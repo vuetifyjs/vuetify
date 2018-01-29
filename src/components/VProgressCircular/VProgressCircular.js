@@ -1,4 +1,4 @@
-require('../../stylus/components/_progress-circular.styl')
+import '../../stylus/components/_progress-circular.styl'
 
 import Colorable from '../../mixins/colorable'
 

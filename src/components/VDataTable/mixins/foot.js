@@ -6,7 +6,7 @@ export default {
       }
 
       const footer = this.$slots.footer
-      const row = this.needsTR(footer) ? this.genTR(footer) : footer
+      const row = this.hasTag(footer, 'td') ? this.genTR(footer) : footer
 
       return this.$createElement('tfoot', [row])
     },

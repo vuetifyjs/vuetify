@@ -134,7 +134,7 @@ export function escapeHTML (str) {
   return str.replace(/[&<>]/g, tag => tagsToReplace[tag] || tag)
 }
 
-export function filterObjectOnKeys(obj, keys) {
+export function filterObjectOnKeys (obj, keys) {
   const filtered = {}
 
   for (let i = 0; i < keys.length; i++) {

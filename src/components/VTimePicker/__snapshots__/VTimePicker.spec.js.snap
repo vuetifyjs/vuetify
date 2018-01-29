@@ -29,10 +29,14 @@ exports[`VTimePicker.js should accept a date object for a value 1`] = `
       </div>
     </div>
   </div>
-  <div class="picker__body">
-    <div style="width: 100%; height: 100%;">
+  <div class="picker__body"
+       style="width: 330px;"
+  >
+    <div class="time-picker-clock__container"
+         style="width: 330px; height: 330px;"
+    >
       <div class="time-picker-clock"
-           style="width: 270px; height: 270px;"
+           style="height: 310px; width: 310px;"
       >
         <div class="time-picker-clock__hand accent">
         </div>
@@ -132,10 +136,14 @@ exports[`VTimePicker.js should accept a value 1`] = `
       </div>
     </div>
   </div>
-  <div class="picker__body">
-    <div style="width: 100%; height: 100%;">
+  <div class="picker__body"
+       style="width: 330px;"
+  >
+    <div class="time-picker-clock__container"
+         style="width: 330px; height: 330px;"
+    >
       <div class="time-picker-clock"
-           style="width: 270px; height: 270px;"
+           style="height: 310px; width: 310px;"
       >
         <div class="time-picker-clock__hand accent">
         </div>
@@ -235,10 +243,14 @@ exports[`VTimePicker.js should change am/pm when updated from model 1`] = `
       </div>
     </div>
   </div>
-  <div class="picker__body">
-    <div style="width: 100%; height: 100%;">
+  <div class="picker__body"
+       style="width: 330px;"
+  >
+    <div class="time-picker-clock__container"
+         style="width: 330px; height: 330px;"
+    >
       <div class="time-picker-clock"
-           style="width: 270px; height: 270px;"
+           style="height: 310px; width: 310px;"
       >
         <div class="time-picker-clock__hand accent">
         </div>
@@ -338,10 +350,14 @@ exports[`VTimePicker.js should render colored time picker 1`] = `
       </div>
     </div>
   </div>
-  <div class="picker__body">
-    <div style="width: 100%; height: 100%;">
+  <div class="picker__body"
+       style="width: 330px;"
+  >
+    <div class="time-picker-clock__container"
+         style="width: 330px; height: 330px;"
+    >
       <div class="time-picker-clock"
-           style="width: 270px; height: 270px;"
+           style="height: 310px; width: 310px;"
       >
         <div class="time-picker-clock__hand primary">
         </div>
@@ -441,10 +457,14 @@ exports[`VTimePicker.js should render colored time picker 2`] = `
       </div>
     </div>
   </div>
-  <div class="picker__body">
-    <div style="width: 100%; height: 100%;">
+  <div class="picker__body"
+       style="width: 330px;"
+  >
+    <div class="time-picker-clock__container"
+         style="width: 330px; height: 330px;"
+    >
       <div class="time-picker-clock"
-           style="width: 270px; height: 270px;"
+           style="height: 310px; width: 310px;"
       >
         <div class="time-picker-clock__hand orange darken-1">
         </div>
@@ -544,10 +564,14 @@ exports[`VTimePicker.js should render landscape component 1`] = `
       </div>
     </div>
   </div>
-  <div class="picker__body">
-    <div style="width: 100%; height: 100%;">
+  <div class="picker__body"
+       style="width: 330px;"
+  >
+    <div class="time-picker-clock__container"
+         style="width: 330px; height: 270px;"
+    >
       <div class="time-picker-clock"
-           style="width: 250px; height: 250px;"
+           style="height: 250px; width: 250px;"
       >
         <div class="time-picker-clock__hand accent">
         </div>

@@ -1,4 +1,4 @@
-require('../../stylus/components/_date-picker-years.styl')
+import '../../stylus/components/_date-picker-years.styl'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
@@ -38,7 +38,7 @@ export default {
   },
 
   mounted () {
-    this.$el.scrollTop = this.$el.scrollHeight / 2 - 125
+    this.$el.scrollTop = this.$el.scrollHeight / 2 - this.$el.offsetHeight / 2
   },
 
   methods: {

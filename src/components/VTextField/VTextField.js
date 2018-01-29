@@ -1,6 +1,6 @@
 // Styles
-require('../../stylus/components/_input-groups.styl')
-require('../../stylus/components/_text-fields.styl')
+import '../../stylus/components/_input-groups.styl'
+import '../../stylus/components/_text-fields.styl'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
@@ -112,8 +112,8 @@ export default {
       }
     },
     isDirty () {
-      return this.lazyValue != null &&
-        this.lazyValue.toString().length > 0 ||
+      return (this.lazyValue != null &&
+        this.lazyValue.toString().length > 0) ||
         this.badInput ||
         ['time', 'date', 'datetime-local', 'week', 'month'].includes(this.type)
     },
@@ -228,13 +228,13 @@ export default {
       const data = {
         style: {},
         domProps: {
-          autofocus: this.autofocus,
-          disabled: this.disabled,
-          required: this.required,
           value: this.maskText(this.lazyValue)
         },
         attrs: {
           ...this.$attrs,
+          autofocus: this.autofocus,
+          disabled: this.disabled,
+          required: this.required,
           readonly: this.readonly,
           tabindex: this.tabindex,
           'aria-label': (!this.$attrs || !this.$attrs.id) && this.label // Label `for` will be set if we have an id
@@ -252,12 +252,12 @@ export default {
         data.style.height = this.inputHeight && `${this.inputHeight}px`
       }
 
-      if (this.placeholder) data.domProps.placeholder = this.placeholder
+      if (this.placeholder) data.attrs.placeholder = this.placeholder
 
       if (!this.isTextarea) {
-        data.domProps.type = this.type
+        data.attrs.type = this.type
       } else {
-        data.domProps.rows = this.rows
+        data.attrs.rows = this.rows
       }
 
       if (this.mask) {

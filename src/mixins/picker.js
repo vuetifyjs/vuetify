@@ -18,9 +18,15 @@ export default {
   ],
 
   props: {
+    fullWidth: Boolean,
     headerColor: String,
     landscape: Boolean,
-    noTitle: Boolean
+    noTitle: Boolean,
+    width: {
+      type: [Number, String],
+      default: 330,
+      validator: value => parseInt(value, 10) > 0
+    }
   },
 
   methods: {
@@ -35,11 +41,14 @@ export default {
     genPicker (staticClass) {
       return this.$createElement('v-picker', {
         staticClass,
+        class: this.fullWidth ? ['picker--full-width'] : [],
         props: {
-          landscape: this.landscape,
+          color: this.headerColor || this.color,
           dark: this.dark,
+          fullWidth: this.fullWidth,
+          landscape: this.landscape,
           light: this.light,
-          color: this.headerColor || this.color
+          width: this.width
         }
       }, [
         this.noTitle ? null : this.genPickerTitle(),

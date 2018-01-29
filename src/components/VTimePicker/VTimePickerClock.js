@@ -1,14 +1,8 @@
-require('../../stylus/components/_time-picker-clock.styl')
+import '../../stylus/components/_time-picker-clock.styl'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
-
-// Utils
-import isValueAllowed from '../../util/isValueAllowed'
-
-const outerRadius = 0.8
-const innerRadius = 0.5
 
 export default {
   name: 'v-time-picker-clock',
@@ -27,10 +21,7 @@ export default {
   },
 
   props: {
-    allowedValues: {
-      type: [Array, Object, Function],
-      default: () => null
-    },
+    allowedValues: Function,
     double: Boolean,
     format: {
       type: Function,
@@ -57,15 +48,18 @@ export default {
       type: Number,
       default: 1
     },
-    value: {
-      type: Number,
-      required: true
-    }
+    value: Number
   },
 
   computed: {
     count () {
       return this.max - this.min + 1
+    },
+    innerRadius () {
+      return this.radius - Math.max(this.radius * 0.4, 48)
+    },
+    outerRadius () {
+      return this.radius - 4
     },
     roundCount () {
       return this.double ? (this.count / 2) : this.count
@@ -78,6 +72,9 @@ export default {
     },
     radius () {
       return this.size / 2
+    },
+    displayedValue () {
+      return this.value == null ? this.min : this.value
     }
   },
 
@@ -90,21 +87,21 @@ export default {
   methods: {
     wheel (e) {
       e.preventDefault()
-      const value = this.value + Math.sign(e.wheelDelta || 1)
+      const value = this.displayedValue + Math.sign(e.wheelDelta || 1)
       this.update((value - this.min + this.count) % this.count + this.min)
     },
     handScale (value) {
-      return this.double && (value - this.min >= this.roundCount) ? (innerRadius / outerRadius) : 1
+      return this.double && (value - this.min >= this.roundCount) ? (this.innerRadius / this.radius) : (this.outerRadius / this.radius)
     },
     isAllowed (value) {
-      return isValueAllowed(value, this.allowedValues)
+      return !this.allowedValues || this.allowedValues(value)
     },
     genValues () {
       const children = []
 
       for (let value = this.min; value <= this.max; value = value + this.step) {
         const classes = {
-          active: value === this.value,
+          active: value === this.displayedValue,
           disabled: !this.isAllowed(value)
         }
 
@@ -118,12 +115,12 @@ export default {
       return children
     },
     genHand () {
-      const scale = `scaleY(${this.handScale(this.value)})`
-      const angle = this.rotate + this.degreesPerUnit * (this.value - this.min)
+      const scale = `scaleY(${this.handScale(this.displayedValue)})`
+      const angle = this.rotate + this.degreesPerUnit * (this.displayedValue - this.min)
 
       return this.$createElement('div', {
         staticClass: 'time-picker-clock__hand',
-        'class': this.addBackgroundColorClassChecks(),
+        'class': this.value == null ? {} : this.addBackgroundColorClassChecks(),
         style: {
           transform: `rotate(${angle}deg) ${scale}`
         }
@@ -134,7 +131,7 @@ export default {
       return { transform: `translate(${x}px, ${y}px)` }
     },
     getPosition (value) {
-      const radius = 0.83 * this.radius * this.handScale(value)
+      const radius = (this.radius - 24) * this.handScale(value)
       const rotateRadians = this.rotate * Math.PI / 180
       return {
         x: Math.round(Math.sin((value - this.min) * this.degrees + rotateRadians) * radius),
@@ -160,8 +157,9 @@ export default {
       const center = { x: width / 2, y: -width / 2 }
       const coords = { x: clientX - left, y: top - clientY }
       const handAngle = Math.round(this.angle(center, coords) - this.rotate + 360) % 360
-      const insideClick = this.double && this.euclidean(center, coords) / this.radius < (outerRadius + innerRadius) / 2
-      const value = Math.round(handAngle / this.degreesPerUnit) + this.min + (insideClick ? this.roundCount : 0)
+      const insideClick = this.double && this.euclidean(center, coords) < (this.outerRadius + this.innerRadius) / 2 - 16
+      const value = Math.round(handAngle / this.degreesPerUnit) +
+        this.min + (insideClick ? this.roundCount : 0)
 
       // Necessary to fix edge case when selecting left part of max value
       if (handAngle >= (360 - this.degreesPerUnit / 2)) {
@@ -191,9 +189,8 @@ export default {
   render (h) {
     const data = {
       staticClass: 'time-picker-clock',
-      style: {
-        width: `${this.size}px`,
-        height: `${this.size}px`
+      class: {
+        'time-picker-clock--indeterminate': this.value == null
       },
       on: {
         mousedown: this.onMouseDown,
@@ -203,6 +200,10 @@ export default {
         touchend: this.onMouseUp,
         mousemove: this.onDragMove,
         touchmove: this.onDragMove
+      },
+      style: {
+        height: `${this.size}px`,
+        width: `${this.size}px`
       },
       ref: 'clock'
     }

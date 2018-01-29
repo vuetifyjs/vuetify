@@ -1,4 +1,4 @@
-require('../../stylus/components/_carousel.styl')
+import '../../stylus/components/_carousel.styl'
 
 import VBtn from '../VBtn'
 import VIcon from '../VIcon'

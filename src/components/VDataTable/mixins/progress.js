@@ -4,7 +4,7 @@ export default {
       const col = this.$createElement('th', {
         staticClass: 'column',
         attrs: {
-          colspan: headersLength
+          colspan: this.headers.length
         }
       }, [this.genProgress()])
 

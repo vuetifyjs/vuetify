@@ -1,4 +1,4 @@
-require('../../stylus/components/_breadcrumbs.styl')
+import '../../stylus/components/_breadcrumbs.styl'
 
 export default {
   name: 'v-breadcrumbs',

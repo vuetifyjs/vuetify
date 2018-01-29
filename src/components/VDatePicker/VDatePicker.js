@@ -13,7 +13,7 @@ import Picker from '../../mixins/picker'
 
 // Utils
 import { pad, createNativeLocaleFormatter } from './util'
-import isValueAllowed from '../../util/isValueAllowed'
+import isDateAllowed from './util/isDateAllowed'
 
 export default {
   name: 'v-date-picker',
@@ -38,20 +38,21 @@ export default {
       defaultColor: 'accent',
       isReversing: false,
       now,
-      originalDate: this.value,
       // tableDate is a string in 'YYYY' / 'YYYY-M' format (leading zero for month is not required)
-      tableDate: this.type === 'month'
-        ? `${now.getFullYear()}`
-        : `${now.getFullYear()}-${now.getMonth() + 1}`
+      tableDate: (() => {
+        if (this.pickerDate) {
+          return this.pickerDate
+        }
+
+        const date = this.value || `${now.getFullYear()}-${now.getMonth() + 1}`
+        const type = this.type === 'date' ? 'month' : 'year'
+        return this.sanitizeDateString(date, type)
+      })()
     }
   },
 
   props: {
-    allowedDates: {
-      type: [Array, Object, Function],
-      default: () => null
-    },
-    autosave: Boolean,
+    allowedDates: Function,
     appendIcon: {
       type: String,
       default: 'chevron_right'
@@ -82,11 +83,14 @@ export default {
       type: String,
       default: 'en-us'
     },
+    max: String,
+    min: String,
     // Function formatting month in the months table
     monthFormat: {
       type: Function,
       default: null
     },
+    pickerDate: String,
     prependIcon: {
       type: String,
       default: 'chevron_left'
@@ -105,7 +109,7 @@ export default {
     type: {
       type: String,
       default: 'date',
-      validator: type => ['date', 'month'/*, 'year'*/].includes(type)
+      validator: type => ['date', 'month'].includes(type) // TODO: year
     },
     value: String,
     // Function formatting the year in table header and pickup title
@@ -134,7 +138,7 @@ export default {
           if (isNaN(new Date(dateString).getDate())) break
 
           const sanitizedDateString = this.sanitizeDateString(dateString, 'date')
-          if (isValueAllowed(sanitizedDateString, this.allowedDates)) {
+          if (this.isDateAllowed(sanitizedDateString)) {
             return sanitizedDateString
           }
         }
@@ -148,7 +152,7 @@ export default {
       if (this.allowedDates) {
         for (let month = 0; month < 12; month++) {
           const dateString = `${year}-${pad(month + 1)}`
-          if (isValueAllowed(dateString, this.allowedDates)) {
+          if (this.isDateAllowed(dateString)) {
             return dateString
           }
         }
@@ -168,7 +172,7 @@ export default {
         return this.type === 'month' ? this.firstAllowedMonth : this.firstAllowedDate
       },
       set (value) {
-        const date = value == null ? this.originalDate : this.sanitizeDateString(value, this.type)
+        const date = value ? this.sanitizeDateString(value, this.type) : null
         this.$emit('input', date)
       }
     },
@@ -182,10 +186,22 @@ export default {
       return this.inputDate.split('-')[0] * 1
     },
     tableMonth () {
-      return this.tableDate.split('-')[1] - 1
+      return (this.pickerDate || this.tableDate).split('-')[1] - 1
     },
     tableYear () {
-      return this.tableDate.split('-')[0] * 1
+      return (this.pickerDate || this.tableDate).split('-')[0] * 1
+    },
+    minMonth () {
+      return this.min ? this.sanitizeDateString(this.min, 'month') : null
+    },
+    maxMonth () {
+      return this.max ? this.sanitizeDateString(this.max, 'month') : null
+    },
+    minYear () {
+      return this.min ? this.sanitizeDateString(this.min, 'year') : null
+    },
+    maxYear () {
+      return this.max ? this.sanitizeDateString(this.max, 'year') : null
     },
     formatters () {
       return {
@@ -219,49 +235,44 @@ export default {
       // compare for example '2000-9' and '2000-10'
       const sanitizeType = this.type === 'month' ? 'year' : 'month'
       this.isReversing = this.sanitizeDateString(val, sanitizeType) < this.sanitizeDateString(prev, sanitizeType)
+      this.$emit('update:pickerDate', val)
     },
-    value (val) {
-      val && this.setTableDate()
+    pickerDate (val) {
+      if (val) {
+        this.tableDate = val
+      } else if (this.value && this.type === 'date') {
+        this.tableDate = this.sanitizeDateString(val, 'month')
+      } else if (this.value && this.type === 'month') {
+        this.tableDate = this.sanitizeDateString(val, 'year')
+      }
+    },
+    value () {
+      if (this.value && !this.pickerDate) {
+        this.tableDate = this.type === 'month' ? `${this.year}` : `${this.year}-${pad(this.month + 1)}`
+      }
     },
     type (type) {
       this.activePicker = type.toUpperCase()
 
       if (this.value) {
         const date = this.sanitizeDateString(this.value, type)
-        this.$emit('input', isValueAllowed(date, this.allowedDates) ? date : null)
+        this.$emit('input', this.isDateAllowed(date) ? date : null)
       }
     }
   },
 
-  created () {
-    this.setTableDate()
-  },
-
   methods: {
-    setTableDate () {
-      this.tableDate = this.type === 'month' ? `${this.year}` : `${this.year}-${pad(this.month + 1)}`
-    },
-    save () {
-      if (this.originalDate) {
-        this.originalDate = this.value
-      } else {
-        this.originalDate = this.inputDate
-      }
-
-      if (this.$parent && this.$parent.isActive) this.$parent.isActive = false
-    },
-    cancel () {
-      this.inputDate = this.originalDate
-      if (this.$parent && this.$parent.isActive) this.$parent.isActive = false
+    isDateAllowed (value) {
+      return isDateAllowed(value, this.min, this.max, this.allowedDates)
     },
     yearClick (value) {
       if (this.type === 'month') {
         const date = `${value}-${pad(this.month + 1)}`
-        if (isValueAllowed(date, this.allowedDates)) this.inputDate = date
+        if (this.isDateAllowed(date)) this.inputDate = date
         this.tableDate = `${value}`
       } else {
         const date = `${value}-${pad(this.tableMonth + 1)}-${pad(this.day)}`
-        if (isValueAllowed(date, this.allowedDates)) this.inputDate = date
+        if (this.isDateAllowed(date)) this.inputDate = date
         this.tableDate = `${value}-${pad(this.tableMonth + 1)}`
       }
       this.activePicker = 'MONTH'
@@ -270,17 +281,17 @@ export default {
       // Updates inputDate setting 'YYYY-MM' or 'YYYY-MM-DD' format, depending on the picker type
       if (this.type === 'date') {
         const date = `${value}-${pad(this.day)}`
-        if (isValueAllowed(date, this.allowedDates)) this.inputDate = date
+        if (this.isDateAllowed(date)) this.inputDate = date
         this.tableDate = value
         this.activePicker = 'DATE'
       } else {
         this.inputDate = value
-        this.$nextTick(() => (this.autosave && this.save()))
+        this.$emit('change', value)
       }
     },
     dateClick (value) {
       this.inputDate = value
-      this.$nextTick(() => (this.autosave && this.save()))
+      this.$emit('change', value)
     },
     genPickerTitle () {
       return this.$createElement('v-date-picker-title', {
@@ -307,8 +318,10 @@ export default {
           disabled: this.readonly,
           format: this.headerDateFormat,
           locale: this.locale,
+          min: this.activePicker === 'DATE' ? this.minMonth : this.minYear,
+          max: this.activePicker === 'DATE' ? this.maxMonth : this.maxYear,
           prependIcon: this.prependIcon,
-          value: this.activePicker === 'DATE' ? this.tableDate : `${this.tableYear}`
+          value: this.activePicker === 'DATE' ? `${this.tableYear}-${pad(this.tableMonth + 1)}` : `${this.tableYear}`
         },
         on: {
           toggle: () => this.activePicker = (this.activePicker === 'DATE' ? 'MONTH' : 'YEAR'),
@@ -328,7 +341,9 @@ export default {
           firstDayOfWeek: this.firstDayOfWeek,
           format: this.dayFormat,
           locale: this.locale,
-          tableDate: this.tableDate,
+          min: this.min,
+          max: this.max,
+          tableDate: `${this.tableYear}-${pad(this.tableMonth + 1)}`,
           scrollable: this.scrollable,
           value: this.value
         },
@@ -344,10 +359,12 @@ export default {
         props: {
           allowedDates: this.type === 'month' ? this.allowedDates : null,
           color: this.color,
-          current: this.current,
+          current: this.current ? this.sanitizeDateString(this.current, 'month') : null,
           disabled: this.readonly,
           format: this.monthFormat,
           locale: this.locale,
+          min: this.minMonth,
+          max: this.maxMonth,
           scrollable: this.scrollable,
           value: (!this.value || this.type === 'month') ? this.value : this.value.substr(0, 7),
           tableDate: `${this.tableYear}`
@@ -365,6 +382,8 @@ export default {
           color: this.color,
           format: this.yearFormat,
           locale: this.locale,
+          min: this.minYear,
+          max: this.maxYear,
           value: `${this.tableYear}`
         },
         on: {
@@ -392,6 +411,12 @@ export default {
     sanitizeDateString (dateString, type) {
       const [year, month = 1, date = 1] = dateString.split('-')
       return `${year}-${pad(month)}-${pad(date)}`.substr(0, { date: 10, month: 7, year: 4 }[type])
+    }
+  },
+
+  mounted () {
+    if (this.pickerDate !== this.tableDate) {
+      this.$emit('update:pickerDate', this.tableDate)
     }
   },
 

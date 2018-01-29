@@ -1,7 +1,7 @@
 // Styles
-require('../../stylus/components/_text-fields.styl')
-require('../../stylus/components/_input-groups.styl')
-require('../../stylus/components/_select.styl')
+import '../../stylus/components/_text-fields.styl'
+import '../../stylus/components/_input-groups.styl'
+import '../../stylus/components/_select.styl'
 
 // Components
 import VBtn from '../VBtn'
@@ -262,8 +262,8 @@ export default {
         const inputValue = this.inputValue.slice()
         const i = this.findExistingIndex(item)
 
-        i !== -1 && inputValue.splice(i, 1) || inputValue.push(item)
-        this.inputValue = inputValue.map((i) => {
+        i !== -1 ? inputValue.splice(i, 1) : inputValue.push(item)
+        this.inputValue = inputValue.map(i => {
           selectedItems.push(i)
           return this.returnObject ? i : this.getValue(i)
         })
