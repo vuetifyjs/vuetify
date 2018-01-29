@@ -93,13 +93,10 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
               >
                 <div class="card"
                      style="height: auto;"
-                     data-ripple="false"
                 >
                   <ul class="list">
                     <li>
-                      <a class="list__tile list__tile--link"
-                         data-ripple="true"
-                      >
+                      <a class="list__tile list__tile--link">
                         <div class="list__tile__content">
                           <div class="list__tile__title">
                             5
@@ -108,9 +105,7 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
                       </a>
                     </li>
                     <li>
-                      <a class="list__tile list__tile--link"
-                         data-ripple="true"
-                      >
+                      <a class="list__tile list__tile--link">
                         <div class="list__tile__content">
                           <div class="list__tile__title">
                             10
@@ -119,9 +114,7 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
                       </a>
                     </li>
                     <li>
-                      <a class="list__tile list__tile--link"
-                         data-ripple="true"
-                      >
+                      <a class="list__tile list__tile--link">
                         <div class="list__tile__content">
                           <div class="list__tile__title">
                             25
@@ -130,9 +123,7 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
                       </a>
                     </li>
                     <li>
-                      <a class="list__tile list__tile--link"
-                         data-ripple="true"
-                      >
+                      <a class="list__tile list__tile--link">
                         <div class="list__tile__content">
                           <div class="list__tile__title">
                             All
@@ -161,7 +152,6 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
         <button disabled="disabled"
                 type="button"
                 class="btn btn--disabled btn--flat btn--icon"
-                data-ripple="false"
                 aria-label="Previous page"
         >
           <div class="btn__content">
@@ -175,7 +165,6 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
         <button disabled="disabled"
                 type="button"
                 class="btn btn--disabled btn--flat btn--icon"
-                data-ripple="false"
                 aria-label="Next page"
         >
           <div class="btn__content">
@@ -286,13 +275,10 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
               >
                 <div class="card"
                      style="height: auto;"
-                     data-ripple="false"
                 >
                   <ul class="list">
                     <li>
-                      <a class="list__tile list__tile--link"
-                         data-ripple="true"
-                      >
+                      <a class="list__tile list__tile--link">
                         <div class="list__tile__content">
                           <div class="list__tile__title">
                             5
@@ -301,9 +287,7 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
                       </a>
                     </li>
                     <li>
-                      <a class="list__tile list__tile--link"
-                         data-ripple="true"
-                      >
+                      <a class="list__tile list__tile--link">
                         <div class="list__tile__content">
                           <div class="list__tile__title">
                             10
@@ -312,9 +296,7 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
                       </a>
                     </li>
                     <li>
-                      <a class="list__tile list__tile--link"
-                         data-ripple="true"
-                      >
+                      <a class="list__tile list__tile--link">
                         <div class="list__tile__content">
                           <div class="list__tile__title">
                             25
@@ -323,9 +305,7 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
                       </a>
                     </li>
                     <li>
-                      <a class="list__tile list__tile--link"
-                         data-ripple="true"
-                      >
+                      <a class="list__tile list__tile--link">
                         <div class="list__tile__content">
                           <div class="list__tile__title">
                             All
@@ -354,7 +334,6 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
         <button disabled="disabled"
                 type="button"
                 class="btn btn--disabled btn--flat btn--icon"
-                data-ripple="false"
                 aria-label="Previous page"
         >
           <div class="btn__content">
@@ -368,7 +347,6 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
         <button disabled="disabled"
                 type="button"
                 class="btn btn--disabled btn--flat btn--icon"
-                data-ripple="false"
                 aria-label="Next page"
         >
           <div class="btn__content">
@@ -481,13 +459,10 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
               >
                 <div class="card"
                      style="height: auto;"
-                     data-ripple="false"
                 >
                   <ul class="list">
                     <li>
-                      <a class="list__tile list__tile--link"
-                         data-ripple="true"
-                      >
+                      <a class="list__tile list__tile--link">
                         <div class="list__tile__content">
                           <div class="list__tile__title">
                             5
@@ -496,9 +471,7 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
                       </a>
                     </li>
                     <li>
-                      <a class="list__tile list__tile--link"
-                         data-ripple="true"
-                      >
+                      <a class="list__tile list__tile--link">
                         <div class="list__tile__content">
                           <div class="list__tile__title">
                             10
@@ -507,9 +480,7 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
                       </a>
                     </li>
                     <li>
-                      <a class="list__tile list__tile--link"
-                         data-ripple="true"
-                      >
+                      <a class="list__tile list__tile--link">
                         <div class="list__tile__content">
                           <div class="list__tile__title">
                             25
@@ -518,9 +489,7 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
                       </a>
                     </li>
                     <li>
-                      <a class="list__tile list__tile--link"
-                         data-ripple="true"
-                      >
+                      <a class="list__tile list__tile--link">
                         <div class="list__tile__content">
                           <div class="list__tile__title">
                             All
@@ -549,7 +518,6 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
         <button disabled="disabled"
                 type="button"
                 class="btn btn--disabled btn--flat btn--icon"
-                data-ripple="false"
                 aria-label="Previous page"
         >
           <div class="btn__content">
@@ -563,7 +531,6 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
         <button disabled="disabled"
                 type="button"
                 class="btn btn--disabled btn--flat btn--icon"
-                data-ripple="false"
                 aria-label="Next page"
         >
           <div class="btn__content">
@@ -647,7 +614,6 @@ exports[`VDataTable.vue should match a snapshot with single rows-per-page-items 
         <button disabled="disabled"
                 type="button"
                 class="btn btn--disabled btn--flat btn--icon"
-                data-ripple="false"
                 aria-label="Previous page"
         >
           <div class="btn__content">
@@ -660,7 +626,6 @@ exports[`VDataTable.vue should match a snapshot with single rows-per-page-items 
         </button>
         <button type="button"
                 class="btn btn--flat btn--icon"
-                data-ripple="true"
                 aria-label="Next page"
         >
           <div class="btn__content">
