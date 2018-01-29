@@ -132,11 +132,9 @@ theme(button, "btn")
       border-radius: 50%
 
     &.btn--small
-      height: $button-small-height
       width: $button-small-height
 
     &.btn--large
-      height: $button-large-height
       width: $button-large-height
 
   &--floating
@@ -187,8 +185,8 @@ theme(button, "btn")
             transform: none
 
     .icon
-      height: $button-floating-icon-width
-      width: $button-floating-icon-width
+      height: inherit
+      width: inherit
 
     &.btn--small
       height: $button-floating-small-width
@@ -196,8 +194,6 @@ theme(button, "btn")
 
       .icon
         font-size: $button-floating-small-icon-width
-        height: $button-floating-small-icon-width
-        width: $button-floating-small-icon-width
 
       &.btn--floating .icon
         left: 'calc(50% - %s)' % ($button-floating-small-icon-width / 2)
@@ -210,8 +206,6 @@ theme(button, "btn")
 
       .icon
         font-size: $button-floating-large-icon-width
-        height: $button-floating-large-icon-width
-        width: $button-floating-large-icon-width
 
       &.btn--floating .icon
         left: 'calc(50% - %s)' % ($button-floating-large-icon-width / 2)
