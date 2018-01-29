@@ -143,7 +143,7 @@ theme(button, "btn")
       :not(:only-child)
         transition: $primary-transition
 
-        &:last-child
+        &:last-child:not(span)
           opacity: 0
           position: absolute
           transform: rotate(-45deg)
