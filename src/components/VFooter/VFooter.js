@@ -20,8 +20,7 @@ export default {
   props: {
     height: {
       default: 32,
-      type: [Number, String],
-      validator: v => !isNaN(parseInt(v)) || v === 'auto'
+      type: [Number, String]
     },
     inset: Boolean
   },
