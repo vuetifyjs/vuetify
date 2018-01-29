@@ -2,7 +2,7 @@ import { consoleWarn } from '../../../util/console'
 
 export default {
   methods: {
-    genTHead (headersLength) {
+    genTHead () {
       if (this.hideHeaders) return // Exit Early since no headers are needed.
 
       let children = []
@@ -14,7 +14,7 @@ export default {
           all: this.everyItem
         })
 
-        children = [this.hasTag(row, 'th') ? this.genTR(row) : row, this.genTProgress(headersLength)]
+        children = [this.hasTag(row, 'th') ? this.genTR(row) : row, this.genTProgress()]
       } else {
         const row = this.headers.map(o => this.genHeader(o))
         const checkbox = this.$createElement('v-checkbox', {
@@ -31,7 +31,7 @@ export default {
 
         this.hasSelectAll && row.unshift(this.$createElement('th', [checkbox]))
 
-        children = [this.genTR(row), this.genTProgress(headersLength)]
+        children = [this.genTR(row), this.genTProgress()]
       }
 
       return this.$createElement('thead', [children])

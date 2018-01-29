@@ -1,10 +1,10 @@
 export default {
   methods: {
-    genTProgress (headersLength) {
+    genTProgress () {
       const col = this.$createElement('th', {
         staticClass: 'column',
         attrs: {
-          colspan: this.headers.length
+          colspan: this.headerColumns
         }
       }, [this.genProgress()])
 

@@ -73,6 +73,9 @@ export default {
     },
     filteredItems () {
       return this.filteredItemsImpl(this.headers)
+    },
+    headerColumns () {
+      return this.headers.length + !!this.selectAll
     }
   },
 
@@ -98,14 +101,12 @@ export default {
   },
 
   render (h) {
-    var headersLength = this.headers.length
-
     const tableOverflow = h('v-table-overflow', {}, [
       h('table', {
         'class': this.classes
       }, [
-        this.genTHead(headersLength),
-        this.genTBody(headersLength),
+        this.genTHead(),
+        this.genTBody(),
         this.genTFoot()
       ])
     ])

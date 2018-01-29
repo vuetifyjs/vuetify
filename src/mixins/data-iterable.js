@@ -330,18 +330,18 @@ export default {
 
       return props
     },
-    genItems (headersLength) {
+    genItems () {
       if (!this.itemsLength && !this.items.length) {
         const noData = this.$slots['no-data'] || this.noDataText
-        return [this.genEmptyItems(noData, headersLength)]
+        return [this.genEmptyItems(noData)]
       }
 
       if (!this.filteredItems.length) {
         const noResults = this.$slots['no-results'] || this.noResultsText
-        return [this.genEmptyItems(noResults, headersLength)]
+        return [this.genEmptyItems(noResults)]
       }
 
-      return this.genFilteredItems(headersLength)
+      return this.genFilteredItems()
     },
     genPrevIcon () {
       return this.$createElement('v-btn', {

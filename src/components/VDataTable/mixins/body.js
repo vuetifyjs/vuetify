@@ -2,12 +2,12 @@ import ExpandTransitionGenerator from '../../transitions/expand-transition'
 
 export default {
   methods: {
-    genTBody (headersLength) {
-      const children = this.genItems(headersLength)
+    genTBody () {
+      const children = this.genItems()
 
       return this.$createElement('tbody', children)
     },
-    genExpandedRow (props, headersLength) {
+    genExpandedRow (props) {
       const children = []
 
       if (this.isExpanded(props.item)) {
@@ -21,7 +21,7 @@ export default {
 
       const transition = this.$createElement('transition-group', {
         class: 'datatable__expand-col',
-        attrs: { colspan: headersLength },
+        attrs: { colspan: this.headerColumns },
         props: {
           tag: 'td'
         },
@@ -30,7 +30,7 @@ export default {
 
       return this.genTR([transition], { class: 'datatable__expand-row' })
     },
-    genFilteredItems (headersLength) {
+    genFilteredItems () {
       if (!this.$scopedSlots.items) {
         return null
       }
@@ -49,14 +49,14 @@ export default {
           : row)
 
         if (this.$scopedSlots.expand) {
-          const expandRow = this.genExpandedRow(props, headersLength)
+          const expandRow = this.genExpandedRow(props)
           rows.push(expandRow)
         }
       }
 
       return rows
     },
-    genEmptyItems (content, headersLength) {
+    genEmptyItems (content) {
       if (this.hasTag(content, 'tr')) {
         return content
       } else if (this.hasTag(content, 'td')) {
@@ -66,7 +66,7 @@ export default {
           class: {
             'text-xs-center': typeof content === 'string'
           },
-          attrs: { colspan: `${this.headers.length}` }
+          attrs: { colspan: this.headerColumns }
         }, content)])
       }
     }
