@@ -2,23 +2,23 @@ import { VExpandTransition } from '../transitions'
 
 import Bootable from '../../mixins/bootable'
 import Toggleable from '../../mixins/toggleable'
+import Rippleable from '../../mixins/rippleable'
+import { inject as RegistrableInject } from '../../mixins/registrable'
 
 import VIcon from '../VIcon'
 
-import Ripple from '../../directives/ripple'
 import ClickOutside from '../../directives/click-outside'
 
 export default {
   name: 'v-expansion-panel-content',
 
-  mixins: [Bootable, Toggleable],
+  mixins: [Bootable, Toggleable, Rippleable, RegistrableInject('expansionPanel', 'v-expansion-panel', 'v-expansion-panel-content')],
 
   components: {
     VIcon
   },
 
   directives: {
-    Ripple,
     ClickOutside
   },
 
@@ -32,7 +32,10 @@ export default {
 
   props: {
     hideActions: Boolean,
-    ripple: Boolean
+    ripple: {
+      type: [Boolean, Object],
+      default: false
+    }
   },
 
   methods: {
@@ -82,6 +85,14 @@ export default {
       // Needs time to calc height
       this.$nextTick(() => (this.isActive = isActive))
     }
+  },
+
+  mounted () {
+    this.expansionPanel.register(this._uid, this.toggle)
+  },
+
+  beforeDestroy () {
+    this.expansionPanel.unregister(this._uid)
   },
 
   render (h) {

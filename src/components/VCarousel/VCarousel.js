@@ -1,4 +1,4 @@
-require('../../stylus/components/_carousel.styl')
+import '../../stylus/components/_carousel.styl'
 
 import VBtn from '../VBtn'
 import VIcon from '../VIcon'
@@ -59,12 +59,13 @@ export default {
       }
     },
     inputValue () {
-      // Evaluate items when inputValue changes to account for
-      // dynamic changing of children
+      // Evaluates items when inputValue changes to
+      // account for dynamic changing of children
 
-      this.items.forEach(i => {
-        i.open(this.items[this.inputValue].uid, this.reverse)
-      })
+      const uid = (this.items[this.inputValue] || {}).uid
+      for (let index = this.items.length; --index >= 0;) {
+        this.items[index].open(uid, this.reverse)
+      }
 
       this.$emit('input', this.inputValue)
       this.restartTimeout()

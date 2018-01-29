@@ -29,7 +29,6 @@ export default {
 
   data () {
     return {
-      all: false,
       searchLength: 0,
       defaultPagination: {
         descending: false,
@@ -79,8 +78,8 @@ export default {
     filter: {
       type: Function,
       default: (val, search) => {
-        return val !== null &&
-          ['undefined', 'boolean'].indexOf(typeof val) === -1 &&
+        return val != null &&
+          typeof val !== 'boolean' &&
           val.toString().toLowerCase().indexOf(search) !== -1
       }
     },
@@ -203,23 +202,16 @@ export default {
     },
     selected () {
       const selected = {}
-      this.value.forEach(i => (selected[i[this.itemKey]] = true))
+      for (let index = 0; index < this.value.length; index++) {
+        selected[this.value[index][this.itemKey]] = true
+      }
       return selected
     }
   },
 
   watch: {
-    indeterminate (val) {
-      if (val) this.all = true
-    },
-    someItems (val) {
-      if (!val) this.all = false
-    },
     search () {
       this.updatePagination({ page: 1, totalItems: this.itemsLength })
-    },
-    everyItem (val) {
-      if (val) this.all = true
     }
   },
 
@@ -293,9 +285,9 @@ export default {
     },
     toggle (value) {
       const selected = Object.assign({}, this.selected)
-      this.filteredItems.forEach(i => (
-        selected[i[this.itemKey]] = value)
-      )
+      for (let index = 0; index < this.filteredItems.length; index++) {
+        selected[this.filteredItems[index][this.itemKey]] = value
+      }
 
       this.$emit('input', this.items.filter(i => (
         selected[i[this.itemKey]]))
@@ -308,7 +300,7 @@ export default {
 
       Object.defineProperty(props, 'selected', {
         get: () => this.selected[item[this.itemKey]],
-        set: (value) => {
+        set: value => {
           if (itemKey == null) {
             consoleWarn(`"${keyProp}" attribute must be defined for item`, this)
           }
@@ -322,15 +314,15 @@ export default {
 
       Object.defineProperty(props, 'expanded', {
         get: () => this.expanded[item[this.itemKey]],
-        set: (value) => {
+        set: value => {
           if (itemKey == null) {
             consoleWarn(`"${keyProp}" attribute must be defined for item`, this)
           }
 
           if (!this.expand) {
-            Object.keys(this.expanded).forEach((key) => {
-              this.$set(this.expanded, key, false)
-            })
+            for (const key in this.expanded) {
+              this.expanded.hasOwnProperty(key) && this.$set(this.expanded, key, false)
+            }
           }
           this.$set(this.expanded, itemKey, value)
         }
@@ -413,7 +405,7 @@ export default {
             minWidth: '75px'
           },
           on: {
-            input: (val) => {
+            input: val => {
               this.updatePagination({
                 page: 1,
                 rowsPerPage: val

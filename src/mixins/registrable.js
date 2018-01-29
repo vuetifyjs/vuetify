@@ -11,7 +11,7 @@ export function inject (namespace, child, parent) {
   } : null
 
   return {
-    name: 'registerable-inject',
+    name: 'registrable-inject',
 
     inject: {
       [namespace]: {
@@ -23,7 +23,7 @@ export function inject (namespace, child, parent) {
 
 export function provide (namespace) {
   return {
-    name: 'registerable-provide',
+    name: 'registrable-provide',
 
     methods: {
       register: null,

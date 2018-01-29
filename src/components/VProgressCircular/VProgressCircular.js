@@ -1,4 +1,4 @@
-require('../../stylus/components/_progress-circular.styl')
+import '../../stylus/components/_progress-circular.styl'
 
 import Colorable from '../../mixins/colorable'
 
@@ -9,11 +9,6 @@ export default {
 
   props: {
     button: Boolean,
-
-    fill: {
-      type: String,
-      default () { return this.indeterminate ? 'none' : 'transparent' }
-    },
 
     indeterminate: Boolean,
 

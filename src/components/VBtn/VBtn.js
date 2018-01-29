@@ -1,4 +1,4 @@
-require('../../stylus/components/_buttons.styl')
+import '../../stylus/components/_buttons.styl'
 
 import Colorable from '../../mixins/colorable'
 import Positionable from '../../mixins/positionable'
@@ -51,9 +51,6 @@ export default {
 
   computed: {
     classes () {
-      const colorBackground = !this.outline && !this.flat
-      const colorText = !this.disabled && !colorBackground
-
       const classes = {
         'btn': true,
         'btn--active': this.isActive,
@@ -70,7 +67,7 @@ export default {
         'btn--left': this.left,
         'btn--loader': this.loading,
         'btn--outline': this.outline,
-        'btn--depressed': this.depressed && !this.flat || this.outline,
+        'btn--depressed': (this.depressed && !this.flat) || this.outline,
         'btn--right': this.right,
         'btn--round': this.round,
         'btn--router': this.to,
@@ -79,24 +76,7 @@ export default {
         ...this.themeClasses
       }
 
-      if (!this.color) {
-        return Object.assign(classes, {
-          'primary': this.primary && colorBackground,
-          'secondary': this.secondary && colorBackground,
-          'success': this.success && colorBackground,
-          'info': this.info && colorBackground,
-          'warning': this.warning && colorBackground,
-          'error': this.error && colorBackground,
-          'primary--text': this.primary && colorText,
-          'secondary--text': this.secondary && colorText,
-          'success--text': this.success && colorText,
-          'info--text': this.info && colorText,
-          'warning--text': this.warning && colorText,
-          'error--text': this.error && colorText
-        })
-      }
-
-      return colorBackground
+      return (!this.outline && !this.flat)
         ? this.addBackgroundColorClassChecks(classes)
         : this.addTextColorClassChecks(classes)
     }
