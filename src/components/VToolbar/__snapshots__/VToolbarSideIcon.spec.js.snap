@@ -4,7 +4,6 @@ exports[`VToolbarSideIcon.js should create default icon when no slot used 1`] = 
 
 <button type="button"
         class="toolbar__side-icon btn btn--icon"
-        data-ripple="true"
 >
   <div class="btn__content">
     <i aria-hidden="true"
@@ -21,7 +20,6 @@ exports[`VToolbarSideIcon.js should create slot icon when present 1`] = `
 
 <button type="button"
         class="toolbar__side-icon btn btn--icon"
-        data-ripple="true"
 >
   <div class="btn__content">
     <i aria-hidden="true"
