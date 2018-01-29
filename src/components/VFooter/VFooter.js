@@ -70,11 +70,9 @@ export default {
      * @return {number}
      */
     updateApplication () {
-      const height = parseInt(this.height)
-
-      return isNaN(height)
+      return isNaN(this.height)
         ? this.$el.clientHeight
-        : height
+        : this.height
     }
   },
 
