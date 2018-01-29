@@ -206,6 +206,7 @@ test('VSelect - tags', ({ mount, compileToFunctions }) => {
 
     input.element.value = 'b'
     input.trigger('input')
+    await wrapper.vm.$nextTick()
     input.trigger('keydown.left')
     await wrapper.vm.$nextTick()
 
@@ -265,6 +266,85 @@ test('VSelect - tags', ({ mount, compileToFunctions }) => {
     await wrapper.vm.$nextTick() // Second tick processes change after tag added
 
     expect(change).toBeCalledWith(['bar'])
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should be able to add a tag from user input after deleting a tag with delete', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        multiple: true,
+        tags: true,
+        value: ['foo', 'bar'],
+      }
+    })
+
+    let input = wrapper.find('input')[0]
+    const change = jest.fn()
+    wrapper.vm.$on('input', change)
+    wrapper.vm.focus()
+    await wrapper.vm.$nextTick()
+
+    input.trigger('keydown.left')
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.selectedIndex).toBe(1)
+    input.trigger('keydown.delete')
+    await wrapper.vm.$nextTick()
+    expect(change).toHaveBeenCalledWith(['foo'])
+    expect(wrapper.vm.selectedIndex).toBe(0)
+
+    input.element.value = 'baz'
+    await wrapper.vm.$nextTick()
+    input.trigger('input')
+    await wrapper.vm.$nextTick()
+    input.trigger('keydown.enter')
+    await wrapper.vm.$nextTick()
+
+    expect(change).toBeCalledWith(['foo', 'baz'])
+    expect(wrapper.vm.selectedIndex).toBe(-1)
+
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should be able to add a tag from user input after clicking a deletable chip', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        chips: true,
+        clearable: true,
+        deletableChips: true,
+        multiple: true,
+        tags: true,
+        value: ['foo', 'bar']
+      }
+    })
+    await wrapper.vm.$nextTick()
+
+    const input = wrapper.find('input')[0]
+    const chip = wrapper.find('.chip')[1]
+    const close = chip.find('.chip__close')[0]
+
+    const change = jest.fn()
+    wrapper.vm.$on('input', change)
+    wrapper.vm.focus()
+    chip.trigger('click')
+    await wrapper.vm.$nextTick()
+    close.trigger('click')
+    await wrapper.vm.$nextTick()
+    expect(change).toHaveBeenCalledWith(['foo'])
+    expect(wrapper.vm.selectedIndex).toBe(-1)
+
+    input.element.value = 'baz'
+    await wrapper.vm.$nextTick()
+    input.trigger('input')
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.searchValue).toBe('baz')
+    input.trigger('keydown.enter')
+    await wrapper.vm.$nextTick()
+
+    expect(change).toBeCalledWith(['foo', 'baz'])
+    expect(wrapper.vm.selectedIndex).toBe(-1)
+
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 })
