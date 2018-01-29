@@ -174,7 +174,6 @@ export default {
 
       this.$nextTick(() => {
         this.searchValue = searchValue
-        this.selectedIndex = -1
         this.$emit('input', this.combobox ? content : this.selectedItems)
 
         // Combobox should close its menu when tags are updated

@@ -206,6 +206,7 @@ test('VSelect - tags', ({ mount, compileToFunctions }) => {
 
     input.element.value = 'b'
     input.trigger('input')
+    await wrapper.vm.$nextTick()
     input.trigger('keydown.left')
     await wrapper.vm.$nextTick()
 
