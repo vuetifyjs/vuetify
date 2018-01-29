@@ -75,7 +75,7 @@ export default {
       return this.filteredItemsImpl(this.headers)
     },
     headerColumns () {
-      return this.headers.length + !!this.selectAll
+      return this.headers.length + (this.selectAll !== false)
     }
   },
 
