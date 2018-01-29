@@ -62,7 +62,7 @@ export default {
   mounted () {
     this.getSteps()
 
-    this.inputValue = this.value || this.steps[0].step || 1
+    this.inputValue = this.value || this.steps[0] && this.steps[0].step || 1
   },
 
   methods: {
