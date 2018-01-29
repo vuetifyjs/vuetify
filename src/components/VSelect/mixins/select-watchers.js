@@ -111,7 +111,7 @@ export default {
         if (val && !this.isAnyValueAllowed) {
           this.setMenuIndex(0)
         }
-        if (val !== null && this.selectedIndex > -1){
+        if (val !== null && this.selectedIndex > -1) {
           this.selectedIndex = -1
         }
       })
