@@ -21,7 +21,7 @@ export default {
 
       const transition = this.$createElement('transition-group', {
         class: 'datatable__expand-col',
-        attrs: { colspan: '100%' },
+        attrs: { colspan: this.headerColumns },
         props: {
           tag: 'td'
         },
@@ -66,7 +66,7 @@ export default {
           class: {
             'text-xs-center': typeof content === 'string'
           },
-          attrs: { colspan: `${this.headers.length}` }
+          attrs: { colspan: this.headerColumns }
         }, content)])
       }
     }
