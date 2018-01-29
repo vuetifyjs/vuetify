@@ -11,6 +11,16 @@ time-picker-clock($material)
     &.active
       color: $material-dark.buttons.disabled
 
+  &--indeterminate
+    .time-picker-clock__hand
+      background-color: $material.picker.indeterminateTime
+
+      &:after
+        color: $material.picker.indeterminateTime
+
+    > span.active
+      background-color: $material.picker.indeterminateTime
+
 theme(time-picker-clock, "time-picker-clock")
 
 .time-picker-clock
