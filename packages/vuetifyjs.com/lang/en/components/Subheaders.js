@@ -14,6 +14,10 @@ export default {
     menu: {
       header: 'Menu subheaders',
       desc: 'Using a subheader can help separate different types of actions.'
+    },
+    social: {
+      header: 'Subheaders with social media',
+      desc: 'Using a subheader with social media interaction.'
     }
   }],
   props: {

@@ -32,3 +32,18 @@ export function isOnSale (variants) {
     return parseFloat(variant.price) < parseFloat(variant.compareAtPrice)
   })
 }
+
+export function randomNumber (min, max) {
+  return Math.floor(Math.random() * max) + min
+}
+
+export function randomString (length = 5) {
+  let text = ''
+  const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+
+  for (let i = 0; i < length; i++) {
+    text += possible.charAt(Math.floor(Math.random() * possible.length))
+  }
+
+  return text
+}
