@@ -21,6 +21,7 @@ export default [
   ['store', 'store/Index'],
   ['store/cart', 'store/Cart'],
   ['store/thank-you', 'store/ThankYou'],
+  ['store/licensing', 'store/Licensing'],
   ['store/product/:id', 'store/Product', null, r => ({ id: r.params.id })],
   ['guides/server-side-rendering', 'guides/SSR'],
   ['guides/a-la-carte', 'guides/ALaCarte'],

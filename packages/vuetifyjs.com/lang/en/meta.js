@@ -478,5 +478,11 @@ export default {
     'title': 'Thank you for supporting Vuetify',
     'description': 'Thank you for supporting open source and Vuetify',
     'keywords': 'thank you from vuetify'
+  },
+  'store/licensing': {
+    h1: '',
+    title: 'Product licensing',
+    description: '',
+    keywords: ''
   }
 }
