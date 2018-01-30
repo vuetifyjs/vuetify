@@ -61,6 +61,10 @@ export default {
       header: '盒子样式',
       desc: '文本框可以使用替代的样式设计，但是这种模式下不支持附加或者前置图标属性。'
     },
+    solo: {
+      header: 'Solo style',
+      desc: 'Text-fields can be used with an alternative solo design.'
+    },
     customColors: {
       header: '自定义颜色',
       desc: '你可以将文本框的颜色更改为 Material design 调色板中的任何颜色。下面是带验证的自定义表单的示例实现。'
