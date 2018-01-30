@@ -72,16 +72,3 @@
     }
   }
 </script>
-
-<style lang="stylus">
-  @import '~vuetify/src/stylus/settings/_variables.styl'
-
-  .page
-    max-width: 1185px !important
-    padding-top: 75px
-    padding-bottom: 0
-    transition: .2s $transition.fast-out-slow-in
-
-    section
-      margin-bottom: 48px
-</style>
