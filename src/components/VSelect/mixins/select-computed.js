@@ -21,7 +21,8 @@ export default {
         'input-group--multi-line': this.multiLine,
         'input-group--chips': this.chips,
         'input-group--multiple': this.multiple,
-        'input-group--open': this.menuIsVisible
+        'input-group--open': this.menuIsVisible,
+        'input-group--select--selecting-index': this.selectedIndex > -1
       }
 
       if (this.hasError) {
