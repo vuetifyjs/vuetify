@@ -117,8 +117,6 @@ export default {
       })
     },
     selectedItems () {
-      clearTimeout(this.searchTimeout)
-
       if (this.isAutocomplete) {
         this.$nextTick(this.$refs.menu.updateDimensions)
       }
