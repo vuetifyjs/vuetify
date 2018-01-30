@@ -60,20 +60,12 @@ theme(button, "btn")
     font-size: $button-small-font-size
     height: $button-small-height
 
-    &.btn--floating,
-    &.btn--icon
-      width: $button-small-height
-
     .btn__content
       padding: $button-small-padding
 
   &--large
     font-size: $button-large-font-size
     height: $button-large-height
-
-    &.btn--floating,
-    &.btn--icon
-      width: $button-large-height
 
     .btn__content
       padding: $button-large-padding
@@ -132,9 +124,14 @@ theme(button, "btn")
     box-shadow: none !important
     border-radius: 50%
     justify-content: center
-    height: $button-height
-    width: $button-height
     min-width: 0
+    width: $button-height
+
+    &.btn--small
+      width: $button-small-height
+
+    &.btn--large
+      width: $button-large-height
 
     .btn__content:before
       border-radius: 50%
