@@ -27,7 +27,7 @@
     }),
 
     computed: {
-      ...mapState({
+      ...mapState('app', {
         loadedLangs: state => state.loadedLangs
       }),
       languageIsValid () {

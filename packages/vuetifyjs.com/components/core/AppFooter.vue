@@ -44,7 +44,7 @@
       items: appDrawerItems
     }),
     computed: {
-      ...mapState({
+      ...mapState('app', {
         footer: state => !state.stateless
       }),
       index () {
