@@ -30,6 +30,14 @@
     v-toolbar-items
       v-btn(
         flat
+        v-show="!isStore"
+        :to="{ name: 'store/Index' }"
+      )
+        span.hidden-sm-and-down Store
+        v-icon(right) store
+    v-toolbar-items
+      v-btn(
+        flat
         v-show="isHome"
         :to="{ name: 'getting-started/QuickStart' }"
       )
@@ -103,8 +111,7 @@
 
     data: () => ({
       fixed: false,
-      languages,
-      notifications: []
+      languages
     }),
 
     computed: {
