@@ -40,7 +40,7 @@
     }),
 
     computed: {
-      ...mapState({
+      ...mapState('app', {
         snackbar: state => state.appSnackbar
       }),
       computedIcon () {

@@ -19,13 +19,14 @@
         src="/static/v-alt.svg"
         height="38px"
       )
+
     v-fade-transition(mode="out-in")
       v-btn(flat :to="backPath" v-if="$route.path.name === 'store/Index'")
         v-icon(left) mdi-arrow-left
         span Back to Docs
       v-toolbar-title(v-else).pb-1.hidden-xs-only Vuetify
+
     v-spacer
-    v-toolbar-items
       v-btn(
         flat
         v-show="isHome"
@@ -101,19 +102,21 @@
 
     data: () => ({
       fixed: false,
-      languages
+      languages,
+      notifications: []
     }),
 
     computed: {
-      ...mapState({
-        appToolbar: state => state.appToolbar,
-        cart: state => state.store.checkout,
-        currentVersion: state => state.currentVersion,
-        isFullscreen: state => state.isFullscreen,
-        releases: state => state.releases,
-        route: state => state.route,
-        stateless: state => state.stateless
+      ...mapState('app', [
+        'appToolbar',
+        'isFullscreen',
+        'releases',
+        'stateless'
+      ]),
+      ...mapState('store', {
+        cart: state => state.checkout
       }),
+      ...mapState(['currentVersion', 'route']),
       backPath () {
         return this.route.from.path === '/'
           ? { name: 'getting-started/QuickStart' }

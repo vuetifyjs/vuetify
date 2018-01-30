@@ -2,7 +2,7 @@
   v-navigation-drawer(
     app
     fixed
-    v-model="appDrawer"
+    v-model="inputValue"
     :stateless="isFullscreen"
   )#app-drawer
     div.text-xs-center
@@ -145,7 +145,8 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
+  // Utilities
+  import { mapMutations, mapState } from 'vuex'
   import supporters from '@/assets/supporters'
   import appDrawerItems from '@/assets/app-drawer-items'
 
@@ -159,17 +160,14 @@
     }),
 
     computed: {
-      ...mapState({
-        isFullscreen: state => state.isFullscreen,
-        stateless: state => state.stateless
-      }),
-      appDrawer: {
+      ...mapState('app', ['isFullscreen', 'stateless', 'appDrawer']),
+      inputValue: {
         get (state) {
-          return this.$store.state.appDrawer &&
+          return this.appDrawer &&
             !this.isFullscreen
         },
         set (val) {
-          this.$store.commit('app/DRAWER', val)
+          this.drawer(val)
         }
       }
     },
@@ -177,20 +175,18 @@
     watch: {
       $route () {
         if (this.stateless &&
-          this.appDrawer &&
+          this.inputValue &&
           this.$vuetify.breakpoint.mdAndDown
-        ) this.appDrawer = false
+        ) this.inputValue = false
       },
-      appDrawer (val) {
+      inputValue (val) {
         if (!val) this.docSearch.autocomplete.autocomplete.close()
       },
       isSearching (val) {
         this.$refs.toolbar.isScrolling = !val
 
         if (val) {
-          this.$nextTick(() => {
-            this.$refs.search.focus()
-          })
+          this.$nextTick(() => this.$refs.search.focus())
         } else {
           this.search = null
         }
@@ -207,6 +203,9 @@
     },
 
     methods: {
+      ...mapMutations('app', {
+        drawer: 'DRAWER'
+      }),
       genChildTarget (item, subItem) {
         if (subItem.href) return
         if (item.component) {
