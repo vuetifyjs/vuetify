@@ -27,6 +27,7 @@
       v-toolbar-title(v-else).pb-1.hidden-xs-only Vuetify
 
     v-spacer
+    v-toolbar-items
       v-btn(
         flat
         v-show="isHome"
