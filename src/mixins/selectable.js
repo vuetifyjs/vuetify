@@ -74,6 +74,20 @@ export default {
         }
       }, this.$slots.label || this.label)
     },
+    removeValuesFromInput (value, input = this.inputValue) {
+      let removed = 0
+
+      for (let i = 0, m = input.length; i < m; i++) {
+        if (this.valueComparator(input[i], value)) {
+          input.splice(i, 1)
+          removed++
+          i--
+          m--
+        }
+      }
+
+      return removed
+    },
     toggle () {
       if (this.disabled) {
         return
@@ -88,17 +102,7 @@ export default {
           return
         }
 
-        let removed = false
-
-        for (let i = 0, m = input.length; i < m; i++) {
-          if (this.valueComparator(input[i], value)) {
-            removed = true
-            input.splice(i, 1)
-            i--; m--
-          }
-        }
-
-        if (!removed) {
+        if (this.removeValuesFromInput(value, input) === 0) {
           input.push(value)
         }
       } else if (this.trueValue || this.falseValue) {
