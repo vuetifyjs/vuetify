@@ -21,7 +21,8 @@ export default {
         'input-group--multi-line': this.multiLine,
         'input-group--chips': this.chips,
         'input-group--multiple': this.multiple,
-        'input-group--open': this.menuIsVisible
+        'input-group--open': this.menuIsVisible,
+        'input-group--select--selecting-index': this.selectedIndex > -1
       }
 
       if (this.hasError) {
@@ -123,7 +124,7 @@ export default {
       get () { return this.lazySearch },
       set (val) {
         if (!this.isAutocomplete ||
-          this.selectedIndex > -1
+          (!this.multiple && this.selectedIndex > -1)
         ) return
 
         this.lazySearch = val

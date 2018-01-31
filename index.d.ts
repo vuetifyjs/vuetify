@@ -60,13 +60,35 @@ declare interface VuetifyOptions {
   themeCache?: VuetifyThemeCache
 }
 
+declare type VuetifyGoToEasing =
+  ((t: number) => number) |
+  'linear' |
+  'easeInQuad' |
+  'easeOutQuad' |
+  'easeInOutQuad' |
+  'easeInCubic' |
+  'easeOutCubic' |
+  'easeInOutCubic' |
+  'easeInQuart' |
+  'easeOutQuart' |
+  'easeInOutQuart' |
+  'easeInQuint' |
+  'easeOutQuint' |
+  'easeInOutQuint'
+
+declare interface VuetifyGoToOptions {
+  duration?: number
+  offset?: number
+  easing?: VuetifyGoToEasing
+}
+
 declare interface VuetifyObject {
   application: VuetifyApplication
   breakpoint: VuetifyBreakpoint
   dark: boolean
   theme: VuetifyTheme
   options: VuetifyOptions
-  goTo: (target: string | number | HTMLElement) => void
+  goTo: (target: string | number | HTMLElement, options?: VuetifyGoToOptions) => void
 }
 
 declare module 'vue/types/vue' {

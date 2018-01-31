@@ -5,7 +5,9 @@ test('VTimePickerTitle.js', ({ mount }) => {
   it('should render component in 24hr', () => {
     const wrapper = mount(VTimePickerTitle, {
       propsData: {
-        value: '14:13',
+        hour: 14,
+        minute: 13,
+        period: 'pm',
         ampm: false
       }
     })
@@ -16,7 +18,9 @@ test('VTimePickerTitle.js', ({ mount }) => {
   it('should render component in 12hr', () => {
     const wrapper = mount(VTimePickerTitle, {
       propsData: {
-        value: '14:13',
+        hour: 14,
+        minute: 13,
+        period: 'pm',
         ampm: true
       }
     })
@@ -27,7 +31,9 @@ test('VTimePickerTitle.js', ({ mount }) => {
   it('should render component when selecting hour', () => {
     const wrapper = mount(VTimePickerTitle, {
       propsData: {
-        value: '14:13',
+        hour: 14,
+        minute: 13,
+        period: 'pm',
         selectingHour: true
       }
     })
@@ -38,7 +44,9 @@ test('VTimePickerTitle.js', ({ mount }) => {
   it('should emit event when clicked on am/pm', async () => {
     const wrapper = mount(VTimePickerTitle, {
       propsData: {
-        value: '14:13',
+        hour: 14,
+        minute: 13,
+        period: 'pm',
         ampm: true
       }
     })
@@ -52,7 +60,9 @@ test('VTimePickerTitle.js', ({ mount }) => {
     expect(period).toBeCalledWith('am')
 
     wrapper.setProps({
-      value: '2:13'
+      hour: 2,
+      minute: 13,
+      period: 'am'
     })
     wrapper.find('.time-picker-title__ampm .picker__title__btn:not(.active)')[0].trigger('click')
     expect(period).toBeCalledWith('pm')
@@ -61,7 +71,9 @@ test('VTimePickerTitle.js', ({ mount }) => {
   it('should emit event when clicked on hours/minutes', async () => {
     const wrapper = mount(VTimePickerTitle, {
       propsData: {
-        value: '14:13'
+        hour: 14,
+        minute: 13,
+        period: 'pm'
       }
     })
 
