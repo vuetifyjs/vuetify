@@ -129,11 +129,7 @@ export default {
 
         this.lazySearch = val
 
-        clearTimeout(this.searchTimeout)
-
-        this.searchTimeout = setTimeout(() => {
-          this.$emit('update:searchInput', val)
-        }, this.debounceSearch)
+        this.$emit('update:searchInput', val)
       }
     },
     selectedItem () {
