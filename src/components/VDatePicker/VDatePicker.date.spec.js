@@ -399,8 +399,8 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
   it('should use prev and next icons', () => {
     const wrapper = mount(VDatePicker, {
       propsData: {
-        prependIcon: 'block',
-        appendIcon: 'check'
+        prevIcon: 'block',
+        nextIcon: 'check'
       }
     })
 

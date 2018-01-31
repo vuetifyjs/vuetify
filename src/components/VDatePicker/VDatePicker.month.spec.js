@@ -205,8 +205,8 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
     const wrapper = mount(VDatePicker, {
       propsData: {
         type: 'month',
-        prependIcon: 'block',
-        appendIcon: 'check'
+        prevIcon: 'block',
+        nextIcon: 'check'
       }
     })
 

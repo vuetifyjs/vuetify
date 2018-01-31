@@ -28,10 +28,6 @@ export default {
   },
 
   props: {
-    appendIcon: {
-      type: String,
-      default: 'chevron_right'
-    },
     disabled: Boolean,
     format: {
       type: Function,
@@ -43,7 +39,11 @@ export default {
     },
     min: String,
     max: String,
-    prependIcon: {
+    nextIcon: {
+      type: String,
+      default: 'chevron_right'
+    },
+    prevIcon: {
       type: String,
       default: 'chevron_left'
     },
@@ -90,7 +90,7 @@ export default {
           }
         }
       }, [
-        this.$createElement('v-icon', change < 0 ? this.prependIcon : this.appendIcon)
+        this.$createElement('v-icon', change < 0 ? this.prevIcon : this.nextIcon)
       ])
     },
     calculateChange (sign) {
