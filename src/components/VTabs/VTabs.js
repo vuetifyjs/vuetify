@@ -62,13 +62,13 @@ export default {
 
   data () {
     return {
-      prependIconVisible: false,
-      appendIconVisible: false,
       bar: [],
       content: [],
       isBooted: false,
       isOverflowing: false,
       lazyValue: this.value,
+      nextIconVisible: false,
+      prevIconVisible: false,
       resizeTimeout: null,
       reverse: false,
       scrollOffset: 0,
@@ -83,10 +83,10 @@ export default {
   },
 
   methods: {
-    checkPrependIcon () {
+    checkPrevIcon () {
       return this.scrollOffset > 0
     },
-    checkAppendIcon () {
+    checkNextIcon () {
       // Check one scroll ahead to know the width of right-most item
       const container = this.$refs.container
       const wrapper = this.$refs.wrapper
@@ -220,8 +220,8 @@ export default {
 
   mounted () {
     this.callSlider()
-    this.prependIconVisible = this.checkPrependIcon()
-    this.appendIconVisible = this.checkAppendIcon()
+    this.prevIconVisible = this.checkPrevIcon()
+    this.nextIconVisible = this.checkNextIcon()
   },
 
   render (h) {
