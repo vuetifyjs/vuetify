@@ -253,7 +253,7 @@ module.exports = {
       "button-group",
       "colorable",
       "positionable",
-      "registerable-provide"
+      "registrable-provide"
     ],
     "slots": [
       "default"
@@ -279,6 +279,12 @@ module.exports = {
       },
       {
         "name": "fullWidth",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "hideOverlay",
         "type": "Boolean",
         "default": "false",
         "source": null
@@ -665,7 +671,7 @@ module.exports = {
     "mixins": [
       "colorable",
       "positionable",
-      "registerable-inject",
+      "registrable-inject",
       "routable",
       "themeable",
       "toggleable"
@@ -709,7 +715,7 @@ module.exports = {
     ],
     "mixins": [
       "button-group",
-      "registerable-provide",
+      "registrable-provide",
       "themeable"
     ],
     "slots": [
@@ -1003,7 +1009,7 @@ module.exports = {
     ],
     "mixins": [
       "bootable",
-      "registerable-provide",
+      "registrable-provide",
       "themeable"
     ],
     "slots": [
@@ -1032,7 +1038,7 @@ module.exports = {
       }
     ],
     "mixins": [
-      "registerable-inject"
+      "registrable-inject"
     ],
     "slots": [
       "default"
@@ -2567,6 +2573,7 @@ module.exports = {
       }
     ],
     "mixins": [
+      "registrable-provide",
       "themeable"
     ],
     "slots": [
@@ -2605,6 +2612,7 @@ module.exports = {
     ],
     "mixins": [
       "bootable",
+      "registrable-inject",
       "rippleable",
       "toggleable"
     ],
@@ -3402,7 +3410,7 @@ module.exports = {
       }
     ],
     "mixins": [
-      "registerable-provide",
+      "registrable-provide",
       "themeable"
     ],
     "slots": [
@@ -3468,7 +3476,7 @@ module.exports = {
     ],
     "mixins": [
       "bootable",
-      "registerable-inject",
+      "registrable-inject",
       "toggleable"
     ]
   },
@@ -4558,7 +4566,7 @@ module.exports = {
     "mixins": [
       "input",
       "loadable",
-      "registerable-provide",
+      "registrable-provide",
       "themeable",
       "validatable"
     ],
@@ -4630,7 +4638,7 @@ module.exports = {
     ],
     "mixins": [
       "colorable",
-      "registerable-inject",
+      "registrable-inject",
       "rippleable",
       "tab-focusable",
       "themeable"
@@ -4645,9 +4653,9 @@ module.exports = {
   "v-select": {
     "props": [
       {
-        "name": "browserAutocomplete",
-        "type": "String",
-        "default": "on",
+        "name": "autocomplete",
+        "type": "Boolean",
+        "default": "false",
         "source": null
       },
       {
@@ -4696,18 +4704,15 @@ module.exports = {
         "source": "validatable"
       },
       {
-        "name": "debounceSearch",
-        "type": [
-          "Number",
-          "String"
-        ],
-        "default": 200,
-        "source": null
-      },
-      {
         "name": "contentClass",
         "type": "String",
         "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "combobox",
+        "type": "Boolean",
+        "default": "false",
         "source": null
       },
       {
@@ -4729,12 +4734,6 @@ module.exports = {
         "source": "input"
       },
       {
-        "name": "combobox",
-        "type": "Boolean",
-        "default": "false",
-        "source": null
-      },
-      {
         "name": "clearable",
         "type": "Boolean",
         "default": "false",
@@ -4753,16 +4752,16 @@ module.exports = {
         "source": null
       },
       {
+        "name": "browserAutocomplete",
+        "type": "String",
+        "default": "on",
+        "source": null
+      },
+      {
         "name": "color",
         "type": "String",
         "default": "undefined",
         "source": "colorable"
-      },
-      {
-        "name": "autocomplete",
-        "type": "Boolean",
-        "default": "false",
-        "source": null
       },
       {
         "name": "auto",
@@ -4789,10 +4788,10 @@ module.exports = {
         "source": null
       },
       {
-        "name": "solo",
+        "name": "required",
         "type": "Boolean",
         "default": "false",
-        "source": "soloable"
+        "source": "input"
       },
       {
         "name": "flat",
@@ -4801,7 +4800,13 @@ module.exports = {
         "source": "soloable"
       },
       {
-        "name": "required",
+        "name": "overflow",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "readonly",
         "type": "Boolean",
         "default": "false",
         "source": "input"
@@ -4816,16 +4821,10 @@ module.exports = {
         "source": "maskable"
       },
       {
-        "name": "returnMaskedValue",
+        "name": "openOnClear",
         "type": "Boolean",
         "default": "false",
-        "source": "maskable"
-      },
-      {
-        "name": "readonly",
-        "type": "Boolean",
-        "default": "false",
-        "source": "input"
+        "source": null
       },
       {
         "name": "prependIconCb",
@@ -4870,16 +4869,16 @@ module.exports = {
         "source": "input"
       },
       {
-        "name": "singleLine",
+        "name": "multiLine",
         "type": "Boolean",
         "default": "false",
         "source": null
       },
       {
-        "name": "rules",
-        "type": "Array",
-        "default": [],
-        "source": "validatable"
+        "name": "multiple",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
       },
       {
         "name": "light",
@@ -4909,9 +4908,13 @@ module.exports = {
         "source": null
       },
       {
-        "name": "segmented",
-        "type": "Boolean",
-        "default": "false",
+        "name": "minWidth",
+        "type": [
+          "Boolean",
+          "Number",
+          "String"
+        ],
+        "default": false,
         "source": null
       },
       {
@@ -4948,38 +4951,34 @@ module.exports = {
         "source": null
       },
       {
-        "name": "minWidth",
-        "type": [
-          "Boolean",
-          "Number",
-          "String"
-        ],
-        "default": false,
-        "source": null
-      },
-      {
-        "name": "multiple",
+        "name": "segmented",
         "type": "Boolean",
         "default": "false",
         "source": null
       },
       {
-        "name": "multiLine",
+        "name": "solo",
+        "type": "Boolean",
+        "default": "false",
+        "source": "soloable"
+      },
+      {
+        "name": "singleLine",
         "type": "Boolean",
         "default": "false",
         "source": null
       },
       {
-        "name": "openOnClear",
+        "name": "returnMaskedValue",
         "type": "Boolean",
         "default": "false",
-        "source": null
+        "source": "maskable"
       },
       {
-        "name": "overflow",
-        "type": "Boolean",
-        "default": "false",
-        "source": null
+        "name": "rules",
+        "type": "Array",
+        "default": [],
+        "source": "validatable"
       },
       {
         "name": "returnObject",
@@ -6025,7 +6024,7 @@ module.exports = {
     ],
     "mixins": [
       "colorable",
-      "registerable-provide",
+      "registrable-provide",
       "ssr-bootable",
       "themeable"
     ],
@@ -6124,7 +6123,7 @@ module.exports = {
       }
     ],
     "mixins": [
-      "registerable-inject",
+      "registrable-inject",
       "routable"
     ],
     "slots": [
@@ -6156,7 +6155,7 @@ module.exports = {
       }
     ],
     "mixins": [
-      "registerable-provide"
+      "registrable-provide"
     ],
     "slots": [
       "default"
@@ -6203,7 +6202,7 @@ module.exports = {
     ],
     "mixins": [
       "bootable",
-      "registerable-inject"
+      "registrable-inject"
     ],
     "slots": [
       "default"
@@ -6741,15 +6740,27 @@ module.exports = {
         "source": null
       },
       {
-        "name": "selectingHour",
-        "type": "Boolean",
-        "default": "false",
+        "name": "hour",
+        "type": "Number",
+        "default": "undefined",
         "source": null
       },
       {
-        "name": "value",
+        "name": "minute",
+        "type": "Number",
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "period",
         "type": "String",
         "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "selectingHour",
+        "type": "Boolean",
+        "default": "false",
         "source": null
       }
     ],
