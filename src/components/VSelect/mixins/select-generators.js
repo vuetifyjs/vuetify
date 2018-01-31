@@ -125,6 +125,8 @@ export default {
         data.on = {
           ...this.genListeners(),
           input: e => {
+            if (this.selectedIndex > -1) return
+
             this.searchValue = this.unmaskText(e.target.value)
           }
         }

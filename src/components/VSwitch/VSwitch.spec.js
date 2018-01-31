@@ -12,11 +12,12 @@ test('VSwitch.js', ({ mount }) => {
 
     const ripple = wrapper.find('.input-group--selection-controls__ripple')[0]
 
-    expect(ripple.getAttribute('data-ripple')).toBe('false')
+    expect(ripple.element._ripple.enabled).toBe(false)
 
     wrapper.setProps({ ripple: true })
 
-    expect(ripple.getAttribute('data-ripple')).toBe('true')
+    expect(ripple.element._ripple.enabled).toBe(true)
+    expect(ripple.element._ripple.centered).toBe(true)
   })
 
   it('should emit change event on swipe', async () => {

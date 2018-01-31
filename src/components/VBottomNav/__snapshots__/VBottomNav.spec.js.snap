@@ -7,14 +7,12 @@ exports[`VBottomNav.js should be hidden with a false value 1`] = `
 >
   <button type="button"
           class="btn"
-          data-ripple="true"
   >
     <div class="btn__content">
     </div>
   </button>
   <button type="button"
           class="btn"
-          data-ripple="true"
   >
     <div class="btn__content">
     </div>
@@ -30,14 +28,12 @@ exports[`VBottomNav.js should be visible with a true value 1`] = `
 >
   <button type="button"
           class="btn"
-          data-ripple="true"
   >
     <div class="btn__content">
     </div>
   </button>
   <button type="button"
           class="btn"
-          data-ripple="true"
   >
     <div class="btn__content">
     </div>
@@ -53,14 +49,12 @@ exports[`VBottomNav.js should have a bottom-nav class 1`] = `
 >
   <button type="button"
           class="btn"
-          data-ripple="true"
   >
     <div class="btn__content">
     </div>
   </button>
   <button type="button"
           class="btn"
-          data-ripple="true"
   >
     <div class="btn__content">
     </div>
@@ -76,14 +70,12 @@ exports[`VBottomNav.js should have prop classes 1`] = `
 >
   <button type="button"
           class="btn"
-          data-ripple="true"
   >
     <div class="btn__content">
     </div>
   </button>
   <button type="button"
           class="btn"
-          data-ripple="true"
   >
     <div class="btn__content">
     </div>

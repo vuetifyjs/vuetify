@@ -269,6 +269,7 @@ export default {
         })
 
         this.selectedItems = selectedItems
+        this.selectedIndex = -1
       }
 
       this.searchValue = !this.isMultiple &&

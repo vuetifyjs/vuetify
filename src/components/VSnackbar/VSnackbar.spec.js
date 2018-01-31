@@ -3,7 +3,11 @@ import VSnackbar from '@components/VSnackbar'
 
 test('VSnackbar.vue', ({ mount }) => {
   it('should have a snack class', () => {
-    const wrapper = mount(VSnackbar)
+    const wrapper = mount(VSnackbar, {
+      propsData: {
+        value: true
+      }
+    })
 
     expect(wrapper.hasClass('snack')).toBe(true)
   })
@@ -11,6 +15,7 @@ test('VSnackbar.vue', ({ mount }) => {
   it('should have a color class', () => {
     const wrapper = mount(VSnackbar, {
       propsData: {
+        value: true,
         color: 'orange lighten-2'
       }
     })
