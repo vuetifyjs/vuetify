@@ -41,6 +41,7 @@
 
     .btn
       color: $snackbar-color
+      flex: 1 0 auto
       margin: 0 0 0 8px
       min-width: 0px
 
@@ -59,6 +60,9 @@
 
     .btn
       align-self: flex-end
+
+  &--auto-size &__content
+    height: auto
 
 @media $display-breakpoints.sm-and-up
   .snack
