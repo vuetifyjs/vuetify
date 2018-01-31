@@ -37,43 +37,6 @@ exports[`VCarousel.js should render component and match snapshot 1`] = `
 
 `;
 
-exports[`VCarousel.js should render component with custom appended icon and match snapshot 1`] = `
-
-<div class="carousel">
-  <div class="carousel__left">
-    <button type="button"
-            class="btn btn--icon theme--dark"
-    >
-      <div class="btn__content">
-        <i aria-hidden="true"
-           class="icon material-icons"
-           style="font-size: 46px;"
-        >
-          chevron_left
-        </i>
-      </div>
-    </button>
-  </div>
-  <div class="carousel__right">
-    <button type="button"
-            class="btn btn--icon theme--dark"
-    >
-      <div class="btn__content">
-        <i aria-hidden="true"
-           class="icon material-icons"
-           style="font-size: 46px;"
-        >
-          stop
-        </i>
-      </div>
-    </button>
-  </div>
-  <div class="carousel__controls">
-  </div>
-</div>
-
-`;
-
 exports[`VCarousel.js should render component with custom duration between image cycles and match snapshot 1`] = `
 
 <div class="carousel">
@@ -214,7 +177,44 @@ exports[`VCarousel.js should render component with custom icon and match snapsho
 
 `;
 
-exports[`VCarousel.js should render component with custom prepended icon and match snapshot 1`] = `
+exports[`VCarousel.js should render component with custom next icon and match snapshot 1`] = `
+
+<div class="carousel">
+  <div class="carousel__left">
+    <button type="button"
+            class="btn btn--icon theme--dark"
+    >
+      <div class="btn__content">
+        <i aria-hidden="true"
+           class="icon material-icons"
+           style="font-size: 46px;"
+        >
+          chevron_left
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="carousel__right">
+    <button type="button"
+            class="btn btn--icon theme--dark"
+    >
+      <div class="btn__content">
+        <i aria-hidden="true"
+           class="icon material-icons"
+           style="font-size: 46px;"
+        >
+          stop
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="carousel__controls">
+  </div>
+</div>
+
+`;
+
+exports[`VCarousel.js should render component with custom prev icon and match snapshot 1`] = `
 
 <div class="carousel">
   <div class="carousel__left">
@@ -391,29 +391,6 @@ exports[`VCarousel.js should render component with selected active item 1`] = `
 
 `;
 
-exports[`VCarousel.js should render component without appended icon and match snapshot 1`] = `
-
-<div class="carousel">
-  <div class="carousel__left">
-    <button type="button"
-            class="btn btn--icon theme--dark"
-    >
-      <div class="btn__content">
-        <i aria-hidden="true"
-           class="icon material-icons"
-           style="font-size: 46px;"
-        >
-          chevron_left
-        </i>
-      </div>
-    </button>
-  </div>
-  <div class="carousel__controls">
-  </div>
-</div>
-
-`;
-
 exports[`VCarousel.js should render component without delimiters 1`] = `
 
 <div class="carousel">
@@ -479,7 +456,30 @@ exports[`VCarousel.js should render component without delimiters 1`] = `
 
 `;
 
-exports[`VCarousel.js should render component without prepended icon and match snapshot 1`] = `
+exports[`VCarousel.js should render component without next icon and match snapshot 1`] = `
+
+<div class="carousel">
+  <div class="carousel__left">
+    <button type="button"
+            class="btn btn--icon theme--dark"
+    >
+      <div class="btn__content">
+        <i aria-hidden="true"
+           class="icon material-icons"
+           style="font-size: 46px;"
+        >
+          chevron_left
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="carousel__controls">
+  </div>
+</div>
+
+`;
+
+exports[`VCarousel.js should render component without prev icon and match snapshot 1`] = `
 
 <div class="carousel">
   <div class="carousel__right">
