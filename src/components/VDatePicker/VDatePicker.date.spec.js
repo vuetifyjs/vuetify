@@ -40,16 +40,21 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
   })
 
   it('should emit input event on date click', async () => {
-    const cb = jest.fn()
     const wrapper = mount(VDatePicker, {
       propsData: {
         value: '2013-05-07'
       }
     })
 
-    wrapper.vm.$on('input', cb);
+    const input = jest.fn()
+    wrapper.vm.$on('input', input)
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
     wrapper.find('.date-picker-table--date tbody tr+tr td:first-child button')[0].trigger('click')
-    expect(cb).toBeCalledWith('2013-05-05')
+    expect(input).toBeCalledWith('2013-05-05')
+    expect(change).toBeCalledWith('2013-05-05')
   })
 
   it('should emit input event on month click', async () => {
@@ -435,5 +440,51 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
     wrapper.vm.activePicker = 'YEAR'
     await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should emit @input and not emit @change when month is clicked (not lazy picker)', async () => {
+    const wrapper = mount(VDatePicker, {
+      propsData: {
+        value: '2013-02-07',
+        lazy: false
+      },
+      data: {
+        activePicker: 'MONTH'
+      }
+    })
+
+    const input = jest.fn()
+    wrapper.vm.$on('input', input)
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    wrapper.find('tbody tr td button')[0].trigger('click')
+    wrapper.vm.$nextTick()
+    expect(change).not.toBeCalled()
+    expect(input).toBeCalledWith('2013-01-07')
+  })
+
+  it('should not emit @input and not emit @change when month is clicked (lazy picker)', async () => {
+    const wrapper = mount(VDatePicker, {
+      propsData: {
+        value: '2013-02-07',
+        lazy: true
+      },
+      data: {
+        activePicker: 'MONTH'
+      }
+    })
+
+    const input = jest.fn()
+    wrapper.vm.$on('input', input)
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    wrapper.find('tbody tr td button')[0].trigger('click')
+    wrapper.vm.$nextTick()
+    expect(change).not.toBeCalled()
+    expect(input).not.toBeCalled()
   })
 })
