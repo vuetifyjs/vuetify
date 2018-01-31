@@ -57,22 +57,6 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
     expect(change).toBeCalledWith('2013-05-05')
   })
 
-  it('should emit input event on month click', async () => {
-    const cb = jest.fn()
-    const wrapper = mount(VDatePicker, {
-      propsData: {
-        value: '2013-05-13'
-      },
-      data: {
-        activePicker: 'MONTH'
-      }
-    })
-
-    wrapper.vm.$on('input', cb);
-    wrapper.find('.date-picker-table--month button')[0].trigger('click')
-    expect(cb).toBeCalledWith('2013-01-13')
-  })
-
   it('should not emit input event on month click if date is not allowed', async () => {
     const cb = jest.fn()
     const wrapper = mount(VDatePicker, {
@@ -90,20 +74,26 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
     expect(cb).not.toBeCalled()
   })
 
-  it('should emit input event on year click', async () => {
-    const cb = jest.fn()
+  it('should emit input event on year click (reactive picker)', async () => {
     const wrapper = mount(VDatePicker, {
       propsData: {
-        value: '2013-05-13'
+        value: '2013-05-13',
+        reactive: true
       },
       data: {
         activePicker: 'YEAR'
       }
     })
 
-    wrapper.vm.$on('input', cb);
+    const input = jest.fn()
+    wrapper.vm.$on('input', input);
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', input);
+
     wrapper.find('.date-picker-years li.active + li')[0].trigger('click')
-    expect(cb).toBeCalledWith('2012-05-13')
+    expect(input).toBeCalledWith('2012-05-13')
+    expect(change).not.toBeCalled()
   })
 
   it('should not emit input event on year click if date is not allowed', async () => {
@@ -442,11 +432,11 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should emit @input and not emit @change when month is clicked (not lazy picker)', async () => {
+  it('should emit @input and not emit @change when month is clicked (not reative picker)', async () => {
     const wrapper = mount(VDatePicker, {
       propsData: {
         value: '2013-02-07',
-        lazy: false
+        reactive: true
       },
       data: {
         activePicker: 'MONTH'
@@ -468,8 +458,7 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
   it('should not emit @input and not emit @change when month is clicked (lazy picker)', async () => {
     const wrapper = mount(VDatePicker, {
       propsData: {
-        value: '2013-02-07',
-        lazy: true
+        value: '2013-02-07'
       },
       data: {
         activePicker: 'MONTH'

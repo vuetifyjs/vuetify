@@ -4,21 +4,27 @@ import VDatePicker from './VDatePicker'
 import VMenu from '@components/VMenu'
 
 test('VDatePicker.js', ({ mount, compileToFunctions }) => {
-  it('should emit input event on year click', async () => {
-    const cb = jest.fn()
+  it('should emit input event on year click (reactive picker)', async () => {
     const wrapper = mount(VDatePicker, {
       propsData: {
         value: '2013-05',
-        type: 'month'
+        type: 'month',
+        reactive: true
       },
       data: {
         activePicker: 'YEAR'
       }
     })
 
-    wrapper.vm.$on('input', cb);
+    const input = jest.fn()
+    wrapper.vm.$on('input', input);
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', input);
+
     wrapper.find('.date-picker-years li.active + li')[0].trigger('click')
-    expect(cb).toBeCalledWith('2012-05')
+    expect(input).toBeCalledWith('2012-05')
+    expect(change).not.toBeCalled()
   })
 
   it('should not emit input event on year click if month is not allowed', async () => {

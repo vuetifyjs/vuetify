@@ -82,7 +82,6 @@ export default {
       type: Function,
       default: null
     },
-    lazy: Boolean,
     locale: {
       type: String,
       default: 'en-us'
@@ -99,6 +98,7 @@ export default {
       type: String,
       default: 'chevron_left'
     },
+    reactive: Boolean,
     readonly: Boolean,
     scrollable: Boolean,
     showCurrent: {
@@ -226,7 +226,7 @@ export default {
         this.tableDate = `${value}-${pad(this.tableMonth + 1)}`
       }
       this.activePicker = 'MONTH'
-      !this.lazy && this.isDateAllowed(this.inputDate) && this.$emit('input', this.inputDate)
+      this.reactive && this.isDateAllowed(this.inputDate) && this.$emit('input', this.inputDate)
     },
     monthClick (value) {
       this.inputYear = parseInt(value.split('-')[0], 10)
@@ -234,7 +234,7 @@ export default {
       if (this.type === 'date') {
         this.tableDate = value
         this.activePicker = 'DATE'
-        !this.lazy && this.isDateAllowed(this.inputDate) && this.$emit('input', this.inputDate)
+        this.reactive && this.isDateAllowed(this.inputDate) && this.$emit('input', this.inputDate)
       } else {
         this.$emit('input', this.inputDate)
         this.$emit('change', this.inputDate)
