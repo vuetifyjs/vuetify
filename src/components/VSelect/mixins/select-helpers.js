@@ -16,13 +16,12 @@ export default {
       return this.getPropertyFromItem(item, this.itemText, item)
     },
     getValue (item) {
-
       return this.getPropertyFromItem(item, this.itemValue, item)
     },
-    getDisabled(item) {
+    getDisabled (item) {
       return this.getPropertyFromItem(item, this.itemDisabled, false)
     },
-    getAvatar(item) {
+    getAvatar (item) {
       return this.getPropertyFromItem(item, this.itemAvatar)
     },
     getPropertyFromItem (item, field, fallback) {

@@ -4,7 +4,7 @@ import '../../stylus/components/_selection-controls.styl'
 import '../../stylus/components/_radio-group.styl'
 
 // Helpers
-import { looseEqual } from "../../util/helpers"
+import { looseEqual } from '../../util/helpers'
 
 // Mixins
 import Input from '../../mixins/input'

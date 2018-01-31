@@ -292,7 +292,7 @@ export default {
     },
     toggle (value) {
       const selected = Object.assign({}, this.selected)
-      
+
       for (let index = 0; index < this.filteredItems.length; index++) {
         selected[this.getItemKey(this.filteredItems[index])] = value
       }
@@ -307,7 +307,7 @@ export default {
 
       Object.defineProperty(props, 'selected', {
         get: () => this.selected[this.getItemKey(item)],
-        set: (value) => {
+        set: value => {
           if (itemKey == null) {
             consoleWarn(`"itemKey" attribute must be present for item`, this)
           }
@@ -326,7 +326,7 @@ export default {
 
       Object.defineProperty(props, 'expanded', {
         get: () => this.expanded[this.getItemKey(item)],
-        set: (value) => {
+        set: value => {
           if (itemKey == null) {
             consoleWarn(`"itemKey" attribute must be present for item`, this)
           }
@@ -336,7 +336,7 @@ export default {
               this.expanded.hasOwnProperty(key) && this.$set(this.expanded, key, false)
             }
           }
-          
+
           this.$set(this.expanded, this.getItemKey(item), value)
         }
       })

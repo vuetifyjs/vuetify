@@ -1,6 +1,6 @@
 import Colorable from './colorable'
 import Input from './input'
-import { looseEqual } from "../util/helpers"
+import { looseEqual } from '../util/helpers'
 
 export default {
   name: 'selectable',

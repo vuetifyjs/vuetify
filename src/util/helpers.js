@@ -103,7 +103,7 @@ export function getNestedValue (obj, path) {
     obj = obj[path[i]]
   }
 
-  return obj;
+  return obj
 }
 
 export function getObjectValueByPath (obj, path) {
@@ -136,25 +136,25 @@ export function escapeHTML (str) {
   return str.replace(/[&<>]/g, tag => tagsToReplace[tag] || tag)
 }
 
-export function looseEqual(a, b) {
-    if (a === b) return true
+export function looseEqual (a, b) {
+  if (a === b) return true
 
-    if (a !== Object(a) || b !== Object(b)) {
-        // If the values aren't objects, they were already checked for equality
-        return false
-    }
+  if (a !== Object(a) || b !== Object(b)) {
+    // If the values aren't objects, they were already checked for equality
+    return false
+  }
 
-    const props = Object.keys(a)
+  const props = Object.keys(a)
 
-    if (props.length !== Object.keys(b).length) {
-        // Different number of props, don't bother to check
-        return false
-    }
+  if (props.length !== Object.keys(b).length) {
+    // Different number of props, don't bother to check
+    return false
+  }
 
-    return props.every(p => looseEqual(a[p], b[p]));
+  return props.every(p => looseEqual(a[p], b[p]))
 }
 
-export function filterObjectOnKeys(obj, keys) {
+export function filterObjectOnKeys (obj, keys) {
   const filtered = {}
 
   for (let i = 0; i < keys.length; i++) {
