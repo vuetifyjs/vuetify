@@ -448,6 +448,54 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
+  it('should work correctly with return-object', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        multiple: false,
+        returnObject: true,
+        items: [
+          {text: 'one', value: {x: [1, 2], y: ["a", "b"]}},
+          {text: 'two', value: {x: [3, 4], y: ["a", "b"]}},
+          {text: 'three', value: {x: [1, 2], y: ["a", "c"]}}
+        ],
+        itemText: 'text',
+        itemValue: 'value',
+        value: {text: 'two', value: {x: [3, 4], y: ["a", "b"]}}
+      }
+    })
+
+    expect(wrapper.vm.selectedItems).toHaveLength(1)
+    expect(wrapper.vm.inputValue).toEqual({text: 'two', value: {x: [3, 4], y: ["a", "b"]}})
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should work correctly with return-object [multiple]', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        multiple: true,
+        returnObject: true,
+        items: [
+          {text: 'one', value: {x: [1, 2], y: ["a", "b"]}},
+          {text: 'two', value: {x: [3, 4], y: ["a", "b"]}},
+          {text: 'three', value: {x: [1, 2], y: ["a", "c"]}}
+        ],
+        itemText: 'text',
+        itemValue: 'value',
+        value: [
+          {text: 'two', value: {x: [3, 4], y: ["a", "b"]}},
+          {text: 'one', value: {x: [1, 2], y: ["a", "b"]}}
+        ]
+      }
+    })
+
+    expect(wrapper.vm.selectedItems).toHaveLength(2)
+    expect(wrapper.vm.inputValue[0]).toEqual({text: 'two', value: {x: [3, 4], y: ["a", "b"]}})
+    expect(wrapper.vm.inputValue[1]).toEqual({text: 'one', value: {x: [1, 2], y: ["a", "b"]}})
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
   it('should not open if readonly', async () => {
     const wrapper = mount(VSelect, {
       propsData: {
