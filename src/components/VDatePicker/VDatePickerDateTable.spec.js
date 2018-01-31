@@ -15,13 +15,27 @@ test('VDatePickerDateTable.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render component with events and match snapshot', () => {
+  it('should render component with events (array) and match snapshot', () => {
     const wrapper = mount(VDatePickerDateTable, {
       propsData: {
         tableDate: '2005-05',
         current: '2005-07',
         value: '2005-11-03',
         events: ['2005-05-03'],
+        eventColor: 'red'
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render component with events (function) and match snapshot', () => {
+    const wrapper = mount(VDatePickerDateTable, {
+      propsData: {
+        tableDate: '2005-05',
+        current: '2005-07',
+        value: '2005-11-03',
+        events: date => date === '2005-05-03',
         eventColor: 'red'
       }
     })
@@ -43,7 +57,7 @@ test('VDatePickerDateTable.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render component with events colored by object and match snapshot', () => {
+  it('should render component with events colored by function and match snapshot', () => {
     const wrapper = mount(VDatePickerDateTable, {
       propsData: {
         tableDate: '2005-05',
