@@ -10,5 +10,9 @@ module.exports = [
   {
     title: '简体中文',
     locale: 'zh-Hans'
+  },
+  {
+    title: '한국어',
+    locale: 'ko'
   }
 ]
