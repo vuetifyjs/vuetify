@@ -1,6 +1,6 @@
 <template>
   <v-card flat tile>
-    <v-toolbar color=“cyan” dark>
+    <v-toolbar color="cyan" dark>
       <v-toolbar-side-icon></v-toolbar-side-icon>
       <v-toolbar-title>Application</v-toolbar-title>
       <v-spacer></v-spacer>
@@ -28,7 +28,7 @@
         >
           <v-card>
             <v-card-media height="300px" :src="`https://picsum.photos/200/300?image=${getImage()}`">
-              <span class="headline white--text  pl-3 pt-3" v-text="card.title"></span>
+              <span class="headline white--text pl-3 pt-3" v-text="card.title"/>
             </v-card-media>
             <v-card-actions class="white justify-center">
               <v-btn
