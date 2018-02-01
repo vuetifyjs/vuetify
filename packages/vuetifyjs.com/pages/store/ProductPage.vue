@@ -57,7 +57,17 @@
                   max="5"
                   hide-details
                 )
-              v-flex(xs3)
+              v-flex(xs12)
+                v-btn(
+                  large
+                  color="primary"
+                  @click="addToCart"
+                  :loading="cartLoading"
+                  block
+                ).px-5.mx-0
+                  span(v-text="$t('Vuetify.Store.addToCart')")
+                  v-icon(right size="18px") add_shopping_cart
+              v-flex(text-xs-center)
                 v-btn(
                   color="grey darken-1"
                   exact
@@ -65,19 +75,8 @@
                   large
                   outline
                   :to="{ name: 'store/Index' }"
-                ).ml-0
+                ).mx-0
                   span(v-text="$t('Vuetify.Store.backToStore')")
-              v-spacer
-              v-flex(xs7)
-                v-btn(
-                  large
-                  color="primary"
-                  @click="addToCart"
-                  :loading="cartLoading"
-                  block
-                ).px-5.mr-0
-                  span(v-text="$t('Vuetify.Store.addToCart')")
-                  v-icon(right size="18px") add_shopping_cart
 
               v-flex(xs12)
                 span(v-text="$t('Vuetify.Store.description')").body-2.grey--text

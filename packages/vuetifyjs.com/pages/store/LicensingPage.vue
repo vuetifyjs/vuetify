@@ -1,9 +1,11 @@
 <template>
-  <v-container class="page">
-    <v-btn flat :to="{ name: 'store/Index' }" class="mb-5" exact>
-      <v-icon>chevron_left</v-icon>
-      Back to store
-    </v-btn>
+  <v-container class="page pb-5">
+    <div class="text-xs-center">
+      <v-btn flat :to="{ name: 'store/Index' }" class="mb-5" exact>
+        <v-icon>chevron_left</v-icon>
+        Back to store
+      </v-btn>
+    </div>
     <h1 class="display-1 primary--text mb-3">Licenses FAQ</h1>
     <p>
       Digital products purchased under the Standard License may be used one time in an End Product for Personal Use (an End Product that does not charge End Users).
@@ -12,7 +14,7 @@
       <br>
       An Unlimited License can be used an unlimited amount of times for Personal Use, Commercial Use, and Commercial End Products.
     </p>
-    <p>If you have a use-case that you feel isn't covered by these licenses and are interested in purchasing, please <a href="mailto:john@vuetifyjs.com">Contact Us</a>.</p>
+    <p>If you have a use-case that you feel isn't covered by these licenses and are interested in purchasing, please <a href="mailto:sales@vuetifyjs.com">Contact Us</a>.</p>
     <table class="table">
       <thead>
         <tr class="text-xs-left">
@@ -46,6 +48,13 @@
       <div class="subheading" v-text="f[0]" />
       <div v-html="f[1]" />
     </div>
+    <div class="text-xs-center pt-5">
+      <cta-btn
+        :caption="$t('Generic.Common.needHelp')"
+        :text="$t('Generic.Common.contactUs')"
+        href="mailto:sales@vuetifyjs.com"
+      />
+    </div>
   </v-container>
 </template>
 
@@ -58,6 +67,10 @@
         ['Unlimited', 'Unlimited', 'Unlimited']
       ],
       faq: [
+        [
+          'What is unlimited vue-cli uses?',
+          'All themes come with a reusable vue-cli template. This has 3 standard presets, Default, Prototype and Custom, along with the install options for the <strong>pre-built</strong> theme examples. All theme purchases have unlimited usage of the <strong>standard presets</strong> and can be used for any project regardless of what it is. The only limitations for theme use is in regards to the <strong>specifically</strong> included pre-built theme examples.'
+        ],
         [
           'Can I use a purchased item in a freelance project or contract work for a client?',
           'Yes. However, if the client intends to charge End Users in any way from the End Product you create, you will need to purchase an Extended License. If you create the End Product for a client, your rights to purchased Items are transferred from you to your client.'
