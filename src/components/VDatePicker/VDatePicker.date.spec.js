@@ -40,32 +40,21 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
   })
 
   it('should emit input event on date click', async () => {
-    const cb = jest.fn()
     const wrapper = mount(VDatePicker, {
       propsData: {
         value: '2013-05-07'
       }
     })
 
-    wrapper.vm.$on('input', cb);
+    const input = jest.fn()
+    wrapper.vm.$on('input', input)
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
     wrapper.find('.date-picker-table--date tbody tr+tr td:first-child button')[0].trigger('click')
-    expect(cb).toBeCalledWith('2013-05-05')
-  })
-
-  it('should emit input event on month click', async () => {
-    const cb = jest.fn()
-    const wrapper = mount(VDatePicker, {
-      propsData: {
-        value: '2013-05-13'
-      },
-      data: {
-        activePicker: 'MONTH'
-      }
-    })
-
-    wrapper.vm.$on('input', cb);
-    wrapper.find('.date-picker-table--month button')[0].trigger('click')
-    expect(cb).toBeCalledWith('2013-01-13')
+    expect(input).toBeCalledWith('2013-05-05')
+    expect(change).toBeCalledWith('2013-05-05')
   })
 
   it('should not emit input event on month click if date is not allowed', async () => {
@@ -85,20 +74,26 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
     expect(cb).not.toBeCalled()
   })
 
-  it('should emit input event on year click', async () => {
-    const cb = jest.fn()
+  it('should emit input event on year click (reactive picker)', async () => {
     const wrapper = mount(VDatePicker, {
       propsData: {
-        value: '2013-05-13'
+        value: '2013-05-13',
+        reactive: true
       },
       data: {
         activePicker: 'YEAR'
       }
     })
 
-    wrapper.vm.$on('input', cb);
+    const input = jest.fn()
+    wrapper.vm.$on('input', input);
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', input);
+
     wrapper.find('.date-picker-years li.active + li')[0].trigger('click')
-    expect(cb).toBeCalledWith('2012-05-13')
+    expect(input).toBeCalledWith('2012-05-13')
+    expect(change).not.toBeCalled()
   })
 
   it('should not emit input event on year click if date is not allowed', async () => {
@@ -332,21 +327,6 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
     expect(wrapper.vm.tableDate).toBe('2004-11')
   })
 
-  it('should calculate the first allowed date', () => {
-    const now = new Date()
-    const year = now.getFullYear()
-    const month = now.getMonth()
-    const date = now.getDate()
-
-    const wrapper2 = mount(VDatePicker, {
-      propsData: {
-        value: null,
-        allowedDates: value => value === `${year}-${(month < 9 ? '0' : '') + (month + 1)}-03`
-      }
-    })
-    expect(wrapper2.vm.inputDate).toBe(`${year}-${(month < 9 ? '0' : '') + (month + 1)}-03`)
-  })
-
   it('should set the table date when value has changed', () => {
     const wrapper = mount(VDatePicker, {
       propsData: {
@@ -450,5 +430,50 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
     wrapper.vm.activePicker = 'YEAR'
     await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should emit @input and not emit @change when month is clicked (not reative picker)', async () => {
+    const wrapper = mount(VDatePicker, {
+      propsData: {
+        value: '2013-02-07',
+        reactive: true
+      },
+      data: {
+        activePicker: 'MONTH'
+      }
+    })
+
+    const input = jest.fn()
+    wrapper.vm.$on('input', input)
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    wrapper.find('tbody tr td button')[0].trigger('click')
+    wrapper.vm.$nextTick()
+    expect(change).not.toBeCalled()
+    expect(input).toBeCalledWith('2013-01-07')
+  })
+
+  it('should not emit @input and not emit @change when month is clicked (lazy picker)', async () => {
+    const wrapper = mount(VDatePicker, {
+      propsData: {
+        value: '2013-02-07'
+      },
+      data: {
+        activePicker: 'MONTH'
+      }
+    })
+
+    const input = jest.fn()
+    wrapper.vm.$on('input', input)
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    wrapper.find('tbody tr td button')[0].trigger('click')
+    wrapper.vm.$nextTick()
+    expect(change).not.toBeCalled()
+    expect(input).not.toBeCalled()
   })
 })
