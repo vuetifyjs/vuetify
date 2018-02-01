@@ -1,4 +1,4 @@
-export default {
+export default () => ({
   appDrawer: null,
   appFooter: true,
   appSnackbar: {
@@ -13,4 +13,4 @@ export default {
   loadedLangs: [],
   releases: [],
   stateless: false
-}
+})
