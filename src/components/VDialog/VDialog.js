@@ -33,7 +33,6 @@ export default {
   data () {
     return {
       isDependent: false,
-      stackClass: 'dialog__content__active',
       stackMinZIndex: 200
     }
   },
@@ -75,7 +74,7 @@ export default {
     contentClasses () {
       return {
         'dialog__content': true,
-        'dialog__content__active': this.isActive
+        'stackable__content__active': this.isActive
       }
     }
   },

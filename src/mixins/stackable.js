@@ -6,7 +6,7 @@ export default {
   data () {
     return {
       stackBase: null,
-      stackClass: 'unpecified',
+      stackSelector: '.stackable__content__active',
       stackElement: null,
       stackExclude: null,
       stackMinZIndex: 0
@@ -20,9 +20,9 @@ export default {
      */
     activeZIndex () {
       const content = this.stackElement || this.$refs.content
-      // Return current zindex if not active
+      // Return current zindex if active
 
-      const index = !this.isActive
+      const index = this.isActive
         ? getZIndex(content)
         : this.getMaxZIndex(this.stackExclude || [content]) + 2
 
@@ -42,7 +42,7 @@ export default {
       // Convert the NodeList to an array to
       // prevent an Edge bug with Symbol.iterator
       // https://github.com/vuetifyjs/vuetify/issues/2146
-      const activeElements = [...document.getElementsByClassName(this.stackClass)]
+      const activeElements = [...document.querySelectorAll(this.stackSelector)]
 
       // Get z-index for all active dialogs
       for (let index = 0; index < activeElements.length; index++) {
