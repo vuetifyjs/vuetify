@@ -7,7 +7,7 @@ export default {
       default: 'arrow_upward'
     }
   },
-  
+
   methods: {
     genTHead () {
       if (this.hideHeaders) return // Exit Early since no headers are needed.
