@@ -66,7 +66,7 @@ export default {
         }
       }, [
         this.$createElement('div', {
-          domProps: { innerHTML: this.date },
+          domProps: { innerHTML: this.date || '&nbsp;' },
           key: this.date
         })
       ])
