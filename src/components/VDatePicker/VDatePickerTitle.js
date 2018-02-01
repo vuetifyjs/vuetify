@@ -44,8 +44,7 @@ export default {
   },
 
   watch: {
-    value: 'setReversing',
-    year: 'setReversing'
+    value: 'setReversing'
   },
 
   methods: {
