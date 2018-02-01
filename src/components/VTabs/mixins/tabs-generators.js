@@ -14,11 +14,11 @@ export default {
         }),
         ref: 'bar'
       }, [
-        this.genTransition('prepend'),
+        this.genTransition('prev'),
         this.genWrapper(
           this.genContainer(items)
         ),
-        this.genTransition('append')
+        this.genTransition('next')
       ])
     },
     genContainer (items) {

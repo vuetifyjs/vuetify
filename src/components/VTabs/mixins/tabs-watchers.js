@@ -31,8 +31,8 @@ export default {
     scrollOffset (val) {
       this.$refs.container.style.transform = `translateX(${-val}px)`
       if (this.hasArrows) {
-        this.prependIconVisible = this.checkPrependIcon()
-        this.appendIconVisible = this.checkAppendIcon()
+        this.prevIconVisible = this.checkPrevIcon()
+        this.nextIconVisible = this.checkNextIcon()
       }
     }
   }

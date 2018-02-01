@@ -31,6 +31,10 @@ export default {
   },
 
   props: {
+    expandIcon: {
+      type: String,
+      default: 'keyboard_arrow_down'
+    },
     hideActions: Boolean,
     ripple: {
       type: [Boolean, Object],
@@ -70,7 +74,7 @@ export default {
       if (this.hideActions) return null
 
       const icon = this.$slots.actions ||
-        this.$createElement('v-icon', 'keyboard_arrow_down')
+        this.$createElement('v-icon', this.expandIcon)
 
       return this.$createElement('div', {
         staticClass: 'header__icon'

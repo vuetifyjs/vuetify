@@ -159,14 +159,14 @@ test('VTabs', ({ mount, shallow }) => {
 
     await ssrBootable()
 
-    wrapper.vm.scrollTo('append')
-    wrapper.vm.scrollTo('prepend')
+    wrapper.vm.scrollTo('next')
+    wrapper.vm.scrollTo('prev')
     expect(newOffset.mock.calls.length).toBe(2)
 
     wrapper.setMethods({ newOffset: () => 5 })
     await wrapper.vm.$nextTick()
 
-    wrapper.vm.scrollTo('prepend')
+    wrapper.vm.scrollTo('prev')
     expect(wrapper.vm.scrollOffset).toBe(5)
   })
 
@@ -208,13 +208,13 @@ test('VTabs', ({ mount, shallow }) => {
     expect(wrapper.vm.target).toBe(null)
   })
 
-  it('should not conditionally render append and prepend icons', async () => {
+  it('should not conditionally render prev and next icons', async () => {
     const scrollTo = jest.fn()
     const wrapper = mount(VTabs, {
       attachToDocument: true
     })
 
-    expect(wrapper.vm.genIcon('prepend')).toBe(null)
+    expect(wrapper.vm.genIcon('prev')).toBe(null)
 
     // // Mock display state
     wrapper.setData({ isOverflowing: true, scrollOffset: 1 })
@@ -223,18 +223,18 @@ test('VTabs', ({ mount, shallow }) => {
     await ssrBootable()
     wrapper.setProps({ mobileBreakPoint: 1200 })
 
-    expect(wrapper.vm.genIcon('prepend')).toBeTruthy()
+    expect(wrapper.vm.genIcon('prev')).toBeTruthy()
 
     wrapper.setMethods({ scrollTo })
     // Since the elements will have no width
-    // trick append icon to show
+    // trick next icon to show
     wrapper.setData({ scrollOffset: -1 })
     await wrapper.vm.$nextTick()
 
-    const next = wrapper.find('.tabs__icon--append')[0]
+    const next = wrapper.find('.tabs__icon--next')[0]
     next.trigger('click')
     await wrapper.vm.$nextTick()
-    expect(scrollTo).toHaveBeenCalledWith('append')
+    expect(scrollTo).toHaveBeenCalledWith('next')
   })
 
   it('should call on touch methods', async () => {

@@ -56,6 +56,14 @@ export default {
       type: String,
       default: 'No matching records found'
     },
+    nextIcon: {
+      type: String,
+      default: 'chevron_right'
+    },
+    prevIcon: {
+      type: String,
+      default: 'chevron_left'
+    },
     rowsPerPageItems: {
       type: Array,
       default () {
@@ -361,7 +369,7 @@ export default {
         attrs: {
           'aria-label': 'Previous page' // TODO: Localization
         }
-      }, [this.$createElement('v-icon', 'chevron_left')])
+      }, [this.$createElement('v-icon', this.prevIcon)])
     },
     genNextIcon () {
       const pagination = this.computedPagination
@@ -386,7 +394,7 @@ export default {
         attrs: {
           'aria-label': 'Next page' // TODO: Localization
         }
-      }, [this.$createElement('v-icon', 'chevron_right')])
+      }, [this.$createElement('v-icon', this.nextIcon)])
     },
     genSelect () {
       return this.$createElement('div', {
