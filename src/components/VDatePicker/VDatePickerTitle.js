@@ -44,7 +44,9 @@ export default {
   },
 
   watch: {
-    value: 'setReversing'
+    value (val, prev) {
+      this.isReversing = val < prev
+    }
   },
 
   methods: {
@@ -75,9 +77,6 @@ export default {
     },
     genTitleDate (title) {
       return this.genPickerButton('selectingYear', false, this.genTitleText(title), 'date-picker-title__date')
-    },
-    setReversing (val, prev) {
-      this.isReversing = val < prev
     }
   },
 
