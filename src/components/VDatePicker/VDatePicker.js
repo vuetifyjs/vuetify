@@ -14,6 +14,7 @@ import Picker from '../../mixins/picker'
 // Utils
 import { pad, createNativeLocaleFormatter } from './util'
 import isDateAllowed from './util/isDateAllowed'
+import { consoleWarn } from '../../util/console'
 
 export default {
   name: 'v-date-picker',
@@ -131,7 +132,7 @@ export default {
       return this.multiple ? this.value : null
     },
     lastValue () {
-      return this.multiple ? this.value[this.value.length - 1] : this.value
+      return Array.isArray(this.value) ? this.value[this.value.length - 1] : this.value
     },
     current () {
       if (this.showCurrent === true) {
@@ -265,6 +266,8 @@ export default {
       }
     },
     value () {
+      this.checkMultipleProp()
+
       if (this.value && !this.pickerDate) {
         this.tableDate = this.type === 'month' ? `${this.year}` : `${this.year}-${pad(this.month + 1)}`
       }
@@ -290,6 +293,11 @@ export default {
   },
 
   methods: {
+    checkMultipleProp () {
+      if (!(!this.multiple ^ Array.isArray(this.value))) {
+        consoleWarn('value must be an Array/String (depending on multiple)', this)
+      }
+    },
     isDateAllowed (value) {
       return isDateAllowed(value, this.min, this.max, this.allowedDates)
     },
@@ -445,6 +453,8 @@ export default {
   },
 
   mounted () {
+    this.checkMultipleProp()
+
     if (this.pickerDate !== this.tableDate) {
       this.$emit('update:pickerDate', this.tableDate)
     }
