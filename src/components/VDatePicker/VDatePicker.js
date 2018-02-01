@@ -299,7 +299,8 @@ export default {
           date: this.formatters.titleDate(this.inputDate),
           selectingYear: this.activePicker === 'YEAR',
           year: this.formatters.year(`${this.year}`),
-          yearIcon: this.yearIcon
+          yearIcon: this.yearIcon,
+          value: this.inputDate
         },
         slot: 'title',
         style: this.readonly ? {

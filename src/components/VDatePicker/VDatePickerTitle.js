@@ -31,6 +31,9 @@ export default {
     },
     yearIcon: {
       type: String
+    },
+    value: {
+      type: String
     }
   },
 
@@ -41,7 +44,7 @@ export default {
   },
 
   watch: {
-    date: 'setReversing',
+    value: 'setReversing',
     year: 'setReversing'
   },
 
@@ -67,7 +70,7 @@ export default {
       }, [
         this.$createElement('div', {
           domProps: { innerHTML: this.date },
-          key: this.date
+          key: this.value
         })
       ])
     },

@@ -59,4 +59,30 @@ test('VDatePickerTitle.js', ({ mount }) => {
     wrapper.find('.date-picker-title__year')[0].trigger('click')
     expect(input).toBeCalledWith(false)
   })
+
+  it('should have the correct transition', () => {
+    const wrapper = mount(VDatePickerTitle, {
+      propsData: {
+        year: '2018',
+        date: 'Tue, Mar 3',
+        value: '2018-03-03'
+      }
+    })
+
+    expect(wrapper.vm.isReversing).toBe(false)
+
+    wrapper.setProps({
+      date: 'Wed, Mar 4',
+      value: '2018-03-04'
+    })
+
+    expect(wrapper.vm.isReversing).toBe(false)
+
+    wrapper.setProps({
+      date: 'Wed, Mar 3',
+      value: '2018-03-03'
+    })
+
+    expect(wrapper.vm.isReversing).toBe(true)
+  })
 })
