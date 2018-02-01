@@ -30,9 +30,6 @@ export default function applicationable (value, events = []) {
       for (let i = 0, length = events.length; i < length; i++) {
         this.$watch(events[i], this.callUpdate)
       }
-    },
-
-    mounted () {
       this.callUpdate()
     },
 
