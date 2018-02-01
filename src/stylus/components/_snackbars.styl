@@ -39,12 +39,13 @@
 
     .btn
       color: $snackbar-color
-      margin: 0 -16px 0 0
+      margin: 0 0 0 24px
       height: auto
       min-width: auto
 
       &__content
-        padding-left: 24px
+        padding: 8px
+        margin: -8px
 
         &::before
           display: none
@@ -60,9 +61,11 @@
     align-items: initial
 
     .btn
-      margin: 0
-      justify-content: flex-end
-      margin-top: 24px
+      &.btn //specificity
+        margin-left: 0
+        justify-content: flex-end
+        margin-top: 24px
+        width: auto
       &__content
         padding: 0
         flex: 0 0 auto
@@ -92,8 +95,8 @@
       &^[0]--bottom
         transform: translateY(0 - $snackbar-corner-offset)
 
-    &__content .btn__content
-      padding-left: 48px
+    &__content .btn:first-of-type
+      margin-left: 48px
 
 .snack-transition
   &-enter-active,
