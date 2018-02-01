@@ -73,8 +73,12 @@ export default {
           on: this.$listeners
         }, [
           h('div', {
-            staticClass: 'snack__content'
-          }, this.$slots.default)
+            staticClass: 'snack__wrapper'
+          }, [
+            h('div', {
+              staticClass: 'snack__content'
+            }, this.$slots.default)
+          ])
         ])
       )
     }

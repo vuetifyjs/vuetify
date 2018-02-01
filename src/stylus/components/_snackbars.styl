@@ -4,13 +4,12 @@
   position: fixed
   display: flex
   align-items: center
-  z-index: 1000
   color: $snackbar-color
-  background-color: $snackbar-background-color
+  pointer-events: none
+  z-index: 1000
   font-size: 14px
   left: 0
   right: 0
-  elevation(6)
 
   &--absolute
     position: absolute
@@ -21,6 +20,14 @@
   &--bottom
     bottom: 0
 
+  &__wrapper
+    display: flex
+    align-items: center
+    background-color: $snackbar-background-color
+    pointer-events: auto
+    width: 100%
+    elevation(6)
+
   &__content
     width: 100%
     height: 48px
@@ -28,59 +35,69 @@
     display: flex
     align-items: center
     justify-content: space-between
+    overflow: hidden
 
     .btn
       color: $snackbar-color
-      margin: 0 -16px 0 8px
-      min-width: 0px
+      margin: 0 -16px 0 0
+      height: auto
+      min-width: auto
 
-      &__content::before
-        display: none
+      &__content
+        padding-left: 24px
 
-  @media $display-breakpoints.xs-only
-    &--multi-line &__content
-      height: 80px
-      padding: 24px
+        &::before
+          display: none
 
-    &--vertical &__content
-      height: 112px
-      padding: 24px 24px 14px
-      flex-direction: column
-      align-items: initial
+  &--multi-line &__content
+    height: 80px
+    padding: 24px
 
-      .btn
-        align-self: flex-end
+  &--vertical &__content
+    height: 112px
+    padding: 24px 24px 14px
+    flex-direction: column
+    align-items: initial
+
+    .btn
+      margin: 0
+      justify-content: flex-end
+      margin-top: 24px
+      &__content
+        padding: 0
+        flex: 0 0 auto
+        margin: 0
 
 @media $display-breakpoints.sm-and-up
   .snack
-    margin: 0 auto
-    border-radius: 2px
-    max-width: 568px
-    min-width: 288px
+    &__wrapper
+      width: auto
+      max-width: 568px
+      min-width: 288px
+      margin: 0 auto
+      border-radius: 2px
+
+      .snack--left &
+        margin-left: 0
+      .snack--right &
+        margin-right: 0
 
     &--left, &--right
+      margin: 0 $snackbar-corner-offset
       &^[0]--top
         transform: translateY($snackbar-corner-offset)
       &^[0]--bottom
         transform: translateY(0 - $snackbar-corner-offset)
 
-    &--left
-      left: $snackbar-corner-offset
-      right: auto
-
-    &--right
-      right: $snackbar-corner-offset
-      left: auto
-
-    &__content .btn
-      margin-left: 32px
+    &__content .btn__content
+      padding-left: 48px
 
 .snack-transition
   &-enter-active,
   &-leave-active
     transition: transform .4s $transition.swing
     .snack__content
-      transition: opacity .4s linear
+      transition: opacity .3s linear .1s
 
   &-enter
     .snack__content
@@ -94,6 +111,7 @@
   &-enter,
   &-leave-to
     &.snack.snack--top
-      transform: translateY(-100%)
+      // Extra 8px to hide the bottom shadow
+      transform: translateY(calc(-100% - 8px))
     &.snack.snack--bottom
       transform: translateY(100%)
