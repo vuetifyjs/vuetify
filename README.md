@@ -147,7 +147,7 @@ Or you can import it to your webpack entry point
 ```javascript
 require('/path/to/node_modules/vuetify/dist/vuetify.min.css')
 ```
-Keep in mind, you will need to ensure your webpack config contains a css-loader.
+Keep in mind, you will need to ensure your webpack config contains a <a href="https://github.com/webpack-contrib/css-loader" target="_blank">css loader</a>.
 
 ## Frequently asked questions and Gotchas
 [FAQ Guide](https://vuetifyjs.com/vuetify/frequently-asked-questions)
