@@ -3,18 +3,16 @@
 .snack
   position: fixed
   display: flex
-  z-index: 1000
-  width: 100%
+  align-items: center
+  color: $snackbar-color
   pointer-events: none
-  visibility: visible
-  background-color: $snackbar-background-color
+  z-index: 1000
+  font-size: 14px
+  left: 0
+  right: 0
 
   &--absolute
     position: absolute
-
-  &--top, &--bottom
-    transform: translate(-50%, 0)
-    left: 50%
 
   &--top
     top: 0
@@ -22,30 +20,37 @@
   &--bottom
     bottom: 0
 
-  &__content
-    background-color: inherit
-    padding: 14px 8px 14px 24px
+  &__wrapper
+    display: flex
+    align-items: center
+    background-color: $snackbar-background-color
     pointer-events: auto
     width: 100%
-    height: 48px
-    align-items: center
-    color: $snackbar-color
-    display: flex
-    font-size: 14px
-    justify-content: space-between
-    position: relative !important
     elevation(6)
 
-    .snack__action
-      min-width: auto
+  &__content
+    width: 100%
+    height: 48px
+    padding: 14px 24px
+    display: flex
+    align-items: center
+    justify-content: space-between
+    overflow: hidden
 
     .btn
       color: $snackbar-color
-      margin: 0 0 0 8px
-      min-width: 0px
+      flex: 1 0 auto
+      margin: 0 0 0 24px
+      height: auto
+      min-width: auto
+      width: auto
 
-      &__content::before
-        display: none
+      &__content
+        padding: 8px
+        margin: -8px
+
+        &::before
+          display: none
 
   &--multi-line &__content
     height: 80px
@@ -55,43 +60,54 @@
     height: 112px
     padding: 24px 24px 14px
     flex-direction: column
-    align-items: initial
+    // https://stackoverflow.com/questions/35111090/text-in-a-flex-container-doesnt-wrap-in-ie11
+    align-items: stretch
 
     .btn
-      align-self: flex-end
+      &.btn //specificity
+        flex: 0 0 auto
+        justify-content: flex-end
+        margin-left: 0
+        margin-top: 24px
+
+      &__content
+        padding: 0
+        flex: 0 0 auto
+        margin: 0
+
+  &--auto-height &__content
+    height: auto
 
 @media $display-breakpoints.sm-and-up
   .snack
-    width: auto
-
-    &--left, &--right
-      &^[0]--top
-        transform: translate(0, $snackbar-corner-offset)
-      &^[0]--bottom
-        transform: translate(0, 0 - $snackbar-corner-offset)
-
-    &--left
-      left: $snackbar-corner-offset
-      right: initial
-
-    &--right
-      right: $snackbar-corner-offset
-      left: initial
-
-    &__content
-      border-radius: 2px
+    &__wrapper
+      width: auto
       max-width: 568px
       min-width: 288px
+      margin: 0 auto
+      border-radius: 2px
 
-      .btn
-        margin-left: 32px
+      .snack--left &
+        margin-left: 0
+      .snack--right &
+        margin-right: 0
+
+    &--left, &--right
+      margin: 0 $snackbar-corner-offset
+      &^[0]--top
+        transform: translateY($snackbar-corner-offset)
+      &^[0]--bottom
+        transform: translateY(0 - $snackbar-corner-offset)
+
+    &__content .btn:first-of-type
+      margin-left: 48px
 
 .snack-transition
   &-enter-active,
   &-leave-active
     transition: transform .4s $transition.swing
     .snack__content
-      transition: opacity .4s linear
+      transition: opacity .3s linear .1s
 
   &-enter
     .snack__content
@@ -104,13 +120,8 @@
 
   &-enter,
   &-leave-to
-    &.snack--top
-      transform: translate(-50%, -100%)
-    &.snack--bottom
-      transform: translate(-50%, 100%)
-    @media $display-breakpoints.sm-and-up
-      &.snack--left, &.snack--right
-        &.snack--top
-          transform: translate(0, -100%)
-        &.snack--bottom
-          transform: translate(0, 100%)
+    &.snack.snack--top
+      // Extra 8px to hide the bottom shadow
+      transform: translateY(calc(-100% - 8px))
+    &.snack.snack--bottom
+      transform: translateY(100%)

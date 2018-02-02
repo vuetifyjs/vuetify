@@ -16,6 +16,7 @@ export default {
   },
 
   props: {
+    autoHeight: Boolean,
     multiLine: Boolean,
     // TODO: change this to closeDelay to match other API in delayable.js
     timeout: {
@@ -30,6 +31,7 @@ export default {
       return this.addBackgroundColorClassChecks({
         'snack--active': this.isActive,
         'snack--absolute': this.absolute,
+        'snack--auto-height': this.autoHeight,
         'snack--bottom': this.bottom || !this.top,
         'snack--left': this.left,
         'snack--multi-line': this.multiLine && !this.vertical,
@@ -73,8 +75,12 @@ export default {
           on: this.$listeners
         }, [
           h('div', {
-            staticClass: 'snack__content'
-          }, this.$slots.default)
+            staticClass: 'snack__wrapper'
+          }, [
+            h('div', {
+              staticClass: 'snack__content'
+            }, this.$slots.default)
+          ])
         ])
       )
     }
