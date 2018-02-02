@@ -414,6 +414,25 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
     expect(wrapper.vm.tableDate).toBe('2013-11')
   })
 
+  it('should update pickerDate to the selected month after setting it to null', async () => {
+    const wrapper = mount(VDatePicker, {
+      propsData: {
+        value: '2017-09-13',
+        pickerDate: '2013-11'
+      }
+    })
+
+    const update = jest.fn()
+    wrapper.vm.$on('update:pickerDate', update)
+    await wrapper.vm.$nextTick()
+
+    wrapper.setProps({
+      pickerDate: null
+    })
+    await wrapper.vm.$nextTick()
+    expect(update).toBeCalledWith('2017-09')
+  })
+
   it('should render component with min/max props', async () => {
     const wrapper = mount(VDatePicker, {
       propsData: {

@@ -193,9 +193,9 @@ export default {
       if (val) {
         this.tableDate = val
       } else if (this.value && this.type === 'date') {
-        this.tableDate = this.sanitizeDateString(val, 'month')
+        this.tableDate = this.sanitizeDateString(this.value, 'month')
       } else if (this.value && this.type === 'month') {
-        this.tableDate = this.sanitizeDateString(val, 'year')
+        this.tableDate = this.sanitizeDateString(this.value, 'year')
       }
     },
     value () {
