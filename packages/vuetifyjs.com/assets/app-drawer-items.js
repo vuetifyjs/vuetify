@@ -43,6 +43,7 @@ export default [
     group: 'motion',
     icon: 'mdi-clock-fast',
     items: [
+      { name: 'Scrolling', title: 'Scrolling', badge: 'new' },
       { name: 'Transitions', title: 'Transitions' }
     ]
   },
