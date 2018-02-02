@@ -80,6 +80,7 @@ export default {
       default: 'Items per page:'
     },
     selectAll: [Boolean, String],
+    singleSelect: [Boolean],
     search: {
       required: false
     },
@@ -302,7 +303,14 @@ export default {
       )
     },
     createProps (item, index) {
-      const props = { item, index }
+      let props = { item, index }
+
+      props = this.createSelectedProp(item, props)
+      props = this.createExpandedProp(item, props)
+
+      return props
+    },
+    createSelectedProp (item, props) {
       const keyProp = this.itemKey
       const itemKey = item[keyProp]
 
@@ -314,11 +322,25 @@ export default {
           }
 
           let selected = this.value.slice()
-          if (value) selected.push(item)
-          else selected = selected.filter(i => i[keyProp] !== itemKey)
+          if (value) {
+            if (this.singleSelect) {
+              selected = [item]
+            } else {
+              selected.push(item)
+            }
+          }
+          else {
+            selected = selected.filter(i => i[keyProp] !== itemKey)
+          }
           this.$emit('input', selected)
         }
       })
+
+      return props
+    },
+    createExpandedProp (item, props) {
+      const keyProp = this.itemKey
+      const itemKey = item[keyProp]
 
       Object.defineProperty(props, 'expanded', {
         get: () => this.expanded[item[this.itemKey]],
