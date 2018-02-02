@@ -17,6 +17,9 @@ export function test(name, cb) {
 
   rafPolyfill(window)
 
+  // Very naive polyfill for performance.now()
+  window.performance = { now: () => (new Date()).getTime() }
+
   describe(name, () => cb({
     functionalContext,
     mount,
