@@ -211,4 +211,6 @@ const attributes = Object.keys(components).reduce((attrs, k) => {
 
 writeJsonFile(tags, 'dist/tags.json')
 writeJsonFile(attributes, 'dist/attributes.json')
+
+components['$vuetify'] = map['$vuetify']
 writeApiFile(components, 'dist/api.js')
