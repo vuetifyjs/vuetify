@@ -120,6 +120,9 @@
         return `${prepend}${description}`
       },
       genName (name, item) {
+        // This is so that camel-cased functions remain so in the API list
+        if (item.signature) return name
+
         name = name || ''
         name = name.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`)
         const sync = (item.sync && '.sync') || ''
