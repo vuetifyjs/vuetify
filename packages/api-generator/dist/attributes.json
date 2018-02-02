@@ -127,6 +127,10 @@
     "type": "boolean",
     "description": ""
   },
+  "v-bottom-sheet/hide-overlay": {
+    "type": "boolean",
+    "description": ""
+  },
   "v-bottom-sheet/inset": {
     "type": "boolean",
     "description": ""
@@ -479,8 +483,8 @@
     "type": "boolean",
     "description": ""
   },
-  "v-carousel/append-icon": {
-    "type": "boolean|string",
+  "v-carousel/interval": {
+    "type": "number|string",
     "description": ""
   },
   "v-carousel/cycle": {
@@ -499,15 +503,15 @@
     "type": "boolean",
     "description": ""
   },
-  "v-carousel/interval": {
-    "type": "number|string",
-    "description": ""
-  },
   "v-carousel/light": {
     "type": "boolean",
     "description": ""
   },
-  "v-carousel/prepend-icon": {
+  "v-carousel/next-icon": {
+    "type": "boolean|string",
+    "description": ""
+  },
+  "v-carousel/prev-icon": {
     "type": "boolean|string",
     "description": ""
   },
@@ -683,16 +687,16 @@
     "type": "boolean",
     "description": ""
   },
-  "v-data-iterator/search": {
-    "type": "any",
+  "v-data-iterator/select-all": {
+    "type": "boolean|string",
     "description": ""
   },
   "v-data-iterator/content-class": {
     "type": "string",
     "description": ""
   },
-  "v-data-iterator/filter": {
-    "type": "function",
+  "v-data-iterator/search": {
+    "type": "any",
     "description": ""
   },
   "v-data-iterator/dark": {
@@ -715,8 +719,8 @@
     "type": "function",
     "description": ""
   },
-  "v-data-iterator/value": {
-    "type": "array",
+  "v-data-iterator/disable-initial-sort": {
+    "type": "boolean",
     "description": ""
   },
   "v-data-iterator/no-data-text": {
@@ -731,6 +735,10 @@
     "type": "boolean",
     "description": ""
   },
+  "v-data-iterator/item-key": {
+    "type": "string",
+    "description": ""
+  },
   "v-data-iterator/loading": {
     "type": "boolean|string",
     "description": ""
@@ -739,15 +747,15 @@
     "type": "boolean",
     "description": ""
   },
+  "v-data-iterator/filter": {
+    "type": "function",
+    "description": ""
+  },
   "v-data-iterator/must-sort": {
     "type": "boolean",
     "description": ""
   },
-  "v-data-iterator/disable-initial-sort": {
-    "type": "boolean",
-    "description": ""
-  },
-  "v-data-iterator/item-key": {
+  "v-data-iterator/next-icon": {
     "type": "string",
     "description": ""
   },
@@ -763,6 +771,10 @@
     "type": "object",
     "description": ""
   },
+  "v-data-iterator/prev-icon": {
+    "type": "string",
+    "description": ""
+  },
   "v-data-iterator/rows-per-page-items": {
     "type": "array",
     "description": ""
@@ -771,16 +783,16 @@
     "type": "string",
     "description": ""
   },
-  "v-data-iterator/select-all": {
-    "type": "boolean|string",
-    "description": ""
-  },
   "v-data-iterator/total-items": {
     "type": "number",
     "description": ""
   },
-  "v-data-table/search": {
-    "type": "any",
+  "v-data-iterator/value": {
+    "type": "array",
+    "description": ""
+  },
+  "v-data-table/select-all": {
+    "type": "boolean|string",
     "description": ""
   },
   "v-data-table/hide-headers": {
@@ -823,12 +835,16 @@
     "type": "function",
     "description": ""
   },
-  "v-data-table/items": {
+  "v-data-table/value": {
     "type": "array",
     "description": ""
   },
   "v-data-table/no-data-text": {
     "type": "string",
+    "description": ""
+  },
+  "v-data-table/loading": {
+    "type": "boolean|string",
     "description": ""
   },
   "v-data-table/light": {
@@ -839,12 +855,16 @@
     "type": "boolean",
     "description": ""
   },
+  "v-data-table/next-icon": {
+    "type": "string",
+    "description": ""
+  },
   "v-data-table/item-key": {
     "type": "string",
     "description": ""
   },
-  "v-data-table/loading": {
-    "type": "boolean|string",
+  "v-data-table/items": {
+    "type": "array",
     "description": ""
   },
   "v-data-table/no-results-text": {
@@ -855,6 +875,10 @@
     "type": "object",
     "description": ""
   },
+  "v-data-table/prev-icon": {
+    "type": "string",
+    "description": ""
+  },
   "v-data-table/rows-per-page-items": {
     "type": "array",
     "description": ""
@@ -863,16 +887,12 @@
     "type": "string",
     "description": ""
   },
-  "v-data-table/select-all": {
-    "type": "boolean|string",
+  "v-data-table/search": {
+    "type": "any",
     "description": ""
   },
   "v-data-table/total-items": {
     "type": "number",
-    "description": ""
-  },
-  "v-data-table/value": {
-    "type": "array",
     "description": ""
   },
   "v-edit-dialog/cancel-text": {
@@ -887,6 +907,10 @@
     "type": "boolean",
     "description": ""
   },
+  "v-edit-dialog/return-value": {
+    "type": "any",
+    "description": ""
+  },
   "v-edit-dialog/save-text": {
     "type": "any",
     "description": ""
@@ -895,35 +919,47 @@
     "type": "string",
     "description": ""
   },
-  "v-date-picker/first-day-of-week": {
-    "type": "string|number",
+  "v-date-picker/max": {
+    "type": "string",
     "description": ""
   },
   "v-date-picker/color": {
     "type": "string",
     "description": ""
   },
-  "v-date-picker/append-icon": {
-    "type": "string",
-    "description": ""
-  },
-  "v-date-picker/autosave": {
-    "type": "boolean",
-    "description": ""
-  },
   "v-date-picker/allowed-dates": {
-    "type": "array|object|function",
-    "description": ""
-  },
-  "v-date-picker/month-format": {
     "type": "function",
     "description": ""
   },
-  "v-date-picker/no-title": {
+  "v-date-picker/min": {
+    "type": "string",
+    "description": ""
+  },
+  "v-date-picker/full-width": {
     "type": "boolean",
     "description": ""
   },
-  "v-date-picker/header-color": {
+  "v-date-picker/dark": {
+    "type": "boolean",
+    "description": ""
+  },
+  "v-date-picker/first-day-of-week": {
+    "type": "string|number",
+    "description": ""
+  },
+  "v-date-picker/event-color": {
+    "type": "string|function|object",
+    "description": ""
+  },
+  "v-date-picker/events": {
+    "type": "array|object|function",
+    "description": ""
+  },
+  "v-date-picker/day-format": {
+    "type": "function",
+    "description": ""
+  },
+  "v-date-picker/prev-icon": {
     "type": "string",
     "description": ""
   },
@@ -931,48 +967,52 @@
     "type": "boolean",
     "description": ""
   },
-  "v-date-picker/day-format": {
-    "type": "function",
-    "description": ""
-  },
-  "v-date-picker/events": {
-    "type": "array|object|function",
-    "description": ""
-  },
-  "v-date-picker/event-color": {
-    "type": "string|function|object",
-    "description": ""
-  },
-  "v-date-picker/dark": {
-    "type": "boolean",
+  "v-date-picker/header-color": {
+    "type": "string",
     "description": ""
   },
   "v-date-picker/header-date-format": {
     "type": "function",
     "description": ""
   },
-  "v-date-picker/locale": {
-    "type": "string",
-    "description": ""
-  },
   "v-date-picker/landscape": {
     "type": "boolean",
-    "description": ""
-  },
-  "v-date-picker/prepend-icon": {
-    "type": "string",
     "description": ""
   },
   "v-date-picker/readonly": {
     "type": "boolean",
     "description": ""
   },
+  "v-date-picker/locale": {
+    "type": "string",
+    "description": ""
+  },
   "v-date-picker/scrollable": {
     "type": "boolean",
     "description": ""
   },
+  "v-date-picker/month-format": {
+    "type": "function",
+    "description": ""
+  },
   "v-date-picker/show-current": {
     "type": "boolean|string",
+    "description": ""
+  },
+  "v-date-picker/picker-date": {
+    "type": "string",
+    "description": ""
+  },
+  "v-date-picker/next-icon": {
+    "type": "string",
+    "description": ""
+  },
+  "v-date-picker/no-title": {
+    "type": "boolean",
+    "description": ""
+  },
+  "v-date-picker/reactive": {
+    "type": "boolean",
     "description": ""
   },
   "v-date-picker/title-date-format": {
@@ -985,6 +1025,10 @@
   },
   "v-date-picker/value": {
     "type": "string",
+    "description": ""
+  },
+  "v-date-picker/width": {
+    "type": "number|string",
     "description": ""
   },
   "v-date-picker/year-format": {
@@ -1003,15 +1047,15 @@
     "type": "boolean",
     "description": ""
   },
+  "v-date-picker-title/value": {
+    "type": "string",
+    "description": ""
+  },
   "v-date-picker-title/year": {
     "type": "number|string",
     "description": ""
   },
   "v-date-picker-title/year-icon": {
-    "type": "string",
-    "description": ""
-  },
-  "v-date-picker-header/append-icon": {
     "type": "string",
     "description": ""
   },
@@ -1031,7 +1075,19 @@
     "type": "string",
     "description": ""
   },
-  "v-date-picker-header/prepend-icon": {
+  "v-date-picker-header/max": {
+    "type": "string",
+    "description": ""
+  },
+  "v-date-picker-header/min": {
+    "type": "string",
+    "description": ""
+  },
+  "v-date-picker-header/next-icon": {
+    "type": "string",
+    "description": ""
+  },
+  "v-date-picker-header/prev-icon": {
     "type": "string",
     "description": ""
   },
@@ -1039,8 +1095,8 @@
     "type": "number|string",
     "description": ""
   },
-  "v-date-picker-date-table/scrollable": {
-    "type": "boolean",
+  "v-date-picker-date-table/max": {
+    "type": "string",
     "description": ""
   },
   "v-date-picker-date-table/color": {
@@ -1048,15 +1104,19 @@
     "description": ""
   },
   "v-date-picker-date-table/allowed-dates": {
-    "type": "array|object|function",
+    "type": "function",
     "description": ""
   },
-  "v-date-picker-date-table/current": {
+  "v-date-picker-date-table/table-date": {
     "type": "string",
     "description": ""
   },
   "v-date-picker-date-table/disabled": {
     "type": "boolean",
+    "description": ""
+  },
+  "v-date-picker-date-table/current": {
+    "type": "string",
     "description": ""
   },
   "v-date-picker-date-table/event-color": {
@@ -1079,8 +1139,12 @@
     "type": "string",
     "description": ""
   },
-  "v-date-picker-date-table/table-date": {
+  "v-date-picker-date-table/min": {
     "type": "string",
+    "description": ""
+  },
+  "v-date-picker-date-table/scrollable": {
+    "type": "boolean",
     "description": ""
   },
   "v-date-picker-date-table/value": {
@@ -1091,12 +1155,16 @@
     "type": "function",
     "description": ""
   },
-  "v-date-picker-month-table/allowed-dates": {
-    "type": "array|object|function",
+  "v-date-picker-month-table/locale": {
+    "type": "string",
     "description": ""
   },
   "v-date-picker-month-table/color": {
     "type": "string",
+    "description": ""
+  },
+  "v-date-picker-month-table/allowed-dates": {
+    "type": "function",
     "description": ""
   },
   "v-date-picker-month-table/current": {
@@ -1111,7 +1179,11 @@
     "type": "function",
     "description": ""
   },
-  "v-date-picker-month-table/locale": {
+  "v-date-picker-month-table/max": {
+    "type": "string",
+    "description": ""
+  },
+  "v-date-picker-month-table/min": {
     "type": "string",
     "description": ""
   },
@@ -1151,7 +1223,7 @@
     "type": "number|string",
     "description": ""
   },
-  "v-dialog/fullscreen": {
+  "v-dialog/persistent": {
     "type": "boolean",
     "description": ""
   },
@@ -1171,6 +1243,10 @@
     "type": "boolean",
     "description": ""
   },
+  "v-dialog/fullscreen": {
+    "type": "boolean",
+    "description": ""
+  },
   "v-dialog/disabled": {
     "type": "boolean",
     "description": ""
@@ -1187,8 +1263,8 @@
     "type": "string",
     "description": ""
   },
-  "v-dialog/persistent": {
-    "type": "boolean",
+  "v-dialog/return-value": {
+    "type": "any",
     "description": ""
   },
   "v-dialog/scrollable": {
@@ -1241,6 +1317,10 @@
   },
   "v-expansion-panel/popout": {
     "type": "boolean",
+    "description": ""
+  },
+  "v-expansion-panel-content/expand-icon": {
+    "type": "string",
     "description": ""
   },
   "v-expansion-panel-content/hide-actions": {
@@ -1823,7 +1903,7 @@
     "type": "number|string",
     "description": ""
   },
-  "v-menu/nudge-right": {
+  "v-menu/nudge-top": {
     "type": "number|string",
     "description": ""
   },
@@ -1899,11 +1979,11 @@
     "type": "number|string",
     "description": ""
   },
-  "v-menu/close-delay": {
+  "v-menu/nudge-right": {
     "type": "number|string",
     "description": ""
   },
-  "v-menu/nudge-top": {
+  "v-menu/close-delay": {
     "type": "number|string",
     "description": ""
   },
@@ -1931,35 +2011,11 @@
     "type": "boolean",
     "description": ""
   },
-  "v-menu/auto": {
-    "type": "boolean",
-    "description": ""
-  },
   "v-menu/close-on-click": {
     "type": "boolean",
     "description": ""
   },
-  "v-menu/open-on-click": {
-    "type": "boolean",
-    "description": ""
-  },
-  "v-menu/open-on-hover": {
-    "type": "boolean",
-    "description": ""
-  },
-  "v-menu/origin": {
-    "type": "string",
-    "description": ""
-  },
-  "v-menu/position-x": {
-    "type": "number",
-    "description": ""
-  },
-  "v-menu/position-y": {
-    "type": "number",
-    "description": ""
-  },
-  "v-menu/right": {
+  "v-menu/auto": {
     "type": "boolean",
     "description": ""
   },
@@ -1969,6 +2025,34 @@
   },
   "v-menu/transition": {
     "type": "boolean|string",
+    "description": ""
+  },
+  "v-menu/origin": {
+    "type": "string",
+    "description": ""
+  },
+  "v-menu/position-y": {
+    "type": "number",
+    "description": ""
+  },
+  "v-menu/position-x": {
+    "type": "number",
+    "description": ""
+  },
+  "v-menu/return-value": {
+    "type": "any",
+    "description": ""
+  },
+  "v-menu/right": {
+    "type": "boolean",
+    "description": ""
+  },
+  "v-menu/open-on-click": {
+    "type": "boolean",
+    "description": ""
+  },
+  "v-menu/open-on-hover": {
+    "type": "boolean",
     "description": ""
   },
   "v-menu/value": {
@@ -2115,6 +2199,10 @@
     "type": "boolean",
     "description": ""
   },
+  "v-picker/full-width": {
+    "type": "boolean",
+    "description": ""
+  },
   "v-picker/landscape": {
     "type": "boolean",
     "description": ""
@@ -2125,6 +2213,10 @@
   },
   "v-picker/transition": {
     "type": "string",
+    "description": ""
+  },
+  "v-picker/width": {
+    "type": "number|string",
     "description": ""
   },
   "v-progress-circular/button": {
@@ -2327,8 +2419,8 @@
     "type": "any",
     "description": ""
   },
-  "v-select/browser-autocomplete": {
-    "type": "string",
+  "v-select/autocomplete": {
+    "type": "boolean",
     "description": ""
   },
   "v-select/filter": {
@@ -2359,12 +2451,12 @@
     "type": "string|array",
     "description": ""
   },
-  "v-select/debounce-search": {
-    "type": "number|string",
-    "description": ""
-  },
   "v-select/content-class": {
     "type": "string",
+    "description": ""
+  },
+  "v-select/combobox": {
+    "type": "boolean",
     "description": ""
   },
   "v-select/append-icon": {
@@ -2376,10 +2468,6 @@
     "description": ""
   },
   "v-select/disabled": {
-    "type": "boolean",
-    "description": ""
-  },
-  "v-select/combobox": {
     "type": "boolean",
     "description": ""
   },
@@ -2395,12 +2483,12 @@
     "type": "boolean",
     "description": ""
   },
-  "v-select/color": {
+  "v-select/browser-autocomplete": {
     "type": "string",
     "description": ""
   },
-  "v-select/autocomplete": {
-    "type": "boolean",
+  "v-select/color": {
+    "type": "string",
     "description": ""
   },
   "v-select/auto": {
@@ -2419,7 +2507,7 @@
     "type": "array",
     "description": ""
   },
-  "v-select/solo": {
+  "v-select/required": {
     "type": "boolean",
     "description": ""
   },
@@ -2427,7 +2515,11 @@
     "type": "boolean",
     "description": ""
   },
-  "v-select/required": {
+  "v-select/overflow": {
+    "type": "boolean",
+    "description": ""
+  },
+  "v-select/readonly": {
     "type": "boolean",
     "description": ""
   },
@@ -2435,11 +2527,7 @@
     "type": "object|string",
     "description": ""
   },
-  "v-select/return-masked-value": {
-    "type": "boolean",
-    "description": ""
-  },
-  "v-select/readonly": {
+  "v-select/open-on-clear": {
     "type": "boolean",
     "description": ""
   },
@@ -2471,12 +2559,12 @@
     "type": "string",
     "description": ""
   },
-  "v-select/single-line": {
+  "v-select/multi-line": {
     "type": "boolean",
     "description": ""
   },
-  "v-select/rules": {
-    "type": "array",
+  "v-select/multiple": {
+    "type": "boolean",
     "description": ""
   },
   "v-select/light": {
@@ -2495,8 +2583,8 @@
     "type": "boolean",
     "description": ""
   },
-  "v-select/segmented": {
-    "type": "boolean",
+  "v-select/min-width": {
+    "type": "boolean|number|string",
     "description": ""
   },
   "v-select/item-avatar": {
@@ -2519,24 +2607,24 @@
     "type": "number|string",
     "description": ""
   },
-  "v-select/min-width": {
-    "type": "boolean|number|string",
-    "description": ""
-  },
-  "v-select/multiple": {
+  "v-select/segmented": {
     "type": "boolean",
     "description": ""
   },
-  "v-select/multi-line": {
+  "v-select/solo": {
     "type": "boolean",
     "description": ""
   },
-  "v-select/open-on-clear": {
+  "v-select/single-line": {
     "type": "boolean",
     "description": ""
   },
-  "v-select/overflow": {
+  "v-select/return-masked-value": {
     "type": "boolean",
+    "description": ""
+  },
+  "v-select/rules": {
+    "type": "array",
     "description": ""
   },
   "v-select/return-object": {
@@ -3003,15 +3091,11 @@
     "type": "boolean",
     "description": ""
   },
-  "v-tabs/icons-and-text": {
-    "type": "boolean",
+  "v-tabs/mobile-break-point": {
+    "type": "number|string",
     "description": ""
   },
   "v-tabs/color": {
-    "type": "string",
-    "description": ""
-  },
-  "v-tabs/append-icon": {
     "type": "string",
     "description": ""
   },
@@ -3023,8 +3107,8 @@
     "type": "boolean",
     "description": ""
   },
-  "v-tabs/right": {
-    "type": "boolean",
+  "v-tabs/prev-icon": {
+    "type": "string",
     "description": ""
   },
   "v-tabs/grow": {
@@ -3047,16 +3131,20 @@
     "type": "boolean",
     "description": ""
   },
+  "v-tabs/icons-and-text": {
+    "type": "boolean",
+    "description": ""
+  },
   "v-tabs/light": {
     "type": "boolean",
     "description": ""
   },
-  "v-tabs/mobile-break-point": {
-    "type": "number|string",
+  "v-tabs/next-icon": {
+    "type": "string",
     "description": ""
   },
-  "v-tabs/prepend-icon": {
-    "type": "string",
+  "v-tabs/right": {
+    "type": "boolean",
     "description": ""
   },
   "v-tabs/show-arrows": {
@@ -3151,8 +3239,8 @@
     "type": "string",
     "description": ""
   },
-  "v-text-field/toggle-keys": {
-    "type": "array",
+  "v-text-field/value": {
+    "type": "any",
     "description": ""
   },
   "v-text-field/color": {
@@ -3183,7 +3271,7 @@
     "type": "string",
     "description": ""
   },
-  "v-text-field/return-masked-value": {
+  "v-text-field/flat": {
     "type": "boolean",
     "description": ""
   },
@@ -3235,12 +3323,12 @@
     "type": "any",
     "description": ""
   },
-  "v-text-field/loading": {
-    "type": "boolean|string",
+  "v-text-field/toggle-keys": {
+    "type": "array",
     "description": ""
   },
-  "v-text-field/textarea": {
-    "type": "boolean",
+  "v-text-field/loading": {
+    "type": "boolean|string",
     "description": ""
   },
   "v-text-field/dont-fill-mask-blanks": {
@@ -3251,12 +3339,12 @@
     "type": "object|string",
     "description": ""
   },
-  "v-text-field/rules": {
-    "type": "array",
+  "v-text-field/return-masked-value": {
+    "type": "boolean",
     "description": ""
   },
-  "v-text-field/flat": {
-    "type": "boolean",
+  "v-text-field/rules": {
+    "type": "array",
     "description": ""
   },
   "v-text-field/solo-inverted": {
@@ -3295,12 +3383,20 @@
     "type": "boolean",
     "description": ""
   },
+  "v-text-field/no-resize": {
+    "type": "boolean",
+    "description": ""
+  },
   "v-text-field/prefix": {
     "type": "string",
     "description": ""
   },
+  "v-text-field/row-height": {
+    "type": "number|string",
+    "description": ""
+  },
   "v-text-field/rows": {
-    "type": "any",
+    "type": "number|string",
     "description": ""
   },
   "v-text-field/single-line": {
@@ -3311,48 +3407,60 @@
     "type": "string",
     "description": ""
   },
+  "v-text-field/textarea": {
+    "type": "boolean",
+    "description": ""
+  },
   "v-text-field/validate-on-blur": {
     "type": "boolean",
     "description": ""
   },
-  "v-text-field/value": {
-    "type": "any",
-    "description": ""
-  },
-  "v-time-picker/allowed-hours": {
-    "type": "array|object|function",
+  "v-time-picker/width": {
+    "type": "number|string",
     "description": ""
   },
   "v-time-picker/color": {
     "type": "string",
     "description": ""
   },
-  "v-time-picker/autosave": {
-    "type": "boolean",
-    "description": ""
-  },
   "v-time-picker/allowed-minutes": {
-    "type": "array|object|function",
+    "type": "function",
     "description": ""
   },
-  "v-time-picker/dark": {
+  "v-time-picker/allowed-hours": {
+    "type": "function",
+    "description": ""
+  },
+  "v-time-picker/light": {
     "type": "boolean",
-    "description": ""
-  },
-  "v-time-picker/format": {
-    "type": "string",
     "description": ""
   },
   "v-time-picker/header-color": {
     "type": "string",
     "description": ""
   },
+  "v-time-picker/format": {
+    "type": "string",
+    "description": ""
+  },
+  "v-time-picker/dark": {
+    "type": "boolean",
+    "description": ""
+  },
+  "v-time-picker/full-width": {
+    "type": "boolean",
+    "description": ""
+  },
   "v-time-picker/landscape": {
     "type": "boolean",
     "description": ""
   },
-  "v-time-picker/light": {
-    "type": "boolean",
+  "v-time-picker/max": {
+    "type": "string",
+    "description": ""
+  },
+  "v-time-picker/min": {
+    "type": "string",
     "description": ""
   },
   "v-time-picker/no-title": {
@@ -3376,7 +3484,7 @@
     "description": ""
   },
   "v-time-picker-clock/allowed-values": {
-    "type": "array|object|function",
+    "type": "function",
     "description": ""
   },
   "v-time-picker-clock/dark": {
@@ -3423,12 +3531,20 @@
     "type": "boolean",
     "description": ""
   },
-  "v-time-picker-title/selecting-hour": {
-    "type": "boolean",
+  "v-time-picker-title/hour": {
+    "type": "number",
     "description": ""
   },
-  "v-time-picker-title/value": {
+  "v-time-picker-title/minute": {
+    "type": "number",
+    "description": ""
+  },
+  "v-time-picker-title/period": {
     "type": "string",
+    "description": ""
+  },
+  "v-time-picker-title/selecting-hour": {
+    "type": "boolean",
     "description": ""
   },
   "v-toolbar/extension-height": {
