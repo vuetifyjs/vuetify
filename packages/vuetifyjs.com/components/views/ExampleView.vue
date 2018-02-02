@@ -154,10 +154,13 @@
       },
       currentApi () {
         return this.api[this.current] || {
-          params: [],
           props: [],
           slots: [],
-          scopedSlots: []
+          scopedSlots: [],
+          params: [],
+          events: [],
+          funtions: [],
+          functional: []
         }
       },
       examples () {
