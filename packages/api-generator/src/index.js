@@ -134,8 +134,10 @@ function parseMixins (component) {
 }
 
 const components = {}
+const directives = {}
 
 const installedComponents = Vue.options._base.options.components
+const installedDirectives = Vue.options._base.options.directives
 
 Object.keys(installedComponents).forEach(key => {
   const name = key
@@ -148,6 +150,15 @@ Object.keys(installedComponents).forEach(key => {
     }
 
     components[name] = options
+  }
+})
+
+Object.keys(installedDirectives).forEach(key => {
+  if (['ripple', 'resize', 'scroll', 'touch'].includes(key)) {
+    const directive = map[`v-${key}`]
+    directive.type = getPropDefault(directive.default, directive.type)
+
+    directives[`v-${key}`] = directive
   }
 })
 
@@ -213,4 +224,5 @@ writeJsonFile(tags, 'dist/tags.json')
 writeJsonFile(attributes, 'dist/attributes.json')
 
 components['$vuetify'] = map['$vuetify']
-writeApiFile(components, 'dist/api.js')
+
+writeApiFile({ ...components, ...directives }, 'dist/api.js')
