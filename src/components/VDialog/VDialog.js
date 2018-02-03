@@ -141,7 +141,9 @@ export default {
         },
         { name: 'show', value: this.isActive }
       ],
-      on: { click: e => e.stopPropagation() }
+      on: {
+        click: e => { e.stopPropagation() }
+      }
     }
 
     if (!this.fullscreen) {
@@ -156,6 +158,7 @@ export default {
         'class': 'dialog__activator',
         on: {
           click: e => {
+            e.stopPropagation()
             if (!this.disabled) this.isActive = !this.isActive
           }
         }

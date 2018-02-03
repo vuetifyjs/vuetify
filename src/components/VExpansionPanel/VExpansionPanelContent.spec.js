@@ -40,6 +40,24 @@ test('VExpansionPanelContent.js', ({ mount, compileToFunctions }) => {
     expect(registrableWarning).toHaveBeenTipped()
   })
 
+  it('should render proper expand-icon', () => {
+    const wrapper = mount(VExpansionPanelContent, {
+      propsData: {
+        expandIcon: 'block'
+      },
+      slots: {
+        header: [compileToFunctions('<span>header</span>')]
+      },
+      provide: {
+        focusable: true,
+        panelClick: jest.fn()
+      }
+    })
+
+    expect(wrapper.find('.icon')[0].element.textContent).toBe('block')
+    expect(registrableWarning).toHaveBeenTipped()
+  })
+
   it('should toggle panel on header click', async () => {
     const wrapper = mount(VExpansionPanelContent, {
       slots: {

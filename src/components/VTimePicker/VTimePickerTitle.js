@@ -13,20 +13,13 @@ export default {
 
   props: {
     ampm: Boolean,
-    selectingHour: Boolean,
-    value: String
-  },
-
-  computed: {
-    hour () {
-      return parseInt(this.value.split(':')[0], 10)
+    hour: Number,
+    minute: Number,
+    period: {
+      type: String,
+      validator: period => period === 'am' || period === 'pm'
     },
-    minute () {
-      return parseInt(this.value.split(':')[1], 10)
-    },
-    period () {
-      return this.hour < 12 ? 'am' : 'pm'
-    }
+    selectingHour: Boolean
   },
 
   methods: {
@@ -36,12 +29,15 @@ export default {
         hour = hour ? ((hour - 1) % 12 + 1) : 12
       }
 
+      const displayedHour = this.hour == null ? '--' : this.ampm ? hour : pad(hour)
+      const displayedMinute = this.minute == null ? '--' : pad(this.minute)
+
       return this.$createElement('div', {
         'class': 'time-picker-title__time'
       }, [
-        this.genPickerButton('selectingHour', true, this.ampm ? hour : pad(hour)),
+        this.genPickerButton('selectingHour', true, displayedHour),
         this.$createElement('span', ':'),
-        this.genPickerButton('selectingHour', false, pad(this.minute))
+        this.genPickerButton('selectingHour', false, displayedMinute)
       ])
     },
     genAmPm () {

@@ -91,7 +91,6 @@ export default {
       lazySearch: null,
       isActive: false,
       menuIsActive: false,
-      searchTimeout: null,
       selectedIndex: -1,
       selectedItems: [],
       shouldBreak: false
@@ -269,6 +268,7 @@ export default {
         })
 
         this.selectedItems = selectedItems
+        this.selectedIndex = -1
       }
 
       this.searchValue = !this.isMultiple &&

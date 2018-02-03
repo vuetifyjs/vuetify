@@ -20,7 +20,7 @@ theme(toolbar, "toolbar")
   .input-group--solo
     .input-group__details
       display: none
-      
+
   .input-group--single-line:not(.input-group--solo)
     padding: 0
 
@@ -64,13 +64,17 @@ theme(toolbar, "toolbar")
 
   &__items
     display: flex
-    height: 100%
+    height: inherit
     max-width: 100%
     padding: 0
-    
-    .menu,
+
     .btn
-      height: 100%
+      align-items: stretch
+
+    .btn,
+    .menu,
+    .menu__activator
+      height: inherit
       margin: 0
 
   @media $display-breakpoints.xs-only
@@ -113,7 +117,7 @@ theme(toolbar, "toolbar")
     display: inline-flex
     margin: 16px
     width: auto
-  
+
   &--clipped
     z-index: 3
 

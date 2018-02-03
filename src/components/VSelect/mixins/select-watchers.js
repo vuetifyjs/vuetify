@@ -111,11 +111,12 @@ export default {
         if (val && !this.isAnyValueAllowed) {
           this.setMenuIndex(0)
         }
+        if (val !== null && this.selectedIndex > -1) {
+          this.selectedIndex = -1
+        }
       })
     },
     selectedItems () {
-      clearTimeout(this.searchTimeout)
-
       if (this.isAutocomplete) {
         this.$nextTick(this.$refs.menu.updateDimensions)
       }

@@ -4,7 +4,6 @@ exports[`VTimePicker.js should accept a date object for a value 1`] = `
 
 <div class="picker picker--time card"
      style="height: auto;"
-     data-ripple="false"
 >
   <div class="picker__title primary">
     <div class="time-picker-title">
@@ -111,7 +110,6 @@ exports[`VTimePicker.js should accept a value 1`] = `
 
 <div class="picker picker--time card"
      style="height: auto;"
-     data-ripple="false"
 >
   <div class="picker__title primary">
     <div class="time-picker-title">
@@ -218,7 +216,6 @@ exports[`VTimePicker.js should change am/pm when updated from model 1`] = `
 
 <div class="picker picker--time card"
      style="height: auto;"
-     data-ripple="false"
 >
   <div class="picker__title primary">
     <div class="time-picker-title">
@@ -325,7 +322,6 @@ exports[`VTimePicker.js should render colored time picker 1`] = `
 
 <div class="picker picker--time card"
      style="height: auto;"
-     data-ripple="false"
 >
   <div class="picker__title orange darken-1">
     <div class="time-picker-title">
@@ -432,7 +428,6 @@ exports[`VTimePicker.js should render colored time picker 2`] = `
 
 <div class="picker picker--time card"
      style="height: auto;"
-     data-ripple="false"
 >
   <div class="picker__title orange darken-1">
     <div class="time-picker-title">
@@ -539,7 +534,6 @@ exports[`VTimePicker.js should render landscape component 1`] = `
 
 <div class="picker picker--time card picker--landscape"
      style="height: auto;"
-     data-ripple="false"
 >
   <div class="picker__title picker__title--landscape primary">
     <div class="time-picker-title">

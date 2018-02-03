@@ -1,6 +1,13 @@
 import { consoleWarn } from '../../../util/console'
 
 export default {
+  props: {
+    sortIcon: {
+      type: String,
+      default: 'arrow_upward'
+    }
+  },
+
   methods: {
     genTHead () {
       if (this.hideHeaders) return // Exit Early since no headers are needed.
@@ -14,7 +21,7 @@ export default {
           all: this.everyItem
         })
 
-        children = [this.needsTR(row) ? this.genTR(row) : row, this.genTProgress()]
+        children = [this.hasTag(row, 'th') ? this.genTR(row) : row, this.genTProgress()]
       } else {
         const row = this.headers.map(o => this.genHeader(o))
         const checkbox = this.$createElement('v-checkbox', {
@@ -99,7 +106,7 @@ export default {
         props: {
           small: true
         }
-      }, 'arrow_upward')
+      }, this.sortIcon)
       if (!header.align || header.align === 'left') {
         children.push(icon)
       } else {

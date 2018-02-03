@@ -48,10 +48,7 @@ export default {
       type: Number,
       default: 1
     },
-    value: {
-      type: Number,
-      required: true
-    }
+    value: Number
   },
 
   computed: {
@@ -75,6 +72,9 @@ export default {
     },
     radius () {
       return this.size / 2
+    },
+    displayedValue () {
+      return this.value == null ? this.min : this.value
     }
   },
 
@@ -87,7 +87,7 @@ export default {
   methods: {
     wheel (e) {
       e.preventDefault()
-      const value = this.value + Math.sign(e.wheelDelta || 1)
+      const value = this.displayedValue + Math.sign(e.wheelDelta || 1)
       this.update((value - this.min + this.count) % this.count + this.min)
     },
     handScale (value) {
@@ -101,7 +101,7 @@ export default {
 
       for (let value = this.min; value <= this.max; value = value + this.step) {
         const classes = {
-          active: value === this.value,
+          active: value === this.displayedValue,
           disabled: !this.isAllowed(value)
         }
 
@@ -115,12 +115,12 @@ export default {
       return children
     },
     genHand () {
-      const scale = `scaleY(${this.handScale(this.value)})`
-      const angle = this.rotate + this.degreesPerUnit * (this.value - this.min)
+      const scale = `scaleY(${this.handScale(this.displayedValue)})`
+      const angle = this.rotate + this.degreesPerUnit * (this.displayedValue - this.min)
 
       return this.$createElement('div', {
         staticClass: 'time-picker-clock__hand',
-        'class': this.addBackgroundColorClassChecks(),
+        'class': this.value == null ? {} : this.addBackgroundColorClassChecks(),
         style: {
           transform: `rotate(${angle}deg) ${scale}`
         }
@@ -189,6 +189,9 @@ export default {
   render (h) {
     const data = {
       staticClass: 'time-picker-clock',
+      class: {
+        'time-picker-clock--indeterminate': this.value == null
+      },
       on: {
         mousedown: this.onMouseDown,
         mouseup: this.onMouseUp,

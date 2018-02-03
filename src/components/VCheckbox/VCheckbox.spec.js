@@ -163,7 +163,7 @@ test('VCheckbox.js', ({ mount }) => {
     expect(change).toBeCalled()
   })
 
-  it('should set ripple data attribute based on disabled state', () => {
+  it('should enable ripple based on disabled state', () => {
     const wrapper = mount(VCheckbox, {
       propsData: {
         inputValue: false,
@@ -173,11 +173,30 @@ test('VCheckbox.js', ({ mount }) => {
 
     const ripple = wrapper.find('.input-group--selection-controls__ripple')[0]
 
-    expect(ripple.getAttribute('data-ripple')).toBe('true')
+    expect(ripple.element._ripple.enabled).toBe(true)
+    expect(ripple.element._ripple.centered).toBe(true)
 
     wrapper.setProps({ disabled: true })
 
-    expect(ripple.getAttribute('data-ripple')).toBe('false')
+    expect(ripple.element._ripple.enabled).toBe(false)
+  })
+
+  it('should set ripple centered property when enabled', () => {
+    const wrapper = mount(VCheckbox, {
+      propsData: {
+        inputValue: false,
+        disabled: true
+      }
+    })
+
+    const ripple = wrapper.find('.input-group--selection-controls__ripple')[0]
+
+    expect(ripple.element._ripple.enabled).toBe(false)
+
+    wrapper.setProps({ disabled: false })
+
+    expect(ripple.element._ripple.enabled).toBe(true)
+    expect(ripple.element._ripple.centered).toBe(true)
   })
 
   it('should not render ripple when ripple prop is false', () => {
@@ -193,7 +212,7 @@ test('VCheckbox.js', ({ mount }) => {
     expect(ripple).toHaveLength(0)
   })
 
-  it('should render ripple with data attribute when ripple prop is true', () => {
+  it('should render ripple when ripple prop is true', () => {
     const wrapper = mount(VCheckbox, {
       propsData: {
         ripple: true
@@ -202,6 +221,7 @@ test('VCheckbox.js', ({ mount }) => {
 
     const ripple = wrapper.find('.input-group--selection-controls__ripple')[0]
 
-    expect(ripple.getAttribute('data-ripple')).toBe('true')
+    expect(ripple.element._ripple.enabled).toBe(true)
+    expect(ripple.element._ripple.centered).toBe(true)
   })
 })

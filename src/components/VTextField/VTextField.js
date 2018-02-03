@@ -228,13 +228,13 @@ export default {
       const data = {
         style: {},
         domProps: {
-          autofocus: this.autofocus,
-          disabled: this.disabled,
-          required: this.required,
           value: this.maskText(this.lazyValue)
         },
         attrs: {
           ...this.$attrs,
+          autofocus: this.autofocus,
+          disabled: this.disabled,
+          required: this.required,
           readonly: this.readonly,
           tabindex: this.tabindex,
           'aria-label': (!this.$attrs || !this.$attrs.id) && this.label // Label `for` will be set if we have an id
@@ -252,12 +252,12 @@ export default {
         data.style.height = this.inputHeight && `${this.inputHeight}px`
       }
 
-      if (this.placeholder) data.domProps.placeholder = this.placeholder
+      if (this.placeholder) data.attrs.placeholder = this.placeholder
 
       if (!this.isTextarea) {
-        data.domProps.type = this.type
+        data.attrs.type = this.type
       } else {
-        data.domProps.rows = this.rows
+        data.attrs.rows = this.rows
       }
 
       if (this.mask) {

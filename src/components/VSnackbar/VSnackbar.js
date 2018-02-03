@@ -1,21 +1,11 @@
 import '../../stylus/components/_snackbars.styl'
 
-import {
-  VSlideYTransition,
-  VSlideYReverseTransition
-} from '../transitions'
-
 import Colorable from '../../mixins/colorable'
 import Toggleable from '../../mixins/toggleable'
 import { factory as PositionableFactory } from '../../mixins/positionable'
 
 export default {
   name: 'v-snackbar',
-
-  components: {
-    VSlideYTransition,
-    VSlideYReverseTransition
-  },
 
   mixins: [Colorable, Toggleable, PositionableFactory(['absolute', 'top', 'bottom', 'left', 'right'])],
 
@@ -26,6 +16,7 @@ export default {
   },
 
   props: {
+    autoHeight: Boolean,
     multiLine: Boolean,
     // TODO: change this to closeDelay to match other API in delayable.js
     timeout: {
@@ -40,6 +31,7 @@ export default {
       return this.addBackgroundColorClassChecks({
         'snack--active': this.isActive,
         'snack--absolute': this.absolute,
+        'snack--auto-height': this.autoHeight,
         'snack--bottom': this.bottom || !this.top,
         'snack--left': this.left,
         'snack--multi-line': this.multiLine && !this.vertical,
@@ -47,9 +39,6 @@ export default {
         'snack--top': this.top,
         'snack--vertical': this.vertical
       })
-    },
-    computedTransition () {
-      return this.top ? 'v-slide-y-transition' : 'v-slide-y-reverse-transition'
     }
   },
 
@@ -79,15 +68,25 @@ export default {
     const children = []
 
     if (this.isActive) {
-      children.push(h('div', {
-        staticClass: 'snack__content'
-      }, this.$slots.default))
+      children.push(
+        h('div', {
+          staticClass: 'snack',
+          class: this.classes,
+          on: this.$listeners
+        }, [
+          h('div', {
+            staticClass: 'snack__wrapper'
+          }, [
+            h('div', {
+              staticClass: 'snack__content'
+            }, this.$slots.default)
+          ])
+        ])
+      )
     }
 
-    return h('div', {
-      staticClass: 'snack',
-      'class': this.classes,
-      on: this.$listeners
-    }, [h(this.computedTransition, children)])
+    return h('transition', {
+      attrs: { name: 'snack-transition' }
+    }, children)
   }
 }

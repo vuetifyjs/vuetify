@@ -14,9 +14,7 @@ exports[`VRadio.vue should not render aria-label attribute with no label value o
     >
       radio_button_unchecked
     </i>
-    <div class="input-group--selection-controls__ripple"
-         data-ripple="true"
-    >
+    <div class="input-group--selection-controls__ripple">
     </div>
     <input name="name"
            type="radio"
@@ -43,9 +41,7 @@ exports[`VRadio.vue should render aria-label attribute with label value on input
     >
       radio_button_unchecked
     </i>
-    <div class="input-group--selection-controls__ripple"
-         data-ripple="true"
-    >
+    <div class="input-group--selection-controls__ripple">
     </div>
     <input name="name"
            type="radio"
@@ -70,9 +66,7 @@ exports[`VRadio.vue should render proper input name 1`] = `
     >
       radio_button_unchecked
     </i>
-    <div class="input-group--selection-controls__ripple"
-         data-ripple="true"
-    >
+    <div class="input-group--selection-controls__ripple">
     </div>
     <input name="name"
            type="radio"
@@ -97,9 +91,7 @@ exports[`VRadio.vue should render role and aria-checked attributes on input grou
     >
       radio_button_unchecked
     </i>
-    <div class="input-group--selection-controls__ripple"
-         data-ripple="true"
-    >
+    <div class="input-group--selection-controls__ripple">
     </div>
     <input name="name"
            type="radio"

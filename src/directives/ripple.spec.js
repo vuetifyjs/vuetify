@@ -3,7 +3,7 @@ import { test } from '@util/testing'
 import Ripple from '@directives/ripple'
 
 test('VRipple', ({ mount }) => {
-  it('Ripple with no value should render data attribute true', () => {
+  it('Ripple with no value should render element with ripple enabled', () => {
     const testComponent = Vue.component('test', {
       directives: {
         Ripple
@@ -21,10 +21,10 @@ test('VRipple', ({ mount }) => {
     const wrapper = mount(testComponent)
 
     const div = wrapper.find('div')[0]
-    expect(div.getAttribute('data-ripple')).toBe('true')
+    expect(div.element._ripple.enabled).toBe(true)
   })
 
-  it('Ripple should update data attribute reactively', () => {
+  it('Ripple should update element property reactively', () => {
     const testComponent = Vue.component('test', {
       directives: {
         Ripple
@@ -51,12 +51,12 @@ test('VRipple', ({ mount }) => {
     })
 
     const div = wrapper.find('div')[0]
-    expect(div.getAttribute('data-ripple')).toBe('true')
+    expect(div.element._ripple.enabled).toBe(true)
 
     wrapper.setProps({ ripple: false })
-    expect(div.getAttribute('data-ripple')).toBe('false')
+    expect(div.element._ripple.enabled).toBe(false)
 
     wrapper.setProps({ ripple: true })
-    expect(div.getAttribute('data-ripple')).toBe('true')
+    expect(div.element._ripple.enabled).toBe(true)
   })
 })
