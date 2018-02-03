@@ -107,7 +107,7 @@ export default {
         }
       }, [!this.isActive && this.genButton(h), this.isActive && this.genToolbar(h)])
     },
-    genPath (id, points) {
+    genPath (h, id, points) {
       return h('path', {
         attrs: {
           id,
@@ -125,7 +125,7 @@ export default {
           width: this.width,
           height: this.endY
         }
-      }, [this.genPath('forward', this.forwardPath), this.genPath('reverse', this.reversePath])
+      }, [this.genPath(h, 'forward', this.forwardPath), this.genPath(h, 'reverse', this.reversePath)])
     }
   },
 
