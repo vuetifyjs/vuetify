@@ -9,24 +9,7 @@ export default {
       uninverted: true
     }
   }],
-  params: [{
-    'v-resize': [
-      {
-        name: 'callback',
-        type: 'Function',
-        default: 'null'
-      },
-      {
-        name: 'quiet',
-        type: 'Boolean',
-        default: 'false',
-        desc: 'Do not invoke callback method when directive is bound'
-      },
-      {
-        name: 'debounce',
-        type: 'Number',
-        default: '200'
-      }
-    ]
-  }]
+  options: {
+    'modifiers.quiet': '`v-resize.quiet="callback"` Will **not** automatically invoke the provided callback on bind.'
+  }
 }
