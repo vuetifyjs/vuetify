@@ -12,7 +12,7 @@ export default {
 
   data () {
     return {
-      width: window.innerWidth,
+      width: window.innerWidth
     }
   },
 
@@ -36,8 +36,8 @@ export default {
     },
     genButton (h) {
       return h('div', {
-        key: 0,
-      }, this.$scopedSlots.activator({ key: 0, toggle: this.toggle}))
+        key: 0
+      }, this.$scopedSlots.activator({ key: 0, toggle: this.toggle }))
     },
     genActivator (h) {
       return h('transition-group', {
@@ -48,7 +48,7 @@ export default {
           css: false
         },
         on: {
-          beforeEnter: (e) => {
+          beforeEnter: e => {
             e.style.transform = `translateX(${this.endX}px) translateY(${this.endY}px)`
           },
           enter: (e, done) => {
@@ -76,7 +76,7 @@ export default {
                 targets: icon,
                 opacity: 0,
                 duration: 50,
-                offset:0
+                offset: 0
               })
 
               .add({
@@ -91,7 +91,7 @@ export default {
               })
           }
         }
-      }, [!this.isActive && this.$scopedSlots.activator({ key: 0, toggle: this.toggle})])
+      }, [!this.isActive && this.$scopedSlots.activator({ key: 0, toggle: this.toggle })])
     },
     genContent (h) {
       return h('transition-group', {
@@ -102,10 +102,10 @@ export default {
           css: false
         },
         on: {
-          beforeEnter: (e) => {
+          beforeEnter: e => {
             e.style.opacity = 0
 
-            Array.from(e.children).forEach((c) => {
+            Array.from(e.children).forEach(c => {
               c.style.opacity = 0
             })
           },
