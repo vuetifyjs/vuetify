@@ -8,7 +8,11 @@
     template(slot="item" slot-scope="{ item }")
       div(class="ma-2")
         div(class="pa-2 grey lighten-4 d-flex align-top")
-          v-flex(v-for="header in headers" :key="header.value" :class="[`xs${header.size}`, `text-xs-${header.align}`]")
+          v-flex(
+            v-for="header in headers"
+            :class="[`xs${header.size}`, `text-xs-${header.align}`]"
+            :key="header.value"
+          )
             div(class="header grey--text text--darken-1") {{ genHeaderName(header.value, item) }}
             div(:class="['mono', header.value]") {{ item[header.value] }}
         div(class="pa-2 grey lighten-3 grey--text text--darken-2 d-flex")

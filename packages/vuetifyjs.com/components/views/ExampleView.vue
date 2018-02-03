@@ -134,11 +134,16 @@
           functional: [
             { value: 'name', align: 'left' },
             { value: 'description', align: 'left' }
+          ],
+          options: [
+            { value: 'name', align: 'left', size: 3 },
+            { value: 'default', align: 'left', size: 3 },
+            { value: 'type', align: 'right' }
           ]
         },
         search: null,
         tab: null,
-        tabs: ['props', 'slots', 'scopedSlots', 'params', 'events', 'functions', 'functional']
+        tabs: ['props', 'slots', 'scopedSlots', 'params', 'events', 'functions', 'functional', 'options']
       }
     },
 
@@ -160,7 +165,8 @@
           params: [],
           events: [],
           funtions: [],
-          functional: []
+          functional: [],
+          options: []
         }
       },
       examples () {
