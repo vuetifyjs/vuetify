@@ -26,7 +26,7 @@
                 <v-icon color="grey lighten-1">star_border</v-icon>
               </v-list-tile-action>
             </v-list-tile>
-            <v-divider v-if="index + 1 &lt; items.length" :key="index"></v-divider>
+            <v-divider v-if="index + 1 < items.length" :key="`divider-${index}`"></v-divider>
           </template>
         </v-list>
       </v-card>
