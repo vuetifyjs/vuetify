@@ -42,7 +42,9 @@ export default {
       // Convert the NodeList to an array to
       // prevent an Edge bug with Symbol.iterator
       // https://github.com/vuetifyjs/vuetify/issues/2146
-      const activeElements = [...document.querySelectorAll(this.stackSelector)]
+      const activeElements = typeof document !== 'undefined' 
+        ? [...document.querySelectorAll(this.stackSelector)]
+        : []
 
       // Get z-index for all active dialogs
       for (let index = 0; index < activeElements.length; index++) {
