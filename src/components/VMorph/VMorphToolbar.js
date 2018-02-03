@@ -75,7 +75,7 @@ export default {
           ...this.$attrs,
           fixed: true
         }
-      })
+      }, [this.$slots.content])
     },
     genTransitionGroup (h) {
       return h('transition-group', {
@@ -84,9 +84,6 @@ export default {
           css: false
         },
         on: {
-          beforeEnter (el) {
-
-          },
           enter: (el, done) => {
             console.log('enter', el)
             if (this.$refs.toolbar && this.$refs.toolbar.$el === el) {
@@ -96,9 +93,6 @@ export default {
             } else {
               return done()
             }
-          },
-          beforeLeave (el) {
-
           },
           leave: (el, done) => {
             console.log('leave', el)
@@ -113,34 +107,25 @@ export default {
         }
       }, [!this.isActive && this.genButton(h), this.isActive && this.genToolbar(h)])
     },
+    genPath (id, points) {
+      return h('path', {
+        attrs: {
+          id,
+          fill: 'none',
+          stroke: 'black',
+          'stroke-width': 1,
+          d: points
+        }
+      })
+    },
     genSvg (h) {
-      const forward = h('path', {
-        attrs: {
-          id: 'forward',
-          fill: 'none',
-          stroke: 'black',
-          'stroke-width': 1,
-          d: this.forwardPath
-        }
-      })
-
-      const reverse = h('path', {
-        attrs: {
-          id: 'reverse',
-          fill: 'none',
-          stroke: 'black',
-          'stroke-width': 1,
-          d: this.reversePath
-        }
-      })
-
       return h('svg', {
         attrs: {
           id: 'morphPath',
           width: this.width,
           height: this.endY
         }
-      }, [forward, reverse])
+      }, [this.genPath('forward', this.forwardPath), this.genPath('reverse', this.reversePath])
     }
   },
 
