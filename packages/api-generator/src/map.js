@@ -195,6 +195,52 @@ module.exports = {
       }
     ]
   },
+  'v-resize': {
+    options: [
+      {
+        name: 'modifiers.quiet',
+        default: 'false',
+        type: 'Boolean'
+      },
+      {
+        name: 'value',
+        default: 'undefined',
+        type: 'Function'
+      }
+    ]
+  },
+  'v-ripple': {
+    options: [
+      {
+        name: 'value',
+        default: '{}',
+        type: 'Object'
+      }
+    ]
+  },
+  'v-scroll': {
+    options: [
+      {
+        name: 'arg:target',
+        default: 'window',
+        type: 'String'
+      },
+      {
+        name: 'value',
+        default: '() => {}',
+        type: 'Function'
+      }
+    ]
+  },
+  'v-touch': {
+    options: [
+      {
+        name: 'value',
+        default: '{}',
+        type: 'Object'
+      }
+    ]
+  },
   'v-app': {
     slots: ['default']
   },
