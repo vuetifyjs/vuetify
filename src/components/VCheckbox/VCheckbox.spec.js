@@ -72,7 +72,6 @@ test('VCheckbox.js', ({ mount }) => {
   it('should push value to array when toggled on and is multiple', () => {
     const wrapper = mount(VCheckbox, {
       propsData: {
-        multiple: true,
         value: 'John',
         inputValue: []
       }
@@ -85,7 +84,6 @@ test('VCheckbox.js', ({ mount }) => {
   it('should push array value to array when toggled on and is multiple', () => {
     const wrapper = mount(VCheckbox, {
       propsData: {
-        multiple: true,
         value: [1, 2, {x: 1, y: 2}],
         inputValue: ['Existing']
       }
@@ -112,10 +110,27 @@ test('VCheckbox.js', ({ mount }) => {
     expect(change).toBeCalledWith(null)
   })
 
+  it('should return null when toggled off with a specified array value', () => {
+    const wrapper = mount(VCheckbox, {
+      propsData: {
+        multiple: false, // must use multiple flag for array values
+        value: ['John'],
+        inputValue: ['John']
+      }
+    })
+
+    const ripple = wrapper.find('.input-group--selection-controls__ripple')[0]
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    ripple.trigger('click')
+    expect(change).toBeCalledWith(null)
+  })
+
   it('should remove value(s) from array when toggled off and multiple', () => {
     const wrapper = mount(VCheckbox, {
       propsData: {
-        multiple: true,
         value: 1,
         inputValue: [1, 2, 1, 3]
       }
