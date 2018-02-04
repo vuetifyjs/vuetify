@@ -265,7 +265,7 @@ export default {
           }
         },
         props: {
-          avatar: item === Object(item) && this.getAvatar(item),
+          avatar: item === Object(item) && Boolean(this.getAvatar(item)),
           ripple: true,
           value: active
         }
