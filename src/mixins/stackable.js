@@ -42,7 +42,7 @@ export default {
       // Convert the NodeList to an array to
       // prevent an Edge bug with Symbol.iterator
       // https://github.com/vuetifyjs/vuetify/issues/2146
-      const activeElements = typeof document !== 'undefined' 
+      const activeElements = typeof document !== 'undefined'
         ? [...document.querySelectorAll(this.stackSelector)]
         : []
 
