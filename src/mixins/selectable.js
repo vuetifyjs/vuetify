@@ -23,7 +23,7 @@ export default {
     trueValue: null,
     multiple: {
       type: Boolean,
-      default: false
+      default: null
     },
     valueComparator: {
       type: Function,
@@ -32,11 +32,14 @@ export default {
   },
 
   computed: {
+    isMultiple () {
+      return this.multiple === true || (this.multiple === null && Array.isArray(this.inputValue))
+    },
     isActive () {
       const value = this.value
       const inputValue = this.inputValue
 
-      if (this.multiple) {
+      if (this.isMultiple) {
         if (!Array.isArray(inputValue)) return false
 
         for (let i = 0, m = inputValue.length; i < m; i++) {
@@ -96,7 +99,7 @@ export default {
       const value = this.value
       let input = this.inputValue
 
-      if (this.multiple) {
+      if (this.isMultiple) {
         if (!Array.isArray(input)) {
           // Cannot toggle if not an array
           return
