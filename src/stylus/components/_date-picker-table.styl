@@ -13,7 +13,7 @@ theme(date-picker-table, "date-picker-table")
 .date-picker-table
   position: relative
   padding: 0 12px
-  height: 290px
+  height: 242px
 
   table
     transition: $primary-transition
@@ -29,8 +29,8 @@ theme(date-picker-table, "date-picker-table")
     font-size: 12px
 
   &--date .btn
-    height: 40px
-    width: 40px
+    height: 32px
+    width: 32px
 
   .btn
     z-index: auto
@@ -63,7 +63,7 @@ theme(date-picker-table, "date-picker-table")
 
 .date-picker-table__event
   border-radius: 50%
-  bottom: 6px
+  bottom: 2px
   content: ""
   display: block
   height: 8px
@@ -72,15 +72,3 @@ theme(date-picker-table, "date-picker-table")
   transform: translateX(-4px)
   width: 8px
 
-.picker--landscape
-  .date-picker-table
-  .date-picker-table
-    height: 242px
-
-  .date-picker-table--date
-    .btn
-      height: 32px
-      width: 32px
-
-  .date-picker-table__event
-    bottom: 2px
