@@ -20,16 +20,12 @@ export default {
 
   created () {
     if (typeof document === 'undefined' && this.$ssrContext) {
-      if (!this.$ssrContext._styles) this.$ssrContext._styles = {}
-      this.$ssrContext._styles['vuetify-theme-stylesheet'] = {
-        ids: ['vuetify-theme-stylesheet'],
-        css: this.genColors(this.parsedTheme),
-        media: ''
-      }
-      return
+      this.$ssrContext.head = this.$ssrContext.head || ''
+      this.$ssrContext.head += `<style id="vuetify-theme-stylesheet">${this.genColors(this.parsedTheme)}</style>`
+    } else if (typeof document !== 'undefined') {
+      this.genStyle()
+      this.applyTheme()
     }
-    this.genStyle()
-    this.applyTheme()
   },
 
   methods: {
