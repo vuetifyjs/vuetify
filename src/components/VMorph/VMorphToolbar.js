@@ -36,16 +36,30 @@ export default {
 
   computed: {
     forwardPath () {
+      const negative = this.right ? '-' : ''
       const target = parseInt(this.width * 0.225, 10)
-      return `m0,0 q0,20 -${target},20`
+      return `m0,0 q0,20 ${negative}${target},20`
     },
     reversePath () {
+      const start = this.right ? '-' : ''
+      const end = this.right ? '' : '-'
       const target = parseInt(this.width * 0.225, 10)
-      return `m-${target},20 q${target},0 ${target},-20`
+      return `m${start}${target},20 q${end}${target},0 ${end}${target},-20`
+    },
+    right () {
+      return this.$attrs.hasOwnProperty('right')
     }
   },
 
   methods: {
+    toolbarEl () {
+      if (this.$refs.toolbar) return this.$refs.toolbar.$el
+      else return null
+    },
+    buttonEl () {
+      if (this.$refs.button) return this.$refs.button.$el
+      else return null
+    },
     genIcon (h) {
       return this.$slots.icon || h(VIcon, [this.activatorIcon])
     },
@@ -75,7 +89,7 @@ export default {
           ...this.$attrs,
           fixed: true
         }
-      }, [this.$slots.content])
+      }, [this.$slots.default])
     },
     genTransitionGroup (h) {
       return h('transition-group', {
@@ -85,20 +99,18 @@ export default {
         },
         on: {
           enter: (el, done) => {
-            console.log('enter', el)
-            if (this.$refs.toolbar && this.$refs.toolbar.$el === el) {
-              return morphs.enterToolbar(el, this.width, this.size, done)
-            } else if (this.$refs.button && this.$refs.button.$el === el) {
+            if (this.toolbarEl() === el) {
+              return morphs.enterToolbar(el, this.width, this.size, this.right, done)
+            } else if (this.buttonEl() === el) {
               return morphs.enterButton(el, done)
             } else {
               return done()
             }
           },
           leave: (el, done) => {
-            console.log('leave', el)
-            if (this.$refs.toolbar && this.$refs.toolbar.$el === el) {
-              return morphs.leaveToolbar(el, this.width, this.size, done)
-            } else if (this.$refs.button && this.$refs.button.$el === el) {
+            if (this.toolbarEl() === el) {
+              return morphs.leaveToolbar(el, this.width, this.size, this.right, done)
+            } else if (this.buttonEl() === el) {
               return morphs.leaveButton(el, done)
             } else {
               return done()
@@ -123,7 +135,7 @@ export default {
         attrs: {
           id: 'morphPath',
           width: this.width,
-          height: this.endY
+          height: 100
         }
       }, [this.genPath(h, 'forward', this.forwardPath), this.genPath(h, 'reverse', this.reversePath)])
     }
@@ -137,7 +149,8 @@ export default {
           name: 'click-outside',
           value: () => (this.isActive = false),
           args: {
-            closeConditional: () => this.isActive
+            closeConditional: () => this.isActive,
+            include: () => [this.toolbarEl()]
           }
         },
         {

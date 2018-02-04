@@ -1,9 +1,15 @@
 import anime from 'animejs'
 
-function enterToolbar (el, width, size, done) {
+function enterToolbar (el, width, size, right, done) {
   const timeline = anime.timeline()
+  const start = right ? 70 : 30
   el.style.opacity = 0
   el.style.zIndex = 999
+
+  const icons = el.querySelectorAll('.icon')
+  Array.from(icons).forEach(el => {
+    el.style.opacity = 0
+  })
 
   timeline
     .add({
@@ -14,24 +20,39 @@ function enterToolbar (el, width, size, done) {
       easing: 'linear'
     })
     .add({
+      targets: icons,
+      opacity: 1,
+      duration: 200,
+      offset: 200
+    })
+    .add({
       targets: el,
-      clipPath: [`circle(${size}px at 70% 50%)`, `circle(${(width / 2 + 10)}px at 50% 50%)`],
+      clipPath: [`circle(${size}px at ${start}% 50%)`, `circle(${(width / 2 + 10)}px at 50% 50%)`],
       easing: 'easeOutSine',
-      duration: 300,
+      duration: 250,
       offset: 200,
       complete: done
     })
 }
 
-function leaveToolbar (el, width, size, done) {
+function leaveToolbar (el, width, size, right, done) {
   const timeline = anime.timeline()
+  const start = right ? 70 : 30
+
+  const icons = el.querySelectorAll('.icon')
 
   timeline
     .add({
       targets: el,
-      clipPath: [`circle(${(width / 2) + 10}px at 50% 50%)`, `circle(${size}px at 70% 50%)`],
+      clipPath: [`circle(${(width / 2) + 10}px at 50% 50%)`, `circle(${size}px at ${start}% 50%)`],
       easing: 'easeOutSine',
-      duration: 300,
+      duration: 250,
+      offset: 0
+    })
+    .add({
+      targets: icons,
+      opacity: 0,
+      duration: 25,
       offset: 0
     })
     .add({
@@ -89,7 +110,7 @@ function leaveButton (el, done) {
       targets: el.querySelector('.icon'),
       offset: 0,
       opacity: 0,
-      duration: 100
+      duration: 50
     })
     .add({
       targets: el,
