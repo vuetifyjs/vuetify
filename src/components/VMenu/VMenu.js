@@ -1,10 +1,11 @@
-require('../../stylus/components/_menus.styl')
+import '../../stylus/components/_menus.styl'
 
 // Mixins
 import Delayable from '../../mixins/delayable'
 import Dependent from '../../mixins/dependent'
 import Detachable from '../../mixins/detachable'
 import Menuable from '../../mixins/menuable.js'
+import Returnable from '../../mixins/returnable'
 import Toggleable from '../../mixins/toggleable'
 
 // Component level mixins
@@ -29,6 +30,7 @@ export default {
     Keyable,
     Menuable,
     Position,
+    Returnable,
     Toggleable
   ],
 
@@ -80,10 +82,9 @@ export default {
 
   computed: {
     calculatedLeft () {
-      let left = this.calcLeft
-      if (this.auto) left = this.calcLeftAuto
+      if (!this.auto) return this.calcLeft()
 
-      return `${this.calcXOverflow(left())}px`
+      return `${this.calcXOverflow(this.calcLeftAuto())}px`
     },
     calculatedMaxHeight () {
       return this.auto
@@ -120,9 +121,9 @@ export default {
       )}px`
     },
     calculatedTop () {
-      const top = this.auto ? this.calcTopAuto : this.calcTop
+      if (!this.auto || this.isAttached) return this.calcTop()
 
-      return `${this.calcYOverflow(top())}px`
+      return `${this.calcYOverflow(this.calcTopAuto())}px`
     },
     styles () {
       return {
@@ -160,11 +161,15 @@ export default {
       // Once transitioning, calculate scroll position
       setTimeout(this.calculateScroll, 50)
     },
+    closeConditional () {
+      return this.isActive && this.closeOnClick
+    },
     onResize () {
       if (!this.isActive) return
 
       // Account for screen resize
       // and orientation change
+      // eslint-disable-next-line no-unused-expressions
       this.$refs.content.offsetWidth
       this.updateDimensions()
 
@@ -188,11 +193,9 @@ export default {
         display: this.fullWidth ? 'block' : 'inline-block'
       },
       directives: [{
+        arg: 500,
         name: 'resize',
-        value: {
-          debounce: 500,
-          value: this.onResize
-        }
+        value: this.onResize
       }],
       on: {
         keydown: this.changeListIndex

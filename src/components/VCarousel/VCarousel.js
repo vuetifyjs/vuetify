@@ -1,4 +1,4 @@
-require('../../stylus/components/_carousel.styl')
+import '../../stylus/components/_carousel.styl'
 
 import VBtn from '../VBtn'
 import VIcon from '../VIcon'
@@ -41,13 +41,13 @@ export default {
       default: 6000,
       validator: value => value > 0
     },
-    leftControlIcon: {
-      type: [Boolean, String],
-      default: 'chevron_left'
-    },
-    rightControlIcon: {
+    nextIcon: {
       type: [Boolean, String],
       default: 'chevron_right'
+    },
+    prevIcon: {
+      type: [Boolean, String],
+      default: 'chevron_left'
     },
     value: Number
   },
@@ -59,12 +59,13 @@ export default {
       }
     },
     inputValue () {
-      // Evaluate items when inputValue changes to account for
-      // dynamic changing of children
+      // Evaluates items when inputValue changes to
+      // account for dynamic changing of children
 
-      this.items.forEach(i => {
-        i.open(this.items[this.inputValue].uid, this.reverse)
-      })
+      const uid = (this.items[this.inputValue] || {}).uid
+      for (let index = this.items.length; --index >= 0;) {
+        this.items[index].open(uid, this.reverse)
+      }
 
       this.$emit('input', this.inputValue)
       this.restartTimeout()
@@ -108,7 +109,11 @@ export default {
             light: this.light
           },
           on: { click: fn }
-        }, [this.$createElement(VIcon, icon)])
+        }, [
+          this.$createElement(VIcon, {
+            props: { 'size': '46px' }
+          }, icon)
+        ])
       ])
     },
     genItems () {
@@ -120,12 +125,15 @@ export default {
           },
           props: {
             icon: true,
+            small: true,
             dark: this.dark || !this.light,
             light: this.light
           },
           key: index,
           on: { click: this.select.bind(this, index) }
-        }, [this.$createElement(VIcon, this.delimiterIcon)])
+        }, [this.$createElement(VIcon, {
+          props: { size: '18px' }
+        }, this.delimiterIcon)])
       })
     },
     restartTimeout () {
@@ -174,8 +182,8 @@ export default {
         }
       }]
     }, [
-      this.hideControls ? null : this.genIcon('left', this.leftControlIcon, this.prev),
-      this.hideControls ? null : this.genIcon('right', this.rightControlIcon, this.next),
+      this.hideControls ? null : this.genIcon('left', this.prevIcon, this.prev),
+      this.hideControls ? null : this.genIcon('right', this.nextIcon, this.next),
       this.hideDelimiters ? null : this.genDelimiters(),
       this.$slots.default
     ])

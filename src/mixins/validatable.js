@@ -1,4 +1,8 @@
+import { consoleError } from '../util/console'
+
 export default {
+  name: 'validatable',
+
   data () {
     return {
       errorBucket: [],
@@ -104,17 +108,16 @@ export default {
 
       this.errorBucket = []
 
-      this.rules.forEach(rule => {
+      for (let index = 0; index < this.rules.length; index++) {
+        const rule = this.rules[index]
         const valid = typeof rule === 'function' ? rule(value) : rule
 
-        if (valid !== true && !['string', 'boolean'].includes(typeof valid)) {
-          throw new TypeError(`Rules should return a string or boolean, received '${typeof valid}' instead`)
-        }
-
-        if (valid !== true) {
+        if (valid === false || typeof valid === 'string') {
           this.errorBucket.push(valid)
+        } else if (valid !== true) {
+          consoleError(`Rules should return a string or boolean, received '${typeof valid}' instead`, this)
         }
-      })
+      }
 
       this.valid = this.errorBucket.length === 0
 

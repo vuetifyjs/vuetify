@@ -1,7 +1,7 @@
-import VBtn from '~components/VBtn'
-import VCard from '~components/VCard'
-import VMenu from '~components/VMenu'
-import { test } from '~util/testing'
+import VBtn from '@components/VBtn'
+import VCard from '@components/VCard'
+import VMenu from '@components/VMenu'
+import { test } from '@util/testing'
 
 // TODO: Most of these have exactly the same snapshots
 test('VMenu.js', ({ mount }) => {
@@ -25,7 +25,7 @@ test('VMenu.js', ({ mount }) => {
 
     expect(input).toBeCalledWith(true)
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render component with custom top and match snapshot', () => {
@@ -36,7 +36,7 @@ test('VMenu.js', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render component with custom bottom and match snapshot', () => {
@@ -47,7 +47,7 @@ test('VMenu.js', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render component with custom left and match snapshot', () => {
@@ -58,7 +58,7 @@ test('VMenu.js', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render component with custom right and match snapshot', () => {
@@ -69,7 +69,7 @@ test('VMenu.js', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render component with custom fullWidth and match snapshot', () => {
@@ -80,7 +80,7 @@ test('VMenu.js', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render component with custom auto and match snapshot', () => {
@@ -91,7 +91,7 @@ test('VMenu.js', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render component with custom offsetX and match snapshot', () => {
@@ -102,7 +102,7 @@ test('VMenu.js', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render component with custom offsetY and match snapshot', () => {
@@ -113,7 +113,7 @@ test('VMenu.js', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render component with custom disabled and match snapshot', () => {
@@ -124,7 +124,7 @@ test('VMenu.js', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render component with custom maxHeight and match snapshot', () => {
@@ -135,7 +135,7 @@ test('VMenu.js', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render component with custom nudgeTop and match snapshot', () => {
@@ -146,7 +146,7 @@ test('VMenu.js', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render component with custom nudgeBottom and match snapshot', () => {
@@ -157,7 +157,7 @@ test('VMenu.js', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render component with custom nudgeLeft and match snapshot', () => {
@@ -168,7 +168,7 @@ test('VMenu.js', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render component with custom nudgeRight and match snapshot', () => {
@@ -179,7 +179,7 @@ test('VMenu.js', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render component with custom nudgeWidth and match snapshot', () => {
@@ -190,7 +190,7 @@ test('VMenu.js', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render component with custom openOnClick and match snapshot', () => {
@@ -201,7 +201,7 @@ test('VMenu.js', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render component with custom openOnHover and match snapshot', () => {
@@ -212,7 +212,7 @@ test('VMenu.js', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render component with custom lazy and match snapshot', () => {
@@ -223,7 +223,7 @@ test('VMenu.js', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render component with custom closeOnClick and match snapshot', () => {
@@ -234,7 +234,7 @@ test('VMenu.js', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render component with custom closeOnContentClick and match snapshot', () => {
@@ -245,7 +245,7 @@ test('VMenu.js', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render component with custom activator and match snapshot', () => {
@@ -256,7 +256,7 @@ test('VMenu.js', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render component with custom origin and match snapshot', () => {
@@ -267,7 +267,7 @@ test('VMenu.js', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render component with custom transition and match snapshot', () => {
@@ -278,7 +278,7 @@ test('VMenu.js', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render component with custom positionX and match snapshot', () => {
@@ -289,7 +289,7 @@ test('VMenu.js', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render component with custom positionY and match snapshot', () => {
@@ -300,18 +300,18 @@ test('VMenu.js', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
-  it('should render component with custom positionAbsolutely and match snapshot', () => {
+  it('should render component with custom absolute and match snapshot', () => {
     const wrapper = mount(VMenu, {
       propsData: {
-        positionAbsolutely: true
+        absolute: true
       }
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render component with custom maxWidth and match snapshot', () => {
@@ -322,7 +322,7 @@ test('VMenu.js', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render component with custom minWidth and match snapshot', () => {
@@ -333,6 +333,42 @@ test('VMenu.js', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should round dimensions', async () => {
+    const wrapper = mount(VMenu, {
+      propsData: {
+        value: false
+      },
+      slots: {
+        activator: [VBtn]
+      }
+    })
+
+    const content = wrapper.find('.menu__content')[0]
+
+    const getBoundingClientRect = () => {
+      return {
+        width: 100.5,
+        height: 100.25,
+        top: 0.75,
+        left: 50.123,
+        right: 75.987,
+        bottom: 4,
+        x: 0,
+        y: 0
+      }
+    }
+
+    wrapper.vm.$refs.activator.querySelector('.btn').getBoundingClientRect = getBoundingClientRect
+    wrapper.vm.$refs.content.getBoundingClientRect = getBoundingClientRect
+
+    wrapper.setProps({ value: true })
+
+    await new Promise(resolve => requestAnimationFrame(resolve))
+
+    expect(content.getAttribute('style')).toMatchSnapshot()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 })

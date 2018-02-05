@@ -1,28 +1,33 @@
-require('../../stylus/components/_lists.styl')
+// Styles
+import '../../stylus/components/_lists.styl'
 
+// Mixins
 import Themeable from '../../mixins/themeable'
+import {
+  provide as RegistrableProvide
+} from '../../mixins/registrable'
 
 export default {
   name: 'v-list',
 
+  mixins: [
+    RegistrableProvide('list'),
+    Themeable
+  ],
+
   provide () {
     return {
-      listClick: this.listClick,
-      listClose: this.listClose
+      'listClick': this.listClick
     }
   },
 
-  mixins: [Themeable],
-
-  data () {
-    return {
-      uid: null,
-      groups: []
-    }
-  },
+  data: () => ({
+    groups: []
+  }),
 
   props: {
     dense: Boolean,
+    expand: Boolean,
     subheader: Boolean,
     threeLine: Boolean,
     twoLine: Boolean
@@ -31,43 +36,40 @@ export default {
   computed: {
     classes () {
       return {
-        'list': true,
-        'list--two-line': this.twoLine,
         'list--dense': this.dense,
-        'list--three-line': this.threeLine,
         'list--subheader': this.subheader,
-        'theme--dark dark--bg': this.dark,
-        'theme--light light--bg': this.light
+        'list--two-line': this.twoLine,
+        'list--three-line': this.threeLine,
+        'theme--dark': this.dark,
+        'theme--light': this.light
       }
-    }
-  },
-
-  watch: {
-    uid () {
-      this.$children.filter(i => i.$options._componentTag === 'v-list-group').forEach(i => i.toggle(this.uid))
     }
   },
 
   methods: {
-    listClick (uid, force) {
-      if (force) {
-        this.uid = uid
-      } else {
-        this.uid = this.uid === uid ? null : uid
+    register (uid, cb) {
+      this.groups.push({ uid, cb })
+    },
+    unregister (uid) {
+      const index = this.groups.findIndex(g => g.uid === uid)
+
+      if (index > -1) {
+        this.groups.splice(index, 1)
       }
     },
+    listClick (uid, isBooted) {
+      if (this.expand) return
 
-    listClose (uid) {
-      if (this.uid === uid) {
-        this.uid = null
+      for (let i = this.groups.length; i--;) {
+        this.groups[i].cb(uid)
       }
     }
   },
 
   render (h) {
     const data = {
-      'class': this.classes,
-      attrs: { 'data-uid': this._uid }
+      staticClass: 'list',
+      'class': this.classes
     }
 
     return h('ul', data, [this.$slots.default])

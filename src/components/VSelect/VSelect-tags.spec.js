@@ -1,9 +1,8 @@
-import { test } from '~util/testing'
-import { mount } from 'avoriaz'
-import VSelect from '~components/VSelect'
-import VMenu from '~components/VMenu'
+import { test } from '@util/testing'
+import VSelect from '@components/VSelect'
+import VMenu from '@components/VMenu'
 
-test('VSelect - tags', () => {
+test('VSelect - tags', ({ mount, compileToFunctions }) => {
   const backspace = new Event('keydown')
   backspace.keyCode = 8
 
@@ -33,7 +32,7 @@ test('VSelect - tags', () => {
     await wrapper.vm.$nextTick()
 
     expect(change).toHaveBeenCalledWith(['foo'])
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should change selectedIndex with keyboard', async () => {
@@ -56,7 +55,7 @@ test('VSelect - tags', () => {
       expect(wrapper.vm.selectedIndex).toBe(index)
     }
 
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should delete a tagged item when selected and backspace/delete is pressed', async () => {
@@ -88,7 +87,7 @@ test('VSelect - tags', () => {
     expect(change).toHaveBeenCalledWith([])
     expect(wrapper.vm.selectedIndex).toBe(-1)
 
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should add a tag on tab using the first suggestion', async () => {
@@ -117,7 +116,7 @@ test('VSelect - tags', () => {
     await wrapper.vm.$nextTick()
 
     expect(change).toBeCalledWith(['bar'])
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should add a tag on tab using the current searchValue', async () => {
@@ -153,7 +152,7 @@ test('VSelect - tags', () => {
     await wrapper.vm.$nextTick()
     expect(change).toBeCalledWith(['bar', 'it'])
 
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should add a tag on enter using the current searchValue', async () => {
@@ -184,7 +183,7 @@ test('VSelect - tags', () => {
     await wrapper.vm.$nextTick()
 
     expect(change).toBeCalledWith(['ba'])
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should add a tag on left arrow and select the previous tag', async () => {
@@ -207,12 +206,13 @@ test('VSelect - tags', () => {
 
     input.element.value = 'b'
     input.trigger('input')
+    await wrapper.vm.$nextTick()
     input.trigger('keydown.left')
     await wrapper.vm.$nextTick()
 
     expect(change).toBeCalledWith(['foo', 'b'])
     expect(wrapper.vm.selectedIndex).toBe(0)
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should remove a duplicate tag and add it to the end', async () => {
@@ -225,7 +225,7 @@ test('VSelect - tags', () => {
     })
 
     const input = wrapper.find('input')[0]
-    
+
     const change = jest.fn()
     wrapper.vm.$on('input', change)
 
@@ -238,7 +238,7 @@ test('VSelect - tags', () => {
     await wrapper.vm.$nextTick()
 
     expect(change).toBeCalledWith(['bar', 'foo'])
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should add tag with valid search value on blur', async () => {
@@ -266,6 +266,140 @@ test('VSelect - tags', () => {
     await wrapper.vm.$nextTick() // Second tick processes change after tag added
 
     expect(change).toBeCalledWith(['bar'])
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should be able to add a tag from user input after deleting a tag with delete', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        multiple: true,
+        tags: true,
+        value: ['foo', 'bar'],
+      }
+    })
+
+    let input = wrapper.find('input')[0]
+    const change = jest.fn()
+    wrapper.vm.$on('input', change)
+    wrapper.vm.focus()
+    await wrapper.vm.$nextTick()
+
+    input.trigger('keydown.left')
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.selectedIndex).toBe(1)
+    input.trigger('keydown.delete')
+    await wrapper.vm.$nextTick()
+    expect(change).toHaveBeenCalledWith(['foo'])
+    expect(wrapper.vm.selectedIndex).toBe(0)
+
+    // Must be reset for input to update
+    wrapper.vm.selectedIndex = -1
+    await wrapper.vm.$nextTick()
+
+    input.element.value = 'baz'
+    await wrapper.vm.$nextTick()
+    input.trigger('input')
+    await wrapper.vm.$nextTick()
+    input.trigger('keydown.enter')
+    await wrapper.vm.$nextTick()
+
+    expect(change).toBeCalledWith(['foo', 'baz'])
+    expect(wrapper.vm.selectedIndex).toBe(-1)
+
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should be able to add a tag from user input after clicking a deletable chip', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        chips: true,
+        clearable: true,
+        deletableChips: true,
+        multiple: true,
+        tags: true,
+        value: ['foo', 'bar']
+      }
+    })
+    await wrapper.vm.$nextTick()
+
+    const input = wrapper.find('input')[0]
+    const chip = wrapper.find('.chip')[1]
+    const close = chip.find('.chip__close')[0]
+
+    const change = jest.fn()
+    wrapper.vm.$on('input', change)
+    wrapper.vm.focus()
+    chip.trigger('click')
+    await wrapper.vm.$nextTick()
+    close.trigger('click')
+    await wrapper.vm.$nextTick()
+    expect(change).toHaveBeenCalledWith(['foo'])
+    expect(wrapper.vm.selectedIndex).toBe(-1)
+
+    input.element.value = 'baz'
+    await wrapper.vm.$nextTick()
+    input.trigger('input')
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.searchValue).toBe('baz')
+    input.trigger('keydown.enter')
+    await wrapper.vm.$nextTick()
+
+    expect(change).toBeCalledWith(['foo', 'baz'])
+    expect(wrapper.vm.selectedIndex).toBe(-1)
+
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should not change search when selecting an index', () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        chips: true,
+        multiple: true,
+        tags: true,
+        value: ['foo', 'bar']
+      }
+    })
+
+    const input = wrapper.find('input')[0]
+
+    input.trigger('focus')
+    expect(wrapper.vm.selectedIndex).toBe(-1)
+
+    input.trigger('keydown.left')
+    expect(wrapper.vm.selectedIndex).toBe(1)
+
+    input.element.value = 'fizz'
+    input.trigger('input')
+    expect(wrapper.vm.searchValue).toBe(null)
+
+    input.trigger('keydown.right')
+    expect(wrapper.vm.selectedIndex).toBe(-1)
+
+    input.element.value = 'fizz'
+    input.trigger('input')
+    expect(wrapper.vm.searchValue).toBe('fizz')
+
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should reset selected index when clicked', () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        items: ['foo']
+      }
+    })
+
+    const input = wrapper.find('input')[0]
+
+    wrapper.vm.selectedIndex = 0
+    input.trigger('focus')
+    expect(wrapper.vm.selectedIndex).toBe(0)
+    wrapper.trigger('click')
+    expect(wrapper.vm.selectedIndex).toBe(-1)
+
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 })

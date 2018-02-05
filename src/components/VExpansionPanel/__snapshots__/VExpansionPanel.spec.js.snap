@@ -1,0 +1,113 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VExpansionPanel.js should render an expanded component and match snapshot 1`] = `
+
+<ul class="expansion-panel">
+  <li tabindex="0"
+      class="expansion-panel__container"
+  >
+    <div class="expansion-panel__header">
+      <div>
+        header
+      </div>
+      <div class="header__icon">
+        <i aria-hidden="true"
+           class="icon material-icons"
+        >
+          keyboard_arrow_down
+        </i>
+      </div>
+    </div>
+    <div class="expansion-panel__body"
+         style="display: none;"
+    >
+      content
+    </div>
+  </li>
+</ul>
+
+`;
+
+exports[`VExpansionPanel.js should render an expanded component and match snapshot 2`] = `
+
+<ul class="expansion-panel">
+  <li tabindex="0"
+      class="expansion-panel__container expansion-panel__container--active"
+  >
+    <div class="expansion-panel__header">
+      <div>
+        header
+      </div>
+      <div class="header__icon">
+        <i aria-hidden="true"
+           class="icon material-icons"
+        >
+          keyboard_arrow_down
+        </i>
+      </div>
+    </div>
+    <div class="expansion-panel__body expand-transition-enter expand-transition-enter-active"
+         style="overflow: hidden; height: 0px; display: block;"
+    >
+      content
+    </div>
+  </li>
+</ul>
+
+`;
+
+exports[`VExpansionPanel.js should render component and match snapshot 1`] = `
+
+<ul class="expansion-panel">
+  <li tabindex="0"
+      class="expansion-panel__container"
+  >
+    <div class="expansion-panel__header">
+      <div>
+        header
+      </div>
+      <div class="header__icon">
+        <i aria-hidden="true"
+           class="icon material-icons"
+        >
+          keyboard_arrow_down
+        </i>
+      </div>
+    </div>
+    <div class="expansion-panel__body"
+         style="display: none;"
+    >
+      content
+    </div>
+  </li>
+</ul>
+
+`;
+
+exports[`VExpansionPanel.js should render component and match snapshot 2`] = `
+
+<ul class="expansion-panel">
+  <li tabindex="0"
+      class="expansion-panel__container expansion-panel__container--active"
+  >
+    <div class="expansion-panel__header">
+      <div>
+        header
+      </div>
+      <div class="header__icon">
+        <i aria-hidden="true"
+           class="icon material-icons"
+        >
+          keyboard_arrow_down
+        </i>
+      </div>
+    </div>
+    <div class="expansion-panel__body expand-transition-enter expand-transition-enter-active"
+         style="overflow: hidden; height: 0px; display: block;"
+    >
+      content
+    </div>
+  </li>
+</ul>
+
+`;

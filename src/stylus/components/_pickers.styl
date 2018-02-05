@@ -9,59 +9,74 @@ picker($material)
   .picker__body
     background: $material.picker.body
 
+dark(picker, 'picker')
 
 picker-title($material)
   .picker__title
     background: $material.picker.title
 
-dark(picker-title, 'picker')
-theme(picker, "picker")
+theme(picker-title, "picker")
 
 .picker
   border-radius: $card-border-radius
-  display: flex
-  flex-direction: column
-  width: 290px
   contain: layout style
+  display: inline-flex
+  flex-direction: column
+  vertical-align: top
 
   .card__row--actions
     border: none
     margin-top: -20px
 
-  &__title
-    color: #fff
-    border-top-left-radius: $card-border-radius
-    border-top-right-radius: $card-border-radius
-    height: 105px
-    padding: 16px
+.picker--full-width
+  display: flex
 
-  &__body
-    height: 290px
-    overflow: hidden
-    position: relative
+.picker__title
+  color: #fff
+  border-top-left-radius: $card-border-radius
+  border-top-right-radius: $card-border-radius
+  padding: 16px
 
-  &--landscape
-    flex-direction: row
-    flex-wrap: wrap
-    width: 500px
+.picker__title__btn
+  transition: $primary-transition
 
-    .picker__title
-      border-top-right-radius: 0
-      border-bottom-right-radius: 0
-      flex: 0 1 170px
-      width: 170px
-      height: auto
+  &.active
+    opacity: 1
+
+  &:not(.active)
+    opacity: .6
+    cursor: pointer
+
+    &:hover
+      opacity: 1
+
+.picker__body
+  height: auto
+  overflow: hidden
+  position: relative
+
+  flex: 1 0 auto
+  display: flex
+  flex-direction: column
+  align-items: center
+
+  > div
+    width: 100%
+
+    &.fade-transition-leave-active
       position: absolute
-      top: 0
-      left: 0
-      height: 100%
-      z-index: 1
 
-    .picker__body
-      flex: 1 0
-      width: 330px
-      margin-left: 170px
+.picker--landscape
+  .picker__title
+    border-top-right-radius: 0
+    border-bottom-right-radius: 0
+    width: 170px
+    position: absolute
+    top: 0
+    left: 0
+    height: 100%
+    z-index: 1
 
-    .card__row--actions
-      margin-left: 170px
-      width: 330px
+  .picker__body,
+  .picker__actions
+    margin-left: 170px

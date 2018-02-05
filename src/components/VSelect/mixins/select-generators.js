@@ -1,4 +1,5 @@
 import { getObjectValueByPath } from '../../../util/helpers'
+import { consoleWarn } from '../../../util/console'
 
 /**
  * Select generators
@@ -15,10 +16,13 @@ export default {
         props: {
           activator: this.$el,
           auto: this.auto,
+          attach: this.attach && `[data-uid="${this._uid}"]`,
           closeOnClick: false,
           closeOnContentClick: !this.isMultiple,
           contentClass: this.computedContentClass,
+          dark: this.dark,
           disabled: this.disabled,
+          light: this.light,
           maxHeight: this.maxHeight,
           nudgeTop: this.nudgeTop,
           offsetY: this.shouldOffset,
@@ -67,21 +71,23 @@ export default {
     genSelections () {
       if (this.hideSelections) return []
 
-      const children = []
-      const chips = this.chips
-      const slots = this.$scopedSlots.selection
-      const length = this.selectedItems.length
-      this.selectedItems.forEach((item, i) => {
-        if (slots) {
-          children.push(this.genSlotSelection(item, i))
-        } else if (chips) {
-          children.push(this.genChipSelection(item, i))
-        } else if (this.segmented) {
-          children.push(this.genSegmentedBtn(item, i))
-        } else {
-          children.push(this.genCommaSelection(item, i < length - 1, i))
-        }
-      })
+      let length = this.selectedItems.length
+      const children = new Array(length)
+
+      let genSelection
+      if (this.$scopedSlots.selection) {
+        genSelection = this.genSlotSelection
+      } else if (this.chips) {
+        genSelection = this.genChipSelection
+      } else if (this.segmented) {
+        genSelection = this.genSegmentedBtn
+      } else {
+        genSelection = this.genCommaSelection
+      }
+
+      while (length--) {
+        children[length] = genSelection(this.selectedItems[length], length, length === children.length - 1)
+      }
 
       return children
     },
@@ -119,26 +125,9 @@ export default {
         data.on = {
           ...this.genListeners(),
           input: e => {
+            if (this.selectedIndex > -1) return
+
             this.searchValue = this.unmaskText(e.target.value)
-          }
-        }
-
-        if (this.combobox) {
-          // When using the combobox
-          // update inputValue and
-          // set the menu status
-          data.on.blur = (e) => {
-            // If user clears input
-            // value will be falsey
-            // but not null
-            if (this.lazySearch == null ||
-              // If blur was caused by clicking
-              // a menu list tile, do nothing
-              (this.content && this.content.contains(e.relatedTarget)) ||
-              (this.$el && this.$el.contains(e.relatedTarget))
-            ) return
-
-            this.inputValue = this.lazySearch
           }
         }
 
@@ -151,7 +140,7 @@ export default {
     },
     genSegmentedBtn (item) {
       if (!item.text || !item.callback) {
-        console.warn('[Vuetify] Warn: When using the v-select component with \'segmented\' prop without a selection slot, items must contain both a text and callback property')
+        consoleWarn('When using \'segmented\' prop without a selection slot, items must contain both a text and callback property', this)
         return null
       }
 
@@ -206,14 +195,14 @@ export default {
         key: this.getValue(item)
       }, this.getText(item))
     },
-    genCommaSelection (item, comma, index) {
+    genCommaSelection (item, index, last) {
       return this.$createElement('div', {
         staticClass: 'input-group__selections__comma',
         'class': {
           'input-group__selections__comma--active': index === this.selectedIndex
         },
         key: JSON.stringify(this.getValue(item)) // Item may be an object
-      }, `${this.getText(item)}${comma ? ', ' : ''}`)
+      }, `${this.getText(item)}${last ? '' : ', '}`)
     },
     genList () {
       const children = this.menuItems.map(o => {
@@ -253,8 +242,8 @@ export default {
     genLabel () {
       const singleLine = this.singleLine || this.isDropdown
 
-      if (singleLine && this.isDirty ||
-        singleLine && this.isFocused && this.searchValue
+      if (singleLine &&
+        (this.isDirty || (this.isFocused && this.searchValue))
       ) return null
 
       const data = {}
@@ -292,9 +281,10 @@ export default {
       data.props.activeClass = Object.keys(this.addTextColorClassChecks()).join(' ')
 
       if (this.$scopedSlots.item) {
-        return this.$createElement('v-list-tile', data,
-          [this.$scopedSlots.item({ parent: this, item })]
-        )
+        const tile = this.$scopedSlots.item({ parent: this, item, tile: data })
+        return this.needsTile(tile)
+          ? this.$createElement('v-list-tile', data, [tile])
+          : tile
       }
 
       return this.$createElement('v-list-tile', data,

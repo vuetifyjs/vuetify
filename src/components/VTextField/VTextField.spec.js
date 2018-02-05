@@ -1,7 +1,7 @@
-import { test } from '~util/testing'
+import { test } from '@util/testing'
 import Vue from 'vue/dist/vue.common'
-import VTextField from '~components/VTextField'
-import VProgressLinear from '~components/VProgressLinear'
+import VTextField from '@components/VTextField'
+import VProgressLinear from '@components/VProgressLinear'
 
 test('VTextField.js', ({ mount }) => {
   it('should render component and match snapshot', () => {
@@ -288,7 +288,7 @@ test('VTextField.js', ({ mount }) => {
     input.trigger('blur')
     await wrapper.vm.$nextTick()
 
-    expect(change.mock.calls.length).toBe(0)
+    expect(change.mock.calls).toHaveLength(0)
   })
 
   it('should render component with async loading and match snapshot', () => {
@@ -350,5 +350,215 @@ test('VTextField.js', ({ mount }) => {
     wrapper.vm.blur()
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.internalChange).toBe(false)
+  })
+
+  it('should emit input when externally set value was modified internally', async () => {
+    let value = '33'
+    const input = jest.fn()
+    const wrapper = mount(VTextField, {
+      propsData: {
+        value,
+        mask: '##',
+        returnMaskedValue: true
+      }
+    })
+
+    wrapper.vm.$on('input', (v) => {
+      value = v
+    })
+    wrapper.vm.$on('input', input)
+
+    wrapper.setProps({ value: '4444' })
+    await wrapper.vm.$nextTick()
+
+    expect(value).toBe('44')
+    expect(input).toBeCalled()
+  })
+
+  it('should mask value if return-masked-value is true', async () => {
+    let value = '44'
+    const component = {
+      render (h) {
+        return h(VTextField, {
+          on: {
+            input: i => value = i
+          },
+          props: {
+            value,
+            returnMaskedValue: true,
+            mask: '#-#',
+          }
+        })
+      }
+    }
+
+    const wrapper = mount(component)
+    const input = wrapper.find('input')[0]
+
+    expect(value).toBe('4-4')
+
+    input.trigger('focus')
+    await wrapper.vm.$nextTick()
+    input.element.value = '33'
+    input.trigger('input')
+    await wrapper.vm.$nextTick()
+
+    expect(value).toBe('3-3')
+  })
+
+  it('should not mask value if return-masked-value is false', async () => {
+    let value = '44'
+    const component = {
+      render (h) {
+        return h(VTextField, {
+          on: {
+            input: i => value = i
+          },
+          props: {
+            value,
+            returnMaskedValue: false,
+            mask: '#-#',
+          }
+        })
+      }
+    }
+
+    const wrapper = mount(component)
+    const input = wrapper.find('input')[0]
+
+    expect(value).toBe('44')
+
+    input.trigger('focus')
+    await wrapper.vm.$nextTick()
+    input.element.value = '33'
+    input.trigger('input')
+    await wrapper.vm.$nextTick()
+
+    expect(value).toBe('33')
+  })
+
+  it('should use pre-defined mask if prop matches', async () => {
+    let value = '12311999'
+    const component = {
+      render (h) {
+        return h(VTextField, {
+          on: {
+            input: i => value = i
+          },
+          props: {
+            value,
+            returnMaskedValue: true,
+            mask: 'date',
+          }
+        })
+      }
+    }
+
+    const wrapper = mount(component)
+
+    expect(value).toBe('12/31/1999')
+  })
+
+  it('should allow switching mask', async () => {
+    const wrapper = mount(VTextField, {
+      propsData: {
+        mask: '#-#-#',
+        value: '1-2-3'
+      }
+    })
+
+    const input = wrapper.find('input')[0]
+
+    expect(input.element.value).toBe('1-2-3')
+
+    wrapper.setProps({ mask: '#.#.#'})
+    await wrapper.vm.$nextTick()
+
+    expect(input.element.value).toBe('1.2.3')
+
+    wrapper.setProps({ mask: '#,#' })
+    await wrapper.vm.$nextTick()
+
+    expect(input.element.value).toBe('1,2')
+  })
+
+  it('should calculate element height when using auto-grow prop', async () => {
+    let value = ''
+    const component = {
+      render (h) {
+        return h(VTextField, {
+          on: {
+            input: i => value = i
+          },
+          props: {
+            value,
+            multiLine: true,
+            autoGrow: true
+          }
+        })
+      }
+    }
+
+    const wrapper = mount(component)
+    const input = wrapper.find('textarea')[0]
+
+    input.trigger('focus')
+    await wrapper.vm.$nextTick()
+    input.element.value = 'this is a really long text that should hopefully make auto-grow kick in. maybe?'
+    input.trigger('input')
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect(input.element.style.getPropertyValue('height').length).not.toBe(0)
+  })
+
+  it('should match multi-line snapshot', () => {
+    const wrapper = mount(VTextField, {
+      propsData: {
+        multiLine: true
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should match textarea snapshot', () => {
+    const wrapper = mount(VTextField, {
+      propsData: {
+        textarea: true
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should match auto-grow snapshot', async () => {
+    const wrapper = mount(VTextField, {
+      propsData: {
+        textarea: true,
+        autoGrow: true
+      }
+    })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render no-resize the same if already auto-grow', () => {
+    const wrappers = [
+      { autoGrow:true, multiLine: true },
+      { autoGrow:true, textarea: true }
+    ].map(propsData => mount(VTextField,{propsData}))
+
+    wrappers.forEach(async wrapper => {
+      await wrapper.vm.$nextTick()
+      const html1 = wrapper.html()
+
+      wrapper.setProps({ noResize: true })
+      // will still pass without this, do not remove
+      await wrapper.vm.$nextTick()
+      const html2 = wrapper.html()
+
+      expect(html2).toBe(html1)
+    })
   })
 })

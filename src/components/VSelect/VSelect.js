@@ -1,6 +1,7 @@
-require('../../stylus/components/_text-fields.styl')
-require('../../stylus/components/_input-groups.styl')
-require('../../stylus/components/_select.styl')
+// Styles
+import '../../stylus/components/_text-fields.styl'
+import '../../stylus/components/_input-groups.styl'
+import '../../stylus/components/_select.styl'
 
 // Components
 import VBtn from '../VBtn'
@@ -22,6 +23,7 @@ import Dependent from '../../mixins/dependent'
 import Filterable from '../../mixins/filterable'
 import Input from '../../mixins/input'
 import Maskable from '../../mixins/maskable'
+import Soloable from '../../mixins/soloable'
 
 // Component level mixins
 import Autocomplete from './mixins/select-autocomplete'
@@ -70,6 +72,7 @@ export default {
     Maskable,
     Menu,
     Props,
+    Soloable,
     Watchers,
     // Input and Computed both
     // contain isDirty props
@@ -88,7 +91,6 @@ export default {
       lazySearch: null,
       isActive: false,
       menuIsActive: false,
-      searchTimeout: null,
       selectedIndex: -1,
       selectedItems: [],
       shouldBreak: false
@@ -116,6 +118,9 @@ export default {
   },
 
   methods: {
+    needsTile (tile) {
+      return tile.componentOptions == null || tile.componentOptions.tag !== 'v-list-tile'
+    },
     changeSelectedIndex (keyCode) {
       // backspace, left, right, delete
       if (![8, 37, 39, 46].includes(keyCode)) return
@@ -149,20 +154,31 @@ export default {
         this.selectedIndex = newIndex
       }
     },
+    closeConditional (e) {
+      return (
+        this.isActive &&
+        !!this.content &&
+        !this.content.contains(e.target) &&
+        !!this.$el &&
+        !this.$el.contains(e.target)
+      )
+    },
     filterDuplicates (arr) {
-      const values = arr.map(this.getValue)
-      return arr.filter((el, i) => i === values.indexOf(values[i]))
+      const uniqueValues = new Map()
+      for (let index = 0; index < arr.length; ++index) {
+        const item = arr[index]
+        const val = this.getValue(item)
+
+        !uniqueValues.has(val) && uniqueValues.set(val, item)
+      }
+      return Array.from(uniqueValues.values())
     },
     genDirectives () {
       return [{
         name: 'click-outside',
-        value: e => {
-          return (
-            !!this.content &&
-            !this.content.contains(e.target) &&
-            !!this.$el &&
-            !this.$el.contains(e.target)
-          )
+        value: () => (this.isActive = false),
+        args: {
+          closeConditional: this.closeConditional
         }
       }]
     },
@@ -172,14 +188,14 @@ export default {
 
       // Combobox is the single version
       // of a taggable select element
-      if (this.combobox) return (this.selectedItems = val ? [val] : [])
+      if (this.combobox) return (this.selectedItems = val != null ? [val] : [])
 
       let selectedItems = this.computedItems.filter(i => {
         if (!this.isMultiple) {
           return this.getValue(i) === this.getValue(val)
         } else {
           // Always return Boolean
-          return this.findExistingItem(i) > -1
+          return this.findExistingIndex(i) > -1
         }
       })
 
@@ -228,15 +244,13 @@ export default {
         }
       }
     },
-    findExistingItem (item) {
-      return this.inputValue.findIndex((i) => {
-        const a = this.getValue(i)
-        const b = this.getValue(item)
-
-        if (a !== Object(a)) return a === b
-
-        return this.compareObjects(a, b)
-      })
+    findExistingItem (val) {
+      const itemValue = this.getValue(val)
+      return this.items.find(i => this.valueComparator(this.getValue(i), itemValue))
+    },
+    findExistingIndex (item) {
+      const itemValue = this.getValue(item)
+      return this.inputValue.findIndex(i => this.valueComparator(this.getValue(i), itemValue))
     },
     selectItem (item) {
       if (!this.isMultiple) {
@@ -245,15 +259,16 @@ export default {
       } else {
         const selectedItems = []
         const inputValue = this.inputValue.slice()
-        const i = this.findExistingItem(item)
+        const i = this.findExistingIndex(item)
 
-        i !== -1 && inputValue.splice(i, 1) || inputValue.push(item)
-        this.inputValue = inputValue.map((i) => {
+        i !== -1 ? inputValue.splice(i, 1) : inputValue.push(item)
+        this.inputValue = inputValue.map(i => {
           selectedItems.push(i)
           return this.returnObject ? i : this.getValue(i)
         })
 
         this.selectedItems = selectedItems
+        this.selectedIndex = -1
       }
 
       this.searchValue = !this.isMultiple &&
@@ -289,6 +304,7 @@ export default {
     const data = {
       attrs: {
         tabindex: this.isAutocomplete || this.disabled ? -1 : this.tabindex,
+        'data-uid': this._uid,
         ...(this.isAutocomplete ? null : this.$attrs),
         role: this.isAutocomplete ? null : 'combobox'
       }

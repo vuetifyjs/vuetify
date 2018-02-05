@@ -1,20 +1,10 @@
-import VApp from '~components/VApp'
-import VNavigationDrawer from '~components/VNavigationDrawer'
-import { test } from '~util/testing'
-import { mount } from 'avoriaz'
+import VApp from '@components/VApp'
+import VNavigationDrawer from '@components/VNavigationDrawer'
+import { test, resizeWindow } from '@util/testing'
 
-const resizeWindow = (width = global.innerWidth, height = global.innerHeight) => {
-  global.innerWidth = width
-  global.innerHeight = height
-  global.dispatchEvent(new Event('resize'))
-  return new Promise(resolve => setTimeout(resolve, 200))
-}
+beforeEach(() => resizeWindow(1920, 1080))
 
-beforeEach(() => {
-  return resizeWindow(1920, 1080)
-})
-
-test('VNavigationDrawer', () => {
+test('VNavigationDrawer', ({ mount }) => {
   // v-app is needed to initialise $vuetify.application
   const app = mount(VApp)
 
@@ -124,6 +114,7 @@ test('VNavigationDrawer', () => {
     const wrapper = mount(VNavigationDrawer, { propsData: {
       app: true
     }})
+    await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.$vuetify.application.left).toBe(300)
 
@@ -139,6 +130,7 @@ test('VNavigationDrawer', () => {
     const wrapper = mount(VNavigationDrawer, { propsData: {
       app: true
     }})
+    await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.$vuetify.application.left).toBe(0)
 
@@ -153,6 +145,7 @@ test('VNavigationDrawer', () => {
     const wrapper = mount(VNavigationDrawer, { propsData: {
       app: true
     }})
+    await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.$vuetify.application.left).toBe(300)
 
@@ -193,6 +186,7 @@ test('VNavigationDrawer', () => {
       fixed: true,
       value: true
     }})
+    await wrapper.vm.$nextTick()
 
     wrapper.vm.$on('input', input)
     expect(wrapper.vm.$vuetify.application.left).toBe(300)

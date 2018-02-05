@@ -1,4 +1,19 @@
 /**
+ * Default delimiter RegExp
+ *
+ * @type {RegExp}
+ */
+export const defaultDelimiters = /[-!$%^&*()_+|~=`{}[\]:";'<>?,./\\ ]/
+
+/**
+ *
+ * @param {String} char
+ *
+ * @return {Boolean}
+ */
+export const isMaskDelimiter = char => char && defaultDelimiters.test(char)
+
+/**
  * Mask keys
  *
  * @type {Object}
@@ -29,13 +44,6 @@ const allowedMasks = {
 }
 
 /**
- * Default delimiter RegExp
- *
- * @type {RegExp}
- */
-export const defaultDelimiters = /[-!$%^&*()_+|~=`{}\[\]:";'<>?,.\/\\ ]/
-
-/**
  * Is Character mask
  *
  * @param  {String} char
@@ -57,14 +65,6 @@ const convert = (mask, char) => {
 }
 
 /**
- *
- * @param {String} char
- *
- * @return {Boolean}
- */
-export const isMaskDelimiter = char => char && char.match(defaultDelimiters)
-
-/**
  * Mask Validation
  *
  * @param  {String} mask
@@ -80,8 +80,8 @@ const maskValidates = (mask, char) => {
 /**
  * Mask Text
  *
- * Takes an array of characters
- * and returns a compiled str
+ * Takes a string or an array of characters
+ * and returns a masked string
  *
  * @param {*} text
  * @param {Array|String} masked
@@ -134,6 +134,6 @@ export const maskText = (text, masked, dontFillMaskBlanks) => {
  *
  * @return {String}
  */
-export const unmaskText = (text) => {
+export const unmaskText = text => {
   return text ? String(text).replace(new RegExp(defaultDelimiters, 'g'), '') : text
 }

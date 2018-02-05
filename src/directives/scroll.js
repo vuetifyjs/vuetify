@@ -1,9 +1,7 @@
 function inserted (el, binding) {
-  const callback = typeof binding.value === 'function'
-    ? binding.value
-    : binding.value.callback
-  const options = binding.value.options || { passive: true }
-  let target = binding.value.target || window
+  const callback = binding.value
+  const options = binding.options || { passive: true }
+  let target = binding.arg || window
   if (target === 'undefined') return
 
   if (target !== window) {
@@ -20,6 +18,8 @@ function inserted (el, binding) {
 }
 
 function unbind (el, binding) {
+  if (!el._onScroll) return
+
   const { callback, options, target } = el._onScroll
 
   target.removeEventListener('scroll', callback, options)

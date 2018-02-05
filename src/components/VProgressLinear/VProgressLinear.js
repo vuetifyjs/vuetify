@@ -1,4 +1,4 @@
-require('../../stylus/components/_progress-linear.styl')
+import '../../stylus/components/_progress-linear.styl'
 
 import Colorable from '../../mixins/colorable'
 
@@ -71,22 +71,13 @@ export default {
 
       return this.value * 100 / this.bufferValue
     },
-    bufferStyles () {
-      const styles = {}
-
-      if (!this.active) {
-        styles.height = 0
-      }
-
-      return styles
-    },
     backgroundStyle () {
       const backgroundOpacity = this.backgroundOpacity == null
         ? (this.backgroundColor ? 1 : 0.3)
         : parseFloat(this.backgroundOpacity)
 
       return {
-        height: this.active ? 'auto' : 0,
+        height: this.active ? `${this.height}px` : 0,
         opacity: backgroundOpacity,
         width: `${this.bufferValue}%`
       }

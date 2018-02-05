@@ -1,4 +1,4 @@
-require('../../stylus/components/_bottom-sheets.styl')
+import '../../stylus/components/_bottom-sheets.styl'
 
 import VDialog from '../VDialog/VDialog'
 
@@ -8,6 +8,7 @@ export default {
   props: {
     disabled: Boolean,
     fullWidth: Boolean,
+    hideOverlay: Boolean,
     inset: Boolean,
     lazy: Boolean,
     maxWidth: {

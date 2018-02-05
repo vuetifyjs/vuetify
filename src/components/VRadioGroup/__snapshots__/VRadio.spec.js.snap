@@ -10,13 +10,11 @@ exports[`VRadio.vue should not render aria-label attribute with no label value o
   </label>
   <div class="input-group__input">
     <i aria-hidden="true"
-       class="material-icons icon icon--selection-control"
+       class="icon icon--selection-control material-icons"
     >
       radio_button_unchecked
     </i>
-    <div class="input-group--selection-controls__ripple"
-         data-ripple="true"
-    >
+    <div class="input-group--selection-controls__ripple">
     </div>
     <input name="name"
            type="radio"
@@ -39,13 +37,11 @@ exports[`VRadio.vue should render aria-label attribute with label value on input
   </label>
   <div class="input-group__input">
     <i aria-hidden="true"
-       class="material-icons icon icon--selection-control"
+       class="icon icon--selection-control material-icons"
     >
       radio_button_unchecked
     </i>
-    <div class="input-group--selection-controls__ripple"
-         data-ripple="true"
-    >
+    <div class="input-group--selection-controls__ripple">
     </div>
     <input name="name"
            type="radio"
@@ -66,13 +62,11 @@ exports[`VRadio.vue should render proper input name 1`] = `
   </label>
   <div class="input-group__input">
     <i aria-hidden="true"
-       class="material-icons icon icon--selection-control"
+       class="icon icon--selection-control material-icons"
     >
       radio_button_unchecked
     </i>
-    <div class="input-group--selection-controls__ripple"
-         data-ripple="true"
-    >
+    <div class="input-group--selection-controls__ripple">
     </div>
     <input name="name"
            type="radio"
@@ -93,13 +87,11 @@ exports[`VRadio.vue should render role and aria-checked attributes on input grou
   </label>
   <div class="input-group__input">
     <i aria-hidden="true"
-       class="material-icons icon icon--selection-control"
+       class="icon icon--selection-control material-icons"
     >
       radio_button_unchecked
     </i>
-    <div class="input-group--selection-controls__ripple"
-         data-ripple="true"
-    >
+    <div class="input-group--selection-controls__ripple">
     </div>
     <input name="name"
            type="radio"

@@ -17,6 +17,21 @@ input-group($material)
     .input-group__input
       border: 2px solid $material.text.secondary
 
+  &.input-group--solo
+    background: $material.cards
+
+  &.input-group--solo-inverted
+    background: rgba($material.inputs.solo-inverted)
+
+    &.input-group--focused
+      background: rgba($material.inputs.solo-inverted-focused)
+
+      .input-group__append-icon,
+      .input-group__prepend-icon,
+      input,
+      label
+          color: $material.inputs.solo-inverted-focused-text
+
   // This is specific for selects
   &.input-group--dirty
     .input-group__selections__comma
@@ -93,6 +108,10 @@ theme(input-group, "input-group")
   outline: none
   transition: box-shadow $primary-transition
 
+/** Input */
+.input-group
+  input
+    width: 100%
 
 /** Label */
 .input-group
@@ -147,7 +166,6 @@ theme(input-group, "input-group")
 
   .input-group__append-icon
     padding: 0 6px
-    transition: .3s $transition.ease-in-out
 
   .input-group__append-icon,
   .input-group__prepend-icon
@@ -165,10 +183,10 @@ theme(input-group, "input-group")
 
   // Solo
   &.input-group--solo
-    background: #fff
     min-height: 46px
     border-radius: $card-border-radius
     padding: 0
+    transition: $primary-transition
     elevation(2)
 
     label
@@ -184,6 +202,8 @@ theme(input-group, "input-group")
       display: none
 
   &--disabled
+    pointer-events: none
+
     .input-group__details:before
       background-color: transparent
       background-position: bottom
@@ -288,9 +308,9 @@ theme(input-group, "input-group")
 
 /** Error */
 .input-group
-  .input-group__error
+  &__error
     color: inherit
-    flex: 1 0
+    flex: 1 0 100%
     transition: .3s $transition.fast-in-fast-out
 
 /** Types */

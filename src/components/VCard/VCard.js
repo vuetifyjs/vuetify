@@ -1,4 +1,4 @@
-require('../../stylus/components/_cards.styl')
+import '../../stylus/components/_cards.styl'
 
 import Colorable from '../../mixins/colorable'
 import Routable from '../../mixins/routable'
@@ -22,7 +22,8 @@ export default {
       type: String,
       default: 'div'
     },
-    tile: Boolean
+    tile: Boolean,
+    width: [String, Number]
   },
 
   computed: {
@@ -45,6 +46,10 @@ export default {
 
       if (this.img) {
         style.background = `url("${this.img}") center center / cover no-repeat`
+      }
+
+      if (this.width) {
+        style.width = isNaN(this.width) ? this.width : `${this.width}px`
       }
 
       return style

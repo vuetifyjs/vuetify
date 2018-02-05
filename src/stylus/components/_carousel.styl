@@ -7,18 +7,8 @@
   overflow: hidden
   elevation(2)
 
-  &__item
-    display: flex
-    align-items: center
-    justify-content: center
-    flex: 1 0 100%
-    height: 100%
-    width: 100%
-    background-size: cover
-    background-position: center center
-    transition: .2s ease-out
-
-  &__left, &__right
+  &__left,
+  &__right
     position: absolute
     top: 50%
     z-index: 1
@@ -57,7 +47,7 @@
 
     &__item
       color: #FFFFFF
-      margin: 0 1rem !important
+      margin: 0 8px !important
 
       i
         opacity: .5
@@ -67,7 +57,6 @@
         i
           opacity: 1
           vertical-align: middle
-          font-size: 2rem !important
 
       &:hover
         background: none

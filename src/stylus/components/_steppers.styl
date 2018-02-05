@@ -64,6 +64,7 @@ theme(stepper, "stepper")
 
 .stepper
   &__header
+    height: 72px
     align-items: stretch
     display: flex
     flex-wrap: wrap
@@ -146,10 +147,9 @@ theme(stepper, "stepper")
 
 .stepper
   &__content
-    top: initial
-    bottom: 0
-    padding: 16px
-    flex: 1
+    top: 0
+    padding: 24px 24px 16px 24px
+    flex: 1 0 auto
     // Chrome has an issue with overflow hidden for rendering
     // Originally used translateZ but this messes up fixed
     // elements within the stepper
@@ -157,12 +157,12 @@ theme(stepper, "stepper")
     // overflow: hidden
     width: 100%
 
-    .btn
-      margin-left: 0
+    > .btn
+      margin: 24px 8px 8px 0
 
   &--is-booted
     .stepper__content, .stepper__wrapper
-      transition: .4s $transition.ease-in-out
+      transition: .3s $transition.swing
 
 .stepper
   &--vertical
@@ -181,6 +181,8 @@ theme(stepper, "stepper")
 
   &--alt-labels
     .stepper__header
+      height: auto
+
       .divider
         margin: 35px -67px 0
         align-self: flex-start
@@ -196,7 +198,7 @@ theme(stepper, "stepper")
 
     .stepper__step__step
       margin-right: 0
-      margin-bottom: 12px
+      margin-bottom: 11px
 
 @media $display-breakpoints.sm-and-down
   .stepper:not(.stepper--vertical)

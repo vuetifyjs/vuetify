@@ -10,6 +10,7 @@ export default {
   computed: {
     classes () {
       const classes = {
+        ...this.genSoloClasses(),
         'input-group--text-field input-group--select': true,
         'input-group--auto': this.auto,
         'input-group--overflow': this.overflow,
@@ -19,9 +20,9 @@ export default {
         'input-group--single-line': this.singleLine || this.isDropdown,
         'input-group--multi-line': this.multiLine,
         'input-group--chips': this.chips,
-        'input-group--solo': this.solo,
         'input-group--multiple': this.multiple,
-        'input-group--open': this.menuIsVisible
+        'input-group--open': this.menuIsVisible,
+        'input-group--select--selecting-index': this.selectedIndex > -1
       }
 
       if (this.hasError) {
@@ -52,7 +53,9 @@ export default {
      * @return {Number}
      */
     currentRange () {
-      return this.getText(this.selectedItem || '').length
+      if (this.selectedItem == null) return 0
+
+      return this.getText(this.selectedItem).toString().length
     },
     filteredItems () {
       // If we are not actively filtering
@@ -86,7 +89,7 @@ export default {
         (this.isAutocomplete && this.searchValue)
     },
     isDropdown () {
-      return this.segmented || this.overflow || this.editable || this.solo
+      return this.segmented || this.overflow || this.editable || this.isSolo
     },
     isMultiple () {
       return this.multiple || this.tags
@@ -107,7 +110,7 @@ export default {
     nudgeTop () {
       let nudgeTop = -18
 
-      if (this.solo) nudgeTop = 0
+      if (this.isSolo) nudgeTop = 0
       else if (this.shouldOffset) {
         nudgeTop += 44
 
@@ -121,16 +124,12 @@ export default {
       get () { return this.lazySearch },
       set (val) {
         if (!this.isAutocomplete ||
-          this.selectedIndex > -1
+          (!this.multiple && this.selectedIndex > -1)
         ) return
 
         this.lazySearch = val
 
-        clearTimeout(this.searchTimeout)
-
-        this.searchTimeout = setTimeout(() => {
-          this.$emit('update:searchInput', val)
-        }, this.debounceSearch)
+        this.$emit('update:searchInput', val)
       }
     },
     selectedItem () {
@@ -138,7 +137,7 @@ export default {
 
       return this.selectedItems.find(i => (
         this.getValue(i) === this.getValue(this.inputValue)
-      )) || null
+      ))
     },
     shouldOffset () {
       return this.isAutocomplete || this.isDropdown

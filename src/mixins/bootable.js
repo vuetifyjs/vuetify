@@ -7,6 +7,8 @@
  * Otherwise can be set manually
  */
 export default {
+  name: 'bootable',
+
   data: () => ({
     isBooted: false
   }),
@@ -23,7 +25,7 @@ export default {
 
   methods: {
     showLazyContent (content) {
-      return (this.isBooted || !this.lazy)
+      return (this.isBooted || !this.lazy || this.isActive)
         ? content
         : null
     }
