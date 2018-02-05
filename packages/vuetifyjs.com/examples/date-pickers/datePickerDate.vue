@@ -1,6 +1,6 @@
 <template>
-  <v-layout>
-    <v-flex xs6>
+  <v-layout row wrap>
+    <v-flex xs12 sm6 class="my-2 px-1">
       <v-date-picker
         ref="picker"
         v-model="date"
@@ -8,7 +8,7 @@
         full-width
       ></v-date-picker>
     </v-flex>
-    <v-flex xs6 class="pl-2">
+    <v-flex xs12 sm6 class="my-2 px-1">
       <div class="title">Month news ({{ pickerDate || 'change month...' }})</div>
       <div class="subheading">Change month to see other news</div>
       <ul class="ma-3">
