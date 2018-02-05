@@ -13,7 +13,7 @@ export default {
       desc: 'Вы также можете применить свой собственный переход.',
       uninverted: true
     },
-    customDelimiter: {
+    customIcons: {
       header: 'Пользовательский разделитель',
       desc: 'Вы также можете изменить значок карусельного разделителя.',
       uninverted: true
@@ -25,8 +25,8 @@ export default {
     }
   }],
   props: {
-    appendIcon: 'Mixins.Input.props.appendIcon',
-    prependIcon: 'Mixins.Input.props.prependIcon',
+    nextIcon: 'Mixins.Input.props.appendIcon',
+    prevIcon: 'Mixins.Input.props.prependIcon',
     cycle: 'Определяет, должна ли карусель перемещаться по изображениям',
     delimiterIcon: 'Устанавливает значок для карусельного разделителя',
     hideControls: 'Скрывает элементы управления навигацией',

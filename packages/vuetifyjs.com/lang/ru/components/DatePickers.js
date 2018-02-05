@@ -85,8 +85,8 @@ export default {
       min: 'Minimum allowed date/month',
       max: 'Maximum allowed date/month',
       pickerDate: 'Displayed year/month',
-      appendIcon: 'Устанавливает иконку для кнопки следующего месяца/года',
-      prependIcon: 'Устанавливает иконку для кнопки предыдущий месяц/год',
+      nextIcon: 'Устанавливает иконку для кнопки следующего месяца/года',
+      prevIcon: 'Устанавливает иконку для кнопки предыдущий месяц/год',
       readonly: 'Makes the picker readonly (doesnt\'t allow to select new date or navigate through months/years)',
       scrollable: 'Allows changing displayed month with mouse scroll',
       showCurrent: 'Toggles visibility of the current date/month outline or shows the provided date/month as a current'

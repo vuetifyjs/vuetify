@@ -19,6 +19,10 @@ export default {
       header: 'Round',
       desc: 'The alternate style for pagination is circle pages.'
     },
+    icons: {
+      header: 'Icons',
+      desc: 'Previous and next page icons can be customized with `prev-icon` and `next-icon` props.'
+    },
     disabled: {
       header: 'Disabled',
       desc: 'Pagination items can be manually deactivated.'

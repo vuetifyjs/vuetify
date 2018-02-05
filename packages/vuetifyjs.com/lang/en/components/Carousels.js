@@ -13,9 +13,9 @@ export default {
       desc: 'You can also apply your own custom transition.',
       uninverted: true
     },
-    customDelimiter: {
-      header: 'Custom delimiter',
-      desc: 'You can also change the icon for the carousel delimiter.',
+    customIcons: {
+      header: 'Custom icons',
+      desc: 'You can also change the icon for the carousel delimiter and previous/next icons.',
       uninverted: true
     },
     hideControls: {
@@ -25,8 +25,8 @@ export default {
     }
   }],
   props: {
-    appendIcon: 'Mixins.Input.props.appendIcon',
-    prependIcon: 'Mixins.Input.props.prependIcon',
+    nextIcon: 'Mixins.Input.props.appendIcon',
+    prevIcon: 'Mixins.Input.props.prependIcon',
     cycle: 'Determines if carousel should cycle through images',
     delimiterIcon: 'Sets icon for carousel delimiter',
     hideControls: 'Hides the navigation controls',

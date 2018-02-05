@@ -19,6 +19,10 @@ export default {
       header: 'Круглые',
       desc: 'Альтернативный стиль для разбивки на страницы - это круглые страницы.'
     },
+    icons: {
+      header: 'Icons',
+      desc: 'Previous and next page icons can be customized with `prev-icon` and `next-icon` props.'
+    },
     disabled: {
       header: 'Не активные',
       desc: 'Отключить элементы разбиения на страницы можно вручную отключить.'

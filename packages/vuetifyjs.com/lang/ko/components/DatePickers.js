@@ -105,8 +105,8 @@ export default {
       min: '최소 날짜/월',
       max: '최대 날짜/월',
       pickerDate: '표시되는 년/월',
-      appendIcon: '다음 달/년 버튼의 아이콘',
-      prependIcon: '이전 달/년 버튼의 아이콘',
+      nextIcon: '다음 달/년 버튼의 아이콘',
+      prevIcon: '이전 달/년 버튼의 아이콘',
       readonly: '읽기전용으로 만듬 (새로운 날짜를 선택하거나 다른 년/월로 이동할 수 없음)',
       scrollable: '마우스 스크롤로 월을 바꿈.',
       showCurrent: '현재 날짜/월이나 현재 날짜/월로 지정된 날짜/월이 outline으로 표시될지 결정'
