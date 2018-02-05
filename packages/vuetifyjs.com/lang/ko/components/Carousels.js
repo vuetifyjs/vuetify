@@ -13,7 +13,7 @@ export default {
       desc: '사용자 커스텀 트랜지션을 적용할 수 있습니다.',
       uninverted: true
     },
-    customDelimiter: {
+    customIcons: {
       header: '커스텀 구분자 (Custom delimiter)',
       desc: '캐러셀의 구분자로 아이콘도 쓸 수 있습니다..',
       uninverted: true
@@ -25,8 +25,8 @@ export default {
     }
   }],
   props: {
-    appendIcon: 'Mixins.Input.props.appendIcon',
-    prependIcon: 'Mixins.Input.props.prependIcon',
+    nextIcon: 'Mixins.Input.props.appendIcon',
+    prevIcon: 'Mixins.Input.props.prependIcon',
     cycle: '케러솔의 이미지가 순환할 것인지 정합니다.',
     delimiterIcon: '아이콘을 케러설 구분자(delimiter)로 지정합니다.',
     hideControls: '내비게이션 컨트롤러를 숨깁니다',

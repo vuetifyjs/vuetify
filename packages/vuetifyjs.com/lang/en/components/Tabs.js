@@ -55,13 +55,13 @@ export default {
     },
     icons: {
       header: 'Custom icons',
-      desc: '**prepend-icon** and **append-icon** can be used for applying custom pagination icons.'
+      desc: '**prev-icon** and **next-icon** can be used for applying custom pagination icons.'
     }
   }],
   props: {
     alignWithTitle: 'Make `v-tabs` lined up with the toolbar title',
-    prependIcon: 'Left pagination icon',
-    appendIcon: 'Right pagination icon',
+    prevIcon: 'Left pagination icon',
+    nextIcon: 'Right pagination icon',
     right: 'Aligns tabs to the right'
   }
 }

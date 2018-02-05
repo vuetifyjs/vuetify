@@ -17,6 +17,10 @@ export default {
       desc: '확장패널은 `popout` 과 `inset` prop과 함께 두가지 다른 형태로 활성화 됩니다.',
       inverted: true
     },
+    customIcons: {
+      header: 'Custom icon',
+      desc: 'Expand action icon can be customized with `expand-icon` prop.'
+    },
     focusable: {
       header: '포커스 가능 (Focusable)',
       desc: '`focusable` prop으로 확장패널 헤더의 포커스 가능 여부를 조절합니다.',
@@ -31,7 +35,8 @@ export default {
       popout: '확장패널을 팝업(popup) 스타일로 엽니다.'
     },
     'v-expansion-panel-content': {
-      hideActions: '컨텐층 헤더의 확장 아이콘을 숨깁니다.'
+      hideActions: '컨텐층 헤더의 확장 아이콘을 숨깁니다.',
+      expandIcon: 'Set the expand action icon'
     }
   }
 }

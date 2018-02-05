@@ -17,6 +17,10 @@ export default {
       desc: 'Панель расширения также имеет два альтернативных варианта, которые вы можете активировать с помощью `popout` и `inset`.',
       inverted: true
     },
+    customIcons: {
+      header: 'Custom icon',
+      desc: 'Expand action icon can be customized with `expand-icon` prop.'
+    },
     focusable: {
       header: 'Фокусируемый',
       desc: 'На заголовок панели можно сделать фокус с помощью свойства `focusable`.',
@@ -31,7 +35,8 @@ export default {
       popout: 'Открывает панель расширения с помощью всплывающего стиля'
     },
     'v-expansion-panel-content': {
-      hideActions: 'Скрыть иконку разворота в заголовке содержимого'
+      hideActions: 'Скрыть иконку разворота в заголовке содержимого',
+      expandIcon: 'Set the expand action icon'
     }
   }
 }

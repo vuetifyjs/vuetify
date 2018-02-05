@@ -5,8 +5,8 @@
         type="month"
         v-model="picker"
         year-icon="mdi-calendar-blank"
-        prepend-icon="mdi-skip-previous"
-        append-icon="mdi-skip-next"
+        prev-icon="mdi-skip-previous"
+        next-icon="mdi-skip-next"
       ></v-date-picker>
     </v-flex>
   </v-layout>

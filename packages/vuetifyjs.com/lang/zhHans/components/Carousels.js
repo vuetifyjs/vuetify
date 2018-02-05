@@ -13,7 +13,7 @@ export default {
       desc: '您也可以应用您自己的自定义过渡。',
       uninverted: true
     },
-    customDelimiter: {
+    customIcons: {
       header: '自定义分隔符',
       desc: '您也可以更改轮播分隔符的图标。',
       uninverted: true
@@ -25,8 +25,8 @@ export default {
     }
   }],
   props: {
-    appendIcon: 'Mixins.Input.props.appendIcon',
-    prependIcon: 'Mixins.Input.props.prependIcon',
+    nextIcon: 'Mixins.Input.props.appendIcon',
+    prevIcon: 'Mixins.Input.props.prependIcon',
     cycle: '指定轮播是否应循环显示图像',
     delimiterIcon: '设置轮播分隔符的图标',
     hideControls: '隐藏导航控件',

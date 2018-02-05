@@ -17,6 +17,10 @@ export default {
       desc: 'The expansion panel also has two alternative designs you can activate with the props `popout` and `inset`.',
       inverted: true
     },
+    customIcons: {
+      header: 'Custom icon',
+      desc: 'Expand action icon can be customized with `expand-icon` prop.'
+    },
     focusable: {
       header: 'Focusable',
       desc: 'The expansion panel headers can be made focusable with the prop `focusable`.',
@@ -31,7 +35,8 @@ export default {
       popout: 'Makes the expansion panel open with an popout style'
     },
     'v-expansion-panel-content': {
-      hideActions: 'Hide the expand icon in the content header'
+      hideActions: 'Hide the expand icon in the content header',
+      expandIcon: 'Set the expand action icon'
     }
   }
 }

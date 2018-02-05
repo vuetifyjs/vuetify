@@ -3,8 +3,8 @@
     dark
     color="cyan"
     show-arrows
-    prepend-icon="mdi-arrow-left-bold-box-outline"
-    append-icon="mdi-arrow-right-bold-box-outline"
+    prev-icon="mdi-arrow-left-bold-box-outline"
+    next-icon="mdi-arrow-right-bold-box-outline"
   >
     <v-tabs-slider color="yellow"></v-tabs-slider>
     <v-tab

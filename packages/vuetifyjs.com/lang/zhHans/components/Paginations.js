@@ -19,6 +19,10 @@ export default {
       header: '圆形',
       desc: '分页的另一种分割是圆形页面按钮'
     },
+    icons: {
+      header: 'Icons',
+      desc: 'Previous and next page icons can be customized with `prev-icon` and `next-icon` props.'
+    },
     disabled: {
       header: '禁用',
       desc: '分页按钮可以手动禁用。'

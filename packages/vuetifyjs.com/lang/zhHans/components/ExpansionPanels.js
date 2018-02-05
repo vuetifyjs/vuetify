@@ -17,6 +17,10 @@ export default {
       desc: '扩展面板还有两种可以用属性`popout`和`inset`激活的替代设计',
       inverted: true
     },
+    customIcons: {
+      header: 'Custom icon',
+      desc: 'Expand action icon can be customized with `expand-icon` prop.'
+    },
     focusable: {
       header: '调焦',
       desc: '扩展面板头部可以通过`focusable`属性进行调焦。',
@@ -31,7 +35,8 @@ export default {
       popout: '使扩展面板以弹出的样式打开'
     },
     'v-expansion-panel-content': {
-      hideActions: '隐藏内容标题中的展开图标'
+      hideActions: '隐藏内容标题中的展开图标',
+      expandIcon: 'Set the expand action icon'
     }
   }
 }

@@ -51,13 +51,13 @@ export default {
     },
     icons: {
       header: '自定义图标',
-      desc: '**prepend-icon**和**append-icon**可以用来设置分页器的自定义图标'
+      desc: '**prev-icon**和**next-icon**可以用来设置分页器的自定义图标'
     }
   }],
   props: {
     alignWithTitle: '让`v-tabs`与工具栏标题对齐',
-    prependIcon: '左分页图标',
-    appendIcon: '右分页图标',
+    prevIcon: '右分页图标',
+    nextIcon: '左分页图标',
     right: '将选项向右侧对齐'
   }
 }
