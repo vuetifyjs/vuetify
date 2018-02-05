@@ -18,7 +18,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
     </div>
   </div>
   <div class="picker__body"
-       style="width: 330px;"
+       style="width: 290px;"
   >
     <div>
       <div class="date-picker-header">
@@ -389,7 +389,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
     </div>
   </div>
   <div class="picker__body"
-       style="width: 330px;"
+       style="width: 290px;"
   >
     <div>
       <div class="date-picker-header">
@@ -760,7 +760,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
     </div>
   </div>
   <div class="picker__body"
-       style="width: 330px;"
+       style="width: 290px;"
   >
     <div>
       <div class="date-picker-header">
@@ -1142,7 +1142,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
     </div>
   </div>
   <div class="picker__body"
-       style="width: 330px;"
+       style="width: 290px;"
   >
     <div>
       <div class="date-picker-header">
@@ -1546,7 +1546,7 @@ exports[`VDatePicker.js should render component with min/max props 1`] = `
     </div>
   </div>
   <div class="picker__body"
-       style="width: 330px;"
+       style="width: 290px;"
   >
     <div>
       <div class="date-picker-header">
@@ -1944,7 +1944,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
     </div>
   </div>
   <div class="picker__body"
-       style="width: 330px;"
+       style="width: 290px;"
   >
     <div class="fade-transition-leave fade-transition-leave-active">
       <div class="date-picker-header">
@@ -2508,7 +2508,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
     </div>
   </div>
   <div class="picker__body"
-       style="width: 330px;"
+       style="width: 290px;"
   >
     <div class="fade-transition-leave fade-transition-leave-active">
       <div class="date-picker-header">
@@ -3081,7 +3081,7 @@ exports[`VDatePicker.js should render readonly picker 1`] = `
     </div>
   </div>
   <div class="picker__body"
-       style="width: 330px;"
+       style="width: 290px;"
   >
     <div style="pointer-events: none;">
       <div class="date-picker-header">
