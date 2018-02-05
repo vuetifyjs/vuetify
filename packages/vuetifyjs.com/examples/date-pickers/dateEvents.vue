@@ -1,15 +1,17 @@
 <template>
   <v-layout justify-space-between wrap>
-    <v-flex xs12 sm6>
+    <v-flex xs12 sm6 class="my-3">
       <div class="subheading">Defined by array</div>
       <v-date-picker
+        v-model="date1"
         event-color="green lighten-1"
         :events="arrayEvents"
       ></v-date-picker>
     </v-flex>
-    <v-flex xs12 sm6>
+    <v-flex xs12 sm6 class="my-3">
       <div class="subheading">Defined by function</div>
       <v-date-picker
+        v-model="date2"
         :event-color="date => date[9] % 2 ? 'red' : 'yellow'"
         :events="functionEvents"
       ></v-date-picker>
@@ -20,7 +22,9 @@
 <script>
   export default {
     data: () => ({
-      arrayEvents: null
+      arrayEvents: null,
+      date1: null,
+      date2: null
     }),
 
     mounted () {
