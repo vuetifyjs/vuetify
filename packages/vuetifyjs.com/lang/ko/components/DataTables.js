@@ -43,6 +43,10 @@ export default {
       header: '검색과 "검색결과 없음"(no-results) 슬롯',
       desc: '`search` prop으로 데이터를 필터링 할 수 있습니다.'
     },
+    customIcons: {
+      header: 'Custom icons',
+      desc: 'Previous/next pagination icons and sort icon can be customized with **prev-icon**, **next-icon** and **sort-icon** props.'
+    },
     paginate: {
       header: '외부 페이지네이션 (External pagination)',
       desc: '페이지네이션(Pagination)은 `pagination` prop을 통해 외부에서 제어될 수 있습니다.\n `.sync` 수식어(modifier)를 반드시 사용해야 합니다.'
