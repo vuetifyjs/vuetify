@@ -5,7 +5,7 @@ export default {
   examples: [{
     dateLight: {
       header: 'Date pickers',
-      desc: 'Date pickers come in two orientation variations, portrait **(default)** and landscape.'
+      desc: 'Date pickers come in two orientation variations, portrait **(default)** and landscape. By default they are emitting `input` event when the day (for date picker) or month (for month picker), but with **reactive** prop they can update the model even after clicking year/month.'
     },
     dateColorable: {
       header: 'Date pickers - Colors',
