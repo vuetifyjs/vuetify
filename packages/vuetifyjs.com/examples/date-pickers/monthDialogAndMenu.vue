@@ -10,8 +10,8 @@
         offset-y
         full-width
         :nudge-right="40"
-        max-width="330px"
-        min-width="330px"
+        max-width="290px"
+        min-width="290px"
         :return-value.sync="date"
       >
         <v-text-field
@@ -41,7 +41,7 @@
         v-model="modal"
         lazy
         full-width
-        width="330px"
+        width="290px"
         :return-value.sync="date"
       >
         <v-text-field

@@ -8,7 +8,7 @@
     offset-y
     full-width
     :nudge-right="40"
-    min-width="330px"
+    min-width="290px"
   >
     <v-text-field
       slot="activator"
