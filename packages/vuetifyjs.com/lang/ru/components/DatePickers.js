@@ -5,7 +5,7 @@ export default {
   examples: [{
     dateLight: {
       header: 'Выбор даты',
-      desc: 'Ориентация Выбора даты присутствует в двух вариантах: портретная **(по умолчанию)** и альбомная.'
+      desc: 'Ориентация Выбора даты присутствует в двух вариантах: портретная **(по умолчанию)** и альбомная. By default they are emitting `input` event when the day (for date picker) or month (for month picker), but with **reactive** prop they can update the model even after clicking year/month.'
     },
     dateColorable: {
       header: 'Выбор даты - Цвета',

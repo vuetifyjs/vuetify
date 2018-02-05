@@ -5,7 +5,7 @@ export default {
   examples: [{
     dateLight: {
       header: 'Date pickers',
-      desc: 'Date picker 는 세로(portrait) 와 가로(landscape0) 두 방향의 변형이 있습니다. 기본 모드는 세로입니다.'
+      desc: 'Date picker 는 세로(portrait) 와 가로(landscape0) 두 방향의 변형이 있습니다. 기본 모드는 세로입니다. By default they are emitting `input` event when the day (for date picker) or month (for month picker), but with **reactive** prop they can update the model even after clicking year/month.'
     },
     dateColorable: {
       header: 'Date pickers - 색상 (Colors)',

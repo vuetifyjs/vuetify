@@ -1,7 +1,15 @@
 <template>
   <div>
-    <v-checkbox label="Landscape" v-model="landscape"></v-checkbox>
-    <v-date-picker v-model="picker" :landscape="landscape"></v-date-picker>
+    <v-layout row wrap>
+      <v-flex xs12 sm3>
+        <v-checkbox hide-details label="Landscape" v-model="landscape"></v-checkbox>
+      </v-flex>
+      <v-flex xs12 sm3>
+        <v-checkbox hide-details label="Reactive" v-model="reactive"></v-checkbox>
+      </v-flex>
+    </v-layout>
+
+    <v-date-picker v-model="picker" :landscape="landscape" :reactive="reactive"></v-date-picker>
   </div>
 </template>
 
@@ -10,7 +18,8 @@
     data () {
       return {
         picker: null,
-        landscape: false
+        landscape: false,
+        reactive: false
       }
     }
   }
