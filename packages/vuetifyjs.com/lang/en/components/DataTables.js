@@ -43,6 +43,10 @@ export default {
       header: 'Search with custom no-results slot',
       desc: 'The data table exposes a `search` prop that allows you to filter your data.'
     },
+    customIcons: {
+      header: 'Custom icons',
+      desc: 'Previous/next pagination icons and sort icon can be customized with **prev-icon**, **next-icon** and **sort-icon** props.'
+    },
     paginate: {
       header: 'External pagination',
       desc: 'Pagination can be controlled externally by using the `pagination` prop. Remember that you must apply the `.sync` modifier.'

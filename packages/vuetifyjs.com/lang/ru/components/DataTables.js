@@ -35,6 +35,10 @@ export default {
       header: 'Поиск с помощью настраиваемого текста страницы',
       desc: 'В таблице данных содержится подсказка `search`, которая позволяет фильтровать ваши данные.'
     },
+    customIcons: {
+      header: 'Custom icons',
+      desc: 'Previous/next pagination icons and sort icon can be customized with **prev-icon**, **next-icon** and **sort-icon** props.'
+    },
     paginate: {
       header: 'Внешняя разбивка на страницы',
       desc: 'Пагинация может управляться извне с помощью свойства `pagination`. Помните, что вы должны применять модификатор `.sync`.'
