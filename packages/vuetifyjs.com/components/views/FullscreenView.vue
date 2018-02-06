@@ -1,6 +1,6 @@
 <template lang="pug">
   v-container(v-bind="$attrs").page
-    app-back-fab(:to="{ name: to }" v-if="to != null && !noBack")
+    app-back-fab(:to="to" v-if="to != null && !noBack")
     slot(:namespace="namespace")
 </template>
 
@@ -21,7 +21,16 @@
 
     computed: {
       ...mapState({
-        to: state => state.route.from.name || 'getting-started/QuickStart'
+        to: state => {
+          if (!state.route.from) return {
+            name: 'getting-started/QuickStart'
+          }
+
+          return {
+            name: state.route.from.name,
+            params: state.route.from.params
+          }
+        }
       }),
       namespace () {
         const route = this.$route.path.split('/').slice(2)
