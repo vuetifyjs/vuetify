@@ -19,6 +19,14 @@ export default {
     subheaders: {
       header: 'Subheaders and dividers',
       desc: 'Subheaders can be lined up with inset dividers by using the same prop.'
+    },
+    dividerList: {
+      header: 'List dividers',
+      desc: 'Inset dividers and subheaders can help break up content'
+    },
+    dividerListPortrait: {
+      header: 'Dividers in Portrait View',
+      desc: 'Create custom cards to fit any use-case'
     }
   }],
   props: {
