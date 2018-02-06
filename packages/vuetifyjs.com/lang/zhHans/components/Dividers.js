@@ -19,6 +19,14 @@ export default {
     subheaders: {
       header: '副标题和分割线',
       desc: '副标题可以使用相同的属性与插页分割线对齐。'
+    },
+    dividerList: {
+      header: 'List dividers',
+      desc: 'Inset dividers and subheaders can help break up content'
+    },
+    dividerListPortrait: {
+      header: 'Divivders in Portrait View',
+      desc: 'Create custom cards to fit any use-case'
     }
   }],
   props: {
