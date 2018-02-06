@@ -22,8 +22,10 @@
     computed: {
       ...mapState({
         to: state => {
-          if (!state.route.from) return {
-            name: 'getting-started/QuickStart'
+          if (!state.route.from) {
+            return {
+              name: 'getting-started/QuickStart'
+            }
           }
 
           return {
