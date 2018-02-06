@@ -20,7 +20,7 @@
     },
 
     computed: {
-      ...mapState('app', {
+      ...mapState({
         to: state => state.route.from.name || 'getting-started/QuickStart'
       }),
       namespace () {
