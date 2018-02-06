@@ -128,6 +128,13 @@ export default [
       { name: 'touch-support', title: 'Touch support' }
     ]
   },
+  {
+    name: 'store/Index',
+    title: 'Store',
+    icon: 'mdi-store',
+    badge: 'Sale ends soon',
+    color: 'red lighten-3'
+  },
   { divider: true },
   { header: 'Additional resources' },
   {
