@@ -1,5 +1,5 @@
 <template lang="pug">
-  fullscreen-view(:to="to")#theme-generator
+  fullscreen-view#theme-generator
     v-btn(
       fab
       top
