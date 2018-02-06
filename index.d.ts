@@ -1,5 +1,5 @@
 import 'vuetify/src/util/helpers'
-import { PluginFunction } from 'vue'
+import { PluginFunction, Component as VueComponent } from 'vue'
 
 declare class Vuetify {
   static install: PluginFunction<never>
