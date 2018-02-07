@@ -6,6 +6,8 @@ import VDialog from '../VDialog/VDialog'
 export default {
   name: 'v-bottom-sheet',
 
+  functional: true,
+
   props: {
     disabled: Boolean,
     fullWidth: Boolean,
@@ -20,29 +22,19 @@ export default {
     value: null
   },
 
-  render (h) {
-    const activator = h('template', {
-      slot: 'activator'
-    }, this.$slots.activator)
+  render (h, context) {
+    const slots = context.slots()
 
-    const contentClass = [
-      'v-bottom-sheet',
-      this.inset ? 'v-bottom-sheet--inset' : ''
-    ].join(' ')
+    const contentClass = 'v-bottom-sheet' +
+      (context.props.inset ? ' v-bottom-sheet--inset' : '')
 
     return h(VDialog, {
-      attrs: {
-        ...this.$props
-      },
-      on: {
-        ...this.$listeners
-      },
+      ...context.data,
       props: {
         contentClass,
         noClickAnimation: true,
-        transition: 'bottom-sheet-transition',
-        value: this.value
+        transition: 'bottom-sheet-transition'
       }
-    }, [activator, this.$slots.default])
+    }, slots.activator ? [h('template', { slot: 'activator' }, slots.activator), slots.default] : slots.default)
   }
 }
