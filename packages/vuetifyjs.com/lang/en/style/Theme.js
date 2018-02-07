@@ -10,6 +10,13 @@ export default {
   customizingText3: 'You can also use the pre-defined material colors.',
   customizingText4: 'Under the hood, Vuetify will generate css classes based upon these values that will be accessible in the DOM. These classes will follow the same markup as other helper classes, `primary` or `secondary--text` for example.',
   customizingText5: 'These values will also be made available on the instance **$vuetify** object under the **theme** property. This allows you to _dynamically_ modify your theme. Behind the scenes, Vuetify will regenerate and update your theme classes, seamlessly updating your application.',
+  optionHeader: 'Options',
+  optionText1: 'Vuetify generates theme styles at run-time for SPA\'s and server side for SSR applications. The generated styles will be placed in a `<style>` tag with the **id** of **vuetify-theme-stylesheet**.',
+  optionText2: 'By default, **primary**, **secondary** and **accent** will have darken and lighten classes created. This allows you to follow the same syntax as working with regular colors, i.e. `class="primary darken-1"`. This can be changed during the plugin bootstrap:',
+  optionHeader2: 'Minification',
+  optionText3: 'For SSR applications, you can pass a callback function to **$vuetify.options.minifyTheme** to reduce the initial page size. When using this option, it is recommended to also use **themeCache**.',
+  optionHeader3: 'Caching',
+  optionText4: 'A custom caching object and be provided (works in tandem with **minifyTheme**) to increase SSR efficiency. The object must contain a **get** and a **set** method. Below is an example using [LRU cache](https://docs.npmjs.com/cli/cache).',
   stylusHeader: 'Modifying Stylus variables',
   stylusText1: 'Vuetify is built on top of **stylus**. Similar to **scss**, you can change variables and re-compile the style files. A list of available variables is located [here](https://github.com/vuetifyjs/vuetify/blob/master/src/stylus/settings/_variables.styl). In order to build the stylus file, you will need to configure your application to support stylus. If you are using one of the pre-made templates available on the [Quick Start](/getting-started/quick-start) guide, you can skip the next section.',
   stylusHeader2: 'Setup stylus-loader with Webpack',
@@ -32,6 +39,10 @@ export default {
     {
       text: 'Customizing',
       href: 'customizing'
+    },
+    {
+      text: 'Options',
+      href: 'options'
     },
     {
       text: 'Modifying Stylus variables',

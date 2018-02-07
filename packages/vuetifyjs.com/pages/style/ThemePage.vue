@@ -50,6 +50,46 @@
         markup(lang="javascript")
           | this.$vuetify.theme.primary = '#4caf50'
 
+      section#options
+        section-head(:value="`${namespace}.optionHeader`")
+        section-text(:value="`${namespace}.optionText1`")
+        section-text(:value="`${namespace}.optionText2`")
+        markup(lang="javascript")
+          | Vue.use(Vuetify, {
+          |   theme: {
+          |     primary: 'red',
+          |     secondary: 'purple'
+          |   },
+          |   options: {
+          |     themeVariations: ['primary', 'secondary']
+          |   }
+          | })
+        h3.mb-3 {{ $t(`${namespace}.optionHeader2`) }}
+        section-text(:value="`${namespace}.optionText3`")
+        markup(lang="javascript")
+          | Vue.use(Vuetify, {
+          |   options: {
+          |     minifyTheme: function () {
+          |       return process.env.NODE_ENV === 'production'
+          |         ? val.replace(/[\s|\r\n|\r|\n]/g, '')
+          |         : null
+          |     }
+          |   }
+          | })
+        h3.mb-3 {{ $t(`${namespace}.optionHeader3`) }}
+        section-text(:value="`${namespace}.optionText4`")
+        markup(lang="javascript")
+          | const themeCache = LRU({
+          |   max: 10,
+          |   maxAge: 1000 * 60 * 60 // 1 hour
+          | })
+          |
+          | Vue.use(Vuetify, {
+          |   options: {
+          |     themeCache
+          |   }
+          | })
+
       section#stylus-guide
         section-head(:value="`${namespace}.stylusHeader`")
         section-text(:value="`${namespace}.stylusText1`")
