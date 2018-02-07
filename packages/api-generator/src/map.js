@@ -399,25 +399,7 @@ module.exports = {
     slots: ['activator', 'default']
   },
   'v-edit-dialog': {
-    slots: ['default', 'input'],
-    events: [
-      {
-        name: 'open',
-        value: 'void'
-      },
-      {
-        name: 'cancel',
-        value: 'void'
-      },
-      {
-        name: 'close',
-        value: 'void'
-      },
-      {
-        name: 'save',
-        value: 'void'
-      }
-    ]
+    slots: ['default', 'input']
   },
   'v-expansion-panel': {
     slots: ['default']
