@@ -10,6 +10,7 @@ export default {
     }
   }],
   options: {
-    'modifiers.quiet': '`v-resize.quiet="callback"` Will **not** automatically invoke the provided callback on bind.'
+    'modifiers.quiet': '`v-resize.quiet="callback"` Will **not** automatically invoke the provided callback on bind.',
+    'value': '`v-resize="callback"` The function to invoke on window resize'
   }
 }
