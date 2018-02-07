@@ -21,6 +21,7 @@ export default {
     },
     large: Boolean,
     lazy: Boolean,
+    persistent: Boolean,
     saveText: {
       default: 'Save'
     },
@@ -85,6 +86,7 @@ export default {
         origin: 'top right',
         right: true,
         value: this.isActive,
+        closeOnClick: !this.persistent,
         closeOnContentClick: false,
         lazy: this.lazy
       },
