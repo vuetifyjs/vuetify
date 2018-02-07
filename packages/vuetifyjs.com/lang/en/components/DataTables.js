@@ -65,7 +65,7 @@ export default {
     },
     editdialog: {
       header: 'Inline Editing',
-      desc: 'The `v-edit-dialog` component is used for inline-editing within data tables.'
+      desc: 'The `v-edit-dialog` component is used for inline-editing within data tables. You can block closing the dialog when clicked outside by adding the **persistent** prop.'
     },
     crud: {
       header: 'CRUD Actions',

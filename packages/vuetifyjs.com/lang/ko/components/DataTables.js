@@ -65,7 +65,7 @@ export default {
     },
     editdialog: {
       header: '인라인 편집 (Inline Editing)',
-      desc: '`v-edit-dialog` 컴포넌트로 데이터 테이블 내에서의 인라인 편집이 가능합니다..'
+      desc: '`v-edit-dialog` 컴포넌트로 데이터 테이블 내에서의 인라인 편집이 가능합니다. You can block closing the dialog when clicked outside by adding the **persistent** prop.'
     },
     crud: {
       header: 'CRUD 액션',

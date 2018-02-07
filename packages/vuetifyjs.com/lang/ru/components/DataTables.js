@@ -57,7 +57,7 @@ export default {
     },
     editdialog: {
       header: 'Встроенное редактирование',
-      desc: 'Компонент `v-edit-dialog` используется для встроенного редактирования в таблицах данных.'
+      desc: 'Компонент `v-edit-dialog` используется для встроенного редактирования в таблицах данных. You can block closing the dialog when clicked outside by adding the **persistent** prop.'
     },
     crud: {
       header: 'Действия CRUD',

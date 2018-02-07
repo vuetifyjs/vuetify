@@ -65,7 +65,7 @@ export default {
     },
     editdialog: {
       header: '行内编辑',
-      desc: '使用 `v-edit-dialog` 组件来进行数据表格的行内编辑。'
+      desc: '使用 `v-edit-dialog` 组件来进行数据表格的行内编辑。 You can block closing the dialog when clicked outside by adding the **persistent** prop.'
     },
     crud: {
       header: 'CRUD 操作',
