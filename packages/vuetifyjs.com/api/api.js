@@ -1859,24 +1859,6 @@ module.exports = {
     "slots": [
       "default",
       "input"
-    ],
-    "events": [
-      {
-        "name": "open",
-        "value": "void"
-      },
-      {
-        "name": "cancel",
-        "value": "void"
-      },
-      {
-        "name": "close",
-        "value": "void"
-      },
-      {
-        "name": "save",
-        "value": "void"
-      }
     ]
   },
   "v-table-overflow": {
