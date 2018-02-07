@@ -14,25 +14,8 @@ export default {
       uninverted: true
     }
   }],
-  params: [{
-    'v-scroll': [
-      {
-        name: 'callback',
-        type: 'Function',
-        default: 'null'
-      },
-      {
-        name: 'target',
-        type: 'String',
-        default: 'null',
-        desc: 'The DOM element to bind the scroll event listener'
-      },
-      {
-        name: 'debounce',
-        type: 'Object',
-        default: '{ _passive_: **true** }',
-        desc: 'The options to be passed to the event listener of the binding target'
-      }
-    ]
-  }]
+  options: {
+    'arg:target': '`v-scroll:#target="callback"` The target watched for scroll changes. Defaults to window but can be changed to any valid id selector.',
+    'value': '`v-scroll="callback"` The function to invoke on target scroll'
+  }
 }
