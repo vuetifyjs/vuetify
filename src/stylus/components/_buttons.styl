@@ -163,12 +163,20 @@ theme(button, "btn")
       :not(:only-child)
         transition: $primary-transition
 
+        &:first-child
+          opacity: 1
+
         &:last-child
           opacity: 0
-          position: absolute
           transform: rotate(-45deg)
-          left: calc(50% - 12px)
-          top: calc(50% - 12px)
+
+        &:last-child,
+        &:first-child
+          // https://stackoverflow.com/questions/14729492/css3-transform-rotate-causing-1px-shift-in-chrome
+          -webkit-backface-visibility: hidden
+          position: absolute
+          left: 0
+          top: 0
 
     &.btn--active
       .btn__content
@@ -176,12 +184,10 @@ theme(button, "btn")
           &:first-child
             opacity: 0
             transform: rotate(45deg)
-            left: 'calc(50% - %s)' % (24 / 2)
-            top: 'calc(50% - %s)' % (24 / 2)
 
           &:last-child
             opacity: 1
-            transform: none
+            transform: rotate(0)
 
     .icon
       height: inherit
