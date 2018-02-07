@@ -16,7 +16,7 @@ export default {
   optionHeader2: 'Minification',
   optionText3: 'For SSR applications, you can pass a callback function to **$vuetify.options.minifyTheme** to reduce the initial page size. When using this option, it is recommended to also use **themeCache**.',
   optionHeader3: 'Caching',
-  optionText4: 'A custom caching object and be provided (works in tandem with **minifyTheme**) to increase SSR efficiency. The object must contain a **get** and a **set** method. Below is an example using [LRU cache](https://docs.npmjs.com/cli/cache).',
+  optionText4: 'A custom caching object and be provided (works in tandem with **minifyTheme**) to increase SSR efficiency. The object must contain a **get** and a **set** method. Below is an example using [LRU cache](https://www.npmjs.com/package/lru-cache).',
   stylusHeader: 'Modifying Stylus variables',
   stylusText1: 'Vuetify is built on top of **stylus**. Similar to **scss**, you can change variables and re-compile the style files. A list of available variables is located [here](https://github.com/vuetifyjs/vuetify/blob/master/src/stylus/settings/_variables.styl). In order to build the stylus file, you will need to configure your application to support stylus. If you are using one of the pre-made templates available on the [Quick Start](/getting-started/quick-start) guide, you can skip the next section.',
   stylusHeader2: 'Setup stylus-loader with Webpack',
