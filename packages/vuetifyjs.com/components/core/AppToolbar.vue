@@ -18,6 +18,7 @@
       img(
         src="/static/v-alt.svg"
         height="38px"
+        width="38px"
       )
 
     v-fade-transition(mode="out-in")
