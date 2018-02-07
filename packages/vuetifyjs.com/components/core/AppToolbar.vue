@@ -144,7 +144,11 @@
 
     methods: {
       changeToRelease (release) {
-        window.location.href = `${window.location.origin}/releases/${release}/#${this.$route.fullPath}`
+        // Remove language setting
+        const path = this.$route.fullPath.split('/')
+          .slice(2)
+          .join('/')
+        window.location.href = `${window.location.origin}/releases/${release}/#${path}`
       },
       translateI18n (lang) {
         this.$router.replace({ params: { lang } })
