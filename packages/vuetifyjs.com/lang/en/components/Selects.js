@@ -61,7 +61,7 @@ export default {
     itemText: 'Set property of **items**\'s text value',
     itemValue: 'Set property of **items**\'s value',
     items: 'Can be an array of objects or array of strings. When using objects, will look for a text and value field. This can be changed using the **item-text** and **item-value** props.',
-    minWidth: 'Mixins.Menuable.props.minWidth',
+    minWidth: 'Sets the minimum width of the select\'s `v-menu` content',
     multiple: 'Changes select to multiple. Accepts array for value',
     multiLine: 'Causes label to float when the select component is focused or dirty',
     noDataText: 'Display text when there is no data',
