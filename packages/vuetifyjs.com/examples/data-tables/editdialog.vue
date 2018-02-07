@@ -28,6 +28,7 @@
           :return-value.sync="props.item.iron"
           large
           lazy
+          persistent
         >
           <div>{{ props.item.iron }}</div>
           <div slot="input" class="mt-3 title">Update Iron</div>
