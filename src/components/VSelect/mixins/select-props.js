@@ -15,6 +15,7 @@ export default {
     cacheItems: Boolean,
     chips: Boolean,
     clearable: Boolean,
+    clearableIcon: String,
     combobox: Boolean,
     contentClass: String,
     deletableChips: Boolean,

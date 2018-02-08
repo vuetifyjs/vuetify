@@ -34,6 +34,7 @@ export default {
     autoGrow: Boolean,
     box: Boolean,
     clearable: Boolean,
+    clearableIcon: String,
     color: {
       type: String,
       default: 'primary'
