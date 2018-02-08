@@ -128,9 +128,9 @@ export default {
         }, this.$listeners),
         ref: 'item'
       }, [
-        this.genPrependIcon(),
+        this.prependIcon ? this.genPrependIcon() : null,
         this.$slots.activator,
-        this.genAppendIcon()
+        this.appendIcon ? this.genAppendIcon() : null
       ])
     },
     genItems () {
