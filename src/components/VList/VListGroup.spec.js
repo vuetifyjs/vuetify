@@ -82,6 +82,7 @@ test('VListGroup.js', ({ mount }) => {
       attachToDocument: true,
       propsData: {
         activeClass: 'foo',
+        prependIcon: 'list',
         value: true
       }
     })
@@ -196,6 +197,26 @@ test('VListGroup.js', ({ mount }) => {
 
     expect(icon.text()).toBe('arrow_drop_down')
 
+    expect('Injection "listClick" not found').toHaveBeenWarned()
+    expect(warning).toHaveBeenTipped()
+  })
+
+  it('should return proper content from icon methods', () => {
+    const wrapper = mount(VListGroup)
+
+    expect(wrapper.vm.genPrependIcon()).toBe(null)
+
+    wrapper.setProps({ prependIcon: 'list' })
+
+    expect(wrapper.vm.genPrependIcon()).toBeTruthy()
+    wrapper.setProps({ prependIcon: undefined })
+
+    const icon = wrapper.find('.icon')[0]
+
+    expect(icon.text()).toBe('keyboard_arrow_down')
+    wrapper.setProps({ appendIcon: 'list' })
+
+    expect(icon.text()).toBe('list')
     expect('Injection "listClick" not found').toHaveBeenWarned()
     expect(warning).toHaveBeenTipped()
   })
