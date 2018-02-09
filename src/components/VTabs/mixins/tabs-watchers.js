@@ -5,8 +5,10 @@
  */
 export default {
   watch: {
-    activeTab (tab) {
-      this.callSlider()
+    activeTab (tab, prev) {
+      !prev && tab && this.updateTabs()
+
+      setTimeout(this.callSlider, 0)
 
       if (!tab) return
 

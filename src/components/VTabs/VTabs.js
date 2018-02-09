@@ -219,7 +219,6 @@ export default {
   },
 
   mounted () {
-    this.callSlider()
     this.prevIconVisible = this.checkPrevIcon()
     this.nextIconVisible = this.checkNextIcon()
   },
