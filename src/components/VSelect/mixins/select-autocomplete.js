@@ -175,9 +175,6 @@ export default {
       this.$nextTick(() => {
         this.searchValue = searchValue
         this.$emit('input', this.combobox ? content : this.selectedItems)
-
-        // Combobox should close its menu when tags are updated
-        this.menuIsActive = !this.combobox
       })
     }
   }
