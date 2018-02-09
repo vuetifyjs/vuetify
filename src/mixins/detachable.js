@@ -16,7 +16,7 @@ export default {
 
   props: {
     attach: {
-      type: [Boolean, String, Object],
+      type: null,
       default: false,
       validator: validateAttachTarget
     },
