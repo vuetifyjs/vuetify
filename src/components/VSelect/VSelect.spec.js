@@ -444,4 +444,22 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
+
+  it('should reset selected index when clicked', () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        items: ['foo']
+      }
+    })
+
+    const input = wrapper.find('input')[0]
+
+    wrapper.vm.selectedIndex = 0
+    input.trigger('focus')
+    expect(wrapper.vm.selectedIndex).toBe(0)
+    wrapper.trigger('click')
+    expect(wrapper.vm.selectedIndex).toBe(-1)
+
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
 })
