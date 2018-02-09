@@ -85,9 +85,11 @@ export default {
 
       const path = `_vnode.data.class.${this.activeClass}`
 
-      if (getObjectValueByPath(this.$refs.link, path)) {
-        this.tabClick(this)
-      }
+      this.$nextTick(() => {
+        if (getObjectValueByPath(this.$refs.link, path)) {
+          this.tabClick(this)
+        }
+      })
     },
     toggle (action) {
       this.isActive = (action === this) || (action === this.action)
