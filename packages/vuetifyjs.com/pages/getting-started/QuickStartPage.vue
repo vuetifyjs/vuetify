@@ -139,10 +139,6 @@
   .browser-icon--split
     position: absolute
 
-    // IE  щ（ﾟДﾟщ）
-    top: 8px
-    left: 16px
-
     &:nth-child(1)
       clip: rect(0px 21px 40px 0px)
     &:nth-child(2)
