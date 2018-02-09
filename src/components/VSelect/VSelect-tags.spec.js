@@ -96,12 +96,12 @@ test('VSelect - tags', ({ mount, compileToFunctions }) => {
 
     input.element.value = 'b'
     input.trigger('input')
-    await wrapper.vm.$nextTick()
     input.trigger('keydown.down')
     input.trigger('keydown.tab')
     await wrapper.vm.$nextTick()
 
     expect(change).toBeCalledWith(['bar'])
+    expect(wrapper.vm.getMenuIndex()).toBe(-1)
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
@@ -113,20 +113,16 @@ test('VSelect - tags', ({ mount, compileToFunctions }) => {
     const input = wrapper.find('input')[0]
 
     wrapper.vm.focus()
-    await wrapper.vm.$nextTick()
+
     wrapper.setProps({ searchInput: 'ba' })
-    await wrapper.vm.$nextTick()
-    input.trigger('keydown.down')
-    await wrapper.vm.$nextTick()
     input.trigger('keydown.tab')
     await wrapper.vm.$nextTick()
-    expect(change).toBeCalledWith(['bar'])
+    expect(change).toBeCalledWith(['ba'])
 
     wrapper.setProps({ searchInput: 'it' })
-    await wrapper.vm.$nextTick()
     input.trigger('keydown.tab')
     await wrapper.vm.$nextTick()
-    expect(change).toBeCalledWith(['bar', 'it'])
+    expect(change).toBeCalledWith(['ba', 'it'])
 
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
@@ -143,9 +139,6 @@ test('VSelect - tags', ({ mount, compileToFunctions }) => {
 
     input.element.value = 'ba'
     input.trigger('input')
-    input.element.setSelectionRange(2, 2)
-    await wrapper.vm.$nextTick()
-    input.trigger('keydown.right')
     await wrapper.vm.$nextTick()
     input.trigger('keydown.enter')
     await wrapper.vm.$nextTick()
