@@ -131,9 +131,7 @@ export default [
   {
     name: 'store/Index',
     title: 'Store',
-    icon: 'mdi-store',
-    badge: 'Sale ends soon',
-    color: 'red lighten-3'
+    icon: 'mdi-store'
   },
   { divider: true },
   { header: 'Additional resources' },
