@@ -1,6 +1,8 @@
 import application from './mixins/application'
 import theme from './mixins/theme'
 import options from './mixins/options'
+import Semver from 'semver'
+import { consoleWarn } from '@util/console'
 import goTo from './util/goTo'
 
 const Vuetify = {
@@ -9,17 +11,20 @@ const Vuetify = {
 
     this.installed = true
 
-    const $vuetify = {}
-    Vue.util.defineReactive($vuetify, 'inspire', {
-      breakpoint: {},
-      application,
-      dark: false,
-      theme: theme(opts.theme),
-      options: options(opts.options),
-      goTo
-    })
+    process.env.NODE_ENV !== 'test' && checkVueVersion(Vue)
 
-    Vue.prototype.$vuetify = $vuetify.inspire
+    Vue.prototype.$vuetify = new Vue({
+      data: {
+        application,
+        breakpoint: {},
+        dark: false,
+        options: options(opts.options),
+        theme: theme(opts.theme)
+      },
+      methods: {
+        goTo
+      }
+    })
 
     if (opts.transitions) {
       Object.values(opts.transitions).forEach(transition => {
@@ -40,6 +45,13 @@ const Vuetify = {
         Vue.use(component)
       })
     }
+  }
+}
+
+function checkVueVersion (Vue) {
+  const vueDep = process.env.REQUIRED_VUE
+  if (!Semver.satisfies(Vue.version, vueDep)) {
+    consoleWarn(`Vuetify requires Vue version ${vueDep}`)
   }
 }
 

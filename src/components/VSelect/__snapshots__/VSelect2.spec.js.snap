@@ -3,7 +3,7 @@
 exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
 
 <div tabindex="0"
-     data-uid="24"
+     data-uid="25"
      role="combobox"
      class="input-group input-group--dirty input-group--append-icon input-group--text-field input-group--select input-group--multiple primary--text"
 >
@@ -111,7 +111,7 @@ exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
 exports[`VSelect should be clearable with prop, dirty and single select 1`] = `
 
 <div tabindex="0"
-     data-uid="16"
+     data-uid="17"
      role="combobox"
      class="input-group input-group--dirty input-group--append-icon input-group--text-field input-group--select primary--text"
 >

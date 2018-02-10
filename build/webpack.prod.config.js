@@ -21,7 +21,9 @@ module.exports = merge(baseWebpackConfig, {
   output: {
     path: resolve('../dist'),
     publicPath: '/dist/',
-    library: 'Vuetify'
+    library: 'Vuetify',
+    libraryTarget: 'umd',
+    libraryExport: 'default'
   },
   module: {
     noParse: /es6-promise\.js$/, // avoid webpack shimming process
