@@ -48,6 +48,7 @@ const Vuetify = {
   }
 }
 
+/* istanbul ignore next */
 function checkVueVersion (Vue) {
   const vueDep = process.env.REQUIRED_VUE
   if (!Semver.satisfies(Vue.version, vueDep)) {
