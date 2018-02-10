@@ -1,8 +1,8 @@
+import Semver from 'semver'
 import application from './mixins/application'
 import theme from './mixins/theme'
 import options from './mixins/options'
-import Semver from 'semver'
-import { consoleWarn } from '@util/console'
+import { consoleWarn } from '../../util/console'
 import goTo from './util/goTo'
 
 const Vuetify = {
