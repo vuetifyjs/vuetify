@@ -60,9 +60,10 @@
       genItem (item, index) {
         item = item || {}
         const isActive = this.activeIndex === index
+        const vm = this
 
         return this.$createElement('li', [
-          this.$createElement('router-link', {
+          this.$createElement('a', {
             staticClass: 'subheading mb-3 d-block',
             'class': {
               'primary--text': isActive,
@@ -71,11 +72,19 @@
             style: {
               borderLeft: `2px solid ${isActive ? this.$vuetify.theme.primary : 'transparent'}`
             },
-            props: {
-              to: { hash: `#${item.href}` }
-            },
-            domProps: {
-              innerText: item.text
+            props: { href: '#' },
+            domProps: { innerText: item.text },
+            on: {
+              click (e) {
+                e.stopPropagation()
+                e.preventDefault()
+
+                const goTo = index === 0
+                  ? 0
+                  : `#${item.href}`
+
+                vm.$vuetify.goTo(goTo)
+              }
             }
           })
         ])
@@ -86,14 +95,11 @@
         for (let item of this.items) {
           item = Object.assign({}, item)
 
-          const target = item.target
-            ? item.target
-            : document.getElementById(item.href)
+          const target = item.target ||
+            document.getElementById(item.href)
 
           if (target) {
-            const offsetTop = target.offsetTop
-
-            item.offsetTop = offsetTop
+            item.offsetTop = target.offsetTop
             item.target = target
 
             list.push(item)
@@ -111,6 +117,8 @@
         this.position = shouldFloat ? 'fixed' : 'relative'
         this.top = shouldFloat ? 85 : 0
         this.isBooted = true
+
+        requestAnimationFrame(this.genList)
       }
     },
 
