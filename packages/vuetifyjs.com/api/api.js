@@ -2653,6 +2653,7 @@ module.exports = {
       "toggleable"
     ],
     "slots": [
+      "actions",
       "default",
       "header"
     ]

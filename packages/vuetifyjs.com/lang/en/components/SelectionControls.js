@@ -66,5 +66,10 @@ export default {
     indeterminate: 'Sets an indeterminate state for the checkbox',
     inputValue: 'The **v-model** bound value',
     value: 'Sets the value of the selection control component'
+  },
+  events: {
+    blur: 'Mixins.Input.events.blur',
+    change: 'Mixins.Input.events.change',
+    'update:error': 'Mixins.Input.events.update:error'
   }
 }

@@ -1,17 +1,17 @@
 export default {
   header: 'Jumbotron',
-  headerText: 'Soon...',
+  headerText: 'The jumbotron is a flexible call to action component. Supports background images, gradient overlays and much more.',
   components: [
     'v-jumbotron'
   ],
   examples: [{
     usage: {
       header: 'Usage',
-      desc: 'Soon..'
+      desc: ''
     },
     color: {
       header: 'Custom color',
-      desc: 'Soon...'
+      desc: 'Apply a custom background-color'
     },
     gradient: {
       header: 'Gradient',

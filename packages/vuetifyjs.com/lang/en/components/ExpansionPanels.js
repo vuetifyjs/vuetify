@@ -38,5 +38,9 @@ export default {
       hideActions: 'Hide the expand icon in the content header',
       expandIcon: 'Set the expand action icon'
     }
+  },
+  slots: {
+    actions: 'Expansion header actions',
+    header: 'Expansion header content'
   }
 }
