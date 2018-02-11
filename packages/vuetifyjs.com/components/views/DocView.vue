@@ -16,7 +16,7 @@
           :offset="85"
           :items="computedToc"
         )
-          app-ad(slot="top")
+          app-ad
 </template>
 
 <script>
