@@ -22,7 +22,7 @@
                 md4
                 xl3
                 d-flex
-                v-for="product in products"
+                v-for="product in computedProducts"
                 :key="product.id"
               )
                 store-product(:value="product")
@@ -59,7 +59,21 @@
     },
 
     computed: {
-      ...mapState('store', ['products'])
+      ...mapState('store', ['products']),
+      computedProducts () {
+        const themes = []
+        const products = []
+
+        for (let product of this.products) {
+          if (product.description.indexOf('theme') > -1) {
+            themes.push(product)
+          } else {
+            products.push(product)
+          }
+        }
+
+        return themes.concat(products)
+      }
     }
   }
 </script>
