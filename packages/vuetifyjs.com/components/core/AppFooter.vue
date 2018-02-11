@@ -8,7 +8,7 @@
     ).app-footer.justify-center
       v-layout(justify-space-between).ma-0
         v-flex(v-if="prev")
-          router-link(:to="{ path: prev.route }").d-inline-flex.align-center
+          router-link(:to="{ name: `${prev.group}/${prev.name}` }").d-inline-flex.align-center
             v-btn(
               color="primary"
               dark
@@ -22,7 +22,7 @@
           :pr-4="$vuetify.breakpoint.xsOnly"
           v-if="next"
         ).text-xs-right
-          router-link(:to="next.route").d-inline-flex.align-center
+          router-link(:to="{ name: `${next.group}/${next.name}` }").d-inline-flex.align-center
             span(v-text="next.title").subheading.no-wrap.hidden-xs-only
             v-btn(
               color="primary"

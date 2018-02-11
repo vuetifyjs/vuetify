@@ -19,7 +19,7 @@ export default [
     icon: 'mdi-page-layout-body',
     items: [
       { name: 'PreDefined', title: 'Pre-defined layouts', badge: 'updated' },
-      { name: 'PremadeThemes', title: 'Pre-made themes', badge: 'updated' },
+      { name: 'PreMadeThemes', title: 'Pre-made themes', badge: 'updated' },
       { name: 'Spacing', title: 'Spacing' },
       { name: 'Alignment', title: 'Text alignment' },
       { name: 'Display', title: 'Display' },

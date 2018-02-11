@@ -7,7 +7,7 @@ export default [
   ['getting-started/contributing', 'getting-started/Contributing'],
   ['getting-started/roadmap', 'getting-started/Roadmap'],
   ['layout/pre-defined', 'layout/PreDefined'],
-  ['layout/pre-made-themes', 'layout/PremadeThemes'],
+  ['layout/pre-made-themes', 'layout/PreMadeThemes'],
   ['layout/spacing', 'layout/Spacing'],
   ['layout/alignment', 'layout/Alignment'],
   ['layout/display', 'layout/Display'],
