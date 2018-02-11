@@ -23,7 +23,6 @@
                   v-list-tile-sub-title {{ getBrowserSupport(browser) }}
 
       section#cdn-install
-        support-vuetify
         section-head(:value="`${namespace}.cdnHeader`")
         section-text(:value="`${namespace}.cdnText`")
 
