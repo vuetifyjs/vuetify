@@ -79,6 +79,7 @@
 
     methods: {
       genPath (item) {
+        // Hacky workaround for link to store
         return (`/${this.$i18n.locale}${item.route}`).replace('/index', '')
       },
       mapRoutes (items, routes = [], group) {
