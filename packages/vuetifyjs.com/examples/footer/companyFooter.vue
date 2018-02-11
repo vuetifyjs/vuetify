@@ -10,7 +10,7 @@
         {{ link }}
       </v-btn>
       <v-flex xs12 py-3 text-xs-center white--text>
-        &copy; 2018 <strong>vuetifyjs.com</strong>
+        &copy;2018 — <strong>Vuetify</strong>
       </v-flex>
     </v-layout>
   </v-footer>
