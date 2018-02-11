@@ -74,17 +74,18 @@
       slot(name="top")
       section(v-if="examples.length > 1")#examples
         section-head(value="Generic.Pages.examples")
-        example(
-          :header="`${example.header}`"
-          :new-in="example.new"
-          :file="`${folder}/${example.file}`"
-          :inverted="example.inverted"
-          :has-inverted="!example.uninverted"
-          :id="`example-${camelCaseToDash(example.file)}`"
-          :key="example.file"
-          :desc="example.desc"
-          v-for="(example, i) in examples.slice(1)"
-        )
+        template(v-for="(example, i) in examples.slice(1)")
+          support-vuetify(v-if="i === 5" :key="i")
+          example(
+            :header="`${example.header}`"
+            :new-in="example.new"
+            :file="`${folder}/${example.file}`"
+            :inverted="example.inverted"
+            :has-inverted="!example.uninverted"
+            :id="`example-${camelCaseToDash(example.file)}`"
+            :key="example.file"
+            :desc="example.desc"
+          )
       section-head {{ $t('Generic.Pages.examples') }}
 
       slot
