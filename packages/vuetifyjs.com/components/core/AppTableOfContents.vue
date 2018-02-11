@@ -23,7 +23,8 @@
       right: 0,
       top: 0,
       list: [],
-      isBooted: false
+      isBooted: false,
+      timeout: null
     }),
 
     computed: {
@@ -109,16 +110,20 @@
         this.list = list
       },
       onScroll () {
+        clearTimeout(this.timeout)
+
         this.currentOffset = window.pageYOffset ||
-          document.documentElement.offsetTop
+        document.documentElement.offsetTop
 
         const shouldFloat = this.currentOffset >= this.threshold
 
         this.position = shouldFloat ? 'fixed' : 'relative'
         this.top = shouldFloat ? 85 : 0
-        this.isBooted = true
 
-        requestAnimationFrame(this.genList)
+        this.timeout = setTimeout(() => {
+          requestAnimationFrame(this.genList)
+          this.isBooted = true
+        }, 100)
       }
     },
 
