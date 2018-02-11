@@ -50,7 +50,7 @@
         </v-layout>
       </v-card-text>
       <v-card-actions class="grey lighten-2 justify-center">
-        &copy; 2018 <strong>vuetifyjs.com</strong>
+        &copy;2018 — <strong>Vuetify</strong>
       </v-card-actions>
     </v-card>
   </v-footer>

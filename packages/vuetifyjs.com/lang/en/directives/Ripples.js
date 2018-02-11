@@ -44,20 +44,8 @@ export default {
       uninverted: true
     }
   }],
-  props: [{
-    'v-ripple': [
-      {
-        name: 'class',
-        type: 'String',
-        default: 'undefined',
-        desc: 'Applies a custom class to the ripple, used for changing color'
-      },
-      {
-        name: 'center',
-        type: 'Boolean',
-        default: 'False',
-        desc: 'Force ripple to originate from the center of the target'
-      }
-    ]
-  }]
+  options: {
+    'class': '`v-ripple="{ class: \'my-class\' }"` Applies a custom class to the ripple, used for changing color',
+    'center': '`v-ripple="{ center: true }"` Force ripple to originate from the center of the target',
+  }
 }
