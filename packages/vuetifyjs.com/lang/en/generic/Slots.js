@@ -3,6 +3,5 @@ export default {
   badge: 'The slot that will be used for the badge',
   default: 'Default Vue slot',
   label: 'Replaces the default label',
-  progress: 'Slot for custom progress linear (displayed when **loading** prop is not equal to Boolean False)',
-  noData: 'Displayed when there are no filtered items'
+  progress: 'Slot for custom progress linear (displayed when **loading** prop is not equal to Boolean False)'
 }

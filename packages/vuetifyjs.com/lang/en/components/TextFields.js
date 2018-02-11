@@ -91,5 +91,9 @@ export default {
     textarea: 'Textarea text-field with alternate style',
     toggleKeys: 'Array of key codes that will toggle the input (if it supports toggling)',
     type: 'Sets input type'
+  },
+  events: {
+    change: 'Mixins.Input.events.change',
+    'update:error': 'Mixins.Input.events.update:error'
   }
 }

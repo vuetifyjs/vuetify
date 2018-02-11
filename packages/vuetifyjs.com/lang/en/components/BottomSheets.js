@@ -14,6 +14,7 @@ export default {
   }],
   props: {
     disabled: 'Disables the ability to open the dialog',
+    hideOverlay: 'Hide the display of the overlay',
     inset: 'Reduces the dialog content maximum width to 70%',
     lazy: 'Mixins.Bootable.props.lazy',
     maxWidth: 'Specify the maximum width of the sheet\'s container'

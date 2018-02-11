@@ -46,6 +46,6 @@ export default {
   }],
   options: {
     'class': '`v-ripple="{ class: \'my-class\' }"` Applies a custom class to the ripple, used for changing color',
-    'center': '`v-ripple="{ center: true }"` Force ripple to originate from the center of the target',
+    'center': '`v-ripple="{ center: true }"` Force ripple to originate from the center of the target'
   }
 }

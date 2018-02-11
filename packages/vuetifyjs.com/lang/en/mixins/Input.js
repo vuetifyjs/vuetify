@@ -15,5 +15,10 @@ export default {
     tabindex: 'Tabindex of input',
     toggleKeys: 'Array of key codes that will toggle the input (if it supports toggling)',
     value: 'Input value'
+  },
+  events: {
+    blur: 'Emitted when the input is blurred',
+    change: 'Emitted when the select is changed by user interaction',
+    'update:error': 'The `update.sync` event'
   }
 }

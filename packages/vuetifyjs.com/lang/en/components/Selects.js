@@ -70,10 +70,21 @@ export default {
     returnObject: 'Changes the selection behavior to return the object directly rather than the value specified with **item-value**',
     searchInput: 'Bound when using the autocomplete prop. Use the **.sync** modifier to catch user input from the autocomplete search input',
     segmented: 'Creates a segmented button - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)',
-    tags: 'Tagging functionality, allows the user to create new values not available from the **items** prop'
+    tags: 'Tagging functionality, allows the user to create new values not available from the **items** prop',
+    valueComparator: 'Apply a custom value comparator function'
   },
   slots: {
     item: 'Scoped slot for designating the markup for a list-tile',
+    'no-data': 'Mixins.Filterable.slots.noData',
     selection: 'Scoped slot for designating the markup for the selected items'
+  },
+  scopedSlots: {
+    item: 'Define a custom item appearance',
+    selection: 'Define a custom selection appearance'
+  },
+  events: {
+    change: 'Mixins.Input.events.change',
+    'update:error': 'Mixins.Input.events.update:error',
+    'update:searchInput': 'The `search-input.sync` event'
   }
 }

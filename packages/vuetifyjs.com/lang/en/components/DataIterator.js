@@ -11,6 +11,11 @@ export default {
   props: {
     contentClass: 'Applies a custom class to the wrapper element around items',
     contentProps: 'Applies custom props to the wrapper element around items',
-    contentTag: 'Specified what tag should be used for the wrapper element around items'
+    contentTag: 'Specified what tag should be used for the wrapper element around items',
+    nextIcon: 'Mixins.Input.props.appendIcon',
+    prevIcon: 'Mixins.Input.props.prependIcon'
+  },
+  events: {
+    'update:pagination': 'The `pagination.sync` update event'
   }
 }
