@@ -1,7 +1,7 @@
 <template lang="pug">
   doc-view
     section#highlights
-      table.table.elevation-1
+      table.table.elevation-1.mb-5
         tbody
           tr(
             v-for="(road, i) in roadmap"
@@ -15,6 +15,7 @@
               span(v-html="road.date")
             td
               markdown(:source="road.desc")
+      support-vuetify
 </template>
 
 <script>
