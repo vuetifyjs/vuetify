@@ -226,6 +226,7 @@
       position: relative
       transition: .3s $transition.swing
       overflow: hidden
+      z-index: 0
 
       > div,
       > form,
