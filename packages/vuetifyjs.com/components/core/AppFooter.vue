@@ -16,7 +16,7 @@
           mx-3
           shrink
         >
-          &nbsp;|&nbsp;
+          <span>&nbsp;|&nbsp;</span>
         </v-flex>
         <template v-for="(social, i) in socials">
           <a
@@ -33,7 +33,7 @@
             />
             <span
               v-text="social.text"
-              v-if="$vuetify.breakpoint.mdAndUp"
+              v-show="$vuetify.breakpoint.mdAndUp"
             />
           </a>
           <v-flex
