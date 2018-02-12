@@ -323,7 +323,7 @@ test('VBtnToggle.vue', ({ mount }) => {
     expect('v-btn-toggle must contain at least one v-btn if the mandatory property is true.').toHaveBeenTipped()
   })
 
-  it('should toggle active state of button', async () => {
+  it('should warn about model binding type not being array if multiple is true', async () => {
     const wrapper = mount(VBtnToggle, {
       propsData: {
         inputValue: '',
