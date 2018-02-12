@@ -23,11 +23,14 @@
               <a href="#!" class="body-2 black--text">EDIT</a>
             </v-flex>
           </v-layout>
-          <v-list-group v-else-if="item.children" v-model="item.model" no-action :key="item.text">
-            <v-list-tile slot="item" @click="">
-              <v-list-tile-action>
-                <v-icon>{{ item.model ? item.icon : item['icon-alt'] }}</v-icon>
-              </v-list-tile-action>
+          <v-list-group
+            v-else-if="item.children"
+            v-model="item.model"
+            :key="item.text"
+            :prepend-icon="item.model ? item.icon : item['icon-alt']"
+            append-icon=""
+          >
+            <v-list-tile slot="activator">
               <v-list-tile-content>
                 <v-list-tile-title>
                   {{ item.text }}
@@ -74,9 +77,10 @@
         <span class="hidden-sm-and-down">Google Contacts</span>
       </v-toolbar-title>
       <v-text-field
-        solo
+        flat
+        solo-inverted
         prepend-icon="search"
-        placeholder="Search"
+        label="Search"
         class="hidden-sm-and-down"
       ></v-text-field>
       <v-spacer></v-spacer>

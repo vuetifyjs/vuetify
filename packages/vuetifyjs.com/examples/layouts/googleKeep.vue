@@ -1,11 +1,11 @@
 <template>
   <v-app id="inspire">
     <v-navigation-drawer
-      permanent
       fixed
       clipped
       class="grey lighten-4"
       app
+      v-model="drawer"
     >
       <v-list
         dense
@@ -30,7 +30,7 @@
           <v-divider
             dark
             v-else-if="item.divider"
-            class="my-4"
+            class="my-3"
             :key="i"
           ></v-divider>
           <v-list-tile
@@ -51,23 +51,33 @@
       </v-list>
     </v-navigation-drawer>
     <v-toolbar color="amber" app absolute clipped-left>
-      <span class="title">Google&nbsp;<span class="text">Keep</span></span>
+      <v-toolbar-side-icon @click.native="drawer = !drawer"></v-toolbar-side-icon>
+      <span class="title ml-3 mr-5">Google&nbsp;<span class="text">Keep</span></span>
+      <v-text-field
+        solo-inverted
+        flat
+        label="Search"
+        prepend-icon="search"
+      ></v-text-field>
+      <v-spacer></v-spacer>
     </v-toolbar>
     <v-content>
       <v-container fluid fill-height class="grey lighten-4">
         <v-layout justify-center align-center>
-          <v-tooltip right>
-            <v-btn
-              icon
-              large
-              :href="source"
-              target="_blank"
-              slot="activator"
-            >
-              <v-icon large>code</v-icon>
-            </v-btn>
-            <span>Source</span>
-          </v-tooltip>
+          <v-flex shrink>
+            <v-tooltip right>
+              <v-btn
+                icon
+                large
+                :href="source"
+                target="_blank"
+                slot="activator"
+              >
+                <v-icon large>code</v-icon>
+              </v-btn>
+              <span>Source</span>
+            </v-tooltip>
+          </v-flex>
         </v-layout>
       </v-container>
     </v-content>
@@ -77,6 +87,7 @@
 <script>
   export default {
     data: () => ({
+      drawer: null,
       items: [
         { icon: 'lightbulb_outline', text: 'Notes' },
         { icon: 'touch_app', text: 'Reminders' },
