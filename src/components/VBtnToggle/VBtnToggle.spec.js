@@ -311,4 +311,26 @@ test('VBtnToggle.vue', ({ mount }) => {
     expect(wrapper.vm.buttons[0].$data.isActive).toBe(false)
     expect(wrapper.vm.buttons[1].$data.isActive).toBe(true)
   })
+
+  it('should warn if mandatory is used without any buttons', async () => {
+    const wrapper = mount(VBtnToggle, {
+      propsData: {
+        inputValue: '',
+        mandatory: true
+      }
+    })
+
+    expect('v-btn-toggle must contain at least one v-btn if the mandatory property is true.').toHaveBeenTipped()
+  })
+
+  it('should toggle active state of button', async () => {
+    const wrapper = mount(VBtnToggle, {
+      propsData: {
+        inputValue: '',
+        multiple: true
+      }
+    })
+
+    expect('v-btn-toggle model must be bound to an array if the multiple property is true.').toHaveBeenTipped()
+  })
 })

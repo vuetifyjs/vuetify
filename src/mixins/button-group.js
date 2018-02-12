@@ -1,4 +1,5 @@
 import { provide as RegistrableProvide } from './registrable'
+import { consoleWarn } from '../util/console'
 
 export default {
   name: 'button-group',
@@ -8,7 +9,14 @@ export default {
   data () {
     return {
       buttons: [],
-      listeners: []
+      listeners: [],
+      destroying: false
+    }
+  },
+
+  watch: {
+    buttons () {
+      this.update()
     }
   },
 
@@ -45,6 +53,8 @@ export default {
       if (selected.length === 1) {
         this.buttons[selected[0]].$el.setAttribute('data-only-child', true)
       }
+
+      this.ensureMandatoryInvariant(selected.length > 0)
     },
     register (button) {
       const index = this.buttons.length
@@ -52,23 +62,53 @@ export default {
       this.listeners.push(this.updateValue.bind(this, index))
       button.$on('click', this.listeners[index])
     },
-    unregister (button) {
-      const index = this.buttons.indexOf(button)
-      if (index === -1) {
+    unregister (buttonToUnregister) {
+      // Basic cleanup if we're destroying
+      if (this.destroying) {
+        const index = this.buttons.indexOf(buttonToUnregister)
+        if (index !== -1) {
+          buttonToUnregister.$off('click', this.listeners[index])
+        }
         return
       }
 
-      const wasSelected = this.isSelected(index)
+      this.redoRegistrations(buttonToUnregister)
+    },
+    redoRegistrations (buttonToUnregister) {
+      let selectedCount = 0
 
-      button.$off('click', this.listeners[index])
-      this.buttons.splice(index, 1)
-      this.listeners.splice(index, 1)
+      const buttons = []
+      for (let index = 0; index < this.buttons.length; ++index) {
+        const button = this.buttons[index]
+        if (button !== buttonToUnregister) {
+          buttons.push(button)
+          if (this.isSelected(index)) {
+            ++selectedCount
+          }
+        }
 
+        button.$off('click', this.listeners[index])
+      }
+
+      this.buttons = []
+      this.listeners = []
+
+      for (let index = 0; index < buttons.length; ++index) {
+        const button = buttons[index]
+        this.register(button)
+      }
+
+      this.ensureMandatoryInvariant(selectedCount > 0)
+      this.updateAllValues && this.updateAllValues()
+    },
+    ensureMandatoryInvariant (hasSelectedAlready) {
       // Preserve the mandatory invariant
-      if (wasSelected &&
-          this.mandatory &&
-          this.buttons.every((_, i) => !this.isSelected(i)) &&
-          this.listeners.length > 0) {
+      if (this.mandatory && !hasSelectedAlready) {
+        if (!this.listeners.length) {
+          consoleWarn('v-btn-toggle must contain at least one v-btn if the mandatory property is true.')
+          return
+        }
+
         this.listeners[0]()
       }
     }
@@ -76,5 +116,9 @@ export default {
 
   mounted () {
     this.update()
+  },
+
+  beforeDestroy () {
+    this.destroying = true
   }
 }
