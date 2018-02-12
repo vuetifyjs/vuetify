@@ -55,14 +55,21 @@
           slot="activator"
           flat
         )
-          span Translations
-          v-icon keyboard_arrow_down
+          img(
+            :src="`http://www.countryflags.io/${currentLanguage.country}/flat/32.png`"
+            width="32px"
+          )
         v-list(light)
           v-list-tile(
+            avatar
             v-for="language in languages"
             :key="language.locale"
             @click="translateI18n(language.locale)"
           )
+            v-list-tile-avatar(size="24px").avatar--tile
+              img(
+                :src="`http://www.countryflags.io/${language.country}/flat/24.png`"
+              )
             v-list-tile-title {{language.title}}
       v-menu(
         bottom
@@ -131,6 +138,9 @@
           ? { name: 'getting-started/QuickStart' }
           : this.route.from.path
       },
+      currentLanguage () {
+        return this.languages.find(l => l.locale === this.$i18n.locale)
+      },
       isHome () {
         return this.route.name === 'Home'
       },
@@ -171,6 +181,6 @@
     .toolbar__items
       .btn
         text-transform capitalize
-        font-size 18px
+        font-size 16px
         font-weight 300
 </style>
