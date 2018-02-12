@@ -9,7 +9,7 @@
           div(slot="sup")
             slot(name="sup")
         slot(:namespace="namespace")
-        app-footer
+        app-footer-alt
       v-flex(md3 hidden-sm-and-down)
         app-table-of-contents(
           :threshold="50"
@@ -21,14 +21,14 @@
 
 <script>
   import AppAd from '@/components/core/AppAd'
-  import AppFooter from '@/components/core/AppFooter'
+  import AppFooterAlt from '@/components/core/AppFooterAlt'
   import AppTableOfContents from '@/components/core/AppTableOfContents'
   import { camel } from '@/util/helpers'
 
   export default {
     components: {
-      AppFooter,
       AppAd,
+      AppFooterAlt,
       AppTableOfContents
     },
 

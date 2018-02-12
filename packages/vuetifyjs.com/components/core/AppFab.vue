@@ -10,6 +10,7 @@
       v-scroll="onScroll"
       v-show="fab"
       @click="toTop"
+      style="bottom: 52px"
     )
       v-icon keyboard_arrow_up
 </template>

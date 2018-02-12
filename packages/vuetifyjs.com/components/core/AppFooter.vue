@@ -1,116 +1,93 @@
-<template lang="pug">
-  v-fade-transition(mode="out-in")
-    v-footer(
-      color="transparent"
-      v-if="footer"
-      height="90"
-      :key="$route.path"
-    ).app-footer.justify-center
-      v-layout(justify-space-between).ma-0
-        v-flex(v-if="prev")
-          router-link(:to="genPath(prev)").d-inline-flex.align-center
-            v-btn(
-              color="primary"
-              dark
-              :icon="$vuetify.breakpoint.mdAndUp"
-              :fab="$vuetify.breakpoint.smAndDown"
-            )
-              v-icon chevron_left
-            span(v-text="prev.title").subheading.no-wrap.hidden-xs-only
-        v-flex(
-          :mr-5="$vuetify.breakpoint.xsOnly"
-          :pr-4="$vuetify.breakpoint.xsOnly"
-          v-if="next"
-        ).text-xs-right
-          router-link(:to="genPath(next)").d-inline-flex.align-center
-            span(v-text="next.title").subheading.no-wrap.hidden-xs-only
-            v-btn(
-              color="primary"
-              dark
-              :icon="$vuetify.breakpoint.mdAndUp"
-              :fab="$vuetify.breakpoint.smAndDown"
-            )
-              v-icon chevron_right
+<template>
+  <v-footer>
+    <v-container
+      fluid
+      fill-height
+      py-0
+    >
+      <v-layout align-center>
+        <v-flex shrink>
+          &copy; {{ (new Date()).getFullYear() }} — Vuetify, LLC
+        </v-flex>
+        <v-flex
+          grey--text
+          text--lighten-1
+          title
+          mx-3
+          shrink
+        >
+          &nbsp;|&nbsp;
+        </v-flex>
+        <template v-for="(social, i) in socials">
+          <a
+            class="d-inline-flex align-center"
+            rel="noopener"
+            target="_blank"
+            :href="social.href"
+            :key="social.href"
+          >
+            <v-icon
+              class="mr-1"
+              size="22px"
+              v-text="social.icon"
+            />
+            <span
+              v-text="social.text"
+              v-if="$vuetify.breakpoint.mdAndUp"
+            />
+          </a>
+          <v-flex
+            grey--text
+            text--lighten-1
+            title
+            mx-2
+            shrink
+            :key="i"
+            v-if="i !== socials.length - 1"
+          >
+            &nbsp;-&nbsp;
+          </v-flex>
+        </template>
+      </v-layout>
+    </v-container>
+  </v-footer>
 </template>
 
 <script>
-  // Utilities
-  import { mapState } from 'vuex'
-  import { kebab } from '@/util/helpers'
-  import appDrawerItems from '@/assets/app-drawer-items'
-
   export default {
     data: () => ({
-      items: appDrawerItems
-    }),
-    computed: {
-      ...mapState('app', {
-        footer: state => !state.stateless
-      }),
-      index () {
-        const path = this.$route.path.replace(/\/[^/]*\/(.*)/, '/$1')
-
-        return this.routes.findIndex(route => {
-          return path === route.route
-        })
-      },
-      current () {
-        return this.routes[this.index]
-      },
-      next () {
-        return this.routes[this.index + 1] || false
-      },
-      prev () {
-        return this.routes[this.index - 1] || false
-      },
-      routes () {
-        return this.mapRoutes(this.items)
-      },
-      styles () {
-        const styles = {}
-
-        if (this.$vuetify.breakpoint.mdAndUp) {
-          styles.paddingLeft = `${this.$vuetify.application.left}px`
+      socials: [
+        {
+          href: 'https://github.com/vuetifyjs/vuetify',
+          icon: 'mdi-github-circle',
+          text: 'Github'
+        },
+        {
+          href: 'https://twitter.com/vuetifyjs',
+          icon: 'mdi-twitter-circle',
+          text: 'Twitter'
+        },
+        {
+          href: 'https://www.facebook.com/vuetifyjs',
+          icon: 'mdi-facebook-box',
+          text: 'Facebook'
+        },
+        {
+          href: 'https://medium.com/vuetify',
+          icon: 'mdi-medium',
+          text: 'Medium'
         }
-
-        return styles
-      }
-    },
-
-    methods: {
-      genPath (item) {
-        // Hacky workaround for link to store
-        return (`/${this.$i18n.locale}${item.route}`).replace('/index', '')
-      },
-      mapRoutes (items, routes = [], group) {
-        items.forEach(item => {
-          if (item.items) {
-            this.mapRoutes(item.items, routes, item.namespace || item.group)
-          } else if (item.name) {
-            const ref = Object.assign({}, item)
-
-            ref.group = group
-            ref.route = `/${group ? group + '/' : ''}${kebab(ref.name)}`
-
-            routes.push(ref)
-          }
-        })
-
-        return routes
-      }
-    }
+      ]
+    })
   }
 </script>
 
-<style lang="stylus">
-  .app-footer
-    a
-      color: inherit
-      text-decoration: none
+<style lang="stylus" scoped>
+  a
+    color: rgba(0,0,0,0.54)
+    text-decoration: none
 
-    &__title
-      color: #fff
-
-    &__sub-title
-      color: rgba(#fff, .3)
+    &:hover i,
+    &:hover
+      color: #1867C0 !important
 </style>
