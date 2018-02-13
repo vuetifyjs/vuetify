@@ -1,6 +1,7 @@
 export default {
   header: 'Free and Premium themes',
   headerText: 'Vuetify offers both **free** and **premium** pre-made themes designed to get you started in a flash. Free themes are available to install through vue-cli or you can simply download the source.',
+  buy: 'Information and Demos',
   free: 'Free',
   demo: 'Demo',
   comingSoon: 'coming soon',

@@ -15,8 +15,6 @@
                   v-chip(label small color="indigo" text-color="white" v-if="template.tag") {{ template.tag.toUpperCase() }}
                   v-chip(label small color="blue-grey" text-color="white" v-else) {{ $t('Layout.PreMadeThemes.free').toUpperCase() }}
                 v-spacer
-                v-avatar(v-if="template.buy").green.lighten-2
-                  span.white--text.title 25$
               v-divider
               v-card-text(style="min-height: 95px") {{ template.description }}
               v-card-actions
@@ -32,9 +30,9 @@
                 v-btn(
                   color="primary"
                   flat
-                  :to="{ name: 'store/Index' }"
+                  :to="{ name: 'store/Product', params: { id: 813199294506 }}"
                   v-if="template.price"
-                ) {{ $t('Layout.PreMadeThemes.comingSoon') }}
+                ) {{ $t('Layout.PreMadeThemes.buy') }}
                   v-icon(right) mdi-arrow-right
                 v-btn(
                   flat
