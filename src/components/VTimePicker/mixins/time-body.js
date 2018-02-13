@@ -166,6 +166,11 @@ export default {
     onDragMove (e) {
       e.preventDefault()
       if (!this.isDragging && e.type !== 'click') return
+      if (typeof this.$refs.clock === 'undefined') {
+        // necessary to set the correct minute on second click
+        e.stopPropagation()
+        return
+      }
 
       const rect = this.$refs.clock.getBoundingClientRect()
       const center = { x: rect.width / 2, y: 0 - rect.width / 2 }
