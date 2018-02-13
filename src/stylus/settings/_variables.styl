@@ -192,7 +192,7 @@ $card-border-radius := 2px
 
 // Chip
 $chip-border-radius := 28px
-$chip-close-margin := 0 -1px 0 4px
+$chip-close-margin := 0 2px 0 8px
 $chip-font-size := 13px
 $chip-label-border-radius := $card-border-radius
 $chip-icon-font-size := 20px
@@ -216,16 +216,16 @@ $footer-height := 36px
 
 /** Lists */
 //  list fonts and weights */
-$list-tile-font-size := $headings.subheading.size //16px - the mdc scss uses subheading to configure like this
-$list-tile-font-weight := $headings.subheading.weight //400
+$list-tile-font-size := $headings.subheading.size // 16px - the mdc scss uses subheading to configure like this
+$list-tile-font-weight := $headings.subheading.weight // 400
 
-$list-action-text-font-size := 12px //this is for the stacked actions
+$list-action-text-font-size := 12px // this is for the stacked actions
 $list-action-text-font-color := $grey.base
 
-$list-sub-title-font-size := ($list-tile-font-size - 2px) //14px
+$list-sub-title-font-size := ($list-tile-font-size - 2px) // 14px
 
-$subheader-height-font-size := ($list-tile-font-size - 2px) //14px
-$subheader-font-weight := $font-weights.medium //500
+$subheader-height-font-size := ($list-tile-font-size - 2px) // 14px
+$subheader-font-weight := $font-weights.medium // 500
 
 
 //   list spacing*/
@@ -236,7 +236,7 @@ $list-bottom-padding := 8px
 
 $list-item-right-margin := 56px
 $list-item-left-padding := 72px
-
+$list-item-avatar-triple-margin-top := -18px
 $list-item-single-height := 48px
 $list-item-double-height := 72px
 $list-item-triple-height := 88px
@@ -248,7 +248,7 @@ $subheader-inset-margin := $list-item-right-margin
 $list-item-dense-font-size := ($list-tile-font-size - 3px) //13px
 $subheader-dense-font-size := $list-item-dense-font-size
 $list-item-dense-icon-font-size := 22px
-
+$list-item-dense-avatar-triple-margin-top := -14px
 $list-item-dense-top-padding := $list-top-padding / 2
 $list-item-dense-single-height := $list-item-single-height - 8px //40px
 $list-item-dense-double-height := $list-item-double-height - 12px //60px
@@ -263,6 +263,7 @@ $list-dense-subheader-group-height := $list-dense-subheader-height //the subhead
 
 /** Pickers */
 $time-picker-number-font-size := 16px
+$time-picker-indicator-size := 40px
 
 // Toolbar
 $toolbar-height := 56px
@@ -283,7 +284,12 @@ $navigation-drawer-item-font-weight := $font-weights.medium
 $navigation-drawer-group-item-font-weight := $font-weights.regular
 
 /** Snackbar */
+$snackbar-color := #fff
 $snackbar-background-color := #323232
+$snackbar-corner-offset := 24px
+
+// Tab
+$tab-text-transform := uppercase
 
 /* Text Input */
 $input-group-padding := 18px 0 0

@@ -33,6 +33,11 @@ $material-light := {
     active: rgba(#000, .54),
     inactive: rgba(#000, .38)
   },
+  inputs: {
+    solo-inverted: rgba(#000, .16),
+    solo-inverted-focused: #424242,
+    solo-inverted-focused-text: #fff
+  },
   buttons: {
     disabled: rgba(#000, .26),
     focused: rgba(#000, .12),
@@ -74,6 +79,7 @@ $material-light := {
   picker: {
     body: #fff,
     clock: $grey.lighten-2,
+    indeterminateTime: $grey.lighten-1,
     title: $grey.lighten-2
   },
   bg-color: #fff
@@ -111,6 +117,11 @@ $material-dark := {
   icons: {
     active: #fff,
     inactive: rgba(#fff, .5)
+  },
+  inputs: {
+    solo-inverted: rgba(#fff, .16),
+    solo-inverted-focused: #fff,
+    solo-inverted-focused-text: $material-light.text.primary
   },
   buttons: {
     disabled: rgba(#fff, .3),
@@ -154,6 +165,7 @@ $material-dark := {
   picker: {
     body: #424242,
     clock: $grey.darken-2,
+    indeterminateTime: $grey.darken-1,
     title: $grey.darken-2
   },
   bg-color: #303030

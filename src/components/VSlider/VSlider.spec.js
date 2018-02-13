@@ -1,13 +1,47 @@
-import { test } from '~util/testing'
+import { test } from '@util/testing'
 import VSlider from './VSlider'
 
-const warning = 'The v-slider component requires the presence of v-app or a non-body wrapping element with the [data-app] attribute.'
+const warning = '[Vuetify] Missing v-app or a non-body wrapping element with the [data-app] attribute in "v-slider"'
 
 test('Vslider.vue', ({ mount }) => {
   it('should match a snapshot', () => {
     const wrapper = mount(VSlider)
 
     expect(wrapper.html()).toMatchSnapshot()
+    expect(warning).toHaveBeenTipped()
+  })
+
+  it('should render component with ticks and match a snapshot', () => {
+    const wrapper = mount(VSlider, {
+      propsData: {
+        ticks: true,
+        step: 25
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect(warning).toHaveBeenTipped()
+  })
+
+  it('should render component with thumbLabel and match a snapshot', () => {
+    const wrapper = mount(VSlider, {
+      propsData: {
+        thumbLabel: true
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect(warning).toHaveBeenTipped()
+  })
+
+  it('should set tabindex in disabled component', () => {
+    const wrapper = mount(VSlider, {
+      propsData: {
+        disabled: true
+      }
+    })
+
+    expect(wrapper.element.getAttribute('tabindex')).toBe('-1')
     expect(warning).toHaveBeenTipped()
   })
 
@@ -71,6 +105,34 @@ test('Vslider.vue', ({ mount }) => {
 
     expect(wrapper.vm.isFocused).toBe(true)
     expect(wrapper.html()).toMatchSnapshot()
+    expect(warning).toHaveBeenTipped()
+  })
+
+  it('should react to keydown event', async () => {
+    const wrapper = mount(VSlider, {
+      propsData: {
+        value: 50
+      }
+    })
+
+    const input = jest.fn()
+    wrapper.vm.$on('input', input)
+
+    wrapper.trigger('keydown.space')
+    expect(input).not.toBeCalled()
+    wrapper.trigger('keydown.left')
+    expect(input).toBeCalledWith(49)
+    wrapper.trigger('keydown.right')
+    expect(input).toBeCalledWith(51)
+    wrapper.trigger('keydown.home')
+    expect(input).toBeCalledWith(0)
+    wrapper.trigger('keydown.end')
+    expect(input).toBeCalledWith(100)
+    wrapper.trigger('keydown.pageup')
+    expect(input).toBeCalledWith(40)
+    wrapper.trigger('keydown.pagedown')
+    expect(input).toBeCalledWith(60)
+
     expect(warning).toHaveBeenTipped()
   })
 })

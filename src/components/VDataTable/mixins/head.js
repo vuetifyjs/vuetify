@@ -1,4 +1,13 @@
+import { consoleWarn } from '../../../util/console'
+
 export default {
+  props: {
+    sortIcon: {
+      type: String,
+      default: 'arrow_upward'
+    }
+  },
+
   methods: {
     genTHead () {
       if (this.hideHeaders) return // Exit Early since no headers are needed.
@@ -9,10 +18,10 @@ export default {
         const row = this.$scopedSlots.headers({
           headers: this.headers,
           indeterminate: this.indeterminate,
-          all: this.all
+          all: this.everyItem
         })
 
-        children = [this.needsTR(row) ? this.genTR(row) : row, this.genTProgress()]
+        children = [this.hasTag(row, 'th') ? this.genTR(row) : row, this.genTProgress()]
       } else {
         const row = this.headers.map(o => this.genHeader(o))
         const checkbox = this.$createElement('v-checkbox', {
@@ -21,7 +30,7 @@ export default {
             light: this.light,
             color: this.selectAll === true ? '' : this.selectAll,
             hideDetails: true,
-            inputValue: this.all,
+            inputValue: this.everyItem,
             indeterminate: this.indeterminate
           },
           on: { change: this.toggle }
@@ -46,6 +55,7 @@ export default {
     genHeaderData (header, children) {
       const classes = ['column']
       const data = {
+        key: header[this.headerText],
         attrs: {
           role: 'columnheader',
           scope: 'col',
@@ -55,13 +65,13 @@ export default {
         }
       }
 
-      if ('sortable' in header && header.sortable || !('sortable' in header)) {
+      if (header.sortable == null || header.sortable) {
         this.genHeaderSortingData(header, children, data, classes)
       } else {
         data.attrs['aria-label'] += ': Not sorted.' // TODO: Localization
       }
 
-      classes.push(`text-xs-${header.align || 'right'}`)
+      classes.push(`text-xs-${header.align || 'left'}`)
       if (Array.isArray(header.class)) {
         classes.push(...header.class)
       } else if (header.class) {
@@ -73,7 +83,7 @@ export default {
     },
     genHeaderSortingData (header, children, data, classes) {
       if (!('value' in header)) {
-        console.warn('Data table headers must have a value property that corresponds to a value in the v-model array')
+        consoleWarn('Headers must have a value property that corresponds to a value in the v-model array', this)
       }
 
       data.attrs.tabIndex = 0
@@ -92,8 +102,12 @@ export default {
       }
 
       classes.push('sortable')
-      const icon = this.$createElement('v-icon', 'arrow_upward')
-      if (header.align && header.align === 'left') {
+      const icon = this.$createElement('v-icon', {
+        props: {
+          small: true
+        }
+      }, this.sortIcon)
+      if (!header.align || header.align === 'left') {
         children.push(icon)
       } else {
         children.unshift(icon)

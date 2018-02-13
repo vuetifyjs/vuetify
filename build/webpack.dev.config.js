@@ -12,7 +12,11 @@ const webpack = require('webpack')
 const resolve = file => require('path').resolve(__dirname, file)
 
 const extractPlugin = ExtractTextPlugin.extract({
-  use: ['css-loader', 'postcss-loader', 'stylus-loader']
+  use: [
+    { loader: 'css-loader', options: { sourceMap: true } },
+    { loader: 'postcss-loader', options: { sourceMap: true } },
+    { loader: 'stylus-loader', options: { sourceMap: true } }
+  ]
 })
 
 module.exports = {

@@ -4,6 +4,8 @@ import Validatable from './validatable'
 import VIcon from '../components/VIcon'
 
 export default {
+  name: 'input',
+
   components: {
     VIcon
   },
@@ -81,31 +83,27 @@ export default {
       }, this.$slots.label || this.label)
     },
     genMessages () {
-      let messages = []
+      let messages = null
 
-      if ((this.hint &&
-            this.isFocused ||
-            this.hint &&
-            this.persistentHint) &&
-          this.validations.length === 0
+      if (
+        this.hint &&
+        (this.isFocused || this.persistentHint) &&
+        !this.validations.length
       ) {
         messages = [this.genHint()]
       } else if (this.validations.length) {
         messages = [this.genError(this.validations[0])]
       }
 
-      return this.$createElement('transition-group', {
-        'class': 'input-group__messages',
+      return this.$createElement('transition', {
         props: {
-          tag: 'div',
           name: 'slide-y-transition'
         }
       }, messages)
     },
     genHint () {
       return this.$createElement('div', {
-        'class': 'input-group__hint',
-        key: this.hint,
+        'class': 'input-group__messages input-group__hint',
         domProps: { innerHTML: this.hint }
       })
     },
@@ -113,8 +111,7 @@ export default {
       return this.$createElement(
         'div',
         {
-          'class': 'input-group__error',
-          key: error
+          'class': 'input-group__messages input-group__error'
         },
         error
       )

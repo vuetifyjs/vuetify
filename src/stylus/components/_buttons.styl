@@ -54,6 +54,22 @@ theme(button, "btn")
     transition: $primary-transition
     width: 100%
 
+/** Sizes */
+.btn
+  &--small
+    font-size: $button-small-font-size
+    height: $button-small-height
+
+    .btn__content
+      padding: $button-small-padding
+
+  &--large
+    font-size: $button-large-font-size
+    height: $button-large-height
+
+    .btn__content
+      padding: $button-large-padding
+
 /** Content */
 .btn
   &--active,
@@ -67,13 +83,14 @@ theme(button, "btn")
     border-radius: inherit
     color: inherit
     display: flex
-    height: 100%
+    height: inherit
     flex: 1 0 auto
     justify-content: center
     margin: 0 auto
     padding: $button-padding
     transition: $primary-transition
     white-space: nowrap
+    width: inherit
 
 /** Icons */
 .btn .btn__content .icon
@@ -92,32 +109,32 @@ theme(button, "btn")
     &:active
       elevation(8)
 
+    // Fixes bug where IE11 moves
+    // button content when clicked
+    // https://stackoverflow.com/questions/10305658/prevent-button-from-shifting-during-click-in-ie
+    &:active,
+    &:focus
+      .btn__content
+        position: relative
+        top: 0
+        left: 0
+
   &--icon
     background: transparent
     box-shadow: none !important
     border-radius: 50%
     justify-content: center
-    height: $button-height
-    width: $button-height
     min-width: 0
-
-    .btn__content
-      padding: 0
-
-      &:before
-        border-radius: 50%
+    width: $button-height
 
     &.btn--small
       width: $button-small-height
 
-      .btn__content
-        height: $button-small-height
-
     &.btn--large
       width: $button-large-height
 
-      .btn__content
-        height: $button-large-height
+    .btn__content:before
+      border-radius: 50%
 
   &--floating
     border-radius: 50%
@@ -146,12 +163,20 @@ theme(button, "btn")
       :not(:only-child)
         transition: $primary-transition
 
+        &:first-child
+          opacity: 1
+
         &:last-child
           opacity: 0
-          position: absolute
           transform: rotate(-45deg)
-          left: calc(50% - 12px)
-          top: calc(50% - 12px)
+
+        &:last-child,
+        &:first-child
+          // https://stackoverflow.com/questions/14729492/css3-transform-rotate-causing-1px-shift-in-chrome
+          -webkit-backface-visibility: hidden
+          position: absolute
+          left: 0
+          top: 0
 
     &.btn--active
       .btn__content
@@ -159,16 +184,14 @@ theme(button, "btn")
           &:first-child
             opacity: 0
             transform: rotate(45deg)
-            left: 'calc(50% - %s)' % (24 / 2)
-            top: 'calc(50% - %s)' % (24 / 2)
 
           &:last-child
             opacity: 1
-            transform: none
+            transform: rotate(0)
 
     .icon
-      height: $button-floating-icon-width
-      width: $button-floating-icon-width
+      height: inherit
+      width: inherit
 
     &.btn--small
       height: $button-floating-small-width
@@ -176,12 +199,6 @@ theme(button, "btn")
 
       .icon
         font-size: $button-floating-small-icon-width
-        height: $button-floating-small-icon-width
-        width: $button-floating-small-icon-width
-
-      &.btn--floating .icon
-        left: 'calc(50% - %s)' % ($button-floating-small-icon-width / 2)
-        top: 'calc(50% - %s)' % ($button-floating-small-icon-width / 2)
 
 
     &.btn--large
@@ -190,12 +207,6 @@ theme(button, "btn")
 
       .icon
         font-size: $button-floating-large-icon-width
-        height: $button-floating-large-icon-width
-        width: $button-floating-large-icon-width
-
-      &.btn--floating .icon
-        left: 'calc(50% - %s)' % ($button-floating-large-icon-width / 2)
-        top: 'calc(50% - %s)' % ($button-floating-large-icon-width / 2)
 
   &--reverse
     .btn__content
@@ -256,21 +267,9 @@ theme(button, "btn")
     box-shadow: none !important
     pointer-events: none
 
-/** Sizes */
-.btn
-  &--small
-    font-size: $button-small-font-size
-    height: $button-small-height
-
-    .btn__content
-      padding: $button-small-padding
-
-  &--large
-    font-size: $button-large-font-size
-    height: $button-large-height
-
-    .btn__content
-      padding: $button-large-padding
+.btn--icon
+  .btn__content
+    padding: 0
 
 
 /** Loader */
@@ -338,6 +337,7 @@ theme(button, "btn")
 .btn
   &.primary,
   &.secondary,
+  &.accent,
   &.success,
   &.error,
   &.warning,

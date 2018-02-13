@@ -1,15 +1,16 @@
 import Vue from 'vue'
-import { test } from '~util/testing'
-import { mount } from 'avoriaz'
+import { test } from '@util/testing'
 import VDataTable from './VDataTable'
 
-test('VDataTable.vue', () => {
+test('VDataTable.vue', ({ mount, compileToFunctions }) => {
   function dataTableTestData () {
     return {
       propsData: {
         pagination: {
           descending: false,
-          sortBy: 'col1'
+          sortBy: 'col1',
+          rowsPerPage: 1,
+          page: 1
         },
         headers: [
           { text: 'First Column', value: 'col1', class: 'a-string' },
@@ -49,15 +50,61 @@ test('VDataTable.vue', () => {
     pagination.descending = true
 
     expect(wrapper.vm.$props.pagination.descending).toBe(true)
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
-  it('should match a snapshot', () => {
+  it('should match a snapshot - no matching results', () => {
     const data = dataTableTestData()
+    data.propsData.search = "asdf"
     const wrapper = mount(VDataTable, data)
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+
+    const content = wrapper.find('table.datatable tbody > tr > td')[0]
+    expect(content.element.textContent).toBe('No matching records found')
+
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should match a snapshot - no data', () => {
+    const data = dataTableTestData()
+    data.propsData.items = []
+    const wrapper = mount(VDataTable, data)
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    const content = wrapper.find('table.datatable tbody > tr > td')[0]
+    expect(content.element.textContent).toBe('No data available')
+
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should match a snapshot - with data', () => {
+    const data = dataTableTestData()
+    data.propsData.pagination.rowsPerPage = 3
+
+    const vm = new Vue()
+    const items = props => vm.$createElement('td', [props.item.col2])
+    const component = Vue.component('test', {
+      components: {
+        VDataTable
+      },
+      render (h) {
+        return h('v-data-table', {
+          props: {
+            ...data.propsData
+          },
+          scopedSlots: {
+            items
+          }
+        })
+      }
+    })
+
+    const wrapper = mount(component)
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should match a snapshot with single rows-per-page-items', () => {
@@ -75,7 +122,7 @@ test('VDataTable.vue', () => {
     const wrapper = mount(VDataTable, data)
 
     expect(wrapper.find('tbody td')[0].html()).toMatchSnapshot()
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should match display no-results-text when no results', () => {
@@ -84,8 +131,8 @@ test('VDataTable.vue', () => {
     data.propsData.search = "no such item"
     const wrapper = mount(VDataTable, data)
 
-    expect(wrapper.find('tbody td')[0].html()).toMatchSnapshot()
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect(wrapper.find('tbody tr td')[0].html()).toMatchSnapshot()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render aria-sort attribute on column headers', async () => {
@@ -109,7 +156,7 @@ test('VDataTable.vue', () => {
       headers.map(h => h.getAttribute('aria-sort'))
     ).toEqual(['none', 'none', 'ascending'])
 
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should match not allow a null sort', async () => {
@@ -142,7 +189,7 @@ test('VDataTable.vue', () => {
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.defaultPagination.descending).toBe(false)
 
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render a progress with headers slot', () => {
@@ -163,34 +210,113 @@ test('VDataTable.vue', () => {
       }
     }))
 
-    expect(wrapper.find('.datatable__progress').length).toBe(1)
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect(wrapper.find('.datatable__progress')).toHaveLength(1)
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should only filter on data specified in headers', async () => {
     const wrapper = mount(VDataTable, dataTableTestDataFilter())
 
-    expect(wrapper.instance().filteredItems.length).toBe(1)
+    expect(wrapper.instance().filteredItems).toHaveLength(1)
     wrapper.setProps({
       search: 'outside'
     })
-    expect(wrapper.instance().filteredItems.length).toBe(0)
+    expect(wrapper.instance().filteredItems).toHaveLength(0)
     wrapper.setProps({
       search: 'baz'
     })
-    expect(wrapper.instance().filteredItems.length).toBe(1)
+    expect(wrapper.instance().filteredItems).toHaveLength(1)
 
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should not filter items if search is empty', async () => {
-    const wrapper = mount(VDataTable, dataTableTestDataFilter())
+    const data = dataTableTestDataFilter()
+    data.propsData.search = '    '
+    const wrapper = mount(VDataTable, data)
 
-    wrapper.setProps({
-      search: '    '
-    })
-    expect(wrapper.instance().filteredItems.length).toBe(1)
+    expect(wrapper.instance().filteredItems).toHaveLength(data.propsData.items.length)
 
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should allow custom tr when using no-data slot', async () => {
+    const wrapper = mount(Vue.component('test', {
+      components: {
+        VDataTable
+      },
+      render (h) {
+        return h('v-data-table', {
+          props: {
+            items: []
+          },
+        }, [h('tr', { slot: 'no-data', class: 'custom-class' })])
+      }
+    }))
+
+    expect(wrapper.find('table tbody tr.custom-class').length).toBe(1)
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should allow custom td when using no-results slot', async () => {
+    const wrapper = mount(Vue.component('test', {
+      components: {
+        VDataTable
+      },
+      render (h) {
+        return h('v-data-table', {
+          props: {
+            items: [{}],
+            search: 'foo'
+          },
+        }, [h('td', { slot: 'no-results', class: 'custom-class' })])
+      }
+    }))
+
+    expect(wrapper.find('table tbody tr td.custom-class').length).toBe(1)
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should render tr and td when using no-results slot', async () => {
+    const wrapper = mount(Vue.component('test', {
+      components: {
+        VDataTable
+      },
+      render (h) {
+        return h('v-data-table', {
+          props: {
+            items: [{}],
+            search: 'foo'
+          },
+        }, [h('div', { slot: 'no-results', class: 'custom-class' })])
+      }
+    }))
+
+    expect(wrapper.find('table tbody tr td div.custom-class').length).toBe(1)
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should initialize everyItem state', async () => {
+    const data = dataTableTestData()
+    data.propsData.value = data.propsData.items
+    const wrapper = mount(VDataTable, data)
+
+    expect(wrapper.vm.everyItem).toBe(true);
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should update everyItem state', async () => {
+    const data = dataTableTestData()
+    data.propsData.itemKey = 'other';
+    const wrapper = mount(VDataTable, data)
+
+    expect(wrapper.vm.everyItem).toBe(false);
+    wrapper.vm.value.push(wrapper.vm.items[0]);
+    expect(wrapper.vm.everyItem).toBe(false);
+
+    wrapper.vm.value.push(wrapper.vm.items[1]);
+    wrapper.vm.value.push(wrapper.vm.items[2]);
+    expect(wrapper.vm.everyItem).toBe(true);
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 })

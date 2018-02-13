@@ -1,9 +1,13 @@
 import Vue from 'vue'
-import { test } from '~util/testing'
-import { mount } from 'avoriaz'
-import VSelect from '~components/VSelect'
+import { test } from '@util/testing'
+import VSelect from '@components/VSelect'
+import {
+  VListTile,
+  VListTileTitle,
+  VListTileContent
+} from '@components/VList'
 
-test('VSelect', () => {
+test('VSelect', ({ mount, compileToFunctions }) => {
   it('should return numeric 0', () => {
     const item = { value: 0, text: '0' }
     const wrapper = mount(VSelect, {
@@ -19,7 +23,7 @@ test('VSelect', () => {
     wrapper.vm.selectItem(item)
 
     expect(change).toBeCalledWith([0])
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should be in an error state', async () => {
@@ -38,7 +42,7 @@ test('VSelect', () => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.hasError).toBe(true)
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should disable list items', () => {
@@ -55,7 +59,7 @@ test('VSelect', () => {
     const item = wrapper.find('li')[0]
 
     expect(item.element.getAttribute('disabled')).toBe('disabled')
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should warn when using incorrect item together with segmented prop', async () => {
@@ -75,7 +79,7 @@ test('VSelect', () => {
 
     await wrapper.vm.$nextTick()
 
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
     expect('items must contain both a text and callback property').toHaveBeenTipped()
   })
 
@@ -96,7 +100,7 @@ test('VSelect', () => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render buttons correctly when using slot with segmented prop', async () => {
@@ -130,7 +134,114 @@ test('VSelect', () => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should render v-select correctly when using v-list-tile in item scope slot', async () => {
+    const items = Array.from({ length: 2 }, (x, i) => ({ value: i, text: `Text ${i}` }))
+
+    const vm = new Vue({
+      components: {
+        VListTile
+      }
+    })
+    const itemSlot = ({ item, tile }) => vm.$createElement('v-list-tile', {
+      on: tile.on,
+      props: tile.props,
+      class: item.value % 2 === 0 ? '' : 'red lighten-1'
+    }, [
+      item.text
+    ])
+    const component = Vue.component('test', {
+      components: {
+        VSelect
+      },
+      render (h) {
+        return h('v-select', {
+          props: {
+            items
+          },
+          scopedSlots: {
+            item: itemSlot
+          }
+        })
+      }
+    })
+
+    const wrapper = mount(component)
+
+    wrapper.vm.$children[0].inputValue = items[0]
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should render v-select correctly when not using v-list-tile in item scope slot', async () => {
+    const items = Array.from({ length: 2 }, (x, i) => ({ value: i, text: `Text ${i}` }))
+
+    const vm = new Vue({
+      components: {
+        VListTileTitle,
+        VListTileContent
+      }
+    })
+    const itemSlot = ({ item }) => vm.$createElement('v-list-tile-content', {
+      class: item.value % 2 === 0 ? '' : 'red lighten-1'
+    }, [
+      vm.$createElement('v-list-tile-title', item.value)
+    ])
+    const component = Vue.component('test', {
+      components: {
+        VSelect
+      },
+      render (h) {
+        return h('v-select', {
+          props: {
+            items
+          },
+          scopedSlots: {
+            item: itemSlot
+          }
+        })
+      }
+    })
+
+    const wrapper = mount(component)
+
+    wrapper.vm.$children[0].inputValue = items[0]
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should render v-select correctly when not using scope slot', async () => {
+    const items = Array.from({ length: 2 }, (x, i) => ({ value: i, text: `Text ${i}` }))
+
+    const component = Vue.component('test', {
+      components: {
+        VSelect
+      },
+      render (h) {
+        return h('v-select', {
+          props: {
+            items
+          }
+        })
+      }
+    })
+
+    const wrapper = mount(component)
+
+    wrapper.vm.$children[0].inputValue = items[0]
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should not close menu when using multiple prop', async () => {
@@ -157,7 +268,7 @@ test('VSelect', () => {
 
     expect(blur).not.toBeCalled()
     expect(wrapper.vm.isActive).toBe(true)
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render aria-hidden=true on arrow icon', async () => {
@@ -165,7 +276,7 @@ test('VSelect', () => {
 
     const icon = wrapper.find('.input-group__append-icon')[0]
     expect(icon.hasAttribute('aria-hidden')).toBe(true)
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should display a default value', async () => {
@@ -177,7 +288,7 @@ test('VSelect', () => {
     })
 
     expect(wrapper.vm.selectedItems).toEqual(['foo'])
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should not display a default value that is not in items', async () => {
@@ -189,7 +300,7 @@ test('VSelect', () => {
     })
 
     expect(wrapper.vm.selectedItems).toHaveLength(0)
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should update the displayed value when items changes', async () => {
@@ -203,7 +314,7 @@ test('VSelect', () => {
     wrapper.setProps({ items: [{ text: 'foo', value: 1 }] })
     expect(wrapper.vm.selectedItems).toContainEqual({ text: 'foo', value: 1 })
 
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render select menu with content class', async () => {
@@ -218,7 +329,7 @@ test('VSelect', () => {
 
     const menu = wrapper.find('.menu__content')[0]
     expect(menu.element.classList).toContain('menu-class')
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should have deletable chips', async () => {
@@ -238,7 +349,7 @@ test('VSelect', () => {
 
     expect(!!chip).toBe(true)
 
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should escape items in menu', async () => {
@@ -256,7 +367,7 @@ test('VSelect', () => {
     await wrapper.vm.$nextTick()
     expect(tileTitle.html()).toMatchSnapshot()
 
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should have the proper nudge', async () => {
@@ -290,7 +401,29 @@ test('VSelect', () => {
 
     expect(wrapper.vm.nudgeTop).toBe(2)
 
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should use value comparator', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        multiple: true,
+        items: [
+          {text: 'one', value: 1},
+          {text: 'two', value: 2},
+          {text: 'three', value: 3}
+        ],
+        itemText: 'text',
+        itemValue: 'value',
+        valueComparator: (a, b) => Math.round(a) === Math.round(b),
+        value: [3.1]
+      }
+    })
+
+    expect(wrapper.vm.selectedItems).toHaveLength(1)
+    expect(wrapper.vm.selectedItems[0].value).toBe(3)
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should not open if readonly', async () => {
@@ -309,6 +442,24 @@ test('VSelect', () => {
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.menuIsActive).toBe(false)
 
-    expect('Application is missing <v-app> component.').toHaveBeenTipped()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should reset selected index when clicked', () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        items: ['foo']
+      }
+    })
+
+    const input = wrapper.find('input')[0]
+
+    wrapper.vm.selectedIndex = 0
+    input.trigger('focus')
+    expect(wrapper.vm.selectedIndex).toBe(0)
+    wrapper.trigger('click')
+    expect(wrapper.vm.selectedIndex).toBe(-1)
+
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 })

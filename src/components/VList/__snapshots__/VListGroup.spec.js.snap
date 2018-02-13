@@ -2,13 +2,18 @@
 
 exports[`VListGroup.js should render a component with no padding for action icon and match snapshot 1`] = `
 
-<ul data-uid="6"
-    class="list"
->
-  <li class="list--group__container">
-    <ul class="list--group__header">
+<ul class="list">
+  <li class="list__group">
+    <ul class="list__group__header">
+      <li class="list__group__header__append-icon">
+        <i aria-hidden="true"
+           class="icon material-icons"
+        >
+          keyboard_arrow_down
+        </i>
+      </li>
     </ul>
-    <ul class="list list--group"
+    <ul class="list__group__items"
         style="display: none;"
     >
     </ul>
@@ -19,13 +24,18 @@ exports[`VListGroup.js should render a component with no padding for action icon
 
 exports[`VListGroup.js should render a component with route namespace and match snapshot 1`] = `
 
-<ul data-uid="9"
-    class="list"
->
-  <li class="list--group__container">
-    <ul class="list--group__header">
+<ul class="list">
+  <li class="list__group">
+    <ul class="list__group__header">
+      <li class="list__group__header__append-icon">
+        <i aria-hidden="true"
+           class="icon material-icons"
+        >
+          keyboard_arrow_down
+        </i>
+      </li>
     </ul>
-    <ul class="list list--group"
+    <ul class="list__group__items"
         style="display: none;"
     >
     </ul>
@@ -36,13 +46,18 @@ exports[`VListGroup.js should render a component with route namespace and match 
 
 exports[`VListGroup.js should render a lazy component and match snapshot 1`] = `
 
-<ul data-uid="3"
-    class="list"
->
-  <li class="list--group__container">
-    <ul class="list--group__header">
+<ul class="list">
+  <li class="list__group">
+    <ul class="list__group__header">
+      <li class="list__group__header__append-icon">
+        <i aria-hidden="true"
+           class="icon material-icons"
+        >
+          keyboard_arrow_down
+        </i>
+      </li>
     </ul>
-    <ul class="list list--group"
+    <ul class="list__group__items"
         style="display: none;"
     >
     </ul>
@@ -53,13 +68,18 @@ exports[`VListGroup.js should render a lazy component and match snapshot 1`] = `
 
 exports[`VListGroup.js should render component and match snapshot 1`] = `
 
-<ul data-uid="0"
-    class="list"
->
-  <li class="list--group__container">
-    <ul class="list--group__header">
+<ul class="list">
+  <li class="list__group">
+    <ul class="list__group__header">
+      <li class="list__group__header__append-icon">
+        <i aria-hidden="true"
+           class="icon material-icons"
+        >
+          keyboard_arrow_down
+        </i>
+      </li>
     </ul>
-    <ul class="list list--group"
+    <ul class="list__group__items"
         style="display: none;"
     >
     </ul>

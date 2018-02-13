@@ -1,4 +1,4 @@
-require('../../stylus/components/_button-toggle.styl')
+import '../../stylus/components/_button-toggle.styl'
 
 import ButtonGroup from '../../mixins/button-group'
 import Themeable from '../../mixins/themeable'
@@ -16,10 +16,6 @@ export default {
   props: {
     inputValue: {
       required: false
-    },
-    items: {
-      type: Array,
-      default: () => []
     },
     mandatory: Boolean,
     multiple: Boolean
@@ -77,12 +73,6 @@ export default {
       }
 
       this.$emit('change', items)
-    }
-  },
-
-  mounted () {
-    if (this.items.length > 0) {
-      console.warn('The \'items\' props has been deprecated. v-btn-toggle now has a default slot where you can place buttons.')
     }
   },
 

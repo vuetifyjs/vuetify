@@ -1,13 +1,11 @@
-import { test } from '~util/testing'
+import { test } from '@util/testing'
 import {
   VBreadcrumbs,
   VBreadcrumbsItem
-} from '~components/VBreadcrumbs'
-import { mount } from 'avoriaz'
+} from '@components/VBreadcrumbs'
 import Vue from 'vue'
-import { compileToFunctions } from 'vue-template-compiler'
 
-test('VBreadcrumbs.js', () => {
+test('VBreadcrumbs.js', ({ mount, compileToFunctions }) => {
   it('should have breadcrumbs classes', () => {
     const wrapper = mount(VBreadcrumbs)
 

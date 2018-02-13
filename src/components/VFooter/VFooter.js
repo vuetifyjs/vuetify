@@ -1,5 +1,7 @@
-require('../../stylus/components/_footer.styl')
+// Styles
+import '../../stylus/components/_footer.styl'
 
+// Mixins
 import Applicationable from '../../mixins/applicationable'
 import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
@@ -7,59 +9,83 @@ import Themeable from '../../mixins/themeable'
 export default {
   name: 'v-footer',
 
-  mixins: [Applicationable, Colorable, Themeable],
+  mixins: [
+    Applicationable('footer', [
+      'height'
+    ]),
+    Colorable,
+    Themeable
+  ],
 
   props: {
-    absolute: Boolean,
-    fixed: Boolean
+    height: {
+      default: 32,
+      type: [Number, String]
+    },
+    inset: Boolean
   },
 
   computed: {
-    paddingLeft () {
-      return this.fixed || !this.app
+    computedMarginBottom () {
+      if (!this.app) return
+
+      return this.$vuetify.application.bottom
+    },
+    computedPaddingLeft () {
+      return !this.app || !this.inset
         ? 0
         : this.$vuetify.application.left
     },
-    paddingRight () {
-      return this.fixed || !this.app
+    computedPaddingRight () {
+      return !this.app
         ? 0
         : this.$vuetify.application.right
-    }
-  },
+    },
+    styles () {
+      const styles = {
+        height: isNaN(this.height) ? this.height : `${this.height}px`
+      }
 
-  destroyed () {
-    if (this.app) this.$vuetify.application.bottom = 0
+      if (this.computedPaddingLeft) {
+        styles.paddingLeft = `${this.computedPaddingLeft}px`
+      }
+
+      if (this.computedPaddingRight) {
+        styles.paddingRight = `${this.computedPaddingRight}px`
+      }
+
+      if (this.computedMarginBottom) {
+        styles.marginBottom = `${this.computedMarginBottom}px`
+      }
+
+      return styles
+    }
   },
 
   methods: {
+    /**
+     * Update the application layout
+     *
+     * @return {number}
+     */
     updateApplication () {
-      if (!this.app) return
-
-      this.$vuetify.application.bottom = this.fixed
-        ? this.$el && this.$el.clientHeight
-        : 0
+      return isNaN(this.height)
+        ? this.$el.clientHeight
+        : this.height
     }
   },
 
-  mounted () {
-    this.updateApplication()
-  },
-
   render (h) {
-    this.updateApplication()
-
     const data = {
       staticClass: 'footer',
       'class': this.addBackgroundColorClassChecks({
         'footer--absolute': this.absolute,
-        'footer--fixed': this.fixed,
+        'footer--fixed': !this.absolute && (this.app || this.fixed),
+        'footer--inset': this.inset,
         'theme--dark': this.dark,
         'theme--light': this.light
       }),
-      style: {
-        paddingLeft: `${this.paddingLeft}px`,
-        paddingRight: `${this.paddingRight}px`
-      },
+      style: this.styles,
       ref: 'content'
     }
 

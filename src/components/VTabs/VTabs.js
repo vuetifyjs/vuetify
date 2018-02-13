@@ -1,237 +1,242 @@
-require('../../stylus/components/_tabs.styl')
+// Styles
+import '../../stylus/components/_tabs.styl'
 
+// Component imports
+import VIcon from '../VIcon'
+import VTabsItems from './VTabsItems'
+import VTabsSlider from './VTabsSlider'
+
+// Component level mixins
+import TabsComputed from './mixins/tabs-computed'
+import TabsGenerators from './mixins/tabs-generators'
+import TabsProps from './mixins/tabs-props'
+import TabsTouch from './mixins/tabs-touch'
+import TabsWatchers from './mixins/tabs-watchers'
+
+// Mixins
+import Colorable from '../../mixins/colorable'
+import SSRBootable from '../../mixins/ssr-bootable'
+import Themeable from '../../mixins/themeable'
+import {
+  provide as RegistrableProvide
+} from '../../mixins/registrable'
+
+// Directives
 import Resize from '../../directives/resize'
+import Touch from '../../directives/touch'
 
 export default {
   name: 'v-tabs',
 
+  components: {
+    VIcon,
+    VTabsItems,
+    VTabsSlider
+  },
+
+  mixins: [
+    RegistrableProvide('tabs'),
+    Colorable,
+    SSRBootable,
+    TabsComputed,
+    TabsProps,
+    TabsGenerators,
+    TabsTouch,
+    TabsWatchers,
+    Themeable
+  ],
+
   directives: {
-    Resize
+    Resize,
+    Touch
   },
 
   provide () {
     return {
-      registerContent: this.registerContent,
-      unregisterContent: this.unregisterContent,
-      registerTabItem: this.registerTabItem,
-      unregisterTabItem: this.unregisterTabItem,
-      next: this.next,
-      prev: this.prev,
-      slider: this.slider,
       tabClick: this.tabClick,
-      isScrollable: () => this.scrollable,
-      isMobile: () => this.isMobile
+      tabProxy: this.tabProxy,
+      registerItems: this.registerItems,
+      unregisterItems: this.unregisterItems
     }
   },
 
   data () {
     return {
-      activeIndex: null,
+      bar: [],
       content: [],
       isBooted: false,
+      isOverflowing: false,
+      lazyValue: this.value,
+      nextIconVisible: false,
+      prevIconVisible: false,
       resizeTimeout: null,
       reverse: false,
-      tabItems: [],
+      scrollOffset: 0,
+      sliderWidth: null,
+      sliderLeft: null,
+      startX: 0,
       tabsContainer: null,
-      tabsSlider: null,
-      target: null,
-      targetEl: null,
+      tabs: [],
+      tabItems: null,
       transitionTime: 300
     }
   },
 
-  props: {
-    centered: Boolean,
-    fixed: Boolean,
-    grow: Boolean,
-    icons: Boolean,
-    mobileBreakPoint: {
-      type: [Number, String],
-      default: 1280
-    },
-    value: String,
-    scrollable: {
-      type: Boolean,
-      default: true
-    }
-  },
-
-  computed: {
-    classes () {
-      return {
-        'tabs': true,
-        'tabs--centered': this.centered,
-        'tabs--fixed': this.fixed,
-        'tabs--grow': this.grow,
-        'tabs--icons': this.icons,
-        'tabs--mobile': this.isMobile,
-        'tabs--scroll-bars': this.scrollable
-      }
-    },
-    isMobile () {
-      return this.$vuetify.breakpoint.width < this.mobileBreakPoint
-    }
-  },
-
-  watch: {
-    value () {
-      this.tabClick(this.value)
-    },
-    activeIndex () {
-      this.updateTabs()
-      this.$nextTick(() => (this.isBooted = true))
-    },
-    tabItems (newItems, oldItems) {
-      // Tab item was removed and
-      // there are still more
-      if (oldItems.length > newItems.length &&
-        newItems.length > 0
-      ) {
-        if (!newItems.find(o => o.id === this.target)) {
-          const i = oldItems.findIndex(o => o.id === this.target)
-
-          this.$nextTick(() => {
-            this.activeIndex = this.tabItems[i > 0 ? i - 1 : 0].id
-            this.target = this.activeIndex
-          })
-        }
-      }
-      this.slider()
-    },
-    '$vuetify.application.left' () {
-      this.onContainerResize()
-    },
-    '$vuetify.application.right' () {
-      this.onContainerResize()
-    }
-  },
-
-  mounted () {
-    // This is a workaround to detect if link is active
-    // when being used as a router or nuxt link
-    const i = this.tabItems.findIndex(({ el }) => {
-      return el.firstChild.classList.contains('tabs__item--active')
-    })
-
-    const tab = this.value || (this.tabItems[i !== -1 ? i : 0] || {}).id
-
-    tab && this.tabClick(tab)
-  },
-
   methods: {
-    registerContent (id, toggle) {
-      this.content.push({ id, toggle })
+    checkPrevIcon () {
+      return this.scrollOffset > 0
     },
-    registerTabItem (id, toggle, el) {
-      this.tabItems.push({ id, toggle, el })
-    },
-    unregisterContent (id) {
-      this.content = this.content.filter(o => o.id !== id)
-    },
-    unregisterTabItem (id) {
-      this.tabItems = this.tabItems.filter(o => o.id !== id)
-    },
-    next (cycle) {
-      let nextIndex = this.activeIndex + 1
+    checkNextIcon () {
+      // Check one scroll ahead to know the width of right-most item
+      const container = this.$refs.container
+      const wrapper = this.$refs.wrapper
 
-      if (!this.content[nextIndex]) {
-        if (!cycle) return
-        nextIndex = 0
-      }
-
-      this.tabClick(this.tabItems[nextIndex].id)
+      return container.clientWidth > this.scrollOffset + wrapper.clientWidth
     },
-    prev (cycle) {
-      let prevIndex = this.activeIndex - 1
+    callSlider () {
+      this.setOverflow()
+      if (this.hideSlider || !this.activeTab) return false
 
-      if (!this.content[prevIndex]) {
-        if (!cycle) return
-        prevIndex = this.content.length - 1
-      }
+      // Give screen time to paint
+      const action = this.activeTab.action
+      const activeTab = action === this.activeTab
+        ? this.activeTab
+        : this.tabs.find(tab => tab.action === action)
 
-      this.tabClick(this.tabItems[prevIndex].id)
-    },
-    onResize () {
-      this.slider()
+      if (!activeTab) return
+      this.sliderWidth = activeTab.$el.scrollWidth
+      this.sliderLeft = activeTab.$el.offsetLeft
     },
     /**
      * When v-navigation-drawer changes the
      * width of the container, call resize
      * after the transition is complete
-     *
-     * @return {Void}
      */
     onContainerResize () {
       clearTimeout(this.resizeTimeout)
-      this.resizeTimeout = setTimeout(this.onResize, this.transitionTime)
+      this.resizeTimeout = setTimeout(this.callSlider, this.transitionTime)
     },
-    slider (el) {
-      this.tabsSlider = this.tabsSlider ||
-        !!this.$el && this.$el.querySelector('.tabs__slider')
+    onResize () {
+      if (this._isDestroyed) return
 
-      this.tabsContainer = this.tabsContainer ||
-        !!this.$el && this.$el.querySelector('.tabs__container')
+      this.callSlider()
+      this.scrollIntoView()
+    },
+    overflowCheck (e, fn) {
+      this.isOverflowing && fn(e)
+    },
+    scrollTo (direction) {
+      this.scrollOffset = this.newOffset(direction)
+    },
+    setOverflow () {
+      this.isOverflowing = this.$refs.bar.clientWidth < this.$refs.container.clientWidth
+    },
+    findActiveLink () {
+      if (!this.tabs.length || this.lazyValue) return
 
-      if (!this.tabsSlider || !this.tabsContainer) return
-
-      this.targetEl = el || this.targetEl
-
-      if (!this.targetEl) return
-
-      // Gives DOM time to paint when
-      // processing slider for
-      // dynamic tabs
-      this.$nextTick(() => {
-        // #684 Calculate width as %
-        const width = (
-          this.targetEl.scrollWidth /
-          this.tabsContainer.clientWidth *
-          100
-        )
-
-        this.tabsSlider.style.width = `${width}%`
-        this.tabsSlider.style.left = `${this.targetEl.offsetLeft}px`
+      const activeIndex = this.tabs.findIndex((tabItem, index) => {
+        const id = tabItem.action === tabItem ? index.toString() : tabItem.action
+        return id === this.lazyValue ||
+          tabItem.$el.firstChild.className.indexOf(this.activeClass) > -1
       })
+
+      const index = activeIndex > -1 ? activeIndex : 0
+      const tab = this.tabs[index]
+
+      /* istanbul ignore next */
+      // There is not a reliable way to test
+      this.inputValue = tab.action === tab ? index : tab.action
     },
-    tabClick (target) {
-      const setActiveIndex = index => {
-        if (this.activeIndex === index) {
-          // #762 update tabs display
-          // In case tabs count got changed but activeIndex didn't
-          this.updateTabs()
-        } else {
-          this.activeIndex = index
+    parseNodes () {
+      const item = []
+      const items = []
+      const slider = []
+      const tab = []
+      const length = (this.$slots.default || []).length
+
+      for (let i = 0; i < length; i++) {
+        const vnode = this.$slots.default[i]
+
+        /* istanbul ignore else */
+        if (vnode.componentOptions) {
+          switch (vnode.componentOptions.Ctor.options.name) {
+            case 'v-tabs-slider': slider.push(vnode)
+              break
+            case 'v-tabs-items': items.push(vnode)
+              break
+            case 'v-tab-item': item.push(vnode)
+              break
+            // case 'v-tab' - intentionally omitted
+            default: tab.push(vnode)
+          }
         }
       }
 
-      this.target = target
+      return { tab, slider, items, item }
+    },
+    register (options) {
+      this.tabs.push(options)
+    },
+    scrollIntoView () {
+      if (!this.activeTab) return false
 
-      this.$nextTick(() => {
-        const nextIndex = this.content.findIndex(o => o.id === target)
-        this.reverse = nextIndex < this.activeIndex
-        setActiveIndex(nextIndex)
+      const { clientWidth, offsetLeft } = this.activeTab.$el
+      const wrapperWidth = this.$refs.wrapper.clientWidth
+      const totalWidth = wrapperWidth + this.scrollOffset
+      const itemOffset = clientWidth + offsetLeft
+      const additionalOffset = clientWidth * 0.3
 
-        this.$emit('input', this.target)
-      })
+      /* instanbul ignore else */
+      if (offsetLeft < this.scrollOffset) {
+        this.scrollOffset = Math.max(offsetLeft - additionalOffset, 0)
+      } else if (totalWidth < itemOffset) {
+        this.scrollOffset -= totalWidth - itemOffset - additionalOffset
+      }
+    },
+    tabClick (tab) {
+      this.inputValue = tab.action === tab ? this.tabs.indexOf(tab) : tab.action
+      this.scrollIntoView()
+    },
+    tabProxy (val) {
+      this.inputValue = val
+    },
+    registerItems (fn) {
+      this.tabItems = fn
+    },
+    unregisterItems () {
+      this.tabItems = null
+    },
+    unregister (tab) {
+      this.tabs = this.tabs.filter(o => o !== tab)
     },
     updateTabs () {
-      this.content.forEach(({ toggle }) => {
-        toggle(this.target, this.reverse, this.isBooted)
-      })
+      for (let index = this.tabs.length; --index >= 0;) {
+        this.tabs[index].toggle(this.target)
+      }
 
-      this.tabItems.forEach(({ toggle }) => {
-        toggle(this.target)
-      })
+      this.setOverflow()
     }
   },
 
+  mounted () {
+    this.prevIconVisible = this.checkPrevIcon()
+    this.nextIconVisible = this.checkNextIcon()
+  },
+
   render (h) {
+    const { tab, slider, items, item } = this.parseNodes()
+
     return h('div', {
-      'class': this.classes,
+      staticClass: 'tabs',
       directives: [{
         name: 'resize',
+        arg: 400,
+        modifiers: { quiet: true },
         value: this.onResize
       }]
-    }, this.$slots.default)
+    }, [
+      this.genBar([this.hideSlider ? null : this.genSlider(slider), tab]),
+      this.genItems(items, item)
+    ])
   }
 }

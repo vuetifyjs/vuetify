@@ -1,5 +1,7 @@
-import { test } from '~util/testing'
-import { VRadioGroup, VRadio } from '~components/VRadioGroup'
+import { test } from '@util/testing'
+import { VRadioGroup, VRadio } from '@components/VRadioGroup'
+
+const warning = '[Vuetify] The v-radio component must be used inside a v-radio-group'
 
 test('VRadio.vue', ({ mount }) => {
   it('should advise about v-radio-group being necessary', () => {
@@ -10,7 +12,7 @@ test('VRadio.vue', ({ mount }) => {
       }
     })
 
-    expect('The v-radio component must be used inside a v-radio-group.').toHaveBeenTipped()
+    expect(warning).toHaveBeenTipped()
   })
 
   // TODO: Enable test when there's a way to test $parent.$vnode.tag
@@ -43,7 +45,7 @@ test('VRadio.vue', ({ mount }) => {
     expect(inputGroup.getAttribute('aria-checked')).toBe('true')
     expect(wrapper.html()).toMatchSnapshot()
 
-    expect('The v-radio component must be used inside a v-radio-group.').toHaveBeenTipped()
+    expect(warning).toHaveBeenTipped()
   })
 
   it('should render aria-label attribute with label value on input group', () => {
@@ -62,7 +64,7 @@ test('VRadio.vue', ({ mount }) => {
     expect(inputGroup.getAttribute('aria-label')).toBe('Test')
     expect(wrapper.html()).toMatchSnapshot()
 
-    expect('The v-radio component must be used inside a v-radio-group.').toHaveBeenTipped()
+    expect(warning).toHaveBeenTipped()
   })
 
   it('should not render aria-label attribute with no label value on input group', () => {
@@ -80,7 +82,7 @@ test('VRadio.vue', ({ mount }) => {
     expect(inputGroup.element.getAttribute('aria-label')).toBeFalsy()
     expect(wrapper.html()).toMatchSnapshot()
 
-    expect('The v-radio component must be used inside a v-radio-group.').toHaveBeenTipped()
+    expect(warning).toHaveBeenTipped()
   })
 
   it('should render proper input name', () => {
@@ -95,7 +97,7 @@ test('VRadio.vue', ({ mount }) => {
     expect(input.getAttribute('name')).toBe('name')
     expect(wrapper.html()).toMatchSnapshot()
 
-    expect('The v-radio component must be used inside a v-radio-group.').toHaveBeenTipped()
+    expect(warning).toHaveBeenTipped()
   })
 
   it('should register and unregister', () => {
@@ -132,12 +134,12 @@ test('VRadio.vue', ({ mount }) => {
 
     const ripple = wrapper.find('.input-group--selection-controls__ripple')
 
-    expect(ripple.length).toBe(0)
+    expect(ripple).toHaveLength(0)
 
-    expect('The v-radio component must be used inside a v-radio-group.').toHaveBeenTipped()
+    expect(warning).toHaveBeenTipped()
   })
 
-  it('should render ripple with data attribute when ripple prop is true', () => {
+  it('should render ripple when ripple prop is true', () => {
     const wrapper = mount(VRadio, {
       propsData: {
         ripple: true
@@ -150,8 +152,9 @@ test('VRadio.vue', ({ mount }) => {
 
     const ripple = wrapper.find('.input-group--selection-controls__ripple')[0]
 
-    expect(ripple.getAttribute('data-ripple')).toBe('true')
+    expect(ripple.element._ripple.enabled).toBe(true)
+    expect(ripple.element._ripple.centered).toBe(true)
 
-    expect('The v-radio component must be used inside a v-radio-group.').toHaveBeenTipped()
+    expect(warning).toHaveBeenTipped()
   })
 })

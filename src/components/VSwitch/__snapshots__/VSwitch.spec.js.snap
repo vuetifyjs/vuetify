@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VSwitch.js should render component with error 1`] = `
+
+<div tabindex="0"
+     class="input-group input-group--error input-group--selection-controls switch error--text"
+>
+  <div class="input-group__input">
+    <div class="input-group--selection-controls__container">
+      <div class="input-group--selection-controls__toggle">
+      </div>
+      <div class="input-group--selection-controls__ripple">
+      </div>
+    </div>
+  </div>
+  <div class="input-group__details">
+    <div class="input-group__messages input-group__error">
+    </div>
+  </div>
+</div>
+
+`;

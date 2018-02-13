@@ -1,9 +1,19 @@
-function directive (e, el, binding, v) {
+function closeConditional () {
+  return false
+}
+
+function directive (e, el, binding) {
+  // Args may not always be supplied
+  binding.args = binding.args || {}
+
+  // If no closeConditional was supplied assign a default
+  const isActive = (binding.args.closeConditional || closeConditional)
+
   // The include element callbacks below can be expensive
   // so we should avoid calling them when we're not active.
   // Explicitly check for false to allow fallback compatibility
   // with non-toggleable components
-  if (!e || v.context.isActive === false) return
+  if (!e || isActive(e) === false) return
 
   // If click was triggered programmaticaly (domEl.click()) then
   // it shouldn't be treated as click-outside
@@ -14,13 +24,9 @@ function directive (e, el, binding, v) {
     ('pointerType' in e && !e.pointerType)
   ) return
 
-  // Get value passed to directive
-  const val = binding.value || (() => true)
-  // Check if callback was passed in object or as the value
-  const cb = val.callback || val
   // Check if additional elements were passed to be included in check
   // (click must be outside all included elements, if any)
-  const elements = (val.include || (() => []))()
+  const elements = (binding.args.include || (() => []))()
   // Add the root element for the component this directive was defined on
   elements.push(el)
 
@@ -29,11 +35,9 @@ function directive (e, el, binding, v) {
   // Toggleable can return true if it wants to deactivate.
   // Note that, because we're in the capture phase, this callback will occure before
   // the bubbling click event on any outside elements.
-  if (!clickedInEls(e, elements) && cb(e)) {
-    // Delay setting toggleable inactive to avoid conflicting
-    // with an outside click on any activator toggling our state.
-    setTimeout(() => (v.context.isActive = false), 0)
-  }
+  !clickedInEls(e, elements) && setTimeout(() => {
+    isActive(e) && binding.value()
+  }, 0)
 }
 
 function clickedInEls (e, elements) {
@@ -65,8 +69,8 @@ export default {
   // sure that the root element is
   // available, iOS does not support
   // clicks on body
-  inserted (el, binding, v) {
-    const onClick = e => directive(e, el, binding, v)
+  inserted (el, binding) {
+    const onClick = e => directive(e, el, binding)
     // iOS does not recognize click events on document
     // or body, this is the entire purpose of the v-app
     // component and [data-app], stop removing this

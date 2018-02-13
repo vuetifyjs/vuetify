@@ -1,54 +1,81 @@
-require('../../stylus/components/_toolbar.styl')
+// Styles
+import '../../stylus/components/_toolbar.styl'
 
+// Mixins
 import Applicationable from '../../mixins/applicationable'
 import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
+import SSRBootable from '../../mixins/ssr-bootable'
+
+// Directives
+import Scroll from '../../directives/scroll'
 
 export default {
   name: 'v-toolbar',
 
-  mixins: [Applicationable, Colorable, Themeable],
+  mixins: [
+    Applicationable('top', [
+      'clippedLeft',
+      'clippedRight',
+      'computedHeight',
+      'invertedScroll',
+      'manualScroll'
+    ]),
+    Colorable,
+    SSRBootable,
+    Themeable
+  ],
+
+  directives: { Scroll },
 
   data: () => ({
+    activeTimeout: null,
+    currentScroll: 0,
     heights: {
       mobileLandscape: 48,
       mobile: 56,
       desktop: 64,
       dense: 48
     },
+    isActive: true,
     isExtended: false,
-    isScrollingProxy: false,
-    marginTop: 0,
+    isScrollingUp: false,
     previousScroll: null,
+    previousScrollDirection: null,
+    savedScroll: 0,
     target: null
   }),
 
   props: {
-    absolute: Boolean,
     card: Boolean,
     clippedLeft: Boolean,
     clippedRight: Boolean,
     dense: Boolean,
     extended: Boolean,
-    fixed: Boolean,
+    extensionHeight: {
+      type: [Number, String],
+      validator: v => !isNaN(parseInt(v))
+    },
     flat: Boolean,
     floating: Boolean,
-    height: [Number, String],
-    manualScroll: {
-      type: Boolean,
-      default: null
+    height: {
+      type: [Number, String],
+      validator: v => !isNaN(parseInt(v))
     },
+    invertedScroll: Boolean,
+    manualScroll: Boolean,
     prominent: Boolean,
     scrollOffScreen: Boolean,
     scrollTarget: String,
     scrollThreshold: {
       type: Number,
-      default: 100
-    }
+      default: 300
+    },
+    tabs: Boolean
   },
 
   computed: {
-    computedHeight () {
+    computedContentHeight () {
       if (this.height) return parseInt(this.height)
       if (this.dense) return this.heights.dense
 
@@ -62,126 +89,136 @@ export default {
 
       return this.heights.mobile
     },
-    computedMarginTop () {
-      if (!this.app) return this.marginTop
+    computedExtensionHeight () {
+      if (this.tabs) return 48
+      if (this.extensionHeight) return parseInt(this.extensionHeight)
 
-      return this.marginTop + this.$vuetify.application.bar
+      return this.computedContentHeight
+    },
+    computedHeight () {
+      if (!this.isExtended) return this.computedContentHeight
+
+      return this.computedContentHeight + this.computedExtensionHeight
+    },
+    computedMarginTop () {
+      if (!this.app) return 0
+
+      return this.$vuetify.application.bar
     },
     classes () {
       return this.addBackgroundColorClassChecks({
         'toolbar': true,
-        'elevation-0': this.flat,
+        'elevation-0': this.flat || (!this.isActive && !this.tabs),
         'toolbar--absolute': this.absolute,
         'toolbar--card': this.card,
         'toolbar--clipped': this.clippedLeft || this.clippedRight,
         'toolbar--dense': this.dense,
-        'toolbar--fixed': this.fixed,
+        'toolbar--extended': this.isExtended,
+        'toolbar--fixed': !this.absolute && (this.app || this.fixed),
         'toolbar--floating': this.floating,
         'toolbar--prominent': this.prominent,
-        'toolbar--extended': this.isExtended,
         'theme--dark': this.dark,
         'theme--light': this.light
       })
     },
-    isScrolling: {
-      get () {
-        return this.manualScroll != null
-          ? this.manualScroll
-          : this.isScrollingProxy
-      },
-      set (val) {
-        this.isScrollingProxy = val
-      }
-    },
-    paddingLeft () {
+    computedPaddingLeft () {
       if (!this.app || this.clippedLeft) return 0
 
       return this.$vuetify.application.left
     },
-    paddingRight () {
+    computedPaddingRight () {
       if (!this.app || this.clippedRight) return 0
 
       return this.$vuetify.application.right
     },
+    computedTransform () {
+      return !this.isActive
+        ? -this.computedHeight
+        : 0
+    },
+    currentThreshold () {
+      return Math.abs(this.currentScroll - this.savedScroll)
+    },
     styles () {
-      const style = {
-        marginTop: `${this.computedMarginTop}px`
+      return {
+        marginTop: `${this.computedMarginTop}px`,
+        paddingRight: `${this.computedPaddingRight}px`,
+        paddingLeft: `${this.computedPaddingLeft}px`,
+        transform: `translateY(${this.computedTransform}px)`
       }
-
-      if (this.app) {
-        style.paddingRight = `${this.paddingRight}px`
-        style.paddingLeft = `${this.paddingLeft}px`
-      }
-
-      return style
     }
   },
 
   watch: {
-    clippedLeft (val) {
-      this.updateApplication()
+    currentThreshold (val) {
+      if (this.invertedScroll) {
+        return this.isActive = this.currentScroll > this.scrollThreshold
+      }
+
+      if (val < this.scrollThreshold ||
+        !this.isBooted
+      ) return
+
+      this.isActive = this.isScrollingUp
+      this.savedScroll = this.currentScroll
     },
-    clippedRight (val) {
-      this.updateApplication()
+    isActive () {
+      this.savedScroll = 0
     },
-    isScrolling (val) {
-      this.whenScrolled(val)
+    invertedScroll (val) {
+      this.isActive = !val
+    },
+    manualScroll (val) {
+      this.isActive = !val
+    },
+    isScrollingUp (val) {
+      this.savedScroll = this.savedScroll || this.currentScroll
     }
   },
 
-  mounted () {
-    this.whenScrolled(this.isScrolling)
+  created () {
+    if (this.invertedScroll ||
+      this.manualScroll
+    ) this.isActive = false
   },
 
-  destroyed () {
-    if (this.app) this.$vuetify.application.top = 0
+  mounted () {
+    if (this.scrollTarget) {
+      this.target = document.querySelector(this.scrollTarget)
+    }
   },
 
   methods: {
     onScroll () {
-      if (typeof window === 'undefined') return
+      if (!this.scrollOffScreen ||
+        this.manualScroll ||
+        typeof window === 'undefined'
+      ) return
 
-      if (!this.target) {
-        this.target = this.scrollTarget
-          ? document.querySelector(this.scrollTarget)
-          : window
-      }
+      const target = this.target || window
 
-      const currentScroll = this.scrollTarget
-        ? this.target.scrollTop
-        : this.target.pageYOffset || document.documentElement.scrollTop
+      this.currentScroll = this.scrollTarget
+        ? target.scrollTop
+        : target.pageYOffset || document.documentElement.scrollTop
 
-      if (currentScroll < this.scrollThreshold) return
+      this.isScrollingUp = this.currentScroll < this.previousScroll
 
-      if (this.previousScroll === null) {
-        this.previousScroll = currentScroll
-      }
-
-      this.isScrollingProxy = this.previousScroll < currentScroll
-
-      this.previousScroll = currentScroll
+      this.previousScroll = this.currentScroll
     },
+    /**
+     * Update the application layout
+     *
+     * @return {number}
+     */
     updateApplication () {
-      if (!this.app) return
-
-      this.$vuetify.application.top = !this.fixed && !this.absolute
+      return this.invertedScroll || this.manualScroll
         ? 0
-        : this.isExtended && !this.isScrolling
-          ? this.computedHeight * 2
-          : this.computedHeight
-    },
-    whenScrolled (val) {
-      this.marginTop = val
-        ? -this.$refs.content.clientHeight - 6
-        : 0
-
-      this.updateApplication()
+        : this.computedHeight
     }
   },
 
   render (h) {
     this.isExtended = this.extended || !!this.$slots.extension
-    this.updateApplication()
 
     const children = []
     const data = {
@@ -190,26 +227,22 @@ export default {
       on: this.$listeners
     }
 
-    if (this.scrollOffScreen) {
-      data.directives = [{
-        name: 'scroll',
-        value: {
-          callback: this.onScroll,
-          target: this.scrollTarget
-        }
-      }]
-    }
+    data.directives = [{
+      arg: this.scrollTarget,
+      name: 'scroll',
+      value: this.onScroll
+    }]
 
     children.push(h('div', {
       staticClass: 'toolbar__content',
-      style: { height: `${this.computedHeight}px` },
+      style: { height: `${this.computedContentHeight}px` },
       ref: 'content'
     }, this.$slots.default))
 
     if (this.isExtended) {
       children.push(h('div', {
         staticClass: 'toolbar__extension',
-        style: { height: `${this.computedHeight}px` }
+        style: { height: `${this.computedExtensionHeight}px` }
       }, this.$slots.extension))
     }
 

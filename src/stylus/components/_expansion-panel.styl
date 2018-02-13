@@ -31,6 +31,7 @@ theme(expansion-panel, "expansion-panel")
 
   &__container
     flex: 1 0 100%
+    max-width: 100%
     outline: none
     transition: .3s $transition.swing
 
@@ -39,7 +40,7 @@ theme(expansion-panel, "expansion-panel")
 
     .header__icon
       margin-left: auto
-      
+
       .icon
         // Edge rendering issue TODO: revisit later
         transition: none
@@ -76,7 +77,7 @@ theme(expansion-panel, "expansion-panel")
   &--popout, &--inset
     .expansion-panel__container
       max-width: 95%
-  
+
   &--popout
     .expansion-panel__container--active
       max-width: 100%

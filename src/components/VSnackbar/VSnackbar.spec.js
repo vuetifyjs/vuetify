@@ -1,22 +1,27 @@
-import { mount } from 'avoriaz'
-import VSnackbar from '~components/VSnackbar'
+import { test } from '@util/testing'
+import VSnackbar from '@components/VSnackbar'
 
-describe('VSnackbar.vue', () => {
+test('VSnackbar.vue', ({ mount }) => {
   it('should have a snack class', () => {
-    const wrapper = mount(VSnackbar)
+    const wrapper = mount(VSnackbar, {
+      propsData: {
+        value: true
+      }
+    })
 
     expect(wrapper.hasClass('snack')).toBe(true)
   })
 
-  it('should have a color class', () => {
+  it('should have a snack__wrapper with a color class', () => {
     const wrapper = mount(VSnackbar, {
       propsData: {
+        value: true,
         color: 'orange lighten-2'
       }
     })
 
-    expect(wrapper.hasClass('orange')).toBe(true)
-    expect(wrapper.hasClass('lighten-2')).toBe(true)
+    expect(wrapper.find('.snack__wrapper.orange')).toHaveLength(1)
+    expect(wrapper.find('.snack__wrapper.lighten-2')).toHaveLength(1)
   })
 
   it('should have a snack__content class only when active', async () => {
