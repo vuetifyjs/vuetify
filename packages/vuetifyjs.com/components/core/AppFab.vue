@@ -1,5 +1,6 @@
 <template lang="pug">
   v-fab-transition
+    //- style="bottom: 52px"
     v-btn(
       fab
       dark
@@ -10,7 +11,6 @@
       v-scroll="onScroll"
       v-show="fab"
       @click="toTop"
-      style="bottom: 52px"
     )
       v-icon keyboard_arrow_up
 </template>

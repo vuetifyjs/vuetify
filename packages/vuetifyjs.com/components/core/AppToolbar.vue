@@ -24,26 +24,18 @@
     v-fade-transition(mode="out-in")
       v-btn(flat :to="backPath" v-if="$route.path.name === 'store/Index'")
         v-icon(left) mdi-arrow-left
-        span Back to Docs
+        span {{ $t('Vuetify.AppToolbar.backToDocs' )}}
       v-toolbar-title(v-else).pb-1.hidden-xs-only Vuetify
 
     v-spacer
     v-toolbar-items
       v-btn(
         flat
-        v-show="!isStore"
-        :to="{ name: 'store/Index' }"
-      )
-        span.hidden-sm-and-down Store
-        v-icon(right) store
-    v-toolbar-items
-      v-btn(
-        flat
         v-show="isHome"
         :to="{ name: 'getting-started/QuickStart' }"
       )
-        span.hidden-md-and-up Docs
-        span.hidden-sm-and-down Documentation
+        span.hidden-md-and-up {{ $t('Vuetify.AppToolbar.docs' )}}
+        span.hidden-sm-and-down {{ $t('Vuetify.AppToolbar.documentation' )}}
       v-menu(
         bottom
         offset-y
@@ -71,6 +63,56 @@
                 :src="`http://www.countryflags.io/${language.country}/flat/24.png`"
               )
             v-list-tile-title {{language.title}}
+    v-toolbar-items
+      v-btn(
+        flat
+        v-show="!isStore"
+        :to="{ name: 'store/Index' }"
+      )
+        span.hidden-sm-and-down {{ $t('Vuetify.AppToolbar.store' )}}
+        v-icon(right) store
+
+    v-toolbar-items
+      v-menu(
+        attach
+        bottom
+        left
+        offset-y
+        v-show="!isStore"
+      )
+        v-btn(
+          flat
+          slot="activator"
+        )
+          span.hidden-sm-and-down {{ $t('Vuetify.AppToolbar.ecosystem' )}}
+          v-icon(right) mdi-earth
+        v-list(light)
+          v-subheader(light) {{ $t('Vuetify.AppToolbar.quickLinks' )}}
+          v-list-tile(
+            target="_blank"
+            rel="noopener"
+            v-for="ecosystem in ecosystems"
+            :href="ecosystem.href"
+            :key="ecosystem.text"
+          )
+            v-list-tile-action
+              v-icon(light) {{ ecosystem.icon }}
+            v-list-tile-content
+              v-list-tile-title {{ ecosystem.text }}
+          v-divider(light)
+          v-subheader(light) {{ $t('Vuetify.AppToolbar.social' )}}
+          v-list-tile(
+            target="_blank"
+            rel="noopener"
+            v-for="social in socials"
+            :href="social.href"
+            :key="social.text"
+          )
+            v-list-tile-action
+              v-icon(light) {{ social.icon }}
+            v-list-tile-content
+              v-list-tile-title {{ social.text }}
+
       v-menu(
         bottom
         offset-y
@@ -82,14 +124,18 @@
           flat
         )
           span {{ currentVersion }}
-          v-icon keyboard_arrow_down
+          v-icon(right) keyboard_arrow_down
         v-list(light)
           v-list-tile(
             v-for="release in releases"
             :key="release"
             @click="changeToRelease(release)"
           )
-            v-list-tile-title {{ release }}
+            v-list-tile-avatar
+              v-icon(light) mdi-package
+            v-list-tile-content
+              v-list-tile-title {{ release }}
+
       v-btn(
         v-if="isStore && cart"
         flat
@@ -99,7 +145,7 @@
         v-badge(color="red" left :value="cart.lineItems.length")
           template(slot="badge") {{ cart.lineItems.length }}
           v-icon(left) shopping_cart
-        span Cart
+        span {{ $t('Vuetify.AppToolbar.cart' )}}
 </template>
 
 <script>
@@ -117,9 +163,11 @@
         : store.dispatch('store/getCheckout')
     },
 
-    data: () => ({
+    data: vm => ({
+      ecosystems: vm.$t('Vuetify.AppToolbar.ecosystems'),
       fixed: false,
-      languages
+      languages,
+      socials: vm.$t('Vuetify.AppToolbar.socials')
     }),
 
     computed: {
