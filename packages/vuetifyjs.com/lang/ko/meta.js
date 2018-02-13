@@ -95,6 +95,18 @@ export default {
     'description': 'Vuetify offers numerous pre-build starter and premium themes. Kickstart your next application today, no design skills needed.',
     'keywords': 'vuetify themes, pre-built material themes, premium themes'
   },
+  'layout/grid': {
+    'h1': 'Grid',
+    'title': 'Layout grid system',
+    'description': 'Vuetify supports the material design 12 point grid for laying out your application.',
+    'keywords': 'grid, layout, flex'
+  },
+  'layout/grid-lists': {
+    'h1': 'Grid lists',
+    'title': 'Grid List Component',
+    'description': 'Grid list component for Vuetify Framework',
+    'keywords': 'grid lists, grid'
+  },
   'layout/spacing': {
     'h1': '간격 (Spacing)',
     'title': 'Spacing helpers',
@@ -232,18 +244,6 @@ export default {
     'title': 'Form Component',
     'description': 'Form component for Vuetify Framework',
     'keywords': 'form'
-  },
-  'components/grid': {
-    'h1': 'Grid',
-    'title': 'Layout grid system',
-    'description': 'Vuetify supports the material design 12 point grid for laying out your application.',
-    'keywords': 'grid, layout, flex'
-  },
-  'components/grid-lists': {
-    'h1': 'Grid lists',
-    'title': 'Grid List Component',
-    'description': 'Grid list component for Vuetify Framework',
-    'keywords': 'grid lists, grid'
   },
   'components/icons': {
     'h1': 'Icons',
