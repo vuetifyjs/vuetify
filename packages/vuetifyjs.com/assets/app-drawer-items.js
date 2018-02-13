@@ -136,24 +136,6 @@ export default [
   { divider: true },
   { header: 'Additional resources' },
   {
-    title: 'Ecosystem',
-    group: 'ecosystem',
-    icon: 'mdi-earth',
-    items: [
-      { href: 'https://github.com/vuetifyjs/awesome-vuetify', title: 'Awesome Vuetify', target: '_blank', badge: 'new' }
-    ]
-  },
-  {
-    title: 'Community',
-    group: 'community',
-    icon: 'mdi-account-multiple',
-    items: [
-      { href: 'https://chat.vuetifyjs.com/', title: 'Chat and support', target: '_blank' },
-      { href: 'https://github.com/vuetifyjs/vuetify/issues', title: 'Issue board', target: '_blank' },
-      { href: 'https://stackoverflow.com/search?q=vuetify', title: 'Stack overflow', target: '_blank' }
-    ]
-  },
-  {
     title: 'Advanced tutorials',
     group: 'guides',
     icon: 'mdi-television-guide',

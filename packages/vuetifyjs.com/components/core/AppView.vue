@@ -2,7 +2,7 @@
   v-content
     v-fade-transition(mode="out-in")
       router-view(:key="$route.path")
-    app-footer
+    //- app-footer
 </template>
 
 <script>
