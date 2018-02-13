@@ -46,6 +46,7 @@
         v-btn(
           slot="activator"
           flat
+          style="min-width: 64px"
         )
           img(
             :src="`http://www.countryflags.io/${currentLanguage.country}/flat/32.png`"
@@ -58,7 +59,7 @@
             :key="language.locale"
             @click="translateI18n(language.locale)"
           )
-            v-list-tile-avatar(size="24px").avatar--tile
+            v-list-tile-avatar(size="64px").avatar--tile
               img(
                 :src="`http://www.countryflags.io/${language.country}/flat/24.png`"
               )
@@ -66,11 +67,12 @@
     v-toolbar-items
       v-btn(
         flat
+        style="min-width: 64px"
         v-show="!isStore"
         :to="{ name: 'store/Index' }"
       )
         span.hidden-sm-and-down {{ $t('Vuetify.AppToolbar.store' )}}
-        v-icon(right) store
+        v-icon(:right="$vuetify.breakpoint.mdAndUp") store
 
     v-toolbar-items
       v-menu(
@@ -83,9 +85,10 @@
         v-btn(
           flat
           slot="activator"
+          style="min-width: 64px"
         )
           span.hidden-sm-and-down {{ $t('Vuetify.AppToolbar.ecosystem' )}}
-          v-icon(right) mdi-earth
+          v-icon(:right="$vuetify.breakpoint.mdAndUp") mdi-earth
         v-list(light)
           v-subheader(light) {{ $t('Vuetify.AppToolbar.quickLinks' )}}
           v-list-tile(
