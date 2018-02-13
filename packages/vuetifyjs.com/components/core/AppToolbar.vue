@@ -59,9 +59,10 @@
             :key="language.locale"
             @click="translateI18n(language.locale)"
           )
-            v-list-tile-avatar(size="64px").avatar--tile
+            v-list-tile-avatar(size="24px").avatar--tile
               img(
                 :src="`http://www.countryflags.io/${language.country}/flat/24.png`"
+                width="24px"
               )
             v-list-tile-title {{language.title}}
     v-toolbar-items
