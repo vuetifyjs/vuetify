@@ -20,6 +20,15 @@ export default [
     items: [
       { name: 'PreDefined', title: 'Pre-defined layouts', badge: 'updated' },
       { name: 'PreMadeThemes', title: 'Pre-made themes', badge: 'updated' },
+      {
+        title: 'Grid & breakpoints',
+        group: 'grid',
+        namespace: 'layout',
+        items: [
+          { name: 'grid', title: 'Grid' },
+          { name: 'grid-lists', title: 'Grid lists' }
+        ]
+      },
       { name: 'Spacing', title: 'Spacing' },
       { name: 'Alignment', title: 'Text alignment' },
       { name: 'Display', title: 'Display' },
@@ -70,15 +79,6 @@ export default [
       { name: 'dividers', title: 'Dividers' },
       { name: 'expansion-panels', title: 'Expansion panels' },
       { name: 'footer', title: 'Footer' },
-      {
-        title: 'Grid & breakpoints',
-        group: 'grid',
-        namespace: 'components',
-        items: [
-          { name: 'grid', title: 'Grid' },
-          { name: 'grid-lists', title: 'Grid lists' }
-        ]
-      },
       {
         title: 'Inputs & controls',
         group: '(forms|selects|selection|text-fields)',

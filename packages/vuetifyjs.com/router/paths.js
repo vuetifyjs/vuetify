@@ -8,6 +8,8 @@ export default [
   ['getting-started/roadmap', 'getting-started/Roadmap'],
   ['layout/pre-defined', 'layout/PreDefined'],
   ['layout/pre-made-themes', 'layout/PreMadeThemes'],
+  ['layout/grid', 'layout/Grid'],
+  ['layout/grid-lists', 'layout/GridLists'],
   ['layout/spacing', 'layout/Spacing'],
   ['layout/alignment', 'layout/Alignment'],
   ['layout/display', 'layout/Display'],
@@ -28,6 +30,6 @@ export default [
   ['guides/a-la-carte', 'guides/ALaCarte'],
   ['theme-generator', 'ThemeGenerator', true],
   ['examples/:example+', 'examples/Example', true],
-  [':section/:component', 'components/Doc'],
+  [':section/:component', 'components/Doc', false, true],
   ['*', 'general/404', true]
 ]

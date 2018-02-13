@@ -17,8 +17,6 @@ import ExpansionPanels from './ExpansionPanels'
 import FloatingActionButtons from './FloatingActionButtons'
 import Footer from './Footer'
 import Forms from './Forms'
-import Grid from './Grid'
-import GridLists from './GridLists'
 import Icons from './Icons'
 import Lists from './Lists'
 import Jumbotrons from './Jumbotrons'
@@ -59,8 +57,6 @@ export default {
   FloatingActionButtons,
   Footer,
   Forms,
-  Grid,
-  GridLists,
   Icons,
   Lists,
   Jumbotrons,

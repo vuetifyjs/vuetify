@@ -2,6 +2,32 @@ export default {
   header: 'Grid system',
   headerText: 'Vuetify has a 12 point grid system. Built using <kbd>flex-box</kbd>, the grid is used to layout an application\'s content.  It contains 5 types of media breakpoints that are used for targeting specific screen sizes or orientations. The props for grid components are actually classes that are derived from their defined properties. This allows you to easily specify these helper classes as props, while still providing the classes to be used anywhere.',
   components: ['v-container', 'v-layout', 'v-flex', 'v-spacer'],
+  toc: [
+    {
+      text: 'Introduction',
+      href: 'introduction'
+    },
+    {
+      text: 'Usage',
+      href: 'usage'
+    },
+    {
+      text: 'API',
+      href: 'api'
+    },
+    {
+      text: 'Supplemental',
+      href: 'supplemental'
+    },
+    {
+      text: 'Examples',
+      href: 'examples'
+    },
+    {
+      text: 'Breakpoint object',
+      href: 'breakpoint-object'
+    }
+  ],
   examples: [{
     grid: {
       header: 'Usage',
