@@ -26,6 +26,11 @@ export default {
       icon: 'mdi-alert-octagon'
     },
     {
+      href: 'https://template.vuetifyjs.com',
+      text: 'Codepen Template',
+      icon: 'mdi-codepen'
+    },
+    {
       href: 'https://github.com/vuetifyjs/vuetify/releases',
       text: 'Latest Releases',
       icon: 'mdi-format-list-checks'
