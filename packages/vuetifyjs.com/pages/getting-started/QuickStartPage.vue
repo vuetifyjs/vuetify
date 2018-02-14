@@ -39,7 +39,7 @@
           |     &lt;v-app&gt;
           |       &lt;v-content&gt;
           |         &lt;v-container&gt;Hello world&lt;/v-container&gt;
-          |       &lt;v-content&gt;
+          |       &lt;/v-content&gt;
           |     &lt;/v-app&gt;
           |   &lt;/div&gt;
           | &nbsp;
