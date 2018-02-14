@@ -47,7 +47,7 @@ export default {
   support: {
     hasVuetifyHelped: 'Помогло ли Vuetify создать потрясающее приложение?',
     showYourSupport: 'Покажите свою поддержку Vuetify',
-    becomingAPatron: 'став покровителей'
+    becomingAPatron: 'став покровителем'
   },
   becomeSponsor: 'Стать спонсором',
   proudlySponsoredBy: 'Patreon спонсоры',
