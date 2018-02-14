@@ -12,6 +12,7 @@
         </v-toolbar>
         <v-list>
           <v-list-group
+            v-model="item.active"
             v-for="item in items"
             :key="item.title"
             :prepend-icon="item.action"
