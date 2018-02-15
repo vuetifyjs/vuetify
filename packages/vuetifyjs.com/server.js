@@ -98,9 +98,10 @@ Object.keys(redirects).forEach(k => {
 // if your app involves user-specific content, you need to implement custom
 // logic to determine whether a request is cacheable based on its url and
 // headers.
-// 1-second microcache.
+// 10-minute microcache.
 // https://www.nginx.com/blog/benefits-of-microcaching-nginx/
-app.use(microcache.cacheSeconds(1, req => useMicroCache && req.originalUrl))
+const isStore = req => !!req.params && !!req.params[1] && req.params[1].includes('store')
+app.use(microcache.cacheSeconds(10 * 60 * 1000, req => useMicroCache && !isStore(req) && req.originalUrl))
 
 function render (req, res) {
   const s = Date.now()
