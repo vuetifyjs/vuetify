@@ -100,7 +100,7 @@ Object.keys(redirects).forEach(k => {
 // 10-minute microcache.
 // https://www.nginx.com/blog/benefits-of-microcaching-nginx/
 const isStore = req => !!req.params && !!req.params[1] && req.params[1].includes('store')
-app.use(microcache.cacheSeconds(10 * 60 * 1000, req => useMicroCache && !isStore(req) && req.originalUrl))
+const cacheMiddleware = microcache.cacheSeconds(10 * 60, req => useMicroCache && !isStore(req) && req.originalUrl)
 
 function render (req, res) {
   const s = Date.now()
@@ -148,7 +148,7 @@ const languageRegex = /^\/([a-z]{2,3}|[a-z]{2,3}-[a-zA-Z]{4}|[a-z]{2,3}-[A-Z]{2,
 
 app.get(languageRegex, isProd ? render : (req, res) => {
   readyPromise.then(() => render(req, res))
-})
+}, cacheMiddleware)
 
 // 302 redirect for no language
 app.get('*', (req, res) => {
