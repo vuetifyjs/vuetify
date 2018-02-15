@@ -68,7 +68,7 @@
         this.email = ''
         this.select = null
         this.checkbox = null
-        this.$validator.clean()
+        this.$validator.reset()
       }
     }
 

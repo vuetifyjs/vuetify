@@ -19,7 +19,6 @@
           <v-list-tile-content>
             <v-list-tile-title>John Leider</v-list-tile-title>
           </v-list-tile-content>
-          </v-list-tile-action>
         </v-list-tile>
       </v-list>
       <v-list class="pt-0" dense>

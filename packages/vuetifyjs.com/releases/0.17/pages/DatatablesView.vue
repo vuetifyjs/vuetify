@@ -56,6 +56,12 @@
                   'Hide the table headers'
                 ],
                 [
+                  'disable-initial-sort',
+                  'Boolean',
+                  'False',
+                  'Disable default sorting on initial render'
+                ],
+                [
                   'items',
                   'Array',
                   '[]',

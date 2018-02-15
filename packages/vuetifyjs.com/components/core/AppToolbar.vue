@@ -211,7 +211,7 @@
         const path = this.$route.fullPath.split('/')
           .slice(2)
           .join('/')
-        window.location.href = `${window.location.origin}/releases/${release}/#${path}`
+        window.location.href = `${window.location.origin}/releases/${release}/#/${path}`
       },
       translateI18n (lang) {
         this.$router.replace({ params: { lang } })
