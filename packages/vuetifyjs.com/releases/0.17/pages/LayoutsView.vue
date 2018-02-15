@@ -3,7 +3,7 @@
     div(slot='top')
       section
         h2.display-1 Default application markup
-        section-text This is an example of the default application markup for Vuetify. You can place your layout elements anywhere, as long as you designate them with the <strong>app</strong> property. The key component in all of this is the <code>v-content</code> element. This will be dynamically sized depending upon the structure of your designated <strong>app</strong> components. This allows you to create extremely customed solutions.
+        section-text This is an example of the default application markup for Vuetify. You can place your layout elements anywhere, as long as you designate them with the <strong>app</strong> property. The key component in all of this is the <code>v-content</code> element. This will be dynamically sized depending upon the structure of your designated <strong>app</strong> components. This allows you to create extremely customized solutions.
         markup(lang='html' xs12 sm6)
           |&lt;v-app&gt;
           |   &lt;v-navigation-drawer app&gt;&lt;/v-navigation-drawer&gt;

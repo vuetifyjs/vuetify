@@ -56,7 +56,7 @@
         },
         {
           q: `Is there a codepen template with router?`,
-          a: 'Yes, <a href="https://codepen.io/wernerm/pen/LjggoV" target="_blank" rel="noopener">https://codepen.io/wernerm/pen/LjggoV</a>'
+          a: 'Yes, <a href="https://codepen.io/zikeji/pen/ypeQNm" target="_blank" rel="noopener">https://codepen.io/zikeji/pen/ypeQNm</a>'
         },
         {
           q: `My application does not look correct`,

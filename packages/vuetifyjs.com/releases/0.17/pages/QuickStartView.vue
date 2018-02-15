@@ -8,6 +8,8 @@
       ad
 
     v-alert(color="error" icon="warning" value).mb-4 In order for your application to work properly, you <strong>must</strong> wrap it in a <code>v-app</code> component. This component is used for dynamically managing your content area and is the mounting point for many components.
+    v-alert(color="info" icon="local_offer" value).mb-4
+      div The new <strong>Vuetify Store</strong> is now live <v-btn color="white" class="primary--text" href="https://next.vuetifyjs.com/store" target="_blank">Check it out! <v-icon>chevron_right</v-icon></v-btn>
     section#cdn-install
       section-header CDN Install
       section-text To test using Vuetify.js without installing a template from Vue CLI, copy the code below into your <code>index.html</code>. This will pull the latest version of Vue and Vuetify, allowing you to start playing with components. You can also use the <a href="https://template.vuetifyjs.com" target="_blank">Vuetify starter</a> on codepen.
