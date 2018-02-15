@@ -72,7 +72,6 @@ const serve = (path, cache) => express.static(resolve(path), {
 app.use(cookieParser())
 app.use(compression({ threshold: 0 }))
 app.use(favicon('./static/favicon.ico'))
-app.use('/example-source', serve('./examples', true)) // TODO: This should be a regex to serve anything with an extension
 app.use('/static/manifest.json', serve('./manifest.json', true))
 app.use('/static', serve('./static', true))
 app.use('/public', serve('./public', true))
