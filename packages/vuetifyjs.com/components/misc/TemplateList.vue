@@ -9,7 +9,6 @@
       v-flex(
         xs12
         sm4
-        md3
         v-for="(template, i) in templates"
         :key="i"
       )
@@ -129,6 +128,12 @@
           title: 'A La Carte',
           init: 'a-la-carte',
           desc: 'In this template you can see an example of how to select only the components you want to use. This is useful for reducing package size with unused components.'
+        },
+        {
+          icon: 'phone_iphone',
+          title: 'Cordova',
+          init: 'cordova',
+          desc: 'This template uses Apache Cordova to help you easily convert your web app into a native Android or iOS app.'
         }
       ],
       selectedIndex: 0
