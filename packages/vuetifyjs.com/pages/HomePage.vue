@@ -12,6 +12,7 @@
               src="/static/vuetify-logo-300.png"
               alt="Logo"
               width="196px"
+              height="196px"
             )
             h1.display-3 {{ $t("Vuetify.Home.heading1") }}
             div.headline.mb-3 {{ $t("Vuetify.Home.heading1cont") }}
