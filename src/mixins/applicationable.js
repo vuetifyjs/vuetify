@@ -33,6 +33,10 @@ export default function applicationable (value, events = []) {
       this.callUpdate()
     },
 
+    mounted () {
+      this.callUpdate()
+    },
+
     destroyed () {
       this.app && this.removeApplication()
     },

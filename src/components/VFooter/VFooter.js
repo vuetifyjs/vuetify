@@ -70,7 +70,9 @@ export default {
      */
     updateApplication () {
       return isNaN(this.height)
-        ? this.$el.clientHeight
+        ? this.$el
+          ? this.$el.clientHeight
+          : 0
         : this.height
     }
   },
