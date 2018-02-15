@@ -147,15 +147,17 @@
     beforeRouteEnter (to, from, next) {
       next(vm => {
         vm.to = from.fullPath
-        vm.backupTheme = Object.assign({}, vm.$vuetify.theme)
-        vm.$vuetify.theme = vm.theme
+        if (typeof window !== 'undefined') {
+          vm.backupTheme = Object.assign({}, vm.$vuetify.theme)
+          vm.$vuetify.theme = vm.theme
+        }
         setTimeout(() => (vm.drawer = true), 400)
       })
     },
 
     beforeRouteLeave (to, from, next) {
-      this.drawer = false
       this.$vuetify.theme = this.backupTheme
+      this.drawer = false
       next()
     },
 
