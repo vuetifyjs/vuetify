@@ -2,7 +2,7 @@ export default {
   header: 'Цвета',
   headerText: 'Из коробки вы получаете доступ ко всем цветам в [Material Design спецификации](https://material.io/guidelines/style/color.html) через **stylus** и **javascript**. Эти значения могут использоваться в ваших таблицах стилей, ваших файлах компонентов и фактических компонентах через систему **color class**.',
   classesHeader: 'Классы',
-  classesText: 'Каждый цвет из спецификации преобразуется в **фоновый** и **текстовый** вариант для стилизации в вашем приложении через класс, например. `<div class ="red">` или `<span class ="red-text">`. Эти цвета классов определены [здесь](https://github.com/vuetifyjs/vuetify/blob/master/src/stylus/settings/_colors.styl).',
+  classesText: 'Каждый цвет из спецификации преобразуется в **фоновый** и **текстовый** вариант для стилизации в вашем приложении через класс, например: `<div class="red">` или `<span class="red-text">`. Эти цвета классов определены [здесь](https://github.com/vuetifyjs/vuetify/blob/master/src/stylus/settings/_colors.styl).',
   classesText2: 'Цвет текста также поддерживают **затемненные** и **осветленные** варианты с использованием `text - {lighten|darken} - {n}`',
   javascriptPackHeader: 'Цветовой пакет Javascript',
   javascriptPackText: 'Vuetify имеет дополнительный пакет цветов javascript, который вы можете импортировать и использовать в своем приложении. Это также можно использовать для определения темы ваших приложений.',
