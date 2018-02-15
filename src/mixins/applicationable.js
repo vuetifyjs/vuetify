@@ -27,6 +27,8 @@ export default function applicationable (value, events = []) {
     },
 
     created () {
+      this.$vuetify.application['activeuid'] = this._uid
+
       for (let i = 0, length = events.length; i < length; i++) {
         this.$watch(events[i], this.callUpdate)
       }
@@ -48,7 +50,9 @@ export default function applicationable (value, events = []) {
         this.$vuetify.application[this.applicationProperty] = this.updateApplication()
       },
       removeApplication () {
-        this.$vuetify.application[this.applicationProperty] = 0
+        if (this.$vuetify.application['activeuid'] === this._uid) {
+          this.$vuetify.application[this.applicationProperty] = 0
+        }
       },
       updateApplication: () => {}
     }
