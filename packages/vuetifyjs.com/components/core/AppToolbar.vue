@@ -61,7 +61,7 @@
           )
             v-list-tile-avatar(size="24px").avatar--tile
               img(
-                :src="`//www.countryflags.io/${language.country}/flat/24.png`"
+                :src="`https://countryflags.io/${language.country}/flat/24.png`"
                 width="24px"
               )
             v-list-tile-title {{language.title}}
