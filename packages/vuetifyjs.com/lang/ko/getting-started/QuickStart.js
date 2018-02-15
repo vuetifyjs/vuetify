@@ -2,7 +2,7 @@ export default {
   header: '빠른 시작',
   headerText: 'Vuetify 프로젝트를 바로 시작하려면 _(공식 예제를 바탕으로한)_ Vuetify Vue CLI 패키지를 사용하세요. Vuetify는 **SSR** (서버사이드 렌더링), **SPA** (싱글페이지 어플리케이션), **PWA** (프로그레시브 웹 어플리케이션)와 단독 **HTML** 페이지를 지원합니다.',
   alert1: '당신의 어플리케이션이 제대로 작독하려면, **반드시** 어플리케이션을 `v-app` 컴포넌트로 감싸야합니다. 이 컴포넌트는 동적으로 컨텐츠 영역을 관리하고 여러 컴포넌트들의 마운팅 포인트이기도 합니다.',
-  newStoreAlert: '새로운 Vuetify 상점이 지금 **운영중**입니다.!. 이 프로젝트를 지원하면서 동시에 멋진 swag도 받으세요! <a href="https://next.vuetifyjs.com/store" class="btn btn--white primary--text"><span class="btn__content">지금 확인하세요</span></a>',
+  newStoreAlert: '새로운 Vuetify 상점이 지금 **운영중**입니다.!. 이 프로젝트를 지원하면서 동시에 멋진 swag도 받으세요! <a href="https://vuetifyjs.com/store" class="btn btn--white primary--text"><span class="btn__content">지금 확인하세요</span></a>',
   browserHeader: '지원하는 브라우져',
   browserText: 'Vuetify는 웹개발의 다음 단계로 나아가는 것을 추구하는 진보적인 프레임웤입니다. 이 과업을 성취하기 위해, 오래된 버변의 인터넷 익스플로러를 지원하지 않는 다소의 희생이 있어야만 했습니다. 이 리스트는 호환되는 브라우져에 대한 완벽한 리스트는 아니지만 주로 지원하는 브라우져들입니다.',
   cdnHeader: 'CDN을 이용한 설치',
