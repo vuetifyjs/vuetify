@@ -12,6 +12,11 @@ selects($material)
       &.input-group--focused .input-group__input
         background: $material.cards
 
+    &:not(.input-group--error)
+    .input-group--select__prefix,
+    .input-group--select__suffix
+      color: $material.text.secondary
+
 theme(selects, "input-group--select")
 
 .input-group--select
@@ -56,6 +61,24 @@ theme(selects, "input-group--select")
     pointer-events: none
 
 .input-group--select
+  /** Prefix/Suffix */
+  &:not(.input-group--focused):not(.input-group--dirty)
+    label
+      left: 16px
+
+  .input-group--select__prefix,
+  .input-group--select__suffix
+    align-items: center
+    display: inline-flex
+    font-size: 16px
+    margin-top: 1px
+
+  .input-group--select__prefix
+    margin-right: 3px
+
+  .input-group--select__suffix
+    margin-left: 3px
+
   .input-group__selections
     align-items: center
     display: flex
@@ -77,6 +100,14 @@ theme(selects, "input-group--select")
   .fade-transition-leave-active
     position: absolute
     left: 0
+
+  .input-group__selected__items
+    display: inline-block
+    flex: 1
+
+  &.input-group--autocomplete
+    .input-group__selected__items
+      flex: unset
 
   &.input-group--autocomplete.input-group--search-focused
     .input-group__selections__comma

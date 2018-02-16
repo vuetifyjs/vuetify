@@ -53,12 +53,14 @@ export default {
     multiLine: Boolean,
     openOnClear: Boolean,
     overflow: Boolean,
+    prefix: String,
     returnObject: Boolean,
     searchInput: {
       default: null
     },
     segmented: Boolean,
     singleLine: Boolean,
+    suffix: String,
     tags: Boolean,
     valueComparator: {
       type: Function,
