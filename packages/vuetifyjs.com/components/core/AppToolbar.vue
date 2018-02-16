@@ -49,7 +49,7 @@
           style="min-width: 64px"
         )
           img(
-            :src="`http://www.countryflags.io/${currentLanguage.country}/flat/32.png`"
+            :src="`https://countryflags.io/${currentLanguage.country}/flat/32.png`"
             width="32px"
           )
         v-list(light)
