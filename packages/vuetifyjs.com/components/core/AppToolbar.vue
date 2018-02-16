@@ -144,7 +144,7 @@
         v-if="isStore && cart"
         flat
         :to="{ name: 'store/Cart' }"
-        active-class="btn"
+        dark
       )
         v-badge(color="red" left :value="cart.lineItems.length")
           template(slot="badge") {{ cart.lineItems.length }}

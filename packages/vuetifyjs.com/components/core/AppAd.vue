@@ -1,5 +1,13 @@
 <template lang="pug">
   li
+    v-card(
+      flat
+      height="205px"
+      img="/static/doc-images/ads/store-ad-1.png"
+      tile
+      width="130px"
+      :to="{ name: 'store/Index' }"
+    ).mb-3
 </template>
 
 <script>
@@ -7,14 +15,14 @@
     name: 'AppAd',
 
     mounted () {
-      if (process.env.NODE_ENV === 'development') return
+      // if (process.env.NODE_ENV === 'development') return
 
       const script = document.createElement('script')
       script.type = 'text/javascript'
       script.src = '//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=vuetifyjscom'
       script.id = '_carbonads_js'
 
-      this.$el.appendChild(script)
+      this.$el.append(script)
     }
   }
 </script>
