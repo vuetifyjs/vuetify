@@ -29,10 +29,10 @@ theme(tabs__bar, "tabs__bar")
   user-select: none
   width: 32px
 
-  &--prepend
+  &--prev
     left: 4px
 
-  &--append
+  &--next
     right: 4px
 
 .tabs__wrapper
@@ -101,8 +101,7 @@ theme(tabs__bar, "tabs__bar")
       margin-left: auto
 
   &--centered,
-  &--fixed-tabs,
-  &--right
+  &--fixed-tabs
     > .tabs__div:last-child
       margin-right: auto
 
@@ -123,7 +122,6 @@ theme(tabs__bar, "tabs__bar")
   height: inherit
   max-width: 264px
   text-align: center
-  text-decoration: none
   text-transform: $tab-text-transform
   vertical-align: middle
 
@@ -137,6 +135,7 @@ theme(tabs__bar, "tabs__bar")
   justify-content: center
   max-width: inherit
   padding: 6px 12px
+  text-decoration: none
   transition: $primary-transition
   user-select: none
   white-space: normal

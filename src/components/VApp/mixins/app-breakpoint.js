@@ -26,7 +26,8 @@ const breakpoint = {
   data () {
     return {
       clientWidth: clientDimensions.getWidth(),
-      clientHeight: clientDimensions.getHeight()
+      clientHeight: clientDimensions.getHeight(),
+      resizeTimeout: null
     }
   },
 
@@ -114,8 +115,16 @@ const breakpoint = {
 
   methods: {
     onResize () {
-      this.clientWidth = clientDimensions.getWidth()
-      this.clientHeight = clientDimensions.getHeight()
+      clearTimeout(this.resizeTimeout)
+
+      // Added debounce to match what
+      // v-resize used to do but was
+      // removed due to a memory leak
+      // https://github.com/vuetifyjs/vuetify/pull/2997
+      this.resizeTimeout = setTimeout(() => {
+        this.clientWidth = clientDimensions.getWidth()
+        this.clientHeight = clientDimensions.getHeight()
+      }, 200)
     }
   }
 }

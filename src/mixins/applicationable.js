@@ -1,11 +1,13 @@
+import { factory as PositionableFactory } from './positionable'
+
 export default function applicationable (value, events = []) {
   return {
     name: 'applicationable',
 
+    mixins: [PositionableFactory(['absolute', 'fixed'])],
+
     props: {
-      absolute: Boolean,
-      app: Boolean,
-      fixed: Boolean
+      app: Boolean
     },
 
     computed: {
@@ -28,6 +30,7 @@ export default function applicationable (value, events = []) {
       for (let i = 0, length = events.length; i < length; i++) {
         this.$watch(events[i], this.callUpdate)
       }
+      this.callUpdate()
     },
 
     mounted () {

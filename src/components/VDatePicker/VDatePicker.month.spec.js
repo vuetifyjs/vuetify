@@ -1,23 +1,30 @@
 import Vue from 'vue'
 import { test } from '@util/testing'
-import VDatePicker from '@components/VDatePicker'
+import VDatePicker from './VDatePicker'
+import VMenu from '@components/VMenu'
 
 test('VDatePicker.js', ({ mount, compileToFunctions }) => {
-  it('should emit input event on year click', async () => {
-    const cb = jest.fn()
+  it('should emit input event on year click (reactive picker)', async () => {
     const wrapper = mount(VDatePicker, {
       propsData: {
         value: '2013-05',
-        type: 'month'
+        type: 'month',
+        reactive: true
       },
       data: {
         activePicker: 'YEAR'
       }
     })
 
-    wrapper.vm.$on('input', cb);
-    wrapper.find('.picker--date__years li.active + li')[0].trigger('click')
-    expect(cb).toBeCalledWith('2012-05')
+    const input = jest.fn()
+    wrapper.vm.$on('input', input);
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', input);
+
+    wrapper.find('.date-picker-years li.active + li')[0].trigger('click')
+    expect(input).toBeCalledWith('2012-05')
+    expect(change).not.toBeCalled()
   })
 
   it('should not emit input event on year click if month is not allowed', async () => {
@@ -26,7 +33,7 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
       propsData: {
         value: '2013-05',
         type: 'month',
-        allowedDates: []
+        allowedDates: () => false
       },
       data: {
         activePicker: 'YEAR'
@@ -34,7 +41,7 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
     })
 
     wrapper.vm.$on('input', cb);
-    wrapper.find('.picker--date__years li.active + li')[0].trigger('click')
+    wrapper.find('.date-picker-years li.active + li')[0].trigger('click')
     expect(cb).not.toBeCalled()
   })
 
@@ -48,7 +55,7 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
     })
 
     wrapper.vm.$on('input', cb);
-    wrapper.find('.picker--date__table tbody tr:first-child td:first-child button')[0].trigger('click')
+    wrapper.find('.date-picker-table--month button')[0].trigger('click')
     expect(cb).toBeCalledWith('2013-01')
   })
 
@@ -61,9 +68,9 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    wrapper.find('.picker--date__table')[0].trigger('wheel')
+    wrapper.find('.date-picker-table--month')[0].trigger('wheel')
     await wrapper.vm.$nextTick()
-    expect(wrapper.vm.tableYear).toBe(2012)
+    expect(wrapper.vm.tableDate).toBe('2014')
   })
 
   it('should match snapshot with pick-month prop', () => {
@@ -82,35 +89,11 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
       propsData: {
         value: '2013-05',
         type: 'month',
-        allowedDates: ['2013-01', '2013-03', '2013-05', '2013-07', 'invalid month']
+        allowedDates: value => ['2013-01', '2013-03', '2013-05', '2013-07'].includes(value)
       }
     })
 
-    expect(wrapper.find('.picker--date__table tbody')[0].html()).toMatchSnapshot()
-  })
-
-  it('should match snapshot with allowed dates as function', () => {
-    const wrapper = mount(VDatePicker, {
-      propsData: {
-        value: '2013-05',
-        type: 'month',
-        allowedDates: date => date.substr(6, 1) === '1'
-      }
-    })
-
-    expect(wrapper.find('.picker--date__table tbody')[0].html()).toMatchSnapshot()
-  })
-
-  it('should match snapshot with allowed dates as object', () => {
-    const wrapper = mount(VDatePicker, {
-      propsData: {
-        value: '2013-05',
-        type: 'month',
-        allowedDates: { min: '2013-03', max: '2013-07' }
-      }
-    })
-
-    expect(wrapper.find('.picker--date__table tbody')[0].html()).toMatchSnapshot()
+    expect(wrapper.find('.date-picker-table--month tbody')[0].html()).toMatchSnapshot()
   })
 
   it('should match snapshot with month formatting functions', () => {
@@ -122,7 +105,7 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    expect(wrapper.find('.picker--date__table tbody')[0].html()).toMatchSnapshot()
+    expect(wrapper.find('.date-picker-table--month tbody')[0].html()).toMatchSnapshot()
   })
 
   it('should match snapshot with colored picker', () => {
@@ -158,7 +141,7 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const [leftButton, rightButton] = wrapper.find('.picker--date__header-selector button')
+    const [leftButton, rightButton] = wrapper.find('.date-picker-header button')
 
     leftButton.trigger('click')
     expect(wrapper.vm.tableDate).toBe('2004')
@@ -175,7 +158,7 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const button = wrapper.find('.picker--date__header-selector-date strong')[0]
+    const button = wrapper.find('.date-picker-header strong')[0]
 
     button.trigger('click')
     expect(wrapper.vm.activePicker).toBe('YEAR')
@@ -192,34 +175,9 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    wrapper.find('.picker--date__years li.active + li')[0].trigger('click')
+    wrapper.find('.date-picker-years li.active + li')[0].trigger('click')
     expect(wrapper.vm.activePicker).toBe('MONTH')
     expect(wrapper.vm.tableDate).toBe('2004')
-  })
-
-  it.skip('should calculate the first allowed month', () => {
-    const today = new Date().toISOString().substr(0, 7)
-
-    const wrapper1 = mount(VDatePicker, {
-      propsData: {
-        value: null,
-        type: 'month'
-      }
-    })
-    expect(wrapper1.vm.inputDate).toBe(today)
-
-    // The behaviour is dependent on the current date
-    // TODO refactor the test or change firstAllowedMonth implementation
-    //
-    // const allowedMonth = today.replace(/..$/, today.substr(5, 2) === '02' ? '03' : '02')
-    // const wrapper2 = mount(VDatePicker, {
-    //   propsData: {
-    //     value: null,
-    //     type: 'month',
-    //     allowedDates: [allowedMonth]
-    //   }
-    // })
-    // expect(wrapper2.vm.inputDate).toBe(allowedMonth)
   })
 
   it('should set the table date when value has changed', () => {
@@ -234,36 +192,16 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
     expect(wrapper.vm.tableDate).toBe('2005')
   })
 
-  it('should update the active picker if type has changed', () => {
-    const wrapper = mount(VDatePicker, {
-      propsData: {
-        value: '1999-12-01',
-        type: 'date'
-      }
-    })
-
-    expect(wrapper.vm.activePicker).toBe('DATE')
-    wrapper.setProps({ type: 'month' })
-    expect(wrapper.vm.inputDate).toBe('1999-12')
-    expect(wrapper.vm.activePicker).toBe('MONTH')
-    wrapper.setProps({ type: 'date' })
-    expect(wrapper.vm.inputDate).toBe('1999-12-01')
-    expect(wrapper.vm.activePicker).toBe('DATE')
-    wrapper.setProps({ type: 'year' })
-    expect(wrapper.vm.inputDate).toBe('1999')
-    expect(wrapper.vm.activePicker).toBe('YEAR')
-  })
-
   it('should use prev and next icons', () => {
     const wrapper = mount(VDatePicker, {
       propsData: {
         type: 'month',
-        prependIcon: 'block',
-        appendIcon: 'check'
+        prevIcon: 'block',
+        nextIcon: 'check'
       }
     })
 
-    const icons = wrapper.find('.picker--date__header-selector .icon')
+    const icons = wrapper.find('.date-picker-header .icon')
     expect(icons[0].element.textContent).toBe('block')
     expect(icons[1].element.textContent).toBe('check')
   })

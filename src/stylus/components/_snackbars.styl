@@ -1,110 +1,127 @@
 @import '../bootstrap'
 
 .snack
-  background-color: $snackbar-background-color
   position: fixed
   display: flex
-  height: 0
+  align-items: center
+  color: $snackbar-color
   pointer-events: none
-  visibility: visible
   z-index: 1000
+  font-size: 14px
+  left: 0
+  right: 0
 
   &--absolute
     position: absolute
 
   &--top
     top: 0
-    left: 50%
-    transform: translate(-50%, 0)
 
   &--bottom
-    bottom: 48px
-    left: 50%
-    transform: translate(-50%, 0)
+    bottom: 0
 
-  &--left
-    left: 8px
-    right: initial
-    transform: none
-
-    &.snack--top
-      top: 8px
-
-    &.snack--bottom
-      bottom: 56px
-
-  &--right
-    left: initial
-    right: 8px
-    transform: none
-
-    &.snack--top
-      top: 8px
-
-    &.snack--bottom
-      top: initial
-      bottom: 56px
-
-  &__content
-    background-color: inherit
-    padding: 14px 24px
-    border-radius: 2px
-    pointer-events: auto
-    max-width: 568px
-    min-width: 288px
-    height: 48px
-    align-items: center
-    color: #fff
+  &__wrapper
     display: flex
-    font-size: 14px
-    justify-content: space-between
-    transition: .4s $transition.swing
-    position: relative !important
+    align-items: center
+    background-color: $snackbar-background-color
+    pointer-events: auto
+    width: 100%
     elevation(6)
 
-    .btn
-      margin: 0 0 0 48px
+  &__content
+    width: 100%
+    height: 48px
+    padding: 14px 24px
+    display: flex
+    align-items: center
+    justify-content: space-between
+    overflow: hidden
 
-.snack
+    .btn
+      color: $snackbar-color
+      flex: 1 0 auto
+      margin: 0 0 0 24px
+      height: auto
+      min-width: auto
+      width: auto
+
+      &__content
+        padding: 8px
+        margin: -8px
+
+        &::before
+          display: none
+
   &--multi-line &__content
     height: 80px
     padding: 24px
-
-  &--bottom, &--right
-    &.snack--multi-line
-      bottom: 80px
 
   &--vertical &__content
     height: 112px
     padding: 24px 24px 14px
     flex-direction: column
-    align-items: initial
+    // https://stackoverflow.com/questions/35111090/text-in-a-flex-container-doesnt-wrap-in-ie11
+    align-items: stretch
 
     .btn
-      align-self: flex-end
+      &.btn //specificity
+        flex: 0 0 auto
+        justify-content: flex-end
+        margin-left: 0
+        margin-top: 24px
 
-  &--bottom, &--right
-    &.snack--vertical
-      bottom: 112px
+      &__content
+        padding: 0
+        flex: 0 0 auto
+        margin: 0
 
-@media $display-breakpoints.xs-only
+  &--auto-height &__content
+    height: auto
+
+@media $display-breakpoints.sm-and-up
   .snack
-    width: 100%
-    left: 0
-    right: initial
-    transform: none
+    &__wrapper
+      width: auto
+      max-width: 568px
+      min-width: 288px
+      margin: 0 auto
+      border-radius: 2px
 
-    &--right, &--left
-      &.snack--top
-        top: 0
+      .snack--left &
+        margin-left: 0
+      .snack--right &
+        margin-right: 0
 
-      &.snack--bottom
-        bottom: 48px
+    &--left, &--right
+      margin: 0 $snackbar-corner-offset
+      &^[0]--top
+        transform: translateY($snackbar-corner-offset)
+      &^[0]--bottom
+        transform: translateY(0 - $snackbar-corner-offset)
 
-    &__content
-      border-radius: 0
-      max-width: 100%
-      width: 100%
+    &__content .btn:first-of-type
+      margin-left: 48px
 
-      .btn
-        margin: 0 0 0 24px
+.snack-transition
+  &-enter-active,
+  &-leave-active
+    transition: transform .4s $transition.swing
+    .snack__content
+      transition: opacity .3s linear .1s
+
+  &-enter
+    .snack__content
+      opacity: 0
+
+  &-enter-to,
+  &-leave
+    .snack__content
+      opacity: 1
+
+  &-enter,
+  &-leave-to
+    &.snack.snack--top
+      // Extra 8px to hide the bottom shadow
+      transform: translateY(calc(-100% - 8px))
+    &.snack.snack--bottom
+      transform: translateY(100%)

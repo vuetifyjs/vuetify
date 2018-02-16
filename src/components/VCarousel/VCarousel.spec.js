@@ -54,10 +54,10 @@ test('VCarousel.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render component with custom prepended icon and match snapshot', async () => {
+  it('should render component with custom prev icon and match snapshot', async () => {
     const wrapper = mount(VCarousel, {
       propsData: {
-        prependIcon: 'stop'
+        prevIcon: 'stop'
       }
     })
     await wrapper.vm.$nextTick()
@@ -66,10 +66,10 @@ test('VCarousel.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render component without prepended icon and match snapshot', async () => {
+  it('should render component without prev icon and match snapshot', async () => {
     const wrapper = mount(VCarousel, {
       propsData: {
-        prependIcon: false
+        prevIcon: false
       }
     })
     await wrapper.vm.$nextTick()
@@ -78,10 +78,10 @@ test('VCarousel.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render component with custom appended icon and match snapshot', async () => {
+  it('should render component with custom next icon and match snapshot', async () => {
     const wrapper = mount(VCarousel, {
       propsData: {
-        appendIcon: 'stop'
+        nextIcon: 'stop'
       }
     })
     await wrapper.vm.$nextTick()
@@ -90,10 +90,10 @@ test('VCarousel.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render component without appended icon and match snapshot', async () => {
+  it('should render component without next icon and match snapshot', async () => {
     const wrapper = mount(VCarousel, {
       propsData: {
-        appendIcon: false
+        nextIcon: false
       }
     })
     await wrapper.vm.$nextTick()

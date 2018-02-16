@@ -6,10 +6,6 @@
 export default {
   props: {
     alignWithTitle: Boolean,
-    appendIcon: {
-      type: String,
-      default: 'chevron_right'
-    },
     centered: Boolean,
     fixedTabs: Boolean,
     grow: Boolean,
@@ -25,7 +21,11 @@ export default {
       default: 1264,
       validator: v => !isNaN(parseInt(v))
     },
-    prependIcon: {
+    nextIcon: {
+      type: String,
+      default: 'chevron_right'
+    },
+    prevIcon: {
       type: String,
       default: 'chevron_left'
     },

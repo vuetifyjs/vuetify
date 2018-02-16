@@ -1,4 +1,4 @@
-require('../../stylus/components/_alerts.styl')
+import '../../stylus/components/_alerts.styl'
 
 import VIcon from '../VIcon'
 
@@ -38,14 +38,14 @@ export default {
 
   computed: {
     classes () {
-      const colorProp = (this.type && !this.color) ? 'type' : 'computedColor'
+      const color = (this.type && !this.color) ? this.type : this.computedColor
       const classes = {
         'alert--dismissible': this.dismissible,
         'alert--outline': this.outline
       }
 
-      return this.outline ? this.addTextColorClassChecks(classes, colorProp)
-        : this.addBackgroundColorClassChecks(classes, colorProp)
+      return this.outline ? this.addTextColorClassChecks(classes, color)
+        : this.addBackgroundColorClassChecks(classes, color)
     },
     computedIcon () {
       if (this.icon || !this.type) return this.icon

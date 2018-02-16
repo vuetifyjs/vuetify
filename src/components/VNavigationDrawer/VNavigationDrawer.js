@@ -1,4 +1,4 @@
-require('../../stylus/components/_navigation-drawer.styl')
+import '../../stylus/components/_navigation-drawer.styl'
 
 // Mixins
 import Applicationable from '../../mixins/applicationable'
@@ -156,7 +156,7 @@ export default {
     },
     showOverlay () {
       return this.isActive &&
-        (this.temporary || this.isMobile)
+        (this.isMobile || this.temporary)
     },
     styles () {
       const styles = {
@@ -173,18 +173,12 @@ export default {
 
   watch: {
     $route () {
-      if (this.reactsToRoute) {
-        this.isActive = !this.closeConditional()
+      if (this.reactsToRoute && this.closeConditional()) {
+        this.isActive = false
       }
     },
     isActive (val) {
       this.$emit('input', val)
-
-      if (this.temporary || this.isMobile) {
-        this.tryOverlay()
-        this.$el && (this.$el.scrollTop = 0)
-      }
-
       this.callUpdate()
     },
     /**
@@ -215,12 +209,17 @@ export default {
       }
       this.callUpdate()
     },
+    showOverlay (val) {
+      if (val) this.genOverlay()
+      else this.removeOverlay()
+    },
     temporary () {
-      this.tryOverlay()
       this.callUpdate()
     },
     value (val) {
       if (this.permanent) return
+
+      if (val == null) return this.init()
 
       if (val !== this.isActive) this.isActive = val
     }
@@ -241,12 +240,16 @@ export default {
       }
     },
     closeConditional () {
-      return this.reactsToClick
+      return this.isActive && this.reactsToClick
     },
     genDirectives () {
-      const directives = [
-        { name: 'click-outside', value: this.closeConditional }
-      ]
+      const directives = [{
+        name: 'click-outside',
+        value: () => (this.isActive = false),
+        args: {
+          closeConditional: this.closeConditional
+        }
+      }]
 
       !this.touchless && directives.push({
         name: 'touch',
@@ -281,7 +284,7 @@ export default {
       this.calculateTouchArea()
 
       if (Math.abs(e.touchendX - e.touchstartX) < 100) return
-      else if (!this.right &&
+      if (!this.right &&
         e.touchstartX <= this.touchArea.left
       ) this.isActive = true
       else if (this.right && this.isActive) this.isActive = false
@@ -291,20 +294,10 @@ export default {
       this.calculateTouchArea()
 
       if (Math.abs(e.touchendX - e.touchstartX) < 100) return
-      else if (this.right &&
+      if (this.right &&
         e.touchstartX >= this.touchArea.right
       ) this.isActive = true
       else if (!this.right && this.isActive) this.isActive = false
-    },
-    tryOverlay () {
-      if (!this.permanent &&
-        this.showOverlay &&
-        this.isActive
-      ) {
-        return this.genOverlay()
-      }
-
-      this.removeOverlay()
     },
     /**
      * Update the application layout

@@ -114,6 +114,7 @@ test('VNavigationDrawer', ({ mount }) => {
     const wrapper = mount(VNavigationDrawer, { propsData: {
       app: true
     }})
+    await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.$vuetify.application.left).toBe(300)
 
@@ -129,6 +130,7 @@ test('VNavigationDrawer', ({ mount }) => {
     const wrapper = mount(VNavigationDrawer, { propsData: {
       app: true
     }})
+    await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.$vuetify.application.left).toBe(0)
 
@@ -143,6 +145,7 @@ test('VNavigationDrawer', ({ mount }) => {
     const wrapper = mount(VNavigationDrawer, { propsData: {
       app: true
     }})
+    await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.$vuetify.application.left).toBe(300)
 
@@ -183,6 +186,7 @@ test('VNavigationDrawer', ({ mount }) => {
       fixed: true,
       value: true
     }})
+    await wrapper.vm.$nextTick()
 
     wrapper.vm.$on('input', input)
     expect(wrapper.vm.$vuetify.application.left).toBe(300)

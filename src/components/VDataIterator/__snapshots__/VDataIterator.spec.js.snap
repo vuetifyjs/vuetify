@@ -37,13 +37,10 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
               >
                 <div class="card"
                      style="height: auto;"
-                     data-ripple="false"
                 >
                   <ul class="list">
                     <li>
-                      <a class="list__tile list__tile--link"
-                         data-ripple="true"
-                      >
+                      <a class="list__tile list__tile--link">
                         <div class="list__tile__content">
                           <div class="list__tile__title">
                             5
@@ -52,9 +49,7 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
                       </a>
                     </li>
                     <li>
-                      <a class="list__tile list__tile--link"
-                         data-ripple="true"
-                      >
+                      <a class="list__tile list__tile--link">
                         <div class="list__tile__content">
                           <div class="list__tile__title">
                             10
@@ -63,9 +58,7 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
                       </a>
                     </li>
                     <li>
-                      <a class="list__tile list__tile--link"
-                         data-ripple="true"
-                      >
+                      <a class="list__tile list__tile--link">
                         <div class="list__tile__content">
                           <div class="list__tile__title">
                             25
@@ -74,9 +67,7 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
                       </a>
                     </li>
                     <li>
-                      <a class="list__tile list__tile--link"
-                         data-ripple="true"
-                      >
+                      <a class="list__tile list__tile--link">
                         <div class="list__tile__content">
                           <div class="list__tile__title">
                             All
@@ -105,7 +96,6 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
         <button disabled="disabled"
                 type="button"
                 class="btn btn--disabled btn--flat btn--icon"
-                data-ripple="false"
                 aria-label="Previous page"
         >
           <div class="btn__content">
@@ -119,7 +109,6 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
         <button disabled="disabled"
                 type="button"
                 class="btn btn--disabled btn--flat btn--icon"
-                data-ripple="false"
                 aria-label="Next page"
         >
           <div class="btn__content">
@@ -185,13 +174,10 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
               >
                 <div class="card"
                      style="height: auto;"
-                     data-ripple="false"
                 >
                   <ul class="list">
                     <li>
-                      <a class="list__tile list__tile--link"
-                         data-ripple="true"
-                      >
+                      <a class="list__tile list__tile--link">
                         <div class="list__tile__content">
                           <div class="list__tile__title">
                             5
@@ -200,9 +186,7 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
                       </a>
                     </li>
                     <li>
-                      <a class="list__tile list__tile--link"
-                         data-ripple="true"
-                      >
+                      <a class="list__tile list__tile--link">
                         <div class="list__tile__content">
                           <div class="list__tile__title">
                             10
@@ -211,9 +195,7 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
                       </a>
                     </li>
                     <li>
-                      <a class="list__tile list__tile--link"
-                         data-ripple="true"
-                      >
+                      <a class="list__tile list__tile--link">
                         <div class="list__tile__content">
                           <div class="list__tile__title">
                             25
@@ -222,9 +204,7 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
                       </a>
                     </li>
                     <li>
-                      <a class="list__tile list__tile--link"
-                         data-ripple="true"
-                      >
+                      <a class="list__tile list__tile--link">
                         <div class="list__tile__content">
                           <div class="list__tile__title">
                             All
@@ -253,7 +233,6 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
         <button disabled="disabled"
                 type="button"
                 class="btn btn--disabled btn--flat btn--icon"
-                data-ripple="false"
                 aria-label="Previous page"
         >
           <div class="btn__content">
@@ -267,7 +246,6 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
         <button disabled="disabled"
                 type="button"
                 class="btn btn--disabled btn--flat btn--icon"
-                data-ripple="false"
                 aria-label="Next page"
         >
           <div class="btn__content">
@@ -324,13 +302,10 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
               >
                 <div class="card"
                      style="height: auto;"
-                     data-ripple="false"
                 >
                   <ul class="list">
                     <li>
-                      <a class="list__tile list__tile--link"
-                         data-ripple="true"
-                      >
+                      <a class="list__tile list__tile--link">
                         <div class="list__tile__content">
                           <div class="list__tile__title">
                             5
@@ -339,9 +314,7 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
                       </a>
                     </li>
                     <li>
-                      <a class="list__tile list__tile--link"
-                         data-ripple="true"
-                      >
+                      <a class="list__tile list__tile--link">
                         <div class="list__tile__content">
                           <div class="list__tile__title">
                             10
@@ -350,9 +323,7 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
                       </a>
                     </li>
                     <li>
-                      <a class="list__tile list__tile--link"
-                         data-ripple="true"
-                      >
+                      <a class="list__tile list__tile--link">
                         <div class="list__tile__content">
                           <div class="list__tile__title">
                             25
@@ -361,9 +332,7 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
                       </a>
                     </li>
                     <li>
-                      <a class="list__tile list__tile--link"
-                         data-ripple="true"
-                      >
+                      <a class="list__tile list__tile--link">
                         <div class="list__tile__content">
                           <div class="list__tile__title">
                             All
@@ -392,7 +361,6 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
         <button disabled="disabled"
                 type="button"
                 class="btn btn--disabled btn--flat btn--icon"
-                data-ripple="false"
                 aria-label="Previous page"
         >
           <div class="btn__content">
@@ -406,7 +374,6 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
         <button disabled="disabled"
                 type="button"
                 class="btn btn--disabled btn--flat btn--icon"
-                data-ripple="false"
                 aria-label="Next page"
         >
           <div class="btn__content">
@@ -467,13 +434,10 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
               >
                 <div class="card"
                      style="height: auto;"
-                     data-ripple="false"
                 >
                   <ul class="list">
                     <li>
-                      <a class="list__tile list__tile--link"
-                         data-ripple="true"
-                      >
+                      <a class="list__tile list__tile--link">
                         <div class="list__tile__content">
                           <div class="list__tile__title">
                             5
@@ -482,9 +446,7 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
                       </a>
                     </li>
                     <li>
-                      <a class="list__tile list__tile--link"
-                         data-ripple="true"
-                      >
+                      <a class="list__tile list__tile--link">
                         <div class="list__tile__content">
                           <div class="list__tile__title">
                             10
@@ -493,9 +455,7 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
                       </a>
                     </li>
                     <li>
-                      <a class="list__tile list__tile--link"
-                         data-ripple="true"
-                      >
+                      <a class="list__tile list__tile--link">
                         <div class="list__tile__content">
                           <div class="list__tile__title">
                             25
@@ -504,9 +464,7 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
                       </a>
                     </li>
                     <li>
-                      <a class="list__tile list__tile--link"
-                         data-ripple="true"
-                      >
+                      <a class="list__tile list__tile--link">
                         <div class="list__tile__content">
                           <div class="list__tile__title">
                             All
@@ -535,7 +493,6 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
         <button disabled="disabled"
                 type="button"
                 class="btn btn--disabled btn--flat btn--icon"
-                data-ripple="false"
                 aria-label="Previous page"
         >
           <div class="btn__content">
@@ -549,7 +506,6 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
         <button disabled="disabled"
                 type="button"
                 class="btn btn--disabled btn--flat btn--icon"
-                data-ripple="false"
                 aria-label="Next page"
         >
           <div class="btn__content">

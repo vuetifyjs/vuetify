@@ -1,5 +1,5 @@
 // Styles
-require('../../stylus/components/_footer.styl')
+import '../../stylus/components/_footer.styl'
 
 // Mixins
 import Applicationable from '../../mixins/applicationable'
@@ -20,16 +20,12 @@ export default {
   props: {
     height: {
       default: 32,
-      type: [Number, String],
-      validator: v => !isNaN(parseInt(v))
+      type: [Number, String]
     },
     inset: Boolean
   },
 
   computed: {
-    computedHeight () {
-      return parseInt(this.height)
-    },
     computedMarginBottom () {
       if (!this.app) return
 
@@ -47,7 +43,7 @@ export default {
     },
     styles () {
       const styles = {
-        height: `${this.computedHeight}px`
+        height: isNaN(this.height) ? this.height : `${this.height}px`
       }
 
       if (this.computedPaddingLeft) {
@@ -73,7 +69,11 @@ export default {
      * @return {number}
      */
     updateApplication () {
-      return this.computedHeight
+      return isNaN(this.height)
+        ? this.$el
+          ? this.$el.clientHeight
+          : 0
+        : this.height
     }
   },
 

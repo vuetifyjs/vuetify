@@ -1,6 +1,8 @@
 import { test } from '@util/testing'
 import VExpansionPanelContent from './VExpansionPanelContent'
 
+const registrableWarning = '[Vuetify] The v-expansion-panel component must be used inside a v-expansion-panel-content'
+
 test('VExpansionPanelContent.js', ({ mount, compileToFunctions }) => {
   it('should render component and match snapshot', () => {
     const wrapper = mount(VExpansionPanelContent, {
@@ -16,6 +18,7 @@ test('VExpansionPanelContent.js', ({ mount, compileToFunctions }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
+    expect(registrableWarning).toHaveBeenTipped()
   })
 
   it('should respect hideActions prop', () => {
@@ -34,6 +37,25 @@ test('VExpansionPanelContent.js', ({ mount, compileToFunctions }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
+    expect(registrableWarning).toHaveBeenTipped()
+  })
+
+  it('should render proper expand-icon', () => {
+    const wrapper = mount(VExpansionPanelContent, {
+      propsData: {
+        expandIcon: 'block'
+      },
+      slots: {
+        header: [compileToFunctions('<span>header</span>')]
+      },
+      provide: {
+        focusable: true,
+        panelClick: jest.fn()
+      }
+    })
+
+    expect(wrapper.find('.icon')[0].element.textContent).toBe('block')
+    expect(registrableWarning).toHaveBeenTipped()
   })
 
   it('should toggle panel on header click', async () => {
@@ -50,6 +72,7 @@ test('VExpansionPanelContent.js', ({ mount, compileToFunctions }) => {
     wrapper.find('.expansion-panel__header')[0].trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
+    expect(registrableWarning).toHaveBeenTipped()
   })
 
   it('should render an expanded component and match snapshot', () => {
@@ -64,6 +87,7 @@ test('VExpansionPanelContent.js', ({ mount, compileToFunctions }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
+    expect(registrableWarning).toHaveBeenTipped()
   })
 
   it('should render an expanded component with lazy prop and match snapshot', () => {
@@ -78,5 +102,6 @@ test('VExpansionPanelContent.js', ({ mount, compileToFunctions }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
+    expect(registrableWarning).toHaveBeenTipped()
   })
 })

@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VDatePickerHeader.js should render component and match snapshot 1`] = `
+
+<div class="date-picker-header">
+  <button type="button"
+          class="btn btn--icon"
+  >
+    <div class="btn__content">
+      <i aria-hidden="true"
+         class="icon material-icons"
+      >
+        chevron_left
+      </i>
+    </div>
+  </button>
+  <div class="date-picker-header__value">
+    <strong class="accent--text">
+      November 2005
+    </strong>
+  </div>
+  <button type="button"
+          class="btn btn--icon"
+  >
+    <div class="btn__content">
+      <i aria-hidden="true"
+         class="icon material-icons"
+      >
+        chevron_right
+      </i>
+    </div>
+  </button>
+</div>
+
+`;
+
+exports[`VDatePickerHeader.js should render component with default slot and match snapshot 1`] = `
+
+<div class="date-picker-header">
+  <button type="button"
+          class="btn btn--icon"
+  >
+    <div class="btn__content">
+      <i aria-hidden="true"
+         class="icon material-icons"
+      >
+        chevron_left
+      </i>
+    </div>
+  </button>
+  <div class="date-picker-header__value">
+    <strong class="accent--text">
+      <span>
+        foo
+      </span>
+    </strong>
+  </div>
+  <button type="button"
+          class="btn btn--icon"
+  >
+    <div class="btn__content">
+      <i aria-hidden="true"
+         class="icon material-icons"
+      >
+        chevron_right
+      </i>
+    </div>
+  </button>
+</div>
+
+`;

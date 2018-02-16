@@ -1,5 +1,5 @@
 // Styles
-require('../../stylus/components/_lists.styl')
+import '../../stylus/components/_lists.styl'
 
 // Mixins
 import Themeable from '../../mixins/themeable'
@@ -60,7 +60,9 @@ export default {
     listClick (uid, isBooted) {
       if (this.expand) return
 
-      this.groups.forEach(group => group.cb(uid))
+      for (let i = this.groups.length; i--;) {
+        this.groups[i].cb(uid)
+      }
     }
   },
 

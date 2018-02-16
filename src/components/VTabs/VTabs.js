@@ -1,5 +1,5 @@
 // Styles
-require('../../stylus/components/_tabs.styl')
+import '../../stylus/components/_tabs.styl'
 
 // Component imports
 import VIcon from '../VIcon'
@@ -62,13 +62,13 @@ export default {
 
   data () {
     return {
-      prependIconVisible: false,
-      appendIconVisible: false,
       bar: [],
       content: [],
       isBooted: false,
       isOverflowing: false,
       lazyValue: this.value,
+      nextIconVisible: false,
+      prevIconVisible: false,
       resizeTimeout: null,
       reverse: false,
       scrollOffset: 0,
@@ -83,10 +83,10 @@ export default {
   },
 
   methods: {
-    checkPrependIcon () {
+    checkPrevIcon () {
       return this.scrollOffset > 0
     },
-    checkAppendIcon () {
+    checkNextIcon () {
       // Check one scroll ahead to know the width of right-most item
       const container = this.$refs.container
       const wrapper = this.$refs.wrapper
@@ -95,7 +95,7 @@ export default {
     },
     callSlider () {
       this.setOverflow()
-      if (!this.activeTab) return false
+      if (this.hideSlider || !this.activeTab) return false
 
       // Give screen time to paint
       const action = this.activeTab.action
@@ -160,14 +160,14 @@ export default {
         /* istanbul ignore else */
         if (vnode.componentOptions) {
           switch (vnode.componentOptions.Ctor.options.name) {
-            case 'v-tab': tab.push(vnode)
-              break
             case 'v-tabs-slider': slider.push(vnode)
               break
             case 'v-tabs-items': items.push(vnode)
               break
             case 'v-tab-item': item.push(vnode)
               break
+            // case 'v-tab' - intentionally omitted
+            default: tab.push(vnode)
           }
         }
       }
@@ -210,18 +210,17 @@ export default {
       this.tabs = this.tabs.filter(o => o !== tab)
     },
     updateTabs () {
-      this.tabs.forEach(({ toggle }) => {
-        toggle(this.target)
-      })
+      for (let index = this.tabs.length; --index >= 0;) {
+        this.tabs[index].toggle(this.target)
+      }
 
       this.setOverflow()
     }
   },
 
   mounted () {
-    this.callSlider()
-    this.prependIconVisible = this.checkPrependIcon()
-    this.appendIconVisible = this.checkAppendIcon()
+    this.prevIconVisible = this.checkPrevIcon()
+    this.nextIconVisible = this.checkNextIcon()
   },
 
   render (h) {
@@ -236,7 +235,7 @@ export default {
         value: this.onResize
       }]
     }, [
-      this.genBar([this.genSlider(slider), tab]),
+      this.genBar([this.hideSlider ? null : this.genSlider(slider), tab]),
       this.genItems(items, item)
     ])
   }

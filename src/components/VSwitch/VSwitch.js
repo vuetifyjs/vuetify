@@ -1,6 +1,6 @@
-require('../../stylus/components/_input-groups.styl')
-require('../../stylus/components/_selection-controls.styl')
-require('../../stylus/components/_switch.styl')
+import '../../stylus/components/_input-groups.styl'
+import '../../stylus/components/_selection-controls.styl'
+import '../../stylus/components/_switch.styl'
 
 // Mixins
 import Rippleable from '../../mixins/rippleable'

@@ -1,14 +1,15 @@
-require('../../stylus/components/_speed-dial.styl')
+import '../../stylus/components/_speed-dial.styl'
 
 import Toggleable from '../../mixins/toggleable'
 import Positionable from '../../mixins/positionable'
+import Transitionable from '../../mixins/transitionable'
 
 import ClickOutside from '../../directives/click-outside'
 
 export default {
   name: 'v-speed-dial',
 
-  mixins: [Positionable, Toggleable],
+  mixins: [Positionable, Toggleable, Transitionable],
 
   directives: { ClickOutside },
 
@@ -16,7 +17,7 @@ export default {
     direction: {
       type: String,
       default: 'top',
-      validator: (val) => {
+      validator: val => {
         return ['top', 'right', 'bottom', 'left'].includes(val)
       }
     },
@@ -47,7 +48,8 @@ export default {
     const data = {
       'class': this.classes,
       directives: [{
-        name: 'click-outside'
+        name: 'click-outside',
+        value: () => (this.isActive = false)
       }],
       on: {
         click: () => (this.isActive = !this.isActive)
@@ -71,6 +73,8 @@ export default {
       'class': 'speed-dial__list',
       props: {
         name: this.transition,
+        mode: this.mode,
+        origin: this.origin,
         tag: 'div'
       }
     }, children)

@@ -45,9 +45,11 @@ export default {
             return this.showMenuItems()
           }
 
-          this.focus()
+          this.selectedIndex > -1
+            ? (this.selectedIndex = -1)
+            : this.focus()
         },
-        focus: (e) => {
+        focus: e => {
           if (this.disabled || this.readonly || this.isFocused) {
             return
           }

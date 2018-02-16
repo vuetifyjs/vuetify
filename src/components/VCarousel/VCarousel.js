@@ -1,4 +1,4 @@
-require('../../stylus/components/_carousel.styl')
+import '../../stylus/components/_carousel.styl'
 
 import VBtn from '../VBtn'
 import VIcon from '../VIcon'
@@ -41,13 +41,13 @@ export default {
       default: 6000,
       validator: value => value > 0
     },
-    prependIcon: {
-      type: [Boolean, String],
-      default: 'chevron_left'
-    },
-    appendIcon: {
+    nextIcon: {
       type: [Boolean, String],
       default: 'chevron_right'
+    },
+    prevIcon: {
+      type: [Boolean, String],
+      default: 'chevron_left'
     },
     value: Number
   },
@@ -59,12 +59,13 @@ export default {
       }
     },
     inputValue () {
-      // Evaluate items when inputValue changes to account for
-      // dynamic changing of children
+      // Evaluates items when inputValue changes to
+      // account for dynamic changing of children
 
-      this.items.forEach(i => {
-        i.open(this.items[this.inputValue].uid, this.reverse)
-      })
+      const uid = (this.items[this.inputValue] || {}).uid
+      for (let index = this.items.length; --index >= 0;) {
+        this.items[index].open(uid, this.reverse)
+      }
 
       this.$emit('input', this.inputValue)
       this.restartTimeout()
@@ -181,8 +182,8 @@ export default {
         }
       }]
     }, [
-      this.hideControls ? null : this.genIcon('left', this.prependIcon, this.prev),
-      this.hideControls ? null : this.genIcon('right', this.appendIcon, this.next),
+      this.hideControls ? null : this.genIcon('left', this.prevIcon, this.prev),
+      this.hideControls ? null : this.genIcon('right', this.nextIcon, this.next),
       this.hideDelimiters ? null : this.genDelimiters(),
       this.$slots.default
     ])

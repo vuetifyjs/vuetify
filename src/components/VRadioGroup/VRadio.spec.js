@@ -139,7 +139,7 @@ test('VRadio.vue', ({ mount }) => {
     expect(warning).toHaveBeenTipped()
   })
 
-  it('should render ripple with data attribute when ripple prop is true', () => {
+  it('should render ripple when ripple prop is true', () => {
     const wrapper = mount(VRadio, {
       propsData: {
         ripple: true
@@ -152,7 +152,8 @@ test('VRadio.vue', ({ mount }) => {
 
     const ripple = wrapper.find('.input-group--selection-controls__ripple')[0]
 
-    expect(ripple.getAttribute('data-ripple')).toBe('true')
+    expect(ripple.element._ripple.enabled).toBe(true)
+    expect(ripple.element._ripple.centered).toBe(true)
 
     expect(warning).toHaveBeenTipped()
   })

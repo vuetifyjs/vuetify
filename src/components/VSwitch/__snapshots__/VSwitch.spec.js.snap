@@ -9,9 +9,7 @@ exports[`VSwitch.js should render component with error 1`] = `
     <div class="input-group--selection-controls__container">
       <div class="input-group--selection-controls__toggle">
       </div>
-      <div class="input-group--selection-controls__ripple"
-           data-ripple="true"
-      >
+      <div class="input-group--selection-controls__ripple">
       </div>
     </div>
   </div>

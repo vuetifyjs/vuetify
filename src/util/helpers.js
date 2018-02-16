@@ -134,6 +134,19 @@ export function escapeHTML (str) {
   return str.replace(/[&<>]/g, tag => tagsToReplace[tag] || tag)
 }
 
+export function filterObjectOnKeys (obj, keys) {
+  const filtered = {}
+
+  for (let i = 0; i < keys.length; i++) {
+    const key = keys[i]
+    if (typeof obj[key] !== 'undefined') {
+      filtered[key] = obj[key]
+    }
+  }
+
+  return filtered
+}
+
 export function filterChildren (array = [], tag) {
   return array.filter(child => {
     return child.componentOptions &&
