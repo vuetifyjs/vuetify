@@ -1,155 +1,209 @@
 <template lang="pug">
-  div.elevation-2.mb-3
-    v-layout(wrap)
-      input(
-        :style="{ position: 'absolute', left: '-1000px', top: '-1000px' }"
-        :value="copy"
-        ref="copy"
-      )
-      v-flex(
-        xs12
-        sm4
+  div(style="position: relative;").elevation-2.mb-3.hide-overflow
+    input(
+      :style="{ position: 'absolute', left: '-1000px', top: '-1000px' }"
+      :value="copy"
+      ref="copy"
+    )
+    v-snackbar(
+      absolute
+      v-model="copied"
+      top
+      left
+    ) {{ $t('Components.TemplateList.init') }}
+      v-btn(flat @click="copied = !copied" color="light-blue")
+        |{{ $t('Components.TemplateList.close') }}
+    help-me-choose(v-model="suggestion")
+    v-divider
+    v-expansion-panel(expand).elevation-0
+      v-expansion-panel-content(
+        lazy
         v-for="(template, i) in templates"
         :key="i"
       )
-        div(style="display: none" v-html="template.desc")
-        v-list(two-line).pa-0
-          v-list-tile(
-            href="javascript:;"
-            @click="selectedIndex = i"
-            :value="selectedIndex === i"
-          )
-            v-list-tile-action
-              v-icon(
-                :text-color="selectedIndex === i ? 'primary' : ''"
-              ) {{ template.icon }}
-            v-list-tile-content
-              v-list-tile-title(v-text="template.title")
-              v-list-tile-sub-title vue init vuetifyjs/{{ template.init }}
-    v-expansion-panel.elevation-0
-      v-expansion-panel-content(value)
+        v-layout(slot="header")
+          v-icon(
+            :color="isActive(template) ? 'primary' : ''"
+            v-text="template.icon"
+          ).mr-3
+          div(
+            v-html="template.title"
+            :class="[isActive(template) ? 'primary--text' : '']"
+          ).mr-3
         v-card(
           color="blue darken-3"
           tile
           flat
           dark
           style="min-height: 75px"
-        ).hide-overflow
+        )
           v-fade-transition(mode="out-in")
             v-layout(
               row
               justify-space-between
-              :key="selectedIndex"
             )
               v-flex(xs10).layout.align-center
-                v-card-text(v-html="selectedTemplate.desc")
-                v-snackbar(
-                  absolute
-                  v-model="copied"
-                  top
-                  left
-                ) Init copied!
-                  v-btn(flat @click="copied = !copied" color="light-blue") close
+                v-card-text(v-html="template.desc")
               v-flex(xs2).layout.column.align-end.pa-3
-                v-tooltip(left debounce="300" dark)
+                v-tooltip(
+                  dark
+                  left
+                  v-if="template.link"
+                )
                   v-btn(
                     icon
                     dark
                     color="secondary"
-                    :href="`https://github.com/vuetifyjs/${selectedTemplate.init}`"
+                    :href="template.link"
                     target="_blank"
                     rel="noopener"
                     slot="activator"
                   )
-                    v-icon fa-github
-                  span Github
-                v-tooltip(left debounce="300" dark)
-                  v-btn(
-                    icon
-                    color="secondary"
-                    dark
-                    @click="copyMarkup"
-                    slot="activator"
-                  )
-                    v-icon content_copy
-                  span Copy markup
+                    v-icon fa-codepen
+                  span Codepen
+                template(v-else)
+                  v-tooltip(left dark)
+                    v-btn(
+                      icon
+                      dark
+                      color="secondary"
+                      :href="`https://github.com/vuetifyjs/${template.init}`"
+                      target="_blank"
+                      rel="noopener"
+                      slot="activator"
+                    ).elevation-20
+                      v-icon fa-github
+                    span Github
+                  v-tooltip(left dark)
+                    v-btn(
+                      icon
+                      color="secondary"
+                      dark
+                      @click="copyMarkup"
+                      slot="activator"
+                    )
+                      v-icon content_copy
+                    span Copy markup
 </template>
 
 <script>
+  // Components
+  import HelpMeChoose from './HelpMeChoose'
+
   export default {
-    data: () => ({
+    components: {
+      HelpMeChoose
+    },
+
+    data: vm => ({
       copied: false,
+      copy: null,
       copyTimeout: null,
+      options: [
+        {
+          label: 'For Beginners',
+          value: null
+        }
+      ],
+      suggestion: null,
       templates: [
         {
-            icon: 'landscape',
-            title: 'Simple HTML',
-            init: 'simple',
-            desc: 'This template is intended for users who want to try out Vue.js and Vuetify.js in the most simplistic way. It contains a basic index.html with no additional functionality. This is useful for developers who want to easily preview the features of the framework.'
+          icon: 'mdi-codepen',
+          title: vm.$t('Components.TemplateList.quickstart.title'),
+          link: 'https://codepen.io/johnjleider/pen/jYZwVZ',
+          cats: ['bwnn'],
+          desc: vm.$t('Components.TemplateList.quickstart.desc')
+        },
+        {
+          icon: 'landscape',
+          title: vm.$t('Components.TemplateList.simple.title'),
+          init: 'simple',
+          cats: ['bwnn'],
+          desc: vm.$t('Components.TemplateList.simple.desc')
         },
         {
           icon: 'web',
-          title: 'Webpack Simple',
+          title: vm.$t('Components.TemplateList.webpackSimple.title'),
           init: 'webpack-simple',
-          desc: 'This template is intended for users who are already familiar with Vue/Webpack. It contains a very simple webpack setup and is targetted at developers creating prototype or basic applications.'
+          cats: ['iwnn'],
+          desc: vm.$t('Components.TemplateList.webpackSimple.desc')
         },
         {
           icon: 'layers',
-          title: 'Webpack',
+          title: vm.$t('Components.TemplateList.webpack.title'),
           init: 'webpack',
-          desc: 'This template is intended for users who are looking for out of the box linting and unit testing.'
+          cats: ['bwnn', 'bwyn', 'iwnn', 'iwyn'],
+          desc: vm.$t('Components.TemplateList.webpack.desc')
         },
         {
           icon: 'cloud_circle',
-          title: 'Webpack SSR',
+          title: vm.$t('Components.TemplateList.webpackSSR.title'),
           init: 'webpack-ssr',
-          desc: 'This template is for advanced users looking to utilize the new Vue SSR (server-side rendering). Based off of the structure in the Vue.js 2 <a class="white--text" href="https://github.com/vuejs/vue-hackernews-2.0" target="_blank" rel="noopener">Hackernews</a> repository. The Vuetify.js SSR template provides next generation functionality for advanced Vue applications.'
+          cats: ['awny'],
+          desc: vm.$t('Components.TemplateList.webpackSSR.desc')
         },
         {
           icon: 'flash_on',
-          title: 'NUXT',
+          title: vm.$t('Components.TemplateList.nuxt.title'),
           init: 'nuxt',
-          desc: 'Utilizing the power of NUXT, supercharge your development experience with a bootstraped version ready to go with Vuetify out of the box.'
+          cats: [
+            'awny',
+            'iwny'
+          ],
+          desc: vm.$t('Components.TemplateList.nuxt.desc')
         },
         {
           icon: 'featured_video',
-          title: 'PWA',
+          title: vm.$t('Components.TemplateList.pwa.title'),
           init: 'pwa',
-          desc: 'A pre-configured PWA (Progressive Web Application) template is at your disposal. Bootstraped with service workers, application manifest, and a 90+/100 Lighthouse score.'
+          cats: ['iwyn', 'idyn', 'imyn', 'awyn', 'adyn', 'amyn'],
+          desc: vm.$t('Components.TemplateList.pwa.desc')
         },
         {
           icon: 'power',
-          title: 'Electron',
+          title: vm.$t('Components.TemplateList.electron.title'),
           init: 'electron',
-          desc: "Vuetify's official Electron template for creating desktop applications."
+          cats: [
+            'bdnn',
+            'bdyn',
+            'idnn',
+            'idyn',
+            'adnn',
+            'adyn'
+          ],
+          desc: vm.$t('Components.TemplateList.electron.desc')
         },
         {
           icon: 'call_split',
-          title: 'A La Carte',
+          title: vm.$t('Components.TemplateList.aLaCarte.title'),
           init: 'a-la-carte',
-          desc: 'In this template you can see an example of how to select only the components you want to use. This is useful for reducing package size with unused components.'
+          cats: [
+            'idnn',
+            'idyn',
+            'adnn',
+            'adyn'
+          ],
+          desc: vm.$t('Components.TemplateList.aLaCarte.desc')
         },
         {
           icon: 'phone_iphone',
-          title: 'Cordova',
+          title: vm.$t('Components.TemplateList.cordova.title'),
           init: 'cordova',
-          desc: 'This template uses Apache Cordova to help you easily convert your web app into a native Android or iOS app.'
+          cats: [
+            'bmnn',
+            'bmyn',
+            'bmny',
+            'imnn',
+            'imyn',
+            'imny',
+            'amnn',
+            'amyn',
+            'amny'
+          ],
+          desc: vm.$t('Components.TemplateList.cordova.desc')
         }
-      ],
-      selectedIndex: 0
+      ]
     }),
-
-    computed: {
-      copy () {
-        return `vue init vuetifyjs/${this.selectedTemplate.init}`
-      },
-      selectedText () {
-        return this.selectedTemplate.desc
-      },
-      selectedTemplate () {
-        return this.templates[this.selectedIndex]
-      }
-    },
 
     watch: {
       copied (val) {
@@ -158,12 +212,17 @@
     },
 
     methods: {
-      copyMarkup () {
+      copyMarkup (template) {
+        this.copy = `vue init vuetifyjs/${template.init}`
         clearTimeout(this.copyTimeout)
+
         this.$refs.copy.select()
         document.execCommand('copy')
         this.copied = true
-        this.copyTimeout = setTimeout(() => { this.copied = false }, 2000)
+        this.copyTimeout = setTimeout(() => { this.copied = false }, 4000)
+      },
+      isActive (template) {
+        return template.cats.indexOf(this.suggestion) > -1
       }
     }
   }
