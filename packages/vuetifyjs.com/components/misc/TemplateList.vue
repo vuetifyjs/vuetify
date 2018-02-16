@@ -79,7 +79,7 @@
                       icon
                       color="secondary"
                       dark
-                      @click="copyMarkup"
+                      @click="copyMarkup(template)"
                       slot="activator"
                     )
                       v-icon content_copy
@@ -215,11 +215,13 @@
       copyMarkup (template) {
         this.copy = `vue init vuetifyjs/${template.init}`
         clearTimeout(this.copyTimeout)
-
-        this.$refs.copy.select()
-        document.execCommand('copy')
         this.copied = true
         this.copyTimeout = setTimeout(() => { this.copied = false }, 4000)
+
+        setTimeout(() => {
+          this.$refs.copy.select()
+          document.execCommand('copy')
+        }, 0)
       },
       isActive (template) {
         return template.cats.indexOf(this.suggestion) > -1
