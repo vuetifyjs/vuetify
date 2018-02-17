@@ -1,4 +1,3 @@
-import Semver from 'semver'
 import application from './mixins/application'
 import theme from './mixins/theme'
 import options from './mixins/options'
@@ -51,7 +50,18 @@ const Vuetify = {
 /* istanbul ignore next */
 function checkVueVersion (Vue) {
   const vueDep = process.env.REQUIRED_VUE
-  if (!Semver.satisfies(Vue.version, vueDep)) {
+
+  const required = vueDep.split('.').map(v => v.replace(/\D/g, ''))
+  const actual = Vue.version.split('.')
+
+  // Simple semver caret range comparison
+  const passes =
+    actual[0] === required[0] && // major matches
+    (actual[1] > required[1] || // minor is greater
+      (actual[1] === required[1] && actual[2] >= required[2]) // or minor is eq and patch is >=
+    )
+
+  if (!passes) {
     consoleWarn(`Vuetify requires Vue version ${vueDep}`)
   }
 }
