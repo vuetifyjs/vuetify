@@ -91,7 +91,6 @@ export default {
       // An item that is selected by
       // menu-index should toggled
       if (this.menuIsActive) {
-        console.log(this.searchValue)
         // Reset the list index if searching
         this.searchValue && this.$nextTick(() => setTimeout(this.resetMenuIndex, 0))
 
