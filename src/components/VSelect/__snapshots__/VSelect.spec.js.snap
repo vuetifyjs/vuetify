@@ -23,7 +23,7 @@ exports[`VSelect should escape items in menu 2`] = `
 exports[`VSelect should render buttons correctly when using items array with segmented prop 1`] = `
 
 <div tabindex="0"
-     data-uid="34"
+     data-uid="35"
      role="combobox"
      class="input-group input-group--dirty input-group--append-icon input-group--text-field input-group--select input-group--segmented input-group--single-line primary--text"
 >
@@ -82,7 +82,7 @@ exports[`VSelect should render buttons correctly when using items array with seg
 exports[`VSelect should render buttons correctly when using slot with segmented prop 1`] = `
 
 <div tabindex="0"
-     data-uid="44"
+     data-uid="45"
      role="combobox"
      class="input-group input-group--dirty input-group--append-icon input-group--text-field input-group--select input-group--segmented input-group--single-line primary--text"
 >
@@ -137,7 +137,7 @@ exports[`VSelect should render buttons correctly when using slot with segmented 
 exports[`VSelect should render v-select correctly when not using scope slot 1`] = `
 
 <div tabindex="0"
-     data-uid="72"
+     data-uid="73"
      role="combobox"
      class="input-group input-group--dirty input-group--append-icon input-group--text-field input-group--select primary--text"
 >
@@ -201,7 +201,7 @@ exports[`VSelect should render v-select correctly when not using scope slot 1`] 
 exports[`VSelect should render v-select correctly when not using v-list-tile in item scope slot 1`] = `
 
 <div tabindex="0"
-     data-uid="63"
+     data-uid="64"
      role="combobox"
      class="input-group input-group--dirty input-group--append-icon input-group--text-field input-group--select primary--text"
 >
@@ -265,7 +265,7 @@ exports[`VSelect should render v-select correctly when not using v-list-tile in 
 exports[`VSelect should render v-select correctly when using v-list-tile in item scope slot 1`] = `
 
 <div tabindex="0"
-     data-uid="53"
+     data-uid="54"
      role="combobox"
      class="input-group input-group--dirty input-group--append-icon input-group--text-field input-group--select primary--text"
 >

@@ -49,7 +49,7 @@ function genConfig (opts) {
 
   config.plugins = config.plugins.concat([
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': opts.env || 'development'
+      'process.env.NODE_ENV': JSON.stringify(opts.env || 'development')
     })
   ])
 
