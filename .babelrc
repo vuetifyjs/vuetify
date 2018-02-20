@@ -2,13 +2,21 @@
   "env": {
     "test": {
       "presets": [
-        ["es2015"],
-        ["stage-2"]
+        ["env", {
+          "targets": {
+            "node": "current"
+          }
+        }]
       ],
       "plugins": [
-        "transform-runtime",
+        ["transform-runtime", {
+          "polyfill": false
+        }],
+        "transform-object-rest-spread",
         ["module-resolver", {
-          "root": ["./src"],
+          "root": [
+            "./src"
+          ],
           "alias": {
             "~components": "components",
             "~directives": "directives",
@@ -21,22 +29,51 @@
     },
     "es5": {
       "presets": [
-        ["es2015"],
-        ["stage-2"]
+        ["env", {
+          "targets": {
+            "ie": 11
+          }
+        }]
       ],
-      "plugins": ["./build/babel-transform-stylus-paths.js"]
+      "plugins": [
+        ["transform-runtime", {
+            "polyfill": false
+        }],
+        "transform-object-rest-spread",
+        "./build/babel-transform-stylus-paths.js"
+      ]
     },
     "development": {
       "presets": [
-        ["es2015", { "modules": false }],
-        ["stage-2"]
+        ["env", {
+          "targets": {
+            "ie": 11
+          },
+          "modules": false
+        }]
       ],
-      "plugins": ["add-filehash"]
+      "plugins": [
+        ["transform-runtime", {
+          "polyfill": false
+        }],
+        "transform-object-rest-spread",
+        "add-filehash"
+      ]
     },
     "production": {
       "presets": [
-        ["es2015", { "modules": false }],
-        ["stage-2"]
+        ["env", {
+          "targets": {
+            "ie": 11
+          },
+          "modules": false
+        }]
+      ],
+      "plugins": [
+        ["transform-runtime", {
+          "polyfill": false
+        }],
+        "transform-object-rest-spread"
       ]
     }
   }
