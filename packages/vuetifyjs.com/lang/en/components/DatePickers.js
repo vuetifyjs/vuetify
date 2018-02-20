@@ -28,7 +28,7 @@ export default {
       desc: 'Starting with year picker by default, resticting dates range and closing the picker menu after selecting the day make the perfect birthday picker.'
     },
     datePickerDate: {
-      header: 'Date pickers - react to disaplyed month/year change',
+      header: 'Date pickers - react to displayed month/year change',
       desc: 'You can watch the `pickerDate` which is the displayed month/year (depending on the picker type and active view) to perform some action when it changes.'
     },
     dateEvents: {
