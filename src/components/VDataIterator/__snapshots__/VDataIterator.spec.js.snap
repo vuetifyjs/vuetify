@@ -13,7 +13,7 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
       <div class="data-iterator__actions__select">
         Items per page:
         <div tabindex="0"
-             data-uid="15"
+             data-uid="16"
              aria-label="Items per page:"
              role="combobox"
              class="input-group input-group--append-icon input-group--hide-details input-group--text-field input-group--select input-group--auto primary--text"
@@ -150,7 +150,7 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
       <div class="data-iterator__actions__select">
         Items per page:
         <div tabindex="0"
-             data-uid="27"
+             data-uid="28"
              aria-label="Items per page:"
              role="combobox"
              class="input-group input-group--append-icon input-group--hide-details input-group--text-field input-group--select input-group--auto primary--text"
@@ -278,7 +278,7 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
       <div class="data-iterator__actions__select">
         Items per page:
         <div tabindex="0"
-             data-uid="1"
+             data-uid="2"
              aria-label="Items per page:"
              role="combobox"
              class="input-group input-group--append-icon input-group--hide-details input-group--text-field input-group--select input-group--auto primary--text"
@@ -410,7 +410,7 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
       <div class="data-iterator__actions__select">
         Items per page:
         <div tabindex="0"
-             data-uid="41"
+             data-uid="42"
              aria-label="Items per page:"
              role="combobox"
              class="input-group input-group--append-icon input-group--hide-details input-group--text-field input-group--select input-group--auto primary--text"

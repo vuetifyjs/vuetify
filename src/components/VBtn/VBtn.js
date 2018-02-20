@@ -53,7 +53,7 @@ export default {
     classes () {
       const classes = {
         'btn': true,
-        'btn--active': this.isActive,
+        [this.activeClass]: this.isActive,
         'btn--absolute': this.absolute,
         'btn--block': this.block,
         'btn--bottom': this.bottom,

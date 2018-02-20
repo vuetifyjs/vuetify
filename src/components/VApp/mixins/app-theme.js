@@ -9,30 +9,10 @@ export default {
   computed: {
     parsedTheme () {
       return Theme.parse(this.$vuetify.theme)
-    }
-  },
-
-  watch: {
-    parsedTheme () {
-      this.applyTheme()
-    }
-  },
-
-  created () {
-    if (typeof document === 'undefined' && this.$ssrContext) {
-      this.$ssrContext.head = this.$ssrContext.head || ''
-      this.$ssrContext.head += `<style id="vuetify-theme-stylesheet">${this.genColors(this.parsedTheme)}</style>`
-    } else if (typeof document !== 'undefined') {
-      this.genStyle()
-      this.applyTheme()
-    }
-  },
-
-  methods: {
-    applyTheme () {
-      this.style.innerHTML = this.genColors(this.parsedTheme)
     },
-    genColors (theme) {
+    /** @return string */
+    generatedStyles () {
+      const theme = this.parsedTheme
       let css
 
       if (this.$vuetify.options.themeCache != null) {
@@ -62,10 +42,50 @@ export default {
       }
 
       return css
+    }
+  },
+
+  watch: {
+    generatedStyles () {
+      this.applyTheme()
+    }
+  },
+
+  beforeCreate () {
+    if (this.$meta) {
+      // Vue-meta
+      const keyName = this.$nuxt ? 'head' : 'metaInfo'
+      this.$options[keyName] = () => ({
+        style: [{
+          cssText: this.generatedStyles,
+          type: 'text/css',
+          id: 'vuetify-theme-stylesheet'
+        }]
+      })
+    }
+  },
+
+  created () {
+    if (this.$meta) {
+      // Vue-meta
+      // Handled by beforeCreate hook
+    } else if (typeof document === 'undefined' && this.$ssrContext) {
+      // SSR
+      this.$ssrContext.head = this.$ssrContext.head || ''
+      this.$ssrContext.head += `<style type="text/css" id="vuetify-theme-stylesheet">${this.generatedStyles}</style>`
+    } else if (typeof document !== 'undefined') {
+      // Client-side
+      this.genStyle()
+      this.applyTheme()
+    }
+  },
+
+  methods: {
+    applyTheme () {
+      this.style.innerHTML = this.generatedStyles
     },
     genStyle () {
-      let style = document.querySelector('[data-vue-ssr-id=vuetify-theme-stylesheet]') ||
-        document.getElementById('vuetify-theme-stylesheet')
+      let style = document.getElementById('vuetify-theme-stylesheet')
 
       if (!style) {
         style = document.createElement('style')
