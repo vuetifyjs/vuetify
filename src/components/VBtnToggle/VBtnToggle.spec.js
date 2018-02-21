@@ -320,7 +320,7 @@ test('VBtnToggle.vue', ({ mount }) => {
       }
     })
 
-    expect('v-btn-toggle must contain at least one v-btn if the mandatory property is true.').toHaveBeenTipped()
+    expect('There must be at least one v-btn child if the mandatory property is true.').toHaveBeenTipped()
   })
 
   it('should warn about model binding type not being array if multiple is true', async () => {
@@ -331,6 +331,6 @@ test('VBtnToggle.vue', ({ mount }) => {
       }
     })
 
-    expect('v-btn-toggle model must be bound to an array if the multiple property is true.').toHaveBeenTipped()
+    expect('Model must be bound to an array if the multiple property is true.').toHaveBeenTipped()
   })
 })

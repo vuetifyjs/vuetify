@@ -76,9 +76,7 @@ export default {
       this.$emit('change', items)
     },
     updateAllValues () {
-      if (!this.multiple) {
-        return
-      }
+      if (!this.multiple) return
 
       const items = []
 
@@ -96,7 +94,7 @@ export default {
 
   created () {
     if (this.multiple && !Array.isArray(this.inputValue)) {
-      consoleWarn('v-btn-toggle model must be bound to an array if the multiple property is true.')
+      consoleWarn('Model must be bound to an array if the multiple property is true.', this)
     }
   },
 

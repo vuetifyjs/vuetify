@@ -10,14 +10,12 @@ export default {
     return {
       buttons: [],
       listeners: [],
-      destroying: false
+      isDestroying: false
     }
   },
 
   watch: {
-    buttons () {
-      this.update()
-    }
+    buttons: 'update'
   },
 
   methods: {
@@ -82,9 +80,7 @@ export default {
         const button = this.buttons[index]
         if (button !== buttonToUnregister) {
           buttons.push(button)
-          if (this.isSelected(index)) {
-            ++selectedCount
-          }
+          selectedCount += Boolean(this.isSelected(index))
         }
 
         button.$off('click', this.listeners[index])
@@ -94,23 +90,23 @@ export default {
       this.listeners = []
 
       for (let index = 0; index < buttons.length; ++index) {
-        const button = buttons[index]
-        this.register(button)
+        this.register(buttons[index])
       }
 
       this.ensureMandatoryInvariant(selectedCount > 0)
       this.updateAllValues && this.updateAllValues()
     },
     ensureMandatoryInvariant (hasSelectedAlready) {
-      // Preserve the mandatory invariant
-      if (this.mandatory && !hasSelectedAlready) {
-        if (!this.listeners.length) {
-          consoleWarn('v-btn-toggle must contain at least one v-btn if the mandatory property is true.')
-          return
-        }
+      // Preserve the mandatory invariant by selecting the first tracked button, if needed
 
-        this.listeners[0]()
+      if (!this.mandatory || hasSelectedAlready) return
+
+      if (!this.listeners.length) {
+        consoleWarn('There must be at least one v-btn child if the mandatory property is true.', this)
+        return
       }
+
+      this.listeners[0]()
     }
   },
 
@@ -119,6 +115,6 @@ export default {
   },
 
   beforeDestroy () {
-    this.destroying = true
+    this.isDestroying = true
   }
 }
