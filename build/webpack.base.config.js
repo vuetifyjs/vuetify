@@ -1,5 +1,3 @@
-const webpack = require('webpack')
-const vuetifyPackage = require('../package.json')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 
 const resolve = file => require('path').resolve(__dirname, file)
@@ -21,10 +19,6 @@ module.exports = {
   plugins: [
     new FriendlyErrorsWebpackPlugin({
       clearConsole: true
-    }),
-    new webpack.DefinePlugin({
-      'process.env.VUETIFY_VERSION': JSON.stringify(vuetifyPackage.version),
-      'process.env.REQUIRED_VUE': JSON.stringify(vuetifyPackage.peerDependencies.vue)
     })
   ]
 }

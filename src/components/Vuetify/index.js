@@ -10,7 +10,7 @@ const Vuetify = {
 
     this.installed = true
 
-    process.env.NODE_ENV !== 'test' && checkVueVersion(Vue)
+    checkVueVersion(Vue)
 
     Vue.prototype.$vuetify = new Vue({
       data: {
