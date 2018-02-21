@@ -62,7 +62,7 @@ export default {
     },
     unregister (buttonToUnregister) {
       // Basic cleanup if we're destroying
-      if (this.destroying) {
+      if (this.isDestroying) {
         const index = this.buttons.indexOf(buttonToUnregister)
         if (index !== -1) {
           buttonToUnregister.$off('click', this.listeners[index])
