@@ -1,13 +1,20 @@
 language: node_js
-node_js:
-- '8'
-cache: npm,
-script:
-- yarn --frozen-lockfile --non-interactive
-- yarn run lint
-- yarn run build
-- yarn run deploy
-after_script: yarn run alias
+node_js: '8'
+jobs:
+  include:
+    - script:
+      - yarn --frozen-lockfile --non-interactive
+      - yarn run lint
+      - yarn run build
+    - stage: deploy
+      script:
+        - npm install now -g
+        - yarn run deploy
+      after_script: yarn run alias
+stages:
+  - test
+  - name: deploy
+    if: branch = master AND type = push AND fork = false
 env:
   global:
     secure: YjM0hHk51+IoVUUm8XTyuVq510WXR45F/n3z/TrAvSJoguMzljctycwY1qUQN0rLtMUDRYRfphuPkVvDTpM4aYsOkOc7NQ04IKzeStRuahRVLo/8C7q5otEFKJ3cMEKkcJoU9Sm/v0SJTqzyWpFaTWitlJR5RDO34mBQgaW2NOeWYgDDwRdM1+j1V5LBALRl3Z+IoUBjjwJdPDyDJcRC20/h0iTUpuK6QtFvINLQbyZz0TdqLJypuuzT+idKhdl7bi2Dq4vGqBotTC1NR1mmrtBlJtQDUuJ1ePGB+QK6jP9YKUuFHqM8xWFEiwVrdkXflCWEf1aQiyIJesLu028D9333PCwlSJOUXLzaHE0D53HxhTJqhh63m26JjVQEuvxfwlJQ5hadupJG53DYMshdxnaUH7Vf7zn4qgV6JKZCJ3NFabIVPOY4JSPgHhkg7JfqQR6leD8841fyVFTQSfhglEX5QwwDXjkUHyy08mbe3cXdMqZiLYnDgWL6gDDzlddfLvZZk7lAAQR6zjLEEFOnkrx2BGWGZZHVy1nbGmPvuMwRAnxcl1g5TO6aOyxSELm9B/+5EsgPOi91HmkVNU6T3BEhzE3iZHb3uWJMBjXs03lKmb84OhgXPo+zEfdeRYhLk/Nn/dWVbe6xb3iLSjU1NW80B/YDHbn5HDHUce29Bzs=
