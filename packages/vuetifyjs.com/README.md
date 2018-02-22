@@ -9,14 +9,8 @@
 
 ``` bash
 git clone https://github.com/vuetifyjs/vuetifyjs.com.git
-
-# yarn
 yarn
-
-# npm
-npm install
-
-npm run dev
+yarn dev
 ```
 
 <h2>Running with local Vuetify</h2>
@@ -25,30 +19,16 @@ npm run dev
 
 ``` bash
 git clone https://github.com/vuetifyjs/vuetify.git
-
-# yarn
 yarn
-
-# npm
-npm install
-
 yarn link
-
-npm run watch
+yarn watch
 ```
 
 <h3>Link Vuetify to docs</h3>
 
 ``` bash
 git clone https://github.com/vuetifyjs/vuetifyjs.com.git
-
-# yarn
 yarn
-
-# npm
-npm install
-
 yarn link vuetify
-
-npm run dev
+yarn dev
 ```
