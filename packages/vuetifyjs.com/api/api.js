@@ -3661,6 +3661,12 @@ module.exports = {
         ],
         "default": 40,
         "source": null
+      },
+      {
+        "name": "tile",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
       }
     ],
     "mixins": [],
