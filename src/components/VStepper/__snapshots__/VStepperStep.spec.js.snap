@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VStepperStep.js should accept a custom color 1`] = `
+
+<div class="stepper__step stepper__step--inactive stepper__step--complete">
+  <span class="stepper__step__step pink">
+    <i aria-hidden="true"
+       class="icon material-icons"
+    >
+      check
+    </i>
+  </span>
+  <div class="stepper__label">
+  </div>
+</div>
+
+`;
