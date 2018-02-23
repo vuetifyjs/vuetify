@@ -5596,6 +5596,12 @@ module.exports = {
   "v-stepper-step": {
     "props": [
       {
+        "name": "color",
+        "type": "String",
+        "default": "primary",
+        "source": "colorable"
+      },
+      {
         "name": "complete",
         "type": "Boolean",
         "default": "false",
