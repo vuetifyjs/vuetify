@@ -220,7 +220,9 @@ export default {
   watch: {
     search () {
       this.updatePagination({ page: 1, totalItems: this.itemsLength })
-    }
+    },
+    'computedPagination.sortBy': function () { this.updatePagination({ page: 1 }) },
+    'computedPagination.descending': function () { this.updatePagination({ page: 1 }) }
   },
 
   methods: {
