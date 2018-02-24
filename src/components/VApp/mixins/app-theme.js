@@ -21,6 +21,9 @@ export default {
       }
 
       const colors = Object.keys(theme)
+
+      if (!colors.length) return ''
+
       css = `a { color: ${intToHex(theme.primary)}; }`
 
       for (let i = 0; i < colors.length; ++i) {
@@ -52,7 +55,7 @@ export default {
   },
 
   beforeCreate () {
-    if (this.$meta) {
+    if (this.$meta && this.$vuetify.theme !== false) {
       // Vue-meta
       const keyName = this.$nuxt ? 'head' : 'metaInfo'
       this.$options[keyName] = () => ({
@@ -66,6 +69,8 @@ export default {
   },
 
   created () {
+    if (this.$vuetify.theme === false) return
+
     if (this.$meta) {
       // Vue-meta
       // Handled by beforeCreate hook
