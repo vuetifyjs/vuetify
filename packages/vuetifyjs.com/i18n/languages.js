@@ -18,5 +18,10 @@ module.exports = [
     title: '한국어',
     locale: 'ko',
     country: 'kr'
+  },
+  {
+    title: '日本語',
+    locale: 'ja',
+    country: 'jp'
   }
 ]
