@@ -4,7 +4,6 @@ exports[`VCarouselItem.js should render component and match snapshot 1`] = `
 
 <div class="jumbotron"
      style="height: 100%; display: none;"
-     data-ripple="false"
 >
   <div class="jumbotron__wrapper">
     <div class="jumbotron__background">
@@ -20,7 +19,6 @@ exports[`VCarouselItem.js should throw warning when not used inside v-carousel 1
 
 <div class="jumbotron"
      style="height: 100%; display: none;"
-     data-ripple="false"
 >
   <div class="jumbotron__wrapper">
     <div class="jumbotron__background">

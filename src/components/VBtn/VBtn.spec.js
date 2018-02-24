@@ -137,4 +137,15 @@ test('VBtn.js', ({ mount, compileToFunctions }) => {
 
     expect(click.mock.calls.length).toBe(2)
   })
+
+  it('should use custom active-class', () => {
+    const wrapper = mount(VBtn, {
+      propsData: {
+        inputValue: true,
+        activeClass: 'foo'
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

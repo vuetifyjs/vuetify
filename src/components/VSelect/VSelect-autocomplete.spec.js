@@ -46,8 +46,7 @@ test('VSelect - autocomplete', ({ mount }) => {
   it('should emit search input changes', async () => {
     const wrapper = mount(VSelect, {
       propsData: {
-        autocomplete: true,
-        debounceSearch: 0
+        autocomplete: true
       }
     })
 
@@ -56,11 +55,8 @@ test('VSelect - autocomplete', ({ mount }) => {
     const update = jest.fn()
     wrapper.vm.$on('update:searchInput', update)
 
-    await wrapper.vm.$nextTick()
-
     input.element.value = 'test'
     input.trigger('input')
-    await new Promise(resolve => setTimeout(resolve, 1))
 
     expect(update).toBeCalledWith('test')
     expect('Unable to locate target [data-app]').toHaveBeenTipped()

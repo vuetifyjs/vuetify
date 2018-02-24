@@ -4,6 +4,9 @@ import {
   inject as RegistrableInject
 } from '../../mixins/registrable'
 
+// Utilities
+import { getObjectValueByPath } from '../../util/helpers'
+
 export default {
   name: 'v-tab',
 
@@ -44,22 +47,21 @@ export default {
 
       if (typeof to === 'string') return to.replace('#', '')
       if (to === Object(to) &&
-        to.hasOwnProperty('path')
-      ) return to.path
+        (to.hasOwnProperty('name') ||
+          to.hasOwnProperty('path'))
+      ) return to.name || to.path
 
       return this
     }
   },
 
   watch: {
-    $route: {
-      immediate: true,
-      handler: 'onRouteChange'
-    }
+    $route: 'onRouteChange'
   },
 
   mounted () {
     this.tabs.register(this)
+    this.onRouteChange()
   },
 
   beforeDestroy () {
@@ -80,10 +82,12 @@ export default {
       this.to || this.tabClick(this)
     },
     onRouteChange () {
-      if (!this.to) return
+      if (!this.to || !this.$refs.link) return
+
+      const path = `_vnode.data.class.${this.activeClass}`
 
       this.$nextTick(() => {
-        if (this.$el.firstChild.className.indexOf(this.activeClass) > -1) {
+        if (getObjectValueByPath(this.$refs.link, path)) {
           this.tabClick(this)
         }
       })
@@ -100,6 +104,8 @@ export default {
     // If disabled, use div as anchor tags do not support
     // being disabled
     const tag = this.disabled ? 'div' : link.tag
+
+    data.ref = 'link'
 
     return h('div', {
       staticClass: 'tabs__div'

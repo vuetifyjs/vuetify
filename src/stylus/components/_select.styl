@@ -40,6 +40,10 @@ theme(selects, "input-group--select")
       display: inline-block
       opacity: 1
 
+    &.input-group--select--selecting-index
+      .input-group--select__autocomplete
+        opacity: 0
+
     &.input-group--open
       .input-group__append-icon:not(.input-group__icon-clearable)
         transform: rotate(-180deg)

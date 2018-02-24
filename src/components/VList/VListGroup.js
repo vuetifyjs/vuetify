@@ -111,7 +111,9 @@ export default {
       return this.$createElement(VIcon, icon)
     },
     genAppendIcon () {
-      const icon = !this.subGroup ? this.appendIcon : ''
+      const icon = !this.subGroup ? this.appendIcon : false
+
+      if (!icon && !this.$slots.appendIcon) return null
 
       return this.$createElement('li', {
         staticClass: 'list__group__header__append-icon'
@@ -149,7 +151,9 @@ export default {
         ? this.prependIcon
         : this.subGroup
           ? 'arrow_drop_down'
-          : ''
+          : false
+
+      if (!icon && !this.$slots.prependIcon) return null
 
       return this.$createElement('li', {
         staticClass: 'list__group__header__prepend-icon',

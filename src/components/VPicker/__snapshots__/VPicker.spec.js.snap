@@ -4,7 +4,6 @@ exports[`VPicker.js should render component with title and match snapshot 1`] = 
 
 <div class="picker card"
      style="height: auto;"
-     data-ripple="false"
 >
   <div class="picker__title primary">
     <span>
@@ -12,7 +11,7 @@ exports[`VPicker.js should render component with title and match snapshot 1`] = 
     </span>
   </div>
   <div class="picker__body"
-       style="width: 330px;"
+       style="width: 290px;"
   >
     <span>
       default
@@ -26,10 +25,9 @@ exports[`VPicker.js should render component without title and match snapshot 1`]
 
 <div class="picker card"
      style="height: auto;"
-     data-ripple="false"
 >
   <div class="picker__body"
-       style="width: 330px;"
+       style="width: 290px;"
   >
     <span>
       default
@@ -43,7 +41,6 @@ exports[`VPicker.js should render dark component and match snapshot 1`] = `
 
 <div class="picker card theme--dark"
      style="height: auto;"
-     data-ripple="false"
 >
   <div class="picker__title">
     <span>
@@ -51,7 +48,7 @@ exports[`VPicker.js should render dark component and match snapshot 1`] = `
     </span>
   </div>
   <div class="picker__body"
-       style="width: 330px;"
+       style="width: 290px;"
   >
     <span>
       default

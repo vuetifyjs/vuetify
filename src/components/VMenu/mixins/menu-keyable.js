@@ -22,8 +22,9 @@ export default {
       this.getTiles()
 
       if (next in this.tiles) {
-        this.tiles[next].classList.add('list__tile--highlighted')
-        this.$refs.content.scrollTop = next * 48
+        const tile = this.tiles[next]
+        tile.classList.add('list__tile--highlighted')
+        this.$refs.content.scrollTop = tile.offsetTop - tile.clientHeight
       }
 
       prev in this.tiles &&

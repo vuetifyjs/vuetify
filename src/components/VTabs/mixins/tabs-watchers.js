@@ -5,8 +5,10 @@
  */
 export default {
   watch: {
-    activeTab (tab) {
-      this.callSlider()
+    activeTab (tab, prev) {
+      !prev && tab && this.updateTabs()
+
+      setTimeout(this.callSlider, 0)
 
       if (!tab) return
 
@@ -31,8 +33,8 @@ export default {
     scrollOffset (val) {
       this.$refs.container.style.transform = `translateX(${-val}px)`
       if (this.hasArrows) {
-        this.prependIconVisible = this.checkPrependIcon()
-        this.appendIconVisible = this.checkAppendIcon()
+        this.prevIconVisible = this.checkPrevIcon()
+        this.nextIconVisible = this.checkNextIcon()
       }
     }
   }

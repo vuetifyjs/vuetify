@@ -8,7 +8,7 @@ export default {
     newOffset (direction) {
       const clientWidth = this.$refs.wrapper.clientWidth
 
-      if (direction === 'prepend') {
+      if (direction === 'prev') {
         return Math.max(this.scrollOffset - clientWidth, 0)
       } else {
         return Math.min(this.scrollOffset + clientWidth, this.$refs.container.clientWidth - clientWidth)

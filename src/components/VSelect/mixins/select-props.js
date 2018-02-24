@@ -17,10 +17,6 @@ export default {
     clearable: Boolean,
     combobox: Boolean,
     contentClass: String,
-    debounceSearch: {
-      type: [Number, String],
-      default: 200
-    },
     deletableChips: Boolean,
     dense: Boolean,
     editable: Boolean,

@@ -1,4 +1,3 @@
-const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 
 const resolve = file => require('path').resolve(__dirname, file)

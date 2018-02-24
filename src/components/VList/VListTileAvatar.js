@@ -11,7 +11,8 @@ export default {
     size: {
       type: [Number, String],
       default: 40
-    }
+    },
+    tile: Boolean
   },
 
   render (h, { data, children, props }) {
@@ -20,7 +21,8 @@ export default {
     const avatar = h(VAvatar, {
       props: {
         color: props.color,
-        size: props.size
+        size: props.size,
+        tile: props.tile
       }
     }, [children])
 

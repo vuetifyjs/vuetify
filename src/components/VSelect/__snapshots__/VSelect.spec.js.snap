@@ -23,7 +23,7 @@ exports[`VSelect should escape items in menu 2`] = `
 exports[`VSelect should render buttons correctly when using items array with segmented prop 1`] = `
 
 <div tabindex="0"
-     data-uid="34"
+     data-uid="35"
      role="combobox"
      class="input-group input-group--dirty input-group--append-icon input-group--text-field input-group--select input-group--segmented input-group--single-line primary--text"
 >
@@ -33,7 +33,6 @@ exports[`VSelect should render buttons correctly when using items array with seg
     >
       <button type="button"
               class="btn btn--flat"
-              data-ripple="true"
       >
         <div class="btn__content">
           Hello
@@ -53,13 +52,10 @@ exports[`VSelect should render buttons correctly when using items array with seg
       >
         <div class="card"
              style="height: auto;"
-             data-ripple="false"
         >
           <ul class="list">
             <li>
-              <a class="list__tile list__tile--link list__tile--active primary--text"
-                 data-ripple="true"
-              >
+              <a class="list__tile list__tile--link list__tile--active primary--text">
                 <div class="list__tile__content">
                   <div class="list__tile__title">
                     Hello
@@ -86,7 +82,7 @@ exports[`VSelect should render buttons correctly when using items array with seg
 exports[`VSelect should render buttons correctly when using slot with segmented prop 1`] = `
 
 <div tabindex="0"
-     data-uid="44"
+     data-uid="45"
      role="combobox"
      class="input-group input-group--dirty input-group--append-icon input-group--text-field input-group--select input-group--segmented input-group--single-line primary--text"
 >
@@ -111,13 +107,10 @@ exports[`VSelect should render buttons correctly when using slot with segmented 
       >
         <div class="card"
              style="height: auto;"
-             data-ripple="false"
         >
           <ul class="list">
             <li>
-              <a class="list__tile list__tile--link list__tile--active primary--text"
-                 data-ripple="true"
-              >
+              <a class="list__tile list__tile--link list__tile--active primary--text">
                 <div class="list__tile__content">
                   <div class="list__tile__title">
                     Hello
@@ -144,7 +137,7 @@ exports[`VSelect should render buttons correctly when using slot with segmented 
 exports[`VSelect should render v-select correctly when not using scope slot 1`] = `
 
 <div tabindex="0"
-     data-uid="72"
+     data-uid="73"
      role="combobox"
      class="input-group input-group--dirty input-group--append-icon input-group--text-field input-group--select primary--text"
 >
@@ -169,13 +162,10 @@ exports[`VSelect should render v-select correctly when not using scope slot 1`] 
       >
         <div class="card"
              style="height: auto;"
-             data-ripple="false"
         >
           <ul class="list">
             <li>
-              <a class="list__tile list__tile--link list__tile--active primary--text"
-                 data-ripple="true"
-              >
+              <a class="list__tile list__tile--link list__tile--active primary--text">
                 <div class="list__tile__content">
                   <div class="list__tile__title">
                     Text 0
@@ -184,9 +174,7 @@ exports[`VSelect should render v-select correctly when not using scope slot 1`] 
               </a>
             </li>
             <li>
-              <a class="list__tile list__tile--link"
-                 data-ripple="true"
-              >
+              <a class="list__tile list__tile--link">
                 <div class="list__tile__content">
                   <div class="list__tile__title">
                     Text 1
@@ -213,7 +201,7 @@ exports[`VSelect should render v-select correctly when not using scope slot 1`] 
 exports[`VSelect should render v-select correctly when not using v-list-tile in item scope slot 1`] = `
 
 <div tabindex="0"
-     data-uid="63"
+     data-uid="64"
      role="combobox"
      class="input-group input-group--dirty input-group--append-icon input-group--text-field input-group--select primary--text"
 >
@@ -238,13 +226,10 @@ exports[`VSelect should render v-select correctly when not using v-list-tile in 
       >
         <div class="card"
              style="height: auto;"
-             data-ripple="false"
         >
           <ul class="list">
             <li>
-              <a class="list__tile list__tile--link list__tile--active primary--text"
-                 data-ripple="true"
-              >
+              <a class="list__tile list__tile--link list__tile--active primary--text">
                 <div class="list__tile__content">
                   <div class="list__tile__title">
                     0
@@ -253,9 +238,7 @@ exports[`VSelect should render v-select correctly when not using v-list-tile in 
               </a>
             </li>
             <li>
-              <a class="list__tile list__tile--link"
-                 data-ripple="true"
-              >
+              <a class="list__tile list__tile--link">
                 <div class="list__tile__content red lighten-1">
                   <div class="list__tile__title">
                     1
@@ -282,7 +265,7 @@ exports[`VSelect should render v-select correctly when not using v-list-tile in 
 exports[`VSelect should render v-select correctly when using v-list-tile in item scope slot 1`] = `
 
 <div tabindex="0"
-     data-uid="53"
+     data-uid="54"
      role="combobox"
      class="input-group input-group--dirty input-group--append-icon input-group--text-field input-group--select primary--text"
 >
@@ -307,20 +290,15 @@ exports[`VSelect should render v-select correctly when using v-list-tile in item
       >
         <div class="card"
              style="height: auto;"
-             data-ripple="false"
         >
           <ul class="list">
             <li class>
-              <a class="list__tile list__tile--link list__tile--active primary--text"
-                 data-ripple="true"
-              >
+              <a class="list__tile list__tile--link list__tile--active primary--text">
                 Text 0
               </a>
             </li>
             <li class="red lighten-1">
-              <a class="list__tile list__tile--link"
-                 data-ripple="true"
-              >
+              <a class="list__tile list__tile--link">
                 Text 1
               </a>
             </li>

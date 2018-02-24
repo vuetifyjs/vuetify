@@ -56,6 +56,14 @@ export default {
       type: String,
       default: 'No matching records found'
     },
+    nextIcon: {
+      type: String,
+      default: 'chevron_right'
+    },
+    prevIcon: {
+      type: String,
+      default: 'chevron_left'
+    },
     rowsPerPageItems: {
       type: Array,
       default () {
@@ -212,7 +220,9 @@ export default {
   watch: {
     search () {
       this.updatePagination({ page: 1, totalItems: this.itemsLength })
-    }
+    },
+    'computedPagination.sortBy': function () { this.updatePagination({ page: 1 }) },
+    'computedPagination.descending': function () { this.updatePagination({ page: 1 }) }
   },
 
   methods: {
@@ -361,7 +371,7 @@ export default {
         attrs: {
           'aria-label': 'Previous page' // TODO: Localization
         }
-      }, [this.$createElement('v-icon', 'chevron_left')])
+      }, [this.$createElement('v-icon', this.prevIcon)])
     },
     genNextIcon () {
       const pagination = this.computedPagination
@@ -386,7 +396,7 @@ export default {
         attrs: {
           'aria-label': 'Next page' // TODO: Localization
         }
-      }, [this.$createElement('v-icon', 'chevron_right')])
+      }, [this.$createElement('v-icon', this.nextIcon)])
     },
     genSelect () {
       return this.$createElement('div', {

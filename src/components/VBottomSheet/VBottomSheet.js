@@ -8,6 +8,7 @@ export default {
   props: {
     disabled: Boolean,
     fullWidth: Boolean,
+    hideOverlay: Boolean,
     inset: Boolean,
     lazy: Boolean,
     maxWidth: {
