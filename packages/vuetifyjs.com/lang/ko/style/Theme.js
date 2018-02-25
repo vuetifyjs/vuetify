@@ -10,6 +10,13 @@ export default {
   customizingText3: '또한 미리 정의된 메테리얼 색상표를 사용할 수 있습니다.',
   customizingText4: '내부적으로, Vuetify는 이 값들을 기반으로 DOM에서 사용될 수 있는 css 클래스들을 생성합니다. 이 클래스들은 예를 들어  `primary` or `secondary--text` 같은 다른 헬퍼 클래스들과 같은 형식으로 쓰입니다.',
   customizingText5: '또한 이 값들은 **$vuetify** 인스턴스의 **theme** 속성아래 오브젝트로 설정할 수 있습니다. 이는 테마를 _동적으로_ 바꾸는 것을 가능하게 합니다. 내부적으로는 Vuetifys는 테마 클래스들을 재생성하고 어플리케이션이 중단 없이 업데이트 되도록 클래스를 업데이트 합니다.',
+  optionHeader: '옵션 (Options)',
+  optionText1: 'Vuetify generates theme styles at run-time for SPA\'s and server side for SSR applications. The generated styles will be placed in a `<style>` tag with the **id** of **vuetify-theme-stylesheet**.',
+  optionText2: 'By default, **primary**, **secondary** and **accent** will have darken and lighten classes created. This allows you to follow the same syntax as working with regular colors, i.e. `class="primary darken-1"`. This can be changed during the plugin bootstrap:',
+  optionHeader2: 'Minification',
+  optionText3: 'For SSR applications, you can pass a callback function to **$vuetify.options.minifyTheme** to reduce the initial page size. When using this option, it is recommended to also use **themeCache**.',
+  optionHeader3: 'Caching',
+  optionText4: 'A custom caching object and be provided (works in tandem with **minifyTheme**) to increase SSR efficiency. The object must contain a **get** and a **set** method. Below is an example using [LRU cache](https://www.npmjs.com/package/lru-cache).',
   stylusHeader: '스타일러스 변수 변경하기',
   stylusText1: 'Vuetify는 **스타일러스 (stylus)** 를 기반으로 만들어졌습니다. **scss** 와 비슷하게, 당신은 변수를 바꾸고 스타일 파일들을 다시 컴파일할 수 있습니다. 가능한 변수 목록은  [여기](https://github.com/vuetifyjs/vuetify/blob/master/src/stylus/settings/_variables.styl)에 있습니다. 스타일러스(stylus) 파일을 빌드하려면, 어플리케이션이 스타일러스를 지원하도록 설정해야 합니다. 이미 [빠른 시작 (Quick Start)](/ko/getting-started/quick-start) 가이드에서 제공하는 Vue-CLI 템플릿을 사용하고 있다면, 이 섹션을 건너뛰어도 좋습니다.',
   stylusHeader2: '웹펙(Webpack)을 위한 stylus-loader 설정',
@@ -22,19 +29,23 @@ export default {
   stylusText7: '이제 스타일러스가 설정되었으니 스타일러스의 변수의 기본값을 원하는 대로 바꿀 수 있습니다. 이는 반드시 import _하기 전에_ 선언되어야 하고, 자동으로 Vuetify 의 기본 값들을 대체합니다 (override).',
   toc: [
     {
-      text: 'Theme',
+      text: '테마',
       href: 'introduction'
     },
     {
-      text: 'Light and Dark',
+      text: '라이트/다크',
       href: 'light-and-dark'
     },
     {
-      text: 'Customizing',
+      text: '커스터마이징',
       href: 'customizing'
     },
     {
-      text: 'Modifying Stylus variables',
+      text: '옵션',
+      href: 'options'
+    },
+    {
+      text: 'Stylus 변수 바꾸기',
       href: 'stylus-guide'
     }
   ]

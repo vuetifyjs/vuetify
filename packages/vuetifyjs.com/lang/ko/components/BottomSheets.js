@@ -14,6 +14,7 @@ export default {
   }],
   props: {
     disabled: '대화창(dialog)이 열릴 수 없도록 설정',
+    hideOverlay: 'Hide the display of the overlay',
     inset: '대화창(dialog) 컨텐츠의 최대 너비를 70%로 줄임',
     lazy: 'Mixins.Bootable.props.lazy',
     maxWidth: '시트의 컨테이너의 최대 너비를 설정'

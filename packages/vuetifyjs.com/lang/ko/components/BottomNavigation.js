@@ -20,5 +20,8 @@ export default {
     active: '현재 활성화된 버튼의 값이 저장됩니다. 만약 버튼에 지정된 값이 없다면, 버튼의 인덱스가 사용됩니다. 이 prop은 **.sync** 수식어(modifier)를 지원합니다.',
     absolute: 'Mixins.Positionable.props.absolute',
     fixed: 'Mixins.Positionable.props.fixed'
+  },
+  events: {
+    'update:active': '`active.sync` 에 쓰이는 이벤트'
   }
 }

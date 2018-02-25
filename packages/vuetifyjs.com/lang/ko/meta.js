@@ -12,13 +12,13 @@ export default {
     'keywords': ''
   },
   'getting-started/quick-start': {
-    'h1': '빠른 시작',
+    'h1': 'Quick Start',
     'title': 'Quick Start',
     'description': 'Get started with Vue and Vuetify in no time.',
     'keywords': 'quick start, vuetify templates, get started'
   },
   'getting-started/starter-templates': {
-    'h1': '스타터 템플릿',
+    'h1': 'Starter Templates',
     'title': 'Starter Templates',
     'description': 'Understand the layout and structure of your application. Check out examples.',
     'keywords': 'templates, vuetify'
@@ -54,19 +54,25 @@ export default {
     'keywords': 'roadmap, future plans'
   },
   'motion/transitions': {
-    'h1': '트랜지션 (Transitions)',
+    'h1': 'Transitions',
     'title': 'Transitions',
     'description': 'Make an amazing application with smooth built in animations.',
     'keywords': 'motion, transitions'
   },
+  'motion/scrolling': {
+    'h1': 'Scrolling',
+    'title': 'Scrolling',
+    'description': 'Scroll to a target location on the page.',
+    'keywords': 'scrolling, smooth scroll, transitions'
+  },
   'style/colors': {
-    'h1': '색상 (Colors)',
+    'h1': 'Colors',
     'title': 'Material color palette',
     'description': 'Easily apply any color from the material design palette.',
     'keywords': 'colors'
   },
   'style/theme': {
-    'h1': '테마',
+    'h1': 'Theme',
     'title': 'Application theming',
     'description': 'Setup your custom application theme by changing a few variables.',
     'keywords': 'themes'
@@ -108,13 +114,13 @@ export default {
     'keywords': 'grid lists, grid'
   },
   'layout/spacing': {
-    'h1': '간격 (Spacing)',
+    'h1': 'Spacing',
     'title': 'Spacing helpers',
     'description': 'Spacing helper classes allow you to apply margin or padding to any element.',
     'keywords': 'spacing helper classes'
   },
   'layout/alignment': {
-    'h1': '정렬 (Alignment)',
+    'h1': 'Alignment',
     'title': 'Alignment helpers',
     'description': 'Alignment helpers assist in modifying your application layout on varying viewport sizes.',
     'keywords': 'alignment helper classes'
@@ -180,7 +186,7 @@ export default {
     'keywords': 'vuetify, cards, components'
   },
   'components/buttons': {
-    'h1': '버튼 (Buttons)',
+    'h1': 'Buttons',
     'title': 'Button Component',
     'description': 'Button component for Vuetify Framework.',
     'keywords': 'vuetify, buttons, components'
@@ -192,7 +198,7 @@ export default {
     'keywords': 'vuetify, buttons, fab, floating button, floating action button'
   },
   'components/carousels': {
-    'h1': '캐러셀 (Carousels)',
+    'h1': 'Carousels',
     'title': 'Carousels Component',
     'description': 'Carousel component for Vuetify Framework.',
     'keywords': 'carousel'
@@ -478,5 +484,11 @@ export default {
     'title': 'Thank you for supporting Vuetify',
     'description': 'Thank you for supporting open source and Vuetify',
     'keywords': 'thank you from vuetify'
+  },
+  'store/licensing': {
+    h1: '',
+    title: 'Product licensing',
+    description: '',
+    keywords: ''
   }
 }

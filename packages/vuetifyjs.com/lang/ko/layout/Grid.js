@@ -2,6 +2,32 @@ export default {
   header: '그리드 시스템 (Grid system)',
   headerText: 'Vuetify 12 포인트 그리드 시스템을 사용합니다. <kbd>flex-box</kbd>를 사용하는 이 그리드는 어플리케이션 컨텐츠의 레이아웃에 사용됩니다. 여기엔 여러 화면 크기와 방향에 대응하는 5가지 타입의 미디어 브레이크포인트가 있습니다. 그리드 컴포넌트의 prop들은 사실 정의된 속성에 따라 파생되는 (css) 클래스들입니다. 이를 이용해 이들 (css) 헬퍼 클래스들을 prop 형태로 쉽게 사용할 수 있습니다. 물론 이 클래스들은 여전히 어디든지 사용할 수 있습니다.',
   components: ['v-container', 'v-layout', 'v-flex', 'v-spacer'],
+  toc: [
+    {
+      text: '소개',
+      href: 'introduction'
+    },
+    {
+      text: '사용법',
+      href: 'usage'
+    },
+    {
+      text: 'API',
+      href: 'api'
+    },
+    {
+      text: '보충',
+      href: 'supplemental'
+    },
+    {
+      text: '예제',
+      href: 'examples'
+    },
+    {
+      text: 'Breakpoint object',
+      href: 'breakpoint-object'
+    }
+  ],
   examples: [{
     grid: {
       header: '사용법',

@@ -19,7 +19,7 @@ export default {
     },
     customIcons: {
       header: 'Custom icon',
-      desc: 'Expand action icon can be customized with `expand-icon` prop.'
+      desc: '`expand-icon` prop으로 확장 액션 아이콘을 커스터마이즈 합니다.'
     },
     focusable: {
       header: '포커스 가능 (Focusable)',
@@ -36,7 +36,11 @@ export default {
     },
     'v-expansion-panel-content': {
       hideActions: '컨텐층 헤더의 확장 아이콘을 숨깁니다.',
-      expandIcon: 'Set the expand action icon'
+      expandIcon: '확장 액션 아이콘(expand actio icon)을 설정'
     }
+  },
+  slots: {
+    actions: '확장 해더 액션',
+    header: '확장 헤더 컨탠츠'
   }
 }

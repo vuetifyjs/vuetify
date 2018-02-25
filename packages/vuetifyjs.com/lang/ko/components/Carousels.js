@@ -14,8 +14,8 @@ export default {
       uninverted: true
     },
     customIcons: {
-      header: '커스텀 구분자 (Custom delimiter)',
-      desc: '캐러셀의 구분자로 아이콘도 쓸 수 있습니다..',
+      header: '커스텀 아이콘',
+      desc: '캐러셀의 구분자와 이전/다음 아이콘을 바꿀 수 있습니다.',
       uninverted: true
     },
     hideControls: {

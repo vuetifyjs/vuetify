@@ -11,6 +11,11 @@ export default {
   props: {
     contentClass: '아이템을 둘러싼 요소에 커스텀 클래스를 적용',
     contentProps: '아이템을 둘러싼 요소에 커스텀 prop을 적용',
-    contentTag: '아이템을 둘러싼 요소의 태그를 지정'
+    contentTag: '아이템을 둘러싼 요소의 태그를 지정',
+    nextIcon: 'Mixins.Input.props.appendIcon',
+    prevIcon: 'Mixins.Input.props.prependIcon'
+  },
+  events: {
+    'update:pagination': '`pagination.sync` update 이벤트'
   }
 }
