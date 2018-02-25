@@ -14,28 +14,29 @@ import DatePickers from './DatePickers'
 import Dialogs from './Dialogs'
 import Dividers from './Dividers'
 import ExpansionPanels from './ExpansionPanels'
-// TODO: import FloatingActionButtons from './FloatingActionButtons'
+import FloatingActionButtons from './FloatingActionButtons'
 import Footer from './Footer'
 import Forms from './Forms'
-// TODO: import GridLists from './GridLists'
+import HelpMeChoose from './HelpMeChoose'
 import Icons from './Icons'
-// TODO: import Lists from './Lists'
-// TODO: import Jumbotrons from './Jumbotrons'
-// TODO: import Menus from './Menus'
-// TODO: import NavigationDrawers from './NavigationDrawers'
-// TODO: import Paginations from './Paginations'
-// TODO: import Parallax from './Parallax'
-// TODO: import Progress from './Progress'
+import Lists from './Lists'
+import Jumbotrons from './Jumbotrons'
+import Menus from './Menus'
+import NavigationDrawers from './NavigationDrawers'
+import Paginations from './Paginations'
+import Parallax from './Parallax'
+import Progress from './Progress'
 import SelectionControls from './SelectionControls'
 import Selects from './Selects'
-// TODO: import Sliders from './Sliders'
-// TODO: import Snackbars from './Snackbars'
-// TODO: import Steppers from './Steppers'
-// TODO: import Subheaders from './Subheaders'
-// TODO: import Tabs from './Tabs'
-// TODO: import TextFields from './TextFields'
-// TODO: import TimePickers from './TimePickers'
-// TODO: import Toolbars from './Toolbars'
+import Sliders from './Sliders'
+import Snackbars from './Snackbars'
+import Steppers from './Steppers'
+import Subheaders from './Subheaders'
+import Tabs from './Tabs'
+import TemplateList from './TemplateList'
+import TextFields from './TextFields'
+import TimePickers from './TimePickers'
+import Toolbars from './Toolbars'
 import Tooltips from './Tooltips'
 
 export default {
@@ -55,27 +56,28 @@ export default {
   Dialogs,
   Dividers,
   ExpansionPanels,
-  // TODO:   FloatingActionButtons,
+  FloatingActionButtons,
   Footer,
   Forms,
-  // TODO:   GridLists,
+  HelpMeChoose,
   Icons,
-  // TODO:   Lists,
-  // TODO:   Jumbotrons,
-  // TODO:   Menus,
-  // TODO:   NavigationDrawers,
-  // TODO:   Paginations,
-  // TODO:   Parallax,
-  // TODO:   Progress,
+  Lists,
+  Jumbotrons,
+  Menus,
+  NavigationDrawers,
+  Paginations,
+  Parallax,
+  Progress,
   SelectionControls,
   Selects,
-  // TODO:   Sliders,
-  // TODO:   Snackbars,
-  // TODO:   Steppers,
-  // TODO:   Subheaders,
-  // TODO:   Tabs,
-  // TODO:   TextFields,
-  // TODO:   TimePickers,
-  // TODO:   Toolbars,
+  Sliders,
+  Snackbars,
+  Steppers,
+  Subheaders,
+  Tabs,
+  TemplateList,
+  TextFields,
+  TimePickers,
+  Toolbars,
   Tooltips
 }

@@ -19,6 +19,14 @@ export default {
     subheaders: {
       header: '서브헤더와 디바이더 (Subheaders and dividers)',
       desc: '서브헤더(Subheaders)는 같은 prop을 사용하는 삽입형 디바이더와 줄이 잘 맞습니다.'
+    },
+    dividerList: {
+      header: '리스트 디바이더',
+      desc: '삽입형 디바이더와 서브헤더로 컨텐츠를 나눕니다.'
+    },
+    dividerListPortrait: {
+      header: '새로보기에서의 디바이더',
+      desc: '어떤 상황에도 적합한 커스텀 카드를 만듭니다.'
     }
   }],
   props: {

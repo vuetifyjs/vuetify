@@ -45,7 +45,7 @@ export default {
     },
     customIcons: {
       header: 'Custom icons',
-      desc: 'Previous/next pagination icons and sort icon can be customized with **prev-icon**, **next-icon** and **sort-icon** props.'
+      desc: '이전/다음 페이지네이션 아이콘과 정렬아이콘을 **prev-icon**, **next-icon** and **sort-icon** props으로 바꿀 수 있습니다.'
     },
     paginate: {
       header: '외부 페이지네이션 (External pagination)',
@@ -65,7 +65,7 @@ export default {
     },
     editdialog: {
       header: '인라인 편집 (Inline Editing)',
-      desc: '`v-edit-dialog` 컴포넌트로 데이터 테이블 내에서의 인라인 편집이 가능합니다. You can block closing the dialog when clicked outside by adding the **persistent** prop.'
+      desc: '`v-edit-dialog` 컴포넌트로 데이터 테이블 내에서의 인라인 편집이 가능합니다. **persistent* prop 을 추가하여 외부를 클릭했을 때 다이얼로그가 닫히는 것을 막을 수 있습니다.'
     },
     crud: {
       header: 'CRUD 액션',
@@ -83,7 +83,10 @@ export default {
     'v-data-table': {
       headerText: '오브젝트를 사용할 경우 헤더의 텍스트 값',
       headers: '각 헤더 컬럼을 정의하는 오브젝트의 배열(array). 모든 속성(propertiy)의 정의는 아래 예제를 참조하세요.',
-      hideHeaders: '테이벌 헤더를 숨김'
+      hideHeaders: '테이블 헤더를 숨김',
+      sortIcon: '커스텀 정렬 아이콘. `v-icon`과 같은 문법',
+      nextIcon: 'Mixins.Input.props.appendIcon',
+      prevIcon: 'Mixins.Input.props.prependIcon'
     }
   },
   scopedSlots: {

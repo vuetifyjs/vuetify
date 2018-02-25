@@ -61,7 +61,7 @@ export default {
     itemText: '**항목** 의 텍스트 값 속성을 설정',
     itemValue: '**항목** 의 값 속성을 설정',
     items: '오브젝트 배열이나 문자열 배열. 오브젝트를 사용하면 text 와 value 필드를 사용. 이는 **item-text** 와 **item-value** 를 사용해서 바꿀 수 있습니다.',
-    minWidth: 'Mixins.Menuable.props.minWidth',
+    minWidth: '셀렉트의 `v-menu` 컨텐츠의 최소 너비를 설정',
     multiple: '복수 선택이 가능하도록 변경. 값의 배열을 받음(?).',
     multiLine: '셀렉트 컴포넌트가 포커스 되거나 dirty(?) 할때 레이블이 떠다니도록(float) 만듬.',
     noDataText: '데이타가 없을때 보여줄 텍스트',
@@ -70,10 +70,21 @@ export default {
     returnObject: '선택시 **item-value** 로 지정된 값이 아니라 오브젝트가 바로 반환되도록 바꿈.',
     searchInput: 'Bound when using the autocomplete prop. Use the **.sync** modifier to catch user input from the autocomplete search input',
     segmented: 'Creates a segmented button - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)',
-    tags: 'Tagging functionality, allows the user to create new values not available from the **items** prop'
+    tags: '태그 기능. 사용자가 **items** prop에 없는 새로운 값을 만들 수 있게해줌',
+    valueComparator: 'Apply a custom value comparator function'
   },
   slots: {
     item: 'Scoped slot for designating the markup for a list-tile',
+    'no-data': 'Mixins.Filterable.slots.noData',
     selection: 'Scoped slot for designating the markup for the selected items'
+  },
+  scopedSlots: {
+    item: 'Define a custom item appearance',
+    selection: 'Define a custom selection appearance'
+  },
+  events: {
+    change: 'Mixins.Input.events.change',
+    'update:error': 'Mixins.Input.events.update:error',
+    'update:searchInput': 'The `search-input.sync` event'
   }
 }

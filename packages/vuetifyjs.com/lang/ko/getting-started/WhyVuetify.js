@@ -32,7 +32,7 @@ export default {
     },
     {
       img: '/static/vuetify_cli.svg',
-      title: '놀랄만한 지원',
+      title: '놀라운 지원',
       caption: `When you run into a roadblock, you need assistance immediately. Vuetify offers chat support in our growing community on Discord.`
     }
   ],
