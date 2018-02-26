@@ -11,8 +11,10 @@ exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
     <div class="input-group__selections"
          style="overflow: hidden;"
     >
-      <div class="input-group__selections__comma">
-        1
+      <div class="input-group__selected__items">
+        <div class="input-group__selections__comma">
+          1
+        </div>
       </div>
       <input disabled="disabled"
              tabindex="-1"
@@ -119,8 +121,10 @@ exports[`VSelect should be clearable with prop, dirty and single select 1`] = `
     <div class="input-group__selections"
          style="overflow: hidden;"
     >
-      <div class="input-group__selections__comma">
-        1
+      <div class="input-group__selected__items">
+        <div class="input-group__selections__comma">
+          1
+        </div>
       </div>
       <input disabled="disabled"
              tabindex="-1"

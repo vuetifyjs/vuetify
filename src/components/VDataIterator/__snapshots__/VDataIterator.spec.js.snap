@@ -22,6 +22,8 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
             <div class="input-group__selections"
                  style="overflow: hidden;"
             >
+              <div class="input-group__selected__items">
+              </div>
               <input aria-label="Items per page:"
                      disabled="disabled"
                      tabindex="-1"
@@ -159,6 +161,8 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
             <div class="input-group__selections"
                  style="overflow: hidden;"
             >
+              <div class="input-group__selected__items">
+              </div>
               <input aria-label="Items per page:"
                      disabled="disabled"
                      tabindex="-1"
@@ -287,6 +291,8 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
             <div class="input-group__selections"
                  style="overflow: hidden;"
             >
+              <div class="input-group__selected__items">
+              </div>
               <input aria-label="Items per page:"
                      disabled="disabled"
                      tabindex="-1"
@@ -419,6 +425,8 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
             <div class="input-group__selections"
                  style="overflow: hidden;"
             >
+              <div class="input-group__selected__items">
+              </div>
               <input aria-label="Items per page:"
                      disabled="disabled"
                      tabindex="-1"

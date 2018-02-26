@@ -59,14 +59,24 @@ export default {
       return this.menuIsActive && this.menuItems.length && this.getMenuIndex() > -1
     },
     genSelectionsAndSearch () {
+      const children = [
+        this.genSelections(),
+        this.genSearch()
+      ]
+
+      this.prefix && children.unshift(this.genFix('prefix'))
+      this.suffix && children.push(this.genFix('suffix'))
+
       return this.$createElement('div', {
         'class': 'input-group__selections',
         style: { 'overflow': 'hidden' },
         ref: 'activator'
-      }, [
-        ...this.genSelections(),
-        this.genSearch()
-      ])
+      }, children)
+    },
+    genFix (type) {
+      return this.$createElement('span', {
+        'class': `input-group--select__${type}`
+      }, this[type])
     },
     genSelections () {
       if (this.hideSelections) return []
@@ -89,7 +99,9 @@ export default {
         children[length] = genSelection(this.selectedItems[length], length, length === children.length - 1)
       }
 
-      return children
+      return this.$createElement('div', {
+        class: 'input-group__selected__items'
+      }, children)
     },
     genSearch () {
       const data = {

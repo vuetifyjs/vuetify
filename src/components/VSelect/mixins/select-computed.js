@@ -22,7 +22,9 @@ export default {
         'input-group--chips': this.chips,
         'input-group--multiple': this.multiple,
         'input-group--open': this.menuIsVisible,
-        'input-group--select--selecting-index': this.selectedIndex > -1
+        'input-group--select--selecting-index': this.selectedIndex > -1,
+        'input-group--select--prefix': this.prefix,
+        'input-group--select--suffix': this.suffix
       }
 
       if (this.hasError) {
