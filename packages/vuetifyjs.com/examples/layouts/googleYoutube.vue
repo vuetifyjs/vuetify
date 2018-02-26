@@ -83,6 +83,12 @@
               </v-btn>
               <span>Source</span>
             </v-tooltip>
+            <v-tooltip right>
+              <v-btn icon large href="https://codepen.io/johnjleider/pen/YeRKwQ" target="_blank" slot="activator">
+                <v-icon large>mdi-codepen</v-icon>
+              </v-btn>
+              <span>Codepen</span>
+            </v-tooltip>
           </v-flex>
         </v-layout>
       </v-container>
@@ -114,9 +120,3 @@
     }
   }
 </script>
-
-<style>
-  .input-group__details:after {
-    background-color: rgba(255, 255, 255, 0.32) !important;
-  }
-</style>
