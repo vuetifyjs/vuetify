@@ -1,4 +1,5 @@
 import 'vuetify/src/util/helpers'
+import 'vuetify/src/util/colors'
 import Vue, { PluginFunction } from 'vue'
 
 declare class Vuetify {
