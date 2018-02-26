@@ -115,10 +115,15 @@ export default {
       this.$listeners.keydown && this.bind()
     },
     bind () {
+      window.addEventListener('keyup', this.onKeyup)
       window.addEventListener('keydown', this.onKeydown)
     },
     unbind () {
+      window.removeEventListener('keyup', this.onKeyup)
       window.removeEventListener('keydown', this.onKeydown)
+    },
+    onKeyup (e) {
+      this.$emit('keyup', e)
     },
     onKeydown (e) {
       this.$emit('keydown', e)
