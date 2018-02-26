@@ -18,13 +18,12 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - [Xavier Escoté](http://www.deister.net/)
 - [Steve Gehrman](https://cocoatech.com/)
 - [Cycloid](https://www.cycloid.io/)
-- [LiveCasino](https://livecasino.com/)
-- [Nate Controls](http://www.natecontrols.com/)
+- [LiveCasino](https://livecasino.com/) <!-- Vidar hwang -->
+- [Nate Controls](http://www.natecontrols.com/) <!-- Brad Stewart -->
 - [Trek10](https://www.trek10.com/)
-- [Zweidenker](http://zweidenker.de)
+- [Zweidenker](http://zweidenker.de) <!-- Christian Denker -->
 
 ### $20+
-- Tibor Nagy
 - [Jaime Olmo](https://www.jaimeolmo.com)
 - Michael Marti
 - [Aeroden](https://www.aeroden.com)
@@ -39,6 +38,8 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - Pierre Vanhulst
 - David Briscese
 - Juha Vehnia
+- Max Hodges
+- Kent Johnson
 
 ### $10+
 - Kevin Pilard
@@ -54,7 +55,6 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - Jim O\`Quinn
 - Sam Bosell
 - Cliff Hess
-- Antonio Luis Gil Rodríguez
 - Omar Spira
 - Jiří Žižka
 - Dejan Kovac
@@ -73,8 +73,8 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - Jadranko Dragoje
 - Charles McKeever
 - Caleb Blankemeyer
-- Nicholas Coates
-- Stanislovas Janonis
+- Caleb B
+- VeloAce
 - Nico Rogers
 - Jamie Sartell
 - Brandon Deo
@@ -82,4 +82,9 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - Idea Junction Ltd.
 - Michael Hipp
 - Keyur Desai
+- Casey Dwyer
+- King of Kings
+- Bohdan Kokotko
+- Blaine Landowski
+- Paul Whittemore
 - Phillipp Naderer-Puiu

@@ -1,10 +1,18 @@
+// Components
 import VIcon from '../VIcon'
+
+// Mixins
+import Colorable from '../../mixins/colorable'
+
+// Directives
 import Ripple from '../../directives/ripple'
 
 export default {
   name: 'v-stepper-step',
 
   components: { VIcon },
+
+  mixins: [Colorable],
 
   directives: { Ripple },
 
@@ -18,6 +26,10 @@ export default {
   },
 
   props: {
+    color: {
+      type: String,
+      default: 'primary'
+    },
     complete: Boolean,
     completeIcon: {
       type: String,
@@ -96,7 +108,7 @@ export default {
     const step = h('span', {
       staticClass: 'stepper__step__step',
       'class': {
-        'primary': !this.hasError && (this.complete || this.isActive)
+        [this.color]: !this.hasError && (this.complete || this.isActive)
       }
     }, stepContent)
 
