@@ -11,6 +11,11 @@ export default {
       icon: 'mdi-account-multiple'
     },
     {
+      href: 'https://www.reddit.com/r/vuetifyjs/',
+      text: 'Reddit',
+      icon: 'mdi-reddit'
+    },
+    {
       href: 'https://medium.com/vuetify',
       text: 'Medium Publication',
       icon: 'mdi-medium'
