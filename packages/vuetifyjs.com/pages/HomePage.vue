@@ -1,7 +1,7 @@
 <template lang="pug">
   div#home
     v-jumbotron(
-      gradient="to right top, #1867c0, #19e5f4"
+      gradient="to bottom, #1867c0, #5CBBF6"
       height="auto"
       dark
     )
