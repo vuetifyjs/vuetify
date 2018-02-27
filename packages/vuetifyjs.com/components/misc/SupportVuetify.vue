@@ -6,15 +6,41 @@
     target="_blank"
   >
     <v-card-text>
-      <v-layout align-center>
-        <v-flex display-1 patreon mr-4>
-          PATREON
+      <v-layout row wrap>
+        <v-flex
+          d-flex
+          pl-1
+          xs10
+          :style="{ order: $vuetify.breakpoint.xs ? '2' : '1' }">
+          <v-layout align-center row wrap>
+            <v-flex
+              display-1
+              mr-4
+              patreon
+              d-flex
+              xs12
+              sm6>
+              PATREON
+            </v-flex>
+            <v-flex hidden-xs-only patreon-bar mr-4 />
+            <v-flex hidden-sm-and-up patreon-bar-horizontal mr-4 />
+            <v-flex xs12 sm6 display-1 patreon-caption pb-1>
+              Support Vuetify
+            </v-flex>
+          </v-layout>
         </v-flex>
-        <v-flex patreon-bar mr-4 />
-        <v-flex display-1 patreon-caption pb-1>
-          Support Vuetify
+        <v-flex
+          align-center
+          text-xs-center
+          xs2
+          d-flex
+          :style="{ order: $vuetify.breakpoint.xs ? '1' : '2' }">
+          <v-layout align-center>
+            <v-flex xs12>
+              <img class="logo" src="/static/doc-images/logo.svg" width="50px" alt="">
+            </v-flex>
+          </v-layout>
         </v-flex>
-        <img src="/static/doc-images/logo.svg" width="50px" alt="">
       </v-layout>
     </v-card-text>
   </v-card>
@@ -31,6 +57,11 @@
     background-color: #052D49
     height: 80px
     flex: 0 1 6px
+
+  .patreon-bar-horizontal
+    border-bottom: 6px solid #052D49
+    width: 100%
+    flex-shrink: 1
 
   .patreon-caption
     color: #052D49
