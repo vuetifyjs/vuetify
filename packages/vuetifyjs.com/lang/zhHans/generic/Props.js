@@ -2,7 +2,7 @@ export default {
   app: '指定组件作为应用程序布局的一部分，用于动态调整内容大小。',
   auto: '在所选择的元素上居中列表',
   centered: '将选项卡居中',
-  clearable: '添加输入框清楚功能，默认图标是 Material Icons **clear**',
+  clearable: '添加输入框清除功能，默认图标是 Material Icons **clear**',
   dontFillMaskBlanks: '键入时禁用自动字符显示',
   falseValue: '设置虚假状态的值',
   fullWidth: 'Forces 100% width',
