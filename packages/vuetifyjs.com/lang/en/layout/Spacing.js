@@ -32,7 +32,8 @@ export default {
     '`l` - applies the property for `margin-left` or `padding-left`',
     '`r` - applies the property for `margin-right` or `padding-right`',
     '`x` - applies the property for both `*-left` and `*-right`',
-    '`y` - applies the property for both `*-top` and `*-bottom`'
+    '`y` - applies the property for both `*-top` and `*-bottom`',
+    '`a` - applies the property for `margin` or `padding` in all directions'
   ],
   sizeText: 'The _size_ controls the increment of the property:',
   sizes: [
