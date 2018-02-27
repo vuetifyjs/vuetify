@@ -3,8 +3,10 @@ export default () => ({
   appFooter: true,
   appSnackbar: {
     color: 'success',
+    href: false,
     msg: '',
     text: 'Close',
+    to: false,
     timeout: 6000
   },
   appToolbar: null,
