@@ -1,5 +1,5 @@
 export default {
   header: 'Typography',
-  headerText: 'The typography of an application is just as important as its functionality. Vuetify.js uses the Material Design spec Roboto Font. Each heading size also has a corresponding helper class to style other elements the same.',
-  examplesHeader: 'Examples'
+  headerText: 'アプリケーションのタイポグラフィーは重要な機能の１つです。Vuetify.js ではマテリアルデザインの仕様である Roboto Font を使用しています。それぞれの見出しのサイズには対応するヘルパークラスが存在します。',
+  examplesHeader: 'サンプル'
 }

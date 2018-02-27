@@ -6,7 +6,7 @@ export default {
   features: [
     {
       img: '/static/doc-images/feature1.svg',
-      title: 'プロジェクトのテンプレート',
+      title: 'プロジェクトテンプレート',
       text: '8つのvue-cli用のテンプレートを用意しています。シンプルなHTMLからSSRを使用した本格的なものまで、数分で作成できます。'
     },
     {
@@ -17,7 +17,7 @@ export default {
     {
       img: '/static/doc-images/feature3.svg',
       title: '活発なコミュニティ',
-      text: 'つまづいてしまったら、すぐに助けが必要です。Discord上でコミュニティによるチャットサポートを用意しています。'
+      text: 'つまづいてしまったらすぐに助けが必要です。Discord上でコミュニティによるチャットサポートを用意しています。'
     }
   ],
   checkFeaturesTitle: '最高のUIを構築するために',
