@@ -21,6 +21,13 @@ export default {
     state.appToolbar = !payload
   },
   SNACKBAR: (state, payload) => {
-    state.appSnackbar = payload
+    state.appSnackbar = Object.assign({}, {
+      color: 'success',
+      href: false,
+      msg: '',
+      text: 'Close',
+      to: false,
+      timeout: 6000
+    }, payload)
   }
 }

@@ -162,6 +162,9 @@
   // Mixins
   import Message from '@/mixins/message'
 
+  // Utilities
+  import { mapMutations } from 'vuex'
+
   export default {
     name: 'HomePage',
 
@@ -178,6 +181,10 @@
         {
           icon: 'fa-github',
           href: 'https://github.com/vuetifyjs/vuetify'
+        },
+        {
+          icon: 'fa-reddit',
+          href: 'https://www.reddit.com/r/vuetifyjs/'
         },
         {
           icon: 'fa-twitter',
@@ -214,7 +221,20 @@
       }
     },
 
+    mounted () {
+      this.snackbar({
+        color: '',
+        msg: 'Vuetify is now on Reddit!',
+        href: 'https://www.reddit.com/r/vuetifyjs/',
+        text: 'Check it out',
+        timeout: 0
+      })
+    },
+
     methods: {
+      ...mapMutations('app', {
+        snackbar: 'SNACKBAR'
+      }),
       snackHandler () {
         this.$router.push({ name: 'store/Index' })
       }

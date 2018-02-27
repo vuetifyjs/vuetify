@@ -19,11 +19,12 @@
       <span v-text="snackbar.msg" />
       <v-spacer />
       <v-btn
-        flat
-        :ripple="false"
-        @click="onClick"
         dark
+        flat
+        @click="onClick"
         :color="!computedIcon ? 'primary lighten-3' : null"
+        :ripple="false"
+        v-bind="bind"
       >
         {{ snackbar.text }}
       </v-btn>
@@ -43,6 +44,18 @@
       ...mapState('app', {
         snackbar: state => state.appSnackbar
       }),
+      bind () {
+        if (this.snackbar.to) return { to: this.snackbar.to }
+        if (this.snackbar.href) {
+ return {
+          href: this.snackbar.href,
+          target: '_blank',
+          rel: 'noopener'
+        }
+}
+
+        return {}
+      },
       computedIcon () {
         switch (this.snackbar.color) {
           case 'success': return 'check'
