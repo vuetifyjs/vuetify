@@ -3,20 +3,6 @@ import '../../stylus/components/_text-fields.styl'
 import '../../stylus/components/_input-groups.styl'
 import '../../stylus/components/_select.styl'
 
-// Components
-import VBtn from '../VBtn'
-import VCard from '../VCard'
-import VCheckbox from '../VCheckbox'
-import VChip from '../VChip'
-import {
-  VList,
-  VListTile,
-  VListTileAction,
-  VListTileContent,
-  VListTileTitle
-} from '../VList'
-import VMenu from '../VMenu'
-
 // Mixins
 import Colorable from '../../mixins/colorable'
 import Dependent from '../../mixins/dependent'
@@ -42,19 +28,6 @@ export default {
   name: 'v-select',
 
   inheritAttrs: false,
-
-  components: {
-    VCard,
-    VCheckbox,
-    VChip,
-    VList,
-    VListTile,
-    VListTileAction,
-    VListTileContent,
-    VListTileTitle,
-    VMenu,
-    VBtn
-  },
 
   directives: {
     ClickOutside
@@ -119,6 +92,7 @@ export default {
 
   methods: {
     needsTile (tile) {
+      // TODO: use the component name instead of tag
       return tile.componentOptions == null || tile.componentOptions.tag !== 'v-list-tile'
     },
     changeSelectedIndex (keyCode) {

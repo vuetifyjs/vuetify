@@ -9,10 +9,6 @@ import PickerButton from '../../mixins/picker-button'
 export default {
   name: 'v-date-picker-title',
 
-  components: {
-    VIcon
-  },
-
   mixins: [PickerButton],
 
   data: () => ({
@@ -51,7 +47,7 @@ export default {
 
   methods: {
     genYearIcon () {
-      return this.$createElement('v-icon', {
+      return this.$createElement(VIcon, {
         props: {
           dark: true
         }

@@ -10,11 +10,8 @@ function createBtn (val = null) {
   if (val) options.attrs = { value: val }
 
   return Vue.component('test', {
-    components: {
-      VBtn
-    },
     render (h) {
-      return h('v-btn', options)
+      return h(VBtn, options)
     }
   })
 }

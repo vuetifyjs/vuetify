@@ -18,11 +18,6 @@ export default {
 
   inject: ['isMandatory', 'name'],
 
-  components: {
-    VFadeTransition,
-    VIcon
-  },
-
   mixins: [
     Colorable,
     Rippleable,
@@ -145,8 +140,8 @@ export default {
   },
 
   render (h) {
-    const transition = h('v-fade-transition', {}, [
-      h('v-icon', {
+    const transition = h(VFadeTransition, {}, [
+      h(VIcon, {
         staticClass: 'icon--selection-control',
         'class': {
           'icon--radio': this.isActive

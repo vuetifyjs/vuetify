@@ -86,11 +86,8 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
     const vm = new Vue()
     const items = props => vm.$createElement('td', [props.item.col2])
     const component = Vue.component('test', {
-      components: {
-        VDataTable
-      },
       render (h) {
-        return h('v-data-table', {
+        return h(VDataTable, {
           props: {
             ...data.propsData
           },
@@ -195,11 +192,8 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
   it('should render a progress with headers slot', () => {
     const vm = new Vue()
     const wrapper = mount(Vue.component('test', {
-      components: {
-        VDataTable
-      },
       render (h) {
-        return h('v-data-table', {
+        return h(VDataTable, {
           props: {
             items: []
           },
@@ -242,11 +236,8 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
 
   it('should allow custom tr when using no-data slot', async () => {
     const wrapper = mount(Vue.component('test', {
-      components: {
-        VDataTable
-      },
       render (h) {
-        return h('v-data-table', {
+        return h(VDataTable, {
           props: {
             items: []
           },
@@ -260,11 +251,8 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
 
   it('should allow custom td when using no-results slot', async () => {
     const wrapper = mount(Vue.component('test', {
-      components: {
-        VDataTable
-      },
       render (h) {
-        return h('v-data-table', {
+        return h(VDataTable, {
           props: {
             items: [{}],
             search: 'foo'
@@ -279,11 +267,8 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
 
   it('should render tr and td when using no-results slot', async () => {
     const wrapper = mount(Vue.component('test', {
-      components: {
-        VDataTable
-      },
       render (h) {
-        return h('v-data-table', {
+        return h(VDataTable, {
           props: {
             items: [{}],
             search: 'foo'

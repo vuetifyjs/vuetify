@@ -1,3 +1,7 @@
+import VTabsItems from '../VTabsItems'
+import VTabsSlider from '../VTabsSlider'
+import VIcon from '../../VIcon'
+
 /**
  * Tabs generators
  *
@@ -42,7 +46,7 @@ export default {
         !this[`${direction}IconVisible`]
       ) return null
 
-      return this.$createElement('v-icon', {
+      return this.$createElement(VIcon, {
         staticClass: `tabs__icon tabs__icon--${direction}`,
         props: {
           disabled: !this[`${direction}IconVisible`]
@@ -56,7 +60,7 @@ export default {
       if (items.length > 0) return items
       if (!item.length) return null
 
-      return this.$createElement('v-tabs-items', item)
+      return this.$createElement(VTabsItems, item)
     },
     genTransition (direction) {
       return this.$createElement('transition', {
@@ -82,7 +86,7 @@ export default {
     },
     genSlider (items) {
       if (!items.length) {
-        items = [this.$createElement('v-tabs-slider', {
+        items = [this.$createElement(VTabsSlider, {
           props: { color: this.sliderColor }
         })]
       }
