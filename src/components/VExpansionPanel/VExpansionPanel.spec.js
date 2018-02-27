@@ -54,4 +54,71 @@ test('VExpansionPanel.js', ({ mount, compileToFunctions }) => {
     await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should show content on v-model change', async () => {
+    const wrapper = mount(VExpansionPanel, {
+      slots: {
+        default: VExpansionPanelContent
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({ value: 0 })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.first('.expansion-panel__container--active')).not.toBe(null)
+  })
+
+  it('should show content on mount using v-model', async () => {
+    const wrapper = mount(VExpansionPanel, {
+      propsData: {
+        value: 0
+      },
+      slots: {
+        default: VExpansionPanelContent
+      }
+    })
+
+    await wrapper.vm.$nextTick()
+    expect(wrapper.first('.expansion-panel__container--active')).not.toBe(null)
+  })
+
+  it('should allow array v-model when using expand prop', async () => {
+    const wrapper = mount(VExpansionPanel, {
+      propsData: {
+        expand: true,
+        value: [1, 3]
+      },
+      slots: {
+        default: [VExpansionPanelContent, VExpansionPanelContent, VExpansionPanelContent, VExpansionPanelContent]
+      }
+    })
+
+    await wrapper.vm.$nextTick()
+    expect(wrapper.find('.expansion-panel__container--active').length).toBe(2)
+  })
+
+  it('should reset v-model when switching expand', async () => {
+    const fn = jest.fn()
+    const wrapper = mount(VExpansionPanel, {
+      propsData: {
+        expand: true,
+        value: [false]
+      },
+      slots: {
+        default: [VExpansionPanelContent]
+      }
+    })
+
+    wrapper.instance().$on('input', fn)
+
+    expect(wrapper.find('.expansion-panel__container--active').length).toBe(0)
+
+    wrapper.setProps({ expand: false })
+
+    await wrapper.vm.$nextTick()
+
+    expect(fn).toHaveBeenCalledWith(null)
+  })
 })
