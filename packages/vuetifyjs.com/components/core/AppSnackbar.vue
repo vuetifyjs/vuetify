@@ -1,6 +1,6 @@
 <template>
   <v-snackbar
-    top
+    bottom
     center
     :color="snackbar.color"
     :timeout="snackbar.timeout"
