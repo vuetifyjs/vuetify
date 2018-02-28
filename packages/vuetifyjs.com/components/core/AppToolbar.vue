@@ -81,6 +81,7 @@
         bottom
         left
         offset-y
+        max-height="500"
         v-show="!isStore"
       )
         v-btn(
