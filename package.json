@@ -111,7 +111,7 @@
   "jest": {
     "verbose": false,
     "roots": [
-      "<rootDir>/src"
+      "<rootDir>/test/unit"
     ],
     "moduleFileExtensions": [
       "js",
@@ -121,11 +121,9 @@
       "node_modules"
     ],
     "moduleNameMapper": {
-      "src/(.*)": "<rootDir>/src/$1",
-      "^@components/(.*)$": "<rootDir>/src/components/$1",
-      "^@directives/(.*)$": "<rootDir>/src/directives/$1",
-      "^@mixins/(.*)$": "<rootDir>/src/mixins/$1",
-      "^@util/(.*)$": "<rootDir>/src/util/$1"
+      "^@/test$": "<rootDir>/test/index.js",
+      "^@/test/(.*)$": "<rootDir>/test/$1",
+      "^@/(.*)$": "<rootDir>/src/$1"
     },
     "transform": {
       ".*\\.(vue)$": "<rootDir>/node_modules/jest-vue-preprocessor",
