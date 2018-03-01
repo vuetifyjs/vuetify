@@ -26,6 +26,7 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
     'no-return-assign': 0,
     'max-statements': [2, 24],
-    'prefer-promise-reject-errors': 0
+    'prefer-promise-reject-errors': 0,
+    'no-render-string-reference': 2
   }
 }
