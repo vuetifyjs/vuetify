@@ -3,7 +3,7 @@
     dark
     style="background-color: #F96854 !important;"
     active-class=""
-    href="https://www.patreon.com/bePatron?u=6223325"
+    href="https://www.patreon.com/vuetify"
     target="_blank"
     rel="noopener"
   )
