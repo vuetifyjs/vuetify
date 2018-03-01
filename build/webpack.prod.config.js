@@ -2,11 +2,11 @@ const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base.config')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
-var extractPlugin = ExtractTextPlugin.extract({
+const extractPlugin = ExtractTextPlugin.extract({
   use: [
-    { loader: 'css-loader', options: { sourceMap: true } },
-    { loader: 'postcss-loader', options: { sourceMap: true } },
-    { loader: 'stylus-loader', options: { sourceMap: true } }
+    { loader: 'css-loader', options: { sourceMap: false } },
+    { loader: 'postcss-loader', options: { sourceMap: false } },
+    { loader: 'stylus-loader', options: { sourceMap: false } }
   ]
 })
 
