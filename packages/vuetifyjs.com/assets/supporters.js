@@ -24,7 +24,6 @@ export default {
     { title: 'Cycloid', href: 'https://www.cycloid.io/', src: 'backers/cycloid.png' },
     { title: 'Live Casino', href: 'https://livecasino.com/', src: 'backers/casino.webp', dark: true },
     { title: 'Nate Controls', href: 'http://www.natecontrols.com/', src: 'backers/n8controls.png' },
-    { title: 'Trek10', href: 'https://www.trek10.com/', src: 'backers/trek10.svg' },
     { title: 'Zweidenker', href: 'http://zweidenker.de/', src: 'backers/zweidenker-logo-grey.svg' }
   ],
   affiliates: [
