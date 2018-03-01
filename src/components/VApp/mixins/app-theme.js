@@ -47,7 +47,7 @@ export default {
 
   watch: {
     generatedStyles () {
-      this.applyTheme()
+      !this.meta && this.applyTheme()
     }
   },
 
@@ -82,7 +82,7 @@ export default {
 
   methods: {
     applyTheme () {
-      this.style.innerHTML = this.generatedStyles
+      if (this.style) this.style.innerHTML = this.generatedStyles
     },
     genStyle () {
       let style = document.getElementById('vuetify-theme-stylesheet')
