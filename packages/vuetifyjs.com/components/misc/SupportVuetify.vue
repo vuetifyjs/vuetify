@@ -1,7 +1,7 @@
 <template>
   <v-card
     class="mb-5"
-    href="https://www.patreon.com/bePatron?u=6223325"
+    href="https://www.patreon.com/vuetify"
     rel="noopener"
     target="_blank"
   >
