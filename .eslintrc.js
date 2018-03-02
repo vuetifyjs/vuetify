@@ -1,3 +1,6 @@
+const rulesDirPlugin = require('eslint-plugin-rulesdir')
+rulesDirPlugin.RULES_DIR = 'eslint-rules'
+
 module.exports = {
   root: true,
   parserOptions: {
@@ -17,7 +20,10 @@ module.exports = {
     'it': true,
     'jest': true
   },
-  'rules': {
+  plugins: [
+    'rulesdir'
+  ],
+  rules: {
     // allow paren-less arrow functions
     'arrow-parens': [2, 'as-needed'],
     // set maximum line characters
@@ -27,6 +33,6 @@ module.exports = {
     'no-return-assign': 0,
     'max-statements': [2, 24],
     'prefer-promise-reject-errors': 0,
-    'no-render-string-reference': 2
+    'rulesdir/no-render-string-reference': 2
   }
 }

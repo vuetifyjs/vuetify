@@ -24,7 +24,7 @@
     "test:unix": "cross-env NODE_ENV=test jest",
     "test:win32": "cross-env NODE_ENV=test jest -i",
     "test:coverage": "cross-env NODE_ENV=test jest --coverage",
-    "lint": "eslint --ext .js,.vue --rulesdir eslint-rules src",
+    "lint": "eslint --ext .js,.vue src",
     "preparecommitmsg": "node dev/prepare-commit-message.js",
     "commitmsg": "node dev/lint-commit-message.js",
     "precommit": "node dev/warn-npm-install.js && yarn lint && yarn test"
@@ -61,6 +61,7 @@
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-node": "^5.2.1",
     "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-rulesdir": "^0.1.0",
     "eslint-plugin-standard": "^3.0.1",
     "eventsource-polyfill": "0.9.6",
     "extract-text-webpack-plugin": "3.0.2",
