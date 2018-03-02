@@ -371,4 +371,21 @@ test('VTabs', ({ mount, shallow }) => {
     const slider = wrapper.find('.tabs__slider')
     expect(slider).toHaveLength(0)
   })
+
+  it('should render generic elements in the tab container', async () => {
+    const component = {
+      render (h) {
+        return h(VTabs, {
+          props: { hideSlider: true }
+        }, [
+          h('div', { staticClass: 'test-element' }, ['foobar'])
+        ])
+      }
+    }
+    const wrapper = mount(component, {
+      attachToDocument: true
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })
