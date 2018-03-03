@@ -176,9 +176,7 @@ export default {
         css: this.transitionCss
       },
       on: {
-        afterLeave: () => {
-          this.$emit('after-leave')
-        }
+        afterLeave: () => { this.$emit('after-leave') }
       }
     }, [h('div', data,
       this.showLazyContent(this.$slots.default)
