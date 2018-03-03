@@ -694,3 +694,13 @@ exports[`VDataTable.vue should match display no-results-text when no results 1`]
 </td>
 
 `;
+
+exports[`VDataTable.vue should match display when width is specified 1`] = `
+
+<colgroup>
+  <col width="100">
+  <col width="200">
+  <col width="300">
+</colgroup>
+
+`;

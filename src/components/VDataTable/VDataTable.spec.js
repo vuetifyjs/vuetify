@@ -320,4 +320,17 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
     expect(wrapper.vm.everyItem).toBe(true);
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
+
+  it.only('should match display when width is specified', () => {
+    const data = dataTableTestData()
+    data.propsData.headers[0].width = 100
+    data.propsData.headers[1].width = 200
+    data.propsData.headers[2].width = 300
+    const wrapper = mount(VDataTable, data)
+
+    wrapper.update()
+
+    expect(wrapper.find('table colgroup')[0].html()).toMatchSnapshot()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
 })
