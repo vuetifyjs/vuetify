@@ -13,13 +13,13 @@ export default {
       return this.$createElement('colgroup', {}, [...this.genCols()])
     },
     genCols () {
-      return this.columnsWidth.map(
+      return (this.columnsWidth) ? this.columnsWidth.map(
         colWidth => this.$createElement('col', {
           attrs: {
             width: colWidth
           }
         })
-      )
+      ) : []
     },
     genFixedHeader () {
       if (this.height === undefined) return // disabled fixed header if height is not specify
@@ -62,7 +62,7 @@ export default {
           on: { change: this.toggle }
         })
 
-        this.hasSelectAll && row.unshift(this.$createElement('th', [checkbox]))
+        this.hasSelectAll && row.unshift(this.$createElement('th', [ this.genHeaderWrapper([ checkbox ]) ]))
 
         children = [this.genTR(row), this.genTProgress()]
       }
@@ -103,8 +103,14 @@ export default {
         classes.push(header.class)
       }
       data.class = classes
-
-      return [data, children]
+      return [data, [ this.genHeaderWrapper(children) ]]
+    },
+    genHeaderWrapper (children) {
+      // for measurement of the actual width of header items
+      return this.$createElement(
+        'span',
+        children
+      )
     },
     genHeaderSortingData (header, children, data, classes) {
       if (!('value' in header)) {

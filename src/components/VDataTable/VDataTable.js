@@ -51,10 +51,6 @@ export default {
     height: {
       type: Number
     },
-    minColumnWidth: {
-      type: Number,
-      default: 100
-    },
     hideHeaders: Boolean,
     rowsPerPageText: {
       type: String,
@@ -87,6 +83,22 @@ export default {
     },
     headerColumns () {
       return this.headers.length + (this.selectAll !== false)
+    },
+    minColumnsWidth () {
+      if (this.$el === undefined) {
+        return []
+      }
+      const $th = this.$el.querySelectorAll('thead tr:first-child th')
+      const minColumnsWidth = []
+      for (let i = 0; i < $th.length; i++) {
+        let actualWidth = 0
+        const $span = $th[i].querySelectorAll('span')
+        actualWidth = $span[0].clientWidth
+        const paddingLeft = parseFloat(getComputedStyle($th[i]).paddingLeft)
+        const paddingRight = parseFloat(getComputedStyle($th[i]).paddingRight)
+        minColumnsWidth.push(actualWidth + paddingLeft + paddingRight)
+      }
+      return minColumnsWidth
     }
   },
 
@@ -105,41 +117,48 @@ export default {
         return el.offsetWidth
       }
     },
-    computedWidth (autoAssignedWidth, unassignedCount) {
-      const computedWidth = parseInt(autoAssignedWidth * 1.0 / unassignedCount)
-      return computedWidth > this.minColumnWidth ? computedWidth : this.minColumnWidth
-    },
-    calculateColumnWidth () {
-      const actualColumnsWidth = this.headers.map(o => o.width)
-      let autoAssignedWidth = this.getContainerWidth()
-      let lastUnassignedIdx = -1
-      let unassignedCount = 0
-      for (let i = 0; i < actualColumnsWidth.length; i++) {
-        if (actualColumnsWidth[i] === undefined) {
-          lastUnassignedIdx = i
-          unassignedCount++
+    calculateColumnsWidth () {
+      const actualColumnsWidth = []
+      const autoWidthColumns = []
+
+      let minAutoAssignedWidth = 0
+      let autoAssignableWidth = this.getContainerWidth()
+
+      for (let i = 0; i < this.headerColumns; i++) {
+        // extract the width specified in header
+        const headerIdx = (this.selectAll === false) ? i : i - 1
+        const specifiedWidth = headerIdx >= 0 ? this.headers[headerIdx].width : undefined
+        if (specifiedWidth === undefined) {
+          // take the min columns width if not specified
+          actualColumnsWidth.push(this.minColumnsWidth[i])
+          minAutoAssignedWidth += actualColumnsWidth[i]
+          autoWidthColumns.push(i) // for width adjustment when there is excessive width remaining
         } else {
-          autoAssignedWidth -= actualColumnsWidth[i]
+          actualColumnsWidth.push(specifiedWidth)
+          autoAssignableWidth -= specifiedWidth
         }
       }
 
-      const computedWidth = this.computedWidth(autoAssignedWidth, unassignedCount)
-      let remain = autoAssignedWidth
-      for (let i = 0; i < actualColumnsWidth.length; i++) {
-        if (actualColumnsWidth[i] === undefined) {
-          if (i === lastUnassignedIdx && remain > this.minColumnWidth) {
-            actualColumnsWidth[i] = remain
+      // min-width of those columns without width specified does not fully occupied the remaining space
+      // need to adjust the width of those column
+      const excessiveWidth = autoAssignableWidth - minAutoAssignedWidth
+      if (excessiveWidth > 0 && autoWidthColumns.length > 0) {
+        const widthIncrement = parseInt(excessiveWidth / autoWidthColumns.length)
+        for (let i = 0; i < autoWidthColumns.length; i++) {
+          if (i === 0) {
+            actualColumnsWidth[autoWidthColumns[i]] += excessiveWidth - widthIncrement * (autoWidthColumns.length - 1)
           } else {
-            actualColumnsWidth[i] = computedWidth
+            actualColumnsWidth[autoWidthColumns[i]] += widthIncrement
           }
-          remain -= actualColumnsWidth[i]
         }
       }
-
-      this.columnsWidth = actualColumnsWidth
+      return actualColumnsWidth
+    },
+    initColumnWidth () {
+      this.columnsWidth = this.calculateColumnsWidth()
     },
     onResize () {
-      this.calculateColumnWidth()
+      this.initColumnWidth()
     }
   },
 
@@ -156,7 +175,7 @@ export default {
   },
 
   mounted () {
-    this.calculateColumnWidth()
+    this.initColumnWidth()
   },
 
   render (h) {
@@ -175,7 +194,6 @@ export default {
         this.genTFoot()
       ])
     ])
-
     return h('div', [
       tableOverflow,
       this.genActionsFooter()
