@@ -4,8 +4,8 @@
       v-for="(item,i) in items"
       :key="i"
       :src="item.src"
-      transition="fade"
-      reverse-transition="fade"
+      transition="fade-transition"
+      reverse-transition="fade-transition"
     ></v-carousel-item>
   </v-carousel>
 </template>
