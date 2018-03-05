@@ -12,17 +12,24 @@ import { getObjectValueByPath } from '../../../util/helpers'
 export default {
   methods: {
     getText (item) {
-      return this.getPropertyFromItem(item, this.itemText)
+      if (item !== Object(item)) return item
+      return this.getPropertyFromItem(item, this.itemText, item)
     },
     getValue (item) {
-      return this.getPropertyFromItem(item, this.itemValue)
+      return this.getPropertyFromItem(item, this.itemValue, item)
     },
-    getPropertyFromItem (item, field) {
-      if (item !== Object(item)) return item
+    getDisabled (item) {
+      return this.getPropertyFromItem(item, this.itemDisabled, false)
+    },
+    getAvatar (item) {
+      return this.getPropertyFromItem(item, this.itemAvatar)
+    },
+    getPropertyFromItem (item, field, fallback) {
+      const value = typeof field === 'function'
+        ? field(item)
+        : getObjectValueByPath(item, field)
 
-      const value = getObjectValueByPath(item, field)
-
-      return typeof value === 'undefined' ? item : value
+      return typeof value === 'undefined' ? fallback : value
     }
   }
 }

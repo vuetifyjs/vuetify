@@ -63,7 +63,7 @@ export default {
         staticClass: 'menu__content',
         'class': {
           [this.contentClass.trim()]: true,
-          'menuable__content__active': this.isActive,
+          'stackable__content__active': this.isActive,
           'theme--dark': this.dark,
           'theme--light': this.light
         },

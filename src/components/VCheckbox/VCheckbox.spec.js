@@ -35,6 +35,64 @@ test('VCheckbox.js', ({ mount }) => {
     expect(change).toBeCalledWith('John')
   })
 
+  it('should return a value when toggled on with a specified object value', () => {
+    const wrapper = mount(VCheckbox, {
+      propsData: {
+        value: {x: 1, y: 2},
+        inputValue: null
+      }
+    })
+
+    const ripple = wrapper.find('.input-group--selection-controls__ripple')[0]
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    ripple.trigger('click')
+    expect(change).toBeCalledWith({x: 1, y: 2})
+  })
+
+  it('should return a value when toggled on with a specified array value', () => {
+    const wrapper = mount(VCheckbox, {
+      propsData: {
+        value: [1, "2", {x: 1, y: 2}],
+        inputValue: null
+      }
+    })
+
+    const ripple = wrapper.find('.input-group--selection-controls__ripple')[0]
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    ripple.trigger('click')
+    expect(change).toBeCalledWith([1, "2", {x: 1, y: 2}])
+  })
+
+  it('should push value to array when toggled on and is multiple', () => {
+    const wrapper = mount(VCheckbox, {
+      propsData: {
+        value: 'John',
+        inputValue: []
+      }
+    })
+
+    wrapper.vm.toggle()
+    expect(wrapper.vm.inputValue).toEqual(['John'])
+  })
+
+  it('should push array value to array when toggled on and is multiple', () => {
+    const wrapper = mount(VCheckbox, {
+      propsData: {
+        value: [1, 2, {x: 1, y: 2}],
+        inputValue: ['Existing']
+      }
+    })
+
+    wrapper.vm.toggle()
+    expect(wrapper.vm.inputValue).toEqual(['Existing', [1, 2, {x: 1, y: 2}]])
+  })
+
   it('should return null when toggled off with a specified value', () => {
     const wrapper = mount(VCheckbox, {
       propsData: {
@@ -50,6 +108,36 @@ test('VCheckbox.js', ({ mount }) => {
 
     ripple.trigger('click')
     expect(change).toBeCalledWith(null)
+  })
+
+  it('should return null when toggled off with a specified array value', () => {
+    const wrapper = mount(VCheckbox, {
+      propsData: {
+        multiple: false, // must use multiple flag for array values
+        value: ['John'],
+        inputValue: ['John']
+      }
+    })
+
+    const ripple = wrapper.find('.input-group--selection-controls__ripple')[0]
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    ripple.trigger('click')
+    expect(change).toBeCalledWith(null)
+  })
+
+  it('should remove value(s) from array when toggled off and multiple', () => {
+    const wrapper = mount(VCheckbox, {
+      propsData: {
+        value: 1,
+        inputValue: [1, 2, 1, 3]
+      }
+    })
+
+    wrapper.vm.toggle()
+    expect(wrapper.vm.inputValue).toEqual([2, 3])
   })
 
   it('should toggle when label is clicked', () => {

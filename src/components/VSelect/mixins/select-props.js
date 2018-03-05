@@ -1,3 +1,5 @@
+import { looseEqual } from '../../../util/helpers'
+
 export default {
   props: {
     appendIcon: {
@@ -26,19 +28,19 @@ export default {
       default: () => []
     },
     itemAvatar: {
-      type: String,
+      type: [String, Function],
       default: 'avatar'
     },
     itemDisabled: {
-      type: String,
+      type: [String, Function],
       default: 'disabled'
     },
     itemText: {
-      type: String,
+      type: [String, Function],
       default: 'text'
     },
     itemValue: {
-      type: String,
+      type: [String, Function],
       default: 'value'
     },
     maxHeight: {
@@ -62,12 +64,7 @@ export default {
     tags: Boolean,
     valueComparator: {
       type: Function,
-      default: (a, b) => {
-        if (a !== Object(a)) return a === b
-        const aProps = Object.keys(a)
-        const bProps = Object.keys(b)
-        return aProps.length === bProps.length && aProps.every(propName => (a[propName] === b[propName]))
-      }
+      default: looseEqual
     }
   }
 }

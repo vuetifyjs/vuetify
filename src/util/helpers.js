@@ -95,21 +95,23 @@ export function addOnceEventListener (el, event, cb) {
   el.addEventListener(event, once, false)
 }
 
+export function getNestedValue (obj, path) {
+  for (let i = 0, m = path.length; i < m; i++) {
+    if (obj === null || obj === undefined) {
+      return
+    }
+    obj = obj[path[i]]
+  }
+
+  return obj
+}
+
 export function getObjectValueByPath (obj, path) {
   // credit: http://stackoverflow.com/questions/6491463/accessing-nested-javascript-objects-with-string-key#comment55278413_6491621
   if (!path || path.constructor !== String) return
   path = path.replace(/\[(\w+)\]/g, '.$1') // convert indexes to properties
   path = path.replace(/^\./, '') // strip a leading dot
-  const a = path.split('.')
-  for (var i = 0, n = a.length; i < n; ++i) {
-    var k = a[i]
-    if (obj instanceof Object && k in obj) {
-      obj = obj[k]
-    } else {
-      return
-    }
-  }
-  return obj
+  return getNestedValue(obj, path.split('.'))
 }
 
 export function createRange (length) {
@@ -132,6 +134,24 @@ const tagsToReplace = {
 
 export function escapeHTML (str) {
   return str.replace(/[&<>]/g, tag => tagsToReplace[tag] || tag)
+}
+
+export function looseEqual (a, b) {
+  if (a === b) return true
+
+  if (a !== Object(a) || b !== Object(b)) {
+    // If the values aren't objects, they were already checked for equality
+    return false
+  }
+
+  const props = Object.keys(a)
+
+  if (props.length !== Object.keys(b).length) {
+    // Different number of props, don't bother to check
+    return false
+  }
+
+  return props.every(p => looseEqual(a[p], b[p]))
 }
 
 export function filterObjectOnKeys (obj, keys) {

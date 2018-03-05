@@ -3,6 +3,9 @@ import '../../stylus/components/_input-groups.styl'
 import '../../stylus/components/_selection-controls.styl'
 import '../../stylus/components/_radio-group.styl'
 
+// Helpers
+import { looseEqual } from '../../util/helpers'
+
 // Mixins
 import Input from '../../mixins/input'
 import {
@@ -45,7 +48,11 @@ export default {
       default: true
     },
     name: String,
-    row: Boolean
+    row: Boolean,
+    valueComparator: {
+      type: Function,
+      default: looseEqual
+    }
   },
 
   watch: {
@@ -57,7 +64,7 @@ export default {
     inputValue (val) {
       for (let index = this.radios.length; --index >= 0;) {
         const radio = this.radios[index]
-        radio.isActive = val === radio.value
+        radio.isActive = this.valueComparator(val, radio.value)
       }
     }
   },
@@ -85,7 +92,7 @@ export default {
 
       for (let index = this.radios.length; --index >= 0;) {
         const radio = this.radios[index]
-        if (radio.value !== value) radio.isActive = false
+        if (!this.valueComparator(value, radio.value)) radio.isActive = false
       }
     },
     radioBlur (e) {
@@ -95,7 +102,7 @@ export default {
       }
     },
     register (radio) {
-      radio.isActive = this.inputValue === radio.value
+      radio.isActive = this.valueComparator(this.inputValue, radio.value)
       radio.$el.tabIndex = radio.$el.tabIndex > 0 ? radio.$el.tabIndex : 0
       radio.$on('change', this.toggleRadio)
       radio.$on('blur', this.radioBlur)

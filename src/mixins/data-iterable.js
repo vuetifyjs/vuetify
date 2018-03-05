@@ -151,7 +151,7 @@ export default {
       default: null
     },
     itemKey: {
-      type: String,
+      type: [String, Function],
       default: 'id'
     },
     pagination: {
@@ -211,7 +211,7 @@ export default {
     selected () {
       const selected = {}
       for (let index = 0; index < this.value.length; index++) {
-        selected[this.value[index][this.itemKey]] = true
+        selected[this.getItemKey(this.value[index])] = true
       }
       return selected
     }
@@ -250,11 +250,18 @@ export default {
         this.defaultPagination = updatedPagination
       }
     },
+    getItemKey (item) {
+      const key = this.itemKey
+
+      return typeof key === 'function'
+        ? key(item)
+        : getObjectValueByPath(item, key)
+    },
     isSelected (item) {
-      return this.selected[item[this.itemKey]]
+      return this.selected[this.getItemKey(item)]
     },
     isExpanded (item) {
-      return this.expanded[item[this.itemKey]]
+      return this.expanded[this.getItemKey(item)]
     },
     filteredItemsImpl (...additionalFilterArgs) {
       if (this.totalItems) return this.items
@@ -295,38 +302,43 @@ export default {
     },
     toggle (value) {
       const selected = Object.assign({}, this.selected)
+
       for (let index = 0; index < this.filteredItems.length; index++) {
-        selected[this.filteredItems[index][this.itemKey]] = value
+        selected[this.getItemKey(this.filteredItems[index])] = value
       }
 
       this.$emit('input', this.items.filter(i => (
-        selected[i[this.itemKey]]))
+        selected[this.getItemKey(i)]))
       )
     },
     createProps (item, index) {
       const props = { item, index }
-      const keyProp = this.itemKey
-      const itemKey = item[keyProp]
+      const itemKey = this.getItemKey(item)
 
       Object.defineProperty(props, 'selected', {
-        get: () => this.selected[item[this.itemKey]],
+        get: () => this.selected[this.getItemKey(item)],
         set: value => {
           if (itemKey == null) {
-            consoleWarn(`"${keyProp}" attribute must be defined for item`, this)
+            consoleWarn(`"itemKey" attribute must be present for item`, this)
           }
 
           let selected = this.value.slice()
-          if (value) selected.push(item)
-          else selected = selected.filter(i => i[keyProp] !== itemKey)
+
+          if (value) {
+            selected.push(item)
+          } else {
+            selected = selected.filter(i => this.getItemKey(i) !== itemKey)
+          }
+
           this.$emit('input', selected)
         }
       })
 
       Object.defineProperty(props, 'expanded', {
-        get: () => this.expanded[item[this.itemKey]],
+        get: () => this.expanded[this.getItemKey(item)],
         set: value => {
           if (itemKey == null) {
-            consoleWarn(`"${keyProp}" attribute must be defined for item`, this)
+            consoleWarn(`"itemKey" attribute must be present for item`, this)
           }
 
           if (!this.expand) {
@@ -334,7 +346,8 @@ export default {
               this.expanded.hasOwnProperty(key) && this.$set(this.expanded, key, false)
             }
           }
-          this.$set(this.expanded, itemKey, value)
+
+          this.$set(this.expanded, this.getItemKey(item), value)
         }
       })
 

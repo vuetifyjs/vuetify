@@ -207,6 +207,27 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
+  it('should populate select[multiple=false] when using value as an object', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        items: [
+          { text: 'foo', value: { id: { subid: 1 } } },
+          { text: 'foo', value: { id: { subid: 2 } } }
+        ],
+        multiple: false,
+        value: { id: { subid: 2 } }
+      }
+    })
+
+    await wrapper.vm.$nextTick()
+
+    const selections = wrapper.find('.input-group__selections__comma')
+
+    expect(selections.length).toEqual(1)
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
   it('should open menu when arrow is clicked', async () => {
     const wrapper = mount(VSelect, {
       attachToDocument: true,

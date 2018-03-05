@@ -13,7 +13,7 @@ export default {
       if (this.isExpanded(props.item)) {
         const expand = this.$createElement('div', {
           class: 'datatable__expand-content',
-          key: props.item[this.itemKey]
+          key: this.getItemKey(props.item)
         }, this.$scopedSlots.expand(props))
 
         children.push(expand)
