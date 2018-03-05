@@ -184,4 +184,24 @@ test('VDialog.js', ({ mount, compileToFunctions }) => {
 
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
+
+  it('should emit after-leave event', async () => {
+    const afterLeave = jest.fn()
+
+    const wrapper = mount(VDialog, {
+      propsData: {
+        value: true,
+        transitionCss: false
+      }
+    })
+
+    wrapper.vm.$on('after-leave', afterLeave)
+
+    wrapper.setProps({ value: false })
+    await wrapper.vm.$nextTick()
+
+    expect(afterLeave).toBeCalled()
+
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
 })

@@ -59,6 +59,10 @@ export default {
     transition: {
       type: [String, Boolean],
       default: 'dialog-transition'
+    },
+    transitionCss: {
+      type: Boolean,
+      default: true
     }
   },
 
@@ -168,7 +172,11 @@ export default {
     const dialog = h('transition', {
       props: {
         name: this.transition || '', // If false, show nothing
-        origin: this.origin
+        origin: this.origin,
+        css: this.transitionCss
+      },
+      on: {
+        afterLeave: () => { this.$emit('after-leave') }
       }
     }, [h('div', data,
       this.showLazyContent(this.$slots.default)
