@@ -34,6 +34,7 @@ export default {
     'Transition Components',
     'Blazing Fast'
   ],
+  componentFramework: 'Component Framework',
   letterFromAuthor: [
     'Hey there,',
     'I know choosing a UI framework can be a daunting task -- there are so many options to choose from and every one of them claims that they are the best. So you have to decide for yourself: what are the metrics for success?',
@@ -48,5 +49,8 @@ export default {
   },
   becomeSponsor: 'Become a Sponsor',
   proudlySponsoredBy: 'Patreon Sponsors',
-  callout: 'Supercharge your development with the power of Vue and Material Design'
+  callout: 'Supercharge your Development',
+  madeWithVuetify: 'Projects Made With Vuetify',
+  materialDesign: 'Material Design',
+  mit: 'MIT License'
 }
