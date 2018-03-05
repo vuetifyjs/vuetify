@@ -223,7 +223,7 @@ theme(list, "list")
       display: flex
       list-style-type: none
 
-      > li:not(.list__group__header__prepend-icon):not(.list__group__header__append-icon)
+      > div:not(.list__group__header__prepend-icon):not(.list__group__header__append-icon)
         flex: 1 0 auto
 
       .list__group__header__append-icon,
@@ -235,7 +235,7 @@ theme(list, "list")
         align-items: center
         display: flex
 
-        li .list__tile
+        div .list__tile
           padding-left: 0
 
         .list__group__header__prepend-icon
@@ -266,7 +266,7 @@ theme(list, "list")
       padding: 0
       transition: inherit
 
-      > li
+      > div
         display: block
 
       &--no-action
