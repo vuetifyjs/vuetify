@@ -1,11 +1,6 @@
 // Styles
 import '../../stylus/components/_tabs.styl'
 
-// Component imports
-import VIcon from '../VIcon'
-import VTabsItems from './VTabsItems'
-import VTabsSlider from './VTabsSlider'
-
 // Component level mixins
 import TabsComputed from './mixins/tabs-computed'
 import TabsGenerators from './mixins/tabs-generators'
@@ -27,12 +22,6 @@ import Touch from '../../directives/touch'
 
 export default {
   name: 'v-tabs',
-
-  components: {
-    VIcon,
-    VTabsItems,
-    VTabsSlider
-  },
 
   mixins: [
     RegistrableProvide('tabs'),

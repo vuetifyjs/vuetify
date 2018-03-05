@@ -256,11 +256,8 @@ test('VTimePicker.js', ({ mount }) => {
     const vm = new Vue()
     const slot = props => vm.$createElement('div', { class: 'scoped-slot' })
     const component = Vue.component('test', {
-      components: {
-        VTimePicker
-      },
       render (h) {
-        return h('v-time-picker', {
+        return h(VTimePicker, {
           props: {
             value: '10:12'
           },

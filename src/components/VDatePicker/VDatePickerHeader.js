@@ -13,11 +13,6 @@ import { createNativeLocaleFormatter, monthChange } from './util'
 export default {
   name: 'v-date-picker-header',
 
-  components: {
-    VBtn,
-    VIcon
-  },
-
   mixins: [Colorable],
 
   data () {
@@ -77,7 +72,7 @@ export default {
         (change < 0 && this.min && this.calculateChange(change) < this.min) ||
         (change > 0 && this.max && this.calculateChange(change) > this.max)
 
-      return this.$createElement('v-btn', {
+      return this.$createElement(VBtn, {
         props: {
           dark: this.dark,
           disabled,
@@ -90,7 +85,7 @@ export default {
           }
         }
       }, [
-        this.$createElement('v-icon', change < 0 ? this.prevIcon : this.nextIcon)
+        this.$createElement(VIcon, change < 0 ? this.prevIcon : this.nextIcon)
       ])
     },
     calculateChange (sign) {

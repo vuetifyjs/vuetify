@@ -269,11 +269,8 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
     const vm = new Vue()
     const slot = props => vm.$createElement('div', { class: 'scoped-slot' })
     const component = Vue.component('test', {
-      components: {
-        VDatePicker
-      },
       render (h) {
-        return h('v-date-picker', {
+        return h(VDatePicker, {
           props: {
             type: 'date',
             value: '2005-11-01'

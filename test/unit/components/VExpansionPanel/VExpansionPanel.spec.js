@@ -5,13 +5,12 @@ import VExpansionPanelContent from '@/components/VExpansionPanel/VExpansionPanel
 
 const createPanel = props => {
   return Vue.component('test', {
-    components: { VExpansionPanel, VExpansionPanelContent },
     render: h => {
-      const panelContent = h('v-expansion-panel-content', [
+      const panelContent = h(VExpansionPanelContent, [
         h('div', { slot: 'header' }, 'header'),
         'content'
       ])
-      return h('v-expansion-panel', { props }, [panelContent])
+      return h(VExpansionPanel, { props }, [panelContent])
     }
   })
 }

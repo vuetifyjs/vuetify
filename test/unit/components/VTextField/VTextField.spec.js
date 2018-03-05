@@ -293,9 +293,6 @@ test('VTextField.js', ({ mount }) => {
 
   it('should render component with async loading and match snapshot', () => {
     const wrapper = mount(VTextField, {
-      components: {
-        VProgressLinear
-      },
       propsData: {
         loading: true
       }
@@ -306,11 +303,8 @@ test('VTextField.js', ({ mount }) => {
 
   it('should render component with async loading and custom progress and match snapshot', () => {
     const progress = Vue.component('test', {
-      components: {
-        VProgressLinear
-      },
       render (h) {
-        return h('v-progress-linear', {
+        return h(VProgressLinear, {
           props: {
             indeterminate: true,
             height: 7,

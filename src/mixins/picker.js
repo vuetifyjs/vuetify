@@ -8,10 +8,6 @@ import Themeable from './themeable'
 export default {
   name: 'picker',
 
-  components: {
-    VPicker
-  },
-
   mixins: [
     Colorable,
     Themeable
@@ -39,7 +35,7 @@ export default {
       }) : this.$slots.default
     },
     genPicker (staticClass) {
-      return this.$createElement('v-picker', {
+      return this.$createElement(VPicker, {
         staticClass,
         class: this.fullWidth ? ['picker--full-width'] : [],
         props: {

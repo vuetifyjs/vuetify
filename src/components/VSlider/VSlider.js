@@ -18,8 +18,6 @@ export default {
 
   directives: { ClickOutside },
 
-  components: { VScaleTransition },
-
   data () {
     return {
       app: {},
@@ -227,7 +225,7 @@ export default {
       }
     },
     genThumbLabel (h) {
-      return h('v-scale-transition', {
+      return h(VScaleTransition, {
         props: { origin: 'bottom center' }
       }, [
         h('div', {

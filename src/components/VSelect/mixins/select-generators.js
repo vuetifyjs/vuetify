@@ -1,6 +1,22 @@
 import { getObjectValueByPath } from '../../../util/helpers'
 import { consoleWarn } from '../../../util/console'
 
+// Components
+import VBtn from '../../VBtn'
+import VCard from '../../VCard'
+import VCheckbox from '../../VCheckbox'
+import VChip from '../../VChip'
+import VDivider from '../../VDivider'
+import VMenu from '../../VMenu'
+import VSubheader from '../../VSubheader'
+import {
+  VList,
+  VListTile,
+  VListTileAction,
+  VListTileContent,
+  VListTileTitle
+} from '../../VList'
+
 /**
  * Select generators
  *
@@ -44,7 +60,7 @@ export default {
 
       this.minWidth && (data.props.minWidth = this.minWidth)
 
-      return this.$createElement('v-menu', data, [this.genList()])
+      return this.$createElement(VMenu, data, [this.genList()])
     },
     getMenuIndex () {
       return this.$refs.menu ? this.$refs.menu.listIndex : -1
@@ -144,7 +160,7 @@ export default {
         return null
       }
 
-      return this.$createElement('v-btn', {
+      return this.$createElement(VBtn, {
         props: {
           flat: true
         },
@@ -175,7 +191,7 @@ export default {
         this.selectedIndex = index
       }
 
-      return this.$createElement('v-chip', {
+      return this.$createElement(VChip, {
         staticClass: 'chip--select-multi',
         attrs: { tabindex: '-1' },
         props: {
@@ -220,8 +236,8 @@ export default {
         }
       }
 
-      return this.$createElement('v-card', [
-        this.$createElement('v-list', {
+      return this.$createElement(VCard, [
+        this.$createElement(VList, {
           props: {
             dense: this.dense
           },
@@ -230,12 +246,12 @@ export default {
       ])
     },
     genHeader (item) {
-      return this.$createElement('v-subheader', {
+      return this.$createElement(VSubheader, {
         props: item
       }, item.header)
     },
     genDivider (item) {
-      return this.$createElement('v-divider', {
+      return this.$createElement(VDivider, {
         props: item
       })
     },
@@ -283,11 +299,11 @@ export default {
       if (this.$scopedSlots.item) {
         const tile = this.$scopedSlots.item({ parent: this, item, tile: data })
         return this.needsTile(tile)
-          ? this.$createElement('v-list-tile', data, [tile])
+          ? this.$createElement(VListTile, data, [tile])
           : tile
       }
 
-      return this.$createElement('v-list-tile', data,
+      return this.$createElement(VListTile, data,
         [this.genAction(item, active), this.genContent(item)]
       )
     },
@@ -304,8 +320,8 @@ export default {
         }
       }
 
-      return this.$createElement('v-list-tile-action', data, [
-        this.$createElement('v-checkbox', {
+      return this.$createElement(VListTileAction, data, [
+        this.$createElement(VCheckbox, {
           props: {
             color: this.computedColor,
             inputValue: active
@@ -316,8 +332,8 @@ export default {
     genContent (item) {
       const text = this.getText(item)
 
-      return this.$createElement('v-list-tile-content',
-        [this.$createElement('v-list-tile-title', {
+      return this.$createElement(VListTileContent,
+        [this.$createElement(VListTileTitle, {
           domProps: {
             innerHTML: this.genFiltered(text)
           }

@@ -11,12 +11,8 @@ function createBtn (val = null, buttonProps = {}) {
   if (val) options.attrs = { value: val }
 
   return Vue.component('test', {
-    components: {
-      VBtn,
-      VIcon
-    },
     render (h) {
-      return h('v-btn', options, [h('v-icon', 'add')])
+      return h(VBtn, options, [h(VIcon, 'add')])
     }
   })
 }

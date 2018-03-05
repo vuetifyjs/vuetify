@@ -49,9 +49,6 @@ test('VBtn.js', ({ mount, compileToFunctions }) => {
 
   it('should render component with loader and match snapshot', () => {
     const wrapper = mount(VBtn, {
-      components: {
-        VProgressCircular
-      },
       propsData: {
         loading: true
       }

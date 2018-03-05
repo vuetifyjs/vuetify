@@ -9,10 +9,6 @@ import Transitionable from '../../mixins/transitionable'
 export default {
   name: 'v-alert',
 
-  components: {
-    VIcon
-  },
-
   mixins: [Colorable, Toggleable, Transitionable],
 
   props: {
@@ -63,7 +59,7 @@ export default {
     const children = [h('div', this.$slots.default)]
 
     if (this.computedIcon) {
-      children.unshift(h('v-icon', {
+      children.unshift(h(VIcon, {
         'class': 'alert__icon'
       }, this.computedIcon))
     }

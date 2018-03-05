@@ -111,11 +111,8 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     const vm = new Vue()
     const selection = props => vm.$createElement('div', [props.item])
     const component = Vue.component('test', {
-      components: {
-        VSelect
-      },
       render (h) {
-        return h('v-select', {
+        return h(VSelect, {
           props: {
             segmented: true,
             items
@@ -153,11 +150,8 @@ test('VSelect', ({ mount, compileToFunctions }) => {
       item.text
     ])
     const component = Vue.component('test', {
-      components: {
-        VSelect
-      },
       render (h) {
-        return h('v-select', {
+        return h(VSelect, {
           props: {
             items
           },
@@ -190,14 +184,11 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     const itemSlot = ({ item }) => vm.$createElement('v-list-tile-content', {
       class: item.value % 2 === 0 ? '' : 'red lighten-1'
     }, [
-      vm.$createElement('v-list-tile-title', item.value)
+      vm.$createElement('v-list-tile-title', [item.value])
     ])
     const component = Vue.component('test', {
-      components: {
-        VSelect
-      },
       render (h) {
-        return h('v-select', {
+        return h(VSelect, {
           props: {
             items
           },
@@ -222,11 +213,8 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     const items = Array.from({ length: 2 }, (x, i) => ({ value: i, text: `Text ${i}` }))
 
     const component = Vue.component('test', {
-      components: {
-        VSelect
-      },
       render (h) {
-        return h('v-select', {
+        return h(VSelect, {
           props: {
             items
           }

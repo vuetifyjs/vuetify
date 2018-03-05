@@ -1,5 +1,8 @@
 import { consoleWarn } from '../../../util/console'
 
+import VCheckbox from '../../VCheckbox'
+import VIcon from '../../VIcon'
+
 export default {
   props: {
     sortIcon: {
@@ -24,7 +27,7 @@ export default {
         children = [this.hasTag(row, 'th') ? this.genTR(row) : row, this.genTProgress()]
       } else {
         const row = this.headers.map(o => this.genHeader(o))
-        const checkbox = this.$createElement('v-checkbox', {
+        const checkbox = this.$createElement(VCheckbox, {
           props: {
             dark: this.dark,
             light: this.light,
@@ -102,7 +105,7 @@ export default {
       }
 
       classes.push('sortable')
-      const icon = this.$createElement('v-icon', {
+      const icon = this.$createElement(VIcon, {
         props: {
           small: true
         }
