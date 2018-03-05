@@ -2,7 +2,7 @@
   <v-app id="inspire">
     <v-navigation-drawer
       fixed
-      :clipped="$vuetify.breakpoint.mdAndUp"
+      :clipped="$vuetify.breakpoint.lgAndUp"
       app
       v-model="drawer"
     >
@@ -69,7 +69,7 @@
       color="blue darken-3"
       dark
       app
-      :clipped-left="$vuetify.breakpoint.mdAndUp"
+      :clipped-left="$vuetify.breakpoint.lgAndUp"
       fixed
     >
       <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
