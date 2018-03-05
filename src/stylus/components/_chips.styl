@@ -74,7 +74,8 @@ theme(chip, "chip")
     .chip__content
       border-radius: $chip-label-border-radius
 
-  &.chip--outline
+  // Increase specificity to override theme background
+  &\&.chip--outline
     background: $chip-outline-background
     border-color: currentColor
     color: $chip-outline-color
