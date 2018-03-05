@@ -53,11 +53,7 @@
           .map(v => v.price)
           .sort((a, b) => +a > +b)
 
-        if (prices[0] === prices[prices.length - 1]) {
-          return `$${prices[0]}`
-        } else {
-          return `$${prices[0]} - $${prices[prices.length - 1]}`
-        }
+        return `$${prices[0]}`
       },
       shortId () {
         // atob() but for node
