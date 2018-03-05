@@ -70,7 +70,7 @@ test('VSelect - combobox', ({ mount }) => {
 
     expect(wrapper.vm.searchValue).toBe('1')
 
-    const list = wrapper.find('.list li')[1]
+    const list = wrapper.find('.list > div')[1]
     list.trigger('click')
     await wrapper.vm.$nextTick()
     expect(event).toBeCalledWith(12)
