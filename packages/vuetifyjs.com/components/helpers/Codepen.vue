@@ -13,7 +13,19 @@
 </template>
 
 <script>
-  const version = require('vuetify/package.json').version || 'latest'
+  import { version } from 'vuetify'
+  const title = 'Vuetify Example Pen'
+
+  const cssResources = [
+    'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons',
+    `https://unpkg.com/vuetify@${version}/dist/vuetify.min.css`
+  ]
+
+  const jsResources = [
+    'https://unpkg.com/babel-polyfill/dist/polyfill.min.js',
+    'https://unpkg.com/vue/dist/vue.js',
+    `https://unpkg.com/vuetify@${version}/dist/vuetify.min.js`
+  ]
 
   export default {
     name: 'Codepen',
@@ -22,27 +34,39 @@
       pen: {
         type: Object,
         default: () => ({})
+      },
+      title: {
+        type: String,
+        default: title
       }
     },
 
-    data: () => ({
-      title: 'Vuetify Example Pen',
-      css_external: [
-        'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons',
-        `https://unpkg.com/vuetify@${version}/dist/vuetify.min.css`
-      ].join(';'),
-      js_external: [
-        'https://unpkg.com/babel-polyfill/dist/polyfill.min.js',
-        'https://unpkg.com/vue/dist/vue.js',
-        `https://unpkg.com/vuetify@${version}/dist/vuetify.min.js`
-      ].join(';')
-    }),
-
     computed: {
+      additionalScript () {
+        const additional = this.pen.codepenAdditional || ''
+
+        return additional
+          .replace(/(<codepen-additional.*?>|<\/codepen-additional>$)/g, '')
+          .replace(/\/static\//g, 'https://vuetifyjs.com/static/')
+          .replace(/\n {2}/g, '\n')
+          .trim() + (additional ? '\n\n' : '')
+      },
+      additionalResources () {
+        const resources = this.pen.codepenResources || '{}'
+
+        return Object.assign(
+          { css: [], js: [] },
+          JSON.parse(
+            resources.replace(/(<codepen-resources.*?>|<\/codepen-resources>$)/g, '')
+          )
+        )
+      },
       script () {
         const replace = /(export default {|<script>|<\/script>|}([^}]*)$)/g
+        const imports = /(import*) ([^'\n]*) from ([^\n]*)/g
         return (this.pen.script || '')
           .replace(replace, '')
+          .replace(imports, '')
           .replace(/\/static\//g, 'https://vuetifyjs.com/static/')
           .replace(/\n {2}/g, '\n')
           .trim()
@@ -58,7 +82,7 @@
 
         return template
           .replace(/\/static\//g, 'https://vuetifyjs.com/static/')
-          .replace(/(<template>|<\/template>([^</template>]*)$)/g, '')
+          .replace(/(<template>|<\/template>$)/g, '')
           .replace(/\n/g, '\n  ')
           .trim()
       },
@@ -70,21 +94,26 @@
         return (html | css | js).toString(2)
       },
       value () {
-        const data = Object.assign({
-          html: `<div id="app">
+        const data = {
+          title: this.title,
+          html:
+`<div id="app">
   <v-app id="inspire">
     ${this.template}
   </v-app>
 </div>`,
           css: this.style.content,
           css_pre_processor: this.style.language ? this.style.language[1] : 'none',
-          js: `new Vue({
+          css_external: [...this.additionalResources.css, ...cssResources].join(';'),
+          js: this.additionalScript +
+`new Vue({
   el: '#app',
   ${this.script}
 })`,
           js_pre_processor: 'babel',
+          js_external: [...this.additionalResources.js, ...jsResources].join(';'),
           editors: this.editors
-        }, this.$data)
+        }
 
         return JSON.stringify(data)
       }

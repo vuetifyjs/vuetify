@@ -29,7 +29,7 @@
             target="_blank"
             slot="activator"
           )
-            v-icon(color="grey darken-1") fa-github
+            v-icon(color="grey darken-1") fab fa-github
           span View on Github
         v-tooltip(top)
           v-btn(
@@ -37,7 +37,7 @@
             @click="sendToCodepen"
             slot="activator"
           )
-            v-icon(color="grey darken-1") fa-codepen
+            v-icon(color="grey darken-1") fab fa-codepen
           span Edit in codepen
         v-tooltip(top)
           v-btn(
@@ -131,7 +131,8 @@
         parsed: {
           script: null,
           style: null,
-          template: null
+          template: null,
+          codepenDeps: null
         },
         url: release ? `releases/${release}/` : ''
       }
@@ -199,11 +200,15 @@
         const template = this.parseTemplate('template', res)
         const script = this.parseTemplate('script', res)
         const style = this.parseTemplate('style', res)
+        const codepenResources = this.parseTemplate('codepen-resources', res)
+        const codepenAdditional = this.parseTemplate('codepen-additional', res)
 
         this.parsed = {
           template,
           script,
-          style
+          style,
+          codepenResources,
+          codepenAdditional
         }
       },
       toggle () {
