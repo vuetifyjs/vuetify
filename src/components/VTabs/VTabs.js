@@ -157,7 +157,6 @@ export default {
       for (let i = 0; i < length; i++) {
         const vnode = this.$slots.default[i]
 
-        /* istanbul ignore else */
         if (vnode.componentOptions) {
           switch (vnode.componentOptions.Ctor.options.name) {
             case 'v-tabs-slider': slider.push(vnode)
@@ -169,6 +168,8 @@ export default {
             // case 'v-tab' - intentionally omitted
             default: tab.push(vnode)
           }
+        } else {
+          tab.push(vnode)
         }
       }
 
