@@ -14,11 +14,13 @@
           img(
             src="/static/vuetify-logo-300.png"
             alt="Logo"
+            style="logoStyles"
             :height="`${$vuetify.breakpoint.mdAndUp ? 256 : 192}px`"
             :width="`${$vuetify.breakpoint.mdAndUp ? 256 : 192}px`"
-            :class="{ 'mr-5': $vuetify.breakpoint.mdAndUp }"
+            :class="$vuetify.breakpoint.mdAndUp ? 'mr-5' : 'mb-3'"
+            :key="$vuetify.breakpoint.mdAndUp ? 'big' : 'small'"
           )
-          div.text-xs-center.text-md-left
+          v-flex(:xs12="$vuetify.breakpoint.smAndDown").text-xs-center.text-md-left
             h1(
               class="mb-4"
               :class="[$vuetify.breakpoint.mdAndUp ? 'display-3' : 'display-1']"
