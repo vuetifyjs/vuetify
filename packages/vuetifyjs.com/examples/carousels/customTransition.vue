@@ -4,8 +4,8 @@
       v-for="(item,i) in items"
       :key="i"
       :src="item.src"
-      transition="fade-transition"
-      reverse-transition="fade-transition"
+      transition="fade"
+      reverse-transition="fade"
     ></v-carousel-item>
   </v-carousel>
 </template>
@@ -34,7 +34,7 @@
 </script>
 
 <style lang="stylus">
-  #carousel-view
+  #example-custom-transition
     .fade
       &-enter-active, &-leave-active, &-leave-to
         transition: .3s ease-out
