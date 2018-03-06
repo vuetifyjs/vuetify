@@ -15,10 +15,9 @@
             src="/static/vuetify-logo-300.png"
             alt="Logo"
             style="logoStyles"
-            :height="`${$vuetify.breakpoint.mdAndUp ? 256 : 192}px`"
-            :width="`${$vuetify.breakpoint.mdAndUp ? 256 : 192}px`"
+            height="256px"
+            width="256px"
             :class="$vuetify.breakpoint.mdAndUp ? 'mr-5' : 'mb-3'"
-            :key="$vuetify.breakpoint.mdAndUp ? 'big' : 'small'"
           )
           v-flex(:xs12="$vuetify.breakpoint.smAndDown").text-xs-center.text-md-left
             h1(
