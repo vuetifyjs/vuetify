@@ -5,7 +5,7 @@
       gradient="to bottom, #1867c0, #5CBBF6"
       height="auto"
     )
-      v-container(fill-height).mt-5.mb-3
+      v-container(fill-height).mt-3.mb-3
         v-layout(
           align-center
           justify-center
@@ -19,7 +19,7 @@
             width="256px"
             :class="$vuetify.breakpoint.mdAndUp ? 'mr-5' : 'mb-3'"
           )
-          v-flex(:xs12="$vuetify.breakpoint.smAndDown").text-xs-center.text-md-left
+          v-flex(:shrink="$vuetify.breakpoint.mdAndUp").text-xs-center.text-md-left
             h1(
               class="mb-4"
               :class="[$vuetify.breakpoint.mdAndUp ? 'display-3' : 'display-1']"
@@ -46,24 +46,31 @@
               v-icon(left) mdi-github-circle
               | Github
 
-      v-container(grid-list-xl).mb-5
+      v-container(
+        grid-list-xl
+        style="max-width: 1280px"
+      ).mb-5
         v-layout(row wrap justify-center)
           v-flex(
+            d-flex
             xs12 sm6 md4 lg4
             v-for="(feature, i) in features"
             :key="feature.title"
           )
-            v-card(light).elevation-24.hide-overflow
+            v-card(
+              light
+              style="max-width: 375px;"
+            ).elevation-24.hide-overflow
               img(
                 :src="feature.img"
                 width="100%"
-              ).mb-3
+              ).mb-2
               v-card-text
                 h3(
                   v-text="feature.title"
                   style="font-size: 18px; font-weight: 500;"
                 ).mb-3.text-xs-center
-                p(v-text="feature.text").text-xs-center
+                p(v-text="feature.text").text-xs-center.mb-2
 
     section#sponsors-and-backers.my-5
       v-container
