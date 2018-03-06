@@ -16,10 +16,6 @@ export default {
 
   mixins: [Bootable, Toggleable, Rippleable, RegistrableInject('expansionPanel', 'v-expansion-panel', 'v-expansion-panel-content')],
 
-  components: {
-    VIcon
-  },
-
   directives: {
     ClickOutside
   },
@@ -76,7 +72,7 @@ export default {
       if (this.hideActions) return null
 
       const icon = this.$slots.actions ||
-        this.$createElement('v-icon', this.expandIcon)
+        this.$createElement(VIcon, this.expandIcon)
 
       return this.$createElement('div', {
         staticClass: 'header__icon'

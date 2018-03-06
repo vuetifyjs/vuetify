@@ -1,6 +1,6 @@
 {
   "name": "vuetify",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -61,6 +61,7 @@
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-node": "^5.2.1",
     "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-rulesdir": "^0.1.0",
     "eslint-plugin-standard": "^3.0.1",
     "eventsource-polyfill": "0.9.6",
     "extract-text-webpack-plugin": "3.0.2",
@@ -111,7 +112,7 @@
   "jest": {
     "verbose": false,
     "roots": [
-      "<rootDir>/src"
+      "<rootDir>/test/unit"
     ],
     "moduleFileExtensions": [
       "js",
@@ -121,11 +122,9 @@
       "node_modules"
     ],
     "moduleNameMapper": {
-      "src/(.*)": "<rootDir>/src/$1",
-      "^@components/(.*)$": "<rootDir>/src/components/$1",
-      "^@directives/(.*)$": "<rootDir>/src/directives/$1",
-      "^@mixins/(.*)$": "<rootDir>/src/mixins/$1",
-      "^@util/(.*)$": "<rootDir>/src/util/$1"
+      "^@/test$": "<rootDir>/test/index.js",
+      "^@/test/(.*)$": "<rootDir>/test/$1",
+      "^@/(.*)$": "<rootDir>/src/$1"
     },
     "transform": {
       ".*\\.(vue)$": "<rootDir>/node_modules/jest-vue-preprocessor",

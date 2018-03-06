@@ -21,12 +21,6 @@ import { consoleWarn } from '../util/console'
 export default {
   name: 'data-iterable',
 
-  components: {
-    VBtn,
-    VIcon,
-    VSelect
-  },
-
   data () {
     return {
       searchLength: 0,
@@ -354,7 +348,7 @@ export default {
       return this.genFilteredItems()
     },
     genPrevIcon () {
-      return this.$createElement('v-btn', {
+      return this.$createElement(VBtn, {
         props: {
           disabled: this.computedPagination.page === 1,
           icon: true,
@@ -371,7 +365,7 @@ export default {
         attrs: {
           'aria-label': 'Previous page' // TODO: Localization
         }
-      }, [this.$createElement('v-icon', this.prevIcon)])
+      }, [this.$createElement(VIcon, this.prevIcon)])
     },
     genNextIcon () {
       const pagination = this.computedPagination
@@ -379,7 +373,7 @@ export default {
         pagination.page * pagination.rowsPerPage >= this.itemsLength ||
         this.pageStop < 0
 
-      return this.$createElement('v-btn', {
+      return this.$createElement(VBtn, {
         props: {
           disabled,
           icon: true,
@@ -396,14 +390,14 @@ export default {
         attrs: {
           'aria-label': 'Next page' // TODO: Localization
         }
-      }, [this.$createElement('v-icon', this.nextIcon)])
+      }, [this.$createElement(VIcon, this.nextIcon)])
     },
     genSelect () {
       return this.$createElement('div', {
         'class': this.actionsSelectClasses
       }, [
         this.rowsPerPageText,
-        this.$createElement('v-select', {
+        this.$createElement(VSelect, {
           attrs: {
             'aria-label': this.rowsPerPageText
           },

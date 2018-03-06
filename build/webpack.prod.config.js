@@ -2,11 +2,13 @@ const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base.config')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
-var extractPlugin = ExtractTextPlugin.extract({
+// Only enable CSS sourcemaps when using `yarn watch`
+const cssSourceMaps = process.env.TARGET === 'development'
+const extractPlugin = ExtractTextPlugin.extract({
   use: [
-    { loader: 'css-loader', options: { sourceMap: true } },
-    { loader: 'postcss-loader', options: { sourceMap: true } },
-    { loader: 'stylus-loader', options: { sourceMap: true } }
+    { loader: 'css-loader', options: { sourceMap: cssSourceMaps } },
+    { loader: 'postcss-loader', options: { sourceMap: cssSourceMaps } },
+    { loader: 'stylus-loader', options: { sourceMap: cssSourceMaps } }
   ]
 })
 
@@ -14,7 +16,6 @@ var extractPlugin = ExtractTextPlugin.extract({
 const resolve = file => require('path').resolve(__dirname, file)
 
 module.exports = merge(baseWebpackConfig, {
-  devtool: '#source-map',
   entry: {
     app: './src/index.js'
   },

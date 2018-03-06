@@ -15,10 +15,6 @@ import { inject as RegistrableInject } from '../../mixins/registrable'
 export default {
   name: 'v-btn',
 
-  components: {
-    VProgressCircular
-  },
-
   mixins: [
     Colorable,
     Routable,

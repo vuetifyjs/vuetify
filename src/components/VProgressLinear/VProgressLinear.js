@@ -10,11 +10,6 @@ import {
 export default {
   name: 'v-progress-linear',
 
-  components: {
-    VFadeTransition,
-    VSlideXTransition
-  },
-
   mixins: [Colorable],
 
   props: {
@@ -118,8 +113,8 @@ export default {
   },
 
   render (h) {
-    const fade = h('v-fade-transition', [this.indeterminate && this.genIndeterminate(h)])
-    const slide = h('v-slide-x-transition', [!this.indeterminate && this.genDeterminate(h)])
+    const fade = h(VFadeTransition, [this.indeterminate && this.genIndeterminate(h)])
+    const slide = h(VSlideXTransition, [!this.indeterminate && this.genDeterminate(h)])
 
     const bar = h('div', {
       staticClass: 'progress-linear__bar',

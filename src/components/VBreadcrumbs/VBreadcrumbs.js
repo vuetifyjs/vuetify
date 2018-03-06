@@ -55,6 +55,7 @@ export default {
         const elm = this.$slots.default[i]
         children.push(elm)
 
+        // TODO: use the component name instead of tag
         if (!elm.componentOptions ||
           elm.componentOptions.tag !== 'v-breadcrumbs-item' ||
           i === length - 1

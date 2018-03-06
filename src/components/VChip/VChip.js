@@ -8,10 +8,6 @@ import Toggleable from '../../mixins/toggleable'
 export default {
   name: 'v-chip',
 
-  components: {
-    VIcon
-  },
-
   mixins: [Colorable, Themeable, Toggleable],
 
   props: {

@@ -1,7 +1,4 @@
 // Components
-import VBtn from '../VBtn'
-import VCard from '../VCard'
-import VIcon from '../VIcon'
 import VDatePickerTitle from './VDatePickerTitle'
 import VDatePickerHeader from './VDatePickerHeader'
 import VDatePickerDateTable from './VDatePickerDateTable'
@@ -17,17 +14,6 @@ import isDateAllowed from './util/isDateAllowed'
 
 export default {
   name: 'v-date-picker',
-
-  components: {
-    VBtn,
-    VCard,
-    VIcon,
-    VDatePickerTitle,
-    VDatePickerHeader,
-    VDatePickerDateTable,
-    VDatePickerMonthTable,
-    VDatePickerYears
-  },
 
   mixins: [Picker],
 
@@ -248,7 +234,7 @@ export default {
       this.$emit('change', this.inputDate)
     },
     genPickerTitle () {
-      return this.$createElement('v-date-picker-title', {
+      return this.$createElement(VDatePickerTitle, {
         props: {
           date: this.value ? this.formatters.titleDate(this.value) : '',
           selectingYear: this.activePicker === 'YEAR',
@@ -266,7 +252,7 @@ export default {
       })
     },
     genTableHeader () {
-      return this.$createElement('v-date-picker-header', {
+      return this.$createElement(VDatePickerHeader, {
         props: {
           nextIcon: this.nextIcon,
           color: this.color,
@@ -285,7 +271,7 @@ export default {
       })
     },
     genDateTable () {
-      return this.$createElement('v-date-picker-date-table', {
+      return this.$createElement(VDatePickerDateTable, {
         props: {
           allowedDates: this.allowedDates,
           color: this.color,
@@ -310,7 +296,7 @@ export default {
       })
     },
     genMonthTable () {
-      return this.$createElement('v-date-picker-month-table', {
+      return this.$createElement(VDatePickerMonthTable, {
         props: {
           allowedDates: this.type === 'month' ? this.allowedDates : null,
           color: this.color,
@@ -332,7 +318,7 @@ export default {
       })
     },
     genYears () {
-      return this.$createElement('v-date-picker-years', {
+      return this.$createElement(VDatePickerYears, {
         props: {
           color: this.color,
           format: this.yearFormat,

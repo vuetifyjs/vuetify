@@ -10,10 +10,6 @@ import Themeable from '../../mixins/themeable'
 export default {
   name: 'v-picker',
 
-  components: {
-    VCard
-  },
-
   mixins: [Colorable, Themeable],
 
   data () {
@@ -78,7 +74,7 @@ export default {
   },
 
   render (h) {
-    return h('v-card', {
+    return h(VCard, {
       staticClass: 'picker',
       'class': {
         'picker--landscape': this.landscape,
