@@ -14,8 +14,8 @@
           img(
             src="/static/vuetify-logo-300.png"
             alt="Logo"
-            height="256px"
-            width="256px"
+            :height="`${$vuetify.breakpoint.mdAndUp ? 256 : 192}px`"
+            :width="`${$vuetify.breakpoint.mdAndUp ? 256 : 192}px`"
             :class="{ 'mr-5': $vuetify.breakpoint.mdAndUp }"
           )
           div.text-xs-center.text-md-left
@@ -50,7 +50,7 @@
           v-flex(
             xs12 sm6 md4 lg4
             v-for="(feature, i) in features"
-            :key="i"
+            :key="feature.title"
           )
             v-card(light).elevation-24.hide-overflow
               img(
