@@ -148,20 +148,27 @@
             md4
           )
             v-card(
-              :href="feature.url"
+              :href="`${feature.url}?ref=vuetifyjs.com`"
               :img="feature.image"
               height="300px"
               target="_blank"
               rel="noopener"
+              @click="$ga.event('home mwvjs click', 'click', feature.title)"
             ).elevation-24
         v-layout(
           justify-center
           pt-3
         )
-          img(
-            src="/static/doc-images/powered-by-madewithvue-1.svg"
-            height="65px"
+          a(
+            href="https://madewithvuejs.com?ref=vuetifyjs.com"
+            target="_blank"
+            rel="noopener"
+            @click="$ga.event('home mwvjs click', 'click', 'madewithvuejs')"
           )
+            img(
+              src="/static/doc-images/powered-by-madewithvue-1.svg"
+              height="65px"
+            )
 
     v-jumbotron(
       dark
