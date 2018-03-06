@@ -1,9 +1,6 @@
 // Components
 import VIcon from '../VIcon'
 
-// Mixins
-import Colorable from '../../mixins/colorable'
-
 // Directives
 import Ripple from '../../directives/ripple'
 
