@@ -59,7 +59,7 @@
                     rel="noopener"
                     slot="activator"
                   )
-                    v-icon fa-codepen
+                    v-icon fab fa-codepen
                   span Codepen
                 template(v-else)
                   v-tooltip(left dark)
@@ -72,7 +72,7 @@
                       rel="noopener"
                       slot="activator"
                     ).elevation-20
-                      v-icon fa-github
+                      v-icon fab fa-github
                     span Github
                   v-tooltip(left dark)
                     v-btn(
