@@ -23,8 +23,8 @@ export default {
     right: 'callSlider',
     value (val) {
       const tab = this.tabs.find(tab => tab.action === val) || this.tabs[val]
-
-      if (!tab) return
+      const activeTab = this.activeTab
+      if (!tab || (activeTab && activeTab.action === tab.action)) return
 
       this.tabClick(tab)
     },
