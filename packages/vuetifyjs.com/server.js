@@ -154,7 +154,7 @@ app.get(languageRegex, isProd ? render : (req, res) => {
 app.get('*', (req, res) => {
   let lang = req.cookies.currentLanguage || req.acceptsLanguages(availableLanguages) || 'en'
   if (!languageRegex.test('/' + lang)) lang = 'en'
-  res.redirect(302, `/${lang}${req.path}`)
+  res.redirect(302, `/${lang}${req.originalUrl}`)
 })
 
 const port = process.env.PORT || 8095
