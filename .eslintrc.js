@@ -1,6 +1,3 @@
-const rulesDirPlugin = require('eslint-plugin-rulesdir')
-rulesDirPlugin.RULES_DIR = 'eslint-rules'
-
 module.exports = {
   root: true,
   parserOptions: {
@@ -21,7 +18,7 @@ module.exports = {
     'jest': true
   },
   plugins: [
-    'rulesdir'
+    'eslint-plugin-local-rules'
   ],
   rules: {
     // allow paren-less arrow functions
@@ -33,6 +30,6 @@ module.exports = {
     'no-return-assign': 0,
     'max-statements': [2, 24],
     'prefer-promise-reject-errors': 0,
-    'rulesdir/no-render-string-reference': 2
+    'local-rules/no-render-string-reference': 2
   }
 }
