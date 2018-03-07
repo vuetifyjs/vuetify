@@ -31,19 +31,19 @@
           <v-flex xs3 layout column>
             <span class="body-2">CONTACT</span>
             <div>
-              <v-icon size="18px" class="mr-3">fa-home</v-icon>
+              <v-icon size="18px" class="mr-3">fas fa-home</v-icon>
               New York, NY 10012, US
             </div>
             <div>
-              <v-icon size="18px" class="mr-3">fa-envelope</v-icon>
+              <v-icon size="18px" class="mr-3">fas fa-envelope</v-icon>
               info@example.com
             </div>
             <div>
-              <v-icon size="18px" class="mr-3">fa-phone</v-icon>
+              <v-icon size="18px" class="mr-3">fas fa-phone</v-icon>
               + 01 234 567 88
             </div>
             <div>
-              <v-icon size="18px" class="mr-3">fa-print</v-icon>
+              <v-icon size="18px" class="mr-3">fas fa-print</v-icon>
               + 01 234 567 89
             </div>
           </v-flex>
@@ -59,7 +59,7 @@
 <script>
   export default {
     data: () => ({
-      icons: ['fa-facebook', 'fa-twitter', 'fa-google-plus', 'fa-linkedin', 'fa-instagram'],
+      icons: ['fab fa-facebook', 'fab fa-twitter', 'fab fa-google-plus', 'fab fa-linkedin', 'fab fa-instagram'],
       rows: [
         {
           title: 'Company Name',
@@ -77,3 +77,9 @@
     })
   }
 </script>
+
+<codepen-resources lang="json">
+  {
+  "js": ["https://use.fontawesome.com/releases/v5.0.6/js/all.js"]
+  }
+</codepen-resources>

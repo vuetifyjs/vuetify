@@ -51,7 +51,7 @@
       app
     >
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-icon class="mx-3">fa-youtube</v-icon>
+      <v-icon class="mx-3">fab fa-youtube</v-icon>
       <v-toolbar-title class="mr-5 align-center">
         <span class="title">Youtube</span>
       </v-toolbar-title>

@@ -57,15 +57,15 @@
       cards: ['Good', 'Best', 'Finest'],
       socials: [
         {
-          icon: 'fa-facebook',
+          icon: 'fab fa-facebook',
           color: 'indigo'
         },
         {
-          icon: 'fa-linkedin',
+          icon: 'fab fa-linkedin',
           color: 'cyan darken-1'
         },
         {
-          icon: 'fa-instagram',
+          icon: 'fab fa-instagram',
           color: 'red lighten-3'
         }
       ]
@@ -81,3 +81,9 @@
     }
   }
 </script>
+
+<codepen-resources lang="json">
+  {
+  "js": ["https://use.fontawesome.com/releases/v5.0.6/js/all.js"]
+  }
+</codepen-resources>

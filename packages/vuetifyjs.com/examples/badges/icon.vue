@@ -8,10 +8,16 @@
     </v-badge>
     &nbsp;&nbsp;
     <v-badge color="orange">
-      <v-icon slot="badge" dark small>fa-fighter-jet</v-icon>
+      <v-icon slot="badge" dark small>fas fa-fighter-jet</v-icon>
       <span>
         Font Awesome icon
       </span>
     </v-badge>
   </div>
 </template>
+
+<codepen-resources lang="json">
+  {
+  "js": ["https://use.fontawesome.com/releases/v5.0.6/js/all.js"]
+  }
+</codepen-resources>
