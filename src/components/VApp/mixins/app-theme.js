@@ -42,7 +42,26 @@ export default {
       }
 
       return css
+    },
+    vueMeta () {
+      return {
+        style: [{
+          cssText: this.generatedStyles,
+          type: 'text/css',
+          id: 'vuetify-theme-stylesheet'
+        }]
+      }
     }
+  },
+
+  // Regular vue-meta
+  metaInfo () {
+    return this.vueMeta
+  },
+
+  // Nuxt
+  head () {
+    return this.vueMeta
   },
 
   watch: {
@@ -51,24 +70,10 @@ export default {
     }
   },
 
-  beforeCreate () {
-    if (this.$meta) {
-      // Vue-meta
-      const keyName = this.$nuxt ? 'head' : 'metaInfo'
-      this.$options[keyName] = () => ({
-        style: [{
-          cssText: this.generatedStyles,
-          type: 'text/css',
-          id: 'vuetify-theme-stylesheet'
-        }]
-      })
-    }
-  },
-
   created () {
     if (this.$meta) {
       // Vue-meta
-      // Handled by beforeCreate hook
+      // Handled by metaInfo()/nuxt()
     } else if (typeof document === 'undefined' && this.$ssrContext) {
       // SSR
       this.$ssrContext.head = this.$ssrContext.head || ''

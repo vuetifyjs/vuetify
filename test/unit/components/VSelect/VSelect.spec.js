@@ -56,7 +56,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const item = wrapper.find('li')[0]
+    const item = wrapper.find('div.text--disabled')[0]
 
     expect(item.element.getAttribute('disabled')).toBe('disabled')
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
@@ -249,7 +249,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     await wrapper.vm.$nextTick()
 
-    const item = wrapper.find('li')[0]
+    const item = wrapper.find('div a.list__tile')[0]
     item.trigger('click')
 
     await wrapper.vm.$nextTick()

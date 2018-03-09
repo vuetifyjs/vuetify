@@ -9,6 +9,13 @@
   &--fixed
     position: fixed
 
+  &--fixed,
+  &--absolute
+    z-index: 4
+
+    & > .btn--floating
+      margin: 0
+
   &--top
     &:not(.speed-dial--absolute)
       top: $grid-gutters.lg

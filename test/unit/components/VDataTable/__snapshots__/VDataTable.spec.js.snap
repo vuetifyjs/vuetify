@@ -94,8 +94,8 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
                 <div class="card"
                      style="height: auto;"
                 >
-                  <ul class="list">
-                    <li>
+                  <div class="list">
+                    <div>
                       <a class="list__tile list__tile--link">
                         <div class="list__tile__content">
                           <div class="list__tile__title">
@@ -103,8 +103,8 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
                           </div>
                         </div>
                       </a>
-                    </li>
-                    <li>
+                    </div>
+                    <div>
                       <a class="list__tile list__tile--link">
                         <div class="list__tile__content">
                           <div class="list__tile__title">
@@ -112,8 +112,8 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
                           </div>
                         </div>
                       </a>
-                    </li>
-                    <li>
+                    </div>
+                    <div>
                       <a class="list__tile list__tile--link">
                         <div class="list__tile__content">
                           <div class="list__tile__title">
@@ -121,8 +121,8 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
                           </div>
                         </div>
                       </a>
-                    </li>
-                    <li>
+                    </div>
+                    <div>
                       <a class="list__tile list__tile--link">
                         <div class="list__tile__content">
                           <div class="list__tile__title">
@@ -130,8 +130,8 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
                           </div>
                         </div>
                       </a>
-                    </li>
-                  </ul>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -276,8 +276,8 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
                 <div class="card"
                      style="height: auto;"
                 >
-                  <ul class="list">
-                    <li>
+                  <div class="list">
+                    <div>
                       <a class="list__tile list__tile--link">
                         <div class="list__tile__content">
                           <div class="list__tile__title">
@@ -285,8 +285,8 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
                           </div>
                         </div>
                       </a>
-                    </li>
-                    <li>
+                    </div>
+                    <div>
                       <a class="list__tile list__tile--link">
                         <div class="list__tile__content">
                           <div class="list__tile__title">
@@ -294,8 +294,8 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
                           </div>
                         </div>
                       </a>
-                    </li>
-                    <li>
+                    </div>
+                    <div>
                       <a class="list__tile list__tile--link">
                         <div class="list__tile__content">
                           <div class="list__tile__title">
@@ -303,8 +303,8 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
                           </div>
                         </div>
                       </a>
-                    </li>
-                    <li>
+                    </div>
+                    <div>
                       <a class="list__tile list__tile--link">
                         <div class="list__tile__content">
                           <div class="list__tile__title">
@@ -312,8 +312,8 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
                           </div>
                         </div>
                       </a>
-                    </li>
-                  </ul>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -460,8 +460,8 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
                 <div class="card"
                      style="height: auto;"
                 >
-                  <ul class="list">
-                    <li>
+                  <div class="list">
+                    <div>
                       <a class="list__tile list__tile--link">
                         <div class="list__tile__content">
                           <div class="list__tile__title">
@@ -469,8 +469,8 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
                           </div>
                         </div>
                       </a>
-                    </li>
-                    <li>
+                    </div>
+                    <div>
                       <a class="list__tile list__tile--link">
                         <div class="list__tile__content">
                           <div class="list__tile__title">
@@ -478,8 +478,8 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
                           </div>
                         </div>
                       </a>
-                    </li>
-                    <li>
+                    </div>
+                    <div>
                       <a class="list__tile list__tile--link">
                         <div class="list__tile__content">
                           <div class="list__tile__title">
@@ -487,8 +487,8 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
                           </div>
                         </div>
                       </a>
-                    </li>
-                    <li>
+                    </div>
+                    <div>
                       <a class="list__tile list__tile--link">
                         <div class="list__tile__content">
                           <div class="list__tile__title">
@@ -496,8 +496,8 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
                           </div>
                         </div>
                       </a>
-                    </li>
-                  </ul>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
