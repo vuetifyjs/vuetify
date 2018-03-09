@@ -72,6 +72,6 @@ export default {
       'class': this.classes
     }
 
-    return h('ul', data, [this.$slots.default])
+    return h('div', data, [this.$slots.default])
   }
 }

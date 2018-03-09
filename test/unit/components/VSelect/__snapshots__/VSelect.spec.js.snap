@@ -53,8 +53,8 @@ exports[`VSelect should render buttons correctly when using items array with seg
         <div class="card"
              style="height: auto;"
         >
-          <ul class="list">
-            <li>
+          <div class="list">
+            <div>
               <a class="list__tile list__tile--link list__tile--active primary--text">
                 <div class="list__tile__content">
                   <div class="list__tile__title">
@@ -62,8 +62,8 @@ exports[`VSelect should render buttons correctly when using items array with seg
                   </div>
                 </div>
               </a>
-            </li>
-          </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -108,8 +108,8 @@ exports[`VSelect should render buttons correctly when using slot with segmented 
         <div class="card"
              style="height: auto;"
         >
-          <ul class="list">
-            <li>
+          <div class="list">
+            <div>
               <a class="list__tile list__tile--link list__tile--active primary--text">
                 <div class="list__tile__content">
                   <div class="list__tile__title">
@@ -117,8 +117,8 @@ exports[`VSelect should render buttons correctly when using slot with segmented 
                   </div>
                 </div>
               </a>
-            </li>
-          </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -163,8 +163,8 @@ exports[`VSelect should render v-select correctly when not using scope slot 1`] 
         <div class="card"
              style="height: auto;"
         >
-          <ul class="list">
-            <li>
+          <div class="list">
+            <div>
               <a class="list__tile list__tile--link list__tile--active primary--text">
                 <div class="list__tile__content">
                   <div class="list__tile__title">
@@ -172,8 +172,8 @@ exports[`VSelect should render v-select correctly when not using scope slot 1`] 
                   </div>
                 </div>
               </a>
-            </li>
-            <li>
+            </div>
+            <div>
               <a class="list__tile list__tile--link">
                 <div class="list__tile__content">
                   <div class="list__tile__title">
@@ -181,8 +181,8 @@ exports[`VSelect should render v-select correctly when not using scope slot 1`] 
                   </div>
                 </div>
               </a>
-            </li>
-          </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -227,8 +227,8 @@ exports[`VSelect should render v-select correctly when not using v-list-tile in 
         <div class="card"
              style="height: auto;"
         >
-          <ul class="list">
-            <li>
+          <div class="list">
+            <div>
               <a class="list__tile list__tile--link list__tile--active primary--text">
                 <div class="list__tile__content">
                   <div class="list__tile__title">
@@ -236,8 +236,8 @@ exports[`VSelect should render v-select correctly when not using v-list-tile in 
                   </div>
                 </div>
               </a>
-            </li>
-            <li>
+            </div>
+            <div>
               <a class="list__tile list__tile--link">
                 <div class="list__tile__content red lighten-1">
                   <div class="list__tile__title">
@@ -245,8 +245,8 @@ exports[`VSelect should render v-select correctly when not using v-list-tile in 
                   </div>
                 </div>
               </a>
-            </li>
-          </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -291,18 +291,18 @@ exports[`VSelect should render v-select correctly when using v-list-tile in item
         <div class="card"
              style="height: auto;"
         >
-          <ul class="list">
-            <li class>
+          <div class="list">
+            <div class>
               <a class="list__tile list__tile--link list__tile--active primary--text">
                 Text 0
               </a>
-            </li>
-            <li class="red lighten-1">
+            </div>
+            <div class="red lighten-1">
               <a class="list__tile list__tile--link">
                 Text 1
               </a>
-            </li>
-          </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>

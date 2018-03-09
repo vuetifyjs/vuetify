@@ -29,8 +29,8 @@ exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
         <div class="card"
              style="height: auto;"
         >
-          <ul class="list">
-            <li>
+          <div class="list">
+            <div>
               <a class="list__tile list__tile--link list__tile--active primary--text">
                 <div class="list__tile__action list__tile__action--select-multi">
                   <div tabindex="0"
@@ -63,8 +63,8 @@ exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
                   </div>
                 </div>
               </a>
-            </li>
-            <li>
+            </div>
+            <div>
               <a class="list__tile list__tile--link">
                 <div class="list__tile__action list__tile__action--select-multi">
                   <div tabindex="0"
@@ -91,8 +91,8 @@ exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
                   </div>
                 </div>
               </a>
-            </li>
-          </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -137,8 +137,8 @@ exports[`VSelect should be clearable with prop, dirty and single select 1`] = `
         <div class="card"
              style="height: auto;"
         >
-          <ul class="list">
-            <li>
+          <div class="list">
+            <div>
               <a class="list__tile list__tile--link list__tile--active primary--text">
                 <div class="list__tile__content">
                   <div class="list__tile__title">
@@ -146,8 +146,8 @@ exports[`VSelect should be clearable with prop, dirty and single select 1`] = `
                   </div>
                 </div>
               </a>
-            </li>
-            <li>
+            </div>
+            <div>
               <a class="list__tile list__tile--link">
                 <div class="list__tile__content">
                   <div class="list__tile__title">
@@ -155,8 +155,8 @@ exports[`VSelect should be clearable with prop, dirty and single select 1`] = `
                   </div>
                 </div>
               </a>
-            </li>
-          </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>
