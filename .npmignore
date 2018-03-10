@@ -13,6 +13,8 @@ release/
 /.editorconfig
 /.eslintignore
 /.eslintrc.js
+/eslint-local-rules.js
+eslint-rules/
 /.travis.yml
 /package-lock.json
 /postcss.config.js

@@ -17,8 +17,8 @@ test('VListTile.vue', ({ mount }) => {
       }
     })
 
-    expect(wrapper.is('li')).toBe(true)
-    expect(wrapper.find('div')).toHaveLength(1)
+    expect(wrapper.is('div')).toBe(true)
+    expect(wrapper.find('div')).toHaveLength(2)
     expect(wrapper.find('a')).toHaveLength(0)
     expect(wrapper.find('.list__tile--link')).toHaveLength(0)
   })
@@ -30,19 +30,19 @@ test('VListTile.vue', ({ mount }) => {
       }
     })
 
-    expect(wrapper.is('li')).toBe(true)
+    expect(wrapper.is('div')).toBe(true)
     expect(wrapper.find('code')).toHaveLength(1)
   })
 
   it('should render with a div when href and to are not used', () => {
     const wrapper = mount(VListTile)
 
-    expect(wrapper.is('li')).toBe(true)
-    expect(wrapper.find('div')).toHaveLength(1)
+    expect(wrapper.is('div')).toBe(true)
+    expect(wrapper.find('div')).toHaveLength(2)
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render <li> with <a> when using href prop', () => {
+  it('should render <div> with <a> when using href prop', () => {
     const wrapper = mount(VListTile, {
       propsData: {
         href: 'http://www.google.com'
@@ -51,12 +51,12 @@ test('VListTile.vue', ({ mount }) => {
 
     const a = wrapper.find('a')[0]
 
-    expect(wrapper.is('li')).toBe(true)
+    expect(wrapper.is('div')).toBe(true)
     expect(a.getAttribute('href')).toBe('http://www.google.com')
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render <li> with <button> when using to prop', () => {
+  it('should render <div> with <button> when using to prop', () => {
     const instance = Vue.extend()
     instance.component('router-link', stub)
 
@@ -67,7 +67,7 @@ test('VListTile.vue', ({ mount }) => {
       instance
     })
 
-    expect(wrapper.is('li')).toBe(true)
+    expect(wrapper.is('div')).toBe(true)
     expect(wrapper.find('button')).toHaveLength(1)
     expect(wrapper.html()).toMatchSnapshot()
   })
