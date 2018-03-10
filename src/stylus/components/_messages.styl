@@ -1,0 +1,16 @@
+@import '../bootstrap'
+@import '../theme'
+
+/* Theme */
+v-messages($material)
+  color: $material.text.secondary
+
+theme(v-messages, "v-messages")
+
+.v-messages
+  flex: 1 1 auto
+  font-size: 12px
+  min-height: 12px
+
+  &__message
+    line-height: 1

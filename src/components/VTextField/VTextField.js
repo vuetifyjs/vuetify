@@ -1,10 +1,13 @@
 // Styles
-import '../../stylus/components/_input-groups.styl'
+import '../../stylus/components/_input.styl'
 import '../../stylus/components/_text-fields.styl'
+
+// Components
+import VLabel from '../VLabel'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
-import Input from '../../mixins/input'
+import Inputable from '../../mixins/inputable'
 import Maskable from '../../mixins/maskable'
 import Soloable from '../../mixins/soloable'
 
@@ -13,29 +16,31 @@ const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', '
 export default {
   name: 'v-text-field',
 
+  components: {
+    VLabel
+  },
+
   mixins: [
     Colorable,
-    Input,
+    Inputable,
     Maskable,
     Soloable
   ],
 
   inheritAttrs: false,
 
-  data () {
-    return {
-      initialValue: null,
-      inputHeight: null,
-      internalChange: false,
-      badInput: false
-    }
-  },
+  data: vm => ({
+    badInput: false,
+    initialValue: null,
+    inputHeight: null,
+    internalChange: false,
+    isClearing: false
+  }),
 
   props: {
     autofocus: Boolean,
     autoGrow: Boolean,
     box: Boolean,
-    clearable: Boolean,
     color: {
       type: String,
       default: 'primary'
@@ -67,26 +72,28 @@ export default {
 
   computed: {
     classes () {
-      const classes = {
-        ...this.genSoloClasses(),
-        'input-group--text-field': true,
-        'input-group--text-field-box': this.box,
-        'input-group--single-line': this.singleLine || this.isSolo,
-        'input-group--multi-line': this.multiLine,
-        'input-group--full-width': this.fullWidth,
-        'input-group--no-resize': this.noResizeHandle,
-        'input-group--prefix': this.prefix,
-        'input-group--suffix': this.suffix,
-        'input-group--textarea': this.textarea
+      return {
+        'v-input--text': true,
+        'v-input--text--prefix': this.prefix,
+        'v-input--text--single-line': this.isSingle,
+        'v-input--text--solo': this.solo,
+        'v-input--text--box': (this.box || this.solo)
       }
+      // const classes = {
+      // ...this.genSoloClasses(),
+      // 'input-group--multi-line': this.multiLine,
+      // 'input-group--full-width': this.fullWidth,
+      // 'input-group--no-resize': this.noResizeHandle,
+      // 'input-group--textarea': this.textarea
+      // }
 
-      if (this.hasError) {
-        classes['error--text'] = true
-      } else {
-        return this.addTextColorClassChecks(classes)
-      }
+      // if (this.hasError) {
+      //   classes['error--text'] = true
+      // } else {
+      //   return this.addTextColorClassChecks(classes)
+      // }
 
-      return classes
+      // return classes
     },
     count () {
       let inputLength
@@ -118,6 +125,9 @@ export default {
         this.lazyValue.toString().length > 0) ||
         this.badInput ||
         dirtyTypes.includes(this.type)
+    },
+    isSingle () {
+      return this.solo || this.singleLine
     },
     isTextarea () {
       return this.multiLine || this.textarea
@@ -174,25 +184,22 @@ export default {
         this.inputHeight = Math.max(minHeight, height)
       })
     },
-    onInput (e) {
-      this.mask && this.resetSelections(e.target)
-      this.inputValue = e.target.value
-      this.badInput = e.target.validity && e.target.validity.badInput
-      this.shouldAutoGrow && this.calculateInputHeight()
-    },
-    blur (e) {
+    onBlur (e) {
       this.isFocused = false
       // Reset internalChange state
       // to allow external change
       // to persist
       this.internalChange = false
 
-      this.$nextTick(() => {
-        this.validate()
-      })
+      this.$nextTick(this.validate)
       this.$emit('blur', e)
     },
-    focus (e) {
+    onClick () {
+      !this.isFocused &&
+        !this.disabled &&
+        this.onFocus()
+    },
+    onFocus (e) {
       if (!this.$refs.input) return
 
       this.isFocused = true
@@ -201,7 +208,13 @@ export default {
       }
       this.$emit('focus', e)
     },
-    keyDown (e) {
+    onInput (e) {
+      this.mask && this.resetSelections(e.target)
+      this.inputValue = e.target.value
+      this.badInput = e.target.validity && e.target.validity.badInput
+      this.shouldAutoGrow && this.calculateInputHeight()
+    },
+    onKeyDown (e) {
       // Prevents closing of a
       // dialog when pressing
       // enter
@@ -214,13 +227,21 @@ export default {
 
       this.internalChange = true
     },
-    genCounter () {
-      return this.$createElement('div', {
-        'class': {
-          'input-group__counter': true,
-          'input-group__counter--error': this.hasError
+    genLabel () {
+      if (this.isDirty && this.isSingle) return null
+
+      const isSingleLine = this.isSingle
+      const data = {
+        props: {
+          color: this.color,
+          focused: !isSingleLine && this.isFocused,
+          value: !isSingleLine && (this.isFocused || this.isDirty)
         }
-      }, this.count)
+      }
+
+      if ((this.attrs || {}).id) data.props.for = this.attrs.id
+
+      return this.$createElement(VLabel, data, this.$slots.label || this.label)
     },
     genInput () {
       const tag = this.isTextarea ? 'textarea' : 'input'
@@ -242,10 +263,10 @@ export default {
           'aria-label': (!this.$attrs || !this.$attrs.id) && this.label // Label `for` will be set if we have an id
         },
         on: Object.assign(listeners, {
-          blur: this.blur,
+          blur: this.onBlur,
           input: this.onInput,
-          focus: this.focus,
-          keydown: this.keyDown
+          focus: this.onFocus,
+          keydown: this.onKeyDown
         }),
         ref: 'input'
       }
@@ -268,14 +289,15 @@ export default {
 
       const children = [this.$createElement(tag, data)]
 
-      this.prefix && children.unshift(this.genFix('prefix'))
-      this.suffix && children.push(this.genFix('suffix'))
+      this.prefix && children.unshift(this.genAffix('prefix'))
+      this.suffix && children.push(this.genAffix('suffix'))
 
       return children
     },
-    genFix (type) {
-      return this.$createElement('span', {
-        'class': `input-group--text-field__${type}`
+    genAffix (type) {
+      return this.$createElement('div', {
+        'class': `v-input--text__${type}`,
+        ref: type
       }, this[type])
     },
     clearableCallback () {
@@ -285,6 +307,7 @@ export default {
   },
 
   render () {
-    return this.genInputGroup(this.genInput(), { attrs: { tabindex: false } })
+    return this.genInputGroup()
+    // return this.genInputGroup(this.genInput(), { attrs: { tabindex: false } })
   }
 }

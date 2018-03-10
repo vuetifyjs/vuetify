@@ -1,0 +1,156 @@
+// Components
+import VCounter from '../../components/VCounter'
+import VIcon from '../../components/VIcon'
+import VLabel from '../../components/VLabel'
+import VMessages from '../../components/VMessages'
+
+export default {
+  methods: {
+    genContent () {
+      return this.$createElement('div', {
+        staticClass: 'v-input__control'
+      }, [
+        this.genInputWrapper(),
+        this.genProgress(),
+        this.genMessages(),
+        this.genCounter()
+      ])
+    },
+    genCounter () {
+      if (this.counter === false) return null
+
+      const length = (this.inputValue || '').length
+
+      return this.$createElement(VCounter, {
+        props: {
+          value: `${length} / ${this.counter}`
+        }
+      })
+    },
+    genIcon (type, defaultCallback = null) {
+      const shouldClear = this.shouldClear(type)
+      const callback = shouldClear
+        ? this.clearableCallback
+        : (this[`${type}IconCb`] || defaultCallback)
+
+      const icon = this.$createElement(VIcon, {
+        'class': {
+          'v-icon--clickable': callback
+        },
+        props: { disabled: this.disabled },
+        on: {
+          click: e => {
+            if (!callback) return
+
+            e.stopPropagation()
+            callback()
+          }
+        }
+      }, shouldClear ? 'clear' : this[`${type}Icon`])
+
+      return this.$createElement('div', {
+        staticClass: `v-input__icon v-input__icon--${type}`
+      }, [icon])
+    },
+    genInputWrapper () {
+      return this.$createElement('div', {
+        staticClass: 'v-input__wrapper',
+        'class': this.classesColor
+      }, [
+        this.genLabel(),
+        this.genInput(),
+        this.genAppendInner()
+      ])
+    },
+    genLabel () {
+      if (this.singleLine && this.isDirty) return null
+
+      const data = {
+        props: {
+          color: 'primary',
+          focused: this.isFocused,
+          value: this.isFocused || this.isDirty
+        }
+      }
+
+      if ((this.attrs || {}).id) data.props.for = this.attrs.id
+
+      return this.$createElement(VLabel, data, [this.$slots.label || this.label])
+    },
+    genMessages () {
+      let messages = []
+
+      if (
+        this.hint &&
+        (this.isFocused || this.persistentHint) &&
+        !this.validations.length
+      ) {
+        messages = [this.hint]
+      } else if (this.validations.length) {
+        messages = [this.genError(this.validations[0])]
+      }
+
+      return this.$createElement(VMessages, {
+        props: { messages }
+      }, this.$slots.messages)
+    },
+    genSlot (ref, location, slot) {
+      return this.$createElement('div', {
+        staticClass: `v-input__${ref}-${location}`
+      }, slot)
+    },
+    genPrependOuter () {
+      const slot = []
+
+      if (this.$slots['prepend-outer']) {
+        slot.push(this.$slots['prepend-outer'])
+      // For backwards compat
+      } else if (this.$slots['prepend-icon']) {
+        slot.push(this.$slots['prepend-icon'])
+      } else if (this.prependIcon) {
+        slot.push(this.genIcon('prepend'))
+      }
+
+      return this.genSlot('prepend', 'outer', slot)
+    },
+    genAppendInner () {
+      const slot = []
+
+      if (this.$slots['append-inner']) {
+        slot.push(this.$slots['append-inner'])
+        // For backwards compat
+      } else if (this.$slots['append-icon']) {
+        slot.push(this.$slots['append-icon'])
+      } else if (this.clearable) {
+        const icon = this.clearIcon ? 'clear' : 'append'
+        slot.push(this.genIcon(icon))
+      }
+
+      return this.genSlot('append', 'inner', slot)
+    },
+    genAppendOuter () {
+      const slot = []
+
+      if (this.$slots['append-outer']) {
+        slot.push(this.$slots['append-outer'])
+      } else if (this.outerIcon) {
+        slot.push(this.genIcon('outer'))
+      }
+
+      return this.genSlot('append', 'outer', slot)
+    },
+    genInputGroup (input, data = {}, defaultAppendCallback = null) {
+      return this.$createElement('div', {
+        staticClass: 'v-input',
+        'class': this.classesInput,
+        on: {
+          click: this.onClick
+        }
+      }, [
+        this.genPrependOuter(),
+        this.genContent(),
+        this.genAppendOuter()
+      ])
+    }
+  }
+}

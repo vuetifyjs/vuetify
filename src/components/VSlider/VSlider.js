@@ -3,7 +3,7 @@ import '../../stylus/components/_sliders.styl'
 import { addOnceEventListener, createRange } from '../../util/helpers'
 
 import Colorable from '../../mixins/colorable'
-import Input from '../../mixins/input'
+import Inputable from '../../mixins/inputable'
 
 import ClickOutside from '../../directives/click-outside'
 
@@ -14,7 +14,7 @@ import { consoleWarn } from '../../util/console'
 export default {
   name: 'v-slider',
 
-  mixins: [Colorable, Input],
+  mixins: [Colorable, Inputable],
 
   directives: { ClickOutside },
 

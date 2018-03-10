@@ -1,0 +1,142 @@
+@import '../bootstrap'
+@import '../theme'
+
+/* Theme */
+v-input($material)
+  input
+    color: $material.text.primary
+
+  &--is-disabled
+    .v-input__label,
+    input
+      color: $material.text.disabled
+
+    .v-input__wrapper:before
+      background-image: linear-gradient(
+        to right,
+        $material.text.disabled 0,
+        $material.text.disabled 33%,
+        transparent 0
+      )
+
+  &__icon--clear
+    background-color: $material.dividers
+    color: $material.icons.active
+
+  &__wrapper
+    border-bottom: 1px solid $material.dividers
+
+theme(v-input, "v-input")
+
+.v-input
+  align-items: flex-start
+  display: flex
+  height: 52px
+  margin: 16px 0 8px
+  text-align: left
+
+  &--has-state
+    .v-input__label
+      color: inherit
+
+    .icon
+      color: inherit
+
+    &:not(.v-input--is-loading)
+      .v-input__wrapper:after
+        transform: scaleX(1)
+
+  &--is-disabled
+    .v-input__wrapper
+      border-color: transparent
+
+  input
+    flex: 1 1 auto
+    font-size: 16px
+    height: 32px
+    padding: 8px 0 8px
+    line-height: 32px
+    width: 100%
+
+    &:focus,
+    &:active
+      outline: none
+
+  &__append-inner,
+  &__append-outer,
+  &__prepend-outer
+    display: flex
+
+  &__append-inner
+    padding: 4px 0 4px
+
+    .v-input__icon
+      margin-left: 16px
+
+  &__append-outer
+    padding: 4px 0 4px 16px
+
+  &__prepend-outer
+    padding: 4px 16px 4px 0
+
+
+  &__control
+    display: flex
+    height: auto
+    flex-grow: 1
+    flex-wrap: wrap
+    position: relative
+
+  &__icon
+    align-items: center
+    display: inline-flex
+    height: 24px
+    flex: 1 0 auto
+    justify-content: center
+    min-width: 24px
+    width: 24px
+
+    .v-icon--clickable
+      cursor: pointer
+
+    &--clear
+      border-radius: 50%
+
+      .icon
+        font-size: 18px
+
+  &__wrapper
+    align-items: flex-end
+    color: inherit
+    display: flex
+    margin-bottom: 8px
+    position: relative
+    width: 100%
+
+    &:before,
+    &:after
+      bottom: -1px
+      content: ''
+      height: 2px
+      left: 0
+      position: absolute
+      transition: $primary-transition
+      width: 100%
+
+    &:before
+      background-color: transparent
+      background-position: bottom
+      background-repeat: repeat-x
+      background-size: 3px 1px
+
+    &:after
+      background-color: currentColor
+      transform: scaleX(0)
+
+  .progress-linear
+    bottom: 8px
+    height: 2px
+    left: 0
+    margin: 0
+    padding: 0
+    position: absolute

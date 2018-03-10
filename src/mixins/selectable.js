@@ -1,10 +1,10 @@
 import Colorable from './colorable'
-import Input from './input'
+import Inputable from './inputable'
 
 export default {
   name: 'selectable',
 
-  mixins: [Input, Colorable],
+  mixins: [Inputable, Colorable],
 
   model: {
     prop: 'inputValue',

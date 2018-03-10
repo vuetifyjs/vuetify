@@ -1,12 +1,33 @@
+// Components
+import VCounter from '../components/VCounter'
+import VIcon from '../components/VIcon'
+import VLabel from '../components/VLabel'
+import VMessages from '../components/VMessages'
+import VProgressLinear from '../components/VProgressLinear'
+
+// Mixins
+import Colorable from './colorable'
 import Loadable from './loadable'
 import Themeable from './themeable'
 import Validatable from './validatable'
-import VIcon from '../components/VIcon'
 
 export default {
   name: 'input',
 
-  mixins: [Loadable, Themeable, Validatable],
+  components: {
+    VCounter,
+    VIcon,
+    VLabel,
+    VMessages,
+    VProgressLinear
+  },
+
+  mixins: [
+    Colorable,
+    Loadable,
+    Themeable,
+    Validatable
+  ],
 
   data () {
     return {
@@ -21,9 +42,12 @@ export default {
     appendIcon: String,
     appendIconCb: Function,
     disabled: Boolean,
+    clearable: Boolean,
+    clearIcon: String,
     hint: String,
     hideDetails: Boolean,
     label: String,
+    outerIcon: String,
     persistentHint: Boolean,
     placeholder: String,
     prependIcon: String,
@@ -43,23 +67,30 @@ export default {
   },
 
   computed: {
-    inputGroupClasses () {
-      return Object.assign({
-        'input-group': true,
-        'input-group--async-loading': this.loading !== false,
-        'input-group--focused': this.isFocused,
-        'input-group--dirty': this.isDirty,
-        'input-group--tab-focused': this.tabFocused,
-        'input-group--disabled': this.disabled,
-        'input-group--error': this.hasError,
-        'input-group--append-icon': this.appendIcon,
-        'input-group--prepend-icon': this.prependIcon,
-        'input-group--required': this.required,
-        'input-group--hide-details': this.hideDetails,
-        'input-group--placeholder': !!this.placeholder,
-        'theme--dark': this.dark,
-        'theme--light': this.light
-      }, this.classes)
+    classesColor () {
+      return this.addTextColorClassChecks()
+    },
+    classesInput () {
+      return {
+        ...this.classes,
+        'v-input--is-focused': this.isFocused,
+        'v-input--is-loading': this.loading !== false,
+        'v-input--is-dirty': this.isDirty,
+        'v-input--is-disabled': this.disabled,
+        'v-input--has-state': this.hasState,
+        ...this.classesColor,
+        'theme--light': !this.dark,
+        'theme--dark': this.dark
+      }
+    },
+    currentColor () {
+      if (this.hasError) return 'error'
+      if (this.hasSuccess) return 'success'
+      if (this.isFocused) return this.color
+      return null
+    },
+    hasState () {
+      return this.hasError || this.hasSuccess || this.isFocused
     },
     isDirty () {
       return !!this.inputValue
@@ -71,63 +102,38 @@ export default {
     groupBlur () {
       this.tabFocused = false
     },
-    genLabel () {
-      return this.$createElement('label', {
-        attrs: {
-          for: this.$attrs.id
-        }
-      }, this.$slots.label || this.label)
-    },
-    genMessages () {
-      let messages = null
-
-      if (
-        this.hint &&
-        (this.isFocused || this.persistentHint) &&
-        !this.validations.length
-      ) {
-        messages = [this.genHint()]
-      } else if (this.validations.length) {
-        messages = [this.genError(this.validations[0])]
-      }
-
-      return this.$createElement('transition', {
-        props: {
-          name: 'slide-y-transition'
-        }
-      }, messages)
-    },
-    genHint () {
+    genContent () {
       return this.$createElement('div', {
-        'class': 'input-group__messages input-group__hint',
-        domProps: { innerHTML: this.hint }
+        staticClass: 'v-input__control'
+      }, [
+        this.genInputWrapper(),
+        this.genProgress(),
+        this.genMessages(),
+        this.genCounter()
+      ])
+    },
+    genCounter () {
+      if (this.counter === false) return null
+
+      const length = (this.inputValue || '').length
+
+      return this.$createElement(VCounter, {
+        props: {
+          value: `${length} / ${this.counter}`
+        }
       })
     },
-    genError (error) {
-      return this.$createElement(
-        'div',
-        {
-          'class': 'input-group__messages input-group__error'
-        },
-        error
-      )
-    },
     genIcon (type, defaultCallback = null) {
-      const shouldClear = type === 'append' && this.clearable && this.isDirty
-      const icon = shouldClear ? '$vuetify.icons.clear' : this[`${type}Icon`]
+      const shouldClear = this.shouldClear(type)
       const callback = shouldClear
         ? this.clearableCallback
         : (this[`${type}IconCb`] || defaultCallback)
 
-      return this.$createElement(VIcon, {
+      const icon = this.$createElement('v-icon', {
         'class': {
-          [`input-group__${type}-icon`]: true,
-          'input-group__icon-cb': !!callback,
-          'input-group__icon-clearable': shouldClear
+          'v-icon--clickable': callback
         },
-        props: {
-          disabled: this.disabled
-        },
+        props: { disabled: this.disabled },
         on: {
           click: e => {
             if (!callback) return
@@ -136,76 +142,192 @@ export default {
             callback()
           }
         }
-      }, icon)
+      }, shouldClear ? 'clear' : this[`${type}Icon`])
+
+      return this.$createElement('div', {
+        staticClass: `v-input__icon v-input__icon--${type}`
+      }, [icon])
+    },
+    genInputWrapper () {
+      return this.$createElement('div', {
+        staticClass: 'v-input__wrapper',
+        'class': this.classesColor
+      }, [
+        this.genLabel(),
+        this.genInput(),
+        this.genAppendInner()
+      ])
+    },
+    genLabel () {
+      if (this.singleLine && this.isDirty) return null
+
+      const data = {
+        props: {
+          color: 'primary',
+          focused: this.isFocused,
+          value: this.isFocused || this.isDirty
+        }
+      }
+
+      if ((this.attrs || {}).id) data.props.for = this.attrs.id
+
+      return this.$createElement(VLabel, data, [this.$slots.label || this.label])
+    },
+    genMessages () {
+      let messages = []
+
+      if (
+        this.hint &&
+        (this.isFocused || this.persistentHint) &&
+        !this.validations.length
+      ) {
+        messages = [this.hint]
+      } else if (this.validations.length) {
+        messages = [this.genError(this.validations[0])]
+      }
+
+      return this.$createElement(VMessages, {
+        props: { messages }
+      }, this.$slots.messages)
+    },
+    hasIcon (icon) {
+      return this[`${icon}Icon`] || this.$slots[`${icon}Icon`]
+    },
+    genSlot (ref, location, slot) {
+      return this.$createElement('div', {
+        staticClass: `v-input__${ref}-${location}`
+      }, slot)
+    },
+    genPrependOuter () {
+      const slot = []
+
+      if (this.$slots['prepend-outer']) {
+        slot.push(this.$slots['prepend-outer'])
+      // For backwards compat
+      } else if (this.$slots['prepend-icon']) {
+        slot.push(this.$slots['prepend-icon'])
+      } else if (this.prependIcon) {
+        slot.push(this.genIcon('prepend'))
+      }
+
+      return this.genSlot('prepend', 'outer', slot)
+    },
+    genAppendInner () {
+      const slot = []
+
+      if (this.$slots['append-inner']) {
+        slot.push(this.$slots['append-inner'])
+        // For backwards compat
+      } else if (this.$slots['append-icon']) {
+        slot.push(this.$slots['append-icon'])
+      } else if (this.clearable) {
+        const icon = this.clearIcon ? 'clear' : 'append'
+        slot.push(this.genIcon(icon))
+      }
+
+      return this.genSlot('append', 'inner', slot)
+    },
+    genAppendOuter () {
+      const slot = []
+
+      if (this.$slots['append-outer']) {
+        slot.push(this.$slots['append-outer'])
+      } else if (this.outerIcon) {
+        slot.push(this.genIcon('outer'))
+      }
+
+      return this.genSlot('append', 'outer', slot)
     },
     genInputGroup (input, data = {}, defaultAppendCallback = null) {
-      const children = []
-      const wrapperChildren = []
-      const detailsChildren = []
-
-      data = Object.assign({}, {
-        'class': this.inputGroupClasses,
-        attrs: {
-          tabindex: this.disabled
-            ? -1
-            : this.internalTabIndex || this.tabindex
-        },
+      return this.$createElement('div', {
+        staticClass: 'v-input',
+        'class': this.classesInput,
         on: {
-          focus: this.groupFocus,
-          blur: this.groupBlur,
-          click: () => (this.tabFocused = false),
-          keyup: e => {
-            if ([9, 16].includes(e.keyCode)) {
-              this.tabFocused = true
-            }
-          },
-          keydown: e => {
-            if (!this.toggle) return
-
-            if (this.toggleKeys.includes(e.keyCode)) {
-              e.preventDefault()
-              this.toggle()
-            }
-          }
+          click: this.onClick
         }
-      }, data)
+      }, [
+        this.genPrependOuter(),
+        this.genContent(),
+        this.genAppendOuter()
+      ])
+      // const children = []
+      // const wrapperChildren = []
+      // const detailsChildren = []
 
-      if (this.$slots.label || this.label) {
-        children.push(this.genLabel())
-      }
+      // data = Object.assign({}, {
+      //   'class': this.inputGroupClasses,
+      //   attrs: {
+      //     tabindex: this.disabled
+      //       ? -1
+      //       : this.internalTabIndex || this.tabindex
+      //   },
+      //   on: {
+      //     focus: this.groupFocus,
+      //     blur: this.groupBlur,
+      //     click: () => (this.tabFocused = false),
+      //     keyup: e => {
+      //       if ([9, 16].includes(e.keyCode)) {
+      //         this.tabFocused = true
+      //       }
+      //     },
+      //     keydown: e => {
+      //       if (!this.toggle) return
 
-      wrapperChildren.push(input)
+      //       if (this.toggleKeys.includes(e.keyCode)) {
+      //         e.preventDefault()
+      //         this.toggle()
+      //       }
+      //     }
+      //   }
+      // }, data)
 
-      if (this.prependIcon) {
-        wrapperChildren.unshift(this.genIcon('prepend'))
-      }
+      // if (this.$slots.label || this.label) {
+      //   children.push(this.genLabel())
+      // }
 
-      if (this.appendIcon || this.clearable) {
-        wrapperChildren.push(this.genIcon('append', defaultAppendCallback))
-      }
+      // wrapperChildren.push(input)
 
-      const progress = this.genProgress()
-      progress && detailsChildren.push(progress)
+      // if (this.prependIcon) {
+      //   wrapperChildren.unshift(this.genIcon('prepend'))
+      // }
 
-      children.push(
-        this.$createElement('div', {
-          'class': 'input-group__input'
-        }, wrapperChildren)
-      )
+      // if (this.appendIcon || this.clearable) {
+      //   wrapperChildren.push(this.genIcon('append', defaultAppendCallback))
+      // }
 
-      !this.hideDetails && detailsChildren.push(this.genMessages())
+      // const progress = this.genProgress()
+      // progress && detailsChildren.push(progress)
 
-      if (this.counter) {
-        detailsChildren.push(this.genCounter())
-      }
+      // children.push(
+      //   this.$createElement('div', {
+      //     'class': 'input-group__input'
+      //   }, wrapperChildren)
+      // )
 
-      children.push(
-        this.$createElement('div', {
-          'class': 'input-group__details'
-        }, detailsChildren)
-      )
+      // !this.hideDetails && detailsChildren.push(this.genMessages())
 
-      return this.$createElement('div', data, children)
+      // if (this.counter) {
+      //   detailsChildren.push(this.genCounter())
+      // }
+
+      // children.push(
+      //   this.$createElement('div', {
+      //     'class': 'input-group__details'
+      //   }, detailsChildren)
+      // )
+
+      // return this.$createElement('div', data, children)
+    },
+    hasIcon (icon) {
+      return this[`${icon}Icon`] || this.$slots[`${icon}Icon`]
+    },
+    onClick () {
+      this.$emit('click')
+    },
+    shouldClear (type) {
+      return (type === 'append' || type === 'clear') &&
+        this.clearable &&
+        this.isDirty
     }
   }
 }
