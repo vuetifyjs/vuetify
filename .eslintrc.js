@@ -17,7 +17,10 @@ module.exports = {
     'it': true,
     'jest': true
   },
-  'rules': {
+  plugins: [
+    'eslint-plugin-local-rules'
+  ],
+  rules: {
     // allow paren-less arrow functions
     'arrow-parens': [2, 'as-needed'],
     // set maximum line characters
@@ -26,6 +29,7 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
     'no-return-assign': 0,
     'max-statements': [2, 24],
-    'prefer-promise-reject-errors': 0
+    'prefer-promise-reject-errors': 0,
+    'local-rules/no-render-string-reference': 2
   }
 }

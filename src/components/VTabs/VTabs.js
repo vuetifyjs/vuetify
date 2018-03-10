@@ -1,11 +1,6 @@
 // Styles
 import '../../stylus/components/_tabs.styl'
 
-// Component imports
-import VIcon from '../VIcon'
-import VTabsItems from './VTabsItems'
-import VTabsSlider from './VTabsSlider'
-
 // Component level mixins
 import TabsComputed from './mixins/tabs-computed'
 import TabsGenerators from './mixins/tabs-generators'
@@ -27,12 +22,6 @@ import Touch from '../../directives/touch'
 
 export default {
   name: 'v-tabs',
-
-  components: {
-    VIcon,
-    VTabsItems,
-    VTabsSlider
-  },
 
   mixins: [
     RegistrableProvide('tabs'),
@@ -157,7 +146,6 @@ export default {
       for (let i = 0; i < length; i++) {
         const vnode = this.$slots.default[i]
 
-        /* istanbul ignore else */
         if (vnode.componentOptions) {
           switch (vnode.componentOptions.Ctor.options.name) {
             case 'v-tabs-slider': slider.push(vnode)
@@ -169,6 +157,8 @@ export default {
             // case 'v-tab' - intentionally omitted
             default: tab.push(vnode)
           }
+        } else {
+          tab.push(vnode)
         }
       }
 

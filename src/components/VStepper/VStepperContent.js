@@ -6,11 +6,6 @@ import {
 export default {
   name: 'v-stepper-content',
 
-  components: {
-    VTabTransition,
-    VTabReverseTransition
-  },
-
   data () {
     return {
       height: 0,
@@ -37,8 +32,8 @@ export default {
     },
     computedTransition () {
       return this.isReverse
-        ? 'v-tab-reverse-transition'
-        : 'v-tab-transition'
+        ? VTabReverseTransition
+        : VTabTransition
     },
     styles () {
       if (!this.isVertical) return {}

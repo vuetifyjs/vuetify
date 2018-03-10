@@ -2,6 +2,7 @@ import '../../stylus/components/_button-toggle.styl'
 
 import ButtonGroup from '../../mixins/button-group'
 import Themeable from '../../mixins/themeable'
+import { consoleWarn } from '../../util/console'
 
 export default {
   name: 'v-btn-toggle',
@@ -73,6 +74,27 @@ export default {
       }
 
       this.$emit('change', items)
+    },
+    updateAllValues () {
+      if (!this.multiple) return
+
+      const items = []
+
+      for (let i = 0; i < this.buttons.length; ++i) {
+        const item = this.getValue(i)
+        const index = this.inputValue.indexOf(item)
+        if (index !== -1) {
+          items.push(item)
+        }
+      }
+
+      this.$emit('change', items)
+    }
+  },
+
+  created () {
+    if (this.multiple && !Array.isArray(this.inputValue)) {
+      consoleWarn('Model must be bound to an array if the multiple property is true.', this)
     }
   },
 
