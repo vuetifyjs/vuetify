@@ -14,10 +14,6 @@ export default {
     customHeight: {
       header: '自定义高度',
       desc: '你可以在视差上指定自定义高度。请记住，如果您的图像尺寸不合适，这可能会打破视差。'
-    },
-    jumbotron: {
-      header: '超大屏幕（jumbotron）',
-      desc: '视差可以使其作用被禁用作为标准**超大屏幕**'
     }
   }]
 }
