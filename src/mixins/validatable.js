@@ -40,6 +40,9 @@ export default {
         return []
       }
     },
+    hasSuccess () {
+      return false
+    },
     hasError () {
       return this.validations.length > 0 ||
         this.errorMessages.length > 0 ||

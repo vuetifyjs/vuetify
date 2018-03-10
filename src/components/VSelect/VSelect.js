@@ -7,7 +7,7 @@ import '../../stylus/components/_select.styl'
 import Colorable from '../../mixins/colorable'
 import Dependent from '../../mixins/dependent'
 import Filterable from '../../mixins/filterable'
-import Input from '../../mixins/input'
+import Inputable from '../../mixins/inputable'
 import Maskable from '../../mixins/maskable'
 import Soloable from '../../mixins/soloable'
 
@@ -41,7 +41,7 @@ export default {
     Filterable,
     Generators,
     Helpers,
-    Input,
+    Inputable,
     Maskable,
     Menu,
     Props,
