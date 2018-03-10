@@ -17,14 +17,13 @@
             style="logoStyles"
             height="256px"
             width="256px"
-            :class="$vuetify.breakpoint.mdAndUp ? 'mr-5' : 'mb-3'"
-          )
-          v-flex(:shrink="$vuetify.breakpoint.mdAndUp").text-xs-center.text-md-left
+          ).mx-4
+          v-flex(shrink).text-xs-center.text-md-left
             h1(
               class="mb-4"
-              :class="[$vuetify.breakpoint.mdAndUp ? 'display-3' : 'display-1']"
               style="font-weight: 300;"
-            )
+              :class="{ 'display-1 mt-4': isBooted && $vuetify.breakpoint.xsOnly }"
+            ).display-3
               div(v-text="$t('Vuetify.Home.materialDesign')")
               div(v-text="$t('Vuetify.Home.componentFramework')")
             v-btn(
@@ -116,7 +115,8 @@
         v-layout(row wrap justify-center)
           v-flex(
             mx-3
-            shrink
+            :shrink="$vuetify.breakpoint.mdAndUp"
+            :grow="$vuetify.breakpoint.smAndDown"
           )
             v-layout(
               v-for="(feature, i) in checkFeatures"
@@ -130,7 +130,8 @@
               span.subheading {{ feature }}
           v-flex(
             mx-3
-            shrink
+            :shrink="$vuetify.breakpoint.mdAndUp"
+            :grow="$vuetify.breakpoint.smAndDown"
           )
             v-layout(
               v-for="(feature, i) in checkFeaturesCtd"
@@ -235,6 +236,7 @@
     data: () => ({
       diamond: supporters.diamond,
       featured: [],
+      isBooted: false,
       palladium: supporters.palladium,
       socials: [
         {
@@ -292,7 +294,10 @@
       }
     },
 
-    mounted () {
+    async mounted () {
+      await this.$nextTick()
+      this.isBooted = true
+
       this.snackbar({
         color: '',
         msg: 'Vuetify is now on Reddit!',
