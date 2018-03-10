@@ -278,7 +278,7 @@
         return this.featured.slice(0, 6)
       },
       features () {
-        return this.$t('Vuetify.Home.features').reverse()
+        return this.$t('Vuetify.Home.features').slice().reverse()
       },
       letterFromAuthor () {
         return this.$t('Vuetify.Home.letterFromAuthor')
