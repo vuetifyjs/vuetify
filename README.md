@@ -74,6 +74,9 @@
   <a href="http://quitt.ch/?ref=vuetify-github">
     <img height="40px" src="https://vuetifyjs.com/static/doc-images/backers/quitt.png">
   </a>
+  <a href="http://quitt.ch/?ref=vuetify-github">
+    <img height="40px" src="https://vuetifyjs.com/static/doc-images/backers/clear-blue.png">
+  </a>
 </p>
 
 <br>
