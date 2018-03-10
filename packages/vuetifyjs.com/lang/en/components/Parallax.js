@@ -14,10 +14,6 @@ export default {
     customHeight: {
       header: 'Custom height',
       desc: 'You can specify a custom height on a parallax. Keep in mind this can break the parallax if your image is not sized properly'
-    },
-    jumbotron: {
-      header: 'Jumbotron',
-      desc: 'The parallax can have its effect disabled to be used as a standard **jumbotron**'
     }
   }],
   props: {

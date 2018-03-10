@@ -14,10 +14,6 @@ export default {
     customHeight: {
       header: '사용자 지정 높이 (Custom height)',
       desc: 'Parallax에 사용자 지정 높이를 지정할 수 있습니다. 이미지의 크기를 적절하게 조절하지 않으면 parallax가 깨질 수도 있다는 점을 명심하세요'
-    },
-    jumbotron: {
-      header: '점보트론 (Jumbotron)',
-      desc: 'Parallax를 표준 **점보트론** 처럼 쓰기 위해 parallax의 효과를 끌 수도 있습니다.'
     }
   }],
   props: {
