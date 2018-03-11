@@ -30,7 +30,7 @@ function getTargetLocation (target, settings) {
   else if (typeof target === 'number') location = target
   else location = undefined
 
-  location += settings.offset
+  location = Math.max(location + settings.offset, 0)
 
   return Math.round(
     documentHeight - location < windowHeight
@@ -59,7 +59,6 @@ export default function goTo (target, options) {
   function step (currentTime) {
     let progressPercentage = Math.min(1, ((currentTime - startTime) / settings.duration))
     let targetPosition = Math.floor(startLocation + distanceToScroll * easingFunction(progressPercentage))
-
     window.scrollTo(0, targetPosition)
     if (Math.round(window.pageYOffset) === targetLocation) return
     window.requestAnimationFrame(step)
