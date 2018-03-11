@@ -9,6 +9,7 @@ const version = process.env.VERSION || require('../package.json').version
 const builds = {
   development: {
     config: {
+      mode: 'development',
       output: {
         filename: 'vuetify.js',
         libraryTarget: 'umd'
@@ -25,6 +26,7 @@ const builds = {
   },
   production: {
     config: {
+      mode: 'production',
       output: {
         filename: 'vuetify.min.js',
         libraryTarget: 'umd'
@@ -34,19 +36,7 @@ const builds = {
       ]
     },
     env: 'production'
-  },
-  /*
-  esm: {
-    filename: 'vuetify.esm.js',
-    libraryTarget: 'esm',
-    env: 'production'
-  },
-  commonjs: {
-    filename: 'vuetify.common.js',
-    libraryTarget: 'commonjs',
-    env: 'production'
   }
-  */
 }
 
 function genConfig (opts) {
@@ -60,9 +50,6 @@ function genConfig (opts) {
 
   if (opts.env) {
     config.plugins = config.plugins.concat([
-      new webpack.optimize.UglifyJsPlugin({
-        sourceMap: false
-      }),
       new OptimizeCssAssetsPlugin({
         assetNameRegExp: /\.css$/g,
         cssProcessor: require('cssnano'),
@@ -80,9 +67,6 @@ function genConfig (opts) {
 */     `,
         raw: true,
         entryOnly: true
-      }),
-      new OptimizeJsPlugin({
-        sourceMap: false
       }),
       new webpack.optimize.ModuleConcatenationPlugin()
     ])
