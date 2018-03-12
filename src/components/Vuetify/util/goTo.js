@@ -30,33 +30,25 @@ function isVueComponent (obj) {
 }
 
 function getTargetLocation (target, settings) {
-  const documentHeight = getDocumentHeight()
-  const windowHeight = getWindowHeight()
-
   let location
 
-  switch (true) {
-    case target instanceof Element:
-      location = target.offsetTop
-      break
-    case isVueComponent(target):
-      location = target.$el.offsetTop
-      break
-    case typeof target === 'string':
-      location = document.querySelector(target).offsetTop
-      break
-    case typeof target === 'number':
-      location = target
-      break
-    default: return location
+  if (target instanceof Element) {
+    location = target.offsetTop
+  } else if (isVueComponent(target)) {
+    location = target.$el.offsetTop
+  } else if (typeof target === 'string') {
+    location = document.querySelector(target).offsetTop
+  } else if (typeof target === 'number') {
+    location = target
+  } else {
+    return undefined
   }
 
-  location = Math.max((location || 0 + settings.offset || 0), 0)
-
   return Math.round(
-    documentHeight - location < windowHeight
-      ? documentHeight - windowHeight
-      : location
+    Math.min(
+      Math.max(location + settings.offset, 0),
+      getDocumentHeight() - getWindowHeight()
+    )
   )
 }
 
