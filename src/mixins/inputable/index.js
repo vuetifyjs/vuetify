@@ -18,14 +18,12 @@ export default {
     Validatable
   ],
 
-  data () {
-    return {
-      isFocused: false,
-      tabFocused: false,
-      internalTabIndex: null,
-      lazyValue: this.value
-    }
-  },
+  data: vm => ({
+    isFocused: false,
+    tabFocused: false,
+    internalTabIndex: null,
+    lazyValue: vm.value
+  }),
 
   props: {
     appendIcon: String,
