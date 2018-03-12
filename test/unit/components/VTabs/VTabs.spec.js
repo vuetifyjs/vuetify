@@ -388,4 +388,17 @@ test('VTabs', ({ mount, shallow }) => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should update input value when changed externally', async () => {
+    const wrapper = mount(VTabs, {
+      attachToDocument: true,
+      propsData: { value: 'foo' }
+    })
+
+    await wrapper.vm.$nextTick()
+    wrapper.setProps({ value: 'bar' })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.lazyValue).toBe('bar')
+  })
 })
