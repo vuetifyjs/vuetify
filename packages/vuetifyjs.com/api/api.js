@@ -6956,6 +6956,12 @@ module.exports = {
         "source": null
       },
       {
+        "name": "scrollToolbarOffScreen",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
         "name": "tabs",
         "type": "Boolean",
         "default": "false",
