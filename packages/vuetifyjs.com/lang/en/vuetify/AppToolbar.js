@@ -42,7 +42,7 @@ export default {
     },
     {
       href: 'https://github.com/vuetifyjs/vuetify/issues',
-      text: 'Github Issue board',
+      text: 'GitHub Issue board',
       icon: 'mdi-github-face'
     },
     {
@@ -56,7 +56,7 @@ export default {
   socials: [
     {
       href: 'https://github.com/vuetifyjs/vuetify',
-      text: 'Github',
+      text: 'GitHub',
       icon: 'mdi-github-box'
     },
     {
