@@ -30,7 +30,7 @@
                 v-btn(
                   color="primary"
                   flat
-                  :to="{ name: 'store/Product', params: { id: 813199294506 }}"
+                  href="/store/product/813199294506"
                   v-if="template.price"
                 ) {{ $t('Layout.PreMadeThemes.buy') }}
                   v-icon(right) mdi-arrow-right
