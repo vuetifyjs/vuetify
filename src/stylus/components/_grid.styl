@@ -20,7 +20,7 @@
     align-items: center
     display: flex
     
-    .layout
+    > .layout
       height: 100%
       flex: 1 1 auto
 
@@ -83,7 +83,7 @@ for size, width in $grid-breakpoints
 
 .flex,
 .child-flex > *
-  flex: 1 1 auto
+  flex: 1 1 0%
 
 .align
   &-start
@@ -171,7 +171,7 @@ for size, width in $grid-breakpoints
 .d-flex,
 .d-inline-flex
   > *
-    flex: 1 1 auto !important
+    flex: 1 1 0% !important
     
 .d-block
   display: block !important
