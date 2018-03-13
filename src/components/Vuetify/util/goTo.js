@@ -18,24 +18,37 @@ function getDocumentHeight () {
   )
 }
 
-function getTargetLocation (target, settings) {
-  const documentHeight = getDocumentHeight()
-  const windowHeight = window.innerHeight || (document.documentElement || document.body).clientHeight
+function getWindowHeight () {
+  return window.innerHeight ||
+    (document.documentElement || document.body).clientHeight
+}
 
+function isVueComponent (obj) {
+  return obj &&
+    obj.constructor &&
+    obj.constructor.name === 'VueComponent'
+}
+
+function getTargetLocation (target, settings) {
   let location
 
-  if (target instanceof Element) location = target.offsetTop
-  else if (target && target.constructor && target.constructor.name === 'VueComponent') location = target.$el.offsetTop
-  else if (typeof target === 'string') location = document.querySelector(target).offsetTop
-  else if (typeof target === 'number') location = target
-  else location = undefined
-
-  location += settings.offset
+  if (target instanceof Element) {
+    location = target.offsetTop
+  } else if (isVueComponent(target)) {
+    location = target.$el.offsetTop
+  } else if (typeof target === 'string') {
+    location = document.querySelector(target).offsetTop
+  } else if (typeof target === 'number') {
+    location = target
+  } else {
+    return undefined
+  }
 
   return Math.round(
-    documentHeight - location < windowHeight
-      ? documentHeight - windowHeight
-      : location
+    Math.min(
+      Math.max(location + settings.offset, 0),
+      getDocumentHeight() - getWindowHeight()
+    )
   )
 }
 

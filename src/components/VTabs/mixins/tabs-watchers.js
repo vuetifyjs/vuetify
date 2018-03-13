@@ -22,11 +22,7 @@ export default {
     lazyValue: 'updateTabs',
     right: 'callSlider',
     value (val) {
-      const tab = this.tabs.find(tab => tab.action === val) || this.tabs[val]
-
-      if (!tab) return
-
-      this.tabClick(tab)
+      this.lazyValue = val
     },
     '$vuetify.application.left': 'onContainerResize',
     '$vuetify.application.right': 'onContainerResize',

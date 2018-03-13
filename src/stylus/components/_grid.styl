@@ -71,13 +71,14 @@ for size, width in $grid-breakpoints
     for n in (1..$grid-columns)
       .flex.{size}{n}
         flex-basis: (n / $grid-columns * 100)%
-        max-width: (n / $grid-columns * 100)%
+        flex-grow: 0
 
       .flex.order-{size}{n}
         order: n
 
     for n in (0..$grid-columns)
       .flex.offset-{size}{n}
+        // Offsets can only ever work in row layouts
         margin-left: (n / $grid-columns * 100)%
 
 .flex,
@@ -133,10 +134,12 @@ for size, width in $grid-breakpoints
   flex-grow: 1 !important
 
 .grow
+  flex-grow: 1 !important
   flex-shrink: 0 !important
 
 .shrink
   flex-grow: 0 !important
+  flex-shrink: 1 !important
 
 .scroll-y
   overflow-y: auto
