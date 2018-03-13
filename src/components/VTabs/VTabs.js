@@ -188,7 +188,7 @@ export default {
       this.scrollIntoView()
     },
     tabProxy (val) {
-      this.inputValue = val
+      this.lazyValue = val
     },
     registerItems (fn) {
       this.tabItems = fn
