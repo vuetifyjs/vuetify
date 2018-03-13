@@ -5,8 +5,10 @@ import '../../stylus/components/_text-fields.styl'
 // Components
 import VLabel from '../VLabel'
 
+// Extensions
+import VInput from '../VInput'
+
 // Mixins
-import Inputable from '../../mixins/inputable'
 import Maskable from '../../mixins/maskable'
 import Soloable from '../../mixins/soloable'
 
@@ -15,8 +17,9 @@ const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', '
 export default {
   name: 'v-text-field',
 
+  extends: VInput,
+
   mixins: [
-    Inputable,
     Maskable,
     Soloable
   ],
@@ -166,11 +169,6 @@ export default {
     this.autofocus && this.focus()
   },
 
-  render () {
-    return this.genInputGroup()
-    // return this.genInputGroup(this.genInput(), { attrs: { tabindex: false } })
-  },
-
   methods: {
     calculateInputHeight () {
       this.inputHeight = null
@@ -247,7 +245,10 @@ export default {
         data.attrs.maxlength = this.masked.length
       }
 
-      const children = [this.$createElement(tag, data)]
+      const children = [
+        this.genLabel(),
+        this.$createElement(tag, data)
+      ]
 
       this.prefix && children.unshift(this.genAffix('prefix'))
       this.suffix && children.push(this.genAffix('suffix'))

@@ -52,7 +52,7 @@ export default {
     xLarge: Boolean
   },
 
-  render (h, { props, data, parent, children = [] }) {
+  render (h, { props, data, parent, listeners = {}, children = [] }) {
     const { small, medium, large, xLarge } = props
     const sizes = { small, medium, large, xLarge }
     const explicitSize = Object.keys(sizes).find(key => sizes[key] && key)
@@ -97,6 +97,7 @@ export default {
     }
 
     const classes = Object.assign({
+      'icon--link': listeners.click || listeners['!click'],
       'icon--disabled': props.disabled,
       'icon--left': props.left,
       'icon--right': props.right,
