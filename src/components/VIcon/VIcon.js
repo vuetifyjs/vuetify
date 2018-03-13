@@ -39,7 +39,7 @@ export default {
     const { small, medium, large, xLarge } = props
     const sizes = { small, medium, large, xLarge }
     const explicitSize = Object.keys(sizes).find(key => sizes[key] && key)
-    const fontSize = (explicitSize && SIZE_MAP[explicitSize]) || props.size
+    const fontSize = (explicitSize && SIZE_MAP[explicitSize]) || (props.size !== undefined && (props.size.indexOf('px') >= 0 ? props.size : props.size + 'px'))
 
     if (fontSize) data.style = { fontSize, ...data.style }
 
