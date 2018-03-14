@@ -47,9 +47,9 @@ export default {
 
       if (typeof to === 'string') return to.replace('#', '')
       if (to === Object(to) &&
-        (to.hasOwnProperty('name') ||
-          to.hasOwnProperty('path'))
-      ) return to.name || to.path
+        (to.hasOwnProperty('path') ||
+          to.hasOwnProperty('name'))
+      ) return to.path || to.name
 
       return this
     }
