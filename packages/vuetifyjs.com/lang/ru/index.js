@@ -18,6 +18,8 @@ import Directives from './directives'
 // Mixins
 import Mixins from './mixins'
 
+import meta from './meta'
+
 export default {
   Components,
   Directives,
@@ -28,5 +30,6 @@ export default {
   Mixins,
   Motion,
   Style,
-  Vuetify
+  Vuetify,
+  meta
 }

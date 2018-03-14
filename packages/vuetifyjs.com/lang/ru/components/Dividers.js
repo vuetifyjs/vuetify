@@ -21,12 +21,12 @@ export default {
       desc: 'Подзаголовки могут быть выстроены с помощью вставных разделителей, используя то же свойство.'
     },
     dividerList: {
-      header: 'List dividers',
-      desc: 'Inset dividers and subheaders can help break up content'
+      header: 'Разделители списков',
+      desc: 'Вставка разделителей и подзаголовков поможет лучше понять ваш контент'
     },
     dividerListPortrait: {
-      header: 'Divivders in Portrait View',
-      desc: 'Create custom cards to fit any use-case'
+      header: 'Разделители в портретном представлении',
+      desc: 'Создание пользовательских карт, чтобы соответствовать любому потребительному случаю'
     }
   }],
   props: {

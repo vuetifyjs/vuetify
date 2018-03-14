@@ -1,6 +1,6 @@
 export default {
-  header: 'Движение',
-  headerText: 'Плавная анимация помогает сделать интерфейс приятным. Используя систему перехода Vue и повторно используемые функциональные компоненты, вы можете легко контролировать движение своего приложения. Большинство компонентов могут изменять свой переход с помощью свойства `transition`.',
+  header: 'Motion',
+  headerText: 'Smooth animations help make a UI feel great. Using Vue\'s transition system and re-usable functional components, you can easily control the motion of your application. Most components can have their transition altered through the <code>transition</code> prop.',
   components: [
     'v-fade-transition',
     'v-slide-x-transition',
@@ -9,46 +9,42 @@ export default {
     'v-slide-y-reverse-transition',
     'v-scale-transition'
   ],
-  examples: [
-    {
-      slideXTransitions: {
-        header: 'Переходы слайдов по X',
-        desc: 'Переходы слайдов x движутся вдоль горизонтальной оси.'
-      },
-      slideYTransitions: {
-        header: 'Переходы слайдов по Y',
-        desc: 'Анимация использует приложения `$primary-transition`.'
-      },
-      scaleTransition: {
-        header: 'Шкала перехода',
-        desc: 'Многие компоненты Vuetify содержат свойство `transition`, в котором можно указать свой собственный.'
-      },
-      fadeTransition: {
-        header: 'Переход с постепенным переходом',
-        desc: 'Другой пример перехода затухания можно найти на компоненте карусели.'
-      },
-      customOrigin: {
-        header: 'Пользовательское начало',
-        desc: 'Программно управляйте началом перехода с помощью простых свойств.'
-      }
+  examples: [{
+    slideXTransitions: {
+      header: 'Slide X transitions',
+      desc: 'Slide x transitions move along the horizontal axis.'
+    },
+    slideYTransitions: {
+      header: 'Slide Y transitions',
+      desc: 'Animations use the applications <code>$primary-transition</code>.'
+    },
+    scaleTransition: {
+      header: 'Scale transition',
+      desc: 'Many of Vuetify\'s components contain a <code>transition</code> prop which allows you to specify your own.'
+    },
+    fadeTransition: {
+      header: 'Fade transition',
+      desc: 'Another example of the fade transition can be found on the Carousel component.'
+    },
+    customOrigin: {
+      header: 'Custom Origin',
+      desc: 'Programmatically control the transition origin with a simple prop.'
     }
-  ],
-  createYourOwnHeader: 'Создайте свой собственный',
-  createYourOwnText1:
-    'Вы можете использовать вспомогательную функцию перехода Vuetify для простого создания собственных пользовательских переходов. Эта функция вернет объект, который вы можете импортировать в Vue. Использование Vue [функционального компонента](https://vuejs.org/v2/guide/render-function.html#Functional-Components) убедитесь, что ваш переход настолько эффективен, насколько это возможно. Просто импортируйте функцию:',
-  createYourOwnText2:
-    'Функция `createSimpleTransition` принимает 1 аргумент, имя. Это будет имя, с которым вы можете вписаться в свой стиль. Это пример того, как выглядит `v-fade-transition`:',
+  }],
+  createYourOwnHeader: 'Create your own',
+  createYourOwnText1: 'You can use Vuetify\'s transition helper function to easily create your own custom transitions. This function will return an object that you can import into Vue. Using Vue\'s <a href="https://vuejs.org/v2/guide/render-function.html#Functional-Components" target="_blank" rel="noopener">functional component</a> option will make sure your transition is as efficient as possible. Simply import the function:',
+  createYourOwnText2: 'The <code>createSimpleTransition</code> function accepts 1 argument, name. This will be the name that you can hook into with your style. This is an example of what <code>v-fade-transition</code> looks like:',
   toc: [
     {
-      text: 'Движение',
+      text: 'Motion',
       href: 'introduction'
     },
     {
-      text: 'Примеры',
+      text: 'Examples',
       href: 'examples'
     },
     {
-      text: 'Создайте свой собственный',
+      text: 'Create your own',
       href: 'create-your-own'
     }
   ]

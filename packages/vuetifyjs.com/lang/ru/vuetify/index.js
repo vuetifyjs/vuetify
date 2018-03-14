@@ -1,5 +1,11 @@
+import AppDrawer from './AppDrawer'
+import AppToolbar from './AppToolbar'
 import Home from './Home'
+import Store from './Store'
 
 export default {
-  Home
+  AppDrawer,
+  AppToolbar,
+  Home,
+  Store
 }

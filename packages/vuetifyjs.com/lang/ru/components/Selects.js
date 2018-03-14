@@ -70,10 +70,21 @@ export default {
     returnObject: 'Изменяет поведение выбора, чтобы вернуть объект напрямую, а не значение, указанное с помощью значения **item-value**',
     searchInput: 'При использовании свойства автозаполнения. Используйте модификатор **.sync**, чтобы отлавить пользовательский ввод из ввода автозаполнения',
     segmented: 'Создает сегментированную кнопку - [спец.](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)',
-    tags: 'Функция тегов позволяет пользователю создавать новые значения, недоступные из **items**'
+    tags: 'Функция тегов позволяет пользователю создавать новые значения, недоступные из **items**',
+    valueComparator: ''
   },
   slots: {
     item: 'Область видимости для обозначения разметки для list-tile',
+    'no-data': 'Mixins.Filterable.slots.noData',
     selection: 'Область видимости для обозначения разметки для выбранных элементов'
+  },
+  scopedSlots: {
+    item: 'Определить внешний вид элемента',
+    selection: 'Определить внешний вид пользовательского выбора'
+  },
+  events: {
+    change: 'Mixins.Input.events.change',
+    'update:error': 'Mixins.Input.events.update:error',
+    'update:searchInput': '`search-input.sync` событие'
   }
 }

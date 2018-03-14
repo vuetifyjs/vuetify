@@ -18,8 +18,8 @@ export default {
       inverted: true
     },
     customIcons: {
-      header: 'Custom icon',
-      desc: 'Expand action icon can be customized with `expand-icon` prop.'
+      header: 'Пользовательские иконки',
+      desc: 'Расширенные иконки действий можно настроить с помощью `expand-icon` prop.'
     },
     focusable: {
       header: 'Фокусируемый',
@@ -36,7 +36,11 @@ export default {
     },
     'v-expansion-panel-content': {
       hideActions: 'Скрыть иконку разворота в заголовке содержимого',
-      expandIcon: 'Set the expand action icon'
+      expandIcon: 'Установить расширенные иконки действий'
     }
+  },
+  slots: {
+    actions: 'Расширение действие заголовка',
+    header: 'Расширение содержимое заголовка'
   }
 }

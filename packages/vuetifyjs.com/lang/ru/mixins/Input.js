@@ -15,5 +15,10 @@ export default {
     tabindex: 'Tabindex ввода',
     toggleKeys: 'Массив кодов клавиш, которые будут переключаться на ввод (если он поддерживает переключение)',
     value: 'Значение ввода'
+  },
+  events: {
+    blur: 'Событие когда input blurred',
+    change: 'Событие когда select изменен путем взаимодействия с пользователем',
+    'update:error': '`update.sync` событие'
   }
 }

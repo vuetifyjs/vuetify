@@ -1,17 +1,17 @@
 export default {
   header: 'Jumbotron',
-  headerText: 'Скоро...',
+  headerText: 'Jumbotron представляет собой гибкий вызов компонента действия. Поддержка фоновых изображений, наложения градиента и многое другое.',
   components: [
     'v-jumbotron'
   ],
   examples: [{
     usage: {
-      header: 'Применение',
-      desc: 'Скоро..'
+      header: 'Использование',
+      desc: ''
     },
     color: {
-      header: 'Пользовательские цвета',
-      desc: 'Скоро...'
+      header: 'Пользовательский цвет',
+      desc: 'Применение специального фонового цвета'
     },
     gradient: {
       header: 'Градиент',
@@ -23,7 +23,7 @@ export default {
     }
   }],
   props: {
-    gradient: 'Примените градиент как фон. Если используется с **src** , наложите его',
-    src: 'img src'
+    gradient: 'Применение градиентного фона. Если используется с **src** prop, наложите его',
+    src: 'Img src'
   }
 }

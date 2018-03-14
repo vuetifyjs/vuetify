@@ -4,7 +4,7 @@ export default {
   components: ['v-badge'],
   examples: [{
     character: {
-      header: 'Xарактеристика',
+      header: 'Характеристика',
       desc: 'Любой символ может быть помещен с иконкой.'
     },
     overlap: {
@@ -17,7 +17,7 @@ export default {
     },
     icon: {
       header: 'Иконка',
-      desc: 'Иконки поддерживаюстя только Material Design.'
+      desc: 'Иконки поддерживаются только Material Design.'
     },
     visibility: {
       header: 'Видимость',

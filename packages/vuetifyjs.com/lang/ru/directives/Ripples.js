@@ -44,20 +44,8 @@ export default {
       uninverted: true
     }
   }],
-  props: [{
-    'v-ripple': [
-      {
-        name: 'class',
-        type: 'String',
-        default: 'undefined',
-        desc: 'Применяет пользовательский класс к пульсации, используемый для изменения цвета'
-      },
-      {
-        name: 'center',
-        type: 'Boolean',
-        default: 'False',
-        desc: 'Сила пульсации, исходящая от центра цели'
-      }
-    ]
-  }]
+  options: {
+    'class': '`v-ripple="{ class: \'my-class\' }"` Применяет пользовательский класс к пульсации, используемый для изменения цвета',
+    'center': '`v-ripple="{ center: true }"` Сила пульсации, исходящая от центра '
+  }
 }

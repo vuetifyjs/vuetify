@@ -9,14 +9,14 @@ export default {
     },
     iconDividers: {
       header: 'Разделители иконок',
-      desc: 'Для варианта иконок breadcrumbs могут использовать любую икону из иконкок Material Design.'
+      desc: 'Для варианта иконок breadcrumbs могут использовать любую икону из иконок Material Design.'
     }
   }],
   props: {
     divider: 'Определяет разделительный символ',
     icons: 'Указывает, что разделители являются иконками',
     justifyCenter: 'Выровнять центр breadcrumbs',
-    justifyEnd: 'Выровнить breadcrumbs в конце',
+    justifyEnd: 'Выравнять breadcrumbs в конце',
     large: 'Увеличить размер шрифта текста элемента палитры'
   }
 }
