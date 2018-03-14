@@ -9,16 +9,16 @@ export default {
   options: 'Опции',
   props: 'Свойства',
   showExample: 'Показать пример',
-  slots: 'Слоты',
+  slots: 'Slots',
   supplemental: 'Дополнительный',
-  type: 'Type',
+  type: 'Тип',
   toc: [
     {
       text: 'Введение',
       href: 'introduction'
     },
     {
-      text: 'Использование',
+      text: 'Применение',
       href: 'usage'
     },
     {
@@ -34,5 +34,10 @@ export default {
       href: 'examples'
     }
   ],
-  usage: 'Применение'
+  usage: 'Применение',
+  parameters: 'Параметры',
+  return: 'Возвращает',
+  example: 'Пример',
+  signature: 'Signature',
+  value: 'Значение'
 }

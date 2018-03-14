@@ -1,55 +1,52 @@
 export default {
-  announcementBanner: 'Все эти Нюансы, это захватывающее объявление! Или, может быть, это реклама!',
+  announcementBanner: 'Aww yisss, this is an exciting announcement! Or maybe its an advertisement!',
   heading1: 'Vuetify',
   heading1cont: 'Material Component Framework',
-  getStarted: 'Начать',
+  getStarted: 'Get Started',
   features: [
     {
       img: '/static/doc-images/feature1.svg',
-      title: 'Готовые шаблоны проекта',
-      text:
-        'Vuetify готов к работе с 8 шаблонами vue-cli. От простого html до полномасштабного SSR, все это и за считанные минуты.'
+      title: 'Ready-Made Project Scaffolding',
+      text: 'Vuetify comes ready to go with 8 pre-made vue-cli templates. From simple html to full-blown SSR you are ready to go in minutes.'
     },
     {
       img: '/static/doc-images/feature2.svg',
-      title: 'Семантические Material Components',
-      text:
-        'Огромное количество, более чем 80 компонентов, подходящих для повторного использования и спроектированных с применением семантических принципов, основанных на простых и чётких именах свойств, которые легко запоминать и использовать.'
+      title: 'Semantic Material Components',
+      text: 'Be prepared for an armada of specialized components at your disposal. With over 80 in total, there is a solution for any application.'
     },
     {
       img: '/static/doc-images/feature3.svg',
-      title: 'Яркое сообщество',
-      text:
-        'Когда вы столкнётесь с проблемой, вам понадобиться помощь. Vuetify предлагает поддержку чата в нашем растущем сообществе в Discord.'
+      title: 'Vibrant Community',
+      text: 'When you run into a roadblock, you need assistance right away. Vuetify offers chat support in our growing community on Discord.'
     }
   ],
-  checkFeaturesTitle: 'Все необходимые инструменты',
-  checkFeaturesTitleCtd: 'Построить невероятные пользовательские интерфейсы',
+  checkFeaturesTitle: 'All the Tools You Need',
+  checkFeaturesTitleCtd: 'To Build Incredible User Interfaces',
   checkFeatures: [
-    'Поддержка сообщества',
-    'Динамические темы',
-    'Поддержка SSR и PWA',
-    '8 шаблонов vue-cli'
+    'Community Chat Support',
+    'Dynamic Themes',
+    'SSR and PWA Support',
+    '8 vue-cli Templates'
   ],
   checkFeaturesCtd: [
-    '80+ компонентов Material Design',
-    'A La Carte Импорт',
-    'Переходные компоненты',
-    'Заведомо быстрый'
+    '80+ Material Design Components',
+    'A La Carte Importing',
+    'Transition Components',
+    'Blazing Fast'
   ],
   letterFromAuthor: [
-    'Привет всем,',
-    'Я знаю, что выбор архитектуры пользовательского интерфейса может быть сложной задачей - есть так много вариантов выбора, и каждый из них утверждает, что они самые лучшие. Поэтому вы должны сами решить: Который?',
-    'Я почти год назад. На выбор было множество наборов инструментов пользовательского интерфейса, но ни у кого из них не было полного комплекса, что мне было нужно, и именно поэтому я начал работать над Vuetify.',
-    'Я очень рад, что вы рассмотрели использование Vuetify в качестве следующей платформы пользовательского интерфейса. Много внимания уделялось разработке идеальной установки для принятия любых идей от идеи до релиза. Я с нетерпением жду, чтобы вы присоединились к сообществу Vuetify, и я очень рад видеть, какие невероятные интерфейсы вы создаете!'
+    'Hey there,',
+    'I know choosing a UI framework can be a daunting task -- there are so many options to choose from and every one of them claims that they are the best. So you have to decide for yourself: what are the metrics for success?',
+    'This was me almost a year ago. There were plenty of UI toolkits to choose from, but none of them had everything that I needed, and that is why I started working on Vuetify.',
+    'I am extremely humbled that you have considered using Vuetify as your next UI Framework. A lot of care has went into crafting the perfect setup for taking any idea from conception to production. I look forward to you joining the Vuetify community and am excited to see what incredible interfaces you create!'
   ],
-  authorOfVuetify: 'автор Vuetify',
+  authorOfVuetify: 'Author of Vuetify',
   support: {
-    hasVuetifyHelped: 'Помогло ли Vuetify создать потрясающее приложение?',
-    showYourSupport: 'Покажите свою поддержку Vuetify',
-    becomingAPatron: 'став покровителем'
+    hasVuetifyHelped: 'Has Vuetify helped you create an amazing application?',
+    showYourSupport: 'Show your support for Vuetify by',
+    becomingAPatron: 'becoming a patron'
   },
-  becomeSponsor: 'Стать спонсором',
-  proudlySponsoredBy: 'Patreon спонсоры',
-  callout: 'Повысьте эффективность разработки Vue и Material Design'
+  becomeSponsor: 'Become a Sponsor',
+  proudlySponsoredBy: 'Patreon Sponsors',
+  callout: 'Supercharge your development with the power of Vue and Material Design'
 }

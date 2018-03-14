@@ -66,5 +66,10 @@ export default {
     indeterminate: 'Устанавливает неопределенное состояние для checkbox',
     inputValue: 'связанное значение **v-model**',
     value: 'Устанавливает значение компонента управления выбора'
+  },
+  events: {
+    blur: 'Mixins.Input.events.blur',
+    change: 'Mixins.Input.events.change',
+    'update:error': 'Mixins.Input.events.update:error'
   }
 }

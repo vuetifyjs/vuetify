@@ -5,3 +5,4 @@ dist/
 npm-debug.log
 .idea/
 .env
+.vscode

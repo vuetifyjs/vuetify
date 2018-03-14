@@ -49,6 +49,7 @@ export default {
     origin: 'Mixins.Transitionable.props.origin',
     persistent: 'Клик снаружи не отменяет диалог',
     scrollable: 'Если установлено значение true, ожидается карта, название карты, текст карты и действия карты. Кроме того, текст карты должен иметь указанную высоту. Устанавливает перенос текста карты на переполнение',
+    transition: 'Mixins.Transitionable.props.transition',
     width: 'Устанавливает ширину диалогового окна'
   }
 }

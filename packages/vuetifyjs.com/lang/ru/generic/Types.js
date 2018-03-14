@@ -1,10 +1,10 @@
 export default {
-  Any: 'Any',
-  Array: 'Array',
+  Any: 'Любой',
+  Array: 'Массив',
   Boolean: 'Boolean',
-  Function: 'Function',
-  Number: 'Number',
+  Function: 'Функция',
+  Number: 'Число',
   Object: 'Object',
-  String: 'String',
+  String: 'Строка',
   undefined: 'undefined'
 }

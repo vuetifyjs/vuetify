@@ -20,5 +20,8 @@ export default {
     active: 'Удерживает значение текущей активной кнопки. Если кнопка не имеет значения, вместо этого будет использоваться его индекс. Эта поддержка поддерживает модификатор **.sync**.',
     absolute: 'Mixins.Positionable.props.absolute',
     fixed: 'Mixins.Positionable.props.fixed'
+  },
+  events: {
+    'update:active': 'Событие, используемое для `active.sync`'
   }
 }

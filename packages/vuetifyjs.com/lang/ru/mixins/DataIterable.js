@@ -1,27 +1,30 @@
 export default {
   props: {
-    customFilter: 'Фильтр пользовательского поиска',
-    customSort: 'Пользовательский сортировочный фильтр',
-    disableInitialSort: 'Отключить сортировку по умолчанию при первоначальном рендеринге',
-    expand: 'Обозначает таблицу как содержащую строки, которые могут расширяться',
-    filter: 'Функция, используемая для фильтрации элементов',
-    hideActions: 'Скрыть действия таблицы',
-    itemKey: 'Поле в объекте элемента, который определяет уникальный ключ',
-    items: 'Массив строк таблицы',
-    mustSort: 'Заставляет по меньшей мере один столбец всегда сортироваться, а не переключать между `сортированными по возрастанию`/`отсортированными по убыванию`/`несортированными` состояниями',
-    noResultsText: 'Отображать текст, если нет отфильтрованных результатов',
-    pagination: 'Используется для управления разбиением на страницы и сортировкой из таблицы данных. Может также использоваться для установки сортированного по умолчанию столбца',
-    rowsPerPageItems: 'Значения по умолчанию для раскрывающегося списка строк на странице',
-    rowsPerPageText: 'Строки по умолчанию для каждой страницы',
-    search: ' Модель поиска для фильтрации результатов',
-    selectAll: 'Добавляет checkbox в строке заголовка. Может быть либо String, который указывает, какой цвет применяется к кнопке, либо Boolean (который использует цвет по умолчанию)',
-    totalItems: 'Вручную задает общее количество элементов строки, что отключает встроенную сортировку и разбиение на страницы. Используется вместе со свойствами для разбивки на страницы, чтобы разрешить сортировку и разбиение на страницы на стороне сервера',
-    value: 'Выбранные элементы строки'
+    customFilter: 'Custom search filter',
+    customSort: 'Custom sort filter',
+    disableInitialSort: 'Disable default sorting on initial render',
+    expand: 'Designates the table as containing rows that are expandable',
+    filter: 'The function used for filtering items',
+    hideActions: 'Hide the table actions',
+    itemKey: 'The field in the item object that designates a unique key',
+    items: 'The array of table rows',
+    mustSort: 'Forces at least one column to always be sorted instead of toggling between **sorted ascending** / **sorted descending** / **unsorted** states',
+    noResultsText: 'Display text when there are no filtered results',
+    pagination: 'Used to control pagination and sorting from outside the data table. Can also be used to set default sorted column',
+    rowsPerPageItems: 'The default values for the rows-per-page dropdown',
+    rowsPerPageText: 'The default rows per page text',
+    search: ' The search model for filtering results',
+    selectAll: 'Adds header row select all checkbox. Can either be a String which specifies which color is applied to the button, or a Boolean (which uses the default color)',
+    totalItems: 'Manually sets total number of row items, which disables built-in sort and pagination. Used together with pagination prop to enable server-side sort and pagination',
+    value: 'Selected row items'
   },
   slots: {
-    footer: 'Слот для указания дополнительного нижнего колонтитула'
+    footer: 'Slot to specify an extra footer',
+    noData: 'Displayed when there are no items (takes precedence over `no-results`)',
+    noResults: 'Displayed when there are no filtered items'
   },
   scopedSlots: {
-    items: 'Слот для определения способа отображения элементов'
+    items: 'Slot to specify how items are rendered',
+    pageText: 'Slot to customize the page text region of the pagination controls.'
   }
 }

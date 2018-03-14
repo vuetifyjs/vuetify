@@ -1,9 +1,9 @@
 export default {
-  header: 'В чем отличия разница?',
+  header: 'В чем отличия?',
   headerText: '',
   toc: [
     {
-      text: 'В чем отличия разница?',
+      text: 'В чем отличия?',
       href: 'why-vuetify'
     },
     {

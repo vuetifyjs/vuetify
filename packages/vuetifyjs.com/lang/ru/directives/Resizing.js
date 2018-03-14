@@ -5,28 +5,12 @@ export default {
   examples: [{
     default: {
       header: 'По умолчанию',
-      desc: 'Измените размер окна и соблюдайте изменения значений.',
+      desc: 'Измените размер окна и соблюдайте изменение значений',
       uninverted: true
     }
   }],
-  params: [{
-    'v-resize': [
-      {
-        name: 'callback',
-        type: 'Function',
-        default: 'null'
-      },
-      {
-        name: 'quiet',
-        type: 'Boolean',
-        default: 'false',
-        desc: 'Не вызывать метод обратного вызова, когда директива привязана'
-      },
-      {
-        name: 'debounce',
-        type: 'Number',
-        default: '200'
-      }
-    ]
-  }]
+  options: {
+    'modifiers.quiet': '`v-resize.quiet="callback"` **Не будет** автоматически вызывать предоставленный обратный вызов при связывании.',
+    'value': '`v-resize="callback"` Функция, вызываемая при изменении размера окна'
+  }
 }
