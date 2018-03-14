@@ -47,5 +47,18 @@ export default {
       header: 'Custom colors',
       desc: 'You can also set the color using the props `color` and `background-color`.'
     }
-  }]
+  }],
+  props: {
+    active: 'Reduce the height to 0, hiding component',
+    backgroundColor: 'Background color, set to component\'s color if null',
+    backgroundOpacity: 'Background opacity, if null it defaults to 0.3 if background color is not specified or 1 otherwise',
+    bufferValue: 'The percentage value for the buffer',
+    button: 'Deprecated - Pending removal',
+    fill: 'Sets the fill color of the circle',
+    indeterminate: 'Constantly animates, use when loading progress is unknown.',
+    rotate: 'Rotates the circle start point in deg',
+    size: 'Sets the diameter of the circle in pixels',
+    value: 'The percentage value for current progress',
+    width: 'Sets the stroke of the circle in pixels'
+  }
 }
