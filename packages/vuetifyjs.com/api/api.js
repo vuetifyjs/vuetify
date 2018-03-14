@@ -1865,6 +1865,12 @@ module.exports = {
     "slots": [
       "default",
       "input"
+    ],
+    "events": [
+      {
+        "name": "save",
+        "value": "void"
+      }
     ]
   },
   "v-table-overflow": {
@@ -2464,11 +2470,7 @@ module.exports = {
       },
       {
         "name": "attach",
-        "type": [
-          "Boolean",
-          "String",
-          "Object"
-        ],
+        "type": "Any",
         "default": false,
         "source": "detachable"
       },
@@ -2600,6 +2602,15 @@ module.exports = {
         "type": "Boolean",
         "default": "false",
         "source": null
+      },
+      {
+        "name": "value",
+        "type": [
+          "Number",
+          "Array"
+        ],
+        "default": null,
+        "source": null
       }
     ],
     "mixins": [
@@ -2653,7 +2664,6 @@ module.exports = {
       "toggleable"
     ],
     "slots": [
-      "actions",
       "default",
       "header"
     ]
@@ -3515,6 +3525,9 @@ module.exports = {
       "bootable",
       "registrable-inject",
       "toggleable"
+    ],
+    "slots": [
+      "default"
     ]
   },
   "v-list-tile": {
@@ -3643,7 +3656,10 @@ module.exports = {
   },
   "v-list-tile-action-text": {
     "props": [],
-    "mixins": []
+    "mixins": [],
+    "slots": [
+      "default"
+    ]
   },
   "v-list-tile-avatar": {
     "props": [
@@ -3676,7 +3692,10 @@ module.exports = {
   },
   "v-list-tile-content": {
     "props": [],
-    "mixins": []
+    "mixins": [],
+    "slots": [
+      "default"
+    ]
   },
   "v-list-tile-sub-title": {
     "props": [],
@@ -3720,11 +3739,7 @@ module.exports = {
       },
       {
         "name": "attach",
-        "type": [
-          "Boolean",
-          "String",
-          "Object"
-        ],
+        "type": "Any",
         "default": false,
         "source": "detachable"
       },
@@ -5599,7 +5614,7 @@ module.exports = {
         "name": "color",
         "type": "String",
         "default": "primary",
-        "source": "colorable"
+        "source": null
       },
       {
         "name": "complete",
@@ -7026,11 +7041,7 @@ module.exports = {
       },
       {
         "name": "attach",
-        "type": [
-          "Boolean",
-          "String",
-          "Object"
-        ],
+        "type": "Any",
         "default": false,
         "source": "detachable"
       },
@@ -7445,14 +7456,9 @@ module.exports = {
   "v-ripple": {
     "options": [
       {
-        "name": "class",
-        "default": "undefined",
-        "type": "String"
-      },
-      {
-        "name": "center",
-        "default": "False",
-        "type": "Boolean"
+        "name": "value",
+        "default": "{}",
+        "type": "Object"
       }
     ],
     "type": "undefined"
@@ -7490,14 +7496,9 @@ module.exports = {
   "v-touch": {
     "options": [
       {
-        "name": "{ move, start, end }",
-        "default": "undefined",
-        "type": "Function"
-      },
-      {
-        "name": "{ up, down, left, right }",
-        "default": "undefined",
-        "type": "Function"
+        "name": "value",
+        "default": "{}",
+        "type": "Object"
       }
     ],
     "type": "undefined"

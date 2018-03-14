@@ -4,12 +4,12 @@ export default {
   components: [
     'v-list',
     'v-list-tile',
-    'v-list-tile-title',
-    'v-list-tile-sub-title',
-    'v-list-tile-content',
+    'v-list-group',
     'v-list-tile-action',
     'v-list-tile-avatar',
-    'v-list-group',
+    'v-list-tile-content',
+    'v-list-tile-title',
+    'v-list-tile-sub-title',
     'v-list-tile-action-text'
   ],
   examples: [{
@@ -58,9 +58,22 @@ export default {
     avatar: 'Used to set minimum tile height on a single-line list item',
     dense: 'Lowers max height of list tiles',
     expand: 'Will only collapse when explicitly closed',
+    group: 'Assign a route namespace. Accepts a string or regexp for determining active state',
+    noAction: 'Removes left padding assigned for action icons from group items',
     subheader: 'Removes top padding. Used when previous sibling is a header',
+    subGroup: 'Designate the component as nested list group',
     threeLine: 'Increases list-tile height for three lines',
     twoLine: 'Increases list-tile height for two lines',
-    inactive: 'If set, the list tile will not be rendered as a link even if it has to/href prop or @click handler'
+    inactive: 'If set, the list tile will not be rendered as a link even if it has to/href prop or @click handler',
+    value: 'Expands / Collapse list group',
+    'v-list-tile-avatar': {
+      color: 'Mixins.Colorable.props.color'
+    },
+    'v-list-group': {
+      activeClass: 'Mixins.Routable.props.activeClass',
+      appendIcon: 'Mixins.Input.props.appendIcon',
+      disabled: 'Mixins.Input.props.disabled',
+      prependIcon: 'Mixins.Input.props.prependIcon'
+    }
   }
 }
