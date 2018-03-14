@@ -2,6 +2,17 @@
 @import '../theme'
 
 v-input--text($material)
+  &__wrapper:before
+    background-color: $material.dividers
+
+  .v-input__wrapper:before
+    background-image: linear-gradient(
+      to right,
+      $material.text.disabled 0,
+      $material.text.disabled 33%,
+      transparent 0
+    )
+
   &--box
     background: $material.inputs.box
 
@@ -100,6 +111,28 @@ theme(v-input--text, "v-input--text")
     font-size: 16px
     line-height: 1
     padding: 8px 0 8px
+
+  .v-input__wrapper
+    &:before,
+    &:after
+      bottom: -1px
+      content: ''
+      left: 0
+      position: absolute
+      transition: $primary-transition
+      width: 100%
+
+    &:before
+      background-color: transparent
+      background-position: bottom
+      background-repeat: repeat-x
+      background-size: 3px 1px
+      height: 1px
+
+    &:after
+      background-color: currentColor
+      height: 2px
+      transform: scaleX(0)
 
 // textfield($material)
 //   &.input-group--text-field-box
