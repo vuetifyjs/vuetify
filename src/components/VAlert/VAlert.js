@@ -73,7 +73,7 @@ export default {
           props: {
             right: true
           }
-        }, 'cancel')
+        }, this.$vuetify.icons.cancel)
       ])
 
       children.push(close)
