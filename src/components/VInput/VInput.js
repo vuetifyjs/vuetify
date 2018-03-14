@@ -21,9 +21,9 @@ export default {
 
   data: vm => ({
     isFocused: false,
-    tabFocused: false,
     internalTabIndex: null,
-    lazyValue: vm.value
+    lazyValue: vm.value,
+    tabFocused: false
   }),
 
   props: {
@@ -80,24 +80,27 @@ export default {
     hasState () {
       return this.hasError || this.hasSuccess || this.isFocused
     },
+    inputValue: {
+      get () {
+        return this.lazyValue
+      },
+      set (val) {
+        this.lazyValue = val
+        this.$emit('input', val)
+      }
+    },
     isDirty () {
       return !!this.inputValue
     }
   },
 
   methods: {
-    groupFocus (e) {},
-    groupBlur (e) {
-      this.tabFocused = false
-    },
     genContent () {
       return this.$createElement('div', {
         staticClass: 'v-input__control'
       }, [
         this.genInputWrapper(),
-        this.genProgress(),
-        this.genMessages(),
-        this.genCounter()
+        this.genMessages()
       ])
     },
     genCounter () {
@@ -133,7 +136,7 @@ export default {
         staticClass: `v-input__icon v-input__icon--${type}`
       }, [icon])
     },
-    genInput () {
+    genDefaultSlot () {
       return this.$slots.default
     },
     genInputWrapper () {
@@ -141,8 +144,7 @@ export default {
         staticClass: 'v-input__wrapper',
         'class': this.classesColor
       }, [
-        this.genInput(),
-        this.genAppendInner()
+        this.genDefaultSlot()
       ])
     },
     genMessages () {
@@ -233,9 +235,9 @@ export default {
         click: this.onClick
       }
     }, [
-      this.genPrependOuter(),
-      this.genContent(),
-      this.genAppendOuter()
+      // this.genPrependOuter(),
+      this.genContent()
+      // this.genAppendOuter()
     ])
   }
 }

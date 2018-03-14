@@ -7,18 +7,9 @@ v-label($material)
 theme(v-label, "v-label")
 
 .v-label
-  top: calc(50% - 8px)
   font-size: 16px
   line-height: 1
   min-height: 8px
   pointer-events: none
   position: absolute
-  transform-origin: top left
   transition: .3s $transition.swing
-
-  &--active
-    top: calc(50% - 16px)
-    transform: translate(0, -18px) scale(.75)
-
-  &--single-line
-    transform: translate(0, 0)

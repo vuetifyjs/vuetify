@@ -11,51 +11,30 @@ v-input($material)
     input
       color: $material.text.disabled
 
-    .v-input__wrapper:before
-      background-image: linear-gradient(
-        to right,
-        $material.text.disabled 0,
-        $material.text.disabled 33%,
-        transparent 0
-      )
-
-  &__icon--clear
-    background-color: $material.dividers
-    color: $material.icons.active
-
-  &__wrapper
-    border-bottom: 1px solid $material.dividers
-
 theme(v-input, "v-input")
 
 .v-input
   align-items: flex-start
   display: flex
-  height: 52px
-  margin: 16px 0 8px
   text-align: left
 
-  &--has-state
-    .v-input__label
-      color: inherit
+  // &--has-state
+  //   .v-input__label
+  //     color: inherit
 
-    .icon
-      color: inherit
+  //   .icon
+  //     color: inherit
 
-    &:not(.v-input--is-loading)
-      .v-input__wrapper:after
-        transform: scaleX(1)
-
-  &--is-disabled
-    .v-input__wrapper
-      border-color: transparent
+  //   &:not(.v-input--is-loading)
+  //     .v-input__wrapper:after
+  //       transform: scaleX(1)
 
   input
     flex: 1 1 auto
     font-size: 16px
     height: 32px
     padding: 8px 0 8px
-    line-height: 32px
+    line-height: 1
     width: 100%
 
     &:focus,
@@ -109,26 +88,6 @@ theme(v-input, "v-input")
     margin-bottom: 8px
     position: relative
     width: 100%
-
-    &:before,
-    &:after
-      bottom: -1px
-      content: ''
-      height: 2px
-      left: 0
-      position: absolute
-      transition: $primary-transition
-      width: 100%
-
-    &:before
-      background-color: transparent
-      background-position: bottom
-      background-repeat: repeat-x
-      background-size: 3px 1px
-
-    &:after
-      background-color: currentColor
-      transform: scaleX(0)
 
   .progress-linear
     bottom: 8px
