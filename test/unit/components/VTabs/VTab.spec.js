@@ -188,8 +188,6 @@ test('VTab', ({ mount }) => {
     expect(wrapper.vm.action).toBe('foo')
     wrapper.setProps({ href: null, to: '/foo' })
     expect(wrapper.vm.action).toBe('/foo')
-    wrapper.setProps({ to: { path: '/bar' }})
-    expect(wrapper.vm.action).toBe('/bar')
     wrapper.setProps({ to: null })
     expect(wrapper.vm.action).toBe(wrapper.vm)
 
