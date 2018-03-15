@@ -26,7 +26,7 @@ const ICONFONT_MATERIAL = {
   name: 'Material Design',
   iconType: 'material-design',
   prefix: ['mdi', 'mdi_', 'mdi-'],
-  placement: 'class' // 'class', 'data-icon' or 'text' for inner text content
+  placement: 'auto' // 'auto', 'class', 'text' for inner text content,or 'data-icon'
 }
 
 // Maps internal Vuetify icon names to actual Font-Awesome icon names.
@@ -55,7 +55,7 @@ const ICONFONT_FONTAWESOME = {
   name: 'Font Awesome',
   iconType: 'fa',
   prefix: ['fa', 'fas', 'far', 'fal', 'fab'],
-  placement: '' // '' (auto), 'class', 'data-icon' or 'text' for inner text content
+  placement: 'auto' // 'auto', 'class', 'text' for inner text content,or 'data-icon'
 }
 
 export default function icons (iconfont = {}, icons = {}) {
