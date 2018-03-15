@@ -3,8 +3,8 @@
 // Maps internal Vuetify icon names to actual Material Design icon names.
 const ICONS_MATERIAL = {
   'cancel': 'cancel',
-  'close': 'cancel',
-  'delete': 'close',  // delete (e.g. v-chip close)
+  'close': 'close',
+  'delete': 'cancel',  // delete (e.g. v-chip close)
   'success': 'check_circle',
   'info': 'info',
   'warning': 'priority_high',
@@ -32,8 +32,8 @@ const ICONFONT_MATERIAL = {
 // Maps internal Vuetify icon names to actual Font-Awesome icon names.
 const ICONS_FONTAWESOME = {
   'cancel': 'fas fa-times-circle',
-  'close': 'fas fa-times-circle',
-  'delete': 'fas fa-times',  // delete (e.g. v-chip close)
+  'close': 'fas fa-times',
+  'delete': 'fas fa-times-circle',  // delete (e.g. v-chip close)
   'success': 'fas fa-check-circle',
   'info': 'fas fa-info-circle',
   'warning': 'fas fa-exclamation',
