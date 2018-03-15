@@ -20,7 +20,7 @@ const Vuetify = {
         dark: false,
         options: options(opts.options),
         theme: theme(opts.theme),
-        icons: icons(opts.icons)
+        icons: icons(opts.iconfont, opts.icons)
       },
       methods: {
         goTo
