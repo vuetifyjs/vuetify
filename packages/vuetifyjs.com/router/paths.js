@@ -21,6 +21,7 @@ export default [
   ['style/content', 'style/Content'],
   ['motion/transitions', 'motion/Transitions'],
   ['motion/scrolling', 'motion/Scrolling'],
+  ['components/at-a-glance', 'components/AtAGlance'],
   ['store', 'store/Index'],
   ['store/cart', 'store/Cart'],
   ['store/thank-you', 'store/ThankYou'],

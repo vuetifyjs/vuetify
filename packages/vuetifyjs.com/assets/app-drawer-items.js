@@ -62,6 +62,7 @@ export default [
     component: 'components/Doc',
     icon: 'mdi-view-dashboard',
     items: [
+      { name: 'at-a-glance', title: 'At a glance', badge: 'new' },
       { name: 'alerts', title: 'Alerts' },
       { name: 'avatars', title: 'Avatars' },
       { name: 'badges', title: 'Badges' },
@@ -73,7 +74,7 @@ export default [
       { name: 'cards', title: 'Cards' },
       { name: 'carousels', title: 'Carousels' },
       { name: 'chips', title: 'Chips' },
-      { name: 'data-iterator', title: 'Data iterator', badge: 'new' },
+      { name: 'data-iterator', title: 'Data iterator' },
       { name: 'data-tables', title: 'Data tables' },
       { name: 'dialogs', title: 'Dialogs' },
       { name: 'dividers', title: 'Dividers' },
@@ -92,7 +93,7 @@ export default [
       },
       { name: 'icons', title: 'Icons' },
       { name: 'lists', title: 'Lists' },
-      { name: 'jumbotrons', title: 'Jumbotrons', badge: 'new' },
+      { name: 'jumbotrons', title: 'Jumbotrons' },
       { name: 'menus', title: 'Menus' },
       { name: 'navigation-drawers', title: 'Navigation drawers' },
       { name: 'paginations', title: 'Paginations' },
@@ -102,8 +103,8 @@ export default [
         group: '(date-pickers|time-pickers)',
         namespace: 'components',
         items: [
-          { name: 'date-pickers', title: 'Date pickers', badge: 'updated' },
-          { name: 'time-pickers', title: 'Time pickers', badge: 'updated' }
+          { name: 'date-pickers', title: 'Date pickers' },
+          { name: 'time-pickers', title: 'Time pickers' }
         ]
       },
       { name: 'progress', title: 'Progress' },
@@ -111,8 +112,8 @@ export default [
       { name: 'snackbars', title: 'Snackbars' },
       { name: 'steppers', title: 'Steppers' },
       { name: 'subheaders', title: 'Subheaders' },
-      { name: 'tabs', title: 'Tabs', badge: 'updated' },
-      { name: 'toolbars', title: 'Toolbars', badge: 'updated' },
+      { name: 'tabs', title: 'Tabs' },
+      { name: 'toolbars', title: 'Toolbars' },
       { name: 'tooltips', title: 'Tooltips' }
     ]
   },
@@ -136,7 +137,7 @@ export default [
     icon: 'mdi-television-guide',
     items: [
       { name: 'SSR', title: 'Server side rendering' },
-      { name: 'ALaCarte', title: 'A la carte', badge: 'updated' }
+      { name: 'ALaCarte', title: 'A la carte' }
     ]
   },
   {

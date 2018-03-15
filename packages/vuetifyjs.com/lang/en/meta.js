@@ -143,6 +143,12 @@ export default {
     'description': 'Play around with the available configuring options for your next application.',
     'keywords': 'sandbox, vuetify, layout sandbox'
   },
+  'components/at-a-glance': {
+    'h1': 'At a glance',
+    'title': 'At a glance',
+    'description': 'Search the API of all Vuetify components.',
+    'keywords': 'material design components, components api, vuetify api'
+  },
   'components/alerts': {
     'h1': 'Alerts',
     'title': 'Alert Component',
