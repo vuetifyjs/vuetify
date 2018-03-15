@@ -25,48 +25,49 @@ const ICONS_MATERIAL = {
 const ICONFONT_MATERIAL = {
   name: 'Material Design',
   iconType: 'material-design',
-  prefix: ['mdi_', 'mdi-'],
+  prefix: ['mdi', 'mdi_', 'mdi-'],
   placement: 'class' // 'class', 'data-icon' or 'text' for inner text content
 }
 
 // Maps internal Vuetify icon names to actual Font-Awesome icon names.
 const ICONS_FONTAWESOME = {
-  'cancel': 'times-circle',
-  'close': 'times-circle',
-  'delete': 'times',  // delete (e.g. v-chip close)
-  'success': 'check-circle',
-  'info': 'info-circle',
-  'warning': 'exclamation',
-  'error': 'exclamation-triangle',
-  'previous': 'chevron-left',
-  'next': 'chevron-right',
-  'checked': 'check-square',
-  'unchecked': 'square',
-  'indeterminate': 'minus-square',
-  'dot': 'circle',   // for carousel
-  'sort': 'sort-up',
-  'expand': 'chevron-down',
-  'append': 'keyboard_arrow_down',
-  'subgroup': 'caret-down'
+  'cancel': 'fas fa-times-circle',
+  'close': 'fas fa-times-circle',
+  'delete': 'fas fa-times',  // delete (e.g. v-chip close)
+  'success': 'fas fa-check-circle',
+  'info': 'fas fa-info-circle',
+  'warning': 'fas fa-exclamation',
+  'error': 'fas fa-exclamation-triangle',
+  'previous': 'fas fa-chevron-left',
+  'next': 'fas fa-chevron-right',
+  'checked': 'fas fa-check-square',
+  'unchecked': 'far fa-square', // note 'far'
+  'indeterminate': 'fas fa-minus-square',
+  'dot': 'fas fa-circle',   // for carousel
+  'sort': 'fas fa-sort-up',
+  'expand': 'fas fa-chevron-down',
+  'append': 'fas fa-keyboard_arrow_down',
+  'subgroup': 'fas fa-caret-down'
 }
 
 // Provides iconfont meta configuration for Material Design icons.
 const ICONFONT_FONTAWESOME = {
   name: 'Font Awesome',
   iconType: 'fa',
-  prefix: ['fa-', 'fas-', 'far-', 'fab-'],
-  placement: 'text' // 'class', 'data-icon' or 'text' for inner text content
+  prefix: ['fa', 'fas', 'far', 'fal', 'fab'],
+  placement: '' // '' (auto), 'class', 'data-icon' or 'text' for inner text content
 }
 
 export default function icons (iconfont = {}, icons = {}) {
-  let ICONFONT_DEFAULT = ICONFONT_MATERIAL
-  let ICONS_DEFAULT = ICONS_MATERIAL
-  if (iconfont.name && iconfont.name === 'Font Awesome') {
-    ICONFONT_DEFAULT = ICONFONT_FONTAWESOME
-    ICONS_DEFAULT = ICONS_FONTAWESOME
+  let iconfontToUse = ICONFONT_MATERIAL
+  let iconsToUse = ICONS_MATERIAL
+  if ((iconfont.name && iconfont.name === 'Font Awesome') ||
+      (iconfont.iconType && iconfont.iconType === 'fa')) {
+    iconfontToUse = ICONFONT_FONTAWESOME
+    iconsToUse = ICONS_FONTAWESOME
   }
 
-  let combinedIcons = Object.assign({}, ICONS_DEFAULT, icons)
-  combinedIcons.iconfont = Object.assign({},  ICONFONT_DEFAULT, iconfont)
+  let combinedIcons = Object.assign({}, iconsToUse, icons)
+  combinedIcons.iconfont = Object.assign({},  iconfontToUse, iconfont)
   return combinedIcons
 }
