@@ -62,7 +62,7 @@ export default [
     component: 'components/Doc',
     icon: 'mdi-view-dashboard',
     items: [
-      { name: 'at-a-glance', title: 'At a glance', badge: 'new' },
+      { name: 'api-explorer', title: 'API explorer', badge: 'new' },
       { name: 'alerts', title: 'Alerts' },
       { name: 'avatars', title: 'Avatars' },
       { name: 'badges', title: 'Badges' },
