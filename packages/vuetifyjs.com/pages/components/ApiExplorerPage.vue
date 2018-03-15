@@ -3,7 +3,6 @@
     <v-layout wrap mb-5>
       <v-flex
         xs12
-        md9
         mb-5
       >
         <v-select

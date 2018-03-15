@@ -201,7 +201,10 @@
       }),
       genChildTarget (item, subItem) {
         if (subItem.href) return
-        if (item.component) {
+        if (item.component &&
+          // Quick and dirty fix
+          subItem.name !== 'api-explorer'
+        ) {
           return {
             name: item.component,
             params: {
