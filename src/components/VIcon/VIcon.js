@@ -35,7 +35,7 @@ export default {
     xLarge: Boolean
   },
 
-  render (h, { props, parent, data, children = [] }) {
+  render (h, { props, data, children = [] }) {
     const { small, medium, large, xLarge } = props
     const sizes = { small, medium, large, xLarge }
     const explicitSize = Object.keys(sizes).find(key => sizes[key] && key)
@@ -56,8 +56,6 @@ export default {
       delete data.domProps.textContent
       delete data.domProps.innerHTML
     }
-
-    // console.log('VIcon:', iconName, parent.$vuetify.icons.iconfont.name)
 
     let iconType = 'material-icons'
     // Material Icon delimiter is _
