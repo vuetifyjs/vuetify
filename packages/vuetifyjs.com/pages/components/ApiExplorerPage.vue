@@ -14,7 +14,7 @@
           chips
           return-object
           v-model="currentProxy"
-          :label="$t('Components.AtAGlance.select')"
+          :label="$t('Components.ApiExplorer.select')"
           :items="computedApi"
         >
           <template
@@ -55,9 +55,9 @@
       >
         <h3
           class="display-1"
-          v-text="$t('Components.AtAGlance.search')"
+          v-text="$t('Components.ApiExplorer.search')"
         />
-        <p v-text="$t('Components.AtAGlance.searchText')" />
+        <p v-text="$t('Components.ApiExplorer.searchText')" />
       </v-flex>
       <v-flex
         xs12

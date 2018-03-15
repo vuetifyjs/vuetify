@@ -1,5 +1,5 @@
 import Alerts from './Alerts'
-import AtAGlance from './AtAGlance'
+import ApiExplorer from './ApiExplorer'
 import Avatars from './Avatars'
 import Badges from './Badges'
 import BottomNavigation from './BottomNavigation'
@@ -42,7 +42,7 @@ import Tooltips from './Tooltips'
 
 export default {
   Alerts,
-  AtAGlance,
+  ApiExplorer,
   Avatars,
   Badges,
   BottomNavigation,
