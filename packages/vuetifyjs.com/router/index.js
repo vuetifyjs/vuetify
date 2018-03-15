@@ -33,12 +33,10 @@ export function createRouter (store) {
     }
   }
 
-
   const routes = paths.map(path => {
     return route(...path)
   })
 
-  console.log(routes)
   const router = new Router({
     base: release ? `/releases/${release}` : __dirname,
     mode: release ? 'hash' : 'history',
