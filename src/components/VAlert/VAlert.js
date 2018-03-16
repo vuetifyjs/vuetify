@@ -47,10 +47,10 @@ export default {
       if (this.icon || !this.type) return this.icon
 
       switch (this.type) {
-        case 'info': return 'info'
-        case 'error': return 'warning'
-        case 'success': return 'check_circle'
-        case 'warning': return 'priority_high'
+        case 'info': return this.$vuetify.icons.info
+        case 'error': return this.$vuetify.icons.error
+        case 'success': return this.$vuetify.icons.success
+        case 'warning': return this.$vuetify.icons.warning
       }
     }
   },

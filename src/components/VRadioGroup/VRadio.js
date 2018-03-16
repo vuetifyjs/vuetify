@@ -58,7 +58,7 @@ export default {
       return classes
     },
     icon () {
-      return this.isActive ? 'radio_button_checked' : 'radio_button_unchecked'
+      return this.isActive ? this.$vuetify.icons.rchecked : this.$vuetify.icons.runchecked
     }
   },
 

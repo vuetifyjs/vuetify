@@ -31,11 +31,11 @@ export default {
     totalVisible: [Number, String],
     nextIcon: {
       type: String,
-      default: 'chevron_right'
+      default: this.$vuetify.icons.next
     },
     prevIcon: {
       type: String,
-      default: 'chevron_left'
+      default: this.$vuetify.icons.prev
     },
     value: {
       type: Number,
