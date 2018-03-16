@@ -19,6 +19,27 @@ const ICONS_MATERIAL = {
   'subgroup': 'arrow_drop_down'
 }
 
+// Maps internal Vuetify icon names to actual icons from materialdesignicons.com
+const ICONS_MDI = {
+  'cancel': 'mdi-close-circle',
+  'close': 'mdi-close',
+  'delete': 'mdi-close-circle', // delete (e.g. v-chip close)
+  'success': 'mdi-check-circle',
+  'info': 'mdi-information',
+  'warning': 'mdi-exclamation',
+  'error': 'mdi-alert',
+  'previous': 'mdi-chevron-left',
+  'next': 'mdi-chevron-right',
+  'checked': 'mdi-checkbox-marked',
+  'unchecked': 'mdi-checkbox-blank-outline',
+  'indeterminate': 'mdi-minus-box',
+  'dot': 'mdi-circle', // for carousel
+  'sort': 'mdi-arrow-up',
+  'expand': 'mdi-chevron-down',
+  'append': 'mdi-chevron-down',
+  'subgroup': 'mdi-menu-down'
+}
+
 // Maps internal Vuetify icon names to actual Font-Awesome icon names.
 const ICONS_FONTAWESOME = {
   'cancel': 'fas fa-times-circle',
@@ -41,7 +62,13 @@ const ICONS_FONTAWESOME = {
 }
 
 export default function icons (iconfont = 'md', icons = {}) {
-  const iconSet = iconfont.toLowerCase()
-  const iconsToUse = (iconSet === 'fa') ? ICONS_FONTAWESOME : ICONS_MATERIAL
-  return Object.assign({}, iconsToUse, icons)
+  switch (iconfont.toLowerCase()) {
+    case 'fa':
+      return Object.assign({}, ICONS_FONTAWESOME, icons)
+    case 'mdi':
+      return Object.assign({}, ICONS_MDI, icons)
+    case 'md':
+    default:
+      return Object.assign({}, ICONS_MATERIAL, icons)
+  }
 }
