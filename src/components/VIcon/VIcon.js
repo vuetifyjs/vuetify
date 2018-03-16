@@ -15,13 +15,18 @@ function isFontAwesome5 (iconType) {
   return ['fas', 'far', 'fal', 'fab'].some(val => iconType.includes(val))
 }
 
+// This remaps internal names like 'icon$cancel' to the current name
+// for that icon. Note the parent component is needed for $vuetify because
+// VIcon is a functional component. This function only looks at the
+// immediate parent, so it won't remap for a nested functional components.
 function remapInternalIcon (parent, iconName) {
   if (iconName.startsWith('icon$')) {
     iconName = iconName.slice(5)
-    if (parent.$vuetify.icons.hasOwnProperty(iconName)) {
+    // Now look up 'cancel' when given 'icon$cancel':
+    if (parent && parent.$vuetify.icons.hasOwnProperty(iconName)) {
       iconName = parent.$vuetify.icons[iconName]
     } else {
-      console.log('No parent $vuetify for', iconName)
+      console.log('No parent $vuetify for icon', iconName)
     }
   }
   return iconName
@@ -69,9 +74,8 @@ export default {
       delete data.domProps.innerHTML
     }
 
-    if (parent && parent.$vuetify) {
-      iconName = remapInternalIcon(parent, iconName)
-    }
+    // Remap internal names like 'icon$cancel' to the current name for that icon
+    iconName = remapInternalIcon(parent, iconName)
 
     let iconType = 'material-icons'
     // Material Icon delimiter is _
