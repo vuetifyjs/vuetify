@@ -16,7 +16,10 @@ const ICONS_MATERIAL = {
   'sort': 'arrow_upward',
   'expand': 'keyboard_arrow_down',
   'append': 'keyboard_arrow_down',
-  'subgroup': 'arrow_drop_down'
+  'subgroup': 'arrow_drop_down',
+  'rchecked': 'radio_button_checked',
+  'runchecked': 'radio_button_unchecked',
+  'edit': 'edit'
 }
 
 // Maps internal Vuetify icon names to actual icons from materialdesignicons.com
@@ -37,7 +40,10 @@ const ICONS_MDI = {
   'sort': 'mdi-arrow-up',
   'expand': 'mdi-chevron-down',
   'append': 'mdi-chevron-down',
-  'subgroup': 'mdi-menu-down'
+  'subgroup': 'mdi-menu-down',
+  'rchecked': 'radio-button-checked',
+  'runchecked': 'radio-button-unchecked',
+  'edit': 'pencil'
 }
 
 // Maps internal Vuetify icon names to actual Font-Awesome icon names.
@@ -58,7 +64,10 @@ const ICONS_FONTAWESOME = {
   'sort': 'fas fa-sort-up',
   'expand': 'fas fa-chevron-down',
   'append': 'fas fa-keyboard_arrow_down',
-  'subgroup': 'fas fa-caret-down'
+  'subgroup': 'fas fa-caret-down',
+  'rchecked': 'fas fa-dot-circle',
+  'runchecked': 'fas fa-circle',
+  'edit': 'fas fa-edit'
 }
 
 export default function icons (iconfont = 'md', icons = {}) {
