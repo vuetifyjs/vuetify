@@ -20,7 +20,8 @@ export default {
   ],
 
   data: vm => ({
-    lazyValue: vm.value
+    lazyValue: vm.value,
+    isFocused: false
   }),
 
   props: {
@@ -57,7 +58,7 @@ export default {
     hasHint () {
       return !this.hasMessages &&
         this.hint &&
-        this.persistentHint
+        (this.persistentHint || this.isFocused)
     },
     inputValue: {
       get () {
