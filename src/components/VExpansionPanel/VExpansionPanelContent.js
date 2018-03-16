@@ -31,7 +31,7 @@ export default {
   props: {
     expandIcon: {
       type: String,
-      default: this.$vuetify.icons.expand
+      default: 'icon$expand'
     },
     hideActions: Boolean,
     ripple: {

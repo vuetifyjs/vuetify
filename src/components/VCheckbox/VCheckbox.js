@@ -39,11 +39,11 @@ export default {
     },
     icon () {
       if (this.inputIndeterminate) {
-        return this.$vuetify.icons.indeterminate
+        return 'icon$indeterminate'
       } else if (this.isActive) {
-        return this.$vuetify.icons.checked
+        return 'icon$checked'
       } else {
-        return this.$vuetify.icons.unchecked
+        return 'icon$unchecked'
       }
     }
   },

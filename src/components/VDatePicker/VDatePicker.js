@@ -77,12 +77,12 @@ export default {
     },
     nextIcon: {
       type: String,
-      default: this.$vuetify.icons.next
+      default: 'icon$next'
     },
     pickerDate: String,
     prevIcon: {
       type: String,
-      default: this.$vuetify.icons.prev
+      default: 'icon$prev'
     },
     reactive: Boolean,
     readonly: Boolean,

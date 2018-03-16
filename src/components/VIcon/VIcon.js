@@ -15,6 +15,18 @@ function isFontAwesome5 (iconType) {
   return ['fas', 'far', 'fal', 'fab'].some(val => iconType.includes(val))
 }
 
+function remapInternalIcon (parent, iconName) {
+  if (iconName.startsWith('icon$')) {
+    iconName = iconName.slice(5)
+    if (parent.$vuetify.icons.hasOwnProperty(iconName)) {
+      iconName = parent.$vuetify.icons[iconName]
+    } else {
+      console.log('No parent $vuetify for', iconName)
+    }
+  }
+  return iconName
+}
+
 export default {
   name: 'v-icon',
 
@@ -35,7 +47,7 @@ export default {
     xLarge: Boolean
   },
 
-  render (h, { props, data, children = [] }) {
+  render (h, { props, data, parent, children = [] }) {
     const { small, medium, large, xLarge } = props
     const sizes = { small, medium, large, xLarge }
     const explicitSize = Object.keys(sizes).find(key => sizes[key] && key)
@@ -55,6 +67,10 @@ export default {
       // overwrite our changes
       delete data.domProps.textContent
       delete data.domProps.innerHTML
+    }
+
+    if (parent && parent.$vuetify) {
+      iconName = remapInternalIcon(parent, iconName)
     }
 
     let iconType = 'material-icons'

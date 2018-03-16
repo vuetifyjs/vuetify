@@ -52,11 +52,11 @@ export default {
     },
     nextIcon: {
       type: String,
-      default: this.$vuetify.icons.next
+      default: 'icon$next'
     },
     prevIcon: {
       type: String,
-      default: this.$vuetify.icons.prev
+      default: 'icon$prev'
     },
     rowsPerPageItems: {
       type: Array,
