@@ -65,7 +65,7 @@ export default {
       h(VIcon, {
         staticClass: 'icon--selection-control',
         'class': {
-          'icon--checkbox': this.icon === this.$vuetify.icons.checked
+          'icon--checkbox': this.icon === 'icon$checked'
         },
         key: this.icon,
         on: Object.assign({
