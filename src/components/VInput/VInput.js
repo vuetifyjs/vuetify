@@ -138,7 +138,7 @@ export default {
           messages,
           value: this.hasMessages || this.hasHint
         }
-      }, this.$slots.messages)
+      })
     },
     genSlot (ref, location, slot) {
       if (!slot.length) return null
