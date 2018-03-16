@@ -62,6 +62,15 @@ export default {
       return this.validations.length > 0
     },
     validations () {
+      return this.validationTarget.slice(0, this.errorCount)
+    },
+    validationState () {
+      if (this.hasError) return 'error'
+      if (this.hasSuccess) return 'success'
+      if (this.hasColor) return this.color
+      return null
+    },
+    validationTarget () {
       const target = this.errorMessages.length > 0
         ? this.errorMessages
         : this.successMessages.length > 0
@@ -80,12 +89,6 @@ export default {
       } else {
         return []
       }
-    },
-    validationState () {
-      if (this.hasError) return 'error'
-      if (this.hasSuccess) return 'success'
-      if (this.hasColor) return this.color
-      return null
     }
   },
 
