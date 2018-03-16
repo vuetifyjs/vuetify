@@ -5,7 +5,7 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 ### $500+
 - [LMAX Exchange](https://www.lmax.com/)
 - [Intygrate](http://intygrate.com/)
-- [Resaleai](http://resaleai.com/)
+- [Resale AI](http://resaleai.com/)
 
 ### $250+
 - [Eikos Partners](http://www.eikospartners.com/)
