@@ -18,17 +18,6 @@ theme(v-input, "v-input")
   display: flex
   text-align: left
 
-  // &--has-state
-  //   .v-input__label
-  //     color: inherit
-
-  //   .icon
-  //     color: inherit
-
-  //   &:not(.v-input--is-loading)
-  //     .v-input__wrapper:after
-  //       transform: scaleX(1)
-
   input
     flex: 1 1 auto
     font-size: 16px
@@ -41,22 +30,12 @@ theme(v-input, "v-input")
     &:active
       outline: none
 
-  &__append-inner,
   &__append-outer,
   &__prepend-outer
     display: flex
 
-  &__append-inner
-    padding: 4px 0 4px
-
     .v-input__icon
-      margin-left: 16px
-
-  &__append-outer
-    padding: 4px 0 4px 16px
-
-  &__prepend-outer
-    padding: 4px 16px 4px 0
+      margin: 4px 16px
 
 
   &__control

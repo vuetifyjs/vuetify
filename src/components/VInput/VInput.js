@@ -1,10 +1,11 @@
+// Styles
+import '../../stylus/components/_inputs.styl'
+
 // Components
-import VCounter from '../VCounter'
 import VIcon from '../VIcon'
 import VMessages from '../VMessages'
 
 // Mixins
-import Colorable from '../../mixins/colorable'
 import Loadable from '../../mixins/loadable'
 import Themeable from '../../mixins/themeable'
 import Validatable from '../../mixins/validatable'
@@ -13,45 +14,28 @@ export default {
   name: 'v-input',
 
   mixins: [
-    Colorable,
     Loadable,
     Themeable,
     Validatable
   ],
 
   data: vm => ({
-    isFocused: false,
-    internalTabIndex: null,
-    lazyValue: vm.value,
-    tabFocused: false
+    lazyValue: vm.value
   }),
 
   props: {
     appendIcon: String,
     appendIconCb: Function,
     disabled: Boolean,
-    clearable: Boolean,
-    clearIcon: String,
-    hint: String,
+    height: [Number, String],
     hideDetails: Boolean,
-    label: String,
-    outerIcon: String,
+    hint: String,
     persistentHint: Boolean,
-    placeholder: String,
     prependIcon: String,
     prependIconCb: Function,
     readonly: Boolean,
-    required: Boolean,
-    tabindex: {
-      default: 0
-    },
-    toggleKeys: {
-      type: Array,
-      default: () => [13, 32]
-    },
-    value: {
-      required: false
-    }
+    tabindex: { default: 0 },
+    value: { required: false }
   },
 
   computed: {
@@ -61,24 +45,19 @@ export default {
     classesInput () {
       return {
         ...this.classes,
-        'v-input--is-focused': this.isFocused,
-        'v-input--is-loading': this.loading !== false,
         'v-input--is-dirty': this.isDirty,
         'v-input--is-disabled': this.disabled,
-        'v-input--has-state': this.hasState,
+        'v-input--is-focused': this.isFocused,
+        'v-input--is-loading': this.loading !== false,
         ...this.classesColor,
         'theme--light': !this.dark,
         'theme--dark': this.dark
       }
     },
-    currentColor () {
-      if (this.hasError) return 'error'
-      if (this.hasSuccess) return 'success'
-      if (this.isFocused) return this.color
-      return null
-    },
-    hasState () {
-      return this.hasError || this.hasSuccess || this.isFocused
+    hasHint () {
+      return !this.hasMessages &&
+        this.hint &&
+        this.persistentHint
     },
     inputValue: {
       get () {
@@ -103,38 +82,33 @@ export default {
         this.genMessages()
       ])
     },
-    genCounter () {
-      if (this.counter === false) return null
+    genIcon (type, cb) {
+      cb = cb || this[`${type}IconCb`]
 
-      const length = (this.inputValue || '').length
-
-      return this.$createElement(VCounter, {
+      const data = {
         props: {
-          value: `${length} / ${this.counter}`
-        }
-      })
-    },
-    genIcon (type, defaultCallback = null) {
-      const shouldClear = this.shouldClear(type)
-      const callback = shouldClear
-        ? this.clearableCallback
-        : (this[`${type}IconCb`] || defaultCallback)
-
-      const icon = this.$createElement(VIcon, {
-        props: { disabled: this.disabled },
-        on: {
+          color: this.validationState,
+          disabled: this.disabled
+        },
+        on: cb ? {
           click: e => {
-            if (!callback) return
-
+            e.preventDefault()
             e.stopPropagation()
-            callback()
+
+            cb()
           }
-        }
-      }, shouldClear ? 'clear' : this[`${type}Icon`])
+        } : null
+      }
 
       return this.$createElement('div', {
         staticClass: `v-input__icon v-input__icon--${type}`
-      }, [icon])
+      }, [
+        this.$createElement(
+          VIcon,
+          data,
+          this[`${type}Icon`]
+        )
+      ])
     },
     genDefaultSlot () {
       return this.$slots.default
@@ -142,88 +116,68 @@ export default {
     genInputWrapper () {
       return this.$createElement('div', {
         staticClass: 'v-input__wrapper',
-        'class': this.classesColor
-      }, [
-        this.genDefaultSlot()
-      ])
+        'class': this.classesColor,
+        style: {
+          height: !this.height
+            ? 'auto'
+            : `${parseInt(this.height)}px`
+        }
+      }, this.genDefaultSlot())
     },
     genMessages () {
-      let messages = []
+      if (this.hideDetails) return null
 
-      if (
-        this.hint &&
-        (this.isFocused || this.persistentHint) &&
-        !this.validations.length
-      ) {
-        messages = [this.hint]
-      } else if (this.validations.length) {
-        messages = [this.genError(this.validations[0])]
-      }
+      const messages = this.hasHint
+        ? [this.hint]
+        : this.validations
 
       return this.$createElement(VMessages, {
-        props: { messages }
+        props: {
+          color: this.validationState,
+          messages,
+          value: this.hasMessages || this.hasHint
+        }
       }, this.$slots.messages)
     },
     genSlot (ref, location, slot) {
-      // When dynamically adding a clear icon
-      // will cause a re-render and blur the
-      // input, so always generate that element
-      if (!slot.length && location !== 'inner') return
+      if (!slot.length) return null
 
       return this.$createElement('div', {
         staticClass: `v-input__${ref}-${location}`
       }, slot)
     },
-    genPrependOuter () {
+    genPrependSlot () {
       const slot = []
 
-      if (this.$slots['prepend-outer']) {
-        slot.push(this.$slots['prepend-outer'])
-      // For backwards compat
-      } else if (this.$slots['prepend-icon']) {
+      // Backwards compat
+      // TODO: Deprecate prepend-icon slot 2.0
+      if (this.$slots['prepend-icon']) {
         slot.push(this.$slots['prepend-icon'])
+      } else if (this.$slots['prepend']) {
+        slot.push(this.$slots['prepend'])
       } else if (this.prependIcon) {
         slot.push(this.genIcon('prepend'))
       }
 
       return this.genSlot('prepend', 'outer', slot)
     },
-    genAppendInner () {
+    genAppendSlot () {
       const slot = []
 
-      if (this.$slots['append-inner']) {
-        slot.push(this.$slots['append-inner'])
-        // For backwards compat
-      } else if (this.$slots['append-icon']) {
-        slot.push(this.$slots['append-icon'])
-      } else if (this.clearable && this.isDirty) {
-        const icon = this.clearIcon ? 'clear' : 'append'
-        slot.push(this.genIcon(icon))
-      }
-
-      return this.genSlot('append', 'inner', slot)
-    },
-    genAppendOuter () {
-      const slot = []
-
-      if (this.$slots['append-outer']) {
-        slot.push(this.$slots['append-outer'])
-      } else if (this.outerIcon) {
-        slot.push(this.genIcon('outer'))
+      // Append icon for text field was really
+      // an appended inner icon, v-text-field
+      // will overwrite this method in order to obtain
+      // backwards compat
+      if (this.$slots['append']) {
+        slot.push(this.$slots['append'])
+      } else if (this.appendIcon) {
+        slot.push(this.genIcon('append'))
       }
 
       return this.genSlot('append', 'outer', slot)
     },
-    hasIcon (icon) {
-      return this[`${icon}Icon`] || this.$slots[`${icon}Icon`]
-    },
-    onClick () {
-      this.$emit('click')
-    },
-    shouldClear (type) {
-      return (type === 'append' || type === 'clear') &&
-        this.clearable &&
-        this.isDirty
+    onClick (e) {
+      this.$emit('click', e)
     }
   },
 
@@ -231,13 +185,11 @@ export default {
     return h('div', {
       staticClass: 'v-input',
       'class': this.classesInput,
-      on: {
-        click: this.onClick
-      }
+      on: { click: this.onClick }
     }, [
-      // this.genPrependOuter(),
-      this.genContent()
-      // this.genAppendOuter()
+      this.genPrependSlot(),
+      this.genContent(),
+      this.genAppendSlot()
     ])
   }
 }
