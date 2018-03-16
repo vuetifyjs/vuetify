@@ -33,14 +33,17 @@ export default {
 
       return this.$createElement('transition-group', {
         staticClass: 'v-messages__wrapper',
-        props: { tag: 'div' }
+        props: {
+          name: 'slide-y-transition',
+          tag: 'div'
+        }
       }, children)
     },
-    genMessage (message) {
+    genMessage (key) {
       return this.$createElement('div', {
         staticClass: 'v-messages__message',
-        key: message
-      }, message)
+        key
+      }, key)
     }
   },
 
