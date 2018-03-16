@@ -1,5 +1,4 @@
 // Styles
-import '../../stylus/components/_inputable.styl'
 import '../../stylus/components/_text-fields.styl'
 
 // Components

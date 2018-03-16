@@ -1,52 +1,91 @@
 import { consoleError } from '../util/console'
 
+// Mixins
+import Colorable from './colorable'
+
 export default {
   name: 'validatable',
 
-  data () {
-    return {
-      errorBucket: [],
-      hasFocused: false,
-      hasInput: false,
-      shouldValidate: false,
-      valid: false
-    }
-  },
+  mixins: [
+    Colorable
+  ],
+
+  data: vm => ({
+    errorBucket: [],
+    hasColor: false,
+    hasFocused: false,
+    hasInput: false,
+    shouldValidate: false,
+    valid: false
+  }),
 
   props: {
-    error: {
-      type: Boolean
+    error: Boolean,
+    errorCount: {
+      type: [Number, String],
+      default: 1
     },
     errorMessages: {
       type: [String, Array],
       default: () => []
     },
+    messages: {
+      type: [String, Array],
+      default: () => []
+    },
+    persistentHint: Boolean,
     rules: {
       type: Array,
+      default: () => []
+    },
+    success: Boolean,
+    successMessages: {
+      type: [String, Array],
       default: () => []
     },
     validateOnBlur: Boolean
   },
 
   computed: {
+    hasError () {
+      return this.errorMessages.length > 0 ||
+        this.errorBucket.length > 0 ||
+        this.error
+    },
+    // TODO: Add logic that allows the user to enable based
+    // upon a good validation
+    hasSuccess () {
+      return this.successMessages.length > 0 ||
+        this.success
+    },
+    hasMessages () {
+      return this.validations.length > 0
+    },
     validations () {
-      if (!Array.isArray(this.errorMessages)) {
-        return [this.errorMessages]
-      } else if (this.errorMessages.length > 0) {
-        return this.errorMessages
+      const target = this.errorMessages.length > 0
+        ? this.errorMessages
+        : this.successMessages.length > 0
+          ? this.successMessages
+          : this.messages
+
+      // String
+      if (!Array.isArray(target)) {
+        return [target]
+      // Array with items
+      } else if (target.length > 0) {
+        return target
+      // Currently has validation
       } else if (this.shouldValidate) {
         return this.errorBucket
       } else {
         return []
       }
     },
-    hasSuccess () {
-      return false
-    },
-    hasError () {
-      return this.validations.length > 0 ||
-        this.errorMessages.length > 0 ||
-        this.error
+    validationState () {
+      if (this.hasError) return 'error'
+      if (this.hasSuccess) return 'success'
+      if (this.hasColor) return this.color
+      return null
     }
   },
 
@@ -88,7 +127,7 @@ export default {
     }
   },
 
-  mounted () {
+  beforeMount () {
     this.shouldValidate = !!this.error
     this.validate()
   },

@@ -13,6 +13,9 @@ export default {
     messages: {
       type: Array,
       default: () => ([])
+    },
+    value: {
+      default: true
     }
   },
 
@@ -24,13 +27,13 @@ export default {
 
   methods: {
     genChildren () {
+      if (!this.value) return null
+
       const children = this.messages.map(m => this.genMessage(m))
 
       return this.$createElement('transition-group', {
         staticClass: 'v-messages__wrapper',
-        props: {
-          tag: 'div'
-        }
+        props: { tag: 'div' }
       }, children)
     },
     genMessage (message) {
