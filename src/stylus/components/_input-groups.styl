@@ -47,9 +47,6 @@ input-group($material)
       .input-group__selections__comma
         color: $material.text.disabled
 
-    .input-group__details:before
-      background-color: $material.input-bottom-line
-
     &:not(.input-group--focused):not(.input-group--disabled)
       .input-group__input
         .input-group__append-icon,
@@ -267,18 +264,22 @@ theme(input-group, "input-group")
       transition: .3s $transition.fast-out-slow-in
 
     &:after
+      border-style: solid
+      border-color: currentColor
+      border-width: medium 0 0 0
       background-color: currentColor
       color: inherit
       top: 0
-      height: 2px
       transform: scaleX(0)
       transform-origin: center center 0
       width: 100%
       z-index: 1
 
     &:before
+      border-style: solid
+      border-color: $material.input-bottom-line
+      border-width: thin 0 0 0
       top: 0
-      height: 1px
       width: 100%
       z-index: 0
 
