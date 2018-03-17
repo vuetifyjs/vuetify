@@ -288,7 +288,7 @@
 
         const end = { break: true }
 
-        supporters.splice(2, 0, end)
+        supporters.splice(3, 0, end)
 
         return supporters
       }
