@@ -11,6 +11,12 @@ export default {
       size: 70,
       href: 'http://intygrate.com/',
       src: 'backers/intygrate.png'
+    },
+    {
+      title: 'ResaleAI',
+      size: 70,
+      href: 'http://resaleai.com/',
+      src: 'backers/resaleai_logo_blue.svg'
     }
   ],
   palladium: [
