@@ -98,8 +98,10 @@ test('VTextField.js', ({ mount }) => {
   it('should not display counter when set to false', async () => {
     const wrapper = mount(VTextField, {
       propsData: {
-        counter: true,
-        max: 50
+        counter: true
+      },
+      attrs: {
+        maxlength: 50
       }
     })
 
@@ -474,26 +476,6 @@ test('VTextField.js', ({ mount }) => {
     await wrapper.vm.$nextTick()
 
     expect(input.element.value).toBe('1,2')
-  })
-
-  it('should have the correct count', () => {
-    const wrapper = mount(VTextField, {
-      attachToDocument: true,
-      propsData: {
-        counter: 10,
-        value: 'foo'
-      }
-    })
-
-    expect(wrapper.vm.count).toBe('3 / 10')
-
-    wrapper.setProps({ value: null })
-
-    expect(wrapper.vm.count).toBe('0 / 10')
-
-    wrapper.setProps({ counter: false })
-
-    expect(wrapper.vm.count).toBe('0 / 25')
   })
 
   it('should autofocus', async () => {

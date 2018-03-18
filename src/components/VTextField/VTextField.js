@@ -85,17 +85,6 @@ export default {
         'v-input--text--box': (this.box || this.solo)
       }
     },
-    count () {
-      let inputLength
-      if (this.inputValue) inputLength = this.inputValue.toString().length
-      else inputLength = 0
-
-      return `${inputLength} / ${this.counterLength}`
-    },
-    counterLength () {
-      const parsedLength = parseInt(this.counter, 10)
-      return isNaN(parsedLength) ? 25 : parsedLength
-    },
     inputValue: {
       get () {
         return this.lazyValue
@@ -196,10 +185,13 @@ export default {
     genCounter () {
       if (this.counter === false) return null
 
+      const value = (this.inputValue || '').length
+      const max = this.counter === true ? this.$attrs.maxlength : this.counter
+
       return this.$createElement(VCounter, {
         props: {
-          value: (this.inputValue || '').length,
-          max: this.counter === true ? null : this.counter
+          value,
+          max
         }
       })
     },
