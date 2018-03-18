@@ -5,7 +5,7 @@ test('VMessages.js', ({ mount }) => {
   it('should have a default array', () => {
     const wrapper = mount(VMessages)
 
-    expect(Array.isArray(wrapper.vm.messages)).toBe(true)
+    expect(Array.isArray(wrapper.vm.value)).toBe(true)
   })
 
   it('should show messages', () => {
@@ -17,9 +17,8 @@ test('VMessages.js', ({ mount }) => {
 
     expect(wrapper.html()).toMatchSnapshot()
 
-    wrapper.setProps({ value: false })
+    wrapper.setProps({ value: [] })
 
-    expect(wrapper.vm.genChildren()).toBe(null)
     expect(wrapper.html()).toMatchSnapshot()
   })
 })
