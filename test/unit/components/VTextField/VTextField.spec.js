@@ -103,14 +103,14 @@ test('VTextField.js', ({ mount }) => {
       }
     })
 
-    expect(wrapper.find('.input-group__counter')[0]).not.toBe(undefined)
+    expect(wrapper.find('.v-counter')[0]).not.toBe(undefined)
     expect(wrapper.html()).toMatchSnapshot()
 
     wrapper.setProps({ counter: false })
     await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect(wrapper.find('.input-group__counter')[0]).toBe(undefined)
+    expect(wrapper.find('.v-counter')[0]).toBe(undefined)
   })
 
   it('should have readonly attribute', () => {
