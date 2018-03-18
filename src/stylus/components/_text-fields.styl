@@ -17,7 +17,18 @@ theme(v-input--text, "v-input--text")
   &__suffix
     height: 32px
     line-height: 18px
+
+  &__prefix
     padding: 8px 4px 8px 0
+
+  &__suffix
+    padding: 8px 0 8px 4px
+
+  .v-counter
+    bottom: -20px
+    position: absolute
+    right: 0
+    white-space: nowrap
 
   .v-label
     top: calc(50% - 7px)
@@ -38,7 +49,8 @@ theme(v-input--text, "v-input--text")
 
   .v-input__append-inner
     display: inline-flex
-    margin-bottom: 4px
+    padding: 4px 0
+    margin-left: 8px
 
   .v-input__wrapper
     &:before,
@@ -57,9 +69,6 @@ theme(v-input--text, "v-input--text")
       background-color: currentColor
       height: 2px
       transform: scaleX(0)
-
-
-
 
 // v-input--text($material)
 //   &__wrapper:before

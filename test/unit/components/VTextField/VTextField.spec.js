@@ -95,7 +95,7 @@ test('VTextField.js', ({ mount }) => {
     expect(wrapper.data().shouldValidate).toEqual(false)
   })
 
-  it.skip('should not display counter when set to false', async () => {
+  it('should not display counter when set to false', async () => {
     const wrapper = mount(VTextField, {
       propsData: {
         counter: true,
@@ -146,7 +146,7 @@ test('VTextField.js', ({ mount }) => {
     expect(input).toHaveBeenCalledWith(null)
   })
 
-  it.skip('should not clear input if not clearable and has appended icon (with callback)', async () => {
+  it('should not clear input if not clearable and has appended icon (with callback)', async () => {
     const appendIconCb = jest.fn()
     const wrapper = mount(VTextField, {
       propsData: {
@@ -156,14 +156,14 @@ test('VTextField.js', ({ mount }) => {
       }
     })
 
-    const icon = wrapper.find('.input-group__append-icon')[0]
+    const icon = wrapper.find('.v-input__icon--append .icon')[0]
     icon.trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.inputValue).toBe('foo')
     expect(appendIconCb.mock.calls).toHaveLength(1)
   })
 
-  it.skip('should not clear input if not clearable and has appended icon (without callback)', async () => {
+  it('should not clear input if not clearable and has appended icon (without callback)', async () => {
     const wrapper = mount(VTextField, {
       propsData: {
         value: 'foo',
@@ -171,7 +171,7 @@ test('VTextField.js', ({ mount }) => {
       }
     })
 
-    const icon = wrapper.find('.input-group__append-icon')[0]
+    const icon = wrapper.find('.v-input__icon--append .icon')[0]
     icon.trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.inputValue).toBe('foo')
@@ -250,7 +250,7 @@ test('VTextField.js', ({ mount }) => {
     expect(change.mock.calls).toHaveLength(1)
   })
 
-  it.skip('should not make prepend icon clearable', () => {
+  it('should not make prepend icon clearable', () => {
     const wrapper = mount(VTextField, {
       propsData: {
         prependIcon: 'check',
@@ -260,7 +260,7 @@ test('VTextField.js', ({ mount }) => {
       }
     })
 
-    const prepend = wrapper.find('.input-group__prepend-icon')[0]
+    const prepend = wrapper.find('.v-input__icon--append .icon')[0]
     expect(prepend.text()).toBe('check')
     expect(prepend.element.classList).not.toContain('input-group__icon-cb')
   })
@@ -291,7 +291,7 @@ test('VTextField.js', ({ mount }) => {
     expect(change.mock.calls).toHaveLength(0)
   })
 
-  it.skip('should render component with async loading and match snapshot', () => {
+  it('should render component with async loading and match snapshot', () => {
     const wrapper = mount(VTextField, {
       propsData: {
         loading: true
@@ -301,7 +301,7 @@ test('VTextField.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it.skip('should render component with async loading and custom progress and match snapshot', () => {
+  it('should render component with async loading and custom progress and match snapshot', () => {
     const progress = Vue.component('test', {
       render (h) {
         return h(VProgressLinear, {

@@ -2,6 +2,7 @@
 import '../../stylus/components/_text-fields.styl'
 
 // Components
+import VCounter from '../VCounter'
 import VLabel from '../VLabel'
 
 // Extensions
@@ -190,6 +191,17 @@ export default {
 
       return this.genSlot('append', 'outer', slot)
     },
+    genCounter () {
+      if (this.counter === false) return null
+
+      const length = (this.inputValue || '').length
+
+      return this.$createElement(VCounter, {
+        props: {
+          value: `${length} / ${this.counter}`
+        }
+      })
+    },
     genLabel () {
       if (this.isDirty && this.isSingle) return null
 
@@ -215,12 +227,12 @@ export default {
     genIconSlot () {
       const slot = []
 
-      if (this.clearable && this.isDirty) {
+      if (this.appendIcon) {
+        slot.push(this.genIcon('append'))
+      } else if (this.clearable && this.isDirty) {
         slot.push(this.genIcon('clear',
           this.clearableCallback || this.clearIconCb
         ))
-      } else if (this.appendIcon) {
-        slot.push(this.genIcon('append'))
       }
 
       return this.genSlot('append', 'inner', slot)
@@ -277,7 +289,9 @@ export default {
         this.prefix ? this.genAffix('prefix') : null,
         this.genInput(),
         this.suffix ? this.genAffix('suffix') : null,
-        this.genIconSlot()
+        this.genIconSlot(),
+        this.genCounter(),
+        this.genProgress()
       ]
     },
     genAffix (type) {
