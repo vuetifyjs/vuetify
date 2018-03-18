@@ -123,31 +123,6 @@ export default {
         }
       })
     },
-    genIcon (type, defaultCallback = null) {
-      const shouldClear = this.shouldClear(type)
-      const callback = shouldClear
-        ? this.clearableCallback
-        : (this[`${type}IconCb`] || defaultCallback)
-
-      const icon = this.$createElement('v-icon', {
-        'class': {
-          'v-icon--clickable': callback
-        },
-        props: { disabled: this.disabled },
-        on: {
-          click: e => {
-            if (!callback) return
-
-            e.stopPropagation()
-            callback()
-          }
-        }
-      }, shouldClear ? 'clear' : this[`${type}Icon`])
-
-      return this.$createElement('div', {
-        staticClass: `v-input__icon v-input__icon--${type}`
-      }, [icon])
-    },
     genInputWrapper () {
       return this.$createElement('div', {
         staticClass: 'v-input__wrapper',
@@ -189,6 +164,30 @@ export default {
       return this.$createElement(VMessages, {
         props: { messages }
       }, this.$slots.messages)
+    },
+    genIcon (type, defaultCallback = null) {
+      if (!this.hasIcon(type)) return null
+
+      const shouldClear = this.shouldClear(type)
+      const callback = shouldClear
+        ? this.clearableCallback
+        : (this[`${type}IconCb`] || defaultCallback)
+
+      const icon = this.$createElement(VIcon, {
+        props: { disabled: this.disabled },
+        on: {
+          click: e => {
+            if (!callback) return
+
+            e.stopPropagation()
+            callback()
+          }
+        }
+      }, shouldClear ? 'clear' : this[`${type}Icon`])
+
+      return this.$createElement('div', {
+        staticClass: `v-input__icon v-input__icon--${type}`
+      }, [icon])
     },
     hasIcon (icon) {
       return this[`${icon}Icon`] || this.$slots[`${icon}Icon`]
