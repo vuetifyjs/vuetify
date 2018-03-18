@@ -290,9 +290,16 @@ export default {
         this.genInput(),
         this.suffix ? this.genAffix('suffix') : null,
         this.genIconSlot(),
-        this.genCounter(),
         this.genProgress()
       ]
+    },
+    genMessages () {
+      return this.$createElement('div', {
+        staticClass: 'v-input--text__details'
+      }, [
+        VInput.methods.genMessages.call(this),
+        this.genCounter()
+      ])
     },
     genAffix (type) {
       return this.$createElement('div', {
