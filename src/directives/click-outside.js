@@ -8,7 +8,7 @@ function directive (e, el, binding) {
 
   // If no closeConditional was supplied assign a default
   const isActive = (binding.args.closeConditional || closeConditional)
-
+  const stopPropagation = binding.args.stopPropagationOnClickOutside || false
   // The include element callbacks below can be expensive
   // so we should avoid calling them when we're not active.
   // Explicitly check for false to allow fallback compatibility
@@ -35,9 +35,12 @@ function directive (e, el, binding) {
   // Toggleable can return true if it wants to deactivate.
   // Note that, because we're in the capture phase, this callback will occure before
   // the bubbling click event on any outside elements.
-  !clickedInEls(e, elements) && setTimeout(() => {
-    isActive(e) && binding.value()
-  }, 0)
+  if (!clickedInEls(e, elements)) {
+    setTimeout(() => {
+      isActive(e) && binding.value()
+    }, 0)
+    stopPropagation && e.stopPropagation()
+  }
 }
 
 function clickedInEls (e, elements) {
