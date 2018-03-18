@@ -2,115 +2,29 @@
 @import '../theme'
 
 v-input--text($material)
-  &__wrapper:before
-    background-color: $material.dividers
-
-  .v-input__wrapper:before
-    background-image: linear-gradient(
-      to right,
-      $material.text.disabled 0,
-      $material.text.disabled 33%,
-      transparent 0
-    )
-
-  &--box
-    background: $material.inputs.box
-
-  &--solo
-    background: $material.cards
-
-  &__prefix,
-  &__suffix
-    color: $material.text.secondary
+  &:not(.v-input--has-state)
+    .v-input__wrapper:before
+      background-color: $material.dividers
 
 theme(v-input--text, "v-input--text")
 
 .v-input--text
-  .v-label--active
-    transform: translate(0, -10px) scale(.75)
+  .v-label
+    top: calc(50% - 7px)
+    transform-origin: top left
 
-  &--prefix
-    &:not(.v-input--text--solo)
-      .v-label
-        left: 14px
+  &.v-input--is-focused,
+  &.v-input--is-dirty
+    .v-label
+      transform: translateY(-19px) scale(0.75)
 
-  &--prefix
-    &.v-input--is-dirty,
-    &.v-input--is-focused
-      &:not(.v-input--text--single-line)
-        .v-label
-          left: 0
-
-  &.v-input--text--box
-    border-radius: $card-border-radius
-    cursor: text
-    margin: 16px 0 28px
-    position: relative
-    elevation(2)
-
-    .v-input__wrapper
-      align-items: center
-      border-bottom: none !important
-      height: 52px
-      padding: 0 16px
-
-    .v-input__append-outer,
-    .v-input__prepend-outer
-      align-self: center
-
-    .v-label--active
-      transform: scale(0.75)
-
-    input
-      align-self: flex-end
-
-    &:after
-      background-color: currentColor
-      border-bottom-left-radius: $card-border-radius
-      border-bottom-right-radius: $card-border-radius
-      bottom: -1px
-      content: ''
-      height: 2px
-      left: 0
-      position: absolute
-      transition: $primary-transition
-      transform: scaleX(0)
-      width: 100%
-
-    .v-input__wrapper
-      &:after
-        display: none
-
-    .v-input__append-inner,
-    .v-input__append-outer
-      padding-right: 16px
-
-    .v-input__prepend-outer
-      padding-left: 16px
-
-      + .v-input__control .v-input__wrapper
-        padding: 0
-
-    &.v-input--is-focused:after
+  &.v-input--is-focused
+    .v-input__wrapper:after
       transform: scaleX(1)
 
-  &.v-input--text--solo
-    input
-      border-bottom: 1px solid transparent // Input not lining up with label
-      height: 100%
-
-    &:after
-      display: none
-
-  &__prefix
-    margin-right: 4px
-
-  &__prefix,
-  &__suffix
-    height: 32px
-    font-size: 16px
-    line-height: 1
-    padding: 8px 0 8px
+  &.v-input--has-state
+    .v-input__wrapper:before
+      background-color: currentColor
 
   .v-input__wrapper
     &:before,
@@ -123,16 +37,148 @@ theme(v-input--text, "v-input--text")
       width: 100%
 
     &:before
-      background-color: transparent
-      background-position: bottom
-      background-repeat: repeat-x
-      background-size: 3px 1px
       height: 1px
 
     &:after
       background-color: currentColor
       height: 2px
       transform: scaleX(0)
+
+
+
+
+// v-input--text($material)
+//   &__wrapper:before
+//     background-color: $material.dividers
+
+//   .v-input__wrapper:before
+//     background-image: linear-gradient(
+//       to right,
+//       $material.text.disabled 0,
+//       $material.text.disabled 33%,
+//       transparent 0
+//     )
+
+//   &--box
+//     background: $material.inputs.box
+
+//   &--solo
+//     background: $material.cards
+
+//   &__prefix,
+//   &__suffix
+//     color: $material.text.secondary
+
+// theme(v-input--text, "v-input--text")
+
+// .v-input--text
+//   .v-label--active
+//     transform: translate(0, -10px) scale(.75)
+
+//   &--prefix
+//     &:not(.v-input--text--solo)
+//       .v-label
+//         left: 14px
+
+//   &--prefix
+//     &.v-input--is-dirty,
+//     &.v-input--is-focused
+//       &:not(.v-input--text--single-line)
+//         .v-label
+//           left: 0
+
+//   &.v-input--text--box
+//     border-radius: $card-border-radius
+//     cursor: text
+//     margin: 16px 0 28px
+//     position: relative
+//     elevation(2)
+
+//     .v-input__wrapper
+//       align-items: center
+//       border-bottom: none !important
+//       height: 52px
+//       padding: 0 16px
+
+//     .v-input__append-outer,
+//     .v-input__prepend-outer
+//       align-self: center
+
+//     .v-label--active
+//       transform: scale(0.75)
+
+//     input
+//       align-self: flex-end
+
+//     &:after
+//       background-color: currentColor
+//       border-bottom-left-radius: $card-border-radius
+//       border-bottom-right-radius: $card-border-radius
+//       bottom: -1px
+//       content: ''
+//       height: 2px
+//       left: 0
+//       position: absolute
+//       transition: $primary-transition
+//       transform: scaleX(0)
+//       width: 100%
+
+//     .v-input__wrapper
+//       &:after
+//         display: none
+
+//     .v-input__append-inner,
+//     .v-input__append-outer
+//       padding-right: 16px
+
+//     .v-input__prepend-outer
+//       padding-left: 16px
+
+//       + .v-input__control .v-input__wrapper
+//         padding: 0
+
+//     &.v-input--is-focused:after
+//       transform: scaleX(1)
+
+//   &.v-input--text--solo
+//     input
+//       border-bottom: 1px solid transparent // Input not lining up with label
+//       height: 100%
+
+//     &:after
+//       display: none
+
+//   &__prefix
+//     margin-right: 4px
+
+//   &__prefix,
+//   &__suffix
+//     height: 32px
+//     font-size: 16px
+//     line-height: 1
+//     padding: 8px 0 8px
+
+//   .v-input__wrapper
+//     &:before,
+//     &:after
+//       bottom: -1px
+//       content: ''
+//       left: 0
+//       position: absolute
+//       transition: $primary-transition
+//       width: 100%
+
+//     &:before
+//       background-color: transparent
+//       background-position: bottom
+//       background-repeat: repeat-x
+//       background-size: 3px 1px
+//       height: 1px
+
+//     &:after
+//       background-color: currentColor
+//       height: 2px
+//       transform: scaleX(0)
 
 // textfield($material)
 //   &.input-group--text-field-box
