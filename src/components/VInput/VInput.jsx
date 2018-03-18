@@ -46,6 +46,7 @@ export default {
     classesInput () {
       return {
         ...this.classes,
+        'v-input': true,
         'v-input--has-state': this.hasState,
         'v-input--is-label-active': this.isLabelActive,
         'v-input--is-disabled': this.disabled,
@@ -80,12 +81,12 @@ export default {
 
   methods: {
     genContent () {
-      return this.$createElement('div', {
-        staticClass: 'v-input__control'
-      }, [
-        this.genInputWrapper(),
-        this.genMessages()
-      ])
+      return (
+        <div class='v-input__control'>
+          {this.genInputWrapper()}
+          {this.genMessages()}
+        </div>
+      )
     },
     genIcon (type, cb) {
       cb = cb || this[`${type}IconCb`]
@@ -105,29 +106,28 @@ export default {
         } : null
       }
 
-      return this.$createElement('div', {
-        staticClass: `v-input__icon v-input__icon--${type}`
-      }, [
-        this.$createElement(
-          VIcon,
-          data,
-          this[`${type}Icon`]
-        )
-      ])
+      return (
+        <div class={`v-input__icon v-input__icon--${type}`}>
+          <VIcon {...data}>{this[`${type}Icon`]}</VIcon>
+        </div>
+      )
     },
     genDefaultSlot () {
       return this.$slots.default
     },
     genInputWrapper () {
-      return this.$createElement('div', {
-        staticClass: 'v-input__wrapper',
-        'class': this.classesColor,
-        style: {
-          height: !this.height
-            ? 'auto'
-            : `${parseInt(this.height)}px`
-        }
-      }, this.genDefaultSlot())
+      return (
+        <div
+          class={['v-input__wrapper', this.classesColor]}
+          style={{
+            height: !this.height
+              ? 'auto'
+              : `${parseInt(this.height)}px`
+          }}
+        >
+          {this.genDefaultSlot()}
+        </div>
+      )
     },
     genMessages () {
       if (this.hideDetails) return null
@@ -136,12 +136,12 @@ export default {
         ? [this.hint]
         : this.validations
 
-      return this.$createElement(VMessages, {
-        props: {
-          color: this.hasHint ? '' : this.validationState,
-          value: (this.hasMessages || this.hasHint) ? messages : []
-        }
-      })
+      return (
+        <VMessages
+          color={this.hasHint ? '' : this.validationState}
+          value={(this.hasMessages || this.hasHint) ? messages : []}
+        />
+      )
     },
     genSlot (ref, location, slot) {
       if (!slot.length) return null
@@ -185,15 +185,13 @@ export default {
     }
   },
 
-  render (h) {
-    return h('div', {
-      staticClass: 'v-input',
-      'class': this.classesInput,
-      on: { click: this.onClick }
-    }, [
-      this.genPrependSlot(),
-      this.genContent(),
-      this.genAppendSlot()
-    ])
+  render () {
+    return (
+      <div class={this.classesInput} onClick={this.onClick}>
+        {this.genPrependSlot()}
+        {this.genContent()}
+        {this.genAppendSlot()}
+      </div>
+    )
   }
 }

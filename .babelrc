@@ -6,6 +6,7 @@
         ["stage-2"]
       ],
       "plugins": [
+        "transform-vue-jsx",
         "transform-runtime",
         ["transform-define", "./build/babel-transform-define.js"],
         ["module-resolver", {
@@ -26,6 +27,7 @@
         ["stage-2"]
       ],
       "plugins": [
+        "transform-vue-jsx",
         "./build/babel-transform-stylus-paths.js",
         ["transform-define", "./build/babel-transform-define.js"]
       ]
@@ -36,6 +38,7 @@
         ["stage-2"]
       ],
       "plugins": [
+        "transform-vue-jsx",
         "add-filehash",
         ["transform-define", "./build/babel-transform-define.js"]
       ]
@@ -46,7 +49,7 @@
         ["stage-2"]
       ],
       "plugins": [
-        ["transform-define", "./build/babel-transform-define.js"]
+        ["transform-vue-jsx", "transform-define", "./build/babel-transform-define.js"]
       ]
     }
   }
