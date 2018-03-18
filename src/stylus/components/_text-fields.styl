@@ -13,6 +13,14 @@ v-input--text($material)
 theme(v-input--text, "v-input--text")
 
 .v-input--text
+  &__details
+    display: flex
+    flex: 1 0 auto
+    justify-content: space-between
+
+    .v-messages
+      flex-grow: 1
+
   &__prefix,
   &__suffix
     height: 32px
@@ -25,9 +33,6 @@ theme(v-input--text, "v-input--text")
     padding: 8px 0 8px 4px
 
   .v-counter
-    bottom: -20px
-    position: absolute
-    right: 0
     white-space: nowrap
 
   .v-label
