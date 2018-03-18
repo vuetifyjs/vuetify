@@ -105,7 +105,8 @@ exports[`VTextField.js should not display counter when set to false 1`] = `
              style="left: 12px; position: absolute;"
       >
       </label>
-      <input tabindex="0"
+      <input maxlength="50"
+             tabindex="0"
              type="text"
       >
     </div>
@@ -115,7 +116,7 @@ exports[`VTextField.js should not display counter when set to false 1`] = `
         </div>
       </div>
       <div class="v-counter">
-        0 / true
+        0 / 50
       </div>
     </div>
   </div>
@@ -134,7 +135,8 @@ exports[`VTextField.js should not display counter when set to false 2`] = `
              style="left: 12px; position: absolute;"
       >
       </label>
-      <input tabindex="0"
+      <input maxlength="50"
+             tabindex="0"
              type="text"
       >
     </div>

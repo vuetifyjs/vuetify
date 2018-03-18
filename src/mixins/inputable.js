@@ -104,10 +104,13 @@ export default {
     genCounter () {
       if (this.counter === false) return null
 
+      const value = (this.inputValue || '').length
+      const max = this.counter === true ? this.$attrs.maxlength : this.counter
+
       return this.$createElement(VCounter, {
         props: {
-          value: (this.inputValue || '').length,
-          max: this.counter === true ? null : this.counter
+          value,
+          max
         }
       })
     },
