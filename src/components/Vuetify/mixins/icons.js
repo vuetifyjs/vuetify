@@ -3,6 +3,7 @@ const ICONS_MATERIAL = {
   'cancel': 'cancel',
   'close': 'close',
   'delete': 'cancel', // delete (e.g. v-chip close)
+  'clear': 'clear',
   'success': 'check_circle',
   'info': 'info',
   'warning': 'priority_high',
@@ -27,6 +28,7 @@ const ICONS_MDI = {
   'cancel': 'mdi-close-circle',
   'close': 'mdi-close',
   'delete': 'mdi-close-circle', // delete (e.g. v-chip close)
+  'clear': 'mdi-close',
   'success': 'mdi-check-circle',
   'info': 'mdi-information',
   'warning': 'mdi-exclamation',
@@ -51,6 +53,7 @@ const ICONS_FONTAWESOME = {
   'cancel': 'fas fa-times-circle',
   'close': 'fas fa-times',
   'delete': 'fas fa-times-circle', // delete (e.g. v-chip close)
+  'clear': 'fas fa-times-circle', // delete (e.g. v-chip close)
   'success': 'fas fa-check-circle',
   'info': 'fas fa-info-circle',
   'warning': 'fas fa-exclamation',
