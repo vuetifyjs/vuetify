@@ -61,6 +61,9 @@ export default {
     hasMessages () {
       return this.validations.length > 0
     },
+    hasState () {
+      return this.hasError || this.hasSuccess
+    },
     validations () {
       return this.validationTarget.slice(0, this.errorCount)
     },

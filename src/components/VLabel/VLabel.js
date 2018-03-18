@@ -11,25 +11,12 @@ export default {
 
   props: {
     absolute: Boolean,
-    activeTransform: String,
     color: {
       type: String,
       default: 'primary'
     },
     focused: Boolean,
     for: String,
-    left: {
-      type: [Number, String],
-      default: 0
-    },
-    top: {
-      type: [Number, String],
-      default: 0
-    },
-    transformOrigin: {
-      type: String,
-      default: 'top left'
-    },
     value: Boolean
   },
 
@@ -43,10 +30,7 @@ export default {
         for: props.for
       },
       style: {
-        left: `${parseInt(props.left)}px`,
-        position: props.absolute ? 'absolute' : 'relative',
-        top: `${parseInt(props.top)}px`,
-        transformOrigin: props.transformOrigin
+        position: props.absolute ? 'absolute' : 'relative'
       }
     }
 

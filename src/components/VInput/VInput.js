@@ -41,11 +41,12 @@ export default {
 
   computed: {
     classesColor () {
-      return this.addTextColorClassChecks()
+      return this.addTextColorClassChecks({}, this.validationState)
     },
     classesInput () {
       return {
         ...this.classes,
+        'v-input--has-state': this.hasState,
         'v-input--is-dirty': this.isDirty,
         'v-input--is-disabled': this.disabled,
         'v-input--is-focused': this.isFocused,
@@ -70,7 +71,7 @@ export default {
       }
     },
     isDirty () {
-      return !!this.inputValue
+      return !!this.lazyValue
     }
   },
 
@@ -134,7 +135,7 @@ export default {
 
       return this.$createElement(VMessages, {
         props: {
-          color: this.validationState,
+          color: this.hasHint ? '' : this.validationState,
           messages,
           value: this.hasMessages || this.hasHint
         }

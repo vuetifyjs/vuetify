@@ -43,6 +43,7 @@ export default {
     },
     counter: [Boolean, Number, String],
     fullWidth: Boolean,
+    label: String,
     multiLine: Boolean,
     noResize: Boolean,
     placeholder: String,
@@ -75,21 +76,6 @@ export default {
         'v-input--text--solo': this.solo,
         'v-input--text--box': (this.box || this.solo)
       }
-      // const classes = {
-      // ...this.genSoloClasses(),
-      // 'input-group--multi-line': this.multiLine,
-      // 'input-group--full-width': this.fullWidth,
-      // 'input-group--no-resize': this.noResizeHandle,
-      // 'input-group--textarea': this.textarea
-      // }
-
-      // if (this.hasError) {
-      //   classes['error--text'] = true
-      // } else {
-      //   return this.addTextColorClassChecks(classes)
-      // }
-
-      // return classes
     },
     count () {
       let inputLength
@@ -138,6 +124,10 @@ export default {
 
   watch: {
     isFocused (val) {
+      // Sets validationState from
+      // validatable
+      this.hasColor = val
+
       if (val) {
         this.initialValue = this.lazyValue
       } else if (this.initialValue !== this.lazyValue) {
@@ -190,8 +180,9 @@ export default {
       const isSingleLine = this.isSingle
       const data = {
         props: {
-          color: this.color,
-          focused: !isSingleLine && this.isFocused,
+          absolute: true,
+          color: this.validationState,
+          focused: !isSingleLine && (this.isFocused || this.validationState),
           value: !isSingleLine && (this.isFocused || this.isDirty)
         }
       }
@@ -244,15 +235,15 @@ export default {
         data.attrs.maxlength = this.masked.length
       }
 
-      const children = [
+      return this.$createElement(tag, data)
+    },
+    genDefaultSlot () {
+      return [
         this.genLabel(),
-        this.$createElement(tag, data)
+        this.prefix ? this.genAffix('prefix') : null,
+        this.genInput(),
+        this.suffix ? this.genAffix('suffix') : null
       ]
-
-      this.prefix && children.unshift(this.genAffix('prefix'))
-      this.suffix && children.push(this.genAffix('suffix'))
-
-      return children
     },
     genAffix (type) {
       return this.$createElement('div', {

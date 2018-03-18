@@ -27,9 +27,9 @@ export default {
 
   methods: {
     genChildren () {
-      if (!this.value) return null
-
-      const children = this.messages.map(m => this.genMessage(m))
+      const children = this.value
+        ? this.messages.map(m => this.genMessage(m))
+        : []
 
       return this.$createElement('transition-group', {
         staticClass: 'v-messages__wrapper',
