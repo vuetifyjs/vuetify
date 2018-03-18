@@ -476,6 +476,78 @@ test('VTextField.js', ({ mount }) => {
     expect(input.element.value).toBe('1,2')
   })
 
+  it('should have the correct count', () => {
+    const wrapper = mount(VTextField, {
+      attachToDocument: true,
+      propsData: {
+        counter: 10,
+        value: 'foo'
+      }
+    })
+
+    expect(wrapper.vm.count).toBe('3 / 10')
+
+    wrapper.setProps({ value: null })
+
+    expect(wrapper.vm.count).toBe('0 / 10')
+
+    wrapper.setProps({ counter: false })
+
+    expect(wrapper.vm.count).toBe('0 / 25')
+  })
+
+  it('should autofocus', async () => {
+    const wrapper = mount(VTextField, {
+      attachToDocument: true,
+      propsData: {
+        autofocus: true
+      }
+    })
+
+    const focus = jest.fn()
+    wrapper.vm.$on('focus', focus)
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.isFocused).toBe(true)
+    wrapper.vm.onClick()
+
+    expect(focus.mock.calls.length).toBe(0)
+
+    wrapper.setData({ isFocused: false })
+
+    wrapper.vm.onClick()
+    expect(focus.mock.calls.length).toBe(1)
+
+    wrapper.setProps({ disabled: true })
+
+    wrapper.setData({ isFocused: false })
+
+    wrapper.vm.onClick()
+    expect(focus.mock.calls.length).toBe(1)
+
+    wrapper.setProps({ disabled: false })
+
+    wrapper.vm.onClick()
+    expect(focus.mock.calls.length).toBe(2)
+
+    delete wrapper.vm.$refs.input
+
+    wrapper.vm.onFocus()
+    expect(focus.mock.calls.length).toBe(2)
+  })
+
+  it('should have prefix and suffix', () => {
+    const wrapper = mount(VTextField, {
+      propsData: {
+        prefix: '$',
+        suffix: '.com'
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it.skip('should calculate element height when using auto-grow prop', async () => {
     let value = ''
     const component = {

@@ -163,7 +163,7 @@ export default {
 
   mounted () {
     this.shouldAutoGrow && this.calculateInputHeight()
-    this.autofocus && this.focus()
+    this.autofocus && this.onFocus()
   },
 
   methods: {
