@@ -179,7 +179,7 @@ export default {
       const slot = []
 
       if (this.appendOuterIcon) {
-        slot.push(this.genIcon('append'))
+        slot.push(this.genIcon('appendOuter'))
       }
 
       return this.genSlot('append', 'outer', slot)
@@ -210,7 +210,7 @@ export default {
       const slot = []
 
       if (this.appendIcon) {
-        slot.push(this.genIcon('appendOuter'))
+        slot.push(this.genIcon('append'))
       }
 
       return this.genSlot('append', 'inner', slot)
