@@ -33,7 +33,6 @@ export default {
       type: [String, Array],
       default: () => []
     },
-    persistentHint: Boolean,
     rules: {
       type: Array,
       default: () => []
