@@ -199,7 +199,7 @@ export default {
       if (this.isDirty && this.isSingle) return null
 
       const isSingleLine = this.isSingle
-      const left = (this.isFocused || this.isDirty)
+      const left = (!this.prefix || this.isFocused || this.isDirty)
         ? 0
         : 12
 
