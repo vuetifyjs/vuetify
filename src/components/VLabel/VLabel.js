@@ -17,6 +17,10 @@ export default {
     },
     focused: Boolean,
     for: String,
+    left: {
+      type: [Number, String],
+      default: 0
+    },
     value: Boolean
   },
 
@@ -30,6 +34,7 @@ export default {
         for: props.for
       },
       style: {
+        left: `${parseInt(props.left)}px`,
         position: props.absolute ? 'absolute' : 'relative'
       }
     }
