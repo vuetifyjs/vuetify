@@ -38,6 +38,12 @@ export default {
     autofocus: Boolean,
     autoGrow: Boolean,
     box: Boolean,
+    clearable: Boolean,
+    clearIcon: {
+      type: String,
+      default: 'clear'
+    },
+    clearIconCb: Function,
     color: {
       type: String,
       default: 'primary'
@@ -196,7 +202,7 @@ export default {
         props: {
           absolute: true,
           color: this.validationState,
-          focused: !isSingleLine && (this.isFocused || this.validationState),
+          focused: !isSingleLine && (this.isFocused || !!this.validationState),
           left,
           value: !isSingleLine && (this.isFocused || this.isDirty)
         }
@@ -209,7 +215,11 @@ export default {
     genIconSlot () {
       const slot = []
 
-      if (this.appendIcon) {
+      if (this.clearable && this.isDirty) {
+        slot.push(this.genIcon('clear',
+          this.clearableCallback || this.clearIconCb
+        ))
+      } else if (this.appendIcon) {
         slot.push(this.genIcon('append'))
       }
 
