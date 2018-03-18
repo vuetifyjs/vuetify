@@ -175,22 +175,17 @@ export default {
 
       const icon = this.$createElement(VIcon, {
         props: { disabled: this.disabled },
-        on: {
+        on: callback ? {
           click: e => {
-            if (!callback) return
-
             e.stopPropagation()
             callback()
           }
-        }
+        } : undefined
       }, shouldClear ? 'clear' : this[`${type}Icon`])
 
       return this.$createElement('div', {
         staticClass: `v-input__icon v-input__icon--${type}`
       }, [icon])
-    },
-    hasIcon (icon) {
-      return this[`${icon}Icon`] || this.$slots[`${icon}Icon`]
     },
     genSlot (ref, location, slot) {
       return this.$createElement('div', {
