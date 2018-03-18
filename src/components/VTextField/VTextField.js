@@ -113,8 +113,10 @@ export default {
     isDirty () {
       return (this.lazyValue != null &&
         this.lazyValue.toString().length > 0) ||
-        this.badInput ||
-        dirtyTypes.includes(this.type)
+        this.badInput
+    },
+    isLabelActive () {
+      return this.isDirty || dirtyTypes.includes(this.type)
     },
     isSingle () {
       return this.solo || this.singleLine

@@ -64,7 +64,7 @@ export default {
         ...this.classes,
         'v-input--is-focused': this.isFocused,
         'v-input--is-loading': this.loading !== false,
-        'v-input--is-dirty': this.isDirty,
+        'v-input--is-label-active': this.isLabelActive,
         'v-input--is-disabled': this.disabled,
         'v-input--has-state': this.hasState,
         ...this.classesColor,

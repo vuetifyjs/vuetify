@@ -627,4 +627,14 @@ test('VTextField.js', ({ mount }) => {
       expect(html2).toBe(html1)
     })
   })
+
+  it('render active label for dirtyTypes (time/date/color/etc)', () => {
+    const wrapper = mount(VTextField, {
+      propsData: {
+        type: "time"
+      }
+    })
+
+    expect(wrapper.element.classList).toContain('v-input--is-label-active')
+  })
 })

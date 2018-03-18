@@ -47,7 +47,7 @@ export default {
       return {
         ...this.classes,
         'v-input--has-state': this.hasState,
-        'v-input--is-dirty': this.isDirty,
+        'v-input--is-label-active': this.isLabelActive,
         'v-input--is-disabled': this.disabled,
         'v-input--is-focused': this.isFocused,
         'v-input--is-loading': this.loading !== false,
@@ -72,6 +72,9 @@ export default {
     },
     isDirty () {
       return !!this.lazyValue
+    },
+    isLabelActive () {
+      return this.isDirty
     }
   },
 
