@@ -95,13 +95,23 @@ exports[`VTextField.js should not display counter when set to false 2`] = `
 
 exports[`VTextField.js should render component and match snapshot 1`] = `
 
-<div class="input-group input-group--text-field primary--text">
-  <div class="input-group__input">
-    <input tabindex="0"
-           type="text"
+<div class="v-input v-input--text theme--light">
+  <div class="v-input__control">
+    <div class="v-input__wrapper"
+         style="height: auto;"
     >
-  </div>
-  <div class="input-group__details">
+      <label class="v-label"
+             style="left: 12px; position: absolute;"
+      >
+      </label>
+      <input tabindex="0"
+             type="text"
+      >
+    </div>
+    <div class="v-messages">
+      <div class="v-messages__wrapper">
+      </div>
+    </div>
   </div>
 </div>
 
