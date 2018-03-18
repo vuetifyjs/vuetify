@@ -17,6 +17,12 @@ export default {
     lazy: Boolean
   },
 
+  computed: {
+    hasContent () {
+      return this.isBooted || !this.lazy || this.isActive
+    }
+  },
+
   watch: {
     isActive () {
       this.isBooted = true
@@ -25,9 +31,7 @@ export default {
 
   methods: {
     showLazyContent (content) {
-      return (this.isBooted || !this.lazy || this.isActive)
-        ? content
-        : null
+      return this.hasContent ? content : null
     }
   }
 }
