@@ -4,12 +4,6 @@ exports[`VMessages.js should show messages 1`] = `
 
 <div class="v-messages">
   <div class="v-messages__wrapper">
-    <div class="v-messages__message">
-      foo
-    </div>
-    <div class="v-messages__message">
-      bar
-    </div>
   </div>
 </div>
 
@@ -18,6 +12,8 @@ exports[`VMessages.js should show messages 1`] = `
 exports[`VMessages.js should show messages 2`] = `
 
 <div class="v-messages">
+  <div class="v-messages__wrapper">
+  </div>
 </div>
 
 `;

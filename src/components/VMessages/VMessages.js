@@ -10,12 +10,9 @@ export default {
   mixins: [Colorable],
 
   props: {
-    messages: {
+    value: {
       type: Array,
       default: () => ([])
-    },
-    value: {
-      default: true
     }
   },
 
@@ -27,17 +24,13 @@ export default {
 
   methods: {
     genChildren () {
-      const children = this.value
-        ? this.messages.map(m => this.genMessage(m))
-        : []
-
       return this.$createElement('transition-group', {
         staticClass: 'v-messages__wrapper',
         props: {
           name: 'slide-y-transition',
           tag: 'div'
         }
-      }, children)
+      }, this.value.map(m => this.genMessage(m)))
     },
     genMessage (key) {
       return this.$createElement('div', {
