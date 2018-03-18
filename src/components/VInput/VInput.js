@@ -136,8 +136,7 @@ export default {
       return this.$createElement(VMessages, {
         props: {
           color: this.hasHint ? '' : this.validationState,
-          messages,
-          value: this.hasMessages || this.hasHint
+          value: (this.hasMessages || this.hasHint) ? messages : []
         }
       })
     },

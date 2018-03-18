@@ -34,6 +34,7 @@ export default {
   }),
 
   props: {
+    appendOuterIcon: String,
     autofocus: Boolean,
     autoGrow: Boolean,
     box: Boolean,
@@ -174,15 +175,29 @@ export default {
       this.inputValue = null
       this.$nextTick(() => this.$refs.input.focus())
     },
+    genAppendSlot () {
+      const slot = []
+
+      if (this.appendOuterIcon) {
+        slot.push(this.genIcon('append'))
+      }
+
+      return this.genSlot('append', 'outer', slot)
+    },
     genLabel () {
       if (this.isDirty && this.isSingle) return null
 
       const isSingleLine = this.isSingle
+      const left = (this.isFocused || this.isDirty)
+        ? 0
+        : 12
+
       const data = {
         props: {
           absolute: true,
           color: this.validationState,
           focused: !isSingleLine && (this.isFocused || this.validationState),
+          left,
           value: !isSingleLine && (this.isFocused || this.isDirty)
         }
       }
@@ -190,6 +205,15 @@ export default {
       if ((this.attrs || {}).id) data.props.for = this.attrs.id
 
       return this.$createElement(VLabel, data, this.$slots.label || this.label)
+    },
+    genIconSlot () {
+      const slot = []
+
+      if (this.appendIcon) {
+        slot.push(this.genIcon('appendOuter'))
+      }
+
+      return this.genSlot('append', 'inner', slot)
     },
     genInput () {
       const tag = this.isTextarea ? 'textarea' : 'input'
@@ -242,7 +266,8 @@ export default {
         this.genLabel(),
         this.prefix ? this.genAffix('prefix') : null,
         this.genInput(),
-        this.suffix ? this.genAffix('suffix') : null
+        this.suffix ? this.genAffix('suffix') : null,
+        this.genIconSlot()
       ]
     },
     genAffix (type) {

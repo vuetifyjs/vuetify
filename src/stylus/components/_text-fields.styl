@@ -6,9 +6,19 @@ v-input--text($material)
     .v-input__wrapper:before
       background-color: $material.dividers
 
+  &__prefix,
+  &__suffix
+    color: $material.text.secondary
+
 theme(v-input--text, "v-input--text")
 
 .v-input--text
+  &__prefix,
+  &__suffix
+    height: 32px
+    line-height: 18px
+    padding: 8px 4px 8px 0
+
   .v-label
     top: calc(50% - 7px)
     transform-origin: top left
@@ -25,6 +35,10 @@ theme(v-input--text, "v-input--text")
   &.v-input--has-state
     .v-input__wrapper:before
       background-color: currentColor
+
+  .v-input__append-inner
+    display: inline-flex
+    margin-bottom: 4px
 
   .v-input__wrapper
     &:before,
