@@ -129,7 +129,7 @@ export default {
         ? this.clearableCallback
         : (this[`${type}IconCb`] || defaultCallback)
 
-      const icon = this.$createElement('v-icon', {
+      const icon = this.$createElement(VIcon, {
         'class': {
           'v-icon--clickable': callback
         },
@@ -198,7 +198,7 @@ export default {
         ? this.clearableCallback
         : (this[`${type}IconCb`] || defaultCallback)
 
-      const icon = this.$createElement('v-icon', {
+      const icon = this.$createElement(VIcon, {
         props: { disabled: this.disabled },
         on: {
           click: e => {
