@@ -74,7 +74,12 @@ export default function goTo (target, options) {
     let targetPosition = Math.floor(startLocation + distanceToScroll * easingFunction(progressPercentage))
 
     window.scrollTo(0, targetPosition)
-    if (Math.round(window.pageYOffset) === targetLocation) return
+
+    if (
+      Math.round(window.pageYOffset) === targetLocation ||
+      progressPercentage === 1
+    ) return
+
     window.requestAnimationFrame(step)
   }
 
