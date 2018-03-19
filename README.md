@@ -56,9 +56,12 @@
 <p align="center">
   <a href="https://careers.lmax.com/?utm_source=vuetify&utm_medium=github-link&utm_campaign=lmax-careers">
     <img height="70px" src="https://vuetifyjs.com/static/doc-images/backers/lmax-exchange.png">
-  </a>
+  </a><br>
   <a href="http://intygrate.com/?ref=vuetify-github">
     <img height="70px" src="https://vuetifyjs.com/static/doc-images/backers/intygrate.png">
+  </a><br>
+  <a href="http://resaleai.com/?ref=vuetify-github">
+    <img height="70px" src="https://vuetifyjs.com/static/doc-images/backers/resaleai_logo_blue.svg">
   </a>
 </p>
 
