@@ -66,7 +66,7 @@ const ICONS_FONTAWESOME = {
   'dot': 'fas fa-circle', // for carousel
   'sort': 'fas fa-sort-up',
   'expand': 'fas fa-chevron-down',
-  'append': 'fas fa-keyboard_arrow_down',
+  'append': 'fas fa-chevron-down',
   'subgroup': 'fas fa-caret-down',
   'rchecked': 'fas fa-dot-circle',
   'runchecked': 'fas fa-circle',
