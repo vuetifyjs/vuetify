@@ -133,7 +133,7 @@ test('VTabs', ({ mount, shallow }) => {
     tab.vm.click(new Event('click'))
     await wrapper.vm.$nextTick()
 
-    expect(input).toHaveBeenCalled()
+    expect(input).toHaveBeenCalledTimes(1)
   })
 
   it('should call method if overflowing', () => {
