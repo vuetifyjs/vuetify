@@ -98,22 +98,13 @@ const ICONS_FONTAWESOME = {
   'edit': 'fas fa-edit'
 }
 
+const iconSets = {
+  md: ICONS_MATERIAL,
+  mdi: ICONS_MDI,
+  fa: ICONS_FONTAWESOME,
+  fa4: ICONS_FONTAWESOME4
+}
+
 export default function icons (iconfont = 'md', icons = {}) {
-  let iconSet = ICONS_MATERIAL
-  switch (iconfont.toLowerCase()) {
-    case 'fa4':
-      iconSet = ICONS_FONTAWESOME4
-      break
-    case 'fa':
-      iconSet = ICONS_FONTAWESOME
-      break
-    case 'mdi':
-      iconSet = ICONS_MDI
-      break
-    case 'md':
-    default:
-      iconSet = ICONS_MATERIAL
-      break
-  }
-  return Object.assign({}, iconSet, icons)
+  return Object.assign({}, iconSets[iconfont] || iconSets.md, icons)
 }
