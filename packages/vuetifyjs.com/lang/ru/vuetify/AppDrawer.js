@@ -1,4 +1,4 @@
 export default {
-  becomeASponsor: 'Become a Sponsor',
-  diamondSponsors: 'Diamond Sponsors'
+  becomeASponsor: 'Стать спонсором',
+  diamondSponsors: 'Алмазные спонсоры'
 }
