@@ -25,8 +25,8 @@
   <a href="https://app.zenhub.com/workspace/o/vuetifyjs/vuetify/boards">
     <img src="https://img.shields.io/badge/Managed_with-ZenHub-5e60ba.svg" alt="zenhub">
   </a>
-  <a href="https://chat.vuetifyjs.com">
-    <img src="https://img.shields.io/badge/chat-on%20discord-7289da.svg" alt="Chat">
+  <a href="https://community.vuetifyjs.com">
+    <img src="https://discordapp.com/api/guilds/340160225338195969/widget.png" alt="Chat">
   </a>
   <br>
   <a href="https://www.npmjs.com/package/vuetify">
