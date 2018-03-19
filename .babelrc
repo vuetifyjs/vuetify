@@ -7,6 +7,7 @@
       ],
       "plugins": [
         "transform-runtime",
+        ["transform-define", "./build/babel-transform-define.js"],
         ["module-resolver", {
           "root": ["./src"],
           "alias": {
@@ -24,19 +25,28 @@
         ["es2015"],
         ["stage-2"]
       ],
-      "plugins": ["./build/babel-transform-stylus-paths.js"]
+      "plugins": [
+        "./build/babel-transform-stylus-paths.js",
+        ["transform-define", "./build/babel-transform-define.js"]
+      ]
     },
     "development": {
       "presets": [
         ["es2015", { "modules": false }],
         ["stage-2"]
       ],
-      "plugins": ["add-filehash"]
+      "plugins": [
+        "add-filehash",
+        ["transform-define", "./build/babel-transform-define.js"]
+      ]
     },
     "production": {
       "presets": [
         ["es2015", { "modules": false }],
         ["stage-2"]
+      ],
+      "plugins": [
+        ["transform-define", "./build/babel-transform-define.js"]
       ]
     }
   }

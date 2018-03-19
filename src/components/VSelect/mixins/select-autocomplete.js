@@ -74,12 +74,14 @@ export default {
       // update, blur the v-select
       if (!this.isAutocomplete || !this.getCurrentTag() || this.combobox) return this.tabOut()
 
+      const menuIndex = this.getMenuIndex()
+
       // When adding tags, if searching and
       // there is not a filtered options,
       // add the value to the tags list
       if (this.tags &&
         this.searchValue &&
-        !this.filteredItems.length
+        menuIndex === -1
       ) {
         e.preventDefault()
 
@@ -89,8 +91,11 @@ export default {
       // An item that is selected by
       // menu-index should toggled
       if (this.menuIsActive) {
+        // Reset the list index if searching
+        this.searchValue && this.$nextTick(() => setTimeout(this.resetMenuIndex, 0))
+
         e.preventDefault()
-        this.selectListTile(this.getMenuIndex())
+        this.selectListTile(menuIndex)
       }
     },
     onEnterDown () {
@@ -175,9 +180,6 @@ export default {
       this.$nextTick(() => {
         this.searchValue = searchValue
         this.$emit('input', this.combobox ? content : this.selectedItems)
-
-        // Combobox should close its menu when tags are updated
-        this.menuIsActive = !this.combobox
       })
     }
   }

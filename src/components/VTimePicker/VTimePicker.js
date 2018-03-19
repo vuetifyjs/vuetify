@@ -17,11 +17,6 @@ const rangeMinutes = createRange(60)
 export default {
   name: 'v-time-picker',
 
-  components: {
-    VTimePickerTitle,
-    VTimePickerClock
-  },
-
   mixins: [Picker],
 
   data () {
@@ -160,7 +155,7 @@ export default {
       return ((first || 0) + value) % range.length + range[0]
     },
     genClock () {
-      return this.$createElement('v-time-picker-clock', {
+      return this.$createElement(VTimePickerClock, {
         props: {
           allowedValues: this.selectingHour ? this.isAllowedHourCb : this.isAllowedMinuteCb,
           color: this.color,
@@ -192,7 +187,7 @@ export default {
       }, [this.genClock()])
     },
     genPickerTitle () {
-      return this.$createElement('v-time-picker-title', {
+      return this.$createElement(VTimePickerTitle, {
         props: {
           ampm: this.isAmPm,
           hour: this.inputHour,

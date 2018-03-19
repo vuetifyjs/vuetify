@@ -1,0 +1,121 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VBtn.js should render a <button> tag when using to prop 1`] = `
+
+<button class="btn btn--router">
+</button>
+
+`;
+
+exports[`VBtn.js should render an <a> tag when using href prop 1`] = `
+
+<a href="http://www.google.com"
+   class="btn"
+>
+  <div class="btn__content">
+  </div>
+</a>
+
+`;
+
+exports[`VBtn.js should render component and match snapshot 1`] = `
+
+<button type="button"
+        class="btn"
+>
+  <div class="btn__content">
+  </div>
+</button>
+
+`;
+
+exports[`VBtn.js should render component with color prop and match snapshot 1`] = `
+
+<button type="button"
+        class="btn green darken-1"
+>
+  <div class="btn__content">
+  </div>
+</button>
+
+`;
+
+exports[`VBtn.js should render component with color prop and match snapshot 2`] = `
+
+<button type="button"
+        class="btn btn--flat green--text text--darken-1"
+>
+  <div class="btn__content">
+  </div>
+</button>
+
+`;
+
+exports[`VBtn.js should render component with loader and match snapshot 1`] = `
+
+<button type="button"
+        class="btn btn--loader"
+>
+  <div class="btn__content">
+  </div>
+  <span class="btn__loading">
+    <div class="progress-circular progress-circular--indeterminate"
+         style="height: 26px; width: 26px;"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg"
+           viewbox="25 25 50 50"
+      >
+        <circle fill="transparent"
+                cx="50"
+                cy="50"
+                r="20"
+                stroke-width="4"
+                stroke-dasharray="125.664"
+                stroke-dashoffset="125.66370614359172px"
+                class="progress-circular__overlay"
+        >
+        </circle>
+      </svg>
+      <div class="progress-circular__info">
+      </div>
+    </div>
+  </span>
+</button>
+
+`;
+
+exports[`VBtn.js should render component with loader slot and match snapshot 1`] = `
+
+<button type="button"
+        class="btn btn--loader"
+>
+  <div class="btn__content">
+  </div>
+  <span class="btn__loading">
+    <span>
+      loader
+    </span>
+  </span>
+</button>
+
+`;
+
+exports[`VBtn.js should render specified tag when using tag prop 1`] = `
+
+<a class="btn">
+  <div class="btn__content">
+  </div>
+</a>
+
+`;
+
+exports[`VBtn.js should use custom active-class 1`] = `
+
+<button type="button"
+        class="btn foo"
+>
+  <div class="btn__content">
+  </div>
+</button>
+
+`;

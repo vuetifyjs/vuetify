@@ -13,18 +13,18 @@ list($material)
     color: $material.text.disabled
 
     background: $material.expansion-panels.focus
-    
+
   .list__tile--link:hover,
   .list__tile--highlighted,
   .list__group__header:hover
   .list__group--active:before,
   .list__group--active:after
     background: $material.dividers
-      
+
   .list__group--disabled
     .list__tile
       color: $material.text.disabled !important
-    
+
     .list__group__header__prepend-icon .icon
       color: $material.icons.inactive !important
 
@@ -136,7 +136,7 @@ theme(list, "list")
 
     &--disabled
       opacity: 0.4 !important
-      pointer-events: none
+      pointer-events: none !important
 
     &--avatar
       height: $list-item-avatar-single-height
@@ -179,7 +179,7 @@ theme(list, "list")
   &--three-line
     .list__tile
       height: $list-item-triple-height
-      
+
     .list__tile__avatar
       margin-top: $list-item-avatar-triple-margin-top
 
@@ -192,14 +192,14 @@ theme(list, "list")
     &.list--dense
       .list__tile
         height: $list-item-dense-triple-height
-        
+
   > .list__group
     &:before
       top: 0
 
       .list__tile__avatar
         margin-top: $list-item-dense-avatar-triple-margin-top
-      
+
   &__group
     padding: 0
     position: relative
@@ -212,7 +212,7 @@ theme(list, "list")
       position: absolute
       transition: $primary-transition
       width: 100%
-    
+
     &--active ~ .list__group
       &:before
         display: none
@@ -222,8 +222,8 @@ theme(list, "list")
       cursor: pointer
       display: flex
       list-style-type: none
-      
-      > li:not(.list__group__header__prepend-icon):not(.list__group__header__append-icon)
+
+      > div:not(.list__group__header__prepend-icon):not(.list__group__header__append-icon)
         flex: 1 0 auto
 
       .list__group__header__append-icon,
@@ -235,7 +235,7 @@ theme(list, "list")
         align-items: center
         display: flex
 
-        li .list__tile
+        div .list__tile
           padding-left: 0
 
         .list__group__header__prepend-icon
@@ -255,7 +255,7 @@ theme(list, "list")
         .list__group__header__prepend-icon
           .icon
             color: inherit
-            
+
         &.list__group__header--sub-group
           .list__group__header__prepend-icon
             .icon
@@ -265,10 +265,10 @@ theme(list, "list")
       position: relative
       padding: 0
       transition: inherit
-      
-      > li
+
+      > div
         display: block
-      
+
       &--no-action
         .list__tile
           padding-left: $list-item-left-padding

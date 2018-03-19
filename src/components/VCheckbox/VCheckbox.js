@@ -9,11 +9,6 @@ import Selectable from '../../mixins/selectable'
 export default {
   name: 'v-checkbox',
 
-  components: {
-    VFadeTransition,
-    VIcon
-  },
-
   mixins: [Rippleable, Selectable],
 
   data () {
@@ -66,8 +61,8 @@ export default {
   },
 
   render (h) {
-    const transition = h('v-fade-transition', [
-      h('v-icon', {
+    const transition = h(VFadeTransition, [
+      h(VIcon, {
         staticClass: 'icon--selection-control',
         'class': {
           'icon--checkbox': this.icon === 'check_box'

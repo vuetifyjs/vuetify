@@ -14,7 +14,12 @@ const builds = {
         libraryTarget: 'umd'
       },
       plugins: [
-        new ExtractTextPlugin('vuetify.css')
+        new ExtractTextPlugin('vuetify.css'),
+        new webpack.SourceMapDevToolPlugin({
+          filename: '[file].map',
+          // Only enable CSS sourcemaps when using `yarn watch`
+          exclude: process.env.TARGET === 'development' ? undefined : /.*\.css$/
+        })
       ]
     }
   },
@@ -49,7 +54,7 @@ function genConfig (opts) {
 
   config.plugins = config.plugins.concat([
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': opts.env || 'development'
+      'process.env.NODE_ENV': JSON.stringify(opts.env || 'development')
     })
   ])
 

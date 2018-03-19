@@ -47,8 +47,9 @@ export default {
 
       if (typeof to === 'string') return to.replace('#', '')
       if (to === Object(to) &&
-        to.hasOwnProperty('path')
-      ) return to.path
+        (to.hasOwnProperty('name') ||
+          to.hasOwnProperty('path'))
+      ) return to.name || to.path
 
       return this
     }
@@ -85,9 +86,11 @@ export default {
 
       const path = `_vnode.data.class.${this.activeClass}`
 
-      if (getObjectValueByPath(this.$refs.link, path)) {
-        this.tabClick(this)
-      }
+      this.$nextTick(() => {
+        if (getObjectValueByPath(this.$refs.link, path)) {
+          this.tabClick(this)
+        }
+      })
     },
     toggle (action) {
       this.isActive = (action === this) || (action === this.action)

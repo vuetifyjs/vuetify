@@ -8,6 +8,8 @@ import Input from '../../mixins/input'
 import Maskable from '../../mixins/maskable'
 import Soloable from '../../mixins/soloable'
 
+const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
+
 export default {
   name: 'v-text-field',
 
@@ -115,7 +117,7 @@ export default {
       return (this.lazyValue != null &&
         this.lazyValue.toString().length > 0) ||
         this.badInput ||
-        ['time', 'date', 'datetime-local', 'week', 'month'].includes(this.type)
+        dirtyTypes.includes(this.type)
     },
     isTextarea () {
       return this.multiLine || this.textarea

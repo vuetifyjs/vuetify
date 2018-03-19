@@ -14,9 +14,13 @@ export default {
 
   mixins: [Bootable],
 
+  data: () => ({
+    hasDetached: false
+  }),
+
   props: {
     attach: {
-      type: [Boolean, String, Object],
+      type: null,
       default: false,
       validator: validateAttachTarget
     },
@@ -25,8 +29,12 @@ export default {
     }
   },
 
+  watch: {
+    hasContent: 'initDetach'
+  },
+
   mounted () {
-    this.initDetach()
+    !this.lazy && this.initDetach()
   },
 
   deactivated () {
@@ -46,6 +54,7 @@ export default {
     initDetach () {
       if (this._isDestroyed ||
         !this.$refs.content ||
+        this.hasDetached ||
         // Leave menu in place if attached
         // and dev has not changed target
         this.attach === '' || // If used as a boolean prop (<v-menu attach>)
@@ -74,6 +83,8 @@ export default {
         this.$refs.content,
         target.firstChild
       )
+
+      this.hasDetached = true
     }
   }
 }

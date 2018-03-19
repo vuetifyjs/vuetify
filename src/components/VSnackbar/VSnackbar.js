@@ -28,7 +28,7 @@ export default {
 
   computed: {
     classes () {
-      return this.addBackgroundColorClassChecks({
+      return {
         'snack--active': this.isActive,
         'snack--absolute': this.absolute,
         'snack--auto-height': this.autoHeight,
@@ -38,7 +38,7 @@ export default {
         'snack--right': this.right,
         'snack--top': this.top,
         'snack--vertical': this.vertical
-      })
+      }
     }
   },
 
@@ -75,7 +75,8 @@ export default {
           on: this.$listeners
         }, [
           h('div', {
-            staticClass: 'snack__wrapper'
+            staticClass: 'snack__wrapper',
+            class: this.addBackgroundColorClassChecks()
           }, [
             h('div', {
               staticClass: 'snack__content'

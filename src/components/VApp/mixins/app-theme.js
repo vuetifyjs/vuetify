@@ -9,34 +9,10 @@ export default {
   computed: {
     parsedTheme () {
       return Theme.parse(this.$vuetify.theme)
-    }
-  },
-
-  watch: {
-    parsedTheme () {
-      this.applyTheme()
-    }
-  },
-
-  created () {
-    if (typeof document === 'undefined' && this.$ssrContext) {
-      if (!this.$ssrContext._styles) this.$ssrContext._styles = {}
-      this.$ssrContext._styles['vuetify-theme-stylesheet'] = {
-        ids: ['vuetify-theme-stylesheet'],
-        css: this.genColors(this.parsedTheme),
-        media: ''
-      }
-      return
-    }
-    this.genStyle()
-    this.applyTheme()
-  },
-
-  methods: {
-    applyTheme () {
-      this.style.innerHTML = this.genColors(this.parsedTheme)
     },
-    genColors (theme) {
+    /** @return string */
+    generatedStyles () {
+      const theme = this.parsedTheme
       let css
 
       if (this.$vuetify.options.themeCache != null) {
@@ -67,9 +43,54 @@ export default {
 
       return css
     },
+    vueMeta () {
+      return {
+        style: [{
+          cssText: this.generatedStyles,
+          type: 'text/css',
+          id: 'vuetify-theme-stylesheet'
+        }]
+      }
+    }
+  },
+
+  // Regular vue-meta
+  metaInfo () {
+    return this.vueMeta
+  },
+
+  // Nuxt
+  head () {
+    return this.vueMeta
+  },
+
+  watch: {
+    generatedStyles () {
+      !this.meta && this.applyTheme()
+    }
+  },
+
+  created () {
+    if (this.$meta) {
+      // Vue-meta
+      // Handled by metaInfo()/nuxt()
+    } else if (typeof document === 'undefined' && this.$ssrContext) {
+      // SSR
+      this.$ssrContext.head = this.$ssrContext.head || ''
+      this.$ssrContext.head += `<style type="text/css" id="vuetify-theme-stylesheet">${this.generatedStyles}</style>`
+    } else if (typeof document !== 'undefined') {
+      // Client-side
+      this.genStyle()
+      this.applyTheme()
+    }
+  },
+
+  methods: {
+    applyTheme () {
+      if (this.style) this.style.innerHTML = this.generatedStyles
+    },
     genStyle () {
-      let style = document.querySelector('[data-vue-ssr-id=vuetify-theme-stylesheet]') ||
-        document.getElementById('vuetify-theme-stylesheet')
+      let style = document.getElementById('vuetify-theme-stylesheet')
 
       if (!style) {
         style = document.createElement('style')

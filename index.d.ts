@@ -1,5 +1,6 @@
 import 'vuetify/src/util/helpers'
-import { PluginFunction } from 'vue'
+import 'vuetify/src/util/colors'
+import Vue, { PluginFunction } from 'vue'
 
 declare class Vuetify {
   static install: PluginFunction<never>
@@ -88,7 +89,7 @@ declare interface VuetifyObject {
   dark: boolean
   theme: VuetifyTheme
   options: VuetifyOptions
-  goTo: (target: string | number | HTMLElement | VueComponent, options?: VuetifyGoToOptions) => void
+  goTo: (target: string | number | HTMLElement | Vue, options?: VuetifyGoToOptions) => void
 }
 
 declare module 'vue/types/vue' {
