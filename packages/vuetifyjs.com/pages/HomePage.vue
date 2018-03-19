@@ -225,9 +225,6 @@
   // Mixins
   import Message from '@/mixins/message'
 
-  // Utilities
-  import { mapMutations } from 'vuex'
-
   export default {
     name: 'HomePage',
 
@@ -298,14 +295,6 @@
       await this.$nextTick()
       this.isBooted = true
 
-      this.snackbar({
-        color: '',
-        msg: 'Vuetify is now on Reddit!',
-        href: 'https://www.reddit.com/r/vuetifyjs/',
-        text: 'Check it out',
-        timeout: 10
-      })
-
       this.$http({
         method: 'GET',
         url: 'https://madewithvuejs.com/api/tag/vuetify',
@@ -321,9 +310,6 @@
     },
 
     methods: {
-      ...mapMutations('app', {
-        snackbar: 'SNACKBAR'
-      }),
       setFeatured (data) {
         if (!data) return []
 

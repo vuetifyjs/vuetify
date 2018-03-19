@@ -19,7 +19,10 @@
   import AppView from '@/components/core/AppView'
   import Meta from '@/mixins/meta'
 
-  import { mapState } from 'vuex'
+  import {
+    mapMutations,
+    mapState
+  } from 'vuex'
 
   export default {
     name: 'Documentation',
@@ -45,9 +48,22 @@
 
     mounted () {
       this.getReleases()
+
+      this.snackbar({
+        color: 'default',
+        close: true,
+        id: 'rebuilding-part-1',
+        text: 'Go to Article',
+        msg: 'Just published — _Rebuilding input-controls Part 1_',
+        href: 'https://medium.com/vuetify/rebuilding-input-controls-part-1-102005207b07',
+        timeout: 0
+      })
     },
 
     methods: {
+      ...mapMutations('app', {
+        snackbar: 'SNACKBAR'
+      }),
       getReleases () {
         this.$http.get('/releases/releases.json').then(({ data }) => {
           this.$store.commit('app/RELEASES', data)

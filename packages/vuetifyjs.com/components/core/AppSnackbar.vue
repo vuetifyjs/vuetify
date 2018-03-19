@@ -16,7 +16,10 @@
       >
         {{ computedIcon }}
       </v-icon>
-      <span v-text="snackbar.msg" />
+      <markdown
+        class="snack-markdown"
+        :source="snackbar.msg"
+      />
       <v-spacer />
       <v-btn
         dark
@@ -27,6 +30,15 @@
         v-bind="bind"
       >
         {{ snackbar.text }}
+      </v-btn>
+      <v-btn
+        icon
+        class="ml-3"
+        @click="markViewed"
+        v-if="snackbar.close"
+        :ripple="false"
+      >
+        <v-icon>clear</v-icon>
       </v-btn>
     </v-layout>
   </v-snackbar>
@@ -47,12 +59,12 @@
       bind () {
         if (this.snackbar.to) return { to: this.snackbar.to }
         if (this.snackbar.href) {
- return {
-          href: this.snackbar.href,
-          target: '_blank',
-          rel: 'noopener'
+          return {
+            href: this.snackbar.href,
+            target: '_blank',
+            rel: 'noopener'
+          }
         }
-}
 
         return {}
       },
@@ -72,13 +84,23 @@
         this.snack = false
       },
       snackbar () {
+        if (localStorage.getItem(this.snackbar.id)) return
+
         this.snack = true
       }
     },
 
     methods: {
-      onClick () {
+      markViewed () {
+        if (this.snackbar.id) {
+          localStorage.setItem(this.snackbar.id, true)
+        }
         this.snack = false
+      },
+      onClick () {
+        this.$ga.event('snackbar', 'click', this.snackbar.id)
+
+        this.markViewed()
 
         this.snackbar.handler &&
           this.snackbar.handler()
@@ -86,3 +108,9 @@
     }
   }
 </script>
+
+<style>
+  .snack-markdown p {
+    margin-bottom: 0 !important;
+  }
+</style>
