@@ -6,7 +6,8 @@ module.exports = {
     sourceType: 'module'
   },
   extends: [
-    'standard'
+    'standard',
+    'plugin:vue/essential'
   ],
   env: {
     browser: true

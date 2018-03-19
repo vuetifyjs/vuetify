@@ -45,7 +45,7 @@ module.exports = merge(baseWebpackConfig, {
         exclude: /node_modules/
       },
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         loaders: ['babel-loader', 'eslint-loader'],
         exclude: /node_modules/
       },
