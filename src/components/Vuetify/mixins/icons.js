@@ -48,7 +48,32 @@ const ICONS_MDI = {
   'edit': 'pencil'
 }
 
-// Maps internal Vuetify icon names to actual Font-Awesome icon names.
+// Maps internal Vuetify icon names to actual Font-Awesome 4 icon names.
+const ICONS_FONTAWESOME4 = {
+  'cancel': 'fa fa-times-circle',
+  'close': 'fa fa-times',
+  'delete': 'fa fa-times-circle', // delete (e.g. v-chip close)
+  'clear': 'fa fa-times-circle', // delete (e.g. v-chip close)
+  'success': 'fa fa-check-circle',
+  'info': 'fa fa-info-circle',
+  'warning': 'fa fa-exclamation',
+  'error': 'fa fa-exclamation-triangle',
+  'prev': 'fa fa-chevron-left',
+  'next': 'fa fa-chevron-right',
+  'checked': 'fa fa-check-square',
+  'unchecked': 'fa fa-square-o', // note 'far'
+  'indeterminate': 'fa fa-minus-square',
+  'dot': 'fa fa-circle', // for carousel
+  'sort': 'fa fa-sort-up',
+  'expand': 'fa fa-chevron-down',
+  'append': 'fa fa-chevron-down',
+  'subgroup': 'fa fa-caret-down',
+  'rchecked': 'fa fa-dot-circle',
+  'runchecked': 'fa fa-circle-o',
+  'edit': 'fa fa-pencil'
+}
+
+// Maps internal Vuetify icon names to actual Font-Awesome 5+ icon names.
 const ICONS_FONTAWESOME = {
   'cancel': 'fas fa-times-circle',
   'close': 'fas fa-times',
@@ -74,13 +99,21 @@ const ICONS_FONTAWESOME = {
 }
 
 export default function icons (iconfont = 'md', icons = {}) {
+  let iconSet = ICONS_MATERIAL
   switch (iconfont.toLowerCase()) {
+    case 'fa4':
+      iconSet = ICONS_FONTAWESOME4
+      break
     case 'fa':
-      return Object.assign({}, ICONS_FONTAWESOME, icons)
+      iconSet = ICONS_FONTAWESOME
+      break
     case 'mdi':
-      return Object.assign({}, ICONS_MDI, icons)
+      iconSet = ICONS_MDI
+      break
     case 'md':
     default:
-      return Object.assign({}, ICONS_MATERIAL, icons)
+      iconSet = ICONS_MATERIAL
+      break
   }
+  return Object.assign({}, iconSet, icons)
 }
