@@ -190,4 +190,45 @@ test('VToolbar.vue', ({ mount }) => {
     await resizeWindow(200)
     expect(wrapper.vm.$vuetify.application.top).toBe(56)
   })
+
+  it('should have a custom extension height', () => {
+    const wrapper = mount(VToolbar, {
+      propsData: { tabs: true }
+    })
+
+    expect(wrapper.vm.computedExtensionHeight).toBe(48)
+  })
+
+  it('should scroll off screen', async () => {
+    const wrapper = mount(VToolbar, {
+      attachToDocument: true,
+      propsData: { scrollOffScreen: true }
+    })
+
+    expect(wrapper.vm.isActive).toBe(true)
+
+    await scrollWindow(100)
+
+    expect(wrapper.vm.currentScroll).toBe(100)
+
+    await scrollWindow(500)
+
+    expect(wrapper.vm.currentScroll).toBe(500)
+    expect(wrapper.vm.isActive).toBe(false)
+
+    await scrollWindow(0)
+
+    expect(wrapper.vm.isScrollingUp).toBe(true)
+    expect(wrapper.vm.isActive).toBe(true)
+
+    wrapper.setProps({ invertedScroll: true })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.isActive).toBe(false)
+
+    await scrollWindow(500)
+
+    expect(wrapper.vm.isActive).toBe(true)
+  })
 })
