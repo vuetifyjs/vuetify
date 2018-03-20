@@ -105,7 +105,7 @@ test('VTabs', ({ mount, shallow }) => {
 
     tabs.setData({ scrollOffset: 1 })
     tabs.vm.onResize()
-    await tabs.vm.$nextTick()
+    await new Promise(resolve => setTimeout(resolve, 300))
     expect(tabs.vm.scrollOffset).toBe(0)
     tabs.setData({ scrollOffset: 2 })
     await tabs.vm.$nextTick()
@@ -133,7 +133,7 @@ test('VTabs', ({ mount, shallow }) => {
     tab.vm.click(new Event('click'))
     await wrapper.vm.$nextTick()
 
-    expect(input).toHaveBeenCalled()
+    expect(input).toHaveBeenCalledTimes(1)
   })
 
   it('should call method if overflowing', () => {
@@ -400,5 +400,34 @@ test('VTabs', ({ mount, shallow }) => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.lazyValue).toBe('bar')
+  })
+
+  // This is an indirect way of testing call slider
+  it('should match active tab', async () => {
+    const wrapper = mount(VTabs, {
+      attachToDocument: true,
+      propsData: {
+        value: 'foo'
+      },
+      slots: {
+        default: [{
+          render: h => h(VTab, {
+            props: { href: '#bar' }
+          })
+        }]
+      }
+    })
+
+    wrapper.vm.callSlider()
+    await wrapper.vm.$nextTick()
+    expect((wrapper.vm.activeTab || {}).action === wrapper.vm.activeTab).toBe(true)
+
+    wrapper.setProps({ value: 'bar' })
+    await wrapper.vm.$nextTick()
+
+    expect((wrapper.vm.activeTab || {}).action === wrapper.vm.activeTab).toBe(false)
+    wrapper.vm.callSlider()
+    await wrapper.vm.$nextTick()
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

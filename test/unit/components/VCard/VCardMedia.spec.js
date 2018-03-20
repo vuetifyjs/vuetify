@@ -19,6 +19,17 @@ test('VCardMedia.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should render component with images with urls that contain the ( & ) characters', () => {
+    const wrapper = mount(VCardMedia, {
+      propsData: {
+        src: 'file(1).jpg',
+        contain: true
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it('should render component with custom height (string) and match snapshot', () => {
     const wrapper = mount(VCardMedia, {
       propsData: {

@@ -58,3 +58,16 @@ exports[`VCardMedia.js should render component with custom height (string) and m
 </div>
 
 `;
+
+exports[`VCardMedia.js should render component with images with urls that contain the ( & ) characters 1`] = `
+
+<div class="card__media"
+     style="height: auto;"
+>
+  <div class="card__media__background">
+  </div>
+  <div class="card__media__content">
+  </div>
+</div>
+
+`;

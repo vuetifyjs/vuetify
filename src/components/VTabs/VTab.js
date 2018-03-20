@@ -43,15 +43,17 @@ export default {
       }
     },
     action () {
-      const to = this.to || this.href
+      let to = this.to || this.href
 
-      if (typeof to === 'string') return to.replace('#', '')
-      if (to === Object(to) &&
-        (to.hasOwnProperty('name') ||
-          to.hasOwnProperty('path'))
-      ) return to.name || to.path
+      if (this.$router && this.to) {
+        const resolve = this.$router.resolve(this.to)
 
-      return this
+        to = resolve.href
+      }
+
+      return typeof to === 'string'
+        ? to.replace('#', '')
+        : this
     }
   },
 
