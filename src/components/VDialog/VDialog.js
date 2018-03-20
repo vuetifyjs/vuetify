@@ -149,7 +149,12 @@ export default {
     if (!this.fullscreen) {
       data.style = {
         maxWidth: this.maxWidth === 'none' ? undefined : (isNaN(this.maxWidth) ? this.maxWidth : `${this.maxWidth}px`),
-        width: this.width === 'auto' ? undefined : (isNaN(this.width) ? this.width : `${this.width}px`)
+        width: this.width === 'auto' ? undefined : (isNaN(this.width) ? this.width : `${this.width}px`),
+        zIndex: this.activeZIndex // temp workaround for #2111, set same zIndex of parent div
+      }
+    } else {
+      data.style = {
+        zIndex: this.activeZIndex // temp workaround for #2111, set same zIndex of parent div
       }
     }
 
