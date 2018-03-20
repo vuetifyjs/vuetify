@@ -43,9 +43,9 @@ const ICONS_MDI = {
   'expand': 'mdi-chevron-down',
   'append': 'mdi-chevron-down',
   'subgroup': 'mdi-menu-down',
-  'rchecked': 'radio-button-checked',
-  'runchecked': 'radio-button-unchecked',
-  'edit': 'pencil'
+  'rchecked': 'mdi-radiobox-marked',
+  'runchecked': 'mdi-radiobox-blank',
+  'edit': 'mdi-pencil'
 }
 
 // Maps internal Vuetify icon names to actual Font-Awesome 4 icon names.
@@ -93,8 +93,8 @@ const ICONS_FONTAWESOME = {
   'expand': 'fas fa-chevron-down',
   'append': 'fas fa-chevron-down',
   'subgroup': 'fas fa-caret-down',
-  'rchecked': 'fas fa-dot-circle',
-  'runchecked': 'fas fa-circle',
+  'rchecked': 'far fa-dot-circle',
+  'runchecked': 'far fa-circle',
   'edit': 'fas fa-edit'
 }
 
