@@ -2,7 +2,7 @@ export default {
   name: 'colorable',
 
   props: {
-    color: String
+    color: [Boolean, String]
   },
 
   data () {

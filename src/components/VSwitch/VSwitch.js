@@ -22,8 +22,7 @@ export default {
   computed: {
     classes () {
       return {
-        'v-input--selection-controls': true,
-        'v-input--switch': true
+        'v-input--selection-controls v-input--switch': true
       }
     }
   },
@@ -35,34 +34,13 @@ export default {
         this.genLabel()
       ]
     },
-    genInput () {
-      return this.$createElement('input', {
-        attrs: {
-          type: 'checkbox',
-          value: this.inputValue
-        },
-        on: {
-          blur: this.onBlur,
-          change: this.toggle, // TODO: change this name
-          focus: this.onFocus
-        }
-      })
-    },
     genSwitch () {
-      // Switches have default colors for thumb/track
-      // that do not tie into theme colors
-      // this avoids a visual issue where
-      // the color takes too long to transition
-      const classes = this.isActive
-        ? this.addTextColorClassChecks({}, this.color)
-        : null
-
       return this.$createElement('div', {
         staticClass: 'v-input--selection-controls__input'
       }, [
-        this.genInput(),
+        this.genInput('checkbox'),
         this.genRipple({
-          'class': classes,
+          'class': this.classesControl,
           directives: [{
             name: 'touch',
             value: {
@@ -71,15 +49,19 @@ export default {
             }
           }]
         }),
-        this.$createElement('div', {
-          staticClass: 'v-input--switch__track',
-          'class': classes
-        }),
-        this.$createElement('div', {
-          staticClass: 'v-input--switch__thumb',
-          'class': classes
-        })
+        this.genSwitchPart('track'),
+        this.genSwitchPart('thumb')
       ])
+    },
+    // Switches have default colors for thumb/track
+    // that do not tie into theme colors
+    // this avoids a visual issue where
+    // the color takes too long to transition
+    genSwitchPart (target) {
+      return this.$createElement('div', {
+        staticClass: `v-input--switch__${target}`,
+        'class': this.classesControl
+      })
     },
     onSwipeLeft () {
       if (this.isActive) this.toggle()

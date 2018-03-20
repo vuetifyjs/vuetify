@@ -27,6 +27,11 @@ export default {
   },
 
   computed: {
+    classesControl () {
+      return this.isActive
+        ? this.addTextColorClassChecks({}, this.color)
+        : null
+    },
     isActive () {
       if ((Array.isArray(this.inputValue))) {
         return this.inputValue.indexOf(this.value) !== -1
@@ -40,14 +45,8 @@ export default {
 
       return this.inputValue === this.trueValue
     },
-    isDirty () {
-      return this.isActive
-    }
-  },
-
-  watch: {
-    indeterminate (val) {
-      this.inputIndeterminate = val
+    isDirty: {
+      get: 'isActive'
     }
   },
 
@@ -63,6 +62,21 @@ export default {
           focused: this.hasState
         }
       }, this.$slots.label || this.label)
+    },
+    genInput (type, attrs) {
+      return this.$createElement('input', {
+        attrs: Object.assign({}, attrs, {
+          'aria-label': this.label,
+          role: type,
+          type,
+          value: this.inputValue
+        }),
+        on: {
+          blur: this.onBlur,
+          change: this.toggle, // TODO: change this name
+          focus: this.onFocus
+        }
+      })
     },
     onBlur () {
       this.isFocused = false

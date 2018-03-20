@@ -46,42 +46,28 @@ export default {
     }
   },
 
-  methods: {
-    // groupFocus (e) {
-    //   this.isFocused = true
-    //   this.$emit('focus', e)
-    // },
-    // groupBlur (e) {
-    //   this.isFocused = false
-    //   this.tabFocused = false
-    //   this.$emit('blur', this.inputValue)
-    // }
-    genCheckbox () {
-      // Switches have default colors for thumb/track
-      // that do not tie into theme colors
-      // this avoids a visual issue where
-      // the color takes too long to transition
-      const classes = this.isActive
-        ? this.addTextColorClassChecks({}, this.color)
-        : null
+  watch: {
+    indeterminate (val) {
+      this.inputIndeterminate = val
+    }
+  },
 
+  methods: {
+    genCheckbox () {
       return this.$createElement('div', {
         staticClass: 'v-input--selection-controls__input'
       }, [
-        this.genInput(),
+        this.genInput('checkbox', {
+          'aria-checked': this.inputIndeterminate
+            ? 'mixed'
+            : this.isActive.toString()
+        }),
         this.genRipple({
-          'class': classes,
-          directives: [{
-            name: 'touch',
-            value: {
-              left: this.onSwipeLeft,
-              right: this.onSwipeRight
-            }
-          }]
+          'class': this.classesControl
         }),
         this.$createElement(VIcon, {
           props: {
-            color: this.isActive ? this.color : ''
+            color: this.isActive && this.color
           }
         }, this.computedIcon)
       ])
@@ -91,49 +77,6 @@ export default {
         this.genCheckbox(),
         this.genLabel()
       ]
-    },
-    genInput () {
-      return this.$createElement('input', {
-        attrs: {
-          type: 'checkbox',
-          value: this.inputValue
-        },
-        on: {
-          blur: this.onBlur,
-          change: this.toggle, // TODO: change this name
-          focus: this.onFocus
-        }
-      })
     }
   }
-
-  // render (h) {
-  //   const transition = h(VFadeTransition, [
-  //     h(VIcon, {
-  //       staticClass: 'icon--selection-control',
-  //       'class': {
-  //         'icon--checkbox': this.icon === 'check_box'
-  //       },
-  //       key: this.icon,
-  //       on: Object.assign({
-  //         click: this.toggle
-  //       }, this.$listeners)
-  //     }, this.icon)
-  //   ])
-
-  //   const data = {
-  //     attrs: {
-  //       tabindex: this.disabled
-  //         ? -1
-  //         : this.internalTabIndex || this.tabindex,
-  //       role: 'checkbox',
-  //       'aria-checked': this.inputIndeterminate ? 'mixed' : (this.isActive ? 'true' : 'false'),
-  //       'aria-label': this.label
-  //     }
-  //   }
-
-  //   const ripple = this.ripple ? this.genRipple() : null
-
-  //   return this.genInputGroup([transition, ripple], data)
-  // }
 }
