@@ -100,9 +100,11 @@ export default {
         ? this.activeTab
         : this.tabs.find(tab => tab.action === action)
 
-      if (!activeTab) return
-      this.sliderWidth = activeTab.$el.scrollWidth
-      this.sliderLeft = activeTab.$el.offsetLeft
+      this.$nextTick(() => {
+        if (!activeTab || !activeTab.$el) return
+        this.sliderWidth = activeTab.$el.scrollWidth
+        this.sliderLeft = activeTab.$el.offsetLeft
+      })
     },
     /**
      * When v-navigation-drawer changes the
