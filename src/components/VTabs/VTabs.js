@@ -71,7 +71,15 @@ export default {
     }
   },
 
+  mounted () {
+    this.checkIcons()
+  },
+
   methods: {
+    checkIcons () {
+      this.prevIconVisible = this.checkPrevIcon()
+      this.nextIconVisible = this.checkNextIcon()
+    },
     checkPrevIcon () {
       return this.scrollOffset > 0
     },
@@ -87,7 +95,7 @@ export default {
       if (this.hideSlider || !this.activeTab) return false
 
       // Give screen time to paint
-      const action = this.activeTab.action
+      const action = (this.activeTab || {}).action
       const activeTab = action === this.activeTab
         ? this.activeTab
         : this.tabs.find(tab => tab.action === action)
@@ -101,15 +109,15 @@ export default {
      * width of the container, call resize
      * after the transition is complete
      */
-    onContainerResize () {
-      clearTimeout(this.resizeTimeout)
-      this.resizeTimeout = setTimeout(this.callSlider, this.transitionTime)
-    },
     onResize () {
       if (this._isDestroyed) return
-
       this.callSlider()
-      this.scrollIntoView()
+
+      clearTimeout(this.resizeTimeout)
+      this.resizeTimeout = setTimeout(() => {
+        this.checkIcons()
+        this.scrollIntoView()
+      }, this.transitionTime)
     },
     overflowCheck (e, fn) {
       this.isOverflowing && fn(e)
@@ -206,11 +214,6 @@ export default {
 
       this.setOverflow()
     }
-  },
-
-  mounted () {
-    this.prevIconVisible = this.checkPrevIcon()
-    this.nextIconVisible = this.checkNextIcon()
   },
 
   render (h) {

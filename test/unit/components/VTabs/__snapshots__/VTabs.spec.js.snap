@@ -1,5 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`VTabs should match active tab 1`] = `
+
+<div class="tabs">
+  <div class="tabs__bar">
+    <div class="tabs__wrapper">
+      <div class="tabs__container">
+        <div class="tabs__slider-wrapper"
+             style="left: 0px; width: 0px;"
+        >
+          <div class="tabs__slider accent">
+          </div>
+        </div>
+        <div class="tabs__div">
+          <a href="#bar"
+             class="tabs__item tabs__item--active"
+          >
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
 exports[`VTabs should render generic elements in the tab container 1`] = `
 
 <div class="tabs">
