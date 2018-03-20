@@ -23,11 +23,11 @@ export default {
     },
     nextIcon: {
       type: String,
-      default: 'icon$next'
+      default: '$vuetify.icons.next'
     },
     prevIcon: {
       type: String,
-      default: 'icon$prev'
+      default: '$vuetify.icons.prev'
     },
     right: Boolean,
     showArrows: Boolean,

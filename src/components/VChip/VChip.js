@@ -58,7 +58,7 @@ export default {
       }
 
       return h('div', data, [
-        h(VIcon, 'icon$delete')
+        h(VIcon, '$vuetify.icons.delete')
       ])
     },
     genContent (h) {

@@ -7,7 +7,7 @@ export default {
   props: {
     sortIcon: {
       type: String,
-      default: 'icon$sort'
+      default: '$vuetify.icons.sort'
     }
   },
 

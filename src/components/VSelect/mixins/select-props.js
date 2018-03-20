@@ -2,7 +2,7 @@ export default {
   props: {
     appendIcon: {
       type: String,
-      default: 'icon$subgroup'
+      default: '$vuetify.icons.subgroup'
     },
     appendIconCb: Function,
     attach: Boolean,

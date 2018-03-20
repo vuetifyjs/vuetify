@@ -38,7 +38,7 @@ export default {
     },
     appendIcon: {
       type: String,
-      default: 'icon$append'
+      default: '$vuetify.icons.append'
     },
     disabled: Boolean,
     group: String,
@@ -150,7 +150,7 @@ export default {
       const icon = this.prependIcon
         ? this.prependIcon
         : this.subGroup
-          ? 'icon$subgroup'
+          ? '$vuetify.icons.subgroup'
           : false
 
       if (!icon && !this.$slots.prependIcon) return null

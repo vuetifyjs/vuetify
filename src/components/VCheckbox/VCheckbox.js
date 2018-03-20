@@ -39,11 +39,11 @@ export default {
     },
     icon () {
       if (this.inputIndeterminate) {
-        return 'icon$indeterminate'
+        return '$vuetify.icons.indeterminate'
       } else if (this.isActive) {
-        return 'icon$checked'
+        return '$vuetify.icons.checked'
       } else {
-        return 'icon$unchecked'
+        return '$vuetify.icons.unchecked'
       }
     }
   },
@@ -65,7 +65,7 @@ export default {
       h(VIcon, {
         staticClass: 'icon--selection-control',
         'class': {
-          'icon--checkbox': this.icon === 'icon$checked'
+          'icon--checkbox': this.icon === '$vuetify.icons.checked'
         },
         key: this.icon,
         on: Object.assign({

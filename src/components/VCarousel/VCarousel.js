@@ -32,7 +32,7 @@ export default {
     },
     delimiterIcon: {
       type: String,
-      default: 'icon$dot'
+      default: '$vuetify.icons.dot'
     },
     hideControls: Boolean,
     hideDelimiters: Boolean,
@@ -43,11 +43,11 @@ export default {
     },
     nextIcon: {
       type: [Boolean, String],
-      default: 'icon$next'
+      default: '$vuetify.icons.next'
     },
     prevIcon: {
       type: [Boolean, String],
-      default: 'icon$prev'
+      default: '$vuetify.icons.prev'
     },
     value: Number
   },

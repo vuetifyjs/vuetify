@@ -31,11 +31,11 @@ export default {
     totalVisible: [Number, String],
     nextIcon: {
       type: String,
-      default: 'icon$next'
+      default: '$vuetify.icons.next'
     },
     prevIcon: {
       type: String,
-      default: 'icon$prev'
+      default: '$vuetify.icons.prev'
     },
     value: {
       type: Number,
