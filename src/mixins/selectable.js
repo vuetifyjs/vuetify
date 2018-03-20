@@ -14,11 +14,11 @@ export default {
     event: 'change'
   },
 
-  data: () => ({
-    defaultColor: 'accent'
-  }),
-
   props: {
+    color: {
+      type: String,
+      default: 'accent'
+    },
     id: String,
     inputValue: null,
     falseValue: null,
@@ -64,10 +64,11 @@ export default {
         }
       }, this.$slots.label || this.label)
     },
+    onBlur () {
+      this.isFocused = false
+    },
     toggle () {
-      if (this.disabled) {
-        return
-      }
+      if (this.disabled) return
 
       let input = this.inputValue
       if (Array.isArray(input)) {
@@ -92,6 +93,9 @@ export default {
       this.validate(true, input)
 
       this.$emit('change', input)
+    },
+    onFocus () {
+      this.isFocused = true
     }
   }
 }

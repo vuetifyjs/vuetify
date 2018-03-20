@@ -125,7 +125,7 @@ export default {
         'class': this.classesColor,
         style: {
           height: !this.height
-            ? 'auto'
+            ? '32px'
             : `${parseInt(this.height)}px`
         }
       }, this.genDefaultSlot())

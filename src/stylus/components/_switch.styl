@@ -13,14 +13,6 @@ v-input--switch($material)
 theme(v-input--switch, "v-input--switch")
 
 .v-input--switch
-  &__switch
-    color: inherit
-    height: 32px
-    position: relative
-    margin-right: 8px
-    transition: .3s cubic-bezier(.25,.8,.25,1)
-    width: 38px
-
   &__track,
   &__thumb
     background-color: currentColor
@@ -42,6 +34,9 @@ theme(v-input--switch, "v-input--switch")
     position: relative
     width: 20px
     elevation(4)
+
+  .v-input--selection-controls__input
+    width: 38px
 
   .v-input--selection-controls__ripple
     left: -14px

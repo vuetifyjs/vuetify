@@ -24,6 +24,41 @@ selection-control($material)
 theme(selection-control, "v-input--selection-controls")
 
 .v-input--selection-controls
+  &__input
+    color: inherit
+    display: inline-flex
+    height: 100%
+    position: relative
+    margin-right: 8px
+    transition: .3s cubic-bezier(.25,.8,.25,1)
+    width: 24px
+
+    input
+      appearance: none
+      position: absolute
+
+  &__ripple
+    cursor: pointer
+    height: 48px
+    position: absolute
+    transition: inherit
+    width: 48px
+    left: -12px
+    top: calc(50% - 24px)
+
+    &:before
+      border-radius: 50%
+      bottom: 0
+      content: ''
+      position: absolute
+      opacity: .2
+      left: 0
+      right: 0
+      top: 0
+      transform-origin: center center
+      transform: scale(0.2)
+      transition: inherit
+
   .v-label
     pointer-events: all
     user-select: none
@@ -31,12 +66,10 @@ theme(selection-control, "v-input--selection-controls")
   .v-input__wrapper
     align-items: center
 
-    .v-input--selection-controls__ripple
-      cursor: pointer
-      height: 48px
-      position: absolute
-      transition: inherit
-      width: 48px
+  &.v-input--is-focused
+    .v-input--selection-controls__ripple:before
+      background: currentColor
+      transform: scale(.8)
 
 // .input-group--selection-controls.input-group--tab-focused,
 // .input-group--tab-focused .input-group:focus

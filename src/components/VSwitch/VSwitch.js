@@ -38,8 +38,13 @@ export default {
     genInput () {
       return this.$createElement('input', {
         attrs: {
-          type: 'hidden',
+          type: 'checkbox',
           value: this.inputValue
+        },
+        on: {
+          blur: this.onBlur,
+          change: this.toggle, // TODO: change this name
+          focus: this.onFocus
         }
       })
     },
@@ -53,7 +58,7 @@ export default {
         : null
 
       return this.$createElement('div', {
-        staticClass: 'v-input--switch__switch'
+        staticClass: 'v-input--selection-controls__input'
       }, [
         this.genInput(),
         this.genRipple({
