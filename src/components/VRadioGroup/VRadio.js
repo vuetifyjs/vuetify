@@ -58,7 +58,7 @@ export default {
       return classes
     },
     icon () {
-      return this.isActive ? '$vuetify.icons.radionOn' : '$vuetify.icons.radionOff'
+      return this.isActive ? '$vuetify.icons.radioOn' : '$vuetify.icons.radioOff'
     }
   },
 

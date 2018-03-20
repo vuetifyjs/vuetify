@@ -18,8 +18,8 @@ const ICONS_MATERIAL = {
   'expand': 'keyboard_arrow_down',
   'subgroup': 'arrow_drop_down',
   'dropdown': 'arrow_drop_down',
-  'radionOn': 'radio_button_checked',
-  'radionOff': 'radio_button_unchecked',
+  'radioOn': 'radio_button_checked',
+  'radioOff': 'radio_button_unchecked',
   'edit': 'edit'
 }
 
@@ -43,8 +43,8 @@ const ICONS_MDI = {
   'expand': 'mdi-chevron-down',
   'subgroup': 'mdi-menu-down',
   'dropdown': 'mdi-menu-down',
-  'radionOn': 'mdi-radiobox-marked',
-  'radionOff': 'mdi-radiobox-blank',
+  'radioOn': 'mdi-radiobox-marked',
+  'radioOff': 'mdi-radiobox-blank',
   'edit': 'mdi-pencil'
 }
 
@@ -68,8 +68,8 @@ const ICONS_FONTAWESOME4 = {
   'expand': 'fa fa-chevron-down',
   'subgroup': 'fa fa-caret-down',
   'dropdown': 'fa fa-caret-down',
-  'radionOn': 'fa fa-dot-circle',
-  'radionOff': 'fa fa-circle-o',
+  'radioOn': 'fa fa-dot-circle',
+  'radioOff': 'fa fa-circle-o',
   'edit': 'fa fa-pencil'
 }
 
@@ -93,8 +93,8 @@ const ICONS_FONTAWESOME = {
   'expand': 'fas fa-chevron-down',
   'subgroup': 'fas fa-caret-down',
   'dropdown': 'fas fa-caret-down',
-  'radionOn': 'far fa-dot-circle',
-  'radionOff': 'far fa-circle',
+  'radioOn': 'far fa-dot-circle',
+  'radioOff': 'far fa-circle',
   'edit': 'fas fa-edit'
 }
 
