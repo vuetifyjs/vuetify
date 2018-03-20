@@ -12,70 +12,75 @@ import Touch from '../../directives/touch'
 export default {
   name: 'v-switch',
 
-  mixins: [Rippleable, Selectable],
+  mixins: [
+    Rippleable,
+    Selectable
+  ],
 
   directives: { Touch },
 
   computed: {
     classes () {
-      const classes = {
-        'input-group--selection-controls switch': true
-      }
-
-      if (this.hasError) {
-        classes['error--text'] = true
-      } else {
-        return this.addTextColorClassChecks(classes)
-      }
-
-      return classes
-    },
-    rippleClasses () {
       return {
-        'input-group--selection-controls__ripple': true,
-        'input-group--selection-controls__ripple--active': this.isActive
-      }
-    },
-    containerClasses () {
-      return {
-        'input-group--selection-controls__container': true,
-        'input-group--selection-controls__container--light': this.light,
-        'input-group--selection-controls__container--disabled': this.disabled
-      }
-    },
-    toggleClasses () {
-      return {
-        'input-group--selection-controls__toggle': true,
-        'input-group--selection-controls__toggle--active': this.isActive
+        'v-input--selection-controls': true,
+        'v-input--switch': true
       }
     }
   },
 
   methods: {
+    genDefaultSlot () {
+      return [
+        this.genSwitch(),
+        this.genLabel()
+      ]
+    },
+    genInput () {
+      return this.$createElement('input', {
+        attrs: {
+          type: 'hidden',
+          value: this.inputValue
+        }
+      })
+    },
+    genSwitch () {
+      // Switches have default colors for thumb/track
+      // that do not tie into theme colors
+      // this avoids a visual issue where
+      // the color takes too long to transition
+      const classes = this.isActive
+        ? this.addTextColorClassChecks({}, this.color)
+        : null
+
+      return this.$createElement('div', {
+        staticClass: 'v-input--switch__switch'
+      }, [
+        this.genInput(),
+        this.genRipple({
+          'class': classes,
+          directives: [{
+            name: 'touch',
+            value: {
+              left: this.onSwipeLeft,
+              right: this.onSwipeRight
+            }
+          }]
+        }),
+        this.$createElement('div', {
+          staticClass: 'v-input--switch__track',
+          'class': classes
+        }),
+        this.$createElement('div', {
+          staticClass: 'v-input--switch__thumb',
+          'class': classes
+        })
+      ])
+    },
     onSwipeLeft () {
       if (this.isActive) this.toggle()
     },
     onSwipeRight () {
       if (!this.isActive) this.toggle()
     }
-  },
-
-  render (h) {
-    const container = h('div', {
-      'class': this.containerClasses
-    }, [
-      h('div', { 'class': this.toggleClasses }),
-      this.genRipple({
-        directives: [{
-          name: 'touch',
-          value: {
-            left: this.onSwipeLeft,
-            right: this.onSwipeRight
-          }
-        }]
-      })
-    ])
-
-    return this.genInputGroup([container])
   }
 }

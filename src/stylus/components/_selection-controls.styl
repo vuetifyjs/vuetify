@@ -3,139 +3,154 @@
 
 /** Theme */
 selection-control($material)
-  label
-    color: $material.text.primary
+  // label
+  //   color: $material.text.primary
 
-  .icon--selection-control
-    color: $material.text.secondary
+  // .icon--selection-control
+  //   color: $material.text.secondary
 
-  &.input-group--active
-    .icon--selection-control
-      color: inherit
+  // &.input-group--active
+  //   .icon--selection-control
+  //     color: inherit
 
-  &.input-group--disabled
-    .input-group__input
-      color: $material.text.disabled
+  // &.input-group--disabled
+  //   .input-group__input
+  //     color: $material.text.disabled
 
-      .icon--radio,
-      .icon--checkbox
-        color: inherit
+  //     .icon--radio,
+  //     .icon--checkbox
+  //       color: inherit
 
-theme(selection-control, "input-group--selection-controls")
+theme(selection-control, "v-input--selection-controls")
 
-.input-group--selection-controls.input-group--tab-focused,
-.input-group--tab-focused .input-group:focus
-  .input-group--selection-controls__ripple
-    &:before
-      transform: translate(-50%, -50%) scale(1)
-      opacity: $ripple-animation-visible-opacity
-
-/** Input */
-.input-group.input-group--selection-controls
-  display: flex
-  padding: 0
-
-  .icon--selection-control
-    cursor: pointer
-    position: absolute
-    left: 0
+.v-input--selection-controls
+  .v-label
+    pointer-events: all
     user-select: none
-    transition: .3s $transition.ease-in-out
 
-  .input-group__details:before, .input-group__details:after
-    display: none
+  .v-input__wrapper
+    align-items: center
 
-  .input-group__input
-    color: inherit
-    width: 100%
-    position: relative
-
-    // Needed for safari
-    .icon--selection-control
-      align-self: center
-      height: 30px
-      margin: auto
-
-  &.input-group--error
-    label
-      color: inherit
-
-    .input-group__input
-      .icon--selection-control
-        color: inherit
-
-/** Label */
-.input-group.input-group--selection-controls
-  label
-    cursor: pointer
-    position: absolute
-    left: 32px
-    user-select: none
-    z-index: 1
-  
-  &:not(.input-group--disabled)
-    label
-      pointer-events: all
-
-.input-group--selection-controls__ripple
-  border-radius: 50%
-  height: 48px
-  width: 48px
-  cursor: pointer
-  position: absolute
-  transform: translate(-12px, -50%)
-  transform-origin: center center
-  top: 50%
-  left: 0
-
-  &:before
-    content: ''
-    position: absolute
-    width: 36px
-    height: 36px
-    background: currentColor
-    border-radius: 50%
-    left: 50%
-    top: 50%
-    transform: translate(-50%, -50%) scale(.3)
-    opacity: 0
-    transition: $ripple-animation-transition
-    transform-origin: center center
-
-/** Appended and prepended icons */
-.input-group--prepend-icon
-  &.input-group--selection-controls
-    .icon--selection-control,
-    .input-group--selection-controls__ripple
-      left: 38px
-
-    label
-      left: 76px
-
-.input-group--append-icon
-  &.input-group--selection-controls
-    .input-group__append-icon
+    .v-input--selection-controls__ripple
+      cursor: pointer
+      height: 48px
       position: absolute
-      left: 32px
+      transition: inherit
+      width: 48px
 
-    &.input-group--selection-controls
-      label
-        left: 76px
+// .input-group--selection-controls.input-group--tab-focused,
+// .input-group--tab-focused .input-group:focus
+//   .input-group--selection-controls__ripple
+//     &:before
+//       transform: translate(-50%, -50%) scale(1)
+//       opacity: $ripple-animation-visible-opacity
 
-  &.input-group--prepend-icon
-    &.input-group--selection-controls
-      .input-group__append-icon
-        left: 72px
+// /** Input */
+// .input-group.input-group--selection-controls
+//   display: flex
+//   padding: 0
 
-      &.input-group--selection-controls
-        label
-          left: 112px
+//   .icon--selection-control
+//     cursor: pointer
+//     position: absolute
+//     left: 0
+//     user-select: none
+//     transition: .3s $transition.ease-in-out
 
-.input-group--prepend-icon
-  &.radio-group--row
-    .icon--selection-control,
-    .input-group--selection-controls__ripple
-      left: 14px
+//   .input-group__details:before, .input-group__details:after
+//     display: none
 
-    label
-      left: 52px
+//   .input-group__input
+//     color: inherit
+//     width: 100%
+//     position: relative
+
+//     // Needed for safari
+//     .icon--selection-control
+//       align-self: center
+//       height: 30px
+//       margin: auto
+
+//   &.input-group--error
+//     label
+//       color: inherit
+
+//     .input-group__input
+//       .icon--selection-control
+//         color: inherit
+
+// /** Label */
+// .input-group.input-group--selection-controls
+//   label
+//     cursor: pointer
+//     position: absolute
+//     left: 32px
+//     user-select: none
+//     z-index: 1
+
+//   &:not(.input-group--disabled)
+//     label
+//       pointer-events: all
+
+// .input-group--selection-controls__ripple
+//   border-radius: 50%
+//   height: 48px
+//   width: 48px
+//   cursor: pointer
+//   position: absolute
+//   transform: translate(-12px, -50%)
+//   transform-origin: center center
+//   top: 50%
+//   left: 0
+
+//   &:before
+//     content: ''
+//     position: absolute
+//     width: 36px
+//     height: 36px
+//     background: currentColor
+//     border-radius: 50%
+//     left: 50%
+//     top: 50%
+//     transform: translate(-50%, -50%) scale(.3)
+//     opacity: 0
+//     transition: $ripple-animation-transition
+//     transform-origin: center center
+
+// /** Appended and prepended icons */
+// .input-group--prepend-icon
+//   &.input-group--selection-controls
+//     .icon--selection-control,
+//     .input-group--selection-controls__ripple
+//       left: 38px
+
+//     label
+//       left: 76px
+
+// .input-group--append-icon
+//   &.input-group--selection-controls
+//     .input-group__append-icon
+//       position: absolute
+//       left: 32px
+
+//     &.input-group--selection-controls
+//       label
+//         left: 76px
+
+//   &.input-group--prepend-icon
+//     &.input-group--selection-controls
+//       .input-group__append-icon
+//         left: 72px
+
+//       &.input-group--selection-controls
+//         label
+//           left: 112px
+
+// .input-group--prepend-icon
+//   &.radio-group--row
+//     .icon--selection-control,
+//     .input-group--selection-controls__ripple
+//       left: 14px
+
+//     label
+//       left: 52px

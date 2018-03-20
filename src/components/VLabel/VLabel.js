@@ -24,7 +24,7 @@ export default {
     value: Boolean
   },
 
-  render (h, { children, props }) {
+  render (h, { children, listeners, props }) {
     const data = {
       staticClass: 'v-label',
       'class': {
@@ -33,6 +33,7 @@ export default {
       attrs: {
         for: props.for
       },
+      on: listeners,
       style: {
         left: `${parseInt(props.left)}px`,
         position: props.absolute ? 'absolute' : 'relative'

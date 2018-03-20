@@ -48,6 +48,7 @@ export default {
         ...this.classes,
         'v-input--has-state': this.hasState,
         'v-input--is-label-active': this.isLabelActive,
+        'v-input--is-dirty': this.isDirty,
         'v-input--is-disabled': this.disabled,
         'v-input--is-focused': this.isFocused,
         'v-input--is-loading': this.loading !== false,
@@ -61,7 +62,7 @@ export default {
         this.hint &&
         (this.persistentHint || this.isFocused)
     },
-    inputValue: {
+    proxyValue: {
       get () {
         return this.lazyValue
       },

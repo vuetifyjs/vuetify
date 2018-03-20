@@ -139,7 +139,7 @@ test('VTextField.js', ({ mount }) => {
     const input = jest.fn()
     wrapper.vm.$on('input', input)
 
-    expect(wrapper.vm.inputValue).toBe('foo')
+    expect(wrapper.vm.proxyValue).toBe('foo')
 
     clear.trigger('click')
 
@@ -161,7 +161,7 @@ test('VTextField.js', ({ mount }) => {
     const icon = wrapper.find('.v-input__icon--append .icon')[0]
     icon.trigger('click')
     await wrapper.vm.$nextTick()
-    expect(wrapper.vm.inputValue).toBe('foo')
+    expect(wrapper.vm.proxyValue).toBe('foo')
     expect(appendIconCb.mock.calls).toHaveLength(1)
   })
 
@@ -176,7 +176,7 @@ test('VTextField.js', ({ mount }) => {
     const icon = wrapper.find('.v-input__icon--append .icon')[0]
     icon.trigger('click')
     await wrapper.vm.$nextTick()
-    expect(wrapper.vm.inputValue).toBe('foo')
+    expect(wrapper.vm.proxyValue).toBe('foo')
   })
 
   it('should start validating on blur', async () => {

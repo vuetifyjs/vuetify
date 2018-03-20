@@ -1,10 +1,13 @@
 import Colorable from './colorable'
-import Inputable from './inputable'
+import VInput from '../components/VInput'
+import VLabel from '../components/VLabel'
 
 export default {
   name: 'selectable',
 
-  mixins: [Inputable, Colorable],
+  extends: VInput,
+
+  mixins: [Colorable],
 
   model: {
     prop: 'inputValue',
@@ -19,13 +22,13 @@ export default {
     id: String,
     inputValue: null,
     falseValue: null,
+    label: String,
     trueValue: null
   },
 
   computed: {
     isActive () {
-      if ((Array.isArray(this.inputValue))
-      ) {
+      if ((Array.isArray(this.inputValue))) {
         return this.inputValue.indexOf(this.value) !== -1
       }
 
@@ -50,10 +53,14 @@ export default {
 
   methods: {
     genLabel () {
-      return this.$createElement('label', {
+      return this.$createElement(VLabel, {
         on: { click: this.toggle },
         attrs: {
           for: this.id
+        },
+        props: {
+          color: 'error',
+          focused: this.hasState
         }
       }, this.$slots.label || this.label)
     },

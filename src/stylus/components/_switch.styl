@@ -2,98 +2,158 @@
 @import '../theme'
 
 /** Theme */
-switch($material)
-  &:not(.input-group--dirty)
-    .input-group--selection-controls__container
-      // Must overwrite color helpers
-      color: $material.selection-controls.track.inactive !important
+v-input--switch($material)
+  &__thumb
+    color: $material.selection-controls.thumb.inactive
 
-  .input-group--selection-controls__ripple
-    &:after
-      background-color: $material.selection-controls.thumb.inactive
-
-    &:not(.input-group--selection-controls__ripple--active)
-      color: $material.selection-controls.track.inactive
-
-    &--active:after
-      background-color: currentColor
-
-  .input-group--selection-controls__toggle
+  &__track
     color: $material.selection-controls.track.inactive
 
-    &--active
-      color: inherit
 
-  &.input-group--disabled
-    .input-group--selection-controls__ripple
-      &:after
-        background-color: $material.selection-controls.thumb.disabled !important
+theme(v-input--switch, "v-input--switch")
 
-    .input-group--selection-controls__toggle
-      color: $material.selection-controls.track.disabled !important
+.v-input--switch
+  &__switch
+    color: inherit
+    height: 32px
+    position: relative
+    margin-right: 8px
+    transition: .3s cubic-bezier(.25,.8,.25,1)
+    width: 38px
 
-theme(switch, "switch")
+  &__track,
+  &__thumb
+    background-color: currentColor
+    pointer-events: none
+    transition: inherit
 
-.input-group.input-group--selection-controls
-  z-index: 0
+  &__track
+    border-radius: 8px
+    height: 14px
+    left: 2px
+    right: 2px
+    position: absolute
+    top: calc(50% - 7px)
 
-  &.switch
-    &.input-group--prepend-icon, &.input-group--append-icon
-      label
-        left: 62px
+  &__thumb
+    border-radius: 50%
+    top: calc(50% - 10px)
+    height: 20px
+    position: relative
+    width: 20px
+    elevation(4)
 
-    &.input-group--prepend-icon
-      .input-group--selection-controls__container
-        margin-left: 6px
+  .v-input--selection-controls__ripple
+    left: -14px
+    top: calc(50% - 24px)
 
-    &.input-group--append-icon
-      .input-group__append-icon
-        left: 40px
+  &.v-input--is-dirty
+    .v-input--switch__track
+      opacity: .6
 
-    .input-group--selection-controls__container
-      color: inherit
-      position: relative
-      width: 36px
+    .v-input--selection-controls__ripple,
+    .v-input--switch__thumb
+      transform: translate(16px, 0)
 
-      &[class*="--text"]
-        .input-group--selection-controls__ripple--active:after
-          background-color: currentColor
 
-    .input-group--selection-controls__toggle
-      background-color: currentColor
-      color: inherit
-      position: absolute
-      height: 14px
-      top: 50%
-      left: 0
-      width: 34px
-      border-radius: 8px
-      transform: translateY(-50%)
 
-      &.input-group--selection-controls__toggle--active
-        opacity: .5
 
-    .input-group--selection-controls__ripple
-      transform: translate(-15px, -24px)
-      transition: .3s $transition.fast-in-fast-out
-      z-index: 1
-      left: 0
 
-      &:after
-        content: ''
-        position: absolute
-        display: inline-block
-        cursor: pointer
-        width: 20px
-        border-radius: 50%
-        top: 50%
-        left: 50%
-        transform: translate(-50%, -50%)
-        height: 20px
-        elevation(4)
 
-      &--active
-        transform: translate(2px, -24px)
 
-    label
-      padding-left: 14px
+
+
+//   &:not(.input-group--dirty)
+//     .input-group--selection-controls__container
+//       // Must overwrite color helpers
+//       color: $material.selection-controls.track.inactive !important
+
+//   .input-group--selection-controls__ripple
+//     &:after
+//       background-color: $material.selection-controls.thumb.inactive
+
+//     &:not(.input-group--selection-controls__ripple--active)
+//       color: $material.selection-controls.track.inactive
+
+//     &--active:after
+//       background-color: currentColor
+
+//   .input-group--selection-controls__toggle
+//     color: $material.selection-controls.track.inactive
+
+//     &--active
+//       color: inherit
+
+//   &.input-group--disabled
+//     .input-group--selection-controls__ripple
+//       &:after
+//         background-color: $material.selection-controls.thumb.disabled !important
+
+//     .input-group--selection-controls__toggle
+//       color: $material.selection-controls.track.disabled !important
+
+// theme(switch, "switch")
+
+// .input-group.input-group--selection-controls
+//   z-index: 0
+
+//   &.switch
+//     &.input-group--prepend-icon, &.input-group--append-icon
+//       label
+//         left: 62px
+
+//     &.input-group--prepend-icon
+//       .input-group--selection-controls__container
+//         margin-left: 6px
+
+//     &.input-group--append-icon
+//       .input-group__append-icon
+//         left: 40px
+
+//     .input-group--selection-controls__container
+//       color: inherit
+//       position: relative
+//       width: 36px
+
+//       &[class*="--text"]
+//         .input-group--selection-controls__ripple--active:after
+//           background-color: currentColor
+
+//     .input-group--selection-controls__toggle
+//       background-color: currentColor
+//       color: inherit
+//       position: absolute
+//       height: 14px
+//       top: 50%
+//       left: 0
+//       width: 34px
+//       border-radius: 8px
+//       transform: translateY(-50%)
+
+//       &.input-group--selection-controls__toggle--active
+//         opacity: .5
+
+//     .input-group--selection-controls__ripple
+//       transform: translate(-15px, -24px)
+//       transition: .3s $transition.fast-in-fast-out
+//       z-index: 1
+//       left: 0
+
+//       &:after
+//         content: ''
+//         position: absolute
+//         display: inline-block
+//         cursor: pointer
+//         width: 20px
+//         border-radius: 50%
+//         top: 50%
+//         left: 50%
+//         transform: translate(-50%, -50%)
+//         height: 20px
+//         elevation(4)
+
+//       &--active
+//         transform: translate(2px, -24px)
+
+//     label
+//       padding-left: 14px

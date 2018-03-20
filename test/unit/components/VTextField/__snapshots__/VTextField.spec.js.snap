@@ -102,7 +102,7 @@ exports[`VTextField.js should not display counter when set to false 1`] = `
          style="height: auto;"
     >
       <label class="v-label"
-             style="left: 12px; position: absolute;"
+             style="left: 0px; position: absolute;"
       >
       </label>
       <input maxlength="50"
@@ -132,7 +132,7 @@ exports[`VTextField.js should not display counter when set to false 2`] = `
          style="height: auto;"
     >
       <label class="v-label"
-             style="left: 12px; position: absolute;"
+             style="left: 0px; position: absolute;"
       >
       </label>
       <input maxlength="50"
@@ -159,7 +159,7 @@ exports[`VTextField.js should render component and match snapshot 1`] = `
          style="height: auto;"
     >
       <label class="v-label"
-             style="left: 12px; position: absolute;"
+             style="left: 0px; position: absolute;"
       >
       </label>
       <input tabindex="0"
@@ -185,7 +185,7 @@ exports[`VTextField.js should render component with async loading and custom pro
          style="height: auto;"
     >
       <label class="v-label"
-             style="left: 12px; position: absolute;"
+             style="left: 0px; position: absolute;"
       >
       </label>
       <input tabindex="0"
@@ -227,7 +227,7 @@ exports[`VTextField.js should render component with async loading and match snap
          style="height: auto;"
     >
       <label class="v-label"
-             style="left: 12px; position: absolute;"
+             style="left: 0px; position: absolute;"
       >
       </label>
       <input tabindex="0"

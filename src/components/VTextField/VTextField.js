@@ -85,7 +85,7 @@ export default {
         'v-input--text--box': (this.box || this.solo)
       }
     },
-    inputValue: {
+    proxyValue: {
       get () {
         return this.lazyValue
       },
@@ -170,7 +170,7 @@ export default {
       })
     },
     clearableCallback () {
-      this.inputValue = null
+      this.proxyValue = null
       this.$nextTick(() => this.$refs.input.focus())
     },
     genAppendSlot () {
@@ -185,7 +185,7 @@ export default {
     genCounter () {
       if (this.counter === false) return null
 
-      const value = (this.inputValue || '').length
+      const value = (this.proxyValue || '').length
       const max = this.counter === true ? this.$attrs.maxlength : this.counter
 
       return this.$createElement(VCounter, {
@@ -326,7 +326,7 @@ export default {
     },
     onInput (e) {
       this.mask && this.resetSelections(e.target)
-      this.inputValue = e.target.value
+      this.proxyValue = e.target.value
       this.badInput = e.target.validity && e.target.validity.badInput
       this.shouldAutoGrow && this.calculateInputHeight()
     },
