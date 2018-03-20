@@ -30,16 +30,12 @@ export default {
     },
     min: String,
     max: String,
-    selectedDates: Array,
     scrollable: Boolean,
     tableDate: {
       type: String,
       required: true
     },
-    value: {
-      type: String,
-      required: false
-    }
+    value: [String, Array]
   },
 
   computed: {
@@ -62,7 +58,7 @@ export default {
 
   methods: {
     genButtonClasses (value, isDisabled, isFloating) {
-      const isSelected = value === this.value || (this.selectedDates && this.selectedDates.indexOf(value) !== -1)
+      const isSelected = value === this.value || (Array.isArray(this.value) && this.value.indexOf(value) !== -1)
       const isCurrent = value === this.current
 
       const classes = {

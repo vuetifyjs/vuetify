@@ -15,13 +15,12 @@ test('VDatePickerMonthTable.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render component and match snapshot', () => {
+  it('should render component and match snapshot (multiple)', () => {
     const wrapper = mount(VDatePickerMonthTable, {
       propsData: {
         tableDate: '2005',
         current: '2005-05',
-        selectedDates: ['2005-11', '2005-10'],
-        value: '2005-11',
+        value: ['2005-11', '2005-10'],
       }
     })
 

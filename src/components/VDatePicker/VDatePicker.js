@@ -34,9 +34,8 @@ export default {
           return this.pickerDate
         }
 
-        const date =
-          (this.multiple ? this.value[this.value.length - 1] : this.value) ||
-           `${now.getFullYear()}-${now.getMonth() + 1}`
+        const date = (this.multiple ? this.value[this.value.length - 1] : this.value) ||
+          `${now.getFullYear()}-${now.getMonth() + 1}`
         const type = this.type === 'date' ? 'month' : 'year'
         return this.sanitizeDateString(date, type)
       })()
@@ -78,10 +77,7 @@ export default {
       type: Function,
       default: null
     },
-    multiple: {
-      type: Boolean,
-      default: false
-    },
+    multiple: Boolean,
     nextIcon: {
       type: String,
       default: 'chevron_right'
@@ -118,11 +114,8 @@ export default {
   },
 
   computed: {
-    selectedDates () {
-      return this.multiple ? this.value : null
-    },
     lastValue () {
-      return Array.isArray(this.value) ? this.value[this.value.length - 1] : this.value
+      return this.multiple ? this.value[this.value.length - 1] : this.value
     },
     current () {
       if (this.showCurrent === true) {
@@ -209,17 +202,9 @@ export default {
       this.activePicker = type.toUpperCase()
 
       if (this.value && this.value.length) {
-        const output = (this.multiple ? this.value : [this.value]).reduce(
-          (acc, val) => {
-            const date = this.sanitizeDateString(val, type)
-            if (this.isDateAllowed(date)) {
-              acc.push(date)
-            }
-            return acc
-          },
-          []
-        )
-
+        const output = (this.multiple ? this.value : [this.value])
+          .map(val => this.sanitizeDateString(val, type))
+          .filter(this.isDateAllowed)
         this.$emit('input', this.multiple ? output : output[0])
       }
     }
@@ -236,13 +221,11 @@ export default {
         : newInput
 
       this.$emit('input', output)
-      if (!this.multiple) {
-        this.$emit('change', newInput)
-      }
+      this.multiple || this.$emit('change', newInput)
     },
     checkMultipleProp () {
-      if (!(!this.multiple ^ Array.isArray(this.value))) {
-        consoleWarn('value must be an Array/String (depending on multiple)', this)
+      if (this.multiple ^ Array.isArray(this.value)) {
+        consoleWarn(`Value must be an Array/String (depending on multiple), got ${typeof this.value}`, this)
       }
     },
     isDateAllowed (value) {
@@ -327,9 +310,8 @@ export default {
           min: this.min,
           max: this.max,
           tableDate: `${this.tableYear}-${pad(this.tableMonth + 1)}`,
-          selectedDates: this.selectedDates,
           scrollable: this.scrollable,
-          value: this.lastValue
+          value: this.value
         },
         ref: 'table',
         on: {
@@ -349,9 +331,8 @@ export default {
           locale: this.locale,
           min: this.minMonth,
           max: this.maxMonth,
-          selectedDates: this.selectedDates,
           scrollable: this.scrollable,
-          value: (!this.lastValue || this.type === 'month') ? this.lastValue : this.lastValue.substr(0, 7),
+          value: (!this.value || !this.value.length || this.type === 'month') ? this.value : (this.multiple ? this.value : [this.value]).map(val => val.substr(0, 7)),
           tableDate: `${this.tableYear}`
         },
         ref: 'table',
