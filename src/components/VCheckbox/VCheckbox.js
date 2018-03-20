@@ -39,7 +39,7 @@ export default {
     },
     icon () {
       if (this.inputIndeterminate) {
-        return '$vuetify.icons.indeterminate'
+        return '$vuetify.icons.checkboxIndeterminate'
       } else if (this.isActive) {
         return '$vuetify.icons.checkboxOn'
       } else {

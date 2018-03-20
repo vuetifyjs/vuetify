@@ -12,7 +12,7 @@ const ICONS_MATERIAL = {
   'next': 'chevron_right',
   'checkboxOn': 'check_box',
   'checkboxOff': 'check_box_outline_blank',
-  'indeterminate': 'indeterminate_check_box',
+  'checkboxIndeterminate': 'indeterminate_check_box',
   'delimiter': 'fiber_manual_record', // for carousel
   'sort': 'arrow_upward',
   'expand': 'keyboard_arrow_down',
@@ -37,7 +37,7 @@ const ICONS_MDI = {
   'next': 'mdi-chevron-right',
   'checkboxOn': 'mdi-checkbox-marked',
   'checkboxOff': 'mdi-checkbox-blank-outline',
-  'indeterminate': 'mdi-minus-box',
+  'checkboxIndeterminate': 'mdi-minus-box',
   'delimiter': 'mdi-circle', // for carousel
   'sort': 'mdi-arrow-up',
   'expand': 'mdi-chevron-down',
@@ -62,7 +62,7 @@ const ICONS_FONTAWESOME4 = {
   'next': 'fa fa-chevron-right',
   'checkboxOn': 'fa fa-check-square',
   'checkboxOff': 'fa fa-square-o', // note 'far'
-  'indeterminate': 'fa fa-minus-square',
+  'checkboxIndeterminate': 'fa fa-minus-square',
   'delimiter': 'fa fa-circle', // for carousel
   'sort': 'fa fa-sort-up',
   'expand': 'fa fa-chevron-down',
@@ -87,7 +87,7 @@ const ICONS_FONTAWESOME = {
   'next': 'fas fa-chevron-right',
   'checkboxOn': 'fas fa-check-square',
   'checkboxOff': 'far fa-square', // note 'far'
-  'indeterminate': 'fas fa-minus-square',
+  'checkboxIndeterminate': 'fas fa-minus-square',
   'delimiter': 'fas fa-circle', // for carousel
   'sort': 'fas fa-sort-up',
   'expand': 'fas fa-chevron-down',
