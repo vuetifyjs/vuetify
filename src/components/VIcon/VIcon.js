@@ -1,4 +1,5 @@
 import '../../stylus/components/_icons.styl'
+import { getObjectValueByPath } from '../../util/helpers'
 
 import Themeable from '../../mixins/themeable'
 import Colorable from '../../mixins/colorable'
@@ -28,13 +29,7 @@ function remapInternalIcon (parent, iconName) {
   }
 
   // Now look up icon indirection name, e.g. '$vuetify.icons.cancel':
-  let shortIconName = iconName.slice(ICONS_PREFIX.length) // just the icons member name
-  if (parent && parent.$vuetify.icons.hasOwnProperty(shortIconName)) {
-    return parent.$vuetify.icons[shortIconName]
-  }
-
-  console.log('No parent $vuetify for icon', iconName)
-  return shortIconName // we don't  know this one but something else might
+  return getObjectValueByPath(parent, iconName) || iconName
 }
 
 export default {
