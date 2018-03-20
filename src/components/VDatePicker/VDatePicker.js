@@ -117,6 +117,15 @@ export default {
     lastValue () {
       return this.multiple ? this.value[this.value.length - 1] : this.value
     },
+    selectedMonths () {
+      if (!this.value || !this.value.length || this.type === 'month') {
+        return this.value
+      } else if (this.multiple) {
+        return this.value.map(val => val.substr(0, 7))
+      } else {
+        return this.value.substr(0, 7)
+      }
+    },
     current () {
       if (this.showCurrent === true) {
         return this.sanitizeDateString(`${this.now.getFullYear()}-${this.now.getMonth() + 1}-${this.now.getDate()}`, this.type)
@@ -224,8 +233,11 @@ export default {
       this.multiple || this.$emit('change', newInput)
     },
     checkMultipleProp () {
-      if (this.multiple ^ Array.isArray(this.value)) {
-        consoleWarn(`Value must be an Array/String (depending on multiple), got ${typeof this.value}`, this)
+      if (this.value == null) return
+      const valueType = this.value.constructor.name
+      const expected = this.multiple ? 'Array' : 'String'
+      if (valueType !== expected) {
+        consoleWarn(`Value must be ${this.multiple ? 'an' : 'a'} ${expected}, got ${valueType}`, this)
       }
     },
     isDateAllowed (value) {
@@ -332,7 +344,7 @@ export default {
           min: this.minMonth,
           max: this.maxMonth,
           scrollable: this.scrollable,
-          value: (!this.value || !this.value.length || this.type === 'month') ? this.value : (this.multiple ? this.value : [this.value]).map(val => val.substr(0, 7)),
+          value: this.selectedMonths,
           tableDate: `${this.tableYear}`
         },
         ref: 'table',
