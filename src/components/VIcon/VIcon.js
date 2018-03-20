@@ -15,21 +15,26 @@ function isFontAwesome5 (iconType) {
   return ['fas', 'far', 'fal', 'fab'].some(val => iconType.includes(val))
 }
 
-// This remaps internal names like 'icon$cancel' to the current name
+const ICONS_PREFIX = '$vuetify.icons.'
+
+// This remaps internal names like '$vuetify.icons.cancel' to the current name
 // for that icon. Note the parent component is needed for $vuetify because
 // VIcon is a functional component. This function only looks at the
 // immediate parent, so it won't remap for a nested functional components.
 function remapInternalIcon (parent, iconName) {
-  if (iconName.startsWith('icon$')) {
-    iconName = iconName.slice(5)
-    // Now look up 'cancel' when given 'icon$cancel':
-    if (parent && parent.$vuetify.icons.hasOwnProperty(iconName)) {
-      iconName = parent.$vuetify.icons[iconName]
-    } else {
-      console.log('No parent $vuetify for icon', iconName)
-    }
+  if (!iconName.startsWith(ICONS_PREFIX)) {
+    // return original icon name unchanged
+    return iconName
   }
-  return iconName
+
+  // Now look up icon indirection name, e.g. '$vuetify.icons.cancel':
+  let shortIconName = iconName.slice(ICONS_PREFIX.length) // just the icons member name
+  if (parent && parent.$vuetify.icons.hasOwnProperty(shortIconName)) {
+    return parent.$vuetify.icons[shortIconName]
+  }
+
+  console.log('No parent $vuetify for icon', iconName)
+  return shortIconName // we don't  know this one but something else might
 }
 
 export default {
@@ -74,7 +79,7 @@ export default {
       delete data.domProps.innerHTML
     }
 
-    // Remap internal names like 'icon$cancel' to the current name for that icon
+    // Remap internal names like '$vuetify.icons.cancel' to the current name for that icon
     iconName = remapInternalIcon(parent, iconName)
 
     let iconType = 'material-icons'
@@ -87,8 +92,8 @@ export default {
       iconType = iconName.slice(0, delimiterIndex)
 
       if (isFontAwesome5(iconType)) iconType = ''
-    // Assume if not a custom icon
-    // is Material Icon font
+      // Assume if not a custom icon
+      // is Material Icon font
     } else children.push(iconName)
 
     data.attrs = data.attrs || {}
