@@ -27,7 +27,7 @@ export default {
       children.push(h('div', {
         'class': 'card__media__background',
         style: {
-          background: `url(${this.src}) center center / ${this.contain ? 'contain' : 'cover'} no-repeat`
+          background: `url("${this.src}") center center / ${this.contain ? 'contain' : 'cover'} no-repeat`
         }
       }))
     }
