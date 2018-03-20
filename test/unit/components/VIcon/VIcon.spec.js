@@ -110,8 +110,8 @@ test('VIcon.js', ({ mount, compileToFunctions }) => {
     expect(wrapper.element.className).toBe('icon fa fa-home')
   })
 
-  it('should render MD left icon from $vuetify.icons.checked', () => {
-    const context = functionalContext({}, '$vuetify.icons.checked')
+  it('should render MD left icon from $vuetify.icons.checkboxOn', () => {
+    const context = functionalContext({}, '$vuetify.icons.checkboxOn')
     const wrapper = mount(VIcon, context)
 
     expect(wrapper.text()).toBe('check_box')

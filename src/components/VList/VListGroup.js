@@ -38,7 +38,7 @@ export default {
     },
     appendIcon: {
       type: String,
-      default: '$vuetify.icons.append'
+      default: '$vuetify.icons.expand'
     },
     disabled: Boolean,
     group: String,

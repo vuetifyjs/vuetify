@@ -10,16 +10,16 @@ const ICONS_MATERIAL = {
   'error': 'warning',
   'prev': 'chevron_left',
   'next': 'chevron_right',
-  'checked': 'check_box',
-  'unchecked': 'check_box_outline_blank',
+  'checkboxOn': 'check_box',
+  'checkboxOff': 'check_box_outline_blank',
   'indeterminate': 'indeterminate_check_box',
-  'dot': 'fiber_manual_record', // for carousel
+  'delimiter': 'fiber_manual_record', // for carousel
   'sort': 'arrow_upward',
   'expand': 'keyboard_arrow_down',
-  'append': 'keyboard_arrow_down',
   'subgroup': 'arrow_drop_down',
-  'rchecked': 'radio_button_checked',
-  'runchecked': 'radio_button_unchecked',
+  'dropdown': 'arrow_drop_down',
+  'radionOn': 'radio_button_checked',
+  'radionOff': 'radio_button_unchecked',
   'edit': 'edit'
 }
 
@@ -35,16 +35,16 @@ const ICONS_MDI = {
   'error': 'mdi-alert',
   'prev': 'mdi-chevron-left',
   'next': 'mdi-chevron-right',
-  'checked': 'mdi-checkbox-marked',
-  'unchecked': 'mdi-checkbox-blank-outline',
+  'checkboxOn': 'mdi-checkbox-marked',
+  'checkboxOff': 'mdi-checkbox-blank-outline',
   'indeterminate': 'mdi-minus-box',
-  'dot': 'mdi-circle', // for carousel
+  'delimiter': 'mdi-circle', // for carousel
   'sort': 'mdi-arrow-up',
   'expand': 'mdi-chevron-down',
-  'append': 'mdi-chevron-down',
   'subgroup': 'mdi-menu-down',
-  'rchecked': 'mdi-radiobox-marked',
-  'runchecked': 'mdi-radiobox-blank',
+  'dropdown': 'mdi-menu-down',
+  'radionOn': 'mdi-radiobox-marked',
+  'radionOff': 'mdi-radiobox-blank',
   'edit': 'mdi-pencil'
 }
 
@@ -60,16 +60,16 @@ const ICONS_FONTAWESOME4 = {
   'error': 'fa fa-exclamation-triangle',
   'prev': 'fa fa-chevron-left',
   'next': 'fa fa-chevron-right',
-  'checked': 'fa fa-check-square',
-  'unchecked': 'fa fa-square-o', // note 'far'
+  'checkboxOn': 'fa fa-check-square',
+  'checkboxOff': 'fa fa-square-o', // note 'far'
   'indeterminate': 'fa fa-minus-square',
-  'dot': 'fa fa-circle', // for carousel
+  'delimiter': 'fa fa-circle', // for carousel
   'sort': 'fa fa-sort-up',
   'expand': 'fa fa-chevron-down',
-  'append': 'fa fa-chevron-down',
   'subgroup': 'fa fa-caret-down',
-  'rchecked': 'fa fa-dot-circle',
-  'runchecked': 'fa fa-circle-o',
+  'dropdown': 'fa fa-caret-down',
+  'radionOn': 'fa fa-dot-circle',
+  'radionOff': 'fa fa-circle-o',
   'edit': 'fa fa-pencil'
 }
 
@@ -85,16 +85,16 @@ const ICONS_FONTAWESOME = {
   'error': 'fas fa-exclamation-triangle',
   'prev': 'fas fa-chevron-left',
   'next': 'fas fa-chevron-right',
-  'checked': 'fas fa-check-square',
-  'unchecked': 'far fa-square', // note 'far'
+  'checkboxOn': 'fas fa-check-square',
+  'checkboxOff': 'far fa-square', // note 'far'
   'indeterminate': 'fas fa-minus-square',
-  'dot': 'fas fa-circle', // for carousel
+  'delimiter': 'fas fa-circle', // for carousel
   'sort': 'fas fa-sort-up',
   'expand': 'fas fa-chevron-down',
-  'append': 'fas fa-chevron-down',
   'subgroup': 'fas fa-caret-down',
-  'rchecked': 'far fa-dot-circle',
-  'runchecked': 'far fa-circle',
+  'dropdown': 'fas fa-caret-down',
+  'radionOn': 'far fa-dot-circle',
+  'radionOff': 'far fa-circle',
   'edit': 'fas fa-edit'
 }
 
