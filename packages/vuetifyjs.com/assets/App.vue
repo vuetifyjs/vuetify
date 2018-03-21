@@ -52,7 +52,7 @@
       this.snackbar({
         color: 'default',
         close: true,
-        id: 'vue-conf-sale1',
+        id: 'vue-conf-sale',
         text: 'Go To Store',
         msg: 'The _Vuetify Alpha Theme_ on **SALE** through 3/28',
         to: { name: 'store/Index' },
