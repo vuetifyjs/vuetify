@@ -18,11 +18,9 @@ export default {
     Selectable
   ],
 
-  data () {
-    return {
-      inputIndeterminate: this.indeterminate
-    }
-  },
+  data: vm => ({
+    inputIndeterminate: vm.indeterminate
+  }),
 
   props: {
     indeterminate: Boolean
@@ -63,12 +61,10 @@ export default {
             : this.isActive.toString()
         }),
         this.genRipple({
-          'class': this.classesControl
+          'class': this.classesSelectable
         }),
         this.$createElement(VIcon, {
-          props: {
-            color: this.isActive && this.color
-          }
+          'class': this.classesSelectable
         }, this.computedIcon)
       ])
     },

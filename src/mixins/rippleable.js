@@ -14,7 +14,7 @@ export default {
   },
 
   methods: {
-    genRipple (data) {
+    genRipple (data = {}) {
       data.staticClass = 'v-input--selection-controls__ripple'
       data.directives = data.directives || []
       data.directives.push({

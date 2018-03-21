@@ -1,4 +1,4 @@
-import Colorable from './colorable'
+// Components
 import VInput from '../components/VInput'
 import VLabel from '../components/VLabel'
 
@@ -6,8 +6,6 @@ export default {
   name: 'selectable',
 
   extends: VInput,
-
-  mixins: [Colorable],
 
   model: {
     prop: 'inputValue',
@@ -27,10 +25,11 @@ export default {
   },
 
   computed: {
-    classesControl () {
-      return this.isActive
-        ? this.addTextColorClassChecks({}, this.color)
-        : null
+    classesSelectable () {
+      return this.addTextColorClassChecks(
+        {},
+        this.isDirty ? this.color : this.validationState
+      )
     },
     isActive () {
       if ((Array.isArray(this.inputValue))) {

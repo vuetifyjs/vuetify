@@ -7,23 +7,14 @@ radiogroup($material)
 
 theme(radiogroup, "radio-group")
 
-.radio-group
-  .input-group__details:before, .input-group__details:after
-    display: none
-
-  .input-group
-    padding: 0
-
-  &--column
-    .input-group__input
-      display: block
+.v-input--radio-group
+  &__input
+    display: flex
 
   &--row
-    .input-group__input
+    .v-input--radio-group__input
       flex-direction: row
 
-  &.input-group--error
-    .radio
-      label,
-      .icon--selection-control
-        color: inherit
+  &--column
+    .v-input--radio-group__input
+      flex-direction: column

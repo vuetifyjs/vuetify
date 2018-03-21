@@ -3,8 +3,10 @@ import '../../stylus/components/_input-groups.styl'
 import '../../stylus/components/_selection-controls.styl'
 import '../../stylus/components/_radio-group.styl'
 
+// Components
+import VInput from '../VInput'
+
 // Mixins
-import Inputable from '../../mixins/inputable'
 import {
   provide as RegistrableProvide
 } from '../../mixins/registrable'
@@ -12,8 +14,9 @@ import {
 export default {
   name: 'v-radio-group',
 
+  extends: VInput,
+
   mixins: [
-    Inputable,
     RegistrableProvide('radio')
   ],
 
@@ -25,7 +28,8 @@ export default {
   provide () {
     return {
       isMandatory: () => this.mandatory,
-      name: () => this.name
+      name: () => this.name,
+      validationState: () => this.validationState
     }
   },
 
@@ -39,6 +43,10 @@ export default {
       type: Boolean,
       default: true
     },
+    height: {
+      type: [Number, String],
+      default: 'auto'
+    },
     inputValue: null,
     mandatory: {
       type: Boolean,
@@ -49,11 +57,7 @@ export default {
   },
 
   watch: {
-    hasError (val) {
-      for (let index = this.radios.length; --index >= 0;) {
-        this.radios[index].parentError = val
-      }
-    },
+    hasError: 'setErrorState',
     inputValue (val) {
       for (let index = this.radios.length; --index >= 0;) {
         const radio = this.radios[index]
@@ -65,19 +69,28 @@ export default {
   computed: {
     classes () {
       return {
-        'radio-group': true,
-        'radio-group--column': this.column && !this.row,
-        'radio-group--row': this.row,
-        'error--text': this.hasError
+        'v-input--selection-controls v-input--radio-group': true,
+        'v-input--radio-group--column': this.column && !this.row,
+        'v-input--radio-group--row': this.row
       }
     }
   },
 
+  mounted () {
+    this.setErrorState(this.hasError)
+  },
+
   methods: {
+    genDefaultSlot () {
+      return [this.genRadioGroup()]
+    },
+    genRadioGroup () {
+      return this.$createElement('div', {
+        staticClass: 'v-input--radio-group__input'
+      }, this.$slots.default)
+    },
     toggleRadio (value) {
-      if (this.disabled) {
-        return
-      }
+      if (this.disabled) return
 
       this.shouldValidate = true
       this.$emit('change', value)
@@ -102,6 +115,11 @@ export default {
       radio.$on('focus', this.radioFocus)
       this.radios.push(radio)
     },
+    setErrorState (val) {
+      for (let index = this.radios.length; --index >= 0;) {
+        this.radios[index].parentError = val
+      }
+    },
     unregister (radio) {
       radio.$off('change', this.toggleRadio)
       radio.$off('blur', this.radioBlur)
@@ -111,14 +129,5 @@ export default {
 
       if (index > -1) this.radios.splice(index, 1)
     }
-  },
-
-  render () {
-    const data = {
-      attrs: {
-        role: 'radiogroup'
-      }
-    }
-    return this.genInputGroup(this.$slots.default, data)
   }
 }

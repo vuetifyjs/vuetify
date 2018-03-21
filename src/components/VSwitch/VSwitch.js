@@ -40,7 +40,7 @@ export default {
       }, [
         this.genInput('checkbox'),
         this.genRipple({
-          'class': this.classesControl,
+          'class': this.classesSelectable,
           directives: [{
             name: 'touch',
             value: {
@@ -60,7 +60,7 @@ export default {
     genSwitchPart (target) {
       return this.$createElement('div', {
         staticClass: `v-input--switch__${target}`,
-        'class': this.classesControl
+        'class': this.classesSelectable
       })
     },
     onSwipeLeft () {
