@@ -113,10 +113,10 @@ export default {
      */
     onResize () {
       if (this._isDestroyed) return
-      this.callSlider()
 
       clearTimeout(this.resizeTimeout)
       this.resizeTimeout = setTimeout(() => {
+        this.callSlider()
         this.checkIcons()
         this.scrollIntoView()
       }, this.transitionTime)
