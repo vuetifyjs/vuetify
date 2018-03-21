@@ -52,10 +52,10 @@
       this.snackbar({
         color: 'default',
         close: true,
-        id: 'rebuilding-part-1',
-        text: 'Go to Article',
-        msg: 'Just published — _Rebuilding input-controls Part 1_',
-        href: 'https://medium.com/vuetify/rebuilding-input-controls-part-1-102005207b07',
+        id: 'vue-conf-sale',
+        text: 'Go To Store',
+        msg: 'The _Vuetify Alpha Theme_ on **SALE** through 3/28',
+        to: '/store/product/813199294506',
         timeout: 0
       })
     },

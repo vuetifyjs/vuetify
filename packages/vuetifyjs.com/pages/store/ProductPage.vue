@@ -112,7 +112,7 @@
 
     data: () => ({
       cartLoading: false,
-      select: null,
+      select: {},
       quantity: 1
     }),
 
@@ -137,9 +137,11 @@
     },
 
     created () {
-      if (!this.product.variants.length) return
+      this.setSelect()
+    },
 
-      this.select = this.product.variants[0]
+    mounted () {
+      Promise.resolve(this.asyncData).then(this.setSelect)
     },
 
     methods: {
@@ -155,6 +157,13 @@
           this.cartLoading = false
           this.$router.push({ name: 'store/Cart' })
         })
+      },
+      setSelect () {
+        if (!this.product ||
+          !this.product.variants.length
+        ) return
+
+        this.select = this.product.variants[0]
       },
       snackHandler () {
         this.$router.push({ name: 'store/Cart' })
