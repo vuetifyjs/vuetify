@@ -7,7 +7,6 @@
     height="58px"
     :flat="isHome"
     :manual-scroll="isManualScrolled"
-    :scroll-off-screen="!isHome"
     ref="toolbar"
   )#app-toolbar
     v-toolbar-side-icon(
