@@ -62,7 +62,7 @@
 
     methods: {
       genSrc (name) {
-        return `'/static/doc-images/layouts/${name.toLowerCase().replace(' ', '-')}.png'`
+        return `/static/doc-images/layouts/${name.toLowerCase().replace(' ', '-')}.png`
       }
     }
   }
