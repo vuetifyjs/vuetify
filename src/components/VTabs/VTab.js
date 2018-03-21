@@ -39,7 +39,7 @@ export default {
       return {
         'tabs__item': true,
         'tabs__item--disabled': this.disabled,
-        [this.activeClass]: !this.to && this.isActive
+        [this.activeClass]: this.isActive
       }
     },
     action () {
