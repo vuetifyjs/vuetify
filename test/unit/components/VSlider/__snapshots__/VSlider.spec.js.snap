@@ -2,27 +2,37 @@
 
 exports[`Vslider.vue should be focused when active 1`] = `
 
-<div role="slider"
-     tabindex="0"
-     class="input-group input-group--focused input-group--dirty input-group--slider input-group--active"
->
-  <div class="input-group__input">
-    <div class="slider">
-      <div class="slider__track__container">
-        <div class="slider__track">
-        </div>
-        <div class="slider__track-fill primary">
-        </div>
-      </div>
-      <div class="slider__thumb-container"
-           style="left: 50%;"
+<div class="v-input v-input--slider v-input--is-label-active v-input--is-dirty v-input--is-focused theme--light">
+  <div class="v-input__control">
+    <div class="v-input__wrapper"
+         style="height: 32px;"
+    >
+      <label class="v-label"
+             style="left: 0px; position: relative;"
       >
-        <div class="slider__thumb primary">
+      </label>
+      <div role="slider"
+           tabindex="0"
+           class="v-slider"
+      >
+        <div class="v-slider__track__container">
+          <div class="v-slider__track">
+          </div>
+          <div class="v-slider__track-fill primary">
+          </div>
+        </div>
+        <div class="v-slider__thumb-container"
+             style="left: 50%;"
+        >
+          <div class="v-slider__thumb primary">
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="input-group__details">
+    <div class="v-messages">
+      <div class="v-messages__wrapper">
+      </div>
+    </div>
   </div>
 </div>
 
@@ -30,25 +40,35 @@ exports[`Vslider.vue should be focused when active 1`] = `
 
 exports[`Vslider.vue should match a snapshot 1`] = `
 
-<div role="slider"
-     tabindex="0"
-     class="input-group input-group--slider"
->
-  <div class="input-group__input">
-    <div class="slider">
-      <div class="slider__track__container">
-        <div class="slider__track">
+<div class="v-input v-input--slider theme--light">
+  <div class="v-input__control">
+    <div class="v-input__wrapper"
+         style="height: 32px;"
+    >
+      <label class="v-label"
+             style="left: 0px; position: relative;"
+      >
+      </label>
+      <div role="slider"
+           tabindex="0"
+           class="v-slider"
+      >
+        <div class="v-slider__track__container">
+          <div class="v-slider__track">
+          </div>
+          <div class="v-slider__track-fill primary">
+          </div>
         </div>
-        <div class="slider__track-fill primary">
-        </div>
-      </div>
-      <div class="slider__thumb-container">
-        <div class="slider__thumb">
+        <div class="v-slider__thumb-container">
+          <div class="v-slider__thumb">
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="input-group__details">
+    <div class="v-messages">
+      <div class="v-messages__wrapper">
+      </div>
+    </div>
   </div>
 </div>
 
@@ -56,33 +76,43 @@ exports[`Vslider.vue should match a snapshot 1`] = `
 
 exports[`Vslider.vue should render component with thumbLabel and match a snapshot 1`] = `
 
-<div role="slider"
-     tabindex="0"
-     class="input-group input-group--slider"
->
-  <div class="input-group__input">
-    <div class="slider">
-      <div class="slider__track__container">
-        <div class="slider__track">
+<div class="v-input v-input--slider theme--light">
+  <div class="v-input__control">
+    <div class="v-input__wrapper"
+         style="height: 32px;"
+    >
+      <label class="v-label"
+             style="left: 0px; position: relative;"
+      >
+      </label>
+      <div role="slider"
+           tabindex="0"
+           class="v-slider"
+      >
+        <div class="v-slider__track__container">
+          <div class="v-slider__track">
+          </div>
+          <div class="v-slider__track-fill primary">
+          </div>
         </div>
-        <div class="slider__track-fill primary">
-        </div>
-      </div>
-      <div class="slider__thumb-container slider__thumb-container--label">
-        <div class="slider__thumb">
-        </div>
-        <div class="slider__thumb--label__container"
-             style="display: none;"
-        >
-          <div class="slider__thumb--label">
-            <span>
-            </span>
+        <div class="v-slider__thumb-container v-slider__thumb-container-label">
+          <div class="v-slider__thumb">
+          </div>
+          <div class="v-slider__thumb-label__container"
+               style="display: none;"
+          >
+            <div class="v-slider__thumb-label">
+              <span>
+              </span>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="input-group__details">
+    <div class="v-messages">
+      <div class="v-messages__wrapper">
+      </div>
+    </div>
   </div>
 </div>
 
@@ -90,47 +120,35 @@ exports[`Vslider.vue should render component with thumbLabel and match a snapsho
 
 exports[`Vslider.vue should render component with ticks and match a snapshot 1`] = `
 
-<div role="slider"
-     tabindex="0"
-     class="input-group input-group--slider input-group--ticks"
->
-  <div class="input-group__input">
-    <div class="slider">
-      <div class="slider__track__container">
-        <div class="slider__track">
+<div class="v-input v-input--slider v-input--ticks theme--light">
+  <div class="v-input__control">
+    <div class="v-input__wrapper"
+         style="height: 32px;"
+    >
+      <label class="v-label"
+             style="left: 0px; position: relative;"
+      >
+      </label>
+      <div role="slider"
+           tabindex="0"
+           class="v-slider"
+      >
+        <div class="v-slider__track__container">
+          <div class="v-slider__track">
+          </div>
+          <div class="v-slider__track-fill primary">
+          </div>
         </div>
-        <div class="slider__track-fill primary">
-        </div>
-      </div>
-      <div class="slider__ticks-container">
-        <span class="slider__tick"
-              style="left: 0%;"
-        >
-        </span>
-        <span class="slider__tick"
-              style="left: 25%;"
-        >
-        </span>
-        <span class="slider__tick"
-              style="left: 50%;"
-        >
-        </span>
-        <span class="slider__tick"
-              style="left: 75%;"
-        >
-        </span>
-        <span class="slider__tick"
-              style="left: 100%;"
-        >
-        </span>
-      </div>
-      <div class="slider__thumb-container">
-        <div class="slider__thumb">
+        <div class="v-slider__thumb-container">
+          <div class="v-slider__thumb">
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="input-group__details">
+    <div class="v-messages">
+      <div class="v-messages__wrapper">
+      </div>
+    </div>
   </div>
 </div>
 

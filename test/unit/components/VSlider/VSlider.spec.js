@@ -41,7 +41,9 @@ test('Vslider.vue', ({ mount }) => {
       }
     })
 
-    expect(wrapper.element.getAttribute('tabindex')).toBe('-1')
+    const slider = wrapper.first('.v-slider')
+
+    expect(slider.element.getAttribute('tabindex')).toBe('-1')
     expect(warning).toHaveBeenTipped()
   })
 
@@ -118,19 +120,21 @@ test('Vslider.vue', ({ mount }) => {
     const input = jest.fn()
     wrapper.vm.$on('input', input)
 
-    wrapper.trigger('keydown.space')
+    const slider = wrapper.first('.v-slider')
+
+    slider.trigger('keydown.space')
     expect(input).not.toBeCalled()
-    wrapper.trigger('keydown.left')
+    slider.trigger('keydown.left')
     expect(input).toBeCalledWith(49)
-    wrapper.trigger('keydown.right')
+    slider.trigger('keydown.right')
     expect(input).toBeCalledWith(51)
-    wrapper.trigger('keydown.home')
+    slider.trigger('keydown.home')
     expect(input).toBeCalledWith(0)
-    wrapper.trigger('keydown.end')
+    slider.trigger('keydown.end')
     expect(input).toBeCalledWith(100)
-    wrapper.trigger('keydown.pageup')
+    slider.trigger('keydown.pageup')
     expect(input).toBeCalledWith(40)
-    wrapper.trigger('keydown.pagedown')
+    slider.trigger('keydown.pagedown')
     expect(input).toBeCalledWith(60)
 
     expect(warning).toHaveBeenTipped()
