@@ -33,7 +33,7 @@ export default {
         on: ExpandTransitionGenerator('datatable__expand-col--expanded')
       }, children)
 
-      return this.nowrapExpanded ? transition : this.genTR([transition], { class: 'datatable__expand-row' })
+      return this.nowrapExpanded ? children : this.genTR([transition], { class: 'datatable__expand-row' })
     },
     genFilteredItems () {
       if (!this.$scopedSlots.items) {
