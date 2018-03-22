@@ -1,20 +1,24 @@
+// Styles
 import '../../stylus/components/_sliders.styl'
 
-import { addOnceEventListener, createRange } from '../../util/helpers'
-
-import Colorable from '../../mixins/colorable'
-import Inputable from '../../mixins/inputable'
-
-import ClickOutside from '../../directives/click-outside'
-
+// Components
+import VLabel from '../VLabel'
 import { VScaleTransition } from '../transitions'
 
+// Extensions
+import VInput from '../VInput'
+
+// Directives
+import ClickOutside from '../../directives/click-outside'
+
+// Utilities
+import { addOnceEventListener, createRange } from '../../util/helpers'
 import { consoleWarn } from '../../util/console'
 
 export default {
   name: 'v-slider',
 
-  mixins: [Colorable, Inputable],
+  extends: VInput,
 
   directives: { ClickOutside },
 
@@ -28,6 +32,7 @@ export default {
   },
 
   props: {
+    label: String,
     min: {
       type: [Number, String],
       default: 0
@@ -56,11 +61,9 @@ export default {
   computed: {
     classes () {
       return {
-        'input-group--slider': true,
-        'input-group--active': this.isActive,
-        'input-group--dirty': this.inputWidth > 0,
-        'input-group--disabled': this.disabled,
-        'input-group--ticks': !this.disabled && this.stepNumeric && this.ticks
+        'v-input--slider': true,
+        'v-input--ticks': !this.disabled &&
+          this.stepNumeric && this.ticks
       }
     },
     computedColor () {
@@ -158,6 +161,131 @@ export default {
   },
 
   methods: {
+    genDefaultSlot () {
+      return [
+        this.genLabel(),
+        this.genSlider()
+      ]
+    },
+    genLabel () {
+      const data = {
+        props: {
+          color: this.validationState
+        }
+      }
+
+      if ((this.attrs || {}).id) data.props.for = this.attrs.id
+
+      return this.$createElement(VLabel, data, this.$slots.label || this.label)
+    },
+    genInput () {
+      return null
+    },
+    genSlider () {
+      return this.$createElement('div', {
+        staticClass: 'v-slider',
+        attrs: {
+          role: 'slider',
+          tabindex: this.disabled ? -1 : this.tabindex
+        },
+        on: Object.assign({}, {
+          mouseup: this.onSliderMove,
+          keydown: this.onKeyDown,
+          keyup: this.onKeyUp
+        }, this.$listeners),
+        directives: [{
+          name: 'click-outside',
+          value: () => (this.isActive = false)
+        }]
+      }, [
+        this.genInput(),
+        this.genTrackContainer(),
+        this.genSteps(),
+        this.genThumbContainer()
+      ])
+    },
+    genSteps () {
+      if (!this.steps || !this.ticks) return null
+
+      const ticks = createRange(this.numTicks + 1).map(i => {
+        const span = this.$createElement('span', {
+          key: i,
+          staticClass: 'v-slider__tick',
+          style: {
+            left: `${i * (100 / this.numTicks)}%`
+          }
+        })
+
+        return span
+      })
+
+      return this.$createElement('div', {
+        staticClass: 'v-slider__ticks-container',
+        style: this.tickContainerStyles
+      }, ticks)
+    },
+    genThumbContainer () {
+      const children = []
+      children.push(this.$createElement('div', {
+        staticClass: 'v-slider__thumb',
+        'class': this.addBackgroundColorClassChecks({}, this.computedThumbColor)
+      }))
+
+      this.thumbLabel && children.push(this.genThumbLabel())
+
+      return this.$createElement('div', {
+        staticClass: 'v-slider__thumb-container',
+        'class': {
+          'v-slider__thumb-container-label': this.thumbLabel
+        },
+        style: this.thumbStyles,
+        on: {
+          touchstart: this.onMouseDown,
+          mousedown: this.onMouseDown
+        },
+        ref: 'thumb'
+      }, children)
+    },
+    genThumbLabel () {
+      return this.$createElement(VScaleTransition, {
+        props: { origin: 'bottom center' }
+      }, [
+        this.$createElement('div', {
+          staticClass: 'v-slider__thumb-label__container',
+          directives: [
+            {
+              name: 'show',
+              value: this.isActive
+            }
+          ]
+        }, [
+          this.$createElement('div', {
+            staticClass: 'v-slider__thumb-label',
+            'class': this.addBackgroundColorClassChecks({}, this.computedThumbColor)
+          }, [
+            this.$createElement('span', {}, this.inputValue)
+          ])
+        ])
+      ])
+    },
+    genTrackContainer () {
+      const children = [
+        this.$createElement('div', {
+          staticClass: 'v-slider__track',
+          'class': this.addBackgroundColorClassChecks({}, this.computedTrackColor),
+          style: this.trackStyles
+        }),
+        this.$createElement('div', {
+          staticClass: 'v-slider__track-fill',
+          'class': this.addBackgroundColorClassChecks(),
+          style: this.trackFillStyles
+        })
+      ]
+
+      return this.$createElement('div', {
+        staticClass: 'v-slider__track__container', ref: 'track'
+      }, children)
+    },
     onMouseDown (e) {
       this.keyPressed = 2
       const options = { passive: true }
@@ -219,130 +347,19 @@ export default {
     onKeyUp () {
       this.keyPressed = 0
     },
-    sliderMove (e) {
+    onSliderMove (e) {
       if (!this.isActive) {
         this.onMouseMove(e)
       }
     },
-    genThumbLabel (h) {
-      return h(VScaleTransition, {
-        props: { origin: 'bottom center' }
-      }, [
-        h('div', {
-          staticClass: 'slider__thumb--label__container',
-          directives: [
-            {
-              name: 'show',
-              value: this.isActive
-            }
-          ]
-        }, [
-          h('div', {
-            staticClass: 'slider__thumb--label',
-            'class': this.addBackgroundColorClassChecks({}, this.computedThumbColor)
-          }, [
-            h('span', {}, this.inputValue)
-          ])
-        ])
-      ])
-    },
     roundValue (value) {
-      if (!this.stepNumeric) {
-        return value
-      }
+      if (!this.stepNumeric) return value
 
       // Format input value using the same number
       // of decimals places as in the step prop
       const trimmedStep = this.step.toString().trim()
       const decimals = trimmedStep.indexOf('.') > -1 ? (trimmedStep.length - trimmedStep.indexOf('.') - 1) : 0
       return 1 * (Math.round(value / this.stepNumeric) * this.stepNumeric).toFixed(decimals)
-    },
-    genThumbContainer (h) {
-      const children = []
-      children.push(h('div', {
-        staticClass: 'slider__thumb',
-        'class': this.addBackgroundColorClassChecks({}, this.computedThumbColor)
-      }))
-
-      this.thumbLabel && children.push(this.genThumbLabel(h))
-
-      return h('div', {
-        staticClass: 'slider__thumb-container',
-        'class': {
-          'slider__thumb-container--label': this.thumbLabel
-        },
-        style: this.thumbStyles,
-        on: {
-          touchstart: this.onMouseDown,
-          mousedown: this.onMouseDown
-        },
-        ref: 'thumb'
-      }, children)
-    },
-    genSteps (h) {
-      const ticks = createRange(this.numTicks + 1).map(i => {
-        const span = h('span', {
-          key: i,
-          staticClass: 'slider__tick',
-          style: {
-            left: `${i * (100 / this.numTicks)}%`
-          }
-        })
-
-        return span
-      })
-
-      return h('div', {
-        staticClass: 'slider__ticks-container',
-        style: this.tickContainerStyles
-      }, ticks)
-    },
-    genTrackContainer (h) {
-      const children = [
-        h('div', {
-          staticClass: 'slider__track',
-          'class': this.addBackgroundColorClassChecks({}, this.computedTrackColor),
-          style: this.trackStyles
-        }),
-        h('div', {
-          staticClass: 'slider__track-fill',
-          'class': this.addBackgroundColorClassChecks(),
-          style: this.trackFillStyles
-        })
-      ]
-
-      return h('div', {
-        staticClass: 'slider__track__container',
-        ref: 'track'
-      }, children)
     }
-  },
-
-  render (h) {
-    const children = []
-
-    children.push(this.genTrackContainer(h))
-    this.step && this.ticks && children.push(this.genSteps(h))
-    children.push(this.genThumbContainer(h))
-
-    const slider = h('div', {
-      staticClass: 'slider'
-    }, children)
-
-    return this.genInputGroup([slider], {
-      attrs: {
-        role: 'slider',
-        tabindex: this.disabled ? -1 : this.tabindex
-      },
-      on: Object.assign({}, {
-        mouseup: this.sliderMove,
-        keydown: this.onKeyDown,
-        keyup: this.onKeyUp
-      }, this.$listeners),
-      directives: [{
-        name: 'click-outside',
-        value: () => (this.isActive = false)
-      }]
-    })
   }
 }

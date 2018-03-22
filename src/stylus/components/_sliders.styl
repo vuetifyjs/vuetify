@@ -3,127 +3,98 @@
 
 /* Theme */
 slider($material)
-  label
-    color: $material.text.secondary
-
-  .slider__track, .slider__track-fill
+  .v-slider__track,
+  .v-slider__track-fill
     background: $material.slider.inactive
 
-  .slider__track__container
+  .v-slider__track__container
     &:after
       border: 1px solid $material.text.primary
 
-  .slider__tick
+  .v-slider__tick
     border: 1px solid $material.text.primary
 
-  &:not(.input-group--dirty)
-    .slider__thumb--label
+  &:not(.v-input--is-dirty)
+    .v-slider__thumb-label
       background: $material.slider.inactive
 
-    .slider__thumb
+    .v-slider__thumb
       border: 3px solid $material.slider.inactive
 
     &:focus
-      .slider__thumb
+      .v-slider__thumb
         border: 3px solid $material.slider.active
 
-  &.input-group--disabled
-    .slider__thumb
+  &.v-input--is-disabled
+    .v-slider__thumb
       background: none
       border: 3px solid $material.slider.disabled
 
-  &.input-group--disabled.input-group--dirty
-    .slider__thumb
+  &.v-input--is-disabled.v-input--is-dirty
+    .v-slider__thumb
       background: $material.slider.disabled
       border: 0px solid transparent
 
   &:focus
-    .slider__track
+    .v-slider__track
       background: $material.slider.active
 
-theme(slider, "input-group--slider")
+theme(slider, "v-input--slider")
 
 /** Input Group */
-.input-group.input-group--slider
-  flex-direction: row
-  flex-wrap: wrap
-  // Allow for right space if inline with other inputs
-  padding-right: 16px
-
-  .input-group__details:before, .input-group__details:after
-    display: none
-
-  .input-group__input
-    flex: 1 1 100%
-
-
-  label
-    flex: 0 1 auto
-    width: auto
-    align-items: center
-    display: inline-flex
-    font-size: 18px
-    transform: none
-
-    + .input-group__input
-      margin-left: 16px
-      flex: 1 0 auto
-
-  &.input-group--active
-    .slider__thumb
+.v-input--slider
+  &.v-input--is-focused
+    .v-slider__thumb
       transform: translateY(-50%) scale(1.2)
 
-    .slider__track
+    .v-slider__track
       transition: none
 
-    .slider__thumb-container
-      &--label
-        .slider__thumb
+    .v-slider__thumb-container
+      &-label
+        .v-slider__thumb
           transform: translateY(-50%) scale(0)
 
           &:hover
             transform: translateY(-50%) scale(0)
 
-    .slider__thumb-container, .slider__track-fill
+    .v-slider__thumb-container,
+    .v-slider__track-fill
       transition: none
 
-    &.input-group--ticks
-      .slider
-        &__track__container:after, &__tick
+    &.v-slider--ticks
+      .v-slider
+        &__track__container:after,
+        &__tick
           opacity: 1
 
-  &.input-group--disabled
+  &.v-input--is-disabled
     pointer-events: none
 
-    .slider__thumb
+    .v-slider__thumb
       transform: translateY(-50%) scale(.5)
       background: transparent
 
-    &.input-group--dirty
+    &.v-input--is-dirty
       border-color: transparent
 
-  &.input-group--prepend-icon
-    .slider
-      margin-left: 40px
-
-  &.input-group--append-icon
-    .slider
-      margin-right: 40px
-
+  .v-label
+    margin-right: 16px
 
 /** Slider */
-.slider
+.v-slider
   cursor: default
   display: flex
   align-items: center
   position: relative
-  height: 30px
+  height: 32px
   flex: 1
+  outline: none
   user-select: none
 
 
 /** Thumb/Track/Ticks */
-.slider
+.v-slider
   &__track__container
     position: absolute
     top: 50%
@@ -142,7 +113,9 @@ theme(slider, "input-group--slider")
       width: 2px
       opacity: 0
 
-  &__track, &__thumb, &__tick
+  &__track,
+  &__thumb,
+  &__tick
     position: absolute
     top: 0
 
@@ -192,14 +165,14 @@ theme(slider, "input-group--slider")
 
 
 /** Thumb Label */
-.slider
-  &__thumb--label__container
+.v-slider
+  &__thumb-label__container
     position: absolute
     left: 0
     top: 0
     transition: .3s ease-in-out
 
-  &__thumb--label
+  &__thumb-label
     display: flex
     align-items: center
     justify-content: center
