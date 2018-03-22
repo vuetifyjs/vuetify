@@ -7,14 +7,19 @@ export default {
 
       return this.$createElement('tbody', children)
     },
+
+    genWrappedExpandedRow (props) {
+      return this.$createElement('div', {
+        class: 'datatable__expand-content',
+        key: props.item[this.itemKey]
+      }, this.$scopedSlots.expand(props))
+    },
+
     genExpandedRow (props) {
       const children = []
 
       if (this.isExpanded(props.item)) {
-        const expand = this.$createElement('div', {
-          class: 'datatable__expand-content',
-          key: props.item[this.itemKey]
-        }, this.$scopedSlots.expand(props))
+        const expand = this.nowrapExpanded ? this.$scopedSlots.expand(props) : this.genWrappedExpandedRow(props)
 
         children.push(expand)
       }
@@ -28,7 +33,7 @@ export default {
         on: ExpandTransitionGenerator('datatable__expand-col--expanded')
       }, children)
 
-      return this.genTR([transition], { class: 'datatable__expand-row' })
+      return this.nowrapExpanded ? transition : this.genTR([transition], { class: 'datatable__expand-row' })
     },
     genFilteredItems () {
       if (!this.$scopedSlots.items) {

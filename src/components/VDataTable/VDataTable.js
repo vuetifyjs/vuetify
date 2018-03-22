@@ -44,6 +44,10 @@ export default {
       type: String,
       default: 'Rows per page:'
     },
+    nowrapExpanded: {
+      type: Boolean,
+      default: false
+    },
     customFilter: {
       type: Function,
       default: (items, search, filter, headers) => {
