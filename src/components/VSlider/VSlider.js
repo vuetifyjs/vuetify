@@ -22,14 +22,13 @@ export default {
 
   directives: { ClickOutside },
 
-  data () {
-    return {
-      app: {},
-      defaultColor: 'primary',
-      isActive: false,
-      keyPressed: 0
-    }
-  },
+  data: vm => ({
+    app: {},
+    defaultColor: 'primary',
+    isActive: false,
+    keyPressed: 0,
+    lazyValue: vm.value || 0
+  }),
 
   props: {
     label: String,
@@ -62,7 +61,7 @@ export default {
     classes () {
       return {
         'v-input--slider': true,
-        'v-input--ticks': !this.disabled &&
+        'v-input--slider--ticks': !this.disabled &&
           this.stepNumeric && this.ticks
       }
     },
@@ -76,11 +75,11 @@ export default {
       return (this.disabled || !this.inputWidth) ? null : (this.thumbColor || this.color || this.defaultColor)
     },
     stepNumeric () {
-      return this.step > 0 ? parseFloat(this.step) : 0
+      return this.step > 0 ? parseFloat(this.step) : 1
     },
     inputValue: {
       get () {
-        return this.value
+        return this.lazyValue
       },
       set (val) {
         const { min, max } = this
@@ -92,23 +91,13 @@ export default {
         const value = this.roundValue(val)
         this.lazyValue = value
 
-        if (value !== this.value) {
-          this.$emit('input', value)
-        }
+        this.$emit('input', value)
       }
-    },
-    interval () {
-      return 100 / (this.max - this.min) * this.stepNumeric
     },
     thumbStyles () {
       return {
         transition: this.keyPressed >= 2 ? 'none' : '',
         left: `${this.inputWidth}%`
-      }
-    },
-    tickContainerStyles () {
-      return {
-        transform: `translate(0, -50%)`
       }
     },
     trackPadding () {
@@ -153,8 +142,6 @@ export default {
   },
 
   mounted () {
-    this.inputValue = this.value
-
     // Without a v-app, iOS does not work with body selectors
     this.app = document.querySelector('[data-app]') ||
       consoleWarn('Missing v-app or a non-body wrapping element with the [data-app] attribute', this)
@@ -174,7 +161,7 @@ export default {
         }
       }
 
-      if ((this.attrs || {}).id) data.props.for = this.attrs.id
+      if (this.$attrs.id) data.props.for = this.$attrs.id
 
       return this.$createElement(VLabel, data, this.$slots.label || this.label)
     },
@@ -205,7 +192,7 @@ export default {
       ])
     },
     genSteps () {
-      if (!this.steps || !this.ticks) return null
+      if (!this.step || !this.ticks) return null
 
       const ticks = createRange(this.numTicks + 1).map(i => {
         const span = this.$createElement('span', {
@@ -220,8 +207,7 @@ export default {
       })
 
       return this.$createElement('div', {
-        staticClass: 'v-slider__ticks-container',
-        style: this.tickContainerStyles
+        staticClass: 'v-slider__ticks-container'
       }, ticks)
     },
     genThumbContainer () {
@@ -313,16 +299,16 @@ export default {
       } = this.$refs.track.getBoundingClientRect()
       const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX
       const left = Math.min(Math.max((clientX - offsetLeft) / trackWidth, 0), 1)
-
       if (clientX >= offsetLeft - 8 && clientX <= offsetLeft + trackWidth + 8) {
-        this.inputValue = parseFloat(this.min) + left * (this.max - this.min)
+        const inputValue = parseFloat(this.min) + left * (this.max - this.min)
+        this.inputValue = inputValue
       }
     },
     onKeyDown (e) {
       if (this.disabled || ![33, 34, 35, 36, 37, 39].includes(e.keyCode)) return
 
       e.preventDefault()
-      const step = this.stepNumeric || 1
+      const step = this.stepNumeric
       const steps = (this.max - this.min) / step
       if (e.keyCode === 37 || e.keyCode === 39) {
         // Left/right
@@ -331,7 +317,7 @@ export default {
         const direction = e.keyCode === 37 ? -1 : 1
         const multiplier = e.shiftKey ? 3 : (e.ctrlKey ? 2 : 1)
 
-        this.inputValue = this.inputValue + direction * step * multiplier
+        this.inputValue = this.inputValue + (direction * step * multiplier)
       } else if (e.keyCode === 36) {
         // Home
         this.inputValue = parseFloat(this.min)
@@ -340,8 +326,8 @@ export default {
         this.inputValue = parseFloat(this.max)
       } else /* if (e.keyCode === 33 || e.keyCode === 34) */ {
         // Page up/down
-        const direction = e.keyCode === 34 ? -1 : 1
-        this.inputValue = this.inputValue - direction * step * (steps > 100 ? steps / 10 : 10)
+        const direction = e.keyCode === 34 ? 1 : -1
+        this.inputValue = this.inputValue - (direction * step * (steps > 100 ? steps / 10 : 10))
       }
     },
     onKeyUp () {
@@ -353,13 +339,16 @@ export default {
       }
     },
     roundValue (value) {
-      if (!this.stepNumeric) return value
-
       // Format input value using the same number
       // of decimals places as in the step prop
       const trimmedStep = this.step.toString().trim()
-      const decimals = trimmedStep.indexOf('.') > -1 ? (trimmedStep.length - trimmedStep.indexOf('.') - 1) : 0
-      return 1 * (Math.round(value / this.stepNumeric) * this.stepNumeric).toFixed(decimals)
+      const decimals = trimmedStep.indexOf('.') > -1
+        ? (trimmedStep.length - trimmedStep.indexOf('.') - 1)
+        : 0
+
+      const newValue = 1 * Math.round(value / this.stepNumeric) * this.stepNumeric
+
+      return parseFloat(Math.min(newValue, this.max).toFixed(decimals))
     }
   }
 }

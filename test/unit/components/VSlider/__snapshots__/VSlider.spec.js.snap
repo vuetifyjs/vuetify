@@ -59,7 +59,9 @@ exports[`Vslider.vue should match a snapshot 1`] = `
           <div class="v-slider__track-fill primary">
           </div>
         </div>
-        <div class="v-slider__thumb-container">
+        <div class="v-slider__thumb-container"
+             style="left: 0%;"
+        >
           <div class="v-slider__thumb">
           </div>
         </div>
@@ -95,7 +97,9 @@ exports[`Vslider.vue should render component with thumbLabel and match a snapsho
           <div class="v-slider__track-fill primary">
           </div>
         </div>
-        <div class="v-slider__thumb-container v-slider__thumb-container-label">
+        <div class="v-slider__thumb-container v-slider__thumb-container-label"
+             style="left: 0%;"
+        >
           <div class="v-slider__thumb">
           </div>
           <div class="v-slider__thumb-label__container"
@@ -103,6 +107,7 @@ exports[`Vslider.vue should render component with thumbLabel and match a snapsho
           >
             <div class="v-slider__thumb-label">
               <span>
+                0
               </span>
             </div>
           </div>
@@ -120,7 +125,7 @@ exports[`Vslider.vue should render component with thumbLabel and match a snapsho
 
 exports[`Vslider.vue should render component with ticks and match a snapshot 1`] = `
 
-<div class="v-input v-input--slider v-input--ticks theme--light">
+<div class="v-input v-input--slider v-input--slider--ticks theme--light">
   <div class="v-input__control">
     <div class="v-input__wrapper"
          style="height: 32px;"
@@ -139,7 +144,31 @@ exports[`Vslider.vue should render component with ticks and match a snapshot 1`]
           <div class="v-slider__track-fill primary">
           </div>
         </div>
-        <div class="v-slider__thumb-container">
+        <div class="v-slider__ticks-container">
+          <span class="v-slider__tick"
+                style="left: 0%;"
+          >
+          </span>
+          <span class="v-slider__tick"
+                style="left: 25%;"
+          >
+          </span>
+          <span class="v-slider__tick"
+                style="left: 50%;"
+          >
+          </span>
+          <span class="v-slider__tick"
+                style="left: 75%;"
+          >
+          </span>
+          <span class="v-slider__tick"
+                style="left: 100%;"
+          >
+          </span>
+        </div>
+        <div class="v-slider__thumb-container"
+             style="left: 0%;"
+        >
           <div class="v-slider__thumb">
           </div>
         </div>

@@ -62,10 +62,10 @@ theme(slider, "v-input--slider")
     .v-slider__track-fill
       transition: none
 
-    &.v-slider--ticks
+    &.v-input--slider--ticks
       .v-slider
         &__track__container:after,
-        &__tick
+        .v-slider__tick
           opacity: 1
 
   &.v-input--is-disabled
@@ -141,6 +141,7 @@ theme(slider, "v-input--slider")
     height: 2px
     width: 100%
     top: 50%
+    transform: translate(0, -50%)
     overflow: hidden
 
   &__tick
