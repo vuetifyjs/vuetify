@@ -15,11 +15,11 @@
 
   &.fluid
     max-width: 100%
-    
+
   &.fill-height
     align-items: center
     display: flex
-    
+
     .layout
       height: 100%
       flex: 1 1 auto
@@ -32,13 +32,13 @@
         .layout
           .flex
             padding: ($gutter / 2)
-            
+
         .layout:only-child
           margin: -($gutter / 2)
 
         .layout:not(:only-child)
           margin: auto -($gutter / 2)
-        
+
         *:not(:only-child)
           .layout:first-child
             margin-top: -($gutter / 2)
@@ -60,6 +60,9 @@
   &.column
     flex-direction: column
 
+    > .flex
+      max-width: 100%
+
     &.reverse
       flex-direction: column-reverse
 
@@ -71,6 +74,7 @@ for size, width in $grid-breakpoints
     for n in (1..$grid-columns)
       .flex.{size}{n}
         flex-basis: (n / $grid-columns * 100)%
+        flex-grow: 0
         max-width: (n / $grid-columns * 100)%
 
       .flex.order-{size}{n}
@@ -78,6 +82,7 @@ for size, width in $grid-breakpoints
 
     for n in (0..$grid-columns)
       .flex.offset-{size}{n}
+        // Offsets can only ever work in row layouts
         margin-left: (n / $grid-columns * 100)%
 
 .flex,
@@ -96,7 +101,7 @@ for size, width in $grid-breakpoints
 
   &-baseline
     align-items: baseline
-    
+
 .align-content
   &-start
     align-content: flex-start
@@ -133,10 +138,12 @@ for size, width in $grid-breakpoints
   flex-grow: 1 !important
 
 .grow
+  flex-grow: 1 !important
   flex-shrink: 0 !important
 
 .shrink
   flex-grow: 0 !important
+  flex-shrink: 1 !important
 
 .scroll-y
   overflow-y: auto
@@ -152,26 +159,26 @@ for size, width in $grid-breakpoints
 
 .no-wrap
   white-space: nowrap
-  
+
 .ellipsis
   white-space: nowrap
   overflow: hidden
   text-overflow: ellipsis
-  
+
 // Display helpers
 .d-flex
   display: flex !important
-    
+
 .d-inline-flex
   display: inline-flex !important
-  
+
 .d-flex,
 .d-inline-flex
   > *
     flex: 1 1 auto !important
-    
+
 .d-block
   display: block !important
-  
+
 .d-inline-block
   display: inline-block !important

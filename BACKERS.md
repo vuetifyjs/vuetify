@@ -5,11 +5,13 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 ### $500+
 - [LMAX Exchange](https://www.lmax.com/)
 - [Intygrate](http://intygrate.com/)
+- [Resale AI](http://resaleai.com/)
 
 ### $250+
 - [Eikos Partners](http://www.eikospartners.com/)
 - [rateGenius](https://application.rategenius.com/)
 - [quitt](https://quitt.ch/)
+- [Clearblue Technologies](http://www.clearbluetechnologies.com/)
 
 ### $100+
 - [Anthony Gherghetta](https://gorilladash.com/)
@@ -20,13 +22,13 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - [Cycloid](https://www.cycloid.io/)
 - [LiveCasino](https://livecasino.com/) <!-- Vidar hwang -->
 - [Nate Controls](http://www.natecontrols.com/) <!-- Brad Stewart -->
-- [Trek10](https://www.trek10.com/)
 - [Zweidenker](http://zweidenker.de) <!-- Christian Denker -->
+- [Software IDM](https://softwareidm.com/) <!-- Peter Sidebotham -->
 
 ### $20+
 - [Jaime Olmo](https://www.jaimeolmo.com)
 - Michael Marti
-- [Aeroden](https://www.aeroden.com)
+- [Aeroden](https://www.aeroden.com) <!-- Adrian Belovic -->
 - Sam Mitchell
 - David Hess
 - Jay Blanchard
@@ -40,6 +42,7 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - Juha Vehnia
 - Max Hodges
 - Kent Johnson
+- Ionut Galita
 
 ### $10+
 - Kevin Pilard
@@ -48,11 +51,9 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - Chava Sobreyra
 - Costa Huang
 - Paul
-- Jussi Pesonen
 - Jordan Wood
 - Alexey Toroshchin
 - Phillippe Genois
-- Jim O\`Quinn
 - Sam Bosell
 - Cliff Hess
 - Omar Spira
@@ -61,7 +62,6 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - Anythony Estebe
 - Luis F Rocha
 - Eeico Wentrup
-- Mathieu Boyer
 - Chris Britton
 - Matthew O'Leary
 - Mike Margerum
@@ -72,13 +72,10 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - Alvin Wang
 - Jadranko Dragoje
 - Charles McKeever
-- Caleb Blankemeyer
 - Caleb B
-- VeloAce
-- Nico Rogers
+- Stanislovas Janonis
 - Jamie Sartell
 - Brandon Deo
-- Chanlito Hem
 - Idea Junction Ltd.
 - Michael Hipp
 - Keyur Desai
@@ -87,4 +84,7 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - Bohdan Kokotko
 - Blaine Landowski
 - Paul Whittemore
+- Abdelkarim Mateos
+- Alexander Weiher
+- Helmi
 - Phillipp Naderer-Puiu

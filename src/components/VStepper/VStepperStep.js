@@ -1,18 +1,11 @@
 // Components
 import VIcon from '../VIcon'
 
-// Mixins
-import Colorable from '../../mixins/colorable'
-
 // Directives
 import Ripple from '../../directives/ripple'
 
 export default {
   name: 'v-stepper-step',
-
-  components: { VIcon },
-
-  mixins: [Colorable],
 
   directives: { Ripple },
 
@@ -94,12 +87,12 @@ export default {
     let stepContent
 
     if (this.hasError) {
-      stepContent = [h('v-icon', {}, this.errorIcon)]
+      stepContent = [h(VIcon, {}, this.errorIcon)]
     } else if (this.complete) {
       if (this.editable) {
-        stepContent = [h('v-icon', {}, this.editIcon)]
+        stepContent = [h(VIcon, {}, this.editIcon)]
       } else {
-        stepContent = [h('v-icon', {}, this.completeIcon)]
+        stepContent = [h(VIcon, {}, this.completeIcon)]
       }
     } else {
       stepContent = this.step

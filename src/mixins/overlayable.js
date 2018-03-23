@@ -73,7 +73,7 @@ export default {
           this.overlay.parentNode.removeChild(this.overlay)
           this.overlay = null
           this.showScroll()
-        } catch (e) {}
+        } catch (e) { console.log(e) }
 
         clearTimeout(this.overlayTimeout)
         this.overlayTimeout = null

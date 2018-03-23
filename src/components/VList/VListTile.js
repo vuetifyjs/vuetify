@@ -70,7 +70,7 @@ export default {
 
     data.attrs = Object.assign({}, data.attrs, this.$attrs)
 
-    return h('li', {
+    return h('div', {
       'class': this.listClasses,
       attrs: {
         disabled: this.disabled

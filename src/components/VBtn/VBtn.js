@@ -1,5 +1,10 @@
+// Styles
 import '../../stylus/components/_buttons.styl'
 
+// Components
+import VProgressCircular from '../VProgressCircular'
+
+// Mixins
 import Colorable from '../../mixins/colorable'
 import Positionable from '../../mixins/positionable'
 import Routable from '../../mixins/routable'
@@ -102,7 +107,7 @@ export default {
       const children = []
 
       if (!this.$slots.loader) {
-        children.push(this.$createElement('v-progress-circular', {
+        children.push(this.$createElement(VProgressCircular, {
           props: {
             indeterminate: true,
             size: 26

@@ -66,6 +66,7 @@ export default {
     manualScroll: Boolean,
     prominent: Boolean,
     scrollOffScreen: Boolean,
+    scrollToolbarOffScreen: Boolean,
     scrollTarget: String,
     scrollThreshold: {
       type: Number,
@@ -108,7 +109,10 @@ export default {
     classes () {
       return this.addBackgroundColorClassChecks({
         'toolbar': true,
-        'elevation-0': this.flat || (!this.isActive && !this.tabs),
+        'elevation-0': this.flat || (!this.isActive &&
+          !this.tabs &&
+          !this.scrollToolbarOffScreen
+        ),
         'toolbar--absolute': this.absolute,
         'toolbar--card': this.card,
         'toolbar--clipped': this.clippedLeft || this.clippedRight,
@@ -133,7 +137,9 @@ export default {
     },
     computedTransform () {
       return !this.isActive
-        ? -this.computedHeight
+        ? this.scrollToolbarOffScreen
+          ? -this.computedContentHeight
+          : -this.computedHeight
         : 0
     },
     currentThreshold () {
@@ -171,7 +177,7 @@ export default {
     manualScroll (val) {
       this.isActive = !val
     },
-    isScrollingUp (val) {
+    isScrollingUp () {
       this.savedScroll = this.savedScroll || this.currentScroll
     }
   },
@@ -190,7 +196,8 @@ export default {
 
   methods: {
     onScroll () {
-      if (!this.scrollOffScreen ||
+      if ((!this.scrollOffScreen &&
+        !this.scrollToolbarOffScreen) ||
         this.manualScroll ||
         typeof window === 'undefined'
       ) return

@@ -36,6 +36,7 @@ theme(datatable, "datatable")
   thead
     th.column.sortable
       cursor: pointer
+      outline: 0
 
       i
         font-size: 16px
@@ -44,6 +45,7 @@ theme(datatable, "datatable")
         opacity: 0
         transition: .3s $transition.swing
 
+      &:focus,
       &:hover
         i
           opacity: .6

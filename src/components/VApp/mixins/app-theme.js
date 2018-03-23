@@ -42,33 +42,38 @@ export default {
       }
 
       return css
-    }
-  },
-
-  watch: {
-    generatedStyles () {
-      this.applyTheme()
-    }
-  },
-
-  beforeCreate () {
-    if (this.$meta) {
-      // Vue-meta
-      const keyName = this.$nuxt ? 'head' : 'metaInfo'
-      this.$options[keyName] = () => ({
+    },
+    vueMeta () {
+      return {
         style: [{
           cssText: this.generatedStyles,
           type: 'text/css',
           id: 'vuetify-theme-stylesheet'
         }]
-      })
+      }
+    }
+  },
+
+  // Regular vue-meta
+  metaInfo () {
+    return this.vueMeta
+  },
+
+  // Nuxt
+  head () {
+    return this.vueMeta
+  },
+
+  watch: {
+    generatedStyles () {
+      !this.meta && this.applyTheme()
     }
   },
 
   created () {
     if (this.$meta) {
       // Vue-meta
-      // Handled by beforeCreate hook
+      // Handled by metaInfo()/nuxt()
     } else if (typeof document === 'undefined' && this.$ssrContext) {
       // SSR
       this.$ssrContext.head = this.$ssrContext.head || ''
@@ -82,7 +87,7 @@ export default {
 
   methods: {
     applyTheme () {
-      this.style.innerHTML = this.generatedStyles
+      if (this.style) this.style.innerHTML = this.generatedStyles
     },
     genStyle () {
       let style = document.getElementById('vuetify-theme-stylesheet')

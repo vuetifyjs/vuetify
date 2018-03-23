@@ -6,10 +6,6 @@ import VIcon from '../components/VIcon'
 export default {
   name: 'input',
 
-  components: {
-    VIcon
-  },
-
   mixins: [Loadable, Themeable, Validatable],
 
   data () {
@@ -71,8 +67,8 @@ export default {
   },
 
   methods: {
-    groupFocus (e) {},
-    groupBlur (e) {
+    groupFocus () {},
+    groupBlur () {
       this.tabFocused = false
     },
     genLabel () {
@@ -123,7 +119,7 @@ export default {
         ? this.clearableCallback
         : (this[`${type}IconCb`] || defaultCallback)
 
-      return this.$createElement('v-icon', {
+      return this.$createElement(VIcon, {
         'class': {
           [`input-group__${type}-icon`]: true,
           'input-group__icon-cb': !!callback,

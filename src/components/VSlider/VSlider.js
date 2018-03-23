@@ -18,8 +18,6 @@ export default {
 
   directives: { ClickOutside },
 
-  components: { VScaleTransition },
-
   data () {
     return {
       app: {},
@@ -218,7 +216,7 @@ export default {
         this.inputValue = this.inputValue - direction * step * (steps > 100 ? steps / 10 : 10)
       }
     },
-    onKeyUp (e) {
+    onKeyUp () {
       this.keyPressed = 0
     },
     sliderMove (e) {
@@ -227,7 +225,7 @@ export default {
       }
     },
     genThumbLabel (h) {
-      return h('v-scale-transition', {
+      return h(VScaleTransition, {
         props: { origin: 'bottom center' }
       }, [
         h('div', {

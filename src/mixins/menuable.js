@@ -234,7 +234,8 @@ export default {
       if (!this.hasWindow) {
         this.hasWindow = typeof window !== 'undefined'
       }
-
+    },
+    checkForPageYOffset () {
       if (this.hasWindow) {
         this.pageYOffset = this.getOffsetTop()
       }
@@ -315,6 +316,7 @@ export default {
     },
     updateDimensions () {
       this.checkForWindow()
+      this.checkForPageYOffset()
 
       const dimensions = {}
 

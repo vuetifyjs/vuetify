@@ -9,14 +9,12 @@ import VIcon from '../VIcon'
 
 import ClickOutside from '../../directives/click-outside'
 
+import { consoleWarn } from '../../util/console'
+
 export default {
   name: 'v-expansion-panel-content',
 
   mixins: [Bootable, Toggleable, Rippleable, RegistrableInject('expansionPanel', 'v-expansion-panel', 'v-expansion-panel-content')],
-
-  components: {
-    VIcon
-  },
 
   directives: {
     ClickOutside
@@ -70,29 +68,30 @@ export default {
         this.genIcon()
       ])
     },
-    genIcon (h) {
+    genIcon () {
       if (this.hideActions) return null
 
       const icon = this.$slots.actions ||
-        this.$createElement('v-icon', this.expandIcon)
+        this.$createElement(VIcon, this.expandIcon)
 
       return this.$createElement('div', {
         staticClass: 'header__icon'
       }, [icon])
     },
-    toggle (uid) {
-      const isActive = this._uid === uid && !this.isActive
-
-      if (isActive) this.isBooted = true
+    toggle (active) {
+      if (active) this.isBooted = true
 
       // We treat bootable differently
       // Needs time to calc height
-      this.$nextTick(() => (this.isActive = isActive))
+      this.$nextTick(() => (this.isActive = active))
     }
   },
 
   mounted () {
     this.expansionPanel.register(this._uid, this.toggle)
+
+    // Can be removed once fully deprecated
+    if (typeof this.value !== 'undefined') consoleWarn('v-model has been deprecated', this)
   },
 
   beforeDestroy () {

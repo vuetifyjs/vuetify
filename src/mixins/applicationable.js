@@ -21,9 +21,13 @@ export default function applicationable (value, events = []) {
       // reset the provided prop
       app (x, prev) {
         prev
-          ? this.removeApplication()
+          ? this.removeApplication(true)
           : this.callUpdate()
       }
+    },
+
+    activated () {
+      this.callUpdate()
     },
 
     created () {
@@ -37,18 +41,31 @@ export default function applicationable (value, events = []) {
       this.callUpdate()
     },
 
+    deactivated () {
+      this.removeApplication()
+    },
+
     destroyed () {
-      this.app && this.removeApplication()
+      this.removeApplication()
     },
 
     methods: {
       callUpdate () {
         if (!this.app) return
 
-        this.$vuetify.application[this.applicationProperty] = this.updateApplication()
+        this.$vuetify.application.bind(
+          this._uid,
+          this.applicationProperty,
+          this.updateApplication()
+        )
       },
-      removeApplication () {
-        this.$vuetify.application[this.applicationProperty] = 0
+      removeApplication (force) {
+        if (!force && !this.app) return
+
+        this.$vuetify.application.unbind(
+          this._uid,
+          this.applicationProperty
+        )
       },
       updateApplication: () => {}
     }

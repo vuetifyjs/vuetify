@@ -115,14 +115,14 @@ export default {
 
       if (!icon && !this.$slots.appendIcon) return null
 
-      return this.$createElement('li', {
+      return this.$createElement('div', {
         staticClass: 'list__group__header__append-icon'
       }, [
         this.$slots.appendIcon || this.genIcon(icon)
       ])
     },
     genGroup () {
-      return this.$createElement('ul', {
+      return this.$createElement('div', {
         staticClass: 'list__group__header',
         'class': this.headerClasses,
         on: Object.assign({}, {
@@ -136,7 +136,7 @@ export default {
       ])
     },
     genItems () {
-      return this.$createElement('ul', {
+      return this.$createElement('div', {
         staticClass: 'list__group__items',
         'class': this.itemsClasses,
         directives: [{
@@ -155,7 +155,7 @@ export default {
 
       if (!icon && !this.$slots.prependIcon) return null
 
-      return this.$createElement('li', {
+      return this.$createElement('div', {
         staticClass: 'list__group__header__prepend-icon',
         'class': {
           [this.activeClass]: this.isActive
@@ -174,7 +174,7 @@ export default {
   },
 
   render (h) {
-    return h('li', {
+    return h('div', {
       staticClass: 'list__group',
       'class': this.groupClasses
     }, [

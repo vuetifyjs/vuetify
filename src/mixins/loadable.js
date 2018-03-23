@@ -1,3 +1,5 @@
+import VProgressLinear from '../components/VProgressLinear'
+
 /**
  * Loadable
  *
@@ -21,7 +23,7 @@ export default {
     genProgress () {
       if (this.loading === false) return null
 
-      return this.$slots.progress || this.$createElement('v-progress-linear', {
+      return this.$slots.progress || this.$createElement(VProgressLinear, {
         props: {
           color: (this.loading === true || this.loading === '')
             ? (this.color || 'primary')

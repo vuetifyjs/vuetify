@@ -4,8 +4,6 @@ import '../../stylus/components/_data-table.styl'
 import DataIterable from '../../mixins/data-iterable'
 import Resize from '../../directives/resize'
 
-import VProgressLinear from '../VProgressLinear'
-
 import Head from './mixins/head'
 import Body from './mixins/body'
 import Foot from './mixins/foot'
@@ -16,14 +14,11 @@ import {
   getObjectValueByPath
 } from '../../util/helpers'
 
+// Importing does not work properly
+const VTableOverflow = createSimpleFunctional('table__overflow')
+
 export default {
   name: 'v-data-table',
-
-  components: {
-    VProgressLinear,
-    // Importing does not work properly
-    'v-table-overflow': createSimpleFunctional('table__overflow')
-  },
 
   data () {
     return {
@@ -179,7 +174,7 @@ export default {
   },
 
   render (h) {
-    const tableOverflow = h('v-table-overflow', {
+    const tableOverflow = h(VTableOverflow, {
       ref: 'tableRef',
       directives: [{ name: 'resize', value: this.onResize }],
       style: { height: this.height ? `${this.height}px` : undefined }

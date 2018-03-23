@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`menuable.js should match snapshot 1`] = `
+
+<div class="input-group--selection-controls__ripple">
+</div>
+
+`;
+
+exports[`menuable.js should match snapshot 2`] = `
+
+<div class="foo">
+</div>
+
+`;

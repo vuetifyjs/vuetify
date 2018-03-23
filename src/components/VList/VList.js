@@ -57,7 +57,7 @@ export default {
         this.groups.splice(index, 1)
       }
     },
-    listClick (uid, isBooted) {
+    listClick (uid) {
       if (this.expand) return
 
       for (let i = this.groups.length; i--;) {
@@ -72,6 +72,6 @@ export default {
       'class': this.classes
     }
 
-    return h('ul', data, [this.$slots.default])
+    return h('div', data, [this.$slots.default])
   }
 }

@@ -3,6 +3,9 @@ import '../../stylus/components/_small-dialog.styl'
 // Mixins
 import Returnable from '../../mixins/returnable'
 
+import VBtn from '../VBtn'
+import VMenu from '../VMenu'
+
 export default {
   name: 'v-edit-dialog',
 
@@ -46,7 +49,7 @@ export default {
       input && input.focus()
     },
     genButton (fn, text) {
-      return this.$createElement('v-btn', {
+      return this.$createElement(VBtn, {
         props: {
           flat: true,
           color: 'primary',
@@ -78,7 +81,7 @@ export default {
   },
 
   render (h) {
-    return h('v-menu', {
+    return h(VMenu, {
       'class': 'small-dialog',
       props: {
         contentClass: 'small-dialog__content',
