@@ -155,6 +155,8 @@ export default {
       ]
     },
     genLabel () {
+      if (!this.label) return null
+
       const data = {
         props: {
           color: this.validationState
