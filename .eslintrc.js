@@ -6,8 +6,8 @@ module.exports = {
     sourceType: 'module'
   },
   extends: [
-    'eslint:recommended',
-    'plugin:vue/recommended'
+    'standard',
+    'eslint:recommended'
   ],
   env: {
     browser: true
@@ -20,7 +20,6 @@ module.exports = {
     'process': true
   },
   plugins: [
-    'vue',
     'eslint-plugin-local-rules'
   ],
   rules: {
