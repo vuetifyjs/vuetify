@@ -69,7 +69,7 @@ export default {
     }
   },
 
-  render (h) {
+  render () {
     return this.$createElement('ul', {
       staticClass: 'date-picker-years',
       ref: 'years'

@@ -113,7 +113,7 @@ export default {
     }
   },
 
-  render (h) {
+  render () {
     const data = {
       attrs: {
         role: 'radiogroup'

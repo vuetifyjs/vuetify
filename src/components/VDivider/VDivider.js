@@ -13,7 +13,7 @@ export default {
     inset: Boolean
   },
 
-  render (h, { props, data, children }) {
+  render (h, { props, data }) {
     data.staticClass = (`divider ${data.staticClass || ''}`).trim()
 
     if (props.inset) data.staticClass += ' divider--inset'

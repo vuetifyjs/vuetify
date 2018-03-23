@@ -277,7 +277,7 @@ export default {
 
       const data = {
         on: {
-          click: e => {
+          click: () => {
             if (disabled) return
 
             this.selectItem(item)

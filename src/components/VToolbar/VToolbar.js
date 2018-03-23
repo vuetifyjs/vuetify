@@ -177,7 +177,7 @@ export default {
     manualScroll (val) {
       this.isActive = !val
     },
-    isScrollingUp (val) {
+    isScrollingUp () {
       this.savedScroll = this.savedScroll || this.currentScroll
     }
   },

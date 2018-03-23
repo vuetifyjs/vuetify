@@ -67,8 +67,8 @@ export default {
   },
 
   methods: {
-    groupFocus (e) {},
-    groupBlur (e) {
+    groupFocus () {},
+    groupBlur () {
       this.tabFocused = false
     },
     genLabel () {

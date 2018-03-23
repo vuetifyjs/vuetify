@@ -63,6 +63,7 @@
     "eslint-plugin-node": "^5.2.1",
     "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-standard": "^3.0.1",
+    "eslint-plugin-vue": "^4.4.0",
     "eventsource-polyfill": "0.9.6",
     "extract-text-webpack-plugin": "3.0.2",
     "friendly-errors-webpack-plugin": "1.6.1",

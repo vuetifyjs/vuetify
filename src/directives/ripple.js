@@ -70,7 +70,7 @@ const ripple = {
         try {
           if (ripples.length < 1) el.style.position = null
           animation.parentNode && el.removeChild(animation.parentNode)
-        } catch (e) {}
+        } catch (e) { console.log(e) }
       }, 300)
     }, delay)
   }
@@ -138,7 +138,7 @@ function directive (el, binding) {
   updateRipple(el, binding, false)
 }
 
-function unbind (el, binding) {
+function unbind (el) {
   delete el._ripple
   removeListeners(el)
 }
