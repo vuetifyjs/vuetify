@@ -37,7 +37,6 @@ export default {
   props: {
     appendOuterIcon: String,
     autofocus: Boolean,
-    autoGrow: Boolean,
     box: Boolean,
     clearable: Boolean,
     clearIcon: {
@@ -52,23 +51,10 @@ export default {
     counter: [Boolean, Number, String],
     fullWidth: Boolean,
     label: String,
-    multiLine: Boolean,
-    noResize: Boolean,
     placeholder: String,
     prefix: String,
-    rowHeight: {
-      type: [Number, String],
-      default: 24,
-      validator: v => !isNaN(parseFloat(v))
-    },
-    rows: {
-      type: [Number, String],
-      default: 5,
-      validator: v => !isNaN(parseInt(v, 10))
-    },
     singleLine: Boolean,
     suffix: String,
-    textarea: Boolean,
     type: {
       type: String,
       default: 'text'
@@ -109,22 +95,12 @@ export default {
     },
     isSingle () {
       return this.solo || this.singleLine
-    },
-    isTextarea () {
-      return this.multiLine || this.textarea
-    },
-    noResizeHandle () {
-      return this.isTextarea && (this.noResize || this.shouldAutoGrow)
-    },
-    shouldAutoGrow () {
-      return this.isTextarea && this.autoGrow
     }
   },
 
   watch: {
     isFocused (val) {
-      // Sets validationState from
-      // validatable
+      // Sets validationState from validatable
       this.hasColor = val
 
       if (val) {
@@ -148,27 +124,14 @@ export default {
       if (this.internalChange) this.internalChange = false
 
       !this.validateOnBlur && this.validate()
-      this.shouldAutoGrow && this.calculateInputHeight()
     }
   },
 
   mounted () {
-    this.shouldAutoGrow && this.calculateInputHeight()
     this.autofocus && this.onFocus()
   },
 
   methods: {
-    calculateInputHeight () {
-      this.inputHeight = null
-
-      this.$nextTick(() => {
-        const height = this.$refs.input
-          ? this.$refs.input.scrollHeight
-          : 0
-        const minHeight = parseInt(this.rows, 10) * parseFloat(this.rowHeight)
-        this.inputHeight = Math.max(minHeight, height)
-      })
-    },
     clearableCallback () {
       this.proxyValue = null
       this.$nextTick(() => this.$refs.input.focus())
@@ -231,7 +194,6 @@ export default {
       return this.genSlot('append', 'inner', slot)
     },
     genInput () {
-      const tag = this.isTextarea ? 'textarea' : 'input'
       const listeners = Object.assign({}, this.$listeners)
       delete listeners['change'] // Change should not be bound externally
 
@@ -247,6 +209,7 @@ export default {
           required: this.required,
           readonly: this.readonly,
           tabindex: this.tabindex,
+          type: this.type,
           'aria-label': (!this.$attrs || !this.$attrs.id) && this.label // Label `for` will be set if we have an id
         },
         on: Object.assign(listeners, {
@@ -258,23 +221,13 @@ export default {
         ref: 'input'
       }
 
-      if (this.shouldAutoGrow) {
-        data.style.height = this.inputHeight && `${this.inputHeight}px`
-      }
-
       if (this.placeholder) data.attrs.placeholder = this.placeholder
-
-      if (!this.isTextarea) {
-        data.attrs.type = this.type
-      } else {
-        data.attrs.rows = this.rows
-      }
 
       if (this.mask) {
         data.attrs.maxlength = this.masked.length
       }
 
-      return this.$createElement(tag, data)
+      return this.$createElement('input', data)
     },
     genDefaultSlot () {
       return [
@@ -328,7 +281,6 @@ export default {
       this.mask && this.resetSelections(e.target)
       this.proxyValue = e.target.value
       this.badInput = e.target.validity && e.target.validity.badInput
-      this.shouldAutoGrow && this.calculateInputHeight()
     },
     onKeyDown (e) {
       // Prevents closing of a
