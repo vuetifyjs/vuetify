@@ -14,10 +14,20 @@
             alt="Vuetify"
           )
 
-        h1(v-text="header").display-1.primary--text.mb-3
-        p(v-text="subHeader").subheading
+        h1(v-text="subHeader").display-1.primary--text.mb-3
         div.mb-5
           slot
+          div
+          v-card(
+            color="blue lighten-1"
+            dark
+            style="max-width: 700px;"
+            width="auto"
+          ).mx-auto.mt-4.d-inline-flex
+            v-card-text
+              v-layout(align-center)
+                v-icon(size="32px").mr-3 mdi-truck-delivery
+                div Free shipping for orders of <span class="subheading"><strong>$79</strong></span> or more with code <v-chip class="my-0 body-2">SHIP79</v-chip> at checkout
 </template>
 
 <script>
