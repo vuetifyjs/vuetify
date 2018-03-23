@@ -6,3 +6,4 @@ npm-debug.log
 .idea/
 .env
 .vscode
+yarn-error.log
