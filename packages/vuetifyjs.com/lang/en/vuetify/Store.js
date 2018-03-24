@@ -6,7 +6,7 @@ export default {
   cartEmptySubheader: 'Your cart is currently empty',
   thankYouHeader: 'Thank you!',
   thankYouSubheader: 'Your purchase helps support the continued maintenance and development of Vuetify',
-  helpSupport: 'Help support Vuetify\'s ongoing development and get yourself and your team some swag!',
+  helpSupport: 'Help support Vuetify\'s ongoing development and get you and your team some swag!',
   checkout: 'Proceeed to checkout',
   addToCart: 'Add to Cart',
   details: 'Details',
