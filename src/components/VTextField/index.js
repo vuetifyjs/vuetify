@@ -10,7 +10,7 @@ const wrapper = {
     multiLine: Boolean
   },
 
-  render (h) {
+  render (h, { props, data, children }) {
     if (props.textarea) {
       console.warn(`[Vuetify] '<v-text-field textarea>' is deprecated, use '<v-text-area outline>' instead in ${parent._name}`)
     }
