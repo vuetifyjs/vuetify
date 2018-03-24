@@ -21,7 +21,7 @@ exports[`VTextField.js should have prefix and suffix 1`] = `
 <div class="v-input v-input--text v-input--text--prefix theme--light">
   <div class="v-input__control">
     <div class="v-input__wrapper"
-         style="height: auto;"
+         style="height: 32px;"
     >
       <label class="v-label"
              style="left: 12px; position: absolute;"
@@ -99,7 +99,7 @@ exports[`VTextField.js should not display counter when set to false 1`] = `
 <div class="v-input v-input--text theme--light">
   <div class="v-input__control">
     <div class="v-input__wrapper"
-         style="height: auto;"
+         style="height: 32px;"
     >
       <label class="v-label"
              style="left: 0px; position: absolute;"
@@ -129,7 +129,7 @@ exports[`VTextField.js should not display counter when set to false 2`] = `
 <div class="v-input v-input--text theme--light">
   <div class="v-input__control">
     <div class="v-input__wrapper"
-         style="height: auto;"
+         style="height: 32px;"
     >
       <label class="v-label"
              style="left: 0px; position: absolute;"
@@ -156,7 +156,7 @@ exports[`VTextField.js should render component and match snapshot 1`] = `
 <div class="v-input v-input--text theme--light">
   <div class="v-input__control">
     <div class="v-input__wrapper"
-         style="height: auto;"
+         style="height: 32px;"
     >
       <label class="v-label"
              style="left: 0px; position: absolute;"
@@ -182,7 +182,7 @@ exports[`VTextField.js should render component with async loading and custom pro
 <div class="v-input v-input--text v-input--is-loading theme--light">
   <div class="v-input__control">
     <div class="v-input__wrapper"
-         style="height: auto;"
+         style="height: 32px;"
     >
       <label class="v-label"
              style="left: 0px; position: absolute;"
@@ -224,7 +224,7 @@ exports[`VTextField.js should render component with async loading and match snap
 <div class="v-input v-input--text v-input--is-loading theme--light">
   <div class="v-input__control">
     <div class="v-input__wrapper"
-         style="height: auto;"
+         style="height: 32px;"
     >
       <label class="v-label"
              style="left: 0px; position: absolute;"

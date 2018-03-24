@@ -1,16 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Vslider.vue should be focused when active 1`] = `
+exports[`VSlider.vue should be focused when active 1`] = `
 
 <div class="v-input v-input--slider v-input--is-label-active v-input--is-dirty v-input--is-focused theme--light">
   <div class="v-input__control">
     <div class="v-input__wrapper"
          style="height: 32px;"
     >
-      <label class="v-label"
-             style="left: 0px; position: relative;"
-      >
-      </label>
       <div role="slider"
            tabindex="0"
            class="v-slider"
@@ -38,17 +34,13 @@ exports[`Vslider.vue should be focused when active 1`] = `
 
 `;
 
-exports[`Vslider.vue should match a snapshot 1`] = `
+exports[`VSlider.vue should match a snapshot 1`] = `
 
 <div class="v-input v-input--slider theme--light">
   <div class="v-input__control">
     <div class="v-input__wrapper"
          style="height: 32px;"
     >
-      <label class="v-label"
-             style="left: 0px; position: relative;"
-      >
-      </label>
       <div role="slider"
            tabindex="0"
            class="v-slider"
@@ -76,17 +68,13 @@ exports[`Vslider.vue should match a snapshot 1`] = `
 
 `;
 
-exports[`Vslider.vue should render component with thumbLabel and match a snapshot 1`] = `
+exports[`VSlider.vue should render component with thumbLabel and match a snapshot 1`] = `
 
 <div class="v-input v-input--slider theme--light">
   <div class="v-input__control">
     <div class="v-input__wrapper"
          style="height: 32px;"
     >
-      <label class="v-label"
-             style="left: 0px; position: relative;"
-      >
-      </label>
       <div role="slider"
            tabindex="0"
            class="v-slider"
@@ -123,17 +111,13 @@ exports[`Vslider.vue should render component with thumbLabel and match a snapsho
 
 `;
 
-exports[`Vslider.vue should render component with ticks and match a snapshot 1`] = `
+exports[`VSlider.vue should render component with ticks and match a snapshot 1`] = `
 
 <div class="v-input v-input--slider v-input--slider--ticks theme--light">
   <div class="v-input__control">
     <div class="v-input__wrapper"
          style="height: 32px;"
     >
-      <label class="v-label"
-             style="left: 0px; position: relative;"
-      >
-      </label>
       <div role="slider"
            tabindex="0"
            class="v-slider"

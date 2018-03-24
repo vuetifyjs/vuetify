@@ -3,7 +3,7 @@ import VSlider from '@/components/VSlider'
 
 const warning = '[Vuetify] Missing v-app or a non-body wrapping element with the [data-app] attribute in "v-slider"'
 
-test('Vslider.vue', ({ mount }) => {
+test('VSlider.vue', ({ mount }) => {
   it('should match a snapshot', () => {
     const wrapper = mount(VSlider)
 
@@ -192,7 +192,11 @@ test('Vslider.vue', ({ mount }) => {
 
   it('should add for to label', () => {
     const wrapper = mount(VSlider, {
-      attrs: { id: 'foo' }
+      attachToDocument: true,
+      attrs: { id: 'foo' },
+      propsData: {
+        label: 'bar'
+      }
     })
 
     const label = wrapper.first('.v-label')
