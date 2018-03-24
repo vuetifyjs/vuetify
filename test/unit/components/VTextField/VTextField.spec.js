@@ -1,6 +1,6 @@
 import { test } from '@/test'
 import Vue from 'vue/dist/vue.common'
-import VTextField from '@/components/VTextField'
+import VTextField from '@/components/VTextField/VTextField'
 import VProgressLinear from '@/components/VProgressLinear'
 
 test('VTextField.js', ({ mount }) => {
