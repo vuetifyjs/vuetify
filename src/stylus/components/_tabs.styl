@@ -8,8 +8,9 @@ tabs__bar($material)
   .tabs__div
     color: $material.tabs.active
 
-    &.tabs__item--disabled
+    .tabs__item--disabled
       color: $material.buttons.disabled
+      pointer-events: none
 
 theme(tabs__bar, "tabs__bar")
 
