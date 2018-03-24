@@ -118,7 +118,7 @@ export default {
           cx: this.cxy,
           cy: this.cxy,
           r: this.radius,
-          'stroke-width': this.width,
+          'stroke-width': this.width / this.size * 50,
           'stroke-dasharray': this.strokeDashArray,
           'stroke-dashoffset': offset
         }
