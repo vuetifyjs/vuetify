@@ -25,7 +25,7 @@ test('VInput.js', ({ mount }) => {
     wrapper.vm.$on('input', input)
 
     expect(wrapper.vm.lazyValue).toBe(undefined)
-    wrapper.vm.inputValue = 'foo'
+    wrapper.vm.proxyValue = 'foo'
     expect(input).toHaveBeenCalledWith('foo')
     expect(wrapper.vm.lazyValue).toBe('foo')
   })
@@ -119,13 +119,12 @@ test('VInput.js', ({ mount }) => {
     const wrapper = mount(VInput)
 
     const inputWrapper = wrapper.find('.v-input__wrapper')[0]
-    expect(inputWrapper.element.style.height).toBe('auto')
+    expect(inputWrapper.element.style.height).toBe('32px')
     expect(wrapper.vm.height).toBe(undefined)
 
     wrapper.setProps({ height: 10 })
     expect(inputWrapper.element.style.height).toBe('10px')
     wrapper.setProps({ height: '20px' })
     expect(inputWrapper.element.style.height).toBe('20px')
-
   })
 })

@@ -18,11 +18,17 @@ export default {
 
   inheritAttrs: false,
 
-  inject: [
-    'isMandatory',
-    'name',
-    'validationState'
-  ],
+  inject: {
+    name: {
+      default: false
+    },
+    isMandatory: {
+      default: false
+    },
+    validationState: {
+      default: false
+    }
+  },
 
   mixins: [
     Colorable,
@@ -74,7 +80,7 @@ export default {
       return this.isActive || !!this.validationStateProxy
     },
     validationStateProxy () {
-      return this.validationState()
+      return this.validationState && this.validationState()
     }
   },
 
@@ -91,18 +97,19 @@ export default {
       return this.$createElement('input', {
         attrs: Object.assign({}, attrs, {
           'aria-label': this.label,
+          name: this.name && this.name(),
           role: type,
           type,
           value: this.inputValue
         }),
         on: {
           blur: this.onBlur,
-          change: this.toggle, // TODO: change this name
+          change: this.onChange, // TODO: change this name
           focus: this.onFocus,
           keydown: e => {
             if ([13, 32].includes(e.keyCode)) {
               e.preventDefault()
-              this.toggle()
+              this.onChange()
             }
           }
         },
@@ -111,7 +118,7 @@ export default {
     },
     genLabel () {
       return this.$createElement(VLabel, {
-        on: { click: this.toggle },
+        on: { click: this.onChange },
         attrs: {
           for: this.id
         },
@@ -125,7 +132,7 @@ export default {
       return this.$createElement('div', {
         staticClass: 'v-input--selection-controls__input'
       }, [
-        this.genInput('checkbox', {
+        this.genInput('radio', {
           'aria-checked': this.isActive.toString()
         }),
         this.genRipple({
@@ -142,7 +149,7 @@ export default {
     onBlur () {
       this.isFocused = false
     },
-    toggle () {
+    onChange () {
       const mandatory = !!this.isMandatory && this.isMandatory()
 
       if (!this.disabled && (!this.isActive || !mandatory)) {

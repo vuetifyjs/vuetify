@@ -7,14 +7,12 @@ import VIcon from '../VIcon'
 // import { VFadeTransition } from '../transitions'
 
 // Mixins
-import Rippleable from '../../mixins/rippleable'
 import Selectable from '../../mixins/selectable'
 
 export default {
   name: 'v-checkbox',
 
   mixins: [
-    Rippleable,
     Selectable
   ],
 

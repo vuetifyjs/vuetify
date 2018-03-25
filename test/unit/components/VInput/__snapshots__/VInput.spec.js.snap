@@ -14,7 +14,7 @@ exports[`VInput.js should generate an icon and match snapshot 1`] = `
   </div>
   <div class="v-input__control">
     <div class="v-input__wrapper"
-         style="height: auto;"
+         style="height: 32px;"
     >
     </div>
     <div class="v-messages">
@@ -31,7 +31,7 @@ exports[`VInput.js should generate an icon and match snapshot 2`] = `
 <div class="v-input theme--light">
   <div class="v-input__control">
     <div class="v-input__wrapper"
-         style="height: auto;"
+         style="height: 32px;"
     >
     </div>
     <div class="v-messages">
@@ -64,7 +64,7 @@ exports[`VInput.js should generate append and prepend slots 1`] = `
   </div>
   <div class="v-input__control">
     <div class="v-input__wrapper"
-         style="height: auto;"
+         style="height: 32px;"
     >
     </div>
     <div class="v-messages">
@@ -81,7 +81,7 @@ exports[`VInput.js should generate append and prepend slots 2`] = `
 <div class="v-input theme--light">
   <div class="v-input__control">
     <div class="v-input__wrapper"
-         style="height: auto;"
+         style="height: 32px;"
     >
     </div>
     <div class="v-messages">
@@ -103,7 +103,7 @@ exports[`VInput.js should generate append and prepend slots 3`] = `
   </div>
   <div class="v-input__control">
     <div class="v-input__wrapper"
-         style="height: auto;"
+         style="height: 32px;"
     >
     </div>
     <div class="v-messages">
@@ -120,7 +120,7 @@ exports[`VInput.js should generate append and prepend slots 4`] = `
 <div class="v-input theme--light">
   <div class="v-input__control">
     <div class="v-input__wrapper"
-         style="height: auto;"
+         style="height: 32px;"
     >
     </div>
     <div class="v-messages">
@@ -142,7 +142,7 @@ exports[`VInput.js should not generate input details 1`] = `
 <div class="v-input theme--light">
   <div class="v-input__control">
     <div class="v-input__wrapper"
-         style="height: auto;"
+         style="height: 32px;"
     >
     </div>
   </div>

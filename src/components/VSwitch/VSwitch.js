@@ -3,7 +3,6 @@ import '../../stylus/components/_selection-controls.styl'
 import '../../stylus/components/_switch.styl'
 
 // Mixins
-import Rippleable from '../../mixins/rippleable'
 import Selectable from '../../mixins/selectable'
 
 // Directives
@@ -13,7 +12,6 @@ export default {
   name: 'v-switch',
 
   mixins: [
-    Rippleable,
     Selectable
   ],
 
@@ -64,10 +62,10 @@ export default {
       })
     },
     onSwipeLeft () {
-      if (this.isActive) this.toggle()
+      if (this.isActive) this.onChange()
     },
     onSwipeRight () {
-      if (!this.isActive) this.toggle()
+      if (!this.isActive) this.onChange()
     }
   }
 }

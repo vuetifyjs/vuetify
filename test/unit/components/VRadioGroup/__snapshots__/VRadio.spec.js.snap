@@ -2,102 +2,102 @@
 
 exports[`VRadio.vue should not render aria-label attribute with no label value on input group 1`] = `
 
-<div role="radio"
-     aria-checked="false"
-     class="input-group input-group--selection-controls radio accent--text"
->
-  <label>
-  </label>
-  <div class="input-group__input">
+<div class="v-radio">
+  <div class="v-input--selection-controls__input">
+    <input aria-checked="false"
+           name="name"
+           role="radio"
+           type="radio"
+    >
+    <div class="v-input--selection-controls__ripple">
+    </div>
     <i aria-hidden="true"
-       class="icon icon--selection-control material-icons"
+       class="icon material-icons"
     >
       radio_button_unchecked
     </i>
-    <div class="input-group--selection-controls__ripple">
-    </div>
-    <input name="name"
-           type="radio"
-           style="display: none;"
-    >
   </div>
+  <label class="v-label"
+         style="left: 0px; position: relative;"
+  >
+  </label>
 </div>
 
 `;
 
 exports[`VRadio.vue should render aria-label attribute with label value on input group 1`] = `
 
-<div role="radio"
-     aria-checked="false"
-     aria-label="Test"
-     class="input-group input-group--selection-controls radio accent--text"
->
-  <label>
-    Test
-  </label>
-  <div class="input-group__input">
+<div class="v-radio">
+  <div class="v-input--selection-controls__input">
+    <input aria-checked="false"
+           aria-label="Test"
+           name="name"
+           role="radio"
+           type="radio"
+    >
+    <div class="v-input--selection-controls__ripple">
+    </div>
     <i aria-hidden="true"
-       class="icon icon--selection-control material-icons"
+       class="icon material-icons"
     >
       radio_button_unchecked
     </i>
-    <div class="input-group--selection-controls__ripple">
-    </div>
-    <input name="name"
-           type="radio"
-           style="display: none;"
-    >
   </div>
+  <label class="v-label"
+         style="left: 0px; position: relative;"
+  >
+    Test
+  </label>
 </div>
 
 `;
 
 exports[`VRadio.vue should render proper input name 1`] = `
 
-<div role="radio"
-     aria-checked="false"
-     class="input-group input-group--selection-controls radio accent--text"
->
-  <label>
-  </label>
-  <div class="input-group__input">
+<div class="v-radio">
+  <div class="v-input--selection-controls__input">
+    <input aria-checked="false"
+           name="name"
+           role="radio"
+           type="radio"
+    >
+    <div class="v-input--selection-controls__ripple">
+    </div>
     <i aria-hidden="true"
-       class="icon icon--selection-control material-icons"
+       class="icon material-icons"
     >
       radio_button_unchecked
     </i>
-    <div class="input-group--selection-controls__ripple">
-    </div>
-    <input name="name"
-           type="radio"
-           style="display: none;"
-    >
   </div>
+  <label class="v-label"
+         style="left: 0px; position: relative;"
+  >
+  </label>
 </div>
 
 `;
 
 exports[`VRadio.vue should render role and aria-checked attributes on input group 1`] = `
 
-<div role="radio"
-     aria-checked="true"
-     class="input-group input-group--active input-group--selection-controls radio accent--text"
->
-  <label>
-  </label>
-  <div class="input-group__input">
-    <i aria-hidden="true"
-       class="icon icon--selection-control material-icons"
-    >
-      radio_button_unchecked
-    </i>
-    <div class="input-group--selection-controls__ripple">
-    </div>
-    <input name="name"
+<div class="v-radio">
+  <div class="v-input--selection-controls__input">
+    <input aria-checked="true"
+           name="name"
+           role="radio"
            type="radio"
-           style="display: none;"
     >
+    <div class="v-input--selection-controls__ripple accent--text">
+    </div>
+    <i aria-hidden="true"
+       class="icon material-icons accent--text"
+    >
+      radio_button_checked
+    </i>
   </div>
+  <label class="v-label"
+         style="left: 0px; position: relative;"
+  >
+  </label>
 </div>
 
 `;

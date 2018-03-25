@@ -86,7 +86,10 @@ export default {
     },
     genRadioGroup () {
       return this.$createElement('div', {
-        staticClass: 'v-input--radio-group__input'
+        staticClass: 'v-input--radio-group__input',
+        attrs: {
+          role: 'radiogroup'
+        }
       }, this.$slots.default)
     },
     toggleRadio (value) {

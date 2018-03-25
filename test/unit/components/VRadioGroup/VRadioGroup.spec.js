@@ -7,7 +7,7 @@ test('VRadioGroup.vue', ({ mount }) => {
 
     expect(wrapper.html()).toMatchSnapshot()
 
-    const radioGroup = wrapper.find('.radio-group')[0]
+    const radioGroup = wrapper.find('.v-input--radio-group__input')[0]
     expect(radioGroup.getAttribute('role')).toBe('radiogroup')
   })
 

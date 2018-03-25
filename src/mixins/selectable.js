@@ -2,10 +2,15 @@
 import VInput from '../components/VInput'
 import VLabel from '../components/VLabel'
 
+// Mixins
+import Rippleable from './rippleable'
+
 export default {
   name: 'selectable',
 
   extends: VInput,
+
+  mixins: [Rippleable],
 
   model: {
     prop: 'inputValue',
@@ -21,6 +26,10 @@ export default {
     inputValue: null,
     falseValue: null,
     label: String,
+    toggleKeys: {
+      type: Array,
+      default: () => [13, 32]
+    },
     trueValue: null
   },
 
@@ -32,17 +41,17 @@ export default {
       )
     },
     isActive () {
-      if ((Array.isArray(this.inputValue))) {
-        return this.inputValue.indexOf(this.value) !== -1
+      if ((Array.isArray(this.proxyValue))) {
+        return this.proxyValue.indexOf(this.value) !== -1
       }
 
       if (!this.trueValue || !this.falseValue) {
         return this.value
-          ? this.value === this.inputValue
-          : Boolean(this.inputValue)
+          ? this.value === this.proxyValue
+          : Boolean(this.proxyValue)
       }
 
-      return this.inputValue === this.trueValue
+      return this.proxyValue === this.trueValue
     },
     isDirty: {
       get: 'isActive'
@@ -52,7 +61,7 @@ export default {
   methods: {
     genLabel () {
       return this.$createElement(VLabel, {
-        on: { click: this.toggle },
+        on: { click: this.onChange },
         attrs: {
           for: this.id
         },
@@ -72,18 +81,20 @@ export default {
         }),
         on: {
           blur: this.onBlur,
-          change: this.toggle, // TODO: change this name
-          focus: this.onFocus
+          change: this.onChange,
+          focus: this.onFocus,
+          keydown: this.onKeydown
         }
       })
     },
     onBlur () {
       this.isFocused = false
     },
-    toggle () {
+    onChange () {
       if (this.disabled) return
 
-      let input = this.inputValue
+      let input = this.lazyValue
+      // If inputValue is an array
       if (Array.isArray(input)) {
         input = input.slice()
         const i = input.indexOf(this.value)
@@ -93,10 +104,12 @@ export default {
         } else {
           input.splice(i, 1)
         }
+      // If has a true or false value set
       } else if (this.trueValue || this.falseValue) {
         input = input === this.trueValue ? this.falseValue : this.trueValue
+      // If has a value set
       } else if (this.value) {
-        input = this.value === this.inputValue
+        input = this.inputValue === this.value
           ? null
           : this.value
       } else {
@@ -104,11 +117,16 @@ export default {
       }
 
       this.validate(true, input)
-
+      this.lazyValue = input
       this.$emit('change', input)
     },
     onFocus () {
       this.isFocused = true
+    },
+    onKeydown (e) {
+      if (this.toggleKeys.indexOf(e.keyCode) > -1) {
+        this.onChange()
+      }
     }
   }
 }

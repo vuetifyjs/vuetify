@@ -79,6 +79,12 @@ export default {
     }
   },
 
+  watch: {
+    inputValue (val) {
+      this.lazyValue = val
+    }
+  },
+
   methods: {
     genContent () {
       return this.$createElement('div', {

@@ -12,7 +12,7 @@ export default {
   props: {
     absolute: Boolean,
     color: {
-      type: String,
+      type: [Boolean, String],
       default: 'primary'
     },
     focused: Boolean,

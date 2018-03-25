@@ -36,12 +36,12 @@ test('VRadio.vue', ({ mount }) => {
       }
     })
 
-    let inputGroup = wrapper.find('.input-group')[0]
+    let inputGroup = wrapper.first('input')
     expect(inputGroup.getAttribute('role')).toBe('radio')
     expect(inputGroup.getAttribute('aria-checked')).toBe('false')
 
     wrapper.setData({ 'isActive': true })
-    inputGroup = wrapper.find('.input-group')[0]
+    inputGroup = wrapper.first('input')
     expect(inputGroup.getAttribute('aria-checked')).toBe('true')
     expect(wrapper.html()).toMatchSnapshot()
 
@@ -60,7 +60,7 @@ test('VRadio.vue', ({ mount }) => {
       }
     })
 
-    const inputGroup = wrapper.find('.input-group')[0]
+    const inputGroup = wrapper.first('input')
     expect(inputGroup.getAttribute('aria-label')).toBe('Test')
     expect(wrapper.html()).toMatchSnapshot()
 
@@ -78,7 +78,7 @@ test('VRadio.vue', ({ mount }) => {
       }
     })
 
-    const inputGroup = wrapper.find('.input-group')[0]
+    const inputGroup = wrapper.first('input')
     expect(inputGroup.element.getAttribute('aria-label')).toBeFalsy()
     expect(wrapper.html()).toMatchSnapshot()
 
@@ -132,7 +132,7 @@ test('VRadio.vue', ({ mount }) => {
       }
     })
 
-    const ripple = wrapper.find('.input-group--selection-controls__ripple')
+    const ripple = wrapper.find('.v-input--selection-controls__ripple')
 
     expect(ripple).toHaveLength(0)
 
@@ -150,7 +150,7 @@ test('VRadio.vue', ({ mount }) => {
       }
     })
 
-    const ripple = wrapper.find('.input-group--selection-controls__ripple')[0]
+    const ripple = wrapper.find('.v-input--selection-controls__ripple')[0]
 
     expect(ripple.element._ripple.enabled).toBe(true)
     expect(ripple.element._ripple.centered).toBe(true)
