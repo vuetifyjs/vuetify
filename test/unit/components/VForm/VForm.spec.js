@@ -69,7 +69,7 @@ test('VForm.js', ({ mount }) => {
     expect(wrapper.vm.inputs.length).toBe(1)
   })
 
-  it('should only watch children if not lazy', async () => {
+  it.skip('should only watch children if not lazy', async () => {
     const wrapper = mount(VForm, {
       propsData: {
         lazyValidation: true
@@ -99,7 +99,7 @@ test('VForm.js', ({ mount }) => {
     expect(Object.keys(wrapper.vm.errorBag).length).toBe(1)
   })
 
-  it('should validate all inputs', async () => {
+  it.skip('should validate all inputs', async () => {
     const wrapper = mount(VForm, {
       slots: {
         default: [{
@@ -117,7 +117,7 @@ test('VForm.js', ({ mount }) => {
     expect(wrapper.vm.validate()).toBe(false)
   })
 
-  it('should reset all inputs', async () => {
+  it.skip('should reset all inputs', async () => {
     const wrapper = mount(VForm, {
       slots: {
         default: [VTextField]
@@ -141,7 +141,7 @@ test('VForm.js', ({ mount }) => {
     expect(Object.keys(wrapper.vm.errorBag).length).toBe(0)
   })
 
-  it('should update inputs when updated lifecycle hook is called', async () => {
+  it.skip('should update inputs when updated lifecycle hook is called', async () => {
     const wrapper = mount(VForm, {
       slots: {
         default: [VTextField]

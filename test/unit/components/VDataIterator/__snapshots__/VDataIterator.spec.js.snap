@@ -12,80 +12,84 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
     <div class="v-data-iterator__actions">
       <div class="v-data-iterator__actions__select">
         Items per page:
-        <div tabindex="0"
-             data-uid="16"
-             aria-label="Items per page:"
-             role="combobox"
-             class="input-group input-group--append-icon input-group--hide-details input-group--text-field input-group--select input-group--auto primary--text"
-        >
-          <div class="input-group__input">
-            <div class="input-group__selections"
-                 style="overflow: hidden;"
+        <div class="v-input v-input--select v-input--text theme--light">
+          <div class="v-input__control">
+            <div class="v-input__wrapper"
+                 style="height: 32px;"
             >
-              <input aria-label="Items per page:"
-                     disabled="disabled"
-                     tabindex="-1"
-                     class="input-group--select__autocomplete"
-                     style="display: none;"
+              <div class="menu"
+                   style="display: inline-block;"
               >
-            </div>
-            <div class="menu"
-                 style="display: inline-block;"
-            >
-              <div class="menu__content menu__content--select menu__content--auto"
-                   style="max-height: 200px; min-width: 75px; max-width: auto; top: 18px; left: 12px; z-index: 0; display: none;"
-              >
-                <div class="v-card"
-                     style="height: auto;"
+                <div class="menu__activator">
+                  <div class="v-input--select__slot">
+                    <label class="v-label"
+                           style="left: 0px; position: absolute;"
+                    >
+                    </label>
+                    <input tabindex="0"
+                           type="text"
+                    >
+                    <div class="v-input__append-inner">
+                      <div class="v-input__icon v-input__icon--append">
+                        <i aria-hidden="true"
+                           class="icon material-icons"
+                        >
+                          arrow_drop_down
+                        </i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="menu__content menu__content--select menu__content--auto"
+                     style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
                 >
-                  <div class="list">
-                    <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
-                            5
+                  <div class="v-card"
+                       style="height: auto;"
+                  >
+                    <div class="list">
+                      <div>
+                        <a class="list__tile list__tile--link">
+                          <div class="list__tile__content">
+                            <div class="list__tile__title">
+                              5
+                            </div>
                           </div>
-                        </div>
-                      </a>
-                    </div>
-                    <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
-                            10
+                        </a>
+                      </div>
+                      <div>
+                        <a class="list__tile list__tile--link">
+                          <div class="list__tile__content">
+                            <div class="list__tile__title">
+                              10
+                            </div>
                           </div>
-                        </div>
-                      </a>
-                    </div>
-                    <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
-                            25
+                        </a>
+                      </div>
+                      <div>
+                        <a class="list__tile list__tile--link">
+                          <div class="list__tile__content">
+                            <div class="list__tile__title">
+                              25
+                            </div>
                           </div>
-                        </div>
-                      </a>
-                    </div>
-                    <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
-                            All
+                        </a>
+                      </div>
+                      <div>
+                        <a class="list__tile list__tile--link">
+                          <div class="list__tile__content">
+                            <div class="list__tile__title">
+                              All
+                            </div>
                           </div>
-                        </div>
-                      </a>
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <i aria-hidden="true"
-               class="icon material-icons input-group__append-icon input-group__icon-cb"
-            >
-              arrow_drop_down
-            </i>
-          </div>
-          <div class="input-group__details">
+            <div class="v-input--text__details">
+            </div>
           </div>
         </div>
       </div>
@@ -149,80 +153,84 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
     <div class="v-data-iterator__actions">
       <div class="v-data-iterator__actions__select">
         Items per page:
-        <div tabindex="0"
-             data-uid="28"
-             aria-label="Items per page:"
-             role="combobox"
-             class="input-group input-group--append-icon input-group--hide-details input-group--text-field input-group--select input-group--auto primary--text"
-        >
-          <div class="input-group__input">
-            <div class="input-group__selections"
-                 style="overflow: hidden;"
+        <div class="v-input v-input--select v-input--text theme--light">
+          <div class="v-input__control">
+            <div class="v-input__wrapper"
+                 style="height: 32px;"
             >
-              <input aria-label="Items per page:"
-                     disabled="disabled"
-                     tabindex="-1"
-                     class="input-group--select__autocomplete"
-                     style="display: none;"
+              <div class="menu"
+                   style="display: inline-block;"
               >
-            </div>
-            <div class="menu"
-                 style="display: inline-block;"
-            >
-              <div class="menu__content menu__content--select menu__content--auto"
-                   style="max-height: 200px; min-width: 75px; max-width: auto; top: 18px; left: 12px; z-index: 0; display: none;"
-              >
-                <div class="v-card"
-                     style="height: auto;"
+                <div class="menu__activator">
+                  <div class="v-input--select__slot">
+                    <label class="v-label"
+                           style="left: 0px; position: absolute;"
+                    >
+                    </label>
+                    <input tabindex="0"
+                           type="text"
+                    >
+                    <div class="v-input__append-inner">
+                      <div class="v-input__icon v-input__icon--append">
+                        <i aria-hidden="true"
+                           class="icon material-icons"
+                        >
+                          arrow_drop_down
+                        </i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="menu__content menu__content--select menu__content--auto"
+                     style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
                 >
-                  <div class="list">
-                    <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
-                            5
+                  <div class="v-card"
+                       style="height: auto;"
+                  >
+                    <div class="list">
+                      <div>
+                        <a class="list__tile list__tile--link">
+                          <div class="list__tile__content">
+                            <div class="list__tile__title">
+                              5
+                            </div>
                           </div>
-                        </div>
-                      </a>
-                    </div>
-                    <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
-                            10
+                        </a>
+                      </div>
+                      <div>
+                        <a class="list__tile list__tile--link">
+                          <div class="list__tile__content">
+                            <div class="list__tile__title">
+                              10
+                            </div>
                           </div>
-                        </div>
-                      </a>
-                    </div>
-                    <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
-                            25
+                        </a>
+                      </div>
+                      <div>
+                        <a class="list__tile list__tile--link">
+                          <div class="list__tile__content">
+                            <div class="list__tile__title">
+                              25
+                            </div>
                           </div>
-                        </div>
-                      </a>
-                    </div>
-                    <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
-                            All
+                        </a>
+                      </div>
+                      <div>
+                        <a class="list__tile list__tile--link">
+                          <div class="list__tile__content">
+                            <div class="list__tile__title">
+                              All
+                            </div>
                           </div>
-                        </div>
-                      </a>
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <i aria-hidden="true"
-               class="icon material-icons input-group__append-icon input-group__icon-cb"
-            >
-              arrow_drop_down
-            </i>
-          </div>
-          <div class="input-group__details">
+            <div class="v-input--text__details">
+            </div>
           </div>
         </div>
       </div>
@@ -277,80 +285,84 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
     <div class="v-data-iterator__actions">
       <div class="v-data-iterator__actions__select">
         Items per page:
-        <div tabindex="0"
-             data-uid="2"
-             aria-label="Items per page:"
-             role="combobox"
-             class="input-group input-group--append-icon input-group--hide-details input-group--text-field input-group--select input-group--auto primary--text"
-        >
-          <div class="input-group__input">
-            <div class="input-group__selections"
-                 style="overflow: hidden;"
+        <div class="v-input v-input--select v-input--text theme--light">
+          <div class="v-input__control">
+            <div class="v-input__wrapper"
+                 style="height: 32px;"
             >
-              <input aria-label="Items per page:"
-                     disabled="disabled"
-                     tabindex="-1"
-                     class="input-group--select__autocomplete"
-                     style="display: none;"
+              <div class="menu"
+                   style="display: inline-block;"
               >
-            </div>
-            <div class="menu"
-                 style="display: inline-block;"
-            >
-              <div class="menu__content menu__content--select menu__content--auto"
-                   style="max-height: 200px; min-width: 75px; max-width: auto; top: 18px; left: 12px; z-index: 0; display: none;"
-              >
-                <div class="v-card"
-                     style="height: auto;"
+                <div class="menu__activator">
+                  <div class="v-input--select__slot">
+                    <label class="v-label"
+                           style="left: 0px; position: absolute;"
+                    >
+                    </label>
+                    <input tabindex="0"
+                           type="text"
+                    >
+                    <div class="v-input__append-inner">
+                      <div class="v-input__icon v-input__icon--append">
+                        <i aria-hidden="true"
+                           class="icon material-icons"
+                        >
+                          arrow_drop_down
+                        </i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="menu__content menu__content--select menu__content--auto"
+                     style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
                 >
-                  <div class="list">
-                    <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
-                            5
+                  <div class="v-card"
+                       style="height: auto;"
+                  >
+                    <div class="list">
+                      <div>
+                        <a class="list__tile list__tile--link">
+                          <div class="list__tile__content">
+                            <div class="list__tile__title">
+                              5
+                            </div>
                           </div>
-                        </div>
-                      </a>
-                    </div>
-                    <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
-                            10
+                        </a>
+                      </div>
+                      <div>
+                        <a class="list__tile list__tile--link">
+                          <div class="list__tile__content">
+                            <div class="list__tile__title">
+                              10
+                            </div>
                           </div>
-                        </div>
-                      </a>
-                    </div>
-                    <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
-                            25
+                        </a>
+                      </div>
+                      <div>
+                        <a class="list__tile list__tile--link">
+                          <div class="list__tile__content">
+                            <div class="list__tile__title">
+                              25
+                            </div>
                           </div>
-                        </div>
-                      </a>
-                    </div>
-                    <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
-                            All
+                        </a>
+                      </div>
+                      <div>
+                        <a class="list__tile list__tile--link">
+                          <div class="list__tile__content">
+                            <div class="list__tile__title">
+                              All
+                            </div>
                           </div>
-                        </div>
-                      </a>
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <i aria-hidden="true"
-               class="icon material-icons input-group__append-icon input-group__icon-cb"
-            >
-              arrow_drop_down
-            </i>
-          </div>
-          <div class="input-group__details">
+            <div class="v-input--text__details">
+            </div>
           </div>
         </div>
       </div>
@@ -409,80 +421,84 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
     <div class="v-data-iterator__actions">
       <div class="v-data-iterator__actions__select">
         Items per page:
-        <div tabindex="0"
-             data-uid="42"
-             aria-label="Items per page:"
-             role="combobox"
-             class="input-group input-group--append-icon input-group--hide-details input-group--text-field input-group--select input-group--auto primary--text"
-        >
-          <div class="input-group__input">
-            <div class="input-group__selections"
-                 style="overflow: hidden;"
+        <div class="v-input v-input--select v-input--text theme--light">
+          <div class="v-input__control">
+            <div class="v-input__wrapper"
+                 style="height: 32px;"
             >
-              <input aria-label="Items per page:"
-                     disabled="disabled"
-                     tabindex="-1"
-                     class="input-group--select__autocomplete"
-                     style="display: none;"
+              <div class="menu"
+                   style="display: inline-block;"
               >
-            </div>
-            <div class="menu"
-                 style="display: inline-block;"
-            >
-              <div class="menu__content menu__content--select menu__content--auto"
-                   style="max-height: 200px; min-width: 75px; max-width: auto; top: 18px; left: 12px; z-index: 0; display: none;"
-              >
-                <div class="v-card"
-                     style="height: auto;"
+                <div class="menu__activator">
+                  <div class="v-input--select__slot">
+                    <label class="v-label"
+                           style="left: 0px; position: absolute;"
+                    >
+                    </label>
+                    <input tabindex="0"
+                           type="text"
+                    >
+                    <div class="v-input__append-inner">
+                      <div class="v-input__icon v-input__icon--append">
+                        <i aria-hidden="true"
+                           class="icon material-icons"
+                        >
+                          arrow_drop_down
+                        </i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="menu__content menu__content--select menu__content--auto"
+                     style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
                 >
-                  <div class="list">
-                    <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
-                            5
+                  <div class="v-card"
+                       style="height: auto;"
+                  >
+                    <div class="list">
+                      <div>
+                        <a class="list__tile list__tile--link">
+                          <div class="list__tile__content">
+                            <div class="list__tile__title">
+                              5
+                            </div>
                           </div>
-                        </div>
-                      </a>
-                    </div>
-                    <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
-                            10
+                        </a>
+                      </div>
+                      <div>
+                        <a class="list__tile list__tile--link">
+                          <div class="list__tile__content">
+                            <div class="list__tile__title">
+                              10
+                            </div>
                           </div>
-                        </div>
-                      </a>
-                    </div>
-                    <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
-                            25
+                        </a>
+                      </div>
+                      <div>
+                        <a class="list__tile list__tile--link">
+                          <div class="list__tile__content">
+                            <div class="list__tile__title">
+                              25
+                            </div>
                           </div>
-                        </div>
-                      </a>
-                    </div>
-                    <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
-                            All
+                        </a>
+                      </div>
+                      <div>
+                        <a class="list__tile list__tile--link">
+                          <div class="list__tile__content">
+                            <div class="list__tile__title">
+                              All
+                            </div>
                           </div>
-                        </div>
-                      </a>
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <i aria-hidden="true"
-               class="icon material-icons input-group__append-icon input-group__icon-cb"
-            >
-              arrow_drop_down
-            </i>
-          </div>
-          <div class="input-group__details">
+            <div class="v-input--text__details">
+            </div>
           </div>
         </div>
       </div>

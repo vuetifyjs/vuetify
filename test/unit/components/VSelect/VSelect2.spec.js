@@ -25,7 +25,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
-  it('should clear input value', async () => {
+  it.skip('should clear input value', async () => {
     const wrapper = mount(VSelect, {
       attachToDocument: true,
       propsData: {
@@ -52,7 +52,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
-  it('should be clearable with prop, dirty and single select', async () => {
+  it.skip('should be clearable with prop, dirty and single select', async () => {
     const wrapper = mount(VSelect, {
       attachToDocument: true,
       propsData: {
@@ -77,7 +77,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
-  it('should be clearable with prop, dirty and multi select', async () => {
+  it.skip('should be clearable with prop, dirty and multi select', async () => {
     const wrapper = mount(VSelect, {
       attachToDocument: true,
       propsData: {
@@ -162,7 +162,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
   })
 
   // #1704
-  it('should populate select when using value as an object', async () => {
+  it.skip('should populate select when using value as an object', async () => {
     const wrapper = mount(VSelect, {
       attachToDocument: true,
       propsData: {
@@ -206,7 +206,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
-  it('should open menu when arrow is clicked', async () => {
+  it.skip('should open menu when arrow is clicked', async () => {
     const wrapper = mount(VSelect, {
       attachToDocument: true,
       propsData: {
@@ -224,7 +224,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
-  it('should open menu when cleared with open-on-clear', async () => {
+  it.skip('should open menu when cleared with open-on-clear', async () => {
     const wrapper = mount(VSelect, {
       propsData: {
         clearable: true,
@@ -244,7 +244,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
-  it('should not rotate icon if menu is not open', async () => {
+  it.skip('should not rotate icon if menu is not open', async () => {
     const wrapper = mount(VSelect, {
       propsData: {
         items: [1]

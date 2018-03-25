@@ -109,7 +109,7 @@ export default {
       }) : this.filteredItems
     },
     nudgeTop () {
-      let nudgeTop = -18
+      let nudgeTop = -4
 
       if (this.isSolo) nudgeTop = 0
       else if (this.shouldOffset) {
