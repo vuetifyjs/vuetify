@@ -10,26 +10,27 @@ export default {
   computed: {
     classes () {
       const classes = {
-        ...this.genSoloClasses(),
-        'input-group--text-field input-group--select': true,
-        'input-group--auto': this.auto,
-        'input-group--overflow': this.overflow,
-        'input-group--segmented': this.segmented,
-        'input-group--editable': this.editable,
-        'input-group--autocomplete': this.isAutocomplete,
-        'input-group--single-line': this.singleLine || this.isDropdown,
-        'input-group--multi-line': this.multiLine,
-        'input-group--chips': this.chips,
-        'input-group--multiple': this.multiple,
-        'input-group--open': this.menuIsVisible,
-        'input-group--select--selecting-index': this.selectedIndex > -1
+        'v-input--select v-input--text': true
+        // ...this.genSoloClasses(),
+        // 'input-group--text-field input-group--select': true,
+        // 'input-group--auto': this.auto,
+        // 'input-group--overflow': this.overflow,
+        // 'input-group--segmented': this.segmented,
+        // 'input-group--editable': this.editable,
+        // 'input-group--autocomplete': this.isAutocomplete,
+        // 'input-group--single-line': this.singleLine || this.isDropdown,
+        // 'input-group--multi-line': this.multiLine,
+        // 'input-group--chips': this.chips,
+        // 'input-group--multiple': this.multiple,
+        // 'input-group--open': this.menuIsVisible,
+        // 'input-group--select--selecting-index': this.selectedIndex > -1
       }
 
-      if (this.hasError) {
-        classes['error--text'] = true
-      } else {
-        return this.addTextColorClassChecks(classes)
-      }
+      // if (this.hasError) {
+      //   classes['error--text'] = true
+      // } else {
+      //   return this.addTextColorClassChecks(classes)
+      // }
 
       return classes
     },

@@ -187,6 +187,11 @@ export default {
 
       return this.genSlot('append', 'outer', slot)
     },
+    genListeners () {
+      return {
+        click: this.onClick
+      }
+    },
     onClick (e) {
       this.$emit('click', e)
     }
@@ -196,7 +201,7 @@ export default {
     return h('div', {
       staticClass: 'v-input',
       'class': this.classesInput,
-      on: { click: this.onClick }
+      on: this.genListeners()
     }, [
       this.genPrependSlot(),
       this.genContent(),

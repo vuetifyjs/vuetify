@@ -1,13 +1,14 @@
 // Styles
 import '../../stylus/components/_text-fields.styl'
-import '../../stylus/components/_input-groups.styl'
 import '../../stylus/components/_select.styl'
+
+// Extensions
+import VTextField from '../VTextField/VTextField'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
 import Dependent from '../../mixins/dependent'
 import Filterable from '../../mixins/filterable'
-import Inputable from '../../mixins/inputable'
 import Maskable from '../../mixins/maskable'
 import Soloable from '../../mixins/soloable'
 
@@ -27,6 +28,8 @@ import ClickOutside from '../../directives/click-outside'
 export default {
   name: 'v-select',
 
+  extends: VTextField,
+
   inheritAttrs: false,
 
   directives: {
@@ -41,7 +44,6 @@ export default {
     Filterable,
     Generators,
     Helpers,
-    Inputable,
     Maskable,
     Menu,
     Props,
@@ -79,7 +81,7 @@ export default {
     // to avoid a unnecessary label transition
     this.genSelectedItems()
 
-    this.content = this.$refs.menu.$refs.content
+    // this.content = this.$refs.menu.$refs.content
   },
 
   beforeDestroy () {
@@ -272,40 +274,39 @@ export default {
         })
       })
     }
-  },
-
-  render () {
-    const data = {
-      attrs: {
-        tabindex: this.isAutocomplete || this.disabled ? -1 : this.tabindex,
-        'data-uid': this._uid,
-        ...(this.isAutocomplete ? null : this.$attrs),
-        role: this.isAutocomplete ? null : 'combobox'
-      }
-    }
-
-    if (!this.isAutocomplete) {
-      data.on = this.genListeners()
-      data.directives = this.genDirectives()
-    } else {
-      data.on = {
-        click: () => {
-          if (this.disabled || this.readonly || this.isFocused) return
-
-          // If the input is dirty,
-          // the input is not targetable
-          // so we must manually focus
-          if (this.isDirty) {
-            this.focus()
-            this.$nextTick(this.focusInput)
-          }
-        }
-      }
-    }
-
-    return this.genInputGroup([
-      this.genSelectionsAndSearch(),
-      this.genMenu()
-    ], data, this.toggleMenu)
   }
+  // render (h) {
+  //   const data = {
+  //     attrs: {
+  //       tabindex: this.isAutocomplete || this.disabled ? -1 : this.tabindex,
+  //       'data-uid': this._uid,
+  //       ...(this.isAutocomplete ? null : this.$attrs),
+  //       role: this.isAutocomplete ? null : 'combobox'
+  //     }
+  //   }
+
+  //   if (!this.isAutocomplete) {
+  //     data.on = this.genListeners()
+  //     data.directives = this.genDirectives()
+  //   } else {
+  //     data.on = {
+  //       click: () => {
+  //         if (this.disabled || this.readonly || this.isFocused) return
+
+  //         // If the input is dirty,
+  //         // the input is not targetable
+  //         // so we must manually focus
+  //         if (this.isDirty) {
+  //           this.focus()
+  //           this.$nextTick(this.focusInput)
+  //         }
+  //       }
+  //     }
+  //   }
+
+  //   return this.genInputGroup([
+  //     this.genSelectionsAndSearch(),
+  //     this.genMenu()
+  //   ], data, this.toggleMenu)
+  // }
 }

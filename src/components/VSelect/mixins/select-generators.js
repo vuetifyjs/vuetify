@@ -26,14 +26,28 @@ import {
  */
 export default {
   methods: {
-    genMenu () {
+    genDefaultSlot () {
+      const activator = this.$createElement('div', {
+        staticClass: 'v-input--select__slot',
+        slot: 'activator'
+      }, [
+        this.genLabel(),
+        this.prefix ? this.genAffix('prefix') : null,
+        this.genInput(),
+        this.suffix ? this.genAffix('suffix') : null,
+        this.genIconSlot(),
+        this.genProgress()
+      ])
+
+      return [this.genMenu(activator)]
+    },
+    genMenu (activator) {
       const data = {
         ref: 'menu',
         props: {
           activator: this.$el,
           auto: this.auto,
           attach: this.attach && `[data-uid="${this._uid}"]`,
-          closeOnClick: false,
           closeOnContentClick: !this.isMultiple,
           contentClass: this.computedContentClass,
           dark: this.dark,
@@ -60,7 +74,7 @@ export default {
 
       this.minWidth && (data.props.minWidth = this.minWidth)
 
-      return this.$createElement(VMenu, data, [this.genList()])
+      return this.$createElement(VMenu, data, [activator, this.genList()])
     },
     getMenuIndex () {
       return this.$refs.menu ? this.$refs.menu.listIndex : -1
@@ -255,19 +269,6 @@ export default {
         props: item
       })
     },
-    genLabel () {
-      const singleLine = this.singleLine || this.isDropdown
-
-      if (singleLine &&
-        (this.isDirty || (this.isFocused && this.searchValue))
-      ) return null
-
-      const data = {}
-
-      if (this.id) data.attrs = { for: this.id }
-
-      return this.$createElement('label', data, this.$slots.label || this.label)
-    },
     genTile (item, disabled) {
       const active = this.selectedItems.indexOf(item) !== -1
 
@@ -304,7 +305,7 @@ export default {
       }
 
       return this.$createElement(VListTile, data,
-        [this.genAction(item, active), this.genContent(item)]
+        [this.genAction(item, active), this.genTileContent(item)]
       )
     },
     genAction (item, active) {
@@ -329,7 +330,7 @@ export default {
         })
       ])
     },
-    genContent (item) {
+    genTileContent (item) {
       const text = this.getText(item)
 
       return this.$createElement(VListTileContent,
