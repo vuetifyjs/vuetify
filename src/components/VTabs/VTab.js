@@ -45,8 +45,14 @@ export default {
     action () {
       let to = this.to || this.href
 
-      if (this.$router && this.to) {
-        const resolve = this.$router.resolve(this.to)
+      if (this.$router &&
+        this.to === Object(this.to)
+      ) {
+        const resolve = this.$router.resolve(
+          this.to,
+          this.$route,
+          this.append
+        )
 
         to = resolve.href
       }
