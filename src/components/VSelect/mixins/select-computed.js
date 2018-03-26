@@ -10,7 +10,9 @@ export default {
   computed: {
     classes () {
       const classes = {
-        'v-input--select v-input--text': true
+        'v-input--select v-input--text': true,
+        'v-input--select--chips': this.chips,
+        'v-input--select--autocomplete': this.isAutocomplete
         // ...this.genSoloClasses(),
         // 'input-group--text-field input-group--select': true,
         // 'input-group--auto': this.auto,
@@ -57,6 +59,9 @@ export default {
       if (this.selectedItem == null) return 0
 
       return this.getText(this.selectedItem).toString().length
+    },
+    dynamicHeight () {
+      return this.chips ? 'auto' : '32px'
     },
     filteredItems () {
       // If we are not actively filtering

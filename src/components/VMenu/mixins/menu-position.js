@@ -57,8 +57,8 @@ export default {
         actingIndex = selectedIndex - this.stopIndex
       }
 
-      // Is always off by 1 pixel, send help (┛ಠ_ಠ)┛彡┻━┻
-      offsetPadding--
+      // (┛ಠ_ಠ)┛彡┻━┻
+      offsetPadding -= 4
 
       return (
         this.computedTop +

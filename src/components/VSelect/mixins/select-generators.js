@@ -33,6 +33,7 @@ export default {
       }, [
         this.genLabel(),
         this.prefix ? this.genAffix('prefix') : null,
+        this.genSelections(),
         this.genInput(),
         this.suffix ? this.genAffix('suffix') : null,
         this.genIconSlot(),

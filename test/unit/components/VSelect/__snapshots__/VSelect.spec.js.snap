@@ -150,6 +150,9 @@ exports[`VSelect should render v-select correctly when not using scope slot 1`] 
                    style="left: 0px; position: absolute;"
             >
             </label>
+            <div class="input-group__selections__comma">
+              Text 0
+            </div>
             <input tabindex="0"
                    type="text"
             >
@@ -172,7 +175,7 @@ exports[`VSelect should render v-select correctly when not using scope slot 1`] 
           >
             <div class="list">
               <div>
-                <a class="list__tile list__tile--link list__tile--active primary--text">
+                <a class="list__tile list__tile--link list__tile--active ">
                   <div class="list__tile__content">
                     <div class="list__tile__title">
                       Text 0
@@ -221,6 +224,9 @@ exports[`VSelect should render v-select correctly when not using v-list-tile in 
                    style="left: 0px; position: absolute;"
             >
             </label>
+            <div class="input-group__selections__comma">
+              Text 0
+            </div>
             <input tabindex="0"
                    type="text"
             >
@@ -243,7 +249,7 @@ exports[`VSelect should render v-select correctly when not using v-list-tile in 
           >
             <div class="list">
               <div>
-                <a class="list__tile list__tile--link list__tile--active primary--text">
+                <a class="list__tile list__tile--link list__tile--active ">
                   <div class="list__tile__content">
                     <div class="list__tile__title">
                       0
@@ -292,6 +298,9 @@ exports[`VSelect should render v-select correctly when using v-list-tile in item
                    style="left: 0px; position: absolute;"
             >
             </label>
+            <div class="input-group__selections__comma">
+              Text 0
+            </div>
             <input tabindex="0"
                    type="text"
             >
@@ -314,7 +323,7 @@ exports[`VSelect should render v-select correctly when using v-list-tile in item
           >
             <div class="list">
               <div class>
-                <a class="list__tile list__tile--link list__tile--active primary--text">
+                <a class="list__tile list__tile--link list__tile--active ">
                   Text 0
                 </a>
               </div>

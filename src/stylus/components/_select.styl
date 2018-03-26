@@ -5,7 +5,28 @@
   .menu
     flex: 1 1 auto
 
+  .chip
+    flex: 0 1 auto
+
+  .fade-transition-leave-active
+    position: absolute
+    left: 0
+
+  &:not(.v-input--select--autocomplete)
+    input
+      opacity: 0
+      pointer-events: none
+
+  &.v-input--is-focused
+    .v-input__icon--append .icon
+      transform: rotate(180deg)
+
+  &--chips
+    .v-label.v-label--active
+      transform: translateY(-22px) scale(0.75)
+
   &__slot
+    align-items: center
     display: flex
 
 // selects($material)

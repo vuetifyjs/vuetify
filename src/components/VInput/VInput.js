@@ -57,11 +57,23 @@ export default {
         'theme--dark': this.dark
       }
     },
+    // Implementing components can
+    // use dynamicHeight to override
+    // the default conditional
+    computedHeight () {
+      return this.dynamicHeight || (!this.height
+        ? '32px'
+        : `${parseInt(this.height)}px`)
+    },
     hasHint () {
       return !this.hasMessages &&
         this.hint &&
         (this.persistentHint || this.isFocused)
     },
+    // Proxy for `lazyValue`
+    // This allows an input
+    // to function without
+    // a provided model
     proxyValue: {
       get () {
         return this.lazyValue
@@ -130,9 +142,7 @@ export default {
         staticClass: 'v-input__wrapper',
         'class': this.classesColor,
         style: {
-          height: !this.height
-            ? '32px'
-            : `${parseInt(this.height)}px`
+          height: this.computedHeight
         }
       }, this.genDefaultSlot())
     },

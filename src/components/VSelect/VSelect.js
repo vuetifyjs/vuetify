@@ -59,7 +59,6 @@ export default {
     return {
       cachedItems: this.cacheItems ? this.items : [],
       content: {},
-      defaultColor: 'primary',
       inputValue: (this.multiple || this.tags) && !this.value ? [] : this.value,
       isBooted: false,
       lastItem: 20,
