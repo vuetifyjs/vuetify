@@ -1,2 +1,26 @@
-@import '../bootstrap'
-@import '../theme'
+@import "../bootstrap"
+@import "../theme"
+
+.timeline
+  display: flex
+  flex-wrap: wrap
+  justify-content: center
+  list-style-type: none
+  text-align: left
+  width: 100%
+
+  &__container
+    flex: 1 0 100%
+    max-width: 100%
+    outline: none
+      
+.header__icon
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  background: #75ce66
+  border-radius: 50%;
+  -webkit-box-shadow: 0 0 0 4px white, inset 0 2px 0 rgba(0, 0, 0, 0.08), 0 3px 0 4px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0 0 4px white, inset 0 2px 0 rgba(0, 0, 0, 0.08), 0 3px 0 4px rgba(0, 0, 0, 0.05);
