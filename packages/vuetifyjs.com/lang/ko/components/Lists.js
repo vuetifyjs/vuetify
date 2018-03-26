@@ -4,12 +4,12 @@ export default {
   components: [
     'v-list',
     'v-list-tile',
-    'v-list-tile-title',
-    'v-list-tile-sub-title',
-    'v-list-tile-content',
+    'v-list-group',
     'v-list-tile-action',
     'v-list-tile-avatar',
-    'v-list-group',
+    'v-list-tile-content',
+    'v-list-tile-title',
+    'v-list-tile-sub-title',
     'v-list-tile-action-text'
   ],
   examples: [{
@@ -58,9 +58,22 @@ export default {
     avatar: '한줄짜리 리스트 아이템에서 최소 타일높이',
     dense: '리스트 타일에서 최대 높이를 낮춤',
     expand: '명시적으로 닫을때만 접음(collapse)',
+    group: '라우트 네임스페이스를 지정. 활성화 상태를 결정하기 위한 문자열이나 정규표현식.',
+    noAction: '그룹 아이템에서  액션아이콘을 위한 왼쪽 패딩을 제거',
     subheader: '탑 패딩(top padding)을 제거. 앞선 형제(previous sibling)이 헤더일 경우 사용',
+    subGroup: '컴포넌트를 중첩된 리스트 그룹(nested  list group)으로 지정',
     threeLine: '3줄 리스트 아이템에서 리스트 타일의 높이를 증가',
     twoLine: '2줄 리스트 아이템에서 리스트 타일의 높이를 증가',
-    inactive: '리스트 타일이 to/herf prop을 가지고 있거나 @click 핸들러를 가지고 있어도 링크로 렌더링 되지 않음'
+    inactive: '리스트 타일이 to/herf prop을 가지고 있거나 @click 핸들러를 가지고 있어도 링크로 렌더링 되지 않음',
+    value: '리스트 그룹을 펼치거나 접음(Expands / Collapse)',
+    'v-list-tile-avatar': {
+      color: 'Mixins.Colorable.props.color'
+    },
+    'v-list-group': {
+      activeClass: 'Mixins.Routable.props.activeClass',
+      appendIcon: 'Mixins.Input.props.appendIcon',
+      disabled: 'Mixins.Input.props.disabled',
+      prependIcon: 'Mixins.Input.props.prependIcon'
+    }
   }
 }

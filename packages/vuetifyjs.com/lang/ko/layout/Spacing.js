@@ -32,7 +32,8 @@ export default {
     '`l` - `margin-left` 이나 `padding-left`의 속성에 적용',
     '`r` - `margin-right` 이나 `padding-right`의 속성에 적용',
     '`x` - `*-left` 과 `*-right`에 둘다 적용',
-    '`y` - `*-top` 과 `*-bottom`에 둘다 적용'
+    '`y` - `*-top` 과 `*-bottom`에 둘다 적용',
+    '`a` - `margin` 이나 `padding` 을 모든 방향에 적용'
   ],
   sizeText: '_크기_ 는 해당 속성의 크기를 조절합니다.',
   sizes: [
