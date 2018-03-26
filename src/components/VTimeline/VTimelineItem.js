@@ -33,7 +33,7 @@ export default {
         'div',
         {
           ref: 'body',
-          class: 'timeline__container--body'
+          class: 'timeline__item--body'
         },
         this.$slots.default
       )
@@ -42,7 +42,7 @@ export default {
       return this.$createElement(
         'div',
         {
-          staticClass: 'timeline__container--header',
+          staticClass: 'timeline__item--head',
           directives: [
             {
               name: 'ripple',
@@ -60,7 +60,7 @@ export default {
       return this.$createElement(
         'div',
         {
-          staticClass: 'header__icon'
+          staticClass: 'timeline__item--head-icon'
         },
         [icon]
       )
@@ -72,7 +72,7 @@ export default {
       return this.$createElement(
         'div',
         {
-          staticClass: 'header__date'
+          staticClass: 'timeline__item--head-date'
         },
         [date]
       )
@@ -86,9 +86,9 @@ export default {
     children.push(this.genBody())
 
     return h(
-      'li',
+      'div',
       {
-        staticClass: 'timeline__container'
+        staticClass: 'timeline__item'
       },
       children
     )
