@@ -34,6 +34,7 @@ export default {
     '트랜지션 컴포넌트',
     '빠른 속도'
   ],
+  componentFramework: '컴포넌트 프레임워크',
   letterFromAuthor: [
     'Hey there,',
     'I know choosing a UI framework can be a daunting task -- there are so many options to choose from and every one of them claims that they are the best. So you have to decide for yourself: what are the metrics for success?',
@@ -48,5 +49,8 @@ export default {
   },
   becomeSponsor: 'Become a Sponsor',
   proudlySponsoredBy: 'Patreon Sponsors',
-  callout: 'Vue와 머티리얼 디자인의 힘으로 여러분의 개발을 한단계 높이세요'
+  callout: '개발을 한단계 높이세요',
+  madeWithVuetify: 'Vueify 를 사용한 프로젝트들',
+  materialDesign: '머티리얼 디자인',
+  mit: 'MIT 라이센스'
 }

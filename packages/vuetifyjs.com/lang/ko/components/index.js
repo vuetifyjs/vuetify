@@ -1,4 +1,5 @@
 import Alerts from './Alerts'
+import ApiExplorer from './ApiExplorer'
 import Avatars from './Avatars'
 import Badges from './Badges'
 import BottomNavigation from './BottomNavigation'
@@ -41,6 +42,7 @@ import Tooltips from './Tooltips'
 
 export default {
   Alerts,
+  ApiExplorer,
   Avatars,
   Badges,
   BottomNavigation,
