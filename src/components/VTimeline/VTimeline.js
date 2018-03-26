@@ -8,15 +8,17 @@ export default {
   mixins: [Themeable],
 
   render (h) {
-    return h(
-      'ul',
-      {
-        staticClass: 'timeline',
-        class: {
-          ...this.themeClasses
-        }
-      },
-      this.$slots.default
-    )
+    return h('section', { staticClass: 'timeline' }, [
+      h(
+        'div',
+        {
+          staticClass: 'timeline__container',
+          class: {
+            ...this.themeClasses
+          }
+        },
+        this.$slots.default
+      )
+    ])
   }
 }
