@@ -75,7 +75,7 @@ export default {
     },
 
     strokeWidth () {
-      return Number(this.width) / Number(this.size) * this.viewBoxSize * 2
+      return this.width / this.size * this.viewBoxSize * 2
     },
 
     styles () {
@@ -92,7 +92,7 @@ export default {
     },
 
     viewBoxSize () {
-      return this.radius / (1 - Number(this.width) / Number(this.size))
+      return this.radius / (1 - this.width / this.size)
     }
   },
 
