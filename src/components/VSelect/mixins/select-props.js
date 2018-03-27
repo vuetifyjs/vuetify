@@ -10,7 +10,7 @@ export default {
     autocomplete: Boolean,
     browserAutocomplete: {
       type: String,
-      default: 'on'
+      default: 'off'
     },
     cacheItems: Boolean,
     chips: Boolean,

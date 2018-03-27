@@ -233,18 +233,32 @@ test('VSelect - autocomplete', ({ mount }) => {
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
-  it('should allow changing of browser autocomplete', () => {
+  it('should disable browser autocompletion by default', () => {
     const wrapper = mount(VSelect, {
       attachToDocument: true,
       propsData: {
         autocomplete: true,
-        browserAutocomplete: 'off'
       }
     })
 
     const input = wrapper.find('input')[0]
 
     expect(input.getAttribute('autocomplete')).toBe('off')
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should allow changing of browser autocomplete', () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        autocomplete: true,
+        browserAutocomplete: 'on'
+      }
+    })
+
+    const input = wrapper.find('input')[0]
+
+    expect(input.getAttribute('autocomplete')).toBe('on')
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
