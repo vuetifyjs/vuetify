@@ -63,13 +63,13 @@ exports[`VBtn.js should render component with loader and match snapshot 1`] = `
          style="height: 26px; width: 26px;"
     >
       <svg xmlns="http://www.w3.org/2000/svg"
-           viewbox="25 25 50 50"
+           viewbox="23.636363636363637 23.636363636363637 47.27272727272727 47.27272727272727"
       >
         <circle fill="transparent"
-                cx="50"
-                cy="50"
+                cx="47.27272727272727"
+                cy="47.27272727272727"
                 r="20"
-                stroke-width="4"
+                stroke-width="7.272727272727273"
                 stroke-dasharray="125.664"
                 stroke-dashoffset="125.66370614359172px"
                 class="progress-circular__overlay"
