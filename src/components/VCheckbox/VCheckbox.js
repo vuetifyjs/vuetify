@@ -53,7 +53,7 @@ export default {
       this.isFocused = true
       this.$emit('focus', e)
     },
-    groupBlur (e) {
+    groupBlur () {
       this.isFocused = false
       this.tabFocused = false
       this.$emit('blur', this.inputValue)

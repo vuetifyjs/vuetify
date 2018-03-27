@@ -22,7 +22,6 @@ export default {
   methods: {
     save (value) {
       this.originalValue = value
-      this.$emit('update:returnValue', value)
       this.isActive = false
     }
   }

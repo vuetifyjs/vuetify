@@ -1,4 +1,7 @@
+// Components
 import VIcon from '../VIcon'
+
+// Directives
 import Ripple from '../../directives/ripple'
 
 export default {
@@ -16,6 +19,10 @@ export default {
   },
 
   props: {
+    color: {
+      type: String,
+      default: 'primary'
+    },
     complete: Boolean,
     completeIcon: {
       type: String,
@@ -94,7 +101,7 @@ export default {
     const step = h('span', {
       staticClass: 'stepper__step__step',
       'class': {
-        'primary': !this.hasError && (this.complete || this.isActive)
+        [this.color]: !this.hasError && (this.complete || this.isActive)
       }
     }, stepContent)
 

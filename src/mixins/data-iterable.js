@@ -214,7 +214,9 @@ export default {
   watch: {
     itemsLength (totalItems) {
       this.updatePagination({ page: 1, totalItems })
-    }
+    },
+    'computedPagination.sortBy': function () { this.updatePagination({ page: 1 }) },
+    'computedPagination.descending': function () { this.updatePagination({ page: 1 }) }
   },
 
   methods: {

@@ -186,7 +186,7 @@ export default {
     }
   },
 
-  render (h) {
+  render () {
     const data = {
       staticClass: 'time-picker-clock',
       class: {

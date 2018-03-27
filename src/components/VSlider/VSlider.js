@@ -216,7 +216,7 @@ export default {
         this.inputValue = this.inputValue - direction * step * (steps > 100 ? steps / 10 : 10)
       }
     },
-    onKeyUp (e) {
+    onKeyUp () {
       this.keyPressed = 0
     },
     sliderMove (e) {

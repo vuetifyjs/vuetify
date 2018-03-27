@@ -121,7 +121,7 @@ export default {
     }
   },
 
-  render (h) {
+  render () {
     return this.$createElement('div', {
       staticClass: 'date-picker-header'
     }, [
