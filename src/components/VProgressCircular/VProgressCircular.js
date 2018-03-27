@@ -35,13 +35,7 @@ export default {
 
   computed: {
     calculatedSize () {
-      let size = Number(this.size)
-
-      if (this.button) {
-        size += 8
-      }
-
-      return size
+      return Number(this.size) + (this.button ? 8 : 0)
     },
 
     circumference () {
@@ -54,10 +48,6 @@ export default {
         'progress-circular--indeterminate': this.indeterminate,
         'progress-circular--button': this.button
       })
-    },
-
-    cxy () {
-      return this.indeterminate && !this.button ? 50 : this.calculatedSize / 2
     },
 
     normalizedValue () {
@@ -73,10 +63,7 @@ export default {
     },
 
     radius () {
-      return this.indeterminate &&
-        !this.button
-        ? 20
-        : (this.calculatedSize - this.width) / 2
+      return 20
     },
 
     strokeDashArray () {
@@ -87,6 +74,10 @@ export default {
       return ((100 - this.normalizedValue) / 100) * this.circumference + 'px'
     },
 
+    strokeWidth () {
+      return Math.min(10, Number(this.width) / Number(this.size) * 50)
+    },
+
     styles () {
       return {
         height: `${this.calculatedSize}px`,
@@ -94,18 +85,10 @@ export default {
       }
     },
 
-    svgSize () {
-      return this.indeterminate ? false : this.calculatedSize
-    },
-
     svgStyles () {
       return {
         transform: `rotate(${this.rotate}deg)`
       }
-    },
-
-    viewBox () {
-      return this.indeterminate ? '25 25 50 50' : false
     }
   },
 
@@ -115,10 +98,10 @@ export default {
         class: `progress-circular__${name}`,
         attrs: {
           fill: 'transparent',
-          cx: this.cxy,
-          cy: this.cxy,
+          cx: 50,
+          cy: 50,
           r: this.radius,
-          'stroke-width': this.width / this.size * 50,
+          'stroke-width': this.strokeWidth,
           'stroke-dasharray': this.strokeDashArray,
           'stroke-dashoffset': offset
         }
@@ -126,7 +109,7 @@ export default {
     },
     genSvg (h) {
       const children = [
-        !this.indeterminate && this.genCircle(h, 'underlay', 0),
+        this.indeterminate || this.genCircle(h, 'underlay', 0),
         this.genCircle(h, 'overlay', this.strokeDashOffset)
       ]
 
@@ -134,9 +117,7 @@ export default {
         style: this.svgStyles,
         attrs: {
           xmlns: 'http://www.w3.org/2000/svg',
-          height: this.svgSize,
-          width: this.svgSize,
-          viewBox: this.viewBox
+          viewBox: '25 25 50 50'
         }
       }, children)
     }
