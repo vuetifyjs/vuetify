@@ -75,7 +75,7 @@ export default {
     },
 
     strokeWidth () {
-      return Math.min(10, Number(this.width) / Number(this.size) * 50)
+      return Number(this.width) / Number(this.size) * this.viewBoxSize * 2
     },
 
     styles () {
@@ -89,6 +89,10 @@ export default {
       return {
         transform: `rotate(${this.rotate}deg)`
       }
+    },
+
+    viewBoxSize () {
+      return this.radius / (1 - Number(this.width) / Number(this.size))
     }
   },
 
@@ -98,8 +102,8 @@ export default {
         class: `progress-circular__${name}`,
         attrs: {
           fill: 'transparent',
-          cx: 50,
-          cy: 50,
+          cx: 2 * this.viewBoxSize,
+          cy: 2 * this.viewBoxSize,
           r: this.radius,
           'stroke-width': this.strokeWidth,
           'stroke-dasharray': this.strokeDashArray,
@@ -117,7 +121,7 @@ export default {
         style: this.svgStyles,
         attrs: {
           xmlns: 'http://www.w3.org/2000/svg',
-          viewBox: '25 25 50 50'
+          viewBox: `${this.viewBoxSize} ${this.viewBoxSize} ${2 * this.viewBoxSize} ${2 * this.viewBoxSize}`
         }
       }, children)
     }
