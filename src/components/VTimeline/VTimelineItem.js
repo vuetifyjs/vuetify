@@ -32,6 +32,19 @@ export default {
     },
     iconFillColorClasses () {
       return this.iconFillColor ? this.iconFillColor : this.$parent.$props.iconFillColor ? this.$parent.$props.iconFillColor : null
+    },
+    lineStyles () {
+      const lineSize = this.$parent.$props.lineSize
+      if (lineSize > 12 || lineSize < 0) {
+        return {
+          width: `8px`,
+          marginLeft: `-8px`
+        }
+      }
+      return {
+        width: `${this.$parent.$props.lineSize}px`,
+        marginLeft: `-${this.$parent.$props.lineSize}px`
+      }
     }
   },
 
@@ -79,7 +92,13 @@ export default {
         staticClass: 'timeline__item',
         class: this.classes
       },
-      children
+      [
+        h('div', {
+          staticClass: 'timeline__line',
+          style: this.lineStyles
+        }),
+        children
+      ]
     )
   }
 }

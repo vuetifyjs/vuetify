@@ -24,17 +24,15 @@ theme(timeline, "timeline")
       position: relative
       min-height: 128px
 
-      &:before
+      & .timeline__line
         content: ""
         position: absolute
-        top: 0
+        top: 44px
         bottom: 0
-        width: 8px
         background: currentColor
         left: 10%
-        margin-left: -8px
 
-      &:last-child
+      &:last-child .timeline__line
         position: relative
 
         &:before
