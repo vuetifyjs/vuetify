@@ -1,29 +1,34 @@
-import Rippleable from '../../mixins/rippleable'
 import { inject as RegistrableInject } from '../../mixins/registrable'
+
+import Colorable from '../../mixins/colorable'
 
 import VIcon from '../VIcon'
 
 export default {
   name: 'v-timeline-item',
 
-  mixins: [Rippleable, RegistrableInject('timeline', 'v-timeline', 'v-timeline-item')],
-
-  data () {
-    return {
-      height: 'auto'
-    }
-  },
+  mixins: [Colorable, RegistrableInject('timeline', 'v-timeline', 'v-timeline-item')],
 
   props: {
     icon: {
       type: String,
       default: 'event'
     },
-    date: String,
-    hideDetail: Boolean,
-    ripple: {
-      type: [Boolean, Object],
+    noIcon: {
+      type: Boolean,
       default: false
+    },
+    lineColor: { type: String },
+    fillColor: { type: String }
+  },
+
+  computed: {
+    classes () {
+      if (this.lineColor) {
+        return this.addTextColorClassChecks(null, this.lineColor)
+      }
+
+      return ''
     }
   },
 
@@ -35,46 +40,25 @@ export default {
           ref: 'body',
           class: 'timeline__item--body'
         },
-        this.$slots.default
+        this.$slots.item
       )
     },
-    genHeader () {
+    genIconHeader () {
+      const icon = this.noIcon || this.$parent.$props.noIcon ? null : this.$slots.icon || this.$createElement(VIcon, this.icon)
       return this.$createElement(
         'div',
         {
-          staticClass: 'timeline__item--head',
-          directives: [
+          staticClass: 'timeline__item--head'
+        },
+        [
+          this.$createElement(
+            'div',
             {
-              name: 'ripple',
-              value: this.ripple
-            }
-          ]
-        },
-        [this.$slots.header, this.genIcon(), this.genDate()]
-      )
-    },
-    genIcon (h) {
-      if (this.hideDetail) return null
-
-      const icon = this.$slots.icon || this.$createElement(VIcon, this.icon)
-      return this.$createElement(
-        'div',
-        {
-          staticClass: 'timeline__item--head-icon'
-        },
-        [icon]
-      )
-    },
-    genDate (h) {
-      if (this.hideDetail) return null
-
-      const date = this.$slots.date || this.$createElement('span', { staticClass: 'caption' }, this.date)
-      return this.$createElement(
-        'div',
-        {
-          staticClass: 'timeline__item--head-date'
-        },
-        [date]
+              staticClass: 'timeline__item--head-icon'
+            },
+            [icon]
+          )
+        ]
       )
     }
   },
@@ -82,13 +66,14 @@ export default {
   render (h) {
     const children = []
 
-    children.push(this.genHeader())
+    children.push(this.genIconHeader())
     children.push(this.genBody())
 
     return h(
-      'div',
+      'li',
       {
-        staticClass: 'timeline__item'
+        staticClass: 'timeline__item',
+        class: this.classes
       },
       children
     )

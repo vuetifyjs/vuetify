@@ -1,285 +1,68 @@
 @import "../bootstrap"
 @import "../theme"
 
+/* Themes */
+timeline($material)
+  background-color: $material.timelines
+  color: $material.text.primary
+
+theme(timeline, "timeline")
+
 .timeline
-  overflow: hidden
-  margin: 2em auto
-
-.timeline__container
-  position: relative
-  width: 90%
-  max-width: 1170px
+  max-width: 1104px
   margin: 0 auto
-  padding: 2em 0
+  padding: 0 30px 0 30px
+  overflow: hidden
 
-.timeline__container::before
-  /* this is the vertical line */
-  content: ""
-  position: absolute
-  top: 0
-  left: 18px
-  height: 100%
-  width: 4px
-  background: #d7e4ed
+  &__container
+    margin: 30px 0 0 0
+    padding: 0
+    list-style: none
+    position: relative
 
-@media only screen and (min-width: 1170px)
-  .timeline
-    margin-top: 3em
-    margin-bottom: 3em
-
-  .timeline__container::before
-    left: 50%
-    margin-left: -2px
-
-.timeline__item
+.timeline__container > .timeline__item
   position: relative
-  margin: 2em 0
+  min-height: 128px
 
-.timeline__item:after
-  /* clearfix */
-  content: ""
-  display: table
-  clear: both
-
-.timeline__item:first-child
-  margin-top: 0
-
-.timeline__item:last-child
-  margin-bottom: 0
-
-@media only screen and (min-width: 1170px)
-  .timeline__item
-    margin: 4em 0
-
-.timeline__item--head-icon
-  position: absolute
-  top: 0
-  left: 0
-  width: 40px
-  height: 40px
-  border-radius: 50%
-  -webkit-box-shadow: 0 0 0 4px white, inset 0 2px 0 rgba(0, 0, 0, 0.08), 0 3px 0 4px rgba(0, 0, 0, 0.05)
-  box-shadow: 0 0 0 4px white, inset 0 2px 0 rgba(0, 0, 0, 0.08), 0 3px 0 4px rgba(0, 0, 0, 0.05)
-
-.timeline__item--head-icon .icon
-  display: block
-  width: 48px
-  height: 48px
-  position: relative
-  left: 50%
-  top: 50%
-  margin-left: -12px
-  margin-top: -12px
-
-@media only screen and (min-width: 1170px)
-  .timeline__item--head-icon
-    width: 60px
-    height: 60px
-    left: 50%
-    margin-left: -30px
-    /* Force Hardware Acceleration */
-    -webkit-transform: translateZ(0)
-    transform: translateZ(0)
-
-  .timeline__item--head-icon.timeline__item--head-icon--bounce-in
-    visibility: visible
-    -webkit-animation: cd-bounce-1 0.6s
-    animation: cd-bounce-1 0.6s
-
-@keyframes cd-bounce-1
-  0%
-    opacity: 0
-    -webkit-transform: scale(0.5)
-    transform: scale(0.5)
-
-  60%
-    opacity: 1
-    -webkit-transform: scale(1.2)
-    transform: scale(1.2)
-
-  100%
-    -webkit-transform: scale(1)
-    transform: scale(1)
-
-@keyframes cd-bounce-1
-  0%
-    opacity: 0
-    -webkit-transform: scale(0.5)
-    transform: scale(0.5)
-
-  60%
-    opacity: 1
-    -webkit-transform: scale(1.2)
-    transform: scale(1.2)
-
-  100%
-    -webkit-transform: scale(1)
-    transform: scale(1)
-
-.timeline__item--body
-  position: relative
-  margin-left: 60px
-  background: white
-  border-radius: 0.25em
-  padding: 1em
-  -webkit-box-shadow: 0 3px 0 #d7e4ed
-  box-shadow: 0 3px 0 #d7e4ed
-
-.timeline__item--body:after
-  /* clearfix */
-  content: ""
-  display: table
-  clear: both
-
-.timeline__item--body::before
-  /* triangle next to content block */
-  content: ""
-  position: absolute
-  top: 16px
-  right: 100%
-  height: 0
-  width: 0
-  border: 7px solid transparent
-  border-right: 7px solid white
-
-.timeline__item--body h2
-  color: #303e49
-
-.timeline__item--body p, .timeline__read-more, .timeline__item--head-date
-  font-size: 1.3rem
-
-.timeline__item--body p
-  margin: 1em 0
-  line-height: 1.6
-
-.timeline__item--head-date
-  display: inline-block
-
-.timeline__item--head-date
-  float: left
-  padding: 0.8em 0
-  opacity: 0.7
-
-@media only screen and (min-width: 768px)
-  .timeline__item--body h2
-    font-size: 2rem
-
-  .timeline__item--body p
-    font-size: 1.6rem
-
-  .timeline__read-more, .timeline__item--head-date
-    font-size: 1.4rem
-
-@media only screen and (min-width: 1170px)
-  .timeline__item--body
-    margin-left: 0
-    padding: 1.6em
-    width: 45%
-    /* Force Hardware Acceleration */
-    -webkit-transform: translateZ(0)
-    transform: translateZ(0)
-
-  .timeline__item--body::before
-    top: 24px
-    left: 100%
-    border-color: transparent
-    border-left-color: white
-
-  .timeline__read-more
-    float: left
-
-  .timeline__item--head-date
+  &:before
+    content: ""
     position: absolute
-    width: 100%
-    left: 122%
-    top: 6px
-    font-size: 1.6rem
+    top: 0
+    bottom: 0
+    width: 8px
+    background: currentColor
+    left: 10%
+    margin-left: -8px
 
-  .timeline__item:nth-child(even) .timeline__item--body
-    float: right
+.timeline__container > .timeline__item:last-child
+  position: relative
 
-  .timeline__item:nth-child(even) .timeline__item--body::before
-    top: 24px
-    left: auto
-    right: 100%
-    border-color: transparent
-    border-right-color: white
+  &:before
+    width: 0px
 
-  .timeline__item:nth-child(even) .timeline__read-more
-    float: right
+.timeline__container > .timeline__item .timeline__item--body
+  margin: 0 0 0 15%
+  padding-bottom: 48px
+  padding-top: 24px
+  position: relative
 
-  .timeline__item:nth-child(even) .timeline__item--head-date
-    left: auto
-    right: 122%
-    text-align: right
+.timeline__container > .timeline__item .timeline__item--head-icon
+  width: 44px
+  height: 44px
+  speak: none
+  line-height: 44px
+  position: absolute
+  border-radius: 50%
+  background-color: white
+  box-shadow: 0 0 0 8px currentColor
+  text-align: center
+  left: 10%
+  top: 0
+  margin: 0 0 0 -28px
 
-  .timeline__item--body.timeline__item--body--bounce-in
-    visibility: visible
-    -webkit-animation: cd-bounce-2 0.6s
-    animation: cd-bounce-2 0.6s
+@media screen and (max-width: 756px)
+  .timeline
+    padding: 0 5px 0 5px
 
-@media only screen and (min-width: 1170px)
-  /* inverse bounce effect on even content blocks */
-  .timeline__item:nth-child(even) .timeline__item--body.timeline__item--body--bounce-in
-    -webkit-animation: cd-bounce-2-inverse 0.6s
-    animation: cd-bounce-2-inverse 0.6s
-
-@keyframes cd-bounce-2
-  0%
-    opacity: 0
-    -webkit-transform: translateX(-100px)
-    transform: translateX(-100px)
-
-  60%
-    opacity: 1
-    -webkit-transform: translateX(20px)
-    transform: translateX(20px)
-
-  100%
-    -webkit-transform: translateX(0)
-    transform: translateX(0)
-
-@keyframes cd-bounce-2
-  0%
-    opacity: 0
-    -webkit-transform: translateX(-100px)
-    transform: translateX(-100px)
-
-  60%
-    opacity: 1
-    -webkit-transform: translateX(20px)
-    transform: translateX(20px)
-
-  100%
-    -webkit-transform: translateX(0)
-    transform: translateX(0)
-
-@keyframes cd-bounce-2-inverse
-  0%
-    opacity: 0
-    -webkit-transform: translateX(100px)
-    transform: translateX(100px)
-
-  60%
-    opacity: 1
-    -webkit-transform: translateX(-20px)
-    transform: translateX(-20px)
-
-  100%
-    -webkit-transform: translateX(0)
-    transform: translateX(0)
-
-@keyframes cd-bounce-2-inverse
-  0%
-    opacity: 0
-    -webkit-transform: translateX(100px)
-    transform: translateX(100px)
-
-  60%
-    opacity: 1
-    -webkit-transform: translateX(-20px)
-    transform: translateX(-20px)
-
-  100%
-    -webkit-transform: translateX(0)
-    transform: translateX(0)
+  .timeline__container > .timeline__item .timeline__item--body
+    padding: 1em
