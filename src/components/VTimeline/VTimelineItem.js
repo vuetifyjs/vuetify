@@ -19,16 +19,19 @@ export default {
       default: false
     },
     lineColor: { type: String },
-    fillColor: { type: String }
+    iconFillColor: { type: String }
   },
 
   computed: {
     classes () {
       if (this.lineColor) {
-        return this.addTextColorClassChecks(null, this.lineColor)
+        return this.addTextColorClassChecks({}, this.lineColor)
       }
 
       return ''
+    },
+    iconFillColorClasses () {
+      return this.iconFillColor ? this.iconFillColor : this.$parent.$props.iconFillColor ? this.$parent.$props.iconFillColor : null
     }
   },
 
@@ -54,7 +57,8 @@ export default {
           this.$createElement(
             'div',
             {
-              staticClass: 'timeline__item--head-icon'
+              staticClass: 'timeline__item--head-icon',
+              class: this.iconFillColorClasses
             },
             [icon]
           )

@@ -20,45 +20,45 @@ theme(timeline, "timeline")
     list-style: none
     position: relative
 
+    &> .timeline__item
+      position: relative
+      min-height: 128px
+
+      &:before
+        content: ""
+        position: absolute
+        top: 0
+        bottom: 0
+        width: 8px
+        background: currentColor
+        left: 10%
+        margin-left: -8px
+
+      &:last-child
+        position: relative
+
+        &:before
+          width: 0px
+
 .timeline__container > .timeline__item
-  position: relative
-  min-height: 128px
+  & .timeline__item--body
+    margin: 0 0 0 15%
+    padding-bottom: 48px
+    padding-top: 24px
+    position: relative
 
-  &:before
-    content: ""
+  & .timeline__item--head-icon
+    width: 44px
+    height: 44px
+    speak: none
+    line-height: 44px
     position: absolute
-    top: 0
-    bottom: 0
-    width: 8px
-    background: currentColor
+    border-radius: 50%
+    box-shadow: 0 0 0 8px currentColor
+    text-align: center
     left: 10%
-    margin-left: -8px
-
-.timeline__container > .timeline__item:last-child
-  position: relative
-
-  &:before
-    width: 0px
-
-.timeline__container > .timeline__item .timeline__item--body
-  margin: 0 0 0 15%
-  padding-bottom: 48px
-  padding-top: 24px
-  position: relative
-
-.timeline__container > .timeline__item .timeline__item--head-icon
-  width: 44px
-  height: 44px
-  speak: none
-  line-height: 44px
-  position: absolute
-  border-radius: 50%
-  background-color: white
-  box-shadow: 0 0 0 8px currentColor
-  text-align: center
-  left: 10%
-  top: 0
-  margin: 0 0 0 -28px
+    top: 0
+    margin: 0 0 0 -28px
 
 @media screen and (max-width: 756px)
   .timeline

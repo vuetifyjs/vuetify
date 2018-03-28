@@ -7,6 +7,8 @@ import Themeable from '../../mixins/themeable'
 export default {
   name: 'v-timeline',
 
+  mixins: [Colorable, Themeable],
+
   props: {
     lineColor: {
       type: String,
@@ -16,13 +18,11 @@ export default {
       type: Boolean,
       default: false
     },
-    fillColor: {
+    iconFillColor: {
       type: String,
       default: 'white'
     }
   },
-
-  mixins: [Colorable, Themeable],
 
   computed: {
     classes () {
