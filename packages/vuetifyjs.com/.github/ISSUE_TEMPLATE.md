@@ -1,10 +1,20 @@
 <!--
+IMPORTANT: Please use the following link to create a new issue:
 
-  STOP
-  
-This repository is for documentation-specific issues ONLY
+  https://issues.vuetifyjs.com
 
-Framework issues should be reported with https://issues.vuetifyjs.com  
-General questions should be asked on https://community.vuetifyjs.com or https://reddit.com/r/vuetifyjs
+This repository is for documentation-specific issues only. Make sure to select vuetifyjs.com when creating your issue.
+
+If your issue was not created using the app above, it will be closed immediately.
+Das heißt wenn du das Problem nicht mit der App erstellt hast, wird dein Eintrag sofort gelöscht.
+Si votre issue n'a pas été créée avec l'application ci-dessus, elle sera fermée immédiatement.
+Jeśli zgłoszenie nie będzie utworzone za pomocą tej aplikacji zostanie ono automatycznie zamknięte.
+Если запрос был создан вами не через приложение по ссылке выше, он будет моментально закрыт.
 
 -->
+
+<!--
+Love Vuetify? Please consider supporting us via Patreon:
+https://www.patreon.com/vuetify
+-->
+
