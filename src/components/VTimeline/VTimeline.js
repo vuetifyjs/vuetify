@@ -10,6 +10,10 @@ export default {
   mixins: [Colorable, Themeable],
 
   props: {
+    lineSize: {
+      type: [Number, String],
+      default: 8
+    },
     lineColor: {
       type: String,
       default: 'grey lighten-2'
