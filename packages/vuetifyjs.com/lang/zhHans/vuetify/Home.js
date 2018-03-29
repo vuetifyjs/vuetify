@@ -3,6 +3,7 @@ export default {
   'heading1': 'Vuetify',
   'heading1cont': 'Material Design 组件框架',
   'getStarted': '快速入门',
+  'getHelp': '帮帮我',
   'features': [
     {
       'img': '/static/doc-images/feature1.svg',

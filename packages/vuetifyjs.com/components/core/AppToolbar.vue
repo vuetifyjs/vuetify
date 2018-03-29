@@ -117,6 +117,35 @@
             v-list-tile-content
               v-list-tile-title {{ social.text }}
 
+      v-toolbar-items
+      v-menu(
+        attach
+        bottom
+        left
+        offset-y
+        max-height="500"
+        v-show="!isStore"
+      )
+        v-btn(
+          flat
+          slot="activator"
+          style="min-width: 64px"
+        )
+          span.hidden-sm-and-down {{ $t('Vuetify.AppToolbar.support' )}}
+          v-icon(:right="$vuetify.breakpoint.mdAndUp") mdi-lifebuoy
+        v-list(light)
+          v-list-tile(
+            target="_blank"
+            rel="noopener"
+            v-for="support in supports"
+            :href="support.href"
+            :key="support.text"
+          )
+            v-list-tile-action
+              v-icon(light) {{ support.icon }}
+            v-list-tile-content
+              v-list-tile-title {{ support.text }}
+
       v-menu(
         bottom
         left
@@ -170,6 +199,7 @@
 
     data: vm => ({
       ecosystems: vm.$t('Vuetify.AppToolbar.ecosystems'),
+      supports: vm.$t('Vuetify.AppToolbar.supports'),
       fixed: false,
       languages,
       socials: vm.$t('Vuetify.AppToolbar.socials')
