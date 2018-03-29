@@ -52,10 +52,10 @@
       this.snackbar({
         color: 'default',
         close: true,
-        id: 'vue-conf-sale',
-        text: 'Go To Store',
-        msg: 'The _Vuetify Alpha Theme_ on **SALE** through 3/28',
-        to: { name: 'store/Index' },
+        id: 'subreddit-3-31-giveaway',
+        text: 'Go To Reddit',
+        msg: 'Vuetify T-shirt giveaway ends 3/31!',
+        href: 'https://www.reddit.com/r/vuetifyjs/comments/81qs3f/we_want_to_hear_from_the_community_subscribe/',
         timeout: 0
       })
     },
