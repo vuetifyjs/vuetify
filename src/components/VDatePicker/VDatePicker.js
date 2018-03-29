@@ -376,7 +376,7 @@ export default {
     this.setInputDate()
   },
 
-  render (h) {
+  render () {
     return this.genPicker('picker--date')
   }
 }

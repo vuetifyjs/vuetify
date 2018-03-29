@@ -13,7 +13,7 @@ function inserted (el, binding) {
   }
 }
 
-function unbind (el, binding) {
+function unbind (el) {
   const { callback, options } = el._onResize
 
   window.removeEventListener('resize', callback, options)

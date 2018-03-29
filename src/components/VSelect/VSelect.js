@@ -274,7 +274,7 @@ export default {
     }
   },
 
-  render (h) {
+  render () {
     const data = {
       attrs: {
         tabindex: this.isAutocomplete || this.disabled ? -1 : this.tabindex,

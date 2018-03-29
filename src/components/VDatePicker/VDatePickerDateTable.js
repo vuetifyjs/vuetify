@@ -118,7 +118,7 @@ export default {
     }
   },
 
-  render (h) {
+  render () {
     return this.genTable('date-picker-table date-picker-table--date', [
       this.genTHead(),
       this.genTBody()
