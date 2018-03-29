@@ -3,6 +3,7 @@ export default {
   heading1: 'Vuetify',
   heading1cont: '마티리얼 컴포넌트 프레임워크',
   getStarted: '시작하기',
+  getHelp: '도움',
   features: [
     {
       img: '/static/doc-images/feature1.svg',

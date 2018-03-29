@@ -3,13 +3,31 @@ export default {
   cart: 'Cart',
   docs: 'Docs',
   documentation: 'Documentation',
-  ecosystem: 'Ecosystem',
-  ecosystems: [
+  support: 'Support',
+  supports: [
     {
       href: 'https://community.vuetifyjs.com/',
-      text: 'Community',
-      icon: 'mdi-account-multiple'
+      text: 'Chat',
+      icon: 'mdi-discord'
     },
+    {
+      href: 'https://issues.vuetifyjs.com',
+      text: 'Create an Issue',
+      icon: 'mdi-alert-octagon'
+    },
+    {
+      href: 'https://github.com/vuetifyjs/vuetify/issues',
+      text: 'GitHub Issue board',
+      icon: 'mdi-github-face'
+    },
+    {
+      href: 'https://stackoverflow.com/search?q=vuetify',
+      text: 'Stack overflow',
+      icon: 'mdi-stack-overflow'
+    }
+  ],
+  ecosystem: 'Ecosystem',
+  ecosystems: [
     {
       href: 'https://www.reddit.com/r/vuetifyjs/',
       text: 'Reddit',
@@ -26,11 +44,6 @@ export default {
       icon: 'mdi-creation'
     },
     {
-      href: 'https://issues.vuetifyjs.com',
-      text: 'Create an Issue',
-      icon: 'mdi-alert-octagon'
-    },
-    {
       href: 'https://template.vuetifyjs.com',
       text: 'Codepen Template',
       icon: 'mdi-codepen'
@@ -39,16 +52,6 @@ export default {
       href: 'https://github.com/vuetifyjs/vuetify/releases',
       text: 'Latest Releases',
       icon: 'mdi-format-list-checks'
-    },
-    {
-      href: 'https://github.com/vuetifyjs/vuetify/issues',
-      text: 'GitHub Issue board',
-      icon: 'mdi-github-face'
-    },
-    {
-      href: 'https://stackoverflow.com/search?q=vuetify',
-      text: 'Stack overflow',
-      icon: 'mdi-stack-overflow'
     }
   ],
   quickLinks: 'Quick Links',

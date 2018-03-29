@@ -3,6 +3,7 @@ export default {
   heading1: 'Vuetify',
   heading1cont: 'Material Component Framework',
   getStarted: 'はじめる',
+  getHelp: '助けて',
   features: [
     {
       img: '/static/doc-images/feature1.svg',

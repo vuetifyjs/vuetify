@@ -44,6 +44,16 @@
             )
               v-icon(left) mdi-github-circle
               | Github
+            v-btn(
+              color="white"
+              href="https://community.vuetifyjs.com"
+              large
+              outline
+              rel="noopener"
+              target="_blank"
+            )
+              v-icon(left) mdi-discord
+              | {{ $t("Vuetify.Home.getHelp") }}
 
       v-container(
         grid-list-xl
@@ -260,6 +270,11 @@
           icon: 'mdi-facebook',
           href: 'https://www.facebook.com/vuetifyjs',
           title: 'Facebook'
+        },
+        {
+          icon: 'mdi-discord',
+          href: 'https://community.vuetifyjs.com',
+          title: 'Discord Community'
         }
       ]
     }),
