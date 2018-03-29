@@ -10,6 +10,18 @@ export default {
   mixins: [Colorable, Themeable],
 
   props: {
+    icon: {
+      type: String,
+      default: 'event'
+    },
+    iconSize: {
+      type: [Number, String],
+      default: '24px'
+    },
+    noIcon: {
+      type: Boolean,
+      default: false
+    },
     lineSize: {
       type: [Number, String],
       default: 8
@@ -18,25 +30,40 @@ export default {
       type: String,
       default: 'grey lighten-2'
     },
-    noIcon: {
+    circleOutlineSize: {
+      type: [Number, String]
+    },
+    circleOutlineColor: {
+      type: String,
+      default: 'grey lighten-2'
+    },
+    circleFillColor: {
+      type: String,
+      default: 'white'
+    },
+    hideCircleOutline: {
       type: Boolean,
       default: false
     },
-    iconFillColor: {
-      type: String,
-      default: 'white'
+    raised: {
+      type: Boolean,
+      default: false
+    },
+    hover: {
+      type: Boolean,
+      default: false
     }
   },
 
   computed: {
     classes () {
-      return this.addTextColorClassChecks(null, this.lineColor)
+      return this.addTextColorClassChecks({}, this.lineColor)
     }
   },
 
   render (h) {
     return h(
-      'section',
+      'div',
       {
         staticClass: 'timeline',
         class: {

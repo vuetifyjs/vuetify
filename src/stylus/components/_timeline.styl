@@ -14,6 +14,17 @@ theme(timeline, "timeline")
   padding: 0 30px 0 30px
   overflow: hidden
 
+  &--hover
+    cursor: pointer
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1)
+    transition-property: box-shadow
+
+    &:hover
+      elevation(8)
+
+  &--raised
+    elevation(3)
+
   &__container
     margin: 30px 0 0 0
     padding: 0
@@ -28,6 +39,7 @@ theme(timeline, "timeline")
         content: ""
         position: absolute
         top: 44px
+        padding: 0
         bottom: 0
         background: currentColor
         left: 10%
@@ -39,7 +51,7 @@ theme(timeline, "timeline")
           width: 0px
 
 .timeline__container > .timeline__item
-  & .timeline__item--body
+  & .timeline__item--body__container
     margin: 0 0 0 15%
     padding-bottom: 48px
     padding-top: 24px
@@ -52,15 +64,27 @@ theme(timeline, "timeline")
     line-height: 44px
     position: absolute
     border-radius: 50%
+    background: inherit
     box-shadow: 0 0 0 8px currentColor
     text-align: center
     left: 10%
     top: 0
+    padding: 0
     margin: 0 0 0 -28px
 
 @media screen and (max-width: 756px)
   .timeline
-    padding: 0 5px 0 5px
+    padding: 0 15px 0 15px
 
-  .timeline__container > .timeline__item .timeline__item--body
-    padding: 1em
+    &__container
+      margin: 16px 0 0 0
+
+      &> .timeline__item .timeline__line
+        left: 6%
+
+  .timeline__container > .timeline__item
+    & .timeline__item--body__conatainer
+      margin: 0 0 0 12%
+
+    & .timeline__item--head-icon
+      left: 6%
