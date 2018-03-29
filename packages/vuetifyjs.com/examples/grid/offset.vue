@@ -6,7 +6,7 @@
           <v-card-text>xs10 offset-xs1</v-card-text>
         </v-card>
       </v-flex>
-      <v-flex xs7 offset-xs0 offset-md2 offset-lg5>
+      <v-flex xs7 offset-xs5 offset-md2 offset-lg5>
         <v-card dark color="secondary">
           <v-card-text>xs7 offset-(xs5 | md2 | lg5)</v-card-text>
         </v-card>
