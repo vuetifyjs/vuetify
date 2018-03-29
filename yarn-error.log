@@ -1,8 +1,8 @@
 Arguments: 
-  C:\Program Files (x86)\nodejs\node.exe C:\Program Files (x86)\nodejs\node_modules\yarn\bin\yarn.js test:win32
+  C:\Program Files (x86)\nodejs\node.exe C:\Program Files (x86)\nodejs\node_modules\yarn\bin\yarn.js test:win32 VTimeline
 
 PATH: 
-  C:\Users\Confidante\Desktop\vuetify-work\vuetify\node_modules\.bin;C:\Users\Confidante\AppData\Local\Yarn\Data\link\node_modules\.bin;C:\Users\Confidante\Desktop\vuetify-work\vuetify\node_modules\.bin;C:\Users\Confidante\AppData\Local\Yarn\Data\link\node_modules\.bin;C:\Program Files (x86)\nodejs\bin;C:\Program Files (x86)\libexec\lib\node_modules\npm\bin\node-gyp-bin;C:\Program Files (x86)\lib\node_modules\npm\bin\node-gyp-bin;C:\Program Files (x86)\nodejs\node_modules\npm\bin\node-gyp-bin;C:\Program Files (x86)\nodejs\node_modules\npm\node_modules\npm-lifecycle\node-gyp-bin;C:\Users\Confidante\Desktop\vuetify-work\vuetify\node_modules\.bin;C:\Program Files\Git\mingw64\libexec\git-core;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\Confidante\bin;C:\cmder_mini\bin;C:\cmder_mini\vendor\conemu-maximus5\ConEmu\Scripts;C:\cmder_mini\vendor\conemu-maximus5;C:\cmder_mini\vendor\conemu-maximus5\ConEmu;C:\ProgramData\Oracle\Java\javapath;C:\Program Files\Java\jdk1.8.0_121\bin;C:\Program Files\Android\Android Studio\gradle\gradle-4.1\bin;C:\Users\Confidante\AppData\Local\Android\Sdk\platform-tools;C:\Program Files (x86)\nodejs;C:\WINDOWS\system32;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\Program Files (x86)\Yarn\bin;C;php;C:\flutter\bin;C:\Users\Confidante\AppData\Roaming\npm;C:\Users\Confidante\AppData\Local\Microsoft\WindowsApps;C:\Python36-32;C:\Python36-32\Scripts;C:\MongoDB\bin;C:\Program Files\Heroku\bin;C:\Program Files\Sublime Text 3;C:\Users\Confidante\AppData\Local\GitHubDesktop\bin;C:\Program Files\Java\jdk1.8.0_121\bin;C:\cmder;C:\Program Files\Microsoft VS Code\bin;C:\Users\Confidante\AppData\Local\atom\bin;C:\Users\Confidante\AppData\Local\Microsoft\WindowsApps;C:\Users\Confidante\AppData\Local\Yarn\bin;C:\cmder_mini;C:\Program Files\nodejs
+  C:\Users\Confidante\Desktop\vuetify-work\vuetify\node_modules\.bin;C:\Users\Confidante\AppData\Local\Yarn\Data\link\node_modules\.bin;C:\Users\Confidante\Desktop\vuetify-work\vuetify\node_modules\.bin;C:\Users\Confidante\AppData\Local\Yarn\Data\link\node_modules\.bin;C:\Program Files (x86)\libexec\lib\node_modules\npm\bin\node-gyp-bin;C:\Program Files (x86)\lib\node_modules\npm\bin\node-gyp-bin;C:\Program Files (x86)\nodejs\node_modules\npm\bin\node-gyp-bin;C:\cmder_mini\bin;C:\cmder_mini\vendor\conemu-maximus5\ConEmu\Scripts;C:\cmder_mini\vendor\conemu-maximus5;C:\cmder_mini\vendor\conemu-maximus5\ConEmu;C:\ProgramData\Oracle\Java\javapath;C:\Program Files\Java\jdk1.8.0_121\bin;C:\Program Files\Android\Android Studio\gradle\gradle-4.1\bin;C:\Users\Confidante\AppData\Local\Android\Sdk\platform-tools;C:\Program Files (x86)\nodejs;C:\WINDOWS\system32;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Yarn\bin\;C:php;C:\flutter\bin;C:\Users\Confidante\AppData\Roaming\npm;C:\Users\Confidante\AppData\Local\Microsoft\WindowsApps;C:\Python36-32;C:\Python36-32\Scripts;C:\MongoDB\bin;C:\Program Files\Heroku\bin;C:\Program Files\Sublime Text 3;C:\Users\Confidante\AppData\Local\GitHubDesktop\bin;C:\Program Files\Java\jdk1.8.0_121\bin;C:\cmder;C:\Program Files\Microsoft VS Code\bin;C:\Users\Confidante\AppData\Local\atom\bin;C:\Users\Confidante\AppData\Local\Microsoft\WindowsApps;C:\Users\Confidante\AppData\Local\Yarn\bin;C:\cmder_mini\vendor\git-for-windows\cmd;C:\cmder_mini\vendor\git-for-windows\bin;C:\cmder_mini
 
 Yarn version: 
   1.5.1
@@ -16,7 +16,7 @@ Platform:
 npm manifest: 
   {
     "name": "vuetify",
-    "version": "1.0.10",
+    "version": "1.0.11",
     "author": {
       "name": "John Leider",
       "email": "john@vuetifyjs.com"
@@ -7937,7 +7937,7 @@ Trace:
   Error: Command failed.
   Exit code: 1
   Command: C:\WINDOWS\system32\cmd.exe
-  Arguments: /d /s /c cross-env NODE_ENV=test jest -i
+  Arguments: /d /s /c cross-env NODE_ENV=test jest -i VTimeline
   Directory: C:\Users\Confidante\Desktop\vuetify-work\vuetify
   Output:
   
