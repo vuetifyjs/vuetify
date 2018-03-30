@@ -281,6 +281,21 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
+  it('should render additional place for actions', async () => {
+    const wrapper = mount(Vue.component('test', {
+      render (h) {
+        return h(VDataTable, {
+          props: {
+            items: [{}]
+          },
+        }, [h('div', { slot: 'actions', class: 'custom-class' })])
+      }
+    }))
+
+    expect(wrapper.find('.custom-class')).toHaveLength(1)
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
   it('should initialize everyItem state', async () => {
     const data = dataTableTestData()
     data.propsData.value = data.propsData.items
