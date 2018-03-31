@@ -9,6 +9,22 @@ export default {
 
   mixins: [Colorable, Themeable],
 
+  provide () {
+    return {
+      iconParent: this.icon,
+      iconSizeParent: this.iconSize,
+      noIconParent: this.noIcon,
+      lineColorParent: this.lineColor,
+      hoverParent: this.hover,
+      raisedParent: this.raised,
+      circleFillColorParent: this.circleFillColor,
+      circleOutlineColorParent: this.circleOutlineColor,
+      lineSizeParent: this.lineSize,
+      circleOutlineSizeParent: this.circleOutlineSize,
+      hideCircleOutlineParent: this.hideCircleOutline
+    }
+  },
+
   props: {
     icon: {
       type: String,
@@ -16,7 +32,7 @@ export default {
     },
     iconSize: {
       type: [Number, String],
-      default: '24px'
+      default: 24
     },
     noIcon: {
       type: Boolean,
@@ -34,8 +50,7 @@ export default {
       type: [Number, String]
     },
     circleOutlineColor: {
-      type: String,
-      default: 'grey lighten-2'
+      type: String
     },
     circleFillColor: {
       type: String,
@@ -55,12 +70,6 @@ export default {
     }
   },
 
-  computed: {
-    classes () {
-      return this.addTextColorClassChecks({}, this.lineColor)
-    }
-  },
-
   render (h) {
     return h(
       'div',
@@ -74,8 +83,7 @@ export default {
         h(
           'ul',
           {
-            staticClass: 'timeline__container',
-            class: this.classes
+            staticClass: 'timeline__container'
           },
           this.$slots.default
         )

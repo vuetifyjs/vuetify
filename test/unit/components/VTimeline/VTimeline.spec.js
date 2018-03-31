@@ -1,44 +1,62 @@
 import { test } from '@/test'
-import VTimeline from '@/components/VTimeline/VTimeline'
+import Vue from 'vue'
+import { VTimeline, VTimelineItem } from '@/components/VTimeline'
 
-test('VTimeline.js', ({ mount }) => {
-  it('renders a div with class timeline', () => {
+test('VTimeline.js', ({ mount, compileToFunctions }) => {
+  it('should render a div with class timeline', () => {
     const wrapper = mount(VTimeline)
     expect(wrapper.is('div')).toBe(true)
     expect(wrapper.hasClass('timeline')).toBe(true)
   })
 
-  it('renders one ul element inside timeline', () => {
+  it('should render one ul with timeline__container class and match snapshot', () => {
     const wrapper = mount(VTimeline)
     const listElements = wrapper.find('.timeline ul')
-    expect(listElements).toHaveLength(1)
-  })
 
-  it('ul class must be timeline__container', () => {
-    const wrapper = mount(VTimeline)
+    expect(listElements).toHaveLength(1)
+
     const ul = wrapper.first('ul')
+
     expect(ul.is('ul')).toBe(true)
     expect(ul.hasClass('timeline__container')).toBe(true)
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('line size prop shold be in range of 0 to 12', () => {
-    const wrapper = mount(VTimeline)
-
-    expect(wrapper.vm.$props.lineSize).toBeGreaterThanOrEqual(0)
-    expect(wrapper.vm.$props.lineSize).toBeLessThanOrEqual(12)
+  it('should render a light component', () => {
+    const wrapper = mount(VTimeline, {
+      propsData: {
+        light: true
+      }
+    })
+    const div = wrapper.find('.timeline')[0]
+    expect(div.hasClass('theme--light')).toBe(true)
   })
 
-  it('circleFillColor prop default value should be white', () => {
-    const wrapper = mount(VTimeline)
-
-    expect(wrapper.vm.$props.circleFillColor).toBe('white')
+  it('should render a dark component', () => {
+    const wrapper = mount(VTimeline, {
+      propsData: {
+        dark: true
+      }
+    })
+    const div = wrapper.find('.timeline')[0]
+    expect(div.hasClass('theme--dark')).toBe(true)
   })
 
-  it('lineColor and circleOutlineColor prop default value should be grey lighten-2', () => {
-    const wrapper = mount(VTimeline)
+  it('should inject slot to children', () => {
+    const { render } = compileToFunctions(`
+      <v-timeline>
+        <v-timeline-item/>
+      </v-timeline>
+    `)
+    const component = Vue.component('test', {
+      components: {
+        VTimeline,
+        VTimelineItem
+      },
+      render
+    })
+    const wrapper = mount(component)
 
-    expect(wrapper.vm.$props.lineColor).toBe('grey lighten-2')
-    expect(wrapper.vm.$props.circleOutlineColor).toBe('grey lighten-2')
+    expect(wrapper.html()).toMatchSnapshot()
   })
-
 })
