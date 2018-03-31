@@ -1,7 +1,13 @@
 @import '../bootstrap'
 @import '../theme'
 
-.v-input--select
+v-select($material)
+  &__selection
+    color: $material.text.primary
+
+theme(v-select, 'v-select')
+
+.v-select
   .menu
     flex: 1 1 auto
 
@@ -12,12 +18,11 @@
     position: absolute
     left: 0
 
-  &:not(.v-input--select--autocomplete)
-    input
-      opacity: 0
-      pointer-events: none
+  input
+    opacity: 0
+    pointer-events: none
 
-  &.v-input--is-focused
+  &.v-select--is-menu-active
     .v-input__icon--append .icon
       transform: rotate(180deg)
 
@@ -28,178 +33,3 @@
   &__slot
     align-items: center
     display: flex
-
-// selects($material)
-//   &.input-group
-//     &--editable,
-//     &--overflow,
-//     &--segmented
-//       .input-group__input:hover
-//         background: $material.cards
-
-//       &.input-group--focused .input-group__input
-//         background: $material.cards
-
-// theme(selects, "input-group--select")
-
-// .input-group--select
-//   // TODO: revisit this
-//   .input-group--select__autocomplete
-//     display: block
-//     height: 0px
-
-//     &--index
-//       background-color: transparent !important
-
-//   .input-group__append-icon
-//     transition: .3s $transition.linear-out-slow-in
-
-//     &.input-group__icon-clearable
-//       transition: none
-
-//   &:not(.input-group--dirty),
-//   &.input-group--focused
-//     .input-group--select__autocomplete
-//       padding-bottom: 1px
-//       height: 30px
-
-//   &.input-group--focused
-//     .input-group--select__autocomplete
-//       display: inline-block
-//       opacity: 1
-
-//     &.input-group--select--selecting-index
-//       .input-group--select__autocomplete
-//         opacity: 0
-
-//     &.input-group--open
-//       .input-group__append-icon:not(.input-group__icon-clearable)
-//         transform: rotate(-180deg)
-
-//   .input-group__input
-//     cursor: pointer
-
-//   &.input-group--disabled
-//     cursor: default
-//     pointer-events: none
-
-// .input-group--select
-//   .input-group__selections
-//     align-items: center
-//     display: flex
-//     flex-wrap: wrap
-//     position: relative
-//     width: 100%
-
-//     &__comma
-//       display: inline-flex
-//       font-size: $input-font-size
-//       padding: 3px 4px 3px 0
-
-//       &--active
-//         color: inherit
-
-//   .menu
-//     display: inline
-
-//   .fade-transition-leave-active
-//     position: absolute
-//     left: 0
-
-//   &.input-group--autocomplete.input-group--search-focused
-//     .input-group__selections__comma
-//       display: none
-
-// .input-group--autocomplete
-//   .input-group__selections
-//     cursor: text
-
-
-// .input-group
-//   &.input-group--chips
-//     .input-group__input
-//       padding-top: 0
-//       padding-bottom: 0
-
-//   &.input-group--overflow,
-//   &.input-group--editable,
-//   &.input-group--segmented
-//     padding: 0
-
-//     .input-group__append-icon
-//       padding: 0
-
-//     .input-group__selections,
-//     input
-//       height: 48px
-
-//     // Handle weird transition issue
-//     .input-group__selections__comma, input
-//       top: 0
-//       left: 0
-//       padding-left: 16px
-
-//     .input-group__selections
-//       width: calc(100% - 55px)
-
-//       .btn
-//         border-radius: 0
-//         margin: 0
-//         height: 48px
-//         width: 100%
-
-//         .btn__content
-//           justify-content: start
-
-//     .input-group__input
-//       transition: .3s $transition.swing
-
-//     &.input-group--focused
-//       .input-group__input
-//         elevation(8)
-
-//     label
-//       left: 16px !important
-//       top: 9px !important
-
-//     .input-group__details
-//       &:after
-//         display: none
-
-//     .input-group__input
-//       padding: 0
-
-//       &:before
-//         content: ''
-//         position: absolute
-//         left: 0
-//         width: 100%
-//         height: 1px
-//         top: 0
-//         transition: .3s $transition.swing
-
-//     .input-group__append-icon
-//       width: 55px
-
-//   &--segmented .input-group__input,
-//   &--editable .input-group__input:hover,
-//   &.input-group--focused.input-group--editable .input-group__input
-//     &:after
-//       background-color: rgba(0,0,0,0.12)
-//       content: ''
-//       position: absolute
-//       right: 55px
-//       height: 48px
-//       top: 0
-//       width: 1px
-
-// .menu__content--select
-//   // // IE11 Fix for overflow
-//   .input-group--selection-controls__ripple
-//     display: none
-
-// .menu__content--autocomplete
-//     border-radius: 0
-
-//     > .card
-//       border-radius: 0

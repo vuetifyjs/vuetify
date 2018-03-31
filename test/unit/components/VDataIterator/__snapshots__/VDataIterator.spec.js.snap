@@ -12,7 +12,7 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
     <div class="v-data-iterator__actions">
       <div class="v-data-iterator__actions__select">
         Items per page:
-        <div class="v-input v-input--select v-input--text theme--light">
+        <div class="v-input v-select v-input--text v-input--is-label-active v-input--is-dirty theme--light">
           <div class="v-input__control">
             <div class="v-input__wrapper"
                  style="height: 32px;"
@@ -21,11 +21,14 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
                    style="display: inline-block;"
               >
                 <div class="menu__activator">
-                  <div class="v-input--select__slot">
-                    <label class="v-label"
+                  <div class="v-select__slot">
+                    <label class="v-label v-label--active"
                            style="left: 0px; position: absolute;"
                     >
                     </label>
+                    <div class="v-select__selection">
+                      5
+                    </div>
                     <input tabindex="0"
                            type="text"
                     >
@@ -40,15 +43,15 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
                     </div>
                   </div>
                 </div>
-                <div class="menu__content menu__content--select menu__content--auto"
-                     style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
+                <div class="menu__content"
+                     style="max-height: 200px; min-width: 16px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
                 >
                   <div class="v-card"
                        style="height: auto;"
                   >
                     <div class="list">
                       <div>
-                        <a class="list__tile list__tile--link">
+                        <a class="list__tile list__tile--link list__tile--active primary--text">
                           <div class="list__tile__content">
                             <div class="list__tile__title">
                               5
@@ -153,7 +156,7 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
     <div class="v-data-iterator__actions">
       <div class="v-data-iterator__actions__select">
         Items per page:
-        <div class="v-input v-input--select v-input--text theme--light">
+        <div class="v-input v-select v-input--text v-input--is-label-active v-input--is-dirty theme--light">
           <div class="v-input__control">
             <div class="v-input__wrapper"
                  style="height: 32px;"
@@ -162,11 +165,14 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
                    style="display: inline-block;"
               >
                 <div class="menu__activator">
-                  <div class="v-input--select__slot">
-                    <label class="v-label"
+                  <div class="v-select__slot">
+                    <label class="v-label v-label--active"
                            style="left: 0px; position: absolute;"
                     >
                     </label>
+                    <div class="v-select__selection">
+                      5
+                    </div>
                     <input tabindex="0"
                            type="text"
                     >
@@ -181,15 +187,15 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
                     </div>
                   </div>
                 </div>
-                <div class="menu__content menu__content--select menu__content--auto"
-                     style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
+                <div class="menu__content"
+                     style="max-height: 200px; min-width: 16px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
                 >
                   <div class="v-card"
                        style="height: auto;"
                   >
                     <div class="list">
                       <div>
-                        <a class="list__tile list__tile--link">
+                        <a class="list__tile list__tile--link list__tile--active primary--text">
                           <div class="list__tile__content">
                             <div class="list__tile__title">
                               5
@@ -285,7 +291,7 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
     <div class="v-data-iterator__actions">
       <div class="v-data-iterator__actions__select">
         Items per page:
-        <div class="v-input v-input--select v-input--text theme--light">
+        <div class="v-input v-select v-input--text v-input--is-label-active v-input--is-dirty theme--light">
           <div class="v-input__control">
             <div class="v-input__wrapper"
                  style="height: 32px;"
@@ -294,11 +300,14 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
                    style="display: inline-block;"
               >
                 <div class="menu__activator">
-                  <div class="v-input--select__slot">
-                    <label class="v-label"
+                  <div class="v-select__slot">
+                    <label class="v-label v-label--active"
                            style="left: 0px; position: absolute;"
                     >
                     </label>
+                    <div class="v-select__selection">
+                      5
+                    </div>
                     <input tabindex="0"
                            type="text"
                     >
@@ -313,15 +322,15 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
                     </div>
                   </div>
                 </div>
-                <div class="menu__content menu__content--select menu__content--auto"
-                     style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
+                <div class="menu__content"
+                     style="max-height: 200px; min-width: 16px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
                 >
                   <div class="v-card"
                        style="height: auto;"
                   >
                     <div class="list">
                       <div>
-                        <a class="list__tile list__tile--link">
+                        <a class="list__tile list__tile--link list__tile--active primary--text">
                           <div class="list__tile__content">
                             <div class="list__tile__title">
                               5
@@ -421,7 +430,7 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
     <div class="v-data-iterator__actions">
       <div class="v-data-iterator__actions__select">
         Items per page:
-        <div class="v-input v-input--select v-input--text theme--light">
+        <div class="v-input v-select v-input--text v-input--is-label-active v-input--is-dirty theme--light">
           <div class="v-input__control">
             <div class="v-input__wrapper"
                  style="height: 32px;"
@@ -430,11 +439,14 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
                    style="display: inline-block;"
               >
                 <div class="menu__activator">
-                  <div class="v-input--select__slot">
-                    <label class="v-label"
+                  <div class="v-select__slot">
+                    <label class="v-label v-label--active"
                            style="left: 0px; position: absolute;"
                     >
                     </label>
+                    <div class="v-select__selection">
+                      5
+                    </div>
                     <input tabindex="0"
                            type="text"
                     >
@@ -449,15 +461,15 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
                     </div>
                   </div>
                 </div>
-                <div class="menu__content menu__content--select menu__content--auto"
-                     style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
+                <div class="menu__content"
+                     style="max-height: 200px; min-width: 16px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
                 >
                   <div class="v-card"
                        style="height: auto;"
                   >
                     <div class="list">
                       <div>
-                        <a class="list__tile list__tile--link">
+                        <a class="list__tile list__tile--link list__tile--active primary--text">
                           <div class="list__tile__content">
                             <div class="list__tile__title">
                               5

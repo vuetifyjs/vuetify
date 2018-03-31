@@ -25,7 +25,7 @@ test('VInput.js', ({ mount }) => {
     wrapper.vm.$on('input', input)
 
     expect(wrapper.vm.lazyValue).toBe(undefined)
-    wrapper.vm.proxyValue = 'foo'
+    wrapper.vm.internalValue = 'foo'
     expect(input).toHaveBeenCalledWith('foo')
     expect(wrapper.vm.lazyValue).toBe('foo')
   })

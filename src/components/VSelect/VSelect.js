@@ -3,10 +3,9 @@ import '../../stylus/components/_text-fields.styl'
 import '../../stylus/components/_select.styl'
 
 // Components
-// import VBtn from '../../VBtn'
 import VCard from '../VCard'
 import VCheckbox from '../VCheckbox'
-// import VChip from '../../VChip'
+import VChip from '../VChip'
 import VDivider from '../VDivider'
 import VMenu from '../VMenu'
 import VSubheader from '../VSubheader'
@@ -28,7 +27,10 @@ import Dependent from '../../mixins/dependent'
 import ClickOutside from '../../directives/click-outside'
 
 // Helpers
-import { getObjectValueByPath } from '../../util/helpers'
+import {
+  escapeHTML,
+  getObjectValueByPath
+} from '../../util/helpers'
 
 export default {
   name: 'v-select',
@@ -43,9 +45,10 @@ export default {
     Dependent
   ],
 
-  data: () => ({
+  data: vm => ({
+    cachedItems: vm.cacheItems ? vm.items : [],
     isMenuActive: false,
-    selectedItems: []
+    selectedIndex: null
   }),
 
   props: {
@@ -123,29 +126,110 @@ export default {
 
   computed: {
     classes () {
-      const classes = {
-        'v-input--select v-input--text': true,
-        'v-input--select--chips': this.chips,
-        'v-input--select--autocomplete': this.isAutocomplete
+      return {
+        'v-select v-input--text': true,
+        'v-select--chips': this.chips,
+        'v-select--is-menu-active': this.isMenuActive
       }
-
-      return classes
     },
     computedItems () {
-      return this.cachedItems.concat(this.items)
+      return this.filterDuplicates(this.cachedItems.concat(this.items))
     },
-    tileActiveClass () {
-      return Object.keys(this.addTextColorClassChecks()).join(' ')
+    directives () {
+      return [{
+        name: 'click-outside',
+        value: () => {
+          this.selectedIndex = null
+          this.onKeyDown({ keyCode: 9 })
+        },
+        args: {
+          closeConditional: () => {
+            return true
+          }
+        }
+      }]
     },
     dynamicHeight () {
       return this.chips ? 'auto' : '32px'
+    },
+    isDirty () {
+      return this.selectedItems.length > 0
+    },
+    isDisabled () {
+      return this.disabled || this.readonly
+    },
+    // Convert internalValue to always
+    // be an array and check for validity
+    selectedItems (val = this.inputValue) {
+      let selectedItems = this.computedItems.filter(i => {
+        if (!this.multiple) {
+          return this.getValue(i) === this.getValue(val)
+        } else {
+          // Always return Boolean
+          return this.findExistingIndex(i, this.internalValue) > -1
+        }
+      })
+
+      return selectedItems
+    },
+    tileActiveClass () {
+      return Object.keys(this.addTextColorClassChecks()).join(' ')
     }
   },
 
   methods: {
-    findExistingIndex (item) {
+    changeSelectedIndex (keyCode) {
+      // backspace, left, right, delete
+      if (![8, 37, 39, 46].includes(keyCode)) return
+
+      const indexes = this.selectedItems.length - 1
+
+      if (keyCode === 37) { // Left arrow
+        this.selectedIndex = this.selectedIndex === -1
+          ? indexes
+          : this.selectedIndex - 1
+      } else if (keyCode === 39) { // Right arrow
+        this.selectedIndex = this.selectedIndex >= indexes
+          ? -1
+          : this.selectedIndex + 1
+      } else if (this.selectedIndex === -1) {
+        this.selectedIndex = indexes
+        return
+      }
+
+      // backspace/delete
+      if ([8, 46].includes(keyCode)) {
+        const newIndex = this.selectedIndex === indexes
+          ? this.selectedIndex - 1
+          : this.selectedItems[this.selectedIndex + 1]
+            ? this.selectedIndex
+            : -1
+
+        this.selectItem(this.selectedItems[this.selectedIndex])
+        this.selectedIndex = newIndex
+      }
+    },
+    clearableCallback () {
+      this.internalValue = this.multiple ? [] : null
+      this.$emit('change', this.internalValue)
+      this.$nextTick(() => this.$refs.input.focus())
+
+      if (this.openOnClear) this.isMenuActive = true
+    },
+    filterDuplicates (arr) {
+      const uniqueValues = new Map()
+      for (let index = 0; index < arr.length; ++index) {
+        const item = arr[index]
+        const val = this.getValue(item)
+
+        !uniqueValues.has(val) && uniqueValues.set(val, item)
+      }
+      return Array.from(uniqueValues.values())
+    },
+    findExistingIndex (item, internalValue) {
       const itemValue = this.getValue(item)
-      return this.internalValue.findIndex(i => this.valueComparator(this.getValue(i), itemValue))
+
+      return (internalValue || []).findIndex(i => this.valueComparator(this.getValue(i), itemValue))
     },
     genAction (item, inputValue) {
       if (!this.multiple || this.isHidingSelected) return null
@@ -168,18 +252,66 @@ export default {
         })
       ])
     },
-    genCommaSelection (item, index, last) {
-      return this.$createElement('div', {
-        staticClass: 'input-group__selections__comma',
-        'class': {
-          'input-group__selections__comma--active': index === this.selectedIndex
+    genChipSelection (item, index) {
+      const isDisabled = this.disabled || this.readonly
+      const click = e => {
+        if (isDisabled) return
+
+        e.stopPropagation()
+        this.selectedIndex = index
+        this.onFocus()
+      }
+
+      return this.$createElement(VChip, {
+        staticClass: 'chip--select-multi',
+        attrs: {
+          tabindex: this.isFocused ? null : '-1'
         },
-        key: JSON.stringify(this.getValue(item)) // Item may be an object
+        props: {
+          close: this.deletableChips && !isDisabled,
+          dark: this.dark,
+          disabled: isDisabled,
+          selected: index === this.selectedIndex
+        },
+        on: {
+          click: click,
+          focus: click,
+          input: () => {
+            if (this.multiple) this.selectItem(item)
+            else this.inputValue = null
+
+            // If all items have been deleted,
+            // open `v-menu`
+            if (this.selectedItems.length === 0) {
+              this.isMenuActive = true
+            }
+          }
+        },
+        key: this.getValue(item)
+      }, this.getText(item))
+    },
+    genClearIcon () {
+      if (!this.clearable ||
+        !this.isDirty
+      ) return null
+
+      return this.genSlot('append', 'inner', [
+        this.genIcon('clear', this.clearableCallback || this.clearIconCb)
+      ])
+    },
+    genCommaSelection (item, index, last) {
+      // Item may be an object
+      const key = JSON.stringify(this.getValue(item))
+
+      return this.$createElement('div', {
+        staticClass: 'v-select__selection',
+        key
       }, `${this.getText(item)}${last ? '' : ', '}`)
     },
     genDefaultSlot () {
       const activator = this.$createElement('div', {
-        staticClass: 'v-input--select__slot',
+        staticClass: 'v-select__slot',
+        directives: this.directives,
         slot: 'activator'
       }, [
         this.genLabel(),
@@ -187,7 +319,8 @@ export default {
         this.genSelections(),
         this.genInput(),
         this.suffix ? this.genAffix('suffix') : null,
-        this.genIconSlot(),
+        this.genClearIcon(),
+        this.genSlot('append', 'inner', [this.genIcon('append')]),
         this.genProgress()
       ])
 
@@ -228,7 +361,9 @@ export default {
       ])
     },
     genMenu (activator) {
-      const props = { activator: this.$el }
+      const props = {
+        contentClass: this.contentClass
+      }
 
       // Later this might be filtered
       for (let prop of Object.keys(VMenu.props)) {
@@ -239,11 +374,14 @@ export default {
       props.value = this.isMenuActive
 
       return this.$createElement(VMenu, {
-        ref: 'menu',
         props,
         on: {
-          input: val => (this.isMenuActive = val)
-        }
+          input: val => {
+            this.isMenuActive = val
+            this.isFocused = false
+          }
+        },
+        ref: 'menu'
       }, [activator, this.genList()])
     },
     genSelections () {
@@ -318,19 +456,19 @@ export default {
         : scopedSlot
     },
     genTileContent (item) {
+      const innerHTML = escapeHTML((this.getText(item) || '').toString())
+
       return this.$createElement(VListTileContent,
         [this.$createElement(VListTileTitle, {
-          domProps: {
-            innerHTML: this.getText(item)
-          }
+          domProps: { innerHTML }
         })]
       )
     },
     getAvatar (item) {
-      return this.getPropertyFromItem(item, this.itemAvatar)
+      return getObjectValueByPath(item, this.itemAvatar)
     },
     getDisabled (item) {
-      return this.getPropertyFromItem(item, this.itemDisabled)
+      return getObjectValueByPath(item, this.itemDisabled)
     },
     getText (item) {
       return this.getPropertyFromItem(item, this.itemText)
@@ -345,28 +483,43 @@ export default {
 
       return typeof value === 'undefined' ? item : value
     },
+    needsTile (tile) {
+      // TODO: use the component name instead of tag
+      return tile.componentOptions == null || tile.componentOptions.tag !== 'v-list-tile'
+    },
+    // Ignore default onBlur
+    onBlur () {},
+    // Detect tab and call original onBlur method
+    onKeyDown (e) {
+      if (e.keyCode === 9) {
+        VTextField.methods.onBlur.call(this, e)
+      } else if ([13, 32, 38, 40].includes(e.keyCode)) {
+        this.isMenuActive = true
+      }
+
+      this.changeSelectedIndex(e.keyCode)
+    },
     onClick () {
+      if (this.isDisabled) return
+
       this.isMenuActive = true
+      this.onFocus()
     },
     selectItem (item) {
       if (!this.multiple) {
         this.internalValue = this.returnObject ? item : this.getValue(item)
-        this.selectedItems = [item]
         this.isMenuActive = false
       } else {
-        const selectedItems = []
-        const internalValue = this.internalValue.slice()
-        const i = this.findExistingIndex(item)
+        const internalValue = this.selectedItems.slice()
+        const i = this.findExistingIndex(item, internalValue)
 
         i !== -1 ? internalValue.splice(i, 1) : internalValue.push(item)
         this.internalValue = internalValue.map(i => {
-          selectedItems.push(i)
           return this.returnObject ? i : this.getValue(i)
         })
-
-        this.selectedItems = selectedItems
-        this.selectedIndex = -1
       }
+
+      this.$emit('change', this.internalValue)
     }
   }
 }
