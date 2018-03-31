@@ -35,7 +35,12 @@ theme(list, "list")
   padding: $list-top-padding 0 $list-bottom-padding
   transition: height .3s $transition.fast-out-slow-in
 
-  .input-group
+  .v-input
+    .v-messages
+      display: none
+
+  .v-input,
+  .v-input__wrapper
     margin: 0
 
   &__tile
@@ -86,14 +91,6 @@ theme(list, "list")
       justify-content: flex-start
       min-width: 56px
       align-items: center
-
-      .input-group--selection-controls
-        align-items: center
-        flex: 0 1
-        padding: 0
-
-      .input-group__details
-        display: none
 
       .v-btn // fix button padding if used
         padding 0

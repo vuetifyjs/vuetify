@@ -105,7 +105,7 @@ export default {
       },
       deep: true
     },
-    proxyValue (val) {
+    internalValue (val) {
       // If it's the first time we're setting input,
       // mark it with hasInput
       if (!!val && !this.hasInput) this.hasInput = true
@@ -150,7 +150,7 @@ export default {
         this.validate()
       })
     },
-    validate (force = false, value = this.proxyValue) {
+    validate (force = false, value = this.internalValue) {
       if (force) this.shouldValidate = true
 
       this.errorBucket = []

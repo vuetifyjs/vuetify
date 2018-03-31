@@ -74,7 +74,7 @@ export default {
     // This allows an input
     // to function without
     // a provided model
-    proxyValue: {
+    internalValue: {
       get () {
         return this.lazyValue
       },

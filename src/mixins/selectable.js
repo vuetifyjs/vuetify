@@ -17,6 +17,10 @@ export default {
     event: 'change'
   },
 
+  data: vm => ({
+    lazyValue: vm.inputValue
+  }),
+
   props: {
     color: {
       type: String,
@@ -41,17 +45,17 @@ export default {
       )
     },
     isActive () {
-      if ((Array.isArray(this.proxyValue))) {
-        return this.proxyValue.indexOf(this.value) !== -1
+      if ((Array.isArray(this.internalValue))) {
+        return this.internalValue.indexOf(this.value) !== -1
       }
 
       if (!this.trueValue || !this.falseValue) {
         return this.value
-          ? this.value === this.proxyValue
-          : Boolean(this.proxyValue)
+          ? this.value === this.internalValue
+          : Boolean(this.internalValue)
       }
 
-      return this.proxyValue === this.trueValue
+      return this.internalValue === this.trueValue
     },
     isDirty: {
       get: 'isActive'
