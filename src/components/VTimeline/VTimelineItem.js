@@ -1,4 +1,4 @@
-import { inject as RegistrableInject } from '../../mixins/registrable'
+// Components
 import VIcon from '../VIcon'
 
 // Mixins
@@ -7,9 +7,30 @@ import Colorable from '../../mixins/colorable'
 export default {
   name: 'v-timeline-item',
 
-  mixins: [Colorable, RegistrableInject('timeline', 'v-timeline', 'v-timeline-item')],
+  inject: [
+    'iconParent',
+    'iconSizeParent',
+    'noIconParent',
+    'lineColorParent',
+    'hoverParent',
+    'raisedParent',
+    'circleFillColorParent',
+    'circleOutlineColorParent',
+    'lineSizeParent',
+    'hideCircleOutlineParent'
+  ],
+
+  mixins: [Colorable],
 
   props: {
+    raised: {
+      type: Boolean,
+      default: false
+    },
+    hover: {
+      type: Boolean,
+      default: false
+    },
     icon: {
       type: String
     },
@@ -23,21 +44,13 @@ export default {
     lineColor: {
       type: String
     },
-    hideCircleOutline: {
-      type: Boolean,
-      default: false
-    },
     circleOutlineColor: {
       type: String
     },
     circleFillColor: {
       type: String
     },
-    raised: {
-      type: Boolean,
-      default: false
-    },
-    hover: {
+    hideCircleOutline: {
       type: Boolean,
       default: false
     }
@@ -47,28 +60,27 @@ export default {
     classes () {
       return this.addBackgroundColorClassChecks({
         'timeline__item--body': true,
-        'timeline--hover': this.hover || this.$parent.$props.hover,
-        'timeline--raised': this.raised || this.$parent.$props.raised
+        'timeline--hover': this.hover || this.hoverParent,
+        'timeline--raised': this.raised || this.raisedParent
       })
     },
     lineClasses () {
-      if (this.lineColor) {
-        return this.addTextColorClassChecks({}, this.lineColor)
-      }
-
-      return ''
+      const lineColor = this.lineColor ? this.lineColor : this.lineColorParent
+      return this.addTextColorClassChecks({}, lineColor)
     },
     circleClasses () {
-      const circleFillColorClass = this.circleFillColor ? this.circleFillColor : this.$parent.$props.circleFillColor
+      const circleFillColorClass = this.circleFillColor ? this.circleFillColor : this.circleFillColorParent
       const classes = {
         [circleFillColorClass]: true
       }
-      const circleOutlineColor = this.circleOutlineColor ? this.circleOutlineColor : this.$parent.$props.circleOutlineColor
+      const circleOutlineColor = this.circleOutlineColor
+        ? this.circleOutlineColor
+        : this.circleOutlineColorParent ? this.circleOutlineColorParent : this.lineColor ? this.lineColor : this.lineColorParent
 
       return this.addTextColorClassChecks(classes, circleOutlineColor)
     },
     lineStyles () {
-      const lineSize = parseInt(this.$parent.$props.lineSize)
+      const lineSize = parseInt(this.lineSizeParent)
       const calcMargin = (lineSize - 1) * 3 / 100 + 0.45
       const width = lineSize > 12 ? `12px` : lineSize < 0 ? `0px` : lineSize
       const margin = lineSize > 12 ? `-0.78em` : lineSize < 0 ? `-0.42em` : calcMargin
@@ -79,14 +91,13 @@ export default {
       }
     },
     circleStyle () {
-      const circleOutlineSizeInt = this.$parent.$props.circleOutlineSize
-        ? parseInt(this.$parent.$props.circleOutlineSize)
-        : parseInt(this.$parent.$props.lineSize)
-      const isHideCircle = this.hideCircleOutline || this.$parent.$props.hideCircleOutline
-      const circleOutlineSize = isHideCircle ? 0 : circleOutlineSizeInt > 12 ? 12 : circleOutlineSizeInt < 0 ? 0 : circleOutlineSizeInt
-
-      return {
-        boxShadow: `0 0 0 ${circleOutlineSize}px currentColor`
+      const circleOutlineSizeInt = this.circleOutlineSizeParent ? parseInt(this.circleOutlineSizeParent) : parseInt(this.lineSizeParent)
+      const isHideCircle = this.hideCircleOutline || this.hideCircleOutlineParent
+      const circleOutlineSize = circleOutlineSizeInt > 12 ? 12 : circleOutlineSizeInt < 0 ? 0 : circleOutlineSizeInt
+      if (isHideCircle) {
+        return { boxShadow: `none` }
+      } else {
+        return { boxShadow: `currentColor 0px 0px 0px ${circleOutlineSize}px` }
       }
     }
   },
@@ -111,18 +122,18 @@ export default {
       )
     },
     genIconHeader () {
-      const icon = this.icon ? this.icon : this.$parent.$props.icon
-      const iconSize = this.iconSize ? this.iconSize : this.$parent.$props.iconSize
+      const icon = this.icon ? this.icon : this.iconParent
+      const iconSize = this.iconSize ? this.iconSize : this.iconSizeParent
 
       const iconElement =
-        this.noIcon || this.$parent.$props.noIcon
+        this.noIcon || this.noIconParent
           ? null
           : this.$slots.icon ||
             this.$createElement(
               VIcon,
               {
                 props: {
-                  size: iconSize
+                  size: iconSize + 'px'
                 }
               },
               icon
@@ -137,7 +148,7 @@ export default {
           this.$createElement(
             'div',
             {
-              staticClass: 'timeline__item--head-icon',
+              staticClass: 'timeline__icon',
               class: this.circleClasses,
               style: this.circleStyle
             },
