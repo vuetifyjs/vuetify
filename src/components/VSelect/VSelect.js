@@ -160,7 +160,9 @@ export default {
     },
     // Convert internalValue to always
     // be an array and check for validity
-    selectedItems (val = this.inputValue) {
+    selectedItems () {
+      const val = this.internalValue
+
       let selectedItems = this.computedItems.filter(i => {
         if (!this.multiple) {
           return this.getValue(i) === this.getValue(val)
@@ -451,7 +453,7 @@ export default {
       const parent = this
       const scopedSlot = this.$scopedSlots.item({ parent, item, tile })
 
-      return this.needsTile(tile)
+      return this.needsTile(scopedSlot)
         ? this.$createElement(VListTile, tile, [scopedSlot])
         : scopedSlot
     },
@@ -484,8 +486,8 @@ export default {
       return typeof value === 'undefined' ? item : value
     },
     needsTile (tile) {
-      // TODO: use the component name instead of tag
-      return tile.componentOptions == null || tile.componentOptions.tag !== 'v-list-tile'
+      return tile.componentOptions == null ||
+        tile.componentOptions.Ctor.options.name !== 'v-list-tile'
     },
     // Ignore default onBlur
     onBlur () {},

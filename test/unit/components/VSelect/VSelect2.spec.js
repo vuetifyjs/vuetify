@@ -101,7 +101,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect(wrapper.vm.isMenuActive).toBe(false)
   })
 
-  it('should prepropulate selectedItems', () => {
+  it('should prepopulate selectedItems', () => {
     const items = ['foo', 'bar', 'baz']
 
     const wrapper = mount(VSelect, {
@@ -216,5 +216,187 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.vm.isMenuActive).toBe(true)
 
+  })
+
+  it('should react to different key down', async () => {
+    const wrapper = mount(VSelect)
+    const blur = jest.fn()
+    wrapper.vm.$on('blur', blur)
+
+    wrapper.vm.onKeyDown({ keyCode: 9 })
+
+    expect(blur).toBeCalled()
+    expect(wrapper.vm.isMenuActive).toBe(false)
+
+    for (let keyCode of [13, 32, 38, 40]) {
+      wrapper.vm.onKeyDown({ keyCode })
+      expect(wrapper.vm.isMenuActive).toBe(true)
+
+      wrapper.vm.isMenuActive = false
+      expect(wrapper.vm.isMenuActive).toBe(false)
+    }
+  })
+
+  it('should select an item !multiple', () => {
+    const wrapper = mount(VSelect)
+
+    const input = jest.fn()
+    const change = jest.fn()
+    wrapper.vm.$on('input', input)
+    wrapper.vm.$on('change', change)
+
+    wrapper.vm.selectItem('foo')
+
+    expect(wrapper.vm.internalValue).toBe('foo')
+    expect(input).toBeCalledWith('foo')
+    expect(change).toBeCalledWith('foo')
+    expect(input).toHaveBeenCalledTimes(1)
+    expect(change).toHaveBeenCalledTimes(1)
+
+    wrapper.setProps({ returnObject: true })
+
+    const item = { foo: 'bar' }
+    wrapper.vm.selectItem(item)
+
+    expect(wrapper.vm.internalValue).toBe(item)
+    expect(input).toBeCalledWith(item)
+    expect(change).toBeCalledWith(item)
+    expect(input).toHaveBeenCalledTimes(2)
+    expect(change).toHaveBeenCalledTimes(2)
+  })
+
+  it('should disable v-list-tile', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        items: [{ text: 'foo', disabled: true, id: 0 }]
+      }
+    })
+
+    const selectItem = jest.fn()
+    wrapper.setMethods({ selectItem })
+
+    let el = wrapper.first('.list__tile')
+
+    el.element.click()
+
+    expect(selectItem).not.toBeCalled()
+
+    wrapper.setProps({
+      items: [{ text: 'foo', disabled: false, id: 0 }]
+    })
+
+    await wrapper.vm.$nextTick()
+
+    el.element.click()
+
+    expect(selectItem).toBeCalled()
+  })
+
+  it('should update menu status and focus when menu closes', async () => {
+    const wrapper = mount(VSelect)
+    const menu = wrapper.vm.$refs.menu
+
+    wrapper.setData({
+      isMenuActive: true,
+      isFocused: true
+    })
+
+    expect(wrapper.vm.isMenuActive).toBe(true)
+    expect(wrapper.vm.isFocused).toBe(true)
+
+    await wrapper.vm.$nextTick()
+
+    expect(menu.isActive).toBe(true)
+
+    menu.isActive = false
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.isMenuActive).toBe(false)
+    expect(wrapper.vm.isFocused).toBe(false)
+  })
+
+  it('should change selected index', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        items: ['foo', 'bar', 'fizz'],
+        multiple: true,
+        value: ['foo', 'bar', 'fizz']
+      }
+    })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.selectedIndex).toBe(null)
+    expect(wrapper.vm.selectedItems.length).toBe(3)
+
+    // Right arrow
+    wrapper.vm.changeSelectedIndex(39)
+    expect(wrapper.vm.selectedIndex).toBe(1)
+
+    wrapper.vm.changeSelectedIndex(39)
+    expect(wrapper.vm.selectedIndex).toBe(2)
+
+    wrapper.vm.changeSelectedIndex(39)
+    expect(wrapper.vm.selectedIndex).toBe(-1)
+
+    // Left arrow
+    wrapper.vm.changeSelectedIndex(37)
+    expect(wrapper.vm.selectedIndex).toBe(2)
+
+    wrapper.vm.changeSelectedIndex(37)
+    expect(wrapper.vm.selectedIndex).toBe(1)
+
+    wrapper.vm.changeSelectedIndex(37)
+    expect(wrapper.vm.selectedIndex).toBe(0)
+
+    wrapper.vm.changeSelectedIndex(37)
+    expect(wrapper.vm.selectedIndex).toBe(-1)
+
+    wrapper.vm.changeSelectedIndex(37)
+    expect(wrapper.vm.selectedIndex).toBe(2)
+
+    // Delete key
+    wrapper.vm.changeSelectedIndex(8)
+    expect(wrapper.vm.selectedIndex).toBe(1)
+
+    wrapper.vm.changeSelectedIndex(37)
+    expect(wrapper.vm.selectedIndex).toBe(0)
+
+    wrapper.vm.changeSelectedIndex(8)
+    expect(wrapper.vm.selectedIndex).toBe(0)
+
+    wrapper.vm.changeSelectedIndex(8)
+    expect(wrapper.vm.selectedIndex).toBe(-1)
+
+    // Should not change/error if called with no selection
+    wrapper.vm.changeSelectedIndex(8)
+    expect(wrapper.vm.selectedIndex).toBe(-1)
+
+    expect(wrapper.vm.selectedItems.length).toBe(0)
+
+    wrapper.setProps({ value: ['foo', 'bar', 'fizz'] })
+
+    expect(wrapper.vm.selectedItems.length).toBe(3)
+
+    wrapper.vm.selectedIndex = 2
+
+    // Simulating removing items when an index already selected
+    wrapper.setProps({ value: ['foo', 'bar'] })
+
+    expect(wrapper.vm.selectedIndex).toBe(2)
+
+    // Backspace
+    wrapper.vm.changeSelectedIndex(46)
+    expect(wrapper.vm.selectedIndex).toBe(-1)
+  })
+
+  it('should use specified value', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        items: ['foo']
+      }
+    })
   })
 })
