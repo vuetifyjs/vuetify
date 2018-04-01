@@ -79,7 +79,7 @@ exports[`VRadio.vue should render proper input name 1`] = `
 
 exports[`VRadio.vue should render role and aria-checked attributes on input group 1`] = `
 
-<div class="v-radio">
+<div class="v-radio accent--text">
   <div class="v-input--selection-controls__input">
     <input aria-checked="true"
            name="name"

@@ -92,7 +92,7 @@ export default {
   },
 
   watch: {
-    inputValue (val) {
+    value (val) {
       this.lazyValue = val
     }
   },

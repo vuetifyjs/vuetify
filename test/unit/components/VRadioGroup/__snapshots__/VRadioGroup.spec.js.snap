@@ -8,13 +8,12 @@ exports[`VRadioGroup.vue should be in error when v-radio-group is 1`] = `
       <div role="radiogroup"
            class="v-input--radio-group__input"
       >
-        <div class="v-radio"
-             tabindex="0"
-        >
+        <div class="v-radio">
           <div class="v-input--selection-controls__input">
             <input aria-checked="true"
                    role="radio"
                    type="radio"
+                   tabindex="0"
             >
             <div class="v-input--selection-controls__ripple accent--text">
             </div>
@@ -48,13 +47,12 @@ exports[`VRadioGroup.vue should be in error when v-radio-group is 2`] = `
       <div role="radiogroup"
            class="v-input--radio-group__input"
       >
-        <div class="v-radio"
-             tabindex="0"
-        >
+        <div class="v-radio accent--text">
           <div class="v-input--selection-controls__input">
             <input aria-checked="true"
                    role="radio"
                    type="radio"
+                   tabindex="0"
             >
             <div class="v-input--selection-controls__ripple accent--text">
             </div>

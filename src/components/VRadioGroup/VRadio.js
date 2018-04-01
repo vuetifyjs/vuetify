@@ -39,6 +39,7 @@ export default {
 
   data: () => ({
     isActive: false,
+    isFocused: false,
     parentError: false
   }),
 
@@ -55,11 +56,12 @@ export default {
   computed: {
     classes () {
       const classes = {
+        'v-radio--is-focused': this.isFocused,
         'theme--dark': this.dark,
         'theme--light': this.light
       }
 
-      if (!this.parentError) {
+      if (!this.parentError && this.isActive) {
         return this.addTextColorClassChecks(classes)
       }
 
@@ -104,7 +106,7 @@ export default {
         }),
         on: {
           blur: this.onBlur,
-          change: this.onChange, // TODO: change this name
+          change: this.onChange,
           focus: this.onFocus,
           keydown: e => {
             if ([13, 32].includes(e.keyCode)) {
@@ -133,7 +135,8 @@ export default {
         staticClass: 'v-input--selection-controls__input'
       }, [
         this.genInput('radio', {
-          'aria-checked': this.isActive.toString()
+          'aria-checked': this.isActive.toString(),
+          ...this.$attrs
         }),
         this.genRipple({
           'class': this.classesSelectable
@@ -162,7 +165,8 @@ export default {
 
   render (h) {
     return h('div', {
-      staticClass: 'v-radio'
+      staticClass: 'v-radio',
+      class: this.classes
     }, [
       this.genRadio(),
       this.genLabel()

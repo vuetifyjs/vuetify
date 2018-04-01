@@ -62,6 +62,12 @@ export default {
     }
   },
 
+  watch: {
+    inputValue (val) {
+      this.internalValue = val
+    }
+  },
+
   methods: {
     genLabel () {
       return this.$createElement(VLabel, {
@@ -77,12 +83,13 @@ export default {
     },
     genInput (type, attrs) {
       return this.$createElement('input', {
-        attrs: Object.assign({}, attrs, {
+        attrs: Object.assign({}, {
           'aria-label': this.label,
+          'aria-checked': this.isActive.toString(),
           role: type,
           type,
           value: this.inputValue
-        }),
+        }, attrs),
         on: {
           blur: this.onBlur,
           change: this.onChange,
@@ -128,7 +135,11 @@ export default {
       this.isFocused = true
     },
     onKeydown (e) {
+      // Overwrite default behavior to only allow
+      // the specified keyCodes
       if (this.toggleKeys.indexOf(e.keyCode) > -1) {
+        e.preventDefault()
+
         this.onChange()
       }
     }

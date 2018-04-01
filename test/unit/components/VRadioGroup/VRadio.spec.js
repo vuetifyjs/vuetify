@@ -157,4 +157,80 @@ test('VRadio.vue', ({ mount }) => {
 
     expect(warning).toHaveBeenTipped()
   })
+
+  it('should toggle when space or enter is pressed', () => {
+    const wrapper = mount(VRadio)
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    const input = wrapper.first('input')
+
+    input.trigger('focus')
+    input.trigger('keydown.enter')
+
+    expect(change).toHaveBeenCalledTimes(1)
+
+    input.trigger('keydown.space')
+    expect(change).toHaveBeenCalledTimes(2)
+
+    input.trigger('keydown.tab')
+    expect(change).toHaveBeenCalledTimes(2)
+
+    expect(wrapper.vm.isFocused).toBe(true)
+    wrapper.vm.onBlur()
+    expect(wrapper.vm.isFocused).toBe(false)
+
+    expect(warning).toHaveBeenTipped()
+  })
+
+  it('should not generate own colors when parent is in error', async () => {
+    const wrapper = mount(VRadio)
+
+    expect(wrapper.vm.classes).toEqual({
+      'theme--dark': false,
+      'theme--light': false,
+      'v-radio--is-focused': false
+    })
+
+    wrapper.setData({ isActive: true })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.classes).toEqual({
+      'accent--text': true,
+      'theme--dark': false,
+      'theme--light': false,
+      'v-radio--is-focused': false
+    })
+
+    expect(warning).toHaveBeenTipped()
+  })
+
+  it('should inject isMandatory', () => {
+    const wrapper = mount(VRadio, {
+      provide: {
+        isMandatory: () => true
+      }
+    })
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    expect(wrapper.vm.internalValue).toBe(undefined)
+
+    wrapper.vm.isActive = true
+
+    wrapper.vm.onChange()
+
+    expect(change).not.toBeCalled()
+
+    wrapper.vm.isActive = false
+
+    wrapper.vm.onChange()
+
+    expect(change).toBeCalled()
+
+    expect(warning).toHaveBeenTipped()
+  })
 })

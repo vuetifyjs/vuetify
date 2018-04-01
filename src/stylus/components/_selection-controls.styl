@@ -3,23 +3,7 @@
 
 /** Theme */
 selection-control($material)
-  // label
-  //   color: $material.text.primary
-
-  // .icon--selection-control
-  //   color: $material.text.secondary
-
-  // &.input-group--active
-  //   .icon--selection-control
-  //     color: inherit
-
-  // &.input-group--disabled
-  //   .input-group__input
-  //     color: $material.text.disabled
-
-  //     .icon--radio,
-  //     .icon--checkbox
-  //       color: inherit
+//
 
 theme(selection-control, "v-input--selection-controls")
 
@@ -30,8 +14,7 @@ theme(selection-control, "v-input--selection-controls")
     height: 100%
     position: relative
     margin-right: 8px
-    transition: $primary-transition
-    // transition: color .2s cubic-bezier(.25,.8,.25,1), transform .3s cubic-bezier(.25,.8,.25,1)
+    transition: color .2s cubic-bezier(.25,.8,.25,1), transform .3s cubic-bezier(.25,.8,.25,1)
     width: 24px
 
     input
@@ -64,7 +47,8 @@ theme(selection-control, "v-input--selection-controls")
     pointer-events: all
     user-select: none
 
-  &.v-input--is-focused
+  &.v-input--is-focused,
+  .v-radio--is-focused
     .v-input--selection-controls__ripple:before
       background: currentColor
       transform: scale(.8)

@@ -127,4 +127,18 @@ test('VInput.js', ({ mount }) => {
     wrapper.setProps({ height: '20px' })
     expect(inputWrapper.element.style.height).toBe('20px')
   })
+
+  it('should update lazyValue when value is updated', () => {
+    const wrapper = mount(VInput, {
+      propsData: {
+        value: 'foo'
+      }
+    })
+
+    expect(wrapper.vm.lazyValue).toBe('foo')
+
+    wrapper.setProps({ value: 'bar' })
+
+    expect(wrapper.vm.lazyValue).toBe('bar')
+  })
 })

@@ -21,7 +21,7 @@ export default {
   ],
 
   model: {
-    prop: 'inputValue',
+    prop: 'internalValue',
     event: 'change'
   },
 
@@ -47,7 +47,6 @@ export default {
       type: [Number, String],
       default: 'auto'
     },
-    inputValue: null,
     mandatory: {
       type: Boolean,
       default: true
@@ -58,7 +57,7 @@ export default {
 
   watch: {
     hasError: 'setErrorState',
-    inputValue (val) {
+    internalValue (val) {
       for (let index = this.radios.length; --index >= 0;) {
         const radio = this.radios[index]
         radio.isActive = val === radio.value
@@ -107,12 +106,12 @@ export default {
     radioBlur (e) {
       if (!e.relatedTarget || !e.relatedTarget.classList.contains('radio')) {
         this.shouldValidate = true
-        this.$emit('blur', this.inputValue)
+        this.$emit('blur', this.internalValue)
       }
     },
     register (radio) {
-      radio.isActive = this.inputValue === radio.value
-      radio.$el.tabIndex = radio.$el.tabIndex > 0 ? radio.$el.tabIndex : 0
+      radio.isActive = this.internalValue === radio.value
+      radio.$refs.input.tabIndex = radio.$refs.input.tabIndex > 0 ? radio.$refs.input.tabIndex : 0
       radio.$on('change', this.toggleRadio)
       radio.$on('blur', this.radioBlur)
       radio.$on('focus', this.radioFocus)
@@ -130,6 +129,7 @@ export default {
 
       const index = this.radios.findIndex(r => r === radio)
 
+      /* istanbul ignore else */
       if (index > -1) this.radios.splice(index, 1)
     }
   }
