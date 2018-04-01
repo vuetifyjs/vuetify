@@ -2,10 +2,10 @@ import VAvatar from '@/components/VAvatar'
 import { test } from '@/test'
 
 test('VAvatar.vue', ({ mount, functionalContext }) => {
-  it('should have an avatar class', () => {
+  it('should have an v-avatar class', () => {
     const wrapper = mount(VAvatar, functionalContext())
 
-    expect(wrapper.hasClass('avatar')).toBe(true)
+    expect(wrapper.hasClass('v-avatar')).toBe(true)
     expect(wrapper.html()).toMatchSnapshot()
   })
 
@@ -16,7 +16,7 @@ test('VAvatar.vue', ({ mount, functionalContext }) => {
       }
     }))
 
-    expect(wrapper.hasClass('avatar--tile')).toBe(true)
+    expect(wrapper.hasClass('v-avatar--tile')).toBe(true)
   })
 
   it('should accept custom or no class declarations', () => {
