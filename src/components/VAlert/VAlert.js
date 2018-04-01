@@ -36,8 +36,8 @@ export default {
     classes () {
       const color = (this.type && !this.color) ? this.type : this.computedColor
       const classes = {
-        'alert--dismissible': this.dismissible,
-        'alert--outline': this.outline
+        'v-alert--dismissible': this.dismissible,
+        'v-alert--outline': this.outline
       }
 
       return this.outline ? this.addTextColorClassChecks(classes, color)
@@ -60,13 +60,13 @@ export default {
 
     if (this.computedIcon) {
       children.unshift(h(VIcon, {
-        'class': 'alert__icon'
+        'class': 'v-alert__icon'
       }, this.computedIcon))
     }
 
     if (this.dismissible) {
       const close = h('a', {
-        'class': 'alert__dismissible',
+        'class': 'v-alert__dismissible',
         on: { click: () => this.$emit('input', false) }
       }, [
         h(VIcon, {
@@ -80,7 +80,7 @@ export default {
     }
 
     const alert = h('div', {
-      staticClass: 'alert',
+      staticClass: 'v-alert',
       'class': this.classes,
       directives: [{
         name: 'show',
