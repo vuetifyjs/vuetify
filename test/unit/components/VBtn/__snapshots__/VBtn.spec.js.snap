@@ -60,16 +60,16 @@ exports[`VBtn.js should render component with loader and match snapshot 1`] = `
   </div>
   <span class="btn__loading">
     <div class="progress-circular progress-circular--indeterminate"
-         style="height: 26px; width: 26px;"
+         style="height: 23px; width: 23px;"
     >
       <svg xmlns="http://www.w3.org/2000/svg"
-           viewbox="23.636363636363637 23.636363636363637 47.27272727272727 47.27272727272727"
+           viewbox="21.904761904761905 21.904761904761905 43.80952380952381 43.80952380952381"
       >
         <circle fill="transparent"
-                cx="47.27272727272727"
-                cy="47.27272727272727"
+                cx="43.80952380952381"
+                cy="43.80952380952381"
                 r="20"
-                stroke-width="7.272727272727273"
+                stroke-width="3.8095238095238093"
                 stroke-dasharray="125.664"
                 stroke-dashoffset="125.66370614359172px"
                 class="progress-circular__overlay"
