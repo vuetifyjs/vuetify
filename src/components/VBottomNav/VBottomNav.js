@@ -38,10 +38,10 @@ export default {
   computed: {
     classes () {
       return {
-        'bottom-nav--absolute': this.absolute,
-        'bottom-nav--fixed': !this.absolute && (this.app || this.fixed),
-        'bottom-nav--shift': this.shift,
-        'bottom-nav--active': this.value
+        'v-bottom-nav--absolute': this.absolute,
+        'v-bottom-nav--fixed': !this.absolute && (this.app || this.fixed),
+        'v-bottom-nav--shift': this.shift,
+        'v-bottom-nav--active': this.value
       }
     },
     computedHeight () {
@@ -73,7 +73,7 @@ export default {
 
   render (h) {
     return h('div', {
-      staticClass: 'bottom-nav',
+      staticClass: 'v-bottom-nav',
       class: this.addBackgroundColorClassChecks(this.classes),
       style: {
         height: `${parseInt(this.computedHeight)}px`
