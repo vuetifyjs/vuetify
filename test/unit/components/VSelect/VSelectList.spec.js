@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import { test } from '@/test'
-import VSelect from '@/components/VSelect'
+import VSelectList from '@/components/VSelect/VSelectList'
 import {
   VListTile,
   VListTileTitle,
@@ -13,7 +13,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
   document.body.appendChild(app)
 
   it('should generate a divider', () => {
-    const wrapper = mount(VSelect)
+    const wrapper = mount(VSelectList)
 
     const divider = wrapper.vm.genDivider({
       inset: true
@@ -23,7 +23,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
   })
 
   it('should generate a header', () => {
-    const wrapper = mount(VSelect)
+    const wrapper = mount(VSelectList)
 
     const divider = wrapper.vm.genHeader({
       light: true,

@@ -3,34 +3,22 @@ import '../../stylus/components/_text-fields.styl'
 import '../../stylus/components/_select.styl'
 
 // Components
-import VCard from '../VCard'
-import VCheckbox from '../VCheckbox'
 import VChip from '../VChip'
-import VDivider from '../VDivider'
 import VMenu from '../VMenu'
-import VSubheader from '../VSubheader'
-import {
-  VList,
-  VListTile,
-  VListTileAction,
-  VListTileContent,
-  VListTileTitle
-} from '../VList'
+import {VSelectList} from '.'
 
 // Extensions
 import VTextField from '../VTextField/VTextField'
 
 // Mixins
 import Dependent from '../../mixins/dependent'
+import Filterable from '../../mixins/filterable'
 
 // Directives
 import ClickOutside from '../../directives/click-outside'
 
 // Helpers
-import {
-  escapeHTML,
-  getObjectValueByPath
-} from '../../util/helpers'
+import {getObjectValueByPath} from '../../util/helpers'
 
 export default {
   name: 'v-select',
@@ -42,7 +30,8 @@ export default {
   },
 
   mixins: [
-    Dependent
+    Dependent,
+    Filterable
   ],
 
   data: vm => ({
@@ -173,9 +162,6 @@ export default {
       })
 
       return selectedItems
-    },
-    tileActiveClass () {
-      return Object.keys(this.addTextColorClassChecks()).join(' ')
     }
   },
 
@@ -232,27 +218,6 @@ export default {
       const itemValue = this.getValue(item)
 
       return (internalValue || []).findIndex(i => this.valueComparator(this.getValue(i), itemValue))
-    },
-    genAction (item, inputValue) {
-      if (!this.multiple || this.isHidingSelected) return null
-
-      const data = {
-        on: {
-          click: e => {
-            e.stopPropagation()
-            this.selectItem(item)
-          }
-        }
-      }
-
-      return this.$createElement(VListTileAction, data, [
-        this.$createElement(VCheckbox, {
-          props: {
-            color: this.computedColor,
-            inputValue
-          }
-        })
-      ])
     },
     genChipSelection (item, index) {
       const isDisabled = this.disabled || this.readonly
@@ -328,38 +293,28 @@ export default {
 
       return [this.genMenu(activator)]
     },
-    genDivider (props) {
-      return this.$createElement(VDivider, { props })
-    },
-    genHeader (props) {
-      return this.$createElement(VSubheader, { props }, props.header)
-    },
     genList () {
-      const children = this.items.map(o => {
-        if (o.header) return this.genHeader(o)
-        if (o.divider) return this.genDivider(o)
-        else return this.genTile(o)
-      })
-
-      if (!children.length) {
-        const noData = this.$slots['no-data']
-        if (noData) {
-          children.push(noData)
-        } else {
-          children.push(this.genTile(this.noDataText, true))
-        }
-      }
-
-      return this.$createElement(VCard, {
+      return this.$createElement(VSelectList, {
         props: {
+          dense: this.dense,
+          noDataText: this.noDataText,
           dark: this.dark,
-          light: this.light
+          light: this.light,
+          color: this.color,
+          items: this.items,
+          selectedItems: this.selectedItems,
+          action: this.multiple && !this.isHidingSelected
+        },
+        on: {
+          select: item => this.selectItem(item)
+        },
+        scopedSlots: {
+          item: this.$scopedSlots.item
         }
       }, [
-        this.$createElement(VList, {
-          props: { dense: this.dense },
-          ref: 'list'
-        }, children)
+        this.$slots['no-data'] ? this.$createElement('div', {
+          slot: 'no-data'
+        }, this.$slots['no-data']) : null
       ])
     },
     genMenu (activator) {
@@ -411,67 +366,6 @@ export default {
 
       return children
     },
-    genTile (
-      item,
-      disabled,
-      avatar = false,
-      value = this.selectedItems.indexOf(item) !== -1
-    ) {
-      if (item === Object(item)) {
-        avatar = this.getAvatar(item)
-        disabled = disabled != null
-          ? disabled
-          : this.getDisabled(item)
-      }
-
-      const tile = {
-        on: {
-          click: () => {
-            if (disabled) return
-
-            this.selectItem(item)
-          }
-        },
-        props: {
-          activeClass: this.tileActiveClass,
-          avatar,
-          disabled,
-          ripple: true,
-          value
-        }
-      }
-
-      if (!this.$scopedSlots.item) {
-        return this.$createElement(VListTile, tile,
-          [
-            this.genAction(item, value),
-            this.genTileContent(item)
-          ]
-        )
-      }
-
-      const parent = this
-      const scopedSlot = this.$scopedSlots.item({ parent, item, tile })
-
-      return this.needsTile(scopedSlot)
-        ? this.$createElement(VListTile, tile, [scopedSlot])
-        : scopedSlot
-    },
-    genTileContent (item) {
-      const innerHTML = escapeHTML((this.getText(item) || '').toString())
-
-      return this.$createElement(VListTileContent,
-        [this.$createElement(VListTileTitle, {
-          domProps: { innerHTML }
-        })]
-      )
-    },
-    getAvatar (item) {
-      return getObjectValueByPath(item, this.itemAvatar)
-    },
-    getDisabled (item) {
-      return getObjectValueByPath(item, this.itemDisabled)
-    },
     getText (item) {
       return this.getPropertyFromItem(item, this.itemText)
     },
@@ -484,10 +378,6 @@ export default {
       const value = getObjectValueByPath(item, field)
 
       return typeof value === 'undefined' ? item : value
-    },
-    needsTile (tile) {
-      return tile.componentOptions == null ||
-        tile.componentOptions.Ctor.options.name !== 'v-list-tile'
     },
     // Ignore default onBlur
     onBlur () {},

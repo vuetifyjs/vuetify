@@ -31,5 +31,13 @@ theme(v-select, 'v-select')
       transform: translateY(-22px) scale(0.75)
 
   &__slot
+    width: 100%
     align-items: center
     display: flex
+
+.v-select-list
+  .list__tile__action
+    .v-input--selection-controls
+      .v-input__wrapper
+        &:after, &:before
+          display: none
