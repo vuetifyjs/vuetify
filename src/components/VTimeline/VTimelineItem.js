@@ -69,13 +69,11 @@ export default {
       return this.addTextColorClassChecks({}, lineColor)
     },
     circleClasses () {
-      const circleFillColorClass = this.circleFillColor ? this.circleFillColor : this.circleFillColorParent
+      const circleFillColorClass = this.circleFillColor || this.circleFillColorParent
       const classes = {
         [circleFillColorClass]: true
       }
-      const circleOutlineColor = this.circleOutlineColor
-        ? this.circleOutlineColor
-        : this.circleOutlineColorParent ? this.circleOutlineColorParent : this.lineColor ? this.lineColor : this.lineColorParent
+      const circleOutlineColor = this.circleOutlineColor || this.circleOutlineColorParent || this.lineColor || this.lineColorParent
 
       return this.addTextColorClassChecks(classes, circleOutlineColor)
     },
