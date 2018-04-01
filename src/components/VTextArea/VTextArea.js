@@ -6,6 +6,10 @@ export default {
 
   extends: VTextField,
 
+  data: () => ({
+    inputHeight: 0
+  }),
+
   props: {
     autoGrow: Boolean,
     noResize: Boolean,
@@ -45,12 +49,10 @@ export default {
 
   methods: {
     calculateInputHeight () {
-      this.inputHeight = null
+      this.inputHeight = 0
 
       this.$nextTick(() => {
-        const height = this.$refs.input
-          ? this.$refs.input.scrollHeight
-          : 0
+        const height = this.$refs.input ? this.$refs.input.scrollHeight : 0
         const minHeight = parseInt(this.rows, 10) * parseFloat(this.rowHeight)
         this.inputHeight = Math.max(minHeight, height)
       })
