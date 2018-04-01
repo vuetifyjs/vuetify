@@ -36,11 +36,11 @@ export default {
     max: String,
     nextIcon: {
       type: String,
-      default: 'chevron_right'
+      default: '$vuetify.icons.next'
     },
     prevIcon: {
       type: String,
-      default: 'chevron_left'
+      default: '$vuetify.icons.prev'
     },
     value: {
       type: [Number, String],

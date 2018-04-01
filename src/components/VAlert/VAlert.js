@@ -47,10 +47,10 @@ export default {
       if (this.icon || !this.type) return this.icon
 
       switch (this.type) {
-        case 'info': return 'info'
-        case 'error': return 'warning'
-        case 'success': return 'check_circle'
-        case 'warning': return 'priority_high'
+        case 'info': return '$vuetify.icons.info'
+        case 'error': return '$vuetify.icons.error'
+        case 'success': return '$vuetify.icons.success'
+        case 'warning': return '$vuetify.icons.warning'
       }
     }
   },
@@ -73,7 +73,7 @@ export default {
           props: {
             right: true
           }
-        }, 'cancel')
+        }, '$vuetify.icons.cancel')
       ])
 
       children.push(close)

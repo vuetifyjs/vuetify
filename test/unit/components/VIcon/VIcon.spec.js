@@ -110,6 +110,22 @@ test('VIcon.js', ({ mount, compileToFunctions }) => {
     expect(wrapper.element.className).toBe('icon fa fa-home')
   })
 
+  it('should render MD left icon from $vuetify.icons.checkboxOn', () => {
+    const context = functionalContext({}, '$vuetify.icons.checkboxOn')
+    const wrapper = mount(VIcon, context)
+
+    expect(wrapper.text()).toBe('check_box')
+    expect(wrapper.element.className).toBe('icon material-icons')
+  })
+
+  it('should render MD left icon from $vuetify.icons.prev', () => {
+    const context = functionalContext({}, '$vuetify.icons.prev')
+    const wrapper = mount(VIcon, context)
+
+    expect(wrapper.text()).toBe('chevron_left')
+    expect(wrapper.element.className).toBe('icon material-icons')
+  })
+
   it('set font size from helper prop', async () => {
     const iconFactory = size => mount(VIcon, functionalContext({
       props: { [size]: true }

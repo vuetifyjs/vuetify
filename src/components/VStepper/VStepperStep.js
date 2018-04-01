@@ -26,15 +26,15 @@ export default {
     complete: Boolean,
     completeIcon: {
       type: String,
-      default: 'check'
+      default: '$vuetify.icons.complete'
     },
     editIcon: {
       type: String,
-      default: 'edit'
+      default: '$vuetify.icons.edit'
     },
     errorIcon: {
       type: String,
-      default: 'warning'
+      default: '$vuetify.icons.error'
     },
     editable: Boolean,
     rules: {

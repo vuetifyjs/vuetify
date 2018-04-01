@@ -31,7 +31,7 @@ export default {
   props: {
     expandIcon: {
       type: String,
-      default: 'keyboard_arrow_down'
+      default: '$vuetify.icons.expand'
     },
     hideActions: Boolean,
     ripple: {
