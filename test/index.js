@@ -4,12 +4,12 @@ import toHaveBeenWarnedInit from '@/test/util/to-have-been-warned'
 import Vuetify from '@/components/Vuetify'
 import { compileToFunctions } from 'vue-template-compiler'
 
-export function test (name, cb) {
+export function test(name, cb) {
   toHaveBeenWarnedInit()
 
   Vuetify.install(Vue)
 
-  /*
+/*
   const app = document.createElement('div')
   app.setAttribute('data-app', true)
   document.body.appendChild(app)
@@ -30,7 +30,7 @@ export function test (name, cb) {
 
 test.skip = describe.skip
 
-export function functionalContext (context = {}, children = []) {
+export function functionalContext(context = {}, children = []) {
   if (!Array.isArray(children)) children = [children]
   return {
     context: Object.assign({
@@ -41,8 +41,8 @@ export function functionalContext (context = {}, children = []) {
   }
 }
 
-// requestAnimationFrame polyfill | Milos Djakonovic ( @Miloshio ) | MIT | https://github.com/milosdjakonovic/requestAnimationFrame-polyfill
-export function rafPolyfill (w) {
+//requestAnimationFrame polyfill | Milos Djakonovic ( @Miloshio ) | MIT | https://github.com/milosdjakonovic/requestAnimationFrame-polyfill
+export function rafPolyfill(w) {
   /**
    *
    * How many times should polyfill call
@@ -63,95 +63,98 @@ export function rafPolyfill (w) {
    * that this is the longest comment I've
    * written on single variable so far.
   **/
-  var FRAME_RATE_INTERVAL = 1000 / 60,
+  var FRAME_RATE_INTERVAL = 1000/60,
 
-    /**
+  /**
    * All queued callbacks in given cycle.
   **/
-    allCallbacks = [],
+  allCallbacks = [],
 
-    executeAllScheduled = false,
+  executeAllScheduled = false,
 
-    shouldCheckCancelRaf = false,
+  shouldCheckCancelRaf = false,
 
-    /**
+  /**
    * Callbacks queued for cancellation.
   **/
-    callbacksForCancellation = [],
+  callbacksForCancellation = [],
 
-    /**
+  /**
    * Should callback be cancelled?
    * @param cb - callback
   **/
-    isToBeCancelled = function (cb) {
-      for (var i = 0; i < callbacksForCancellation.length; i++) {
-        if (callbacksForCancellation[i] === cb) {
-          callbacksForCancellation.splice(i, 1)
-        return true
+  isToBeCancelled = function(cb){
+    for(var i=0;i<callbacksForCancellation.length;i++){
+      if(callbacksForCancellation[i] === cb ){
+        callbacksForCancellation.splice(i,1);
+        return true;
       }
-      }
-    },
+    }
+  },
 
-    /**
+
+
+  /**
    *
    * Executes all (surprise) callbacks in
    * and removes them from callback queue.
    *
   **/
-    executeAll = function () {
-      executeAllScheduled = false
-    var _allCallbacks = allCallbacks
-    allCallbacks = []
-    for (var i = 0; i < _allCallbacks.length; i++) {
-        if (shouldCheckCancelRaf === true) {
-          if (isToBeCancelled(_allCallbacks[i])) {
-            shouldCheckCancelRaf = false
+  executeAll = function(){
+    executeAllScheduled = false;
+    var _allCallbacks = allCallbacks;
+    allCallbacks = [];
+    for(var i=0;i<_allCallbacks.length;i++){
+      if(shouldCheckCancelRaf===true){
+        if (isToBeCancelled(_allCallbacks[i])){
+          shouldCheckCancelRaf = false;
           return;
-          }
         }
-        _allCallbacks[i].apply(w, [ new Date().getTime() ])
+      }
+      _allCallbacks[i].apply(w, [ new Date().getTime() ] );
     }
-    },
+  },
 
-    /**
+  /**
    *
    * requestAnimationFrame polyfill
    * @param callback - callback to be queued & executed | executed
    * @return callback
    *
   **/
-    raf = function (callback) {
-      allCallbacks.push(callback)
-    if (executeAllScheduled === false) {
-        w.setTimeout(executeAll, FRAME_RATE_INTERVAL)
-      executeAllScheduled = true
+  raf = function(callback){
+    allCallbacks.push(callback);
+    if(executeAllScheduled===false){
+      w.setTimeout(executeAll, FRAME_RATE_INTERVAL);
+      executeAllScheduled = true;
     }
-      return callback
+    return callback;
   },
 
-    /**
+  /**
    *
    * Cancels raf.
   **/
-    cancelRaf = function (callback) {
-      callbacksForCancellation.push(callback)
-    shouldCheckCancelRaf = true
+  cancelRaf = function(callback){
+    callbacksForCancellation.push(callback);
+    shouldCheckCancelRaf = true;
   },
 
-    // https://gist.github.com/paulirish/1579671
-    vendors = ['ms', 'moz', 'webkit', 'o']
 
-    for (var x = 0; x < vendors.length && !w.requestAnimationFrame; ++x) {
-    w.requestAnimationFrame = w[vendors[x] + 'RequestAnimationFrame']
-        w.cancelAnimationFrame = w[vendors[x] + 'CancelAnimationFrame'] ||
-        w[vendors[x] + 'CancelRequestAnimationFrame']
+  //https://gist.github.com/paulirish/1579671
+  vendors = ['ms', 'moz', 'webkit', 'o'];
+
+    for(var x = 0; x < vendors.length && !w.requestAnimationFrame; ++x) {
+        w.requestAnimationFrame = w[vendors[x]+'RequestAnimationFrame'];
+        w.cancelAnimationFrame = w[vendors[x]+'CancelAnimationFrame']
+        || w[vendors[x]+'CancelRequestAnimationFrame'];
     }
 
-  if (!w.requestAnimationFrame) w.requestAnimationFrame = raf
-  if (!w.cancelAnimationFrame) w.cancelAnimationFrame = cancelRaf
+  if (!w.requestAnimationFrame) w.requestAnimationFrame = raf;
+  if (!w.cancelAnimationFrame)  w.cancelAnimationFrame  = cancelRaf;
 }
 
-export function touch (element) {
+export function touch(element) {
   const createTrigger = eventName => (clientX, clientY) => {
     const touches = [{ clientX, clientY }]
     element.trigger(eventName, ({ touches, changedTouches: touches }))
