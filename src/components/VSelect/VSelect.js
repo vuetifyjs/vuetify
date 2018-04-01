@@ -5,7 +5,7 @@ import '../../stylus/components/_select.styl'
 // Components
 import VChip from '../VChip'
 import VMenu from '../VMenu'
-import {VSelectList} from '.'
+import VSelectList from './VSelectList'
 
 // Extensions
 import VTextField from '../VTextField/VTextField'
@@ -296,17 +296,17 @@ export default {
     genList () {
       return this.$createElement(VSelectList, {
         props: {
-          dense: this.dense,
-          noDataText: this.noDataText,
-          dark: this.dark,
-          light: this.light,
+          action: this.multiple && !this.isHidingSelected,
           color: this.color,
+          dark: this.dark,
+          dense: this.dense,
           items: this.items,
-          selectedItems: this.selectedItems,
-          action: this.multiple && !this.isHidingSelected
+          light: this.light,
+          noDataText: this.noDataText,
+          selectedItems: this.selectedItems
         },
         on: {
-          select: item => this.selectItem(item)
+          select: this.selectItem
         },
         scopedSlots: {
           item: this.$scopedSlots.item
