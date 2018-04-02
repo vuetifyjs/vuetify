@@ -36,7 +36,7 @@ exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
                   <div tabindex="0"
                        role="checkbox"
                        aria-checked="true"
-                       class="input-group input-group--dirty checkbox input-group--selection-controls input-group--active primary--text"
+                       class="input-group input-group--dirty v-checkbox input-group--selection-controls input-group--active primary--text"
                   >
                     <div class="input-group__input">
                       <i aria-hidden="true"
@@ -70,7 +70,7 @@ exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
                   <div tabindex="0"
                        role="checkbox"
                        aria-checked="false"
-                       class="input-group checkbox input-group--selection-controls primary--text"
+                       class="input-group v-checkbox input-group--selection-controls primary--text"
                   >
                     <div class="input-group__input">
                       <i aria-hidden="true"
