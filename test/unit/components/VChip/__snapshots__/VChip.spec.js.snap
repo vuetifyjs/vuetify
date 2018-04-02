@@ -47,14 +47,3 @@ exports[`VChip.vue should have a chip class 1`] = `
 </span>
 
 `;
-
-exports[`VChip.vue should have a v-chip class 1`] = `
-
-<span tabindex="0"
-      class="v-chip"
->
-  <span class="v-chip__content">
-  </span>
-</span>
-
-`;
