@@ -209,7 +209,7 @@ export default {
     this.setInputData(this.value)
   },
 
-  render (h) {
+  render () {
     return this.genPicker('picker--time')
   }
 }

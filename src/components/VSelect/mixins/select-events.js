@@ -49,7 +49,7 @@ export default {
             ? (this.selectedIndex = -1)
             : this.focus()
         },
-        focus: e => {
+        focus: () => {
           if (this.disabled || this.readonly || this.isFocused) {
             return
           }

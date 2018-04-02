@@ -1,4 +1,7 @@
+// Components
 import VIcon from '../VIcon'
+
+// Directives
 import Ripple from '../../directives/ripple'
 
 export default {
@@ -16,18 +19,22 @@ export default {
   },
 
   props: {
+    color: {
+      type: String,
+      default: 'primary'
+    },
     complete: Boolean,
     completeIcon: {
       type: String,
-      default: 'check'
+      default: '$vuetify.icons.complete'
     },
     editIcon: {
       type: String,
-      default: 'edit'
+      default: '$vuetify.icons.edit'
     },
     errorIcon: {
       type: String,
-      default: 'warning'
+      default: '$vuetify.icons.error'
     },
     editable: Boolean,
     rules: {
@@ -94,7 +101,7 @@ export default {
     const step = h('span', {
       staticClass: 'stepper__step__step',
       'class': {
-        'primary': !this.hasError && (this.complete || this.isActive)
+        [this.color]: !this.hasError && (this.complete || this.isActive)
       }
     }, stepContent)
 

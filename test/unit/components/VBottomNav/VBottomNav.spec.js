@@ -17,14 +17,14 @@ function createBtn (val = null) {
 }
 
 test('VBottomNav.js', ({ mount }) => {
-  it('should have a bottom-nav class', () => {
+  it('should have a v-bottom-nav class', () => {
     const wrapper = mount(VBottomNav, {
       slots: {
         default: [VBtn, VBtn]
       }
     })
 
-    expect(wrapper.hasClass('bottom-nav')).toBe(true)
+    expect(wrapper.hasClass('v-bottom-nav')).toBe(true)
     expect(wrapper.html()).toMatchSnapshot()
   })
 
@@ -39,8 +39,8 @@ test('VBottomNav.js', ({ mount }) => {
       }
     })
 
-    expect(wrapper.hasClass('bottom-nav--absolute')).toBe(true)
-    expect(wrapper.hasClass('bottom-nav--shift')).toBe(true)
+    expect(wrapper.hasClass('v-bottom-nav--absolute')).toBe(true)
+    expect(wrapper.hasClass('v-bottom-nav--shift')).toBe(true)
     expect(wrapper.html()).toMatchSnapshot()
   })
 
@@ -52,7 +52,7 @@ test('VBottomNav.js', ({ mount }) => {
       }
     })
 
-    expect(wrapper.hasClass('bottom-nav--active')).toBe(false)
+    expect(wrapper.hasClass('v-bottom-nav--active')).toBe(false)
     expect(wrapper.html()).toMatchSnapshot()
   })
 
@@ -64,7 +64,7 @@ test('VBottomNav.js', ({ mount }) => {
       }
     })
 
-    expect(wrapper.hasClass('bottom-nav--active')).toBe(true)
+    expect(wrapper.hasClass('v-bottom-nav--active')).toBe(true)
     expect(wrapper.html()).toMatchSnapshot()
   })
 

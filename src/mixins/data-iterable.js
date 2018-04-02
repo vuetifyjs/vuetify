@@ -52,11 +52,11 @@ export default {
     },
     nextIcon: {
       type: String,
-      default: 'chevron_right'
+      default: '$vuetify.icons.next'
     },
     prevIcon: {
       type: String,
-      default: 'chevron_left'
+      default: '$vuetify.icons.prev'
     },
     rowsPerPageItems: {
       type: Array,
@@ -214,7 +214,9 @@ export default {
   watch: {
     itemsLength (totalItems) {
       this.updatePagination({ page: 1, totalItems })
-    }
+    },
+    'computedPagination.sortBy': function () { this.updatePagination({ page: 1 }) },
+    'computedPagination.descending': function () { this.updatePagination({ page: 1 }) }
   },
 
   methods: {

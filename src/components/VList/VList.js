@@ -57,7 +57,7 @@ export default {
         this.groups.splice(index, 1)
       }
     },
-    listClick (uid, isBooted) {
+    listClick (uid) {
       if (this.expand) return
 
       for (let i = this.groups.length; i--;) {

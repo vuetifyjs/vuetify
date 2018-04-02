@@ -67,8 +67,8 @@ export default {
   },
 
   methods: {
-    groupFocus (e) {},
-    groupBlur (e) {
+    groupFocus () {},
+    groupBlur () {
       this.tabFocused = false
     },
     genLabel () {
@@ -114,7 +114,7 @@ export default {
     },
     genIcon (type, defaultCallback = null) {
       const shouldClear = type === 'append' && this.clearable && this.isDirty
-      const icon = shouldClear ? 'clear' : this[`${type}Icon`]
+      const icon = shouldClear ? '$vuetify.icons.clear' : this[`${type}Icon`]
       const callback = shouldClear
         ? this.clearableCallback
         : (this[`${type}IconCb`] || defaultCallback)

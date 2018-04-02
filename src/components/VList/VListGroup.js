@@ -38,7 +38,7 @@ export default {
     },
     appendIcon: {
       type: String,
-      default: 'keyboard_arrow_down'
+      default: '$vuetify.icons.expand'
     },
     disabled: Boolean,
     group: String,
@@ -150,7 +150,7 @@ export default {
       const icon = this.prependIcon
         ? this.prependIcon
         : this.subGroup
-          ? 'arrow_drop_down'
+          ? '$vuetify.icons.subgroup'
           : false
 
       if (!icon && !this.$slots.prependIcon) return null
