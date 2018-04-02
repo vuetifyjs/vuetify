@@ -47,7 +47,8 @@ export default {
       default: 'grey lighten-2'
     },
     circleOutlineSize: {
-      type: [Number, String]
+      type: [Number, String],
+      default: 8
     },
     circleOutlineColor: {
       type: String
