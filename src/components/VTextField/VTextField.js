@@ -10,7 +10,6 @@ import VInput from '../VInput'
 
 // Mixins
 import Maskable from '../../mixins/maskable'
-import Soloable from '../../mixins/soloable'
 
 const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
 
@@ -19,10 +18,7 @@ export default {
 
   extends: VInput,
 
-  mixins: [
-    Maskable,
-    Soloable
-  ],
+  mixins: [Maskable],
 
   inheritAttrs: false,
 
@@ -48,11 +44,14 @@ export default {
       default: 'primary'
     },
     counter: [Boolean, Number, String],
+    flat: Boolean,
     fullWidth: Boolean,
     label: String,
     placeholder: String,
     prefix: String,
     singleLine: Boolean,
+    solo: Boolean,
+    soloInverted: Boolean,
     suffix: String,
     type: {
       type: String,
@@ -63,11 +62,13 @@ export default {
   computed: {
     classes () {
       return {
-        'v-input--text': true,
-        'v-input--text--prefix': this.prefix,
-        'v-input--text--single-line': this.isSingle,
-        'v-input--text--solo': this.solo,
-        'v-input--text--box': (this.box || this.solo)
+        'v-text-field': true,
+        'v-text-field--prefix': this.prefix,
+        'v-text-field--single-line': this.isSingle,
+        'v-text-field--solo': this.isSolo,
+        'v-text-field--solo-inverted': this.soloInverted,
+        'v-text-field--box': (this.box || this.solo),
+        'elevation-0': this.flat
       }
     },
     internalValue: {
@@ -93,7 +94,10 @@ export default {
       return this.isDirty || dirtyTypes.includes(this.type)
     },
     isSingle () {
-      return this.solo || this.singleLine
+      return this.isSolo || this.singleLine
+    },
+    isSolo () {
+      return this.solo || this.soloInverted
     }
   },
 
@@ -230,25 +234,32 @@ export default {
     },
     genDefaultSlot () {
       return [
-        this.genLabel(),
-        this.prefix ? this.genAffix('prefix') : null,
-        this.genInput(),
-        this.suffix ? this.genAffix('suffix') : null,
+        this.genTextFieldWrapper(),
         this.genIconSlot(),
         this.genProgress()
       ]
     },
     genMessages () {
       return this.$createElement('div', {
-        staticClass: 'v-input--text__details'
+        staticClass: 'v-text-field__details'
       }, [
         VInput.methods.genMessages.call(this),
         this.genCounter()
       ])
     },
+    genTextFieldWrapper () {
+      return this.$createElement('div', {
+        staticClass: 'v-text-field__wrapper'
+      }, [
+        this.genLabel(),
+        this.prefix ? this.genAffix('prefix') : null,
+        this.genInput(),
+        this.suffix ? this.genAffix('suffix') : null
+      ])
+    },
     genAffix (type) {
       return this.$createElement('div', {
-        'class': `v-input--text__${type}`,
+        'class': `v-text-field__${type}`,
         ref: type
       }, this[type])
     },

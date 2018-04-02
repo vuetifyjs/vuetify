@@ -2,9 +2,9 @@
 
 exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
 
-<div class="v-input v-select v-input--text v-input--is-label-active v-input--is-dirty theme--light">
+<div class="v-input v-select v-input--text v-input--is-label-active v-input--is-dirty">
   <div class="v-input__control">
-    <div class="v-input__wrapper"
+    <div class="v-input__wrapper primary--text"
          style="height: 32px;"
     >
       <div class="menu"
@@ -44,7 +44,7 @@ exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
         </div>
       </div>
     </div>
-    <div class="v-input--text__details">
+    <div class="v-text-field__details">
       <div class="v-messages">
         <div class="v-messages__wrapper">
         </div>
@@ -57,9 +57,9 @@ exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
 
 exports[`VSelect should be clearable with prop, dirty and single select 1`] = `
 
-<div class="v-input v-select v-input--text v-input--is-label-active v-input--is-dirty theme--light">
+<div class="v-input v-select v-input--text v-input--is-label-active v-input--is-dirty">
   <div class="v-input__control">
-    <div class="v-input__wrapper"
+    <div class="v-input__wrapper primary--text"
          style="height: 32px;"
     >
       <div class="menu"
@@ -99,7 +99,7 @@ exports[`VSelect should be clearable with prop, dirty and single select 1`] = `
         </div>
       </div>
     </div>
-    <div class="v-input--text__details">
+    <div class="v-text-field__details">
       <div class="v-messages">
         <div class="v-messages__wrapper">
         </div>

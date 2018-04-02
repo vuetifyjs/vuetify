@@ -2,7 +2,7 @@
 
 exports[`VRadioGroup.vue should be in error when v-radio-group is 1`] = `
 
-<div class="v-input v-input--selection-controls v-input--radio-group v-input--radio-group--column v-input--has-state error--text theme--light">
+<div class="v-input v-input--selection-controls v-input--radio-group v-input--radio-group--column v-input--has-state error--text">
   <div class="v-input__control">
     <div class="v-input__wrapper error--text">
       <div role="radiogroup"
@@ -41,7 +41,7 @@ exports[`VRadioGroup.vue should be in error when v-radio-group is 1`] = `
 
 exports[`VRadioGroup.vue should be in error when v-radio-group is 2`] = `
 
-<div class="v-input v-input--selection-controls v-input--radio-group v-input--radio-group--column theme--light">
+<div class="v-input v-input--selection-controls v-input--radio-group v-input--radio-group--column">
   <div class="v-input__control">
     <div class="v-input__wrapper">
       <div role="radiogroup"
@@ -80,7 +80,7 @@ exports[`VRadioGroup.vue should be in error when v-radio-group is 2`] = `
 
 exports[`VRadioGroup.vue should render role on radio group 1`] = `
 
-<div class="v-input v-input--selection-controls v-input--radio-group v-input--radio-group--column theme--light">
+<div class="v-input v-input--selection-controls v-input--radio-group v-input--radio-group--column">
   <div class="v-input__control">
     <div class="v-input__wrapper">
       <div role="radiogroup"

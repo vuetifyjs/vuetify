@@ -68,9 +68,9 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
     <div class="v-datatable__actions">
       <div class="v-datatable__actions__select">
         Rows per page:
-        <div class="v-input v-select v-input--text theme--light">
+        <div class="v-input v-select v-input--text">
           <div class="v-input__control">
-            <div class="v-input__wrapper"
+            <div class="v-input__wrapper primary--text"
                  style="height: 32px;"
             >
               <div class="menu"
@@ -144,7 +144,7 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
                 </div>
               </div>
             </div>
-            <div class="v-input--text__details">
+            <div class="v-text-field__details">
             </div>
           </div>
         </div>
@@ -254,9 +254,9 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
     <div class="v-datatable__actions">
       <div class="v-datatable__actions__select">
         Rows per page:
-        <div class="v-input v-select v-input--text theme--light">
+        <div class="v-input v-select v-input--text">
           <div class="v-input__control">
-            <div class="v-input__wrapper"
+            <div class="v-input__wrapper primary--text"
                  style="height: 32px;"
             >
               <div class="menu"
@@ -330,7 +330,7 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
                 </div>
               </div>
             </div>
-            <div class="v-input--text__details">
+            <div class="v-text-field__details">
             </div>
           </div>
         </div>
@@ -442,9 +442,9 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
     <div class="v-datatable__actions">
       <div class="v-datatable__actions__select">
         Rows per page:
-        <div class="v-input v-select v-input--text theme--light">
+        <div class="v-input v-select v-input--text">
           <div class="v-input__control">
-            <div class="v-input__wrapper"
+            <div class="v-input__wrapper primary--text"
                  style="height: 32px;"
             >
               <div class="menu"
@@ -518,7 +518,7 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
                 </div>
               </div>
             </div>
-            <div class="v-input--text__details">
+            <div class="v-text-field__details">
             </div>
           </div>
         </div>

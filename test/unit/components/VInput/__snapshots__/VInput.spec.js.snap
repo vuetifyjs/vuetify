@@ -2,7 +2,7 @@
 
 exports[`VInput.js should generate an icon and match snapshot 1`] = `
 
-<div class="v-input theme--light">
+<div class="v-input">
   <div class="v-input__prepend-outer">
     <div class="v-input__icon v-input__icon--prepend">
       <i aria-hidden="true"
@@ -28,7 +28,7 @@ exports[`VInput.js should generate an icon and match snapshot 1`] = `
 
 exports[`VInput.js should generate an icon and match snapshot 2`] = `
 
-<div class="v-input theme--light">
+<div class="v-input">
   <div class="v-input__control">
     <div class="v-input__wrapper"
          style="height: 32px;"
@@ -56,7 +56,7 @@ exports[`VInput.js should generate an icon and match snapshot 2`] = `
 
 exports[`VInput.js should generate append and prepend slots 1`] = `
 
-<div class="v-input theme--light">
+<div class="v-input">
   <div class="v-input__prepend-outer">
     <div>
       prepend-icon
@@ -78,7 +78,7 @@ exports[`VInput.js should generate append and prepend slots 1`] = `
 
 exports[`VInput.js should generate append and prepend slots 2`] = `
 
-<div class="v-input theme--light">
+<div class="v-input">
   <div class="v-input__control">
     <div class="v-input__wrapper"
          style="height: 32px;"
@@ -95,7 +95,7 @@ exports[`VInput.js should generate append and prepend slots 2`] = `
 
 exports[`VInput.js should generate append and prepend slots 3`] = `
 
-<div class="v-input theme--light">
+<div class="v-input">
   <div class="v-input__prepend-outer">
     <div>
       prepend
@@ -117,7 +117,7 @@ exports[`VInput.js should generate append and prepend slots 3`] = `
 
 exports[`VInput.js should generate append and prepend slots 4`] = `
 
-<div class="v-input theme--light">
+<div class="v-input">
   <div class="v-input__control">
     <div class="v-input__wrapper"
          style="height: 32px;"
@@ -139,7 +139,7 @@ exports[`VInput.js should generate append and prepend slots 4`] = `
 
 exports[`VInput.js should not generate input details 1`] = `
 
-<div class="v-input theme--light">
+<div class="v-input">
   <div class="v-input__control">
     <div class="v-input__wrapper"
          style="height: 32px;"

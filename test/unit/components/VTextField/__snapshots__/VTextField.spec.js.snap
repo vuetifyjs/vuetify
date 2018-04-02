@@ -18,26 +18,28 @@ exports[`VTextField.js should calculate element height when using auto-grow prop
 
 exports[`VTextField.js should have prefix and suffix 1`] = `
 
-<div class="v-input v-input--text v-input--text--prefix theme--light">
+<div class="v-input v-text-field v-text-field--prefix">
   <div class="v-input__control">
-    <div class="v-input__wrapper"
+    <div class="v-input__wrapper primary--text"
          style="height: 32px;"
     >
-      <label class="v-label"
-             style="left: 12px; position: absolute;"
-      >
-      </label>
-      <div class="v-input--text__prefix">
-        $
-      </div>
-      <input tabindex="0"
-             type="text"
-      >
-      <div class="v-input--text__suffix">
-        .com
+      <div class="v-text-field__wrapper">
+        <label class="v-label"
+               style="left: 12px; position: absolute;"
+        >
+        </label>
+        <div class="v-text-field__prefix">
+          $
+        </div>
+        <input tabindex="0"
+               type="text"
+        >
+        <div class="v-text-field__suffix">
+          .com
+        </div>
       </div>
     </div>
-    <div class="v-input--text__details">
+    <div class="v-text-field__details">
       <div class="v-messages">
         <div class="v-messages__wrapper">
         </div>
@@ -96,21 +98,23 @@ exports[`VTextField.js should match textarea snapshot 1`] = `
 
 exports[`VTextField.js should not display counter when set to false 1`] = `
 
-<div class="v-input v-input--text theme--light">
+<div class="v-input v-text-field">
   <div class="v-input__control">
-    <div class="v-input__wrapper"
+    <div class="v-input__wrapper primary--text"
          style="height: 32px;"
     >
-      <label class="v-label"
-             style="left: 0px; position: absolute;"
-      >
-      </label>
-      <input maxlength="50"
-             tabindex="0"
-             type="text"
-      >
+      <div class="v-text-field__wrapper">
+        <label class="v-label"
+               style="left: 0px; position: absolute;"
+        >
+        </label>
+        <input maxlength="50"
+               tabindex="0"
+               type="text"
+        >
+      </div>
     </div>
-    <div class="v-input--text__details">
+    <div class="v-text-field__details">
       <div class="v-messages">
         <div class="v-messages__wrapper">
         </div>
@@ -126,21 +130,23 @@ exports[`VTextField.js should not display counter when set to false 1`] = `
 
 exports[`VTextField.js should not display counter when set to false 2`] = `
 
-<div class="v-input v-input--text theme--light">
+<div class="v-input v-text-field">
   <div class="v-input__control">
-    <div class="v-input__wrapper"
+    <div class="v-input__wrapper primary--text"
          style="height: 32px;"
     >
-      <label class="v-label"
-             style="left: 0px; position: absolute;"
-      >
-      </label>
-      <input maxlength="50"
-             tabindex="0"
-             type="text"
-      >
+      <div class="v-text-field__wrapper">
+        <label class="v-label"
+               style="left: 0px; position: absolute;"
+        >
+        </label>
+        <input maxlength="50"
+               tabindex="0"
+               type="text"
+        >
+      </div>
     </div>
-    <div class="v-input--text__details">
+    <div class="v-text-field__details">
       <div class="v-messages">
         <div class="v-messages__wrapper">
         </div>
@@ -153,20 +159,22 @@ exports[`VTextField.js should not display counter when set to false 2`] = `
 
 exports[`VTextField.js should render component and match snapshot 1`] = `
 
-<div class="v-input v-input--text theme--light">
+<div class="v-input v-text-field">
   <div class="v-input__control">
-    <div class="v-input__wrapper"
+    <div class="v-input__wrapper primary--text"
          style="height: 32px;"
     >
-      <label class="v-label"
-             style="left: 0px; position: absolute;"
-      >
-      </label>
-      <input tabindex="0"
-             type="text"
-      >
+      <div class="v-text-field__wrapper">
+        <label class="v-label"
+               style="left: 0px; position: absolute;"
+        >
+        </label>
+        <input tabindex="0"
+               type="text"
+        >
+      </div>
     </div>
-    <div class="v-input--text__details">
+    <div class="v-text-field__details">
       <div class="v-messages">
         <div class="v-messages__wrapper">
         </div>
@@ -179,18 +187,20 @@ exports[`VTextField.js should render component and match snapshot 1`] = `
 
 exports[`VTextField.js should render component with async loading and custom progress and match snapshot 1`] = `
 
-<div class="v-input v-input--text v-input--is-loading theme--light">
+<div class="v-input v-text-field v-input--is-loading">
   <div class="v-input__control">
-    <div class="v-input__wrapper"
+    <div class="v-input__wrapper primary--text"
          style="height: 32px;"
     >
-      <label class="v-label"
-             style="left: 0px; position: absolute;"
-      >
-      </label>
-      <input tabindex="0"
-             type="text"
-      >
+      <div class="v-text-field__wrapper">
+        <label class="v-label"
+               style="left: 0px; position: absolute;"
+        >
+        </label>
+        <input tabindex="0"
+               type="text"
+        >
+      </div>
       <div class="progress-linear"
            style="height: 7px;"
       >
@@ -208,7 +218,7 @@ exports[`VTextField.js should render component with async loading and custom pro
         </div>
       </div>
     </div>
-    <div class="v-input--text__details">
+    <div class="v-text-field__details">
       <div class="v-messages">
         <div class="v-messages__wrapper">
         </div>
@@ -221,18 +231,20 @@ exports[`VTextField.js should render component with async loading and custom pro
 
 exports[`VTextField.js should render component with async loading and match snapshot 1`] = `
 
-<div class="v-input v-input--text v-input--is-loading theme--light">
+<div class="v-input v-text-field v-input--is-loading">
   <div class="v-input__control">
-    <div class="v-input__wrapper"
+    <div class="v-input__wrapper primary--text"
          style="height: 32px;"
     >
-      <label class="v-label"
-             style="left: 0px; position: absolute;"
-      >
-      </label>
-      <input tabindex="0"
-             type="text"
-      >
+      <div class="v-text-field__wrapper">
+        <label class="v-label"
+               style="left: 0px; position: absolute;"
+        >
+        </label>
+        <input tabindex="0"
+               type="text"
+        >
+      </div>
       <div class="progress-linear"
            style="height: 2px;"
       >
@@ -250,7 +262,7 @@ exports[`VTextField.js should render component with async loading and match snap
         </div>
       </div>
     </div>
-    <div class="v-input--text__details">
+    <div class="v-text-field__details">
       <div class="v-messages">
         <div class="v-messages__wrapper">
         </div>

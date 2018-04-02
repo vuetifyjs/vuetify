@@ -40,9 +40,6 @@ export default {
   },
 
   computed: {
-    classesColor () {
-      return this.addTextColorClassChecks({}, this.validationState)
-    },
     classesInput () {
       return {
         ...this.classes,
@@ -53,8 +50,8 @@ export default {
         'v-input--is-focused': this.isFocused,
         'v-input--is-loading': this.loading !== false,
         ...this.classesColor,
-        'theme--light': !this.dark,
-        'theme--dark': this.dark
+        ...this.addTextColorClassChecks({}, this.validationState),
+        ...this.themeClasses
       }
     },
     // Implementing components can
@@ -140,7 +137,10 @@ export default {
     genInputWrapper () {
       return this.$createElement('div', {
         staticClass: 'v-input__wrapper',
-        'class': this.classesColor,
+        'class': this.addTextColorClassChecks(
+          {},
+          this.hasState ? this.validationState : this.color
+        ),
         style: {
           height: this.computedHeight
         }

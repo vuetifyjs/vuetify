@@ -1,18 +1,37 @@
 @import '../bootstrap'
 @import '../theme'
 
-v-input--text($material)
+v-text-field($material)
   &:not(.v-input--has-state)
     .v-input__wrapper:before
-      background-color: $material.dividers
+      background-color: $material.input-bottom-line
+
+    &:hover
+      .v-input__wrapper:before
+        background-color: $material.text.primary
 
   &__prefix,
   &__suffix
     color: $material.text.secondary
 
-theme(v-input--text, "v-input--text")
+  &.v-text-field--solo
+    background: $material.cards
 
-.v-input--text
+  &.v-text-field--solo-inverted
+    background: rgba($material.inputs.solo-inverted)
+
+    &.v-input--is-focused
+      background: rgba($material.inputs.solo-inverted-focused)
+
+      // May need to remove this
+      .icon,
+      input,
+      label
+        color: $material.inputs.solo-inverted-focused-text
+
+theme(v-text-field, "v-text-field")
+
+.v-text-field
   &__details
     display: flex
     flex: 1 0 auto
@@ -30,17 +49,50 @@ theme(v-input--text, "v-input--text")
   &__suffix
     padding: 8px 0 8px 4px
 
+  &__wrapper
+    flex: 1 1 auto
+    position: relative
+
+  &--solo
+    padding: 8px 16px
+    elevation(2)
+
+    .v-input__icon--prepend
+      margin-left: 0
+
+    .v-input__icon--outer
+      margin-right: 0
+
+    .v-input__wrapper
+      margin-bottom: 0
+      position: static
+
+      &:before,
+      &:after
+        display: none
+
+    .v-text-field__details
+      bottom: -22px
+      position: absolute
+      width: 100%
+
   .v-counter
     white-space: nowrap
 
   .v-label
+    line-height: normal // needed because of hidden overflow clips y axis of text
+    max-width: 100%
+    overflow: hidden
+    text-overflow: ellipsis
     top: calc(50% - 10px)
     transform-origin: top left
+    white-space: nowrap
 
-  &.v-input--is-focused,
-  &.v-input--is-label-active
-    .v-label
-      transform: translateY(-19px) scale(0.75)
+  &:not(.v-text-field--solo)
+    &.v-input--is-focused,
+    &.v-input--is-label-active
+      .v-label--active
+        transform: translateY(-19px) scale(0.75)
 
   &.v-input--is-focused
     .v-input__wrapper:after
@@ -72,383 +124,3 @@ theme(v-input--text, "v-input--text")
       background-color: currentColor
       height: 2px
       transform: scaleX(0)
-
-// v-input--text($material)
-//   &__wrapper:before
-//     background-color: $material.dividers
-
-//   .v-input__wrapper:before
-//     background-image: linear-gradient(
-//       to right,
-//       $material.text.disabled 0,
-//       $material.text.disabled 33%,
-//       transparent 0
-//     )
-
-//   &--box
-//     background: $material.inputs.box
-
-//   &--solo
-//     background: $material.cards
-
-//   &__prefix,
-//   &__suffix
-//     color: $material.text.secondary
-
-// theme(v-input--text, "v-input--text")
-
-// .v-input--text
-//   .v-label--active
-//     transform: translate(0, -10px) scale(.75)
-
-//   &--prefix
-//     &:not(.v-input--text--solo)
-//       .v-label
-//         left: 14px
-
-//   &--prefix
-//     &.v-input--is-dirty,
-//     &.v-input--is-focused
-//       &:not(.v-input--text--single-line)
-//         .v-label
-//           left: 0
-
-//   &.v-input--text--box
-//     border-radius: $card-border-radius
-//     cursor: text
-//     margin: 16px 0 28px
-//     position: relative
-//     elevation(2)
-
-//     .v-input__wrapper
-//       align-items: center
-//       border-bottom: none !important
-//       height: 52px
-//       padding: 0 16px
-
-//     .v-input__append-outer,
-//     .v-input__prepend-outer
-//       align-self: center
-
-//     .v-label--active
-//       transform: scale(0.75)
-
-//     input
-//       align-self: flex-end
-
-//     &:after
-//       background-color: currentColor
-//       border-bottom-left-radius: $card-border-radius
-//       border-bottom-right-radius: $card-border-radius
-//       bottom: -1px
-//       content: ''
-//       height: 2px
-//       left: 0
-//       position: absolute
-//       transition: $primary-transition
-//       transform: scaleX(0)
-//       width: 100%
-
-//     .v-input__wrapper
-//       &:after
-//         display: none
-
-//     .v-input__append-inner,
-//     .v-input__append-outer
-//       padding-right: 16px
-
-//     .v-input__prepend-outer
-//       padding-left: 16px
-
-//       + .v-input__control .v-input__wrapper
-//         padding: 0
-
-//     &.v-input--is-focused:after
-//       transform: scaleX(1)
-
-//   &.v-input--text--solo
-//     input
-//       border-bottom: 1px solid transparent // Input not lining up with label
-//       height: 100%
-
-//     &:after
-//       display: none
-
-//   &__prefix
-//     margin-right: 4px
-
-//   &__prefix,
-//   &__suffix
-//     height: 32px
-//     font-size: 16px
-//     line-height: 1
-//     padding: 8px 0 8px
-
-//   .v-input__wrapper
-//     &:before,
-//     &:after
-//       bottom: -1px
-//       content: ''
-//       left: 0
-//       position: absolute
-//       transition: $primary-transition
-//       width: 100%
-
-//     &:before
-//       background-color: transparent
-//       background-position: bottom
-//       background-repeat: repeat-x
-//       background-size: 3px 1px
-//       height: 1px
-
-//     &:after
-//       background-color: currentColor
-//       height: 2px
-//       transform: scaleX(0)
-
-// textfield($material)
-//   &.input-group--text-field-box
-//     .input-group__input
-//       background: $material.buttons.focused-alt
-
-//   input::placeholder,
-//   textarea::placeholder
-//     color: $material.text.disabled
-
-//   &:not(.input-group--error)
-//     .input-group__counter
-//       color: $material.text.secondary
-
-// theme(textfield, "input-group--text-field")
-
-// /** Label */
-// .input-group--text-field label
-//   position: absolute
-//   top: $input-group-text-field-label-top
-//   left: 0
-
-// /** Input */
-// .input-group--text-field
-//   // TODO: Revisit in 1.1 refactor
-//   // Input was mis-aligned by 1px
-//   input
-//     padding-bottom: 1px
-
-//   input,
-//   textarea
-//     font-size: $input-font-size
-
-//     &::placeholder
-//       color: inherit
-//       transition: .3s $transition.swing
-
-// .input-group--text-field input
-//   box-shadow: none
-//   flex: 1
-//   height: $input-height
-//   margin: 0
-//   min-width: 0
-//   overflow: hidden
-//   text-overflow: ellipsis
-//   white-space: nowrap
-
-//   &:focus
-//     outline: none
-
-//   &:disabled
-//     pointer-events: none
-
-// /** Textarea */
-// .input-group--text-field
-//   textarea
-//     flex: 1 1
-
-//     &:focus
-//       outline: none
-
-// .input-group--text-field.input-group--textarea
-//   label
-//     top: 13px
-
-//   .input-group__input
-//     border-radius: 2px
-//     transition: .4s $transition.fast-in-fast-out
-
-//   textarea
-//     font-size: $input-font-size
-//     transition: .3s $transition.swing
-
-//   &:not(.input-group--full-width)
-//     label
-//       top: 30px
-//       left: 15px
-
-//     .input-group__input
-//       padding: 30px 0 0 13px
-
-//   .input-group__details
-//     &:before,
-//     &:after
-//       opacity: 0
-
-// /** Counter */
-// .input-group--text-field
-//   .input-group__counter
-//     margin-left: auto
-
-//     &--error
-//       color: inherit
-
-// /** Input States */
-// .input-group--text-field
-//   &.input-group--placeholder.input-group--dirty
-//     input::placeholder,
-//     textarea::placeholder
-//       opacity: 0
-
-// /** No Resize */
-// .input-group--text-field
-//   &.input-group--no-resize textarea
-//       resize: none
-
-// /** Types */
-// .input-group--text-field
-//   // Icons
-//   &.input-group--prepend-icon
-//     .input-group__prepend-icon
-//       align-items: center
-//       display: flex
-//       justify-content: flex-start
-//       min-width: 40px
-
-//     .input-group__details
-//       margin-left: auto
-//       max-width: calc(100% - 40px)
-
-//     label
-//       left: 40px
-
-//   &:not(.input-group--single-line)
-//     &.input-group--focused,
-//     &.input-group--placeholder
-//       label
-//         opacity: 1
-
-//       &:not(.input-group--textarea)
-//         label
-//           transform: translate(0, -18px) scale(.75)
-
-//       &:not(.input-group--full-width).input-group--textarea
-//         label
-//           transform: translate(0, -8px) scale(.75)
-
-//       &.input-group--text-field-box
-//         label
-//           transform: translate(0, -10px) scale(.75)
-
-//   &.input-group--dirty
-//     &.input-group--select,
-//     &:not(.input-group--textarea)
-//       label
-//         transform: translate(0, -18px) scale(.75)
-
-//     &:not(.input-group--full-width).input-group--textarea
-//       label
-//         transform: translate(0, -8px) scale(.75)
-
-//   // Multi Line
-//   &.input-group--multi-line
-//     textarea
-//       padding-top: 4px
-
-//   // Full Width
-//   &.input-group--full-width
-//     padding: 16px
-
-//     label
-//       margin-left: $grid-gutters.lg
-
-//     .input-group__details:before, .input-group__details:after
-//       display: none
-
-// /** Prefix/Suffix */
-// .input-group--prefix
-//   &:not(.input-group--focused):not(.input-group--dirty)
-//     label
-//       left: 16px
-
-// .input-group--prefix,
-// .input-group--suffix
-//   .input-group--text-field__prefix,
-//   .input-group--text-field__suffix
-//     align-items: center
-//     display: inline-flex
-//     font-size: 16px
-//     margin-top: 1px
-
-//   .input-group--text-field__prefix
-//     margin-right: 3px
-
-//   .input-group--text-field__suffix
-//     margin-left: 3px
-
-// /** Box */
-// .input-group--text-field-box
-//   input, textarea
-//     cursor: pointer
-
-//   label
-//     left: 16px
-
-//   .input-group__input
-//     align-items: flex-end
-//     border-radius: 4px 4px 0 0
-//     cursor: pointer
-//     min-height: 56px
-//     user-select: none
-
-//   .input-group__details
-//     padding: 8px 16px 0
-//     user-select: none
-
-//     &:before,
-//     &:after
-//       height: 2px
-//       border-bottom-left-radius: 4px
-//       border-bottom-right-radius: 4px
-
-//   &.input-group--multi-line
-//     textarea
-//       padding-left: 24px
-//       padding-right: 24px
-
-//   &:not(.input-group--textarea)
-//     &.input-group--multi-line
-//       .input-group__input
-//         padding-top: 26px
-
-//       label
-//         top: 26px
-
-//     &:not(.input-group--multi-line)
-//       .input-group__input
-//         padding-left: 16px
-//         padding-right: 16px
-
-//       label
-//         top: 32px
-
-//     &:not(.input-group--single-line)
-//       &.input-group--focused,
-//       &.input-group--dirty
-//         label
-//           transform: translate(0, -10px) scale(0.75)
-//   // Icons
-//   &.input-group--prepend-icon
-//     .input-group__details
-//       &:before, &:after
-//         margin-left: 56px
-//         max-width: calc(100% - 56px)
-
-//     label
-//       left: 56px
