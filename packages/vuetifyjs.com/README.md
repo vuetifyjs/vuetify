@@ -20,6 +20,7 @@ yarn dev
 ``` bash
 git clone https://github.com/vuetifyjs/vuetify.git
 yarn
+yarn build
 yarn link
 yarn watch
 ```
