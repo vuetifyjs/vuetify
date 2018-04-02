@@ -110,8 +110,7 @@ export default {
         children.push(this.$createElement(VProgressCircular, {
           props: {
             indeterminate: true,
-            size: 23,
-            width: 2
+            size: 26
           }
         }))
       } else {
