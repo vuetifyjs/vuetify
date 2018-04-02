@@ -44,7 +44,7 @@ export default {
       type: String,
       default: 'Rows per page:'
     },
-    nowrapExpanded: {
+    noWrappedExpandSlots: {
       type: Boolean,
       default: false
     },

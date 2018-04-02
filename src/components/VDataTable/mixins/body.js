@@ -19,9 +19,13 @@ export default {
       const children = []
 
       if (this.isExpanded(props.item)) {
-        const expand = this.nowrapExpanded ? this.$scopedSlots.expand(props) : this.genWrappedExpandedRow(props)
+        const expand = this.noWrappedExpandSlots ? this.$scopedSlots.expand(props) : this.genWrappedExpandedRow(props)
 
         children.push(expand)
+      }
+
+      if (this.noWrappedExpandSlots) {
+        return children
       }
 
       const transition = this.$createElement('transition-group', {
@@ -33,7 +37,7 @@ export default {
         on: ExpandTransitionGenerator('datatable__expand-col--expanded')
       }, children)
 
-      return this.nowrapExpanded ? children : this.genTR([transition], { class: 'datatable__expand-row' })
+      return this.genTR([transition], { class: 'datatable__expand-row' })
     },
     genFilteredItems () {
       if (!this.$scopedSlots.items) {
