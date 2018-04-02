@@ -13,6 +13,7 @@ theme(timeline, "timeline")
   margin: 0 auto
   padding: 0 30px 0 30px
   overflow: hidden
+  width: 100%
 
   &--hover
     cursor: pointer
@@ -65,14 +66,14 @@ theme(timeline, "timeline")
     position: absolute
     border-radius: 50%
     background: inherit
-    box-shadow: currentColor 0px 0px 0px 8px 
+    box-shadow: currentColor 0px 0px 0px 8px
     text-align: center
     left: 10%
     top: 0
     padding: 0
     margin: 0 0 0 -28px
 
-@media screen and (max-width: $grid-breakpoints.sm)
+@media screen and (max-width: ($grid-breakpoints.md))
   .timeline
     padding: 0 15px 0 15px
 
