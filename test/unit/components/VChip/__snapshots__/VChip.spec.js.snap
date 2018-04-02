@@ -37,7 +37,7 @@ exports[`VChip.vue should be removable 2`] = `
 
 `;
 
-exports[`VChip.vue should have a chip class 1`] = `
+exports[`VChip.vue should have a v-chip class 1`] = `
 
 <span tabindex="0"
       class="v-chip"
