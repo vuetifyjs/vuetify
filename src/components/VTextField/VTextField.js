@@ -165,9 +165,12 @@ export default {
       if (this.isDirty && this.isSingle) return null
 
       const isSingleLine = this.isSingle
-      const left = (!this.prefix || this.isFocused || this.isDirty)
-        ? 0
-        : 12
+      let left = 0
+
+      if (this.prefix &&
+        (isSingleLine || !this.isFocused) &&
+        !this.isDirty
+      ) left = 12
 
       const data = {
         props: {
