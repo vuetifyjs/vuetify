@@ -27,8 +27,8 @@ export default {
   computed: {
     classes () {
       return {
-        'data-iterator': true,
-        'data-iterator--select-all': this.selectAll !== false,
+        'v-data-iterator': true,
+        'v-data-iterator--select-all': this.selectAll !== false,
         'theme--dark': this.dark,
         'theme--light': this.light
       }

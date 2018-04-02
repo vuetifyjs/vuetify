@@ -29,7 +29,7 @@ test('VDataIterator.js', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.html()).toMatchSnapshot()
 
-    const content = wrapper.find('.data-iterator div div')[0]
+    const content = wrapper.find('.v-data-iterator div div')[0]
     expect(content.element.textContent).toBe('No matching records found')
 
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
@@ -61,7 +61,7 @@ test('VDataIterator.js', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.html()).toMatchSnapshot()
 
-    const content = wrapper.find('.data-iterator div div')[0]
+    const content = wrapper.find('.v-data-iterator div div')[0]
     expect(content.element.textContent).toBe('No data available')
 
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
@@ -118,7 +118,7 @@ test('VDataIterator.js', ({ mount, compileToFunctions }) => {
 
     const wrapper = mount(component)
 
-    const mainDiv = wrapper.find('.data-iterator')[0]
+    const mainDiv = wrapper.find('.v-data-iterator')[0]
     expect(mainDiv.hasAttribute('id')).toBe(false)
 
     var button = mainDiv.find('button')[0]
