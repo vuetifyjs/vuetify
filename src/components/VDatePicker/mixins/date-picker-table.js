@@ -65,13 +65,13 @@ export default {
       const isCurrent = value === this.current
 
       const classes = {
-        'btn--active': isSelected,
-        'btn--flat': !isSelected,
-        'btn--icon': isSelected && !isDisabled && isFloating,
-        'btn--floating': isFloating,
-        'btn--depressed': !isFloating && isSelected,
-        'btn--disabled': isDisabled || (this.disabled && isSelected),
-        'btn--outline': isCurrent && !isSelected
+        'v-btn--active': isSelected,
+        'v-btn--flat': !isSelected,
+        'v-btn--icon': isSelected && !isDisabled && isFloating,
+        'v-btn--floating': isFloating,
+        'v-btn--depressed': !isFloating && isSelected,
+        'v-btn--disabled': isDisabled || (this.disabled && isSelected),
+        'v-btn--outline': isCurrent && !isSelected
       }
 
       if (isSelected) return this.addBackgroundColorClassChecks(classes)
@@ -82,14 +82,14 @@ export default {
       const isDisabled = !isDateAllowed(value, this.min, this.max, this.allowedDates)
 
       return this.$createElement('button', {
-        staticClass: 'btn',
+        staticClass: 'v-btn',
         'class': this.genButtonClasses(value, isDisabled, isFloating),
         attrs: {
           type: 'button'
         },
         domProps: {
           disabled: isDisabled,
-          innerHTML: `<div class="btn__content">${this.formatter(value)}</div>`
+          innerHTML: `<div class="v-btn__content">${this.formatter(value)}</div>`
         },
         on: isDisabled ? {} : {
           click: () => this.$emit('input', value)

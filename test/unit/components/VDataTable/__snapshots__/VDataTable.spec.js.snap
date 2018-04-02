@@ -151,10 +151,10 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
         </div>
         <button disabled="disabled"
                 type="button"
-                class="btn btn--disabled btn--flat btn--icon"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--icon"
                 aria-label="Previous page"
         >
-          <div class="btn__content">
+          <div class="v-btn__content">
             <i aria-hidden="true"
                class="icon material-icons"
             >
@@ -164,10 +164,10 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
         </button>
         <button disabled="disabled"
                 type="button"
-                class="btn btn--disabled btn--flat btn--icon"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--icon"
                 aria-label="Next page"
         >
-          <div class="btn__content">
+          <div class="v-btn__content">
             <i aria-hidden="true"
                class="icon material-icons"
             >
@@ -333,10 +333,10 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
         </div>
         <button disabled="disabled"
                 type="button"
-                class="btn btn--disabled btn--flat btn--icon"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--icon"
                 aria-label="Previous page"
         >
-          <div class="btn__content">
+          <div class="v-btn__content">
             <i aria-hidden="true"
                class="icon material-icons"
             >
@@ -346,10 +346,10 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
         </button>
         <button disabled="disabled"
                 type="button"
-                class="btn btn--disabled btn--flat btn--icon"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--icon"
                 aria-label="Next page"
         >
-          <div class="btn__content">
+          <div class="v-btn__content">
             <i aria-hidden="true"
                class="icon material-icons"
             >
@@ -517,10 +517,10 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
         </div>
         <button disabled="disabled"
                 type="button"
-                class="btn btn--disabled btn--flat btn--icon"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--icon"
                 aria-label="Previous page"
         >
-          <div class="btn__content">
+          <div class="v-btn__content">
             <i aria-hidden="true"
                class="icon material-icons"
             >
@@ -530,10 +530,10 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
         </button>
         <button disabled="disabled"
                 type="button"
-                class="btn btn--disabled btn--flat btn--icon"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--icon"
                 aria-label="Next page"
         >
-          <div class="btn__content">
+          <div class="v-btn__content">
             <i aria-hidden="true"
                class="icon material-icons"
             >
@@ -613,10 +613,10 @@ exports[`VDataTable.vue should match a snapshot with single rows-per-page-items 
         </div>
         <button disabled="disabled"
                 type="button"
-                class="btn btn--disabled btn--flat btn--icon"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--icon"
                 aria-label="Previous page"
         >
-          <div class="btn__content">
+          <div class="v-btn__content">
             <i aria-hidden="true"
                class="icon material-icons"
             >
@@ -625,10 +625,10 @@ exports[`VDataTable.vue should match a snapshot with single rows-per-page-items 
           </div>
         </button>
         <button type="button"
-                class="btn btn--flat btn--icon"
+                class="v-btn v-btn--flat v-btn--icon"
                 aria-label="Next page"
         >
-          <div class="btn__content">
+          <div class="v-btn__content">
             <i aria-hidden="true"
                class="icon material-icons"
             >
