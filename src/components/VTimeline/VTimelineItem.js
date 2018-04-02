@@ -15,6 +15,7 @@ export default {
     'hoverParent',
     'raisedParent',
     'circleFillColorParent',
+    'circleOutlineSizeParent',
     'circleOutlineColorParent',
     'lineSizeParent',
     'hideCircleOutlineParent'
