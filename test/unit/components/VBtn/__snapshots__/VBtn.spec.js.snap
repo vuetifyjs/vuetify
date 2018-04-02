@@ -1,121 +1,148 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+import { test } from '@/test'
+import Vue from 'vue'
+import VBtn from '@/components/VBtn'
+import VProgressCircular from '@/components/VProgressCircular'
 
-exports[`VBtn.js should render a <button> tag when using to prop 1`] = `
+const stub = {
+  name: 'router-link',
+  render: h => h('button')
+}
 
-<button class="btn btn--router">
-</button>
+test('VBtn.js', ({ mount, compileToFunctions }) => {
+  it('should render component and match snapshot', () => {
+    const wrapper = mount(VBtn)
 
-`;
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 
-exports[`VBtn.js should render an <a> tag when using href prop 1`] = `
+  it('should render component with color prop and match snapshot', () => {
+    const wrapper1 = mount(VBtn, {
+      propsData: {
+        color: 'green darken-1'
+      }
+    })
 
-<a href="http://www.google.com"
-   class="btn"
->
-  <div class="btn__content">
-  </div>
-</a>
+    expect(wrapper1.html()).toMatchSnapshot()
 
-`;
+    const wrapper2 = mount(VBtn, {
+      propsData: {
+        color: 'green darken-1',
+        flat: true
+      }
+    })
 
-exports[`VBtn.js should render component and match snapshot 1`] = `
+    expect(wrapper2.html()).toMatchSnapshot()
+  })
 
-<button type="button"
-        class="btn"
->
-  <div class="btn__content">
-  </div>
-</button>
+  it('should render component with loader slot and match snapshot', () => {
+    const wrapper = mount(VBtn, {
+      propsData: {
+        loading: true
+      },
+      slots: {
+        loader: [compileToFunctions('<span>loader</span>')]
+      }
+    })
 
-`;
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 
-exports[`VBtn.js should render component with color prop and match snapshot 1`] = `
+  it('should render component with loader and match snapshot', () => {
+    const wrapper = mount(VBtn, {
+      propsData: {
+        loading: true
+      }
+    })
 
-<button type="button"
-        class="btn green darken-1"
->
-  <div class="btn__content">
-  </div>
-</button>
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 
-`;
+  it('should render an <a> tag when using href prop', () => {
+    const wrapper = mount(VBtn, {
+      propsData: {
+        href: 'http://www.google.com'
+      }
+    })
 
-exports[`VBtn.js should render component with color prop and match snapshot 2`] = `
+    expect(wrapper.is('a')).toBe(true)
+    expect(wrapper.getAttribute('href')).toBe('http://www.google.com')
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 
-<button type="button"
-        class="btn btn--flat green--text text--darken-1"
->
-  <div class="btn__content">
-  </div>
-</button>
+  it('should render a <button> tag when using to prop', () => {
+    const instance = Vue.extend()
+    instance.component('router-link', stub)
 
-`;
+    const wrapper = mount(VBtn, {
+      propsData: {
+        to: '/home'
+      },
+      instance
+    })
 
-exports[`VBtn.js should render component with loader and match snapshot 1`] = `
+    expect(wrapper.is('button')).toBe(true)
+    expect(wrapper.vm.$props.to).toBe('/home')
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 
-<button type="button"
-        class="btn btn--loader"
->
-  <div class="btn__content">
-  </div>
-  <span class="btn__loading">
-    <div class="progress-circular progress-circular--indeterminate"
-         style="height: 23px; width: 23px;"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg"
-           viewbox="21.904761904761905 21.904761904761905 43.80952380952381 43.80952380952381"
-      >
-        <circle fill="transparent"
-                cx="43.80952380952381"
-                cy="43.80952380952381"
-                r="20"
-                stroke-width="3.8095238095238093"
-                stroke-dasharray="125.664"
-                stroke-dashoffset="125.66370614359172px"
-                class="progress-circular__overlay"
-        >
-        </circle>
-      </svg>
-      <div class="progress-circular__info">
-      </div>
-    </div>
-  </span>
-</button>
+  it('should render specified tag when using tag prop', () => {
+    const wrapper = mount(VBtn, {
+      propsData: {
+        tag: 'a'
+      }
+    })
 
-`;
+    expect(wrapper.is('a')).toBe(true)
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 
-exports[`VBtn.js should render component with loader slot and match snapshot 1`] = `
+  it('should register and unregister', () => {
+    const register = jest.fn()
+    const unregister = jest.fn()
 
-<button type="button"
-        class="btn btn--loader"
->
-  <div class="btn__content">
-  </div>
-  <span class="btn__loading">
-    <span>
-      loader
-    </span>
-  </span>
-</button>
+    const wrapper = mount(VBtn, {
+      provide: {
+        buttonGroup: {
+          register: register,
+          unregister: unregister
+        }
+      }
+    })
 
-`;
+    expect(register).toHaveBeenCalled()
+    wrapper.destroy()
+    expect(unregister).toHaveBeenCalled()
+  })
 
-exports[`VBtn.js should render specified tag when using tag prop 1`] = `
+  it('should emit a click event', async () => {
+    const instance = Vue.extend()
+    instance.component('router-link', stub)
 
-<a class="btn">
-  <div class="btn__content">
-  </div>
-</a>
+    const wrapper = mount(VBtn, {
+      propsData: {
+        href: '#!'
+      },
+      instance
+    })
 
-`;
+    const click = jest.fn()
+    wrapper.vm.$on('click', click)
+    wrapper.trigger('click')
 
-exports[`VBtn.js should use custom active-class 1`] = `
+    wrapper.setProps({ href: undefined, to: '/foo' })
+    wrapper.trigger('click')
 
-<button type="button"
-        class="btn foo"
->
-  <div class="btn__content">
-  </div>
-</button>
+    expect(click.mock.calls.length).toBe(2)
+  })
 
-`;
+  it('should use custom active-class', () => {
+    const wrapper = mount(VBtn, {
+      propsData: {
+        inputValue: true,
+        activeClass: 'foo'
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+})
