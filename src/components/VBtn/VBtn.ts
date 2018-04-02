@@ -112,8 +112,7 @@ const VBtn = mixins(
         children.push(this.$createElement(VProgressCircular as ComponentOptions<Vue>, {
           props: {
             indeterminate: true,
-            size: 26,
-            width: 2
+            size: 26
           }
         }))
       } else {
