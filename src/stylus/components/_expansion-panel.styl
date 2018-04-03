@@ -2,7 +2,7 @@
 @import '../theme'
 
 /** Theme */
-expansion-panel($material)
+v-expansion-panel($material)
   .v-expansion-panel__container
     border-top: 1px solid rgba($material.fg-color, $material.divider-percent)
     background-color: $material.cards
@@ -17,7 +17,7 @@ expansion-panel($material)
       &:focus
         background-color: $material.v-expansion-panels.focus
 
-theme(v-expansion-panel, "v-expansion-panel")
+theme(expansion-panel, "v-expansion-panel")
 
 .v-expansion-panel
   display: flex
