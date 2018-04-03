@@ -1,8 +1,12 @@
+// Styles
+import '../../stylus/components/_textarea.styl'
+
+// Extensions
 import VTextField from '../VTextField/VTextField'
 
 /* @vue/component */
 export default {
-  name: 'v-text-area',
+  name: 'v-textarea',
 
   extends: VTextField,
 
@@ -23,14 +27,22 @@ export default {
       type: [Number, String],
       default: 5,
       validator: v => !isNaN(parseInt(v, 10))
-    }
+    },
+    textarea: Boolean,
   },
 
   computed: {
     classes () {
       return {
-        // TODO
+        'v-textarea': true,
+        'v-textarea--textarea': this.textarea,
+        ...VTextField.computed.classes.call(this, null)
       }
+    },
+    dynamicHeight () {
+      return this.autoGrow
+        ? this.inputHeight
+        : 'auto'
     },
     noResizeHandle () {
       return this.noResize || this.autoGrow

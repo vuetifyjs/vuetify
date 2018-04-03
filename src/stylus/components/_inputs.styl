@@ -3,13 +3,20 @@
 
 /* Theme */
 v-input($material)
-  input
-    color: $material.text.primary
+  input::placeholder,
+  textarea::placeholder
+    color: $material.text.disabled
 
-  &--is-disabled
-    .v-input__label,
-    input
-      color: $material.text.disabled
+  &:not(.v-input--has-state)
+    input,
+    textarea
+      color: $material.text.primary
+
+    &--is-disabled
+      .v-input__label,
+      input,
+      textarea
+        color: $material.text.disabled
 
 theme(v-input, "v-input")
 
@@ -20,16 +27,24 @@ theme(v-input, "v-input")
   margin-top: 16px
   text-align: left
 
-  input
+  input,
+  textarea
     flex: 1 1 auto
-    height: 32px
     padding: 8px 0 8px
     line-height: 1
-    width: 100%
+    width: auto
 
     &:focus,
     &:active
       outline: none
+
+  .progress-linear
+    bottom: -1px
+    height: 2px
+    left: 0
+    margin: 0
+    padding: 0
+    position: absolute
 
   &__append-outer,
   &__prepend-outer
@@ -58,7 +73,7 @@ theme(v-input, "v-input")
     &--clear
       border-radius: 50%
 
-  &__wrapper
+  &__slot
     align-items: center
     color: inherit
     display: flex
@@ -66,10 +81,5 @@ theme(v-input, "v-input")
     position: relative
     width: 100%
 
-  .progress-linear
-    bottom: -1px
-    height: 2px
-    left: 0
-    margin: 0
-    padding: 0
-    position: absolute
+  &--is-disabled
+    pointer-events: none

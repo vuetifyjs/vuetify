@@ -20,10 +20,10 @@ exports[`VTextField.js should have prefix and suffix 1`] = `
 
 <div class="v-input v-text-field v-text-field--prefix">
   <div class="v-input__control">
-    <div class="v-input__wrapper primary--text"
+    <div class="v-input__slot primary--text"
          style="height: 32px;"
     >
-      <div class="v-text-field__wrapper">
+      <div class="v-text-field__slot">
         <label class="v-label"
                style="left: 12px; position: absolute;"
         >
@@ -100,10 +100,10 @@ exports[`VTextField.js should not display counter when set to false 1`] = `
 
 <div class="v-input v-text-field">
   <div class="v-input__control">
-    <div class="v-input__wrapper primary--text"
+    <div class="v-input__slot primary--text"
          style="height: 32px;"
     >
-      <div class="v-text-field__wrapper">
+      <div class="v-text-field__slot">
         <label class="v-label"
                style="left: 0px; position: absolute;"
         >
@@ -132,10 +132,10 @@ exports[`VTextField.js should not display counter when set to false 2`] = `
 
 <div class="v-input v-text-field">
   <div class="v-input__control">
-    <div class="v-input__wrapper primary--text"
+    <div class="v-input__slot primary--text"
          style="height: 32px;"
     >
-      <div class="v-text-field__wrapper">
+      <div class="v-text-field__slot">
         <label class="v-label"
                style="left: 0px; position: absolute;"
         >
@@ -161,10 +161,10 @@ exports[`VTextField.js should render component and match snapshot 1`] = `
 
 <div class="v-input v-text-field">
   <div class="v-input__control">
-    <div class="v-input__wrapper primary--text"
+    <div class="v-input__slot primary--text"
          style="height: 32px;"
     >
-      <div class="v-text-field__wrapper">
+      <div class="v-text-field__slot">
         <label class="v-label"
                style="left: 0px; position: absolute;"
         >
@@ -189,10 +189,10 @@ exports[`VTextField.js should render component with async loading and custom pro
 
 <div class="v-input v-text-field v-input--is-loading">
   <div class="v-input__control">
-    <div class="v-input__wrapper primary--text"
+    <div class="v-input__slot primary--text"
          style="height: 32px;"
     >
-      <div class="v-text-field__wrapper">
+      <div class="v-text-field__slot">
         <label class="v-label"
                style="left: 0px; position: absolute;"
         >
@@ -233,10 +233,10 @@ exports[`VTextField.js should render component with async loading and match snap
 
 <div class="v-input v-text-field v-input--is-loading">
   <div class="v-input__control">
-    <div class="v-input__wrapper primary--text"
+    <div class="v-input__slot primary--text"
          style="height: 32px;"
     >
-      <div class="v-text-field__wrapper">
+      <div class="v-text-field__slot">
         <label class="v-label"
                style="left: 0px; position: absolute;"
         >

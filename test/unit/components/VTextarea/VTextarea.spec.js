@@ -1,5 +1,5 @@
 import { test } from '@/test'
-import VTextArea from '@/components/VTextArea'
+import VTextarea from '@/components/VTextarea'
 import Vue from 'vue'
 
 const tabClick = 'Injection "tabClick" not found'
@@ -18,9 +18,9 @@ const stub = {
   }
 }
 
-test('VTextArea.vue', ({ mount }) => {
+test('VTextarea.vue', ({ mount }) => {
   it('should have no resize handle', async () => {
-    const wrapper = mount(VTextArea)
+    const wrapper = mount(VTextarea)
 
     expect(wrapper.vm.noResizeHandle).toBe(false)
 
@@ -38,7 +38,7 @@ test('VTextArea.vue', ({ mount }) => {
   })
 
   it('should watch lazy value', async () => {
-    const wrapper = mount(VTextArea)
+    const wrapper = mount(VTextarea)
 
     const calculateInputHeight = jest.fn()
     wrapper.setMethods({ calculateInputHeight })
@@ -60,7 +60,7 @@ test('VTextArea.vue', ({ mount }) => {
   it('should calculate height on mounted', async () => {
     const calculateInputHeight = jest.fn()
 
-    const wrapper = mount(VTextArea, {
+    const wrapper = mount(VTextarea, {
       attachToDocument: true,
       propsData: {
         autoGrow: true
@@ -73,7 +73,7 @@ test('VTextArea.vue', ({ mount }) => {
   })
 
   it('should calculate input height', async () => {
-    const wrapper = mount(VTextArea, {
+    const wrapper = mount(VTextarea, {
       propsData: {
         autoGrow: true
       }

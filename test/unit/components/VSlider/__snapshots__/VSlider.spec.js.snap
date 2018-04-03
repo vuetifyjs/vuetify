@@ -4,7 +4,7 @@ exports[`VSlider.vue should be focused when active 1`] = `
 
 <div class="v-input v-input--slider v-input--is-label-active v-input--is-dirty v-input--is-focused">
   <div class="v-input__control">
-    <div class="v-input__wrapper"
+    <div class="v-input__slot"
          style="height: 32px;"
     >
       <div role="slider"
@@ -38,7 +38,7 @@ exports[`VSlider.vue should match a snapshot 1`] = `
 
 <div class="v-input v-input--slider">
   <div class="v-input__control">
-    <div class="v-input__wrapper"
+    <div class="v-input__slot"
          style="height: 32px;"
     >
       <div role="slider"
@@ -72,7 +72,7 @@ exports[`VSlider.vue should render component with thumbLabel and match a snapsho
 
 <div class="v-input v-input--slider">
   <div class="v-input__control">
-    <div class="v-input__wrapper"
+    <div class="v-input__slot"
          style="height: 32px;"
     >
       <div role="slider"
@@ -115,7 +115,7 @@ exports[`VSlider.vue should render component with ticks and match a snapshot 1`]
 
 <div class="v-input v-input--slider v-input--slider--ticks">
   <div class="v-input__control">
-    <div class="v-input__wrapper"
+    <div class="v-input__slot"
          style="height: 32px;"
     >
       <div role="slider"

@@ -1,5 +1,5 @@
 import VTextField from './VTextField'
-import VTextArea from '../VTextArea/VTextArea'
+import VTextarea from '../VTextarea/VTextarea'
 
 // TODO: remove this in v2.0
 const wrapper = {
@@ -21,7 +21,7 @@ const wrapper = {
 
     if (props.textarea || props.multiLine) {
       data.attrs.outline = props.textarea
-      return h(VTextArea, data, children)
+      return h(VTextarea, data, children)
     } else {
       return h(VTextField, data, children)
     }

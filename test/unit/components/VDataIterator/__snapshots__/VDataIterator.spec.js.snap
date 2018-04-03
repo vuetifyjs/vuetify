@@ -12,9 +12,9 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
     <div class="v-data-iterator__actions">
       <div class="v-data-iterator__actions__select">
         Items per page:
-        <div class="v-input v-select v-input--text v-input--is-label-active v-input--is-dirty">
+        <div class="v-input v-select v-text-field v-input--is-label-active v-input--is-dirty">
           <div class="v-input__control">
-            <div class="v-input__wrapper primary--text"
+            <div class="v-input__slot primary--text"
                  style="height: 32px;"
             >
               <div class="menu"
@@ -156,9 +156,9 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
     <div class="v-data-iterator__actions">
       <div class="v-data-iterator__actions__select">
         Items per page:
-        <div class="v-input v-select v-input--text v-input--is-label-active v-input--is-dirty">
+        <div class="v-input v-select v-text-field v-input--is-label-active v-input--is-dirty">
           <div class="v-input__control">
-            <div class="v-input__wrapper primary--text"
+            <div class="v-input__slot primary--text"
                  style="height: 32px;"
             >
               <div class="menu"
@@ -291,9 +291,9 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
     <div class="v-data-iterator__actions">
       <div class="v-data-iterator__actions__select">
         Items per page:
-        <div class="v-input v-select v-input--text v-input--is-label-active v-input--is-dirty">
+        <div class="v-input v-select v-text-field v-input--is-label-active v-input--is-dirty">
           <div class="v-input__control">
-            <div class="v-input__wrapper primary--text"
+            <div class="v-input__slot primary--text"
                  style="height: 32px;"
             >
               <div class="menu"
@@ -430,9 +430,9 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
     <div class="v-data-iterator__actions">
       <div class="v-data-iterator__actions__select">
         Items per page:
-        <div class="v-input v-select v-input--text v-input--is-label-active v-input--is-dirty">
+        <div class="v-input v-select v-text-field v-input--is-label-active v-input--is-dirty">
           <div class="v-input__control">
-            <div class="v-input__wrapper primary--text"
+            <div class="v-input__slot primary--text"
                  style="height: 32px;"
             >
               <div class="menu"

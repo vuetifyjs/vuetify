@@ -1,0 +1,58 @@
+@import '../bootstrap'
+@import '../theme'
+
+v-textarea($material)
+  // Add full width functionality
+  &--textarea:not(.v-text-field--full-width)
+    border: 2px solid $material.text.secondary
+
+theme(v-textarea, "v-textarea")
+
+// Add no resize classes
+.v-textarea
+  textarea
+    min-height: 32px
+    outline: none
+
+  .v-input__slot
+    align-items: flex-start
+
+  .v-label
+    top: 5px
+
+    &--active
+      transform: translateY(-10px) scale(0.75)
+
+  &.v-textarea--textarea
+    border-radius: 2px
+
+    textarea
+      padding-top: 12px
+
+    .v-label
+      top: 0
+
+    .v-input__append-inner
+      padding-top: 0
+
+    .v-input__icon--prepend,
+    .v-input__icon--appendOuter
+      margin-top: 16px
+
+    .v-input__icon--prepend
+      margin-right: 0
+
+    &.v-input--is-focused
+      border: 2px solid currentColor
+      transition: border $primary-transition
+
+    .v-input__slot
+      margin-bottom: 0
+      padding: 16px 0 0 16px
+
+      &:before,
+      &:after
+        display: none
+
+    .v-text-field__details
+      display: none

@@ -99,7 +99,7 @@ export default {
       return this.$createElement('div', {
         staticClass: 'v-input__control'
       }, [
-        this.genInputWrapper(),
+        this.genInputSlot(),
         this.genMessages()
       ])
     },
@@ -134,9 +134,9 @@ export default {
     genDefaultSlot () {
       return this.$slots.default
     },
-    genInputWrapper () {
+    genInputSlot () {
       return this.$createElement('div', {
-        staticClass: 'v-input__wrapper',
+        staticClass: 'v-input__slot',
         'class': this.addTextColorClassChecks(
           {},
           this.hasState ? this.validationState : this.color

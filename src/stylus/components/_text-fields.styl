@@ -3,16 +3,22 @@
 
 v-text-field($material)
   &:not(.v-input--has-state)
-    .v-input__wrapper:before
+    .v-input__slot:before
       background-color: $material.input-bottom-line
 
     &:hover
-      .v-input__wrapper:before
+      .v-input__slot:before
         background-color: $material.text.primary
 
-  &__prefix,
-  &__suffix
-    color: $material.text.secondary
+  &.v-input--is-disabled
+    .v-input__slot:before
+      background-color: transparent
+      background-image: linear-gradient(
+        to right,
+        $material.text.disabled 0,
+        $material.text.disabled 33%,
+        transparent 0
+      )
 
   &.v-text-field--solo
     background: $material.cards
@@ -23,11 +29,9 @@ v-text-field($material)
     &.v-input--is-focused
       background: rgba($material.inputs.solo-inverted-focused)
 
-      // May need to remove this
-      .icon,
-      input,
-      label
-        color: $material.inputs.solo-inverted-focused-text
+  &__prefix,
+  &__suffix
+    color: $material.text.secondary
 
 theme(v-text-field, "v-text-field")
 
@@ -49,7 +53,7 @@ theme(v-text-field, "v-text-field")
   &__suffix
     padding: 8px 0 8px 4px
 
-  &__wrapper
+  &__slot
     display: flex
     flex: 1 1 auto
     position: relative
@@ -61,10 +65,10 @@ theme(v-text-field, "v-text-field")
     .v-input__icon--prepend
       margin-left: 0
 
-    .v-input__icon--outer
+    .v-input__icon--appendOuter
       margin-right: 0
 
-    .v-input__wrapper
+    .v-input__slot
       margin-bottom: 0
       position: static
 
@@ -89,18 +93,15 @@ theme(v-text-field, "v-text-field")
     transform-origin: top left
     white-space: nowrap
 
-  &:not(.v-text-field--solo)
-    &.v-input--is-focused,
-    &.v-input--is-label-active
-      .v-label--active
-        transform: translateY(-19px) scale(0.75)
+    &--active
+      transform: translateY(-19px) scale(0.75)
 
   &.v-input--is-focused
-    .v-input__wrapper:after
+    .v-input__slot:after
       transform: scaleX(1)
 
   &.v-input--has-state
-    .v-input__wrapper:before
+    .v-input__slot:before
       background-color: currentColor
 
   .v-input__append-inner
@@ -108,7 +109,7 @@ theme(v-text-field, "v-text-field")
     padding: 4px 0 4px 8px
     margin-left: auto
 
-  .v-input__wrapper
+  .v-input__slot
     &:before,
     &:after
       bottom: -1px
@@ -119,6 +120,10 @@ theme(v-text-field, "v-text-field")
       width: 100%
 
     &:before
+      background-color: transparent
+      background-position: bottom
+      background-size: 3px 1px
+      background-repeat: repeat-x
       height: 1px
 
     &:after

@@ -57,8 +57,8 @@ export default {
 
       return this.internalValue === this.trueValue
     },
-    isDirty: {
-      get: 'isActive'
+    isDirty () {
+      return this.isActive
     }
   },
 

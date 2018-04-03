@@ -162,7 +162,9 @@ export default {
       })
     },
     genLabel () {
-      if (this.isDirty && this.isSingle) return null
+      if (this.isSingle &&
+        (this.isDirty || !!this.placeholder)
+      ) return null
 
       const isSingleLine = this.isSingle
       let left = 0
@@ -176,9 +178,10 @@ export default {
         props: {
           absolute: true,
           color: this.validationState,
+          disabled: this.disabled,
           focused: !isSingleLine && (this.isFocused || !!this.validationState),
           left,
-          value: !isSingleLine && (this.isFocused || this.isDirty)
+          value: !isSingleLine && (this.isFocused || this.isDirty || !!this.placeholder)
         }
       }
 
@@ -237,7 +240,7 @@ export default {
     },
     genDefaultSlot () {
       return [
-        this.genTextFieldWrapper(),
+        this.genTextFieldSlot(),
         this.genIconSlot(),
         this.genProgress()
       ]
@@ -250,9 +253,9 @@ export default {
         this.genCounter()
       ])
     },
-    genTextFieldWrapper () {
+    genTextFieldSlot () {
       return this.$createElement('div', {
-        staticClass: 'v-text-field__wrapper'
+        staticClass: 'v-text-field__slot'
       }, [
         this.genLabel(),
         this.prefix ? this.genAffix('prefix') : null,

@@ -116,7 +116,7 @@ export default {
   computed: {
     classes () {
       return {
-        'v-select v-input--text': true,
+        'v-select v-text-field': true,
         'v-select--chips': this.chips,
         'v-select--is-menu-active': this.isMenuActive
       }

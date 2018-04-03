@@ -2,8 +2,14 @@
 @import '../theme'
 
 v-select($material)
+  // Needs an explicit color to override
+  // higher level color
   &__selection
     color: $material.text.primary
+
+  &.v-input--is-disabled
+    .v-select__selection
+      color: $material.text.disabled
 
 theme(v-select, 'v-select')
 
@@ -38,6 +44,6 @@ theme(v-select, 'v-select')
 .v-select-list
   .list__tile__action
     .v-input--selection-controls
-      .v-input__wrapper
+      .v-input__slot
         &:after, &:before
           display: none

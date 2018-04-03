@@ -4,23 +4,23 @@ exports[`VRadioGroup.vue should be in error when v-radio-group is 1`] = `
 
 <div class="v-input v-input--selection-controls v-input--radio-group v-input--radio-group--column v-input--has-state error--text">
   <div class="v-input__control">
-    <div class="v-input__wrapper error--text">
+    <div class="v-input__slot error--text">
       <div role="radiogroup"
            class="v-input--radio-group__input"
       >
         <div class="v-radio">
           <div class="v-input--selection-controls__input">
-            <input aria-checked="true"
+            <input aria-checked="false"
                    role="radio"
                    type="radio"
                    tabindex="0"
             >
-            <div class="v-input--selection-controls__ripple accent--text">
+            <div class="v-input--selection-controls__ripple error--text">
             </div>
             <i aria-hidden="true"
-               class="icon material-icons accent--text"
+               class="icon material-icons error--text"
             >
-              radio_button_checked
+              radio_button_unchecked
             </i>
           </div>
           <label class="v-label error--text"
@@ -43,23 +43,23 @@ exports[`VRadioGroup.vue should be in error when v-radio-group is 2`] = `
 
 <div class="v-input v-input--selection-controls v-input--radio-group v-input--radio-group--column">
   <div class="v-input__control">
-    <div class="v-input__wrapper">
+    <div class="v-input__slot">
       <div role="radiogroup"
            class="v-input--radio-group__input"
       >
-        <div class="v-radio accent--text">
+        <div class="v-radio">
           <div class="v-input--selection-controls__input">
-            <input aria-checked="true"
+            <input aria-checked="false"
                    role="radio"
                    type="radio"
                    tabindex="0"
             >
-            <div class="v-input--selection-controls__ripple accent--text">
+            <div class="v-input--selection-controls__ripple">
             </div>
             <i aria-hidden="true"
-               class="icon material-icons accent--text"
+               class="icon material-icons"
             >
-              radio_button_checked
+              radio_button_unchecked
             </i>
           </div>
           <label class="v-label"
@@ -82,7 +82,7 @@ exports[`VRadioGroup.vue should render role on radio group 1`] = `
 
 <div class="v-input v-input--selection-controls v-input--radio-group v-input--radio-group--column">
   <div class="v-input__control">
-    <div class="v-input__wrapper">
+    <div class="v-input__slot">
       <div role="radiogroup"
            class="v-input--radio-group__input"
       >

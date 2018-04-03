@@ -15,6 +15,7 @@ export default {
       type: [Boolean, String],
       default: 'primary'
     },
+    disabled: Boolean,
     focused: Boolean,
     for: String,
     left: {
@@ -28,7 +29,8 @@ export default {
     const data = {
       staticClass: 'v-label',
       'class': {
-        'v-label--active': props.value
+        'v-label--active': props.value,
+        'v-label--is-disabled': props.disabled
       },
       attrs: {
         for: props.for
