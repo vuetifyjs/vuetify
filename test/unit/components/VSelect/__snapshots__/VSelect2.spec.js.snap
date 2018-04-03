@@ -26,7 +26,7 @@ exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
       <div class="menu__content menu__content--select"
            style="max-height: 300px; min-width: 0px; max-width: auto; top: 18px; left: 0px; z-index: 0; display: none;"
       >
-        <div class="card"
+        <div class="v-card"
              style="height: auto;"
         >
           <div class="list">
@@ -134,7 +134,7 @@ exports[`VSelect should be clearable with prop, dirty and single select 1`] = `
       <div class="menu__content menu__content--select"
            style="max-height: 300px; min-width: 0px; max-width: auto; top: 18px; left: 0px; z-index: 0; display: none;"
       >
-        <div class="card"
+        <div class="v-card"
              style="height: auto;"
         >
           <div class="list">

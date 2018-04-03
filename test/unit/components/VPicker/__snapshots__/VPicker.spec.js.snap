@@ -2,7 +2,7 @@
 
 exports[`VPicker.js should render component with title and match snapshot 1`] = `
 
-<div class="picker card"
+<div class="picker v-card"
      style="height: auto;"
 >
   <div class="picker__title primary">
@@ -23,7 +23,7 @@ exports[`VPicker.js should render component with title and match snapshot 1`] = 
 
 exports[`VPicker.js should render component without title and match snapshot 1`] = `
 
-<div class="picker card"
+<div class="picker v-card"
      style="height: auto;"
 >
   <div class="picker__body"
@@ -39,7 +39,7 @@ exports[`VPicker.js should render component without title and match snapshot 1`]
 
 exports[`VPicker.js should render dark component and match snapshot 1`] = `
 
-<div class="picker card theme--dark"
+<div class="picker v-card theme--dark"
      style="height: auto;"
 >
   <div class="picker__title">
