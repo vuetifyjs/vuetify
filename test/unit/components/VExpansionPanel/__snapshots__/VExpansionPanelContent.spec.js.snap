@@ -3,9 +3,9 @@
 exports[`VExpansionPanelContent.js should render an expanded component and match snapshot 1`] = `
 
 <li tabindex="0"
-    class="expansion-panel__container"
+    class="v-expansion-panel__container"
 >
-  <div class="expansion-panel__body"
+  <div class="v-expansion-panel__body"
        style="display: none;"
   >
   </div>
@@ -16,9 +16,9 @@ exports[`VExpansionPanelContent.js should render an expanded component and match
 exports[`VExpansionPanelContent.js should render an expanded component with lazy prop and match snapshot 1`] = `
 
 <li tabindex="0"
-    class="expansion-panel__container"
+    class="v-expansion-panel__container"
 >
-  <div class="expansion-panel__body"
+  <div class="v-expansion-panel__body"
        style="display: none;"
   >
   </div>
@@ -29,9 +29,9 @@ exports[`VExpansionPanelContent.js should render an expanded component with lazy
 exports[`VExpansionPanelContent.js should render component and match snapshot 1`] = `
 
 <li tabindex="0"
-    class="expansion-panel__container"
+    class="v-expansion-panel__container"
 >
-  <div class="expansion-panel__header">
+  <div class="v-expansion-panel__header">
     <span>
       header
     </span>
@@ -41,7 +41,7 @@ exports[`VExpansionPanelContent.js should render component and match snapshot 1`
       </span>
     </div>
   </div>
-  <div class="expansion-panel__body"
+  <div class="v-expansion-panel__body"
        style="display: none;"
   >
     <span>
@@ -55,14 +55,14 @@ exports[`VExpansionPanelContent.js should render component and match snapshot 1`
 exports[`VExpansionPanelContent.js should respect hideActions prop 1`] = `
 
 <li tabindex="0"
-    class="expansion-panel__container"
+    class="v-expansion-panel__container"
 >
-  <div class="expansion-panel__header">
+  <div class="v-expansion-panel__header">
     <span>
       header
     </span>
   </div>
-  <div class="expansion-panel__body"
+  <div class="v-expansion-panel__body"
        style="display: none;"
   >
   </div>
@@ -73,9 +73,9 @@ exports[`VExpansionPanelContent.js should respect hideActions prop 1`] = `
 exports[`VExpansionPanelContent.js should toggle panel on header click 1`] = `
 
 <li tabindex="0"
-    class="expansion-panel__container expansion-panel__container--active"
+    class="v-expansion-panel__container v-expansion-panel__container--active"
 >
-  <div class="expansion-panel__header">
+  <div class="v-expansion-panel__header">
     <span>
       header
     </span>
@@ -87,7 +87,7 @@ exports[`VExpansionPanelContent.js should toggle panel on header click 1`] = `
       </i>
     </div>
   </div>
-  <div class="expansion-panel__body expand-transition-enter expand-transition-enter-active"
+  <div class="v-expansion-panel__body expand-transition-enter expand-transition-enter-active"
        style="overflow: hidden; height: 0px; display: block;"
   >
   </div>

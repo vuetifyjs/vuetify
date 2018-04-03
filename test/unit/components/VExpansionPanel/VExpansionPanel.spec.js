@@ -21,7 +21,7 @@ test('VExpansionPanel.js', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.html()).toMatchSnapshot()
 
-    wrapper.find('.expansion-panel__header')[0].trigger('click')
+    wrapper.find('.v-expansion-panel__header')[0].trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
   })
@@ -31,7 +31,7 @@ test('VExpansionPanel.js', ({ mount, compileToFunctions }) => {
       inset: true
     }))
 
-    expect(wrapper.hasClass('expansion-panel--inset')).toBe(true)
+    expect(wrapper.hasClass('v-expansion-panel--inset')).toBe(true)
   })
 
   it('should render popout component', () => {
@@ -39,7 +39,7 @@ test('VExpansionPanel.js', ({ mount, compileToFunctions }) => {
       popout: true
     }))
 
-    expect(wrapper.hasClass('expansion-panel--popout')).toBe(true)
+    expect(wrapper.hasClass('v-expansion-panel--popout')).toBe(true)
   })
 
   it('should render an expanded component and match snapshot', async () => {
@@ -49,7 +49,7 @@ test('VExpansionPanel.js', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.html()).toMatchSnapshot()
 
-    wrapper.find('.expansion-panel__header')[0].trigger('click')
+    wrapper.find('.v-expansion-panel__header')[0].trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
   })
@@ -66,7 +66,7 @@ test('VExpansionPanel.js', ({ mount, compileToFunctions }) => {
     wrapper.setProps({ value: 0 })
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.first('.expansion-panel__container--active')).not.toBe(null)
+    expect(wrapper.first('.v-expansion-panel__container--active')).not.toBe(null)
   })
 
   it('should show content on mount using v-model', async () => {
@@ -80,7 +80,7 @@ test('VExpansionPanel.js', ({ mount, compileToFunctions }) => {
     })
 
     await wrapper.vm.$nextTick()
-    expect(wrapper.first('.expansion-panel__container--active')).not.toBe(null)
+    expect(wrapper.first('.v-expansion-panel__container--active')).not.toBe(null)
   })
 
   it('should allow array v-model when using expand prop', async () => {
@@ -95,7 +95,7 @@ test('VExpansionPanel.js', ({ mount, compileToFunctions }) => {
     })
 
     await wrapper.vm.$nextTick()
-    expect(wrapper.find('.expansion-panel__container--active').length).toBe(2)
+    expect(wrapper.find('.v-expansion-panel__container--active').length).toBe(2)
   })
 
   it('should reset v-model when switching expand', async () => {
@@ -112,7 +112,7 @@ test('VExpansionPanel.js', ({ mount, compileToFunctions }) => {
 
     wrapper.instance().$on('input', fn)
 
-    expect(wrapper.find('.expansion-panel__container--active').length).toBe(0)
+    expect(wrapper.find('.v-expansion-panel__container--active').length).toBe(0)
 
     wrapper.setProps({ expand: false })
 
