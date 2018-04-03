@@ -33,7 +33,7 @@ export default {
   data () {
     return {
       isDependent: false,
-      stackClass: 'dialog__content__active',
+      stackClass: 'v-dialog__content__active',
       stackMinZIndex: 200
     }
   },
@@ -65,17 +65,17 @@ export default {
   computed: {
     classes () {
       return {
-        [(`dialog ${this.contentClass}`).trim()]: true,
-        'dialog--active': this.isActive,
-        'dialog--persistent': this.persistent,
-        'dialog--fullscreen': this.fullscreen,
-        'dialog--scrollable': this.scrollable
+        [(`v-dialog ${this.contentClass}`).trim()]: true,
+        'v-dialog--active': this.isActive,
+        'v-dialog--persistent': this.persistent,
+        'v-dialog--fullscreen': this.fullscreen,
+        'v-dialog--scrollable': this.scrollable
       }
     },
     contentClasses () {
       return {
-        'dialog__content': true,
-        'dialog__content__active': this.isActive
+        'v-dialog__content': true,
+        'v-dialog__content__active': this.isActive
       }
     }
   },
@@ -155,7 +155,7 @@ export default {
 
     if (this.$slots.activator) {
       children.push(h('div', {
-        'class': 'dialog__activator',
+        'class': 'v-dialog__activator',
         on: {
           click: e => {
             e.stopPropagation()
@@ -182,7 +182,7 @@ export default {
     }, [dialog]))
 
     return h('div', {
-      staticClass: 'dialog__container',
+      staticClass: 'v-dialog__container',
       style: {
         display: (!this.$slots.activator || this.fullWidth) ? 'block' : 'inline-block'
       }
