@@ -1,15 +1,15 @@
 ﻿@import '../bootstrap'
 @import '../theme'
 
-breadcrumbs($material)
-  li.breadcrumbs__divider,
-  li:last-child .breadcrumbs__item,
-  li .breadcrumbs__item--disabled
+v-breadcrumbs($material)
+  li.v-breadcrumbs__divider,
+  li:last-child .v-breadcrumbs__item,
+  li .v-breadcrumbs__item--disabled
     color: $material.text.disabled
 
-theme(breadcrumbs, "breadcrumbs")
+theme(v-breadcrumbs, "v-breadcrumbs")
 
-.breadcrumbs
+.v-breadcrumbs
   align-items: center
   display: flex
   flex-wrap: wrap
@@ -29,14 +29,14 @@ theme(breadcrumbs, "breadcrumbs")
     &:last-child a
       cursor: default
       pointer-events: none
-      
+
     &:nth-child(even)
       padding: $breadcrumbs-even-child-padding
 
   &--large
     li
       font-size: $breadcrumbs-item-large-font-size
-      
+
       .icon
         font-size: $breadcrumbs-item-large-font-size
 
