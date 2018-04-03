@@ -2,8 +2,8 @@
 
 exports[`VTimePickerTitle.js should render component in 12hr 1`] = `
 
-<div class="time-picker-title">
-  <div class="time-picker-title__time">
+<div class="v-time-picker-title">
+  <div class="v-time-picker-title__time">
     <div class="picker__title__btn">
       2
     </div>
@@ -14,7 +14,7 @@ exports[`VTimePickerTitle.js should render component in 12hr 1`] = `
       13
     </div>
   </div>
-  <div class="time-picker-title__ampm">
+  <div class="v-time-picker-title__ampm">
     <div class="picker__title__btn">
       am
     </div>
@@ -28,8 +28,8 @@ exports[`VTimePickerTitle.js should render component in 12hr 1`] = `
 
 exports[`VTimePickerTitle.js should render component in 24hr 1`] = `
 
-<div class="time-picker-title">
-  <div class="time-picker-title__time">
+<div class="v-time-picker-title">
+  <div class="v-time-picker-title__time">
     <div class="picker__title__btn">
       14
     </div>
@@ -46,8 +46,8 @@ exports[`VTimePickerTitle.js should render component in 24hr 1`] = `
 
 exports[`VTimePickerTitle.js should render component when selecting hour 1`] = `
 
-<div class="time-picker-title">
-  <div class="time-picker-title__time">
+<div class="v-time-picker-title">
+  <div class="v-time-picker-title__time">
     <div class="picker__title__btn active">
       14
     </div>
