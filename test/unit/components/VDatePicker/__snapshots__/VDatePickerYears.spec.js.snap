@@ -2,7 +2,7 @@
 
 exports[`VDatePickerYears.js should render component and match snapshot 1`] = `
 
-<ul class="date-picker-years">
+<ul class="v-date-picker-years">
   <li class>
     2100
   </li>

@@ -2,7 +2,7 @@
 
 exports[`VDatePickerDateTable.js should match snapshot with first day of week 1`] = `
 
-<div class="date-picker-table date-picker-table--date">
+<div class="v-date-picker-table v-date-picker-table--date">
   <table>
     <thead>
       <tr>
@@ -339,7 +339,7 @@ exports[`VDatePickerDateTable.js should match snapshot with first day of week 1`
 
 exports[`VDatePickerDateTable.js should render component and match snapshot 1`] = `
 
-<div class="date-picker-table date-picker-table--date">
+<div class="v-date-picker-table v-date-picker-table--date">
   <table>
     <thead>
       <tr>
@@ -664,7 +664,7 @@ exports[`VDatePickerDateTable.js should render component and match snapshot 1`] 
 
 exports[`VDatePickerDateTable.js should render component with events (array) and match snapshot 1`] = `
 
-<div class="date-picker-table date-picker-table--date">
+<div class="v-date-picker-table v-date-picker-table--date">
   <table>
     <thead>
       <tr>
@@ -719,7 +719,7 @@ exports[`VDatePickerDateTable.js should render component with events (array) and
               3
             </div>
           </button>
-          <div class="date-picker-table__event red">
+          <div class="v-date-picker-table__event red">
           </div>
         </td>
         <td>
@@ -991,7 +991,7 @@ exports[`VDatePickerDateTable.js should render component with events (array) and
 
 exports[`VDatePickerDateTable.js should render component with events (function) and match snapshot 1`] = `
 
-<div class="date-picker-table date-picker-table--date">
+<div class="v-date-picker-table v-date-picker-table--date">
   <table>
     <thead>
       <tr>
@@ -1046,7 +1046,7 @@ exports[`VDatePickerDateTable.js should render component with events (function) 
               3
             </div>
           </button>
-          <div class="date-picker-table__event red">
+          <div class="v-date-picker-table__event red">
           </div>
         </td>
         <td>
@@ -1318,7 +1318,7 @@ exports[`VDatePickerDateTable.js should render component with events (function) 
 
 exports[`VDatePickerDateTable.js should render component with events colored by function and match snapshot 1`] = `
 
-<div class="date-picker-table date-picker-table--date">
+<div class="v-date-picker-table v-date-picker-table--date">
   <table>
     <thead>
       <tr>
@@ -1373,7 +1373,7 @@ exports[`VDatePickerDateTable.js should render component with events colored by 
               3
             </div>
           </button>
-          <div class="date-picker-table__event red">
+          <div class="v-date-picker-table__event red">
           </div>
         </td>
         <td>
@@ -1384,7 +1384,7 @@ exports[`VDatePickerDateTable.js should render component with events colored by 
               4
             </div>
           </button>
-          <div class="date-picker-table__event accent">
+          <div class="v-date-picker-table__event accent">
           </div>
         </td>
         <td>
@@ -1647,7 +1647,7 @@ exports[`VDatePickerDateTable.js should render component with events colored by 
 
 exports[`VDatePickerDateTable.js should render component with events colored by object and match snapshot 1`] = `
 
-<div class="date-picker-table date-picker-table--date">
+<div class="v-date-picker-table v-date-picker-table--date">
   <table>
     <thead>
       <tr>
@@ -1702,7 +1702,7 @@ exports[`VDatePickerDateTable.js should render component with events colored by 
               3
             </div>
           </button>
-          <div class="date-picker-table__event red">
+          <div class="v-date-picker-table__event red">
           </div>
         </td>
         <td>
@@ -1713,7 +1713,7 @@ exports[`VDatePickerDateTable.js should render component with events colored by 
               4
             </div>
           </button>
-          <div class="date-picker-table__event blue lighten-1">
+          <div class="v-date-picker-table__event blue lighten-1">
           </div>
         </td>
         <td>

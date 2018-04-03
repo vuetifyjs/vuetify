@@ -2,7 +2,7 @@
 
 exports[`VDatePickerMonthTable.js should render component and match snapshot 1`] = `
 
-<div class="date-picker-table date-picker-table--month">
+<div class="v-date-picker-table v-date-picker-table--month">
   <table>
     <tbody>
       <tr>
