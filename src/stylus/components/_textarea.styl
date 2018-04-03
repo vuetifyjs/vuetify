@@ -20,9 +20,6 @@ theme(v-textarea, "v-textarea")
   .v-label
     top: 5px
 
-    &--active
-      transform: translateY(-10px) scale(0.75)
-
   &.v-textarea--textarea
     border-radius: 2px
 
@@ -31,6 +28,9 @@ theme(v-textarea, "v-textarea")
 
     .v-label
       top: 0
+
+      &--active
+        transform: translateY(-10px) scale(0.75)
 
     .v-input__append-inner
       padding-top: 0
@@ -48,7 +48,7 @@ theme(v-textarea, "v-textarea")
 
     .v-input__slot
       margin-bottom: 0
-      padding: 16px 0 0 16px
+      padding: 16px 0 8px 16px
 
       &:before,
       &:after

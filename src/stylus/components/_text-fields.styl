@@ -29,6 +29,9 @@ v-text-field($material)
     &.v-input--is-focused
       background: rgba($material.inputs.solo-inverted-focused)
 
+  &.v-text-field--box
+    background: $material.buttons.focused-alt
+
   &__prefix,
   &__suffix
     color: $material.text.secondary
@@ -58,9 +61,28 @@ theme(v-text-field, "v-text-field")
     flex: 1 1 auto
     position: relative
 
+  &--box
+    border-radius: 4px
+    position: relative
+
+    .v-input__control
+      position: static
+
+      .v-input__slot:before
+        border-radius: 4px
+        height: 2px
+
   &--solo
     padding: 8px 16px
-    elevation(2)
+    margin-bottom: 12px
+
+    &:not(.v-text-field--box)
+      elevation(2)
+
+      .v-input__slot
+        &:before,
+        &:after
+          display: none
 
     .v-input__icon--prepend
       margin-left: 0
@@ -72,14 +94,13 @@ theme(v-text-field, "v-text-field")
       margin-bottom: 0
       position: static
 
-      &:before,
-      &:after
-        display: none
-
     .v-text-field__details
       bottom: -22px
       position: absolute
       width: 100%
+
+  input
+    max-height: 32px
 
   .v-counter
     white-space: nowrap
@@ -89,7 +110,7 @@ theme(v-text-field, "v-text-field")
     max-width: 100%
     overflow: hidden
     text-overflow: ellipsis
-    top: calc(50% - 10px)
+    top: calc(50% - 11px)
     transform-origin: top left
     white-space: nowrap
 

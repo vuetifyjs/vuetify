@@ -24,9 +24,11 @@ theme(v-select, 'v-select')
     position: absolute
     left: 0
 
-  input
-    opacity: 0
-    pointer-events: none
+  // For specificity, hide caret
+  &.v-text-field
+    input
+      caret-color: transparent !important
+      pointer-events: none
 
   &.v-select--is-menu-active
     .v-input__icon--append .icon

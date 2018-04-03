@@ -67,7 +67,7 @@ export default {
         'v-text-field--single-line': this.isSingle,
         'v-text-field--solo': this.isSolo,
         'v-text-field--solo-inverted': this.soloInverted,
-        'v-text-field--box': (this.box || this.solo),
+        'v-text-field--box': this.box,
         'elevation-0': this.flat
       }
     },
@@ -97,7 +97,7 @@ export default {
       return this.isSolo || this.singleLine
     },
     isSolo () {
-      return this.solo || this.soloInverted
+      return this.solo || this.soloInverted || this.box
     }
   },
 
