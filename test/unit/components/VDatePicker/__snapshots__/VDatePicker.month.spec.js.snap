@@ -133,22 +133,22 @@ exports[`VDatePicker.js should match snapshot with allowed dates as array 1`] = 
 
 exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
 
-<div class="picker picker--date card"
+<div class="v-picker v-picker--date card"
      style="height: auto;"
 >
-  <div class="picker__title orange darken-1">
+  <div class="v-picker__title orange darken-1">
     <div class="v-date-picker-title">
-      <div class="picker__title__btn v-date-picker-title__year">
+      <div class="v-picker__title__btn v-date-picker-title__year">
         2005
       </div>
-      <div class="picker__title__btn v-date-picker-title__date active">
+      <div class="v-picker__title__btn v-date-picker-title__date active">
         <div>
           November
         </div>
       </div>
     </div>
   </div>
-  <div class="picker__body"
+  <div class="v-picker__body"
        style="width: 290px;"
   >
     <div>
@@ -311,22 +311,22 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
 
 exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
 
-<div class="picker picker--date card"
+<div class="v-picker v-picker--date card"
      style="height: auto;"
 >
-  <div class="picker__title orange darken-1">
+  <div class="v-picker__title orange darken-1">
     <div class="v-date-picker-title">
-      <div class="picker__title__btn v-date-picker-title__year">
+      <div class="v-picker__title__btn v-date-picker-title__year">
         2005
       </div>
-      <div class="picker__title__btn v-date-picker-title__date active">
+      <div class="v-picker__title__btn v-date-picker-title__date active">
         <div>
           November
         </div>
       </div>
     </div>
   </div>
-  <div class="picker__body"
+  <div class="v-picker__body"
        style="width: 290px;"
   >
     <div>
@@ -612,22 +612,22 @@ exports[`VDatePicker.js should match snapshot with month formatting functions 1`
 
 exports[`VDatePicker.js should match snapshot with pick-month prop 1`] = `
 
-<div class="picker picker--date card"
+<div class="v-picker v-picker--date card"
      style="height: auto;"
 >
-  <div class="picker__title primary">
+  <div class="v-picker__title primary">
     <div class="v-date-picker-title">
-      <div class="picker__title__btn v-date-picker-title__year">
+      <div class="v-picker__title__btn v-date-picker-title__year">
         2013
       </div>
-      <div class="picker__title__btn v-date-picker-title__date active">
+      <div class="v-picker__title__btn v-date-picker-title__date active">
         <div>
           May
         </div>
       </div>
     </div>
   </div>
-  <div class="picker__body"
+  <div class="v-picker__body"
        style="width: 290px;"
   >
     <div>

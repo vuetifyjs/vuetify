@@ -210,6 +210,6 @@ export default {
   },
 
   render () {
-    return this.genPicker('picker--time')
+    return this.genPicker('v-picker--time')
   }
 }

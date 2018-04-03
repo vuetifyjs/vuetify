@@ -160,7 +160,7 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    expect(wrapper.find('.picker__title')).toHaveLength(0)
+    expect(wrapper.find('.v-picker__title')).toHaveLength(0)
   })
 
   it('should pass first day of week to v-date-picker-table component', () => {
@@ -233,7 +233,7 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    expect(wrapper.find('.picker__title')[0].html()).toMatchSnapshot()
+    expect(wrapper.find('.v-picker__title')[0].html()).toMatchSnapshot()
   })
 
   it('should match change month when clicked on header arrow buttons', () => {
@@ -283,7 +283,7 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
     })
 
     const wrapper = mount(component)
-    expect(wrapper.find('.picker__actions .scoped-slot')).toHaveLength(1)
+    expect(wrapper.find('.v-picker__actions .scoped-slot')).toHaveLength(1)
   })
 
   it('should match years snapshot', async () => {
