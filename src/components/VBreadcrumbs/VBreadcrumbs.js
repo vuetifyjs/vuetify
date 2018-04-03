@@ -16,7 +16,7 @@ export default {
   computed: {
     classes () {
       return {
-        'breadcrumbs--large': this.large
+        'v-breadcrumbs--large': this.large
       }
     },
     computedDivider () {
@@ -48,7 +48,7 @@ export default {
       if (!this.$slots.default) return null
 
       const children = []
-      const dividerData = { staticClass: 'breadcrumbs__divider' }
+      const dividerData = { staticClass: 'v-breadcrumbs__divider' }
       const length = this.$slots.default.length
 
       for (let i = 0; i < length; i++) {
@@ -70,7 +70,7 @@ export default {
 
   render (h) {
     return h('ul', {
-      staticClass: 'breadcrumbs',
+      staticClass: 'v-breadcrumbs',
       'class': this.classes,
       style: this.styles
     }, this.genChildren())

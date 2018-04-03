@@ -43,18 +43,18 @@ exports[`VDatePickerDateTable.js should match snapshot with first day of week 1`
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               1
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               2
             </div>
           </button>
@@ -63,63 +63,63 @@ exports[`VDatePickerDateTable.js should match snapshot with first day of week 1`
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               3
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               4
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               5
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               6
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               7
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               8
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               9
             </div>
           </button>
@@ -128,63 +128,63 @@ exports[`VDatePickerDateTable.js should match snapshot with first day of week 1`
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               10
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               11
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               12
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               13
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               14
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               15
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               16
             </div>
           </button>
@@ -193,63 +193,63 @@ exports[`VDatePickerDateTable.js should match snapshot with first day of week 1`
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               17
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               18
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               19
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               20
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               21
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               22
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               23
             </div>
           </button>
@@ -258,63 +258,63 @@ exports[`VDatePickerDateTable.js should match snapshot with first day of week 1`
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               24
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               25
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               26
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               27
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               28
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               29
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               30
             </div>
           </button>
@@ -323,9 +323,9 @@ exports[`VDatePickerDateTable.js should match snapshot with first day of week 1`
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               31
             </div>
           </button>
@@ -370,63 +370,63 @@ exports[`VDatePickerDateTable.js should render component and match snapshot 1`] 
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               1
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               2
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               3
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               4
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               5
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               6
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               7
             </div>
           </button>
@@ -435,63 +435,63 @@ exports[`VDatePickerDateTable.js should render component and match snapshot 1`] 
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               8
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               9
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               10
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               11
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               12
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               13
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               14
             </div>
           </button>
@@ -500,63 +500,63 @@ exports[`VDatePickerDateTable.js should render component and match snapshot 1`] 
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               15
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               16
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               17
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               18
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               19
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               20
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               21
             </div>
           </button>
@@ -565,63 +565,63 @@ exports[`VDatePickerDateTable.js should render component and match snapshot 1`] 
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               22
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               23
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               24
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               25
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               26
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               27
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               28
             </div>
           </button>
@@ -630,27 +630,27 @@ exports[`VDatePickerDateTable.js should render component and match snapshot 1`] 
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               29
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               30
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               31
             </div>
           </button>
@@ -695,27 +695,27 @@ exports[`VDatePickerDateTable.js should render component with events (array) and
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               1
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               2
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               3
             </div>
           </button>
@@ -724,36 +724,36 @@ exports[`VDatePickerDateTable.js should render component with events (array) and
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               4
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               5
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               6
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               7
             </div>
           </button>
@@ -762,63 +762,63 @@ exports[`VDatePickerDateTable.js should render component with events (array) and
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               8
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               9
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               10
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               11
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               12
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               13
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               14
             </div>
           </button>
@@ -827,63 +827,63 @@ exports[`VDatePickerDateTable.js should render component with events (array) and
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               15
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               16
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               17
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               18
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               19
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               20
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               21
             </div>
           </button>
@@ -892,63 +892,63 @@ exports[`VDatePickerDateTable.js should render component with events (array) and
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               22
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               23
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               24
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               25
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               26
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               27
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               28
             </div>
           </button>
@@ -957,27 +957,27 @@ exports[`VDatePickerDateTable.js should render component with events (array) and
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               29
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               30
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               31
             </div>
           </button>
@@ -1022,27 +1022,27 @@ exports[`VDatePickerDateTable.js should render component with events (function) 
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               1
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               2
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               3
             </div>
           </button>
@@ -1051,36 +1051,36 @@ exports[`VDatePickerDateTable.js should render component with events (function) 
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               4
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               5
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               6
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               7
             </div>
           </button>
@@ -1089,63 +1089,63 @@ exports[`VDatePickerDateTable.js should render component with events (function) 
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               8
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               9
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               10
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               11
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               12
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               13
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               14
             </div>
           </button>
@@ -1154,63 +1154,63 @@ exports[`VDatePickerDateTable.js should render component with events (function) 
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               15
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               16
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               17
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               18
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               19
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               20
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               21
             </div>
           </button>
@@ -1219,63 +1219,63 @@ exports[`VDatePickerDateTable.js should render component with events (function) 
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               22
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               23
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               24
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               25
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               26
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               27
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               28
             </div>
           </button>
@@ -1284,27 +1284,27 @@ exports[`VDatePickerDateTable.js should render component with events (function) 
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               29
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               30
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               31
             </div>
           </button>
@@ -1349,27 +1349,27 @@ exports[`VDatePickerDateTable.js should render component with events colored by 
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               1
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               2
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               3
             </div>
           </button>
@@ -1378,9 +1378,9 @@ exports[`VDatePickerDateTable.js should render component with events colored by 
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               4
             </div>
           </button>
@@ -1389,27 +1389,27 @@ exports[`VDatePickerDateTable.js should render component with events colored by 
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               5
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               6
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               7
             </div>
           </button>
@@ -1418,63 +1418,63 @@ exports[`VDatePickerDateTable.js should render component with events colored by 
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               8
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               9
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               10
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               11
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               12
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               13
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               14
             </div>
           </button>
@@ -1483,63 +1483,63 @@ exports[`VDatePickerDateTable.js should render component with events colored by 
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               15
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               16
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               17
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               18
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               19
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               20
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               21
             </div>
           </button>
@@ -1548,63 +1548,63 @@ exports[`VDatePickerDateTable.js should render component with events colored by 
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               22
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               23
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               24
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               25
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               26
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               27
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               28
             </div>
           </button>
@@ -1613,27 +1613,27 @@ exports[`VDatePickerDateTable.js should render component with events colored by 
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               29
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               30
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               31
             </div>
           </button>
@@ -1678,27 +1678,27 @@ exports[`VDatePickerDateTable.js should render component with events colored by 
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               1
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               2
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               3
             </div>
           </button>
@@ -1707,9 +1707,9 @@ exports[`VDatePickerDateTable.js should render component with events colored by 
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               4
             </div>
           </button>
@@ -1718,27 +1718,27 @@ exports[`VDatePickerDateTable.js should render component with events colored by 
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               5
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               6
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               7
             </div>
           </button>
@@ -1747,63 +1747,63 @@ exports[`VDatePickerDateTable.js should render component with events colored by 
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               8
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               9
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               10
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               11
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               12
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               13
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               14
             </div>
           </button>
@@ -1812,63 +1812,63 @@ exports[`VDatePickerDateTable.js should render component with events colored by 
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               15
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               16
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               17
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               18
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               19
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               20
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               21
             </div>
           </button>
@@ -1877,63 +1877,63 @@ exports[`VDatePickerDateTable.js should render component with events colored by 
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               22
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               23
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               24
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               25
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               26
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               27
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               28
             </div>
           </button>
@@ -1942,27 +1942,27 @@ exports[`VDatePickerDateTable.js should render component with events colored by 
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               29
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               30
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               31
             </div>
           </button>

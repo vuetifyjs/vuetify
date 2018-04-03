@@ -430,4 +430,33 @@ test('VTabs', ({ mount, shallow }) => {
     await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/3643
+  it('should re-evaluate when tabs change', async () => {
+    const onResize = jest.fn()
+    const wrapper = mount(VTabs, {
+      methods: {
+        onResize
+      },
+      slots: {
+        default: [{
+          functional: true,
+          render: h => h(VTab)
+        }]
+      }
+    })
+
+    expect(onResize).not.toHaveBeenCalled()
+
+    expect(wrapper.vm.tabs.length).toBe(1)
+
+    const tab = wrapper.first(VTab)
+
+    tab.vm.$destroy()
+
+    await wrapper.vm.$nextTick()
+
+    expect(onResize).toHaveBeenCalledTimes(1)
+    expect(wrapper.vm.tabs.length).toBe(0)
+  })
 })

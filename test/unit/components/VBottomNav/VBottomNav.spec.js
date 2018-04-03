@@ -68,7 +68,7 @@ test('VBottomNav.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should output active btn when clicked', () => {
+  it('should output active v-btn when clicked', () => {
     const wrapper = mount(VBottomNav, {
       propsData: { value: true, active: 1 },
       slots: {
@@ -79,7 +79,7 @@ test('VBottomNav.js', ({ mount }) => {
       }
     })
 
-    const btn = wrapper.find('.btn')[0]
+    const btn = wrapper.find('.v-btn')[0]
 
     const change = jest.fn()
     wrapper.instance().$on('update:active', change)
@@ -113,7 +113,7 @@ test('VBottomNav.js', ({ mount }) => {
 
     wrapper.vm.$on('update:active', update)
 
-    const btn = wrapper.find('.btn')[1]
+    const btn = wrapper.find('.v-btn')[1]
     btn.trigger('click')
 
     await wrapper.vm.$nextTick()
