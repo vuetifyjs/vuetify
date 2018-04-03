@@ -360,7 +360,7 @@ test('VMenu.js', ({ mount }) => {
       }
     }
 
-    wrapper.vm.$refs.activator.querySelector('.btn').getBoundingClientRect = getBoundingClientRect
+    wrapper.vm.$refs.activator.querySelector('.v-btn').getBoundingClientRect = getBoundingClientRect
     wrapper.vm.$refs.content.getBoundingClientRect = getBoundingClientRect
 
     wrapper.setProps({ value: true })

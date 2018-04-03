@@ -2,10 +2,10 @@
 
 exports[`VCardMedia.js should render component and match snapshot 1`] = `
 
-<div class="card__media"
+<div class="v-card__media"
      style="height: auto;"
 >
-  <div class="card__media__content">
+  <div class="v-card__media__content">
   </div>
 </div>
 
@@ -13,12 +13,12 @@ exports[`VCardMedia.js should render component and match snapshot 1`] = `
 
 exports[`VCardMedia.js should render component with contained background and match snapshot 1`] = `
 
-<div class="card__media"
+<div class="v-card__media"
      style="height: auto;"
 >
-  <div class="card__media__background">
+  <div class="v-card__media__background">
   </div>
-  <div class="card__media__content">
+  <div class="v-card__media__content">
   </div>
 </div>
 
@@ -26,12 +26,12 @@ exports[`VCardMedia.js should render component with contained background and mat
 
 exports[`VCardMedia.js should render component with custom background image and match snapshot 1`] = `
 
-<div class="card__media"
+<div class="v-card__media"
      style="height: auto;"
 >
-  <div class="card__media__background">
+  <div class="v-card__media__background">
   </div>
-  <div class="card__media__content">
+  <div class="v-card__media__content">
   </div>
 </div>
 
@@ -39,10 +39,10 @@ exports[`VCardMedia.js should render component with custom background image and 
 
 exports[`VCardMedia.js should render component with custom height (number) and match snapshot 1`] = `
 
-<div class="card__media"
+<div class="v-card__media"
      style="height: 100px;"
 >
-  <div class="card__media__content">
+  <div class="v-card__media__content">
   </div>
 </div>
 
@@ -50,10 +50,10 @@ exports[`VCardMedia.js should render component with custom height (number) and m
 
 exports[`VCardMedia.js should render component with custom height (string) and match snapshot 1`] = `
 
-<div class="card__media"
+<div class="v-card__media"
      style="height: 100px;"
 >
-  <div class="card__media__content">
+  <div class="v-card__media__content">
   </div>
 </div>
 
@@ -61,12 +61,12 @@ exports[`VCardMedia.js should render component with custom height (string) and m
 
 exports[`VCardMedia.js should render component with images with urls that contain the ( & ) characters 1`] = `
 
-<div class="card__media"
+<div class="v-card__media"
      style="height: auto;"
 >
-  <div class="card__media__background">
+  <div class="v-card__media__background">
   </div>
-  <div class="card__media__content">
+  <div class="v-card__media__content">
   </div>
 </div>
 

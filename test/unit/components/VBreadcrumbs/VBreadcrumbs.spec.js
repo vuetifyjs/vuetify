@@ -9,7 +9,7 @@ test('VBreadcrumbs.js', ({ mount, compileToFunctions }) => {
   it('should have breadcrumbs classes', () => {
     const wrapper = mount(VBreadcrumbs)
 
-    expect(wrapper.hasClass('breadcrumbs')).toBe(true)
+    expect(wrapper.hasClass('v-breadcrumbs')).toBe(true)
     expect(wrapper.html()).toMatchSnapshot()
   })
 

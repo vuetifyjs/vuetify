@@ -25,8 +25,8 @@ export default {
     }, this.$slots.activator)
 
     const contentClass = [
-      'bottom-sheet',
-      this.inset ? 'bottom-sheet--inset' : ''
+      'v-bottom-sheet',
+      this.inset ? 'v-bottom-sheet--inset' : ''
     ].join(' ')
 
     return h(VDialog, {
@@ -38,7 +38,7 @@ export default {
       },
       props: {
         contentClass: contentClass,
-        transition: 'bottom-sheet-transition',
+        transition: 'v-bottom-sheet-transition',
         value: this.value
       }
     }, [activator, this.$slots.default])
