@@ -1,3 +1,4 @@
+
 import Vue from 'vue'
 import { test } from '@/test'
 import VTextField from '@/components/VTextField'
@@ -63,10 +64,9 @@ test('VForm.js', ({ mount }) => {
       }
     })
 
-    expect(wrapper.vm.inputs.length).toBe(1)
-    wrapper.vm.watchInputs()
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.inputs.length).toBe(1)
+    expect(Object.keys(wrapper.vm.errorBag).length).toBe(1)
   })
 
   it.skip('should only watch children if not lazy', async () => {
@@ -99,8 +99,11 @@ test('VForm.js', ({ mount }) => {
     expect(Object.keys(wrapper.vm.errorBag).length).toBe(1)
   })
 
-  it.skip('should validate all inputs', async () => {
+  it('should emit input when calling validate on lazy-validated form', async () => {
     const wrapper = mount(VForm, {
+      propsData: {
+        lazyValidation: true
+      },
       slots: {
         default: [{
           render (h) {
@@ -114,45 +117,44 @@ test('VForm.js', ({ mount }) => {
       }
     })
 
+    const value = jest.fn()
+    wrapper.vm.$on('input', value)
+
     expect(wrapper.vm.validate()).toBe(false)
+
+    await wrapper.vm.$nextTick()
+
+    expect(value).toBeCalledWith(false)
   })
 
-  it.skip('should reset all inputs', async () => {
+  it('should reset valid state', async () => {
+
     const wrapper = mount(VForm, {
       slots: {
         default: [VTextField]
       }
     })
 
-    const event = jest.fn()
-    const input = wrapper.find(VTextField)[0]
-    input.vm.$on('input', event)
+    let value = jest.fn()
+    wrapper.vm.$on('input', value)
 
     expect(Object.keys(wrapper.vm.errorBag).length).toBe(1)
     wrapper.vm.reset()
+    await wrapper.vm.$nextTick()
 
+    expect(value).toBeCalledWith(false)
     expect(Object.keys(wrapper.vm.errorBag).length).toBe(1)
-    expect(event).toHaveBeenCalledWith(null)
 
     wrapper.setProps({ lazyValidation: true })
+    await wrapper.vm.$nextTick()
+
+    expect(value).toBeCalledWith(true)
     expect(Object.keys(wrapper.vm.errorBag).length).toBe(1)
 
     wrapper.vm.reset()
-    expect(Object.keys(wrapper.vm.errorBag).length).toBe(0)
-  })
-
-  it.skip('should update inputs when updated lifecycle hook is called', async () => {
-    const wrapper = mount(VForm, {
-      slots: {
-        default: [VTextField]
-      }
-    })
-
-    const input = wrapper.find(VTextField)[0]
-    expect(wrapper.vm.inputs.length).toBe(1)
-    input.vm.$destroy()
-    wrapper.update()
     await wrapper.vm.$nextTick()
-    expect(wrapper.vm.inputs.length).toBe(0)
+
+    expect(value).toBeCalledWith(true)
+    expect(Object.keys(wrapper.vm.errorBag).length).toBe(0)
   })
 })

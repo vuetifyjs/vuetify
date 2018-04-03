@@ -1,3 +1,5 @@
+
+import { inject as RegistrableInject } from './registrable'
 import { consoleError } from '../util/console'
 
 // Mixins
@@ -7,7 +9,8 @@ export default {
   name: 'validatable',
 
   mixins: [
-    Colorable
+    Colorable,
+    RegistrableInject('form')
   ],
 
   data: vm => ({
@@ -61,14 +64,14 @@ export default {
       return this.validations.length > 0
     },
     hasState () {
-      return this.hasError || this.hasSuccess
+      return this.shouldValidate && (this.hasError || this.hasSuccess)
     },
     validations () {
       return this.validationTarget.slice(0, this.errorCount)
     },
     validationState () {
-      if (this.hasError) return 'error'
-      if (this.hasSuccess) return 'success'
+      if (this.hasError && this.shouldValidate) return 'error'
+      if (this.hasSuccess && this.shouldValidate) return 'success'
       if (this.hasColor) return this.color
       return null
     },
@@ -137,18 +140,18 @@ export default {
     this.validate()
   },
 
+  created () {
+    this.form && this.form.register(this)
+  },
+
+  beforeDestroy () {
+    this.form && this.form.unregister(this)
+  },
+
   methods: {
     reset () {
-      // TODO: Do this another way!
-      // This is so that we can reset all types of inputs
-      this.$emit('input', this.isMultiple ? [] : null)
-      this.$emit('change', null)
-
-      this.$nextTick(() => {
-        this.shouldValidate = false
-        this.hasFocused = false
-        this.validate()
-      })
+      this.shouldValidate = false
+      this.hasFocused = false
     },
     validate (force = false, value = this.internalValue) {
       if (force) this.shouldValidate = true
