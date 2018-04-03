@@ -27,7 +27,7 @@ export default {
   props: {
     activeClass: {
       type: String,
-      default: 'btn--active'
+      default: 'v-btn--active'
     },
     block: Boolean,
     depressed: Boolean,
@@ -57,27 +57,27 @@ export default {
   computed: {
     classes () {
       const classes = {
-        'btn': true,
+        'v-btn': true,
         [this.activeClass]: this.isActive,
-        'btn--absolute': this.absolute,
-        'btn--block': this.block,
-        'btn--bottom': this.bottom,
-        'btn--disabled': this.disabled,
-        'btn--flat': this.flat,
-        'btn--floating': this.fab,
-        'btn--fixed': this.fixed,
-        'btn--hover': this.hover,
-        'btn--icon': this.icon,
-        'btn--large': this.large,
-        'btn--left': this.left,
-        'btn--loader': this.loading,
-        'btn--outline': this.outline,
-        'btn--depressed': (this.depressed && !this.flat) || this.outline,
-        'btn--right': this.right,
-        'btn--round': this.round,
-        'btn--router': this.to,
-        'btn--small': this.small,
-        'btn--top': this.top,
+        'v-btn--absolute': this.absolute,
+        'v-btn--block': this.block,
+        'v-btn--bottom': this.bottom,
+        'v-btn--disabled': this.disabled,
+        'v-btn--flat': this.flat,
+        'v-btn--floating': this.fab,
+        'v-btn--fixed': this.fixed,
+        'v-btn--hover': this.hover,
+        'v-btn--icon': this.icon,
+        'v-btn--large': this.large,
+        'v-btn--left': this.left,
+        'v-btn--loader': this.loading,
+        'v-btn--outline': this.outline,
+        'v-btn--depressed': (this.depressed && !this.flat) || this.outline,
+        'v-btn--right': this.right,
+        'v-btn--round': this.round,
+        'v-btn--router': this.to,
+        'v-btn--small': this.small,
+        'v-btn--top': this.top,
         ...this.themeClasses
       }
 
@@ -99,7 +99,7 @@ export default {
     genContent () {
       return this.$createElement(
         'div',
-        { 'class': 'btn__content' },
+        { 'class': 'v-btn__content' },
         [this.$slots.default]
       )
     },
@@ -118,7 +118,7 @@ export default {
         children.push(this.$slots.loader)
       }
 
-      return this.$createElement('span', { 'class': 'btn__loading' }, children)
+      return this.$createElement('span', { 'class': 'v-btn__loading' }, children)
     }
   },
 

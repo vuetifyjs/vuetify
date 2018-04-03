@@ -95,10 +95,10 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
         </div>
         <button disabled="disabled"
                 type="button"
-                class="btn btn--disabled btn--flat btn--icon"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--icon"
                 aria-label="Previous page"
         >
-          <div class="btn__content">
+          <div class="v-btn__content">
             <i aria-hidden="true"
                class="icon material-icons"
             >
@@ -108,10 +108,10 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
         </button>
         <button disabled="disabled"
                 type="button"
-                class="btn btn--disabled btn--flat btn--icon"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--icon"
                 aria-label="Next page"
         >
-          <div class="btn__content">
+          <div class="v-btn__content">
             <i aria-hidden="true"
                class="icon material-icons"
             >
@@ -232,10 +232,10 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
         </div>
         <button disabled="disabled"
                 type="button"
-                class="btn btn--disabled btn--flat btn--icon"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--icon"
                 aria-label="Previous page"
         >
-          <div class="btn__content">
+          <div class="v-btn__content">
             <i aria-hidden="true"
                class="icon material-icons"
             >
@@ -245,10 +245,10 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
         </button>
         <button disabled="disabled"
                 type="button"
-                class="btn btn--disabled btn--flat btn--icon"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--icon"
                 aria-label="Next page"
         >
-          <div class="btn__content">
+          <div class="v-btn__content">
             <i aria-hidden="true"
                class="icon material-icons"
             >
@@ -360,10 +360,10 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
         </div>
         <button disabled="disabled"
                 type="button"
-                class="btn btn--disabled btn--flat btn--icon"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--icon"
                 aria-label="Previous page"
         >
-          <div class="btn__content">
+          <div class="v-btn__content">
             <i aria-hidden="true"
                class="icon material-icons"
             >
@@ -373,10 +373,10 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
         </button>
         <button disabled="disabled"
                 type="button"
-                class="btn btn--disabled btn--flat btn--icon"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--icon"
                 aria-label="Next page"
         >
-          <div class="btn__content">
+          <div class="v-btn__content">
             <i aria-hidden="true"
                class="icon material-icons"
             >
@@ -492,10 +492,10 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
         </div>
         <button disabled="disabled"
                 type="button"
-                class="btn btn--disabled btn--flat btn--icon"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--icon"
                 aria-label="Previous page"
         >
-          <div class="btn__content">
+          <div class="v-btn__content">
             <i aria-hidden="true"
                class="icon material-icons"
             >
@@ -505,10 +505,10 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
         </button>
         <button disabled="disabled"
                 type="button"
-                class="btn btn--disabled btn--flat btn--icon"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--icon"
                 aria-label="Next page"
         >
-          <div class="btn__content">
+          <div class="v-btn__content">
             <i aria-hidden="true"
                class="icon material-icons"
             >
