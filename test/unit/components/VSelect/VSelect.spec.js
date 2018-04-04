@@ -333,7 +333,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     })
 
     await wrapper.vm.$nextTick()
-    const chip = wrapper.find('.chip')[0]
+    const chip = wrapper.find('.v-chip')[0]
 
     expect(!!chip).toBe(true)
 

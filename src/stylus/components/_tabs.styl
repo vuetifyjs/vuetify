@@ -8,8 +8,8 @@ tabs__bar($material)
   .tabs__div
     color: $material.tabs.active
 
-    &.tabs__item--disabled
-      color: $material.buttons.disabled
+  .tabs__item--disabled
+    color: $material.buttons.disabled
 
 theme(tabs__bar, "tabs__bar")
 
@@ -142,6 +142,9 @@ theme(tabs__bar, "tabs__bar")
 
   &:not(.tabs__item--active)
     opacity: .7
+
+  &--disabled
+    pointer-events: none
 
 .tabs__slider
   height: 2px

@@ -25,8 +25,8 @@ export default {
   computed: {
     classes () {
       return {
-        'btn-toggle': true,
-        'btn-toggle--selected': this.hasValue,
+        'v-btn-toggle': true,
+        'v-btn-toggle--selected': this.hasValue,
         'theme--light': this.light,
         'theme--dark': this.dark
       }

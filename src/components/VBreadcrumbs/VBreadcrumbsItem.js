@@ -10,14 +10,14 @@ export default {
     // active item should be dimmed
     activeClass: {
       type: String,
-      default: 'breadcrumbs__item--disabled'
+      default: 'v-breadcrumbs__item--disabled'
     }
   },
 
   computed: {
     classes () {
       return {
-        'breadcrumbs__item': true,
+        'v-breadcrumbs__item': true,
         [this.activeClass]: this.disabled
       }
     }

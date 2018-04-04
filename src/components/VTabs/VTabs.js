@@ -71,6 +71,10 @@ export default {
     }
   },
 
+  watch: {
+    tabs: 'onResize'
+  },
+
   mounted () {
     this.checkIcons()
   },
