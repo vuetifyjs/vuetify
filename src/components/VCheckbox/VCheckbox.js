@@ -24,7 +24,7 @@ export default {
   computed: {
     classes () {
       const classes = {
-        'checkbox': true,
+        'v-checkbox': true,
         'input-group--selection-controls': true,
         'input-group--active': this.isActive
       }
