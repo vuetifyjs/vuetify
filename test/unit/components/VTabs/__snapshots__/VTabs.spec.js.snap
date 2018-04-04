@@ -2,19 +2,19 @@
 
 exports[`VTabs should match active tab 1`] = `
 
-<div class="tabs">
-  <div class="tabs__bar">
-    <div class="tabs__wrapper">
-      <div class="tabs__container">
-        <div class="tabs__slider-wrapper"
+<div class="v-tabs">
+  <div class="v-tabs__bar">
+    <div class="v-tabs__wrapper">
+      <div class="v-tabs__container">
+        <div class="v-tabs__slider-wrapper"
              style="left: 0px; width: 0px;"
         >
-          <div class="tabs__slider accent">
+          <div class="v-tabs__slider accent">
           </div>
         </div>
-        <div class="tabs__div">
+        <div class="v-tabs__div">
           <a href="#bar"
-             class="tabs__item tabs__item--active"
+             class="v-tabs__item v-tabs__item--active"
           >
           </a>
         </div>
@@ -27,10 +27,10 @@ exports[`VTabs should match active tab 1`] = `
 
 exports[`VTabs should render generic elements in the tab container 1`] = `
 
-<div class="tabs">
-  <div class="tabs__bar">
-    <div class="tabs__wrapper">
-      <div class="tabs__container">
+<div class="v-tabs">
+  <div class="v-tabs__bar">
+    <div class="v-tabs__wrapper">
+      <div class="v-tabs__container">
         <div class="test-element">
           foobar
         </div>
@@ -43,12 +43,12 @@ exports[`VTabs should render generic elements in the tab container 1`] = `
 
 exports[`VTabs should show tabs arrows 1`] = `
 
-<div class="tabs">
-  <div class="tabs__bar">
-    <div class="tabs__wrapper tabs__wrapper--show-arrows">
-      <div class="tabs__container tabs__container--overflow">
-        <div class="tabs__slider-wrapper">
-          <div class="tabs__slider accent">
+<div class="v-tabs">
+  <div class="v-tabs__bar">
+    <div class="v-tabs__wrapper v-tabs__wrapper--show-arrows">
+      <div class="v-tabs__container v-tabs__container--overflow">
+        <div class="v-tabs__slider-wrapper">
+          <div class="v-tabs__slider accent">
           </div>
         </div>
       </div>
