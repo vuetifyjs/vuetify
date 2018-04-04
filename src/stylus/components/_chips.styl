@@ -1,13 +1,13 @@
 @import '../bootstrap'
 @import '../theme'
 
-chip($material)
+v-chip($material)
   background: $material.chips.background
   color: $material.chips.color
 
-theme(chip, "chip")
+theme(v-chip, "v-chip")
 
-.chip
+.v-chip
   align-items: center
   border-radius: $chip-border-radius
   border: 1px solid transparent
@@ -19,7 +19,7 @@ theme(chip, "chip")
   transition: $primary-transition
   vertical-align: middle
 
-  .chip__content
+  .v-chip__content
     align-items: center
     border-radius: $chip-border-radius
     cursor: default
@@ -32,7 +32,7 @@ theme(chip, "chip")
     z-index: 1
 
   &--removable
-    .chip__content
+    .v-chip__content
       padding: $chip-removeable-padding
 
   .v-avatar
@@ -50,7 +50,7 @@ theme(chip, "chip")
   &:focus,
   &--active,
   &--selected
-    &:not(.chip--disabled)
+    &:not(.v-chip--disabled)
       border-color: rgba(#000, .13)
       overflow: hidden
       elevation(2)
@@ -71,11 +71,11 @@ theme(chip, "chip")
   &--label
     border-radius: $chip-label-border-radius
 
-    .chip__content
+    .v-chip__content
       border-radius: $chip-label-border-radius
 
   // Increase specificity to override theme background
-  &\&.chip--outline
+  &\&.v-chip--outline
     background: $chip-outline-background
     border-color: currentColor
     color: $chip-outline-color
@@ -87,7 +87,7 @@ theme(chip, "chip")
       height: $chip-small-height
       min-width: $chip-small-height
       width: $chip-small-height
-      
+
     .icon
       font-size: $chip-small-font-size
 
@@ -100,7 +100,7 @@ theme(chip, "chip")
     margin: $chip-close-margin
     text-decoration: none
     user-select: none
-    
+
     > .icon
       color: inherit !important
       font-size: 20px
