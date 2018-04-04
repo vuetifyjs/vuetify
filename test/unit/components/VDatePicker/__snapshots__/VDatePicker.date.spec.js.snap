@@ -2,26 +2,26 @@
 
 exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
 
-<div class="picker picker--date v-card"
+<div class="v-picker v-picker--date v-card"
      style="height: auto;"
 >
-  <div class="picker__title orange darken-1">
-    <div class="date-picker-title">
-      <div class="picker__title__btn date-picker-title__year">
+  <div class="v-picker__title orange darken-1">
+    <div class="v-date-picker-title">
+      <div class="v-picker__title__btn v-date-picker-title__year">
         2005
       </div>
-      <div class="picker__title__btn date-picker-title__date active">
+      <div class="v-picker__title__btn v-date-picker-title__date active">
         <div>
           Tue, Nov 1
         </div>
       </div>
     </div>
   </div>
-  <div class="picker__body"
+  <div class="v-picker__body"
        style="width: 290px;"
   >
     <div>
-      <div class="date-picker-header">
+      <div class="v-date-picker-header">
         <button type="button"
                 class="v-btn v-btn--icon"
         >
@@ -33,7 +33,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
             </i>
           </div>
         </button>
-        <div class="date-picker-header__value">
+        <div class="v-date-picker-header__value">
           <strong class="primary--text">
             November 2005
           </strong>
@@ -50,7 +50,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
           </div>
         </button>
       </div>
-      <div class="date-picker-table date-picker-table--date">
+      <div class="v-date-picker-table v-date-picker-table--date">
         <table>
           <thead>
             <tr>
@@ -373,26 +373,26 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
 
 exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
 
-<div class="picker picker--date v-card"
+<div class="v-picker v-picker--date v-card"
      style="height: auto;"
 >
-  <div class="picker__title orange darken-1">
-    <div class="date-picker-title">
-      <div class="picker__title__btn date-picker-title__year">
+  <div class="v-picker__title orange darken-1">
+    <div class="v-date-picker-title">
+      <div class="v-picker__title__btn v-date-picker-title__year">
         2005
       </div>
-      <div class="picker__title__btn date-picker-title__date active">
+      <div class="v-picker__title__btn v-date-picker-title__date active">
         <div>
           Tue, Nov 1
         </div>
       </div>
     </div>
   </div>
-  <div class="picker__body"
+  <div class="v-picker__body"
        style="width: 290px;"
   >
     <div>
-      <div class="date-picker-header">
+      <div class="v-date-picker-header">
         <button type="button"
                 class="v-btn v-btn--icon"
         >
@@ -404,7 +404,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
             </i>
           </div>
         </button>
-        <div class="date-picker-header__value">
+        <div class="v-date-picker-header__value">
           <strong class="orange--text text--darken-1">
             November 2005
           </strong>
@@ -421,7 +421,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
           </div>
         </button>
       </div>
-      <div class="date-picker-table date-picker-table--date">
+      <div class="v-date-picker-table v-date-picker-table--date">
         <table>
           <thead>
             <tr>
@@ -744,26 +744,26 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
 
 exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
 
-<div class="picker picker--date v-card theme--dark"
+<div class="v-picker v-picker--date v-card theme--dark"
      style="height: auto;"
 >
-  <div class="picker__title">
-    <div class="date-picker-title">
-      <div class="picker__title__btn date-picker-title__year">
+  <div class="v-picker__title">
+    <div class="v-date-picker-title">
+      <div class="v-picker__title__btn v-date-picker-title__year">
         2013
       </div>
-      <div class="picker__title__btn date-picker-title__date active">
+      <div class="v-picker__title__btn v-date-picker-title__date active">
         <div>
           Tue, May 7
         </div>
       </div>
     </div>
   </div>
-  <div class="picker__body"
+  <div class="v-picker__body"
        style="width: 290px;"
   >
     <div>
-      <div class="date-picker-header">
+      <div class="v-date-picker-header">
         <button type="button"
                 class="v-btn v-btn--icon"
         >
@@ -775,7 +775,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
             </i>
           </div>
         </button>
-        <div class="date-picker-header__value">
+        <div class="v-date-picker-header__value">
           <strong class="accent--text">
             May 2013
           </strong>
@@ -792,7 +792,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
           </div>
         </button>
       </div>
-      <div class="date-picker-table date-picker-table--date">
+      <div class="v-date-picker-table v-date-picker-table--date">
         <table>
           <thead>
             <tr>
@@ -1126,26 +1126,26 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
 
 exports[`VDatePicker.js should match snapshot with default settings 1`] = `
 
-<div class="picker picker--date v-card"
+<div class="v-picker v-picker--date v-card"
      style="height: auto;"
 >
-  <div class="picker__title primary">
-    <div class="date-picker-title">
-      <div class="picker__title__btn date-picker-title__year">
+  <div class="v-picker__title primary">
+    <div class="v-date-picker-title">
+      <div class="v-picker__title__btn v-date-picker-title__year">
         2013
       </div>
-      <div class="picker__title__btn date-picker-title__date active">
+      <div class="v-picker__title__btn v-date-picker-title__date active">
         <div>
           Tue, May 7
         </div>
       </div>
     </div>
   </div>
-  <div class="picker__body"
+  <div class="v-picker__body"
        style="width: 290px;"
   >
     <div>
-      <div class="date-picker-header">
+      <div class="v-date-picker-header">
         <button type="button"
                 class="v-btn v-btn--icon"
         >
@@ -1157,7 +1157,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
             </i>
           </div>
         </button>
-        <div class="date-picker-header__value">
+        <div class="v-date-picker-header__value">
           <strong class="accent--text">
             May 2013
           </strong>
@@ -1174,7 +1174,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
           </div>
         </button>
       </div>
-      <div class="date-picker-table date-picker-table--date">
+      <div class="v-date-picker-table v-date-picker-table--date">
         <table>
           <thead>
             <tr>
@@ -1508,9 +1508,9 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
 
 exports[`VDatePicker.js should match snapshot with year icon 1`] = `
 
-<div class="picker__title primary">
-  <div class="date-picker-title">
-    <div class="picker__title__btn date-picker-title__year">
+<div class="v-picker__title primary">
+  <div class="v-date-picker-title">
+    <div class="v-picker__title__btn v-date-picker-title__year">
       2005
       <i aria-hidden="true"
          class="icon theme--dark material-icons"
@@ -1518,7 +1518,7 @@ exports[`VDatePicker.js should match snapshot with year icon 1`] = `
         year
       </i>
     </div>
-    <div class="picker__title__btn date-picker-title__date active">
+    <div class="v-picker__title__btn v-date-picker-title__date active">
       <div>
         Tue, Nov 1
       </div>
@@ -1530,26 +1530,26 @@ exports[`VDatePicker.js should match snapshot with year icon 1`] = `
 
 exports[`VDatePicker.js should render component with min/max props 1`] = `
 
-<div class="picker picker--date v-card"
+<div class="v-picker v-picker--date v-card"
      style="height: auto;"
 >
-  <div class="picker__title primary">
-    <div class="date-picker-title">
-      <div class="picker__title__btn date-picker-title__year">
+  <div class="v-picker__title primary">
+    <div class="v-date-picker-title">
+      <div class="v-picker__title__btn v-date-picker-title__year">
         2013
       </div>
-      <div class="picker__title__btn date-picker-title__date active">
+      <div class="v-picker__title__btn v-date-picker-title__date active">
         <div>
           Mon, Jan 7
         </div>
       </div>
     </div>
   </div>
-  <div class="picker__body"
+  <div class="v-picker__body"
        style="width: 290px;"
   >
     <div>
-      <div class="date-picker-header">
+      <div class="v-date-picker-header">
         <button disabled="disabled"
                 type="button"
                 class="v-btn v-btn--disabled v-btn--icon"
@@ -1562,7 +1562,7 @@ exports[`VDatePicker.js should render component with min/max props 1`] = `
             </i>
           </div>
         </button>
-        <div class="date-picker-header__value">
+        <div class="v-date-picker-header__value">
           <strong class="accent--text">
             January 2013
           </strong>
@@ -1580,7 +1580,7 @@ exports[`VDatePicker.js should render component with min/max props 1`] = `
           </div>
         </button>
       </div>
-      <div class="date-picker-table date-picker-table--date">
+      <div class="v-date-picker-table v-date-picker-table--date">
         <table>
           <thead>
             <tr>
@@ -1928,26 +1928,26 @@ exports[`VDatePicker.js should render component with min/max props 1`] = `
 
 exports[`VDatePicker.js should render component with min/max props 2`] = `
 
-<div class="picker picker--date v-card"
+<div class="v-picker v-picker--date v-card"
      style="height: auto;"
 >
-  <div class="picker__title primary">
-    <div class="date-picker-title">
-      <div class="picker__title__btn date-picker-title__year">
+  <div class="v-picker__title primary">
+    <div class="v-date-picker-title">
+      <div class="v-picker__title__btn v-date-picker-title__year">
         2013
       </div>
-      <div class="picker__title__btn date-picker-title__date active">
+      <div class="v-picker__title__btn v-date-picker-title__date active">
         <div>
           Mon, Jan 7
         </div>
       </div>
     </div>
   </div>
-  <div class="picker__body"
+  <div class="v-picker__body"
        style="width: 290px;"
   >
     <div class="fade-transition-leave fade-transition-leave-active">
-      <div class="date-picker-header">
+      <div class="v-date-picker-header">
         <button disabled="disabled"
                 type="button"
                 class="v-btn v-btn--disabled v-btn--icon"
@@ -1960,7 +1960,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
             </i>
           </div>
         </button>
-        <div class="date-picker-header__value">
+        <div class="v-date-picker-header__value">
           <strong class="accent--text">
             January 2013
           </strong>
@@ -1978,7 +1978,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
           </div>
         </button>
       </div>
-      <div class="date-picker-table date-picker-table--date">
+      <div class="v-date-picker-table v-date-picker-table--date">
         <table>
           <thead>
             <tr>
@@ -2320,7 +2320,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
       </div>
     </div>
     <div class="fade-transition-enter fade-transition-enter-active">
-      <div class="date-picker-header">
+      <div class="v-date-picker-header">
         <button disabled="disabled"
                 type="button"
                 class="v-btn v-btn--disabled v-btn--icon"
@@ -2333,7 +2333,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
             </i>
           </div>
         </button>
-        <div class="date-picker-header__value">
+        <div class="v-date-picker-header__value">
           <strong class="accent--text">
             2013
           </strong>
@@ -2351,7 +2351,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
           </div>
         </button>
       </div>
-      <div class="date-picker-table date-picker-table--month">
+      <div class="v-date-picker-table v-date-picker-table--month">
         <table>
           <tbody>
             <tr>
@@ -2492,26 +2492,26 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
 
 exports[`VDatePicker.js should render component with min/max props 3`] = `
 
-<div class="picker picker--date v-card"
+<div class="v-picker v-picker--date v-card"
      style="height: auto;"
 >
-  <div class="picker__title primary">
-    <div class="date-picker-title">
-      <div class="picker__title__btn date-picker-title__year active">
+  <div class="v-picker__title primary">
+    <div class="v-date-picker-title">
+      <div class="v-picker__title__btn v-date-picker-title__year active">
         2013
       </div>
-      <div class="picker__title__btn date-picker-title__date">
+      <div class="v-picker__title__btn v-date-picker-title__date">
         <div>
           Mon, Jan 7
         </div>
       </div>
     </div>
   </div>
-  <div class="picker__body"
+  <div class="v-picker__body"
        style="width: 290px;"
   >
     <div class="fade-transition-leave fade-transition-leave-active">
-      <div class="date-picker-header">
+      <div class="v-date-picker-header">
         <button disabled="disabled"
                 type="button"
                 class="v-btn v-btn--disabled v-btn--icon"
@@ -2524,7 +2524,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
             </i>
           </div>
         </button>
-        <div class="date-picker-header__value">
+        <div class="v-date-picker-header__value">
           <strong class="accent--text">
             January 2013
           </strong>
@@ -2542,7 +2542,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
           </div>
         </button>
       </div>
-      <div class="date-picker-table date-picker-table--date">
+      <div class="v-date-picker-table v-date-picker-table--date">
         <table>
           <thead>
             <tr>
@@ -2884,7 +2884,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
       </div>
     </div>
     <div class="fade-transition-leave fade-transition-leave-active">
-      <div class="date-picker-header">
+      <div class="v-date-picker-header">
         <button disabled="disabled"
                 type="button"
                 class="v-btn v-btn--disabled v-btn--icon"
@@ -2897,7 +2897,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
             </i>
           </div>
         </button>
-        <div class="date-picker-header__value">
+        <div class="v-date-picker-header__value">
           <strong class="accent--text">
             2013
           </strong>
@@ -2915,7 +2915,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
           </div>
         </button>
       </div>
-      <div class="date-picker-table date-picker-table--month">
+      <div class="v-date-picker-table v-date-picker-table--month">
         <table>
           <tbody>
             <tr>
@@ -3050,7 +3050,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
       </div>
     </div>
     <div class="fade-transition-enter fade-transition-enter-active">
-      <ul class="date-picker-years">
+      <ul class="v-date-picker-years">
         <li class="active primary--text">
           2013
         </li>
@@ -3063,28 +3063,28 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
 
 exports[`VDatePicker.js should render readonly picker 1`] = `
 
-<div class="picker picker--date v-card"
+<div class="v-picker v-picker--date v-card"
      style="height: auto;"
 >
-  <div class="picker__title primary">
-    <div class="date-picker-title"
+  <div class="v-picker__title primary">
+    <div class="v-date-picker-title"
          style="pointer-events: none;"
     >
-      <div class="picker__title__btn date-picker-title__year">
+      <div class="v-picker__title__btn v-date-picker-title__year">
         2013
       </div>
-      <div class="picker__title__btn date-picker-title__date active">
+      <div class="v-picker__title__btn v-date-picker-title__date active">
         <div>
           Tue, May 7
         </div>
       </div>
     </div>
   </div>
-  <div class="picker__body"
+  <div class="v-picker__body"
        style="width: 290px;"
   >
     <div style="pointer-events: none;">
-      <div class="date-picker-header">
+      <div class="v-date-picker-header">
         <button disabled="disabled"
                 type="button"
                 class="v-btn v-btn--disabled v-btn--icon"
@@ -3097,7 +3097,7 @@ exports[`VDatePicker.js should render readonly picker 1`] = `
             </i>
           </div>
         </button>
-        <div class="date-picker-header__value date-picker-header__value--disabled">
+        <div class="v-date-picker-header__value v-date-picker-header__value--disabled">
           <strong>
             May 2013
           </strong>
@@ -3115,7 +3115,7 @@ exports[`VDatePicker.js should render readonly picker 1`] = `
           </div>
         </button>
       </div>
-      <div class="date-picker-table date-picker-table--date">
+      <div class="v-date-picker-table v-date-picker-table--date">
         <table>
           <thead>
             <tr>

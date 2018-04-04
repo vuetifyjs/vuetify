@@ -2,7 +2,7 @@
 
 exports[`VDatePickerHeader.js should render component and match snapshot 1`] = `
 
-<div class="date-picker-header">
+<div class="v-date-picker-header">
   <button type="button"
           class="v-btn v-btn--icon"
   >
@@ -14,7 +14,7 @@ exports[`VDatePickerHeader.js should render component and match snapshot 1`] = `
       </i>
     </div>
   </button>
-  <div class="date-picker-header__value">
+  <div class="v-date-picker-header__value">
     <strong class="accent--text">
       November 2005
     </strong>
@@ -36,7 +36,7 @@ exports[`VDatePickerHeader.js should render component and match snapshot 1`] = `
 
 exports[`VDatePickerHeader.js should render component with default slot and match snapshot 1`] = `
 
-<div class="date-picker-header">
+<div class="v-date-picker-header">
   <button type="button"
           class="v-btn v-btn--icon"
   >
@@ -48,7 +48,7 @@ exports[`VDatePickerHeader.js should render component with default slot and matc
       </i>
     </div>
   </button>
-  <div class="date-picker-header__value">
+  <div class="v-date-picker-header__value">
     <strong class="accent--text">
       <span>
         foo

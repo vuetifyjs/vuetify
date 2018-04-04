@@ -377,6 +377,6 @@ export default {
   },
 
   render () {
-    return this.genPicker('picker--date')
+    return this.genPicker('v-picker--date')
   }
 }
