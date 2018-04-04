@@ -68,7 +68,7 @@ export default {
     },
     genActions () {
       return this.$createElement('div', {
-        staticClass: 'v-picker__actions card__actions'
+        staticClass: 'v-picker__actions v-card__actions'
       }, this.$slots.actions)
     }
   },

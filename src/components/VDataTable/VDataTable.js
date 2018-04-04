@@ -14,7 +14,7 @@ import {
 } from '../../util/helpers'
 
 // Importing does not work properly
-const VTableOverflow = createSimpleFunctional('table__overflow')
+const VTableOverflow = createSimpleFunctional('v-table__overflow')
 
 export default {
   name: 'v-data-table',
