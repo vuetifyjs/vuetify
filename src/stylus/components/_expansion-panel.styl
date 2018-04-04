@@ -2,24 +2,24 @@
 @import '../theme'
 
 /** Theme */
-expansion-panel($material)
-  .expansion-panel__container
+v-expansion-panel($material)
+  .v-expansion-panel__container
     border-top: 1px solid rgba($material.fg-color, $material.divider-percent)
     background-color: $material.cards
     color: $material.text.primary
 
-    .expansion-panel__header
+    .v-expansion-panel__header
       .icon
         color: $material.icons.active
 
   &--focusable
-    .expansion-panel__container
+    .v-expansion-panel__container
       &:focus
-        background-color: $material.expansion-panels.focus
+        background-color: $material.v-expansion-panels.focus
 
-theme(expansion-panel, "expansion-panel")
+theme(expansion-panel, "v-expansion-panel")
 
-.expansion-panel
+.v-expansion-panel
   display: flex
   flex-wrap: wrap
   justify-content: center
@@ -46,7 +46,7 @@ theme(expansion-panel, "expansion-panel")
         transition: none
 
     &--active
-      > .expansion-panel__header
+      > .v-expansion-panel__header
         .header__icon .icon
           transform: rotate(-180deg)
 
@@ -70,18 +70,18 @@ theme(expansion-panel, "expansion-panel")
   &--popout, &--inset
     elevation(0)
 
-    .expansion-panel__container--active
+    .v-expansion-panel__container--active
       margin: $spacers.three.x
       elevation(3)
 
   &--popout, &--inset
-    .expansion-panel__container
+    .v-expansion-panel__container
       max-width: 95%
 
   &--popout
-    .expansion-panel__container--active
+    .v-expansion-panel__container--active
       max-width: 100%
 
   &--inset
-    .expansion-panel__container--active
+    .v-expansion-panel__container--active
       max-width: 85%

@@ -44,7 +44,7 @@ export default {
     genBody () {
       return this.$createElement('div', {
         ref: 'body',
-        class: 'expansion-panel__body',
+        class: 'v-expansion-panel__body',
         directives: [
           {
             name: 'show',
@@ -55,7 +55,7 @@ export default {
     },
     genHeader () {
       return this.$createElement('div', {
-        staticClass: 'expansion-panel__header',
+        staticClass: 'v-expansion-panel__header',
         directives: [{
           name: 'ripple',
           value: this.ripple
@@ -105,9 +105,9 @@ export default {
     children.push(h(VExpandTransition, [this.genBody()]))
 
     return h('li', {
-      staticClass: 'expansion-panel__container',
+      staticClass: 'v-expansion-panel__container',
       'class': {
-        'expansion-panel__container--active': this.isActive
+        'v-expansion-panel__container--active': this.isActive
       },
       attrs: {
         tabindex: 0
