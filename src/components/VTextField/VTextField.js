@@ -185,7 +185,7 @@ export default {
         }
       }
 
-      if ((this.attrs || {}).id) data.props.for = this.attrs.id
+      if (this.$attrs.id) data.props.for = this.$attrs.id
 
       return this.$createElement(VLabel, data, this.$slots.label || this.label)
     },
@@ -196,7 +196,7 @@ export default {
         slot.push(this.genIcon('append'))
       } else if (this.clearable && this.isDirty) {
         slot.push(this.genIcon('clear',
-          this.clearableCallback || this.clearIconCb
+          this.clearIconCb || this.clearableCallback
         ))
       }
 
@@ -298,17 +298,7 @@ export default {
       this.internalValue = e.target.value
       this.badInput = e.target.validity && e.target.validity.badInput
     },
-    onKeyDown (e) {
-      // Prevents closing of a
-      // dialog when pressing
-      // enter
-      if (this.isTextarea &&
-        this.isFocused &&
-        e.keyCode === 13
-      ) {
-        e.stopPropagation()
-      }
-
+    onKeyDown () {
       this.internalChange = true
     }
   }

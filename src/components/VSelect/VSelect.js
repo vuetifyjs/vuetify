@@ -165,6 +165,14 @@ export default {
     }
   },
 
+  watch: {
+    items (val) {
+      if (this.cacheItems) {
+        this.cachedItems = this.filterDuplicates(this.cachedItems.concat(val))
+      }
+    }
+  },
+
   methods: {
     changeSelectedIndex (keyCode) {
       // backspace, left, right, delete
@@ -231,9 +239,6 @@ export default {
 
       return this.$createElement(VChip, {
         staticClass: 'chip--select-multi',
-        attrs: {
-          tabindex: this.isFocused ? null : '-1'
-        },
         props: {
           close: this.deletableChips && !isDisabled,
           dark: this.dark,
@@ -245,7 +250,7 @@ export default {
           focus: click,
           input: () => {
             if (this.multiple) this.selectItem(item)
-            else this.inputValue = null
+            else this.internalValue = null
 
             // If all items have been deleted,
             // open `v-menu`
@@ -263,7 +268,7 @@ export default {
       ) return null
 
       return this.genSlot('append', 'inner', [
-        this.genIcon('clear', this.clearableCallback || this.clearIconCb)
+        this.genIcon('clear', this.clearIconCb || this.clearableCallback)
       ])
     },
     genCommaSelection (item, index, last) {

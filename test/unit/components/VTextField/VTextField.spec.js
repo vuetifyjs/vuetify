@@ -336,16 +336,18 @@ test('VTextField.js', ({ mount }) => {
     expect(wrapper.vm.$refs.input.value).toBe('0')
   })
 
-  it('should reset internal change on blur', async () => {
+  it('should reset internal change on blur and keydown', async () => {
     const wrapper = mount(VTextField)
 
     wrapper.setProps({ value: 'foo' })
     wrapper.vm.internalChange = true
-    await wrapper.vm.$nextTick()
     expect(wrapper.vm.internalChange).toBe(true)
     wrapper.vm.onBlur()
-    await wrapper.vm.$nextTick()
     expect(wrapper.vm.internalChange).toBe(false)
+
+    wrapper.first('input').trigger('keydown')
+
+    expect(wrapper.vm.internalChange).toBe(true)
   })
 
   it('should emit input when externally set value was modified internally', async () => {
@@ -618,5 +620,125 @@ test('VTextField.js', ({ mount }) => {
     })
 
     expect(wrapper.element.classList).toContain('v-input--is-label-active')
+  })
+
+  it('should use a custom clear callback', async () => {
+    const clearIconCb = jest.fn()
+    const wrapper = mount(VTextField, {
+      propsData: {
+        clearIconCb,
+        clearable: true,
+        value: 'foo'
+      }
+    })
+
+    wrapper.first('.v-input__icon--clear .icon').trigger('click')
+
+    expect(clearIconCb).toBeCalled()
+  })
+
+  it('should not generate label', () => {
+    const wrapper = mount(VTextField)
+
+    expect(wrapper.vm.genLabel()).toBeTruthy()
+
+    wrapper.setProps({ singleLine: true })
+
+    expect(wrapper.vm.genLabel()).toBeTruthy()
+
+    wrapper.setProps({ placeholder: 'foo' })
+
+    expect(wrapper.vm.genLabel()).toBe(null)
+
+    wrapper.setProps({
+      placeholder: undefined,
+      value: 'bar'
+    })
+
+    expect(wrapper.vm.genLabel()).toBe(null)
+  })
+
+  it('should propagate id to label for attribute', () => {
+    const wrapper = mount(VTextField, {
+      propsData: {
+        label: 'foo',
+        id: 'bar'
+      },
+      attrs: {
+        id: 'bar'
+      },
+      domProps: {
+        id: 'bar'
+      }
+    })
+
+    const label = wrapper.first('label')
+
+    expect(label.element.getAttribute('for')).toBe('bar')
+  })
+
+  it('should render an appended outer icon', () => {
+    const wrapper = mount(VTextField, {
+      propsData: {
+        appendOuterIcon: 'search'
+      }
+    })
+
+    expect(wrapper.first('.v-input__icon--appendOuter .icon').element.innerHTML).toBe('search')
+  })
+
+  it('should reset internal change', () => {
+    const wrapper = mount(VTextField)
+
+    wrapper.setData({ internalChange: true })
+
+    expect(wrapper.vm.internalChange).toBe(true)
+
+    wrapper.setProps({ value: 'foo' })
+
+    expect(wrapper.vm.internalChange).toBe(false)
+  })
+
+  it('should have correct max value', async () => {
+    const wrapper = mount(VTextField, {
+      attrs: {
+        maxlength: 25
+      },
+      propsData: {
+        counter: true
+      }
+    })
+
+    const counter = wrapper.first('.v-counter')
+
+    expect(counter.element.innerHTML).toBe('0 / 25')
+
+    wrapper.setProps({ counter: '50' })
+
+    expect(counter.element.innerHTML).toBe('0 / 50')
+  })
+
+  it('should set bad input on input', () => {
+    const wrapper = mount(VTextField)
+
+    expect(wrapper.vm.badInput).toBeFalsy()
+
+    wrapper.vm.onInput({
+      target: {}
+    })
+
+    expect(wrapper.vm.badInput).toBeFalsy()
+
+    wrapper.vm.onInput({
+      target: { validity: { badInput: false } }
+    })
+
+    expect(wrapper.vm.badInput).toBeFalsy()
+
+    wrapper.vm.onInput({
+      target: { validity: { badInput: true } }
+    })
+
+    expect(wrapper.vm.badInput).toBe(true)
   })
 })

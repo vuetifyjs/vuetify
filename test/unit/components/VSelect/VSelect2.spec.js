@@ -1,5 +1,6 @@
 import { test } from '@/test'
 import VSelect from '@/components/VSelect'
+import VChip from '@/components/VChip'
 
 test('VSelect', ({ mount, compileToFunctions }) => {
   const app = document.createElement('div')
@@ -398,5 +399,162 @@ test('VSelect', ({ mount, compileToFunctions }) => {
         items: ['foo']
       }
     })
+  })
+
+  it('should update model when chips are removed', async () => {
+    const selectItem = jest.fn()
+    const wrapper = mount(VSelect, {
+      propsData: {
+        chips: true,
+        deletableChips: true,
+        items: ['foo'],
+        value: 'foo'
+      },
+      methods: { selectItem }
+    })
+
+    const input = jest.fn()
+    const change = jest.fn()
+
+    wrapper.vm.$on('input', input)
+
+    expect(wrapper.vm.internalValue).toEqual('foo')
+    wrapper.first('.chip__close').trigger('click')
+
+    expect(input).toBeCalled()
+
+    wrapper.setProps({
+      items: ['foo', 'bar'],
+      multiple: true,
+      value: ['foo', 'bar']
+    })
+    wrapper.vm.$on('change', change)
+
+    expect(wrapper.vm.internalValue).toEqual(['foo', 'bar'])
+    wrapper.first('.chip__close').trigger('click')
+
+    await wrapper.vm.$nextTick()
+
+    expect(selectItem).toHaveBeenCalledTimes(1)
+  })
+
+  it('should set selected index', async () => {
+    const onFocus = jest.fn()
+    const wrapper = mount(VSelect, {
+      propsData: {
+        chips: true,
+        deletableChips: true,
+        multiple: true,
+        items: ['foo', 'bar', 'fizz', 'buzz'],
+        value: ['foo', 'bar', 'fizz', 'buzz']
+      },
+      methods: { onFocus }
+    })
+
+    expect(wrapper.vm.selectedIndex).toBe(null)
+
+    const foo = wrapper.first('.chip--select-multi')
+    foo.trigger('click')
+
+    expect(wrapper.vm.selectedIndex).toBe(0)
+    expect(onFocus).toHaveBeenCalledTimes(1)
+
+    wrapper.find('.chip--select-multi')[1].trigger('click')
+
+    expect(wrapper.vm.selectedIndex).toBe(1)
+    expect(onFocus).toHaveBeenCalledTimes(2)
+
+    wrapper.setProps({ disabled: true })
+
+    await wrapper.vm.$nextTick()
+
+    wrapper.first('.chip--select-multi').trigger('click')
+
+    expect(wrapper.vm.selectedIndex).toBe(1)
+    expect(onFocus).toHaveBeenCalledTimes(2)
+  })
+
+  it('should not duplicate items after items update when caching is turned on', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        cacheItems: true,
+        returnObject: true,
+        itemText: 'text',
+        itemValue: 'id',
+        items: [],
+      }
+    })
+
+    wrapper.setProps({ items: [{ id: 1, text: 'A' }] })
+    expect(wrapper.vm.computedItems).toHaveLength(1)
+    wrapper.setProps({ items: [{ id: 1, text: 'A' }] })
+    expect(wrapper.vm.computedItems).toHaveLength(1)
+  })
+
+  it('should cache items', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        cacheItems: true,
+        items: []
+      }
+    })
+
+    wrapper.setProps({ items: ['bar', 'baz'] })
+    expect(wrapper.vm.computedItems).toHaveLength(2)
+
+    wrapper.setProps({ items: ['foo'] })
+    expect(wrapper.vm.computedItems).toHaveLength(3)
+
+    wrapper.setProps({ items: ['bar'] })
+    expect(wrapper.vm.computedItems).toHaveLength(3)
+  })
+
+  it('should cache items passed via prop', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        cacheItems: true,
+        items: [1, 2, 3, 4]
+      }
+    })
+
+    expect(wrapper.vm.computedItems).toHaveLength(4)
+
+    wrapper.setProps({ items: [5] })
+    expect(wrapper.vm.computedItems).toHaveLength(5)
+  })
+
+  it('should have an affix', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        prefix: '$',
+        suffix: 'lbs'
+      }
+    })
+
+    expect(wrapper.first('.v-text-field__prefix').element.innerHTML).toBe('$')
+    expect(wrapper.first('.v-text-field__suffix').element.innerHTML).toBe('lbs')
+
+    wrapper.setProps({ prefix: undefined, suffix: undefined })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.find('.v-text-field__prefix').length).toBe(0)
+    expect(wrapper.find('.v-text-field__suffix').length).toBe(0)
+  })
+
+  it('should use custom clear icon cb', () => {
+    const clearIconCb = jest.fn()
+    const wrapper = mount(VSelect, {
+      propsData: {
+        clearIconCb,
+        clearable: true,
+        items: ['foo'],
+        value: 'foo'
+      }
+    })
+
+    wrapper.first('.v-input__icon--clear .icon').trigger('click')
+
+    expect(clearIconCb).toBeCalled()
   })
 })

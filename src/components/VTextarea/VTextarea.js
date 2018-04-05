@@ -80,6 +80,18 @@ export default {
       input.data.attrs.rows = this.rows
 
       return input
+    },
+    onKeyDown (e) {
+      // Prevents closing of a
+      // dialog when pressing
+      // enter
+      if (this.isFocused &&
+        e.keyCode === 13
+      ) {
+        e.stopPropagation()
+      }
+
+      this.internalChange = true
     }
   }
 }

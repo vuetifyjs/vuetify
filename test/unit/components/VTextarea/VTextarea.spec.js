@@ -104,4 +104,23 @@ test('VTextarea.vue', ({ mount }) => {
 
     expect(wrapper.vm.inputHeight).toBe(120)
   })
+
+  it('should stop propagation', async () => {
+    const wrapper = mount(VTextarea)
+
+    const stopPropagation = jest.fn()
+    const onKeyDown = {
+      keyCode: 13,
+      stopPropagation
+   }
+    wrapper.vm.onKeyDown(onKeyDown)
+
+    expect(stopPropagation).not.toBeCalled()
+
+    wrapper.setData({ isFocused: true })
+
+    wrapper.vm.onKeyDown(onKeyDown)
+
+    expect(stopPropagation).toBeCalled()
+  })
 })
