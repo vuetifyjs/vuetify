@@ -47,12 +47,12 @@ export default {
   computed: {
     classes () {
       return {
-        'stepper__step': true,
-        'stepper__step--active': this.isActive,
-        'stepper__step--editable': this.editable,
-        'stepper__step--inactive': this.isInactive,
-        'stepper__step--error': this.hasError,
-        'stepper__step--complete': this.complete,
+        'v-stepper__step': true,
+        'v-stepper__step--active': this.isActive,
+        'v-stepper__step--editable': this.editable,
+        'v-stepper__step--inactive': this.isInactive,
+        'v-stepper__step--error': this.hasError,
+        'v-stepper__step--complete': this.complete,
         'error--text': this.hasError
       }
     },
@@ -99,14 +99,14 @@ export default {
     }
 
     const step = h('span', {
-      staticClass: 'stepper__step__step',
+      staticClass: 'v-stepper__step__step',
       'class': {
         [this.color]: !this.hasError && (this.complete || this.isActive)
       }
     }, stepContent)
 
     const label = h('div', {
-      staticClass: 'stepper__label'
+      staticClass: 'v-stepper__label'
     }, this.$slots.default)
 
     return h('div', data, [step, label])
