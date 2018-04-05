@@ -45,7 +45,7 @@ exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
                         check_box_outline_blank
                       </i>
                       <i aria-hidden="true"
-                         class="v-icon v-icon--selection-control material-icons icon--checkbox fade-transition-enter fade-transition-enter-active"
+                         class="v-icon v-icon--selection-control material-icons v-icon--checkbox fade-transition-enter fade-transition-enter-active"
                          style="-webkit-transform-origin: top center 0;"
                       >
                         check_box

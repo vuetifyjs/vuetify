@@ -144,7 +144,7 @@ export default {
       h(VIcon, {
         staticClass: 'v-icon--selection-control',
         'class': {
-          'icon--radio': this.isActive
+          'v-icon--radio': this.isActive
         },
         key: this.icon,
         on: Object.assign({
