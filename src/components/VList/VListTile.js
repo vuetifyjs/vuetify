@@ -22,7 +22,7 @@ export default {
   inheritAttrs: false,
 
   data: () => ({
-    proxyClass: 'list__tile--active'
+    proxyClass: 'v-list__tile--active'
   }),
 
   props: {
@@ -45,11 +45,11 @@ export default {
     },
     classes () {
       return {
-        'list__tile': true,
-        'list__tile--link': this.isLink && !this.inactive,
-        'list__tile--avatar': this.avatar,
-        'list__tile--disabled': this.disabled,
-        'list__tile--active': !this.to && this.isActive,
+        'v-list__tile': true,
+        'v-list__tile--link': this.isLink && !this.inactive,
+        'v-list__tile--avatar': this.avatar,
+        'v-list__tile--disabled': this.disabled,
+        'v-list__tile--active': !this.to && this.isActive,
         [this.activeClass]: this.isActive
       }
     },

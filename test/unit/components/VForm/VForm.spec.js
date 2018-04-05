@@ -13,7 +13,7 @@ const inputOne = Vue.component('input-one', {
 })
 
 test('VForm.js', ({ mount }) => {
-  it('should pass on listeners to form element', async () => {
+  it('should pass on v-listeners to form element', async () => {
     const submit = jest.fn()
     const component = Vue.component('test', {
       render (h) {
