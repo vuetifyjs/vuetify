@@ -2,28 +2,28 @@
 
 exports[`VSubheader.js should have custom class 1`] = `
 
-<div class="subheader foo">
+<div class="v-subheader foo">
 </div>
 
 `;
 
 exports[`VSubheader.js should have custom class 2`] = `
 
-<div class="subheader theme--light">
+<div class="v-subheader theme--light">
 </div>
 
 `;
 
 exports[`VSubheader.js should have custom class 3`] = `
 
-<div class="subheader theme--dark">
+<div class="v-subheader theme--dark">
 </div>
 
 `;
 
 exports[`VSubheader.js should have custom class 4`] = `
 
-<div class="subheader subheader--inset">
+<div class="v-subheader v-subheader--inset">
 </div>
 
 `;
