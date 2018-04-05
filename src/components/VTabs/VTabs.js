@@ -188,7 +188,10 @@ export default {
       const wrapperWidth = this.$refs.wrapper.clientWidth
       const totalWidth = wrapperWidth + this.scrollOffset
       const itemOffset = clientWidth + offsetLeft
-      const additionalOffset = clientWidth * 0.3
+      let additionalOffset = clientWidth * 0.3
+      if (this.activeIndex === this.tabs.length - 1) {
+        additionalOffset = 0 // don't add an offset if selecting the last tab
+      }
 
       /* instanbul ignore else */
       if (offsetLeft < this.scrollOffset) {
