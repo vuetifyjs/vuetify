@@ -1,5 +1,6 @@
 // Maps internal Vuetify icon names to actual Material Design icon names.
 const ICONS_MATERIAL = {
+  'complete': 'check',
   'cancel': 'cancel',
   'close': 'close',
   'delete': 'cancel', // delete (e.g. v-chip close)
@@ -25,6 +26,7 @@ const ICONS_MATERIAL = {
 
 // Maps internal Vuetify icon names to actual icons from materialdesignicons.com
 const ICONS_MDI = {
+  'complete': 'mdi-check',
   'cancel': 'mdi-close-circle',
   'close': 'mdi-close',
   'delete': 'mdi-close-circle', // delete (e.g. v-chip close)
@@ -50,6 +52,7 @@ const ICONS_MDI = {
 
 // Maps internal Vuetify icon names to actual Font-Awesome 4 icon names.
 const ICONS_FONTAWESOME4 = {
+  'complete': 'fa fa-check',
   'cancel': 'fa fa-times-circle',
   'close': 'fa fa-times',
   'delete': 'fa fa-times-circle', // delete (e.g. v-chip close)
@@ -75,6 +78,7 @@ const ICONS_FONTAWESOME4 = {
 
 // Maps internal Vuetify icon names to actual Font-Awesome 5+ icon names.
 const ICONS_FONTAWESOME = {
+  'complete': 'fas fa-check',
   'cancel': 'fas fa-times-circle',
   'close': 'fas fa-times',
   'delete': 'fas fa-times-circle', // delete (e.g. v-chip close)

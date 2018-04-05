@@ -226,7 +226,7 @@ export default {
     const { tab, slider, items, item } = this.parseNodes()
 
     return h('div', {
-      staticClass: 'tabs',
+      staticClass: 'v-tabs',
       directives: [{
         name: 'resize',
         arg: 400,
