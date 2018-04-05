@@ -62,7 +62,7 @@ test('VCarousel.js', ({ mount }) => {
     })
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.find('.v-carousel__left .icon')[0].text()).toBe('stop')
+    expect(wrapper.find('.v-carousel__left .v-icon')[0].text()).toBe('stop')
     expect(wrapper.html()).toMatchSnapshot()
   })
 
@@ -86,7 +86,7 @@ test('VCarousel.js', ({ mount }) => {
     })
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.find('.v-carousel__right .icon')[0].text()).toBe('stop')
+    expect(wrapper.find('.v-carousel__right .v-icon')[0].text()).toBe('stop')
     expect(wrapper.html()).toMatchSnapshot()
   })
 

@@ -6,19 +6,19 @@ selection-control($material)
   label
     color: $material.text.primary
 
-  .icon--selection-control
+  .v-icon--selection-control
     color: $material.text.secondary
 
   &.v-input-group--active
-    .icon--selection-control
+    .v-icon--selection-control
       color: inherit
 
   &.v-input-group--disabled
     .v-input-group__input
       color: $material.text.disabled
 
-      .icon--radio,
-      .icon--checkbox
+      .v-icon--radio,
+      .v-icon--checkbox
         color: inherit
 
 theme(selection-control, "v-input-group--selection-controls")
@@ -35,7 +35,7 @@ theme(selection-control, "v-input-group--selection-controls")
   display: flex
   padding: 0
 
-  .icon--selection-control
+  .v-icon--selection-control
     cursor: pointer
     position: absolute
     left: 0
@@ -51,7 +51,7 @@ theme(selection-control, "v-input-group--selection-controls")
     position: relative
 
     // Needed for safari
-    .icon--selection-control
+    .v-icon--selection-control
       align-self: center
       height: 30px
       margin: auto
@@ -61,7 +61,7 @@ theme(selection-control, "v-input-group--selection-controls")
       color: inherit
 
     .v-input-group__input
-      .icon--selection-control
+      .v-icon--selection-control
         color: inherit
 
 /** Label */
@@ -105,7 +105,7 @@ theme(selection-control, "v-input-group--selection-controls")
 /** Appended and prepended icons */
 .v-input-group--prepend-icon
   &.v-input-group--selection-controls
-    .icon--selection-control,
+    .v-icon--selection-control,
     .v-input-group--selection-controls__ripple
       left: 38px
 
@@ -133,7 +133,7 @@ theme(selection-control, "v-input-group--selection-controls")
 
 .v-input-group--prepend-icon
   &.radio-group--row
-    .icon--selection-control,
+    .v-icon--selection-control,
     .v-input-group--selection-controls__ripple
       left: 14px
 

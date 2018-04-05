@@ -158,7 +158,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
-               class="icon material-icons"
+               class="v-icon material-icons"
             >
               chevron_left
             </i>
@@ -174,7 +174,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
-               class="icon material-icons"
+               class="v-icon material-icons"
             >
               chevron_right
             </i>
@@ -336,7 +336,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
-               class="icon material-icons"
+               class="v-icon material-icons"
             >
               chevron_left
             </i>
@@ -352,7 +352,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
-               class="icon material-icons"
+               class="v-icon material-icons"
             >
               chevron_right
             </i>
@@ -637,7 +637,7 @@ exports[`VDatePicker.js should match snapshot with pick-month prop 1`] = `
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
-               class="icon material-icons"
+               class="v-icon material-icons"
             >
               chevron_left
             </i>
@@ -653,7 +653,7 @@ exports[`VDatePicker.js should match snapshot with pick-month prop 1`] = `
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
-               class="icon material-icons"
+               class="v-icon material-icons"
             >
               chevron_right
             </i>

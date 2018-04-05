@@ -70,7 +70,7 @@ test('VAlert.vue', ({ mount }) => {
   it('should have no icon', () => {
     const wrapper = mount(VAlert)
 
-    expect(wrapper.contains('.icon')).toBe(false)
+    expect(wrapper.contains('.v-icon')).toBe(false)
   })
 
   it('should display contextual colors by type', async () => {

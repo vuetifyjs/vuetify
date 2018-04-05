@@ -54,7 +54,7 @@ test('VExpansionPanelContent.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    expect(wrapper.find('.icon')[0].element.textContent).toBe('block')
+    expect(wrapper.find('.v-icon')[0].element.textContent).toBe('block')
     expect(registrableWarning).toHaveBeenTipped()
   })
 
