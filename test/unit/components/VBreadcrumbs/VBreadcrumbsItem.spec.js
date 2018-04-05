@@ -13,7 +13,7 @@ test.skip('VBreadcrumbsItem.js', ({ mount }) => {
   it.skip('should have a custom active class', () => {
     const wrapper = mount(VBreadcrumbsItem, {
       propsData: {
-        activeClass: 'breadcrumbs-item--active',
+        activeClass: 'v-breadcrumbs-item--active',
         to: '/'
       }
     })

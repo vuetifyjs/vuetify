@@ -71,7 +71,7 @@ export default {
 
   render (h) {
     const data = {
-      staticClass: 'tabs__content',
+      staticClass: 'v-tabs__content',
       directives: [{
         name: 'show',
         value: this.isActive
