@@ -2,13 +2,13 @@
 @import '../theme'
 
 /* Theme */
-toolbar($material)
+v-toolbar($material)
   background-color: $material.app-bar
   color: $material.text.primary
 
-theme(toolbar, "toolbar")
+theme(v-toolbar, "v-toolbar")
 
-.toolbar
+.v-toolbar
   bootable()
   elevation(4)
 
@@ -28,7 +28,7 @@ theme(toolbar, "toolbar")
       top: auto
 
 /** Children */
-.toolbar
+.v-toolbar
   .tabs
     width: 100%
 
@@ -82,8 +82,8 @@ theme(toolbar, "toolbar")
       margin: 0
 
   @media $display-breakpoints.xs-only
-    .toolbar__content,
-    .toolbar__extension
+    .v-toolbar__content,
+    .v-toolbar__extension
       > .v-btn:last-child
         margin-right: 17px
 
@@ -97,10 +97,10 @@ theme(toolbar, "toolbar")
         margin-right: $grid-gutters.xl
 
   @media all and (max-width: $grid-breakpoints.sm) and (orientation: portrait)
-    toolbar-content(7px)
+    v-toolbar-content(7px)
 
 /** Types */
-.toolbar
+.v-toolbar
   &--card
     border-radius: $card-border-radius $card-border-radius 0 0
     elevation(0)
@@ -126,14 +126,14 @@ theme(toolbar, "toolbar")
     z-index: 3
 
   &--prominent
-    toolbar-content(15px)
+    v-toolbar-content(15px)
 
   &--dense
-    toolbar-content(7px)
+    v-toolbar-content(7px)
 
-toolbar-content(left)
-  .toolbar__content,
-  .toolbar__extension
+v-toolbar-content(left)
+  .v-toolbar__content,
+  .v-toolbar__extension
     > *:first-child
       margin-left: left
 
