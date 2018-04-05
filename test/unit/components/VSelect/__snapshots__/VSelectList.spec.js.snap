@@ -2,14 +2,14 @@
 
 exports[`VSelect should generate children 1`] = `
 
-<div class="v-select-list card"
+<div class="v-select-list v-card"
      style="height: auto;"
 >
   <div class="list">
-    <div class="subheader">
+    <div class="v-subheader">
       true
     </div>
-    <hr class="divider">
+    <hr class="v-divider">
     <div>
       <a class="list__tile list__tile--link">
         <div class="list__tile__content">

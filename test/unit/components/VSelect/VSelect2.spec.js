@@ -419,7 +419,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     wrapper.vm.$on('input', input)
 
     expect(wrapper.vm.internalValue).toEqual('foo')
-    wrapper.first('.chip__close').trigger('click')
+    wrapper.first('.v-chip__close').trigger('click')
 
     expect(input).toBeCalled()
 
@@ -431,7 +431,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     wrapper.vm.$on('change', change)
 
     expect(wrapper.vm.internalValue).toEqual(['foo', 'bar'])
-    wrapper.first('.chip__close').trigger('click')
+    wrapper.first('.v-chip__close').trigger('click')
 
     await wrapper.vm.$nextTick()
 

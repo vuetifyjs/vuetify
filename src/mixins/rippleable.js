@@ -18,6 +18,9 @@ export default {
       if (!this.ripple) return null
 
       data.staticClass = 'v-input--selection-controls__ripple'
+
+      if (this.rippleClasses) data.staticClass += ` ${this.rippleClasses}`
+
       data.directives = data.directives || []
       data.directives.push({
         name: 'ripple',
@@ -28,6 +31,7 @@ export default {
       }, this.$listeners)
 
       return this.$createElement('div', data)
-    }
+    },
+    onChange () {}
   }
 }

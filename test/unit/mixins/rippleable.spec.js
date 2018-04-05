@@ -15,14 +15,13 @@ const Mock = {
 
 test('menuable.js', ({ mount }) => {
   it('should react to click', () => {
+    const onChange = jest.fn()
+    Mock.methods = { onChange }
     const wrapper = mount(Mock)
 
-    const click = jest.fn()
-
-    wrapper.setMethods({ toggle: click })
     wrapper.trigger('click')
 
-    expect(click).toHaveBeenCalled()
+    expect(onChange).toHaveBeenCalled()
   })
 
   it('should match snapshot', () => {
