@@ -41,7 +41,9 @@
       border-top: 1px solid $material-light.dividers
 
     & > .card
-      contain: content
+      // This causes an issue on Chrome 65
+      // that prevents scrolling after a menu is opened
+      // contain: content
       backface-visibility: hidden
 
   > .menu__content
