@@ -5,8 +5,8 @@ import {
 import VToolbar from './VToolbar'
 import VToolbarSideIcon from './VToolbarSideIcon'
 
-const VToolbarTitle = createSimpleFunctional('toolbar__title')
-const VToolbarItems = createSimpleFunctional('toolbar__items')
+const VToolbarTitle = createSimpleFunctional('v-toolbar__title')
+const VToolbarItems = createSimpleFunctional('v-toolbar__items')
 
 export { VToolbar, VToolbarSideIcon, VToolbarTitle, VToolbarItems }
 

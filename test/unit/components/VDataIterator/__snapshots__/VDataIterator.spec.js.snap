@@ -38,38 +38,38 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
                 <div class="v-card"
                      style="height: auto;"
                 >
-                  <div class="list">
+                  <div class="v-list">
                     <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
+                      <a class="v-list__tile v-list__tile--link">
+                        <div class="v-list__tile__content">
+                          <div class="v-list__tile__title">
                             5
                           </div>
                         </div>
                       </a>
                     </div>
                     <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
+                      <a class="v-list__tile v-list__tile--link">
+                        <div class="v-list__tile__content">
+                          <div class="v-list__tile__title">
                             10
                           </div>
                         </div>
                       </a>
                     </div>
                     <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
+                      <a class="v-list__tile v-list__tile--link">
+                        <div class="v-list__tile__content">
+                          <div class="v-list__tile__title">
                             25
                           </div>
                         </div>
                       </a>
                     </div>
                     <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
+                      <a class="v-list__tile v-list__tile--link">
+                        <div class="v-list__tile__content">
+                          <div class="v-list__tile__title">
                             All
                           </div>
                         </div>
@@ -175,38 +175,38 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
                 <div class="v-card"
                      style="height: auto;"
                 >
-                  <div class="list">
+                  <div class="v-list">
                     <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
+                      <a class="v-list__tile v-list__tile--link">
+                        <div class="v-list__tile__content">
+                          <div class="v-list__tile__title">
                             5
                           </div>
                         </div>
                       </a>
                     </div>
                     <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
+                      <a class="v-list__tile v-list__tile--link">
+                        <div class="v-list__tile__content">
+                          <div class="v-list__tile__title">
                             10
                           </div>
                         </div>
                       </a>
                     </div>
                     <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
+                      <a class="v-list__tile v-list__tile--link">
+                        <div class="v-list__tile__content">
+                          <div class="v-list__tile__title">
                             25
                           </div>
                         </div>
                       </a>
                     </div>
                     <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
+                      <a class="v-list__tile v-list__tile--link">
+                        <div class="v-list__tile__content">
+                          <div class="v-list__tile__title">
                             All
                           </div>
                         </div>
@@ -303,38 +303,38 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
                 <div class="v-card"
                      style="height: auto;"
                 >
-                  <div class="list">
+                  <div class="v-list">
                     <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
+                      <a class="v-list__tile v-list__tile--link">
+                        <div class="v-list__tile__content">
+                          <div class="v-list__tile__title">
                             5
                           </div>
                         </div>
                       </a>
                     </div>
                     <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
+                      <a class="v-list__tile v-list__tile--link">
+                        <div class="v-list__tile__content">
+                          <div class="v-list__tile__title">
                             10
                           </div>
                         </div>
                       </a>
                     </div>
                     <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
+                      <a class="v-list__tile v-list__tile--link">
+                        <div class="v-list__tile__content">
+                          <div class="v-list__tile__title">
                             25
                           </div>
                         </div>
                       </a>
                     </div>
                     <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
+                      <a class="v-list__tile v-list__tile--link">
+                        <div class="v-list__tile__content">
+                          <div class="v-list__tile__title">
                             All
                           </div>
                         </div>
@@ -435,38 +435,38 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
                 <div class="v-card"
                      style="height: auto;"
                 >
-                  <div class="list">
+                  <div class="v-list">
                     <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
+                      <a class="v-list__tile v-list__tile--link">
+                        <div class="v-list__tile__content">
+                          <div class="v-list__tile__title">
                             5
                           </div>
                         </div>
                       </a>
                     </div>
                     <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
+                      <a class="v-list__tile v-list__tile--link">
+                        <div class="v-list__tile__content">
+                          <div class="v-list__tile__title">
                             10
                           </div>
                         </div>
                       </a>
                     </div>
                     <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
+                      <a class="v-list__tile v-list__tile--link">
+                        <div class="v-list__tile__content">
+                          <div class="v-list__tile__title">
                             25
                           </div>
                         </div>
                       </a>
                     </div>
                     <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
+                      <a class="v-list__tile v-list__tile--link">
+                        <div class="v-list__tile__content">
+                          <div class="v-list__tile__title">
                             All
                           </div>
                         </div>

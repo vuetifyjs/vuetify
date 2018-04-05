@@ -249,7 +249,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     await wrapper.vm.$nextTick()
 
-    const item = wrapper.find('div a.list__tile')[0]
+    const item = wrapper.find('div a.v-list__tile')[0]
     item.trigger('click')
 
     await wrapper.vm.$nextTick()
@@ -348,7 +348,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const tileTitle = wrapper.find('.list__tile__title')[0]
+    const tileTitle = wrapper.find('.v-list__tile__title')[0]
     expect(tileTitle.html()).toMatchSnapshot()
 
     wrapper.setProps({ searchInput: 'str' })

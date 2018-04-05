@@ -2,7 +2,7 @@
 @import '../theme'
 
 /* Theme */
-system-bar($material)
+v-system-bar($material)
   background-color: $material.status-bar.regular
   color: $material.text.secondary
 
@@ -12,9 +12,9 @@ system-bar($material)
   &--lights-out
     background-color: $material.status-bar.lights-out !important
 
-theme(system-bar, "system-bar")
+theme(v-system-bar, "v-system-bar")
 
-.system-bar
+.v-system-bar
   align-items: center
   display: flex
   font-size: $headings.body-2.size
