@@ -8,7 +8,7 @@ exports[`VDatePickerHeader.js should render component and match snapshot 1`] = `
   >
     <div class="v-btn__content">
       <i aria-hidden="true"
-         class="icon material-icons"
+         class="v-icon material-icons"
       >
         chevron_left
       </i>
@@ -24,7 +24,7 @@ exports[`VDatePickerHeader.js should render component and match snapshot 1`] = `
   >
     <div class="v-btn__content">
       <i aria-hidden="true"
-         class="icon material-icons"
+         class="v-icon material-icons"
       >
         chevron_right
       </i>
@@ -42,7 +42,7 @@ exports[`VDatePickerHeader.js should render component with default slot and matc
   >
     <div class="v-btn__content">
       <i aria-hidden="true"
-         class="icon material-icons"
+         class="v-icon material-icons"
       >
         chevron_left
       </i>
@@ -60,7 +60,7 @@ exports[`VDatePickerHeader.js should render component with default slot and matc
   >
     <div class="v-btn__content">
       <i aria-hidden="true"
-         class="icon material-icons"
+         class="v-icon material-icons"
       >
         chevron_right
       </i>

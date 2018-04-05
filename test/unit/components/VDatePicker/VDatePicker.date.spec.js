@@ -381,7 +381,7 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const icons = wrapper.find('.v-date-picker-header .icon')
+    const icons = wrapper.find('.v-date-picker-header .v-icon')
     expect(icons[0].element.textContent).toBe('block')
     expect(icons[1].element.textContent).toBe('check')
   })

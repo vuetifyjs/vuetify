@@ -25,7 +25,7 @@ v-list($material)
     .v-list__tile
       color: $material.text.disabled !important
 
-    .v-list__group__header__prepend-icon .icon
+    .v-list__group__header__prepend-icon .v-icon
       color: $material.icons.inactive !important
 
 theme(v-list, "v-list")
@@ -131,7 +131,7 @@ theme(v-list, "v-list")
 
     &--active
       .v-list__tile__action:first-of-type
-        .icon
+        .v-icon
           color: inherit
 
     &--disabled
@@ -162,7 +162,7 @@ theme(v-list, "v-list")
       &:not(.v-list__tile--avatar)
         height: $list-item-dense-single-height
 
-      .icon
+      .v-icon
         font-size: $list-item-dense-icon-font-size
 
     .v-list__tile__sub-title
@@ -249,16 +249,16 @@ theme(v-list, "v-list")
 
       &--active
         .v-list__group__header__append-icon
-          .icon
+          .v-icon
             transform: rotate(-180deg)
 
         .v-list__group__header__prepend-icon
-          .icon
+          .v-icon
             color: inherit
 
         &.v-list__group__header--sub-group
           .v-list__group__header__prepend-icon
-            .icon
+            .v-icon
               transform: rotate(-180deg)
 
     &__items
