@@ -41,11 +41,11 @@ export default {
   computed: {
     classes () {
       const classes = {
-        'input-group': true,
-        'input-group--active': this.isActive,
-        'input-group--disabled': this.disabled,
-        'input-group--selection-controls': true,
-        'input-group--tab-focused': this.tabFocused,
+        'v-input-group': true,
+        'v-input-group--active': this.isActive,
+        'v-input-group--disabled': this.disabled,
+        'v-input-group--selection-controls': true,
+        'v-input-group--tab-focused': this.tabFocused,
         'radio': true,
         'theme--dark': this.dark,
         'theme--light': this.light
@@ -83,7 +83,7 @@ export default {
       radio.push(input)
 
       return this.$createElement('div', {
-        class: 'input-group__input'
+        class: 'v-input-group__input'
       }, radio)
     },
     genWrapper (radio) {

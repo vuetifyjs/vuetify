@@ -2,15 +2,15 @@
 
 exports[`VTextField.js should calculate element height when using auto-grow prop 1`] = `
 
-<div class="input-group input-group--focused input-group--dirty input-group--text-field input-group--multi-line input-group--no-resize primary--text">
-  <div class="input-group__input">
+<div class="v-input-group v-input-group--focused v-input-group--dirty v-input-group--text-field v-input-group--multi-line v-input-group--no-resize primary--text">
+  <div class="v-input-group__input">
     <textarea tabindex="0"
               rows="5"
               style="height: 120px;"
     >
     </textarea>
   </div>
-  <div class="input-group__details">
+  <div class="v-input-group__details">
   </div>
 </div>
 
@@ -18,15 +18,15 @@ exports[`VTextField.js should calculate element height when using auto-grow prop
 
 exports[`VTextField.js should match auto-grow snapshot 1`] = `
 
-<div class="input-group input-group--text-field input-group--no-resize input-group--textarea primary--text">
-  <div class="input-group__input">
+<div class="v-input-group v-input-group--text-field v-input-group--no-resize v-input-group--textarea primary--text">
+  <div class="v-input-group__input">
     <textarea tabindex="0"
               rows="5"
               style="height: 120px;"
     >
     </textarea>
   </div>
-  <div class="input-group__details">
+  <div class="v-input-group__details">
   </div>
 </div>
 
@@ -34,14 +34,14 @@ exports[`VTextField.js should match auto-grow snapshot 1`] = `
 
 exports[`VTextField.js should match multi-line snapshot 1`] = `
 
-<div class="input-group input-group--text-field input-group--multi-line primary--text">
-  <div class="input-group__input">
+<div class="v-input-group v-input-group--text-field v-input-group--multi-line primary--text">
+  <div class="v-input-group__input">
     <textarea tabindex="0"
               rows="5"
     >
     </textarea>
   </div>
-  <div class="input-group__details">
+  <div class="v-input-group__details">
   </div>
 </div>
 
@@ -49,14 +49,14 @@ exports[`VTextField.js should match multi-line snapshot 1`] = `
 
 exports[`VTextField.js should match textarea snapshot 1`] = `
 
-<div class="input-group input-group--text-field input-group--textarea primary--text">
-  <div class="input-group__input">
+<div class="v-input-group v-input-group--text-field v-input-group--textarea primary--text">
+  <div class="v-input-group__input">
     <textarea tabindex="0"
               rows="5"
     >
     </textarea>
   </div>
-  <div class="input-group__details">
+  <div class="v-input-group__details">
   </div>
 </div>
 
@@ -64,14 +64,14 @@ exports[`VTextField.js should match textarea snapshot 1`] = `
 
 exports[`VTextField.js should not display counter when set to false 1`] = `
 
-<div class="input-group input-group--text-field primary--text">
-  <div class="input-group__input">
+<div class="v-input-group v-input-group--text-field primary--text">
+  <div class="v-input-group__input">
     <input tabindex="0"
            type="text"
     >
   </div>
-  <div class="input-group__details">
-    <div class="input-group__counter">
+  <div class="v-input-group__details">
+    <div class="v-input-group__counter">
       0 / 25
     </div>
   </div>
@@ -81,13 +81,13 @@ exports[`VTextField.js should not display counter when set to false 1`] = `
 
 exports[`VTextField.js should not display counter when set to false 2`] = `
 
-<div class="input-group input-group--text-field primary--text">
-  <div class="input-group__input">
+<div class="v-input-group v-input-group--text-field primary--text">
+  <div class="v-input-group__input">
     <input tabindex="0"
            type="text"
     >
   </div>
-  <div class="input-group__details">
+  <div class="v-input-group__details">
   </div>
 </div>
 
@@ -95,13 +95,13 @@ exports[`VTextField.js should not display counter when set to false 2`] = `
 
 exports[`VTextField.js should render component and match snapshot 1`] = `
 
-<div class="input-group input-group--text-field primary--text">
-  <div class="input-group__input">
+<div class="v-input-group v-input-group--text-field primary--text">
+  <div class="v-input-group__input">
     <input tabindex="0"
            type="text"
     >
   </div>
-  <div class="input-group__details">
+  <div class="v-input-group__details">
   </div>
 </div>
 
@@ -109,13 +109,13 @@ exports[`VTextField.js should render component and match snapshot 1`] = `
 
 exports[`VTextField.js should render component with async loading and custom progress and match snapshot 1`] = `
 
-<div class="input-group input-group--async-loading input-group--text-field primary--text">
-  <div class="input-group__input">
+<div class="v-input-group v-input-group--async-loading v-input-group--text-field primary--text">
+  <div class="v-input-group__input">
     <input tabindex="0"
            type="text"
     >
   </div>
-  <div class="input-group__details">
+  <div class="v-input-group__details">
     <div class="progress-linear"
          style="height: 7px;"
     >
@@ -139,13 +139,13 @@ exports[`VTextField.js should render component with async loading and custom pro
 
 exports[`VTextField.js should render component with async loading and match snapshot 1`] = `
 
-<div class="input-group input-group--async-loading input-group--text-field primary--text">
-  <div class="input-group__input">
+<div class="v-input-group v-input-group--async-loading v-input-group--text-field primary--text">
+  <div class="v-input-group__input">
     <input tabindex="0"
            type="text"
     >
   </div>
-  <div class="input-group__details">
+  <div class="v-input-group__details">
     <div class="progress-linear"
          style="height: 2px;"
     >

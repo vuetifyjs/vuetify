@@ -11,18 +11,18 @@ export default {
     classes () {
       const classes = {
         ...this.genSoloClasses(),
-        'input-group--text-field input-group--select': true,
-        'input-group--auto': this.auto,
-        'input-group--overflow': this.overflow,
-        'input-group--segmented': this.segmented,
-        'input-group--editable': this.editable,
-        'input-group--autocomplete': this.isAutocomplete,
-        'input-group--single-line': this.singleLine || this.isDropdown,
-        'input-group--multi-line': this.multiLine,
-        'input-group--chips': this.chips,
-        'input-group--multiple': this.multiple,
-        'input-group--open': this.menuIsVisible,
-        'input-group--select--selecting-index': this.selectedIndex > -1
+        'v-input-group--text-field v-input-group--select': true,
+        'v-input-group--auto': this.auto,
+        'v-input-group--overflow': this.overflow,
+        'v-input-group--segmented': this.segmented,
+        'v-input-group--editable': this.editable,
+        'v-input-group--autocomplete': this.isAutocomplete,
+        'v-input-group--single-line': this.singleLine || this.isDropdown,
+        'v-input-group--multi-line': this.multiLine,
+        'v-input-group--chips': this.chips,
+        'v-input-group--multiple': this.multiple,
+        'v-input-group--open': this.menuIsVisible,
+        'v-input-group--select--selecting-index': this.selectedIndex > -1
       }
 
       if (this.hasError) {

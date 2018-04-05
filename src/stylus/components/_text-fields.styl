@@ -2,28 +2,28 @@
 @import '../theme'
 
 textfield($material)
-  &.input-group--text-field-box
-    .input-group__input
+  &.v-input-group--text-field-box
+    .v-input-group__input
       background: $material.buttons.focused-alt
 
   input::placeholder,
   textarea::placeholder
     color: $material.text.disabled
 
-  &:not(.input-group--error)
-    .input-group__counter
+  &:not(.v-input-group--error)
+    .v-input-group__counter
       color: $material.text.secondary
 
-theme(textfield, "input-group--text-field")
+theme(textfield, "v-input-group--text-field")
 
 /** Label */
-.input-group--text-field label
+.v-input-group--text-field label
   position: absolute
   top: $input-group-text-field-label-top
   left: 0
 
 /** Input */
-.input-group--text-field
+.v-input-group--text-field
   // TODO: Revisit in 1.1 refactor
   // Input was mis-aligned by 1px
   input
@@ -37,7 +37,7 @@ theme(textfield, "input-group--text-field")
       color: inherit
       transition: .3s $transition.swing
 
-.input-group--text-field input
+.v-input-group--text-field input
   box-shadow: none
   flex: 1
   height: $input-height
@@ -54,18 +54,18 @@ theme(textfield, "input-group--text-field")
     pointer-events: none
 
 /** Textarea */
-.input-group--text-field
+.v-input-group--text-field
   textarea
     flex: 1 1
 
     &:focus
       outline: none
 
-.input-group--text-field.input-group--textarea
+.v-input-group--text-field.v-input-group--textarea
   label
     top: 13px
 
-  .input-group__input
+  .v-input-group__input
     border-radius: 2px
     transition: .4s $transition.fast-in-fast-out
 
@@ -73,22 +73,22 @@ theme(textfield, "input-group--text-field")
     font-size: $input-font-size
     transition: .3s $transition.swing
 
-  &:not(.input-group--full-width)
+  &:not(.v-input-group--full-width)
     label
       top: 30px
       left: 15px
 
-    .input-group__input
+    .v-input-group__input
       padding: 30px 0 0 13px
 
-  .input-group__details
+  .v-input-group__details
     &:before,
     &:after
       opacity: 0
 
 /** Counter */
-.input-group--text-field
-  .input-group__counter
+.v-input-group--text-field
+  .v-input-group__counter
     margin-left: auto
     white-space: nowrap
 
@@ -96,114 +96,114 @@ theme(textfield, "input-group--text-field")
       color: inherit
 
 /** Input States */
-.input-group--text-field
-  &.input-group--placeholder.input-group--dirty
+.v-input-group--text-field
+  &.v-input-group--placeholder.v-input-group--dirty
     input::placeholder,
     textarea::placeholder
       opacity: 0
 
 /** No Resize */
-.input-group--text-field
-  &.input-group--no-resize textarea
+.v-input-group--text-field
+  &.v-input-group--no-resize textarea
       resize: none
 
 /** Types */
-.input-group--text-field
+.v-input-group--text-field
   // Icons
-  &.input-group--prepend-icon
-    .input-group__prepend-icon
+  &.v-input-group--prepend-icon
+    .v-input-group__prepend-icon
       align-items: center
       display: flex
       justify-content: flex-start
       min-width: 40px
 
-    .input-group__details
+    .v-input-group__details
       margin-left: auto
       max-width: calc(100% - 40px)
 
     label
       left: 40px
 
-  &:not(.input-group--single-line)
-    &.input-group--focused,
-    &.input-group--placeholder
+  &:not(.v-input-group--single-line)
+    &.v-input-group--focused,
+    &.v-input-group--placeholder
       label
         opacity: 1
 
-      &:not(.input-group--textarea)
+      &:not(.v-input-group--textarea)
         label
           transform: translate(0, -18px) scale(.75)
 
-      &:not(.input-group--full-width).input-group--textarea
+      &:not(.v-input-group--full-width).v-input-group--textarea
         label
           transform: translate(0, -8px) scale(.75)
 
-      &.input-group--text-field-box
+      &.v-input-group--text-field-box
         label
           transform: translate(0, -10px) scale(.75)
 
-  &.input-group--dirty
-    &.input-group--select,
-    &:not(.input-group--textarea)
+  &.v-input-group--dirty
+    &.v-input-group--select,
+    &:not(.v-input-group--textarea)
       label
         transform: translate(0, -18px) scale(.75)
 
-    &:not(.input-group--full-width).input-group--textarea
+    &:not(.v-input-group--full-width).v-input-group--textarea
       label
         transform: translate(0, -8px) scale(.75)
 
   // Multi Line
-  &.input-group--multi-line
+  &.v-input-group--multi-line
     textarea
       padding-top: 4px
 
   // Full Width
-  &.input-group--full-width
+  &.v-input-group--full-width
     padding: 16px
 
     label
       margin-left: $grid-gutters.lg
 
-    .input-group__details:before, .input-group__details:after
+    .v-input-group__details:before, .v-input-group__details:after
       display: none
 
 /** Prefix/Suffix */
-.input-group--prefix
-  &:not(.input-group--focused):not(.input-group--dirty)
+.v-input-group--prefix
+  &:not(.v-input-group--focused):not(.v-input-group--dirty)
     label
       left: 16px
 
-.input-group--prefix,
-.input-group--suffix
-  .input-group--text-field__prefix,
-  .input-group--text-field__suffix
+.v-input-group--prefix,
+.v-input-group--suffix
+  .v-input-group--text-field__prefix,
+  .v-input-group--text-field__suffix
     align-items: center
     display: inline-flex
     font-size: 16px
     margin-top: 1px
 
-  .input-group--text-field__prefix
+  .v-input-group--text-field__prefix
     margin-right: 3px
 
-  .input-group--text-field__suffix
+  .v-input-group--text-field__suffix
     margin-left: 3px
 
 /** Box */
-.input-group--text-field-box
+.v-input-group--text-field-box
   input, textarea
     cursor: pointer
 
   label
     left: 16px
 
-  .input-group__input
+  .v-input-group__input
     align-items: flex-end
     border-radius: 4px 4px 0 0
     cursor: pointer
     min-height: 56px
     user-select: none
 
-  .input-group__details
+  .v-input-group__details
     padding: 8px 16px 0
     user-select: none
 
@@ -213,35 +213,35 @@ theme(textfield, "input-group--text-field")
       border-bottom-left-radius: 4px
       border-bottom-right-radius: 4px
 
-  &.input-group--multi-line
+  &.v-input-group--multi-line
     textarea
       padding-left: 24px
       padding-right: 24px
 
-  &:not(.input-group--textarea)
-    &.input-group--multi-line
-      .input-group__input
+  &:not(.v-input-group--textarea)
+    &.v-input-group--multi-line
+      .v-input-group__input
         padding-top: 26px
 
       label
         top: 26px
 
-    &:not(.input-group--multi-line)
-      .input-group__input
+    &:not(.v-input-group--multi-line)
+      .v-input-group__input
         padding-left: 16px
         padding-right: 16px
 
       label
         top: 32px
 
-    &:not(.input-group--single-line)
-      &.input-group--focused,
-      &.input-group--dirty
+    &:not(.v-input-group--single-line)
+      &.v-input-group--focused,
+      &.v-input-group--dirty
         label
           transform: translate(0, -10px) scale(0.75)
   // Icons
-  &.input-group--prepend-icon
-    .input-group__details
+  &.v-input-group--prepend-icon
+    .v-input-group__details
       &:before, &:after
         margin-left: 56px
         max-width: calc(100% - 56px)

@@ -16,16 +16,16 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
              data-uid="16"
              aria-label="Items per page:"
              role="combobox"
-             class="input-group input-group--append-icon input-group--hide-details input-group--text-field input-group--select input-group--auto primary--text"
+             class="v-input-group v-input-group--append-icon v-input-group--hide-details v-input-group--text-field v-input-group--select v-input-group--auto primary--text"
         >
-          <div class="input-group__input">
-            <div class="input-group__selections"
+          <div class="v-input-group__input">
+            <div class="v-input-group__selections"
                  style="overflow: hidden;"
             >
               <input aria-label="Items per page:"
                      disabled="disabled"
                      tabindex="-1"
-                     class="input-group--select__autocomplete"
+                     class="v-input-group--select__autocomplete"
                      style="display: none;"
               >
             </div>
@@ -80,12 +80,12 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
               </div>
             </div>
             <i aria-hidden="true"
-               class="icon material-icons input-group__append-icon input-group__icon-cb"
+               class="icon material-icons v-input-group__append-icon v-input-group__icon-cb"
             >
               arrow_drop_down
             </i>
           </div>
-          <div class="input-group__details">
+          <div class="v-input-group__details">
           </div>
         </div>
       </div>
@@ -153,16 +153,16 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
              data-uid="28"
              aria-label="Items per page:"
              role="combobox"
-             class="input-group input-group--append-icon input-group--hide-details input-group--text-field input-group--select input-group--auto primary--text"
+             class="v-input-group v-input-group--append-icon v-input-group--hide-details v-input-group--text-field v-input-group--select v-input-group--auto primary--text"
         >
-          <div class="input-group__input">
-            <div class="input-group__selections"
+          <div class="v-input-group__input">
+            <div class="v-input-group__selections"
                  style="overflow: hidden;"
             >
               <input aria-label="Items per page:"
                      disabled="disabled"
                      tabindex="-1"
-                     class="input-group--select__autocomplete"
+                     class="v-input-group--select__autocomplete"
                      style="display: none;"
               >
             </div>
@@ -217,12 +217,12 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
               </div>
             </div>
             <i aria-hidden="true"
-               class="icon material-icons input-group__append-icon input-group__icon-cb"
+               class="icon material-icons v-input-group__append-icon v-input-group__icon-cb"
             >
               arrow_drop_down
             </i>
           </div>
-          <div class="input-group__details">
+          <div class="v-input-group__details">
           </div>
         </div>
       </div>
@@ -281,16 +281,16 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
              data-uid="2"
              aria-label="Items per page:"
              role="combobox"
-             class="input-group input-group--append-icon input-group--hide-details input-group--text-field input-group--select input-group--auto primary--text"
+             class="v-input-group v-input-group--append-icon v-input-group--hide-details v-input-group--text-field v-input-group--select v-input-group--auto primary--text"
         >
-          <div class="input-group__input">
-            <div class="input-group__selections"
+          <div class="v-input-group__input">
+            <div class="v-input-group__selections"
                  style="overflow: hidden;"
             >
               <input aria-label="Items per page:"
                      disabled="disabled"
                      tabindex="-1"
-                     class="input-group--select__autocomplete"
+                     class="v-input-group--select__autocomplete"
                      style="display: none;"
               >
             </div>
@@ -345,12 +345,12 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
               </div>
             </div>
             <i aria-hidden="true"
-               class="icon material-icons input-group__append-icon input-group__icon-cb"
+               class="icon material-icons v-input-group__append-icon v-input-group__icon-cb"
             >
               arrow_drop_down
             </i>
           </div>
-          <div class="input-group__details">
+          <div class="v-input-group__details">
           </div>
         </div>
       </div>
@@ -413,16 +413,16 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
              data-uid="42"
              aria-label="Items per page:"
              role="combobox"
-             class="input-group input-group--append-icon input-group--hide-details input-group--text-field input-group--select input-group--auto primary--text"
+             class="v-input-group v-input-group--append-icon v-input-group--hide-details v-input-group--text-field v-input-group--select v-input-group--auto primary--text"
         >
-          <div class="input-group__input">
-            <div class="input-group__selections"
+          <div class="v-input-group__input">
+            <div class="v-input-group__selections"
                  style="overflow: hidden;"
             >
               <input aria-label="Items per page:"
                      disabled="disabled"
                      tabindex="-1"
-                     class="input-group--select__autocomplete"
+                     class="v-input-group--select__autocomplete"
                      style="display: none;"
               >
             </div>
@@ -477,12 +477,12 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
               </div>
             </div>
             <i aria-hidden="true"
-               class="icon material-icons input-group__append-icon input-group__icon-cb"
+               class="icon material-icons v-input-group__append-icon v-input-group__icon-cb"
             >
               arrow_drop_down
             </i>
           </div>
-          <div class="input-group__details">
+          <div class="v-input-group__details">
           </div>
         </div>
       </div>

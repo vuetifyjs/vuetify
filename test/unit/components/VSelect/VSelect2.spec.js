@@ -35,7 +35,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const clear = wrapper.find('.input-group__append-icon')[0]
+    const clear = wrapper.find('.v-input-group__append-icon')[0]
 
     const input = jest.fn()
     wrapper.vm.$on('input', input)
@@ -62,10 +62,10 @@ test('VSelect', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const clear = wrapper.find('.input-group__append-icon')[0]
+    const clear = wrapper.find('.v-input-group__append-icon')[0]
 
     await wrapper.vm.$nextTick()
-    expect(clear.element.classList).toContain('input-group__icon-clearable')
+    expect(clear.element.classList).toContain('v-input-group__icon-clearable')
     expect(wrapper.vm.inputValue).toBe(1)
     expect(wrapper.html()).toMatchSnapshot()
 
@@ -88,7 +88,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const clear = wrapper.find('.input-group__append-icon')[0]
+    const clear = wrapper.find('.v-input-group__append-icon')[0]
 
     const change = jest.fn()
     wrapper.vm.$on('change', change)
@@ -177,7 +177,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     await wrapper.vm.$nextTick()
 
-    const selections = wrapper.find('.input-group__selections__comma')
+    const selections = wrapper.find('.v-input-group__selections__comma')
 
     expect(selections.length).toBeGreaterThan(0)
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
@@ -214,7 +214,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const arrow = wrapper.find('.input-group__append-icon')[0]
+    const arrow = wrapper.find('.v-input-group__append-icon')[0]
 
     expect(wrapper.vm.menuIsActive).toBe(false)
 
@@ -233,7 +233,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const clear = wrapper.find('.input-group__append-icon')[0]
+    const clear = wrapper.find('.v-input-group__append-icon')[0]
 
     clear.trigger('click')
 
@@ -256,14 +256,14 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.menuIsVisible).toBe(false)
-    expect(wrapper.hasClass('input-group--open')).toBe(false)
+    expect(wrapper.hasClass('v-input-group--open')).toBe(false)
 
     wrapper.trigger('click')
 
     await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.menuIsVisible).toBe(true)
-    expect(wrapper.hasClass('input-group--open')).toBe(true)
+    expect(wrapper.hasClass('v-input-group--open')).toBe(true)
 
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })

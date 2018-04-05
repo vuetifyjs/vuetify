@@ -16,7 +16,7 @@ slider($material)
   .slider__tick
     border: 1px solid $material.text.primary
 
-  &:not(.input-group--dirty)
+  &:not(.v-input-group--dirty)
     .slider__thumb--label
       background: $material.slider.inactive
 
@@ -27,12 +27,12 @@ slider($material)
       .slider__thumb
         border: 3px solid $material.slider.active
 
-  &.input-group--disabled
+  &.v-input-group--disabled
     .slider__thumb
       background: none
       border: 3px solid $material.slider.disabled
 
-  &.input-group--disabled.input-group--dirty
+  &.v-input-group--disabled.v-input-group--dirty
     .slider__thumb
       background: $material.slider.disabled
       border: 0px solid transparent
@@ -41,19 +41,19 @@ slider($material)
     .slider__track
       background: $material.slider.active
 
-theme(slider, "input-group--slider")
+theme(slider, "v-input-group--slider")
 
 /** Input Group */
-.input-group.input-group--slider
+.v-input-group.v-input-group--slider
   flex-direction: row
   flex-wrap: wrap
   // Allow for right space if inline with other inputs
   padding-right: 16px
 
-  .input-group__details:before, .input-group__details:after
+  .v-input-group__details:before, .v-input-group__details:after
     display: none
 
-  .input-group__input
+  .v-input-group__input
     flex: 1 1 100%
 
 
@@ -65,11 +65,11 @@ theme(slider, "input-group--slider")
     font-size: 18px
     transform: none
 
-    + .input-group__input
+    + .v-input-group__input
       margin-left: 16px
       flex: 1 0 auto
 
-  &.input-group--active
+  &.v-input-group--active
     .slider__thumb
       transform: translateY(-50%) scale(1.2)
 
@@ -87,26 +87,26 @@ theme(slider, "input-group--slider")
     .slider__thumb-container, .slider__track-fill
       transition: none
 
-    &.input-group--ticks
+    &.v-input-group--ticks
       .slider
         &__track__container:after, &__tick
           opacity: 1
 
-  &.input-group--disabled
+  &.v-input-group--disabled
     pointer-events: none
 
     .slider__thumb
       transform: translateY(-50%) scale(.5)
       background: transparent
 
-    &.input-group--dirty
+    &.v-input-group--dirty
       border-color: transparent
 
-  &.input-group--prepend-icon
+  &.v-input-group--prepend-icon
     .slider
       margin-left: 40px
 
-  &.input-group--append-icon
+  &.v-input-group--append-icon
     .slider
       margin-right: 40px
 

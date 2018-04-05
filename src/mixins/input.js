@@ -45,18 +45,18 @@ export default {
   computed: {
     inputGroupClasses () {
       return Object.assign({
-        'input-group': true,
-        'input-group--async-loading': this.loading !== false,
-        'input-group--focused': this.isFocused,
-        'input-group--dirty': this.isDirty,
-        'input-group--tab-focused': this.tabFocused,
-        'input-group--disabled': this.disabled,
-        'input-group--error': this.hasError,
-        'input-group--append-icon': this.appendIcon,
-        'input-group--prepend-icon': this.prependIcon,
-        'input-group--required': this.required,
-        'input-group--hide-details': this.hideDetails,
-        'input-group--placeholder': !!this.placeholder,
+        'v-input-group': true,
+        'v-input-group--async-loading': this.loading !== false,
+        'v-input-group--focused': this.isFocused,
+        'v-input-group--dirty': this.isDirty,
+        'v-input-group--tab-focused': this.tabFocused,
+        'v-input-group--disabled': this.disabled,
+        'v-input-group--error': this.hasError,
+        'v-input-group--append-icon': this.appendIcon,
+        'v-input-group--prepend-icon': this.prependIcon,
+        'v-input-group--required': this.required,
+        'v-input-group--hide-details': this.hideDetails,
+        'v-input-group--placeholder': !!this.placeholder,
         'theme--dark': this.dark,
         'theme--light': this.light
       }, this.classes)
@@ -99,7 +99,7 @@ export default {
     },
     genHint () {
       return this.$createElement('div', {
-        'class': 'input-group__messages input-group__hint',
+        'class': 'v-input-group__messages v-input-group__hint',
         domProps: { innerHTML: this.hint }
       })
     },
@@ -107,7 +107,7 @@ export default {
       return this.$createElement(
         'div',
         {
-          'class': 'input-group__messages input-group__error'
+          'class': 'v-input-group__messages v-input-group__error'
         },
         error
       )
@@ -121,9 +121,9 @@ export default {
 
       return this.$createElement(VIcon, {
         'class': {
-          [`input-group__${type}-icon`]: true,
-          'input-group__icon-cb': !!callback,
-          'input-group__icon-clearable': shouldClear
+          [`v-input-group__${type}-icon`]: true,
+          'v-input-group__icon-cb': !!callback,
+          'v-input-group__icon-clearable': shouldClear
         },
         props: {
           disabled: this.disabled
@@ -189,7 +189,7 @@ export default {
 
       children.push(
         this.$createElement('div', {
-          'class': 'input-group__input'
+          'class': 'v-input-group__input'
         }, wrapperChildren)
       )
 
@@ -201,7 +201,7 @@ export default {
 
       children.push(
         this.$createElement('div', {
-          'class': 'input-group__details'
+          'class': 'v-input-group__details'
         }, detailsChildren)
       )
 

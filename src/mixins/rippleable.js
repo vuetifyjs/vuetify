@@ -15,7 +15,7 @@ export default {
 
   methods: {
     genRipple (data = { directives: [] }) {
-      data.class = this.rippleClasses || 'input-group--selection-controls__ripple'
+      data.class = this.rippleClasses || 'v-input-group--selection-controls__ripple'
       data.directives.push({
         name: 'ripple',
         value: this.ripple && !this.disabled && { center: true }

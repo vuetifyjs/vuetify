@@ -19,7 +19,7 @@ export default {
   computed: {
     classes () {
       const classes = {
-        'input-group--selection-controls switch': true
+        'v-input-group--selection-controls switch': true
       }
 
       if (this.hasError) {
@@ -32,21 +32,21 @@ export default {
     },
     rippleClasses () {
       return {
-        'input-group--selection-controls__ripple': true,
-        'input-group--selection-controls__ripple--active': this.isActive
+        'v-input-group--selection-controls__ripple': true,
+        'v-input-group--selection-controls__ripple--active': this.isActive
       }
     },
     containerClasses () {
       return {
-        'input-group--selection-controls__container': true,
-        'input-group--selection-controls__container--light': this.light,
-        'input-group--selection-controls__container--disabled': this.disabled
+        'v-input-group--selection-controls__container': true,
+        'v-input-group--selection-controls__container--light': this.light,
+        'v-input-group--selection-controls__container--disabled': this.disabled
       }
     },
     toggleClasses () {
       return {
-        'input-group--selection-controls__toggle': true,
-        'input-group--selection-controls__toggle--active': this.isActive
+        'v-input-group--selection-controls__toggle': true,
+        'v-input-group--selection-controls__toggle--active': this.isActive
       }
     }
   },

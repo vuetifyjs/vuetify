@@ -10,7 +10,7 @@ test('VSwitch.js', ({ mount }) => {
       }
     })
 
-    const ripple = wrapper.find('.input-group--selection-controls__ripple')[0]
+    const ripple = wrapper.find('.v-input-group--selection-controls__ripple')[0]
 
     expect(ripple.element._ripple.enabled).toBe(false)
 
@@ -29,11 +29,11 @@ test('VSwitch.js', ({ mount }) => {
 
     const change = jest.fn()
     wrapper.vm.$on('change', change)
-    touch(wrapper.find('.input-group--selection-controls__ripple')[0]).start(0, 0).end(20, 0)
+    touch(wrapper.find('.v-input-group--selection-controls__ripple')[0]).start(0, 0).end(20, 0)
     expect(change).toBeCalledWith(true)
 
     wrapper.setProps({ inputValue: true })
-    touch(wrapper.find('.input-group--selection-controls__ripple')[0]).start(0, 0).end(-20, 0)
+    touch(wrapper.find('.v-input-group--selection-controls__ripple')[0]).start(0, 0).end(-20, 0)
     expect(change).toBeCalledWith(false)
   })
 
@@ -46,11 +46,11 @@ test('VSwitch.js', ({ mount }) => {
 
     const change = jest.fn()
     wrapper.vm.$on('change', change)
-    touch(wrapper.find('.input-group--selection-controls__ripple')[0]).start(0, 0).end(-20, 0)
+    touch(wrapper.find('.v-input-group--selection-controls__ripple')[0]).start(0, 0).end(-20, 0)
     expect(change).not.toBeCalled()
 
     wrapper.setProps({ inputValue: true })
-    touch(wrapper.find('.input-group--selection-controls__ripple')[0]).start(0, 0).end(20, 0)
+    touch(wrapper.find('.v-input-group--selection-controls__ripple')[0]).start(0, 0).end(20, 0)
     expect(change).not.toBeCalled()
   })
 

@@ -25,8 +25,8 @@ export default {
     classes () {
       const classes = {
         'checkbox': true,
-        'input-group--selection-controls': true,
-        'input-group--active': this.isActive
+        'v-input-group--selection-controls': true,
+        'v-input-group--active': this.isActive
       }
 
       if (this.hasError) {

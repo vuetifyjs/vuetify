@@ -3,63 +3,63 @@
 
 /** Theme */
 switch($material)
-  &:not(.input-group--dirty)
-    .input-group--selection-controls__container
+  &:not(.v-input-group--dirty)
+    .v-input-group--selection-controls__container
       // Must overwrite color helpers
       color: $material.selection-controls.track.inactive !important
 
-  .input-group--selection-controls__ripple
+  .v-input-group--selection-controls__ripple
     &:after
       background-color: $material.selection-controls.thumb.inactive
 
-    &:not(.input-group--selection-controls__ripple--active)
+    &:not(.v-input-group--selection-controls__ripple--active)
       color: $material.selection-controls.track.inactive
 
     &--active:after
       background-color: currentColor
 
-  .input-group--selection-controls__toggle
+  .v-input-group--selection-controls__toggle
     color: $material.selection-controls.track.inactive
 
     &--active
       color: inherit
 
-  &.input-group--disabled
-    .input-group--selection-controls__ripple
+  &.v-input-group--disabled
+    .v-input-group--selection-controls__ripple
       &:after
         background-color: $material.selection-controls.thumb.disabled !important
 
-    .input-group--selection-controls__toggle
+    .v-input-group--selection-controls__toggle
       color: $material.selection-controls.track.disabled !important
 
 theme(switch, "switch")
 
-.input-group.input-group--selection-controls
+.v-input-group.v-input-group--selection-controls
   z-index: 0
 
   &.switch
-    &.input-group--prepend-icon, &.input-group--append-icon
+    &.v-input-group--prepend-icon, &.v-input-group--append-icon
       label
         left: 62px
 
-    &.input-group--prepend-icon
-      .input-group--selection-controls__container
+    &.v-input-group--prepend-icon
+      .v-input-group--selection-controls__container
         margin-left: 6px
 
-    &.input-group--append-icon
-      .input-group__append-icon
+    &.v-input-group--append-icon
+      .v-input-group__append-icon
         left: 40px
 
-    .input-group--selection-controls__container
+    .v-input-group--selection-controls__container
       color: inherit
       position: relative
       width: 36px
 
       &[class*="--text"]
-        .input-group--selection-controls__ripple--active:after
+        .v-input-group--selection-controls__ripple--active:after
           background-color: currentColor
 
-    .input-group--selection-controls__toggle
+    .v-input-group--selection-controls__toggle
       background-color: currentColor
       color: inherit
       position: absolute
@@ -70,10 +70,10 @@ theme(switch, "switch")
       border-radius: 8px
       transform: translateY(-50%)
 
-      &.input-group--selection-controls__toggle--active
+      &.v-input-group--selection-controls__toggle--active
         opacity: .5
 
-    .input-group--selection-controls__ripple
+    .v-input-group--selection-controls__ripple
       transform: translate(-15px, -24px)
       transition: .3s $transition.fast-in-fast-out
       z-index: 1

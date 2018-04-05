@@ -69,15 +69,15 @@ export default {
     classes () {
       const classes = {
         ...this.genSoloClasses(),
-        'input-group--text-field': true,
-        'input-group--text-field-box': this.box,
-        'input-group--single-line': this.singleLine || this.isSolo,
-        'input-group--multi-line': this.multiLine,
-        'input-group--full-width': this.fullWidth,
-        'input-group--no-resize': this.noResizeHandle,
-        'input-group--prefix': this.prefix,
-        'input-group--suffix': this.suffix,
-        'input-group--textarea': this.textarea
+        'v-input-group--text-field': true,
+        'v-input-group--text-field-box': this.box,
+        'v-input-group--single-line': this.singleLine || this.isSolo,
+        'v-input-group--multi-line': this.multiLine,
+        'v-input-group--full-width': this.fullWidth,
+        'v-input-group--no-resize': this.noResizeHandle,
+        'v-input-group--prefix': this.prefix,
+        'v-input-group--suffix': this.suffix,
+        'v-input-group--textarea': this.textarea
       }
 
       if (this.hasError) {
@@ -217,8 +217,8 @@ export default {
     genCounter () {
       return this.$createElement('div', {
         'class': {
-          'input-group__counter': true,
-          'input-group__counter--error': this.hasError
+          'v-input-group__counter': true,
+          'v-input-group__counter--error': this.hasError
         }
       }, this.count)
     },
@@ -275,7 +275,7 @@ export default {
     },
     genFix (type) {
       return this.$createElement('span', {
-        'class': `input-group--text-field__${type}`
+        'class': `v-input-group--text-field__${type}`
       }, this[type])
     },
     clearableCallback () {

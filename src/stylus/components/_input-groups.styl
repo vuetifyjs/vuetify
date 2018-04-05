@@ -2,7 +2,7 @@
 @import '../theme'
 
 /* Theme */
-input-group($material)
+v-input-group($material)
   input,
   textarea
     color: $material.text.primary
@@ -10,75 +10,75 @@ input-group($material)
     &:disabled
       color: $material.text.disabled
 
-  &:not(.input-group--error) .input-group__messages
+  &:not(.v-input-group--error) .v-input-group__messages
     color: $material.text.secondary
 
-  &.input-group--textarea:not(.input-group--full-width)
-    .input-group__input
+  &.v-input-group--textarea:not(.v-input-group--full-width)
+    .v-input-group__input
       border: 2px solid $material.text.secondary
 
-  &.input-group--solo
+  &.v-input-group--solo
     background: $material.cards
 
-  &.input-group--solo-inverted
+  &.v-input-group--solo-inverted
     background: rgba($material.inputs.solo-inverted)
 
-    &.input-group--focused
+    &.v-input-group--focused
       background: rgba($material.inputs.solo-inverted-focused)
 
-      .input-group__append-icon,
-      .input-group__prepend-icon,
+      .v-input-group__append-icon,
+      .v-input-group__prepend-icon,
       input,
       label
           color: $material.inputs.solo-inverted-focused-text
 
   // This is specific for selects
-  &.input-group--dirty
-    .input-group__selections__comma
-      &:not(.input-group__selections__comma--active)
+  &.v-input-group--dirty
+    .v-input-group__selections__comma
+      &:not(.v-input-group__selections__comma--active)
         color: $material.text.primary
 
-  &:not(.input-group--error)
+  &:not(.v-input-group--error)
     label
       color: $material.text.secondary
 
-    &.input-group--disabled
+    &.v-input-group--disabled
       label,
-      .input-group__selections__comma
+      .v-input-group__selections__comma
         color: $material.text.disabled
 
-    .input-group__details:before
+    .v-input-group__details:before
       background-color: $material.input-bottom-line
 
-    &:not(.input-group--focused):not(.input-group--disabled)
-      .input-group__input
-        .input-group__append-icon,
-        .input-group__prepend-icon
+    &:not(.v-input-group--focused):not(.v-input-group--disabled)
+      .v-input-group__input
+        .v-input-group__append-icon,
+        .v-input-group__prepend-icon
           &:not(:hover)
             color: $material.text.secondary
 
-      &:not(.input-group--disabled):not(.input-group--overflow):not(.input-group--segmented):not(.input-group--editable):hover
-        .input-group__details:before
+      &:not(.v-input-group--disabled):not(.v-input-group--overflow):not(.v-input-group--segmented):not(.v-input-group--editable):hover
+        .v-input-group__details:before
           background-color: $material.text.primary
 
-        &.input-group--textarea:not(.input-group--full-width)
-          .input-group__input
+        &.v-input-group--textarea:not(.v-input-group--full-width)
+          .v-input-group__input
             border-color: $material.text.primary
 
-  &.input-group
+  &.v-input-group
     &--overflow, &--segmented, &--editable
-      .input-group__input,
-      .input-group__details
+      .v-input-group__input,
+      .v-input-group__details
         &:before
           background-color: $material.dividers
 
-  &.input-group--disabled
-    .input-group__input
-      .input-group__append-icon,
-      .input-group__prepend-icon
+  &.v-input-group--disabled
+    .v-input-group__input
+      .v-input-group__append-icon,
+      .v-input-group__prepend-icon
         color: $material.text.disabled
 
-    .input-group__details:before
+    .v-input-group__details:before
       background-color: transparent
       background-image: linear-gradient(
         to right,
@@ -87,17 +87,17 @@ input-group($material)
         transparent 0
       )
 
-  .input-group--text-field
+  .v-input-group--text-field
     &__prefix, &__suffix
       color: $material.text.secondary
 
-    &.input-group--disabled
+    &.v-input-group--disabled
       &__prefix, &__suffix
         color: $material.text.disabled
 
-theme(input-group, "input-group")
+theme(v-input-group, "v-input-group")
 
-.input-group
+.v-input-group
   display: flex
   flex: 1 1
   flex-wrap: wrap
@@ -109,12 +109,12 @@ theme(input-group, "input-group")
   transition: box-shadow $primary-transition
 
 /** Input */
-.input-group
+.v-input-group
   input
     width: 100%
 
 /** Label */
-.input-group
+.v-input-group
   label
     display: inline-block
     font-size: $input-font-size
@@ -133,7 +133,7 @@ theme(input-group, "input-group")
     z-index: 0
 
 /** Blocks */
-.input-group
+.v-input-group
   &__input
     display: flex
     flex: 1 0 100%
@@ -141,48 +141,48 @@ theme(input-group, "input-group")
     min-height: $input-height
 
 /** Icons */
-.input-group
+.v-input-group
   &__icon-cb
     cursor: pointer
 
-.input-group
-  &.input-group--focused,
-  &.input-group--error
-    .input-group__append-icon,
-    .input-group__prepend-icon
+.v-input-group
+  &.v-input-group--focused,
+  &.v-input-group--error
+    .v-input-group__append-icon,
+    .v-input-group__prepend-icon
       color: inherit
 
-  &.input-group--append-icon, &.input-group--selection-controls
+  &.v-input-group--append-icon, &.v-input-group--selection-controls
     label
       max-width: 75%
 
-  &.input-group--prepend-icon
+  &.v-input-group--prepend-icon
     label
       max-width: 75%
 
-  &.input-group--append-icon.input-group--prepend-icon
+  &.v-input-group--append-icon.v-input-group--prepend-icon
     label
       max-width: 65%
 
-  .input-group__append-icon
+  .v-input-group__append-icon
     padding: 0 6px
 
-  .input-group__append-icon,
-  .input-group__prepend-icon
+  .v-input-group__append-icon,
+  .v-input-group__prepend-icon
     align-self: center
     user-select: none
 
 /** States */
-.input-group
+.v-input-group
   // Single Line
-  &.input-group--single-line,
-  &.input-group--solo
-    &.input-group--dirty
+  &.v-input-group--single-line,
+  &.v-input-group--solo
+    &.v-input-group--dirty
       label
         display: none
 
   // Solo
-  &.input-group--solo
+  &.v-input-group--solo
     min-height: 46px
     border-radius: $card-border-radius
     padding: 0
@@ -194,35 +194,35 @@ theme(input-group, "input-group")
       padding-left: 16px
       transform: none !important
 
-    .input-group__input
+    .v-input-group__input
       align-items: center
       padding: 8px 16px
 
-    .input-group__details
+    .v-input-group__details
       display: none
 
   &--disabled
     pointer-events: none
 
-    .input-group__details:before
+    .v-input-group__details:before
       background-color: transparent
       background-position: bottom
       background-size: 3px 1px
       background-repeat: repeat-x
 
   // Focused
-  &.input-group--text-field
-    &:not(.input-group--single-line):not(.input-group--error)
-      &.input-group--focused
+  &.v-input-group--text-field
+    &:not(.v-input-group--single-line):not(.v-input-group--error)
+      &.v-input-group--focused
         label
           color: inherit
 
-        .input-group__input
+        .v-input-group__input
           border-color: inherit
 
-    &.input-group--focused
-      &:not(.input-group--disabled)
-        .input-group__details
+    &.v-input-group--focused
+      &:not(.v-input-group--disabled)
+        .v-input-group__details
           &:after
             transform: scaleX(1)
 
@@ -232,19 +232,19 @@ theme(input-group, "input-group")
       content: '*'
 
   // Error
-  &.input-group--error
+  &.v-input-group--error
     label
       animation: shake .6s $transition.swing
 
-    .input-group__messages
+    .v-input-group__messages
       color: inherit
 
-    .input-group__details
+    .v-input-group__details
       &:before
         background-color: currentColor
 
 /** Details */
-.input-group
+.v-input-group
   .slide-y-transition-leave,
   .slide-y-transition-leave-to
     position: absolute
@@ -283,12 +283,12 @@ theme(input-group, "input-group")
       z-index: 0
 
   &--hide-details
-    .input-group__details
+    .v-input-group__details
       min-height: 2px
       padding: 0
 
   &--async-loading
-    .input-group__details
+    .v-input-group__details
       &:before,
       &:after
         display: none
@@ -301,21 +301,21 @@ theme(input-group, "input-group")
     margin: 0
 
 /** Hint */
-.input-group
+.v-input-group
   &__hint
     // flex: 1 0
     transition: .3s $transition.fast-in-fast-out
 
 /** Error */
-.input-group
+.v-input-group
   &__error
     color: inherit
     transition: .3s $transition.fast-in-fast-out
 
 /** Types */
-.input-group
+.v-input-group
   &--overflow,
   &--segmented,
   &--editable
-    &.input-group--active
+    &.v-input-group--active
       background-color: #fff

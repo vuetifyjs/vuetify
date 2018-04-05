@@ -56,11 +56,11 @@ export default {
   computed: {
     classes () {
       return {
-        'input-group--slider': true,
-        'input-group--active': this.isActive,
-        'input-group--dirty': this.inputWidth > 0,
-        'input-group--disabled': this.disabled,
-        'input-group--ticks': !this.disabled && this.stepNumeric && this.ticks
+        'v-input-group--slider': true,
+        'v-input-group--active': this.isActive,
+        'v-input-group--dirty': this.inputWidth > 0,
+        'v-input-group--disabled': this.disabled,
+        'v-input-group--ticks': !this.disabled && this.stepNumeric && this.ticks
       }
     },
     computedColor () {

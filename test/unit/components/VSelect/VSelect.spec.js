@@ -262,7 +262,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
   it('should render aria-hidden=true on arrow icon', async () => {
     const wrapper = mount(VSelect)
 
-    const icon = wrapper.find('.input-group__append-icon')[0]
+    const icon = wrapper.find('.v-input-group__append-icon')[0]
     expect(icon.hasAttribute('aria-hidden')).toBe(true)
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
@@ -426,7 +426,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.menuIsActive).toBe(false)
 
-    wrapper.find('.input-group__append-icon')[0].trigger('click')
+    wrapper.find('.v-input-group__append-icon')[0].trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.menuIsActive).toBe(false)
 

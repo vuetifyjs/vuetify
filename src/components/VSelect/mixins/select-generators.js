@@ -76,7 +76,7 @@ export default {
     },
     genSelectionsAndSearch () {
       return this.$createElement('div', {
-        'class': 'input-group__selections',
+        'class': 'v-input-group__selections',
         style: { 'overflow': 'hidden' },
         ref: 'activator'
       }, [
@@ -109,9 +109,9 @@ export default {
     },
     genSearch () {
       const data = {
-        staticClass: 'input-group--select__autocomplete',
+        staticClass: 'v-input-group--select__autocomplete',
         'class': {
-          'input-group--select__autocomplete--index': this.selectedIndex > -1
+          'v-input-group--select__autocomplete--index': this.selectedIndex > -1
         },
         style: {
           flex: this.shouldBreak ? '1 0 100%' : null
@@ -213,9 +213,9 @@ export default {
     },
     genCommaSelection (item, index, last) {
       return this.$createElement('div', {
-        staticClass: 'input-group__selections__comma',
+        staticClass: 'v-input-group__selections__comma',
         'class': {
-          'input-group__selections__comma--active': index === this.selectedIndex
+          'v-input-group__selections__comma--active': index === this.selectedIndex
         },
         key: JSON.stringify(this.getValue(item)) // Item may be an object
       }, `${this.getText(item)}${last ? '' : ', '}`)

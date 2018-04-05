@@ -3,18 +3,18 @@
 exports[`VSwitch.js should render component with error 1`] = `
 
 <div tabindex="0"
-     class="input-group input-group--error input-group--selection-controls switch error--text"
+     class="v-input-group v-input-group--error v-input-group--selection-controls switch error--text"
 >
-  <div class="input-group__input">
-    <div class="input-group--selection-controls__container">
-      <div class="input-group--selection-controls__toggle">
+  <div class="v-input-group__input">
+    <div class="v-input-group--selection-controls__container">
+      <div class="v-input-group--selection-controls__toggle">
       </div>
-      <div class="input-group--selection-controls__ripple">
+      <div class="v-input-group--selection-controls__ripple">
       </div>
     </div>
   </div>
-  <div class="input-group__details">
-    <div class="input-group__messages input-group__error">
+  <div class="v-input-group__details">
+    <div class="v-input-group__messages v-input-group__error">
     </div>
   </div>
 </div>

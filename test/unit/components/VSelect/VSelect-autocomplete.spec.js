@@ -138,7 +138,7 @@ test('VSelect - autocomplete', ({ mount }) => {
       }
     })
 
-    const inputGroup = wrapper.find('.input-group--select')[0]
+    const inputGroup = wrapper.find('.v-input-group--select')[0]
     expect(inputGroup.element.getAttribute('role')).toBeFalsy()
 
     const input = wrapper.find('input')[0]
@@ -150,7 +150,7 @@ test('VSelect - autocomplete', ({ mount }) => {
   it('should render role=combobox correctly when not autocomplete)', async () => {
     const wrapper = mount(VSelect)
 
-    const inputGroup = wrapper.find('.input-group--select')[0]
+    const inputGroup = wrapper.find('.v-input-group--select')[0]
     expect(inputGroup.element.getAttribute('role')).toBe('combobox')
 
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
@@ -184,7 +184,7 @@ test('VSelect - autocomplete', ({ mount }) => {
       }
     })
 
-    const input = wrapper.find('.input-group__input')[0]
+    const input = wrapper.find('.v-input-group__input')[0]
 
     input.trigger('click')
     await wrapper.vm.$nextTick()

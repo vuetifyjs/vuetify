@@ -103,14 +103,14 @@ test('VTextField.js', ({ mount }) => {
       }
     })
 
-    expect(wrapper.find('.input-group__counter')[0]).not.toBe(undefined)
+    expect(wrapper.find('.v-input-group__counter')[0]).not.toBe(undefined)
     expect(wrapper.html()).toMatchSnapshot()
 
     wrapper.setProps({ counter: false })
     await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect(wrapper.find('.input-group__counter')[0]).toBe(undefined)
+    expect(wrapper.find('.v-input-group__counter')[0]).toBe(undefined)
   })
 
   it('should have readonly attribute', () => {
@@ -133,7 +133,7 @@ test('VTextField.js', ({ mount }) => {
       }
     })
 
-    const clear = wrapper.find('.input-group__append-icon')[0]
+    const clear = wrapper.find('.v-input-group__append-icon')[0]
     const input = jest.fn()
     wrapper.vm.$on('input', input)
 
@@ -156,7 +156,7 @@ test('VTextField.js', ({ mount }) => {
       }
     })
 
-    const icon = wrapper.find('.input-group__append-icon')[0]
+    const icon = wrapper.find('.v-input-group__append-icon')[0]
     icon.trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.inputValue).toBe('foo')
@@ -171,7 +171,7 @@ test('VTextField.js', ({ mount }) => {
       }
     })
 
-    const icon = wrapper.find('.input-group__append-icon')[0]
+    const icon = wrapper.find('.v-input-group__append-icon')[0]
     icon.trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.inputValue).toBe('foo')
@@ -260,9 +260,9 @@ test('VTextField.js', ({ mount }) => {
       }
     })
 
-    const prepend = wrapper.find('.input-group__prepend-icon')[0]
+    const prepend = wrapper.find('.v-input-group__prepend-icon')[0]
     expect(prepend.text()).toBe('check')
-    expect(prepend.element.classList).not.toContain('input-group__icon-cb')
+    expect(prepend.element.classList).not.toContain('v-input-group__icon-cb')
   })
 
   it('should not emit change event if value has not changed', async () => {

@@ -16,8 +16,8 @@ export default {
   methods: {
     genSoloClasses () {
       return {
-        'input-group--solo': this.isSolo,
-        'input-group--solo-inverted': this.soloInverted,
+        'v-input-group--solo': this.isSolo,
+        'v-input-group--solo-inverted': this.soloInverted,
         'elevation-0': this.flat
       }
     }

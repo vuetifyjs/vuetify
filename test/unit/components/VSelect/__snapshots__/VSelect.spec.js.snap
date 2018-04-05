@@ -25,10 +25,10 @@ exports[`VSelect should render buttons correctly when using items array with seg
 <div tabindex="0"
      data-uid="35"
      role="combobox"
-     class="input-group input-group--dirty input-group--append-icon input-group--text-field input-group--select input-group--segmented input-group--single-line primary--text"
+     class="v-input-group v-input-group--dirty v-input-group--append-icon v-input-group--text-field v-input-group--select v-input-group--segmented v-input-group--single-line primary--text"
 >
-  <div class="input-group__input">
-    <div class="input-group__selections"
+  <div class="v-input-group__input">
+    <div class="v-input-group__selections"
          style="overflow: hidden;"
     >
       <button type="button"
@@ -40,7 +40,7 @@ exports[`VSelect should render buttons correctly when using items array with seg
       </button>
       <input disabled="disabled"
              tabindex="-1"
-             class="input-group--select__autocomplete"
+             class="v-input-group--select__autocomplete"
              style="display: none;"
       >
     </div>
@@ -68,12 +68,12 @@ exports[`VSelect should render buttons correctly when using items array with seg
       </div>
     </div>
     <i aria-hidden="true"
-       class="icon material-icons input-group__append-icon input-group__icon-cb"
+       class="icon material-icons v-input-group__append-icon v-input-group__icon-cb"
     >
       arrow_drop_down
     </i>
   </div>
-  <div class="input-group__details">
+  <div class="v-input-group__details">
   </div>
 </div>
 
@@ -84,10 +84,10 @@ exports[`VSelect should render buttons correctly when using slot with segmented 
 <div tabindex="0"
      data-uid="45"
      role="combobox"
-     class="input-group input-group--dirty input-group--append-icon input-group--text-field input-group--select input-group--segmented input-group--single-line primary--text"
+     class="v-input-group v-input-group--dirty v-input-group--append-icon v-input-group--text-field v-input-group--select v-input-group--segmented v-input-group--single-line primary--text"
 >
-  <div class="input-group__input">
-    <div class="input-group__selections"
+  <div class="v-input-group__input">
+    <div class="v-input-group__selections"
          style="overflow: hidden;"
     >
       <div>
@@ -95,7 +95,7 @@ exports[`VSelect should render buttons correctly when using slot with segmented 
       </div>
       <input disabled="disabled"
              tabindex="-1"
-             class="input-group--select__autocomplete"
+             class="v-input-group--select__autocomplete"
              style="display: none;"
       >
     </div>
@@ -123,12 +123,12 @@ exports[`VSelect should render buttons correctly when using slot with segmented 
       </div>
     </div>
     <i aria-hidden="true"
-       class="icon material-icons input-group__append-icon input-group__icon-cb"
+       class="icon material-icons v-input-group__append-icon v-input-group__icon-cb"
     >
       arrow_drop_down
     </i>
   </div>
-  <div class="input-group__details">
+  <div class="v-input-group__details">
   </div>
 </div>
 
@@ -139,18 +139,18 @@ exports[`VSelect should render v-select correctly when not using scope slot 1`] 
 <div tabindex="0"
      data-uid="73"
      role="combobox"
-     class="input-group input-group--dirty input-group--append-icon input-group--text-field input-group--select primary--text"
+     class="v-input-group v-input-group--dirty v-input-group--append-icon v-input-group--text-field v-input-group--select primary--text"
 >
-  <div class="input-group__input">
-    <div class="input-group__selections"
+  <div class="v-input-group__input">
+    <div class="v-input-group__selections"
          style="overflow: hidden;"
     >
-      <div class="input-group__selections__comma">
+      <div class="v-input-group__selections__comma">
         Text 0
       </div>
       <input disabled="disabled"
              tabindex="-1"
-             class="input-group--select__autocomplete"
+             class="v-input-group--select__autocomplete"
              style="display: none;"
       >
     </div>
@@ -187,12 +187,12 @@ exports[`VSelect should render v-select correctly when not using scope slot 1`] 
       </div>
     </div>
     <i aria-hidden="true"
-       class="icon material-icons input-group__append-icon input-group__icon-cb"
+       class="icon material-icons v-input-group__append-icon v-input-group__icon-cb"
     >
       arrow_drop_down
     </i>
   </div>
-  <div class="input-group__details">
+  <div class="v-input-group__details">
   </div>
 </div>
 
@@ -203,18 +203,18 @@ exports[`VSelect should render v-select correctly when not using v-list-tile in 
 <div tabindex="0"
      data-uid="64"
      role="combobox"
-     class="input-group input-group--dirty input-group--append-icon input-group--text-field input-group--select primary--text"
+     class="v-input-group v-input-group--dirty v-input-group--append-icon v-input-group--text-field v-input-group--select primary--text"
 >
-  <div class="input-group__input">
-    <div class="input-group__selections"
+  <div class="v-input-group__input">
+    <div class="v-input-group__selections"
          style="overflow: hidden;"
     >
-      <div class="input-group__selections__comma">
+      <div class="v-input-group__selections__comma">
         Text 0
       </div>
       <input disabled="disabled"
              tabindex="-1"
-             class="input-group--select__autocomplete"
+             class="v-input-group--select__autocomplete"
              style="display: none;"
       >
     </div>
@@ -251,12 +251,12 @@ exports[`VSelect should render v-select correctly when not using v-list-tile in 
       </div>
     </div>
     <i aria-hidden="true"
-       class="icon material-icons input-group__append-icon input-group__icon-cb"
+       class="icon material-icons v-input-group__append-icon v-input-group__icon-cb"
     >
       arrow_drop_down
     </i>
   </div>
-  <div class="input-group__details">
+  <div class="v-input-group__details">
   </div>
 </div>
 
@@ -267,18 +267,18 @@ exports[`VSelect should render v-select correctly when using v-list-tile in item
 <div tabindex="0"
      data-uid="54"
      role="combobox"
-     class="input-group input-group--dirty input-group--append-icon input-group--text-field input-group--select primary--text"
+     class="v-input-group v-input-group--dirty v-input-group--append-icon v-input-group--text-field v-input-group--select primary--text"
 >
-  <div class="input-group__input">
-    <div class="input-group__selections"
+  <div class="v-input-group__input">
+    <div class="v-input-group__selections"
          style="overflow: hidden;"
     >
-      <div class="input-group__selections__comma">
+      <div class="v-input-group__selections__comma">
         Text 0
       </div>
       <input disabled="disabled"
              tabindex="-1"
-             class="input-group--select__autocomplete"
+             class="v-input-group--select__autocomplete"
              style="display: none;"
       >
     </div>
@@ -307,12 +307,12 @@ exports[`VSelect should render v-select correctly when using v-list-tile in item
       </div>
     </div>
     <i aria-hidden="true"
-       class="icon material-icons input-group__append-icon input-group__icon-cb"
+       class="icon material-icons v-input-group__append-icon v-input-group__icon-cb"
     >
       arrow_drop_down
     </i>
   </div>
-  <div class="input-group__details">
+  <div class="v-input-group__details">
   </div>
 </div>
 

@@ -2,61 +2,61 @@
 @import '../theme'
 
 selects($material)
-  &.input-group
+  &.v-input-group
     &--editable,
     &--overflow,
     &--segmented
-      .input-group__input:hover
+      .v-input-group__input:hover
         background: $material.cards
 
-      &.input-group--focused .input-group__input
+      &.v-input-group--focused .v-input-group__input
         background: $material.cards
 
-theme(selects, "input-group--select")
+theme(selects, "v-input-group--select")
 
-.input-group--select
+.v-input-group--select
   // TODO: revisit this
-  .input-group--select__autocomplete
+  .v-input-group--select__autocomplete
     display: block
     height: 0px
 
     &--index
       background-color: transparent !important
 
-  .input-group__append-icon
+  .v-input-group__append-icon
     transition: .3s $transition.linear-out-slow-in
 
-    &.input-group__icon-clearable
+    &.v-input-group__icon-clearable
       transition: none
 
-  &:not(.input-group--dirty),
-  &.input-group--focused
-    .input-group--select__autocomplete
+  &:not(.v-input-group--dirty),
+  &.v-input-group--focused
+    .v-input-group--select__autocomplete
       padding-bottom: 1px
       height: 30px
 
-  &.input-group--focused
-    .input-group--select__autocomplete
+  &.v-input-group--focused
+    .v-input-group--select__autocomplete
       display: inline-block
       opacity: 1
 
-    &.input-group--select--selecting-index
-      .input-group--select__autocomplete
+    &.v-input-group--select--selecting-index
+      .v-input-group--select__autocomplete
         opacity: 0
 
-    &.input-group--open
-      .input-group__append-icon:not(.input-group__icon-clearable)
+    &.v-input-group--open
+      .v-input-group__append-icon:not(.v-input-group__icon-clearable)
         transform: rotate(-180deg)
 
-  .input-group__input
+  .v-input-group__input
     cursor: pointer
 
-  &.input-group--disabled
+  &.v-input-group--disabled
     cursor: default
     pointer-events: none
 
-.input-group--select
-  .input-group__selections
+.v-input-group--select
+  .v-input-group__selections
     align-items: center
     display: flex
     flex-wrap: wrap
@@ -78,40 +78,40 @@ theme(selects, "input-group--select")
     position: absolute
     left: 0
 
-  &.input-group--autocomplete.input-group--search-focused
-    .input-group__selections__comma
+  &.v-input-group--autocomplete.v-input-group--search-focused
+    .v-input-group__selections__comma
       display: none
 
-.input-group--autocomplete
-  .input-group__selections
+.v-input-group--autocomplete
+  .v-input-group__selections
     cursor: text
 
 
-.input-group
-  &.input-group--chips
-    .input-group__input
+.v-input-group
+  &.v-input-group--chips
+    .v-input-group__input
       padding-top: 0
       padding-bottom: 0
 
-  &.input-group--overflow,
-  &.input-group--editable,
-  &.input-group--segmented
+  &.v-input-group--overflow,
+  &.v-input-group--editable,
+  &.v-input-group--segmented
     padding: 0
 
-    .input-group__append-icon
+    .v-input-group__append-icon
       padding: 0
 
-    .input-group__selections,
+    .v-input-group__selections,
     input
       height: 48px
 
     // Handle weird transition issue
-    .input-group__selections__comma, input
+    .v-input-group__selections__comma, input
       top: 0
       left: 0
       padding-left: 16px
 
-    .input-group__selections
+    .v-input-group__selections
       width: calc(100% - 55px)
 
       .v-btn
@@ -123,22 +123,22 @@ theme(selects, "input-group--select")
         .v-btn__content
           justify-content: start
 
-    .input-group__input
+    .v-input-group__input
       transition: .3s $transition.swing
 
-    &.input-group--focused
-      .input-group__input
+    &.v-input-group--focused
+      .v-input-group__input
         elevation(8)
 
     label
       left: 16px !important
       top: 9px !important
 
-    .input-group__details
+    .v-input-group__details
       &:after
         display: none
 
-    .input-group__input
+    .v-input-group__input
       padding: 0
 
       &:before
@@ -150,12 +150,12 @@ theme(selects, "input-group--select")
         top: 0
         transition: .3s $transition.swing
 
-    .input-group__append-icon
+    .v-input-group__append-icon
       width: 55px
 
-  &--segmented .input-group__input,
-  &--editable .input-group__input:hover,
-  &.input-group--focused.input-group--editable .input-group__input
+  &--segmented .v-input-group__input,
+  &--editable .v-input-group__input:hover,
+  &.v-input-group--focused.v-input-group--editable .v-input-group__input
     &:after
       background-color: rgba(0,0,0,0.12)
       content: ''
@@ -167,7 +167,7 @@ theme(selects, "input-group--select")
 
 .menu__content--select
   // // IE11 Fix for overflow
-  .input-group--selection-controls__ripple
+  .v-input-group--selection-controls__ripple
     display: none
 
 .menu__content--autocomplete

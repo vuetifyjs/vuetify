@@ -9,7 +9,7 @@ test('VCheckbox.js', ({ mount }) => {
       }
     })
 
-    const ripple = wrapper.find('.input-group--selection-controls__ripple')[0]
+    const ripple = wrapper.find('.v-input-group--selection-controls__ripple')[0]
 
     const change = jest.fn()
     wrapper.vm.$on('change', change)
@@ -26,7 +26,7 @@ test('VCheckbox.js', ({ mount }) => {
       }
     })
 
-    const ripple = wrapper.find('.input-group--selection-controls__ripple')[0]
+    const ripple = wrapper.find('.v-input-group--selection-controls__ripple')[0]
 
     const change = jest.fn()
     wrapper.vm.$on('change', change)
@@ -43,7 +43,7 @@ test('VCheckbox.js', ({ mount }) => {
       }
     })
 
-    const ripple = wrapper.find('.input-group--selection-controls__ripple')[0]
+    const ripple = wrapper.find('.v-input-group--selection-controls__ripple')[0]
 
     const change = jest.fn()
     wrapper.vm.$on('change', change)
@@ -77,7 +77,7 @@ test('VCheckbox.js', ({ mount }) => {
       }
     })
 
-    const inputGroup = wrapper.find('.input-group')[0]
+    const inputGroup = wrapper.find('.v-input-group')[0]
 
     expect(inputGroup.getAttribute('role')).toBe('checkbox')
     expect(inputGroup.getAttribute('aria-checked')).toBe('false')
@@ -97,7 +97,7 @@ test('VCheckbox.js', ({ mount }) => {
       attrs: {}
     })
 
-    const inputGroup = wrapper.find('.input-group')[0]
+    const inputGroup = wrapper.find('.v-input-group')[0]
     expect(inputGroup.getAttribute('aria-label')).toBe('Test')
   })
 
@@ -108,7 +108,7 @@ test('VCheckbox.js', ({ mount }) => {
       }
     })
 
-    const inputGroup = wrapper.find('.input-group')[0]
+    const inputGroup = wrapper.find('.v-input-group')[0]
     expect(inputGroup.element.getAttribute('aria-label')).toBeFalsy()
   })
 
@@ -171,7 +171,7 @@ test('VCheckbox.js', ({ mount }) => {
       }
     })
 
-    const ripple = wrapper.find('.input-group--selection-controls__ripple')[0]
+    const ripple = wrapper.find('.v-input-group--selection-controls__ripple')[0]
 
     expect(ripple.element._ripple.enabled).toBe(true)
     expect(ripple.element._ripple.centered).toBe(true)
@@ -189,7 +189,7 @@ test('VCheckbox.js', ({ mount }) => {
       }
     })
 
-    const ripple = wrapper.find('.input-group--selection-controls__ripple')[0]
+    const ripple = wrapper.find('.v-input-group--selection-controls__ripple')[0]
 
     expect(ripple.element._ripple.enabled).toBe(false)
 
@@ -207,7 +207,7 @@ test('VCheckbox.js', ({ mount }) => {
       }
     })
 
-    const ripple = wrapper.find('.input-group--selection-controls__ripple')
+    const ripple = wrapper.find('.v-input-group--selection-controls__ripple')
 
     expect(ripple).toHaveLength(0)
   })
@@ -219,7 +219,7 @@ test('VCheckbox.js', ({ mount }) => {
       }
     })
 
-    const ripple = wrapper.find('.input-group--selection-controls__ripple')[0]
+    const ripple = wrapper.find('.v-input-group--selection-controls__ripple')[0]
 
     expect(ripple.element._ripple.enabled).toBe(true)
     expect(ripple.element._ripple.centered).toBe(true)
