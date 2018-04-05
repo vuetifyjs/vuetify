@@ -6,19 +6,19 @@ selection-control($material)
   label
     color: $material.text.primary
 
-  .icon--selection-control
+  .v-icon--selection-control
     color: $material.text.secondary
 
   &.input-group--active
-    .icon--selection-control
+    .v-icon--selection-control
       color: inherit
 
   &.input-group--disabled
     .input-group__input
       color: $material.text.disabled
 
-      .icon--radio,
-      .icon--checkbox
+      .v-icon--radio,
+      .v-icon--checkbox
         color: inherit
 
 theme(selection-control, "input-group--selection-controls")
@@ -35,7 +35,7 @@ theme(selection-control, "input-group--selection-controls")
   display: flex
   padding: 0
 
-  .icon--selection-control
+  .v-icon--selection-control
     cursor: pointer
     position: absolute
     left: 0
@@ -51,7 +51,7 @@ theme(selection-control, "input-group--selection-controls")
     position: relative
 
     // Needed for safari
-    .icon--selection-control
+    .v-icon--selection-control
       align-self: center
       height: 30px
       margin: auto
@@ -61,7 +61,7 @@ theme(selection-control, "input-group--selection-controls")
       color: inherit
 
     .input-group__input
-      .icon--selection-control
+      .v-icon--selection-control
         color: inherit
 
 /** Label */
@@ -72,7 +72,7 @@ theme(selection-control, "input-group--selection-controls")
     left: 32px
     user-select: none
     z-index: 1
-  
+
   &:not(.input-group--disabled)
     label
       pointer-events: all
@@ -105,7 +105,7 @@ theme(selection-control, "input-group--selection-controls")
 /** Appended and prepended icons */
 .input-group--prepend-icon
   &.input-group--selection-controls
-    .icon--selection-control,
+    .v-icon--selection-control,
     .input-group--selection-controls__ripple
       left: 38px
 
@@ -133,7 +133,7 @@ theme(selection-control, "input-group--selection-controls")
 
 .input-group--prepend-icon
   &.radio-group--row
-    .icon--selection-control,
+    .v-icon--selection-control,
     .input-group--selection-controls__ripple
       left: 14px
 

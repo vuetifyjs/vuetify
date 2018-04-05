@@ -8,7 +8,7 @@ button($material)
   &.v-btn--disabled
     color: $material.buttons.disabled !important
 
-    .icon
+    .v-icon
       color: $material.buttons.disabled !important
 
     &:not(.v-btn--icon):not(.v-btn--flat)
@@ -93,7 +93,7 @@ theme(button, "v-btn")
     width: inherit
 
 /** Icons */
-.v-btn .v-btn__content .icon
+.v-btn .v-btn__content .v-icon
   color: inherit
 
 /** Types */
@@ -191,7 +191,7 @@ theme(button, "v-btn")
             opacity: 1
             transform: rotate(0)
 
-    .icon
+    .v-icon
       height: inherit
       width: inherit
 
@@ -199,7 +199,7 @@ theme(button, "v-btn")
       height: $button-floating-small-width
       width: $button-floating-small-width
 
-      .icon
+      .v-icon
         font-size: $button-floating-small-icon-width
 
 
@@ -207,7 +207,7 @@ theme(button, "v-btn")
       height: $button-floating-large-width
       width: $button-floating-large-width
 
-      .icon
+      .v-icon
         font-size: $button-floating-large-icon-width
 
   &--reverse
@@ -292,7 +292,7 @@ theme(button, "v-btn")
     top: 0
     width: 100%
 
-    .icon
+    .v-icon
       &--left
         margin-right: 1rem
         line-height: inherit
@@ -327,7 +327,7 @@ theme(button, "v-btn")
 
 /** Button w/ directional Icon */
 .v-btn
-  .icon
+  .v-icon
     &--right
       margin-left: 16px
 

@@ -193,7 +193,7 @@ test('VListGroup.js', ({ mount }) => {
       }
     })
 
-    const icon = wrapper.find('.icon')[0]
+    const icon = wrapper.find('.v-icon')[0]
 
     expect(icon.text()).toBe('arrow_drop_down')
 
@@ -211,7 +211,7 @@ test('VListGroup.js', ({ mount }) => {
     expect(wrapper.vm.genPrependIcon()).toBeTruthy()
     wrapper.setProps({ prependIcon: undefined })
 
-    const icon = wrapper.find('.icon')[0]
+    const icon = wrapper.find('.v-icon')[0]
 
     expect(icon.text()).toBe('keyboard_arrow_down')
     wrapper.setProps({ appendIcon: 'list' })

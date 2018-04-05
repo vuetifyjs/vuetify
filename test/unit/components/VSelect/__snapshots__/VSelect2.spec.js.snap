@@ -40,12 +40,12 @@ exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
                   >
                     <div class="input-group__input">
                       <i aria-hidden="true"
-                         class="icon icon--selection-control material-icons fade-transition-leave fade-transition-leave-active"
+                         class="v-icon v-icon--selection-control material-icons fade-transition-leave fade-transition-leave-active"
                       >
                         check_box_outline_blank
                       </i>
                       <i aria-hidden="true"
-                         class="icon icon--selection-control material-icons icon--checkbox fade-transition-enter fade-transition-enter-active"
+                         class="v-icon v-icon--selection-control material-icons icon--checkbox fade-transition-enter fade-transition-enter-active"
                          style="-webkit-transform-origin: top center 0;"
                       >
                         check_box
@@ -74,7 +74,7 @@ exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
                   >
                     <div class="input-group__input">
                       <i aria-hidden="true"
-                         class="icon icon--selection-control material-icons"
+                         class="v-icon v-icon--selection-control material-icons"
                       >
                         check_box_outline_blank
                       </i>
@@ -97,7 +97,7 @@ exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
       </div>
     </div>
     <i aria-hidden="true"
-       class="icon material-icons input-group__append-icon input-group__icon-cb input-group__icon-clearable"
+       class="v-icon material-icons input-group__append-icon input-group__icon-cb input-group__icon-clearable"
     >
       clear
     </i>
@@ -161,7 +161,7 @@ exports[`VSelect should be clearable with prop, dirty and single select 1`] = `
       </div>
     </div>
     <i aria-hidden="true"
-       class="icon material-icons input-group__append-icon input-group__icon-cb input-group__icon-clearable"
+       class="v-icon material-icons input-group__append-icon input-group__icon-cb input-group__icon-clearable"
     >
       clear
     </i>

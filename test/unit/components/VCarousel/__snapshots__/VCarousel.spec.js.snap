@@ -9,7 +9,7 @@ exports[`VCarousel.js should render component and match snapshot 1`] = `
     >
       <div class="v-btn__content">
         <i aria-hidden="true"
-           class="icon material-icons"
+           class="v-icon material-icons"
            style="font-size: 46px;"
         >
           chevron_left
@@ -23,7 +23,7 @@ exports[`VCarousel.js should render component and match snapshot 1`] = `
     >
       <div class="v-btn__content">
         <i aria-hidden="true"
-           class="icon material-icons"
+           class="v-icon material-icons"
            style="font-size: 46px;"
         >
           chevron_right
@@ -46,7 +46,7 @@ exports[`VCarousel.js should render component with custom duration between image
     >
       <div class="v-btn__content">
         <i aria-hidden="true"
-           class="icon material-icons"
+           class="v-icon material-icons"
            style="font-size: 46px;"
         >
           chevron_left
@@ -60,7 +60,7 @@ exports[`VCarousel.js should render component with custom duration between image
     >
       <div class="v-btn__content">
         <i aria-hidden="true"
-           class="icon material-icons"
+           class="v-icon material-icons"
            style="font-size: 46px;"
         >
           chevron_right
@@ -83,7 +83,7 @@ exports[`VCarousel.js should render component with custom icon and match snapsho
     >
       <div class="v-btn__content">
         <i aria-hidden="true"
-           class="icon material-icons"
+           class="v-icon material-icons"
            style="font-size: 46px;"
         >
           chevron_left
@@ -97,7 +97,7 @@ exports[`VCarousel.js should render component with custom icon and match snapsho
     >
       <div class="v-btn__content">
         <i aria-hidden="true"
-           class="icon material-icons"
+           class="v-icon material-icons"
            style="font-size: 46px;"
         >
           chevron_right
@@ -111,7 +111,7 @@ exports[`VCarousel.js should render component with custom icon and match snapsho
     >
       <div class="v-btn__content">
         <i aria-hidden="true"
-           class="icon material-icons"
+           class="v-icon material-icons"
            style="font-size: 18px;"
         >
           stop
@@ -123,7 +123,7 @@ exports[`VCarousel.js should render component with custom icon and match snapsho
     >
       <div class="v-btn__content">
         <i aria-hidden="true"
-           class="icon material-icons"
+           class="v-icon material-icons"
            style="font-size: 18px;"
         >
           stop
@@ -135,7 +135,7 @@ exports[`VCarousel.js should render component with custom icon and match snapsho
     >
       <div class="v-btn__content">
         <i aria-hidden="true"
-           class="icon material-icons"
+           class="v-icon material-icons"
            style="font-size: 18px;"
         >
           stop
@@ -186,7 +186,7 @@ exports[`VCarousel.js should render component with custom next icon and match sn
     >
       <div class="v-btn__content">
         <i aria-hidden="true"
-           class="icon material-icons"
+           class="v-icon material-icons"
            style="font-size: 46px;"
         >
           chevron_left
@@ -200,7 +200,7 @@ exports[`VCarousel.js should render component with custom next icon and match sn
     >
       <div class="v-btn__content">
         <i aria-hidden="true"
-           class="icon material-icons"
+           class="v-icon material-icons"
            style="font-size: 46px;"
         >
           stop
@@ -223,7 +223,7 @@ exports[`VCarousel.js should render component with custom prev icon and match sn
     >
       <div class="v-btn__content">
         <i aria-hidden="true"
-           class="icon material-icons"
+           class="v-icon material-icons"
            style="font-size: 46px;"
         >
           stop
@@ -237,7 +237,7 @@ exports[`VCarousel.js should render component with custom prev icon and match sn
     >
       <div class="v-btn__content">
         <i aria-hidden="true"
-           class="icon material-icons"
+           class="v-icon material-icons"
            style="font-size: 46px;"
         >
           chevron_right
@@ -260,7 +260,7 @@ exports[`VCarousel.js should render component with image cycling off and match s
     >
       <div class="v-btn__content">
         <i aria-hidden="true"
-           class="icon material-icons"
+           class="v-icon material-icons"
            style="font-size: 46px;"
         >
           chevron_left
@@ -274,7 +274,7 @@ exports[`VCarousel.js should render component with image cycling off and match s
     >
       <div class="v-btn__content">
         <i aria-hidden="true"
-           class="icon material-icons"
+           class="v-icon material-icons"
            style="font-size: 46px;"
         >
           chevron_right
@@ -297,7 +297,7 @@ exports[`VCarousel.js should render component with selected active item 1`] = `
     >
       <div class="v-btn__content">
         <i aria-hidden="true"
-           class="icon material-icons"
+           class="v-icon material-icons"
            style="font-size: 46px;"
         >
           chevron_left
@@ -311,7 +311,7 @@ exports[`VCarousel.js should render component with selected active item 1`] = `
     >
       <div class="v-btn__content">
         <i aria-hidden="true"
-           class="icon material-icons"
+           class="v-icon material-icons"
            style="font-size: 46px;"
         >
           chevron_right
@@ -325,7 +325,7 @@ exports[`VCarousel.js should render component with selected active item 1`] = `
     >
       <div class="v-btn__content">
         <i aria-hidden="true"
-           class="icon material-icons"
+           class="v-icon material-icons"
            style="font-size: 18px;"
         >
           fiber_manual_record
@@ -337,7 +337,7 @@ exports[`VCarousel.js should render component with selected active item 1`] = `
     >
       <div class="v-btn__content">
         <i aria-hidden="true"
-           class="icon material-icons"
+           class="v-icon material-icons"
            style="font-size: 18px;"
         >
           fiber_manual_record
@@ -349,7 +349,7 @@ exports[`VCarousel.js should render component with selected active item 1`] = `
     >
       <div class="v-btn__content">
         <i aria-hidden="true"
-           class="icon material-icons"
+           class="v-icon material-icons"
            style="font-size: 18px;"
         >
           fiber_manual_record
@@ -400,7 +400,7 @@ exports[`VCarousel.js should render component without delimiters 1`] = `
     >
       <div class="v-btn__content">
         <i aria-hidden="true"
-           class="icon material-icons"
+           class="v-icon material-icons"
            style="font-size: 46px;"
         >
           chevron_left
@@ -414,7 +414,7 @@ exports[`VCarousel.js should render component without delimiters 1`] = `
     >
       <div class="v-btn__content">
         <i aria-hidden="true"
-           class="icon material-icons"
+           class="v-icon material-icons"
            style="font-size: 46px;"
         >
           chevron_right
@@ -465,7 +465,7 @@ exports[`VCarousel.js should render component without next icon and match snapsh
     >
       <div class="v-btn__content">
         <i aria-hidden="true"
-           class="icon material-icons"
+           class="v-icon material-icons"
            style="font-size: 46px;"
         >
           chevron_left
@@ -488,7 +488,7 @@ exports[`VCarousel.js should render component without prev icon and match snapsh
     >
       <div class="v-btn__content">
         <i aria-hidden="true"
-           class="icon material-icons"
+           class="v-icon material-icons"
            style="font-size: 46px;"
         >
           chevron_right

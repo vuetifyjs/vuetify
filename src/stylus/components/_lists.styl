@@ -25,7 +25,7 @@ list($material)
     .list__tile
       color: $material.text.disabled !important
 
-    .list__group__header__prepend-icon .icon
+    .list__group__header__prepend-icon .v-icon
       color: $material.icons.inactive !important
 
 theme(list, "list")
@@ -131,7 +131,7 @@ theme(list, "list")
 
     &--active
       .list__tile__action:first-of-type
-        .icon
+        .v-icon
           color: inherit
 
     &--disabled
@@ -162,7 +162,7 @@ theme(list, "list")
       &:not(.list__tile--avatar)
         height: $list-item-dense-single-height
 
-      .icon
+      .v-icon
         font-size: $list-item-dense-icon-font-size
 
     .list__tile__sub-title
@@ -249,16 +249,16 @@ theme(list, "list")
 
       &--active
         .list__group__header__append-icon
-          .icon
+          .v-icon
             transform: rotate(-180deg)
 
         .list__group__header__prepend-icon
-          .icon
+          .v-icon
             color: inherit
 
         &.list__group__header--sub-group
           .list__group__header__prepend-icon
-            .icon
+            .v-icon
               transform: rotate(-180deg)
 
     &__items
