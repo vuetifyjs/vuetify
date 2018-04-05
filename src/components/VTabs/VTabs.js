@@ -67,7 +67,12 @@ export default {
       tabsContainer: null,
       tabs: [],
       tabItems: null,
-      transitionTime: 300
+      transitionTime: 300,
+      widths: {
+        bar: 0,
+        container: 0,
+        wrapper: 0
+      }
     }
   },
 
@@ -89,13 +94,10 @@ export default {
     },
     checkNextIcon () {
       // Check one scroll ahead to know the width of right-most item
-      const container = this.$refs.container
-      const wrapper = this.$refs.wrapper
-
-      return container.clientWidth > this.scrollOffset + wrapper.clientWidth
+      return this.widths.container > this.scrollOffset + this.widths.wrapper
     },
     callSlider () {
-      this.setOverflow()
+      this.setWidths()
       if (this.hideSlider || !this.activeTab) return false
 
       // Give screen time to paint
@@ -132,7 +134,16 @@ export default {
       this.scrollOffset = this.newOffset(direction)
     },
     setOverflow () {
-      this.isOverflowing = this.$refs.bar.clientWidth < this.$refs.container.clientWidth
+      this.isOverflowing = this.widths.bar < this.widths.container
+    },
+    setWidths () {
+      const bar = this.$refs.bar ? this.$refs.bar.clientWidth : 0
+      const container = this.$refs.container ? this.$refs.container.clientWidth : 0
+      const wrapper = this.$refs.wrapper ? this.$refs.wrapper.clientWidth : 0
+
+      this.widths = { bar, container, wrapper }
+
+      this.setOverflow()
     },
     findActiveLink () {
       if (!this.tabs.length || this.lazyValue) return
@@ -185,8 +196,7 @@ export default {
       if (!this.activeTab) return false
 
       const { clientWidth, offsetLeft } = this.activeTab.$el
-      const wrapperWidth = this.$refs.wrapper.clientWidth
-      const totalWidth = wrapperWidth + this.scrollOffset
+      const totalWidth = this.widths.wrapper + this.scrollOffset
       const itemOffset = clientWidth + offsetLeft
       const additionalOffset = clientWidth * 0.3
 

@@ -459,4 +459,19 @@ test('VTabs', ({ mount, shallow }) => {
     expect(onResize).toHaveBeenCalledTimes(1)
     expect(wrapper.vm.tabs.length).toBe(0)
   })
+
+  it('should not error if processing resize on destroy', () => {
+    const wrapper = mount(VTabs, {
+      slots: {
+        default: [{
+          functional: true,
+          render: h => h(VTab)
+        }]
+      }
+    })
+
+    // Will kill test if fails
+    delete wrapper.vm.$refs.bar
+    wrapper.vm.setOverflow()
+  })
 })
