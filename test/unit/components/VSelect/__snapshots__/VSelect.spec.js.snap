@@ -2,7 +2,7 @@
 
 exports[`VSelect should escape items in menu 1`] = `
 
-<div class="list__tile__title">
+<div class="v-list__tile__title">
   &lt;strong&gt;foo&lt;/strong&gt;
 </div>
 
@@ -10,7 +10,7 @@ exports[`VSelect should escape items in menu 1`] = `
 
 exports[`VSelect should escape items in menu 2`] = `
 
-<div class="list__tile__title">
+<div class="v-list__tile__title">
   &lt;
   <span class="list__tile__mask">
     str
@@ -53,11 +53,11 @@ exports[`VSelect should render buttons correctly when using items array with seg
         <div class="v-card"
              style="height: auto;"
         >
-          <div class="list">
+          <div class="v-list">
             <div>
-              <a class="list__tile list__tile--link list__tile--active primary--text">
-                <div class="list__tile__content">
-                  <div class="list__tile__title">
+              <a class="v-list__tile v-list__tile--link v-list__tile--active primary--text">
+                <div class="v-list__tile__content">
+                  <div class="v-list__tile__title">
                     Hello
                   </div>
                 </div>
@@ -108,11 +108,11 @@ exports[`VSelect should render buttons correctly when using slot with segmented 
         <div class="v-card"
              style="height: auto;"
         >
-          <div class="list">
+          <div class="v-list">
             <div>
-              <a class="list__tile list__tile--link list__tile--active primary--text">
-                <div class="list__tile__content">
-                  <div class="list__tile__title">
+              <a class="v-list__tile v-list__tile--link v-list__tile--active primary--text">
+                <div class="v-list__tile__content">
+                  <div class="v-list__tile__title">
                     Hello
                   </div>
                 </div>
@@ -163,20 +163,20 @@ exports[`VSelect should render v-select correctly when not using scope slot 1`] 
         <div class="v-card"
              style="height: auto;"
         >
-          <div class="list">
+          <div class="v-list">
             <div>
-              <a class="list__tile list__tile--link list__tile--active primary--text">
-                <div class="list__tile__content">
-                  <div class="list__tile__title">
+              <a class="v-list__tile v-list__tile--link v-list__tile--active primary--text">
+                <div class="v-list__tile__content">
+                  <div class="v-list__tile__title">
                     Text 0
                   </div>
                 </div>
               </a>
             </div>
             <div>
-              <a class="list__tile list__tile--link">
-                <div class="list__tile__content">
-                  <div class="list__tile__title">
+              <a class="v-list__tile v-list__tile--link">
+                <div class="v-list__tile__content">
+                  <div class="v-list__tile__title">
                     Text 1
                   </div>
                 </div>
@@ -227,20 +227,20 @@ exports[`VSelect should render v-select correctly when not using v-list-tile in 
         <div class="v-card"
              style="height: auto;"
         >
-          <div class="list">
+          <div class="v-list">
             <div>
-              <a class="list__tile list__tile--link list__tile--active primary--text">
-                <div class="list__tile__content">
-                  <div class="list__tile__title">
+              <a class="v-list__tile v-list__tile--link v-list__tile--active primary--text">
+                <div class="v-list__tile__content">
+                  <div class="v-list__tile__title">
                     0
                   </div>
                 </div>
               </a>
             </div>
             <div>
-              <a class="list__tile list__tile--link">
-                <div class="list__tile__content red lighten-1">
-                  <div class="list__tile__title">
+              <a class="v-list__tile v-list__tile--link">
+                <div class="v-list__tile__content red lighten-1">
+                  <div class="v-list__tile__title">
                     1
                   </div>
                 </div>
@@ -291,14 +291,14 @@ exports[`VSelect should render v-select correctly when using v-list-tile in item
         <div class="v-card"
              style="height: auto;"
         >
-          <div class="list">
+          <div class="v-list">
             <div class>
-              <a class="list__tile list__tile--link list__tile--active primary--text">
+              <a class="v-list__tile v-list__tile--link v-list__tile--active primary--text">
                 Text 0
               </a>
             </div>
             <div class="red lighten-1">
-              <a class="list__tile list__tile--link">
+              <a class="v-list__tile v-list__tile--link">
                 Text 1
               </a>
             </div>

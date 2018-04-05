@@ -87,7 +87,7 @@ test('VListGroup.js', ({ mount }) => {
       }
     })
 
-    const header = wrapper.find('.list__group__header__prepend-icon')[0]
+    const header = wrapper.find('.v-list__group__header__prepend-icon')[0]
 
     expect(header.hasClass('foo')).toBe(true)
     wrapper.setProps({ activeClass: 'bar' })
