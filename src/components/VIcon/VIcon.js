@@ -97,10 +97,10 @@ export default {
     }
 
     const classes = Object.assign({
-      'icon--link': listeners.click || listeners['!click'],
-      'icon--disabled': props.disabled,
-      'icon--left': props.left,
-      'icon--right': props.right,
+      'v-icon--disabled': props.disabled,
+      'v-icon--left': props.left,
+      'v-icon--link': listeners.click || listeners['!click'],
+      'v-icon--right': props.right,
       'theme--dark': props.dark,
       'theme--light': props.light
     }, props.color ? Colorable.methods.addTextColorClassChecks.call(props, {}, props.color) : {})
@@ -110,7 +110,7 @@ export default {
     // * Vuetify classes
     // * Icon Classes
     data.staticClass = [
-      'icon',
+      'v-icon',
       data.staticClass,
       Object.keys(classes).filter(k => classes[k]).join(' '),
       iconType,

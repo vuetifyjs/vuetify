@@ -25,7 +25,7 @@ exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
             <div class="v-input__append-inner">
               <div class="v-input__icon v-input__icon--clear">
                 <i aria-hidden="true"
-                   class="icon icon--link material-icons"
+                   class="v-icon v-icon--link material-icons"
                 >
                   clear
                 </i>
@@ -34,7 +34,7 @@ exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
             <div class="v-input__append-inner">
               <div class="v-input__icon v-input__icon--append">
                 <i aria-hidden="true"
-                   class="icon material-icons"
+                   class="v-icon material-icons"
                 >
                   arrow_drop_down
                 </i>
@@ -80,7 +80,7 @@ exports[`VSelect should be clearable with prop, dirty and single select 1`] = `
             <div class="v-input__append-inner">
               <div class="v-input__icon v-input__icon--clear">
                 <i aria-hidden="true"
-                   class="icon icon--link material-icons"
+                   class="v-icon v-icon--link material-icons"
                 >
                   clear
                 </i>
@@ -89,7 +89,7 @@ exports[`VSelect should be clearable with prop, dirty and single select 1`] = `
             <div class="v-input__append-inner">
               <div class="v-input__icon v-input__icon--append">
                 <i aria-hidden="true"
-                   class="icon material-icons"
+                   class="v-icon material-icons"
                 >
                   arrow_drop_down
                 </i>

@@ -51,7 +51,7 @@
 
   &-transition
     &-enter
-      .list__tile
+      .v-list__tile
         min-width: 0
         transition-delay: .4s
         opacity: 0
@@ -59,11 +59,11 @@
         pointer-events: none
 
     &-enter-to
-      .list__tile
+      .v-list__tile
         pointer-events: auto
         opacity: 1
 
-      .list__tile--active
+      .v-list__tile--active
         transform: none !important
 
     &-leave-to
@@ -83,7 +83,7 @@
 
 .menu-transition-enter
   &.menu__content--auto
-    .list__tile--active
+    .v-list__tile--active
       opacity: 1
       transform: none !important
       pointer-events: auto

@@ -2,15 +2,15 @@
 @import '../theme'
 
 /* Themes */
-icon($material)
+v-icon($material)
   color: $material.icons.active
 
-  &.icon--disabled:not(.input-group__append-icon)
+  &.v-icon--disabled:not(.input-group__append-icon)
     color: $material.icons.inactive !important
 
-theme(icon, "icon")
+theme(v-icon, "v-icon")
 
-.icon
+.v-icon
   align-items: center
   display: inline-flex
   font-feature-settings: 'liga'
@@ -23,14 +23,14 @@ theme(icon, "icon")
   &--link
     cursor: pointer
 
-  &.icon--large
+  &.v-icon--large
     font-size: 2.5rem
 
-  &.icon--medium
+  &.v-icon--medium
     font-size: 2rem
 
-  &.icon--x-large
+  &.v-icon--x-large
     font-size: 3rem
 
-  &.icon--disabled
+  &.v-icon--disabled
     pointer-events: none

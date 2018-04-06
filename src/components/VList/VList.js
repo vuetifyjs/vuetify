@@ -36,10 +36,10 @@ export default {
   computed: {
     classes () {
       return {
-        'list--dense': this.dense,
-        'list--subheader': this.subheader,
-        'list--two-line': this.twoLine,
-        'list--three-line': this.threeLine,
+        'v-list--dense': this.dense,
+        'v-list--subheader': this.subheader,
+        'v-list--two-line': this.twoLine,
+        'v-list--three-line': this.threeLine,
         'theme--dark': this.dark,
         'theme--light': this.light
       }
@@ -68,7 +68,7 @@ export default {
 
   render (h) {
     const data = {
-      staticClass: 'list',
+      staticClass: 'v-list',
       'class': this.classes
     }
 

@@ -135,7 +135,7 @@ test('VTextField.js', ({ mount }) => {
       }
     })
 
-    const clear = wrapper.find('.v-input__icon--clear .icon')[0]
+    const clear = wrapper.find('.v-input__icon--clear .v-icon')[0]
     const input = jest.fn()
     wrapper.vm.$on('input', input)
 
@@ -158,7 +158,7 @@ test('VTextField.js', ({ mount }) => {
       }
     })
 
-    const icon = wrapper.find('.v-input__icon--append .icon')[0]
+    const icon = wrapper.find('.v-input__icon--append .v-icon')[0]
     icon.trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.internalValue).toBe('foo')
@@ -173,7 +173,7 @@ test('VTextField.js', ({ mount }) => {
       }
     })
 
-    const icon = wrapper.find('.v-input__icon--append .icon')[0]
+    const icon = wrapper.find('.v-input__icon--append .v-icon')[0]
     icon.trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.internalValue).toBe('foo')
@@ -262,7 +262,7 @@ test('VTextField.js', ({ mount }) => {
       }
     })
 
-    const prepend = wrapper.find('.v-input__icon--append .icon')[0]
+    const prepend = wrapper.find('.v-input__icon--append .v-icon')[0]
     expect(prepend.text()).toBe('check')
     expect(prepend.element.classList).not.toContain('input-group__icon-cb')
   })
@@ -632,7 +632,7 @@ test('VTextField.js', ({ mount }) => {
       }
     })
 
-    wrapper.first('.v-input__icon--clear .icon').trigger('click')
+    wrapper.first('.v-input__icon--clear .v-icon').trigger('click')
 
     expect(clearIconCb).toBeCalled()
   })
@@ -684,7 +684,7 @@ test('VTextField.js', ({ mount }) => {
       }
     })
 
-    expect(wrapper.first('.v-input__icon--appendOuter .icon').element.innerHTML).toBe('search')
+    expect(wrapper.first('.v-input__icon--appendOuter .v-icon').element.innerHTML).toBe('search')
   })
 
   it('should reset internal change', () => {

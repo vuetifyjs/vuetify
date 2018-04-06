@@ -40,7 +40,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const clear = wrapper.find('.icon')[0]
+    const clear = wrapper.find('.v-icon')[0]
 
     const input = jest.fn()
     wrapper.vm.$on('input', input)
@@ -65,7 +65,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const clear = wrapper.first('.icon')
+    const clear = wrapper.first('.v-icon')
 
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.internalValue).toBe(1)
@@ -88,7 +88,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const clear = wrapper.first('.icon')
+    const clear = wrapper.first('.v-icon')
 
     const change = jest.fn()
     wrapper.vm.$on('change', change)
@@ -193,7 +193,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.vm.selectedItems).toHaveLength(1)
     wrapper.trigger('click')
-    const item = wrapper.find('div.list__tile__action')[0]
+    const item = wrapper.find('div.v-list__tile__action')[0]
     item.trigger('click')
 
     expect(wrapper.vm.selectedItems).toHaveLength(0)
@@ -209,7 +209,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const clear = wrapper.first('.v-input__icon--clear .icon')
+    const clear = wrapper.first('.v-input__icon--clear .v-icon')
 
     clear.trigger('click')
 
@@ -276,7 +276,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     const selectItem = jest.fn()
     wrapper.setMethods({ selectItem })
 
-    let el = wrapper.first('.list__tile')
+    let el = wrapper.first('.v-list__tile')
 
     el.element.click()
 
@@ -553,7 +553,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
       }
     })
 
-    wrapper.first('.v-input__icon--clear .icon').trigger('click')
+    wrapper.first('.v-input__icon--clear .v-icon').trigger('click')
 
     expect(clearIconCb).toBeCalled()
   })

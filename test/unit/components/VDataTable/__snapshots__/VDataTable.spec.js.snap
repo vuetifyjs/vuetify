@@ -16,7 +16,7 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
           >
             First Column
             <i aria-hidden="true"
-               class="icon material-icons"
+               class="v-icon material-icons"
                style="font-size: 16px;"
             >
               arrow_upward
@@ -39,7 +39,7 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
           >
             Third Column
             <i aria-hidden="true"
-               class="icon material-icons"
+               class="v-icon material-icons"
                style="font-size: 16px;"
             >
               arrow_upward
@@ -88,7 +88,7 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
                     <div class="v-input__append-inner">
                       <div class="v-input__icon v-input__icon--append">
                         <i aria-hidden="true"
-                           class="icon material-icons"
+                           class="v-icon material-icons"
                         >
                           arrow_drop_down
                         </i>
@@ -102,38 +102,38 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
                   <div class="v-select-list v-card"
                        style="height: auto;"
                   >
-                    <div class="list">
+                    <div class="v-list">
                       <div>
-                        <a class="list__tile list__tile--link">
-                          <div class="list__tile__content">
-                            <div class="list__tile__title">
+                        <a class="v-list__tile v-list__tile--link">
+                          <div class="v-list__tile__content">
+                            <div class="v-list__tile__title">
                               5
                             </div>
                           </div>
                         </a>
                       </div>
                       <div>
-                        <a class="list__tile list__tile--link">
-                          <div class="list__tile__content">
-                            <div class="list__tile__title">
+                        <a class="v-list__tile v-list__tile--link">
+                          <div class="v-list__tile__content">
+                            <div class="v-list__tile__title">
                               10
                             </div>
                           </div>
                         </a>
                       </div>
                       <div>
-                        <a class="list__tile list__tile--link">
-                          <div class="list__tile__content">
-                            <div class="list__tile__title">
+                        <a class="v-list__tile v-list__tile--link">
+                          <div class="v-list__tile__content">
+                            <div class="v-list__tile__title">
                               25
                             </div>
                           </div>
                         </a>
                       </div>
                       <div>
-                        <a class="list__tile list__tile--link">
-                          <div class="list__tile__content">
-                            <div class="list__tile__title">
+                        <a class="v-list__tile v-list__tile--link">
+                          <div class="v-list__tile__content">
+                            <div class="v-list__tile__title">
                               All
                             </div>
                           </div>
@@ -160,7 +160,7 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
-               class="icon material-icons"
+               class="v-icon material-icons"
             >
               chevron_left
             </i>
@@ -173,7 +173,7 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
-               class="icon material-icons"
+               class="v-icon material-icons"
             >
               chevron_right
             </i>
@@ -202,7 +202,7 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
           >
             First Column
             <i aria-hidden="true"
-               class="icon material-icons"
+               class="v-icon material-icons"
                style="font-size: 16px;"
             >
               arrow_upward
@@ -225,7 +225,7 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
           >
             Third Column
             <i aria-hidden="true"
-               class="icon material-icons"
+               class="v-icon material-icons"
                style="font-size: 16px;"
             >
               arrow_upward
@@ -274,7 +274,7 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
                     <div class="v-input__append-inner">
                       <div class="v-input__icon v-input__icon--append">
                         <i aria-hidden="true"
-                           class="icon material-icons"
+                           class="v-icon material-icons"
                         >
                           arrow_drop_down
                         </i>
@@ -288,38 +288,38 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
                   <div class="v-select-list v-card"
                        style="height: auto;"
                   >
-                    <div class="list">
+                    <div class="v-list">
                       <div>
-                        <a class="list__tile list__tile--link">
-                          <div class="list__tile__content">
-                            <div class="list__tile__title">
+                        <a class="v-list__tile v-list__tile--link">
+                          <div class="v-list__tile__content">
+                            <div class="v-list__tile__title">
                               5
                             </div>
                           </div>
                         </a>
                       </div>
                       <div>
-                        <a class="list__tile list__tile--link">
-                          <div class="list__tile__content">
-                            <div class="list__tile__title">
+                        <a class="v-list__tile v-list__tile--link">
+                          <div class="v-list__tile__content">
+                            <div class="v-list__tile__title">
                               10
                             </div>
                           </div>
                         </a>
                       </div>
                       <div>
-                        <a class="list__tile list__tile--link">
-                          <div class="list__tile__content">
-                            <div class="list__tile__title">
+                        <a class="v-list__tile v-list__tile--link">
+                          <div class="v-list__tile__content">
+                            <div class="v-list__tile__title">
                               25
                             </div>
                           </div>
                         </a>
                       </div>
                       <div>
-                        <a class="list__tile list__tile--link">
-                          <div class="list__tile__content">
-                            <div class="list__tile__title">
+                        <a class="v-list__tile v-list__tile--link">
+                          <div class="v-list__tile__content">
+                            <div class="v-list__tile__title">
                               All
                             </div>
                           </div>
@@ -346,7 +346,7 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
-               class="icon material-icons"
+               class="v-icon material-icons"
             >
               chevron_left
             </i>
@@ -359,7 +359,7 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
-               class="icon material-icons"
+               class="v-icon material-icons"
             >
               chevron_right
             </i>
@@ -388,7 +388,7 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
           >
             First Column
             <i aria-hidden="true"
-               class="icon material-icons"
+               class="v-icon material-icons"
                style="font-size: 16px;"
             >
               arrow_upward
@@ -411,7 +411,7 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
           >
             Third Column
             <i aria-hidden="true"
-               class="icon material-icons"
+               class="v-icon material-icons"
                style="font-size: 16px;"
             >
               arrow_upward
@@ -462,7 +462,7 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
                     <div class="v-input__append-inner">
                       <div class="v-input__icon v-input__icon--append">
                         <i aria-hidden="true"
-                           class="icon material-icons"
+                           class="v-icon material-icons"
                         >
                           arrow_drop_down
                         </i>
@@ -476,38 +476,38 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
                   <div class="v-select-list v-card"
                        style="height: auto;"
                   >
-                    <div class="list">
+                    <div class="v-list">
                       <div>
-                        <a class="list__tile list__tile--link">
-                          <div class="list__tile__content">
-                            <div class="list__tile__title">
+                        <a class="v-list__tile v-list__tile--link">
+                          <div class="v-list__tile__content">
+                            <div class="v-list__tile__title">
                               5
                             </div>
                           </div>
                         </a>
                       </div>
                       <div>
-                        <a class="list__tile list__tile--link">
-                          <div class="list__tile__content">
-                            <div class="list__tile__title">
+                        <a class="v-list__tile v-list__tile--link">
+                          <div class="v-list__tile__content">
+                            <div class="v-list__tile__title">
                               10
                             </div>
                           </div>
                         </a>
                       </div>
                       <div>
-                        <a class="list__tile list__tile--link">
-                          <div class="list__tile__content">
-                            <div class="list__tile__title">
+                        <a class="v-list__tile v-list__tile--link">
+                          <div class="v-list__tile__content">
+                            <div class="v-list__tile__title">
                               25
                             </div>
                           </div>
                         </a>
                       </div>
                       <div>
-                        <a class="list__tile list__tile--link">
-                          <div class="list__tile__content">
-                            <div class="list__tile__title">
+                        <a class="v-list__tile v-list__tile--link">
+                          <div class="v-list__tile__content">
+                            <div class="v-list__tile__title">
                               All
                             </div>
                           </div>
@@ -534,7 +534,7 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
-               class="icon material-icons"
+               class="v-icon material-icons"
             >
               chevron_left
             </i>
@@ -547,7 +547,7 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
-               class="icon material-icons"
+               class="v-icon material-icons"
             >
               chevron_right
             </i>
@@ -576,7 +576,7 @@ exports[`VDataTable.vue should match a snapshot with single rows-per-page-items 
           >
             First Column
             <i aria-hidden="true"
-               class="icon material-icons"
+               class="v-icon material-icons"
                style="font-size: 16px;"
             >
               arrow_upward
@@ -599,7 +599,7 @@ exports[`VDataTable.vue should match a snapshot with single rows-per-page-items 
           >
             Third Column
             <i aria-hidden="true"
-               class="icon material-icons"
+               class="v-icon material-icons"
                style="font-size: 16px;"
             >
               arrow_upward
@@ -630,7 +630,7 @@ exports[`VDataTable.vue should match a snapshot with single rows-per-page-items 
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
-               class="icon material-icons"
+               class="v-icon material-icons"
             >
               chevron_left
             </i>
@@ -642,7 +642,7 @@ exports[`VDataTable.vue should match a snapshot with single rows-per-page-items 
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
-               class="icon material-icons"
+               class="v-icon material-icons"
             >
               chevron_right
             </i>

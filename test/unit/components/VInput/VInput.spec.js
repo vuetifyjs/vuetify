@@ -105,8 +105,8 @@ test('VInput.js', ({ mount }) => {
     const click = jest.fn()
     wrapper.vm.$on('click', click)
 
-    const prepend = wrapper.find('.icon')[0]
-    const append = wrapper.find('.icon')[1]
+    const prepend = wrapper.find('.v-icon')[0]
+    const append = wrapper.find('.v-icon')[1]
 
     prepend.trigger('click')
     expect(cb.mock.calls.length).toBe(1)

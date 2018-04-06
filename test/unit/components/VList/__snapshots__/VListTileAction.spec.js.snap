@@ -2,14 +2,14 @@
 
 exports[`VListTileAction.js should render component and match snapshot 1`] = `
 
-<div class="list__tile__action">
+<div class="v-list__tile__action">
 </div>
 
 `;
 
 exports[`VListTileAction.js should render component with many children and match snapshot 1`] = `
 
-<div class="list__tile__action list__tile__action--stack">
+<div class="v-list__tile__action v-list__tile__action--stack">
   <div>
   </div>
   <span>
@@ -20,7 +20,7 @@ exports[`VListTileAction.js should render component with many children and match
 
 exports[`VListTileAction.js should render component with static class and match snapshot 1`] = `
 
-<div class="list__tile__action static-class">
+<div class="v-list__tile__action static-class">
 </div>
 
 `;

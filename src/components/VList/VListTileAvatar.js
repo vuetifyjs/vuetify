@@ -16,7 +16,7 @@ export default {
   },
 
   render (h, { data, children, props }) {
-    data.staticClass = (`list__tile__avatar ${data.staticClass || ''}`).trim()
+    data.staticClass = (`v-list__tile__avatar ${data.staticClass || ''}`).trim()
 
     const avatar = h(VAvatar, {
       props: {

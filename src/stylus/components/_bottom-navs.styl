@@ -21,7 +21,7 @@ theme(v-bottom-nav, "v-bottom-nav")
 
   &--active
     transform: translate(0, 0)
-  
+
   &--fixed
     position: fixed
 
@@ -46,7 +46,7 @@ theme(v-bottom-nav, "v-bottom-nav")
       white-space: nowrap
       will-change: font-size
 
-      i.icon
+      i.v-icon
         color: inherit
         margin-bottom: 4px
         transition: all .4s cubic-bezier(.25, .8, .50, 1)
@@ -64,7 +64,7 @@ theme(v-bottom-nav, "v-bottom-nav")
         &:before
           opacity: 0
 
-        .icon
+        .v-icon
           transform: none
 
     &:not(.v-btn--active)
@@ -85,7 +85,7 @@ theme(v-bottom-nav, "v-bottom-nav")
 
 .v-bottom-nav--shift
   .v-btn:not(.v-btn--active) .v-btn__content
-    .icon
+    .v-icon
       transform: scale(1, 1) translate(0, 8px)
 
     span
