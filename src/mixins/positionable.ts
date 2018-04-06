@@ -1,22 +1,24 @@
-import Vue, { ComponentOptions } from 'vue'
 import { filterObjectOnKeys } from '../util/helpers'
+import { ComponentOptions } from 'vue'
+import { Vue } from 'vue/types/vue'
 
 declare interface props {
-  absolute?: boolean,
-  bottom?: boolean,
-  fixed?: boolean,
-  left?: boolean,
-  right?: boolean,
-  top?: boolean
+  absolute?: BooleanConstructor,
+  bottom?: BooleanConstructor,
+  fixed?: BooleanConstructor,
+  left?: BooleanConstructor,
+  right?: BooleanConstructor,
+  top?: BooleanConstructor
 }
 
-export function factory<S extends props = props> (selected: Array<keyof S> = []): ComponentOptions<
+export function factory <S extends props = props> (selected?: Array<keyof S>): ComponentOptions<
   Vue,
   undefined,
   undefined,
   undefined,
   { [P in keyof S]: boolean }
-> {
+>
+export function factory (selected = []) {
   const props = {
     absolute: Boolean,
     bottom: Boolean,
@@ -32,9 +34,8 @@ export function factory<S extends props = props> (selected: Array<keyof S> = [])
   }
 }
 
-// const test = factory(['top'])
-const test = factory()
-
-console.log(test.props.absolute)
-
 export default factory()
+
+export declare interface factory {
+  new (...args: any[]): Vue
+}

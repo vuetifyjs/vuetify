@@ -16,23 +16,12 @@ import Vue from 'vue'
 import Component, { mixins } from 'vue-class-component'
 import { Prop } from 'vue-property-decorator'
 
-export const test = Vue.extend({
-  mixins: [
-    Colorable,
-    Routable,
-    Positionable,
-    Themeable,
-    ToggleableFactory('inputValue'),
-    RegistrableInject('buttonGroup')
-  ]
-})
-
 @Component
 export class VBtn extends mixins(
-  // Colorable,
+  Colorable,
   // Routable,
-  // Positionable,
-  // Themeable,
+  Positionable,
+  Themeable,
   // ToggleableFactory('inputValue'),
   // RegistrableInject('buttonGroup')
 ) {
