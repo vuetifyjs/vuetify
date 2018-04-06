@@ -98,7 +98,7 @@ export default {
       value = this.selectedItems.indexOf(item) !== -1
     ) {
       if (item === Object(item)) {
-        avatar = this.getAvatar(item)
+        avatar = !!this.getAvatar(item)
         disabled = disabled != null
           ? disabled
           : this.getDisabled(item)
