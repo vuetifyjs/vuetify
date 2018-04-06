@@ -24,7 +24,7 @@ export default {
   computed: {
     classes () {
       const classes = {
-        'checkbox': true,
+        'v-checkbox': true,
         'input-group--selection-controls': true,
         'input-group--active': this.isActive
       }
@@ -65,7 +65,7 @@ export default {
       h(VIcon, {
         staticClass: 'v-icon--selection-control',
         'class': {
-          'icon--checkbox': this.icon === '$vuetify.icons.checkboxOn'
+          'v-icon--checkbox': this.icon === '$vuetify.icons.checkboxOn'
         },
         key: this.icon,
         on: Object.assign({
