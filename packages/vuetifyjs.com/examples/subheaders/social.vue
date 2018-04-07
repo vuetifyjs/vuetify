@@ -28,7 +28,7 @@
         >
           <v-card>
             <v-card-media height="300px" :src="`https://picsum.photos/200/300?image=${getImage()}`">
-              <span class="headline white--text pl-3 pt-3" v-text="card.title"/>
+              <span class="headline white--text pl-3 pt-3" v-text="card.title"></span>
             </v-card-media>
             <v-card-actions class="white justify-center">
               <v-btn

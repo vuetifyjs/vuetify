@@ -47,7 +47,7 @@ module.exports = {
         "vue/html-self-closing": ["error", {
           "html": {
             "void": "never",
-            "normal": "always",
+            "normal": "never",
             "component": "never"
           },
           "svg": "always",

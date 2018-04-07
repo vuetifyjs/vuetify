@@ -94,7 +94,7 @@
             </v-list>
           </v-card-text>
 
-          <div style="flex: 1 1 auto;"/>
+          <div style="flex: 1 1 auto;"></div>
         </v-card>
       </v-dialog>
       <v-dialog v-model="dialog2" max-width="500px">

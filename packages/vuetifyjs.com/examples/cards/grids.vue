@@ -25,7 +25,7 @@
                   <v-container fill-height fluid>
                     <v-layout fill-height>
                       <v-flex xs12 align-end flexbox>
-                        <span class="headline white--text" v-text="card.title"/>
+                        <span class="headline white--text" v-text="card.title"></span>
                       </v-flex>
                     </v-layout>
                   </v-container>

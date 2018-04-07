@@ -22,7 +22,7 @@
             </v-avatar>
           </v-flex>
           <v-flex sm5 md3 hidden-xs-only>
-            <strong v-html="message.name"/>
+            <strong v-html="message.name"></strong>
             <span class="grey--text" v-if="message.total">&nbsp;({{ message.total }})</span>
           </v-flex>
           <v-flex no-wrap xs5 sm3>
@@ -33,7 +33,7 @@
               class="ml-0"
               v-if="message.new"
             >{{ message.new }} new</v-chip>
-            <strong v-html="message.title"/>
+            <strong v-html="message.title"></strong>
           </v-flex>
           <v-flex
             class="grey--text"
