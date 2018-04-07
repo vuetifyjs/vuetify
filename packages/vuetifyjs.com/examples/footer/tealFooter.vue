@@ -21,12 +21,12 @@
             :key="i"
             xs3
           >
-            <span class="body-2" v-text="col.title.toUpperCase()"/>
+            <span class="body-2" v-text="col.title.toUpperCase()"></span>
             <div
               v-for="(child, i) in col.children"
               :key="i"
               v-text="child"
-            />
+            ></div>
           </v-flex>
           <v-flex xs3 layout column>
             <span class="body-2">CONTACT</span>
