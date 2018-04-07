@@ -23,8 +23,7 @@ export default {
     { title: 'Eikos Partners', size: 50, href: 'http://www.eikospartners.com/', src: 'backers/eikos-partners.webp' },
     { title: 'rateGenius', size: 50, href: 'https://application.rategenius.com/', src: 'backers/rate-genius.png' },
     { title: 'quitt.ch', size: 50, href: 'https://quitt.ch', src: 'backers/quitt.png' },
-    { title: 'Clearblue Technologies', size: 50, href: 'http://www.clearbluetechnologies.com/', src: 'backers/clear-blue.png'
-    }
+    { title: 'Clearblue Technologies', size: 50, href: 'http://www.clearbluetechnologies.com/', src: 'backers/clear-blue.png' }
   ],
   gold: [
     { title: 'Deister Software', href: 'http://www.deister.es/', src: 'backers/deister-logo-light.png' },
@@ -33,7 +32,9 @@ export default {
     { title: 'Live Casino', href: 'https://livecasino.com/', src: 'backers/casino.webp', dark: true },
     { title: 'Nate Controls', href: 'http://www.natecontrols.com/', src: 'backers/n8controls.png' },
     { title: 'Zweidenker', href: 'http://zweidenker.de/', src: 'backers/zweidenker-logo-grey.svg' },
-    { title: 'Identity Panel', size: 100, href: 'https://support.identitypanel.com/', src: 'backers/identity-panel.png' }
+    { title: 'Identity Panel', size: 100, href: 'https://support.identitypanel.com/', src: 'backers/identity-panel.png' },
+    { title: 'Hohenstein', href: 'https://www.hohenstein.de/en/home/home.xhtml', src: 'backers/hohenstein.svg' },
+    { title: 'P2L Technologies', href: 'https://p2l.tech/', src: 'backers/p2l.png' }
   ],
   affiliates: [
     {
