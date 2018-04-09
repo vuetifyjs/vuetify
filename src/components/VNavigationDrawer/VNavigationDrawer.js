@@ -222,6 +222,16 @@ export default {
       if (val == null) return this.init()
 
       if (val !== this.isActive) this.isActive = val
+      let start = null
+      const refreshWidth = timestamp => {
+        if (!start) start = timestamp
+        const progress = timestamp - start
+        window.dispatchEvent(new Event('resize'))
+        if (progress < 500) {
+          window.requestAnimationFrame(refreshWidth)
+        }
+      }
+      requestAnimationFrame(refreshWidth)
     }
   },
 
