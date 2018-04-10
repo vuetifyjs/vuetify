@@ -42,10 +42,6 @@ export default {
       }
     }
 
-    if (props.value) {
-      data.style.transform = props.activeTransform
-    }
-
     if (props.focused) {
       data.class = Colorable.methods.addTextColorClassChecks(data.class, props.color)
     }
