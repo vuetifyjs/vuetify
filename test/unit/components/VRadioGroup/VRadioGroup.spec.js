@@ -180,7 +180,6 @@ test('VRadioGroup.vue', ({ mount }) => {
     expect(wrapper.vm.shouldValidate).toBe(false)
 
     input.trigger('focus')
-    await wrapper.vm.$nextTick()
     input.trigger('blur')
 
     expect(blur).toHaveBeenCalledTimes(1)
