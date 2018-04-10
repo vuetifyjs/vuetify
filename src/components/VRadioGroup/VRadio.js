@@ -146,7 +146,7 @@ export default {
         }, this.computedIcon)
       ])
     },
-    onFocus (e) {
+    onFocus () {
       this.isFocused = true
     },
     onBlur (e) {
