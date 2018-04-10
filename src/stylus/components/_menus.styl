@@ -30,6 +30,9 @@
     overflow-y: auto
     overflow-x: hidden
     contain: content
+    // This is required for an issue on Chrome 65
+    // that prevents scrolling after a menu is opened
+    will-change: transform
     elevation(8)
 
     &--active
@@ -41,9 +44,7 @@
       border-top: 1px solid $material-light.dividers
 
     & > .card
-      // This causes an issue on Chrome 65
-      // that prevents scrolling after a menu is opened
-      // contain: content
+      contain: content
       backface-visibility: hidden
 
   > .menu__content
