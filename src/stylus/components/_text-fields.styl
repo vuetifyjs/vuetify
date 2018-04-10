@@ -212,6 +212,8 @@ theme(textfield, "input-group--text-field")
       height: 2px
       border-bottom-left-radius: 4px
       border-bottom-right-radius: 4px
+      margin-left: 16px
+      max-width: calc(100% - 16px)
 
   &.input-group--multi-line
     textarea
@@ -241,10 +243,5 @@ theme(textfield, "input-group--text-field")
           transform: translate(0, -10px) scale(0.75)
   // Icons
   &.input-group--prepend-icon
-    .input-group__details
-      &:before, &:after
-        margin-left: 56px
-        max-width: calc(100% - 56px)
-
     label
       left: 56px
