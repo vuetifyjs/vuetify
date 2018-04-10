@@ -11,6 +11,7 @@ import VSelectList from './VSelectList'
 import VTextField from '../VTextField/VTextField'
 
 // Mixins
+import Comparable from '../../mixins/comparable'
 import Dependent from '../../mixins/dependent'
 import Filterable from '../../mixins/filterable'
 
@@ -18,7 +19,7 @@ import Filterable from '../../mixins/filterable'
 import ClickOutside from '../../directives/click-outside'
 
 // Helpers
-import {getObjectValueByPath} from '../../util/helpers'
+import { getObjectValueByPath } from '../../util/helpers'
 
 export default {
   name: 'v-select',
@@ -30,6 +31,7 @@ export default {
   },
 
   mixins: [
+    Comparable,
     Dependent,
     Filterable
   ],

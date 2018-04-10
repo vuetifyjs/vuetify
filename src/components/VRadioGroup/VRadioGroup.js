@@ -7,6 +7,7 @@ import '../../stylus/components/_radio-group.styl'
 import VInput from '../VInput'
 
 // Mixins
+import Comparable from '../../mixins/comparable'
 import {
   provide as RegistrableProvide
 } from '../../mixins/registrable'
@@ -17,11 +18,12 @@ export default {
   extends: VInput,
 
   mixins: [
+    Comparable,
     RegistrableProvide('radio')
   ],
 
   model: {
-    prop: 'internalValue',
+    prop: 'value',
     event: 'change'
   },
 
@@ -57,12 +59,7 @@ export default {
 
   watch: {
     hasError: 'setErrorState',
-    internalValue (val) {
-      for (let index = this.radios.length; --index >= 0;) {
-        const radio = this.radios[index]
-        radio.isActive = val === radio.value
-      }
-    }
+    internalValue: 'setActiveRadio'
   },
 
   computed: {
@@ -77,6 +74,7 @@ export default {
 
   mounted () {
     this.setErrorState(this.hasError)
+    this.setActiveRadio()
   },
 
   methods: {
@@ -91,31 +89,26 @@ export default {
         }
       }, this.$slots.default)
     },
-    toggleRadio (value) {
+    onRadioChange (value) {
       if (this.disabled) return
 
       this.shouldValidate = true
+      this.internalValue = value
       this.$emit('change', value)
-      this.$nextTick(() => this.validate())
-
-      for (let index = this.radios.length; --index >= 0;) {
-        const radio = this.radios[index]
-        if (radio.value !== value) radio.isActive = false
-      }
+      this.setActiveRadio()
+      this.$nextTick(this.validate)
     },
-    radioBlur (e) {
+    onRadioBlur (e) {
       if (!e.relatedTarget || !e.relatedTarget.classList.contains('radio')) {
         this.shouldValidate = true
-        this.$emit('blur', this.internalValue)
+        this.$emit('blur', e)
       }
     },
     register (radio) {
-      radio.isActive = this.internalValue != null &&
-        this.internalValue === radio.value
+      radio.isActive = this.valueComparator(this.internalValue, radio.value)
       radio.$refs.input.tabIndex = radio.$refs.input.tabIndex > 0 ? radio.$refs.input.tabIndex : 0
-      radio.$on('change', this.toggleRadio)
-      radio.$on('blur', this.radioBlur)
-      radio.$on('focus', this.radioFocus)
+      radio.$on('change', this.onRadioChange)
+      radio.$on('blur', this.onRadioBlur)
       this.radios.push(radio)
     },
     setErrorState (val) {
@@ -123,10 +116,15 @@ export default {
         this.radios[index].parentError = val
       }
     },
+    setActiveRadio () {
+      for (let index = this.radios.length; --index >= 0;) {
+        const radio = this.radios[index]
+        radio.isActive = this.valueComparator(this.internalValue, radio.value)
+      }
+    },
     unregister (radio) {
-      radio.$off('change', this.toggleRadio)
-      radio.$off('blur', this.radioBlur)
-      radio.$off('focus', this.radioFocus)
+      radio.$off('change', this.onRadioChange)
+      radio.$off('blur', this.onRadioBlur)
 
       const index = this.radios.findIndex(r => r === radio)
 

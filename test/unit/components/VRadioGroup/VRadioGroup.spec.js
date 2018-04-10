@@ -59,11 +59,12 @@ test('VRadioGroup.vue', ({ mount }) => {
 
   it('should toggle radio', async () => {
     const stub = value => ({
-      functional: true,
-
-      render: h => h(VRadio, {
-        props: { value }
-      })
+      extends: VRadio,
+      props: {
+        value: {
+          default: value
+        }
+      }
     })
     const wrapper = mount(VRadioGroup, {
       attachToDocument: true,
@@ -83,6 +84,7 @@ test('VRadioGroup.vue', ({ mount }) => {
     inputOne.trigger('focus')
     inputOne.trigger('keydown.enter')
 
+
     expect(one.vm.isActive).toBe(true)
 
     wrapper.setProps({ disabled: true })
@@ -93,7 +95,7 @@ test('VRadioGroup.vue', ({ mount }) => {
     await wrapper.vm.$nextTick()
 
     expect(one.vm.isActive).toBe(true)
-    // expect(two.vm.isActive).toBe(false) // fix this
+    expect(two.vm.isActive).toBe(false)
   })
 
   it('should change selected radio', async () => {
@@ -160,5 +162,54 @@ test('VRadioGroup.vue', ({ mount }) => {
     radio.vm.$destroy()
 
     expect(wrapper.vm.radios.length).toBe(0)
+  })
+
+  it('should validate on blur', async () => {
+    const wrapper = mount(VRadioGroup, {
+      slots: {
+        default: [{
+          extends: VRadio
+        }]
+      }
+    })
+
+    const blur = jest.fn()
+    const input = wrapper.first('input')
+    wrapper.vm.$on('blur', blur)
+
+    expect(wrapper.vm.shouldValidate).toBe(false)
+
+    input.trigger('focus')
+    await wrapper.vm.$nextTick()
+    input.trigger('blur')
+
+    expect(blur).toHaveBeenCalledTimes(1)
+    expect(wrapper.vm.shouldValidate).toBe(true)
+
+    wrapper.setData({ shouldValidate: false })
+
+    wrapper.vm.onRadioBlur({
+      relatedTarget: {
+        classList: {
+          contains: () => false
+        }
+      }
+    })
+
+    expect(blur).toHaveBeenCalledTimes(2)
+    expect(wrapper.vm.shouldValidate).toBe(true)
+
+    wrapper.setData({ shouldValidate: false })
+
+    wrapper.vm.onRadioBlur({
+      relatedTarget: {
+        classList: {
+          contains: () => true
+        }
+      }
+    })
+
+    expect(blur).toHaveBeenCalledTimes(2)
+    expect(wrapper.vm.shouldValidate).toBe(false)
   })
 })

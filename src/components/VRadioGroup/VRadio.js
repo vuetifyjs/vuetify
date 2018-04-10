@@ -146,11 +146,12 @@ export default {
         }, this.computedIcon)
       ])
     },
-    onFocus () {
+    onFocus (e) {
       this.isFocused = true
     },
-    onBlur () {
+    onBlur (e) {
       this.isFocused = false
+      this.$emit('blur', e)
     },
     onChange () {
       const mandatory = !!this.isMandatory && this.isMandatory()
