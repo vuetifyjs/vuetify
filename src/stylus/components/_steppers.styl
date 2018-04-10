@@ -1,68 +1,68 @@
 @import '../bootstrap'
 @import '../theme'
 
-stepper($material)
+v-stepper($material)
   background: $material.bg-color
 
-  .stepper__step
-    &:not(.stepper__step--active):not(.stepper__step--complete):not(.stepper__step--error)
-      .stepper__step__step
+  .v-stepper__step
+    &:not(.v-stepper__step--active):not(.v-stepper__step--complete):not(.v-stepper__step--error)
+      .v-stepper__step__step
         background: rgba($material.fg-color, $material.disabledORhints-text-percent)
 
     &__step
       color: $material.stepper.active
 
-      .icon
+      .v-icon
         color: $material.stepper.active
 
-  .stepper__header
+  .v-stepper__header
     .divider
       background: rgba($material.fg-color, $material.divider-percent)
 
-  .stepper__step
+  .v-stepper__step
     &--active
-      .stepper__label
+      .v-stepper__label
         text-shadow: 0px 0px 0px rgba($material.fg-color, 1)
 
     &--editable:hover
       background: rgba($material.fg-color, .06)
 
-      .stepper__label
+      .v-stepper__label
         text-shadow: 0px 0px 0px rgba($material.fg-color, 1)
 
     &--complete
-      .stepper__label
+      .v-stepper__label
         color: $material.stepper.completed
 
     &--inactive
-      &.stepper__step--editable:not(.stepper__step--error)
+      &.v-stepper__step--editable:not(.v-stepper__step--error)
         &:hover
-          .stepper__step__step
+          .v-stepper__step__step
             background: $material.stepper.hover
 
-  .stepper__label
+  .v-stepper__label
     color: rgba($material.fg-color, $material.disabledORhints-text-percent)
 
     small
       color: rgba($material.fg-color, $material.secondary-text-percent)
 
   &--non-linear
-    .stepper__step:not(.stepper__step--complete):not(.stepper__step--error)
-      .stepper__label
+    .v-stepper__step:not(.v-stepper__step--complete):not(.v-stepper__step--error)
+      .v-stepper__label
         color: rgba($material.fg-color, $material.secondary-text-percent)
 
   &--vertical
-    .stepper__content:not(:last-child)
+    .v-stepper__content:not(:last-child)
       border-left: 1px solid rgba($material.fg-color, $material.divider-percent)
 
-theme(stepper, "stepper")
+theme(v-stepper, "v-stepper")
 
-.stepper
+.v-stepper
   overflow: hidden
   position: relative
   elevation(2)
 
-.stepper
+.v-stepper
   &__header
     height: 72px
     align-items: stretch
@@ -75,12 +75,12 @@ theme(stepper, "stepper")
       align-self: center
       margin: 0 -16px
 
-.stepper
+.v-stepper
   &__items
     position: relative
     overflow: hidden
 
-.stepper
+.v-stepper
   &__step__step
     align-items: center
     border-radius: 50%
@@ -93,10 +93,10 @@ theme(stepper, "stepper")
     width: 24px
     transition: .3s $transition.fast-in-fast-out
 
-    .icon
+    .v-icon
       font-size: 18px
 
-.stepper
+.v-stepper
   &__step
     align-items: center
     display: flex
@@ -105,22 +105,22 @@ theme(stepper, "stepper")
     position: relative
 
     &--active
-      .stepper__label
+      .v-stepper__label
         transition: .3s $transition.ease-in-out
 
     &--editable
       cursor: pointer
 
-    &.stepper__step--error
-      .stepper__step__step
+    &.v-stepper__step--error
+      .v-stepper__step__step
         background: transparent
         color: inherit
 
-        .icon
+        .v-icon
           font-size: 24px
           color: inherit
 
-      .stepper__label
+      .v-stepper__label
         color: inherit
         text-shadow: none
         font-weight: 500
@@ -128,7 +128,7 @@ theme(stepper, "stepper")
         small
           color: inherit
 
-.stepper
+.v-stepper
   &__label
     align-items: flex-start
     display: flex
@@ -140,12 +140,12 @@ theme(stepper, "stepper")
       font-weight: 300
       text-shadow: none
 
-.stepper
+.v-stepper
   &__wrapper
     overflow: hidden
     transition: none
 
-.stepper
+.v-stepper
   &__content
     top: 0
     padding: 24px 24px 16px 24px
@@ -157,37 +157,37 @@ theme(stepper, "stepper")
     // overflow: hidden
     width: 100%
 
-    > .btn
+    > .v-btn
       margin: 24px 8px 8px 0
 
   &--is-booted
-    .stepper__content, .stepper__wrapper
+    .v-stepper__content, .v-stepper__wrapper
       transition: .3s $transition.swing
 
-.stepper
+.v-stepper
   &--vertical
     padding-bottom: 36px
 
-    .stepper__content
+    .v-stepper__content
       margin: -8px -36px -16px 36px
       padding: 16px 60px 16px 23px
       width: auto
 
-    .stepper__step
+    .v-stepper__step
       padding: 24px 24px 16px
 
-    .stepper__step__step
+    .v-stepper__step__step
       margin-right: 12px
 
   &--alt-labels
-    .stepper__header
+    .v-stepper__header
       height: auto
 
       .divider
         margin: 35px -67px 0
         align-self: flex-start
 
-    .stepper__step
+    .v-stepper__step
       flex-direction: column
       justify-content: flex-start
       align-items: center
@@ -196,14 +196,14 @@ theme(stepper, "stepper")
       small
         align-self: center
 
-    .stepper__step__step
+    .v-stepper__step__step
       margin-right: 0
       margin-bottom: 11px
 
 @media $display-breakpoints.sm-and-down
-  .stepper:not(.stepper--vertical)
-    .stepper__label
+  .v-stepper:not(.v-stepper--vertical)
+    .v-stepper__label
       display: none
 
-    .stepper__step__step
+    .v-stepper__step__step
       margin-right: 0

@@ -18,3 +18,4 @@ dev/*css
 /dist
 /release
 .env
+yarn-error.log

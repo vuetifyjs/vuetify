@@ -2,15 +2,15 @@
 
 exports[`VStepperStep.js should accept a custom color 1`] = `
 
-<div class="stepper__step stepper__step--inactive stepper__step--complete">
-  <span class="stepper__step__step pink">
+<div class="v-stepper__step v-stepper__step--inactive v-stepper__step--complete">
+  <span class="v-stepper__step__step pink">
     <i aria-hidden="true"
-       class="icon material-icons"
+       class="v-icon material-icons"
     >
       check
     </i>
   </span>
-  <div class="stepper__label">
+  <div class="v-stepper__label">
   </div>
 </div>
 

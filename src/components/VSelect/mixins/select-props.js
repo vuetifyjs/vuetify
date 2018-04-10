@@ -2,7 +2,7 @@ export default {
   props: {
     appendIcon: {
       type: String,
-      default: 'arrow_drop_down'
+      default: '$vuetify.icons.dropdown'
     },
     appendIconCb: Function,
     attach: Boolean,
@@ -10,7 +10,7 @@ export default {
     autocomplete: Boolean,
     browserAutocomplete: {
       type: String,
-      default: 'on'
+      default: 'off'
     },
     cacheItems: Boolean,
     chips: Boolean,

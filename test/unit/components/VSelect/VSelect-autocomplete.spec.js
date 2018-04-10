@@ -175,7 +175,7 @@ test('VSelect - autocomplete', ({ mount }) => {
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
-  it('should not display list with no items and autocomplete', async () => {
+  it('should not display v-list with no items and autocomplete', async () => {
     const wrapper = mount(VSelect, {
       attachToDocument: true,
       propsData: {
@@ -233,18 +233,32 @@ test('VSelect - autocomplete', ({ mount }) => {
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
-  it('should allow changing of browser autocomplete', () => {
+  it('should disable browser autocompletion by default', () => {
     const wrapper = mount(VSelect, {
       attachToDocument: true,
       propsData: {
         autocomplete: true,
-        browserAutocomplete: 'off'
       }
     })
 
     const input = wrapper.find('input')[0]
 
     expect(input.getAttribute('autocomplete')).toBe('off')
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should allow changing of browser autocomplete', () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        autocomplete: true,
+        browserAutocomplete: 'on'
+      }
+    })
+
+    const input = wrapper.find('input')[0]
+
+    expect(input.getAttribute('autocomplete')).toBe('on')
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
@@ -279,7 +293,7 @@ test('VSelect - autocomplete', ({ mount }) => {
     wrapper.setProps({ searchInput: 'asdf' })
     wrapper.update()
     await wrapper.vm.$nextTick()
-    const tile = wrapper.find('.list__tile__title')[0]
+    const tile = wrapper.find('.v-list__tile__title')[0]
 
     expect(tile.text()).toBe('No data available')
     expect('Unable to locate target [data-app]').toHaveBeenTipped()

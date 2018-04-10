@@ -24,18 +24,18 @@ function getWindowHeight () {
 }
 
 function isVueComponent (obj) {
-  return obj &&
-    obj.constructor &&
-    obj.constructor.name === 'VueComponent'
+  return obj != null && obj._isVue
 }
 
 function getTargetLocation (target, settings) {
   let location
 
+  if (isVueComponent(target)) {
+    target = target.$el
+  }
+
   if (target instanceof Element) {
-    location = target.offsetTop
-  } else if (isVueComponent(target)) {
-    location = target.$el.offsetTop
+    location = target.getBoundingClientRect().top + window.scrollY
   } else if (typeof target === 'string') {
     location = document.querySelector(target).offsetTop
   } else if (typeof target === 'number') {
@@ -64,7 +64,7 @@ export default function goTo (target, options) {
   const easingFunction = typeof settings.easing === 'function' ? settings.easing : easingPatterns[settings.easing]
 
   if (isNaN(targetLocation)) {
-    const type = target && target.constructor ? target.constructor.name : target
+    const type = target == null ? target : target.constructor.name
     return consoleError(`Target must be a Selector/Number/DOMElement/VueComponent, received ${type} instead.`)
   }
   if (!easingFunction) return consoleError(`Easing function '${settings.easing}' not found.`)

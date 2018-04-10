@@ -61,7 +61,7 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.html()).toMatchSnapshot()
 
-    const content = wrapper.find('table.datatable tbody > tr > td')[0]
+    const content = wrapper.find('table.v-datatable tbody > tr > td')[0]
     expect(content.element.textContent).toBe('No matching records found')
 
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
@@ -74,7 +74,7 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.html()).toMatchSnapshot()
 
-    const content = wrapper.find('table.datatable tbody > tr > td')[0]
+    const content = wrapper.find('table.v-datatable tbody > tr > td')[0]
     expect(content.element.textContent).toBe('No data available')
 
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
@@ -205,7 +205,7 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
       }
     }))
 
-    expect(wrapper.find('.datatable__progress')).toHaveLength(1)
+    expect(wrapper.find('.v-datatable__progress')).toHaveLength(1)
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 

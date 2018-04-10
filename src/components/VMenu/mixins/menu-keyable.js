@@ -23,12 +23,12 @@ export default {
 
       if (next in this.tiles) {
         const tile = this.tiles[next]
-        tile.classList.add('list__tile--highlighted')
+        tile.classList.add('v-list__tile--highlighted')
         this.$refs.content.scrollTop = tile.offsetTop - tile.clientHeight
       }
 
       prev in this.tiles &&
-        this.tiles[prev].classList.remove('list__tile--highlighted')
+        this.tiles[prev].classList.remove('v-list__tile--highlighted')
     }
   },
 
@@ -63,7 +63,7 @@ export default {
       }
     },
     getTiles () {
-      this.tiles = this.$refs.content.querySelectorAll('.list__tile')
+      this.tiles = this.$refs.content.querySelectorAll('.v-list__tile')
     }
   }
 }

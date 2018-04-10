@@ -2,6 +2,6 @@
 
 exports[`VDivider.js should render component and match snapshot 1`] = `
 
-<hr class="divider">
+<hr class="v-divider">
 
 `;

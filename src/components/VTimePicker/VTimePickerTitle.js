@@ -33,7 +33,7 @@ export default {
       const displayedMinute = this.minute == null ? '--' : pad(this.minute)
 
       return this.$createElement('div', {
-        'class': 'time-picker-title__time'
+        'class': 'v-time-picker-title__time'
       }, [
         this.genPickerButton('selectingHour', true, displayedHour),
         this.$createElement('span', ':'),
@@ -42,7 +42,7 @@ export default {
     },
     genAmPm () {
       return this.$createElement('div', {
-        staticClass: 'time-picker-title__ampm'
+        staticClass: 'v-time-picker-title__ampm'
       }, [
         this.genPickerButton('period', 'am', 'am'),
         this.genPickerButton('period', 'pm', 'pm')
@@ -52,7 +52,7 @@ export default {
 
   render (h) {
     return h('div', {
-      staticClass: 'time-picker-title'
+      staticClass: 'v-time-picker-title'
     }, [
       this.genTime(),
       this.ampm ? this.genAmPm() : null

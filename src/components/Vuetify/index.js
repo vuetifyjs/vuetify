@@ -1,5 +1,6 @@
 import application from './mixins/application'
 import theme from './mixins/theme'
+import icons from './mixins/icons'
 import options from './mixins/options'
 import { consoleWarn } from '../../util/console'
 import goTo from './util/goTo'
@@ -18,7 +19,8 @@ const Vuetify = {
         breakpoint: {},
         dark: false,
         options: options(opts.options),
-        theme: theme(opts.theme)
+        theme: theme(opts.theme),
+        icons: icons(opts.iconfont, opts.icons)
       },
       methods: {
         goTo

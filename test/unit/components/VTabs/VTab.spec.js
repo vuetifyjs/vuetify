@@ -26,9 +26,9 @@ test('VTab', ({ mount }) => {
       }
     })
 
-    expect(wrapper.find('.tabs__item')[0].vNode.elm.tagName).toBe('A')
+    expect(wrapper.find('.v-tabs__item')[0].vNode.elm.tagName).toBe('A')
     wrapper.setProps({ disabled: true })
-    expect(wrapper.find('.tabs__item')[0].vNode.elm.tagName).toBe('DIV')
+    expect(wrapper.find('.v-tabs__item')[0].vNode.elm.tagName).toBe('DIV')
 
     expect(tabClick).toHaveBeenWarned()
     expect(tabsWarning).toHaveBeenTipped()
@@ -140,7 +140,7 @@ test('VTab', ({ mount }) => {
   //
   // Current conversation on vue-router tests
   // https://github.com/vuejs/vue-router/issues/1768
-  it.skip('should call tabClick', async () => {
+  it('should call tabClick', async () => {
     const instance = Vue.extend()
     instance.component('router-link', stub)
     const wrapper = mount(VTab, {
@@ -163,7 +163,7 @@ test('VTab', ({ mount }) => {
     // Mock the actions that would normally
     // happen with a route-link
     wrapper.vm.isActive = true
-    wrapper.vm.$el.firstChild.classList.add('tabs__item--active')
+    wrapper.vm.$el.firstChild.classList.add('v-tabs__item--active')
     await wrapper.vm.$nextTick()
 
     // Mock on route change
@@ -182,7 +182,18 @@ test('VTab', ({ mount }) => {
       propsData: {
         href: '#foo'
       },
-      instance
+      instance,
+      globals: {
+        $route: { path: '/' },
+        $router: {
+          resolve: (to, route, append) => {
+            let href
+            if (to.path) href = to.path
+
+            return { href }
+          }
+        }
+      }
     })
 
     expect(wrapper.vm.action).toBe('foo')
@@ -190,6 +201,8 @@ test('VTab', ({ mount }) => {
     expect(wrapper.vm.action).toBe('/foo')
     wrapper.setProps({ to: null })
     expect(wrapper.vm.action).toBe(wrapper.vm)
+    wrapper.setProps({ to: { path: 'bar' }})
+    expect(wrapper.vm.action).toBe('bar')
 
     expect(tabClick).toHaveBeenWarned()
     expect(tabsWarning).toHaveBeenTipped()

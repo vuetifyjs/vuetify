@@ -87,7 +87,7 @@ declare interface VuetifyObject {
   application: VuetifyApplication
   breakpoint: VuetifyBreakpoint
   dark: boolean
-  theme: VuetifyTheme
+  theme: VuetifyTheme | false
   options: VuetifyOptions
   goTo: (target: string | number | HTMLElement | Vue, options?: VuetifyGoToOptions) => void
 }

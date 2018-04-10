@@ -15,7 +15,7 @@ test('VDivider.js', ({ mount, compileToFunctions, functionalContext }) => {
       }
     }))
 
-    expect(wrapper.hasClass('divider--inset')).toBe(true)
+    expect(wrapper.hasClass('v-divider--inset')).toBe(true)
   })
 
   it('should render a light component', () => {

@@ -92,11 +92,11 @@ export default {
 
   render (h) {
     return h('ul', {
-      staticClass: 'expansion-panel',
+      staticClass: 'v-expansion-panel',
       'class': {
-        'expansion-panel--focusable': this.focusable,
-        'expansion-panel--popout': this.popout,
-        'expansion-panel--inset': this.inset,
+        'v-expansion-panel--focusable': this.focusable,
+        'v-expansion-panel--popout': this.popout,
+        'v-expansion-panel--inset': this.inset,
         ...this.themeClasses
       }
     }, this.$slots.default)

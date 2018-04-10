@@ -24,9 +24,10 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - [Nate Controls](http://www.natecontrols.com/) <!-- Brad Stewart -->
 - [Zweidenker](http://zweidenker.de) <!-- Christian Denker -->
 - [Software IDM](https://softwareidm.com/) <!-- Peter Sidebotham -->
+- [Hohenstein Laboratories](https://www.hohenstein.de/en/home/home.xhtml)
+- [P2L Technologies](https://p2l.tech/) <!-- Blaise Laflamme -->
 
 ### $20+
-- [Jaime Olmo](https://www.jaimeolmo.com)
 - Michael Marti
 - [Aeroden](https://www.aeroden.com) <!-- Adrian Belovic -->
 - Sam Mitchell
@@ -37,12 +38,10 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - Robin Paolini
 - [Integra CCS](https://www.integraccs.com/)
 - Joel Hatch
-- Pierre Vanhulst
 - David Briscese
 - Juha Vehnia
 - Max Hodges
 - Kent Johnson
-- Ionut Galita
 
 ### $10+
 - Kevin Pilard
@@ -87,4 +86,10 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - Abdelkarim Mateos
 - Alexander Weiher
 - Helmi
-- Phillipp Naderer-Puiu
+- Hexodus
+- David Hanson
+- Pierre Vanhulst
+- Johannes Eriksson
+- Brett Lindenberg
+- Randall Adams
+- Philipp Naderer-Puiu

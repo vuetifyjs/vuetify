@@ -2,14 +2,14 @@
 
 exports[`VToolbar.vue should render an extended toolbar 1`] = `
 
-<nav class="toolbar toolbar--extended"
+<nav class="v-toolbar v-toolbar--extended"
      style="margin-top: 0px; padding-right: 0px; padding-left: 0px;"
 >
-  <div class="toolbar__content"
+  <div class="v-toolbar__content"
        style="height: 56px;"
   >
   </div>
-  <div class="toolbar__extension"
+  <div class="v-toolbar__extension"
        style="height: 56px;"
   >
   </div>
@@ -19,14 +19,14 @@ exports[`VToolbar.vue should render an extended toolbar 1`] = `
 
 exports[`VToolbar.vue should render an extended toolbar with specific height 1`] = `
 
-<nav class="toolbar toolbar--extended"
+<nav class="v-toolbar v-toolbar--extended"
      style="margin-top: 0px; padding-right: 0px; padding-left: 0px;"
 >
-  <div class="toolbar__content"
+  <div class="v-toolbar__content"
        style="height: 56px;"
   >
   </div>
-  <div class="toolbar__extension"
+  <div class="v-toolbar__extension"
        style="height: 42px;"
   >
   </div>

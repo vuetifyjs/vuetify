@@ -3,8 +3,8 @@ import VCard from './VCard'
 import VCardMedia from './VCardMedia'
 import VCardTitle from './VCardTitle'
 
-const VCardActions = createSimpleFunctional('card__actions')
-const VCardText = createSimpleFunctional('card__text')
+const VCardActions = createSimpleFunctional('v-card__actions')
+const VCardText = createSimpleFunctional('v-card__text')
 
 export { VCard, VCardMedia, VCardTitle, VCardActions, VCardText }
 

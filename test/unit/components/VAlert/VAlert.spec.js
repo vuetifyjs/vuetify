@@ -33,7 +33,7 @@ test('VAlert.vue', ({ mount }) => {
       propsData: { outline: true }
     })
 
-    expect(wrapper.hasClass('alert--outline')).toBe(true)
+    expect(wrapper.hasClass('v-alert--outline')).toBe(true)
   })
 
   it('should be dismissible', async () => {
@@ -44,7 +44,7 @@ test('VAlert.vue', ({ mount }) => {
       }
     })
 
-    const icon = wrapper.find('.alert__dismissible')[0]
+    const icon = wrapper.find('.v-alert__dismissible')[0]
 
     const input = jest.fn(value => wrapper.setProps({ value }))
     wrapper.vm.$on('input', input)
@@ -62,7 +62,7 @@ test('VAlert.vue', ({ mount }) => {
       }
     })
 
-    const icon = wrapper.find('.alert__icon')[0]
+    const icon = wrapper.find('.v-alert__icon')[0]
 
     expect(icon.text()).toBe('list')
   })
@@ -70,7 +70,7 @@ test('VAlert.vue', ({ mount }) => {
   it('should have no icon', () => {
     const wrapper = mount(VAlert)
 
-    expect(wrapper.contains('.icon')).toBe(false)
+    expect(wrapper.contains('.v-icon')).toBe(false)
   })
 
   it('should display contextual colors by type', async () => {
@@ -114,7 +114,7 @@ test('VAlert.vue', ({ mount }) => {
       }
     })
 
-    const icon = wrapper.find('.alert__icon')[0]
+    const icon = wrapper.find('.v-alert__icon')[0]
 
     expect(icon.text()).toBe('block')
   })

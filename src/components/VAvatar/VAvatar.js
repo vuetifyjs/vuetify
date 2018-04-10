@@ -19,10 +19,10 @@ export default {
   },
 
   render (h, { data, props, children }) {
-    data.staticClass = (`avatar ${data.staticClass || ''}`).trim()
+    data.staticClass = (`v-avatar ${data.staticClass || ''}`).trim()
     data.style = data.style || {}
 
-    if (props.tile) data.staticClass += ' avatar--tile'
+    if (props.tile) data.staticClass += ' v-avatar--tile'
 
     const size = `${parseInt(props.size)}px`
     data.style.height = size

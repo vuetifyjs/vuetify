@@ -11,8 +11,8 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const title = wrapper.find('.date-picker-title__date')[0]
-    const header = wrapper.find('.date-picker-header__value strong')[0]
+    const title = wrapper.find('.v-date-picker-title__date')[0]
+    const header = wrapper.find('.v-date-picker-header__value strong')[0]
 
     expect(title.text()).toBe('Tue, Nov 1')
     expect(header.text()).toBe('November 2005')
@@ -52,7 +52,7 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
     const change = jest.fn()
     wrapper.vm.$on('change', change)
 
-    wrapper.find('.date-picker-table--date tbody tr+tr td:first-child button')[0].trigger('click')
+    wrapper.find('.v-date-picker-table--date tbody tr+tr td:first-child button')[0].trigger('click')
     expect(input).toBeCalledWith('2013-05-05')
     expect(change).toBeCalledWith('2013-05-05')
   })
@@ -70,7 +70,7 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
     })
 
     wrapper.vm.$on('input', cb);
-    wrapper.find('.date-picker-table--month button')[0].trigger('click')
+    wrapper.find('.v-date-picker-table--month button')[0].trigger('click')
     expect(cb).not.toBeCalled()
   })
 
@@ -91,7 +91,7 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
     const change = jest.fn()
     wrapper.vm.$on('change', input);
 
-    wrapper.find('.date-picker-years li.active + li')[0].trigger('click')
+    wrapper.find('.v-date-picker-years li.active + li')[0].trigger('click')
     expect(input).toBeCalledWith('2012-05-13')
     expect(change).not.toBeCalled()
   })
@@ -109,7 +109,7 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
     })
 
     wrapper.vm.$on('input', cb);
-    wrapper.find('.date-picker-years li.active + li')[0].trigger('click')
+    wrapper.find('.v-date-picker-years li.active + li')[0].trigger('click')
     expect(cb).not.toBeCalled()
   })
 
@@ -121,7 +121,7 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    wrapper.find('.date-picker-table--date')[0].trigger('wheel')
+    wrapper.find('.v-date-picker-table--date')[0].trigger('wheel')
     expect(wrapper.vm.tableDate).toBe('2013-06')
   })
 
@@ -133,7 +133,7 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const table = wrapper.find('.date-picker-table--date')[0]
+    const table = wrapper.find('.v-date-picker-table--date')[0]
     touch(table).start(0, 0).end(20, 0)
     expect(wrapper.vm.tableDate).toBe('2013-04')
 
@@ -160,10 +160,10 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    expect(wrapper.find('.picker__title')).toHaveLength(0)
+    expect(wrapper.find('.v-picker__title')).toHaveLength(0)
   })
 
-  it('should pass first day of week to date-picker-table component', () => {
+  it('should pass first day of week to v-date-picker-table component', () => {
     const wrapper = mount(VDatePicker, {
       propsData: {
         value: '2013-05-07',
@@ -198,8 +198,8 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    expect(wrapper.find('.date-picker-title__date')[0].text()).toBe('(2005-11-01)')
-    expect(wrapper.find('.date-picker-header__value')[0].text()).toBe('(2005-11)')
+    expect(wrapper.find('.v-date-picker-title__date')[0].text()).toBe('(2005-11-01)')
+    expect(wrapper.find('.v-date-picker-header__value')[0].text()).toBe('(2005-11)')
   })
 
   it('should match snapshot with colored picker', () => {
@@ -233,7 +233,7 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    expect(wrapper.find('.picker__title')[0].html()).toMatchSnapshot()
+    expect(wrapper.find('.v-picker__title')[0].html()).toMatchSnapshot()
   })
 
   it('should match change month when clicked on header arrow buttons', () => {
@@ -243,7 +243,7 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const [leftButton, rightButton] = wrapper.find('.date-picker-header button')
+    const [leftButton, rightButton] = wrapper.find('.v-date-picker-header button')
 
     leftButton.trigger('click')
     expect(wrapper.vm.tableDate).toBe('2005-10')
@@ -259,7 +259,7 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const button = wrapper.find('.date-picker-header strong')[0]
+    const button = wrapper.find('.v-date-picker-header strong')[0]
 
     button.trigger('click')
     expect(wrapper.vm.activePicker).toBe('MONTH')
@@ -283,7 +283,7 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
     })
 
     const wrapper = mount(component)
-    expect(wrapper.find('.picker__actions .scoped-slot')).toHaveLength(1)
+    expect(wrapper.find('.v-picker__actions .scoped-slot')).toHaveLength(1)
   })
 
   it('should match years snapshot', async () => {
@@ -299,11 +299,11 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.vm.activePicker).toBe('YEAR')
 
-    wrapper.find('.date-picker-title__date')[0].trigger('click')
+    wrapper.find('.v-date-picker-title__date')[0].trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.activePicker).toBe('DATE')
 
-    wrapper.find('.date-picker-title__year')[0].trigger('click')
+    wrapper.find('.v-date-picker-title__year')[0].trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.activePicker).toBe('YEAR')
   })
@@ -319,7 +319,7 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    wrapper.find('.date-picker-years li.active + li')[0].trigger('click')
+    wrapper.find('.v-date-picker-years li.active + li')[0].trigger('click')
     expect(wrapper.vm.activePicker).toBe('MONTH')
     expect(wrapper.vm.tableDate).toBe('2004-11')
   })
@@ -381,7 +381,7 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const icons = wrapper.find('.date-picker-header .icon')
+    const icons = wrapper.find('.v-date-picker-header .v-icon')
     expect(icons[0].element.textContent).toBe('block')
     expect(icons[1].element.textContent).toBe('check')
   })
