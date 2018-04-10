@@ -57,7 +57,7 @@ export default {
       return this.genPickerButton('selectingYear', true, [
         this.year,
         this.yearIcon ? this.genYearIcon() : null
-      ], 'date-picker-title__year')
+      ], 'v-date-picker-title__year')
     },
     genTitleText () {
       return this.$createElement('transition', {
@@ -72,13 +72,13 @@ export default {
       ])
     },
     genTitleDate (title) {
-      return this.genPickerButton('selectingYear', false, this.genTitleText(title), 'date-picker-title__date')
+      return this.genPickerButton('selectingYear', false, this.genTitleText(title), 'v-date-picker-title__date')
     }
   },
 
   render (h) {
     return h('div', {
-      staticClass: 'date-picker-title'
+      staticClass: 'v-date-picker-title'
     }, [
       this.getYearBtn(),
       this.genTitleDate()

@@ -1,6 +1,6 @@
 @import '../bootstrap'
 
-.dialog
+.v-dialog
   elevation(24)
   border-radius: $card-border-radius
   margin: 24px
@@ -24,7 +24,7 @@
     z-index: 6
     outline: none
 
-  &:not(.dialog--fullscreen)
+  &:not(.v-dialog--fullscreen)
     max-height: 90%
 
   &__container
@@ -39,7 +39,7 @@
     top: 0
     left 0
 
-    > .card
+    > .v-card
       min-height 100%
       min-width 100%
       margin 0 !important
@@ -48,15 +48,15 @@
   &--scrollable
     display: flex
 
-    > .card
+    > .v-card
       display: flex
       flex: 1 1 auto
       flex-direction: column
 
-      > .card__title
-      > .card__actions
+      > .v-card__title
+      > .v-card__actions
         flex: 1 0 auto
 
-      > .card__text
+      > .v-card__text
         overflow-y: auto
         backface-visibility: hidden

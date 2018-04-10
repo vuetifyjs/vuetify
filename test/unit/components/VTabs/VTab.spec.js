@@ -26,9 +26,9 @@ test('VTab', ({ mount }) => {
       }
     })
 
-    expect(wrapper.find('.tabs__item')[0].vNode.elm.tagName).toBe('A')
+    expect(wrapper.find('.v-tabs__item')[0].vNode.elm.tagName).toBe('A')
     wrapper.setProps({ disabled: true })
-    expect(wrapper.find('.tabs__item')[0].vNode.elm.tagName).toBe('DIV')
+    expect(wrapper.find('.v-tabs__item')[0].vNode.elm.tagName).toBe('DIV')
 
     expect(tabClick).toHaveBeenWarned()
     expect(tabsWarning).toHaveBeenTipped()
@@ -163,7 +163,7 @@ test('VTab', ({ mount }) => {
     // Mock the actions that would normally
     // happen with a route-link
     wrapper.vm.isActive = true
-    wrapper.vm.$el.firstChild.classList.add('tabs__item--active')
+    wrapper.vm.$el.firstChild.classList.add('v-tabs__item--active')
     await wrapper.vm.$nextTick()
 
     // Mock on route change

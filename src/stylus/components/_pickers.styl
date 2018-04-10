@@ -3,21 +3,21 @@
 
 /* Themes */
 
-picker($material)
+v-picker($material)
   color: $material.text.primary
 
-  .picker__body
+  .v-picker__body
     background: $material.picker.body
 
-dark(picker, 'picker')
+dark(v-picker, 'v-picker')
 
-picker-title($material)
-  .picker__title
+v-picker-title($material)
+  .v-picker__title
     background: $material.picker.title
 
-theme(picker-title, "picker")
+theme(v-picker-title, "v-picker")
 
-.picker
+.v-picker
   border-radius: $card-border-radius
   contain: layout style
   display: inline-flex
@@ -28,16 +28,16 @@ theme(picker-title, "picker")
     border: none
     margin-top: -20px
 
-.picker--full-width
+.v-picker--full-width
   display: flex
 
-.picker__title
+.v-picker__title
   color: #fff
   border-top-left-radius: $card-border-radius
   border-top-right-radius: $card-border-radius
   padding: 16px
 
-.picker__title__btn
+.v-picker__title__btn
   transition: $primary-transition
 
   &.active
@@ -50,7 +50,7 @@ theme(picker-title, "picker")
     &:hover
       opacity: 1
 
-.picker__body
+.v-picker__body
   height: auto
   overflow: hidden
   position: relative
@@ -66,8 +66,8 @@ theme(picker-title, "picker")
     &.fade-transition-leave-active
       position: absolute
 
-.picker--landscape
-  .picker__title
+.v-picker--landscape
+  .v-picker__title
     border-top-right-radius: 0
     border-bottom-right-radius: 0
     width: 170px
@@ -77,6 +77,6 @@ theme(picker-title, "picker")
     height: 100%
     z-index: 1
 
-  .picker__body,
-  .picker__actions
+  .v-picker__body,
+  .v-picker__actions
     margin-left: 170px

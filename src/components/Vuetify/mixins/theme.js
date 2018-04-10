@@ -10,5 +10,7 @@ const THEME_DEFAULTS = {
 }
 
 export default function theme (theme = {}) {
+  if (theme === false) return false
+
   return Object.assign({}, THEME_DEFAULTS, theme)
 }

@@ -37,7 +37,7 @@
     justify-content: space-between
     overflow: hidden
 
-    .btn
+    .v-btn
       color: $snackbar-color
       flex: 0 0 auto
       margin: 0 0 0 24px
@@ -47,7 +47,7 @@
 
       &__content
         padding: 8px
-        margin: -8px
+        margin: -2px
 
         &::before
           display: none
@@ -63,8 +63,8 @@
     // https://stackoverflow.com/questions/35111090/text-in-a-flex-container-doesnt-wrap-in-ie11
     align-items: stretch
 
-    .btn
-      &.btn //specificity
+    .v-btn
+      &.v-btn //specificity
         justify-content: flex-end
         margin-left: 0
         margin-top: 24px
@@ -98,8 +98,9 @@
       &^[0]--bottom
         transform: translateY(0 - $snackbar-corner-offset)
 
-    &__content .btn:first-of-type
+    &__content .v-btn:first-of-type
       margin-left: 48px
+      margin-right: -6px
 
 .snack-transition
   &-enter-active,

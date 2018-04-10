@@ -8,7 +8,7 @@ export default {
       }
 
       return this.$createElement('div', {
-        staticClass: `picker__title__btn ${staticClass}`.trim(),
+        staticClass: `v-picker__title__btn ${staticClass}`.trim(),
         'class': { active },
         on: active ? undefined : { click }
       }, Array.isArray(content) ? content : [content])

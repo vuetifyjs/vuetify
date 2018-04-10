@@ -21,6 +21,9 @@ export default {
       }
 
       const colors = Object.keys(theme)
+
+      if (!colors.length) return ''
+
       css = `a { color: ${intToHex(theme.primary)}; }`
 
       for (let i = 0; i < colors.length; ++i) {
@@ -44,6 +47,7 @@ export default {
       return css
     },
     vueMeta () {
+      if (this.$vuetify.theme === false) return
       return {
         style: [{
           cssText: this.generatedStyles,
@@ -71,6 +75,8 @@ export default {
   },
 
   created () {
+    if (this.$vuetify.theme === false) return
+
     if (this.$meta) {
       // Vue-meta
       // Handled by metaInfo()/nuxt()

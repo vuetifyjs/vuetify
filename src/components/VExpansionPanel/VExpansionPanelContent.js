@@ -9,6 +9,8 @@ import VIcon from '../VIcon'
 
 import ClickOutside from '../../directives/click-outside'
 
+import { consoleWarn } from '../../util/console'
+
 export default {
   name: 'v-expansion-panel-content',
 
@@ -29,7 +31,7 @@ export default {
   props: {
     expandIcon: {
       type: String,
-      default: 'keyboard_arrow_down'
+      default: '$vuetify.icons.expand'
     },
     hideActions: Boolean,
     ripple: {
@@ -42,7 +44,7 @@ export default {
     genBody () {
       return this.$createElement('div', {
         ref: 'body',
-        class: 'expansion-panel__body',
+        class: 'v-expansion-panel__body',
         directives: [
           {
             name: 'show',
@@ -53,7 +55,7 @@ export default {
     },
     genHeader () {
       return this.$createElement('div', {
-        staticClass: 'expansion-panel__header',
+        staticClass: 'v-expansion-panel__header',
         directives: [{
           name: 'ripple',
           value: this.ripple
@@ -66,7 +68,7 @@ export default {
         this.genIcon()
       ])
     },
-    genIcon (h) {
+    genIcon () {
       if (this.hideActions) return null
 
       const icon = this.$slots.actions ||
@@ -76,19 +78,20 @@ export default {
         staticClass: 'header__icon'
       }, [icon])
     },
-    toggle (uid) {
-      const isActive = this._uid === uid && !this.isActive
-
-      if (isActive) this.isBooted = true
+    toggle (active) {
+      if (active) this.isBooted = true
 
       // We treat bootable differently
       // Needs time to calc height
-      this.$nextTick(() => (this.isActive = isActive))
+      this.$nextTick(() => (this.isActive = active))
     }
   },
 
   mounted () {
     this.expansionPanel.register(this._uid, this.toggle)
+
+    // Can be removed once fully deprecated
+    if (typeof this.value !== 'undefined') consoleWarn('v-model has been deprecated', this)
   },
 
   beforeDestroy () {
@@ -102,9 +105,9 @@ export default {
     children.push(h(VExpandTransition, [this.genBody()]))
 
     return h('li', {
-      staticClass: 'expansion-panel__container',
+      staticClass: 'v-expansion-panel__container',
       'class': {
-        'expansion-panel__container--active': this.isActive
+        'v-expansion-panel__container--active': this.isActive
       },
       attrs: {
         tabindex: 0

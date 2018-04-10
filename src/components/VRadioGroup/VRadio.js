@@ -58,7 +58,7 @@ export default {
       return classes
     },
     icon () {
-      return this.isActive ? 'radio_button_checked' : 'radio_button_unchecked'
+      return this.isActive ? '$vuetify.icons.radioOn' : '$vuetify.icons.radioOff'
     }
   },
 
@@ -142,7 +142,7 @@ export default {
   render (h) {
     const transition = h(VFadeTransition, {}, [
       h(VIcon, {
-        staticClass: 'icon--selection-control',
+        staticClass: 'v-icon--selection-control',
         'class': {
           'icon--radio': this.isActive
         },

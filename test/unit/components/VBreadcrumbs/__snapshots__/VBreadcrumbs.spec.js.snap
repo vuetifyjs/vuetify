@@ -2,37 +2,37 @@
 
 exports[`VBreadcrumbs.js should have breadcrumbs classes 1`] = `
 
-<ul class="breadcrumbs">
+<ul class="v-breadcrumbs">
 </ul>
 
 `;
 
 exports[`VBreadcrumbs.js should inject slot to children 1`] = `
 
-<ul class="breadcrumbs">
+<ul class="v-breadcrumbs">
   <li>
-    <a class="breadcrumbs__item">
+    <a class="v-breadcrumbs__item">
     </a>
   </li>
-  <li class="breadcrumbs__divider">
+  <li class="v-breadcrumbs__divider">
     /
   </li>
   <li>
-    <a class="breadcrumbs__item">
+    <a class="v-breadcrumbs__item">
     </a>
   </li>
-  <li class="breadcrumbs__divider">
+  <li class="v-breadcrumbs__divider">
     /
   </li>
   <li>
-    <a class="breadcrumbs__item">
+    <a class="v-breadcrumbs__item">
     </a>
   </li>
-  <li class="breadcrumbs__divider">
+  <li class="v-breadcrumbs__divider">
     /
   </li>
   <li>
-    <a class="breadcrumbs__item">
+    <a class="v-breadcrumbs__item">
     </a>
   </li>
 </ul>
@@ -41,16 +41,16 @@ exports[`VBreadcrumbs.js should inject slot to children 1`] = `
 
 exports[`VBreadcrumbs.js should use a custom divider slot 1`] = `
 
-<ul class="breadcrumbs">
+<ul class="v-breadcrumbs">
   <li>
-    <a class="breadcrumbs__item">
+    <a class="v-breadcrumbs__item">
     </a>
   </li>
-  <li class="breadcrumbs__divider">
+  <li class="v-breadcrumbs__divider">
     /divider/
   </li>
   <li>
-    <a class="breadcrumbs__item">
+    <a class="v-breadcrumbs__item">
     </a>
   </li>
 </ul>
@@ -59,14 +59,14 @@ exports[`VBreadcrumbs.js should use a custom divider slot 1`] = `
 
 exports[`VBreadcrumbs.js should use custom justify props 1`] = `
 
-<ul class="breadcrumbs">
+<ul class="v-breadcrumbs">
 </ul>
 
 `;
 
 exports[`VBreadcrumbs.js should use custom justify props 2`] = `
 
-<ul class="breadcrumbs">
+<ul class="v-breadcrumbs">
 </ul>
 
 `;

@@ -54,7 +54,7 @@ test('VExpansionPanelContent.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    expect(wrapper.find('.icon')[0].element.textContent).toBe('block')
+    expect(wrapper.find('.v-icon')[0].element.textContent).toBe('block')
     expect(registrableWarning).toHaveBeenTipped()
   })
 
@@ -69,7 +69,7 @@ test('VExpansionPanelContent.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    wrapper.find('.expansion-panel__header')[0].trigger('click')
+    wrapper.find('.v-expansion-panel__header')[0].trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
     expect(registrableWarning).toHaveBeenTipped()
