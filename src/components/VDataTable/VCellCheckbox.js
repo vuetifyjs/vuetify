@@ -3,6 +3,10 @@ import VCheckbox from '../VCheckbox'
 
 export default {
   name: 'v-cell-checkbox',
+  model: {
+    prop: 'inputValue',
+    event: 'change'
+  },
   inheritAttrs: false,
   render (h) {
     const checkbox = h(VCheckbox, {
@@ -12,7 +16,6 @@ export default {
       },
       on: this.$listeners
     })
-
 
     return h(VCell, {
       staticClass: 'v-cell-checkbox'

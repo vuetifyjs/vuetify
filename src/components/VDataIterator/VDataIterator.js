@@ -144,15 +144,15 @@ export default {
     },
     createProps () {
       const props = {
+        columns: this.columns,
         items: this.computedItems,
         everyItem: this.everyItem,
         someItems: this.someItems,
-        toggleSelected: () => {
-          if (this.everyItem) this.selectAll(false)
-          else this.selectAll()
-        },
-        itemsLength: this.computedItems.length,
-        pageCount: this.pageCount
+        selectAll: this.selectAll,
+        itemsLength: this.itemsLength,
+        pageCount: this.pageCount,
+        pageStart: this.pageStart,
+        pageStop: this.pageStop
       }
 
       Object.defineProperty(props, 'sortBy', {
@@ -215,8 +215,6 @@ export default {
         const items = this.computedItems.map(item => this.$scopedSlots.item(this.createItemProps(item)))
         bodies.push(this.genBodyWrapper(h, items))
       }
-
-      console.log(this.$slots.body)
 
       return bodies
     },
