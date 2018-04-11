@@ -1,6 +1,7 @@
 export { default as Vuetify } from './Vuetify'
 export { default as VApp } from './VApp'
 export { default as VAlert } from './VAlert'
+export { default as VAutocomplete } from './VAutocomplete'
 export { default as VAvatar } from './VAvatar'
 export { default as VBadge } from './VBadge'
 export { default as VBottomNav } from './VBottomNav'

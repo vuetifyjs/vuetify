@@ -27,11 +27,11 @@ theme(v-select, 'v-select')
   // For specificity, hide caret
   &.v-text-field
     input
-      caret-color: transparent !important
+      // caret-color: transparent !important
       pointer-events: none
 
   &.v-select--is-menu-active
-    .v-input__icon--append .icon
+    .v-input__icon--append .v-icon
       transform: rotate(180deg)
 
   &--chips
@@ -44,7 +44,7 @@ theme(v-select, 'v-select')
     display: flex
 
 .v-select-list
-  .list__tile__action
+  .v-list__tile__action
     .v-input--selection-controls
       .v-input__slot
         &:after, &:before

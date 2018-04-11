@@ -81,16 +81,6 @@ test('VInput.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should emit a click event', () => {
-    const wrapper = mount(VInput)
-
-    const click = jest.fn()
-    wrapper.vm.$on('click', click)
-
-    wrapper.trigger('click')
-    expect(click).toHaveBeenCalled()
-  })
-
   it('should invoke callback', () => {
     const cb = jest.fn()
     const wrapper = mount(VInput, {

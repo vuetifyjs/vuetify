@@ -14,6 +14,7 @@ import VTextField from '../VTextField/VTextField'
 import Comparable from '../../mixins/comparable'
 import Dependent from '../../mixins/dependent'
 import Filterable from '../../mixins/filterable'
+import Menuable from '../../mixins/menuable'
 
 // Directives
 import ClickOutside from '../../directives/click-outside'
@@ -44,6 +45,7 @@ export default {
 
   props: {
     ...VMenu.props, // remove some, just for testing,
+    ...Menuable.props,
     appendIcon: {
       type: String,
       default: 'arrow_drop_down'
@@ -91,7 +93,7 @@ export default {
     },
     minWidth: {
       type: [Boolean, Number, String],
-      default: false
+      default: 0
     },
     multiple: Boolean,
     multiLine: Boolean,
@@ -117,11 +119,11 @@ export default {
 
   computed: {
     classes () {
-      return {
-        'v-select v-text-field': true,
+      return Object.assign({}, VTextField.computed.classes.call(this), {
+        'v-select': true,
         'v-select--chips': this.chips,
         'v-select--is-menu-active': this.isMenuActive
-      }
+      })
     },
     computedItems () {
       return this.filterDuplicates(this.cachedItems.concat(this.items))
@@ -130,12 +132,16 @@ export default {
       return [{
         name: 'click-outside',
         value: () => {
+          this.isMenuActive = false
+          this.isFocused = false
           this.selectedIndex = null
           this.onKeyDown({ keyCode: 9 })
         },
         args: {
-          closeConditional: () => {
-            return true
+          closeConditional: e => {
+            return !this.$refs.menu.$refs.content.contains(e.target) &&
+              !this.$el.contains(e.target) &&
+              e.target !== this.$el
           }
         }
       }]
@@ -328,12 +334,14 @@ export default {
       const props = {
         contentClass: this.contentClass
       }
+      const inheritedProps = Object.keys(VMenu.props).concat(Object.keys(Menuable.props))
 
       // Later this might be filtered
-      for (let prop of Object.keys(VMenu.props)) {
+      for (let prop of inheritedProps) {
         props[prop] = this[prop]
       }
 
+      props.closeOnClick = false
       props.closeOnContentClick = false
       props.value = this.isMenuActive
 
@@ -342,7 +350,7 @@ export default {
         on: {
           input: val => {
             this.isMenuActive = val
-            this.isFocused = false
+            this.isFocused = val
           }
         },
         ref: 'menu'
@@ -401,7 +409,6 @@ export default {
     onClick () {
       if (this.isDisabled) return
 
-      this.isMenuActive = true
       this.onFocus()
     },
     selectItem (item) {

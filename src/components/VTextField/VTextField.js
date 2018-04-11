@@ -289,7 +289,7 @@ export default {
 
       this.isFocused = true
       if (document.activeElement !== this.$refs.input) {
-        this.$refs.input.focus()
+        // this.$refs.input.focus()
       }
       this.$emit('focus', e)
     },

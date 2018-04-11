@@ -12,7 +12,7 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
     <div class="v-data-iterator__actions">
       <div class="v-data-iterator__actions__select">
         Items per page:
-        <div class="v-input v-select v-text-field v-input--is-label-active v-input--is-dirty">
+        <div class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty">
           <div class="v-input__control">
             <div class="v-input__slot primary--text"
                  style="height: 32px;"
@@ -44,7 +44,7 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
                   </div>
                 </div>
                 <div class="menu__content"
-                     style="max-height: 200px; min-width: 16px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
+                     style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
                 >
                   <div class="v-select-list v-card"
                        style="height: auto;"
@@ -156,7 +156,7 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
     <div class="v-data-iterator__actions">
       <div class="v-data-iterator__actions__select">
         Items per page:
-        <div class="v-input v-select v-text-field v-input--is-label-active v-input--is-dirty">
+        <div class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty">
           <div class="v-input__control">
             <div class="v-input__slot primary--text"
                  style="height: 32px;"
@@ -188,7 +188,7 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
                   </div>
                 </div>
                 <div class="menu__content"
-                     style="max-height: 200px; min-width: 16px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
+                     style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
                 >
                   <div class="v-select-list v-card"
                        style="height: auto;"
@@ -291,7 +291,7 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
     <div class="v-data-iterator__actions">
       <div class="v-data-iterator__actions__select">
         Items per page:
-        <div class="v-input v-select v-text-field v-input--is-label-active v-input--is-dirty">
+        <div class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty">
           <div class="v-input__control">
             <div class="v-input__slot primary--text"
                  style="height: 32px;"
@@ -323,7 +323,7 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
                   </div>
                 </div>
                 <div class="menu__content"
-                     style="max-height: 200px; min-width: 16px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
+                     style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
                 >
                   <div class="v-select-list v-card"
                        style="height: auto;"
@@ -430,7 +430,7 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
     <div class="v-data-iterator__actions">
       <div class="v-data-iterator__actions__select">
         Items per page:
-        <div class="v-input v-select v-text-field v-input--is-label-active v-input--is-dirty">
+        <div class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty">
           <div class="v-input__control">
             <div class="v-input__slot primary--text"
                  style="height: 32px;"
@@ -462,7 +462,7 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
                   </div>
                 </div>
                 <div class="menu__content"
-                     style="max-height: 200px; min-width: 16px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
+                     style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
                 >
                   <div class="v-select-list v-card"
                        style="height: auto;"

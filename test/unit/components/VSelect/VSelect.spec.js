@@ -141,17 +141,20 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     const blur = jest.fn()
     wrapper.vm.$on('blur', blur)
 
-    wrapper.trigger('click')
-    wrapper.trigger('keydown.tab')
+    const menu = wrapper.first('.menu__activator')
+
+    menu.trigger('click')
 
     await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.isFocused).toBe(true)
+    expect(wrapper.vm.isMenuActive).toBe(true)
 
     const item = wrapper.find('div a.v-list__tile')[0]
     item.trigger('click')
 
     await wrapper.vm.$nextTick()
 
-    expect(blur).not.toBeCalled()
     expect(wrapper.vm.isMenuActive).toBe(true)
   })
 
