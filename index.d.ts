@@ -89,7 +89,7 @@ declare interface VuetifyObject {
   dark: boolean
   theme: VuetifyTheme | false
   options: VuetifyOptions
-  goTo: (target: string | number | HTMLElement | Vue, options?: VuetifyGoToOptions) => Promise
+  goTo: <T extends string | number | HTMLElement | Vue>(target: T, options?: VuetifyGoToOptions) => Promise<T>
 }
 
 declare module 'vue/types/vue' {
