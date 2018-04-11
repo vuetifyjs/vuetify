@@ -1,110 +1,241 @@
-import '../../stylus/components/_data-iterator.styl'
 
-import DataIterable from '../../mixins/data-iterable'
+import { getObjectValueByPath } from '../../util/helpers'
 
 export default {
   name: 'v-data-iterator',
-
-  mixins: [DataIterable],
-
-  inheritAttrs: false,
-
   props: {
-    contentTag: {
-      type: String,
-      default: 'div'
+    items: {
+      type: Array,
+      default: () => ([])
     },
-    contentProps: {
-      type: Object,
-      required: false
-    },
-    contentClass: {
+    classPrefix: {
       type: String,
-      required: false
+      default: 'v-data-iterator'
+    },
+    itemKey: {
+      type: String
+    },
+    sort: {
+      type: Function,
+      default: (items, sortBy, sortDesc) => {
+        if (sortBy === null) return items
+
+        return items.sort((a, b) => {
+          let sortA = getObjectValueByPath(a, sortBy)
+          let sortB = getObjectValueByPath(b, sortBy)
+
+          if (sortDesc) {
+            [sortA, sortB] = [sortB, sortA]
+          }
+
+          // Check if both are numbers
+          if (!isNaN(sortA) && !isNaN(sortB)) {
+            return sortA - sortB
+          }
+
+          // Check if both cannot be evaluated
+          if (sortA === null && sortB === null) {
+            return 0
+          }
+
+          [sortA, sortB] = [sortA, sortB]
+            .map(s => (
+              (s || '').toString().toLocaleLowerCase()
+            ))
+
+          if (sortA > sortB) return 1
+          if (sortA < sortB) return -1
+
+          return 0
+        })
+      }
+    },
+    sortBy: {
+      type: String
+    },
+    sortDesc: {
+      type: String
+    },
+    rowsPerPage: {
+      type: Number,
+      default: 10
+    },
+    page: {
+      type: Number,
+      default: 1
     }
   },
-
+  data () {
+    return {
+      selection: {},
+      sorting: { sortBy: this.sortBy, sortDesc: this.sortDesc },
+      pagination: { rowsPerPage: this.rowsPerPage, page: this.page }
+    }
+  },
   computed: {
-    classes () {
-      return {
-        'v-data-iterator': true,
-        'v-data-iterator--select-all': this.selectAll !== false,
-        'theme--dark': this.dark,
-        'theme--light': this.light
-      }
+    computedItems () {
+      // TODO: Handle this differently (server-side-processing prop?)
+      // if (this.totalItems) return this.items
+
+      let items = this.items.slice()
+
+      // const hasSearch = typeof this.search !== 'undefined' &&
+      //   this.search !== null
+
+      // if (hasSearch) {
+      //   items = this.customFilter(items, this.search, this.filter, ...additionalFilterArgs)
+      //   this.searchLength = items.length
+      // }
+
+      items = this.sort(
+        items,
+        this.sorting.sortBy,
+        this.sorting.sortDesc
+      )
+
+      // return this.hideActions &&
+      //   !this.hasPagination
+      //   ? items
+      //   : items.slice(this.pageStart, this.pageStop)
+
+      return items.slice(this.pageStart, this.pageStop)
+    },
+    pageStart () {
+      return this.pagination.rowsPerPage === -1
+        ? 0
+        : (this.pagination.page - 1) * this.pagination.rowsPerPage
+    },
+    pageStop () {
+      return this.pagination.rowsPerPage === -1
+        ? this.computedItems.length // TODO: Does this need to be something other (server-side, etc?)
+        : this.pagination.page * this.pagination.rowsPerPage
+    },
+    pageCount () {
+      // We can't simply use computedItems.length here since it's already sliced
+      return Math.ceil(this.itemsLength / this.pagination.rowsPerPage)
+    },
+    itemsLength () {
+      // TODO: needs to account for search
+      return this.items.length
+    },
+    everyItem () {
+      return this.computedItems.length &&
+        this.computedItems.every(i => this.isSelected(i))
+    },
+    someItems () {
+      return this.computedItems.some(i => this.isSelected(i))
     }
   },
-
   methods: {
-    genContent () {
-      const children = this.genItems()
-
-      const data = {
-        'class': this.contentClass,
-        attrs: this.$attrs,
-        on: this.$listeners,
-        props: this.contentProps
-      }
-
-      return this.$createElement(this.contentTag, data, children)
+    isSelected (item) {
+      return this.selection[item[this.itemKey]]
     },
-    genEmptyItems (content) {
-      return [this.$createElement('div', {
-        'class': 'text-xs-center',
-        style: 'width: 100%'
-      }, content)]
+    select (item, value = true) {
+      this.$set(this.selection, item[this.itemKey], value)
     },
-    genFilteredItems () {
-      if (!this.$scopedSlots.item) {
-        return null
-      }
+    selectAll (value = true) {
+      const selection = {}
 
-      const items = []
-      for (let index = 0, len = this.filteredItems.length; index < len; ++index) {
-        const item = this.filteredItems[index]
-        const props = this.createProps(item, index)
-        items.push(this.$scopedSlots.item(props))
-      }
+      this.computedItems.forEach(item => {
+        selection[item[this.itemKey]] = value
+      })
 
-      return items
+      this.selection = Object.assign({}, this.selection, selection)
     },
-    genFooter () {
-      const children = []
-
-      if (this.$slots.footer) {
-        children.push(this.$slots.footer)
+    createProps () {
+      const props = {
+        items: this.computedItems,
+        everyItem: this.everyItem,
+        someItems: this.someItems,
+        toggleSelected: () => {
+          if (this.everyItem) this.selectAll(false)
+          else this.selectAll()
+        },
+        itemsLength: this.computedItems.length,
+        pageCount: this.pageCount
       }
 
-      if (!this.hideActions) {
-        children.push(this.genActions())
-      }
+      Object.defineProperty(props, 'sortBy', {
+        get: () => this.sorting.sortBy,
+        set: v => this.sorting.sortBy = v,
+        enumerable: true
+      })
 
-      if (!children.length) return null
-      return this.$createElement('div', children)
+      Object.defineProperty(props, 'sortDesc', {
+        get: () => this.sorting.sortDesc,
+        set: v => this.sorting.sortDesc = v,
+        enumerable: true
+      })
+
+      Object.defineProperty(props, 'rowsPerPage', {
+        get: () => this.pagination.rowsPerPage,
+        set: v => this.pagination.rowsPerPage = v,
+        enumerable: true
+      })
+
+      Object.defineProperty(props, 'page', {
+        get: () => this.pagination.page,
+        set: v => this.pagination.page = v,
+        enumerable: true
+      })
+
+      return props
     },
-    genHeader () {
-      const children = []
-
-      if (this.$slots.header) {
-        children.push(this.$slots.header)
+    createItemProps (item) {
+      const props = {
+        item
       }
 
-      if (!children.length) return null
-      return this.$createElement('div', children)
+      Object.defineProperty(props, 'selected', {
+        get: () => this.isSelected(item),
+        set: v => this.select(item, v),
+        enumerable: true
+      })
+
+      return props
+    },
+    computeSlots (name) {
+      const slots = []
+
+      if (this.$slots[name]) slots.push(...this.$slots[name])
+      if (this.$scopedSlots[name]) {
+        const scoped = this.$scopedSlots[name](this.createProps())
+        Array.isArray(scoped) ? slots.push(...scoped) : slots.push(scoped)
+      }
+
+      return slots
+    },
+    genHeaders (h) {
+      return this.computeSlots('header')
+    },
+    genBodies (h) {
+      const bodies = this.computeSlots('body')
+
+      if (this.$scopedSlots.item) {
+        const items = this.computedItems.map(item => this.$scopedSlots.item(this.createItemProps(item)))
+        bodies.push(this.genBodyWrapper(h, items))
+      }
+
+      console.log(this.$slots.body)
+
+      return bodies
+    },
+    genFooters (h) {
+      return this.computeSlots('footer')
+    },
+    genBodyWrapper (h, items) {
+      return h('div', {
+        // TODO: How to customize this?
+      }, items)
     }
   },
-
-  created () {
-    this.initPagination()
-  },
-
   render (h) {
     return h('div', {
-      'class': this.classes
+      staticClass: this.classPrefix
     }, [
-      this.genHeader(),
-      this.genContent(),
-      this.genFooter()
+      ...this.genHeaders(h),
+      ...this.genBodies(h),
+      ...this.genFooters(h)
     ])
   }
 }
