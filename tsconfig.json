@@ -8,7 +8,7 @@
     "moduleResolution": "node",
     "outDir": "./dist",
     "sourceMap": true,
-    "lib": ["es2018", "dom"]
+    "lib": ["es6", "es2018", "dom"]
   },
   "include": [
     "src"

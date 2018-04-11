@@ -1,33 +1,20 @@
 import { filterObjectOnKeys } from '../util/helpers'
-import { ComponentOptions } from 'vue'
-import { Vue } from 'vue/types/vue'
 
-declare interface props {
-  absolute?: BooleanConstructor,
-  bottom?: BooleanConstructor,
-  fixed?: BooleanConstructor,
-  left?: BooleanConstructor,
-  right?: BooleanConstructor,
-  top?: BooleanConstructor
+const props = {
+  absolute: Boolean,
+  bottom: Boolean,
+  fixed: Boolean,
+  left: Boolean,
+  right: Boolean,
+  top: Boolean
 }
+declare type props = typeof props
 
-export function factory <S extends props = props> (selected?: Array<keyof S>): ComponentOptions<
-  Vue,
-  undefined,
-  undefined,
-  undefined,
-  { [P in keyof S]: boolean }
->
-export function factory (selected = []) {
-  const props = {
-    absolute: Boolean,
-    bottom: Boolean,
-    fixed: Boolean,
-    left: Boolean,
-    right: Boolean,
-    top: Boolean
-  }
-
+export function factory <S extends keyof props> (selected?: S[]): {
+  name: string,
+  props: { [P in S]: props[P] }
+}
+export function factory (selected: Array<keyof props> = []): { name: string, props: props } {
   return {
     name: 'positionable',
     props: selected.length ? filterObjectOnKeys(props, selected) : props
@@ -35,7 +22,3 @@ export function factory (selected = []) {
 }
 
 export default factory()
-
-export declare interface factory {
-  new (...args: any[]): Vue
-}
