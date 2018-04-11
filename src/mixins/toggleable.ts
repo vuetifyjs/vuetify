@@ -1,15 +1,7 @@
-import Vue, { ComponentOptions } from 'vue'
+import Vue from 'vue'
 
-export function factory (prop = 'value', event = 'input'): ComponentOptions<
-  Vue,
-  () => { isActive: boolean },
-  undefined,
-  undefined,
-  { [prop: string]: any }
-> {
-  return {
-    name: 'toggleable',
-
+export function factory (prop = 'value', event = 'input') {
+  return Vue.extend({
     model: { prop, event },
 
     props: {
@@ -30,7 +22,7 @@ export function factory (prop = 'value', event = 'input'): ComponentOptions<
         !!val !== this[prop] && this.$emit(event, val)
       }
     }
-  }
+  })
 }
 
 const Toggleable = factory()

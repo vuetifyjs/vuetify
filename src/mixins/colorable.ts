@@ -1,16 +1,12 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
+import { Prop } from 'vue-property-decorator'
 
 declare type classObject = { [name: string]: boolean }
 
-@Component({
-  name: 'colorable',
-  props: {
-    color: String
-  },
-})
+@Component
 export default class Colorable extends Vue {
-  color: string
+  @Prop() color: string
 
   defaultColor: string = null
 

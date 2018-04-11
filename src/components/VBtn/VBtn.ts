@@ -12,47 +12,47 @@ import Themeable from '../../mixins/themeable'
 import { factory as ToggleableFactory } from '../../mixins/toggleable'
 import { inject as RegistrableInject } from '../../mixins/registrable'
 
-import Vue from 'vue'
+import Vue, { ComponentOptions, CreateElement } from 'vue'
 import Component, { mixins } from 'vue-class-component'
 import { Prop } from 'vue-property-decorator'
 
 @Component
 export class VBtn extends mixins(
   Colorable,
-  // Routable,
+  Routable,
   Positionable,
   Themeable,
-  // ToggleableFactory('inputValue'),
+  ToggleableFactory('inputValue'),
   // RegistrableInject('buttonGroup')
 ) {
-  @Prop() block: boolean
-  @Prop() depressed: boolean
-  @Prop() fab: boolean
-  @Prop() flat: boolean
-  @Prop() icon: boolean
-  @Prop() large: boolean
-  @Prop() loading: boolean
-  @Prop() outline: boolean
-  @Prop() round: boolean
-  @Prop() small: boolean
-  @Prop() value: any
+  @Prop() block!: boolean
+  @Prop() depressed!: boolean
+  @Prop() fab!: boolean
+  @Prop() flat!: boolean
+  @Prop() icon!: boolean
+  @Prop() large!: boolean
+  @Prop() loading!: boolean
+  @Prop() outline!: boolean
+  @Prop() round!: boolean
+  @Prop() small!: boolean
+  @Prop() value!: any
 
   @Prop({ default: 'btn--active' })
-  activeClass: string
+  activeClass!: string
 
-  @Prop({ default: true })
-  ripple: boolean | object // TODO: ripple arg types
-
-  @Prop({ default: 'button' })
-  tag: string
+  @Prop({ default: true, type: [Boolean, Object] })
+  ripple!: boolean | object // TODO: ripple arg types
 
   @Prop({ default: 'button' })
-  type: string
+  tag!: string
+
+  @Prop({ default: 'button' })
+  type!: string
 
   get classes () {
     const classes = {
       'btn': true,
-      [this.activeClass]: this.isActive,
+      // [this.activeClass]: this.isActive,
       'btn--absolute': this.absolute,
       'btn--block': this.block,
       'btn--bottom': this.bottom,
@@ -60,7 +60,7 @@ export class VBtn extends mixins(
       'btn--flat': this.flat,
       'btn--floating': this.fab,
       'btn--fixed': this.fixed,
-      'btn--hover': this.hover,
+      // 'btn--hover': this.hover,
       'btn--icon': this.icon,
       'btn--large': this.large,
       'btn--left': this.left,
@@ -69,7 +69,7 @@ export class VBtn extends mixins(
       'btn--depressed': (this.depressed && !this.flat) || this.outline,
       'btn--right': this.right,
       'btn--round': this.round,
-      'btn--router': this.to,
+      'btn--router': !!this.to,
       'btn--small': this.small,
       'btn--top': this.top,
       ...this.themeClasses
@@ -81,7 +81,7 @@ export class VBtn extends mixins(
   }
 
   // Prevent focus to match md spec
-  click (e) {
+  click (e: MouseEvent): void {
     !this.fab &&
     e.detail &&
     this.$el.blur()
@@ -101,7 +101,7 @@ export class VBtn extends mixins(
     const children = []
 
     if (!this.$slots.loader) {
-      children.push(this.$createElement(VProgressCircular, {
+      children.push(this.$createElement(VProgressCircular as ComponentOptions<Vue>, {
         props: {
           indeterminate: true,
           size: 26
@@ -115,18 +115,18 @@ export class VBtn extends mixins(
   }
 
   mounted () {
-    if (this.buttonGroup) {
-      this.buttonGroup.register(this)
-    }
+    // if (this.buttonGroup) {
+    //   this.buttonGroup.register(this)
+    // }
   }
 
   beforeDestroy () {
-    if (this.buttonGroup) {
-      this.buttonGroup.unregister(this)
-    }
+    // if (this.buttonGroup) {
+    //   this.buttonGroup.unregister(this)
+    // }
   }
 
-  render (h) {
+  render (h: CreateElement) {
     const { tag, data } = this.generateRouteLink()
     const children = [this.genContent()]
 
@@ -137,6 +137,11 @@ export class VBtn extends mixins(
       ? this.value
       : JSON.stringify(this.value)
 
-    return h(tag, data, children)
+    if (this.isActive) {
+      // TODO
+    }
+
+    // TODO: remove 'as any'
+    return h(tag, data as any, children)
   }
 }

@@ -18,7 +18,7 @@ const extractPlugin = ExtractTextPlugin.extract({
 })
 
 module.exports = merge(baseWebpackConfig, {
-  devtool: '#cheap-module-eval-source-map',
+  devtool: 'source-map',
   entry: ['babel-polyfill', './dev/index.js'],
   output: {
     filename: '[name].js',
@@ -61,8 +61,13 @@ module.exports = merge(baseWebpackConfig, {
         exclude: /node_modules/
       },
       {
-        test: /\.[jt]s$/,
-        loaders: ['babel-loader', 'ts-loader'],
+        test: /\.ts$/,
+        loaders: ['ts-loader'],
+        exclude: /node_modules/
+      },
+      {
+        test: /\.js$/,
+        loaders: ['babel-loader'],
         exclude: /node_modules/
       },
       {
