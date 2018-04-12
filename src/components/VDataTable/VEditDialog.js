@@ -60,7 +60,7 @@ export default {
     },
     genActions () {
       return this.$createElement('div', {
-        'class': 'small-dialog__actions'
+        'class': 'v-small-dialog__actions'
       }, [
         this.genButton(this.cancel, this.cancelText),
         this.genButton(() => this.save(this.returnValue), this.saveText)
@@ -82,9 +82,9 @@ export default {
 
   render (h) {
     return h(VMenu, {
-      'class': 'small-dialog',
+      'class': 'v-small-dialog',
       props: {
-        contentClass: 'small-dialog__content',
+        contentClass: 'v-small-dialog__content',
         transition: this.transition,
         origin: 'top right',
         right: true,
