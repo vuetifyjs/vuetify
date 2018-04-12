@@ -8,7 +8,7 @@ import VRow from './VRow'
 import VCell from './VCell'
 import VCellCheckbox from './VCellCheckbox'
 import VTablePagination from './VTablePagination'
-import VTableHeader from './VTableHeader'
+import VTableHeaders from './VTableHeaders'
 import VRowExpandable from './VRowExpandable'
 import VRowGroup from './VRowGroup'
 
@@ -25,7 +25,7 @@ VDataTable.install = function install (Vue) {
   Vue.component(VCellCheckbox.name, VCellCheckbox)
   Vue.component(VRow.name, VRow)
   Vue.component(VTablePagination.name, VTablePagination)
-  Vue.component(VTableHeader.name, VTableHeader)
+  Vue.component(VTableHeaders.name, VTableHeaders)
   Vue.component(VRowExpandable.name, VRowExpandable)
   Vue.component(VRowGroup.name, VRowGroup)
 }

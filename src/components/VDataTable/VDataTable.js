@@ -1,5 +1,5 @@
 import VDataIterator from '../VDataIterator'
-import VTableHeader from './VTableHeader'
+import VTableHeaders from './VTableHeaders'
 import VTablePagination from './VTablePagination'
 import VRowGroup from './VRowGroup'
 
@@ -13,8 +13,21 @@ const groupByProperty = (xs, key) => {
 export default {
   name: 'v-data-table',
   extends: VDataIterator,
+  inheritAttrs: false,
+  provide () {
+    const dataTable = {
+      test: 'hello'
+    }
+
+    Object.defineProperty(dataTable, 'headers', {
+      get: () => this.headers,
+      enumerable: true
+    })
+
+    return { dataTable }
+  },
   props: {
-    columns: {
+    headers: {
       type: Array,
       default: () => ([])
     },
@@ -46,18 +59,10 @@ export default {
       const headers = this.computeSlots('header')
 
       if (!this.hideHeader) {
-        headers.push(h(VTableHeader, {
+        headers.push(h(VTableHeaders, {
           props: {
-            columns: this.columns,
-            showSelectAll: this.showSelectAll,
-            everyItem: this.everyItem,
-            someItems: this.someItems
+            showSelectAll: this.showSelectAll
           },
-          on: {
-            'update:sortBy': v => this.sorting.sortBy = v,
-            'update:sortDesc': v => this.sorting.sortDesc = v,
-            'toggleSelectAll': () => this.selectAll(!this.everyItem)
-          }
         }))
       }
 
@@ -90,9 +95,11 @@ export default {
         rows.push(
           this.$scopedSlots.group ?
           this.$scopedSlots.group({ groupBy, group, items: grouped[group] }) :
-          h(VRowGroup, [
+          h(VRowGroup, {
+            key: `${group}_${i}`
+          }, [
             h('span', { slot: 'cell' }, [group]),
-            this.genRows(grouped[group])
+            h('div', { slot: 'expansion' }, this.genRows(grouped[group]))
           ])
         )
       }

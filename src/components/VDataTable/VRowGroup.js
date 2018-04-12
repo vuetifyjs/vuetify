@@ -17,7 +17,7 @@ export default {
     }
   },
   methods: {
-    genHeader (h) {
+    genRow (h) {
       if (this.$slots.header) return this.$slots.header
 
       if (this.disableExpansion) return null
@@ -41,13 +41,5 @@ export default {
         ])
       ])
     }
-  },
-  render (h) {
-    return h('div', {
-      staticClass: 'v-row-group'
-    }, [
-      this.genHeader(h),
-      this.isActive && this.$slots.default
-    ])
   }
 }

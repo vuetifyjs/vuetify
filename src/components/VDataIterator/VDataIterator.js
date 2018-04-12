@@ -3,6 +3,68 @@ import { getObjectValueByPath } from '../../util/helpers'
 
 export default {
   name: 'v-data-iterator',
+  provide () {
+    const dataIterator = {
+      toggleSelected: this.toggleSelected,
+      resetExpanded: this.resetExpanded,
+      sort: this.sort
+    }
+
+    Object.defineProperty(dataIterator, 'page', {
+      get: () => this.pagination.page,
+      set: v => this.pagination.page = v,
+      enumerable: true
+    })
+
+    Object.defineProperty(dataIterator, 'rowsPerPage', {
+      get: () => this.pagination.rowsPerPage,
+      set: v => this.pagination.rowsPerPage = v,
+      enumerable: true
+    })
+
+    Object.defineProperty(dataIterator, 'pageCount', {
+      get: () => this.pageCount,
+      enumerable: true
+    })
+
+    Object.defineProperty(dataIterator, 'pageStart', {
+      get: () => this.pageStart,
+      enumerable: true
+    })
+
+    Object.defineProperty(dataIterator, 'pageStop', {
+      get: () => this.pageStop,
+      enumerable: true
+    })
+
+    Object.defineProperty(dataIterator, 'itemsLength', {
+      get: () => this.itemsLength,
+      enumerable: true
+    })
+
+    Object.defineProperty(dataIterator, 'everyItem', {
+      get: () => this.everyItem,
+      enumerable: true
+    })
+
+    Object.defineProperty(dataIterator, 'someItems', {
+      get: () => this.someItems,
+      enumerable: true
+    })
+
+    Object.defineProperty(dataIterator, 'sortBy', {
+      get: () => this.sorting.sortBy,
+      set: v => this.sorting.sortBy = v,
+      enumerable: true
+    })
+
+    Object.defineProperty(dataIterator, 'sortDesc', {
+      get: () => this.sorting.sortDesc,
+      enumerable: true
+    })
+
+    return { dataIterator }
+  },
   props: {
     items: {
       type: Array,
@@ -15,7 +77,7 @@ export default {
     itemKey: {
       type: String
     },
-    sort: {
+    customSort: {
       type: Function,
       default: (items, sortBy, sortDesc) => {
         if (sortBy === null) return items
@@ -68,6 +130,7 @@ export default {
   data () {
     return {
       selection: {},
+      expansion: {},
       sorting: { sortBy: this.sortBy, sortDesc: this.sortDesc },
       pagination: { rowsPerPage: this.rowsPerPage, page: this.page }
     }
@@ -87,7 +150,7 @@ export default {
       //   this.searchLength = items.length
       // }
 
-      items = this.sort(
+      items = this.customSort(
         items,
         this.sorting.sortBy,
         this.sorting.sortDesc
@@ -127,17 +190,40 @@ export default {
     }
   },
   methods: {
+    sort (index) {
+      const { sortBy, sortDesc } = this.sorting
+      if (sortBy === null) {
+        this.sorting = { sortBy: index, sortDesc: false }
+      } else if (sortBy === index && !sortDesc) {
+        this.sorting = { sortBy: index, sortDesc: true }
+      } else if (sortBy !== index) {
+        this.sorting = { sortBy: index, sortDesc: false }
+      } else if (!this.mustSort) {
+        this.sorting = { sortBy: null, sortDesc: null }
+      } else {
+        this.sorting = { sortBy: index, sortDesc: false }
+      }
+    },
     isSelected (item) {
       return this.selection[item[this.itemKey]]
     },
     select (item, value = true) {
       this.$set(this.selection, item[this.itemKey], value)
     },
-    selectAll (value = true) {
+    isExpanded (item) {
+      return this.expansion[item[this.itemKey]]
+    },
+    expand (item, value = true) {
+      this.$set(this.expansion, item[this.itemKey], value)
+    },
+    resetExpanded () {
+      this.expansion = {}
+    },
+    toggleSelected (value) {
       const selection = {}
 
       this.computedItems.forEach(item => {
-        selection[item[this.itemKey]] = value
+        selection[item[this.itemKey]] = !this.everyItem
       })
 
       this.selection = Object.assign({}, this.selection, selection)
@@ -189,6 +275,12 @@ export default {
       Object.defineProperty(props, 'selected', {
         get: () => this.isSelected(item),
         set: v => this.select(item, v),
+        enumerable: true
+      })
+
+      Object.defineProperty(props, 'expanded', {
+        get: () => this.isExpanded(item),
+        set: v => this.expand(item, v),
         enumerable: true
       })
 

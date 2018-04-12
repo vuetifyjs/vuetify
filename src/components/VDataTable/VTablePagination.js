@@ -6,27 +6,8 @@ import VSelect from '../VSelect'
 export default {
   name: 'v-table-pagination',
   inheritAttrs: false,
+  inject: ['dataIterator'],
   props: {
-    itemsLength: {
-      type: Number,
-      required: true
-    },
-    page: {
-      type: Number,
-      required: true
-    },
-    pageStart: {
-      type: Number,
-      required: true
-    },
-    pageStop: {
-      type: Number,
-      required: true
-    },
-    rowsPerPage: {
-      type: Number,
-      required: true
-    },
     prevIcon: {
       type: String,
       default: 'chevron_left'
@@ -52,7 +33,7 @@ export default {
   methods: {
     genRowsPerPageSelect (h) {
       return h('div', {
-        // 'class': this.actionsSelectClasses
+        staticClass: 'v-table-pagination__select'
       }, [
         this.rowsPerPageText,
         h(VSelect, {
@@ -61,15 +42,15 @@ export default {
           },
           props: {
             items: this.rowsPerPageItems,
-            value: this.rowsPerPage,
+            value: this.dataIterator.rowsPerPage,
             hideDetails: true,
             auto: true,
             minWidth: '75px'
           },
           on: {
             input: val => {
-              this.$emit('update:page', 1)
-              this.$emit('update:rowsPerPage', val)
+              this.dataIterator.page = 1
+              this.dataIterator.rowsPerPage = val
             }
           }
         })
@@ -78,18 +59,18 @@ export default {
     genPagination (h) {
       let pagination = '–'
 
-      if (this.itemsLength) {
-        const stop = this.itemsLength < this.pageStop || this.pageStop < 0
-          ? this.itemsLength
-          : this.pageStop
+      if (this.dataIterator.itemsLength) {
+        const stop = this.dataIterator.itemsLength < this.dataIterator.pageStop || this.dataIterator.pageStop < 0
+          ? this.dataIterator.itemsLength
+          : this.dataIterator.pageStop
 
         pagination = this.$scopedSlots.pageText
           ? this.$scopedSlots.pageText({
-            pageStart: this.pageStart + 1,
+            pageStart: this.dataIterator.pageStart + 1,
             pageStop: stop,
-            itemsLength: this.itemsLength
+            itemsLength: this.dataIterator.itemsLength
           })
-          : `${this.pageStart + 1}-${stop} of ${this.itemsLength}`
+          : `${this.dataIterator.pageStart + 1}-${stop} of ${this.dataIterator.itemsLength}`
       }
 
       return h('div', {
@@ -116,12 +97,12 @@ export default {
   },
   render (h) {
     const nextIcon = this.genIcon(h, () => {
-      this.$emit('update:page', this.page + 1)
-    }, this.rowsPerPage < 0 || this.page * this.rowsPerPage >= this.itemsLength || this.pageStop < 0, 'Next page', this.nextIcon)
+      this.dataIterator.page = this.dataIterator.page + 1
+    }, this.dataIterator.rowsPerPage < 0 || this.dataIterator.page * this.dataIterator.rowsPerPage >= this.dataIterator.itemsLength || this.dataIterator.pageStop < 0, 'Next page', this.nextIcon)
 
     const prevIcon = this.genIcon(h, () => {
-      this.$emit('update:page', this.page - 1)
-    }, this.page === 1, 'Previous page', this.prevIcon)
+      this.dataIterator.page = this.dataIterator.page - 1
+    }, this.dataIterator.page === 1, 'Previous page', this.prevIcon)
 
     return h('div', {
       staticClass: 'v-table-pagination'

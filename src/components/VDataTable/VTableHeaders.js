@@ -1,47 +1,73 @@
 import VCheckbox from '../VCheckbox'
+import VRow from './VRow'
+import VCell from './VCell'
+import VIcon from '../VIcon'
 
 export default {
   name: 'v-table-headers',
-  inheritAttrs: false,
+  inject: ['dataIterator', 'dataTable'],
   props: {
-    columns: {
-      type: Array,
-      default: () => ([])
-    },
-    everyItem: {
-      type: Boolean
-    },
-    someItems: {
-      type: Boolean
-    },
     showSelectAll: {
       type: Boolean
+    },
+    sortIcon: {
+      type: String,
+      default: 'arrow_upward'
     }
   },
   methods: {
     genSelectAll (h) {
       return h(VCheckbox, {
         attrs: {
-          inputValue: this.everyItem,
-          indeterminate: !this.everyItem && this.someItems
+          inputValue: this.dataIterator.everyItem,
+          indeterminate: !this.dataIterator.everyItem && this.dataIterator.someItems
         },
         on: {
-          change: () => this.$emit('toggleSelectAll')
+          change: () => this.dataIterator.toggleSelected()
         }
       })
+    },
+    genSortIcon (h, column) {
+      return h(VIcon, [this.sortIcon])
     }
   },
   render (h) {
-    const columns = this.columns.map(c => {
-      const align = c.align || 'text-xs-left'
+    const headers = this.dataTable.headers.map(c => {
+      const sortable = c.sortable == null || c.sortable
 
-      return h('th', {
-        staticClass: [align],
-      }, [c.text])
+      const classes = {
+        'column': true,
+        [c.align || 'text-xs-left']: true
+      }
+
+      const listeners = {}
+
+      if (sortable) {
+        listeners['click'] = () => {
+          this.dataIterator.resetExpanded()
+          this.dataIterator.sort(c.value)
+        }
+
+        const beingSorted = this.dataIterator.sortBy === c.value
+
+        classes[c.align || 'text-xs-left'] = true
+        classes['sortable'] = true
+        classes['active'] = beingSorted
+        classes['asc'] = beingSorted && !this.dataIterator.sortDesc
+        classes['desc'] = beingSorted && this.dataIterator.sortDesc
+      }
+
+      return h(VCell, {
+        class: classes,
+        nativeOn: listeners
+      }, [
+        h('span', [c.text]),
+        sortable && this.genSortIcon(h)
+      ])
     })
 
-    if (this.showSelectAll) columns.unshift(this.genSelectAll(h))
+    if (this.showSelectAll) headers.unshift(this.genSelectAll(h))
 
-    return h('tr', columns)
+    return h(VRow, headers)
   }
 }
