@@ -1,4 +1,4 @@
-import Vue  from 'vue'
+import Vue from 'vue'
 import { ExtendedVue } from 'vue/types/vue'
 
 declare type Toggleable<T extends string> = ExtendedVue<Vue, { isActive: boolean }, {}, {}, Record<T, any>>
