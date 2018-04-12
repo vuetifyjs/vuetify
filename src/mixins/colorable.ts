@@ -1,38 +1,46 @@
 import Vue from 'vue'
-import Component from 'vue-class-component'
-import { Prop } from 'vue-property-decorator'
 
-declare type classObject = { [name: string]: boolean }
+export default Vue.extend({
+  name: 'colorable',
 
-@Component
-export default class Colorable extends Vue {
-  @Prop() color: string
+  props: {
+    color: String
+  },
 
-  defaultColor: string = null
-
-  get computedColor (): string {
-    return this.color || this.defaultColor
-  }
-
-  addBackgroundColorClassChecks (obj: classObject = {}, color = this.computedColor): classObject {
-    const classes = Object.assign({}, obj)
-
-    if (color) {
-      classes[color] = true
+  data () {
+    return {
+      defaultColor: null
     }
+  },
 
-    return classes
-  }
-
-  addTextColorClassChecks (obj: classObject = {}, color = this.computedColor): classObject {
-    const classes = Object.assign({}, obj)
-
-    if (color) {
-      const [colorName, colorModifier] = color.trim().split(' ')
-      classes[colorName + '--text'] = true
-      colorModifier && (classes['text--' + colorModifier] = true)
+  computed: {
+    computedColor (): string {
+      return this.color || this.defaultColor
     }
+  },
 
-    return classes
+  methods: {
+    addBackgroundColorClassChecks<T, C extends string> (obj?: T, color?: C): T & Record<C, true> {
+      const classes: any = Object.assign({}, obj)
+      if (color === undefined) color = this.computedColor as any
+
+      if (color) {
+        classes[color] = true
+      }
+
+      return classes
+    },
+    addTextColorClassChecks (obj?: any, color?: string): any {
+      const classes = Object.assign({}, obj)
+      if (color === undefined) color = this.computedColor
+
+      if (color) {
+        const [colorName, colorModifier] = color.trim().split(' ')
+        classes[colorName + '--text'] = true
+        colorModifier && (classes['text--' + colorModifier] = true)
+      }
+
+      return classes
+    }
   }
-}
+})

@@ -1,15 +1,8 @@
-import { VBtn } from './VBtn'
-import { PluginFunction, VueConstructor } from 'vue'
-
-declare module './VBtn' {
-  interface VBtn {
-    install: PluginFunction<never>
-  }
-}
+import VBtn from './VBtn'
 
 /* istanbul ignore next */
-(VBtn as any).install = function install (Vue: VueConstructor) {
-  Vue.component(VBtn.name, VBtn)
+VBtn.install = function install (Vue) {
+  Vue.component((VBtn as any).options.name, VBtn)
 }
 
 export default VBtn
