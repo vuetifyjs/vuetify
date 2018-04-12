@@ -31,7 +31,8 @@
   },
   "description": "Vue.js 2 Semantic Component Framework",
   "devDependencies": {
-    "@types/node": "^9.6.2",
+    "@types/jest": "^22.2.3",
+    "@types/node": "^9.6.4",
     "autoprefixer": "7.2.5",
     "avoriaz": "6.3.0",
     "babel-cli": "6.26.0",
@@ -89,23 +90,22 @@
     "style-loader": "0.19.1",
     "stylus": "0.54.5",
     "stylus-loader": "^3.0.2",
-    "ts-loader": "^3.0.5",
-    "tslint": "^5.8.0",
-    "tslint-config-standard": "^6.0.1",
-    "tslint-loader": "^3.5.3",
+    "ts-jest": "^22.4.2",
+    "ts-loader": "^3.5.0",
+    "tslint": "^5.9.1",
+    "tslint-config-standard": "^7.0.0",
+    "tslint-loader": "^3.6.0",
     "typescript": "^2.8.1",
     "uglifyjs-webpack-plugin": "1.1.6",
-    "vue": "^2.5.14",
-    "vue-class-component": "^6.2.0",
-    "vue-loader": "^14.2.1",
-    "vue-property-decorator": "^6.0.0",
+    "vue": "^2.5.16",
+    "vue-loader": "^14.2.2",
     "vue-router": "3.0.1",
-    "vue-server-renderer": "^2.5.14",
-    "vue-template-compiler": "^2.5.14",
-    "webpack": "3.10.0",
+    "vue-server-renderer": "^2.5.16",
+    "vue-template-compiler": "^2.5.16",
+    "webpack": "^3.11.0",
     "webpack-bundle-analyzer": "2.9.2",
     "webpack-bundle-size-analyzer": "2.7.0",
-    "webpack-dev-server": "^2.11.1",
+    "webpack-dev-server": "^2.11.2",
     "webpack-merge": "^4.1.2",
     "write-file-webpack-plugin": "4.2.0"
   },
@@ -123,6 +123,7 @@
       "<rootDir>/test/unit"
     ],
     "moduleFileExtensions": [
+      "ts",
       "js",
       "vue"
     ],
@@ -135,9 +136,10 @@
       "^@/(.*)$": "<rootDir>/src/$1"
     },
     "transform": {
-      ".*\\.(vue)$": "<rootDir>/node_modules/jest-vue-preprocessor",
-      "\\.(styl)$": "<rootDir>/node_modules/jest-css-modules",
-      ".*\\.(vue|js)$": "<rootDir>/node_modules/babel-jest"
+      ".*\\.(vue)$": "jest-vue-preprocessor",
+      "\\.(styl)$": "jest-css-modules",
+      ".*\\.(vue|js)$": "babel-jest",
+      ".*\\.(ts)$": "ts-jest"
     },
     "transformIgnorePatterns": [
       "node_modules/(?!vue-router)"
