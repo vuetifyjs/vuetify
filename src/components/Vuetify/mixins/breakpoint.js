@@ -103,14 +103,16 @@ const breakpoint = {
     }
   },
 
-  watch: {
-    breakpoint (val) {
-      this.$vuetify.breakpoint = val
-    }
+  created () {
+    if (this.$ssrContext ||
+      typeof window === 'undefined'
+    ) return
+
+    window.addEventListener('resize', this.onResize, { passive: true })
   },
 
-  created () {
-    this.$vuetify.breakpoint = this.breakpoint
+  beforeDestroy () {
+    window.removeEventListener('resize', this.onResize, { passive: true })
   },
 
   methods: {

@@ -1,4 +1,4 @@
-import VApp from '@/components/VApp'
+import breakpoint from '@/components/Vuetify/mixins/breakpoint'
 import { test } from '@/test'
 
 test('breakpoint.js', ({ mount }) => {
@@ -230,20 +230,23 @@ test('breakpoint.js', ({ mount }) => {
   ]
 
   scenarios.forEach(scenario => {
-    it('should calculate breakpoint for ' + scenario.description, () => {
-      const wrapper = mount(VApp)
+    it('should calculate breakpoint for ' + scenario.description, async () => {
+      const wrapper = mount({
+        mixins: [breakpoint],
+        render: () => null
+      })
       wrapper.setData({
         clientWidth: scenario.width,
         clientHeight: scenario.height
       })
-      const breakpoint = wrapper.vm.breakpoint
 
-      expect(breakpoint.width).toBe(scenario.width)
-      expect(breakpoint.height).toBe(scenario.height)
-      expect(breakpoint.name).toBe(scenario.name)
+      await wrapper.vm.$nextTick()
+      expect(wrapper.vm.breakpoint.height).toBe(scenario.height)
+      expect(wrapper.vm.breakpoint.width).toBe(scenario.width)
+      expect(wrapper.vm.breakpoint.name).toBe(scenario.name)
       allFlags.forEach(flag => {
         const expectedValue = scenario.mustBeTrue.indexOf(flag) !== -1
-        expect(breakpoint[flag]).toBe(expectedValue)
+        expect(wrapper.vm.breakpoint[flag]).toBe(expectedValue)
       })
     })
   })

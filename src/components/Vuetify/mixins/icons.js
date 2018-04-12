@@ -110,5 +110,9 @@ const iconSets = {
 }
 
 export default function icons (iconfont = 'md', icons = {}) {
-  return Object.assign({}, iconSets[iconfont] || iconSets.md, icons)
+  return {
+    data: () => ({
+      icons: Object.assign({}, iconSets[iconfont] || iconSets.md, icons)
+    })
+  }
 }

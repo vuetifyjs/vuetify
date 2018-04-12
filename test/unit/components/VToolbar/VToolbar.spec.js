@@ -98,7 +98,7 @@ test('VToolbar.vue', ({ mount }) => {
     expect(wrapper.vm.$vuetify.application.top).toBe(0)
   })
 
-  it('should properly calculate content height', () => {
+  it('should properly calculate content height', async () => {
     const wrapper = mount(VToolbar)
 
     wrapper.setProps({
@@ -124,12 +124,6 @@ test('VToolbar.vue', ({ mount }) => {
       dense: false,
       prominent: false
     })
-    Vue.set(wrapper.vm.$vuetify.breakpoint, 'width', 200)
-    Vue.set(wrapper.vm.$vuetify.breakpoint, 'height', 100)
-    expect(wrapper.vm.computedContentHeight).toBe(wrapper.vm.heights.mobileLandscape)
-    Vue.set(wrapper.vm.$vuetify.breakpoint, 'width', 100)
-    Vue.set(wrapper.vm.$vuetify.breakpoint, 'height', 200)
-    expect(wrapper.vm.computedContentHeight).toBe(wrapper.vm.heights.mobile)
   })
 
   it('should set margin top', () => {
