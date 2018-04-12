@@ -9,6 +9,8 @@ import VCell from './VCell'
 import VCellCheckbox from './VCellCheckbox'
 import VTablePagination from './VTablePagination'
 import VTableHeader from './VTableHeader'
+import VRowExpandable from './VRowExpandable'
+import VRowGroup from './VRowGroup'
 
 const VTableOverflow = createSimpleFunctional('v-table__overflow')
 
@@ -24,6 +26,8 @@ VDataTable.install = function install (Vue) {
   Vue.component(VRow.name, VRow)
   Vue.component(VTablePagination.name, VTablePagination)
   Vue.component(VTableHeader.name, VTableHeader)
+  Vue.component(VRowExpandable.name, VRowExpandable)
+  Vue.component(VRowGroup.name, VRowGroup)
 }
 
 export default VDataTable
