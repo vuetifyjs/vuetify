@@ -229,7 +229,7 @@ export default {
         props: { origin: 'bottom center' }
       }, [
         h('div', {
-          staticClass: 'slider__thumb--label__container',
+          staticClass: 'v-slider__thumb--label__container',
           directives: [
             {
               name: 'show',
@@ -238,7 +238,7 @@ export default {
           ]
         }, [
           h('div', {
-            staticClass: 'slider__thumb--label',
+            staticClass: 'v-slider__thumb--label',
             'class': this.addBackgroundColorClassChecks({}, this.computedThumbColor)
           }, [
             h('span', {}, this.inputValue)
@@ -260,16 +260,16 @@ export default {
     genThumbContainer (h) {
       const children = []
       children.push(h('div', {
-        staticClass: 'slider__thumb',
+        staticClass: 'v-slider__thumb',
         'class': this.addBackgroundColorClassChecks({}, this.computedThumbColor)
       }))
 
       this.thumbLabel && children.push(this.genThumbLabel(h))
 
       return h('div', {
-        staticClass: 'slider__thumb-container',
+        staticClass: 'v-slider__thumb-container',
         'class': {
-          'slider__thumb-container--label': this.thumbLabel
+          'v-slider__thumb-container--label': this.thumbLabel
         },
         style: this.thumbStyles,
         on: {
@@ -283,7 +283,7 @@ export default {
       const ticks = createRange(this.numTicks + 1).map(i => {
         const span = h('span', {
           key: i,
-          staticClass: 'slider__tick',
+          staticClass: 'v-slider__tick',
           style: {
             left: `${i * (100 / this.numTicks)}%`
           }
@@ -293,26 +293,26 @@ export default {
       })
 
       return h('div', {
-        staticClass: 'slider__ticks-container',
+        staticClass: 'v-slider__ticks-container',
         style: this.tickContainerStyles
       }, ticks)
     },
     genTrackContainer (h) {
       const children = [
         h('div', {
-          staticClass: 'slider__track',
+          staticClass: 'v-slider__track',
           'class': this.addBackgroundColorClassChecks({}, this.computedTrackColor),
           style: this.trackStyles
         }),
         h('div', {
-          staticClass: 'slider__track-fill',
+          staticClass: 'v-slider__track-fill',
           'class': this.addBackgroundColorClassChecks(),
           style: this.trackFillStyles
         })
       ]
 
       return h('div', {
-        staticClass: 'slider__track__container',
+        staticClass: 'v-slider__track__container',
         ref: 'track'
       }, children)
     }
@@ -326,7 +326,7 @@ export default {
     children.push(this.genThumbContainer(h))
 
     const slider = h('div', {
-      staticClass: 'slider'
+      staticClass: 'v-slider'
     }, children)
 
     return this.genInputGroup([slider], {
