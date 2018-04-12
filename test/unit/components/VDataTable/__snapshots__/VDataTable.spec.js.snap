@@ -4,7 +4,7 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
 
 <div>
   <div class="v-table__overflow">
-    <table class="v-datatable table">
+    <table class="v-datatable v-table">
       <thead>
         <tr>
           <th role="columnheader"
@@ -64,7 +64,7 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
       </tbody>
     </table>
   </div>
-  <div class="v-datatable table">
+  <div class="v-datatable v-table">
     <div class="v-datatable__actions">
       <div class="v-datatable__actions__select">
         Rows per page:
@@ -186,7 +186,7 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
 
 <div>
   <div class="v-table__overflow">
-    <table class="v-datatable table">
+    <table class="v-datatable v-table">
       <thead>
         <tr>
           <th role="columnheader"
@@ -246,7 +246,7 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
       </tbody>
     </table>
   </div>
-  <div class="v-datatable table">
+  <div class="v-datatable v-table">
     <div class="v-datatable__actions">
       <div class="v-datatable__actions__select">
         Rows per page:
@@ -368,7 +368,7 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
 
 <div>
   <div class="v-table__overflow">
-    <table class="v-datatable table">
+    <table class="v-datatable v-table">
       <thead>
         <tr>
           <th role="columnheader"
@@ -430,7 +430,7 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
       </tbody>
     </table>
   </div>
-  <div class="v-datatable table">
+  <div class="v-datatable v-table">
     <div class="v-datatable__actions">
       <div class="v-datatable__actions__select">
         Rows per page:
@@ -552,7 +552,7 @@ exports[`VDataTable.vue should match a snapshot with single rows-per-page-items 
 
 <div>
   <div class="v-table__overflow">
-    <table class="v-datatable table">
+    <table class="v-datatable v-table">
       <thead>
         <tr>
           <th role="columnheader"
@@ -605,7 +605,7 @@ exports[`VDataTable.vue should match a snapshot with single rows-per-page-items 
       </tbody>
     </table>
   </div>
-  <div class="v-datatable table">
+  <div class="v-datatable v-table">
     <div class="v-datatable__actions">
       <div class="v-datatable__actions__range-controls">
         <div class="v-datatable__actions__pagination">

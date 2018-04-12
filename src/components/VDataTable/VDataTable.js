@@ -60,7 +60,7 @@ export default {
   computed: {
     classes () {
       return {
-        'v-datatable table': true,
+        'v-datatable v-table': true,
         'v-datatable--select-all': this.selectAll !== false,
         'theme--dark': this.dark,
         'theme--light': this.light
