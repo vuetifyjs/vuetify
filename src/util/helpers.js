@@ -105,18 +105,18 @@ export function getNestedValue (obj, path, fallback) {
   if (last < 0) return obj === undefined ? fallback : obj
 
   for (let i = 0; i < last; i++) {
-    if (obj === null || obj === undefined) {
+    if (obj == null) {
       return fallback
     }
     obj = obj[path[i]]
   }
 
-  if (obj === null || obj === undefined) return fallback
+  if (obj == null) return fallback
 
   return obj[path[last]] === undefined ? fallback : obj[path[last]]
 }
 
-export function looseEqual (a, b) {
+export function deepEqual (a, b) {
   if (a === b) return true
 
   if (a !== Object(a) || b !== Object(b)) {
@@ -131,7 +131,7 @@ export function looseEqual (a, b) {
     return false
   }
 
-  return props.every(p => looseEqual(a[p], b[p]))
+  return props.every(p => deepEqual(a[p], b[p]))
 }
 
 export function getObjectValueByPath (obj, path, fallback) {
@@ -143,7 +143,7 @@ export function getObjectValueByPath (obj, path, fallback) {
 }
 
 export function getPropertyFromItem (item, property, fallback) {
-  if (property === null || property === undefined) return item === undefined ? fallback : item
+  if (property == null) return item === undefined ? fallback : item
 
   if (item !== Object(item)) return fallback === undefined ? item : fallback
 
@@ -155,7 +155,7 @@ export function getPropertyFromItem (item, property, fallback) {
 
   const value = property(item, fallback)
 
-  return typeof value === "undefined" ? fallback : value
+  return typeof value === 'undefined' ? fallback : value
 }
 
 export function createRange (length) {

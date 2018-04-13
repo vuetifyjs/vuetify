@@ -32,9 +32,9 @@ declare module 'vuetify/src/util/helpers' {
   export function addOnceEventListener (el: EventTarget, event: string, cb: () => void): void
   export function getNestedValue (obj: object | Array<any>, path: Array<string | number>, fallback?: any): any
   export function getObjectValueByPath (obj: object, path: string, fallback?: any): any
-  export function getPropertyFromItem (item: object, property: string | Array<string | number> | Function, fallback?: any): any
+  export function getPropertyFromItem (item: object, property: string | Array<string | number> | ((item: object) => any), fallback?: any): any
   export function createRange (length: number): number[]
   export function getZIndex (el: Element): number
   export function escapeHTML (str: string): string
-  export function looseEqual (a: any, b: any): boolean
+  export function deepEqual (a: any, b: any): boolean
 }

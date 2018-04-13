@@ -150,7 +150,7 @@ export default {
       return Boolean(getPropertyFromItem(item, this.itemDisabled, false))
     },
     getText (item) {
-      return (getPropertyFromItem(item, this.itemText, item) || '').toString();
+      return (getPropertyFromItem(item, this.itemText, item) || '').toString()
     },
     getValue (item) {
       return getPropertyFromItem(item, this.itemValue, item)
