@@ -11,14 +11,14 @@ export default {
     }
 
     Object.defineProperty(dataIterator, 'page', {
-      get: () => this.pagination.page,
-      set: v => this.pagination.page = v,
+      get: () => this.options.page,
+      set: v => this.options.page = v,
       enumerable: true
     })
 
     Object.defineProperty(dataIterator, 'rowsPerPage', {
-      get: () => this.pagination.rowsPerPage,
-      set: v => this.pagination.rowsPerPage = v,
+      get: () => this.options.rowsPerPage,
+      set: v => this.options.rowsPerPage = v,
       enumerable: true
     })
 
@@ -53,13 +53,14 @@ export default {
     })
 
     Object.defineProperty(dataIterator, 'sortBy', {
-      get: () => this.sorting.sortBy,
-      set: v => this.sorting.sortBy = v,
+      get: () => this.options.sortBy,
+      set: v => this.options.sortBy = v,
       enumerable: true
     })
 
     Object.defineProperty(dataIterator, 'sortDesc', {
-      get: () => this.sorting.sortDesc,
+      get: () => this.options.sortDesc,
+      set: v => this.options.sortDesc = v,
       enumerable: true
     })
 
@@ -69,10 +70,6 @@ export default {
     items: {
       type: Array,
       default: () => ([])
-    },
-    classPrefix: {
-      type: String,
-      default: 'v-data-iterator'
     },
     itemKey: {
       type: String
@@ -116,7 +113,8 @@ export default {
       type: String
     },
     sortDesc: {
-      type: String
+      type: Boolean,
+      default: false
     },
     rowsPerPage: {
       type: Number,
@@ -125,22 +123,63 @@ export default {
     page: {
       type: Number,
       default: 1
+    },
+    serverSide: {
+      type: Object
     }
   },
   data () {
     return {
       selection: {},
       expansion: {},
-      sorting: { sortBy: this.sortBy, sortDesc: this.sortDesc },
-      pagination: { rowsPerPage: this.rowsPerPage, page: this.page }
+      options: {
+        sortBy: this.sortBy,
+        sortDesc: this.sortDesc,
+        rowsPerPage: this.rowsPerPage,
+        page: this.page
+      }
     }
   },
+  watch: {
+    serverSide: {
+      handler (options) {
+        if (!options) return
+
+        this.options = Object.assign(this.options, options)
+      },
+      deep: true,
+      immediate: true
+    },
+    options: {
+      handler (options) {
+        // const pagination = this.pagination
+        // this.$emit('update:serverSide', { sorting, pagination })
+        this.$emit('update:serverSide', options)
+      },
+      deep: true,
+      immediate: true
+    }/*,
+    pagination: {
+      handler (pagination) {
+        const sorting = this.sorting
+        this.$emit('update:serverSide', { sorting, pagination })
+      },
+      deep: true
+    }*/
+  },
   computed: {
+    classes () {
+      return {
+        'v-data-iterator': true
+      }
+    },
     computedItems () {
       // TODO: Handle this differently (server-side-processing prop?)
       // if (this.totalItems) return this.items
 
       let items = this.items.slice()
+
+      if (this.serverSide) return items
 
       // const hasSearch = typeof this.search !== 'undefined' &&
       //   this.search !== null
@@ -152,8 +191,8 @@ export default {
 
       items = this.customSort(
         items,
-        this.sorting.sortBy,
-        this.sorting.sortDesc
+        this.options.sortBy,
+        this.options.sortDesc
       )
 
       // return this.hideActions &&
@@ -164,18 +203,18 @@ export default {
       return items.slice(this.pageStart, this.pageStop)
     },
     pageStart () {
-      return this.pagination.rowsPerPage === -1
+      return this.options.rowsPerPage === -1
         ? 0
-        : (this.pagination.page - 1) * this.pagination.rowsPerPage
+        : (this.options.page - 1) * this.options.rowsPerPage
     },
     pageStop () {
-      return this.pagination.rowsPerPage === -1
+      return this.options.rowsPerPage === -1
         ? this.computedItems.length // TODO: Does this need to be something other (server-side, etc?)
-        : this.pagination.page * this.pagination.rowsPerPage
+        : this.options.page * this.options.rowsPerPage
     },
     pageCount () {
       // We can't simply use computedItems.length here since it's already sliced
-      return Math.ceil(this.itemsLength / this.pagination.rowsPerPage)
+      return Math.ceil(this.itemsLength / this.options.rowsPerPage)
     },
     itemsLength () {
       // TODO: needs to account for search
@@ -191,18 +230,21 @@ export default {
   },
   methods: {
     sort (index) {
-      const { sortBy, sortDesc } = this.sorting
+      const { sortBy, sortDesc } = this.options
+      let updated
       if (sortBy === null) {
-        this.sorting = { sortBy: index, sortDesc: false }
+        updated = { sortBy: index, sortDesc: false }
       } else if (sortBy === index && !sortDesc) {
-        this.sorting = { sortBy: index, sortDesc: true }
+        updated = { sortBy: index, sortDesc: true }
       } else if (sortBy !== index) {
-        this.sorting = { sortBy: index, sortDesc: false }
+        updated = { sortBy: index, sortDesc: false }
       } else if (!this.mustSort) {
-        this.sorting = { sortBy: null, sortDesc: null }
+        updated = { sortBy: null, sortDesc: null }
       } else {
-        this.sorting = { sortBy: index, sortDesc: false }
+        updated = { sortBy: index, sortDesc: false }
       }
+
+      this.options = Object.assign(this.options, updated)
     },
     isSelected (item) {
       return this.selection[item[this.itemKey]]
@@ -242,26 +284,26 @@ export default {
       }
 
       Object.defineProperty(props, 'sortBy', {
-        get: () => this.sorting.sortBy,
-        set: v => this.sorting.sortBy = v,
+        get: () => this.options.sortBy,
+        set: v => this.options.sortBy = v,
         enumerable: true
       })
 
       Object.defineProperty(props, 'sortDesc', {
-        get: () => this.sorting.sortDesc,
-        set: v => this.sorting.sortDesc = v,
+        get: () => this.options.sortDesc,
+        set: v => this.options.sortDesc = v,
         enumerable: true
       })
 
       Object.defineProperty(props, 'rowsPerPage', {
-        get: () => this.pagination.rowsPerPage,
-        set: v => this.pagination.rowsPerPage = v,
+        get: () => this.options.rowsPerPage,
+        set: v => this.options.rowsPerPage = v,
         enumerable: true
       })
 
       Object.defineProperty(props, 'page', {
-        get: () => this.pagination.page,
-        set: v => this.pagination.page = v,
+        get: () => this.options.page,
+        set: v => this.options.page = v,
         enumerable: true
       })
 
@@ -321,7 +363,7 @@ export default {
   },
   render (h) {
     return h('div', {
-      staticClass: this.classPrefix
+      class: this.classes
     }, [
       ...this.genHeaders(h),
       ...this.genBodies(h),

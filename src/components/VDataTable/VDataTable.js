@@ -2,6 +2,8 @@ import VDataIterator from '../VDataIterator'
 import VTableHeaders from './VTableHeaders'
 import VTablePagination from './VTablePagination'
 import VRowGroup from './VRowGroup'
+import VProgressLinear from '../VProgressLinear'
+import VRow from './VRow'
 
 const groupByProperty = (xs, key) => {
   return xs.reduce((rv, x) => {
@@ -45,6 +47,9 @@ export default {
     },
     fixedHeight: {
       type: String
+    },
+    loading: {
+      type: Boolean
     }
   },
   computed: {
@@ -64,6 +69,14 @@ export default {
             showSelectAll: this.showSelectAll
           },
         }))
+        this.loading && headers.push(h(VRow, [
+          h(VProgressLinear, {
+            props: {
+              active: true,
+              indeterminate: true
+            }
+          })
+        ]))
       }
 
       return headers
@@ -115,13 +128,13 @@ export default {
             itemsLength: this.itemsLength,
             pageStart: this.pageStart,
             pageStop: this.pageStop,
-            page: this.pagination.page,
-            rowsPerPage: this.pagination.rowsPerPage,
+            page: this.options.page,
+            rowsPerPage: this.options.rowsPerPage,
             rowsPerPageItems: this.rowsPerPageItems
           },
           on: {
-            'update:page': v => this.pagination.page = v,
-            'update:rowsPerPage': v => this.pagination.rowsPerPage = v
+            'update:page': v => this.options.page = v,
+            'update:rowsPerPage': v => this.options.rowsPerPage = v
           }
         }))
       }
