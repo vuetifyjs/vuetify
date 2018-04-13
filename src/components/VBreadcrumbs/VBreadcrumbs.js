@@ -50,7 +50,6 @@ export default {
       const children = []
       const dividerData = { staticClass: 'breadcrumbs__divider' }
       const breadcrumbItemList = this.$slots.default.filter(
-        // TODO: use the component name instead of tag
         elm => elm.componentOptions && elm.componentOptions.tag === 'v-breadcrumbs-item')
       const length = breadcrumbItemList.length
 
@@ -58,7 +57,6 @@ export default {
         const elm = breadcrumbItemList[i]
         children.push(elm)
 
-        // TODO: use the component name instead of tag
         if (i === length - 1) continue
 
         children.push(this.$createElement('li', dividerData, this.computedDivider))
