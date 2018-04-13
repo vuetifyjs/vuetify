@@ -325,7 +325,8 @@ export default {
 
           this.$emit('update:miniVariant', false)
         },
-        transitionend () {
+        transitionend: e => {
+          this.$emit('transitionend', e)
           window.dispatchEvent(new Event('resize'))
         }
       }
