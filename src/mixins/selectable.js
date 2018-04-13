@@ -4,13 +4,14 @@ import VLabel from '../components/VLabel'
 
 // Mixins
 import Rippleable from './rippleable'
+import Comparable from './comparable'
 
 export default {
   name: 'selectable',
 
   extends: VInput,
 
-  mixins: [Rippleable],
+  mixins: [Rippleable, Comparable],
 
   model: {
     prop: 'inputValue',
@@ -29,12 +30,16 @@ export default {
     id: String,
     inputValue: null,
     falseValue: null,
+    trueValue: null,
+    multiple: {
+      type: Boolean,
+      default: null
+    },
     label: String,
     toggleKeys: {
       type: Array,
       default: () => [13, 32]
-    },
-    trueValue: null
+    }
   },
 
   computed: {
@@ -44,18 +49,27 @@ export default {
         this.isDirty ? this.color : this.validationState
       )
     },
+    isMultiple () {
+      return this.multiple === true || (this.multiple === null && Array.isArray(this.internalValue))
+    },
     isActive () {
-      if ((Array.isArray(this.internalValue))) {
-        return this.internalValue.indexOf(this.value) !== -1
+      const value = this.value
+      const input = this.internalValue
+
+      if (this.isMultiple) {
+
+        if (!Array.isArray(input)) return false
+
+        return input.some(item => this.valueComparator(item, value))
       }
 
       if (!this.trueValue || !this.falseValue) {
-        return this.value
-          ? this.value === this.internalValue
-          : Boolean(this.internalValue)
+        return value
+          ? this.valueComparator(value, input)
+          : Boolean(input)
       }
 
-      return this.internalValue === this.trueValue
+      return this.valueComparator(value, input)
     },
     isDirty () {
       return this.isActive
@@ -71,7 +85,7 @@ export default {
   methods: {
     genLabel () {
       return this.$createElement(VLabel, {
-        on: { click: this.onChange },
+        on: {click: this.onChange},
         attrs: {
           for: this.id
         },
@@ -104,25 +118,27 @@ export default {
     onChange () {
       if (this.disabled) return
 
-      let input = this.lazyValue
-      // If inputValue is an array
-      if (Array.isArray(input)) {
-        input = input.slice()
-        const i = input.indexOf(this.value)
+      const value = this.value
+      let input = this.internalValue
 
-        if (i === -1) {
-          input.push(this.value)
-        } else {
-          input.splice(i, 1)
+      if (this.isMultiple) {
+        if (!Array.isArray(input)) {
+          input = []
         }
-      // If has a true or false value set
+
+        const length = input.length
+
+        input = input.filter(item => !this.valueComparator(item, value))
+
+        if (input.length === length) {
+          input.push(value)
+        }
       } else if (this.trueValue || this.falseValue) {
-        input = input === this.trueValue ? this.falseValue : this.trueValue
-      // If has a value set
-      } else if (this.value) {
-        input = this.inputValue === this.value
-          ? null
-          : this.value
+        // If has a true or false value set
+        input = this.valueComparator(this.trueValue, value) ? this.falseValue : this.trueValue
+      } else if (value) {
+        // If has a value set
+        input = this.valueComparator(input, value) ? null : value
       } else {
         input = !input
       }

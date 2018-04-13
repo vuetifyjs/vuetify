@@ -70,7 +70,9 @@ export default {
       this.overlayTimeout = setTimeout(() => {
         // IE11 Fix
         try {
-          this.overlay.parentNode.removeChild(this.overlay)
+          if (this.overlay && this.overlay.parentNode) {
+            this.overlay.parentNode.removeChild(this.overlay)
+          }
           this.overlay = null
           this.showScroll()
         } catch (e) { console.log(e) }
