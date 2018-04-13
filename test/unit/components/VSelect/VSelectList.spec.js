@@ -77,12 +77,4 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     expect(getValue({ fizz: 'buzz' })).toEqual('buzz')
   })
-
-  it('should use supplied item if cannot find path', () => {
-    const wrapper = mount(VSelectList)
-    const getPropertyFromItem = wrapper.vm.getPropertyFromItem
-
-    expect(getPropertyFromItem({ foo: true }, 'foo.bar')).toEqual({ foo: true })
-    expect(getPropertyFromItem({ foo: { bar: true }}, 'foo.bar')).toBe(true)
-  })
 })
