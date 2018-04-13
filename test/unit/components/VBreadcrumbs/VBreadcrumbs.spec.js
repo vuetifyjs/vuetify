@@ -30,6 +30,23 @@ test('VBreadcrumbs.js', ({ mount, compileToFunctions }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should have only three dividers', () => {
+    const { render } = compileToFunctions(`
+      <v-breadcrumbs>
+        <v-breadcrumbs-item v-for="i in 4" :key="i"/>
+      </v-breadcrumbs>
+    `)
+    const component = Vue.component('test', {
+      components: {
+        VBreadcrumbs, VBreadcrumbsItem
+      },
+      render
+    })
+    const wrapper = mount(component)
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it('should use a custom divider slot', () => {
     const { render } = compileToFunctions(`
       <v-breadcrumbs>
