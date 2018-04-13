@@ -7,6 +7,38 @@ exports[`VBreadcrumbs.js should have breadcrumbs classes 1`] = `
 
 `;
 
+exports[`VBreadcrumbs.js should have only three dividers 1`] = `
+
+<ul class="breadcrumbs">
+  <li>
+    <a class="breadcrumbs__item">
+    </a>
+  </li>
+  <li class="breadcrumbs__divider">
+    /
+  </li>
+  <li>
+    <a class="breadcrumbs__item">
+    </a>
+  </li>
+  <li class="breadcrumbs__divider">
+    /
+  </li>
+  <li>
+    <a class="breadcrumbs__item">
+    </a>
+  </li>
+  <li class="breadcrumbs__divider">
+    /
+  </li>
+  <li>
+    <a class="breadcrumbs__item">
+    </a>
+  </li>
+</ul>
+
+`;
+
 exports[`VBreadcrumbs.js should inject slot to children 1`] = `
 
 <ul class="breadcrumbs">
