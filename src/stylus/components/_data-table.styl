@@ -2,7 +2,7 @@
 @import '../theme'
 
 /* Theme */
-datatable($material)
+v-datatable($material)
   thead
     th.column.sortable
       i
@@ -17,8 +17,10 @@ datatable($material)
         i
           color: rgba($material.fg-color, $material.primary-text-percent)
 
-  .datatable__actions
+  .v-datatable__actions
+    background-color: $material.cards
     color: rgba($material.fg-color, $material.secondary-text-percent)
+    border-top: 1px solid rgba($material.fg-color, $material.divider-percent)
 
     &__select
       .input-group--select
@@ -28,12 +30,13 @@ datatable($material)
         .input-group__append-icon
           color: rgba($material.fg-color, $material.secondary-text-percent) !important
 
-theme(datatable, "datatable")
+theme(v-datatable, "v-datatable")
 
-.datatable
+.v-datatable
   thead
     th.column.sortable
       cursor: pointer
+      outline: 0
 
       i
         font-size: 16px
@@ -42,6 +45,7 @@ theme(datatable, "datatable")
         opacity: 0
         transition: .3s $transition.swing
 
+      &:focus,
       &:hover
         i
           opacity: .6
@@ -57,26 +61,34 @@ theme(datatable, "datatable")
             transform: rotate(-180deg)
 
 /** Actions */
-.datatable__actions
+.v-datatable__actions
   display: flex
   justify-content: flex-end
   align-items: center
   font-size: 12px
+  flex-wrap: wrap-reverse
 
-  .btn
+  .v-btn
     color: inherit
 
     &:last-of-type
-      margin-left: 18px
+      margin-left: 14px
+
+  &__range-controls
+    display: flex
+    align-items: center
+    min-height: 48px
 
   &__pagination
+    display: block
     text-align: center
-    margin: 0 26px 0 32px
+    margin: 0 32px 0 24px
 
   &__select
     display: flex
     align-items: center
     justify-content: center
+    margin-right: 14px
 
     .input-group--select
       margin: 13px 0 13px 34px
@@ -86,7 +98,7 @@ theme(datatable, "datatable")
       .input-group__selections__comma
         font-size: 12px
 
-.datatable__progress
+.v-datatable__progress
   height: auto !important
 
   tr, td, th
@@ -99,7 +111,7 @@ theme(datatable, "datatable")
       top: -2px
       margin: 0 0 -2px
 
-.datatable__expand
+.v-datatable__expand
   &-row
     border: none !important
 

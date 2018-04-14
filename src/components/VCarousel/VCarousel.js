@@ -1,4 +1,4 @@
-require('../../stylus/components/_carousel.styl')
+import '../../stylus/components/_carousel.styl'
 
 import VBtn from '../VBtn'
 import VIcon from '../VIcon'
@@ -32,7 +32,7 @@ export default {
     },
     delimiterIcon: {
       type: String,
-      default: 'fiber_manual_record'
+      default: '$vuetify.icons.delimiter'
     },
     hideControls: Boolean,
     hideDelimiters: Boolean,
@@ -41,13 +41,13 @@ export default {
       default: 6000,
       validator: value => value > 0
     },
-    leftControlIcon: {
+    nextIcon: {
       type: [Boolean, String],
-      default: 'chevron_left'
+      default: '$vuetify.icons.next'
     },
-    rightControlIcon: {
+    prevIcon: {
       type: [Boolean, String],
-      default: 'chevron_right'
+      default: '$vuetify.icons.prev'
     },
     value: Number
   },
@@ -59,12 +59,13 @@ export default {
       }
     },
     inputValue () {
-      // Evaluate items when inputValue changes to account for
-      // dynamic changing of children
+      // Evaluates items when inputValue changes to
+      // account for dynamic changing of children
 
-      this.items.forEach(i => {
-        i.open(this.items[this.inputValue].uid, this.reverse)
-      })
+      const uid = (this.items[this.inputValue] || {}).uid
+      for (let index = this.items.length; --index >= 0;) {
+        this.items[index].open(uid, this.reverse)
+      }
 
       this.$emit('input', this.inputValue)
       this.restartTimeout()
@@ -92,14 +93,14 @@ export default {
   methods: {
     genDelimiters () {
       return this.$createElement('div', {
-        staticClass: 'carousel__controls'
+        staticClass: 'v-carousel__controls'
       }, this.genItems())
     },
     genIcon (direction, icon, fn) {
       if (!icon) return null
 
       return this.$createElement('div', {
-        staticClass: `carousel__${direction}`
+        staticClass: `v-carousel__${direction}`
       }, [
         this.$createElement(VBtn, {
           props: {
@@ -108,24 +109,31 @@ export default {
             light: this.light
           },
           on: { click: fn }
-        }, [this.$createElement(VIcon, icon)])
+        }, [
+          this.$createElement(VIcon, {
+            props: { 'size': '46px' }
+          }, icon)
+        ])
       ])
     },
     genItems () {
       return this.items.map((item, index) => {
         return this.$createElement(VBtn, {
           class: {
-            'carousel__controls__item': true,
-            'carousel__controls__item--active': index === this.inputValue
+            'v-carousel__controls__item': true,
+            'v-carousel__controls__item--active': index === this.inputValue
           },
           props: {
             icon: true,
+            small: true,
             dark: this.dark || !this.light,
             light: this.light
           },
           key: index,
           on: { click: this.select.bind(this, index) }
-        }, [this.$createElement(VIcon, this.delimiterIcon)])
+        }, [this.$createElement(VIcon, {
+          props: { size: '18px' }
+        }, this.delimiterIcon)])
       })
     },
     restartTimeout () {
@@ -165,7 +173,7 @@ export default {
 
   render (h) {
     return h('div', {
-      staticClass: 'carousel',
+      staticClass: 'v-carousel',
       directives: [{
         name: 'touch',
         value: {
@@ -174,8 +182,8 @@ export default {
         }
       }]
     }, [
-      this.hideControls ? null : this.genIcon('left', this.leftControlIcon, this.prev),
-      this.hideControls ? null : this.genIcon('right', this.rightControlIcon, this.next),
+      this.hideControls ? null : this.genIcon('left', this.prevIcon, this.prev),
+      this.hideControls ? null : this.genIcon('right', this.nextIcon, this.next),
       this.hideDelimiters ? null : this.genDelimiters(),
       this.$slots.default
     ])

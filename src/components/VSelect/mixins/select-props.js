@@ -2,24 +2,21 @@ export default {
   props: {
     appendIcon: {
       type: String,
-      default: 'arrow_drop_down'
+      default: '$vuetify.icons.dropdown'
     },
     appendIconCb: Function,
+    attach: Boolean,
     auto: Boolean,
     autocomplete: Boolean,
     browserAutocomplete: {
       type: String,
-      default: 'on'
+      default: 'off'
     },
     cacheItems: Boolean,
     chips: Boolean,
     clearable: Boolean,
     combobox: Boolean,
     contentClass: String,
-    debounceSearch: {
-      type: [Number, String],
-      default: 200
-    },
     deletableChips: Boolean,
     dense: Boolean,
     editable: Boolean,
@@ -62,7 +59,15 @@ export default {
     },
     segmented: Boolean,
     singleLine: Boolean,
-    solo: Boolean,
-    tags: Boolean
+    tags: Boolean,
+    valueComparator: {
+      type: Function,
+      default: (a, b) => {
+        if (a !== Object(a)) return a === b
+        const aProps = Object.keys(a)
+        const bProps = Object.keys(b)
+        return aProps.length === bProps.length && aProps.every(propName => (a[propName] === b[propName]))
+      }
+    }
   }
 }

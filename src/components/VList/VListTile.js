@@ -1,11 +1,19 @@
+// Mixins
+import Colorable from '../../mixins/colorable'
 import Routable from '../../mixins/routable'
 import Toggleable from '../../mixins/toggleable'
+
+// Directives
 import Ripple from '../../directives/ripple'
 
 export default {
   name: 'v-list-tile',
 
-  mixins: [Routable, Toggleable],
+  mixins: [
+    Colorable,
+    Routable,
+    Toggleable
+  ],
 
   directives: {
     Ripple
@@ -14,7 +22,7 @@ export default {
   inheritAttrs: false,
 
   data: () => ({
-    proxyClass: 'list__tile--active'
+    proxyClass: 'v-list__tile--active'
   }),
 
   props: {
@@ -28,13 +36,20 @@ export default {
   },
 
   computed: {
+    listClasses () {
+      return this.disabled
+        ? 'text--disabled'
+        : this.color
+          ? this.addTextColorClassChecks()
+          : this.defaultColor
+    },
     classes () {
       return {
-        'list__tile': true,
-        'list__tile--link': this.isLink && !this.inactive,
-        'list__tile--avatar': this.avatar,
-        'list__tile--disabled': this.disabled,
-        'list__tile--active': !this.to && this.isActive,
+        'v-list__tile': true,
+        'v-list__tile--link': this.isLink && !this.inactive,
+        'v-list__tile--avatar': this.avatar,
+        'v-list__tile--disabled': this.disabled,
+        'v-list__tile--active': !this.to && this.isActive,
         [this.activeClass]: this.isActive
       }
     },
@@ -55,7 +70,8 @@ export default {
 
     data.attrs = Object.assign({}, data.attrs, this.$attrs)
 
-    return h('li', {
+    return h('div', {
+      'class': this.listClasses,
       attrs: {
         disabled: this.disabled
       },

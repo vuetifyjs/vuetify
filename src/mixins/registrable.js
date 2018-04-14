@@ -1,15 +1,21 @@
+import { consoleWarn } from '../util/console'
+
 function generateWarning (child, parent) {
-  return () => console.warn(`[Vuetify] Warn: The ${child} component must be used inside a ${parent}.`)
+  return () => consoleWarn(`The ${child} component must be used inside a ${parent}`)
 }
 
 export function inject (namespace, child, parent) {
+  const defaultImpl = child && parent ? {
+    register: generateWarning(child, parent),
+    unregister: generateWarning(child, parent)
+  } : null
+
   return {
+    name: 'registrable-inject',
+
     inject: {
       [namespace]: {
-        default: {
-          register: generateWarning(child, parent),
-          unregister: generateWarning(child, parent)
-        }
+        default: defaultImpl
       }
     }
   }
@@ -17,6 +23,8 @@ export function inject (namespace, child, parent) {
 
 export function provide (namespace) {
   return {
+    name: 'registrable-provide',
+
     methods: {
       register: null,
       unregister: null

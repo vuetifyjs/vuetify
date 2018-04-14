@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VDatePickerTitle.js should render component and match snapshot 1`] = `
+
+<div class="v-date-picker-title">
+  <div class="v-picker__title__btn v-date-picker-title__year">
+    1234
+  </div>
+  <div class="v-picker__title__btn v-date-picker-title__date active">
+    <div>
+      2005-11-01
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VDatePickerTitle.js should render component when selecting year and match snapshot 1`] = `
+
+<div class="v-date-picker-title">
+  <div class="v-picker__title__btn v-date-picker-title__year active">
+    1234
+  </div>
+  <div class="v-picker__title__btn v-date-picker-title__date">
+    <div>
+      2005-11-01
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VDatePickerTitle.js should render year icon 1`] = `
+
+<div class="v-picker__title__btn v-date-picker-title__year">
+  1234
+  <i aria-hidden="true"
+     class="v-icon theme--dark material-icons"
+  >
+    year
+  </i>
+</div>
+
+`;

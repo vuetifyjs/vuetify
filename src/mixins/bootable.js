@@ -7,12 +7,20 @@
  * Otherwise can be set manually
  */
 export default {
+  name: 'bootable',
+
   data: () => ({
     isBooted: false
   }),
 
   props: {
     lazy: Boolean
+  },
+
+  computed: {
+    hasContent () {
+      return this.isBooted || !this.lazy || this.isActive
+    }
   },
 
   watch: {
@@ -23,9 +31,7 @@ export default {
 
   methods: {
     showLazyContent (content) {
-      return (this.isBooted || !this.lazy)
-        ? content
-        : null
+      return this.hasContent ? content : null
     }
   }
 }

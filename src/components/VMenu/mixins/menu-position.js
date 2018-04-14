@@ -1,6 +1,6 @@
 /**
  * Menu position
- * 
+ *
  * @mixin
  *
  * Used for calculating an automatic position (used for VSelect)
@@ -26,20 +26,18 @@ export default {
       this.$refs.content.scrollTop = scrollTop
     },
     calcLeftAuto () {
-      const a = this.dimensions.activator
+      if (this.isAttached) return 0
 
-      return parseInt(a.left - this.defaultOffset * 2)
+      return parseInt(this.dimensions.activator.left - this.defaultOffset * 2)
     },
     calcTopAuto () {
-      if (!this.hasActivator) return this.calcTop()
-
       const selectedIndex = Array.from(this.tiles)
         .findIndex(n => n.classList.contains('list__tile--active'))
 
       if (selectedIndex === -1) {
         this.selectedIndex = null
 
-        return this.calcTop()
+        return this.computedTop
       }
 
       this.selectedIndex = selectedIndex
@@ -63,7 +61,7 @@ export default {
       offsetPadding--
 
       return (
-        this.calcTop() +
+        this.computedTop +
         offsetPadding -
         (actingIndex * (this.defaultOffset * 6))
       )

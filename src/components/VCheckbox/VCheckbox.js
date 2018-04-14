@@ -1,5 +1,5 @@
-require('../../stylus/components/_input-groups.styl')
-require('../../stylus/components/_selection-controls.styl')
+import '../../stylus/components/_input-groups.styl'
+import '../../stylus/components/_selection-controls.styl'
 
 import VIcon from '../VIcon'
 import { VFadeTransition } from '../transitions'
@@ -8,11 +8,6 @@ import Selectable from '../../mixins/selectable'
 
 export default {
   name: 'v-checkbox',
-
-  components: {
-    VFadeTransition,
-    VIcon
-  },
 
   mixins: [Rippleable, Selectable],
 
@@ -44,11 +39,11 @@ export default {
     },
     icon () {
       if (this.inputIndeterminate) {
-        return 'indeterminate_check_box'
+        return '$vuetify.icons.checkboxIndeterminate'
       } else if (this.isActive) {
-        return 'check_box'
+        return '$vuetify.icons.checkboxOn'
       } else {
-        return 'check_box_outline_blank'
+        return '$vuetify.icons.checkboxOff'
       }
     }
   },
@@ -58,7 +53,7 @@ export default {
       this.isFocused = true
       this.$emit('focus', e)
     },
-    groupBlur (e) {
+    groupBlur () {
       this.isFocused = false
       this.tabFocused = false
       this.$emit('blur', this.inputValue)
@@ -66,11 +61,11 @@ export default {
   },
 
   render (h) {
-    const transition = h('v-fade-transition', [
-      h('v-icon', {
-        staticClass: 'icon--selection-control',
+    const transition = h(VFadeTransition, [
+      h(VIcon, {
+        staticClass: 'v-icon--selection-control',
         'class': {
-          'icon--checkbox': this.icon === 'check_box'
+          'icon--checkbox': this.icon === '$vuetify.icons.checkboxOn'
         },
         key: this.icon,
         on: Object.assign({
@@ -85,7 +80,7 @@ export default {
           ? -1
           : this.internalTabIndex || this.tabindex,
         role: 'checkbox',
-        'aria-checked': this.inputIndeterminate && 'mixed' || this.isActive && 'true' || 'false',
+        'aria-checked': this.inputIndeterminate ? 'mixed' : (this.isActive ? 'true' : 'false'),
         'aria-label': this.label
       }
     }

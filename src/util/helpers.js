@@ -1,8 +1,12 @@
 export function createSimpleFunctional (c, el = 'div', name) {
   name = name || c.replace(/__/g, '-')
 
+  // TODO: remove after close
+  // https://github.com/vuetifyjs/vuetify/issues/1561
+  name = name.split('-')[0] === 'v' ? name : `v-${name}`
+
   return {
-    name: `v-${name}`,
+    name: name,
     functional: true,
 
     render: (h, { data, children }) => {
@@ -118,10 +122,11 @@ export function createRange (length) {
 
 export function getZIndex (el) {
   if (!el || el.nodeType !== Node.ELEMENT_NODE) return 0
-  var zi = document.defaultView.getComputedStyle(el).getPropertyValue('z-index')
-  if (isNaN(zi)) return getZIndex(el.parentNode)
 
-  return zi
+  const index = window.getComputedStyle(el).getPropertyValue('z-index')
+
+  if (isNaN(index)) return getZIndex(el.parentNode)
+  return index
 }
 
 const tagsToReplace = {
@@ -129,6 +134,27 @@ const tagsToReplace = {
   '<': '&lt;',
   '>': '&gt;'
 }
+
 export function escapeHTML (str) {
   return str.replace(/[&<>]/g, tag => tagsToReplace[tag] || tag)
+}
+
+export function filterObjectOnKeys (obj, keys) {
+  const filtered = {}
+
+  for (let i = 0; i < keys.length; i++) {
+    const key = keys[i]
+    if (typeof obj[key] !== 'undefined') {
+      filtered[key] = obj[key]
+    }
+  }
+
+  return filtered
+}
+
+export function filterChildren (array = [], tag) {
+  return array.filter(child => {
+    return child.componentOptions &&
+      child.componentOptions.Ctor.options.name === tag
+  })
 }

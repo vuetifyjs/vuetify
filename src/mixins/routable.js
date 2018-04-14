@@ -1,6 +1,8 @@
 import Ripple from '../directives/ripple'
 
 export default {
+  name: 'routable',
+
   directives: {
     Ripple
   },
@@ -9,13 +11,16 @@ export default {
     activeClass: String,
     append: Boolean,
     disabled: Boolean,
-    exact: Boolean,
+    exact: {
+      type: Boolean,
+      default: undefined
+    },
     exactActiveClass: String,
     href: [String, Object],
     to: [String, Object],
     nuxt: Boolean,
     replace: Boolean,
-    ripple: Boolean,
+    ripple: [Boolean, Object],
     tag: String,
     target: String
   },
@@ -32,10 +37,10 @@ export default {
         props: {},
         directives: [{
           name: 'ripple',
-          value: this.ripple || false
+          value: (this.ripple && !this.disabled) ? this.ripple : false
         }],
-        on: {
-          ...(this.$listeners || {}),
+        [this.to ? 'nativeOn' : 'on']: {
+          ...this.$listeners,
           click: this.click
         }
       }
@@ -66,7 +71,7 @@ export default {
           replace: this.replace
         })
       } else {
-        tag = this.href && 'a' || this.tag || 'a'
+        tag = (this.href && 'a') || this.tag || 'a'
 
         if (tag === 'a') {
           if (this.href) data.attrs.href = this.href

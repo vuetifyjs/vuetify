@@ -1,4 +1,4 @@
-require('../../stylus/components/_sliders.styl')
+import '../../stylus/components/_sliders.styl'
 
 import { addOnceEventListener, createRange } from '../../util/helpers'
 
@@ -6,6 +6,10 @@ import Colorable from '../../mixins/colorable'
 import Input from '../../mixins/input'
 
 import ClickOutside from '../../directives/click-outside'
+
+import { VScaleTransition } from '../transitions'
+
+import { consoleWarn } from '../../util/console'
 
 export default {
   name: 'v-slider',
@@ -150,7 +154,7 @@ export default {
 
     // Without a v-app, iOS does not work with body selectors
     this.app = document.querySelector('[data-app]') ||
-      console.warn('The v-slider component requires the presence of v-app or a non-body wrapping element with the [data-app] attribute.')
+      consoleWarn('Missing v-app or a non-body wrapping element with the [data-app] attribute', this)
   },
 
   methods: {
@@ -206,13 +210,13 @@ export default {
       } else if (e.keyCode === 35) {
         // End
         this.inputValue = parseFloat(this.max)
-      } else if (e.keyCode === 33 || e.keyCode === 34) {
+      } else /* if (e.keyCode === 33 || e.keyCode === 34) */ {
         // Page up/down
         const direction = e.keyCode === 34 ? -1 : 1
         this.inputValue = this.inputValue - direction * step * (steps > 100 ? steps / 10 : 10)
       }
     },
-    onKeyUp (e) {
+    onKeyUp () {
       this.keyPressed = 0
     },
     sliderMove (e) {
@@ -221,11 +225,11 @@ export default {
       }
     },
     genThumbLabel (h) {
-      return h('v-scale-transition', {
+      return h(VScaleTransition, {
         props: { origin: 'bottom center' }
       }, [
         h('div', {
-          staticClass: 'slider__thumb--label__container',
+          staticClass: 'v-slider__thumb--label__container',
           directives: [
             {
               name: 'show',
@@ -234,8 +238,8 @@ export default {
           ]
         }, [
           h('div', {
-            staticClass: 'slider__thumb--label',
-            'class': this.addBackgroundColorClassChecks({}, 'computedThumbColor')
+            staticClass: 'v-slider__thumb--label',
+            'class': this.addBackgroundColorClassChecks({}, this.computedThumbColor)
           }, [
             h('span', {}, this.inputValue)
           ])
@@ -256,16 +260,16 @@ export default {
     genThumbContainer (h) {
       const children = []
       children.push(h('div', {
-        staticClass: 'slider__thumb',
-        'class': this.addBackgroundColorClassChecks({}, 'computedThumbColor')
+        staticClass: 'v-slider__thumb',
+        'class': this.addBackgroundColorClassChecks({}, this.computedThumbColor)
       }))
 
       this.thumbLabel && children.push(this.genThumbLabel(h))
 
       return h('div', {
-        staticClass: 'slider__thumb-container',
+        staticClass: 'v-slider__thumb-container',
         'class': {
-          'slider__thumb-container--label': this.thumbLabel
+          'v-slider__thumb-container--label': this.thumbLabel
         },
         style: this.thumbStyles,
         on: {
@@ -276,9 +280,10 @@ export default {
       }, children)
     },
     genSteps (h) {
-      const ticks = createRange(this.numTicks + 1).map((i) => {
+      const ticks = createRange(this.numTicks + 1).map(i => {
         const span = h('span', {
-          staticClass: 'slider__tick',
+          key: i,
+          staticClass: 'v-slider__tick',
           style: {
             left: `${i * (100 / this.numTicks)}%`
           }
@@ -288,26 +293,26 @@ export default {
       })
 
       return h('div', {
-        staticClass: 'slider__ticks-container',
+        staticClass: 'v-slider__ticks-container',
         style: this.tickContainerStyles
       }, ticks)
     },
     genTrackContainer (h) {
       const children = [
         h('div', {
-          staticClass: 'slider__track',
-          'class': this.addBackgroundColorClassChecks({}, 'computedTrackColor'),
+          staticClass: 'v-slider__track',
+          'class': this.addBackgroundColorClassChecks({}, this.computedTrackColor),
           style: this.trackStyles
         }),
         h('div', {
-          staticClass: 'slider__track-fill',
+          staticClass: 'v-slider__track-fill',
           'class': this.addBackgroundColorClassChecks(),
           style: this.trackFillStyles
         })
       ]
 
       return h('div', {
-        staticClass: 'slider__track__container',
+        staticClass: 'v-slider__track__container',
         ref: 'track'
       }, children)
     }
@@ -321,7 +326,7 @@ export default {
     children.push(this.genThumbContainer(h))
 
     const slider = h('div', {
-      staticClass: 'slider'
+      staticClass: 'v-slider'
     }, children)
 
     return this.genInputGroup([slider], {
@@ -335,7 +340,8 @@ export default {
         keyup: this.onKeyUp
       }, this.$listeners),
       directives: [{
-        name: 'click-outside'
+        name: 'click-outside',
+        value: () => (this.isActive = false)
       }]
     })
   }

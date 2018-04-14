@@ -10,8 +10,8 @@ export default {
   }),
 
   render (h) {
-    return h('li', {
-      staticClass: 'tabs__slider',
+    return h('div', {
+      staticClass: 'v-tabs__slider',
       class: this.addBackgroundColorClassChecks()
     })
   }

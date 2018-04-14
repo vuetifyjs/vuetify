@@ -1,0 +1,44 @@
+@import '../bootstrap'
+@import '../theme'
+
+v-jumbotron($material)
+  &__content
+    color: $material.text.primary
+
+theme(v-jumbotron, 'v-jumbotron')
+
+.v-jumbotron
+  display: block
+  top: 0
+  transition: .3s $transition.swing
+  width: 100%
+  
+  &__wrapper
+    height: 100%
+    overflow: hidden
+    position: relative
+    transition: inherit
+    width: 100%
+
+  &__background
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    contain: strict
+    transition: inherit
+
+  &__image
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+    min-width: 100%
+    will-change: transform
+    transition: inherit
+
+  &__content
+    height: 100%
+    position: relative
+    transition: inherit

@@ -1,7 +1,8 @@
-require('../../stylus/components/_button-toggle.styl')
+import '../../stylus/components/_button-toggle.styl'
 
 import ButtonGroup from '../../mixins/button-group'
 import Themeable from '../../mixins/themeable'
+import { consoleWarn } from '../../util/console'
 
 export default {
   name: 'v-btn-toggle',
@@ -17,10 +18,6 @@ export default {
     inputValue: {
       required: false
     },
-    items: {
-      type: Array,
-      default: () => []
-    },
     mandatory: Boolean,
     multiple: Boolean
   },
@@ -28,8 +25,8 @@ export default {
   computed: {
     classes () {
       return {
-        'btn-toggle': true,
-        'btn-toggle--selected': this.hasValue,
+        'v-btn-toggle': true,
+        'v-btn-toggle--selected': this.hasValue,
         'theme--light': this.light,
         'theme--dark': this.dark
       }
@@ -77,12 +74,27 @@ export default {
       }
 
       this.$emit('change', items)
+    },
+    updateAllValues () {
+      if (!this.multiple) return
+
+      const items = []
+
+      for (let i = 0; i < this.buttons.length; ++i) {
+        const item = this.getValue(i)
+        const index = this.inputValue.indexOf(item)
+        if (index !== -1) {
+          items.push(item)
+        }
+      }
+
+      this.$emit('change', items)
     }
   },
 
-  mounted () {
-    if (this.items.length > 0) {
-      console.warn('The \'items\' props has been deprecated. v-btn-toggle now has a default slot where you can place buttons.')
+  created () {
+    if (this.multiple && !Array.isArray(this.inputValue)) {
+      consoleWarn('Model must be bound to an array if the multiple property is true.', this)
     }
   },
 

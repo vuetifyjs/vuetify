@@ -1,8 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`VListTileAction.js should render component and match snapshot 1`] = `
-
-<div class="list__tile__action">
-</div>
-
-`;

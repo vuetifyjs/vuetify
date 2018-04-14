@@ -1,40 +1,32 @@
 @import '../bootstrap'
 @import '../theme'
 
-footer($material)
+v-footer($material)
   background: $material.app-bar
-  
-theme(footer, "footer")
+  color: $material.text.primary
 
-.footer
+theme(v-footer, "v-footer")
+
+.v-footer
   align-items: center
   display: flex
   flex: 0 1 auto !important // Don't let devs break their code
   min-height: $footer-height
   transition: .2s $transition.fast-out-slow-in
 
-  &--absolute, &--fixed
+  &--absolute,
+  &--fixed
     bottom: 0
     left: 0
     width: 100%
     z-index: 3
+
+  &--inset
+    z-index: 2
 
   &--absolute
     position: absolute
 
   &--fixed
     position: fixed
-
-  > *:first-child
-    margin-left: $grid-gutters.md
-
-  > *:last-child
-    margin-right: $grid-gutters.md
-
-  @media $display-breakpoints.xs-only
-    > *:first-child
-      margin-left: $grid-gutters.lg
-
-    > *:last-child
-      margin-right: $grid-gutters.lg
 

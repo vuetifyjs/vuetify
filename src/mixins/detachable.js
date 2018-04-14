@@ -1,16 +1,40 @@
 import Bootable from './bootable'
+import { consoleWarn } from '../util/console'
+
+function validateAttachTarget (val) {
+  const type = typeof val
+
+  if (type === 'boolean' || type === 'string') return true
+
+  return val.nodeType === Node.ELEMENT_NODE
+}
 
 export default {
+  name: 'detachable',
+
   mixins: [Bootable],
 
+  data: () => ({
+    hasDetached: false
+  }),
+
   props: {
+    attach: {
+      type: null,
+      default: false,
+      validator: validateAttachTarget
+    },
     contentClass: {
       default: ''
     }
   },
 
+  watch: {
+    hasContent: 'initDetach'
+  },
+
   mounted () {
-    this.initDetach()
+    !this.lazy && this.initDetach()
   },
 
   deactivated () {
@@ -23,26 +47,44 @@ export default {
     // IE11 Fix
     try {
       this.$refs.content.parentNode.removeChild(this.$refs.content)
-    } catch (e) {}
+    } catch (e) { console.log(e) }
   },
 
   methods: {
     initDetach () {
-      if (this._isDestroyed) return
+      if (this._isDestroyed ||
+        !this.$refs.content ||
+        this.hasDetached ||
+        // Leave menu in place if attached
+        // and dev has not changed target
+        this.attach === '' || // If used as a boolean prop (<v-menu attach>)
+        this.attach === true || // If bound to a boolean (<v-menu :attach="true">)
+        this.attach === 'attach' // If bound as boolean prop in pug (v-menu(attach))
+      ) return
 
-      const app = document.querySelector('[data-app]')
-
-      if (!app) {
-        return console.warn('Application is missing <v-app> component.')
+      let target
+      if (this.attach === false) {
+        // Default, detach to app
+        target = document.querySelector('[data-app]')
+      } else if (typeof this.attach === 'string') {
+        // CSS selector
+        target = document.querySelector(this.attach)
+      } else {
+        // DOM Element
+        target = this.attach
       }
 
-      // If child has already been removed, bail
-      if (!this.$refs.content) return
+      if (!target) {
+        consoleWarn(`Unable to locate target ${this.attach || '[data-app]'}`, this)
+        return
+      }
 
-      app.insertBefore(
+      target.insertBefore(
         this.$refs.content,
-        app.firstChild
+        target.firstChild
       )
+
+      this.hasDetached = true
     }
   }
 }

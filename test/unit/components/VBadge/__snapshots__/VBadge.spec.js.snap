@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VBadge.js should render component and match snapshot 1`] = `
+
+<span class="v-badge">
+  <span>
+    element
+  </span>
+  <span class="v-badge__badge primary">
+    <span>
+      content
+    </span>
+  </span>
+</span>
+
+`;
+
+exports[`VBadge.js should render component with with value=false and match snapshot 1`] = `
+
+<span class="v-badge">
+  <span>
+    element
+  </span>
+  <span class="v-badge__badge primary"
+        style="display: none;"
+  >
+    <span>
+      content
+    </span>
+  </span>
+</span>
+
+`;

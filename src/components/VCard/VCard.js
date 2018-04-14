@@ -1,4 +1,4 @@
-require('../../stylus/components/_cards.styl')
+import '../../stylus/components/_cards.styl'
 
 import Colorable from '../../mixins/colorable'
 import Routable from '../../mixins/routable'
@@ -22,18 +22,19 @@ export default {
       type: String,
       default: 'div'
     },
-    tile: Boolean
+    tile: Boolean,
+    width: [String, Number]
   },
 
   computed: {
     classes () {
       return this.addBackgroundColorClassChecks({
-        'card': true,
-        'card--flat': this.flat,
-        'card--horizontal': this.horizontal,
-        'card--hover': this.hover,
-        'card--raised': this.raised,
-        'card--tile': this.tile,
+        'v-card': true,
+        'v-card--flat': this.flat,
+        'v-card--horizontal': this.horizontal,
+        'v-card--hover': this.hover,
+        'v-card--raised': this.raised,
+        'v-card--tile': this.tile,
         'theme--light': this.light,
         'theme--dark': this.dark
       })
@@ -45,6 +46,10 @@ export default {
 
       if (this.img) {
         style.background = `url("${this.img}") center center / cover no-repeat`
+      }
+
+      if (this.width) {
+        style.width = isNaN(this.width) ? this.width : `${this.width}px`
       }
 
       return style

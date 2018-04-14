@@ -1,21 +1,21 @@
-require('../../stylus/components/_badges.styl')
+import '../../stylus/components/_badges.styl'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
 import Toggleable from '../../mixins/toggleable'
+import { factory as PositionableFactory } from '../../mixins/positionable'
+import Transitionable from '../../mixins/transitionable'
 
 export default {
   name: 'v-badge',
 
-  mixins: [Colorable, Toggleable],
+  mixins: [Colorable, Toggleable, PositionableFactory(['left', 'bottom']), Transitionable],
 
   props: {
-    bottom: Boolean,
     color: {
       type: String,
       default: 'primary'
     },
-    left: Boolean,
     overlap: Boolean,
     transition: {
       type: String,
@@ -29,16 +29,16 @@ export default {
   computed: {
     classes () {
       return {
-        'badge--bottom': this.bottom,
-        'badge--left': this.left,
-        'badge--overlap': this.overlap
+        'v-badge--bottom': this.bottom,
+        'v-badge--left': this.left,
+        'v-badge--overlap': this.overlap
       }
     }
   },
 
   render (h) {
     const badge = this.$slots.badge ? [h('span', {
-      staticClass: 'badge__badge',
+      staticClass: 'v-badge__badge',
       'class': this.addBackgroundColorClassChecks(),
       attrs: this.attrs,
       directives: [{
@@ -48,13 +48,15 @@ export default {
     }, this.$slots.badge)] : null
 
     return h('span', {
-      staticClass: 'badge',
+      staticClass: 'v-badge',
       'class': this.classes
     }, [
       this.$slots.default,
       h('transition', {
         props: {
-          name: this.transition
+          name: this.transition,
+          origin: this.origin,
+          mode: this.mode
         }
       }, badge)
     ])

@@ -12,6 +12,12 @@ export default {
       this.$refs.menu && this.$refs.menu.updateDimensions()
     },
     inputValue (val) {
+      // Search for an existing item when a
+      // value was selected from the menu
+      if (this.combobox && this.isNotFiltering) {
+        val = this.findExistingItem(val)
+      }
+
       // Populate selected items
       this.genSelectedItems(val)
 
@@ -37,6 +43,10 @@ export default {
 
       if (this.tags && this.searchValue) {
         this.updateTags(this.searchValue)
+      }
+
+      if (this.combobox && this.lazySearch && !this.isNotFiltering) {
+        this.inputValue = this.lazySearch
       }
 
       // Only set search value if
@@ -88,24 +98,25 @@ export default {
       // Activate menu if inactive and searching
       if (this.isActive &&
         !this.menuIsActive &&
-        val !== this.getValue(this.selectedItem)
+        val !== this.getText(this.selectedItem)
       ) {
         this.menuIsActive = true
       }
 
       // Only reset list index
       // if typing in search
-      val || prev && this.resetMenuIndex()
+      !val && prev && this.resetMenuIndex()
 
       this.$nextTick(() => {
         if (val && !this.isAnyValueAllowed) {
           this.setMenuIndex(0)
         }
+        if (val !== null && this.selectedIndex > -1) {
+          this.selectedIndex = -1
+        }
       })
     },
     selectedItems () {
-      clearTimeout(this.searchTimeout)
-
       if (this.isAutocomplete) {
         this.$nextTick(this.$refs.menu.updateDimensions)
       }
