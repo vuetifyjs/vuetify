@@ -30,8 +30,11 @@ declare module 'vuetify/src/util/helpers' {
   }
   export function directiveConfig (binding: BindingConfig, defaults: object): VNodeDirective
   export function addOnceEventListener (el: EventTarget, event: string, cb: () => void): void
-  export function getObjectValueByPath (obj: object, path: string): any
+  export function getNestedValue (obj: object | Array<any>, path: Array<string | number>, fallback?: any): any
+  export function getObjectValueByPath (obj: object, path: string, fallback?: any): any
+  export function getPropertyFromItem (item: object, property: string | Array<string | number> | ((item: object, fallback?: any) => any), fallback?: any): any
   export function createRange (length: number): number[]
   export function getZIndex (el: Element): number
   export function escapeHTML (str: string): string
+  export function deepEqual (a: any, b: any): boolean
 }

@@ -98,6 +98,51 @@ test('VRadioGroup.vue', ({ mount }) => {
     expect(two.vm.isActive).toBe(false)
   })
 
+  it('should toggle radio - objects', async () => {
+    const stub = value => ({
+      extends: VRadio,
+      props: {
+        value: {
+          default: value
+        }
+      }
+    })
+    const wrapper = mount(VRadioGroup, {
+      attachToDocument: true,
+      slots: {
+        default: [stub(() => ({a: 1})), stub(() => ({b: 2}))]
+      }
+    })
+
+    expect(wrapper.vm.radios.length).toBe(2)
+
+    const radios = wrapper.find(VRadio)
+    const one = radios[0]
+    const two = radios[1]
+
+    expect(wrapper.vm.internalValue).toBe(undefined)
+    expect(one.vm.isActive).toBe(false)
+    expect(two.vm.isActive).toBe(false)
+
+    wrapper.setProps({ value: {a: 1} })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.internalValue).toEqual({a: 1})
+    expect(one.vm.isActive).toBe(true)
+    expect(two.vm.isActive).toBe(false)
+
+    wrapper.setProps({ value: {b: 2} })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.internalValue).toEqual({b: 2})
+    expect(one.vm.isActive).toBe(false)
+    expect(two.vm.isActive).toBe(true)
+
+    wrapper.setProps({ value: {a: 1, b: 2} })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.internalValue).toEqual({a: 1, b: 2})
+    expect(one.vm.isActive).toBe(false)
+    expect(two.vm.isActive).toBe(false)
+  })
+
   it('should change selected radio', async () => {
     const wrapper = mount(VRadioGroup, {
       attachToDocument: true,

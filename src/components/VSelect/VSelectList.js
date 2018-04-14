@@ -18,7 +18,7 @@ import Themeable from '../../mixins/themeable'
 // Helpers
 import {
   escapeHTML,
-  getObjectValueByPath
+  getPropertyFromItem
 } from '../../util/helpers'
 
 export default {
@@ -37,19 +37,19 @@ export default {
       default: () => []
     },
     itemAvatar: {
-      type: String,
+      type: [String, Array, Function],
       default: 'avatar'
     },
     itemDisabled: {
-      type: String,
+      type: [String, Array, Function],
       default: 'disabled'
     },
     itemText: {
-      type: String,
+      type: [String, Array, Function],
       default: 'text'
     },
     itemValue: {
-      type: String,
+      type: [String, Array, Function],
       default: 'value'
     },
     noDataText: String,
@@ -119,13 +119,13 @@ export default {
     },
     genTile (
       item,
-      disabled,
+      disabled = null,
       avatar = false,
       value = this.selectedItems.indexOf(item) !== -1
     ) {
       if (item === Object(item)) {
-        avatar = !!this.getAvatar(item)
-        disabled = disabled != null
+        avatar = this.getAvatar(item)
+        disabled = disabled !== null
           ? disabled
           : this.getDisabled(item)
       }
@@ -171,23 +171,16 @@ export default {
         tile.componentOptions.Ctor.options.name !== 'v-list-tile'
     },
     getAvatar (item) {
-      return getObjectValueByPath(item, this.itemAvatar)
+      return Boolean(getPropertyFromItem(item, this.itemAvatar, false))
     },
     getDisabled (item) {
-      return getObjectValueByPath(item, this.itemDisabled)
+      return Boolean(getPropertyFromItem(item, this.itemDisabled, false))
     },
     getText (item) {
-      return this.getPropertyFromItem(item, this.itemText)
+      return (getPropertyFromItem(item, this.itemText, item) || '').toString()
     },
     getValue (item) {
-      return this.getPropertyFromItem(item, this.itemValue)
-    },
-    getPropertyFromItem (item, field) {
-      if (item !== Object(item)) return item
-
-      const value = getObjectValueByPath(item, field)
-
-      return typeof value === 'undefined' ? item : value
+      return getPropertyFromItem(item, this.itemValue, item)
     }
   },
 

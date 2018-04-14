@@ -557,4 +557,24 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     expect(clearIconCb).toBeCalled()
   })
+
+  it('should populate select[multiple=false] when using value as an object', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        items: [
+          { text: 'foo', value: { id: { subid: 1 } } },
+          { text: 'foo', value: { id: { subid: 2 } } }
+        ],
+        multiple: false,
+        value: { id: { subid: 2 } }
+      }
+    })
+
+    await wrapper.vm.$nextTick()
+
+    const selections = wrapper.find('.v-select__selection')
+
+    expect(selections.length).toEqual(1)
+  })
 })

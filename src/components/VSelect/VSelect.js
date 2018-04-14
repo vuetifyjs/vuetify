@@ -20,7 +20,7 @@ import Menuable from '../../mixins/menuable'
 import ClickOutside from '../../directives/click-outside'
 
 // Helpers
-import { getObjectValueByPath } from '../../util/helpers'
+import { getPropertyFromItem } from '../../util/helpers'
 
 export default {
   name: 'v-select',
@@ -72,19 +72,19 @@ export default {
       default: () => []
     },
     itemAvatar: {
-      type: String,
+      type: [String, Array, Function],
       default: 'avatar'
     },
     itemDisabled: {
-      type: String,
+      type: [String, Array, Function],
       default: 'disabled'
     },
     itemText: {
-      type: String,
+      type: [String, Array, Function],
       default: 'text'
     },
     itemValue: {
-      type: String,
+      type: [String, Array, Function],
       default: 'value'
     },
     maxHeight: {
@@ -105,16 +105,7 @@ export default {
     },
     segmented: Boolean,
     singleLine: Boolean,
-    tags: Boolean,
-    valueComparator: {
-      type: Function,
-      default: (a, b) => {
-        if (a !== Object(a)) return a === b
-        const aProps = Object.keys(a)
-        const bProps = Object.keys(b)
-        return aProps.length === bProps.length && aProps.every(propName => (a[propName] === b[propName]))
-      }
-    }
+    tags: Boolean
   },
 
   computed: {
@@ -162,7 +153,7 @@ export default {
 
       let selectedItems = this.computedItems.filter(i => {
         if (!this.multiple) {
-          return this.getValue(i) === this.getValue(val)
+          return this.valueComparator(this.getValue(i), this.getValue(val))
         } else {
           // Always return Boolean
           return this.findExistingIndex(i, this.internalValue) > -1
@@ -226,6 +217,7 @@ export default {
         const item = arr[index]
         const val = this.getValue(item)
 
+        // TODO: comparator
         !uniqueValues.has(val) && uniqueValues.set(val, item)
       }
       return Array.from(uniqueValues.values())
@@ -281,6 +273,7 @@ export default {
     },
     genCommaSelection (item, index, last) {
       // Item may be an object
+      // TODO: Remove JSON.stringify
       const key = JSON.stringify(this.getValue(item))
 
       return this.$createElement('div', {
@@ -316,7 +309,11 @@ export default {
           items: this.items,
           light: this.light,
           noDataText: this.noDataText,
-          selectedItems: this.selectedItems
+          selectedItems: this.selectedItems,
+          itemAvatar: this.itemAvatar,
+          itemDisabled: this.itemDisabled,
+          itemValue: this.itemValue,
+          itemText: this.itemText
         },
         on: {
           select: this.selectItem
@@ -382,17 +379,10 @@ export default {
       return children
     },
     getText (item) {
-      return this.getPropertyFromItem(item, this.itemText)
+      return getPropertyFromItem(item, this.itemText, item)
     },
     getValue (item) {
-      return this.getPropertyFromItem(item, this.itemValue)
-    },
-    getPropertyFromItem (item, field) {
-      if (item !== Object(item)) return item
-
-      const value = getObjectValueByPath(item, field)
-
-      return typeof value === 'undefined' ? item : value
+      return getPropertyFromItem(item, this.itemValue, item)
     },
     // Ignore default onBlur
     onBlur () {},

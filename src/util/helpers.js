@@ -99,21 +99,63 @@ export function addOnceEventListener (el, event, cb) {
   el.addEventListener(event, once, false)
 }
 
-export function getObjectValueByPath (obj, path) {
+export function getNestedValue (obj, path, fallback) {
+  const last = path.length - 1
+
+  if (last < 0) return obj === undefined ? fallback : obj
+
+  for (let i = 0; i < last; i++) {
+    if (obj == null) {
+      return fallback
+    }
+    obj = obj[path[i]]
+  }
+
+  if (obj == null) return fallback
+
+  return obj[path[last]] === undefined ? fallback : obj[path[last]]
+}
+
+export function deepEqual (a, b) {
+  if (a === b) return true
+
+  if (a !== Object(a) || b !== Object(b)) {
+    // If the values aren't objects, they were already checked for equality
+    return false
+  }
+
+  const props = Object.keys(a)
+
+  if (props.length !== Object.keys(b).length) {
+    // Different number of props, don't bother to check
+    return false
+  }
+
+  return props.every(p => deepEqual(a[p], b[p]))
+}
+
+export function getObjectValueByPath (obj, path, fallback) {
   // credit: http://stackoverflow.com/questions/6491463/accessing-nested-javascript-objects-with-string-key#comment55278413_6491621
-  if (!path || path.constructor !== String) return
+  if (!path || path.constructor !== String) return fallback
   path = path.replace(/\[(\w+)\]/g, '.$1') // convert indexes to properties
   path = path.replace(/^\./, '') // strip a leading dot
-  const a = path.split('.')
-  for (var i = 0, n = a.length; i < n; ++i) {
-    var k = a[i]
-    if (obj instanceof Object && k in obj) {
-      obj = obj[k]
-    } else {
-      return
-    }
-  }
-  return obj
+  return getNestedValue(obj, path.split('.'), fallback)
+}
+
+export function getPropertyFromItem (item, property, fallback) {
+  if (property == null) return item === undefined ? fallback : item
+
+  if (item !== Object(item)) return fallback === undefined ? item : fallback
+
+  if (property.constructor === String) return getObjectValueByPath(item, property, fallback)
+
+  if (Array.isArray(property)) return getNestedValue(item, property, fallback)
+
+  if (typeof property !== 'function') return fallback
+
+  const value = property(item, fallback)
+
+  return typeof value === 'undefined' ? fallback : value
 }
 
 export function createRange (length) {

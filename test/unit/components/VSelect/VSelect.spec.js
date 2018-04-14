@@ -293,4 +293,71 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.isMenuActive).toBe(false)
   })
+
+  it('can use itemValue as function', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        multiple: true,
+        items: [
+          {text: 'one', v1: "prop v1"},
+          {text: 'two', v2: "prop v2"},
+          {text: 'three', v1: "also prop v1"}
+        ],
+        itemText: 'text',
+        itemValue: item => item.hasOwnProperty('v1') ? item.v1 : item.v2,
+        value: ["prop v1", "prop v2"]
+      }
+    })
+
+    expect(wrapper.vm.selectedItems).toHaveLength(2)
+    expect(wrapper.vm.getValue(wrapper.vm.selectedItems[0])).toBe("prop v1")
+    expect(wrapper.vm.getValue(wrapper.vm.selectedItems[1])).toBe("prop v2")
+  })
+
+  it('should work correctly with return-object', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        multiple: false,
+        returnObject: true,
+        items: [
+          {text: 'one', value: {x: [1, 2], y: ["a", "b"]}},
+          {text: 'two', value: {x: [3, 4], y: ["a", "b"]}},
+          {text: 'three', value: {x: [1, 2], y: ["a", "c"]}}
+        ],
+        itemText: 'text',
+        itemValue: 'value',
+        value: {text: 'two', value: {x: [3, 4], y: ["a", "b"]}}
+      }
+    })
+
+    expect(wrapper.vm.selectedItems).toHaveLength(1)
+    expect(wrapper.vm.internalValue).toEqual({text: 'two', value: {x: [3, 4], y: ["a", "b"]}})
+  })
+
+  it('should work correctly with return-object [multiple]', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        multiple: true,
+        returnObject: true,
+        items: [
+          {text: 'one', value: {x: [1, 2], y: ["a", "b"]}},
+          {text: 'two', value: {x: [3, 4], y: ["a", "b"]}},
+          {text: 'three', value: {x: [1, 2], y: ["a", "c"]}}
+        ],
+        itemText: 'text',
+        itemValue: 'value',
+        value: [
+          {text: 'two', value: {x: [3, 4], y: ["a", "b"]}},
+          {text: 'one', value: {x: [1, 2], y: ["a", "b"]}}
+        ]
+      }
+    })
+
+    expect(wrapper.vm.selectedItems).toHaveLength(2)
+    expect(wrapper.vm.internalValue[0]).toEqual({text: 'two', value: {x: [3, 4], y: ["a", "b"]}})
+    expect(wrapper.vm.internalValue[1]).toEqual({text: 'one', value: {x: [1, 2], y: ["a", "b"]}})
+  })
 })
