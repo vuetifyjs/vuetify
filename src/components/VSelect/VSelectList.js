@@ -53,6 +53,7 @@ export default {
       default: 'value'
     },
     noDataText: String,
+    searchInput: String,
     selectedItems: {
       type: Array,
       default: () => []
@@ -88,8 +89,33 @@ export default {
     genDivider (props) {
       return this.$createElement(VDivider, { props })
     },
+    genFilteredText (text) {
+      text = (text || '').toString()
+
+      if (!this.searchInput) return escapeHTML(text)
+
+      const { start, middle, end } = this.getMaskedCharacters(text)
+
+      return `${escapeHTML(start)}${this.genHighlight(middle)}${escapeHTML(end)}`
+    },
     genHeader (props) {
       return this.$createElement(VSubheader, { props }, props.header)
+    },
+    genHighlight (text) {
+      if (this.isNotFiltering) return escapeHTML(text)
+
+      return `<span class="v-list__tile__mask">${escapeHTML(text)}</span>`
+    },
+    getMaskedCharacters (text) {
+      const searchInput = (this.searchInput || '').toString().toLowerCase()
+      const index = text.toLowerCase().indexOf(searchInput)
+
+      if (index < 0) return { start: '', middle: text, end: '' }
+
+      const start = text.slice(0, index)
+      const middle = text.slice(index, index + searchInput.length)
+      const end = text.slice(index + searchInput.length)
+      return { start, middle, end }
     },
     genTile (
       item,
@@ -132,7 +158,8 @@ export default {
         : scopedSlot
     },
     genTileContent (item) {
-      const innerHTML = escapeHTML((this.getText(item) || '').toString())
+      const innerHTML = this.genFilteredText(this.getText(item))
+
       return this.$createElement(VListTileContent,
         [this.$createElement(VListTileTitle, {
           domProps: { innerHTML }

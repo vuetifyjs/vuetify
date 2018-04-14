@@ -404,7 +404,9 @@ export default {
         this.isMenuActive = true
       }
 
-      this.changeSelectedIndex(e.keyCode)
+      if (this.chips || this.multiple) {
+        this.changeSelectedIndex(e.keyCode)
+      }
     },
     onClick () {
       if (this.isDisabled) return
