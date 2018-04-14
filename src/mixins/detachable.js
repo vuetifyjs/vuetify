@@ -1,4 +1,5 @@
 import Bootable from './bootable'
+import { consoleWarn } from '../util/console'
 
 function validateAttachTarget (val) {
   const type = typeof val
@@ -9,11 +10,17 @@ function validateAttachTarget (val) {
 }
 
 export default {
+  name: 'detachable',
+
   mixins: [Bootable],
+
+  data: () => ({
+    hasDetached: false
+  }),
 
   props: {
     attach: {
-      type: [Boolean, String, Object],
+      type: null,
       default: false,
       validator: validateAttachTarget
     },
@@ -22,8 +29,12 @@ export default {
     }
   },
 
+  watch: {
+    hasContent: 'initDetach'
+  },
+
   mounted () {
-    this.initDetach()
+    !this.lazy && this.initDetach()
   },
 
   deactivated () {
@@ -36,13 +47,14 @@ export default {
     // IE11 Fix
     try {
       this.$refs.content.parentNode.removeChild(this.$refs.content)
-    } catch (e) {}
+    } catch (e) { console.log(e) }
   },
 
   methods: {
     initDetach () {
       if (this._isDestroyed ||
         !this.$refs.content ||
+        this.hasDetached ||
         // Leave menu in place if attached
         // and dev has not changed target
         this.attach === '' || // If used as a boolean prop (<v-menu attach>)
@@ -63,13 +75,16 @@ export default {
       }
 
       if (!target) {
-        return console.warn(`Unable to locate target ${this.attach || '[data-app]'}`)
+        consoleWarn(`Unable to locate target ${this.attach || '[data-app]'}`, this)
+        return
       }
 
       target.insertBefore(
         this.$refs.content,
         target.firstChild
       )
+
+      this.hasDetached = true
     }
   }
 }

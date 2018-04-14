@@ -4,9 +4,7 @@ import Validatable from './validatable'
 import VIcon from '../components/VIcon'
 
 export default {
-  components: {
-    VIcon
-  },
+  name: 'input',
 
   mixins: [Loadable, Themeable, Validatable],
 
@@ -69,8 +67,8 @@ export default {
   },
 
   methods: {
-    groupFocus (e) {},
-    groupBlur (e) {
+    groupFocus () {},
+    groupBlur () {
       this.tabFocused = false
     },
     genLabel () {
@@ -83,11 +81,10 @@ export default {
     genMessages () {
       let messages = null
 
-      if ((this.hint &&
-            this.isFocused ||
-            this.hint &&
-            this.persistentHint) &&
-          this.validations.length === 0
+      if (
+        this.hint &&
+        (this.isFocused || this.persistentHint) &&
+        !this.validations.length
       ) {
         messages = [this.genHint()]
       } else if (this.validations.length) {
@@ -117,12 +114,12 @@ export default {
     },
     genIcon (type, defaultCallback = null) {
       const shouldClear = type === 'append' && this.clearable && this.isDirty
-      const icon = shouldClear ? 'clear' : this[`${type}Icon`]
+      const icon = shouldClear ? '$vuetify.icons.clear' : this[`${type}Icon`]
       const callback = shouldClear
         ? this.clearableCallback
         : (this[`${type}IconCb`] || defaultCallback)
 
-      return this.$createElement('v-icon', {
+      return this.$createElement(VIcon, {
         'class': {
           [`input-group__${type}-icon`]: true,
           'input-group__icon-cb': !!callback,

@@ -1,6 +1,8 @@
 
 <p align="center">
-  <a href="https://vuetifyjs.com" target="_blank"><img width="100"src="https://vuetifyjs.com/static/doc-images/logo.svg"></a>
+  <a href="https://vuetifyjs.com" target="_blank">
+    <img width="100"src="https://vuetifyjs.com/static/doc-images/logo.svg">
+  </a>
 </p>
 
 <p align="center">
@@ -23,8 +25,8 @@
   <a href="https://app.zenhub.com/workspace/o/vuetifyjs/vuetify/boards">
     <img src="https://img.shields.io/badge/Managed_with-ZenHub-5e60ba.svg" alt="zenhub">
   </a>
-  <a href="https://chat.vuetifyjs.com">
-    <img src="https://img.shields.io/badge/chat-on%20discord-7289da.svg" alt="Chat">
+  <a href="https://community.vuetifyjs.com">
+    <img src="https://discordapp.com/api/guilds/340160225338195969/widget.png" alt="Chat">
   </a>
   <br>
   <a href="https://www.npmjs.com/package/vuetify">
@@ -34,7 +36,9 @@
     <img src="https://img.shields.io/cdnjs/v/vuetify.svg" alt="CDN">
   </a>
 </p>
-<br><br>
+
+<br>
+
 <h2 align="center">Supporting Vuetify</h2>
 <p>Vuetify is an open source MIT project that has been made possible due to the generous contributions by <a href="https://github.com/vuetifyjs/vuetify/blob/dev/BACKERS.md">community backers</a>. If you are interested in supporting this project, please consider becoming a patron.</p>
 
@@ -44,7 +48,7 @@
   </a>
 </p>
 
-<br><br>
+<br>
 <h3 align="center">Patrons</h3>
 
 <h4 align="center">Diamond</h4>
@@ -52,9 +56,12 @@
 <p align="center">
   <a href="https://careers.lmax.com/?utm_source=vuetify&utm_medium=github-link&utm_campaign=lmax-careers">
     <img height="70px" src="https://vuetifyjs.com/static/doc-images/backers/lmax-exchange.png">
-  </a>
+  </a><br>
   <a href="http://intygrate.com/?ref=vuetify-github">
     <img height="70px" src="https://vuetifyjs.com/static/doc-images/backers/intygrate.png">
+  </a><br>
+  <a href="http://resaleai.com/?ref=vuetify-github">
+    <img height="70px" src="https://vuetifyjs.com/static/doc-images/backers/resaleai_logo_blue.svg">
   </a>
 </p>
 
@@ -70,24 +77,32 @@
   <a href="http://quitt.ch/?ref=vuetify-github">
     <img height="40px" src="https://vuetifyjs.com/static/doc-images/backers/quitt.png">
   </a>
+  <a href="http://www.clearbluetechnologies.com/?ref=vuetify-github">
+    <img height="40px" src="https://vuetifyjs.com/static/doc-images/backers/clear-blue.png">
+  </a>
 </p>
 
-<h2>Introduction</h2>
+<br>
 
-<p>Vuetify is a semantic component framework for Vue. It aims to provide clean, semantic and reusable components that make building your application a breeze.</p>
+## Introduction
 
-<p>Build <i>amazing</i> applications with the power of Vue and Material Design and a massive library of beautifully crafted components. Created according to Google's <strong><a href="https://material.io/" target="_blank">Material Design Spec</a></strong>, Vuetify components feature an easy-to-remember semantic design that shifts remembering complex classes and markup, to type-as-you speak properties that have simple and clear names.</p>
+Vuetify is a semantic component framework for Vue. It aims to provide clean, semantic and reusable components that make building your application a breeze.
 
-<p>Harness the power of the <a href="https://chat.vuetifyjs.com">Vuetify community</a> and get help 24/7 from talented developers across the world, the dev team and the creator, John Leider. Become a <a href="https://www.patreon.com/vuetify">patreon backer</a> and get access to special Patreon only channels.</p>
-  
-<p>Vuetify supports all <strong>modern browsers</strong>, including IE11 and Safari 9+. From mobile to laptop to desktop, you can rest assured that your application will work as expected. Interested in the bleeding edge? Try the vue-cli Webpack SSR (Server side rendered) template and build websites optimized for SEO.</p>
+Build *amazing* applications with the power of Vue and Material Design and a massive library of beautifully crafted components. Created according to Google's **<a href="https://material.io/" target="_blank">Material Design Spec</a>**, Vuetify components feature an easy-to-remember semantic design that shifts remembering complex classes and markup, to type-as-you speak properties that have simple and clear names.
 
-<h2>Demo and Documentation</h2>
+Harness the power of the [Vuetify community](https://chat.vuetifyjs.com) and get help 24/7 from the development team and our talented community members across the world. Become a [backer](https://www.patreon.com/vuetify) and get access to dedicated support from the team.
 
-<a href="https://vuetifyjs.com" target="_blank">Documentation</a>
+### Browser Support
 
-<h2>One minute Quick-start</h2>
+Vuetify supports all **modern browsers**, including IE11 and Safari 9+ (using polyfills). From mobile to laptop to desktop, you can rest assured that your application will work as expected. Interested in the bleeding edge? Try the vue-cli Webpack SSR (Server side rendered) template and build websites optimized for SEO.
 
+## Documentation
+
+You can find the Vuetify documentation <a href="https://vuetifyjs.com" target="_blank">on the website</a>.
+
+## One minute Quick-start
+
+[Codepen link](https://codepen.io/johnjleider/pen/jYZwVZ)
 ```html
 <!DOCTYPE html>
 <html>
@@ -99,9 +114,9 @@
 <body>
   <div id="app">
     <v-app>
-      <main>
+      <v-content>
         <v-container>Hello world</v-container>
-      </main>
+      </v-content>
     </v-app>
   </div>
 
@@ -116,7 +131,7 @@
 </html>
 ```
 
-<h2>Project Install</h2>
+## Installation
 
 ``` bash
 # npm
@@ -128,7 +143,7 @@ npm install vuetify
 yarn add vuetify
 ```
 
-## Use
+## Usage
 
 ```javascript
 import Vue from 'vue'
@@ -144,19 +159,36 @@ For including styles, you can either place the below styles in your `index.html`
 ```
 Or you can import it to your webpack entry point
 ```javascript
+require('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons')
 require('/path/to/node_modules/vuetify/dist/vuetify.min.css')
 ```
-Keep in mind, you will need to ensure your webpack config contains a css-loader.
+Keep in mind, you will need to ensure your webpack config contains a <a href="https://github.com/webpack-contrib/css-loader" target="_blank">css loader</a>.
 
-<h2>Frequently asked questions and Gotchas</h2>
-<a href="https://vuetifyjs.com/vuetify/frequently-asked-questions" target="_blank">Frequently asked questions</a>
+## Community Support
 
-<h2>Community Support</h2>
-Ask your support questions on the vuetifyjs <a href="https://chat.vuetifyjs.com">discord</a>.
+Ask your support questions on the [Vuetify Discord Community](https://community.vuetifyjs.com/).
 
-<h2>Additional Resources</h2>
+Frequently asked questions and Gotchas on the [FAQ Guide](https://vuetifyjs.com/vuetify/frequently-asked-questions)
 
-- [Codepen starter template](https://template.vuetifyjs.com)
-- [Storybook for Vue boilerplate project with Vuetify](https://github.com/white-rabbit-japan/vuetify-storyboard-boilerplate)
+## Contributing
 
+Developers interested in contributing should read the [Code of Conduct](./CODE_OF_CONDUCT.md).
 
+> Please do **not** ask general questions in an issue. Issues are only to report bugs, request
+  enhancements, or request new features. For general questions and discussions, ask on the [Vuetify Discord Community](https://community.vuetifyjs.com/).
+
+It is important to note that for each release, the detailed changes are documented in the [release notes](https://github.com/vuetifyjs/vuetify/releases).
+
+### Contributing Guide
+
+You can report issues by following the [Issue Template](https://issues.vuetifyjs.com/) and you can create a minimal reproduction with a [CodePen template](https://template.vuetifyjs.com/) or a full project at [CodeSandbox](https://codesandbox.io/s/vue).
+
+### Good First Issue
+
+To help you get you familiar with our contribution process, we have a list of [good first issues](https://github.com/vuetifyjs/vuetify/labels/good%20first%20issue) that contain bugs which have a relatively limited scope. This is a great place to get started.
+
+We also have a list of [help wanted](https://github.com/vuetifyjs/vuetify/labels/help%20wanted) issues that you might want to check.
+
+### License
+
+Vuetify is [MIT licensed](./LICENSE).

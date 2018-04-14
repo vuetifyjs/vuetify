@@ -2,6 +2,8 @@ import Ripple from '../directives/ripple'
 
 /** @mixin */
 export default {
+  name: 'rippleable',
+
   directives: { Ripple },
 
   props: {
@@ -18,9 +20,12 @@ export default {
         name: 'ripple',
         value: this.ripple && !this.disabled && { center: true }
       })
-      data.on = Object.assign({
-        click: this.toggle
-      }, this.$listeners)
+      data.on = Object.assign({}, this.$listeners, {
+        click: e => {
+          this.$emit('click', e)
+          this.toggle()
+        }
+      })
 
       return this.$createElement('div', data)
     }

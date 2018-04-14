@@ -18,11 +18,6 @@ export default {
 
   inject: ['isMandatory', 'name'],
 
-  components: {
-    VFadeTransition,
-    VIcon
-  },
-
   mixins: [
     Colorable,
     Rippleable,
@@ -63,7 +58,7 @@ export default {
       return classes
     },
     icon () {
-      return this.isActive ? 'radio_button_checked' : 'radio_button_unchecked'
+      return this.isActive ? '$vuetify.icons.radioOn' : '$vuetify.icons.radioOff'
     }
   },
 
@@ -101,7 +96,7 @@ export default {
         class: this.classes,
         attrs: {
           role: 'radio',
-          'aria-checked': this.isActive && 'true' || 'false',
+          'aria-checked': this.isActive ? 'true' : 'false',
           'aria-label': this.label
         },
         on: {
@@ -126,8 +121,7 @@ export default {
       }, this.$slots.label || this.label)
     },
     toggle () {
-      const mandatory = this.isMandatory &&
-        this.isMandatory() || false
+      const mandatory = !!this.isMandatory && this.isMandatory()
 
       if (!this.disabled && (!this.isActive || !mandatory)) {
         this.$refs.input.checked = true
@@ -146,9 +140,9 @@ export default {
   },
 
   render (h) {
-    const transition = h('v-fade-transition', {}, [
-      h('v-icon', {
-        staticClass: 'icon--selection-control',
+    const transition = h(VFadeTransition, {}, [
+      h(VIcon, {
+        staticClass: 'v-icon--selection-control',
         'class': {
           'icon--radio': this.isActive
         },

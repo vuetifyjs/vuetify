@@ -1,4 +1,21 @@
 import { getObjectValueByPath } from '../../../util/helpers'
+import { consoleWarn } from '../../../util/console'
+
+// Components
+import VBtn from '../../VBtn'
+import VCard from '../../VCard'
+import VCheckbox from '../../VCheckbox'
+import VChip from '../../VChip'
+import VDivider from '../../VDivider'
+import VMenu from '../../VMenu'
+import VSubheader from '../../VSubheader'
+import {
+  VList,
+  VListTile,
+  VListTileAction,
+  VListTileContent,
+  VListTileTitle
+} from '../../VList'
 
 /**
  * Select generators
@@ -39,11 +56,11 @@ export default {
         }
       }
 
-      if (this.isAutocomplete) data.props.transition = ''
+      if (this.isAutocomplete) data.props.transition = false
 
       this.minWidth && (data.props.minWidth = this.minWidth)
 
-      return this.$createElement('v-menu', data, [this.genList()])
+      return this.$createElement(VMenu, data, [this.genList()])
     },
     getMenuIndex () {
       return this.$refs.menu ? this.$refs.menu.listIndex : -1
@@ -70,21 +87,23 @@ export default {
     genSelections () {
       if (this.hideSelections) return []
 
-      const children = []
-      const chips = this.chips
-      const slots = this.$scopedSlots.selection
-      const length = this.selectedItems.length
-      this.selectedItems.forEach((item, i) => {
-        if (slots) {
-          children.push(this.genSlotSelection(item, i))
-        } else if (chips) {
-          children.push(this.genChipSelection(item, i))
-        } else if (this.segmented) {
-          children.push(this.genSegmentedBtn(item, i))
-        } else {
-          children.push(this.genCommaSelection(item, i < length - 1, i))
-        }
-      })
+      let length = this.selectedItems.length
+      const children = new Array(length)
+
+      let genSelection
+      if (this.$scopedSlots.selection) {
+        genSelection = this.genSlotSelection
+      } else if (this.chips) {
+        genSelection = this.genChipSelection
+      } else if (this.segmented) {
+        genSelection = this.genSegmentedBtn
+      } else {
+        genSelection = this.genCommaSelection
+      }
+
+      while (length--) {
+        children[length] = genSelection(this.selectedItems[length], length, length === children.length - 1)
+      }
 
       return children
     },
@@ -122,6 +141,8 @@ export default {
         data.on = {
           ...this.genListeners(),
           input: e => {
+            if (this.selectedIndex > -1) return
+
             this.searchValue = this.unmaskText(e.target.value)
           }
         }
@@ -135,11 +156,11 @@ export default {
     },
     genSegmentedBtn (item) {
       if (!item.text || !item.callback) {
-        console.warn('[Vuetify] Warn: When using the v-select component with \'segmented\' prop without a selection slot, items must contain both a text and callback property')
+        consoleWarn('When using \'segmented\' prop without a selection slot, items must contain both a text and callback property', this)
         return null
       }
 
-      return this.$createElement('v-btn', {
+      return this.$createElement(VBtn, {
         props: {
           flat: true
         },
@@ -170,7 +191,7 @@ export default {
         this.selectedIndex = index
       }
 
-      return this.$createElement('v-chip', {
+      return this.$createElement(VChip, {
         staticClass: 'chip--select-multi',
         attrs: { tabindex: '-1' },
         props: {
@@ -190,14 +211,14 @@ export default {
         key: this.getValue(item)
       }, this.getText(item))
     },
-    genCommaSelection (item, comma, index) {
+    genCommaSelection (item, index, last) {
       return this.$createElement('div', {
         staticClass: 'input-group__selections__comma',
         'class': {
           'input-group__selections__comma--active': index === this.selectedIndex
         },
         key: JSON.stringify(this.getValue(item)) // Item may be an object
-      }, `${this.getText(item)}${comma ? ', ' : ''}`)
+      }, `${this.getText(item)}${last ? '' : ', '}`)
     },
     genList () {
       const children = this.menuItems.map(o => {
@@ -215,8 +236,8 @@ export default {
         }
       }
 
-      return this.$createElement('v-card', [
-        this.$createElement('v-list', {
+      return this.$createElement(VCard, [
+        this.$createElement(VList, {
           props: {
             dense: this.dense
           },
@@ -225,20 +246,20 @@ export default {
       ])
     },
     genHeader (item) {
-      return this.$createElement('v-subheader', {
+      return this.$createElement(VSubheader, {
         props: item
       }, item.header)
     },
     genDivider (item) {
-      return this.$createElement('v-divider', {
+      return this.$createElement(VDivider, {
         props: item
       })
     },
     genLabel () {
       const singleLine = this.singleLine || this.isDropdown
 
-      if (singleLine && this.isDirty ||
-        singleLine && this.isFocused && this.searchValue
+      if (singleLine &&
+        (this.isDirty || (this.isFocused && this.searchValue))
       ) return null
 
       const data = {}
@@ -256,7 +277,7 @@ export default {
 
       const data = {
         on: {
-          click: e => {
+          click: () => {
             if (disabled) return
 
             this.selectItem(item)
@@ -276,12 +297,13 @@ export default {
       data.props.activeClass = Object.keys(this.addTextColorClassChecks()).join(' ')
 
       if (this.$scopedSlots.item) {
-        return this.$createElement('v-list-tile', data,
-          [this.$scopedSlots.item({ parent: this, item })]
-        )
+        const tile = this.$scopedSlots.item({ parent: this, item, tile: data })
+        return this.needsTile(tile)
+          ? this.$createElement(VListTile, data, [tile])
+          : tile
       }
 
-      return this.$createElement('v-list-tile', data,
+      return this.$createElement(VListTile, data,
         [this.genAction(item, active), this.genContent(item)]
       )
     },
@@ -298,8 +320,8 @@ export default {
         }
       }
 
-      return this.$createElement('v-list-tile-action', data, [
-        this.$createElement('v-checkbox', {
+      return this.$createElement(VListTileAction, data, [
+        this.$createElement(VCheckbox, {
           props: {
             color: this.computedColor,
             inputValue: active
@@ -310,8 +332,8 @@ export default {
     genContent (item) {
       const text = this.getText(item)
 
-      return this.$createElement('v-list-tile-content',
-        [this.$createElement('v-list-tile-title', {
+      return this.$createElement(VListTileContent,
+        [this.$createElement(VListTileTitle, {
           domProps: {
             innerHTML: this.genFiltered(text)
           }

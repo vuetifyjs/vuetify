@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VList.js should render a dense component and match snapshot 1`] = `
+
+<div class="v-list v-list--dense">
+</div>
+
+`;
+
+exports[`VList.js should render a subheader component and match snapshot 1`] = `
+
+<div class="v-list v-list--subheader">
+</div>
+
+`;
+
+exports[`VList.js should render a threeLine component and match snapshot 1`] = `
+
+<div class="v-list v-list--three-line">
+</div>
+
+`;
+
+exports[`VList.js should render a twoLine component and match snapshot 1`] = `
+
+<div class="v-list v-list--two-line">
+</div>
+
+`;
+
+exports[`VList.js should render component and match snapshot 1`] = `
+
+<div class="v-list">
+</div>
+
+`;

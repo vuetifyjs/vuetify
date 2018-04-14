@@ -22,12 +22,13 @@ export default {
       this.getTiles()
 
       if (next in this.tiles) {
-        this.tiles[next].classList.add('list__tile--highlighted')
-        this.$refs.content.scrollTop = next * 48
+        const tile = this.tiles[next]
+        tile.classList.add('v-list__tile--highlighted')
+        this.$refs.content.scrollTop = tile.offsetTop - tile.clientHeight
       }
 
       prev in this.tiles &&
-        this.tiles[prev].classList.remove('list__tile--highlighted')
+        this.tiles[prev].classList.remove('v-list__tile--highlighted')
     }
   },
 
@@ -35,7 +36,7 @@ export default {
     changeListIndex (e) {
       // Up, Down, Enter, Space
       if ([40, 38, 13].includes(e.keyCode) ||
-        e.keyCode === 32 && !this.isActive
+        (e.keyCode === 32 && !this.isActive)
       ) {
         e.preventDefault()
       }
@@ -62,7 +63,7 @@ export default {
       }
     },
     getTiles () {
-      this.tiles = this.$refs.content.querySelectorAll('.list__tile')
+      this.tiles = this.$refs.content.querySelectorAll('.v-list__tile')
     }
   }
 }

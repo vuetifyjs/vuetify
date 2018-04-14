@@ -12,7 +12,7 @@ export default {
 
       if (this.isExpanded(props.item)) {
         const expand = this.$createElement('div', {
-          class: 'datatable__expand-content',
+          class: 'v-datatable__expand-content',
           key: props.item[this.itemKey]
         }, this.$scopedSlots.expand(props))
 
@@ -20,15 +20,15 @@ export default {
       }
 
       const transition = this.$createElement('transition-group', {
-        class: 'datatable__expand-col',
-        attrs: { colspan: '100%' },
+        class: 'v-datatable__expand-col',
+        attrs: { colspan: this.headerColumns },
         props: {
           tag: 'td'
         },
-        on: ExpandTransitionGenerator('datatable__expand-col--expanded')
+        on: ExpandTransitionGenerator('v-datatable__expand-col--expanded')
       }, children)
 
-      return this.genTR([transition], { class: 'datatable__expand-row' })
+      return this.genTR([transition], { class: 'v-datatable__expand-row' })
     },
     genFilteredItems () {
       if (!this.$scopedSlots.items) {
@@ -54,7 +54,7 @@ export default {
       return rows
     },
     processRow (row, item, index) {
-      if (this.needsTR(row)) {
+      if (this.hasTag(row, 'td')) {
         return this.genTR(row, {
           key: index,
           attrs: { active: this.isSelected(item) }
@@ -69,10 +69,18 @@ export default {
       return row
     },
     genEmptyItems (content) {
-      return this.genTR([this.$createElement('td', {
-        'class': 'text-xs-center',
-        attrs: { colspan: '100%' }
-      }, content)])
+      if (this.hasTag(content, 'tr')) {
+        return content
+      } else if (this.hasTag(content, 'td')) {
+        return this.genTR(content)
+      } else {
+        return this.genTR([this.$createElement('td', {
+          class: {
+            'text-xs-center': typeof content === 'string'
+          },
+          attrs: { colspan: this.headerColumns }
+        }, content)])
+      }
     }
   }
 }

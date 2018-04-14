@@ -1,13 +1,13 @@
 @import '../bootstrap'
 @import '../theme'
 
-jumbotron($material)
+v-jumbotron($material)
   &__content
     color: $material.text.primary
 
-theme(jumbotron, 'jumbotron')
+theme(v-jumbotron, 'v-jumbotron')
 
-.jumbotron
+.v-jumbotron
   display: block
   top: 0
   transition: .3s $transition.swing
@@ -17,6 +17,7 @@ theme(jumbotron, 'jumbotron')
     height: 100%
     overflow: hidden
     position: relative
+    transition: inherit
     width: 100%
 
   &__background
@@ -33,7 +34,7 @@ theme(jumbotron, 'jumbotron')
     top: 50%
     left: 50%
     transform: translate(-50%, -50%)
-    width: 100%
+    min-width: 100%
     will-change: transform
     transition: inherit
 

@@ -1,4 +1,4 @@
-require('../../stylus/components/_parallax.styl')
+import '../../stylus/components/_parallax.styl'
 
 import Translatable from '../../mixins/translatable'
 

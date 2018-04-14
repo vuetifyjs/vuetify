@@ -26,7 +26,7 @@ const touchmove = (event, wrapper) => {
   wrapper.move && wrapper.move(Object.assign(event, wrapper))
 }
 
-const handleGesture = (wrapper) => {
+const handleGesture = wrapper => {
   const { touchstartX, touchendX, touchstartY, touchendY } = wrapper
   const dirRatio = 0.5
   const minDistance = 16
@@ -69,16 +69,17 @@ function inserted (el, { value }, { context }) {
   // Needed to pass unit tests
   if (!target) return
 
+  const handlers = {
+    touchstart: e => touchstart(e, wrapper),
+    touchend: e => touchend(e, wrapper),
+    touchmove: e => touchmove(e, wrapper)
+  }
   target._touchHandlers = Object.assign(Object(target._touchHandlers), {
-    [context._uid]: {
-      touchstart: e => touchstart(e, wrapper),
-      touchend: e => touchend(e, wrapper),
-      touchmove: e => touchmove(e, wrapper)
-    }
+    [context._uid]: handlers
   })
-  Object.keys(target._touchHandlers[context._uid]).forEach(eventName => {
-    target.addEventListener(eventName, target._touchHandlers[context._uid][eventName], options)
-  })
+  for (const eventName of Object.keys(handlers)) {
+    target.addEventListener(eventName, handlers[eventName], options)
+  }
 }
 
 function unbind (el, { value }, { context }) {
@@ -87,7 +88,9 @@ function unbind (el, { value }, { context }) {
   if (!target) return
 
   const handlers = target._touchHandlers[context._uid]
-  Object.keys(handlers).forEach(eventName => target.removeEventListener(eventName, handlers[eventName]))
+  for (const eventName of Object.keys(handlers)) {
+    target.removeEventListener(eventName, handlers[eventName])
+  }
   delete target._touchHandlers[context._uid]
 }
 

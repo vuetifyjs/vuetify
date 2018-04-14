@@ -1,5 +1,10 @@
-require('../../stylus/components/_buttons.styl')
+// Styles
+import '../../stylus/components/_buttons.styl'
 
+// Components
+import VProgressCircular from '../VProgressCircular'
+
+// Mixins
 import Colorable from '../../mixins/colorable'
 import Positionable from '../../mixins/positionable'
 import Routable from '../../mixins/routable'
@@ -22,7 +27,7 @@ export default {
   props: {
     activeClass: {
       type: String,
-      default: 'btn--active'
+      default: 'v-btn--active'
     },
     block: Boolean,
     depressed: Boolean,
@@ -51,52 +56,32 @@ export default {
 
   computed: {
     classes () {
-      const colorBackground = !this.outline && !this.flat
-      const colorText = !this.disabled && !colorBackground
-
       const classes = {
-        'btn': true,
-        'btn--active': this.isActive,
-        'btn--absolute': this.absolute,
-        'btn--block': this.block,
-        'btn--bottom': this.bottom,
-        'btn--disabled': this.disabled,
-        'btn--flat': this.flat,
-        'btn--floating': this.fab,
-        'btn--fixed': this.fixed,
-        'btn--hover': this.hover,
-        'btn--icon': this.icon,
-        'btn--large': this.large,
-        'btn--left': this.left,
-        'btn--loader': this.loading,
-        'btn--outline': this.outline,
-        'btn--depressed': this.depressed && !this.flat || this.outline,
-        'btn--right': this.right,
-        'btn--round': this.round,
-        'btn--router': this.to,
-        'btn--small': this.small,
-        'btn--top': this.top,
+        'v-btn': true,
+        [this.activeClass]: this.isActive,
+        'v-btn--absolute': this.absolute,
+        'v-btn--block': this.block,
+        'v-btn--bottom': this.bottom,
+        'v-btn--disabled': this.disabled,
+        'v-btn--flat': this.flat,
+        'v-btn--floating': this.fab,
+        'v-btn--fixed': this.fixed,
+        'v-btn--hover': this.hover,
+        'v-btn--icon': this.icon,
+        'v-btn--large': this.large,
+        'v-btn--left': this.left,
+        'v-btn--loader': this.loading,
+        'v-btn--outline': this.outline,
+        'v-btn--depressed': (this.depressed && !this.flat) || this.outline,
+        'v-btn--right': this.right,
+        'v-btn--round': this.round,
+        'v-btn--router': this.to,
+        'v-btn--small': this.small,
+        'v-btn--top': this.top,
         ...this.themeClasses
       }
 
-      if (!this.color) {
-        return Object.assign(classes, {
-          'primary': this.primary && colorBackground,
-          'secondary': this.secondary && colorBackground,
-          'success': this.success && colorBackground,
-          'info': this.info && colorBackground,
-          'warning': this.warning && colorBackground,
-          'error': this.error && colorBackground,
-          'primary--text': this.primary && colorText,
-          'secondary--text': this.secondary && colorText,
-          'success--text': this.success && colorText,
-          'info--text': this.info && colorText,
-          'warning--text': this.warning && colorText,
-          'error--text': this.error && colorText
-        })
-      }
-
-      return colorBackground
+      return (!this.outline && !this.flat)
         ? this.addBackgroundColorClassChecks(classes)
         : this.addTextColorClassChecks(classes)
     }
@@ -114,7 +99,7 @@ export default {
     genContent () {
       return this.$createElement(
         'div',
-        { 'class': 'btn__content' },
+        { 'class': 'v-btn__content' },
         [this.$slots.default]
       )
     },
@@ -122,17 +107,18 @@ export default {
       const children = []
 
       if (!this.$slots.loader) {
-        children.push(this.$createElement('v-progress-circular', {
+        children.push(this.$createElement(VProgressCircular, {
           props: {
             indeterminate: true,
-            size: 26
+            size: 23,
+            width: 2
           }
         }))
       } else {
         children.push(this.$slots.loader)
       }
 
-      return this.$createElement('span', { 'class': 'btn__loading' }, children)
+      return this.$createElement('span', { 'class': 'v-btn__loading' }, children)
     }
   },
 

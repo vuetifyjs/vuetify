@@ -1,14 +1,15 @@
-require('../../stylus/components/_speed-dial.styl')
+import '../../stylus/components/_speed-dial.styl'
 
 import Toggleable from '../../mixins/toggleable'
 import Positionable from '../../mixins/positionable'
+import Transitionable from '../../mixins/transitionable'
 
 import ClickOutside from '../../directives/click-outside'
 
 export default {
   name: 'v-speed-dial',
 
-  mixins: [Positionable, Toggleable],
+  mixins: [Positionable, Toggleable, Transitionable],
 
   directives: { ClickOutside },
 
@@ -16,11 +17,11 @@ export default {
     direction: {
       type: String,
       default: 'top',
-      validator: (val) => {
+      validator: val => {
         return ['top', 'right', 'bottom', 'left'].includes(val)
       }
     },
-    hover: Boolean,
+    openOnHover: Boolean,
     transition: {
       type: String,
       default: 'scale-transition'
@@ -30,14 +31,14 @@ export default {
   computed: {
     classes () {
       return {
-        'speed-dial': true,
-        'speed-dial--top': this.top,
-        'speed-dial--right': this.right,
-        'speed-dial--bottom': this.bottom,
-        'speed-dial--left': this.left,
-        'speed-dial--absolute': this.absolute,
-        'speed-dial--fixed': this.fixed,
-        [`speed-dial--direction-${this.direction}`]: true
+        'v-speed-dial': true,
+        'v-speed-dial--top': this.top,
+        'v-speed-dial--right': this.right,
+        'v-speed-dial--bottom': this.bottom,
+        'v-speed-dial--left': this.left,
+        'v-speed-dial--absolute': this.absolute,
+        'v-speed-dial--fixed': this.fixed,
+        [`v-speed-dial--direction-${this.direction}`]: true
       }
     }
   },
@@ -47,14 +48,15 @@ export default {
     const data = {
       'class': this.classes,
       directives: [{
-        name: 'click-outside'
+        name: 'click-outside',
+        value: () => (this.isActive = false)
       }],
       on: {
         click: () => (this.isActive = !this.isActive)
       }
     }
 
-    if (this.hover) {
+    if (this.openOnHover) {
       data.on.mouseenter = () => (this.isActive = true)
       data.on.mouseleave = () => (this.isActive = false)
     }
@@ -68,9 +70,11 @@ export default {
     }
 
     const list = h('transition-group', {
-      'class': 'speed-dial__list',
+      'class': 'v-speed-dial__list',
       props: {
         name: this.transition,
+        mode: this.mode,
+        origin: this.origin,
         tag: 'div'
       }
     }, children)

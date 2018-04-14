@@ -93,13 +93,14 @@ $font-weights := {
 
 // Headings
 // ============================================================
+$heading-font-family := $body-font-family
 $headings := {
-  h1: { size: 112px, weight: 300, line-height: 1, letter-spacing: -.04em },
-  h2: { size: 56px, weight: 400, line-height: 1.35, letter-spacing: -.02em },
-  h3: { size: 45px, weight: 400, line-height: 48px, letter-spacing: normal },
-  h4: { size: 34px, weight: 400, line-height: 40px, letter-spacing: normal },
-  h5: { size: 24px, weight: 400, line-height: 32px, letter-spacing: normal },
-  h6: { size: 20px, weight: 500, line-height: 1, letter-spacing: .02em },
+  h1: { size: 112px, weight: 300, line-height: 1, letter-spacing: -.04em, font-family: $heading-font-family },
+  h2: { size: 56px, weight: 400, line-height: 1.35, letter-spacing: -.02em, font-family: $heading-font-family },
+  h3: { size: 45px, weight: 400, line-height: 48px, letter-spacing: normal, font-family: $heading-font-family },
+  h4: { size: 34px, weight: 400, line-height: 40px, letter-spacing: normal, font-family: $heading-font-family },
+  h5: { size: 24px, weight: 400, line-height: 32px, letter-spacing: normal, font-family: $heading-font-family },
+  h6: { size: 20px, weight: 500, line-height: 1, letter-spacing: .02em, font-family: $heading-font-family },
   subheading: { size: 16px, weight: 400 },
   body-2: { size: 14px, weight: 500 },
   body-1: { size: 14px, weight: 400 },
@@ -263,6 +264,7 @@ $list-dense-subheader-group-height := $list-dense-subheader-height //the subhead
 
 /** Pickers */
 $time-picker-number-font-size := 16px
+$time-picker-indicator-size := 40px
 
 // Toolbar
 $toolbar-height := 56px
@@ -283,7 +285,12 @@ $navigation-drawer-item-font-weight := $font-weights.medium
 $navigation-drawer-group-item-font-weight := $font-weights.regular
 
 /** Snackbar */
+$snackbar-color := #fff
 $snackbar-background-color := #323232
+$snackbar-corner-offset := 24px
+
+// Tab
+$tab-text-transform := uppercase
 
 /* Text Input */
 $input-group-padding := 18px 0 0

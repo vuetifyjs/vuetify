@@ -1,3 +1,5 @@
+import VProgressLinear from '../components/VProgressLinear'
+
 /**
  * Loadable
  *
@@ -8,6 +10,8 @@
  * or designate a custom progress linear bar
  */
 export default {
+  name: 'loadable',
+
   props: {
     loading: {
       type: [Boolean, String],
@@ -19,7 +23,7 @@ export default {
     genProgress () {
       if (this.loading === false) return null
 
-      return this.$slots.progress || this.$createElement('v-progress-linear', {
+      return this.$slots.progress || this.$createElement(VProgressLinear, {
         props: {
           color: (this.loading === true || this.loading === '')
             ? (this.color || 'primary')

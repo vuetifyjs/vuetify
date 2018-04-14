@@ -1,9 +1,7 @@
-require('../../stylus/components/_tables.styl')
-require('../../stylus/components/_data-table.styl')
+import '../../stylus/components/_tables.styl'
+import '../../stylus/components/_data-table.styl'
 
 import DataIterable from '../../mixins/data-iterable'
-
-import VProgressLinear from '../VProgressLinear'
 
 import Head from './mixins/head'
 import Body from './mixins/body'
@@ -15,21 +13,18 @@ import {
   getObjectValueByPath
 } from '../../util/helpers'
 
+// Importing does not work properly
+const VTableOverflow = createSimpleFunctional('v-table__overflow')
+
 export default {
   name: 'v-data-table',
 
-  components: {
-    VProgressLinear,
-    // Importing does not work properly
-    'v-table-overflow': createSimpleFunctional('table__overflow')
-  },
-
   data () {
     return {
-      actionsClasses: 'datatable__actions',
-      actionsRangeControlsClasses: 'datatable__actions__range-controls',
-      actionsSelectClasses: 'datatable__actions__select',
-      actionsPaginationClasses: 'datatable__actions__pagination'
+      actionsClasses: 'v-datatable__actions',
+      actionsRangeControlsClasses: 'v-datatable__actions__range-controls',
+      actionsSelectClasses: 'v-datatable__actions__select',
+      actionsPaginationClasses: 'v-datatable__actions__pagination'
     }
   },
 
@@ -65,20 +60,23 @@ export default {
   computed: {
     classes () {
       return {
-        'datatable table': true,
-        'datatable--select-all': this.selectAll !== false,
+        'v-datatable v-table': true,
+        'v-datatable--select-all': this.selectAll !== false,
         'theme--dark': this.dark,
         'theme--light': this.light
       }
     },
     filteredItems () {
       return this.filteredItemsImpl(this.headers)
+    },
+    headerColumns () {
+      return this.headers.length + (this.selectAll !== false)
     }
   },
 
   methods: {
-    needsTR (row) {
-      return row.length && row.find(c => c.tag === 'td' || c.tag === 'th')
+    hasTag (elements, tag) {
+      return Array.isArray(elements) && elements.find(e => e.tag === tag)
     },
     genTR (children, data = {}) {
       return this.$createElement('tr', data, children)
@@ -98,7 +96,7 @@ export default {
   },
 
   render (h) {
-    const tableOverflow = h('v-table-overflow', {}, [
+    const tableOverflow = h(VTableOverflow, {}, [
       h('table', {
         'class': this.classes
       }, [

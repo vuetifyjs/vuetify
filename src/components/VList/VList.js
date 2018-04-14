@@ -1,5 +1,5 @@
 // Styles
-require('../../stylus/components/_lists.styl')
+import '../../stylus/components/_lists.styl'
 
 // Mixins
 import Themeable from '../../mixins/themeable'
@@ -36,10 +36,10 @@ export default {
   computed: {
     classes () {
       return {
-        'list--dense': this.dense,
-        'list--subheader': this.subheader,
-        'list--two-line': this.twoLine,
-        'list--three-line': this.threeLine,
+        'v-list--dense': this.dense,
+        'v-list--subheader': this.subheader,
+        'v-list--two-line': this.twoLine,
+        'v-list--three-line': this.threeLine,
         'theme--dark': this.dark,
         'theme--light': this.light
       }
@@ -57,19 +57,21 @@ export default {
         this.groups.splice(index, 1)
       }
     },
-    listClick (uid, isBooted) {
+    listClick (uid) {
       if (this.expand) return
 
-      this.groups.forEach(group => group.cb(uid))
+      for (let i = this.groups.length; i--;) {
+        this.groups[i].cb(uid)
+      }
     }
   },
 
   render (h) {
     const data = {
-      staticClass: 'list',
+      staticClass: 'v-list',
       'class': this.classes
     }
 
-    return h('ul', data, [this.$slots.default])
+    return h('div', data, [this.$slots.default])
   }
 }

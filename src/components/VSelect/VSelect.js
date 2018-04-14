@@ -1,21 +1,7 @@
 // Styles
-require('../../stylus/components/_text-fields.styl')
-require('../../stylus/components/_input-groups.styl')
-require('../../stylus/components/_select.styl')
-
-// Components
-import VBtn from '../VBtn'
-import VCard from '../VCard'
-import VCheckbox from '../VCheckbox'
-import VChip from '../VChip'
-import {
-  VList,
-  VListTile,
-  VListTileAction,
-  VListTileContent,
-  VListTileTitle
-} from '../VList'
-import VMenu from '../VMenu'
+import '../../stylus/components/_text-fields.styl'
+import '../../stylus/components/_input-groups.styl'
+import '../../stylus/components/_select.styl'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
@@ -42,19 +28,6 @@ export default {
   name: 'v-select',
 
   inheritAttrs: false,
-
-  components: {
-    VCard,
-    VCheckbox,
-    VChip,
-    VList,
-    VListTile,
-    VListTileAction,
-    VListTileContent,
-    VListTileTitle,
-    VMenu,
-    VBtn
-  },
 
   directives: {
     ClickOutside
@@ -91,7 +64,6 @@ export default {
       lazySearch: null,
       isActive: false,
       menuIsActive: false,
-      searchTimeout: null,
       selectedIndex: -1,
       selectedItems: [],
       shouldBreak: false
@@ -119,6 +91,10 @@ export default {
   },
 
   methods: {
+    needsTile (tile) {
+      // TODO: use the component name instead of tag
+      return tile.componentOptions == null || tile.componentOptions.tag !== 'v-list-tile'
+    },
     changeSelectedIndex (keyCode) {
       // backspace, left, right, delete
       if (![8, 37, 39, 46].includes(keyCode)) return
@@ -152,6 +128,15 @@ export default {
         this.selectedIndex = newIndex
       }
     },
+    closeConditional (e) {
+      return (
+        this.isActive &&
+        !!this.content &&
+        !this.content.contains(e.target) &&
+        !!this.$el &&
+        !this.$el.contains(e.target)
+      )
+    },
     filterDuplicates (arr) {
       const uniqueValues = new Map()
       for (let index = 0; index < arr.length; ++index) {
@@ -165,13 +150,9 @@ export default {
     genDirectives () {
       return [{
         name: 'click-outside',
-        value: e => {
-          return (
-            !!this.content &&
-            !this.content.contains(e.target) &&
-            !!this.$el &&
-            !this.$el.contains(e.target)
-          )
+        value: () => (this.isActive = false),
+        args: {
+          closeConditional: this.closeConditional
         }
       }]
     },
@@ -188,7 +169,7 @@ export default {
           return this.getValue(i) === this.getValue(val)
         } else {
           // Always return Boolean
-          return this.findExistingItem(i) > -1
+          return this.findExistingIndex(i) > -1
         }
       })
 
@@ -237,7 +218,11 @@ export default {
         }
       }
     },
-    findExistingItem (item) {
+    findExistingItem (val) {
+      const itemValue = this.getValue(val)
+      return this.items.find(i => this.valueComparator(this.getValue(i), itemValue))
+    },
+    findExistingIndex (item) {
       const itemValue = this.getValue(item)
       return this.inputValue.findIndex(i => this.valueComparator(this.getValue(i), itemValue))
     },
@@ -248,15 +233,16 @@ export default {
       } else {
         const selectedItems = []
         const inputValue = this.inputValue.slice()
-        const i = this.findExistingItem(item)
+        const i = this.findExistingIndex(item)
 
-        i !== -1 && inputValue.splice(i, 1) || inputValue.push(item)
-        this.inputValue = inputValue.map((i) => {
+        i !== -1 ? inputValue.splice(i, 1) : inputValue.push(item)
+        this.inputValue = inputValue.map(i => {
           selectedItems.push(i)
           return this.returnObject ? i : this.getValue(i)
         })
 
         this.selectedItems = selectedItems
+        this.selectedIndex = -1
       }
 
       this.searchValue = !this.isMultiple &&
@@ -288,7 +274,7 @@ export default {
     }
   },
 
-  render (h) {
+  render () {
     const data = {
       attrs: {
         tabindex: this.isAutocomplete || this.disabled ? -1 : this.tabindex,

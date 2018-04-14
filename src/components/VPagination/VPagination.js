@@ -1,4 +1,4 @@
-require('../../stylus/components/_pagination.styl')
+import '../../stylus/components/_pagination.styl'
 
 import VIcon from '../VIcon'
 
@@ -31,11 +31,11 @@ export default {
     totalVisible: [Number, String],
     nextIcon: {
       type: String,
-      default: 'chevron_right'
+      default: '$vuetify.icons.next'
     },
     prevIcon: {
       type: String,
-      default: 'chevron_left'
+      default: '$vuetify.icons.prev'
     },
     value: {
       type: Number,
@@ -147,7 +147,7 @@ export default {
     genItems (h) {
       return this.items.map((i, index) => {
         return h('li', { key: index }, [
-          isNaN(i) && h('span', { class: 'pagination__more' }, [i]) || this.genItem(h, i)
+          isNaN(i) ? h('span', { class: 'pagination__more' }, [i]) : this.genItem(h, i)
         ])
       })
     }

@@ -1,4 +1,4 @@
-require('../../stylus/components/_alerts.styl')
+import '../../stylus/components/_alerts.styl'
 
 import VIcon from '../VIcon'
 
@@ -8,10 +8,6 @@ import Transitionable from '../../mixins/transitionable'
 
 export default {
   name: 'v-alert',
-
-  components: {
-    VIcon
-  },
 
   mixins: [Colorable, Toggleable, Transitionable],
 
@@ -38,23 +34,23 @@ export default {
 
   computed: {
     classes () {
-      const colorProp = (this.type && !this.color) ? 'type' : 'computedColor'
+      const color = (this.type && !this.color) ? this.type : this.computedColor
       const classes = {
-        'alert--dismissible': this.dismissible,
-        'alert--outline': this.outline
+        'v-alert--dismissible': this.dismissible,
+        'v-alert--outline': this.outline
       }
 
-      return this.outline ? this.addTextColorClassChecks(classes, colorProp)
-        : this.addBackgroundColorClassChecks(classes, colorProp)
+      return this.outline ? this.addTextColorClassChecks(classes, color)
+        : this.addBackgroundColorClassChecks(classes, color)
     },
     computedIcon () {
       if (this.icon || !this.type) return this.icon
 
       switch (this.type) {
-        case 'info': return 'info'
-        case 'error': return 'warning'
-        case 'success': return 'check_circle'
-        case 'warning': return 'priority_high'
+        case 'info': return '$vuetify.icons.info'
+        case 'error': return '$vuetify.icons.error'
+        case 'success': return '$vuetify.icons.success'
+        case 'warning': return '$vuetify.icons.warning'
       }
     }
   },
@@ -63,28 +59,28 @@ export default {
     const children = [h('div', this.$slots.default)]
 
     if (this.computedIcon) {
-      children.unshift(h('v-icon', {
-        'class': 'alert__icon'
+      children.unshift(h(VIcon, {
+        'class': 'v-alert__icon'
       }, this.computedIcon))
     }
 
     if (this.dismissible) {
       const close = h('a', {
-        'class': 'alert__dismissible',
+        'class': 'v-alert__dismissible',
         on: { click: () => this.$emit('input', false) }
       }, [
         h(VIcon, {
           props: {
             right: true
           }
-        }, 'cancel')
+        }, '$vuetify.icons.cancel')
       ])
 
       children.push(close)
     }
 
     const alert = h('div', {
-      staticClass: 'alert',
+      staticClass: 'v-alert',
       'class': this.classes,
       directives: [{
         name: 'show',

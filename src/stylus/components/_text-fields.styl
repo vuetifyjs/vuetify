@@ -90,6 +90,7 @@ theme(textfield, "input-group--text-field")
 .input-group--text-field
   .input-group__counter
     margin-left: auto
+    white-space: nowrap
 
     &--error
       color: inherit
@@ -100,6 +101,11 @@ theme(textfield, "input-group--text-field")
     input::placeholder,
     textarea::placeholder
       opacity: 0
+
+/** No Resize */
+.input-group--text-field
+  &.input-group--no-resize textarea
+      resize: none
 
 /** Types */
 .input-group--text-field

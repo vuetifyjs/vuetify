@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VListTile.vue should render <div> with <a> when using href prop 1`] = `
+
+<div>
+  <a href="http://www.google.com"
+     class="v-list__tile v-list__tile--link"
+  >
+  </a>
+</div>
+
+`;
+
+exports[`VListTile.vue should render <div> with <button> when using to prop 1`] = `
+
+<div>
+  <button class="v-list__tile v-list__tile--link">
+  </button>
+</div>
+
+`;
+
+exports[`VListTile.vue should render with a div when href and to are not used 1`] = `
+
+<div>
+  <div class="v-list__tile">
+  </div>
+</div>
+
+`;

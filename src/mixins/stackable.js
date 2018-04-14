@@ -1,6 +1,8 @@
 import { getZIndex } from '../util/helpers'
 
 export default {
+  name: 'stackable',
+
   data () {
     return {
       stackBase: null,
@@ -13,10 +15,12 @@ export default {
   computed: {
     /**
      * Currently active z-index
-     * 
+     *
      * @return {number}
      */
     activeZIndex () {
+      if (typeof window === 'undefined') return 0
+
       const content = this.stackElement || this.$refs.content
       // Return current zindex if not active
 
@@ -43,9 +47,9 @@ export default {
       const activeElements = [...document.getElementsByClassName(this.stackClass)]
 
       // Get z-index for all active dialogs
-      for (const activeElement of activeElements) {
-        if (!exclude.includes(activeElement)) {
-          zis.push(getZIndex(activeElement))
+      for (let index = 0; index < activeElements.length; index++) {
+        if (!exclude.includes(activeElements[index])) {
+          zis.push(getZIndex(activeElements[index]))
         }
       }
 

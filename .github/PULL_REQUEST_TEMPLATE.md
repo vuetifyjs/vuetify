@@ -15,15 +15,18 @@ https://github.com/vuetifyjs/vuetify/blob/master/.github/CONTRIBUTING.md
 ## How Has This Been Tested?
 <!--- Please describe how you tested your changes. -->
 <!--- Have you created new tests or updated existing ones? -->
+<!--- e.g. unit | visually | e2e | none -->
 
 ## Markup:
 <!--- Paste markup that showcases your contribution --->
+<!--- You can use ```vue to style the code -->
 
 ## Types of changes
 <!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
 - [ ] Bug fix (non-breaking change which fixes an issue)
 - [ ] New feature (non-breaking change which adds functionality)
 - [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
+- [ ] Improvement/refactoring (non-breaking change that doesn't add any feature but make things better)
 
 ## Checklist:
 <!--- Go over all the following points, and put an `x` in all the boxes that apply. -->

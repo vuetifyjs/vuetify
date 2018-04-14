@@ -1,10 +1,8 @@
 require('dotenv').config()
 const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base.config')
-const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const WriteFilePlugin = require('write-file-webpack-plugin')
 const webpack = require('webpack')
 
@@ -12,10 +10,14 @@ const webpack = require('webpack')
 const resolve = file => require('path').resolve(__dirname, file)
 
 const extractPlugin = ExtractTextPlugin.extract({
-  use: ['css-loader', 'postcss-loader', 'stylus-loader']
+  use: [
+    { loader: 'css-loader', options: { sourceMap: true } },
+    { loader: 'postcss-loader', options: { sourceMap: true } },
+    { loader: 'stylus-loader', options: { sourceMap: true } }
+  ]
 })
 
-module.exports = {
+module.exports = merge(baseWebpackConfig, {
   devtool: '#cheap-module-eval-source-map',
   entry: ['babel-polyfill', './dev/index.js'],
   output: {
@@ -81,4 +83,4 @@ module.exports = {
       test: /\.css$/
     })
   ]
-}
+})

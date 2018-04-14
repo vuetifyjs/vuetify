@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VCardTitle.js should render component and match snapshot 1`] = `
+
+<div class="v-card__title">
+</div>
+
+`;
+
+exports[`VCardTitle.js should render component with specific padding applied 1`] = `
+
+<div class="v-card__title v-card__title--primary">
+</div>
+
+`;

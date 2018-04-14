@@ -17,7 +17,9 @@ function inserted (el, binding) {
   }
 }
 
-function unbind (el, binding) {
+function unbind (el) {
+  if (!el._onScroll) return
+
   const { callback, options, target } = el._onScroll
 
   target.removeEventListener('scroll', callback, options)

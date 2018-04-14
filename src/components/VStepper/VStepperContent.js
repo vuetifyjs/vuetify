@@ -6,15 +6,12 @@ import {
 export default {
   name: 'v-stepper-content',
 
-  components: {
-    VTabTransition,
-    VTabReverseTransition
-  },
-
   data () {
     return {
       height: 0,
-      isActive: false,
+      // Must be null to allow
+      // previous comparison
+      isActive: null,
       isReverse: false,
       isVertical: false
     }
@@ -30,13 +27,13 @@ export default {
   computed: {
     classes () {
       return {
-        'stepper__content': true
+        'v-stepper__content': true
       }
     },
     computedTransition () {
       return this.isReverse
-        ? 'v-tab-reverse-transition'
-        : 'v-tab-transition'
+        ? VTabReverseTransition
+        : VTabTransition
     },
     styles () {
       if (!this.isVertical) return {}
@@ -47,22 +44,23 @@ export default {
     },
     wrapperClasses () {
       return {
-        'stepper__wrapper': true
+        'v-stepper__wrapper': true
       }
     }
   },
 
   watch: {
-    isActive () {
-      if (!this.isVertical) {
-        return
+    isActive (current, previous) {
+      // If active and the previous state
+      // was null, is just booting up
+      if (current && previous == null) {
+        return (this.height = 'auto')
       }
 
-      if (this.isActive) {
-        this.enter()
-      } else {
-        this.leave()
-      }
+      if (!this.isVertical) return
+
+      if (this.isActive) this.enter()
+      else this.leave()
     }
   },
 

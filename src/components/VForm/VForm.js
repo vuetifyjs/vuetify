@@ -33,7 +33,8 @@ export default {
       const results = []
 
       const search = (children, depth = 0) => {
-        for (const child of children) {
+        for (let index = 0; index < children.length; index++) {
+          const child = children[index]
           if (child.errorBucket !== undefined) {
             results.push(child)
           } else {
@@ -46,7 +47,8 @@ export default {
       return search(this.$children)
     },
     watchInputs (inputs = this.getInputs()) {
-      for (const child of inputs) {
+      for (let index = 0; index < inputs.length; index++) {
+        const child = inputs[index]
         if (this.inputs.includes(child)) {
           continue // We already know about this input
         }
@@ -56,8 +58,8 @@ export default {
       }
     },
     watchChild (child) {
-      const watcher = (child) => {
-        child.$watch('valid', (val) => {
+      const watcher = child => {
+        child.$watch('valid', val => {
           this.$set(this.errorBag, child._uid, !val)
         }, { immediate: true })
       }
@@ -65,7 +67,7 @@ export default {
       if (!this.lazyValidation) return watcher(child)
 
       // Only start watching inputs if we need to
-      child.$watch('shouldValidate', (val) => {
+      child.$watch('shouldValidate', val => {
         if (!val) return
 
         // Only watch if we're not already doing it
@@ -79,10 +81,10 @@ export default {
       return !errors
     },
     reset () {
-      this.inputs.forEach((input) => input.reset())
-      if (this.lazyValidation) {
-        Object.keys(this.errorBag).forEach(key => this.$delete(this.errorBag, key))
+      for (let i = this.inputs.length; i--;) {
+        this.inputs[i].reset()
       }
+      if (this.lazyValidation) this.errorBag = {}
     }
   },
 
@@ -97,7 +99,8 @@ export default {
       // Something was removed, we don't want it in the errorBag any more
       const removed = this.inputs.filter(i => !inputs.includes(i))
 
-      for (const input of removed) {
+      for (let index = 0; index < removed.length; index++) {
+        const input = removed[index]
         this.$delete(this.errorBag, input._uid)
         this.$delete(this.inputs, this.inputs.indexOf(input))
       }
