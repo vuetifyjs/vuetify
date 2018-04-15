@@ -38,7 +38,11 @@ export default {
   },
 
   mounted () {
-    this.$el.scrollTop = this.$el.scrollHeight / 2 - this.$el.offsetHeight / 2
+    if (this.value && this.$el.scrollIntoView) {
+      this.$el.getElementsByClassName('active')[0].scrollIntoView()
+    } else {
+      this.$el.scrollTop = this.$el.scrollHeight / 2 - this.$el.offsetHeight / 2
+    }
   },
 
   methods: {
