@@ -28,8 +28,7 @@ export default {
         descending: false,
         page: 1,
         rowsPerPage: 5,
-        sortBy: null,
-        totalItems: 0
+        sortBy: null
       },
       expanded: {},
       actionsClasses: 'v-data-iterator__actions',
@@ -151,6 +150,9 @@ export default {
     pagination: {
       type: Object,
       default: () => {}
+    },
+    disablePageReset: {
+      type: Boolean
     }
   },
 
@@ -212,11 +214,11 @@ export default {
   },
 
   watch: {
-    itemsLength (totalItems) {
-      this.updatePagination({ page: 1, totalItems })
+    itemsLength () {
+      !this.disablePageReset && this.updatePagination({ page: 1 })
     },
-    'computedPagination.sortBy': function () { this.updatePagination({ page: 1 }) },
-    'computedPagination.descending': function () { this.updatePagination({ page: 1 }) }
+    'computedPagination.sortBy': function () { !this.disablePageReset && this.updatePagination({ page: 1 }) },
+    'computedPagination.descending': function () { !this.disablePageReset && this.updatePagination({ page: 1 }) }
   },
 
   methods: {
@@ -226,8 +228,6 @@ export default {
       } else {
         this.defaultPagination.rowsPerPage = this.rowsPerPageItems[0]
       }
-
-      this.defaultPagination.totalItems = this.itemsLength
 
       this.updatePagination(
         Object.assign({}, this.defaultPagination, this.pagination)
