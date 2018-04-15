@@ -68,7 +68,9 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
     <div class="v-datatable__actions">
       <div class="v-datatable__actions__select">
         Rows per page:
-        <div class="v-input v-text-field v-select">
+        <div role="combobox"
+             class="v-input v-text-field v-select"
+        >
           <div class="v-input__control">
             <div class="v-input__slot primary--text"
                  style="height: 32px;"
@@ -84,6 +86,7 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
                     </label>
                     <input tabindex="0"
                            type="text"
+                           autocomplete="on"
                     >
                     <div class="v-input__append-inner">
                       <div class="v-input__icon v-input__icon--append">
@@ -254,7 +257,9 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
     <div class="v-datatable__actions">
       <div class="v-datatable__actions__select">
         Rows per page:
-        <div class="v-input v-text-field v-select">
+        <div role="combobox"
+             class="v-input v-text-field v-select"
+        >
           <div class="v-input__control">
             <div class="v-input__slot primary--text"
                  style="height: 32px;"
@@ -270,6 +275,7 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
                     </label>
                     <input tabindex="0"
                            type="text"
+                           autocomplete="on"
                     >
                     <div class="v-input__append-inner">
                       <div class="v-input__icon v-input__icon--append">
@@ -442,7 +448,9 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
     <div class="v-datatable__actions">
       <div class="v-datatable__actions__select">
         Rows per page:
-        <div class="v-input v-text-field v-select">
+        <div role="combobox"
+             class="v-input v-text-field v-select"
+        >
           <div class="v-input__control">
             <div class="v-input__slot primary--text"
                  style="height: 32px;"
@@ -458,6 +466,7 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
                     </label>
                     <input tabindex="0"
                            type="text"
+                           autocomplete="on"
                     >
                     <div class="v-input__append-inner">
                       <div class="v-input__icon v-input__icon--append">

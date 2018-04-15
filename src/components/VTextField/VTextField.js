@@ -33,6 +33,7 @@ export default {
     appendOuterIcon: String,
     autofocus: Boolean,
     box: Boolean,
+    browserAutocomplete: String,
     clearable: Boolean,
     clearIcon: {
       type: String,
@@ -181,7 +182,8 @@ export default {
           disabled: this.disabled,
           focused: !isSingleLine && (this.isFocused || !!this.validationState),
           left,
-          value: !isSingleLine && (this.isFocused || this.isDirty || !!this.placeholder)
+          value: Boolean(!isSingleLine &&
+            (this.isFocused || this.isDirty || this.placeholder))
         }
       }
 
@@ -231,10 +233,8 @@ export default {
       }
 
       if (this.placeholder) data.attrs.placeholder = this.placeholder
-
-      if (this.mask) {
-        data.attrs.maxlength = this.masked.length
-      }
+      if (this.mask) data.attrs.maxlength = this.masked.length
+      if (this.browserAutocomplete) data.attrs.autocomplete = this.browserAutocomplete
 
       return this.$createElement('input', data)
     },

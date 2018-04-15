@@ -38,6 +38,7 @@ export default {
   ],
 
   data: vm => ({
+    attrsInput: { role: 'combobox' },
     cachedItems: vm.cacheItems ? vm.items : [],
     isMenuActive: false,
     selectedIndex: null
@@ -123,10 +124,13 @@ export default {
       return [{
         name: 'click-outside',
         value: () => {
+          if (this.isMenuActive) {
+            this.onKeyDown({ keyCode: 9 })
+          }
+
           this.isMenuActive = false
           this.isFocused = false
           this.selectedIndex = null
-          this.onKeyDown({ keyCode: 9 })
         },
         args: {
           closeConditional: e => {
@@ -282,11 +286,7 @@ export default {
       }, `${this.getText(item)}${last ? '' : ', '}`)
     },
     genDefaultSlot () {
-      const activator = this.$createElement('div', {
-        staticClass: 'v-select__slot',
-        directives: this.directives,
-        slot: 'activator'
-      }, [
+      const activator = this.genSelectSlot([
         this.genLabel(),
         this.prefix ? this.genAffix('prefix') : null,
         this.genSelections(),
@@ -377,6 +377,13 @@ export default {
       }
 
       return children
+    },
+    genSelectSlot (children) {
+      return this.$createElement('div', {
+        staticClass: 'v-select__slot',
+        directives: this.directives,
+        slot: 'activator'
+      }, children)
     },
     getText (item) {
       return getPropertyFromItem(item, this.itemText, item)

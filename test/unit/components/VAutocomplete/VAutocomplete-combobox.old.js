@@ -3,33 +3,7 @@
 // import VMenu from '@/components/VMenu'
 
 // test('VSelect - combobox', ({ mount }) => {
-//   it('should emit custom value on blur', async () => {
-//     const wrapper = mount(VSelect, {
-//       attachToDocument: true,
-//       propsData: {
-//         combobox: true,
-//         value: null
-//       }
-//     })
-
-//     const input = wrapper.find('input')[0]
-
-//     const change = jest.fn()
-//     wrapper.vm.$on('input', change)
-
-//     input.trigger('focus')
-//     await wrapper.vm.$nextTick()
-
-//     input.element.value = 'foo'
-//     input.trigger('input')
-//     await wrapper.vm.$nextTick()
-
-//     wrapper.vm.blur()
-//     await wrapper.vm.$nextTick()
-
-//     expect(change).toHaveBeenCalledWith('foo')
-//     expect('Unable to locate target [data-app]').toHaveBeenTipped()
-//   })
+//
 
 //   it('should evaluate the range of an integer', async () => {
 //     const wrapper = mount(VSelect, {

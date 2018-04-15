@@ -53,7 +53,9 @@ export default {
       default: 'value'
     },
     noDataText: String,
-    searchInput: String,
+    searchInput: {
+      default: null
+    },
     selectedItems: {
       type: Array,
       default: () => []

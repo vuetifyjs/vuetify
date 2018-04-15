@@ -205,6 +205,7 @@ export default {
   render (h) {
     return h('div', {
       staticClass: 'v-input',
+      attrs: this.attrsInput,
       'class': this.classesInput
     }, [
       this.genPrependSlot(),

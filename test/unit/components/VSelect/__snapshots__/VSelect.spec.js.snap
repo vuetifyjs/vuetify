@@ -10,7 +10,9 @@ exports[`VSelect should escape items in menu 1`] = `
 
 exports[`VSelect should only show items if they are in items 1`] = `
 
-<div class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty">
+<div role="combobox"
+     class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty"
+>
   <div class="v-input__control">
     <div class="v-input__slot primary--text"
          style="height: 32px;"
@@ -29,6 +31,7 @@ exports[`VSelect should only show items if they are in items 1`] = `
             </div>
             <input tabindex="0"
                    type="text"
+                   autocomplete="on"
             >
             <div class="v-input__append-inner">
               <div class="v-input__icon v-input__icon--append">
@@ -56,7 +59,9 @@ exports[`VSelect should only show items if they are in items 1`] = `
 
 exports[`VSelect should only show items if they are in items 2`] = `
 
-<div class="v-input v-text-field v-select">
+<div role="combobox"
+     class="v-input v-text-field v-select"
+>
   <div class="v-input__control">
     <div class="v-input__slot primary--text"
          style="height: 32px;"
@@ -72,6 +77,7 @@ exports[`VSelect should only show items if they are in items 2`] = `
             </label>
             <input tabindex="0"
                    type="text"
+                   autocomplete="on"
             >
             <div class="v-input__append-inner">
               <div class="v-input__icon v-input__icon--append">
@@ -99,7 +105,9 @@ exports[`VSelect should only show items if they are in items 2`] = `
 
 exports[`VSelect should only show items if they are in items 3`] = `
 
-<div class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty">
+<div role="combobox"
+     class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty"
+>
   <div class="v-input__control">
     <div class="v-input__slot primary--text"
          style="height: 32px;"
@@ -118,6 +126,7 @@ exports[`VSelect should only show items if they are in items 3`] = `
             </div>
             <input tabindex="0"
                    type="text"
+                   autocomplete="on"
             >
             <div class="v-input__append-inner">
               <div class="v-input__icon v-input__icon--append">
@@ -145,7 +154,9 @@ exports[`VSelect should only show items if they are in items 3`] = `
 
 exports[`VSelect should only show items if they are in items 4`] = `
 
-<div class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty">
+<div role="combobox"
+     class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty"
+>
   <div class="v-input__control">
     <div class="v-input__slot primary--text"
          style="height: 32px;"
@@ -167,6 +178,7 @@ exports[`VSelect should only show items if they are in items 4`] = `
             </div>
             <input tabindex="0"
                    type="text"
+                   autocomplete="on"
             >
             <div class="v-input__append-inner">
               <div class="v-input__icon v-input__icon--append">
@@ -194,7 +206,9 @@ exports[`VSelect should only show items if they are in items 4`] = `
 
 exports[`VSelect should render v-select correctly when not using scope slot 1`] = `
 
-<div class="v-input v-text-field v-select">
+<div role="combobox"
+     class="v-input v-text-field v-select"
+>
   <div class="v-input__control">
     <div class="v-input__slot primary--text"
          style="height: 32px;"
@@ -210,6 +224,7 @@ exports[`VSelect should render v-select correctly when not using scope slot 1`] 
             </label>
             <input tabindex="0"
                    type="text"
+                   autocomplete="on"
             >
             <div class="v-input__append-inner">
               <div class="v-input__icon v-input__icon--append">
@@ -237,7 +252,9 @@ exports[`VSelect should render v-select correctly when not using scope slot 1`] 
 
 exports[`VSelect should render v-select correctly when not using v-list-tile in item scope slot 1`] = `
 
-<div class="v-input v-text-field v-select">
+<div role="combobox"
+     class="v-input v-text-field v-select"
+>
   <div class="v-input__control">
     <div class="v-input__slot primary--text"
          style="height: 32px;"
@@ -253,6 +270,7 @@ exports[`VSelect should render v-select correctly when not using v-list-tile in 
             </label>
             <input tabindex="0"
                    type="text"
+                   autocomplete="on"
             >
             <div class="v-input__append-inner">
               <div class="v-input__icon v-input__icon--append">
@@ -280,7 +298,9 @@ exports[`VSelect should render v-select correctly when not using v-list-tile in 
 
 exports[`VSelect should render v-select correctly when using v-list-tile in item scope slot 1`] = `
 
-<div class="v-input v-text-field v-select">
+<div role="combobox"
+     class="v-input v-text-field v-select"
+>
   <div class="v-input__control">
     <div class="v-input__slot primary--text"
          style="height: 32px;"
@@ -296,6 +316,7 @@ exports[`VSelect should render v-select correctly when using v-list-tile in item
             </label>
             <input tabindex="0"
                    type="text"
+                   autocomplete="on"
             >
             <div class="v-input__append-inner">
               <div class="v-input__icon v-input__icon--append">

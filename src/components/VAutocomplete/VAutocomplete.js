@@ -3,18 +3,24 @@ import '../../stylus/components/_autocompletes.styl'
 
 // Extensions
 import VSelect from '../VSelect'
-import VSelectList from '../VSelect/VSelectList'
+import VTextField from '../VTextField/VTextField'
 
 export default {
   name: 'v-autocomplete',
 
   extends: VSelect,
 
-  data: () => ({
-    searchValue: null
+  data: vm => ({
+    attrsInput: null,
+    lazySearch: vm.searchInput
   }),
 
   props: {
+    browserAutocomplete: {
+      type: String,
+      default: 'off'
+    },
+    combobox: Boolean,
     filter: {
       type: Function,
       default: (item, queryText, itemText) => {
@@ -36,7 +42,9 @@ export default {
       type: Boolean,
       default: true
     },
-    search: String,
+    searchInput: {
+      default: null
+    },
     transition: {
       type: String,
       default: 'fade-transition'
@@ -54,72 +62,91 @@ export default {
     },
     filteredItems () {
       return this.filterDuplicates(this.cachedItems.concat(this.items))
-        .filter(i => this.filter(i, this.searchValue, this.getText(i)))
+        .filter(i => this.filter(i, this.internalSearch, this.getText(i)))
+    },
+    hasTags () {
+      return this.tags || this.combobox
+    },
+    internalSearch: {
+      get () {
+        return this.lazySearch
+      },
+      set (val) {
+        this.lazySearch = val
+
+        this.$emit('update:searchInput', val)
+      }
     },
     isDirty () {
-      return VSelect.computed.isDirty.call(this) || this.searchValue
+      return VSelect.computed.isDirty.call(this) || this.searchIsDirty
     },
     isNotFiltering () {
       return this.isDirty &&
-        this.searchValue === this.getText(this.selectedItem)
+        this.internalSearch === this.getText(this.selectedItem)
+    },
+    searchIsDirty () {
+      return VTextField.computed.isDirty.call(this)
     }
   },
 
   watch: {
+    internalValue (val) {
+      this.lazySearch = val
+    },
     isFocused (val) {
       if (val && this.$refs.input) {
         this.$refs.input.select()
+      } else if (!val && this.hasTags && this.lazySearch) {
+        this.updateTags(this.lazySearch)
       }
     },
-    searchValue (val) {
-      if (val != null && val != '') {
-        this.isMenuActive = true
-      }
+    isMenuActive (val) {
+      if (val) return
+
+      this.lazySearch = null
+    },
+    searchInput (val) {
+      this.lazySearch = val
     }
   },
 
   methods: {
+    genInput () {
+      const input = VTextField.methods.genInput.call(this)
+
+      input.data.attrs.role = 'combobox'
+
+      return input
+    },
     genList () {
-      return this.$createElement(VSelectList, {
-        props: {
-          action: this.multiple && !this.isHidingSelected,
-          color: this.color,
-          dark: this.dark,
-          dense: this.dense,
-          items: this.filteredItems,
-          light: this.light,
-          noDataText: this.noDataText,
-          searchInput: this.searchValue,
-          selectedItems: this.selectedItems
-        },
-        on: {
-          select: this.selectItem
-        },
-        scopedSlots: {
-          item: this.$scopedSlots.item
-        }
-      }, [
-        this.$slots['no-data'] ? this.$createElement('div', {
-          slot: 'no-data'
-        }, this.$slots['no-data']) : null
-      ])
+      const list = VSelect.methods.genList.call(this)
+
+      list.componentOptions.propsData.searchInput = this.internalSearch
+      list.componentOptions.propsData.items = this.filteredItems
+
+      return list
     },
     genSelections () {
-      return this.multiple || this.chips
-        ? VSelect.methods.genSelections.call(this)
-        : null
+      return this.combobox && this.isDirty
+        ? null
+        : VSelect.methods.genSelections.call(this)
     },
     selectItem (item) {
-      this.searchValue = null
+      this.internalSearch = null
       VSelect.methods.selectItem.call(this, item)
     },
     onInput (e) {
       this.mask && this.resetSelections(e.target)
+      this.internalSearch = e.target.value
       this.lazyValue = e.target.value
-      this.searchValue = e.target.value
       this.badInput = e.target.validity && e.target.validity.badInput
     },
     onKeyDown (e) {
+      // If typing and menu is not currently active
+      if (this.searchIsDirty) {
+        this.isMenuActive = true
+      }
+
       if (!this.$refs.menu || e.keyCode !== 38) {
         return VSelect.methods.onKeyDown.call(this, e)
       }
@@ -128,6 +155,39 @@ export default {
       if (this.$refs.menu.listIndex === 0) {
         this.$refs.menu.listIndex = -1
       }
+    },
+    updateTags (content) {
+      if (this.combobox && this.searchIsDirty) {
+        this.internalValue = content
+      }
+      // console.log('tags')
+      // // Avoid direct mutation
+      // // for vuex strict mode
+      // let selectedItems = this.selectedItems.slice()
+
+      // // If a duplicate item
+      // // exists, remove it
+      // if (selectedItems.includes(content)) {
+      //   this.$delete(selectedItems, selectedItems.indexOf(content))
+      // }
+
+      // // When updating tags ensure
+      // // that that the search text
+      // // is populated if needed
+      // let internalSearch = null
+      // if (this.combobox) {
+      //   selectedItems = [content]
+      //   internalSearch = this.chips ? null : content
+      // } else {
+      //   selectedItems.push(content)
+      // }
+
+      // this.selectedItems = selectedItems
+
+      // this.$nextTick(() => {
+      //   this.internalSearch = internalSearch
+      //   this.$emit('input', this.combobox ? content : this.selectedItems)
+      // })
     }
   }
 }
