@@ -15,7 +15,7 @@ export default {
     }
   }],
   options: {
-    'arg:target': '`v-scroll:#target="callback"` 타겟의 스크롤 변화를 관찰. 기본 타겟은 윈도우지만 임의의 유효한 id selector 로 바꿀 수 있음',
+    'arg:target': '`v-scroll:#scroll-target="callback"` 타겟의 스크롤 변화를 관찰. 기본 타겟은 윈도우지만 임의의 유효한 id selector 로 바꿀 수 있음',
     'value': '`v-scroll="callback"` 타겟이 스크롤 될때 호출되는 함수'
   }
 }
