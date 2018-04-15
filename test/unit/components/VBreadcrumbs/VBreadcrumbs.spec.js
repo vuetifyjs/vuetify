@@ -59,4 +59,20 @@ test('VBreadcrumbs.js', ({ mount, compileToFunctions }) => {
     wrapper.setProps({ justifyCenter: false, justifyEnd: true })
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should have one less number of dividers then items', () => {
+    const { render } = compileToFunctions(`
+      <v-breadcrumbs>
+        <v-breadcrumbs-item v-for="i in 5" :key="i"/>
+      </v-breadcrumbs>
+    `)
+    const component = Vue.component('test', {
+      components: {
+        VBreadcrumbs, VBreadcrumbsItem
+      },
+      render
+    })
+    const wrapper = mount(component)
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })
