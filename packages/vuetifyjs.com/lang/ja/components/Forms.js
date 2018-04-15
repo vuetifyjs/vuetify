@@ -1,30 +1,36 @@
 export default {
   header: 'Form',
-  headerText: 'When it comes to form validation, Vuetify has a multitude of integrations and baked in functionality. Want to use a 3rd party validation plugin? Out of the box you can use [Vee-validate](https://github.com/baianat/Vee-validate) and [vuelidate](https://github.com/monterail/vuelidate).',
+  headerText:
+    'フォームのバリデーションに関して、Vuetifyには多数の機能が組み込まれています。なお、サードパーティのバリデーションプラグインである[Vee-validate](https://github.com/baianat/Vee-validate)や[vuelidate](https://github.com/monterail/vuelidate)も使用することができます。',
   components: ['v-form'],
-  examples: [{
-    basicValidation: {
-      header: 'VForm - Basic validation',
-      desc: 'The internal `v-form` component makes it easy to add validation to form inputs. All input components have a `rules` prop which takes an array of functions. Whenever the value of an input is changed, each function in the array will receive the new value. If a function returns false or a string, validation has failed.'
-    },
-    validationWithSubmitAndClear: {
-      header: 'Validation with submit & clear',
-      desc: 'The `v-form` component has two functions that can be accessed by setting a ref on the component. `validate()` will validate all inputs and return if they are all valid or not. `reset()` will clear validation errors from all inputs.'
-    },
-    vuelidate: {
-      header: 'Vuelidate',
-      desc: ''
-    },
-    veeValidate: {
-      header: 'Vee-validate',
-      desc: 'Vee-validate is another validation plugin that allows you to check your forms. One caveat is that you must add the **type="checkbox"** to properly validate a `v-checkbox` when using the **value** prop.'
+  examples: [
+    {
+      basicValidation: {
+        header: 'VForm - 基本的なバリデーション',
+        desc:
+          '内部の `v-form` コンポーネントを使用すると、簡単にフォームにバリデーションを追加できます。全てのフォームコンポーネントは、 `rules` prop という関数の配列を保持しています。入力値が変更される度に、配列内の各関数は新しいフォームの値を受け取ります。関数がfalseまたは文字列を返却した場合、バリデーションの結果はfalseです。'
+      },
+      validationWithSubmitAndClear: {
+        header: '送信時のバリデーションとバリデーションのクリア',
+        desc:
+          ' `v-form` コンポーネントは、コンポーネントからのrefを設定することでアクセスが可能になる2つの関数を保持しています。 `validate()` は全ての入力値をバリデートし、全てが有効な入力かどうかを返却します。 `reset()` は、全ての入力値からバリデーションエラーをクリアにします。'
+      },
+      vuelidate: {
+        header: 'Vuelidate',
+        desc: ''
+      },
+      veeValidate: {
+        header: 'Vee-validate',
+        desc:
+          'Vee-validateは、フォームのバリデーションが可能なもうひとつのバリデーションプラグインです。なお、 **value** propを使用するときに `v-checkbox`を正しくバリデートするには、**type =" checkbox "** を追加する必要があるので注意して下さい。'
+      }
     }
-  }],
+  ],
   props: {
-    lazyValidation: 'If enabled, **value** will always be _true_ unless there are visible validation errors. You can still call `validate()` to manually trigger validation'
+    lazyValidation: '有効にすると、表示されるバリデーションエラーが無い限り、 **value** は常に _true_ となります。'
   },
   functions: {
-    reset: 'Resets validation for all inputs',
-    validate: 'Validates all inputs and returns result'
+    reset: '全ての入力値に対するバリデートをリセットします。',
+    validate: '全ての入力値をバリデートし結果を返却します。'
   }
 }
