@@ -1,11 +1,11 @@
 export default {
   header: 'Progress',
-  headerText: 'The `v-progress-circular` and `v-progress-linear` components are used to convey data visually to users. They can also represent an indeterminate amount, such as loading or processing. These components contains a slot that is centered within the component container.',
+  headerText: 'The `v-progress-circular` and `v-progress-linear` components are used to convey data visually to users. They can also represent an indeterminate amount, such as loading or processing. These components contain a slot that is centered within the component container.',
   components: ['v-progress-circular', 'v-progress-linear'],
   examples: [{
     circularDefault: {
       header: 'Default',
-      desc: 'By default, progress circular uses the applications secondary color.'
+      desc: "By default, progress circular uses the application's secondary color."
     },
     circularColored: {
       header: 'Colored',
@@ -41,7 +41,7 @@ export default {
     },
     linearCustomHeightAndContextualColors: {
       header: 'Custom height and contextual colors',
-      desc: 'A custom height or contextual color can be applied to a progress bar. The bars primary color is your applications primary color.'
+      desc: "A custom height or contextual color can be applied to a progress bar. The bar's primary color is your application's primary color."
     },
     linearCustomColors: {
       header: 'Custom colors',
