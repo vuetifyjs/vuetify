@@ -52,16 +52,16 @@ export default {
       const length = this.$slots.default.length
 
       for (let i = 0; i < length; i++) {
-        const elm = this.$slots.default[i]
-        children.push(elm)
-
+        const elm = this.$slots.default[i];
+        
         // TODO: use the component name instead of tag
-        if (!elm.componentOptions ||
-          elm.componentOptions.tag !== 'v-breadcrumbs-item' ||
-          i === length - 1
-        ) continue
+        if (!elm.componentOptions || elm.componentOptions.tag !== 'v-breadcrumbs-item') 
+          continue
 
-        children.push(this.$createElement('li', dividerData, this.computedDivider))
+        if (children.length)
+          children.push(this.$createElement('li', dividerData, this.computedDivider))
+          
+        children.push(elm);
       }
 
       return children
