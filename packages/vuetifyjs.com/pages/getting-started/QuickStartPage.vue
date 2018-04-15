@@ -83,6 +83,10 @@
           | &lt;head&gt;
           |   &lt;link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet"&gt;
           | &lt;/head&gt;
+        section-text(:value="`${namespace}.existingText6`")
+        markup(lang="js")
+          | // index.js or main.js
+          | import 'material-design-icons-iconfont/dist/material-design-icons.min.css' // Ensure you are using css-loader
         app-alert(error :value="`${namespace}.alert2`")
 
       section#ie11-support
