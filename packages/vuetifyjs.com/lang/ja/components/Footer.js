@@ -1,28 +1,28 @@
 export default {
   header: 'Footer',
-  headerText: 'The `v-footer` component is used for displaying general information that a user might want to access from any page within your site.',
+  headerText: '`v-footer`コンポーネントは、あなたのサイト内のどのページからでもアクセスしたい一般的な情報を表示するために使われます。',
   components: ['v-footer'],
   examples: [{
     default: {
       header: 'Default',
-      desc: 'The footer component is just a basic container.'
+      desc: 'フッターコンポーネントは単なる基本的なコンテナです。'
     },
     companyFooter: {
-      header: 'Company Footer',
-      desc: 'The footer component as a basic company footer with links.'
+      header: '会社のフッター',
+      desc: 'リンクを持つ基本的な会社のフッターとしてのフッターコンポーネントです。'
     },
     indigoFooter: {
-      header: 'Indigo Footer',
-      desc: 'The footer component with Indigo background color and social media icons and button.'
+      header: 'インディゴ色のフッター',
+      desc: 'インディゴ色の背景色で、ソーシャルメディアのアイコンとボタンのあるフッターコンポーネントです。'
     },
     tealFooter: {
-      header: 'Teal Footer',
-      desc: 'The footer component with a Teal color header and columns and rows of links.'
+      header: '青緑色のフッター',
+      desc: '青緑色見出しと、列と行のリンクを含むフッターコンポーネントです。'
     }
   }],
   props: {
     absolute: 'Mixins.Positionable.props.absolute',
     fixed: 'Mixins.Positionable.props.fixed',
-    inset: 'Positions the toolbar offset from an application `v-navigation-drawer`'
+    inset: 'アプリケーションからのツールバーの位置を `v-navigation-drawer`で指定します。'
   }
 }
