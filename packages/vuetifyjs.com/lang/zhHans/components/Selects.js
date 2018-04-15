@@ -44,7 +44,7 @@ export default {
   props: {
     attach: 'Mixins.Detachable.props.attach',
     autocomplete: '根据用户输入进行筛选',
-    browserAutocomplete: '当使用 **autocomplete** 属性时为搜索框设置自动补全属性',
+    browserAutocomplete: '设置搜索框的浏览器自动补全',
     cacheItems: '保留已经通过 **items** 属性的项在本地的唯一副本',
     chips: '改变一个已选择项为小纸片（chips）的显示方式',
     combobox: '在单选中 **tags** 的一个变种',
