@@ -1,6 +1,6 @@
 <template>
   <v-layout row wrap>
-    <v-flex xs11 sm5>
+    <v-flex xs12 sm6 md4>
       <v-menu
         ref="menu"
         lazy
@@ -28,7 +28,7 @@
       </v-menu>
     </v-flex>
     <v-spacer></v-spacer>
-    <v-flex xs11 sm5>
+    <v-flex xs12 sm6 md4>
       <v-dialog
         ref="dialog"
         persistent
@@ -52,6 +52,31 @@
         </v-date-picker>
       </v-dialog>
     </v-flex>
+    <v-flex xs12 sm6 md4>
+      <v-menu
+        ref="menu2"
+        lazy
+        :close-on-content-click="false"
+        v-model="menu2"
+        transition="scale-transition"
+        offset-y
+        full-width
+        :nudge-right="40"
+        min-width="290px"
+        :return-value.sync="date"
+      >
+        <v-text-field
+          slot="activator"
+          label="Picker without buttons"
+          v-model="date"
+          prepend-icon="event"
+          readonly
+        ></v-text-field>
+        <v-date-picker v-model="date" @input="$refs.menu2.save(date)"></v-date-picker>
+
+      </v-menu>
+    </v-flex>
+    <v-spacer></v-spacer>
   </v-layout>
 </template>
 
@@ -60,7 +85,8 @@
     data: () => ({
       date: null,
       menu: false,
-      modal: false
+      modal: false,
+      menu2: false
     })
   }
 </script>
