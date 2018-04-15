@@ -60,10 +60,13 @@ test('VBreadcrumbs.js', ({ mount, compileToFunctions }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should have one less number of dividers then items', () => {
+  it('should not create dividers for non-items', () => {
     const { render } = compileToFunctions(`
       <v-breadcrumbs>
-        <v-breadcrumbs-item v-for="i in 5" :key="i"/>
+        <span></span>
+        <v-breadcrumbs-item/>
+        <span></span>
+        <v-breadcrumbs-item/>
       </v-breadcrumbs>
     `)
     const component = Vue.component('test', {
