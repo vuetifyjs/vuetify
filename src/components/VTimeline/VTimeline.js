@@ -11,16 +11,16 @@ export default {
 
   provide () {
     return {
-      iconParent: this.icon,
-      noIconParent: this.noIcon,
-      circleFillColorParent: this.circleFillColor
+      right: this.right,
+      left: this.left,
+      alternate: this.alternate
     }
   },
 
   props: {
     right: {
       type: Boolean,
-      default: true
+      default: false
     },
     left: {
       type: Boolean,
@@ -28,40 +28,20 @@ export default {
     },
     alternate: {
       type: Boolean,
-      default: false
-    },
-    icon: {
-      type: String,
-      default: 'event'
-    },
-    noIcon: {
-      type: Boolean,
-      default: false
-    },
-    circleFillColor: {
-      type: String,
-      default: 'grey lighten-4'
+      default: true
     }
   },
 
   render (h) {
     return h(
-      'div',
+      'ul',
       {
         staticClass: 'v-timeline',
         class: {
           ...this.themeClasses
         }
       },
-      [
-        h(
-          'ul',
-          {
-            staticClass: 'v-timeline__container'
-          },
-          this.$slots.default
-        )
-      ]
+      this.$slots.default
     )
   }
 }
