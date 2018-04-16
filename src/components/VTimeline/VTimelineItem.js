@@ -7,35 +7,32 @@ import Colorable from '../../mixins/colorable'
 export default {
   name: 'v-timeline-item',
 
-  inject: ['iconParent', 'noIconParent', 'circleFillColorParent'],
+  // inject: ['right', 'left', 'alternate'],
 
   mixins: [Colorable],
 
   props: {
     icon: {
-      type: String
+      type: String,
+      default: 'event'
+    },
+    iconColor: {
+      tyep: String
     },
     noIcon: {
       type: Boolean,
       default: false
     },
-    circleFillColor: {
-      type: String
+    iconFillColor: {
+      type: String,
+      default: 'white'
     }
   },
 
   computed: {
-    classes () {
-      return this.addBackgroundColorClassChecks({
-        'v-timeline__item--body': true
-      })
-    },
     circleClasses () {
-      const circleFillColorClass = this.circleFillColor || this.circleFillColorParent
-      const classes = {
-        [circleFillColorClass]: true
-      }
-      this.addBackgroundColorClassChecks({}, classes)
+      const classes = this.addBackgroundColorClassChecks({}, this.iconFillColor)
+      return this.addTextColorClassChecks(classes, this.iconFillColor)
     }
   },
 
@@ -44,37 +41,14 @@ export default {
       return this.$createElement(
         'div',
         {
-          staticClass: 'v-timeline__item--body__container'
+          staticClass: 'v-timeline__body'
         },
-        [
-          this.$createElement(
-            'div',
-            {
-              ref: 'body',
-              class: this.classes
-            },
-            this.$slots.item
-          )
-        ]
+        this.$slots.item
       )
     },
-    genIconHeader () {
-      const icon = this.icon ? this.icon : this.iconParent
-      const iconSize = this.iconSize ? this.iconSize : this.iconSizeParent
-
-      const iconElement =
-        this.noIcon || this.noIconParent
-          ? null
-          : this.$slots.icon ||
-            this.$createElement(
-              VIcon,
-              {
-                props: {
-                  size: iconSize + 'px'
-                }
-              },
-              icon
-            )
+    genHeader () {
+      const icon = this.icon
+      const iconElement = this.noIcon ? null : this.$createElement(VIcon, icon)
       return this.$createElement(
         'div',
         {
@@ -89,7 +63,7 @@ export default {
   render (h) {
     const children = []
 
-    children.push(this.genIconHeader())
+    children.push(this.genHeader())
     children.push(this.genBody())
 
     return h(
@@ -97,13 +71,7 @@ export default {
       {
         staticClass: 'v-timeline__item'
       },
-      [
-        h('div', {
-          staticClass: 'v-timeline__line',
-          class: this.lineClasses
-        }),
-        children
-      ]
+      children
     )
   }
 }
