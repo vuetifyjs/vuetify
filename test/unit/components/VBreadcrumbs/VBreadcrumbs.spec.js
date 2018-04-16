@@ -59,4 +59,23 @@ test('VBreadcrumbs.js', ({ mount, compileToFunctions }) => {
     wrapper.setProps({ justifyCenter: false, justifyEnd: true })
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should not create dividers for non-items', () => {
+    const { render } = compileToFunctions(`
+      <v-breadcrumbs>
+        <span></span>
+        <v-breadcrumbs-item/>
+        <span></span>
+        <v-breadcrumbs-item/>
+      </v-breadcrumbs>
+    `)
+    const component = Vue.component('test', {
+      components: {
+        VBreadcrumbs, VBreadcrumbsItem
+      },
+      render
+    })
+    const wrapper = mount(component)
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

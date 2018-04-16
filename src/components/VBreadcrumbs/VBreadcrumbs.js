@@ -48,20 +48,24 @@ export default {
       if (!this.$slots.default) return null
 
       const children = []
-      const dividerData = { staticClass: 'breadcrumbs__divider' }
-      const length = this.$slots.default.length
+      const divider = this.$createElement('li', {
+        staticClass: 'breadcrumbs__divider'
+      }, this.computedDivider)
 
-      for (let i = 0; i < length; i++) {
+      let createDividers = false
+      for (let i = 0; i < this.$slots.default.length; i++) {
         const elm = this.$slots.default[i]
-        children.push(elm)
 
-        // TODO: use the component name instead of tag
-        if (!elm.componentOptions ||
-          elm.componentOptions.tag !== 'v-breadcrumbs-item' ||
-          i === length - 1
-        ) continue
-
-        children.push(this.$createElement('li', dividerData, this.computedDivider))
+        if (
+          !elm.componentOptions ||
+          elm.componentOptions.Ctor.options.name !== 'v-breadcrumbs-item'
+        ) {
+          children.push(elm)
+        } else {
+          if (createDividers) children.push(divider)
+          children.push(elm)
+          createDividers = true
+        }
       }
 
       return children
