@@ -3,6 +3,85 @@
 
 /* Themes */
 timeline($material)
+  background-color: $material.v-timelines
+  color: $material.text.primary
+
+theme(timeline, "timeline")
+
+.v-timeline
+  max-width: 1104px
+  padding: 0
+  margin: 24px auto
+  overflow: hidden
+  width: 100%
+
+  &__container
+    list-style: none
+    position: relative
+
+    &> .v-timeline__item
+      position: relative
+      min-height: 128px
+
+      & .v-timeline__line
+        content: ""
+        width: 2px
+        margin-left: -4px
+        position: absolute
+        top: 0
+        padding: 0
+        bottom: 0
+        background: currentColor
+        left: 5%
+
+&:last-child .v-timeline__line
+position: relative
+
+&:before
+width: 0px
+
+.v-timeline__container > .v-timeline__item
+& .v-timeline__item--body__container
+margin: 0 0 0 10%
+padding-top: 24px
+padding-bottom: 48px
+position: relative
+
+& .v-timeline__icon
+width: 50px
+height: 50px
+speak: none
+line-height: 50px
+position: absolute
+border-radius: 50%
+background: inherit
+box-shadow: none
+text-align: center
+left: 5%
+top: 48%
+margin: 0 0 0 -28px
+
+@media screen and (max-width: ($grid-breakpoints.md))
+  .v-timeline
+    padding: 0 15px 0 15px
+
+    &__container
+      margin: 16px 0 0 0
+
+      &> .v-timeline__item .v-timeline__icon
+        left: 6%
+
+.v-timeline__container > .v-timeline__item
+  & .v-timeline__item--body__conatainer
+    margin: 0 48px 0 12%
+
+& .v-timeline__icon
+  left: 6%
+@import "../bootstrap"
+@import "../theme"
+
+/* Themes */
+timeline($material)
   background-color: $material.timelines
   color: $material.text.primary
 
