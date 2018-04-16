@@ -1,4 +1,4 @@
-import { test, touch } from '@/test'
+import { test, touch, resizeWindow } from '@/test'
 import { createRange } from '@/util/helpers'
 import VTabs from '@/components/VTabs'
 import VTab from '@/components/VTabs/VTab'
@@ -473,5 +473,33 @@ test('VTabs', ({ mount, shallow }) => {
     // Will kill test if fails
     delete wrapper.vm.$refs.bar
     wrapper.vm.setOverflow()
+  })
+
+  it('should set dimensions when onResize is called', async () => {
+    const setWidths = jest.fn()
+    const wrapper = mount(VTabs, {
+      propsData: {
+        value: 'foo'
+      },
+      slots: {
+        default: [{
+          functional: true,
+          render: h => h(VTab, {
+            props: { href: '#foo' }
+          })
+        }]
+      },
+      methods: { setWidths }
+    })
+
+    expect(setWidths).not.toBeCalled()
+
+    await wrapper.vm.$nextTick()
+
+    expect(setWidths).toHaveBeenCalledTimes(1)
+
+    await resizeWindow(800)
+
+    expect(setWidths).toHaveBeenCalledTimes(2)
   })
 })

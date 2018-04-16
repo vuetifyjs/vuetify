@@ -97,7 +97,6 @@ export default {
       return this.widths.container > this.scrollOffset + this.widths.wrapper
     },
     callSlider () {
-      this.setWidths()
       if (this.hideSlider || !this.activeTab) return false
 
       // Give screen time to paint
@@ -119,6 +118,8 @@ export default {
      */
     onResize () {
       if (this._isDestroyed) return
+
+      this.setWidths()
 
       clearTimeout(this.resizeTimeout)
       this.resizeTimeout = setTimeout(() => {
