@@ -18,6 +18,18 @@ export default {
   },
 
   props: {
+    right: {
+      type: Boolean,
+      default: true
+    },
+    left: {
+      type: Boolean,
+      default: false
+    },
+    alternate: {
+      type: Boolean,
+      default: false
+    },
     icon: {
       type: String,
       default: 'event'
