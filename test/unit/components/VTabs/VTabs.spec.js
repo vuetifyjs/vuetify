@@ -333,23 +333,37 @@ test('VTabs', ({ mount, shallow }) => {
 
     await ssrBootable()
 
-    expect(wrapper.vm.scrollIntoView()).toEqual(false)
+    wrapper.vm.scrollIntoView()
+
+    expect(wrapper.vm.scrollOffset).toBe(0)
+    expect(wrapper.vm.isOverflowing).toBe(false)
 
     wrapper.setProps({ value: 'foo' })
-    // Simulate being scrolled too far to the right
-    wrapper.setData({ scrollOffset: 400 })
     await wrapper.vm.$nextTick()
 
+    // Simulate being scrolled too far to the left
+    wrapper.setData({
+      isOverflowing: true,
+      scrollOffset: 100
+    })
+
     wrapper.vm.scrollIntoView()
-    await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.scrollOffset).toBe(0)
 
-    // DOM elements have no actual widths
-    // Trick into running else condition
-    wrapper.setData({ scrollOffset: -1 })
+    // Simulate being scrolled too far to the right
+    wrapper.setData({
+      isOverflowing: true,
+      scrollOffset: -100
+    })
+
     wrapper.vm.scrollIntoView()
-    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.scrollOffset).toBe(0)
+
+    wrapper.setData({ isOverflowing: true })
+
+    wrapper.vm.scrollIntoView()
 
     expect(wrapper.vm.scrollOffset).toBe(0)
   })
