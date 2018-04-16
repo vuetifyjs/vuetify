@@ -15,8 +15,8 @@
       <v-dialog
         v-model="dialog"
         fullscreen
+        hide-overlay
         transition="dialog-bottom-transition"
-        :hide-overlay="false"
         scrollable
       >
         <v-card tile>
