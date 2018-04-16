@@ -11,7 +11,7 @@ export default {
   methods: {
     genBar (items) {
       return this.$createElement('div', {
-        staticClass: 'tabs__bar',
+        staticClass: 'v-tabs__bar',
         'class': this.addBackgroundColorClassChecks({
           'theme--dark': this.dark,
           'theme--light': this.light
@@ -27,15 +27,15 @@ export default {
     },
     genContainer (items) {
       return this.$createElement('div', {
-        staticClass: 'tabs__container',
+        staticClass: 'v-tabs__container',
         class: {
-          'tabs__container--align-with-title': this.alignWithTitle,
-          'tabs__container--centered': this.centered,
-          'tabs__container--fixed-tabs': this.fixedTabs,
-          'tabs__container--grow': this.grow,
-          'tabs__container--icons-and-text': this.iconsAndText,
-          'tabs__container--overflow': this.isOverflowing,
-          'tabs__container--right': this.right
+          'v-tabs__container--align-with-title': this.alignWithTitle,
+          'v-tabs__container--centered': this.centered,
+          'v-tabs__container--fixed-tabs': this.fixedTabs,
+          'v-tabs__container--grow': this.grow,
+          'v-tabs__container--icons-and-text': this.iconsAndText,
+          'v-tabs__container--overflow': this.isOverflowing,
+          'v-tabs__container--right': this.right
         },
         style: this.containerStyles,
         ref: 'container'
@@ -47,7 +47,7 @@ export default {
       ) return null
 
       return this.$createElement(VIcon, {
-        staticClass: `tabs__icon tabs__icon--${direction}`,
+        staticClass: `v-tabs__icon v-tabs__icon--${direction}`,
         props: {
           disabled: !this[`${direction}IconVisible`]
         },
@@ -69,9 +69,9 @@ export default {
     },
     genWrapper (items) {
       return this.$createElement('div', {
-        staticClass: 'tabs__wrapper',
+        staticClass: 'v-tabs__wrapper',
         class: {
-          'tabs__wrapper--show-arrows': this.hasArrows
+          'v-tabs__wrapper--show-arrows': this.hasArrows
         },
         ref: 'wrapper',
         directives: [{
@@ -92,7 +92,7 @@ export default {
       }
 
       return this.$createElement('div', {
-        staticClass: 'tabs__slider-wrapper',
+        staticClass: 'v-tabs__slider-wrapper',
         style: this.sliderStyles
       }, items)
     }

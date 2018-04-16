@@ -2,42 +2,42 @@
 
 exports[`VTimePicker.js should accept a date object for a value 1`] = `
 
-<div class="picker picker--time card"
+<div class="v-picker v-picker--time v-card"
      style="height: auto;"
 >
-  <div class="picker__title primary">
-    <div class="time-picker-title">
-      <div class="time-picker-title__time">
-        <div class="picker__title__btn active">
+  <div class="v-picker__title primary">
+    <div class="v-time-picker-title">
+      <div class="v-time-picker-title__time">
+        <div class="v-picker__title__btn active">
           12
         </div>
         <span>
           :
         </span>
-        <div class="picker__title__btn">
+        <div class="v-picker__title__btn">
           00
         </div>
       </div>
-      <div class="time-picker-title__ampm">
-        <div class="picker__title__btn active">
+      <div class="v-time-picker-title__ampm">
+        <div class="v-picker__title__btn active">
           am
         </div>
-        <div class="picker__title__btn">
+        <div class="v-picker__title__btn">
           pm
         </div>
       </div>
     </div>
   </div>
-  <div class="picker__body"
+  <div class="v-picker__body"
        style="width: 290px;"
   >
-    <div class="time-picker-clock__container"
+    <div class="v-time-picker-clock__container"
          style="width: 290px; height: 290px;"
     >
-      <div class="time-picker-clock"
+      <div class="v-time-picker-clock"
            style="height: 270px; width: 270px;"
       >
-        <div class="time-picker-clock__hand accent">
+        <div class="v-time-picker-clock__hand accent">
         </div>
         <span class="active accent">
           <span>
@@ -108,42 +108,42 @@ exports[`VTimePicker.js should accept a date object for a value 1`] = `
 
 exports[`VTimePicker.js should accept a value 1`] = `
 
-<div class="picker picker--time card"
+<div class="v-picker v-picker--time v-card"
      style="height: auto;"
 >
-  <div class="picker__title primary">
-    <div class="time-picker-title">
-      <div class="time-picker-title__time">
-        <div class="picker__title__btn active">
+  <div class="v-picker__title primary">
+    <div class="v-time-picker-title">
+      <div class="v-time-picker-title__time">
+        <div class="v-picker__title__btn active">
           9
         </div>
         <span>
           :
         </span>
-        <div class="picker__title__btn">
+        <div class="v-picker__title__btn">
           12
         </div>
       </div>
-      <div class="time-picker-title__ampm">
-        <div class="picker__title__btn active">
+      <div class="v-time-picker-title__ampm">
+        <div class="v-picker__title__btn active">
           am
         </div>
-        <div class="picker__title__btn">
+        <div class="v-picker__title__btn">
           pm
         </div>
       </div>
     </div>
   </div>
-  <div class="picker__body"
+  <div class="v-picker__body"
        style="width: 290px;"
   >
-    <div class="time-picker-clock__container"
+    <div class="v-time-picker-clock__container"
          style="width: 290px; height: 290px;"
     >
-      <div class="time-picker-clock"
+      <div class="v-time-picker-clock"
            style="height: 270px; width: 270px;"
       >
-        <div class="time-picker-clock__hand accent">
+        <div class="v-time-picker-clock__hand accent">
         </div>
         <span class>
           <span>
@@ -214,42 +214,42 @@ exports[`VTimePicker.js should accept a value 1`] = `
 
 exports[`VTimePicker.js should change am/pm when updated from model 1`] = `
 
-<div class="picker picker--time card"
+<div class="v-picker v-picker--time v-card"
      style="height: auto;"
 >
-  <div class="picker__title primary">
-    <div class="time-picker-title">
-      <div class="time-picker-title__time">
-        <div class="picker__title__btn active">
+  <div class="v-picker__title primary">
+    <div class="v-time-picker-title">
+      <div class="v-time-picker-title__time">
+        <div class="v-picker__title__btn active">
           9
         </div>
         <span>
           :
         </span>
-        <div class="picker__title__btn">
+        <div class="v-picker__title__btn">
           00
         </div>
       </div>
-      <div class="time-picker-title__ampm">
-        <div class="picker__title__btn active">
+      <div class="v-time-picker-title__ampm">
+        <div class="v-picker__title__btn active">
           am
         </div>
-        <div class="picker__title__btn">
+        <div class="v-picker__title__btn">
           pm
         </div>
       </div>
     </div>
   </div>
-  <div class="picker__body"
+  <div class="v-picker__body"
        style="width: 290px;"
   >
-    <div class="time-picker-clock__container"
+    <div class="v-time-picker-clock__container"
          style="width: 290px; height: 290px;"
     >
-      <div class="time-picker-clock"
+      <div class="v-time-picker-clock"
            style="height: 270px; width: 270px;"
       >
-        <div class="time-picker-clock__hand accent">
+        <div class="v-time-picker-clock__hand accent">
         </div>
         <span class>
           <span>
@@ -320,42 +320,42 @@ exports[`VTimePicker.js should change am/pm when updated from model 1`] = `
 
 exports[`VTimePicker.js should render colored time picker 1`] = `
 
-<div class="picker picker--time card"
+<div class="v-picker v-picker--time v-card"
      style="height: auto;"
 >
-  <div class="picker__title orange darken-1">
-    <div class="time-picker-title">
-      <div class="time-picker-title__time">
-        <div class="picker__title__btn active">
+  <div class="v-picker__title orange darken-1">
+    <div class="v-time-picker-title">
+      <div class="v-time-picker-title__time">
+        <div class="v-picker__title__btn active">
           9
         </div>
         <span>
           :
         </span>
-        <div class="picker__title__btn">
+        <div class="v-picker__title__btn">
           00
         </div>
       </div>
-      <div class="time-picker-title__ampm">
-        <div class="picker__title__btn active">
+      <div class="v-time-picker-title__ampm">
+        <div class="v-picker__title__btn active">
           am
         </div>
-        <div class="picker__title__btn">
+        <div class="v-picker__title__btn">
           pm
         </div>
       </div>
     </div>
   </div>
-  <div class="picker__body"
+  <div class="v-picker__body"
        style="width: 290px;"
   >
-    <div class="time-picker-clock__container"
+    <div class="v-time-picker-clock__container"
          style="width: 290px; height: 290px;"
     >
-      <div class="time-picker-clock"
+      <div class="v-time-picker-clock"
            style="height: 270px; width: 270px;"
       >
-        <div class="time-picker-clock__hand primary">
+        <div class="v-time-picker-clock__hand primary">
         </div>
         <span class>
           <span>
@@ -426,42 +426,42 @@ exports[`VTimePicker.js should render colored time picker 1`] = `
 
 exports[`VTimePicker.js should render colored time picker 2`] = `
 
-<div class="picker picker--time card"
+<div class="v-picker v-picker--time v-card"
      style="height: auto;"
 >
-  <div class="picker__title orange darken-1">
-    <div class="time-picker-title">
-      <div class="time-picker-title__time">
-        <div class="picker__title__btn active">
+  <div class="v-picker__title orange darken-1">
+    <div class="v-time-picker-title">
+      <div class="v-time-picker-title__time">
+        <div class="v-picker__title__btn active">
           9
         </div>
         <span>
           :
         </span>
-        <div class="picker__title__btn">
+        <div class="v-picker__title__btn">
           00
         </div>
       </div>
-      <div class="time-picker-title__ampm">
-        <div class="picker__title__btn active">
+      <div class="v-time-picker-title__ampm">
+        <div class="v-picker__title__btn active">
           am
         </div>
-        <div class="picker__title__btn">
+        <div class="v-picker__title__btn">
           pm
         </div>
       </div>
     </div>
   </div>
-  <div class="picker__body"
+  <div class="v-picker__body"
        style="width: 290px;"
   >
-    <div class="time-picker-clock__container"
+    <div class="v-time-picker-clock__container"
          style="width: 290px; height: 290px;"
     >
-      <div class="time-picker-clock"
+      <div class="v-time-picker-clock"
            style="height: 270px; width: 270px;"
       >
-        <div class="time-picker-clock__hand orange darken-1">
+        <div class="v-time-picker-clock__hand orange darken-1">
         </div>
         <span class>
           <span>
@@ -532,42 +532,42 @@ exports[`VTimePicker.js should render colored time picker 2`] = `
 
 exports[`VTimePicker.js should render landscape component 1`] = `
 
-<div class="picker picker--time card picker--landscape"
+<div class="v-picker v-picker--time v-card v-picker--landscape"
      style="height: auto;"
 >
-  <div class="picker__title picker__title--landscape primary">
-    <div class="time-picker-title">
-      <div class="time-picker-title__time">
-        <div class="picker__title__btn active">
+  <div class="v-picker__title v-picker__title--landscape primary">
+    <div class="v-time-picker-title">
+      <div class="v-time-picker-title__time">
+        <div class="v-picker__title__btn active">
           9
         </div>
         <span>
           :
         </span>
-        <div class="picker__title__btn">
+        <div class="v-picker__title__btn">
           12
         </div>
       </div>
-      <div class="time-picker-title__ampm">
-        <div class="picker__title__btn active">
+      <div class="v-time-picker-title__ampm">
+        <div class="v-picker__title__btn active">
           am
         </div>
-        <div class="picker__title__btn">
+        <div class="v-picker__title__btn">
           pm
         </div>
       </div>
     </div>
   </div>
-  <div class="picker__body"
+  <div class="v-picker__body"
        style="width: 290px;"
   >
-    <div class="time-picker-clock__container"
+    <div class="v-time-picker-clock__container"
          style="width: 290px; height: 230px;"
     >
-      <div class="time-picker-clock"
+      <div class="v-time-picker-clock"
            style="height: 210px; width: 210px;"
       >
-        <div class="time-picker-clock__hand accent">
+        <div class="v-time-picker-clock__hand accent">
         </div>
         <span class>
           <span>

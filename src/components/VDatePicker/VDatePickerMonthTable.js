@@ -48,7 +48,7 @@ export default {
   },
 
   render () {
-    return this.genTable('date-picker-table date-picker-table--month', [
+    return this.genTable('v-date-picker-table v-date-picker-table--month', [
       this.genTBody()
     ])
   }

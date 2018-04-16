@@ -178,7 +178,7 @@ export default {
     },
     genPickerBody () {
       return this.$createElement('div', {
-        staticClass: 'time-picker-clock__container',
+        staticClass: 'v-time-picker-clock__container',
         style: {
           width: `${this.width}px`,
           height: `${this.width - ((!this.fullWidth && this.landscape) ? 60 : 0)}px`
@@ -210,6 +210,6 @@ export default {
   },
 
   render () {
-    return this.genPicker('picker--time')
+    return this.genPicker('v-picker--time')
   }
 }

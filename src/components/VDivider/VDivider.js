@@ -14,9 +14,9 @@ export default {
   },
 
   render (h, { props, data }) {
-    data.staticClass = (`divider ${data.staticClass || ''}`).trim()
+    data.staticClass = (`v-divider ${data.staticClass || ''}`).trim()
 
-    if (props.inset) data.staticClass += ' divider--inset'
+    if (props.inset) data.staticClass += ' v-divider--inset'
     if (props.light) data.staticClass += ' theme--light'
     if (props.dark) data.staticClass += ' theme--dark'
 

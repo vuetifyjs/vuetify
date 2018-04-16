@@ -198,7 +198,7 @@ test('VTabs', ({ mount, shallow }) => {
 
     wrapper.setData({ isOverflowing: true })
     await wrapper.vm.$nextTick()
-    expect(wrapper.find('.tabs__wrapper--show-arrows')).toHaveLength(1)
+    expect(wrapper.find('.v-tabs__wrapper--show-arrows')).toHaveLength(1)
     expect(wrapper.html()).toMatchSnapshot()
   })
 
@@ -231,7 +231,7 @@ test('VTabs', ({ mount, shallow }) => {
     wrapper.setData({ scrollOffset: -1 })
     await wrapper.vm.$nextTick()
 
-    const next = wrapper.find('.tabs__icon--next')[0]
+    const next = wrapper.find('.v-tabs__icon--next')[0]
     next.trigger('click')
     await wrapper.vm.$nextTick()
     expect(scrollTo).toHaveBeenCalledWith('next')
@@ -252,7 +252,7 @@ test('VTabs', ({ mount, shallow }) => {
     })
     await ssrBootable()
 
-    const tabsWrapper = wrapper.find('.tabs__wrapper')[0]
+    const tabsWrapper = wrapper.find('.v-tabs__wrapper')[0]
 
     touch(tabsWrapper).start(0, 0)
     touch(tabsWrapper).end(0, 0)
@@ -282,7 +282,7 @@ test('VTabs', ({ mount, shallow }) => {
     })
 
     wrapper.setData({ isOverflowing: true })
-    const container = wrapper.find('.tabs__container')[0]
+    const container = wrapper.find('.v-tabs__container')[0]
 
     await ssrBootable()
 
@@ -368,7 +368,7 @@ test('VTabs', ({ mount, shallow }) => {
 
     await ssrBootable()
 
-    const slider = wrapper.find('.tabs__slider')
+    const slider = wrapper.find('.v-tabs__slider')
     expect(slider).toHaveLength(0)
   })
 
@@ -429,5 +429,49 @@ test('VTabs', ({ mount, shallow }) => {
     wrapper.vm.callSlider()
     await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/3643
+  it('should re-evaluate when tabs change', async () => {
+    const onResize = jest.fn()
+    const wrapper = mount(VTabs, {
+      methods: {
+        onResize
+      },
+      slots: {
+        default: [{
+          functional: true,
+          render: h => h(VTab)
+        }]
+      }
+    })
+
+    expect(onResize).not.toHaveBeenCalled()
+
+    expect(wrapper.vm.tabs.length).toBe(1)
+
+    const tab = wrapper.first(VTab)
+
+    tab.vm.$destroy()
+
+    await wrapper.vm.$nextTick()
+
+    expect(onResize).toHaveBeenCalledTimes(1)
+    expect(wrapper.vm.tabs.length).toBe(0)
+  })
+
+  it('should not error if processing resize on destroy', () => {
+    const wrapper = mount(VTabs, {
+      slots: {
+        default: [{
+          functional: true,
+          render: h => h(VTab)
+        }]
+      }
+    })
+
+    // Will kill test if fails
+    delete wrapper.vm.$refs.bar
+    wrapper.vm.setOverflow()
   })
 })

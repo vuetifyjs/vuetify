@@ -28,7 +28,7 @@ test('VSubheader.js', ({ functionalContext, mount }) => {
       props: { inset: true }
     }))
 
-    expect(wrapper4.element.classList.contains('subheader--inset')).toBe(true)
+    expect(wrapper4.element.classList.contains('v-subheader--inset')).toBe(true)
     expect(wrapper4.html()).toMatchSnapshot()
   })
 })
