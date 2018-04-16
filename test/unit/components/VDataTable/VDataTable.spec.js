@@ -314,4 +314,38 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
 
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
+
+  it('should update pagination when using custom-filter that does not use search', async () => {
+    const data = dataTableTestDataFilter()
+    data.propsData.customFilter = (items, search, filter) => {
+      return items
+    }
+    data.propsData.pagination = {
+      rowsPerPage: 5
+    }
+    data.propsData.search = ''
+
+    const wrapper = mount(VDataTable, data)
+
+    const pagination = jest.fn(value => wrapper.setProps({ pagination: value }))
+    wrapper.vm.$on('update:pagination', pagination)
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.instance().filteredItems).toHaveLength(1)
+
+    wrapper.setProps({ customFilter: (items, search, filter) => {
+      return []
+    }})
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.instance().filteredItems).toHaveLength(0)
+    expect(pagination).toHaveBeenLastCalledWith({
+      rowsPerPage: 5,
+      totalItems: 0,
+      page: 1
+    })
+
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
 })
