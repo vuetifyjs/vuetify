@@ -217,8 +217,8 @@ export default {
         this.updatePagination({ page: 1, totalItems: this.itemsLength })
       })
     },
-    'computedPagination.sortBy': function () { this.updatePagination({ page: 1 }) },
-    'computedPagination.descending': function () { this.updatePagination({ page: 1 }) }
+    'computedPagination.sortBy': function () { this.computedPagination.page !== 1 && this.updatePagination({ page: 1 }) },
+    'computedPagination.descending': function () { this.computedPagination.page !== 1 && this.updatePagination({ page: 1 }) }
   },
 
   methods: {
@@ -239,7 +239,7 @@ export default {
       const pagination = this.hasPagination
         ? this.pagination
         : this.defaultPagination
-      const updatedPagination = Object.assign(pagination, val)
+      const updatedPagination = Object.assign({}, pagination, val)
       this.$emit('update:pagination', updatedPagination)
 
       if (!this.hasPagination) {
