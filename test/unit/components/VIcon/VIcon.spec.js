@@ -48,12 +48,19 @@ test('VIcon.js', ({ mount, compileToFunctions }) => {
     })
   })
 
-  it('should render a specific size', () => {
+  it('should render a specific size with String type', () => {
     const context = functionalContext({ props: { size: '112px' } }, 'add')
     const wrapper = mount(VIcon, context)
 
     expect(wrapper.element.style.fontSize).toBe('112px')
   })
+
+  it('should render a specific size with Number type', () => {
+    const context = functionalContext({ props: { size: '112' } }, 'add')
+    const wrapper = mount(VIcon, context)
+
+    expect(wrapper.element.style.fontSize).toBe('112px')
+ })
 
   it('should render a left aligned component', () => {
     const context = functionalContext({ props: { left: true } }, 'add')
