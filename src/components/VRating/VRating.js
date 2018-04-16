@@ -1,3 +1,4 @@
+import VBtn from '../VBtn'
 import VIcon from '../VIcon'
 import Colorable from '../../mixins/colorable'
 
@@ -45,7 +46,7 @@ export default {
         this.$emit('input', i + 1)
       }
     },
-    genIcon (h, i) {
+    genItem (h, i) {
       const click = this.createClickFn(i)
 
       if (this.$scopedSlots.item) {
@@ -59,12 +60,12 @@ export default {
         })
       }
 
-      let icon
+      let iconName
 
       if (this.showHover && this.hover > 0) {
-        icon = this.hover > i ? this.fullIcon : this.emptyIcon
+        iconName = this.hover > i ? this.fullIcon : this.emptyIcon
       } else {
-        icon = this.value > i ? this.fullIcon : this.emptyIcon
+        iconName = this.value > i ? this.fullIcon : this.emptyIcon
       }
 
       let listeners = {
@@ -82,17 +83,22 @@ export default {
         })
       }
 
-      return h(VIcon, {
+      const icon = h(VIcon, {
         class: this.addTextColorClassChecks({}, this.color),
         on: listeners
+      }, [iconName])
+
+      return h(VBtn, {
+        props: {
+          icon: true,
+          small: true
+        },
+        on: listeners
       }, [icon])
-    },
-    genItems (h) {
-      return createRange(this.length).map(i => this.genIcon(h, i))
     }
   },
   render (h) {
-    const children = this.genItems(h)
+    const children = createRange(this.length).map(i => this.genItem(h, i))
 
     return h('div', {
       class: this.classes
