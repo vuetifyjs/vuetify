@@ -12,16 +12,8 @@ export default {
   provide () {
     return {
       iconParent: this.icon,
-      iconSizeParent: this.iconSize,
       noIconParent: this.noIcon,
-      lineColorParent: this.lineColor,
-      hoverParent: this.hover,
-      raisedParent: this.raised,
-      circleFillColorParent: this.circleFillColor,
-      circleOutlineColorParent: this.circleOutlineColor,
-      lineSizeParent: this.lineSize,
-      circleOutlineSizeParent: this.circleOutlineSize,
-      hideCircleOutlineParent: this.hideCircleOutline
+      circleFillColorParent: this.circleFillColor
     }
   },
 
@@ -30,44 +22,13 @@ export default {
       type: String,
       default: 'event'
     },
-    iconSize: {
-      type: [Number, String],
-      default: 24
-    },
     noIcon: {
       type: Boolean,
       default: false
     },
-    lineSize: {
-      type: [Number, String],
-      default: 8
-    },
-    lineColor: {
-      type: String,
-      default: 'grey lighten-2'
-    },
-    circleOutlineSize: {
-      type: [Number, String],
-      default: 8
-    },
-    circleOutlineColor: {
-      type: String
-    },
     circleFillColor: {
       type: String,
-      default: 'white'
-    },
-    hideCircleOutline: {
-      type: Boolean,
-      default: false
-    },
-    raised: {
-      type: Boolean,
-      default: false
-    },
-    hover: {
-      type: Boolean,
-      default: false
+      default: 'grey lighten-4'
     }
   },
 
@@ -75,7 +36,7 @@ export default {
     return h(
       'div',
       {
-        staticClass: 'timeline',
+        staticClass: 'v-timeline',
         class: {
           ...this.themeClasses
         }
@@ -84,7 +45,7 @@ export default {
         h(
           'ul',
           {
-            staticClass: 'timeline__container'
+            staticClass: 'v-timeline__container'
           },
           this.$slots.default
         )

@@ -8,84 +8,72 @@ timeline($material)
 
 theme(timeline, "timeline")
 
-.timeline
+.v-timeline
   max-width: 1104px
-  margin: 0 auto
-  padding: 0 30px 0 30px
+  padding: 0
+  margin: 24px auto
   overflow: hidden
   width: 100%
 
-  &--hover
-    cursor: pointer
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1)
-    transition-property: box-shadow
-
-    &:hover
-      elevation(8)
-
-  &--raised
-    elevation(3)
-
   &__container
-    margin: 30px 0 0 0
-    padding: 0
     list-style: none
     position: relative
 
-    &> .timeline__item
+    &> .v-timeline__item
       position: relative
       min-height: 128px
 
-      & .timeline__line
+      & .v-timeline__line
         content: ""
+        width: 2px
+        margin-left: -4px
         position: absolute
-        top: 44px
+        top: 0
         padding: 0
         bottom: 0
         background: currentColor
-        left: 10%
+        left: 5%
 
-      &:last-child .timeline__line
+      &:last-child .v-timeline__line
         position: relative
 
         &:before
           width: 0px
 
-.timeline__container > .timeline__item
-  & .timeline__item--body__container
-    margin: 0 0 0 15%
-    padding-bottom: 48px
+.v-timeline__container > .v-timeline__item
+  & .v-timeline__item--body__container
+    margin: 0 0 0 10%
     padding-top: 24px
+    padding-bottom: 48px
     position: relative
 
-  & .timeline__icon
-    width: 44px
-    height: 44px
+  & .v-timeline__icon
+    width: 50px
+    height: 50px
     speak: none
-    line-height: 44px
+    line-height: 50px
     position: absolute
     border-radius: 50%
     background: inherit
-    box-shadow: currentColor 0px 0px 0px 8px
+    box-shadow: none
     text-align: center
-    left: 10%
-    top: 0
-    padding: 0
+    left: 5%
+    top: 48%
     margin: 0 0 0 -28px
 
-@media screen and (max-width: ($grid-breakpoints.md))
-  .timeline
+@media screen and (max-width: $grid-breakpoints.md)
+  .v-timeline
     padding: 0 15px 0 15px
 
     &__container
       margin: 16px 0 0 0
 
-      &> .timeline__item .timeline__line
+      &> .v-timeline__item .v-timeline__icon
         left: 6%
 
-  .timeline__container > .timeline__item
-    & .timeline__item--body__conatainer
-      margin: 0 0 0 12%
+  .v-timeline__container > .v-timeline__item
+    & .v-timeline__item--body__conatainer
+      margin: 0 48px 0 12%
 
-    & .timeline__icon
+    & .v-timeline__icon
       left: 6%
