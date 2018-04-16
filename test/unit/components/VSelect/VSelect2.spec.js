@@ -317,82 +317,6 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect(wrapper.vm.isFocused).toBe(false)
   })
 
-  it('should change selected index', async () => {
-    const wrapper = mount(VSelect, {
-      attachToDocument: true,
-      propsData: {
-        items: ['foo', 'bar', 'fizz'],
-        multiple: true,
-        value: ['foo', 'bar', 'fizz']
-      }
-    })
-
-    await wrapper.vm.$nextTick()
-
-    expect(wrapper.vm.selectedIndex).toBe(null)
-    expect(wrapper.vm.selectedItems.length).toBe(3)
-
-    // Right arrow
-    wrapper.vm.changeSelectedIndex(39)
-    expect(wrapper.vm.selectedIndex).toBe(1)
-
-    wrapper.vm.changeSelectedIndex(39)
-    expect(wrapper.vm.selectedIndex).toBe(2)
-
-    wrapper.vm.changeSelectedIndex(39)
-    expect(wrapper.vm.selectedIndex).toBe(-1)
-
-    // Left arrow
-    wrapper.vm.changeSelectedIndex(37)
-    expect(wrapper.vm.selectedIndex).toBe(2)
-
-    wrapper.vm.changeSelectedIndex(37)
-    expect(wrapper.vm.selectedIndex).toBe(1)
-
-    wrapper.vm.changeSelectedIndex(37)
-    expect(wrapper.vm.selectedIndex).toBe(0)
-
-    wrapper.vm.changeSelectedIndex(37)
-    expect(wrapper.vm.selectedIndex).toBe(-1)
-
-    wrapper.vm.changeSelectedIndex(37)
-    expect(wrapper.vm.selectedIndex).toBe(2)
-
-    // Delete key
-    wrapper.vm.changeSelectedIndex(8)
-    expect(wrapper.vm.selectedIndex).toBe(1)
-
-    wrapper.vm.changeSelectedIndex(37)
-    expect(wrapper.vm.selectedIndex).toBe(0)
-
-    wrapper.vm.changeSelectedIndex(8)
-    expect(wrapper.vm.selectedIndex).toBe(0)
-
-    wrapper.vm.changeSelectedIndex(8)
-    expect(wrapper.vm.selectedIndex).toBe(-1)
-
-    // Should not change/error if called with no selection
-    wrapper.vm.changeSelectedIndex(8)
-    expect(wrapper.vm.selectedIndex).toBe(-1)
-
-    expect(wrapper.vm.selectedItems.length).toBe(0)
-
-    wrapper.setProps({ value: ['foo', 'bar', 'fizz'] })
-
-    expect(wrapper.vm.selectedItems.length).toBe(3)
-
-    wrapper.vm.selectedIndex = 2
-
-    // Simulating removing items when an index already selected
-    wrapper.setProps({ value: ['foo', 'bar'] })
-
-    expect(wrapper.vm.selectedIndex).toBe(2)
-
-    // Backspace
-    wrapper.vm.changeSelectedIndex(46)
-    expect(wrapper.vm.selectedIndex).toBe(-1)
-  })
-
   it('should use specified value', async () => {
     const wrapper = mount(VSelect, {
       propsData: {
@@ -451,7 +375,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
       methods: { onFocus }
     })
 
-    expect(wrapper.vm.selectedIndex).toBe(null)
+    expect(wrapper.vm.selectedIndex).toBe(-1)
 
     const foo = wrapper.first('.chip--select-multi')
     foo.trigger('click')

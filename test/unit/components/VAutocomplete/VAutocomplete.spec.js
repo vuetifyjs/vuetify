@@ -260,4 +260,89 @@ test('VAutocomplete.js', ({ shallow }) => {
 
     expect(change).toHaveBeenCalledWith('foo')
   })
+
+
+
+  it('should change selected index', async () => {
+    const wrapper = shallow(VAutocomplete, {
+      attachToDocument: true,
+      propsData: {
+        items: ['foo', 'bar', 'fizz'],
+        multiple: true,
+        value: ['foo', 'bar', 'fizz']
+      }
+    })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.selectedIndex).toBe(-1)
+    expect(wrapper.vm.selectedItems.length).toBe(3)
+
+    // Right arrow
+    wrapper.vm.changeSelectedIndex(39)
+    expect(wrapper.vm.selectedIndex).toBe(0)
+
+    wrapper.vm.changeSelectedIndex(39)
+    expect(wrapper.vm.selectedIndex).toBe(1)
+
+    wrapper.vm.changeSelectedIndex(39)
+    expect(wrapper.vm.selectedIndex).toBe(2)
+
+    // Left arrow
+    wrapper.vm.changeSelectedIndex(37)
+    expect(wrapper.vm.selectedIndex).toBe(1)
+
+    wrapper.vm.changeSelectedIndex(37)
+    expect(wrapper.vm.selectedIndex).toBe(0)
+
+    wrapper.vm.changeSelectedIndex(37)
+    expect(wrapper.vm.selectedIndex).toBe(-1)
+
+    wrapper.vm.changeSelectedIndex(37)
+    expect(wrapper.vm.selectedIndex).toBe(2)
+
+    wrapper.vm.changeSelectedIndex(37)
+    expect(wrapper.vm.selectedIndex).toBe(1)
+
+    // Delete key
+    wrapper.vm.changeSelectedIndex(8)
+    expect(wrapper.vm.selectedIndex).toBe(1)
+
+    wrapper.vm.changeSelectedIndex(37)
+    expect(wrapper.vm.selectedIndex).toBe(0)
+
+    wrapper.vm.changeSelectedIndex(8)
+    expect(wrapper.vm.selectedIndex).toBe(0)
+
+    wrapper.vm.changeSelectedIndex(8)
+    expect(wrapper.vm.selectedIndex).toBe(-1)
+
+    // Should not change/error if called with no selection
+    wrapper.vm.changeSelectedIndex(8)
+    expect(wrapper.vm.selectedIndex).toBe(0)
+    wrapper.vm.changeSelectedIndex(8)
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.selectedItems.length).toBe(0)
+
+    wrapper.setProps({ value: ['foo', 'bar', 'fizz'] })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.selectedItems.length).toBe(3)
+
+    wrapper.vm.selectedIndex = 2
+
+    // Simulating removing items when an index already selected
+    wrapper.setProps({ value: ['foo', 'bar'] })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.selectedIndex).toBe(2)
+
+    // Backspace
+    wrapper.vm.changeSelectedIndex(46)
+    expect(wrapper.vm.selectedIndex).toBe(-1)
+  })
 })

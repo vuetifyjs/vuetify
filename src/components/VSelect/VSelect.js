@@ -41,7 +41,8 @@ export default {
     attrsInput: { role: 'combobox' },
     cachedItems: vm.cacheItems ? vm.items : [],
     isMenuActive: false,
-    selectedIndex: null
+    selectedIndex: -1,
+    selectedItems: []
   }),
 
   props: {
@@ -144,72 +145,38 @@ export default {
     dynamicHeight () {
       return this.chips ? 'auto' : '32px'
     },
+    hasSlot () {
+      return Boolean(this.chips || this.$slots.item)
+    },
     isDirty () {
       return this.selectedItems.length > 0
     },
     isDisabled () {
       return this.disabled || this.readonly
     },
-    // Convert internalValue to always
-    // be an array and check for validity
-    selectedItems () {
-      const val = this.internalValue
-
-      let selectedItems = this.computedItems.filter(i => {
-        if (!this.multiple) {
-          return this.valueComparator(this.getValue(i), this.getValue(val))
-        } else {
-          // Always return Boolean
-          return this.findExistingIndex(i, this.internalValue) > -1
-        }
-      })
-
-      return selectedItems
+    isMulti () {
+      return this.multiple
     }
   },
 
   watch: {
+    internalValue: 'setSelectedItems',
     items (val) {
       if (this.cacheItems) {
         this.cachedItems = this.filterDuplicates(this.cachedItems.concat(val))
       }
+
+      this.setSelectedItems()
     }
   },
 
+  created () {
+    this.setSelectedItems()
+  },
+
   methods: {
-    changeSelectedIndex (keyCode) {
-      // backspace, left, right, delete
-      if (![8, 37, 39, 46].includes(keyCode)) return
-
-      const indexes = this.selectedItems.length - 1
-
-      if (keyCode === 37) { // Left arrow
-        this.selectedIndex = this.selectedIndex === -1
-          ? indexes
-          : this.selectedIndex - 1
-      } else if (keyCode === 39) { // Right arrow
-        this.selectedIndex = this.selectedIndex >= indexes
-          ? -1
-          : this.selectedIndex + 1
-      } else if (this.selectedIndex === -1) {
-        this.selectedIndex = indexes
-        return
-      }
-
-      // backspace/delete
-      if ([8, 46].includes(keyCode)) {
-        const newIndex = this.selectedIndex === indexes
-          ? this.selectedIndex - 1
-          : this.selectedItems[this.selectedIndex + 1]
-            ? this.selectedIndex
-            : -1
-
-        this.selectItem(this.selectedItems[this.selectedIndex])
-        this.selectedIndex = newIndex
-      }
-    },
     clearableCallback () {
-      this.internalValue = this.multiple ? [] : null
+      this.internalValue = this.isMulti ? [] : null
       this.$emit('change', this.internalValue)
       this.$nextTick(() => this.$refs.input.focus())
 
@@ -226,10 +193,10 @@ export default {
       }
       return Array.from(uniqueValues.values())
     },
-    findExistingIndex (item, internalValue) {
+    findExistingIndex (item) {
       const itemValue = this.getValue(item)
 
-      return (internalValue || []).findIndex(i => this.valueComparator(this.getValue(i), itemValue))
+      return (this.internalValue || []).findIndex(i => this.valueComparator(this.getValue(i), itemValue))
     },
     genChipSelection (item, index) {
       const isDisabled = this.disabled || this.readonly
@@ -253,7 +220,7 @@ export default {
           click: click,
           focus: click,
           input: () => {
-            if (this.multiple) this.selectItem(item)
+            if (this.isMulti) this.selectItem(item)
             else this.internalValue = null
 
             // If all items have been deleted,
@@ -302,7 +269,7 @@ export default {
     genList () {
       return this.$createElement(VSelectList, {
         props: {
-          action: this.multiple && !this.isHidingSelected,
+          action: this.isMulti && !this.isHidingSelected,
           color: this.color,
           dark: this.dark,
           dense: this.dense,
@@ -400,22 +367,34 @@ export default {
       } else if ([13, 32, 38, 40].includes(e.keyCode)) {
         this.isMenuActive = true
       }
-
-      if (this.chips || this.multiple) {
-        this.changeSelectedIndex(e.keyCode)
-      }
     },
     onClick () {
       if (this.isDisabled) return
 
       this.onFocus()
     },
+    // Convert internalValue to always
+    // be an array and check for validity
+    setSelectedItems () {
+      const val = this.internalValue
+
+      let selectedItems = this.computedItems.filter(i => {
+        if (!this.isMulti) {
+          return this.valueComparator(this.getValue(i), this.getValue(val))
+        } else {
+          // Always return Boolean
+          return this.findExistingIndex(i, this.internalValue) > -1
+        }
+      })
+
+      this.selectedItems = selectedItems
+    },
     selectItem (item) {
-      if (!this.multiple) {
+      if (!this.isMulti) {
         this.internalValue = this.returnObject ? item : this.getValue(item)
         this.isMenuActive = false
       } else {
-        const internalValue = this.selectedItems.slice()
+        const internalValue = (this.internalValue || []).slice()
         const i = this.findExistingIndex(item, internalValue)
 
         i !== -1 ? internalValue.splice(i, 1) : internalValue.push(item)
@@ -424,7 +403,14 @@ export default {
         })
       }
 
+      this.setSelectedItems()
+
       this.$emit('change', this.internalValue)
+
+      this.$nextTick(() => {
+        this.$refs.menu &&
+          this.$refs.menu.updateDimensions()
+      })
     }
   }
 }

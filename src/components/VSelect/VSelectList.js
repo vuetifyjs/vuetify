@@ -53,6 +53,7 @@ export default {
       default: 'value'
     },
     noDataText: String,
+    noFilter: Boolean,
     searchInput: {
       default: null
     },
@@ -94,7 +95,7 @@ export default {
     genFilteredText (text) {
       text = (text || '').toString()
 
-      if (!this.searchInput) return escapeHTML(text)
+      if (!this.searchInput || this.noFilter) return escapeHTML(text)
 
       const { start, middle, end } = this.getMaskedCharacters(text)
 
