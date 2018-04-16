@@ -1,12 +1,18 @@
 import VBtn from '../VBtn'
 import VIcon from '../VIcon'
+
 import Colorable from '../../mixins/colorable'
+
+import Ripple from '../../directives/ripple'
 
 import { createRange } from '../../util/helpers'
 
 export default {
   name: 'v-rating',
   mixins: [Colorable],
+  directives: {
+    Ripple
+  },
   props: {
     length: {
       type: Number,
@@ -87,6 +93,12 @@ export default {
       }
 
       const icon = h(VIcon, {
+        directives: [
+          {
+            name: 'ripple',
+            value: true
+          }
+        ],
         props: {
           large: this.large
         },
@@ -96,6 +108,7 @@ export default {
 
       return h(VBtn, {
         props: {
+          ripple: true,
           icon: true,
           large: this.large
         },
