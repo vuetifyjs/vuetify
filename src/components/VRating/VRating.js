@@ -26,6 +26,9 @@ export default {
     },
     showHover: {
       type: Boolean
+    },
+    large: {
+      type: Boolean
     }
   },
   data () {
@@ -84,6 +87,9 @@ export default {
       }
 
       const icon = h(VIcon, {
+        props: {
+          large: this.large
+        },
         class: this.addTextColorClassChecks({}, this.color),
         on: listeners
       }, [iconName])
@@ -91,7 +97,7 @@ export default {
       return h(VBtn, {
         props: {
           icon: true,
-          small: true
+          large: this.large
         },
         on: listeners
       }, [icon])
