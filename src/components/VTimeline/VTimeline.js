@@ -2,12 +2,11 @@ import '../../stylus/components/_timeline.styl'
 
 //  MIXINS
 import Colorable from '../../mixins/colorable'
-import Themeable from '../../mixins/themeable'
 
 export default {
   name: 'v-timeline',
 
-  mixins: [Colorable, Themeable],
+  mixins: [Colorable],
 
   provide () {
     return {
@@ -36,10 +35,7 @@ export default {
     return h(
       'ul',
       {
-        staticClass: 'v-timeline',
-        class: {
-          ...this.themeClasses
-        }
+        staticClass: 'v-timeline'
       },
       this.$slots.default
     )
