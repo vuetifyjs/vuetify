@@ -1,40 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VTimeline.js should inject slot to children 1`] = `
-
-<div class="timeline">
-  <ul class="timeline__container">
-    <li class="timeline__item">
-      <div class="timeline__line grey--text text--lighten-2"
-           style="width: 8px; margin-left: -0.66em;"
-      >
-      </div>
-      <div class="timeline__item--head white grey--text text--lighten-2">
-        <div class="timeline__icon white grey--text text--lighten-2"
-             style="box-shadow: currentColor 0px 0px 0px 8px;"
-        >
-          <i aria-hidden="true"
-             class="icon material-icons"
-             style="font-size: 24px;"
-          >
-            event
-          </i>
-        </div>
-      </div>
-      <div class="timeline__item--body__container">
-        <div class="timeline__item--body">
-        </div>
-      </div>
-    </li>
-  </ul>
-</div>
-
-`;
-
 exports[`VTimeline.js should render one ul with timeline__container class and match snapshot 1`] = `
 
-<div class="timeline">
-  <ul class="timeline__container">
+<div class="v-timeline">
+  <ul class="v-timeline__container">
   </ul>
 </div>
 
