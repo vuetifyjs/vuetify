@@ -108,7 +108,9 @@ export default {
         directives: [
           {
             name: 'ripple',
-            value: true
+            value: {
+              circle: true
+            }
           }
         ],
         props,
