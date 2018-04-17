@@ -8,14 +8,6 @@ export default {
 
   mixins: [Colorable],
 
-  provide () {
-    return {
-      right: this.right,
-      left: this.left,
-      alternate: this.alternate
-    }
-  },
-
   props: {
     right: {
       type: Boolean,
@@ -27,7 +19,17 @@ export default {
     },
     alternate: {
       type: Boolean,
-      default: true
+      default: false
+    }
+  },
+
+  computed: {
+    alignClass () {
+      return {
+        'v-timeline--alternate': this.alternate,
+        'v-timeline--left': this.left,
+        'v-timeline--right': this.right
+      }
     }
   },
 
@@ -35,7 +37,8 @@ export default {
     return h(
       'ul',
       {
-        staticClass: 'v-timeline'
+        staticClass: 'v-timeline',
+        class: this.alignClass
       },
       this.$slots.default
     )

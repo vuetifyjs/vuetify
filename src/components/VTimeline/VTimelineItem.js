@@ -7,17 +7,14 @@ import Colorable from '../../mixins/colorable'
 export default {
   name: 'v-timeline-item',
 
-  // inject: ['right', 'left', 'alternate'],
-
   mixins: [Colorable],
 
   props: {
     icon: {
-      type: String,
-      default: 'event'
+      type: String
     },
     iconColor: {
-      tyep: String
+      type: String
     },
     noIcon: {
       type: Boolean,
@@ -30,9 +27,8 @@ export default {
   },
 
   computed: {
-    circleClasses () {
-      const classes = this.addBackgroundColorClassChecks({}, this.iconFillColor)
-      return this.addTextColorClassChecks(classes, this.iconFillColor)
+    iconFillClass () {
+      return this.addBackgroundColorClassChecks({}, this.iconFillColor)
     }
   },
 
@@ -47,13 +43,22 @@ export default {
       )
     },
     genHeader () {
-      const icon = this.icon
-      const iconElement = this.noIcon ? null : this.$createElement(VIcon, icon)
+      const iconElement = this.noIcon
+        ? null
+        : this.$createElement(
+            VIcon,
+            {
+              props: {
+                color: this.iconColor
+              }
+            },
+            this.icon
+          )
       return this.$createElement(
         'div',
         {
           staticClass: 'v-timeline__icon',
-          class: this.circleClasses
+          class: this.iconFillClass
         },
         [iconElement]
       )
