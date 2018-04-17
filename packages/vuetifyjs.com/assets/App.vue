@@ -49,15 +49,15 @@
     mounted () {
       this.getReleases()
 
-      // this.snackbar({
-      //   color: 'default',
-      //   close: true,
-      //   id: 'subreddit-3-31-giveaway',
-      //   text: 'Go To Reddit',
-      //   msg: 'Vuetify T-shirt giveaway ends 3/31!',
-      //   href: 'https://www.reddit.com/r/vuetifyjs/comments/81qs3f/we_want_to_hear_from_the_community_subscribe/',
-      //   timeout: 0
-      // })
+      this.snackbar({
+        color: 'default',
+        close: true,
+        id: 'how-vue-cli-3-will-shape-our-future-eb7c01f4a241',
+        text: 'Go To Article',
+        msg: '**New Article** — _How Vue-Cli 3 Will Shape Our Future_',
+        href: 'https://medium.com/vuetify/how-vue-cli-3-will-shape-our-future-eb7c01f4a241',
+        timeout: 0
+      })
     },
 
     methods: {
