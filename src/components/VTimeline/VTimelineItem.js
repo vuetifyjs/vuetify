@@ -34,34 +34,20 @@ export default {
 
   methods: {
     genBody () {
-      return this.$createElement(
-        'div',
-        {
+      return this.$createElement('div', {
           staticClass: 'v-timeline__body'
-        },
-        this.$slots.item
-      )
+        }, this.$slots.item)
     },
     genHeader () {
       const iconElement = this.noIcon
         ? null
-        : this.$createElement(
-            VIcon,
-            {
-              props: {
-                color: this.iconColor
-              }
-            },
-            this.icon
-          )
-      return this.$createElement(
-        'div',
-        {
+        : this.$createElement( VIcon, { props: { color: this.iconColor } },
+            this.icon )
+      
+      return this.$createElement('div', {
           staticClass: 'v-timeline__icon',
           class: this.iconFillClass
-        },
-        [iconElement]
-      )
+        }, [iconElement])
     }
   },
 
@@ -71,12 +57,8 @@ export default {
     children.push(this.genHeader())
     children.push(this.genBody())
 
-    return h(
-      'li',
-      {
+    return h('li', {
         staticClass: 'v-timeline__item'
-      },
-      children
-    )
+      }, children)
   }
 }
