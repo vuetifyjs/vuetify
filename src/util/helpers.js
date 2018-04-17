@@ -158,3 +158,7 @@ export function filterChildren (array = [], tag) {
       child.componentOptions.Ctor.options.name === tag
   })
 }
+
+export function convertToUnit (str, unit = 'px') {
+  return isNaN(str) ? str : `${Number(str)}${unit}`
+}

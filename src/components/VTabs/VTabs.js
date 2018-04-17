@@ -97,7 +97,6 @@ export default {
       return this.widths.container > this.scrollOffset + this.widths.wrapper
     },
     callSlider () {
-      this.setWidths()
       if (this.hideSlider || !this.activeTab) return false
 
       // Give screen time to paint
@@ -120,11 +119,13 @@ export default {
     onResize () {
       if (this._isDestroyed) return
 
+      this.setWidths()
+
       clearTimeout(this.resizeTimeout)
       this.resizeTimeout = setTimeout(() => {
         this.callSlider()
-        this.checkIcons()
         this.scrollIntoView()
+        this.checkIcons()
       }, this.transitionTime)
     },
     overflowCheck (e, fn) {
@@ -193,14 +194,15 @@ export default {
       this.tabs.push(options)
     },
     scrollIntoView () {
-      if (!this.activeTab) return false
+      if (!this.activeTab) return
+      if (!this.isOverflowing) return (this.scrollOffset = 0)
 
-      const { clientWidth, offsetLeft } = this.activeTab.$el
       const totalWidth = this.widths.wrapper + this.scrollOffset
+      const { clientWidth, offsetLeft } = this.activeTab.$el
       const itemOffset = clientWidth + offsetLeft
       const additionalOffset = clientWidth * 0.3
 
-      /* instanbul ignore else */
+      /* istanbul ignore else */
       if (offsetLeft < this.scrollOffset) {
         this.scrollOffset = Math.max(offsetLeft - additionalOffset, 0)
       } else if (totalWidth < itemOffset) {

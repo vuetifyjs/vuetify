@@ -114,7 +114,8 @@ export default {
       }
     },
     isMobile () {
-      return !this.permanent &&
+      return !this.stateless &&
+        !this.permanent &&
         !this.temporary &&
         this.$vuetify.breakpoint.width < parseInt(this.mobileBreakPoint, 10)
     },
@@ -323,6 +324,10 @@ export default {
           if (!this.miniVariant) return
 
           this.$emit('update:miniVariant', false)
+        },
+        transitionend: e => {
+          this.$emit('transitionend', e)
+          window.dispatchEvent(new Event('resize'))
         }
       }
     }

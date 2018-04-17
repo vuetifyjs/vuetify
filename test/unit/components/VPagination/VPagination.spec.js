@@ -129,4 +129,28 @@ test('VPagination.vue', ({ mount }) => {
     expect(wrapper.find('.pagination__more').length).toEqual(2)
     expect(wrapper.find('.pagination__item').length).toEqual(8)
   })
+
+  it('should set from to 1 if <= 0', () => {
+    const wrapper = mount(VPagination)
+
+    expect(wrapper.vm.range(1, 2)).toEqual([1, 2])
+    expect(wrapper.vm.range(0, 2)).toEqual([1, 2])
+  })
+
+  // Since we have no DOM access, test the expected outcome
+  // even if it's not real world, so that we can detect changes
+  it('should use parents width for on resize calculation', () => {
+    const wrapper = mount({
+      functional: true,
+      render: h => h('div', [h(VPagination)])
+    })
+
+    const pagination = wrapper.first(VPagination)
+
+    expect(pagination.vm.maxButtons).toBe(0)
+
+    pagination.vm.onResize()
+
+    expect(pagination.vm.maxButtons).toBe(-3)
+  })
 })
