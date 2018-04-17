@@ -1,12 +1,4 @@
-@import "../bootstrap"
-@import "../theme"
-
-/* Themes */
-timeline($material)
-  background-color: $material.v-timelines
-  color: $material.text.primary
-
-theme(timeline, "timeline")
+@import '../bootstrap'
 
 .v-timeline
   list-style: none
@@ -18,7 +10,7 @@ theme(timeline, "timeline")
   top: 50px
   bottom: 0
   position: absolute
-  content: " "
+  content: ' '
   width: 3px
   background-color: #E5E5E5
   left: 50%
@@ -29,26 +21,11 @@ theme(timeline, "timeline")
   font-weight: 400
   margin: 10px 0px 0px
 
-.v-timeline.v-timeline-simple
-  margin-top: 30px
-  padding: 0 0 20px
-
-.v-timeline.v-timeline-simple:before
-  left: 5%
-  background-color: #E5E5E5
-
-.v-timeline.v-timeline-simple > li > .v-timeline__body
-  width: 86%
-
-.v-timeline.v-timeline-simple > li > .v-timeline__icon
-  left: 5%
-
 .v-timeline > li
-  margin-bottom: 20px
   position: relative
 
 .v-timeline > li:before, .v-timeline > li:after
-  content: " "
+  content: ' '
   display: table
 
 .v-timeline > li:after
@@ -57,13 +34,13 @@ theme(timeline, "timeline")
 .v-timeline > li > .v-timeline__body
   width: 45%
   float: left
-  padding: 20px
-  margin-bottom: 20px
+  padding: 24px
+  margin-bottom: 18px
   position: relative
-  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14)
-  border-radius: 6px
-  color: rgba(0, 0, 0, 0.87)
-  background: #fff
+
+  elevation(2)
+
+  border-radius: 4px
 
 .v-timeline > li > .v-timeline__body:before
   position: absolute
@@ -74,7 +51,7 @@ theme(timeline, "timeline")
   border-left: 15px solid #e4e4e4
   border-right: 0 solid #e4e4e4
   border-bottom: 15px solid transparent
-  content: " "
+  content: ' '
 
 .v-timeline > li > .v-timeline__body:after
   position: absolute
@@ -85,25 +62,23 @@ theme(timeline, "timeline")
   border-left: 14px solid #FFFFFF
   border-right: 0 solid #FFFFFF
   border-bottom: 14px solid transparent
-  content: " "
+  content: ' '
 
 .v-timeline > li > .v-timeline__icon
   width: 50px
   height: 50px
-  line-height: 51px
-  font-size: 1.4em
+  line-height: 50px
   text-align: center
   position: absolute
   top: 16px
   left: 50%
   margin-left: -24px
-  z-index: 100
+  z-index: 2
   border-top-right-radius: 50%
   border-top-left-radius: 50%
   border-bottom-right-radius: 50%
   border-bottom-left-radius: 50%
   background-color: currentColor
-  box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(0, 0, 0, 0.14)
 
 .v-timeline > li.v-timeline__item:nth-child(odd) > .v-timeline__body
   float: right
