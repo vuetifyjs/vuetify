@@ -33,12 +33,7 @@ export default {
   },
 
   methods: {
-    genBody () {
-      return this.$createElement('div', {
-          staticClass: 'v-timeline__body'
-        }, this.$slots.item)
-    },
-    genHeader () {
+        genIcon () {
       const iconElement = this.noIcon
         ? null
         : this.$createElement( VIcon, { props: { color: this.iconColor } },
@@ -48,17 +43,22 @@ export default {
           staticClass: 'v-timeline__icon',
           class: this.iconFillClass
         }, [iconElement])
+    },
+    genBody () {
+      return this.$createElement('div', {
+          staticClass: 'v-timeline__body'
+        }, this.$slots.item)
     }
   },
 
   render (h) {
     const children = []
 
-    children.push(this.genHeader())
+    children.push(this.genIcon())
     children.push(this.genBody())
 
     return h('li', {
-        staticClass: 'v-timeline__item'
+        staticClass: 'v-timeline-item'
       }, children)
   }
 }
