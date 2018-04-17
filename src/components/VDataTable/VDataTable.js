@@ -1,9 +1,11 @@
+import '../../stylus/components/_tables.styl'
+import '../../stylus/components/_data-table.styl'
+
 import VDataIterator from '../VDataIterator'
 import VTableHeaders from './VTableHeaders'
-import VTablePagination from './VTablePagination'
+import VTableActions from './VTableActions'
 import VRowGroup from './VRowGroup'
-import VProgressLinear from '../VProgressLinear'
-import VRow from './VRow'
+import VTableProgress from './VTableProgress'
 
 const groupByProperty = (xs, key) => {
   return xs.reduce((rv, x) => {
@@ -26,6 +28,11 @@ export default {
       enumerable: true
     })
 
+    Object.defineProperty(dataTable, 'loading', {
+      get: () => this.loading,
+      enumerable: true
+    })
+
     return { dataTable }
   },
   props: {
@@ -36,7 +43,7 @@ export default {
     showSelectAll: {
       type: Boolean
     },
-    hidePagination: {
+    hideActions: {
       type: Boolean
     },
     hideHeader: {
@@ -55,6 +62,7 @@ export default {
   computed: {
     classes () {
       return {
+        'table': true,
         'v-data-table': true
       }
     }
@@ -69,14 +77,7 @@ export default {
             showSelectAll: this.showSelectAll
           },
         }))
-        this.loading && headers.push(h(VRow, [
-          h(VProgressLinear, {
-            props: {
-              active: true,
-              indeterminate: true
-            }
-          })
-        ]))
+        headers.push(h(VTableProgress))
       }
 
       return headers
@@ -122,8 +123,8 @@ export default {
     genFooters (h) {
       const footers = this.computeSlots('footer')
 
-      if (!this.hidePagination) {
-        footers.push(h(VTablePagination, {
+      if (!this.hideActions) {
+        footers.push(h(VTableActions, {
           props: {
             itemsLength: this.itemsLength,
             pageStart: this.pageStart,
@@ -144,7 +145,7 @@ export default {
     genBodyWrapper (h, items) {
       return h('div', {
         class: {
-          'v-data-table__body': true,
+          'tbody v-data-table__body': true,
           'v-data-table__body--fixed': this.fixedHeight
         },
         style: {

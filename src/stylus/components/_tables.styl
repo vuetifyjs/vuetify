@@ -6,16 +6,16 @@ v-table($material)
   background-color: $material.cards
   color: $material.text.primary
 
-  thead
-    tr
+  .thead
+    .tr
       &:first-child
         border-bottom: 1px solid rgba($material.fg-color, $material.divider-percent)
 
-    th
+    .th
       color: rgba($material.text-color, $material.secondary-text-percent)
 
-  tbody
-    tr
+  .tbody
+    .tr
       &:not(:last-child)
         border-bottom: 1px solid rgba($material.fg-color, $material.divider-percent)
 
@@ -25,35 +25,34 @@ v-table($material)
       &:hover:not(.datatable__expand-row)
         background: $material.table.hover
 
-  tfoot
-    tr
+  .tfoot
+    .tr
       border-top: 1px solid rgba($material.fg-color, $material.divider-percent)
 
 theme(v-table, "v-table")
 
-.v-table
-  &__overflow
-    width: 100%
-    overflow-x: auto
-    overflow-y: hidden
-
-table.v-table
+.table
   border-radius: 2px
   border-collapse: collapse
   border-spacing: 0
   width: 100%
   max-width: 100%
 
-  thead, tbody
-    td, th
+  &__overflow
+    width: 100%
+    overflow-x: auto
+    overflow-y: hidden
+
+  .thead, .tbody
+    .td, .th
       &:not(:nth-child(1)), &:first-child
         padding: 0 24px
 
-  thead
-    tr
+  .thead
+    .tr
       height: 56px
 
-    th
+    .th
       font-weight: 500
       font-size: 12px
       transition: .3s $transition.swing
@@ -66,15 +65,15 @@ table.v-table
       > div
         width: 100%
 
-  tbody
-    tr
+  .tbody
+    .tr
       transition: background $primary-transition
       will-change: background
 
-    td, th
+    .td, .th
       height: 48px
 
-    td
+    .td
       font-weight: 400
       font-size: 13px
 
@@ -93,8 +92,8 @@ table.v-table
         left: 50%
         transform: translate(-50%, -50%)
 
-  tfoot
-    tr
+  .tfoot
+    .tr
       height: 48px
-      td
+      .td
         padding: 0 24px

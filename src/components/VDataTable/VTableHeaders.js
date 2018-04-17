@@ -58,6 +58,9 @@ export default {
       }
 
       return h(VCell, {
+        props: {
+          head: true
+        },
         class: classes,
         nativeOn: listeners
       }, [
@@ -68,6 +71,9 @@ export default {
 
     if (this.showSelectAll) headers.unshift(this.genSelectAll(h))
 
-    return h(VRow, headers)
+    return h('div', {
+      class: 'thead'
+
+    }, [h(VRow, headers)])
   }
 }

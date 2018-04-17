@@ -4,7 +4,7 @@ import VIcon from '../VIcon'
 import VSelect from '../VSelect'
 
 export default {
-  name: 'v-table-pagination',
+  name: 'v-table-actions',
   inheritAttrs: false,
   inject: ['dataIterator'],
   props: {
@@ -33,7 +33,7 @@ export default {
   methods: {
     genRowsPerPageSelect (h) {
       return h('div', {
-        staticClass: 'v-table-pagination__select'
+        staticClass: 'v-data-table__actions__select'
       }, [
         this.rowsPerPageText,
         h(VSelect, {
@@ -74,7 +74,7 @@ export default {
       }
 
       return h('div', {
-        'class': this.actionsPaginationClasses
+        'class': 'v-data-table__actions__pagination'
       }, [pagination])
     },
     genIcon (h, click, disabled, label, icon) {
@@ -105,7 +105,7 @@ export default {
     }, this.dataIterator.page === 1, 'Previous page', this.prevIcon)
 
     return h('div', {
-      staticClass: 'v-table-pagination'
+      staticClass: 'v-data-table__actions'
     }, [
       this.genRowsPerPageSelect(h),
       this.genPagination(h),

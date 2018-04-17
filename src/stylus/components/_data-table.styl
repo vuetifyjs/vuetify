@@ -2,9 +2,9 @@
 @import '../theme'
 
 /* Theme */
-v-datatable($material)
-  thead
-    th.column.sortable
+v-data-table($material)
+  .thead
+    .th.column.sortable
       i
         color: rgba($material.fg-color, $material.disabledORhints-text-percent)
 
@@ -22,14 +22,19 @@ v-datatable($material)
     color: rgba($material.fg-color, $material.secondary-text-percent)
     border-top: 1px solid rgba($material.fg-color, $material.divider-percent)
 
-theme(v-datatable, "v-datatable")
+    &__select
+      .input-group--select
+        .input-group__selections__comma
+          color: rgba($material.fg-color, $material.secondary-text-percent) !important
 
-.v-datatable
-  .v-input
-    margin: 0
+        .input-group__append-icon
+          color: rgba($material.fg-color, $material.secondary-text-percent) !important
 
-  thead
-    th.column.sortable
+theme(v-data-table, "v-data-table")
+
+.v-data-table
+  .thead
+    .th.column.sortable
       cursor: pointer
       outline: 0
 
@@ -56,7 +61,7 @@ theme(v-datatable, "v-datatable")
             transform: rotate(-180deg)
 
 /** Actions */
-.v-datatable__actions
+.v-data-table__actions
   display: flex
   justify-content: flex-end
   align-items: center
@@ -95,20 +100,18 @@ theme(v-datatable, "v-datatable")
       .v-select__selection--comma
         font-size: 12px
 
-.v-datatable__progress
+.v-data-table__progress
   height: auto !important
 
-  tr, td, th
+  .tr, .td, .th
     height: auto !important
-
-  th
-    padding: 0 !important
+    border: none !important
 
     .v-progress-linear
       top: -2px
       margin: 0 0 -2px
 
-.v-datatable__expand
+.v-data-table__expand
   &-row
     border: none !important
 

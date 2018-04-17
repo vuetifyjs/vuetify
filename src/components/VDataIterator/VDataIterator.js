@@ -126,6 +126,9 @@ export default {
     },
     serverSide: {
       type: Object
+    },
+    serverItemsLength: {
+      type: Number
     }
   },
   data () {
@@ -217,6 +220,7 @@ export default {
       return Math.ceil(this.itemsLength / this.options.rowsPerPage)
     },
     itemsLength () {
+      if (typeof this.serverItemsLength !== 'undefined' && !isNaN(this.serverItemsLength)) return this.serverItemsLength
       // TODO: needs to account for search
       return this.items.length
     },
