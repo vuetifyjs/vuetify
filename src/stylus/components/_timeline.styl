@@ -100,7 +100,26 @@
     left: -14px
     right: auto
 
-/* Changes for small display */
+.v-timeline--left > li.v-timeline-item:nth-child(n) > .v-timeline__body
+  width: 86%
+  float: left
+
+  &:before
+    border-right-width: 0
+    border-left-width: 15px
+    right: -15px
+    left: auto
+
+  &:after
+    border-right-width: 0
+    border-left-width: 14px
+    right: -14px
+    left: auto
+
+.v-timeline--right > li.v-timeline-item:nth-child(n) > .v-timeline__body
+  width: 86%
+  float: right
+
 @media $display-breakpoints.sm-and-down
   .v-timeline:before
     left: 5%
@@ -124,4 +143,11 @@
         border-right-width: 14px
         left: -14px
         right: auto
- 
+  
+  .v-timeline--left:before
+    left: 95%
+
+  .v-timeline--left > li >
+    & .v-timeline__icon
+      left: 95%
+    
