@@ -7,6 +7,6 @@ test('VTimelineItem.js', ({ mount }) => {
 
     const li = wrapper.first('li')
     expect(li.is('li')).toBe(true)
-    expect(li.hasClass('v-timeline__item')).toBe(true)
+    expect(li.hasClass('v-timeline-item')).toBe(true)
   })
 })
