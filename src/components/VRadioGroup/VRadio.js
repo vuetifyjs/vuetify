@@ -37,7 +37,7 @@ export default {
     Themeable
   ],
 
-  data: () => ({
+  data: vm => ({
     isActive: false,
     isFocused: false,
     parentError: false
