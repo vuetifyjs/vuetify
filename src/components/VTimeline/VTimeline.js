@@ -1,12 +1,7 @@
 import '../../stylus/components/_timeline.styl'
 
-//  MIXINS
-import Colorable from '../../mixins/colorable'
-
 export default {
   name: 'v-timeline',
-
-  mixins: [Colorable],
 
   props: {
     right: {
@@ -16,17 +11,13 @@ export default {
     left: {
       type: Boolean,
       default: false
-    },
-    alternate: {
-      type: Boolean,
-      default: false
     }
   },
 
   computed: {
     alignClass () {
       return {
-        'v-timeline--alternate': this.alternate,
+        'v-timeline': true,
         'v-timeline--left': this.left,
         'v-timeline--right': this.right
       }
@@ -35,8 +26,7 @@ export default {
 
   render (h) {
     return h('ul', {
-        staticClass: 'v-timeline',
-        class: this.alignClass
-      }, this.$slots.default)
+      class: this.alignClass
+    }, this.$slots.default)
   }
 }

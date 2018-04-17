@@ -2,27 +2,27 @@
 
 .v-timeline
   list-style: none
-  padding: 20px 0 20px
+  padding: 24px 0 24px 0
   position: relative
-  margin-top: 30px
+  margin-top: 18px
 
-.v-timeline:before
-  top: 50px
-  bottom: 0
-  position: absolute
-  content: ' '
-  width: 3px
-  background-color: #E5E5E5
-  left: 50%
-  margin-left: -1px
+  &:before
+    top: 50px
+    bottom: 0
+    position: absolute
+    content: ' '
+    width: 2px
+    background-color: #E5E5E5
+    left: 50%
 
-.v-timeline h6
-  color: #333333
-  font-weight: 400
-  margin: 10px 0px 0px
+  &--left:before
+    left: 95%
 
-.v-timeline > li
-  position: relative
+  &--right:before
+    left: 5%
+
+  & > li
+    position: relative
 
 .v-timeline > li:before, .v-timeline > li:after
   content: ' '
@@ -37,32 +37,31 @@
   padding: 24px
   margin-bottom: 18px
   position: relative
+  border-radius: 4px
 
   elevation(2)
 
-  border-radius: 4px
+  &:before
+    position: absolute
+    top: 26px
+    right: -15px
+    display: inline-block
+    border-top: 15px solid transparent
+    border-left: 15px solid #e4e4e4
+    border-right: 0 solid #e4e4e4
+    border-bottom: 15px solid transparent
+    content: ' '
 
-.v-timeline > li > .v-timeline__body:before
-  position: absolute
-  top: 26px
-  right: -15px
-  display: inline-block
-  border-top: 15px solid transparent
-  border-left: 15px solid #e4e4e4
-  border-right: 0 solid #e4e4e4
-  border-bottom: 15px solid transparent
-  content: ' '
-
-.v-timeline > li > .v-timeline__body:after
-  position: absolute
-  top: 27px
-  right: -14px
-  display: inline-block
-  border-top: 14px solid transparent
-  border-left: 14px solid #FFFFFF
-  border-right: 0 solid #FFFFFF
-  border-bottom: 14px solid transparent
-  content: ' '
+  &:after
+    position: absolute
+    top: 27px
+    right: -14px
+    display: inline-block
+    border-top: 14px solid transparent
+    border-left: 14px solid #FFFFFF
+    border-right: 0 solid #FFFFFF
+    border-bottom: 14px solid transparent
+    content: ' '
 
 .v-timeline > li > .v-timeline__icon
   width: 50px
@@ -80,52 +79,49 @@
   border-bottom-left-radius: 50%
   background-color: currentColor
 
-.v-timeline > li.v-timeline__item:nth-child(odd) > .v-timeline__body
+.v-timeline--left > li > .v-timeline__icon
+  left: 95%
+
+.v-timeline--right > li > .v-timeline__icon
+  left: 5%
+
+.v-timeline > li.v-timeline-item:nth-child(odd) > .v-timeline__body
   float: right
-  background-color: #FFFFFF
 
-.v-timeline > li.v-timeline__item:nth-child(odd) > .v-timeline__body:before
-  border-left-width: 0
-  border-right-width: 15px
-  left: -15px
-  right: auto
-
-.v-timeline > li.v-timeline__item:nth-child(odd) > .v-timeline__body:after
-  border-left-width: 0
-  border-right-width: 14px
-  left: -14px
-  right: auto
-
-.v-timeline-heading
-  margin-bottom: 15px
-
-.v-timeline-title
-  margin-top: 0
-  color: inherit
-
-.v-timeline-body > ul
-  margin-bottom: 0
-
-/* Changes for small display */
-@media (max-width: 991px)
-  .v-timeline:before
-    left: 5%
-
-  .v-timeline > li > .v-timeline__icon
-    left: 5%
-
-  .v-timeline > li > .v-timeline__body
-    float: right
-    width: 86%
-
-  .v-timeline > li > .v-timeline__body:before
+  &:before
     border-left-width: 0
     border-right-width: 15px
     left: -15px
     right: auto
 
-  .v-timeline > li > .v-timeline__body:after
+  &:after
     border-left-width: 0
     border-right-width: 14px
     left: -14px
     right: auto
+
+/* Changes for small display */
+@media $display-breakpoints.sm-and-down
+  .v-timeline:before
+    left: 5%
+
+  .v-timeline > li >
+    & .v-timeline__icon
+      left: 5%
+
+    & .v-timeline__body
+      float: right
+      width: 86%
+
+      &:before
+        border-left-width: 0
+        border-right-width: 15px
+        left: -15px
+        right: auto
+
+      &:after
+        border-left-width: 0
+        border-right-width: 14px
+        left: -14px
+        right: auto
+ 
