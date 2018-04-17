@@ -35,6 +35,10 @@ export default {
     combined: {
       header: 'Combined drawers',
       desc: 'Drawers are flexible and are easily adapted to any use-case.'
+    },
+    nested: {
+      header: 'Nested lists',
+      desc: 'List tiles can be nested a second level for even more options for your navigation'
     }
   }],
   props: {
