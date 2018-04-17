@@ -5,6 +5,9 @@
 v-card($material)
   background-color: $material.cards
   color: $material.text.primary
+  &__expansion
+    &--cover
+      background-color: $material.cards
 
 theme(v-card, "v-card")
 
@@ -40,7 +43,17 @@ theme(v-card, "v-card")
 
     &:hover
       elevation(8)
-
+  &__expansion
+    &--cover
+      position: absolute
+      width: 100%
+      height: 100%
+      overflow-y: auto
+      left: 0
+      top: 0
+      bottom: 0
+    &--dropdown
+      transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1)
   &__title
     align-items: center
     display: flex
