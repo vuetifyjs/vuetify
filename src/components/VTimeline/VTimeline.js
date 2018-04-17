@@ -34,13 +34,9 @@ export default {
   },
 
   render (h) {
-    return h(
-      'ul',
-      {
+    return h('ul', {
         staticClass: 'v-timeline',
         class: this.alignClass
-      },
-      this.$slots.default
-    )
+      }, this.$slots.default)
   }
 }
