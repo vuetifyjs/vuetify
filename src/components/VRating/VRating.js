@@ -1,7 +1,9 @@
-import VBtn from '../VBtn'
+import '../../stylus/components/_rating.styl'
+
 import VIcon from '../VIcon'
 
 import Colorable from '../../mixins/colorable'
+import Sizeable from '../../mixins/sizeable'
 
 import Ripple from '../../directives/ripple'
 
@@ -9,11 +11,19 @@ import { createRange } from '../../util/helpers'
 
 export default {
   name: 'v-rating',
-  mixins: [Colorable],
+  mixins: [Colorable, Sizeable],
   directives: {
     Ripple
   },
   props: {
+    backgroundColor: {
+      type: String,
+      default: 'secondary'
+    },
+    color: {
+      type: String,
+      default: 'primary'
+    },
     length: {
       type: Number,
       default: 5
@@ -32,14 +42,11 @@ export default {
     },
     showHover: {
       type: Boolean
-    },
-    large: {
-      type: Boolean
     }
   },
   data () {
     return {
-      hover: 0
+      hoverIndex: 0
     }
   },
   computed: {
@@ -57,22 +64,23 @@ export default {
     },
     genItem (h, i) {
       const click = this.createClickFn(i)
+      const isHovering = this.hoverIndex > 0
+      const isSelected = this.value > i
 
       if (this.$scopedSlots.item) {
         return this.$scopedSlots.item({
           index: i,
           value: this.value,
-          full: this.value > i,
-          click,
-          hover: this.hover,
-          showHover: this.showHover
+          isSelected,
+          isHovering,
+          click
         })
       }
 
       let iconName
 
-      if (this.showHover && this.hover > 0) {
-        iconName = this.hover > i ? this.fullIcon : this.emptyIcon
+      if (this.showHover && isHovering) {
+        iconName = this.hoverIndex > i ? this.fullIcon : this.emptyIcon
       } else {
         iconName = this.value > i ? this.fullIcon : this.emptyIcon
       }
@@ -84,36 +92,29 @@ export default {
       if (this.showHover) {
         listeners = Object.assign(listeners, {
           mouseenter: () => {
-            this.hover = i + 1
+            this.hoverIndex = i + 1
           },
           mouseleave: () => {
-            this.hover = 0
+            this.hoverIndex = 0
           }
         })
       }
 
-      const icon = h(VIcon, {
+      const { small, medium, large, xLarge } = this.$props
+      const props = { small, medium, large, xLarge }
+      const color = this.hoverIndex > i || (isSelected && !isHovering) ? this.color : this.backgroundColor
+
+      return h(VIcon, {
         directives: [
           {
             name: 'ripple',
             value: true
           }
         ],
-        props: {
-          large: this.large
-        },
-        class: this.addTextColorClassChecks({}, this.color),
+        props,
+        class: this.addTextColorClassChecks({}, color),
         on: listeners
       }, [iconName])
-
-      return h(VBtn, {
-        props: {
-          ripple: true,
-          icon: true,
-          large: this.large
-        },
-        on: listeners
-      }, [icon])
     }
   },
   render (h) {
