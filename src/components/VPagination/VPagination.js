@@ -91,6 +91,7 @@ export default {
     init () {
       this.selected = null
 
+      this.$nextTick(this.onResize)
       // TODO: Change this (f75dee3a, cbdf7caa)
       setTimeout(() => (this.selected = this.value), 100)
     },
@@ -161,7 +162,11 @@ export default {
     ]
 
     return h('ul', {
-      directives: [{ name: 'resize', value: this.onResize }],
+      directives: [{
+        modifiers: { quiet: true },
+        name: 'resize',
+        value: this.onResize
+      }],
       class: this.classes
     }, children)
   }

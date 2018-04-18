@@ -9,7 +9,7 @@ v-expansion-panel($material)
     color: $material.text.primary
 
     .v-expansion-panel__header
-      .icon
+      .v-icon
         color: $material.icons.active
 
   &--focusable
@@ -41,13 +41,13 @@ theme(v-expansion-panel, "v-expansion-panel")
     .header__icon
       margin-left: auto
 
-      .icon
+      .v-icon
         // Edge rendering issue TODO: revisit later
         transition: none
 
     &--active
       > .v-expansion-panel__header
-        .header__icon .icon
+        .header__icon .v-icon
           transform: rotate(-180deg)
 
   &__header

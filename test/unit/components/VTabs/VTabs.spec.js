@@ -1,4 +1,4 @@
-import { test, touch } from '@/test'
+import { test, touch, resizeWindow } from '@/test'
 import { createRange } from '@/util/helpers'
 import VTabs from '@/components/VTabs'
 import VTab from '@/components/VTabs/VTab'
@@ -333,23 +333,37 @@ test('VTabs', ({ mount, shallow }) => {
 
     await ssrBootable()
 
-    expect(wrapper.vm.scrollIntoView()).toEqual(false)
+    wrapper.vm.scrollIntoView()
+
+    expect(wrapper.vm.scrollOffset).toBe(0)
+    expect(wrapper.vm.isOverflowing).toBe(false)
 
     wrapper.setProps({ value: 'foo' })
-    // Simulate being scrolled too far to the right
-    wrapper.setData({ scrollOffset: 400 })
     await wrapper.vm.$nextTick()
 
+    // Simulate being scrolled too far to the left
+    wrapper.setData({
+      isOverflowing: true,
+      scrollOffset: 100
+    })
+
     wrapper.vm.scrollIntoView()
-    await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.scrollOffset).toBe(0)
 
-    // DOM elements have no actual widths
-    // Trick into running else condition
-    wrapper.setData({ scrollOffset: -1 })
+    // Simulate being scrolled too far to the right
+    wrapper.setData({
+      isOverflowing: true,
+      scrollOffset: -100
+    })
+
     wrapper.vm.scrollIntoView()
-    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.scrollOffset).toBe(0)
+
+    wrapper.setData({ isOverflowing: true })
+
+    wrapper.vm.scrollIntoView()
 
     expect(wrapper.vm.scrollOffset).toBe(0)
   })
@@ -458,5 +472,48 @@ test('VTabs', ({ mount, shallow }) => {
 
     expect(onResize).toHaveBeenCalledTimes(1)
     expect(wrapper.vm.tabs.length).toBe(0)
+  })
+
+  it('should not error if processing resize on destroy', () => {
+    const wrapper = mount(VTabs, {
+      slots: {
+        default: [{
+          functional: true,
+          render: h => h(VTab)
+        }]
+      }
+    })
+
+    // Will kill test if fails
+    delete wrapper.vm.$refs.bar
+    wrapper.vm.setOverflow()
+  })
+
+  it('should set dimensions when onResize is called', async () => {
+    const setWidths = jest.fn()
+    const wrapper = mount(VTabs, {
+      propsData: {
+        value: 'foo'
+      },
+      slots: {
+        default: [{
+          functional: true,
+          render: h => h(VTab, {
+            props: { href: '#foo' }
+          })
+        }]
+      },
+      methods: { setWidths }
+    })
+
+    expect(setWidths).not.toBeCalled()
+
+    await wrapper.vm.$nextTick()
+
+    expect(setWidths).toHaveBeenCalledTimes(1)
+
+    await resizeWindow(800)
+
+    expect(setWidths).toHaveBeenCalledTimes(2)
   })
 })
