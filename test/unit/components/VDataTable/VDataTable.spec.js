@@ -67,6 +67,54 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
     }
   }
 
+  function wrapperForNoWrappedExpandSlots (noWrappedExpandSlots) {
+    const vm = new Vue()
+
+    const items = (props) => {
+      return vm.$createElement('tr',
+        {
+          on: {
+            click: () => props.expanded = !props.expanded
+          },
+          attrs: { class: 'item' }
+        },
+        [ vm.$createElement('td', [props.item.name]) ]
+      )
+    }
+
+    const expand = (props) => {
+      return  props.item.ingredients.map((ingredient) => {
+            return vm.$createElement('tr',
+              {
+                attrs: { class: 'nested' }
+              },
+              [ vm.$createElement('td', [ingredient.name], { key: ingredient.id }) ]
+            )
+          }
+        )
+    }
+
+    const wrapper = mount(Vue.component('test', {
+        render (h) {
+          return h(VDataTable, {
+            props: {
+              noWrappedExpandSlots: noWrappedExpandSlots,
+              itemKey: 'name',
+              items: this.items,
+              headers: this.headers
+            },
+            scopedSlots: {
+              items,
+              expand
+            }
+          })
+        },
+        data: noWrappedExpandSlotsData
+    }))
+
+    return wrapper
+  }
+
   // TODO: This doesn't actually test anything
   it.skip('should be able to filter null and undefined values', async () => {
     const data = dataTableTestData()
@@ -332,50 +380,7 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
   })
 
   it('should render expand slot as direct child', async () => {
-    const vm = new Vue()
-
-    const items = (props) => {
-      return vm.$createElement('tr',
-        {
-          on: {
-            click: () => props.expanded = !props.expanded
-          },
-          attrs: { class: 'item' }
-        },
-        [ vm.$createElement('td', [props.item.name]) ]
-      )
-    }
-
-    const expand = (props) => {
-      return  props.item.ingredients.map((ingredient) => {
-            return vm.$createElement('tr',
-              {
-                attrs: { class: 'nested' }
-              },
-              [ vm.$createElement('td', [ingredient.name], { key: ingredient.id }) ]
-            )
-          }
-        )
-    }
-
-    const wrapper = mount(Vue.component('test', {
-        render (h) {
-          return h(VDataTable, {
-            props: {
-              noWrappedExpandSlots: true,
-              itemKey: 'name',
-              items: this.items,
-              headers: this.headers
-            },
-            scopedSlots: {
-              items,
-              expand
-            }
-          })
-        },
-        data: noWrappedExpandSlotsData
-    }))
-
+    const wrapper = wrapperForNoWrappedExpandSlots(true)
 
     wrapper.find('tr.item')[0].element.click()
     await wrapper.vm.$nextTick()
@@ -384,50 +389,7 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
   })
 
   it('should render expand slot as indirect child', async () => {
-    const vm = new Vue()
-
-    const items = (props) => {
-      return vm.$createElement('tr',
-        {
-          on: {
-            click: () => props.expanded = !props.expanded
-          },
-          attrs: { class: 'item' }
-        },
-        [ vm.$createElement('td', [props.item.name]) ]
-      )
-    }
-
-    const expand = (props) => {
-      return  props.item.ingredients.map((ingredient) => {
-            return vm.$createElement('tr',
-              {
-                attrs: { class: 'nested' }
-              },
-              [ vm.$createElement('td', [ingredient.name], { key: ingredient.id }) ]
-            )
-          }
-        )
-    }
-
-    const wrapper = mount(Vue.component('test', {
-        render (h) {
-          return h(VDataTable, {
-            props: {
-              noWrappedExpandSlots: false,
-              itemKey: 'name',
-              items: this.items,
-              headers: this.headers
-            },
-            scopedSlots: {
-              items,
-              expand
-            }
-          })
-        },
-        data: noWrappedExpandSlotsData
-    }))
-
+    const wrapper = wrapperForNoWrappedExpandSlots(false)
 
     wrapper.find('tr.item')[0].element.click()
     await wrapper.vm.$nextTick()
