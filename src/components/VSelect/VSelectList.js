@@ -105,8 +105,6 @@ export default {
       return this.$createElement(VSubheader, { props }, props.header)
     },
     genHighlight (text) {
-      if (this.isNotFiltering) return escapeHTML(text)
-
       return `<span class="v-list__tile__mask">${escapeHTML(text)}</span>`
     },
     getMaskedCharacters (text) {

@@ -193,9 +193,9 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.vm.selectedItems).toHaveLength(1)
     wrapper.trigger('click')
-    const item = wrapper.find('div.v-list__tile__action')[0]
+    const item = wrapper.first('div.v-list__tile__action')
     item.trigger('click')
-
+    await wrapper.vm.$nextTick()
     expect(wrapper.vm.selectedItems).toHaveLength(0)
   })
 

@@ -102,15 +102,18 @@ test('VAutocomplete.js', ({ shallow }) => {
       }
     })
 
-    wrapper.setData({
-      isMenuActive: true,
-      internalSearch: 2
-    })
-    await wrapper.vm.$nextTick()
-    wrapper.setData({ isMenuActive: false })
+    const input = wrapper.first('input')
+
+    input.trigger('focus')
+    input.element.value = 2
+    input.trigger('input')
+
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.internalSearch).toBe(null)
+    input.trigger('blur')
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.internalSearch).toBe(undefined)
   })
 
   it('should render role=combobox correctly when autocomplete', async () => {
@@ -255,8 +258,11 @@ test('VAutocomplete.js', ({ shallow }) => {
 
     await wrapper.vm.$nextTick()
 
-    input.trigger('keydown.tab')
+    input.trigger('blur')
     await wrapper.vm.$nextTick()
+    await wrapper.vm.$nextTick()
+    await wrapper.vm.$nextTick()
+    await new Promise(resolve => setTimeout(resolve, 1000))
 
     expect(change).toHaveBeenCalledWith('foo')
   })
@@ -306,25 +312,27 @@ test('VAutocomplete.js', ({ shallow }) => {
 
     // Delete key
     wrapper.vm.changeSelectedIndex(8)
+    await wrapper.vm.$nextTick()
     expect(wrapper.vm.selectedIndex).toBe(1)
 
     wrapper.vm.changeSelectedIndex(37)
     expect(wrapper.vm.selectedIndex).toBe(0)
 
     wrapper.vm.changeSelectedIndex(8)
+    await wrapper.vm.$nextTick()
     expect(wrapper.vm.selectedIndex).toBe(0)
 
     wrapper.vm.changeSelectedIndex(8)
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.selectedItems.length).toBe(0)
     expect(wrapper.vm.selectedIndex).toBe(-1)
 
     // Should not change/error if called with no selection
     wrapper.vm.changeSelectedIndex(8)
-    expect(wrapper.vm.selectedIndex).toBe(0)
-    wrapper.vm.changeSelectedIndex(8)
-
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.selectedItems.length).toBe(0)
+    expect(wrapper.vm.selectedIndex).toBe(-1)
 
     wrapper.setProps({ value: ['foo', 'bar', 'fizz'] })
 

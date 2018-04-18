@@ -124,6 +124,7 @@ export default {
     directives () {
       return [{
         name: 'click-outside',
+        // TODO: Check into this firing when it shouldn't
         value: () => {
           if (this.isMenuActive) {
             this.onKeyDown({ keyCode: 9 })
@@ -131,7 +132,7 @@ export default {
 
           this.isMenuActive = false
           this.isFocused = false
-          this.selectedIndex = null
+          this.selectedIndex = -1
         },
         args: {
           closeConditional: e => {
@@ -161,7 +162,7 @@ export default {
 
   watch: {
     internalValue: 'setSelectedItems',
-    items (val) {
+    items (val, prev) {
       if (this.cacheItems) {
         this.cachedItems = this.filterDuplicates(this.cachedItems.concat(val))
       }
@@ -248,7 +249,10 @@ export default {
       const key = JSON.stringify(this.getValue(item))
 
       return this.$createElement('div', {
-        staticClass: 'v-select__selection',
+        staticClass: 'v-select__selection v-select__selection--comma',
+        'class': index === this.selectedIndex
+          ? this.addTextColorClassChecks()
+          : null,
         key
       }, `${this.getText(item)}${last ? '' : ', '}`)
     },
@@ -265,6 +269,13 @@ export default {
       ])
 
       return [this.genMenu(activator)]
+    },
+    genInput () {
+      const input = VTextField.methods.genInput.call(this)
+
+      input.data.domProps.value = null
+
+      return input
     },
     genList () {
       return this.$createElement(VSelectList, {
@@ -402,8 +413,6 @@ export default {
           return this.returnObject ? i : this.getValue(i)
         })
       }
-
-      this.setSelectedItems()
 
       this.$emit('change', this.internalValue)
 

@@ -28,7 +28,7 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
                            style="left: 0px; position: absolute;"
                     >
                     </label>
-                    <div class="v-select__selection">
+                    <div class="v-select__selection v-select__selection--comma">
                       5
                     </div>
                     <input tabindex="0"
@@ -175,7 +175,7 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
                            style="left: 0px; position: absolute;"
                     >
                     </label>
-                    <div class="v-select__selection">
+                    <div class="v-select__selection v-select__selection--comma">
                       5
                     </div>
                     <input tabindex="0"
@@ -313,7 +313,7 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
                            style="left: 0px; position: absolute;"
                     >
                     </label>
-                    <div class="v-select__selection">
+                    <div class="v-select__selection v-select__selection--comma">
                       5
                     </div>
                     <input tabindex="0"
@@ -455,7 +455,7 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
                            style="left: 0px; position: absolute;"
                     >
                     </label>
-                    <div class="v-select__selection">
+                    <div class="v-select__selection v-select__selection--comma">
                       5
                     </div>
                     <input tabindex="0"

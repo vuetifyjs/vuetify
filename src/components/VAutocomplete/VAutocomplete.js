@@ -64,12 +64,15 @@ export default {
     filteredItems () {
       const items = this.filterDuplicates(this.cachedItems.concat(this.items))
 
-      if (this.isNotFiltering) return items
+      if (!this.isSearching) return items
 
       return items.filter(i => this.filter(i, this.internalSearch, this.getText(i)))
     },
     hasSlot () {
       return VSelect.computed.hasSlot.call(this) || this.tags
+    },
+    hasTags () {
+      return this.combobox || this.tags
     },
     internalSearch: {
       get () {
@@ -87,16 +90,17 @@ export default {
     isMulti () {
       return this.tags || VSelect.computed.isMulti.call(this)
     },
-    isNotFiltering () {
-      return this.searchIsDirty &&
-        (this.multiple || this.internalSearch === this.getText(this.selectedItem))
+    isSearching () {
+      if (this.isMulti) return this.searchIsDirty
+
+      return this.internalSearch !== this.getText(this.internalValue)
     },
     searchIsDirty () {
       return this.internalSearch != null &&
         this.internalSearch != ''
     },
     selectedItem () {
-      if (this.multiple) return null
+      if (this.isMulti) return null
 
       return this.selectedItems.find(i => {
         return this.valueComparator(this.getValue(i), this.getValue(this.internalValue))
@@ -109,12 +113,10 @@ export default {
       if (val) {
         this.$refs.input &&
           this.$refs.input.select()
-      } else {
-        this.updateTags()
       }
     },
     isMenuActive (val) {
-      if (val) return
+      if (val || !this.hasSlot) return
 
       this.lazySearch = null
     },
@@ -123,8 +125,11 @@ export default {
     }
   },
 
-  methods: {
+  created () {
+    this.setSearch()
+  },
 
+  methods: {
     changeSelectedIndex (keyCode) {
       // Do not allow changing of selectedIndex
       // when search is dirty
@@ -183,7 +188,7 @@ export default {
       const list = VSelect.methods.genList.call(this)
 
       list.componentOptions.propsData.items = this.filteredItems
-      list.componentOptions.propsData.noFilter = this.isNotFiltering
+      list.componentOptions.propsData.noFilter = !this.isSearching
       list.componentOptions.propsData.searchInput = this.internalSearch
 
       return list
@@ -192,6 +197,12 @@ export default {
       return this.hasSlot || this.isMulti
         ? VSelect.methods.genSelections.call(this)
         : null
+    },
+    onBlur () {
+      this.isMenuActive = false
+      if (this.tags) this.updateTags()
+      else if (this.combobox) this.updateCombobox()
+      else this.updateAutocomplete()
     },
     onInput (e) {
       // If typing and menu is not currently active
@@ -203,14 +214,6 @@ export default {
       this.internalSearch = e.target.value
       this.badInput = e.target.validity && e.target.validity.badInput
     },
-    selectItem (item) {
-      VSelect.methods.selectItem.call(this, item)
-
-      if (this.hasSlot) {
-        this.lazySearch = null
-        this.focusInput()
-      }
-    },
     onKeyDown (e) {
       const keyCode = e.keyCode
 
@@ -218,21 +221,44 @@ export default {
         this.changeSelectedIndex(keyCode)
       }
 
-      if (keyCode === 8 && !this.searchIsDirty) {
-        return VSelect.methods.onKeyDown.call(this, e)
-      }
-
-      if (!this.$refs.menu || e.keyCode !== 38) {
-        return VSelect.methods.onKeyDown.call(this, e)
-      }
-
-      // // Pressing up on index 0 resets index
-      // if (this.$refs.menu.listIndex === 0) {
-      //   this.$refs.menu.listIndex = -1
-      // }
+      if ((keyCode === 8 && !this.searchIsDirty) ||
+        (!this.$refs.menu || e.keyCode !== 38)
+      ) return VSelect.methods.onKeyDown.call(this, e)
     },
+    selectItem (item) {
+      VSelect.methods.selectItem.call(this, item)
+
+      this.setSearch()
+    },
+    setValue () {
+      this.internalValue = this.internalSearch
+      this.$emit('change', this.internalValue)
+    },
+    setSearch () {
+      if (this.hasSlot || this.isMulti) return
+
+      this.lazySearch = this.getText(this.internalValue)
+    },
+    updateAutocomplete () {
+      this.internalSearch = this.initialValue
+    },
+    updateCombobox () {
+      // no internal value
+      // set lazySearch
+
+      if (this.internalSearch &&
+        this.internalSearch !== this.internalValue
+      ) this.setValue()
+      else this.updateAutocomplete()
+
+      // if (this.searchIsDirty) this.setSearch()
+      // else if (this.internalSearch &&
+      //   this.internalSearch !== this.internalValue
+      // ) this.setInternalValue()
+    },
+    // Maybe change to onBlur?
     updateTags (content) {
-      if (this.combobox && this.searchIsDirty) {
+      if (!this.hasSlot && this.searchIsDirty) {
         this.internalValue = this.internalSearch
         this.$emit('change', this.internalValue)
       }

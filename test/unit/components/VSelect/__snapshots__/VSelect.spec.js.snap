@@ -26,7 +26,7 @@ exports[`VSelect should only show items if they are in items 1`] = `
                    style="left: 0px; position: absolute;"
             >
             </label>
-            <div class="v-select__selection">
+            <div class="v-select__selection v-select__selection--comma">
               foo
             </div>
             <input tabindex="0"
@@ -121,7 +121,7 @@ exports[`VSelect should only show items if they are in items 3`] = `
                    style="left: 0px; position: absolute;"
             >
             </label>
-            <div class="v-select__selection">
+            <div class="v-select__selection v-select__selection--comma">
               bar
             </div>
             <input tabindex="0"
@@ -170,10 +170,10 @@ exports[`VSelect should only show items if they are in items 4`] = `
                    style="left: 0px; position: absolute;"
             >
             </label>
-            <div class="v-select__selection">
+            <div class="v-select__selection v-select__selection--comma">
               foo,
             </div>
-            <div class="v-select__selection">
+            <div class="v-select__selection v-select__selection--comma">
               bar
             </div>
             <input tabindex="0"
