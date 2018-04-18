@@ -1,20 +1,20 @@
 import '../../stylus/components/_rating.styl'
 
+// Components
 import VIcon from '../VIcon'
 
+// Mixins
 import Colorable from '../../mixins/colorable'
 import Sizeable from '../../mixins/sizeable'
+import Rippleable from '../../mixins/rippleable'
 
-import Ripple from '../../directives/ripple'
-
-import { createRange } from '../../util/helpers'
+import { createRange, remapInternalIcon } from '../../util/helpers'
 
 export default {
   name: 'v-rating',
-  mixins: [Colorable, Sizeable],
-  directives: {
-    Ripple
-  },
+
+  mixins: [Colorable, Sizeable, Rippleable],
+
   props: {
     backgroundColor: {
       type: String,
@@ -30,11 +30,11 @@ export default {
     },
     emptyIcon: {
       type: String,
-      default: 'star_border'
+      default: '$vuetify.icons.ratingEmpty'
     },
     fullIcon: {
       type: String,
-      default: 'star'
+      default: '$vuetify.icons.ratingFull'
     },
     value: {
       type: Number,
@@ -44,18 +44,13 @@ export default {
       type: Boolean
     }
   },
+
   data () {
     return {
       hoverIndex: 0
     }
   },
-  computed: {
-    classes () {
-      return {
-        'v-rating': true
-      }
-    }
-  },
+
   methods: {
     createClickFn (i) {
       return () => {
@@ -65,13 +60,12 @@ export default {
     genItem (h, i) {
       const click = this.createClickFn(i)
       const isHovering = this.hoverIndex > 0
-      const isSelected = this.value > i
+      const isFilled = this.value > i
 
       if (this.$scopedSlots.item) {
         return this.$scopedSlots.item({
           index: i,
           value: this.value,
-          isSelected,
           isHovering,
           click
         })
@@ -84,6 +78,8 @@ export default {
       } else {
         iconName = this.value > i ? this.fullIcon : this.emptyIcon
       }
+
+      iconName = remapInternalIcon(this, iconName)
 
       let listeners = {
         click
@@ -102,10 +98,10 @@ export default {
 
       const { small, medium, large, xLarge } = this.$props
       const props = { small, medium, large, xLarge }
-      const color = this.hoverIndex > i || (isSelected && !isHovering) ? this.color : this.backgroundColor
+      const color = this.hoverIndex > i || (isFilled && !isHovering) ? this.color : this.backgroundColor
 
       return h(VIcon, {
-        directives: [
+        directives: this.ripple && [
           {
             name: 'ripple',
             value: {
@@ -119,11 +115,12 @@ export default {
       }, [iconName])
     }
   },
+
   render (h) {
     const children = createRange(this.length).map(i => this.genItem(h, i))
 
     return h('div', {
-      class: this.classes
+      staticClass: 'v-rating'
     }, children)
   }
 }
