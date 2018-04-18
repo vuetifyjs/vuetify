@@ -50,7 +50,8 @@
   display: flex
   flex: 1 1 auto
   flex-wrap: nowrap
-  max-width: 100%
+  // https://github.com/vuetifyjs/vuetify/issues/3873
+  min-width: 0
 
   &.row
     flex-direction: row
