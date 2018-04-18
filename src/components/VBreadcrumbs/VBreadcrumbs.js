@@ -62,7 +62,9 @@ export default {
         ) {
           children.push(elm)
         } else {
-          if (createDividers) children.push(divider)
+          if (createDividers) {
+            children.push(divider)
+          }
           children.push(elm)
           createDividers = true
         }
