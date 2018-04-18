@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VCardExpansion.js should render with "display:none" applied and cover class 1`] = `
+
+<div class="v-card__expansion v-card__expansion--cover"
+     style="display: none;"
+>
+  <div class="v-card__text">
+  </div>
+</div>
+
+`;
+
+exports[`VCardExpansion.js should render with "display:none" applied and dropdown class 1`] = `
+
+<div class="v-card__expansion v-card__expansion--dropdown"
+     style="display: none;"
+>
+  <div class="v-card__text">
+  </div>
+</div>
+
+`;
+
+exports[`VCardExpansion.js should render with no "display:none" applied and cover class 1`] = `
+
+<div class="v-card__expansion v-card__expansion--cover">
+  <div class="v-card__text">
+  </div>
+</div>
+
+`;
+
+exports[`VCardExpansion.js should render with no "display:none" applied and dropdown class 1`] = `
+
+<div class="v-card__expansion v-card__expansion--dropdown">
+  <div class="v-card__text">
+  </div>
+</div>
+
+`;
