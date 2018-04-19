@@ -55,7 +55,8 @@ export default {
   computed: {
     classes () {
       return Object.assign({}, VSelect.computed.classes.call(this), {
-        'v-autocomplete': true
+        'v-autocomplete': true,
+        'v-autocomplete--is-selecting-index': this.selectedIndex > -1
       })
     },
     computedItems () {
@@ -199,10 +200,16 @@ export default {
         : null
     },
     onBlur () {
-      this.isMenuActive = false
       if (this.tags) this.updateTags()
       else if (this.combobox) this.updateCombobox()
       else this.updateAutocomplete()
+    },
+    onEnterDown () {
+      this.updateTags()
+    },
+    onEscDown (e) {
+      e.preventDefault()
+      this.isMenuActive = false
     },
     onInput (e) {
       // If typing and menu is not currently active
@@ -217,13 +224,61 @@ export default {
     onKeyDown (e) {
       const keyCode = e.keyCode
 
-      if (this.chips || this.isMulti) {
-        this.changeSelectedIndex(keyCode)
-      }
+      // If enter, space, up, or down is pressed, open menu
+      if (!this.isMenuActive &&
+        [13, 32, 38, 40].includes(keyCode)
+      ) return (this.isMenuActive = true)
+
+      // If escape deactivate the menu
+      if (keyCode === 27) return this.onEscDown(e)
+
+      // If tab - select item or close menu
+      if (keyCode === 9) return this.onTabDown(e)
+
+      if (!this.hideSelections &&
+        !this.internalSearch
+      ) this.changeSelectedIndex(keyCode)
+
+      if (!this.isAnyValueAllowed ||
+        !this.internalSearch
+      ) return
+
+      // Enter
+      if (e.keyCode === 13) return this.onEnterDown()
 
       if ((keyCode === 8 && !this.searchIsDirty) ||
         (!this.$refs.menu || e.keyCode !== 38)
       ) return VSelect.methods.onKeyDown.call(this, e)
+    },
+    onTabDown (e) {
+      // If tabbing through inputs and
+      // and there is no need for an
+      // update, blur the v-select
+      const menuIndex = this.getMenuIndex()
+
+      // When adding tags, if searching and
+      // there is not a filtered options,
+      // add the value to the tags list
+      if (this.tags &&
+        this.internalSearch &&
+        menuIndex === -1
+      ) {
+        e.preventDefault()
+        e.stopPropagation()
+
+        return this.updateTags()
+      }
+
+      // An item that is selected by
+      // menu-index should toggled
+      if (this.isMenuActive) {
+        // Reset the list index if searching
+        this.internalSearch &&
+          this.$nextTick(() => setTimeout(this.resetMenuIndex, 0))
+
+        e.preventDefault()
+        this.selectListTile(menuIndex)
+      }
     },
     selectItem (item) {
       VSelect.methods.selectItem.call(this, item)
@@ -240,7 +295,9 @@ export default {
       this.lazySearch = this.getText(this.internalValue)
     },
     updateAutocomplete () {
-      this.internalSearch = this.initialValue
+      if (!this.isMulti) {
+        this.internalSearch = this.initialValue
+      }
     },
     updateCombobox () {
       // no internal value
@@ -257,11 +314,12 @@ export default {
       // ) this.setInternalValue()
     },
     // Maybe change to onBlur?
-    updateTags (content) {
-      if (!this.hasSlot && this.searchIsDirty) {
-        this.internalValue = this.internalSearch
-        this.$emit('change', this.internalValue)
-      }
+    updateTags () {
+      console.log('update tags')
+      // if (!this.hasSlot && this.searchIsDirty) {
+      //   this.internalValue = this.internalSearch
+      //   this.$emit('change', this.internalValue)
+      // }
       // console.log('tags')
       // // Avoid direct mutation
       // // for vuex strict mode

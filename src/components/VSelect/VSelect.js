@@ -125,9 +125,9 @@ export default {
       return [{
         name: 'click-outside',
         // TODO: Check into this firing when it shouldn't
-        value: () => {
+        value: e => {
           if (this.isMenuActive) {
-            this.onKeyDown({ keyCode: 9 })
+            this.onKeyDown(e)
           }
 
           this.isMenuActive = false
@@ -363,6 +363,9 @@ export default {
         slot: 'activator'
       }, children)
     },
+    getMenuIndex () {
+      return this.$refs.menu ? this.$refs.menu.listIndex : -1
+    },
     getText (item) {
       return getPropertyFromItem(item, this.itemText, item)
     },
@@ -420,6 +423,9 @@ export default {
         this.$refs.menu &&
           this.$refs.menu.updateDimensions()
       })
+    },
+    setMenuIndex (index) {
+      this.$refs.menu && (this.$refs.menu.listIndex = index)
     }
   }
 }
