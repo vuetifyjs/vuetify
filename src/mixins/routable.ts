@@ -1,4 +1,4 @@
-import Vue, { VNodeData } from 'vue'
+import Vue, { VNodeData, VNodeDirective } from 'vue'
 import Ripple from '../directives/ripple'
 
 export default Vue.extend({
@@ -26,6 +26,12 @@ export default Vue.extend({
     target: String
   },
 
+  computed: {
+    computedRipple (): VNodeDirective | boolean {
+      return (this.ripple && !this.disabled) ? this.ripple : false
+    }
+  },
+
   methods: {
     /* eslint-disable-next-line no-unused-vars */
     click (e: MouseEvent): void { /**/ },
@@ -39,8 +45,8 @@ export default Vue.extend({
         props: {},
         directives: [{
           name: 'ripple',
-          value: (this.ripple && !this.disabled) ? this.ripple : false
-        }] as any, // TODO
+          value: this.computedRipple
+        }],
         [this.to ? 'nativeOn' : 'on']: {
           ...this.$listeners,
           click: this.click
