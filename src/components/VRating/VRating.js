@@ -113,8 +113,11 @@ export default {
       return remapInternalIcon(this, iconName)
     },
     getColor (props) {
-      if (props.isFilled || props.isHalfFilled) return this.color
-      if (this.isHovering && (props.isHovered || props.isHalfHovered)) return this.color
+      if (this.isHovering) {
+        if (props.isHovered || props.isHalfHovered) return this.color
+      } else {
+        if (props.isFilled || props.isHalfFilled) return this.color
+      }
 
       return this.backgroundColor
     },
