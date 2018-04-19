@@ -36,72 +36,118 @@ export default {
       type: String,
       default: '$vuetify.icons.ratingFull'
     },
+    halfIcon: {
+      type: String,
+      default: '$vuetify.icons.ratingHalf'
+    },
     value: {
       type: Number,
       required: true
     },
     showHover: {
       type: Boolean
+    },
+    halfIncrements: {
+      type: Boolean
+    },
+    readonly: {
+      type: Boolean
     }
   },
 
   data () {
     return {
-      hoverIndex: 0
+      hoverIndex: null
+    }
+  },
+
+  computed: {
+    isHovering () {
+      return this.showHover && this.hoverIndex !== null
     }
   },
 
   methods: {
+    isHalfEvent (e) {
+      if (this.halfIncrements) {
+        const rect = e.target.getBoundingClientRect()
+        if (e.offsetX < rect.width / 2) return true
+      }
+
+      return false
+    },
     createClickFn (i) {
-      return () => {
-        this.$emit('input', i + 1)
+      return e => {
+        if (this.readonly) return
+
+        if (this.isHalfEvent(e)) this.$emit('input', i + 0.5)
+        else this.$emit('input', i + 1)
       }
     },
-    genItem (h, i) {
+    createProps (i) {
       const click = this.createClickFn(i)
-      const isHovering = this.hoverIndex > 0
-      const isFilled = this.value > i
+      const isHovered = Math.floor(this.hoverIndex) > i
+      const isHalfHovered = this.halfIncrements && !isHovered && (this.hoverIndex - i) % 1 > 0
+      const isFilled = Math.floor(this.value) > i
+      const isHalfFilled = this.halfIncrements && !isFilled && (this.value - i) % 1 > 0
 
-      if (this.$scopedSlots.item) {
-        return this.$scopedSlots.item({
-          index: i,
-          value: this.value,
-          isHovering,
-          click
-        })
+      return {
+        index: i,
+        value: this.value,
+        isFilled,
+        isHalfFilled,
+        isHovered,
+        isHalfHovered,
+        click
       }
-
+    },
+    getIconName (props) {
       let iconName
 
-      if (this.showHover && isHovering) {
-        iconName = this.hoverIndex > i ? this.fullIcon : this.emptyIcon
+      if (this.isHovering) {
+        iconName = props.isHovered ? this.fullIcon : props.isHalfHovered ? this.halfIcon : this.emptyIcon
       } else {
-        iconName = this.value > i ? this.fullIcon : this.emptyIcon
+        iconName = props.isFilled ? this.fullIcon : props.isHalfFilled ? this.halfIcon : this.emptyIcon
       }
 
-      iconName = remapInternalIcon(this, iconName)
+      return remapInternalIcon(this, iconName)
+    },
+    getColor (props) {
+      if (props.isFilled || props.isHalfFilled) return this.color
+      if (this.isHovering && (props.isHovered || props.isHalfHovered)) return this.color
+
+      return this.backgroundColor
+    },
+    onMouseEnter (e, i) {
+      if (this.isHalfEvent(e)) this.hoverIndex = i + 0.5
+      else this.hoverIndex = i + 1
+    },
+    onMouseLeave (e) {
+      this.hoverIndex = null
+    },
+    genItem (h, i) {
+      const props = this.createProps(i)
+
+      if (this.$scopedSlots.item) return this.$scopedSlots.item(props)
 
       let listeners = {
-        click
+        click: props.click
       }
 
       if (this.showHover) {
         listeners = Object.assign(listeners, {
-          mouseenter: () => {
-            this.hoverIndex = i + 1
-          },
-          mouseleave: () => {
-            this.hoverIndex = 0
-          }
+          mouseenter: e => this.onMouseEnter(e, i),
+          mouseleave: this.onMouseLeave
         })
+
+        if (this.halfIncrements) listeners.mousemove = e => this.onMouseEnter(e, i)
       }
 
       const { small, medium, large, xLarge } = this.$props
-      const props = { small, medium, large, xLarge }
-      const color = this.hoverIndex > i || (isFilled && !isHovering) ? this.color : this.backgroundColor
+      const iconProps = { small, medium, large, xLarge }
 
       return h(VIcon, {
-        directives: this.ripple && [
+        directives: !this.readonly && this.ripple && [
           {
             name: 'ripple',
             value: {
@@ -109,10 +155,10 @@ export default {
             }
           }
         ],
-        props,
-        class: this.addTextColorClassChecks({}, color),
+        props: iconProps,
+        class: this.addTextColorClassChecks({}, this.getColor(props)),
         on: listeners
-      }, [iconName])
+      }, [this.getIconName(props)])
     }
   },
 
@@ -120,7 +166,10 @@ export default {
     const children = createRange(this.length).map(i => this.genItem(h, i))
 
     return h('div', {
-      staticClass: 'v-rating'
+      staticClass: 'v-rating',
+      class: {
+        'v-rating--readonly': this.readonly
+      }
     }, children)
   }
 }
