@@ -1,8 +1,12 @@
 import { VNodeDirective } from 'vue'
 
-function style (el: HTMLElement, value: string) {
+function transform (el: HTMLElement, value: string) {
   el.style['transform'] = value
   el.style['webkitTransform'] = value
+}
+
+function opacity (el: HTMLElement, value: number) {
+  el.style['opacity'] = value.toString()
 }
 
 declare global {
@@ -15,6 +19,7 @@ declare global {
       enabled?: boolean
       centered?: boolean
       class?: string
+      circle?: boolean
     }
   }
 }
@@ -22,6 +27,7 @@ declare global {
 interface RippleOptions {
   class?: string
   center?: boolean
+  circle?: boolean
 }
 
 const ripple = {
@@ -40,28 +46,49 @@ const ripple = {
       container.className += ` ${value.class}`
     }
 
-    const size = Math.max(el.clientWidth, el.clientHeight) * (value.center ? 1 : 2)
-    const halfSize = size / 2
+    const offset = el.getBoundingClientRect()
+    const localX = e.clientX - offset.left
+    const localY = e.clientY - offset.top
+
+    let radius = 0, scale = 0.3
+    if (el._ripple.circle) {
+      scale = 0.15
+      radius = el.clientWidth / 2
+      radius = radius + Math.sqrt((localX - radius)**2 + (localY - radius)**2) / 4
+    } else {
+      radius = Math.sqrt(el.clientWidth**2 + el.clientHeight**2) / 2
+    }
+
     animation.className = 'v-ripple__animation'
-    animation.style.width = `${size}px`
-    animation.style.height = `${size}px`
+    animation.style.width = `${radius * 2}px`
+    animation.style.height = animation.style.width
 
     el.appendChild(container)
     const computed = window.getComputedStyle(el)
     if (computed.position !== 'absolute' && computed.position !== 'fixed') el.style.position = 'relative'
 
-    const offset = el.getBoundingClientRect()
-    const x = value.center ? 0 : e.clientX - offset.left - halfSize
-    const y = value.center ? 0 : e.clientY - offset.top - halfSize
+    const x = value.center ? '50%' : `${localX}px`
+    const y = value.center ? '50%' : `${localY}px`
+    const centerX = `${el.clientWidth / 2}px`
+    const centerY = `${el.clientHeight / 2}px`
 
     animation.classList.add('v-ripple__animation--enter')
     animation.classList.add('v-ripple__animation--visible')
-    style(animation, `translate(${x}px, ${y}px) scale3d(0, 0, 0)`)
+    transform(animation, `translate(${x}px, ${y}px) scale3d(${scale},${scale},${scale})`)
+    opacity(animation, 0)
     animation.dataset.activated = String(performance.now())
 
     setTimeout(() => {
-      animation.classList.remove('v-ripple__animation--enter')
-      style(animation, `translate(${x}px, ${y}px)  scale3d(1, 1, 1)`)
+      animation.classList.remove('ripple__animation--enter')
+      animation.classList.add('ripple__animation--in')
+      transform(animation, `translate(${centerX}, ${centerY}) scale3d(0.99,0.99,0.99)`)
+      opacity(animation, 0.25)
+
+      setTimeout(() => {
+        animation.classList.remove('ripple__animation--in')
+        animation.classList.add('ripple__animation--out')
+        opacity(animation, 0)
+      }, 250)
     }, 0)
   },
 
@@ -77,7 +104,7 @@ const ripple = {
     else animation.dataset.isHiding = 'true'
 
     const diff = performance.now() - Number(animation.dataset.activated)
-    let delay = Math.max(300 - diff, 0)
+    let delay = Math.max(700 - diff, 0)
 
     setTimeout(() => {
       animation.classList.remove('v-ripple__animation--visible')
@@ -123,6 +150,9 @@ function updateRipple (el: HTMLElement, binding: VNodeDirective, wasEnabled: boo
   }
   if (value.class) {
     el._ripple.class = binding.value.class
+  }
+  if (value.circle) {
+    el._ripple.circle = value.circle
   }
   if (enabled && !wasEnabled) {
     if ('ontouchstart' in window) {
