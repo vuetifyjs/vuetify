@@ -143,6 +143,9 @@ export default {
         ),
         style: {
           height: this.computedHeight
+        },
+        on: {
+          click: this.onClick
         }
       }, this.genDefaultSlot())
     },

@@ -1,7 +1,7 @@
 import { test } from '@/test'
 import VAutocomplete from '@/components/VAutocomplete'
 
-test('VAutocomplete.js', ({ shallow }) => {
+test('VAutocomplete.js', ({ mount, shallow }) => {
   const app = document.createElement('div')
   app.setAttribute('data-app', true)
   document.body.appendChild(app)
@@ -145,16 +145,6 @@ test('VAutocomplete.js', ({ shallow }) => {
     expect(wrapper.vm.computedItems).toHaveLength(1)
     wrapper.setProps({ items: [{ id: 1, text: 'A' }] })
     expect(wrapper.vm.computedItems).toHaveLength(1)
-  })
-
-  it('should not display list with no items and autocomplete', async () => {
-    const wrapper = shallow(VAutocomplete)
-
-    const input = wrapper.first('input')
-
-    input.trigger('click')
-
-    expect(wrapper.vm.isMenuActive).toBe(false)
   })
 
   it('should cache items', async () => {
@@ -357,5 +347,127 @@ test('VAutocomplete.js', ({ shallow }) => {
     // Backspace
     wrapper.vm.changeSelectedIndex(46)
     expect(wrapper.vm.selectedIndex).toBe(-1)
+  })
+
+  it('should conditionally show the menu', async () => {
+    const wrapper = mount(VAutocomplete, {
+      attachToDocument: true,
+      propsData: {
+        items: ['foo', 'bar', 'fizz']
+      }
+    })
+
+    const slot = wrapper.first('.v-input__slot')
+    const input = wrapper.first('input')
+
+    // Focus input should only focus
+    input.trigger('focus')
+
+    expect(wrapper.vm.isFocused).toBe(true)
+    expect(wrapper.vm.menuCanShow).toBe(true)
+    expect(wrapper.vm.isMenuActive).toBe(false)
+
+    // Clicking input should open menu
+    slot.trigger('click')
+
+    expect(wrapper.vm.isMenuActive).toBe(true)
+    expect(wrapper.vm.menuCanShow).toBe(true)
+
+    wrapper.setProps({ searchInput: 'foo' })
+
+    expect(wrapper.vm.isMenuActive).toBe(true)
+    expect(wrapper.vm.menuCanShow).toBe(true)
+
+    // Should close menu but keep focus
+    input.trigger('keydown.esc')
+
+    expect(wrapper.vm.isFocused).toBe(true)
+    expect(wrapper.vm.isMenuActive).toBe(false)
+    expect(wrapper.vm.menuCanShow).toBe(true)
+
+    // Should not show menu
+    wrapper.setProps({
+      combobox: true,
+      searchInput: 'foobar'
+    })
+
+    expect(wrapper.vm.menuCanShow).toBe(false)
+
+    slot.trigger('click')
+
+    expect(wrapper.vm.isMenuActive).toBe(false)
+
+    // TODO: Add expects for tags when impl
+  })
+
+  it('should have the correct selected item', async () => {
+    const wrapper = shallow(VAutocomplete, {
+      propsData: {
+        items: ['foo', 'bar', 'fizz'],
+        multiple: true,
+        value: ['foo']
+      }
+    })
+
+    expect(wrapper.vm.selectedItem).toBe(null)
+
+    wrapper.setProps({
+      multiple: false,
+      value: 'foo'
+    })
+
+    expect(wrapper.vm.selectedItem).toBe('foo')
+  })
+
+  it('should reset lazySearch', async () => {
+    const wrapper = shallow(VAutocomplete, {
+      propsData: {
+        chips: true,
+        items: ['foo', 'bar', 'fizz'],
+        searchInput: 'foo'
+      }
+    })
+
+    expect(wrapper.vm.lazySearch).toBe('foo')
+    expect(wrapper.vm.hasSlot).toBe(true)
+
+    wrapper.setData({ isMenuActive: true })
+    await wrapper.vm.$nextTick()
+    wrapper.setData({ isMenuActive: false })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.lazySearch).toBe(null)
+  })
+
+  it('should call methods on blur', () => {
+    const updateTags = jest.fn()
+    const updateCombobox = jest.fn()
+    const updateAutocomplete = jest.fn()
+    const wrapper = shallow(VAutocomplete, {
+      methods: {
+        updateAutocomplete,
+        updateCombobox,
+        updateTags
+      }
+    })
+
+    wrapper.vm.onEnterDown()
+
+    expect(updateAutocomplete).toHaveBeenCalledTimes(1)
+
+    wrapper.setProps({ combobox: true })
+
+    wrapper.vm.onEnterDown()
+
+    expect(updateCombobox).toHaveBeenCalledTimes(1)
+
+    wrapper.setProps({
+      combobox: false,
+      tags: true
+    })
+
+    wrapper.vm.onEnterDown()
+
+    expect(updateTags).toHaveBeenCalledTimes(1)
   })
 })

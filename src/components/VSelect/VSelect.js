@@ -318,6 +318,7 @@ export default {
 
       props.closeOnClick = false
       props.closeOnContentClick = false
+      props.openOnClick = false
       props.value = this.isMenuActive
 
       return this.$createElement(VMenu, {
@@ -372,8 +373,15 @@ export default {
     getValue (item) {
       return getPropertyFromItem(item, this.itemValue, item)
     },
-    // Ignore default onBlur
-    onBlur () {},
+    onBlur (e) {
+      this.$emit('blur', e)
+    },
+    onClick () {
+      if (this.isDisabled) return
+
+      this.onFocus()
+      this.isMenuActive = true
+    },
     // Detect tab and call original onBlur method
     onKeyDown (e) {
       if (e.keyCode === 9) {
@@ -381,11 +389,6 @@ export default {
       } else if ([13, 32, 38, 40].includes(e.keyCode)) {
         this.isMenuActive = true
       }
-    },
-    onClick () {
-      if (this.isDisabled) return
-
-      this.onFocus()
     },
     // Convert internalValue to always
     // be an array and check for validity

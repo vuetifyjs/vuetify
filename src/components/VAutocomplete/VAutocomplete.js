@@ -96,6 +96,13 @@ export default {
 
       return this.internalSearch !== this.getText(this.internalValue)
     },
+    menuCanShow () {
+      if (!this.hasTags) return true
+
+      return this.isFocused &&
+        (this.filteredItems.length > 0 ||
+          !this.isSearching)
+    },
     searchIsDirty () {
       return this.internalSearch != null &&
         this.internalSearch != ''
@@ -131,6 +138,11 @@ export default {
   },
 
   methods: {
+    activateMenu () {
+      if (this.menuCanShow) {
+        this.isMenuActive = true
+      }
+    },
     changeSelectedIndex (keyCode) {
       // Do not allow changing of selectedIndex
       // when search is dirty
@@ -171,12 +183,6 @@ export default {
         this.selectedIndex = newIndex
       }
     },
-    focusInput () {
-      this.$nextTick(() => {
-        this.$refs.input &&
-          this.$refs.input.focus()
-      })
-    },
     genInput () {
       const input = VTextField.methods.genInput.call(this)
 
@@ -189,23 +195,38 @@ export default {
       const list = VSelect.methods.genList.call(this)
 
       list.componentOptions.propsData.items = this.filteredItems
-      list.componentOptions.propsData.noFilter = !this.isSearching
+      list.componentOptions.propsData.noFilter = !this.isSearching || !this.filteredItems.length
       list.componentOptions.propsData.searchInput = this.internalSearch
 
       return list
+    },
+    genMenu (activator) {
+      const menu = VSelect.methods.genMenu.call(this, activator)
+
+      menu.componentOptions.propsData.value = this.menuCanShow && this.isMenuActive
+
+      return menu
     },
     genSelections () {
       return this.hasSlot || this.isMulti
         ? VSelect.methods.genSelections.call(this)
         : null
     },
-    onBlur () {
+    onBlur (e) {
       if (this.tags) this.updateTags()
       else if (this.combobox) this.updateCombobox()
       else this.updateAutocomplete()
+
+      VSelect.methods.onBlur.call(this, e)
+    },
+    onClick () {
+      if (this.isDisabled) return
+
+      this.onFocus()
+      this.activateMenu()
     },
     onEnterDown () {
-      this.updateTags()
+      this.onBlur()
     },
     onEscDown (e) {
       e.preventDefault()
@@ -214,7 +235,7 @@ export default {
     onInput (e) {
       // If typing and menu is not currently active
       if (e.target.value) {
-        this.isMenuActive = true
+        this.activateMenu()
       }
 
       this.mask && this.resetSelections(e.target)
@@ -227,7 +248,7 @@ export default {
       // If enter, space, up, or down is pressed, open menu
       if (!this.isMenuActive &&
         [13, 32, 38, 40].includes(keyCode)
-      ) return (this.isMenuActive = true)
+      ) return this.activateMenu()
 
       // If escape deactivate the menu
       if (keyCode === 27) return this.onEscDown(e)
@@ -251,6 +272,7 @@ export default {
       ) return VSelect.methods.onKeyDown.call(this, e)
     },
     onTabDown (e) {
+      this.isFocused = false
       // If tabbing through inputs and
       // and there is no need for an
       // update, blur the v-select
@@ -271,7 +293,7 @@ export default {
 
       // An item that is selected by
       // menu-index should toggled
-      if (this.isMenuActive) {
+      if (this.isMenuActive && menuIndex > -1) {
         // Reset the list index if searching
         this.internalSearch &&
           this.$nextTick(() => setTimeout(this.resetMenuIndex, 0))
@@ -284,6 +306,11 @@ export default {
       VSelect.methods.selectItem.call(this, item)
 
       this.setSearch()
+    },
+    selectListTile (index) {
+      if (!this.$refs.menu.tiles[index]) return
+
+      this.$refs.menu.tiles[index].click()
     },
     setValue () {
       this.internalValue = this.internalSearch
