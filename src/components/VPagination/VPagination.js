@@ -46,9 +46,9 @@ export default {
   computed: {
     classes () {
       return {
-        'pagination': true,
-        'pagination--circle': this.circle,
-        'pagination--disabled': this.disabled
+        'v-pagination': true,
+        'v-pagination--circle': this.circle,
+        'v-pagination--disabled': this.disabled
       }
     },
 
@@ -126,9 +126,9 @@ export default {
     genIcon (h, icon, disabled, fn) {
       return h('li', [
         h('button', {
-          staticClass: 'pagination__navigation',
+          staticClass: 'v-pagination__navigation',
           class: {
-            'pagination__navigation--disabled': disabled
+            'v-pagination__navigation--disabled': disabled
           },
           on: disabled ? {} : { click: fn }
         }, [h(VIcon, [icon])])
@@ -136,9 +136,9 @@ export default {
     },
     genItem (h, i) {
       return h('button', {
-        staticClass: 'pagination__item',
+        staticClass: 'v-pagination__item',
         class: (i === this.value) ? this.addBackgroundColorClassChecks({
-          'pagination__item--active': true
+          'v-pagination__item--active': true
         }) : {},
         on: {
           click: () => this.$emit('input', i)
@@ -148,7 +148,7 @@ export default {
     genItems (h) {
       return this.items.map((i, index) => {
         return h('li', { key: index }, [
-          isNaN(i) ? h('span', { class: 'pagination__more' }, [i]) : this.genItem(h, i)
+          isNaN(i) ? h('span', { class: 'v-pagination__more' }, [i]) : this.genItem(h, i)
         ])
       })
     }
