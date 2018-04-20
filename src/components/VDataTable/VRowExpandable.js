@@ -18,36 +18,23 @@ export default {
       this.isActive = v
     }
   },
-  computed: {
-    classes () {
-      return {
-        'v-row-expandable': true
-      }
-    }
-  },
   methods: {
     toggle () {
       this.isActive = !this.isActive
       this.$emit('input', this.isActive)
     },
-    genExpansionContent (h) {
-      return h('div', {
-        class: 'v-row-expandable__expansion__content',
-        key: this._uid
+    genTransition (h) {
+      const wrapper = h('div', {
+        class: 'v-row-expandable__wrapper'
       }, this.$slots.expansion)
-    },
-    genExpandTransition (h) {
+
       const children = []
 
       if (this.isActive) {
-        children.push(this.genExpansionContent(h))
+        children.push(wrapper)
       }
 
-      const transition = h('transition-group', {
-        class: 'v-row-expandable__expansion',
-        props: {
-          tag: 'div'
-        },
+      const transition = h('transition', {
         on: ExpandTransitionGenerator('v-row-expandable--expanded')
       }, children)
 
@@ -62,10 +49,10 @@ export default {
   },
   render (h) {
     return h('div', {
-      class: this.classes
+      staticClass: 'v-row-expandable'
     }, [
       this.genRow(h),
-      this.genExpandTransition(h)
+      this.genTransition(h)
     ])
   }
 }

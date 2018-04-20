@@ -1,4 +1,4 @@
-import VCheckbox from '../VCheckbox'
+import VCellCheckbox from './VCellCheckbox'
 import VRow from './VRow'
 import VCell from './VCell'
 import VIcon from '../VIcon'
@@ -17,7 +17,7 @@ export default {
   },
   methods: {
     genSelectAll (h) {
-      return h(VCheckbox, {
+      return h(VCellCheckbox, {
         attrs: {
           inputValue: this.dataIterator.everyItem,
           indeterminate: !this.dataIterator.everyItem && this.dataIterator.someItems
@@ -37,7 +37,7 @@ export default {
 
       const classes = {
         'column': true,
-        [c.align || 'text-xs-left']: true
+        [`justify-${c.align || 'start'}`]: true
       }
 
       const listeners = {}
@@ -50,7 +50,6 @@ export default {
 
         const beingSorted = this.dataIterator.sortBy === c.value
 
-        classes[c.align || 'text-xs-left'] = true
         classes['sortable'] = true
         classes['active'] = beingSorted
         classes['asc'] = beingSorted && !this.dataIterator.sortDesc
@@ -73,7 +72,6 @@ export default {
 
     return h('div', {
       class: 'thead'
-
     }, [h(VRow, headers)])
   }
 }
