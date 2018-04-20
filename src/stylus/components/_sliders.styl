@@ -2,7 +2,7 @@
 @import '../theme'
 
 /* Theme */
-slider($material)
+v-slider($material)
   .v-slider__track,
   .v-slider__track-fill
     background: $material.slider.inactive
@@ -39,7 +39,13 @@ slider($material)
     .v-slider__track
       background: $material.slider.active
 
-theme(slider, "v-input--slider")
+v-slider-rtl()
+  .v-label
+    margin-left: 16px
+    margin-right: 0
+
+theme(v-slider, "v-input--slider")
+rtl(v-slider-rtl, "v-input--slider")
 
 /** Input Group */
 .v-input--slider
@@ -91,7 +97,6 @@ theme(slider, "v-input--slider")
   flex: 1
   outline: none
   user-select: none
-
 
 /** Thumb/Track/Ticks */
 .v-slider

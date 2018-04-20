@@ -25,7 +25,7 @@ export default {
     value: Boolean
   },
 
-  render (h, { children, listeners, props }) {
+  render (h, { children, listeners, props, parent }) {
     const data = {
       staticClass: 'v-label',
       'class': {
@@ -37,7 +37,7 @@ export default {
       },
       on: listeners,
       style: {
-        left: `${parseInt(props.left)}px`,
+        [parent.$vuetify.rtl ? 'right' : 'left']: `${parseInt(props.left)}px`,
         position: props.absolute ? 'absolute' : 'relative'
       }
     }
