@@ -7,21 +7,14 @@ import VTableActions from './VTableActions'
 import VRowGroup from './VRowGroup'
 import VTableProgress from './VTableProgress'
 
-const groupByProperty = (xs, key) => {
-  return xs.reduce((rv, x) => {
-    (rv[x[key]] = rv[x[key]] || []).push(x)
-    return rv
-  }, {})
-}
+import { groupByProperty } from '../../util/helpers'
 
 export default {
   name: 'v-data-table',
   extends: VDataIterator,
   inheritAttrs: false,
   provide () {
-    const dataTable = {
-      test: 'hello'
-    }
+    const dataTable = {}
 
     Object.defineProperty(dataTable, 'headers', {
       get: () => this.headers,
@@ -31,6 +24,14 @@ export default {
     Object.defineProperty(dataTable, 'loading', {
       get: () => this.loading,
       enumerable: true
+    })
+
+    Object.defineProperty(dataTable, 'isFlexWidth', {
+      get: () => this.isFlexWidth
+    })
+
+    Object.defineProperty(dataTable, 'widths', {
+      get: () => this.widths
     })
 
     return { dataTable }
@@ -65,6 +66,12 @@ export default {
         'table': true,
         'v-data-table': true
       }
+    },
+    isFlexWidth () {
+      return this.headers.some(h => h.width && !isNaN(h.width))
+    },
+    widths () {
+      return this.headers.map(h => h.width || (this.isFlexWidth ? 1 : null))
     }
   },
   methods: {
@@ -87,7 +94,7 @@ export default {
 
       if (this.$scopedSlots.item) {
         if (this.groupBy) {
-          bodies.push(...this.genGroupedRows(h, this.computedItems, this.groupBy))
+          bodies.push(this.genBodyWrapper(h, this.genGroupedRows(h, this.computedItems, this.groupBy)))
         } else {
           bodies.push(this.genBodyWrapper(h, this.genRows(this.computedItems)))
         }
@@ -113,7 +120,7 @@ export default {
             key: `${group}_${i}`
           }, [
             h('span', { slot: 'cell' }, [group]),
-            h('div', { slot: 'expansion' }, this.genRows(grouped[group]))
+            h('template', { slot: 'expansion' }, this.genRows(grouped[group]))
           ])
         )
       }
@@ -153,16 +160,5 @@ export default {
         }
       }, items)
     }
-  },
-  render (h) {
-    const children = [
-      ...this.genHeaders(h),
-      ...this.genBodies(h),
-      ...this.genFooters(h)
-    ]
-
-    return h('div', {
-      class: this.classes
-    }, children)
   }
 }
