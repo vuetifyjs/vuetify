@@ -3,12 +3,17 @@ import { getObjectValueByPath } from '../../util/helpers'
 
 export default {
   name: 'v-data-iterator',
+
   provide () {
     const dataIterator = {
       toggleSelected: this.toggleSelected,
       resetExpanded: this.resetExpanded,
       sort: this.sort
     }
+
+    Object.defineProperty(dataIterator, 'items', {
+      get: () => this.computedItems
+    })
 
     Object.defineProperty(dataIterator, 'page', {
       get: () => this.options.page,
@@ -66,6 +71,7 @@ export default {
 
     return { dataIterator }
   },
+
   props: {
     items: {
       type: Array,
@@ -124,13 +130,14 @@ export default {
       type: Number,
       default: 1
     },
-    serverSide: {
-      type: Object
-    },
     serverItemsLength: {
       type: Number
+    },
+    disablePagination:  {
+      type: Boolean
     }
   },
+
   data () {
     return {
       selection: {},
@@ -143,33 +150,16 @@ export default {
       }
     }
   },
-  watch: {
-    serverSide: {
-      handler (options) {
-        if (!options) return
 
-        this.options = Object.assign(this.options, options)
-      },
-      deep: true,
-      immediate: true
+  watch: {
+    'options.sortBy': function (v) {
+      this.$emit('update:sortBy', v)
     },
-    options: {
-      handler (options) {
-        // const pagination = this.pagination
-        // this.$emit('update:serverSide', { sorting, pagination })
-        this.$emit('update:serverSide', options)
-      },
-      deep: true,
-      immediate: true
-    }/*,
-    pagination: {
-      handler (pagination) {
-        const sorting = this.sorting
-        this.$emit('update:serverSide', { sorting, pagination })
-      },
-      deep: true
-    }*/
+    sortBy (v) {
+      this.options.sortBy = v
+    }
   },
+
   computed: {
     classes () {
       return {
@@ -182,7 +172,7 @@ export default {
 
       let items = this.items.slice()
 
-      if (this.serverSide) return items
+      if (this.serverItemsLength) return items
 
       // const hasSearch = typeof this.search !== 'undefined' &&
       //   this.search !== null
@@ -198,12 +188,7 @@ export default {
         this.options.sortDesc
       )
 
-      // return this.hideActions &&
-      //   !this.hasPagination
-      //   ? items
-      //   : items.slice(this.pageStart, this.pageStop)
-
-      return items.slice(this.pageStart, this.pageStop)
+      return this.disablePagination ? items : items.slice(this.pageStart, this.pageStop)
     },
     pageStart () {
       return this.options.rowsPerPage === -1
@@ -232,6 +217,7 @@ export default {
       return this.computedItems.some(i => this.isSelected(i))
     }
   },
+
   methods: {
     sort (index) {
       const { sortBy, sortDesc } = this.options
@@ -274,45 +260,6 @@ export default {
 
       this.selection = Object.assign({}, this.selection, selection)
     },
-    createProps () {
-      const props = {
-        columns: this.columns,
-        items: this.computedItems,
-        everyItem: this.everyItem,
-        someItems: this.someItems,
-        selectAll: this.selectAll,
-        itemsLength: this.itemsLength,
-        pageCount: this.pageCount,
-        pageStart: this.pageStart,
-        pageStop: this.pageStop
-      }
-
-      Object.defineProperty(props, 'sortBy', {
-        get: () => this.options.sortBy,
-        set: v => this.options.sortBy = v,
-        enumerable: true
-      })
-
-      Object.defineProperty(props, 'sortDesc', {
-        get: () => this.options.sortDesc,
-        set: v => this.options.sortDesc = v,
-        enumerable: true
-      })
-
-      Object.defineProperty(props, 'rowsPerPage', {
-        get: () => this.options.rowsPerPage,
-        set: v => this.options.rowsPerPage = v,
-        enumerable: true
-      })
-
-      Object.defineProperty(props, 'page', {
-        get: () => this.options.page,
-        set: v => this.options.page = v,
-        enumerable: true
-      })
-
-      return props
-    },
     createItemProps (item) {
       const props = {
         item
@@ -337,7 +284,7 @@ export default {
 
       if (this.$slots[name]) slots.push(...this.$slots[name])
       if (this.$scopedSlots[name]) {
-        const scoped = this.$scopedSlots[name](this.createProps())
+        const scoped = this.$scopedSlots[name](this._provided.dataIterator)
         Array.isArray(scoped) ? slots.push(...scoped) : slots.push(scoped)
       }
 
@@ -360,11 +307,10 @@ export default {
       return this.computeSlots('footer')
     },
     genBodyWrapper (h, items) {
-      return h('div', {
-        // TODO: How to customize this?
-      }, items)
+      return h('div', items)
     }
   },
+
   render (h) {
     return h('div', {
       class: this.classes
