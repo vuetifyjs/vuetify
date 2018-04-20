@@ -69,6 +69,7 @@ export default {
         'v-text-field--solo': this.isSolo,
         'v-text-field--solo-inverted': this.soloInverted,
         'v-text-field--box': this.box,
+        'v-text-field--enclosed': this.isEnclosed,
         'elevation-0': this.flat
       }
     },
@@ -91,6 +92,9 @@ export default {
         this.lazyValue.toString().length > 0) ||
         this.badInput
     },
+    isEnclosed () {
+      return this.isSolo || this.box
+    },
     isLabelActive () {
       return this.isDirty || dirtyTypes.includes(this.type)
     },
@@ -98,7 +102,7 @@ export default {
       return this.isSolo || this.singleLine
     },
     isSolo () {
-      return this.solo || this.soloInverted || this.box
+      return this.solo || this.soloInverted
     }
   },
 

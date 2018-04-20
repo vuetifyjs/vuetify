@@ -44,6 +44,10 @@ export default {
         ? this.inputHeight
         : 'auto'
     },
+    isEnclosed () {
+      return this.textarea ||
+        VTextField.computed.isEnclosed.call(this)
+    },
     noResizeHandle () {
       return this.noResize || this.autoGrow
     }

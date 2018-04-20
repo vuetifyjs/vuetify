@@ -72,17 +72,13 @@ theme(v-text-field, "v-text-field")
         border-radius: 4px
         height: 2px
 
-  &--solo
+    .v-input__slot
+      margin-bottom: 0
+      position: static
+
+  &--enclosed
     padding: 8px 16px
-    margin-bottom: 12px
-
-    &:not(.v-text-field--box)
-      elevation(2)
-
-      .v-input__slot
-        &:before,
-        &:after
-          display: none
+    margin-bottom: 24px
 
     .v-input__icon--prepend
       margin-left: 0
@@ -90,14 +86,19 @@ theme(v-text-field, "v-text-field")
     .v-input__icon--appendOuter
       margin-right: 0
 
-    .v-input__slot
-      margin-bottom: 0
-      position: static
-
     .v-text-field__details
       bottom: -22px
       position: absolute
       width: 100%
+
+    &:not(.v-text-field--box)
+      .v-input__slot
+        &:before,
+        &:after
+          display: none
+
+  &--solo
+    elevation(2)
 
   input
     max-height: 32px
