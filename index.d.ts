@@ -35,10 +35,6 @@ declare interface VuetifyUseOptions {
   options?: Partial<VuetifyOptions>
 }
 
-type Partial<T> = {
-  [P in keyof T]?: T[P]
-}
-
 declare interface VuetifyObject extends Vue {
   readonly breakpoint: VuetifyBreakpoint
   readonly dark: boolean
