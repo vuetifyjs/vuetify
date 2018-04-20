@@ -36,7 +36,7 @@ export default {
       }
 
       this.overlay = document.createElement('div')
-      this.overlay.className = 'overlay'
+      this.overlay.className = 'v-overlay'
 
       if (this.absolute) this.overlay.className += ' v-overlay--absolute'
 
