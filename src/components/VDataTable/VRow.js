@@ -17,7 +17,7 @@ export default {
     })
 
     return h('div', {
-      staticClass: 'tr'
+      staticClass: 'v-row'
     }, cells)
   }
 }

@@ -1,4 +1,3 @@
-
 import { getObjectValueByPath } from '../../util/helpers'
 
 export default {
@@ -115,6 +114,26 @@ export default {
         })
       }
     },
+    // TODO: should probably not combine customFilter and filter
+    // but having both of them is confusing and overly complex.
+    // Also should we do built-in column filter in headers?
+    customFilter: {
+      type: Function,
+      default: (items, search, filter) => {
+        search = search.toString().toLowerCase()
+        if (search.trim() === '') return items
+
+        return items.filter(i => Object.keys(i).some(j => {
+          const val = i[j]
+          return val != null &&
+            typeof val !== 'boolean' &&
+            val.toString().toLowerCase().indexOf(search) !== -1
+        }))
+      }
+    },
+    search: {
+      type: String
+    },
     sortBy: {
       type: String
     },
@@ -135,11 +154,24 @@ export default {
     },
     disablePagination:  {
       type: Boolean
+    },
+    noResultsText: {
+      type: String,
+      default: 'No matching records found'
+    },
+    noDataText: {
+      type: String,
+      default: 'No data available'
+    },
+    loadingText: {
+      type: String,
+      default: 'Please wait...'
     }
   },
 
   data () {
     return {
+      searchItemsLength: 0,
       selection: {},
       expansion: {},
       options: {
@@ -155,8 +187,26 @@ export default {
     'options.sortBy': function (v) {
       this.$emit('update:sortBy', v)
     },
+    'options.sortDesc': function (v) {
+      this.$emit('update:sortDesc', v)
+    },
+    'options.page': function (v) {
+      this.$emit('update:page', v)
+    },
+    'options.rowsPerPage': function (v) {
+      this.$emit('update:rowsPerPage', v)
+    },
     sortBy (v) {
       this.options.sortBy = v
+    },
+    sortDesc (v) {
+      this.options.sortDesc = v
+    },
+    page (v) {
+      this.options.page = v
+    },
+    rowsPerPage (v) {
+      this.options.rowsPerPage = v
     }
   },
 
@@ -166,6 +216,9 @@ export default {
         'v-data-iterator': true
       }
     },
+    hasSearch () {
+      return typeof this.search !== 'undefined' && this.search !== null
+    },
     computedItems () {
       // TODO: Handle this differently (server-side-processing prop?)
       // if (this.totalItems) return this.items
@@ -174,13 +227,10 @@ export default {
 
       if (this.serverItemsLength) return items
 
-      // const hasSearch = typeof this.search !== 'undefined' &&
-      //   this.search !== null
-
-      // if (hasSearch) {
-      //   items = this.customFilter(items, this.search, this.filter, ...additionalFilterArgs)
-      //   this.searchLength = items.length
-      // }
+      if (this.hasSearch) {
+        items = this.customFilter(items, this.search)
+        this.searchItemsLength = items.length
+      }
 
       items = this.customSort(
         items,
@@ -206,12 +256,11 @@ export default {
     },
     itemsLength () {
       if (typeof this.serverItemsLength !== 'undefined' && !isNaN(this.serverItemsLength)) return this.serverItemsLength
-      // TODO: needs to account for search
+      if (this.hasSearch) return this.searchItemsLength
       return this.items.length
     },
     everyItem () {
-      return this.computedItems.length &&
-        this.computedItems.every(i => this.isSelected(i))
+      return this.computedItems.length && this.computedItems.every(i => this.isSelected(i))
     },
     someItems () {
       return this.computedItems.some(i => this.isSelected(i))
@@ -293,15 +342,37 @@ export default {
     genHeaders (h) {
       return this.computeSlots('header')
     },
+    genEmpty (h, content) {
+      return h('div', content)
+    },
     genBodies (h) {
-      const bodies = this.computeSlots('body')
+      const bodies = []
+      if (!this.serverItemsLength && this.loading) {
+        const loading = this.$slots['loading'] || this.loadingText
+        bodies.push(this.genEmpty(h, loading))
+      } else if (!this.itemsLength && !this.items.length) {
+        const noData = this.$slots['no-data'] || this.noDataText
+        bodies.push(this.genEmpty(h, noData))
+      } else if (!this.computedItems.length) {
+        const noResults = this.$slots['no-results'] || this.noResultsText
+        bodies.push(this.genEmpty(h, noResults))
+      }
+
+      bodies.push(this.$slots.default)
+      bodies.push(...this.computeSlots('body'))
+      bodies.push(this.genItems(h))
+
+      return bodies
+    },
+    genItems (h) {
+      const items = []
 
       if (this.$scopedSlots.item) {
         const items = this.computedItems.map(item => this.$scopedSlots.item(this.createItemProps(item)))
-        bodies.push(this.genBodyWrapper(h, items))
+        items.push(this.genBodyWrapper(h, items))
       }
 
-      return bodies
+      return items
     },
     genFooters (h) {
       return this.computeSlots('footer')

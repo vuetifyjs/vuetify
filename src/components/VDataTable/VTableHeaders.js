@@ -36,7 +36,6 @@ export default {
       const sortable = c.sortable == null || c.sortable
 
       const classes = {
-        'column': true,
         [`justify-${c.align || 'start'}`]: true
       }
 
@@ -71,7 +70,7 @@ export default {
     if (this.showSelectAll) headers.unshift(this.genSelectAll(h))
 
     return h('div', {
-      class: 'thead'
+      class: 'v-table__header'
     }, [h(VRow, headers)])
   }
 }

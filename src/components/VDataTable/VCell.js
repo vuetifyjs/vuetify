@@ -7,7 +7,7 @@ export default {
   },
   render (h) {
     return h('div', {
-      staticClass: this.head ? 'th' : 'td'
+      staticClass: this.head ? 'v-head' : 'v-cell'
     }, this.$slots.default)
   }
 }

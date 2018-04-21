@@ -3,8 +3,8 @@
 
 /* Theme */
 v-data-table($material)
-  .thead
-    .th.column.sortable
+  .v-table__header
+    .v-head.sortable
       i
         color: rgba($material.fg-color, $material.disabledORhints-text-percent)
 
@@ -33,8 +33,12 @@ v-data-table($material)
 theme(v-data-table, "v-data-table")
 
 .v-data-table
-  .thead
-    .th.sortable
+  .v-table__body
+    &--fixed
+      overflow-y: auto
+
+  .v-table__header
+    .v-head.sortable
       cursor: pointer
       outline: 0
 
@@ -103,7 +107,7 @@ theme(v-data-table, "v-data-table")
 .v-data-table__progress
   height: auto !important
 
-  .tr, .td, .th
+  .v-row, .v-cell, .v-head
     height: auto !important
     border: none !important
 

@@ -6,6 +6,8 @@ import VTableHeaders from './VTableHeaders'
 import VTableActions from './VTableActions'
 import VRowGroup from './VRowGroup'
 import VTableProgress from './VTableProgress'
+import VRow from './VRow'
+import VCell from './VCell'
 
 import { groupByProperty } from '../../util/helpers'
 
@@ -63,7 +65,7 @@ export default {
   computed: {
     classes () {
       return {
-        'table': true,
+        'v-table': true,
         'v-data-table': true
       }
     },
@@ -89,18 +91,18 @@ export default {
 
       return headers
     },
-    genBodies (h) {
-      const bodies = this.computeSlots('body')
+    genItems (h) {
+      const items = []
 
       if (this.$scopedSlots.item) {
         if (this.groupBy) {
-          bodies.push(this.genBodyWrapper(h, this.genGroupedRows(h, this.computedItems, this.groupBy)))
+          items.push(this.genBodyWrapper(h, this.genGroupedRows(h, this.computedItems, this.groupBy)))
         } else {
-          bodies.push(this.genBodyWrapper(h, this.genRows(this.computedItems)))
+          items.push(this.genBodyWrapper(h, this.genRows(this.computedItems)))
         }
       }
 
-      return bodies
+      return items
     },
     genRows (items) {
       return items.map(item => this.$scopedSlots.item(this.createItemProps(item)))
@@ -152,13 +154,16 @@ export default {
     genBodyWrapper (h, items) {
       return h('div', {
         class: {
-          'tbody v-data-table__body': true,
-          'v-data-table__body--fixed': this.fixedHeight
+          'v-table__body': true,
+          'v-table__body--fixed': this.fixedHeight
         },
         style: {
           'height': this.fixedHeight
         }
       }, items)
+    },
+    genEmpty (h, content) {
+      return h(VRow, [h(VCell, content)])
     }
   }
 }
