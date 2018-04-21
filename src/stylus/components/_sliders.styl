@@ -44,6 +44,11 @@ v-slider-rtl()
     margin-left: 16px
     margin-right: 0
 
+  &.v-input--slider--inverse-label
+    .v-label
+      margin-right: 16px
+      margin-left: 0
+
 theme(v-slider, "v-input--slider")
 rtl(v-slider-rtl, "v-input--slider")
 
@@ -86,6 +91,11 @@ rtl(v-slider-rtl, "v-input--slider")
 
   .v-label
     margin-right: 16px
+
+  &--inverse-label
+    .v-label
+      margin-right: 0
+      margin-left: 16px
 
 /** Slider */
 .v-slider

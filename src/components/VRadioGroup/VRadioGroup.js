@@ -54,7 +54,13 @@ export default {
       default: true
     },
     name: String,
-    row: Boolean
+    row: Boolean,
+    // If no value set on VRadio
+    // will match valueComparator
+    // force default to null
+    value: {
+      default: null
+    }
   },
 
   watch: {

@@ -32,6 +32,7 @@ export default {
 
   props: {
     label: String,
+    inverseLabel: Boolean,
     min: {
       type: [Number, String],
       default: 0
@@ -62,7 +63,8 @@ export default {
       return {
         'v-input--slider': true,
         'v-input--slider--ticks': !this.disabled &&
-          this.stepNumeric && this.ticks
+          this.stepNumeric && this.ticks,
+        'v-input--slider--inverse-label': this.inverseLabel
       }
     },
     computedColor () {
@@ -73,9 +75,6 @@ export default {
     },
     computedThumbColor () {
       return (this.disabled || !this.inputWidth) ? null : (this.thumbColor || this.color || this.defaultColor)
-    },
-    stepNumeric () {
-      return this.step > 0 ? parseFloat(this.step) : 1
     },
     inputValue: {
       get () {
@@ -93,6 +92,9 @@ export default {
 
         this.$emit('input', value)
       }
+    },
+    stepNumeric () {
+      return this.step > 0 ? parseFloat(this.step) : 1
     },
     thumbStyles () {
       return {
@@ -149,10 +151,14 @@ export default {
 
   methods: {
     genDefaultSlot () {
-      return [
-        this.genLabel(),
-        this.genSlider()
-      ]
+      const children = [this.genLabel()]
+      const slider = this.genSlider()
+
+      this.inverseLabel
+        ? children.unshift(slider)
+        : children.push(slider)
+
+      return children
     },
     genLabel () {
       if (!this.label) return null

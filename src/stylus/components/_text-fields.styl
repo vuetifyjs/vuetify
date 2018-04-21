@@ -78,23 +78,27 @@ theme(v-text-field, "v-text-field")
         height: 2px
 
     .v-input__slot
-      margin-bottom: 0
       position: static
 
   &--enclosed
     padding: 8px 16px
     margin-bottom: 24px
 
-    .v-input__icon--prepend
-      margin-left: 0
+    .v-input__append-outer
+      .v-input__icon
+        margin-right: 0
 
-    .v-input__icon--appendOuter
-      margin-right: 0
+    .v-input__prepend-outer
+      .v-input__icon
+        margin-left: 0
 
     .v-text-field__details
       bottom: -22px
       position: absolute
       width: 100%
+
+    .v-input__slot
+      margin-bottom: 0
 
     &:not(.v-text-field--box)
       .v-input__slot

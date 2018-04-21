@@ -5,13 +5,19 @@
 selection-control($material)
 //
 
+v-selection-control-rtl()
+  .v-input--selection-controls__input
+    margin-right: 0
+    margin-left: 8px
+
 theme(selection-control, "v-input--selection-controls")
+rtl(v-selection-control-rtl, "v-input--selection-controls")
 
 .v-input--selection-controls
   &__input
     color: inherit
     display: inline-flex
-    flex: 1 0 auto
+    flex: 0 1 auto
     height: 100%
     position: relative
     margin-right: 8px

@@ -120,7 +120,7 @@ test('VRadioGroup.vue', ({ mount }) => {
     const one = radios[0]
     const two = radios[1]
 
-    expect(wrapper.vm.internalValue).toBe(undefined)
+    expect(wrapper.vm.internalValue).toBe(null)
     expect(one.vm.isActive).toBe(false)
     expect(two.vm.isActive).toBe(false)
 
@@ -159,7 +159,7 @@ test('VRadioGroup.vue', ({ mount }) => {
 
     const radio = wrapper.first(VRadio)
 
-    expect(wrapper.vm.internalValue).toBe(undefined)
+    expect(wrapper.vm.internalValue).toBe(null)
     expect(radio.vm.isActive).toBe(false)
 
     wrapper.setProps({ value: 'foo' })
