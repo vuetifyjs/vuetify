@@ -324,8 +324,8 @@ export default {
         // Left/right
         this.keyPressed += 1
 
-        let direction = e.keyCode === 37 || e.keyCode === 38 ? -1 : 1
-        direction = this.$vuetify.rtl ? direction * -1 : 1
+        const increase = this.$vuetify.rtl ? [37, 38] : [38, 39]
+        let direction = increase.includes(e.keyCode) ? 1 : -1
         const multiplier = e.shiftKey ? 3 : (e.ctrlKey ? 2 : 1)
 
         this.inputValue = this.inputValue + (direction * step * multiplier)
