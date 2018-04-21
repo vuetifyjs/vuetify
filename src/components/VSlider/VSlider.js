@@ -99,7 +99,7 @@ export default {
     thumbStyles () {
       return {
         transition: this.keyPressed >= 2 ? 'none' : '',
-        left: `${this.inputWidth}%`
+        left: `${this.$vuetify.rtl ? 100 - this.inputWidth : this.inputWidth}%`
       }
     },
     trackPadding () {
@@ -110,14 +110,15 @@ export default {
     trackStyles () {
       return {
         transition: this.keyPressed >= 2 ? 'none' : '',
-        left: `calc(${this.inputWidth}% + ${this.trackPadding}px)`,
+        [this.$vuetify.rtl ? 'right' : 'left']: `calc(${this.inputWidth}% + ${this.trackPadding}px)`,
         width: `calc(${100 - this.inputWidth}% - ${this.trackPadding}px)`
       }
     },
     trackFillStyles () {
       return {
         transition: this.keyPressed >= 2 ? 'none' : '',
-        width: `calc(${this.inputWidth}% - ${this.trackPadding}px)`
+        width: `calc(${this.inputWidth}% - ${this.trackPadding}px)`,
+        right: this.$vuetify.rtl && 0
       }
     },
     numTicks () {
@@ -306,23 +307,25 @@ export default {
         width: trackWidth
       } = this.$refs.track.getBoundingClientRect()
       const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX
-      const left = Math.min(Math.max((clientX - offsetLeft) / trackWidth, 0), 1)
+      let left = Math.min(Math.max((clientX - offsetLeft) / trackWidth, 0), 1)
+      if (this.$vuetify.rtl) left = 1 - left
       if (clientX >= offsetLeft - 8 && clientX <= offsetLeft + trackWidth + 8) {
         const inputValue = parseFloat(this.min) + left * (this.max - this.min)
         this.inputValue = inputValue
       }
     },
     onKeyDown (e) {
-      if (this.disabled || ![33, 34, 35, 36, 37, 39].includes(e.keyCode)) return
+      if (this.disabled || ![33, 34, 35, 36, 37, 38, 39, 40].includes(e.keyCode)) return
 
       e.preventDefault()
       const step = this.stepNumeric
       const steps = (this.max - this.min) / step
-      if (e.keyCode === 37 || e.keyCode === 39) {
+      if (e.keyCode === 37 || e.keyCode === 39 || e.keyCode === 38 || e.keyCode === 40) {
         // Left/right
         this.keyPressed += 1
 
-        const direction = e.keyCode === 37 ? -1 : 1
+        let direction = e.keyCode === 37 || e.keyCode === 38 ? -1 : 1
+        direction = this.$vuetify.rtl ? direction * -1 : 1
         const multiplier = e.shiftKey ? 3 : (e.ctrlKey ? 2 : 1)
 
         this.inputValue = this.inputValue + (direction * step * multiplier)
