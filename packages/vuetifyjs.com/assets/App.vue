@@ -52,10 +52,10 @@
       this.snackbar({
         color: 'default',
         close: true,
-        id: 'how-vue-cli-3-will-shape-our-future-eb7c01f4a241',
+        id: 'rebuilding-input-controls-part-2-a01936b6520e',
         text: 'Go To Article',
-        msg: '**New Article** — _How Vue-Cli 3 Will Shape Our Future_',
-        href: 'https://medium.com/vuetify/how-vue-cli-3-will-shape-our-future-eb7c01f4a241',
+        msg: '**New Article** — _Rebuilding input-controls Part 2_',
+        href: 'https://medium.com/vuetify/rebuilding-input-controls-part-2-a01936b6520e',
         timeout: 0
       })
     },
