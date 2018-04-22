@@ -6,8 +6,7 @@ module.exports = {
     sourceType: 'module'
   },
   extends: [
-    'standard',
-    'eslint:recommended'
+    'standard'
   ],
   env: {
     browser: true
@@ -27,13 +26,24 @@ module.exports = {
     'arrow-parens': [2, 'as-needed'],
     'local-rules/no-render-string-reference': 2,
     // set maximum line characters
-    'max-len': [2, 140, 4, {'ignoreUrls': true, 'ignoreTemplateLiterals': true, 'ignoreStrings': true}],
+    'max-len': [2, 140, 4, {
+      'ignoreUrls': true,
+      'ignoreTemplateLiterals': true,
+      'ignoreStrings': true
+    }],
     'max-statements': [2, 24],
     'no-console': 'off',
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
     'no-return-assign': 0,
     'prefer-promise-reject-errors': 0,
+    'no-unused-vars': ['error', {
+      vars: 'all',
+      args: 'after-used',
+      ignoreRestSiblings: false
+    }],
+    'no-empty': 'error',
+    'object-curly-spacing': ['error', 'always'],
     'space-before-function-paren': [
       'error',
       {
