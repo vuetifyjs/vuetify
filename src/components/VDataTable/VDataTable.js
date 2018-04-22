@@ -13,8 +13,11 @@ import { groupByProperty } from '../../util/helpers'
 
 export default {
   name: 'v-data-table',
+
   extends: VDataIterator,
+
   inheritAttrs: false,
+
   provide () {
     const dataTable = {}
 
@@ -38,6 +41,7 @@ export default {
 
     return { dataTable }
   },
+
   props: {
     headers: {
       type: Array,
@@ -62,6 +66,13 @@ export default {
       type: Boolean
     }
   },
+
+  data () {
+    return {
+      groupByIndices: []
+    }
+  },
+
   computed: {
     classes () {
       return {
@@ -76,7 +87,17 @@ export default {
       return this.headers.map(h => h.width || (this.isFlexWidth ? 1 : null))
     }
   },
+
   methods: {
+    sortItems (items, sortBy, sortDesc) {
+      items = VDataIterator.methods.sortItems.call(this, items, sortBy, sortDesc)
+
+      if (!this.groupBy) return items
+
+      items = this.customSort(items, this.groupBy, false)
+
+      return items
+    },
     genHeaders (h) {
       const headers = this.computeSlots('header')
 

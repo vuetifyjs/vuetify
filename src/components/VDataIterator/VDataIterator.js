@@ -232,13 +232,9 @@ export default {
         this.searchItemsLength = items.length
       }
 
-      items = this.customSort(
-        items,
-        this.options.sortBy,
-        this.options.sortDesc
-      )
+      items = this.sortItems(items, this.options.sortBy, this.options.sortDesc)
 
-      return this.disablePagination ? items : items.slice(this.pageStart, this.pageStop)
+      return this.paginateItems(items)
     },
     pageStart () {
       return this.options.rowsPerPage === -1
@@ -268,6 +264,12 @@ export default {
   },
 
   methods: {
+    sortItems (items, sortBy, sortDesc) {
+      return this.customSort(items, sortBy, sortDesc)
+    },
+    paginateItems (items) {
+      return this.disablePagination ? items : items.slice(this.pageStart, this.pageStop)
+    },
     sort (index) {
       const { sortBy, sortDesc } = this.options
       let updated
