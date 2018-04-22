@@ -14,7 +14,7 @@ test('VSlider.vue', ({ mount }) => {
   it('should render component with ticks and match a snapshot', () => {
     const wrapper = mount(VSlider, {
       propsData: {
-        ticks: 'hover',
+        ticks: true,
         step: 25
       }
     })
@@ -26,7 +26,7 @@ test('VSlider.vue', ({ mount }) => {
   it('should render component with thumbLabel and match a snapshot', () => {
     const wrapper = mount(VSlider, {
       propsData: {
-        thumbLabel: 'hover'
+        thumbLabel: true
       }
     })
 
