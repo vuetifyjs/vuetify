@@ -14,7 +14,7 @@ test('VSlider.vue', ({ mount }) => {
   it('should render component with ticks and match a snapshot', () => {
     const wrapper = mount(VSlider, {
       propsData: {
-        ticks: true,
+        ticks: 'hover',
         step: 25
       }
     })
@@ -26,7 +26,7 @@ test('VSlider.vue', ({ mount }) => {
   it('should render component with thumbLabel and match a snapshot', () => {
     const wrapper = mount(VSlider, {
       propsData: {
-        thumbLabel: true
+        thumbLabel: 'hover'
       }
     })
 
@@ -162,34 +162,6 @@ test('VSlider.vue', ({ mount }) => {
     expect(warning).toHaveBeenTipped()
   })
 
-  it('should have the correct track padding', () => {
-    const wrapper = mount(VSlider)
-
-    expect(wrapper.vm.trackPadding).toBe(6)
-
-    wrapper.setData({ isActive: true })
-
-    expect(wrapper.vm.trackPadding).toBe(9)
-
-    wrapper.setData({ disabled: true })
-
-    expect(wrapper.vm.trackPadding).toBe(6)
-
-    wrapper.setProps({ thumbLabel: true })
-
-    expect(wrapper.vm.trackPadding).toBe(0)
-
-    wrapper.setData({ isActive: false })
-
-    expect(wrapper.vm.trackPadding).toBe(6)
-
-    wrapper.setProps({ thumbLabel: false })
-
-    expect(wrapper.vm.trackPadding).toBe(6)
-
-    expect(warning).toHaveBeenTipped()
-  })
-
   it('should add for to label', () => {
     const wrapper = mount(VSlider, {
       attachToDocument: true,
@@ -256,24 +228,49 @@ test('VSlider.vue', ({ mount }) => {
     expect(warning).toHaveBeenTipped()
   })
 
-  it('should set inputValue', async () => {
+  it('should emit number if not using range prop', async () => {
     const wrapper = mount(VSlider, {
+      propsData: {
+        value: 0
+      },
       attachToDocument: true
     })
 
-    expect(wrapper.vm.lazyValue).toBe(0)
+    const input = jest.fn()
+    wrapper.vm.$on('input', input)
 
     wrapper.vm.onMouseMove({
       clientX: 6
     })
 
-    expect(wrapper.vm.lazyValue).toBe(100)
+    expect(input).toHaveBeenCalledWith(100)
 
     wrapper.vm.onMouseMove({
       touches: [{ clientX: 50 }]
     })
 
-    expect(wrapper.vm.lazyValue).toBe(100)
+    expect(input).toHaveBeenCalledWith(100)
+
+    expect(warning).toHaveBeenTipped()
+  })
+
+  it('should emit array if using range prop', async () => {
+    const wrapper = mount(VSlider, {
+      propsData: {
+        value: [0, 50],
+        range: true
+      },
+      attachToDocument: true
+    })
+
+    const input = jest.fn()
+    wrapper.vm.$on('input', input)
+
+    wrapper.vm.onMouseMove({
+      clientX: 6
+    })
+
+    expect(input).toHaveBeenCalledWith([50, 100])
 
     expect(warning).toHaveBeenTipped()
   })
@@ -288,25 +285,6 @@ test('VSlider.vue', ({ mount }) => {
     wrapper.vm.onKeyUp()
 
     expect(wrapper.vm.keyPressed).toBe(0)
-
-    expect(warning).toHaveBeenTipped()
-  })
-
-  it('should call on mouse move', () => {
-    const wrapper = mount(VSlider)
-    const onMouseMove = jest.fn()
-    wrapper.setMethods({ onMouseMove })
-
-    wrapper.vm.onSliderMove('foo')
-
-    expect(onMouseMove).toBeCalledWith('foo')
-
-    wrapper.setData({ isActive: true })
-
-    wrapper.vm.onSliderMove('bar')
-
-    expect(onMouseMove).not.toBeCalledWith('bar')
-    expect(onMouseMove).toHaveBeenCalledTimes(1)
 
     expect(warning).toHaveBeenTipped()
   })
