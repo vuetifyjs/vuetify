@@ -48,18 +48,18 @@ export default {
       default: 1
     },
     ticks: {
-      type: String,
-      default: null,
-      validator: value => !value || value === 'hover' || value === 'always'
+      type: [Boolean, String],
+      default: false,
+      validator: value => value === false || value === true || value === 'always'
     },
     thumbColor: {
       type: String,
       default: null
     },
     thumbLabel: {
-      type: String,
-      default: null,
-      validator: value => !value || value === 'hover' || value === 'always'
+      type: [Boolean, String],
+      default: false,
+      validator: value => value === false || value === true || value === 'always'
     },
     trackColor: {
       type: String,
@@ -77,10 +77,10 @@ export default {
       }
     },
     showTicks () {
-      return !this.disabled && this.stepNumeric && (!!this.ticks || this.ticks === '')
+      return !this.disabled && this.stepNumeric && !!this.ticks
     },
     showThumbLabel () {
-      return !this.disabled && (!!this.thumbLabel || this.thumbLabel === '')
+      return !this.disabled && !!this.thumbLabel
     },
     computedColor () {
       if (this.disabled) return null
