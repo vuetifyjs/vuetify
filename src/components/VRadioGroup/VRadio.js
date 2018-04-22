@@ -14,7 +14,7 @@ import {
 } from '../../mixins/registrable'
 
 // Utils
-import {keyCodes} from '../../util/helpers'
+import { keyCodes } from '../../util/helpers'
 
 export default {
   name: 'v-radio',
@@ -40,7 +40,7 @@ export default {
     Themeable
   ],
 
-  data: vm => ({
+  data: () => ({
     isActive: false,
     isFocused: false,
     parentError: false

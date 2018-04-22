@@ -1,7 +1,7 @@
 import '../stylus/components/_overlay.styl'
 
 // Utils
-import {keyCodes} from '../util/helpers'
+import { keyCodes } from '../util/helpers'
 
 export default {
   name: 'overlayable',

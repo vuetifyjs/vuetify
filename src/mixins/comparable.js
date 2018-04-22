@@ -1,4 +1,4 @@
-import { deepEqual } from "../util/helpers"
+import { deepEqual } from '../util/helpers'
 
 export default {
   props: {

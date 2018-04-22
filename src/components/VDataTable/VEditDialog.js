@@ -4,7 +4,7 @@ import '../../stylus/components/_small-dialog.styl'
 import Returnable from '../../mixins/returnable'
 
 // Utils
-import {keyCodes} from '../../util/helpers'
+import { keyCodes } from '../../util/helpers'
 
 import VBtn from '../VBtn'
 import VMenu from '../VMenu'

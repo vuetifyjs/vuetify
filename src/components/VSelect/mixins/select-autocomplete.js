@@ -118,7 +118,7 @@ export default {
       if (e.keyCode === keyCodes.tab) return this.onTabDown(e)
 
       if (!this.isAutocomplete ||
-        e.keyCode != keyCodes.space
+        e.keyCode !== keyCodes.space
       ) this.$refs.menu.changeListIndex(e)
 
       if ([keyCodes.up, keyCodes.down].includes(e.keyCode)) this.selectedIndex = -1

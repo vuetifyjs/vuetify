@@ -13,7 +13,7 @@ export default {
     RegistrableInject('form')
   ],
 
-  data: vm => ({
+  data: () => ({
     errorBucket: [],
     hasColor: false,
     hasFocused: false,

@@ -6,7 +6,7 @@ import VSelect from '../VSelect'
 import VTextField from '../VTextField/VTextField'
 
 // Utils
-import {keyCodes} from '../../util/helpers'
+import { keyCodes } from '../../util/helpers'
 
 export default {
   name: 'v-autocomplete',
@@ -108,7 +108,7 @@ export default {
     },
     searchIsDirty () {
       return this.internalSearch != null &&
-        this.internalSearch != ''
+        this.internalSearch !== ''
     },
     selectedItem () {
       if (this.isMulti) return null

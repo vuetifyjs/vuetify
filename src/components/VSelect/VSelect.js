@@ -162,7 +162,7 @@ export default {
 
   watch: {
     internalValue: 'setSelectedItems',
-    items (val, prev) {
+    items (val) {
       if (this.cacheItems) {
         this.cachedItems = this.filterDuplicates(this.cachedItems.concat(val))
       }

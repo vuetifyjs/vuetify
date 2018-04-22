@@ -35,7 +35,7 @@ export default {
     }
   },
 
-  data: vm => ({
+  data: () => ({
     internalTabIndex: -1,
     radios: []
   }),

@@ -28,7 +28,7 @@ export default {
       default: 5,
       validator: v => !isNaN(parseInt(v, 10))
     },
-    textarea: Boolean,
+    textarea: Boolean
   },
 
   computed: {

@@ -11,7 +11,7 @@ import Themeable from './themeable'
 import Validatable from './validatable'
 
 // Utils
-import {keyCodes} from '../util/helpers'
+import { keyCodes } from '../util/helpers'
 
 export default {
   name: 'input',
@@ -90,8 +90,8 @@ export default {
   },
 
   methods: {
-    groupFocus (e) {},
-    groupBlur (e) {
+    groupFocus () {},
+    groupBlur () {
       this.tabFocused = false
     },
     genContent () {
@@ -229,6 +229,7 @@ export default {
 
       return this.genSlot('append', 'outer', slot)
     },
+    // eslint-disable-next-line no-unused-vars
     genInputGroup (input, data = {}, defaultAppendCallback = null) {
       return this.$createElement('div', {
         staticClass: 'v-input',

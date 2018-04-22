@@ -7,7 +7,7 @@ import Rippleable from './rippleable'
 import Comparable from './comparable'
 
 // Utils
-import {keyCodes} from '../util/helpers'
+import { keyCodes } from '../util/helpers'
 
 export default {
   name: 'selectable',
@@ -60,7 +60,6 @@ export default {
       const input = this.internalValue
 
       if (this.isMultiple) {
-
         if (!Array.isArray(input)) return false
 
         return input.some(item => this.valueComparator(item, value))
@@ -88,7 +87,7 @@ export default {
   methods: {
     genLabel () {
       return this.$createElement(VLabel, {
-        on: {click: this.onChange},
+        on: { click: this.onChange },
         attrs: {
           for: this.id
         },

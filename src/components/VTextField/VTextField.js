@@ -22,7 +22,7 @@ export default {
 
   inheritAttrs: false,
 
-  data: vm => ({
+  data: () => ({
     badInput: false,
     initialValue: null,
     internalChange: false,

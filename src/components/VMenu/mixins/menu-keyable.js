@@ -8,8 +8,8 @@
  * Will conditionally highlight VListTiles for VSelect
  */
 
- // Utils
-import {keyCodes} from '../../../util/helpers'
+// Utils
+import { keyCodes } from '../../../util/helpers'
 
 export default {
   data: () => ({
