@@ -32,8 +32,8 @@ export default {
   }),
 
   props: {
-    label: String,
     inverseLabel: Boolean,
+    label: String,
     min: {
       type: [Number, String],
       default: 0
@@ -47,12 +47,20 @@ export default {
       type: [Number, String],
       default: 1
     },
-    ticks: Boolean,
+    ticks: {
+      type: String,
+      default: null,
+      validator: value => !value || value === 'hover' || value === 'always'
+    },
     thumbColor: {
       type: String,
       default: null
     },
-    thumbLabel: Boolean,
+    thumbLabel: {
+      type: String,
+      default: null,
+      validator: value => !value || value === 'hover' || value === 'always'
+    },
     trackColor: {
       type: String,
       default: null
@@ -64,10 +72,15 @@ export default {
     classes () {
       return {
         'v-input--slider': true,
-        'v-input--slider--ticks': !this.disabled &&
-          this.stepNumeric && this.ticks,
+        'v-input--slider--ticks': this.showTicks,
         'v-input--slider--inverse-label': this.inverseLabel
       }
+    },
+    showTicks () {
+      return !this.disabled && this.stepNumeric && (!!this.ticks || this.ticks === '')
+    },
+    showThumbLabel () {
+      return !this.disabled && (!!this.thumbLabel || this.thumbLabel === '')
     },
     computedColor () {
       if (this.disabled) return null
@@ -108,15 +121,15 @@ export default {
       return this.step > 0 ? parseFloat(this.step) : 1
     },
     trackPadding () {
-      if (this.thumbLabel || this.isActive) return 0
+      if (this.isActive || (this.range && this.isDirty)) return 0
 
-      return 6 + (this.isActive && !this.disabled ? 3 : 0)
+      return 6 + (this.disabled ? 3 : 0)
     },
     trackStyles () {
       return {
         transition: this.keyPressed >= 2 ? 'none' : '',
-        [this.$vuetify.rtl ? 'right' : 'left']: `calc(${this.inputWidth}% + ${this.trackPadding}px)`,
-        width: `calc(${100 - this.inputWidth}% - ${this.trackPadding}px)`
+        [this.$vuetify.rtl ? 'right' : 'left']: `${this.trackPadding}px`,
+        width: `calc(100 - ${this.trackPadding}px)`
       }
     },
     trackFillStyles () {
@@ -217,18 +230,21 @@ export default {
       ])
     },
     genSteps () {
-      if (!this.step || !this.ticks) return null
+      if (!this.step || !this.showTicks) return null
 
       const ticks = createRange(this.numTicks + 1).map(i => {
         const span = this.$createElement('span', {
           key: i,
           staticClass: 'v-slider__tick',
+          class: {
+            'v-slider__tick--always-show': this.ticks === 'always'
+          },
           style: {
             left: `${i * (100 / this.numTicks)}%`
           }
         })
 
-        return span
+        return i === 0 && !this.isDirty ? null : span
       })
 
       return this.$createElement('div', {
@@ -250,14 +266,14 @@ export default {
         }
       }))
 
-      this.thumbLabel && children.push(this.genThumbLabel())
+      this.showThumbLabel && children.push(this.genThumbLabel(i))
 
       const drag = e => this.onMouseDown(e, i)
 
       return this.$createElement('div', {
         staticClass: 'v-slider__thumb-container',
         'class': {
-          'v-slider__thumb-container-label': this.thumbLabel
+          'v-slider__thumb-container-label': this.showThumbLabel
         },
         style: this.createThumbStyles(i),
         on: {
@@ -266,8 +282,12 @@ export default {
         }
       }, children)
     },
-    genThumbLabel () {
-      return this.$createElement(VScaleTransition, {
+    genThumbLabel (i) {
+      const content = this.$scopedSlots['thumb-label'] ?
+        this.$scopedSlots['thumb-label']({ index: i, value: this.inputValue[i] }) :
+        this.$createElement('span', {}, this.inputValue[i])
+
+        return this.$createElement(VScaleTransition, {
         props: { origin: 'bottom center' }
       }, [
         this.$createElement('div', {
@@ -275,16 +295,14 @@ export default {
           directives: [
             {
               name: 'show',
-              value: this.isActive
+              value: (this.isActive && this.activeThumb === i) || this.thumbLabel === 'always'
             }
           ]
         }, [
           this.$createElement('div', {
             staticClass: 'v-slider__thumb-label',
             'class': this.addBackgroundColorClassChecks({}, this.computedThumbColor)
-          }, [
-            this.$createElement('span', {}, this.inputValue)
-          ])
+          }, [content])
         ])
       ])
     },

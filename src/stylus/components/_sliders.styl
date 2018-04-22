@@ -63,7 +63,7 @@ rtl(v-slider-rtl, "v-input--slider")
 
     .v-slider__thumb-container
       &-label
-        .v-slider__thumb
+        .v-slider__thumb--is-active
           transform: translateY(-50%) scale(0)
 
           &:hover
@@ -78,6 +78,10 @@ rtl(v-slider-rtl, "v-input--slider")
         &__track__container:after,
         .v-slider__tick
           opacity: 1
+
+  &.v-input--slider--ticks
+    .v-slider__tick.v-slider__tick--always-show
+      opacity: 1
 
   &.v-input--is-disabled
     pointer-events: none
@@ -199,7 +203,7 @@ rtl(v-slider-rtl, "v-input--slider")
     border-radius: 50% 50% 0
     position: absolute
     left: -14px
-    top: -40px
+    top: -42px
     transform: rotate(45deg)
     user-select: none
     transition: .3s ease-in-out
