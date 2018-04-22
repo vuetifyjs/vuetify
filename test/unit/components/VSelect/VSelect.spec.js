@@ -310,13 +310,13 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     const wrapper = mount(VSelect, {
       propsData: {
-        contentClass: 'menu-class',
+        contentClass: 'v-menu-class',
         items
       }
     })
 
-    const menu = wrapper.find('.menu__content')[0]
-    expect(menu.element.classList).toContain('menu-class')
+    const menu = wrapper.find('.v-menu__content')[0]
+    expect(menu.element.classList).toContain('v-menu-class')
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
