@@ -37,4 +37,24 @@ declare module 'vuetify/src/util/helpers' {
   export function getZIndex (el: Element): number
   export function escapeHTML (str: string): string
   export function deepEqual (a: any, b: any): boolean
+
+  export interface KeyCodes {
+    readonly enter: number
+    readonly tab: number
+    readonly delete: number
+    readonly esc: number
+    readonly space: number
+    readonly up: number
+    readonly down: number
+    readonly left: number
+    readonly right: number
+    readonly end: number
+    readonly home: number
+    readonly del: number
+    readonly backspace: number
+    readonly insert: number
+    readonly pageup: number
+    readonly pagedown: number
+  }
+  export const keyCodes: KeyCodes
 }

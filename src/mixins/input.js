@@ -11,6 +11,9 @@ import Loadable from './loadable'
 import Themeable from './themeable'
 import Validatable from './validatable'
 
+// Utils
+import {keyCodes} from '../util/helpers'
+
 export default {
   name: 'input',
 
@@ -59,7 +62,7 @@ export default {
     },
     toggleKeys: {
       type: Array,
-      default: () => [13, 32]
+      default: () => [keyCodes.enter, keyCodes.space]
     },
     value: {
       required: false
@@ -260,7 +263,7 @@ export default {
       //     blur: this.groupBlur,
       //     click: () => (this.tabFocused = false),
       //     keyup: e => {
-      //       if ([9, 16].includes(e.keyCode)) {
+      //       if ([keyCodes.tab, 16/* shift? */].includes(e.keyCode)) {
       //         this.tabFocused = true
       //       }
       //     },

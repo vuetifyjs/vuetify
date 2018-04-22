@@ -10,6 +10,9 @@ import Loadable from './loadable'
 import Themeable from './themeable'
 import Validatable from './validatable'
 
+// Utils
+import {keyCodes} from '../util/helpers'
+
 export default {
   name: 'input',
 
@@ -48,7 +51,7 @@ export default {
     },
     toggleKeys: {
       type: Array,
-      default: () => [13, 32]
+      default: () => [keyCodes.enter, keyCodes.space]
     },
     value: {
       required: false

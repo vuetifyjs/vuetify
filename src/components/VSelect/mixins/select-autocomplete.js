@@ -1,4 +1,4 @@
-import { escapeHTML } from '../../../util/helpers'
+import { escapeHTML, keyCodes } from '../../../util/helpers'
 
 /**
  * Select autocomplete
@@ -106,24 +106,22 @@ export default {
       this.menuIsActive = false
     },
     onKeyDown (e) {
-      // If enter, space, up, or down is pressed, open menu
-      if (!this.menuIsActive && [13, 32, 38, 40].includes(e.keyCode)) {
+      if (!this.menuIsActive && [keyCodes.enter, keyCodes.space, keyCodes.up, keyCodes.down].includes(e.keyCode)) {
         e.preventDefault()
         return this.showMenu()
       }
 
       // If escape deactivate the menu
-      if (e.keyCode === 27) return this.onEscDown(e)
+      if (e.keyCode === keyCodes.esc) return this.onEscDown(e)
 
       // If tab - select item or close menu
-      if (e.keyCode === 9) return this.onTabDown(e)
+      if (e.keyCode === keyCodes.tab) return this.onTabDown(e)
 
       if (!this.isAutocomplete ||
-        ![32].includes(e.keyCode) // space
+        e.keyCode != keyCodes.space
       ) this.$refs.menu.changeListIndex(e)
 
-      // Up or down
-      if ([38, 40].includes(e.keyCode)) this.selectedIndex = -1
+      if ([keyCodes.up, keyCodes.down].includes(e.keyCode)) this.selectedIndex = -1
 
       if (this.isAutocomplete &&
         !this.hideSelections &&
@@ -132,19 +130,16 @@ export default {
 
       if (!this.isAnyValueAllowed || !this.searchValue) return
 
-      // Enter
-      if (e.keyCode === 13) return this.onEnterDown()
+      if (e.keyCode === keyCodes.enter) return this.onEnterDown()
 
-      // Left arrow
-      if (e.keyCode === 37 && this.$refs.input.selectionStart === 0 && this.selectedItems.length) {
+      if (e.keyCode === keyCodes.left && this.$refs.input.selectionStart === 0 && this.selectedItems.length) {
         this.updateTags(this.searchValue)
         this.$nextTick(() => {
           this.selectedIndex = Math.max(this.selectedItems.length - 2, 0)
         })
       }
 
-      // Right arrow
-      if (e.keyCode === 39 && this.$refs.input.selectionEnd === this.searchValue.length) {
+      if (e.keyCode === keyCodes.right && this.$refs.input.selectionEnd === this.searchValue.length) {
         this.resetMenuIndex()
       }
     },

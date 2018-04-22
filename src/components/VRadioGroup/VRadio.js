@@ -13,6 +13,9 @@ import {
   inject as RegistrableInject
 } from '../../mixins/registrable'
 
+// Utils
+import {keyCodes} from '../../util/helpers'
+
 export default {
   name: 'v-radio',
 
@@ -109,7 +112,7 @@ export default {
           change: this.onChange,
           focus: this.onFocus,
           keydown: e => {
-            if ([13, 32].includes(e.keyCode)) {
+            if ([keyCodes.enter, keyCodes.space].includes(e.keyCode)) {
               e.preventDefault()
               this.onChange()
             }

@@ -5,6 +5,9 @@ import '../../stylus/components/_autocompletes.styl'
 import VSelect from '../VSelect'
 import VTextField from '../VTextField/VTextField'
 
+// Utils
+import {keyCodes} from '../../util/helpers'
+
 export default {
   name: 'v-autocomplete',
 
@@ -148,16 +151,15 @@ export default {
       // when search is dirty
       if (this.searchIsDirty) return
 
-      // backspace, left, right, delete
-      if (![8, 37, 39, 46].includes(keyCode)) return
+      if (![keyCodes.backspace, keyCodes.left, keyCodes.right, keyCodes.del].includes(keyCode)) return
 
       const indexes = this.selectedItems.length - 1
 
-      if (keyCode === 37) { // Left arrow
+      if (keyCode === keyCodes.left) {
         this.selectedIndex = this.selectedIndex === -1
           ? indexes
           : this.selectedIndex - 1
-      } else if (keyCode === 39) { // Right arrow
+      } else if (keyCode === keyCodes.right) {
         this.selectedIndex = this.selectedIndex >= indexes
           ? -1
           : this.selectedIndex + 1
@@ -166,8 +168,7 @@ export default {
         return
       }
 
-      // backspace/delete
-      if ([8, 46].includes(keyCode)) {
+      if ([keyCodes.backspace, keyCodes.delete].includes(keyCode)) {
         const newIndex = this.selectedIndex === indexes
           ? this.selectedIndex - 1
           : this.selectedItems[this.selectedIndex + 1]
@@ -247,14 +248,14 @@ export default {
 
       // If enter, space, up, or down is pressed, open menu
       if (!this.isMenuActive &&
-        [13, 32, 38, 40].includes(keyCode)
+        [keyCodes.enter, keyCodes.space, keyCodes.up, keyCodes.down].includes(keyCode)
       ) return this.activateMenu()
 
       // If escape deactivate the menu
-      if (keyCode === 27) return this.onEscDown(e)
+      if (keyCode === keyCodes.esc) return this.onEscDown(e)
 
       // If tab - select item or close menu
-      if (keyCode === 9) return this.onTabDown(e)
+      if (keyCode === keyCodes.tab) return this.onTabDown(e)
 
       if (!this.hideSelections &&
         !this.internalSearch
@@ -264,11 +265,10 @@ export default {
         !this.internalSearch
       ) return
 
-      // Enter
-      if (e.keyCode === 13) return this.onEnterDown()
+      if (e.keyCode === keyCodes.enter) return this.onEnterDown()
 
-      if ((keyCode === 8 && !this.searchIsDirty) ||
-        (!this.$refs.menu || e.keyCode !== 38)
+      if ((keyCode === keyCodes.backspace && !this.searchIsDirty) ||
+        (!this.$refs.menu || e.keyCode !== keyCodes.up)
       ) return VSelect.methods.onKeyDown.call(this, e)
     },
     onTabDown (e) {

@@ -20,7 +20,7 @@ import Menuable from '../../mixins/menuable'
 import ClickOutside from '../../directives/click-outside'
 
 // Helpers
-import { getPropertyFromItem } from '../../util/helpers'
+import { getPropertyFromItem, keyCodes } from '../../util/helpers'
 
 export default {
   name: 'v-select',
@@ -384,9 +384,9 @@ export default {
     },
     // Detect tab and call original onBlur method
     onKeyDown (e) {
-      if (e.keyCode === 9) {
+      if (e.keyCode === keyCodes.tab) {
         VTextField.methods.onBlur.call(this, e)
-      } else if ([13, 32, 38, 40].includes(e.keyCode)) {
+      } else if ([keyCodes.enter, keyCodes.space, keyCodes.up, keyCodes.down].includes(e.keyCode)) {
         this.isMenuActive = true
       }
     },

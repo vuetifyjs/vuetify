@@ -12,7 +12,7 @@ import VInput from '../VInput'
 import ClickOutside from '../../directives/click-outside'
 
 // Utilities
-import { addOnceEventListener, createRange } from '../../util/helpers'
+import { addOnceEventListener, createRange, keyCodes } from '../../util/helpers'
 import { consoleWarn } from '../../util/console'
 
 export default {
@@ -315,29 +315,29 @@ export default {
       }
     },
     onKeyDown (e) {
-      if (this.disabled || ![33, 34, 35, 36, 37, 38, 39, 40].includes(e.keyCode)) return
+      if (this.disabled || ![
+        keyCodes.pageup, keyCodes.pagedown, keyCodes.end, keyCodes.home,
+        keyCodes.left, keyCodes.right, keyCodes.down, keyCodes.up
+      ].includes(e.keyCode)) return
 
       e.preventDefault()
       const step = this.stepNumeric
       const steps = (this.max - this.min) / step
-      if (e.keyCode === 37 || e.keyCode === 39 || e.keyCode === 38 || e.keyCode === 40) {
-        // Left/right
+      if (e.keyCode === keyCodes.left || e.keyCode === keyCodes.right || e.keyCode === keyCodes.down || e.keyCode === keyCodes.up) {
         this.keyPressed += 1
 
-        const increase = this.$vuetify.rtl ? [37, 38] : [38, 39]
+        const increase = this.$vuetify.rtl ? [keyCodes.left, keyCodes.up] : [keyCodes.right, keyCodes.up]
         let direction = increase.includes(e.keyCode) ? 1 : -1
         const multiplier = e.shiftKey ? 3 : (e.ctrlKey ? 2 : 1)
 
         this.inputValue = this.inputValue + (direction * step * multiplier)
-      } else if (e.keyCode === 36) {
-        // Home
+      } else if (e.keyCode === keyCodes.home) {
         this.inputValue = parseFloat(this.min)
-      } else if (e.keyCode === 35) {
-        // End
+      } else if (e.keyCode === keyCodes.end) {
         this.inputValue = parseFloat(this.max)
-      } else /* if (e.keyCode === 33 || e.keyCode === 34) */ {
+      } else /* if (e.keyCode === keyCodes.pageup || e.keyCode === pagedown) */ {
         // Page up/down
-        const direction = e.keyCode === 34 ? 1 : -1
+        const direction = e.keyCode === keyCodes.pagedown ? 1 : -1
         this.inputValue = this.inputValue - (direction * step * (steps > 100 ? steps / 10 : 10))
       }
     },

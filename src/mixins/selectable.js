@@ -6,6 +6,9 @@ import VLabel from '../components/VLabel'
 import Rippleable from './rippleable'
 import Comparable from './comparable'
 
+// Utils
+import {keyCodes} from '../util/helpers'
+
 export default {
   name: 'selectable',
 
@@ -38,7 +41,7 @@ export default {
     label: String,
     toggleKeys: {
       type: Array,
-      default: () => [13, 32]
+      default: () => [keyCodes.enter, keyCodes.space]
     }
   },
 
