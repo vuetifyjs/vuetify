@@ -28,7 +28,7 @@ export default {
     defaultColor: 'primary',
     isActive: false,
     keyPressed: 0,
-    lazyValue: typeof vm.value !== 'undefined' && (Array.isArray(vm.value) ? vm.value : [vm.value]) || (vm.range ? [0, 0] : [0])
+    lazyValue: typeof vm.value !== 'undefined' ? (Array.isArray(vm.value) ? vm.value : [vm.value]) : (vm.range ? [0, 0] : [0])
   }),
 
   props: {
@@ -283,11 +283,11 @@ export default {
       }, children)
     },
     genThumbLabel (i) {
-      const content = this.$scopedSlots['thumb-label'] ?
-        this.$scopedSlots['thumb-label']({ index: i, value: this.inputValue[i] }) :
-        this.$createElement('span', {}, this.inputValue[i])
+      const content = this.$scopedSlots['thumb-label']
+        ? this.$scopedSlots['thumb-label']({ index: i, value: this.inputValue[i] })
+        : this.$createElement('span', {}, this.inputValue[i])
 
-        return this.$createElement(VScaleTransition, {
+      return this.$createElement(VScaleTransition, {
         props: { origin: 'bottom center' }
       }, [
         this.$createElement('div', {
