@@ -189,7 +189,7 @@ export default {
           tabindex: this.disabled ? -1 : this.tabindex
         },
         on: Object.assign({}, {
-          mouseup: this.onSliderMove,
+          click: this.onSliderMove,
           keydown: this.onKeyDown,
           keyup: this.onKeyUp
         }, this.$listeners),
@@ -307,7 +307,6 @@ export default {
       this.app.removeEventListener('touchmove', this.onMouseMove, options)
       this.app.removeEventListener('mousemove', this.onMouseMove, options)
 
-      this.$emit('change', this.inputValue)
       this.$emit('end', this.inputValue)
     },
     onMouseMove (e) {
