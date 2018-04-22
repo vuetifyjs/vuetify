@@ -11,9 +11,9 @@ export default {
       if (!this.$slots.activator) return null
 
       const options = {
-        staticClass: 'menu__activator',
+        staticClass: 'v-menu__activator',
         'class': {
-          'menu__activator--active': this.hasJustFocused || this.isActive
+          'v-menu__activator--active': this.hasJustFocused || this.isActive
         },
         ref: 'activator',
         on: {}
@@ -60,7 +60,7 @@ export default {
 
     genContent () {
       const options = {
-        staticClass: 'menu__content',
+        staticClass: 'v-menu__content',
         'class': {
           [this.contentClass.trim()]: true,
           'menuable__content__active': this.isActive,

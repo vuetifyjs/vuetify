@@ -1,8 +1,11 @@
 import '../../stylus/components/_icons.styl'
-import { getObjectValueByPath } from '../../util/helpers'
 
 import Themeable from '../../mixins/themeable'
 import Colorable from '../../mixins/colorable'
+import {
+  convertToUnit,
+  getObjectValueByPath
+} from '../../util/helpers'
 
 const SIZE_MAP = {
   small: '16px',
@@ -56,7 +59,7 @@ export default {
     const { small, medium, large, xLarge } = props
     const sizes = { small, medium, large, xLarge }
     const explicitSize = Object.keys(sizes).find(key => sizes[key] && key)
-    const fontSize = (explicitSize && SIZE_MAP[explicitSize]) || props.size
+    const fontSize = (explicitSize && SIZE_MAP[explicitSize]) || convertToUnit(props.size)
 
     if (fontSize) data.style = { fontSize, ...data.style }
 

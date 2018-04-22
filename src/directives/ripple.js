@@ -18,7 +18,7 @@ const ripple = {
     const animation = document.createElement('span')
 
     container.appendChild(animation)
-    container.className = 'ripple__container'
+    container.className = 'v-ripple__container'
 
     if (value.class) {
       container.className += ` ${value.class}`
@@ -27,7 +27,7 @@ const ripple = {
     const size = el.clientWidth > el.clientHeight
       ? el.clientWidth
       : el.clientHeight
-    animation.className = 'ripple__animation'
+    animation.className = 'v-ripple__animation'
     animation.style.width = `${size * (value.center ? 1 : 2)}px`
     animation.style.height = animation.style.width
 
@@ -39,13 +39,13 @@ const ripple = {
     const x = value.center ? '50%' : `${e.clientX - offset.left}px`
     const y = value.center ? '50%' : `${e.clientY - offset.top}px`
 
-    animation.classList.add('ripple__animation--enter')
-    animation.classList.add('ripple__animation--visible')
+    animation.classList.add('v-ripple__animation--enter')
+    animation.classList.add('v-ripple__animation--visible')
     style(animation, `translate(-50%, -50%) translate(${x}, ${y}) scale3d(0.01,0.01,0.01)`)
     animation.dataset.activated = Date.now()
 
     setTimeout(() => {
-      animation.classList.remove('ripple__animation--enter')
+      animation.classList.remove('v-ripple__animation--enter')
       style(animation, `translate(-50%, -50%) translate(${x}, ${y})  scale3d(0.99,0.99,0.99)`)
     }, 0)
   },
@@ -53,7 +53,7 @@ const ripple = {
   hide: el => {
     if (!el._ripple || !el._ripple.enabled) return
 
-    const ripples = el.getElementsByClassName('ripple__animation')
+    const ripples = el.getElementsByClassName('v-ripple__animation')
 
     if (ripples.length === 0) return
     const animation = ripples[ripples.length - 1]
@@ -63,7 +63,7 @@ const ripple = {
     delay = delay < 0 ? 0 : delay
 
     setTimeout(() => {
-      animation.classList.remove('ripple__animation--visible')
+      animation.classList.remove('v-ripple__animation--visible')
 
       setTimeout(() => {
         // Need to figure out a new way to do this

@@ -201,6 +201,10 @@ export function filterChildren (array = [], tag) {
   })
 }
 
+export function convertToUnit (str, unit = 'px') {
+  return isNaN(str) ? str : `${Number(str)}${unit}`
+}
+
 // KeyboardEvent.keyCode aliases
 export const keyCodes = Object.freeze({
   enter: 13,

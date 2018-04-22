@@ -19,10 +19,10 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
             <div class="v-input__slot primary--text"
                  style="height: 32px;"
             >
-              <div class="menu"
+              <div class="v-menu"
                    style="display: inline-block;"
               >
-                <div class="menu__activator">
+                <div class="v-menu__activator">
                   <div class="v-select__slot">
                     <label class="v-label v-label--active"
                            style="left: 0px; position: absolute;"
@@ -46,7 +46,7 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
                     </div>
                   </div>
                 </div>
-                <div class="menu__content"
+                <div class="v-menu__content"
                      style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
                 >
                   <div class="v-select-list v-card"
@@ -166,10 +166,10 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
             <div class="v-input__slot primary--text"
                  style="height: 32px;"
             >
-              <div class="menu"
+              <div class="v-menu"
                    style="display: inline-block;"
               >
-                <div class="menu__activator">
+                <div class="v-menu__activator">
                   <div class="v-select__slot">
                     <label class="v-label v-label--active"
                            style="left: 0px; position: absolute;"
@@ -193,7 +193,7 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
                     </div>
                   </div>
                 </div>
-                <div class="menu__content"
+                <div class="v-menu__content"
                      style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
                 >
                   <div class="v-select-list v-card"
@@ -304,10 +304,10 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
             <div class="v-input__slot primary--text"
                  style="height: 32px;"
             >
-              <div class="menu"
+              <div class="v-menu"
                    style="display: inline-block;"
               >
-                <div class="menu__activator">
+                <div class="v-menu__activator">
                   <div class="v-select__slot">
                     <label class="v-label v-label--active"
                            style="left: 0px; position: absolute;"
@@ -331,7 +331,7 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
                     </div>
                   </div>
                 </div>
-                <div class="menu__content"
+                <div class="v-menu__content"
                      style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
                 >
                   <div class="v-select-list v-card"
@@ -446,10 +446,10 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
             <div class="v-input__slot primary--text"
                  style="height: 32px;"
             >
-              <div class="menu"
+              <div class="v-menu"
                    style="display: inline-block;"
               >
-                <div class="menu__activator">
+                <div class="v-menu__activator">
                   <div class="v-select__slot">
                     <label class="v-label v-label--active"
                            style="left: 0px; position: absolute;"
@@ -473,7 +473,7 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
                     </div>
                   </div>
                 </div>
-                <div class="menu__content"
+                <div class="v-menu__content"
                      style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
                 >
                   <div class="v-select-list v-card"

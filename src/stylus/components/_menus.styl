@@ -1,6 +1,6 @@
 @import '../bootstrap'
 
-.menu
+.v-menu
   display: inline-block
   position: relative
   vertical-align: middle
@@ -8,8 +8,8 @@
   &--disabled
     cursor: default
 
-    .menu__activator,
-    .menu__activator > *
+    .v-menu__activator,
+    .v-menu__activator > *
       cursor: default
       pointer-events: none
 
@@ -30,6 +30,9 @@
     overflow-y: auto
     overflow-x: hidden
     contain: content
+    // This is required for an issue on Chrome 65
+    // that prevents scrolling after a menu is opened
+    will-change: transform
     elevation(8)
 
     &--active
@@ -41,12 +44,10 @@
       border-top: 1px solid $material-light.dividers
 
     & > .card
-      // This causes an issue on Chrome 65
-      // that prevents scrolling after a menu is opened
-      // contain: content
+      contain: content
       backface-visibility: hidden
 
-  > .menu__content
+  > .v-menu__content
     max-width: none
 
   &-transition
@@ -81,8 +82,8 @@
     &-enter-active, &-leave-active
       transition: all .5s $transition.swing
 
-.menu-transition-enter
-  &.menu__content--auto
+.v-menu-transition-enter
+  &.v-menu__content--auto
     .v-list__tile--active
       opacity: 1
       transform: none !important

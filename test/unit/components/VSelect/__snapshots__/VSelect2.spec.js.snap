@@ -9,10 +9,10 @@ exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
     <div class="v-input__slot primary--text"
          style="height: 32px;"
     >
-      <div class="menu"
+      <div class="v-menu"
            style="display: inline-block;"
       >
-        <div class="menu__activator">
+        <div class="v-menu__activator">
           <div class="v-select__slot">
             <label class="v-label v-label--active"
                    style="left: 0px; position: absolute;"
@@ -67,10 +67,10 @@ exports[`VSelect should be clearable with prop, dirty and single select 1`] = `
     <div class="v-input__slot primary--text"
          style="height: 32px;"
     >
-      <div class="menu"
+      <div class="v-menu"
            style="display: inline-block;"
       >
-        <div class="menu__activator">
+        <div class="v-menu__activator">
           <div class="v-select__slot">
             <label class="v-label v-label--active"
                    style="left: 0px; position: absolute;"

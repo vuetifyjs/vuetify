@@ -39,6 +39,28 @@ exports[`VBreadcrumbs.js should inject slot to children 1`] = `
 
 `;
 
+exports[`VBreadcrumbs.js should not create dividers for non-items 1`] = `
+
+<ul class="v-breadcrumbs">
+  <span>
+  </span>
+  <li>
+    <a class="v-breadcrumbs__item">
+    </a>
+  </li>
+  <span>
+  </span>
+  <li class="v-breadcrumbs__divider">
+    /
+  </li>
+  <li>
+    <a class="v-breadcrumbs__item">
+    </a>
+  </li>
+</ul>
+
+`;
+
 exports[`VBreadcrumbs.js should use a custom divider slot 1`] = `
 
 <ul class="v-breadcrumbs">
