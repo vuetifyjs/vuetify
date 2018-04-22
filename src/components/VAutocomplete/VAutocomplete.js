@@ -151,7 +151,7 @@ export default {
       // when search is dirty
       if (this.searchIsDirty) return
 
-      if (![keyCodes.backspace, keyCodes.left, keyCodes.right, keyCodes.del].includes(keyCode)) return
+      if (![keyCodes.backspace, keyCodes.left, keyCodes.right, keyCodes.delete].includes(keyCode)) return
 
       const indexes = this.selectedItems.length - 1
 
