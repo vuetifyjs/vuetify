@@ -297,6 +297,8 @@ export default {
         this.app.addEventListener('mousemove', this.onMouseMove, options)
         addOnceEventListener(this.app, 'mouseup', this.onMouseUp)
       }
+
+      this.$emit('start', this.inputValue)
     },
     onMouseUp () {
       this.keyPressed = 0
@@ -304,6 +306,9 @@ export default {
       this.isActive = false
       this.app.removeEventListener('touchmove', this.onMouseMove, options)
       this.app.removeEventListener('mousemove', this.onMouseMove, options)
+
+      this.$emit('change', this.inputValue)
+      this.$emit('end', this.inputValue)
     },
     onMouseMove (e) {
       const {
@@ -344,6 +349,8 @@ export default {
         const direction = e.keyCode === keyCodes.pagedown ? 1 : -1
         this.inputValue = this.inputValue - (direction * step * (steps > 100 ? steps / 10 : 10))
       }
+
+      this.$emit('change', this.inputValue)
     },
     onKeyUp () {
       this.keyPressed = 0
@@ -351,6 +358,7 @@ export default {
     onSliderMove (e) {
       if (!this.isActive) {
         this.onMouseMove(e)
+        this.$emit('change', this.inputValue)
       }
     },
     roundValue (value) {
