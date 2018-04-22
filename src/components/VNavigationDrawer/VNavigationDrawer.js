@@ -98,17 +98,17 @@ export default {
     },
     classes () {
       return {
-        'navigation-drawer': true,
-        'navigation-drawer--absolute': this.absolute,
-        'navigation-drawer--clipped': this.clipped,
-        'navigation-drawer--close': !this.isActive,
-        'navigation-drawer--fixed': !this.absolute && (this.app || this.fixed),
-        'navigation-drawer--floating': this.floating,
-        'navigation-drawer--is-mobile': this.isMobile,
-        'navigation-drawer--mini-variant': this.miniVariant,
-        'navigation-drawer--open': this.isActive,
-        'navigation-drawer--right': this.right,
-        'navigation-drawer--temporary': this.temporary,
+        'v-navigation-drawer': true,
+        'v-navigation-drawer--absolute': this.absolute,
+        'v-navigation-drawer--clipped': this.clipped,
+        'v-navigation-drawer--close': !this.isActive,
+        'v-navigation-drawer--fixed': !this.absolute && (this.app || this.fixed),
+        'v-navigation-drawer--floating': this.floating,
+        'v-navigation-drawer--is-mobile': this.isMobile,
+        'v-navigation-drawer--mini-variant': this.miniVariant,
+        'v-navigation-drawer--open': this.isActive,
+        'v-navigation-drawer--right': this.right,
+        'v-navigation-drawer--temporary': this.temporary,
         'theme--dark': this.dark,
         'theme--light': this.light
       }
@@ -334,7 +334,7 @@ export default {
 
     return h('aside', data, [
       this.$slots.default,
-      h('div', { 'class': 'navigation-drawer__border' })
+      h('div', { 'class': 'v-navigation-drawer__border' })
     ])
   }
 }
