@@ -68,13 +68,15 @@ export default {
       }
     },
     computedColor () {
-      return this.disabled ? null : (this.color || this.defaultColor)
+      if (this.disabled) return null
+      return this.validationState || this.color || this.defaultColor
     },
     computedTrackColor () {
       return this.disabled ? null : (this.trackColor || null)
     },
     computedThumbColor () {
-      return (this.disabled || !this.inputWidth) ? null : (this.thumbColor || this.color || this.defaultColor)
+      if (this.disabled || !this.inputWidth) return null
+      return this.validationState || this.thumbColor || this.color || this.defaultColor
     },
     inputValue: {
       get () {
@@ -91,6 +93,7 @@ export default {
         this.lazyValue = value
 
         this.$emit('input', value)
+        this.validate()
       }
     },
     stepNumeric () {
@@ -166,7 +169,8 @@ export default {
 
       const data = {
         props: {
-          color: this.validationState
+          color: this.validationState,
+          focused: !!this.validationState
         }
       }
 
