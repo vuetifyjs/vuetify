@@ -2,46 +2,46 @@
 @import '../theme'
 
 /* Theme */
-v-slider($material)
+slider($material)
   label
     color: $material.text.secondary
 
-  .v-slider__track, .slider__track-fill
+  .slider__track, .slider__track-fill
     background: $material.slider.inactive
 
-  .v-slider__track__container
+  .slider__track__container
     &:after
       border: 1px solid $material.text.primary
 
-  .v-slider__tick
+  .slider__tick
     border: 1px solid $material.text.primary
 
   &:not(.input-group--dirty)
-    .v-slider__thumb--label
+    .slider__thumb--label
       background: $material.slider.inactive
 
-    .v-slider__thumb
+    .slider__thumb
       border: 3px solid $material.slider.inactive
 
     &:focus
-      .v-slider__thumb
+      .slider__thumb
         border: 3px solid $material.slider.active
 
   &.input-group--disabled
-    .v-slider__thumb
+    .slider__thumb
       background: none
       border: 3px solid $material.slider.disabled
 
   &.input-group--disabled.input-group--dirty
-    .v-slider__thumb
+    .slider__thumb
       background: $material.slider.disabled
       border: 0px solid transparent
 
   &:focus
-    .v-slider__track
+    .slider__track
       background: $material.slider.active
 
-theme(v-slider, "input-group--slider")
+theme(slider, "input-group--slider")
 
 /** Input Group */
 .input-group.input-group--slider
@@ -70,32 +70,32 @@ theme(v-slider, "input-group--slider")
       flex: 1 0 auto
 
   &.input-group--active
-    .v-slider__thumb
+    .slider__thumb
       transform: translateY(-50%) scale(1.2)
 
-    .v-slider__track
+    .slider__track
       transition: none
 
-    .v-slider__thumb-container
+    .slider__thumb-container
       &--label
-        .v-slider__thumb
+        .slider__thumb
           transform: translateY(-50%) scale(0)
 
           &:hover
             transform: translateY(-50%) scale(0)
 
-    .v-slider__thumb-container, .v-slider__track-fill
+    .slider__thumb-container, .slider__track-fill
       transition: none
 
     &.input-group--ticks
-      .v-slider
+      .slider
         &__track__container:after, &__tick
           opacity: 1
 
   &.input-group--disabled
     pointer-events: none
 
-    .v-slider__thumb
+    .slider__thumb
       transform: translateY(-50%) scale(.5)
       background: transparent
 
@@ -103,16 +103,16 @@ theme(v-slider, "input-group--slider")
       border-color: transparent
 
   &.input-group--prepend-icon
-    .v-slider
+    .slider
       margin-left: 40px
 
   &.input-group--append-icon
-    .v-slider
+    .slider
       margin-right: 40px
 
 
 /** Slider */
-.v-slider
+.slider
   cursor: default
   display: flex
   align-items: center
@@ -123,7 +123,7 @@ theme(v-slider, "input-group--slider")
 
 
 /** Thumb/Track/Ticks */
-.v-slider
+.slider
   &__track__container
     position: absolute
     top: 50%
@@ -192,7 +192,7 @@ theme(v-slider, "input-group--slider")
 
 
 /** Thumb Label */
-.v-slider
+.slider
   &__thumb--label__container
     position: absolute
     left: 0
