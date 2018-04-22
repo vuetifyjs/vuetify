@@ -20,7 +20,7 @@ test('VPagination.vue', ({ mount }) => {
     wrapper.instance().$on('previous', previous)
     wrapper.instance().$on('next', next)
 
-    const navigation = wrapper.find('.pagination__navigation')
+    const navigation = wrapper.find('.v-pagination__navigation')
     navigation[0].trigger('click')
     navigation[1].trigger('click')
 
@@ -45,7 +45,7 @@ test('VPagination.vue', ({ mount }) => {
 
     wrapper.instance().$on('input', cb)
 
-    const navigation = wrapper.find('.pagination__item')
+    const navigation = wrapper.find('.v-pagination__item')
     navigation[1].trigger('click')
 
     expect(cb).toBeCalledWith(2)
@@ -93,7 +93,7 @@ test('VPagination.vue', ({ mount }) => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect(wrapper.find('.pagination__more').length).toEqual(1)
+    expect(wrapper.find('.v-pagination__more').length).toEqual(1)
   })
 
   it('should only render middle of range if length is big and value is somewhere in the middle', async () => {
@@ -109,7 +109,7 @@ test('VPagination.vue', ({ mount }) => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect(wrapper.find('.pagination__more').length).toEqual(2)
+    expect(wrapper.find('.v-pagination__more').length).toEqual(2)
   })
 
   it('should use totalVisible prop if defined', async () => {
@@ -126,8 +126,8 @@ test('VPagination.vue', ({ mount }) => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect(wrapper.find('.pagination__more').length).toEqual(2)
-    expect(wrapper.find('.pagination__item').length).toEqual(8)
+    expect(wrapper.find('.v-pagination__more').length).toEqual(2)
+    expect(wrapper.find('.v-pagination__item').length).toEqual(8)
   })
 
   it('should set from to 1 if <= 0', () => {
