@@ -23,17 +23,14 @@ export default {
       this.scrollOffset = this.startX - e.touchmoveX
     },
     onTouchEnd () {
-      const container = this.$refs.container
-      const wrapper = this.$refs.wrapper
-      const maxScrollOffset = container.clientWidth - wrapper.clientWidth
-      container.style.transition = null
-      container.style.willChange = null
+      this.$refs.container.style.transition = null
+      this.$refs.container.style.willChange = null
 
       /* istanbul ignore else */
       if (this.scrollOffset < 0 || !this.isOverflowing) {
         this.scrollOffset = 0
-      } else if (this.scrollOffset >= maxScrollOffset) {
-        this.scrollOffset = maxScrollOffset
+      } else if (this.scrollOffset >= this.maxScrollOffset) {
+        this.scrollOffset = this.maxScrollOffset
       }
     }
   }

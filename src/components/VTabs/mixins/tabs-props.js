@@ -6,6 +6,7 @@
 export default {
   props: {
     alignWithTitle: Boolean,
+    centerActiveTab: Boolean,
     centered: Boolean,
     fixedTabs: Boolean,
     grow: Boolean,
