@@ -16,6 +16,9 @@ export default {
       this.tabItems && this.tabItems(action === tab ? this.tabs.indexOf(tab).toString() : action)
     },
     alignWithTitle: 'callSlider',
+    centerActiveTab (val) {
+      val && this.callSlider()
+    },
     centered: 'callSlider',
     fixedTabs: 'callSlider',
     hasArrows (val) {
@@ -24,6 +27,10 @@ export default {
     isBooted: 'findActiveLink',
     lazyValue: 'updateTabs',
     right: 'callSlider',
+    showArrows () {
+      this.setWidths()
+      this.callSlider()
+    },
     value (val) {
       this.lazyValue = val
     },

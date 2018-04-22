@@ -77,7 +77,9 @@ export default {
   },
 
   watch: {
-    tabs: 'onResize'
+    tabs () {
+      this.$nextTick(this.onResize)
+    }
   },
 
   mounted () {
@@ -141,15 +143,14 @@ export default {
     setWidths () {
       const bar = this.$refs.bar ? this.$refs.bar.clientWidth : 0
       const container = this.$refs.container ? this.$refs.container.clientWidth : 0
-      const arrows = this.showArrows ? 80 : 0
-      const wrapper = this.$refs.wrapper ? (this.$refs.wrapper.clientWidth - arrows) : 0
+      const wrapper = bar ? (bar - 80 * this.showArrows) : 0
 
       this.widths = { bar, container, wrapper }
 
       this.setOverflow()
     },
     centerActiveTabInWrapper () {
-      if (!this.activeTab || !this.widths.wrapper) {
+      if (!this.activeTab || !this.isOverflowing) {
         return
       }
 
