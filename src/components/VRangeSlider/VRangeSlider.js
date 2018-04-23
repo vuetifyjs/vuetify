@@ -84,16 +84,6 @@ export default {
   },
 
   methods: {
-  //   onKeyDown () {
-  //     this.range ? this.inputValue[this.activeThumb] : this.inputValue[0]
-  //     let value = this.range ? this.inputValue[this.activeThumb] : this.inputValue[0]
-
-
-  //     this.inputValue = this.inputValue.map((v, i) => {
-  //       if (i === this.activeThumb) return value
-  //       else return v
-  //     })
-  //   },
     getIndexOfClosestValue (arr, v) {
       return arr.indexOf(arr.reduce((prev, curr) => {
         return Math.abs((curr / 100) - v) < Math.abs((prev / 100) - v) ? curr : prev
@@ -104,6 +94,11 @@ export default {
         const input = VSlider.methods.genInput.call(this)
 
         input.data.attrs.value = this.internalValue[i]
+
+        input.data.on.focus = e => {
+          this.activeThumb = i
+          VSlider.methods.onFocus.call(this, e)
+        }
 
         return input
       })
@@ -116,7 +111,7 @@ export default {
       return createRange(2).map(i => {
         const drag = e => this.onMouseDown(e, i)
         const left = this.$vuetify.rtl ? 100 - this.inputWidth[i] : this.inputWidth[i]
-        const isActive = (this.isActive && this.activeThumb === i) ||
+        const isActive = (this.isFocused && this.activeThumb === i) ||
           this.thumbLabel === 'always'
         const thumbContainer = VSlider.methods.genThumbContainer.call(this)
 
@@ -141,6 +136,11 @@ export default {
 
         return thumbContainer
       })
+    },
+    onBlur (e) {
+      if (this.activeThumb === 1) {
+        VSlider.methods.onBlur.call(this, e)
+      }
     },
     onClick (e) {
       if (!this.isActive) {
@@ -170,6 +170,20 @@ export default {
           else return v
         })
       }
+    },
+    parseKeyDown (e) {
+      const value = VSlider.methods.parseKeyDown.call(
+        this,
+        e,
+        this.internalValue[this.activeThumb]
+      )
+
+      if (value == null) return
+
+      return this.internalValue.map((v, i) => {
+        if (i === this.activeThumb) return value
+        else return Number(v)
+      })
     }
   }
 }

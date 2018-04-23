@@ -382,17 +382,30 @@ export default {
       }
     },
     onKeyDown (e) {
+      const value = this.parseKeyDown(e)
+
+      if (value == null) return
+
+      this.setInternalValue(value)
+    },
+    onKeyUp () {
+      this.keyPressed = 0
+    },
+    onSliderClick (e) {
+      this.onMouseMove(e)
+      this.$emit('input', this.internalValue)
+    },
+    parseKeyDown (e, value = this.internalValue) {
+      if (this.disabled) return
+
       const { pageup, pagedown, end, home, left, right, down, up } = keyCodes
 
-      if (this.disabled ||
-        ![pageup, pagedown, end, home, left, right, down, up].includes(e.keyCode)
-      ) return
+      if (![pageup, pagedown, end, home, left, right, down, up].includes(e.keyCode)) return
 
       e.preventDefault()
       const step = this.stepNumeric
       const steps = (this.max - this.min) / step
-      let value = this.internalValue
-      if (e.keyCode === left || e.keyCode === right || e.keyCode === down || e.keyCode === up) {
+      if ([left, right, down, up].includes(e.keyCode)) {
         this.keyPressed += 1
 
         const increase = this.$vuetify.rtl ? [left, up] : [right, up]
@@ -410,15 +423,7 @@ export default {
         value = value - (direction * step * (steps > 100 ? steps / 10 : 10))
       }
 
-      this.internalValue = value
-      this.$emit('change', this.internalValue)
-    },
-    onKeyUp () {
-      this.keyPressed = 0
-    },
-    onSliderClick (e) {
-      this.onMouseMove(e)
-      this.$emit('input', this.internalValue)
+      return value
     },
     roundValue (value) {
       // Format input value using the same number
@@ -431,6 +436,9 @@ export default {
       const newValue = 1 * Math.round(value / this.stepNumeric) * this.stepNumeric
 
       return parseFloat(Math.min(newValue, this.max).toFixed(decimals))
+    },
+    setInternalValue (value) {
+      this.internalValue = value
     }
   }
 }
