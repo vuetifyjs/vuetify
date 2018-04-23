@@ -59,7 +59,7 @@ exports[`VBtn.js should render component with loader and match snapshot 1`] = `
   <div class="v-btn__content">
   </div>
   <span class="v-btn__loading">
-    <div class="progress-circular progress-circular--indeterminate"
+    <div class="v-progress-circular v-progress-circular--indeterminate"
          style="height: 23px; width: 23px;"
     >
       <svg xmlns="http://www.w3.org/2000/svg"
@@ -72,11 +72,11 @@ exports[`VBtn.js should render component with loader and match snapshot 1`] = `
                 stroke-width="3.8095238095238093"
                 stroke-dasharray="125.664"
                 stroke-dashoffset="125.66370614359172px"
-                class="progress-circular__overlay"
+                class="v-progress-circular__overlay"
         >
         </circle>
       </svg>
-      <div class="progress-circular__info">
+      <div class="v-progress-circular__info">
       </div>
     </div>
   </span>

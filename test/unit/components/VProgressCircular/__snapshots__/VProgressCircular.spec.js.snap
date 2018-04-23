@@ -2,7 +2,7 @@
 
 exports[`VProgressCircular.js should render component and match snapshot 1`] = `
 
-<div class="progress-circular"
+<div class="v-progress-circular"
      style="height: 32px; width: 32px;"
 >
   <svg xmlns="http://www.w3.org/2000/svg"
@@ -15,7 +15,7 @@ exports[`VProgressCircular.js should render component and match snapshot 1`] = `
             stroke-width="5.714285714285714"
             stroke-dasharray="125.664"
             stroke-dashoffset="0"
-            class="progress-circular__underlay"
+            class="v-progress-circular__underlay"
     >
     </circle>
     <circle fill="transparent"
@@ -25,11 +25,11 @@ exports[`VProgressCircular.js should render component and match snapshot 1`] = `
             stroke-width="5.714285714285714"
             stroke-dasharray="125.664"
             stroke-dashoffset="84.19468311620646px"
-            class="progress-circular__overlay"
+            class="v-progress-circular__overlay"
     >
     </circle>
   </svg>
-  <div class="progress-circular__info">
+  <div class="v-progress-circular__info">
     <span>
       content
     </span>
@@ -40,7 +40,7 @@ exports[`VProgressCircular.js should render component and match snapshot 1`] = `
 
 exports[`VProgressCircular.js should render component with button prop and match snapshot 1`] = `
 
-<div class="progress-circular progress-circular--button"
+<div class="v-progress-circular v-progress-circular--button"
      style="height: 40px; width: 40px;"
 >
   <svg xmlns="http://www.w3.org/2000/svg"
@@ -53,7 +53,7 @@ exports[`VProgressCircular.js should render component with button prop and match
             stroke-width="5.714285714285714"
             stroke-dasharray="125.664"
             stroke-dashoffset="0"
-            class="progress-circular__underlay"
+            class="v-progress-circular__underlay"
     >
     </circle>
     <circle fill="transparent"
@@ -63,11 +63,11 @@ exports[`VProgressCircular.js should render component with button prop and match
             stroke-width="5.714285714285714"
             stroke-dasharray="125.664"
             stroke-dashoffset="84.19468311620646px"
-            class="progress-circular__overlay"
+            class="v-progress-circular__overlay"
     >
     </circle>
   </svg>
-  <div class="progress-circular__info">
+  <div class="v-progress-circular__info">
   </div>
 </div>
 
@@ -75,7 +75,7 @@ exports[`VProgressCircular.js should render component with button prop and match
 
 exports[`VProgressCircular.js should render component with color prop and match snapshot 1`] = `
 
-<div class="progress-circular orange--text text--lighten-1"
+<div class="v-progress-circular orange--text text--lighten-1"
      style="height: 32px; width: 32px;"
 >
   <svg xmlns="http://www.w3.org/2000/svg"
@@ -88,7 +88,7 @@ exports[`VProgressCircular.js should render component with color prop and match 
             stroke-width="5.714285714285714"
             stroke-dasharray="125.664"
             stroke-dashoffset="0"
-            class="progress-circular__underlay"
+            class="v-progress-circular__underlay"
     >
     </circle>
     <circle fill="transparent"
@@ -98,11 +98,11 @@ exports[`VProgressCircular.js should render component with color prop and match 
             stroke-width="5.714285714285714"
             stroke-dasharray="125.664"
             stroke-dashoffset="84.19468311620646px"
-            class="progress-circular__overlay"
+            class="v-progress-circular__overlay"
     >
     </circle>
   </svg>
-  <div class="progress-circular__info">
+  <div class="v-progress-circular__info">
   </div>
 </div>
 
@@ -110,7 +110,7 @@ exports[`VProgressCircular.js should render component with color prop and match 
 
 exports[`VProgressCircular.js should render component with fill prop and match snapshot 1`] = `
 
-<div class="progress-circular"
+<div class="v-progress-circular"
      style="height: 32px; width: 32px;"
 >
   <svg xmlns="http://www.w3.org/2000/svg"
@@ -123,7 +123,7 @@ exports[`VProgressCircular.js should render component with fill prop and match s
             stroke-width="5.714285714285714"
             stroke-dasharray="125.664"
             stroke-dashoffset="0"
-            class="progress-circular__underlay"
+            class="v-progress-circular__underlay"
     >
     </circle>
     <circle fill="transparent"
@@ -133,11 +133,11 @@ exports[`VProgressCircular.js should render component with fill prop and match s
             stroke-width="5.714285714285714"
             stroke-dasharray="125.664"
             stroke-dashoffset="84.19468311620646px"
-            class="progress-circular__overlay"
+            class="v-progress-circular__overlay"
     >
     </circle>
   </svg>
-  <div class="progress-circular__info">
+  <div class="v-progress-circular__info">
   </div>
 </div>
 
@@ -145,7 +145,7 @@ exports[`VProgressCircular.js should render component with fill prop and match s
 
 exports[`VProgressCircular.js should render component with indeterminate prop and match snapshot 1`] = `
 
-<div class="progress-circular progress-circular--indeterminate"
+<div class="v-progress-circular v-progress-circular--indeterminate"
      style="height: 32px; width: 32px;"
 >
   <svg xmlns="http://www.w3.org/2000/svg"
@@ -158,11 +158,11 @@ exports[`VProgressCircular.js should render component with indeterminate prop an
             stroke-width="5.714285714285714"
             stroke-dasharray="125.664"
             stroke-dashoffset="125.66370614359172px"
-            class="progress-circular__overlay"
+            class="v-progress-circular__overlay"
     >
     </circle>
   </svg>
-  <div class="progress-circular__info">
+  <div class="v-progress-circular__info">
   </div>
 </div>
 
@@ -170,7 +170,7 @@ exports[`VProgressCircular.js should render component with indeterminate prop an
 
 exports[`VProgressCircular.js should render component with rotate prop and match snapshot 1`] = `
 
-<div class="progress-circular"
+<div class="v-progress-circular"
      style="height: 32px; width: 32px;"
 >
   <svg xmlns="http://www.w3.org/2000/svg"
@@ -183,7 +183,7 @@ exports[`VProgressCircular.js should render component with rotate prop and match
             stroke-width="5.714285714285714"
             stroke-dasharray="125.664"
             stroke-dashoffset="0"
-            class="progress-circular__underlay"
+            class="v-progress-circular__underlay"
     >
     </circle>
     <circle fill="transparent"
@@ -193,11 +193,11 @@ exports[`VProgressCircular.js should render component with rotate prop and match
             stroke-width="5.714285714285714"
             stroke-dasharray="125.664"
             stroke-dashoffset="84.19468311620646px"
-            class="progress-circular__overlay"
+            class="v-progress-circular__overlay"
     >
     </circle>
   </svg>
-  <div class="progress-circular__info">
+  <div class="v-progress-circular__info">
   </div>
 </div>
 
@@ -205,7 +205,7 @@ exports[`VProgressCircular.js should render component with rotate prop and match
 
 exports[`VProgressCircular.js should render component with size prop and match snapshot 1`] = `
 
-<div class="progress-circular"
+<div class="v-progress-circular"
      style="height: 17px; width: 17px;"
 >
   <svg xmlns="http://www.w3.org/2000/svg"
@@ -218,7 +218,7 @@ exports[`VProgressCircular.js should render component with size prop and match s
             stroke-width="12.307692307692308"
             stroke-dasharray="125.664"
             stroke-dashoffset="0"
-            class="progress-circular__underlay"
+            class="v-progress-circular__underlay"
     >
     </circle>
     <circle fill="transparent"
@@ -228,11 +228,11 @@ exports[`VProgressCircular.js should render component with size prop and match s
             stroke-width="12.307692307692308"
             stroke-dasharray="125.664"
             stroke-dashoffset="84.19468311620646px"
-            class="progress-circular__overlay"
+            class="v-progress-circular__overlay"
     >
     </circle>
   </svg>
-  <div class="progress-circular__info">
+  <div class="v-progress-circular__info">
   </div>
 </div>
 
@@ -240,7 +240,7 @@ exports[`VProgressCircular.js should render component with size prop and match s
 
 exports[`VProgressCircular.js should render component with width prop and match snapshot 1`] = `
 
-<div class="progress-circular"
+<div class="v-progress-circular"
      style="height: 32px; width: 32px;"
 >
   <svg xmlns="http://www.w3.org/2000/svg"
@@ -253,7 +253,7 @@ exports[`VProgressCircular.js should render component with width prop and match 
             stroke-width="27.36842105263158"
             stroke-dasharray="125.664"
             stroke-dashoffset="0"
-            class="progress-circular__underlay"
+            class="v-progress-circular__underlay"
     >
     </circle>
     <circle fill="transparent"
@@ -263,11 +263,11 @@ exports[`VProgressCircular.js should render component with width prop and match 
             stroke-width="27.36842105263158"
             stroke-dasharray="125.664"
             stroke-dashoffset="84.19468311620646px"
-            class="progress-circular__overlay"
+            class="v-progress-circular__overlay"
     >
     </circle>
   </svg>
-  <div class="progress-circular__info">
+  <div class="v-progress-circular__info">
   </div>
 </div>
 

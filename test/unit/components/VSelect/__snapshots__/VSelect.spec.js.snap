@@ -44,10 +44,10 @@ exports[`VSelect should render buttons correctly when using items array with seg
              style="display: none;"
       >
     </div>
-    <div class="menu"
+    <div class="v-menu"
          style="display: inline-block;"
     >
-      <div class="menu__content menu__content--select  menu__content--dropdown"
+      <div class="v-menu__content menu__content--select  menu__content--dropdown"
            style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; z-index: 0; display: none;"
       >
         <div class="v-card"
@@ -99,10 +99,10 @@ exports[`VSelect should render buttons correctly when using slot with segmented 
              style="display: none;"
       >
     </div>
-    <div class="menu"
+    <div class="v-menu"
          style="display: inline-block;"
     >
-      <div class="menu__content menu__content--select  menu__content--dropdown"
+      <div class="v-menu__content menu__content--select  menu__content--dropdown"
            style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; z-index: 0; display: none;"
       >
         <div class="v-card"
@@ -154,10 +154,10 @@ exports[`VSelect should render v-select correctly when not using scope slot 1`] 
              style="display: none;"
       >
     </div>
-    <div class="menu"
+    <div class="v-menu"
          style="display: inline-block;"
     >
-      <div class="menu__content menu__content--select"
+      <div class="v-menu__content menu__content--select"
            style="max-height: 300px; min-width: 0px; max-width: auto; top: 18px; left: 0px; z-index: 0; display: none;"
       >
         <div class="v-card"
@@ -218,10 +218,10 @@ exports[`VSelect should render v-select correctly when not using v-list-tile in 
              style="display: none;"
       >
     </div>
-    <div class="menu"
+    <div class="v-menu"
          style="display: inline-block;"
     >
-      <div class="menu__content menu__content--select"
+      <div class="v-menu__content menu__content--select"
            style="max-height: 300px; min-width: 0px; max-width: auto; top: 18px; left: 0px; z-index: 0; display: none;"
       >
         <div class="v-card"
@@ -282,10 +282,10 @@ exports[`VSelect should render v-select correctly when using v-list-tile in item
              style="display: none;"
       >
     </div>
-    <div class="menu"
+    <div class="v-menu"
          style="display: inline-block;"
     >
-      <div class="menu__content menu__content--select"
+      <div class="v-menu__content menu__content--select"
            style="max-height: 300px; min-width: 0px; max-width: auto; top: 18px; left: 0px; z-index: 0; display: none;"
       >
         <div class="v-card"
