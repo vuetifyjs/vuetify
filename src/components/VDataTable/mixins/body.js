@@ -21,7 +21,6 @@ export default {
       if (this.isExpanded(props.item)) {
         const expand = this.noWrappedExpandSlots ? this.$scopedSlots.expand(props) : this.genWrappedExpandedRow(props)
 
-
         children.push(expand)
       }
 
