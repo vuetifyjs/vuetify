@@ -18,15 +18,8 @@ export default {
     activeThumb: null,
     lazyValue: !vm.value.length
       ? [0, 0]
-      : []
+      : vm.value
   }),
-
-  // watch: {
-
-  //   value (val) {
-  //     this.internalValue = Array.isArray(val) ? val : [parseFloat(val)]
-  //   }
-  // },
 
   props: {
     value: {
@@ -87,7 +80,7 @@ export default {
     getIndexOfClosestValue (arr, v) {
       return arr.indexOf(arr.reduce((prev, curr) => {
         return Math.abs((curr / 100) - v) < Math.abs((prev / 100) - v) ? curr : prev
-      }))
+      }, 0))
     },
     genInput () {
       return createRange(2).map(i => {
@@ -148,7 +141,7 @@ export default {
 
       VSlider.methods.onMouseDown.call(this, e)
     },
-    onMouseMove (e) {
+    onMouseMove (e, trackClick = false) {
       const {
         left: offsetLeft,
         width: trackWidth
@@ -158,7 +151,7 @@ export default {
 
       if (this.$vuetify.rtl) left = 1 - left
       if (clientX >= offsetLeft - 8 && clientX <= offsetLeft + trackWidth + 8) {
-        this.activeThumb = this.getIndexOfClosestValue(this.inputWidth, left)
+        if (trackClick) this.activeThumb = this.getIndexOfClosestValue(this.inputWidth, left)
 
         this.internalValue = this.internalValue.map((v, i) => {
           if (i === this.activeThumb) return parseFloat(this.min) + left * (this.max - this.min)
