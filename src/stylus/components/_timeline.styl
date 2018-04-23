@@ -1,0 +1,153 @@
+@import '../bootstrap'
+
+.v-timeline
+  list-style: none
+  padding: 24px 0 24px 0
+  position: relative
+  margin-top: 18px
+
+  &:before
+    top: 50px
+    bottom: 0
+    position: absolute
+    content: ' '
+    width: 2px
+    background-color: #E5E5E5
+    left: 50%
+
+  &--left:before
+    left: 95%
+
+  &--right:before
+    left: 5%
+
+  & > li
+    position: relative
+
+.v-timeline > li:before, .v-timeline > li:after
+  content: ' '
+  display: table
+
+.v-timeline > li:after
+  clear: both
+
+.v-timeline > li > .v-timeline__body
+  width: 45%
+  float: left
+  padding: 24px
+  margin-bottom: 18px
+  position: relative
+  border-radius: 4px
+
+  elevation(2)
+
+  &:before
+    position: absolute
+    top: 26px
+    right: -15px
+    display: inline-block
+    border-top: 15px solid transparent
+    border-left: 15px solid #e4e4e4
+    border-right: 0 solid #e4e4e4
+    border-bottom: 15px solid transparent
+    content: ' '
+
+  &:after
+    position: absolute
+    top: 27px
+    right: -14px
+    display: inline-block
+    border-top: 14px solid transparent
+    border-left: 14px solid #FFFFFF
+    border-right: 0 solid #FFFFFF
+    border-bottom: 14px solid transparent
+    content: ' '
+
+.v-timeline > li > .v-timeline__icon
+  width: 50px
+  height: 50px
+  line-height: 50px
+  text-align: center
+  position: absolute
+  top: 16px
+  left: 50%
+  margin-left: -24px
+  z-index: 2
+  border-top-right-radius: 50%
+  border-top-left-radius: 50%
+  border-bottom-right-radius: 50%
+  border-bottom-left-radius: 50%
+  background-color: currentColor
+
+.v-timeline--left > li > .v-timeline__icon
+  left: 95%
+
+.v-timeline--right > li > .v-timeline__icon
+  left: 5%
+
+.v-timeline > li.v-timeline-item:nth-child(odd) > .v-timeline__body
+  float: right
+
+  &:before
+    border-left-width: 0
+    border-right-width: 15px
+    left: -15px
+    right: auto
+
+  &:after
+    border-left-width: 0
+    border-right-width: 14px
+    left: -14px
+    right: auto
+
+.v-timeline--left > li.v-timeline-item:nth-child(n) > .v-timeline__body
+  width: 86%
+  float: left
+
+  &:before
+    border-right-width: 0
+    border-left-width: 15px
+    right: -15px
+    left: auto
+
+  &:after
+    border-right-width: 0
+    border-left-width: 14px
+    right: -14px
+    left: auto
+
+.v-timeline--right > li.v-timeline-item:nth-child(n) > .v-timeline__body
+  width: 86%
+  float: right
+
+@media $display-breakpoints.sm-and-down
+  .v-timeline:before
+    left: 5%
+
+  .v-timeline > li >
+    & .v-timeline__icon
+      left: 5%
+
+    & .v-timeline__body
+      float: right
+      width: 86%
+
+      &:before
+        border-left-width: 0
+        border-right-width: 15px
+        left: -15px
+        right: auto
+
+      &:after
+        border-left-width: 0
+        border-right-width: 14px
+        left: -14px
+        right: auto
+  
+  .v-timeline--left:before
+    left: 95%
+
+  .v-timeline--left > li >
+    & .v-timeline__icon
+      left: 95%
+    
