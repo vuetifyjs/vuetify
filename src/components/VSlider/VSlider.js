@@ -32,7 +32,7 @@ export default {
     defaultColor: 'primary',
     isActive: false,
     keyPressed: 0,
-    lazyValue: vm.value || 0
+    lazyValue: vm.value || Number(vm.min)
   }),
 
   props: {
@@ -53,8 +53,8 @@ export default {
     },
     ticks: {
       type: [Boolean, String],
-      default: null,
-      validator: v => !v || ['always', 'hover'].indexOf(v) > -1
+      default: false,
+      validator: v => typeof v === 'boolean' || ['', 'always', 'hover'].includes(v)
     },
     thumbColor: {
       type: String,
@@ -109,6 +109,8 @@ export default {
         // be selected with step
         const value = this.roundValue(Math.min(Math.max(val, min), max))
 
+        if (value === this.lazyValue) return
+
         this.lazyValue = value
 
         this.$emit('input', value)
@@ -121,7 +123,7 @@ export default {
     trackFillStyles () {
       return {
         transition: this.trackTransition,
-        width: `${this.internalValue}%`,
+        width: `${this.inputWidth}%`,
         [this.$vuetify.rtl ? 'right' : 'left']: 0
       }
     },
@@ -159,7 +161,7 @@ export default {
       val < this.internalValue && this.$emit('input', parseFloat(val))
     },
     value (val) {
-      this.lazyValue = val
+      this.internalValue = val
     }
   },
 
@@ -393,7 +395,6 @@ export default {
     },
     onSliderClick (e) {
       this.onMouseMove(e)
-      this.$emit('input', this.internalValue)
     },
     parseKeyDown (e, value = this.internalValue) {
       if (this.disabled) return
