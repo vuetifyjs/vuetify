@@ -308,4 +308,10 @@ test('VSlider.vue', ({ mount }) => {
 
     expect(warning).toHaveBeenTipped()
   })
+
+  it('should emit start and stop when mousedown and mouseup', () => {
+    const wrapper = mount(VSlider)
+
+    const input = wrapper.first('input')
+  })
 })

@@ -12,7 +12,11 @@ import VInput from '../VInput'
 import ClickOutside from '../../directives/click-outside'
 
 // Utilities
-import { addOnceEventListener, createRange, keyCodes, deepEqual } from '../../util/helpers'
+import {
+  addOnceEventListener,
+  createRange,
+  keyCodes
+} from '../../util/helpers'
 import { consoleWarn } from '../../util/console'
 
 export default {
@@ -28,7 +32,7 @@ export default {
     defaultColor: 'primary',
     isActive: false,
     keyPressed: 0,
-    lazyValue: typeof vm.value !== 'undefined' ? (Array.isArray(vm.value) ? vm.value : [vm.value]) : (vm.range ? [0, 0] : [0])
+    lazyValue: vm.value || 0
   }),
 
   props: {
@@ -49,8 +53,8 @@ export default {
     },
     ticks: {
       type: [Boolean, String],
-      default: false,
-      validator: value => value === false || value === true || value === 'always'
+      default: null,
+      validator: v => !v || ['always', 'hover'].indexOf(v) > -1
     },
     thumbColor: {
       type: String,
@@ -58,8 +62,7 @@ export default {
     },
     thumbLabel: {
       type: [Boolean, String],
-      default: false,
-      validator: value => value === false || value === true || value === 'always'
+      default: null
     },
     trackColor: {
       type: String,
@@ -80,7 +83,8 @@ export default {
       return !this.disabled && this.stepNumeric && !!this.ticks
     },
     showThumbLabel () {
-      return !this.disabled && !!this.thumbLabel
+      return !this.disabled &&
+        (!!this.thumbLabel || this.thumbLabel === '')
     },
     computedColor () {
       if (this.disabled) return null
@@ -93,7 +97,7 @@ export default {
       if (this.disabled || !this.isDirty) return null
       return this.validationState || this.thumbColor || this.color || this.defaultColor
     },
-    inputValue: {
+    internalValue: {
       get () {
         return this.lazyValue
       },
@@ -103,66 +107,59 @@ export default {
         // Round value to ensure the
         // entire slider range can
         // be selected with step
-        let value = val.map(v => this.roundValue(Math.min(Math.max(v, min), max)))
-
-        // Switch values if range and wrong order
-        if (this.range && (value[0] > value[1] || value[1] < value[0])) {
-          if (this.activeThumb !== null) this.activeThumb = this.activeThumb === 1 ? 0 : 1
-          value = [value[1], value[0]]
-        }
+        const value = this.roundValue(Math.min(Math.max(val, min), max))
 
         this.lazyValue = value
 
-        if (!deepEqual(value, this.value)) this.$emit('input', this.range ? value : value[0])
+        this.$emit('input', value)
         this.validate()
       }
     },
     stepNumeric () {
       return this.step > 0 ? parseFloat(this.step) : 1
     },
+    trackFillStyles () {
+      return {
+        transition: this.trackTransition,
+        width: `${this.internalValue}%`,
+        [this.$vuetify.rtl ? 'right' : 'left']: 0
+      }
+    },
     trackPadding () {
-      if (this.isActive || (this.range && this.isDirty)) return 0
+      if (this.isActive) return 0
 
-      return 6 + (this.disabled ? 3 : 0)
+      return 7 + (this.disabled ? 3 : 0)
     },
     trackStyles () {
       return {
-        transition: this.keyPressed >= 2 ? 'none' : '',
+        transition: this.trackTransition,
         [this.$vuetify.rtl ? 'right' : 'left']: `${this.trackPadding}px`,
-        width: `calc(100 - ${this.trackPadding}px)`
+        width: '100%'
       }
     },
-    trackFillStyles () {
-      const width = this.range ? Math.abs(this.inputWidth[0] - this.inputWidth[1]) : this.inputWidth[0]
-      return {
-        transition: this.keyPressed >= 2 ? 'none' : '',
-        width: `calc(${width}% - ${this.trackPadding}px)`,
-        [this.$vuetify.rtl ? 'right' : 'left']: this.range ? `${this.inputWidth[0]}%` : 0
-      }
+    trackTransition () {
+      return this.keyPressed >= 2 ? 'none' : ''
     },
     numTicks () {
       return Math.ceil((this.max - this.min) / this.stepNumeric)
     },
     inputWidth () {
-      return this.inputValue.map(v => (this.roundValue(v) - this.min) / (this.max - this.min) * 100)
+      return (this.roundValue(this.internalValue) - this.min) / (this.max - this.min) * 100
     },
     isDirty () {
-      return this.inputValue.some(v => v !== this.min)
+      return this.internalValue > this.min
     }
   },
 
   watch: {
-    isActive (val) {
-      this.isFocused = val
-    },
     min (val) {
-      val > this.inputValue && this.$emit('input', parseFloat(val))
+      val > this.internalValue && this.$emit('input', parseFloat(val))
     },
     max (val) {
-      val < this.inputValue && this.$emit('input', parseFloat(val))
+      val < this.internalValue && this.$emit('input', parseFloat(val))
     },
     value (val) {
-      this.inputValue = Array.isArray(val) ? val : [parseFloat(val)]
+      this.lazyValue = val
     }
   },
 
@@ -173,12 +170,6 @@ export default {
   },
 
   methods: {
-    createThumbStyles (i) {
-      return {
-        transition: this.keyPressed >= 2 ? 'none' : '',
-        left: `${this.$vuetify.rtl ? 100 - this.inputWidth[i] : this.inputWidth[i]}%`
-      }
-    },
     genDefaultSlot () {
       const children = [this.genLabel()]
       const slider = this.genSlider()
@@ -203,30 +194,44 @@ export default {
 
       return this.$createElement(VLabel, data, this.$slots.label || this.label)
     },
+    genListeners () {
+      return Object.assign({}, {
+        blur: this.onBlur,
+        click: this.onSliderClick,
+        focus: this.onFocus,
+        keydown: this.onKeyDown,
+        keyup: this.onKeyUp
+      }, this.$listeners)
+    },
     genInput () {
-      return null
+      return this.$createElement('input', {
+        attrs: {
+          'aria-label': this.label,
+          name: this.name,
+          role: 'slider',
+          tabindex: this.disabled ? -1 : undefined,
+          type: 'slider',
+          value: this.internalValue
+        },
+        on: this.genListeners(),
+        ref: 'input'
+      })
     },
     genSlider () {
       return this.$createElement('div', {
         staticClass: 'v-slider',
-        attrs: {
-          role: 'slider',
-          tabindex: this.disabled ? -1 : this.tabindex
+        'class': {
+          'v-slider--is-active': this.isActive
         },
-        on: Object.assign({}, {
-          click: this.onSliderMove,
-          keydown: this.onKeyDown,
-          keyup: this.onKeyUp
-        }, this.$listeners),
         directives: [{
           name: 'click-outside',
-          value: () => (this.isActive = false)
+          value: this.onBlur
         }]
       }, [
         this.genInput(),
         this.genTrackContainer(),
         this.genSteps(),
-        ...this.genThumbs()
+        this.genThumbContainer()
       ])
     },
     genSteps () {
@@ -251,41 +256,40 @@ export default {
         staticClass: 'v-slider__ticks-container'
       }, ticks)
     },
-    genThumbs () {
-      const thumbs = createRange(this.range ? 2 : 1)
-
-      return thumbs.map(i => this.genThumbContainer(i))
-    },
-    genThumbContainer (i) {
+    genThumbContainer () {
       const children = []
       children.push(this.$createElement('div', {
         staticClass: 'v-slider__thumb',
-        'class': {
-          ...this.addBackgroundColorClassChecks({}, this.computedThumbColor),
-          'v-slider__thumb--is-active': this.activeThumb === i
-        }
+        'class': this.addBackgroundColorClassChecks({}, this.computedThumbColor)
       }))
 
-      this.showThumbLabel && children.push(this.genThumbLabel(i))
+      this.showThumbLabel && children.push(this.genThumbLabel())
 
-      const drag = e => this.onMouseDown(e, i)
+      const drag = e => {
+        this.isActive = true
+
+        // Wait for data to persist
+        this.$nextTick(() => this.onMouseDown(e))
+      }
 
       return this.$createElement('div', {
         staticClass: 'v-slider__thumb-container',
-        'class': {
-          'v-slider__thumb-container-label': this.showThumbLabel
+        'class': this.addTextColorClassChecks({
+          'v-slider__thumb-container--is-active': this.isFocused || this.isActive,
+          'v-slider__thumb-container--show-label': this.showThumbLabel
+        }, this.computedThumbColor),
+        style: {
+          transition: this.trackTransition,
+          left: `${this.$vuetify.rtl ? 100 - this.inputWidth : this.inputWidth}%`
         },
-        style: this.createThumbStyles(i),
         on: {
           touchstart: drag,
           mousedown: drag
         }
       }, children)
     },
-    genThumbLabel (i) {
-      const content = this.$scopedSlots['thumb-label']
-        ? this.$scopedSlots['thumb-label']({ index: i, value: this.inputValue[i] })
-        : this.$createElement('span', {}, this.inputValue[i])
+    genThumbLabel () {
+      const content = this.getLabel()
 
       return this.$createElement(VScaleTransition, {
         props: { origin: 'bottom center' }
@@ -295,7 +299,7 @@ export default {
           directives: [
             {
               name: 'show',
-              value: (this.isActive && this.activeThumb === i) || this.thumbLabel === 'always'
+              value: this.isFocused || this.isActive || this.thumbLabel === 'always'
             }
           ]
         }, [
@@ -321,19 +325,28 @@ export default {
       ]
 
       return this.$createElement('div', {
-        staticClass: 'v-slider__track__container', ref: 'track'
+        staticClass: 'v-slider__track__container',
+        ref: 'track'
       }, children)
     },
-    getIndexOfClosestValue (arr, v) {
-      return arr.indexOf(arr.reduce((prev, curr) => {
-        return Math.abs((curr / 100) - v) < Math.abs((prev / 100) - v) ? curr : prev
-      }))
+    getLabel () {
+      return this.$scopedSlots['thumb-label']
+        ? this.$scopedSlots['thumb-label']({ value: this.internalValue })
+        : this.$createElement('span', {}, this.internalValue)
     },
-    onMouseDown (e, i) {
+    onBlur (e) {
+      this.isActive = false
+      this.isFocused = false
+      this.$emit('blur', e)
+    },
+    onFocus (e) {
+      this.isFocused = true
+      this.$emit('focus', e)
+    },
+    onMouseDown (e) {
       this.keyPressed = 2
       const options = { passive: true }
       this.isActive = true
-      this.activeThumb = i
 
       if ('touches' in e) {
         this.app.addEventListener('touchmove', this.onMouseMove, options)
@@ -343,7 +356,7 @@ export default {
         addOnceEventListener(this.app, 'mouseup', this.onMouseUp)
       }
 
-      this.$emit('start', this.inputValue)
+      this.$emit('start', this.internalValue)
     },
     onMouseUp () {
       this.keyPressed = 0
@@ -352,33 +365,33 @@ export default {
       this.app.removeEventListener('touchmove', this.onMouseMove, options)
       this.app.removeEventListener('mousemove', this.onMouseMove, options)
 
-      this.$emit('end', this.inputValue)
+      this.$emit('end', this.internalValue)
     },
-    onMouseMove (e, isTrackClick = false) {
+    onMouseMove (e) {
       const {
         left: offsetLeft,
         width: trackWidth
       } = this.$refs.track.getBoundingClientRect()
       const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX
       let left = Math.min(Math.max((clientX - offsetLeft) / trackWidth, 0), 1)
-      if (this.$vuetify.rtl) left = 1 - left
-      if (clientX >= offsetLeft - 8 && clientX <= offsetLeft + trackWidth + 8) {
-        if (isTrackClick) this.activeThumb = this.getIndexOfClosestValue(this.inputWidth, left)
 
-        this.inputValue = this.inputValue.map((v, i) => {
-          if (i === this.activeThumb) return parseFloat(this.min) + left * (this.max - this.min)
-          else return v
-        })
+      if (this.$vuetify.rtl) left = 1 - left
+
+      if (clientX >= offsetLeft - 8 && clientX <= offsetLeft + trackWidth + 8) {
+        this.internalValue = parseFloat(this.min) + left * (this.max - this.min)
       }
     },
     onKeyDown (e) {
       const { pageup, pagedown, end, home, left, right, down, up } = keyCodes
-      if (this.disabled || ![pageup, pagedown, end, home, left, right, down, up].includes(e.keyCode)) return
+
+      if (this.disabled ||
+        ![pageup, pagedown, end, home, left, right, down, up].includes(e.keyCode)
+      ) return
 
       e.preventDefault()
       const step = this.stepNumeric
       const steps = (this.max - this.min) / step
-      let value = this.range ? this.inputValue[this.activeThumb] : this.inputValue[0]
+      let value = this.internalValue
       if (e.keyCode === left || e.keyCode === right || e.keyCode === down || e.keyCode === up) {
         this.keyPressed += 1
 
@@ -397,20 +410,15 @@ export default {
         value = value - (direction * step * (steps > 100 ? steps / 10 : 10))
       }
 
-      this.inputValue = this.inputValue.map((v, i) => {
-        if (i === this.activeThumb) return value
-        else return v
-      })
-      this.$emit('change', this.inputValue)
+      this.internalValue = value
+      this.$emit('change', this.internalValue)
     },
     onKeyUp () {
       this.keyPressed = 0
     },
-    onSliderMove (e) {
-      if (!this.isActive) {
-        this.onMouseMove(e, true)
-        this.$emit('change', this.inputValue)
-      }
+    onSliderClick (e) {
+      this.onMouseMove(e)
+      this.$emit('input', this.internalValue)
     },
     roundValue (value) {
       // Format input value using the same number
