@@ -137,11 +137,6 @@ export default {
         return thumbContainer
       })
     },
-    onBlur (e) {
-      if (this.activeThumb === 1) {
-        VSlider.methods.onBlur.call(this, e)
-      }
-    },
     onClick (e) {
       if (!this.isActive) {
         this.onMouseMove(e, true)
