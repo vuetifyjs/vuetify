@@ -15,7 +15,8 @@ import ClickOutside from '../../directives/click-outside'
 import {
   addOnceEventListener,
   createRange,
-  keyCodes
+  keyCodes,
+  deepEqual
 } from '../../util/helpers'
 import { consoleWarn } from '../../util/console'
 
@@ -32,7 +33,8 @@ export default {
     defaultColor: 'primary',
     isActive: false,
     keyPressed: 0,
-    lazyValue: vm.value || Number(vm.min)
+    lazyValue: vm.value || Number(vm.min),
+    oldValue: null
   }),
 
   props: {
@@ -54,7 +56,7 @@ export default {
     ticks: {
       type: [Boolean, String],
       default: false,
-      validator: v => typeof v === 'boolean' || ['', 'always', 'hover'].includes(v)
+      validator: v => typeof v === 'boolean' || v === 'always'
     },
     thumbColor: {
       type: String,
@@ -62,13 +64,14 @@ export default {
     },
     thumbLabel: {
       type: [Boolean, String],
-      default: null
+      default: null,
+      validator: v => typeof v === 'boolean' || v === 'always'
     },
     trackColor: {
       type: String,
       default: null
     },
-    value: [Array, Number, String]
+    value: [Number, String]
   },
 
   computed: {
@@ -203,7 +206,7 @@ export default {
         focus: this.onFocus,
         keydown: this.onKeyDown,
         keyup: this.onKeyUp
-      }, this.$listeners)
+      })
     },
     genInput () {
       return this.$createElement('input', {
@@ -229,12 +232,24 @@ export default {
           name: 'click-outside',
           value: this.onBlur
         }]
-      }, [
+      }, this.genChildren())
+    },
+    genChildren () {
+      return [
         this.genInput(),
         this.genTrackContainer(),
         this.genSteps(),
-        this.genThumbContainer()
-      ])
+        this.genThumbContainer(
+          this.internalValue,
+          this.inputWidth,
+          this.isFocused || this.isActive,
+          e => {
+            this.isActive = true
+            // Wait for data to persist
+            this.onMouseDown(e)
+          }
+        )
+      ]
     },
     genSteps () {
       if (!this.step || !this.showTicks) return null
@@ -258,41 +273,35 @@ export default {
         staticClass: 'v-slider__ticks-container'
       }, ticks)
     },
-    genThumbContainer () {
-      const children = []
-      children.push(this.$createElement('div', {
+    genThumb () {
+      return this.$createElement('div', {
         staticClass: 'v-slider__thumb',
         'class': this.addBackgroundColorClassChecks({}, this.computedThumbColor)
-      }))
+      })
+    },
+    genThumbContainer (value, valueWidth, isActive, onDrag) {
+      const children = [this.genThumb()]
 
-      this.showThumbLabel && children.push(this.genThumbLabel())
-
-      const drag = e => {
-        this.isActive = true
-
-        // Wait for data to persist
-        this.$nextTick(() => this.onMouseDown(e))
-      }
+      const thumbLabelContent = this.getLabel(value)
+      this.showThumbLabel && children.push(this.genThumbLabel(thumbLabelContent))
 
       return this.$createElement('div', {
         staticClass: 'v-slider__thumb-container',
         'class': this.addTextColorClassChecks({
-          'v-slider__thumb-container--is-active': this.isFocused || this.isActive,
+          'v-slider__thumb-container--is-active': isActive,
           'v-slider__thumb-container--show-label': this.showThumbLabel
         }, this.computedThumbColor),
         style: {
           transition: this.trackTransition,
-          left: `${this.$vuetify.rtl ? 100 - this.inputWidth : this.inputWidth}%`
+          left: `${this.$vuetify.rtl ? 100 - valueWidth : valueWidth}%`
         },
         on: {
-          touchstart: drag,
-          mousedown: drag
+          touchstart: onDrag,
+          mousedown: onDrag
         }
       }, children)
     },
-    genThumbLabel () {
-      const content = this.getLabel()
-
+    genThumbLabel (content) {
       return this.$createElement(VScaleTransition, {
         props: { origin: 'bottom center' }
       }, [
@@ -331,10 +340,10 @@ export default {
         ref: 'track'
       }, children)
     },
-    getLabel () {
+    getLabel (value) {
       return this.$scopedSlots['thumb-label']
-        ? this.$scopedSlots['thumb-label']({ value: this.internalValue })
-        : this.$createElement('span', {}, this.internalValue)
+        ? this.$scopedSlots['thumb-label']({ value })
+        : this.$createElement('span', {}, value)
     },
     onBlur (e) {
       this.isActive = false
@@ -346,6 +355,7 @@ export default {
       this.$emit('focus', e)
     },
     onMouseDown (e) {
+      this.oldValue = this.internalValue
       this.keyPressed = 2
       const options = { passive: true }
       this.isActive = true
@@ -368,8 +378,33 @@ export default {
       this.app.removeEventListener('mousemove', this.onMouseMove, options)
 
       this.$emit('end', this.internalValue)
+      if (!deepEqual(this.oldValue, this.internalValue)) {
+        this.$emit('change', this.internalValue)
+      }
     },
     onMouseMove (e) {
+      const { value, isInsideTrack } = this.parseMouseMove(e)
+
+      if (isInsideTrack) {
+        this.setInternalValue(value)
+      }
+    },
+    onKeyDown (e) {
+      const value = this.parseKeyDown(e)
+
+      if (value == null) return
+
+      this.setInternalValue(value)
+      this.$emit('change', value)
+    },
+    onKeyUp () {
+      this.keyPressed = 0
+    },
+    onSliderClick (e) {
+      this.onMouseMove(e)
+      this.$emit('change', this.internalValue)
+    },
+    parseMouseMove (e) {
       const {
         left: offsetLeft,
         width: trackWidth
@@ -379,22 +414,10 @@ export default {
 
       if (this.$vuetify.rtl) left = 1 - left
 
-      if (clientX >= offsetLeft - 8 && clientX <= offsetLeft + trackWidth + 8) {
-        this.internalValue = parseFloat(this.min) + left * (this.max - this.min)
-      }
-    },
-    onKeyDown (e) {
-      const value = this.parseKeyDown(e)
+      const isInsideTrack = clientX >= offsetLeft - 8 && clientX <= offsetLeft + trackWidth + 8
+      const value = parseFloat(this.min) + left * (this.max - this.min)
 
-      if (value == null) return
-
-      this.setInternalValue(value)
-    },
-    onKeyUp () {
-      this.keyPressed = 0
-    },
-    onSliderClick (e) {
-      this.onMouseMove(e)
+      return { value, isInsideTrack }
     },
     parseKeyDown (e, value = this.internalValue) {
       if (this.disabled) return

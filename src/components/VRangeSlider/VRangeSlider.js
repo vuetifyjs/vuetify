@@ -78,9 +78,8 @@ export default {
 
   methods: {
     getIndexOfClosestValue (arr, v) {
-      return arr.indexOf(arr.reduce((prev, curr) => {
-        return Math.abs((curr / 100) - v) < Math.abs((prev / 100) - v) ? curr : prev
-      }, 0))
+      if (Math.abs(arr[0] - v) < Math.abs(arr[1] - v)) return 0
+      else return 1
     },
     genInput () {
       return createRange(2).map(i => {
@@ -96,79 +95,49 @@ export default {
         return input
       })
     },
-    // We will manually general this
-    getLabel () {
-      return null
+    genChildren () {
+      return [
+        this.genInput(),
+        this.genTrackContainer(),
+        this.genSteps(),
+        createRange(2).map(i => {
+          const value = this.internalValue[i]
+          const onDrag = e => {
+            this.isActive = true
+            this.activeThumb = i
+            this.onMouseDown(e)
+          }
+          const valueWidth = this.inputWidth[i]
+          const isActive = (this.isFocused || this.isActive) && this.activeThumb === i
+
+          return this.genThumbContainer(value, valueWidth, isActive, onDrag)
+        })
+      ]
     },
-    genThumbContainer () {
-      return createRange(2).map(i => {
-        const drag = e => this.onMouseDown(e, i)
-        const left = this.$vuetify.rtl ? 100 - this.inputWidth[i] : this.inputWidth[i]
-        const isActive = (this.isFocused && this.activeThumb === i) ||
-          this.thumbLabel === 'always'
-        const thumbContainer = VSlider.methods.genThumbContainer.call(this)
-
-        if (thumbContainer.children.length > 1) {
-          const transition = thumbContainer.children[1]
-          const label = transition.componentOptions.children[0]
-          const content = this.$scopedSlots['thumb-label']
-            ? this.$scopedSlots['thumb-label']({ index: i, value: this.internalValue[i] })
-            : this.$createElement('span', {}, this.internalValue[i])
-
-          // Dynamically generate content
-          label.children[0].children.push(content)
-          // Re-assign directive value for show
-          label.data.directives[0].value = isActive
-        }
-
-        thumbContainer.data.on.touchstart = drag
-        thumbContainer.data.on.mousedown = drag
-
-        thumbContainer.data.class['v-slider__thumb-container--is-active'] = isActive
-        thumbContainer.data.style.left = `${left}%`
-
-        return thumbContainer
-      })
-    },
-    onClick (e) {
+    onSliderClick (e) {
       if (!this.isActive) {
         this.onMouseMove(e, true)
-        this.$emit('input', this.internalValue)
+        this.$emit('change', this.internalValue)
       }
-    },
-    onMouseDown (e, i) {
-      this.activeThumb = i
-
-      VSlider.methods.onMouseDown.call(this, e)
     },
     onMouseMove (e, trackClick = false) {
-      const {
-        left: offsetLeft,
-        width: trackWidth
-      } = this.$refs.track.getBoundingClientRect()
-      const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX
-      let left = Math.min(Math.max((clientX - offsetLeft) / trackWidth, 0), 1)
+      const { value, isInsideTrack } = this.parseMouseMove(e)
 
-      if (this.$vuetify.rtl) left = 1 - left
-      if (clientX >= offsetLeft - 8 && clientX <= offsetLeft + trackWidth + 8) {
-        if (trackClick) this.activeThumb = this.getIndexOfClosestValue(this.inputWidth, left)
+      if (isInsideTrack) {
+        if (trackClick) this.activeThumb = this.getIndexOfClosestValue(this.internalValue, value)
 
-        this.internalValue = this.internalValue.map((v, i) => {
-          if (i === this.activeThumb) return parseFloat(this.min) + left * (this.max - this.min)
-          else return v
-        })
+        this.setInternalValue(value)
       }
     },
-    parseKeyDown (e) {
-      const value = VSlider.methods.parseKeyDown.call(
-        this,
-        e,
-        this.internalValue[this.activeThumb]
-      )
+    onKeyDown (e) {
+      const value = this.parseKeyDown(e, this.internalValue[this.activeThumb])
 
       if (value == null) return
 
-      return this.internalValue.map((v, i) => {
+      this.setInternalValue(value)
+    },
+    setInternalValue (value) {
+      this.internalValue = this.internalValue.map((v, i) => {
         if (i === this.activeThumb) return value
         else return Number(v)
       })
