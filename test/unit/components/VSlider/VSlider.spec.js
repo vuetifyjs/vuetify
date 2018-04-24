@@ -11,13 +11,21 @@ test('VSlider.vue', ({ mount }) => {
     expect(warning).toHaveBeenTipped()
   })
 
-  it('should render component with ticks and match a snapshot', () => {
+  it('should render component with ticks and match a snapshot', async () => {
     const wrapper = mount(VSlider, {
       propsData: {
-        ticks: true,
+        ticks: 'yes',
         step: 25
       }
     })
+
+    expect('Invalid prop: custom validator check failed for prop "ticks"').toHaveBeenWarned()
+
+    wrapper.setProps({ ticks: true })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({ ticks: 'always' })
 
     expect(wrapper.html()).toMatchSnapshot()
     expect(warning).toHaveBeenTipped()
@@ -26,9 +34,17 @@ test('VSlider.vue', ({ mount }) => {
   it('should render component with thumbLabel and match a snapshot', () => {
     const wrapper = mount(VSlider, {
       propsData: {
-        thumbLabel: true
+        thumbLabel: 'true'
       }
     })
+
+    expect('Invalid prop: custom validator check failed for prop "thumbLabel"').toHaveBeenWarned()
+
+    wrapper.setProps({ thumbLabel: true })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({ thumbLabel: 'always' })
 
     expect(wrapper.html()).toMatchSnapshot()
     expect(warning).toHaveBeenTipped()
@@ -41,7 +57,7 @@ test('VSlider.vue', ({ mount }) => {
       }
     })
 
-    const slider = wrapper.first('.v-slider')
+    const slider = wrapper.first('input')
 
     expect(slider.element.getAttribute('tabindex')).toBe('-1')
     expect(warning).toHaveBeenTipped()
@@ -92,24 +108,6 @@ test('VSlider.vue', ({ mount }) => {
     expect(warning).toHaveBeenTipped()
   })
 
-  it('should be focused when active', async () => {
-    const wrapper = mount(VSlider, {
-      propsData: {
-        value: 5,
-        min: 0,
-        max: 10
-      }
-    })
-
-    wrapper.setData({ isActive: true })
-
-    await wrapper.vm.$nextTick()
-
-    expect(wrapper.vm.isFocused).toBe(true)
-    expect(wrapper.html()).toMatchSnapshot()
-    expect(warning).toHaveBeenTipped()
-  })
-
   it('should react to keydown event', async () => {
     const wrapper = mount(VSlider, {
       propsData: {
@@ -120,7 +118,7 @@ test('VSlider.vue', ({ mount }) => {
     const input = jest.fn()
     wrapper.vm.$on('input', input)
 
-    const slider = wrapper.first('.v-slider')
+    const slider = wrapper.first('input')
 
     slider.trigger('keydown.space')
     expect(input).not.toBeCalled()
@@ -162,34 +160,6 @@ test('VSlider.vue', ({ mount }) => {
     expect(warning).toHaveBeenTipped()
   })
 
-  it('should have the correct track padding', () => {
-    const wrapper = mount(VSlider)
-
-    expect(wrapper.vm.trackPadding).toBe(6)
-
-    wrapper.setData({ isActive: true })
-
-    expect(wrapper.vm.trackPadding).toBe(9)
-
-    wrapper.setData({ disabled: true })
-
-    expect(wrapper.vm.trackPadding).toBe(6)
-
-    wrapper.setProps({ thumbLabel: true })
-
-    expect(wrapper.vm.trackPadding).toBe(0)
-
-    wrapper.setData({ isActive: false })
-
-    expect(wrapper.vm.trackPadding).toBe(6)
-
-    wrapper.setProps({ thumbLabel: false })
-
-    expect(wrapper.vm.trackPadding).toBe(6)
-
-    expect(warning).toHaveBeenTipped()
-  })
-
   it('should add for to label', () => {
     const wrapper = mount(VSlider, {
       attachToDocument: true,
@@ -203,33 +173,48 @@ test('VSlider.vue', ({ mount }) => {
 
     expect(label.element.getAttribute('for')).toBe('foo')
 
+    const wrapper2 = mount(VSlider, {
+      attachToDocument: true,
+      propsData: {
+        label: 'bar'
+      }
+    })
+
+    const label2 = wrapper2.first('.v-label')
+
+    expect(label2.element.getAttribute('for')).toBe(null)
+
     expect(warning).toHaveBeenTipped()
   })
 
   it('should deactivate', async () => {
+    const el = document.createElement('div')
+    el.setAttribute('data-app', true)
+    document.body.appendChild(el)
+
     const wrapper = mount(VSlider, {
       attachToDocument: true
     })
 
-    const slider = wrapper.first('.v-slider__thumb-container')
+    const container = wrapper.first('.v-slider__thumb-container')
 
     expect(wrapper.vm.isActive).toBe(false)
 
-    slider.trigger('mousedown')
+    container.trigger('mousedown')
 
     expect(wrapper.vm.isActive).toBe(true)
 
-    expect(warning).toHaveBeenTipped()
+    document.body.removeChild(el)
   })
 
-  it('should react to touch', () => {
+  it('should react to touch', async () => {
+    const el = document.createElement('div')
+    el.setAttribute('data-app', true)
+    document.body.appendChild(el)
+
     const wrapper = mount(VSlider, {
       attachToDocument: true
     })
-
-    const app = document.createElement('span')
-    document.body.appendChild(app)
-    wrapper.setData({ app })
 
     const container = wrapper.first('.v-slider__thumb-container')
 
@@ -238,10 +223,12 @@ test('VSlider.vue', ({ mount }) => {
 
     container.trigger('mousedown')
 
+    await wrapper.vm.$nextTick()
+
     expect(wrapper.vm.keyPressed).toBe(2)
     expect(wrapper.vm.isActive).toBe(true)
 
-    app.dispatchEvent(new Event('mouseup'))
+    el.dispatchEvent(new Event('mouseup'))
 
     expect(wrapper.vm.keyPressed).toBe(0)
     expect(wrapper.vm.isActive).toBe(false)
@@ -250,30 +237,36 @@ test('VSlider.vue', ({ mount }) => {
       touches: []
     })
 
+    await wrapper.vm.$nextTick()
+
     expect(wrapper.vm.keyPressed).toBe(2)
     expect(wrapper.vm.isActive).toBe(true)
 
-    expect(warning).toHaveBeenTipped()
+    document.body.removeChild(el)
   })
 
-  it('should set inputValue', async () => {
+  it('should emit number if not using range prop', async () => {
     const wrapper = mount(VSlider, {
+      propsData: {
+        value: 0
+      },
       attachToDocument: true
     })
 
-    expect(wrapper.vm.lazyValue).toBe(0)
+    const input = jest.fn()
+    wrapper.vm.$on('input', input)
 
     wrapper.vm.onMouseMove({
       clientX: 6
     })
 
-    expect(wrapper.vm.lazyValue).toBe(100)
+    expect(input).toHaveBeenCalledWith(100)
 
     wrapper.vm.onMouseMove({
       touches: [{ clientX: 50 }]
     })
 
-    expect(wrapper.vm.lazyValue).toBe(100)
+    expect(input).toHaveBeenCalledWith(100)
 
     expect(warning).toHaveBeenTipped()
   })
@@ -288,25 +281,6 @@ test('VSlider.vue', ({ mount }) => {
     wrapper.vm.onKeyUp()
 
     expect(wrapper.vm.keyPressed).toBe(0)
-
-    expect(warning).toHaveBeenTipped()
-  })
-
-  it('should call on mouse move', () => {
-    const wrapper = mount(VSlider)
-    const onMouseMove = jest.fn()
-    wrapper.setMethods({ onMouseMove })
-
-    wrapper.vm.onSliderMove('foo')
-
-    expect(onMouseMove).toBeCalledWith('foo')
-
-    wrapper.setData({ isActive: true })
-
-    wrapper.vm.onSliderMove('bar')
-
-    expect(onMouseMove).not.toBeCalledWith('bar')
-    expect(onMouseMove).toHaveBeenCalledTimes(1)
 
     expect(warning).toHaveBeenTipped()
   })
@@ -327,6 +301,93 @@ test('VSlider.vue', ({ mount }) => {
     wrapper.setProps({ step: 2.5 })
 
     expect(wrapper.vm.roundValue(5.667)).toBe(5)
+
+    expect(warning).toHaveBeenTipped()
+  })
+
+  it('should not update if value matches lazy value', () => {
+    const validate = jest.fn()
+    const wrapper = mount(VSlider, {
+      propsData: {
+        value: 10
+      },
+      methods: { validate }
+    })
+
+    const input = jest.fn()
+    wrapper.vm.$on('input', input)
+
+    expect(wrapper.vm.lazyValue).toBe(10)
+    expect(validate).toHaveBeenCalledTimes(1)
+
+    wrapper.vm.internalValue = 15
+
+    expect(input).toHaveBeenCalledTimes(1)
+    expect(wrapper.vm.lazyValue).toBe(15)
+    expect(validate).toHaveBeenCalledTimes(2)
+
+    wrapper.vm.internalValue = 15
+
+    expect(input).toHaveBeenCalledTimes(1)
+    expect(validate).toHaveBeenCalledTimes(2)
+
+    expect(warning).toHaveBeenTipped()
+  })
+
+  it('should react to input events', () => {
+    const wrapper = mount(VSlider)
+    const focus = jest.fn()
+    const blur = jest.fn()
+
+    wrapper.vm.$on('focus', focus)
+    wrapper.vm.$on('blur', blur)
+
+    const input = wrapper.first('input')
+
+    expect(wrapper.vm.isActive).toBe(false)
+    expect(wrapper.vm.isFocused).toBe(false)
+
+    input.trigger('focus')
+
+    expect(wrapper.vm.isFocused).toBe(true)
+    expect(focus).toHaveBeenCalledTimes(1)
+
+    input.trigger('blur')
+
+    expect(wrapper.vm.isFocused).toBe(false)
+    expect(blur).toHaveBeenCalledTimes(1)
+
+    wrapper.setData({
+      isFocused: true,
+      isActive: true
+    })
+
+    expect(wrapper.vm.isActive).toBe(true)
+    expect(wrapper.vm.isFocused).toBe(true)
+
+    input.trigger('blur')
+
+    expect(wrapper.vm.isActive).toBe(false)
+    expect(wrapper.vm.isFocused).toBe(false)
+    expect(blur).toHaveBeenCalledTimes(2)
+
+    expect(warning).toHaveBeenTipped()
+  })
+
+  it('should call mousemove and emit change', () => {
+    const onMouseMove = jest.fn()
+    const wrapper = mount(VSlider, {
+      methods: { onMouseMove }
+    })
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+    const input = wrapper.first('input')
+
+    input.trigger('click')
+
+    expect(onMouseMove).toHaveBeenCalledTimes(1)
+    expect(change).toHaveBeenCalledTimes(1)
 
     expect(warning).toHaveBeenTipped()
   })

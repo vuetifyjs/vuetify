@@ -21,13 +21,12 @@ v-slider($material)
     .v-slider__thumb
       border: 3px solid $material.slider.inactive
 
-    &:focus
+    &.v-input--slider--is-active
       .v-slider__thumb
         border: 3px solid $material.slider.active
 
   &.v-input--is-disabled
     .v-slider__thumb
-      background: none
       border: 3px solid $material.slider.disabled
 
   &.v-input--is-disabled.v-input--is-dirty
@@ -35,7 +34,7 @@ v-slider($material)
       background: $material.slider.disabled
       border: 0px solid transparent
 
-  &:focus
+  &.v-input--slider--is-active
     .v-slider__track
       background: $material.slider.active
 
@@ -44,33 +43,18 @@ v-slider-rtl()
     margin-left: 16px
     margin-right: 0
 
-  &.v-input--slider--inverse-label
-    .v-label
-      margin-right: 16px
-      margin-left: 0
-
 theme(v-slider, "v-input--slider")
 rtl(v-slider-rtl, "v-input--slider")
 
 /** Input Group */
 .v-input--slider
   &.v-input--is-focused
-    .v-slider__thumb
-      transform: translateY(-50%) scale(1.2)
+    .v-slider__thumb-container--is-active:not(.v-slider__thumb-container--show-label)
+      &:before
+        opacity: .2
+        transform: scale(1)
 
     .v-slider__track
-      transition: none
-
-    .v-slider__thumb-container
-      &-label
-        .v-slider__thumb
-          transform: translateY(-50%) scale(0)
-
-          &:hover
-            transform: translateY(-50%) scale(0)
-
-    .v-slider__thumb-container,
-    .v-slider__track-fill
       transition: none
 
     &.v-input--slider--ticks
@@ -79,9 +63,11 @@ rtl(v-slider-rtl, "v-input--slider")
         .v-slider__tick
           opacity: 1
 
-  &.v-input--is-disabled
-    pointer-events: none
+  &.v-input--slider--ticks
+    .v-slider__tick.v-slider__tick--always-show
+      opacity: 1
 
+  &.v-input--is-disabled
     .v-slider__thumb
       transform: translateY(-50%) scale(.5)
       background: transparent
@@ -89,13 +75,8 @@ rtl(v-slider-rtl, "v-input--slider")
     &.v-input--is-dirty
       border-color: transparent
 
-  .v-label
+  .v-input__slot > *:first-child:not(:only-child)
     margin-right: 16px
-
-  &--inverse-label
-    .v-label
-      margin-right: 0
-      margin-left: 16px
 
 /** Slider */
 .v-slider
@@ -108,15 +89,21 @@ rtl(v-slider-rtl, "v-input--slider")
   outline: none
   user-select: none
 
+  input
+    cursor: default
+    opacity: 0
+    padding: 0
+
 /** Thumb/Track/Ticks */
 .v-slider
   &__track__container
+    height: 2px
+    overflow: hidden
+    pointer-events: none
     position: absolute
     top: 50%
     transform: translateY(-50%)
-    height: 2px
     width: 100%
-    overflow: hidden
 
     &:after
       content: ''
@@ -168,20 +155,45 @@ rtl(v-slider-rtl, "v-input--slider")
     top: 50%
     transition: .3s $transition.swing
 
+    &:before
+      content: ''
+      color: inherit
+      border-radius: 50%
+      background: currentColor
+      height: 32px
+      left: -16px
+      opacity: 0
+      overflow: hidden
+      pointer-events: none
+      position: absolute
+      top: -16px
+      transform: scale(0.2)
+      transition: $ripple-animation-transition
+      width: 32px
+      will-change: transform, opacity
+
   &__thumb
-    width: 16px
-    height: 16px
-    left: -8px
+    width: 24px
+    height: 24px
+    left: -12px
     top: 50%
     border-radius: 50%
     background: transparent
     transition: .3s $transition.swing
-    transform: translateY(-50%) scale(.8)
+    transform: translateY(-50%) scale(.6)
     user-select: none
-
 
 /** Thumb Label */
 .v-slider
+  &--is-active
+    .v-slider__thumb-container--is-active
+      .v-slider__thumb
+        transform: translateY(-50%) scale(1)
+
+      &.v-slider__thumb-container--show-label
+        .v-slider__thumb
+          transform: translateY(-50%) scale(0)
+
   &__thumb-label__container
     position: absolute
     left: 0
@@ -199,7 +211,7 @@ rtl(v-slider-rtl, "v-input--slider")
     border-radius: 50% 50% 0
     position: absolute
     left: -14px
-    top: -40px
+    top: -42px
     transform: rotate(45deg)
     user-select: none
     transition: .3s ease-in-out
