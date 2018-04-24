@@ -4,20 +4,13 @@ export default {
   name: 'v-timeline',
 
   props: {
-    right: {
-      type: Boolean,
-      default: false
-    },
-    left: {
-      type: Boolean,
-      default: false
-    }
+    right: Boolean,
+    left: Boolean
   },
 
   computed: {
-    alignClass () {
+    classes () {
       return {
-        'v-timeline': true,
         'v-timeline--left': this.left,
         'v-timeline--right': this.right
       }
@@ -25,8 +18,9 @@ export default {
   },
 
   render (h) {
-    return h('ul', {
-      class: this.alignClass
+    return h('div', {
+      staticClass: 'v-timeline',
+      'class': this.classes
     }, this.$slots.default)
   }
 }
