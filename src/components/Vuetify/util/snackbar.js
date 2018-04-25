@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import Main from '@components/VSnackbar/VSnackbar'
+import Main from '@/components/VSnackbar/VSnackbar'
 const SnackbarConstructor = Vue.extend(Main)
 
 let instance = null
@@ -26,7 +26,7 @@ const Snackbar = function (options) {
   }
   instance.$slots.default = [instance.message]
   instance.vm = instance.$mount()
-  document.body.appendChild(instance.vm.$el)
+  document.querySelector('.application').appendChild(instance.vm.$el)
   instance.vm.isActive = true
   instance.dom = instance.vm.$el
   instances.push(instance)
