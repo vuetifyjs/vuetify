@@ -1,4 +1,4 @@
-import { VExpandTransition , VSlideYReverseTransition } from '../transitions'
+import { VExpandTransition, VSlideYReverseTransition } from '../transitions'
 
 import { consoleWarn } from '../../util/console'
 
