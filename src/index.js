@@ -2,6 +2,8 @@ import './stylus/app.styl'
 import * as components from './components'
 import * as directives from './directives'
 
+import snackbar from './components/Vuetify/util/snackbar'
+
 function Vuetify (Vue, args) {
   const Vuetify = components.Vuetify
 
@@ -10,6 +12,7 @@ function Vuetify (Vue, args) {
     directives,
     ...args
   })
+  Vue.prototype.$snackbar = snackbar
 }
 
 Vuetify.version = process.env.VUETIFY_VERSION

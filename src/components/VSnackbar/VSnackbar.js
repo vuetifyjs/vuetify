@@ -57,6 +57,9 @@ export default {
           this.isActive = false
         }, this.timeout)
       }
+    },
+    close () {
+      this.isActive = false
     }
   },
 
