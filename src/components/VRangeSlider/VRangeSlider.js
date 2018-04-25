@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_sliders.styl'
+import '../../stylus/components/_range-sliders.styl'
 
 // Extensions
 import VSlider from '../VSlider'
@@ -29,6 +29,11 @@ export default {
   },
 
   computed: {
+    classes () {
+      return Object.assign({}, {
+        'v-input--range-slider': true
+      }, VSlider.computed.classes.call(this))
+    },
     internalValue: {
       get () {
         return this.lazyValue

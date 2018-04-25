@@ -69,11 +69,7 @@ rtl(v-slider-rtl, "v-input--slider")
 
   &.v-input--is-disabled
     .v-slider__thumb
-      transform: translateY(-50%) scale(.5)
-      background: transparent
-
-    &.v-input--is-dirty
-      border-color: transparent
+      transform: translateY(-50%) scale(.45)
 
   .v-input__slot > *:first-child:not(:only-child)
     margin-right: 16px
@@ -198,7 +194,7 @@ rtl(v-slider-rtl, "v-input--slider")
     position: absolute
     left: 0
     top: 0
-    transition: .3s ease-in-out
+    transition: .3s $transition.fast-in-fast-out
 
   &__thumb-label
     display: flex
@@ -206,17 +202,17 @@ rtl(v-slider-rtl, "v-input--slider")
     justify-content: center
     font-size: 12px
     color: #fff
-    width: 28px
-    height: 28px
+    width: 32px
+    height: 32px
     border-radius: 50% 50% 0
     position: absolute
-    left: -14px
-    top: -42px
+    left: -16px
+    top: -52px
     transform: rotate(45deg)
     user-select: none
-    transition: .3s ease-in-out
+    transition: .3s $transition.fast-in-fast-out
 
-    span
+    > *
       transform: rotate(-45deg)
 
   &__track,

@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import { test } from '@/test'
 import VSlider from '@/components/VSlider'
 
@@ -156,6 +157,22 @@ test('VSlider.vue', ({ mount }) => {
       ctrlKey: true
     })
     expect(input).toBeCalledWith(78)
+    expect(input).toHaveBeenCalledTimes(12)
+
+    wrapper.setProps({ disabled: true })
+
+    slider.trigger('keydown.left')
+
+    expect(input).toHaveBeenCalledTimes(12)
+
+    wrapper.setProps({ disabled: false })
+    wrapper.vm.$vuetify.rtl = true
+
+    slider.trigger('keydown.right', {
+      shiftKey: true
+    })
+    expect(input).toBeCalledWith(72)
+    wrapper.vm.$vuetify.rtl = undefined
 
     expect(warning).toHaveBeenTipped()
   })
@@ -245,7 +262,7 @@ test('VSlider.vue', ({ mount }) => {
     document.body.removeChild(el)
   })
 
-  it('should emit number if not using range prop', async () => {
+  it('should emit number', async () => {
     const wrapper = mount(VSlider, {
       propsData: {
         value: 0
@@ -257,7 +274,7 @@ test('VSlider.vue', ({ mount }) => {
     wrapper.vm.$on('input', input)
 
     wrapper.vm.onMouseMove({
-      clientX: 6
+      clientX: 1
     })
 
     expect(input).toHaveBeenCalledWith(100)
@@ -267,6 +284,13 @@ test('VSlider.vue', ({ mount }) => {
     })
 
     expect(input).toHaveBeenCalledWith(100)
+
+    wrapper.vm.$vuetify.rtl = true
+    wrapper.vm.onMouseMove({
+      clientX: 1
+    })
+    expect(input).toHaveBeenCalledWith(0)
+    wrapper.vm.$vuetify.rtl = undefined
 
     expect(warning).toHaveBeenTipped()
   })
@@ -388,6 +412,74 @@ test('VSlider.vue', ({ mount }) => {
 
     expect(onMouseMove).toHaveBeenCalledTimes(1)
     expect(change).toHaveBeenCalledTimes(1)
+
+    expect(warning).toHaveBeenTipped()
+  })
+
+  it('should keep thumb-label when focused and clicked', async () => {
+    const onBlur = jest.fn()
+    const wrapper = mount(VSlider, {
+      propsData: {
+        thumbLabel: true
+      }
+    })
+
+    const input = wrapper.first('input')
+    const thumb = wrapper.first('.v-slider__thumb-container')
+
+    input.trigger('focus')
+
+    expect(wrapper.vm.showThumbLabel).toBe(true)
+    expect(wrapper.vm.isActive).toBe(false)
+    expect(wrapper.vm.isFocused).toBe(true)
+
+    // Clicking thumb label triggers blur
+    thumb.trigger('mousedown')
+    input.trigger('blur')
+
+    expect(wrapper.vm.isActive).toBe(true)
+    expect(wrapper.vm.isFocused).toBe(true)
+    expect(warning).toHaveBeenTipped()
+  })
+
+  it('should reverse label location when inverse', () => {
+    const wrapper = mount(VSlider, {
+      propsData: { label: 'foo' }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({ inverseLabel: true })
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect(warning).toHaveBeenTipped()
+  })
+
+  it('should change track styles in rtl', () => {
+    const wrapper = mount(VSlider)
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({ value: 50 })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({ disabled: true })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.vm.$vuetify.rtl = true
+    wrapper.setProps({ value: 0, disabled: false })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({ value: 50 })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({ disabled: true })
+
+    expect(wrapper.html()).toMatchSnapshot()
 
     expect(warning).toHaveBeenTipped()
   })

@@ -28,7 +28,6 @@ export default {
   directives: { ClickOutside },
 
   data: vm => ({
-    activeThumb: 0,
     app: {},
     defaultColor: 'primary',
     isActive: false,
@@ -86,8 +85,11 @@ export default {
       return !this.disabled && this.stepNumeric && !!this.ticks
     },
     showThumbLabel () {
-      return !this.disabled &&
-        (!!this.thumbLabel || this.thumbLabel === '')
+      return !this.disabled && (
+        !!this.thumbLabel ||
+        this.thumbLabel === '' ||
+        this.$scopedSlots['thumb-label']
+      )
     },
     computedColor () {
       if (this.disabled) return null
@@ -124,22 +126,39 @@ export default {
       return this.step > 0 ? parseFloat(this.step) : 1
     },
     trackFillStyles () {
+      let left = this.$vuetify.rtl ? 'auto' : 0
+      let right = this.$vuetify.rtl ? 0 : 'auto'
+      let width = `${this.inputWidth}%`
+
+      if (this.disabled) width = `calc(${this.inputWidth}% - 8px)`
+
       return {
         transition: this.trackTransition,
-        width: `${this.inputWidth}%`,
-        [this.$vuetify.rtl ? 'right' : 'left']: 0
+        left,
+        right,
+        width
       }
     },
     trackPadding () {
-      if (this.isActive) return 0
-
-      return 7 + (this.disabled ? 3 : 0)
+      return (
+        this.isActive ||
+        this.inputWidth > 0 ||
+        this.disabled
+      ) ? 0 : 7
     },
     trackStyles () {
+      const trackPadding = `${this.trackPadding}px`
+      let left = this.$vuetify.rtl ? 'auto' : trackPadding
+      let right = this.$vuetify.rtl ? trackPadding : 'auto'
+      let width = this.disabled
+        ? `calc(${100 - this.inputWidth}% - 8px)`
+        : '100%'
+
       return {
         transition: this.trackTransition,
-        [this.$vuetify.rtl ? 'right' : 'left']: `${this.trackPadding}px`,
-        width: '100%'
+        left,
+        right,
+        width
       }
     },
     trackTransition () {
@@ -244,8 +263,6 @@ export default {
           this.inputWidth,
           this.isFocused || this.isActive,
           e => {
-            this.isActive = true
-            // Wait for data to persist
             this.onMouseDown(e)
           }
         )
@@ -346,6 +363,8 @@ export default {
         : this.$createElement('span', {}, value)
     },
     onBlur (e) {
+      if (this.keyPressed === 2) return
+
       this.isActive = false
       this.isFocused = false
       this.$emit('blur', e)
@@ -374,6 +393,7 @@ export default {
       this.keyPressed = 0
       const options = { passive: true }
       this.isActive = false
+      this.isFocused = false
       this.app.removeEventListener('touchmove', this.onMouseMove, options)
       this.app.removeEventListener('mousemove', this.onMouseMove, options)
 
@@ -410,7 +430,8 @@ export default {
         width: trackWidth
       } = this.$refs.track.getBoundingClientRect()
       const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX
-      let left = Math.min(Math.max((clientX - offsetLeft) / trackWidth, 0), 1)
+      // It is possible for left to be NaN, force to number
+      let left = Math.min(Math.max((clientX - offsetLeft) / trackWidth, 0), 1) || 0
 
       if (this.$vuetify.rtl) left = 1 - left
 
