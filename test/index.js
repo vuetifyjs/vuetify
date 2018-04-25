@@ -19,6 +19,7 @@ export function test(name, cb) {
 
   // Very naive polyfill for performance.now()
   window.performance = { now: () => (new Date()).getTime() }
+  window.HTMLElement.prototype.scrollIntoView = function() {};
 
   describe(name, () => cb({
     functionalContext,
