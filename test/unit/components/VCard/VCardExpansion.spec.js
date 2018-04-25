@@ -2,40 +2,41 @@ import { test } from '@/test'
 import { VCardExpansion } from '@/components/VCard'
 
 test('VCardExpansion.js', ({ mount }) => {
-  it('should render with "display:none" applied and dropdown class', () => {
-    const wrapper = mount(VCardExpansion)
-
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-
-  it('should render with no "display:none" applied and dropdown class', () => {
+  it('should render dropdown class', () => {
     const wrapper = mount(VCardExpansion, {
-      propsData: {
-        show: true
+      slots: {
+        default: [{
+          render: h => h('div', {
+            staticClass: 'fake-text'
+          })
+        }]
       }
     })
 
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render with "display:none" applied and cover class', () => {
+  it('should render with cover class', () => {
     const wrapper = mount(VCardExpansion, {
       propsData: {
         cover: true
+      },
+      slots: {
+        default: [{
+          render: h => h('div', {
+            staticClass: 'fake-text'
+          })
+        }]
       }
     })
 
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render with no "display:none" applied and cover class', () => {
-    const wrapper = mount(VCardExpansion, {
-      propsData: {
-        cover: true,
-        show: true
-      }
-    })
+  it('should warn if nothing is provided in slot', () => {
+    const wrapper = mount(VCardExpansion)
+    const warningTip = '[Vuetify] no text was provided in "v-card-expansion"'
 
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(warningTip).toHaveBeenTipped()
   })
 })
