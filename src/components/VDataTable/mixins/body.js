@@ -4,8 +4,17 @@ export default {
   methods: {
     genTBody () {
       const children = this.genItems()
-
-      return this.$createElement('tbody', children)
+      if (children != null && children.length && this.hasTag(children[0], 'tbody')) {
+        return {
+          tbody: children,
+          hasTbodied: true
+        }
+      } else {
+        return {
+          tbody: this.$createElement('tbody', children),
+          hasTbodied: false
+        }
+      }
     },
     genExpandedRow (props) {
       const children = []

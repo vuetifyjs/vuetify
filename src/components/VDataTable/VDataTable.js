@@ -96,12 +96,17 @@ export default {
   },
 
   render (h) {
+    const tbodyData = this.genTBody()
+    if (tbodyData.hasTbodied) {
+      this.classes['row-spans'] = true
+    }
+
     const tableOverflow = h(VTableOverflow, {}, [
       h('table', {
         'class': this.classes
       }, [
         this.genTHead(),
-        this.genTBody(),
+        tbodyData.tbody,
         this.genTFoot()
       ])
     ])
