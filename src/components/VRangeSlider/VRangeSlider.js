@@ -69,13 +69,15 @@ export default {
       const styles = VSlider.computed.trackFillStyles.call(this)
       const fillPercent = Math.abs(this.inputWidth[0] - this.inputWidth[1])
 
-      styles.width = `calc(${fillPercent}% - ${this.trackPadding}px`
+      styles.width = `calc(${fillPercent}% - ${this.trackPadding}px)`
       styles[this.$vuetify.rtl ? 'right' : 'left'] = `${this.inputWidth[0]}%`
 
       return styles
     },
     trackPadding () {
-      if (this.range && this.isDirty) return 0
+      if (this.isDirty ||
+        this.internalValue[0]
+      ) return 0
 
       return VSlider.computed.trackPadding.call(this)
     }
