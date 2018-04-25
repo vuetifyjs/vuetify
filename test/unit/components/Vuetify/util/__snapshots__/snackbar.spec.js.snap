@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snackbar.js should functionally work 1`] = `
+
+<div data-app="true"
+     class="application"
+>
+  <div class="v-snack v-snack--active v-snack--bottom snack-transition-enter snack-transition-enter-active">
+    <div class="v-snack__wrapper error">
+      <div class="v-snack__content">
+        test-message
+      </div>
+    </div>
+  </div>
+</div>
+
+`;

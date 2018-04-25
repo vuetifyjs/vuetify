@@ -48,6 +48,7 @@ types.forEach(type => {
 Snackbar.close = function (id) {
   for (let i = 0, len = instances.length; i < len; i++) {
     if (id === instances[i].id) {
+      instances[i].close()
       instances.splice(i, 1)
       break
     }
