@@ -5,8 +5,7 @@
     v-model="inputValue"
     :stateless="isFullscreen"
   )#app-drawer
-    div.text-xs-center
-      div(v-text="$t('Vuetify.AppDrawer.diamondSponsors')").diamond-sponsor-label
+    div.text-xs-center.pt-3
       div(
         v-for="diamond in diamonds"
         :key="diamond.title"
@@ -35,7 +34,7 @@
         ref="search"
         light
       )
-    div.py-3.text-xs-center
+    div.pt-3.text-xs-center
       a(
         href="https://vuejobs.com/?utm_source=vuejobs&utm_medium=banner&utm_campaign=linking&ref=vuetifyjs.com"
         target="_blank"
@@ -276,7 +275,7 @@
 
     .diamond-sponsor
       // todo trim down actual image file dimensions
-      height: 35px
+      height: 30px
       margin-bottom 0.25em
 
       aside.navigation-drawer ul li

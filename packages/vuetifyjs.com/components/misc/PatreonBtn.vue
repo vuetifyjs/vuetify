@@ -6,6 +6,7 @@
     href="https://www.patreon.com/vuetify"
     target="_blank"
     rel="noopener"
+    small
   )
     img(src="/static/doc-images/patreon-dark.png" width="24px").mr-2
     span(v-text="$t('Vuetify.AppDrawer.becomeASponsor')").caption
