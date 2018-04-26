@@ -2,7 +2,6 @@
   doc-view
     template(slot-scope="{ namespace }")
       app-alert(error :value="`${namespace}.alert1`")
-      app-alert(info :value="`${namespace}.newStoreAlert`")
 
       section#supported-browsers
         section-head(:value="`${namespace}.browserHeader`")
