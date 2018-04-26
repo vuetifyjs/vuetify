@@ -77,7 +77,6 @@
       section(v-if="examples.length > 1")#examples
         section-head(value="Generic.Pages.examples")
         template(v-for="(example, i) in examples.slice(1)")
-          support-vuetify(v-if="i === 5" :key="i")
           example(
             :header="`${example.header}`"
             :new-in="example.new"
