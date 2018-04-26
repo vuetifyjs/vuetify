@@ -22,9 +22,6 @@ export default {
       if (!val) this.listIndex = -1
     },
     listIndex (next, prev) {
-      // For infinite scroll and autocomplete, re-evaluate children
-      this.getTiles()
-
       if (next in this.tiles) {
         const tile = this.tiles[next]
         tile.classList.add('v-list__tile--highlighted')
@@ -44,13 +41,19 @@ export default {
         e.preventDefault()
       }
 
-      if ([keyCodes.esc, keyCodes.tab].includes(e.keyCode)) return this.isActive = false
-      else if (!this.isActive &&
+      if ([keyCodes.esc, keyCodes.tab].includes(e.keyCode)) {
+        return this.isActive = false
+      }
+
+      if (!this.isActive &&
         [keyCodes.enter, keyCodes.space].includes(e.keyCode) &&
         this.openOnClick
       ) {
         return this.isActive = true
       }
+
+      // For infinite scroll and autocomplete, re-evaluate children
+      this.getTiles()
 
       if (e.keyCode === keyCodes.down && this.listIndex < this.tiles.length - 1) {
         this.listIndex++

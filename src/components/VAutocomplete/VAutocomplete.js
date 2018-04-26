@@ -257,19 +257,16 @@ export default {
       // If tab - select item or close menu
       if (keyCode === keyCodes.tab) return this.onTabDown(e)
 
-      if (!this.hideSelections &&
-        !this.internalSearch
-      ) this.changeSelectedIndex(keyCode)
+      // If user is not searching, abort
+      if (!this.internalSearch) return
 
-      if (!this.isAnyValueAllowed ||
-        !this.internalSearch
-      ) return
+      if (!this.hideSelections) this.changeSelectedIndex(keyCode)
 
-      if (e.keyCode === keyCodes.enter) return this.onEnterDown()
-
-      if ((keyCode === keyCodes.backspace && !this.searchIsDirty) ||
-        (!this.$refs.menu || e.keyCode !== keyCodes.up)
-      ) return VSelect.methods.onKeyDown.call(this, e)
+      // This might not be needed
+      // if (e.keyCode === keyCodes.enter) return this.onEnterDown()
+      // if ((keyCode === keyCodes.backspace && !this.searchIsDirty) ||
+      //   (!this.$refs.menu || e.keyCode !== keyCodes.up)
+      // ) return VSelect.methods.onKeyDown.call(this, e)
     },
     onTabDown (e) {
       this.isFocused = false
@@ -322,7 +319,16 @@ export default {
       this.lazySearch = this.getText(this.internalValue)
     },
     updateAutocomplete () {
-      if (!this.isMulti) {
+      if (!this.searchIsDirty ||
+        !this.internalValue
+      ) return
+
+      if (this.isMulti) return (this.internalSearch = null)
+
+      if (!this.valueComparator(
+        this.internalSearch,
+        this.getValue(this.internalValue)
+      )) {
         this.internalSearch = this.initialValue
       }
     },

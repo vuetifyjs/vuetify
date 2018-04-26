@@ -111,10 +111,13 @@ test('VAutocomplete.js', ({ mount, shallow }) => {
 
     expect(wrapper.vm.internalSearch).toBe('2')
 
-    wrapper.setProps({ multiple: false })
+    wrapper.setProps({
+      multiple: false,
+      value: 2
+    })
 
     input.trigger('focus')
-    input.element.value = 2
+    input.element.value = 3
     input.trigger('input')
     input.trigger('blur')
 
@@ -253,13 +256,19 @@ test('VAutocomplete.js', ({ mount, shallow }) => {
 
     await wrapper.vm.$nextTick()
 
-    input.trigger('blur')
-    await wrapper.vm.$nextTick()
-    await wrapper.vm.$nextTick()
-    await wrapper.vm.$nextTick()
-    await new Promise(resolve => setTimeout(resolve, 1000))
+    expect(wrapper.vm.isMenuActive).toBe(true)
 
+    input.trigger('blur')
     expect(change).toHaveBeenCalledWith('foo')
+
+    input.trigger('keydown.esc')
+    expect(wrapper.vm.isMenuActive).toBe(false)
+
+    input.element.value = ''
+    input.trigger('input')
+
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isMenuActive).toBe(false)
   })
 
 
@@ -316,6 +325,22 @@ test('VAutocomplete.js', ({ mount, shallow }) => {
     wrapper.vm.changeSelectedIndex(8)
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.selectedIndex).toBe(0)
+
+    // Should not change index if search is dirty
+    wrapper.setProps({ searchInput: 'foo' })
+    wrapper.vm.changeSelectedIndex(8)
+
+    expect(wrapper.vm.selectedIndex).toBe(0)
+    expect(wrapper.vm.selectedItems.length).toBe(1)
+
+    wrapper.setProps({ searchInput: undefined })
+
+    // Should not proceed if keyCode doesn't match
+    wrapper.vm.changeSelectedIndex(99)
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.selectedIndex).toBe(0)
+    expect(wrapper.vm.selectedItems.length).toBe(1)
 
     wrapper.vm.changeSelectedIndex(8)
     await wrapper.vm.$nextTick()
@@ -469,5 +494,153 @@ test('VAutocomplete.js', ({ mount, shallow }) => {
     wrapper.vm.onEnterDown()
 
     expect(updateTags).toHaveBeenCalledTimes(1)
+  })
+
+  it('should select input text on focus', async () => {
+    const wrapper = mount(VAutocomplete)
+    const select = jest.fn()
+    wrapper.vm.$refs.input.select = select
+
+    const input = wrapper.first('input')
+    input.trigger('focus')
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.isFocused).toBe(true)
+    expect(select).toHaveBeenCalledTimes(1)
+
+    input.trigger('keydown.tab')
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.isFocused).toBe(false)
+    expect(select).toHaveBeenCalledTimes(1)
+  })
+
+  it('should not respond to click', () => {
+    const onFocus = jest.fn()
+    const wrapper = mount(VAutocomplete, {
+      propsData: { disabled: true },
+      methods: { onFocus }
+    })
+    const slot = wrapper.first('.v-input__slot')
+
+    slot.trigger('click')
+
+    expect(onFocus).not.toBeCalled()
+
+    wrapper.setProps({ disabled: false, readonly: true })
+
+    slot.trigger('click')
+
+    expect(onFocus).not.toBeCalled()
+
+    wrapper.setProps({ readonly: false })
+
+    slot.trigger('click')
+
+    expect(onFocus).toBeCalled()
+  })
+
+  it('should react to tabs', async () => {
+    const selectListTile = jest.fn()
+    const updateTags = jest.fn()
+    const wrapper = mount(VAutocomplete, {
+      propsData: {
+        items: ['fizz', 'buzz'],
+        tags: true
+      },
+      methods: {
+        selectListTile,
+        updateTags
+      }
+    })
+
+    const input = wrapper.first('input')
+    const menu = wrapper.first('.v-menu')
+    const tile = wrapper.first('.v-list__tile')
+
+    input.trigger('focus')
+    input.element.value = 'foo'
+    input.trigger('input')
+    input.trigger('keydown.tab')
+
+    expect(wrapper.vm.getMenuIndex()).toBe(-1)
+    expect(updateTags).toBeCalled()
+
+    wrapper.setProps({ tags: false })
+
+    input.element.value = 'bar'
+    input.trigger('input')
+    input.trigger('keydown.down')
+    menu.trigger('keydown.down')
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.getMenuIndex()).toBe(0)
+
+    expect(selectListTile).not.toBeCalled()
+
+    input.trigger('keydown.tab')
+
+    expect(selectListTile).toBeCalled()
+  })
+
+  it('should select list tile', () => {
+    const wrapper = mount(VAutocomplete)
+    const click = jest.fn()
+
+    // Would normally be filled with actual tiles
+    wrapper.vm.$refs.menu.tiles = [{ click }]
+
+    wrapper.vm.selectListTile(2)
+
+    expect(click).not.toBeCalled()
+
+    wrapper.vm.selectListTile(0)
+
+    expect(click).toBeCalled()
+  })
+
+  it('should react to keydown', () => {
+    const activateMenu = jest.fn()
+    const changeSelectedIndex = jest.fn()
+    const onEscDown = jest.fn()
+    const onTabDown = jest.fn()
+    const wrapper = mount(VAutocomplete, {
+      methods: {
+        activateMenu,
+        changeSelectedIndex,
+        onEscDown,
+        onTabDown
+      }
+    })
+
+    const input = wrapper.first('input')
+
+    expect(wrapper.vm.isMenuActive).toBe(false)
+
+    input.trigger('keydown.enter')
+    input.trigger('keydown.space')
+    input.trigger('keydown.up')
+    input.trigger('keydown.down')
+
+    expect(activateMenu).toHaveBeenCalledTimes(4)
+
+    input.trigger('keydown.esc')
+
+    expect(onEscDown).toHaveBeenCalledTimes(1)
+
+    input.trigger('keydown.tab')
+
+    expect(onTabDown).toHaveBeenCalledTimes(1)
+
+    // Skip menu activation
+    wrapper.setData({ isMenuActive: true })
+
+    input.element.value = 'foo'
+    input.trigger('input')
+
+    wrapper.setProps({ hideSelections: true })
   })
 })

@@ -386,7 +386,12 @@ export default {
     onKeyDown (e) {
       if (e.keyCode === keyCodes.tab) {
         VTextField.methods.onBlur.call(this, e)
-      } else if ([keyCodes.enter, keyCodes.space, keyCodes.up, keyCodes.down].includes(e.keyCode)) {
+      } else if ([
+        keyCodes.enter,
+        keyCodes.space,
+        keyCodes.up,
+        keyCodes.down
+      ].includes(e.keyCode)) {
         this.isMenuActive = true
       }
     },
@@ -426,9 +431,6 @@ export default {
         this.$refs.menu &&
           this.$refs.menu.updateDimensions()
       })
-    },
-    setMenuIndex (index) {
-      this.$refs.menu && (this.$refs.menu.listIndex = index)
     }
   }
 }
