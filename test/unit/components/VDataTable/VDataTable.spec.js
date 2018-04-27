@@ -304,4 +304,54 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
     expect(wrapper.vm.everyItem).toBe(true);
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
+
+  it('should not generate a tbody If already exists', async () => {
+    const vm = new Vue()
+    const wrapper = mount(Vue.component('test', {
+      render (h) {
+        return h(VDataTable, {
+          props: {
+            items: [
+              { other: 1, col1: 'foo', col2: 'a', col3: 1, col4: 'A', col5: 10 },
+              { other: 2, col1: null, col2: 'b', col3: 2, col4: 'B', col5: 20 },
+              { other: 3, col1: undefined, col2: 'c', col3: 3, col4: 'C', col5: 30 }
+            ]
+          },
+          scopedSlots: {
+            headers: props => [
+              vm.$createElement('tr', [
+                vm.$createElement('th', { attrs: { rowspan: 2 } }, ['First Row, First Column']),
+                vm.$createElement('th', ['First Row, Second Column']),
+                vm.$createElement('th', ['First Row, Third Column'])
+              ]),
+              vm.$createElement('tr', [
+                vm.$createElement('th', ['Second Row, First Column']),
+                vm.$createElement('th', ['Second Row, Second Column'])
+              ]),
+            ],
+            items: props => [
+              vm.$createElement('tbody', [
+                vm.$createElement('tr', [
+                  vm.$createElement('td', { attrs: { rowspan: 2 } }, [props.item.col1]),
+                  vm.$createElement('td', [props.item.col2]),
+                  vm.$createElement('td', [props.item.col3])
+                ]),
+          
+                vm.$createElement('tr', [
+                  vm.$createElement('td', [props.item.col4]),
+                  vm.$createElement('td', [props.item.col5]),
+                ])
+              ])
+            ]
+          }
+        })
+      }
+    }))
+    
+    expect(wrapper.find('table.v-datatable tbody tbody').length).toBe(0)
+    expect(wrapper.find('table.v-datatable tbody').length).toBe(3)
+    expect(wrapper.find('table.row-spans').length).toBe(1)
+
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
 })
