@@ -35,21 +35,15 @@ export default {
 
   methods: {
     changeListIndex (e) {
-      if ([keyCodes.down, keyCodes.up, keyCodes.enter].includes(e.keyCode) ||
-        (e.keyCode === keyCodes.space && !this.isActive)
-      ) {
-        e.preventDefault()
-      }
+      if ([
+        keyCodes.down,
+        keyCodes.up,
+        keyCodes.enter
+      ].includes(e.keyCode)
+      ) e.stopPropagation()
 
       if ([keyCodes.esc, keyCodes.tab].includes(e.keyCode)) {
         return this.isActive = false
-      }
-
-      if (!this.isActive &&
-        [keyCodes.enter, keyCodes.space].includes(e.keyCode) &&
-        this.openOnClick
-      ) {
-        return this.isActive = true
       }
 
       // For infinite scroll and autocomplete, re-evaluate children

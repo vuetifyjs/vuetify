@@ -107,7 +107,6 @@ test('VAutocomplete.js', ({ mount, shallow }) => {
     input.trigger('focus')
     input.element.value = 2
     input.trigger('input')
-    input.trigger('blur')
 
     expect(wrapper.vm.internalSearch).toBe('2')
 

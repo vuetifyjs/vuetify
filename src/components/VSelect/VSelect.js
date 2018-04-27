@@ -41,6 +41,12 @@ export default {
     attrsInput: { role: 'combobox' },
     cachedItems: vm.cacheItems ? vm.items : [],
     isMenuActive: false,
+    // As long as a value is defined, show it
+    // Otherwise, check if tags or multiple (can't use isMulti)
+    // to determine which default to provide
+    lazyValue: vm.value != null
+      ? vm.value
+      : vm.tags || vm.multiple ? [] : undefined,
     selectedIndex: -1,
     selectedItems: []
   }),
@@ -156,7 +162,7 @@ export default {
       return this.disabled || this.readonly
     },
     isMulti () {
-      return this.multiple
+      return this.multiple || this.tags
     }
   },
 
@@ -395,21 +401,17 @@ export default {
         this.isMenuActive = true
       }
     },
-    // Convert internalValue to always
-    // be an array and check for validity
     setSelectedItems () {
-      const val = this.internalValue
+      if (this.tags) return this.selectedItems = this.internalValue
 
-      let selectedItems = this.computedItems.filter(i => {
-        if (!this.isMulti) {
-          return this.valueComparator(this.getValue(i), this.getValue(val))
-        } else {
-          // Always return Boolean
-          return this.findExistingIndex(i, this.internalValue) > -1
-        }
-      })
+      const fn = !this.isMulti
+        ? i => this.valueComparator(
+          this.getValue(i),
+          this.getValue(this.internalValue)
+        )
+        : i => this.findExistingIndex(i, this.internalValue) > -1
 
-      this.selectedItems = selectedItems
+      this.selectedItems = this.computedItems.filter(fn)
     },
     selectItem (item) {
       if (!this.isMulti) {

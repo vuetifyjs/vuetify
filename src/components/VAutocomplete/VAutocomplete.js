@@ -249,7 +249,10 @@ export default {
       // If enter, space, up, or down is pressed, open menu
       if (!this.isMenuActive &&
         [keyCodes.enter, keyCodes.space, keyCodes.up, keyCodes.down].includes(keyCode)
-      ) return this.activateMenu()
+      ) this.activateMenu()
+
+      // This should do something different
+      if (e.keyCode === keyCodes.enter) return this.onEnterDown()
 
       // If escape deactivate the menu
       if (keyCode === keyCodes.esc) return this.onEscDown(e)
@@ -257,22 +260,9 @@ export default {
       // If tab - select item or close menu
       if (keyCode === keyCodes.tab) return this.onTabDown(e)
 
-      // If user is not searching, abort
-      if (!this.internalSearch) return
-
       if (!this.hideSelections) this.changeSelectedIndex(keyCode)
-
-      // This might not be needed
-      // if (e.keyCode === keyCodes.enter) return this.onEnterDown()
-      // if ((keyCode === keyCodes.backspace && !this.searchIsDirty) ||
-      //   (!this.$refs.menu || e.keyCode !== keyCodes.up)
-      // ) return VSelect.methods.onKeyDown.call(this, e)
     },
     onTabDown (e) {
-      this.isFocused = false
-      // If tabbing through inputs and
-      // and there is no need for an
-      // update, blur the v-select
       const menuIndex = this.getMenuIndex()
 
       // When adding tags, if searching and
@@ -297,6 +287,11 @@ export default {
 
         e.preventDefault()
         this.selectListTile(menuIndex)
+      } else {
+        // If we make it here,
+        // the user has no selected indexes
+        // and is probably tabbing out
+        this.isFocused = false
       }
     },
     selectItem (item) {
@@ -348,7 +343,14 @@ export default {
     },
     // Maybe change to onBlur?
     updateTags () {
-      console.log('update tags')
+      if (!this.searchIsDirty) return
+
+      const itemExists = this.selectedItems.includes(this.internalSearch)
+
+      if (itemExists) return (this.internalSearch = null)
+
+      this.selectItem(this.internalSearch)
+      this.internalSearch = null
       // if (!this.hasSlot && this.searchIsDirty) {
       //   this.internalValue = this.internalSearch
       //   this.$emit('change', this.internalValue)
