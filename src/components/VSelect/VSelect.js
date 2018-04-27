@@ -166,7 +166,7 @@ export default {
 
       let selectedItems = this.computedItems.filter(i => {
         if (!this.isMultiple) {
-          return this.getValue(i) === this.getValue(val)
+          return this.valueComparator(this.getValue(i), this.getValue(val))
         } else {
           // Always return Boolean
           return this.findExistingIndex(i) > -1
