@@ -130,6 +130,8 @@ declare interface VuetifyOptions {
   themeVariations: string[]
   minifyTheme: ((css: string) => string) | null
   themeCache: VuetifyThemeCache | null
+  /** @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src#Unsafe_inline_script */
+  cspNonce: string | null
 }
 
 declare type VuetifyGoToEasing =
