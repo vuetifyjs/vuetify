@@ -150,7 +150,7 @@ export default {
       }]
     },
     dynamicHeight () {
-      return this.chips ? 'auto' : '32px'
+      return this.chips || this.isMulti ? 'auto' : '32px'
     },
     hasSlot () {
       return Boolean(this.chips || this.$slots.item)
@@ -263,11 +263,23 @@ export default {
       }, `${this.getText(item)}${last ? '' : ', '}`)
     },
     genDefaultSlot () {
+      const selections = this.genSelections()
+      const input = this.genInput()
+
+      // If the return is an empty array
+      // push the input
+      if (Array.isArray(selections)) {
+        selections.push(input)
+      // Otherwise push it into children
+      } else {
+        selections.children = selections.children || []
+        selections.children.push(input)
+      }
+
       const activator = this.genSelectSlot([
         this.genLabel(),
         this.prefix ? this.genAffix('prefix') : null,
-        this.genSelections(),
-        this.genInput(),
+        selections,
         this.suffix ? this.genAffix('suffix') : null,
         this.genClearIcon(),
         this.genSlot('append', 'inner', [this.genIcon('append')]),
@@ -361,7 +373,9 @@ export default {
         )
       }
 
-      return children
+      return this.$createElement('div', {
+        staticClass: 'v-select__selections'
+      }, children)
     },
     genSelectSlot (children) {
       return this.$createElement('div', {

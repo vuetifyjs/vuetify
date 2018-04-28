@@ -27,7 +27,8 @@ theme(v-select, 'v-select')
   // For specificity, hide caret
   &.v-text-field
     input
-      // caret-color: transparent !important
+      flex: 1 1 0
+      min-width: 40%
       pointer-events: none
 
   &.v-select--is-menu-active
@@ -38,14 +39,21 @@ theme(v-select, 'v-select')
     .v-label.v-label--active
       transform: translateY(-22px) scale(0.75)
 
+  &__selections
+    display: flex
+    flex: 1 1 auto
+    flex-wrap: wrap
+
   &__selection
     &--comma
+      align-items: center
+      display: inline-flex
       margin-right: 4px
 
   &__slot
-    width: 100%
     align-items: center
     display: flex
+    width: 100%
 
 .v-select-list
   .v-list__tile__action

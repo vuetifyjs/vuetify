@@ -211,7 +211,7 @@ export default {
     genSelections () {
       return this.hasSlot || this.isMulti
         ? VSelect.methods.genSelections.call(this)
-        : null
+        : []
     },
     onBlur (e) {
       if (this.tags) this.updateTags()

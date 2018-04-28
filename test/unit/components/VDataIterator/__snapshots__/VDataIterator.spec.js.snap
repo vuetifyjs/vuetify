@@ -28,13 +28,15 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
                            style="left: 0px; position: absolute;"
                     >
                     </label>
-                    <div class="v-select__selection v-select__selection--comma">
-                      5
+                    <div class="v-select__selections">
+                      <div class="v-select__selection v-select__selection--comma">
+                        5
+                      </div>
+                      <input tabindex="0"
+                             type="text"
+                             autocomplete="on"
+                      >
                     </div>
-                    <input tabindex="0"
-                           type="text"
-                           autocomplete="on"
-                    >
                     <div class="v-input__append-inner">
                       <div class="v-input__icon v-input__icon--append">
                         <i aria-hidden="true"
@@ -175,13 +177,15 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
                            style="left: 0px; position: absolute;"
                     >
                     </label>
-                    <div class="v-select__selection v-select__selection--comma">
-                      5
+                    <div class="v-select__selections">
+                      <div class="v-select__selection v-select__selection--comma">
+                        5
+                      </div>
+                      <input tabindex="0"
+                             type="text"
+                             autocomplete="on"
+                      >
                     </div>
-                    <input tabindex="0"
-                           type="text"
-                           autocomplete="on"
-                    >
                     <div class="v-input__append-inner">
                       <div class="v-input__icon v-input__icon--append">
                         <i aria-hidden="true"
@@ -313,13 +317,15 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
                            style="left: 0px; position: absolute;"
                     >
                     </label>
-                    <div class="v-select__selection v-select__selection--comma">
-                      5
+                    <div class="v-select__selections">
+                      <div class="v-select__selection v-select__selection--comma">
+                        5
+                      </div>
+                      <input tabindex="0"
+                             type="text"
+                             autocomplete="on"
+                      >
                     </div>
-                    <input tabindex="0"
-                           type="text"
-                           autocomplete="on"
-                    >
                     <div class="v-input__append-inner">
                       <div class="v-input__icon v-input__icon--append">
                         <i aria-hidden="true"
@@ -455,13 +461,15 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
                            style="left: 0px; position: absolute;"
                     >
                     </label>
-                    <div class="v-select__selection v-select__selection--comma">
-                      5
+                    <div class="v-select__selections">
+                      <div class="v-select__selection v-select__selection--comma">
+                        5
+                      </div>
+                      <input tabindex="0"
+                             type="text"
+                             autocomplete="on"
+                      >
                     </div>
-                    <input tabindex="0"
-                           type="text"
-                           autocomplete="on"
-                    >
                     <div class="v-input__append-inner">
                       <div class="v-input__icon v-input__icon--append">
                         <i aria-hidden="true"

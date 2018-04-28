@@ -26,13 +26,15 @@ exports[`VSelect should only show items if they are in items 1`] = `
                    style="left: 0px; position: absolute;"
             >
             </label>
-            <div class="v-select__selection v-select__selection--comma">
-              foo
+            <div class="v-select__selections">
+              <div class="v-select__selection v-select__selection--comma">
+                foo
+              </div>
+              <input tabindex="0"
+                     type="text"
+                     autocomplete="on"
+              >
             </div>
-            <input tabindex="0"
-                   type="text"
-                   autocomplete="on"
-            >
             <div class="v-input__append-inner">
               <div class="v-input__icon v-input__icon--append">
                 <i aria-hidden="true"
@@ -75,10 +77,12 @@ exports[`VSelect should only show items if they are in items 2`] = `
                    style="left: 0px; position: absolute;"
             >
             </label>
-            <input tabindex="0"
-                   type="text"
-                   autocomplete="on"
-            >
+            <div class="v-select__selections">
+              <input tabindex="0"
+                     type="text"
+                     autocomplete="on"
+              >
+            </div>
             <div class="v-input__append-inner">
               <div class="v-input__icon v-input__icon--append">
                 <i aria-hidden="true"
@@ -121,13 +125,15 @@ exports[`VSelect should only show items if they are in items 3`] = `
                    style="left: 0px; position: absolute;"
             >
             </label>
-            <div class="v-select__selection v-select__selection--comma">
-              bar
+            <div class="v-select__selections">
+              <div class="v-select__selection v-select__selection--comma">
+                bar
+              </div>
+              <input tabindex="0"
+                     type="text"
+                     autocomplete="on"
+              >
             </div>
-            <input tabindex="0"
-                   type="text"
-                   autocomplete="on"
-            >
             <div class="v-input__append-inner">
               <div class="v-input__icon v-input__icon--append">
                 <i aria-hidden="true"
@@ -159,7 +165,7 @@ exports[`VSelect should only show items if they are in items 4`] = `
 >
   <div class="v-input__control">
     <div class="v-input__slot primary--text"
-         style="height: 32px;"
+         style="height: auto;"
     >
       <div class="v-menu"
            style="display: inline-block;"
@@ -170,16 +176,18 @@ exports[`VSelect should only show items if they are in items 4`] = `
                    style="left: 0px; position: absolute;"
             >
             </label>
-            <div class="v-select__selection v-select__selection--comma">
-              foo,
+            <div class="v-select__selections">
+              <div class="v-select__selection v-select__selection--comma">
+                foo,
+              </div>
+              <div class="v-select__selection v-select__selection--comma">
+                bar
+              </div>
+              <input tabindex="0"
+                     type="text"
+                     autocomplete="on"
+              >
             </div>
-            <div class="v-select__selection v-select__selection--comma">
-              bar
-            </div>
-            <input tabindex="0"
-                   type="text"
-                   autocomplete="on"
-            >
             <div class="v-input__append-inner">
               <div class="v-input__icon v-input__icon--append">
                 <i aria-hidden="true"
@@ -222,10 +230,12 @@ exports[`VSelect should render v-select correctly when not using scope slot 1`] 
                    style="left: 0px; position: absolute;"
             >
             </label>
-            <input tabindex="0"
-                   type="text"
-                   autocomplete="on"
-            >
+            <div class="v-select__selections">
+              <input tabindex="0"
+                     type="text"
+                     autocomplete="on"
+              >
+            </div>
             <div class="v-input__append-inner">
               <div class="v-input__icon v-input__icon--append">
                 <i aria-hidden="true"
@@ -268,10 +278,12 @@ exports[`VSelect should render v-select correctly when not using v-list-tile in 
                    style="left: 0px; position: absolute;"
             >
             </label>
-            <input tabindex="0"
-                   type="text"
-                   autocomplete="on"
-            >
+            <div class="v-select__selections">
+              <input tabindex="0"
+                     type="text"
+                     autocomplete="on"
+              >
+            </div>
             <div class="v-input__append-inner">
               <div class="v-input__icon v-input__icon--append">
                 <i aria-hidden="true"
@@ -314,10 +326,12 @@ exports[`VSelect should render v-select correctly when using v-list-tile in item
                    style="left: 0px; position: absolute;"
             >
             </label>
-            <input tabindex="0"
-                   type="text"
-                   autocomplete="on"
-            >
+            <div class="v-select__selections">
+              <input tabindex="0"
+                     type="text"
+                     autocomplete="on"
+              >
+            </div>
             <div class="v-input__append-inner">
               <div class="v-input__icon v-input__icon--append">
                 <i aria-hidden="true"
