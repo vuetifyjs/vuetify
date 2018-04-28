@@ -24,6 +24,21 @@ test('VTooltip.js', ({ mount, compileToFunctions }) => {
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
+  it('should render component with custom lazy and match snapshot', () => {
+    const wrapper = mount(VTooltip, {
+      propsData: {
+        lazy: true
+      },
+      slots: {
+        activator: [compileToFunctions('<span>activator</span>')],
+        default: [compileToFunctions('<span>content</span>')]
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
   it('should render component with value=true and match snapshot', async () => {
     const wrapper = mount(VTooltip, {
       propsData: {
