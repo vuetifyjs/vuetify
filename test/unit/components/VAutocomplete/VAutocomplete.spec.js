@@ -255,7 +255,7 @@ test('VAutocomplete.js', ({ mount, shallow }) => {
 
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.isMenuActive).toBe(true)
+    expect(wrapper.vm.isMenuActive).toBe(false)
 
     input.trigger('blur')
     expect(change).toHaveBeenCalledWith('foo')
@@ -576,7 +576,7 @@ test('VAutocomplete.js', ({ mount, shallow }) => {
 
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.getMenuIndex()).toBe(0)
+    expect(wrapper.vm.getMenuIndex()).toBe(1)
 
     expect(selectListTile).not.toBeCalled()
 

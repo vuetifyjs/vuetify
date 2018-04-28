@@ -42,11 +42,11 @@ export default {
     cachedItems: vm.cacheItems ? vm.items : [],
     isMenuActive: false,
     // As long as a value is defined, show it
-    // Otherwise, check if tags or multiple (can't use isMulti)
+    // Otherwise, check if multiple
     // to determine which default to provide
     lazyValue: vm.value != null
       ? vm.value
-      : vm.tags || vm.multiple ? [] : undefined,
+      : vm.multi ? [] : undefined,
     selectedIndex: -1,
     selectedItems: []
   }),
@@ -69,7 +69,6 @@ export default {
     cacheItems: Boolean,
     chips: Boolean,
     clearable: Boolean,
-    combobox: Boolean,
     contentClass: String,
     deletableChips: Boolean,
     dense: Boolean,
@@ -112,8 +111,7 @@ export default {
       default: null
     },
     segmented: Boolean,
-    singleLine: Boolean,
-    tags: Boolean
+    singleLine: Boolean
   },
 
   computed: {
@@ -162,7 +160,7 @@ export default {
       return this.disabled || this.readonly
     },
     isMulti () {
-      return this.multiple || this.tags
+      return this.multiple
     }
   },
 
@@ -235,6 +233,8 @@ export default {
             if (this.selectedItems.length === 0) {
               this.isMenuActive = true
             }
+
+            this.selectedIndex = -1
           }
         },
         key: this.getValue(item)
@@ -415,18 +415,6 @@ export default {
         this.isMenuActive = true
       }
     },
-    setSelectedItems () {
-      if (this.tags) return this.selectedItems = this.internalValue
-
-      const fn = !this.isMulti
-        ? i => this.valueComparator(
-          this.getValue(i),
-          this.getValue(this.internalValue)
-        )
-        : i => this.findExistingIndex(i, this.internalValue) > -1
-
-      this.selectedItems = this.computedItems.filter(fn)
-    },
     selectItem (item) {
       if (!this.isMulti) {
         this.internalValue = this.returnObject ? item : this.getValue(item)
@@ -447,6 +435,19 @@ export default {
         this.$refs.menu &&
           this.$refs.menu.updateDimensions()
       })
+    },
+    setMenuIndex (index) {
+      this.$refs.menu && (this.$refs.menu.listIndex = index)
+    },
+    setSelectedItems () {
+      const fn = !this.isMulti
+        ? i => this.valueComparator(
+          this.getValue(i),
+          this.getValue(this.internalValue)
+        )
+        : i => this.findExistingIndex(i, this.internalValue) > -1
+
+      this.selectedItems = this.computedItems.filter(fn)
     }
   }
 }
