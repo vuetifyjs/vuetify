@@ -5,5 +5,9 @@ const OPTIONS_DEFAULTS = {
 }
 
 export default function options (options = {}) {
-  return Object.assign({}, OPTIONS_DEFAULTS, options)
+  return {
+    data: () => ({
+      options: Object.assign({}, OPTIONS_DEFAULTS, options)
+    })
+  }
 }

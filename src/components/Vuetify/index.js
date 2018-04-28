@@ -1,9 +1,10 @@
 import application from './mixins/application'
-import theme from './mixins/theme'
+import breakpoint from './mixins/breakpoint'
 import icons from './mixins/icons'
+import methods from './mixins/methods'
 import options from './mixins/options'
+import theme from './mixins/theme'
 import { consoleWarn } from '../../util/console'
-import goTo from './util/goTo'
 
 const Vuetify = {
   install (Vue, opts = {}) {
@@ -14,17 +15,14 @@ const Vuetify = {
     checkVueVersion(Vue)
 
     Vue.prototype.$vuetify = new Vue({
-      data: {
+      mixins: [
         application,
-        breakpoint: {},
-        dark: false,
-        options: options(opts.options),
-        theme: theme(opts.theme),
-        icons: icons(opts.iconfont, opts.icons)
-      },
-      methods: {
-        goTo
-      }
+        breakpoint,
+        icons(opts.iconfont, opts.icons),
+        methods,
+        options(opts.options),
+        theme(opts.theme)
+      ]
     })
 
     if (opts.transitions) {
