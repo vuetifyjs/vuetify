@@ -42,7 +42,7 @@ theme(button, "v-btn")
 
 /** Psuedo */
 .v-btn
-  &__content:before
+  &:before
     border-radius: inherit
     color: inherit
     content: ''
@@ -73,7 +73,9 @@ theme(button, "v-btn")
   &--active,
   &:hover,
   &:focus
-    .v-btn__content:before
+    position: relative
+
+    &:before
       background-color: currentColor
 
   &__content
@@ -130,7 +132,7 @@ theme(button, "v-btn")
     &.v-btn--large
       width: $button-large-height
 
-    .v-btn__content:before
+    &:before
       border-radius: 50%
 
   &--floating
