@@ -1,13 +1,13 @@
 import { test } from '@/test'
 import VAutocomplete from '@/components/VAutocomplete'
 
-test('VAutocomplete - combobox', ({ mount }) => {
+test('VAutocomplete - combobox', ({ mount, shallow }) => {
   const app = document.createElement('div')
   app.setAttribute('data-app', true)
   document.body.appendChild(app)
 
   it('should evaluate the range of an integer', async () => {
-    const wrapper = mount(VAutocomplete, {
+    const wrapper = shallow(VAutocomplete, {
       propsData: {
         combobox: true,
         value: 11
@@ -23,7 +23,7 @@ test('VAutocomplete - combobox', ({ mount }) => {
   })
 
   it('should not use search input when blurring', async () => {
-    const wrapper = mount(VAutocomplete, {
+    const wrapper = shallow(VAutocomplete, {
       attachToDocument: true,
       propsData: {
         combobox: true,
@@ -51,7 +51,7 @@ test('VAutocomplete - combobox', ({ mount }) => {
 
   it('should not use search input if an option is selected from the menu', async () => {
     const item = { value: 123, text: 'Foo' }
-    const wrapper = mount(VAutocomplete, {
+    const wrapper = shallow(VAutocomplete, {
       propsData: {
         combobox: true,
         items: [item]
@@ -74,7 +74,7 @@ test('VAutocomplete - combobox', ({ mount }) => {
   })
 
   it('should not populate search field if value is falsey', async () => {
-    const wrapper = mount(VAutocomplete, {
+    const wrapper = shallow(VAutocomplete, {
       propsData: {
         combobox: true
       }
@@ -93,5 +93,34 @@ test('VAutocomplete - combobox', ({ mount }) => {
     await wrapper.vm.$nextTick()
 
     expect(event).not.toBeCalled()
+  })
+
+  it('should clear value', async () => {
+    const wrapper = mount(VAutocomplete, {
+      attachToDocument: true,
+      propsData: { combobox: true }
+    })
+
+    const change = jest.fn()
+    const input = wrapper.first('input')
+
+    wrapper.vm.$on('change', change)
+    wrapper.vm.$on('input', change)
+
+    input.trigger('focus')
+    input.element.value = 'foo'
+    input.trigger('input')
+    input.trigger('keydown.enter')
+
+    expect(change).toBeCalledWith('foo')
+    expect(change).toHaveBeenCalledTimes(2)
+    expect(wrapper.vm.internalValue).toBe('foo')
+
+    input.element.value = ''
+    input.trigger('input')
+    input.trigger('keydown.tab')
+
+    expect(wrapper.vm.internalValue).toBe('')
+    expect(change).toHaveBeenCalledTimes(4)
   })
 })

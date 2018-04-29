@@ -230,10 +230,7 @@ export default {
         : []
     },
     onBlur (e) {
-      if (this.tags) this.updateTags()
-      else if (this.combobox) this.updateCombobox()
-      else this.updateAutocomplete()
-
+      this.updateSelf()
       VSelect.methods.onBlur.call(this, e)
     },
     onClick (e) {
@@ -277,7 +274,7 @@ export default {
       // If tab - select item or close menu
       if (keyCode === keyCodes.tab) return this.onTabDown(e)
 
-      if (this.$refs.input.selectionStart === 0) this.updateTags()
+      if (this.$refs.input.selectionStart === 0) this.updateSelf()
       if (!this.hideSelections) this.changeSelectedIndex(keyCode)
     },
     onTabDown (e) {
@@ -294,11 +291,9 @@ export default {
         e.stopPropagation()
 
         return this.updateTags()
-      }
-
       // An item that is selected by
       // menu-index should toggled
-      if (this.isMenuActive && menuIndex > -1) {
+      } else if (this.isMenuActive && menuIndex > -1) {
         // Reset the list index if searching
         this.internalSearch &&
           this.$nextTick(() => setTimeout(() => this.setMenuIndex(-1), 0))
@@ -311,6 +306,8 @@ export default {
         // and is probably tabbing out
         this.isFocused = false
       }
+
+      this.updateSelf()
     },
     selectItem (item) {
       VSelect.methods.selectItem.call(this, item)
@@ -343,7 +340,7 @@ export default {
     },
     setValue () {
       this.internalValue = this.internalSearch
-      this.$emit('change', this.internalValue)
+      this.$emit('change', this.internalSearch)
     },
     updateAutocomplete () {
       if (!this.searchIsDirty ||
@@ -360,18 +357,13 @@ export default {
       }
     },
     updateCombobox () {
-      // no internal value
-      // set lazySearch
-
-      if (this.internalSearch &&
-        this.internalSearch !== this.internalValue
-      ) this.setValue()
+      if (this.internalSearch !== this.internalValue) this.setValue()
       else this.updateAutocomplete()
-
-      // if (this.searchIsDirty) this.setSearch()
-      // else if (this.internalSearch &&
-      //   this.internalSearch !== this.internalValue
-      // ) this.setInternalValue()
+    },
+    updateSelf () {
+      if (this.tags) this.updateTags()
+      else if (this.combobox) this.updateCombobox()
+      else this.updateAutocomplete()
     },
     // Maybe change to onBlur?
     updateTags () {
