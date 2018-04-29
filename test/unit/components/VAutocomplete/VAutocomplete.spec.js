@@ -642,4 +642,23 @@ test('VAutocomplete.js', ({ mount, shallow }) => {
 
     wrapper.setProps({ hideSelections: true })
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/3793
+  it('should reset menu index after selection', async () => {
+    const wrapper = shallow(VAutocomplete, {
+      propsData: {
+        items: ['foo', 'bar'],
+        value: 'foo'
+      }
+    })
+
+    expect(wrapper.vm.isMenuActive).toBe(false)
+    const slot = wrapper.first('.v-input__slot')
+    const item = wrapper.first('.v-list__tile')
+    slot.trigger('click')
+
+    expect(wrapper.vm.isMenuActive).toBe(true)
+
+    expect(wrapper.vm.getMenuIndex()).toBe(-1)
+  })
 })
