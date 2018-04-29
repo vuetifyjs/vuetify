@@ -761,4 +761,14 @@ test('VTextField.js', ({ mount }) => {
 
     expect(input.element.autocomplete).toBe('off')
   })
+
+  it('should not apply id to root element', () => {
+    const wrapper = mount(VTextField, {
+      attrs: { id: 'foo' }
+    })
+
+    const input = wrapper.first('input')
+    expect(wrapper.element.id).toBe('')
+    expect(input.element.id).toBe('foo')
+  })
 })
