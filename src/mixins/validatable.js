@@ -136,7 +136,7 @@ export default {
   },
 
   beforeMount () {
-    this.shouldValidate = !!this.error
+    this.shouldValidate = this.hasError
     this.validate()
   },
 
