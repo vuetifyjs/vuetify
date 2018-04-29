@@ -139,7 +139,7 @@ exports[`VInput.js should generate append and prepend slots 4`] = `
 
 exports[`VInput.js should not generate input details 1`] = `
 
-<div class="v-input">
+<div class="v-input v-input--hide-details">
   <div class="v-input__control">
     <div class="v-input__slot"
          style="height: 32px;"

@@ -69,7 +69,7 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
       <div class="v-datatable__actions__select">
         Rows per page:
         <div role="combobox"
-             class="v-input v-text-field v-select"
+             class="v-input v-text-field v-select v-input--hide-details"
         >
           <div class="v-input__control">
             <div class="v-input__slot primary--text"
@@ -260,7 +260,7 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
       <div class="v-datatable__actions__select">
         Rows per page:
         <div role="combobox"
-             class="v-input v-text-field v-select"
+             class="v-input v-text-field v-select v-input--hide-details"
         >
           <div class="v-input__control">
             <div class="v-input__slot primary--text"
@@ -453,7 +453,7 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
       <div class="v-datatable__actions__select">
         Rows per page:
         <div role="combobox"
-             class="v-input v-text-field v-select"
+             class="v-input v-text-field v-select v-input--hide-details"
         >
           <div class="v-input__control">
             <div class="v-input__slot primary--text"

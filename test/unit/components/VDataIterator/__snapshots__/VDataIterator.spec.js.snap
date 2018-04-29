@@ -13,7 +13,7 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
       <div class="v-data-iterator__actions__select">
         Items per page:
         <div role="combobox"
-             class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty"
+             class="v-input v-text-field v-select v-input--hide-details v-input--is-label-active v-input--is-dirty"
         >
           <div class="v-input__control">
             <div class="v-input__slot primary--text"
@@ -162,7 +162,7 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
       <div class="v-data-iterator__actions__select">
         Items per page:
         <div role="combobox"
-             class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty"
+             class="v-input v-text-field v-select v-input--hide-details v-input--is-label-active v-input--is-dirty"
         >
           <div class="v-input__control">
             <div class="v-input__slot primary--text"
@@ -302,7 +302,7 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
       <div class="v-data-iterator__actions__select">
         Items per page:
         <div role="combobox"
-             class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty"
+             class="v-input v-text-field v-select v-input--hide-details v-input--is-label-active v-input--is-dirty"
         >
           <div class="v-input__control">
             <div class="v-input__slot primary--text"
@@ -446,7 +446,7 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
       <div class="v-data-iterator__actions__select">
         Items per page:
         <div role="combobox"
-             class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty"
+             class="v-input v-text-field v-select v-input--hide-details v-input--is-label-active v-input--is-dirty"
         >
           <div class="v-input__control">
             <div class="v-input__slot primary--text"

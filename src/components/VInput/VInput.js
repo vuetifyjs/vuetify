@@ -47,6 +47,7 @@ export default {
       return {
         ...this.classes,
         'v-input--has-state': this.hasState,
+        'v-input--hide-details': this.hideDetails,
         'v-input--is-label-active': this.isLabelActive,
         'v-input--is-dirty': this.isDirty,
         'v-input--is-disabled': this.disabled,
