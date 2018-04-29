@@ -1,7 +1,7 @@
-for size, query in $display-breakpoints
+for size, mediaQuery in $display-breakpoints
   .hidden
     &-{size}
-      @media query
+      @media mediaQuery
         display: none !important
 
 .overflow-hidden
