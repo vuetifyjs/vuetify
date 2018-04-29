@@ -59,19 +59,17 @@ theme(button, "v-btn")
   &--small
     font-size: $button-small-font-size
     height: $button-small-height
-
-    .v-btn__content
-      padding: $button-small-padding
+    padding: $button-small-padding
 
   &--large
     font-size: $button-large-font-size
     height: $button-large-height
-
-    .v-btn__content
-      padding: $button-large-padding
+    padding: $button-large-padding
 
 /** Content */
 .v-btn
+  padding: $button-padding
+
   &--active,
   &:hover,
   &:focus
@@ -87,7 +85,6 @@ theme(button, "v-btn")
     flex: 1 0 auto
     justify-content: center
     margin: 0 auto
-    padding: $button-padding
     transition: $primary-transition
     white-space: nowrap
     width: inherit
@@ -156,7 +153,6 @@ theme(button, "v-btn")
     .v-btn__content
       flex: 1 1 auto
       margin: 0
-      padding: 0
 
     &:after
       border-radius: 50%
@@ -270,8 +266,7 @@ theme(button, "v-btn")
     pointer-events: none
 
 .v-btn--icon
-  .v-btn__content
-    padding: 0
+  padding: 0
 
 
 /** Loader */
