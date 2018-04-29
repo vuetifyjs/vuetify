@@ -562,56 +562,6 @@ test('VTextField.js', ({ mount }) => {
     expect(input.element.style.getPropertyValue('height').length).not.toBe(0)
   })
 
-  it.skip('should match multi-line snapshot', () => {
-    const wrapper = mount(VTextField, {
-      propsData: {
-        multiLine: true
-      }
-    })
-
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-
-  it.skip('should match textarea snapshot', () => {
-    const wrapper = mount(VTextField, {
-      propsData: {
-        textarea: true
-      }
-    })
-
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-
-  it.skip('should match auto-grow snapshot', async () => {
-    const wrapper = mount(VTextField, {
-      propsData: {
-        textarea: true,
-        autoGrow: true
-      }
-    })
-    await wrapper.vm.$nextTick()
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-
-  it.skip('should render no-resize the same if already auto-grow', () => {
-    const wrappers = [
-      { autoGrow:true, multiLine: true },
-      { autoGrow:true, textarea: true }
-    ].map(propsData => mount(VTextField,{propsData}))
-
-    wrappers.forEach(async wrapper => {
-      await wrapper.vm.$nextTick()
-      const html1 = wrapper.html()
-
-      wrapper.setProps({ noResize: true })
-      // will still pass without this, do not remove
-      await wrapper.vm.$nextTick()
-      const html2 = wrapper.html()
-
-      expect(html2).toBe(html1)
-    })
-  })
-
   it('render active label for dirtyTypes (time/date/color/etc)', () => {
     const wrapper = mount(VTextField, {
       propsData: {

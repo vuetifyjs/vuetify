@@ -123,4 +123,23 @@ test('VTextarea.vue', ({ mount }) => {
 
     expect(stopPropagation).toBeCalled()
   })
+
+  it.skip('should render no-resize the same if already auto-grow', () => {
+    const wrappers = [
+      { autoGrow:true, multiLine: true },
+      { autoGrow:true, textarea: true }
+    ].map(propsData => mount(VTextField,{propsData}))
+
+    wrappers.forEach(async wrapper => {
+      await wrapper.vm.$nextTick()
+      const html1 = wrapper.html()
+
+      wrapper.setProps({ noResize: true })
+      // will still pass without this, do not remove
+      await wrapper.vm.$nextTick()
+      const html2 = wrapper.html()
+
+      expect(html2).toBe(html1)
+    })
+  })
 })
