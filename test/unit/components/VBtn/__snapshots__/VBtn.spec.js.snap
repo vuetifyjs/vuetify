@@ -1,49 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VBtn.js should have v-btn--depressed and v-btn--outline classes when using outline prop 1`] = `
-
-<button type="button"
-        class="v-btn v-btn--outline v-btn--depressed"
->
-  <div class="v-btn__content">
-  </div>
-</button>
-
-`;
-
-exports[`VBtn.js should have v-btn--depressed class when using depressed prop 1`] = `
-
-<button type="button"
-        class="v-btn v-btn--depressed"
->
-  <div class="v-btn__content">
-  </div>
-</button>
-
-`;
-
-exports[`VBtn.js should have v-btn--flat class when using flat and depressed props 1`] = `
-
-<button type="button"
-        class="v-btn v-btn--flat"
->
-  <div class="v-btn__content">
-  </div>
-</button>
-
-`;
-
-exports[`VBtn.js should have v-btn--outline and v-btn--depressed classes when using outline prop 1`] = `
-
-<button type="button"
-        class="v-btn v-btn--outline v-btn--depressed"
->
-  <div class="v-btn__content">
-  </div>
-</button>
-
-`;
-
 exports[`VBtn.js should render a <button> tag when using to prop 1`] = `
 
 <button class="v-btn v-btn--router">
@@ -150,16 +106,5 @@ exports[`VBtn.js should render specified tag when using tag prop 1`] = `
   <div class="v-btn__content">
   </div>
 </a>
-
-`;
-
-exports[`VBtn.js should use custom active-class 1`] = `
-
-<button type="button"
-        class="v-btn foo"
->
-  <div class="v-btn__content">
-  </div>
-</button>
 
 `;

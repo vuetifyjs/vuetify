@@ -143,7 +143,7 @@ test('VBtn.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.hasClass('foo')).toBe(true)
   })
 
   it('should have v-btn--depressed class when using depressed prop', () => {
@@ -153,7 +153,7 @@ test('VBtn.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.hasClass('v-btn--depressed')).toBe(true)
   })
 
   it('should have v-btn--flat class when using flat and depressed props', () => {
@@ -164,7 +164,7 @@ test('VBtn.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.hasClass('v-btn--flat')).toBe(true)
   })
 
   it('should have v-btn--outline and v-btn--depressed classes when using outline prop', () => {
@@ -174,6 +174,7 @@ test('VBtn.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.hasClass('v-btn--outline')).toBe(true)
+    expect(wrapper.hasClass('v-btn--depressed')).toBe(true)
   })
 })
