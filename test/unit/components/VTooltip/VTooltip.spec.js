@@ -36,7 +36,6 @@ test('VTooltip.js', ({ mount, compileToFunctions }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render component with value=true and match snapshot', async () => {
