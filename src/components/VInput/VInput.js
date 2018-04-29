@@ -10,6 +10,9 @@ import Loadable from '../../mixins/loadable'
 import Themeable from '../../mixins/themeable'
 import Validatable from '../../mixins/validatable'
 
+// Utilities
+import { convertToUnit } from '../../util/helpers'
+
 export default {
   name: 'v-input',
 
@@ -58,9 +61,10 @@ export default {
     // use dynamicHeight to override
     // the default conditional
     computedHeight () {
-      return this.dynamicHeight || (!this.height
-        ? '32px'
-        : `${parseInt(this.height)}px`)
+      return convertToUnit(this.dynamicHeight || this.height || 32)
+    },
+    directivesInput () {
+      return []
     },
     hasHint () {
       return !this.hasMessages &&
@@ -111,14 +115,15 @@ export default {
           color: this.validationState,
           disabled: this.disabled
         },
-        on: cb ? {
+        on: {
           click: e => {
             e.preventDefault()
             e.stopPropagation()
 
-            cb()
+            if (cb) cb()
+            else this.onClick()
           }
-        } : null
+        }
       }
 
       return this.$createElement('div', {
@@ -209,7 +214,8 @@ export default {
     return h('div', {
       staticClass: 'v-input',
       attrs: this.attrsInput,
-      'class': this.classesInput
+      'class': this.classesInput,
+      directives: this.directivesInput
     }, [
       this.genPrependSlot(),
       this.genContent(),

@@ -1,15 +1,18 @@
 // Styles
 import '../../stylus/components/_text-fields.styl'
 
+// Extensions
+import VInput from '../VInput'
+
 // Components
 import VCounter from '../VCounter'
 import VLabel from '../VLabel'
 
-// Extensions
-import VInput from '../VInput'
-
 // Mixins
 import Maskable from '../../mixins/maskable'
+
+// Directives
+import Ripple from '../../directives/ripple'
 
 const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
 
@@ -19,6 +22,8 @@ export default {
   extends: VInput,
 
   mixins: [Maskable],
+
+  directives: { Ripple },
 
   inheritAttrs: false,
 
@@ -72,6 +77,14 @@ export default {
         'v-text-field--enclosed': this.isEnclosed,
         'elevation-0': this.flat
       }
+    },
+    directivesInput () {
+      return this.box
+        ? [{ name: 'ripple', value: true }]
+        : []
+    },
+    dynamicHeight () {
+      return this.isEnclosed ? 40 : false
     },
     internalValue: {
       get () {
@@ -284,17 +297,14 @@ export default {
       this.$emit('blur', e)
     },
     onClick () {
-      !this.isFocused &&
-        !this.disabled &&
-        this.onFocus()
+      if (this.isFocused || this.disabled) return
+
+      this.$refs.input.focus()
     },
     onFocus (e) {
       if (!this.$refs.input) return
 
       this.isFocused = true
-      if (document.activeElement !== this.$refs.input) {
-        // this.$refs.input.focus()
-      }
       this.$emit('focus', e)
     },
     onInput (e) {

@@ -44,6 +44,46 @@ v-text-field($material)
 theme(v-text-field, "v-text-field")
 
 .v-text-field
+  input
+    max-height: 32px
+
+  .v-counter
+    white-space: nowrap
+
+  .v-label
+    line-height: normal // needed because of hidden overflow clips y axis of text
+    max-width: 100%
+    overflow: hidden
+    text-overflow: ellipsis
+    top: 7px
+    transform-origin: top left
+    white-space: nowrap
+
+    &--active
+      transform: translateY(-16px) scale(0.75)
+
+  .v-input__slot
+    &:before,
+    &:after
+      bottom: -1px
+      content: ''
+      left: 0
+      position: absolute
+      transition: $primary-transition
+      width: 100%
+
+    &:before
+      background-color: transparent
+      background-position: bottom
+      background-size: 3px 1px
+      background-repeat: repeat-x
+      height: 1px
+
+    &:after
+      background-color: currentColor
+      height: 2px
+      transform: scaleX(0)
+
   &__details
     display: flex
     flex: 1 0 auto
@@ -68,21 +108,41 @@ theme(v-text-field, "v-text-field")
 
   &--box
     border-radius: 4px
+    cursor: pointer
     position: relative
 
+    &:after
+      background-color: currentColor
+      bottom: 1px
+      border-bottom-left-radius: 2px
+      border-bottom-right-radius: 2px
+      content: ''
+      height: 2px
+      left: 0
+      position: absolute
+      transform: scaleX(0)
+      transition-delay: 2s
+      transition: $primary-transition
+      width: 100%
+
+    &.v-input--is-focused:after
+      transform: scaleX(1)
+
+    input
+      cursor: pointer
+
     .v-input__control
-      position: static
+      .v-input__slot
+        position: static
 
-      .v-input__slot:before
-        border-radius: 4px
-        height: 2px
+        &:before,
+        &:after
+          display: none
 
-    .v-input__slot
-      position: static
-
-  &--enclosed
-    padding: 8px 16px
+  &.v-text-field--enclosed
+    align-items: center
     margin-bottom: 24px
+    padding: 8px 16px
 
     .v-input__append-outer
       .v-input__icon
@@ -94,11 +154,15 @@ theme(v-text-field, "v-text-field")
 
     .v-text-field__details
       bottom: -22px
+      pointer-events: none
       position: absolute
       width: 100%
 
     .v-input__slot
       margin-bottom: 0
+
+    .v-text-field__slot
+      height: 100%
 
     &:not(.v-text-field--box)
       .v-input__slot
@@ -106,26 +170,32 @@ theme(v-text-field, "v-text-field")
         &:after
           display: none
 
-  &--solo
+    input
+      align-self: flex-end
+      position: relative
+      bottom: -4px
+
+    .v-label
+      top: 11px
+
+      &--active
+        transform: translateY(-8px) scale(0.75)
+
+  &--single-line
+    &.v-text-field--box
+      input
+        align-self: auto
+
+  &.v-text-field--solo
     elevation(2)
 
-  input
-    max-height: 32px
+    input
+      align-self: auto
 
-  .v-counter
-    white-space: nowrap
-
-  .v-label
-    line-height: normal // needed because of hidden overflow clips y axis of text
-    max-width: 100%
-    overflow: hidden
-    text-overflow: ellipsis
-    top: 4px
-    transform-origin: top left
-    white-space: nowrap
-
-    &--active
-      transform: translateY(-19px) scale(0.75)
+  &.v-input
+    &:before,
+    &:after
+      bottom: 0
 
   &.v-input--is-focused
     .v-input__slot:after
@@ -139,25 +209,3 @@ theme(v-text-field, "v-text-field")
     display: inline-flex
     padding: 4px 0 4px 8px
     margin-left: auto
-
-  .v-input__slot
-    &:before,
-    &:after
-      bottom: -1px
-      content: ''
-      left: 0
-      position: absolute
-      transition: $primary-transition
-      width: 100%
-
-    &:before
-      background-color: transparent
-      background-position: bottom
-      background-size: 3px 1px
-      background-repeat: repeat-x
-      height: 1px
-
-    &:after
-      background-color: currentColor
-      height: 2px
-      transform: scaleX(0)
