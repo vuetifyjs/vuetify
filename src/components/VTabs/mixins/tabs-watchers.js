@@ -23,14 +23,12 @@ export default {
     fixedTabs: 'callSlider',
     hasArrows (val) {
       if (!val) this.scrollOffset = 0
+      this.setWidths()
+      this.callSlider()
     },
     isBooted: 'findActiveLink',
     lazyValue: 'updateTabs',
     right: 'callSlider',
-    showArrows () {
-      this.setWidths()
-      this.callSlider()
-    },
     value (val) {
       this.lazyValue = val
     },

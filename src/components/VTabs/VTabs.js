@@ -143,7 +143,7 @@ export default {
     setWidths () {
       const bar = this.$refs.bar ? this.$refs.bar.clientWidth : 0
       const container = this.$refs.container ? this.$refs.container.clientWidth : 0
-      const wrapper = bar ? (bar - 80 * this.showArrows) : 0
+      const wrapper = bar ? (bar - 80 * this.hasArrows) : 0
 
       this.widths = { bar, container, wrapper }
 
@@ -223,7 +223,7 @@ export default {
     },
     tabClick (tab) {
       this.inputValue = tab.action === tab ? this.tabs.indexOf(tab) : tab.action
-      this.scrollIntoView()
+      this.centerActiveTabInWrapper || this.scrollIntoView()
     },
     tabProxy (val) {
       this.lazyValue = val
