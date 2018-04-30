@@ -97,9 +97,17 @@ export default {
       const icon = this.$slots.actions ||
         this.$createElement(VIcon, this.expandIcon)
 
-      return this.$createElement('div', {
-        staticClass: 'header__icon'
-      }, [icon])
+      return this.$createElement('transition', {
+        attrs: { name: 'fade-transition' }
+      }, [
+        this.$createElement('div', {
+          staticClass: 'header__icon',
+          directives: [{
+            name: 'show',
+            value: !this.isDisabled
+          }]
+        }, [icon])
+      ])
     },
     toggle (active) {
       if (active) this.isBooted = true

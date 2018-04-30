@@ -53,9 +53,6 @@ theme(v-expansion-panel, "v-expansion-panel")
       .v-expansion-panel__header
         pointer-events: none
 
-      .header__icon
-        visibility: hidden
-
     &--active
       > .v-expansion-panel__header
         .header__icon .v-icon
@@ -67,6 +64,7 @@ theme(v-expansion-panel, "v-expansion-panel")
     align-items: center
     position: relative
     padding: 12px 24px
+    height: 48px
 
     > *:not(.header__icon)
       flex: 1 1 auto
