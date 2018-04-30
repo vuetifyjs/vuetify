@@ -61,13 +61,15 @@ test('VExpansionPanelContent.js', ({ mount, compileToFunctions }) => {
     expect(wrapper.find('.v-icon')[0].element.textContent).toBe('block')
   })
 
-  it.only('should toggle panel on header click', async () => {
+  it('should toggle panel on header click', async () => {
     const wrapper = mount(VExpansionPanelContent, {
       slots: {
         header: [compileToFunctions('<span>header</span>')]
       },
       provide: {
-        expansionPanel: expansionPanelProvide()
+        expansionPanel: expansionPanelProvide({
+          panelClick: uid => wrapper.vm.toggle(uid)
+        })
       }
     })
 
