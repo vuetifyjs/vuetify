@@ -15,6 +15,34 @@ theme(v-textarea, "v-textarea")
     min-height: 32px
     outline: none
 
+  .v-label
+    top: 6px
+
+  .v-input__slot
+    align-items: flex-start
+
+  &.v-text-field--enclosed
+    .v-input__prepend-outer,
+    .v-input__append-inner,
+    .v-input__append-outer
+      align-self: flex-start
+      margin-top: 12px
+
+    .v-label
+      margin-top: 12px
+
+    textarea
+      margin-top: 24px
+
+    &:not(.v-text-field--single-line)
+      .v-label--active
+        transform: translateY(-45%) scale(0.75)
+
+
+    &.v-text-field--single-line
+      textarea
+        margin-top: 12px
+
   &.v-textarea--textarea
     border-radius: 2px
 

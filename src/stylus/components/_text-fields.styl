@@ -61,7 +61,7 @@ theme(v-text-field, "v-text-field")
     max-width: 100%
     overflow: hidden
     text-overflow: ellipsis
-    top: 6px
+    top: calc(50% - 9px)
     transform-origin: top left
     white-space: nowrap
 
@@ -190,10 +190,10 @@ theme(v-text-field, "v-text-field")
     align-items: center
     elevation(2)
 
-    .v-label
-      top: calc(50% - 9px)
-
     input
+      align-self: center
+
+    .v-input__append-inner
       align-self: center
 
   &.v-input--is-focused
