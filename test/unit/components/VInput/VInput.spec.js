@@ -97,12 +97,16 @@ test('VInput.js', ({ mount }) => {
 
     const prepend = wrapper.find('.v-icon')[0]
     const append = wrapper.find('.v-icon')[1]
+    const slot = wrapper.first('.v-input__slot')
 
     prepend.trigger('click')
     expect(cb.mock.calls.length).toBe(1)
     append.trigger('click')
     expect(cb.mock.calls.length).toBe(2)
     expect(click).not.toHaveBeenCalled()
+
+    slot.trigger('click')
+    expect(click).toBeCalled()
   })
 
   it('should accept a custom height', () => {

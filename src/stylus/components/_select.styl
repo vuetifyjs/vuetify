@@ -4,17 +4,18 @@
 v-select($material)
   // Needs an explicit color to override
   // higher level color
-  &__selection
+  &__selections
     color: $material.text.primary
 
   &.v-input--is-disabled
-    .v-select__selection
+    .v-select__selections
       color: $material.text.disabled
 
 theme(v-select, 'v-select')
 
 .v-select
   .v-menu
+    height: 100%
     flex: 1 1 auto
 
   .v-chip
@@ -27,9 +28,11 @@ theme(v-select, 'v-select')
   // For specificity, hide caret
   &.v-text-field
     input
+      bottom: 1px
       flex: 1 1 0
       min-width: 40%
       pointer-events: none
+      position: relative
 
   &.v-select--is-menu-active
     .v-input__icon--append .v-icon
@@ -39,7 +42,15 @@ theme(v-select, 'v-select')
     .v-label.v-label--active
       transform: translateY(-22px) scale(0.75)
 
+  // Essentially duplicated from _text-fields.styl
+  &.v-text-field--box:not(.v-text-field--single-line)
+    .v-select__selections
+      align-self: flex-end
+      position: relative
+      bottom: -4px
+
   &__selections
+    align-items: center
     display: flex
     flex: 1 1 auto
     flex-wrap: wrap
@@ -53,6 +64,7 @@ theme(v-select, 'v-select')
   &__slot
     align-items: center
     display: flex
+    height: 100%
     width: 100%
 
 .v-select-list

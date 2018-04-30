@@ -46,7 +46,7 @@ export default {
     // to determine which default to provide
     lazyValue: vm.value != null
       ? vm.value
-      : vm.multi ? [] : undefined,
+      : vm.multiple ? [] : undefined,
     selectedIndex: -1,
     selectedItems: []
   }),
@@ -148,7 +148,9 @@ export default {
       }]
     },
     dynamicHeight () {
-      return this.chips || this.isMulti ? 'auto' : '32px'
+      return !this.isSolo && (this.chips || this.isMulti)
+        ? 'auto'
+        : VTextField.computed.dynamicHeight.call(this)
     },
     hasSlot () {
       return Boolean(this.chips || this.$slots.item)
@@ -328,16 +330,26 @@ export default {
         contentClass: this.contentClass
       }
       const inheritedProps = Object.keys(VMenu.props).concat(Object.keys(Menuable.props))
+      const nudgeMenu = this.isSolo || this.box
 
       // Later this might be filtered
       for (let prop of inheritedProps) {
         props[prop] = this[prop]
       }
 
+      // These styles encompass the prepend
+      // and append icons. Change activator
+      // to the entire component
+      if (this.isSolo || this.box) {
+        props.activator = this.$el
+      }
+
       props.closeOnClick = false
       props.closeOnContentClick = false
       props.openOnClick = false
       props.value = this.isMenuActive
+      props.offsetY = this.offsetY || nudgeMenu
+      props.nudgeBottom = +nudgeMenu // convert to int
 
       return this.$createElement(VMenu, {
         props,
@@ -351,7 +363,7 @@ export default {
       }, [activator, this.genList()])
     },
     genSelections () {
-      if (this.hideSelections) return []
+      if (this.hideSelected) return []
 
       let length = this.selectedItems.length
       const children = new Array(length)
@@ -383,6 +395,15 @@ export default {
         directives: this.directives,
         slot: 'activator'
       }, children)
+    },
+    genSlotSelection (item, index) {
+      return this.$scopedSlots.selection({
+        parent: this,
+        item,
+        index,
+        selected: index === this.selectedIndex,
+        disabled: this.disabled || this.readonly
+      })
     },
     getMenuIndex () {
       return this.$refs.menu ? this.$refs.menu.listIndex : -1

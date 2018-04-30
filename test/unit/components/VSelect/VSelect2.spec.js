@@ -501,4 +501,83 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     expect(selections.length).toEqual(1)
   })
+
+  it('should be true when has slot or chips', () => {
+    const wrapper = mount(VSelect, {
+      propsData: { chips: true }
+    })
+    const wrapper2 = mount(VSelect, {
+      slots: {
+        item: [{
+          render: h => h('div', 'foobar')
+        }]
+      }
+    })
+
+    expect(wrapper.vm.hasSlot).toBe(true)
+
+    wrapper.setProps({ chips: false })
+
+    expect(wrapper.vm.hasSlot).toBe(false)
+
+    expect(wrapper2.vm.hasSlot).toBe(true)
+  })
+
+  it('should add color to selected index', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        multiple: true,
+        items: ['foo', 'bar'],
+        value: ['foo']
+      }
+    })
+
+    wrapper.vm.selectedIndex = 0
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should not react to click when disabled', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: { items: ['foo', 'bar'] }
+    })
+    const slot = wrapper.first('.v-input__slot')
+    const input = wrapper.first('input')
+
+    expect(wrapper.vm.isMenuActive).toBe(false)
+    slot.trigger('click')
+    expect(wrapper.vm.isMenuActive).toBe(true)
+
+    wrapper.setData({ isMenuActive: false })
+    wrapper.setProps({ disabled: true })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isMenuActive).toBe(false)
+
+    slot.trigger('click')
+    expect(wrapper.vm.isMenuActive).toBe(false)
+  })
+
+  it('should set the menu index', () => {
+    const wrapper = mount(VSelect)
+
+    expect(wrapper.vm.getMenuIndex()).toBe(-1)
+
+    wrapper.vm.setMenuIndex(1)
+
+    expect(wrapper.vm.getMenuIndex()).toBe(1)
+  })
+
+  it('should hide selected items', () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        items: ['foo', 'bar'],
+        hideSelected: true,
+        value: 'foo'
+      }
+    })
+
+    expect(wrapper.vm.genSelections()).toEqual([])
+  })
 })

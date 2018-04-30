@@ -641,6 +641,8 @@ test('VAutocomplete.js', ({ mount, shallow }) => {
     input.trigger('input')
 
     wrapper.setProps({ hideSelections: true })
+
+    expect(wrapper.vm.genSelections()).toEqual([])
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/3793

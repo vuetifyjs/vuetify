@@ -304,6 +304,10 @@ export default {
     onFocus (e) {
       if (!this.$refs.input) return
 
+      if (document.activeElement !== this.$refs.input) {
+        return this.$refs.input.focus()
+      }
+
       this.isFocused = true
       this.$emit('focus', e)
     },

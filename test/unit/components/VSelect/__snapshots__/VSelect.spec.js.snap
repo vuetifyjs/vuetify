@@ -311,7 +311,7 @@ exports[`VSelect should render v-select correctly when not using v-list-tile in 
 exports[`VSelect should render v-select correctly when using v-list-tile in item scope slot 1`] = `
 
 <div role="combobox"
-     class="v-input v-text-field v-select"
+     class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty"
 >
   <div class="v-input__control">
     <div class="v-input__slot primary--text"
@@ -322,11 +322,16 @@ exports[`VSelect should render v-select correctly when using v-list-tile in item
       >
         <div class="v-menu__activator">
           <div class="v-select__slot">
-            <label class="v-label"
+            <label class="v-label v-label--active"
                    style="left: 0px; position: absolute;"
             >
             </label>
             <div class="v-select__selections">
+              <div>
+                <div class="v-list__tile">
+                  1
+                </div>
+              </div>
               <input tabindex="0"
                      type="text"
                      autocomplete="on"
@@ -351,6 +356,73 @@ exports[`VSelect should render v-select correctly when using v-list-tile in item
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+`;
+
+exports[`VSelect should use scoped slot for selection generation 1`] = `
+
+<div role="combobox"
+     class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty"
+>
+  <div class="v-input__control">
+    <div class="v-input__slot primary--text"
+         style="height: 32px;"
+    >
+      <div class="v-menu"
+           style="display: inline-block;"
+      >
+        <div class="v-menu__activator">
+          <div class="v-select__slot">
+            <label class="v-label v-label--active"
+                   style="left: 0px; position: absolute;"
+            >
+            </label>
+            <div class="v-select__selections">
+              <div class="v-select__selection v-select__selection--comma">
+                foo
+              </div>
+              <input tabindex="0"
+                     type="text"
+                     autocomplete="on"
+              >
+            </div>
+            <div class="v-input__append-inner">
+              <div class="v-input__icon v-input__icon--append">
+                <i aria-hidden="true"
+                   class="v-icon v-icon--link material-icons"
+                >
+                  arrow_drop_down
+                </i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-text-field__details">
+      <div class="v-messages">
+        <div class="v-messages__wrapper">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VSelect should use slotted no-data 1`] = `
+
+<div class="v-list">
+  <div>
+    <a class="v-list__tile v-list__tile--link">
+      <div class="v-list__tile__content">
+        <div class="v-list__tile__title">
+          foo
+        </div>
+      </div>
+    </a>
   </div>
 </div>
 

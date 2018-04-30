@@ -59,11 +59,15 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     }, [
       item.text
     ])
+    const selectionSlot = ({ item }) => vm.$createElement('v-list-tile', item.value)
     const component = Vue.component('test', {
       render (h) {
         return h(VSelect, {
-          props: { items },
-          scopedSlots: { item: itemSlot }
+          props: { items, value: 1 },
+          scopedSlots: {
+            item: itemSlot,
+            selection: selectionSlot
+          }
         })
       }
     })
@@ -359,5 +363,61 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect(wrapper.vm.selectedItems).toHaveLength(2)
     expect(wrapper.vm.internalValue[0]).toEqual({text: 'two', value: {x: [3, 4], y: ["a", "b"]}})
     expect(wrapper.vm.internalValue[1]).toEqual({text: 'one', value: {x: [1, 2], y: ["a", "b"]}})
+  })
+
+  it('should provide the correct default value', () => {
+    const wrapper = mount(VSelect)
+
+    expect(wrapper.vm.internalValue).toBe(undefined)
+
+    const wrapper2 = mount(VSelect, {
+      propsData: { multiple: true }
+    })
+
+    expect(wrapper2.vm.internalValue).toEqual([])
+  })
+
+  it('should use slotted no-data', () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        items: ['foo']
+      },
+      slots: {
+        'no-data': [{
+          render: h => h('div', 'foo')
+        }]
+      }
+    })
+
+    const list = wrapper.first('.v-list')
+
+    expect(wrapper.vm.$slots['no-data']).toBeTruthy()
+    expect(list.html()).toMatchSnapshot()
+  })
+
+  it('should assign self as activator when solo or box', () => {
+    const wrapper = mount(VSelect, {
+      propsData: { solo: true }
+    })
+
+    wrapper.trigger('click')
+
+    expect(wrapper.vm.$refs.menu.activator).toEqual(wrapper.vm.$el)
+  })
+
+  it('should use scoped slot for selection generation', () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        items: ['foo', 'bar'],
+        value: 'foo'
+      },
+      scopedSlots: {
+        selection: () => {
+          render: h => h('div', 'bar')
+        }
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })
