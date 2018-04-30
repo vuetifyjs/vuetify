@@ -52,6 +52,11 @@ theme(v-text-field, "v-text-field")
     max-width: 100%
     width: auto
 
+  .v-input__append-inner
+    display: inline-flex
+    padding: 4px 0 4px 8px
+    margin-left: auto
+
   .v-counter
     white-space: nowrap
 
@@ -145,7 +150,7 @@ theme(v-text-field, "v-text-field")
 
     .v-input__prepend-outer,
     .v-input__append-outer
-      margin-top: 12px
+      margin-top: 16px
 
     .v-input__control
       .v-input__slot
@@ -163,12 +168,10 @@ theme(v-text-field, "v-text-field")
       margin-bottom: 0 // normally for messages
 
     .v-input__append-outer
-      .v-input__icon
-        margin-right: 0
+      margin-right: 0
 
     .v-input__prepend-outer
-      .v-input__icon
-        margin-left: 0
+      margin-left: 0
 
     .v-text-field__details
       bottom: -22px
@@ -203,8 +206,3 @@ theme(v-text-field, "v-text-field")
   &.v-input--has-state
     .v-input__slot:before
       background-color: currentColor
-
-  .v-input__append-inner
-    display: inline-flex
-    padding: 4px 0 4px 8px
-    margin-left: auto
