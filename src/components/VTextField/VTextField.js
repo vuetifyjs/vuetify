@@ -145,8 +145,6 @@ export default {
       } else this.lazyValue = val
 
       if (this.internalChange) this.internalChange = false
-
-      !this.validateOnBlur && this.validate()
     }
   },
 
@@ -295,7 +293,6 @@ export default {
       // to persist
       this.internalChange = false
 
-      this.$nextTick(this.validate)
       this.$emit('blur', e)
     },
     onClick () {
