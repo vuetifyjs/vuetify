@@ -10,21 +10,13 @@ export default {
 
   provide () {
     return {
-      expansionPanel: {
-        data: this.injection,
-        panelClick: this.panelClick
-      }
+      expansionPanel: this
     }
   },
 
-  data: vm => ({
+  data: () => ({
     items: [],
-    open: [],
-    injection: {
-      disabled: vm.disabled,
-      readonly: vm.readonly,
-      focusable: vm.focusable
-    }
+    open: []
   }),
 
   props: {
@@ -41,9 +33,6 @@ export default {
   },
 
   watch: {
-    disabled: 'updateInjection',
-    readonly: 'updateInjection',
-    focusable: 'updateInjection',
     expand (v) {
       this.open = Array(this.items.length).fill(false)
       this.$emit('input', v ? this.open : null)
@@ -54,13 +43,6 @@ export default {
   },
 
   methods: {
-    updateInjection () {
-      Object.assign(this.injection, {
-        disabled: this.disabled,
-        readonly: this.readonly,
-        focusable: this.focusable
-      })
-    },
     updateFromValue (v) {
       if (Array.isArray(v) && !this.expand) return
 

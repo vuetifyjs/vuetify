@@ -48,10 +48,10 @@ export default {
       }
     },
     isDisabled () {
-      return this.expansionPanel.data.disabled || this.disabled
+      return this.expansionPanel.disabled || this.disabled
     },
     isReadonly () {
-      return this.expansionPanel.data.readonly || this.readonly
+      return this.expansionPanel.readonly || this.readonly
     }
   },
 
