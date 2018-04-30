@@ -44,9 +44,26 @@ export default {
   },
 
   watch: {
-    expand (v) {
-      this.open = Array(this.items.length).fill(false)
-      this.$emit('input', v ? this.open : null)
+    expand (val) {
+      let open
+      if (val) {
+        // Keep the currently open panel, there should already only be one
+      } else {
+        // Close all panels unless only one is open
+        const openCount = this.open.reduce((acc, val) => acc + val, 0)
+
+        if (openCount === 1) {
+          open = this.open.indexOf(true)
+        }
+
+        this.open = Array(this.items.length).fill(false)
+
+        if (open > -1) {
+          this.open[open] = true
+        }
+      }
+      this.$emit('input', val ? this.open : (open > -1 ? open : null)
+      )
     },
     value (v) {
       this.updateFromValue(v)
