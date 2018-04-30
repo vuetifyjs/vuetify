@@ -44,7 +44,7 @@ function getTargetLocation (target, settings) {
   } else {
     const type = target == null ? target : target.constructor.name
     throw new TypeError(`Target must be a Selector/Number/DOMElement/VueComponent, received ${type} instead.`)
-}
+  }
 
   return Math.round(
     Math.min(
