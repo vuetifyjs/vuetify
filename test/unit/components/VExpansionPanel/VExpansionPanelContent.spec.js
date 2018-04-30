@@ -3,6 +3,15 @@ import VExpansionPanelContent from '@/components/VExpansionPanel/VExpansionPanel
 
 const registrableWarning = '[Vuetify] The v-expansion-panel component must be used inside a v-expansion-panel-content'
 
+function expansionPanelProvide (additional) {
+  return Object.assign({
+    data: {},
+    focusable: true,
+    panelClick: () => null,
+    register: () => null
+  }, additional)
+}
+
 test('VExpansionPanelContent.js', ({ mount, compileToFunctions }) => {
   it('should render component and match snapshot', () => {
     const wrapper = mount(VExpansionPanelContent, {
@@ -12,13 +21,11 @@ test('VExpansionPanelContent.js', ({ mount, compileToFunctions }) => {
         header: [compileToFunctions('<span>header</span>')]
       },
       provide: {
-        focusable: true,
-        panelClick: jest.fn()
+        expansionPanel: expansionPanelProvide()
       }
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect(registrableWarning).toHaveBeenTipped()
   })
 
   it('should respect hideActions prop', () => {
@@ -31,16 +38,14 @@ test('VExpansionPanelContent.js', ({ mount, compileToFunctions }) => {
         header: [compileToFunctions('<span>header</span>')]
       },
       provide: {
-        focusable: true,
-        panelClick: jest.fn()
+        expansionPanel: expansionPanelProvide()
       }
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect(registrableWarning).toHaveBeenTipped()
   })
 
-  it('should render proper expand-icon', () => {
+  it('should render proper expand-icon', async () => {
     const wrapper = mount(VExpansionPanelContent, {
       propsData: {
         expandIcon: 'block'
@@ -49,30 +54,26 @@ test('VExpansionPanelContent.js', ({ mount, compileToFunctions }) => {
         header: [compileToFunctions('<span>header</span>')]
       },
       provide: {
-        focusable: true,
-        panelClick: jest.fn()
+        expansionPanel: expansionPanelProvide()
       }
     })
 
     expect(wrapper.find('.v-icon')[0].element.textContent).toBe('block')
-    expect(registrableWarning).toHaveBeenTipped()
   })
 
-  it('should toggle panel on header click', async () => {
+  it.only('should toggle panel on header click', async () => {
     const wrapper = mount(VExpansionPanelContent, {
       slots: {
         header: [compileToFunctions('<span>header</span>')]
       },
       provide: {
-        focusable: true,
-        panelClick: uid => wrapper.vm.toggle(uid)
+        expansionPanel: expansionPanelProvide()
       }
     })
 
-    wrapper.find('.v-expansion-panel__header')[0].trigger('click')
+    wrapper.first('.v-expansion-panel__header').trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
-    expect(registrableWarning).toHaveBeenTipped()
   })
 
   it('should render an expanded component and match snapshot', () => {
@@ -81,13 +82,11 @@ test('VExpansionPanelContent.js', ({ mount, compileToFunctions }) => {
         ripple: true
       },
       provide: {
-        focusable: true,
-        panelClick: jest.fn()
+        expansionPanel: expansionPanelProvide()
       }
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect(registrableWarning).toHaveBeenTipped()
   })
 
   it('should render an expanded component with lazy prop and match snapshot', () => {
@@ -96,12 +95,10 @@ test('VExpansionPanelContent.js', ({ mount, compileToFunctions }) => {
         lazy: true
       },
       provide: {
-        focusable: true,
-        panelClick: jest.fn()
+        expansionPanel: expansionPanelProvide()
       }
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect(registrableWarning).toHaveBeenTipped()
   })
 })

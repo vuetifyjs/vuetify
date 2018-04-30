@@ -20,15 +20,15 @@ export default {
     ClickOutside
   },
 
-  inject: ['focusable', 'panelClick'],
+  inject: ['expansionPanel'],
 
-  data () {
-    return {
-      height: 'auto'
-    }
-  },
+  data: () => ({
+    height: 'auto'
+  }),
 
   props: {
+    disabled: Boolean,
+    readonly: Boolean,
     expandIcon: {
       type: String,
       default: '$vuetify.icons.expand'
@@ -40,17 +40,40 @@ export default {
     }
   },
 
+  computed: {
+    containerClasses () {
+      return {
+        'v-expansion-panel__container--active': this.isActive,
+        'v-expansion-panel__container--disabled': this.isDisabled
+      }
+    },
+    isDisabled () {
+      return this.expansionPanel.data.disabled || this.disabled
+    },
+    isReadonly () {
+      return this.expansionPanel.data.readonly || this.readonly
+    }
+  },
+
   methods: {
+    onKeydown (e) {
+      // Ensure element is the activeElement
+      if (
+        e.keyCode === 13 &&
+        this.$el === document.activeElement
+      ) this.expansionPanel.panelClick(this._uid)
+    },
+    onHeaderClick () {
+      this.isReadonly || this.expansionPanel.panelClick(this._uid)
+    },
     genBody () {
       return this.$createElement('div', {
         ref: 'body',
         class: 'v-expansion-panel__body',
-        directives: [
-          {
-            name: 'show',
-            value: this.isActive
-          }
-        ]
+        directives: [{
+          name: 'show',
+          value: this.isActive
+        }]
       }, this.showLazyContent(this.$slots.default))
     },
     genHeader () {
@@ -61,7 +84,7 @@ export default {
           value: this.ripple
         }],
         on: {
-          click: () => this.panelClick(this._uid)
+          click: this.onHeaderClick
         }
       }, [
         this.$slots.header,
@@ -106,20 +129,12 @@ export default {
 
     return h('li', {
       staticClass: 'v-expansion-panel__container',
-      'class': {
-        'v-expansion-panel__container--active': this.isActive
-      },
+      class: this.containerClasses,
       attrs: {
         tabindex: 0
       },
       on: {
-        keydown: e => {
-          // Ensure element is focusable and the activeElement
-          if (this.focusable &&
-            this.$el === document.activeElement &&
-            e.keyCode === 13
-          ) this.panelClick(this._uid)
-        }
+        keydown: this.onKeydown
       }
     }, children)
   }
