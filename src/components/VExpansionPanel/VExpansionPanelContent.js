@@ -131,7 +131,7 @@ export default {
       staticClass: 'v-expansion-panel__container',
       class: this.containerClasses,
       attrs: {
-        tabindex: 0
+        tabindex: this.isReadonly || this.isDisabled ? null : 0
       },
       on: {
         keydown: this.onKeydown
