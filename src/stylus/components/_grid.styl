@@ -50,6 +50,8 @@
   display: flex
   flex: 1 1 auto
   flex-wrap: nowrap
+  // https://github.com/vuetifyjs/vuetify/issues/3873
+  min-width: 0
 
   &.row
     flex-direction: row
@@ -182,3 +184,6 @@ for size, width in $grid-breakpoints
 
 .d-inline-block
   display: inline-block !important
+  
+.d-inline
+  display: inline !important

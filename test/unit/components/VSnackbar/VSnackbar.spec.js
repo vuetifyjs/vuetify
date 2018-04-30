@@ -2,17 +2,17 @@ import { test } from '@/test'
 import VSnackbar from '@/components/VSnackbar'
 
 test('VSnackbar.vue', ({ mount }) => {
-  it('should have a snack class', () => {
+  it('should have a v-snack class', () => {
     const wrapper = mount(VSnackbar, {
       propsData: {
         value: true
       }
     })
 
-    expect(wrapper.hasClass('snack')).toBe(true)
+    expect(wrapper.hasClass('v-snack')).toBe(true)
   })
 
-  it('should have a snack__wrapper with a color class', () => {
+  it('should have a v-snack__wrapper with a color class', () => {
     const wrapper = mount(VSnackbar, {
       propsData: {
         value: true,
@@ -20,11 +20,11 @@ test('VSnackbar.vue', ({ mount }) => {
       }
     })
 
-    expect(wrapper.find('.snack__wrapper.orange')).toHaveLength(1)
-    expect(wrapper.find('.snack__wrapper.lighten-2')).toHaveLength(1)
+    expect(wrapper.find('.v-snack__wrapper.orange')).toHaveLength(1)
+    expect(wrapper.find('.v-snack__wrapper.lighten-2')).toHaveLength(1)
   })
 
-  it('should have a snack__content class only when active', async () => {
+  it('should have a v-snack__content class only when active', async () => {
     const wrapper = mount(VSnackbar, {
       propsData: {
         value: false,
@@ -32,13 +32,13 @@ test('VSnackbar.vue', ({ mount }) => {
       }
     })
 
-    expect(wrapper.find('div .snack__content')).toHaveLength(0)
+    expect(wrapper.find('div .v-snack__content')).toHaveLength(0)
 
     wrapper.setProps({ value: true })
 
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.find('div .snack__content')).toHaveLength(1)
+    expect(wrapper.find('div .v-snack__content')).toHaveLength(1)
   })
 
   it('should timeout correctly', async () => {

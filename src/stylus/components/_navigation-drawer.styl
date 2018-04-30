@@ -1,19 +1,19 @@
 @import '../bootstrap'
 @import '../theme'
 
-navigation-drawer($material)
+v-navigation-drawer($material)
   background-color: $material.cards
 
-  &:not(.navigation-drawer--floating)
-    .navigation-drawer__border
+  &:not(.v-navigation-drawer--floating)
+    .v-navigation-drawer__border
       background-color: $material.dividers
 
   .divider
     background-color: $material.dividers
 
-theme(navigation-drawer, "navigation-drawer")
+theme(v-navigation-drawer, "v-navigation-drawer")
 
-.navigation-drawer
+.v-navigation-drawer
   bootable()
 
   display: block
@@ -40,7 +40,7 @@ theme(navigation-drawer, "navigation-drawer")
     height: 100%
     width: 1px
 
-  &.navigation-drawer--right
+  &.v-navigation-drawer--right
     &:after
       left: 0
       right: initial
@@ -49,7 +49,7 @@ theme(navigation-drawer, "navigation-drawer")
     left: auto
     right: 0
 
-    > .navigation-drawer__border
+    > .v-navigation-drawer__border
       right: auto
       left: 0
 
@@ -88,7 +88,7 @@ theme(navigation-drawer, "navigation-drawer")
   &--is-mobile
     z-index: 6
 
-    &:not(.navigation-drawer--close)
+    &:not(.v-navigation-drawer--close)
       elevation(16)
 
   .v-list

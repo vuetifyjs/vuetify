@@ -116,18 +116,18 @@ exports[`VTextField.js should render component with async loading and custom pro
     >
   </div>
   <div class="input-group__details">
-    <div class="progress-linear"
+    <div class="v-progress-linear"
          style="height: 7px;"
     >
-      <div class="progress-linear__background orange"
+      <div class="v-progress-linear__background orange"
            style="height: 7px; opacity: 0.3; width: 100%;"
       >
       </div>
-      <div class="progress-linear__bar">
-        <div class="progress-linear__bar__indeterminate progress-linear__bar__indeterminate--active">
-          <div class="progress-linear__bar__indeterminate long orange">
+      <div class="v-progress-linear__bar">
+        <div class="v-progress-linear__bar__indeterminate v-progress-linear__bar__indeterminate--active">
+          <div class="v-progress-linear__bar__indeterminate long orange">
           </div>
-          <div class="progress-linear__bar__indeterminate short orange">
+          <div class="v-progress-linear__bar__indeterminate short orange">
           </div>
         </div>
       </div>
@@ -146,18 +146,18 @@ exports[`VTextField.js should render component with async loading and match snap
     >
   </div>
   <div class="input-group__details">
-    <div class="progress-linear"
+    <div class="v-progress-linear"
          style="height: 2px;"
     >
-      <div class="progress-linear__background primary"
+      <div class="v-progress-linear__background primary"
            style="height: 2px; opacity: 0.3; width: 100%;"
       >
       </div>
-      <div class="progress-linear__bar">
-        <div class="progress-linear__bar__indeterminate progress-linear__bar__indeterminate--active">
-          <div class="progress-linear__bar__indeterminate long primary">
+      <div class="v-progress-linear__bar">
+        <div class="v-progress-linear__bar__indeterminate v-progress-linear__bar__indeterminate--active">
+          <div class="v-progress-linear__bar__indeterminate long primary">
           </div>
-          <div class="progress-linear__bar__indeterminate short primary">
+          <div class="v-progress-linear__bar__indeterminate short primary">
           </div>
         </div>
       </div>
