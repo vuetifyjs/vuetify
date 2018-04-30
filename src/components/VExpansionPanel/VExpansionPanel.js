@@ -32,6 +32,17 @@ export default {
     }
   },
 
+  computed: {
+    classes () {
+      return {
+        'v-expansion-panel--focusable': this.focusable,
+        'v-expansion-panel--popout': this.popout,
+        'v-expansion-panel--inset': this.inset,
+        ...this.themeClasses
+      }
+    }
+  },
+
   watch: {
     expand (v) {
       this.open = Array(this.items.length).fill(false)
@@ -92,12 +103,7 @@ export default {
   render (h) {
     return h('ul', {
       staticClass: 'v-expansion-panel',
-      'class': {
-        'v-expansion-panel--focusable': this.focusable,
-        'v-expansion-panel--popout': this.popout,
-        'v-expansion-panel--inset': this.inset,
-        ...this.themeClasses
-      }
+      class: this.classes
     }, this.$slots.default)
   }
 }
