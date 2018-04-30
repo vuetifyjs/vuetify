@@ -346,4 +346,14 @@ test('VCheckbox.js', ({ mount }) => {
     ripple.trigger('click')
     expect(change).toBeCalledWith([{b: 1}, {c: 1}])
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/2119
+  it('should put id on internal input', () => {
+    const wrapper = mount(VCheckbox, {
+      propsData: { id: 'foo' }
+    })
+
+    const input = wrapper.first('input')
+    expect(input.element.id).toBe('foo')
+  })
 })

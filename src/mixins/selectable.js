@@ -102,6 +102,7 @@ export default {
         attrs: Object.assign({}, {
           'aria-label': this.label,
           'aria-checked': this.isActive.toString(),
+          id: this.id,
           role: type,
           type,
           value: this.inputValue
