@@ -44,8 +44,13 @@ v-text-field($material)
 theme(v-text-field, "v-text-field")
 
 .v-text-field
-  input
-    max-height: 32px
+  input,
+  textarea // could/should probably be in textarea
+    flex: 1 1 auto
+    padding: 8px 0 8px
+    line-height: 1
+    max-width: 100%
+    width: auto
 
   .v-counter
     white-space: nowrap
@@ -56,12 +61,12 @@ theme(v-text-field, "v-text-field")
     max-width: 100%
     overflow: hidden
     text-overflow: ellipsis
-    top: 7px
+    top: 6px
     transform-origin: top left
     white-space: nowrap
 
     &--active
-      transform: translateY(-16px) scale(0.75)
+      transform: translateY(-90%) scale(.75)
 
   .v-input__slot
     &:before,
@@ -88,13 +93,11 @@ theme(v-text-field, "v-text-field")
   &__details
     display: flex
     flex: 1 0 auto
-    justify-content: space-between
     max-width: 100%
 
   &__prefix,
   &__suffix
-    height: 32px
-    line-height: 18px
+    //
 
   &__prefix
     padding: 8px 4px 8px 0
@@ -105,12 +108,23 @@ theme(v-text-field, "v-text-field")
   &__slot
     display: flex
     flex: 1 1 auto
+    height: 100%
     position: relative
 
   &--box
     border-radius: 4px
     cursor: pointer
     position: relative
+
+    .v-label
+      top: 18px
+
+      &--active
+        top: 30px
+
+    input
+      align-self: flex-end
+      cursor: pointer
 
     &:after
       background-color: currentColor
@@ -129,8 +143,9 @@ theme(v-text-field, "v-text-field")
     &.v-input--is-focused:after
       transform: scaleX(1)
 
-    input
-      cursor: pointer
+    .v-input__prepend-outer,
+    .v-input__append-outer
+      margin-top: 12px
 
     .v-input__control
       .v-input__slot
@@ -140,10 +155,12 @@ theme(v-text-field, "v-text-field")
         &:after
           display: none
 
-  &.v-text-field--enclosed
-    align-items: center
-    margin-bottom: 24px
-    padding: 8px 16px
+  &--enclosed
+    margin-top: 16px
+    padding: 0 16px
+
+    .v-input__slot
+      margin-bottom: 0 // normally for messages
 
     .v-input__append-outer
       .v-input__icon
@@ -159,44 +176,25 @@ theme(v-text-field, "v-text-field")
       position: absolute
       width: 100%
 
-    .v-input__slot
-      margin-bottom: 0
-
-    .v-text-field__slot
-      height: 100%
-
     &:not(.v-text-field--box)
       .v-input__slot
         &:before,
         &:after
           display: none
 
-    input
-      align-self: flex-end
-      position: relative
-      bottom: -4px
-
-    .v-label
-      top: 11px
-
-      &--active
-        transform: translateY(-8px) scale(0.75)
-
   &--single-line
     &.v-text-field--box
-      input
-        align-self: auto
+      //
 
   &.v-text-field--solo
+    align-items: center
     elevation(2)
 
-    input
-      align-self: auto
+    .v-label
+      top: calc(50% - 9px)
 
-  &.v-input
-    &:before,
-    &:after
-      bottom: 0
+    input
+      align-self: center
 
   &.v-input--is-focused
     .v-input__slot:after

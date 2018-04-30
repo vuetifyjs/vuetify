@@ -15,25 +15,9 @@ theme(v-textarea, "v-textarea")
     min-height: 32px
     outline: none
 
-  .v-input__slot
-    align-items: flex-start
-
-  .v-label
-    top: 6px
-
   &.v-textarea--textarea
     border-radius: 2px
 
     &.v-input--is-focused
       border: 2px solid currentColor
       transition: border $primary-transition
-
-  &.v-text-field--enclosed
-    align-items: flex-start
-
-    .v-label
-      top: 6px
-
-    &:not(.v-text-field--single-line)
-      textarea
-        margin-top: 8px

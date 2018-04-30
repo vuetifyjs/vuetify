@@ -62,10 +62,13 @@ export default {
     // use dynamicHeight to override
     // the default conditional
     computedHeight () {
-      return convertToUnit(this.dynamicHeight || this.height || 32)
+      return convertToUnit(this.dynamicHeight)
     },
     directivesInput () {
       return []
+    },
+    dynamicHeight () {
+      return this.height || 32
     },
     hasHint () {
       return !this.hasMessages &&
@@ -108,6 +111,9 @@ export default {
         this.genMessages()
       ])
     },
+    genDefaultSlot () {
+      return this.$slots.default
+    },
     genIcon (type, cb) {
       cb = cb || this[`${type}IconCb`]
 
@@ -136,9 +142,6 @@ export default {
           this[`${type}Icon`]
         )
       ])
-    },
-    genDefaultSlot () {
-      return this.$slots.default
     },
     genInputSlot () {
       return this.$createElement('div', {

@@ -24,17 +24,14 @@ theme(v-input, "v-input")
   align-items: flex-start
   display: flex
   font-size: 16px
-  margin-top: 16px
+  margin-top: 28px // 12px for label, 16px for spec
   text-align: left
+
+  input
+    max-height: 32px
 
   input,
   textarea
-    flex: 1 1 auto
-    padding: 8px 0 8px
-    line-height: 1
-    max-width: 100%
-    width: auto
-
     &:focus,
     &:active
       outline: none

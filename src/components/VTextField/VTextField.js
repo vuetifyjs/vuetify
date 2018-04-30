@@ -84,7 +84,9 @@ export default {
         : []
     },
     dynamicHeight () {
-      return this.isEnclosed ? 40 : false
+      if (!this.isEnclosed) return VInput.computed.dynamicHeight.call(this)
+
+      return this.height || (this.isEnclosed ? 56 : false)
     },
     internalValue: {
       get () {
@@ -179,6 +181,13 @@ export default {
         }
       })
     },
+    genDefaultSlot () {
+      return [
+        this.genTextFieldSlot(),
+        this.genIconSlot(),
+        this.genProgress()
+      ]
+    },
     genLabel () {
       if (this.isSingle &&
         (this.isDirty || !!this.placeholder)
@@ -254,13 +263,6 @@ export default {
       if (this.browserAutocomplete) data.attrs.autocomplete = this.browserAutocomplete
 
       return this.$createElement('input', data)
-    },
-    genDefaultSlot () {
-      return [
-        this.genTextFieldSlot(),
-        this.genIconSlot(),
-        this.genProgress()
-      ]
     },
     genMessages () {
       return this.$createElement('div', {
