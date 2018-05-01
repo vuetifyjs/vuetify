@@ -111,6 +111,7 @@ export default {
       default: null
     },
     segmented: Boolean,
+    smallChips: Boolean,
     singleLine: Boolean
   },
 
@@ -148,7 +149,7 @@ export default {
       }]
     },
     dynamicHeight () {
-      return !this.isSolo && (this.chips || this.isMulti)
+      return this.chips || this.isMulti
         ? 'auto'
         : VTextField.computed.dynamicHeight.call(this)
     },
@@ -221,7 +222,8 @@ export default {
           close: this.deletableChips && !isDisabled,
           dark: this.dark,
           disabled: isDisabled,
-          selected: index === this.selectedIndex
+          selected: index === this.selectedIndex,
+          small: this.smallChips
         },
         on: {
           click: click,
@@ -330,7 +332,7 @@ export default {
         contentClass: this.contentClass
       }
       const inheritedProps = Object.keys(VMenu.props).concat(Object.keys(Menuable.props))
-      const nudgeMenu = this.isSolo || this.box
+      const nudgeMenu = !this.isSolo && !this.box
 
       // Later this might be filtered
       for (let prop of inheritedProps) {
@@ -349,7 +351,7 @@ export default {
       props.openOnClick = false
       props.value = this.isMenuActive
       props.offsetY = this.offsetY || nudgeMenu
-      props.nudgeBottom = +nudgeMenu // convert to int
+      props.nudgeBottom = nudgeMenu ? 2 : 0 // convert to int
 
       return this.$createElement(VMenu, {
         props,

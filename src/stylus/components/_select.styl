@@ -44,15 +44,35 @@ theme(v-select, 'v-select')
     .v-input__icon--append .v-icon
       transform: rotate(180deg)
 
-  &--chips
-    .v-label.v-label--active
-      transform: translateY(-22px) scale(0.75)
-
   // Essentially duplicated from _text-fields.styl
-  &.v-text-field--box:not(.v-text-field--single-line)
+  &.v-text-field--box
+    &:not(.v-text-field--single-line)
+      .v-select__selections
+        align-self: flex-end
+        position: relative
+
+  &.v-select--chips
+    .v-input__prepend-outer,
+    .v-input__append-outer
+      align-self: center
+      margin-bottom: 0
+      margin-top: 0
+
     .v-select__selections
-      align-self: flex-end
-      position: relative
+      padding: 8px 0
+      margin-left: -4px // to line up the chips
+
+    &.v-text-field--box,
+    &.v-text-field--solo
+      .v-select__selections
+        margin-top: 24px
+
+    &.v-text-field--box
+      .v-label
+        top: 26px
+
+        &--active
+          transform: translateY(-60%) scale(0.75)
 
   &__selections
     align-items: center

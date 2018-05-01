@@ -42,7 +42,7 @@ export default {
     },
     nudgeBottom: {
       type: [String, Number],
-      default: 2
+      default: 4
     },
     offsetY: {
       type: Boolean,
@@ -131,6 +131,9 @@ export default {
   },
 
   watch: {
+    filteredItems () {
+      this.setMenuIndex(-1)
+    },
     isFocused (val) {
       if (val) {
         this.$refs.input &&
@@ -343,7 +346,7 @@ export default {
       this.$emit('change', this.internalSearch)
     },
     updateAutocomplete () {
-      if (!this.searchIsDirty ||
+      if (!this.searchIsDirty &&
         !this.internalValue
       ) return
 
@@ -391,39 +394,6 @@ export default {
 
       this.selectItem(this.internalSearch)
       this.internalSearch = null
-
-      // if (!this.hasSlot && this.searchIsDirty) {
-      //   this.internalValue = this.internalSearch
-      //   this.$emit('change', this.internalValue)
-      // }
-      // console.log('tags')
-      // // Avoid direct mutation
-      // // for vuex strict mode
-      // let selectedItems = this.selectedItems.slice()
-
-      // // If a duplicate item
-      // // exists, remove it
-      // if (selectedItems.includes(content)) {
-      //   this.$delete(selectedItems, selectedItems.indexOf(content))
-      // }
-
-      // // When updating tags ensure
-      // // that that the search text
-      // // is populated if needed
-      // let internalSearch = null
-      // if (this.combobox) {
-      //   selectedItems = [content]
-      //   internalSearch = this.chips ? null : content
-      // } else {
-      //   selectedItems.push(content)
-      // }
-
-      // this.selectedItems = selectedItems
-
-      // this.$nextTick(() => {
-      //   this.internalSearch = internalSearch
-      //   this.$emit('input', this.combobox ? content : this.selectedItems)
-      // })
     }
   }
 }
