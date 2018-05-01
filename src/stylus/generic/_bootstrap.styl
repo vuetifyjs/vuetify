@@ -32,14 +32,14 @@ global-color-accent(color_name, color_value)
       textarea
         caret-color: color_value !important
 
-for color_name, color_value in $shades
-  global-color(color_name, color_value)
+for $color_name, $color_value in $shades
+  global-color($color_name, $color_value)
 
 if ($color-pack)
-  for color_name, color_color in $colors
-    for color_type, color_value in color_color
-      if color_type == 'base'
-        global-color(color_name, color_value)
+  for $color_name, $color_color in $colors
+    for $color_type, $color_value in $color_color
+      if $color_type == 'base'
+        global-color($color_name, $color_value)
 
-      else if color_type != 'shades'
-        global-color-accent(color_name, color_value)
+      else if $color_type != 'shades'
+        global-color-accent($color_name, $color_value)
