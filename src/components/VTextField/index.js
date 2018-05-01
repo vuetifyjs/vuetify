@@ -1,5 +1,6 @@
 import VTextField from './VTextField'
 import VTextarea from '../VTextarea/VTextarea'
+import rebuildSlots from '../../util/rebuildFunctionalSlots'
 
 // TODO: remove this in v2.0
 const wrapper = {
@@ -10,17 +11,8 @@ const wrapper = {
     multiLine: Boolean
   },
 
-  render (h, context) {
-    const { props, data, parent } = context
-
-    const children = []
-    const slots = context.slots()
-
-    for (const slot in slots) {
-      if (slots.hasOwnProperty(slot)) {
-        children.push(h('template', { slot }, slots[slot]))
-      }
-    }
+  render (h, { props, data, slots, parent }) {
+    const children = rebuildSlots(slots(), h)
 
     if (props.textarea) {
       console.warn(`[Vuetify] '<v-text-field textarea>' is deprecated, use '<v-text-area outline>' instead in ${parent._name}`)

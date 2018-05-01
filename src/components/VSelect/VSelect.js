@@ -52,7 +52,7 @@ export default {
   }),
 
   props: {
-    ...VMenu.props, // remove some, just for testing,
+    ...VMenu.props, // TODO: remove some, just for testing,
     ...Menuable.props,
     appendIcon: {
       type: String,
@@ -61,7 +61,6 @@ export default {
     appendIconCb: Function,
     attach: Boolean,
     auto: Boolean,
-    autocomplete: Boolean,
     browserAutocomplete: {
       type: String,
       default: 'on'
