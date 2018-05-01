@@ -160,7 +160,11 @@ export default {
     genAppendSlot () {
       const slot = []
 
-      if (this.appendOuterIcon) {
+      if (this.$slots['append-outer']) {
+        slot.push(this.$slots['append-outer'])
+      } else if (this.$slots['append-outer-icon']) {
+        slot.push(this.$slots['append-outer-icon'])
+      } else if (this.appendOuterIcon) {
         slot.push(this.genIcon('appendOuter'))
       }
 
@@ -218,7 +222,11 @@ export default {
     genIconSlot () {
       const slot = []
 
-      if (this.appendIcon) {
+      if (this.$slots['append']) {
+        slot.push(this.$slots['append'])
+      } else if (this.$slots['append-icon']) {
+        slot.push(this.$slots['append-icon'])
+      } else if (this.appendIcon) {
         slot.push(this.genIcon('append'))
       } else if (this.clearable && this.isDirty) {
         slot.push(this.genIcon('clear',

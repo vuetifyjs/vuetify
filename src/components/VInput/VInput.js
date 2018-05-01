@@ -11,7 +11,10 @@ import Themeable from '../../mixins/themeable'
 import Validatable from '../../mixins/validatable'
 
 // Utilities
-import { convertToUnit } from '../../util/helpers'
+import {
+  convertToUnit,
+  kebabCase
+} from '../../util/helpers'
 
 export default {
   name: 'v-input',
@@ -134,7 +137,7 @@ export default {
       }
 
       return this.$createElement('div', {
-        staticClass: `v-input__icon v-input__icon--${type}`
+        staticClass: `v-input__icon v-input__icon--${kebabCase(type)}`
       }, [
         this.$createElement(
           VIcon,
@@ -203,6 +206,8 @@ export default {
       // backwards compat
       if (this.$slots['append']) {
         slot.push(this.$slots['append'])
+      } else if (this.$slots['append-icon']) {
+        slot.push(this.$slots['append-icon'])
       } else if (this.appendIcon) {
         slot.push(this.genIcon('append'))
       }

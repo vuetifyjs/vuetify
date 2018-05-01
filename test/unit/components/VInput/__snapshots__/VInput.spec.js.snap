@@ -89,6 +89,11 @@ exports[`VInput.js should generate append and prepend slots 2`] = `
       </div>
     </div>
   </div>
+  <div class="v-input__append-outer">
+    <div>
+      append-icon
+    </div>
+  </div>
 </div>
 
 `;

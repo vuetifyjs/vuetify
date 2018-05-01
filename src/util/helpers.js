@@ -205,6 +205,10 @@ export function convertToUnit (str, unit = 'px') {
   return isNaN(str) ? str : `${Number(str)}${unit}`
 }
 
+export function kebabCase (str) {
+  return (str || '').replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()
+}
+
 // KeyboardEvent.keyCode aliases
 export const keyCodes = Object.freeze({
   enter: 13,
