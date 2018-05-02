@@ -1,12 +1,12 @@
 <template>
   <v-app
-    dark
     id="inspire"
+    dark
   >
     <v-navigation-drawer
+      v-model="drawer"
       fixed
       clipped
-      v-model="drawer"
       app
     >
       <v-list dense>
@@ -58,10 +58,10 @@
       <v-spacer></v-spacer>
       <v-layout row align-center style="max-width: 650px">
         <v-text-field
+          :append-icon-cb="() => {}"
           placeholder="Search..."
           single-line
           append-icon="search"
-          :append-icon-cb="() => {}"
           color="white"
           hide-details
         ></v-text-field>
@@ -73,18 +73,18 @@
           <v-flex shrink>
             <v-tooltip right>
               <v-btn
+                slot="activator"
+                :href="source"
                 icon
                 large
-                :href="source"
                 target="_blank"
-                slot="activator"
               >
                 <v-icon large>code</v-icon>
               </v-btn>
               <span>Source</span>
             </v-tooltip>
             <v-tooltip right>
-              <v-btn icon large href="https://codepen.io/johnjleider/pen/YeRKwQ" target="_blank" slot="activator">
+              <v-btn slot="activator" icon large href="https://codepen.io/johnjleider/pen/YeRKwQ" target="_blank">
                 <v-icon large>mdi-codepen</v-icon>
               </v-btn>
               <span>Codepen</span>

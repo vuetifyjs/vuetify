@@ -21,9 +21,9 @@
     <template slot="items" slot-scope="props">
       <td>
         <v-checkbox
+          v-model="props.selected"
           primary
           hide-details
-          v-model="props.selected"
         ></v-checkbox>
       </td>
       <td>{{ props.item.name }}</td>

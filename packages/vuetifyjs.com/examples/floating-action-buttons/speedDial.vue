@@ -46,11 +46,11 @@
     >
       <v-btn
         slot="activator"
+        v-model="fab"
         color="blue darken-2"
         dark
         fab
         hover
-        v-model="fab"
       >
         <v-icon>account_circle</v-icon>
         <v-icon>close</v-icon>

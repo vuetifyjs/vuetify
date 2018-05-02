@@ -10,8 +10,8 @@
           thumb-label
         ></v-slider>
         <v-switch
-          label="Tile"
           v-model="tile"
+          label="Tile"
         ></v-switch>
       </v-flex>
       <v-flex

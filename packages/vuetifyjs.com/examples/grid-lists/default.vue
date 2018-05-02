@@ -3,15 +3,15 @@
     <v-flex xs12 sm6 offset-sm3>
       <v-card>
         <v-card-actions>
-          <v-select label="Size" :items="items" v-model="size"></v-select>
+          <v-select :items="items" v-model="size" label="Size"></v-select>
           <v-spacer></v-spacer>
         </v-card-actions>
-        <v-container fluid v-bind="{ [`grid-list-${size}`]: true }">
+        <v-container v-bind="{ [`grid-list-${size}`]: true }" fluid>
           <v-layout row wrap>
             <v-flex
-              xs4
               v-for="n in 9"
               :key="n"
+              xs4
             >
               <v-card flat tile>
                 <v-card-media

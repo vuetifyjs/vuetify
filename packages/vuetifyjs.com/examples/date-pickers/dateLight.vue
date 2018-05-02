@@ -2,10 +2,10 @@
   <div>
     <v-layout row wrap>
       <v-flex xs12 sm3>
-        <v-checkbox hide-details label="Landscape" v-model="landscape"></v-checkbox>
+        <v-checkbox v-model="landscape" hide-details label="Landscape"></v-checkbox>
       </v-flex>
       <v-flex xs12 sm3>
-        <v-checkbox hide-details label="Reactive" v-model="reactive"></v-checkbox>
+        <v-checkbox v-model="reactive" hide-details label="Reactive"></v-checkbox>
       </v-flex>
     </v-layout>
 

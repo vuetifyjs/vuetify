@@ -29,10 +29,10 @@
       </v-flex>
       <v-flex xs6>
         <v-select
-          label="Select"
           :items="items"
           v-model="e3"
           :error-messages="['Please select an option']"
+          label="Select"
           item-value="text"
         ></v-select>
       </v-flex>
@@ -41,9 +41,9 @@
       </v-flex>
       <v-flex xs6>
         <v-select
-          label="Select"
           :items="items"
           v-model="e4"
+          label="Select"
           disabled
         ></v-select>
       </v-flex>

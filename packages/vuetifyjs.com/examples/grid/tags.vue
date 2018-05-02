@@ -1,9 +1,9 @@
 <template>
   <v-container
+    id="grid"
     fluid
     grid-list-sm
     tag="section"
-    id="grid"
   >
     <v-layout row wrap>
       <v-flex tag="h1" class="headline">Lorem Ipsum</v-flex>

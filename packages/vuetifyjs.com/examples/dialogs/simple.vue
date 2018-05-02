@@ -21,7 +21,7 @@
       >
         <v-card tile>
           <v-toolbar card dark color="primary">
-            <v-btn icon @click.native="dialog = false" dark>
+            <v-btn icon dark @click.native="dialog = false">
               <v-icon>close</v-icon>
             </v-btn>
             <v-toolbar-title>Settings</v-toolbar-title>
@@ -121,7 +121,7 @@
             <span>Dialog 3</span>
             <v-spacer></v-spacer>
             <v-menu bottom left>
-              <v-btn icon slot="activator">
+              <v-btn slot="activator" icon>
                 <v-icon>more_vert</v-icon>
               </v-btn>
               <v-list>

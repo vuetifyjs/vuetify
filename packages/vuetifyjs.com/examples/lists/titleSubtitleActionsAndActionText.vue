@@ -16,10 +16,10 @@
         <v-list two-line>
           <template v-for="(item, index) in items">
             <v-list-tile
+              :key="item.title"
               avatar
               ripple
               @click="toggle(index)"
-              :key="item.title"
             >
               <v-list-tile-content>
                 <v-list-tile-title>{{ item.title }}</v-list-tile-title>
@@ -29,12 +29,12 @@
               <v-list-tile-action>
                 <v-list-tile-action-text>{{ item.action }}</v-list-tile-action-text>
                 <v-icon
-                  color="grey lighten-1"
                   v-if="selected.indexOf(index) < 0"
+                  color="grey lighten-1"
                 >star_border</v-icon>
                 <v-icon
-                  color="yellow darken-2"
                   v-else
+                  color="yellow darken-2"
                 >star</v-icon>
               </v-list-tile-action>
             </v-list-tile>

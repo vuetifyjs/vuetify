@@ -5,7 +5,7 @@
       transition="scale-transition"
       bottom
     >
-      <v-btn color="primary" dark slot="activator">
+      <v-btn slot="activator" color="primary" dark>
         Scale Transition
       </v-btn>
       <v-list>
@@ -20,7 +20,7 @@
       bottom
       right
     >
-      <v-btn color="primary" dark slot="activator" class="deep-orange">
+      <v-btn slot="activator" color="primary" dark class="deep-orange">
         Slide X Transition
       </v-btn>
       <v-list>
@@ -34,7 +34,7 @@
       transition="slide-y-transition"
       bottom
     >
-      <v-btn color="primary" dark slot="activator" class="purple">
+      <v-btn slot="activator" color="primary" dark class="purple">
         Slide Y Transition
       </v-btn>
       <v-list>

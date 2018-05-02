@@ -1,7 +1,7 @@
 <template>
   <v-layout row justify-center>
     <v-dialog v-model="dialog" persistent max-width="500px">
-      <v-btn color="primary" dark slot="activator">Open Dialog</v-btn>
+      <v-btn slot="activator" color="primary" dark>Open Dialog</v-btn>
       <v-card>
         <v-card-title>
           <span class="headline">User Profile</span>
@@ -31,18 +31,18 @@
               </v-flex>
               <v-flex xs12 sm6>
                 <v-select
+                  :items="['0-17', '18-29', '30-54', '54+']"
                   label="Age"
                   required
-                  :items="['0-17', '18-29', '30-54', '54+']"
                 ></v-select>
               </v-flex>
               <v-flex xs12 sm6>
                 <v-select
+                  :items="['Skiing', 'Ice hockey', 'Soccer', 'Basketball', 'Hockey', 'Reading', 'Writing', 'Coding', 'Basejump']"
                   label="Interests"
                   multiple
                   autocomplete
                   chips
-                  :items="['Skiing', 'Ice hockey', 'Soccer', 'Basketball', 'Hockey', 'Reading', 'Writing', 'Coding', 'Basejump']"
                 ></v-select>
               </v-flex>
             </v-layout>

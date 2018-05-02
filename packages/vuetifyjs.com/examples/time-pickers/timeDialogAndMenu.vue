@@ -3,21 +3,21 @@
     <v-flex xs11 sm5>
       <v-menu
         ref="menu"
-        lazy
         :close-on-content-click="false"
         v-model="menu2"
+        :nudge-right="40"
+        :return-value.sync="time"
+        lazy
         transition="scale-transition"
         offset-y
         full-width
-        :nudge-right="40"
         max-width="290px"
         min-width="290px"
-        :return-value.sync="time"
       >
         <v-text-field
           slot="activator"
-          label="Picker in menu"
           v-model="time"
+          label="Picker in menu"
           prepend-icon="access_time"
           readonly
         ></v-text-field>
@@ -28,17 +28,17 @@
     <v-flex xs11 sm5>
       <v-dialog
         ref="dialog"
-        persistent
         v-model="modal2"
+        :return-value.sync="time"
+        persistent
         lazy
         full-width
         width="290px"
-        :return-value.sync="time"
       >
         <v-text-field
           slot="activator"
-          label="Picker in dialog"
           v-model="time"
+          label="Picker in dialog"
           prepend-icon="access_time"
           readonly
         ></v-text-field>

@@ -8,10 +8,10 @@
     <v-card-text>
       <v-layout row wrap>
         <v-flex
+          :style="{ order: $vuetify.breakpoint.xs ? '2' : '1' }"
           d-flex
           pl-1
-          xs10
-          :style="{ order: $vuetify.breakpoint.xs ? '2' : '1' }">
+          xs10>
           <v-layout align-center row wrap>
             <v-flex
               display-1
@@ -30,11 +30,11 @@
           </v-layout>
         </v-flex>
         <v-flex
+          :style="{ order: $vuetify.breakpoint.xs ? '1' : '2' }"
           align-center
           text-xs-center
           xs2
-          d-flex
-          :style="{ order: $vuetify.breakpoint.xs ? '1' : '2' }">
+          d-flex>
           <v-layout align-center>
             <v-flex xs12>
               <img class="logo" src="/static/doc-images/logo.svg" width="50px" alt="">

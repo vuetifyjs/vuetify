@@ -7,43 +7,43 @@
       <v-layout row wrap>
         <v-flex xs6>
           <v-switch
-            label="primary"
             v-model="ex11"
+            label="primary"
             color="primary"
             value="primary"
             hide-details
           />
           <v-switch
-            label="secondary"
             v-model="ex11"
+            label="secondary"
             color="secondary"
             value="secondary"
             hide-details
           />
           <v-switch
-            label="success"
             v-model="ex11"
+            label="success"
             color="success"
             value="success"
             hide-details
           />
           <v-switch
-            label="info"
             v-model="ex11"
+            label="info"
             color="info"
             value="info"
             hide-details
           />
           <v-switch
-            label="warning"
             v-model="ex11"
+            label="warning"
             color="warning"
             value="warning"
             hide-details
           />
           <v-switch
-            label="error"
             v-model="ex11"
+            label="error"
             color="error"
             value="error"
             hide-details

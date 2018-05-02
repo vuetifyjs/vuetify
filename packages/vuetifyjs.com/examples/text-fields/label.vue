@@ -6,9 +6,9 @@
       </v-flex>
       <v-flex xs8>
         <v-text-field
+          id="testing"
           name="input-1"
           label="Label Text"
-          id="testing"
         ></v-text-field>
       </v-flex>
     </v-layout>

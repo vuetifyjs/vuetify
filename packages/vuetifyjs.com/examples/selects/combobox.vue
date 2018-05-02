@@ -4,35 +4,35 @@
       <v-flex xs12>
         <v-select
           v-model="select"
+          :items="items"
           label="Select a favorite activity or create a new one"
           combobox
-          :items="items"
         ></v-select>
       </v-flex>
       <v-flex xs12>
         <v-select
           v-model="select"
+          :items="items"
           label="I use chips"
           chips
           combobox
-          :items="items"
         ></v-select>
       </v-flex>
       <v-flex xs12>
         <v-select
           v-model="select"
+          :items="items"
           label="I use a scoped slot"
           chips
           combobox
-          :items="items"
         >
           <template slot="selection" slot-scope="data">
             <v-chip
-              @input="data.parent.selectItem(data.item)"
-              class="chip--select-multi"
               :selected="data.selected"
               :disabled="data.disabled"
               :key="JSON.stringify(data.item)"
+              class="chip--select-multi"
+              @input="data.parent.selectItem(data.item)"
             >
               <v-avatar class="accent">{{ data.item.slice(0, 1).toUpperCase() }}</v-avatar>
               {{ data.item }}

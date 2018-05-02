@@ -13,22 +13,22 @@
         <v-list two-line>
           <template v-for="(item, index) in items">
             <v-subheader
-              inset
-              :key="item.header"
               v-if="item.header"
+              :key="item.header"
+              inset
             >
               {{ item.header }}
             </v-subheader>
             <v-divider
               v-else-if="item.divider"
-              inset
               :key="index"
+              inset
             ></v-divider>
             <v-list-tile
               v-else
+              :key="item.title"
               avatar
               ripple
-              :key="item.title"
               @click=""
             >
               <v-list-tile-avatar>

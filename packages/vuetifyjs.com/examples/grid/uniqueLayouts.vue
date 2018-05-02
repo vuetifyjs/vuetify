@@ -25,9 +25,9 @@
           <v-flex d-flex>
             <v-layout row>
               <v-flex
-                d-flex
                 v-for="n in 2"
                 :key="n"
+                d-flex
               >
                 <v-card
                   color="amber lighten-2"

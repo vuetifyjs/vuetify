@@ -1,11 +1,11 @@
 <template>
   <div>
     <v-date-picker
-      class="mt-3"
       v-model="date"
+      :allowed-dates="allowedDates"
+      class="mt-3"
       min="2016-06-15"
       max="2018-03-20"
-      :allowed-dates="allowedDates"
     ></v-date-picker>
   </div>
 </template>

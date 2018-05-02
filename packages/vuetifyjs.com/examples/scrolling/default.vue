@@ -1,5 +1,5 @@
 <template>
-  <v-layout column align-center justify-center v-scroll="onScroll">
+  <v-layout v-scroll="onScroll" column align-center justify-center>
     <v-subheader>Offset Top</v-subheader>
     {{ offsetTop }}
   </v-layout>

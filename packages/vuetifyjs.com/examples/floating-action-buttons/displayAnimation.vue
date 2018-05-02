@@ -7,6 +7,7 @@
             <v-toolbar-side-icon></v-toolbar-side-icon>
             <v-fab-transition>
               <v-btn
+                v-show="!hidden"
                 color="pink"
                 fab
                 dark
@@ -14,7 +15,6 @@
                 absolute
                 bottom
                 left
-                v-show="!hidden"
               >
                 <v-icon>add</v-icon>
               </v-btn>
@@ -28,13 +28,13 @@
           <v-card-text style="height: 100px; position: relative">
             <v-fab-transition>
               <v-btn
+                v-show="!hidden"
                 color="pink"
                 dark
                 absolute
                 top
                 right
                 fab
-                v-show="!hidden"
               >
                 <v-icon>add</v-icon>
               </v-btn>

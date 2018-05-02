@@ -1,42 +1,42 @@
 <template>
   <v-snackbar
-    bottom
-    right
     :color="snackbar.color"
     :timeout="snackbar.timeout"
     v-model="snack"
+    bottom
+    right
   >
     <v-layout
       align-center
     >
       <v-icon
+        v-if="computedIcon"
         dark
         class="mr-3"
-        v-if="computedIcon"
       >
         {{ computedIcon }}
       </v-icon>
       <markdown
-        class="snack-markdown"
         :source="snackbar.msg"
+        class="snack-markdown"
       />
       <v-spacer />
       <v-btn
-        dark
-        flat
-        @click="onClick"
         :color="!computedIcon ? 'primary lighten-3' : null"
         :ripple="false"
         v-bind="bind"
+        dark
+        flat
+        @click="onClick"
       >
         {{ snackbar.text }}
       </v-btn>
       <v-btn
+        v-if="snackbar.close"
+        :ripple="false"
         icon
         class="ml-3"
         @click="markViewed"
-        v-if="snackbar.close"
-        :ripple="false"
       >
         <v-icon>clear</v-icon>
       </v-btn>

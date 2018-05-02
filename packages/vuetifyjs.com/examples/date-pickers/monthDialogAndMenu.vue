@@ -3,27 +3,27 @@
     <v-flex xs11 sm5>
       <v-menu
         ref="menu"
-        lazy
         :close-on-content-click="false"
         v-model="menu"
+        :nudge-right="40"
+        :return-value.sync="date"
+        lazy
         transition="scale-transition"
         offset-y
         full-width
-        :nudge-right="40"
         max-width="290px"
         min-width="290px"
-        :return-value.sync="date"
       >
         <v-text-field
           slot="activator"
-          label="Picker in menu"
           v-model="date"
+          label="Picker in menu"
           prepend-icon="event"
           readonly
         ></v-text-field>
         <v-date-picker
-          type="month"
           v-model="date"
+          type="month"
           no-title
           scrollable
         >
@@ -37,21 +37,21 @@
     <v-flex xs11 sm5>
       <v-dialog
         ref="dialog"
-        persistent
         v-model="modal"
+        :return-value.sync="date"
+        persistent
         lazy
         full-width
         width="290px"
-        :return-value.sync="date"
       >
         <v-text-field
           slot="activator"
-          label="Picker in dialog"
           v-model="date"
+          label="Picker in dialog"
           prepend-icon="event"
           readonly
         ></v-text-field>
-        <v-date-picker type="month" v-model="date" scrollable>
+        <v-date-picker v-model="date" type="month" scrollable>
           <v-spacer></v-spacer>
           <v-btn flat color="primary" @click="modal = false">Cancel</v-btn>
           <v-btn flat color="primary" @click="$refs.dialog.save(date)">OK</v-btn>

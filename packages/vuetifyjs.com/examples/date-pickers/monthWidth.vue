@@ -1,17 +1,17 @@
 <template>
   <div>
     <v-date-picker
+      v-model="date"
       type="month"
       width="290"
       class="mt-3"
-      v-model="date"
     ></v-date-picker>
     <v-date-picker
+      v-model="date"
       full-width
       landscape
       type="month"
       class="mt-3"
-      v-model="date"
     ></v-date-picker>
   </div>
 </template>

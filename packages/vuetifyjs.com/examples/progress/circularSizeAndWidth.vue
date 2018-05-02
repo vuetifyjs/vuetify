@@ -1,14 +1,14 @@
 <template>
   <div>
-    <v-progress-circular indeterminate :size="50" color="primary"></v-progress-circular>
+    <v-progress-circular :size="50" indeterminate color="primary"></v-progress-circular>
 
-    <v-progress-circular indeterminate :width="3" color="red"></v-progress-circular>
+    <v-progress-circular :width="3" indeterminate color="red"></v-progress-circular>
 
-    <v-progress-circular indeterminate :size="70" :width="7" color="purple"></v-progress-circular>
+    <v-progress-circular :size="70" :width="7" indeterminate color="purple"></v-progress-circular>
 
-    <v-progress-circular indeterminate :width="3" color="green"></v-progress-circular>
+    <v-progress-circular :width="3" indeterminate color="green"></v-progress-circular>
 
-    <v-progress-circular indeterminate :size="50" color="amber"></v-progress-circular>
+    <v-progress-circular :size="50" indeterminate color="amber"></v-progress-circular>
   </div>
 </template>
 

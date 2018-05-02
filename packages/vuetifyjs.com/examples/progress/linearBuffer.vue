@@ -1,8 +1,8 @@
 <template>
   <v-progress-linear
     v-model="buffer"
-    buffer
     :buffer-value="bufferValue"
+    buffer
   ></v-progress-linear>
 </template>
 

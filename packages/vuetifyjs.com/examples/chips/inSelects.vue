@@ -1,5 +1,6 @@
 <template>
   <v-select
+    v-model="chips"
     label="Your favorite hobbies"
     chips
     tags
@@ -7,13 +8,12 @@
     prepend-icon="filter_list"
     append-icon=""
     clearable
-    v-model="chips"
   >
     <template slot="selection" slot-scope="data">
       <v-chip
+        :selected="data.selected"
         close
         @input="remove(data.item)"
-        :selected="data.selected"
       >
         <strong>{{ data.item }}</strong>&nbsp;
         <span>(interest)</span>

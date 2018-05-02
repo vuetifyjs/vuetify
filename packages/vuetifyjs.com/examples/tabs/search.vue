@@ -15,8 +15,8 @@
       ></v-text-field>
       <v-tabs
         slot="extension"
-        centered
         v-model="tabs"
+        centered
         slider-color="white"
         color="transparent"
       >

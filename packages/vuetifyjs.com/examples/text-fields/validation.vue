@@ -16,18 +16,18 @@
             <v-layout row wrap>
               <v-flex xs12>
                 <v-text-field
-                  label="Title"
                   v-model="title"
+                  :rules="[rules.required]"
+                  label="Title"
                   counter
                   max="15"
-                  :rules="[rules.required]"
                 ></v-text-field>
               </v-flex>
               <v-flex xs12>
                 <v-text-field
-                  label="E-mail"
                   v-model="email"
                   :rules="[rules.required, rules.email]"
+                  label="E-mail"
                 ></v-text-field>
               </v-flex>
             </v-layout>

@@ -14,8 +14,8 @@
           {{ step.step }}
         </v-stepper-step>
         <v-divider
-          :key="`divider-${i}`"
           v-if="i !== steps.length - 1"
+          :key="`divider-${i}`"
         />
       </template>
     </v-stepper-header>
@@ -31,14 +31,14 @@
           </v-card-title>
           <v-card-text class="text-xs-center">
             <v-btn
-              large
               v-for="(option, j) in step.options"
               :key="j"
+              large
               @click="next(step, option)"
             >
               <v-icon
-                left
                 v-if="option.icon"
+                left
                 v-text="option.icon"
               />
               {{ option.action }}

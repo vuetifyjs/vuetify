@@ -1,11 +1,11 @@
 <template>
   <v-navigation-drawer
+    v-model="drawer"
     class="pb-0"
     floating
     hide-overlay
     stateless
     width="380"
-    v-model="drawer"
   >
     <v-layout fill-height>
       <v-navigation-drawer

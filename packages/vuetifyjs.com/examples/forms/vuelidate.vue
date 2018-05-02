@@ -1,38 +1,38 @@
 <template>
   <form>
     <v-text-field
-      label="Name"
       v-model="name"
       :error-messages="nameErrors"
       :counter="10"
+      label="Name"
+      required
       @input="$v.name.$touch()"
       @blur="$v.name.$touch()"
-      required
     ></v-text-field>
     <v-text-field
-      label="E-mail"
       v-model="email"
       :error-messages="emailErrors"
+      label="E-mail"
+      required
       @input="$v.email.$touch()"
       @blur="$v.email.$touch()"
-      required
     ></v-text-field>
     <v-select
-      label="Item"
       v-model="select"
       :items="items"
       :error-messages="selectErrors"
+      label="Item"
+      required
       @change="$v.select.$touch()"
       @blur="$v.select.$touch()"
-      required
     ></v-select>
     <v-checkbox
-      label="Do you agree?"
       v-model="checkbox"
       :error-messages="checkboxErrors"
+      label="Do you agree?"
+      required
       @change="$v.checkbox.$touch()"
       @blur="$v.checkbox.$touch()"
-      required
     ></v-checkbox>
 
     <v-btn @click="submit">submit</v-btn>

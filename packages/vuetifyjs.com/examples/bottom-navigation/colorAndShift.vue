@@ -1,11 +1,11 @@
 <template>
   <v-card height="200px">
     <v-bottom-nav
-      absolute
-      shift
       :value="true"
       :active.sync="e2"
       :color="color"
+      absolute
+      shift
     >
       <v-btn dark>
         <span>Video</span>

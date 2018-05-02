@@ -6,9 +6,9 @@
       </v-flex>
       <v-flex xs12 sm6>
         <v-select
-          label="Select"
           :items="states"
           v-model="e6"
+          label="Select"
           multiple
           max-height="400"
           hint="Pick your favorite states"
@@ -20,9 +20,9 @@
       </v-flex>
       <v-flex xs12 sm6>
         <v-select
-          label="Select"
           :items="states"
           v-model="e7"
+          label="Select"
           multiple
           chips
           hint="What are the target regions"

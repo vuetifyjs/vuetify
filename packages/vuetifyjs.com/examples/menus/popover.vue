@@ -1,12 +1,12 @@
 <template>
   <div class="text-xs-center">
     <v-menu
-      offset-x
       :close-on-content-click="false"
       :nudge-width="200"
       v-model="menu"
+      offset-x
     >
-      <v-btn color="indigo" dark slot="activator">Menu as Popover</v-btn>
+      <v-btn slot="activator" color="indigo" dark>Menu as Popover</v-btn>
       <v-card>
         <v-list>
           <v-list-tile avatar>
@@ -19,8 +19,8 @@
             </v-list-tile-content>
             <v-list-tile-action>
               <v-btn
-                icon
                 :class="fav ? 'red--text' : ''"
+                icon
                 @click="fav = !fav"
               >
                 <v-icon>favorite</v-icon>
