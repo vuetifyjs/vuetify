@@ -9,6 +9,14 @@ module.exports = {
       '@': resolve('../src')
     }
   },
+  externals: {
+    vue: {
+      commonjs: 'vue',
+      commonjs2: 'vue',
+      amd: 'vue',
+      root: 'Vue'
+    }
+  },
   node: {
     fs: 'empty'
   },
