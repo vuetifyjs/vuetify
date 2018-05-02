@@ -67,7 +67,7 @@ export default mixins(Colorable, Themeable).extend({
     xLarge: Boolean
   },
 
-  render (h, { props, data, parent, children }): VNode {
+  render (h, { props, data, parent, children = [] }): VNode {
     const { small, medium, large, xLarge } = props
     const sizes = { small, medium, large, xLarge }
     const explicitSize = keys(sizes).find(key => sizes[key] && !!key)
