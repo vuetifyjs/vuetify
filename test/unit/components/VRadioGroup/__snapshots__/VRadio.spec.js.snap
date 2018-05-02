@@ -10,7 +10,7 @@ exports[`VRadio.vue should not render aria-label attribute with no label value o
   </label>
   <div class="input-group__input">
     <i aria-hidden="true"
-       class="icon icon--selection-control material-icons"
+       class="v-icon v-icon--selection-control material-icons"
     >
       radio_button_unchecked
     </i>
@@ -37,7 +37,7 @@ exports[`VRadio.vue should render aria-label attribute with label value on input
   </label>
   <div class="input-group__input">
     <i aria-hidden="true"
-       class="icon icon--selection-control material-icons"
+       class="v-icon v-icon--selection-control material-icons"
     >
       radio_button_unchecked
     </i>
@@ -62,7 +62,7 @@ exports[`VRadio.vue should render proper input name 1`] = `
   </label>
   <div class="input-group__input">
     <i aria-hidden="true"
-       class="icon icon--selection-control material-icons"
+       class="v-icon v-icon--selection-control material-icons"
     >
       radio_button_unchecked
     </i>
@@ -87,7 +87,7 @@ exports[`VRadio.vue should render role and aria-checked attributes on input grou
   </label>
   <div class="input-group__input">
     <i aria-hidden="true"
-       class="icon icon--selection-control material-icons"
+       class="v-icon v-icon--selection-control material-icons"
     >
       radio_button_unchecked
     </i>

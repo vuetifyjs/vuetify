@@ -1,8 +1,11 @@
 import '../../stylus/components/_icons.styl'
-import { getObjectValueByPath } from '../../util/helpers'
 
 import Themeable from '../../mixins/themeable'
 import Colorable from '../../mixins/colorable'
+import {
+  convertToUnit,
+  getObjectValueByPath
+} from '../../util/helpers'
 
 import { VNode, VNodeChildren } from 'vue'
 import mixins from '../../util/mixins'
@@ -69,7 +72,7 @@ export default mixins(Colorable, Themeable).extend({
     const { small, medium, large, xLarge } = props
     const sizes = { small, medium, large, xLarge }
     const explicitSize = keys(sizes).find(key => sizes[key] && !!key)
-    const fontSize = (explicitSize && SIZE_MAP[explicitSize]) || props.size
+    const fontSize = (explicitSize && SIZE_MAP[explicitSize]) || convertToUnit(props.size)
     const children: VNodeChildren = []
 
     if (fontSize) data.style = { fontSize, ...data.style }
@@ -112,9 +115,9 @@ export default mixins(Colorable, Themeable).extend({
 
     const classes = {
       ...(props.color && addTextColorClassChecks.call(props, {}, props.color)),
-      'icon--disabled': props.disabled,
-      'icon--left': props.left,
-      'icon--right': props.right,
+      'v-icon--disabled': props.disabled,
+      'v-icon--left': props.left,
+      'v-icon--right': props.right,
       'theme--dark': props.dark,
       'theme--light': props.light
     }
@@ -124,7 +127,7 @@ export default mixins(Colorable, Themeable).extend({
     // * Vuetify classes
     // * Icon Classes
     data.staticClass = [
-      'icon',
+      'v-icon',
       data.staticClass,
       Object.keys(classes).filter(k => classes[k]).join(' '),
       iconType,

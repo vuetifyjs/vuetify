@@ -2,10 +2,10 @@ import VChip from '@/components/VChip'
 import { test } from '@/test'
 
 test('VChip.vue', ({ mount, compileToFunctions }) => {
-  it('should have a chip class', () => {
+  it('should have a v-chip class', () => {
     const wrapper = mount(VChip)
 
-    expect(wrapper.hasClass('chip')).toBe(true)
+    expect(wrapper.hasClass('v-chip')).toBe(true)
     expect(wrapper.html()).toMatchSnapshot()
   })
 
@@ -14,7 +14,7 @@ test('VChip.vue', ({ mount, compileToFunctions }) => {
       propsData: { close: true }
     })
 
-    const close = wrapper.find('.chip__close')[0]
+    const close = wrapper.find('.v-chip__close')[0]
 
     const input = jest.fn(value => wrapper.setProps({ value }))
     wrapper.vm.$on('input', input)
@@ -45,7 +45,7 @@ test('VChip.vue', ({ mount, compileToFunctions }) => {
       }
     })
 
-    expect(wrapper.element.classList).toContain('chip--disabled')
+    expect(wrapper.element.classList).toContain('v-chip--disabled')
   })
 
   it('should render a colored outline chip', () => {

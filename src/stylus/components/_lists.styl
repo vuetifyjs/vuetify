@@ -2,35 +2,35 @@
 @import '../theme'
 
 /* Themes */
-list($material)
+v-list($material)
   background: $material.cards
   color: $material.text.primary
 
-  .list__tile__sub-title
+  .v-list__tile__sub-title
     color: $material.text.secondary
 
-  .list__tile__mask
+  .v-list__tile__mask
     color: $material.text.disabled
 
     background: $material.expansion-panels.focus
 
-  .list__tile--link:hover,
-  .list__tile--highlighted,
-  .list__group__header:hover
-  .list__group--active:before,
-  .list__group--active:after
+  .v-list__tile--link:hover,
+  .v-list__tile--highlighted,
+  .v-list__group__header:hover
+  .v-list__group--active:before,
+  .v-list__group--active:after
     background: $material.dividers
 
-  .list__group--disabled
-    .list__tile
+  .v-list__group--disabled
+    .v-list__tile
       color: $material.text.disabled !important
 
-    .list__group__header__prepend-icon .icon
+    .v-list__group__header__prepend-icon .v-icon
       color: $material.icons.inactive !important
 
-theme(list, "list")
+theme(v-list, "v-list")
 
-.list
+.v-list
   list-style-type: none
   padding: $list-top-padding 0 $list-bottom-padding
   transition: height .3s $transition.fast-out-slow-in
@@ -95,7 +95,7 @@ theme(list, "list")
       .input-group__details
         display: none
 
-      .btn // fix button padding if used
+      .v-btn // fix button padding if used
         padding 0
         margin 0
 
@@ -123,15 +123,15 @@ theme(list, "list")
       justify-content: center
       flex-direction: column
 
-      ~ .list__tile__avatar
+      ~ .v-list__tile__avatar
         justify-content: flex-end
 
-      ~ .list__tile__action:not(.list__tile__action--stack)
+      ~ .v-list__tile__action:not(.v-list__tile__action--stack)
         justify-content: flex-end
 
     &--active
-      .list__tile__action:first-of-type
-        .icon
+      .v-list__tile__action:first-of-type
+        .v-icon
           color: inherit
 
     &--disabled
@@ -145,59 +145,59 @@ theme(list, "list")
     padding-top: $list-item-dense-top-padding
     padding-bottom: $list-item-dense-top-padding
 
-    .subheader
+    .v-subheader
       font-size: $subheader-dense-font-size
       height: $list-dense-subheader-height
 
-    .list__group
-      .subheader
+    .v-list__group
+      .v-subheader
         height $list-dense-subheader-group-height
 
-    .list__tile
+    .v-list__tile
       font-size: $list-item-dense-font-size
 
       &--avatar
         height: $list-item-dense-avatar-single-height
 
-      &:not(.list__tile--avatar)
+      &:not(.v-list__tile--avatar)
         height: $list-item-dense-single-height
 
-      .icon
+      .v-icon
         font-size: $list-item-dense-icon-font-size
 
-    .list__tile__sub-title
+    .v-list__tile__sub-title
       font-size: $list-item-dense-font-size
 
   &--two-line
-    .list__tile
+    .v-list__tile
       height: $list-item-double-height
 
-    &.list--dense
-      .list__tile
+    &.v-list--dense
+      .v-list__tile
         height: $list-item-dense-double-height
 
   &--three-line
-    .list__tile
+    .v-list__tile
       height: $list-item-triple-height
 
-    .list__tile__avatar
+    .v-list__tile__avatar
       margin-top: $list-item-avatar-triple-margin-top
 
-    .list__tile__sub-title
+    .v-list__tile__sub-title
       white-space: initial
       -webkit-line-clamp: 2
       -webkit-box-orient: vertical
       display: -webkit-box
 
-    &.list--dense
-      .list__tile
+    &.v-list--dense
+      .v-list__tile
         height: $list-item-dense-triple-height
 
-  > .list__group
+  > .v-list__group
     &:before
       top: 0
 
-      .list__tile__avatar
+      .v-list__tile__avatar
         margin-top: $list-item-dense-avatar-triple-margin-top
 
   &__group
@@ -213,7 +213,7 @@ theme(list, "list")
       transition: $primary-transition
       width: 100%
 
-    &--active ~ .list__group
+    &--active ~ .v-list__group
       &:before
         display: none
 
@@ -223,11 +223,11 @@ theme(list, "list")
       display: flex
       list-style-type: none
 
-      > div:not(.list__group__header__prepend-icon):not(.list__group__header__append-icon)
+      > div:not(.v-list__group__header__prepend-icon):not(.v-list__group__header__append-icon)
         flex: 1 0 auto
 
-      .list__group__header__append-icon,
-      .list__group__header__prepend-icon
+      .v-list__group__header__append-icon,
+      .v-list__group__header__prepend-icon
         padding: 0 16px
         user-select: none
 
@@ -235,30 +235,30 @@ theme(list, "list")
         align-items: center
         display: flex
 
-        div .list__tile
+        div .v-list__tile
           padding-left: 0
 
-        .list__group__header__prepend-icon
+        .v-list__group__header__prepend-icon
           padding: 0 0 0 40px
           margin-right: 8px
 
-      .list__group__header__prepend-icon
+      .v-list__group__header__prepend-icon
         display: flex
         justify-content: flex-start
         min-width: 56px
 
       &--active
-        .list__group__header__append-icon
-          .icon
+        .v-list__group__header__append-icon
+          .v-icon
             transform: rotate(-180deg)
 
-        .list__group__header__prepend-icon
-          .icon
+        .v-list__group__header__prepend-icon
+          .v-icon
             color: inherit
 
-        &.list__group__header--sub-group
-          .list__group__header__prepend-icon
-            .icon
+        &.v-list__group__header--sub-group
+          .v-list__group__header__prepend-icon
+            .v-icon
               transform: rotate(-180deg)
 
     &__items
@@ -270,7 +270,7 @@ theme(list, "list")
         display: block
 
       &--no-action
-        .list__tile
+        .v-list__tile
           padding-left: $list-item-left-padding
 
     &--disabled

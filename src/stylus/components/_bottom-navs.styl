@@ -21,11 +21,11 @@ theme(v-bottom-nav, "v-bottom-nav")
 
   &--active
     transform: translate(0, 0)
-  
+
   &--fixed
     position: fixed
 
-  .btn
+  .v-btn
     background: transparent !important
     border-radius: 0
     box-shadow: none !important
@@ -39,14 +39,14 @@ theme(v-bottom-nav, "v-bottom-nav")
     opacity: .5
     width: 100%
 
-    .btn__content
+    .v-btn__content
       flex-direction: column-reverse
       font-size: 12px
       padding: 0 12px
       white-space: nowrap
       will-change: font-size
 
-      i.icon
+      i.v-icon
         color: inherit
         margin-bottom: 4px
         transition: all .4s cubic-bezier(.25, .8, .50, 1)
@@ -58,23 +58,23 @@ theme(v-bottom-nav, "v-bottom-nav")
       opacity: 1
       padding-top: 6px
 
-      .btn__content
+      .v-btn__content
         font-size: 14px
 
         &:before
           opacity: 0
 
-        .icon
+        .v-icon
           transform: none
 
-    &:not(.btn--active)
+    &:not(.v-btn--active)
       filter: grayscale(100%)
 
   &--shift
-    .btn__content
+    .v-btn__content
       font-size: 14px
 
-    .btn
+    .v-btn
       transition: all .3s
       min-width: 56px
       max-width: 96px
@@ -84,8 +84,8 @@ theme(v-bottom-nav, "v-bottom-nav")
         max-width: 168px
 
 .v-bottom-nav--shift
-  .btn:not(.btn--active) .btn__content
-    .icon
+  .v-btn:not(.v-btn--active) .v-btn__content
+    .v-icon
       transform: scale(1, 1) translate(0, 8px)
 
     span

@@ -16,7 +16,7 @@ test('VMenu.js', ({ mount }) => {
       }
     })
 
-    const activator = wrapper.find('.menu__activator')[0]
+    const activator = wrapper.find('.v-menu__activator')[0]
     const input = jest.fn()
     wrapper.instance().$on('input', input)
     activator.trigger('click')
@@ -345,7 +345,7 @@ test('VMenu.js', ({ mount }) => {
       }
     })
 
-    const content = wrapper.find('.menu__content')[0]
+    const content = wrapper.find('.v-menu__content')[0]
 
     const getBoundingClientRect = () => {
       return {
@@ -360,7 +360,7 @@ test('VMenu.js', ({ mount }) => {
       }
     }
 
-    wrapper.vm.$refs.activator.querySelector('.btn').getBoundingClientRect = getBoundingClientRect
+    wrapper.vm.$refs.activator.querySelector('.v-btn').getBoundingClientRect = getBoundingClientRect
     wrapper.vm.$refs.content.getBoundingClientRect = getBoundingClientRect
 
     wrapper.setProps({ value: true })

@@ -2,13 +2,13 @@
 @import '../theme'
 
 /* Themes */
-card($material)
+v-card($material)
   background-color: $material.cards
   color: $material.text.primary
 
-theme(card, "card")
+theme(v-card, "v-card")
 
-.card
+.v-card
   display: block
   border-radius: $card-border-radius
   min-width: 0
@@ -16,11 +16,11 @@ theme(card, "card")
   text-decoration: none
   elevation(1)
 
-  > *:first-child:not(.btn)
+  > *:first-child:not(.v-btn):not(.v-chip)
     border-top-left-radius: inherit
     border-top-right-radius: inherit
 
-  > *:last-child:not(.btn)
+  > *:last-child:not(.v-btn):not(.v-chip)
     border-bottom-left-radius: inherit
     border-bottom-right-radius: inherit
 
@@ -81,5 +81,5 @@ theme(card, "card")
     padding: 8px 4px
 
     > *,
-    .btn
+    .v-btn
       margin: 0 4px

@@ -119,7 +119,7 @@ export default {
       const angle = this.rotate + this.degreesPerUnit * (this.displayedValue - this.min)
 
       return this.$createElement('div', {
-        staticClass: 'time-picker-clock__hand',
+        staticClass: 'v-time-picker-clock__hand',
         'class': this.value == null ? {} : this.addBackgroundColorClassChecks(),
         style: {
           transform: `rotate(${angle}deg) ${scale}`
@@ -188,9 +188,9 @@ export default {
 
   render () {
     const data = {
-      staticClass: 'time-picker-clock',
+      staticClass: 'v-time-picker-clock',
       class: {
-        'time-picker-clock--indeterminate': this.value == null
+        'v-time-picker-clock--indeterminate': this.value == null
       },
       on: {
         mousedown: this.onMouseDown,

@@ -1,4 +1,4 @@
-import { FunctionalComponentOptions, VNodeDirective } from 'vue'
+import { FunctionalComponentOptions, VNode, VNodeDirective } from 'vue'
 
 export function createSimpleFunctional (
   c: string,
@@ -34,3 +34,5 @@ export function createRange (length: number): number[]
 export function getZIndex (el: Element): number
 export function escapeHTML (str: string): string
 export function filterObjectOnKeys<T, K extends keyof T> (obj: T, keys: K[]): { [N in K]: T[N] }
+export function filterChildren (array: VNode[], tag: string): VNode[]
+export function convertToUnit (str: string | number, unit?: string): string

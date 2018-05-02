@@ -2,7 +2,7 @@
 @import '../theme'
 
 /* Theme */
-datatable($material)
+v-datatable($material)
   thead
     th.column.sortable
       i
@@ -17,7 +17,7 @@ datatable($material)
         i
           color: rgba($material.fg-color, $material.primary-text-percent)
 
-  .datatable__actions
+  .v-datatable__actions
     background-color: $material.cards
     color: rgba($material.fg-color, $material.secondary-text-percent)
     border-top: 1px solid rgba($material.fg-color, $material.divider-percent)
@@ -30,9 +30,9 @@ datatable($material)
         .input-group__append-icon
           color: rgba($material.fg-color, $material.secondary-text-percent) !important
 
-theme(datatable, "datatable")
+theme(v-datatable, "v-datatable")
 
-.datatable
+.v-datatable
   thead
     th.column.sortable
       cursor: pointer
@@ -61,14 +61,14 @@ theme(datatable, "datatable")
             transform: rotate(-180deg)
 
 /** Actions */
-.datatable__actions
+.v-datatable__actions
   display: flex
   justify-content: flex-end
   align-items: center
   font-size: 12px
   flex-wrap: wrap-reverse
 
-  .btn
+  .v-btn
     color: inherit
 
     &:last-of-type
@@ -98,7 +98,7 @@ theme(datatable, "datatable")
       .input-group__selections__comma
         font-size: 12px
 
-.datatable__progress
+.v-datatable__progress
   height: auto !important
 
   tr, td, th
@@ -107,11 +107,11 @@ theme(datatable, "datatable")
   th
     padding: 0 !important
 
-    .progress-linear
+    .v-progress-linear
       top: -2px
       margin: 0 0 -2px
 
-.datatable__expand
+.v-datatable__expand
   &-row
     border: none !important
 

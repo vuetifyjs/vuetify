@@ -1,8 +1,8 @@
 @import '../bootstrap'
 @import '../theme'
 
-dataiterator($material)
-  .data-iterator__actions
+v-dataiterator($material)
+  .v-data-iterator__actions
     color: rgba($material.fg-color, $material.secondary-text-percent)
 
     &__select
@@ -13,17 +13,17 @@ dataiterator($material)
         .input-group__append-icon
           color: rgba($material.fg-color, $material.secondary-text-percent) !important
 
-theme(dataiterator, "data-iterator")
+theme(v-dataiterator, "v-data-iterator")
 
 /** Actions */
-.data-iterator__actions
+.v-data-iterator__actions
   display: flex
   justify-content: flex-end
   align-items: center
   font-size: 12px
   flex-wrap: wrap-reverse
 
-  .btn
+  .v-btn
     color: inherit
 
     &:last-of-type

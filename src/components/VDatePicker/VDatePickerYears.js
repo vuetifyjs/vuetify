@@ -71,7 +71,7 @@ export default {
 
   render () {
     return this.$createElement('ul', {
-      staticClass: 'date-picker-years',
+      staticClass: 'v-date-picker-years',
       ref: 'years'
     }, this.genYearItems())
   }

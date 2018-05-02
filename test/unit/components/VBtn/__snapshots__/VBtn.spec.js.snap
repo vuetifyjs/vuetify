@@ -2,7 +2,7 @@
 
 exports[`VBtn.js should render a <button> tag when using to prop 1`] = `
 
-<button class="btn btn--router">
+<button class="v-btn v-btn--router">
 </button>
 
 `;
@@ -10,9 +10,9 @@ exports[`VBtn.js should render a <button> tag when using to prop 1`] = `
 exports[`VBtn.js should render an <a> tag when using href prop 1`] = `
 
 <a href="http://www.google.com"
-   class="btn"
+   class="v-btn"
 >
-  <div class="btn__content">
+  <div class="v-btn__content">
   </div>
 </a>
 
@@ -21,9 +21,9 @@ exports[`VBtn.js should render an <a> tag when using href prop 1`] = `
 exports[`VBtn.js should render component and match snapshot 1`] = `
 
 <button type="button"
-        class="btn"
+        class="v-btn"
 >
-  <div class="btn__content">
+  <div class="v-btn__content">
   </div>
 </button>
 
@@ -32,9 +32,9 @@ exports[`VBtn.js should render component and match snapshot 1`] = `
 exports[`VBtn.js should render component with color prop and match snapshot 1`] = `
 
 <button type="button"
-        class="btn green darken-1"
+        class="v-btn green darken-1"
 >
-  <div class="btn__content">
+  <div class="v-btn__content">
   </div>
 </button>
 
@@ -43,9 +43,9 @@ exports[`VBtn.js should render component with color prop and match snapshot 1`] 
 exports[`VBtn.js should render component with color prop and match snapshot 2`] = `
 
 <button type="button"
-        class="btn btn--flat green--text text--darken-1"
+        class="v-btn v-btn--flat green--text text--darken-1"
 >
-  <div class="btn__content">
+  <div class="v-btn__content">
   </div>
 </button>
 
@@ -54,29 +54,29 @@ exports[`VBtn.js should render component with color prop and match snapshot 2`] 
 exports[`VBtn.js should render component with loader and match snapshot 1`] = `
 
 <button type="button"
-        class="btn btn--loader"
+        class="v-btn v-btn--loader"
 >
-  <div class="btn__content">
+  <div class="v-btn__content">
   </div>
-  <span class="btn__loading">
-    <div class="progress-circular progress-circular--indeterminate"
-         style="height: 26px; width: 26px;"
+  <span class="v-btn__loading">
+    <div class="v-progress-circular v-progress-circular--indeterminate"
+         style="height: 23px; width: 23px;"
     >
       <svg xmlns="http://www.w3.org/2000/svg"
-           viewbox="23.636363636363637 23.636363636363637 47.27272727272727 47.27272727272727"
+           viewbox="21.904761904761905 21.904761904761905 43.80952380952381 43.80952380952381"
       >
         <circle fill="transparent"
-                cx="47.27272727272727"
-                cy="47.27272727272727"
+                cx="43.80952380952381"
+                cy="43.80952380952381"
                 r="20"
-                stroke-width="7.272727272727273"
+                stroke-width="3.8095238095238093"
                 stroke-dasharray="125.664"
                 stroke-dashoffset="125.66370614359172px"
-                class="progress-circular__overlay"
+                class="v-progress-circular__overlay"
         >
         </circle>
       </svg>
-      <div class="progress-circular__info">
+      <div class="v-progress-circular__info">
       </div>
     </div>
   </span>
@@ -87,11 +87,11 @@ exports[`VBtn.js should render component with loader and match snapshot 1`] = `
 exports[`VBtn.js should render component with loader slot and match snapshot 1`] = `
 
 <button type="button"
-        class="btn btn--loader"
+        class="v-btn v-btn--loader"
 >
-  <div class="btn__content">
+  <div class="v-btn__content">
   </div>
-  <span class="btn__loading">
+  <span class="v-btn__loading">
     <span>
       loader
     </span>
@@ -102,8 +102,8 @@ exports[`VBtn.js should render component with loader slot and match snapshot 1`]
 
 exports[`VBtn.js should render specified tag when using tag prop 1`] = `
 
-<a class="btn">
-  <div class="btn__content">
+<a class="v-btn">
+  <div class="v-btn__content">
   </div>
 </a>
 
@@ -112,9 +112,9 @@ exports[`VBtn.js should render specified tag when using tag prop 1`] = `
 exports[`VBtn.js should use custom active-class 1`] = `
 
 <button type="button"
-        class="btn foo"
+        class="v-btn foo"
 >
-  <div class="btn__content">
+  <div class="v-btn__content">
   </div>
 </button>
 

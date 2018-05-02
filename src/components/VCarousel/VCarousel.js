@@ -93,14 +93,14 @@ export default {
   methods: {
     genDelimiters () {
       return this.$createElement('div', {
-        staticClass: 'carousel__controls'
+        staticClass: 'v-carousel__controls'
       }, this.genItems())
     },
     genIcon (direction, icon, fn) {
       if (!icon) return null
 
       return this.$createElement('div', {
-        staticClass: `carousel__${direction}`
+        staticClass: `v-carousel__${direction}`
       }, [
         this.$createElement(VBtn, {
           props: {
@@ -120,8 +120,8 @@ export default {
       return this.items.map((item, index) => {
         return this.$createElement(VBtn, {
           class: {
-            'carousel__controls__item': true,
-            'carousel__controls__item--active': index === this.inputValue
+            'v-carousel__controls__item': true,
+            'v-carousel__controls__item--active': index === this.inputValue
           },
           props: {
             icon: true,
@@ -173,7 +173,7 @@ export default {
 
   render (h) {
     return h('div', {
-      staticClass: 'carousel',
+      staticClass: 'v-carousel',
       directives: [{
         name: 'touch',
         value: {

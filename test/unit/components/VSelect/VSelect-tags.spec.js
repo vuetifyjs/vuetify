@@ -254,8 +254,8 @@ test('VSelect - tags', ({ mount, compileToFunctions }) => {
     await wrapper.vm.$nextTick()
 
     const input = wrapper.find('input')[0]
-    const chip = wrapper.find('.chip')[1]
-    const close = chip.find('.chip__close')[0]
+    const chip = wrapper.find('.v-chip')[1]
+    const close = chip.find('.v-chip__close')[0]
 
     wrapper.vm.focus()
     chip.trigger('click')

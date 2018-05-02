@@ -2,13 +2,13 @@
 @import '../theme'
 
 /* Theme */
-toolbar($material)
+v-toolbar($material)
   background-color: $material.app-bar
   color: $material.text.primary
 
-theme(toolbar, "toolbar")
+theme(v-toolbar, "v-toolbar")
 
-.toolbar
+.v-toolbar
   bootable()
   elevation(4)
 
@@ -28,8 +28,8 @@ theme(toolbar, "toolbar")
       top: auto
 
 /** Children */
-.toolbar
-  .tabs
+.v-toolbar
+  .v-tabs
     width: 100%
 
   &__title
@@ -45,21 +45,21 @@ theme(toolbar, "toolbar")
     align-items: center
     display: flex
 
-    > .list
+    > .v-list
       flex: 1 1 auto
       margin: 0 !important // come back to this
       max-height: 100%
 
-    > .btn:last-child, > .menu:last-child
+    > .v-btn:last-child, > .v-menu:last-child
       margin-right: 8px
 
-    > .btn:first-child, > .menu:first-child
+    > .v-btn:first-child, > .v-menu:first-child
       margin-left: 8px
 
-    > *:not(.btn):not(.menu):first-child:not(:only-child)
+    > *:not(.v-btn):not(.v-menu):first-child:not(:only-child)
       margin-left: $grid-gutters.lg
 
-    > *:not(.btn):not(.menu):last-child:not(:only-child)
+    > *:not(.v-btn):not(.v-menu):last-child:not(:only-child)
       margin-right: $grid-gutters.lg
 
   &__items
@@ -68,39 +68,39 @@ theme(toolbar, "toolbar")
     max-width: 100%
     padding: 0
 
-    .btn
+    .v-btn
       align-items: stretch
 
-    .tooltip,
-    .tooltip > span
+    .v-tooltip,
+    .v-tooltip > span
       height: inherit
 
-    .btn,
-    .menu,
-    .menu__activator
+    .v-btn,
+    .v-menu,
+    .v-menu__activator
       height: inherit
       margin: 0
 
   @media $display-breakpoints.xs-only
-    .toolbar__content,
-    .toolbar__extension
-      > .btn:last-child
+    .v-toolbar__content,
+    .v-toolbar__extension
+      > .v-btn:last-child
         margin-right: 17px
 
-      > .btn:first-child
+      > .v-btn:first-child
         margin-left: 17px
 
-      > *:not(.btn):not(.menu):first-child:not(:only-child)
+      > *:not(.v-btn):not(.v-menu):first-child:not(:only-child)
         margin-left: $grid-gutters.xl
 
-      > *:not(.btn):not(.menu):last-child:not(:only-child)
+      > *:not(.v-btn):not(.v-menu):last-child:not(:only-child)
         margin-right: $grid-gutters.xl
 
   @media all and (max-width: $grid-breakpoints.sm) and (orientation: portrait)
-    toolbar-content(7px)
+    v-toolbar-content(7px)
 
 /** Types */
-.toolbar
+.v-toolbar
   &--card
     border-radius: $card-border-radius $card-border-radius 0 0
     elevation(0)
@@ -126,14 +126,14 @@ theme(toolbar, "toolbar")
     z-index: 3
 
   &--prominent
-    toolbar-content(15px)
+    v-toolbar-content(15px)
 
   &--dense
-    toolbar-content(7px)
+    v-toolbar-content(7px)
 
-toolbar-content(left)
-  .toolbar__content,
-  .toolbar__extension
+v-toolbar-content(left)
+  .v-toolbar__content,
+  .v-toolbar__extension
     > *:first-child
       margin-left: left
 

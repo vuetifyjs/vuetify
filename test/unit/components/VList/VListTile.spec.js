@@ -20,7 +20,7 @@ test('VListTile.vue', ({ mount }) => {
     expect(wrapper.is('div')).toBe(true)
     expect(wrapper.find('div')).toHaveLength(2)
     expect(wrapper.find('a')).toHaveLength(0)
-    expect(wrapper.find('.list__tile--link')).toHaveLength(0)
+    expect(wrapper.find('.v-list__tile--link')).toHaveLength(0)
   })
 
   it('should render with a tag when tag is specified', () => {
@@ -102,7 +102,7 @@ test('VListTile.vue', ({ mount }) => {
       }
     })
 
-    expect(wrapper.contains('.list__tile--link')).toBe(true)
+    expect(wrapper.contains('.v-list__tile--link')).toBe(true)
   })
 
   it('should have --link class when to prop present', () => {
@@ -116,7 +116,7 @@ test('VListTile.vue', ({ mount }) => {
       instance
     })
 
-    expect(wrapper.contains('.list__tile--link')).toBe(true)
+    expect(wrapper.contains('.v-list__tile--link')).toBe(true)
   })
 
   it('should have --link class when click handler present', () => {
@@ -133,7 +133,7 @@ test('VListTile.vue', ({ mount }) => {
 
     const wrapper = mount(component)
 
-    expect(wrapper.contains('.list__tile--link')).toBe(true)
+    expect(wrapper.contains('.v-list__tile--link')).toBe(true)
   })
 
   it('should have --link class when click.prevent.stop handler present', () => {
@@ -150,6 +150,6 @@ test('VListTile.vue', ({ mount }) => {
 
     const wrapper = mount(component)
 
-    expect(wrapper.contains('.list__tile--link')).toBe(true)
+    expect(wrapper.contains('.v-list__tile--link')).toBe(true)
   })
 })

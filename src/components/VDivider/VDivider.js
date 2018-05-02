@@ -1,5 +1,7 @@
+// Styles
 import '../../stylus/components/_dividers.styl'
 
+// Mixins
 import Themeable from '../../mixins/themeable'
 
 export default {
@@ -7,16 +9,17 @@ export default {
 
   functional: true,
 
-  mixins: [Themeable],
-
   props: {
-    inset: Boolean
+    ...Themeable.props,
+    inset: Boolean,
+    vertical: Boolean
   },
 
   render (h, { props, data }) {
-    data.staticClass = (`divider ${data.staticClass || ''}`).trim()
+    data.staticClass = (`v-divider ${data.staticClass || ''}`).trim()
 
-    if (props.inset) data.staticClass += ' divider--inset'
+    if (props.inset) data.staticClass += ' v-divider--inset'
+    if (props.vertical) data.staticClass += ' v-divider--vertical'
     if (props.light) data.staticClass += ' theme--light'
     if (props.dark) data.staticClass += ' theme--dark'
 

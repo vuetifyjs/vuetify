@@ -1,19 +1,19 @@
 @import '../bootstrap'
 @import '../theme'
 
-navigation-drawer($material)
+v-navigation-drawer($material)
   background-color: $material.cards
 
-  &:not(.navigation-drawer--floating)
-    .navigation-drawer__border
+  &:not(.v-navigation-drawer--floating)
+    .v-navigation-drawer__border
       background-color: $material.dividers
 
   .divider
     background-color: $material.dividers
 
-theme(navigation-drawer, "navigation-drawer")
+theme(v-navigation-drawer, "v-navigation-drawer")
 
-.navigation-drawer
+.v-navigation-drawer
   bootable()
 
   display: block
@@ -40,7 +40,7 @@ theme(navigation-drawer, "navigation-drawer")
     height: 100%
     width: 1px
 
-  &.navigation-drawer--right
+  &.v-navigation-drawer--right
     &:after
       left: 0
       right: initial
@@ -49,7 +49,7 @@ theme(navigation-drawer, "navigation-drawer")
     left: auto
     right: 0
 
-    > .navigation-drawer__border
+    > .v-navigation-drawer__border
       right: auto
       left: 0
 
@@ -65,52 +65,52 @@ theme(navigation-drawer, "navigation-drawer")
   &--mini-variant
     overflow: hidden
 
-    .list__group__header__prepend-icon
+    .v-list__group__header__prepend-icon
       flex: 1 0 auto
       justify-content: center
       width: 100%
 
-    .list__tile__action,
-    .list__tile__avatar
+    .v-list__tile__action,
+    .v-list__tile__avatar
       justify-content: center
       min-width: 48px
 
-    .list__tile__content,
-    .list__tile:after
+    .v-list__tile__content,
+    .v-list__tile:after
       opacity: 0
 
-    .subheader,
+    .v-subheader,
     .divider,
-    .list--group
+    .v-list--group
       display: none !important
 
   &--temporary,
   &--is-mobile
     z-index: 6
 
-    &:not(.navigation-drawer--close)
+    &:not(.v-navigation-drawer--close)
       elevation(16)
 
-  .list
+  .v-list
     background: inherit
 
-  > .list
-    .list__tile
+  > .v-list
+    .v-list__tile
       transition: none
       font-weight: $navigation-drawer-item-font-weight
 
       &--active
-        .list__tile__title
+        .v-list__tile__title
           color: inherit
 
-    .list--group
-      .list__tile
+    .v-list--group
+      .v-list__tile
         font-weight: $navigation-drawer-group-item-font-weight
 
       &__header--active
         &:after
           background: transparent
 
-  > .list:not(.list--dense)
-    .list__tile
+  > .v-list:not(.v-list--dense)
+    .v-list__tile
       font-size: $navigation-drawer-item-font-size

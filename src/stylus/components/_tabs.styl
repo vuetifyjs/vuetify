@@ -2,24 +2,24 @@
 @import '../theme'
 
 /* Theme */
-tabs__bar($material)
+v-tabs__bar($material)
   background-color: $material.cards
 
-  .tabs__div
+  .v-tabs__div
     color: $material.tabs.active
 
-    &.tabs__item--disabled
-      color: $material.buttons.disabled
+  .v-tabs__item--disabled
+    color: $material.buttons.disabled
 
-theme(tabs__bar, "tabs__bar")
+theme(v-tabs__bar, "v-tabs__bar")
 
-.tabs
+.v-tabs
   position: relative
 
-.tabs__bar
+.v-tabs__bar
   position: relative
 
-.tabs__icon
+.v-tabs__icon
   align-items: center
   cursor: pointer
   display: inline-flex
@@ -35,7 +35,7 @@ theme(tabs__bar, "tabs__bar")
   &--next
     right: 4px
 
-.tabs__wrapper
+.v-tabs__wrapper
   overflow: hidden
   contain: content
   display: flex
@@ -44,13 +44,13 @@ theme(tabs__bar, "tabs__bar")
     margin-left: 40px
     margin-right: 40px
 
-    .tabs__container--align-with-title
+    .v-tabs__container--align-with-title
       padding-left: 16px
 
       @media $display-breakpoints.xs-only
         padding-left: 24px
 
-.tabs__container
+.v-tabs__container
   flex: 1 0 auto
   display: flex
   height: 48px
@@ -60,11 +60,11 @@ theme(tabs__bar, "tabs__bar")
   position: relative
 
   &--overflow
-    .tabs__div
+    .v-tabs__div
       flex: 1 0 auto
 
   &--grow
-    .tabs__div
+    .v-tabs__div
       flex: 1 0 auto
       max-width: none
 
@@ -78,41 +78,40 @@ theme(tabs__bar, "tabs__bar")
       padding-left: 64px
 
   &--fixed-tabs,
-  &--icons-and-text,
-  &--centered
-    .tabs__div
+  &--icons-and-text
+    .v-tabs__div
       min-width: 72px
 
       @media $display-breakpoints.sm-and-up
           min-width: 160px
 
   &--fixed-tabs
-    .tabs__div
+    .v-tabs__div
       @media $display-breakpoints.xs-only
         flex: 1 0 auto
 
   &--centered,
   &--fixed-tabs,
   &--right
-    > .tabs__div:first-child
+    > .v-tabs__div:first-child
       margin-left: auto
 
-    .tabs__slider-wrapper + .tabs__div
+    .v-tabs__slider-wrapper + .v-tabs__div
       margin-left: auto
 
   &--centered,
   &--fixed-tabs
-    > .tabs__div:last-child
+    > .v-tabs__div:last-child
       margin-right: auto
 
   &--icons-and-text
-    .tabs__item
+    .v-tabs__item
       flex-direction: column-reverse
 
-      .icon
+      .v-icon
         margin-bottom: 6px
 
-.tabs__div
+.v-tabs__div
   align-items: center
   display: inline-flex
   flex: 0 1 auto
@@ -125,7 +124,7 @@ theme(tabs__bar, "tabs__bar")
   text-transform: $tab-text-transform
   vertical-align: middle
 
-.tabs__item
+.v-tabs__item
   align-items: center
   color: inherit
   display: flex
@@ -140,10 +139,13 @@ theme(tabs__bar, "tabs__bar")
   user-select: none
   white-space: normal
 
-  &:not(.tabs__item--active)
+  &:not(.v-tabs__item--active)
     opacity: .7
 
-.tabs__slider
+  &--disabled
+    pointer-events: none
+
+.v-tabs__slider
   height: 2px
   width: 100%
 
@@ -153,10 +155,10 @@ theme(tabs__bar, "tabs__bar")
     position: absolute
     transition: $primary-transition
 
-.tabs__items
+.v-tabs__items
   overflow: hidden
   position: relative
 
-.tabs__content
+.v-tabs__content
   width: 100%
   transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1)

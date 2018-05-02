@@ -2,7 +2,7 @@
 
 exports[`VSelect should escape items in menu 1`] = `
 
-<div class="list__tile__title">
+<div class="v-list__tile__title">
   &lt;strong&gt;foo&lt;/strong&gt;
 </div>
 
@@ -10,7 +10,7 @@ exports[`VSelect should escape items in menu 1`] = `
 
 exports[`VSelect should escape items in menu 2`] = `
 
-<div class="list__tile__title">
+<div class="v-list__tile__title">
   &lt;
   <span class="list__tile__mask">
     str
@@ -32,9 +32,9 @@ exports[`VSelect should render buttons correctly when using items array with seg
          style="overflow: hidden;"
     >
       <button type="button"
-              class="btn btn--flat"
+              class="v-btn v-btn--flat"
       >
-        <div class="btn__content">
+        <div class="v-btn__content">
           Hello
         </div>
       </button>
@@ -44,20 +44,20 @@ exports[`VSelect should render buttons correctly when using items array with seg
              style="display: none;"
       >
     </div>
-    <div class="menu"
+    <div class="v-menu"
          style="display: inline-block;"
     >
-      <div class="menu__content menu__content--select  menu__content--dropdown"
+      <div class="v-menu__content menu__content--select  menu__content--dropdown"
            style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; z-index: 0; display: none;"
       >
-        <div class="card"
+        <div class="v-card"
              style="height: auto;"
         >
-          <div class="list">
+          <div class="v-list">
             <div>
-              <a class="list__tile list__tile--link list__tile--active primary--text">
-                <div class="list__tile__content">
-                  <div class="list__tile__title">
+              <a class="v-list__tile v-list__tile--link v-list__tile--active primary--text">
+                <div class="v-list__tile__content">
+                  <div class="v-list__tile__title">
                     Hello
                   </div>
                 </div>
@@ -68,7 +68,7 @@ exports[`VSelect should render buttons correctly when using items array with seg
       </div>
     </div>
     <i aria-hidden="true"
-       class="icon material-icons input-group__append-icon input-group__icon-cb"
+       class="v-icon material-icons input-group__append-icon input-group__icon-cb"
     >
       arrow_drop_down
     </i>
@@ -99,20 +99,20 @@ exports[`VSelect should render buttons correctly when using slot with segmented 
              style="display: none;"
       >
     </div>
-    <div class="menu"
+    <div class="v-menu"
          style="display: inline-block;"
     >
-      <div class="menu__content menu__content--select  menu__content--dropdown"
+      <div class="v-menu__content menu__content--select  menu__content--dropdown"
            style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; z-index: 0; display: none;"
       >
-        <div class="card"
+        <div class="v-card"
              style="height: auto;"
         >
-          <div class="list">
+          <div class="v-list">
             <div>
-              <a class="list__tile list__tile--link list__tile--active primary--text">
-                <div class="list__tile__content">
-                  <div class="list__tile__title">
+              <a class="v-list__tile v-list__tile--link v-list__tile--active primary--text">
+                <div class="v-list__tile__content">
+                  <div class="v-list__tile__title">
                     Hello
                   </div>
                 </div>
@@ -123,7 +123,7 @@ exports[`VSelect should render buttons correctly when using slot with segmented 
       </div>
     </div>
     <i aria-hidden="true"
-       class="icon material-icons input-group__append-icon input-group__icon-cb"
+       class="v-icon material-icons input-group__append-icon input-group__icon-cb"
     >
       arrow_drop_down
     </i>
@@ -154,29 +154,29 @@ exports[`VSelect should render v-select correctly when not using scope slot 1`] 
              style="display: none;"
       >
     </div>
-    <div class="menu"
+    <div class="v-menu"
          style="display: inline-block;"
     >
-      <div class="menu__content menu__content--select"
+      <div class="v-menu__content menu__content--select"
            style="max-height: 300px; min-width: 0px; max-width: auto; top: 18px; left: 0px; z-index: 0; display: none;"
       >
-        <div class="card"
+        <div class="v-card"
              style="height: auto;"
         >
-          <div class="list">
+          <div class="v-list">
             <div>
-              <a class="list__tile list__tile--link list__tile--active primary--text">
-                <div class="list__tile__content">
-                  <div class="list__tile__title">
+              <a class="v-list__tile v-list__tile--link v-list__tile--active primary--text">
+                <div class="v-list__tile__content">
+                  <div class="v-list__tile__title">
                     Text 0
                   </div>
                 </div>
               </a>
             </div>
             <div>
-              <a class="list__tile list__tile--link">
-                <div class="list__tile__content">
-                  <div class="list__tile__title">
+              <a class="v-list__tile v-list__tile--link">
+                <div class="v-list__tile__content">
+                  <div class="v-list__tile__title">
                     Text 1
                   </div>
                 </div>
@@ -187,7 +187,7 @@ exports[`VSelect should render v-select correctly when not using scope slot 1`] 
       </div>
     </div>
     <i aria-hidden="true"
-       class="icon material-icons input-group__append-icon input-group__icon-cb"
+       class="v-icon material-icons input-group__append-icon input-group__icon-cb"
     >
       arrow_drop_down
     </i>
@@ -218,29 +218,29 @@ exports[`VSelect should render v-select correctly when not using v-list-tile in 
              style="display: none;"
       >
     </div>
-    <div class="menu"
+    <div class="v-menu"
          style="display: inline-block;"
     >
-      <div class="menu__content menu__content--select"
+      <div class="v-menu__content menu__content--select"
            style="max-height: 300px; min-width: 0px; max-width: auto; top: 18px; left: 0px; z-index: 0; display: none;"
       >
-        <div class="card"
+        <div class="v-card"
              style="height: auto;"
         >
-          <div class="list">
+          <div class="v-list">
             <div>
-              <a class="list__tile list__tile--link list__tile--active primary--text">
-                <div class="list__tile__content">
-                  <div class="list__tile__title">
+              <a class="v-list__tile v-list__tile--link v-list__tile--active primary--text">
+                <div class="v-list__tile__content">
+                  <div class="v-list__tile__title">
                     0
                   </div>
                 </div>
               </a>
             </div>
             <div>
-              <a class="list__tile list__tile--link">
-                <div class="list__tile__content red lighten-1">
-                  <div class="list__tile__title">
+              <a class="v-list__tile v-list__tile--link">
+                <div class="v-list__tile__content red lighten-1">
+                  <div class="v-list__tile__title">
                     1
                   </div>
                 </div>
@@ -251,7 +251,7 @@ exports[`VSelect should render v-select correctly when not using v-list-tile in 
       </div>
     </div>
     <i aria-hidden="true"
-       class="icon material-icons input-group__append-icon input-group__icon-cb"
+       class="v-icon material-icons input-group__append-icon input-group__icon-cb"
     >
       arrow_drop_down
     </i>
@@ -282,23 +282,23 @@ exports[`VSelect should render v-select correctly when using v-list-tile in item
              style="display: none;"
       >
     </div>
-    <div class="menu"
+    <div class="v-menu"
          style="display: inline-block;"
     >
-      <div class="menu__content menu__content--select"
+      <div class="v-menu__content menu__content--select"
            style="max-height: 300px; min-width: 0px; max-width: auto; top: 18px; left: 0px; z-index: 0; display: none;"
       >
-        <div class="card"
+        <div class="v-card"
              style="height: auto;"
         >
-          <div class="list">
+          <div class="v-list">
             <div class>
-              <a class="list__tile list__tile--link list__tile--active primary--text">
+              <a class="v-list__tile v-list__tile--link v-list__tile--active primary--text">
                 Text 0
               </a>
             </div>
             <div class="red lighten-1">
-              <a class="list__tile list__tile--link">
+              <a class="v-list__tile v-list__tile--link">
                 Text 1
               </a>
             </div>
@@ -307,7 +307,7 @@ exports[`VSelect should render v-select correctly when using v-list-tile in item
       </div>
     </div>
     <i aria-hidden="true"
-       class="icon material-icons input-group__append-icon input-group__icon-cb"
+       class="v-icon material-icons input-group__append-icon input-group__icon-cb"
     >
       arrow_drop_down
     </i>

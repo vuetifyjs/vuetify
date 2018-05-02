@@ -1,16 +1,16 @@
 @import '../bootstrap'
 @import '../theme'
 
-date-picker-table($material)
+v-date-picker-table($material)
   th
     color: $material.text.disabled
 
-  .btn
+  .v-btn
     color: $material.text.primary
 
-theme(date-picker-table, "date-picker-table")
+theme(v-date-picker-table, "v-date-picker-table")
 
-.date-picker-table
+.v-date-picker-table
   position: relative
   padding: 0 12px
   height: 242px
@@ -28,32 +28,32 @@ theme(date-picker-table, "date-picker-table")
   th
     font-size: 12px
 
-  &--date .btn
+  &--date .v-btn
     height: 32px
     width: 32px
 
-  .btn
+  .v-btn
     z-index: auto
     margin: 0
     font-size: 12px
 
-    &.btn--active
+    &.v-btn--active
       color: #fff
 
-.date-picker-table--month
+.v-date-picker-table--month
   td
     width: 33.333333%
     height: 56px
     vertical-align: middle
     text-align: center
 
-    .btn
+    .v-btn
       margin: 0 auto
       max-width: 160px
       min-width: 40px
       width: 100%
 
-.date-picker-table--date
+.v-date-picker-table--date
   th
     padding: 8px 0
     font-weight: 600
@@ -61,7 +61,7 @@ theme(date-picker-table, "date-picker-table")
   td
     width: 45px
 
-.date-picker-table__event
+.v-date-picker-table__event
   border-radius: 50%
   bottom: 2px
   content: ""

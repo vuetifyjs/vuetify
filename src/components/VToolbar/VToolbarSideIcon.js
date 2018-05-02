@@ -8,8 +8,8 @@ export default {
 
   render (h, { slots, listeners, props, data }) {
     const classes = data.staticClass
-      ? `${data.staticClass} toolbar__side-icon`
-      : 'toolbar__side-icon'
+      ? `${data.staticClass} v-toolbar__side-icon`
+      : 'v-toolbar__side-icon'
 
     const d = Object.assign(data, {
       staticClass: classes,

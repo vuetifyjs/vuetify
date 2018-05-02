@@ -9,7 +9,7 @@ export default {
       }, [this.genProgress()])
 
       return this.genTR([col], {
-        staticClass: 'datatable__progress'
+        staticClass: 'v-datatable__progress'
       })
     }
   }

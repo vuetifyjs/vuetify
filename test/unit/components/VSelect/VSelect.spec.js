@@ -249,7 +249,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     await wrapper.vm.$nextTick()
 
-    const item = wrapper.find('div a.list__tile')[0]
+    const item = wrapper.find('div a.v-list__tile')[0]
     item.trigger('click')
 
     await wrapper.vm.$nextTick()
@@ -310,13 +310,13 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     const wrapper = mount(VSelect, {
       propsData: {
-        contentClass: 'menu-class',
+        contentClass: 'v-menu-class',
         items
       }
     })
 
-    const menu = wrapper.find('.menu__content')[0]
-    expect(menu.element.classList).toContain('menu-class')
+    const menu = wrapper.find('.v-menu__content')[0]
+    expect(menu.element.classList).toContain('v-menu-class')
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
@@ -333,7 +333,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     })
 
     await wrapper.vm.$nextTick()
-    const chip = wrapper.find('.chip')[0]
+    const chip = wrapper.find('.v-chip')[0]
 
     expect(!!chip).toBe(true)
 
@@ -348,7 +348,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const tileTitle = wrapper.find('.list__tile__title')[0]
+    const tileTitle = wrapper.find('.v-list__tile__title')[0]
     expect(tileTitle.html()).toMatchSnapshot()
 
     wrapper.setProps({ searchInput: 'str' })
