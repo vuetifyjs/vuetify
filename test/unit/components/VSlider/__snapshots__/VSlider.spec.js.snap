@@ -4,9 +4,7 @@ exports[`VSlider.vue should change track styles in rtl 1`] = `
 
 <div class="v-input v-input--slider">
   <div class="v-input__control">
-    <div class="v-input__slot"
-         style="height: 32px;"
-    >
+    <div class="v-input__slot">
       <div class="v-slider">
         <input role="slider"
                type="slider"
@@ -43,9 +41,7 @@ exports[`VSlider.vue should change track styles in rtl 2`] = `
 
 <div class="v-input v-input--slider v-input--is-label-active v-input--is-dirty">
   <div class="v-input__control">
-    <div class="v-input__slot"
-         style="height: 32px;"
-    >
+    <div class="v-input__slot">
       <div class="v-slider">
         <input role="slider"
                type="slider"
@@ -82,9 +78,7 @@ exports[`VSlider.vue should change track styles in rtl 3`] = `
 
 <div class="v-input v-input--slider v-input--is-label-active v-input--is-dirty v-input--is-disabled">
   <div class="v-input__control">
-    <div class="v-input__slot"
-         style="height: 32px;"
-    >
+    <div class="v-input__slot">
       <div class="v-slider">
         <input role="slider"
                type="slider"
@@ -122,9 +116,7 @@ exports[`VSlider.vue should change track styles in rtl 4`] = `
 
 <div class="v-input v-input--slider">
   <div class="v-input__control">
-    <div class="v-input__slot"
-         style="height: 32px;"
-    >
+    <div class="v-input__slot">
       <div class="v-slider">
         <input role="slider"
                type="slider"
@@ -161,9 +153,7 @@ exports[`VSlider.vue should change track styles in rtl 5`] = `
 
 <div class="v-input v-input--slider v-input--is-label-active v-input--is-dirty">
   <div class="v-input__control">
-    <div class="v-input__slot"
-         style="height: 32px;"
-    >
+    <div class="v-input__slot">
       <div class="v-slider">
         <input role="slider"
                type="slider"
@@ -200,9 +190,7 @@ exports[`VSlider.vue should change track styles in rtl 6`] = `
 
 <div class="v-input v-input--slider v-input--is-label-active v-input--is-dirty v-input--is-disabled">
   <div class="v-input__control">
-    <div class="v-input__slot"
-         style="height: 32px;"
-    >
+    <div class="v-input__slot">
       <div class="v-slider">
         <input role="slider"
                type="slider"
@@ -240,9 +228,7 @@ exports[`VSlider.vue should match a snapshot 1`] = `
 
 <div class="v-input v-input--slider">
   <div class="v-input__control">
-    <div class="v-input__slot"
-         style="height: 32px;"
-    >
+    <div class="v-input__slot">
       <div class="v-slider">
         <input role="slider"
                type="slider"
@@ -279,9 +265,7 @@ exports[`VSlider.vue should render component with thumbLabel and match a snapsho
 
 <div class="v-input v-input--slider">
   <div class="v-input__control">
-    <div class="v-input__slot"
-         style="height: 32px;"
-    >
+    <div class="v-input__slot">
       <div class="v-slider">
         <input role="slider"
                type="slider"
@@ -327,9 +311,7 @@ exports[`VSlider.vue should render component with thumbLabel and match a snapsho
 
 <div class="v-input v-input--slider">
   <div class="v-input__control">
-    <div class="v-input__slot"
-         style="height: 32px;"
-    >
+    <div class="v-input__slot">
       <div class="v-slider">
         <input role="slider"
                type="slider"
@@ -375,9 +357,7 @@ exports[`VSlider.vue should render component with ticks and match a snapshot 1`]
 
 <div class="v-input v-input--slider v-input--slider--ticks">
   <div class="v-input__control">
-    <div class="v-input__slot"
-         style="height: 32px;"
-    >
+    <div class="v-input__slot">
       <div class="v-slider">
         <input role="slider"
                type="slider"
@@ -432,9 +412,7 @@ exports[`VSlider.vue should render component with ticks and match a snapshot 2`]
 
 <div class="v-input v-input--slider v-input--slider--ticks">
   <div class="v-input__control">
-    <div class="v-input__slot"
-         style="height: 32px;"
-    >
+    <div class="v-input__slot">
       <div class="v-slider">
         <input role="slider"
                type="slider"
@@ -489,9 +467,7 @@ exports[`VSlider.vue should reverse label location when inverse 1`] = `
 
 <div class="v-input v-input--slider">
   <div class="v-input__control">
-    <div class="v-input__slot"
-         style="height: 32px;"
-    >
+    <div class="v-input__slot">
       <label class="v-label"
              style="left: 0px; position: relative;"
       >
@@ -534,9 +510,7 @@ exports[`VSlider.vue should reverse label location when inverse 2`] = `
 
 <div class="v-input v-input--slider v-input--slider--inverse-label">
   <div class="v-input__control">
-    <div class="v-input__slot"
-         style="height: 32px;"
-    >
+    <div class="v-input__slot">
       <div class="v-slider">
         <input aria-label="foo"
                role="slider"

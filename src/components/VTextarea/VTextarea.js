@@ -27,15 +27,13 @@ export default {
       type: [Number, String],
       default: 5,
       validator: v => !isNaN(parseInt(v, 10))
-    },
-    textarea: Boolean
+    }
   },
 
   computed: {
     classes () {
       return {
         'v-textarea': true,
-        'v-textarea--textarea': this.textarea,
         ...VTextField.computed.classes.call(this, null)
       }
     },

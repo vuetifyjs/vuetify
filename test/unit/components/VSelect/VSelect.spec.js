@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import { test } from '@/test'
-import VSelect from '@/components/VSelect'
+import VSelect from '@/components/VSelect/VSelect'
 import {
   VListTile,
   VListTileTitle,
@@ -145,7 +145,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     const blur = jest.fn()
     wrapper.vm.$on('blur', blur)
 
-    const menu = wrapper.first('.v-input__slot')
+    const menu = wrapper.first('.v-input')
 
     menu.trigger('click')
 

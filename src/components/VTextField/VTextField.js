@@ -53,12 +53,14 @@ export default {
     flat: Boolean,
     fullWidth: Boolean,
     label: String,
+    outline: Boolean,
     placeholder: String,
     prefix: String,
     singleLine: Boolean,
     solo: Boolean,
     soloInverted: Boolean,
     suffix: String,
+    textarea: Boolean, // TODO: Deprecate
     type: {
       type: String,
       default: 'text'
@@ -75,6 +77,7 @@ export default {
         'v-text-field--solo-inverted': this.soloInverted,
         'v-text-field--box': this.box,
         'v-text-field--enclosed': this.isEnclosed,
+        'v-text-field--outline': this.hasOutline,
         'elevation-0': this.flat
       }
     },
@@ -83,10 +86,9 @@ export default {
         ? [{ name: 'ripple', value: true }]
         : []
     },
-    dynamicHeight () {
-      if (!this.isEnclosed) return VInput.computed.dynamicHeight.call(this)
-
-      return this.height || (this.isEnclosed ? 56 : false)
+    // TODO: Deprecate
+    hasOutline () {
+      return this.outline || this.textarea
     },
     internalValue: {
       get () {
@@ -108,7 +110,7 @@ export default {
         this.badInput
     },
     isEnclosed () {
-      return this.isSolo || this.box
+      return this.isSolo || this.box || this.hasOutline
     },
     isLabelActive () {
       return this.isDirty || dirtyTypes.includes(this.type)
@@ -325,6 +327,13 @@ export default {
     },
     onKeyDown () {
       this.internalChange = true
+    },
+    onMouseDown (e) {
+      // Prevent input from being blurred
+      if (document.activeElement === this.$refs.input) {
+        e.preventDefault()
+        e.stopPropagation()
+      }
     }
   }
 }

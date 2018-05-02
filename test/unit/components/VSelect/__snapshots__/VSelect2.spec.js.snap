@@ -6,9 +6,7 @@ exports[`VSelect should add color to selected index 1`] = `
      class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty"
 >
   <div class="v-input__control">
-    <div class="v-input__slot primary--text"
-         style="height: auto;"
-    >
+    <div class="v-input__slot primary--text">
       <div class="v-menu"
            style="display: inline-block;"
       >
@@ -57,9 +55,7 @@ exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
      class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty"
 >
   <div class="v-input__control">
-    <div class="v-input__slot primary--text"
-         style="height: auto;"
-    >
+    <div class="v-input__slot primary--text">
       <div class="v-menu"
            style="display: inline-block;"
       >
@@ -117,9 +113,7 @@ exports[`VSelect should be clearable with prop, dirty and single select 1`] = `
      class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty"
 >
   <div class="v-input__control">
-    <div class="v-input__slot primary--text"
-         style="height: 32px;"
-    >
+    <div class="v-input__slot primary--text">
       <div class="v-menu"
            style="display: inline-block;"
       >

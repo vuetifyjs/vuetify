@@ -32,10 +32,13 @@ v-text-field($material)
   &.v-text-field--box
     background: $material.buttons.focused-alt
 
+  &.v-text-field--outline
+    border: 2px solid $material.text.secondary
+    background: transparent !important
+
   &__prefix,
   &__suffix
     color: $material.text.secondary
-
 
   .v-label
     left: initial
@@ -66,7 +69,7 @@ theme(v-text-field, "v-text-field")
     max-width: 90%
     overflow: hidden
     text-overflow: ellipsis
-    top: calc(50% - 9px)
+    top: 6px // equal to the margin top of icons
     transform-origin: top left
     white-space: nowrap
 
@@ -117,24 +120,39 @@ theme(v-text-field, "v-text-field")
     height: 100%
     position: relative
 
-  &--box
+  &--box,
+  &--outline
     border-radius: 4px
     cursor: pointer
     position: relative
 
+    input
+      margin-top: 8px
+
     .v-label
-      top: 18px
+      top: 2px
 
       &--active
-        top: 30px
+        transform: translateY(-40%) scale(.75)
 
+    .v-input__control
+      min-height: 56px
+      padding-top: 16px
+
+      .v-input__slot
+        position: static
+
+        &:before,
+        &:after
+          display: none
+
+  &--box
     input
-      align-self: flex-end
       cursor: pointer
 
     &:after
       background-color: currentColor
-      bottom: 1px
+      bottom: 0
       border-bottom-left-radius: 2px
       border-bottom-right-radius: 2px
       content: ''
@@ -153,13 +171,10 @@ theme(v-text-field, "v-text-field")
     .v-input__append-outer
       margin-top: 16px
 
-    .v-input__control
-      .v-input__slot
-        position: static
-
-        &:before,
-        &:after
-          display: none
+  &--enclosed,
+  &--box
+    .v-input__append-inner
+      align-self: flex-start
 
   &--enclosed
     margin-top: 16px
@@ -186,19 +201,46 @@ theme(v-text-field, "v-text-field")
         &:after
           display: none
 
-  &--single-line
-    &.v-text-field--box
-      //
+  &--outline
+    &.v-input--is-focused
+      border: 2px solid currentColor
+      transition: border $primary-transition
+
+    .v-input__prepend-outer,
+    .v-input__append-inner,
+    .v-input__append-outer
+      align-self: flex-start
+      margin-top: 16px
+
+    &:not(.v-text-field--single-line)
+      .v-input__append-inner
+        margin-top: 0
+
+  &.v-text-field--solo,
+  &.v-text-field--box.v-text-field--single-line
+    input
+      margin: 0
+
+    .v-label
+      top: calc(50% - 10px)
+
+    .v-input__control
+      align-items: center
+      padding: 0
+
+    .v-input__prepend-outer,
+    .v-input__append-inner,
+    .v-input__append-outer
+      align-self: center
+      margin-bottom: 0
+      margin-top: 0
 
   &.v-text-field--solo
     align-items: center
     elevation(2)
 
-    input
-      align-self: center
-
-    .v-input__append-inner
-      align-self: center
+    .v-input__control
+      min-height: 48px
 
   &.v-input--is-focused
     .v-input__slot:after

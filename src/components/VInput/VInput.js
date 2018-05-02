@@ -61,17 +61,8 @@ export default {
         ...this.themeClasses
       }
     },
-    // Implementing components can
-    // use dynamicHeight to override
-    // the default conditional
-    computedHeight () {
-      return convertToUnit(this.dynamicHeight)
-    },
     directivesInput () {
       return []
-    },
-    dynamicHeight () {
-      return this.height || 32
     },
     hasHint () {
       return !this.hasMessages &&
@@ -108,7 +99,8 @@ export default {
   methods: {
     genContent () {
       return this.$createElement('div', {
-        staticClass: 'v-input__control'
+        staticClass: 'v-input__control',
+        style: { height: convertToUnit(this.height) }
       }, [
         this.genInputSlot(),
         this.genMessages()
@@ -152,13 +144,7 @@ export default {
         'class': this.addTextColorClassChecks(
           {},
           this.hasState ? this.validationState : this.color
-        ),
-        style: {
-          height: this.computedHeight
-        },
-        on: {
-          click: this.onClick
-        }
+        )
       }, this.genDefaultSlot())
     },
     genMessages () {
@@ -216,6 +202,9 @@ export default {
     },
     onClick (e) {
       this.$emit('click', e)
+    },
+    onMouseDown (e) {
+      this.$emit('mousedown', e)
     }
   },
 
@@ -224,7 +213,11 @@ export default {
       staticClass: 'v-input',
       attrs: this.attrsInput,
       'class': this.classesInput,
-      directives: this.directivesInput
+      directives: this.directivesInput,
+      on: {
+        click: this.onClick,
+        mousedown: this.onMouseDown
+      }
     }, [
       this.genPrependSlot(),
       this.genContent(),

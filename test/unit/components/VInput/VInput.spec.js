@@ -97,7 +97,7 @@ test('VInput.js', ({ mount }) => {
 
     const prepend = wrapper.find('.v-icon')[0]
     const append = wrapper.find('.v-icon')[1]
-    const slot = wrapper.first('.v-input__slot')
+    const slot = wrapper.first('.v-input')
 
     prepend.trigger('click')
     expect(cb.mock.calls.length).toBe(1)
@@ -112,8 +112,8 @@ test('VInput.js', ({ mount }) => {
   it('should accept a custom height', () => {
     const wrapper = mount(VInput)
 
-    const inputWrapper = wrapper.find('.v-input__slot')[0]
-    expect(inputWrapper.element.style.height).toBe('32px')
+    const inputWrapper = wrapper.find('.v-input__control')[0]
+    expect(inputWrapper.element.style.height).toBe('')
     expect(wrapper.vm.height).toBe(undefined)
 
     wrapper.setProps({ height: 10 })

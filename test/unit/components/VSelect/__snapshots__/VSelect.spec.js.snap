@@ -14,9 +14,7 @@ exports[`VSelect should only show items if they are in items 1`] = `
      class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty"
 >
   <div class="v-input__control">
-    <div class="v-input__slot primary--text"
-         style="height: 32px;"
-    >
+    <div class="v-input__slot primary--text">
       <div class="v-menu"
            style="display: inline-block;"
       >
@@ -65,9 +63,7 @@ exports[`VSelect should only show items if they are in items 2`] = `
      class="v-input v-text-field v-select"
 >
   <div class="v-input__control">
-    <div class="v-input__slot primary--text"
-         style="height: 32px;"
-    >
+    <div class="v-input__slot primary--text">
       <div class="v-menu"
            style="display: inline-block;"
       >
@@ -113,9 +109,7 @@ exports[`VSelect should only show items if they are in items 3`] = `
      class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty"
 >
   <div class="v-input__control">
-    <div class="v-input__slot primary--text"
-         style="height: 32px;"
-    >
+    <div class="v-input__slot primary--text">
       <div class="v-menu"
            style="display: inline-block;"
       >
@@ -164,9 +158,7 @@ exports[`VSelect should only show items if they are in items 4`] = `
      class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty"
 >
   <div class="v-input__control">
-    <div class="v-input__slot primary--text"
-         style="height: auto;"
-    >
+    <div class="v-input__slot primary--text">
       <div class="v-menu"
            style="display: inline-block;"
       >
@@ -218,9 +210,7 @@ exports[`VSelect should render v-select correctly when not using scope slot 1`] 
      class="v-input v-text-field v-select"
 >
   <div class="v-input__control">
-    <div class="v-input__slot primary--text"
-         style="height: 32px;"
-    >
+    <div class="v-input__slot primary--text">
       <div class="v-menu"
            style="display: inline-block;"
       >
@@ -266,9 +256,7 @@ exports[`VSelect should render v-select correctly when not using v-list-tile in 
      class="v-input v-text-field v-select"
 >
   <div class="v-input__control">
-    <div class="v-input__slot primary--text"
-         style="height: 32px;"
-    >
+    <div class="v-input__slot primary--text">
       <div class="v-menu"
            style="display: inline-block;"
       >
@@ -314,9 +302,7 @@ exports[`VSelect should render v-select correctly when using v-list-tile in item
      class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty"
 >
   <div class="v-input__control">
-    <div class="v-input__slot primary--text"
-         style="height: 32px;"
-    >
+    <div class="v-input__slot primary--text">
       <div class="v-menu"
            style="display: inline-block;"
       >
@@ -367,9 +353,7 @@ exports[`VSelect should use scoped slot for selection generation 1`] = `
      class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty"
 >
   <div class="v-input__control">
-    <div class="v-input__slot primary--text"
-         style="height: 32px;"
-    >
+    <div class="v-input__slot primary--text">
       <div class="v-menu"
            style="display: inline-block;"
       >

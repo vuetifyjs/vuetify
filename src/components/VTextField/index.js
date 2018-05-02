@@ -15,11 +15,11 @@ const wrapper = {
     const children = rebuildSlots(slots(), h)
 
     if (props.textarea) {
-      console.warn(`[Vuetify] '<v-text-field textarea>' is deprecated, use '<v-text-area outline>' instead in ${parent._name}`)
+      console.warn(`[Vuetify] '<v-text-field textarea>' is deprecated, use '<v-textarea outline>' instead in ${parent._name}`)
     }
 
     if (props.multiLine) {
-      console.warn(`[Vuetify] '<v-text-field multi-line>' is deprecated, use '<v-text-area>' instead in ${parent._name}`)
+      console.warn(`[Vuetify] '<v-text-field multi-line>' is deprecated, use '<v-textarea>' instead in ${parent._name}`)
     }
 
     if (props.textarea || props.multiLine) {

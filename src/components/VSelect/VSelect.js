@@ -148,9 +148,7 @@ export default {
       }]
     },
     dynamicHeight () {
-      return this.chips || this.isMulti
-        ? 'auto'
-        : VTextField.computed.dynamicHeight.call(this)
+      return 'auto'
     },
     hasSlot () {
       return Boolean(this.chips || this.$slots.item)

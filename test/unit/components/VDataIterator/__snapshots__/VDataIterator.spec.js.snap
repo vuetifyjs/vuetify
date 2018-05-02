@@ -16,9 +16,7 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
              class="v-input v-text-field v-select v-input--hide-details v-input--is-label-active v-input--is-dirty"
         >
           <div class="v-input__control">
-            <div class="v-input__slot primary--text"
-                 style="height: 32px;"
-            >
+            <div class="v-input__slot primary--text">
               <div class="v-menu"
                    style="display: inline-block;"
               >
@@ -165,9 +163,7 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
              class="v-input v-text-field v-select v-input--hide-details v-input--is-label-active v-input--is-dirty"
         >
           <div class="v-input__control">
-            <div class="v-input__slot primary--text"
-                 style="height: 32px;"
-            >
+            <div class="v-input__slot primary--text">
               <div class="v-menu"
                    style="display: inline-block;"
               >
@@ -305,9 +301,7 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
              class="v-input v-text-field v-select v-input--hide-details v-input--is-label-active v-input--is-dirty"
         >
           <div class="v-input__control">
-            <div class="v-input__slot primary--text"
-                 style="height: 32px;"
-            >
+            <div class="v-input__slot primary--text">
               <div class="v-menu"
                    style="display: inline-block;"
               >
@@ -449,9 +443,7 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
              class="v-input v-text-field v-select v-input--hide-details v-input--is-label-active v-input--is-dirty"
         >
           <div class="v-input__control">
-            <div class="v-input__slot primary--text"
-                 style="height: 32px;"
-            >
+            <div class="v-input__slot primary--text">
               <div class="v-menu"
                    style="display: inline-block;"
               >

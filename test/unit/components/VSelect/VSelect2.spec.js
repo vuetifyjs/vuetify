@@ -1,5 +1,5 @@
 import { test } from '@/test'
-import VSelect from '@/components/VSelect'
+import VSelect from '@/components/VSelect/VSelect'
 import VChip from '@/components/VChip'
 
 test('VSelect', ({ mount, compileToFunctions }) => {
@@ -543,7 +543,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     const wrapper = mount(VSelect, {
       propsData: { items: ['foo', 'bar'] }
     })
-    const slot = wrapper.first('.v-input__slot')
+    const slot = wrapper.first('.v-input')
     const input = wrapper.first('input')
 
     expect(wrapper.vm.isMenuActive).toBe(false)
