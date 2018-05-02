@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import { filterObjectOnKeys } from '../util/helpers'
-import { ExtendedVue } from 'vue/types/vue'
+import { OptionsVue } from 'vue/types/vue'
 
-const props = {
+const availableProps = {
   absolute: Boolean,
   bottom: Boolean,
   fixed: Boolean,
@@ -10,22 +10,23 @@ const props = {
   right: Boolean,
   top: Boolean
 }
-type props = Record<keyof typeof props, boolean>
+type props = Record<keyof typeof availableProps, boolean>
 
 type someProps<S extends keyof props> = { [P in S]: props[P] }
-type Positionable<S extends keyof props> = ExtendedVue<Vue, {}, {}, {}, someProps<S>>
+type somePropsDef<S extends keyof props> = { [P in S]: typeof availableProps[P] }
+type Positionable<S extends keyof props> = OptionsVue<Vue, {}, {}, {}, someProps<S>, somePropsDef<S>>
 
-// export function factory<S extends keyof props> (selected: S[] = []): Positionable<S> {
 export function factory <S extends keyof props> (selected?: S[]): Positionable<S>
-export function factory (selected: Array<keyof props>): ExtendedVue<Vue, {}, {}, {}, props>
-export function factory (selected: Array<keyof props> = []) {
+export function factory (selected: undefined): OptionsVue<Vue, {}, {}, {}, props, typeof availableProps>
+export function factory (selected: any[] = []): any {
   return Vue.extend({
-    props: selected.length ? filterObjectOnKeys(props, selected) : props
+    props: selected.length ? filterObjectOnKeys(availableProps, selected) : availableProps
   })
 }
 
 export default factory()
 
+// Add a `*` before the second `/`
 /* Tests /
 let single = factory(['top']).extend({
   created () {
