@@ -13,15 +13,15 @@ import Positionable from '../../mixins/positionable'
 import Routable from '../../mixins/routable'
 import Themeable from '../../mixins/themeable'
 import { factory as ToggleableFactory } from '../../mixins/toggleable'
-// import { inject as RegistrableInject } from '../../mixins/registrable'
+import { inject as RegistrableInject } from '../../mixins/registrable'
 
 export default mixins(
   Colorable,
   Routable,
   Positionable,
   Themeable,
-  ToggleableFactory('inputValue')
-  // RegistrableInject('buttonGroup') // TODO
+  ToggleableFactory('inputValue'),
+  RegistrableInject('buttonGroup')
 ).extend({
   name: 'v-btn',
 
@@ -67,7 +67,6 @@ export default mixins(
         'v-btn--flat': this.flat,
         'v-btn--floating': this.fab,
         'v-btn--fixed': this.fixed,
-        // 'v-btn--hover': this.hover, // TODO
         'v-btn--icon': this.icon,
         'v-btn--large': this.large,
         'v-btn--left': this.left,
@@ -124,15 +123,15 @@ export default mixins(
   },
 
   mounted () {
-    // if (this.buttonGroup) {
-    //   this.buttonGroup.register(this)
-    // }
+    if (this.buttonGroup) {
+      this.buttonGroup.register(this)
+    }
   },
 
   beforeDestroy () {
-    // if (this.buttonGroup) {
-    //   this.buttonGroup.unregister(this)
-    // }
+    if (this.buttonGroup) {
+      this.buttonGroup.unregister(this)
+    }
   },
 
   render (h): VNode {
