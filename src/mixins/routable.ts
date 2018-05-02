@@ -27,6 +27,7 @@ export default Vue.extend({
   },
 
   methods: {
+    /* eslint-disable-next-line no-unused-vars */
     click (e: MouseEvent): void { /**/ },
     generateRouteLink () {
       let exact = this.exact

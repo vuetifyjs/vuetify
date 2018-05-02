@@ -23,8 +23,8 @@ export function createJavaScriptTransition (
 ): FunctionalComponentOptions
 
 export interface BindingConfig {
-  arg: VNodeDirective['arg'],
-  modifiers: VNodeDirective['modifiers'],
+  arg: VNodeDirective['arg']
+  modifiers: VNodeDirective['modifiers']
   value: VNodeDirective['value']
 }
 export function directiveConfig (binding: BindingConfig, defaults: object): VNodeDirective

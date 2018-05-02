@@ -2,15 +2,7 @@
 
 import { VueConstructor, ComponentOptions, PluginFunction, FunctionalComponentOptions } from 'vue'
 import { CombinedVueInstance, Vue } from 'vue/types/vue'
-import {
-  RecordPropsDefinition,
-  ThisTypedComponentOptionsWithArrayProps,
-  ThisTypedComponentOptionsWithRecordProps,
-  DefaultData,
-  DefaultMethods,
-  DefaultComputed,
-  DefaultProps
-} from 'vue/types/options'
+import { RecordPropsDefinition, ThisTypedComponentOptionsWithArrayProps, ThisTypedComponentOptionsWithRecordProps } from 'vue/types/options'
 
 declare global {
   interface Window {
@@ -28,11 +20,11 @@ declare module 'vue/types/vue' {
   >
 
   export interface RawComponentOptions<V extends Vue = Vue, Data = {}, Methods = {}, Computed = {}, Props = {}> {
-    data?: Data,
-    methods?: Methods,
+    data?: Data
+    methods?: Methods
     computed?: {
       [C in keyof Computed]: (this: V) => Computed[C]
-    },
+    }
     props?: Props
   }
 

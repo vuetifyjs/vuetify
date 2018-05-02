@@ -61,7 +61,6 @@ module.exports = {
       rules: {
         // https://github.com/eslint/typescript-eslint-parser#known-issues
         'no-undef': 'off',
-        'no-unused-vars': 'off',
 
         // https://github.com/eslint/typescript-eslint-parser/issues/445
         // 'typescript/no-unused-vars': 'error'
@@ -69,8 +68,19 @@ module.exports = {
         // https://github.com/eslint/eslint/issues/10260
         'space-infix-ops': false,
 
+        // https://github.com/nzakas/eslint-plugin-typescript/issues/127
+        // 'typescript/prefer-namespace-keyword': 'error',
+
         // Can't overload function exports with this enabled
-        'import/export': false
+        'import/export': false,
+
+        'typescript/no-unused-vars': 'error',
+        'typescript/adjacent-overload-signatures': 'error',
+        'typescript/member-delimiter-style': ['error', {
+          delimiter: 'none'
+        }],
+        'typescript/member-ordering': 'error',
+        'typescript/type-annotation-spacing': 'error'
       }
     }
   ]
