@@ -11,16 +11,12 @@
         <v-layout column>
           <v-flex>
             <v-card flat>
-              <v-card-text
-              v-text="lorem">
-              </v-card-text>
+              <v-card-text>{{ lorem }}</v-card-text>
             </v-card>
           </v-flex>
           <v-flex>
             <v-card flat>
-              <v-card-text
-              v-text="lorem">
-              </v-card-text>
+              <v-card-text>{{ lorem }}</v-card-text>
             </v-card>
           </v-flex>
         </v-layout>
