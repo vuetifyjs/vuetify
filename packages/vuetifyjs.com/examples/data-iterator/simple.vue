@@ -1,12 +1,12 @@
 <template>
   <v-container fluid grid-list-md>
     <v-data-iterator
-      content-tag="v-layout"
-      row
-      wrap
       :items="items"
       :rows-per-page-items="rowsPerPageItems"
       :pagination.sync="pagination"
+      content-tag="v-layout"
+      row
+      wrap
     >
       <v-flex
         slot="item"

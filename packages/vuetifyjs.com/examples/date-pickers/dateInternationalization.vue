@@ -3,15 +3,15 @@
     <v-flex xs12 sm6 class="my-3">
       <v-date-picker
         :first-day-of-week="0"
-        locale="zh-cn"
         v-model="picker"
+        locale="zh-cn"
       ></v-date-picker>
     </v-flex>
     <v-flex xs12 sm6 class="my-3">
       <v-date-picker
         :first-day-of-week="1"
-        locale="sv-se"
         v-model="picker"
+        locale="sv-se"
       ></v-date-picker>
     </v-flex>
   </v-layout>

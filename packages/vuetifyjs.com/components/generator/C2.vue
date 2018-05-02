@@ -8,7 +8,7 @@
     </v-toolbar>
     <v-card class="elevation-0">
       <v-card-media height="200px" class="grey lighten-2"/>
-      <v-tabs grow :scrollable="false" color="primary">
+      <v-tabs :scrollable="false" grow color="primary">
         <v-tab
           v-for="tab in 3"
           :key="tab"

@@ -1,14 +1,14 @@
 <template>
   <v-layout
+    v-touch="{
+      left: () => swipe('Left'),
+      right: () => swipe('Right')
+    }"
     column
     align-center
     justify-center
     style="height: 500px"
     class="grey lighten-2"
-    v-touch="{
-      left: () => swipe('Left'),
-      right: () => swipe('Right')
-    }"
   >
     <v-subheader>Swipe Direction</v-subheader>
     {{ swipeDirection }}

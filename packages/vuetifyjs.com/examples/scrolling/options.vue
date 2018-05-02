@@ -5,15 +5,15 @@
       {{ offsetTop }}
     </v-layout>
     <v-container
+      id="scroll-target"
       style="max-height: 400px"
       class="scroll-y"
-      id="scroll-target"
     >
       <v-layout
+        v-scroll:#scroll-target="onScroll"
         column
         align-center
         justify-center
-        v-scroll:#scroll-target="onScroll"
         style="height: 1000px"
       >
       </v-layout>

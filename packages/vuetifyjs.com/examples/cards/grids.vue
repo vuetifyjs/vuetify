@@ -13,8 +13,8 @@
         <v-container fluid grid-list-md>
           <v-layout row wrap>
             <v-flex
-              v-bind="{ [`xs${card.flex}`]: true }"
               v-for="card in cards"
+              v-bind="{ [`xs${card.flex}`]: true }"
               :key="card.title"
             >
               <v-card>

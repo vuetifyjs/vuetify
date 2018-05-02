@@ -1,28 +1,28 @@
 <template>
   <v-menu
     ref="menu"
-    lazy
     :close-on-content-click="false"
     v-model="menu"
+    :nudge-right="40"
+    lazy
     transition="scale-transition"
     offset-y
     full-width
-    :nudge-right="40"
     min-width="290px"
   >
     <v-text-field
       slot="activator"
-      label="Birthday date"
       v-model="date"
+      label="Birthday date"
       prepend-icon="event"
       readonly
     ></v-text-field>
     <v-date-picker
       ref="picker"
       v-model="date"
-      @change="save"
-      min="1950-01-01"
       :max="new Date().toISOString().substr(0, 10)"
+      min="1950-01-01"
+      @change="save"
     ></v-date-picker>
   </v-menu>
 </template>

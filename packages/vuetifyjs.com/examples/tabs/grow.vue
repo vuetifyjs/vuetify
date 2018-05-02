@@ -11,9 +11,9 @@
         <v-icon>more_vert</v-icon>
       </v-btn>
       <v-tabs
-        color="cyan"
         slot="extension"
         v-model="tab"
+        color="cyan"
         grow
       >
         <v-tabs-slider color="yellow"></v-tabs-slider>

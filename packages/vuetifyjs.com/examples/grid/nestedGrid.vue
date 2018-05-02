@@ -17,9 +17,9 @@
           <v-flex d-flex>
             <v-layout row wrap>
               <v-flex
-                d-flex
                 v-for="n in 2"
                 :key="n"
+                d-flex
                 xs12
               >
                 <v-card

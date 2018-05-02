@@ -3,20 +3,20 @@
     <v-flex xs12 sm6 md4>
       <v-menu
         ref="menu"
-        lazy
         :close-on-content-click="false"
         v-model="menu"
+        :nudge-right="40"
+        :return-value.sync="date"
+        lazy
         transition="scale-transition"
         offset-y
         full-width
-        :nudge-right="40"
         min-width="290px"
-        :return-value.sync="date"
       >
         <v-text-field
           slot="activator"
-          label="Picker in menu"
           v-model="date"
+          label="Picker in menu"
           prepend-icon="event"
           readonly
         ></v-text-field>
@@ -31,17 +31,17 @@
     <v-flex xs12 sm6 md4>
       <v-dialog
         ref="dialog"
-        persistent
         v-model="modal"
+        :return-value.sync="date"
+        persistent
         lazy
         full-width
         width="290px"
-        :return-value.sync="date"
       >
         <v-text-field
           slot="activator"
-          label="Picker in dialog"
           v-model="date"
+          label="Picker in dialog"
           prepend-icon="event"
           readonly
         ></v-text-field>
@@ -55,20 +55,20 @@
     <v-flex xs12 sm6 md4>
       <v-menu
         ref="menu2"
-        lazy
         :close-on-content-click="false"
         v-model="menu2"
+        :nudge-right="40"
+        :return-value.sync="date"
+        lazy
         transition="scale-transition"
         offset-y
         full-width
-        :nudge-right="40"
         min-width="290px"
-        :return-value.sync="date"
       >
         <v-text-field
           slot="activator"
-          label="Picker without buttons"
           v-model="date"
+          label="Picker without buttons"
           prepend-icon="event"
           readonly
         ></v-text-field>

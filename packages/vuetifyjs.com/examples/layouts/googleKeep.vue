@@ -1,11 +1,11 @@
 <template>
   <v-app id="inspire">
     <v-navigation-drawer
+      v-model="drawer"
       fixed
       clipped
       class="grey lighten-4"
       app
-      v-model="drawer"
     >
       <v-list
         dense
@@ -13,10 +13,10 @@
       >
         <template v-for="(item, i) in items">
           <v-layout
-            row
             v-if="item.heading"
-            align-center
             :key="i"
+            row
+            align-center
           >
             <v-flex xs6>
               <v-subheader v-if="item.heading">
@@ -28,14 +28,14 @@
             </v-flex>
           </v-layout>
           <v-divider
-            dark
             v-else-if="item.divider"
-            class="my-3"
             :key="i"
+            dark
+            class="my-3"
           ></v-divider>
           <v-list-tile
-            :key="i"
             v-else
+            :key="i"
             @click=""
           >
             <v-list-tile-action>
@@ -67,18 +67,18 @@
           <v-flex shrink>
             <v-tooltip right>
               <v-btn
+                slot="activator"
+                :href="source"
                 icon
                 large
-                :href="source"
                 target="_blank"
-                slot="activator"
               >
                 <v-icon large>code</v-icon>
               </v-btn>
               <span>Source</span>
             </v-tooltip>
             <v-tooltip right>
-              <v-btn icon large href="https://codepen.io/johnjleider/pen/jZQNbd" target="_blank" slot="activator">
+              <v-btn slot="activator" icon large href="https://codepen.io/johnjleider/pen/jZQNbd" target="_blank">
                 <v-icon large>mdi-codepen</v-icon>
               </v-btn>
               <span>Codepen</span>

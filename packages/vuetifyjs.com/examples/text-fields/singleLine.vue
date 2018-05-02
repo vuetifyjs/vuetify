@@ -58,10 +58,10 @@
       </v-flex>
       <v-flex xs8>
         <v-text-field
+          :rules="[() => 'Username or Password is incorrect.']"
           name="input-3-5"
           label="Hint Text"
           value="Input text"
-          :rules="[() => 'Username or Password is incorrect.']"
           error
           single-line
         ></v-text-field>

@@ -12,7 +12,7 @@
         </v-toolbar>
         <v-list>
           <template v-for="(item, index) in items">
-            <v-list-tile v-if="item.action" @click="" :key="item.title">
+            <v-list-tile v-if="item.action" :key="item.title" @click="">
               <v-list-tile-action>
                 <v-icon>{{ item.action }}</v-icon>
               </v-list-tile-action>

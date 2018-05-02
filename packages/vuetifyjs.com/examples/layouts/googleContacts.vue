@@ -1,18 +1,18 @@
 <template>
   <v-app id="inspire">
     <v-navigation-drawer
-      fixed
       :clipped="$vuetify.breakpoint.lgAndUp"
-      app
       v-model="drawer"
+      fixed
+      app
     >
       <v-list dense>
         <template v-for="item in items">
           <v-layout
-            row
             v-if="item.heading"
-            align-center
             :key="item.heading"
+            row
+            align-center
           >
             <v-flex xs6>
               <v-subheader v-if="item.heading">
@@ -52,7 +52,7 @@
               </v-list-tile-content>
             </v-list-tile>
           </v-list-group>
-          <v-list-tile v-else @click="" :key="item.text">
+          <v-list-tile v-else :key="item.text" @click="">
             <v-list-tile-action>
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-tile-action>
@@ -66,10 +66,10 @@
       </v-list>
     </v-navigation-drawer>
     <v-toolbar
+      :clipped-left="$vuetify.breakpoint.lgAndUp"
       color="blue darken-3"
       dark
       app
-      :clipped-left="$vuetify.breakpoint.lgAndUp"
       fixed
     >
       <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
@@ -104,18 +104,18 @@
         <v-layout justify-center align-center>
           <v-tooltip right>
             <v-btn
+              slot="activator"
+              :href="source"
               icon
               large
-              :href="source"
               target="_blank"
-              slot="activator"
             >
               <v-icon large>code</v-icon>
             </v-btn>
             <span>Source</span>
           </v-tooltip>
           <v-tooltip right>
-            <v-btn icon large href="https://codepen.io/johnjleider/pen/EQOYVV" target="_blank" slot="activator">
+            <v-btn slot="activator" icon large href="https://codepen.io/johnjleider/pen/EQOYVV" target="_blank">
               <v-icon large>mdi-codepen</v-icon>
             </v-btn>
             <span>Codepen</span>

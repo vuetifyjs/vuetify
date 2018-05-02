@@ -22,7 +22,7 @@
           </v-flex>
           <v-flex xs12 sm6 class="py-2">
             <p>Multiple</p>
-            <v-btn-toggle multiple v-model="toggle_multiple">
+            <v-btn-toggle v-model="toggle_multiple" multiple>
               <v-btn flat>
                 <v-icon>format_bold</v-icon>
               </v-btn>
@@ -56,7 +56,7 @@
           </v-flex>
           <v-flex xs12 sm6 class="py-2">
             <p>Mandatory</p>
-            <v-btn-toggle mandatory v-model="toggle_one">
+            <v-btn-toggle v-model="toggle_one" mandatory>
               <v-btn flat>
                 <v-icon>format_align_left</v-icon>
               </v-btn>

@@ -9,11 +9,11 @@
       ></v-card>
     </v-layout>
     <v-menu
-      offset-y
       v-model="showMenu"
-      absolute
       :position-x="x"
       :position-y="y"
+      offset-y
+      absolute
     >
       <v-list>
         <v-list-tile v-for="item in items" :key="item.title" @click="">

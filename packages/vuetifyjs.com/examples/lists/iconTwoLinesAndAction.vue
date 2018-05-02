@@ -15,7 +15,7 @@
         </v-toolbar>
         <v-list two-line subheader>
           <v-subheader inset>Folders</v-subheader>
-          <v-list-tile avatar v-for="item in items" :key="item.title" @click="">
+          <v-list-tile v-for="item in items" :key="item.title" avatar @click="">
             <v-list-tile-avatar>
               <v-icon :class="[item.iconClass]">{{ item.icon }}</v-icon>
             </v-list-tile-avatar>

@@ -1,12 +1,12 @@
 <template>
   <v-layout row wrap>
     <v-flex
+      v-for="(bar, i) in bars"
+      :key="i"
       xs12
       sm12
       md6
       class="my-3"
-      v-for="(bar, i) in bars"
-      :key="i"
     >
       <v-card color="grey lighten-4" flat height="200px">
         <v-toolbar :color="bar.class" :dark="bar.dark">

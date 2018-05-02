@@ -2,13 +2,13 @@
   <v-layout wrap style="height: 200px;">
     <v-container>
       <v-layout justify-center>
-        <v-btn @click.stop="drawer = !drawer" color="pink" dark>Toggle</v-btn>
+        <v-btn color="pink" dark @click.stop="drawer = !drawer">Toggle</v-btn>
       </v-layout>
     </v-container>
     <v-navigation-drawer
-      temporary
       v-model="drawer"
       :mini-variant="mini"
+      temporary
       dark
       absolute
     >

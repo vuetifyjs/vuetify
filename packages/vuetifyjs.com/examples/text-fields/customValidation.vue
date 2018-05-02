@@ -4,59 +4,59 @@
       <v-card ref="form">
         <v-card-text>
           <v-text-field
-            label="Full Name"
-            placeholder="John Doe"
-            v-model="name"
-            required
             ref="name"
+            v-model="name"
             :rules="[() => !!name || 'This field is required']"
             :error-messages="errorMessages"
+            label="Full Name"
+            placeholder="John Doe"
+            required
           ></v-text-field>
           <v-text-field
-            label="Address Line"
-            placeholder="Snowy Rock Pl"
+            ref="address"
             :rules="[
               () => !!address || 'This field is required',
               () => !!address && address.length <= 25 || 'Address must be less than 25 characters',
               addressCheck
             ]"
             v-model="address"
-            ref="address"
+            label="Address Line"
+            placeholder="Snowy Rock Pl"
             counter="25"
             required
           ></v-text-field>
           <v-text-field
-            label="City"
-            placeholder="El Paso"
+            ref="city"
             :rules="[() => !!city || 'This field is required', addressCheck]"
             v-model="city"
-            ref="city"
+            label="City"
+            placeholder="El Paso"
             required
           ></v-text-field>
           <v-text-field
-            label="State/Province/Region"
+            ref="state"
             v-model="state"
             :rules="[() => !!state || 'This field is required']"
+            label="State/Province/Region"
             required
-            ref="state"
             placeholder="TX"
           ></v-text-field>
           <v-text-field
-            label="ZIP / Postal Code"
-            required
+            ref="zip"
             :rules="[() => !!zip || 'This field is required']"
             v-model="zip"
-            ref="zip"
+            label="ZIP / Postal Code"
+            required
             placeholder="79938"
           ></v-text-field>
           <v-select
-            autocomplete
-            label="Country"
-            placeholder="Select..."
+            ref="country"
             :rules="[() => !!country || 'This field is required']"
             :items="countries"
             v-model="country"
-            ref="country"
+            autocomplete
+            label="Country"
+            placeholder="Select..."
             required
           ></v-select>
         </v-card-text>
@@ -66,14 +66,14 @@
           <v-spacer></v-spacer>
           <v-slide-x-reverse-transition>
             <v-tooltip
-              left
               v-if="formHasErrors"
+              left
             >
               <v-btn
-                icon
-                @click="resetForm"
                 slot="activator"
+                icon
                 class="my-0"
+                @click="resetForm"
               >
                 <v-icon>refresh</v-icon>
               </v-btn>

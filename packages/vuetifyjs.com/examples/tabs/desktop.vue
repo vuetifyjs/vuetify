@@ -11,10 +11,10 @@
         <v-icon>more_vert</v-icon>
       </v-btn>
       <v-tabs
+        slot="extension"
         v-model="tabs"
         fixed-tabs
         color="transparent"
-        slot="extension"
       >
         <v-tabs-slider></v-tabs-slider>
         <v-tab href="#mobile-tabs-5-1" class="primary--text">

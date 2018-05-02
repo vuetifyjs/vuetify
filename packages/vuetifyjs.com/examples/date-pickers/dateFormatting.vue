@@ -2,29 +2,29 @@
   <v-layout row wrap>
     <v-flex xs11 sm5>
       <v-menu
-        lazy
         :close-on-content-click="false"
         v-model="menu"
+        :nudge-right="40"
+        lazy
         transition="scale-transition"
         offset-y
         full-width
-        :nudge-right="40"
         max-width="290px"
         min-width="290px"
       >
         <v-text-field
           slot="activator"
-          label="Date in M/D/Y format"
           v-model="dateFormatted"
+          label="Date in M/D/Y format"
           prepend-icon="event"
           @blur="date = parseDate(dateFormatted)"
         ></v-text-field>
         <v-date-picker
           v-model="date"
-          @input="dateFormatted = formatDate($event)"
           no-title
           scrollable
           actions
+          @input="dateFormatted = formatDate($event)"
         >
           <template slot-scope="{ save, cancel }">
             <v-card-actions>

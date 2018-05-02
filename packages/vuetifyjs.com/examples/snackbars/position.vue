@@ -30,7 +30,7 @@
         </v-layout>
 
       </v-container>
-      <v-btn block color="primary" @click.native="snackbar = true" dark>Show Snackbar</v-btn>
+      <v-btn block color="primary" dark @click.native="snackbar = true">Show Snackbar</v-btn>
     </v-card-text>
     <v-snackbar
       :timeout="timeout"

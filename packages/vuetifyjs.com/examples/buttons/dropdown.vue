@@ -1,5 +1,5 @@
 <template>
-  <v-container grid-list-xl id="dropdown-example">
+  <v-container id="dropdown-example" grid-list-xl>
     <v-layout row wrap>
       <v-flex xs12 sm4>
         <p>Overflow</p>

@@ -1,40 +1,40 @@
 <template>
   <div class="text-xs-center">
     <v-btn
-      color="secondary"
       :loading="loading"
-      @click.native="loader = 'loading'"
       :disabled="loading"
+      color="secondary"
+      @click.native="loader = 'loading'"
     >
       Accept Terms
     </v-btn>
 
     <v-btn
       :loading="loading3"
-      @click.native="loader = 'loading3'"
       :disabled="loading3"
       color="blue-grey"
       class="white--text"
+      @click.native="loader = 'loading3'"
     >
       Upload
       <v-icon right dark>cloud_upload</v-icon>
     </v-btn>
 
     <v-btn
-      color="success"
       :loading="loading2"
-      @click.native="loader = 'loading2'"
       :disabled="loading2"
+      color="success"
+      @click.native="loader = 'loading2'"
     >
       Custom Loader
       <span slot="loader">Loading...</span>
     </v-btn>
 
     <v-btn
-      color="info"
       :loading="loading4"
-      @click.native="loader = 'loading4'"
       :disabled="loading4"
+      color="info"
+      @click.native="loader = 'loading4'"
     >
       Icon Loader
       <span slot="loader" class="custom-loader">

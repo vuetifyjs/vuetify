@@ -1,16 +1,16 @@
 <template>
   <v-form v-model="valid">
     <v-text-field
-      label="Name"
       v-model="name"
       :rules="nameRules"
       :counter="10"
+      label="Name"
       required
     ></v-text-field>
     <v-text-field
-      label="E-mail"
       v-model="email"
       :rules="emailRules"
+      label="E-mail"
       required
     ></v-text-field>
   </v-form>

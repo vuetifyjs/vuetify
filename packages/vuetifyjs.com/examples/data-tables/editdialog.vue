@@ -11,11 +11,11 @@
         > {{ props.item.name }}
           <v-text-field
             slot="input"
-            label="Edit"
             v-model="props.item.name"
+            :rules="[max25chars]"
+            label="Edit"
             single-line
             counter
-            :rules="[max25chars]"
           ></v-text-field>
         </v-edit-dialog>
       </td>
@@ -34,12 +34,12 @@
           <div slot="input" class="mt-3 title">Update Iron</div>
           <v-text-field
             slot="input"
-            label="Edit"
             v-model="props.item.iron"
+            :rules="[max25chars]"
+            label="Edit"
             single-line
             counter
             autofocus
-            :rules="[max25chars]"
           ></v-text-field>
         </v-edit-dialog>
       </td>

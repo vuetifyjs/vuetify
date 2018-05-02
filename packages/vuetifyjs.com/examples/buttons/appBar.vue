@@ -3,30 +3,30 @@
     <v-select :items="dropdown_font" overflow label="Select font" hide-details></v-select>
     <v-select :items="dropdown_edit" overflow label="Select size" hide-details editable></v-select>
     <v-btn-toggle v-model="toggle_multiple" multiple>
-      <v-btn icon :value="1">
+      <v-btn :value="1" icon>
         <v-icon>format_bold</v-icon>
       </v-btn>
-      <v-btn icon :value="2">
+      <v-btn :value="2" icon>
         <v-icon>format_italic</v-icon>
       </v-btn>
-      <v-btn icon :value="3">
+      <v-btn :value="3" icon>
         <v-icon>format_underlined</v-icon>
       </v-btn>
-      <v-btn icon :value="4">
+      <v-btn :value="4" icon>
         <v-icon>format_color_fill</v-icon>
       </v-btn>
     </v-btn-toggle>
     <v-btn-toggle v-model="toggle_exclusive">
-      <v-btn icon :value="1">
+      <v-btn :value="1" icon>
         <v-icon>format_align_left</v-icon>
       </v-btn>
-      <v-btn icon :value="2">
+      <v-btn :value="2" icon>
         <v-icon>format_align_center</v-icon>
       </v-btn>
-      <v-btn icon :value="3">
+      <v-btn :value="3" icon>
         <v-icon>format_align_right</v-icon>
       </v-btn>
-      <v-btn icon :value="4">
+      <v-btn :value="4" icon>
         <v-icon>format_align_justify</v-icon>
       </v-btn>
     </v-btn-toggle>

@@ -11,11 +11,11 @@
         <v-icon>more_vert</v-icon>
       </v-btn>
       <v-tabs
+        slot="extension"
+        v-model="model"
         centered
         color="cyan"
-        slot="extension"
         slider-color="yellow"
-        v-model="model"
       >
         <v-tab
           v-for="i in 3"

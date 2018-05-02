@@ -8,7 +8,7 @@
         style="z-index: 1"
       >
         <v-list>
-          <v-list-tile ripple v-for="i in 3" :key="i" @click="">
+          <v-list-tile v-for="i in 3" :key="i" ripple @click="">
             <v-list-tile-title>Link {{ i }}</v-list-tile-title>
           </v-list-tile>
         </v-list>

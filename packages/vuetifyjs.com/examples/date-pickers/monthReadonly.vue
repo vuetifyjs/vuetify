@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-date-picker type="month" v-model="date" readonly></v-date-picker>
+    <v-date-picker v-model="date" type="month" readonly></v-date-picker>
   </div>
 </template>
 

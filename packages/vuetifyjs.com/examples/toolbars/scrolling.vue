@@ -21,9 +21,9 @@
       </v-btn>
     </v-toolbar>
     <div
+      id="scrolling-techniques"
       style="max-height: 600px;"
       class="scroll-y"
-      id="scrolling-techniques"
     >
       <v-container style="height: 1000px;"></v-container>
     </div>

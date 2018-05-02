@@ -1,7 +1,7 @@
 <template>
   <v-layout row justify-center>
     <v-dialog v-model="dialog" scrollable max-width="300px">
-      <v-btn color="primary" dark slot="activator">Open Dialog</v-btn>
+      <v-btn slot="activator" color="primary" dark>Open Dialog</v-btn>
       <v-card>
         <v-card-title>Select Country</v-card-title>
         <v-divider></v-divider>

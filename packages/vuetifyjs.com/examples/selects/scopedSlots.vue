@@ -6,9 +6,9 @@
       </v-flex>
       <v-flex xs12 sm6>
         <v-select
-          label="Select"
           :items="people"
           v-model="e11"
+          label="Select"
           item-text="name"
           item-value="name"
           multiple
@@ -18,11 +18,11 @@
         >
           <template slot="selection" slot-scope="data">
             <v-chip
-              close
-              @input="data.parent.selectItem(data.item)"
               :selected="data.selected"
-              class="chip--select-multi"
               :key="JSON.stringify(data.item)"
+              close
+              class="chip--select-multi"
+              @input="data.parent.selectItem(data.item)"
             >
               <v-avatar>
                 <img :src="data.item.avatar">

@@ -11,46 +11,46 @@
         <v-container grid-list-md>
           <v-layout wrap>
             <v-flex xs12 sm6 md4>
-              <v-text-field label="Legal first name" required :rules="[required]"/>
+              <v-text-field :rules="[required]" label="Legal first name" required/>
             </v-flex>
             <v-flex xs12 sm6 md4>
               <v-text-field label="Legal middle name" hint="example of helper text only on focus"/>
             </v-flex>
             <v-flex xs12 sm6 md4>
               <v-text-field
+                :rules="[required]"
                 label="Legal last name"
                 hint="example of persistent helper text"
                 persistent-hint
                 required
-                :rules="[required]"
               />
             </v-flex>
             <v-flex xs12>
-              <v-text-field label="Email" required :rules="[required]"/>
+              <v-text-field :rules="[required]" label="Email" required/>
             </v-flex>
             <v-flex xs12>
               <v-text-field
+                :rules="[required]"
                 label="Password"
                 type="password"
                 required
-                :rules="[required]"
               />
             </v-flex>
             <v-flex xs12 sm6>
               <v-select
-                label="Age"
-                required
                 :items="['0-17', '18-29', '30-54', '54+']"
                 :rules="[required]"
+                label="Age"
+                required
               />
             </v-flex>
             <v-flex xs12 sm6>
               <v-select
+                :items="['Skiing', 'Ice hockey', 'Soccer', 'Basketball', 'Hockey', 'Reading', 'Writing', 'Coding', 'Basejump']"
                 label="Interests"
                 multiple
                 autocomplete
                 chips
-                :items="['Skiing', 'Ice hockey', 'Soccer', 'Basketball', 'Hockey', 'Reading', 'Writing', 'Coding', 'Basejump']"
               />
             </v-flex>
             <v-flex xs12>

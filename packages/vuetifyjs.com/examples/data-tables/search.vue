@@ -4,11 +4,11 @@
       Nutrition
       <v-spacer></v-spacer>
       <v-text-field
+        v-model="search"
         append-icon="search"
         label="Search"
         single-line
         hide-details
-        v-model="search"
       ></v-text-field>
     </v-card-title>
     <v-data-table

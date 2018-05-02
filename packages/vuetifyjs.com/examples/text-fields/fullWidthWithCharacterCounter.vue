@@ -41,8 +41,8 @@
               <v-flex xs12>
                 <v-divider></v-divider>
                 <v-text-field
-                  label="Message"
                   v-model="title"
+                  label="Message"
                   counter
                   max="120"
                   full-width

@@ -7,7 +7,7 @@
       </v-layout>
       <v-layout align-center>
         <v-checkbox v-model="enabled" hide-details class="shrink mr-2"></v-checkbox>
-        <v-text-field label="I only work if you check the box" :disabled="!enabled"></v-text-field>
+        <v-text-field :disabled="!enabled" label="I only work if you check the box"></v-text-field>
       </v-layout>
     </v-card-text>
   </v-card>

@@ -2,10 +2,10 @@
   <v-footer height="auto" class="grey darken-3">
     <v-layout row wrap justify-center>
       <v-btn
-        color="white"
-        flat
         v-for="link in links"
         :key="link"
+        color="white"
+        flat
       >
         {{ link }}
       </v-btn>

@@ -14,7 +14,7 @@
           </v-btn>
         </v-toolbar>
         <v-list>
-          <v-list-tile avatar v-for="item in items" :key="item.title" @click="">
+          <v-list-tile v-for="item in items" :key="item.title" avatar @click="">
             <v-list-tile-action>
               <v-icon v-if="item.icon" color="pink">star</v-icon>
             </v-list-tile-action>

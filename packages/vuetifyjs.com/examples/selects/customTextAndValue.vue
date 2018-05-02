@@ -8,12 +8,12 @@
         <v-select
           :items="items"
           v-model="select"
+          :hint="`${select.state}, ${select.abbr}`"
           label="Select"
           single-line
           item-text="state"
           item-value="abbr"
           return-object
-          :hint="`${select.state}, ${select.abbr}`"
           persistent-hint
         ></v-select>
       </v-flex>

@@ -2,10 +2,10 @@
   <v-layout row>
     <v-flex xs12>
       <v-card
+        :color="colors[color]"
         class="custom-ripple"
         ripple
         height="300"
-        :color="colors[color]"
         @click.native="color = (color + 1) % colors.length"
       >
         <div class="title white--text pl-3 pt-3">{{ colors[color] }}</div>

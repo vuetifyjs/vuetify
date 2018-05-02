@@ -16,18 +16,18 @@
             <v-layout row wrap>
               <v-flex xs12>
                 <v-text-field
-                  label="Title"
                   :rules="[(v) => v.length <= 25 || 'Max 25 characters']"
                   :counter="25"
                   v-model="title"
+                  label="Title"
                 ></v-text-field>
               </v-flex>
               <v-flex xs12>
                 <v-text-field
-                  label="Description"
                   :rules="[(v) => v.length <= 50 || 'Max 50 characters']"
                   :counter="50"
                   v-model="description"
+                  label="Description"
                 ></v-text-field>
               </v-flex>
             </v-layout>

@@ -2,8 +2,8 @@
   <v-layout row wrap>
     <v-flex xs12 sm6>
       <v-date-picker
-        type="month"
         v-model="picker"
+        type="month"
         year-icon="mdi-calendar-blank"
         prev-icon="mdi-skip-previous"
         next-icon="mdi-skip-next"

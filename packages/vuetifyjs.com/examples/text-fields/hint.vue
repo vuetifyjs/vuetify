@@ -28,11 +28,11 @@
               persistent-hint
             ></v-text-field>
             <v-select
+              :items="options"
+              v-model="select"
               label="Your product category"
               hint="Enter or select a product category"
               persistent-hint
-              :items="options"
-              v-model="select"
             ></v-select>
           </v-card-text>
         </v-card>

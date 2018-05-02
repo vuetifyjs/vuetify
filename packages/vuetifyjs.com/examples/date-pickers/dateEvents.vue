@@ -4,8 +4,8 @@
       <div class="subheading">Defined by array</div>
       <v-date-picker
         v-model="date1"
-        event-color="green lighten-1"
         :events="arrayEvents"
+        event-color="green lighten-1"
       ></v-date-picker>
     </v-flex>
     <v-flex xs12 sm6 class="my-3">

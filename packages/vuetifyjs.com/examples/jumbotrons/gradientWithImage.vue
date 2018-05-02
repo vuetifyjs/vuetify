@@ -1,7 +1,7 @@
 <template>
   <v-jumbotron
-    src="/static/doc-images/parallax/material2.jpg"
     :gradient="gradient"
+    src="/static/doc-images/parallax/material2.jpg"
     dark
   >
     <v-container fill-height>

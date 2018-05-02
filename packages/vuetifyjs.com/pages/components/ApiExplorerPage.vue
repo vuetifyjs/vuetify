@@ -6,15 +6,15 @@
         mb-5
       >
         <v-select
+          v-model="currentProxy"
+          :label="$t('Components.ApiExplorer.select')"
+          :items="computedApi"
           solo
           prepend-icon="mdi-database-search"
           clearable
           combobox
           chips
           return-object
-          v-model="currentProxy"
-          :label="$t('Components.ApiExplorer.select')"
-          :items="computedApi"
         >
           <template
             slot="selection"
@@ -47,8 +47,8 @@
         </v-select>
       </v-flex>
       <v-flex
-        xs12
         v-if="!current"
+        xs12
         text-xs-center
         grey--text
       >
@@ -59,8 +59,8 @@
         <p v-text="$t('Components.ApiExplorer.searchText')" />
       </v-flex>
       <v-flex
-        xs12
         v-else
+        xs12
       >
         <v-card>
           <v-tabs
@@ -79,16 +79,16 @@
           <v-card-title>
             <v-spacer />
             <v-text-field
+              v-model="search"
               append-icon="search"
               placeholder="Search..."
               single-line
               hide-details
-              v-model="search"
             />
           </v-card-title>
           <v-tabs-items
-            touchless
             v-model="tab"
+            touchless
           >
             <v-tab-item
               v-for="(tabItem, i) in computedTabs"
@@ -96,8 +96,8 @@
               :key="i"
             >
               <v-card
-                flat
                 v-if="hasTab(tabItem)"
+                flat
               >
                 <parameters
                   :headers="headers[tabItem]"

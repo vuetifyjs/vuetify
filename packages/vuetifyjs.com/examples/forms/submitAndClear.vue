@@ -1,35 +1,35 @@
 <template>
-  <v-form v-model="valid" ref="form" lazy-validation>
+  <v-form ref="form" v-model="valid" lazy-validation>
     <v-text-field
-      label="Name"
       v-model="name"
       :rules="nameRules"
       :counter="10"
+      label="Name"
       required
     ></v-text-field>
     <v-text-field
-      label="E-mail"
       v-model="email"
       :rules="emailRules"
+      label="E-mail"
       required
     ></v-text-field>
     <v-select
-      label="Item"
       v-model="select"
       :items="items"
       :rules="[v => !!v || 'Item is required']"
+      label="Item"
       required
     ></v-select>
     <v-checkbox
-      label="Do you agree?"
       v-model="checkbox"
       :rules="[v => !!v || 'You must agree to continue!']"
+      label="Do you agree?"
       required
     ></v-checkbox>
 
     <v-btn
-      @click="submit"
       :disabled="!valid"
+      @click="submit"
     >
       submit
     </v-btn>

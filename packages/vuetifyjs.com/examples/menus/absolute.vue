@@ -1,7 +1,7 @@
 <template>
   <v-layout d-flex justify-center>
-    <v-menu offset-y v-model="showMenu" absolute full-width>
-      <v-card class="portrait" img="/static/doc-images/cards/girl.jpg" height="300px" slot="activator"></v-card>
+    <v-menu v-model="showMenu" offset-y absolute full-width>
+      <v-card slot="activator" class="portrait" img="/static/doc-images/cards/girl.jpg" height="300px"></v-card>
       <v-list>
         <v-list-tile v-for="item in items" :key="item.title" @click="">
           <v-list-tile-title>{{ item.title }}</v-list-tile-title>

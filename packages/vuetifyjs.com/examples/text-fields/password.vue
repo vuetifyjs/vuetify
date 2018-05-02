@@ -6,14 +6,14 @@
       </v-flex>
       <v-flex xs8>
         <v-text-field
-          name="input-10-1"
-          label="Enter your password"
-          hint="At least 8 characters"
           v-model="password"
-          min="8"
           :append-icon="e1 ? 'visibility' : 'visibility_off'"
           :append-icon-cb="() => (e1 = !e1)"
           :type="e1 ? 'password' : 'text'"
+          name="input-10-1"
+          label="Enter your password"
+          hint="At least 8 characters"
+          min="8"
           counter
         ></v-text-field>
       </v-flex>
@@ -24,15 +24,15 @@
       </v-flex>
       <v-flex xs8>
         <v-text-field
+          :append-icon="e2 ? 'visibility' : 'visibility_off'"
+          :append-icon-cb="() => (e2 = !e2)"
+          :type="e2 ? 'password' : 'text'"
           name="input-10-2"
           label="Enter your password"
           hint="At least 8 characters"
           min="8"
-          :append-icon="e2 ? 'visibility' : 'visibility_off'"
-          :append-icon-cb="() => (e2 = !e2)"
           value="wqfasds"
           class="input-group--focused"
-          :type="e2 ? 'password' : 'text'"
         ></v-text-field>
       </v-flex>
     </v-layout>
@@ -42,15 +42,15 @@
       </v-flex>
       <v-flex xs8>
         <v-text-field
+          :append-icon="e3 ? 'visibility' : 'visibility_off'"
+          :append-icon-cb="() => (e3 = !e3)"
+          :type="e3 ? 'password' : 'text'"
           name="input-10-2"
           label="Enter your password"
           hint="At least 8 characters"
           min="8"
-          :append-icon="e3 ? 'visibility' : 'visibility_off'"
-          :append-icon-cb="() => (e3 = !e3)"
           value="wqfasds"
           class="input-group--focused"
-          :type="e3 ? 'password' : 'text'"
         ></v-text-field>
       </v-flex>
     </v-layout>
@@ -60,16 +60,16 @@
       </v-flex>
       <v-flex xs8>
         <v-text-field
+          :append-icon="e4 ? 'visibility' : 'visibility_off'"
+          :append-icon-cb="() => (e4 = !e4)"
+          :rules="[() => ('The email and password you entered don\'t match')]"
+          :type="e4 ? 'password' : 'text'"
           name="input-10-2"
           label="Enter your password"
           hint="At least 8 characters"
           min="8"
-          :append-icon="e4 ? 'visibility' : 'visibility_off'"
-          :append-icon-cb="() => (e4 = !e4)"
           value="Pa"
-          :rules="[() => ('The email and password you entered don\'t match')]"
           error
-          :type="e4 ? 'password' : 'text'"
         ></v-text-field>
       </v-flex>
     </v-layout>

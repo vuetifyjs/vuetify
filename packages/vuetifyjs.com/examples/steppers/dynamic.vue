@@ -4,14 +4,14 @@
       <v-card-text>
         <div>{{ typeof steps }}</div>
         <v-text-field
-          label="# of steps"
           :value="steps"
-          @input="onInput"
+          label="# of steps"
           min="1"
           max="6"
           hint="This demo has a maximum of 6 steps"
           type="number"
           persistent-hint
+          @input="onInput"
         ></v-text-field>
       </v-card-text>
     </v-card>
@@ -31,8 +31,8 @@
       </v-stepper-header>
       <v-stepper-items>
         <v-stepper-content
-          :step="n"
           v-for="n in steps"
+          :step="n"
           :key="`${n}-content`"
         >
           <v-card color="grey lighten-1" class="mb-5" height="200px"></v-card>

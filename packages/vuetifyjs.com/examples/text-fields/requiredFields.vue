@@ -9,23 +9,23 @@
           <v-card-text>
             <span class="title">Personal Info</span>
             <v-text-field
-              label="Legal first name"
-              class="mt-5"
               v-model="first"
               :rules="[() => first.length > 0 || 'This field is required']"
+              label="Legal first name"
+              class="mt-5"
               required
             ></v-text-field>
             <v-text-field
+              v-model="middle"
               label="Legal middle name"
               hint="This field is not required"
-              v-model="middle"
             ></v-text-field>
             <v-text-field
+              v-model="last"
+              :rules="[() => last.length > 0 || 'This field is required']"
               label="Legal last name"
               hint="example of persistent helper text"
               persistent-hint
-              v-model="last"
-              :rules="[() => last.length > 0 || 'This field is required']"
               required
             ></v-text-field>
             <small>*indicates required field</small>

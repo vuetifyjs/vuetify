@@ -3,7 +3,7 @@
     <v-card-text class="text-xs-center">
       <v-btn flat color="primary" @click.native="e31 = !e31">Toggle Nav</v-btn>
     </v-card-text>
-    <v-bottom-nav absolute :value="e31" :active.sync="e3" color="transparent">
+    <v-bottom-nav :value="e31" :active.sync="e3" absolute color="transparent">
       <v-btn flat color="teal">
         <span>Recents</span>
         <v-icon>history</v-icon>

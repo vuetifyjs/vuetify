@@ -15,10 +15,10 @@
         <v-subheader>May</v-subheader>
         <v-container fluid grid-list-xs>
           <v-layout row wrap>
-            <v-flex xs4 v-for="i in 6" :key="i">
+            <v-flex v-for="i in 6" :key="i" xs4>
               <img
-                class="image"
                 :src="`https://randomuser.me/api/portraits/men/${i + 20}.jpg`"
+                class="image"
                 alt="lorem"
                 width="100%"
                 height="100%"
@@ -29,10 +29,10 @@
         <v-subheader>June</v-subheader>
         <v-container fluid grid-list-xs>
           <v-layout row wrap>
-            <v-flex xs4 v-for="i in 6" :key="i">
+            <v-flex v-for="i in 6" :key="i" xs4>
               <img
-                class="image"
                 :src="`https://randomuser.me/api/portraits/women/${i + 5}.jpg`"
+                class="image"
                 alt="lorem"
                 width="100%"
                 height="100%"

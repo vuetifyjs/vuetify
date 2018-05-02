@@ -6,7 +6,7 @@
       </v-flex>
       <v-flex xs12 class="mt-5">
         <v-tooltip v-model="show" top>
-          <v-btn icon slot="activator">
+          <v-btn slot="activator" icon>
             <v-icon color="grey lighten-1">shopping_cart</v-icon>
           </v-btn>
           <span>Programmatic tooltip</span>

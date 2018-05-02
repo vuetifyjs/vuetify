@@ -1,19 +1,19 @@
 <template>
   <v-container fluid>
-    <v-checkbox label="Custom progress bar" v-model="custom"></v-checkbox>
+    <v-checkbox v-model="custom" label="Custom progress bar"></v-checkbox>
     <v-text-field
+      v-model="value"
       color="cyan darken"
       label="Text field"
       placeholder="Start typing..."
-      v-model="value"
       loading
     >
       <v-progress-linear
         v-if="custom"
         slot="progress"
         :value="progress"
-        height="7"
         :color="color"
+        height="7"
       ></v-progress-linear>
     </v-text-field>
   </v-container>

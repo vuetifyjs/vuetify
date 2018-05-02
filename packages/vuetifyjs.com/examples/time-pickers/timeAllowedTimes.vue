@@ -1,14 +1,14 @@
 <template>
   <div>
     <v-time-picker
+      v-model="time"
+      :allowed-hours="allowedHours"
+      :allowed-minutes="allowedMinutes"
       class="mt-3"
       format="24hr"
       scrollable
-      v-model="time"
       min="9:30"
       max="22:15"
-      :allowed-hours="allowedHours"
-      :allowed-minutes="allowedMinutes"
     ></v-time-picker>
   </div>
 </template>

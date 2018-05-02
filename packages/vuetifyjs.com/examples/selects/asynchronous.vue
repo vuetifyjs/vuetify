@@ -3,17 +3,17 @@
     <v-layout>
       <v-flex>
         <v-select
-          label="Async items"
-          autocomplete
           :loading="loading"
-          multiple
-          cache-items
-          chips
-          required
           :items="items"
           :rules="[() => select.length > 0 || 'You must choose at least one']"
           :search-input.sync="search"
           v-model="select"
+          label="Async items"
+          autocomplete
+          multiple
+          cache-items
+          chips
+          required
         ></v-select>
       </v-flex>
     </v-layout>
