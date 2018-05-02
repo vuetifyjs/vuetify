@@ -318,10 +318,10 @@
           'Content-Type': 'application/json'
         }
       })
-      .then(res => {
-        this.featured = this.setFeatured(res.data)
-      })
-      .catch(err => console.log(err))
+        .then(res => {
+          this.featured = this.setFeatured(res.data)
+        })
+        .catch(err => console.log(err))
     },
 
     methods: {

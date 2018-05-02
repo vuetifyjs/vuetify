@@ -71,7 +71,7 @@
             // custom messages
           },
           select: {
-             required: 'Select field is required'
+            required: 'Select field is required'
           }
         }
       }

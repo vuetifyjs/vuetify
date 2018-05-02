@@ -28,20 +28,20 @@
 </template>
 
 <script>
-export default {
-  data: () => ({
-    date: null,
-    menu: false
-  }),
-  watch: {
-    menu (val) {
-      val && this.$nextTick(() => (this.$refs.picker.activePicker = 'YEAR'))
-    }
-  },
-  methods: {
-    save (date) {
-      this.$refs.menu.save(date)
+  export default {
+    data: () => ({
+      date: null,
+      menu: false
+    }),
+    watch: {
+      menu (val) {
+        val && this.$nextTick(() => (this.$refs.picker.activePicker = 'YEAR'))
+      }
+    },
+    methods: {
+      save (date) {
+        this.$refs.menu.save(date)
+      }
     }
   }
-}
 </script>

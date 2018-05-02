@@ -42,5 +42,5 @@
         return parseInt(day, 10) % 3 === 0
       }
     }
-}
+  }
 </script>

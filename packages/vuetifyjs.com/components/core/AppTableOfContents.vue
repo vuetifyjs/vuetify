@@ -113,7 +113,7 @@
         clearTimeout(this.timeout)
 
         this.currentOffset = window.pageYOffset ||
-        document.documentElement.offsetTop
+          document.documentElement.offsetTop
 
         const shouldFloat = this.currentOffset >= this.threshold
 

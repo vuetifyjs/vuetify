@@ -138,107 +138,107 @@
 </template>
 
 <script>
-export default {
-  data () {
-    return {
-      search: '',
-      pagination: {},
-      selected: [],
-      headers: [
-        { text: 'Markup', value: 'markup' },
-        { text: 'Component Name', value: 'component' }
-      ],
-      // component list.
-      items: [
-        { value: false, name: 'v-alert', component: 'VAlert', group: 'VAlert' },
-        { value: false, name: 'v-app', component: 'VApp', group: 'VApp' },
-        { value: false, name: 'v-avatar', component: 'VAvatar', group: 'VAvatar' },
-        { value: false, name: 'v-badge', component: 'VBadge', group: 'VBadge' },
-        { value: false, name: 'v-bottom-nav', component: 'VBottomNav', group: 'VBottomNav' },
-        { value: false, name: 'v-bottom-sheet', component: 'VBottomSheet', group: 'VBottomSheet' },
-        { value: false, name: 'v-breadcrumbs', component: 'VBreadcrumbs', group: 'VBreadcrumbs' },
-        { value: false, name: 'v-breadcrumbs-item', component: 'VBreadcrumbs', group: 'VBreadcrumbs' },
-        { value: false, name: 'v-btn', component: 'VBtn', group: 'VBtn' },
-        { value: false, name: 'v-btn-toggle', component: 'VBtnToggle', group: 'VBtnToggle' },
-        { value: false, name: 'v-card', component: 'VCard', group: 'VCard' },
-        { value: false, name: 'v-card-title', component: 'VCard', group: 'VCard' },
-        { value: false, name: 'v-card-media', component: 'VCard', group: 'VCard' },
-        { value: false, name: 'v-carousel', component: 'VCarousel', group: 'VCarousel' },
-        { value: false, name: 'v-checkbox', component: 'VCheckbox', group: 'VCheckbox' },
-        { value: false, name: 'v-chip', component: 'VChip', group: 'VChip' },
-        { value: false, name: 'v-data-table', component: 'VDataTable', group: 'VDataTable' },
-        { value: false, name: 'v-edit-dialog', component: 'VDataTable', group: 'VDataTable' },
-        { value: false, name: 'v-date-picker', component: 'VDatePicker', group: 'VDatePicker' },
-        { value: false, name: 'v-dialog', component: 'VDialog', group: 'VDialog' },
-        { value: false, name: 'v-divider', component: 'VDivider', group: 'VDivider' },
-        { value: false, name: 'v-expansion-panel', component: 'VExpansionPanel', group: 'VExpansionPanel' },
-        { value: false, name: 'v-expansion-panel-content', component: 'VExpansionPanel', group: 'VExpansionPanel' },
-        { value: false, name: 'v-footer', component: 'VFooter', group: 'VFooter' },
-        { value: false, name: 'v-form', component: 'VForm', group: 'VForm' },
-        { value: false, name: 'v-footer', component: 'VFooter', group: 'VFooter' },
-        { value: false, name: 'v-layout', component: 'VGrid', group: 'VGrid' },
-        { value: false, name: 'v-flex', component: 'VGrid', group: 'VGrid' },
-        { value: false, name: 'v-container', component: 'VGrid', group: 'VGrid' },
-        { value: false, name: 'v-content', component: 'VGrid', group: 'VGrid' },
-        { value: false, name: 'v-icon', component: 'VIcon', group: 'VIcon' },
-        { value: false, name: 'v-list', component: 'VList', group: 'VList' },
-        { value: false, name: 'v-list-group', component: 'VList', group: 'VList' },
-        { value: false, name: 'v-list-tile', component: 'VList', group: 'VList' },
-        { value: false, name: 'v-list-tile-action', component: 'VList', group: 'VList' },
-        { value: false, name: 'v-menu', component: 'VMenu', group: 'VMenu' },
-        { value: false, name: 'v-navigation-drawer', component: 'VNavigationDrawer', group: 'VNavigationDrawer' },
-        { value: false, name: 'v-pagination', component: 'VPagination', group: 'VPagination' },
-        { value: false, name: 'v-parallax', component: 'VParallax', group: 'VParallax' },
-        { value: false, name: 'v-progress-circular', component: 'VProgressCircular', group: 'VProgressCircular' },
-        { value: false, name: 'v-progress-linear', component: 'VProgressLinear', group: 'VProgressLinear' },
-        { value: false, name: 'v-radio', component: 'VRadioGroup', group: 'VRadioGroup' },
-        { value: false, name: 'v-radio-group', component: 'VRadioGroup', group: 'VRadioGroup' },
-        { value: false, name: 'v-select', component: 'VSelect', group: 'VSelect' },
-        { value: false, name: 'v-slider', component: 'VSlider', group: 'VSlider' },
-        { value: false, name: 'v-snackbar', component: 'VSnackbar', group: 'VSnackbar' },
-        { value: false, name: 'v-speed-dial', component: 'VSpeedDial', group: 'VSpeedDial' },
-        { value: false, name: 'v-stepper', component: 'VStepper', group: 'VStepper' },
-        { value: false, name: 'v-stepper-content', component: 'VStepper', group: 'VStepper' },
-        { value: false, name: 'v-stepper-step', component: 'VStepper', group: 'VStepper' },
-        { value: false, name: 'v-subheader', component: 'VSubheader', group: 'VSubheader' },
-        { value: false, name: 'v-switch', component: 'VSwitch', group: 'VSwitch' },
-        { value: false, name: 'v-system-bar', component: 'VSystemBar', group: 'VSystemBar' },
-        { value: false, name: 'v-tabs', component: 'VTabs', group: 'VTabs' },
-        { value: false, name: 'v-tab', component: 'VTabs', group: 'VTabs' },
-        { value: false, name: 'v-tabs-slider', component: 'VTabs', group: 'VTabs' },
-        { value: false, name: 'v-tabs-items', component: 'VTabs', group: 'VTabs' },
-        { value: false, name: 'v-tab-item', component: 'VTabs', group: 'VTabs' },
-        { value: false, name: 'v-text-field', component: 'VTextField', group: 'VTextField' },
-        { value: false, name: 'v-time-picker', component: 'VTimePicker', group: 'VTimePicker' },
-        { value: false, name: 'v-toolbar', component: 'VToolbar', group: 'VToolbar' },
-        { value: false, name: 'v-toolbar-side-icon', component: 'VToolbar', group: 'VToolbar' },
-        { value: false, name: 'v-tooltip', component: 'VTooltip', group: 'VTooltip' },
-        { value: false, name: 'transitions', component: 'transitions', group: 'transitions' }
-      ]
-    }
-  },
-  computed: {
-    copy () {
-      return this.generateCustomComponent()
-    }
-  },
-  methods: {
-    customFilter (items, search, filter) {
-      if (!search) return items
-      search = search.toString().toLowerCase()
+  export default {
+    data () {
+      return {
+        search: '',
+        pagination: {},
+        selected: [],
+        headers: [
+          { text: 'Markup', value: 'markup' },
+          { text: 'Component Name', value: 'component' }
+        ],
+        // component list.
+        items: [
+          { value: false, name: 'v-alert', component: 'VAlert', group: 'VAlert' },
+          { value: false, name: 'v-app', component: 'VApp', group: 'VApp' },
+          { value: false, name: 'v-avatar', component: 'VAvatar', group: 'VAvatar' },
+          { value: false, name: 'v-badge', component: 'VBadge', group: 'VBadge' },
+          { value: false, name: 'v-bottom-nav', component: 'VBottomNav', group: 'VBottomNav' },
+          { value: false, name: 'v-bottom-sheet', component: 'VBottomSheet', group: 'VBottomSheet' },
+          { value: false, name: 'v-breadcrumbs', component: 'VBreadcrumbs', group: 'VBreadcrumbs' },
+          { value: false, name: 'v-breadcrumbs-item', component: 'VBreadcrumbs', group: 'VBreadcrumbs' },
+          { value: false, name: 'v-btn', component: 'VBtn', group: 'VBtn' },
+          { value: false, name: 'v-btn-toggle', component: 'VBtnToggle', group: 'VBtnToggle' },
+          { value: false, name: 'v-card', component: 'VCard', group: 'VCard' },
+          { value: false, name: 'v-card-title', component: 'VCard', group: 'VCard' },
+          { value: false, name: 'v-card-media', component: 'VCard', group: 'VCard' },
+          { value: false, name: 'v-carousel', component: 'VCarousel', group: 'VCarousel' },
+          { value: false, name: 'v-checkbox', component: 'VCheckbox', group: 'VCheckbox' },
+          { value: false, name: 'v-chip', component: 'VChip', group: 'VChip' },
+          { value: false, name: 'v-data-table', component: 'VDataTable', group: 'VDataTable' },
+          { value: false, name: 'v-edit-dialog', component: 'VDataTable', group: 'VDataTable' },
+          { value: false, name: 'v-date-picker', component: 'VDatePicker', group: 'VDatePicker' },
+          { value: false, name: 'v-dialog', component: 'VDialog', group: 'VDialog' },
+          { value: false, name: 'v-divider', component: 'VDivider', group: 'VDivider' },
+          { value: false, name: 'v-expansion-panel', component: 'VExpansionPanel', group: 'VExpansionPanel' },
+          { value: false, name: 'v-expansion-panel-content', component: 'VExpansionPanel', group: 'VExpansionPanel' },
+          { value: false, name: 'v-footer', component: 'VFooter', group: 'VFooter' },
+          { value: false, name: 'v-form', component: 'VForm', group: 'VForm' },
+          { value: false, name: 'v-footer', component: 'VFooter', group: 'VFooter' },
+          { value: false, name: 'v-layout', component: 'VGrid', group: 'VGrid' },
+          { value: false, name: 'v-flex', component: 'VGrid', group: 'VGrid' },
+          { value: false, name: 'v-container', component: 'VGrid', group: 'VGrid' },
+          { value: false, name: 'v-content', component: 'VGrid', group: 'VGrid' },
+          { value: false, name: 'v-icon', component: 'VIcon', group: 'VIcon' },
+          { value: false, name: 'v-list', component: 'VList', group: 'VList' },
+          { value: false, name: 'v-list-group', component: 'VList', group: 'VList' },
+          { value: false, name: 'v-list-tile', component: 'VList', group: 'VList' },
+          { value: false, name: 'v-list-tile-action', component: 'VList', group: 'VList' },
+          { value: false, name: 'v-menu', component: 'VMenu', group: 'VMenu' },
+          { value: false, name: 'v-navigation-drawer', component: 'VNavigationDrawer', group: 'VNavigationDrawer' },
+          { value: false, name: 'v-pagination', component: 'VPagination', group: 'VPagination' },
+          { value: false, name: 'v-parallax', component: 'VParallax', group: 'VParallax' },
+          { value: false, name: 'v-progress-circular', component: 'VProgressCircular', group: 'VProgressCircular' },
+          { value: false, name: 'v-progress-linear', component: 'VProgressLinear', group: 'VProgressLinear' },
+          { value: false, name: 'v-radio', component: 'VRadioGroup', group: 'VRadioGroup' },
+          { value: false, name: 'v-radio-group', component: 'VRadioGroup', group: 'VRadioGroup' },
+          { value: false, name: 'v-select', component: 'VSelect', group: 'VSelect' },
+          { value: false, name: 'v-slider', component: 'VSlider', group: 'VSlider' },
+          { value: false, name: 'v-snackbar', component: 'VSnackbar', group: 'VSnackbar' },
+          { value: false, name: 'v-speed-dial', component: 'VSpeedDial', group: 'VSpeedDial' },
+          { value: false, name: 'v-stepper', component: 'VStepper', group: 'VStepper' },
+          { value: false, name: 'v-stepper-content', component: 'VStepper', group: 'VStepper' },
+          { value: false, name: 'v-stepper-step', component: 'VStepper', group: 'VStepper' },
+          { value: false, name: 'v-subheader', component: 'VSubheader', group: 'VSubheader' },
+          { value: false, name: 'v-switch', component: 'VSwitch', group: 'VSwitch' },
+          { value: false, name: 'v-system-bar', component: 'VSystemBar', group: 'VSystemBar' },
+          { value: false, name: 'v-tabs', component: 'VTabs', group: 'VTabs' },
+          { value: false, name: 'v-tab', component: 'VTabs', group: 'VTabs' },
+          { value: false, name: 'v-tabs-slider', component: 'VTabs', group: 'VTabs' },
+          { value: false, name: 'v-tabs-items', component: 'VTabs', group: 'VTabs' },
+          { value: false, name: 'v-tab-item', component: 'VTabs', group: 'VTabs' },
+          { value: false, name: 'v-text-field', component: 'VTextField', group: 'VTextField' },
+          { value: false, name: 'v-time-picker', component: 'VTimePicker', group: 'VTimePicker' },
+          { value: false, name: 'v-toolbar', component: 'VToolbar', group: 'VToolbar' },
+          { value: false, name: 'v-toolbar-side-icon', component: 'VToolbar', group: 'VToolbar' },
+          { value: false, name: 'v-tooltip', component: 'VTooltip', group: 'VTooltip' },
+          { value: false, name: 'transitions', component: 'transitions', group: 'transitions' }
+        ]
+      }
+    },
+    computed: {
+      copy () {
+        return this.generateCustomComponent()
+      }
+    },
+    methods: {
+      customFilter (items, search, filter) {
+        if (!search) return items
+        search = search.toString().toLowerCase()
 
-      return items.filter(item => (
-        filter(item['name'], search) || filter(item['component'], search) || filter(item['group'], search)
-      ))
-    },
-    generateCustomComponent () {
-      const components = this.selected.map(({ component }) => component).join(', ')
-      return `import Vue from 'vue';\nimport { Vuetify, ${components} } from 'vuetify';\nVue.use(Vuetify, { components: { ${components} } });`
-    },
-    copyMarkup () {
-      this.$refs.copy.select()
-      document.execCommand('copy')
+        return items.filter(item => (
+          filter(item['name'], search) || filter(item['component'], search) || filter(item['group'], search)
+        ))
+      },
+      generateCustomComponent () {
+        const components = this.selected.map(({ component }) => component).join(', ')
+        return `import Vue from 'vue';\nimport { Vuetify, ${components} } from 'vuetify';\nVue.use(Vuetify, { components: { ${components} } });`
+      },
+      copyMarkup () {
+        this.$refs.copy.select()
+        document.execCommand('copy')
+      }
     }
   }
-}
 </script>

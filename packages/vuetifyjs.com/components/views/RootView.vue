@@ -49,7 +49,7 @@
           /* webpackChunkName: "lang-[request]" */
           /* webpackMode: "lazy-once" */
           `@/lang/${localeFile}`
-          ).then(msgs => this.$i18n.setLocaleMessage(locale, msgs.default))
+        ).then(msgs => this.$i18n.setLocaleMessage(locale, msgs.default))
           .catch(err => Promise.resolve(err))
       }
 

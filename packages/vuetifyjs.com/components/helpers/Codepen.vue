@@ -97,7 +97,7 @@
         const data = {
           title: this.title,
           html:
-`<div id="app">
+            `<div id="app">
   <v-app id="inspire">
     ${this.template}
   </v-app>
@@ -106,7 +106,7 @@
           css_pre_processor: this.style.language ? this.style.language[1] : 'none',
           css_external: [...this.additionalResources.css, ...cssResources].join(';'),
           js: this.additionalScript +
-`new Vue({
+            `new Vue({
   el: '#app',
   ${this.script}
 })`,

@@ -20,18 +20,18 @@
 </template>
 
 <script>
-export default {
-  data: () => ({
-    value: '',
-    custom: true
-  }),
-  computed: {
-    progress () {
-      return Math.min(100, this.value.length * 10)
-    },
-    color () {
-      return ['error', 'warning', 'success'][Math.floor(this.progress / 40)]
+  export default {
+    data: () => ({
+      value: '',
+      custom: true
+    }),
+    computed: {
+      progress () {
+        return Math.min(100, this.value.length * 10)
+      },
+      color () {
+        return ['error', 'warning', 'success'][Math.floor(this.progress / 40)]
+      }
     }
   }
-}
 </script>

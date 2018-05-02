@@ -54,8 +54,8 @@
     asyncData ({ store }) {
       return store.state.store.hasFetchedProducts &&
         store.state.store.products.length
-          ? Promise.resolve()
-          : store.dispatch('store/getProducts')
+        ? Promise.resolve()
+        : store.dispatch('store/getProducts')
     },
 
     computed: {
