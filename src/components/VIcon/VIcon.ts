@@ -67,18 +67,18 @@ export default mixins(Colorable, Themeable).extend({
     xLarge: Boolean
   },
 
-  render (h, context): VNode {
-    const { props, data, parent } = context
+  render (h, { props, data, parent, children }): VNode {
     const { small, medium, large, xLarge } = props
     const sizes = { small, medium, large, xLarge }
     const explicitSize = keys(sizes).find(key => sizes[key] && !!key)
     const fontSize = (explicitSize && SIZE_MAP[explicitSize]) || convertToUnit(props.size)
-    const children: VNodeChildren = []
+
+    const newChildren: VNodeChildren = []
 
     if (fontSize) data.style = { fontSize, ...data.style }
 
     let iconName = ''
-    if (context.children.length) iconName = context.children[0].text
+    if (children.length) iconName = children[0].text
     // Support usage of v-text and v-html
     else if (data.domProps) {
       iconName = data.domProps.textContent ||
@@ -106,7 +106,7 @@ export default mixins(Colorable, Themeable).extend({
       if (isFontAwesome5(iconType)) iconType = ''
       // Assume if not a custom icon
       // is Material Icon font
-    } else children.push(iconName)
+    } else newChildren.push(iconName)
 
     data.attrs = data.attrs || {}
     if (!('aria-hidden' in data.attrs)) {
@@ -135,6 +135,6 @@ export default mixins(Colorable, Themeable).extend({
     ].reduce((prev, curr) => curr ? `${prev} ${curr}` : prev)
       .trim()
 
-    return h('i', data, children)
+    return h('i', data, newChildren)
   }
 })

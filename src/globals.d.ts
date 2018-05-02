@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+
 import { VueConstructor, ComponentOptions, PluginFunction, FunctionalComponentOptions } from 'vue'
 import { CombinedVueInstance, Vue } from 'vue/types/vue'
 import {
@@ -17,7 +19,13 @@ declare global {
 }
 
 declare module 'vue/types/vue' {
-  export type OptionsVue<Instance extends Vue, Data, Methods, Computed, Props, RawProps = undefined> = VueConstructor<CombinedVueInstance<Instance, Data, Methods, Computed, Props> & Vue, Data, Methods, Computed, RawProps>
+  export type OptionsVue<Instance extends Vue, Data, Methods, Computed, Props, RawProps = undefined> = VueConstructor<
+    CombinedVueInstance<Instance, Data, Methods, Computed, Props> & Vue,
+    Data,
+    Methods,
+    Computed,
+    RawProps
+  >
 
   export interface RawComponentOptions<V extends Vue = Vue, Data = {}, Methods = {}, Computed = {}, Props = {}> {
     data?: Data,

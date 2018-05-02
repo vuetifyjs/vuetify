@@ -1,7 +1,7 @@
 module.exports = {
   root: true,
+  parser: 'typescript-eslint-parser',
   parserOptions: {
-    parser: 'babel-eslint',
     ecmaVersion: 2017,
     sourceType: 'module'
   },
@@ -19,6 +19,7 @@ module.exports = {
     'process': true
   },
   plugins: [
+    'typescript',
     'eslint-plugin-local-rules'
   ],
   rules: {
@@ -51,6 +52,26 @@ module.exports = {
         named: 'always',
         asyncArrow: 'always'
       }
-    ]
-  }
+    ],
+    'no-return-await': 'warn'
+  },
+  overrides: [
+    {
+      files: '**/*.ts',
+      rules: {
+        // https://github.com/eslint/typescript-eslint-parser#known-issues
+        'no-undef': 'off',
+        'no-unused-vars': 'off',
+
+        // https://github.com/eslint/typescript-eslint-parser/issues/445
+        // 'typescript/no-unused-vars': 'error'
+
+        // https://github.com/eslint/eslint/issues/10260
+        'space-infix-ops': false,
+
+        // Can't overload function exports with this enabled
+        'import/export': false
+      }
+    }
+  ]
 }

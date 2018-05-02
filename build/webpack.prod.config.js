@@ -30,20 +30,8 @@ module.exports = merge(baseWebpackConfig, {
     noParse: /es6-promise\.js$/, // avoid webpack shimming process
     rules: [
       {
-        test: /\.ts$/,
-        enforce: 'pre',
-        loader: 'tslint-loader',
-        options: {
-          failOnHint: true,
-          typeCheck: true,
-          configFile: resolve('../.tslint.js'),
-          tsConfigFile: resolve('../tsconfig.json')
-        },
-        exclude: /node_modules/
-      },
-      {
         test: /\.[jt]s$/,
-        loaders: ['babel-loader', 'ts-loader'],
+        loaders: ['babel-loader', 'ts-loader', 'eslint-loader'],
         exclude: /node_modules/
       },
       {

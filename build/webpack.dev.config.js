@@ -48,26 +48,9 @@ module.exports = merge(baseWebpackConfig, {
         }, 'eslint-loader'],
         exclude: /node_modules/
       },
-      // {
-      //   test: /\.[jt]s$/,
-      //   enforce: 'pre',
-      //   loader: 'tslint-loader',
-      //   options: {
-      //     failOnHint: true,
-      //     typeCheck: true,
-      //     configFile: resolve('../.tslint.js'),
-      //     tsConfigFile: resolve('../tsconfig.json')
-      //   },
-      //   exclude: /node_modules/
-      // },
       {
-        test: /\.ts$/,
-        loaders: ['ts-loader'],
-        exclude: /node_modules/
-      },
-      {
-        test: /\.js$/,
-        loaders: ['babel-loader'],
+        test: /\.[jt]s$/,
+        loaders: ['babel-loader', 'ts-loader', 'eslint-loader'],
         exclude: /node_modules/
       },
       {

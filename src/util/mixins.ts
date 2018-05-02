@@ -1,4 +1,4 @@
-/* tslint:disable:max-line-length */
+/* eslint-disable max-len, import/export */
 import Vue, { VueConstructor, ComponentOptions } from 'vue'
 
 type Component<T extends Vue> = ComponentOptions<T> | VueConstructor<T>
