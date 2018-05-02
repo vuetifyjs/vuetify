@@ -35,7 +35,7 @@ theme(v-select, 'v-select')
   &.v-text-field
     input
       flex: 1 1 0
-      min-width: 40%
+      min-width: 0
       pointer-events: none
       position: relative
 
@@ -48,7 +48,7 @@ theme(v-select, 'v-select')
       margin: 0
 
     .v-select__selections
-      padding: 8px 0
+      padding: 12px 0 4px
       margin-left: -4px // to line up the chips
 
   &__selections
@@ -62,7 +62,6 @@ theme(v-select, 'v-select')
       align-items: center
       display: inline-flex
       margin-right: 4px
-      padding-top: 2px
 
   &__slot
     align-items: center

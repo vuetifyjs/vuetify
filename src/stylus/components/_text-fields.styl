@@ -20,19 +20,19 @@ v-text-field($material)
         transparent 0
       )
 
-  &.v-text-field--solo
+  &--solo
     background: $material.cards
 
-  &.v-text-field--solo-inverted
+  &--solo-inverted
     background: rgba($material.inputs.solo-inverted)
 
     &.v-input--is-focused
       background: rgba($material.inputs.solo-inverted-focused)
 
-  &.v-text-field--box
+  &--box
     background: $material.buttons.focused-alt
 
-  &.v-text-field--outline
+  &--outline
     border: 2px solid $material.text.secondary
     background: transparent !important
 
@@ -103,10 +103,6 @@ theme(v-text-field, "v-text-field")
     display: flex
     flex: 1 0 auto
     max-width: 100%
-
-  &__prefix,
-  &__suffix
-    //
 
   &__prefix
     padding: 8px 4px 8px 0
@@ -207,17 +203,16 @@ theme(v-text-field, "v-text-field")
       transition: border $primary-transition
 
     .v-input__prepend-outer,
-    .v-input__append-inner,
     .v-input__append-outer
       align-self: flex-start
       margin-top: 16px
 
-    &:not(.v-text-field--single-line)
-      .v-input__append-inner
-        margin-top: 0
+    .v-input__append-inner
+      align-self: flex-start
 
   &.v-text-field--solo,
-  &.v-text-field--box.v-text-field--single-line
+  &.v-text-field--box.v-text-field--single-line,
+  &.v-text-field--outline.v-text-field--single-line
     input
       margin: 0
 
