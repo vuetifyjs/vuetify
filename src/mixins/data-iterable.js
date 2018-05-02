@@ -452,6 +452,7 @@ export default {
       return [this.$createElement('div', {
         'class': this.actionsClasses
       }, [
+        this.$slots.actions,
         this.rowsPerPageItems.length > 1 ? this.genSelect() : null,
         rangeControls
       ])]

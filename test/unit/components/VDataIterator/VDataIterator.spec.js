@@ -54,6 +54,17 @@ test('VDataIterator.js', ({ mount, compileToFunctions }) => {
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
+  it('should match a snapshot - actions slot', () => {
+    const data = dataIteratorTestData()
+    data.slots = {
+      actions: [compileToFunctions('<span>actions</span>')],
+    }
+    const wrapper = mount(VDataIterator, data)
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
   it('should match a snapshot - no data', () => {
     const data = dataIteratorTestData()
     data.propsData.items = []
