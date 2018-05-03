@@ -1,7 +1,7 @@
 <template>
   <v-data-table
     :headers="headers"
-    :items="items"
+    :items="desserts"
     class="elevation-1"
   >
     <template slot="items" slot-scope="props">
@@ -35,7 +35,7 @@
           { text: 'Protein (g)', value: 'protein' },
           { text: 'Iron (%)', value: 'iron' }
         ],
-        items: [
+        desserts: [
           {
             value: false,
             name: 'Frozen Yogurt',

@@ -2,10 +2,10 @@
   <div>
     <v-data-table
       :headers="headers"
-      :items="items"
+      :items="desserts"
       :search="search"
       :pagination.sync="pagination"
-      :total-items="totalItems"
+      :total-items="totalDesserts"
       :loading="loading"
       class="elevation-1"
     >
@@ -26,8 +26,8 @@
     data () {
       return {
         search: '',
-        totalItems: 0,
-        items: [],
+        totalDesserts: 0,
+        desserts: [],
         loading: true,
         pagination: {},
         headers: [
@@ -50,8 +50,8 @@
         handler () {
           this.getDataFromApi()
             .then(data => {
-              this.items = data.items
-              this.totalItems = data.total
+              this.desserts = data.items
+              this.totalDesserts = data.total
             })
         },
         deep: true
@@ -60,8 +60,8 @@
     mounted () {
       this.getDataFromApi()
         .then(data => {
-          this.items = data.items
-          this.totalItems = data.total
+          this.desserts = data.items
+          this.totalDesserts = data.total
         })
     },
     methods: {

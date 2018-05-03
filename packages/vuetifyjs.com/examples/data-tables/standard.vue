@@ -1,7 +1,7 @@
 <template>
   <v-data-table
     :headers="headers"
-    :items="items"
+    :items="desserts"
     hide-actions
     class="elevation-1"
   >
@@ -33,7 +33,7 @@
           { text: 'Protein (g)', value: 'protein' },
           { text: 'Iron (%)', value: 'iron' }
         ],
-        items: [
+        desserts: [
           {
             value: false,
             name: 'Frozen Yogurt',

@@ -1,6 +1,6 @@
 <template>
   <v-data-table
-    :items="items"
+    :items="desserts"
     class="elevation-1"
     hide-actions
     hide-headers
@@ -20,7 +20,7 @@
   export default {
     data () {
       return {
-        items: [
+        desserts: [
           {
             value: false,
             name: 'Frozen Yogurt',
