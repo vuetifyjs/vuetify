@@ -263,7 +263,7 @@ export default {
           this.inputWidth,
           this.isFocused || this.isActive,
           e => {
-            this.onMouseDown(e)
+            this.onThumbMouseDown(e)
           }
         )
       ]
@@ -373,11 +373,12 @@ export default {
       this.isFocused = true
       this.$emit('focus', e)
     },
-    onMouseDown (e) {
+    onThumbMouseDown (e) {
       this.oldValue = this.internalValue
       this.keyPressed = 2
       const options = { passive: true }
       this.isActive = true
+      this.isFocused = false
 
       if ('touches' in e) {
         this.app.addEventListener('touchmove', this.onMouseMove, options)
@@ -421,6 +422,7 @@ export default {
       this.keyPressed = 0
     },
     onSliderClick (e) {
+      this.isFocused = true
       this.onMouseMove(e)
       this.$emit('change', this.internalValue)
     },

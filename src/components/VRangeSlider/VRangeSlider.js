@@ -112,7 +112,7 @@ export default {
           const onDrag = e => {
             this.isActive = true
             this.activeThumb = i
-            this.onMouseDown(e)
+            this.onThumbMouseDown(e)
           }
           const valueWidth = this.inputWidth[i]
           const isActive = (this.isFocused || this.isActive) && this.activeThumb === i
@@ -123,6 +123,7 @@ export default {
     },
     onSliderClick (e) {
       if (!this.isActive) {
+        this.isFocused = true
         this.onMouseMove(e, true)
         this.$emit('change', this.internalValue)
       }

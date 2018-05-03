@@ -438,7 +438,7 @@ test('VSlider.vue', ({ mount }) => {
     input.trigger('blur')
 
     expect(wrapper.vm.isActive).toBe(true)
-    expect(wrapper.vm.isFocused).toBe(true)
+    expect(wrapper.vm.isFocused).toBe(false)
     expect(warning).toHaveBeenTipped()
   })
 
