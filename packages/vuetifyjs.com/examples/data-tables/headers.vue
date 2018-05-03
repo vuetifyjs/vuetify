@@ -2,7 +2,7 @@
   <v-data-table
     v-model="selected"
     :headers="headers"
-    :items="items"
+    :items="desserts"
     :pagination.sync="pagination"
     select-all
     item-key="name"
@@ -69,7 +69,7 @@
         { text: 'Protein (g)', value: 'protein' },
         { text: 'Iron (%)', value: 'iron' }
       ],
-      items: [
+      desserts: [
         {
           value: false,
           name: 'Frozen Yogurt',
@@ -166,7 +166,7 @@
     methods: {
       toggleAll () {
         if (this.selected.length) this.selected = []
-        else this.selected = this.items.slice()
+        else this.selected = this.desserts.slice()
       },
       changeSort (column) {
         if (this.pagination.sortBy === column) {

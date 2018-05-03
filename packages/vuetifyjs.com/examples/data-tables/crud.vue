@@ -36,7 +36,7 @@
     </v-dialog>
     <v-data-table
       :headers="headers"
-      :items="items"
+      :items="desserts"
       hide-actions
       class="elevation-1"
     >
@@ -79,7 +79,7 @@
         { text: 'Protein (g)', value: 'protein' },
         { text: 'Actions', value: 'name', sortable: false }
       ],
-      items: [],
+      desserts: [],
       editedIndex: -1,
       editedItem: {
         name: '',
@@ -115,7 +115,7 @@
 
     methods: {
       initialize () {
-        this.items = [
+        this.desserts = [
           {
             name: 'Frozen Yogurt',
             calories: 159,
@@ -190,14 +190,14 @@
       },
 
       editItem (item) {
-        this.editedIndex = this.items.indexOf(item)
+        this.editedIndex = this.desserts.indexOf(item)
         this.editedItem = Object.assign({}, item)
         this.dialog = true
       },
 
       deleteItem (item) {
-        const index = this.items.indexOf(item)
-        confirm('Are you sure you want to delete this item?') && this.items.splice(index, 1)
+        const index = this.desserts.indexOf(item)
+        confirm('Are you sure you want to delete this item?') && this.desserts.splice(index, 1)
       },
 
       close () {
@@ -210,9 +210,9 @@
 
       save () {
         if (this.editedIndex > -1) {
-          Object.assign(this.items[this.editedIndex], this.editedItem)
+          Object.assign(this.desserts[this.editedIndex], this.editedItem)
         } else {
-          this.items.push(this.editedItem)
+          this.desserts.push(this.editedItem)
         }
         this.close()
       }
