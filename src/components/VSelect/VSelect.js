@@ -435,6 +435,13 @@ export default {
         this.isMenuActive = true
       }
     },
+    onMouseUp (e) {
+      if (this.isSolo || this.box || this.hasOutline) {
+        this.isMenuActive = true
+      }
+
+      VTextField.methods.onMouseUp.call(this, e)
+    },
     selectItem (item) {
       if (!this.isMulti) {
         this.internalValue = this.returnObject ? item : this.getValue(item)
