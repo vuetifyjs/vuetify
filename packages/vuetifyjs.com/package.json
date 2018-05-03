@@ -5,10 +5,10 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "node server",
-    "start": "NODE_ENV=production node server",
+    "start": "cross-env NODE_ENV=production node server",
     "build": "rimraf public && npm run build:client && npm run build:server",
-    "build:client": "NODE_ENV=production webpack --config build/webpack.client.config.js --progress --hide-modules",
-    "build:server": "NODE_ENV=production webpack --config build/webpack.server.config.js --progress --hide-modules",
+    "build:client": "cross-env NODE_ENV=production webpack --config build/webpack.client.config.js --progress --hide-modules",
+    "build:server": "cross-env NODE_ENV=production webpack --config build/webpack.server.config.js --progress --hide-modules",
     "lint": "eslint --ext .js,.vue .",
     "commitmsg": "node scripts/lint-commit-message.js",
     "precommit": "node scripts/warn-npm-install.js && yarn lint",
