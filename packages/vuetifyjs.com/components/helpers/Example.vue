@@ -205,12 +205,12 @@
 
         this.parsed = {
           template,
-          script,
-          style,
-          codepenResources,
-          codepenAdditional
-        }
-      },
+            script,
+              style,
+                codepenResources,
+                  codepenAdditional
+                    }
+                    },
       toggle () {
         this.active = !this.active
       },

@@ -151,9 +151,9 @@
             const icon = this.getIcon(text)
             return Object.assign({}, {
               text,
-              subtext: this.getSubText(icon),
+                subtext: this.getSubText(icon),
               icon
-            })
+                })
           })
           .sort((a, b) => {
             if (a.text > b.text) return 1

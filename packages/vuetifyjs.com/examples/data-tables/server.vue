@@ -98,8 +98,8 @@
             this.loading = false
             resolve({
               items,
-              total
-            })
+                total
+                  })
           }, 1000)
         })
       },

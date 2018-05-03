@@ -12,6 +12,6 @@
   export default {
     components: {
       DocPage
-    }
-  }
+        }
+        }
 </script>

@@ -24,7 +24,7 @@
   export default {
     components: {
       StoreHeader
-    },
+        },
 
     mounted () {
       this.$store.dispatch('store/getCheckout')

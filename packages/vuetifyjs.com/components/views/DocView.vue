@@ -28,9 +28,9 @@
   export default {
     components: {
       AppAd,
-      AppFooterAlt,
-      AppTableOfContents
-    },
+        AppFooterAlt,
+          AppTableOfContents
+            },
 
     props: {
       toc: {
