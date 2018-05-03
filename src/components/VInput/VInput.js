@@ -116,15 +116,16 @@ export default {
           color: this.validationState,
           disabled: this.disabled
         },
-        on: {
-          click: e => {
-            e.preventDefault()
-            e.stopPropagation()
+        on: !cb
+          ? null
+          : {
+            click: e => {
+              e.preventDefault()
+              e.stopPropagation()
 
-            if (cb) cb()
-            else this.onClick()
+              cb(e)
+            }
           }
-        }
       }
 
       return this.$createElement('div', {
@@ -143,7 +144,8 @@ export default {
         'class': this.addTextColorClassChecks(
           {},
           this.hasState ? this.validationState : this.color
-        )
+        ),
+        on: { click: this.onClick }
       }, this.genDefaultSlot())
     },
     genMessages () {
@@ -204,6 +206,9 @@ export default {
     },
     onMouseDown (e) {
       this.$emit('mousedown', e)
+    },
+    onMouseUp (e) {
+      this.$emit('mouseup', e)
     }
   },
 
@@ -214,8 +219,8 @@ export default {
       'class': this.classesInput,
       directives: this.directivesInput,
       on: {
-        click: this.onClick,
-        mousedown: this.onMouseDown
+        mousedown: this.onMouseDown,
+        mouseup: this.onMouseUp
       }
     }, [
       this.genPrependSlot(),

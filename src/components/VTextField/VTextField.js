@@ -330,10 +330,25 @@ export default {
     },
     onMouseDown (e) {
       // Prevent input from being blurred
-      if (document.activeElement === this.$refs.input) {
+      if (e.target !== this.$refs.input) {
         e.preventDefault()
         e.stopPropagation()
       }
+
+      VInput.methods.onMouseDown.call(this, e)
+    },
+    onMouseUp (e) {
+      // Default click handler is on slot,
+      // Mouse events are to enable specific
+      // input types when clicked
+      if (
+        (this.isSolo || this.box || this.hasOutline) &&
+        document.activeElement !== this.$refs.input
+      ) {
+        this.$refs.input.focus()
+      }
+
+      VInput.methods.onMouseUp.call(this, e)
     }
   }
 }

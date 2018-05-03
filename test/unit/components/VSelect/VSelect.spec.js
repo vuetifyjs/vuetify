@@ -145,7 +145,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     const blur = jest.fn()
     wrapper.vm.$on('blur', blur)
 
-    const menu = wrapper.first('.v-input')
+    const menu = wrapper.first('.v-input__slot')
 
     menu.trigger('click')
 

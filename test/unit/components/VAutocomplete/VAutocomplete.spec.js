@@ -381,7 +381,7 @@ test('VAutocomplete.js', ({ mount, shallow }) => {
       }
     })
 
-    const slot = wrapper.first('.v-input')
+    const slot = wrapper.first('.v-input__slot')
     const input = wrapper.first('input')
 
     // Focus input should only focus
@@ -522,7 +522,7 @@ test('VAutocomplete.js', ({ mount, shallow }) => {
       propsData: { disabled: true },
       methods: { onFocus }
     })
-    const slot = wrapper.first('.v-input')
+    const slot = wrapper.first('.v-input__slot')
 
     slot.trigger('click')
 
@@ -652,7 +652,7 @@ test('VAutocomplete.js', ({ mount, shallow }) => {
     })
 
     expect(wrapper.vm.isMenuActive).toBe(false)
-    const slot = wrapper.first('.v-input')
+    const slot = wrapper.first('.v-input__slot')
     const item = wrapper.first('.v-list__tile')
     slot.trigger('click')
 

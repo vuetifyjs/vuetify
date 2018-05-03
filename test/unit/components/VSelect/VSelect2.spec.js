@@ -543,7 +543,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     const wrapper = mount(VSelect, {
       propsData: { items: ['foo', 'bar'] }
     })
-    const slot = wrapper.first('.v-input')
+    const slot = wrapper.first('.v-input__slot')
     const input = wrapper.first('input')
 
     expect(wrapper.vm.isMenuActive).toBe(false)

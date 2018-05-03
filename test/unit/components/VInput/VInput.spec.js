@@ -97,7 +97,7 @@ test('VInput.js', ({ mount }) => {
 
     const prepend = wrapper.find('.v-icon')[0]
     const append = wrapper.find('.v-icon')[1]
-    const slot = wrapper.first('.v-input')
+    const slot = wrapper.first('.v-input__slot')
 
     prepend.trigger('click')
     expect(cb.mock.calls.length).toBe(1)
@@ -134,5 +134,31 @@ test('VInput.js', ({ mount }) => {
     wrapper.setProps({ value: 'bar' })
 
     expect(wrapper.vm.lazyValue).toBe('bar')
+  })
+
+  it('should call the correct event for different click locations', () => {
+    const onClick = jest.fn()
+    const onMouseDown = jest.fn()
+    const onMouseUp = jest.fn()
+    const wrapper = mount(VInput, {
+      methods: {
+        onClick,
+        onMouseDown,
+        onMouseUp
+      }
+    })
+
+    const slot = wrapper.first('.v-input__slot')
+
+    wrapper.trigger('click')
+    wrapper.trigger('mousedown')
+    wrapper.trigger('mouseup')
+    slot.trigger('click')
+    slot.trigger('mousedown')
+    slot.trigger('mouseup')
+
+    expect(onClick).toHaveBeenCalledTimes(1)
+    expect(onMouseDown).toHaveBeenCalledTimes(1)
+    expect(onMouseUp).toHaveBeenCalledTimes(1)
   })
 })
