@@ -151,8 +151,8 @@
         snackbar: false,
         terms: false,
         defaultForm
-      }
-    },
+          }
+          },
 
     computed: {
       formIsValid () {

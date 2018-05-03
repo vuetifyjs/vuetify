@@ -52,7 +52,7 @@
       email: { required, email },
       select: { required },
       checkbox: { required }
-    },
+        },
 
     data: () => ({
       name: '',

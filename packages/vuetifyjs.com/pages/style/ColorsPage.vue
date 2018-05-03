@@ -108,7 +108,7 @@
   export default {
     data: () => ({
       colors,
-      search: ''
+        search: ''
     }),
 
     computed: {

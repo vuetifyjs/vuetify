@@ -110,7 +110,7 @@
     data () {
       return {
         api,
-        current: null,
+          current: null,
         id: '',
         headers: {
           props: [
