@@ -136,6 +136,7 @@ export default [
     group: 'guides',
     icon: 'mdi-television-guide',
     items: [
+      { name: 'VueCli3', title: 'Vue-cli 3', badge: 'new' },
       { name: 'SSR', title: 'Server side rendering' },
       { name: 'ALaCarte', title: 'A la carte' }
     ]

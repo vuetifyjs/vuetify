@@ -7,3 +7,4 @@ npm-debug.log
 .env
 .vscode
 yarn-error.log
+*.swp

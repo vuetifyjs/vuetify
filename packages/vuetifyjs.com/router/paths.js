@@ -27,6 +27,7 @@ export default [
   ['store/thank-you', 'store/ThankYou'],
   ['store/licensing', 'store/Licensing'],
   ['store/product/:id', 'store/Product', null, r => ({ id: r.params.id })],
+  ['guides/vue-cli-3', 'guides/VueCli3'],
   ['guides/server-side-rendering', 'guides/SSR'],
   ['guides/a-la-carte', 'guides/ALaCarte'],
   ['theme-generator', 'ThemeGenerator', true],
