@@ -15,6 +15,10 @@ export default {
       header: 'Date pickers - 대화창과 메뉴에서 사용하기 (In dialog and menu)',
       desc: '선택기를 `v-text-field` 에 결합 하려면, **readonly** prop을 사용하는 것을 권장합니다. 이는 모바일 키보드가 작동하는 것을 방지합니다. 세로 공간을 절약하려면 선택기의 제목을 숨길수 있습니다.  \n\n  선택기(Pickers)는 저장(save), 취소(cancel) 기능을 가로챌 수 있는(hook) 스코프드 슬롯(socped slot)을 제공합니다.  This will maintain an old value which can be replaced if the user cancels.'
     },
+    dateFormatting: {
+      header: 'Date pickers - formatting date',
+      desc: 'If you need to display date in the custom format (different than YYYY-MM-DD) you need to use the formatting function.'
+    },
     dateAllowedDates: {
       header: 'Date pickers - 특정 날짜 허용 (Allowed dates)',
       desc: '배열, 오브젝트, 함수를 이용하여 선택 가능한 날짜를 정할 수 있습니다.'
