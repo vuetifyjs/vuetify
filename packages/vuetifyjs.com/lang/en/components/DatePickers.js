@@ -15,6 +15,10 @@ export default {
       header: 'Date pickers - In dialog and menu',
       desc: 'When integrating a picker into a `v-text-field`, it is recommended to use the **readonly** prop. This will prevent mobile keyboards from triggering. To save vertical space, you can also hide the picker title.  \n\n  Pickers expose a scoped slot that allow you to hook into save and cancel functionality. This will maintain an old value which can be replaced if the user cancels.'
     },
+    dateFormatting: {
+      header: 'Date pickers - formatting date',
+      desc: 'If you need to display date in the custom format (different than YYYY-MM-DD) you need to use the formatting function.'
+    },
     dateAllowedDates: {
       header: 'Date pickers - Allowed dates',
       desc: 'You can specify allowed dates using arrays, objects, and functions.'
