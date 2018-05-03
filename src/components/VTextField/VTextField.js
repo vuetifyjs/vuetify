@@ -56,6 +56,7 @@ export default {
     outline: Boolean,
     placeholder: String,
     prefix: String,
+    reverse: Boolean,
     singleLine: Boolean,
     solo: Boolean,
     soloInverted: Boolean,
@@ -77,6 +78,7 @@ export default {
         'v-text-field--solo-inverted': this.soloInverted,
         'v-text-field--box': this.box,
         'v-text-field--enclosed': this.isEnclosed,
+        'v-text-field--reverse': this.reverse,
         'v-text-field--outline': this.hasOutline,
         'elevation-0': this.flat
       }
@@ -198,12 +200,26 @@ export default {
       ) return null
 
       const isSingleLine = this.isSingle
-      let left = 0
+      let value = 0
+      let left = 'auto'
+      let right = 'auto'
 
-      if (this.prefix &&
+      // Create spacing
+      if ((this.prefix || this.reverse) &&
         (isSingleLine || !this.isFocused) &&
         !this.isDirty
-      ) left = 12
+      ) value = 16
+
+      // Check if RTL
+      if (this.$vuetify.rtl) right = value
+      else left = value
+
+      // Check if reversed
+      if (this.reverse) {
+        const direction = right
+        right = left
+        left = direction
+      }
 
       const data = {
         props: {
@@ -212,6 +228,7 @@ export default {
           disabled: this.disabled,
           focused: !isSingleLine && (this.isFocused || !!this.validationState),
           left,
+          right,
           value: Boolean(!isSingleLine &&
             (this.isFocused || this.isDirty || this.placeholder))
         }

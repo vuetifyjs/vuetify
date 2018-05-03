@@ -4,6 +4,9 @@ import '../../stylus/components/_labels.styl'
 // Mixins
 import Colorable from '../../mixins/colorable'
 
+// Helpers
+import { convertToUnit } from '../../util/helpers'
+
 export default {
   functional: true,
 
@@ -22,10 +25,14 @@ export default {
       type: [Number, String],
       default: 0
     },
+    right: {
+      type: [Number, String],
+      default: 'auto'
+    },
     value: Boolean
   },
 
-  render (h, { children, listeners, props, parent }) {
+  render (h, { children, listeners, props }) {
     const data = {
       staticClass: 'v-label',
       'class': {
@@ -37,7 +44,8 @@ export default {
       },
       on: listeners,
       style: {
-        [parent.$vuetify.rtl ? 'right' : 'left']: `${parseInt(props.left)}px`,
+        left: convertToUnit(props.left),
+        right: convertToUnit(props.right),
         position: props.absolute ? 'absolute' : 'relative'
       }
     }

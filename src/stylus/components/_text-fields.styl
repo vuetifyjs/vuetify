@@ -40,10 +40,6 @@ v-text-field($material)
   &__suffix
     color: $material.text.secondary
 
-  .v-label
-    left: initial
-    right: 0 !important
-
 v-text-field-rtl()
   .v-label
     transform-origin: top right
@@ -56,6 +52,21 @@ v-text-field-rtl()
     .v-input__prepend-outer
       margin-left: 16px
       margin-right: 0
+
+  &--reverse
+    input
+      text-align: left
+
+    .v-label
+      transform-origin: top left
+
+  &__prefix
+    padding-right: 0
+    padding-left: 4px
+
+  &__suffix
+    padding-left: 0
+    padding-right: 4px
 
 theme(v-text-field, "v-text-field")
 rtl(v-text-field-rtl, "v-text-field")
@@ -73,6 +84,7 @@ rtl(v-text-field-rtl, "v-text-field")
     display: inline-flex
     margin-left: auto
     line-height: 1
+    padding-left: 4px
 
   .v-counter
     white-space: nowrap
@@ -118,11 +130,15 @@ rtl(v-text-field-rtl, "v-text-field")
     flex: 1 0 auto
     max-width: 100%
 
+  &__prefix,
+  &__suffix
+    align-self: center
+
   &__prefix
-    padding: 8px 4px 8px 0
+    padding-right: 4px
 
   &__suffix
-    padding: 8px 0 8px 4px
+    padding-left: 4px
 
   &__slot
     display: flex
@@ -210,6 +226,17 @@ rtl(v-text-field-rtl, "v-text-field")
         &:before,
         &:after
           display: none
+
+  &--reverse
+    input
+      text-align: right
+
+    .v-label
+      transform-origin: top right
+
+    .v-input__slot,
+    .v-text-field__slot
+      flex-direction: row-reverse
 
   &--outline
     &.v-input--is-focused
