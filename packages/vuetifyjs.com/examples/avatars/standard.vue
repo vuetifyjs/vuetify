@@ -26,7 +26,7 @@
         <v-avatar
           :tile="tile"
           :size="avatarSize"
-          class="grey lighten-4"
+          color="grey lighten-4"
         >
           <img src="/static/apple-touch-icon-180x180.png" alt="avatar">
         </v-avatar>
