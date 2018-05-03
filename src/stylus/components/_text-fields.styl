@@ -44,7 +44,21 @@ v-text-field($material)
     left: initial
     right: 0 !important
 
+v-text-field-rtl()
+  .v-label
+    transform-origin: top right
+
+  &--enclosed
+    .v-input__append-outer
+      margin-left: 0
+      margin-right: 16px
+
+    .v-input__prepend-outer
+      margin-left: 16px
+      margin-right: 0
+
 theme(v-text-field, "v-text-field")
+rtl(v-text-field-rtl, "v-text-field")
 
 .v-text-field
   input,
