@@ -6,9 +6,9 @@
   padding: $grid-gutters.lg
   width: 100%
 
-  for size, width in $container-max-widths
-    @media only screen and (min-width: width)
-      max-width: (width * 0.9375) // Credit to bootstrap
+  for $size, $width in $container-max-widths
+    @media only screen and (min-width: $width)
+      max-width: ($width * 0.9375) // Credit to bootstrap
 
   @media $display-breakpoints.xs-only
     padding: $grid-gutters.xl
@@ -71,19 +71,19 @@
   &.wrap
     flex-wrap: wrap
 
-for size, width in $grid-breakpoints
-  @media all and (min-width: width)
+for $size, $width in $grid-breakpoints
+  @media all and (min-width: $width)
     for n in (1..$grid-columns)
-      .flex.{size}{n}
+      .flex.{$size}{n}
         flex-basis: (n / $grid-columns * 100)%
         flex-grow: 0
         max-width: (n / $grid-columns * 100)%
 
-      .flex.order-{size}{n}
+      .flex.order-{$size}{n}
         order: n
 
     for n in (0..$grid-columns)
-      .flex.offset-{size}{n}
+      .flex.offset-{$size}{n}
         // Offsets can only ever work in row layouts
         margin-left: (n / $grid-columns * 100)%
 
@@ -184,6 +184,6 @@ for size, width in $grid-breakpoints
 
 .d-inline-block
   display: inline-block !important
-  
+
 .d-inline
   display: inline !important
