@@ -11,8 +11,9 @@ v-slider($material)
     &:after
       border: 1px solid $material.text.primary
 
-  .v-slider__tick
+  .v-slider__ticks
     border: 1px solid $material.text.primary
+    color: $material.text.secondary
 
   &:not(.v-input--is-dirty)
     .v-slider__thumb-label
@@ -24,6 +25,9 @@ v-slider($material)
     &.v-input--slider--is-active
       .v-slider__thumb
         border: 3px solid $material.slider.active
+
+    .v-slider__ticks:first-child
+      border-color: transparent
 
   &.v-input--is-disabled
     .v-slider__thumb
@@ -64,8 +68,12 @@ rtl(v-slider-rtl, "v-input--slider")
           opacity: 1
 
   &.v-input--slider--ticks
-    .v-slider__tick.v-slider__tick--always-show
+    .v-slider__ticks.v-slider__ticks--always-show
       opacity: 1
+
+    &-labels
+      .v-input__slot
+        margin-bottom: 16px
 
   &.v-input--is-disabled
     .v-slider__thumb
@@ -99,6 +107,7 @@ rtl(v-slider-rtl, "v-input--slider")
 .v-slider
   &__track__container
     height: 2px
+    left: 0
     overflow: hidden
     pointer-events: none
     position: absolute
@@ -118,7 +127,7 @@ rtl(v-slider-rtl, "v-input--slider")
 
   &__track,
   &__thumb,
-  &__tick
+  &__ticks
     position: absolute
     top: 0
 
@@ -145,11 +154,23 @@ rtl(v-slider-rtl, "v-input--slider")
     width: 100%
     top: 50%
     transform: translate(0, -50%)
-    overflow: hidden
 
-  &__tick
-    transition: .3s $transition.swing
+  &__ticks
     opacity: 0
+    transition: .3s $transition.swing
+
+    > span
+      position: absolute
+      top: 8px
+      transform: translateX(-50%)
+      white-space: nowrap
+      user-select: none
+
+    &:first-child > span
+      transform: translateX(0)
+
+    &:last-child > span
+      transform: translateX(-100%)
 
   &__thumb-container
     position: absolute
@@ -211,9 +232,12 @@ rtl(v-slider-rtl, "v-input--slider")
     height: 32px
     border-radius: 50% 50% 0
     position: absolute
-    left: -16px
-    top: -52px
-    transform: rotate(45deg)
+    left: 0
+    bottom: 100%
+    // Needed for IE11 which does not
+    // process translateY(calc(-20% - 12px))
+    // or translate(-50%, calc(-20% - 12px))
+    transform: translateY(-20%) translateY(-12px) translateX(-50%) rotate(45deg)
     user-select: none
     transition: .3s $transition.fast-in-fast-out
 

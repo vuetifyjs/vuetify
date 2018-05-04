@@ -483,4 +483,21 @@ test('VSlider.vue', ({ mount }) => {
 
     expect(warning).toHaveBeenTipped()
   })
+
+  it('should display tick labels', () => {
+    const wrapper = mount(VSlider, {
+      propsData: {
+        max: 1,
+        tickLabels: ['foo', 'bar']
+      }
+    })
+
+    const ticks = wrapper.find('.v-slider__ticks')
+
+    expect(ticks.length).toBe(2)
+    expect(ticks[0].element.firstChild.innerHTML).toBe('foo')
+    expect(ticks[1].element.firstChild.innerHTML).toBe('bar')
+
+    expect(warning).toHaveBeenTipped()
+  })
 })

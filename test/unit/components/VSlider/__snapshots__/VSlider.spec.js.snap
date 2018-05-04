@@ -289,7 +289,9 @@ exports[`VSlider.vue should render component with thumbLabel and match a snapsho
           <div class="v-slider__thumb-label__container"
                style="display: none;"
           >
-            <div class="v-slider__thumb-label">
+            <div class="v-slider__thumb-label"
+                 style="height: 32px; width: 32px;"
+            >
               <span>
                 0
               </span>
@@ -335,7 +337,9 @@ exports[`VSlider.vue should render component with thumbLabel and match a snapsho
           <div class="v-slider__thumb-label__container"
                style="display: none;"
           >
-            <div class="v-slider__thumb-label">
+            <div class="v-slider__thumb-label"
+                 style="height: 32px; width: 32px;"
+            >
               <span>
                 0
               </span>
@@ -374,19 +378,23 @@ exports[`VSlider.vue should render component with ticks and match a snapshot 1`]
           </div>
         </div>
         <div class="v-slider__ticks-container">
-          <span class="v-slider__tick"
+          <span class="v-slider__ticks"
+                style="left: 0%;"
+          >
+          </span>
+          <span class="v-slider__ticks"
                 style="left: 25%;"
           >
           </span>
-          <span class="v-slider__tick"
+          <span class="v-slider__ticks"
                 style="left: 50%;"
           >
           </span>
-          <span class="v-slider__tick"
+          <span class="v-slider__ticks"
                 style="left: 75%;"
           >
           </span>
-          <span class="v-slider__tick"
+          <span class="v-slider__ticks"
                 style="left: 100%;"
           >
           </span>
@@ -429,19 +437,23 @@ exports[`VSlider.vue should render component with ticks and match a snapshot 2`]
           </div>
         </div>
         <div class="v-slider__ticks-container">
-          <span class="v-slider__tick v-slider__tick--always-show"
+          <span class="v-slider__ticks v-slider__ticks--always-show"
+                style="left: 0%;"
+          >
+          </span>
+          <span class="v-slider__ticks v-slider__ticks--always-show"
                 style="left: 25%;"
           >
           </span>
-          <span class="v-slider__tick v-slider__tick--always-show"
+          <span class="v-slider__ticks v-slider__ticks--always-show"
                 style="left: 50%;"
           >
           </span>
-          <span class="v-slider__tick v-slider__tick--always-show"
+          <span class="v-slider__ticks v-slider__ticks--always-show"
                 style="left: 75%;"
           >
           </span>
-          <span class="v-slider__tick v-slider__tick--always-show"
+          <span class="v-slider__ticks v-slider__ticks--always-show"
                 style="left: 100%;"
           >
           </span>

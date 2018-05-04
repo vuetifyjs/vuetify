@@ -86,10 +86,7 @@ test('VRangeSlider.vue', ({ mount }) => {
   })
 
   it('should call on drag', async () => {
-    const onMouseDown = jest.fn()
-    const wrapper = mount(VRangeSlider, {
-      methods: { onMouseDown }
-    })
+    const wrapper = mount(VRangeSlider)
 
     expect(wrapper.vm.isActive).toBe(false)
     expect(wrapper.vm.activeThumb).toBe(null)
@@ -100,7 +97,6 @@ test('VRangeSlider.vue', ({ mount }) => {
 
     expect(wrapper.vm.isActive).toBe(true)
     expect(wrapper.vm.activeThumb).toBe(0)
-    expect(onMouseDown).toBeCalled()
 
     expect(warning).toHaveBeenTipped()
   })

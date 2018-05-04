@@ -14,6 +14,7 @@ import ClickOutside from '../../directives/click-outside'
 // Utilities
 import {
   addOnceEventListener,
+  convertToUnit,
   createRange,
   keyCodes,
   deepEqual
@@ -37,6 +38,7 @@ export default {
   }),
 
   props: {
+    alwaysDirty: Boolean,
     inverseLabel: Boolean,
     label: String,
     min: {
@@ -57,6 +59,10 @@ export default {
       default: false,
       validator: v => typeof v === 'boolean' || v === 'always'
     },
+    tickLabels: {
+      type: Array,
+      default: () => ([])
+    },
     thumbColor: {
       type: String,
       default: null
@@ -65,6 +71,10 @@ export default {
       type: [Boolean, String],
       default: null,
       validator: v => typeof v === 'boolean' || v === 'always'
+    },
+    thumbSize: {
+      type: [Number, String],
+      default: 32
     },
     trackColor: {
       type: String,
@@ -78,11 +88,13 @@ export default {
       return {
         'v-input--slider': true,
         'v-input--slider--ticks': this.showTicks,
-        'v-input--slider--inverse-label': this.inverseLabel
+        'v-input--slider--inverse-label': this.inverseLabel,
+        'v-input--slider--ticks-labels': this.tickLabels.length > 0
       }
     },
     showTicks () {
-      return !this.disabled && this.stepNumeric && !!this.ticks
+      return this.tickLabels.length > 0 ||
+        (!this.disabled && this.stepNumeric && !!this.ticks)
     },
     showThumbLabel () {
       return !this.disabled && (
@@ -171,7 +183,8 @@ export default {
       return (this.roundValue(this.internalValue) - this.min) / (this.max - this.min) * 100
     },
     isDirty () {
-      return this.internalValue > this.min
+      return this.internalValue > this.min ||
+        this.alwaysDirty
     }
   },
 
@@ -262,9 +275,7 @@ export default {
           this.internalValue,
           this.inputWidth,
           this.isFocused || this.isActive,
-          e => {
-            this.onThumbMouseDown(e)
-          }
+          this.onThumbMouseDown
         )
       ]
     },
@@ -272,18 +283,23 @@ export default {
       if (!this.step || !this.showTicks) return null
 
       const ticks = createRange(this.numTicks + 1).map(i => {
-        const span = this.$createElement('span', {
+        const children = []
+
+        if (this.tickLabels[i]) {
+          children.push(this.$createElement('span', this.tickLabels[i]))
+        }
+
+        return this.$createElement('span', {
           key: i,
-          staticClass: 'v-slider__tick',
+          staticClass: 'v-slider__ticks',
           class: {
-            'v-slider__tick--always-show': this.ticks === 'always'
+            'v-slider__ticks--always-show': this.ticks === 'always' ||
+              this.tickLabels.length > 0
           },
           style: {
             left: `${i * (100 / this.numTicks)}%`
           }
-        })
-
-        return i === 0 && !this.isDirty ? null : span
+        }, children)
       })
 
       return this.$createElement('div', {
@@ -319,6 +335,8 @@ export default {
       }, children)
     },
     genThumbLabel (content) {
+      const size = convertToUnit(this.thumbSize)
+
       return this.$createElement(VScaleTransition, {
         props: { origin: 'bottom center' }
       }, [
@@ -333,7 +351,11 @@ export default {
         }, [
           this.$createElement('div', {
             staticClass: 'v-slider__thumb-label',
-            'class': this.addBackgroundColorClassChecks({}, this.computedThumbColor)
+            'class': this.addBackgroundColorClassChecks({}, this.computedThumbColor),
+            style: {
+              height: size,
+              width: size
+            }
           }, [content])
         ])
       ])
@@ -360,7 +382,7 @@ export default {
     getLabel (value) {
       return this.$scopedSlots['thumb-label']
         ? this.$scopedSlots['thumb-label']({ value })
-        : this.$createElement('span', {}, value)
+        : this.$createElement('span', value)
     },
     onBlur (e) {
       if (this.keyPressed === 2) return
