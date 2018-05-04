@@ -42,7 +42,7 @@ declare interface VuetifyObject extends Vue {
   theme: VuetifyTheme | false
   icons: VuetifyIcons
   options: VuetifyOptions
-  goTo: (target: string | number | HTMLElement | Vue, options?: VuetifyGoToOptions) => void
+  goTo: <T extends string | number | HTMLElement | Vue>(target: T, options?: VuetifyGoToOptions) => Promise<T>
 }
 
 declare module 'vue/types/vue' {
