@@ -4,22 +4,22 @@
       <v-flex xs12 lg6>
         <v-menu
           ref="menu1"
-          lazy
           :close-on-content-click="false"
           v-model="menu1"
+          :nudge-right="40"
+          lazy
           transition="scale-transition"
           offset-y
           full-width
-          :nudge-right="40"
           max-width="290px"
           min-width="290px"
         >
           <v-text-field
             slot="activator"
+            v-model="dateFormatted"
             label="Date"
             hint="MM/DD/YYYY format"
             persistent-hint
-            v-model="dateFormatted"
             prepend-icon="event"
             @blur="date = parseDate(dateFormatted)"
           ></v-text-field>
@@ -30,22 +30,22 @@
 
       <v-flex xs12 lg6>
         <v-menu
-          lazy
           :close-on-content-click="false"
           v-model="menu2"
+          :nudge-right="40"
+          lazy
           transition="scale-transition"
           offset-y
           full-width
-          :nudge-right="40"
           max-width="290px"
           min-width="290px"
         >
           <v-text-field
             slot="activator"
+            v-model="computedDateFormatted"
             label="Date (read only text field)"
             hint="MM/DD/YYYY format"
             persistent-hint
-            v-model="computedDateFormatted"
             prepend-icon="event"
             readonly
           ></v-text-field>
