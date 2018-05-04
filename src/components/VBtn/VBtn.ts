@@ -2,6 +2,7 @@
 import '../../stylus/components/_buttons.styl'
 
 import Vue, { VNode, ComponentOptions, VNodeChildren } from 'vue'
+import { PropValidator } from 'vue/types/options'
 import mixins from '../../util/mixins'
 
 // Components
@@ -52,7 +53,7 @@ export default mixins(
       type: String,
       default: 'button'
     },
-    value: null
+    value: null as any as PropValidator<any>
   },
 
   computed: {
