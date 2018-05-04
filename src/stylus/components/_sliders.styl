@@ -52,6 +52,9 @@ rtl(v-slider-rtl, "v-input--slider")
 
 /** Input Group */
 .v-input--slider
+  &:not(.v-input--slider--thumb-label)
+    margin-top: 0
+
   &.v-input--is-focused
     .v-slider__thumb-container--is-active:not(.v-slider__thumb-container--show-label)
       &:before

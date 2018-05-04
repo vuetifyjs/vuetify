@@ -89,7 +89,9 @@ export default {
         'v-input--slider': true,
         'v-input--slider--ticks': this.showTicks,
         'v-input--slider--inverse-label': this.inverseLabel,
-        'v-input--slider--ticks-labels': this.tickLabels.length > 0
+        'v-input--slider--ticks-labels': this.tickLabels.length > 0,
+        'v-input--slider--thumb-label': this.thumbLabel ||
+          this.$scopedSlots.thumbLabel
       }
     },
     showTicks () {

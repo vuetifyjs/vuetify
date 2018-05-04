@@ -251,6 +251,10 @@ rtl(v-text-field-rtl, "v-text-field")
     .v-input__append-inner
       align-self: flex-start
 
+  // For specificity
+  &.v-text-field--single-line
+    margin-top: 0
+
   &.v-text-field--solo,
   &.v-text-field--box.v-text-field--single-line,
   &.v-text-field--outline.v-text-field--single-line

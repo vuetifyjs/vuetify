@@ -263,7 +263,7 @@ exports[`VSlider.vue should match a snapshot 1`] = `
 
 exports[`VSlider.vue should render component with thumbLabel and match a snapshot 1`] = `
 
-<div class="v-input v-input--slider">
+<div class="v-input v-input--slider v-input--slider--thumb-label">
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-slider">
@@ -311,7 +311,7 @@ exports[`VSlider.vue should render component with thumbLabel and match a snapsho
 
 exports[`VSlider.vue should render component with thumbLabel and match a snapshot 2`] = `
 
-<div class="v-input v-input--slider">
+<div class="v-input v-input--slider v-input--slider--thumb-label">
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-slider">
