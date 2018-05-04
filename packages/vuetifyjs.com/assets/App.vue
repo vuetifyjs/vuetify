@@ -29,11 +29,11 @@
 
     components: {
       AppDrawer,
-        AppFab,
-          AppSnackbar,
-            AppToolbar,
-              AppView
-                },
+      AppFab,
+      AppSnackbar,
+      AppToolbar,
+      AppView
+    },
 
     mixins: [Meta],
 

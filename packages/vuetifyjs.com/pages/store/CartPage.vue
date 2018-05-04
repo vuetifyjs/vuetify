@@ -89,7 +89,7 @@
   export default {
     components: {
       StoreHeader
-        },
+    },
 
     mixins: [asyncData],
 

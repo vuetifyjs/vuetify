@@ -202,7 +202,7 @@
       supports: vm.$t('Vuetify.AppToolbar.supports'),
       fixed: false,
       languages,
-        socials: vm.$t('Vuetify.AppToolbar.socials')
+      socials: vm.$t('Vuetify.AppToolbar.socials')
     }),
 
     computed: {

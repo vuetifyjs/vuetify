@@ -46,8 +46,8 @@
   export default {
     components: {
       StoreHeader,
-        StoreProduct
-          },
+      StoreProduct
+    },
 
     mixins: [asyncData],
 
