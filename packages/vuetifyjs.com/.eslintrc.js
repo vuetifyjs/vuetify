@@ -31,12 +31,11 @@ module.exports = {
       files: '**/*.vue',
       rules: {
         indent: false,
-        // TODO: This breaks with shorthand property names (d40508db)
-        /* "vue/script-indent": ["error", 2, {
+        "vue/script-indent": ["error", 2, {
           "baseIndent": 1,
           "switchCase": 1,
           "ignores": []
-        }] */
+        }]
       }
     },
     {
