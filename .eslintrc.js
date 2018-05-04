@@ -16,7 +16,8 @@ module.exports = {
     'describe': true,
     'it': true,
     'jest': true,
-    'process': true
+    'process': true,
+    '__REQUIRED_VUE__': true
   },
   plugins: [
     'typescript',

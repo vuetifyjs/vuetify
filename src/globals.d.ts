@@ -8,6 +8,9 @@ declare global {
   interface Window {
     Vue: VueConstructor
   }
+
+  export const __VUETIFY_VERSION__: string
+  export const __REQUIRED_VUE__: string
 }
 
 declare module 'vue/types/vue' {
@@ -20,6 +23,7 @@ declare module 'vue/types/vue' {
   >
 
   export interface RawComponentOptions<V extends Vue = Vue, Data = {}, Methods = {}, Computed = {}, Props = {}> {
+    name?: string
     data?: Data
     methods?: Methods
     computed?: {

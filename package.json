@@ -9,8 +9,9 @@
   "homepage": "http://vuetifyjs.com",
   "repository": "vuetifyjs/vuetify",
   "main": "dist/vuetify.js",
+  "module": "dist/vuetify.js",
   "unpkg": "dist/vuetify.js",
-  "types": "index.d.ts",
+  "types": "types/index.d.ts",
   "scripts": {
     "watch": "cross-env TARGET=development webpack --config build/config.js --progress --hide-modules --watch",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.config.js --open --hot",

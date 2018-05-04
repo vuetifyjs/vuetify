@@ -2,7 +2,7 @@ import VIcon from './VIcon'
 
 /* istanbul ignore next */
 VIcon.install = function install (Vue) {
-  Vue.component((VIcon as any).options.name, VIcon)
+  Vue.component(VIcon.options.name, VIcon)
 }
 
 export default VIcon
