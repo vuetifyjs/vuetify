@@ -12,7 +12,7 @@
   export default {
     components: {
       NotFoundPage
-        },
+    },
 
     props: {
       lang: {
@@ -24,7 +24,7 @@
     data: () => ({
       availableLocales: languages.map(lang => lang.locale),
       languages
-        }),
+    }),
 
     computed: {
       ...mapState('app', {

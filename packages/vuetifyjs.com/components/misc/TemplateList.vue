@@ -93,7 +93,7 @@
   export default {
     components: {
       HelpMeChoose
-        },
+    },
 
     data: vm => ({
       copied: false,

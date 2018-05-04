@@ -12,6 +12,6 @@
   export default {
     components: {
       AppFooter
-        }
-        }
+    }
+  }
 </script>
