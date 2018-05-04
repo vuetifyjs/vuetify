@@ -729,4 +729,20 @@ test('VTextField.js', ({ mount }) => {
     expect(wrapper.element.id).toBe('')
     expect(input.element.id).toBe('foo')
   })
+
+  it('should fire change event when pressing enter', () => {
+    const wrapper = mount(VTextField)
+    const input = wrapper.first('input')
+    const change = jest.fn()
+
+    wrapper.vm.$on('change', change)
+
+    input.trigger('focus')
+    input.element.value = 'foo'
+    input.trigger('input')
+    input.trigger('keydown.enter')
+    input.trigger('keydown.enter')
+
+    expect(change).toHaveBeenCalledTimes(2)
+  })
 })

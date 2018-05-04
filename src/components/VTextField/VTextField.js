@@ -14,6 +14,11 @@ import Maskable from '../../mixins/maskable'
 // Directives
 import Ripple from '../../directives/ripple'
 
+// Utilities
+import {
+  keyCodes
+} from '../../util/helpers'
+
 const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
 
 export default {
@@ -342,8 +347,10 @@ export default {
       this.internalValue = e.target.value
       this.badInput = e.target.validity && e.target.validity.badInput
     },
-    onKeyDown () {
+    onKeyDown (e) {
       this.internalChange = true
+
+      if (e.keyCode === keyCodes.enter) this.$emit('change', this.internalValue)
     },
     onMouseDown (e) {
       // Prevent input from being blurred
