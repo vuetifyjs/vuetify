@@ -9,6 +9,13 @@ v-input--switch($material)
   &__track
     color: $material.selection-controls.track.inactive
 
+  &.v-input--is-disabled
+    .v-input--switch__thumb
+      color: $material.selection-controls.thumb.disabled !important
+
+    .v-input--switch__track
+      color: $material.selection-controls.track.disabled !important
+
 v-input--switch-rtl()
   .v-input--selection-controls__ripple
     left: auto

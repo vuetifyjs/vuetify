@@ -156,9 +156,6 @@ export default {
     isDirty () {
       return this.selectedItems.length > 0
     },
-    isDisabled () {
-      return this.disabled || this.readonly
-    },
     isMulti () {
       return this.multiple
     }

@@ -61,12 +61,14 @@ export default {
       type: String,
       default: '$vuetify.icons.radioOff'
     },
+    readonly: Boolean,
     value: null
   },
 
   computed: {
     classes () {
       const classes = {
+        'v-radio--is-disabled': this.isDisabled,
         'v-radio--is-focused': this.isFocused,
         'theme--dark': this.dark,
         'theme--light': this.light
@@ -91,6 +93,9 @@ export default {
     },
     hasState () {
       return this.isActive || !!this.validationStateProxy
+    },
+    isDisabled () {
+      return this.disabled || this.readonly
     },
     validationStateProxy () {
       return this.validationState && this.validationState()

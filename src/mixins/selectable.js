@@ -119,7 +119,7 @@ export default {
       this.isFocused = false
     },
     onChange () {
-      if (this.disabled) return
+      if (this.isDisabled) return
 
       const value = this.value
       let input = this.internalValue
