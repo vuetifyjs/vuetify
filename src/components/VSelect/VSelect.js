@@ -71,7 +71,6 @@ export default {
     contentClass: String,
     deletableChips: Boolean,
     dense: Boolean,
-    editable: Boolean,
     hideSelected: Boolean,
     items: {
       type: Array,
@@ -104,12 +103,10 @@ export default {
     multiple: Boolean,
     multiLine: Boolean,
     openOnClear: Boolean,
-    overflow: Boolean,
     returnObject: Boolean,
     searchInput: {
       default: null
     },
-    segmented: Boolean,
     smallChips: Boolean,
     singleLine: Boolean
   },
@@ -158,6 +155,18 @@ export default {
     },
     isMulti () {
       return this.multiple
+    },
+    menuProps () {
+      const nudgeMenu = !this.isSolo && !this.box
+
+      return {
+        closeOnClick: false,
+        closeOnContentClick: false,
+        openOnClick: false,
+        value: this.isMenuActive,
+        offsetY: this.offsetY || nudgeMenu,
+        nudgeBottom: nudgeMenu ? 2 : 0 // convert to int
+      }
     }
   },
 
@@ -329,7 +338,6 @@ export default {
         contentClass: this.contentClass
       }
       const inheritedProps = Object.keys(VMenu.props).concat(Object.keys(Menuable.props))
-      const nudgeMenu = !this.isSolo && !this.box
 
       // Later this might be filtered
       for (let prop of inheritedProps) {
@@ -345,12 +353,7 @@ export default {
         props.activator = this.$refs['input-slot']
       }
 
-      props.closeOnClick = false
-      props.closeOnContentClick = false
-      props.openOnClick = false
-      props.value = this.isMenuActive
-      props.offsetY = this.offsetY || nudgeMenu
-      props.nudgeBottom = nudgeMenu ? 2 : 0 // convert to int
+      Object.assign(props, this.menuProps)
 
       return this.$createElement(VMenu, {
         props,
@@ -465,7 +468,7 @@ export default {
         this.isMenuActive = false
       } else {
         const internalValue = (this.internalValue || []).slice()
-        const i = this.findExistingIndex(item, internalValue)
+        const i = this.findExistingIndex(item)
 
         i !== -1 ? internalValue.splice(i, 1) : internalValue.push(item)
         this.internalValue = internalValue.map(i => {
@@ -489,7 +492,7 @@ export default {
           this.getValue(i),
           this.getValue(this.internalValue)
         )
-        : i => this.findExistingIndex(i, this.internalValue) > -1
+        : i => this.findExistingIndex(i) > -1
 
       this.selectedItems = this.computedItems.filter(fn)
     }

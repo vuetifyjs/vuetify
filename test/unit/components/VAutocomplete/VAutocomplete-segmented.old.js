@@ -1,24 +1,3 @@
-// it.skip('should warn when using incorrect item together with segmented prop', async () => {
-//     const items = [
-//       { text: 'Hello', callback: () => {} },
-//       { text: 'Hello' }
-//     ]
-
-//     const wrapper = mount(VSelect, {
-//       propsData: {
-//         segmented: true,
-//         items
-//       }
-//     })
-
-//     wrapper.vm.inputValue = items[1]
-
-//     await wrapper.vm.$nextTick()
-
-//     expect('Unable to locate target [data-app]').toHaveBeenTipped()
-//     expect('items must contain both a text and callback property').toHaveBeenTipped()
-//   })
-
 // it.skip('should render buttons correctly when using items array with segmented prop', async () => {
 //     const items = [
 //       { text: 'Hello', callback: () => {} }
