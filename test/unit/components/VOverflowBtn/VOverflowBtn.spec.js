@@ -3,7 +3,7 @@ import VOverflowBtn from '@/components/VOverflowBtn'
 
 test('VOverflowBtn', ({ mount }) => {
 
-  it.skip('segmented - should warn when item has no callback', async () => {
+  it('segmented - should warn when item has no callback', async () => {
     const items = [
       { text: 'Hello', callback: () => {} },
       { text: 'Hello' }
@@ -16,7 +16,7 @@ test('VOverflowBtn', ({ mount }) => {
       }
     })
 
-    wrapper.vm.inputValue = items[1]
+    wrapper.vm.internalValue = items[1]
 
     await wrapper.vm.$nextTick()
 
