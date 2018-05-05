@@ -15,12 +15,12 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.vm.isMenuActive).toBe(false)
 
+    // Box should not trigger from wrapper clicks
     wrapper.setProps({ box: true })
     wrapper.trigger('mouseup')
 
-    expect(wrapper.vm.isMenuActive).toBe(true)
+    expect(wrapper.vm.isMenuActive).toBe(false)
 
-    wrapper.setData({ isMenuActive: false })
     wrapper.setProps({ box: false, solo: true })
     wrapper.trigger('mouseup')
 

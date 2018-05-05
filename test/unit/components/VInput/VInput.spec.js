@@ -112,7 +112,7 @@ test('VInput.js', ({ mount }) => {
   it('should accept a custom height', () => {
     const wrapper = mount(VInput)
 
-    const inputWrapper = wrapper.find('.v-input__control')[0]
+    const inputWrapper = wrapper.first('.v-input__slot')
     expect(inputWrapper.element.style.height).toBe('')
     expect(wrapper.vm.height).toBe(undefined)
 

@@ -117,7 +117,7 @@ export default {
         this.badInput
     },
     isEnclosed () {
-      return this.isSolo || this.box || this.hasOutline
+      return this.isSolo || this.hasOutline
     },
     isLabelActive () {
       return this.isDirty || dirtyTypes.includes(this.type)
@@ -366,7 +366,7 @@ export default {
       // Mouse events are to enable specific
       // input types when clicked
       if (
-        (this.isSolo || this.box || this.hasOutline) &&
+        (this.isSolo || this.hasOutline) &&
         document.activeElement !== this.$refs.input
       ) {
         this.$refs.input.focus()

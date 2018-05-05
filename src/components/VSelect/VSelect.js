@@ -339,8 +339,10 @@ export default {
       // These styles encompass the prepend
       // and append icons. Change activator
       // to the entire component
-      if (this.isSolo || this.box) {
+      if (this.isSolo) {
         props.activator = this.$el
+      } else {
+        props.activator = this.$refs['input-slot']
       }
 
       props.closeOnClick = false
@@ -436,7 +438,7 @@ export default {
       }
     },
     onMouseUp (e) {
-      if (this.isSolo || this.box || this.hasOutline) {
+      if (this.isSolo || this.hasOutline) {
         this.isMenuActive = true
       }
 

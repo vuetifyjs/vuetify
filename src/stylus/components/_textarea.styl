@@ -13,14 +13,10 @@ theme(v-textarea, "v-textarea")
     min-height: 32px
     outline: none
 
-  .v-input__append-inner
-    align-self: flex-start
-    margin-top: 6px
-
   &.v-text-field--box,
   &.v-text-field--enclosed
     textarea
-      margin-top: 8px
+      margin-top: 24px
 
     &.v-text-field--single-line
       textarea
@@ -33,15 +29,11 @@ theme(v-textarea, "v-textarea")
         .v-input__control
           padding-top: 0
 
-  // For specificity
-  &.v-textarea.v-text-field--box,
-  &.v-textarea.v-text-field--enclosed
-    .v-input__prepend-outer,
-    .v-input__append-inner,
-    .v-input__append-outer
+  &.v-text-field--solo
+    align-items: flex-start
+
+    // Essentially revert styles
+    // applied by v-text-field
+    .v-input__append-inner
       align-self: flex-start
       margin-top: 16px
-
-    &:not(.v-text-field--single-line)
-      .v-input__append-inner
-        margin-top: 0

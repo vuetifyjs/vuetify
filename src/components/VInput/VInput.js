@@ -98,8 +98,7 @@ export default {
   methods: {
     genContent () {
       return this.$createElement('div', {
-        staticClass: 'v-input__control',
-        style: { height: convertToUnit(this.height) }
+        staticClass: 'v-input__control'
       }, [
         this.genInputSlot(),
         this.genMessages()
@@ -145,7 +144,10 @@ export default {
           {},
           this.hasState ? this.validationState : this.color
         ),
-        on: { click: this.onClick }
+        style: { height: convertToUnit(this.height) },
+        directives: this.directivesInput,
+        on: { click: this.onClick },
+        ref: 'input-slot'
       }, this.genDefaultSlot())
     },
     genMessages () {
@@ -217,7 +219,6 @@ export default {
       staticClass: 'v-input',
       attrs: this.attrsInput,
       'class': this.classesInput,
-      directives: this.directivesInput,
       on: {
         mousedown: this.onMouseDown,
         mouseup: this.onMouseUp
