@@ -660,4 +660,36 @@ test('VAutocomplete.js', ({ mount, shallow }) => {
 
     expect(wrapper.vm.getMenuIndex()).toBe(-1)
   })
+
+  it('should not remove a disabled item', () => {
+    const wrapper = mount(VAutocomplete, {
+      propsData: {
+        chips: true,
+        multiple: true,
+        items: [
+          { text: 'foo', value: 'foo', disabled: true },
+          { text: 'bar', value: 'bar' },
+        ],
+        value: ['foo', 'bar']
+      }
+    })
+
+    const chips = wrapper.find('.v-chip')
+    const input = wrapper.first('input')
+
+    expect(chips[0].element.classList.contains('v-chip--disabled')).toBe(true)
+
+    input.trigger('focus')
+    input.trigger('keydown.left')
+
+    expect(wrapper.vm.selectedIndex).toBe(1)
+
+    input.trigger('keydown.delete')
+
+    expect(wrapper.vm.internalValue).toEqual(['foo'])
+
+    input.trigger('keydown.delete')
+
+    expect(wrapper.vm.internalValue).toEqual(['foo'])
+  })
 })

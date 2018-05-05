@@ -377,13 +377,13 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.vm.selectedIndex).toBe(-1)
 
-    const foo = wrapper.first('.chip--select-multi')
+    const foo = wrapper.first('.v-chip--select-multi')
     foo.trigger('click')
 
     expect(wrapper.vm.selectedIndex).toBe(0)
     expect(onFocus).toHaveBeenCalledTimes(1)
 
-    wrapper.find('.chip--select-multi')[1].trigger('click')
+    wrapper.find('.v-chip--select-multi')[1].trigger('click')
 
     expect(wrapper.vm.selectedIndex).toBe(1)
     expect(onFocus).toHaveBeenCalledTimes(2)
@@ -392,7 +392,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     await wrapper.vm.$nextTick()
 
-    wrapper.first('.chip--select-multi').trigger('click')
+    wrapper.first('.v-chip--select-multi').trigger('click')
 
     expect(wrapper.vm.selectedIndex).toBe(1)
     expect(onFocus).toHaveBeenCalledTimes(2)

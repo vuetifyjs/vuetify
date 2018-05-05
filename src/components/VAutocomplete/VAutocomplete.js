@@ -187,7 +187,14 @@ export default {
         return
       }
 
-      if ([keyCodes.backspace, keyCodes.delete].includes(keyCode)) {
+      const currentItem = this.selectedItems[this.selectedIndex]
+
+      if ([
+        keyCodes.backspace,
+        keyCodes.delete
+      ].includes(keyCode) &&
+        !this.getDisabled(currentItem)
+      ) {
         const newIndex = this.selectedIndex === indexes
           ? this.selectedIndex - 1
           : this.selectedItems[this.selectedIndex + 1]
@@ -197,7 +204,7 @@ export default {
         if (newIndex === -1) {
           this.internalValue = this.isMulti ? [] : undefined
         } else {
-          this.selectItem(this.selectedItems[this.selectedIndex])
+          this.selectItem(currentItem)
         }
 
         this.selectedIndex = newIndex

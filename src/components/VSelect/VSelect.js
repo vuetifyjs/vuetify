@@ -204,7 +204,11 @@ export default {
       return (this.internalValue || []).findIndex(i => this.valueComparator(this.getValue(i), itemValue))
     },
     genChipSelection (item, index) {
-      const isDisabled = this.disabled || this.readonly
+      const isDisabled = (
+        this.disabled ||
+        this.readonly ||
+        this.getDisabled(item)
+      )
       const click = e => {
         if (isDisabled) return
 
@@ -214,7 +218,7 @@ export default {
       }
 
       return this.$createElement(VChip, {
-        staticClass: 'chip--select-multi',
+        staticClass: 'v-chip--select-multi',
         props: {
           close: this.deletableChips && !isDisabled,
           dark: this.dark,
@@ -244,11 +248,21 @@ export default {
       // TODO: Remove JSON.stringify
       const key = JSON.stringify(this.getValue(item))
 
+      const isDisabled = (
+        this.disabled ||
+        this.readonly ||
+        this.getDisabled(item)
+      )
+
+      const classes = index === this.selectedIndex
+        ? this.addTextColorClassChecks()
+        : {}
+
+      classes['v-select__selection--disabled'] = isDisabled
+
       return this.$createElement('div', {
         staticClass: 'v-select__selection v-select__selection--comma',
-        'class': index === this.selectedIndex
-          ? this.addTextColorClassChecks()
-          : null,
+        'class': classes,
         key
       }, `${this.getText(item)}${last ? '' : ', '}`)
     },
@@ -397,6 +411,9 @@ export default {
     },
     getMenuIndex () {
       return this.$refs.menu ? this.$refs.menu.listIndex : -1
+    },
+    getDisabled (item) {
+      return getPropertyFromItem(item, this.itemDisabled, false)
     },
     getText (item) {
       return getPropertyFromItem(item, this.itemText, item)
