@@ -1,30 +1,51 @@
- @import '../bootstrap'
- @import '../theme'
+@import '../bootstrap'
+@import '../theme'
 
- v-overflow-btn($material)
+v-overflow-btn($material)
   .v-input__control,
   .v-input__slot
     &::before
-      background-color: $material.dividers
+      background-color: $material.dividers !important // override v-text-field bottom border
+
+  &--segmented,
+  &--editable:hover,
+  &--editable.v-input--is-focused,
+  &--editable.v-select--is-menu-active
+    .v-input__append-inner
+      border-left: 1px solid $material.dividers
+
+  &:hover,
+  &.v-input--is-focused,
+  &.v-select--is-menu-active
+    .v-input__slot
+      background: $material.cards
 
 theme(v-overflow-btn, "v-overflow-btn")
 
 .v-overflow-btn
   margin-top: 12px
 
-  .v-label
-    position: static
-    padding-left: 16px
-
   .v-select__slot
     height: 48px
 
+    input
+      margin-left: 16px
+
+  .v-input__slot
+    transition: .3s $transition.swing
+
+    &::after
+      content: none
+
   .v-label
     top: auto
+    left: 16px !important // Override inline css ò_ó
 
   .v-input__append-inner
-    width: 55px
+    width: 42px
+    height: 48px
     align-self: auto
+    align-items: center
     margin-top: 0
 
   .v-input__append-outer,
@@ -42,13 +63,24 @@ theme(v-overflow-btn, "v-overflow-btn")
       transition: $primary-transition
       width: 100%
 
+  &.v-input--is-focused,
+  &.v-select--is-menu-active
+    .v-input__slot
+      elevation(8)
+
   &--segmented
     .v-select__selections
+      flex-wrap: nowrap
+
       .v-btn
-        border-radius: 0;
-        margin: 0;
-        height: 48px;
-        width: 100%;
+        border-radius: 0
+        margin: 0
+        margin-right: -16px // push past the input's padding
+        height: 48px
+        width: 100%
 
         &__content
           justify-content: start
+
+          &::before
+            background-color: transparent

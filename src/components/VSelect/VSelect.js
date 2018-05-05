@@ -155,6 +155,18 @@ export default {
     },
     isMulti () {
       return this.multiple
+    },
+    menuProps () {
+      const nudgeMenu = !this.isSolo && !this.box
+
+      return {
+        closeOnClick: false,
+        closeOnContentClick: false,
+        openOnClick: false,
+        value: this.isMenuActive,
+        offsetY: this.offsetY || nudgeMenu,
+        nudgeBottom: nudgeMenu ? 2 : 0 // convert to int
+      }
     }
   },
 
@@ -326,7 +338,6 @@ export default {
         contentClass: this.contentClass
       }
       const inheritedProps = Object.keys(VMenu.props).concat(Object.keys(Menuable.props))
-      const nudgeMenu = !this.isSolo && !this.box
 
       // Later this might be filtered
       for (let prop of inheritedProps) {
@@ -342,12 +353,7 @@ export default {
         props.activator = this.$refs['input-slot']
       }
 
-      props.closeOnClick = false
-      props.closeOnContentClick = false
-      props.openOnClick = false
-      props.value = this.isMenuActive
-      props.offsetY = this.offsetY || nudgeMenu
-      props.nudgeBottom = nudgeMenu ? 2 : 0 // convert to int
+      Object.assign(props, this.menuProps)
 
       return this.$createElement(VMenu, {
         props,

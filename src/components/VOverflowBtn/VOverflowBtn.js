@@ -19,14 +19,16 @@ export default {
 
   props: {
     segmented: Boolean,
-    editable: Boolean
+    editable: Boolean,
+    transition: VSelect.props.transition
   },
 
   computed: {
     classes () {
       return Object.assign(VAutocomplete.computed.classes.call(this), {
         'v-overflow-btn': true,
-        'v-overflow-btn--segmented': this.segmented
+        'v-overflow-btn--segmented': this.segmented,
+        'v-overflow-btn--editable': this.editable
       })
     },
     isAnyValueAllowed () {
@@ -34,19 +36,20 @@ export default {
     },
     isSingle () {
       return true
+    },
+    menuProps () {
+      return Object.assign(VSelect.computed.menuProps.call(this), {
+        nudgeBottom: 1
+      })
     }
   },
 
   methods: {
-    genSelections () {
-      // Override VAutocomplete's override
-      return VSelect.methods.genSelections.call(this)
-    },
     genCommaSelection (item) {
       if (this.segmented) {
         return this.genSegmentedBtn(item)
       } else {
-        return VAutocomplete.methods.genCommaSelection.call(this, item)
+        return VSelect.methods.genCommaSelection.call(this, item)
       }
     },
     genInput () {
@@ -83,5 +86,16 @@ export default {
         }
       }, [item.text])
     },
+    setSelectedItems () {
+      if (this.internalValue == null) {
+        this.selectedItems = []
+      } else {
+        this.selectedItems = [this.internalValue]
+      }
+    },
+    updateSelf () {
+      if (this.editable) this.updateCombobox()
+      else VAutocomplete.methods.updateSelf.call(this)
+    }
   }
 }
