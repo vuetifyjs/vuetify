@@ -71,7 +71,6 @@ export default {
     contentClass: String,
     deletableChips: Boolean,
     dense: Boolean,
-    editable: Boolean,
     hideSelected: Boolean,
     items: {
       type: Array,
@@ -104,12 +103,10 @@ export default {
     multiple: Boolean,
     multiLine: Boolean,
     openOnClear: Boolean,
-    overflow: Boolean,
     returnObject: Boolean,
     searchInput: {
       default: null
     },
-    segmented: Boolean,
     smallChips: Boolean,
     singleLine: Boolean
   },

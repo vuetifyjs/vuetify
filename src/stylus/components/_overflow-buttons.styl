@@ -1,0 +1,38 @@
+ @import '../bootstrap'
+ @import '../theme'
+
+ v-overflow-btn($material)
+  .v-input__control,
+  .v-input__slot
+    &::before
+      background-color: $material.dividers
+
+theme(v-overflow-btn, "v-overflow-btn")
+
+.v-overflow-btn
+  margin-top: 12px
+
+  .v-select__slot
+    height: 48px
+
+  .v-label
+    top: auto
+
+  .v-input__append-inner
+    align-self: auto
+    margin-top: 0
+
+  .v-input__append-outer,
+  .v-input__prepend-outer
+    margin-top: 12px
+    margin-bottom: 12px
+
+  .v-input__control::before
+      // TODO: move to mixin
+      height: 1px
+      top: -1px
+      content: ''
+      left: 0
+      position: absolute
+      transition: $primary-transition
+      width: 100%
