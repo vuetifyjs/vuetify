@@ -28,6 +28,8 @@ const wrapper = {
     }
 
     if (props.autocomplete || props.combobox || props.tags) {
+      data.attrs.combobox = props.combobox
+      data.attrs.tags = props.tags
       return h(VAutocomplete, data, children)
     } else {
       return h(VSelect, data, children)
