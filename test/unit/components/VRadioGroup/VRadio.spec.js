@@ -230,7 +230,23 @@ test('VRadio.vue', ({ mount }) => {
     wrapper.vm.onChange()
 
     expect(change).toBeCalled()
+    expect(warning).toHaveBeenTipped()
+  })
 
+
+  it('should use custom icons', () => {
+    const wrapper = mount(VRadio, {
+      propsData: {
+        onIcon: 'foo',
+        offIcon: 'bar'
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setData({ isActive: true })
+
+    expect(wrapper.html()).toMatchSnapshot()
     expect(warning).toHaveBeenTipped()
   })
 })

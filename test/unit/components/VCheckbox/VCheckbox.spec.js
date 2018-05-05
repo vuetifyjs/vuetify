@@ -356,4 +356,22 @@ test('VCheckbox.js', ({ mount }) => {
     const input = wrapper.first('input')
     expect(input.element.id).toBe('foo')
   })
+
+  it('should use custom icons', () => {
+    const wrapper = mount(VCheckbox, {
+      propsData: {
+        indeterminateIcon: 'fizzbuzz',
+        onIcon: 'foo',
+        offIcon: 'bar',
+        indeterminate: true,
+        value: 'fizz'
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+    wrapper.setData({ value: 'fizz'})
+    expect(wrapper.html()).toMatchSnapshot()
+    wrapper.setData({ value: 'buzz'})
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

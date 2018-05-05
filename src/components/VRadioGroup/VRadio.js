@@ -52,8 +52,16 @@ export default {
       default: 'accent'
     },
     disabled: Boolean,
-    value: null,
-    label: String
+    label: String,
+    onIcon: {
+      type: String,
+      default: '$vuetify.icons.radioOn'
+    },
+    offIcon: {
+      type: String,
+      default: '$vuetify.icons.radioOff'
+    },
+    value: null
   },
 
   computed: {
@@ -78,8 +86,8 @@ export default {
     },
     computedIcon () {
       return this.isActive
-        ? '$vuetify.icons.radioOn'
-        : '$vuetify.icons.radioOff'
+        ? this.onIcon
+        : this.offIcon
     },
     hasState () {
       return this.isActive || !!this.validationStateProxy

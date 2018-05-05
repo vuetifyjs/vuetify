@@ -21,7 +21,19 @@ export default {
   }),
 
   props: {
-    indeterminate: Boolean
+    indeterminate: Boolean,
+    indeterminateIcon: {
+      type: String,
+      default: '$vuetify.icons.checkboxIndeterminate'
+    },
+    onIcon: {
+      type: String,
+      default: '$vuetify.icons.checkboxOn'
+    },
+    offIcon: {
+      type: String,
+      default: '$vuetify.icons.checkboxOff'
+    }
   },
 
   computed: {
@@ -33,11 +45,11 @@ export default {
     },
     computedIcon () {
       if (this.inputIndeterminate) {
-        return '$vuetify.icons.checkboxIndeterminate'
+        return this.indeterminateIcon
       } else if (this.isActive) {
-        return '$vuetify.icons.checkboxOn'
+        return this.onIcon
       } else {
-        return '$vuetify.icons.checkboxOff'
+        return this.offIcon
       }
     }
   },
