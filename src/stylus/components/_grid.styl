@@ -27,8 +27,6 @@
   &.grid-list
     for $size, $gutter in $grid-gutters
       &-{$size}
-        padding: $gutter
-
         .layout
           .flex
             padding: ($gutter / 2)
@@ -184,6 +182,6 @@ for size, width in $grid-breakpoints
 
 .d-inline-block
   display: inline-block !important
-  
+
 .d-inline
   display: inline !important
