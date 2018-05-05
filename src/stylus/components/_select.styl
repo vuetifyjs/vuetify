@@ -15,6 +15,10 @@ v-select($material)
   .v-select__selection--disabled
     color: $material.text.disabled
 
+  &.v-text-field--solo-inverted.v-input--is-focused
+    .v-select__selections
+      color: $material.inputs.solo-inverted-focused-text
+
 theme(v-select, 'v-select')
 
 .v-select
