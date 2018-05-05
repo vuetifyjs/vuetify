@@ -225,18 +225,7 @@ export default {
         on: {
           click: click,
           focus: click,
-          input: () => {
-            if (this.isMulti) this.selectItem(item)
-            else this.internalValue = null
-
-            // If all items have been deleted,
-            // open `v-menu`
-            if (this.selectedItems.length === 0) {
-              this.isMenuActive = true
-            }
-
-            this.selectedIndex = -1
-          }
+          input: () => this.onChipInput(item)
         },
         key: this.getValue(item)
       }, this.getText(item))
@@ -417,6 +406,18 @@ export default {
     },
     onBlur (e) {
       this.$emit('blur', e)
+    },
+    onChipInput (item) {
+      if (this.isMulti) this.selectItem(item)
+      else this.internalValue = null
+
+      // If all items have been deleted,
+      // open `v-menu`
+      if (this.selectedItems.length === 0) {
+        this.isMenuActive = true
+      }
+
+      this.selectedIndex = -1
     },
     onClick () {
       if (this.isDisabled) return

@@ -108,6 +108,7 @@ export default {
       return this.$slots.default
     },
     genIcon (type, cb) {
+      const icon = this[`${type}Icon`]
       cb = cb || this[`${type}IconCb`]
 
       const data = {
@@ -128,12 +129,13 @@ export default {
       }
 
       return this.$createElement('div', {
-        staticClass: `v-input__icon v-input__icon--${kebabCase(type)}`
+        staticClass: `v-input__icon v-input__icon--${kebabCase(type)}`,
+        key: `${type}${icon}`
       }, [
         this.$createElement(
           VIcon,
           data,
-          this[`${type}Icon`]
+          icon
         )
       ])
     },

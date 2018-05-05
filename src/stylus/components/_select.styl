@@ -64,8 +64,12 @@ theme(v-select, 'v-select')
     input
       margin: 0
 
-    .v-select__selections
-      margin-left: -4px // to line up the chips
+    &.v-input--is-dirty
+      .v-input__append-inner
+        margin-top: 8px
+
+      .v-select__selections
+        margin-left: -4px // to line up the chips
 
   &__selections
     align-items: center

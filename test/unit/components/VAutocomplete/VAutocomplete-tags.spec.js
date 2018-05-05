@@ -216,6 +216,7 @@ test('VAutocomplete - tags', ({ mount, compileToFunctions }) => {
       chips: true,
       clearable: true,
       deletableChips: true,
+      tags: true,
       value: ['foo', 'bar']
     })
 
