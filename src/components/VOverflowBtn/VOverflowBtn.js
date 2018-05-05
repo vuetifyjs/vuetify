@@ -45,6 +45,11 @@ export default {
   },
 
   methods: {
+    genSelections () {
+      return this.segmented
+        ? VSelect.methods.genSelections.call(this)       // Override v-autocomplete's override
+        : VAutocomplete.methods.genSelections.call(this)
+    },
     genCommaSelection (item) {
       if (this.segmented) {
         return this.genSegmentedBtn(item)
