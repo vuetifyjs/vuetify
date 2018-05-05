@@ -12,6 +12,10 @@ theme(v-overflow-btn, "v-overflow-btn")
 .v-overflow-btn
   margin-top: 12px
 
+  .v-label
+    position: static
+    padding-left: 16px
+
   .v-select__slot
     height: 48px
 
@@ -19,6 +23,7 @@ theme(v-overflow-btn, "v-overflow-btn")
     top: auto
 
   .v-input__append-inner
+    width: 55px
     align-self: auto
     margin-top: 0
 
@@ -36,3 +41,14 @@ theme(v-overflow-btn, "v-overflow-btn")
       position: absolute
       transition: $primary-transition
       width: 100%
+
+  &--segmented
+    .v-select__selections
+      .v-btn
+        border-radius: 0;
+        margin: 0;
+        height: 48px;
+        width: 100%;
+
+        &__content
+          justify-content: start
