@@ -63,6 +63,10 @@ export default {
       type: Array,
       default: () => ([])
     },
+    tickSize: {
+      type: [Number, String],
+      default: 1
+    },
     thumbColor: {
       type: String,
       default: null
@@ -173,6 +177,15 @@ export default {
         left,
         right,
         width
+      }
+    },
+    tickStyles () {
+      const size = Number(this.tickSize)
+
+      return {
+        'border-width': `${size}px`,
+        'border-radius': size > 1 ? '50%' : null,
+        transform: size > 1 ? `translateX(-${size}px) translateY(-${size - 1}px)` : null
       }
     },
     trackTransition () {
@@ -299,6 +312,7 @@ export default {
               this.tickLabels.length > 0
           },
           style: {
+            ...this.tickStyles,
             left: `${i * (100 / this.numTicks)}%`
           }
         }, children)

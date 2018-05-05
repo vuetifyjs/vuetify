@@ -379,23 +379,23 @@ exports[`VSlider.vue should render component with ticks and match a snapshot 1`]
         </div>
         <div class="v-slider__ticks-container">
           <span class="v-slider__ticks"
-                style="left: 0%;"
+                style="border-width: 1px; left: 0%;"
           >
           </span>
           <span class="v-slider__ticks"
-                style="left: 25%;"
+                style="border-width: 1px; left: 25%;"
           >
           </span>
           <span class="v-slider__ticks"
-                style="left: 50%;"
+                style="border-width: 1px; left: 50%;"
           >
           </span>
           <span class="v-slider__ticks"
-                style="left: 75%;"
+                style="border-width: 1px; left: 75%;"
           >
           </span>
           <span class="v-slider__ticks"
-                style="left: 100%;"
+                style="border-width: 1px; left: 100%;"
           >
           </span>
         </div>
@@ -438,23 +438,23 @@ exports[`VSlider.vue should render component with ticks and match a snapshot 2`]
         </div>
         <div class="v-slider__ticks-container">
           <span class="v-slider__ticks v-slider__ticks--always-show"
-                style="left: 0%;"
+                style="border-width: 1px; left: 0%;"
           >
           </span>
           <span class="v-slider__ticks v-slider__ticks--always-show"
-                style="left: 25%;"
+                style="border-width: 1px; left: 25%;"
           >
           </span>
           <span class="v-slider__ticks v-slider__ticks--always-show"
-                style="left: 50%;"
+                style="border-width: 1px; left: 50%;"
           >
           </span>
           <span class="v-slider__ticks v-slider__ticks--always-show"
-                style="left: 75%;"
+                style="border-width: 1px; left: 75%;"
           >
           </span>
           <span class="v-slider__ticks v-slider__ticks--always-show"
-                style="left: 100%;"
+                style="border-width: 1px; left: 100%;"
           >
           </span>
         </div>
