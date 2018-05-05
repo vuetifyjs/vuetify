@@ -63,7 +63,7 @@ export default {
       )
     },
     isDirty () {
-      return this.internalValue.some(v => v !== this.min)
+      return this.internalValue.some(v => v !== this.min) || this.alwaysDirty
     },
     trackFillStyles () {
       const styles = VSlider.computed.trackFillStyles.call(this)
