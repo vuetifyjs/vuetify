@@ -31,10 +31,27 @@ theme(v-select, 'v-select')
     position: absolute
     left: 0
 
+  &.v-text-field--solo
+    .v-select__selections
+      padding: 4px 0
+
+  &.v-text-field--box
+    .v-select__selections
+      padding: 24px 0 4px
+
+    &.v-text-field--single-line
+      .v-select__selections
+        padding: 12px 0
+
+      &.v-select--chips
+        .v-select__selections
+          padding: 8px 0
+
   // For specificity, hide caret
   &.v-text-field
     input
       flex: 1 1 0
+      margin-top: 0
       min-width: 0
       pointer-events: none
       position: relative
@@ -48,7 +65,6 @@ theme(v-select, 'v-select')
       margin: 0
 
     .v-select__selections
-      padding: 12px 0 4px
       margin-left: -4px // to line up the chips
 
   &__selections
