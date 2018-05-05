@@ -32,7 +32,8 @@ export default {
       })
     },
     isAnyValueAllowed () {
-      return this.editable || VAutocomplete.computed.isAnyValueAllowed.call(this)
+      return this.editable ||
+        VAutocomplete.computed.isAnyValueAllowed.call(this)
     },
     isSingle () {
       return true
@@ -51,32 +52,36 @@ export default {
         : VAutocomplete.methods.genSelections.call(this)
     },
     genCommaSelection (item) {
-      if (this.segmented) {
-        return this.genSegmentedBtn(item)
-      } else {
-        return VSelect.methods.genCommaSelection.call(this, item)
-      }
+      return this.segmented
+        ? this.genSegmentedBtn(item)
+        : VSelect.methods.genCommaSelection.call(this, item)
     },
     genInput () {
-      // if (this.segmented) return this.$createElement()
-
       const input = VTextField.methods.genInput.call(this)
 
       input.data.domProps.value = this.internalSearch
-      input.data.attrs.disabled = !this.isAnyValueAllowed
+      input.data.attrs.readonly = !this.isAnyValueAllowed
 
       return input
     },
     genLabel () {
       const label = VTextField.methods.genLabel.call(this)
+
       if (!label) return label
 
+      // Force 16px always
+      label.data.style.left = '16px'
       delete label.data.style.position
 
       return label
     },
     genSegmentedBtn (item) {
-      if (!item.text || !item.callback) {
+      const itemObj = this.computedItems.find(i => i.value === item)
+
+      if (!itemObj ||
+        !itemObj.text ||
+        !itemObj.callback
+      ) {
         consoleWarn('When using \'segmented\' prop without a selection slot, items must contain both a text and callback property', this)
         return null
       }
@@ -86,10 +91,10 @@ export default {
         on: {
           click (e) {
             e.stopPropagation()
-            item.callback(e)
+            itemObj.callback(e)
           }
         }
-      }, [item.text])
+      }, [itemObj.text])
     },
     setSelectedItems () {
       if (this.internalValue == null) {

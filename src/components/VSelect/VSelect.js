@@ -468,7 +468,7 @@ export default {
         this.isMenuActive = false
       } else {
         const internalValue = (this.internalValue || []).slice()
-        const i = this.findExistingIndex(item, internalValue)
+        const i = this.findExistingIndex(item)
 
         i !== -1 ? internalValue.splice(i, 1) : internalValue.push(item)
         this.internalValue = internalValue.map(i => {
@@ -492,7 +492,7 @@ export default {
           this.getValue(i),
           this.getValue(this.internalValue)
         )
-        : i => this.findExistingIndex(i, this.internalValue) > -1
+        : i => this.findExistingIndex(i) > -1
 
       this.selectedItems = this.computedItems.filter(fn)
     }

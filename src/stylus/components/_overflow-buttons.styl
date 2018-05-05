@@ -39,14 +39,14 @@ theme(v-overflow-btn, "v-overflow-btn")
 
   .v-label
     top: auto
-    left: 16px !important // Override inline css ò_ó
 
   .v-input__append-inner
-    width: 42px
+    width: 48px
     height: 48px
     align-self: auto
     align-items: center
     margin-top: 0
+    padding: 0
 
   .v-input__append-outer,
   .v-input__prepend-outer
@@ -54,14 +54,14 @@ theme(v-overflow-btn, "v-overflow-btn")
     margin-bottom: 12px
 
   .v-input__control::before
-      // TODO: move to mixin
-      height: 1px
-      top: -1px
-      content: ''
-      left: 0
-      position: absolute
-      transition: $primary-transition
-      width: 100%
+    // TODO: move to mixin
+    height: 1px
+    top: -1px
+    content: ''
+    left: 0
+    position: absolute
+    transition: $primary-transition
+    width: 100%
 
   &.v-input--is-focused,
   &.v-select--is-menu-active
