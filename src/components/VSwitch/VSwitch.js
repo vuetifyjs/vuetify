@@ -1,4 +1,3 @@
-import '../../stylus/components/_input-groups.styl'
 import '../../stylus/components/_selection-controls.styl'
 import '../../stylus/components/_switch.styl'
 
