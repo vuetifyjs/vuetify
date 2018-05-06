@@ -153,7 +153,10 @@ export default {
         directives: this.directivesInput,
         on: { click: this.onClick },
         ref: 'input-slot'
-      }, this.genDefaultSlot())
+      }, [
+        this.genDefaultSlot(),
+        this.genProgress()
+      ])
     },
     genMessages () {
       if (this.hideDetails) return null

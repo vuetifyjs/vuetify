@@ -195,8 +195,7 @@ export default {
     genDefaultSlot () {
       return [
         this.genTextFieldSlot(),
-        this.genIconSlot(),
-        this.genProgress()
+        this.genIconSlot()
       ]
     },
     genLabel () {

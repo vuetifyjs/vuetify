@@ -28,6 +28,12 @@ theme(v-input, "v-input")
   text-align: left
   transition: $primary-transition
 
+  .v-progress-linear
+    bottom: 0
+    left: 0
+    margin: 0
+    position: absolute
+
   input
     max-height: 32px
 
@@ -84,6 +90,10 @@ theme(v-input, "v-input")
 
   &--is-disabled
     pointer-events: none
+
+  &--is-loading
+    .v-input__slot:before
+      display: none
 
   &--hide-details
     .v-input__slot

@@ -294,8 +294,7 @@ export default {
         selections,
         this.suffix ? this.genAffix('suffix') : null,
         this.genClearIcon(),
-        this.genSlot('append', 'inner', [this.genIcon('append')]),
-        this.genProgress()
+        this.genSlot('append', 'inner', [this.genIcon('append')])
       ])
 
       return [this.genMenu(activator)]

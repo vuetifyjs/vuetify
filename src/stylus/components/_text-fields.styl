@@ -202,10 +202,10 @@ rtl(v-text-field-rtl, "v-text-field")
 
   &--enclosed
     margin-top: 16px
-    padding: 0 16px
 
     .v-input__slot
       margin-bottom: 0 // normally for messages
+      padding: 0 16px
 
     .v-text-field__details
       bottom: -22px
@@ -241,10 +241,10 @@ rtl(v-text-field-rtl, "v-text-field")
   &.v-text-field--solo,
   &.v-text-field--outline
     .v-input__prepend-outer
-      margin-left: 0
+      margin-right: 0
 
     .v-input__append-outer
-      margin-right: 0
+      margin-left: 0
 
   &.v-text-field--solo
     align-items: center
@@ -255,7 +255,6 @@ rtl(v-text-field-rtl, "v-text-field")
       top: calc(50% - 10px)
 
     .v-input__control
-      align-items: center
       min-height: 48px
       padding: 0
 
@@ -265,6 +264,11 @@ rtl(v-text-field-rtl, "v-text-field")
     .v-input__append-inner
       align-self: center
       margin-top: 0
+
+    .v-input__prepend-outer,
+    .v-input__append-outer
+      margin-top: 8px
+      margin-bottom: 8px
 
   &.v-input--is-focused
     .v-input__slot:after
