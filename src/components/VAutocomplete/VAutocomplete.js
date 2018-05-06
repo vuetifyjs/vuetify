@@ -40,10 +40,6 @@ export default {
           .indexOf(query.toString().toLowerCase()) > -1
       }
     },
-    nudgeBottom: {
-      type: [String, Number],
-      default: 4
-    },
     offsetY: {
       type: Boolean,
       default: true
@@ -230,6 +226,7 @@ export default {
     genMenu (activator) {
       const menu = VSelect.methods.genMenu.call(this, activator)
 
+      menu.componentOptions.propsData.contentClass = 'v-autocomplete__content'
       menu.componentOptions.propsData.value = this.menuCanShow && this.isMenuActive
 
       return menu

@@ -32,6 +32,7 @@ export default {
   props: {
     action: Boolean,
     dense: Boolean,
+    hideSelected: Boolean,
     items: {
       type: Array,
       default: () => []
@@ -64,6 +65,9 @@ export default {
   },
 
   computed: {
+    parsedItems () {
+      return this.selectedItems.map(item => this.getValue(item))
+    },
     tileActiveClass () {
       return Object.keys(this.addTextColorClassChecks()).join(' ')
     }
@@ -122,7 +126,9 @@ export default {
       item,
       disabled = null,
       avatar = false,
-      value = this.selectedItems.indexOf(item) !== -1
+      value = this.parsedItems.indexOf(
+        this.getValue(item)
+      ) !== -1
     ) {
       if (item === Object(item)) {
         avatar = this.getAvatar(item)
@@ -146,7 +152,9 @@ export default {
 
       if (!this.$scopedSlots.item) {
         return this.$createElement(VListTile, tile, [
-          this.action ? this.genAction(item, value) : null,
+          this.action && !this.hideSelected
+            ? this.genAction(item, value)
+            : null,
           this.genTileContent(item)
         ])
       }
@@ -186,11 +194,16 @@ export default {
   },
 
   render () {
-    const children = this.items.map(o => {
-      if (o.header) return this.genHeader(o)
-      if (o.divider) return this.genDivider(o)
-      else return this.genTile(o)
-    })
+    const children = []
+    for (const item of this.items) {
+      if (this.hideSelected &&
+        this.selectedItems.indexOf(this.getValue(item)) > -1
+      ) continue
+
+      if (item.header) children.push(this.genHeader(item))
+      else if (item.divider) children.push(this.genDivider(item))
+      else children.push(this.genTile(item))
+    }
 
     if (!children.length) {
       const noData = this.$slots['no-data']

@@ -39,7 +39,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const item = wrapper.first('div.text--disabled')
+    const item = wrapper.first('div.v-list--disabled')
 
     expect(item.element.getAttribute('disabled')).toBe('disabled')
   })

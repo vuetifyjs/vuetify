@@ -77,4 +77,22 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     expect(getValue({ fizz: 'buzz' })).toEqual('buzz')
   })
+
+  it('should hide selected items', async () => {
+    const wrapper = mount(VSelectList, {
+      propsData: {
+        selectedItems: ['foo'],
+        hideSelected: true,
+        items: ['foo', 'bar', 'fizz']
+      }
+    })
+
+    expect(wrapper.find('.v-list__tile').length).toBe(2)
+
+    wrapper.setProps({ selectedItems: ['foo', 'bar'] })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.find('.v-list__tile').length).toBe(1)
+  })
 })

@@ -568,16 +568,4 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.vm.getMenuIndex()).toBe(1)
   })
-
-  it('should hide selected items', () => {
-    const wrapper = mount(VSelect, {
-      propsData: {
-        items: ['foo', 'bar'],
-        hideSelected: true,
-        value: 'foo'
-      }
-    })
-
-    expect(wrapper.vm.genSelections()).toEqual([])
-  })
 })

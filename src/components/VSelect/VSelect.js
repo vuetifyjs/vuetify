@@ -312,6 +312,7 @@ export default {
           color: this.color,
           dark: this.dark,
           dense: this.dense,
+          hideSelected: this.hideSelected,
           items: this.items,
           light: this.light,
           noDataText: this.noDataText,
@@ -355,6 +356,11 @@ export default {
 
       Object.assign(props, this.menuProps)
 
+      if (props.offsetY) {
+        props.nudgeBottom = 1
+        props.nudgeWidth = -1
+      }
+
       return this.$createElement(VMenu, {
         props,
         on: {
@@ -367,8 +373,6 @@ export default {
       }, [activator, this.genList()])
     },
     genSelections () {
-      if (this.hideSelected) return []
-
       let length = this.selectedItems.length
       const children = new Array(length)
 
