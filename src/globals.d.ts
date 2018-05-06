@@ -3,9 +3,6 @@
 import { VueConstructor, ComponentOptions, PluginFunction, FunctionalComponentOptions } from 'vue'
 import { CombinedVueInstance, Vue } from 'vue/types/vue'
 import {
-  DefaultComputed,
-  DefaultData,
-  DefaultMethods, DefaultProps, PropsDefinition,
   RecordPropsDefinition,
   ThisTypedComponentOptionsWithArrayProps,
   ThisTypedComponentOptionsWithRecordProps
@@ -20,15 +17,10 @@ declare global {
   export const __REQUIRED_VUE__: string
 }
 
-type maybeEmpty = {} | undefined
-
 declare module 'vue/types/vue' {
-  export type OptionsVue<Instance extends Vue, Data, Methods, Computed, Props, RawProps = undefined> = VueConstructor<
+  export type OptionsVue<Instance extends Vue, Data, Methods, Computed, Props, Options = {}> = VueConstructor<
     CombinedVueInstance<Instance, Data, Methods, Computed, Props> & Vue,
-    Data,
-    Methods,
-    Computed,
-    RawProps
+    Options
   >
 
   export interface RawComponentOptions<
@@ -49,19 +41,16 @@ declare module 'vue/types/vue' {
 
   interface VueConstructor<
     V extends Vue = Vue,
-    Data = {} | undefined,
-    Methods = {} | undefined,
-    Computed = {} | undefined,
-    Props = {} | undefined
+    Options = {} | undefined
   > {
     version: string
     install?: PluginFunction<never>
-    options: RawComponentOptions<V, Data, Methods, Computed, Props>
+    options: Options
 
-    extend<Data, Methods, Computed, PropNames extends string = never> (options?: ThisTypedComponentOptionsWithArrayProps<V, Data, Methods, Computed, PropNames>): OptionsVue<V, Data, Methods, Computed, Record<PropNames, any>>
-    extend<Data, Methods, Computed, Props> (options?: ThisTypedComponentOptionsWithRecordProps<V, Data, Methods, Computed, Props>): OptionsVue<V, Data, Methods, Computed, Props>
-    extend<PropNames extends string = never> (definition: FunctionalComponentOptions<Record<PropNames, any>, PropNames[]>): OptionsVue<V, {}, {}, {}, Record<PropNames, any>>
-    extend<Props> (definition: FunctionalComponentOptions<Props, RecordPropsDefinition<Props>>): OptionsVue<V, {}, {}, {}, Props>
-    extend (options?: ComponentOptions<V>): OptionsVue<V, {}, {}, {}, {}>
+    extend<Data, Methods, Computed, Options, PropNames extends string = never> (options?: ThisTypedComponentOptionsWithArrayProps<V, Data, Methods, Computed, PropNames> & Options): OptionsVue<V, Data, Methods, Computed, Record<PropNames, any>, Options>
+    extend<Data, Methods, Computed, Props, Options> (options?: ThisTypedComponentOptionsWithRecordProps<V, Data, Methods, Computed, Props> & Options): OptionsVue<V, Data, Methods, Computed, Props, Options>
+    extend<Options, PropNames extends string = never> (definition: FunctionalComponentOptions<Record<PropNames, any>, PropNames[]> & Options): OptionsVue<V, {}, {}, {}, Record<PropNames, any>, Options>
+    extend<Props, Options> (definition: FunctionalComponentOptions<Props, RecordPropsDefinition<Props>> & Options): OptionsVue<V, {}, {}, {}, Props, Options>
+    extend<V extends Vue = Vue> (options?: ComponentOptions<V> & Options): OptionsVue<V, {}, {}, {}, {}, Options>
   }
 }

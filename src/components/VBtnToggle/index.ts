@@ -2,7 +2,7 @@ import VBtnToggle from './VBtnToggle'
 
 /* istanbul ignore next */
 VBtnToggle.install = function install (Vue) {
-  Vue.component(VBtnToggle.options.name!, VBtnToggle)
+  Vue.component(VBtnToggle.options.name, VBtnToggle)
 }
 
 export default VBtnToggle

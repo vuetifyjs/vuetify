@@ -132,7 +132,7 @@ export default mixins(Colorable, Themeable).extend({
       Object.keys(classes).filter(k => classes[k]).join(' '),
       iconType,
       isCustomIcon ? iconName : null
-    ].join(' ').trim()
+    ].filter(val => !!val).join(' ').trim()
 
     return h('i', data, newChildren)
   }
