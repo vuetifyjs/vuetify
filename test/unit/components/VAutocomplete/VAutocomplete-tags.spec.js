@@ -265,4 +265,41 @@ test('VAutocomplete - tags', ({ mount, compileToFunctions }) => {
     input.trigger('input')
     expect(wrapper.vm.internalSearch).toBe('fizz')
   })
+
+  it('should create new items when a delimiter is entered', async () => {
+    const { wrapper, change } = createTagsAutocomplete({
+      delimiters: [', ', 'baz']
+    })
+
+    const input = wrapper.first('input')
+    input.trigger('focus')
+
+    input.element.value = 'foo,'
+    input.trigger('input')
+
+    await wrapper.vm.$nextTick()
+    expect(change).toHaveBeenCalledTimes(0)
+
+    input.element.value += ' '
+    input.trigger('input')
+
+    await wrapper.vm.$nextTick()
+    expect(change).toHaveBeenCalledTimes(1)
+    expect(change).toHaveBeenCalledWith(['foo'])
+    expect(input.element.value).toBe('')
+
+    input.element.value = 'foo,barba'
+    input.trigger('input')
+
+    await wrapper.vm.$nextTick()
+    expect(change).toHaveBeenCalledTimes(1)
+
+    input.element.value += 'z'
+    input.trigger('input')
+
+    await wrapper.vm.$nextTick()
+    expect(change).toHaveBeenCalledTimes(2)
+    expect(change).toHaveBeenCalledWith(['foo', 'foo,bar'])
+    expect(input.element.value).toBe('')
+  })
 })

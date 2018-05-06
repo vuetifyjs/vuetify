@@ -27,6 +27,7 @@ export default {
       default: 'off'
     },
     combobox: Boolean,
+    delimiters: Array,
     filter: {
       type: Function,
       default: (item, queryText, itemText) => {
@@ -150,6 +151,19 @@ export default {
     },
     searchInput (val) {
       this.lazySearch = val
+    },
+    internalSearch (val) {
+      if (
+        val &&
+        this.tags &&
+        this.delimiters
+      ) {
+        const delimiter = this.delimiters.find(d => val.endsWith(d))
+        if (delimiter == null) return
+
+        this.internalSearch = val.slice(0, val.length - delimiter.length)
+        this.updateTags()
+      }
     }
   },
 
