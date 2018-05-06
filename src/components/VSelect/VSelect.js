@@ -71,6 +71,7 @@ export default {
     contentClass: String,
     deletableChips: Boolean,
     dense: Boolean,
+    hideNoData: Boolean,
     hideSelected: Boolean,
     items: {
       type: Array,

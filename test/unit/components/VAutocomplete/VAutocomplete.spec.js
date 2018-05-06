@@ -712,4 +712,27 @@ test('VAutocomplete.js', ({ mount, shallow }) => {
 
     expect(wrapper.vm.filteredItems.length).toBe(2)
   })
+
+  it('should hide menu when no data', async () => {
+    const wrapper = mount(VAutocomplete)
+
+    const input = wrapper.first('input')
+    input.trigger('focus')
+    input.element.value = 'foo'
+    input.trigger('input')
+
+    expect(wrapper.vm.menuCanShow).toBe(true)
+
+    wrapper.setProps({ hideNoData: true })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.menuCanShow).toBe(false)
+
+    wrapper.setProps({ hideNoData: false })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.menuCanShow).toBe(true)
+  })
 })

@@ -111,9 +111,15 @@ export default {
       return this.internalSearch !== this.getText(this.internalValue)
     },
     menuCanShow () {
-      if (!this.isAnyValueAllowed) return true
+      if (!this.isFocused) return false
 
-      return this.isFocused && this.filteredItems.length > 0
+      const filtered = this.filteredItems.length > 0
+
+      if (this.isAnyValueAllowed) {
+        return filtered
+      }
+
+      return !this.hideNoData || filtered
     },
     menuProps () {
       return Object.assign(VSelect.computed.menuProps.call(this), {

@@ -152,7 +152,7 @@ export default {
 
       if (!this.$scopedSlots.item) {
         return this.$createElement(VListTile, tile, [
-          this.action && !this.hideSelected
+          this.action && !this.hideSelected && this.items.length > 0
             ? this.genAction(item, value)
             : null,
           this.genTileContent(item)

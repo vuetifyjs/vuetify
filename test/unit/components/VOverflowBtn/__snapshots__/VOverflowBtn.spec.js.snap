@@ -12,7 +12,7 @@ exports[`VOverflowBtn should use default autocomplete selections 1`] = `
           <div class="v-select__slot">
             <div class="v-select__selections">
               <div class="v-select__selection v-select__selection--comma">
-                foo,
+                foo
               </div>
               <input readonly="readonly"
                      tabindex="0"
