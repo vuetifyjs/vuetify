@@ -41,7 +41,7 @@ module.exports = {
     'prefer-promise-reject-errors': 0,
     'no-unused-vars': ['error', {
       vars: 'all',
-      args: 'after-used',
+      args: 'none', // This needs to be off so we can specify mixin interfaces
       ignoreRestSiblings: false
     }],
     'no-empty': 'error',

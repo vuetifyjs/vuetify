@@ -16,7 +16,7 @@ import Themeable from '../../mixins/themeable'
 import { factory as ToggleableFactory } from '../../mixins/toggleable'
 import { inject as RegistrableInject } from '../../mixins/registrable'
 
-export default mixins(
+const VBtn = mixins(
   Colorable,
   Routable,
   Positionable,
@@ -149,3 +149,9 @@ export default mixins(
     return h(tag, data, children)
   }
 })
+
+/* eslint-disable-next-line no-redeclare */
+export type VBtn = InstanceType<typeof VBtn> & {
+  $el: HTMLButtonElement | HTMLAnchorElement
+}
+export default VBtn

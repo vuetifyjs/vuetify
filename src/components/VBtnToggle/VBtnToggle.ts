@@ -1,10 +1,15 @@
 import '../../stylus/components/_button-toggle.styl'
 
+import { VNode } from 'vue'
+import { PropValidator } from 'vue/types/options'
+
+import mixins from '../../util/mixins'
+
 import ButtonGroup from '../../mixins/button-group'
 import Themeable from '../../mixins/themeable'
 import { consoleWarn } from '../../util/console'
 
-export default {
+const VBtnToggle = mixins(ButtonGroup, Themeable).extend({
   name: 'v-btn-toggle',
 
   model: {
@@ -12,18 +17,16 @@ export default {
     event: 'change'
   },
 
-  mixins: [ButtonGroup, Themeable],
-
   props: {
     inputValue: {
       required: false
-    },
+    } as PropValidator<any>,
     mandatory: Boolean,
     multiple: Boolean
   },
 
   computed: {
-    classes () {
+    classes (): object {
       return {
         'v-btn-toggle': true,
         'v-btn-toggle--selected': this.hasValue,
@@ -31,7 +34,7 @@ export default {
         'theme--dark': this.dark
       }
     },
-    hasValue () {
+    hasValue (): boolean {
       return (this.multiple && this.inputValue.length) ||
         (!this.multiple && this.inputValue !== null &&
           typeof this.inputValue !== 'undefined')
@@ -48,7 +51,7 @@ export default {
   },
 
   methods: {
-    isSelected (i) {
+    isSelected (i: number): boolean {
       const item = this.getValue(i)
       if (!this.multiple) {
         return this.inputValue === item
@@ -56,11 +59,12 @@ export default {
 
       return this.inputValue.includes(item)
     },
-    updateValue (i) {
+    updateValue (i: number): void {
       const item = this.getValue(i)
       if (!this.multiple) {
         if (this.mandatory && this.inputValue === item) return
-        return this.$emit('change', this.inputValue === item ? null : item)
+        this.$emit('change', this.inputValue === item ? null : item)
+        return
       }
 
       const items = this.inputValue.slice()
@@ -75,7 +79,7 @@ export default {
 
       this.$emit('change', items)
     },
-    updateAllValues () {
+    updateAllValues (): void {
       if (!this.multiple) return
 
       const items = []
@@ -98,7 +102,13 @@ export default {
     }
   },
 
-  render (h) {
+  render (h): VNode {
     return h('div', { class: this.classes }, this.$slots.default)
   }
+})
+
+/* eslint-disable-next-line no-redeclare */
+export type VBtnToggle = InstanceType<typeof VBtnToggle> & {
+  $el: HTMLDivElement
 }
+export default VBtnToggle
