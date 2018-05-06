@@ -63,13 +63,9 @@ export default {
 
   methods: {
     calculateInputHeight () {
-      this.inputHeight = 0
-
-      this.$nextTick(() => {
-        const height = this.$refs.input ? this.$refs.input.scrollHeight : 0
-        const minHeight = parseInt(this.rows, 10) * parseFloat(this.rowHeight)
-        this.inputHeight = Math.max(minHeight, height)
-      })
+      const height = this.$refs.input ? this.$refs.input.scrollHeight : 0
+      const minHeight = parseInt(this.rows, 10) * parseFloat(this.rowHeight)
+      this.inputHeight = Math.max(minHeight, height)
     },
     genInput () {
       const input = VTextField.methods.genInput.call(this)
