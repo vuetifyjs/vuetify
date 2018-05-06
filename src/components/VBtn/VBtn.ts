@@ -139,10 +139,10 @@ const VBtn = mixins(
     const { tag, data } = this.generateRouteLink()
     const children = [this.genContent()]
 
-    tag === 'button' && (data.attrs.type = this.type)
+    tag === 'button' && (data.attrs!.type = this.type)
     this.loading && children.push(this.genLoader())
 
-    data.attrs.value = ['string', 'number'].includes(typeof this.value)
+    data.attrs!.value = ['string', 'number'].includes(typeof this.value)
       ? this.value
       : JSON.stringify(this.value)
 

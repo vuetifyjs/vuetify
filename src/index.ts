@@ -5,7 +5,7 @@ import { PluginObject, VueConstructor } from 'vue'
 import { Vuetify as VuetifyPlugin, VuetifyUseOptions } from '../types'
 
 const Vuetify: VuetifyPlugin = {
-  install (Vue: VueConstructor, args: VuetifyUseOptions): void {
+  install (Vue: VueConstructor, args?: VuetifyUseOptions): void {
     const VuetifyComponent: PluginObject<VuetifyPlugin> = components.Vuetify
 
     Vue.use(VuetifyComponent, {

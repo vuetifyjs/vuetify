@@ -78,7 +78,7 @@ export default mixins(Colorable, Themeable).extend({
     if (fontSize) data.style = { fontSize, ...data.style }
 
     let iconName = ''
-    if (children.length) iconName = children[0].text
+    if (children.length) iconName = children[0].text!
     // Support usage of v-text and v-html
     else if (data.domProps) {
       iconName = data.domProps.textContent ||
@@ -132,8 +132,7 @@ export default mixins(Colorable, Themeable).extend({
       Object.keys(classes).filter(k => classes[k]).join(' '),
       iconType,
       isCustomIcon ? iconName : null
-    ].reduce((prev, curr) => curr ? `${prev} ${curr}` : prev)
-      .trim()
+    ].join(' ').trim()
 
     return h('i', data, newChildren)
   }

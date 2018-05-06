@@ -14,7 +14,7 @@ export default Vue.extend({
   },
 
   computed: {
-    computedColor (): string {
+    computedColor (): string | null {
       return this.color || this.defaultColor
     }
   },
@@ -30,7 +30,7 @@ export default Vue.extend({
 
       return classes
     },
-    addTextColorClassChecks (obj?: any, color?: string): any {
+    addTextColorClassChecks (obj?: any, color?: string | null): any {
       const classes = Object.assign({}, obj)
       if (color === undefined) color = this.computedColor
 

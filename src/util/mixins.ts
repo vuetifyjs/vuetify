@@ -9,6 +9,6 @@ export default function mixins<A extends Vue, B extends Vue, C extends Vue> (Cto
 export default function mixins<A extends Vue, B extends Vue, C extends Vue, D extends Vue> (CtorA: Component<A>, CtorB: Component<B>, CtorC: Component<C>, CtorD: Component<D>): VueConstructor<A & B & C & D>
 export default function mixins<A extends Vue, B extends Vue, C extends Vue, D extends Vue, E extends Vue> (CtorA: Component<A>, CtorB: Component<B>, CtorC: Component<C>, CtorD: Component<D>, CtorE: Component<E>): VueConstructor<A & B & C & D & E>
 export default function mixins<A extends Vue, B extends Vue, C extends Vue, D extends Vue, E extends Vue, F extends Vue> (CtorA: Component<A>, CtorB: Component<B>, CtorC: Component<C>, CtorD: Component<D>, CtorE: Component<E>, CtorF: Component<F>): VueConstructor<A & B & C & D & E & F>
-export default function mixins (...args: Component<Vue>[]) {
+export default function mixins (...args: Component<Vue>[]): any {
   return Vue.extend({ mixins: args })
 }
