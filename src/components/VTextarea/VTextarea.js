@@ -63,9 +63,11 @@ export default {
 
   methods: {
     calculateInputHeight () {
-      const height = this.$refs.input ? this.$refs.input.scrollHeight : 0
-      const minHeight = parseInt(this.rows, 10) * parseFloat(this.rowHeight)
-      this.inputHeight = Math.max(minHeight, height)
+      this.$nextTick(() => {
+        const height = this.$refs.marker ? this.$refs.marker.clientHeight : 0
+        const minHeight = parseInt(this.rows, 10) * parseFloat(this.rowHeight)
+        this.inputHeight = Math.max(minHeight, height)
+      })
     },
     genInput () {
       const input = VTextField.methods.genInput.call(this)
@@ -77,7 +79,17 @@ export default {
       delete input.data.attrs.type
       input.data.attrs.rows = this.rows
 
-      return input
+      return [
+        input,
+        this.genMarker()
+      ]
+    },
+    genMarker () {
+      return this.$createElement('div', {
+        staticClass: 'v-textarea__mask',
+        domProps: { innerHTML: this.internalValue },
+        ref: 'marker'
+      })
     },
     onKeyDown (e) {
       // Prevents closing of a

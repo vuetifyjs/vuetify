@@ -11,6 +11,7 @@ theme(v-textarea, "v-textarea")
 .v-textarea
   textarea
     min-height: 32px
+    overflow: hidden
     outline: none
 
   &.v-text-field--box,
@@ -37,3 +38,15 @@ theme(v-textarea, "v-textarea")
     .v-input__append-inner
       align-self: flex-start
       margin-top: 16px
+
+  &__mask
+    left: 0
+    line-height: 1
+    overflow: hidden
+    padding: 8px 0
+    position: absolute
+    top: 0
+    text-indent: 16px
+    word-break: break-all
+    width: 100%
+    visibility hidden
