@@ -35,34 +35,24 @@ export default {
     },
     isSingle () {
       return true
-    },
-    internalSearch: {
-      get () {
-        return this.editable
-          ? VAutocomplete.computed.internalSearch.get.call(this)
-          : ''
-      },
-      set (val) {
-        VAutocomplete.computed.internalSearch.set.call(this, val)
-      }
     }
   },
 
   methods: {
     genSelections () {
-      return this.segmented
-        ? VSelect.methods.genSelections.call(this) // Override v-autocomplete's override
-        : VAutocomplete.methods.genSelections.call(this)
+      return this.editable
+        ? VAutocomplete.methods.genSelections.call(this)
+        : VSelect.methods.genSelections.call(this) // Override v-autocomplete's override
     },
-    genCommaSelection (item) {
+    genCommaSelection (item, index, last) {
       return this.segmented
         ? this.genSegmentedBtn(item)
-        : VSelect.methods.genCommaSelection.call(this, item)
+        : VSelect.methods.genCommaSelection.call(this, item, index, last)
     },
     genInput () {
       const input = VTextField.methods.genInput.call(this)
 
-      input.data.domProps.value = this.internalSearch
+      input.data.domProps.value = this.editable ? this.internalSearch : ''
       input.data.attrs.readonly = !this.isAnyValueAllowed
 
       return input
