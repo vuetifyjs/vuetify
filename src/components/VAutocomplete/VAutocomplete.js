@@ -114,6 +114,12 @@ export default {
 
       return this.isFocused && this.filteredItems.length > 0
     },
+    menuProps () {
+      return Object.assign(VSelect.computed.menuProps.call(this), {
+        contentClass: 'v-autocomplete__content',
+        value: this.menuCanShow && this.isMenuActive
+      })
+    },
     searchIsDirty () {
       return this.internalSearch != null &&
         this.internalSearch !== ''
@@ -227,14 +233,6 @@ export default {
       list.componentOptions.propsData.searchInput = this.internalSearch
 
       return list
-    },
-    genMenu (activator) {
-      const menu = VSelect.methods.genMenu.call(this, activator)
-
-      menu.componentOptions.propsData.contentClass = 'v-autocomplete__content'
-      menu.componentOptions.propsData.value = this.menuCanShow && this.isMenuActive
-
-      return menu
     },
     genSelections () {
       return this.hasSlot || this.isMulti

@@ -2,14 +2,13 @@
 import '../../stylus/components/_overflow-buttons.styl'
 
 // Extensions
-// import VSelect from '../VSelect/VSelect'
+import VSelect from '../VSelect/VSelect'
 import VAutocomplete from '../VAutocomplete'
 import VTextField from '../VTextField/VTextField'
 
 import VBtn from '../VBtn'
 
 import { consoleWarn } from '../../util/console'
-import VSelect from '@/components/VSelect/VSelect'
 
 export default {
   name: 'v-overflow-btn',
@@ -36,11 +35,6 @@ export default {
     },
     isSingle () {
       return true
-    },
-    menuProps () {
-      return Object.assign(VSelect.computed.menuProps.call(this), {
-        nudgeBottom: 1
-      })
     }
   },
 

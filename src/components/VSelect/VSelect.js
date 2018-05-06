@@ -158,14 +158,15 @@ export default {
     },
     menuProps () {
       const nudgeMenu = !this.isSolo && !this.box
+      const offsetY = this.offsetY || nudgeMenu
 
       return {
         closeOnClick: false,
         closeOnContentClick: false,
         openOnClick: false,
         value: this.isMenuActive,
-        offsetY: this.offsetY || nudgeMenu,
-        nudgeBottom: nudgeMenu ? 2 : 0 // convert to int
+        offsetY,
+        nudgeBottom: offsetY ? 1 : 0 // convert to int
       }
     }
   },
@@ -355,11 +356,6 @@ export default {
       }
 
       Object.assign(props, this.menuProps)
-
-      if (props.offsetY) {
-        props.nudgeBottom = 1
-        props.nudgeWidth = -1
-      }
 
       return this.$createElement(VMenu, {
         props,
