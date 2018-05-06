@@ -40,6 +40,7 @@ export default {
           .indexOf(query.toString().toLowerCase()) > -1
       }
     },
+    noFilter: Boolean,
     offsetY: {
       type: Boolean,
       default: true
@@ -77,7 +78,7 @@ export default {
     filteredItems () {
       const items = this.filterDuplicates(this.cachedItems.concat(this.items))
 
-      if (!this.isSearching) return items
+      if (!this.isSearching || this.noFilter) return items
 
       return items.filter(i => this.filter(i, this.internalSearch, this.getText(i)))
     },
@@ -218,7 +219,11 @@ export default {
       const list = VSelect.methods.genList.call(this)
 
       list.componentOptions.propsData.items = this.filteredItems
-      list.componentOptions.propsData.noFilter = !this.isSearching || !this.filteredItems.length
+      list.componentOptions.propsData.noFilter = (
+        this.noFilter ||
+        !this.isSearching ||
+        !this.filteredItems.length
+      )
       list.componentOptions.propsData.searchInput = this.internalSearch
 
       return list

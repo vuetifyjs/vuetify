@@ -692,4 +692,24 @@ test('VAutocomplete.js', ({ mount, shallow }) => {
 
     expect(wrapper.vm.internalValue).toEqual(['foo'])
   })
+
+  it('should not filter results', async () => {
+    const wrapper = mount(VAutocomplete, {
+      propsData: {
+        items: ['foo', 'bar']
+      }
+    })
+
+    const input = wrapper.first('input')
+    input.element.value = 'foo'
+    input.trigger('input')
+
+    expect(wrapper.vm.filteredItems.length).toBe(1)
+
+    wrapper.setProps({ noFilter: true })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.filteredItems.length).toBe(2)
+  })
 })
