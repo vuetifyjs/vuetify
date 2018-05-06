@@ -35,6 +35,16 @@ export default {
     },
     isSingle () {
       return true
+    },
+    internalSearch: {
+      get () {
+        return this.editable
+          ? VAutocomplete.computed.internalSearch.get.call(this)
+          : ''
+      },
+      set (val) {
+        VAutocomplete.computed.internalSearch.set.call(this, val)
+      }
     }
   },
 
@@ -69,12 +79,10 @@ export default {
       return label
     },
     genSegmentedBtn (item) {
-      const itemObj = this.computedItems.find(i => i.value === item)
+      const itemValue = this.getValue(item)
+      const itemObj = this.computedItems.find(i => this.getValue(i) === itemValue) || item
 
-      if (!itemObj ||
-        !itemObj.text ||
-        !itemObj.callback
-      ) {
+      if (!itemObj.text || !itemObj.callback) {
         consoleWarn('When using \'segmented\' prop without a selection slot, items must contain both a text and callback property', this)
         return null
       }
