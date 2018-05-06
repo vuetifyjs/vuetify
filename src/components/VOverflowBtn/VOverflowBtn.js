@@ -6,7 +6,6 @@ import '../../stylus/components/_overflow-buttons.styl'
 import VAutocomplete from '../VAutocomplete'
 import VTextField from '../VTextField/VTextField'
 
-/* eslint-disable */
 import VBtn from '../VBtn'
 
 import { consoleWarn } from '../../util/console'
@@ -48,7 +47,7 @@ export default {
   methods: {
     genSelections () {
       return this.segmented
-        ? VSelect.methods.genSelections.call(this)       // Override v-autocomplete's override
+        ? VSelect.methods.genSelections.call(this) // Override v-autocomplete's override
         : VAutocomplete.methods.genSelections.call(this)
     },
     genCommaSelection (item) {
