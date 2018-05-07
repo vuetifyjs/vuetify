@@ -22,10 +22,10 @@ export default Vue.extend({
   methods: {
     addBackgroundColorClassChecks<T, C extends string> (obj?: T, color?: C): T & Record<C, true> {
       const classes: any = Object.assign({}, obj)
-      if (color === undefined) color = this.computedColor as any
+      const selectedColor = color === undefined ? this.computedColor : color
 
-      if (color) {
-        classes[color] = true
+      if (selectedColor) {
+        classes[selectedColor] = true
       }
 
       return classes
@@ -35,7 +35,7 @@ export default Vue.extend({
       if (color === undefined) color = this.computedColor
 
       if (color) {
-        const [colorName, colorModifier] = color.trim().split(' ')
+        const [colorName, colorModifier] = color.toString().trim().split(' ')
         classes[colorName + '--text'] = true
         colorModifier && (classes['text--' + colorModifier] = true)
       }

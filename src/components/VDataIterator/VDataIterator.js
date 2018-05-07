@@ -81,6 +81,16 @@ export default {
 
       if (!children.length) return null
       return this.$createElement('div', children)
+    },
+    genHeader () {
+      const children = []
+
+      if (this.$slots.header) {
+        children.push(this.$slots.header)
+      }
+
+      if (!children.length) return null
+      return this.$createElement('div', children)
     }
   },
 
@@ -92,6 +102,7 @@ export default {
     return h('div', {
       'class': this.classes
     }, [
+      this.genHeader(),
       this.genContent(),
       this.genFooter()
     ])

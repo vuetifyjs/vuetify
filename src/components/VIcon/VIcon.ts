@@ -67,7 +67,7 @@ export default mixins(Colorable, Themeable).extend({
     xLarge: Boolean
   },
 
-  render (h, { props, data, parent, children = [] }): VNode {
+  render (h, { props, data, parent, listeners = {}, children = [] }): VNode {
     const { small, medium, large, xLarge } = props
     const sizes = { small, medium, large, xLarge }
     const explicitSize = keys(sizes).find(key => sizes[key] && !!key)
@@ -117,6 +117,7 @@ export default mixins(Colorable, Themeable).extend({
       ...(props.color && addTextColorClassChecks.call(props, {}, props.color)),
       'v-icon--disabled': props.disabled,
       'v-icon--left': props.left,
+      'v-icon--link': listeners.click || listeners['!click'],
       'v-icon--right': props.right,
       'theme--dark': props.dark,
       'theme--light': props.light

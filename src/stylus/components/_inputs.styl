@@ -1,0 +1,104 @@
+@import '../bootstrap'
+@import '../theme'
+
+/* Theme */
+v-input($material)
+  input::placeholder,
+  textarea::placeholder
+    color: $material.text.disabled
+
+  &:not(.v-input--has-state)
+    input,
+    textarea
+      color: $material.text.primary
+
+    &--is-disabled
+      .v-input__label,
+      input,
+      textarea
+        color: $material.text.disabled
+
+theme(v-input, "v-input")
+
+.v-input
+  align-items: flex-start
+  display: flex
+  font-size: 16px
+  margin-top: 28px // 12px for label, 16px for spec
+  text-align: left
+  transition: $primary-transition
+
+  .v-progress-linear
+    bottom: 0
+    left: 0
+    margin: 0
+    position: absolute
+
+  input
+    max-height: 32px
+
+  input,
+  textarea
+    &:focus,
+    &:active
+      outline: none
+
+  .progress-linear
+    bottom: -1px
+    height: 2px
+    left: 0
+    margin: 0
+    padding: 0
+    position: absolute
+
+  &__append-outer,
+  &__prepend-outer
+    display: inline-flex
+    margin: 4px 16px 16px
+    line-height: 1
+
+    .v-icon
+      user-select: none
+
+  &__control
+    display: flex
+    height: auto
+    flex-grow: 1
+    flex-wrap: wrap
+    position: relative
+
+  &__icon
+    align-items: center
+    display: inline-flex
+    height: 24px
+    flex: 1 0 auto
+    justify-content: center
+    min-width: 24px
+    width: 24px
+
+    &--clear
+      border-radius: 50%
+
+  &__slot
+    align-items: center
+    color: inherit
+    display: flex
+    margin-bottom: 8px
+    min-height: 32px
+    position: relative
+    width: 100%
+
+  &--is-disabled
+    pointer-events: none
+
+  &--is-loading
+    .v-input__slot:before
+      display: none
+
+  &--hide-details
+    .v-input__slot
+      margin-bottom: 0
+
+  &--has-state
+    &.error--text .v-label
+      animation: shake .6s $transition.swing
