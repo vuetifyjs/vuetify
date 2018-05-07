@@ -9,12 +9,12 @@ test('VCheckbox.js', ({ mount }) => {
       }
     })
 
-    const ripple = wrapper.find('.input-group--selection-controls__ripple')[0]
+    const input = wrapper.first('input')
 
     const change = jest.fn()
     wrapper.vm.$on('change', change)
 
-    ripple.trigger('click')
+    input.trigger('click')
     expect(change).toBeCalledWith(true)
   })
 
@@ -26,12 +26,12 @@ test('VCheckbox.js', ({ mount }) => {
       }
     })
 
-    const ripple = wrapper.find('.input-group--selection-controls__ripple')[0]
+    const input = wrapper.first('input')
 
     const change = jest.fn()
     wrapper.vm.$on('change', change)
 
-    ripple.trigger('click')
+    input.trigger('click')
     expect(change).toBeCalledWith('John')
   })
 
@@ -43,7 +43,7 @@ test('VCheckbox.js', ({ mount }) => {
       }
     })
 
-    const ripple = wrapper.find('.input-group--selection-controls__ripple')[0]
+    const ripple = wrapper.find('input')[0]
 
     const change = jest.fn()
     wrapper.vm.$on('change', change)
@@ -77,16 +77,16 @@ test('VCheckbox.js', ({ mount }) => {
       }
     })
 
-    const inputGroup = wrapper.find('.input-group')[0]
+    const input = wrapper.first('input')
 
-    expect(inputGroup.getAttribute('role')).toBe('checkbox')
-    expect(inputGroup.getAttribute('aria-checked')).toBe('false')
+    expect(input.getAttribute('role')).toBe('checkbox')
+    expect(input.getAttribute('aria-checked')).toBe('false')
 
     wrapper.setProps({ 'inputValue': true })
-    expect(inputGroup.getAttribute('aria-checked')).toBe('true')
+    expect(input.getAttribute('aria-checked')).toBe('true')
 
     wrapper.setProps({ 'indeterminate': true })
-    expect(inputGroup.getAttribute('aria-checked')).toBe('mixed')
+    expect(input.getAttribute('aria-checked')).toBe('mixed')
   })
 
   it('should render aria-label attribute with label value on input group', () => {
@@ -97,7 +97,7 @@ test('VCheckbox.js', ({ mount }) => {
       attrs: {}
     })
 
-    const inputGroup = wrapper.find('.input-group')[0]
+    const inputGroup = wrapper.first('input')
     expect(inputGroup.getAttribute('aria-label')).toBe('Test')
   })
 
@@ -108,7 +108,7 @@ test('VCheckbox.js', ({ mount }) => {
       }
     })
 
-    const inputGroup = wrapper.find('.input-group')[0]
+    const inputGroup = wrapper.first('input')
     expect(inputGroup.element.getAttribute('aria-label')).toBeFalsy()
   })
 
@@ -121,9 +121,10 @@ test('VCheckbox.js', ({ mount }) => {
 
     const change = jest.fn()
     wrapper.vm.$on('change', change)
+    const input = wrapper.first('input')
 
-    wrapper.trigger('keydown.enter')
-    wrapper.trigger('keydown.space')
+    input.trigger('keydown.enter')
+    input.trigger('keydown.space')
 
     expect(change.mock.calls).toHaveLength(2)
   })
@@ -155,11 +156,12 @@ test('VCheckbox.js', ({ mount }) => {
 
     const change = jest.fn()
     wrapper.vm.$on('change', change)
+    const input = wrapper.first('input')
 
-    wrapper.trigger('keydown.enter')
+    input.trigger('keydown.enter')
     expect(change).not.toBeCalled()
 
-    wrapper.trigger('keydown.space')
+    input.trigger('keydown.space')
     expect(change).toBeCalled()
   })
 
@@ -171,7 +173,7 @@ test('VCheckbox.js', ({ mount }) => {
       }
     })
 
-    const ripple = wrapper.find('.input-group--selection-controls__ripple')[0]
+    const ripple = wrapper.first('.v-input--selection-controls__ripple')
 
     expect(ripple.element._ripple.enabled).toBe(true)
     expect(ripple.element._ripple.centered).toBe(true)
@@ -189,7 +191,7 @@ test('VCheckbox.js', ({ mount }) => {
       }
     })
 
-    const ripple = wrapper.find('.input-group--selection-controls__ripple')[0]
+    const ripple = wrapper.first('.v-input--selection-controls__ripple')
 
     expect(ripple.element._ripple.enabled).toBe(false)
 
@@ -207,7 +209,7 @@ test('VCheckbox.js', ({ mount }) => {
       }
     })
 
-    const ripple = wrapper.find('.input-group--selection-controls__ripple')
+    const ripple = wrapper.find('.v-input--selection-controls__ripple')
 
     expect(ripple).toHaveLength(0)
   })
@@ -219,9 +221,157 @@ test('VCheckbox.js', ({ mount }) => {
       }
     })
 
-    const ripple = wrapper.find('.input-group--selection-controls__ripple')[0]
+    const ripple = wrapper.find('.v-input--selection-controls__ripple')[0]
 
     expect(ripple.element._ripple.enabled).toBe(true)
     expect(ripple.element._ripple.centered).toBe(true)
+  })
+
+  it('should return a value when toggled on with a specified object value', () => {
+    const wrapper = mount(VCheckbox, {
+      propsData: {
+        value: {x: 1, y: 2},
+        inputValue: null
+      }
+    })
+
+    const ripple = wrapper.find('.v-input--selection-controls__ripple')[0]
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    ripple.trigger('click')
+    expect(change).toBeCalledWith({x: 1, y: 2})
+  })
+
+  it('should return a value when toggled on with a specified array value', () => {
+    const wrapper = mount(VCheckbox, {
+      propsData: {
+        value: [1, "2", {x: 1, y: 2}],
+        inputValue: null
+      }
+    })
+
+    const ripple = wrapper.find('.v-input--selection-controls__ripple')[0]
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    ripple.trigger('click')
+    expect(change).toBeCalledWith([1, "2", {x: 1, y: 2}])
+  })
+
+  it('should push value to array when toggled on and is multiple', () => {
+    const wrapper = mount(VCheckbox, {
+      propsData: {
+        value: 'John',
+        inputValue: []
+      }
+    })
+
+    const ripple = wrapper.find('.v-input--selection-controls__ripple')[0]
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    ripple.trigger('click')
+    expect(change).toBeCalledWith(['John'])
+  })
+
+  it('should push array value to array when toggled on and is multiple', () => {
+    const wrapper = mount(VCheckbox, {
+      propsData: {
+        value: [1, 2, {x: 1, y: 2}],
+        inputValue: ['Existing']
+      }
+    })
+
+    const ripple = wrapper.find('.v-input--selection-controls__ripple')[0]
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    ripple.trigger('click')
+    expect(change).toBeCalledWith(['Existing', [1, 2, {x: 1, y: 2}]])
+  })
+
+  it('should return null when toggled off with a specified array value', () => {
+    const wrapper = mount(VCheckbox, {
+      propsData: {
+        multiple: false, // must use multiple flag for array values
+        value: ['John'],
+        inputValue: ['John']
+      }
+    })
+
+    const ripple = wrapper.find('.v-input--selection-controls__ripple')[0]
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    ripple.trigger('click')
+    expect(change).toBeCalledWith(null)
+  })
+
+  it('should remove value(s) from array when toggled off and multiple', () => {
+    const wrapper = mount(VCheckbox, {
+      propsData: {
+        value: 1,
+        inputValue: [1, 2, 1, 3]
+      }
+    })
+
+    const ripple = wrapper.find('.v-input--selection-controls__ripple')[0]
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    ripple.trigger('click')
+    expect(change).toBeCalledWith([2, 3])
+  })
+
+  it('should remove value(s) from array when toggled off and multiple - with objects', () => {
+    const wrapper = mount(VCheckbox, {
+      propsData: {
+        value: {a: 1},
+        inputValue: [{a: 1}, {b: 1}, {a: 1}, {c: 1}]
+      }
+    })
+
+    const ripple = wrapper.find('.v-input--selection-controls__ripple')[0]
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    ripple.trigger('click')
+    expect(change).toBeCalledWith([{b: 1}, {c: 1}])
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/2119
+  it('should put id on internal input', () => {
+    const wrapper = mount(VCheckbox, {
+      propsData: { id: 'foo' }
+    })
+
+    const input = wrapper.first('input')
+    expect(input.element.id).toBe('foo')
+  })
+
+  it('should use custom icons', () => {
+    const wrapper = mount(VCheckbox, {
+      propsData: {
+        indeterminateIcon: 'fizzbuzz',
+        onIcon: 'foo',
+        offIcon: 'bar',
+        indeterminate: true,
+        value: 'fizz'
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+    wrapper.setData({ value: 'fizz'})
+    expect(wrapper.html()).toMatchSnapshot()
+    wrapper.setData({ value: 'buzz'})
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

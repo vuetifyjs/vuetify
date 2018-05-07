@@ -1,10 +1,12 @@
 // Styles
-import '../../stylus/components/_input-groups.styl'
 import '../../stylus/components/_selection-controls.styl'
 import '../../stylus/components/_radio-group.styl'
 
+// Components
+import VInput from '../VInput'
+
 // Mixins
-import Input from '../../mixins/input'
+import Comparable from '../../mixins/comparable'
 import {
   provide as RegistrableProvide
 } from '../../mixins/registrable'
@@ -12,20 +14,23 @@ import {
 export default {
   name: 'v-radio-group',
 
+  extends: VInput,
+
   mixins: [
-    Input,
+    Comparable,
     RegistrableProvide('radio')
   ],
 
   model: {
-    prop: 'inputValue',
+    prop: 'value',
     event: 'change'
   },
 
   provide () {
     return {
       isMandatory: () => this.mandatory,
-      name: () => this.name
+      name: () => this.name,
+      validationState: () => this.validationState
     }
   },
 
@@ -39,86 +44,97 @@ export default {
       type: Boolean,
       default: true
     },
-    inputValue: null,
+    height: {
+      type: [Number, String],
+      default: 'auto'
+    },
     mandatory: {
       type: Boolean,
       default: true
     },
     name: String,
-    row: Boolean
+    row: Boolean,
+    // If no value set on VRadio
+    // will match valueComparator
+    // force default to null
+    value: {
+      default: null
+    }
   },
 
   watch: {
-    hasError (val) {
-      for (let index = this.radios.length; --index >= 0;) {
-        this.radios[index].parentError = val
-      }
-    },
-    inputValue (val) {
-      for (let index = this.radios.length; --index >= 0;) {
-        const radio = this.radios[index]
-        radio.isActive = val === radio.value
-      }
-    }
+    hasError: 'setErrorState',
+    internalValue: 'setActiveRadio'
   },
 
   computed: {
     classes () {
       return {
-        'radio-group': true,
-        'radio-group--column': this.column && !this.row,
-        'radio-group--row': this.row,
-        'error--text': this.hasError
+        'v-input--selection-controls v-input--radio-group': true,
+        'v-input--radio-group--column': this.column && !this.row,
+        'v-input--radio-group--row': this.row
       }
     }
+  },
+
+  mounted () {
+    this.setErrorState(this.hasError)
+    this.setActiveRadio()
   },
 
   methods: {
-    toggleRadio (value) {
-      if (this.disabled) {
-        return
-      }
-
-      this.shouldValidate = true
-      this.$emit('change', value)
-      this.$nextTick(() => this.validate())
-
-      for (let index = this.radios.length; --index >= 0;) {
-        const radio = this.radios[index]
-        if (radio.value !== value) radio.isActive = false
-      }
+    genDefaultSlot () {
+      return [this.genRadioGroup()]
     },
-    radioBlur (e) {
+    genRadioGroup () {
+      return this.$createElement('div', {
+        staticClass: 'v-input--radio-group__input',
+        attrs: {
+          role: 'radiogroup'
+        }
+      }, this.$slots.default)
+    },
+    onRadioChange (value) {
+      if (this.disabled) return
+
+      this.hasInput = true
+      this.internalValue = value
+      this.$emit('change', value)
+      this.setActiveRadio()
+      this.$nextTick(this.validate)
+    },
+    onRadioBlur (e) {
       if (!e.relatedTarget || !e.relatedTarget.classList.contains('radio')) {
-        this.shouldValidate = true
-        this.$emit('blur', this.inputValue)
+        this.hasInput = true
+        this.$emit('blur', e)
       }
     },
     register (radio) {
-      radio.isActive = this.inputValue === radio.value
-      radio.$el.tabIndex = radio.$el.tabIndex > 0 ? radio.$el.tabIndex : 0
-      radio.$on('change', this.toggleRadio)
-      radio.$on('blur', this.radioBlur)
-      radio.$on('focus', this.radioFocus)
+      radio.isActive = this.valueComparator(this.internalValue, radio.value)
+      radio.$refs.input.tabIndex = radio.$refs.input.tabIndex > 0 ? radio.$refs.input.tabIndex : 0
+      radio.$on('change', this.onRadioChange)
+      radio.$on('blur', this.onRadioBlur)
       this.radios.push(radio)
     },
+    setErrorState (val) {
+      for (let index = this.radios.length; --index >= 0;) {
+        this.radios[index].parentError = val
+      }
+    },
+    setActiveRadio () {
+      for (let index = this.radios.length; --index >= 0;) {
+        const radio = this.radios[index]
+        radio.isActive = this.valueComparator(this.internalValue, radio.value)
+      }
+    },
     unregister (radio) {
-      radio.$off('change', this.toggleRadio)
-      radio.$off('blur', this.radioBlur)
-      radio.$off('focus', this.radioFocus)
+      radio.$off('change', this.onRadioChange)
+      radio.$off('blur', this.onRadioBlur)
 
       const index = this.radios.findIndex(r => r === radio)
 
+      /* istanbul ignore else */
       if (index > -1) this.radios.splice(index, 1)
     }
-  },
-
-  render () {
-    const data = {
-      attrs: {
-        role: 'radiogroup'
-      }
-    }
-    return this.genInputGroup(this.$slots.default, data)
   }
 }

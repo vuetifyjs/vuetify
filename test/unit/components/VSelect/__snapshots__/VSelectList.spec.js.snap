@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VSelect should generate children 1`] = `
+
+<div class="v-select-list v-card"
+     style="height: auto;"
+>
+  <div class="v-list">
+    <div class="v-subheader">
+      true
+    </div>
+    <hr class="v-divider">
+    <div>
+      <a class="v-list__tile v-list__tile--link">
+        <div class="v-list__tile__content">
+          <div class="v-list__tile__title">
+            foo
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+`;

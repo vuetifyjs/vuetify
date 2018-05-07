@@ -16,47 +16,34 @@ exports[`VTextField.js should calculate element height when using auto-grow prop
 
 `;
 
-exports[`VTextField.js should match auto-grow snapshot 1`] = `
+exports[`VTextField.js should have prefix and suffix 1`] = `
 
-<div class="input-group input-group--text-field input-group--no-resize input-group--textarea primary--text">
-  <div class="input-group__input">
-    <textarea tabindex="0"
-              rows="5"
-              style="height: 120px;"
-    >
-    </textarea>
-  </div>
-  <div class="input-group__details">
-  </div>
-</div>
-
-`;
-
-exports[`VTextField.js should match multi-line snapshot 1`] = `
-
-<div class="input-group input-group--text-field input-group--multi-line primary--text">
-  <div class="input-group__input">
-    <textarea tabindex="0"
-              rows="5"
-    >
-    </textarea>
-  </div>
-  <div class="input-group__details">
-  </div>
-</div>
-
-`;
-
-exports[`VTextField.js should match textarea snapshot 1`] = `
-
-<div class="input-group input-group--text-field input-group--textarea primary--text">
-  <div class="input-group__input">
-    <textarea tabindex="0"
-              rows="5"
-    >
-    </textarea>
-  </div>
-  <div class="input-group__details">
+<div class="v-input v-text-field v-text-field--prefix">
+  <div class="v-input__control">
+    <div class="v-input__slot primary--text">
+      <div class="v-text-field__slot">
+        <label aria-hidden="true"
+               class="v-label"
+               style="left: 16px; position: absolute;"
+        >
+        </label>
+        <div class="v-text-field__prefix">
+          $
+        </div>
+        <input tabindex="0"
+               type="text"
+        >
+        <div class="v-text-field__suffix">
+          .com
+        </div>
+      </div>
+    </div>
+    <div class="v-text-field__details">
+      <div class="v-messages">
+        <div class="v-messages__wrapper">
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -64,15 +51,29 @@ exports[`VTextField.js should match textarea snapshot 1`] = `
 
 exports[`VTextField.js should not display counter when set to false 1`] = `
 
-<div class="input-group input-group--text-field primary--text">
-  <div class="input-group__input">
-    <input tabindex="0"
-           type="text"
-    >
-  </div>
-  <div class="input-group__details">
-    <div class="input-group__counter">
-      0 / 25
+<div class="v-input v-text-field">
+  <div class="v-input__control">
+    <div class="v-input__slot primary--text">
+      <div class="v-text-field__slot">
+        <label aria-hidden="true"
+               class="v-label"
+               style="left: 0px; position: absolute;"
+        >
+        </label>
+        <input maxlength="50"
+               tabindex="0"
+               type="text"
+        >
+      </div>
+    </div>
+    <div class="v-text-field__details">
+      <div class="v-messages">
+        <div class="v-messages__wrapper">
+        </div>
+      </div>
+      <div class="v-counter">
+        0 / 50
+      </div>
     </div>
   </div>
 </div>
@@ -81,13 +82,27 @@ exports[`VTextField.js should not display counter when set to false 1`] = `
 
 exports[`VTextField.js should not display counter when set to false 2`] = `
 
-<div class="input-group input-group--text-field primary--text">
-  <div class="input-group__input">
-    <input tabindex="0"
-           type="text"
-    >
-  </div>
-  <div class="input-group__details">
+<div class="v-input v-text-field">
+  <div class="v-input__control">
+    <div class="v-input__slot primary--text">
+      <div class="v-text-field__slot">
+        <label aria-hidden="true"
+               class="v-label"
+               style="left: 0px; position: absolute;"
+        >
+        </label>
+        <input maxlength="50"
+               tabindex="0"
+               type="text"
+        >
+      </div>
+    </div>
+    <div class="v-text-field__details">
+      <div class="v-messages">
+        <div class="v-messages__wrapper">
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -95,13 +110,26 @@ exports[`VTextField.js should not display counter when set to false 2`] = `
 
 exports[`VTextField.js should render component and match snapshot 1`] = `
 
-<div class="input-group input-group--text-field primary--text">
-  <div class="input-group__input">
-    <input tabindex="0"
-           type="text"
-    >
-  </div>
-  <div class="input-group__details">
+<div class="v-input v-text-field">
+  <div class="v-input__control">
+    <div class="v-input__slot primary--text">
+      <div class="v-text-field__slot">
+        <label aria-hidden="true"
+               class="v-label"
+               style="left: 0px; position: absolute;"
+        >
+        </label>
+        <input tabindex="0"
+               type="text"
+        >
+      </div>
+    </div>
+    <div class="v-text-field__details">
+      <div class="v-messages">
+        <div class="v-messages__wrapper">
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -109,26 +137,39 @@ exports[`VTextField.js should render component and match snapshot 1`] = `
 
 exports[`VTextField.js should render component with async loading and custom progress and match snapshot 1`] = `
 
-<div class="input-group input-group--async-loading input-group--text-field primary--text">
-  <div class="input-group__input">
-    <input tabindex="0"
-           type="text"
-    >
-  </div>
-  <div class="input-group__details">
-    <div class="v-progress-linear"
-         style="height: 7px;"
-    >
-      <div class="v-progress-linear__background orange"
-           style="height: 7px; opacity: 0.3; width: 100%;"
-      >
+<div class="v-input v-text-field v-input--is-loading">
+  <div class="v-input__control">
+    <div class="v-input__slot primary--text">
+      <div class="v-text-field__slot">
+        <label aria-hidden="true"
+               class="v-label"
+               style="left: 0px; position: absolute;"
+        >
+        </label>
+        <input tabindex="0"
+               type="text"
+        >
       </div>
-      <div class="v-progress-linear__bar">
-        <div class="v-progress-linear__bar__indeterminate v-progress-linear__bar__indeterminate--active">
-          <div class="v-progress-linear__bar__indeterminate long orange">
+      <div class="v-progress-linear"
+           style="height: 7px;"
+      >
+        <div class="v-progress-linear__background orange"
+             style="height: 7px; opacity: 0.3; width: 100%;"
+        >
+        </div>
+        <div class="v-progress-linear__bar">
+          <div class="v-progress-linear__bar__indeterminate v-progress-linear__bar__indeterminate--active">
+            <div class="v-progress-linear__bar__indeterminate long orange">
+            </div>
+            <div class="v-progress-linear__bar__indeterminate short orange">
+            </div>
           </div>
-          <div class="v-progress-linear__bar__indeterminate short orange">
-          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-text-field__details">
+      <div class="v-messages">
+        <div class="v-messages__wrapper">
         </div>
       </div>
     </div>
@@ -139,26 +180,39 @@ exports[`VTextField.js should render component with async loading and custom pro
 
 exports[`VTextField.js should render component with async loading and match snapshot 1`] = `
 
-<div class="input-group input-group--async-loading input-group--text-field primary--text">
-  <div class="input-group__input">
-    <input tabindex="0"
-           type="text"
-    >
-  </div>
-  <div class="input-group__details">
-    <div class="v-progress-linear"
-         style="height: 2px;"
-    >
-      <div class="v-progress-linear__background primary"
-           style="height: 2px; opacity: 0.3; width: 100%;"
-      >
+<div class="v-input v-text-field v-input--is-loading">
+  <div class="v-input__control">
+    <div class="v-input__slot primary--text">
+      <div class="v-text-field__slot">
+        <label aria-hidden="true"
+               class="v-label"
+               style="left: 0px; position: absolute;"
+        >
+        </label>
+        <input tabindex="0"
+               type="text"
+        >
       </div>
-      <div class="v-progress-linear__bar">
-        <div class="v-progress-linear__bar__indeterminate v-progress-linear__bar__indeterminate--active">
-          <div class="v-progress-linear__bar__indeterminate long primary">
+      <div class="v-progress-linear"
+           style="height: 2px;"
+      >
+        <div class="v-progress-linear__background primary"
+             style="height: 2px; opacity: 0.3; width: 100%;"
+        >
+        </div>
+        <div class="v-progress-linear__bar">
+          <div class="v-progress-linear__bar__indeterminate v-progress-linear__bar__indeterminate--active">
+            <div class="v-progress-linear__bar__indeterminate long primary">
+            </div>
+            <div class="v-progress-linear__bar__indeterminate short primary">
+            </div>
           </div>
-          <div class="v-progress-linear__bar__indeterminate short primary">
-          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-text-field__details">
+      <div class="v-messages">
+        <div class="v-messages__wrapper">
         </div>
       </div>
     </div>

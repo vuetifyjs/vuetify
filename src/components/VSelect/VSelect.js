@@ -1,141 +1,199 @@
 // Styles
 import '../../stylus/components/_text-fields.styl'
-import '../../stylus/components/_input-groups.styl'
 import '../../stylus/components/_select.styl'
 
+// Components
+import VChip from '../VChip'
+import VMenu from '../VMenu'
+import VSelectList from './VSelectList'
+
+// Extensions
+import VTextField from '../VTextField/VTextField'
+
 // Mixins
-import Colorable from '../../mixins/colorable'
+import Comparable from '../../mixins/comparable'
 import Dependent from '../../mixins/dependent'
 import Filterable from '../../mixins/filterable'
-import Input from '../../mixins/input'
-import Maskable from '../../mixins/maskable'
-import Soloable from '../../mixins/soloable'
-
-// Component level mixins
-import Autocomplete from './mixins/select-autocomplete'
-import Computed from './mixins/select-computed'
-import Events from './mixins/select-events'
-import Generators from './mixins/select-generators'
-import Helpers from './mixins/select-helpers'
-import Menu from './mixins/select-menu'
-import Props from './mixins/select-props'
-import Watchers from './mixins/select-watchers'
+import Menuable from '../../mixins/menuable'
 
 // Directives
 import ClickOutside from '../../directives/click-outside'
 
+// Helpers
+import { getPropertyFromItem, keyCodes } from '../../util/helpers'
+
 export default {
   name: 'v-select',
 
-  inheritAttrs: false,
+  extends: VTextField,
 
   directives: {
     ClickOutside
   },
 
   mixins: [
-    Autocomplete,
-    Colorable,
+    Comparable,
     Dependent,
-    Events,
-    Filterable,
-    Generators,
-    Helpers,
-    Input,
-    Maskable,
-    Menu,
-    Props,
-    Soloable,
-    Watchers,
-    // Input and Computed both
-    // contain isDirty props
-    // last gets merged in
-    Computed
+    Filterable
   ],
 
-  data () {
-    return {
-      cachedItems: this.cacheItems ? this.items : [],
-      content: {},
-      defaultColor: 'primary',
-      inputValue: (this.multiple || this.tags) && !this.value ? [] : this.value,
-      isBooted: false,
-      lastItem: 20,
-      lazySearch: null,
-      isActive: false,
-      menuIsActive: false,
-      selectedIndex: -1,
-      selectedItems: [],
-      shouldBreak: false
-    }
+  data: vm => ({
+    attrsInput: { role: 'combobox' },
+    cachedItems: vm.cacheItems ? vm.items : [],
+    isMenuActive: false,
+    // As long as a value is defined, show it
+    // Otherwise, check if multiple
+    // to determine which default to provide
+    lazyValue: vm.value != null
+      ? vm.value
+      : vm.multiple ? [] : undefined,
+    selectedIndex: -1,
+    selectedItems: []
+  }),
+
+  props: {
+    ...VMenu.props, // TODO: remove some, just for testing,
+    ...Menuable.props,
+    appendIcon: {
+      type: String,
+      default: 'arrow_drop_down'
+    },
+    appendIconCb: Function,
+    attach: Boolean,
+    auto: Boolean,
+    browserAutocomplete: {
+      type: String,
+      default: 'on'
+    },
+    cacheItems: Boolean,
+    chips: Boolean,
+    clearable: Boolean,
+    contentClass: String,
+    deletableChips: Boolean,
+    dense: Boolean,
+    hideNoData: Boolean,
+    hideSelected: Boolean,
+    items: {
+      type: Array,
+      default: () => []
+    },
+    itemAvatar: {
+      type: [String, Array, Function],
+      default: 'avatar'
+    },
+    itemDisabled: {
+      type: [String, Array, Function],
+      default: 'disabled'
+    },
+    itemText: {
+      type: [String, Array, Function],
+      default: 'text'
+    },
+    itemValue: {
+      type: [String, Array, Function],
+      default: 'value'
+    },
+    maxHeight: {
+      type: [Number, String],
+      default: 300
+    },
+    minWidth: {
+      type: [Boolean, Number, String],
+      default: 0
+    },
+    multiple: Boolean,
+    multiLine: Boolean,
+    openOnClear: Boolean,
+    returnObject: Boolean,
+    searchInput: {
+      default: null
+    },
+    smallChips: Boolean,
+    singleLine: Boolean
   },
 
-  mounted () {
-    // If instance is being destroyed
-    // do not run mounted functions
-    if (this._isDestroyed) return
+  computed: {
+    classes () {
+      return Object.assign({}, VTextField.computed.classes.call(this), {
+        'v-select': true,
+        'v-select--chips': this.chips,
+        'v-select--is-menu-active': this.isMenuActive
+      })
+    },
+    computedItems () {
+      return this.filterDuplicates(this.cachedItems.concat(this.items))
+    },
+    directives () {
+      return [{
+        name: 'click-outside',
+        // TODO: Check into this firing when it shouldn't
+        value: e => {
+          if (this.isMenuActive) {
+            this.onKeyDown(e)
+          }
 
-    // Evaluate the selected items immediately
-    // to avoid a unnecessary label transition
-    this.genSelectedItems()
+          this.isMenuActive = false
+          this.isFocused = false
+          this.selectedIndex = -1
+        },
+        args: {
+          closeConditional: e => {
+            return !this.$refs.menu.$refs.content.contains(e.target) &&
+              !this.$el.contains(e.target) &&
+              e.target !== this.$el
+          }
+        }
+      }]
+    },
+    dynamicHeight () {
+      return 'auto'
+    },
+    hasSlot () {
+      return Boolean(this.chips || this.$slots.item)
+    },
+    isDirty () {
+      return this.selectedItems.length > 0
+    },
+    isMulti () {
+      return this.multiple
+    },
+    menuProps () {
+      const nudgeMenu = !this.isSolo && !this.box
+      const offsetY = this.offsetY || nudgeMenu
 
-    this.content = this.$refs.menu.$refs.content
-  },
-
-  beforeDestroy () {
-    if (this.isBooted) {
-      if (this.content) {
-        this.content.removeEventListener('scroll', this.onScroll, false)
+      return {
+        closeOnClick: false,
+        closeOnContentClick: false,
+        openOnClick: false,
+        value: this.isMenuActive,
+        offsetY,
+        nudgeBottom: offsetY ? 1 : 0 // convert to int
       }
     }
+  },
+
+  watch: {
+    internalValue: 'setSelectedItems',
+    items (val) {
+      if (this.cacheItems) {
+        this.cachedItems = this.filterDuplicates(this.cachedItems.concat(val))
+      }
+
+      this.setSelectedItems()
+    }
+  },
+
+  created () {
+    this.setSelectedItems()
   },
 
   methods: {
-    needsTile (tile) {
-      // TODO: use the component name instead of tag
-      return tile.componentOptions == null || tile.componentOptions.tag !== 'v-list-tile'
-    },
-    changeSelectedIndex (keyCode) {
-      // backspace, left, right, delete
-      if (![8, 37, 39, 46].includes(keyCode)) return
+    clearableCallback () {
+      this.internalValue = this.isMulti ? [] : null
+      this.$emit('change', this.internalValue)
+      this.$nextTick(() => this.$refs.input.focus())
 
-      const indexes = this.selectedItems.length - 1
-
-      if (keyCode === 37) { // Left arrow
-        this.selectedIndex = this.selectedIndex === -1
-          ? indexes
-          : this.selectedIndex - 1
-      } else if (keyCode === 39) { // Right arrow
-        this.selectedIndex = this.selectedIndex >= indexes
-          ? -1
-          : this.selectedIndex + 1
-      } else if (this.selectedIndex === -1) {
-        this.selectedIndex = indexes
-        return
-      }
-
-      // backspace/delete
-      if ([8, 46].includes(keyCode)) {
-        const newIndex = this.selectedIndex === indexes
-          ? this.selectedIndex - 1
-          : this.selectedItems[this.selectedIndex + 1]
-            ? this.selectedIndex
-            : -1
-
-        this.combobox
-          ? this.inputValue = null
-          : this.selectItem(this.selectedItems[this.selectedIndex])
-        this.selectedIndex = newIndex
-      }
-    },
-    closeConditional (e) {
-      return (
-        this.isActive &&
-        !!this.content &&
-        !this.content.contains(e.target) &&
-        !!this.$el &&
-        !this.$el.contains(e.target)
-      )
+      if (this.openOnClear) this.isMenuActive = true
     },
     filterDuplicates (arr) {
       const uniqueValues = new Map()
@@ -143,169 +201,300 @@ export default {
         const item = arr[index]
         const val = this.getValue(item)
 
+        // TODO: comparator
         !uniqueValues.has(val) && uniqueValues.set(val, item)
       }
       return Array.from(uniqueValues.values())
     },
-    genDirectives () {
-      return [{
-        name: 'click-outside',
-        value: () => (this.isActive = false),
-        args: {
-          closeConditional: this.closeConditional
-        }
-      }]
-    },
-    genSelectedItems (val = this.inputValue) {
-      // If we are using tags, don't filter results
-      if (this.tags) return (this.selectedItems = val)
-
-      // Combobox is the single version
-      // of a taggable select element
-      if (this.combobox) return (this.selectedItems = val != null ? [val] : [])
-
-      let selectedItems = this.computedItems.filter(i => {
-        if (!this.isMultiple) {
-          return this.getValue(i) === this.getValue(val)
-        } else {
-          // Always return Boolean
-          return this.findExistingIndex(i) > -1
-        }
-      })
-
-      if (!selectedItems.length &&
-        val != null &&
-        this.tags
-      ) {
-        selectedItems = Array.isArray(val) ? val : [val]
-      }
-
-      this.selectedItems = selectedItems
-    },
-    clearableCallback () {
-      const inputValue = this.isMultiple ? [] : null
-
-      this.inputValue = inputValue
-      this.$emit('change', inputValue)
-      this.genSelectedItems()
-
-      // When input is cleared
-      // reset search value and
-      // re-focus the input
-      setTimeout(() => {
-        this.searchValue = null
-        this.focusInput()
-      }, 0)
-
-      if (this.openOnClear) {
-        setTimeout(this.showMenu, 50)
-      }
-    },
-    onScroll () {
-      if (!this.isActive) {
-        requestAnimationFrame(() => (this.content.scrollTop = 0))
-      } else {
-        if (this.lastItem >= this.computedItems.length) return
-
-        const showMoreItems = (
-          this.content.scrollHeight -
-          (this.content.scrollTop +
-          this.content.clientHeight)
-        ) < 200
-
-        if (showMoreItems) {
-          this.lastItem += 20
-        }
-      }
-    },
-    findExistingItem (val) {
-      const itemValue = this.getValue(val)
-      return this.items.find(i => this.valueComparator(this.getValue(i), itemValue))
-    },
     findExistingIndex (item) {
       const itemValue = this.getValue(item)
-      return this.inputValue.findIndex(i => this.valueComparator(this.getValue(i), itemValue))
+
+      return (this.internalValue || []).findIndex(i => this.valueComparator(this.getValue(i), itemValue))
+    },
+    genChipSelection (item, index) {
+      const isDisabled = (
+        this.disabled ||
+        this.readonly ||
+        this.getDisabled(item)
+      )
+      const click = e => {
+        if (isDisabled) return
+
+        e.stopPropagation()
+        this.selectedIndex = index
+        this.onFocus()
+      }
+
+      return this.$createElement(VChip, {
+        staticClass: 'v-chip--select-multi',
+        props: {
+          close: this.deletableChips && !isDisabled,
+          dark: this.dark,
+          disabled: isDisabled,
+          selected: index === this.selectedIndex,
+          small: this.smallChips
+        },
+        on: {
+          click: click,
+          focus: click,
+          input: () => this.onChipInput(item)
+        },
+        key: this.getValue(item)
+      }, this.getText(item))
+    },
+    genClearIcon () {
+      if (!this.clearable ||
+        !this.isDirty
+      ) return null
+
+      return this.genSlot('append', 'inner', [
+        this.genIcon('clear', this.clearIconCb || this.clearableCallback)
+      ])
+    },
+    genCommaSelection (item, index, last) {
+      // Item may be an object
+      // TODO: Remove JSON.stringify
+      const key = JSON.stringify(this.getValue(item))
+
+      const isDisabled = (
+        this.disabled ||
+        this.readonly ||
+        this.getDisabled(item)
+      )
+
+      const classes = index === this.selectedIndex
+        ? this.addTextColorClassChecks()
+        : {}
+
+      classes['v-select__selection--disabled'] = isDisabled
+
+      return this.$createElement('div', {
+        staticClass: 'v-select__selection v-select__selection--comma',
+        'class': classes,
+        key
+      }, `${this.getText(item)}${last ? '' : ', '}`)
+    },
+    genDefaultSlot () {
+      const selections = this.genSelections()
+      const input = this.genInput()
+
+      // If the return is an empty array
+      // push the input
+      if (Array.isArray(selections)) {
+        selections.push(input)
+      // Otherwise push it into children
+      } else {
+        selections.children = selections.children || []
+        selections.children.push(input)
+      }
+
+      const activator = this.genSelectSlot([
+        this.genLabel(),
+        this.prefix ? this.genAffix('prefix') : null,
+        selections,
+        this.suffix ? this.genAffix('suffix') : null,
+        this.genClearIcon(),
+        this.genSlot('append', 'inner', [this.genIcon('append')])
+      ])
+
+      return [this.genMenu(activator)]
+    },
+    genInput () {
+      const input = VTextField.methods.genInput.call(this)
+
+      input.data.domProps.value = null
+
+      return input
+    },
+    genList () {
+      return this.$createElement(VSelectList, {
+        props: {
+          action: this.isMulti && !this.isHidingSelected,
+          color: this.color,
+          dark: this.dark,
+          dense: this.dense,
+          hideSelected: this.hideSelected,
+          items: this.items,
+          light: this.light,
+          noDataText: this.noDataText,
+          selectedItems: this.selectedItems,
+          itemAvatar: this.itemAvatar,
+          itemDisabled: this.itemDisabled,
+          itemValue: this.itemValue,
+          itemText: this.itemText
+        },
+        on: {
+          select: this.selectItem
+        },
+        scopedSlots: {
+          item: this.$scopedSlots.item
+        }
+      }, [
+        this.$slots['no-data'] ? this.$createElement('div', {
+          slot: 'no-data'
+        }, this.$slots['no-data']) : null
+      ])
+    },
+    genMenu (activator) {
+      const props = {
+        contentClass: this.contentClass
+      }
+      const inheritedProps = Object.keys(VMenu.props).concat(Object.keys(Menuable.props))
+
+      // Later this might be filtered
+      for (let prop of inheritedProps) {
+        props[prop] = this[prop]
+      }
+
+      // These styles encompass the prepend
+      // and append icons. Change activator
+      // to the entire component
+      if (this.isSolo) {
+        props.activator = this.$el
+      } else {
+        props.activator = this.$refs['input-slot']
+      }
+
+      Object.assign(props, this.menuProps)
+
+      return this.$createElement(VMenu, {
+        props,
+        on: {
+          input: val => {
+            this.isMenuActive = val
+            this.isFocused = val
+          }
+        },
+        ref: 'menu'
+      }, [activator, this.genList()])
+    },
+    genSelections () {
+      let length = this.selectedItems.length
+      const children = new Array(length)
+
+      let genSelection
+      if (this.$scopedSlots.selection) {
+        genSelection = this.genSlotSelection
+      } else if (this.chips) {
+        genSelection = this.genChipSelection
+      } else {
+        genSelection = this.genCommaSelection
+      }
+
+      while (length--) {
+        children[length] = genSelection(
+          this.selectedItems[length],
+          length,
+          length === children.length - 1
+        )
+      }
+
+      return this.$createElement('div', {
+        staticClass: 'v-select__selections'
+      }, children)
+    },
+    genSelectSlot (children) {
+      return this.$createElement('div', {
+        staticClass: 'v-select__slot',
+        directives: this.directives,
+        slot: 'activator'
+      }, children)
+    },
+    genSlotSelection (item, index) {
+      return this.$scopedSlots.selection({
+        parent: this,
+        item,
+        index,
+        selected: index === this.selectedIndex,
+        disabled: this.disabled || this.readonly
+      })
+    },
+    getMenuIndex () {
+      return this.$refs.menu ? this.$refs.menu.listIndex : -1
+    },
+    getDisabled (item) {
+      return getPropertyFromItem(item, this.itemDisabled, false)
+    },
+    getText (item) {
+      return getPropertyFromItem(item, this.itemText, item)
+    },
+    getValue (item) {
+      return getPropertyFromItem(item, this.itemValue, item)
+    },
+    onBlur (e) {
+      this.$emit('blur', e)
+    },
+    onChipInput (item) {
+      if (this.isMulti) this.selectItem(item)
+      else this.internalValue = null
+
+      // If all items have been deleted,
+      // open `v-menu`
+      if (this.selectedItems.length === 0) {
+        this.isMenuActive = true
+      }
+
+      this.selectedIndex = -1
+    },
+    onClick () {
+      if (this.isDisabled) return
+
+      this.onFocus()
+      this.isMenuActive = true
+    },
+    // Detect tab and call original onBlur method
+    onKeyDown (e) {
+      if (e.keyCode === keyCodes.tab) {
+        VTextField.methods.onBlur.call(this, e)
+      } else if ([
+        keyCodes.enter,
+        keyCodes.space,
+        keyCodes.up,
+        keyCodes.down
+      ].includes(e.keyCode)) {
+        this.isMenuActive = true
+      }
+    },
+    onMouseUp (e) {
+      if (this.isSolo || this.hasOutline) {
+        this.isMenuActive = true
+      }
+
+      VTextField.methods.onMouseUp.call(this, e)
     },
     selectItem (item) {
-      if (!this.isMultiple) {
-        this.inputValue = this.returnObject ? item : this.getValue(item)
-        this.selectedItems = [item]
+      if (!this.isMulti) {
+        this.internalValue = this.returnObject ? item : this.getValue(item)
+        this.isMenuActive = false
       } else {
-        const selectedItems = []
-        const inputValue = this.inputValue.slice()
+        const internalValue = (this.internalValue || []).slice()
         const i = this.findExistingIndex(item)
 
-        i !== -1 ? inputValue.splice(i, 1) : inputValue.push(item)
-        this.inputValue = inputValue.map(i => {
-          selectedItems.push(i)
+        i !== -1 ? internalValue.splice(i, 1) : internalValue.push(item)
+        this.internalValue = internalValue.map(i => {
           return this.returnObject ? i : this.getValue(i)
         })
-
-        this.selectedItems = selectedItems
-        this.selectedIndex = -1
       }
 
-      this.searchValue = !this.isMultiple &&
-        !this.chips &&
-        !this.$scopedSlots.selection
-        ? this.getText(this.selectedItem)
-        : null
+      this.$emit('change', this.internalValue)
 
-      this.$emit('change', this.inputValue)
-
-      // List tile will re-render, reset index to
-      // maintain highlighting
-      const savedIndex = this.getMenuIndex()
-      this.resetMenuIndex()
-
-      // After selecting an item
-      // refocus the input and
-      // reset the caret pos
       this.$nextTick(() => {
-        this.focusInput()
-        this.setCaretPosition(this.currentRange)
-
-        requestAnimationFrame(() => {
-          if (savedIndex > -1) {
-            this.setMenuIndex(savedIndex)
-          }
-        })
+        this.$refs.menu &&
+          this.$refs.menu.updateDimensions()
       })
+    },
+    setMenuIndex (index) {
+      this.$refs.menu && (this.$refs.menu.listIndex = index)
+    },
+    setSelectedItems () {
+      const fn = !this.isMulti
+        ? i => this.valueComparator(
+          this.getValue(i),
+          this.getValue(this.internalValue)
+        )
+        : i => this.findExistingIndex(i) > -1
+
+      this.selectedItems = this.computedItems.filter(fn)
     }
-  },
-
-  render () {
-    const data = {
-      attrs: {
-        tabindex: this.isAutocomplete || this.disabled ? -1 : this.tabindex,
-        'data-uid': this._uid,
-        ...(this.isAutocomplete ? null : this.$attrs),
-        role: this.isAutocomplete ? null : 'combobox'
-      }
-    }
-
-    if (!this.isAutocomplete) {
-      data.on = this.genListeners()
-      data.directives = this.genDirectives()
-    } else {
-      data.on = {
-        click: () => {
-          if (this.disabled || this.readonly || this.isFocused) return
-
-          // If the input is dirty,
-          // the input is not targetable
-          // so we must manually focus
-          if (this.isDirty) {
-            this.focus()
-            this.$nextTick(this.focusInput)
-          }
-        }
-      }
-    }
-
-    return this.genInputGroup([
-      this.genSelectionsAndSearch(),
-      this.genMenu()
-    ], data, this.toggleMenu)
   }
 }
