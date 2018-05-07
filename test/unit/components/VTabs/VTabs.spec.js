@@ -215,7 +215,7 @@ test('VTabs', ({ mount, shallow }) => {
 
     expect(wrapper.vm.genIcon('prev')).toBe(null)
 
-    // // Mock display state
+    // Mock display state
     wrapper.setData({ isOverflowing: true, scrollOffset: 1 })
     wrapper.setProps({ showArrows: true })
     wrapper.vm.$vuetify.breakpoint.width = 800

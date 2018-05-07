@@ -36,10 +36,7 @@ export default {
     '$vuetify.application.right': 'onResize',
     scrollOffset (val) {
       this.$refs.container.style.transform = `translateX(${-val}px)`
-      if (this.hasArrows) {
-        this.prevIconVisible = this.checkPrevIcon()
-        this.nextIconVisible = this.checkNextIcon()
-      }
+      this.hasArrows && this.checkIcons()
     }
   }
 }
