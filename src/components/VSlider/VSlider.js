@@ -165,7 +165,7 @@ export default {
       ) ? 0 : 7
     },
     trackStyles () {
-      const trackPadding = `${this.trackPadding}px`
+      const trackPadding = this.disabled ? `calc(${this.inputWidth}% + 8px)` : `${this.trackPadding}px`
       let left = this.$vuetify.rtl ? 'auto' : trackPadding
       let right = this.$vuetify.rtl ? trackPadding : 'auto'
       let width = this.disabled
