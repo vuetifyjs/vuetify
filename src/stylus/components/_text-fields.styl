@@ -73,8 +73,7 @@ theme(v-text-field, "v-text-field")
 rtl(v-text-field-rtl, "v-text-field")
 
 .v-text-field
-  input,
-  textarea // could/should probably be in textarea
+  input
     flex: 1 1 auto
     padding: 8px 0 8px
     max-width: 100%
@@ -157,6 +156,7 @@ rtl(v-text-field-rtl, "v-text-field")
       align-items: flex-start
 
     input
+      cursor: pointer
       margin-top: 24px
 
     &.v-text-field--single-line

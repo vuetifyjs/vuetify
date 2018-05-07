@@ -10,9 +10,13 @@ theme(v-textarea, "v-textarea")
 // Add no resize classes
 .v-textarea
   textarea
+    flex: 1 1 auto
+    max-width: 100%
     min-height: 32px
     overflow: hidden
     outline: none
+    padding: 4px 0 8px
+    width: 100%
 
   &.v-text-field--box,
   &.v-text-field--enclosed
@@ -35,7 +39,9 @@ theme(v-textarea, "v-textarea")
 
     // Essentially revert styles
     // applied by v-text-field
-    .v-input__append-inner
+    .v-input__prepend-outer,
+    .v-input__append-inner,
+    .v-input__append-outer
       align-self: flex-start
       margin-top: 16px
 
