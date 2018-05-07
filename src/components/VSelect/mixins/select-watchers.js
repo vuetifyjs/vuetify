@@ -9,7 +9,7 @@
 export default {
   watch: {
     filteredItems () {
-      this.$refs.menu && this.$refs.menu.updateDimensions()
+      this.$refs.menu && this.isActive && this.$refs.menu.updateDimensions()
     },
     inputValue (val) {
       // Search for an existing item when a
@@ -90,7 +90,9 @@ export default {
       // Wrap input to next line if overflowing
       if (this.$refs.input.scrollWidth > this.$refs.input.clientWidth) {
         this.shouldBreak = true
-        this.$nextTick(this.$refs.menu.updateDimensions)
+        if (this.isActive) {
+          this.$nextTick(this.$refs.menu.updateDimensions)
+        }
       } else if (val === null) {
         this.shouldBreak = false
       }
@@ -117,7 +119,7 @@ export default {
       })
     },
     selectedItems () {
-      if (this.isAutocomplete) {
+      if (this.isAutocomplete && this.isActive) {
         this.$nextTick(this.$refs.menu.updateDimensions)
       }
     },
