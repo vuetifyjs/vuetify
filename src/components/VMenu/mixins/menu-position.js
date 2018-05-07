@@ -43,7 +43,7 @@ export default {
       this.selectedIndex = selectedIndex
       let actingIndex = selectedIndex
 
-      let offsetPadding = -(this.defaultOffset * 2)
+      let offsetPadding = -(this.defaultOffset * 6)
       // #708 Stop index should vary by tile length
       this.stopIndex = this.tiles.length > 4
         ? this.tiles.length - 4
@@ -51,9 +51,9 @@ export default {
 
       if (selectedIndex > this.startIndex && selectedIndex < this.stopIndex) {
         actingIndex = 2
-        offsetPadding = (this.defaultOffset * 3)
+        offsetPadding = -this.defaultOffset
       } else if (selectedIndex >= this.stopIndex) {
-        offsetPadding = -(this.defaultOffset)
+        offsetPadding = -(this.defaultOffset * 5)
         actingIndex = selectedIndex - this.stopIndex
       }
 
