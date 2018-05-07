@@ -8,127 +8,201 @@ exports[`VSelect should escape items in menu 1`] = `
 
 `;
 
-exports[`VSelect should escape items in menu 2`] = `
+exports[`VSelect should only show items if they are in items 1`] = `
 
-<div class="v-list__tile__title">
-  &lt;
-  <span class="list__tile__mask">
-    str
-  </span>
-  ong&gt;foo&lt;/strong&gt;
-</div>
-
-`;
-
-exports[`VSelect should render buttons correctly when using items array with segmented prop 1`] = `
-
-<div tabindex="0"
-     data-uid="35"
-     role="combobox"
-     class="input-group input-group--dirty input-group--append-icon input-group--text-field input-group--select input-group--segmented input-group--single-line primary--text"
+<div role="combobox"
+     class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty"
 >
-  <div class="input-group__input">
-    <div class="input-group__selections"
-         style="overflow: hidden;"
-    >
-      <button type="button"
-              class="v-btn v-btn--flat"
+  <div class="v-input__control">
+    <div class="v-input__slot primary--text">
+      <div class="v-menu"
+           style="display: inline-block;"
       >
-        <div class="v-btn__content">
-          Hello
-        </div>
-      </button>
-      <input disabled="disabled"
-             tabindex="-1"
-             class="input-group--select__autocomplete"
-             style="display: none;"
-      >
-    </div>
-    <div class="v-menu"
-         style="display: inline-block;"
-    >
-      <div class="v-menu__content menu__content--select  menu__content--dropdown"
-           style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; z-index: 0; display: none;"
-      >
-        <div class="v-card"
-             style="height: auto;"
-        >
-          <div class="v-list">
-            <div>
-              <a class="v-list__tile v-list__tile--link v-list__tile--active primary--text">
-                <div class="v-list__tile__content">
-                  <div class="v-list__tile__title">
-                    Hello
-                  </div>
-                </div>
-              </a>
+        <div class="v-menu__activator">
+          <div class="v-select__slot">
+            <label aria-hidden="true"
+                   class="v-label v-label--active"
+                   style="left: 0px; position: absolute;"
+            >
+            </label>
+            <div class="v-select__selections">
+              <div class="v-select__selection v-select__selection--comma">
+                foo
+              </div>
+              <input tabindex="0"
+                     type="text"
+                     autocomplete="on"
+              >
+            </div>
+            <div class="v-input__append-inner">
+              <div class="v-input__icon v-input__icon--append">
+                <i aria-hidden="true"
+                   class="v-icon material-icons"
+                >
+                  arrow_drop_down
+                </i>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <i aria-hidden="true"
-       class="v-icon material-icons input-group__append-icon input-group__icon-cb"
-    >
-      arrow_drop_down
-    </i>
-  </div>
-  <div class="input-group__details">
+    <div class="v-text-field__details">
+      <div class="v-messages">
+        <div class="v-messages__wrapper">
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
 `;
 
-exports[`VSelect should render buttons correctly when using slot with segmented prop 1`] = `
+exports[`VSelect should only show items if they are in items 2`] = `
 
-<div tabindex="0"
-     data-uid="45"
-     role="combobox"
-     class="input-group input-group--dirty input-group--append-icon input-group--text-field input-group--select input-group--segmented input-group--single-line primary--text"
+<div role="combobox"
+     class="v-input v-text-field v-select"
 >
-  <div class="input-group__input">
-    <div class="input-group__selections"
-         style="overflow: hidden;"
-    >
-      <div>
-        Hello
-      </div>
-      <input disabled="disabled"
-             tabindex="-1"
-             class="input-group--select__autocomplete"
-             style="display: none;"
+  <div class="v-input__control">
+    <div class="v-input__slot primary--text">
+      <div class="v-menu"
+           style="display: inline-block;"
       >
-    </div>
-    <div class="v-menu"
-         style="display: inline-block;"
-    >
-      <div class="v-menu__content menu__content--select  menu__content--dropdown"
-           style="max-height: 300px; min-width: 0px; max-width: auto; top: 12px; left: 0px; z-index: 0; display: none;"
-      >
-        <div class="v-card"
-             style="height: auto;"
-        >
-          <div class="v-list">
-            <div>
-              <a class="v-list__tile v-list__tile--link v-list__tile--active primary--text">
-                <div class="v-list__tile__content">
-                  <div class="v-list__tile__title">
-                    Hello
-                  </div>
-                </div>
-              </a>
+        <div class="v-menu__activator">
+          <div class="v-select__slot">
+            <label aria-hidden="true"
+                   class="v-label"
+                   style="left: 0px; position: absolute;"
+            >
+            </label>
+            <div class="v-select__selections">
+              <input tabindex="0"
+                     type="text"
+                     autocomplete="on"
+              >
+            </div>
+            <div class="v-input__append-inner">
+              <div class="v-input__icon v-input__icon--append">
+                <i aria-hidden="true"
+                   class="v-icon material-icons"
+                >
+                  arrow_drop_down
+                </i>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <i aria-hidden="true"
-       class="v-icon material-icons input-group__append-icon input-group__icon-cb"
-    >
-      arrow_drop_down
-    </i>
+    <div class="v-text-field__details">
+      <div class="v-messages">
+        <div class="v-messages__wrapper">
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="input-group__details">
+</div>
+
+`;
+
+exports[`VSelect should only show items if they are in items 3`] = `
+
+<div role="combobox"
+     class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty"
+>
+  <div class="v-input__control">
+    <div class="v-input__slot primary--text">
+      <div class="v-menu"
+           style="display: inline-block;"
+      >
+        <div class="v-menu__activator">
+          <div class="v-select__slot">
+            <label aria-hidden="true"
+                   class="v-label v-label--active"
+                   style="left: 0px; position: absolute;"
+            >
+            </label>
+            <div class="v-select__selections">
+              <div class="v-select__selection v-select__selection--comma">
+                bar
+              </div>
+              <input tabindex="0"
+                     type="text"
+                     autocomplete="on"
+              >
+            </div>
+            <div class="v-input__append-inner">
+              <div class="v-input__icon v-input__icon--append">
+                <i aria-hidden="true"
+                   class="v-icon material-icons"
+                >
+                  arrow_drop_down
+                </i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-text-field__details">
+      <div class="v-messages">
+        <div class="v-messages__wrapper">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VSelect should only show items if they are in items 4`] = `
+
+<div role="combobox"
+     class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty"
+>
+  <div class="v-input__control">
+    <div class="v-input__slot primary--text">
+      <div class="v-menu"
+           style="display: inline-block;"
+      >
+        <div class="v-menu__activator">
+          <div class="v-select__slot">
+            <label aria-hidden="true"
+                   class="v-label v-label--active"
+                   style="left: 0px; position: absolute;"
+            >
+            </label>
+            <div class="v-select__selections">
+              <div class="v-select__selection v-select__selection--comma">
+                foo,
+              </div>
+              <div class="v-select__selection v-select__selection--comma">
+                bar
+              </div>
+              <input tabindex="0"
+                     type="text"
+                     autocomplete="on"
+              >
+            </div>
+            <div class="v-input__append-inner">
+              <div class="v-input__icon v-input__icon--append">
+                <i aria-hidden="true"
+                   class="v-icon material-icons"
+                >
+                  arrow_drop_down
+                </i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-text-field__details">
+      <div class="v-messages">
+        <div class="v-messages__wrapper">
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -136,63 +210,46 @@ exports[`VSelect should render buttons correctly when using slot with segmented 
 
 exports[`VSelect should render v-select correctly when not using scope slot 1`] = `
 
-<div tabindex="0"
-     data-uid="73"
-     role="combobox"
-     class="input-group input-group--dirty input-group--append-icon input-group--text-field input-group--select primary--text"
+<div role="combobox"
+     class="v-input v-text-field v-select"
 >
-  <div class="input-group__input">
-    <div class="input-group__selections"
-         style="overflow: hidden;"
-    >
-      <div class="input-group__selections__comma">
-        Text 0
-      </div>
-      <input disabled="disabled"
-             tabindex="-1"
-             class="input-group--select__autocomplete"
-             style="display: none;"
+  <div class="v-input__control">
+    <div class="v-input__slot primary--text">
+      <div class="v-menu"
+           style="display: inline-block;"
       >
-    </div>
-    <div class="v-menu"
-         style="display: inline-block;"
-    >
-      <div class="v-menu__content menu__content--select"
-           style="max-height: 300px; min-width: 0px; max-width: auto; top: 18px; left: 0px; z-index: 0; display: none;"
-      >
-        <div class="v-card"
-             style="height: auto;"
-        >
-          <div class="v-list">
-            <div>
-              <a class="v-list__tile v-list__tile--link v-list__tile--active primary--text">
-                <div class="v-list__tile__content">
-                  <div class="v-list__tile__title">
-                    Text 0
-                  </div>
-                </div>
-              </a>
+        <div class="v-menu__activator">
+          <div class="v-select__slot">
+            <label aria-hidden="true"
+                   class="v-label"
+                   style="left: 0px; position: absolute;"
+            >
+            </label>
+            <div class="v-select__selections">
+              <input tabindex="0"
+                     type="text"
+                     autocomplete="on"
+              >
             </div>
-            <div>
-              <a class="v-list__tile v-list__tile--link">
-                <div class="v-list__tile__content">
-                  <div class="v-list__tile__title">
-                    Text 1
-                  </div>
-                </div>
-              </a>
+            <div class="v-input__append-inner">
+              <div class="v-input__icon v-input__icon--append">
+                <i aria-hidden="true"
+                   class="v-icon material-icons"
+                >
+                  arrow_drop_down
+                </i>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <i aria-hidden="true"
-       class="v-icon material-icons input-group__append-icon input-group__icon-cb"
-    >
-      arrow_drop_down
-    </i>
-  </div>
-  <div class="input-group__details">
+    <div class="v-text-field__details">
+      <div class="v-messages">
+        <div class="v-messages__wrapper">
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -200,63 +257,46 @@ exports[`VSelect should render v-select correctly when not using scope slot 1`] 
 
 exports[`VSelect should render v-select correctly when not using v-list-tile in item scope slot 1`] = `
 
-<div tabindex="0"
-     data-uid="64"
-     role="combobox"
-     class="input-group input-group--dirty input-group--append-icon input-group--text-field input-group--select primary--text"
+<div role="combobox"
+     class="v-input v-text-field v-select"
 >
-  <div class="input-group__input">
-    <div class="input-group__selections"
-         style="overflow: hidden;"
-    >
-      <div class="input-group__selections__comma">
-        Text 0
-      </div>
-      <input disabled="disabled"
-             tabindex="-1"
-             class="input-group--select__autocomplete"
-             style="display: none;"
+  <div class="v-input__control">
+    <div class="v-input__slot primary--text">
+      <div class="v-menu"
+           style="display: inline-block;"
       >
-    </div>
-    <div class="v-menu"
-         style="display: inline-block;"
-    >
-      <div class="v-menu__content menu__content--select"
-           style="max-height: 300px; min-width: 0px; max-width: auto; top: 18px; left: 0px; z-index: 0; display: none;"
-      >
-        <div class="v-card"
-             style="height: auto;"
-        >
-          <div class="v-list">
-            <div>
-              <a class="v-list__tile v-list__tile--link v-list__tile--active primary--text">
-                <div class="v-list__tile__content">
-                  <div class="v-list__tile__title">
-                    0
-                  </div>
-                </div>
-              </a>
+        <div class="v-menu__activator">
+          <div class="v-select__slot">
+            <label aria-hidden="true"
+                   class="v-label"
+                   style="left: 0px; position: absolute;"
+            >
+            </label>
+            <div class="v-select__selections">
+              <input tabindex="0"
+                     type="text"
+                     autocomplete="on"
+              >
             </div>
-            <div>
-              <a class="v-list__tile v-list__tile--link">
-                <div class="v-list__tile__content red lighten-1">
-                  <div class="v-list__tile__title">
-                    1
-                  </div>
-                </div>
-              </a>
+            <div class="v-input__append-inner">
+              <div class="v-input__icon v-input__icon--append">
+                <i aria-hidden="true"
+                   class="v-icon material-icons"
+                >
+                  arrow_drop_down
+                </i>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <i aria-hidden="true"
-       class="v-icon material-icons input-group__append-icon input-group__icon-cb"
-    >
-      arrow_drop_down
-    </i>
-  </div>
-  <div class="input-group__details">
+    <div class="v-text-field__details">
+      <div class="v-messages">
+        <div class="v-messages__wrapper">
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -264,55 +304,117 @@ exports[`VSelect should render v-select correctly when not using v-list-tile in 
 
 exports[`VSelect should render v-select correctly when using v-list-tile in item scope slot 1`] = `
 
-<div tabindex="0"
-     data-uid="54"
-     role="combobox"
-     class="input-group input-group--dirty input-group--append-icon input-group--text-field input-group--select primary--text"
+<div role="combobox"
+     class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty"
 >
-  <div class="input-group__input">
-    <div class="input-group__selections"
-         style="overflow: hidden;"
-    >
-      <div class="input-group__selections__comma">
-        Text 0
-      </div>
-      <input disabled="disabled"
-             tabindex="-1"
-             class="input-group--select__autocomplete"
-             style="display: none;"
+  <div class="v-input__control">
+    <div class="v-input__slot primary--text">
+      <div class="v-menu"
+           style="display: inline-block;"
       >
-    </div>
-    <div class="v-menu"
-         style="display: inline-block;"
-    >
-      <div class="v-menu__content menu__content--select"
-           style="max-height: 300px; min-width: 0px; max-width: auto; top: 18px; left: 0px; z-index: 0; display: none;"
-      >
-        <div class="v-card"
-             style="height: auto;"
-        >
-          <div class="v-list">
-            <div class>
-              <a class="v-list__tile v-list__tile--link v-list__tile--active primary--text">
-                Text 0
-              </a>
+        <div class="v-menu__activator">
+          <div class="v-select__slot">
+            <label aria-hidden="true"
+                   class="v-label v-label--active"
+                   style="left: 0px; position: absolute;"
+            >
+            </label>
+            <div class="v-select__selections">
+              <div>
+                <div class="v-list__tile">
+                  1
+                </div>
+              </div>
+              <input tabindex="0"
+                     type="text"
+                     autocomplete="on"
+              >
             </div>
-            <div class="red lighten-1">
-              <a class="v-list__tile v-list__tile--link">
-                Text 1
-              </a>
+            <div class="v-input__append-inner">
+              <div class="v-input__icon v-input__icon--append">
+                <i aria-hidden="true"
+                   class="v-icon material-icons"
+                >
+                  arrow_drop_down
+                </i>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <i aria-hidden="true"
-       class="v-icon material-icons input-group__append-icon input-group__icon-cb"
-    >
-      arrow_drop_down
-    </i>
+    <div class="v-text-field__details">
+      <div class="v-messages">
+        <div class="v-messages__wrapper">
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="input-group__details">
+</div>
+
+`;
+
+exports[`VSelect should use scoped slot for selection generation 1`] = `
+
+<div role="combobox"
+     class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty"
+>
+  <div class="v-input__control">
+    <div class="v-input__slot primary--text">
+      <div class="v-menu"
+           style="display: inline-block;"
+      >
+        <div class="v-menu__activator">
+          <div class="v-select__slot">
+            <label aria-hidden="true"
+                   class="v-label v-label--active"
+                   style="left: 0px; position: absolute;"
+            >
+            </label>
+            <div class="v-select__selections">
+              <div class="v-select__selection v-select__selection--comma">
+                foo
+              </div>
+              <input tabindex="0"
+                     type="text"
+                     autocomplete="on"
+              >
+            </div>
+            <div class="v-input__append-inner">
+              <div class="v-input__icon v-input__icon--append">
+                <i aria-hidden="true"
+                   class="v-icon material-icons"
+                >
+                  arrow_drop_down
+                </i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-text-field__details">
+      <div class="v-messages">
+        <div class="v-messages__wrapper">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VSelect should use slotted no-data 1`] = `
+
+<div class="v-list">
+  <div>
+    <a class="v-list__tile v-list__tile--link">
+      <div class="v-list__tile__content">
+        <div class="v-list__tile__title">
+          foo
+        </div>
+      </div>
+    </a>
   </div>
 </div>
 

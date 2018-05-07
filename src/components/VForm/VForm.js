@@ -1,7 +1,12 @@
+
+import { provide as RegistrableProvide } from '../../mixins/registrable'
+
 export default {
   name: 'v-form',
 
   inheritAttrs: false,
+
+  mixins: [RegistrableProvide('form')],
 
   data () {
     return {
@@ -19,62 +24,25 @@ export default {
     errorBag: {
       handler () {
         const errors = Object.values(this.errorBag).includes(true)
-
         this.$emit('input', !errors)
-
-        return !errors
       },
-      deep: true
+      deep: true,
+      immediate: true
     }
   },
 
   methods: {
-    getInputs () {
-      const results = []
+    watchInput (input) {
+      const valid = input.$watch('valid', val => {
+        if (!input.shouldValidate && this.lazyValidation) return
+        this.$set(this.errorBag, input._uid, !val)
+      }, { immediate: true })
 
-      const search = (children, depth = 0) => {
-        for (let index = 0; index < children.length; index++) {
-          const child = children[index]
-          if (child.errorBucket !== undefined) {
-            results.push(child)
-          } else {
-            search(child.$children, depth + 1)
-          }
-        }
-        if (depth === 0) return results
-      }
+      const shouldValidate = input.$watch('shouldValidate', val => {
+        if (val) this.$set(this.errorBag, input._uid, !input.valid)
+      }, { immediate: true })
 
-      return search(this.$children)
-    },
-    watchInputs (inputs = this.getInputs()) {
-      for (let index = 0; index < inputs.length; index++) {
-        const child = inputs[index]
-        if (this.inputs.includes(child)) {
-          continue // We already know about this input
-        }
-
-        this.inputs.push(child)
-        this.watchChild(child)
-      }
-    },
-    watchChild (child) {
-      const watcher = child => {
-        child.$watch('valid', val => {
-          this.$set(this.errorBag, child._uid, !val)
-        }, { immediate: true })
-      }
-
-      if (!this.lazyValidation) return watcher(child)
-
-      // Only start watching inputs if we need to
-      child.$watch('shouldValidate', val => {
-        if (!val) return
-
-        // Only watch if we're not already doing it
-        if (this.errorBag.hasOwnProperty(child._uid)) return
-
-        watcher(child)
-      })
+      return { valid, shouldValidate }
     },
     validate () {
       const errors = this.inputs.filter(input => !input.validate(true)).length
@@ -85,28 +53,26 @@ export default {
         this.inputs[i].reset()
       }
       if (this.lazyValidation) this.errorBag = {}
+    },
+    register (input) {
+      const unwatch = this.watchInput(input)
+      this.inputs.push({
+        uid: input._uid,
+        validate: input.validate,
+        reset: input.reset,
+        unwatch
+      })
+    },
+    unregister (input) {
+      const found = this.inputs.find(i => i.uid === input._uid)
+
+      if (!found) return
+
+      found.unwatch.valid()
+      found.unwatch.shouldValidate()
+      this.inputs = this.inputs.filter(i => i.uid !== found.uid)
+      this.$delete(this.errorBag, found.uid)
     }
-  },
-
-  mounted () {
-    this.watchInputs()
-  },
-
-  updated () {
-    const inputs = this.getInputs()
-
-    if (inputs.length < this.inputs.length) {
-      // Something was removed, we don't want it in the errorBag any more
-      const removed = this.inputs.filter(i => !inputs.includes(i))
-
-      for (let index = 0; index < removed.length; index++) {
-        const input = removed[index]
-        this.$delete(this.errorBag, input._uid)
-        this.$delete(this.inputs, this.inputs.indexOf(input))
-      }
-    }
-
-    this.watchInputs(inputs)
   },
 
   render (h) {

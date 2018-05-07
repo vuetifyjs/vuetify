@@ -32,7 +32,7 @@ export default {
     },
     calcTopAuto () {
       const selectedIndex = Array.from(this.tiles)
-        .findIndex(n => n.classList.contains('list__tile--active'))
+        .findIndex(n => n.classList.contains('v-list__tile--active'))
 
       if (selectedIndex === -1) {
         this.selectedIndex = null
@@ -56,9 +56,6 @@ export default {
         offsetPadding = -(this.defaultOffset)
         actingIndex = selectedIndex - this.stopIndex
       }
-
-      // Is always off by 1 pixel, send help (┛ಠ_ಠ)┛彡┻━┻
-      offsetPadding--
 
       return (
         this.computedTop +

@@ -18,9 +18,10 @@ const Vuetify = {
         application,
         breakpoint: {},
         dark: false,
+        icons: icons(opts.iconfont, opts.icons),
         options: options(opts.options),
-        theme: theme(opts.theme),
-        icons: icons(opts.iconfont, opts.icons)
+        rtl: opts.rtl,
+        theme: theme(opts.theme)
       },
       methods: {
         goTo

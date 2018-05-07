@@ -2,14 +2,14 @@
 
 exports[`menuable.js should match snapshot 1`] = `
 
-<div class="input-group--selection-controls__ripple">
+<div class="v-input--selection-controls__ripple">
 </div>
 
 `;
 
 exports[`menuable.js should match snapshot 2`] = `
 
-<div class="foo">
+<div class="v-input--selection-controls__ripple foo">
 </div>
 
 `;
