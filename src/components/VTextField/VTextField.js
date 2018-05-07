@@ -338,8 +338,10 @@ export default {
         return this.$refs.input.focus()
       }
 
-      this.isFocused = true
-      this.$emit('focus', e)
+      if (!this.isFocused) {
+        this.isFocused = true
+        this.$emit('focus', e)
+      }
     },
     onInput (e) {
       this.mask && this.resetSelections(e.target)

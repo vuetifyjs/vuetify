@@ -263,10 +263,13 @@ export default {
       this.updateSelf()
       VSelect.methods.onBlur.call(this, e)
     },
-    onClick (e) {
+    onClick () {
       if (this.isDisabled) return
 
-      if (e.target !== this.$refs.input) this.onFocus()
+      this.selectedIndex > -1
+        ? (this.selectedIndex = -1)
+        : this.onFocus()
+
       this.activateMenu()
     },
     onEnterDown () {
