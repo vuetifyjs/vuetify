@@ -60,6 +60,10 @@ export default {
       type: Boolean,
       default: true
     },
+    stopPropagationOnClickOutside: {
+      type: Boolean,
+      default: true
+    },
     disabled: Boolean,
     fullWidth: Boolean,
     maxHeight: { default: 'auto' },

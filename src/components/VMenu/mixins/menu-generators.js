@@ -46,6 +46,7 @@ export default {
         value: () => (this.isActive = false),
         args: {
           closeConditional: this.closeConditional,
+          stopPropagationOnClickOutside: this.stopPropagationOnClickOutside,
           include: () => [this.$el, ...this.getOpenDependentElements()]
         }
       }] : []
