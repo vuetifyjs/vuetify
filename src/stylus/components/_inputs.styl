@@ -98,3 +98,7 @@ theme(v-input, "v-input")
   &--hide-details
     .v-input__slot
       margin-bottom: 0
+
+  &--has-state
+    &.error--text .v-label
+      animation: shake .6s $transition.swing
