@@ -67,9 +67,6 @@ export const genBaseColor = (name, value) => {
 .${name}--text input,
 .${name}--text textarea {
   caret-color: ${value} !important;
-}
-.${name}--after::after {
-  background: ${value} !important;
 }`
 }
 
@@ -95,8 +92,5 @@ export const genVariantColor = (name, value, type, n) => {
 .${name}--text.text--${type}-${n} input,
 .${name}--text.text--${type}-${n} textarea {
   caret-color: ${value} !important;
-}
-.${name}.${type}-${n}--after::after {
-  background: ${value} !important;
 }`
 }

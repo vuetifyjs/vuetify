@@ -1,4 +1,3 @@
-import { consoleError } from '../../../util/console'
 import * as easingPatterns from '../../../util/easing-patterns'
 
 const defaults = {
@@ -37,11 +36,14 @@ function getTargetLocation (target, settings) {
   if (target instanceof Element) {
     location = target.getBoundingClientRect().top + window.scrollY
   } else if (typeof target === 'string') {
-    location = document.querySelector(target).offsetTop
+    const targetEl = document.querySelector(target)
+    if (!targetEl) throw new TypeError(`Target element "${target}" not found.`)
+    location = targetEl.offsetTop
   } else if (typeof target === 'number') {
     location = target
   } else {
-    return undefined
+    const type = target == null ? target : target.constructor.name
+    throw new TypeError(`Target must be a Selector/Number/DOMElement/VueComponent, received ${type} instead.`)
   }
 
   return Math.round(
@@ -53,35 +55,34 @@ function getTargetLocation (target, settings) {
 }
 
 export default function goTo (target, options) {
-  if (typeof window === 'undefined') return
+  return new Promise((resolve, reject) => {
+    if (typeof window === 'undefined') return reject('Window is undefined')
 
-  const settings = Object.assign({}, defaults, options)
+    const settings = Object.assign({}, defaults, options)
+    const startTime = performance.now()
+    const startLocation = window.pageYOffset
+    const targetLocation = getTargetLocation(target, settings)
+    const distanceToScroll = targetLocation - startLocation
+    const easingFunction = typeof settings.easing === 'function' ? settings.easing : easingPatterns[settings.easing]
 
-  const startTime = performance.now()
-  const startLocation = window.pageYOffset
-  const targetLocation = getTargetLocation(target, settings)
-  const distanceToScroll = targetLocation - startLocation
-  const easingFunction = typeof settings.easing === 'function' ? settings.easing : easingPatterns[settings.easing]
+    if (!easingFunction) throw new TypeError(`Easing function '${settings.easing}' not found.`)
 
-  if (isNaN(targetLocation)) {
-    const type = target == null ? target : target.constructor.name
-    return consoleError(`Target must be a Selector/Number/DOMElement/VueComponent, received ${type} instead.`)
-  }
-  if (!easingFunction) return consoleError(`Easing function '${settings.easing}' not found.`)
+    function step (currentTime) {
+      let progressPercentage = Math.min(1, ((currentTime - startTime) / settings.duration))
+      let targetPosition = Math.floor(startLocation + distanceToScroll * easingFunction(progressPercentage))
 
-  function step (currentTime) {
-    let progressPercentage = Math.min(1, ((currentTime - startTime) / settings.duration))
-    let targetPosition = Math.floor(startLocation + distanceToScroll * easingFunction(progressPercentage))
+      window.scrollTo(0, targetPosition)
 
-    window.scrollTo(0, targetPosition)
+      if (
+        Math.round(window.pageYOffset) === targetLocation ||
+        progressPercentage === 1
+      ) {
+        return resolve(target)
+      }
 
-    if (
-      Math.round(window.pageYOffset) === targetLocation ||
-      progressPercentage === 1
-    ) return
+      window.requestAnimationFrame(step)
+    }
 
     window.requestAnimationFrame(step)
-  }
-
-  window.requestAnimationFrame(step)
+  })
 }

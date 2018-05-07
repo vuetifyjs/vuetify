@@ -144,7 +144,7 @@ export default {
         value: this.isContentActive
       }],
       ref: 'content'
-    }, this.$slots.default)
+    }, this.showLazyContent(this.$slots.default))
 
     return h(this.tag, {
       staticClass: 'v-tooltip',

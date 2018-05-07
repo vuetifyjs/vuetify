@@ -76,7 +76,7 @@ export default {
     },
     transition: {
       type: [Boolean, String],
-      default: 'menu-transition'
+      default: 'v-menu-transition'
     }
   },
 

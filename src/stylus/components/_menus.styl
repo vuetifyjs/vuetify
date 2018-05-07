@@ -16,7 +16,8 @@
   &__activator
     align-items: center
     cursor: pointer
-    height: inherit
+    display: flex
+    height: 100%
     position: relative
 
     input[readonly]
@@ -54,33 +55,31 @@
     &-enter
       .v-list__tile
         min-width: 0
-        transition-delay: .4s
-        opacity: 0
         transform: translateY(-15px)
+        opacity: 0
         pointer-events: none
-
-    &-enter-to
-      .v-list__tile
-        pointer-events: auto
-        opacity: 1
 
       .v-list__tile--active
         transform: none !important
 
-    &-leave-to
-      transform: translateY(-10px)
+    &-enter-to
+      .v-list__tile
+        pointer-events: auto
 
-    &-leave-active, &-leave-to
+    &-leave-to
+      transform: translateY(-15px)
+
+    &-leave-active,
+    &-leave-to
       pointer-events: none
 
-    &-enter, &-leave-to
+    &-enter,
+    &-leave-to
       opacity: 0
 
-    &-enter-to, &-leave
-      opacity: 1
-
-    &-enter-active, &-leave-active
-      transition: all .5s $transition.swing
+    &-enter-active,
+    &-leave-active
+      transition: all .3s $transition.fast-in-fast-out
 
 .v-menu-transition-enter
   &.v-menu__content--auto

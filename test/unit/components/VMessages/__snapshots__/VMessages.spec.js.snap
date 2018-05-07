@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VMessages.js should show messages 1`] = `
+
+<div class="v-messages">
+  <div class="v-messages__wrapper">
+  </div>
+</div>
+
+`;
+
+exports[`VMessages.js should show messages 2`] = `
+
+<div class="v-messages">
+  <div class="v-messages__wrapper">
+  </div>
+</div>
+
+`;

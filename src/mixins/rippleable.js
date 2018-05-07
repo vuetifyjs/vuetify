@@ -14,20 +14,24 @@ export default {
   },
 
   methods: {
-    genRipple (data = { directives: [] }) {
-      data.class = this.rippleClasses || 'input-group--selection-controls__ripple'
+    genRipple (data = {}) {
+      if (!this.ripple) return null
+
+      data.staticClass = 'v-input--selection-controls__ripple'
+
+      if (this.rippleClasses) data.staticClass += ` ${this.rippleClasses}`
+
+      data.directives = data.directives || []
       data.directives.push({
         name: 'ripple',
         value: this.ripple && !this.disabled && { center: true }
       })
-      data.on = Object.assign({}, this.$listeners, {
-        click: e => {
-          this.$emit('click', e)
-          this.toggle()
-        }
-      })
+      data.on = Object.assign({
+        click: this.onChange
+      }, this.$listeners)
 
       return this.$createElement('div', data)
-    }
+    },
+    onChange () {}
   }
 }

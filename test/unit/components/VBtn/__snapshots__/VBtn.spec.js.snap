@@ -108,14 +108,3 @@ exports[`VBtn.js should render specified tag when using tag prop 1`] = `
 </a>
 
 `;
-
-exports[`VBtn.js should use custom active-class 1`] = `
-
-<button type="button"
-        class="v-btn foo"
->
-  <div class="v-btn__content">
-  </div>
-</button>
-
-`;
