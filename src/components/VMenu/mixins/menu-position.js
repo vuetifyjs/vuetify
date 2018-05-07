@@ -61,7 +61,7 @@ export default {
         this.computedTop +
         offsetPadding -
         (actingIndex * (this.defaultOffset * 6))
-      )
+      ) - 1 // for border
     }
   }
 }
