@@ -158,16 +158,13 @@ export default {
       return this.multiple
     },
     menuProps () {
-      const nudgeMenu = !this.isSolo && !this.box
-      const offsetY = this.offsetY || nudgeMenu
-
       return {
         closeOnClick: false,
         closeOnContentClick: false,
         openOnClick: false,
         value: this.isMenuActive,
-        offsetY,
-        nudgeBottom: offsetY ? 1 : 0 // convert to int
+        offsetY: this.offsetY,
+        nudgeBottom: this.offsetY ? 1 : 0 // convert to int
       }
     }
   },
