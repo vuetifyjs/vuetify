@@ -148,7 +148,6 @@ test('VDataIterator.js', ({ mount, compileToFunctions }) => {
     const wrapper = mount(VDataIterator, data)
 
     expect(wrapper.find('span.header').length).toBe(1)
-    expect(wrapper.html()).toMatchSnapshot()
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 })
