@@ -1384,7 +1384,7 @@ exports[`VDatePickerDateTable.js should render component with events colored by 
               4
             </div>
           </button>
-          <div class="v-date-picker-table__event">
+          <div class="v-date-picker-table__event accent">
           </div>
         </td>
         <td>
