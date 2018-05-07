@@ -40,17 +40,17 @@
     .v-btn
       color: $snackbar-color
       flex: 0 0 auto
+      padding: 8px
       margin: 0 0 0 24px
       height: auto
       min-width: auto
       width: auto
 
       &__content
-        padding: 8px
         margin: -2px
 
-        &::before
-          display: none
+      &::before
+        display: none
 
   &--multi-line &__content
     height: 80px
@@ -66,11 +66,11 @@
     .v-btn
       &.v-btn //specificity
         justify-content: flex-end
+        padding: 0
         margin-left: 0
         margin-top: 24px
 
       &__content
-        padding: 0
         flex: 0 0 auto
         margin: 0
 

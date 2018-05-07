@@ -1,0 +1,52 @@
+@import '../bootstrap'
+@import '../theme'
+
+v-textarea($material)
+  // Add full width functionality
+
+
+theme(v-textarea, "v-textarea")
+
+// Add no resize classes
+.v-textarea
+  textarea
+    min-height: 32px
+    overflow: hidden
+    outline: none
+
+  &.v-text-field--box,
+  &.v-text-field--enclosed
+    textarea
+      margin-top: 24px
+
+    &.v-text-field--single-line
+      textarea
+        margin-top: 12px
+
+      .v-label
+        top: 18px
+
+      &.v-text-field--outline
+        .v-input__control
+          padding-top: 0
+
+  &.v-text-field--solo
+    align-items: flex-start
+
+    // Essentially revert styles
+    // applied by v-text-field
+    .v-input__append-inner
+      align-self: flex-start
+      margin-top: 16px
+
+  &__mask
+    left: 0
+    line-height: 1
+    overflow: hidden
+    padding: 8px 0
+    position: absolute
+    top: 0
+    text-indent: 16px
+    word-break: break-all
+    width: 100%
+    visibility hidden

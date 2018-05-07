@@ -1,9 +1,7 @@
-import '../../stylus/components/_input-groups.styl'
 import '../../stylus/components/_selection-controls.styl'
 import '../../stylus/components/_switch.styl'
 
 // Mixins
-import Rippleable from '../../mixins/rippleable'
 import Selectable from '../../mixins/selectable'
 
 // Directives
@@ -12,70 +10,61 @@ import Touch from '../../directives/touch'
 export default {
   name: 'v-switch',
 
-  mixins: [Rippleable, Selectable],
+  mixins: [
+    Selectable
+  ],
 
   directives: { Touch },
 
   computed: {
     classes () {
-      const classes = {
-        'input-group--selection-controls switch': true
-      }
-
-      if (this.hasError) {
-        classes['error--text'] = true
-      } else {
-        return this.addTextColorClassChecks(classes)
-      }
-
-      return classes
-    },
-    rippleClasses () {
       return {
-        'input-group--selection-controls__ripple': true,
-        'input-group--selection-controls__ripple--active': this.isActive
-      }
-    },
-    containerClasses () {
-      return {
-        'input-group--selection-controls__container': true,
-        'input-group--selection-controls__container--light': this.light,
-        'input-group--selection-controls__container--disabled': this.disabled
-      }
-    },
-    toggleClasses () {
-      return {
-        'input-group--selection-controls__toggle': true,
-        'input-group--selection-controls__toggle--active': this.isActive
+        'v-input--selection-controls v-input--switch': true
       }
     }
   },
 
   methods: {
+    genDefaultSlot () {
+      return [
+        this.genSwitch(),
+        this.genLabel()
+      ]
+    },
+    genSwitch () {
+      return this.$createElement('div', {
+        staticClass: 'v-input--selection-controls__input'
+      }, [
+        this.genInput('checkbox'),
+        this.genRipple({
+          'class': this.classesSelectable,
+          directives: [{
+            name: 'touch',
+            value: {
+              left: this.onSwipeLeft,
+              right: this.onSwipeRight
+            }
+          }]
+        }),
+        this.genSwitchPart('track'),
+        this.genSwitchPart('thumb')
+      ])
+    },
+    // Switches have default colors for thumb/track
+    // that do not tie into theme colors
+    // this avoids a visual issue where
+    // the color takes too long to transition
+    genSwitchPart (target) {
+      return this.$createElement('div', {
+        staticClass: `v-input--switch__${target}`,
+        'class': this.classesSelectable
+      })
+    },
     onSwipeLeft () {
-      if (this.isActive) this.toggle()
+      if (this.isActive) this.onChange()
     },
     onSwipeRight () {
-      if (!this.isActive) this.toggle()
+      if (!this.isActive) this.onChange()
     }
-  },
-
-  render (h) {
-    const container = h('div', {
-      'class': this.containerClasses
-    }, [
-      h('div', { 'class': this.toggleClasses }),
-      this.genRipple({
-        directives: [{
-          name: 'touch',
-          value: {
-            left: this.onSwipeLeft,
-            right: this.onSwipeRight
-          }
-        }]
-      })
-    ])
-
-    return this.genInputGroup([container])
   }
 }

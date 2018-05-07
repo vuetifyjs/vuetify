@@ -11,7 +11,6 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - [Eikos Partners](http://www.eikospartners.com/)
 - [rateGenius](https://application.rategenius.com/)
 - [quitt](https://quitt.ch/)
-- [Clearblue Technologies](http://www.clearbluetechnologies.com/)
 
 ### $100+
 - [Anthony Gherghetta](https://gorilladash.com/)

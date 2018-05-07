@@ -2,7 +2,7 @@ export default {
   name: 'colorable',
 
   props: {
-    color: String
+    color: [Boolean, String]
   },
 
   data () {
@@ -31,7 +31,7 @@ export default {
       const classes = Object.assign({}, obj)
 
       if (color) {
-        const [colorName, colorModifier] = color.trim().split(' ')
+        const [colorName, colorModifier] = color.toString().trim().split(' ')
         classes[colorName + '--text'] = true
         colorModifier && (classes['text--' + colorModifier] = true)
       }
