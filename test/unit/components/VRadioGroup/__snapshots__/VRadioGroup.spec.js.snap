@@ -25,7 +25,8 @@ exports[`VRadioGroup.vue should be in error when v-radio-group is 1`] = `
               radio_button_unchecked
             </i>
           </div>
-          <label class="v-label"
+          <label aria-hidden="true"
+                 class="v-label"
                  style="left: 0px; position: relative;"
           >
           </label>
@@ -66,7 +67,8 @@ exports[`VRadioGroup.vue should be in error when v-radio-group is 2`] = `
               radio_button_unchecked
             </i>
           </div>
-          <label class="v-label"
+          <label aria-hidden="true"
+                 class="v-label"
                  style="left: 0px; position: relative;"
           >
           </label>

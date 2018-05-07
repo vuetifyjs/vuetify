@@ -12,7 +12,8 @@ exports[`VSelect should add color to selected index 1`] = `
       >
         <div class="v-menu__activator">
           <div class="v-select__slot">
-            <label class="v-label v-label--active"
+            <label aria-hidden="true"
+                   class="v-label v-label--active"
                    style="left: 0px; position: absolute;"
             >
             </label>
@@ -61,7 +62,8 @@ exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
       >
         <div class="v-menu__activator">
           <div class="v-select__slot">
-            <label class="v-label v-label--active"
+            <label aria-hidden="true"
+                   class="v-label v-label--active"
                    style="left: 0px; position: absolute;"
             >
             </label>
@@ -119,7 +121,8 @@ exports[`VSelect should be clearable with prop, dirty and single select 1`] = `
       >
         <div class="v-menu__activator">
           <div class="v-select__slot">
-            <label class="v-label v-label--active"
+            <label aria-hidden="true"
+                   class="v-label v-label--active"
                    style="left: 0px; position: absolute;"
             >
             </label>

@@ -22,7 +22,8 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
               >
                 <div class="v-menu__activator">
                   <div class="v-select__slot">
-                    <label class="v-label v-label--active"
+                    <label aria-hidden="true"
+                           class="v-label v-label--active"
                            style="left: 0px; position: absolute;"
                     >
                     </label>
@@ -169,7 +170,8 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
               >
                 <div class="v-menu__activator">
                   <div class="v-select__slot">
-                    <label class="v-label v-label--active"
+                    <label aria-hidden="true"
+                           class="v-label v-label--active"
                            style="left: 0px; position: absolute;"
                     >
                     </label>
@@ -307,7 +309,8 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
               >
                 <div class="v-menu__activator">
                   <div class="v-select__slot">
-                    <label class="v-label v-label--active"
+                    <label aria-hidden="true"
+                           class="v-label v-label--active"
                            style="left: 0px; position: absolute;"
                     >
                     </label>
@@ -449,7 +452,8 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
               >
                 <div class="v-menu__activator">
                   <div class="v-select__slot">
-                    <label class="v-label v-label--active"
+                    <label aria-hidden="true"
+                           class="v-label v-label--active"
                            style="left: 0px; position: absolute;"
                     >
                     </label>

@@ -40,7 +40,8 @@ export default {
         'v-label--is-disabled': props.disabled
       },
       attrs: {
-        for: props.for
+        for: props.for,
+        'aria-hidden': !props.for
       },
       on: listeners,
       style: {

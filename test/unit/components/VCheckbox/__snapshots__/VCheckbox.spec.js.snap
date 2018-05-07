@@ -18,7 +18,8 @@ exports[`VCheckbox.js should use custom icons 1`] = `
           fizzbuzz
         </i>
       </div>
-      <label class="v-label"
+      <label aria-hidden="true"
+             class="v-label"
              style="left: 0px; position: relative;"
       >
       </label>
@@ -50,7 +51,8 @@ exports[`VCheckbox.js should use custom icons 2`] = `
           fizzbuzz
         </i>
       </div>
-      <label class="v-label"
+      <label aria-hidden="true"
+             class="v-label"
              style="left: 0px; position: relative;"
       >
       </label>
@@ -82,7 +84,8 @@ exports[`VCheckbox.js should use custom icons 3`] = `
           fizzbuzz
         </i>
       </div>
-      <label class="v-label"
+      <label aria-hidden="true"
+             class="v-label"
              style="left: 0px; position: relative;"
       >
       </label>

@@ -78,7 +78,8 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
               >
                 <div class="v-menu__activator">
                   <div class="v-select__slot">
-                    <label class="v-label"
+                    <label aria-hidden="true"
+                           class="v-label"
                            style="left: 0px; position: absolute;"
                     >
                     </label>
@@ -267,7 +268,8 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
               >
                 <div class="v-menu__activator">
                   <div class="v-select__slot">
-                    <label class="v-label"
+                    <label aria-hidden="true"
+                           class="v-label"
                            style="left: 0px; position: absolute;"
                     >
                     </label>
@@ -458,7 +460,8 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
               >
                 <div class="v-menu__activator">
                   <div class="v-select__slot">
-                    <label class="v-label"
+                    <label aria-hidden="true"
+                           class="v-label"
                            style="left: 0px; position: absolute;"
                     >
                     </label>

@@ -20,7 +20,8 @@ exports[`VSelect should only show items if they are in items 1`] = `
       >
         <div class="v-menu__activator">
           <div class="v-select__slot">
-            <label class="v-label v-label--active"
+            <label aria-hidden="true"
+                   class="v-label v-label--active"
                    style="left: 0px; position: absolute;"
             >
             </label>
@@ -69,7 +70,8 @@ exports[`VSelect should only show items if they are in items 2`] = `
       >
         <div class="v-menu__activator">
           <div class="v-select__slot">
-            <label class="v-label"
+            <label aria-hidden="true"
+                   class="v-label"
                    style="left: 0px; position: absolute;"
             >
             </label>
@@ -115,7 +117,8 @@ exports[`VSelect should only show items if they are in items 3`] = `
       >
         <div class="v-menu__activator">
           <div class="v-select__slot">
-            <label class="v-label v-label--active"
+            <label aria-hidden="true"
+                   class="v-label v-label--active"
                    style="left: 0px; position: absolute;"
             >
             </label>
@@ -164,7 +167,8 @@ exports[`VSelect should only show items if they are in items 4`] = `
       >
         <div class="v-menu__activator">
           <div class="v-select__slot">
-            <label class="v-label v-label--active"
+            <label aria-hidden="true"
+                   class="v-label v-label--active"
                    style="left: 0px; position: absolute;"
             >
             </label>
@@ -216,7 +220,8 @@ exports[`VSelect should render v-select correctly when not using scope slot 1`] 
       >
         <div class="v-menu__activator">
           <div class="v-select__slot">
-            <label class="v-label"
+            <label aria-hidden="true"
+                   class="v-label"
                    style="left: 0px; position: absolute;"
             >
             </label>
@@ -262,7 +267,8 @@ exports[`VSelect should render v-select correctly when not using v-list-tile in 
       >
         <div class="v-menu__activator">
           <div class="v-select__slot">
-            <label class="v-label"
+            <label aria-hidden="true"
+                   class="v-label"
                    style="left: 0px; position: absolute;"
             >
             </label>
@@ -308,7 +314,8 @@ exports[`VSelect should render v-select correctly when using v-list-tile in item
       >
         <div class="v-menu__activator">
           <div class="v-select__slot">
-            <label class="v-label v-label--active"
+            <label aria-hidden="true"
+                   class="v-label v-label--active"
                    style="left: 0px; position: absolute;"
             >
             </label>
@@ -359,7 +366,8 @@ exports[`VSelect should use scoped slot for selection generation 1`] = `
       >
         <div class="v-menu__activator">
           <div class="v-select__slot">
-            <label class="v-label v-label--active"
+            <label aria-hidden="true"
+                   class="v-label v-label--active"
                    style="left: 0px; position: absolute;"
             >
             </label>

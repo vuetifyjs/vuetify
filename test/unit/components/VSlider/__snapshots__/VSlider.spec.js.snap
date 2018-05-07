@@ -480,7 +480,8 @@ exports[`VSlider.vue should reverse label location when inverse 1`] = `
 <div class="v-input v-input--slider">
   <div class="v-input__control">
     <div class="v-input__slot">
-      <label class="v-label"
+      <label aria-hidden="true"
+             class="v-label"
              style="left: 0px; position: relative;"
       >
         foo
@@ -546,7 +547,8 @@ exports[`VSlider.vue should reverse label location when inverse 2`] = `
           </div>
         </div>
       </div>
-      <label class="v-label"
+      <label aria-hidden="true"
+             class="v-label"
              style="left: 0px; position: relative;"
       >
         foo
