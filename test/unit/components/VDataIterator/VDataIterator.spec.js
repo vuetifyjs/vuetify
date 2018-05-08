@@ -138,4 +138,16 @@ test('VDataIterator.js', ({ mount, compileToFunctions }) => {
 
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
+
+  it('should render header slot', async () => {
+    const data = dataIteratorTestData()
+    data.slots = {
+      footer: [compileToFunctions('<span class="header">header</span>')],
+    }
+
+    const wrapper = mount(VDataIterator, data)
+
+    expect(wrapper.find('span.header').length).toBe(1)
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
 })

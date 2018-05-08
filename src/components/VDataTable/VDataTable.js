@@ -35,6 +35,9 @@ export default {
       type: Array,
       default: () => []
     },
+    headersLength: {
+      type: Number
+    },
     headerText: {
       type: String,
       default: 'text'
@@ -70,7 +73,7 @@ export default {
       return this.filteredItemsImpl(this.headers)
     },
     headerColumns () {
-      return this.headers.length + (this.selectAll !== false)
+      return this.headersLength || this.headers.length + (this.selectAll !== false)
     }
   },
 

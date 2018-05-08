@@ -1,7 +1,8 @@
 const OPTIONS_DEFAULTS = {
   themeVariations: ['primary', 'secondary', 'accent'],
   minifyTheme: null,
-  themeCache: null
+  themeCache: null,
+  cspNonce: null
 }
 
 export default function options (options = {}) {

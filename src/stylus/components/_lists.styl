@@ -6,6 +6,9 @@ v-list($material)
   background: $material.cards
   color: $material.text.primary
 
+  .v-list--disabled
+    color: $material.text.disabled
+
   .v-list__tile__sub-title
     color: $material.text.secondary
 
@@ -35,7 +38,12 @@ theme(v-list, "v-list")
   padding: $list-top-padding 0 $list-bottom-padding
   transition: height .3s $transition.fast-out-slow-in
 
-  .input-group
+  .v-input
+    .v-messages
+      display: none
+
+  .v-input,
+  .v-input__slot
     margin: 0
 
   &__tile
@@ -87,20 +95,15 @@ theme(v-list, "v-list")
       min-width: 56px
       align-items: center
 
-      .input-group--selection-controls
-        align-items: center
-        flex: 0 1
-        padding: 0
-
-      .input-group__details
-        display: none
-
       .v-btn // fix button padding if used
         padding 0
         margin 0
 
         &--icon
           margin -8px
+
+      .v-radio.v-radio
+        margin: 0
 
       &-text
         color: $list-action-text-font-color

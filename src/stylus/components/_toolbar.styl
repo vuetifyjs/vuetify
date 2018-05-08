@@ -50,16 +50,16 @@ theme(v-toolbar, "v-toolbar")
       margin: 0 !important // come back to this
       max-height: 100%
 
-    > .v-btn:last-child, > .menu:last-child
+    > .v-btn:last-child, > .v-menu:last-child
       margin-right: 8px
 
-    > .v-btn:first-child, > .menu:first-child
+    > .v-btn:first-child, > .v-menu:first-child
       margin-left: 8px
 
-    > *:not(.v-btn):not(.menu):first-child:not(:only-child)
+    > *:not(.v-btn):not(.v-menu):first-child:not(:only-child)
       margin-left: $grid-gutters.lg
 
-    > *:not(.v-btn):not(.menu):last-child:not(:only-child)
+    > *:not(.v-btn):not(.v-menu):last-child:not(:only-child)
       margin-right: $grid-gutters.lg
 
   &__items
@@ -76,8 +76,8 @@ theme(v-toolbar, "v-toolbar")
       height: inherit
 
     .v-btn,
-    .menu,
-    .menu__activator
+    .v-menu,
+    .v-menu__activator
       height: inherit
       margin: 0
 
@@ -90,10 +90,10 @@ theme(v-toolbar, "v-toolbar")
       > .v-btn:first-child
         margin-left: 17px
 
-      > *:not(.v-btn):not(.menu):first-child:not(:only-child)
+      > *:not(.v-btn):not(.v-menu):first-child:not(:only-child)
         margin-left: $grid-gutters.xl
 
-      > *:not(.v-btn):not(.menu):last-child:not(:only-child)
+      > *:not(.v-btn):not(.v-menu):last-child:not(:only-child)
         margin-right: $grid-gutters.xl
 
   @media all and (max-width: $grid-breakpoints.sm) and (orientation: portrait)

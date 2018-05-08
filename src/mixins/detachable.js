@@ -30,6 +30,10 @@ export default {
   },
 
   watch: {
+    attach () {
+      this.hasDetached = false
+      this.initDetach()
+    },
     hasContent: 'initDetach'
   },
 

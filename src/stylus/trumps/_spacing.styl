@@ -3,39 +3,39 @@
   margin-right: auto !important
 
 $i = 0
-for level, spacer in $spacers
+for $level, $spacer in $spacers
   .mt-{$i}
-    margin-top: spacer.y !important
+    margin-top: $spacer.y !important
   .mr-{$i}
-    margin-right: spacer.x !important
+    margin-right: $spacer.x !important
   .mb-{$i}
-    margin-bottom: spacer.y !important
+    margin-bottom: $spacer.y !important
   .ml-{$i}
-    margin-left: spacer.x !important
+    margin-left: $spacer.x !important
   .mx-{$i}
-    margin-left: spacer.x !important
-    margin-right: spacer.x !important
+    margin-left: $spacer.x !important
+    margin-right: $spacer.x !important
   .my-{$i}
-    margin-top: spacer.y !important
-    margin-bottom: spacer.y !important
+    margin-top: $spacer.y !important
+    margin-bottom: $spacer.y !important
   .ma-{$i}
-    margin: spacer.y spacer.x !important
-    
+    margin: $spacer.y $spacer.x !important
+
   .pt-{$i}
-    padding-top: spacer.y !important
+    padding-top: $spacer.y !important
   .pr-{$i}
-    padding-right: spacer.x !important
+    padding-right: $spacer.x !important
   .pb-{$i}
-    padding-bottom: spacer.y !important
+    padding-bottom: $spacer.y !important
   .pl-{$i}
-    padding-left: spacer.x !important
+    padding-left: $spacer.x !important
   .px-{$i}
-    padding-left: spacer.x !important
-    padding-right: spacer.x !important
+    padding-left: $spacer.x !important
+    padding-right: $spacer.x !important
   .py-{$i}
-    padding-top: spacer.y !important
-    padding-bottom: spacer.y !important
+    padding-top: $spacer.y !important
+    padding-bottom: $spacer.y !important
   .pa-{$i}
-    padding: spacer.y spacer.x !important
-    
+    padding: $spacer.y $spacer.x !important
+
   $i = $i + 1
