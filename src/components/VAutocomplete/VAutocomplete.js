@@ -137,6 +137,21 @@ export default {
       return this.selectedItems.find(i => {
         return this.valueComparator(this.getValue(i), this.getValue(this.internalValue))
       })
+    },
+    listData () {
+      const data = VSelect.computed.listData.call(this)
+
+      Object.assign(data.props, {
+        items: this.filteredItems,
+        noFilter: (
+          this.noFilter ||
+          !this.isSearching ||
+          !this.filteredItems.length
+        ),
+        searchInput: this.internalSearch
+      })
+
+      return data
     }
   },
 
@@ -240,19 +255,6 @@ export default {
       input.data.domProps.value = this.internalSearch
 
       return input
-    },
-    genList () {
-      const list = VSelect.methods.genList.call(this)
-
-      list.componentOptions.propsData.items = this.filteredItems
-      list.componentOptions.propsData.noFilter = (
-        this.noFilter ||
-        !this.isSearching ||
-        !this.filteredItems.length
-      )
-      list.componentOptions.propsData.searchInput = this.internalSearch
-
-      return list
     },
     genSelections () {
       return this.hasSlot || this.isMulti
