@@ -187,12 +187,15 @@ export default {
         },
         on: {
           select: this.selectItem
+        },
+        scopedSlots: {
+          item: this.$scopedSlots.item
         }
       }
     },
     staticList () {
-      if (this.$scopedSlots.item || this.$slots['no-data']) {
-        consoleError('assert: staticList should not be called if scoped slots are used')
+      if (this.$slots['no-data']) {
+        consoleError('assert: staticList should not be called if slots are used')
       }
 
       return this.$createElement(VSelectList, this.listData)
@@ -334,19 +337,15 @@ export default {
       return input
     },
     genList () {
-      if (this.$scopedSlots.item || this.$slots['no-data']) {
+      // If there's no slots, we can use a cached VNode to improve performance
+      if (this.$slots['no-data']) {
         return this.genListWithSlot()
       } else {
         return this.staticList
       }
     },
     genListWithSlot () {
-      return this.$createElement(VSelectList, {
-        ...this.listData,
-        scopedSlots: {
-          item: this.$scopedSlots.item
-        }
-      }, [
+      return this.$createElement(VSelectList, this.listData, [
         this.$slots['no-data'] ? this.$createElement('div', {
           slot: 'no-data'
         }, this.$slots['no-data']) : null
