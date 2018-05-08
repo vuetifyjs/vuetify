@@ -54,11 +54,18 @@ theme(v-input, "v-input")
   &__append-outer,
   &__prepend-outer
     display: inline-flex
-    margin: 4px 16px
+    margin-bottom: 4px
+    margin-top: 4px
     line-height: 1
 
     .v-icon
       user-select: none
+
+  &__append-outer
+    margin-left: 16px
+
+  &__prepend-outer
+    margin-right: 16px
 
   &__control
     display: flex
