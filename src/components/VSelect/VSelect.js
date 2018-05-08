@@ -354,6 +354,12 @@ export default {
 
       Object.assign(props, this.menuProps)
 
+      // Attach to root el so that
+      // menu covers prepend/append icons
+      if (this.attach) {
+        props.attach = this.$el
+      }
+
       return this.$createElement(VMenu, {
         props,
         on: {
