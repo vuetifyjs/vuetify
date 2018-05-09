@@ -211,7 +211,6 @@ test('VRadioGroup.vue', ({ mount }) => {
 
   it('should validate on blur', async () => {
     const wrapper = mount(VRadioGroup, {
-      propsData: { error: true },
       slots: {
         default: [{
           extends: VRadio
@@ -220,10 +219,8 @@ test('VRadioGroup.vue', ({ mount }) => {
     })
 
     const blur = jest.fn()
-    const event = jest.fn()
     const input = wrapper.first('input')
     wrapper.vm.$on('blur', blur)
-    wrapper.vm.$on('input', event)
 
     expect(wrapper.vm.shouldValidate).toBe(false)
 
@@ -233,7 +230,7 @@ test('VRadioGroup.vue', ({ mount }) => {
     expect(blur).toHaveBeenCalledTimes(1)
     expect(wrapper.vm.shouldValidate).toBe(true)
 
-    wrapper.setData({ hasInput: false })
+    wrapper.setData({ shouldValidate: false })
 
     wrapper.vm.onRadioBlur({
       relatedTarget: {
@@ -246,7 +243,7 @@ test('VRadioGroup.vue', ({ mount }) => {
     expect(blur).toHaveBeenCalledTimes(2)
     expect(wrapper.vm.shouldValidate).toBe(true)
 
-    wrapper.setData({ hasInput: false })
+    wrapper.setData({ shouldValidate: false })
 
     wrapper.vm.onRadioBlur({
       relatedTarget: {
