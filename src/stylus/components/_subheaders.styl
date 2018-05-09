@@ -1,15 +1,10 @@
 @import '../bootstrap'
-@import '../theme'
-
-v-subheader($material)
-  color: $material.text.secondary
-
-theme(v-subheader, "v-subheader")
 
 .v-subheader
   height: $list-item-single-height
   font-size: $headings.body-2.size
   font-weight: $headings.body-2.weight
+  color: var(--vuetify-text-secondary)
   padding: 0 $list-right-padding 0 $list-left-padding
 
   &--inset
