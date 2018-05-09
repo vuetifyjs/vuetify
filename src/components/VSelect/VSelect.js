@@ -158,16 +158,13 @@ export default {
       return this.multiple
     },
     menuProps () {
-      const nudgeMenu = !this.isSolo && !this.box
-      const offsetY = this.offsetY || nudgeMenu
-
       return {
         closeOnClick: false,
         closeOnContentClick: false,
         openOnClick: false,
         value: this.isMenuActive,
-        offsetY,
-        nudgeBottom: offsetY ? 1 : 0 // convert to int
+        offsetY: this.offsetY,
+        nudgeBottom: this.offsetY ? 1 : 0 // convert to int
       }
     }
   },
@@ -356,6 +353,17 @@ export default {
       }
 
       Object.assign(props, this.menuProps)
+
+      // Attach to root el so that
+      // menu covers prepend/append icons
+      if (
+        // TODO: make this a computed property or helper or something
+        this.attach === '' || // If used as a boolean prop (<v-menu attach>)
+        this.attach === true || // If bound to a boolean (<v-menu :attach="true">)
+        this.attach === 'attach' // If bound as boolean prop in pug (v-menu(attach))
+      ) {
+        props.attach = this.$el
+      }
 
       return this.$createElement(VMenu, {
         props,

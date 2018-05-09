@@ -77,6 +77,7 @@ export default {
     classes () {
       return {
         'v-text-field': true,
+        'v-text-field--full-width': this.fullWidth,
         'v-text-field--prefix': this.prefix,
         'v-text-field--single-line': this.isSingle,
         'v-text-field--solo': this.isSolo,
@@ -89,9 +90,7 @@ export default {
       }
     },
     directivesInput () {
-      return this.box
-        ? [{ name: 'ripple', value: true }]
-        : []
+      return []
     },
     // TODO: Deprecate
     hasOutline () {
@@ -117,7 +116,7 @@ export default {
         this.badInput
     },
     isEnclosed () {
-      return this.isSolo || this.hasOutline
+      return this.isSolo || this.hasOutline || this.fullWidth
     },
     isLabelActive () {
       return this.isDirty || dirtyTypes.includes(this.type)

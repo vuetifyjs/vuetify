@@ -33,7 +33,7 @@ export default {
     defaultColor: 'primary',
     isActive: false,
     keyPressed: 0,
-    lazyValue: vm.value || Number(vm.min),
+    lazyValue: typeof vm.value !== 'undefined' ? vm.value : Number(vm.min),
     oldValue: null
   }),
 

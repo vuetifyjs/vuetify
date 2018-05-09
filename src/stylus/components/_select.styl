@@ -22,6 +22,7 @@ v-select($material)
 theme(v-select, 'v-select')
 
 .v-select
+  position: relative // For **attach** prop
   // This is here to avoid making it transparent
   // then visible when autocomplete
   &:not(.v-autocomplete)
@@ -29,7 +30,7 @@ theme(v-select, 'v-select')
       caret-color: transparent !important
 
   .v-menu
-    // height: 100%
+    height: 100%
     flex: 1 1 auto
 
   .v-chip
@@ -43,17 +44,13 @@ theme(v-select, 'v-select')
     .v-select__selections
       padding: 4px 0
 
-  &.v-text-field--box
-    .v-select__selections
-      padding: 24px 0 4px
-
-    &.v-text-field--single-line
-      .v-select__selections
-        padding: 12px 0
-
-      &.v-select--chips
+  &.v-text-field--box,
+  &.v-text-field--outline
+    &:not(.v-text-field--single-line)
+      &.v-input--is-dirty,
+      &.v-input--is-focused
         .v-select__selections
-          padding: 8px 0
+          padding-top: 24px
 
   // For specificity, hide caret
   &.v-text-field
@@ -72,15 +69,12 @@ theme(v-select, 'v-select')
     input
       margin: 0
 
-    &.v-input--is-dirty
-      .v-input__append-inner
-        margin-top: 8px
-
   &__selections
     align-items: center
     display: flex
     flex: 1 1 auto
     flex-wrap: wrap
+    line-height: 18px
 
   &__selection
     &--comma

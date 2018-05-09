@@ -29,7 +29,7 @@ theme(v-input, "v-input")
   transition: $primary-transition
 
   .v-progress-linear
-    bottom: 0
+    top: 100%
     left: 0
     margin: 0
     position: absolute
@@ -54,11 +54,18 @@ theme(v-input, "v-input")
   &__append-outer,
   &__prepend-outer
     display: inline-flex
-    margin: 4px 16px 16px
+    margin-bottom: 4px
+    margin-top: 4px
     line-height: 1
 
     .v-icon
       user-select: none
+
+  &__append-outer
+    margin-left: 16px
+
+  &__prepend-outer
+    margin-right: 16px
 
   &__control
     display: flex
@@ -86,6 +93,7 @@ theme(v-input, "v-input")
     margin-bottom: 8px
     min-height: 32px
     position: relative
+    transition: $primary-transition
     width: 100%
 
   &--is-disabled

@@ -139,6 +139,10 @@ export default {
 
       const tile = {
         on: {
+          mousedown: e => {
+            // Prevent onBlur from being called
+            e.preventDefault()
+          },
           click: () => disabled || this.$emit('select', item)
         },
         props: {

@@ -700,14 +700,6 @@ test('VTextField.js', ({ mount }) => {
     expect(wrapper.vm.badInput).toBe(true)
   })
 
-  it('should add ripple directive when using box', () => {
-    const wrapper = mount(VTextField)
-
-    expect(wrapper.vm.directivesInput.length).toBe(0)
-    wrapper.setProps({ box: true })
-    expect(wrapper.vm.directivesInput.length).toBe(1)
-  })
-
   it('should set input autocomplete attr', () => {
     const wrapper = mount(VTextField, {
       propsData: {
