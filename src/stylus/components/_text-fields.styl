@@ -113,6 +113,7 @@ rtl(v-text-field-rtl, "v-text-field")
     white-space: nowrap
 
   .v-label
+    cursor: auto
     height: 20px
     line-height: 20px
     max-width: 90%
@@ -199,6 +200,10 @@ rtl(v-text-field-rtl, "v-text-field")
     .v-input__append-inner,
     .v-input__append-outer
       margin-top: 16px
+
+    &:not(.v-text-field--solo)
+      .v-label
+        cursor: pointer
 
   &--box
     .v-input__slot,
