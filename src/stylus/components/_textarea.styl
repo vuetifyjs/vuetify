@@ -21,6 +21,12 @@ theme(v-textarea, "v-textarea")
     padding: 7px 0 8px
     width: 100%
 
+  &.v-text-field--full-width,
+  &.v-text-field--full-width.v-text-field--single-line
+    .v-text-field__slot
+      textarea
+        margin-top: 0
+
   &.v-text-field--box,
   &.v-text-field--enclosed
     textarea
