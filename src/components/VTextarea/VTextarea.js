@@ -34,6 +34,7 @@ export default {
     classes () {
       return {
         'v-textarea': true,
+        'v-textarea--auto-grow': this.autoGrow,
         ...VTextField.computed.classes.call(this, null)
       }
     },
