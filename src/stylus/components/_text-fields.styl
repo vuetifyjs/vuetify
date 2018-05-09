@@ -2,10 +2,10 @@
 @import '../theme'
 
 v-text-field($material)
-  &:not(.v-input--has-state)
-    .v-input__slot:before
-      background-color: $material.input-bottom-line
+  .v-input__slot:before
+    background-color: $material.input-bottom-line
 
+  &:not(.v-input--has-state)
     &:hover
       .v-input__slot:before
         background-color: $material.text.primary
@@ -23,16 +23,6 @@ v-text-field($material)
   &__prefix,
   &__suffix
     color: $material.text.secondary
-
-  &--full-width
-    margin: 0
-
-    .v-input__slot
-      padding: 16px
-
-    .v-input__append-inner
-      align-self: center
-      margin-top: 0
 
   &--solo
     background: $material.cards
@@ -168,6 +158,17 @@ rtl(v-text-field-rtl, "v-text-field")
     flex: 1 1 auto
     height: 100%
     position: relative
+
+  &--full-width
+    margin: 0
+
+    .v-input__slot
+      padding: 16px
+
+    .v-input__append-inner
+      align-self: center
+      margin-top: 0
+
 
   &--box,
   &--outline
