@@ -20,14 +20,21 @@ v-text-field($material)
         transparent 0
       )
 
+  &__prefix,
+  &__suffix
+    color: $material.text.secondary
+
   &--solo
     background: $material.cards
 
-  &--solo-inverted
+  &--solo-inverted.v-text-field--solo
     background: rgba($material.inputs.solo-inverted)
 
     &.v-input--is-focused
       background: rgba($material.inputs.solo-inverted-focused)
+      .v-label,
+      input
+        color: $material.inputs.solo-inverted-focused-text
 
   &--box
     .v-input__slot
@@ -36,10 +43,6 @@ v-text-field($material)
   &--outline
     border: 2px solid $material.text.secondary
     background: transparent !important
-
-  &__prefix,
-  &__suffix
-    color: $material.text.secondary
 
 v-text-field-rtl()
   .v-label
