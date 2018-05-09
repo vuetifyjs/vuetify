@@ -41,7 +41,7 @@ export default {
 
     genDirectives () {
       // Do not add click outside for hover menu
-      const directives = !this.openOnHover ? [{
+      const directives = !this.openOnHover && this.closeOnClick ? [{
         name: 'click-outside',
         value: () => (this.isActive = false),
         args: {

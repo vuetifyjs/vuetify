@@ -304,4 +304,14 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
     expect(wrapper.vm.everyItem).toBe(true);
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
+
+  it('should render correct colspan when using headers-length prop', async () => {
+    const data = dataTableTestData()
+    data.propsData.headersLength = 11
+    const wrapper = mount(VDataTable, data)
+
+    expect(wrapper.find('tr.v-datatable__progress th')[0].getAttribute('colspan')).toBe('11')
+
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
 })

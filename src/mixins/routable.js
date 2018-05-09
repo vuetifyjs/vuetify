@@ -73,11 +73,10 @@ export default {
       } else {
         tag = (this.href && 'a') || this.tag || 'a'
 
-        if (tag === 'a') {
-          if (this.href) data.attrs.href = this.href
-          if (this.target) data.attrs.target = this.target
-        }
+        if (tag === 'a' && this.href) data.attrs.href = this.href
       }
+
+      if (this.target) data.attrs.target = this.target
 
       return { tag, data }
     }

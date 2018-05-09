@@ -55,7 +55,7 @@ export default {
     xLarge: Boolean
   },
 
-  render (h, { props, data, parent, children = [] }) {
+  render (h, { props, data, parent, listeners = {}, children = [] }) {
     const { small, medium, large, xLarge } = props
     const sizes = { small, medium, large, xLarge }
     const explicitSize = Object.keys(sizes).find(key => sizes[key] && key)
@@ -102,6 +102,7 @@ export default {
     const classes = Object.assign({
       'v-icon--disabled': props.disabled,
       'v-icon--left': props.left,
+      'v-icon--link': listeners.click || listeners['!click'],
       'v-icon--right': props.right,
       'theme--dark': props.dark,
       'theme--light': props.light
