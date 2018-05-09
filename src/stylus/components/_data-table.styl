@@ -33,6 +33,9 @@ v-datatable($material)
 theme(v-datatable, "v-datatable")
 
 .v-datatable
+  .v-input
+    margin: 0
+
   thead
     th.column.sortable
       cursor: pointer
@@ -87,15 +90,17 @@ theme(v-datatable, "v-datatable")
   &__select
     display: flex
     align-items: center
-    justify-content: center
+    justify-content: flex-end
     margin-right: 14px
+    white-space: nowrap
 
-    .input-group--select
+    .v-select
+      flex: 0 1 0
       margin: 13px 0 13px 34px
       padding: 0
       position: initial
 
-      .input-group__selections__comma
+      .v-select__selection--comma
         font-size: 12px
 
 .v-datatable__progress
