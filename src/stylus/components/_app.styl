@@ -4,6 +4,11 @@
 
 .application
   display: flex
+  background: var(--vuetify-app-background)
+  color: var(--vuetify-app-color)
+
+  a
+    cursor: pointer
 
   &--is-rtl
     direction: rtl
@@ -17,24 +22,15 @@
     max-width: 100%
     position: relative
 
-application($material)
-  background: $material.background
-  color: $material.text.primary
+.application .text
+  &--primary
+    color: var(--vuetify-text-primary) !important
 
-  a
-    cursor: pointer
+  &--secondary
+    color: var(--vuetify-text-secondary) !important
 
-  .text
-    &--primary
-      color: $material.text.primary !important
-
-    &--secondary
-      color: $material.text.secondary !important
-
-    &--disabled
-      color: $material.text.disabled !important
-
-app(application)
+  &--disabled
+    color: var(--vuetify-text-disabled) !important
 
 +firefox()
   @media print
