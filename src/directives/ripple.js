@@ -68,8 +68,14 @@ const ripple = {
       setTimeout(() => {
         // Need to figure out a new way to do this
         try {
-          if (ripples.length < 1) el.style.position = null
-          animation.parentNode && el.removeChild(animation.parentNode)
+          // refresh ripples and animation since this is async
+          const ripples = el.getElementsByClassName('v-ripple__animation')
+          if (ripples.length === 0) {
+            el.style.position = null
+          } else {
+            const animation = ripples[ripples.length - 1]
+            animation.parentNode && el.removeChild(animation.parentNode)
+          }
         } catch (e) { console.log(e) }
       }, 300)
     }, delay)
