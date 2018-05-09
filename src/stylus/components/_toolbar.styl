@@ -1,12 +1,4 @@
 @import '../bootstrap'
-@import '../theme'
-
-/* Theme */
-v-toolbar($material)
-  background-color: $material.app-bar
-  color: $material.text.primary
-
-theme(v-toolbar, "v-toolbar")
 
 .v-toolbar
   bootable()
@@ -16,6 +8,8 @@ theme(v-toolbar, "v-toolbar")
   position: relative
   width: 100%
   will-change: padding-left
+  background-color: var(--vuetify-app-bar-color)
+  color: var(--vuetify-text-primary)
 
   .input-group--solo
     .input-group__details
