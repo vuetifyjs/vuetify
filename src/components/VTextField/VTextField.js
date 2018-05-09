@@ -90,9 +90,7 @@ export default {
       }
     },
     directivesInput () {
-      return this.box
-        ? [{ name: 'ripple', value: true }]
-        : []
+      return []
     },
     // TODO: Deprecate
     hasOutline () {

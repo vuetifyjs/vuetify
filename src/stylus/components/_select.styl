@@ -46,16 +46,11 @@ theme(v-select, 'v-select')
 
   &.v-text-field--box,
   &.v-text-field--outline
-    .v-select__selections
-      padding: 24px 0 4px
-
-    &.v-text-field--single-line
-      .v-select__selections
-        padding: 12px 0
-
-      &.v-select--chips
+    &:not(.v-text-field--single-line)
+      &.v-input--is-dirty,
+      &.v-input--is-focused
         .v-select__selections
-          padding: 8px 0
+          padding-top: 24px
 
   // For specificity, hide caret
   &.v-text-field

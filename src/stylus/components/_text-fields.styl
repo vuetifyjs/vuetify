@@ -50,6 +50,13 @@ v-text-field($material)
     .v-input__slot
       background: $material.text-fields.box
 
+      &:hover
+        background: $material.text-fields.box-hover
+
+    &.v-input--is-focused
+      .v-input__slot
+        background: $material.text-fields.box-focus
+
   &--outline
     border: 2px solid $material.text.secondary
     background: transparent !important
@@ -198,12 +205,9 @@ rtl(v-text-field-rtl, "v-text-field")
     input
       cursor: pointer
 
-    .v-label
-      top: 18px
-
     .v-input__slot
       border-radius: 4px
-      padding: 0 16px
+      margin-bottom: 4px
 
       &:before,
       &:after
@@ -213,12 +217,15 @@ rtl(v-text-field-rtl, "v-text-field")
       &:before
         height: 2px
 
+    .v-input__slot,
+    .v-text-field__details
+      padding: 0 12px
+
   &--enclosed
     margin-top: 16px
 
     .v-input__slot
       margin-bottom: 0 // normally for messages
-      padding: 0 16px
 
     .v-text-field__details
       bottom: -22px
@@ -237,6 +244,10 @@ rtl(v-text-field-rtl, "v-text-field")
         &:before,
         &:after
           display: none
+
+    .v-input__slot,
+    .v-text-field__details
+      padding: 0 12px
 
   &--reverse
     input
