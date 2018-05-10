@@ -1,17 +1,4 @@
 @import '../bootstrap'
-@import '../theme'
-
-v-navigation-drawer($material)
-  background-color: $material.cards
-
-  &:not(.v-navigation-drawer--floating)
-    .v-navigation-drawer__border
-      background-color: $material.dividers
-
-  .v-divider
-    background-color: $material.dividers
-
-theme(v-navigation-drawer, "v-navigation-drawer")
 
 .v-navigation-drawer
   bootable()
@@ -27,6 +14,14 @@ theme(v-navigation-drawer, "v-navigation-drawer")
   will-change: transform
   z-index: 3
   -webkit-overflow-scrolling: touch
+  background-color: var(--vuetify-cards-color)
+
+  &:not(.v-navigation-drawer--floating)
+    .v-navigation-drawer__border
+      background-color: var(--vuetify-dividers-color)
+
+  .v-divider
+    background-color: var(--vuetify-dividers-color)
 
   &[data-booted="true"]
     // Work around for Safari bug. See https://github.com/vuetifyjs/vuetify/issues/2773
