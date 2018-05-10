@@ -1,4 +1,5 @@
 import Vue, { PluginFunction, PluginObject, VueConstructor, DirectiveFunction, DirectiveOptions } from 'vue'
+import './alacarte'
 
 declare const Vuetify: Vuetify
 export default Vuetify
