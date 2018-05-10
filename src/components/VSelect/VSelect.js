@@ -56,7 +56,7 @@ export default {
     ...Menuable.props,
     appendIcon: {
       type: String,
-      default: 'arrow_drop_down'
+      default: '$vuetify.icons.dropdown'
     },
     appendIconCb: Function,
     attach: Boolean,
