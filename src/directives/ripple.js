@@ -66,17 +66,14 @@ const ripple = {
       animation.classList.remove('v-ripple__animation--visible')
 
       setTimeout(() => {
-        // Need to figure out a new way to do this
-        try {
-          // refresh ripples and animation since this is async
-          const ripples = el.getElementsByClassName('v-ripple__animation')
-          if (ripples.length === 0) {
-            el.style.position = null
-          } else {
-            const animation = ripples[ripples.length - 1]
-            animation.parentNode && el.removeChild(animation.parentNode)
-          }
-        } catch (e) { console.log(e) }
+        // refresh ripples and animation since this is async
+        const ripples = el.getElementsByClassName('v-ripple__animation')
+        if (ripples.length === 0) {
+          el.style.position = null
+        } else {
+          const animation = ripples[ripples.length - 1]
+          animation.parentNode && el.removeChild(animation.parentNode)
+        }
       }, 300)
     }, delay)
   }
