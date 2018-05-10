@@ -142,7 +142,7 @@ export default {
       const data = VSelect.computed.listData.call(this)
 
       Object.assign(data.props, {
-        items: this.filteredItems,
+        items: this.virtualizedItems,
         noFilter: (
           this.noFilter ||
           !this.isSearching ||

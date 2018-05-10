@@ -41,7 +41,10 @@ export default {
   data: vm => ({
     attrsInput: { role: 'combobox' },
     cachedItems: vm.cacheItems ? vm.items : [],
+    content: null,
+    isBooted: false,
     isMenuActive: false,
+    lastItem: 20,
     // As long as a value is defined, show it
     // Otherwise, check if multiple
     // to determine which default to provide
@@ -176,7 +179,7 @@ export default {
           dark: this.dark,
           dense: this.dense,
           hideSelected: this.hideSelected,
-          items: this.items,
+          items: this.virtualizedItems,
           light: this.light,
           noDataText: this.noDataText,
           selectedItems: this.selectedItems,
@@ -199,11 +202,28 @@ export default {
       }
 
       return this.$createElement(VSelectList, this.listData)
+    },
+    virtualizedItems () {
+      return !this.auto
+        ? this.computedItems.slice(0, this.lastItem)
+        : this.computedItems
     }
   },
 
   watch: {
     internalValue: 'setSelectedItems',
+    isBooted () {
+      this.$nextTick(() => {
+        if (this.content && this.content.addEventListener) {
+          this.content.addEventListener('scroll', this.onScroll, false)
+        }
+      })
+    },
+    isMenuActive (val) {
+      if (!val) return
+
+      this.isBooted = true
+    },
     items (val) {
       if (this.cacheItems) {
         this.cachedItems = this.filterDuplicates(this.cachedItems.concat(val))
@@ -215,6 +235,14 @@ export default {
 
   created () {
     this.setSelectedItems()
+  },
+
+  mounted () {
+    // If instance is being destroyed
+    // do not run mounted functions
+    if (this._isDestroyed) return
+
+    this.content = this.$refs.menu.$refs.content
   },
 
   methods: {
@@ -488,6 +516,23 @@ export default {
       }
 
       VTextField.methods.onMouseUp.call(this, e)
+    },
+    onScroll () {
+      if (!this.isMenuActive) {
+        requestAnimationFrame(() => (this.content.scrollTop = 0))
+      } else {
+        if (this.lastItem >= this.computedItems.length) return
+
+        const showMoreItems = (
+          this.content.scrollHeight -
+          (this.content.scrollTop +
+          this.content.clientHeight)
+        ) < 200
+
+        if (showMoreItems) {
+          this.lastItem += 20
+        }
+      }
     },
     selectItem (item) {
       if (!this.isMulti) {
