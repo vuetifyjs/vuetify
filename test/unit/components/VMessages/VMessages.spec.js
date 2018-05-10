@@ -8,17 +8,28 @@ test('VMessages.js', ({ mount }) => {
     expect(Array.isArray(wrapper.vm.value)).toBe(true)
   })
 
-  it('should show messages', () => {
+  it('should show messages', async () => {
     const wrapper = mount(VMessages, {
       propsData: {
-        messages: ['foo', 'bar']
+        value: ['foo', 'bar']
       }
     })
 
     expect(wrapper.html()).toMatchSnapshot()
 
     wrapper.setProps({ value: [] })
+    await wrapper.vm.$nextTick()
 
+    expect(wrapper.html()).toMatchSnapshot()
+    expect('Cannot read property \'split\' of undefined').toHaveBeenWarned()
+  })
+
+  it('should allow HTML', () => {
+    const wrapper = mount(VMessages, {
+      propsData: {
+        value: ['<a href="#">a link</a>']
+      }
+    })
     expect(wrapper.html()).toMatchSnapshot()
   })
 })
