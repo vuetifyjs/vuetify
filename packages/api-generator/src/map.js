@@ -121,7 +121,7 @@ const sharedGridProps = [
   }
 ]
 
-dataIterableProps = [
+const dataIterableProps = [
   {
     name: 'pagination',
     sync: true
@@ -140,10 +140,11 @@ dataIterableProps = [
   }
 ]
 
-dataIterableEvents = [
+const dataIterableEvents = [
   {
     name: 'update:pagination',
-    value: 'object'
+    value: 'object',
+    source: 'data-iterable'
   },
   {
     name: 'input',
@@ -151,13 +152,13 @@ dataIterableEvents = [
   }
 ]
 
-dataIterableSlots = [
+const dataIterableSlots = [
   { name: 'footer', source: 'data-iterable' },
   { name: 'noData', source: 'data-iterable' },
   { name: 'noResults', source: 'data-iterable' }
 ]
 
-dataIterableScopedSlots = [
+const dataIterableScopedSlots = [
   {
     name: 'items',
     props: {
@@ -179,12 +180,74 @@ dataIterableScopedSlots = [
   }
 ]
 
-validatableEvents = [
+const validatableEvents = [
   {
     name: 'update:error',
     value: 'boolean'
   }
 ]
+
+const inputFunctions = [
+  {
+    name: 'append-icon-cb',
+    signature: '(): void'
+  },
+  {
+    name: 'prepend-icon-cb',
+    signature: '(): void'
+  }
+]
+
+const inputSlots = ['append', 'prepend', 'prepend-icon', 'append-icon', 'default']
+
+const VSelect = {
+  props: [
+    {
+      name: 'filter',
+      default: '(item: object, queryText: string, itemText: string): boolean'
+    },
+    {
+      name: 'valueComparator',
+      default: '(a: any, b: any): boolean'
+    }
+  ],
+  slots: inputSlots.concat(['no-data', 'label', 'progress']),
+  scopedSlots: [
+    {
+      name: 'selection',
+      props: {
+        parent: 'VueComponent',
+        item: 'object',
+        index: 'number',
+        selected: 'boolean',
+        disabled: 'boolean'
+      }
+    },
+    {
+      name: 'item',
+      props: {
+        parent: 'VueComponent',
+        item: 'object',
+        tile: 'object'
+      }
+    }
+  ],
+  events: [
+    {
+      name: 'input',
+      value: 'any'
+    },
+    {
+      name: 'change',
+      value: 'any'
+    },
+    {
+      name: 'update:searchInput',
+      value: 'string'
+    }
+  ].concat(validatableEvents),
+  functions: inputFunctions
+}
 
 module.exports = {
   '$vuetify': {
@@ -253,6 +316,7 @@ module.exports = {
       }
     ]
   },
+  'v-autocomplete': VSelect,
   'v-avatar': {
     slots: ['default']
   },
@@ -315,13 +379,8 @@ module.exports = {
     slots: ['default']
   },
   'v-checkbox': {
-    slots: ['label'],
-    events: [
-      {
-        name: 'blur',
-        value: 'any'
-      }
-    ]
+    slots: inputSlots.concat(['label']),
+    functions: inputFunctions
   },
   'v-chip': {
     slots: ['default'],
@@ -350,7 +409,7 @@ module.exports = {
   },
   'v-data-iterator': {
     props: dataIterableProps,
-    slots: dataIterableSlots,
+    slots: dataIterableSlots.concat(['header']),
     scopedSlots: dataIterableScopedSlots,
     events: dataIterableEvents
   },
@@ -393,10 +452,48 @@ module.exports = {
         name: 'input',
         value: 'string'
       }
+    ],
+    functions: [
+      {
+        name: 'title-date-format',
+        signature: '(date: string, locale: string): string'
+      },
+      {
+        name: 'day-format',
+        signature: '(date: string, locale: string): string'
+      },
+      {
+        name: 'header-date-format',
+        signature: '(date: string, locale: string): string'
+      },
+      {
+        name: 'month-format',
+        signature: '(date: string, locale: string): string'
+      },
+      {
+        name: 'year-format',
+        signature: '(date: string, locale: string): string'
+      },
+      {
+        name: 'allowed-dates',
+        signature: '(date: string): boolean'
+      }
     ]
   },
   'v-dialog': {
     slots: ['activator', 'default']
+  },
+  'v-divider': {
+    props: [
+      {
+        "name": "dark",
+        "source": 'themeable'
+      },
+      {
+        "name": "light",
+        "source": 'themeable'
+      }
+    ]
   },
   'v-edit-dialog': {
     slots: ['default', 'input'],
@@ -533,7 +630,8 @@ module.exports = {
     slots: ['default']
   },
   'v-switch': {
-    slots: ['label']
+    slots: inputSlots.concat(['label']),
+    functions: inputFunctions
   },
   'v-radio': {
     events: [
@@ -544,75 +642,60 @@ module.exports = {
     ]
   },
   'v-radio-group': {
-    slots: ['label'],
+    slots: inputSlots.concat(['label']),
     events: [
       {
         name: 'change',
         value: 'any'
-      },
-      {
-        name: 'blur',
-        value: 'any'
       }
-    ].concat(validatableEvents)
+    ].concat(validatableEvents),
+    functions: inputFunctions
   },
   'v-snackbar': {
     slots: ['default']
   },
-  'v-select': {
-    props: [
-      {
-        name: 'filter',
-        default: '(item: object, queryText: string, itemText: string): boolean'
-      },
-      {
-        name: 'valueComparator',
-        default: '(a: any, b: any): boolean'
-      }
-    ],
-    slots: ['no-data', 'label', 'progress'],
-    scopedSlots: [
-      {
-        name: 'selection',
-        props: {
-          parent: 'VueComponent',
-          item: 'object',
-          index: 'number',
-          selected: 'boolean',
-          disabled: 'boolean'
-        }
-      },
-      {
-        name: 'item',
-        props: {
-          parent: 'VueComponent',
-          item: 'object',
-          tile: 'object'
-        }
-      }
-    ],
-    events: [
-      {
-        name: 'input',
-        value: 'any'
-      },
-      {
-        name: 'change',
-        value: 'any'
-      },
-      {
-        name: 'update:searchInput',
-        value: 'string'
-      }
-    ].concat(validatableEvents)
-  },
+  'v-select': VSelect,
   'v-slider': {
     events: [
       {
         name: 'input',
         value: 'number'
+      },
+      {
+        name: 'change',
+        value: 'number'
+      },
+      {
+        name: 'start',
+        value: 'number'
+      },
+      {
+        name: 'end',
+        value: 'number'
       }
-    ].concat(validatableEvents)
+    ].concat(validatableEvents),
+    functions: inputFunctions
+  },
+  'v-range-slider': {
+    events: [
+      {
+        name: 'input',
+        value: 'array'
+      },
+      {
+        name: 'change',
+        value: 'array'
+      },
+      {
+        name: 'start',
+        value: 'array'
+      },
+      {
+        name: 'end',
+        value: 'array'
+      }
+    ].concat(validatableEvents),
+    functions: inputFunctions
   },
   'v-speed-dial': {
     slots: ['activator', 'default']
@@ -675,7 +758,8 @@ module.exports = {
         name: 'change',
         value: 'string'
       }
-    ].concat(validatableEvents)
+    ].concat(validatableEvents),
+    functions: inputFunctions
   },
   'v-time-picker': {
     events: [
