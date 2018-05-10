@@ -254,7 +254,7 @@ export default {
         // Make sure the slot takes space
         // so layout doesn't jump when
         // dirty
-        const icon = !this.isDirty ? false : '$vuetify.icons.clear'
+        const icon = !this.isDirty ? false : 'clear'
 
         slot.push(this.genIcon(icon,
           this.clearIconCb || this.clearableCallback
