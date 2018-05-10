@@ -161,6 +161,14 @@ export default {
   },
 
   methods: {
+    /** @public */
+    focus () {
+      this.onFocus()
+    },
+    /** @public */
+    blur () {
+      this.onBlur()
+    },
     clearableCallback () {
       this.internalValue = null
       this.$nextTick(() => this.$refs.input.focus())
