@@ -21,6 +21,7 @@ import ClickOutside from '../../directives/click-outside'
 
 // Helpers
 import { getPropertyFromItem, keyCodes } from '../../util/helpers'
+import { consoleError } from '../../util/console'
 
 export default {
   name: 'v-select',
@@ -166,6 +167,38 @@ export default {
         offsetY: this.offsetY,
         nudgeBottom: this.offsetY ? 1 : 0 // convert to int
       }
+    },
+    listData () {
+      return {
+        props: {
+          action: this.isMulti && !this.isHidingSelected,
+          color: this.color,
+          dark: this.dark,
+          dense: this.dense,
+          hideSelected: this.hideSelected,
+          items: this.items,
+          light: this.light,
+          noDataText: this.noDataText,
+          selectedItems: this.selectedItems,
+          itemAvatar: this.itemAvatar,
+          itemDisabled: this.itemDisabled,
+          itemValue: this.itemValue,
+          itemText: this.itemText
+        },
+        on: {
+          select: this.selectItem
+        },
+        scopedSlots: {
+          item: this.$scopedSlots.item
+        }
+      }
+    },
+    staticList () {
+      if (this.$slots['no-data']) {
+        consoleError('assert: staticList should not be called if slots are used')
+      }
+
+      return this.$createElement(VSelectList, this.listData)
     }
   },
 
@@ -304,29 +337,15 @@ export default {
       return input
     },
     genList () {
-      return this.$createElement(VSelectList, {
-        props: {
-          action: this.isMulti && !this.isHidingSelected,
-          color: this.color,
-          dark: this.dark,
-          dense: this.dense,
-          hideSelected: this.hideSelected,
-          items: this.items,
-          light: this.light,
-          noDataText: this.noDataText,
-          selectedItems: this.selectedItems,
-          itemAvatar: this.itemAvatar,
-          itemDisabled: this.itemDisabled,
-          itemValue: this.itemValue,
-          itemText: this.itemText
-        },
-        on: {
-          select: this.selectItem
-        },
-        scopedSlots: {
-          item: this.$scopedSlots.item
-        }
-      }, [
+      // If there's no slots, we can use a cached VNode to improve performance
+      if (this.$slots['no-data']) {
+        return this.genListWithSlot()
+      } else {
+        return this.staticList
+      }
+    },
+    genListWithSlot () {
+      return this.$createElement(VSelectList, this.listData, [
         this.$slots['no-data'] ? this.$createElement('div', {
           slot: 'no-data'
         }, this.$slots['no-data']) : null
