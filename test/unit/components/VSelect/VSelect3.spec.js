@@ -39,12 +39,6 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect(wrapper.vm.isMenuActive).toBe(true)
   })
 
-  it('should return auto', () => {
-    const wrapper = mount(VSelect)
-
-    expect(wrapper.vm.dynamicHeight).toBe('auto')
-  })
-
   it('should return full items if using auto prop', () => {
     const wrapper = mount(VSelect, {
       propsData: {
