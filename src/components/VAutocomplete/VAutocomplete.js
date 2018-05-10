@@ -152,11 +152,6 @@ export default {
       })
 
       return data
-    },
-    virtualizedItems () {
-      return !this.auto
-        ? this.filteredItems.slice(0, this.lastItem)
-        : this.filteredItems
     }
   },
 

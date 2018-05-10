@@ -205,8 +205,8 @@ export default {
     },
     virtualizedItems () {
       return !this.auto
-        ? this.items.slice(0, this.lastItem)
-        : this.items
+        ? this.computedItems.slice(0, this.lastItem)
+        : this.computedItems
     }
   },
 
