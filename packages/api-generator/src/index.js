@@ -57,8 +57,8 @@ function getPropDefault (def, type) {
 
   switch (type) {
     case 'Boolean':
-    if (def) return 'true'
-    else return 'false'
+      if (def) return 'true'
+      else return 'false'
     case 'Function': return parseFunctionParams(def)
     case 'Array':
     case 'Number':
@@ -140,7 +140,13 @@ const installedComponents = Vue.options._base.options.components
 const installedDirectives = Vue.options._base.options.directives
 
 Object.keys(installedComponents).forEach(key => {
-  const name = key
+  let name = key
+
+  if (name.startsWith('wrapped-')) {
+    console.log(name)
+    name = name.slice(8)
+  }
+
   if (name.match(/v-/)) {
     const component = installedComponents[key]
     let options = parseComponent(component.options)
@@ -166,7 +172,7 @@ function writeApiFile (obj, file) {
   const stream = fs.createWriteStream(file)
 
   const comment = `/*
- * THIS FILE HAS BEEN AUTOMATICALLY GENERATED USING THE VUETIFY-HELPER-JSON TOOL.
+ * THIS FILE HAS BEEN AUTOMATICALLY GENERATED USING THE API-GENERATOR TOOL.
  *
  * CHANGES MADE TO THIS FILE WILL BE LOST!
  */
@@ -204,7 +210,9 @@ const tags = Object.keys(components).reduce((t, k) => {
 const attributes = Object.keys(components).reduce((attrs, k) => {
   const tmp = components[k].props.reduce((a, prop) => {
     let type = prop.type
-    if (Array.isArray(type)) type = type.map(t => t.toLowerCase()).join('|')
+
+    if (!type) type = ''
+    else if (Array.isArray(type)) type = type.map(t => t.toLowerCase()).join('|')
     else type = type.toLowerCase()
 
     const name = prop.name.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`)
