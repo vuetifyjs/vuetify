@@ -26,7 +26,7 @@ export default {
     genChildren () {
       return this.$createElement('transition-group', {
         staticClass: 'v-messages__wrapper',
-        props: {
+        attrs: {
           name: 'slide-y-transition',
           tag: 'div'
         }
@@ -35,8 +35,11 @@ export default {
     genMessage (key) {
       return this.$createElement('div', {
         staticClass: 'v-messages__message',
-        key
-      }, key)
+        key,
+        domProps: {
+          innerHTML: key
+        }
+      })
     }
   },
 
