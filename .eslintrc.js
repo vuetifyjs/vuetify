@@ -1,7 +1,7 @@
 module.exports = {
   root: true,
+  parser: 'typescript-eslint-parser',
   parserOptions: {
-    parser: 'babel-eslint',
     ecmaVersion: 2017,
     sourceType: 'module'
   },
@@ -16,9 +16,11 @@ module.exports = {
     'describe': true,
     'it': true,
     'jest': true,
-    'process': true
+    'process': true,
+    '__REQUIRED_VUE__': true
   },
   plugins: [
+    'typescript',
     'eslint-plugin-local-rules'
   ],
   rules: {
@@ -39,7 +41,7 @@ module.exports = {
     'prefer-promise-reject-errors': 0,
     'no-unused-vars': ['error', {
       vars: 'all',
-      args: 'after-used',
+      args: 'none', // This needs to be off so we can specify mixin interfaces
       ignoreRestSiblings: false
     }],
     'no-empty': 'error',
@@ -51,6 +53,36 @@ module.exports = {
         named: 'always',
         asyncArrow: 'always'
       }
-    ]
-  }
+    ],
+    'no-return-await': 'warn'
+  },
+  overrides: [
+    {
+      files: '**/*.ts',
+      rules: {
+        // https://github.com/eslint/typescript-eslint-parser#known-issues
+        'no-undef': 'off',
+
+        // https://github.com/eslint/typescript-eslint-parser/issues/445
+        // 'typescript/no-unused-vars': 'error'
+
+        // https://github.com/eslint/eslint/issues/10260
+        'space-infix-ops': false,
+
+        // https://github.com/nzakas/eslint-plugin-typescript/issues/127
+        // 'typescript/prefer-namespace-keyword': 'error',
+
+        // Can't overload function exports with this enabled
+        'import/export': false,
+
+        'typescript/no-unused-vars': 'error',
+        'typescript/adjacent-overload-signatures': 'error',
+        'typescript/member-delimiter-style': ['error', {
+          delimiter: 'none'
+        }],
+        'typescript/member-ordering': 'error',
+        'typescript/type-annotation-spacing': 'error'
+      }
+    }
+  ]
 }
