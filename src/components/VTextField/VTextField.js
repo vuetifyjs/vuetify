@@ -47,7 +47,7 @@ export default {
     clearable: Boolean,
     clearIcon: {
       type: String,
-      default: 'clear'
+      default: '$vuetify.icons.clear'
     },
     clearIconCb: Function,
     color: {
