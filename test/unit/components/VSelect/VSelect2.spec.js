@@ -568,4 +568,52 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.vm.getMenuIndex()).toBe(1)
   })
+
+  it('should retain selection when retain-selection, chips & deletable-chips are set', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        items: ['foo', 'bar', 'bizz'],
+        value: ['bar', 'bizz'],
+        chips: true,
+        deletableChips: true,
+        retainSelection: true
+      }
+    })
+
+    wrapper.setProps({
+      items: ['foo', 'bizz']
+    })
+
+    expect(wrapper.vm.internalValue).toEqual(['bar', 'bizz'])
+  })
+
+  it('should not retain selection when retain-selection, chips or deletable-chips are not set', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        items: ['foo', 'bar', 'bizz'],
+        value: ['bar', 'bizz'],
+        chips: false,
+        deletableChips: true,
+        retainSelection: true
+      }
+    })
+
+    wrapper.setProps({
+      items: ['foo', 'bizz']
+    })
+
+    expect(wrapper.vm.internalValue).not.toEqual(['bar', 'fizz'])
+
+    wrapper.setProps({
+      deletableChips: false,
+    })
+
+    expect(wrapper.vm.internalValue).not.toEqual(['bar', 'fizz'])
+
+    wrapper.setProps({
+      retainSelection: false,
+    })
+
+    expect(wrapper.vm.internalValue).not.toEqual(['bar', 'fizz'])
+  })
 })

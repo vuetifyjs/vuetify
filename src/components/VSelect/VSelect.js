@@ -109,7 +109,8 @@ export default {
       default: null
     },
     smallChips: Boolean,
-    singleLine: Boolean
+    singleLine: Boolean,
+    retainSelection: Boolean
   },
 
   computed: {
@@ -502,7 +503,11 @@ export default {
         )
         : i => this.findExistingIndex(i) > -1
 
-      this.selectedItems = this.computedItems.filter(fn)
+      if (this.retainSelection && this.chips && this.deletableChips) {
+        this.selectedItems = this.internalValue.filter(fn)
+      } else {
+        this.selectedItems = this.computedItems.filter(fn)
+      }
     }
   }
 }
