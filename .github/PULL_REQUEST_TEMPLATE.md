@@ -3,7 +3,8 @@ MAKE SURE TO READ THE CONTRIBUTING GUIDE BEFORE CREATING A PR
 https://github.com/vuetifyjs/vuetify/blob/master/.github/CONTRIBUTING.md
 -->
 
-<!--- Provide a general summary of your changes in the Title above -->
+<!-- Provide a general summary of your changes in the Title above -->
+<!-- Keep the title short and descriptive, as it will be used as a commit message -->
 
 ## Description
 <!--- Describe your changes in detail -->
@@ -18,8 +19,13 @@ https://github.com/vuetifyjs/vuetify/blob/master/.github/CONTRIBUTING.md
 <!--- e.g. unit | visually | e2e | none -->
 
 ## Markup:
-<!--- Paste markup that showcases your contribution --->
-<!--- You can use ```vue to style the code -->
+<!--- Paste markup for testing your change --->
+<details>
+
+```vue
+// Paste your FULL Playground.vue here
+```
+</details>
 
 ## Types of changes
 <!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
