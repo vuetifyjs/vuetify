@@ -47,7 +47,7 @@ export default {
     clearable: Boolean,
     clearIcon: {
       type: String,
-      default: 'clear'
+      default: '$vuetify.icons.clear'
     },
     clearIconCb: Function,
     color: {
@@ -254,7 +254,7 @@ export default {
         // Make sure the slot takes space
         // so layout doesn't jump when
         // dirty
-        const icon = !this.isDirty ? false : 'clear'
+        const icon = !this.isDirty ? false : '$vuetify.icons.clear'
 
         slot.push(this.genIcon(icon,
           this.clearIconCb || this.clearableCallback
