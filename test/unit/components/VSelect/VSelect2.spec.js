@@ -572,8 +572,9 @@ test('VSelect', ({ mount, compileToFunctions }) => {
   it('should retain selection when retain-selection, chips & deletable-chips are set', async () => {
     const wrapper = mount(VSelect, {
       propsData: {
-        items: ['foo', 'bar', 'bizz'],
         value: ['bar', 'bizz'],
+        items: ['foo', 'bar', 'bizz'],
+        multiple: true,
         chips: true,
         deletableChips: true,
         retainSelection: true
@@ -584,14 +585,17 @@ test('VSelect', ({ mount, compileToFunctions }) => {
       items: ['foo', 'bizz']
     })
 
-    expect(wrapper.vm.internalValue).toEqual(['bar', 'bizz'])
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.selectedItems).toEqual(['bar', 'bizz'])
   })
 
   it('should not retain selection when retain-selection, chips or deletable-chips are not set', async () => {
     const wrapper = mount(VSelect, {
       propsData: {
-        items: ['foo', 'bar', 'bizz'],
         value: ['bar', 'bizz'],
+        items: ['foo', 'bar', 'bizz'],
+        multiple: true,
         chips: false,
         deletableChips: true,
         retainSelection: true
@@ -602,18 +606,24 @@ test('VSelect', ({ mount, compileToFunctions }) => {
       items: ['foo', 'bizz']
     })
 
-    expect(wrapper.vm.internalValue).not.toEqual(['bar', 'fizz'])
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.selectedItems).not.toEqual(['bar', 'bizz'])
 
     wrapper.setProps({
       deletableChips: false,
     })
 
-    expect(wrapper.vm.internalValue).not.toEqual(['bar', 'fizz'])
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.selectedItems).not.toEqual(['bar', 'bizz'])
 
     wrapper.setProps({
       retainSelection: false,
     })
 
-    expect(wrapper.vm.internalValue).not.toEqual(['bar', 'fizz'])
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.selectedItems).not.toEqual(['bar', 'bizz'])
   })
 })
