@@ -568,4 +568,20 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.vm.getMenuIndex()).toBe(1)
   })
+
+  it('should retain the selection even if selection is removed from menu', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        retainSelection: true,
+        items: ['foo', 'bar', 'fizz'],
+        value: ['bar', 'fizz']
+      }
+    })
+
+    wrapper.setProps({
+      items: ['foo', 'fizz']
+    })
+
+    expect(wrapper.vm.internalValue).toEqual(['bar', 'fizz'])
+  })
 })

@@ -109,7 +109,8 @@ export default {
       default: null
     },
     smallChips: Boolean,
-    singleLine: Boolean
+    singleLine: Boolean,
+    retainSelection: Boolean
   },
 
   computed: {
@@ -176,7 +177,9 @@ export default {
         this.cachedItems = this.filterDuplicates(this.cachedItems.concat(val))
       }
 
-      this.setSelectedItems()
+      if (!this.retainSelection || this.cachedItems) {
+        this.setSelectedItems()
+      }
     }
   },
 
