@@ -1,4 +1,6 @@
-export default {
+import Vue from 'vue'
+
+export default Vue.extend({
   name: 'themeable',
 
   props: {
@@ -7,11 +9,11 @@ export default {
   },
 
   computed: {
-    themeClasses () {
+    themeClasses (): any {
       return {
         'theme--light': this.light,
         'theme--dark': this.dark
       }
     }
   }
-}
+})

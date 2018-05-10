@@ -1,6 +1,10 @@
 // Styles
 import '../../stylus/components/_buttons.styl'
 
+import Vue, { VNode, ComponentOptions, VNodeChildren } from 'vue'
+import { PropValidator } from 'vue/types/options'
+import mixins from '../../util/mixins'
+
 // Components
 import VProgressCircular from '../VProgressCircular'
 
@@ -12,17 +16,15 @@ import Themeable from '../../mixins/themeable'
 import { factory as ToggleableFactory } from '../../mixins/toggleable'
 import { inject as RegistrableInject } from '../../mixins/registrable'
 
-export default {
+const VBtn = mixins(
+  Colorable,
+  Routable,
+  Positionable,
+  Themeable,
+  ToggleableFactory('inputValue'),
+  RegistrableInject('buttonGroup')
+).extend({
   name: 'v-btn',
-
-  mixins: [
-    Colorable,
-    Routable,
-    Positionable,
-    Themeable,
-    ToggleableFactory('inputValue'),
-    RegistrableInject('buttonGroup')
-  ],
 
   props: {
     activeClass: {
@@ -51,11 +53,11 @@ export default {
       type: String,
       default: 'button'
     },
-    value: null
+    value: null as any as PropValidator<any>
   },
 
   computed: {
-    classes () {
+    classes (): any {
       const classes = {
         'v-btn': true,
         [this.activeClass]: this.isActive,
@@ -66,7 +68,6 @@ export default {
         'v-btn--flat': this.flat,
         'v-btn--floating': this.fab,
         'v-btn--fixed': this.fixed,
-        'v-btn--hover': this.hover,
         'v-btn--icon': this.icon,
         'v-btn--large': this.large,
         'v-btn--left': this.left,
@@ -89,25 +90,25 @@ export default {
 
   methods: {
     // Prevent focus to match md spec
-    click (e) {
+    click (e: MouseEvent): void {
       !this.fab &&
-        e.detail &&
-        this.$el.blur()
+      e.detail &&
+      this.$el.blur()
 
       this.$emit('click', e)
     },
-    genContent () {
+    genContent (): VNode {
       return this.$createElement(
         'div',
         { 'class': 'v-btn__content' },
         [this.$slots.default]
       )
     },
-    genLoader () {
-      const children = []
+    genLoader (): VNode {
+      const children: VNodeChildren = []
 
       if (!this.$slots.loader) {
-        children.push(this.$createElement(VProgressCircular, {
+        children.push(this.$createElement(VProgressCircular as ComponentOptions<Vue>, {
           props: {
             indeterminate: true,
             size: 23,
@@ -134,17 +135,23 @@ export default {
     }
   },
 
-  render (h) {
+  render (h): VNode {
     const { tag, data } = this.generateRouteLink()
     const children = [this.genContent()]
 
-    tag === 'button' && (data.attrs.type = this.type)
+    tag === 'button' && (data.attrs!.type = this.type)
     this.loading && children.push(this.genLoader())
 
-    data.attrs.value = ['string', 'number'].includes(typeof this.value)
+    data.attrs!.value = ['string', 'number'].includes(typeof this.value)
       ? this.value
       : JSON.stringify(this.value)
 
     return h(tag, data, children)
   }
+})
+
+/* eslint-disable-next-line no-redeclare */
+export type VBtn = InstanceType<typeof VBtn> & {
+  $el: HTMLButtonElement | HTMLAnchorElement
 }
+export default VBtn
