@@ -524,7 +524,7 @@ export default {
         this.$nextTick(() => (this.isMenuActive = !this.isMenuActive))
       // If user is clicking in the container
       // and field is enclosed, activate it
-      } else if (this.isSolo || this.hasOutline) {
+      } else if (this.isEnclosed) {
         this.isMenuActive = true
       }
 
