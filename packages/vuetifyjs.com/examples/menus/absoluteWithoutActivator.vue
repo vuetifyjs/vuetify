@@ -16,7 +16,7 @@
       absolute
     >
       <v-list>
-        <v-list-tile v-for="item in items" :key="item.title" @click="">
+        <v-list-tile v-for="(item, index) in items" :key="index" @click="">
           <v-list-tile-title>{{ item.title }}</v-list-tile-title>
         </v-list-tile>
       </v-list>
