@@ -20,3 +20,5 @@ dev/*css
 /release
 .env
 yarn-error.log
+/test/cypress/screenshots
+/test/cypress/videos

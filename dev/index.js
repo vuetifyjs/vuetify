@@ -13,6 +13,6 @@ Vue.use(VueRouter)
 Vue.component(Boilerplate.name, Boilerplate)
 
 new Vue({
-  render: h => h(App),
+  render: h => h('router-view'),
   router
 }).$mount('#app')
