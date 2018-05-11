@@ -7,6 +7,7 @@ export default {
   issue3: 'Попробуйте найти проблему, на нее, возможно, ответили.',
   issue4: 'Посмотрите, воспроизводится ли ошибка с последней версией Vuetify.',
   issue5: 'Если воспроизводится, пожалуйста, предоставьте простой [codepen](https://template.vuetifyjs.com) или репозиторий, который можно клонировать для получения ожидаемого поведения.',
+  issue6: 'Please use the [issue creator](https://issues.vuetifyjs.com) to create a new issue.',
   pullRequestsHeader: 'Pull requests',
   pullRequest1: 'Все PR должны быть отправлены в ветвь `dev` Vuetify.',
   pullRequest2: 'Для изменений и добавления функциональности просьба указать пример того, что вы пытаетесь решить, и пример разметки',
