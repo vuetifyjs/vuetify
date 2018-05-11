@@ -16,6 +16,8 @@
               markdown(:source="$t(`${namespace}.issue4`)")
             li
               markdown(:source="$t(`${namespace}.issue5`)")
+            li
+              markdown(:source="$t(`${namespace}.issue6`)")
       section#pull-requests
         section-head(:value="`${namespace}.pullRequestsHeader`")
         div.mb-3
