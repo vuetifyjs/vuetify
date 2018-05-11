@@ -47,12 +47,14 @@ export default {
           this.dataIterator.sort(c.value)
         }
 
-        const beingSorted = this.dataIterator.sortBy === c.value
+        const sortIndex = this.dataIterator.sortBy.findIndex(k => k === c.value)
+        const beingSorted = sortIndex >= 0
+        const isDesc = this.dataIterator.sortDesc[sortIndex]
 
         classes['sortable'] = true
         classes['active'] = beingSorted
-        classes['asc'] = beingSorted && !this.dataIterator.sortDesc
-        classes['desc'] = beingSorted && this.dataIterator.sortDesc
+        classes['asc'] = beingSorted && !isDesc
+        classes['desc'] = beingSorted && isDesc
       }
 
       return h(VCell, {
