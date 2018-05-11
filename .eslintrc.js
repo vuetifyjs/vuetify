@@ -12,10 +12,6 @@ module.exports = {
     browser: true
   },
   globals: {
-    'expect': true,
-    'describe': true,
-    'it': true,
-    'jest': true,
     'process': true,
     '__REQUIRED_VUE__': true
   },
@@ -82,6 +78,18 @@ module.exports = {
         }],
         'typescript/member-ordering': 'error',
         'typescript/type-annotation-spacing': 'error'
+      }
+    },
+    {
+      files: ['cypress/**/*.js', '**/*.spec.js', '**/*.spec.ts'],
+      globals: {
+        'expect': true,
+        'describe': true,
+        'it': true,
+        'jest': true,
+        'cy': true,
+        'context': true,
+        'beforeEach': true,
       }
     }
   ]
