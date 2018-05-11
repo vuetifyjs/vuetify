@@ -18,7 +18,7 @@ const extractPlugin = ExtractTextPlugin.extract({
 })
 
 module.exports = merge(baseWebpackConfig, {
-  devtool: '#cheap-module-eval-source-map',
+  devtool: 'source-map',
   entry: ['babel-polyfill', './dev/index.js'],
   output: {
     filename: '[name].js',
@@ -27,7 +27,7 @@ module.exports = merge(baseWebpackConfig, {
     library: 'Vuetify'
   },
   resolve: {
-    extensions: ['*', '.js', '.json', '.vue'],
+    extensions: ['*', '.js', '.json', '.vue', '.ts'],
     alias: {
       vuetify: resolve('../src'),
       'vue$': 'vue/dist/vue.esm.js'
@@ -49,8 +49,8 @@ module.exports = merge(baseWebpackConfig, {
         exclude: /node_modules/
       },
       {
-        test: /\.js$/,
-        loaders: ['babel-loader', 'eslint-loader'],
+        test: /\.[jt]s$/,
+        loaders: ['babel-loader', 'ts-loader', 'eslint-loader'],
         exclude: /node_modules/
       },
       {

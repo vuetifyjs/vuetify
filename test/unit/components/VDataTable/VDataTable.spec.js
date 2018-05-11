@@ -351,6 +351,16 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
     expect(wrapper.find('table.v-datatable tbody tbody').length).toBe(0)
     expect(wrapper.find('table.v-datatable tbody').length).toBe(3)
     expect(wrapper.find('table.row-spans').length).toBe(1)
+    
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+  
+  it('should render correct colspan when using headers-length prop', async () => {
+    const data = dataTableTestData()
+    data.propsData.headersLength = 11
+    const wrapper = mount(VDataTable, data)
+
+    expect(wrapper.find('tr.v-datatable__progress th')[0].getAttribute('colspan')).toBe('11')
 
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })

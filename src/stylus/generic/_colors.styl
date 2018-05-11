@@ -1,0 +1,41 @@
+global-color($color_name, $color_value)
+  .{$color_name}
+    background-color $color_value !important
+    border-color: $color_value !important
+
+  .{$color_name}--text
+    color $color_value !important
+
+    input,
+    textarea
+      caret-color: $color_value !important
+
+global-color-accent($color_name, $color_value, $color_type)
+  .{$color_name}
+    &.{$color_type}
+      background-color $color_value !important
+      border-color: $color_value !important
+
+  .{$color_name}--text
+    &.text--{$color_type}
+      color: $color_value !important
+
+      input,
+      textarea
+        caret-color: $color_value !important
+
+// Put the loop in a function so it can't leak
+create-global-colors()
+  for $color_name, $color_value in $shades
+    global-color($color_name, $color_value)
+
+  if ($color-pack)
+    for $color_name, $color_color in $colors
+      for $color_type, $color_value in $color_color
+        if $color_type == 'base'
+          global-color($color_name, $color_value)
+
+        else if $color_type != 'shades'
+          global-color-accent($color_name, $color_value, $color_type)
+
+create-global-colors()

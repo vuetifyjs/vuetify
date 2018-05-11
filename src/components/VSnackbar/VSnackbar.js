@@ -87,7 +87,7 @@ export default {
     }
 
     return h('transition', {
-      attrs: { name: 'snack-transition' }
+      attrs: { name: 'v-snack-transition' }
     }, children)
   }
 }

@@ -6,7 +6,7 @@
   margin: 24px
   overflow-y: auto
   pointer-events: auto
-  transition: .3s ease-in-out
+  transition: .3s $transition.fast-in-fast-out
   width: 100%
   z-index: inherit
 
@@ -19,7 +19,7 @@
     pointer-events: none
     position: fixed
     top: 0
-    transition: .3s ease-in-out
+    transition: .2s $transition.fast-in-fast-out
     width: 100%
     z-index: 6
     outline: none
@@ -30,6 +30,21 @@
   &__container
     display: inline-block
     vertical-align: middle
+
+  @keyframes animate-dialog
+    0%
+      transform: scale(1)
+
+    50%
+      transform: scale(1.03)
+
+    100%
+      transform: scale(1)
+
+  &--animated
+    animation-duration: .15s
+    animation-name: animate-dialog
+    animation-timing-function: $transition.fast-in-fast-out
 
   &--fullscreen
     margin 0

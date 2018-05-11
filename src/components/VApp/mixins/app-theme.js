@@ -102,6 +102,9 @@ export default {
         style = document.createElement('style')
         style.type = 'text/css'
         style.id = 'vuetify-theme-stylesheet'
+        if (this.$vuetify.options.cspNonce) {
+          style.setAttribute('nonce', this.$vuetify.options.cspNonce)
+        }
         document.head.appendChild(style)
       }
 
