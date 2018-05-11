@@ -90,13 +90,7 @@ export default {
 
   methods: {
     sortItems (items, sortBy, sortDesc) {
-      items = VDataIterator.methods.sortItems.call(this, items, sortBy, sortDesc)
-
-      if (!this.groupBy) return items
-
-      items = this.customSort(items, this.groupBy, false)
-
-      return items
+      return VDataIterator.methods.sortItems.call(this, items, [this.groupBy, ...sortBy], [false, ...sortDesc])
     },
     genHeaders (h) {
       const headers = this.computeSlots('header')
