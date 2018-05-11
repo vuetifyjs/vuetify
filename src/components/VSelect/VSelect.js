@@ -511,7 +511,20 @@ export default {
       }
     },
     onMouseUp (e) {
-      if (this.isSolo || this.hasOutline) {
+      const appendInner = this.$refs['append-inner']
+
+      // If append inner is present
+      // and the target is itself
+      // or inside, toggle menu
+      if (this.isMenuActive &&
+        appendInner &&
+        (appendInner === e.target ||
+        appendInner.contains(e.target))
+      ) {
+        this.$nextTick(() => (this.isMenuActive = !this.isMenuActive))
+      // If user is clicking in the container
+      // and field is enclosed, activate it
+      } else if (this.isEnclosed) {
         this.isMenuActive = true
       }
 
