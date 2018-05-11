@@ -50,7 +50,6 @@
         color="blue darken-2"
         dark
         fab
-        hover
       >
         <v-icon>account_circle</v-icon>
         <v-icon>close</v-icon>
