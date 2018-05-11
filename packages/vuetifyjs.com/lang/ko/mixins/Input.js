@@ -11,7 +11,7 @@ export default {
     prependIcon: '컴포넌트 앞에 아이콘을 추가. `v-icon`과 같은 문법을 사용',
     prependIconCb: '앞에 추가된 아이콘이 클릭되었을 때 호출되는 콜백',
     readonly: '읽기전용 인풋으로 지정',
-    required: '인풋을 필수 요소로 지정. 레이블 끝에 별표(asertisk)가 추가됨. 실제 검증은 실행되지 않음',
+    required: '인풋을 필수 요소로 지정. 레이블 끝에 별표(asterisk)가 추가됨. 실제 검증은 실행되지 않음',
     tabindex: '인풋의 탭 인덱스(Tabindex)',
     toggleKeys: '인풋을 토글하는 키 코드의 배열 (토글이 지원될 경우)',
     value: '인풋 값'

@@ -11,7 +11,7 @@ export default {
     prependIcon: 'Prepend an icon to the component, uses same syntax as `v-icon`',
     prependIconCb: 'Callback for prepended icon when clicked',
     readonly: 'Puts input in readonly state',
-    required: 'Designates the input as required. Adds an asertisk to end of label. Does not perform any validation.',
+    required: 'Designates the input as required. Adds an asterisk to end of label. Does not perform any validation.',
     tabindex: 'Tabindex of input',
     toggleKeys: 'Array of key codes that will toggle the input (if it supports toggling)',
     value: 'Input value'
