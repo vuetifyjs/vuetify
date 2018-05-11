@@ -89,8 +89,23 @@ export default {
   },
 
   methods: {
+    searchItems (items) {
+      const columns = this.headers.filter(h => h.filter)
+
+      if (columns.length) {
+        items = items.filter(i => columns.every(column => column.filter(i[column.value])))
+        this.searchItemsLength = items.length
+      }
+
+      items = VDataIterator.methods.searchItems.call(this, items)
+
+      return items
+    },
     sortItems (items, sortBy, sortDesc) {
-      return VDataIterator.methods.sortItems.call(this, items, [this.groupBy, ...sortBy], [false, ...sortDesc])
+      sortBy = this.groupBy ? [this.groupBy, ...sortBy] : sortBy
+      sortDesc = this.groupBy ? [false, ...sortDesc] : sortDesc
+
+      return VDataIterator.methods.sortItems.call(this, items, sortBy, sortDesc)
     },
     genHeaders (h) {
       const headers = this.computeSlots('header')
@@ -164,7 +179,7 @@ export default {
         }))
       }
 
-      return footers
+      return [this.genBodyWrapper(h, footers)]
     },
     genBodyWrapper (h, items) {
       return h('div', {

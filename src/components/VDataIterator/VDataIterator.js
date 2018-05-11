@@ -232,10 +232,7 @@ export default {
 
       if (this.serverItemsLength) return items
 
-      if (this.hasSearch) {
-        items = this.customFilter(items, this.search)
-        this.searchItemsLength = items.length
-      }
+      items = this.searchItems(items)
 
       items = this.sortItems(items, this.options.sortBy, this.options.sortDesc)
 
@@ -274,6 +271,14 @@ export default {
     },
     paginateItems (items) {
       return items.slice(this.pageStart, this.pageStop)
+    },
+    searchItems (items) {
+      if (this.hasSearch) {
+        items = this.customFilter(items, this.search)
+        this.searchItemsLength = items.length
+      }
+
+      return items
     },
     sort (key) {
       let sortBy = this.options.sortBy.slice()
