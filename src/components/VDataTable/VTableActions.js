@@ -16,6 +16,14 @@ export default {
       type: String,
       default: 'chevron_right'
     },
+    firstIcon: {
+      type: String,
+      default: 'first_page'
+    },
+    lastIcon: {
+      type: String,
+      default: 'last_page'
+    },
     rowsPerPageItems: {
       type: Array,
       default: () => ([
@@ -28,6 +36,9 @@ export default {
     rowsPerPageText: {
       type: String,
       default: 'Rows per page:'
+    },
+    showFirstLastPage: {
+      type: Boolean
     }
   },
   methods: {
@@ -96,21 +107,32 @@ export default {
     }
   },
   render (h) {
-    const nextIcon = this.genIcon(h, () => {
-      this.dataIterator.page = this.dataIterator.page + 1
-    }, this.dataIterator.rowsPerPage < 0 || this.dataIterator.page * this.dataIterator.rowsPerPage >= this.dataIterator.itemsLength || this.dataIterator.pageStop < 0, 'Next page', this.nextIcon)
+    const icons = []
 
-    const prevIcon = this.genIcon(h, () => {
+    icons.push(this.genIcon(h, () => {
       this.dataIterator.page = this.dataIterator.page - 1
-    }, this.dataIterator.page === 1, 'Previous page', this.prevIcon)
+    }, this.dataIterator.page === 1, 'Previous page', this.prevIcon))
+
+    icons.push(this.genIcon(h, () => {
+      this.dataIterator.page = this.dataIterator.page + 1
+    }, this.dataIterator.rowsPerPage < 0 || this.dataIterator.page * this.dataIterator.rowsPerPage >= this.dataIterator.itemsLength || this.dataIterator.pageStop < 0, 'Next page', this.nextIcon))
+
+    if (this.showFirstLastPage) {
+      icons.unshift(this.genIcon(h, () => {
+        this.dataIterator.page = 1
+      }, this.dataIterator.page === 1, 'First page', this.firstIcon))
+
+      icons.push(this.genIcon(h, () => {
+        this.dataIterator.page = this.dataIterator.pageCount
+      }, this.dataIterator.page === this.dataIterator.pageCount || this.dataIterator.rowsPerPage === -1, 'Last page', this.lastIcon))
+    }
 
     return h('div', {
       staticClass: 'v-data-table__actions'
     }, [
       this.genRowsPerPageSelect(h),
       this.genPagination(h),
-      prevIcon,
-      nextIcon
+      ...icons
     ])
   }
 }
