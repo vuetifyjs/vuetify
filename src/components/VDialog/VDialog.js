@@ -193,14 +193,19 @@ export default {
       }, [this.$slots.activator]))
     }
 
-    const dialog = h('transition', {
-      props: {
-        name: this.transition || '', // If false, show nothing
-        origin: this.origin
-      }
-    }, [h('div', data,
-      this.showLazyContent(this.$slots.default)
-    )])
+    var dialog
+    if (this.transition) {
+      dialog = h('transition', {
+        props: {
+          name: this.transition,
+          origin: this.origin
+        }
+      }, [h('div', data, this.showLazyContent(this.$slots.default))])
+    } else {
+      dialog = h('div', data,
+        this.showLazyContent(this.$slots.default)
+      )
+    }
 
     children.push(h('div', {
       'class': this.contentClasses,
