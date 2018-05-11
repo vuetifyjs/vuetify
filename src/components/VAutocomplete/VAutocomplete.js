@@ -2,6 +2,7 @@
 import '../../stylus/components/_autocompletes.styl'
 
 // Extensions
+import VInput from '../VInput'
 import VSelect from '../VSelect/VSelect'
 import VTextField from '../VTextField/VTextField'
 
@@ -316,12 +317,13 @@ export default {
       const appendInner = this.$refs['append-inner']
 
       if (!appendInner || !this.isMenuActive) return
-      if (appendInner !== e.target &&
-        !appendInner.contains(e.target)
-      ) return
+      if (appendInner === e.target ||
+        appendInner.contains(e.target)
+      ) {
+        this.$nextTick(() => (this.isMenuActive = !this.isMenuActive))
+      }
 
-      this.$emit('mouseup', e)
-      this.$nextTick(() => (this.isMenuActive = !this.isMenuActive))
+      VInput.methods.onMouseUp.call(this, e)
     },
     onTabDown (e) {
       const menuIndex = this.getMenuIndex()
