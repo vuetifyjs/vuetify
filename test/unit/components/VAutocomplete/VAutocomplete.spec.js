@@ -735,4 +735,18 @@ test('VAutocomplete.js', ({ mount, shallow }) => {
 
     expect(wrapper.vm.menuCanShow).toBe(true)
   })
+
+  it('should toggle autocomplete menu', async () => {
+    const wrapper = mount(VAutocomplete)
+
+    const icon = wrapper.first('.v-icon')
+
+    expect(wrapper.vm.isMenuActive).toBe(false)
+
+    icon.trigger('click')
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.isMenuActive).toBe(true)
+  })
 })

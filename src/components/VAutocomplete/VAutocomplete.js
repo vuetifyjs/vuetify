@@ -312,6 +312,17 @@ export default {
       if (this.$refs.input.selectionStart === 0) this.updateSelf()
       if (!this.hideSelections) this.changeSelectedIndex(keyCode)
     },
+    onMouseUp (e) {
+      const appendInner = this.$refs['append-inner']
+
+      if (!appendInner || !this.isMenuActive) return
+      if (appendInner !== e.target &&
+        !appendInner.contains(e.target)
+      ) return
+
+      this.$emit('mouseup', e)
+      this.$nextTick(() => (this.isMenuActive = !this.isMenuActive))
+    },
     onTabDown (e) {
       const menuIndex = this.getMenuIndex()
 
