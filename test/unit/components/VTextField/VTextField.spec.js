@@ -747,10 +747,8 @@ test('VTextField.js', ({ mount }) => {
 
     wrapper.vm.focus()
     expect(focus).toHaveBeenCalledTimes(1)
-    expect('[Vuetify] The <focus> function is deprecated, use <onFocus> instead in "v-text-field"').toHaveBeenTipped()
 
     wrapper.vm.blur()
     expect(blur).toHaveBeenCalledTimes(1)
-    expect('[Vuetify] The <blur> function is deprecated, use <onBlur> instead in "v-text-field"').toHaveBeenTipped()
   })
 })

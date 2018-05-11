@@ -18,9 +18,6 @@ import Ripple from '../../directives/ripple'
 import {
   keyCodes
 } from '../../util/helpers'
-import {
-  consoleWarn
-} from '../../util/console'
 
 const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
 
@@ -166,12 +163,10 @@ export default {
   methods: {
     /** @public */
     focus () {
-      consoleWarn('The <focus> function is deprecated, use <onFocus> instead', this)
       this.onFocus()
     },
     /** @public */
     blur () {
-      consoleWarn('The <blur> function is deprecated, use <onBlur> instead', this)
       this.onBlur()
     },
     clearableCallback () {
