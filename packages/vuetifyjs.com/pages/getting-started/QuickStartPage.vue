@@ -85,7 +85,7 @@
         section-text(:value="`${namespace}.existingText6`")
         markup(lang="js")
           | // index.js or main.js
-          | import 'material-design-icons-iconfont/dist/material-design-icons.min.css' // Ensure you are using css-loader
+          | import 'material-design-icons-iconfont/dist/material-design-icons.css' // Ensure you are using css-loader
         app-alert(error :value="`${namespace}.alert2`")
 
       section#ie11-support
