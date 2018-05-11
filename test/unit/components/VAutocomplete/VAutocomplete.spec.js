@@ -735,29 +735,4 @@ test('VAutocomplete.js', ({ mount, shallow }) => {
 
     expect(wrapper.vm.menuCanShow).toBe(true)
   })
-
-  it('should toggle autocomplete menu', async () => {
-    const wrapper = mount(VAutocomplete)
-
-    const icon = wrapper.first('.v-icon')
-    const slot = wrapper.first('.v-input__slot')
-
-    expect(wrapper.vm.isMenuActive).toBe(false)
-
-    slot.trigger('click')
-    expect(wrapper.vm.isMenuActive).toBe(true)
-
-    slot.trigger('click')
-    expect(wrapper.vm.isMenuActive).toBe(true)
-
-    // Mock mouseup event with a target of
-    // the inner icon element
-    const event = new Event('mouseup')
-    Object.defineProperty(event, 'target', { writable: false, value: icon.element })
-
-    wrapper.element.dispatchEvent(event)
-
-    await wrapper.vm.$nextTick()
-    expect(wrapper.vm.isMenuActive).toBe(false)
-  })
 })
