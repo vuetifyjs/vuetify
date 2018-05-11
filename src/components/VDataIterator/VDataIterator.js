@@ -1,5 +1,7 @@
 import { getObjectValueByPath } from '../../util/helpers'
 
+const wrapInArray = v => Array.isArray(v) ? v : [v]
+
 export default {
   name: 'v-data-iterator',
 
@@ -84,33 +86,35 @@ export default {
       default: (items, sortBy, sortDesc) => {
         if (sortBy === null) return items
 
+        if (!Array.isArray(sortBy)) {
+          sortBy = [sortBy]
+          sortDesc = [sortDesc]
+        }
+
         return items.sort((a, b) => {
-          let sortA = getObjectValueByPath(a, sortBy)
-          let sortB = getObjectValueByPath(b, sortBy)
+          for (let i = 0; i < sortBy.length; i++) {
+            const sortKey = sortBy[i]
 
-          if (sortDesc) {
-            [sortA, sortB] = [sortB, sortA]
+            let sortA = getObjectValueByPath(a, sortKey)
+            let sortB = getObjectValueByPath(b, sortKey)
+
+            if (sortDesc[i]) {
+              [sortA, sortB] = [sortB, sortA]
+            }
+
+            // Check if both cannot be evaluated
+            if (sortA === null && sortB === null) {
+              return 0
+            }
+
+            [sortA, sortB] = [sortA, sortB].map(s => (s || '').toString().toLocaleLowerCase())
+
+            if (sortA !== sortB) {
+              if (!isNaN(sortA) && !isNaN(sortB)) return Number(sortA) - Number(sortB)
+              if (sortA > sortB) return 1
+              if (sortA < sortB) return -1
+            }
           }
-
-          // Check if both are numbers
-          if (!isNaN(sortA) && !isNaN(sortB)) {
-            return sortA - sortB
-          }
-
-          // Check if both cannot be evaluated
-          if (sortA === null && sortB === null) {
-            return 0
-          }
-
-          [sortA, sortB] = [sortA, sortB]
-            .map(s => (
-              (s || '').toString().toLocaleLowerCase()
-            ))
-
-          if (sortA > sortB) return 1
-          if (sortA < sortB) return -1
-
-          return 0
         })
       }
     },
@@ -135,11 +139,12 @@ export default {
       type: String
     },
     sortBy: {
-      type: String
+      type: [Array, String],
+      default: () => ([])
     },
     sortDesc: {
-      type: Boolean,
-      default: false
+      type: [Array, Boolean],
+      default: () => ([])
     },
     rowsPerPage: {
       type: Number,
@@ -152,9 +157,6 @@ export default {
     serverItemsLength: {
       type: Number
     },
-    disablePagination:  {
-      type: Boolean
-    },
     noResultsText: {
       type: String,
       default: 'No matching records found'
@@ -166,6 +168,12 @@ export default {
     loadingText: {
       type: String,
       default: 'Please wait...'
+    },
+    multiSort: {
+      type: Boolean
+    },
+    mustSort: {
+      type: Boolean
     }
   },
 
@@ -175,8 +183,8 @@ export default {
       selection: {},
       expansion: {},
       options: {
-        sortBy: this.sortBy,
-        sortDesc: this.sortDesc,
+        sortBy: wrapInArray(this.sortBy),
+        sortDesc: wrapInArray(this.sortDesc),
         rowsPerPage: this.rowsPerPage,
         page: this.page
       }
@@ -185,10 +193,10 @@ export default {
 
   watch: {
     'options.sortBy': function (v) {
-      this.$emit('update:sortBy', v)
+      this.$emit('update:sortBy', !this.multiSort && !Array.isArray(this.sortBy) ? v[0] : v)
     },
     'options.sortDesc': function (v) {
-      this.$emit('update:sortDesc', v)
+      this.$emit('update:sortDesc', !this.multiSort && !Array.isArray(this.sortBy) ? v[0] : v)
     },
     'options.page': function (v) {
       this.$emit('update:page', v)
@@ -197,10 +205,10 @@ export default {
       this.$emit('update:rowsPerPage', v)
     },
     sortBy (v) {
-      this.options.sortBy = v
+      this.options.sortBy = wrapInArray(v)
     },
     sortDesc (v) {
-      this.options.sortDesc = v
+      this.options.sortDesc = wrapInArray(v)
     },
     page (v) {
       this.options.page = v
@@ -220,9 +228,6 @@ export default {
       return typeof this.search !== 'undefined' && this.search !== null
     },
     computedItems () {
-      // TODO: Handle this differently (server-side-processing prop?)
-      // if (this.totalItems) return this.items
-
       let items = this.items.slice()
 
       if (this.serverItemsLength) return items
@@ -243,12 +248,12 @@ export default {
     },
     pageStop () {
       return this.options.rowsPerPage === -1
-        ? this.computedItems.length // TODO: Does this need to be something other (server-side, etc?)
+        ? this.itemsLength // TODO: Does this need to be something other (server-side, etc?)
         : this.options.page * this.options.rowsPerPage
     },
     pageCount () {
       // We can't simply use computedItems.length here since it's already sliced
-      return Math.ceil(this.itemsLength / this.options.rowsPerPage)
+      return this.options.rowsPerPage <= 0 ? 1 : Math.ceil(this.itemsLength / this.options.rowsPerPage)
     },
     itemsLength () {
       if (typeof this.serverItemsLength !== 'undefined' && !isNaN(this.serverItemsLength)) return this.serverItemsLength
@@ -268,24 +273,30 @@ export default {
       return this.customSort(items, sortBy, sortDesc)
     },
     paginateItems (items) {
-      return this.disablePagination ? items : items.slice(this.pageStart, this.pageStop)
+      return items.slice(this.pageStart, this.pageStop)
     },
-    sort (index) {
-      const { sortBy, sortDesc } = this.options
-      let updated
-      if (sortBy === null) {
-        updated = { sortBy: index, sortDesc: false }
-      } else if (sortBy === index && !sortDesc) {
-        updated = { sortBy: index, sortDesc: true }
-      } else if (sortBy !== index) {
-        updated = { sortBy: index, sortDesc: false }
+    sort (key) {
+      let sortBy = this.options.sortBy.slice()
+      let sortDesc = this.options.sortDesc.slice()
+      const sortByIndex = sortBy.findIndex(k => k === key)
+
+      if (sortByIndex < 0) {
+        if (!this.multiSort) {
+          sortBy = []
+          sortDesc = []
+        }
+        sortBy.push(key)
+        sortDesc.push(false)
+      } else if (sortByIndex >= 0 && !sortDesc[sortByIndex]) {
+        sortDesc[sortByIndex] = true
       } else if (!this.mustSort) {
-        updated = { sortBy: null, sortDesc: null }
+        sortBy.splice(sortByIndex, 1)
+        sortDesc.splice(sortByIndex, 1)
       } else {
-        updated = { sortBy: index, sortDesc: false }
+        sortDesc[sortByIndex] = false
       }
 
-      this.options = Object.assign(this.options, updated)
+      this.options = Object.assign(this.options, { sortBy, sortDesc })
     },
     isSelected (item) {
       return this.selection[item[this.itemKey]]
