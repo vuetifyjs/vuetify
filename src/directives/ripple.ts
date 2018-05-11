@@ -77,7 +77,7 @@ const ripple = {
     else animation.dataset.isHiding = 'true'
 
     const diff = performance.now() - Number(animation.dataset.activated)
-    let delay = Math.max(400 - diff, 0)
+    let delay = Math.max(300 - diff, 0)
 
     setTimeout(() => {
       animation.classList.remove('v-ripple__animation--visible')
