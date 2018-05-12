@@ -41,7 +41,8 @@ export default {
       return transition
     },
     genRow (h) {
-      return this.$scopedSlots.default && this.$scopedSlots.default({ expanded: this.isActive, toggle: this.toggle }) || this.$slots.default
+      const hasScopedSlot = !!this.$scopedSlots.default
+      return hasScopedSlot ? this.$scopedSlots.default({ expanded: this.isActive, toggle: this.toggle }) : this.$slots.default
     }
   },
   created () {

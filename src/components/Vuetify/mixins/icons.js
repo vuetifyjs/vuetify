@@ -22,7 +22,9 @@ const ICONS_MATERIAL = {
   'dropdown': 'arrow_drop_down',
   'radioOn': 'radio_button_checked',
   'radioOff': 'radio_button_unchecked',
-  'edit': 'edit'
+  'edit': 'edit',
+  'first': 'first_page',
+  'last': 'last_page'
 }
 
 // Maps internal Vuetify icon names to actual icons from materialdesignicons.com

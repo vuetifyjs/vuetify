@@ -114,7 +114,7 @@ export default {
         headers.push(h(VTableHeaders, {
           props: {
             showSelectAll: this.showSelectAll
-          },
+          }
         }))
         headers.push(h(VTableProgress))
       }
@@ -146,14 +146,14 @@ export default {
         const group = groups[i]
 
         rows.push(
-          this.$scopedSlots.group ?
-          this.$scopedSlots.group({ groupBy, group, items: grouped[group] }) :
-          h(VRowGroup, {
-            key: `${group}_${i}`
-          }, [
-            h('span', { slot: 'cell' }, [group]),
-            h('template', { slot: 'expansion' }, this.genRows(grouped[group]))
-          ])
+          this.$scopedSlots.group
+            ? this.$scopedSlots.group({ groupBy, group, items: grouped[group] })
+            : h(VRowGroup, {
+              key: `${group}_${i}`
+            }, [
+              h('span', { slot: 'cell' }, [group]),
+              h('template', { slot: 'expansion' }, this.genRows(grouped[group]))
+            ])
         )
       }
 

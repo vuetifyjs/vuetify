@@ -254,3 +254,10 @@ export const keyCodes = Object.freeze({
   pageup: 33,
   pagedown: 34
 })
+
+export const groupByProperty = (xs, key) => {
+  return xs.reduce((rv, x) => {
+    (rv[x[key]] = rv[x[key]] || []).push(x)
+    return rv
+  }, {})
+}

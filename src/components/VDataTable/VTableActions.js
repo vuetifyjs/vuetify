@@ -10,19 +10,19 @@ export default {
   props: {
     prevIcon: {
       type: String,
-      default: 'chevron_left'
+      default: '$vuetify.icons.prev'
     },
     nextIcon: {
       type: String,
-      default: 'chevron_right'
+      default: '$vuetify.icons.next'
     },
     firstIcon: {
       type: String,
-      default: 'first_page'
+      default: '$vuetify.icons.first'
     },
     lastIcon: {
       type: String,
-      default: 'last_page'
+      default: '$vuetify.icons.last'
     },
     rowsPerPageItems: {
       type: Array,

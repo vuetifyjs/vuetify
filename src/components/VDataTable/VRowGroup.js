@@ -14,6 +14,10 @@ export default {
     },
     disableExpansion: {
       type: Boolean
+    },
+    expandIcon: {
+      type: String,
+      default: '$vuetify.icons.expand'
     }
   },
   methods: {
@@ -35,7 +39,11 @@ export default {
               click: this.toggle
             }
           }, [
-            h(VIcon, [this.isActive ? 'keyboard_arrow_down' : 'keyboard_arrow_right'])
+            h(VIcon, {
+              class: {
+                'rotate-180': this.isActive
+              }
+            }, [this.expandIcon])
           ]),
           this.$slots.cell
         ])

@@ -1,7 +1,6 @@
 import VProgressLinear from '../VProgressLinear'
 import VRow from './VRow'
 
-
 export default {
   name: 'v-table-progress',
   inject: ['dataTable'],
