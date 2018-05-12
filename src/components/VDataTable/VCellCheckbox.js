@@ -7,6 +7,9 @@ export default {
     prop: 'inputValue',
     event: 'change'
   },
+  props: {
+    head: Boolean
+  },
   inheritAttrs: false,
   render (h) {
     const checkbox = h(VCheckbox, {
@@ -18,6 +21,9 @@ export default {
     })
 
     return h(VCell, {
+      props: {
+        head: this.head
+      },
       staticClass: 'v-cell-checkbox'
     }, [checkbox])
   }

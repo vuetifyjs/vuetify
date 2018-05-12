@@ -18,6 +18,9 @@ export default {
   methods: {
     genSelectAll (h) {
       return h(VCellCheckbox, {
+        props: {
+          head: true
+        },
         attrs: {
           inputValue: this.dataIterator.everyItem,
           indeterminate: !this.dataIterator.everyItem && this.dataIterator.someItems
