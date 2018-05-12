@@ -1,15 +1,31 @@
-function style (el, value) {
+import { VNodeDirective } from 'vue'
+
+function style (el: HTMLElement, value: string) {
   el.style['transform'] = value
   el.style['webkitTransform'] = value
 }
 
+declare global {
+  interface Element {
+    getElementsByClassName(classNames: string): NodeListOf<HTMLElement>
+  }
+
+  interface HTMLElement {
+    _ripple: undefined | {
+      enabled?: boolean
+      centered?: boolean
+      class?: string
+    }
+  }
+}
+
+interface RippleOptions {
+  class?: string
+  center?: boolean
+}
+
 const ripple = {
-  /**
-   * @param {Event} e
-   * @param {Element} el
-   * @param {{ class?: string, center?: boolean }} [value={}]
-   */
-  show: (e, el, value = {}) => {
+  show (e: MouseEvent, el: HTMLElement, value: RippleOptions = {}) {
     if (!el._ripple || !el._ripple.enabled) {
       return
     }
@@ -24,80 +40,77 @@ const ripple = {
       container.className += ` ${value.class}`
     }
 
-    const size = el.clientWidth > el.clientHeight
-      ? el.clientWidth
-      : el.clientHeight
+    const size = Math.max(el.clientWidth, el.clientHeight) * (value.center ? 1 : 2)
+    const halfSize = size / 2
     animation.className = 'v-ripple__animation'
-    animation.style.width = `${size * (value.center ? 1 : 2)}px`
-    animation.style.height = animation.style.width
+    animation.style.width = `${size}px`
+    animation.style.height = `${size}px`
 
     el.appendChild(container)
     const computed = window.getComputedStyle(el)
     if (computed.position !== 'absolute' && computed.position !== 'fixed') el.style.position = 'relative'
 
     const offset = el.getBoundingClientRect()
-    const x = value.center ? '50%' : `${e.clientX - offset.left}px`
-    const y = value.center ? '50%' : `${e.clientY - offset.top}px`
+    const x = value.center ? 0 : e.clientX - offset.left - halfSize
+    const y = value.center ? 0 : e.clientY - offset.top - halfSize
 
     animation.classList.add('v-ripple__animation--enter')
     animation.classList.add('v-ripple__animation--visible')
-    style(animation, `translate(-50%, -50%) translate(${x}, ${y}) scale3d(0.01,0.01,0.01)`)
-    animation.dataset.activated = Date.now()
+    style(animation, `translate(${x}px, ${y}px) scale3d(0, 0, 0)`)
+    animation.dataset.activated = String(performance.now())
 
     setTimeout(() => {
       animation.classList.remove('v-ripple__animation--enter')
-      style(animation, `translate(-50%, -50%) translate(${x}, ${y})  scale3d(0.99,0.99,0.99)`)
+      style(animation, `translate(${x}px, ${y}px)  scale3d(1, 1, 1)`)
     }, 0)
   },
 
-  hide: el => {
-    if (!el._ripple || !el._ripple.enabled) return
+  hide (el: HTMLElement | null) {
+    if (!el || !el._ripple || !el._ripple.enabled) return
 
     const ripples = el.getElementsByClassName('v-ripple__animation')
 
     if (ripples.length === 0) return
     const animation = ripples[ripples.length - 1]
-    const diff = Date.now() - Number(animation.dataset.activated)
-    let delay = 400 - diff
 
-    delay = delay < 0 ? 0 : delay
+    if (animation.dataset.isHiding) return
+    else animation.dataset.isHiding = 'true'
+
+    const diff = performance.now() - Number(animation.dataset.activated)
+    let delay = Math.max(300 - diff, 0)
 
     setTimeout(() => {
       animation.classList.remove('v-ripple__animation--visible')
 
       setTimeout(() => {
-        // refresh ripples and animation since this is async
         const ripples = el.getElementsByClassName('v-ripple__animation')
-        if (ripples.length === 0) {
-          el.style.position = null
-        } else {
-          const animation = ripples[ripples.length - 1]
-          animation.parentNode && el.removeChild(animation.parentNode)
-        }
+        if (ripples.length === 0) el.style.position = null
+        animation.parentNode && el.removeChild(animation.parentNode)
       }, 300)
     }, delay)
   }
 }
 
-function isRippleEnabled (value) {
+function isRippleEnabled (value: any): value is true {
   return typeof value === 'undefined' || !!value
 }
 
-function rippleShow (e) {
-  const value = {}
-  const element = e.currentTarget
-  value.center = element._ripple.centered
-  if (element._ripple.class) {
-    value.class = element._ripple.class
+function rippleShow (e: MouseEvent) {
+  const value: RippleOptions = {}
+  const element = e.currentTarget as HTMLElement
+  if (!element) return
+  value.center = element._ripple!.centered
+  if (element._ripple!.class) {
+    value.class = element._ripple!.class
   }
   ripple.show(e, element, value)
 }
 
-function rippleHide (e) {
-  ripple.hide(e.currentTarget)
+function rippleHide (e: Event) {
+  ripple.hide(e.currentTarget as HTMLElement | null)
 }
 
-function updateRipple (el, binding, wasEnabled) {
+function updateRipple (el: HTMLElement, binding: VNodeDirective, wasEnabled: boolean) {
   const enabled = isRippleEnabled(binding.value)
   if (!enabled) {
     ripple.hide(el)
@@ -127,8 +140,7 @@ function updateRipple (el, binding, wasEnabled) {
   }
 }
 
-function removeListeners (el) {
-  el.removeEventListener('touchstart', rippleShow, false)
+function removeListeners (el: HTMLElement) {
   el.removeEventListener('mousedown', rippleShow, false)
   el.removeEventListener('touchend', rippleHide, false)
   el.removeEventListener('touchcancel', rippleHide, false)
@@ -137,16 +149,16 @@ function removeListeners (el) {
   el.removeEventListener('dragstart', rippleHide, false)
 }
 
-function directive (el, binding) {
+function directive (el: HTMLElement, binding: VNodeDirective) {
   updateRipple(el, binding, false)
 }
 
-function unbind (el) {
+function unbind (el: HTMLElement) {
   delete el._ripple
   removeListeners(el)
 }
 
-function update (el, binding) {
+function update (el: HTMLElement, binding: VNodeDirective) {
   if (binding.value === binding.oldValue) {
     return
   }

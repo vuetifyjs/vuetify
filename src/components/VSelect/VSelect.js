@@ -276,12 +276,12 @@ export default {
         this.readonly ||
         this.getDisabled(item)
       )
-      const click = e => {
+      const focus = (e, cb) => {
         if (isDisabled) return
 
         e.stopPropagation()
-        this.selectedIndex = index
         this.onFocus()
+        cb && cb()
       }
 
       return this.$createElement(VChip, {
@@ -294,21 +294,16 @@ export default {
           small: this.smallChips
         },
         on: {
-          click: click,
-          focus: click,
+          click: e => {
+            focus(e, () => {
+              this.selectedIndex = index
+            })
+          },
+          focus,
           input: () => this.onChipInput(item)
         },
         key: this.getValue(item)
       }, this.getText(item))
-    },
-    genClearIcon () {
-      if (!this.clearable ||
-        !this.isDirty
-      ) return null
-
-      return this.genSlot('append', 'inner', [
-        this.genIcon('clear', this.clearIconCb || this.clearableCallback)
-      ])
     },
     genCommaSelection (item, index, last) {
       // Item may be an object
@@ -512,7 +507,20 @@ export default {
       }
     },
     onMouseUp (e) {
-      if (this.isSolo || this.hasOutline) {
+      const appendInner = this.$refs['append-inner']
+
+      // If append inner is present
+      // and the target is itself
+      // or inside, toggle menu
+      if (this.isMenuActive &&
+        appendInner &&
+        (appendInner === e.target ||
+        appendInner.contains(e.target))
+      ) {
+        this.$nextTick(() => (this.isMenuActive = !this.isMenuActive))
+      // If user is clicking in the container
+      // and field is enclosed, activate it
+      } else if (this.isEnclosed) {
         this.isMenuActive = true
       }
 

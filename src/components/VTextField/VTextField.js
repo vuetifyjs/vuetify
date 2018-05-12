@@ -47,7 +47,7 @@ export default {
     clearable: Boolean,
     clearIcon: {
       type: String,
-      default: 'clear'
+      default: '$vuetify.icons.clear'
     },
     clearIconCb: Function,
     color: {
@@ -161,6 +161,14 @@ export default {
   },
 
   methods: {
+    /** @public */
+    focus () {
+      this.onFocus()
+    },
+    /** @public */
+    blur () {
+      this.onBlur()
+    },
     clearableCallback () {
       this.internalValue = null
       this.$nextTick(() => this.$refs.input.focus())
@@ -178,6 +186,15 @@ export default {
 
       return this.genSlot('append', 'outer', slot)
     },
+    genClearIcon () {
+      const icon = !this.clearable || !this.isDirty
+        ? false
+        : 'clear'
+
+      return this.genSlot('append', 'inner', [
+        this.genIcon(icon, this.clearIconCb || this.clearableCallback)
+      ])
+    },
     genCounter () {
       if (this.counter === false) return null
 
@@ -194,6 +211,7 @@ export default {
     genDefaultSlot () {
       return [
         this.genTextFieldSlot(),
+        this.genClearIcon(),
         this.genIconSlot()
       ]
     },

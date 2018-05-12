@@ -90,6 +90,14 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
                       >
                     </div>
                     <div class="v-input__append-inner">
+                      <div class="v-input__icon v-input__icon--">
+                        <i aria-hidden="true"
+                           class="v-icon v-icon--link material-icons"
+                        >
+                        </i>
+                      </div>
+                    </div>
+                    <div class="v-input__append-inner">
                       <div class="v-input__icon v-input__icon--append">
                         <i aria-hidden="true"
                            class="v-icon material-icons"
@@ -278,6 +286,14 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
                              type="text"
                              autocomplete="on"
                       >
+                    </div>
+                    <div class="v-input__append-inner">
+                      <div class="v-input__icon v-input__icon--">
+                        <i aria-hidden="true"
+                           class="v-icon v-icon--link material-icons"
+                        >
+                        </i>
+                      </div>
                     </div>
                     <div class="v-input__append-inner">
                       <div class="v-input__icon v-input__icon--append">
@@ -470,6 +486,14 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
                              type="text"
                              autocomplete="on"
                       >
+                    </div>
+                    <div class="v-input__append-inner">
+                      <div class="v-input__icon v-input__icon--">
+                        <i aria-hidden="true"
+                           class="v-icon v-icon--link material-icons"
+                        >
+                        </i>
+                      </div>
                     </div>
                     <div class="v-input__append-inner">
                       <div class="v-input__icon v-input__icon--append">
