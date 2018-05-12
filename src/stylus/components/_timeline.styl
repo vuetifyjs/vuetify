@@ -25,10 +25,11 @@ theme(v-timeline, "v-timeline")
     flex-direction: row-reverse
     margin-bottom: 24px
 
-    &:nth-child(odd)
+    &:nth-child(odd):not(.v-timeline-item--right), &--left
       flex-direction: row
 
-    .v-btn
+    &__btn
+      align-self: center
       left: calc(50% - 28px)
 
     &__body
@@ -36,12 +37,28 @@ theme(v-timeline, "v-timeline")
       flex: 1 1 100%
       max-width: calc(50% - 56px)
 
+    &__opposite
+      flex: 1 1 auto
+      align-self: center
+      max-width: calc(50% - 56px)
+
+    &:nth-child(odd):not(.v-timeline-item--right), &--left
+      .v-timeline-item__opposite
+        margin-left: 112px
+        text-align: left
+
+    &:nth-child(even):not(.v-timeline-item--left), &--right
+      .v-timeline-item__opposite
+        margin-right: 112px
+        text-align: right
+
+
   @media $display-breakpoints.sm-and-down
     &:before
       left: 27px // -1 for line width
 
     .v-timeline-item
-      &:nth-child(odd)
+      &:nth-child(odd):not(.v-timeline-item--right), &--left
         flex-direction: row-reverse
 
       .v-btn
@@ -50,3 +67,6 @@ theme(v-timeline, "v-timeline")
 
       &__body
         max-width: calc(100% - 84px)
+
+      &__opposite
+        display: none
