@@ -39,6 +39,10 @@ export default {
         [`justify-${c.align || 'start'}`]: true
       }
 
+      const children = [
+        h('span', [c.text])
+      ]
+
       const listeners = {}
 
       if (sortable) {
@@ -55,6 +59,10 @@ export default {
         classes['active'] = beingSorted
         classes['asc'] = beingSorted && !isDesc
         classes['desc'] = beingSorted && isDesc
+
+        children.push(this.genSortIcon(h))
+
+        this.dataIterator.multiSort && beingSorted && children.push(h('span', [sortIndex + 1]))
       }
 
       return h(VCell, {
@@ -63,10 +71,7 @@ export default {
         },
         class: classes,
         nativeOn: listeners
-      }, [
-        h('span', [c.text]),
-        sortable && this.genSortIcon(h)
-      ])
+      }, children)
     })
 
     if (this.showSelectAll) headers.unshift(this.genSelectAll(h))

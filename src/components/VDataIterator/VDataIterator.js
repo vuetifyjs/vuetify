@@ -70,6 +70,11 @@ export default {
       enumerable: true
     })
 
+    Object.defineProperty(dataIterator, 'multiSort', {
+      get: () => this.multiSort,
+      enumerable: true
+    })
+
     return { dataIterator }
   },
 
