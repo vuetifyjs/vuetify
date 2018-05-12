@@ -1,7 +1,9 @@
-export function factory (prop = 'value', event = 'input') {
-  return {
-    name: 'toggleable',
+import Vue from 'vue'
+import { ExtendedVue } from 'vue/types/vue'
 
+export function factory<T extends string> (prop?: T, event?: string): ExtendedVue<Vue, { isActive: boolean }, {}, {}, Record<T, any>>
+export function factory (prop = 'value', event = 'input') {
+  return Vue.extend({
     model: { prop, event },
 
     props: {
@@ -22,7 +24,7 @@ export function factory (prop = 'value', event = 'input') {
         !!val !== this[prop] && this.$emit(event, val)
       }
     }
-  }
+  })
 }
 
 const Toggleable = factory()

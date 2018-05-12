@@ -10,7 +10,7 @@ export default {
   functional: true,
 
   props: {
-    ...Themeable.props,
+    ...Themeable.options.props,
     inset: Boolean,
     vertical: Boolean
   },

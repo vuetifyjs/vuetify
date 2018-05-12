@@ -737,4 +737,18 @@ test('VTextField.js', ({ mount }) => {
 
     expect(change).toHaveBeenCalledTimes(2)
   })
+
+  it('should have focus and blur methods', () => {
+    const wrapper = mount(VTextField)
+    const focus = jest.fn()
+    const blur = jest.fn()
+    wrapper.vm.$on('focus', focus)
+    wrapper.vm.$on('blur', blur)
+
+    wrapper.vm.focus()
+    expect(focus).toHaveBeenCalledTimes(1)
+
+    wrapper.vm.blur()
+    expect(blur).toHaveBeenCalledTimes(1)
+  })
 })

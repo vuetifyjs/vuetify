@@ -52,7 +52,7 @@ const Vuetify = {
 
 /* istanbul ignore next */
 function checkVueVersion (Vue) {
-  const vueDep = process.env.REQUIRED_VUE
+  const vueDep = __REQUIRED_VUE__
 
   const required = vueDep.split('.').map(v => v.replace(/\D/g, ''))
   const actual = Vue.version.split('.')

@@ -21,6 +21,7 @@ import ClickOutside from '../../directives/click-outside'
 
 // Helpers
 import { getPropertyFromItem, keyCodes } from '../../util/helpers'
+import { consoleError } from '../../util/console'
 
 export default {
   name: 'v-select',
@@ -40,7 +41,10 @@ export default {
   data: vm => ({
     attrsInput: { role: 'combobox' },
     cachedItems: vm.cacheItems ? vm.items : [],
+    content: null,
+    isBooted: false,
     isMenuActive: false,
+    lastItem: 20,
     // As long as a value is defined, show it
     // Otherwise, check if multiple
     // to determine which default to provide
@@ -56,7 +60,7 @@ export default {
     ...Menuable.props,
     appendIcon: {
       type: String,
-      default: 'arrow_drop_down'
+      default: '$vuetify.icons.dropdown'
     },
     appendIconCb: Function,
     attach: Boolean,
@@ -166,11 +170,60 @@ export default {
         offsetY: this.offsetY,
         nudgeBottom: this.offsetY ? 1 : 0 // convert to int
       }
+    },
+    listData () {
+      return {
+        props: {
+          action: this.isMulti && !this.isHidingSelected,
+          color: this.color,
+          dark: this.dark,
+          dense: this.dense,
+          hideSelected: this.hideSelected,
+          items: this.virtualizedItems,
+          light: this.light,
+          noDataText: this.noDataText,
+          selectedItems: this.selectedItems,
+          itemAvatar: this.itemAvatar,
+          itemDisabled: this.itemDisabled,
+          itemValue: this.itemValue,
+          itemText: this.itemText
+        },
+        on: {
+          select: this.selectItem
+        },
+        scopedSlots: {
+          item: this.$scopedSlots.item
+        }
+      }
+    },
+    staticList () {
+      if (this.$slots['no-data']) {
+        consoleError('assert: staticList should not be called if slots are used')
+      }
+
+      return this.$createElement(VSelectList, this.listData)
+    },
+    virtualizedItems () {
+      return !this.auto
+        ? this.computedItems.slice(0, this.lastItem)
+        : this.computedItems
     }
   },
 
   watch: {
     internalValue: 'setSelectedItems',
+    isBooted () {
+      this.$nextTick(() => {
+        if (this.content && this.content.addEventListener) {
+          this.content.addEventListener('scroll', this.onScroll, false)
+        }
+      })
+    },
+    isMenuActive (val) {
+      if (!val) return
+
+      this.isBooted = true
+    },
     items (val) {
       if (this.cacheItems) {
         this.cachedItems = this.filterDuplicates(this.cachedItems.concat(val))
@@ -182,6 +235,14 @@ export default {
 
   created () {
     this.setSelectedItems()
+  },
+
+  mounted () {
+    // If instance is being destroyed
+    // do not run mounted functions
+    if (this._isDestroyed) return
+
+    this.content = this.$refs.menu.$refs.content
   },
 
   methods: {
@@ -214,12 +275,12 @@ export default {
         this.readonly ||
         this.getDisabled(item)
       )
-      const click = e => {
+      const focus = (e, cb) => {
         if (isDisabled) return
 
         e.stopPropagation()
-        this.selectedIndex = index
         this.onFocus()
+        cb && cb()
       }
 
       return this.$createElement(VChip, {
@@ -232,21 +293,16 @@ export default {
           small: this.smallChips
         },
         on: {
-          click: click,
-          focus: click,
+          click: e => {
+            focus(e, () => {
+              this.selectedIndex = index
+            })
+          },
+          focus,
           input: () => this.onChipInput(item)
         },
         key: this.getValue(item)
       }, this.getText(item))
-    },
-    genClearIcon () {
-      if (!this.clearable ||
-        !this.isDirty
-      ) return null
-
-      return this.genSlot('append', 'inner', [
-        this.genIcon('clear', this.clearIconCb || this.clearableCallback)
-      ])
     },
     genCommaSelection (item, index, last) {
       // Item may be an object
@@ -304,29 +360,15 @@ export default {
       return input
     },
     genList () {
-      return this.$createElement(VSelectList, {
-        props: {
-          action: this.isMulti && !this.isHidingSelected,
-          color: this.color,
-          dark: this.dark,
-          dense: this.dense,
-          hideSelected: this.hideSelected,
-          items: this.items,
-          light: this.light,
-          noDataText: this.noDataText,
-          selectedItems: this.selectedItems,
-          itemAvatar: this.itemAvatar,
-          itemDisabled: this.itemDisabled,
-          itemValue: this.itemValue,
-          itemText: this.itemText
-        },
-        on: {
-          select: this.selectItem
-        },
-        scopedSlots: {
-          item: this.$scopedSlots.item
-        }
-      }, [
+      // If there's no slots, we can use a cached VNode to improve performance
+      if (this.$slots['no-data']) {
+        return this.genListWithSlot()
+      } else {
+        return this.staticList
+      }
+    },
+    genListWithSlot () {
+      return this.$createElement(VSelectList, this.listData, [
         this.$slots['no-data'] ? this.$createElement('div', {
           slot: 'no-data'
         }, this.$slots['no-data']) : null
@@ -464,11 +506,41 @@ export default {
       }
     },
     onMouseUp (e) {
-      if (this.isSolo || this.hasOutline) {
+      const appendInner = this.$refs['append-inner']
+
+      // If append inner is present
+      // and the target is itself
+      // or inside, toggle menu
+      if (this.isMenuActive &&
+        appendInner &&
+        (appendInner === e.target ||
+        appendInner.contains(e.target))
+      ) {
+        this.$nextTick(() => (this.isMenuActive = !this.isMenuActive))
+      // If user is clicking in the container
+      // and field is enclosed, activate it
+      } else if (this.isEnclosed) {
         this.isMenuActive = true
       }
 
       VTextField.methods.onMouseUp.call(this, e)
+    },
+    onScroll () {
+      if (!this.isMenuActive) {
+        requestAnimationFrame(() => (this.content.scrollTop = 0))
+      } else {
+        if (this.lastItem >= this.computedItems.length) return
+
+        const showMoreItems = (
+          this.content.scrollHeight -
+          (this.content.scrollTop +
+          this.content.clientHeight)
+        ) < 200
+
+        if (showMoreItems) {
+          this.lastItem += 20
+        }
+      }
     },
     selectItem (item) {
       if (!this.isMulti) {
