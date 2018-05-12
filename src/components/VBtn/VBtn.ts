@@ -86,7 +86,7 @@ const VBtn = mixins(
         ? this.addBackgroundColorClassChecks(classes)
         : this.addTextColorClassChecks(classes)
     },
-    computedRipple () {
+    computedRipple (): any {
       const defaultRipple = this.icon || this.fab ? { circle: true } : true
       if (this.disabled) return false
       else return this.ripple || defaultRipple

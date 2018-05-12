@@ -30,6 +30,30 @@ interface RippleOptions {
   circle?: boolean
 }
 
+const calculate = (e: MouseEvent, el: HTMLElement, value: RippleOptions = {}) => {
+  const offset = el.getBoundingClientRect()
+  const localX = e.clientX - offset.left
+  const localY = e.clientY - offset.top
+
+  let radius = 0
+  let scale = 0.3
+  if (el._ripple && el._ripple.circle) {
+    scale = 0.15
+    radius = el.clientWidth / 2
+    radius = radius + Math.sqrt((localX - radius)**2 + (localY - radius)**2) / 4
+  } else {
+    radius = Math.sqrt(el.clientWidth**2 + el.clientHeight**2) / 2
+  }
+
+  const x = value.center ? 0 : `${localX - radius}px`
+  const y = value.center ? 0 : `${localY - radius}px`
+
+  const centerX = `${(el.clientWidth - (radius * 2)) / 2}px`
+  const centerY = `${(el.clientHeight - (radius * 2)) / 2}px`
+
+  return { radius, scale, x, y, centerX, centerY }
+}
+
 const ripple = {
   show (e: MouseEvent, el: HTMLElement, value: RippleOptions = {}) {
     if (!el._ripple || !el._ripple.enabled) {
@@ -46,18 +70,7 @@ const ripple = {
       container.className += ` ${value.class}`
     }
 
-    const offset = el.getBoundingClientRect()
-    const localX = e.clientX - offset.left
-    const localY = e.clientY - offset.top
-
-    let radius = 0, scale = 0.3
-    if (el._ripple.circle) {
-      scale = 0.15
-      radius = el.clientWidth / 2
-      radius = radius + Math.sqrt((localX - radius)**2 + (localY - radius)**2) / 4
-    } else {
-      radius = Math.sqrt(el.clientWidth**2 + el.clientHeight**2) / 2
-    }
+    const { radius, scale, x, y, centerX, centerY } = calculate(e, el, value)
 
     animation.className = 'v-ripple__animation'
     animation.style.width = `${radius * 2}px`
@@ -67,28 +80,23 @@ const ripple = {
     const computed = window.getComputedStyle(el)
     if (computed.position !== 'absolute' && computed.position !== 'fixed') el.style.position = 'relative'
 
-    const x = value.center ? '50%' : `${localX}px`
-    const y = value.center ? '50%' : `${localY}px`
-    const centerX = `${el.clientWidth / 2}px`
-    const centerY = `${el.clientHeight / 2}px`
-
     animation.classList.add('v-ripple__animation--enter')
     animation.classList.add('v-ripple__animation--visible')
-    transform(animation, `translate(${x}px, ${y}px) scale3d(${scale},${scale},${scale})`)
+    transform(animation, `translate(${x}, ${y}) scale3d(${scale},${scale},${scale})`)
     opacity(animation, 0)
     animation.dataset.activated = String(performance.now())
 
     setTimeout(() => {
-      animation.classList.remove('ripple__animation--enter')
-      animation.classList.add('ripple__animation--in')
+      animation.classList.remove('v-ripple__animation--enter')
+      animation.classList.add('v-ripple__animation--in')
       transform(animation, `translate(${centerX}, ${centerY}) scale3d(0.99,0.99,0.99)`)
       opacity(animation, 0.25)
 
       setTimeout(() => {
-        animation.classList.remove('ripple__animation--in')
-        animation.classList.add('ripple__animation--out')
+        animation.classList.remove('v-ripple__animation--in')
+        animation.classList.add('v-ripple__animation--out')
         opacity(animation, 0)
-      }, 250)
+      }, 300)
     }, 0)
   },
 
