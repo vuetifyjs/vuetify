@@ -1,13 +1,21 @@
 export default {
   name: 'v-cell',
+
+  functional: true,
+
   props: {
     head: {
       type: Boolean
     }
   },
-  render (h) {
+
+  render (h, { data, slots, props }) {
+    const resolvedSlots = slots()
+
     return h('div', {
-      staticClass: this.head ? 'v-head' : 'v-cell'
-    }, this.$slots.default)
+      staticClass: `${props.head ? 'v-head' : 'v-cell'} ${data.staticClass || ''}`,
+      class: data.class,
+      on: data.nativeOn
+    }, resolvedSlots.default)
   }
 }
