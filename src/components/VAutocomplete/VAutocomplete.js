@@ -47,7 +47,7 @@ export default {
       default: true
     },
     searchInput: {
-      default: null
+      default: undefined
     },
     tags: Boolean,
     transition: {
@@ -309,7 +309,9 @@ export default {
       // If tab - select item or close menu
       if (keyCode === keyCodes.tab) return this.onTabDown(e)
 
-      if (this.$refs.input.selectionStart === 0) this.updateSelf()
+      if (this.$refs.input.selectionStart === 0 &&
+        this.isMulti
+      ) this.updateSelf()
       if (!this.hideSelections) this.changeSelectedIndex(keyCode)
     },
     onTabDown (e) {
@@ -355,7 +357,9 @@ export default {
       this.$refs.menu.tiles[index].click()
     },
     setSelectedItems () {
-      if (this.internalValue == null) {
+      if (this.internalValue == null ||
+        this.internalValue === ''
+      ) {
         this.selectedItems = []
       } else if (this.tags) {
         this.selectedItems = this.internalValue
@@ -392,8 +396,17 @@ export default {
       }
     },
     updateCombobox () {
+      // When using chips and search is dirty
+      // avoid updating input
+      if (this.chips && !this.searchIsDirty) return
+
+      // The internal search is not matching
+      // the initial value, update the input
       if (this.internalSearch !== this.internalValue) this.setValue()
-      else this.updateAutocomplete()
+
+      // Reset search if using chips
+      // to avoid a double input
+      if (this.chips) this.internalSearch = undefined
     },
     updateSelf () {
       if (this.tags) this.updateTags()

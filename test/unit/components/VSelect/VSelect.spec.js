@@ -424,10 +424,13 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
   it('should toggle menu on icon click', async () => {
     const wrapper = mount(VSelect, {
-      propsData: { offsetY: true }
+      propsData: {
+        items: ['foo', 'bar'],
+        offsetY: true
+      }
     })
 
-    const icon = wrapper.first('.v-icon')
+    const icon = wrapper.find('.v-icon')[1]
     const slot = wrapper.first('.v-input__slot')
 
     expect(wrapper.vm.isMenuActive).toBe(false)
