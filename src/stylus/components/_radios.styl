@@ -1,16 +1,4 @@
 @import '../bootstrap'
-@import '../theme'
-
-v-radio($material)
-  &--is-disabled
-    label
-      color: $material.text.disabled
-
-    .v-icon
-      // needed for helper override
-      color: $material.buttons.disabled !important
-
-theme(v-radio, "v-radio")
 
 .v-radio
   align-items: center
@@ -21,3 +9,10 @@ theme(v-radio, "v-radio")
 
   &--is-disabled
     pointer-events: none
+
+    label
+      color: var(--vuetify-text-disabled)
+
+    .v-icon
+      // needed for helper override
+      color: var(--vuetify-btn-disabled-color) !important
