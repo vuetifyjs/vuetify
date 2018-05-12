@@ -567,8 +567,12 @@ export default {
         )
         : i => this.findExistingIndex(i) > -1
 
-      if (this.retainSelection && this.chips && this.deletableChips) {
-        this.selectedItems = this.internalValue.filter(fn)
+      if (this.retainSelection && ((this.chips && this.deletableChips) || this.clearable)) {
+        if (this.isMulti) {
+          this.selectedItems = this.internalValue.filter(fn)
+        } else {
+          this.selectedItems[0] = this.internalValue ? this.internalValue : []
+        }
       } else {
         this.selectedItems = this.computedItems.filter(fn)
       }
