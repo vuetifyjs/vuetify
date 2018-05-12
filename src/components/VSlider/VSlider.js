@@ -1,3 +1,4 @@
+import '../../stylus/components/_input-groups.styl'
 import '../../stylus/components/_sliders.styl'
 
 import { addOnceEventListener, createRange } from '../../util/helpers'
