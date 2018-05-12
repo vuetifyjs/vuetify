@@ -26,7 +26,7 @@ export default {
   props: {
     activeClass: {
       type: String,
-      default: 'tabs__item--active'
+      default: 'v-tabs__item--active'
     },
     ripple: {
       type: [Boolean, Object],
@@ -37,21 +37,29 @@ export default {
   computed: {
     classes () {
       return {
-        'tabs__item': true,
-        'tabs__item--disabled': this.disabled,
+        'v-tabs__item': true,
+        'v-tabs__item--disabled': this.disabled,
         [this.activeClass]: !this.to && this.isActive
       }
     },
     action () {
-      const to = this.to || this.href
+      let to = this.to || this.href
 
-      if (typeof to === 'string') return to.replace('#', '')
-      if (to === Object(to) &&
-        (to.hasOwnProperty('name') ||
-          to.hasOwnProperty('path'))
-      ) return to.name || to.path
+      if (this.$router &&
+        this.to === Object(this.to)
+      ) {
+        const resolve = this.$router.resolve(
+          this.to,
+          this.$route,
+          this.append
+        )
 
-      return this
+        to = resolve.href
+      }
+
+      return typeof to === 'string'
+        ? to.replace('#', '')
+        : this
     }
   },
 
@@ -108,7 +116,7 @@ export default {
     data.ref = 'link'
 
     return h('div', {
-      staticClass: 'tabs__div'
+      staticClass: 'v-tabs__div'
     }, [h(tag, data, this.$slots.default)])
   }
 }

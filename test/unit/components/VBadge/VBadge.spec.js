@@ -34,7 +34,7 @@ test('VBadge.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    expect(wrapper.hasClass('badge--bottom')).toBe(true)
+    expect(wrapper.hasClass('v-badge--bottom')).toBe(true)
   })
 
   it('should render component with left prop', () => {
@@ -44,7 +44,7 @@ test('VBadge.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    expect(wrapper.hasClass('badge--left')).toBe(true)
+    expect(wrapper.hasClass('v-badge--left')).toBe(true)
   })
 
   it('should render component with overlap prop', () => {
@@ -54,7 +54,7 @@ test('VBadge.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    expect(wrapper.hasClass('badge--overlap')).toBe(true)
+    expect(wrapper.hasClass('v-badge--overlap')).toBe(true)
   })
 
   it('should render component with color prop', () => {
@@ -67,7 +67,7 @@ test('VBadge.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const badge = wrapper.find('.badge__badge')[0]
+    const badge = wrapper.find('.v-badge__badge')[0]
     expect(badge.hasClass('green')).toBe(true)
     expect(badge.hasClass('lighten-1')).toBe(true)
   })

@@ -1,7 +1,7 @@
 @import '../bootstrap'
 @import '../theme'
 
-pagination($material)
+v-pagination($material)
   &__item
     background: $material.cards
     color: $material.fg-color
@@ -12,12 +12,12 @@ pagination($material)
   &__navigation
     background: $material.cards
 
-    .icon
+    .v-icon
       color: rgba($material.fg-color, $material.active-icon-percent)
 
-theme(pagination, "pagination")
+theme(v-pagination, "v-pagination")
 
-.pagination
+.v-pagination
   align-items: center
   align-items: center
   display: inline-flex
@@ -31,9 +31,9 @@ theme(pagination, "pagination")
     display: flex
 
   &--circle
-    .pagination__item,
-    .pagination__more,
-    .pagination__navigation
+    .v-pagination__item,
+    .v-pagination__more,
+    .v-pagination__navigation
       border-radius: 50%
 
   &--disabled
@@ -69,7 +69,7 @@ theme(pagination, "pagination")
     width: 2rem
     margin: .3rem 10px
 
-    .icon
+    .v-icon
       font-size: 2rem
       transition: $secondary-transition
       vertical-align: middle

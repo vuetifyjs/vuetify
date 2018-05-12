@@ -1,9 +1,9 @@
 @import '../bootstrap'
 
-.badge
+.v-badge
   display: inline-block
   position: relative
-  
+
   &__badge
     color: $badge-color
     display: flex
@@ -19,30 +19,30 @@
     flex-direction: row
     flex-wrap: wrap
     transition: $primary-transition
-    
-    .icon
+
+    .v-icon
       font-size: $badge-font-size
 
   &--overlap
-    .badge__badge
+    .v-badge__badge
       top: -8px
       right: -8px
 
-    &.badge--left
-      .badge__badge
+    &.v-badge--left
+      .v-badge__badge
         left: -8px
         right: initial
 
-    &.badge--bottom
-      .badge__badge
+    &.v-badge--bottom
+      .v-badge__badge
         bottom: -8px
         top: initial
 
   &--left
-    .badge__badge
+    .v-badge__badge
       left: -($badge-width)
 
   &--bottom
-    .badge__badge
+    .v-badge__badge
       bottom: -($badge-height / 2)
       top: initial;

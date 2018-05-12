@@ -30,6 +30,10 @@ export default {
   },
 
   watch: {
+    attach () {
+      this.hasDetached = false
+      this.initDetach()
+    },
     hasContent: 'initDetach'
   },
 
@@ -47,7 +51,7 @@ export default {
     // IE11 Fix
     try {
       this.$refs.content.parentNode.removeChild(this.$refs.content)
-    } catch (e) {}
+    } catch (e) { console.log(e) }
   },
 
   methods: {

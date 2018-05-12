@@ -4,7 +4,7 @@ const resolve = file => require('path').resolve(__dirname, file)
 
 module.exports = {
   resolve: {
-    extensions: ['*', '.js', '.json', '.vue'],
+    extensions: ['*', '.js', '.json', '.vue', '.ts'],
     alias: {
       '@': resolve('../src')
     }

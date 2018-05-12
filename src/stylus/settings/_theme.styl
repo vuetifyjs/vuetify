@@ -34,6 +34,7 @@ $material-light := {
     inactive: rgba(#000, .38)
   },
   inputs: {
+    box: rgba(#000, .04),
     solo-inverted: rgba(#000, .16),
     solo-inverted-focused: #424242,
     solo-inverted-focused-text: #fff
@@ -65,6 +66,11 @@ $material-light := {
   },
   tabs: {
     active: rgba(#000, .87)
+  },
+  text-fields: {
+    box: rgba(#000, .06),
+    box-hover: rgba(#000, .12),
+    box-focus: rgba(#000, .16)
   },
   input-bottom-line: rgba(#000, .42),
   stepper: {
@@ -119,6 +125,7 @@ $material-dark := {
     inactive: rgba(#fff, .5)
   },
   inputs: {
+    box: #fff,
     solo-inverted: rgba(#fff, .16),
     solo-inverted-focused: #fff,
     solo-inverted-focused-text: $material-light.text.primary
@@ -150,6 +157,11 @@ $material-dark := {
   },
   tabs: {
     active: #fff
+  },
+  text-fields: {
+    box: rgba(#000, .1),
+    box-hover: rgba(#000, .2),
+    box-focus: rgba(#000, .3)
   },
   input-bottom-line: rgba(#fff, .7),
 

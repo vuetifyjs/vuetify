@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VCounter.js should render component 1`] = `
+
+<div class="v-counter">
+  5 / 10
+</div>
+
+`;

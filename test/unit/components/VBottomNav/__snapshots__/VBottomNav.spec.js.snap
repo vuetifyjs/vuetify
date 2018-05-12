@@ -2,19 +2,19 @@
 
 exports[`VBottomNav.js should be hidden with a false value 1`] = `
 
-<div class="bottom-nav"
+<div class="v-bottom-nav"
      style="height: 56px;"
 >
   <button type="button"
-          class="btn"
+          class="v-btn"
   >
-    <div class="btn__content">
+    <div class="v-btn__content">
     </div>
   </button>
   <button type="button"
-          class="btn"
+          class="v-btn"
   >
-    <div class="btn__content">
+    <div class="v-btn__content">
     </div>
   </button>
 </div>
@@ -23,40 +23,40 @@ exports[`VBottomNav.js should be hidden with a false value 1`] = `
 
 exports[`VBottomNav.js should be visible with a true value 1`] = `
 
-<div class="bottom-nav bottom-nav--active"
+<div class="v-bottom-nav v-bottom-nav--active"
      style="height: 56px;"
 >
   <button type="button"
-          class="btn"
+          class="v-btn"
   >
-    <div class="btn__content">
+    <div class="v-btn__content">
     </div>
   </button>
   <button type="button"
-          class="btn"
+          class="v-btn"
   >
-    <div class="btn__content">
+    <div class="v-btn__content">
     </div>
   </button>
 </div>
 
 `;
 
-exports[`VBottomNav.js should have a bottom-nav class 1`] = `
+exports[`VBottomNav.js should have a v-bottom-nav class 1`] = `
 
-<div class="bottom-nav"
+<div class="v-bottom-nav"
      style="height: 56px;"
 >
   <button type="button"
-          class="btn"
+          class="v-btn"
   >
-    <div class="btn__content">
+    <div class="v-btn__content">
     </div>
   </button>
   <button type="button"
-          class="btn"
+          class="v-btn"
   >
-    <div class="btn__content">
+    <div class="v-btn__content">
     </div>
   </button>
 </div>
@@ -65,19 +65,19 @@ exports[`VBottomNav.js should have a bottom-nav class 1`] = `
 
 exports[`VBottomNav.js should have prop classes 1`] = `
 
-<div class="bottom-nav bottom-nav--absolute bottom-nav--shift"
+<div class="v-bottom-nav v-bottom-nav--absolute v-bottom-nav--shift"
      style="height: 56px;"
 >
   <button type="button"
-          class="btn"
+          class="v-btn"
   >
-    <div class="btn__content">
+    <div class="v-btn__content">
     </div>
   </button>
   <button type="button"
-          class="btn"
+          class="v-btn"
   >
-    <div class="btn__content">
+    <div class="v-btn__content">
     </div>
   </button>
 </div>

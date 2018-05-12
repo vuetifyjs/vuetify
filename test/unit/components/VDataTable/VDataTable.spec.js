@@ -60,7 +60,7 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.html()).toMatchSnapshot()
 
-    const content = wrapper.find('table.datatable tbody > tr > td')[0]
+    const content = wrapper.find('table.v-datatable tbody > tr > td')[0]
     expect(content.element.textContent).toBe('No matching records found')
 
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
@@ -73,7 +73,7 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.html()).toMatchSnapshot()
 
-    const content = wrapper.find('table.datatable tbody > tr > td')[0]
+    const content = wrapper.find('table.v-datatable tbody > tr > td')[0]
     expect(content.element.textContent).toBe('No data available')
 
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
@@ -204,7 +204,7 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
       }
     }))
 
-    expect(wrapper.find('.datatable__progress')).toHaveLength(1)
+    expect(wrapper.find('.v-datatable__progress')).toHaveLength(1)
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
@@ -302,6 +302,16 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
     wrapper.vm.value.push(wrapper.vm.items[1]);
     wrapper.vm.value.push(wrapper.vm.items[2]);
     expect(wrapper.vm.everyItem).toBe(true);
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should render correct colspan when using headers-length prop', async () => {
+    const data = dataTableTestData()
+    data.propsData.headersLength = 11
+    const wrapper = mount(VDataTable, data)
+
+    expect(wrapper.find('tr.v-datatable__progress th')[0].getAttribute('colspan')).toBe('11')
+
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 })

@@ -1,5 +1,6 @@
 import application from './mixins/application'
 import theme from './mixins/theme'
+import icons from './mixins/icons'
 import options from './mixins/options'
 import { consoleWarn } from '../../util/console'
 import goTo from './util/goTo'
@@ -17,7 +18,9 @@ const Vuetify = {
         application,
         breakpoint: {},
         dark: false,
+        icons: icons(opts.iconfont, opts.icons),
         options: options(opts.options),
+        rtl: opts.rtl,
         theme: theme(opts.theme)
       },
       methods: {
@@ -49,7 +52,7 @@ const Vuetify = {
 
 /* istanbul ignore next */
 function checkVueVersion (Vue) {
-  const vueDep = process.env.REQUIRED_VUE
+  const vueDep = __REQUIRED_VUE__
 
   const required = vueDep.split('.').map(v => v.replace(/\D/g, ''))
   const actual = Vue.version.split('.')

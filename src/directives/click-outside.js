@@ -36,7 +36,7 @@ function directive (e, el, binding) {
   // Note that, because we're in the capture phase, this callback will occure before
   // the bubbling click event on any outside elements.
   !clickedInEls(e, elements) && setTimeout(() => {
-    isActive(e) && binding.value()
+    isActive(e) && binding.value(e)
   }, 0)
 }
 

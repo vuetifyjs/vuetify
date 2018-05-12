@@ -58,13 +58,14 @@ export default {
       }
     },
     allowOverflow: Boolean,
+    inputActivator: Boolean,
     maxWidth: {
       type: [Number, String],
       default: 'auto'
     },
     minWidth: [Number, String],
     nudgeBottom: {
-      type: Number,
+      type: [Number, String],
       default: 0
     },
     nudgeLeft: {
@@ -120,13 +121,13 @@ export default {
 
       if (!this.isAttached) top += this.pageYOffset
       if (this.offsetY) top += this.top ? -a.height : a.height
-      if (this.nudgeTop) top -= this.nudgeTop
-      if (this.nudgeBottom) top += this.nudgeBottom
+      if (this.nudgeTop) top -= parseInt(this.nudgeTop)
+      if (this.nudgeBottom) top += parseInt(this.nudgeBottom)
 
       return top
     },
     hasActivator () {
-      return !!this.$slots.activator || this.activator
+      return !!this.$slots.activator || this.activator || this.inputActivator
     },
     isAttached () {
       return this.attach !== false
@@ -242,6 +243,10 @@ export default {
     },
     deactivate () {},
     getActivator () {
+      if (this.inputActivator) {
+        return this.$el.querySelector('.v-input__slot')
+      }
+
       if (this.activator) {
         return typeof this.activator === 'string'
           ? document.querySelector(this.activator)

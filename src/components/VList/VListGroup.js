@@ -38,7 +38,7 @@ export default {
     },
     appendIcon: {
       type: String,
-      default: 'keyboard_arrow_down'
+      default: '$vuetify.icons.expand'
     },
     disabled: Boolean,
     group: String,
@@ -50,19 +50,19 @@ export default {
   computed: {
     groupClasses () {
       return {
-        'list__group--active': this.isActive,
-        'list__group--disabled': this.disabled
+        'v-list__group--active': this.isActive,
+        'v-list__group--disabled': this.disabled
       }
     },
     headerClasses () {
       return {
-        'list__group__header--active': this.isActive,
-        'list__group__header--sub-group': this.subGroup
+        'v-list__group__header--active': this.isActive,
+        'v-list__group__header--sub-group': this.subGroup
       }
     },
     itemsClasses () {
       return {
-        'list__group__items--no-action': this.noAction
+        'v-list__group__items--no-action': this.noAction
       }
     }
   },
@@ -116,14 +116,14 @@ export default {
       if (!icon && !this.$slots.appendIcon) return null
 
       return this.$createElement('div', {
-        staticClass: 'list__group__header__append-icon'
+        staticClass: 'v-list__group__header__append-icon'
       }, [
         this.$slots.appendIcon || this.genIcon(icon)
       ])
     },
     genGroup () {
       return this.$createElement('div', {
-        staticClass: 'list__group__header',
+        staticClass: 'v-list__group__header',
         'class': this.headerClasses,
         on: Object.assign({}, {
           click: this.click
@@ -137,7 +137,7 @@ export default {
     },
     genItems () {
       return this.$createElement('div', {
-        staticClass: 'list__group__items',
+        staticClass: 'v-list__group__items',
         'class': this.itemsClasses,
         directives: [{
           name: 'show',
@@ -150,13 +150,13 @@ export default {
       const icon = this.prependIcon
         ? this.prependIcon
         : this.subGroup
-          ? 'arrow_drop_down'
+          ? '$vuetify.icons.subgroup'
           : false
 
       if (!icon && !this.$slots.prependIcon) return null
 
       return this.$createElement('div', {
-        staticClass: 'list__group__header__prepend-icon',
+        staticClass: 'v-list__group__header__prepend-icon',
         'class': {
           [this.activeClass]: this.isActive
         }
@@ -175,7 +175,7 @@ export default {
 
   render (h) {
     return h('div', {
-      staticClass: 'list__group',
+      staticClass: 'v-list__group',
       'class': this.groupClasses
     }, [
       this.genGroup(),
