@@ -193,18 +193,17 @@ export default {
       }, [this.$slots.activator]))
     }
 
-    var dialog
+    let dialog
+    let baseDialog = h('div', data, this.showLazyContent(this.$slots.default))
     if (this.transition) {
       dialog = h('transition', {
         props: {
           name: this.transition,
           origin: this.origin
         }
-      }, [h('div', data, this.showLazyContent(this.$slots.default))])
+      }, [baseDialog])
     } else {
-      dialog = h('div', data,
-        this.showLazyContent(this.$slots.default)
-      )
+      dialog = baseDialog
     }
 
     children.push(h('div', {
