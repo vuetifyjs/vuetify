@@ -56,6 +56,7 @@ export default {
         'v-input--is-disabled': this.isDisabled,
         'v-input--is-focused': this.isFocused,
         'v-input--is-loading': this.loading !== false,
+        'v-input--is-readonly': this.readonly,
         ...this.addTextColorClassChecks({}, this.validationState),
         ...this.themeClasses
       }

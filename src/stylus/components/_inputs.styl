@@ -97,7 +97,7 @@ theme(v-input, "v-input")
     transition: $primary-transition
     width: 100%
 
-  &--is-disabled
+  &--is-disabled:not(.v-input--is-readonly)
     pointer-events: none
 
   &--is-loading
