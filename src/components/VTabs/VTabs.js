@@ -223,7 +223,7 @@ export default {
     },
     tabClick (tab) {
       this.inputValue = tab.action === tab ? this.tabs.indexOf(tab) : tab.action
-      this.centerActiveTabInWrapper || this.scrollIntoView()
+      this.centerActiveTab || this.scrollIntoView()
     },
     tabProxy (val) {
       this.lazyValue = val
