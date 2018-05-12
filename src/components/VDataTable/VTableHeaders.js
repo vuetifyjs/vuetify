@@ -12,7 +12,7 @@ export default {
     },
     sortIcon: {
       type: String,
-      default: 'arrow_upward'
+      default: '$vuetify.icons.sort'
     }
   },
   methods: {
