@@ -1,14 +1,4 @@
 @import '../bootstrap'
-@import '../theme'
-
-v-date-picker-table($material)
-  th
-    color: $material.text.disabled
-
-  .v-btn
-    color: $material.text.primary
-
-theme(v-date-picker-table, "v-date-picker-table")
 
 .v-date-picker-table
   position: relative
@@ -27,6 +17,10 @@ theme(v-date-picker-table, "v-date-picker-table")
 
   th
     font-size: 12px
+    color: var(--vuetify-text-disabled)
+
+  .v-btn
+    color: var(--vuetify-text-primary)
 
   &--date .v-btn
     height: 32px
