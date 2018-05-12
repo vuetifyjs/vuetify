@@ -2,7 +2,7 @@ export default {
   name: 'v-row',
   inject: ['dataTable'],
   render (h) {
-    const cells = this.$slots.default.filter(e => !!e.tag)
+    const cells = this.$slots.default && this.$slots.default.filter(e => !!e.tag) || []
 
     const widths = this.dataTable.widths
     const isFlexWidth = this.dataTable.isFlexWidth
