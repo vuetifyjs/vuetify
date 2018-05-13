@@ -159,8 +159,15 @@ export default {
     formatters () {
       return {
         year: this.yearFormat || createNativeLocaleFormatter(this.locale, { year: 'numeric', timeZone: 'UTC' }, { length: 4 }),
-        titleDate: this.titleDateFormat || this.defaultTitleDateFormatter
+        titleDate: this.titleDateFormat || (this.multiple ? this.defaultTitleMultipleDateFormatter : this.defaultTitleDateFormatter)
       }
+    },
+    defaultTitleMultipleDateFormatter () {
+      if (this.value.length < 2) {
+        return dates => dates.length ? this.defaultTitleDateFormatter(dates[0]) : '0 selected'
+      }
+
+      return dates => `${dates.length} selected`
     },
     defaultTitleDateFormatter () {
       const titleFormats = {
@@ -273,11 +280,11 @@ export default {
     genPickerTitle () {
       return this.$createElement(VDatePickerTitle, {
         props: {
-          date: this.lastValue ? this.formatters.titleDate(this.lastValue) : '',
+          date: this.value ? this.formatters.titleDate(this.value) : '',
           selectingYear: this.activePicker === 'YEAR',
           year: this.formatters.year(`${this.inputYear}`),
           yearIcon: this.yearIcon,
-          value: this.lastValue
+          value: this.multiple ? this.value[0] : this.value
         },
         slot: 'title',
         style: this.readonly ? {
