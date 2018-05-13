@@ -65,7 +65,7 @@ export default {
 
         children.push(this.genSortIcon(h))
 
-        this.dataIterator.multiSort && beingSorted && children.push(h('span', [sortIndex + 1]))
+        this.dataIterator.multiSort && beingSorted && children.push(h('span', { class: 'badge' }, [sortIndex + 1]))
       }
 
       return h(VCell, {
