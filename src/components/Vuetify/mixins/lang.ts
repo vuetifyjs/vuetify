@@ -7,7 +7,7 @@ const LANG_PREFIX = '$vuetify.lang.'
 
 export default function lang (config: Options['lang'] = {}): VuetifyLanguage {
   return {
-    locales: Object.assign({ en }, config.locales), // TODO: deep merge
+    locales: Object.assign({ en }, config.locales),
     current: config.current || 'en',
     t (key, ...params) {
       const translation: string = getObjectValueByPath(this.locales[this.current], key.replace(LANG_PREFIX, ''), key)
