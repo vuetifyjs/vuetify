@@ -51,7 +51,9 @@ const ICONS_MDI = {
   'dropdown': 'mdi-menu-down',
   'radioOn': 'mdi-radiobox-marked',
   'radioOff': 'mdi-radiobox-blank',
-  'edit': 'mdi-pencil'
+  'edit': 'mdi-pencil',
+  'first': 'page-first',
+  'last': 'page-last'
 }
 
 // Maps internal Vuetify icon names to actual Font-Awesome 4 icon names.
@@ -78,7 +80,9 @@ const ICONS_FONTAWESOME4 = {
   'dropdown': 'fa fa-caret-down',
   'radioOn': 'fa fa-dot-circle',
   'radioOff': 'fa fa-circle-o',
-  'edit': 'fa fa-pencil'
+  'edit': 'fa fa-pencil',
+  'first': 'fa fa-step-backward',
+  'last': 'fa fa-step-forward'
 }
 
 // Maps internal Vuetify icon names to actual Font-Awesome 5+ icon names.
@@ -105,7 +109,9 @@ const ICONS_FONTAWESOME = {
   'dropdown': 'fas fa-caret-down',
   'radioOn': 'far fa-dot-circle',
   'radioOff': 'far fa-circle',
-  'edit': 'fas fa-edit'
+  'edit': 'fas fa-edit',
+  'first': 'fas fa-step-backward',
+  'last': 'fas fa-step-forward'
 }
 
 const iconSets = {
