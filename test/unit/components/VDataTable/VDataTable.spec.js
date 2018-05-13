@@ -396,7 +396,7 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
     await wrapper.vm.$nextTick()
     expect(wrapper.find('tr.nested')[0].element.parentElement.tagName).toBe('DIV')
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
-  }
+  })
 
   it('should render correct colspan when using headers-length prop', async () => {
     const data = dataTableTestData()
