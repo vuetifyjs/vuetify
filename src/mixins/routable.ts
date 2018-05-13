@@ -1,5 +1,5 @@
 import Vue, { VNodeData } from 'vue'
-import Ripple from '../directives/ripple'
+import Ripple, { RippleOptions } from '../directives/ripple'
 
 export default Vue.extend({
   name: 'routable',
@@ -27,7 +27,7 @@ export default Vue.extend({
   },
 
   computed: {
-    computedRipple (): any {
+    computedRipple (): RippleOptions | boolean {
       return (this.ripple && !this.disabled) ? this.ripple : false
     }
   },
@@ -46,7 +46,7 @@ export default Vue.extend({
         directives: [{
           name: 'ripple',
           value: this.computedRipple
-        }] as any,
+        }] as any, // TODO: remove as any when vuejs/vue#8013 is fixed
         [this.to ? 'nativeOn' : 'on']: {
           ...this.$listeners,
           click: this.click
