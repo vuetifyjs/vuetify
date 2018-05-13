@@ -481,7 +481,7 @@ export default {
       return getPropertyFromItem(item, this.itemText, item)
     },
     getValue (item) {
-      return getPropertyFromItem(item, this.itemValue, item)
+      return getPropertyFromItem(item, this.itemValue, this.getText(item))
     },
     onBlur (e) {
       this.$emit('blur', e)
