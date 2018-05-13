@@ -41,6 +41,7 @@ export interface VuetifyObject extends Vue {
   icons: VuetifyIcons
   options: VuetifyOptions
   goTo: <T extends string | number | HTMLElement | Vue>(target: T, options?: VuetifyGoToOptions) => Promise<T>
+  lang: VuetifyLanguage
 }
 
 declare module 'vue/types/vue' {
@@ -152,4 +153,10 @@ export interface VuetifyGoToOptions {
   duration?: number
   offset?: number
   easing?: VuetifyGoToEasing
+}
+
+export interface VuetifyLanguage {
+  locales?: { [locale: string]: object }
+  current?: string
+  t?: (key: string, ...params: (string|number)[]) => string
 }

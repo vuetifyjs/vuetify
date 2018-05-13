@@ -2,7 +2,7 @@ import application from './mixins/application'
 import theme from './mixins/theme'
 import icons from './mixins/icons'
 import options from './mixins/options'
-import lang from './mixins/lang'
+import lang from './mixins/lang.ts'
 import { consoleWarn } from '../../util/console'
 import goTo from './util/goTo'
 
