@@ -112,6 +112,29 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should match a snapshot - actions on top', () => {
+    const data = dataTableTestData()
+    data.propsData.actionsTop = true
+
+    const wrapper = mount(VDataTable, data)
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should match a snapshot - actions on top with prepend', () => {
+    const data = dataTableTestData()
+    data.propsData.actionsTop = true
+    data.slots = {
+      prepend: [compileToFunctions('<span>prepend</span>')]
+    }
+
+    const wrapper = mount(VDataTable, data)
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
   it('should match display no-data-text when no data', () => {
     const data = dataTableTestData()
     data.propsData.items = []

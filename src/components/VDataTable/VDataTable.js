@@ -21,7 +21,7 @@ export default {
 
   data () {
     return {
-      actionsClasses: 'v-datatable__actions',
+      actionsClasses: 'v-datatable__actions' + (this.actionsTop ? ' v-datatable__actions__top' : ''),
       actionsRangeControlsClasses: 'v-datatable__actions__range-controls',
       actionsSelectClasses: 'v-datatable__actions__select',
       actionsPaginationClasses: 'v-datatable__actions__pagination'
@@ -77,12 +77,34 @@ export default {
     }
   },
 
+  watch: {
+    actionsTop () {
+      this.actionsClasses = 'v-datatable__actions' + (this.actionsTop ? ' v-datatable__actions__top' : '')
+    }
+  },
+
   methods: {
     hasTag (elements, tag) {
       return Array.isArray(elements) && elements.find(e => e.tag === tag)
     },
     genTR (children, data = {}) {
       return this.$createElement('tr', data, children)
+    },
+    genPrepend () {
+      if (!this.$slots.prepend) return null
+
+      return this.$createElement('div', {
+        'class': this.classes
+      }, [this.$slots.prepend])
+    },
+    genActionsPanel () {
+      if (this.hideActions) {
+        return null
+      }
+
+      return this.$createElement('div', {
+        'class': this.classes
+      }, this.genActions())
     }
   },
 
@@ -100,6 +122,7 @@ export default {
 
   render (h) {
     const tableOverflow = h(VTableOverflow, {}, [
+      this.genPrepend(),
       h('table', {
         'class': this.classes
       }, [
@@ -109,9 +132,15 @@ export default {
       ])
     ])
 
-    return h('div', [
-      tableOverflow,
-      this.genActionsFooter()
-    ])
+    const children = []
+    if (this.actionsTop) {
+      children.push(this.genActionsPanel())
+    }
+    children.push(tableOverflow)
+    if (!this.actionsTop) {
+      children.push(this.genActionsPanel())
+    }
+
+    return h('div', children)
   }
 }

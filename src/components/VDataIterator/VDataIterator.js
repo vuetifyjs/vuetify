@@ -36,6 +36,20 @@ export default {
   },
 
   methods: {
+    genHeader () {
+      const children = []
+
+      if (this.actionsTop && !this.hideActions) {
+        children.push(this.genActions())
+      }
+
+      if (this.$slots.prepend) {
+        children.push(this.$slots.prepend)
+      }
+
+      if (!children.length) return null
+      return this.$createElement('div', children)
+    },
     genContent () {
       const children = this.genItems()
 
@@ -75,7 +89,7 @@ export default {
         children.push(this.$slots.footer)
       }
 
-      if (!this.hideActions) {
+      if (!this.actionsTop && !this.hideActions) {
         children.push(this.genActions())
       }
 

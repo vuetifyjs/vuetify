@@ -44,6 +44,7 @@ export default {
   props: {
     expand: Boolean,
     hideActions: Boolean,
+    actionsTop: Boolean,
     disableInitialSort: Boolean,
     mustSort: Boolean,
     noResultsText: {
