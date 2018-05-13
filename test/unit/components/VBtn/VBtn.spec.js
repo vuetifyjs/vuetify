@@ -177,4 +177,14 @@ test('VBtn.js', ({ mount, compileToFunctions }) => {
     expect(wrapper.hasClass('v-btn--outline')).toBe(true)
     expect(wrapper.hasClass('v-btn--depressed')).toBe(true)
   })
+
+  it('should disable ripple', () => {
+    const wrapper = mount(VBtn, {
+      propsData: {
+        ripple: false
+      }
+    })
+
+    expect(wrapper.element._ripple.enabled).toBe(false)
+  })
 })
