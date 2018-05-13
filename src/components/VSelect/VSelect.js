@@ -142,9 +142,24 @@ export default {
         },
         args: {
           closeConditional: e => {
-            return !this.$refs.menu.$refs.content.contains(e.target) &&
-              !this.$el.contains(e.target) &&
-              e.target !== this.$el
+            return (
+              // Check if the menu is
+              // currently active
+              this.isMenuActive &&
+              // Check if click originates
+              // from within the content
+              (
+                !!this.content &&
+                !this.content.contains(e.target)
+              ) &&
+              // Check if click originates
+              // from within the element
+              (
+                !!this.$el &&
+                !this.$el.contains(e.target) &&
+                e.target !== this.$el
+              )
+            )
           }
         }
       }]
