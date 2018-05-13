@@ -47,10 +47,9 @@ export default {
     genChildren () {
       if (!this.$slots.default) return null
 
+      const h = this.$createElement
       const children = []
-      const divider = this.$createElement('li', {
-        staticClass: 'v-breadcrumbs__divider'
-      }, this.computedDivider)
+      const dividerData = { staticClass: 'v-breadcrumbs__divider' }
 
       let createDividers = false
       for (let i = 0; i < this.$slots.default.length; i++) {
@@ -63,7 +62,7 @@ export default {
           children.push(elm)
         } else {
           if (createDividers) {
-            children.push(divider)
+            children.push(h('li', dividerData, this.computedDivider))
           }
           children.push(elm)
           createDividers = true

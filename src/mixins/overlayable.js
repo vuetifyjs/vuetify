@@ -1,5 +1,8 @@
 import '../stylus/components/_overlay.styl'
 
+// Utils
+import { keyCodes } from '../util/helpers'
+
 export default {
   name: 'overlayable',
 
@@ -70,7 +73,9 @@ export default {
       this.overlayTimeout = setTimeout(() => {
         // IE11 Fix
         try {
-          this.overlay.parentNode.removeChild(this.overlay)
+          if (this.overlay && this.overlay.parentNode) {
+            this.overlay.parentNode.removeChild(this.overlay)
+          }
           this.overlay = null
           this.showScroll()
         } catch (e) { console.log(e) }
@@ -87,8 +92,8 @@ export default {
       if (e.type === 'keydown') {
         if (['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName)) return
 
-        const up = [38, 33]
-        const down = [40, 34]
+        const up = [keyCodes.up, keyCodes.pageup]
+        const down = [keyCodes.down, keyCodes.pagedown]
 
         if (up.includes(e.keyCode)) {
           e.deltaY = -1

@@ -379,6 +379,7 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
+
   it('should render expand slot as direct child', async () => {
     const wrapper = wrapperForNoWrappedExpandSlots(true)
 
@@ -394,6 +395,15 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
     wrapper.find('tr.item')[0].element.click()
     await wrapper.vm.$nextTick()
     expect(wrapper.find('tr.nested')[0].element.parentElement.tagName).toBe('DIV')
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  }
+
+  it('should render correct colspan when using headers-length prop', async () => {
+    const data = dataTableTestData()
+    data.propsData.headersLength = 11
+    const wrapper = mount(VDataTable, data)
+
+    expect(wrapper.find('tr.v-datatable__progress th')[0].getAttribute('colspan')).toBe('11')
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 })
