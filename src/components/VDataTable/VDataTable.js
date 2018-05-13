@@ -43,28 +43,17 @@ export default {
   },
 
   props: {
+    dumb: Boolean,
     headers: {
       type: Array,
       default: () => ([])
     },
-    showSelectAll: {
-      type: Boolean
-    },
-    hideActions: {
-      type: Boolean
-    },
-    hideHeader: {
-      type: Boolean
-    },
-    groupBy: {
-      type: String
-    },
-    fixedHeight: {
-      type: String
-    },
-    loading: {
-      type: Boolean
-    }
+    showSelectAll: Boolean,
+    hideActions: Boolean,
+    hideHeader: Boolean,
+    groupBy: String,
+    fixedHeight: String,
+    loading: Boolean
   },
 
   data () {
@@ -104,7 +93,7 @@ export default {
     genHeaders (h) {
       const headers = this.computeSlots('header')
 
-      if (!this.hideHeader) {
+      if (!this.hideHeader && !this.dumb) {
         headers.push(h(VTableHeaders, {
           props: {
             showSelectAll: this.showSelectAll
@@ -156,7 +145,7 @@ export default {
     genFooters (h) {
       const footers = this.computeSlots('footer')
 
-      if (!this.hideActions) {
+      if (!this.hideActions && !this.dumb) {
         footers.push(h(VTableActions, {
           props: {
             itemsLength: this.itemsLength,
@@ -174,6 +163,11 @@ export default {
       }
 
       return [this.genBodyWrapper(h, footers)]
+    },
+    genBodies (h) {
+      if (this.dumb) return this.$slots.default
+
+      return VDataIterator.methods.genBodies.call(this, h)
     },
     genBodyWrapper (h, items) {
       return h('div', {
