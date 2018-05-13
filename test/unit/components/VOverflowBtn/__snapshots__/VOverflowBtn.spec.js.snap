@@ -21,14 +21,6 @@ exports[`VOverflowBtn should use default autocomplete selections 1`] = `
               >
             </div>
             <div class="v-input__append-inner">
-              <div class="v-input__icon v-input__icon--">
-                <i aria-hidden="true"
-                   class="v-icon v-icon--link material-icons"
-                >
-                </i>
-              </div>
-            </div>
-            <div class="v-input__append-inner">
               <div class="v-input__icon v-input__icon--append">
                 <i aria-hidden="true"
                    class="v-icon material-icons"
@@ -75,14 +67,6 @@ exports[`VOverflowBtn should use default autocomplete selections 2`] = `
                      type="text"
                      autocomplete="off"
               >
-            </div>
-            <div class="v-input__append-inner">
-              <div class="v-input__icon v-input__icon--">
-                <i aria-hidden="true"
-                   class="v-icon v-icon--link material-icons"
-                >
-                </i>
-              </div>
             </div>
             <div class="v-input__append-inner">
               <div class="v-input__icon v-input__icon--append">

@@ -143,9 +143,6 @@ export default {
         args: {
           closeConditional: e => {
             return (
-              // Check if the menu is
-              // currently active
-              this.isMenuActive &&
               // Check if click originates
               // from within the content
               (

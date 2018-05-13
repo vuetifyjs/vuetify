@@ -187,7 +187,9 @@ export default {
       return this.genSlot('append', 'outer', slot)
     },
     genClearIcon () {
-      const icon = !this.clearable || !this.isDirty
+      if (!this.clearable) return null
+
+      const icon = !this.isDirty
         ? false
         : 'clear'
 

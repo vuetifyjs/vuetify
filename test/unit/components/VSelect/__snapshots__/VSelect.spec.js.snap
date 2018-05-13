@@ -35,14 +35,6 @@ exports[`VSelect should only show items if they are in items 1`] = `
               >
             </div>
             <div class="v-input__append-inner">
-              <div class="v-input__icon v-input__icon--">
-                <i aria-hidden="true"
-                   class="v-icon v-icon--link material-icons"
-                >
-                </i>
-              </div>
-            </div>
-            <div class="v-input__append-inner">
               <div class="v-input__icon v-input__icon--append">
                 <i aria-hidden="true"
                    class="v-icon material-icons"
@@ -88,14 +80,6 @@ exports[`VSelect should only show items if they are in items 2`] = `
                      type="text"
                      autocomplete="on"
               >
-            </div>
-            <div class="v-input__append-inner">
-              <div class="v-input__icon v-input__icon--">
-                <i aria-hidden="true"
-                   class="v-icon v-icon--link material-icons"
-                >
-                </i>
-              </div>
             </div>
             <div class="v-input__append-inner">
               <div class="v-input__icon v-input__icon--append">
@@ -146,14 +130,6 @@ exports[`VSelect should only show items if they are in items 3`] = `
                      type="text"
                      autocomplete="on"
               >
-            </div>
-            <div class="v-input__append-inner">
-              <div class="v-input__icon v-input__icon--">
-                <i aria-hidden="true"
-                   class="v-icon v-icon--link material-icons"
-                >
-                </i>
-              </div>
             </div>
             <div class="v-input__append-inner">
               <div class="v-input__icon v-input__icon--append">
@@ -209,14 +185,6 @@ exports[`VSelect should only show items if they are in items 4`] = `
               >
             </div>
             <div class="v-input__append-inner">
-              <div class="v-input__icon v-input__icon--">
-                <i aria-hidden="true"
-                   class="v-icon v-icon--link material-icons"
-                >
-                </i>
-              </div>
-            </div>
-            <div class="v-input__append-inner">
               <div class="v-input__icon v-input__icon--append">
                 <i aria-hidden="true"
                    class="v-icon material-icons"
@@ -264,14 +232,6 @@ exports[`VSelect should render v-select correctly when not using scope slot 1`] 
               >
             </div>
             <div class="v-input__append-inner">
-              <div class="v-input__icon v-input__icon--">
-                <i aria-hidden="true"
-                   class="v-icon v-icon--link material-icons"
-                >
-                </i>
-              </div>
-            </div>
-            <div class="v-input__append-inner">
               <div class="v-input__icon v-input__icon--append">
                 <i aria-hidden="true"
                    class="v-icon material-icons"
@@ -317,14 +277,6 @@ exports[`VSelect should render v-select correctly when not using v-list-tile in 
                      type="text"
                      autocomplete="on"
               >
-            </div>
-            <div class="v-input__append-inner">
-              <div class="v-input__icon v-input__icon--">
-                <i aria-hidden="true"
-                   class="v-icon v-icon--link material-icons"
-                >
-                </i>
-              </div>
             </div>
             <div class="v-input__append-inner">
               <div class="v-input__icon v-input__icon--append">
@@ -379,14 +331,6 @@ exports[`VSelect should render v-select correctly when using v-list-tile in item
               >
             </div>
             <div class="v-input__append-inner">
-              <div class="v-input__icon v-input__icon--">
-                <i aria-hidden="true"
-                   class="v-icon v-icon--link material-icons"
-                >
-                </i>
-              </div>
-            </div>
-            <div class="v-input__append-inner">
               <div class="v-input__icon v-input__icon--append">
                 <i aria-hidden="true"
                    class="v-icon material-icons"
@@ -435,14 +379,6 @@ exports[`VSelect should use scoped slot for selection generation 1`] = `
                      type="text"
                      autocomplete="on"
               >
-            </div>
-            <div class="v-input__append-inner">
-              <div class="v-input__icon v-input__icon--">
-                <i aria-hidden="true"
-                   class="v-icon v-icon--link material-icons"
-                >
-                </i>
-              </div>
             </div>
             <div class="v-input__append-inner">
               <div class="v-input__icon v-input__icon--append">

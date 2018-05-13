@@ -430,7 +430,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const icon = wrapper.find('.v-icon')[1]
+    const icon = wrapper.first('.v-icon')
     const slot = wrapper.first('.v-input__slot')
 
     expect(wrapper.vm.isMenuActive).toBe(false)
