@@ -4,7 +4,6 @@ export default {
     pageText: '{0}-{1} of {2}'
   },
   dataTable: {
-    rowsPerPageText: 'Rows per page:',
-    asd: '{start} of {stop}'
+    rowsPerPageText: 'Rows per page:'
   }
 }
