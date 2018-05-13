@@ -71,7 +71,7 @@ export default {
     },
     rowsPerPageText: {
       type: String,
-      default: 'Items per page:'
+      default: '$vuetify.lang.dataIterator.rowsPerPageText'
     },
     selectAll: [Boolean, String],
     search: {
@@ -396,10 +396,10 @@ export default {
       return this.$createElement('div', {
         'class': this.actionsSelectClasses
       }, [
-        this.rowsPerPageText,
+        this.$vuetify.lang.t(this.rowsPerPageText),
         this.$createElement(VSelect, {
           attrs: {
-            'aria-label': this.rowsPerPageText
+            'aria-label': this.$vuetify.lang.t(this.rowsPerPageText)
           },
           props: {
             items: this.rowsPerPageItems,
@@ -433,7 +433,7 @@ export default {
             pageStop: stop,
             itemsLength: this.itemsLength
           })
-          : `${this.pageStart + 1}-${stop} of ${this.itemsLength}`
+          : this.$vuetify.lang.t('$vuetify.lang.dataIterator.pageText', this.pageStart + 1, stop, this.itemsLength)
       }
 
       return this.$createElement('div', {
