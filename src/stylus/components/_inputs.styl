@@ -7,16 +7,16 @@ v-input($material)
   textarea::placeholder
     color: $material.text.disabled
 
-  &:not(.v-input--has-state)
+  &:not(.v-input--has-state):not(.v-input--is-disabled)
     input,
     textarea
       color: $material.text.primary
 
-    &--is-disabled
-      .v-input__label,
-      input,
-      textarea
-        color: $material.text.disabled
+  &--is-disabled
+    .v-input__label,
+    input,
+    textarea
+      color: $material.text.disabled
 
 theme(v-input, "v-input")
 
