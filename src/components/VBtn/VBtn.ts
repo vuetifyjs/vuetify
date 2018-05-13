@@ -90,7 +90,7 @@ const VBtn = mixins(
     computedRipple (): RippleOptions | boolean {
       const defaultRipple = this.icon || this.fab ? { circle: true } : true
       if (this.disabled) return false
-      else return this.ripple || defaultRipple
+      else return this.ripple !== null ? this.ripple : defaultRipple
     }
   },
 
