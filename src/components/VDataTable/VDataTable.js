@@ -74,12 +74,6 @@ export default {
   },
 
   computed: {
-    classes () {
-      return {
-        'v-table': true,
-        'v-data-table': true
-      }
-    },
     isFlexWidth () {
       return this.headers.some(h => h.width && !isNaN(h.width))
     },
@@ -195,5 +189,15 @@ export default {
     genEmpty (h, content) {
       return h(VRow, [h(VCell, content)])
     }
+  },
+
+  render (h) {
+    return h('div', {
+      staticClass: 'v-table v-data-table'
+    }, [
+      ...this.genHeaders(h),
+      ...this.genBodies(h),
+      ...this.genFooters(h)
+    ])
   }
 }

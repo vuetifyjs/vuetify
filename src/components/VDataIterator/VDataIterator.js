@@ -224,11 +224,6 @@ export default {
   },
 
   computed: {
-    classes () {
-      return {
-        'v-data-iterator': true
-      }
-    },
     hasSearch () {
       return typeof this.search !== 'undefined' && this.search !== null
     },
@@ -407,7 +402,7 @@ export default {
 
   render (h) {
     return h('div', {
-      class: this.classes
+      staticClass: 'v-data-iterator'
     }, [
       ...this.genHeaders(h),
       ...this.genBodies(h),
