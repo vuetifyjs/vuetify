@@ -7,9 +7,7 @@ export default {
   name: 'v-table-headers',
   inject: ['dataIterator', 'dataTable'],
   props: {
-    showSelectAll: {
-      type: Boolean
-    },
+    showSelectAll: Boolean,
     sortIcon: {
       type: String,
       default: '$vuetify.icons.sort'
