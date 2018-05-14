@@ -2,10 +2,10 @@
 @import '../theme'
 
 v-text-field($material)
-  &:not(.v-input--has-state)
-    .v-input__slot:before
-      background-color: $material.input-bottom-line
+  .v-input__slot:before
+    background-color: $material.input-bottom-line
 
+  &:not(.v-input--has-state)
     &:hover
       .v-input__slot:before
         background-color: $material.text.primary
