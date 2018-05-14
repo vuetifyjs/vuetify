@@ -45,6 +45,11 @@ export default {
   watch: {
     isActive () {
       this.setTimeout()
+    },
+    timeout (value) {
+      if (value === 0) {
+        this.isActive = false;
+      }
     }
   },
 
@@ -53,9 +58,11 @@ export default {
       clearTimeout(this.activeTimeout)
 
       if (this.isActive && this.timeout) {
-        this.activeTimeout = setTimeout(() => {
-          this.isActive = false
-        }, this.timeout)
+        if (this.timeout !== -1) {
+          this.activeTimeout = setTimeout(() => {
+            this.isActive = false
+          }, this.timeout)
+        }
       }
     }
   },
