@@ -18,7 +18,6 @@ export default {
     hasColor: false,
     hasFocused: false,
     hasInput: false,
-    isResetting: false,
     shouldValidate: false,
     valid: false
   }),
@@ -110,8 +109,6 @@ export default {
       deep: true
     },
     internalValue (val) {
-      if (this.isResetting) return
-
       // If it's the first time we're setting input,
       // mark it with hasInput
       if (!!val && !this.hasInput) this.hasInput = true
@@ -127,13 +124,6 @@ export default {
 
         this.$emit('update:error', this.errorBucket.length > 0)
       }
-    },
-    isResetting (val) {
-      val && setTimeout(() => {
-        this.hasInput = false
-        this.hasFocused = false
-        this.isResetting = false
-      }, 0)
     },
     hasError (val) {
       if (this.shouldValidate) {
@@ -160,10 +150,15 @@ export default {
 
   methods: {
     reset () {
-      this.isResetting = true
       this.internalValue = Array.isArray(this.internalValue)
         ? []
-        : null
+        : undefined
+
+      this.$nextTick(() => {
+        this.shouldValidate = false
+        this.hasFocused = false
+        this.validate()
+      })
     },
     validate (force = false, value = this.internalValue) {
       if (force) this.shouldValidate = true
