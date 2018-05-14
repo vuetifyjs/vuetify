@@ -48,7 +48,9 @@ export default {
     mustSort: Boolean,
     noResultsText: {
       type: String,
-      default: 'No matching records found'
+      default () {
+        return this.$vuetify.lang.t('dataIterator.noResultsText')
+      }
     },
     nextIcon: {
       type: String,
@@ -65,13 +67,18 @@ export default {
           5,
           10,
           25,
-          { text: 'All', value: -1 }
+          {
+            text: this.$vuetify.lang.t('dataIterator.rowsPerPageAll'),
+            value: -1
+          }
         ]
       }
     },
     rowsPerPageText: {
       type: String,
-      default: '$vuetify.lang.dataIterator.rowsPerPageText'
+      default () {
+        return this.$vuetify.lang.t('dataIterator.rowsPerPageText')
+      }
     },
     selectAll: [Boolean, String],
     search: {
@@ -363,7 +370,7 @@ export default {
           }
         },
         attrs: {
-          'aria-label': 'Previous page' // TODO: Localization
+          'aria-label': this.$vuetify.lang.t('dataIterator.prevPage')
         }
       }, [this.$createElement(VIcon, this.prevIcon)])
     },
@@ -388,7 +395,7 @@ export default {
           }
         },
         attrs: {
-          'aria-label': 'Next page' // TODO: Localization
+          'aria-label': this.$vuetify.lang.t('dataIterator.nextPage')
         }
       }, [this.$createElement(VIcon, this.nextIcon)])
     },
@@ -396,10 +403,10 @@ export default {
       return this.$createElement('div', {
         'class': this.actionsSelectClasses
       }, [
-        this.$vuetify.lang.t(this.rowsPerPageText),
+        this.rowsPerPageText,
         this.$createElement(VSelect, {
           attrs: {
-            'aria-label': this.$vuetify.lang.t(this.rowsPerPageText)
+            'aria-label': this.rowsPerPageText
           },
           props: {
             items: this.rowsPerPageItems,
@@ -433,7 +440,7 @@ export default {
             pageStop: stop,
             itemsLength: this.itemsLength
           })
-          : this.$vuetify.lang.t('$vuetify.lang.dataIterator.pageText', this.pageStart + 1, stop, this.itemsLength)
+          : this.$vuetify.lang.t('dataIterator.pageText', this.pageStart + 1, stop, this.itemsLength)
       }
 
       return this.$createElement('div', {
