@@ -97,7 +97,7 @@ export default {
     onRadioChange (value) {
       if (this.disabled) return
 
-      this.hasInput = true
+      this.shouldValidate = true
       this.internalValue = value
       this.$emit('change', value)
       this.setActiveRadio()
@@ -105,7 +105,7 @@ export default {
     },
     onRadioBlur (e) {
       if (!e.relatedTarget || !e.relatedTarget.classList.contains('radio')) {
-        this.hasInput = true
+        this.shouldValidate = true
         this.$emit('blur', e)
       }
     },

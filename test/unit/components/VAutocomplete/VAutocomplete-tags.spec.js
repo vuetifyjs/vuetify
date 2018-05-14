@@ -221,9 +221,9 @@ test('VAutocomplete - tags', ({ mount, compileToFunctions }) => {
       chips: true,
       clearable: true,
       deletableChips: true,
-      tags: true,
       value: ['foo', 'bar']
     })
+    await wrapper.vm.$nextTick()
 
     const input = wrapper.first('input')
     const chip = wrapper.find('.v-chip')[1]
@@ -231,14 +231,19 @@ test('VAutocomplete - tags', ({ mount, compileToFunctions }) => {
 
     input.trigger('focus')
     chip.trigger('click')
+    await wrapper.vm.$nextTick()
     close.trigger('click')
+    await wrapper.vm.$nextTick()
     expect(change).toHaveBeenCalledWith(['foo'])
     expect(wrapper.vm.selectedIndex).toBe(-1)
 
     input.element.value = 'baz'
+    await wrapper.vm.$nextTick()
     input.trigger('input')
+    await wrapper.vm.$nextTick()
     expect(wrapper.vm.internalSearch).toBe('baz')
     input.trigger('keydown.enter')
+    await wrapper.vm.$nextTick()
 
     expect(change).toBeCalledWith(['foo', 'baz'])
     expect(wrapper.vm.selectedIndex).toBe(-1)

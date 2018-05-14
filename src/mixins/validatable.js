@@ -18,7 +18,7 @@ export default {
     hasColor: false,
     hasFocused: false,
     hasInput: false,
-    isResetting: false,
+    shouldValidate: false,
     valid: false
   }),
 
@@ -66,13 +66,6 @@ export default {
     hasState () {
       return this.hasError || this.hasSuccess
     },
-    shouldValidate () {
-      return (
-        !this.isResetting &&
-        this.hasError &&
-        (this.hasInput || this.hasFocused)
-      )
-    },
     validations () {
       return this.validationTarget.slice(0, this.errorCount)
     },
@@ -115,35 +108,35 @@ export default {
       },
       deep: true
     },
-    internalValue () {
+    internalValue (val) {
       // If it's the first time we're setting input,
       // mark it with hasInput
-      this.hasInput = true
-      this.$nextTick(this.validate)
+      if (!!val && !this.hasInput) this.hasInput = true
+
+      if (this.hasInput && !this.validateOnBlur) this.shouldValidate = true
     },
     isFocused (val) {
-      if (!val) this.hasFocused = true
       // If we're not focused, and it's the first time
       // we're defocusing, set shouldValidate to true
       if (!val && !this.hasFocused) {
+        this.hasFocused = true
+        this.shouldValidate = true
+
         this.$emit('update:error', this.errorBucket.length > 0)
       }
-    },
-    isResetting () {
-      setTimeout(() => {
-        this.hasInput = false
-        this.hasFocused = false
-        this.isResetting = false
-      }, 0)
     },
     hasError (val) {
       if (this.shouldValidate) {
         this.$emit('update:error', val)
       }
+    },
+    error (val) {
+      this.shouldValidate = !!val
     }
   },
 
   beforeMount () {
+    this.shouldValidate = this.hasError
     this.validate()
   },
 
@@ -157,29 +150,26 @@ export default {
 
   methods: {
     reset () {
-      this.isResetting = true
-      this.internalValue = Array.isArray(this.internalValue)
-        ? []
-        : undefined
+      this.shouldValidate = false
+      this.hasFocused = false
     },
     validate (force = false, value = this.internalValue) {
-      const errorBucket = []
+      if (force) this.shouldValidate = true
 
-      if (force) this.hasInput = true
+      this.errorBucket = []
 
       for (let index = 0; index < this.rules.length; index++) {
         const rule = this.rules[index]
         const valid = typeof rule === 'function' ? rule(value) : rule
 
         if (valid === false || typeof valid === 'string') {
-          errorBucket.push(valid)
+          this.errorBucket.push(valid)
         } else if (valid !== true) {
           consoleError(`Rules should return a string or boolean, received '${typeof valid}' instead`, this)
         }
       }
 
-      this.errorBucket = errorBucket
-      this.valid = errorBucket.length === 0
+      this.valid = this.errorBucket.length === 0
 
       return this.valid
     }

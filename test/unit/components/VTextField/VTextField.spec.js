@@ -73,17 +73,13 @@ test('VTextField.js', ({ mount }) => {
     expect(wrapper.data().valid).toEqual(false)
   })
 
-  // Changed for v1.1 - shouldValidate is now computed
-  // and must be in an error state
   it('should start validating on input', async () => {
-    const wrapper = mount(VTextField, {
-      propsData: { error: true }
-    })
+    const wrapper = mount(VTextField, {})
 
-    expect(wrapper.vm.shouldValidate).toEqual(false)
+    expect(wrapper.data().shouldValidate).toEqual(false)
     wrapper.setProps({ value: 'asd' })
     await wrapper.vm.$nextTick()
-    expect(wrapper.vm.shouldValidate).toEqual(true)
+    expect(wrapper.data().shouldValidate).toEqual(true)
   })
 
   it('should not start validating on input if validate-on-blur prop is set', async () => {
@@ -93,10 +89,10 @@ test('VTextField.js', ({ mount }) => {
       }
     })
 
-    expect(wrapper.vm.shouldValidate).toEqual(false)
+    expect(wrapper.data().shouldValidate).toEqual(false)
     wrapper.setProps({ value: 'asd' })
     await wrapper.vm.$nextTick()
-    expect(wrapper.vm.shouldValidate).toEqual(false)
+    expect(wrapper.data().shouldValidate).toEqual(false)
   })
 
   it('should not display counter when set to false', async () => {
@@ -183,20 +179,16 @@ test('VTextField.js', ({ mount }) => {
     expect(wrapper.vm.internalValue).toBe('foo')
   })
 
-  // Changed for v1.1 - shouldValidate is now computed
-  // and must be in an error state
   it('should start validating on blur', async () => {
-    const wrapper = mount(VTextField, {
-      propsData: { error: true }
-    })
+    const wrapper = mount(VTextField, {})
 
-    const input = wrapper.first('input')
-    expect(wrapper.vm.shouldValidate).toEqual(false)
+    const input = wrapper.find('input')[0]
+    expect(wrapper.data().shouldValidate).toEqual(false)
     input.trigger('focus')
     await wrapper.vm.$nextTick()
     input.trigger('blur')
     await wrapper.vm.$nextTick()
-    expect(wrapper.vm.shouldValidate).toEqual(true)
+    expect(wrapper.data().shouldValidate).toEqual(true)
   })
 
   it('should keep its value on blur', async () => {
