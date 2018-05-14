@@ -54,6 +54,9 @@ export default {
         this.errorBucket.length > 0 ||
         this.error
     },
+    externalError () {
+      return this.errorMessages.length > 0 || this.error
+    },
     // TODO: Add logic that allows the user to enable based
     // upon a good validation
     hasSuccess () {
@@ -70,7 +73,7 @@ export default {
       return (
         !this.isResetting &&
         this.hasError &&
-        (this.hasInput || this.hasFocused)
+        (this.hasInput || this.hasFocused || this.externalError)
       )
     },
     validations () {
