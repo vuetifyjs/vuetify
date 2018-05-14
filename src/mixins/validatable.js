@@ -64,14 +64,14 @@ export default {
       return this.validations.length > 0
     },
     hasState () {
-      return this.hasError || this.hasSuccess
+      return this.shouldValidate && (this.hasError || this.hasSuccess)
     },
     validations () {
       return this.validationTarget.slice(0, this.errorCount)
     },
     validationState () {
-      if (this.hasError) return 'error'
-      if (this.hasSuccess) return 'success'
+      if (this.hasError && this.shouldValidate) return 'error'
+      if (this.hasSuccess && this.shouldValidate) return 'success'
       if (this.hasColor) return this.color
       return null
     },
@@ -150,8 +150,15 @@ export default {
 
   methods: {
     reset () {
-      this.shouldValidate = false
-      this.hasFocused = false
+      this.internalValue = Array.isArray(this.internalValue)
+        ? []
+        : undefined
+
+      this.$nextTick(() => {
+        this.shouldValidate = false
+        this.hasFocused = false
+        this.validate()
+      })
     },
     validate (force = false, value = this.internalValue) {
       if (force) this.shouldValidate = true
