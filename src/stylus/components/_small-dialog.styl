@@ -1,17 +1,4 @@
 @import '../bootstrap'
-@import '../theme'
-
-v-small-dialog($material)
-  &__content
-    background: $material.cards
-
-  &__actions
-    background: $material.cards
-
-  a
-    color: rgba($material.fg-color, $material.primary-text-percent)
-
-theme(v-small-dialog, "v-small-dialog")
 
 .v-small-dialog
   display: block
@@ -20,9 +7,11 @@ theme(v-small-dialog, "v-small-dialog")
 
   &__content
     padding: 0 24px
+    background: var(--vuetify-cards-color)
 
   &__actions
     text-align: right
+    background: var(--vuetify-cards-color)
 
   a
     display: flex
@@ -30,6 +19,7 @@ theme(v-small-dialog, "v-small-dialog")
 
     height: 100%
     text-decoration: none
+    color: var(--vuetify-small-dialog-link-color)
 
     > *
       width: 100%
