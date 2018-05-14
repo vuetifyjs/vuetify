@@ -268,11 +268,6 @@ export default {
         ? VSelect.methods.genSelections.call(this)
         : []
     },
-    getTextFromSelected () {
-      if (!this.selectedItem) return null
-
-      return this.getText(this.selectedItem)
-    },
     onBlur (e) {
       this.updateSelf()
       VSelect.methods.onBlur.call(this, e)
@@ -359,9 +354,13 @@ export default {
       // Wait for nextTick so selectedItem
       // has had time to update
       this.$nextTick(() => {
-        this.internalSearch = this.hasSlot || this.isMulti
+        this.internalSearch = (
+          !this.selectedItem ||
+          this.isMulti ||
+          this.hasSlot
+        )
           ? null
-          : this.getTextFromSelected()
+          : this.getText(this.selectedItem)
       })
     },
     setValue () {
