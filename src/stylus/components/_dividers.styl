@@ -1,10 +1,4 @@
 @import '../bootstrap'
-@import '../theme'
-
-v-divider($material)
-  background-color: $material.dividers
-
-theme(v-divider, "v-divider")
 
 .v-divider
   border: none
@@ -13,6 +7,7 @@ theme(v-divider, "v-divider")
   flex: 1 1
   min-height: 1px
   width: 100%
+  background-color: var(--vuetify-dividers-color)
 
   &--inset:not(.v-divider--vertical)
     margin-left: 72px

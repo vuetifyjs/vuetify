@@ -1,18 +1,11 @@
 @import '../bootstrap'
-@import '../theme'
-
-v-jumbotron($material)
-  &__content
-    color: $material.text.primary
-
-theme(v-jumbotron, 'v-jumbotron')
 
 .v-jumbotron
   display: block
   top: 0
   transition: .3s $transition.swing
   width: 100%
-  
+
   &__wrapper
     height: 100%
     overflow: hidden
@@ -42,3 +35,4 @@ theme(v-jumbotron, 'v-jumbotron')
     height: 100%
     position: relative
     transition: inherit
+    color: var(--vuetify-text-primary)

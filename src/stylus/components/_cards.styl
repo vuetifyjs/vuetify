@@ -1,12 +1,4 @@
 @import '../bootstrap'
-@import '../theme'
-
-/* Themes */
-v-card($material)
-  background-color: $material.cards
-  color: $material.text.primary
-
-theme(v-card, "v-card")
 
 .v-card
   display: block
@@ -14,6 +6,8 @@ theme(v-card, "v-card")
   min-width: 0
   position: relative
   text-decoration: none
+  background-color: var(--vuetify-cards-color)
+  color: var(--vuetify-text-primary)
   elevation(1)
 
   > *:first-child:not(.v-btn):not(.v-chip)

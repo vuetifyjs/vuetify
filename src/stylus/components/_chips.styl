@@ -1,11 +1,4 @@
 @import '../bootstrap'
-@import '../theme'
-
-v-chip($material)
-  background: $material.chips.background
-  color: $material.chips.color
-
-theme(v-chip, "v-chip")
 
 .v-chip
   align-items: center
@@ -18,6 +11,8 @@ theme(v-chip, "v-chip")
   position: relative
   transition: $primary-transition
   vertical-align: middle
+  background: var(--vuetify-chip-background)
+  color: var(--vuetify-chip-color)
 
   .v-chip__content
     align-items: center

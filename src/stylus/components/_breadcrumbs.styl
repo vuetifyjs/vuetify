@@ -1,13 +1,4 @@
 ﻿@import '../bootstrap'
-@import '../theme'
-
-v-breadcrumbs($material)
-  li.v-breadcrumbs__divider,
-  li:last-child .v-breadcrumbs__item,
-  li .v-breadcrumbs__item--disabled
-    color: $material.text.disabled
-
-theme(v-breadcrumbs, "v-breadcrumbs")
 
 .v-breadcrumbs
   align-items: center
@@ -22,6 +13,11 @@ theme(v-breadcrumbs, "v-breadcrumbs")
     align-items: center
     display: inline-flex
     font-size: $breadcrumbs-item-font-size
+
+    &.v-breadcrumbs__divider,
+    &:last-child .v-breadcrumbs__item,
+    & .v-breadcrumbs__item--disabled
+      color: var(--vuetify-text-disabled)
 
     .v-icon
       font-size: $breadcrumbs-item-large-font-size

@@ -1,14 +1,4 @@
 @import '../bootstrap'
-@import '../theme'
-
-/* Themes */
-v-icon($material)
-  color: $material.icons.active
-
-  &.v-icon--disabled:not(.input-group__append-icon)
-    color: $material.icons.inactive !important
-
-theme(v-icon, "v-icon")
 
 .v-icon
   align-items: center
@@ -19,6 +9,10 @@ theme(v-icon, "v-icon")
   line-height: 1
   transition: $primary-transition
   vertical-align: middle
+  color: var(--vuetify-icon-active)
+
+  &.v-icon--disabled:not(.input-group__append-icon)
+    color: var(--vuetify-icon-inactive) !important
 
   &--link
     cursor: pointer
