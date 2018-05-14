@@ -120,6 +120,8 @@ test('VAutocomplete.js', ({ mount, shallow }) => {
     input.trigger('input')
     input.trigger('blur')
 
+    await wrapper.vm.$nextTick()
+
     expect(wrapper.vm.internalSearch).toBe(null)
   })
 

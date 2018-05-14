@@ -108,7 +108,7 @@ export default {
     isSearching () {
       if (this.isMulti) return this.searchIsDirty
 
-      return this.internalSearch !== this.getText(this.internalValue)
+      return this.internalSearch !== this.getText(this.selectedItem)
     },
     menuCanShow () {
       if (!this.isFocused) return false
@@ -188,10 +188,6 @@ export default {
     }
   },
 
-  created () {
-    this.setSearch()
-  },
-
   methods: {
     activateMenu () {
       if (this.menuCanShow) {
@@ -260,6 +256,11 @@ export default {
       return this.hasSlot || this.isMulti
         ? VSelect.methods.genSelections.call(this)
         : []
+    },
+    getTextFromSelected () {
+      if (!this.selectedItem) return null
+
+      return this.getText(this.selectedItem)
     },
     onBlur (e) {
       this.updateSelf()
@@ -373,9 +374,13 @@ export default {
       this.$refs.menu && (this.$refs.menu.listIndex = index)
     },
     setSearch () {
-      if (this.hasSlot || this.isMulti) return
-
-      this.lazySearch = this.getText(this.internalValue)
+      // Wait for nextTick so selectedItem
+      // has had time to update
+      this.$nextTick(() => {
+        this.internalSearch = this.hasSlot || this.isMulti
+          ? null
+          : this.getTextFromSelected()
+      })
     },
     setValue () {
       this.internalValue = this.internalSearch
@@ -386,13 +391,11 @@ export default {
         !this.internalValue
       ) return
 
-      if (this.isMulti) return (this.internalSearch = null)
-
       if (!this.valueComparator(
         this.internalSearch,
         this.getValue(this.internalValue)
       )) {
-        this.internalSearch = this.initialValue
+        this.setSearch()
       }
     },
     updateCombobox () {
