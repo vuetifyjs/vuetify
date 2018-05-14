@@ -1,4 +1,3 @@
-
 import Vue from 'vue'
 import { test } from '@/test'
 import VTextField from '@/components/VTextField'
@@ -127,34 +126,23 @@ test('VForm.js', ({ mount }) => {
     expect(value).toBeCalledWith(false)
   })
 
-  it('should reset valid state', async () => {
-
+  it('should reset validation', async () => {
     const wrapper = mount(VForm, {
       slots: {
         default: [VTextField]
       }
     })
 
-    let value = jest.fn()
-    wrapper.vm.$on('input', value)
-
     expect(Object.keys(wrapper.vm.errorBag).length).toBe(1)
     wrapper.vm.reset()
-    await wrapper.vm.$nextTick()
 
-    expect(value).toBeCalledWith(false)
     expect(Object.keys(wrapper.vm.errorBag).length).toBe(1)
 
     wrapper.setProps({ lazyValidation: true })
-    await wrapper.vm.$nextTick()
-
-    expect(value).toBeCalledWith(true)
     expect(Object.keys(wrapper.vm.errorBag).length).toBe(1)
 
     wrapper.vm.reset()
-    await wrapper.vm.$nextTick()
-
-    expect(value).toBeCalledWith(true)
+    await new Promise(resolve => setTimeout(resolve, 0))
     expect(Object.keys(wrapper.vm.errorBag).length).toBe(0)
   })
 })
