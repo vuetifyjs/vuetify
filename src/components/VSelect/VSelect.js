@@ -258,6 +258,9 @@ export default {
   },
 
   methods: {
+    activateMenu () {
+      this.isMenuActive = true
+    },
     clearableCallback () {
       this.internalValue = this.isMulti ? [] : null
       this.$emit('change', this.internalValue)
@@ -504,18 +507,32 @@ export default {
       this.onFocus()
       this.isMenuActive = true
     },
+    onEnterDown () {
+      this.onBlur()
+    },
+    onEscDown (e) {
+      e.preventDefault()
+      this.isMenuActive = false
+    },
     // Detect tab and call original onBlur method
     onKeyDown (e) {
-      if (e.keyCode === keyCodes.tab) {
-        VTextField.methods.onBlur.call(this, e)
-      } else if ([
+      const keyCode = e.keyCode
+
+      // If enter, space, up, or down is pressed, open menu
+      if (!this.isMenuActive && [
         keyCodes.enter,
         keyCodes.space,
-        keyCodes.up,
-        keyCodes.down
-      ].includes(e.keyCode)) {
-        this.isMenuActive = true
-      }
+        keyCodes.up, keyCodes.down
+      ].includes(keyCode)) this.activateMenu()
+
+      // This should do something different
+      if (e.keyCode === keyCodes.enter) return this.onEnterDown()
+
+      // If escape deactivate the menu
+      if (keyCode === keyCodes.esc) return this.onEscDown(e)
+
+      // If tab - select item or close menu
+      if (keyCode === keyCodes.tab) return this.onTabDown(e)
     },
     onMouseUp (e) {
       const appendInner = this.$refs['append-inner']
@@ -552,6 +569,34 @@ export default {
         if (showMoreItems) {
           this.lastItem += 20
         }
+      }
+    },
+    onTabDown (e) {
+      const menuIndex = this.getMenuIndex()
+
+      const listTile = this.$refs.menu.tiles[menuIndex]
+
+      // An item that is selected by
+      // menu-index should toggled
+      if (
+        listTile &&
+        listTile.className.indexOf('v-list__tile--highlighted') > -1 &&
+        this.isMenuActive &&
+        menuIndex > -1
+      ) {
+        e.preventDefault()
+        e.stopPropagation()
+
+        // Reset the list index if searching
+        this.internalSearch &&
+          this.$nextTick(() => setTimeout(() => this.setMenuIndex(-1), 0))
+
+        listTile.click()
+      } else {
+        // If we make it here,
+        // the user has no selected indexes
+        // and is probably tabbing out
+        VTextField.methods.onBlur.call(this, e)
       }
     },
     selectItem (item) {

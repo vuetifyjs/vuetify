@@ -85,11 +85,16 @@ test('VAutocomplete - tags', ({ mount, compileToFunctions }) => {
     const menu = wrapper.first('.v-menu')
 
     input.trigger('focus')
-    await wrapper.vm.$nextTick()
-
     input.element.value = 'b'
     input.trigger('input')
     menu.trigger('keydown.down')
+
+    // Give DOM time to update
+    // list tile classes
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.isMenuActive).toBe(true)
+
     input.trigger('keydown.tab')
 
     expect(change).toBeCalledWith(['bar'])

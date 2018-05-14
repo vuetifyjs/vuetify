@@ -544,7 +544,6 @@ test('VAutocomplete.js', ({ mount, shallow }) => {
   })
 
   it('should react to tabs', async () => {
-    const selectListTile = jest.fn()
     const updateTags = jest.fn()
     const wrapper = mount(VAutocomplete, {
       propsData: {
@@ -552,7 +551,6 @@ test('VAutocomplete.js', ({ mount, shallow }) => {
         tags: true
       },
       methods: {
-        selectListTile,
         updateTags
       }
     })
@@ -569,35 +567,24 @@ test('VAutocomplete.js', ({ mount, shallow }) => {
     expect(wrapper.vm.getMenuIndex()).toBe(-1)
     expect(updateTags).toBeCalled()
 
-    wrapper.setProps({ tags: false })
-
+    input.trigger('focus')
     input.element.value = 'fizz'
     input.trigger('input')
     menu.trigger('keydown.down')
 
-    expect(wrapper.vm.getMenuIndex()).toBe(1)
+    // Allow dom to update class for
+    // selected tile
+    await wrapper.vm.$nextTick()
 
-    expect(selectListTile).not.toBeCalled()
+    expect(wrapper.vm.isMenuActive).toBe(true)
+    expect(wrapper.vm.getMenuIndex()).toBe(0)
 
     input.trigger('keydown.tab')
 
-    expect(selectListTile).toBeCalled()
-  })
-
-  it('should select list tile', () => {
-    const wrapper = mount(VAutocomplete)
-    const click = jest.fn()
-
-    // Would normally be filled with actual tiles
-    wrapper.vm.$refs.menu.tiles = [{ click }]
-
-    wrapper.vm.selectListTile(2)
-
-    expect(click).not.toBeCalled()
-
-    wrapper.vm.selectListTile(0)
-
-    expect(click).toBeCalled()
+    // We overwrite update tags so above
+    // is does not persist
+    expect(wrapper.vm.internalValue).toEqual(['fizz'])
+    expect(updateTags).toHaveBeenCalledTimes(2)
   })
 
   it('should react to keydown', () => {

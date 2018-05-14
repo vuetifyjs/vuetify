@@ -156,9 +156,6 @@ export default {
   },
 
   watch: {
-    filteredItems () {
-      this.setMenuIndex(-1)
-    },
     isFocused (val) {
       if (val) {
         this.$refs.input &&
@@ -275,13 +272,6 @@ export default {
 
       this.activateMenu()
     },
-    onEnterDown () {
-      this.onBlur()
-    },
-    onEscDown (e) {
-      e.preventDefault()
-      this.isMenuActive = false
-    },
     onInput (e) {
       // If typing and menu is not currently active
       if (e.target.value) {
@@ -296,24 +286,26 @@ export default {
     onKeyDown (e) {
       const keyCode = e.keyCode
 
-      // If enter, space, up, or down is pressed, open menu
-      if (!this.isMenuActive &&
-        [keyCodes.enter, keyCodes.space, keyCodes.up, keyCodes.down].includes(keyCode)
-      ) this.activateMenu()
+      VSelect.methods.onKeyDown.call(this, e)
 
-      // This should do something different
-      if (e.keyCode === keyCodes.enter) return this.onEnterDown()
-
-      // If escape deactivate the menu
-      if (keyCode === keyCodes.esc) return this.onEscDown(e)
-
-      // If tab - select item or close menu
-      if (keyCode === keyCodes.tab) return this.onTabDown(e)
-
-      if (this.$refs.input.selectionStart === 0 &&
+      // If user is at selection index of 0
+      // create a new tag
+      if (![
+        keyCodes.tab,
+        keyCodes.esc,
+        keyCodes.enter
+      ].includes(keyCode) &&
+        this.$refs.input.selectionStart === 0 &&
         this.isMulti
-      ) this.updateSelf()
-      if (!this.hideSelections) this.changeSelectedIndex(keyCode)
+      ) {
+        this.updateSelf()
+      }
+
+      // The ordering is important here
+      // allows new value to be updated
+      // and then moves the index to the
+      // proper location
+      this.changeSelectedIndex(keyCode)
     },
     onTabDown (e) {
       const menuIndex = this.getMenuIndex()
@@ -329,20 +321,8 @@ export default {
         e.stopPropagation()
 
         return this.updateTags()
-      // An item that is selected by
-      // menu-index should toggled
-      } else if (this.isMenuActive && menuIndex > -1) {
-        // Reset the list index if searching
-        this.internalSearch &&
-          this.$nextTick(() => setTimeout(() => this.setMenuIndex(-1), 0))
-
-        e.preventDefault()
-        this.selectListTile(menuIndex)
       } else {
-        // If we make it here,
-        // the user has no selected indexes
-        // and is probably tabbing out
-        this.isFocused = false
+        VSelect.methods.onTabDown.call(this, e)
       }
 
       this.updateSelf()
@@ -351,11 +331,6 @@ export default {
       VSelect.methods.selectItem.call(this, item)
 
       this.setSearch()
-    },
-    selectListTile (index) {
-      if (!this.$refs.menu.tiles[index]) return
-
-      this.$refs.menu.tiles[index].click()
     },
     setSelectedItems () {
       if (this.internalValue == null ||
@@ -369,9 +344,6 @@ export default {
       } else {
         VSelect.methods.setSelectedItems.call(this)
       }
-    },
-    setMenuIndex (index) {
-      this.$refs.menu && (this.$refs.menu.listIndex = index)
     },
     setSearch () {
       // Wait for nextTick so selectedItem
