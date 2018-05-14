@@ -1,32 +1,43 @@
+import mixins from '../util/mixins'
+
 import { provide as RegistrableProvide } from './registrable'
 import { consoleWarn } from '../util/console'
 
-export default {
+import { VBtn } from '../components/VBtn/VBtn'
+
+export default mixins(RegistrableProvide('buttonGroup')).extend({
   name: 'button-group',
 
-  mixins: [RegistrableProvide('buttonGroup')],
-
-  data () {
-    return {
-      buttons: [],
-      listeners: [],
-      isDestroying: false
-    }
+  props: {
+    mandatory: Boolean
   },
+
+  data: () => ({
+    buttons: [] as VBtn[],
+    listeners: [] as (() => void)[],
+    isDestroying: false
+  }),
 
   watch: {
     buttons: 'update'
   },
 
   methods: {
-    getValue (i) {
+    /** @abstract */
+    isSelected (i: number): boolean {
+      throw new Error('Not implemented !')
+    },
+    /** @abstract */
+    updateValue (i: number): void {
+      throw new Error('Not implemented !')
+    },
+    /** @abstract */
+    updateAllValues (): void {
+      throw new Error('Not implemented !')
+    },
+    getValue (i: number): any {
       if (this.buttons[i].value != null) {
         return this.buttons[i].value
-      }
-
-      // Fix for testing, this should always be false in the browser
-      if (this.buttons[i].$el.value != null && this.buttons[i].$el.value !== '') {
-        return this.buttons[i].$el.value
       }
 
       return i
@@ -49,18 +60,18 @@ export default {
       }
 
       if (selected.length === 1) {
-        this.buttons[selected[0]].$el.setAttribute('data-only-child', true)
+        this.buttons[selected[0]].$el.setAttribute('data-only-child', 'true')
       }
 
       this.ensureMandatoryInvariant(selected.length > 0)
     },
-    register (button) {
+    register (button: VBtn): void {
       const index = this.buttons.length
       this.buttons.push(button)
       this.listeners.push(this.updateValue.bind(this, index))
       button.$on('click', this.listeners[index])
     },
-    unregister (buttonToUnregister) {
+    unregister (buttonToUnregister: VBtn): void {
       // Basic cleanup if we're destroying
       if (this.isDestroying) {
         const index = this.buttons.indexOf(buttonToUnregister)
@@ -72,7 +83,7 @@ export default {
 
       this.redoRegistrations(buttonToUnregister)
     },
-    redoRegistrations (buttonToUnregister) {
+    redoRegistrations (buttonToUnregister: VBtn): void {
       let selectedCount = 0
 
       const buttons = []
@@ -80,7 +91,7 @@ export default {
         const button = this.buttons[index]
         if (button !== buttonToUnregister) {
           buttons.push(button)
-          selectedCount += Boolean(this.isSelected(index))
+          selectedCount += Number(this.isSelected(index))
         }
 
         button.$off('click', this.listeners[index])
@@ -96,7 +107,7 @@ export default {
       this.ensureMandatoryInvariant(selectedCount > 0)
       this.updateAllValues && this.updateAllValues()
     },
-    ensureMandatoryInvariant (hasSelectedAlready) {
+    ensureMandatoryInvariant (hasSelectedAlready: boolean): void {
       // Preserve the mandatory invariant by selecting the first tracked button, if needed
 
       if (!this.mandatory || hasSelectedAlready) return
@@ -117,4 +128,4 @@ export default {
   beforeDestroy () {
     this.isDestroying = true
   }
-}
+})

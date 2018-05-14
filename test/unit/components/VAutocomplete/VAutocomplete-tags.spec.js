@@ -85,11 +85,16 @@ test('VAutocomplete - tags', ({ mount, compileToFunctions }) => {
     const menu = wrapper.first('.v-menu')
 
     input.trigger('focus')
-    await wrapper.vm.$nextTick()
-
     input.element.value = 'b'
     input.trigger('input')
     menu.trigger('keydown.down')
+
+    // Give DOM time to update
+    // list tile classes
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.isMenuActive).toBe(true)
+
     input.trigger('keydown.tab')
 
     expect(change).toBeCalledWith(['bar'])
@@ -239,10 +244,11 @@ test('VAutocomplete - tags', ({ mount, compileToFunctions }) => {
     expect(wrapper.vm.selectedIndex).toBe(-1)
   })
 
+  // This test is actually almost useless
   it('should not change search when selecting an index', () => {
     const { wrapper } = createTagsAutocomplete({
       chips: true,
-      multiple: true,
+      tags: true,
       value: ['foo', 'bar']
     })
 
@@ -254,16 +260,13 @@ test('VAutocomplete - tags', ({ mount, compileToFunctions }) => {
     input.trigger('keydown.left')
     expect(wrapper.vm.selectedIndex).toBe(1)
 
-    expect(wrapper.vm.internalSearch).toBe(null)
-    input.element.value = 'fizz'
-    input.trigger('input')
-
+    expect(wrapper.vm.internalSearch).toBe(undefined)
     input.trigger('keydown.right')
-    expect(wrapper.vm.selectedIndex).toBe(-1)
-
     input.element.value = 'fizz'
     input.trigger('input')
+
     expect(wrapper.vm.internalSearch).toBe('fizz')
+    expect(wrapper.vm.selectedIndex).toBe(-1)
   })
 
   it('should create new items when a delimiter is entered', async () => {

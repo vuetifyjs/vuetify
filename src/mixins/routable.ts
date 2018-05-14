@@ -1,6 +1,7 @@
+import Vue, { VNodeData } from 'vue'
 import Ripple from '../directives/ripple'
 
-export default {
+export default Vue.extend({
   name: 'routable',
 
   directives: {
@@ -26,19 +27,20 @@ export default {
   },
 
   methods: {
-    click () {},
+    /* eslint-disable-next-line no-unused-vars */
+    click (e: MouseEvent): void { /**/ },
     generateRouteLink () {
       let exact = this.exact
       let tag
 
-      const data = {
+      const data: VNodeData = {
         attrs: { disabled: this.disabled },
-        class: this.classes,
+        class: (this as any).classes,
         props: {},
         directives: [{
           name: 'ripple',
           value: (this.ripple && !this.disabled) ? this.ripple : false
-        }],
+        }] as any, // TODO
         [this.to ? 'nativeOn' : 'on']: {
           ...this.$listeners,
           click: this.click
@@ -56,9 +58,9 @@ export default {
         let activeClass = this.activeClass
         let exactActiveClass = this.exactActiveClass || activeClass
 
-        if (this.proxyClass) {
-          activeClass += ' ' + this.proxyClass
-          exactActiveClass += ' ' + this.proxyClass
+        if ((this as any).proxyClass) {
+          activeClass += ' ' + (this as any).proxyClass
+          exactActiveClass += ' ' + (this as any).proxyClass
         }
 
         tag = this.nuxt ? 'nuxt-link' : 'router-link'
@@ -73,12 +75,12 @@ export default {
       } else {
         tag = (this.href && 'a') || this.tag || 'a'
 
-        if (tag === 'a' && this.href) data.attrs.href = this.href
+        if (tag === 'a' && this.href) data.attrs!.href = this.href
       }
 
-      if (this.target) data.attrs.target = this.target
+      if (this.target) data.attrs!.target = this.target
 
       return { tag, data }
     }
   }
-}
+})

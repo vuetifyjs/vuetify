@@ -16,7 +16,6 @@ theme(v-textarea, "v-textarea")
     line-height: 18px
     max-width: 100%
     min-height: 32px
-    overflow: hidden
     outline: none
     padding: 7px 0 8px
     width: 100%
@@ -62,6 +61,10 @@ theme(v-textarea, "v-textarea")
     position: absolute
     top: 0
     text-indent: 24px
-    word-break: break-all
     width: 100%
+    word-break: break-word
     visibility hidden
+
+  &--auto-grow
+    textarea
+      overflow: hidden

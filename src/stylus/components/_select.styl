@@ -27,11 +27,15 @@ theme(v-select, 'v-select')
   // then visible when autocomplete
   &:not(.v-autocomplete)
     input
-      caret-color: transparent !important
+      // IE11 refuses to hide blinking input
+      // because of this requires a min-height
+      font-size: 0
+      min-height: 32px
 
   .v-menu
     height: 100%
     flex: 1 1 auto
+    width: 100%
 
   .v-chip
     flex: 0 1 auto

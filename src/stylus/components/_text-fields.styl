@@ -43,10 +43,6 @@ v-text-field($material)
       &:hover
         background: $material.text-fields.box-hover
 
-    &.v-input--is-focused
-      .v-input__slot
-        background: $material.text-fields.box-focus
-
   &--outline
     border: 2px solid $material.text.secondary
     background: transparent !important
@@ -85,7 +81,7 @@ rtl(v-text-field-rtl, "v-text-field")
 .v-text-field
   input
     flex: 1 1 auto
-    line-height: 18px
+    line-height: 20px
     padding: 8px 0 8px
     max-width: 100%
     width: 100%
@@ -103,6 +99,7 @@ rtl(v-text-field-rtl, "v-text-field")
     white-space: nowrap
 
   .v-label
+    cursor: auto
     height: 20px
     line-height: 20px
     max-width: 90%
@@ -151,7 +148,10 @@ rtl(v-text-field-rtl, "v-text-field")
     padding-right: 4px
 
   &__suffix
+    overflow: hidden
     padding-left: 4px
+    text-overflow: ellipsis
+    white-space: nowrap
 
   &__slot
     display: flex
@@ -200,6 +200,10 @@ rtl(v-text-field-rtl, "v-text-field")
     .v-input__append-inner,
     .v-input__append-outer
       margin-top: 16px
+
+    &:not(.v-text-field--solo)
+      .v-label
+        cursor: pointer
 
   &--box
     .v-input__slot,

@@ -47,7 +47,7 @@ export default {
     clearable: Boolean,
     clearIcon: {
       type: String,
-      default: 'clear'
+      default: '$vuetify.icons.clear'
     },
     clearIconCb: Function,
     color: {
@@ -161,6 +161,14 @@ export default {
   },
 
   methods: {
+    /** @public */
+    focus () {
+      this.onFocus()
+    },
+    /** @public */
+    blur () {
+      this.onBlur()
+    },
     clearableCallback () {
       this.internalValue = null
       this.$nextTick(() => this.$refs.input.focus())
@@ -178,6 +186,17 @@ export default {
 
       return this.genSlot('append', 'outer', slot)
     },
+    genClearIcon () {
+      if (!this.clearable) return null
+
+      const icon = !this.isDirty
+        ? false
+        : 'clear'
+
+      return this.genSlot('append', 'inner', [
+        this.genIcon(icon, this.clearIconCb || this.clearableCallback)
+      ])
+    },
     genCounter () {
       if (this.counter === false) return null
 
@@ -194,6 +213,7 @@ export default {
     genDefaultSlot () {
       return [
         this.genTextFieldSlot(),
+        this.genClearIcon(),
         this.genIconSlot()
       ]
     },
@@ -250,8 +270,13 @@ export default {
         slot.push(this.$slots['append-icon'])
       } else if (this.appendIcon) {
         slot.push(this.genIcon('append'))
-      } else if (this.clearable && this.isDirty) {
-        slot.push(this.genIcon('clear',
+      } else if (this.clearable) {
+        // Make sure the slot takes space
+        // so layout doesn't jump when
+        // dirty
+        const icon = !this.isDirty ? false : 'clear'
+
+        slot.push(this.genIcon(icon,
           this.clearIconCb || this.clearableCallback
         ))
       }

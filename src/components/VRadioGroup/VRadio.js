@@ -118,7 +118,7 @@ export default {
           name: this.name && this.name(),
           role: type,
           type,
-          value: this.inputValue
+          checked: this.isActive
         }),
         on: {
           blur: this.onBlur,
@@ -173,8 +173,6 @@ export default {
       const mandatory = !!this.isMandatory && this.isMandatory()
 
       if (!this.disabled && (!this.isActive || !mandatory)) {
-        this.$refs.input.checked = true
-        // this.isActive = true
         this.$emit('change', this.value)
       }
     }

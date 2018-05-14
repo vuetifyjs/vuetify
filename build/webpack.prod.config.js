@@ -17,7 +17,7 @@ const resolve = file => require('path').resolve(__dirname, file)
 
 module.exports = merge(baseWebpackConfig, {
   entry: {
-    app: './src/index.js'
+    app: './src/index.ts'
   },
   output: {
     path: resolve('../dist'),
@@ -26,27 +26,20 @@ module.exports = merge(baseWebpackConfig, {
     libraryTarget: 'umd',
     libraryExport: 'default'
   },
+  externals: {
+    vue: {
+      commonjs: 'vue',
+      commonjs2: 'vue',
+      amd: 'vue',
+      root: 'Vue'
+    }
+  },
   module: {
     noParse: /es6-promise\.js$/, // avoid webpack shimming process
     rules: [
       {
-        test: /\.vue$/,
-        use: [
-          {
-            loader: 'vue-loader',
-            options: {
-              loaders: {
-                stylus: extractPlugin
-              }
-            }
-          },
-          'eslint-loader'
-        ],
-        exclude: /node_modules/
-      },
-      {
-        test: /\.js$/,
-        loaders: ['babel-loader', 'eslint-loader'],
+        test: /\.[jt]s$/,
+        loaders: ['babel-loader', 'ts-loader', 'eslint-loader'],
         exclude: /node_modules/
       },
       {

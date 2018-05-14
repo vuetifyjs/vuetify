@@ -51,7 +51,9 @@ export default {
 
       if (e.keyCode === keyCodes.down && this.listIndex < this.tiles.length - 1) {
         this.listIndex++
-      } else if (e.keyCode === keyCodes.up && this.listIndex > 0) {
+        // Allow user to set listIndex to -1 so
+        // that the list can be un-highlighted
+      } else if (e.keyCode === keyCodes.up && this.listIndex > -1) {
         this.listIndex--
       } else if (e.keyCode === keyCodes.enter && this.listIndex !== -1) {
         this.tiles[this.listIndex].click()

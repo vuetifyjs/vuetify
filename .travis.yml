@@ -8,7 +8,7 @@ before_script:
 script:
   - yarn --frozen-lockfile --non-interactive
   - yarn run lint
-  - yarn run test:coverage && codecov
+  - yarn run test:coverage -i && codecov
   - yarn run build
 
 cache:

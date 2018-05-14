@@ -56,6 +56,7 @@ export default {
         'v-input--is-disabled': this.isDisabled,
         'v-input--is-focused': this.isFocused,
         'v-input--is-loading': this.loading !== false,
+        'v-input--is-readonly': this.readonly,
         ...this.addTextColorClassChecks({}, this.validationState),
         ...this.themeClasses
       }
@@ -168,11 +169,14 @@ export default {
         }
       })
     },
-    genSlot (ref, location, slot) {
+    genSlot (type, location, slot) {
       if (!slot.length) return null
 
+      const ref = `${type}-${location}`
+
       return this.$createElement('div', {
-        staticClass: `v-input__${ref}-${location}`
+        staticClass: `v-input__${ref}`,
+        ref
       }, slot)
     },
     genPrependSlot () {
