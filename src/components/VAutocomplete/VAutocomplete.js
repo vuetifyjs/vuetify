@@ -22,6 +22,10 @@ export default {
   }),
 
   props: {
+    allowOverflow: {
+      type: Boolean,
+      default: true
+    },
     browserAutocomplete: {
       type: String,
       default: 'off'
@@ -43,6 +47,10 @@ export default {
     },
     noFilter: Boolean,
     offsetY: {
+      type: Boolean,
+      default: true
+    },
+    offsetOverflow: {
       type: Boolean,
       default: true
     },
@@ -182,6 +190,12 @@ export default {
         this.internalSearch = val.slice(0, val.length - delimiter.length)
         this.updateTags()
       }
+
+      if (this.isMenuActive &&
+        this.$refs.menu
+      ) {
+        this.$refs.menu.updateDimensions()
+      }
     }
   },
 
@@ -290,13 +304,9 @@ export default {
 
       // If user is at selection index of 0
       // create a new tag
-      if (![
-        keyCodes.tab,
-        keyCodes.esc,
-        keyCodes.enter
-      ].includes(keyCode) &&
-        this.$refs.input.selectionStart === 0 &&
-        this.isMulti
+      if (this.tags &&
+        keyCode === keyCodes.left &&
+        this.$refs.input.selectionStart === 0
       ) {
         this.updateSelf()
       }
