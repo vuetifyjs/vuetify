@@ -168,6 +168,8 @@ export default {
     filteredItems (val) {
       if (this.isAnyValueAllowed) return
 
+      this.setMenuIndex(-1)
+
       this.$nextTick(() => {
         this.setMenuIndex(val.length === 1 ? 0 : -1)
       })
