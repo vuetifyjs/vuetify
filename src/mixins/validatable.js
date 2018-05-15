@@ -68,9 +68,12 @@ export default {
     },
     shouldValidate () {
       return (
-        !this.isResetting &&
-        this.hasError &&
-        (this.hasInput || this.hasFocused)
+        this.error ||
+        (
+          !this.isResetting &&
+          this.hasError &&
+          (this.hasInput || this.hasFocused)
+        )
       )
     },
     validations () {

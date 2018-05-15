@@ -211,7 +211,9 @@ test('VRadioGroup.vue', ({ mount }) => {
 
   it('should validate on blur', async () => {
     const wrapper = mount(VRadioGroup, {
-      propsData: { error: true },
+      propsData: {
+        rules: [v => !!v || 'Foobar']
+      },
       slots: {
         default: [{
           extends: VRadio
@@ -260,6 +262,7 @@ test('VRadioGroup.vue', ({ mount }) => {
     expect(wrapper.vm.shouldValidate).toBe(false)
   })
 
+  // https://github.com/vuetifyjs/vuetify/issues/3299
   it('should call/update validation for dynamic model', async () => {
     const wrapper = mount(VRadioGroup, {
       propsData: {
