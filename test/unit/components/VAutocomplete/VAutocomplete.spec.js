@@ -255,10 +255,6 @@ test('VAutocomplete.js', ({ mount, shallow }) => {
     input.element.value = 'foo'
     input.trigger('input')
 
-    await wrapper.vm.$nextTick()
-
-    expect(wrapper.vm.isMenuActive).toBe(false)
-
     input.trigger('blur')
     expect(change).toHaveBeenCalledWith('foo')
 
@@ -712,13 +708,13 @@ test('VAutocomplete.js', ({ mount, shallow }) => {
 
     expect(wrapper.vm.menuCanShow).toBe(true)
 
-    wrapper.setProps({ hideNoData: true })
+    wrapper.setProps({ asyncItems: true })
 
     await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.menuCanShow).toBe(false)
 
-    wrapper.setProps({ hideNoData: false })
+    wrapper.setProps({ asyncItems: false })
 
     await wrapper.vm.$nextTick()
 

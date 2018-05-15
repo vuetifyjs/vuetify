@@ -26,6 +26,7 @@ export default {
       type: Boolean,
       default: true
     },
+    asyncItems: Boolean,
     browserAutocomplete: {
       type: String,
       default: 'off'
@@ -127,7 +128,7 @@ export default {
         return filtered
       }
 
-      return !this.hideNoData || filtered
+      return filtered || !this.asyncItems
     },
     menuProps () {
       return Object.assign(VSelect.computed.menuProps.call(this), {
@@ -164,6 +165,13 @@ export default {
   },
 
   watch: {
+    filteredItems (val) {
+      if (this.isAnyValueAllowed) return
+
+      this.$nextTick(() => {
+        this.setMenuIndex(val.length === 1 ? 0 : -1)
+      })
+    },
     isFocused (val) {
       if (val) {
         this.$refs.input &&

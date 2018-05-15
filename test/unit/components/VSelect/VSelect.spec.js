@@ -13,7 +13,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
   app.setAttribute('data-app', true)
   document.body.appendChild(app)
 
-  it('should return numeric 0', () => {
+  it('should return numeric 0', async () => {
     const item = { value: 0, text: '0' }
     const wrapper = mount(VSelect, {
       propsData: {
@@ -26,6 +26,8 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     const change = jest.fn()
     wrapper.vm.$on('change', change)
     wrapper.vm.selectItem(item)
+
+    await wrapper.vm.$nextTick()
 
     expect(change).toBeCalledWith([0])
   })

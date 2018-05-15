@@ -70,7 +70,7 @@ export default {
       return this.shouldValidate && (this.hasError || this.hasSuccess)
     },
     shouldValidate () {
-      return !this.isResetting && (this.externalError || (
+      return this.externalError || (!this.isResetting && (
         this.validateOnBlur
           ? this.hasInput && this.hasFocused && !this.isFocused
           : (this.hasInput || this.hasFocused)

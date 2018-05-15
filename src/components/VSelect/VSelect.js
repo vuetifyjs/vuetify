@@ -75,7 +75,6 @@ export default {
     contentClass: String,
     deletableChips: Boolean,
     dense: Boolean,
-    hideNoData: Boolean,
     hideSelected: Boolean,
     items: {
       type: Array,
@@ -223,7 +222,10 @@ export default {
   },
 
   watch: {
-    internalValue: 'setSelectedItems',
+    internalValue () {
+      this.$emit('change', this.internalValue)
+      this.setSelectedItems()
+    },
     isBooted () {
       this.$nextTick(() => {
         if (this.content && this.content.addEventListener) {
@@ -236,17 +238,16 @@ export default {
 
       this.isBooted = true
     },
-    items (val) {
-      if (this.cacheItems) {
-        this.cachedItems = this.filterDuplicates(this.cachedItems.concat(val))
+    items: {
+      immediate: true,
+      handler (val) {
+        if (this.cacheItems) {
+          this.cachedItems = this.filterDuplicates(this.cachedItems.concat(val))
+        }
+
+        this.setSelectedItems()
       }
-
-      this.setSelectedItems()
     }
-  },
-
-  created () {
-    this.setSelectedItems()
   },
 
   mounted () {
@@ -587,10 +588,6 @@ export default {
         e.preventDefault()
         e.stopPropagation()
 
-        // Reset the list index if searching
-        this.internalSearch &&
-          this.$nextTick(() => setTimeout(() => this.setMenuIndex(-1), 0))
-
         listTile.click()
       } else {
         // If we make it here,
@@ -613,8 +610,6 @@ export default {
         })
       }
 
-      this.$emit('change', this.internalValue)
-
       this.$nextTick(() => {
         this.$refs.menu &&
           this.$refs.menu.updateDimensions()
@@ -624,6 +619,10 @@ export default {
       this.$refs.menu && (this.$refs.menu.listIndex = index)
     },
     setSelectedItems () {
+      const items = this.cacheItems
+        ? this.cachedItems
+        : this.computedItems
+
       const fn = !this.isMulti
         ? i => this.valueComparator(
           this.getValue(i),
@@ -631,7 +630,7 @@ export default {
         )
         : i => this.findExistingIndex(i) > -1
 
-      this.selectedItems = this.computedItems.filter(fn)
+      this.selectedItems = items.filter(fn)
     }
   }
 }

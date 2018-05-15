@@ -376,6 +376,8 @@ export default {
       this.internalChange = true
 
       if (e.keyCode === keyCodes.enter) this.$emit('change', this.internalValue)
+
+      this.$emit('keydown', e)
     },
     onMouseDown (e) {
       // Prevent input from being blurred

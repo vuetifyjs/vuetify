@@ -258,4 +258,44 @@ test('VRadioGroup.vue', ({ mount }) => {
     expect(blur).toHaveBeenCalledTimes(2)
     expect(wrapper.vm.shouldValidate).toBe(false)
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/3299
+  it('should call/update validation for dynamic model', async () => {
+    const wrapper = mount(VRadioGroup, {
+      propsData: {
+        rules: [v => !!v || 'Foobar'],
+        value: null
+      },
+      slots: {
+        default: [
+          {
+            extends: VRadio,
+            props: {
+              value: {
+                default: 'Single'
+              }
+            }
+          },
+          {
+            extends: VRadio,
+            props: {
+              value: {
+                default: 'Double'
+              }
+            }
+          }
+        ]
+      }
+    })
+
+    const radio = wrapper.first(VRadio)
+    const input = radio.first('input')
+
+    expect(wrapper.vm.shouldValidate).toBe(false)
+
+    input.trigger('focus')
+    input.trigger('blur')
+
+    expect(wrapper.vm.shouldValidate).toBe(true)
+  })
 })
