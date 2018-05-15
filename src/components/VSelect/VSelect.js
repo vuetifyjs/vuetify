@@ -222,7 +222,10 @@ export default {
   },
 
   watch: {
-    internalValue: 'setSelectedItems',
+    internalValue () {
+      this.$emit('change', this.internalValue)
+      this.setSelectedItems()
+    },
     isBooted () {
       this.$nextTick(() => {
         if (this.content && this.content.addEventListener) {
@@ -606,8 +609,6 @@ export default {
           return this.returnObject ? i : this.getValue(i)
         })
       }
-
-      this.$emit('change', this.internalValue)
 
       this.$nextTick(() => {
         this.$refs.menu &&
