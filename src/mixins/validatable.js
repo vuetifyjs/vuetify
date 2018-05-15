@@ -70,11 +70,11 @@ export default {
       return this.shouldValidate && (this.hasError || this.hasSuccess)
     },
     shouldValidate () {
-      return (
-        !this.isResetting &&
-        this.hasError &&
-        (this.hasInput || this.hasFocused || this.externalError)
-      )
+      return !this.isResetting && (this.externalError || (
+        this.validateOnBlur
+          ? this.hasInput && this.hasFocused && !this.isFocused
+          : (this.hasInput || this.hasFocused)
+      ))
     },
     validations () {
       return this.validationTarget.slice(0, this.errorCount)
