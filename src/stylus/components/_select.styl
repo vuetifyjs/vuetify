@@ -97,6 +97,13 @@ theme(v-select, 'v-select')
     height: 100%
     width: 100%
 
+    // If an input is a direct child
+    // there is no selections div
+    // and we must move input to
+    // the end of the container
+    > input
+      align-self: flex-end
+
 .v-select-list
   .v-list__tile__action
     .v-input--selection-controls
