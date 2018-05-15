@@ -31,9 +31,11 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
                       <div class="v-select__selection v-select__selection--comma">
                         5
                       </div>
-                      <input tabindex="0"
+                      <input readonly="readonly"
+                             tabindex="0"
                              type="text"
                              autocomplete="on"
+                             aria-readonly="false"
                       >
                     </div>
                     <div class="v-input__append-inner">
@@ -179,9 +181,11 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
                       <div class="v-select__selection v-select__selection--comma">
                         5
                       </div>
-                      <input tabindex="0"
+                      <input readonly="readonly"
+                             tabindex="0"
                              type="text"
                              autocomplete="on"
+                             aria-readonly="false"
                       >
                     </div>
                     <div class="v-input__append-inner">
@@ -318,9 +322,11 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
                       <div class="v-select__selection v-select__selection--comma">
                         5
                       </div>
-                      <input tabindex="0"
+                      <input readonly="readonly"
+                             tabindex="0"
                              type="text"
                              autocomplete="on"
+                             aria-readonly="false"
                       >
                     </div>
                     <div class="v-input__append-inner">
@@ -461,9 +467,11 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
                       <div class="v-select__selection v-select__selection--comma">
                         5
                       </div>
-                      <input tabindex="0"
+                      <input readonly="readonly"
+                             tabindex="0"
                              type="text"
                              autocomplete="on"
+                             aria-readonly="false"
                       >
                     </div>
                     <div class="v-input__append-inner">

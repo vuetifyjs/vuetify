@@ -372,6 +372,8 @@ export default {
       const input = VTextField.methods.genInput.call(this)
 
       input.data.domProps.value = null
+      input.data.attrs.readonly = true
+      input.data.attrs['aria-readonly'] = String(this.readonly)
 
       return input
     },

@@ -21,9 +21,11 @@ exports[`VSelect should add color to selected index 1`] = `
               <div class="v-select__selection v-select__selection--comma primary--text">
                 foo
               </div>
-              <input tabindex="0"
+              <input readonly="readonly"
+                     tabindex="0"
                      type="text"
                      autocomplete="on"
+                     aria-readonly="false"
               >
             </div>
             <div class="v-input__append-inner">
@@ -71,9 +73,11 @@ exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
               <div class="v-select__selection v-select__selection--comma">
                 1
               </div>
-              <input tabindex="0"
+              <input readonly="readonly"
+                     tabindex="0"
                      type="text"
                      autocomplete="on"
+                     aria-readonly="false"
               >
             </div>
             <div class="v-input__append-inner">
@@ -130,9 +134,11 @@ exports[`VSelect should be clearable with prop, dirty and single select 1`] = `
               <div class="v-select__selection v-select__selection--comma">
                 1
               </div>
-              <input tabindex="0"
+              <input readonly="readonly"
+                     tabindex="0"
                      type="text"
                      autocomplete="on"
+                     aria-readonly="false"
               >
             </div>
             <div class="v-input__append-inner">
