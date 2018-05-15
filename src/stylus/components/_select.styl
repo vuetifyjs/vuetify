@@ -44,6 +44,11 @@ theme(v-select, 'v-select')
     position: absolute
     left: 0
 
+  &.v-input--is-dirty
+    ::placeholder
+      color: transparent !important
+
+
   &.v-text-field--solo
     .v-select__selections
       padding: 4px 0
