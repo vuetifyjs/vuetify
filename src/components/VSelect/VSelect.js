@@ -116,6 +116,10 @@ export default {
   },
 
   computed: {
+    /* All items that the select has */
+    allItems () {
+      return this.filterDuplicates(this.cachedItems.concat(this.items))
+    },
     classes () {
       return Object.assign({}, VTextField.computed.classes.call(this), {
         'v-select': true,
@@ -123,8 +127,9 @@ export default {
         'v-select--is-menu-active': this.isMenuActive
       })
     },
+    /* Used by other components to overwrite */
     computedItems () {
-      return this.filterDuplicates(this.cachedItems.concat(this.items))
+      return this.allItems
     },
     directives () {
       return [{
@@ -624,10 +629,6 @@ export default {
       this.$refs.menu && (this.$refs.menu.listIndex = index)
     },
     setSelectedItems () {
-      const items = this.cacheItems
-        ? this.cachedItems
-        : this.computedItems
-
       const fn = !this.isMulti
         ? i => this.valueComparator(
           this.getValue(i),
@@ -635,7 +636,7 @@ export default {
         )
         : i => this.findExistingIndex(i) > -1
 
-      this.selectedItems = items.filter(fn)
+      this.selectedItems = this.allItems.filter(fn)
     }
   }
 }

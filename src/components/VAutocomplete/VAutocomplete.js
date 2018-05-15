@@ -86,11 +86,9 @@ export default {
       return this.getText(this.selectedItem).toString().length
     },
     filteredItems () {
-      const items = this.filterDuplicates(this.cachedItems.concat(this.items))
+      if (!this.isSearching || this.noFilter) return this.allItems
 
-      if (!this.isSearching || this.noFilter) return items
-
-      return items.filter(i => this.filter(i, this.internalSearch, this.getText(i)))
+      return this.allItems.filter(i => this.filter(i, this.internalSearch, this.getText(i)))
     },
     hasSlot () {
       return VSelect.computed.hasSlot.call(this) || this.tags

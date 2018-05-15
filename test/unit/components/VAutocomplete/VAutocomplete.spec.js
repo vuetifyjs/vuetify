@@ -114,17 +114,19 @@ test('VAutocomplete.js', ({ mount, shallow }) => {
 
     wrapper.setProps({
       multiple: false,
-      value: 2
+      value: 1
     })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.internalSearch).toBe(1)
 
     input.trigger('focus')
     input.element.value = 3
     input.trigger('input')
     input.trigger('blur')
 
-    await wrapper.vm.$nextTick()
-
-    expect(wrapper.vm.internalSearch).toBe(null)
+    expect(wrapper.vm.internalSearch).toBe('3')
   })
 
   it('should render role=combobox correctly when autocomplete', async () => {
