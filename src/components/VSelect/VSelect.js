@@ -610,12 +610,15 @@ export default {
         this.internalValue = internalValue.map(i => {
           return this.returnObject ? i : this.getValue(i)
         })
-      }
 
-      this.$nextTick(() => {
-        this.$refs.menu &&
-          this.$refs.menu.updateDimensions()
-      })
+        // When selecting multiple
+        // adjust menu after each
+        // selection
+        this.$nextTick(() => {
+          this.$refs.menu &&
+            this.$refs.menu.updateDimensions()
+        })
+      }
     },
     setMenuIndex (index) {
       this.$refs.menu && (this.$refs.menu.listIndex = index)
