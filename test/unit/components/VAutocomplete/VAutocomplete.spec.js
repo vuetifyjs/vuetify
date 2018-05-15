@@ -102,6 +102,8 @@ test('VAutocomplete.js', ({ mount, shallow }) => {
       }
     })
 
+    await wrapper.vm.$nextTick()
+
     const input = wrapper.first('input')
 
     input.trigger('focus')
@@ -199,6 +201,8 @@ test('VAutocomplete.js', ({ mount, shallow }) => {
         items: ['foo', 'bar']
       }
     })
+
+    await wrapper.vm.$nextTick()
 
     wrapper.setProps({ searchInput: 'asdf' })
 

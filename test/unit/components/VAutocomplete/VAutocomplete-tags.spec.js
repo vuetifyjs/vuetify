@@ -274,6 +274,8 @@ test('VAutocomplete - tags', ({ mount, compileToFunctions }) => {
       delimiters: [', ', 'baz']
     })
 
+    await wrapper.vm.$nextTick()
+
     const input = wrapper.first('input')
     input.trigger('focus')
 

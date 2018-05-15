@@ -172,6 +172,9 @@ export default {
         this.setMenuIndex(val.length === 1 ? 0 : -1)
       })
     },
+    internalValue () {
+      this.setSearch()
+    },
     isFocused (val) {
       if (val) {
         this.$refs.input &&
@@ -205,6 +208,10 @@ export default {
         this.$refs.menu.updateDimensions()
       }
     }
+  },
+
+  created () {
+    this.setSearch()
   },
 
   methods: {
