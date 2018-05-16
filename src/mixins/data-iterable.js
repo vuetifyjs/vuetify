@@ -212,11 +212,13 @@ export default {
   },
 
   watch: {
-    itemsLength (totalItems) {
-      this.updatePagination({ page: 1, totalItems })
+    search () {
+      this.$nextTick(() => {
+        this.updatePagination({ page: 1, totalItems: this.itemsLength })
+      })
     },
-    'computedPagination.sortBy': function () { this.updatePagination({ page: 1 }) },
-    'computedPagination.descending': function () { this.updatePagination({ page: 1 }) }
+    'computedPagination.sortBy': 'resetPagination',
+    'computedPagination.descending': 'resetPagination'
   },
 
   methods: {
@@ -272,6 +274,10 @@ export default {
         !this.hasPagination
         ? items
         : items.slice(this.pageStart, this.pageStop)
+    },
+    resetPagination () {
+      this.computedPagination.page !== 1 &&
+        this.updatePagination({ page: 1 })
     },
     sort (index) {
       const { sortBy, descending } = this.computedPagination

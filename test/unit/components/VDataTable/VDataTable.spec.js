@@ -311,6 +311,82 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
     const wrapper = mount(VDataTable, data)
 
     expect(wrapper.find('tr.v-datatable__progress th')[0].getAttribute('colspan')).toBe('11')
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should not emit pagination event after load (#3585)', async () => {
+    const data = dataTableTestDataFilter()
+    data.propsData.totalItems = 0
+    data.propsData.search = ''
+    data.propsData.pagination = {}
+
+    const wrapper = mount(VDataTable, data)
+    const pagination = jest.fn()
+    wrapper.vm.$on('update:pagination', pagination)
+
+    await wrapper.vm.$nextTick()
+
+    expect(pagination).toHaveBeenCalledTimes(0)
+
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should emit correct totalItems property in pagination when searching (#3511)', async () => {
+    const data = {
+      propsData: {
+        pagination: {
+          rowsPerPage: 5,
+          descending: false,
+          page: 1,
+          sortBy: 'calories'
+        },
+        headers: [{ text: 'Calories', value: 'calories' }],
+        items: [{ calories: 19 }, { calories: 19 }, { calories: 152 }]
+      }
+    }
+
+    const wrapper = mount(VDataTable, data)
+    const pagination = jest.fn()
+    wrapper.vm.$on('update:pagination', pagination)
+
+    await wrapper.vm.$nextTick()
+
+    wrapper.setProps({ search: '9' })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.instance().filteredItems).toHaveLength(2)
+    expect(pagination).toHaveBeenCalledWith(Object.assign({}, data.propsData.pagination, { totalItems: 2 }))
+
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should not reset page when total-items prop changes (#3766)', async () => {
+    const data = {
+      propsData: {
+        pagination: {
+          rowsPerPage: 1,
+          descending: false,
+          page: 2,
+          sortBy: 'calories'
+        },
+        totalItems: 3,
+        headers: [{ text: 'Calories', value: 'calories' }],
+        items: [{ calories: 19 }, { calories: 19 }, { calories: 152 }]
+      }
+    }
+
+    const wrapper = mount(VDataTable, data)
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.instance().computedPagination.page).toBe(2)
+
+    wrapper.setProps({ totalItems: 10 })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.instance().computedPagination.page).toBe(2)
 
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
