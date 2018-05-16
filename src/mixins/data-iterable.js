@@ -169,7 +169,7 @@ export default {
       return this.selectAll !== undefined && this.selectAll !== false
     },
     itemsLength () {
-      if (this.search) return this.searchLength
+      if (this.hasSearch) return this.searchLength
       return this.totalItems || this.items.length
     },
     indeterminate () {
@@ -209,6 +209,9 @@ export default {
         selected[key] = true
       }
       return selected
+    },
+    hasSearch () {
+      return this.search != null
     }
   },
 
@@ -257,10 +260,8 @@ export default {
       if (this.totalItems) return this.items
 
       let items = this.items.slice()
-      const hasSearch = typeof this.search !== 'undefined' &&
-        this.search !== null
 
-      if (hasSearch) {
+      if (this.hasSearch) {
         items = this.customFilter(items, this.search, this.filter, ...additionalFilterArgs)
         this.searchLength = items.length
       }
