@@ -226,7 +226,9 @@ rtl(v-text-field-rtl, "v-text-field")
       padding: 0 12px
 
   &--enclosed
-    margin-top: 16px
+    // To better align with box
+    &.v-input
+      margin-top: 14px
 
     .v-input__slot
       margin-bottom: 0 // normally for messages
