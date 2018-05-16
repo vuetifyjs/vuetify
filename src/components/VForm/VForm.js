@@ -35,16 +35,32 @@ export default {
 
   methods: {
     watchInput (input) {
-      const valid = input.$watch('valid', val => {
-        if (!input.shouldValidate && this.lazyValidation) return
-        this.$set(this.errorBag, input._uid, !val)
-      }, { immediate: true })
+      const watcher = input => {
+        return input.$watch('valid', val => {
+          this.$set(this.errorBag, input._uid, !val)
+        }, { immediate: true })
+      }
 
-      const shouldValidate = input.$watch('shouldValidate', val => {
-        if (val) this.$set(this.errorBag, input._uid, !input.valid)
-      }, { immediate: true })
+      const watchers = {
+        valid: undefined,
+        shouldValidate: undefined
+      }
 
-      return { valid, shouldValidate }
+      if (this.lazyValidation) {
+        // Only start watching inputs if we need to
+        watchers.shouldValidate = input.$watch('shouldValidate', val => {
+          if (!val) return
+
+          // Only watch if we're not already doing it
+          if (this.errorBag.hasOwnProperty(input._uid)) return
+
+          watchers.input = watcher(input)
+        })
+      } else {
+        watchers.valid = watcher(input)
+      }
+
+      return watchers
     },
     validate () {
       const errors = this.inputs.filter(input => !input.validate(true)).length
@@ -54,7 +70,12 @@ export default {
       for (let i = this.inputs.length; i--;) {
         this.inputs[i].reset()
       }
-      if (this.lazyValidation) this.errorBag = {}
+      if (this.lazyValidation) {
+        // Account for timeout in validatable
+        setTimeout(() => {
+          this.errorBag = {}
+        }, 0)
+      }
     },
     register (input) {
       const unwatch = this.watchInput(input)
@@ -70,8 +91,8 @@ export default {
 
       if (!found) return
 
-      found.unwatch.valid()
-      found.unwatch.shouldValidate()
+      found.unwatch.valid && found.unwatch.valid()
+      found.unwatch.shouldValidate && found.unwatch.shouldValidate()
       this.inputs = this.inputs.filter(i => i.uid !== found.uid)
       this.$delete(this.errorBag, found.uid)
     }

@@ -7,7 +7,7 @@ v-input($material)
   textarea::placeholder
     color: $material.text.disabled
 
-  &:not(.v-input--has-state):not(.v-input--is-disabled)
+  &:not(.v-input--is-disabled)
     input,
     textarea
       color: $material.text.primary
@@ -27,7 +27,6 @@ theme(v-input, "v-input")
   font-size: 16px
   margin-top: 16px // 12px for label, 16px for spec
   text-align: left
-  transition: $primary-transition
 
   .v-progress-linear
     top: calc(100% - 1px)
@@ -94,7 +93,6 @@ theme(v-input, "v-input")
     margin-bottom: 8px
     min-height: inherit
     position: relative
-    transition: $primary-transition
     width: 100%
 
   &--is-disabled:not(.v-input--is-readonly)

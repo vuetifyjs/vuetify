@@ -211,9 +211,6 @@ test('VRadioGroup.vue', ({ mount }) => {
 
   it('should validate on blur', async () => {
     const wrapper = mount(VRadioGroup, {
-      propsData: {
-        rules: [v => !!v || 'Foobar']
-      },
       slots: {
         default: [{
           extends: VRadio

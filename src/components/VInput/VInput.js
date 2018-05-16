@@ -146,10 +146,6 @@ export default {
     genInputSlot () {
       return this.$createElement('div', {
         staticClass: 'v-input__slot',
-        'class': this.addTextColorClassChecks(
-          {},
-          this.hasState ? this.validationState : this.color
-        ),
         style: { height: convertToUnit(this.height) },
         directives: this.directivesInput,
         on: { click: this.onClick },
