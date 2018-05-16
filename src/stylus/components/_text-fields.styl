@@ -24,16 +24,6 @@ v-text-field($material)
   &__suffix
     color: $material.text.secondary
 
-  &--full-width
-    margin: 0
-
-    .v-input__slot
-      padding: 16px
-
-    .v-input__append-inner
-      align-self: center
-      margin-top: 0
-
   &--solo
     background: $material.cards
 
@@ -252,6 +242,18 @@ rtl(v-text-field-rtl, "v-text-field")
     .v-input__slot,
     .v-text-field__details
       padding: 0 12px
+
+  &--full-width
+    &.v-input
+      margin-bottom: 0
+      margin-top: 0
+
+    .v-input__slot
+      padding: 16px
+
+    .v-input__append-inner
+      align-self: center
+      margin-top: 0
 
   &--reverse
     input
