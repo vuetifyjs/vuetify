@@ -1,3 +1,5 @@
+// Styles
+import '../../stylus/components/_forms.styl'
 
 import { provide as RegistrableProvide } from '../../mixins/registrable'
 
@@ -77,6 +79,7 @@ export default {
 
   render (h) {
     return h('form', {
+      staticClass: 'v-form',
       attrs: Object.assign({
         novalidate: true
       }, this.$attrs),
