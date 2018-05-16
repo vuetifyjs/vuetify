@@ -128,6 +128,13 @@ export default {
               e.stopPropagation()
 
               cb(e)
+            },
+            // Container has mouseup event
+            // that will trigger menu open
+            // if enclosed
+            mouseup: e => {
+              e.preventDefault()
+              e.stopPropagation()
             }
           }
       }
