@@ -16,7 +16,7 @@
     "alias": "now alias --team=vuetifyjs --token=$NOW_TOKEN"
   },
   "engines": {
-    "node": ">=7.0",
+    "node": ">=7.0 <10",
     "npm": ">=4.0"
   },
   "dependencies": {
