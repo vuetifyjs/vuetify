@@ -210,7 +210,7 @@ export default {
       return selected
     },
     hasSearch () {
-      return this.search != null && this.search !== ''
+      return this.search != null
     }
   },
 
