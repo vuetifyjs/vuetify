@@ -726,4 +726,29 @@ test('VAutocomplete.js', ({ mount, shallow }) => {
 
     expect(wrapper.vm.menuCanShow).toBe(true)
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/2834
+  it('should not update search if selectedIndex is > -1', () => {
+    const wrapper = mount(VAutocomplete)
+
+    const input = wrapper.first('input')
+
+    input.trigger('focus')
+    input.element.value = 'foo'
+    input.trigger('input')
+
+    expect(wrapper.vm.internalSearch).toBe('foo')
+
+    wrapper.setData({
+      lazySearch: '',
+      selectedIndex: 0
+    })
+
+    expect(wrapper.vm.internalSearch).toBe('')
+
+    input.element.value = 'bar'
+    input.trigger('input')
+
+    expect(wrapper.vm.internalSearch).toBe('')
+  })
 })

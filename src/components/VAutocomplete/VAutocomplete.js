@@ -297,6 +297,8 @@ export default {
       this.activateMenu()
     },
     onInput (e) {
+      if (this.selectedIndex > -1) return
+
       // If typing and menu is not currently active
       if (e.target.value) {
         this.activateMenu()
