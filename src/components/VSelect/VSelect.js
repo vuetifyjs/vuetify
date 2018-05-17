@@ -633,14 +633,23 @@ export default {
       this.$refs.menu && (this.$refs.menu.listIndex = index)
     },
     setSelectedItems () {
-      const fn = !this.isMulti
-        ? i => this.valueComparator(
-          this.getValue(i),
-          this.getValue(this.internalValue)
-        )
-        : i => this.findExistingIndex(i) > -1
+      const selectedItems = []
+      const values = Array.isArray(this.internalValue)
+        ? this.internalValue
+        : [this.internalValue]
 
-      this.selectedItems = this.allItems.filter(fn)
+      for (const value of values) {
+        const index = this.allItems.findIndex(v => this.valueComparator(
+          this.getValue(v),
+          this.getValue(value)
+        ))
+
+        if (index > -1) {
+          selectedItems.push(this.allItems[index])
+        }
+      }
+
+      this.selectedItems = selectedItems
     }
   }
 }
