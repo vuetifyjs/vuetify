@@ -725,6 +725,29 @@ test('VAutocomplete.js', ({ mount, shallow }) => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.menuCanShow).toBe(true)
+
+    // If we are hiding selected
+    // filtered will have a positive length
+    // but the hidden items will not show
+    // check to make sure when all values are
+    // selected to close the menu
+    wrapper.setProps({
+      hideNoData: true,
+      hideSelected: true,
+      items: [1,2,3,4],
+      multiple: true,
+      value: [1,2,3]
+    })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.menuCanShow).toBe(true)
+
+    wrapper.setProps({ value: [1,2,3,4] })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.menuCanShow).toBe(false)
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/2834

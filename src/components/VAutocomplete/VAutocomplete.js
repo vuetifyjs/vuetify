@@ -120,7 +120,9 @@ export default {
     menuCanShow () {
       if (!this.isFocused) return false
 
-      const filtered = this.filteredItems.length > 0
+      const filtered = this.hideSelected
+        ? this.filteredItems.length - this.selectedItems.length > 0
+        : this.filteredItems.length > 0
 
       if (this.isAnyValueAllowed) {
         return filtered
