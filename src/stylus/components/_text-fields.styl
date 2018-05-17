@@ -40,8 +40,10 @@ v-text-field($material)
     .v-input__slot
       background: $material.text-fields.box
 
-      &:hover
-        background: $material.text-fields.box-hover
+    &:not(.v-input--is-focused)
+      .v-input__slot
+        &:hover
+          background: $material.text-fields.box-hover
 
   &--outline
     border: 2px solid $material.text.secondary
