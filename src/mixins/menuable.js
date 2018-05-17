@@ -46,7 +46,7 @@ export default {
     dimensions: Object.assign({}, dimensions),
     isContentActive: false,
     pageYOffset: 0,
-    stackClass: 'menuable__content__active',
+    stackClass: 'v-menu__content--active',
     stackMinZIndex: 6
   }),
 
