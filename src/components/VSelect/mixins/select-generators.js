@@ -221,19 +221,33 @@ export default {
       }, `${this.getText(item)}${last ? '' : ', '}`)
     },
     genList () {
-      const children = this.menuItems.map(o => {
+      let children = []
+
+      const beforeList = this.$slots['before-list']
+      if (beforeList) {
+        children.push(beforeList)
+      }
+
+      const menuItems = this.menuItems.map(o => {
         if (o.header) return this.genHeader(o)
         if (o.divider) return this.genDivider(o)
         else return this.genTile(o)
       })
 
-      if (!children.length) {
+      children = children.concat(menuItems)
+
+      if (!menuItems.length) {
         const noData = this.$slots['no-data']
         if (noData) {
           children.push(noData)
         } else {
           children.push(this.genTile(this.noDataText, true))
         }
+      }
+
+      const afterList = this.$slots['after-list']
+      if (afterList) {
+        children.push(afterList)
       }
 
       return this.$createElement(VCard, [
