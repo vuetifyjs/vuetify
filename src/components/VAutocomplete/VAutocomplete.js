@@ -26,7 +26,6 @@ export default {
       type: Boolean,
       default: true
     },
-    asyncItems: Boolean,
     browserAutocomplete: {
       type: String,
       default: 'off'
@@ -46,6 +45,7 @@ export default {
           .indexOf(query.toString().toLowerCase()) > -1
       }
     },
+    hideNoData: Boolean,
     noFilter: Boolean,
     offsetY: {
       type: Boolean,
@@ -126,7 +126,7 @@ export default {
         return filtered
       }
 
-      return filtered || !this.asyncItems
+      return filtered || !this.hideNoData
     },
     menuProps () {
       return Object.assign(VSelect.computed.menuProps.call(this), {

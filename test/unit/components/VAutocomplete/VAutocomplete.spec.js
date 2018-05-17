@@ -714,13 +714,13 @@ test('VAutocomplete.js', ({ mount, shallow }) => {
 
     expect(wrapper.vm.menuCanShow).toBe(true)
 
-    wrapper.setProps({ asyncItems: true })
+    wrapper.setProps({ hideNoData: true })
 
     await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.menuCanShow).toBe(false)
 
-    wrapper.setProps({ asyncItems: false })
+    wrapper.setProps({ hideNoData: false })
 
     await wrapper.vm.$nextTick()
 
