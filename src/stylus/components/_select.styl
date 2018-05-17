@@ -48,11 +48,6 @@ theme(v-select, 'v-select')
     ::placeholder
       color: transparent !important
 
-
-  &.v-text-field--solo
-    .v-select__selections
-      padding: 4px 0
-
   &.v-text-field--box,
   &.v-text-field--outline
     &:not(.v-text-field--single-line)
@@ -77,6 +72,23 @@ theme(v-select, 'v-select')
   &.v-select--chips
     input
       margin: 0
+
+    .v-select__selections
+      min-height: 42px
+
+    &.v-select--chips--small
+      .v-select__selections
+        min-height: 32px
+
+    &:not(.v-text-field--single-line)
+      &.v-text-field--box,
+      &.v-text-field--enclosed
+        .v-select__selections
+          min-height: 68px
+
+        &.v-select--chips--small
+          .v-select__selections
+            min-height: 56px
 
   &__selections
     align-items: center

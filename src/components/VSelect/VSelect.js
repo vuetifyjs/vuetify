@@ -123,7 +123,8 @@ export default {
     classes () {
       return Object.assign({}, VTextField.computed.classes.call(this), {
         'v-select': true,
-        'v-select--chips': this.chips,
+        'v-select--chips': this.hasChips,
+        'v-select--chips--small': this.smallChips,
         'v-select--is-menu-active': this.isMenuActive
       })
     },
@@ -168,8 +169,11 @@ export default {
     dynamicHeight () {
       return 'auto'
     },
+    hasChips () {
+      return this.chips || this.smallChips
+    },
     hasSlot () {
-      return Boolean(this.chips || this.$slots.item)
+      return Boolean(this.hasChips || this.$slots.item)
     },
     isDirty () {
       return this.selectedItems.length > 0
@@ -448,7 +452,7 @@ export default {
       let genSelection
       if (this.$scopedSlots.selection) {
         genSelection = this.genSlotSelection
-      } else if (this.chips) {
+      } else if (this.hasChips) {
         genSelection = this.genChipSelection
       } else {
         genSelection = this.genCommaSelection

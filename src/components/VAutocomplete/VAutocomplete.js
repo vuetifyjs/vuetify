@@ -401,7 +401,7 @@ export default {
     updateCombobox () {
       // When using chips and search is dirty
       // avoid updating input
-      if (this.chips && !this.searchIsDirty) return
+      if (this.hasChips && !this.searchIsDirty) return
 
       // The internal search is not matching
       // the initial value, update the input
@@ -409,7 +409,7 @@ export default {
 
       // Reset search if using chips
       // to avoid a double input
-      if (this.chips) this.internalSearch = undefined
+      if (this.hasChips) this.internalSearch = undefined
     },
     updateSelf () {
       if (this.tags) this.updateTags()
