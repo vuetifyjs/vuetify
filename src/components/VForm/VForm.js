@@ -54,7 +54,7 @@ export default {
           // Only watch if we're not already doing it
           if (this.errorBag.hasOwnProperty(input._uid)) return
 
-          watchers.input = watcher(input)
+          watchers.valid = watcher(input)
         })
       } else {
         watchers.valid = watcher(input)
