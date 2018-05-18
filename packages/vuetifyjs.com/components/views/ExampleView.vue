@@ -169,7 +169,7 @@
           scopedSlots: [],
           params: [],
           events: [],
-          funtions: [],
+          functions: [],
           functional: [],
           options: []
         }
