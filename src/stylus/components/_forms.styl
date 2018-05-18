@@ -1,9 +1,22 @@
+@import '../bootstrap'
+
 .v-form
   > .container
-    > .layout
-      flex-wrap: wrap
-      margin-bottom: 0
-      margin-top: 0
+    padding: $grid-gutters.xl
 
-      > .flex
-        padding: 0 16px
+    .layout
+      .flex
+        padding: ($grid-gutters.xl / 2)
+
+    .layout:only-child
+      margin: -($grid-gutters.xl / 2)
+
+    .layout:not(:only-child)
+      margin: auto -($grid-gutters.xl / 2)
+
+    *:not(:only-child)
+      .layout:first-child
+        margin-top: -($grid-gutters.xl / 2)
+
+      .layout:last-child
+        margin-bottom: -($grid-gutters.xl / 2)
