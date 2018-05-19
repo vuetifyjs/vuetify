@@ -239,8 +239,10 @@ export default {
     'computedPagination.sortBy': 'resetPagination',
     'computedPagination.descending': 'resetPagination',
     expanded (items) {
+      if (!Array.isArray(items)) return
+
       this.expandedKeys = {}
-      const keys = items.map(item => item[this.itemKey])
+      const keys = items.map(item => getObjectValueByPath(item, this.itemKey))
       for (let i = 0; i < keys.length; i++) {
         this.$set(this.expandedKeys, keys[i], true)
       }
@@ -362,7 +364,7 @@ export default {
           }
           this.$set(this.expandedKeys, itemKey, value)
 
-          this.$emit('update:expanded', this.items.filter(item => this.expandedKeys[item[this.itemKey]]))
+          this.$emit('update:expanded', this.items.filter(item => this.expandedKeys[getObjectValueByPath(item, keyProp)]))
         }
       })
 
