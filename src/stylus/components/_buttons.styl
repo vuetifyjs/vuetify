@@ -8,7 +8,8 @@ button($material)
   &.v-btn--disabled
     color: $material.buttons.disabled !important
 
-    .v-icon
+    .v-icon,
+    .v-btn__loading
       color: $material.buttons.disabled !important
 
     &:not(.v-btn--icon):not(.v-btn--flat)
@@ -34,7 +35,7 @@ theme(button, "v-btn")
   outline: 0
   text-transform: $button-text-transform
   text-decoration: none
-  transition: .3s $transition.swing, color 1ms
+  transition: $primary-transition, color 1ms
   position: relative
   vertical-align: middle
   user-select: none
@@ -94,10 +95,6 @@ theme(button, "v-btn")
     font-size: $button-large-font-size
     height: $button-large-height
     padding: $button-large-padding
-
-/** Icons */
-.v-btn .v-btn__content .v-icon
-  color: inherit
 
 /** Types */
 .v-btn
