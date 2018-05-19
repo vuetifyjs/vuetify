@@ -2,7 +2,7 @@ import { test, touch } from '@/test'
 import VSwitch from '@/components/VSwitch'
 
 test('VSwitch.js', ({ mount }) => {
-  it('should set ripple data attribute based on ripple prop state', () => {
+  it('should set ripple data attribute based on ripple prop state', async () => {
     const wrapper = mount(VSwitch, {
       propsData: {
         inputValue: false,
@@ -10,11 +10,15 @@ test('VSwitch.js', ({ mount }) => {
       }
     })
 
-    const ripple = wrapper.find('.input-group--selection-controls__ripple')[0]
+    let ripple = wrapper.find('.v-input--selection-controls__ripple')
 
-    expect(ripple.element._ripple.enabled).toBe(false)
+    expect(ripple.length).toBe(0)
 
     wrapper.setProps({ ripple: true })
+
+    ripple = wrapper.first('.v-input--selection-controls__ripple')
+
+    await wrapper.vm.$nextTick()
 
     expect(ripple.element._ripple.enabled).toBe(true)
     expect(ripple.element._ripple.centered).toBe(true)
@@ -29,11 +33,11 @@ test('VSwitch.js', ({ mount }) => {
 
     const change = jest.fn()
     wrapper.vm.$on('change', change)
-    touch(wrapper.find('.input-group--selection-controls__ripple')[0]).start(0, 0).end(20, 0)
+    touch(wrapper.first('.v-input--selection-controls__ripple')).start(0, 0).end(20, 0)
     expect(change).toBeCalledWith(true)
 
     wrapper.setProps({ inputValue: true })
-    touch(wrapper.find('.input-group--selection-controls__ripple')[0]).start(0, 0).end(-20, 0)
+    touch(wrapper.first('.v-input--selection-controls__ripple')).start(0, 0).end(-20, 0)
     expect(change).toBeCalledWith(false)
   })
 
@@ -46,21 +50,11 @@ test('VSwitch.js', ({ mount }) => {
 
     const change = jest.fn()
     wrapper.vm.$on('change', change)
-    touch(wrapper.find('.input-group--selection-controls__ripple')[0]).start(0, 0).end(-20, 0)
+    touch(wrapper.first('.v-input--selection-controls__ripple')).start(0, 0).end(-20, 0)
     expect(change).not.toBeCalled()
 
     wrapper.setProps({ inputValue: true })
-    touch(wrapper.find('.input-group--selection-controls__ripple')[0]).start(0, 0).end(20, 0)
+    touch(wrapper.first('.v-input--selection-controls__ripple')).start(0, 0).end(20, 0)
     expect(change).not.toBeCalled()
-  })
-
-  it('should render component with error', async () => {
-    const wrapper = mount(VSwitch, {
-      props: {
-        errorMessages: ['error']
-      }
-    })
-
-    expect(wrapper.html()).toMatchSnapshot()
   })
 })

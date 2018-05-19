@@ -8,7 +8,8 @@ button($material)
   &.v-btn--disabled
     color: $material.buttons.disabled !important
 
-    .v-icon
+    .v-icon,
+    .v-btn__loading
       color: $material.buttons.disabled !important
 
     &:not(.v-btn--icon):not(.v-btn--flat)
@@ -34,7 +35,7 @@ theme(button, "v-btn")
   outline: 0
   text-transform: $button-text-transform
   text-decoration: none
-  transition: .3s $transition.swing, color 1ms
+  transition: $primary-transition, color 1ms
   position: relative
   vertical-align: middle
   user-select: none
@@ -42,7 +43,7 @@ theme(button, "v-btn")
 
 /** Psuedo */
 .v-btn
-  &__content:before
+  &:before
     border-radius: inherit
     color: inherit
     content: ''
@@ -54,28 +55,16 @@ theme(button, "v-btn")
     transition: $primary-transition
     width: 100%
 
-/** Sizes */
-.v-btn
-  &--small
-    font-size: $button-small-font-size
-    height: $button-small-height
-
-    .v-btn__content
-      padding: $button-small-padding
-
-  &--large
-    font-size: $button-large-font-size
-    height: $button-large-height
-
-    .v-btn__content
-      padding: $button-large-padding
-
 /** Content */
 .v-btn
+  padding: $button-padding
+
   &--active,
   &:hover,
   &:focus
-    .v-btn__content:before
+    position: relative
+
+    &:before
       background-color: currentColor
 
   &__content
@@ -87,14 +76,25 @@ theme(button, "v-btn")
     flex: 1 0 auto
     justify-content: center
     margin: 0 auto
-    padding: $button-padding
+    // Fixes bug where IE11 moves
+    // button content when clicked
+    // https://stackoverflow.com/questions/10305658/prevent-button-from-shifting-during-click-in-ie
+    position: relative
     transition: $primary-transition
     white-space: nowrap
     width: inherit
 
-/** Icons */
-.v-btn .v-btn__content .v-icon
-  color: inherit
+/** Sizes */
+.v-btn
+  &--small
+    font-size: $button-small-font-size
+    height: $button-small-height
+    padding: $button-small-padding
+
+  &--large
+    font-size: $button-large-font-size
+    height: $button-large-height
+    padding: $button-large-padding
 
 /** Types */
 .v-btn
@@ -108,16 +108,6 @@ theme(button, "v-btn")
 
     &:active
       elevation(8)
-
-    // Fixes bug where IE11 moves
-    // button content when clicked
-    // https://stackoverflow.com/questions/10305658/prevent-button-from-shifting-during-click-in-ie
-    &:active,
-    &:focus
-      .v-btn__content
-        position: relative
-        top: 0
-        left: 0
 
   &--icon
     background: transparent
@@ -133,7 +123,7 @@ theme(button, "v-btn")
     &.v-btn--large
       width: $button-large-height
 
-    .v-btn__content:before
+    &:before
       border-radius: 50%
 
   &--floating
@@ -156,7 +146,6 @@ theme(button, "v-btn")
     .v-btn__content
       flex: 1 1 auto
       margin: 0
-      padding: 0
 
     &:after
       border-radius: 50%
@@ -270,8 +259,7 @@ theme(button, "v-btn")
     pointer-events: none
 
 .v-btn--icon
-  .v-btn__content
-    padding: 0
+  padding: 0
 
 
 /** Loader */

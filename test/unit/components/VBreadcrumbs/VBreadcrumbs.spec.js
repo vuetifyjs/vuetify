@@ -59,4 +59,42 @@ test('VBreadcrumbs.js', ({ mount, compileToFunctions }) => {
     wrapper.setProps({ justifyCenter: false, justifyEnd: true })
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should not create dividers for non-items', () => {
+    const { render } = compileToFunctions(`
+      <v-breadcrumbs>
+        <span></span>
+        <v-breadcrumbs-item/>
+        <span></span>
+        <v-breadcrumbs-item/>
+      </v-breadcrumbs>
+    `)
+    const component = Vue.component('test', {
+      components: {
+        VBreadcrumbs, VBreadcrumbsItem
+      },
+      render
+    })
+    const wrapper = mount(component)
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  // TODO: this always passes in jest, needs to be e2e
+  it.skip('should remove dividers when items change', async () => {
+    const component = Vue.component('test', {
+      data: () => ({ items: 3 }),
+      render (h) {
+        return h(VBreadcrumbs, Array.from(Array(this.items), (_, i) => (
+          h(VBreadcrumbsItem, { key: i }, [i])
+        )))
+      }
+    })
+
+    const wrapper = mount(component)
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setData({ items: 1 })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

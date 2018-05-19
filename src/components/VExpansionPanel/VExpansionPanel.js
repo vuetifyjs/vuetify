@@ -10,19 +10,18 @@ export default {
 
   provide () {
     return {
-      panelClick: this.panelClick,
-      focusable: this.focusable
+      expansionPanel: this
     }
   },
 
-  data () {
-    return {
-      items: [],
-      open: []
-    }
-  },
+  data: () => ({
+    items: [],
+    open: []
+  }),
 
   props: {
+    disabled: Boolean,
+    readonly: Boolean,
     expand: Boolean,
     focusable: Boolean,
     inset: Boolean,
@@ -33,10 +32,37 @@ export default {
     }
   },
 
+  computed: {
+    classes () {
+      return {
+        'v-expansion-panel--focusable': this.focusable,
+        'v-expansion-panel--popout': this.popout,
+        'v-expansion-panel--inset': this.inset,
+        ...this.themeClasses
+      }
+    }
+  },
+
   watch: {
-    expand (v) {
-      this.open = Array(this.items.length).fill(false)
-      this.$emit('input', v ? this.open : null)
+    expand (val) {
+      let openIndex
+      if (!val) {
+        // Close all panels unless only one is open
+        const openCount = this.open.reduce((acc, val) => acc + val, 0)
+        const open = Array(this.items.length).fill(false)
+
+        if (openCount === 1) {
+          openIndex = this.open.indexOf(true)
+        }
+
+        if (openIndex > -1) {
+          open[openIndex] = true
+        }
+
+        this.open = open
+      }
+
+      this.$emit('input', val ? this.open : (openIndex > -1 ? openIndex : null))
     },
     value (v) {
       this.updateFromValue(v)
@@ -93,12 +119,7 @@ export default {
   render (h) {
     return h('ul', {
       staticClass: 'v-expansion-panel',
-      'class': {
-        'v-expansion-panel--focusable': this.focusable,
-        'v-expansion-panel--popout': this.popout,
-        'v-expansion-panel--inset': this.inset,
-        ...this.themeClasses
-      }
+      class: this.classes
     }, this.$slots.default)
   }
 }

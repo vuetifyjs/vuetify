@@ -39,6 +39,9 @@ export default {
       type: Array,
       default: () => []
     },
+    headersLength: {
+      type: Number
+    },
     headerText: {
       type: String,
       default: 'text'
@@ -67,7 +70,7 @@ export default {
   computed: {
     classes () {
       return {
-        'v-datatable table': true,
+        'v-datatable v-table': true,
         'v-datatable--select-all': this.selectAll !== false,
         'theme--dark': this.dark,
         'theme--light': this.light
@@ -77,7 +80,7 @@ export default {
       return this.filteredItemsImpl(this.headers)
     },
     headerColumns () {
-      return this.headers.length + (this.selectAll !== false)
+      return this.headersLength || this.headers.length + (this.selectAll !== false)
     },
     minColumnsWidth () {
       if (this.$el === undefined) {

@@ -38,7 +38,7 @@ export default {
   computed: {
     listClasses () {
       return this.disabled
-        ? 'text--disabled'
+        ? 'v-list--disabled'
         : this.color
           ? this.addTextColorClassChecks()
           : this.defaultColor

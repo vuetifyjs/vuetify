@@ -169,7 +169,7 @@ export default {
       return this.selectAll !== undefined && this.selectAll !== false
     },
     itemsLength () {
-      if (this.search) return this.searchLength
+      if (this.hasSearch) return this.searchLength
       return this.totalItems || this.items.length
     },
     indeterminate () {
@@ -205,18 +205,24 @@ export default {
     selected () {
       const selected = {}
       for (let index = 0; index < this.value.length; index++) {
-        selected[this.value[index][this.itemKey]] = true
+        const key = getObjectValueByPath(this.value[index], this.itemKey)
+        selected[key] = true
       }
       return selected
+    },
+    hasSearch () {
+      return this.search != null
     }
   },
 
   watch: {
-    itemsLength (totalItems) {
-      this.updatePagination({ page: 1, totalItems })
+    search () {
+      this.$nextTick(() => {
+        this.updatePagination({ page: 1, totalItems: this.itemsLength })
+      })
     },
-    'computedPagination.sortBy': function () { this.updatePagination({ page: 1 }) },
-    'computedPagination.descending': function () { this.updatePagination({ page: 1 }) }
+    'computedPagination.sortBy': 'resetPagination',
+    'computedPagination.descending': 'resetPagination'
   },
 
   methods: {
@@ -245,19 +251,17 @@ export default {
       }
     },
     isSelected (item) {
-      return this.selected[item[this.itemKey]]
+      return this.selected[getObjectValueByPath(item, this.itemKey)]
     },
     isExpanded (item) {
-      return this.expanded[item[this.itemKey]]
+      return this.expanded[getObjectValueByPath(item, this.itemKey)]
     },
     filteredItemsImpl (...additionalFilterArgs) {
       if (this.totalItems) return this.items
 
       let items = this.items.slice()
-      const hasSearch = typeof this.search !== 'undefined' &&
-        this.search !== null
 
-      if (hasSearch) {
+      if (this.hasSearch) {
         items = this.customFilter(items, this.search, this.filter, ...additionalFilterArgs)
         this.searchLength = items.length
       }
@@ -272,6 +276,10 @@ export default {
         !this.hasPagination
         ? items
         : items.slice(this.pageStart, this.pageStop)
+    },
+    resetPagination () {
+      this.computedPagination.page !== 1 &&
+        this.updatePagination({ page: 1 })
     },
     sort (index) {
       const { sortBy, descending } = this.computedPagination
@@ -290,20 +298,22 @@ export default {
     toggle (value) {
       const selected = Object.assign({}, this.selected)
       for (let index = 0; index < this.filteredItems.length; index++) {
-        selected[this.filteredItems[index][this.itemKey]] = value
+        const key = getObjectValueByPath(this.filteredItems[index], this.itemKey)
+        selected[key] = value
       }
 
-      this.$emit('input', this.items.filter(i => (
-        selected[i[this.itemKey]]))
-      )
+      this.$emit('input', this.items.filter(i => {
+        const key = getObjectValueByPath(i, this.itemKey)
+        return selected[key]
+      }))
     },
     createProps (item, index) {
       const props = { item, index }
       const keyProp = this.itemKey
-      const itemKey = item[keyProp]
+      const itemKey = getObjectValueByPath(item, keyProp)
 
       Object.defineProperty(props, 'selected', {
-        get: () => this.selected[item[this.itemKey]],
+        get: () => this.selected[itemKey],
         set: value => {
           if (itemKey == null) {
             consoleWarn(`"${keyProp}" attribute must be defined for item`, this)
@@ -311,13 +321,13 @@ export default {
 
           let selected = this.value.slice()
           if (value) selected.push(item)
-          else selected = selected.filter(i => i[keyProp] !== itemKey)
+          else selected = selected.filter(i => getObjectValueByPath(i, keyProp) !== itemKey)
           this.$emit('input', selected)
         }
       })
 
       Object.defineProperty(props, 'expanded', {
-        get: () => this.expanded[item[this.itemKey]],
+        get: () => this.expanded[itemKey],
         set: value => {
           if (itemKey == null) {
             consoleWarn(`"${keyProp}" attribute must be defined for item`, this)

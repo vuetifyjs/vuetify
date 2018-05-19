@@ -1,133 +1,104 @@
+// Styles
+import '../../stylus/components/_radios.styl'
+
 // Components
-import { VFadeTransition } from '../transitions'
 import VIcon from '../VIcon'
+import VLabel from '../VLabel'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
 import Rippleable from '../../mixins/rippleable'
-import TabFocusable from '../../mixins/tab-focusable'
 import Themeable from '../../mixins/themeable'
 import {
   inject as RegistrableInject
 } from '../../mixins/registrable'
+
+// Utils
+import { keyCodes } from '../../util/helpers'
 
 export default {
   name: 'v-radio',
 
   inheritAttrs: false,
 
-  inject: ['isMandatory', 'name'],
+  inject: {
+    name: {
+      default: false
+    },
+    isMandatory: {
+      default: false
+    },
+    validationState: {
+      default: false
+    }
+  },
 
   mixins: [
     Colorable,
     Rippleable,
     RegistrableInject('radio', 'v-radio', 'v-radio-group'),
-    TabFocusable,
     Themeable
   ],
 
   data: () => ({
-    defaultColor: 'accent',
     isActive: false,
+    isFocused: false,
     parentError: false
   }),
 
   props: {
+    color: {
+      type: [Boolean, String],
+      default: 'accent'
+    },
     disabled: Boolean,
-    value: null,
-    label: String
+    label: String,
+    onIcon: {
+      type: String,
+      default: '$vuetify.icons.radioOn'
+    },
+    offIcon: {
+      type: String,
+      default: '$vuetify.icons.radioOff'
+    },
+    readonly: Boolean,
+    value: null
   },
 
   computed: {
     classes () {
       const classes = {
-        'input-group': true,
-        'input-group--active': this.isActive,
-        'input-group--disabled': this.disabled,
-        'input-group--selection-controls': true,
-        'input-group--tab-focused': this.tabFocused,
-        'radio': true,
+        'v-radio--is-disabled': this.isDisabled,
+        'v-radio--is-focused': this.isFocused,
         'theme--dark': this.dark,
         'theme--light': this.light
       }
 
-      if (!this.parentError) {
+      if (!this.parentError && this.isActive) {
         return this.addTextColorClassChecks(classes)
       }
 
       return classes
     },
-    icon () {
-      return this.isActive ? '$vuetify.icons.radioOn' : '$vuetify.icons.radioOff'
-    }
-  },
-
-  methods: {
-    genInput (radio) {
-      const value = ['string', 'number'].includes(typeof this.value)
-        ? this.value
-        : JSON.stringify(this.value)
-      const input = this.$createElement('input', {
-        ref: 'input',
-        style: {
-          display: 'none'
-        },
-        attrs: Object.assign({
-          name: this.name && this.name(),
-          id: this.id,
-          type: 'radio',
-          value
-        }, this.$attrs)
-      }, [value])
-
-      radio.push(input)
-
-      return this.$createElement('div', {
-        class: 'input-group__input'
-      }, radio)
+    classesSelectable () {
+      return this.addTextColorClassChecks(
+        {},
+        this.isActive ? this.color : this.validationStateProxy
+      )
     },
-    genWrapper (radio) {
-      const children = []
-
-      children.push(this.genLabel())
-      children.push(this.genInput(radio))
-
-      return this.$createElement('div', {
-        class: this.classes,
-        attrs: {
-          role: 'radio',
-          'aria-checked': this.isActive ? 'true' : 'false',
-          'aria-label': this.label
-        },
-        on: {
-          keydown: e => {
-            if ([13, 32].includes(e.keyCode)) {
-              e.preventDefault()
-              this.toggle()
-            }
-          },
-          blur: e => {
-            this.$emit('blur', e)
-            this.tabFocused = false
-          }
-        }
-      }, children)
+    computedIcon () {
+      return this.isActive
+        ? this.onIcon
+        : this.offIcon
     },
-    genLabel () {
-      return this.$createElement('label', {
-        on: {
-          click: this.toggle
-        }
-      }, this.$slots.label || this.label)
+    hasState () {
+      return this.isActive || !!this.validationStateProxy
     },
-    toggle () {
-      const mandatory = !!this.isMandatory && this.isMandatory()
-
-      if (!this.disabled && (!this.isActive || !mandatory)) {
-        this.$refs.input.checked = true
-        this.isActive = true
-        this.$emit('change', this.value)
-      }
+    isDisabled () {
+      return this.disabled || this.readonly
+    },
+    validationStateProxy () {
+      return this.validationState && this.validationState()
     }
   },
 
@@ -139,22 +110,81 @@ export default {
     this.radio.unregister(this)
   },
 
-  render (h) {
-    const transition = h(VFadeTransition, {}, [
-      h(VIcon, {
-        staticClass: 'v-icon--selection-control',
-        'class': {
-          'icon--radio': this.isActive
+  methods: {
+    genInput (type, attrs) {
+      return this.$createElement('input', {
+        attrs: Object.assign({}, attrs, {
+          'aria-label': this.label,
+          name: this.name && this.name(),
+          role: type,
+          type,
+          checked: this.isActive
+        }),
+        on: {
+          blur: this.onBlur,
+          change: this.onChange,
+          focus: this.onFocus,
+          keydown: e => {
+            if ([keyCodes.enter, keyCodes.space].includes(e.keyCode)) {
+              e.preventDefault()
+              this.onChange()
+            }
+          }
         },
-        key: this.icon,
-        on: Object.assign({
-          click: this.toggle
-        }, this.$listeners)
-      }, this.icon)
+        ref: 'input'
+      })
+    },
+    genLabel () {
+      return this.$createElement(VLabel, {
+        on: { click: this.onChange },
+        attrs: {
+          for: this.id
+        },
+        props: {
+          color: this.validationStateProxy,
+          focused: this.hasState
+        }
+      }, this.$slots.label || this.label)
+    },
+    genRadio () {
+      return this.$createElement('div', {
+        staticClass: 'v-input--selection-controls__input'
+      }, [
+        this.genInput('radio', {
+          'aria-checked': this.isActive.toString(),
+          ...this.$attrs
+        }),
+        this.genRipple({
+          'class': this.classesSelectable
+        }),
+        this.$createElement(VIcon, {
+          'class': this.classesSelectable
+        }, this.computedIcon)
+      ])
+    },
+    onFocus () {
+      this.isFocused = true
+    },
+    onBlur (e) {
+      this.isFocused = false
+      this.$emit('blur', e)
+    },
+    onChange () {
+      const mandatory = !!this.isMandatory && this.isMandatory()
+
+      if (!this.disabled && (!this.isActive || !mandatory)) {
+        this.$emit('change', this.value)
+      }
+    }
+  },
+
+  render (h) {
+    return h('div', {
+      staticClass: 'v-radio',
+      class: this.classes
+    }, [
+      this.genRadio(),
+      this.genLabel()
     ])
-
-    const ripple = this.ripple ? this.genRipple() : null
-
-    return this.genWrapper([transition, ripple])
   }
 }

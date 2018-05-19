@@ -17,6 +17,10 @@ export default function Grid (name) {
 
       if (data.attrs) {
         const classes = Object.keys(data.attrs).filter(key => {
+          // TODO: Remove once resolved
+          // https://github.com/vuejs/vue/issues/7841
+          if (key === 'slot') return false
+
           const value = data.attrs[key]
           return value || typeof value === 'string'
         })

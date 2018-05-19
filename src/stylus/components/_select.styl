@@ -1,177 +1,126 @@
 @import '../bootstrap'
 @import '../theme'
 
-selects($material)
-  &.input-group
-    &--editable,
-    &--overflow,
-    &--segmented
-      .input-group__input:hover
-        background: $material.cards
+v-select($material)
+  // Needs an explicit color to override
+  // higher level color
+  &__selections
+    color: $material.text.primary
 
-      &.input-group--focused .input-group__input
-        background: $material.cards
+  &.v-input--is-disabled
+    .v-select__selections
+      color: $material.text.disabled
 
-theme(selects, "input-group--select")
+  .v-chip--disabled,
+  .v-select__selection--disabled
+    color: $material.text.disabled
 
-.input-group--select
-  // TODO: revisit this
-  .input-group--select__autocomplete
-    display: block
-    height: 0px
+  &.v-text-field--solo-inverted.v-input--is-focused
+    .v-select__selections
+      color: $material.inputs.solo-inverted-focused-text
 
-    &--index
-      background-color: transparent !important
+theme(v-select, 'v-select')
 
-  .input-group__append-icon
-    transition: .3s $transition.linear-out-slow-in
+.v-select
+  position: relative // For **attach** prop
+  // This is here to avoid making it transparent
+  // then visible when autocomplete
+  &:not(.v-autocomplete)
+    input
+      // IE11 refuses to hide blinking input
+      // because of this requires a min-height
+      font-size: 0
+      min-height: 32px
 
-    &.input-group__icon-clearable
-      transition: none
-
-  &:not(.input-group--dirty),
-  &.input-group--focused
-    .input-group--select__autocomplete
-      padding-bottom: 1px
-      height: 30px
-
-  &.input-group--focused
-    .input-group--select__autocomplete
-      display: inline-block
-      opacity: 1
-
-    &.input-group--select--selecting-index
-      .input-group--select__autocomplete
-        opacity: 0
-
-    &.input-group--open
-      .input-group__append-icon:not(.input-group__icon-clearable)
-        transform: rotate(-180deg)
-
-  .input-group__input
-    cursor: pointer
-
-  &.input-group--disabled
-    cursor: default
-    pointer-events: none
-
-.input-group--select
-  .input-group__selections
-    align-items: center
-    display: flex
-    flex-wrap: wrap
-    position: relative
+  .v-menu
+    height: 100%
+    flex: 1 1 auto
     width: 100%
 
-    &__comma
-      display: inline-flex
-      font-size: $input-font-size
-      padding: 3px 4px 3px 0
-
-      &--active
-        color: inherit
-
-  .menu
-    display: inline
+  .v-chip
+    flex: 0 1 auto
 
   .fade-transition-leave-active
     position: absolute
     left: 0
 
-  &.input-group--autocomplete.input-group--search-focused
-    .input-group__selections__comma
-      display: none
+  &.v-input--is-dirty
+    ::placeholder
+      color: transparent !important
 
-.input-group--autocomplete
-  .input-group__selections
-    cursor: text
+  &.v-text-field--box,
+  &.v-text-field--outline
+    &:not(.v-text-field--single-line)
+      &.v-input--is-dirty,
+      &.v-input--is-focused
+        .v-select__selections
+          padding-top: 24px
 
-
-.input-group
-  &.input-group--chips
-    .input-group__input
-      padding-top: 0
-      padding-bottom: 0
-
-  &.input-group--overflow,
-  &.input-group--editable,
-  &.input-group--segmented
-    padding: 0
-
-    .input-group__append-icon
-      padding: 0
-
-    .input-group__selections,
+  // For specificity, hide caret
+  &.v-text-field
     input
-      height: 48px
+      flex: 1 1 0
+      margin-top: 0
+      min-width: 0
+      pointer-events: none
+      position: relative
 
-    // Handle weird transition issue
-    .input-group__selections__comma, input
-      top: 0
-      left: 0
-      padding-left: 16px
+  &.v-select--is-menu-active
+    .v-input__icon--append .v-icon
+      transform: rotate(180deg)
 
-    .input-group__selections
-      width: calc(100% - 55px)
+  &.v-select--chips
+    input
+      margin: 0
 
-      .v-btn
-        border-radius: 0
-        margin: 0
-        height: 48px
-        width: 100%
+    .v-select__selections
+      min-height: 42px
 
-        .v-btn__content
-          justify-content: start
+    &.v-select--chips--small
+      .v-select__selections
+        min-height: 32px
 
-    .input-group__input
-      transition: .3s $transition.swing
+    &:not(.v-text-field--single-line)
+      &.v-text-field--box,
+      &.v-text-field--enclosed
+        .v-select__selections
+          min-height: 68px
 
-    &.input-group--focused
-      .input-group__input
-        elevation(8)
+        &.v-select--chips--small
+          .v-select__selections
+            min-height: 56px
 
-    label
-      left: 16px !important
-      top: 9px !important
+  &__selections
+    align-items: center
+    display: flex
+    flex: 1 1 auto
+    flex-wrap: wrap
+    line-height: 18px
 
-    .input-group__details
-      &:after
-        display: none
+  &__selection
+    &--comma
+      align-items: center
+      display: inline-flex
+      margin: 7px 4px 7px 0
 
-    .input-group__input
-      padding: 0
+  &__slot
+    align-items: center
+    display: flex
+    height: 100%
+    width: 100%
 
-      &:before
-        content: ''
-        position: absolute
-        left: 0
-        width: 100%
-        height: 1px
-        top: 0
-        transition: .3s $transition.swing
+  &:not(.v-text-field--single-line)
+    .v-select__slot
+      // If an input is a direct child
+      // there is no selections div
+      // and we must move input to
+      // the end of the container
+      > input
+        align-self: flex-end
 
-    .input-group__append-icon
-      width: 55px
-
-  &--segmented .input-group__input,
-  &--editable .input-group__input:hover,
-  &.input-group--focused.input-group--editable .input-group__input
-    &:after
-      background-color: rgba(0,0,0,0.12)
-      content: ''
-      position: absolute
-      right: 55px
-      height: 48px
-      top: 0
-      width: 1px
-
-.menu__content--select
-  // // IE11 Fix for overflow
-  .input-group--selection-controls__ripple
-    display: none
-
-.menu__content--autocomplete
-    border-radius: 0
-
-    > .card
-      border-radius: 0
+.v-select-list
+  .v-list__tile__action
+    .v-input--selection-controls
+      .v-input__slot
+        &:after, &:before
+          display: none

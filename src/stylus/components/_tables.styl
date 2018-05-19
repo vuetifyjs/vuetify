@@ -2,7 +2,7 @@
 @import '../theme'
 
 /* Theme */
-table($material)
+v-table($material)
   background-color: $material.cards
   color: $material.text.primary
 
@@ -29,9 +29,9 @@ table($material)
     tr
       border-top: 1px solid rgba($material.fg-color, $material.divider-percent)
 
-theme(table, "table")
+theme(v-table, "v-table")
 
-.table
+.v-table
   &__overflow
     width: 100%
     overflow-x: auto
@@ -41,7 +41,7 @@ theme(table, "table")
   top: 0px
   position: sticky
 
-table.table
+table.v-table
   word-break: break-all
   word-wrap: break-word
   table-layout: fixed

@@ -33,7 +33,7 @@ export default function (expandedParentClass = '') {
     },
 
     afterLeave (el) {
-      expandedParentClass && el._parent.classList.remove(expandedParentClass)
+      expandedParentClass && el._parent && el._parent.classList.remove(expandedParentClass)
     }
   }
 }
