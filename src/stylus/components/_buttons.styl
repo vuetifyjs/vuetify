@@ -75,6 +75,10 @@ theme(button, "v-btn")
     flex: 1 0 auto
     justify-content: center
     margin: 0 auto
+    // Fixes bug where IE11 moves
+    // button content when clicked
+    // https://stackoverflow.com/questions/10305658/prevent-button-from-shifting-during-click-in-ie
+    position: relative
     transition: $primary-transition
     white-space: nowrap
     width: inherit
@@ -107,16 +111,6 @@ theme(button, "v-btn")
 
     &:active
       elevation(8)
-
-    // Fixes bug where IE11 moves
-    // button content when clicked
-    // https://stackoverflow.com/questions/10305658/prevent-button-from-shifting-during-click-in-ie
-    &:active,
-    &:focus
-      .v-btn__content
-        position: relative
-        top: 0
-        left: 0
 
   &--icon
     background: transparent
