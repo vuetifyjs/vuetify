@@ -153,7 +153,9 @@ export default {
       return actualColumnsWidth
     },
     initColumnWidth () {
-      this.columnsWidth = this.calculateColumnsWidth()
+      if (!this.headersLength || (this.headers && this.headers.length === this.headersLength)) {
+        this.columnsWidth = this.calculateColumnsWidth()
+      }
     },
     onResize () {
       this.initColumnWidth()
