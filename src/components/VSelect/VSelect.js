@@ -381,8 +381,8 @@ export default {
       const input = VTextField.methods.genInput.call(this)
 
       input.data.domProps.value = null
-      input.data.attrs.readonly = true
-      input.data.attrs['aria-readonly'] = String(this.readonly)
+      input.data.attrs.disabled = true
+      input.data.attrs['aria-disabled'] = String(this.disabled)
 
       return input
     },
@@ -516,8 +516,12 @@ export default {
     onClick () {
       if (this.isDisabled) return
 
-      this.onFocus()
       this.isMenuActive = true
+
+      if (!this.isFocused) {
+        this.isFocused = true
+        this.$emit('focus')
+      }
     },
     onEnterDown () {
       this.onBlur()

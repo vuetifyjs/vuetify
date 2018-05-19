@@ -262,7 +262,7 @@ export default {
           name: this.name,
           role: 'slider',
           tabindex: this.disabled ? -1 : undefined,
-          type: 'slider',
+          type: 'range',
           value: this.internalValue,
           readonly: true,
           'aria-readonly': String(this.readonly)

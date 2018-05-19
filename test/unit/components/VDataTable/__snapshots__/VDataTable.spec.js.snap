@@ -84,11 +84,11 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
                     >
                     </label>
                     <div class="v-select__selections">
-                      <input readonly="readonly"
+                      <input disabled="disabled"
                              tabindex="0"
                              type="text"
                              autocomplete="on"
-                             aria-readonly="false"
+                             aria-disabled="false"
                       >
                     </div>
                     <div class="v-input__append-inner">
@@ -276,11 +276,11 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
                     >
                     </label>
                     <div class="v-select__selections">
-                      <input readonly="readonly"
+                      <input disabled="disabled"
                              tabindex="0"
                              type="text"
                              autocomplete="on"
-                             aria-readonly="false"
+                             aria-disabled="false"
                       >
                     </div>
                     <div class="v-input__append-inner">
@@ -470,11 +470,11 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
                     >
                     </label>
                     <div class="v-select__selections">
-                      <input readonly="readonly"
+                      <input disabled="disabled"
                              tabindex="0"
                              type="text"
                              autocomplete="on"
-                             aria-readonly="false"
+                             aria-disabled="false"
                       >
                     </div>
                     <div class="v-input__append-inner">
