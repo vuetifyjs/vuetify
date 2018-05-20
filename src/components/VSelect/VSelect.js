@@ -143,6 +143,7 @@ export default {
 
           this.isMenuActive = false
           this.isFocused = false
+          this.editingIndex = -1
           this.selectedIndex = -1
         },
         args: {
@@ -511,6 +512,7 @@ export default {
         this.isMenuActive = true
       }
 
+      this.editingIndex = -1
       this.selectedIndex = -1
     },
     onClick () {
