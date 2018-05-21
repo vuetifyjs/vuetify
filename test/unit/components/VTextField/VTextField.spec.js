@@ -73,12 +73,8 @@ test('VTextField.js', ({ mount }) => {
     expect(wrapper.data().valid).toEqual(false)
   })
 
-  // Changed for v1.1 - shouldValidate is now computed
-  // and must be in an error state
   it('should start validating on input', async () => {
-    const wrapper = mount(VTextField, {
-      propsData: { error: true }
-    })
+    const wrapper = mount(VTextField)
 
     expect(wrapper.vm.shouldValidate).toEqual(false)
     wrapper.setProps({ value: 'asd' })
@@ -183,12 +179,8 @@ test('VTextField.js', ({ mount }) => {
     expect(wrapper.vm.internalValue).toBe('foo')
   })
 
-  // Changed for v1.1 - shouldValidate is now computed
-  // and must be in an error state
   it('should start validating on blur', async () => {
-    const wrapper = mount(VTextField, {
-      propsData: { error: true }
-    })
+    const wrapper = mount(VTextField)
 
     const input = wrapper.first('input')
     expect(wrapper.vm.shouldValidate).toEqual(false)

@@ -103,6 +103,7 @@ export default {
       }
 
       this.internalChange = true
+      this.$emit('keydown', e)
     }
   }
 }

@@ -35,7 +35,7 @@ export default {
       animate: false,
       animateTimeout: null,
       isDependent: false,
-      stackClass: 'v-dialog__content__active',
+      stackClass: 'v-dialog__content--active',
       stackMinZIndex: 200
     }
   },

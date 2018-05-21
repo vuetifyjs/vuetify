@@ -135,6 +135,9 @@ export default {
         transformOrigin: this.origin,
         zIndex: this.zIndex || this.activeZIndex
       }
+    },
+    tileHeight () {
+      return this.dense ? 36 : 48
     }
   },
 

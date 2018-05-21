@@ -238,7 +238,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     }
   })
 
-  it('should select an item !multiple', () => {
+  it('should select an item !multiple', async () => {
     const wrapper = mount(VSelect)
 
     const input = jest.fn()
@@ -250,8 +250,11 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.vm.internalValue).toBe('foo')
     expect(input).toBeCalledWith('foo')
-    expect(change).toBeCalledWith('foo')
     expect(input).toHaveBeenCalledTimes(1)
+
+    await wrapper.vm.$nextTick()
+
+    expect(change).toBeCalledWith('foo')
     expect(change).toHaveBeenCalledTimes(1)
 
     wrapper.setProps({ returnObject: true })
@@ -261,8 +264,11 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.vm.internalValue).toBe(item)
     expect(input).toBeCalledWith(item)
-    expect(change).toBeCalledWith(item)
     expect(input).toHaveBeenCalledTimes(2)
+
+    await wrapper.vm.$nextTick()
+
+    expect(change).toBeCalledWith(item)
     expect(change).toHaveBeenCalledTimes(2)
   })
 

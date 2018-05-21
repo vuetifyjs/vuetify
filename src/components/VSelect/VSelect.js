@@ -75,7 +75,6 @@ export default {
     contentClass: String,
     deletableChips: Boolean,
     dense: Boolean,
-    hideNoData: Boolean,
     hideSelected: Boolean,
     items: {
       type: Array,
@@ -117,15 +116,21 @@ export default {
   },
 
   computed: {
+    /* All items that the select has */
+    allItems () {
+      return this.filterDuplicates(this.cachedItems.concat(this.items))
+    },
     classes () {
       return Object.assign({}, VTextField.computed.classes.call(this), {
         'v-select': true,
-        'v-select--chips': this.chips,
+        'v-select--chips': this.hasChips,
+        'v-select--chips--small': this.smallChips,
         'v-select--is-menu-active': this.isMenuActive
       })
     },
+    /* Used by other components to overwrite */
     computedItems () {
-      return this.filterDuplicates(this.cachedItems.concat(this.items))
+      return this.allItems
     },
     directives () {
       return [{
@@ -138,14 +143,12 @@ export default {
 
           this.isMenuActive = false
           this.isFocused = false
+          this.editingIndex = -1
           this.selectedIndex = -1
         },
         args: {
           closeConditional: e => {
             return (
-              // Check if the menu is
-              // currently active
-              this.isMenuActive &&
               // Check if click originates
               // from within the content
               (
@@ -167,8 +170,11 @@ export default {
     dynamicHeight () {
       return 'auto'
     },
+    hasChips () {
+      return this.chips || this.smallChips
+    },
     hasSlot () {
-      return Boolean(this.chips || this.$slots.item)
+      return Boolean(this.hasChips || this.$slots.item)
     },
     isDirty () {
       return this.selectedItems.length > 0
@@ -226,7 +232,10 @@ export default {
   },
 
   watch: {
-    internalValue: 'setSelectedItems',
+    internalValue () {
+      this.$emit('change', this.internalValue)
+      this.setSelectedItems()
+    },
     isBooted () {
       this.$nextTick(() => {
         if (this.content && this.content.addEventListener) {
@@ -239,17 +248,16 @@ export default {
 
       this.isBooted = true
     },
-    items (val) {
-      if (this.cacheItems) {
-        this.cachedItems = this.filterDuplicates(this.cachedItems.concat(val))
+    items: {
+      immediate: true,
+      handler (val) {
+        if (this.cacheItems) {
+          this.cachedItems = this.filterDuplicates(this.cachedItems.concat(val))
+        }
+
+        this.setSelectedItems()
       }
-
-      this.setSelectedItems()
     }
-  },
-
-  created () {
-    this.setSelectedItems()
   },
 
   mounted () {
@@ -261,6 +269,9 @@ export default {
   },
 
   methods: {
+    activateMenu () {
+      this.isMenuActive = true
+    },
     clearableCallback () {
       this.internalValue = this.isMulti ? [] : null
       this.$emit('change', this.internalValue)
@@ -371,6 +382,8 @@ export default {
       const input = VTextField.methods.genInput.call(this)
 
       input.data.domProps.value = null
+      input.data.attrs.readonly = true
+      input.data.attrs['aria-readonly'] = String(this.readonly)
 
       return input
     },
@@ -440,7 +453,7 @@ export default {
       let genSelection
       if (this.$scopedSlots.selection) {
         genSelection = this.genSlotSelection
-      } else if (this.chips) {
+      } else if (this.hasChips) {
         genSelection = this.genChipSelection
       } else {
         genSelection = this.genCommaSelection
@@ -484,7 +497,7 @@ export default {
       return getPropertyFromItem(item, this.itemText, item)
     },
     getValue (item) {
-      return getPropertyFromItem(item, this.itemValue, item)
+      return getPropertyFromItem(item, this.itemValue, this.getText(item))
     },
     onBlur (e) {
       this.$emit('blur', e)
@@ -499,6 +512,7 @@ export default {
         this.isMenuActive = true
       }
 
+      this.editingIndex = -1
       this.selectedIndex = -1
     },
     onClick () {
@@ -507,18 +521,32 @@ export default {
       this.onFocus()
       this.isMenuActive = true
     },
+    onEnterDown () {
+      this.onBlur()
+    },
+    onEscDown (e) {
+      e.preventDefault()
+      this.isMenuActive = false
+    },
     // Detect tab and call original onBlur method
     onKeyDown (e) {
-      if (e.keyCode === keyCodes.tab) {
-        VTextField.methods.onBlur.call(this, e)
-      } else if ([
+      const keyCode = e.keyCode
+
+      // If enter, space, up, or down is pressed, open menu
+      if (!this.isMenuActive && [
         keyCodes.enter,
         keyCodes.space,
-        keyCodes.up,
-        keyCodes.down
-      ].includes(e.keyCode)) {
-        this.isMenuActive = true
-      }
+        keyCodes.up, keyCodes.down
+      ].includes(keyCode)) this.activateMenu()
+
+      // This should do something different
+      if (e.keyCode === keyCodes.enter) return this.onEnterDown()
+
+      // If escape deactivate the menu
+      if (keyCode === keyCodes.esc) return this.onEscDown(e)
+
+      // If tab - select item or close menu
+      if (keyCode === keyCodes.tab) return this.onTabDown(e)
     },
     onMouseUp (e) {
       const appendInner = this.$refs['append-inner']
@@ -557,6 +585,30 @@ export default {
         }
       }
     },
+    onTabDown (e) {
+      const menuIndex = this.getMenuIndex()
+
+      const listTile = this.$refs.menu.tiles[menuIndex]
+
+      // An item that is selected by
+      // menu-index should toggled
+      if (
+        listTile &&
+        listTile.className.indexOf('v-list__tile--highlighted') > -1 &&
+        this.isMenuActive &&
+        menuIndex > -1
+      ) {
+        e.preventDefault()
+        e.stopPropagation()
+
+        listTile.click()
+      } else {
+        // If we make it here,
+        // the user has no selected indexes
+        // and is probably tabbing out
+        VTextField.methods.onBlur.call(this, e)
+      }
+    },
     selectItem (item) {
       if (!this.isMulti) {
         this.internalValue = this.returnObject ? item : this.getValue(item)
@@ -569,27 +621,37 @@ export default {
         this.internalValue = internalValue.map(i => {
           return this.returnObject ? i : this.getValue(i)
         })
+
+        // When selecting multiple
+        // adjust menu after each
+        // selection
+        this.$nextTick(() => {
+          this.$refs.menu &&
+            this.$refs.menu.updateDimensions()
+        })
       }
-
-      this.$emit('change', this.internalValue)
-
-      this.$nextTick(() => {
-        this.$refs.menu &&
-          this.$refs.menu.updateDimensions()
-      })
     },
     setMenuIndex (index) {
       this.$refs.menu && (this.$refs.menu.listIndex = index)
     },
     setSelectedItems () {
-      const fn = !this.isMulti
-        ? i => this.valueComparator(
-          this.getValue(i),
-          this.getValue(this.internalValue)
-        )
-        : i => this.findExistingIndex(i) > -1
+      const selectedItems = []
+      const values = Array.isArray(this.internalValue)
+        ? this.internalValue
+        : [this.internalValue]
 
-      this.selectedItems = this.computedItems.filter(fn)
+      for (const value of values) {
+        const index = this.allItems.findIndex(v => this.valueComparator(
+          this.getValue(v),
+          this.getValue(value)
+        ))
+
+        if (index > -1) {
+          selectedItems.push(this.allItems[index])
+        }
+      }
+
+      this.selectedItems = selectedItems
     }
   }
 }
