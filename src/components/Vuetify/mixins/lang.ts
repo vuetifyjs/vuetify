@@ -8,14 +8,15 @@ const LANG_PREFIX = '$vuetify.lang.'
 const fallback = Symbol('Lang fallback')
 
 function getTranslation (locale: VuetifyLocale, key: string, usingFallback = false): string {
-  let translation = getObjectValueByPath(locale, key, fallback) as string | typeof fallback
+  const shortKey = key.replace(LANG_PREFIX, '')
+  let translation = getObjectValueByPath(locale, shortKey, fallback) as string | typeof fallback
 
   if (translation === fallback) {
     if (usingFallback) {
-      consoleError(`Translation key ${key} not found in fallback`)
+      consoleError(`Translation key "${shortKey}" not found in fallback`)
       translation = key
     } else {
-      consoleWarn(`Translation key ${key} not found, falling back to default`)
+      consoleWarn(`Translation key "${shortKey}" not found, falling back to default`)
       translation = getTranslation(en, key, true)
     }
   }
@@ -30,7 +31,7 @@ export default function lang (config: Options['lang'] = {}): VuetifyLanguage {
     t (key, ...params) {
       if (!key.startsWith(LANG_PREFIX)) return key
 
-      const translation = getTranslation(this.locales[this.current], key.replace(LANG_PREFIX, ''))
+      const translation = getTranslation(this.locales[this.current], key)
 
       return translation.replace(/\{(\d+)\}/g, (match: string, index: string) => {
         return String(params[+index])
