@@ -114,6 +114,15 @@ export default {
         this.genBar(h, 'long'),
         this.genBar(h, 'short')
       ])
+    },
+    genContent (h) {
+      const children = [this.$slots.default]
+
+      if (typeof children[0] !== 'undefined') {
+        return h('div', {
+          staticClass: 'progress-linear__content'
+        }, children)
+      }
     }
   },
 
@@ -142,7 +151,8 @@ export default {
       on: this.$listeners
     }, [
       background,
-      bar
+      bar,
+      this.genContent(h)
     ])
   }
 }
