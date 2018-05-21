@@ -43,6 +43,7 @@ export function filterObjectOnKeys<T, K extends keyof T> (obj: T, keys: K[]): { 
 export function filterChildren (array: VNode[], tag: string): VNode[]
 export function convertToUnit (str: string | number, unit?: string): string
 export function deepEqual (a: any, b: any): boolean
+export function isObject (obj: any): obj is object
 
 export interface KeyCodes {
   readonly enter: number

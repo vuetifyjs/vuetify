@@ -4,9 +4,7 @@ export default {
   props: {
     noDataText: {
       type: String,
-      default () {
-        return this.$vuetify.lang.t('noDataText')
-      }
+      default: '$vuetify.lang.noDataText'
     }
   }
 }

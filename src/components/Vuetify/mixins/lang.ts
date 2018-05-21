@@ -12,11 +12,11 @@ function getTranslation (locale: VuetifyLocale, key: string, usingFallback = fal
 
   if (translation === fallback) {
     if (usingFallback) {
-      translation = key
       consoleError(`Translation key ${key} not found in fallback`)
+      translation = key
     } else {
-      translation = getTranslation(locale, key, true)
       consoleWarn(`Translation key ${key} not found, falling back to default`)
+      translation = getTranslation(en, key, true)
     }
   }
 
@@ -28,6 +28,8 @@ export default function lang (config: Options['lang'] = {}): VuetifyLanguage {
     locales: Object.assign({ en }, config.locales),
     current: config.current || 'en',
     t (key, ...params) {
+      if (!key.startsWith(LANG_PREFIX)) return key
+
       const translation = getTranslation(this.locales[this.current], key.replace(LANG_PREFIX, ''))
 
       return translation.replace(/\{(\d+)\}/g, (match: string, index: string) => {

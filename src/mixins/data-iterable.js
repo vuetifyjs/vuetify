@@ -6,7 +6,7 @@ import Filterable from './filterable'
 import Themeable from './themeable'
 import Loadable from './loadable'
 
-import { getObjectValueByPath } from '../util/helpers'
+import { getObjectValueByPath, isObject } from '../util/helpers'
 import { consoleWarn } from '../util/console'
 
 /**
@@ -48,9 +48,7 @@ export default {
     mustSort: Boolean,
     noResultsText: {
       type: String,
-      default () {
-        return this.$vuetify.lang.t('dataIterator.noResultsText')
-      }
+      default: '$vuetify.lang.dataIterator.noResultsText'
     },
     nextIcon: {
       type: String,
@@ -68,7 +66,7 @@ export default {
           10,
           25,
           {
-            text: this.$vuetify.lang.t('dataIterator.rowsPerPageAll'),
+            text: '$vuetify.lang.dataIterator.rowsPerPageAll',
             value: -1
           }
         ]
@@ -76,9 +74,7 @@ export default {
     },
     rowsPerPageText: {
       type: String,
-      default () {
-        return this.$vuetify.lang.t('dataIterator.rowsPerPageText')
-      }
+      default: '$vuetify.lang.dataIterator.rowsPerPageText'
     },
     selectAll: [Boolean, String],
     search: {
@@ -166,6 +162,15 @@ export default {
       return this.hasPagination
         ? this.pagination
         : this.defaultPagination
+    },
+    computedRowsPerPageItems () {
+      return this.rowsPerPageItems.map(item => {
+        return isObject(item)
+          ? Object.assign({}, item, {
+            text: this.$vuetify.lang.t(item.text)
+          })
+          : item
+      })
     },
     hasPagination () {
       const pagination = this.pagination || {}
@@ -353,12 +358,12 @@ export default {
     },
     genItems () {
       if (!this.itemsLength && !this.items.length) {
-        const noData = this.$slots['no-data'] || this.noDataText
+        const noData = this.$slots['no-data'] || this.$vuetify.lang.t(this.noDataText)
         return [this.genEmptyItems(noData)]
       }
 
       if (!this.filteredItems.length) {
-        const noResults = this.$slots['no-results'] || this.noResultsText
+        const noResults = this.$slots['no-results'] || this.$vuetify.lang.t(this.noResultsText)
         return [this.genEmptyItems(noResults)]
       }
 
@@ -380,7 +385,7 @@ export default {
           }
         },
         attrs: {
-          'aria-label': this.$vuetify.lang.t('dataIterator.prevPage')
+          'aria-label': this.$vuetify.lang.t('$vuetify.lang.dataIterator.prevPage')
         }
       }, [this.$createElement(VIcon, this.prevIcon)])
     },
@@ -405,7 +410,7 @@ export default {
           }
         },
         attrs: {
-          'aria-label': this.$vuetify.lang.t('dataIterator.nextPage')
+          'aria-label': this.$vuetify.lang.t('$vuetify.lang.dataIterator.nextPage')
         }
       }, [this.$createElement(VIcon, this.nextIcon)])
     },
@@ -413,13 +418,13 @@ export default {
       return this.$createElement('div', {
         'class': this.actionsSelectClasses
       }, [
-        this.rowsPerPageText,
+        this.$vuetify.lang.t(this.rowsPerPageText),
         this.$createElement(VSelect, {
           attrs: {
-            'aria-label': this.rowsPerPageText
+            'aria-label': this.$vuetify.lang.t(this.rowsPerPageText)
           },
           props: {
-            items: this.rowsPerPageItems,
+            items: this.computedRowsPerPageItems,
             value: this.computedPagination.rowsPerPage,
             hideDetails: true,
             auto: true,
@@ -450,7 +455,7 @@ export default {
             pageStop: stop,
             itemsLength: this.itemsLength
           })
-          : this.$vuetify.lang.t('dataIterator.pageText', this.pageStart + 1, stop, this.itemsLength)
+          : this.$vuetify.lang.t('$vuetify.lang.dataIterator.pageText', this.pageStart + 1, stop, this.itemsLength)
       }
 
       return this.$createElement('div', {
