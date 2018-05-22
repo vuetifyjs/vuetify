@@ -68,6 +68,7 @@ export interface VuetifyIcons {
   delimiter: string
   sort: string
   expand: string
+  menu: string
   subgroup: string
   dropdown: string
   radioOn: string
