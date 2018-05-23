@@ -314,7 +314,7 @@ test('VSlider.vue', ({ mount }) => {
       propsData: { step: 0 }
     })
 
-    expect(wrapper.vm.roundValue(1.234)).toBe(1)
+    expect(wrapper.vm.roundValue(1.234)).toBe(1.234)
 
     wrapper.setProps({ step: 4 })
 
@@ -488,6 +488,7 @@ test('VSlider.vue', ({ mount }) => {
     const wrapper = mount(VSlider, {
       propsData: {
         max: 1,
+        step: 1,
         tickLabels: ['foo', 'bar']
       }
     })
