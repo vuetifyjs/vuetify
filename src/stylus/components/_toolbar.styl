@@ -55,7 +55,8 @@ theme(v-toolbar, "v-toolbar")
       margin-right: $grid-gutters.sm
 
     > .v-btn--icon,
-    > .v-menu > .v-menu__activator > .v-btn
+    > .v-menu > .v-menu__activator > .v-btn,
+    > .v-tooltip .v-btn
       margin-left: 6px
       margin-right: 6px
 
@@ -71,16 +72,18 @@ theme(v-toolbar, "v-toolbar")
     > .v-btn--icon:last-child
       margin-right: 10px
 
-    > .v-menu:last-child
-      margin-right: $grid-gutters.sm
-
-    > .v-menu:first-child
+    > .v-menu:first-child,
+    > .v-tooltip:first-child
       margin-left: $grid-gutters.sm
 
-    > *:not(.v-btn):not(.v-menu):first-child:not(:only-child)
+    > .v-menu:last-child,
+    > .v-tooltip:last-child
+      margin-right: $grid-gutters.sm
+
+    > *:not(.v-btn):not(.v-menu):not(.v-tooltip):first-child:not(:only-child)
       margin-left: $grid-gutters.lg
 
-    > *:not(.v-btn):not(.v-menu):last-child:not(:only-child)
+    > *:not(.v-btn):not(.v-menu):not(.v-tooltip):last-child:not(:only-child)
       margin-right: $grid-gutters.lg
 
   &__items
