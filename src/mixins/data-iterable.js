@@ -6,7 +6,7 @@ import Filterable from './filterable'
 import Themeable from './themeable'
 import Loadable from './loadable'
 
-import { getObjectValueByPath } from '../util/helpers'
+import { getObjectValueByPath, isObject } from '../util/helpers'
 import { consoleWarn } from '../util/console'
 
 /**
@@ -48,7 +48,7 @@ export default {
     mustSort: Boolean,
     noResultsText: {
       type: String,
-      default: 'No matching records found'
+      default: '$vuetify.lang.dataIterator.noResultsText'
     },
     nextIcon: {
       type: String,
@@ -65,13 +65,16 @@ export default {
           5,
           10,
           25,
-          { text: 'All', value: -1 }
+          {
+            text: '$vuetify.lang.dataIterator.rowsPerPageAll',
+            value: -1
+          }
         ]
       }
     },
     rowsPerPageText: {
       type: String,
-      default: 'Items per page:'
+      default: '$vuetify.lang.dataIterator.rowsPerPageText'
     },
     selectAll: [Boolean, String],
     search: {
@@ -159,6 +162,15 @@ export default {
       return this.hasPagination
         ? this.pagination
         : this.defaultPagination
+    },
+    computedRowsPerPageItems () {
+      return this.rowsPerPageItems.map(item => {
+        return isObject(item)
+          ? Object.assign({}, item, {
+            text: this.$vuetify.t(item.text)
+          })
+          : item
+      })
     },
     hasPagination () {
       const pagination = this.pagination || {}
@@ -346,12 +358,12 @@ export default {
     },
     genItems () {
       if (!this.itemsLength && !this.items.length) {
-        const noData = this.$slots['no-data'] || this.noDataText
+        const noData = this.$slots['no-data'] || this.$vuetify.t(this.noDataText)
         return [this.genEmptyItems(noData)]
       }
 
       if (!this.filteredItems.length) {
-        const noResults = this.$slots['no-results'] || this.noResultsText
+        const noResults = this.$slots['no-results'] || this.$vuetify.t(this.noResultsText)
         return [this.genEmptyItems(noResults)]
       }
 
@@ -373,7 +385,7 @@ export default {
           }
         },
         attrs: {
-          'aria-label': 'Previous page' // TODO: Localization
+          'aria-label': this.$vuetify.t('$vuetify.lang.dataIterator.prevPage')
         }
       }, [this.$createElement(VIcon, this.prevIcon)])
     },
@@ -398,7 +410,7 @@ export default {
           }
         },
         attrs: {
-          'aria-label': 'Next page' // TODO: Localization
+          'aria-label': this.$vuetify.t('$vuetify.lang.dataIterator.nextPage')
         }
       }, [this.$createElement(VIcon, this.nextIcon)])
     },
@@ -406,13 +418,13 @@ export default {
       return this.$createElement('div', {
         'class': this.actionsSelectClasses
       }, [
-        this.rowsPerPageText,
+        this.$vuetify.t(this.rowsPerPageText),
         this.$createElement(VSelect, {
           attrs: {
-            'aria-label': this.rowsPerPageText
+            'aria-label': this.$vuetify.t(this.rowsPerPageText)
           },
           props: {
-            items: this.rowsPerPageItems,
+            items: this.computedRowsPerPageItems,
             value: this.computedPagination.rowsPerPage,
             hideDetails: true,
             auto: true,
@@ -443,7 +455,7 @@ export default {
             pageStop: stop,
             itemsLength: this.itemsLength
           })
-          : `${this.pageStart + 1}-${stop} of ${this.itemsLength}`
+          : this.$vuetify.t('$vuetify.lang.dataIterator.pageText', this.pageStart + 1, stop, this.itemsLength)
       }
 
       return this.$createElement('div', {
