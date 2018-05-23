@@ -187,7 +187,9 @@ export default {
       return this.genSlot('append', 'outer', slot)
     },
     genClearIcon () {
-      const icon = !this.clearable || !this.isDirty
+      if (!this.clearable) return null
+
+      const icon = !this.isDirty
         ? false
         : 'clear'
 
@@ -268,15 +270,6 @@ export default {
         slot.push(this.$slots['append-icon'])
       } else if (this.appendIcon) {
         slot.push(this.genIcon('append'))
-      } else if (this.clearable) {
-        // Make sure the slot takes space
-        // so layout doesn't jump when
-        // dirty
-        const icon = !this.isDirty ? false : 'clear'
-
-        slot.push(this.genIcon(icon,
-          this.clearIconCb || this.clearableCallback
-        ))
       }
 
       return this.genSlot('append', 'inner', slot)
@@ -374,6 +367,8 @@ export default {
       this.internalChange = true
 
       if (e.keyCode === keyCodes.enter) this.$emit('change', this.internalValue)
+
+      this.$emit('keydown', e)
     },
     onMouseDown (e) {
       // Prevent input from being blurred

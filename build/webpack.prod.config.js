@@ -39,7 +39,7 @@ module.exports = merge(baseWebpackConfig, {
     rules: [
       {
         test: /\.[jt]s$/,
-        loaders: ['babel-loader', 'ts-loader', 'eslint-loader'],
+        loaders: ['babel-loader', 'ts-loader'],
         exclude: /node_modules/
       },
       {
