@@ -35,26 +35,38 @@ export default {
         return null
       }
 
-      const rows = []
-      for (let index = 0, len = this.filteredItems.length; index < len; ++index) {
+      const rowMultiplier = this.$scopedSlots.expand ? 2 : 1
+      const rows = new Array(this.filteredItems.length * rowMultiplier)
+      for (let index = 0; index < this.filteredItems.length; ++index) {
         const item = this.filteredItems[index]
         const props = this.createProps(item, index)
         const row = this.$scopedSlots.items(props)
 
-        rows.push(this.hasTag(row, 'td')
-          ? this.genTR(row, {
-            key: index,
-            attrs: { active: this.isSelected(item) }
-          })
-          : row)
+        const rowPosition = index * rowMultiplier
+        rows[rowPosition] = this.processRow(row, item, index)
 
         if (this.$scopedSlots.expand) {
           const expandRow = this.genExpandedRow(props)
-          rows.push(expandRow)
+          rows[rowPosition + 1] = expandRow
         }
       }
 
       return rows
+    },
+    processRow (row, item, index) {
+      if (this.hasTag(row, 'td')) {
+        return this.genTR(row, {
+          key: index,
+          attrs: { active: this.isSelected(item) }
+        })
+      }
+
+      for (let childIndex = 0; childIndex < row.length; ++childIndex) {
+        const rowChild = row[childIndex]
+        rowChild.key = rowChild.key || `${index}:${childIndex}`
+      }
+
+      return row
     },
     genEmptyItems (content) {
       if (this.hasTag(content, 'tr')) {
