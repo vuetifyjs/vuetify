@@ -1,4 +1,4 @@
-import { Vue } from '../components/Vuetify'
+import Vue from 'vue'
 
 export default Vue.extend({
   name: 'colorable',

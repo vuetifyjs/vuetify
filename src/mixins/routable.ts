@@ -1,5 +1,4 @@
-import { Vue } from '../components/Vuetify'
-import { VNodeData } from 'vue/types'
+import Vue, { VNodeData } from 'vue'
 import Ripple from '../directives/ripple'
 
 export default Vue.extend({

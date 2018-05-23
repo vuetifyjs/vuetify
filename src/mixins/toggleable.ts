@@ -1,4 +1,4 @@
-import { Vue } from '../components/Vuetify'
+import Vue from 'vue'
 import { ExtendedVue } from 'vue/types/vue'
 
 export function factory<T extends string> (prop?: T, event?: string): ExtendedVue<Vue, { isActive: boolean }, {}, {}, Record<T, any>>

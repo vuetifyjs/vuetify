@@ -80,7 +80,7 @@ module.exports = {
         // 'typescript/no-unused-vars': 'error',
 
         // https://github.com/eslint/typescript-eslint-parser/issues/443
-        'no-redeclare': false,
+        // 'no-redeclare': false,
 
         'typescript/adjacent-overload-signatures': 'error',
         'typescript/member-delimiter-style': ['error', {

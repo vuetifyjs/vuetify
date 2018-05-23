@@ -1,6 +1,5 @@
 /* eslint-disable max-len, import/export */
-import { Vue } from '../components/Vuetify'
-import { VueConstructor, ComponentOptions } from 'vue'
+import Vue, { VueConstructor, ComponentOptions } from 'vue'
 
 type Component<T extends Vue> = ComponentOptions<T> | VueConstructor<T>
 

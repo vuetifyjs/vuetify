@@ -5,19 +5,14 @@ import options from './mixins/options'
 import genLang from './mixins/lang'
 import { consoleWarn } from '../../util/console'
 import goTo from './util/goTo'
-import { Vue as _Vue } from 'vue/types/vue'
+import { VueConstructor } from 'vue/types'
 import { Vuetify as VuetifyPlugin } from 'types'
 
-// Export Vue ourselves so we can use the same plugins
-export let Vue: typeof _Vue
-export type Vue = _Vue
-
 const Vuetify: VuetifyPlugin = {
-  install (_Vue, opts = {}) {
+  install (Vue, opts = {}) {
     if ((this as any).installed) return
 
     (this as any).installed = true
-    Vue = _Vue
 
     checkVueVersion(Vue)
 
@@ -64,7 +59,7 @@ const Vuetify: VuetifyPlugin = {
 }
 
 /* istanbul ignore next */
-function checkVueVersion (Vue: typeof _Vue) {
+function checkVueVersion (Vue: VueConstructor) {
   const vueDep = __REQUIRED_VUE__
 
   const required = vueDep.split('.').map(v => v.replace(/\D/g, ''))

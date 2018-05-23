@@ -147,6 +147,11 @@
     ],
     "snapshotSerializers": [
       "jest-serializer-html"
-    ]
+    ],
+    "globals": {
+      "ts-jest": {
+        "useBabelrc": true
+      }
+    }
   }
 }

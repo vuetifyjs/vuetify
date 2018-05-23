@@ -1,4 +1,4 @@
-import { Vue } from '../components/Vuetify'
+import Vue from 'vue'
 import { ExtendedVue } from 'vue/types/vue'
 import { consoleWarn } from '../util/console'
 

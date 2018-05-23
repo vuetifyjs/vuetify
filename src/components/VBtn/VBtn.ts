@@ -1,12 +1,9 @@
 // Styles
 import '../../stylus/components/_buttons.styl'
 
-import { Vue } from '../Vuetify'
-import mixins from '../../util/mixins'
-
-// Types
-import { VNode, ComponentOptions, VNodeChildren } from 'vue/types'
+import Vue, { VNode, ComponentOptions, VNodeChildren } from 'vue'
 import { PropValidator } from 'vue/types/options'
+import mixins from '../../util/mixins'
 
 // Components
 import VProgressCircular from '../VProgressCircular'
