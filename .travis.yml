@@ -20,6 +20,7 @@ jobs:
         - npm i codecov -g
       script:
         - yarn run lint
+        - yarn run test:types
         - yarn run test:coverage -i
       after_script:
         - codecov

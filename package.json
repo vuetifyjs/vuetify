@@ -25,6 +25,7 @@
     "test:unix": "cross-env NODE_ENV=test jest",
     "test:win32": "cross-env NODE_ENV=test jest -i",
     "test:coverage": "yarn test --coverage",
+    "test:types": "tsc -p ./types/test/tsconfig.json",
     "lint": "tsc --noEmit --pretty && eslint --ext .js,.ts src",
     "preparecommitmsg": "node dev/prepare-commit-message.js",
     "commitmsg": "node dev/lint-commit-message.js",
