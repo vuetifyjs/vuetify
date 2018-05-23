@@ -7,3 +7,4 @@ src/util/to-have-been-warned.js
 /dist
 /es5
 /es5-temp
+/types/test

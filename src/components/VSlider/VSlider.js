@@ -263,7 +263,9 @@ export default {
           role: 'slider',
           tabindex: this.disabled ? -1 : undefined,
           type: 'slider',
-          value: this.internalValue
+          value: this.internalValue,
+          readonly: true,
+          'aria-readonly': String(this.readonly)
         },
         on: this.genListeners(),
         ref: 'input'

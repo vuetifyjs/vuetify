@@ -161,4 +161,15 @@ test('VInput.js', ({ mount }) => {
     expect(onMouseDown).toHaveBeenCalledTimes(1)
     expect(onMouseUp).toHaveBeenCalledTimes(1)
   })
+
+  it('should be in an error state', async () => {
+    const wrapper = mount(VInput, {
+      propsData: { error: true }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({ errorMessages: 'required', error: false })
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

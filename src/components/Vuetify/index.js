@@ -2,6 +2,7 @@ import application from './mixins/application'
 import theme from './mixins/theme'
 import icons from './mixins/icons'
 import options from './mixins/options'
+import genLang from './mixins/lang.ts'
 import { consoleWarn } from '../../util/console'
 import goTo from './util/goTo'
 
@@ -13,18 +14,22 @@ const Vuetify = {
 
     checkVueVersion(Vue)
 
+    const lang = genLang(opts.lang)
+
     Vue.prototype.$vuetify = new Vue({
       data: {
         application,
         breakpoint: {},
         dark: false,
         icons: icons(opts.iconfont, opts.icons),
+        lang,
         options: options(opts.options),
         rtl: opts.rtl,
         theme: theme(opts.theme)
       },
       methods: {
-        goTo
+        goTo,
+        t: lang.t.bind(lang)
       }
     })
 

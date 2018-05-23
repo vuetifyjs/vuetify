@@ -46,7 +46,7 @@ export default {
     dimensions: Object.assign({}, dimensions),
     isContentActive: false,
     pageYOffset: 0,
-    stackClass: 'menuable__content__active',
+    stackClass: 'v-menu__content--active',
     stackMinZIndex: 6
   }),
 
@@ -209,7 +209,12 @@ export default {
 
       // If overflowing bottom and offset
       // TODO: set 'bottom' position instead of 'top'
-      if (isOverflowing && this.offsetOverflow) {
+      if (isOverflowing &&
+        this.offsetOverflow &&
+        // If we don't have enough room to offset
+        // the overflow, don't offset
+        activator.top > contentHeight
+      ) {
         top = this.pageYOffset + (activator.top - contentHeight)
       // If overflowing bottom
       } else if (isOverflowing && !this.allowOverflow) {

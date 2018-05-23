@@ -1,4 +1,5 @@
 import Vue, { PluginFunction, PluginObject, VueConstructor, DirectiveFunction, DirectiveOptions } from 'vue'
+import { VuetifyLanguage } from './lang'
 import './alacarte'
 
 declare const Vuetify: Vuetify
@@ -31,16 +32,21 @@ export interface VuetifyUseOptions {
   icons?: Partial<VuetifyIcons>
   /** @see https://vuetifyjs.com/style/theme#options */
   options?: Partial<VuetifyOptions>
+  lang?: Partial<Pick<VuetifyLanguage, 'locales' | 'current'>>
+  rtl?: boolean
 }
 
 export interface VuetifyObject extends Vue {
-  readonly breakpoint: VuetifyBreakpoint
+  readonly breakpoint: Readonly<VuetifyBreakpoint>
   readonly dark: boolean
+  readonly goTo: <T extends string | number | HTMLElement | Vue>(target: T, options?: VuetifyGoToOptions) => Promise<T>
+  readonly t: VuetifyLanguage['t']
   application: VuetifyApplication
-  theme: VuetifyTheme | false
+  theme: VuetifyTheme
   icons: VuetifyIcons
+  lang: VuetifyLanguage
   options: VuetifyOptions
-  goTo: <T extends string | number | HTMLElement | Vue>(target: T, options?: VuetifyGoToOptions) => Promise<T>
+  rtl: boolean
 }
 
 declare module 'vue/types/vue' {
@@ -68,6 +74,7 @@ export interface VuetifyIcons {
   delimiter: string
   sort: string
   expand: string
+  menu: string
   subgroup: string
   dropdown: string
   radioOn: string

@@ -43,7 +43,7 @@ export default {
 
         rows.push(this.hasTag(row, 'td')
           ? this.genTR(row, {
-            key: index,
+            key: this.itemKey ? props.item[this.itemKey] : index,
             attrs: { active: this.isSelected(item) }
           })
           : row)
