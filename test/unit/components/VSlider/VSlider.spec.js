@@ -488,7 +488,6 @@ test('VSlider.vue', ({ mount }) => {
     const wrapper = mount(VSlider, {
       propsData: {
         max: 1,
-        step: 1,
         tickLabels: ['foo', 'bar']
       }
     })

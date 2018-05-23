@@ -16,8 +16,7 @@ test('VRangeSlider.vue', ({ mount }) => {
   it('should round values and swap order if needed', () => {
     const wrapper = mount(VRangeSlider, {
       propsData: {
-        value: [0, 0],
-        step: 1
+        value: [0, 0]
       }
     })
 

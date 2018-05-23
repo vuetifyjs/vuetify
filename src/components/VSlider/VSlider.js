@@ -52,7 +52,7 @@ export default {
     range: Boolean,
     step: {
       type: [Number, String],
-      default: 0
+      default: 1
     },
     ticks: {
       type: [Boolean, String],
