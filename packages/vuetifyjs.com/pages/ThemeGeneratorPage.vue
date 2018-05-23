@@ -1,5 +1,15 @@
 <template lang="pug">
-  fullscreen-view#theme-generator
+  fullscreen-view(no-back)#theme-generator
+    v-btn(
+      fab
+      top
+      left
+      fixed
+      color="accent"
+      @click="goBack()"
+    )
+      v-icon arrow_back
+
     v-btn(
       fab
       top
@@ -11,10 +21,18 @@
     ).mt-1.white--text
       v-icon menu
     div.text-xs-center.mb-5
-      v-btn(icon :disabled="current === 1" @click="current = current - 1")
+      v-btn(
+        icon
+        :disabled="current === 1"
+        @click="current = current - 1"
+      )
         v-icon chevron_left
       span.body-2 {{ current }} / {{ total }}
-      v-btn(icon :disabled="current === total" @click="current = current + 1")
+      v-btn(
+        icon
+        :disabled="current === total"
+        @click="current = current + 1"
+      )
         v-icon chevron_right
     component(:is="components[current - 1]" :dark="dark")
     //- div.text-xs-center
@@ -172,6 +190,9 @@
           }
         }
         return value
+      },
+      goBack () {
+        this.$router.push({ path: `style/theme` })
       }
     }
   }
