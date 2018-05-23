@@ -209,6 +209,10 @@ export function kebabCase (str) {
   return (str || '').replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()
 }
 
+export function isObject (obj) {
+  return obj !== null && typeof obj === 'object'
+}
+
 // KeyboardEvent.keyCode aliases
 export const keyCodes = Object.freeze({
   enter: 13,

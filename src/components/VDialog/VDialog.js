@@ -124,10 +124,12 @@ export default {
       ) return false
 
       // If we made it here, the click is outside
-      // and is active. If persistent, animate
-      // content
+      // and is active. If persistent, and the
+      // click is on the overlay, animate
       if (this.persistent) {
-        !this.noClickAnimation && this.animateClick()
+        if (!this.noClickAnimation &&
+          this.overlay === e.target
+        ) this.animateClick()
 
         return false
       }

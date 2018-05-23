@@ -174,7 +174,7 @@ export default {
       return this.chips || this.smallChips
     },
     hasSlot () {
-      return Boolean(this.hasChips || this.$slots.item)
+      return Boolean(this.hasChips || this.$scopedSlots.selection)
     },
     isDirty () {
       return this.selectedItems.length > 0
@@ -202,7 +202,7 @@ export default {
           hideSelected: this.hideSelected,
           items: this.virtualizedItems,
           light: this.light,
-          noDataText: this.noDataText,
+          noDataText: this.$vuetify.t(this.noDataText),
           selectedItems: this.selectedItems,
           itemAvatar: this.itemAvatar,
           itemDisabled: this.itemDisabled,
