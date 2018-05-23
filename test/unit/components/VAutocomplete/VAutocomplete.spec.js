@@ -774,4 +774,24 @@ test('VAutocomplete.js', ({ mount, shallow }) => {
 
     expect(wrapper.vm.internalSearch).toBe('')
   })
+
+  it('should clear search input on clear callback', async () => {
+    const wrapper = mount(VAutocomplete, {
+      propsData: {
+        clearable: true
+      }
+    })
+
+    const icon = wrapper.first('.v-input__append-inner .v-icon')
+    const input = wrapper.first('input')
+
+    input.element.value = 'foobar'
+    input.trigger('input')
+
+    expect(wrapper.vm.internalSearch).toBe('foobar')
+
+    icon.trigger('click')
+
+    expect(wrapper.vm.internalSearch).toBe(null)
+  })
 })

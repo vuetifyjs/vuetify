@@ -409,15 +409,19 @@ test('VSelect', ({ mount, compileToFunctions }) => {
   })
 
   it('should use scoped slot for selection generation', () => {
-    const wrapper = mount(VSelect, {
-      propsData: {
-        items: ['foo', 'bar'],
-        value: 'foo'
-      },
-      scopedSlots: {
-        selection: () => {
-          render: h => h('div', 'bar')
-        }
+    const wrapper = mount({
+      render (h) {
+        return h(VSelect, {
+          attrs: {
+            items: ['foo', 'bar'],
+            value: 'foo'
+          },
+          scopedSlots: {
+            selection: ({ item }) => {
+              return h('div', item + ' - from slot')
+            }
+          }
+        })
       }
     })
 

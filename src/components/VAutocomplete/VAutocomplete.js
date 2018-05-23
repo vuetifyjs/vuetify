@@ -273,6 +273,11 @@ export default {
         this.selectedIndex = newIndex
       }
     },
+    clearableCallback () {
+      this.internalSearch = null
+
+      VSelect.methods.clearableCallback.call(this)
+    },
     genChipSelection (item, index) {
       const chip = VSelect.methods.genChipSelection.call(this, item, index)
 
