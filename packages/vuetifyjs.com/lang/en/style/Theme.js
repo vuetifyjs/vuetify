@@ -1,6 +1,6 @@
 export default {
   header: 'Theme',
-  headerText: 'Easily change the colors of your application programmatically. Rebuild the default stylesheet and customize various aspects of the framework for your particular needs. If you are looking for the **Theme Generator**, please navigate [here](/theme-generator).',
+  headerText: 'Easily change the colors of your application programmatically. Rebuild the default stylesheet and customize various aspects of the framework for your particular needs.',
   lightAndDarkHeader: 'Light and Dark',
   lightAndDarkText1: 'Vuetify supports both **light** and **dark** variants of the Material Design spec. This designation starts at the root application component, `v-app` and is supported by majority of components. By default, your application will use the **light** theme, but this can be easily overwritten by adding the **dark** prop.',
   lightAndDarkText2: 'When you designate a component as light or dark, all of its children will inherit and apply the same unless otherwise specified. Due to CSS specificity, there are certain combinations that might prompt you to manually assign the _theme_ for nested children. This is most likely to occur when using the **dark** theme.',
@@ -27,10 +27,16 @@ export default {
   stylusText6: 'After you have decided on your import location, if you are requiring the Vuetify stylesheet by a `<link>` tag in your index file, remove it. Restart your build processes and re-open your project. You should see all of the styles working correctly.',
   stylusHeader3: 'Changing values',
   stylusText7: 'Now that stylus is configured, you can set default values for the stylus variables that you wish to change. These must be declared _before_ the import and will automatically override the Vuetify defaults.',
+  themeGeneratorHeader: 'Theme generator',
+  themeGeneratorText1: 'Discover and generate new color themes for your **Vuetify** applications using our [Theme Generator](/theme-generator) tool.',
   toc: [
     {
       text: 'Theme',
       href: 'introduction'
+    },
+    {
+      text: 'Theme generator',
+      href: 'theme-generator'
     },
     {
       text: 'Light and Dark',

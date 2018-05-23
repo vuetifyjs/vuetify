@@ -1,6 +1,10 @@
 <template lang="pug">
   doc-view
     template(slot-scope="{ namespace }")
+      section#theme-generator
+        section-head(:value="`${namespace}.themeGeneratorHeader`")
+        section-text(:value="`${namespace}.themeGeneratorText1`")
+
       section#light-and-dark
         section-head(:value="`${namespace}.lightAndDarkHeader`")
         section-text(:value="`${namespace}.lightAndDarkText1`")
