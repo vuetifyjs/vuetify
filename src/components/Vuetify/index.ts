@@ -2,15 +2,17 @@ import application from './mixins/application'
 import theme from './mixins/theme'
 import icons from './mixins/icons'
 import options from './mixins/options'
-import genLang from './mixins/lang.ts'
+import genLang from './mixins/lang'
 import { consoleWarn } from '../../util/console'
 import goTo from './util/goTo'
+import { VueConstructor } from 'vue/types'
+import { Vuetify as VuetifyPlugin } from 'types'
 
-const Vuetify = {
+const Vuetify: VuetifyPlugin = {
   install (Vue, opts = {}) {
-    if (this.installed) return
+    if ((this as any).installed) return
 
-    this.installed = true
+    (this as any).installed = true
 
     checkVueVersion(Vue)
 
@@ -52,11 +54,12 @@ const Vuetify = {
         Vue.use(component)
       })
     }
-  }
+  },
+  version: __VUETIFY_VERSION__
 }
 
 /* istanbul ignore next */
-function checkVueVersion (Vue) {
+function checkVueVersion (Vue: VueConstructor) {
   const vueDep = __REQUIRED_VUE__
 
   const required = vueDep.split('.').map(v => v.replace(/\D/g, ''))
