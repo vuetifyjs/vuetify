@@ -26,14 +26,6 @@ module.exports = merge(baseWebpackConfig, {
     libraryTarget: 'umd',
     libraryExport: 'default'
   },
-  externals: {
-    vue: {
-      commonjs: 'vue',
-      commonjs2: 'vue',
-      amd: 'vue',
-      root: 'Vue'
-    }
-  },
   module: {
     noParse: /es6-promise\.js$/, // avoid webpack shimming process
     rules: [

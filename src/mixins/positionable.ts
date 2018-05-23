@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import { Vue } from '../components/Vuetify'
 import { filterObjectOnKeys } from '../util/helpers'
 import { OptionsVue } from 'vue/types/vue'
 
