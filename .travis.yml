@@ -1,18 +1,20 @@
 language: node_js
-node_js:
-  - "8"
+node_js: '8'
+
+cache:
+  yarn: true
+
+install:
+  - yarn --frozen-lockfile --non-interactive
 
 before_script:
   - npm i codecov -g
 
 script:
-  - yarn --frozen-lockfile --non-interactive
   - yarn run lint
-  - yarn run test:coverage -i && codecov
+  - yarn run test:coverage -i
+  - codecov
   - yarn run build
-
-cache:
-  yarn: true
 
 before_deploy:
   - rm -rf release
@@ -34,4 +36,5 @@ deploy:
     file: "release/vuetify-${TRAVIS_TAG}.zip"
     skip_cleanup: true
     on:
+      repo: vuetifyjs/vuetify
       tags: true
