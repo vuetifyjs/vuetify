@@ -167,7 +167,7 @@ export default {
       return this.rowsPerPageItems.map(item => {
         return isObject(item)
           ? Object.assign({}, item, {
-            text: this.$vuetify.lang.t(item.text)
+            text: this.$vuetify.t(item.text)
           })
           : item
       })
@@ -358,12 +358,12 @@ export default {
     },
     genItems () {
       if (!this.itemsLength && !this.items.length) {
-        const noData = this.$slots['no-data'] || this.$vuetify.lang.t(this.noDataText)
+        const noData = this.$slots['no-data'] || this.$vuetify.t(this.noDataText)
         return [this.genEmptyItems(noData)]
       }
 
       if (!this.filteredItems.length) {
-        const noResults = this.$slots['no-results'] || this.$vuetify.lang.t(this.noResultsText)
+        const noResults = this.$slots['no-results'] || this.$vuetify.t(this.noResultsText)
         return [this.genEmptyItems(noResults)]
       }
 
@@ -385,7 +385,7 @@ export default {
           }
         },
         attrs: {
-          'aria-label': this.$vuetify.lang.t('$vuetify.lang.dataIterator.prevPage')
+          'aria-label': this.$vuetify.t('$vuetify.lang.dataIterator.prevPage')
         }
       }, [this.$createElement(VIcon, this.prevIcon)])
     },
@@ -410,7 +410,7 @@ export default {
           }
         },
         attrs: {
-          'aria-label': this.$vuetify.lang.t('$vuetify.lang.dataIterator.nextPage')
+          'aria-label': this.$vuetify.t('$vuetify.lang.dataIterator.nextPage')
         }
       }, [this.$createElement(VIcon, this.nextIcon)])
     },
@@ -418,10 +418,10 @@ export default {
       return this.$createElement('div', {
         'class': this.actionsSelectClasses
       }, [
-        this.$vuetify.lang.t(this.rowsPerPageText),
+        this.$vuetify.t(this.rowsPerPageText),
         this.$createElement(VSelect, {
           attrs: {
-            'aria-label': this.$vuetify.lang.t(this.rowsPerPageText)
+            'aria-label': this.$vuetify.t(this.rowsPerPageText)
           },
           props: {
             items: this.computedRowsPerPageItems,
@@ -455,7 +455,7 @@ export default {
             pageStop: stop,
             itemsLength: this.itemsLength
           })
-          : this.$vuetify.lang.t('$vuetify.lang.dataIterator.pageText', this.pageStart + 1, stop, this.itemsLength)
+          : this.$vuetify.t('$vuetify.lang.dataIterator.pageText', this.pageStart + 1, stop, this.itemsLength)
       }
 
       return this.$createElement('div', {

@@ -41,9 +41,10 @@ export interface VuetifyObject extends Vue {
   application: VuetifyApplication
   theme: VuetifyTheme | false
   icons: VuetifyIcons
+  lang: VuetifyLanguage
   options: VuetifyOptions
   goTo: <T extends string | number | HTMLElement | Vue>(target: T, options?: VuetifyGoToOptions) => Promise<T>
-  lang: VuetifyLanguage
+  t: VuetifyLanguage['t']
 }
 
 declare module 'vue/types/vue' {
