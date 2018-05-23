@@ -3,6 +3,9 @@ import '../../stylus/components/_small-dialog.styl'
 // Mixins
 import Returnable from '../../mixins/returnable'
 
+// Utils
+import { keyCodes } from '../../util/helpers'
+
 import VBtn from '../VBtn'
 import VMenu from '../VMenu'
 
@@ -71,8 +74,8 @@ export default {
         on: {
           keydown: e => {
             const input = this.$refs.content.querySelector('input')
-            e.keyCode === 27 && this.cancel()
-            e.keyCode === 13 && input && this.save(input.value)
+            e.keyCode === keyCodes.esc && this.cancel()
+            e.keyCode === keyCodes.enter && input && this.save(input.value)
           }
         },
         ref: 'content'

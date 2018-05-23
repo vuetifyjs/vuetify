@@ -30,7 +30,7 @@ export default {
     data.style.width = size
     data.class = [
       data.class,
-      Colorable.methods.addBackgroundColorClassChecks.call(props, {}, props.color)
+      Colorable.options.methods.addBackgroundColorClassChecks.call(props, {}, props.color)
     ]
 
     return h('div', data, children)

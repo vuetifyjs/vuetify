@@ -7,6 +7,10 @@
  * Handles opening and closing of VMenu from keystrokes
  * Will conditionally highlight VListTiles for VSelect
  */
+
+// Utils
+import { keyCodes } from '../../../util/helpers'
+
 export default {
   data: () => ({
     listIndex: -1,
@@ -18,9 +22,6 @@ export default {
       if (!val) this.listIndex = -1
     },
     listIndex (next, prev) {
-      // For infinite scroll and autocomplete, re-evaluate children
-      this.getTiles()
-
       if (next in this.tiles) {
         const tile = this.tiles[next]
         tile.classList.add('v-list__tile--highlighted')
@@ -34,31 +35,27 @@ export default {
 
   methods: {
     changeListIndex (e) {
-      // Up, Down, Enter, Space
-      if ([40, 38, 13].includes(e.keyCode) ||
-        (e.keyCode === 32 && !this.isActive)
-      ) {
-        e.preventDefault()
+      if ([
+        keyCodes.down,
+        keyCodes.up,
+        keyCodes.enter
+      ].includes(e.keyCode)
+      ) e.stopPropagation()
+
+      if ([keyCodes.esc, keyCodes.tab].includes(e.keyCode)) {
+        return this.isActive = false
       }
 
-      // Esc, Tab
-      if ([27, 9].includes(e.keyCode)) return this.isActive = false
-      else if (!this.isActive &&
-        // Enter, Space
-        [13, 32].includes(e.keyCode) &&
-        this.openOnClick
-      ) {
-        return this.isActive = true
-      }
+      // For infinite scroll and autocomplete, re-evaluate children
+      this.getTiles()
 
-      // Down
-      if (e.keyCode === 40 && this.listIndex < this.tiles.length - 1) {
+      if (e.keyCode === keyCodes.down && this.listIndex < this.tiles.length - 1) {
         this.listIndex++
-      // Up
-      } else if (e.keyCode === 38 && this.listIndex > 0) {
+        // Allow user to set listIndex to -1 so
+        // that the list can be un-highlighted
+      } else if (e.keyCode === keyCodes.up && this.listIndex > -1) {
         this.listIndex--
-      // Enter
-      } else if (e.keyCode === 13 && this.listIndex !== -1) {
+      } else if (e.keyCode === keyCodes.enter && this.listIndex !== -1) {
         this.tiles[this.listIndex].click()
       }
     },

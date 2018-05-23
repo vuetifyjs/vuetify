@@ -5,7 +5,7 @@
 v-icon($material)
   color: $material.icons.active
 
-  &.v-icon--disabled:not(.input-group__append-icon)
+  &.v-icon--disabled
     color: $material.icons.inactive !important
 
 theme(v-icon, "v-icon")
@@ -19,6 +19,9 @@ theme(v-icon, "v-icon")
   line-height: 1
   transition: $primary-transition
   vertical-align: middle
+
+  &--link
+    cursor: pointer
 
   &.v-icon--large
     font-size: 2.5rem

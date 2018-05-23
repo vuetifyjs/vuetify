@@ -10,11 +10,11 @@ theme(v-bottom-nav, "v-bottom-nav")
   bottom: 0
   box-shadow: 0 3px 14px 2px rgba(#000, .12)
   display: flex
+  left: 0
   justify-content: center
   transform: translate(0, 60px)
   transition: all .4s $transition.swing
   width: 100%
-  z-index: 4
 
   &--absolute
     position: absolute
@@ -24,6 +24,7 @@ theme(v-bottom-nav, "v-bottom-nav")
 
   &--fixed
     position: fixed
+    z-index: 4
 
   .v-btn
     background: transparent !important
@@ -34,7 +35,7 @@ theme(v-bottom-nav, "v-bottom-nav")
     margin: 0
     max-width: 168px
     min-width: 80px
-    padding: 8px 0 10px
+    padding: 8px 12px 10px
     text-transform: none
     opacity: .5
     width: 100%
@@ -42,7 +43,6 @@ theme(v-bottom-nav, "v-bottom-nav")
     .v-btn__content
       flex-direction: column-reverse
       font-size: 12px
-      padding: 0 12px
       white-space: nowrap
       will-change: font-size
 
@@ -58,11 +58,11 @@ theme(v-bottom-nav, "v-bottom-nav")
       opacity: 1
       padding-top: 6px
 
+      &:before
+        background-color: transparent
+
       .v-btn__content
         font-size: 14px
-
-        &:before
-          opacity: 0
 
         .v-icon
           transform: none

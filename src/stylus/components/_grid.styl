@@ -3,15 +3,15 @@
 .container
   flex: 1 1 100%
   margin: auto
-  padding: $grid-gutters.lg
+  padding: $grid-gutters.xl
   width: 100%
 
-  for size, width in $container-max-widths
-    @media only screen and (min-width: width)
-      max-width: (width * 0.9375) // Credit to bootstrap
+  for $size, $width in $container-max-widths
+    @media only screen and (min-width: $width)
+      max-width: ($width * 0.9375) // Credit to bootstrap
 
-  @media $display-breakpoints.xs-only
-    padding: $grid-gutters.xl
+  @media $display-breakpoints.sm-and-down
+    padding: $grid-gutters.lg
 
   &.fluid
     max-width: 100%
@@ -27,8 +27,6 @@
   &.grid-list
     for $size, $gutter in $grid-gutters
       &-{$size}
-        padding: $gutter
-
         .layout
           .flex
             padding: ($gutter / 2)
@@ -53,6 +51,9 @@
   // https://github.com/vuetifyjs/vuetify/issues/3873
   min-width: 0
 
+  > .flex
+    max-width: 100%
+
   &.row
     flex-direction: row
 
@@ -62,28 +63,25 @@
   &.column
     flex-direction: column
 
-    > .flex
-      max-width: 100%
-
     &.reverse
       flex-direction: column-reverse
 
   &.wrap
     flex-wrap: wrap
 
-for size, width in $grid-breakpoints
-  @media all and (min-width: width)
+for $size, $width in $grid-breakpoints
+  @media all and (min-width: $width)
     for n in (1..$grid-columns)
-      .flex.{size}{n}
+      .flex.{$size}{n}
         flex-basis: (n / $grid-columns * 100)%
         flex-grow: 0
         max-width: (n / $grid-columns * 100)%
 
-      .flex.order-{size}{n}
+      .flex.order-{$size}{n}
         order: n
 
     for n in (0..$grid-columns)
-      .flex.offset-{size}{n}
+      .flex.offset-{$size}{n}
         // Offsets can only ever work in row layouts
         margin-left: (n / $grid-columns * 100)%
 
@@ -184,6 +182,6 @@ for size, width in $grid-breakpoints
 
 .d-inline-block
   display: inline-block !important
-  
+
 .d-inline
   display: inline !important

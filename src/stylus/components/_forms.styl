@@ -1,0 +1,14 @@
+@import '../bootstrap'
+
+.v-form
+  > .container
+    padding: $grid-gutters.lg
+
+    > .layout > .flex
+      padding: ($grid-gutters.lg / 2)
+
+    > .layout:only-child
+      margin: -($grid-gutters.lg / 2)
+
+    > .layout:not(:only-child)
+      margin: auto -($grid-gutters.lg / 2)

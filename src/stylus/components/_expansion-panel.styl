@@ -9,8 +9,12 @@ v-expansion-panel($material)
     color: $material.text.primary
 
     .v-expansion-panel__header
-      .v-icon
-        color: $material.icons.active
+      .header__icon
+        .v-icon
+          color: $material.icons.active
+
+    &--disabled
+      color: $material.text.disabled
 
   &--focusable
     .v-expansion-panel__container
@@ -45,6 +49,10 @@ theme(v-expansion-panel, "v-expansion-panel")
         // Edge rendering issue TODO: revisit later
         transition: none
 
+    &--disabled
+      .v-expansion-panel__header
+        pointer-events: none
+
     &--active
       > .v-expansion-panel__header
         .header__icon .v-icon
@@ -56,6 +64,7 @@ theme(v-expansion-panel, "v-expansion-panel")
     align-items: center
     position: relative
     padding: 12px 24px
+    height: 48px
 
     > *:not(.header__icon)
       flex: 1 1 auto

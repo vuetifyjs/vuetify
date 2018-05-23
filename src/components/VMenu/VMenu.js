@@ -76,7 +76,7 @@ export default {
     },
     transition: {
       type: [Boolean, String],
-      default: 'menu-transition'
+      default: 'v-menu-transition'
     }
   },
 
@@ -135,6 +135,9 @@ export default {
         transformOrigin: this.origin,
         zIndex: this.zIndex || this.activeZIndex
       }
+    },
+    tileHeight () {
+      return this.dense ? 36 : 48
     }
   },
 

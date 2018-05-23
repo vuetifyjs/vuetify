@@ -18,9 +18,10 @@ const Vuetify = {
         application,
         breakpoint: {},
         dark: false,
+        icons: icons(opts.iconfont, opts.icons),
         options: options(opts.options),
-        theme: theme(opts.theme),
-        icons: icons(opts.iconfont, opts.icons)
+        rtl: opts.rtl,
+        theme: theme(opts.theme)
       },
       methods: {
         goTo
@@ -51,7 +52,7 @@ const Vuetify = {
 
 /* istanbul ignore next */
 function checkVueVersion (Vue) {
-  const vueDep = process.env.REQUIRED_VUE
+  const vueDep = __REQUIRED_VUE__
 
   const required = vueDep.split('.').map(v => v.replace(/\D/g, ''))
   const actual = Vue.version.split('.')
