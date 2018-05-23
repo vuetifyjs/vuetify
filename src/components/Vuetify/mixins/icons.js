@@ -17,6 +17,7 @@ const ICONS_MATERIAL = {
   'delimiter': 'fiber_manual_record', // for carousel
   'sort': 'arrow_upward',
   'expand': 'keyboard_arrow_down',
+  'menu': 'menu',
   'subgroup': 'arrow_drop_down',
   'dropdown': 'arrow_drop_down',
   'radioOn': 'radio_button_checked',
@@ -43,6 +44,7 @@ const ICONS_MDI = {
   'delimiter': 'mdi-circle', // for carousel
   'sort': 'mdi-arrow-up',
   'expand': 'mdi-chevron-down',
+  'menu': 'mdi-menu',
   'subgroup': 'mdi-menu-down',
   'dropdown': 'mdi-menu-down',
   'radioOn': 'mdi-radiobox-marked',
@@ -69,6 +71,7 @@ const ICONS_FONTAWESOME4 = {
   'delimiter': 'fa fa-circle', // for carousel
   'sort': 'fa fa-sort-up',
   'expand': 'fa fa-chevron-down',
+  'menu': 'fa fa-bars',
   'subgroup': 'fa fa-caret-down',
   'dropdown': 'fa fa-caret-down',
   'radioOn': 'fa fa-dot-circle',
@@ -95,6 +98,7 @@ const ICONS_FONTAWESOME = {
   'delimiter': 'fas fa-circle', // for carousel
   'sort': 'fas fa-sort-up',
   'expand': 'fas fa-chevron-down',
+  'menu': 'fas fa-bars',
   'subgroup': 'fas fa-caret-down',
   'dropdown': 'fas fa-caret-down',
   'radioOn': 'far fa-dot-circle',
