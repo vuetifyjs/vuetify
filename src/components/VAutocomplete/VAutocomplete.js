@@ -15,6 +15,7 @@ export default {
 
   data: vm => ({
     attrsInput: null,
+    editingIndex: -1,
     lazySearch: vm.searchInput,
     lazyValue: vm.value != null
       ? vm.value
@@ -272,6 +273,25 @@ export default {
         this.selectedIndex = newIndex
       }
     },
+    clearableCallback () {
+      this.internalSearch = null
+
+      VSelect.methods.clearableCallback.call(this)
+    },
+    genChipSelection (item, index) {
+      const chip = VSelect.methods.genChipSelection.call(this, item, index)
+
+      // Allow user to update an existing value
+      if (this.tags) {
+        chip.componentOptions.listeners.dblclick = () => {
+          this.editingIndex = index
+          this.internalSearch = this.getText(item)
+          this.selectedIndex = -1
+        }
+      }
+
+      return chip
+    },
     genInput () {
       const input = VTextField.methods.genInput.call(this)
 
@@ -352,7 +372,13 @@ export default {
       this.updateSelf()
     },
     selectItem (item) {
-      VSelect.methods.selectItem.call(this, item)
+      // Currently only supports items:<string[]>
+      if (this.editingIndex > -1) {
+        this.internalValue.splice(this.editingIndex, 1, this.internalSearch)
+        this.editingIndex = -1
+      } else {
+        VSelect.methods.selectItem.call(this, item)
+      }
 
       this.setSearch()
     },

@@ -75,7 +75,10 @@ module.exports = {
         // Can't overload function exports with this enabled
         'import/export': false,
 
-        'typescript/no-unused-vars': 'error',
+        // https://github.com/eslint/typescript-eslint-parser/issues/457
+        'no-unused-vars': false,
+        // 'typescript/no-unused-vars': 'error',
+
         'typescript/adjacent-overload-signatures': 'error',
         'typescript/member-delimiter-style': ['error', {
           delimiter: 'none'
