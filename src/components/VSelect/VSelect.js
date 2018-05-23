@@ -641,25 +641,26 @@ export default {
         ? this.internalValue
         : [this.internalValue]
 
+      let findFrom = ''
+
+      if (this.retainSelection && ((this.chips && this.deletableChips) || this.clearable)) {
+        findFrom = 'internalValue'
+      } else {
+        findFrom = 'allItems'
+      }
+
       for (const value of values) {
-        const index = this.allItems.findIndex(v => this.valueComparator(
+        const index = Array.isArray(this[findFrom]) ? this[findFrom].findIndex(v => this.valueComparator(
           this.getValue(v),
           this.getValue(value)
-        ))
+        )) : selectedItems[0] = this[findFrom]
 
         if (index > -1) {
-          selectedItems.push(this.allItems[index])
+          selectedItems.push(this[findFrom][index])
         }
       }
-      if (this.retainSelection && ((this.chips && this.deletableChips) || this.clearable)) {
-        if (this.isMulti) {
-          this.selectedItems = this.internalValue.filter(fn)
-        } else {
-          this.selectedItems[0] = this.internalValue ? this.internalValue : []
-        }
-      } else {
-        this.selectedItems = this.computedItems.filter(fn)
-      }
+
+      this.selectedItems = selectedItems
     }
   }
 }
