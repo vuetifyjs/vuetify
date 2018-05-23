@@ -73,12 +73,8 @@ test('VTextField.js', ({ mount }) => {
     expect(wrapper.data().valid).toEqual(false)
   })
 
-  // Changed for v1.1 - shouldValidate is now computed
-  // and must be in an error state
   it('should start validating on input', async () => {
-    const wrapper = mount(VTextField, {
-      propsData: { error: true }
-    })
+    const wrapper = mount(VTextField)
 
     expect(wrapper.vm.shouldValidate).toEqual(false)
     wrapper.setProps({ value: 'asd' })
@@ -183,12 +179,8 @@ test('VTextField.js', ({ mount }) => {
     expect(wrapper.vm.internalValue).toBe('foo')
   })
 
-  // Changed for v1.1 - shouldValidate is now computed
-  // and must be in an error state
   it('should start validating on blur', async () => {
-    const wrapper = mount(VTextField, {
-      propsData: { error: true }
-    })
+    const wrapper = mount(VTextField)
 
     const input = wrapper.first('input')
     expect(wrapper.vm.shouldValidate).toEqual(false)
@@ -700,14 +692,6 @@ test('VTextField.js', ({ mount }) => {
     expect(wrapper.vm.badInput).toBe(true)
   })
 
-  it('should add ripple directive when using box', () => {
-    const wrapper = mount(VTextField)
-
-    expect(wrapper.vm.directivesInput.length).toBe(0)
-    wrapper.setProps({ box: true })
-    expect(wrapper.vm.directivesInput.length).toBe(1)
-  })
-
   it('should set input autocomplete attr', () => {
     const wrapper = mount(VTextField, {
       propsData: {
@@ -744,5 +728,19 @@ test('VTextField.js', ({ mount }) => {
     input.trigger('keydown.enter')
 
     expect(change).toHaveBeenCalledTimes(2)
+  })
+
+  it('should have focus and blur methods', () => {
+    const wrapper = mount(VTextField)
+    const focus = jest.fn()
+    const blur = jest.fn()
+    wrapper.vm.$on('focus', focus)
+    wrapper.vm.$on('blur', blur)
+
+    wrapper.vm.focus()
+    expect(focus).toHaveBeenCalledTimes(1)
+
+    wrapper.vm.blur()
+    expect(blur).toHaveBeenCalledTimes(1)
   })
 })

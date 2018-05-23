@@ -47,7 +47,7 @@ export default {
     clearable: Boolean,
     clearIcon: {
       type: String,
-      default: 'clear'
+      default: '$vuetify.icons.clear'
     },
     clearIconCb: Function,
     color: {
@@ -77,6 +77,7 @@ export default {
     classes () {
       return {
         'v-text-field': true,
+        'v-text-field--full-width': this.fullWidth,
         'v-text-field--prefix': this.prefix,
         'v-text-field--single-line': this.isSingle,
         'v-text-field--solo': this.isSolo,
@@ -89,9 +90,7 @@ export default {
       }
     },
     directivesInput () {
-      return this.box
-        ? [{ name: 'ripple', value: true }]
-        : []
+      return []
     },
     // TODO: Deprecate
     hasOutline () {
@@ -117,7 +116,7 @@ export default {
         this.badInput
     },
     isEnclosed () {
-      return this.isSolo || this.hasOutline
+      return this.isSolo || this.hasOutline || this.fullWidth
     },
     isLabelActive () {
       return this.isDirty || dirtyTypes.includes(this.type)
@@ -162,6 +161,14 @@ export default {
   },
 
   methods: {
+    /** @public */
+    focus () {
+      this.onFocus()
+    },
+    /** @public */
+    blur () {
+      this.onBlur()
+    },
     clearableCallback () {
       this.internalValue = null
       this.$nextTick(() => this.$refs.input.focus())
@@ -179,6 +186,17 @@ export default {
 
       return this.genSlot('append', 'outer', slot)
     },
+    genClearIcon () {
+      if (!this.clearable) return null
+
+      const icon = !this.isDirty
+        ? false
+        : 'clear'
+
+      return this.genSlot('append', 'inner', [
+        this.genIcon(icon, this.clearIconCb || this.clearableCallback)
+      ])
+    },
     genCounter () {
       if (this.counter === false) return null
 
@@ -195,6 +213,7 @@ export default {
     genDefaultSlot () {
       return [
         this.genTextFieldSlot(),
+        this.genClearIcon(),
         this.genIconSlot()
       ]
     },
@@ -251,10 +270,6 @@ export default {
         slot.push(this.$slots['append-icon'])
       } else if (this.appendIcon) {
         slot.push(this.genIcon('append'))
-      } else if (this.clearable && this.isDirty) {
-        slot.push(this.genIcon('clear',
-          this.clearIconCb || this.clearableCallback
-        ))
       }
 
       return this.genSlot('append', 'inner', slot)
@@ -352,6 +367,8 @@ export default {
       this.internalChange = true
 
       if (e.keyCode === keyCodes.enter) this.$emit('change', this.internalValue)
+
+      this.$emit('keydown', e)
     },
     onMouseDown (e) {
       // Prevent input from being blurred

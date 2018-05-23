@@ -1,6 +1,6 @@
 const vuetifyPackage = require('../package.json')
 
 module.exports = {
-  'process.env.VUETIFY_VERSION': vuetifyPackage.version,
-  'process.env.REQUIRED_VUE': vuetifyPackage.peerDependencies.vue
+  __VUETIFY_VERSION__: vuetifyPackage.version,
+  __REQUIRED_VUE__: vuetifyPackage.peerDependencies.vue
 }

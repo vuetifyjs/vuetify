@@ -2,7 +2,7 @@ import VSelect from './VSelect'
 import VSelectList from './VSelectList'
 import VOverflowBtn from '../VOverflowBtn'
 import VAutocomplete from '../VAutocomplete'
-import rebuildSlots from '@/util/rebuildFunctionalSlots'
+import rebuildSlots from '../../util/rebuildFunctionalSlots'
 
 const wrapper = {
   functional: true,

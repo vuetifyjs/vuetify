@@ -38,4 +38,30 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.vm.isMenuActive).toBe(true)
   })
+
+  it('should return full items if using auto prop', () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        items: [...Array(100).keys()]
+      }
+    })
+
+    expect(wrapper.vm.virtualizedItems.length).toBe(20)
+
+    wrapper.setProps({ auto: true })
+
+    expect(wrapper.vm.virtualizedItems.length).toBe(100)
+  })
+
+  it('should fallback to using text as value if none present', () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        items: [{
+          text: 'foo'
+        }]
+      }
+    })
+
+    expect(wrapper.vm.getValue(wrapper.vm.items[0])).toBe('foo')
+  })
 })

@@ -7,29 +7,29 @@ v-input($material)
   textarea::placeholder
     color: $material.text.disabled
 
-  &:not(.v-input--has-state)
+  &:not(.v-input--is-disabled)
     input,
     textarea
       color: $material.text.primary
 
-    &--is-disabled
-      .v-input__label,
-      input,
-      textarea
-        color: $material.text.disabled
+  &--is-disabled
+    .v-input__label,
+    input,
+    textarea
+      color: $material.text.disabled
 
 theme(v-input, "v-input")
 
 .v-input
   align-items: flex-start
   display: flex
+  flex: 1 1 auto
   font-size: 16px
-  margin-top: 28px // 12px for label, 16px for spec
+  margin-top: 16px // 12px for label, 16px for spec
   text-align: left
-  transition: $primary-transition
 
   .v-progress-linear
-    bottom: 0
+    top: calc(100% - 1px)
     left: 0
     margin: 0
     position: absolute
@@ -54,11 +54,18 @@ theme(v-input, "v-input")
   &__append-outer,
   &__prepend-outer
     display: inline-flex
-    margin: 4px 16px 16px
+    margin-bottom: 4px
+    margin-top: 4px
     line-height: 1
 
     .v-icon
       user-select: none
+
+  &__append-outer
+    margin-left: 16px
+
+  &__prepend-outer
+    margin-right: 16px
 
   &__control
     display: flex
@@ -84,15 +91,17 @@ theme(v-input, "v-input")
     color: inherit
     display: flex
     margin-bottom: 8px
-    min-height: 32px
+    min-height: inherit
     position: relative
+    transition: $primary-transition
     width: 100%
 
-  &--is-disabled
+  &--is-disabled:not(.v-input--is-readonly)
     pointer-events: none
 
   &--is-loading
-    .v-input__slot:before
+    .v-input__slot:before,
+    .v-input__slot:after
       display: none
 
   &--hide-details

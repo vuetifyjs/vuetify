@@ -53,9 +53,10 @@ export default {
         'v-input--hide-details': this.hideDetails,
         'v-input--is-label-active': this.isLabelActive,
         'v-input--is-dirty': this.isDirty,
-        'v-input--is-disabled': this.isDisabled,
+        'v-input--is-disabled': this.disabled,
         'v-input--is-focused': this.isFocused,
         'v-input--is-loading': this.loading !== false,
+        'v-input--is-readonly': this.readonly,
         ...this.addTextColorClassChecks({}, this.validationState),
         ...this.themeClasses
       }
@@ -127,6 +128,13 @@ export default {
               e.stopPropagation()
 
               cb(e)
+            },
+            // Container has mouseup event
+            // that will trigger menu open
+            // if enclosed
+            mouseup: e => {
+              e.preventDefault()
+              e.stopPropagation()
             }
           }
       }
@@ -145,10 +153,6 @@ export default {
     genInputSlot () {
       return this.$createElement('div', {
         staticClass: 'v-input__slot',
-        'class': this.addTextColorClassChecks(
-          {},
-          this.hasState ? this.validationState : this.color
-        ),
         style: { height: convertToUnit(this.height) },
         directives: this.directivesInput,
         on: { click: this.onClick },
@@ -172,11 +176,14 @@ export default {
         }
       })
     },
-    genSlot (ref, location, slot) {
+    genSlot (type, location, slot) {
       if (!slot.length) return null
 
+      const ref = `${type}-${location}`
+
       return this.$createElement('div', {
-        staticClass: `v-input__${ref}-${location}`
+        staticClass: `v-input__${ref}`,
+        ref
       }, slot)
     },
     genPrependSlot () {

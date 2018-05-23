@@ -34,6 +34,7 @@ export default {
     classes () {
       return {
         'v-textarea': true,
+        'v-textarea--auto-grow': this.autoGrow,
         ...VTextField.computed.classes.call(this, null)
       }
     },
@@ -102,6 +103,7 @@ export default {
       }
 
       this.internalChange = true
+      this.$emit('keydown', e)
     }
   }
 }

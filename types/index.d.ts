@@ -1,16 +1,15 @@
-import 'vuetify/src/util/helpers'
-import 'vuetify/src/util/colors'
 import Vue, { PluginFunction, PluginObject, VueConstructor, DirectiveFunction, DirectiveOptions } from 'vue'
+import { VuetifyLanguage } from './lang'
+import './alacarte'
 
+declare const Vuetify: Vuetify
 export default Vuetify
-
-declare function Vuetify (Vue: VueConstructor, options?: VuetifyUseOptions): void
-
-declare module Vuetify {
-  const version: string
+export interface Vuetify {
+  install: PluginFunction<VuetifyUseOptions>
+  version: string
 }
 
-declare interface VuetifyUseOptions {
+export interface VuetifyUseOptions {
   transitions?: VueConstructor
   directives?: DirectiveOptions | DirectiveFunction
   components?: PluginObject<any> | PluginFunction<any>
@@ -33,25 +32,28 @@ declare interface VuetifyUseOptions {
   icons?: Partial<VuetifyIcons>
   /** @see https://vuetifyjs.com/style/theme#options */
   options?: Partial<VuetifyOptions>
+  lang?: Partial<Pick<VuetifyLanguage, 'locales' | 'current'>>
 }
 
-declare interface VuetifyObject extends Vue {
+export interface VuetifyObject extends Vue {
   readonly breakpoint: VuetifyBreakpoint
   readonly dark: boolean
   application: VuetifyApplication
   theme: VuetifyTheme | false
   icons: VuetifyIcons
+  lang: VuetifyLanguage
   options: VuetifyOptions
   goTo: <T extends string | number | HTMLElement | Vue>(target: T, options?: VuetifyGoToOptions) => Promise<T>
+  t: VuetifyLanguage['t']
 }
 
 declare module 'vue/types/vue' {
-  interface Vue {
+  export interface Vue {
     $vuetify: VuetifyObject
   }
 }
 
-declare interface VuetifyIcons {
+export interface VuetifyIcons {
   [name: string]: string
 
   cancel: string
@@ -70,6 +72,7 @@ declare interface VuetifyIcons {
   delimiter: string
   sort: string
   expand: string
+  menu: string
   subgroup: string
   dropdown: string
   radioOn: string
@@ -77,7 +80,7 @@ declare interface VuetifyIcons {
   edit: string
 }
 
-declare interface VuetifyApplication {
+export interface VuetifyApplication {
   bar: number
   bottom: number
   left: number
@@ -85,7 +88,7 @@ declare interface VuetifyApplication {
   top: number
 }
 
-declare interface VuetifyBreakpoint {
+export interface VuetifyBreakpoint {
   height: number
   lg: boolean
   lgAndDown: boolean
@@ -107,7 +110,9 @@ declare interface VuetifyBreakpoint {
   xsOnly: boolean
 }
 
-declare interface VuetifyTheme {
+export type VuetifyThemeItem = string | number
+
+export interface VuetifyTheme {
   [name: string]: VuetifyThemeItem
 
   primary: VuetifyThemeItem
@@ -119,14 +124,12 @@ declare interface VuetifyTheme {
   success: VuetifyThemeItem
 }
 
-declare type VuetifyThemeItem = string | number
-
-declare interface VuetifyThemeCache {
+export interface VuetifyThemeCache {
   get: (parsedTheme: VuetifyTheme) => string | null
   set: (parsedTheme: VuetifyTheme, css: string) => void
 }
 
-declare interface VuetifyOptions {
+export interface VuetifyOptions {
   themeVariations: string[]
   minifyTheme: ((css: string) => string) | null
   themeCache: VuetifyThemeCache | null
@@ -134,7 +137,7 @@ declare interface VuetifyOptions {
   cspNonce: string | null
 }
 
-declare type VuetifyGoToEasing =
+export type VuetifyGoToEasing =
   ((t: number) => number) |
   'linear' |
   'easeInQuad' |
@@ -150,7 +153,7 @@ declare type VuetifyGoToEasing =
   'easeOutQuint' |
   'easeInOutQuint'
 
-declare interface VuetifyGoToOptions {
+export interface VuetifyGoToOptions {
   duration?: number
   offset?: number
   easing?: VuetifyGoToEasing

@@ -1,16 +1,25 @@
+import Vue from 'vue'
+import { ExtendedVue } from 'vue/types/vue'
 import { consoleWarn } from '../util/console'
 
-function generateWarning (child, parent) {
+function generateWarning (child: string, parent: string) {
   return () => consoleWarn(`The ${child} component must be used inside a ${parent}`)
 }
 
-export function inject (namespace, child, parent) {
+type Registrable<T extends string> = ExtendedVue<Vue, {
+  [K in T]: {
+    register (...props: any[]): void
+    unregister (self: any): void
+  }
+}, {}, {}, {}>
+
+export function inject<T extends string> (namespace: T, child?: string, parent?: string): Registrable<T> {
   const defaultImpl = child && parent ? {
     register: generateWarning(child, parent),
     unregister: generateWarning(child, parent)
   } : null
 
-  return {
+  return Vue.extend({
     name: 'registrable-inject',
 
     inject: {
@@ -18,11 +27,11 @@ export function inject (namespace, child, parent) {
         default: defaultImpl
       }
     }
-  }
+  })
 }
 
-export function provide (namespace) {
-  return {
+export function provide (namespace: string) {
+  return Vue.extend({
     name: 'registrable-provide',
 
     methods: {
@@ -37,5 +46,5 @@ export function provide (namespace) {
         }
       }
     }
-  }
+  })
 }
