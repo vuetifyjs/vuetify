@@ -1,5 +1,44 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`VCarousel.js should render a carousel with custom height 1`] = `
+
+<div class="carousel"
+     style="height: 400px;"
+>
+  <div class="carousel__left">
+    <button type="button"
+            class="btn btn--icon theme--dark"
+    >
+      <div class="btn__content">
+        <i aria-hidden="true"
+           class="icon material-icons"
+           style="font-size: 46px;"
+        >
+          chevron_left
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="carousel__right">
+    <button type="button"
+            class="btn btn--icon theme--dark"
+    >
+      <div class="btn__content">
+        <i aria-hidden="true"
+           class="icon material-icons"
+           style="font-size: 46px;"
+        >
+          chevron_right
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="carousel__controls">
+  </div>
+</div>
+
+`;
+
 exports[`VCarousel.js should render component and match snapshot 1`] = `
 
 <div class="v-carousel">
