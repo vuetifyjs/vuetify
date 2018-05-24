@@ -2,16 +2,16 @@
 
 exports[`VCarousel.js should render a carousel with custom height 1`] = `
 
-<div class="carousel"
+<div class="v-carousel"
      style="height: 400px;"
 >
-  <div class="carousel__left">
+  <div class="v-carousel__left">
     <button type="button"
-            class="btn btn--icon theme--dark"
+            class="v-btn v-btn--icon theme--dark"
     >
-      <div class="btn__content">
+      <div class="v-btn__content">
         <i aria-hidden="true"
-           class="icon material-icons"
+           class="v-icon material-icons"
            style="font-size: 46px;"
         >
           chevron_left
@@ -19,13 +19,13 @@ exports[`VCarousel.js should render a carousel with custom height 1`] = `
       </div>
     </button>
   </div>
-  <div class="carousel__right">
+  <div class="v-carousel__right">
     <button type="button"
-            class="btn btn--icon theme--dark"
+            class="v-btn v-btn--icon theme--dark"
     >
-      <div class="btn__content">
+      <div class="v-btn__content">
         <i aria-hidden="true"
-           class="icon material-icons"
+           class="v-icon material-icons"
            style="font-size: 46px;"
         >
           chevron_right
@@ -33,7 +33,7 @@ exports[`VCarousel.js should render a carousel with custom height 1`] = `
       </div>
     </button>
   </div>
-  <div class="carousel__controls">
+  <div class="v-carousel__controls">
   </div>
 </div>
 
