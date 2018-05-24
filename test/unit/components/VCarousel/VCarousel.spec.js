@@ -182,4 +182,21 @@ test('VCarousel.js', ({ mount }) => {
     await wrapper.vm.$nextTick()
     expect(input).toBeCalledWith(2)
   })
+
+  it('should render a carousel with custom height', () => {
+    const heightpx = '400px'
+    const wrapper = mount(VCarousel, {
+      propsData: {
+        height: heightpx
+      }
+    })
+
+    expect(wrapper.hasStyle('height', heightpx)).toBe(true)
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({
+      height: 302
+    })
+    expect(wrapper.hasStyle('height', '302px')).toBe(true)
+  })
 })

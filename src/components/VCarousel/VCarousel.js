@@ -49,7 +49,11 @@ export default {
       type: [Boolean, String],
       default: 'chevron_left'
     },
-    value: Number
+    value: Number,
+    height: {
+      type: [Number, String],
+      default: ''
+    }
   },
 
   watch: {
@@ -180,7 +184,10 @@ export default {
           left: this.next,
           right: this.prev
         }
-      }]
+      }],
+      style: {
+        height: !isNaN(this.height) ? `${this.height}px` : this.height
+      }
     }, [
       this.hideControls ? null : this.genIcon('left', this.prevIcon, this.prev),
       this.hideControls ? null : this.genIcon('right', this.nextIcon, this.next),
