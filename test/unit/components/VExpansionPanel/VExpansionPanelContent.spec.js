@@ -1,7 +1,7 @@
 import { test } from '@/test'
 import VExpansionPanelContent from '@/components/VExpansionPanel/VExpansionPanelContent'
 
-const registrableWarning = '[Vuetify] The v-expansion-panel component must be used inside a v-expansion-panel-content'
+const registrableWarning = '[Vuetify] The v-expansion-panel-content component must be used inside a v-expansion-panel'
 
 function expansionPanelProvide (additional) {
   return Object.assign({
@@ -76,6 +76,14 @@ test('VExpansionPanelContent.js', ({ mount, compileToFunctions }) => {
     wrapper.first('.v-expansion-panel__header').trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should warn a registrable warning when expansionPanel empty', () => {
+    mount(VExpansionPanelContent)
+
+    expect('Injection "expansionPanel" not found').toHaveBeenWarned()
+    expect('TypeError: Cannot read property \'disabled\' of undefined').toHaveBeenWarned()
+    expect('TypeError: Cannot read property \'register\' of undefined').toHaveBeenWarned()
   })
 
   it('should render an expanded component and match snapshot', () => {
