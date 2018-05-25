@@ -73,7 +73,7 @@ export default {
       const lang = this.$route.path.split('/')[1]
       const meta = this.$i18n.getLocaleMessage(lang).meta || {}
 
-      if (this.$route.path.indexOf('product') > -1) {
+      if (this.$route.name === 'store/Product') {
         return (this.meta = this.getProductMeta())
       }
 
