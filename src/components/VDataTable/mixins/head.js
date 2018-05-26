@@ -93,7 +93,6 @@ export default {
       data.attrs.tabIndex = 0
       data.on = {
         click: () => {
-          this.expanded = {}
           this.sort(header.value)
         },
         keydown: e => {
