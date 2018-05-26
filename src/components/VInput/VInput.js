@@ -53,7 +53,7 @@ export default {
         'v-input--hide-details': this.hideDetails,
         'v-input--is-label-active': this.isLabelActive,
         'v-input--is-dirty': this.isDirty,
-        'v-input--is-disabled': this.isDisabled,
+        'v-input--is-disabled': this.disabled,
         'v-input--is-focused': this.isFocused,
         'v-input--is-loading': this.loading !== false,
         'v-input--is-readonly': this.readonly,

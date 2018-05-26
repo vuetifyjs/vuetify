@@ -508,27 +508,6 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect(selections.length).toEqual(1)
   })
 
-  it('should be true when has slot or chips', () => {
-    const wrapper = mount(VSelect, {
-      propsData: { chips: true }
-    })
-    const wrapper2 = mount(VSelect, {
-      slots: {
-        item: [{
-          render: h => h('div', 'foobar')
-        }]
-      }
-    })
-
-    expect(wrapper.vm.hasSlot).toBe(true)
-
-    wrapper.setProps({ chips: false })
-
-    expect(wrapper.vm.hasSlot).toBe(false)
-
-    expect(wrapper2.vm.hasSlot).toBe(true)
-  })
-
   it('should add color to selected index', async () => {
     const wrapper = mount(VSelect, {
       propsData: {

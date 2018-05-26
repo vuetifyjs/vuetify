@@ -47,7 +47,9 @@ v-text-field($material)
 
   &--outline
     border: 2px solid $material.text.secondary
-    background: transparent !important
+
+    &:hover
+      border: 2px solid $material.text.primary
 
 v-text-field-rtl()
   .v-label
@@ -237,11 +239,10 @@ rtl(v-text-field-rtl, "v-text-field")
     .v-input__append-outer
       margin-right: 16px
 
-    &:not(.v-text-field--box)
-      .v-input__slot
-        &:before,
-        &:after
-          display: none
+    .v-input__slot
+      &:before,
+      &:after
+        display: none
 
     .v-input__slot,
     .v-text-field__details
@@ -277,10 +278,14 @@ rtl(v-text-field-rtl, "v-text-field")
     border-radius: 4px
     cursor: pointer
     margin-bottom: 16px
+    transition: border $primary-transition
 
     &.v-input--is-focused
       border: 2px solid currentColor
       transition: border $primary-transition
+
+    .v-input__slot
+      background: transparent !important
 
   &.v-text-field--solo,
   &.v-text-field--outline

@@ -4,19 +4,11 @@
   > .container
     padding: $grid-gutters.lg
 
-    .layout
-      .flex
-        padding: ($grid-gutters.lg / 2)
+    > .layout > .flex
+      padding: ($grid-gutters.lg / 2)
 
-    .layout:only-child
+    > .layout:only-child
       margin: -($grid-gutters.lg / 2)
 
-    .layout:not(:only-child)
+    > .layout:not(:only-child)
       margin: auto -($grid-gutters.lg / 2)
-
-    *:not(:only-child)
-      .layout:first-child
-        margin-top: -($grid-gutters.lg / 2)
-
-      .layout:last-child
-        margin-bottom: -($grid-gutters.lg / 2)

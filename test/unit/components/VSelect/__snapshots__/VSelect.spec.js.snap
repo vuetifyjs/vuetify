@@ -386,8 +386,8 @@ exports[`VSelect should use scoped slot for selection generation 1`] = `
             >
             </label>
             <div class="v-select__selections">
-              <div class="v-select__selection v-select__selection--comma">
-                foo
+              <div>
+                foo - from slot
               </div>
               <input readonly="readonly"
                      tabindex="0"
