@@ -15,6 +15,16 @@ export default {
     genColgroup () {
       return this.$createElement('colgroup', {}, [...this.genCols()])
     },
+    genColgroupForFixedHeader () {
+      return this.$createElement('colgroup', {}, [
+        ...this.genCols(),
+        (this.scrollbarWidth > 0) ? this.$createElement('col', {
+          attrs: {
+            width: this.scrollbarWidth
+          }
+        }) : undefined
+      ])
+    },
     genCols () {
       return (this.columnsWidth) ? this.columnsWidth.map(
         colWidth => this.$createElement('col', {
@@ -25,20 +35,24 @@ export default {
       ) : []
     },
     genFixedHeader () {
-      if (this.height === undefined) return // disabled fixed header if height is not specify
+      if (!this.fixedHeaderEnabled) return // disabled fixed header if height is not specify
 
-      return this.$createElement('table', {
-        'class': { ...this.classes, 'fixed': true }
+      return this.$createElement('div', {
+        'class': { 'v-table__header-wrapper': true }
       }, [
-        this.genColgroup(),
-        this.genTHead()
+        this.$createElement('table', {
+          'class': this.classes
+        }, [
+          this.genColgroupForFixedHeader(),
+          this.genTHead(true)
+        ])
       ])
     },
     genDefaultHeader () {
       if (this.height !== undefined) return
       return this.genTHead()
     },
-    genTHead () {
+    genTHead (isHeader = false) {
       if (this.hideHeaders) return // Exit Early since no headers are needed.
 
       let children = []
@@ -66,6 +80,10 @@ export default {
         })
 
         this.hasSelectAll && row.unshift(this.$createElement('th', [ this.genHeaderWrapper([ checkbox ]) ]))
+
+        if (isHeader && this.scrollbarWidth > 0) {
+          row.push(this.$createElement('th', [ this.genHeaderWrapper(['']) ]))
+        }
 
         children = [this.genTR(row), this.genTProgress()]
       }

@@ -26,7 +26,8 @@ export default {
       actionsRangeControlsClasses: 'v-datatable__actions__range-controls',
       actionsSelectClasses: 'v-datatable__actions__select',
       actionsPaginationClasses: 'v-datatable__actions__pagination',
-      columnsWidth: []
+      columnsWidth: [],
+      scrollbarWidth: 0
     }
   },
 
@@ -97,9 +98,11 @@ export default {
         minColumnsWidth.push(actualWidth + paddingLeft + paddingRight)
       }
       return minColumnsWidth
+    },
+    fixedHeaderEnabled () {
+      return this.height !== undefined
     }
   },
-
   methods: {
     hasTag (elements, tag) {
       return Array.isArray(elements) && elements.find(e => e.tag === tag)
@@ -114,6 +117,20 @@ export default {
       } else {
         return el.offsetWidth
       }
+    },
+    getScrollbarWidth () {
+      const el = this.$refs.tableRef
+      if (el.scrollHeight > el.offsetHeight) {
+        return el.offsetWidth - el.clientWidth
+      }
+      return 0
+    },
+    fixedHeaderScroll () {
+      const $tableBody = this.$el.querySelector('.v-table__overflow')
+      const $tableHeader = this.$el.querySelector('.v-table__header-wrapper')
+      $tableBody.addEventListener('scroll', function (e) {
+        $tableHeader.scrollLeft = this.scrollLeft
+      })
     },
     calculateColumnsWidth () {
       const actualColumnsWidth = []
@@ -150,6 +167,9 @@ export default {
           }
         }
       }
+
+      this.scrollbarWidth = this.getScrollbarWidth()
+
       return actualColumnsWidth
     },
     initColumnWidth () {
@@ -175,6 +195,7 @@ export default {
   },
 
   mounted () {
+    this.fixedHeaderScroll()
     this.initColumnWidth()
   },
 
@@ -184,18 +205,20 @@ export default {
       directives: [{ name: 'resize', value: this.onResize }],
       style: { height: this.height ? `${this.height}px` : undefined }
     }, [
-      this.genFixedHeader(),
       h('table', {
         'class': this.classes
       }, [
         this.genColgroup(),
         this.genDefaultHeader(),
-        this.genTBody(),
-        this.genTFoot()
+        this.genTBody()
       ])
     ])
-    return h('div', [
+    return h('div', {
+      class: { 'v-table__wrapper': true }
+    }, [
+      this.genFixedHeader(),
       tableOverflow,
+      this.genTFoot(),
       this.genActionsFooter()
     ])
   }

@@ -2,7 +2,7 @@
 
 exports[`VDataTable.vue should match a snapshot - no data 1`] = `
 
-<div>
+<div class="v-table__wrapper">
   <div class="v-table__overflow">
     <table class="v-datatable v-table">
       <colgroup>
@@ -202,7 +202,7 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
 
 exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
 
-<div>
+<div class="v-table__wrapper">
   <div class="v-table__overflow">
     <table class="v-datatable v-table">
       <colgroup>
@@ -402,7 +402,7 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
 
 exports[`VDataTable.vue should match a snapshot - with data 1`] = `
 
-<div>
+<div class="v-table__wrapper">
   <div class="v-table__overflow">
     <table class="v-datatable v-table">
       <colgroup>
@@ -604,7 +604,7 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
 
 exports[`VDataTable.vue should match a snapshot with single rows-per-page-items 1`] = `
 
-<div>
+<div class="v-table__wrapper">
   <div class="v-table__overflow">
     <table class="v-datatable v-table">
       <colgroup>

@@ -32,10 +32,22 @@ v-table($material)
 theme(v-table, "v-table")
 
 .v-table
+  width: 100%
+  &__wrapper
+    position: relative
+    overflow: hidden
+    display: flex
+    flex-wrap: wrap
+    flex: 0 0 auto
+  &__header-wrapper
+  &__footer-wrapper
+    position: relative
+    overflow: hidden
+    flex: 0 0 100%
   &__overflow
     width: 100%
-    overflow-x: auto
-    overflow-y: auto
+    overflow: auto
+    flex: 0 0 100%
 
 .fixed
   top: 0px

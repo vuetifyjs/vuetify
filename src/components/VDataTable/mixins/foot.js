@@ -8,7 +8,15 @@ export default {
       const footer = this.$slots.footer
       const row = this.hasTag(footer, 'td') ? this.genTR(footer) : footer
 
-      return this.$createElement('tfoot', [row])
+      return this.$createElement('div', {
+        'class': { 'v-table__footer-wrapper': true }
+      }, [
+        this.$createElement('table', {
+          'class': this.classes
+        }, [
+          this.$createElement('tfoot', [row])
+        ])
+      ])
     },
     genActionsFooter () {
       if (this.hideActions) {
