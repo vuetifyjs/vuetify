@@ -90,12 +90,7 @@ export default {
       const $th = this.$el.querySelectorAll('thead tr:first-child th')
       const minColumnsWidth = []
       for (let i = 0; i < $th.length; i++) {
-        let actualWidth = 0
-        const $span = $th[i].querySelectorAll('span')
-        actualWidth = $span[0].clientWidth
-        const paddingLeft = parseFloat(getComputedStyle($th[i]).paddingLeft)
-        const paddingRight = parseFloat(getComputedStyle($th[i]).paddingRight)
-        minColumnsWidth.push(actualWidth + paddingLeft + paddingRight)
+        minColumnsWidth.push(this.extractMinWidthFromTableHeader($th[i]))
       }
       return minColumnsWidth
     },
@@ -118,7 +113,14 @@ export default {
         return el.offsetWidth
       }
     },
-    getScrollbarWidth () {
+    extractMinWidthFromTableHeader ($th) {
+      const $span = $th.querySelectorAll('span')
+      let actualWidth = $span[0].clientWidth
+      const paddingLeft = parseFloat(getComputedStyle($th).paddingLeft)
+      const paddingRight = parseFloat(getComputedStyle($th).paddingRight)
+      return actualWidth + paddingLeft + paddingRight
+    },
+    calculateScrollbarWidth () {
       const el = this.$refs.tableRef
       if (el.scrollHeight > el.offsetHeight) {
         return el.offsetWidth - el.clientWidth
@@ -132,50 +134,52 @@ export default {
         $tableHeader.scrollLeft = this.scrollLeft
       })
     },
-    calculateColumnsWidth () {
-      const actualColumnsWidth = []
-      const autoWidthColumns = []
-
-      let minAutoAssignedWidth = 0
-      let autoAssignableWidth = this.getContainerWidth()
-
-      for (let i = 0; i < this.headerColumns; i++) {
-        // extract the width specified in header
-        const headerIdx = (this.selectAll === false) ? i : i - 1
-        const specifiedWidth = headerIdx >= 0 ? this.headers[headerIdx].width : undefined
-        if (specifiedWidth === undefined) {
-          // take the min columns width if not specified
-          actualColumnsWidth.push(this.minColumnsWidth[i])
-          minAutoAssignedWidth += actualColumnsWidth[i]
-          autoWidthColumns.push(i) // for width adjustment when there is excessive width remaining
-        } else {
-          actualColumnsWidth.push(specifiedWidth)
-          autoAssignableWidth -= specifiedWidth
-        }
-      }
-
-      // min-width of those columns without width specified does not fully occupied the remaining space
-      // need to adjust the width of those column
+    autoWidthColumnCount () {
+      return this.headers.reduce((total, header) => {
+        return header.width ? total : total + 1
+      }, 0)
+    },
+    calculateAutoAssignableWidth () {
+      const autoAssignableWidth = this.headers.reduce((remaining, header) => {
+        return header.width ? remaining - header.width : remaining
+      }, this.getContainerWidth())
+      return (this.selectAll === true) ? autoAssignableWidth - this.minColumnsWidth[0] : autoAssignableWidth
+    },
+    calculateMinAutoAssignedWidth () {
+      return this.headers.reduce((minAutoAssignedWidth, header, index) => {
+        const minWidth = (this.selectAll === true) ? this.minColumnsWidth[index + 1] : this.minColumnsWidth[index]
+        return header.width ? minAutoAssignedWidth : minAutoAssignedWidth + minWidth
+      }, 0)
+    },
+    calculateWidthIncrement () {
+      const autoWidthColumnCount = this.autoWidthColumnCount()
+      const minAutoAssignedWidth = this.calculateMinAutoAssignedWidth()
+      const autoAssignableWidth = this.calculateAutoAssignableWidth()
       const excessiveWidth = autoAssignableWidth - minAutoAssignedWidth
-      if (excessiveWidth > 0 && autoWidthColumns.length > 0) {
-        const widthIncrement = parseInt(excessiveWidth / autoWidthColumns.length)
-        for (let i = 0; i < autoWidthColumns.length; i++) {
-          if (i === 0) {
-            actualColumnsWidth[autoWidthColumns[i]] += excessiveWidth - widthIncrement * (autoWidthColumns.length - 1)
-          } else {
-            actualColumnsWidth[autoWidthColumns[i]] += widthIncrement
-          }
-        }
+      return (excessiveWidth > 0 && autoWidthColumnCount > 0) ? parseInt(excessiveWidth / autoWidthColumnCount) : 0
+    },
+    columnsWidthRefinement (actualColumnsWidth) {
+      const remaining = this.getContainerWidth() - actualColumnsWidth.reduce((total, width) => total + width, 0)
+      if (remaining > 0) {
+        actualColumnsWidth[actualColumnsWidth.length - 1] += remaining
       }
-
-      this.scrollbarWidth = this.getScrollbarWidth()
-
       return actualColumnsWidth
     },
-    initColumnWidth () {
-      if (!this.headersLength || (this.headers && this.headers.length === this.headersLength)) {
-        this.columnsWidth = this.calculateColumnsWidth()
+    calculateColumnsWidth () {
+      // column for the select checkbox will not be expanded, minimum width is taken
+      const actualColumnsWidth = (this.selectAll === true) ? [this.minColumnsWidth[0]] : []
+
+      const autoWidthIncrement = this.calculateWidthIncrement()
+      for (let i = 0; i < this.headers.length; i++) {
+        const specifiedWidth = this.headers[i].width ? this.headers[i].width : this.minColumnsWidth[i] + autoWidthIncrement
+        actualColumnsWidth.push(specifiedWidth)
       }
+
+      return this.columnsWidthRefinement(actualColumnsWidth)
+    },
+    initColumnWidth () {
+      this.scrollbarWidth = this.calculateScrollbarWidth()
+      this.columnsWidth = this.calculateColumnsWidth()
     },
     onResize () {
       this.initColumnWidth()
