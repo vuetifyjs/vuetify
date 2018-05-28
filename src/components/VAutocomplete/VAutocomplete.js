@@ -15,6 +15,7 @@ export default {
 
   data: vm => ({
     attrsInput: null,
+    editingIndex: -1,
     lazySearch: vm.searchInput,
     lazyValue: vm.value != null
       ? vm.value
@@ -22,6 +23,10 @@ export default {
   }),
 
   props: {
+    allowOverflow: {
+      type: Boolean,
+      default: true
+    },
     browserAutocomplete: {
       type: String,
       default: 'off'
@@ -41,13 +46,18 @@ export default {
           .indexOf(query.toString().toLowerCase()) > -1
       }
     },
+    hideNoData: Boolean,
     noFilter: Boolean,
     offsetY: {
       type: Boolean,
       default: true
     },
+    offsetOverflow: {
+      type: Boolean,
+      default: true
+    },
     searchInput: {
-      default: null
+      default: undefined
     },
     tags: Boolean,
     transition: {
@@ -77,11 +87,9 @@ export default {
       return this.getText(this.selectedItem).toString().length
     },
     filteredItems () {
-      const items = this.filterDuplicates(this.cachedItems.concat(this.items))
+      if (!this.isSearching || this.noFilter) return this.allItems
 
-      if (!this.isSearching || this.noFilter) return items
-
-      return items.filter(i => this.filter(i, this.internalSearch, this.getText(i)))
+      return this.allItems.filter(i => this.filter(i, this.internalSearch, this.getText(i)))
     },
     hasSlot () {
       return VSelect.computed.hasSlot.call(this) || this.tags
@@ -108,18 +116,20 @@ export default {
     isSearching () {
       if (this.isMulti) return this.searchIsDirty
 
-      return this.internalSearch !== this.getText(this.internalValue)
+      return this.internalSearch !== this.getText(this.selectedItem)
     },
     menuCanShow () {
       if (!this.isFocused) return false
 
-      const filtered = this.filteredItems.length > 0
+      const filtered = this.hideSelected
+        ? this.filteredItems.length - this.selectedItems.length > 0
+        : this.filteredItems.length > 0
 
       if (this.isAnyValueAllowed) {
         return filtered
       }
 
-      return !this.hideNoData || filtered
+      return filtered || !this.hideNoData
     },
     menuProps () {
       return Object.assign(VSelect.computed.menuProps.call(this), {
@@ -156,8 +166,17 @@ export default {
   },
 
   watch: {
-    filteredItems () {
+    filteredItems (val) {
+      if (this.isAnyValueAllowed) return
+
       this.setMenuIndex(-1)
+
+      this.$nextTick(() => {
+        this.setMenuIndex(val.length === 1 ? 0 : -1)
+      })
+    },
+    internalValue () {
+      this.setSearch()
     },
     isFocused (val) {
       if (val) {
@@ -184,6 +203,12 @@ export default {
 
         this.internalSearch = val.slice(0, val.length - delimiter.length)
         this.updateTags()
+      }
+
+      if (this.isMenuActive &&
+        this.$refs.menu
+      ) {
+        this.$refs.menu.updateDimensions()
       }
     }
   },
@@ -248,6 +273,25 @@ export default {
         this.selectedIndex = newIndex
       }
     },
+    clearableCallback () {
+      this.internalSearch = null
+
+      VSelect.methods.clearableCallback.call(this)
+    },
+    genChipSelection (item, index) {
+      const chip = VSelect.methods.genChipSelection.call(this, item, index)
+
+      // Allow user to update an existing value
+      if (this.tags) {
+        chip.componentOptions.listeners.dblclick = () => {
+          this.editingIndex = index
+          this.internalSearch = this.getText(item)
+          this.selectedIndex = -1
+        }
+      }
+
+      return chip
+    },
     genInput () {
       const input = VTextField.methods.genInput.call(this)
 
@@ -274,14 +318,9 @@ export default {
 
       this.activateMenu()
     },
-    onEnterDown () {
-      this.onBlur()
-    },
-    onEscDown (e) {
-      e.preventDefault()
-      this.isMenuActive = false
-    },
     onInput (e) {
+      if (this.selectedIndex > -1) return
+
       // If typing and menu is not currently active
       if (e.target.value) {
         this.activateMenu()
@@ -295,22 +334,22 @@ export default {
     onKeyDown (e) {
       const keyCode = e.keyCode
 
-      // If enter, space, up, or down is pressed, open menu
-      if (!this.isMenuActive &&
-        [keyCodes.enter, keyCodes.space, keyCodes.up, keyCodes.down].includes(keyCode)
-      ) this.activateMenu()
+      VSelect.methods.onKeyDown.call(this, e)
 
-      // This should do something different
-      if (e.keyCode === keyCodes.enter) return this.onEnterDown()
+      // If user is at selection index of 0
+      // create a new tag
+      if (this.tags &&
+        keyCode === keyCodes.left &&
+        this.$refs.input.selectionStart === 0
+      ) {
+        this.updateSelf()
+      }
 
-      // If escape deactivate the menu
-      if (keyCode === keyCodes.esc) return this.onEscDown(e)
-
-      // If tab - select item or close menu
-      if (keyCode === keyCodes.tab) return this.onTabDown(e)
-
-      if (this.$refs.input.selectionStart === 0) this.updateSelf()
-      if (!this.hideSelections) this.changeSelectedIndex(keyCode)
+      // The ordering is important here
+      // allows new value to be updated
+      // and then moves the index to the
+      // proper location
+      this.changeSelectedIndex(keyCode)
     },
     onTabDown (e) {
       const menuIndex = this.getMenuIndex()
@@ -326,36 +365,27 @@ export default {
         e.stopPropagation()
 
         return this.updateTags()
-      // An item that is selected by
-      // menu-index should toggled
-      } else if (this.isMenuActive && menuIndex > -1) {
-        // Reset the list index if searching
-        this.internalSearch &&
-          this.$nextTick(() => setTimeout(() => this.setMenuIndex(-1), 0))
-
-        e.preventDefault()
-        this.selectListTile(menuIndex)
       } else {
-        // If we make it here,
-        // the user has no selected indexes
-        // and is probably tabbing out
-        this.isFocused = false
+        VSelect.methods.onTabDown.call(this, e)
       }
 
       this.updateSelf()
     },
     selectItem (item) {
-      VSelect.methods.selectItem.call(this, item)
+      // Currently only supports items:<string[]>
+      if (this.editingIndex > -1) {
+        this.internalValue.splice(this.editingIndex, 1, this.internalSearch)
+        this.editingIndex = -1
+      } else {
+        VSelect.methods.selectItem.call(this, item)
+      }
 
       this.setSearch()
     },
-    selectListTile (index) {
-      if (!this.$refs.menu.tiles[index]) return
-
-      this.$refs.menu.tiles[index].click()
-    },
     setSelectedItems () {
-      if (this.internalValue == null) {
+      if (this.internalValue == null ||
+        this.internalValue === ''
+      ) {
         this.selectedItems = []
       } else if (this.tags) {
         this.selectedItems = this.internalValue
@@ -365,13 +395,18 @@ export default {
         VSelect.methods.setSelectedItems.call(this)
       }
     },
-    setMenuIndex (index) {
-      this.$refs.menu && (this.$refs.menu.listIndex = index)
-    },
     setSearch () {
-      if (this.hasSlot || this.isMulti) return
-
-      this.lazySearch = this.getText(this.internalValue)
+      // Wait for nextTick so selectedItem
+      // has had time to update
+      this.$nextTick(() => {
+        this.internalSearch = (
+          !this.selectedItem ||
+          this.isMulti ||
+          this.hasSlot
+        )
+          ? null
+          : this.getText(this.selectedItem)
+      })
     },
     setValue () {
       this.internalValue = this.internalSearch
@@ -382,18 +417,25 @@ export default {
         !this.internalValue
       ) return
 
-      if (this.isMulti) return (this.internalSearch = null)
-
       if (!this.valueComparator(
         this.internalSearch,
         this.getValue(this.internalValue)
       )) {
-        this.internalSearch = this.initialValue
+        this.setSearch()
       }
     },
     updateCombobox () {
+      // When using chips and search is dirty
+      // avoid updating input
+      if (this.hasChips && !this.searchIsDirty) return
+
+      // The internal search is not matching
+      // the initial value, update the input
       if (this.internalSearch !== this.internalValue) this.setValue()
-      else this.updateAutocomplete()
+
+      // Reset search if using chips
+      // to avoid a double input
+      if (this.hasChips) this.internalSearch = undefined
     },
     updateSelf () {
       if (this.tags) this.updateTags()

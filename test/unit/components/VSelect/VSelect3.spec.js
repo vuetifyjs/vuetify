@@ -52,4 +52,16 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.vm.virtualizedItems.length).toBe(100)
   })
+
+  it('should fallback to using text as value if none present', () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        items: [{
+          text: 'foo'
+        }]
+      }
+    })
+
+    expect(wrapper.vm.getValue(wrapper.vm.items[0])).toBe('foo')
+  })
 })

@@ -6,13 +6,14 @@ import {
   VListTileTitle,
   VListTileContent
 } from '@/components/VList'
+import VAutocomplete from '@/components/VAutocomplete'
 
 test('VSelect', ({ mount, compileToFunctions }) => {
   const app = document.createElement('div')
   app.setAttribute('data-app', true)
   document.body.appendChild(app)
 
-  it('should return numeric 0', () => {
+  it('should return numeric 0', async () => {
     const item = { value: 0, text: '0' }
     const wrapper = mount(VSelect, {
       propsData: {
@@ -25,6 +26,8 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     const change = jest.fn()
     wrapper.vm.$on('change', change)
     wrapper.vm.selectItem(item)
+
+    await wrapper.vm.$nextTick()
 
     expect(change).toBeCalledWith([0])
   })
@@ -406,18 +409,52 @@ test('VSelect', ({ mount, compileToFunctions }) => {
   })
 
   it('should use scoped slot for selection generation', () => {
-    const wrapper = mount(VSelect, {
-      propsData: {
-        items: ['foo', 'bar'],
-        value: 'foo'
-      },
-      scopedSlots: {
-        selection: () => {
-          render: h => h('div', 'bar')
-        }
+    const wrapper = mount({
+      render (h) {
+        return h(VSelect, {
+          attrs: {
+            items: ['foo', 'bar'],
+            value: 'foo'
+          },
+          scopedSlots: {
+            selection: ({ item }) => {
+              return h('div', item + ' - from slot')
+            }
+          }
+        })
       }
     })
 
     expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should toggle menu on icon click', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        items: ['foo', 'bar'],
+        offsetY: true
+      }
+    })
+
+    const icon = wrapper.first('.v-icon')
+    const slot = wrapper.first('.v-input__slot')
+
+    expect(wrapper.vm.isMenuActive).toBe(false)
+
+    slot.trigger('click')
+    expect(wrapper.vm.isMenuActive).toBe(true)
+
+    slot.trigger('click')
+    expect(wrapper.vm.isMenuActive).toBe(true)
+
+    // Mock mouseup event with a target of
+    // the inner icon element
+    const event = new Event('mouseup')
+    Object.defineProperty(event, 'target', { writable: false, value: icon.element })
+
+    wrapper.element.dispatchEvent(event)
+
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isMenuActive).toBe(false)
   })
 })

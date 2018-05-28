@@ -18,9 +18,6 @@ import Ripple from '../../directives/ripple'
 import {
   keyCodes
 } from '../../util/helpers'
-import {
-  consoleWarn
-} from '../../util/console'
 
 const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
 
@@ -166,12 +163,10 @@ export default {
   methods: {
     /** @public */
     focus () {
-      consoleWarn('The <focus> function is deprecated, use <onFocus> instead', this)
       this.onFocus()
     },
     /** @public */
     blur () {
-      consoleWarn('The <blur> function is deprecated, use <onBlur> instead', this)
       this.onBlur()
     },
     clearableCallback () {
@@ -191,6 +186,17 @@ export default {
 
       return this.genSlot('append', 'outer', slot)
     },
+    genClearIcon () {
+      if (!this.clearable) return null
+
+      const icon = !this.isDirty
+        ? false
+        : 'clear'
+
+      return this.genSlot('append', 'inner', [
+        this.genIcon(icon, this.clearIconCb || this.clearableCallback)
+      ])
+    },
     genCounter () {
       if (this.counter === false) return null
 
@@ -207,6 +213,7 @@ export default {
     genDefaultSlot () {
       return [
         this.genTextFieldSlot(),
+        this.genClearIcon(),
         this.genIconSlot()
       ]
     },
@@ -263,15 +270,6 @@ export default {
         slot.push(this.$slots['append-icon'])
       } else if (this.appendIcon) {
         slot.push(this.genIcon('append'))
-      } else if (this.clearable) {
-        // Make sure the slot takes space
-        // so layout doesn't jump when
-        // dirty
-        const icon = !this.isDirty ? false : 'clear'
-
-        slot.push(this.genIcon(icon,
-          this.clearIconCb || this.clearableCallback
-        ))
       }
 
       return this.genSlot('append', 'inner', slot)
@@ -369,6 +367,8 @@ export default {
       this.internalChange = true
 
       if (e.keyCode === keyCodes.enter) this.$emit('change', this.internalValue)
+
+      this.$emit('keydown', e)
     },
     onMouseDown (e) {
       // Prevent input from being blurred

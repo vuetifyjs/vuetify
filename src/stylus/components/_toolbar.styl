@@ -17,15 +17,12 @@ theme(v-toolbar, "v-toolbar")
   width: 100%
   will-change: padding-left
 
-  .input-group--solo
-    .input-group__details
+  .v-text-field--enclosed,
+  .v-text-field--box
+    margin: 0
+
+    .v-text-field__details
       display: none
-
-  .input-group--single-line:not(.input-group--solo)
-    padding: 0
-
-    label
-      top: auto
 
 /** Children */
 .v-toolbar

@@ -142,4 +142,18 @@ test('VTextarea.vue', ({ mount }) => {
       expect(html2).toBe(html1)
     })
   })
+
+  it('should emit keydown event', () => {
+    const wrapper = mount(VTextarea)
+    const keydown = jest.fn()
+    const textarea = wrapper.first('textarea')
+    wrapper.vm.$on('keydown', keydown)
+
+    textarea.trigger('focus')
+    textarea.element.value = 'foobar'
+    textarea.trigger('input')
+    textarea.trigger('keydown.enter')
+
+    expect(keydown).toBeCalled()
+  })
 })

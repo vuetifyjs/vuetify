@@ -104,7 +104,7 @@ export default {
       this.$nextTick(this.validate)
     },
     onRadioBlur (e) {
-      if (!e.relatedTarget || !e.relatedTarget.classList.contains('radio')) {
+      if (!e.relatedTarget || !e.relatedTarget.classList.contains('v-radio')) {
         this.hasInput = true
         this.$emit('blur', e)
       }

@@ -4,7 +4,7 @@ exports[`VCheckbox.js should use custom icons 1`] = `
 
 <div class="v-input v-input--selection-controls v-input--checkbox">
   <div class="v-input__control">
-    <div class="v-input__slot accent--text">
+    <div class="v-input__slot">
       <div class="v-input--selection-controls__input">
         <input aria-checked="mixed"
                role="checkbox"
@@ -37,7 +37,7 @@ exports[`VCheckbox.js should use custom icons 2`] = `
 
 <div class="v-input v-input--selection-controls v-input--checkbox">
   <div class="v-input__control">
-    <div class="v-input__slot accent--text">
+    <div class="v-input__slot">
       <div class="v-input--selection-controls__input">
         <input aria-checked="mixed"
                role="checkbox"
@@ -70,7 +70,7 @@ exports[`VCheckbox.js should use custom icons 3`] = `
 
 <div class="v-input v-input--selection-controls v-input--checkbox">
   <div class="v-input__control">
-    <div class="v-input__slot accent--text">
+    <div class="v-input__slot">
       <div class="v-input--selection-controls__input">
         <input aria-checked="mixed"
                role="checkbox"
