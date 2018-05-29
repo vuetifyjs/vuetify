@@ -1,13 +1,25 @@
 {
+  "presets": [
+    ["env", {
+      "targets": {
+        "browsers": [">0.5%", "last 2 versions", "not dead", "not op_mini all"],
+        "node": 8
+      },
+      "modules": false
+    }]
+  ],
+  "plugins": [
+    ["transform-define", "./build/babel-transform-define.js"],
+    "transform-object-rest-spread"
+  ],
   "env": {
     "test": {
       "presets": [
-        ["es2015"],
-        ["stage-2"]
+        ["env", {
+          "targets": { "node": true }
+        }]
       ],
       "plugins": [
-        "transform-runtime",
-        ["transform-define", "./build/babel-transform-define.js"],
         ["module-resolver", {
           "root": ["./src"],
           "alias": {
@@ -21,32 +33,8 @@
       ]
     },
     "es5": {
-      "presets": [
-        ["es2015"],
-        ["stage-2"]
-      ],
       "plugins": [
-        "./build/babel-transform-stylus-paths.js",
-        ["transform-define", "./build/babel-transform-define.js"]
-      ]
-    },
-    "development": {
-      "presets": [
-        ["es2015", { "modules": false }],
-        ["stage-2"]
-      ],
-      "plugins": [
-        "add-filehash",
-        ["transform-define", "./build/babel-transform-define.js"]
-      ]
-    },
-    "production": {
-      "presets": [
-        ["es2015", { "modules": false }],
-        ["stage-2"]
-      ],
-      "plugins": [
-        ["transform-define", "./build/babel-transform-define.js"]
+        "./build/babel-transform-stylus-paths.js"
       ]
     }
   }
