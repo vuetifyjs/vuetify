@@ -13,7 +13,9 @@ module.exports = merge(baseWebpackConfig, {
     publicPath: '/dist/',
     library: 'Vuetify',
     libraryTarget: 'umd',
-    libraryExport: 'default'
+    libraryExport: 'default',
+    // See https://github.com/webpack/webpack/issues/6522
+    globalObject: 'typeof self !== \'undefined\' ? self : this'
   },
   externals: {
     vue: {
