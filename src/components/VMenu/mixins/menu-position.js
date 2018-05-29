@@ -23,7 +23,9 @@ export default {
         )
       }
 
-      this.$refs.content.scrollTop = scrollTop
+      if(this.$refs.content) {
+        this.$refs.content.scrollTop = scrollTop
+      }
     },
     calcLeftAuto () {
       if (this.isAttached) return 0
