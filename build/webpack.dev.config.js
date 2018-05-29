@@ -66,7 +66,6 @@ module.exports = merge(baseWebpackConfig, {
     disableHostCheck: true
   },
   plugins: [
-    new VueLoaderPlugin(),
-    new MiniCssExtractPlugin()
+    new VueLoaderPlugin()
   ]
 })

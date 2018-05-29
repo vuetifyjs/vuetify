@@ -24,7 +24,8 @@ module.exports = {
       {
         test: /\.styl$/,
         use: [
-          MiniCssExtractPlugin.loader,
+          // https://github.com/webpack-contrib/mini-css-extract-plugin#user-content-advanced-configuration-example
+          isProd ? MiniCssExtractPlugin.loader : 'style-loader',
           { loader: 'css-loader', options: { sourceMap: !isProd } },
           { loader: 'postcss-loader', options: { sourceMap: !isProd } },
           { loader: 'stylus-loader', options: { sourceMap: !isProd } }
