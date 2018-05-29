@@ -4,7 +4,6 @@ import Boilerplate from './Boilerplate'
 import Vuetify from 'vuetify'
 import VueRouter from 'vue-router'
 import router from './router'
-import '../src/stylus/main.styl'
 
 Vue.config.performance = true
 

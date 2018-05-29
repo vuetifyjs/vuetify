@@ -14,7 +14,7 @@
   "types": "types/index.d.ts",
   "scripts": {
     "watch": "cross-env TARGET=development webpack --config build/config.js --progress --hide-modules --watch",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.config.js --open --hot",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.config.js --hot",
     "build": "yarn build:dist && yarn build:es5",
     "build:dev": "cross-env NODE_ENV=production node build/webpack.dev.config.js",
     "build:dist": "rimraf dist && cross-env NODE_ENV=production webpack --config build/config.js --progress --hide-modules",
@@ -69,7 +69,6 @@
     "eslint-plugin-standard": "^3.1.0",
     "eslint-plugin-typescript": "^0.12.0",
     "eventsource-polyfill": "0.9.6",
-    "extract-text-webpack-plugin": "4.0.0-beta.0",
     "friendly-errors-webpack-plugin": "1.7.0",
     "function-bind": "1.1.1",
     "husky": "0.14.3",
@@ -105,8 +104,6 @@
     "vue-server-renderer": "^2.5.16",
     "vue-template-compiler": "^2.5.16",
     "webpack": "^4.10.0",
-    "webpack-bundle-analyzer": "2.13.1",
-    "webpack-bundle-size-analyzer": "2.7.0",
     "webpack-cli": "^2.1.4",
     "webpack-dev-server": "^3.1.4",
     "webpack-merge": "^4.1.2"

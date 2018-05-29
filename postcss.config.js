@@ -1,11 +1,10 @@
 const autoprefixer = require('autoprefixer')
 const mqpacker = require('css-mqpacker')
-const postcss = require('postcss')
 
 module.exports = (ctx) => ({
   plugins: [
     autoprefixer({
-      browsers: ['ie >= 11', 'safari >= 9', 'last 2 versions', '> 1%']
+      browsers: ['>0.5%', 'not ie < 11', 'not safari < 9', 'not dead', 'not op_mini all']
     }),
     mqpacker()
   ]

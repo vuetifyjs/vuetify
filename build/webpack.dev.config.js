@@ -1,6 +1,8 @@
 const path = require('path')
 const merge = require('webpack-merge')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const baseWebpackConfig = require('./webpack.base.config')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 // Helpers
@@ -24,14 +26,24 @@ module.exports = merge(baseWebpackConfig, {
   module: {
     rules: [
       {
+        enforce: 'pre',
+        test: /\.[jt]s$/,
+        exclude: /node_modules/,
+        loader: 'eslint-loader',
+        options: { cache: true }
+      },
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader'
+      },
+      {
         test: /\.[jt]s$/,
         use: [
           'babel-loader',
           {
             loader: 'ts-loader',
             options: { appendTsSuffixTo: [/\.vue$/] }
-          },
-          'eslint-loader'
+          }
         ],
         exclude: /node_modules/
       },
@@ -55,6 +67,7 @@ module.exports = merge(baseWebpackConfig, {
     disableHostCheck: true
   },
   plugins: [
-    new BundleAnalyzerPlugin({ openAnalyzer: false })
+    new VueLoaderPlugin(),
+    new MiniCssExtractPlugin()
   ]
 })
