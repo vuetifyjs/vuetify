@@ -139,7 +139,6 @@ theme(v-list, "v-list")
 
     &--disabled
       opacity: 0.4 !important
-      pointer-events: none !important
 
     &--avatar
       height: $list-item-avatar-single-height
@@ -170,6 +169,9 @@ theme(v-list, "v-list")
 
     .v-list__tile__sub-title
       font-size: $list-item-dense-font-size
+
+  &--disabled
+    pointer-events: none
 
   &--two-line
     .v-list__tile
