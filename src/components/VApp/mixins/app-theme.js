@@ -48,12 +48,19 @@ export default {
     },
     vueMeta () {
       if (this.$vuetify.theme === false) return
+
+      const options = {
+        cssText: this.generatedStyles,
+        id: 'vuetify-theme-stylesheet',
+        type: 'text/css'
+      }
+
+      if (this.$vuetify.options.cspNonce) {
+        options.nonce = this.$vuetify.options.cspNonce
+      }
+
       return {
-        style: [{
-          cssText: this.generatedStyles,
-          type: 'text/css',
-          id: 'vuetify-theme-stylesheet'
-        }]
+        style: [options]
       }
     }
   },
