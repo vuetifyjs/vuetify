@@ -79,6 +79,7 @@
     "jest-css-modules": "1.1.0",
     "jest-serializer-html": "5.0.0",
     "jest-vue-preprocessor": "1.4.0",
+    "mini-css-extract-plugin": "^0.4.0",
     "optimize-css-assets-webpack-plugin": "4.0.2",
     "optimize-js-plugin": "0.0.4",
     "postcss-loader": "2.1.5",
@@ -106,9 +107,9 @@
     "webpack": "^4.10.0",
     "webpack-bundle-analyzer": "2.13.1",
     "webpack-bundle-size-analyzer": "2.7.0",
+    "webpack-cli": "^2.1.4",
     "webpack-dev-server": "^3.1.4",
-    "webpack-merge": "^4.1.2",
-    "write-file-webpack-plugin": "4.3.2"
+    "webpack-merge": "^4.1.2"
   },
   "dependencies": {},
   "peerDependencies": {
