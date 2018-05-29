@@ -2,7 +2,6 @@
 import '../../stylus/components/_sliders.styl'
 
 // Components
-import VLabel from '../VLabel'
 import { VScaleTransition } from '../transitions'
 
 // Extensions
@@ -231,20 +230,6 @@ export default {
         : children.push(slider)
 
       return children
-    },
-    genLabel () {
-      if (!this.label) return null
-
-      const data = {
-        props: {
-          color: this.validationState,
-          focused: !!this.validationState
-        }
-      }
-
-      if (this.$attrs.id) data.props.for = this.$attrs.id
-
-      return this.$createElement(VLabel, data, this.$slots.label || this.label)
     },
     genListeners () {
       return Object.assign({}, {

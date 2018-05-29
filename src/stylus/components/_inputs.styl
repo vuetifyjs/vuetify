@@ -13,7 +13,7 @@ v-input($material)
       color: $material.text.primary
 
   &--is-disabled
-    .v-input__label,
+    .v-label,
     input,
     textarea
       color: $material.text.disabled
@@ -50,6 +50,11 @@ theme(v-input, "v-input")
     margin: 0
     padding: 0
     position: absolute
+
+  .v-label
+    cursor: auto
+    height: 20px
+    line-height: 20px
 
   &__append-outer,
   &__prepend-outer

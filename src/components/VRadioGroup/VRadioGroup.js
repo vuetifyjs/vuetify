@@ -84,15 +84,12 @@ export default {
 
   methods: {
     genDefaultSlot () {
-      return [this.genRadioGroup()]
-    },
-    genRadioGroup () {
       return this.$createElement('div', {
         staticClass: 'v-input--radio-group__input',
         attrs: {
           role: 'radiogroup'
         }
-      }, this.$slots.default)
+      }, VInput.methods.genDefaultSlot.call(this))
     },
     onRadioChange (value) {
       if (this.disabled) return

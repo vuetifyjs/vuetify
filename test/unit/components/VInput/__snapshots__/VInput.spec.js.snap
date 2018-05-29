@@ -168,3 +168,47 @@ exports[`VInput.js should not generate input details 1`] = `
 </div>
 
 `;
+
+exports[`VInput.js should render a label 1`] = `
+
+<div class="v-input">
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <label aria-hidden="true"
+             class="v-label"
+             style="left: 0px; position: relative;"
+      >
+        foo
+      </label>
+    </div>
+    <div class="v-messages">
+      <div class="v-messages__wrapper">
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VInput.js should render a label 2`] = `
+
+<div class="v-input">
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <label aria-hidden="true"
+             class="v-label"
+             style="left: 0px; position: relative;"
+      >
+        <div>
+          foo
+        </div>
+      </label>
+    </div>
+    <div class="v-messages">
+      <div class="v-messages__wrapper">
+      </div>
+    </div>
+  </div>
+</div>
+
+`;

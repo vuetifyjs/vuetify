@@ -12,11 +12,6 @@ exports[`VSelect should add color to selected index 1`] = `
       >
         <div class="v-menu__activator">
           <div class="v-select__slot">
-            <label aria-hidden="true"
-                   class="v-label v-label--active"
-                   style="left: 0px; position: absolute;"
-            >
-            </label>
             <div class="v-select__selections">
               <div class="v-select__selection v-select__selection--comma primary--text">
                 foo
@@ -64,11 +59,6 @@ exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
       >
         <div class="v-menu__activator">
           <div class="v-select__slot">
-            <label aria-hidden="true"
-                   class="v-label v-label--active"
-                   style="left: 0px; position: absolute;"
-            >
-            </label>
             <div class="v-select__selections">
               <div class="v-select__selection v-select__selection--comma">
                 1
@@ -125,11 +115,6 @@ exports[`VSelect should be clearable with prop, dirty and single select 1`] = `
       >
         <div class="v-menu__activator">
           <div class="v-select__slot">
-            <label aria-hidden="true"
-                   class="v-label v-label--active"
-                   style="left: 0px; position: absolute;"
-            >
-            </label>
             <div class="v-select__selections">
               <div class="v-select__selection v-select__selection--comma">
                 1
