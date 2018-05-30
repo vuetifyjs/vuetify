@@ -2,7 +2,6 @@ const path = require('path')
 const merge = require('webpack-merge')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const baseWebpackConfig = require('./webpack.base.config')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 // Helpers
 const resolve = file => path.resolve(__dirname, file)
