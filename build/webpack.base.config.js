@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 
 const isProd = process.env.NODE_ENV === 'production'
+const extractCSS = isProd || process.env.TARGET === 'development'
 
 let plugins = [
   new FriendlyErrorsWebpackPlugin({
@@ -26,7 +27,7 @@ module.exports = {
         use: [
           // https://github.com/webpack-contrib/mini-css-extract-plugin#user-content-advanced-configuration-example
           // TODO: remove style-loader: https://github.com/webpack-contrib/mini-css-extract-plugin/issues/34
-          isProd ? MiniCssExtractPlugin.loader : 'style-loader',
+          extractCSS ? MiniCssExtractPlugin.loader : 'style-loader',
           { loader: 'css-loader', options: { sourceMap: !isProd } },
           { loader: 'postcss-loader', options: { sourceMap: !isProd } },
           { loader: 'stylus-loader', options: { sourceMap: !isProd } }
