@@ -314,6 +314,10 @@ test('VSlider.vue', ({ mount }) => {
       propsData: { step: 0 }
     })
 
+    expect(wrapper.vm.roundValue(1.234)).toBe(1.234)
+
+    wrapper.setProps({ step: 1 })
+
     expect(wrapper.vm.roundValue(1.234)).toBe(1)
 
     wrapper.setProps({ step: 4 })
@@ -482,6 +486,7 @@ test('VSlider.vue', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
 
     expect(warning).toHaveBeenTipped()
+    wrapper.vm.$vuetify.rtl = undefined
   })
 
   it('should display tick labels', () => {
