@@ -96,6 +96,10 @@ theme(button, "v-btn")
     height: $button-large-height
     padding: $button-large-padding
 
+/** Icons */
+.v-btn .v-btn__content .v-icon
+  color: inherit
+
 /** Types */
 .v-btn
   &--flat
@@ -257,6 +261,10 @@ theme(button, "v-btn")
   &.v-btn--disabled
     box-shadow: none !important
     pointer-events: none
+
+  &:not(.v-btn--disabled)
+    .v-btn__content .v-icon
+      transition: none
 
 .v-btn--icon
   padding: 0
