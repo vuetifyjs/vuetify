@@ -2,7 +2,6 @@
 import '../../stylus/components/_sliders.styl'
 
 // Components
-import VLabel from '../VLabel'
 import { VScaleTransition } from '../transitions'
 
 // Extensions
@@ -141,7 +140,7 @@ export default {
       }
     },
     stepNumeric () {
-      return this.step > 0 ? parseFloat(this.step) : 1
+      return this.step > 0 ? parseFloat(this.step) : 0
     },
     trackFillStyles () {
       let left = this.$vuetify.rtl ? 'auto' : 0
@@ -231,20 +230,6 @@ export default {
         : children.push(slider)
 
       return children
-    },
-    genLabel () {
-      if (!this.label) return null
-
-      const data = {
-        props: {
-          color: this.validationState,
-          focused: !!this.validationState
-        }
-      }
-
-      if (this.$attrs.id) data.props.for = this.$attrs.id
-
-      return this.$createElement(VLabel, data, this.$slots.label || this.label)
     },
     genListeners () {
       return Object.assign({}, {
@@ -490,7 +475,7 @@ export default {
       if (![pageup, pagedown, end, home, left, right, down, up].includes(e.keyCode)) return
 
       e.preventDefault()
-      const step = this.stepNumeric
+      const step = this.stepNumeric || 1
       const steps = (this.max - this.min) / step
       if ([left, right, down, up].includes(e.keyCode)) {
         this.keyPressed += 1
@@ -513,6 +498,7 @@ export default {
       return value
     },
     roundValue (value) {
+      if (!this.stepNumeric) return value
       // Format input value using the same number
       // of decimals places as in the step prop
       const trimmedStep = this.step.toString().trim()
@@ -520,7 +506,7 @@ export default {
         ? (trimmedStep.length - trimmedStep.indexOf('.') - 1)
         : 0
 
-      const newValue = 1 * Math.round(value / this.stepNumeric) * this.stepNumeric
+      const newValue = Math.round(value / this.stepNumeric) * this.stepNumeric
 
       return parseFloat(Math.min(newValue, this.max).toFixed(decimals))
     },

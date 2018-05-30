@@ -218,8 +218,9 @@ export default {
       ]
     },
     genLabel () {
-      if (this.isSingle &&
-        (this.isDirty || !!this.placeholder)
+      if (!this.hasLabel ||
+        (this.isSingle &&
+        (this.isDirty || !!this.placeholder))
       ) return null
 
       const isSingleLine = this.isSingle

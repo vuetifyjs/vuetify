@@ -172,4 +172,43 @@ test('VInput.js', ({ mount }) => {
     wrapper.setProps({ errorMessages: 'required', error: false })
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should be disabled', () => {
+    const wrapper = mount(VInput)
+
+    expect(wrapper.vm.isDisabled).toBe(false)
+
+    wrapper.setProps({ disabled: true })
+
+    expect(wrapper.vm.isDisabled).toBe(true)
+
+    wrapper.setProps({
+      disabled: undefined,
+      readonly: true
+    })
+
+    expect(wrapper.vm.isDisabled).toBe(true)
+
+    wrapper.setProps({ readonly: undefined })
+
+    expect(wrapper.vm.isDisabled).toBe(false)
+  })
+
+  it('should render a label', () => {
+    const wrapper = mount(VInput, {
+      propsData: { label: 'foo' }
+    })
+
+    expect(wrapper.vm.hasLabel).toBe(true)
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    const wrapper2 = mount(VInput, {
+      slots: {
+        label: [{ render: h => h('div', 'foo') }]
+      }
+    })
+
+    expect(wrapper2.html()).toMatchSnapshot()
+  })
 })

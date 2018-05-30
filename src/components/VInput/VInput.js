@@ -3,6 +3,7 @@ import '../../stylus/components/_inputs.styl'
 
 // Components
 import VIcon from '../VIcon'
+import VLabel from '../VLabel'
 import VMessages from '../VMessages'
 
 // Mixins
@@ -37,6 +38,7 @@ export default {
     height: [Number, String],
     hideDetails: Boolean,
     hint: String,
+    label: String,
     persistentHint: Boolean,
     prependIcon: String,
     prependIconCb: Function,
@@ -69,6 +71,9 @@ export default {
         this.hint &&
         (this.persistentHint || this.isFocused)
     },
+    hasLabel () {
+      return Boolean(this.$slots.label || this.label)
+    },
     // Proxy for `lazyValue`
     // This allows an input
     // to function without
@@ -86,7 +91,7 @@ export default {
       return !!this.lazyValue
     },
     isDisabled () {
-      return this.disabled || this.readonly
+      return Boolean(this.disabled || this.readonly)
     },
     isLabelActive () {
       return this.isDirty
@@ -109,7 +114,10 @@ export default {
       ])
     },
     genDefaultSlot () {
-      return this.$slots.default
+      return [
+        this.genLabel(),
+        this.$slots.default
+      ]
     },
     genIcon (type, cb) {
       const icon = this[`${type}Icon`]
@@ -161,6 +169,17 @@ export default {
         this.genDefaultSlot(),
         this.genProgress()
       ])
+    },
+    genLabel () {
+      if (!this.hasLabel) return null
+
+      return this.$createElement(VLabel, {
+        props: {
+          color: this.validationStateProxy,
+          focused: this.hasState,
+          for: this.$attrs.id
+        }
+      }, this.$slots.label || this.label)
     },
     genMessages () {
       if (this.hideDetails) return null

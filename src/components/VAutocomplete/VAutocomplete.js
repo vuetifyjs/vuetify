@@ -133,7 +133,7 @@ export default {
     },
     menuProps () {
       return Object.assign(VSelect.computed.menuProps.call(this), {
-        contentClass: 'v-autocomplete__content',
+        contentClass: (`v-autocomplete__content ${this.contentClass || ''}`).trim(),
         value: this.menuCanShow && this.isMenuActive
       })
     },
