@@ -23,7 +23,7 @@ export default {
         )
       }
 
-      if(this.$refs.content) {
+      if (this.$refs.content) {
         this.$refs.content.scrollTop = scrollTop
       }
     },
