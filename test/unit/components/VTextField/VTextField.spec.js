@@ -590,11 +590,11 @@ test('VTextField.js', ({ mount }) => {
   it('should not generate label', () => {
     const wrapper = mount(VTextField)
 
-    expect(wrapper.vm.genLabel()).toBeTruthy()
+    expect(wrapper.vm.genLabel()).toBe(null)
 
     wrapper.setProps({ singleLine: true })
 
-    expect(wrapper.vm.genLabel()).toBeTruthy()
+    expect(wrapper.vm.genLabel()).toBe(null)
 
     wrapper.setProps({ placeholder: 'foo' })
 
@@ -606,6 +606,13 @@ test('VTextField.js', ({ mount }) => {
     })
 
     expect(wrapper.vm.genLabel()).toBe(null)
+
+    wrapper.setProps({
+      label: 'bar',
+      value: undefined
+    })
+
+    expect(wrapper.vm.genLabel()).toBeTruthy()
   })
 
   it('should propagate id to label for attribute', () => {

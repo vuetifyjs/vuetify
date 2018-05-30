@@ -36,8 +36,8 @@ export default {
   methods: {
     watchInput (input) {
       const watcher = input => {
-        return input.$watch('valid', val => {
-          this.$set(this.errorBag, input._uid, !val)
+        return input.$watch('hasError', val => {
+          this.$set(this.errorBag, input._uid, val)
         }, { immediate: true })
       }
 

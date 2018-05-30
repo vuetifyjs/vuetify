@@ -794,4 +794,14 @@ test('VAutocomplete.js', ({ mount, shallow }) => {
 
     expect(wrapper.vm.internalSearch).toBe(null)
   })
+
+  it('should propagate content class', () => {
+    const wrapper = mount(VAutocomplete, {
+      propsData: { contentClass: 'foobar' }
+    })
+
+    const content = wrapper.first('.v-autocomplete__content')
+
+    expect(content.element.classList.contains('foobar')).toBe(true)
+  })
 })

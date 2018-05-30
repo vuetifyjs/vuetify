@@ -103,9 +103,6 @@ rtl(v-text-field-rtl, "v-text-field")
     white-space: nowrap
 
   .v-label
-    cursor: auto
-    height: 20px
-    line-height: 20px
     max-width: 90%
     overflow: hidden
     text-overflow: ellipsis
@@ -223,6 +220,13 @@ rtl(v-text-field-rtl, "v-text-field")
     // To better align with box
     &.v-input
       margin-top: 14px
+
+    .v-progress-linear__background
+      display: none
+
+    .v-input__control,
+    .v-input__slot
+      position: static
 
     .v-input__slot
       margin-bottom: 0 // normally for messages

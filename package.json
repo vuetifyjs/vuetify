@@ -1,6 +1,6 @@
 {
   "name": "vuetify",
-  "version": "1.1.0-alpha.6",
+  "version": "1.1.0-beta.0",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -25,6 +25,7 @@
     "test:unix": "cross-env NODE_ENV=test jest",
     "test:win32": "cross-env NODE_ENV=test jest -i",
     "test:coverage": "yarn test --coverage",
+    "test:types": "tsc -p ./types/test/tsconfig.json",
     "lint": "tsc --noEmit --pretty && eslint --ext .js,.ts src",
     "preparecommitmsg": "node dev/prepare-commit-message.js",
     "commitmsg": "node dev/lint-commit-message.js",
@@ -146,6 +147,11 @@
     ],
     "snapshotSerializers": [
       "jest-serializer-html"
-    ]
+    ],
+    "globals": {
+      "ts-jest": {
+        "useBabelrc": true
+      }
+    }
   }
 }
