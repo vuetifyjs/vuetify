@@ -35,7 +35,7 @@ module.exports = merge(baseWebpackConfig, {
         loader: 'vue-loader'
       },
       {
-        test: /\.[jt]s$/,
+        test: /\.ts$/,
         use: [
           'babel-loader',
           {
@@ -43,6 +43,11 @@ module.exports = merge(baseWebpackConfig, {
             options: { appendTsSuffixTo: [/\.vue$/] }
           }
         ],
+        exclude: /node_modules/
+      },
+      {
+        test: /\.js$/,
+        use: 'babel-loader',
         exclude: /node_modules/
       },
       {
