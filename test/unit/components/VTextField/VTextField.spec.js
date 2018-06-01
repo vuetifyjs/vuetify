@@ -532,36 +532,6 @@ test('VTextField.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it.skip('should calculate element height when using auto-grow prop', async () => {
-    let value = ''
-    const component = {
-      render (h) {
-        return h(VTextField, {
-          on: {
-            input: i => value = i
-          },
-          props: {
-            value,
-            multiLine: true,
-            autoGrow: true
-          }
-        })
-      }
-    }
-
-    const wrapper = mount(component)
-    const input = wrapper.find('textarea')[0]
-
-    input.trigger('focus')
-    await wrapper.vm.$nextTick()
-    input.element.value = 'this is a really long text that should hopefully make auto-grow kick in. maybe?'
-    input.trigger('input')
-    await wrapper.vm.$nextTick()
-
-    expect(wrapper.html()).toMatchSnapshot()
-    expect(input.element.style.getPropertyValue('height').length).not.toBe(0)
-  })
-
   it('render active label for dirtyTypes (time/date/color/etc)', () => {
     const wrapper = mount(VTextField, {
       propsData: {
