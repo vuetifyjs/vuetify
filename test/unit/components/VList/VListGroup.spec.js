@@ -138,17 +138,12 @@ test('VListGroup.js', ({ mount }) => {
 
   it('should toggle when it is focused and enter key is pressed', async () => {
     const wrapper = mount(VListGroup, {
-      attachToDocument: true,
-      provide: {
-        listClick: () => {}
-      }
+      attachToDocument: true
     })
 
     const input = jest.fn()
     wrapper.vm.$on('input', input)
-    const enterEvent = new window.Event('keypress', { which: 13 })
-    input.dispatchEvent(enterEvent)
-    await wrapper.vm.$nextTick()
+    wrapper.trigger('keydown.enter')
     expect(input).toBeCalledWith(true)
 
     expect(warning).toHaveBeenTipped()
