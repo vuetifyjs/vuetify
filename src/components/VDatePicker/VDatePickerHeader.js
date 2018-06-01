@@ -6,6 +6,7 @@ import VIcon from '../VIcon'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
+import Themeable from '../../mixins/themeable'
 
 // Utils
 import { createNativeLocaleFormatter, monthChange } from './util'
@@ -13,7 +14,10 @@ import { createNativeLocaleFormatter, monthChange } from './util'
 export default {
   name: 'v-date-picker-header',
 
-  mixins: [Colorable],
+  mixins: [
+    Colorable,
+    Themeable
+  ],
 
   data () {
     return {
@@ -76,7 +80,8 @@ export default {
         props: {
           dark: this.dark,
           disabled,
-          icon: true
+          icon: true,
+          light: this.light
         },
         nativeOn: {
           click: e => {
@@ -123,7 +128,10 @@ export default {
 
   render () {
     return this.$createElement('div', {
-      staticClass: 'v-date-picker-header'
+      staticClass: 'v-date-picker-header',
+      class: {
+        ...this.themeClasses
+      }
     }, [
       this.genBtn(-1),
       this.genHeader(),
