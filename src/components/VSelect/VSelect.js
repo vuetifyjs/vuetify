@@ -218,7 +218,7 @@ export default {
       }
     },
     staticList () {
-      if (this.$slots['no-data']) {
+      if (this.$slots['no-data'] || this.$slots['before-list'] || this.$slots['after-list']) {
         consoleError('assert: staticList should not be called if slots are used')
       }
 
@@ -389,7 +389,7 @@ export default {
     },
     genList () {
       // If there's no slots, we can use a cached VNode to improve performance
-      if (this.$slots['no-data']) {
+      if (this.$slots['no-data'] || this.$slots['before-list'] || this.$slots['after-list']) {
         return this.genListWithSlot()
       } else {
         return this.staticList
@@ -399,7 +399,13 @@ export default {
       return this.$createElement(VSelectList, this.listData, [
         this.$slots['no-data'] ? this.$createElement('div', {
           slot: 'no-data'
-        }, this.$slots['no-data']) : null
+        }, this.$slots['no-data']) : null,
+        this.$slots['before-list'] ? this.$createElement('div', {
+          slot: 'before-list'
+        }, this.$slots['before-list']) : null,
+        this.$slots['after-list'] ? this.$createElement('div', {
+          slot: 'after-list'
+        }, this.$slots['after-list']) : null
       ])
     },
     genMenu (activator) {
