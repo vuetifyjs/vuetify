@@ -136,6 +136,24 @@ test('VListGroup.js', ({ mount }) => {
     expect(warning).toHaveBeenTipped()
   })
 
+  it('should toggle when it is focused and enter key is pressed', async () => {
+    const wrapper = mount(VListGroup, {
+      attachToDocument: true,
+      provide: {
+        listClick: () => {}
+      }
+    })
+
+    const input = jest.fn()
+    wrapper.vm.$on('input', input)
+    const enterEvent = new window.Event('keypress', { which: 13 })
+    input.dispatchEvent(enterEvent)
+    await wrapper.vm.$nextTick()
+    expect(input).toBeCalledWith(true)
+
+    expect(warning).toHaveBeenTipped()
+  })
+
   it('should unregister when destroyed', async () => {
     const unregister = jest.fn()
     const wrapper = mount(VListGroup, {
