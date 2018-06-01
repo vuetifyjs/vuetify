@@ -107,6 +107,13 @@ export default {
 
       this.isActive = !this.isActive
     },
+    onKeyDown: function onKeyDown(e) {
+        e.stopPropagation();
+        if (this.disabled) return;
+        if (e.keyCode === 13) {
+            this.isActive = !this.isActive;
+        };
+    },
     genIcon (icon) {
       return this.$createElement(VIcon, icon)
     },
@@ -124,9 +131,13 @@ export default {
     genGroup () {
       return this.$createElement('div', {
         staticClass: 'v-list__group__header',
+        attrs: {
+          tabindex:'0',
+        },
         'class': this.headerClasses,
         on: Object.assign({}, {
-          click: this.click
+          click: this.click,
+          keydown: this.onKeyDown
         }, this.$listeners),
         ref: 'item'
       }, [
