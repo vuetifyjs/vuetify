@@ -111,7 +111,7 @@ export default {
       e.stopPropagation()
       if (this.disabled) return
       if (e.keyCode === 13) {
-          this.isActive = !this.isActive
+        this.isActive = !this.isActive
       };
     },
     genIcon (icon) {
