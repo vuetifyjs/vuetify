@@ -190,7 +190,8 @@ export default {
     const data = {
       staticClass: 'v-time-picker-clock',
       class: {
-        'v-time-picker-clock--indeterminate': this.value == null
+        'v-time-picker-clock--indeterminate': this.value == null,
+        ...this.themeClasses
       },
       on: {
         mousedown: this.onMouseDown,
