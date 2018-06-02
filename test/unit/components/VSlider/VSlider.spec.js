@@ -505,4 +505,42 @@ test('VSlider.vue', ({ mount }) => {
 
     expect(warning).toHaveBeenTipped()
   })
+
+  it('should not react to keydown', () => {
+    const parseKeyDown = jest.fn()
+    const wrapper = mount(VSlider, {
+      propsData: { disabled: true },
+      methods: { parseKeyDown }
+    })
+
+    const input = wrapper.first('input')
+
+    input.trigger('focus')
+
+    expect(wrapper.vm.isFocused).toBe(true)
+
+    input.trigger('keydown.right')
+
+    expect(parseKeyDown).not.toBeCalled()
+
+    wrapper.setProps({
+      disabled: false,
+      readonly: true
+    })
+
+    input.trigger('keydown.right')
+
+    expect(parseKeyDown).not.toBeCalled()
+
+    wrapper.setProps({
+      disabled: false,
+      readonly: false
+    })
+
+    input.trigger('keydown.right')
+
+    expect(parseKeyDown).toBeCalled()
+
+    expect(warning).toHaveBeenTipped()
+  })
 })
