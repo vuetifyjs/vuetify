@@ -78,14 +78,6 @@ test('VExpansionPanelContent.js', ({ mount, compileToFunctions }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should warn a registrable warning when expansionPanel empty', () => {
-    mount(VExpansionPanelContent)
-
-    expect('Injection "expansionPanel" not found').toHaveBeenWarned()
-    expect('TypeError: Cannot read property \'disabled\' of undefined').toHaveBeenWarned()
-    expect('TypeError: Cannot read property \'register\' of undefined').toHaveBeenWarned()
-  })
-
   it('should render an expanded component and match snapshot', () => {
     const wrapper = mount(VExpansionPanelContent, {
       propsData: {
