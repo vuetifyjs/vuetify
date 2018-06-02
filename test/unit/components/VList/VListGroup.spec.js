@@ -144,6 +144,7 @@ test('VListGroup.js', ({ mount }) => {
     const input = jest.fn()
     wrapper.vm.$on('input', input)
     wrapper.trigger('keydown.enter')
+    await wrapper.vm.$nextTick()
     expect(input).toBeCalledWith(true)
 
     expect(warning).toHaveBeenTipped()
