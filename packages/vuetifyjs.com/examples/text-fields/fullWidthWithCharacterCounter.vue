@@ -42,9 +42,9 @@
                 <v-divider></v-divider>
                 <v-text-field
                   v-model="title"
+                  :counter="120"
+                  :rules="[(v) => v.length <= 120 || 'Max 120 characters']"
                   label="Message"
-                  counter
-                  max="120"
                   full-width
                   multi-line
                   single-line
