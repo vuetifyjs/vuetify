@@ -41,7 +41,7 @@ declare module 'vue/types/vue' {
 
   interface VueConstructor<
     V extends Vue = Vue,
-    Options = {} | undefined
+    Options = Record<string, any>
   > {
     version: string
     install?: PluginFunction<never>
