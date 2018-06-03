@@ -98,6 +98,18 @@ theme(v-toolbar, "v-toolbar")
 
 /** Types */
 .v-toolbar
+  .v-overflow-btn,
+  .v-btn-toggle
+    elevation(0)
+
+  .v-overflow-btn
+    margin: 0
+
+    .v-input__control,
+    .v-input__slot
+      &:before
+        display: none
+
   &--card
     border-radius: $card-border-radius $card-border-radius 0 0
     elevation(0)
