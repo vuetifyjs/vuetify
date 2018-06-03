@@ -138,12 +138,15 @@ test('VListGroup.js', ({ mount }) => {
 
   it('should toggle when it is focused and enter key is pressed', async () => {
     const wrapper = mount(VListGroup, {
-      attachToDocument: true
+      attachToDocument: true,
+      provide: {
+        listClick: () => {}
+      }
     })
-
+    
     const input = jest.fn()
     wrapper.vm.$on('input', input)
-    wrapper.trigger('keydown.enter')
+    wrapper.vm.onKeyDown({ keyCode: 13, stopPropagation: jest.fn() })
     await wrapper.vm.$nextTick()
     expect(input).toBeCalledWith(true)
 
