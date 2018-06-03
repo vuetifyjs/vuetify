@@ -112,7 +112,7 @@ export default {
       if (this.disabled) return
       if (e.keyCode === 13) {
         this.isActive = !this.isActive
-      };
+      }
     },
     genIcon (icon) {
       return this.$createElement(VIcon, icon)
