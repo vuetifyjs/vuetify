@@ -14,17 +14,17 @@ import {
 } from '../../util/helpers'
 
 // Importing does not work properly
-const VTableOverflow = createSimpleFunctional('table__overflow')
+const VTableOverflow = createSimpleFunctional('v-table__overflow')
 
 export default {
   name: 'v-data-table',
 
   data () {
     return {
-      actionsClasses: 'datatable__actions',
-      actionsRangeControlsClasses: 'datatable__actions__range-controls',
-      actionsSelectClasses: 'datatable__actions__select',
-      actionsPaginationClasses: 'datatable__actions__pagination'
+      actionsClasses: 'v-datatable__actions',
+      actionsRangeControlsClasses: 'v-datatable__actions__range-controls',
+      actionsSelectClasses: 'v-datatable__actions__select',
+      actionsPaginationClasses: 'v-datatable__actions__pagination'
     }
   },
 
@@ -35,6 +35,9 @@ export default {
       type: Array,
       default: () => []
     },
+    headersLength: {
+      type: Number
+    },
     headerText: {
       type: String,
       default: 'text'
@@ -42,7 +45,7 @@ export default {
     hideHeaders: Boolean,
     rowsPerPageText: {
       type: String,
-      default: 'Rows per page:'
+      default: '$vuetify.lang.dataTable.rowsPerPageText'
     },
     customFilter: {
       type: Function,
@@ -60,8 +63,8 @@ export default {
   computed: {
     classes () {
       return {
-        'datatable table': true,
-        'datatable--select-all': this.selectAll !== false,
+        'v-datatable v-table': true,
+        'v-datatable--select-all': this.selectAll !== false,
         'theme--dark': this.dark,
         'theme--light': this.light
       }
@@ -70,7 +73,7 @@ export default {
       return this.filteredItemsImpl(this.headers)
     },
     headerColumns () {
-      return this.headers.length + (this.selectAll !== false)
+      return this.headersLength || this.headers.length + (this.selectAll !== false)
     }
   },
 

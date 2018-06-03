@@ -1,6 +1,6 @@
 import { test } from '@/test'
 import Vue from 'vue/dist/vue.common'
-import VTextField from '@/components/VTextField'
+import VTextField from '@/components/VTextField/VTextField'
 import VProgressLinear from '@/components/VProgressLinear'
 
 test('VTextField.js', ({ mount }) => {
@@ -74,12 +74,12 @@ test('VTextField.js', ({ mount }) => {
   })
 
   it('should start validating on input', async () => {
-    const wrapper = mount(VTextField, {})
+    const wrapper = mount(VTextField)
 
-    expect(wrapper.data().shouldValidate).toEqual(false)
+    expect(wrapper.vm.shouldValidate).toEqual(false)
     wrapper.setProps({ value: 'asd' })
     await wrapper.vm.$nextTick()
-    expect(wrapper.data().shouldValidate).toEqual(true)
+    expect(wrapper.vm.shouldValidate).toEqual(true)
   })
 
   it('should not start validating on input if validate-on-blur prop is set', async () => {
@@ -89,28 +89,30 @@ test('VTextField.js', ({ mount }) => {
       }
     })
 
-    expect(wrapper.data().shouldValidate).toEqual(false)
+    expect(wrapper.vm.shouldValidate).toEqual(false)
     wrapper.setProps({ value: 'asd' })
     await wrapper.vm.$nextTick()
-    expect(wrapper.data().shouldValidate).toEqual(false)
+    expect(wrapper.vm.shouldValidate).toEqual(false)
   })
 
   it('should not display counter when set to false', async () => {
     const wrapper = mount(VTextField, {
       propsData: {
-        counter: true,
-        max: 50
+        counter: true
+      },
+      attrs: {
+        maxlength: 50
       }
     })
 
-    expect(wrapper.find('.input-group__counter')[0]).not.toBe(undefined)
+    expect(wrapper.find('.v-counter')[0]).not.toBe(undefined)
     expect(wrapper.html()).toMatchSnapshot()
 
     wrapper.setProps({ counter: false })
     await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect(wrapper.find('.input-group__counter')[0]).toBe(undefined)
+    expect(wrapper.find('.v-counter')[0]).toBe(undefined)
   })
 
   it('should have readonly attribute', () => {
@@ -133,11 +135,11 @@ test('VTextField.js', ({ mount }) => {
       }
     })
 
-    const clear = wrapper.find('.input-group__append-icon')[0]
+    const clear = wrapper.find('.v-input__icon--clear .v-icon')[0]
     const input = jest.fn()
     wrapper.vm.$on('input', input)
 
-    expect(wrapper.vm.inputValue).toBe('foo')
+    expect(wrapper.vm.internalValue).toBe('foo')
 
     clear.trigger('click')
 
@@ -156,10 +158,10 @@ test('VTextField.js', ({ mount }) => {
       }
     })
 
-    const icon = wrapper.find('.input-group__append-icon')[0]
+    const icon = wrapper.find('.v-input__icon--append .v-icon')[0]
     icon.trigger('click')
     await wrapper.vm.$nextTick()
-    expect(wrapper.vm.inputValue).toBe('foo')
+    expect(wrapper.vm.internalValue).toBe('foo')
     expect(appendIconCb.mock.calls).toHaveLength(1)
   })
 
@@ -171,22 +173,22 @@ test('VTextField.js', ({ mount }) => {
       }
     })
 
-    const icon = wrapper.find('.input-group__append-icon')[0]
+    const icon = wrapper.find('.v-input__icon--append .v-icon')[0]
     icon.trigger('click')
     await wrapper.vm.$nextTick()
-    expect(wrapper.vm.inputValue).toBe('foo')
+    expect(wrapper.vm.internalValue).toBe('foo')
   })
 
   it('should start validating on blur', async () => {
-    const wrapper = mount(VTextField, {})
+    const wrapper = mount(VTextField)
 
-    const input = wrapper.find('input')[0]
-    expect(wrapper.data().shouldValidate).toEqual(false)
+    const input = wrapper.first('input')
+    expect(wrapper.vm.shouldValidate).toEqual(false)
     input.trigger('focus')
     await wrapper.vm.$nextTick()
     input.trigger('blur')
     await wrapper.vm.$nextTick()
-    expect(wrapper.data().shouldValidate).toEqual(true)
+    expect(wrapper.vm.shouldValidate).toEqual(true)
   })
 
   it('should keep its value on blur', async () => {
@@ -260,7 +262,7 @@ test('VTextField.js', ({ mount }) => {
       }
     })
 
-    const prepend = wrapper.find('.input-group__prepend-icon')[0]
+    const prepend = wrapper.find('.v-input__icon--append .v-icon')[0]
     expect(prepend.text()).toBe('check')
     expect(prepend.element.classList).not.toContain('input-group__icon-cb')
   })
@@ -334,16 +336,18 @@ test('VTextField.js', ({ mount }) => {
     expect(wrapper.vm.$refs.input.value).toBe('0')
   })
 
-  it('should reset internal change on blur', async () => {
+  it('should reset internal change on blur and keydown', async () => {
     const wrapper = mount(VTextField)
 
     wrapper.setProps({ value: 'foo' })
     wrapper.vm.internalChange = true
-    await wrapper.vm.$nextTick()
     expect(wrapper.vm.internalChange).toBe(true)
-    wrapper.vm.blur()
-    await wrapper.vm.$nextTick()
+    wrapper.vm.onBlur()
     expect(wrapper.vm.internalChange).toBe(false)
+
+    wrapper.first('input').trigger('keydown')
+
+    expect(wrapper.vm.internalChange).toBe(true)
   })
 
   it('should emit input when externally set value was modified internally', async () => {
@@ -476,83 +480,244 @@ test('VTextField.js', ({ mount }) => {
     expect(input.element.value).toBe('1,2')
   })
 
-  it('should calculate element height when using auto-grow prop', async () => {
-    let value = ''
-    const component = {
-      render (h) {
-        return h(VTextField, {
-          on: {
-            input: i => value = i
-          },
-          props: {
-            value,
-            multiLine: true,
-            autoGrow: true
-          }
-        })
+  it('should autofocus', async () => {
+    const wrapper = mount(VTextField, {
+      attachToDocument: true,
+      propsData: {
+        autofocus: true
       }
-    }
+    })
 
-    const wrapper = mount(component)
-    const input = wrapper.find('textarea')[0]
+    const focus = jest.fn()
+    wrapper.vm.$on('focus', focus)
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.isFocused).toBe(true)
+    wrapper.vm.onClick()
+
+    expect(focus.mock.calls.length).toBe(0)
+
+    wrapper.setData({ isFocused: false })
+
+    wrapper.vm.onClick()
+    expect(focus.mock.calls.length).toBe(1)
+
+    wrapper.setProps({ disabled: true })
+
+    wrapper.setData({ isFocused: false })
+
+    wrapper.vm.onClick()
+    expect(focus.mock.calls.length).toBe(1)
+
+    wrapper.setProps({ disabled: false })
+
+    wrapper.vm.onClick()
+    expect(focus.mock.calls.length).toBe(2)
+
+    delete wrapper.vm.$refs.input
+
+    wrapper.vm.onFocus()
+    expect(focus.mock.calls.length).toBe(2)
+  })
+
+  it('should have prefix and suffix', () => {
+    const wrapper = mount(VTextField, {
+      propsData: {
+        prefix: '$',
+        suffix: '.com'
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('render active label for dirtyTypes (time/date/color/etc)', () => {
+    const wrapper = mount(VTextField, {
+      propsData: {
+        type: "time"
+      }
+    })
+
+    expect(wrapper.element.classList).toContain('v-input--is-label-active')
+  })
+
+  it('should use a custom clear callback', async () => {
+    const clearIconCb = jest.fn()
+    const wrapper = mount(VTextField, {
+      propsData: {
+        clearIconCb,
+        clearable: true,
+        value: 'foo'
+      }
+    })
+
+    wrapper.first('.v-input__icon--clear .v-icon').trigger('click')
+
+    expect(clearIconCb).toBeCalled()
+  })
+
+  it('should not generate label', () => {
+    const wrapper = mount(VTextField)
+
+    expect(wrapper.vm.genLabel()).toBe(null)
+
+    wrapper.setProps({ singleLine: true })
+
+    expect(wrapper.vm.genLabel()).toBe(null)
+
+    wrapper.setProps({ placeholder: 'foo' })
+
+    expect(wrapper.vm.genLabel()).toBe(null)
+
+    wrapper.setProps({
+      placeholder: undefined,
+      value: 'bar'
+    })
+
+    expect(wrapper.vm.genLabel()).toBe(null)
+
+    wrapper.setProps({
+      label: 'bar',
+      value: undefined
+    })
+
+    expect(wrapper.vm.genLabel()).toBeTruthy()
+  })
+
+  it('should propagate id to label for attribute', () => {
+    const wrapper = mount(VTextField, {
+      propsData: {
+        label: 'foo',
+        id: 'bar'
+      },
+      attrs: {
+        id: 'bar'
+      },
+      domProps: {
+        id: 'bar'
+      }
+    })
+
+    const label = wrapper.first('label')
+
+    expect(label.element.getAttribute('for')).toBe('bar')
+  })
+
+  it('should render an appended outer icon', () => {
+    const wrapper = mount(VTextField, {
+      propsData: {
+        appendOuterIcon: 'search'
+      }
+    })
+
+    expect(wrapper.first('.v-input__icon--append-outer .v-icon').element.innerHTML).toBe('search')
+  })
+
+  it('should reset internal change', () => {
+    const wrapper = mount(VTextField)
+
+    wrapper.setData({ internalChange: true })
+
+    expect(wrapper.vm.internalChange).toBe(true)
+
+    wrapper.setProps({ value: 'foo' })
+
+    expect(wrapper.vm.internalChange).toBe(false)
+  })
+
+  it('should have correct max value', async () => {
+    const wrapper = mount(VTextField, {
+      attrs: {
+        maxlength: 25
+      },
+      propsData: {
+        counter: true
+      }
+    })
+
+    const counter = wrapper.first('.v-counter')
+
+    expect(counter.element.innerHTML).toBe('0 / 25')
+
+    wrapper.setProps({ counter: '50' })
+
+    expect(counter.element.innerHTML).toBe('0 / 50')
+  })
+
+  it('should set bad input on input', () => {
+    const wrapper = mount(VTextField)
+
+    expect(wrapper.vm.badInput).toBeFalsy()
+
+    wrapper.vm.onInput({
+      target: {}
+    })
+
+    expect(wrapper.vm.badInput).toBeFalsy()
+
+    wrapper.vm.onInput({
+      target: { validity: { badInput: false } }
+    })
+
+    expect(wrapper.vm.badInput).toBeFalsy()
+
+    wrapper.vm.onInput({
+      target: { validity: { badInput: true } }
+    })
+
+    expect(wrapper.vm.badInput).toBe(true)
+  })
+
+  it('should set input autocomplete attr', () => {
+    const wrapper = mount(VTextField, {
+      propsData: {
+        browserAutocomplete: 'off'
+      }
+    })
+
+    const input = wrapper.first('input')
+
+    expect(input.element.autocomplete).toBe('off')
+  })
+
+  it('should not apply id to root element', () => {
+    const wrapper = mount(VTextField, {
+      attrs: { id: 'foo' }
+    })
+
+    const input = wrapper.first('input')
+    expect(wrapper.element.id).toBe('')
+    expect(input.element.id).toBe('foo')
+  })
+
+  it('should fire change event when pressing enter', () => {
+    const wrapper = mount(VTextField)
+    const input = wrapper.first('input')
+    const change = jest.fn()
+
+    wrapper.vm.$on('change', change)
 
     input.trigger('focus')
-    await wrapper.vm.$nextTick()
-    input.element.value = 'this is a really long text that should hopefully make auto-grow kick in. maybe?'
+    input.element.value = 'foo'
     input.trigger('input')
-    await wrapper.vm.$nextTick()
+    input.trigger('keydown.enter')
+    input.trigger('keydown.enter')
 
-    expect(wrapper.html()).toMatchSnapshot()
-    expect(input.element.style.getPropertyValue('height').length).not.toBe(0)
+    expect(change).toHaveBeenCalledTimes(2)
   })
 
-  it('should match multi-line snapshot', () => {
-    const wrapper = mount(VTextField, {
-      propsData: {
-        multiLine: true
-      }
-    })
+  it('should have focus and blur methods', () => {
+    const wrapper = mount(VTextField)
+    const focus = jest.fn()
+    const blur = jest.fn()
+    wrapper.vm.$on('focus', focus)
+    wrapper.vm.$on('blur', blur)
 
-    expect(wrapper.html()).toMatchSnapshot()
-  })
+    wrapper.vm.focus()
+    expect(focus).toHaveBeenCalledTimes(1)
 
-  it('should match textarea snapshot', () => {
-    const wrapper = mount(VTextField, {
-      propsData: {
-        textarea: true
-      }
-    })
-
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-
-  it('should match auto-grow snapshot', async () => {
-    const wrapper = mount(VTextField, {
-      propsData: {
-        textarea: true,
-        autoGrow: true
-      }
-    })
-    await wrapper.vm.$nextTick()
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-
-  it('should render no-resize the same if already auto-grow', () => {
-    const wrappers = [
-      { autoGrow:true, multiLine: true },
-      { autoGrow:true, textarea: true }
-    ].map(propsData => mount(VTextField,{propsData}))
-
-    wrappers.forEach(async wrapper => {
-      await wrapper.vm.$nextTick()
-      const html1 = wrapper.html()
-
-      wrapper.setProps({ noResize: true })
-      // will still pass without this, do not remove
-      await wrapper.vm.$nextTick()
-      const html2 = wrapper.html()
-
-      expect(html2).toBe(html1)
-    })
+    wrapper.vm.blur()
+    expect(blur).toHaveBeenCalledTimes(1)
   })
 })

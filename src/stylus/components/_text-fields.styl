@@ -1,250 +1,332 @@
 @import '../bootstrap'
 @import '../theme'
 
-textfield($material)
-  &.input-group--text-field-box
-    .input-group__input
-      background: $material.buttons.focused-alt
+v-text-field($material)
+  .v-input__slot:before
+    background-color: $material.input-bottom-line
 
-  input::placeholder,
-  textarea::placeholder
-    color: $material.text.disabled
+  &:not(.v-input--has-state)
+    &:hover
+      .v-input__slot:before
+        background-color: $material.text.primary
 
-  &:not(.input-group--error)
-    .input-group__counter
-      color: $material.text.secondary
+  &.v-input--is-disabled
+    .v-input__slot:before
+      background-color: transparent
+      background-image: linear-gradient(
+        to right,
+        $material.text.disabled 0,
+        $material.text.disabled 33%,
+        transparent 0
+      )
 
-theme(textfield, "input-group--text-field")
+  &__prefix,
+  &__suffix
+    color: $material.text.secondary
 
-/** Label */
-.input-group--text-field label
-  position: absolute
-  top: $input-group-text-field-label-top
-  left: 0
+  &--solo
+    background: $material.cards
 
-/** Input */
-.input-group--text-field
-  // TODO: Revisit in 1.1 refactor
-  // Input was mis-aligned by 1px
+  &--solo-inverted.v-text-field--solo
+    background: rgba($material.inputs.solo-inverted)
+
+    &.v-input--is-focused
+      background: rgba($material.inputs.solo-inverted-focused)
+      .v-label,
+      input
+        color: $material.inputs.solo-inverted-focused-text
+
+  &--box
+    .v-input__slot
+      background: $material.text-fields.box
+
+    &:not(.v-input--is-focused)
+      .v-input__slot
+        &:hover
+          background: $material.text-fields.box-hover
+
+  &--outline
+    border: 2px solid $material.text.secondary
+
+    &:hover
+      border: 2px solid $material.text.primary
+
+v-text-field-rtl()
+  .v-label
+    transform-origin: top right
+
+  &--enclosed
+    .v-input__append-outer
+      margin-left: 0
+      margin-right: 16px
+
+    .v-input__prepend-outer
+      margin-left: 16px
+      margin-right: 0
+
+  &--reverse
+    input
+      text-align: left
+
+    .v-label
+      transform-origin: top left
+
+  &__prefix
+    padding-right: 0
+    padding-left: 4px
+
+  &__suffix
+    padding-left: 0
+    padding-right: 4px
+
+theme(v-text-field, "v-text-field")
+rtl(v-text-field-rtl, "v-text-field")
+
+.v-text-field
   input
-    padding-bottom: 1px
+    flex: 1 1 auto
+    line-height: 20px
+    padding: 8px 0 8px
+    max-width: 100%
+    width: 100%
 
-  input,
-  textarea
-    font-size: $input-font-size
-
-    &::placeholder
-      color: inherit
-      transition: .3s $transition.swing
-
-.input-group--text-field input
-  box-shadow: none
-  flex: 1
-  height: $input-height
-  margin: 0
-  min-width: 0
-  overflow: hidden
-  text-overflow: ellipsis
-  white-space: nowrap
-
-  &:focus
-    outline: none
-
-  &:disabled
-    pointer-events: none
-
-/** Textarea */
-.input-group--text-field
-  textarea
-    flex: 1 1
-
-    &:focus
-      outline: none
-
-.input-group--text-field.input-group--textarea
-  label
-    top: 13px
-
-  .input-group__input
-    border-radius: 2px
-    transition: .4s $transition.fast-in-fast-out
-
-  textarea
-    font-size: $input-font-size
-    transition: .3s $transition.swing
-
-  &:not(.input-group--full-width)
-    label
-      top: 30px
-      left: 15px
-
-    .input-group__input
-      padding: 30px 0 0 13px
-
-  .input-group__details
-    &:before,
-    &:after
-      opacity: 0
-
-/** Counter */
-.input-group--text-field
-  .input-group__counter
+  .v-input__append-inner
+    align-self: flex-start
+    display: inline-flex
     margin-left: auto
+    margin-top: 4px
+    line-height: 1
+    padding-left: 4px
+    user-select: none
+
+  .v-counter
     white-space: nowrap
 
-    &--error
-      color: inherit
+  .v-label
+    max-width: 90%
+    overflow: hidden
+    text-overflow: ellipsis
+    top: 6px // equal to the margin top of icons
+    transform-origin: top left
+    white-space: nowrap
 
-/** Input States */
-.input-group--text-field
-  &.input-group--placeholder.input-group--dirty
-    input::placeholder,
-    textarea::placeholder
-      opacity: 0
+    &--active
+      max-width: 100%
+      transform: translateY(-18px) scale(.75)
 
-/** No Resize */
-.input-group--text-field
-  &.input-group--no-resize textarea
-      resize: none
-
-/** Types */
-.input-group--text-field
-  // Icons
-  &.input-group--prepend-icon
-    .input-group__prepend-icon
-      align-items: center
-      display: flex
-      justify-content: flex-start
-      min-width: 40px
-
-    .input-group__details
-      margin-left: auto
-      max-width: calc(100% - 40px)
-
-    label
-      left: 40px
-
-  &:not(.input-group--single-line)
-    &.input-group--focused,
-    &.input-group--placeholder
-      label
-        opacity: 1
-
-      &:not(.input-group--textarea)
-        label
-          transform: translate(0, -18px) scale(.75)
-
-      &:not(.input-group--full-width).input-group--textarea
-        label
-          transform: translate(0, -8px) scale(.75)
-
-      &.input-group--text-field-box
-        label
-          transform: translate(0, -10px) scale(.75)
-
-  &.input-group--dirty
-    &.input-group--select,
-    &:not(.input-group--textarea)
-      label
-        transform: translate(0, -18px) scale(.75)
-
-    &:not(.input-group--full-width).input-group--textarea
-      label
-        transform: translate(0, -8px) scale(.75)
-
-  // Multi Line
-  &.input-group--multi-line
-    textarea
-      padding-top: 4px
-
-  // Full Width
-  &.input-group--full-width
-    padding: 16px
-
-    label
-      margin-left: $grid-gutters.lg
-
-    .input-group__details:before, .input-group__details:after
-      display: none
-
-/** Prefix/Suffix */
-.input-group--prefix
-  &:not(.input-group--focused):not(.input-group--dirty)
-    label
-      left: 16px
-
-.input-group--prefix,
-.input-group--suffix
-  .input-group--text-field__prefix,
-  .input-group--text-field__suffix
-    align-items: center
-    display: inline-flex
-    font-size: 16px
-    margin-top: 1px
-
-  .input-group--text-field__prefix
-    margin-right: 3px
-
-  .input-group--text-field__suffix
-    margin-left: 3px
-
-/** Box */
-.input-group--text-field-box
-  input, textarea
-    cursor: pointer
-
-  label
-    left: 16px
-
-  .input-group__input
-    align-items: flex-end
-    border-radius: 4px 4px 0 0
-    cursor: pointer
-    min-height: 56px
-    user-select: none
-
-  .input-group__details
-    padding: 8px 16px 0
-    user-select: none
+  .v-input__slot
+    transition: background $primary-transition
 
     &:before,
     &:after
+      bottom: 0
+      content: ''
+      left: 0
+      position: absolute
+      transition: $primary-transition
+      width: 100%
+
+    &:before
+      background-color: transparent
+      background-position: bottom
+      background-size: 3px 1px
+      background-repeat: repeat-x
+      height: 1px
+
+    &:after
+      background-color: currentColor
       height: 2px
-      border-bottom-left-radius: 4px
-      border-bottom-right-radius: 4px
+      transform: scaleX(0)
 
-  &.input-group--multi-line
-    textarea
-      padding-left: 24px
-      padding-right: 24px
+  &__details
+    display: flex
+    flex: 1 0 auto
+    max-width: 100%
 
-  &:not(.input-group--textarea)
-    &.input-group--multi-line
-      .input-group__input
-        padding-top: 26px
+  &__prefix,
+  &__suffix
+    align-self: center
 
-      label
-        top: 26px
+  &__prefix
+    padding-right: 4px
 
-    &:not(.input-group--multi-line)
-      .input-group__input
-        padding-left: 16px
-        padding-right: 16px
+  &__suffix
+    padding-left: 4px
+    white-space: nowrap
 
-      label
-        top: 32px
+  &__slot
+    display: flex
+    flex: 1 1 auto
+    height: 100%
+    position: relative
 
-    &:not(.input-group--single-line)
-      &.input-group--focused,
-      &.input-group--dirty
-        label
-          transform: translate(0, -10px) scale(0.75)
-  // Icons
-  &.input-group--prepend-icon
-    .input-group__details
-      &:before, &:after
-        margin-left: 56px
-        max-width: calc(100% - 56px)
+  &--box,
+  &--outline
+    position: relative
 
-    label
-      left: 56px
+    .v-input__slot
+      align-items: flex-start
+
+    input
+      cursor: pointer
+      margin-top: 24px
+
+    &.v-text-field--single-line
+      input
+        margin-top: 12px
+
+    .v-label
+      top: 18px
+
+      &--active
+        transform: translateY(-6px) scale(.75)
+
+    .v-input__slot
+      min-height: 56px
+
+  &--box,
+  &--enclosed
+    .v-input__prepend-outer,
+    .v-input__append-inner,
+    .v-input__append-outer
+      margin-top: 16px
+
+    &:not(.v-text-field--solo)
+      .v-label
+        cursor: pointer
+
+  &--box
+    .v-input__slot,
+    input
+      cursor: pointer
+
+    .v-input__slot
+      border-radius: 4px
+      margin-bottom: 4px
+
+      &:before,
+      &:after
+        border-bottom-left-radius: 4px
+        border-bottom-right-radius: 4px
+
+      &:before
+        height: 2px
+
+    .v-input__slot,
+    .v-text-field__details
+      padding: 0 12px
+
+  &--enclosed
+    // To better align with box
+    &.v-input
+      margin-top: 14px
+
+    .v-progress-linear__background
+      display: none
+
+    .v-input__control,
+    .v-input__slot
+      position: static
+
+    .v-input__slot
+      margin-bottom: 0 // normally for messages
+
+    .v-text-field__details
+      bottom: -18px
+      pointer-events: none
+      position: absolute
+      width: 100%
+
+    .v-input__prepend-outer
+      margin-left: 16px
+
+    .v-input__append-outer
+      margin-right: 16px
+
+    .v-input__slot
+      &:before,
+      &:after
+        display: none
+
+    .v-input__slot,
+    .v-text-field__details
+      padding: 0 12px
+
+  &--full-width
+    &.v-input
+      margin-bottom: 0
+      margin-top: 0
+
+    .v-label
+      top: calc(50% - 10px)
+
+    .v-input__slot
+      padding: 16px
+
+    .v-input__append-inner
+      align-self: center
+      margin-top: 0
+
+  &--reverse
+    input
+      text-align: right
+
+    .v-label
+      transform-origin: top right
+
+    .v-input__slot,
+    .v-text-field__slot
+      flex-direction: row-reverse
+
+  &--outline
+    border-radius: 4px
+    cursor: pointer
+    margin-bottom: 16px
+    transition: border $primary-transition
+
+    &.v-input--is-focused
+      border: 2px solid currentColor
+      transition: border $primary-transition
+
+    .v-input__slot
+      background: transparent !important
+
+  &.v-text-field--solo,
+  &.v-text-field--outline
+    .v-input__prepend-outer
+      margin-right: 0
+
+    .v-input__append-outer
+      margin-left: 0
+
+  &.v-text-field--solo
+    align-items: center
+    margin: 0
+    elevation(2)
+
+    .v-label
+      top: calc(50% - 10px)
+
+    .v-input__control
+      min-height: 48px
+      padding: 0
+
+    .v-text-field__slot
+      align-items: center
+
+    .v-input__append-inner
+      align-self: center
+      margin-top: 0
+
+    .v-input__prepend-outer,
+    .v-input__append-outer
+      margin-top: 8px
+      margin-bottom: 8px
+
+  &.v-input--is-focused
+    .v-input__slot:after
+      transform: scaleX(1)
+
+  &.v-input--has-state
+    .v-input__slot:before
+      background-color: currentColor

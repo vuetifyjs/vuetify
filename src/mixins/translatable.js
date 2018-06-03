@@ -8,7 +8,8 @@ export default {
       percentScrolled: null,
       scrollTop: null,
       windowHeight: null,
-      windowBottom: null
+      windowBottom: null,
+      lastScroll: 0
     }
   },
 
@@ -35,6 +36,20 @@ export default {
     listeners () {
       window.addEventListener('scroll', this.translate, false)
       window.addEventListener('resize', this.translate, false)
+
+      let isFirefox = window.navigator.userAgent.toLowerCase().indexOf('firefox') > -1
+      let isEdge = window.navigator.userAgent.toLowerCase().indexOf('edge') > -1
+
+      if (isFirefox || isEdge) requestAnimationFrame(this.checkScrolling)
+    },
+
+    checkScrolling () {
+      if (this.lastScroll !== window.pageYOffset) {
+        this.lastScroll = window.pageYOffset
+        this.translate()
+      }
+
+      requestAnimationFrame(this.checkScrolling)
     },
 
     translate () {

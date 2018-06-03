@@ -2,15 +2,15 @@
 
 exports[`VProgressLinear.js should render component and match snapshot 1`] = `
 
-<div class="progress-linear"
+<div class="v-progress-linear"
      style="height: 7px;"
 >
-  <div class="progress-linear__background primary"
+  <div class="v-progress-linear__background primary"
        style="height: 7px; opacity: 0.3; width: 100%;"
   >
   </div>
-  <div class="progress-linear__bar">
-    <div class="progress-linear__bar__determinate primary"
+  <div class="v-progress-linear__bar">
+    <div class="v-progress-linear__bar__determinate primary"
          style="width: 33%;"
     >
     </div>
@@ -21,17 +21,17 @@ exports[`VProgressLinear.js should render component and match snapshot 1`] = `
 
 exports[`VProgressLinear.js should render component with buffer value and match snapshot 1`] = `
 
-<div class="progress-linear"
+<div class="v-progress-linear"
      style="height: 7px;"
 >
-  <div class="progress-linear__background primary"
+  <div class="v-progress-linear__background primary"
        style="height: 7px; opacity: 0.3; width: 80%;"
   >
   </div>
-  <div class="progress-linear__bar"
+  <div class="v-progress-linear__bar"
        style="width: 80%;"
   >
-    <div class="progress-linear__bar__determinate primary"
+    <div class="v-progress-linear__bar__determinate primary"
          style="width: 41.25%;"
     >
     </div>
@@ -42,17 +42,17 @@ exports[`VProgressLinear.js should render component with buffer value and match 
 
 exports[`VProgressLinear.js should render component with buffer value and match snapshot 2`] = `
 
-<div class="progress-linear"
+<div class="v-progress-linear"
      style="height: 7px;"
 >
-  <div class="progress-linear__background primary"
+  <div class="v-progress-linear__background primary"
        style="height: 7px; opacity: 0.3; width: 0%;"
   >
   </div>
-  <div class="progress-linear__bar"
+  <div class="v-progress-linear__bar"
        style="width: 0%;"
   >
-    <div class="progress-linear__bar__determinate primary"
+    <div class="v-progress-linear__bar__determinate primary"
          style="width: 0%;"
     >
     </div>
@@ -63,17 +63,17 @@ exports[`VProgressLinear.js should render component with buffer value and match 
 
 exports[`VProgressLinear.js should render component with buffer value and value > buffer value and match snapshot 1`] = `
 
-<div class="progress-linear"
+<div class="v-progress-linear"
      style="height: 7px;"
 >
-  <div class="progress-linear__background primary"
+  <div class="v-progress-linear__background primary"
        style="height: 7px; opacity: 0.3; width: 80%;"
   >
   </div>
-  <div class="progress-linear__bar"
+  <div class="v-progress-linear__bar"
        style="width: 80%;"
   >
-    <div class="progress-linear__bar__determinate primary"
+    <div class="v-progress-linear__bar__determinate primary"
          style="width: 112.5%;"
     >
     </div>
@@ -84,15 +84,15 @@ exports[`VProgressLinear.js should render component with buffer value and value 
 
 exports[`VProgressLinear.js should render component with color and background color and match snapshot 1`] = `
 
-<div class="progress-linear"
+<div class="v-progress-linear"
      style="height: 7px;"
 >
-  <div class="progress-linear__background blue"
+  <div class="v-progress-linear__background blue"
        style="height: 7px; opacity: 1; width: 100%;"
   >
   </div>
-  <div class="progress-linear__bar">
-    <div class="progress-linear__bar__determinate orange"
+  <div class="v-progress-linear__bar">
+    <div class="v-progress-linear__bar__determinate orange"
          style="width: 33%;"
     >
     </div>
@@ -103,15 +103,15 @@ exports[`VProgressLinear.js should render component with color and background co
 
 exports[`VProgressLinear.js should render component with color and background color and opacity and match snapshot 1`] = `
 
-<div class="progress-linear"
+<div class="v-progress-linear"
      style="height: 7px;"
 >
-  <div class="progress-linear__background blue"
+  <div class="v-progress-linear__background blue"
        style="height: 7px; opacity: 0.5; width: 100%;"
   >
   </div>
-  <div class="progress-linear__bar">
-    <div class="progress-linear__bar__determinate orange"
+  <div class="v-progress-linear__bar">
+    <div class="v-progress-linear__bar__determinate orange"
          style="width: 33%;"
     >
     </div>
@@ -122,15 +122,15 @@ exports[`VProgressLinear.js should render component with color and background co
 
 exports[`VProgressLinear.js should render component with color and background opacity and match snapshot 1`] = `
 
-<div class="progress-linear"
+<div class="v-progress-linear"
      style="height: 7px;"
 >
-  <div class="progress-linear__background orange"
+  <div class="v-progress-linear__background orange"
        style="height: 7px; opacity: 0.5; width: 100%;"
   >
   </div>
-  <div class="progress-linear__bar">
-    <div class="progress-linear__bar__determinate orange"
+  <div class="v-progress-linear__bar">
+    <div class="v-progress-linear__bar__determinate orange"
          style="width: 33%;"
     >
     </div>
@@ -141,15 +141,15 @@ exports[`VProgressLinear.js should render component with color and background op
 
 exports[`VProgressLinear.js should render component with color and match snapshot 1`] = `
 
-<div class="progress-linear"
+<div class="v-progress-linear"
      style="height: 7px;"
 >
-  <div class="progress-linear__background orange"
+  <div class="v-progress-linear__background orange"
        style="height: 7px; opacity: 0.3; width: 100%;"
   >
   </div>
-  <div class="progress-linear__bar">
-    <div class="progress-linear__bar__determinate orange"
+  <div class="v-progress-linear__bar">
+    <div class="v-progress-linear__bar__determinate orange"
          style="width: 33%;"
     >
     </div>
@@ -160,17 +160,17 @@ exports[`VProgressLinear.js should render component with color and match snapsho
 
 exports[`VProgressLinear.js should render inactive component and match snapshot 1`] = `
 
-<div class="progress-linear"
+<div class="v-progress-linear"
      style="height: 7px;"
 >
-  <div class="progress-linear__background primary"
+  <div class="v-progress-linear__background primary"
        style="height: 0px; opacity: 0.3; width: 100%;"
   >
   </div>
-  <div class="progress-linear__bar"
+  <div class="v-progress-linear__bar"
        style="height: 0px;"
   >
-    <div class="progress-linear__bar__determinate primary"
+    <div class="v-progress-linear__bar__determinate primary"
          style="width: 33%;"
     >
     </div>
@@ -181,18 +181,18 @@ exports[`VProgressLinear.js should render inactive component and match snapshot 
 
 exports[`VProgressLinear.js should render indeterminate progress and match snapshot 1`] = `
 
-<div class="progress-linear"
+<div class="v-progress-linear"
      style="height: 7px;"
 >
-  <div class="progress-linear__background primary"
+  <div class="v-progress-linear__background primary"
        style="height: 7px; opacity: 0.3; width: 100%;"
   >
   </div>
-  <div class="progress-linear__bar">
-    <div class="progress-linear__bar__indeterminate progress-linear__bar__indeterminate--active">
-      <div class="progress-linear__bar__indeterminate long primary">
+  <div class="v-progress-linear__bar">
+    <div class="v-progress-linear__bar__indeterminate v-progress-linear__bar__indeterminate--active">
+      <div class="v-progress-linear__bar__indeterminate long primary">
       </div>
-      <div class="progress-linear__bar__indeterminate short primary">
+      <div class="v-progress-linear__bar__indeterminate short primary">
       </div>
     </div>
   </div>
@@ -202,18 +202,18 @@ exports[`VProgressLinear.js should render indeterminate progress and match snaps
 
 exports[`VProgressLinear.js should render indeterminate progress with query prop and match snapshot 1`] = `
 
-<div class="progress-linear"
+<div class="v-progress-linear"
      style="height: 7px;"
 >
-  <div class="progress-linear__background primary"
+  <div class="v-progress-linear__background primary"
        style="height: 7px; opacity: 0.3; width: 100%;"
   >
   </div>
-  <div class="progress-linear__bar">
-    <div class="progress-linear__bar__indeterminate progress-linear__bar__indeterminate--active">
-      <div class="progress-linear__bar__indeterminate long primary">
+  <div class="v-progress-linear__bar">
+    <div class="v-progress-linear__bar__indeterminate v-progress-linear__bar__indeterminate--active">
+      <div class="v-progress-linear__bar__indeterminate long primary">
       </div>
-      <div class="progress-linear__bar__indeterminate short primary">
+      <div class="v-progress-linear__bar__indeterminate short primary">
       </div>
     </div>
   </div>

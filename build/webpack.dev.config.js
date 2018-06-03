@@ -1,24 +1,13 @@
-require('dotenv').config()
+const path = require('path')
 const merge = require('webpack-merge')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const baseWebpackConfig = require('./webpack.base.config')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-const WriteFilePlugin = require('write-file-webpack-plugin')
-const webpack = require('webpack')
 
 // Helpers
-const resolve = file => require('path').resolve(__dirname, file)
-
-const extractPlugin = ExtractTextPlugin.extract({
-  use: [
-    { loader: 'css-loader', options: { sourceMap: true } },
-    { loader: 'postcss-loader', options: { sourceMap: true } },
-    { loader: 'stylus-loader', options: { sourceMap: true } }
-  ]
-})
+const resolve = file => path.resolve(__dirname, file)
 
 module.exports = merge(baseWebpackConfig, {
-  devtool: '#cheap-module-eval-source-map',
+  devtool: 'source-map',
   entry: ['babel-polyfill', './dev/index.js'],
   output: {
     filename: '[name].js',
@@ -27,36 +16,46 @@ module.exports = merge(baseWebpackConfig, {
     library: 'Vuetify'
   },
   resolve: {
-    extensions: ['*', '.js', '.json', '.vue'],
     alias: {
       vuetify: resolve('../src'),
       'vue$': 'vue/dist/vue.esm.js'
     }
   },
   module: {
-    noParse: /es6-promise\.js$/, // avoid webpack shimming process
     rules: [
       {
+        enforce: 'pre',
+        test: /\.[jt]s$/,
+        exclude: /node_modules/,
+        loader: 'eslint-loader',
+        options: { cache: true }
+      },
+      {
         test: /\.vue$/,
-        loaders: [{
-          loader: 'vue-loader',
-          options: {
-            loaders: {
-              stylus: extractPlugin
-            }
+        loader: 'vue-loader'
+      },
+      {
+        test: /\.ts$/,
+        use: [
+          'babel-loader',
+          {
+            loader: 'ts-loader',
+            options: { appendTsSuffixTo: [/\.vue$/] }
           }
-        }, 'eslint-loader'],
+        ],
         exclude: /node_modules/
       },
       {
         test: /\.js$/,
-        loaders: ['babel-loader', 'eslint-loader'],
+        use: 'babel-loader',
         exclude: /node_modules/
       },
       {
-        test: /\.styl$/,
-        loaders: extractPlugin,
-        exclude: /node_modules/
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader'
+        ]
       }
     ]
   },
@@ -71,16 +70,6 @@ module.exports = merge(baseWebpackConfig, {
     disableHostCheck: true
   },
   plugins: [
-    new ExtractTextPlugin({
-      filename: '[name].css',
-      allChunks: true
-    }),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': "'development'"
-    }),
-    new BundleAnalyzerPlugin({ openAnalyzer: false }),
-    new WriteFilePlugin({
-      test: /\.css$/
-    })
+    new VueLoaderPlugin()
   ]
 })

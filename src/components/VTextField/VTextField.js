@@ -1,64 +1,72 @@
 // Styles
-import '../../stylus/components/_input-groups.styl'
 import '../../stylus/components/_text-fields.styl'
 
+// Extensions
+import VInput from '../VInput'
+
+// Components
+import VCounter from '../VCounter'
+import VLabel from '../VLabel'
+
 // Mixins
-import Colorable from '../../mixins/colorable'
-import Input from '../../mixins/input'
 import Maskable from '../../mixins/maskable'
-import Soloable from '../../mixins/soloable'
+
+// Directives
+import Ripple from '../../directives/ripple'
+
+// Utilities
+import {
+  keyCodes
+} from '../../util/helpers'
 
 const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
 
 export default {
   name: 'v-text-field',
 
-  mixins: [
-    Colorable,
-    Input,
-    Maskable,
-    Soloable
-  ],
+  extends: VInput,
+
+  mixins: [Maskable],
+
+  directives: { Ripple },
 
   inheritAttrs: false,
 
-  data () {
-    return {
-      initialValue: null,
-      inputHeight: null,
-      internalChange: false,
-      badInput: false
-    }
-  },
+  data: () => ({
+    badInput: false,
+    initialValue: null,
+    internalChange: false,
+    isClearing: false
+  }),
 
   props: {
+    appendOuterIcon: String,
     autofocus: Boolean,
-    autoGrow: Boolean,
     box: Boolean,
+    browserAutocomplete: String,
     clearable: Boolean,
+    clearIcon: {
+      type: String,
+      default: '$vuetify.icons.clear'
+    },
+    clearIconCb: Function,
     color: {
       type: String,
       default: 'primary'
     },
     counter: [Boolean, Number, String],
+    flat: Boolean,
     fullWidth: Boolean,
-    multiLine: Boolean,
-    noResize: Boolean,
+    label: String,
+    outline: Boolean,
     placeholder: String,
     prefix: String,
-    rowHeight: {
-      type: [Number, String],
-      default: 24,
-      validator: v => !isNaN(parseFloat(v))
-    },
-    rows: {
-      type: [Number, String],
-      default: 5,
-      validator: v => !isNaN(parseInt(v, 10))
-    },
+    reverse: Boolean,
     singleLine: Boolean,
+    solo: Boolean,
+    soloInverted: Boolean,
     suffix: String,
-    textarea: Boolean,
+    textarea: Boolean, // TODO: Deprecate
     type: {
       type: String,
       default: 'text'
@@ -67,39 +75,28 @@ export default {
 
   computed: {
     classes () {
-      const classes = {
-        ...this.genSoloClasses(),
-        'input-group--text-field': true,
-        'input-group--text-field-box': this.box,
-        'input-group--single-line': this.singleLine || this.isSolo,
-        'input-group--multi-line': this.multiLine,
-        'input-group--full-width': this.fullWidth,
-        'input-group--no-resize': this.noResizeHandle,
-        'input-group--prefix': this.prefix,
-        'input-group--suffix': this.suffix,
-        'input-group--textarea': this.textarea
+      return {
+        'v-text-field': true,
+        'v-text-field--full-width': this.fullWidth,
+        'v-text-field--prefix': this.prefix,
+        'v-text-field--single-line': this.isSingle,
+        'v-text-field--solo': this.isSolo,
+        'v-text-field--solo-inverted': this.soloInverted,
+        'v-text-field--box': this.box,
+        'v-text-field--enclosed': this.isEnclosed,
+        'v-text-field--reverse': this.reverse,
+        'v-text-field--outline': this.hasOutline,
+        'elevation-0': this.flat
       }
-
-      if (this.hasError) {
-        classes['error--text'] = true
-      } else {
-        return this.addTextColorClassChecks(classes)
-      }
-
-      return classes
     },
-    count () {
-      let inputLength
-      if (this.inputValue) inputLength = this.inputValue.toString().length
-      else inputLength = 0
-
-      return `${inputLength} / ${this.counterLength}`
+    directivesInput () {
+      return []
     },
-    counterLength () {
-      const parsedLength = parseInt(this.counter, 10)
-      return isNaN(parsedLength) ? 25 : parsedLength
+    // TODO: Deprecate
+    hasOutline () {
+      return this.outline || this.textarea
     },
-    inputValue: {
+    internalValue: {
       get () {
         return this.lazyValue
       },
@@ -116,22 +113,27 @@ export default {
     isDirty () {
       return (this.lazyValue != null &&
         this.lazyValue.toString().length > 0) ||
-        this.badInput ||
-        dirtyTypes.includes(this.type)
+        this.badInput
     },
-    isTextarea () {
-      return this.multiLine || this.textarea
+    isEnclosed () {
+      return this.isSolo || this.hasOutline || this.fullWidth
     },
-    noResizeHandle () {
-      return this.isTextarea && (this.noResize || this.shouldAutoGrow)
+    isLabelActive () {
+      return this.isDirty || dirtyTypes.includes(this.type)
     },
-    shouldAutoGrow () {
-      return this.isTextarea && this.autoGrow
+    isSingle () {
+      return this.isSolo || this.singleLine
+    },
+    isSolo () {
+      return this.solo || this.soloInverted
     }
   },
 
   watch: {
     isFocused (val) {
+      // Sets validationState from validatable
+      this.hasColor = val
+
       if (val) {
         this.initialValue = this.lazyValue
       } else if (this.initialValue !== this.lazyValue) {
@@ -151,79 +153,129 @@ export default {
       } else this.lazyValue = val
 
       if (this.internalChange) this.internalChange = false
-
-      !this.validateOnBlur && this.validate()
-      this.shouldAutoGrow && this.calculateInputHeight()
     }
   },
 
   mounted () {
-    this.shouldAutoGrow && this.calculateInputHeight()
-    this.autofocus && this.focus()
+    this.autofocus && this.onFocus()
   },
 
   methods: {
-    calculateInputHeight () {
-      this.inputHeight = null
+    /** @public */
+    focus () {
+      this.onFocus()
+    },
+    /** @public */
+    blur () {
+      this.onBlur()
+    },
+    clearableCallback () {
+      this.internalValue = null
+      this.$nextTick(() => this.$refs.input.focus())
+    },
+    genAppendSlot () {
+      const slot = []
 
-      this.$nextTick(() => {
-        const height = this.$refs.input
-          ? this.$refs.input.scrollHeight
-          : 0
-        const minHeight = parseInt(this.rows, 10) * parseFloat(this.rowHeight)
-        this.inputHeight = Math.max(minHeight, height)
-      })
-    },
-    onInput (e) {
-      this.mask && this.resetSelections(e.target)
-      this.inputValue = e.target.value
-      this.badInput = e.target.validity && e.target.validity.badInput
-      this.shouldAutoGrow && this.calculateInputHeight()
-    },
-    blur (e) {
-      this.isFocused = false
-      // Reset internalChange state
-      // to allow external change
-      // to persist
-      this.internalChange = false
-
-      this.$nextTick(() => {
-        this.validate()
-      })
-      this.$emit('blur', e)
-    },
-    focus (e) {
-      if (!this.$refs.input) return
-
-      this.isFocused = true
-      if (document.activeElement !== this.$refs.input) {
-        this.$refs.input.focus()
-      }
-      this.$emit('focus', e)
-    },
-    keyDown (e) {
-      // Prevents closing of a
-      // dialog when pressing
-      // enter
-      if (this.isTextarea &&
-        this.isFocused &&
-        e.keyCode === 13
-      ) {
-        e.stopPropagation()
+      if (this.$slots['append-outer']) {
+        slot.push(this.$slots['append-outer'])
+      } else if (this.$slots['append-outer-icon']) {
+        slot.push(this.$slots['append-outer-icon'])
+      } else if (this.appendOuterIcon) {
+        slot.push(this.genIcon('appendOuter'))
       }
 
-      this.internalChange = true
+      return this.genSlot('append', 'outer', slot)
+    },
+    genClearIcon () {
+      if (!this.clearable) return null
+
+      const icon = !this.isDirty
+        ? false
+        : 'clear'
+
+      return this.genSlot('append', 'inner', [
+        this.genIcon(icon, this.clearIconCb || this.clearableCallback)
+      ])
     },
     genCounter () {
-      return this.$createElement('div', {
-        'class': {
-          'input-group__counter': true,
-          'input-group__counter--error': this.hasError
+      if (this.counter === false) return null
+
+      const value = (this.internalValue || '').length
+      const max = this.counter === true ? this.$attrs.maxlength : this.counter
+
+      return this.$createElement(VCounter, {
+        props: {
+          value,
+          max
         }
-      }, this.count)
+      })
+    },
+    genDefaultSlot () {
+      return [
+        this.genTextFieldSlot(),
+        this.genClearIcon(),
+        this.genIconSlot()
+      ]
+    },
+    genLabel () {
+      if (!this.hasLabel ||
+        (this.isSingle &&
+        (this.isDirty || !!this.placeholder))
+      ) return null
+
+      const isSingleLine = this.isSingle
+      let value = 0
+      let left = 'auto'
+      let right = 'auto'
+
+      // Create spacing
+      if ((this.prefix || this.reverse) &&
+        (isSingleLine || !this.isFocused) &&
+        !this.isDirty
+      ) value = 16
+
+      // Check if RTL
+      if (this.$vuetify.rtl) right = value
+      else left = value
+
+      // Check if reversed
+      if (this.reverse) {
+        const direction = right
+        right = left
+        left = direction
+      }
+
+      const data = {
+        props: {
+          absolute: true,
+          color: this.validationState,
+          disabled: this.disabled,
+          focused: !isSingleLine && (this.isFocused || !!this.validationState),
+          left,
+          right,
+          value: Boolean(!isSingleLine &&
+            (this.isFocused || this.isDirty || this.placeholder))
+        }
+      }
+
+      if (this.$attrs.id) data.props.for = this.$attrs.id
+
+      return this.$createElement(VLabel, data, this.$slots.label || this.label)
+    },
+    genIconSlot () {
+      const slot = []
+
+      if (this.$slots['append']) {
+        slot.push(this.$slots['append'])
+      } else if (this.$slots['append-icon']) {
+        slot.push(this.$slots['append-icon'])
+      } else if (this.appendIcon) {
+        slot.push(this.genIcon('append'))
+      }
+
+      return this.genSlot('append', 'inner', slot)
     },
     genInput () {
-      const tag = this.isTextarea ? 'textarea' : 'input'
       const listeners = Object.assign({}, this.$listeners)
       delete listeners['change'] // Change should not be bound externally
 
@@ -239,52 +291,107 @@ export default {
           required: this.required,
           readonly: this.readonly,
           tabindex: this.tabindex,
+          type: this.type,
           'aria-label': (!this.$attrs || !this.$attrs.id) && this.label // Label `for` will be set if we have an id
         },
         on: Object.assign(listeners, {
-          blur: this.blur,
+          blur: this.onBlur,
           input: this.onInput,
-          focus: this.focus,
-          keydown: this.keyDown
+          focus: this.onFocus,
+          keydown: this.onKeyDown
         }),
         ref: 'input'
       }
 
-      if (this.shouldAutoGrow) {
-        data.style.height = this.inputHeight && `${this.inputHeight}px`
-      }
-
       if (this.placeholder) data.attrs.placeholder = this.placeholder
+      if (this.mask) data.attrs.maxlength = this.masked.length
+      if (this.browserAutocomplete) data.attrs.autocomplete = this.browserAutocomplete
 
-      if (!this.isTextarea) {
-        data.attrs.type = this.type
-      } else {
-        data.attrs.rows = this.rows
-      }
-
-      if (this.mask) {
-        data.attrs.maxlength = this.masked.length
-      }
-
-      const children = [this.$createElement(tag, data)]
-
-      this.prefix && children.unshift(this.genFix('prefix'))
-      this.suffix && children.push(this.genFix('suffix'))
-
-      return children
+      return this.$createElement('input', data)
     },
-    genFix (type) {
-      return this.$createElement('span', {
-        'class': `input-group--text-field__${type}`
+    genMessages () {
+      return this.$createElement('div', {
+        staticClass: 'v-text-field__details'
+      }, [
+        VInput.methods.genMessages.call(this),
+        this.genCounter()
+      ])
+    },
+    genTextFieldSlot () {
+      return this.$createElement('div', {
+        staticClass: 'v-text-field__slot'
+      }, [
+        this.genLabel(),
+        this.prefix ? this.genAffix('prefix') : null,
+        this.genInput(),
+        this.suffix ? this.genAffix('suffix') : null
+      ])
+    },
+    genAffix (type) {
+      return this.$createElement('div', {
+        'class': `v-text-field__${type}`,
+        ref: type
       }, this[type])
     },
-    clearableCallback () {
-      this.inputValue = null
-      this.$nextTick(() => this.$refs.input.focus())
-    }
-  },
+    onBlur (e) {
+      this.isFocused = false
+      // Reset internalChange state
+      // to allow external change
+      // to persist
+      this.internalChange = false
 
-  render () {
-    return this.genInputGroup(this.genInput(), { attrs: { tabindex: false } })
+      this.$emit('blur', e)
+    },
+    onClick () {
+      if (this.isFocused || this.disabled) return
+
+      this.$refs.input.focus()
+    },
+    onFocus (e) {
+      if (!this.$refs.input) return
+
+      if (document.activeElement !== this.$refs.input) {
+        return this.$refs.input.focus()
+      }
+
+      if (!this.isFocused) {
+        this.isFocused = true
+        this.$emit('focus', e)
+      }
+    },
+    onInput (e) {
+      this.mask && this.resetSelections(e.target)
+      this.internalValue = e.target.value
+      this.badInput = e.target.validity && e.target.validity.badInput
+    },
+    onKeyDown (e) {
+      this.internalChange = true
+
+      if (e.keyCode === keyCodes.enter) this.$emit('change', this.internalValue)
+
+      this.$emit('keydown', e)
+    },
+    onMouseDown (e) {
+      // Prevent input from being blurred
+      if (e.target !== this.$refs.input) {
+        e.preventDefault()
+        e.stopPropagation()
+      }
+
+      VInput.methods.onMouseDown.call(this, e)
+    },
+    onMouseUp (e) {
+      // Default click handler is on slot,
+      // Mouse events are to enable specific
+      // input types when clicked
+      if (
+        (this.isSolo || this.hasOutline) &&
+        document.activeElement !== this.$refs.input
+      ) {
+        this.$refs.input.focus()
+      }
+
+      VInput.methods.onMouseUp.call(this, e)
+    }
   }
 }

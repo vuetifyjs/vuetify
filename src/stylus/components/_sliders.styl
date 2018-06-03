@@ -2,135 +2,123 @@
 @import '../theme'
 
 /* Theme */
-slider($material)
-  label
-    color: $material.text.secondary
-
-  .slider__track, .slider__track-fill
+v-slider($material)
+  .v-slider__track,
+  .v-slider__track-fill
     background: $material.slider.inactive
 
-  .slider__track__container
+  .v-slider__track__container
     &:after
       border: 1px solid $material.text.primary
 
-  .slider__tick
-    border: 1px solid $material.text.primary
+  .v-slider__ticks
+    border-color: $material.text.primary
+    border-style: solid
+    color: $material.text.secondary
 
-  &:not(.input-group--dirty)
-    .slider__thumb--label
+  &:not(.v-input--is-dirty)
+    .v-slider__thumb-label
       background: $material.slider.inactive
 
-    .slider__thumb
+    .v-slider__thumb
       border: 3px solid $material.slider.inactive
 
-    &:focus
-      .slider__thumb
+    &.v-input--slider--is-active
+      .v-slider__thumb
         border: 3px solid $material.slider.active
 
-  &.input-group--disabled
-    .slider__thumb
-      background: none
-      border: 3px solid $material.slider.disabled
+    .v-slider__ticks:first-child
+      border-color: transparent
 
-  &.input-group--disabled.input-group--dirty
-    .slider__thumb
+  &.v-input--is-disabled
+    .v-slider__thumb
+      border: 5px solid $material.slider.disabled
+
+  &.v-input--is-disabled.v-input--is-dirty
+    .v-slider__thumb
       background: $material.slider.disabled
       border: 0px solid transparent
 
-  &:focus
-    .slider__track
+  &.v-input--slider--is-active
+    .v-slider__track
       background: $material.slider.active
 
-theme(slider, "input-group--slider")
+v-slider-rtl()
+  .v-label
+    margin-left: 16px
+    margin-right: 0
+
+theme(v-slider, "v-input--slider")
+rtl(v-slider-rtl, "v-input--slider")
 
 /** Input Group */
-.input-group.input-group--slider
-  flex-direction: row
-  flex-wrap: wrap
-  // Allow for right space if inline with other inputs
-  padding-right: 16px
+.v-input--slider
+  &:not(.v-input--slider--thumb-label)
+    margin-top: 0
 
-  .input-group__details:before, .input-group__details:after
-    display: none
+  &.v-input--is-focused
+    .v-slider__thumb-container--is-active:not(.v-slider__thumb-container--show-label)
+      &:before
+        opacity: .2
+        transform: scale(1)
 
-  .input-group__input
-    flex: 1 1 100%
-
-
-  label
-    flex: 0 1 auto
-    width: auto
-    align-items: center
-    display: inline-flex
-    font-size: 18px
-    transform: none
-
-    + .input-group__input
-      margin-left: 16px
-      flex: 1 0 auto
-
-  &.input-group--active
-    .slider__thumb
-      transform: translateY(-50%) scale(1.2)
-
-    .slider__track
+    .v-slider__track
       transition: none
 
-    .slider__thumb-container
-      &--label
-        .slider__thumb
-          transform: translateY(-50%) scale(0)
-
-          &:hover
-            transform: translateY(-50%) scale(0)
-
-    .slider__thumb-container, .slider__track-fill
-      transition: none
-
-    &.input-group--ticks
-      .slider
-        &__track__container:after, &__tick
+    &.v-input--slider--ticks
+      .v-slider
+        &__track__container:after,
+        .v-slider__tick
           opacity: 1
 
-  &.input-group--disabled
+  &.v-input--slider--ticks
+    .v-slider__ticks.v-slider__ticks--always-show
+      opacity: 1
+
+    &-labels
+      .v-input__slot
+        margin-bottom: 16px
+
+  &.v-input--is-readonly
     pointer-events: none
 
-    .slider__thumb
-      transform: translateY(-50%) scale(.5)
-      background: transparent
+  &.v-input--is-disabled
+    .v-slider__thumb
+      transform: translateY(-50%) scale(.45)
 
-    &.input-group--dirty
-      border-color: transparent
-
-  &.input-group--prepend-icon
-    .slider
-      margin-left: 40px
-
-  &.input-group--append-icon
-    .slider
-      margin-right: 40px
-
+  .v-input__slot > *:first-child:not(:only-child)
+    margin-right: 16px
 
 /** Slider */
-.slider
+.v-slider
   cursor: default
   display: flex
   align-items: center
   position: relative
-  height: 30px
+  height: 32px
   flex: 1
+  outline: none
   user-select: none
 
+  input
+    cursor: default
+    opacity: 0
+    padding: 0
+    width: 100%
+    font-size: 0
+    min-height: 32px
 
 /** Thumb/Track/Ticks */
-.slider
+.v-slider
   &__track__container
+    height: 2px
+    left: 0
+    overflow: hidden
+    pointer-events: none
     position: absolute
     top: 50%
     transform: translateY(-50%)
-    height: 2px
     width: 100%
-    overflow: hidden
 
     &:after
       content: ''
@@ -142,7 +130,9 @@ theme(slider, "input-group--slider")
       width: 2px
       opacity: 0
 
-  &__track, &__thumb, &__tick
+  &__track,
+  &__thumb,
+  &__ticks
     position: absolute
     top: 0
 
@@ -168,54 +158,99 @@ theme(slider, "input-group--slider")
     height: 2px
     width: 100%
     top: 50%
-    overflow: hidden
+    transform: translate(0, -50%)
 
-  &__tick
-    transition: .3s $transition.swing
+  &__ticks
     opacity: 0
+    transition: .3s $transition.swing
+
+    > span
+      position: absolute
+      top: 8px
+      transform: translateX(-50%)
+      white-space: nowrap
+      user-select: none
+
+    &:first-child > span
+      transform: translateX(0)
+
+    &:last-child > span
+      transform: translateX(-100%)
 
   &__thumb-container
     position: absolute
     top: 50%
     transition: .3s $transition.swing
 
+    &:before
+      content: ''
+      color: inherit
+      border-radius: 50%
+      background: currentColor
+      height: 32px
+      left: -16px
+      opacity: 0
+      overflow: hidden
+      pointer-events: none
+      position: absolute
+      top: -16px
+      transform: scale(0.2)
+      transition: $ripple-animation-transition
+      width: 32px
+      will-change: transform, opacity
+
   &__thumb
-    width: 16px
-    height: 16px
-    left: -8px
+    width: 24px
+    height: 24px
+    left: -12px
     top: 50%
     border-radius: 50%
     background: transparent
     transition: .3s $transition.swing
-    transform: translateY(-50%) scale(.8)
+    transform: translateY(-50%) scale(.6)
     user-select: none
 
-
 /** Thumb Label */
-.slider
-  &__thumb--label__container
+.v-slider
+  &--is-active
+    .v-slider__thumb-container--is-active
+      .v-slider__thumb
+        transform: translateY(-50%) scale(1)
+
+      &.v-slider__thumb-container--show-label
+        .v-slider__thumb
+          transform: translateY(-50%) scale(0)
+
+    .v-slider__ticks-container
+      .v-slider__ticks
+        opacity: 1
+
+  &__thumb-label__container
     position: absolute
     left: 0
     top: 0
-    transition: .3s ease-in-out
+    transition: .3s $transition.fast-in-fast-out
 
-  &__thumb--label
+  &__thumb-label
     display: flex
     align-items: center
     justify-content: center
     font-size: 12px
     color: #fff
-    width: 28px
-    height: 28px
+    width: 32px
+    height: 32px
     border-radius: 50% 50% 0
     position: absolute
-    left: -14px
-    top: -40px
-    transform: rotate(45deg)
+    left: 0
+    bottom: 100%
+    // Needed for IE11 which does not
+    // process translateY(calc(-20% - 12px))
+    // or translate(-50%, calc(-20% - 12px))
+    transform: translateY(-20%) translateY(-12px) translateX(-50%) rotate(45deg)
     user-select: none
-    transition: .3s ease-in-out
+    transition: .3s $transition.fast-in-fast-out
 
-    span
+    > *
       transform: rotate(-45deg)
 
   &__track,

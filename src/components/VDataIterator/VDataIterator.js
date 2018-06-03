@@ -27,8 +27,8 @@ export default {
   computed: {
     classes () {
       return {
-        'data-iterator': true,
-        'data-iterator--select-all': this.selectAll !== false,
+        'v-data-iterator': true,
+        'v-data-iterator--select-all': this.selectAll !== false,
         'theme--dark': this.dark,
         'theme--light': this.light
       }
@@ -81,6 +81,16 @@ export default {
 
       if (!children.length) return null
       return this.$createElement('div', children)
+    },
+    genHeader () {
+      const children = []
+
+      if (this.$slots.header) {
+        children.push(this.$slots.header)
+      }
+
+      if (!children.length) return null
+      return this.$createElement('div', children)
     }
   },
 
@@ -92,6 +102,7 @@ export default {
     return h('div', {
       'class': this.classes
     }, [
+      this.genHeader(),
       this.genContent(),
       this.genFooter()
     ])

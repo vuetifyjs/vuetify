@@ -2,33 +2,33 @@
 
 exports[`VDatePickerMonthTable.js should render component and match snapshot 1`] = `
 
-<div class="date-picker-table date-picker-table--month">
+<div class="v-date-picker-table v-date-picker-table--month">
   <table>
     <tbody>
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--flat"
+                  class="v-btn v-btn--flat"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               Jan
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat"
+                  class="v-btn v-btn--flat"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               Feb
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat"
+                  class="v-btn v-btn--flat"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               Mar
             </div>
           </button>
@@ -37,27 +37,27 @@ exports[`VDatePickerMonthTable.js should render component and match snapshot 1`]
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--flat"
+                  class="v-btn v-btn--flat"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               Apr
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat btn--outline accent--text"
+                  class="v-btn v-btn--flat v-btn--outline accent--text"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               May
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat"
+                  class="v-btn v-btn--flat"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               Jun
             </div>
           </button>
@@ -66,27 +66,27 @@ exports[`VDatePickerMonthTable.js should render component and match snapshot 1`]
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--flat"
+                  class="v-btn v-btn--flat"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               Jul
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat"
+                  class="v-btn v-btn--flat"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               Aug
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat"
+                  class="v-btn v-btn--flat"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               Sep
             </div>
           </button>
@@ -95,27 +95,27 @@ exports[`VDatePickerMonthTable.js should render component and match snapshot 1`]
       <tr>
         <td>
           <button type="button"
-                  class="btn btn--flat"
+                  class="v-btn v-btn--flat"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               Oct
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--active btn--depressed accent"
+                  class="v-btn v-btn--active v-btn--depressed accent"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               Nov
             </div>
           </button>
         </td>
         <td>
           <button type="button"
-                  class="btn btn--flat"
+                  class="v-btn v-btn--flat"
           >
-            <div class="btn__content">
+            <div class="v-btn__content">
               Dec
             </div>
           </button>

@@ -14,7 +14,7 @@ export default {
 
   render (h) {
     const data = {
-      'class': 'card__media',
+      'class': 'v-card__media',
       style: {
         height: !isNaN(this.height) ? `${this.height}px` : this.height
       },
@@ -25,7 +25,7 @@ export default {
 
     if (this.src) {
       children.push(h('div', {
-        'class': 'card__media__background',
+        'class': 'v-card__media__background',
         style: {
           background: `url("${this.src}") center center / ${this.contain ? 'contain' : 'cover'} no-repeat`
         }
@@ -33,7 +33,7 @@ export default {
     }
 
     children.push(h('div', {
-      'class': 'card__media__content'
+      'class': 'v-card__media__content'
     }, this.$slots.default))
 
     return h('div', data, children)

@@ -76,7 +76,7 @@ export default {
     },
     transition: {
       type: [Boolean, String],
-      default: 'menu-transition'
+      default: 'v-menu-transition'
     }
   },
 
@@ -135,6 +135,9 @@ export default {
         transformOrigin: this.origin,
         zIndex: this.zIndex || this.activeZIndex
       }
+    },
+    tileHeight () {
+      return this.dense ? 36 : 48
     }
   },
 
@@ -185,9 +188,9 @@ export default {
 
   render (h) {
     const data = {
-      staticClass: 'menu',
+      staticClass: 'v-menu',
       class: {
-        'menu--disabled': this.disabled
+        'v-menu--disabled': this.disabled
       },
       style: {
         display: this.fullWidth ? 'block' : 'inline-block'

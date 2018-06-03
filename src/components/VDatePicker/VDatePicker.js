@@ -77,12 +77,12 @@ export default {
     },
     nextIcon: {
       type: String,
-      default: 'chevron_right'
+      default: '$vuetify.icons.next'
     },
     pickerDate: String,
     prevIcon: {
       type: String,
-      default: 'chevron_left'
+      default: '$vuetify.icons.prev'
     },
     reactive: Boolean,
     readonly: Boolean,
@@ -376,7 +376,7 @@ export default {
     this.setInputDate()
   },
 
-  render (h) {
-    return this.genPicker('picker--date')
+  render () {
+    return this.genPicker('v-picker--date')
   }
 }

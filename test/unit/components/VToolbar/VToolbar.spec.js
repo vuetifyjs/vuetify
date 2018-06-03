@@ -191,6 +191,26 @@ test('VToolbar.vue', ({ mount }) => {
     expect(wrapper.vm.$vuetify.application.top).toBe(56)
   })
 
+  it('should return different heights for scroll-{toolbar}-off-screen', async () => {
+    const app = mount(VApp)
+    const wrapper = mount(VToolbar, {
+      propsData: {
+        app: true,
+        extended: true
+      }
+    })
+
+    expect(wrapper.vm.computedTransform).toBe(0)
+
+    wrapper.setData({ isActive: false })
+
+    expect(wrapper.vm.computedTransform).toBe(-112)
+
+    wrapper.setProps({ scrollToolbarOffScreen: true })
+
+    expect(wrapper.vm.computedTransform).toBe(-56)
+  })
+
   it('should have a custom extension height', () => {
     const wrapper = mount(VToolbar, {
       propsData: { tabs: true }
