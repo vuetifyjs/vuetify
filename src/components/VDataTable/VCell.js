@@ -11,9 +11,10 @@ export default {
 
   render (h, { data, slots, props }) {
     const resolvedSlots = slots()
+    const staticClass = `${props.head ? 'v-head' : 'v-cell'} ${data.staticClass || ''}`
 
     return h('div', {
-      staticClass: `${props.head ? 'v-head' : 'v-cell'} ${data.staticClass || ''}`,
+      staticClass,
       class: data.class,
       on: data.nativeOn
     }, resolvedSlots.default)

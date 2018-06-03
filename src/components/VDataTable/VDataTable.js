@@ -171,12 +171,12 @@ export default {
     },
     genBodyWrapper (h, items) {
       return h('div', {
+        staticClass: 'v-table__body',
         class: {
-          'v-table__body': true,
           'v-table__body--fixed': this.fixedHeight
         },
         style: {
-          'height': this.fixedHeight
+          height: this.fixedHeight
         }
       }, items)
     },
