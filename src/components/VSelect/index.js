@@ -7,6 +7,8 @@ import rebuildSlots from '../../util/rebuildFunctionalSlots'
 const wrapper = {
   functional: true,
 
+  $_wrapperFor: VSelect,
+
   props: {
     // VAutoComplete
     autocomplete: Boolean,

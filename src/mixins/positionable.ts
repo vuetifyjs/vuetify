@@ -20,6 +20,7 @@ export function factory <S extends keyof props> (selected?: S[]): Positionable<S
 export function factory (selected: undefined): OptionsVue<Vue, {}, {}, {}, props, typeof availableProps>
 export function factory (selected: any[] = []): any {
   return Vue.extend({
+    name: 'positionable',
     props: selected.length ? filterObjectOnKeys(availableProps, selected) : availableProps
   })
 }
