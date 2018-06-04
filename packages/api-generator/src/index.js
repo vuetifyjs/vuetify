@@ -34,38 +34,33 @@ function getPropType (type) {
     return type.map(t => getPropType(t))
   }
 
-  type = (type || '').toString()
+  if (!type) return 'any'
 
-  if (type.match(/Array/)) return 'Array'
-  if (type.match(/Boolean/)) return 'Boolean'
-  if (type.match(/Number/)) return 'Number'
-  if (type.match(/Object/)) return 'Object'
-  if (type.match(/String/)) return 'String'
-  if (type.match(/Function/)) return 'Function'
-
-  return 'Any'
+  return type.name.toLowerCase()
 }
 
 function getPropDefault (def, type) {
   if (def === '' ||
-    (def == null && type !== 'Boolean' && type !== 'Function')
+    (def == null && type !== 'boolean' && type !== 'function')
   ) {
     return 'undefined'
-  } else if (typeof(def) === 'function' && type !== 'Function') {
+  } else if (typeof(def) === 'function' && type !== 'function') {
     def = def()
   }
 
-  switch (type) {
-    case 'Boolean':
-      if (def) return 'true'
-      else return 'false'
-    case 'Function': return parseFunctionParams(def)
-    case 'Array':
-    case 'Number':
-    case 'String':
-    case 'Object': return def
-    default: return def
+  if (type === 'boolean') {
+    return def ? 'true' : 'false'
   }
+
+  if (type === 'string') {
+    return def ? `'${def}'` : def
+  }
+
+  if (type === 'function') {
+    return parseFunctionParams(def)
+  }
+
+  return def
 }
 
 function getPropSource (name, mixins) {
