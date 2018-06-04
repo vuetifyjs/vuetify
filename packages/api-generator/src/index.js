@@ -71,7 +71,9 @@ function getPropDefault (def, type) {
 function getPropSource (name, mixins) {
   let source = null
   for (let i = 0; i < mixins.length; i++) {
-    const mixin = mixins[i]
+    let mixin = mixins[i]
+    if (mixin.name === 'VueComponent') mixin = mixin.options
+
     if (mixin.name) {
       const source = Object.keys(mixin.props || {}).find(p => p === name) && mixin.name
       let found = getPropSource(name, mixin.mixins || []) || source
@@ -119,7 +121,9 @@ function parseMixins (component) {
 
   let mixins = []
   for (let i = 0; i < component.mixins.length; i++) {
-    const mixin = component.mixins[i]
+    let mixin = component.mixins[i]
+
+    if (mixin.name === 'VueComponent') mixin = mixin.options
 
     if (mixin.name) {
       mixins.push(mixin.name)
@@ -139,17 +143,14 @@ const directives = {}
 const installedComponents = Vue.options._base.options.components
 const installedDirectives = Vue.options._base.options.directives
 
-Object.keys(installedComponents).forEach(key => {
-  let name = key
-
-  if (name.startsWith('wrapped-')) {
-    console.log(name)
-    name = name.slice(8)
-  }
-
+Object.keys(installedComponents).forEach(name => {
   if (name.match(/v-/)) {
-    const component = installedComponents[key]
-    let options = parseComponent(component.options)
+    let component = installedComponents[name]
+    if (component.options.$_wrapperFor) {
+      component = component.options.$_wrapperFor
+    }
+
+    let options = parseComponent(component.options || component)
 
     if (map[name]) {
       options = deepmerge(options, map[name], { arrayMerge })
