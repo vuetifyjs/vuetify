@@ -112,25 +112,25 @@ module.exports = {
           "string"
         ],
         "default": false,
-        "source": null
+        "source": "loadable"
       },
       {
         "name": "light",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "themeable"
       },
       {
         "name": "color",
         "type": "string",
         "default": "'primary'",
-        "source": null
+        "source": "colorable"
       },
       {
         "name": "error",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "validatable"
       },
       {
         "name": "errorCount",
@@ -139,7 +139,7 @@ module.exports = {
           "string"
         ],
         "default": 1,
-        "source": null
+        "source": "validatable"
       },
       {
         "name": "errorMessages",
@@ -148,7 +148,7 @@ module.exports = {
           "array"
         ],
         "default": [],
-        "source": null
+        "source": "validatable"
       },
       {
         "name": "hideNoData",
@@ -188,19 +188,19 @@ module.exports = {
         "name": "appendIcon",
         "type": "string",
         "default": "'$vuetify.icons.dropdown'",
-        "source": "v-select"
+        "source": "v-input"
       },
       {
         "name": "appendIconCb",
         "type": "function",
         "default": "null",
-        "source": "v-select"
+        "source": "v-input"
       },
       {
         "name": "disabled",
         "type": "boolean",
         "default": "false",
-        "source": "v-select"
+        "source": "v-input"
       },
       {
         "name": "height",
@@ -209,25 +209,25 @@ module.exports = {
           "string"
         ],
         "default": "undefined",
-        "source": null
+        "source": "v-input"
       },
       {
         "name": "hideDetails",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-input"
       },
       {
         "name": "hint",
         "type": "string",
         "default": "undefined",
-        "source": null
+        "source": "v-input"
       },
       {
         "name": "label",
         "type": "string",
         "default": "undefined",
-        "source": null
+        "source": "v-input"
       },
       {
         "name": "itemText",
@@ -281,7 +281,7 @@ module.exports = {
         "name": "dontFillMaskBlanks",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "maskable"
       },
       {
         "name": "deletableChips",
@@ -299,43 +299,43 @@ module.exports = {
         "name": "appendOuterIcon",
         "type": "string",
         "default": "undefined",
-        "source": null
+        "source": "v-text-field"
       },
       {
         "name": "autofocus",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-text-field"
       },
       {
         "name": "box",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-text-field"
       },
       {
         "name": "browserAutocomplete",
         "type": "string",
         "default": "'off'",
-        "source": "v-select"
+        "source": "v-text-field"
       },
       {
         "name": "clearable",
         "type": "boolean",
         "default": "false",
-        "source": "v-select"
+        "source": "v-text-field"
       },
       {
         "name": "clearIcon",
         "type": "string",
         "default": "'$vuetify.icons.clear'",
-        "source": null
+        "source": "v-text-field"
       },
       {
         "name": "clearIconCb",
         "type": "function",
         "default": "null",
-        "source": null
+        "source": "v-text-field"
       },
       {
         "name": "counter",
@@ -345,19 +345,19 @@ module.exports = {
           "string"
         ],
         "default": "undefined",
-        "source": null
+        "source": "v-text-field"
       },
       {
         "name": "flat",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-text-field"
       },
       {
         "name": "fullWidth",
         "type": "boolean",
         "default": "false",
-        "source": "v-select"
+        "source": "v-text-field"
       },
       {
         "name": "chips",
@@ -417,7 +417,7 @@ module.exports = {
         "name": "dark",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "themeable"
       },
       {
         "name": "zIndex",
@@ -444,13 +444,13 @@ module.exports = {
         "name": "suffix",
         "type": "string",
         "default": "undefined",
-        "source": null
+        "source": "v-text-field"
       },
       {
         "name": "soloInverted",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-text-field"
       },
       {
         "name": "maxHeight",
@@ -498,25 +498,25 @@ module.exports = {
           "array"
         ],
         "default": [],
-        "source": null
+        "source": "validatable"
       },
       {
         "name": "solo",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-text-field"
       },
       {
         "name": "singleLine",
         "type": "boolean",
         "default": "false",
-        "source": "v-select"
+        "source": "v-text-field"
       },
       {
         "name": "reverse",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-text-field"
       },
       {
         "name": "maxWidth",
@@ -604,31 +604,31 @@ module.exports = {
         "name": "rules",
         "type": "array",
         "default": [],
-        "source": null
+        "source": "validatable"
       },
       {
         "name": "prefix",
         "type": "string",
         "default": "undefined",
-        "source": null
+        "source": "v-text-field"
       },
       {
         "name": "placeholder",
         "type": "string",
         "default": "undefined",
-        "source": null
+        "source": "v-text-field"
       },
       {
         "name": "outline",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-text-field"
       },
       {
         "name": "returnMaskedValue",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "maskable"
       },
       {
         "name": "mask",
@@ -637,43 +637,43 @@ module.exports = {
           "string"
         ],
         "default": "undefined",
-        "source": null
+        "source": "maskable"
       },
       {
         "name": "success",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "validatable"
       },
       {
         "name": "tabindex",
         "type": "any",
         "default": 0,
-        "source": null
+        "source": "v-input"
       },
       {
         "name": "readonly",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-input"
       },
       {
         "name": "prependIconCb",
         "type": "function",
         "default": "null",
-        "source": null
+        "source": "v-input"
       },
       {
         "name": "prependIcon",
         "type": "string",
         "default": "undefined",
-        "source": null
+        "source": "v-input"
       },
       {
         "name": "persistentHint",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-input"
       },
       {
         "name": "successMessages",
@@ -682,7 +682,7 @@ module.exports = {
           "array"
         ],
         "default": [],
-        "source": null
+        "source": "validatable"
       },
       {
         "name": "multiple",
@@ -724,7 +724,7 @@ module.exports = {
         "name": "textarea",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-text-field"
       },
       {
         "name": "transition",
@@ -739,19 +739,19 @@ module.exports = {
         "name": "type",
         "type": "string",
         "default": "'text'",
-        "source": null
+        "source": "v-text-field"
       },
       {
         "name": "validateOnBlur",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "validatable"
       },
       {
         "name": "value",
         "type": "any",
         "default": "undefined",
-        "source": null
+        "source": "v-input"
       },
       {
         "name": "valueComparator",
@@ -5319,7 +5319,7 @@ module.exports = {
         "name": "auto",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-select"
       },
       {
         "name": "editable",
@@ -5337,7 +5337,7 @@ module.exports = {
         "name": "color",
         "type": "string",
         "default": "'primary'",
-        "source": null
+        "source": "colorable"
       },
       {
         "name": "combobox",
@@ -5349,85 +5349,85 @@ module.exports = {
         "name": "dense",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-select"
       },
       {
         "name": "deletableChips",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-select"
       },
       {
         "name": "contentClass",
         "type": "string",
         "default": "undefined",
-        "source": null
+        "source": "v-select"
       },
       {
         "name": "chips",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-select"
       },
       {
         "name": "cacheItems",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-select"
       },
       {
         "name": "attach",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-select"
       },
       {
         "name": "allowOverflow",
         "type": "boolean",
         "default": "true",
-        "source": "v-autocomplete"
+        "source": "v-select"
       },
       {
         "name": "appendIcon",
         "type": "string",
         "default": "'$vuetify.icons.dropdown'",
-        "source": null
+        "source": "v-input"
       },
       {
         "name": "appendIconCb",
         "type": "function",
         "default": "null",
-        "source": null
+        "source": "v-input"
       },
       {
         "name": "disabled",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-input"
       },
       {
         "name": "activator",
         "type": "any",
         "default": "undefined",
-        "source": null
+        "source": "v-select"
       },
       {
         "name": "closeOnContentClick",
         "type": "boolean",
         "default": "true",
-        "source": null
+        "source": "v-select"
       },
       {
         "name": "closeOnClick",
         "type": "boolean",
         "default": "true",
-        "source": null
+        "source": "v-select"
       },
       {
         "name": "dark",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "themeable"
       },
       {
         "name": "counter",
@@ -5437,55 +5437,55 @@ module.exports = {
           "string"
         ],
         "default": "undefined",
-        "source": null
+        "source": "v-text-field"
       },
       {
         "name": "clearIconCb",
         "type": "function",
         "default": "null",
-        "source": null
+        "source": "v-text-field"
       },
       {
         "name": "clearIcon",
         "type": "string",
         "default": "'$vuetify.icons.clear'",
-        "source": null
+        "source": "v-text-field"
       },
       {
         "name": "clearable",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-text-field"
       },
       {
         "name": "browserAutocomplete",
         "type": "string",
         "default": "'off'",
-        "source": "v-autocomplete"
+        "source": "v-text-field"
       },
       {
         "name": "box",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-text-field"
       },
       {
         "name": "dontFillMaskBlanks",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "maskable"
       },
       {
         "name": "autofocus",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-text-field"
       },
       {
         "name": "appendOuterIcon",
         "type": "string",
         "default": "undefined",
-        "source": null
+        "source": "v-text-field"
       },
       {
         "name": "minWidth",
@@ -5495,7 +5495,7 @@ module.exports = {
           "string"
         ],
         "default": 0,
-        "source": null
+        "source": "v-select"
       },
       {
         "name": "loading",
@@ -5504,7 +5504,7 @@ module.exports = {
           "string"
         ],
         "default": false,
-        "source": null
+        "source": "loadable"
       },
       {
         "name": "hideNoData",
@@ -5522,13 +5522,13 @@ module.exports = {
         "name": "light",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "themeable"
       },
       {
         "name": "error",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "validatable"
       },
       {
         "name": "itemValue",
@@ -5538,7 +5538,7 @@ module.exports = {
           "function"
         ],
         "default": "value",
-        "source": null
+        "source": "v-select"
       },
       {
         "name": "itemText",
@@ -5548,19 +5548,19 @@ module.exports = {
           "function"
         ],
         "default": "text",
-        "source": null
+        "source": "v-select"
       },
       {
         "name": "flat",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-text-field"
       },
       {
         "name": "fullWidth",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-text-field"
       },
       {
         "name": "itemDisabled",
@@ -5570,7 +5570,7 @@ module.exports = {
           "function"
         ],
         "default": "disabled",
-        "source": null
+        "source": "v-select"
       },
       {
         "name": "itemAvatar",
@@ -5580,19 +5580,19 @@ module.exports = {
           "function"
         ],
         "default": "avatar",
-        "source": null
+        "source": "v-select"
       },
       {
         "name": "items",
         "type": "array",
         "default": [],
-        "source": null
+        "source": "v-select"
       },
       {
         "name": "hideSelected",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-select"
       },
       {
         "name": "errorCount",
@@ -5601,7 +5601,7 @@ module.exports = {
           "string"
         ],
         "default": 1,
-        "source": null
+        "source": "validatable"
       },
       {
         "name": "errorMessages",
@@ -5610,13 +5610,13 @@ module.exports = {
           "array"
         ],
         "default": [],
-        "source": null
+        "source": "validatable"
       },
       {
         "name": "inputActivator",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-select"
       },
       {
         "name": "height",
@@ -5625,25 +5625,25 @@ module.exports = {
           "string"
         ],
         "default": "undefined",
-        "source": null
+        "source": "v-input"
       },
       {
         "name": "hideDetails",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-input"
       },
       {
         "name": "hint",
         "type": "string",
         "default": "undefined",
-        "source": null
+        "source": "v-input"
       },
       {
         "name": "label",
         "type": "string",
         "default": "undefined",
-        "source": null
+        "source": "v-input"
       },
       {
         "name": "successMessages",
@@ -5652,7 +5652,7 @@ module.exports = {
           "array"
         ],
         "default": [],
-        "source": null
+        "source": "validatable"
       },
       {
         "name": "noDataText",
@@ -5664,13 +5664,13 @@ module.exports = {
         "name": "multiLine",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-select"
       },
       {
         "name": "multiple",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-select"
       },
       {
         "name": "maxHeight",
@@ -5679,7 +5679,7 @@ module.exports = {
           "string"
         ],
         "default": 300,
-        "source": null
+        "source": "v-select"
       },
       {
         "name": "messages",
@@ -5688,7 +5688,7 @@ module.exports = {
           "array"
         ],
         "default": [],
-        "source": null
+        "source": "validatable"
       },
       {
         "name": "mask",
@@ -5697,7 +5697,7 @@ module.exports = {
           "string"
         ],
         "default": "undefined",
-        "source": null
+        "source": "maskable"
       },
       {
         "name": "maxWidth",
@@ -5706,19 +5706,19 @@ module.exports = {
           "string"
         ],
         "default": "auto",
-        "source": null
+        "source": "v-select"
       },
       {
         "name": "solo",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-text-field"
       },
       {
         "name": "openOnHover",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-select"
       },
       {
         "name": "noFilter",
@@ -5730,31 +5730,31 @@ module.exports = {
         "name": "openOnClear",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-select"
       },
       {
         "name": "offsetX",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-select"
       },
       {
         "name": "offsetOverflow",
         "type": "boolean",
         "default": "true",
-        "source": "v-autocomplete"
+        "source": "v-select"
       },
       {
         "name": "openOnClick",
         "type": "boolean",
         "default": "true",
-        "source": null
+        "source": "v-select"
       },
       {
         "name": "offsetY",
         "type": "boolean",
         "default": "true",
-        "source": "v-autocomplete"
+        "source": "v-select"
       },
       {
         "name": "nudgeBottom",
@@ -5763,7 +5763,7 @@ module.exports = {
           "string"
         ],
         "default": 0,
-        "source": null
+        "source": "v-select"
       },
       {
         "name": "nudgeLeft",
@@ -5772,7 +5772,7 @@ module.exports = {
           "string"
         ],
         "default": 0,
-        "source": null
+        "source": "v-select"
       },
       {
         "name": "nudgeRight",
@@ -5781,7 +5781,7 @@ module.exports = {
           "string"
         ],
         "default": 0,
-        "source": null
+        "source": "v-select"
       },
       {
         "name": "nudgeTop",
@@ -5790,7 +5790,7 @@ module.exports = {
           "string"
         ],
         "default": 0,
-        "source": null
+        "source": "v-select"
       },
       {
         "name": "nudgeWidth",
@@ -5799,91 +5799,91 @@ module.exports = {
           "string"
         ],
         "default": 0,
-        "source": null
+        "source": "v-select"
       },
       {
         "name": "prependIcon",
         "type": "string",
         "default": "undefined",
-        "source": null
+        "source": "v-input"
       },
       {
         "name": "returnMaskedValue",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "maskable"
       },
       {
         "name": "positionY",
         "type": "number",
         "default": "undefined",
-        "source": null
+        "source": "v-select"
       },
       {
         "name": "readonly",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-input"
       },
       {
         "name": "prependIconCb",
         "type": "function",
         "default": "null",
-        "source": null
+        "source": "v-input"
       },
       {
         "name": "positionX",
         "type": "number",
         "default": "undefined",
-        "source": null
+        "source": "v-select"
       },
       {
         "name": "persistentHint",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-input"
       },
       {
         "name": "outline",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-text-field"
       },
       {
         "name": "origin",
         "type": "string",
         "default": "'top left'",
-        "source": null
+        "source": "v-select"
       },
       {
         "name": "placeholder",
         "type": "string",
         "default": "undefined",
-        "source": null
+        "source": "v-text-field"
       },
       {
         "name": "prefix",
         "type": "string",
         "default": "undefined",
-        "source": null
+        "source": "v-text-field"
       },
       {
         "name": "searchInput",
         "type": "any",
         "default": "undefined",
-        "source": "v-autocomplete"
+        "source": "v-select"
       },
       {
         "name": "reverse",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-text-field"
       },
       {
         "name": "returnObject",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-select"
       },
       {
         "name": "valueComparator",
@@ -5895,7 +5895,7 @@ module.exports = {
         "name": "rules",
         "type": "array",
         "default": [],
-        "source": null
+        "source": "validatable"
       },
       {
         "name": "zIndex",
@@ -5904,13 +5904,13 @@ module.exports = {
           "string"
         ],
         "default": "undefined",
-        "source": null
+        "source": "v-select"
       },
       {
         "name": "soloInverted",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-text-field"
       },
       {
         "name": "segmented",
@@ -5922,31 +5922,31 @@ module.exports = {
         "name": "smallChips",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-select"
       },
       {
         "name": "singleLine",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-text-field"
       },
       {
         "name": "success",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "validatable"
       },
       {
         "name": "suffix",
         "type": "string",
         "default": "undefined",
-        "source": null
+        "source": "v-text-field"
       },
       {
         "name": "tabindex",
         "type": "any",
         "default": 0,
-        "source": null
+        "source": "v-input"
       },
       {
         "name": "tags",
@@ -5958,7 +5958,7 @@ module.exports = {
         "name": "textarea",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-text-field"
       },
       {
         "name": "transition",
@@ -5967,25 +5967,25 @@ module.exports = {
           "string"
         ],
         "default": "v-menu-transition",
-        "source": "v-autocomplete"
+        "source": "v-select"
       },
       {
         "name": "type",
         "type": "string",
         "default": "'text'",
-        "source": null
+        "source": "v-text-field"
       },
       {
         "name": "validateOnBlur",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "validatable"
       },
       {
         "name": "value",
         "type": "any",
         "default": "undefined",
-        "source": null
+        "source": "v-input"
       }
     ],
     "mixins": [
@@ -6598,7 +6598,7 @@ module.exports = {
         "name": "persistentHint",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-input"
       },
       {
         "name": "loading",
@@ -6667,31 +6667,31 @@ module.exports = {
         "name": "label",
         "type": "string",
         "default": "undefined",
-        "source": "v-slider"
+        "source": "v-input"
       },
       {
         "name": "hint",
         "type": "string",
         "default": "undefined",
-        "source": null
+        "source": "v-input"
       },
       {
         "name": "appendIcon",
         "type": "string",
         "default": "undefined",
-        "source": null
+        "source": "v-input"
       },
       {
         "name": "appendIconCb",
         "type": "function",
         "default": "null",
-        "source": null
+        "source": "v-input"
       },
       {
         "name": "disabled",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-input"
       },
       {
         "name": "height",
@@ -6700,13 +6700,13 @@ module.exports = {
           "string"
         ],
         "default": "undefined",
-        "source": null
+        "source": "v-input"
       },
       {
         "name": "hideDetails",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-input"
       },
       {
         "name": "min",
@@ -6733,25 +6733,25 @@ module.exports = {
         "name": "prependIcon",
         "type": "string",
         "default": "undefined",
-        "source": null
+        "source": "v-input"
       },
       {
         "name": "prependIconCb",
         "type": "function",
         "default": "null",
-        "source": null
+        "source": "v-input"
       },
       {
         "name": "readonly",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-input"
       },
       {
         "name": "tabindex",
         "type": "any",
         "default": 0,
-        "source": null
+        "source": "v-input"
       },
       {
         "name": "thumbSize",
@@ -6859,7 +6859,7 @@ module.exports = {
         "name": "value",
         "type": "array",
         "default": [],
-        "source": "v-slider"
+        "source": "v-input"
       }
     ],
     "mixins": [
@@ -6926,13 +6926,13 @@ module.exports = {
         "name": "appendIconCb",
         "type": "function",
         "default": "null",
-        "source": null
+        "source": "v-input"
       },
       {
         "name": "appendIcon",
         "type": "string",
         "default": "'$vuetify.icons.dropdown'",
-        "source": null
+        "source": "v-input"
       },
       {
         "name": "allowOverflow",
@@ -7107,7 +7107,7 @@ module.exports = {
         "name": "disabled",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-input"
       },
       {
         "name": "itemAvatar",
@@ -8732,25 +8732,25 @@ module.exports = {
           "string"
         ],
         "default": false,
-        "source": null
+        "source": "loadable"
       },
       {
         "name": "light",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "themeable"
       },
       {
         "name": "color",
         "type": "string",
         "default": "'primary'",
-        "source": "v-text-field"
+        "source": "colorable"
       },
       {
         "name": "error",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "validatable"
       },
       {
         "name": "errorCount",
@@ -8759,7 +8759,7 @@ module.exports = {
           "string"
         ],
         "default": 1,
-        "source": null
+        "source": "validatable"
       },
       {
         "name": "errorMessages",
@@ -8768,7 +8768,7 @@ module.exports = {
           "array"
         ],
         "default": [],
-        "source": null
+        "source": "validatable"
       },
       {
         "name": "autoGrow",
@@ -8808,19 +8808,19 @@ module.exports = {
         "name": "appendIcon",
         "type": "string",
         "default": "undefined",
-        "source": null
+        "source": "v-input"
       },
       {
         "name": "appendIconCb",
         "type": "function",
         "default": "null",
-        "source": null
+        "source": "v-input"
       },
       {
         "name": "disabled",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-input"
       },
       {
         "name": "height",
@@ -8829,25 +8829,25 @@ module.exports = {
           "string"
         ],
         "default": "undefined",
-        "source": null
+        "source": "v-input"
       },
       {
         "name": "hideDetails",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-input"
       },
       {
         "name": "hint",
         "type": "string",
         "default": "undefined",
-        "source": null
+        "source": "v-input"
       },
       {
         "name": "label",
         "type": "string",
         "default": "undefined",
-        "source": "v-text-field"
+        "source": "v-input"
       },
       {
         "name": "clearIcon",
@@ -8895,7 +8895,7 @@ module.exports = {
         "name": "dark",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "themeable"
       },
       {
         "name": "placeholder",
@@ -8919,25 +8919,25 @@ module.exports = {
         "name": "readonly",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-input"
       },
       {
         "name": "prependIconCb",
         "type": "function",
         "default": "null",
-        "source": null
+        "source": "v-input"
       },
       {
         "name": "prependIcon",
         "type": "string",
         "default": "undefined",
-        "source": null
+        "source": "v-input"
       },
       {
         "name": "persistentHint",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "v-input"
       },
       {
         "name": "messages",
@@ -8946,7 +8946,7 @@ module.exports = {
           "array"
         ],
         "default": [],
-        "source": null
+        "source": "validatable"
       },
       {
         "name": "prefix",
@@ -9000,7 +9000,7 @@ module.exports = {
         "name": "rules",
         "type": "array",
         "default": [],
-        "source": null
+        "source": "validatable"
       },
       {
         "name": "singleLine",
@@ -9018,7 +9018,7 @@ module.exports = {
         "name": "success",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "validatable"
       },
       {
         "name": "successMessages",
@@ -9027,7 +9027,7 @@ module.exports = {
           "array"
         ],
         "default": [],
-        "source": null
+        "source": "validatable"
       },
       {
         "name": "suffix",
@@ -9039,7 +9039,7 @@ module.exports = {
         "name": "tabindex",
         "type": "any",
         "default": 0,
-        "source": null
+        "source": "v-input"
       },
       {
         "name": "type",
@@ -9051,13 +9051,13 @@ module.exports = {
         "name": "validateOnBlur",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "validatable"
       },
       {
         "name": "value",
         "type": "any",
         "default": "undefined",
-        "source": null
+        "source": "v-input"
       }
     ],
     "mixins": [

@@ -71,7 +71,7 @@ function getPropSource (name, mixins) {
 
     if (mixin.name) {
       const source = Object.keys(mixin.props || {}).find(p => p === name) && mixin.name
-      let found = getPropSource(name, mixin.mixins || []) || source
+      let found = getPropSource(name, [mixin.extends].concat(mixin.mixins).filter(m => !!m)) || source
       if (found) return found
     }
   }
