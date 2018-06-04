@@ -105,7 +105,7 @@ function parseComponent (component) {
 }
 
 function parseProps (component, array = [], mixin = false) {
-  const mixins = component.mixins || []
+  const mixins = [component.extends].concat(component.mixins).filter(m => !!m)
   const props = component.props || {}
 
   Object.keys(props).forEach(prop => {
