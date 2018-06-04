@@ -2,10 +2,11 @@
   "name": "api-generator",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/api.js",
   "scripts": {
     "debug": "babel-node inspect src/index.js",
     "build": "node src/index.js",
+    "install": "node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -13,8 +14,8 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.1",
-    "deepmerge": "^2.0.1",
-    "vue": "^2.5.9",
-    "vuetify": "^1.0.0-beta.4"
+    "deepmerge": "^2.1.1",
+    "vue": "^2.5.16",
+    "vuetify": "^1.0.18"
   }
 }
