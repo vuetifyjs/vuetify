@@ -142,7 +142,7 @@ Object.keys(installedComponents).forEach(name => {
   if (name.match(/v-/)) {
     let component = installedComponents[name]
     if (component.options.$_wrapperFor) {
-      component = component.options.$_wrapperFor
+      component = Vue.extend(component.options.$_wrapperFor)
     }
 
     let options = parseComponent(component.options || component)
