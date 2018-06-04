@@ -200,7 +200,7 @@ function writeJsonFile (obj, file) {
 
 const tags = Object.keys(components).reduce((t, k) => {
   t[k] = {
-    attributes: components[k].props.map(p => p.name.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`)),
+    attributes: components[k].props.map(p => p.name.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`)).sort(),
     description: ''
   }
 
