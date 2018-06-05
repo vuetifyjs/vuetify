@@ -1,4 +1,10 @@
-export function createSimpleFunctional (c, el = 'div', name) {
+import { VNode, VNodeDirective, FunctionalComponentOptions } from 'vue'
+
+export function createSimpleFunctional (
+  c: string,
+  el = 'div',
+  name?: string
+): FunctionalComponentOptions {
   name = name || c.replace(/__/g, '-')
 
   // TODO: remove after close
@@ -6,10 +12,10 @@ export function createSimpleFunctional (c, el = 'div', name) {
   name = name.split('-')[0] === 'v' ? name : `v-${name}`
 
   return {
-    name: name,
+    name,
     functional: true,
 
-    render: (h, { data, children }) => {
+    render (h, { data, children }) {
       data.staticClass = (`${c} ${data.staticClass || ''}`).trim()
 
       return h(el, data, children)
@@ -17,7 +23,11 @@ export function createSimpleFunctional (c, el = 'div', name) {
   }
 }
 
-export function createSimpleTransition (name, origin = 'top center 0', mode) {
+export function createSimpleTransition (
+  name: string,
+  origin = 'top center 0',
+  mode?: string
+): FunctionalComponentOptions {
   return {
     name,
 
@@ -40,7 +50,7 @@ export function createSimpleTransition (name, origin = 'top center 0', mode) {
 
       if (mode) context.data.props.mode = mode
 
-      context.data.on.beforeEnter = el => {
+      context.data.on.beforeEnter = (el: HTMLElement) => {
         el.style.transformOrigin = context.props.origin
         el.style.webkitTransformOrigin = context.props.origin
       }
@@ -50,7 +60,12 @@ export function createSimpleTransition (name, origin = 'top center 0', mode) {
   }
 }
 
-export function createJavaScriptTransition (name, functions, css = true, mode = 'in-out') {
+export function createJavaScriptTransition (
+  name: string,
+  functions: Record<string, () => any>,
+  css = true,
+  mode = 'in-out'
+): FunctionalComponentOptions {
   return {
     name,
 
@@ -81,16 +96,17 @@ export function createJavaScriptTransition (name, functions, css = true, mode = 
   }
 }
 
-export function directiveConfig (binding, defaults = {}) {
-  return Object.assign({},
-    defaults,
-    binding.modifiers,
-    { value: binding.arg },
-    binding.value || {}
-  )
+export type BindingConfig = Pick<VNodeDirective, 'arg' | 'modifiers' | 'value'>
+export function directiveConfig (binding: BindingConfig, defaults = {}): VNodeDirective {
+  return {
+    ...defaults,
+    ...binding.modifiers,
+    value: binding.arg,
+    ...(binding.value || {})
+  }
 }
 
-export function addOnceEventListener (el, event, cb) {
+export function addOnceEventListener (el: EventTarget, event: string, cb: () => void): void {
   var once = () => {
     cb()
     el.removeEventListener(event, once, false)
@@ -99,7 +115,7 @@ export function addOnceEventListener (el, event, cb) {
   el.addEventListener(event, once, false)
 }
 
-export function getNestedValue (obj, path, fallback) {
+export function getNestedValue (obj: any, path: (string | number)[], fallback?: any): any {
   const last = path.length - 1
 
   if (last < 0) return obj === undefined ? fallback : obj
@@ -116,7 +132,7 @@ export function getNestedValue (obj, path, fallback) {
   return obj[path[last]] === undefined ? fallback : obj[path[last]]
 }
 
-export function deepEqual (a, b) {
+export function deepEqual (a: any, b: any): boolean {
   if (a === b) return true
 
   if (a !== Object(a) || b !== Object(b)) {
@@ -134,7 +150,7 @@ export function deepEqual (a, b) {
   return props.every(p => deepEqual(a[p], b[p]))
 }
 
-export function getObjectValueByPath (obj, path, fallback) {
+export function getObjectValueByPath (obj: object, path: string, fallback?: any): any {
   // credit: http://stackoverflow.com/questions/6491463/accessing-nested-javascript-objects-with-string-key#comment55278413_6491621
   if (!path || path.constructor !== String) return fallback
   path = path.replace(/\[(\w+)\]/g, '.$1') // convert indexes to properties
@@ -142,12 +158,16 @@ export function getObjectValueByPath (obj, path, fallback) {
   return getNestedValue(obj, path.split('.'), fallback)
 }
 
-export function getPropertyFromItem (item, property, fallback) {
+export function getPropertyFromItem (
+  item: object,
+  property: string | (string | number)[] | ((item: object, fallback?: any) => any),
+  fallback?: any
+): any {
   if (property == null) return item === undefined ? fallback : item
 
   if (item !== Object(item)) return fallback === undefined ? item : fallback
 
-  if (property.constructor === String) return getObjectValueByPath(item, property, fallback)
+  if (typeof property === 'string') return getObjectValueByPath(item, property, fallback)
 
   if (Array.isArray(property)) return getNestedValue(item, property, fallback)
 
@@ -158,16 +178,16 @@ export function getPropertyFromItem (item, property, fallback) {
   return typeof value === 'undefined' ? fallback : value
 }
 
-export function createRange (length) {
-  return [...Array.from({ length }, (v, k) => k)]
+export function createRange (length: number): number[] {
+  return Array.from({ length }, (v, k) => k)
 }
 
-export function getZIndex (el) {
+export function getZIndex (el?: Element | null): number {
   if (!el || el.nodeType !== Node.ELEMENT_NODE) return 0
 
-  const index = window.getComputedStyle(el).getPropertyValue('z-index')
+  const index = +window.getComputedStyle(el).getPropertyValue('z-index')
 
-  if (isNaN(index)) return getZIndex(el.parentNode)
+  if (isNaN(index)) return getZIndex(el.parentNode as Element)
   return index
 }
 
@@ -175,14 +195,14 @@ const tagsToReplace = {
   '&': '&amp;',
   '<': '&lt;',
   '>': '&gt;'
-}
+} as any
 
-export function escapeHTML (str) {
+export function escapeHTML (str: string): string {
   return str.replace(/[&<>]/g, tag => tagsToReplace[tag] || tag)
 }
 
-export function filterObjectOnKeys (obj, keys) {
-  const filtered = {}
+export function filterObjectOnKeys<T, K extends keyof T> (obj: T, keys: K[]): { [N in K]: T[N] } {
+  const filtered = {} as { [N in K]: T[N] }
 
   for (let i = 0; i < keys.length; i++) {
     const key = keys[i]
@@ -194,22 +214,24 @@ export function filterObjectOnKeys (obj, keys) {
   return filtered
 }
 
-export function filterChildren (array = [], tag) {
+export function filterChildren (array: VNode[] = [], tag: string): VNode[] {
   return array.filter(child => {
     return child.componentOptions &&
       child.componentOptions.Ctor.options.name === tag
   })
 }
 
-export function convertToUnit (str, unit = 'px') {
-  return isNaN(str) ? str : `${Number(str)}${unit}`
+export function convertToUnit (str: string | number, unit = 'px'): string {
+  return isNaN(+str)
+    ? str as string // TODO: this is wrong but I cbf fixing it
+    : `${Number(str)}${unit}`
 }
 
-export function kebabCase (str) {
+export function kebabCase (str: string): string {
   return (str || '').replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()
 }
 
-export function isObject (obj) {
+export function isObject (obj: any): obj is object {
   return obj !== null && typeof obj === 'object'
 }
 
