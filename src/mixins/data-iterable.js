@@ -6,7 +6,7 @@ import Filterable from './filterable'
 import Themeable from './themeable'
 import Loadable from './loadable'
 
-import { getObjectValueByPath } from '../util/helpers'
+import { getObjectValueByPath, isObject } from '../util/helpers'
 import { consoleWarn } from '../util/console'
 
 /**
@@ -48,7 +48,7 @@ export default {
     mustSort: Boolean,
     noResultsText: {
       type: String,
-      default: 'No matching records found'
+      default: '$vuetify.lang.dataIterator.noResultsText'
     },
     nextIcon: {
       type: String,
@@ -65,13 +65,16 @@ export default {
           5,
           10,
           25,
-          { text: 'All', value: -1 }
+          {
+            text: '$vuetify.lang.dataIterator.rowsPerPageAll',
+            value: -1
+          }
         ]
       }
     },
     rowsPerPageText: {
       type: String,
-      default: 'Items per page:'
+      default: '$vuetify.lang.dataIterator.rowsPerPageText'
     },
     selectAll: [Boolean, String],
     search: {
@@ -160,6 +163,15 @@ export default {
         ? this.pagination
         : this.defaultPagination
     },
+    computedRowsPerPageItems () {
+      return this.rowsPerPageItems.map(item => {
+        return isObject(item)
+          ? Object.assign({}, item, {
+            text: this.$vuetify.t(item.text)
+          })
+          : item
+      })
+    },
     hasPagination () {
       const pagination = this.pagination || {}
 
@@ -169,7 +181,7 @@ export default {
       return this.selectAll !== undefined && this.selectAll !== false
     },
     itemsLength () {
-      if (this.search) return this.searchLength
+      if (this.hasSearch) return this.searchLength
       return this.totalItems || this.items.length
     },
     indeterminate () {
@@ -205,18 +217,24 @@ export default {
     selected () {
       const selected = {}
       for (let index = 0; index < this.value.length; index++) {
-        selected[this.value[index][this.itemKey]] = true
+        const key = getObjectValueByPath(this.value[index], this.itemKey)
+        selected[key] = true
       }
       return selected
+    },
+    hasSearch () {
+      return this.search != null
     }
   },
 
   watch: {
-    itemsLength (totalItems) {
-      this.updatePagination({ page: 1, totalItems })
+    search () {
+      this.$nextTick(() => {
+        this.updatePagination({ page: 1, totalItems: this.itemsLength })
+      })
     },
-    'computedPagination.sortBy': function () { this.updatePagination({ page: 1 }) },
-    'computedPagination.descending': function () { this.updatePagination({ page: 1 }) }
+    'computedPagination.sortBy': 'resetPagination',
+    'computedPagination.descending': 'resetPagination'
   },
 
   methods: {
@@ -227,7 +245,7 @@ export default {
         this.defaultPagination.rowsPerPage = this.rowsPerPageItems[0]
       }
 
-      this.defaultPagination.totalItems = this.itemsLength
+      this.defaultPagination.totalItems = this.items.length
 
       this.updatePagination(
         Object.assign({}, this.defaultPagination, this.pagination)
@@ -245,19 +263,17 @@ export default {
       }
     },
     isSelected (item) {
-      return this.selected[item[this.itemKey]]
+      return this.selected[getObjectValueByPath(item, this.itemKey)]
     },
     isExpanded (item) {
-      return this.expanded[item[this.itemKey]]
+      return this.expanded[getObjectValueByPath(item, this.itemKey)]
     },
     filteredItemsImpl (...additionalFilterArgs) {
       if (this.totalItems) return this.items
 
       let items = this.items.slice()
-      const hasSearch = typeof this.search !== 'undefined' &&
-        this.search !== null
 
-      if (hasSearch) {
+      if (this.hasSearch) {
         items = this.customFilter(items, this.search, this.filter, ...additionalFilterArgs)
         this.searchLength = items.length
       }
@@ -272,6 +288,10 @@ export default {
         !this.hasPagination
         ? items
         : items.slice(this.pageStart, this.pageStop)
+    },
+    resetPagination () {
+      this.computedPagination.page !== 1 &&
+        this.updatePagination({ page: 1 })
     },
     sort (index) {
       const { sortBy, descending } = this.computedPagination
@@ -290,20 +310,22 @@ export default {
     toggle (value) {
       const selected = Object.assign({}, this.selected)
       for (let index = 0; index < this.filteredItems.length; index++) {
-        selected[this.filteredItems[index][this.itemKey]] = value
+        const key = getObjectValueByPath(this.filteredItems[index], this.itemKey)
+        selected[key] = value
       }
 
-      this.$emit('input', this.items.filter(i => (
-        selected[i[this.itemKey]]))
-      )
+      this.$emit('input', this.items.filter(i => {
+        const key = getObjectValueByPath(i, this.itemKey)
+        return selected[key]
+      }))
     },
     createProps (item, index) {
       const props = { item, index }
       const keyProp = this.itemKey
-      const itemKey = item[keyProp]
+      const itemKey = getObjectValueByPath(item, keyProp)
 
       Object.defineProperty(props, 'selected', {
-        get: () => this.selected[item[this.itemKey]],
+        get: () => this.selected[itemKey],
         set: value => {
           if (itemKey == null) {
             consoleWarn(`"${keyProp}" attribute must be defined for item`, this)
@@ -311,13 +333,13 @@ export default {
 
           let selected = this.value.slice()
           if (value) selected.push(item)
-          else selected = selected.filter(i => i[keyProp] !== itemKey)
+          else selected = selected.filter(i => getObjectValueByPath(i, keyProp) !== itemKey)
           this.$emit('input', selected)
         }
       })
 
       Object.defineProperty(props, 'expanded', {
-        get: () => this.expanded[item[this.itemKey]],
+        get: () => this.expanded[itemKey],
         set: value => {
           if (itemKey == null) {
             consoleWarn(`"${keyProp}" attribute must be defined for item`, this)
@@ -336,12 +358,12 @@ export default {
     },
     genItems () {
       if (!this.itemsLength && !this.items.length) {
-        const noData = this.$slots['no-data'] || this.noDataText
+        const noData = this.$slots['no-data'] || this.$vuetify.t(this.noDataText)
         return [this.genEmptyItems(noData)]
       }
 
       if (!this.filteredItems.length) {
-        const noResults = this.$slots['no-results'] || this.noResultsText
+        const noResults = this.$slots['no-results'] || this.$vuetify.t(this.noResultsText)
         return [this.genEmptyItems(noResults)]
       }
 
@@ -363,7 +385,7 @@ export default {
           }
         },
         attrs: {
-          'aria-label': 'Previous page' // TODO: Localization
+          'aria-label': this.$vuetify.t('$vuetify.lang.dataIterator.prevPage')
         }
       }, [this.$createElement(VIcon, this.prevIcon)])
     },
@@ -388,7 +410,7 @@ export default {
           }
         },
         attrs: {
-          'aria-label': 'Next page' // TODO: Localization
+          'aria-label': this.$vuetify.t('$vuetify.lang.dataIterator.nextPage')
         }
       }, [this.$createElement(VIcon, this.nextIcon)])
     },
@@ -396,13 +418,13 @@ export default {
       return this.$createElement('div', {
         'class': this.actionsSelectClasses
       }, [
-        this.rowsPerPageText,
+        this.$vuetify.t(this.rowsPerPageText),
         this.$createElement(VSelect, {
           attrs: {
-            'aria-label': this.rowsPerPageText
+            'aria-label': this.$vuetify.t(this.rowsPerPageText)
           },
           props: {
-            items: this.rowsPerPageItems,
+            items: this.computedRowsPerPageItems,
             value: this.computedPagination.rowsPerPage,
             hideDetails: true,
             auto: true,
@@ -433,7 +455,7 @@ export default {
             pageStop: stop,
             itemsLength: this.itemsLength
           })
-          : `${this.pageStart + 1}-${stop} of ${this.itemsLength}`
+          : this.$vuetify.t('$vuetify.lang.dataIterator.pageText', this.pageStart + 1, stop, this.itemsLength)
       }
 
       return this.$createElement('div', {

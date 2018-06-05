@@ -18,12 +18,20 @@ export default {
         scrollTop = this.$refs.content.scrollHeight
       } else if (this.selectedIndex > this.startIndex) {
         scrollTop = (
-          (this.selectedIndex * (this.defaultOffset * 6)) -
-          (this.defaultOffset * 7)
+          // Top position of selected item
+          (this.selectedIndex * this.tileHeight) +
+          // Remove half of a tile's height
+          (this.tileHeight / 2) +
+          // Account for padding offset on lists
+          (this.defaultOffset / 2) -
+          // Half of the auto content's height
+          100
         )
       }
 
-      this.$refs.content.scrollTop = scrollTop
+      if (this.$refs.content) {
+        this.$refs.content.scrollTop = scrollTop
+      }
     },
     calcLeftAuto () {
       if (this.isAttached) return 0
@@ -41,27 +49,35 @@ export default {
       }
 
       this.selectedIndex = selectedIndex
-      let actingIndex = selectedIndex
-
-      let offsetPadding = -(this.defaultOffset * 6)
-      // #708 Stop index should vary by tile length
       this.stopIndex = this.tiles.length > 4
         ? this.tiles.length - 4
         : this.tiles.length
+      let additionalOffset = this.defaultOffset
+      let offsetPadding
 
-      if (selectedIndex > this.startIndex && selectedIndex < this.stopIndex) {
-        actingIndex = 2
-        offsetPadding = -this.defaultOffset
+      // Menu should be centered
+      if (selectedIndex > this.startIndex &&
+        selectedIndex < this.stopIndex
+      ) {
+        offsetPadding = 1.5 * this.tileHeight
+      // Menu should be offset top
       } else if (selectedIndex >= this.stopIndex) {
-        offsetPadding = -(this.defaultOffset * 5)
-        actingIndex = selectedIndex - this.stopIndex
+        // Being offset top means
+        // we have to account for top
+        // and bottom list padding
+        additionalOffset *= 2
+        offsetPadding = (selectedIndex - this.stopIndex) * this.tileHeight
+      // Menu should be offset bottom
+      } else {
+        offsetPadding = selectedIndex * this.tileHeight
       }
 
       return (
         this.computedTop +
+        additionalOffset -
         offsetPadding -
-        (actingIndex * (this.defaultOffset * 6))
-      ) - 1 // for border
+        (this.tileHeight / 2)
+      )
     }
   }
 }

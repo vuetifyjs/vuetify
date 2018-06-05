@@ -9,7 +9,8 @@ module.exports = {
     'standard'
   ],
   env: {
-    browser: true
+    browser: true,
+    es6: true
   },
   globals: {
     'expect': true,
@@ -54,7 +55,9 @@ module.exports = {
         asyncArrow: 'always'
       }
     ],
-    'no-return-await': 'warn'
+    'no-return-await': 'warn',
+    'object-shorthand': ['error', 'always'],
+    'no-extra-semi': 'error'
   },
   overrides: [
     {
@@ -75,7 +78,13 @@ module.exports = {
         // Can't overload function exports with this enabled
         'import/export': false,
 
-        'typescript/no-unused-vars': 'error',
+        // https://github.com/eslint/typescript-eslint-parser/issues/457
+        'no-unused-vars': false,
+        // 'typescript/no-unused-vars': 'error',
+
+        // https://github.com/eslint/typescript-eslint-parser/issues/443
+        // 'no-redeclare': false,
+
         'typescript/adjacent-overload-signatures': 'error',
         'typescript/member-delimiter-style': ['error', {
           delimiter: 'none'

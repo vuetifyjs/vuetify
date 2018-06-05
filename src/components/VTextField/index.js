@@ -6,6 +6,8 @@ import rebuildSlots from '../../util/rebuildFunctionalSlots'
 const wrapper = {
   functional: true,
 
+  $_wrapperFor: VTextField,
+
   props: {
     textarea: Boolean,
     multiLine: Boolean

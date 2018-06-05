@@ -19,22 +19,33 @@ const stub = {
 }
 
 test('VTextarea.vue', ({ mount }) => {
-  it('should have no resize handle', async () => {
-    const wrapper = mount(VTextarea)
+  it('should calculate element height when using auto-grow prop', async () => {
+    let value = ''
+    const component = {
+      render (h) {
+        return h(VTextarea, {
+          on: {
+            input: i => value = i
+          },
+          props: {
+            value,
+            autoGrow: true
+          }
+        })
+      }
+    }
 
-    expect(wrapper.vm.noResizeHandle).toBe(false)
+    const wrapper = mount(component)
+    const input = wrapper.find('textarea')[0]
 
-    wrapper.setProps({ noResize: true })
+    input.trigger('focus')
+    await wrapper.vm.$nextTick()
+    input.element.value = 'this is a really long text that should hopefully make auto-grow kick in. maybe?'
+    input.trigger('input')
+    await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.noResizeHandle).toBe(true)
-
-    wrapper.setProps({ noResize: false, autoGrow: true })
-
-    expect(wrapper.vm.noResizeHandle).toBe(true)
-
-    wrapper.setProps({ autoGrow: false })
-
-    expect(wrapper.vm.noResizeHandle).toBe(false)
+    expect(wrapper.html()).toMatchSnapshot()
+    expect(input.element.style.getPropertyValue('height').length).not.toBe(0)
   })
 
   it('should watch lazy value', async () => {
@@ -124,11 +135,11 @@ test('VTextarea.vue', ({ mount }) => {
     expect(stopPropagation).toBeCalled()
   })
 
-  it.skip('should render no-resize the same if already auto-grow', () => {
+  it('should render no-resize the same if already auto-grow', () => {
     const wrappers = [
-      { autoGrow:true, multiLine: true },
-      { autoGrow:true, textarea: true }
-    ].map(propsData => mount(VTextField,{propsData}))
+      { autoGrow: true, outline: false },
+      { autoGrow: true, outline: true }
+    ].map(propsData => mount(VTextarea,{ propsData }))
 
     wrappers.forEach(async wrapper => {
       await wrapper.vm.$nextTick()
@@ -141,5 +152,19 @@ test('VTextarea.vue', ({ mount }) => {
 
       expect(html2).toBe(html1)
     })
+  })
+
+  it('should emit keydown event', () => {
+    const wrapper = mount(VTextarea)
+    const keydown = jest.fn()
+    const textarea = wrapper.first('textarea')
+    wrapper.vm.$on('keydown', keydown)
+
+    textarea.trigger('focus')
+    textarea.element.value = 'foobar'
+    textarea.trigger('input')
+    textarea.trigger('keydown.enter')
+
+    expect(keydown).toBeCalled()
   })
 })

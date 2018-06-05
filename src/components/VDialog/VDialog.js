@@ -35,7 +35,7 @@ export default {
       animate: false,
       animateTimeout: null,
       isDependent: false,
-      stackClass: 'v-dialog__content__active',
+      stackClass: 'v-dialog__content--active',
       stackMinZIndex: 200
     }
   },
@@ -124,10 +124,12 @@ export default {
       ) return false
 
       // If we made it here, the click is outside
-      // and is active. If persistent, animate
-      // content
+      // and is active. If persistent, and the
+      // click is on the overlay, animate
       if (this.persistent) {
-        !this.noClickAnimation && this.animateClick()
+        if (!this.noClickAnimation &&
+          this.overlay === e.target
+        ) this.animateClick()
 
         return false
       }
@@ -193,14 +195,15 @@ export default {
       }, [this.$slots.activator]))
     }
 
-    const dialog = h('transition', {
-      props: {
-        name: this.transition || '', // If false, show nothing
-        origin: this.origin
-      }
-    }, [h('div', data,
-      this.showLazyContent(this.$slots.default)
-    )])
+    let dialog = h('div', data, this.showLazyContent(this.$slots.default))
+    if (this.transition) {
+      dialog = h('transition', {
+        props: {
+          name: this.transition,
+          origin: this.origin
+        }
+      }, [dialog])
+    }
 
     children.push(h('div', {
       'class': this.contentClasses,

@@ -78,8 +78,12 @@ theme(v-card, "v-card")
   &__actions
     align-items: center
     display: flex
-    padding: 8px 4px
+    padding: 8px
 
     > *,
+    .v-input,
     .v-btn
-      margin: 0 4px
+      margin: 0
+
+    .v-btn + .v-btn
+      margin-left: 8px

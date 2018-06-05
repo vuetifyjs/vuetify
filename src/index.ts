@@ -1,12 +1,12 @@
 import './stylus/app.styl'
 import * as components from './components'
 import * as directives from './directives'
-import { PluginObject, VueConstructor } from 'vue'
-import { Vuetify as VuetifyPlugin, VuetifyUseOptions } from '../types'
+import { VueConstructor } from 'vue'
+import { Vuetify as VuetifyPlugin, VuetifyUseOptions } from 'types'
 
 const Vuetify: VuetifyPlugin = {
   install (Vue: VueConstructor, args?: VuetifyUseOptions): void {
-    const VuetifyComponent: PluginObject<VuetifyPlugin> = components.Vuetify
+    const VuetifyComponent: VuetifyPlugin = components.Vuetify
 
     Vue.use(VuetifyComponent, {
       components,

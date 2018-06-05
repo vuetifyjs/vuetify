@@ -73,12 +73,8 @@ test('VTextField.js', ({ mount }) => {
     expect(wrapper.data().valid).toEqual(false)
   })
 
-  // Changed for v1.1 - shouldValidate is now computed
-  // and must be in an error state
   it('should start validating on input', async () => {
-    const wrapper = mount(VTextField, {
-      propsData: { error: true }
-    })
+    const wrapper = mount(VTextField)
 
     expect(wrapper.vm.shouldValidate).toEqual(false)
     wrapper.setProps({ value: 'asd' })
@@ -183,12 +179,8 @@ test('VTextField.js', ({ mount }) => {
     expect(wrapper.vm.internalValue).toBe('foo')
   })
 
-  // Changed for v1.1 - shouldValidate is now computed
-  // and must be in an error state
   it('should start validating on blur', async () => {
-    const wrapper = mount(VTextField, {
-      propsData: { error: true }
-    })
+    const wrapper = mount(VTextField)
 
     const input = wrapper.first('input')
     expect(wrapper.vm.shouldValidate).toEqual(false)
@@ -540,36 +532,6 @@ test('VTextField.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it.skip('should calculate element height when using auto-grow prop', async () => {
-    let value = ''
-    const component = {
-      render (h) {
-        return h(VTextField, {
-          on: {
-            input: i => value = i
-          },
-          props: {
-            value,
-            multiLine: true,
-            autoGrow: true
-          }
-        })
-      }
-    }
-
-    const wrapper = mount(component)
-    const input = wrapper.find('textarea')[0]
-
-    input.trigger('focus')
-    await wrapper.vm.$nextTick()
-    input.element.value = 'this is a really long text that should hopefully make auto-grow kick in. maybe?'
-    input.trigger('input')
-    await wrapper.vm.$nextTick()
-
-    expect(wrapper.html()).toMatchSnapshot()
-    expect(input.element.style.getPropertyValue('height').length).not.toBe(0)
-  })
-
   it('render active label for dirtyTypes (time/date/color/etc)', () => {
     const wrapper = mount(VTextField, {
       propsData: {
@@ -598,11 +560,11 @@ test('VTextField.js', ({ mount }) => {
   it('should not generate label', () => {
     const wrapper = mount(VTextField)
 
-    expect(wrapper.vm.genLabel()).toBeTruthy()
+    expect(wrapper.vm.genLabel()).toBe(null)
 
     wrapper.setProps({ singleLine: true })
 
-    expect(wrapper.vm.genLabel()).toBeTruthy()
+    expect(wrapper.vm.genLabel()).toBe(null)
 
     wrapper.setProps({ placeholder: 'foo' })
 
@@ -614,6 +576,13 @@ test('VTextField.js', ({ mount }) => {
     })
 
     expect(wrapper.vm.genLabel()).toBe(null)
+
+    wrapper.setProps({
+      label: 'bar',
+      value: undefined
+    })
+
+    expect(wrapper.vm.genLabel()).toBeTruthy()
   })
 
   it('should propagate id to label for attribute', () => {

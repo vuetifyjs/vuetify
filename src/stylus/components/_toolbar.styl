@@ -17,15 +17,12 @@ theme(v-toolbar, "v-toolbar")
   width: 100%
   will-change: padding-left
 
-  .input-group--solo
-    .input-group__details
+  .v-text-field--enclosed,
+  .v-text-field--box
+    margin: 0
+
+    .v-text-field__details
       display: none
-
-  .input-group--single-line:not(.input-group--solo)
-    padding: 0
-
-    label
-      top: auto
 
 /** Children */
 .v-toolbar
@@ -101,6 +98,18 @@ theme(v-toolbar, "v-toolbar")
 
 /** Types */
 .v-toolbar
+  .v-overflow-btn,
+  .v-btn-toggle
+    elevation(0)
+
+  .v-overflow-btn
+    margin: 0
+
+    .v-input__control,
+    .v-input__slot
+      &:before
+        display: none
+
   &--card
     border-radius: $card-border-radius $card-border-radius 0 0
     elevation(0)

@@ -1,3 +1,5 @@
+import { VuetifyUseOptions, VuetifyTheme } from 'types'
+
 /* eslint-disable no-multi-spaces */
 const THEME_DEFAULTS = {
   primary: '#1976D2',   // blue.darken2
@@ -9,8 +11,11 @@ const THEME_DEFAULTS = {
   warning: '#FFC107'    // amber.base
 }
 
-export default function theme (theme = {}) {
+export default function theme (theme: VuetifyUseOptions['theme'] = {}): VuetifyTheme | false {
   if (theme === false) return false
 
-  return Object.assign({}, THEME_DEFAULTS, theme)
+  return {
+    ...THEME_DEFAULTS,
+    ...theme
+  }
 }

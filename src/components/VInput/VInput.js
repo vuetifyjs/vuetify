@@ -3,6 +3,7 @@ import '../../stylus/components/_inputs.styl'
 
 // Components
 import VIcon from '../VIcon'
+import VLabel from '../VLabel'
 import VMessages from '../VMessages'
 
 // Mixins
@@ -37,6 +38,7 @@ export default {
     height: [Number, String],
     hideDetails: Boolean,
     hint: String,
+    label: String,
     persistentHint: Boolean,
     prependIcon: String,
     prependIconCb: Function,
@@ -53,7 +55,7 @@ export default {
         'v-input--hide-details': this.hideDetails,
         'v-input--is-label-active': this.isLabelActive,
         'v-input--is-dirty': this.isDirty,
-        'v-input--is-disabled': this.isDisabled,
+        'v-input--is-disabled': this.disabled,
         'v-input--is-focused': this.isFocused,
         'v-input--is-loading': this.loading !== false,
         'v-input--is-readonly': this.readonly,
@@ -68,6 +70,9 @@ export default {
       return !this.hasMessages &&
         this.hint &&
         (this.persistentHint || this.isFocused)
+    },
+    hasLabel () {
+      return Boolean(this.$slots.label || this.label)
     },
     // Proxy for `lazyValue`
     // This allows an input
@@ -86,7 +91,7 @@ export default {
       return !!this.lazyValue
     },
     isDisabled () {
-      return this.disabled || this.readonly
+      return Boolean(this.disabled || this.readonly)
     },
     isLabelActive () {
       return this.isDirty
@@ -109,7 +114,10 @@ export default {
       ])
     },
     genDefaultSlot () {
-      return this.$slots.default
+      return [
+        this.genLabel(),
+        this.$slots.default
+      ]
     },
     genIcon (type, cb) {
       const icon = this[`${type}Icon`]
@@ -128,6 +136,13 @@ export default {
               e.stopPropagation()
 
               cb(e)
+            },
+            // Container has mouseup event
+            // that will trigger menu open
+            // if enclosed
+            mouseup: e => {
+              e.preventDefault()
+              e.stopPropagation()
             }
           }
       }
@@ -146,10 +161,6 @@ export default {
     genInputSlot () {
       return this.$createElement('div', {
         staticClass: 'v-input__slot',
-        'class': this.addTextColorClassChecks(
-          {},
-          this.hasState ? this.validationState : this.color
-        ),
         style: { height: convertToUnit(this.height) },
         directives: this.directivesInput,
         on: { click: this.onClick },
@@ -158,6 +169,17 @@ export default {
         this.genDefaultSlot(),
         this.genProgress()
       ])
+    },
+    genLabel () {
+      if (!this.hasLabel) return null
+
+      return this.$createElement(VLabel, {
+        props: {
+          color: this.validationState,
+          focused: this.hasState,
+          for: this.$attrs.id
+        }
+      }, this.$slots.label || this.label)
     },
     genMessages () {
       if (this.hideDetails) return null

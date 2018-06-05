@@ -62,7 +62,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should return defined item value', () => {
+  it('should return defined item value', async () => {
     const wrapper = mount(VSelectList, {
       propsData: {
         itemValue: 'foo'
@@ -70,8 +70,9 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     })
 
     const getValue = wrapper.vm.getValue
+    const getText = wrapper.vm.getText
 
-    expect(getValue({ fizz: 'buzz' })).toEqual({ fizz: 'buzz' })
+    expect(getValue({ fizz: 'buzz' })).toEqual(getText({ fizz: 'buzz' }))
 
     wrapper.setProps({ itemValue: 'fizz' })
 

@@ -238,7 +238,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     }
   })
 
-  it('should select an item !multiple', () => {
+  it('should select an item !multiple', async () => {
     const wrapper = mount(VSelect)
 
     const input = jest.fn()
@@ -250,8 +250,11 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.vm.internalValue).toBe('foo')
     expect(input).toBeCalledWith('foo')
-    expect(change).toBeCalledWith('foo')
     expect(input).toHaveBeenCalledTimes(1)
+
+    await wrapper.vm.$nextTick()
+
+    expect(change).toBeCalledWith('foo')
     expect(change).toHaveBeenCalledTimes(1)
 
     wrapper.setProps({ returnObject: true })
@@ -261,8 +264,11 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.vm.internalValue).toBe(item)
     expect(input).toBeCalledWith(item)
-    expect(change).toBeCalledWith(item)
     expect(input).toHaveBeenCalledTimes(2)
+
+    await wrapper.vm.$nextTick()
+
+    expect(change).toBeCalledWith(item)
     expect(change).toHaveBeenCalledTimes(2)
   })
 
@@ -500,27 +506,6 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     const selections = wrapper.find('.v-select__selection')
 
     expect(selections.length).toEqual(1)
-  })
-
-  it('should be true when has slot or chips', () => {
-    const wrapper = mount(VSelect, {
-      propsData: { chips: true }
-    })
-    const wrapper2 = mount(VSelect, {
-      slots: {
-        item: [{
-          render: h => h('div', 'foobar')
-        }]
-      }
-    })
-
-    expect(wrapper.vm.hasSlot).toBe(true)
-
-    wrapper.setProps({ chips: false })
-
-    expect(wrapper.vm.hasSlot).toBe(false)
-
-    expect(wrapper2.vm.hasSlot).toBe(true)
   })
 
   it('should add color to selected index', async () => {

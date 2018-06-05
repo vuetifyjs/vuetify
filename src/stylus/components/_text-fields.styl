@@ -2,10 +2,10 @@
 @import '../theme'
 
 v-text-field($material)
-  &:not(.v-input--has-state)
-    .v-input__slot:before
-      background-color: $material.input-bottom-line
+  .v-input__slot:before
+    background-color: $material.input-bottom-line
 
+  &:not(.v-input--has-state)
     &:hover
       .v-input__slot:before
         background-color: $material.text.primary
@@ -24,16 +24,6 @@ v-text-field($material)
   &__suffix
     color: $material.text.secondary
 
-  &--full-width
-    margin: 0
-
-    .v-input__slot
-      padding: 16px
-
-    .v-input__append-inner
-      align-self: center
-      margin-top: 0
-
   &--solo
     background: $material.cards
 
@@ -50,16 +40,16 @@ v-text-field($material)
     .v-input__slot
       background: $material.text-fields.box
 
-      &:hover
-        background: $material.text-fields.box-hover
-
-    &.v-input--is-focused
+    &:not(.v-input--is-focused)
       .v-input__slot
-        background: $material.text-fields.box-focus
+        &:hover
+          background: $material.text-fields.box-hover
 
   &--outline
     border: 2px solid $material.text.secondary
-    background: transparent !important
+
+    &:hover
+      border: 2px solid $material.text.primary
 
 v-text-field-rtl()
   .v-label
@@ -113,9 +103,6 @@ rtl(v-text-field-rtl, "v-text-field")
     white-space: nowrap
 
   .v-label
-    cursor: auto
-    height: 20px
-    line-height: 20px
     max-width: 90%
     overflow: hidden
     text-overflow: ellipsis
@@ -128,9 +115,11 @@ rtl(v-text-field-rtl, "v-text-field")
       transform: translateY(-18px) scale(.75)
 
   .v-input__slot
+    transition: background $primary-transition
+
     &:before,
     &:after
-      bottom: -1px
+      bottom: 0
       content: ''
       left: 0
       position: absolute
@@ -163,6 +152,7 @@ rtl(v-text-field-rtl, "v-text-field")
 
   &__suffix
     padding-left: 4px
+    white-space: nowrap
 
   &__slot
     display: flex
@@ -227,13 +217,22 @@ rtl(v-text-field-rtl, "v-text-field")
       padding: 0 12px
 
   &--enclosed
-    margin-top: 16px
+    // To better align with box
+    &.v-input
+      margin-top: 14px
+
+    .v-progress-linear__background
+      display: none
+
+    .v-input__control,
+    .v-input__slot
+      position: static
 
     .v-input__slot
       margin-bottom: 0 // normally for messages
 
     .v-text-field__details
-      bottom: -22px
+      bottom: -18px
       pointer-events: none
       position: absolute
       width: 100%
@@ -244,15 +243,29 @@ rtl(v-text-field-rtl, "v-text-field")
     .v-input__append-outer
       margin-right: 16px
 
-    &:not(.v-text-field--box)
-      .v-input__slot
-        &:before,
-        &:after
-          display: none
+    .v-input__slot
+      &:before,
+      &:after
+        display: none
 
     .v-input__slot,
     .v-text-field__details
       padding: 0 12px
+
+  &--full-width
+    &.v-input
+      margin-bottom: 0
+      margin-top: 0
+
+    .v-label
+      top: calc(50% - 10px)
+
+    .v-input__slot
+      padding: 16px
+
+    .v-input__append-inner
+      align-self: center
+      margin-top: 0
 
   &--reverse
     input
@@ -268,10 +281,15 @@ rtl(v-text-field-rtl, "v-text-field")
   &--outline
     border-radius: 4px
     cursor: pointer
+    margin-bottom: 16px
+    transition: border $primary-transition
 
     &.v-input--is-focused
       border: 2px solid currentColor
       transition: border $primary-transition
+
+    .v-input__slot
+      background: transparent !important
 
   &.v-text-field--solo,
   &.v-text-field--outline

@@ -1,6 +1,5 @@
 // Components
 import VInput from '../components/VInput'
-import VLabel from '../components/VLabel'
 
 // Mixins
 import Rippleable from './rippleable'
@@ -86,16 +85,13 @@ export default {
 
   methods: {
     genLabel () {
-      return this.$createElement(VLabel, {
-        on: { click: this.onChange },
-        attrs: {
-          for: this.id
-        },
-        props: {
-          color: 'error',
-          focused: this.hasState
-        }
-      }, this.$slots.label || this.label)
+      if (!this.hasLabel) return null
+
+      const label = VInput.methods.genLabel.call(this)
+
+      label.data.on = { click: this.onChange }
+
+      return label
     },
     genInput (type, attrs) {
       return this.$createElement('input', {

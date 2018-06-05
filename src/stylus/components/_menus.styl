@@ -55,16 +55,12 @@
     &-enter
       .v-list__tile
         min-width: 0
-        transform: translateY(-15px)
-        opacity: 0
         pointer-events: none
 
     &-enter-to
       .v-list__tile
         pointer-events: auto
-
-    &-leave-to
-      transform: translateY(-15px)
+        transition-delay: .1s
 
     &-leave-active,
     &-leave-to
@@ -80,6 +76,10 @@
 
 .v-menu-transition-enter
   &.v-menu__content--auto
+    .v-list__tile
+        opacity: 0
+        transform: translateY(-15px)
+
     .v-list__tile--active
       opacity: 1
       transform: none !important

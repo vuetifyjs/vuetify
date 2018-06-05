@@ -4,6 +4,8 @@ import { ExtendedVue } from 'vue/types/vue'
 export function factory<T extends string> (prop?: T, event?: string): ExtendedVue<Vue, { isActive: boolean }, {}, {}, Record<T, any>>
 export function factory (prop = 'value', event = 'input') {
   return Vue.extend({
+    name: 'toggleable',
+
     model: { prop, event },
 
     props: {

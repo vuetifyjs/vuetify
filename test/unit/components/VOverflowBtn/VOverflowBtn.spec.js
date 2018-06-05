@@ -20,7 +20,14 @@ test('VOverflowBtn', ({ mount }) => {
       }
     })
 
-    wrapper.vm.internalValue = items[1]
+    // The error only happens
+    // when generating the button
+    // which only happens when
+    // we have a matching model
+    wrapper.setProps({
+      items: [items[1]],
+      value: 'Hello'
+    })
 
     await wrapper.vm.$nextTick()
 

@@ -8,6 +8,9 @@ radiogroup($material)
 theme(radiogroup, "radio-group")
 
 .v-input--radio-group
+  .v-radio
+    margin-bottom: 8px
+
   &__input
     display: flex
     width: 100%
@@ -20,6 +23,3 @@ theme(radiogroup, "radio-group")
   &--column
     .v-input--radio-group__input
       flex-direction: column
-
-  .v-radio
-    margin-bottom: 8px
