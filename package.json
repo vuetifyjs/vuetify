@@ -99,7 +99,7 @@
   },
   "dependencies": {},
   "peerDependencies": {
-    "vue": "^2.5.0"
+    "vue": "^2.5.10"
   },
   "engines": {
     "node": ">= 4.0.0",
