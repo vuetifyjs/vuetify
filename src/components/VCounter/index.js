@@ -5,4 +5,5 @@ VCounter.install = function install (Vue) {
   Vue.component(VCounter.name, VCounter)
 }
 
+export { VCounter }
 export default VCounter
