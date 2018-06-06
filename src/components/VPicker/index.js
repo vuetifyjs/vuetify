@@ -5,4 +5,5 @@ VPicker.install = function install (Vue) {
   Vue.component(VPicker.name, VPicker)
 }
 
+export { VPicker }
 export default VPicker

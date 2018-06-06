@@ -38,4 +38,5 @@ wrapper.install = function install (Vue) {
   Vue.component(VTextField.name, wrapper)
 }
 
+export { wrapper as VTextField }
 export default wrapper
