@@ -155,12 +155,7 @@ export default {
       }
     },
     showLabel () {
-      if (!this.hasLabel ||
-        (this.isSingle &&
-        (this.isDirty || !!this.placeholder))
-      ) return false
-
-      return true
+      return this.hasLabel && (!this.isSingle || (!this.isDirty && !this.placeholder))
     }
   },
 
