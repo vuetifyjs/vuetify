@@ -155,7 +155,7 @@ export default {
       }
     },
     showLabel () {
-      return this.hasLabel && (!this.isSingle || (!this.isDirty && !this.placeholder))
+      return this.hasLabel && (!this.isSingle || (!this.isLabelActive && !this.placeholder))
     }
   },
 
