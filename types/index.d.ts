@@ -10,9 +10,9 @@ export interface Vuetify {
 }
 
 export interface VuetifyUseOptions {
-  transitions?: VueConstructor
-  directives?: DirectiveOptions | DirectiveFunction
-  components?: PluginObject<any> | PluginFunction<any>
+  transitions?: Record<string, VueConstructor>
+  directives?: Record<string, DirectiveOptions | DirectiveFunction>
+  components?: Record<string, PluginObject<any> | PluginFunction<never>>
   /** @see https://vuetifyjs.com/style/theme */
   theme?: Partial<VuetifyTheme> | false
   /**

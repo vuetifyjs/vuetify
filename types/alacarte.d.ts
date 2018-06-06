@@ -5,11 +5,16 @@ declare module 'vuetify/es5/components/Vuetify' {
 }
 
 declare module 'vuetify/es5/components/*' {
-  import { PluginFunction } from 'vue'
+  import { PluginFunction, PluginObject, VueConstructor, ComponentOptions } from 'vue'
 
-  module Component {
-    const install: PluginFunction<never>
+  interface PluginConstructor extends VueConstructor {
+    install: PluginFunction<never>
   }
 
-  export default Component
+  const Component: {
+    default: PluginConstructor,
+    [key: string]: PluginConstructor
+  }
+
+  export = Component
 }

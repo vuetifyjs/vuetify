@@ -10,13 +10,14 @@
     "noEmit": true,
     "baseUrl": ".",
     "paths": {
-      "vuetify": ["../index.d.ts"]
+      "vuetify": ["../../"]
     }
   },
   "files": [
     "../index.d.ts",
     "../alacarte.d.ts",
     "../lang.d.ts",
+    "alacarte.ts",
     "plugin.ts",
     "global.ts"
   ],
