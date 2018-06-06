@@ -4,6 +4,7 @@ declare module 'vuetify/es5/components/Vuetify' {
   export default Vuetify
 }
 
+// TODO: transitions
 declare module 'vuetify/es5/components/*' {
   import { PluginFunction, PluginObject, VueConstructor, ComponentOptions } from 'vue'
 
@@ -17,4 +18,26 @@ declare module 'vuetify/es5/components/*' {
   }
 
   export = Component
+}
+
+declare module 'vuetify/es5/directives' {
+  import { PluginFunction } from 'vue'
+  import { VuetifyDirective } from 'vuetify'
+
+  const ClickOutside: VuetifyDirective
+  const Ripple: VuetifyDirective
+  const Resize: VuetifyDirective
+  const Scroll: VuetifyDirective
+  const Touch: VuetifyDirective
+
+  const Plugin: PluginFunction<never>
+
+  export {
+    ClickOutside,
+    Ripple,
+    Resize,
+    Scroll,
+    Touch
+  }
+  export default Plugin
 }
