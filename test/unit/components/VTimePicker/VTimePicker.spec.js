@@ -226,7 +226,7 @@ test('VTimePicker.js', ({ mount }) => {
     clock.$emit('change')
     expect(wrapper.vm.selectingHour).toBe(false)
     clock.$emit('change')
-    expect(wrapper.vm.selectingHour).toBe(true)
+    expect(wrapper.vm.selectingHour).toBe(false)
   })
 
   it('should change selectingHour when clicked in title', () => {
