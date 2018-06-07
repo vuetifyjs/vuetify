@@ -288,7 +288,6 @@ export default {
           ...this.$attrs,
           autofocus: this.autofocus,
           disabled: this.disabled,
-          required: this.required,
           readonly: this.readonly,
           tabindex: this.tabindex,
           type: this.type,

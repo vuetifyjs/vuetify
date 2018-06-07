@@ -10,6 +10,17 @@ test('VTextField.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should pass required attr to the input', () => {
+    const wrapper = mount(VTextField, {
+      attrs: {
+        required: true
+      }
+    })
+
+    const input = wrapper.find('input')[0]
+    expect(input.getAttribute('required')).toBe('required')
+  })
+
   it('should pass events to internal input field', () => {
     const keyup = jest.fn()
     const component = {
