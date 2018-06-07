@@ -1,5 +1,4 @@
 import VSelect from './VSelect'
-import VSelectList from './VSelectList'
 import VOverflowBtn from '../VOverflowBtn'
 import VAutocomplete from '../VAutocomplete'
 import rebuildSlots from '../../util/rebuildFunctionalSlots'
@@ -61,9 +60,8 @@ const wrapper = {
 /* istanbul ignore next */
 wrapper.install = function install (Vue) {
   Vue.component(VSelect.name, wrapper)
-  Vue.component(VSelectList.name, VSelectList)
 }
 
-export { wrapper as VSelect, VSelectList }
+export { wrapper as VSelect }
 
 export default wrapper

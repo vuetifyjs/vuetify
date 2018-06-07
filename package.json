@@ -1,6 +1,6 @@
 {
   "name": "vuetify",
-  "version": "1.1.0-beta.1",
+  "version": "1.1.0-beta.2",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -99,7 +99,7 @@
   },
   "dependencies": {},
   "peerDependencies": {
-    "vue": "^2.5.0"
+    "vue": "^2.5.10"
   },
   "engines": {
     "node": ">= 4.0.0",

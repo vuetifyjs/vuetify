@@ -23,6 +23,17 @@ import ClickOutside from '../../directives/click-outside'
 import { getPropertyFromItem, keyCodes } from '../../util/helpers'
 import { consoleError } from '../../util/console'
 
+// For api-generator
+const fakeVMenu = {
+  name: 'v-menu',
+  props: VMenu.props // TODO: remove some, just for testing
+}
+
+const fakeMenuable = {
+  name: 'menuable',
+  props: Menuable.props
+}
+
 export default {
   name: 'v-select',
 
@@ -33,6 +44,8 @@ export default {
   },
 
   mixins: [
+    fakeVMenu,
+    fakeMenuable,
     Comparable,
     Dependent,
     Filterable
@@ -56,8 +69,6 @@ export default {
   }),
 
   props: {
-    ...VMenu.props, // TODO: remove some, just for testing,
-    ...Menuable.props,
     appendIcon: {
       type: String,
       default: '$vuetify.icons.dropdown'
