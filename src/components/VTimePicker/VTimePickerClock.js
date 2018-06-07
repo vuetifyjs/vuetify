@@ -87,8 +87,17 @@ export default {
   methods: {
     wheel (e) {
       e.preventDefault()
-      const value = this.displayedValue + Math.sign(e.wheelDelta || 1)
-      this.update((value - this.min + this.count) % this.count + this.min)
+
+      const delta = Math.sign(e.wheelDelta || 1)
+      let value = this.displayedValue
+      do {
+        value = value + delta
+        value = (value - this.min + this.count) % this.count + this.min
+      } while (!this.isAllowed(value) && value !== this.displayedValue)
+
+      if (value !== this.displayedValue) {
+        this.update(value)
+      }
     },
     handScale (value) {
       return this.double && (value - this.min >= this.roundCount) ? (this.innerRadius / this.radius) : (this.outerRadius / this.radius)
