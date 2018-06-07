@@ -71,7 +71,8 @@ export default {
         'v-btn--floating': isFloating,
         'v-btn--depressed': !isFloating && isSelected,
         'v-btn--disabled': isDisabled || (this.disabled && isSelected),
-        'v-btn--outline': isCurrent && !isSelected
+        'v-btn--outline': isCurrent && !isSelected,
+        ...this.themeClasses
       }
 
       if (isSelected) return this.addBackgroundColorClassChecks(classes)
@@ -118,6 +119,9 @@ export default {
 
       return this.$createElement('div', {
         staticClass,
+        class: {
+          ...this.themeClasses
+        },
         on: this.scrollable ? { wheel: this.wheel } : undefined,
         directives: [touchDirective]
       }, [transition])
