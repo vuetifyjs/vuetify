@@ -543,16 +543,6 @@ test('VTextField.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('render active label for dirtyTypes (time/date/color/etc)', () => {
-    const wrapper = mount(VTextField, {
-      propsData: {
-        type: "time"
-      }
-    })
-
-    expect(wrapper.element.classList).toContain('v-input--is-label-active')
-  })
-
   it('should use a custom clear callback', async () => {
     const clearIconCb = jest.fn()
     const wrapper = mount(VTextField, {
@@ -730,5 +720,32 @@ test('VTextField.js', ({ mount }) => {
 
     wrapper.vm.blur()
     expect(blur).toHaveBeenCalledTimes(1)
+  })
+
+  it('should activate label when using dirtyTypes', async () => {
+    const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
+    const wrapper = mount(VTextField, {
+      propsData: {
+        label: 'Foobar'
+      }
+    })
+    const label = wrapper.first('.v-label')
+
+
+    for (const type of dirtyTypes) {
+      wrapper.setProps({ type })
+
+      await wrapper.vm.$nextTick()
+
+      expect(label.element.classList).toContain('v-label--active')
+      expect(wrapper.vm.$el.classList).toContain('v-input--is-label-active')
+
+      wrapper.setProps({ type: undefined })
+
+      await wrapper.vm.$nextTick()
+
+      expect(label.element.classList).not.toContain('v-label--active')
+      expect(wrapper.vm.$el.classList).not.toContain('v-input--is-label-active')
+    }
   })
 })

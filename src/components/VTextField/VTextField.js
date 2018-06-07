@@ -126,6 +126,36 @@ export default {
     },
     isSolo () {
       return this.solo || this.soloInverted
+    },
+    labelPosition () {
+      let value = 0
+      let left = 'auto'
+      let right = 'auto'
+
+      // Create spacing
+      if ((this.prefix || this.reverse) &&
+        (this.isSingle || !this.isFocused) &&
+        !this.isDirty
+      ) value = 16
+
+      // Check if RTL
+      if (this.$vuetify.rtl) right = value
+      else left = value
+
+      // Check if reversed
+      if (this.reverse) {
+        const direction = right
+        right = left
+        left = direction
+      }
+
+      return {
+        left,
+        right
+      }
+    },
+    showLabel () {
+      return this.hasLabel && (!this.isSingle || (!this.isLabelActive && !this.placeholder))
     }
   },
 
@@ -218,43 +248,19 @@ export default {
       ]
     },
     genLabel () {
-      if (!this.hasLabel ||
-        (this.isSingle &&
-        (this.isDirty || !!this.placeholder))
-      ) return null
+      if (!this.showLabel) return null
 
       const isSingleLine = this.isSingle
-      let value = 0
-      let left = 'auto'
-      let right = 'auto'
-
-      // Create spacing
-      if ((this.prefix || this.reverse) &&
-        (isSingleLine || !this.isFocused) &&
-        !this.isDirty
-      ) value = 16
-
-      // Check if RTL
-      if (this.$vuetify.rtl) right = value
-      else left = value
-
-      // Check if reversed
-      if (this.reverse) {
-        const direction = right
-        right = left
-        left = direction
-      }
-
       const data = {
         props: {
           absolute: true,
           color: this.validationState,
           disabled: this.disabled,
           focused: !isSingleLine && (this.isFocused || !!this.validationState),
-          left,
-          right,
+          left: this.labelPosition.left,
+          right: this.labelPosition.right,
           value: Boolean(!isSingleLine &&
-            (this.isFocused || this.isDirty || this.placeholder))
+            (this.isFocused || this.isLabelActive || this.placeholder))
         }
       }
 
