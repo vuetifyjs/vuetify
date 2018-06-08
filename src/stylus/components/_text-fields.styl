@@ -119,7 +119,7 @@ rtl(v-text-field-rtl, "v-text-field")
 
     &:before,
     &:after
-      bottom: 0
+      bottom: -1px // Needed for browser autocomplete styles
       content: ''
       left: 0
       position: absolute
@@ -169,7 +169,7 @@ rtl(v-text-field-rtl, "v-text-field")
 
     input
       cursor: pointer
-      margin-top: 24px
+      margin-top: 22px
 
     &.v-text-field--single-line
       input
@@ -201,13 +201,9 @@ rtl(v-text-field-rtl, "v-text-field")
       cursor: pointer
 
     .v-input__slot
-      border-radius: 4px
+      border-top-left-radius: 4px
+      border-top-right-radius: 4px
       margin-bottom: 4px
-
-      &:before,
-      &:after
-        border-bottom-left-radius: 4px
-        border-bottom-right-radius: 4px
 
       &:before
         height: 2px
