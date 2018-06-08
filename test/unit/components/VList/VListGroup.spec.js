@@ -136,6 +136,27 @@ test('VListGroup.js', ({ mount }) => {
     expect(warning).toHaveBeenTipped()
   })
 
+  it('should toggle when it is focused and enter key is pressed', async () => {
+    const wrapper = mount(VListGroup, {
+      attachToDocument: true,
+      provide: {
+        listClick: () => {}
+      }
+    })
+    
+    const change = jest.fn()
+    wrapper.vm.$on('input', change)
+
+    const input = wrapper.first('.v-list__group__header')
+
+    input.trigger('focus')
+    input.trigger('keydown.enter')
+    await wrapper.vm.$nextTick()
+    expect(change).toBeCalledWith(true)
+
+    expect(warning).toHaveBeenTipped()
+  })
+
   it('should unregister when destroyed', async () => {
     const unregister = jest.fn()
     const wrapper = mount(VListGroup, {
@@ -153,22 +174,7 @@ test('VListGroup.js', ({ mount }) => {
     await wrapper.vm.$nextTick()
     expect(unregister).toBeCalledWith(wrapper.vm._uid)
   })
-  it('should toggle when it is focused and enter key is pressed', async () => {
-    const wrapper = mount(VListGroup, {
-      attachToDocument: true,
-      provide: {
-        listClick: () => {}
-      }
-    })
-    
-    const input = jest.fn()
-    wrapper.vm.$on('input', input)
-    wrapper.vm.onKeyDown({ keyCode: 13, stopPropagation: jest.fn() })
-    await wrapper.vm.$nextTick()
-    expect(input).toBeCalledWith(true)
 
-    expect(warning).toHaveBeenTipped()
-  })
     
   it('should render a custom append icon', async () => {
     const wrapper = mount(VListGroup, {
