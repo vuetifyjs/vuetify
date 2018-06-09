@@ -49,6 +49,23 @@ test('VTimePickerClock.js', ({ mount }) => {
     expect(input).toBeCalledWith(3)
   })
 
+  it('should emit input event on wheel if scrollable and has allowedValues', () => {
+    const wrapper = mount(VTimePickerClock, {
+      propsData: {
+        max: 10,
+        min: 1,
+        value: 6,
+        scrollable: true,
+        allowedValues: val => !(val % 3)
+      }
+    })
+
+    const input = jest.fn()
+    wrapper.vm.$on('input', input)
+    wrapper.trigger('wheel')
+    expect(input).toBeCalledWith(9)
+  })
+
   it('should not emit input event on wheel if not scrollable', () => {
     const wrapper = mount(VTimePickerClock, {
       propsData: {

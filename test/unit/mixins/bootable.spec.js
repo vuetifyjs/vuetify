@@ -62,4 +62,19 @@ test('bootable.js', ({ mount }) => {
 
     expect(wrapper.vm.showLazyContent('content')).toBe('content')
   })
+
+  it('should boot', async () => {
+    const wrapper = mount({
+      data: () => ({ isActive: false }),
+      mixins: [Bootable],
+      render: h => h('div')
+    })
+
+    expect(wrapper.vm.isActive).toBe(false)
+    expect(wrapper.vm.isBooted).toBe(false)
+
+    wrapper.setData({ isActive: true })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isBooted).toBe(true)
+  })
 })

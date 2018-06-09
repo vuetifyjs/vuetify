@@ -87,8 +87,17 @@ export default {
   methods: {
     wheel (e) {
       e.preventDefault()
-      const value = this.displayedValue + Math.sign(e.wheelDelta || 1)
-      this.update((value - this.min + this.count) % this.count + this.min)
+
+      const delta = Math.sign(e.wheelDelta || 1)
+      let value = this.displayedValue
+      do {
+        value = value + delta
+        value = (value - this.min + this.count) % this.count + this.min
+      } while (!this.isAllowed(value) && value !== this.displayedValue)
+
+      if (value !== this.displayedValue) {
+        this.update(value)
+      }
     },
     handScale (value) {
       return this.double && (value - this.min >= this.roundCount) ? (this.innerRadius / this.radius) : (this.outerRadius / this.radius)
@@ -119,7 +128,7 @@ export default {
       const angle = this.rotate + this.degreesPerUnit * (this.displayedValue - this.min)
 
       return this.$createElement('div', {
-        staticClass: 'time-picker-clock__hand',
+        staticClass: 'v-time-picker-clock__hand',
         'class': this.value == null ? {} : this.addBackgroundColorClassChecks(),
         style: {
           transform: `rotate(${angle}deg) ${scale}`
@@ -186,11 +195,12 @@ export default {
     }
   },
 
-  render (h) {
+  render () {
     const data = {
-      staticClass: 'time-picker-clock',
+      staticClass: 'v-time-picker-clock',
       class: {
-        'time-picker-clock--indeterminate': this.value == null
+        'v-time-picker-clock--indeterminate': this.value == null,
+        ...this.themeClasses
       },
       on: {
         mousedown: this.onMouseDown,

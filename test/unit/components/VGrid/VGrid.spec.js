@@ -25,4 +25,14 @@ test('VFlex', ({ mount, functionalContext }) => {
 
     expect(wrapper.find('#test')).toHaveLength(1)
   })
+
+  // TODO: Remove once resolved
+  // https://github.com/vuejs/vue/issues/7841
+  it('should filter the slot attr', () => {
+    const wrapper = mount(VFlex, functionalContext({
+      attrs: { slot: 'content' }
+    }))
+
+    expect(wrapper.element.classList.contains('slot')).toBe(false)
+  })
 })

@@ -52,7 +52,7 @@ test('VStepperContent.js', ({ mount }) => {
       isVertical: true
     })
     await wrapper.vm.$nextTick()
-    const stepWrapper = wrapper.find('.stepper__wrapper')[0]
+    const stepWrapper = wrapper.find('.v-stepper__wrapper')[0]
 
     expect(stepWrapper.element.style.height).toBe('auto')
 
@@ -124,7 +124,7 @@ test('VStepperContent.js', ({ mount }) => {
     })
 
     const onTransition = jest.fn()
-    const stepWrapper = wrapper.find('.stepper__wrapper')[0]
+    const stepWrapper = wrapper.find('.v-stepper__wrapper')[0]
 
     expect(wrapper.vm.height).toBe(0)
 

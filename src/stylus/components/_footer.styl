@@ -1,13 +1,13 @@
 @import '../bootstrap'
 @import '../theme'
 
-footer($material)
+v-footer($material)
   background: $material.app-bar
   color: $material.text.primary
-  
-theme(footer, "footer")
 
-.footer
+theme(v-footer, "v-footer")
+
+.v-footer
   align-items: center
   display: flex
   flex: 0 1 auto !important // Don't let devs break their code
@@ -20,7 +20,7 @@ theme(footer, "footer")
     left: 0
     width: 100%
     z-index: 3
-    
+
   &--inset
     z-index: 2
 

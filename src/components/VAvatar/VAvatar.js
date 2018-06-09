@@ -20,17 +20,17 @@ export default {
   },
 
   render (h, { data, props, children }) {
-    data.staticClass = (`avatar ${data.staticClass || ''}`).trim()
+    data.staticClass = (`v-avatar ${data.staticClass || ''}`).trim()
     data.style = data.style || {}
 
-    if (props.tile) data.staticClass += ' avatar--tile'
+    if (props.tile) data.staticClass += ' v-avatar--tile'
 
     const size = convertToUnit(props.size)
     data.style.height = size
     data.style.width = size
     data.class = [
       data.class,
-      Colorable.methods.addBackgroundColorClassChecks.call(props, {}, props.color)
+      Colorable.options.methods.addBackgroundColorClassChecks.call(props, {}, props.color)
     ]
 
     return h('div', data, children)

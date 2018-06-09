@@ -4,3 +4,7 @@ src/stylus/*.styl
 src/util/testing.js
 src/util/to-have-been-warned.js
 *.spec.js
+/dist
+/es5
+/es5-temp
+/types/test

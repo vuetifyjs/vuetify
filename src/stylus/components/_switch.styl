@@ -2,98 +2,65 @@
 @import '../theme'
 
 /** Theme */
-switch($material)
-  &:not(.input-group--dirty)
-    .input-group--selection-controls__container
-      // Must overwrite color helpers
-      color: $material.selection-controls.track.inactive !important
+v-input--switch($material)
+  &__thumb
+    color: $material.selection-controls.thumb.inactive
 
-  .input-group--selection-controls__ripple
-    &:after
-      background-color: $material.selection-controls.thumb.inactive
-
-    &:not(.input-group--selection-controls__ripple--active)
-      color: $material.selection-controls.track.inactive
-
-    &--active:after
-      background-color: currentColor
-
-  .input-group--selection-controls__toggle
+  &__track
     color: $material.selection-controls.track.inactive
 
-    &--active
-      color: inherit
+  &.v-input--is-disabled
+    .v-input--switch__thumb
+      color: $material.selection-controls.thumb.disabled !important
 
-  &.input-group--disabled
-    .input-group--selection-controls__ripple
-      &:after
-        background-color: $material.selection-controls.thumb.disabled !important
-
-    .input-group--selection-controls__toggle
+    .v-input--switch__track
       color: $material.selection-controls.track.disabled !important
 
-theme(switch, "switch")
+v-input--switch-rtl()
+  .v-input--selection-controls__ripple
+    left: auto
+    right: -14px
 
-.input-group.input-group--selection-controls
-  z-index: 0
+  &.v-input--is-dirty
+    .v-input--selection-controls__ripple,
+    .v-input--switch__thumb
+      transform: translate(-16px, 0)
 
-  &.switch
-    &.input-group--prepend-icon, &.input-group--append-icon
-      label
-        left: 62px
+theme(v-input--switch, "v-input--switch")
+rtl(v-input--switch-rtl, "v-input--switch")
 
-    &.input-group--prepend-icon
-      .input-group--selection-controls__container
-        margin-left: 6px
+.v-input--switch
+  &__track,
+  &__thumb
+    background-color: currentColor
+    pointer-events: none
+    transition: inherit
 
-    &.input-group--append-icon
-      .input-group__append-icon
-        left: 40px
+  &__track
+    border-radius: 8px
+    height: 14px
+    left: 2px
+    opacity: .6
+    position: absolute
+    right: 2px
+    top: calc(50% - 7px)
 
-    .input-group--selection-controls__container
-      color: inherit
-      position: relative
-      width: 36px
+  &__thumb
+    border-radius: 50%
+    top: calc(50% - 10px)
+    height: 20px
+    position: relative
+    width: 20px
+    elevation(4)
 
-      &[class*="--text"]
-        .input-group--selection-controls__ripple--active:after
-          background-color: currentColor
+  .v-input--selection-controls__input
+    width: 38px
 
-    .input-group--selection-controls__toggle
-      background-color: currentColor
-      color: inherit
-      position: absolute
-      height: 14px
-      top: 50%
-      left: 0
-      width: 34px
-      border-radius: 8px
-      transform: translateY(-50%)
+  .v-input--selection-controls__ripple
+    left: -14px
+    top: calc(50% - 24px)
 
-      &.input-group--selection-controls__toggle--active
-        opacity: .5
-
-    .input-group--selection-controls__ripple
-      transform: translate(-15px, -24px)
-      transition: .3s $transition.fast-in-fast-out
-      z-index: 1
-      left: 0
-
-      &:after
-        content: ''
-        position: absolute
-        display: inline-block
-        cursor: pointer
-        width: 20px
-        border-radius: 50%
-        top: 50%
-        left: 50%
-        transform: translate(-50%, -50%)
-        height: 20px
-        elevation(4)
-
-      &--active
-        transform: translate(2px, -24px)
-
-    label
-      padding-left: 14px
+  &.v-input--is-dirty
+    .v-input--selection-controls__ripple,
+    .v-input--switch__thumb
+      transform: translate(16px, 0)

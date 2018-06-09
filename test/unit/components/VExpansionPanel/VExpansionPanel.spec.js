@@ -21,7 +21,7 @@ test('VExpansionPanel.js', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.html()).toMatchSnapshot()
 
-    wrapper.find('.expansion-panel__header')[0].trigger('click')
+    wrapper.find('.v-expansion-panel__header')[0].trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
   })
@@ -31,7 +31,7 @@ test('VExpansionPanel.js', ({ mount, compileToFunctions }) => {
       inset: true
     }))
 
-    expect(wrapper.hasClass('expansion-panel--inset')).toBe(true)
+    expect(wrapper.hasClass('v-expansion-panel--inset')).toBe(true)
   })
 
   it('should render popout component', () => {
@@ -39,7 +39,7 @@ test('VExpansionPanel.js', ({ mount, compileToFunctions }) => {
       popout: true
     }))
 
-    expect(wrapper.hasClass('expansion-panel--popout')).toBe(true)
+    expect(wrapper.hasClass('v-expansion-panel--popout')).toBe(true)
   })
 
   it('should render an expanded component and match snapshot', async () => {
@@ -49,8 +49,133 @@ test('VExpansionPanel.js', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.html()).toMatchSnapshot()
 
-    wrapper.find('.expansion-panel__header')[0].trigger('click')
+    wrapper.find('.v-expansion-panel__header')[0].trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should show content on v-model change', async () => {
+    const wrapper = mount(VExpansionPanel, {
+      slots: {
+        default: VExpansionPanelContent
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({ value: 0 })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.first('.v-expansion-panel__container--active')).not.toBe(null)
+  })
+
+  it('should show content on mount using v-model', async () => {
+    const wrapper = mount(VExpansionPanel, {
+      propsData: {
+        value: 0
+      },
+      slots: {
+        default: VExpansionPanelContent
+      }
+    })
+
+    await wrapper.vm.$nextTick()
+    expect(wrapper.first('.v-expansion-panel__container--active')).not.toBe(null)
+  })
+
+  it('should allow array v-model when using expand prop', async () => {
+    const wrapper = mount(VExpansionPanel, {
+      propsData: {
+        expand: true,
+        value: [1, 3]
+      },
+      slots: {
+        default: [VExpansionPanelContent, VExpansionPanelContent, VExpansionPanelContent, VExpansionPanelContent]
+      }
+    })
+
+    await wrapper.vm.$nextTick()
+    expect(wrapper.find('.v-expansion-panel__container--active').length).toBe(2)
+  })
+
+  it('should reset v-model when disabling expand', async () => {
+    const fn = jest.fn()
+    const wrapper = mount(VExpansionPanel, {
+      propsData: {
+        expand: true,
+        value: [true, true]
+      },
+      slots: {
+        default: [VExpansionPanelContent, VExpansionPanelContent]
+      }
+    })
+
+    wrapper.instance().$on('input', fn)
+
+    await wrapper.vm.$nextTick()
+    expect(wrapper.find('.v-expansion-panel__container--active').length).toBe(2)
+
+    wrapper.setProps({ expand: false })
+    await wrapper.vm.$nextTick()
+    expect(fn).toHaveBeenCalledWith(null)
+  })
+
+  it('should reset v-model when disabling expand', async () => {
+    const input = jest.fn()
+    const wrapper = mount(VExpansionPanel, {
+      propsData: {
+        expand: true,
+        value: [false]
+      },
+      slots: {
+        default: [VExpansionPanelContent]
+      }
+    })
+
+    wrapper.instance().$on('input', input)
+
+    await wrapper.vm.$nextTick()
+    expect(wrapper.find('.v-expansion-panel__container--active').length).toBe(0)
+
+    wrapper.setProps({ expand: false })
+    await wrapper.vm.$nextTick()
+    expect(input).toHaveBeenCalledWith(null)
+  })
+
+  it('should keep a single item open when disabling expand', async () => {
+    const input = jest.fn()
+    const wrapper = mount(VExpansionPanel, {
+      propsData: {
+        expand: true,
+        value: [false, true]
+      },
+      slots: {
+        default: [VExpansionPanelContent, VExpansionPanelContent]
+      }
+    })
+    wrapper.vm.$on('input', input)
+
+    wrapper.setProps({ expand: false })
+    await wrapper.vm.$nextTick()
+    expect(input).toHaveBeenCalledWith(1)
+  })
+
+  it('should keep the current item open when enabling expand', async () => {
+    const input = jest.fn()
+    const wrapper = mount(VExpansionPanel, {
+      propsData: {
+        expand: false,
+        value: 1
+      },
+      slots: {
+        default: [VExpansionPanelContent, VExpansionPanelContent]
+      }
+    })
+    wrapper.vm.$on('input', input)
+
+    wrapper.setProps({ expand: true })
+    await wrapper.vm.$nextTick()
+    expect(input).toHaveBeenCalledWith([false, true])
+    expect(wrapper.find('.v-expansion-panel__container--active').length).toBe(1)
   })
 })

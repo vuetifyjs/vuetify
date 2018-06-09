@@ -77,12 +77,12 @@ export default {
     },
     nextIcon: {
       type: String,
-      default: 'chevron_right'
+      default: '$vuetify.icons.next'
     },
     pickerDate: String,
     prevIcon: {
       type: String,
-      default: 'chevron_left'
+      default: '$vuetify.icons.prev'
     },
     reactive: Boolean,
     readonly: Boolean,
@@ -256,8 +256,10 @@ export default {
         props: {
           nextIcon: this.nextIcon,
           color: this.color,
+          dark: this.dark,
           disabled: this.readonly,
           format: this.headerDateFormat,
+          light: this.light,
           locale: this.locale,
           min: this.activePicker === 'DATE' ? this.minMonth : this.minYear,
           max: this.activePicker === 'DATE' ? this.maxMonth : this.maxYear,
@@ -276,11 +278,13 @@ export default {
           allowedDates: this.allowedDates,
           color: this.color,
           current: this.current,
+          dark: this.dark,
           disabled: this.readonly,
           events: this.events,
           eventColor: this.eventColor,
           firstDayOfWeek: this.firstDayOfWeek,
           format: this.dayFormat,
+          light: this.light,
           locale: this.locale,
           min: this.min,
           max: this.max,
@@ -301,8 +305,10 @@ export default {
           allowedDates: this.type === 'month' ? this.allowedDates : null,
           color: this.color,
           current: this.current ? this.sanitizeDateString(this.current, 'month') : null,
+          dark: this.dark,
           disabled: this.readonly,
           format: this.monthFormat,
+          light: this.light,
           locale: this.locale,
           min: this.minMonth,
           max: this.maxMonth,
@@ -376,7 +382,7 @@ export default {
     this.setInputDate()
   },
 
-  render (h) {
-    return this.genPicker('picker--date')
+  render () {
+    return this.genPicker('v-picker--date')
   }
 }

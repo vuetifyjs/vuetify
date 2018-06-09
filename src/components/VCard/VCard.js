@@ -29,12 +29,12 @@ export default {
   computed: {
     classes () {
       return this.addBackgroundColorClassChecks({
-        'card': true,
-        'card--flat': this.flat,
-        'card--horizontal': this.horizontal,
-        'card--hover': this.hover,
-        'card--raised': this.raised,
-        'card--tile': this.tile,
+        'v-card': true,
+        'v-card--flat': this.flat,
+        'v-card--horizontal': this.horizontal,
+        'v-card--hover': this.hover,
+        'v-card--raised': this.raised,
+        'v-card--tile': this.tile,
         'theme--light': this.light,
         'theme--dark': this.dark
       })

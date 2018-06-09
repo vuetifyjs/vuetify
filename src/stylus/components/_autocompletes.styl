@@ -1,0 +1,25 @@
+@import '../bootstrap'
+@import '../theme'
+
+v-autocomplete($material)
+  //
+
+theme(v-autocomplete, 'v-autocomplete')
+
+.v-autocomplete
+  input
+    align-self: center
+
+  &--is-selecting-index
+    input
+      opacity: 0
+
+  &:not(.v-input--is-disabled).v-select.v-text-field
+    input
+      pointer-events: auto
+
+  &__content.v-menu__content
+    border-radius: 0
+
+    .v-card
+      border-radius: 0

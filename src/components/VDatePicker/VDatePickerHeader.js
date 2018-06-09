@@ -6,6 +6,7 @@ import VIcon from '../VIcon'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
+import Themeable from '../../mixins/themeable'
 
 // Utils
 import { createNativeLocaleFormatter, monthChange } from './util'
@@ -13,7 +14,10 @@ import { createNativeLocaleFormatter, monthChange } from './util'
 export default {
   name: 'v-date-picker-header',
 
-  mixins: [Colorable],
+  mixins: [
+    Colorable,
+    Themeable
+  ],
 
   data () {
     return {
@@ -36,11 +40,11 @@ export default {
     max: String,
     nextIcon: {
       type: String,
-      default: 'chevron_right'
+      default: '$vuetify.icons.next'
     },
     prevIcon: {
       type: String,
-      default: 'chevron_left'
+      default: '$vuetify.icons.prev'
     },
     value: {
       type: [Number, String],
@@ -76,7 +80,8 @@ export default {
         props: {
           dark: this.dark,
           disabled,
-          icon: true
+          icon: true,
+          light: this.light
         },
         nativeOn: {
           click: e => {
@@ -113,17 +118,20 @@ export default {
       }, [header])
 
       return this.$createElement('div', {
-        staticClass: 'date-picker-header__value',
+        staticClass: 'v-date-picker-header__value',
         class: {
-          'date-picker-header__value--disabled': this.disabled
+          'v-date-picker-header__value--disabled': this.disabled
         }
       }, [transition])
     }
   },
 
-  render (h) {
+  render () {
     return this.$createElement('div', {
-      staticClass: 'date-picker-header'
+      staticClass: 'v-date-picker-header',
+      class: {
+        ...this.themeClasses
+      }
     }, [
       this.genBtn(-1),
       this.genHeader(),

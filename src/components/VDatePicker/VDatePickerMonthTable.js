@@ -1,6 +1,7 @@
 // Mixins
 import Colorable from '../../mixins/colorable'
 import DatePickerTable from './mixins/date-picker-table'
+import Themeable from '../../mixins/themeable'
 
 // Utils
 import { pad, createNativeLocaleFormatter } from './util'
@@ -10,7 +11,8 @@ export default {
 
   mixins: [
     Colorable,
-    DatePickerTable
+    DatePickerTable,
+    Themeable
   ],
 
   computed: {
@@ -47,8 +49,8 @@ export default {
     }
   },
 
-  render (h) {
-    return this.genTable('date-picker-table date-picker-table--month', [
+  render () {
+    return this.genTable('v-date-picker-table v-date-picker-table--month', [
       this.genTBody()
     ])
   }
