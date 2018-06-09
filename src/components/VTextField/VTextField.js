@@ -41,6 +41,7 @@ export default {
 
   props: {
     appendOuterIcon: String,
+    appendOuterIconCb: Function,
     autofocus: Boolean,
     box: Boolean,
     browserAutocomplete: String,
