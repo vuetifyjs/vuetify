@@ -60,7 +60,9 @@ export default {
   },
 
   mounted () {
-    this.autoGrow && this.calculateInputHeight()
+    setTimeout(() => {
+      this.autoGrow && this.calculateInputHeight()
+    }, 0)
   },
 
   methods: {

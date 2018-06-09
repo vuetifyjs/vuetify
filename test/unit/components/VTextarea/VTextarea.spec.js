@@ -79,7 +79,7 @@ test('VTextarea.vue', ({ mount }) => {
       methods: { calculateInputHeight }
     })
 
-
+    await new Promise(resolve => setTimeout(resolve, 0))
     expect(calculateInputHeight).toBeCalled()
   })
 
@@ -90,7 +90,7 @@ test('VTextarea.vue', ({ mount }) => {
       }
     })
 
-    await wrapper.vm.$nextTick()
+    await new Promise(resolve => setTimeout(resolve, 0))
 
     expect(wrapper.vm.inputHeight).toBe(120)
 
