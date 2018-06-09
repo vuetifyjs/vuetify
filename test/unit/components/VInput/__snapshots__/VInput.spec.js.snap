@@ -81,26 +81,6 @@ exports[`VInput.js should generate an icon and match snapshot 2`] = `
 exports[`VInput.js should generate append and prepend slots 1`] = `
 
 <div class="v-input">
-  <div class="v-input__prepend-outer">
-    <div>
-      prepend-icon
-    </div>
-  </div>
-  <div class="v-input__control">
-    <div class="v-input__slot">
-    </div>
-    <div class="v-messages">
-      <div class="v-messages__wrapper">
-      </div>
-    </div>
-  </div>
-</div>
-
-`;
-
-exports[`VInput.js should generate append and prepend slots 2`] = `
-
-<div class="v-input">
   <div class="v-input__control">
     <div class="v-input__slot">
     </div>
@@ -111,14 +91,14 @@ exports[`VInput.js should generate append and prepend slots 2`] = `
   </div>
   <div class="v-input__append-outer">
     <div>
-      append-icon
+      append
     </div>
   </div>
 </div>
 
 `;
 
-exports[`VInput.js should generate append and prepend slots 3`] = `
+exports[`VInput.js should generate append and prepend slots 2`] = `
 
 <div class="v-input">
   <div class="v-input__prepend-outer">
@@ -132,26 +112,6 @@ exports[`VInput.js should generate append and prepend slots 3`] = `
     <div class="v-messages">
       <div class="v-messages__wrapper">
       </div>
-    </div>
-  </div>
-</div>
-
-`;
-
-exports[`VInput.js should generate append and prepend slots 4`] = `
-
-<div class="v-input">
-  <div class="v-input__control">
-    <div class="v-input__slot">
-    </div>
-    <div class="v-messages">
-      <div class="v-messages__wrapper">
-      </div>
-    </div>
-  </div>
-  <div class="v-input__append-outer">
-    <div>
-      append
     </div>
   </div>
 </div>
