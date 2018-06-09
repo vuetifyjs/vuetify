@@ -175,7 +175,7 @@ export default {
 
       return this.$createElement(VLabel, {
         props: {
-          color: this.validationStateProxy,
+          color: this.validationState,
           focused: this.hasState,
           for: this.$attrs.id
         }

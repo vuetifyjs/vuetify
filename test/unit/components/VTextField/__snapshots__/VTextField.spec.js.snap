@@ -1,21 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VTextField.js should calculate element height when using auto-grow prop 1`] = `
-
-<div class="input-group input-group--focused input-group--dirty input-group--text-field input-group--multi-line input-group--no-resize primary--text">
-  <div class="input-group__input">
-    <textarea tabindex="0"
-              rows="5"
-              style="height: 120px;"
-    >
-    </textarea>
-  </div>
-  <div class="input-group__details">
-  </div>
-</div>
-
-`;
-
 exports[`VTextField.js should have prefix and suffix 1`] = `
 
 <div class="v-input v-text-field v-text-field--prefix">

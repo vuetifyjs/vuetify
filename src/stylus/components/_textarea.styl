@@ -9,7 +9,6 @@ v-textarea($material)
 
 theme(v-textarea, "v-textarea")
 
-// Add no resize classes
 .v-textarea
   textarea
     flex: 1 1 auto
@@ -71,3 +70,7 @@ theme(v-textarea, "v-textarea")
   &--auto-grow
     textarea
       overflow: hidden
+
+  &--no-resize
+    textarea
+      resize: none

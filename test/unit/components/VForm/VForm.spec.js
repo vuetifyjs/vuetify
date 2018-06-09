@@ -68,6 +68,7 @@ test('VForm.js', ({ mount }) => {
     expect(Object.keys(wrapper.vm.errorBag).length).toBe(1)
   })
 
+  // TODO: Figure out how to test this with the updated v-form
   it.skip('should only watch children if not lazy', async () => {
     const wrapper = mount(VForm, {
       propsData: {

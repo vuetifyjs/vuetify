@@ -5,4 +5,5 @@ VSnackbar.install = function install (Vue) {
   Vue.component(VSnackbar.name, VSnackbar)
 }
 
+export { VSnackbar }
 export default VSnackbar

@@ -6,6 +6,8 @@ import rebuildSlots from '../../util/rebuildFunctionalSlots'
 const wrapper = {
   functional: true,
 
+  $_wrapperFor: VTextField,
+
   props: {
     textarea: Boolean,
     multiLine: Boolean
@@ -36,4 +38,5 @@ wrapper.install = function install (Vue) {
   Vue.component(VTextField.name, wrapper)
 }
 
+export { wrapper as VTextField }
 export default wrapper
