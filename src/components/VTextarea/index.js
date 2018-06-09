@@ -5,4 +5,5 @@ VTextarea.install = function install (Vue) {
   Vue.component(VTextarea.name, VTextarea)
 }
 
+export { VTextarea }
 export default VTextarea

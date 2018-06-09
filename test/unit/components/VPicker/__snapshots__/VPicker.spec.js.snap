@@ -47,7 +47,7 @@ exports[`VPicker.js should render dark component and match snapshot 1`] = `
       title
     </span>
   </div>
-  <div class="v-picker__body"
+  <div class="v-picker__body theme--dark"
        style="width: 290px;"
   >
     <span>

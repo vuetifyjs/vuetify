@@ -9,7 +9,8 @@ module.exports = {
     'standard'
   ],
   env: {
-    browser: true
+    browser: true,
+    es6: true
   },
   globals: {
     'expect': true,
@@ -54,7 +55,9 @@ module.exports = {
         asyncArrow: 'always'
       }
     ],
-    'no-return-await': 'warn'
+    'no-return-await': 'warn',
+    'object-shorthand': ['error', 'always'],
+    'no-extra-semi': 'error'
   },
   overrides: [
     {

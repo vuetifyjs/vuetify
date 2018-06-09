@@ -79,6 +79,9 @@ rtl(v-slider-rtl, "v-input--slider")
       .v-input__slot
         margin-bottom: 16px
 
+  &.v-input--is-readonly
+    pointer-events: none
+
   &.v-input--is-disabled
     .v-slider__thumb
       transform: translateY(-50%) scale(.45)
