@@ -41,6 +41,8 @@ export default {
 
   props: {
     appendOuterIcon: String,
+    /** @deprecated */
+    appendOuterIconCb: Function,
     autofocus: Boolean,
     box: Boolean,
     browserAutocomplete: String,
@@ -233,7 +235,9 @@ export default {
         : 'clear'
 
       return this.genSlot('append', 'inner', [
-        this.genIcon(icon, this.clearIconCb || this.clearableCallback)
+        this.genIcon(icon,
+          (this.$listeners['click:clear-icon'] ? false : this.clearIconCb) || this.clearableCallback
+        )
       ])
     },
     genCounter () {
