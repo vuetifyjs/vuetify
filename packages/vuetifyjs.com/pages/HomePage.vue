@@ -5,6 +5,22 @@
       gradient="to bottom, #1867c0, #5CBBF6"
       height="auto"
     )
+      a(
+        class="chip v-chip--tidelift white--text"
+        href="http://tidelift.com/subscription/npm/vuetify"
+        rel="noopener"
+        target="_blank"
+        @click="$ga.event('home sponsor click', 'click', 'Tidelift')"
+      )
+        span.chip__content
+          img(
+            alt="Tidelift"
+            class="mr-3"
+            src="/static/doc-images/affiliates/tidelift-small.png"
+            width="24px"
+          )
+          span.body-2.hidden-sm-and-down GET PROFESSIONALLY SUPPORTED VUETIFY
+          span.body-2.hidden-md-and-up GET PROFESSIONAL SUPPORT
       v-container(fill-height).mt-3.mb-3
         v-layout(
           align-center
@@ -365,4 +381,15 @@
 <style lang="stylus" scoped>
   .social
     text-decoration: none
+
+  .v-chip--tidelift
+    background: #f6914d !important
+    padding-right: 64px
+    position: absolute
+    right: -24px
+    text-decoration: none
+    top: -20px
+
+    .chip__content
+      cursor: pointer !important
 </style>
