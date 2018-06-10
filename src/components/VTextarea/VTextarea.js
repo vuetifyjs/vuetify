@@ -60,7 +60,9 @@ export default {
   },
 
   mounted () {
-    this.autoGrow && this.calculateInputHeight()
+    setTimeout(() => {
+      this.autoGrow && this.calculateInputHeight()
+    }, 0)
   },
 
   methods: {
@@ -89,7 +91,7 @@ export default {
     genMarker () {
       return this.$createElement('div', {
         staticClass: 'v-textarea__mask',
-        domProps: { innerHTML: this.internalValue },
+        domProps: { innerHTML: this.internalValue + '&#8203' },
         ref: 'marker'
       })
     },
