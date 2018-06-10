@@ -1,20 +1,18 @@
 @import '../bootstrap'
 @import '../browsers'
 
-.content
+.v-content
   bootable()
 
   display: flex
   flex: 1 0 auto
   max-width: 100%
-  will-change: padding
 
-  &--wrap
+  &__wrap
     flex: 1 1 auto
     max-width: 100%
     position: relative
 
-+firefox()
-  @media print
-    .content
+  +firefox()
+    @media print
       display: block
