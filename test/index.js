@@ -22,7 +22,12 @@ export function test(name, cb) {
 
   describe(name, () => cb({
     functionalContext,
-    mount,
+    mount (component, options) {
+      if (component.options) {
+        component = component.options
+      }
+      return mount(component, options)
+    },
     shallow,
     compileToFunctions
   }))

@@ -46,7 +46,7 @@ export default {
     dimensions: Object.assign({}, dimensions),
     isContentActive: false,
     pageYOffset: 0,
-    stackClass: 'menuable__content__active',
+    stackClass: 'v-menu__content--active',
     stackMinZIndex: 6
   }),
 
@@ -58,13 +58,14 @@ export default {
       }
     },
     allowOverflow: Boolean,
+    inputActivator: Boolean,
     maxWidth: {
       type: [Number, String],
       default: 'auto'
     },
     minWidth: [Number, String],
     nudgeBottom: {
-      type: Number,
+      type: [Number, String],
       default: 0
     },
     nudgeLeft: {
@@ -120,13 +121,13 @@ export default {
 
       if (!this.isAttached) top += this.pageYOffset
       if (this.offsetY) top += this.top ? -a.height : a.height
-      if (this.nudgeTop) top -= this.nudgeTop
-      if (this.nudgeBottom) top += this.nudgeBottom
+      if (this.nudgeTop) top -= parseInt(this.nudgeTop)
+      if (this.nudgeBottom) top += parseInt(this.nudgeBottom)
 
       return top
     },
     hasActivator () {
-      return !!this.$slots.activator || this.activator
+      return !!this.$slots.activator || this.activator || this.inputActivator
     },
     isAttached () {
       return this.attach !== false
@@ -208,7 +209,12 @@ export default {
 
       // If overflowing bottom and offset
       // TODO: set 'bottom' position instead of 'top'
-      if (isOverflowing && this.offsetOverflow) {
+      if (isOverflowing &&
+        this.offsetOverflow &&
+        // If we don't have enough room to offset
+        // the overflow, don't offset
+        activator.top > contentHeight
+      ) {
         top = this.pageYOffset + (activator.top - contentHeight)
       // If overflowing bottom
       } else if (isOverflowing && !this.allowOverflow) {
@@ -242,6 +248,10 @@ export default {
     },
     deactivate () {},
     getActivator () {
+      if (this.inputActivator) {
+        return this.$el.querySelector('.v-input__slot')
+      }
+
       if (this.activator) {
         return typeof this.activator === 'string'
           ? document.querySelector(this.activator)

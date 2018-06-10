@@ -242,7 +242,7 @@ test('VBtnToggle.vue', ({ mount }) => {
     expect(change).not.toBeCalled()
   })
 
-  it('should have btn with data-only-child if only one selected', async () => {
+  it('should have v-btn with data-only-child if only one selected', async () => {
     const wrapper = mount(VBtnToggle, {
       propsData: {
         inputValue: 0
@@ -255,7 +255,7 @@ test('VBtnToggle.vue', ({ mount }) => {
       }
     })
 
-    const btn = wrapper.find('.btn')[0]
+    const btn = wrapper.find('.v-btn')[0]
 
     expect(btn.getAttribute('data-only-child')).toBe('true')
   })

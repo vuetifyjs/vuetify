@@ -3,6 +3,9 @@ import '../../stylus/components/_small-dialog.styl'
 // Mixins
 import Returnable from '../../mixins/returnable'
 
+// Utils
+import { keyCodes } from '../../util/helpers'
+
 import VBtn from '../VBtn'
 import VMenu from '../VMenu'
 
@@ -60,7 +63,7 @@ export default {
     },
     genActions () {
       return this.$createElement('div', {
-        'class': 'small-dialog__actions'
+        'class': 'v-small-dialog__actions'
       }, [
         this.genButton(this.cancel, this.cancelText),
         this.genButton(() => this.save(this.returnValue), this.saveText)
@@ -71,8 +74,8 @@ export default {
         on: {
           keydown: e => {
             const input = this.$refs.content.querySelector('input')
-            e.keyCode === 27 && this.cancel()
-            e.keyCode === 13 && input && this.save(input.value)
+            e.keyCode === keyCodes.esc && this.cancel()
+            e.keyCode === keyCodes.enter && input && this.save(input.value)
           }
         },
         ref: 'content'
@@ -82,9 +85,9 @@ export default {
 
   render (h) {
     return h(VMenu, {
-      'class': 'small-dialog',
+      'class': 'v-small-dialog',
       props: {
-        contentClass: 'small-dialog__content',
+        contentClass: 'v-small-dialog__content',
         transition: this.transition,
         origin: 'top right',
         right: true,

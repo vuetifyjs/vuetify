@@ -30,7 +30,8 @@ export default {
   computed: {
     classes () {
       return {
-        [`theme--${this.dark ? 'dark' : 'light'}`]: true
+        [`theme--${this.dark ? 'dark' : 'light'}`]: true,
+        'application--is-rtl': this.$vuetify.rtl
       }
     }
   },

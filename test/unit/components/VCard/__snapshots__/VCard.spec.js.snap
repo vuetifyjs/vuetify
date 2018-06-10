@@ -2,7 +2,7 @@
 
 exports[`VCard.vue should render a card with custom height 1`] = `
 
-<div class="card"
+<div class="v-card"
      style="height: 400px;"
 >
 </div>
@@ -11,7 +11,7 @@ exports[`VCard.vue should render a card with custom height 1`] = `
 
 exports[`VCard.vue should render a flat card 1`] = `
 
-<div class="card card--flat"
+<div class="v-card v-card--flat"
      style="height: auto;"
 >
 </div>
@@ -20,7 +20,7 @@ exports[`VCard.vue should render a flat card 1`] = `
 
 exports[`VCard.vue should render a raised card 1`] = `
 
-<div class="card card--raised"
+<div class="v-card v-card--raised"
      style="height: auto;"
 >
 </div>
@@ -29,7 +29,7 @@ exports[`VCard.vue should render a raised card 1`] = `
 
 exports[`VCard.vue should render a tile card 1`] = `
 
-<div class="card card--tile"
+<div class="v-card v-card--tile"
      style="height: auto;"
 >
 </div>
@@ -38,7 +38,7 @@ exports[`VCard.vue should render a tile card 1`] = `
 
 exports[`VCard.vue should render a tile card 2`] = `
 
-<div class="card card--tile"
+<div class="v-card v-card--tile"
      style="height: auto;"
 >
 </div>
@@ -47,7 +47,7 @@ exports[`VCard.vue should render a tile card 2`] = `
 
 exports[`VCard.vue should render card with img 1`] = `
 
-<div class="card"
+<div class="v-card"
      style="height: auto;"
 >
 </div>
@@ -56,7 +56,7 @@ exports[`VCard.vue should render card with img 1`] = `
 
 exports[`VCard.vue should render component and match snapshot 1`] = `
 
-<div class="card"
+<div class="v-card"
      style="height: auto;"
 >
 </div>

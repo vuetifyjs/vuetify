@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import VApp from '@/components/VApp'
 import { test } from '@/test'
 
@@ -48,5 +49,18 @@ test('VApp.js', ({ mount }) => {
     wrapper.vm.$vuetify.theme.primary = '#000'
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.style).toMatchSnapshot()
+  })
+
+  it('should set a CSP nonce', async () => {
+    // Delete the old stylesheet first
+    let el = document.getElementById('vuetify-theme-stylesheet')
+    el.parentNode.removeChild(el)
+
+    Vue.prototype.$vuetify.options.cspNonce = 'asdfghjkl'
+    const app = mount(VApp, { attachToDocument: true })
+
+    el = document.getElementById('vuetify-theme-stylesheet')
+    expect(el).toBeTruthy()
+    expect(el.getAttribute('nonce')).toBe('asdfghjkl')
   })
 })

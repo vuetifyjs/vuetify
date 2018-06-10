@@ -135,9 +135,9 @@ export default {
     onChange () {
       if (!this.selectingHour) {
         this.$emit('change', this.value)
+      } else {
+        this.selectingHour = false
       }
-
-      this.selectingHour = !this.selectingHour
     },
     firstAllowed (type, value) {
       const allowedFn = type === 'hour' ? this.isAllowedHourCb : this.isAllowedMinuteCb
@@ -162,6 +162,7 @@ export default {
           dark: this.dark,
           double: this.selectingHour && !this.isAmPm,
           format: this.selectingHour ? (this.isAmPm ? this.convert24to12 : val => val) : val => pad(val, 2),
+          light: this.light,
           max: this.selectingHour ? (this.isAmPm && this.period === 'am' ? 11 : 23) : 59,
           min: this.selectingHour && this.isAmPm && this.period === 'pm' ? 12 : 0,
           scrollable: this.scrollable,
@@ -178,7 +179,7 @@ export default {
     },
     genPickerBody () {
       return this.$createElement('div', {
-        staticClass: 'time-picker-clock__container',
+        staticClass: 'v-time-picker-clock__container',
         style: {
           width: `${this.width}px`,
           height: `${this.width - ((!this.fullWidth && this.landscape) ? 60 : 0)}px`
@@ -209,7 +210,7 @@ export default {
     this.setInputData(this.value)
   },
 
-  render (h) {
-    return this.genPicker('picker--time')
+  render () {
+    return this.genPicker('v-picker--time')
   }
 }
