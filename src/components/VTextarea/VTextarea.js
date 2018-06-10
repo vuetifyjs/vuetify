@@ -91,7 +91,7 @@ export default {
     genMarker () {
       return this.$createElement('div', {
         staticClass: 'v-textarea__mask',
-        domProps: { innerHTML: this.internalValue },
+        domProps: { innerHTML: this.internalValue + '&#8203' },
         ref: 'marker'
       })
     },
