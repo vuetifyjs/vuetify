@@ -41,6 +41,7 @@ export default {
 
   props: {
     appendOuterIcon: String,
+    appendOuterIconCb: Function,
     autofocus: Boolean,
     box: Boolean,
     browserAutocomplete: String,
@@ -208,13 +209,22 @@ export default {
 
       if (this.$slots['append-outer']) {
         slot.push(this.$slots['append-outer'])
-      } else if (this.$slots['append-outer-icon']) {
-        slot.push(this.$slots['append-outer-icon'])
       } else if (this.appendOuterIcon) {
         slot.push(this.genIcon('appendOuter'))
       }
 
       return this.genSlot('append', 'outer', slot)
+    },
+    genIconSlot () {
+      const slot = []
+
+      if (this.$slots['append']) {
+        slot.push(this.$slots['append'])
+      } else if (this.appendIcon) {
+        slot.push(this.genIcon('append'))
+      }
+
+      return this.genSlot('append', 'inner', slot)
     },
     genClearIcon () {
       if (!this.clearable) return null
@@ -267,19 +277,6 @@ export default {
       if (this.$attrs.id) data.props.for = this.$attrs.id
 
       return this.$createElement(VLabel, data, this.$slots.label || this.label)
-    },
-    genIconSlot () {
-      const slot = []
-
-      if (this.$slots['append']) {
-        slot.push(this.$slots['append'])
-      } else if (this.$slots['append-icon']) {
-        slot.push(this.$slots['append-icon'])
-      } else if (this.appendIcon) {
-        slot.push(this.genIcon('append'))
-      }
-
-      return this.genSlot('append', 'inner', slot)
     },
     genInput () {
       const listeners = Object.assign({}, this.$listeners)

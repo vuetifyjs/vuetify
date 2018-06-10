@@ -208,11 +208,7 @@ export default {
     genPrependSlot () {
       const slot = []
 
-      // Backwards compat
-      // TODO: Deprecate prepend-icon slot 2.0
-      if (this.$slots['prepend-icon']) {
-        slot.push(this.$slots['prepend-icon'])
-      } else if (this.$slots['prepend']) {
+      if (this.$slots['prepend']) {
         slot.push(this.$slots['prepend'])
       } else if (this.prependIcon) {
         slot.push(this.genIcon('prepend'))
@@ -229,8 +225,6 @@ export default {
       // backwards compat
       if (this.$slots['append']) {
         slot.push(this.$slots['append'])
-      } else if (this.$slots['append-icon']) {
-        slot.push(this.$slots['append-icon'])
       } else if (this.appendIcon) {
         slot.push(this.genIcon('append'))
       }
