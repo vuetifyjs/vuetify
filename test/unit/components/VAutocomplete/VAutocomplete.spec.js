@@ -274,8 +274,6 @@ test('VAutocomplete.js', ({ mount, shallow }) => {
     expect(wrapper.vm.isMenuActive).toBe(false)
   })
 
-
-
   it('should change selected index', async () => {
     const wrapper = shallow(VAutocomplete, {
       attachToDocument: true,
@@ -803,5 +801,20 @@ test('VAutocomplete.js', ({ mount, shallow }) => {
     const content = wrapper.first('.v-autocomplete__content')
 
     expect(content.element.classList.contains('foobar')).toBe(true)
+  })
+
+  it('should update the displayed value when items changes', async () => {
+    const wrapper = mount(VAutocomplete, {
+      propsData: {
+        value: 1,
+        items: []
+      }
+    })
+
+    const input = wrapper.first('input')
+
+    wrapper.setProps({ items: [{ text: 'foo', value: 1 }] })
+    await wrapper.vm.$nextTick()
+    expect(input.element.value).toBe('foo')
   })
 })
