@@ -9,9 +9,9 @@ function createMessage (message: string, vm?: any, parent?: any): string | void 
 
   if (vm) {
     // Only show each message once per instance
-    vm.$_alreadyWarned = vm.$_alreadyWarned || {}
-    if (vm.$_alreadyWarned[message]) return
-    vm.$_alreadyWarned[message] = true
+    vm.$_alreadyWarned = vm.$_alreadyWarned || []
+    if (vm.$_alreadyWarned.includes(message)) return
+    vm.$_alreadyWarned.push(message)
   }
 
   return `[Vuetify] ${message}` + (
