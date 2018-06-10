@@ -16,6 +16,7 @@ import {
   convertToUnit,
   kebabCase
 } from '../../util/helpers'
+import { deprecate } from '../../util/console'
 
 export default {
   name: 'v-input',
@@ -123,7 +124,12 @@ export default {
     },
     genIcon (type, cb) {
       const icon = this[`${type}Icon`]
-      const eventName = `click:${type}-icon`
+      const eventName = `click:${type}`
+
+      if (type) {
+        deprecate(`:${type}-icon-cb`, `@click:${type}`, this)
+      }
+
       cb = cb || this[`${type}IconCb`]
 
       const data = {

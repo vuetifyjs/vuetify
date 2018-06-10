@@ -2,6 +2,7 @@ import VSelect from './VSelect'
 import VOverflowBtn from '../VOverflowBtn'
 import VAutocomplete from '../VAutocomplete'
 import rebuildSlots from '../../util/rebuildFunctionalSlots'
+import { deprecate } from '../../util/console'
 
 const wrapper = {
   functional: true,
@@ -24,23 +25,23 @@ const wrapper = {
     const children = rebuildSlots(slots(), h)
 
     if (props.autocomplete) {
-      console.warn(`[Vuetify] '<v-select autocomplete>' is deprecated, use '<v-autocomplete>' instead in ${parent._name}`)
+      deprecate('<v-select autocomplete>', '<v-autocomplete>', wrapper, parent)
     }
     if (props.combobox) {
-      console.warn(`[Vuetify] '<v-select combobox>' is deprecated, use '<v-autocomplete combobox>' instead in ${parent._name}`)
+      deprecate('<v-select combobox>', '<v-autocomplete combobox>', wrapper, parent)
     }
     if (props.tags) {
-      console.warn(`[Vuetify] '<v-select tags>' is deprecated, use '<v-autocomplete tags>' instead in ${parent._name}`)
+      deprecate('<v-select tags>', '<v-autocomplete tags>', wrapper, parent)
     }
 
     if (props.overflow) {
-      console.warn(`[Vuetify] '<v-select overflow>' is deprecated, use '<v-overflow-btn>' instead in ${parent._name}`)
+      deprecate('<v-select overflow>', '<v-overflow-btn>', wrapper, parent)
     }
     if (props.segmented) {
-      console.warn(`[Vuetify] '<v-select segmented>' is deprecated, use '<v-overflow-btn segmented>' instead in ${parent._name}`)
+      deprecate('<v-select segmented>', '<v-overflow-btn segmented>', wrapper, parent)
     }
     if (props.editable) {
-      console.warn(`[Vuetify] '<v-select editable>' is deprecated, use '<v-overflow-btn editable>' instead in ${parent._name}`)
+      deprecate('<v-select editable>', '<v-overflow-btn editable>', wrapper, parent)
     }
 
     if (props.autocomplete || props.combobox || props.tags) {
