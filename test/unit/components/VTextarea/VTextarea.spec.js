@@ -20,32 +20,27 @@ const stub = {
 
 test('VTextarea.vue', ({ mount }) => {
   it('should calculate element height when using auto-grow prop', async () => {
-    let value = ''
-    const component = {
-      render (h) {
-        return h(VTextarea, {
-          on: {
-            input: i => value = i
-          },
-          props: {
-            value,
-            autoGrow: true
-          }
-        })
+    const wrapper = mount(VTextarea, {
+      attachToDocument: true,
+      propsData: {
+        value: '',
+        autoGrow: true
       }
-    }
+    })
+    const input = jest.fn(value => wrapper.setData({ value }))
+    wrapper.vm.$on('input', input)
 
-    const wrapper = mount(component)
-    const input = wrapper.find('textarea')[0]
+    const el = wrapper.find('textarea')[0]
 
-    input.trigger('focus')
+    el.trigger('focus')
     await wrapper.vm.$nextTick()
-    input.element.value = 'this is a really long text that should hopefully make auto-grow kick in. maybe?'
-    input.trigger('input')
+    el.element.value = 'this is a really long text that should hopefully make auto-grow kick in. maybe?'.replace(/\s/g, '\n')
+    el.trigger('input')
     await wrapper.vm.$nextTick()
 
+    // TODO: switch to e2e, jest doesn't do inline styles
     expect(wrapper.html()).toMatchSnapshot()
-    expect(input.element.style.getPropertyValue('height').length).not.toBe(0)
+    expect(el.element.style.getPropertyValue('height').length).not.toBe(0)
   })
 
   it('should watch lazy value', async () => {
@@ -79,41 +74,8 @@ test('VTextarea.vue', ({ mount }) => {
       methods: { calculateInputHeight }
     })
 
-
+    await new Promise(resolve => setTimeout(resolve, 0))
     expect(calculateInputHeight).toBeCalled()
-  })
-
-  it('should calculate input height', async () => {
-    const wrapper = mount(VTextarea, {
-      propsData: {
-        autoGrow: true
-      }
-    })
-
-    await wrapper.vm.$nextTick()
-
-    expect(wrapper.vm.inputHeight).toBe(120)
-
-    wrapper.setData({ inputHeight: 200 })
-
-    expect(wrapper.vm.inputHeight).toBe(200)
-
-    wrapper.vm.calculateInputHeight()
-
-    await wrapper.vm.$nextTick()
-
-    expect(wrapper.vm.inputHeight).toBe(120)
-
-    wrapper.vm.calculateInputHeight()
-
-    await wrapper.vm.$nextTick()
-
-    delete wrapper.vm.$refs.input
-    wrapper.vm.calculateInputHeight()
-
-    await wrapper.vm.$nextTick()
-
-    expect(wrapper.vm.inputHeight).toBe(120)
   })
 
   it('should stop propagation', async () => {

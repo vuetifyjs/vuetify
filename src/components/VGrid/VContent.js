@@ -33,8 +33,7 @@ export default {
 
   render (h) {
     const data = {
-      staticClass: 'content',
-      'class': this.classes,
+      staticClass: 'v-content',
       style: this.styles,
       ref: 'content'
     }
@@ -42,7 +41,7 @@ export default {
     return h(this.tag, data, [
       h(
         'div',
-        { staticClass: 'content--wrap' },
+        { staticClass: 'v-content__wrap' },
         this.$slots.default
       )
     ])

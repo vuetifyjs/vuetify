@@ -184,8 +184,6 @@ export default {
           this.$emit('input', this.lazyValue)
         })
       } else this.lazyValue = val
-
-      if (this.internalChange) this.internalChange = false
     }
   },
 
@@ -368,6 +366,7 @@ export default {
       }
     },
     onInput (e) {
+      this.internalChange = true
       this.mask && this.resetSelections(e.target)
       this.internalValue = e.target.value
       this.badInput = e.target.validity && e.target.validity.badInput
