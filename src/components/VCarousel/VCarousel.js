@@ -51,7 +51,11 @@ export default {
       type: [Boolean, String],
       default: '$vuetify.icons.prev'
     },
-    value: Number
+    value: Number,
+    height: {
+      type: [Number, String],
+      default: ''
+    }
   },
 
   watch: {
