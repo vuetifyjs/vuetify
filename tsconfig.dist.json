@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "outDir": "./es5-temp",
+    "sourceMap": false,
+    "inlineSourceMap": true,
+    "inlineSources": true
+  }
+}

@@ -6,7 +6,7 @@ import Filterable from './filterable'
 import Themeable from './themeable'
 import Loadable from './loadable'
 
-import { getObjectValueByPath } from '../util/helpers'
+import { getObjectValueByPath, isObject } from '../util/helpers'
 import { consoleWarn } from '../util/console'
 
 /**
@@ -21,12 +21,6 @@ import { consoleWarn } from '../util/console'
 export default {
   name: 'data-iterable',
 
-  components: {
-    VBtn,
-    VIcon,
-    VSelect
-  },
-
   data () {
     return {
       searchLength: 0,
@@ -38,10 +32,10 @@ export default {
         totalItems: 0
       },
       expanded: {},
-      actionsClasses: 'data-iterator__actions',
-      actionsRangeControlsClasses: 'data-iterator__actions__range-controls',
-      actionsSelectClasses: 'data-iterator__actions__select',
-      actionsPaginationClasses: 'data-iterator__actions__pagination'
+      actionsClasses: 'v-data-iterator__actions',
+      actionsRangeControlsClasses: 'v-data-iterator__actions__range-controls',
+      actionsSelectClasses: 'v-data-iterator__actions__select',
+      actionsPaginationClasses: 'v-data-iterator__actions__pagination'
     }
   },
 
@@ -54,15 +48,15 @@ export default {
     mustSort: Boolean,
     noResultsText: {
       type: String,
-      default: 'No matching records found'
+      default: '$vuetify.lang.dataIterator.noResultsText'
     },
     nextIcon: {
       type: String,
-      default: 'chevron_right'
+      default: '$vuetify.icons.next'
     },
     prevIcon: {
       type: String,
-      default: 'chevron_left'
+      default: '$vuetify.icons.prev'
     },
     rowsPerPageItems: {
       type: Array,
@@ -71,13 +65,16 @@ export default {
           5,
           10,
           25,
-          { text: 'All', value: -1 }
+          {
+            text: '$vuetify.lang.dataIterator.rowsPerPageAll',
+            value: -1
+          }
         ]
       }
     },
     rowsPerPageText: {
       type: String,
-      default: 'Items per page:'
+      default: '$vuetify.lang.dataIterator.rowsPerPageText'
     },
     selectAll: [Boolean, String],
     search: {
@@ -166,6 +163,15 @@ export default {
         ? this.pagination
         : this.defaultPagination
     },
+    computedRowsPerPageItems () {
+      return this.rowsPerPageItems.map(item => {
+        return isObject(item)
+          ? Object.assign({}, item, {
+            text: this.$vuetify.t(item.text)
+          })
+          : item
+      })
+    },
     hasPagination () {
       const pagination = this.pagination || {}
 
@@ -175,7 +181,7 @@ export default {
       return this.selectAll !== undefined && this.selectAll !== false
     },
     itemsLength () {
-      if (this.search) return this.searchLength
+      if (this.hasSearch) return this.searchLength
       return this.totalItems || this.items.length
     },
     indeterminate () {
@@ -211,16 +217,24 @@ export default {
     selected () {
       const selected = {}
       for (let index = 0; index < this.value.length; index++) {
-        selected[this.value[index][this.itemKey]] = true
+        const key = getObjectValueByPath(this.value[index], this.itemKey)
+        selected[key] = true
       }
       return selected
+    },
+    hasSearch () {
+      return this.search != null
     }
   },
 
   watch: {
     search () {
-      this.updatePagination({ page: 1, totalItems: this.itemsLength })
-    }
+      this.$nextTick(() => {
+        this.updatePagination({ page: 1, totalItems: this.itemsLength })
+      })
+    },
+    'computedPagination.sortBy': 'resetPagination',
+    'computedPagination.descending': 'resetPagination'
   },
 
   methods: {
@@ -231,7 +245,7 @@ export default {
         this.defaultPagination.rowsPerPage = this.rowsPerPageItems[0]
       }
 
-      this.defaultPagination.totalItems = this.itemsLength
+      this.defaultPagination.totalItems = this.items.length
 
       this.updatePagination(
         Object.assign({}, this.defaultPagination, this.pagination)
@@ -249,19 +263,17 @@ export default {
       }
     },
     isSelected (item) {
-      return this.selected[item[this.itemKey]]
+      return this.selected[getObjectValueByPath(item, this.itemKey)]
     },
     isExpanded (item) {
-      return this.expanded[item[this.itemKey]]
+      return this.expanded[getObjectValueByPath(item, this.itemKey)]
     },
     filteredItemsImpl (...additionalFilterArgs) {
       if (this.totalItems) return this.items
 
       let items = this.items.slice()
-      const hasSearch = typeof this.search !== 'undefined' &&
-        this.search !== null
 
-      if (hasSearch) {
+      if (this.hasSearch) {
         items = this.customFilter(items, this.search, this.filter, ...additionalFilterArgs)
         this.searchLength = items.length
       }
@@ -276,6 +288,10 @@ export default {
         !this.hasPagination
         ? items
         : items.slice(this.pageStart, this.pageStop)
+    },
+    resetPagination () {
+      this.computedPagination.page !== 1 &&
+        this.updatePagination({ page: 1 })
     },
     sort (index) {
       const { sortBy, descending } = this.computedPagination
@@ -294,20 +310,22 @@ export default {
     toggle (value) {
       const selected = Object.assign({}, this.selected)
       for (let index = 0; index < this.filteredItems.length; index++) {
-        selected[this.filteredItems[index][this.itemKey]] = value
+        const key = getObjectValueByPath(this.filteredItems[index], this.itemKey)
+        selected[key] = value
       }
 
-      this.$emit('input', this.items.filter(i => (
-        selected[i[this.itemKey]]))
-      )
+      this.$emit('input', this.items.filter(i => {
+        const key = getObjectValueByPath(i, this.itemKey)
+        return selected[key]
+      }))
     },
     createProps (item, index) {
       const props = { item, index }
       const keyProp = this.itemKey
-      const itemKey = item[keyProp]
+      const itemKey = getObjectValueByPath(item, keyProp)
 
       Object.defineProperty(props, 'selected', {
-        get: () => this.selected[item[this.itemKey]],
+        get: () => this.selected[itemKey],
         set: value => {
           if (itemKey == null) {
             consoleWarn(`"${keyProp}" attribute must be defined for item`, this)
@@ -315,13 +333,13 @@ export default {
 
           let selected = this.value.slice()
           if (value) selected.push(item)
-          else selected = selected.filter(i => i[keyProp] !== itemKey)
+          else selected = selected.filter(i => getObjectValueByPath(i, keyProp) !== itemKey)
           this.$emit('input', selected)
         }
       })
 
       Object.defineProperty(props, 'expanded', {
-        get: () => this.expanded[item[this.itemKey]],
+        get: () => this.expanded[itemKey],
         set: value => {
           if (itemKey == null) {
             consoleWarn(`"${keyProp}" attribute must be defined for item`, this)
@@ -340,19 +358,19 @@ export default {
     },
     genItems () {
       if (!this.itemsLength && !this.items.length) {
-        const noData = this.$slots['no-data'] || this.noDataText
+        const noData = this.$slots['no-data'] || this.$vuetify.t(this.noDataText)
         return [this.genEmptyItems(noData)]
       }
 
       if (!this.filteredItems.length) {
-        const noResults = this.$slots['no-results'] || this.noResultsText
+        const noResults = this.$slots['no-results'] || this.$vuetify.t(this.noResultsText)
         return [this.genEmptyItems(noResults)]
       }
 
       return this.genFilteredItems()
     },
     genPrevIcon () {
-      return this.$createElement('v-btn', {
+      return this.$createElement(VBtn, {
         props: {
           disabled: this.computedPagination.page === 1,
           icon: true,
@@ -367,9 +385,9 @@ export default {
           }
         },
         attrs: {
-          'aria-label': 'Previous page' // TODO: Localization
+          'aria-label': this.$vuetify.t('$vuetify.lang.dataIterator.prevPage')
         }
-      }, [this.$createElement('v-icon', this.prevIcon)])
+      }, [this.$createElement(VIcon, this.prevIcon)])
     },
     genNextIcon () {
       const pagination = this.computedPagination
@@ -377,7 +395,7 @@ export default {
         pagination.page * pagination.rowsPerPage >= this.itemsLength ||
         this.pageStop < 0
 
-      return this.$createElement('v-btn', {
+      return this.$createElement(VBtn, {
         props: {
           disabled,
           icon: true,
@@ -392,21 +410,21 @@ export default {
           }
         },
         attrs: {
-          'aria-label': 'Next page' // TODO: Localization
+          'aria-label': this.$vuetify.t('$vuetify.lang.dataIterator.nextPage')
         }
-      }, [this.$createElement('v-icon', this.nextIcon)])
+      }, [this.$createElement(VIcon, this.nextIcon)])
     },
     genSelect () {
       return this.$createElement('div', {
         'class': this.actionsSelectClasses
       }, [
-        this.rowsPerPageText,
-        this.$createElement('v-select', {
+        this.$vuetify.t(this.rowsPerPageText),
+        this.$createElement(VSelect, {
           attrs: {
-            'aria-label': this.rowsPerPageText
+            'aria-label': this.$vuetify.t(this.rowsPerPageText)
           },
           props: {
-            items: this.rowsPerPageItems,
+            items: this.computedRowsPerPageItems,
             value: this.computedPagination.rowsPerPage,
             hideDetails: true,
             auto: true,
@@ -437,7 +455,7 @@ export default {
             pageStop: stop,
             itemsLength: this.itemsLength
           })
-          : `${this.pageStart + 1}-${stop} of ${this.itemsLength}`
+          : this.$vuetify.t('$vuetify.lang.dataIterator.pageText', this.pageStart + 1, stop, this.itemsLength)
       }
 
       return this.$createElement('div', {

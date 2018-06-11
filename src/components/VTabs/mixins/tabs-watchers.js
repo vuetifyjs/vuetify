@@ -5,8 +5,10 @@
  */
 export default {
   watch: {
-    activeTab (tab) {
-      this.callSlider()
+    activeTab (tab, prev) {
+      !prev && tab && this.updateTabs()
+
+      setTimeout(this.callSlider, 0)
 
       if (!tab) return
 
@@ -16,18 +18,17 @@ export default {
     alignWithTitle: 'callSlider',
     centered: 'callSlider',
     fixedTabs: 'callSlider',
+    hasArrows (val) {
+      if (!val) this.scrollOffset = 0
+    },
     isBooted: 'findActiveLink',
     lazyValue: 'updateTabs',
     right: 'callSlider',
     value (val) {
-      const tab = this.tabs.find(tab => tab.action === val) || this.tabs[val]
-
-      if (!tab) return
-
-      this.tabClick(tab)
+      this.lazyValue = val
     },
-    '$vuetify.application.left': 'onContainerResize',
-    '$vuetify.application.right': 'onContainerResize',
+    '$vuetify.application.left': 'onResize',
+    '$vuetify.application.right': 'onResize',
     scrollOffset (val) {
       this.$refs.container.style.transform = `translateX(${-val}px)`
       if (this.hasArrows) {

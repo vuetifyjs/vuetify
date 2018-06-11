@@ -11,16 +11,18 @@ export default {
     size: {
       type: [Number, String],
       default: 40
-    }
+    },
+    tile: Boolean
   },
 
   render (h, { data, children, props }) {
-    data.staticClass = (`list__tile__avatar ${data.staticClass || ''}`).trim()
+    data.staticClass = (`v-list__tile__avatar ${data.staticClass || ''}`).trim()
 
     const avatar = h(VAvatar, {
       props: {
         color: props.color,
-        size: props.size
+        size: props.size,
+        tile: props.tile
       }
     }, [children])
 

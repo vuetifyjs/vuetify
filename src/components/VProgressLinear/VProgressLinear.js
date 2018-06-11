@@ -10,11 +10,6 @@ import {
 export default {
   name: 'v-progress-linear',
 
-  components: {
-    VFadeTransition,
-    VSlideXTransition
-  },
-
   mixins: [Colorable],
 
   props: {
@@ -88,7 +83,7 @@ export default {
     genDeterminate (h) {
       return h('div', {
         ref: 'front',
-        staticClass: `progress-linear__bar__determinate`,
+        staticClass: `v-progress-linear__bar__determinate`,
         class: this.addBackgroundColorClassChecks(),
         style: {
           width: `${this.effectiveWidth}%`
@@ -97,7 +92,7 @@ export default {
     },
     genBar (h, name) {
       return h('div', {
-        staticClass: 'progress-linear__bar__indeterminate',
+        staticClass: 'v-progress-linear__bar__indeterminate',
         class: this.addBackgroundColorClassChecks({
           [name]: true
         })
@@ -106,9 +101,9 @@ export default {
     genIndeterminate (h) {
       return h('div', {
         ref: 'front',
-        staticClass: 'progress-linear__bar__indeterminate',
+        staticClass: 'v-progress-linear__bar__indeterminate',
         class: {
-          'progress-linear__bar__indeterminate--active': this.active
+          'v-progress-linear__bar__indeterminate--active': this.active
         }
       }, [
         this.genBar(h, 'long'),
@@ -118,23 +113,23 @@ export default {
   },
 
   render (h) {
-    const fade = h('v-fade-transition', [this.indeterminate && this.genIndeterminate(h)])
-    const slide = h('v-slide-x-transition', [!this.indeterminate && this.genDeterminate(h)])
+    const fade = h(VFadeTransition, [this.indeterminate && this.genIndeterminate(h)])
+    const slide = h(VSlideXTransition, [!this.indeterminate && this.genDeterminate(h)])
 
     const bar = h('div', {
-      staticClass: 'progress-linear__bar',
+      staticClass: 'v-progress-linear__bar',
       style: this.styles
     }, [fade, slide])
     const background = h('div', {
-      staticClass: 'progress-linear__background',
+      staticClass: 'v-progress-linear__background',
       class: [this.backgroundColor || this.color],
       style: this.backgroundStyle
     })
 
     return h('div', {
-      staticClass: 'progress-linear',
+      staticClass: 'v-progress-linear',
       class: {
-        'progress-linear--query': this.query
+        'v-progress-linear--query': this.query
       },
       style: {
         height: `${this.height}px`

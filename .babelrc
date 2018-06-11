@@ -1,12 +1,25 @@
 {
+  "presets": [
+    ["env", {
+      "targets": {
+        "browsers": [">0.5%", "last 2 versions", "not dead", "not op_mini all"],
+        "node": 8
+      },
+      "modules": false
+    }]
+  ],
+  "plugins": [
+    ["transform-define", "./build/babel-transform-define.js"],
+    "transform-object-rest-spread"
+  ],
   "env": {
     "test": {
       "presets": [
-        ["es2015"],
-        ["stage-2"]
+        ["env", {
+          "targets": { "node": true }
+        }]
       ],
       "plugins": [
-        "transform-runtime",
         ["module-resolver", {
           "root": ["./src"],
           "alias": {
@@ -21,22 +34,15 @@
     },
     "es5": {
       "presets": [
-        ["es2015"],
-        ["stage-2"]
+        ["env", {
+          "targets": {
+            "browsers": [">0.5%", "last 2 versions", "not dead", "not op_mini all"],
+            "node": 8
+          }
+        }]
       ],
-      "plugins": ["./build/babel-transform-stylus-paths.js"]
-    },
-    "development": {
-      "presets": [
-        ["es2015", { "modules": false }],
-        ["stage-2"]
-      ],
-      "plugins": ["add-filehash"]
-    },
-    "production": {
-      "presets": [
-        ["es2015", { "modules": false }],
-        ["stage-2"]
+      "plugins": [
+        "./build/babel-transform-stylus-paths.js"
       ]
     }
   }

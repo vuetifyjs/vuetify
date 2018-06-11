@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VFooter.js should accept an auto height 1`] = `
+
+<footer class="v-footer"
+        style="height: auto;"
+>
+</footer>
+
+`;
+
+exports[`VFooter.js should get the right padding with app prop 1`] = `
+
+<footer class="v-footer v-footer--absolute"
+        style="height: 32px;"
+>
+</footer>
+
+`;
+
+exports[`VFooter.js should get the right padding with app prop 2`] = `
+
+<footer class="v-footer v-footer--absolute"
+        style="height: 32px; padding-right: 30px;"
+>
+</footer>
+
+`;

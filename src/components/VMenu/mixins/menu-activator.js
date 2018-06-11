@@ -20,7 +20,7 @@ export default {
         this.isActive = false
       }
     },
-    mouseEnterHandler (e) {
+    mouseEnterHandler () {
       this.runDelay('open', () => {
         if (this.hasJustFocused) return
 

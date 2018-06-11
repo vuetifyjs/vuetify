@@ -1,0 +1,159 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VRadio.vue should not render aria-label attribute with no label value on input group 1`] = `
+
+<div class="v-radio">
+  <div class="v-input--selection-controls__input">
+    <input aria-checked="false"
+           name="name"
+           role="radio"
+           type="radio"
+    >
+    <div class="v-input--selection-controls__ripple">
+    </div>
+    <i aria-hidden="true"
+       class="v-icon material-icons"
+    >
+      radio_button_unchecked
+    </i>
+  </div>
+  <label aria-hidden="true"
+         class="v-label"
+         style="left: 0px; position: relative;"
+  >
+  </label>
+</div>
+
+`;
+
+exports[`VRadio.vue should render aria-label attribute with label value on input group 1`] = `
+
+<div class="v-radio">
+  <div class="v-input--selection-controls__input">
+    <input aria-checked="false"
+           aria-label="Test"
+           name="name"
+           role="radio"
+           type="radio"
+    >
+    <div class="v-input--selection-controls__ripple">
+    </div>
+    <i aria-hidden="true"
+       class="v-icon material-icons"
+    >
+      radio_button_unchecked
+    </i>
+  </div>
+  <label aria-hidden="true"
+         class="v-label"
+         style="left: 0px; position: relative;"
+  >
+    Test
+  </label>
+</div>
+
+`;
+
+exports[`VRadio.vue should render proper input name 1`] = `
+
+<div class="v-radio">
+  <div class="v-input--selection-controls__input">
+    <input aria-checked="false"
+           name="name"
+           role="radio"
+           type="radio"
+    >
+    <div class="v-input--selection-controls__ripple">
+    </div>
+    <i aria-hidden="true"
+       class="v-icon material-icons"
+    >
+      radio_button_unchecked
+    </i>
+  </div>
+  <label aria-hidden="true"
+         class="v-label"
+         style="left: 0px; position: relative;"
+  >
+  </label>
+</div>
+
+`;
+
+exports[`VRadio.vue should render role and aria-checked attributes on input group 1`] = `
+
+<div class="v-radio accent--text">
+  <div class="v-input--selection-controls__input">
+    <input aria-checked="true"
+           name="name"
+           role="radio"
+           type="radio"
+           checked="checked"
+    >
+    <div class="v-input--selection-controls__ripple accent--text">
+    </div>
+    <i aria-hidden="true"
+       class="v-icon material-icons accent--text"
+    >
+      radio_button_checked
+    </i>
+  </div>
+  <label aria-hidden="true"
+         class="v-label"
+         style="left: 0px; position: relative;"
+  >
+  </label>
+</div>
+
+`;
+
+exports[`VRadio.vue should use custom icons 1`] = `
+
+<div class="v-radio">
+  <div class="v-input--selection-controls__input">
+    <input aria-checked="false"
+           role="radio"
+           type="radio"
+    >
+    <div class="v-input--selection-controls__ripple">
+    </div>
+    <i aria-hidden="true"
+       class="v-icon material-icons"
+    >
+      bar
+    </i>
+  </div>
+  <label aria-hidden="true"
+         class="v-label"
+         style="left: 0px; position: relative;"
+  >
+  </label>
+</div>
+
+`;
+
+exports[`VRadio.vue should use custom icons 2`] = `
+
+<div class="v-radio accent--text">
+  <div class="v-input--selection-controls__input">
+    <input aria-checked="true"
+           role="radio"
+           type="radio"
+           checked="checked"
+    >
+    <div class="v-input--selection-controls__ripple accent--text">
+    </div>
+    <i aria-hidden="true"
+       class="v-icon material-icons accent--text"
+    >
+      foo
+    </i>
+  </div>
+  <label aria-hidden="true"
+         class="v-label"
+         style="left: 0px; position: relative;"
+  >
+  </label>
+</div>
+
+`;

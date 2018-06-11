@@ -70,9 +70,9 @@ export default {
 
       if (this.top || this.bottom) {
         top = (
-          activator.top -
-          (this.top ? activator.height : -activator.height) -
-          (this.top ? 0 : -10)
+          activator.top +
+          (this.bottom ? activator.height : -content.height) +
+          (this.bottom ? 10 : -10)
         )
       } else if (this.left || this.right) {
         top = (
@@ -86,10 +86,10 @@ export default {
     },
     classes () {
       return {
-        'tooltip--top': this.top,
-        'tooltip--right': this.right,
-        'tooltip--bottom': this.bottom,
-        'tooltip--left': this.left
+        'v-tooltip--top': this.top,
+        'v-tooltip--right': this.right,
+        'v-tooltip--bottom': this.bottom,
+        'v-tooltip--left': this.left
       }
     },
     computedTransition () {
@@ -132,7 +132,7 @@ export default {
 
   render (h) {
     const tooltip = h('div', {
-      staticClass: 'tooltip__content',
+      staticClass: 'v-tooltip__content',
       'class': this.addBackgroundColorClassChecks({
         [this.contentClass]: true,
         'menuable__content__active': this.isActive
@@ -144,10 +144,10 @@ export default {
         value: this.isContentActive
       }],
       ref: 'content'
-    }, this.$slots.default)
+    }, this.showLazyContent(this.$slots.default))
 
     return h(this.tag, {
-      staticClass: 'tooltip',
+      staticClass: 'v-tooltip',
       'class': this.classes
     }, [
       h('transition', {

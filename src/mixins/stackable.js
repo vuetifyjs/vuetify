@@ -19,6 +19,8 @@ export default {
      * @return {number}
      */
     activeZIndex () {
+      if (typeof window === 'undefined') return 0
+
       const content = this.stackElement || this.$refs.content
       // Return current zindex if not active
 

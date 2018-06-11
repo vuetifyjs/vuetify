@@ -1,4 +1,3 @@
-import { consoleError } from '../../../util/console'
 import * as easingPatterns from '../../../util/easing-patterns'
 
 const defaults = {
@@ -18,52 +17,72 @@ function getDocumentHeight () {
   )
 }
 
-function getTargetLocation (target, settings) {
-  const documentHeight = getDocumentHeight()
-  const windowHeight = window.innerHeight || (document.documentElement || document.body).clientHeight
+function getWindowHeight () {
+  return window.innerHeight ||
+    (document.documentElement || document.body).clientHeight
+}
 
+function isVueComponent (obj) {
+  return obj != null && obj._isVue
+}
+
+function getTargetLocation (target, settings) {
   let location
 
-  if (target instanceof Element) location = target.offsetTop
-  else if (target && target.constructor && target.constructor.name === 'VueComponent') location = target.$el.offsetTop
-  else if (typeof target === 'string') location = document.querySelector(target).offsetTop
-  else if (typeof target === 'number') location = target
-  else location = undefined
+  if (isVueComponent(target)) {
+    target = target.$el
+  }
 
-  location += settings.offset
+  if (target instanceof Element) {
+    location = target.getBoundingClientRect().top + window.scrollY
+  } else if (typeof target === 'string') {
+    const targetEl = document.querySelector(target)
+    if (!targetEl) throw new TypeError(`Target element "${target}" not found.`)
+    location = targetEl.getBoundingClientRect().top + window.scrollY
+  } else if (typeof target === 'number') {
+    location = target
+  } else {
+    const type = target == null ? target : target.constructor.name
+    throw new TypeError(`Target must be a Selector/Number/DOMElement/VueComponent, received ${type} instead.`)
+  }
 
   return Math.round(
-    documentHeight - location < windowHeight
-      ? documentHeight - windowHeight
-      : location
+    Math.min(
+      Math.max(location + settings.offset, 0),
+      getDocumentHeight() - getWindowHeight()
+    )
   )
 }
 
 export default function goTo (target, options) {
-  if (typeof window === 'undefined') return
+  return new Promise((resolve, reject) => {
+    if (typeof window === 'undefined') return reject('Window is undefined')
 
-  const settings = Object.assign({}, defaults, options)
+    const settings = Object.assign({}, defaults, options)
+    const startTime = performance.now()
+    const startLocation = window.pageYOffset
+    const targetLocation = getTargetLocation(target, settings)
+    const distanceToScroll = targetLocation - startLocation
+    const easingFunction = typeof settings.easing === 'function' ? settings.easing : easingPatterns[settings.easing]
 
-  const startTime = performance.now()
-  const startLocation = window.pageYOffset
-  const targetLocation = getTargetLocation(target, settings)
-  const distanceToScroll = targetLocation - startLocation
-  const easingFunction = typeof settings.easing === 'function' ? settings.easing : easingPatterns[settings.easing]
+    if (!easingFunction) throw new TypeError(`Easing function '${settings.easing}' not found.`)
 
-  if (isNaN(targetLocation)) {
-    const type = target && target.constructor ? target.constructor.name : target
-    return consoleError(`Target must be a Selector/Number/DOMElement/VueComponent, received ${type} instead.`)
-  }
-  if (!easingFunction) return consoleError(`Easing function '${settings.easing}' not found.`)
+    function step (currentTime) {
+      let progressPercentage = Math.min(1, ((currentTime - startTime) / settings.duration))
+      let targetPosition = Math.floor(startLocation + distanceToScroll * easingFunction(progressPercentage))
 
-  function step (currentTime) {
-    let progressPercentage = Math.min(1, ((currentTime - startTime) / settings.duration))
-    let targetPosition = Math.floor(startLocation + distanceToScroll * easingFunction(progressPercentage))
+      window.scrollTo(0, targetPosition)
 
-    window.scrollTo(0, targetPosition)
-    if (Math.round(window.pageYOffset) === targetLocation) return
+      if (
+        Math.round(window.pageYOffset) === targetLocation ||
+        progressPercentage === 1
+      ) {
+        return resolve(target)
+      }
+
+      window.requestAnimationFrame(step)
+    }
+
     window.requestAnimationFrame(step)
-  }
-
-  window.requestAnimationFrame(step)
+  })
 }

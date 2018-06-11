@@ -2,7 +2,7 @@
 @import '../theme'
 
 /* Theme */
-table($material)
+v-table($material)
   background-color: $material.cards
   color: $material.text.primary
 
@@ -29,15 +29,15 @@ table($material)
     tr
       border-top: 1px solid rgba($material.fg-color, $material.divider-percent)
 
-theme(table, "table")
+theme(v-table, "v-table")
 
-.table
+.v-table
   &__overflow
     width: 100%
     overflow-x: auto
     overflow-y: hidden
 
-table.table
+table.v-table
   border-radius: 2px
   border-collapse: collapse
   border-spacing: 0
@@ -85,7 +85,7 @@ table.table
       display: none
 
     &.checkbox
-      .icon
+      .v-icon
         left: 50%
         transform: translateX(-50%)
 

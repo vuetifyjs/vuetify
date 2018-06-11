@@ -1,0 +1,791 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VApp.js should allow a custom id 1`] = `
+
+<div data-app="true"
+     class="application theme--light"
+     id="inspire"
+>
+  <div class="application--wrap">
+  </div>
+</div>
+
+`;
+
+exports[`VApp.js should match a snapshot 1`] = `
+
+<div data-app="true"
+     class="application theme--light"
+     id="app"
+>
+  <div class="application--wrap">
+  </div>
+</div>
+
+`;
+
+exports[`VApp.js should watch theme 1`] = `
+<style
+  id="vuetify-theme-stylesheet"
+  type="text/css"
+>
+  a { color: #1976d2; }
+.primary {
+  background-color: #1976d2 !important;
+  border-color: #1976d2 !important;
+}
+.primary--text {
+  color: #1976d2 !important;
+}
+.primary--text input,
+.primary--text textarea {
+  caret-color: #1976d2 !important;
+}
+.primary.lighten-5 {
+  background-color: #c7fdff !important;
+  border-color: #c7fdff !important;
+}
+.primary--text.text--lighten-5 {
+  color: #c7fdff !important;
+}
+.primary--text.text--lighten-5 input,
+.primary--text.text--lighten-5 textarea {
+  caret-color: #c7fdff !important;
+}
+.primary.lighten-4 {
+  background-color: #a8e0ff !important;
+  border-color: #a8e0ff !important;
+}
+.primary--text.text--lighten-4 {
+  color: #a8e0ff !important;
+}
+.primary--text.text--lighten-4 input,
+.primary--text.text--lighten-4 textarea {
+  caret-color: #a8e0ff !important;
+}
+.primary.lighten-3 {
+  background-color: #8ac5ff !important;
+  border-color: #8ac5ff !important;
+}
+.primary--text.text--lighten-3 {
+  color: #8ac5ff !important;
+}
+.primary--text.text--lighten-3 input,
+.primary--text.text--lighten-3 textarea {
+  caret-color: #8ac5ff !important;
+}
+.primary.lighten-2 {
+  background-color: #6aaaff !important;
+  border-color: #6aaaff !important;
+}
+.primary--text.text--lighten-2 {
+  color: #6aaaff !important;
+}
+.primary--text.text--lighten-2 input,
+.primary--text.text--lighten-2 textarea {
+  caret-color: #6aaaff !important;
+}
+.primary.lighten-1 {
+  background-color: #488fef !important;
+  border-color: #488fef !important;
+}
+.primary--text.text--lighten-1 {
+  color: #488fef !important;
+}
+.primary--text.text--lighten-1 input,
+.primary--text.text--lighten-1 textarea {
+  caret-color: #488fef !important;
+}
+.primary.darken-1 {
+  background-color: #005eb6 !important;
+  border-color: #005eb6 !important;
+}
+.primary--text.text--darken-1 {
+  color: #005eb6 !important;
+}
+.primary--text.text--darken-1 input,
+.primary--text.text--darken-1 textarea {
+  caret-color: #005eb6 !important;
+}
+.primary.darken-2 {
+  background-color: #00479b !important;
+  border-color: #00479b !important;
+}
+.primary--text.text--darken-2 {
+  color: #00479b !important;
+}
+.primary--text.text--darken-2 input,
+.primary--text.text--darken-2 textarea {
+  caret-color: #00479b !important;
+}
+.primary.darken-3 {
+  background-color: #003180 !important;
+  border-color: #003180 !important;
+}
+.primary--text.text--darken-3 {
+  color: #003180 !important;
+}
+.primary--text.text--darken-3 input,
+.primary--text.text--darken-3 textarea {
+  caret-color: #003180 !important;
+}
+.primary.darken-4 {
+  background-color: #001e67 !important;
+  border-color: #001e67 !important;
+}
+.primary--text.text--darken-4 {
+  color: #001e67 !important;
+}
+.primary--text.text--darken-4 input,
+.primary--text.text--darken-4 textarea {
+  caret-color: #001e67 !important;
+}
+.secondary {
+  background-color: #424242 !important;
+  border-color: #424242 !important;
+}
+.secondary--text {
+  color: #424242 !important;
+}
+.secondary--text input,
+.secondary--text textarea {
+  caret-color: #424242 !important;
+}
+.secondary.lighten-5 {
+  background-color: #c1c1c1 !important;
+  border-color: #c1c1c1 !important;
+}
+.secondary--text.text--lighten-5 {
+  color: #c1c1c1 !important;
+}
+.secondary--text.text--lighten-5 input,
+.secondary--text.text--lighten-5 textarea {
+  caret-color: #c1c1c1 !important;
+}
+.secondary.lighten-4 {
+  background-color: #a6a6a6 !important;
+  border-color: #a6a6a6 !important;
+}
+.secondary--text.text--lighten-4 {
+  color: #a6a6a6 !important;
+}
+.secondary--text.text--lighten-4 input,
+.secondary--text.text--lighten-4 textarea {
+  caret-color: #a6a6a6 !important;
+}
+.secondary.lighten-3 {
+  background-color: #8b8b8b !important;
+  border-color: #8b8b8b !important;
+}
+.secondary--text.text--lighten-3 {
+  color: #8b8b8b !important;
+}
+.secondary--text.text--lighten-3 input,
+.secondary--text.text--lighten-3 textarea {
+  caret-color: #8b8b8b !important;
+}
+.secondary.lighten-2 {
+  background-color: #727272 !important;
+  border-color: #727272 !important;
+}
+.secondary--text.text--lighten-2 {
+  color: #727272 !important;
+}
+.secondary--text.text--lighten-2 input,
+.secondary--text.text--lighten-2 textarea {
+  caret-color: #727272 !important;
+}
+.secondary.lighten-1 {
+  background-color: #595959 !important;
+  border-color: #595959 !important;
+}
+.secondary--text.text--lighten-1 {
+  color: #595959 !important;
+}
+.secondary--text.text--lighten-1 input,
+.secondary--text.text--lighten-1 textarea {
+  caret-color: #595959 !important;
+}
+.secondary.darken-1 {
+  background-color: #2c2c2c !important;
+  border-color: #2c2c2c !important;
+}
+.secondary--text.text--darken-1 {
+  color: #2c2c2c !important;
+}
+.secondary--text.text--darken-1 input,
+.secondary--text.text--darken-1 textarea {
+  caret-color: #2c2c2c !important;
+}
+.secondary.darken-2 {
+  background-color: #171717 !important;
+  border-color: #171717 !important;
+}
+.secondary--text.text--darken-2 {
+  color: #171717 !important;
+}
+.secondary--text.text--darken-2 input,
+.secondary--text.text--darken-2 textarea {
+  caret-color: #171717 !important;
+}
+.secondary.darken-3 {
+  background-color: #000000 !important;
+  border-color: #000000 !important;
+}
+.secondary--text.text--darken-3 {
+  color: #000000 !important;
+}
+.secondary--text.text--darken-3 input,
+.secondary--text.text--darken-3 textarea {
+  caret-color: #000000 !important;
+}
+.secondary.darken-4 {
+  background-color: #000000 !important;
+  border-color: #000000 !important;
+}
+.secondary--text.text--darken-4 {
+  color: #000000 !important;
+}
+.secondary--text.text--darken-4 input,
+.secondary--text.text--darken-4 textarea {
+  caret-color: #000000 !important;
+}
+.accent {
+  background-color: #82b1ff !important;
+  border-color: #82b1ff !important;
+}
+.accent--text {
+  color: #82b1ff !important;
+}
+.accent--text input,
+.accent--text textarea {
+  caret-color: #82b1ff !important;
+}
+.accent.lighten-5 {
+  background-color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+.accent--text.text--lighten-5 {
+  color: #ffffff !important;
+}
+.accent--text.text--lighten-5 input,
+.accent--text.text--lighten-5 textarea {
+  caret-color: #ffffff !important;
+}
+.accent.lighten-4 {
+  background-color: #f8ffff !important;
+  border-color: #f8ffff !important;
+}
+.accent--text.text--lighten-4 {
+  color: #f8ffff !important;
+}
+.accent--text.text--lighten-4 input,
+.accent--text.text--lighten-4 textarea {
+  caret-color: #f8ffff !important;
+}
+.accent.lighten-3 {
+  background-color: #daffff !important;
+  border-color: #daffff !important;
+}
+.accent--text.text--lighten-3 {
+  color: #daffff !important;
+}
+.accent--text.text--lighten-3 input,
+.accent--text.text--lighten-3 textarea {
+  caret-color: #daffff !important;
+}
+.accent.lighten-2 {
+  background-color: #bce8ff !important;
+  border-color: #bce8ff !important;
+}
+.accent--text.text--lighten-2 {
+  color: #bce8ff !important;
+}
+.accent--text.text--lighten-2 input,
+.accent--text.text--lighten-2 textarea {
+  caret-color: #bce8ff !important;
+}
+.accent.lighten-1 {
+  background-color: #9fccff !important;
+  border-color: #9fccff !important;
+}
+.accent--text.text--lighten-1 {
+  color: #9fccff !important;
+}
+.accent--text.text--lighten-1 input,
+.accent--text.text--lighten-1 textarea {
+  caret-color: #9fccff !important;
+}
+.accent.darken-1 {
+  background-color: #6596e2 !important;
+  border-color: #6596e2 !important;
+}
+.accent--text.text--darken-1 {
+  color: #6596e2 !important;
+}
+.accent--text.text--darken-1 input,
+.accent--text.text--darken-1 textarea {
+  caret-color: #6596e2 !important;
+}
+.accent.darken-2 {
+  background-color: #467dc6 !important;
+  border-color: #467dc6 !important;
+}
+.accent--text.text--darken-2 {
+  color: #467dc6 !important;
+}
+.accent--text.text--darken-2 input,
+.accent--text.text--darken-2 textarea {
+  caret-color: #467dc6 !important;
+}
+.accent.darken-3 {
+  background-color: #2364aa !important;
+  border-color: #2364aa !important;
+}
+.accent--text.text--darken-3 {
+  color: #2364aa !important;
+}
+.accent--text.text--darken-3 input,
+.accent--text.text--darken-3 textarea {
+  caret-color: #2364aa !important;
+}
+.accent.darken-4 {
+  background-color: #004c90 !important;
+  border-color: #004c90 !important;
+}
+.accent--text.text--darken-4 {
+  color: #004c90 !important;
+}
+.accent--text.text--darken-4 input,
+.accent--text.text--darken-4 textarea {
+  caret-color: #004c90 !important;
+}
+.error {
+  background-color: #ff5252 !important;
+  border-color: #ff5252 !important;
+}
+.error--text {
+  color: #ff5252 !important;
+}
+.error--text input,
+.error--text textarea {
+  caret-color: #ff5252 !important;
+}
+.info {
+  background-color: #2196f3 !important;
+  border-color: #2196f3 !important;
+}
+.info--text {
+  color: #2196f3 !important;
+}
+.info--text input,
+.info--text textarea {
+  caret-color: #2196f3 !important;
+}
+.success {
+  background-color: #4caf50 !important;
+  border-color: #4caf50 !important;
+}
+.success--text {
+  color: #4caf50 !important;
+}
+.success--text input,
+.success--text textarea {
+  caret-color: #4caf50 !important;
+}
+.warning {
+  background-color: #ffc107 !important;
+  border-color: #ffc107 !important;
+}
+.warning--text {
+  color: #ffc107 !important;
+}
+.warning--text input,
+.warning--text textarea {
+  caret-color: #ffc107 !important;
+}
+</style>
+`;
+
+exports[`VApp.js should watch theme 2`] = `
+<style
+  id="vuetify-theme-stylesheet"
+  type="text/css"
+>
+  a { color: #000000; }
+.primary {
+  background-color: #000000 !important;
+  border-color: #000000 !important;
+}
+.primary--text {
+  color: #000000 !important;
+}
+.primary--text input,
+.primary--text textarea {
+  caret-color: #000000 !important;
+}
+.primary.lighten-5 {
+  background-color: #777777 !important;
+  border-color: #777777 !important;
+}
+.primary--text.text--lighten-5 {
+  color: #777777 !important;
+}
+.primary--text.text--lighten-5 input,
+.primary--text.text--lighten-5 textarea {
+  caret-color: #777777 !important;
+}
+.primary.lighten-4 {
+  background-color: #5e5e5e !important;
+  border-color: #5e5e5e !important;
+}
+.primary--text.text--lighten-4 {
+  color: #5e5e5e !important;
+}
+.primary--text.text--lighten-4 input,
+.primary--text.text--lighten-4 textarea {
+  caret-color: #5e5e5e !important;
+}
+.primary.lighten-3 {
+  background-color: #474747 !important;
+  border-color: #474747 !important;
+}
+.primary--text.text--lighten-3 {
+  color: #474747 !important;
+}
+.primary--text.text--lighten-3 input,
+.primary--text.text--lighten-3 textarea {
+  caret-color: #474747 !important;
+}
+.primary.lighten-2 {
+  background-color: #303030 !important;
+  border-color: #303030 !important;
+}
+.primary--text.text--lighten-2 {
+  color: #303030 !important;
+}
+.primary--text.text--lighten-2 input,
+.primary--text.text--lighten-2 textarea {
+  caret-color: #303030 !important;
+}
+.primary.lighten-1 {
+  background-color: #1b1b1b !important;
+  border-color: #1b1b1b !important;
+}
+.primary--text.text--lighten-1 {
+  color: #1b1b1b !important;
+}
+.primary--text.text--lighten-1 input,
+.primary--text.text--lighten-1 textarea {
+  caret-color: #1b1b1b !important;
+}
+.primary.darken-1 {
+  background-color: #000000 !important;
+  border-color: #000000 !important;
+}
+.primary--text.text--darken-1 {
+  color: #000000 !important;
+}
+.primary--text.text--darken-1 input,
+.primary--text.text--darken-1 textarea {
+  caret-color: #000000 !important;
+}
+.primary.darken-2 {
+  background-color: #000000 !important;
+  border-color: #000000 !important;
+}
+.primary--text.text--darken-2 {
+  color: #000000 !important;
+}
+.primary--text.text--darken-2 input,
+.primary--text.text--darken-2 textarea {
+  caret-color: #000000 !important;
+}
+.primary.darken-3 {
+  background-color: #000000 !important;
+  border-color: #000000 !important;
+}
+.primary--text.text--darken-3 {
+  color: #000000 !important;
+}
+.primary--text.text--darken-3 input,
+.primary--text.text--darken-3 textarea {
+  caret-color: #000000 !important;
+}
+.primary.darken-4 {
+  background-color: #000000 !important;
+  border-color: #000000 !important;
+}
+.primary--text.text--darken-4 {
+  color: #000000 !important;
+}
+.primary--text.text--darken-4 input,
+.primary--text.text--darken-4 textarea {
+  caret-color: #000000 !important;
+}
+.secondary {
+  background-color: #424242 !important;
+  border-color: #424242 !important;
+}
+.secondary--text {
+  color: #424242 !important;
+}
+.secondary--text input,
+.secondary--text textarea {
+  caret-color: #424242 !important;
+}
+.secondary.lighten-5 {
+  background-color: #c1c1c1 !important;
+  border-color: #c1c1c1 !important;
+}
+.secondary--text.text--lighten-5 {
+  color: #c1c1c1 !important;
+}
+.secondary--text.text--lighten-5 input,
+.secondary--text.text--lighten-5 textarea {
+  caret-color: #c1c1c1 !important;
+}
+.secondary.lighten-4 {
+  background-color: #a6a6a6 !important;
+  border-color: #a6a6a6 !important;
+}
+.secondary--text.text--lighten-4 {
+  color: #a6a6a6 !important;
+}
+.secondary--text.text--lighten-4 input,
+.secondary--text.text--lighten-4 textarea {
+  caret-color: #a6a6a6 !important;
+}
+.secondary.lighten-3 {
+  background-color: #8b8b8b !important;
+  border-color: #8b8b8b !important;
+}
+.secondary--text.text--lighten-3 {
+  color: #8b8b8b !important;
+}
+.secondary--text.text--lighten-3 input,
+.secondary--text.text--lighten-3 textarea {
+  caret-color: #8b8b8b !important;
+}
+.secondary.lighten-2 {
+  background-color: #727272 !important;
+  border-color: #727272 !important;
+}
+.secondary--text.text--lighten-2 {
+  color: #727272 !important;
+}
+.secondary--text.text--lighten-2 input,
+.secondary--text.text--lighten-2 textarea {
+  caret-color: #727272 !important;
+}
+.secondary.lighten-1 {
+  background-color: #595959 !important;
+  border-color: #595959 !important;
+}
+.secondary--text.text--lighten-1 {
+  color: #595959 !important;
+}
+.secondary--text.text--lighten-1 input,
+.secondary--text.text--lighten-1 textarea {
+  caret-color: #595959 !important;
+}
+.secondary.darken-1 {
+  background-color: #2c2c2c !important;
+  border-color: #2c2c2c !important;
+}
+.secondary--text.text--darken-1 {
+  color: #2c2c2c !important;
+}
+.secondary--text.text--darken-1 input,
+.secondary--text.text--darken-1 textarea {
+  caret-color: #2c2c2c !important;
+}
+.secondary.darken-2 {
+  background-color: #171717 !important;
+  border-color: #171717 !important;
+}
+.secondary--text.text--darken-2 {
+  color: #171717 !important;
+}
+.secondary--text.text--darken-2 input,
+.secondary--text.text--darken-2 textarea {
+  caret-color: #171717 !important;
+}
+.secondary.darken-3 {
+  background-color: #000000 !important;
+  border-color: #000000 !important;
+}
+.secondary--text.text--darken-3 {
+  color: #000000 !important;
+}
+.secondary--text.text--darken-3 input,
+.secondary--text.text--darken-3 textarea {
+  caret-color: #000000 !important;
+}
+.secondary.darken-4 {
+  background-color: #000000 !important;
+  border-color: #000000 !important;
+}
+.secondary--text.text--darken-4 {
+  color: #000000 !important;
+}
+.secondary--text.text--darken-4 input,
+.secondary--text.text--darken-4 textarea {
+  caret-color: #000000 !important;
+}
+.accent {
+  background-color: #82b1ff !important;
+  border-color: #82b1ff !important;
+}
+.accent--text {
+  color: #82b1ff !important;
+}
+.accent--text input,
+.accent--text textarea {
+  caret-color: #82b1ff !important;
+}
+.accent.lighten-5 {
+  background-color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+.accent--text.text--lighten-5 {
+  color: #ffffff !important;
+}
+.accent--text.text--lighten-5 input,
+.accent--text.text--lighten-5 textarea {
+  caret-color: #ffffff !important;
+}
+.accent.lighten-4 {
+  background-color: #f8ffff !important;
+  border-color: #f8ffff !important;
+}
+.accent--text.text--lighten-4 {
+  color: #f8ffff !important;
+}
+.accent--text.text--lighten-4 input,
+.accent--text.text--lighten-4 textarea {
+  caret-color: #f8ffff !important;
+}
+.accent.lighten-3 {
+  background-color: #daffff !important;
+  border-color: #daffff !important;
+}
+.accent--text.text--lighten-3 {
+  color: #daffff !important;
+}
+.accent--text.text--lighten-3 input,
+.accent--text.text--lighten-3 textarea {
+  caret-color: #daffff !important;
+}
+.accent.lighten-2 {
+  background-color: #bce8ff !important;
+  border-color: #bce8ff !important;
+}
+.accent--text.text--lighten-2 {
+  color: #bce8ff !important;
+}
+.accent--text.text--lighten-2 input,
+.accent--text.text--lighten-2 textarea {
+  caret-color: #bce8ff !important;
+}
+.accent.lighten-1 {
+  background-color: #9fccff !important;
+  border-color: #9fccff !important;
+}
+.accent--text.text--lighten-1 {
+  color: #9fccff !important;
+}
+.accent--text.text--lighten-1 input,
+.accent--text.text--lighten-1 textarea {
+  caret-color: #9fccff !important;
+}
+.accent.darken-1 {
+  background-color: #6596e2 !important;
+  border-color: #6596e2 !important;
+}
+.accent--text.text--darken-1 {
+  color: #6596e2 !important;
+}
+.accent--text.text--darken-1 input,
+.accent--text.text--darken-1 textarea {
+  caret-color: #6596e2 !important;
+}
+.accent.darken-2 {
+  background-color: #467dc6 !important;
+  border-color: #467dc6 !important;
+}
+.accent--text.text--darken-2 {
+  color: #467dc6 !important;
+}
+.accent--text.text--darken-2 input,
+.accent--text.text--darken-2 textarea {
+  caret-color: #467dc6 !important;
+}
+.accent.darken-3 {
+  background-color: #2364aa !important;
+  border-color: #2364aa !important;
+}
+.accent--text.text--darken-3 {
+  color: #2364aa !important;
+}
+.accent--text.text--darken-3 input,
+.accent--text.text--darken-3 textarea {
+  caret-color: #2364aa !important;
+}
+.accent.darken-4 {
+  background-color: #004c90 !important;
+  border-color: #004c90 !important;
+}
+.accent--text.text--darken-4 {
+  color: #004c90 !important;
+}
+.accent--text.text--darken-4 input,
+.accent--text.text--darken-4 textarea {
+  caret-color: #004c90 !important;
+}
+.error {
+  background-color: #ff5252 !important;
+  border-color: #ff5252 !important;
+}
+.error--text {
+  color: #ff5252 !important;
+}
+.error--text input,
+.error--text textarea {
+  caret-color: #ff5252 !important;
+}
+.info {
+  background-color: #2196f3 !important;
+  border-color: #2196f3 !important;
+}
+.info--text {
+  color: #2196f3 !important;
+}
+.info--text input,
+.info--text textarea {
+  caret-color: #2196f3 !important;
+}
+.success {
+  background-color: #4caf50 !important;
+  border-color: #4caf50 !important;
+}
+.success--text {
+  color: #4caf50 !important;
+}
+.success--text input,
+.success--text textarea {
+  caret-color: #4caf50 !important;
+}
+.warning {
+  background-color: #ffc107 !important;
+  border-color: #ffc107 !important;
+}
+.warning--text {
+  color: #ffc107 !important;
+}
+.warning--text input,
+.warning--text textarea {
+  caret-color: #ffc107 !important;
+}
+</style>
+`;

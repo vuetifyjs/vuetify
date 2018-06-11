@@ -70,18 +70,20 @@ export default {
      */
     updateApplication () {
       return isNaN(this.height)
-        ? this.$el.clientHeight
+        ? this.$el
+          ? this.$el.clientHeight
+          : 0
         : this.height
     }
   },
 
   render (h) {
     const data = {
-      staticClass: 'footer',
+      staticClass: 'v-footer',
       'class': this.addBackgroundColorClassChecks({
-        'footer--absolute': this.absolute,
-        'footer--fixed': !this.absolute && (this.app || this.fixed),
-        'footer--inset': this.inset,
+        'v-footer--absolute': this.absolute,
+        'v-footer--fixed': !this.absolute && (this.app || this.fixed),
+        'v-footer--inset': this.inset,
         'theme--dark': this.dark,
         'theme--light': this.light
       }),

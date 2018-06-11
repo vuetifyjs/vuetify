@@ -10,10 +10,6 @@ import Themeable from '../../mixins/themeable'
 export default {
   name: 'v-picker',
 
-  components: {
-    VCard
-  },
-
   mixins: [Colorable, Themeable],
 
   data () {
@@ -47,9 +43,9 @@ export default {
   methods: {
     genTitle () {
       return this.$createElement('div', {
-        staticClass: 'picker__title',
+        staticClass: 'v-picker__title',
         'class': this.addBackgroundColorClassChecks({
-          'picker__title--landscape': this.landscape
+          'v-picker__title--landscape': this.landscape
         }, this.computedTitleColor)
       }, this.$slots.title)
     },
@@ -62,7 +58,10 @@ export default {
     },
     genBody () {
       return this.$createElement('div', {
-        staticClass: 'picker__body',
+        staticClass: 'v-picker__body',
+        'class': {
+          ...this.themeClasses
+        },
         style: this.fullWidth ? undefined : {
           width: this.width + 'px'
         }
@@ -72,16 +71,16 @@ export default {
     },
     genActions () {
       return this.$createElement('div', {
-        staticClass: 'picker__actions card__actions'
+        staticClass: 'v-picker__actions v-card__actions'
       }, this.$slots.actions)
     }
   },
 
   render (h) {
-    return h('v-card', {
-      staticClass: 'picker',
+    return h(VCard, {
+      staticClass: 'v-picker',
       'class': {
-        'picker--landscape': this.landscape,
+        'v-picker--landscape': this.landscape,
         ...this.themeClasses
       }
     }, [

@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VCarouselItem.js should render component and match snapshot 1`] = `
+
+<div class="v-jumbotron"
+     style="height: 100%; display: none;"
+>
+  <div class="v-jumbotron__wrapper">
+    <div class="v-jumbotron__background">
+    </div>
+    <div class="v-jumbotron__content">
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VCarouselItem.js should throw warning when not used inside v-carousel 1`] = `
+
+<div class="v-jumbotron"
+     style="height: 100%; display: none;"
+>
+  <div class="v-jumbotron__wrapper">
+    <div class="v-jumbotron__background">
+    </div>
+    <div class="v-jumbotron__content">
+    </div>
+  </div>
+</div>
+
+`;

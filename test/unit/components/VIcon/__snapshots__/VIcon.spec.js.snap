@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VIcon.js set font size from helper prop 1`] = `
+
+<i aria-hidden="true"
+   class="v-icon material-icons"
+   style="font-size: 16px;"
+>
+</i>
+
+`;
+
+exports[`VIcon.js set font size from helper prop 2`] = `
+
+<i aria-hidden="true"
+   class="v-icon material-icons"
+   style="font-size: 28px;"
+>
+</i>
+
+`;
+
+exports[`VIcon.js set font size from helper prop 3`] = `
+
+<i aria-hidden="true"
+   class="v-icon material-icons"
+   style="font-size: 36px;"
+>
+</i>
+
+`;
+
+exports[`VIcon.js set font size from helper prop 4`] = `
+
+<i aria-hidden="true"
+   class="v-icon material-icons"
+   style="font-size: 40px;"
+>
+</i>
+
+`;

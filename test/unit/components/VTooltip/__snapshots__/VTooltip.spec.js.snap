@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VTooltip.js should render component and match snapshot 1`] = `
+
+<span class="v-tooltip">
+  <div class="v-tooltip__content"
+       style="left: 0px; max-width: auto; opacity: 0; top: 12px; z-index: 0; display: none;"
+  >
+    <span>
+      content
+    </span>
+  </div>
+  <span>
+    <span>
+      activator
+    </span>
+  </span>
+</span>
+
+`;
+
+exports[`VTooltip.js should render component and match snapshot 2`] = `
+
+<span class="v-tooltip">
+  <div class="v-tooltip__content menuable__content__active"
+       style="left: 0px; max-width: auto; opacity: 0.9; top: 12px; z-index: 8; display: none; z-index: 8;"
+  >
+    <span>
+      content
+    </span>
+  </div>
+  <span>
+    <span>
+      activator
+    </span>
+  </span>
+</span>
+
+`;
+
+exports[`VTooltip.js should render component with custom lazy and match snapshot 1`] = `
+
+<span class="v-tooltip">
+  <div class="v-tooltip__content"
+       style="left: 0px; max-width: auto; opacity: 0; top: 12px; z-index: 0; display: none;"
+  >
+  </div>
+  <span>
+    <span>
+      activator
+    </span>
+  </span>
+</span>
+
+`;
+
+exports[`VTooltip.js should render component with value=true and match snapshot 1`] = `
+
+<span class="v-tooltip">
+  <div class="v-tooltip__content menuable__content__active"
+       style="left: 0px; max-width: auto; opacity: 0.9; top: 12px; z-index: 8; display: none;"
+  >
+    <span>
+      content
+    </span>
+  </div>
+  <span>
+    <span>
+      activator
+    </span>
+  </span>
+</span>
+
+`;
+
+exports[`VTooltip.js should render component with zIndex prop and match snapshot 1`] = `
+
+<span class="v-tooltip">
+  <div class="v-tooltip__content"
+       style="left: 0px; max-width: auto; opacity: 0; top: 12px; z-index: 42; display: none;"
+  >
+  </div>
+  <span>
+  </span>
+</span>
+
+`;

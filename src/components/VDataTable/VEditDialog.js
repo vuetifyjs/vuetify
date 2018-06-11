@@ -3,6 +3,12 @@ import '../../stylus/components/_small-dialog.styl'
 // Mixins
 import Returnable from '../../mixins/returnable'
 
+// Utils
+import { keyCodes } from '../../util/helpers'
+
+import VBtn from '../VBtn'
+import VMenu from '../VMenu'
+
 export default {
   name: 'v-edit-dialog',
 
@@ -45,7 +51,7 @@ export default {
       input && input.focus()
     },
     genButton (fn, text) {
-      return this.$createElement('v-btn', {
+      return this.$createElement(VBtn, {
         props: {
           flat: true,
           color: 'primary',
@@ -56,7 +62,7 @@ export default {
     },
     genActions () {
       return this.$createElement('div', {
-        'class': 'small-dialog__actions'
+        'class': 'v-small-dialog__actions'
       }, [
         this.genButton(this.cancel, this.cancelText),
         this.genButton(() => {
@@ -70,8 +76,8 @@ export default {
         on: {
           keydown: e => {
             const input = this.$refs.content.querySelector('input')
-            e.keyCode === 27 && this.cancel()
-            if (e.keyCode === 13 && input) {
+            e.keyCode === keyCodes.esc && this.cancel()
+            if (e.keyCode === keyCodes.enter && input) {
               this.save(input.value)
               this.$emit('save')
             }
@@ -83,10 +89,10 @@ export default {
   },
 
   render (h) {
-    return h('v-menu', {
-      'class': 'small-dialog',
+    return h(VMenu, {
+      'class': 'v-small-dialog',
       props: {
-        contentClass: 'small-dialog__content',
+        contentClass: 'v-small-dialog__content',
         transition: this.transition,
         origin: 'top right',
         right: true,

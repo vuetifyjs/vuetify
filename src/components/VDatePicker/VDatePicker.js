@@ -1,7 +1,4 @@
 // Components
-import VBtn from '../VBtn'
-import VCard from '../VCard'
-import VIcon from '../VIcon'
 import VDatePickerTitle from './VDatePickerTitle'
 import VDatePickerHeader from './VDatePickerHeader'
 import VDatePickerDateTable from './VDatePickerDateTable'
@@ -17,17 +14,6 @@ import isDateAllowed from './util/isDateAllowed'
 
 export default {
   name: 'v-date-picker',
-
-  components: {
-    VBtn,
-    VCard,
-    VIcon,
-    VDatePickerTitle,
-    VDatePickerHeader,
-    VDatePickerDateTable,
-    VDatePickerMonthTable,
-    VDatePickerYears
-  },
 
   mixins: [Picker],
 
@@ -91,12 +77,12 @@ export default {
     },
     nextIcon: {
       type: String,
-      default: 'chevron_right'
+      default: '$vuetify.icons.next'
     },
     pickerDate: String,
     prevIcon: {
       type: String,
-      default: 'chevron_left'
+      default: '$vuetify.icons.prev'
     },
     reactive: Boolean,
     readonly: Boolean,
@@ -248,7 +234,7 @@ export default {
       this.$emit('change', this.inputDate)
     },
     genPickerTitle () {
-      return this.$createElement('v-date-picker-title', {
+      return this.$createElement(VDatePickerTitle, {
         props: {
           date: this.value ? this.formatters.titleDate(this.value) : '',
           selectingYear: this.activePicker === 'YEAR',
@@ -266,12 +252,14 @@ export default {
       })
     },
     genTableHeader () {
-      return this.$createElement('v-date-picker-header', {
+      return this.$createElement(VDatePickerHeader, {
         props: {
           nextIcon: this.nextIcon,
           color: this.color,
+          dark: this.dark,
           disabled: this.readonly,
           format: this.headerDateFormat,
+          light: this.light,
           locale: this.locale,
           min: this.activePicker === 'DATE' ? this.minMonth : this.minYear,
           max: this.activePicker === 'DATE' ? this.maxMonth : this.maxYear,
@@ -285,16 +273,18 @@ export default {
       })
     },
     genDateTable () {
-      return this.$createElement('v-date-picker-date-table', {
+      return this.$createElement(VDatePickerDateTable, {
         props: {
           allowedDates: this.allowedDates,
           color: this.color,
           current: this.current,
+          dark: this.dark,
           disabled: this.readonly,
           events: this.events,
           eventColor: this.eventColor,
           firstDayOfWeek: this.firstDayOfWeek,
           format: this.dayFormat,
+          light: this.light,
           locale: this.locale,
           min: this.min,
           max: this.max,
@@ -310,13 +300,15 @@ export default {
       })
     },
     genMonthTable () {
-      return this.$createElement('v-date-picker-month-table', {
+      return this.$createElement(VDatePickerMonthTable, {
         props: {
           allowedDates: this.type === 'month' ? this.allowedDates : null,
           color: this.color,
           current: this.current ? this.sanitizeDateString(this.current, 'month') : null,
+          dark: this.dark,
           disabled: this.readonly,
           format: this.monthFormat,
+          light: this.light,
           locale: this.locale,
           min: this.minMonth,
           max: this.maxMonth,
@@ -332,7 +324,7 @@ export default {
       })
     },
     genYears () {
-      return this.$createElement('v-date-picker-years', {
+      return this.$createElement(VDatePickerYears, {
         props: {
           color: this.color,
           format: this.yearFormat,
@@ -390,7 +382,7 @@ export default {
     this.setInputDate()
   },
 
-  render (h) {
-    return this.genPicker('picker--date')
+  render () {
+    return this.genPicker('v-picker--date')
   }
 }
