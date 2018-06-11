@@ -122,15 +122,15 @@ export default {
         this.$slots.default
       ]
     },
-    genIcon (type, cb) {
+    // TODO: remove shouldDeprecate (2.0), used for clearIcon
+    genIcon (type, cb, shouldDeprecate = true) {
       const icon = this[`${type}Icon`]
       const eventName = `click:${type}`
+      cb = cb || this[`${type}IconCb`]
 
-      if (type) {
+      if (shouldDeprecate && type && cb) {
         deprecate(`:${type}-icon-cb`, `@click:${type}`, this)
       }
-
-      cb = cb || this[`${type}IconCb`]
 
       const data = {
         props: {

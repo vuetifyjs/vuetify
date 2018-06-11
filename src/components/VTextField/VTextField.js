@@ -236,8 +236,10 @@ export default {
       if (this.clearIconCb) deprecate(':clear-icon-cb', '@click:clear', this)
 
       return this.genSlot('append', 'inner', [
-        this.genIcon(icon,
-          (this.$listeners['click:clear'] ? false : this.clearIconCb) || this.clearableCallback
+        this.genIcon(
+          icon,
+          (!this.$listeners['click:clear'] && this.clearIconCb) || this.clearableCallback,
+          false
         )
       ])
     },
