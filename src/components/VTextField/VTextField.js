@@ -18,6 +18,7 @@ import Ripple from '../../directives/ripple'
 import {
   keyCodes
 } from '../../util/helpers'
+import { deprecate } from '../../util/console'
 
 const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
 
@@ -41,6 +42,7 @@ export default {
 
   props: {
     appendOuterIcon: String,
+    /** @deprecated */
     appendOuterIconCb: Function,
     autofocus: Boolean,
     box: Boolean,
@@ -231,8 +233,12 @@ export default {
         ? false
         : 'clear'
 
+      if (this.clearIconCb) deprecate(':clear-icon-cb', '@click:clear', this)
+
       return this.genSlot('append', 'inner', [
-        this.genIcon(icon, this.clearIconCb || this.clearableCallback)
+        this.genIcon(icon,
+          (this.$listeners['click:clear'] ? false : this.clearIconCb) || this.clearableCallback
+        )
       ])
     },
     genCounter () {

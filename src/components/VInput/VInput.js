@@ -16,6 +16,7 @@ import {
   convertToUnit,
   kebabCase
 } from '../../util/helpers'
+import { deprecate } from '../../util/console'
 
 export default {
   name: 'v-input',
@@ -33,6 +34,7 @@ export default {
 
   props: {
     appendIcon: String,
+    /** @deprecated */
     appendIconCb: Function,
     disabled: Boolean,
     height: [Number, String],
@@ -41,6 +43,7 @@ export default {
     label: String,
     persistentHint: Boolean,
     prependIcon: String,
+    /** @deprecated */
     prependIconCb: Function,
     readonly: Boolean,
     tabindex: { default: 0 },
@@ -121,6 +124,12 @@ export default {
     },
     genIcon (type, cb) {
       const icon = this[`${type}Icon`]
+      const eventName = `click:${type}`
+
+      if (type) {
+        deprecate(`:${type}-icon-cb`, `@click:${type}`, this)
+      }
+
       cb = cb || this[`${type}IconCb`]
 
       const data = {
@@ -128,18 +137,18 @@ export default {
           color: this.validationState,
           disabled: this.disabled
         },
-        on: !cb
+        on: !(this.$listeners[eventName] || cb)
           ? null
           : {
             click: e => {
               e.preventDefault()
               e.stopPropagation()
 
-              cb(e)
+              this.$emit(eventName, e)
+              cb && cb(e)
             },
-            // Container has mouseup event
-            // that will trigger menu open
-            // if enclosed
+            // Container has mouseup event that will
+            // trigger menu open if enclosed
             mouseup: e => {
               e.preventDefault()
               e.stopPropagation()
