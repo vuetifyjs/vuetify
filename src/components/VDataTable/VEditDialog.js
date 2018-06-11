@@ -38,13 +38,19 @@ export default {
 
   watch: {
     isActive (val) {
-      val && setTimeout(this.focus, 50) // Give DOM time to paint
+      if (val) {
+        this.$emit('open')
+        setTimeout(this.focus, 50) // Give DOM time to paint
+      } else {
+        this.$emit('close')
+      }
     }
   },
 
   methods: {
     cancel () {
       this.isActive = false
+      this.$emit('cancel')
     },
     focus () {
       const input = this.$refs.content.querySelector('input')
