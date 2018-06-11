@@ -112,7 +112,7 @@ export default {
       this.isActive = !this.isActive
     },
     onKeydown (e) {
-      e.stopPropagation()
+      if (e.target === this.$el) e.stopPropagation()
       if (this.disabled) return
       if (e.keyCode === keyCodes.enter) {
         this.isActive = !this.isActive
