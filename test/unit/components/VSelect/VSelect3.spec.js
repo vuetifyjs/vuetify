@@ -64,4 +64,26 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.vm.getValue(wrapper.vm.items[0])).toBe('foo')
   })
+
+  it('should accept arrays as values', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        items: [
+          { text: 'Foo', value: ['bar'] }
+        ]
+      }
+    })
+
+    const input = jest.fn()
+    wrapper.vm.$on('input', input)
+
+    wrapper.vm.selectItem(wrapper.vm.items[0])
+
+    await wrapper.vm.$nextTick()
+
+    expect(input).toBeCalledWith(['bar'])
+    expect(wrapper.vm.selectedItems).toEqual([
+      { text: 'Foo', value: ['bar'] }
+    ])
+  })
 })

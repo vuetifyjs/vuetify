@@ -647,9 +647,9 @@ export default {
     },
     setSelectedItems () {
       const selectedItems = []
-      const values = Array.isArray(this.internalValue)
-        ? this.internalValue
-        : [this.internalValue]
+      const values = !this.isMulti || !Array.isArray(this.internalValue)
+        ? [this.internalValue]
+        : this.internalValue
 
       for (const value of values) {
         const index = this.allItems.findIndex(v => this.valueComparator(
