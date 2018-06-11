@@ -138,7 +138,7 @@ export default {
       // Create spacing
       if ((this.prefix || this.reverse) &&
         (this.isSingle || !this.isFocused) &&
-        !this.isDirty
+        !this.labelValue
       ) value = 16
 
       // Check if RTL
@@ -159,6 +159,9 @@ export default {
     },
     showLabel () {
       return this.hasLabel && (!this.isSingle || (!this.isLabelActive && !this.placeholder))
+    },
+    labelValue () {
+      return Boolean(!this.isSingle && (this.isFocused || this.isLabelActive || this.placeholder))
     }
   },
 
@@ -266,17 +269,15 @@ export default {
     genLabel () {
       if (!this.showLabel) return null
 
-      const isSingleLine = this.isSingle
       const data = {
         props: {
           absolute: true,
           color: this.validationState,
           disabled: this.disabled,
-          focused: !isSingleLine && (this.isFocused || !!this.validationState),
+          focused: !this.isSingle && (this.isFocused || !!this.validationState),
           left: this.labelPosition.left,
           right: this.labelPosition.right,
-          value: Boolean(!isSingleLine &&
-            (this.isFocused || this.isLabelActive || this.placeholder))
+          value: this.labelValue
         }
       }
 
