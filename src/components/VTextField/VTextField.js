@@ -18,6 +18,7 @@ import Ripple from '../../directives/ripple'
 import {
   keyCodes
 } from '../../util/helpers'
+import { deprecate } from '../../util/console'
 
 const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
 
@@ -41,6 +42,8 @@ export default {
 
   props: {
     appendOuterIcon: String,
+    /** @deprecated */
+    appendOuterIconCb: Function,
     autofocus: Boolean,
     box: Boolean,
     browserAutocomplete: String,
@@ -126,6 +129,36 @@ export default {
     },
     isSolo () {
       return this.solo || this.soloInverted
+    },
+    labelPosition () {
+      let value = 0
+      let left = 'auto'
+      let right = 'auto'
+
+      // Create spacing
+      if ((this.prefix || this.reverse) &&
+        (this.isSingle || !this.isFocused) &&
+        !this.isDirty
+      ) value = 16
+
+      // Check if RTL
+      if (this.$vuetify.rtl) right = value
+      else left = value
+
+      // Check if reversed
+      if (this.reverse) {
+        const direction = right
+        right = left
+        left = direction
+      }
+
+      return {
+        left,
+        right
+      }
+    },
+    showLabel () {
+      return this.hasLabel && (!this.isSingle || (!this.isLabelActive && !this.placeholder))
     }
   },
 
@@ -151,8 +184,6 @@ export default {
           this.$emit('input', this.lazyValue)
         })
       } else this.lazyValue = val
-
-      if (this.internalChange) this.internalChange = false
     }
   },
 
@@ -178,21 +209,36 @@ export default {
 
       if (this.$slots['append-outer']) {
         slot.push(this.$slots['append-outer'])
-      } else if (this.$slots['append-outer-icon']) {
-        slot.push(this.$slots['append-outer-icon'])
       } else if (this.appendOuterIcon) {
         slot.push(this.genIcon('appendOuter'))
       }
 
       return this.genSlot('append', 'outer', slot)
     },
+    genIconSlot () {
+      const slot = []
+
+      if (this.$slots['append']) {
+        slot.push(this.$slots['append'])
+      } else if (this.appendIcon) {
+        slot.push(this.genIcon('append'))
+      }
+
+      return this.genSlot('append', 'inner', slot)
+    },
     genClearIcon () {
-      const icon = !this.clearable || !this.isDirty
+      if (!this.clearable) return null
+
+      const icon = !this.isDirty
         ? false
         : 'clear'
 
+      if (this.clearIconCb) deprecate(':clear-icon-cb', '@click:clear', this)
+
       return this.genSlot('append', 'inner', [
-        this.genIcon(icon, this.clearIconCb || this.clearableCallback)
+        this.genIcon(icon,
+          (this.$listeners['click:clear'] ? false : this.clearIconCb) || this.clearableCallback
+        )
       ])
     },
     genCounter () {
@@ -216,70 +262,25 @@ export default {
       ]
     },
     genLabel () {
-      if (this.isSingle &&
-        (this.isDirty || !!this.placeholder)
-      ) return null
+      if (!this.showLabel) return null
 
       const isSingleLine = this.isSingle
-      let value = 0
-      let left = 'auto'
-      let right = 'auto'
-
-      // Create spacing
-      if ((this.prefix || this.reverse) &&
-        (isSingleLine || !this.isFocused) &&
-        !this.isDirty
-      ) value = 16
-
-      // Check if RTL
-      if (this.$vuetify.rtl) right = value
-      else left = value
-
-      // Check if reversed
-      if (this.reverse) {
-        const direction = right
-        right = left
-        left = direction
-      }
-
       const data = {
         props: {
           absolute: true,
           color: this.validationState,
           disabled: this.disabled,
           focused: !isSingleLine && (this.isFocused || !!this.validationState),
-          left,
-          right,
+          left: this.labelPosition.left,
+          right: this.labelPosition.right,
           value: Boolean(!isSingleLine &&
-            (this.isFocused || this.isDirty || this.placeholder))
+            (this.isFocused || this.isLabelActive || this.placeholder))
         }
       }
 
       if (this.$attrs.id) data.props.for = this.$attrs.id
 
       return this.$createElement(VLabel, data, this.$slots.label || this.label)
-    },
-    genIconSlot () {
-      const slot = []
-
-      if (this.$slots['append']) {
-        slot.push(this.$slots['append'])
-      } else if (this.$slots['append-icon']) {
-        slot.push(this.$slots['append-icon'])
-      } else if (this.appendIcon) {
-        slot.push(this.genIcon('append'))
-      } else if (this.clearable) {
-        // Make sure the slot takes space
-        // so layout doesn't jump when
-        // dirty
-        const icon = !this.isDirty ? false : 'clear'
-
-        slot.push(this.genIcon(icon,
-          this.clearIconCb || this.clearableCallback
-        ))
-      }
-
-      return this.genSlot('append', 'inner', slot)
     },
     genInput () {
       const listeners = Object.assign({}, this.$listeners)
@@ -294,7 +295,6 @@ export default {
           ...this.$attrs,
           autofocus: this.autofocus,
           disabled: this.disabled,
-          required: this.required,
           readonly: this.readonly,
           tabindex: this.tabindex,
           type: this.type,
@@ -366,6 +366,7 @@ export default {
       }
     },
     onInput (e) {
+      this.internalChange = true
       this.mask && this.resetSelections(e.target)
       this.internalValue = e.target.value
       this.badInput = e.target.validity && e.target.validity.badInput
@@ -374,6 +375,8 @@ export default {
       this.internalChange = true
 
       if (e.keyCode === keyCodes.enter) this.$emit('change', this.internalValue)
+
+      this.$emit('keydown', e)
     },
     onMouseDown (e) {
       // Prevent input from being blurred

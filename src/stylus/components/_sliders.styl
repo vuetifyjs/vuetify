@@ -79,6 +79,9 @@ rtl(v-slider-rtl, "v-input--slider")
       .v-input__slot
         margin-bottom: 16px
 
+  &.v-input--is-readonly
+    pointer-events: none
+
   &.v-input--is-disabled
     .v-slider__thumb
       transform: translateY(-50%) scale(.45)
@@ -102,6 +105,8 @@ rtl(v-slider-rtl, "v-input--slider")
     opacity: 0
     padding: 0
     width: 100%
+    font-size: 0
+    min-height: 32px
 
 /** Thumb/Track/Ticks */
 .v-slider

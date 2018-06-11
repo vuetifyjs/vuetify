@@ -123,6 +123,17 @@ test('VTimePicker.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should render dark time picker', async () => {
+    const wrapper = mount(VTimePicker, {
+      propsData: {
+        dark: true
+      }
+    })
+
+    await wrapper.vm.$nextTick()
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it('should render colored time picker', async () => {
     const wrapper = mount(VTimePicker, {
       propsData: {
@@ -215,7 +226,7 @@ test('VTimePicker.js', ({ mount }) => {
     clock.$emit('change')
     expect(wrapper.vm.selectingHour).toBe(false)
     clock.$emit('change')
-    expect(wrapper.vm.selectingHour).toBe(true)
+    expect(wrapper.vm.selectingHour).toBe(false)
   })
 
   it('should change selectingHour when clicked in title', () => {

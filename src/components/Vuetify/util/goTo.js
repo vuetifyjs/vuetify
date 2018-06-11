@@ -38,7 +38,7 @@ function getTargetLocation (target, settings) {
   } else if (typeof target === 'string') {
     const targetEl = document.querySelector(target)
     if (!targetEl) throw new TypeError(`Target element "${target}" not found.`)
-    location = targetEl.offsetTop
+    location = targetEl.getBoundingClientRect().top + window.scrollY
   } else if (typeof target === 'number') {
     location = target
   } else {

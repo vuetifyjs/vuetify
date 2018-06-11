@@ -2,16 +2,21 @@ import application from './mixins/application'
 import theme from './mixins/theme'
 import icons from './mixins/icons'
 import options from './mixins/options'
+import genLang from './mixins/lang'
 import { consoleWarn } from '../../util/console'
 import goTo from './util/goTo'
+import { VueConstructor } from 'vue/types'
+import { Vuetify as VuetifyPlugin } from 'types'
 
-const Vuetify = {
+const Vuetify: VuetifyPlugin = {
   install (Vue, opts = {}) {
-    if (this.installed) return
+    if ((this as any).installed) return
 
-    this.installed = true
+    (this as any).installed = true
 
     checkVueVersion(Vue)
+
+    const lang = genLang(opts.lang)
 
     Vue.prototype.$vuetify = new Vue({
       data: {
@@ -19,12 +24,14 @@ const Vuetify = {
         breakpoint: {},
         dark: false,
         icons: icons(opts.iconfont, opts.icons),
+        lang,
         options: options(opts.options),
         rtl: opts.rtl,
         theme: theme(opts.theme)
       },
       methods: {
-        goTo
+        goTo,
+        t: lang.t.bind(lang)
       }
     })
 
@@ -47,15 +54,16 @@ const Vuetify = {
         Vue.use(component)
       })
     }
-  }
+  },
+  version: __VUETIFY_VERSION__
 }
 
 /* istanbul ignore next */
-function checkVueVersion (Vue) {
-  const vueDep = __REQUIRED_VUE__
+function checkVueVersion (Vue: VueConstructor) {
+  const vueDep = __REQUIRED_VUE__ as string
 
-  const required = vueDep.split('.').map(v => v.replace(/\D/g, ''))
-  const actual = Vue.version.split('.')
+  const required = vueDep.split('.').map(v => v.replace(/\D/g, '')).map(Number)
+  const actual = Vue.version.split('.').map(Number)
 
   // Simple semver caret range comparison
   const passes =

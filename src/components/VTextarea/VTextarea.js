@@ -10,10 +10,6 @@ export default {
 
   extends: VTextField,
 
-  data: () => ({
-    inputHeight: 0
-  }),
-
   props: {
     autoGrow: Boolean,
     noResize: Boolean,
@@ -35,6 +31,7 @@ export default {
       return {
         'v-textarea': true,
         'v-textarea--auto-grow': this.autoGrow,
+        'v-textarea--no-resize': this.noResizeHandle,
         ...VTextField.computed.classes.call(this, null)
       }
     },
@@ -54,43 +51,40 @@ export default {
 
   watch: {
     lazyValue () {
-      this.autoGrow && this.calculateInputHeight()
+      !this.internalChange && this.autoGrow && this.$nextTick(this.calculateInputHeight)
     }
   },
 
   mounted () {
-    this.autoGrow && this.calculateInputHeight()
+    setTimeout(() => {
+      this.autoGrow && this.calculateInputHeight()
+    }, 0)
   },
 
   methods: {
     calculateInputHeight () {
-      this.$nextTick(() => {
-        const height = this.$refs.marker ? this.$refs.marker.clientHeight : 0
+      const input = this.$refs.input
+      if (input) {
+        input.style.height = 0
+        const height = input.scrollHeight
         const minHeight = parseInt(this.rows, 10) * parseFloat(this.rowHeight)
-        this.inputHeight = Math.max(minHeight, height)
-      })
+        // This has to be done ASAP, waiting for Vue
+        // to update the DOM causes ugly layout jumping
+        input.style.height = Math.max(minHeight, height) + 'px'
+      }
     },
     genInput () {
       const input = VTextField.methods.genInput.call(this)
 
       input.tag = 'textarea'
-      if (this.autoGrow) {
-        input.data.style.height = this.inputHeight && `${this.inputHeight}px`
-      }
       delete input.data.attrs.type
       input.data.attrs.rows = this.rows
 
-      return [
-        input,
-        this.genMarker()
-      ]
+      return input
     },
-    genMarker () {
-      return this.$createElement('div', {
-        staticClass: 'v-textarea__mask',
-        domProps: { innerHTML: this.internalValue },
-        ref: 'marker'
-      })
+    onInput (e) {
+      VTextField.methods.onInput.call(this, e)
+      this.autoGrow && this.calculateInputHeight()
     },
     onKeyDown (e) {
       // Prevents closing of a
@@ -103,6 +97,7 @@ export default {
       }
 
       this.internalChange = true
+      this.$emit('keydown', e)
     }
   }
 }

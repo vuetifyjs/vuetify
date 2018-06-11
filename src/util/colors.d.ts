@@ -25,24 +25,28 @@ declare module 'vuetify/es5/util/colors' {
     readonly transparent: string
   }
 
-  export const red: Color
-  export const pink: Color
-  export const purple: Color
-  export const deepPurple: Color
-  export const indigo: Color
-  export const blue: Color
-  export const lightBlue: Color
-  export const cyan: Color
-  export const teal: Color
-  export const green: Color
-  export const lightGreen: Color
-  export const lime: Color
-  export const yellow: Color
-  export const amber: Color
-  export const orange: Color
-  export const deepOrange: Color
-  export const brown: BaseColor
-  export const blueGrey: BaseColor
-  export const grey: BaseColor
-  export const shades: Shade
+  interface Colors {
+    red: Color
+    pink: Color
+    purple: Color
+    deepPurple: Color
+    indigo: Color
+    blue: Color
+    lightBlue: Color
+    cyan: Color
+    teal: Color
+    green: Color
+    lightGreen: Color
+    lime: Color
+    yellow: Color
+    amber: Color
+    orange: Color
+    deepOrange: Color
+    brown: BaseColor
+    blueGrey: BaseColor
+    grey: BaseColor
+    shades: Shade
+  }
+  const colors: Colors
+  export default colors
 }

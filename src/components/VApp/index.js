@@ -5,4 +5,5 @@ VApp.install = function install (Vue) {
   Vue.component(VApp.name, VApp)
 }
 
+export { VApp }
 export default VApp

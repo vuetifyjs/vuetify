@@ -3,15 +3,15 @@
 .container
   flex: 1 1 100%
   margin: auto
-  padding: $grid-gutters.lg
+  padding: $grid-gutters.xl
   width: 100%
 
   for $size, $width in $container-max-widths
     @media only screen and (min-width: $width)
       max-width: ($width * 0.9375) // Credit to bootstrap
 
-  @media $display-breakpoints.xs-only
-    padding: $grid-gutters.xl
+  @media $display-breakpoints.sm-and-down
+    padding: $grid-gutters.lg
 
   &.fluid
     max-width: 100%

@@ -5,4 +5,5 @@ VSubheader.install = function install (Vue) {
   Vue.component(VSubheader.name, VSubheader)
 }
 
+export { VSubheader }
 export default VSubheader

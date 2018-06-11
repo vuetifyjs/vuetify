@@ -1,6 +1,5 @@
 // Components
 import VInput from '../components/VInput'
-import VLabel from '../components/VLabel'
 
 // Mixins
 import Rippleable from './rippleable'
@@ -65,13 +64,13 @@ export default {
         return input.some(item => this.valueComparator(item, value))
       }
 
-      if (!this.trueValue || !this.falseValue) {
+      if (this.trueValue === undefined || this.falseValue === undefined) {
         return value
           ? this.valueComparator(value, input)
           : Boolean(input)
       }
 
-      return this.valueComparator(value, input)
+      return this.valueComparator(input, this.trueValue)
     },
     isDirty () {
       return this.isActive
@@ -86,16 +85,13 @@ export default {
 
   methods: {
     genLabel () {
-      return this.$createElement(VLabel, {
-        on: { click: this.onChange },
-        attrs: {
-          for: this.id
-        },
-        props: {
-          color: 'error',
-          focused: this.hasState
-        }
-      }, this.$slots.label || this.label)
+      if (!this.hasLabel) return null
+
+      const label = VInput.methods.genLabel.call(this)
+
+      label.data.on = { click: this.onChange }
+
+      return label
     },
     genInput (type, attrs) {
       return this.$createElement('input', {
@@ -136,11 +132,9 @@ export default {
         if (input.length === length) {
           input.push(value)
         }
-      } else if (this.trueValue || this.falseValue) {
-        // If has a true or false value set
-        input = this.valueComparator(this.trueValue, value) ? this.falseValue : this.trueValue
+      } else if (this.trueValue !== undefined && this.falseValue !== undefined) {
+        input = this.valueComparator(input, this.trueValue) ? this.falseValue : this.trueValue
       } else if (value) {
-        // If has a value set
         input = this.valueComparator(input, value) ? null : value
       } else {
         input = !input

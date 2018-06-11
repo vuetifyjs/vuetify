@@ -35,7 +35,7 @@ export default {
       animate: false,
       animateTimeout: null,
       isDependent: false,
-      stackClass: 'v-dialog__content__active',
+      stackClass: 'v-dialog__content--active',
       stackMinZIndex: 200
     }
   },
@@ -124,10 +124,12 @@ export default {
       ) return false
 
       // If we made it here, the click is outside
-      // and is active. If persistent, animate
-      // content
+      // and is active. If persistent, and the
+      // click is on the overlay, animate
       if (this.persistent) {
-        !this.noClickAnimation && this.animateClick()
+        if (!this.noClickAnimation &&
+          this.overlay === e.target
+        ) this.animateClick()
 
         return false
       }
