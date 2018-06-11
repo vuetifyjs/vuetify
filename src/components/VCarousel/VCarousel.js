@@ -7,6 +7,8 @@ import Bootable from '../../mixins/bootable'
 import Themeable from '../../mixins/themeable'
 import { provide as RegistrableProvide } from '../../mixins/registrable'
 
+import { convertToUnit } from '../../util/helpers'
+
 import Touch from '../../directives/touch'
 
 export default {
@@ -180,7 +182,10 @@ export default {
           left: this.next,
           right: this.prev
         }
-      }]
+      }],
+      style: {
+        height: convertToUnit(this.height)
+      }
     }, [
       this.hideControls ? null : this.genIcon('left', this.prevIcon, this.prev),
       this.hideControls ? null : this.genIcon('right', this.nextIcon, this.next),
