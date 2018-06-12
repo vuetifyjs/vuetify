@@ -54,7 +54,7 @@ export default {
     value: Number,
     height: {
       type: [Number, String],
-      default: ''
+      default: null
     }
   },
 
@@ -188,7 +188,7 @@ export default {
         }
       }],
       style: {
-        height: convertToUnit(this.height)
+        height: this.height ? convertToUnit(this.height) : null
       }
     }, [
       this.hideControls ? null : this.genIcon('left', this.prevIcon, this.prev),
