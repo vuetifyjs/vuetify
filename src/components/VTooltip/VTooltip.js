@@ -131,6 +131,7 @@ export default {
   },
 
   render (h) {
+    const scopeId = this.$vnode.context.$options._scopeId
     const tooltip = h('div', {
       staticClass: 'v-tooltip__content',
       'class': this.addBackgroundColorClassChecks({
@@ -138,7 +139,9 @@ export default {
         'menuable__content__active': this.isActive
       }),
       style: this.styles,
-      attrs: this.attrs,
+      attrs: scopeId && {
+        [scopeId]: ''
+      },
       directives: [{
         name: 'show',
         value: this.isContentActive

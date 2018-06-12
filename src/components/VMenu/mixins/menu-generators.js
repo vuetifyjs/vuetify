@@ -59,7 +59,11 @@ export default {
     },
 
     genContent () {
+      const scopeId = this.$vnode.context.$options._scopeId
       const options = {
+        attrs: scopeId && {
+          [scopeId]: ''
+        },
         staticClass: 'v-menu__content',
         'class': {
           [this.contentClass.trim()]: true,

@@ -205,9 +205,13 @@ export default {
       }, [dialog])
     }
 
+    const scopeId = this.$vnode.context.$options._scopeId
     children.push(h('div', {
       'class': this.contentClasses,
-      domProps: { tabIndex: -1 },
+      attrs: {
+        tabIndex: '-1',
+        ...(scopeId && { [scopeId]: '' })
+      },
       style: { zIndex: this.activeZIndex },
       ref: 'content'
     }, [dialog]))
