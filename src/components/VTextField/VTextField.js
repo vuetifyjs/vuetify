@@ -64,6 +64,9 @@ export default {
     outline: Boolean,
     placeholder: String,
     prefix: String,
+    prependInnerIcon: String,
+    /** @deprecated */
+    prependInnerIconCb: Function,
     reverse: Boolean,
     singleLine: Boolean,
     solo: Boolean,
@@ -220,12 +223,16 @@ export default {
 
       return this.genSlot('append', 'outer', slot)
     },
-    genContent () {
-      if (this.isEnclosed) {
-        return [this.genControl()]
+    genPrependInnerSlot () {
+      const slot = []
+
+      if (this.$slots['prepend-inner']) {
+        slot.push(this.$slots['prepend-inner'])
+      } else if (this.prependInnerIcon) {
+        slot.push(this.genIcon('prependInner'))
       }
 
-      return VInput.methods.genContent.call(this)
+      return this.genSlot('prepend', 'inner', slot)
     },
     genIconSlot () {
       const slot = []
@@ -241,13 +248,8 @@ export default {
     genInputSlot () {
       const input = VInput.methods.genInputSlot.call(this)
 
-      if (this.isEnclosed) {
-        const prepend = this.genPrependSlot()
-        const append = this.genAppendSlot()
-
-        prepend && input.children.unshift(prepend)
-        append && input.children.push(append)
-      }
+      const prepend = this.genPrependInnerSlot()
+      prepend && input.children.unshift(prepend)
 
       return input
     },
