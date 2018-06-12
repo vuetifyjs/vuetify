@@ -119,7 +119,12 @@ export default {
         this.badInput
     },
     isEnclosed () {
-      return this.isSolo || this.hasOutline || this.fullWidth
+      return (
+        this.box ||
+        this.isSolo ||
+        this.hasOutline ||
+        this.fullWidth
+      )
     },
     isLabelActive () {
       return this.isDirty || dirtyTypes.includes(this.type)
@@ -215,6 +220,13 @@ export default {
 
       return this.genSlot('append', 'outer', slot)
     },
+    genContent () {
+      if (this.isEnclosed) {
+        return [this.genControl()]
+      }
+
+      return VInput.methods.genContent.call(this)
+    },
     genIconSlot () {
       const slot = []
 
@@ -225,6 +237,19 @@ export default {
       }
 
       return this.genSlot('append', 'inner', slot)
+    },
+    genInputSlot () {
+      const input = VInput.methods.genInputSlot.call(this)
+
+      if (this.isEnclosed) {
+        const prepend = this.genPrependSlot()
+        const append = this.genAppendSlot()
+
+        prepend && input.children.unshift(prepend)
+        append && input.children.push(append)
+      }
+
+      return input
     },
     genClearIcon () {
       if (!this.clearable) return null
