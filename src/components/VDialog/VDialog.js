@@ -205,7 +205,7 @@ export default {
       }, [dialog])
     }
 
-    const scopeId = this.$vnode.context.$options._scopeId
+    const scopeId = this.$vnode && this.$vnode.context.$options._scopeId
     children.push(h('div', {
       'class': this.contentClasses,
       attrs: {

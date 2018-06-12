@@ -131,7 +131,7 @@ export default {
   },
 
   render (h) {
-    const scopeId = this.$vnode.context.$options._scopeId
+    const scopeId = this.$vnode && this.$vnode.context.$options._scopeId
     const tooltip = h('div', {
       staticClass: 'v-tooltip__content',
       'class': this.addBackgroundColorClassChecks({

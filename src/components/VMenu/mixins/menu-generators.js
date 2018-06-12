@@ -59,7 +59,7 @@ export default {
     },
 
     genContent () {
-      const scopeId = this.$vnode.context.$options._scopeId
+      const scopeId = this.$vnode && this.$vnode.context.$options._scopeId
       const options = {
         attrs: scopeId && {
           [scopeId]: ''
