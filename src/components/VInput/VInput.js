@@ -109,6 +109,13 @@ export default {
 
   methods: {
     genContent () {
+      return [
+        this.genPrependSlot(),
+        this.genControl(),
+        this.genAppendSlot()
+      ]
+    },
+    genControl () {
       return this.$createElement('div', {
         staticClass: 'v-input__control'
       }, [
@@ -260,10 +267,6 @@ export default {
         mousedown: this.onMouseDown,
         mouseup: this.onMouseUp
       }
-    }, [
-      this.genPrependSlot(),
-      this.genContent(),
-      this.genAppendSlot()
-    ])
+    }, this.genContent())
   }
 }
