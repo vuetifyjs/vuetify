@@ -13,7 +13,7 @@ export default function Grid (name) {
     },
 
     render: (h, { props, data, children }) => {
-      data.staticClass = (`${name} ${data.staticClass || ''}`).trim()
+      data.staticClass = (`v-${name} ${data.staticClass || ''}`).trim()
 
       if (data.attrs) {
         const classes = Object.keys(data.attrs).filter(key => {

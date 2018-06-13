@@ -1,6 +1,6 @@
 @import '../bootstrap'
 
-.container
+.v-container
   flex: 1 1 100%
   margin: auto
   padding: $grid-gutters.xl
@@ -20,38 +20,38 @@
     align-items: center
     display: flex
 
-    .layout
+    .v-layout
       height: 100%
       flex: 1 1 auto
 
   &.grid-list
     for $size, $gutter in $grid-gutters
       &-{$size}
-        .layout
-          .flex
+        .v-layout
+          .v-flex
             padding: ($gutter / 2)
 
-        .layout:only-child
+        .v-layout:only-child
           margin: -($gutter / 2)
 
-        .layout:not(:only-child)
+        .v-layout:not(:only-child)
           margin: auto -($gutter / 2)
 
         *:not(:only-child)
-          .layout:first-child
+          .v-layout:first-child
             margin-top: -($gutter / 2)
 
-          .layout:last-child
+          .v-layout:last-child
             margin-bottom: -($gutter / 2)
 
-.layout
+.v-layout
   display: flex
   flex: 1 1 auto
   flex-wrap: nowrap
   // https://github.com/vuetifyjs/vuetify/issues/3873
   min-width: 0
 
-  > .flex
+  > .v-flex
     max-width: 100%
 
   &.row
@@ -72,21 +72,20 @@
 for $size, $width in $grid-breakpoints
   @media all and (min-width: $width)
     for n in (1..$grid-columns)
-      .flex.{$size}{n}
+      .v-flex.{$size}{n}
         flex-basis: (n / $grid-columns * 100)%
         flex-grow: 0
         max-width: (n / $grid-columns * 100)%
 
-      .flex.order-{$size}{n}
+      .v-flex.order-{$size}{n}
         order: n
 
     for n in (0..$grid-columns)
-      .flex.offset-{$size}{n}
+      .v-flex.offset-{$size}{n}
         // Offsets can only ever work in row layouts
         margin-left: (n / $grid-columns * 100)%
 
-.flex,
-.child-flex > *
+.v-flex
   flex: 1 1 auto
 
 .align
