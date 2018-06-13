@@ -813,6 +813,7 @@ test('VAutocomplete.js', ({ mount, shallow }) => {
 
     const input = wrapper.first('input')
 
+    await wrapper.vm.$nextTick()
     wrapper.setProps({ items: [{ text: 'foo', value: 1 }] })
     await wrapper.vm.$nextTick()
     expect(input.element.value).toBe('foo')
