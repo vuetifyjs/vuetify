@@ -41,7 +41,7 @@
   &-enter-active,
   &-leave-active
     transition: .3s $transition.linear-out-slow-in
-  
+
   &-enter,
   &-leave-to
     opacity: 0
@@ -67,19 +67,19 @@
 
   &-leave-to
     transform: translate(0, 100%)
-    
+
 .picker-title-transition
   &-enter-to,
   &-leave
     transform: translate(0, 0)
-  
+
   &-enter
     transform: translate(-100%, 0)
-    
+
   &-leave-to
     opacity: 0
     transform: translate(100%, 0)
-  
+
   &-leave,
   &-leave-to,
   &-leave-active
@@ -117,6 +117,22 @@
   &-enter, &-leave, &-leave-to
     opacity: 0
     transform: scale(0)
+
+.message-transition
+  &-enter-active, &-leave-active
+    transition: $primary-transition
+
+  &-enter, &-leave-to
+    opacity: 0
+    transform: translateY(-15px)
+
+  &-leave, &-leave-active
+    position: absolute
+
+.application--is-rtl
+  .message-transition
+    &-leave, &-leave-active
+      right: 0
 
 .slide-y-transition
   &-enter-active, &-leave-active

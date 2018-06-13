@@ -27,7 +27,7 @@ export default {
       return this.$createElement('transition-group', {
         staticClass: 'v-messages__wrapper',
         attrs: {
-          name: 'slide-y-transition',
+          name: 'message-transition',
           tag: 'div'
         }
       }, this.value.map(m => this.genMessage(m)))

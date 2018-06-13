@@ -393,6 +393,7 @@ export default {
         this.selectedItems = [this.internalValue]
       } else {
         VSelect.methods.setSelectedItems.call(this)
+        this.setSearch()
       }
     },
     setSearch () {
