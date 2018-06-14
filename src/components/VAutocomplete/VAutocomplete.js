@@ -128,7 +128,7 @@ export default {
         ? this.filteredItems.length - this.selectedItems.length > 0
         : this.filteredItems.length > 0
 
-      if (this.isAnyValueAllowed) {
+      if (this.isAnyValueAllowed && !this.$slots['no-data']) {
         return filtered
       }
 
