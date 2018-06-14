@@ -407,7 +407,7 @@ export default {
       }
     },
     genListWithSlot () {
-      const slots = [];
+      const slots = []
       if (this.$slots['no-data']) {
         slots.push(this.$createElement('template', {
           slot: 'no-data'
