@@ -408,9 +408,9 @@ export default {
     },
     genListWithSlot () {
       return this.$createElement(VSelectList, this.listData, [
-        this.$slots['no-data'] ? this.$createElement('div', {
+        this.$createElement('template', {
           slot: 'no-data'
-        }, this.$slots['no-data']) : null
+        }, this.$slots['no-data'])
       ])
     },
     genMenu (activator) {
