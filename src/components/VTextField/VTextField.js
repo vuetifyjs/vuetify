@@ -131,30 +131,18 @@ export default {
       return this.solo || this.soloInverted
     },
     labelPosition () {
-      let value = 0
-      let left = 'auto'
-      let right = 'auto'
-
-      // Create spacing
-      if ((this.prefix || this.reverse) &&
+      const offset = (
+        (this.prefix || this.reverse) &&
         (this.isSingle || !this.isFocused) &&
         !this.labelValue
-      ) value = 16
+      ) ? 16 : 0
 
-      // Check if RTL
-      if (this.$vuetify.rtl) right = value
-      else left = value
-
-      // Check if reversed
-      if (this.reverse) {
-        const direction = right
-        right = left
-        left = direction
-      }
-
-      return {
-        left,
-        right
+      return (this.$vuetify.rtl ^ this.reverse) ? {
+        left: 'auto',
+        right: offset
+      } : {
+        left: offset,
+        right: 'auto'
       }
     },
     showLabel () {
