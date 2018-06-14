@@ -19,6 +19,10 @@ theme(v-textarea, "v-textarea")
     padding: 7px 0 8px
     width: 100%
 
+  .v-text-field__prefix
+    padding-top: 4px
+    align-self: start
+
   &.v-text-field--full-width,
   &.v-text-field--full-width.v-text-field--single-line
     .v-text-field__slot
@@ -30,10 +34,12 @@ theme(v-textarea, "v-textarea")
 
   &.v-text-field--box,
   &.v-text-field--enclosed
+    .v-text-field__prefix,
     textarea
       margin-top: 24px
 
     &.v-text-field--single-line
+      .v-text-field__prefix,
       textarea
         margin-top: 12px
 
@@ -49,6 +55,7 @@ theme(v-textarea, "v-textarea")
 
     // Essentially revert styles
     // applied by v-text-field
+    .v-input__prepend-inner,
     .v-input__prepend-outer,
     .v-input__append-inner,
     .v-input__append-outer

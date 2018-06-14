@@ -64,6 +64,9 @@ export default {
     outline: Boolean,
     placeholder: String,
     prefix: String,
+    prependInnerIcon: String,
+    /** @deprecated */
+    prependInnerIconCb: Function,
     reverse: Boolean,
     singleLine: Boolean,
     solo: Boolean,
@@ -119,7 +122,12 @@ export default {
         this.badInput
     },
     isEnclosed () {
-      return this.isSolo || this.hasOutline || this.fullWidth
+      return (
+        this.box ||
+        this.isSolo ||
+        this.hasOutline ||
+        this.fullWidth
+      )
     },
     isLabelActive () {
       return this.isDirty || dirtyTypes.includes(this.type)
@@ -215,6 +223,17 @@ export default {
 
       return this.genSlot('append', 'outer', slot)
     },
+    genPrependInnerSlot () {
+      const slot = []
+
+      if (this.$slots['prepend-inner']) {
+        slot.push(this.$slots['prepend-inner'])
+      } else if (this.prependInnerIcon) {
+        slot.push(this.genIcon('prependInner'))
+      }
+
+      return this.genSlot('prepend', 'inner', slot)
+    },
     genIconSlot () {
       const slot = []
 
@@ -225,6 +244,14 @@ export default {
       }
 
       return this.genSlot('append', 'inner', slot)
+    },
+    genInputSlot () {
+      const input = VInput.methods.genInputSlot.call(this)
+
+      const prepend = this.genPrependInnerSlot()
+      prepend && input.children.unshift(prepend)
+
+      return input
     },
     genClearIcon () {
       if (!this.clearable) return null
