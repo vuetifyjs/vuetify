@@ -393,9 +393,7 @@ exports[`VSelect should use slotted after-list 1`] = `
     </a>
   </div>
   <div>
-    <div>
-      foo
-    </div>
+    foo
   </div>
 </div>
 
@@ -405,9 +403,7 @@ exports[`VSelect should use slotted before-list 1`] = `
 
 <div class="v-list">
   <div>
-    <div>
-      foo
-    </div>
+    foo
   </div>
   <div>
     <a class="v-list__tile v-list__tile--link">

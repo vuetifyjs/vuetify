@@ -407,9 +407,11 @@ export default {
       }
     },
     genListWithSlot () {
-      const slots = ['before-list', 'no-data', 'after-list'].map(slotName => this.$createElement('template', {
-        slot: slotName
-      }, this.$slots[slotName]))
+      const slots = ['before-list', 'no-data', 'after-list']
+        .filter(slotName => this.$slots[slotName])
+        .map(slotName => this.$createElement('template', {
+          slot: slotName
+        }, this.$slots[slotName]))
 
       return this.$createElement(VSelectList, this.listData, slots)
     },
