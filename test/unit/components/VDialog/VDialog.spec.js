@@ -85,6 +85,17 @@ test('VDialog.js', ({ mount, compileToFunctions }) => {
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
+  it('should render component with custom width and match snapshot', () => {
+    const wrapper = mount(VDialog, {
+      propsData: {
+        width: '50%'
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
   it('should render component with custom transition and match snapshot', () => {
     const wrapper = mount(VDialog, {
       propsData: {
