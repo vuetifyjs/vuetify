@@ -23,6 +23,17 @@ import ClickOutside from '../../directives/click-outside'
 import { getPropertyFromItem, keyCodes } from '../../util/helpers'
 import { consoleError } from '../../util/console'
 
+// For api-generator
+const fakeVMenu = {
+  name: 'v-menu',
+  props: VMenu.props // TODO: remove some, just for testing
+}
+
+const fakeMenuable = {
+  name: 'menuable',
+  props: Menuable.props
+}
+
 export default {
   name: 'v-select',
 
@@ -33,6 +44,8 @@ export default {
   },
 
   mixins: [
+    fakeVMenu,
+    fakeMenuable,
     Comparable,
     Dependent,
     Filterable
@@ -56,8 +69,6 @@ export default {
   }),
 
   props: {
-    ...VMenu.props, // TODO: remove some, just for testing,
-    ...Menuable.props,
     appendIcon: {
       type: String,
       default: '$vuetify.icons.dropdown'
@@ -396,17 +407,11 @@ export default {
       }
     },
     genListWithSlot () {
-      return this.$createElement(VSelectList, this.listData, [
-        this.$slots['no-data'] ? this.$createElement('div', {
-          slot: 'no-data'
-        }, this.$slots['no-data']) : null,
-        this.$slots['before-list'] ? this.$createElement('div', {
-          slot: 'before-list'
-        }, this.$slots['before-list']) : null,
-        this.$slots['after-list'] ? this.$createElement('div', {
-          slot: 'after-list'
-        }, this.$slots['after-list']) : null
-      ])
+      const slots = ['before-list', 'no-data', 'after-list'].map(slotName => this.$createElement('template', {
+        slot: slotName
+      }, this.$slots[slotName]))
+
+      return this.$createElement(VSelectList, this.listData, slots)
     },
     genMenu (activator) {
       const props = {
@@ -642,9 +647,9 @@ export default {
     },
     setSelectedItems () {
       const selectedItems = []
-      const values = Array.isArray(this.internalValue)
-        ? this.internalValue
-        : [this.internalValue]
+      const values = !this.isMulti || !Array.isArray(this.internalValue)
+        ? [this.internalValue]
+        : this.internalValue
 
       for (const value of values) {
         const index = this.allItems.findIndex(v => this.valueComparator(

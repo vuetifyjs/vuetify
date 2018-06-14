@@ -35,22 +35,14 @@ test('VInput.js', ({ mount }) => {
       render: h => h('div', slot)
     })
     const wrapper = mount(VInput, {
-      slots: { 'prepend-icon': [el('prepend-icon')] }
+      slots: { 'append': [el('append')] }
     })
     const wrapper2 = mount(VInput, {
-      slots: { 'append-icon': [el('append-icon')] }
-    })
-    const wrapper3 = mount(VInput, {
       slots: { 'prepend': [el('prepend')] }
-    })
-    const wrapper4 = mount(VInput, {
-      slots: { 'append': [el('append')] }
     })
 
     expect(wrapper.html()).toMatchSnapshot()
     expect(wrapper2.html()).toMatchSnapshot()
-    expect(wrapper3.html()).toMatchSnapshot()
-    expect(wrapper4.html()).toMatchSnapshot()
   })
 
   it('should generate an icon and match snapshot', () => {

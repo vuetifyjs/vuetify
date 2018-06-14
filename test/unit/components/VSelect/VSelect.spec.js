@@ -398,6 +398,42 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect(list.html()).toMatchSnapshot()
   })
 
+  it('should use slotted before-list', () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        items: ['foo']
+      },
+      slots: {
+        'before-list': [{
+          render: h => h('div', 'foo')
+        }]
+      }
+    })
+
+    const list = wrapper.first('.v-list')
+
+    expect(wrapper.vm.$slots['before-list']).toBeTruthy()
+    expect(list.html()).toMatchSnapshot()
+  })
+
+  it('should use slotted after-list', () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        items: ['foo']
+      },
+      slots: {
+        'after-list': [{
+          render: h => h('div', 'foo')
+        }]
+      }
+    })
+
+    const list = wrapper.first('.v-list')
+
+    expect(wrapper.vm.$slots['after-list']).toBeTruthy()
+    expect(list.html()).toMatchSnapshot()
+  })
+
   it('should assign self as activator when solo or box', () => {
     const wrapper = mount(VSelect, {
       propsData: { solo: true }

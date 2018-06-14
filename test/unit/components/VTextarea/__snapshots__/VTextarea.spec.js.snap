@@ -11,9 +11,6 @@ exports[`VTextarea.vue should calculate element height when using auto-grow prop
                   style="height: 120px;"
         >
         </textarea>
-        <div class="v-textarea__mask">
-          this is a really long text that should hopefully make auto-grow kick in. maybe?
-        </div>
       </div>
     </div>
     <div class="v-text-field__details">

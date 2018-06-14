@@ -116,7 +116,10 @@ export default {
     isSearching () {
       if (this.isMulti) return this.searchIsDirty
 
-      return this.internalSearch !== this.getText(this.selectedItem)
+      return (
+        this.searchIsDirty &&
+        this.internalSearch !== this.getText(this.selectedItem)
+      )
     },
     menuCanShow () {
       if (!this.isFocused) return false
@@ -393,6 +396,8 @@ export default {
         this.selectedItems = [this.internalValue]
       } else {
         VSelect.methods.setSelectedItems.call(this)
+        // #4273 Don't replace if searching
+        !this.isSearching && this.setSearch()
       }
     },
     setSearch () {

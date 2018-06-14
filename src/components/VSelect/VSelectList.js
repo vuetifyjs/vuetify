@@ -219,14 +219,10 @@ export default {
     }
 
     const beforeList = this.$slots['before-list']
-    if (beforeList) {
-      children.unshift(beforeList)
-    }
+    if (beforeList) children.unshift(beforeList)
 
     const afterList = this.$slots['after-list']
-    if (afterList) {
-      children.push(afterList)
-    }
+    if (afterList) children.push(afterList)
 
     return this.$createElement(VCard, {
       staticClass: 'v-select-list',

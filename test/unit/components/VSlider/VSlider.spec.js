@@ -2,7 +2,7 @@ import Vue from 'vue'
 import { test } from '@/test'
 import VSlider from '@/components/VSlider'
 
-const warning = '[Vuetify] Missing v-app or a non-body wrapping element with the [data-app] attribute in "v-slider"'
+const warning = '[Vuetify] Missing v-app or a non-body wrapping element with the [data-app] attribute'
 
 test('VSlider.vue', ({ mount }) => {
   it('should match a snapshot', () => {
@@ -502,6 +502,44 @@ test('VSlider.vue', ({ mount }) => {
     expect(ticks.length).toBe(2)
     expect(ticks[0].element.firstChild.innerHTML).toBe('foo')
     expect(ticks[1].element.firstChild.innerHTML).toBe('bar')
+
+    expect(warning).toHaveBeenTipped()
+  })
+
+  it('should not react to keydown', () => {
+    const parseKeyDown = jest.fn()
+    const wrapper = mount(VSlider, {
+      propsData: { disabled: true },
+      methods: { parseKeyDown }
+    })
+
+    const input = wrapper.first('input')
+
+    input.trigger('focus')
+
+    expect(wrapper.vm.isFocused).toBe(true)
+
+    input.trigger('keydown.right')
+
+    expect(parseKeyDown).not.toBeCalled()
+
+    wrapper.setProps({
+      disabled: false,
+      readonly: true
+    })
+
+    input.trigger('keydown.right')
+
+    expect(parseKeyDown).not.toBeCalled()
+
+    wrapper.setProps({
+      disabled: false,
+      readonly: false
+    })
+
+    input.trigger('keydown.right')
+
+    expect(parseKeyDown).toBeCalled()
 
     expect(warning).toHaveBeenTipped()
   })

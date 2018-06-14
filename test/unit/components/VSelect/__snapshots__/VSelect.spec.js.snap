@@ -380,6 +380,48 @@ exports[`VSelect should use scoped slot for selection generation 1`] = `
 
 `;
 
+exports[`VSelect should use slotted after-list 1`] = `
+
+<div class="v-list">
+  <div>
+    <a class="v-list__tile v-list__tile--link">
+      <div class="v-list__tile__content">
+        <div class="v-list__tile__title">
+          foo
+        </div>
+      </div>
+    </a>
+  </div>
+  <div>
+    <div>
+      foo
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VSelect should use slotted before-list 1`] = `
+
+<div class="v-list">
+  <div>
+    <div>
+      foo
+    </div>
+  </div>
+  <div>
+    <a class="v-list__tile v-list__tile--link">
+      <div class="v-list__tile__content">
+        <div class="v-list__tile__title">
+          foo
+        </div>
+      </div>
+    </a>
+  </div>
+</div>
+
+`;
+
 exports[`VSelect should use slotted no-data 1`] = `
 
 <div class="v-list">
