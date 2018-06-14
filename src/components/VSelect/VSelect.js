@@ -407,22 +407,10 @@ export default {
       }
     },
     genListWithSlot () {
-      const slots = []
-      if (this.$slots['no-data']) {
-        slots.push(this.$createElement('template', {
-          slot: 'no-data'
-        }, this.$slots['no-data']))
-      }
-      if (this.$slots['before-list']) {
-        slots.push(this.$createElement('div', {
-          slot: 'before-list'
-        }, this.$slots['before-list']))
-      }
-      if (this.$slots['after-list']) {
-        slots.push(this.$createElement('div', {
-          slot: 'after-list'
-        }, this.$slots['after-list']))
-      }
+      const slots = ['before-list', 'no-data', 'after-list'].map(slotName => this.$createElement('template', {
+        slot: slotName
+      }, this.$slots[slotName]))
+
       return this.$createElement(VSelectList, this.listData, slots)
     },
     genMenu (activator) {
