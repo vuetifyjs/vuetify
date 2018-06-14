@@ -52,10 +52,10 @@
       this.snackbar({
         color: 'default',
         close: true,
-        id: 'rebuilding-input-controls-part-2-a01936b6520e',
-        text: 'Go To Article',
-        msg: '**New Article** — _Rebuilding input-controls Part 2_',
-        href: 'https://medium.com/vuetify/rebuilding-input-controls-part-2-a01936b6520e',
+        id: 'may-2018-update-19449773',
+        text: 'Go To Update',
+        msg: '**New Patreon Update** — _May 2018 Update_',
+        href: 'https://www.patreon.com/posts/may-2018-update-19449773',
         timeout: 0
       })
     },
