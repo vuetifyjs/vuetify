@@ -58,6 +58,7 @@ const wrapper = {
       data.attrs.editable = props.editable
       return h(VOverflowBtn, data, children)
     } else {
+      data.attrs.multiple = props.multiple
       return h(VSelect, data, children)
     }
   }
