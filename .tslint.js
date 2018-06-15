@@ -10,6 +10,7 @@ module.exports = {
       './node_modules/**/*'
     ]
   },
+  jsRules: {},
   rules: {
     'use-type-alias': true,
 

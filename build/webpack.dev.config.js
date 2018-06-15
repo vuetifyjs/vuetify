@@ -1,10 +1,13 @@
 const path = require('path')
 const merge = require('webpack-merge')
+const HappyPack = require('happypack')
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const baseWebpackConfig = require('./webpack.base.config')
 
 // Helpers
 const resolve = file => path.resolve(__dirname, file)
+const happyThreadPool = HappyPack.ThreadPool({ size: 5 })
 
 module.exports = merge(baseWebpackConfig, {
   devtool: 'source-map',
@@ -24,41 +27,17 @@ module.exports = merge(baseWebpackConfig, {
   module: {
     rules: [
       {
-        enforce: 'pre',
-        test: /\.[jt]s$/,
-        exclude: /node_modules/,
-        loader: 'eslint-loader',
-        options: { cache: true }
-      },
-      {
-        enforce: 'pre',
-        test: /\.ts$/,
-        exclude: /node_modules/,
-        loader: 'tslint-loader',
-        options: {
-          typeCheck: true,
-          configFile: resolve('../.tslint.js'),
-          tsConfigFile: resolve('../tsconfig.json')
-        }
-      },
-      {
         test: /\.vue$/,
         loader: 'vue-loader'
       },
       {
         test: /\.ts$/,
-        use: [
-          'babel-loader',
-          {
-            loader: 'ts-loader',
-            options: { appendTsSuffixTo: [/\.vue$/] }
-          }
-        ],
+        use: 'happypack/loader?id=ts',
         exclude: /node_modules/
       },
       {
         test: /\.js$/,
-        use: 'babel-loader',
+        use: 'happypack/loader?id=js',
         exclude: /node_modules/
       },
       {
@@ -81,6 +60,31 @@ module.exports = merge(baseWebpackConfig, {
     disableHostCheck: true
   },
   plugins: [
-    new VueLoaderPlugin()
+    new VueLoaderPlugin(),
+    new ForkTsCheckerWebpackPlugin({
+      checkSyntacticErrors: true,
+      tsconfig: resolve('../tsconfig.json'),
+      tslint: resolve('../.tslint.js')
+    }),
+    new HappyPack({
+      id: 'ts',
+      threadPool: happyThreadPool,
+      loaders: [
+        'babel-loader',
+        {
+          loader: 'ts-loader',
+          options: {
+            appendTsSuffixTo: [/\.vue$/],
+            happyPackMode: true
+          }
+        },
+        'eslint-loader?cache=true?emitWarning=true'
+      ]
+    }),
+    new HappyPack({
+      id: 'js',
+      threadPool: happyThreadPool,
+      loaders: ['babel-loader', 'eslint-loader?cache=true?emitWarning=true']
+    })
   ]
 })
