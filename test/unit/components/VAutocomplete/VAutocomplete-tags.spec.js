@@ -1,7 +1,7 @@
 import { test } from '@/test'
 import VAutocomplete from '@/components/VAutocomplete'
 
-test('VAutocomplete - tags', ({ mount, compileToFunctions }) => {
+test('VAutocomplete - combobox multiple', ({ mount, compileToFunctions }) => {
   const app = document.createElement('div')
   app.setAttribute('data-app', true)
   document.body.appendChild(app)
@@ -13,7 +13,8 @@ test('VAutocomplete - tags', ({ mount, compileToFunctions }) => {
     const wrapper = mount(VAutocomplete, {
       attachToDocument: true,
       propsData: Object.assign({
-        tags: true,
+        combobox: true,
+        multiple: true,
         value: []
       }, propsData)
     })
@@ -221,7 +222,8 @@ test('VAutocomplete - tags', ({ mount, compileToFunctions }) => {
       chips: true,
       clearable: true,
       deletableChips: true,
-      tags: true,
+      combobox: true,
+      multiple: true,
       value: ['foo', 'bar']
     })
 
@@ -248,7 +250,8 @@ test('VAutocomplete - tags', ({ mount, compileToFunctions }) => {
   it('should not change search when selecting an index', () => {
     const { wrapper } = createTagsAutocomplete({
       chips: true,
-      tags: true,
+      combobox: true,
+      multiple: true,
       value: ['foo', 'bar']
     })
 

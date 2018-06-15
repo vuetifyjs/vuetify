@@ -19,7 +19,7 @@ export default {
     lazySearch: vm.searchInput,
     lazyValue: vm.value != null
       ? vm.value
-      : vm.multi || vm.tags ? [] : undefined
+      : vm.multiple ? [] : undefined
   }),
 
   props: {
@@ -59,7 +59,6 @@ export default {
     searchInput: {
       default: undefined
     },
-    tags: Boolean,
     transition: {
       type: [Boolean, String],
       default: false
@@ -92,7 +91,7 @@ export default {
       return this.allItems.filter(i => this.filter(i, this.internalSearch, this.getText(i)))
     },
     hasSlot () {
-      return VSelect.computed.hasSlot.call(this) || this.tags
+      return VSelect.computed.hasSlot.call(this) || (this.combobox && this.multiple)
     },
     internalSearch: {
       get () {
@@ -105,16 +104,13 @@ export default {
       }
     },
     isAnyValueAllowed () {
-      return this.combobox || this.tags
+      return this.combobox
     },
     isDirty () {
       return this.searchIsDirty || this.selectedItems.length > 0
     },
-    isMulti () {
-      return this.tags || VSelect.computed.isMulti.call(this)
-    },
     isSearching () {
-      if (this.isMulti) return this.searchIsDirty
+      if (this.multiple) return this.searchIsDirty
 
       return (
         this.searchIsDirty &&
@@ -145,7 +141,7 @@ export default {
         this.internalSearch !== ''
     },
     selectedItem () {
-      if (this.isMulti) return null
+      if (this.multiple) return null
 
       return this.selectedItems.find(i => {
         return this.valueComparator(this.getValue(i), this.getValue(this.internalValue))
@@ -198,7 +194,8 @@ export default {
     internalSearch (val) {
       if (
         val &&
-        this.tags &&
+        this.combobox &&
+        this.multiple &&
         this.delimiters
       ) {
         const delimiter = this.delimiters.find(d => val.endsWith(d))
@@ -268,7 +265,7 @@ export default {
             : -1
 
         if (newIndex === -1) {
-          this.internalValue = this.isMulti ? [] : undefined
+          this.internalValue = this.multiple ? [] : undefined
         } else {
           this.selectItem(currentItem)
         }
@@ -285,7 +282,7 @@ export default {
       const chip = VSelect.methods.genChipSelection.call(this, item, index)
 
       // Allow user to update an existing value
-      if (this.tags) {
+      if (this.combobox && this.multiple) {
         chip.componentOptions.listeners.dblclick = () => {
           this.editingIndex = index
           this.internalSearch = this.getText(item)
@@ -304,7 +301,7 @@ export default {
       return input
     },
     genSelections () {
-      return this.hasSlot || this.isMulti
+      return this.hasSlot || this.multiple
         ? VSelect.methods.genSelections.call(this)
         : []
     },
@@ -341,7 +338,8 @@ export default {
 
       // If user is at selection index of 0
       // create a new tag
-      if (this.tags &&
+      if (this.combobox &&
+        this.multiple &&
         keyCode === keyCodes.left &&
         this.$refs.input.selectionStart === 0
       ) {
@@ -360,7 +358,8 @@ export default {
       // When adding tags, if searching and
       // there is not a filtered options,
       // add the value to the tags list
-      if (this.tags &&
+      if (this.combobox &&
+        this.multiple &&
         this.internalSearch &&
         menuIndex === -1
       ) {
@@ -390,7 +389,7 @@ export default {
         this.internalValue === ''
       ) {
         this.selectedItems = []
-      } else if (this.tags) {
+      } else if (this.combobox && this.multiple) {
         this.selectedItems = this.internalValue
       } else if (this.combobox) {
         this.selectedItems = [this.internalValue]
@@ -406,7 +405,7 @@ export default {
       this.$nextTick(() => {
         this.internalSearch = (
           !this.selectedItem ||
-          this.isMulti ||
+          this.multiple ||
           this.hasSlot
         )
           ? null
@@ -443,7 +442,7 @@ export default {
       if (this.hasChips) this.internalSearch = undefined
     },
     updateSelf () {
-      if (this.tags) this.updateTags()
+      if (this.combobox && this.multiple) this.updateTags()
       else if (this.combobox) this.updateCombobox()
       else this.updateAutocomplete()
     },

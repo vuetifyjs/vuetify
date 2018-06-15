@@ -13,6 +13,8 @@ const wrapper = {
     // VAutoComplete
     autocomplete: Boolean,
     combobox: Boolean,
+    multiple: Boolean,
+    /** @deprecated */
     tags: Boolean,
 
     // VOverflowBtn
@@ -31,7 +33,7 @@ const wrapper = {
       deprecate('<v-select combobox>', '<v-autocomplete combobox>', wrapper, parent)
     }
     if (props.tags) {
-      deprecate('<v-select tags>', '<v-autocomplete tags>', wrapper, parent)
+      deprecate('<v-select tags>', '<v-autocomplete combobox multiple>', wrapper, parent)
     }
 
     if (props.overflow) {
@@ -45,8 +47,8 @@ const wrapper = {
     }
 
     if (props.autocomplete || props.combobox || props.tags) {
-      data.attrs.combobox = props.combobox
-      data.attrs.tags = props.tags
+      data.attrs.combobox = props.combobox || props.tags
+      data.attrs.multiple = props.multiple || props.tags
       return h(VAutocomplete, data, children)
     } else if (props.overflow || props.segmented || props.editable) {
       data.attrs.segmented = props.segmented

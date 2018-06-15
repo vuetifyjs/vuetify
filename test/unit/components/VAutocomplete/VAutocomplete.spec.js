@@ -488,8 +488,8 @@ test('VAutocomplete.js', ({ mount, shallow }) => {
     expect(updateCombobox).toHaveBeenCalledTimes(1)
 
     wrapper.setProps({
-      combobox: false,
-      tags: true
+      combobox: true,
+      multiple: true
     })
 
     wrapper.vm.onEnterDown()
@@ -548,7 +548,8 @@ test('VAutocomplete.js', ({ mount, shallow }) => {
     const wrapper = mount(VAutocomplete, {
       propsData: {
         items: ['fizz', 'buzz'],
-        tags: true
+        combobox: true,
+        multiple: true
       },
       methods: {
         updateTags
