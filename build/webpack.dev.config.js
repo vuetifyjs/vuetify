@@ -1,3 +1,4 @@
+const os = require('os')
 const path = require('path')
 const merge = require('webpack-merge')
 const HappyPack = require('happypack')
@@ -7,7 +8,9 @@ const baseWebpackConfig = require('./webpack.base.config')
 
 // Helpers
 const resolve = file => path.resolve(__dirname, file)
-const happyThreadPool = HappyPack.ThreadPool({ size: 5 })
+const happyThreadPool = HappyPack.ThreadPool({
+  size: Math.max(os.cpus().length, 8)
+})
 
 module.exports = merge(baseWebpackConfig, {
   devtool: 'source-map',
