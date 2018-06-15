@@ -48,9 +48,6 @@ module.exports = merge(baseWebpackConfig, {
       }
     ]
   },
-  performance: {
-    hints: false
-  },
   devServer: {
     contentBase: resolve('../dev'),
     publicPath: '/dev/',

@@ -54,5 +54,6 @@ exports.config = {
   plugins,
   performance: {
     hints: false
-  }
+  },
+  stats: { children: false }
 }
