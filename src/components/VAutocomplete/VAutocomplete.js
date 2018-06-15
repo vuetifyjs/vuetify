@@ -15,7 +15,6 @@ export default {
 
   data: vm => ({
     attrsInput: null,
-    combobox: false,
     editingIndex: -1,
     lazySearch: vm.searchInput,
     lazyValue: vm.value != null
@@ -90,9 +89,6 @@ export default {
 
       return this.allItems.filter(i => this.filter(i, this.internalSearch, this.getText(i)))
     },
-    hasSlot () {
-      return VSelect.computed.hasSlot.call(this) || (this.combobox && this.multiple)
-    },
     internalSearch: {
       get () {
         return this.lazySearch
@@ -104,7 +100,7 @@ export default {
       }
     },
     isAnyValueAllowed () {
-      return this.combobox
+      return false
     },
     isDirty () {
       return this.searchIsDirty || this.selectedItems.length > 0
@@ -123,10 +119,6 @@ export default {
       const filtered = this.hideSelected
         ? this.filteredItems.length - this.selectedItems.length > 0
         : this.filteredItems.length > 0
-
-      if (this.isAnyValueAllowed) {
-        return filtered
-      }
 
       return filtered || !this.hideNoData
     },
@@ -166,13 +158,7 @@ export default {
 
   watch: {
     filteredItems (val) {
-      if (this.isAnyValueAllowed) return
-
-      this.setMenuIndex(-1)
-
-      this.$nextTick(() => {
-        this.setMenuIndex(val.length === 1 ? 0 : -1)
-      })
+      this.onFilteredItemsChanged(val)
     },
     internalValue () {
       this.setSearch()
@@ -192,24 +178,7 @@ export default {
       this.lazySearch = val
     },
     internalSearch (val) {
-      if (
-        val &&
-        this.combobox &&
-        this.multiple &&
-        this.delimiters
-      ) {
-        const delimiter = this.delimiters.find(d => val.endsWith(d))
-        if (delimiter == null) return
-
-        this.internalSearch = val.slice(0, val.length - delimiter.length)
-        this.updateTags()
-      }
-
-      if (this.isMenuActive &&
-        this.$refs.menu
-      ) {
-        this.$refs.menu.updateDimensions()
-      }
+      this.onInternalSearchChanged(val)
     }
   },
 
@@ -218,9 +187,26 @@ export default {
   },
 
   methods: {
+    onFilteredItemsChanged (val) {
+      this.setMenuIndex(-1)
+
+      this.$nextTick(() => {
+        this.setMenuIndex(val.length === 1 ? 0 : -1)
+      })
+    },
+    onInternalSearchChanged (val) {
+      this.updateMenuDimensions()
+    },
     activateMenu () {
       if (this.menuCanShow) {
         this.isMenuActive = true
+      }
+    },
+    updateMenuDimensions () {
+      if (this.isMenuActive &&
+        this.$refs.menu
+      ) {
+        this.$refs.menu.updateDimensions()
       }
     },
     changeSelectedIndex (keyCode) {
@@ -278,20 +264,6 @@ export default {
 
       VSelect.methods.clearableCallback.call(this)
     },
-    genChipSelection (item, index) {
-      const chip = VSelect.methods.genChipSelection.call(this, item, index)
-
-      // Allow user to update an existing value
-      if (this.combobox && this.multiple) {
-        chip.componentOptions.listeners.dblclick = () => {
-          this.editingIndex = index
-          this.internalSearch = this.getText(item)
-          this.selectedIndex = -1
-        }
-      }
-
-      return chip
-    },
     genInput () {
       const input = VTextField.methods.genInput.call(this)
 
@@ -336,16 +308,6 @@ export default {
 
       VSelect.methods.onKeyDown.call(this, e)
 
-      // If user is at selection index of 0
-      // create a new tag
-      if (this.combobox &&
-        this.multiple &&
-        keyCode === keyCodes.left &&
-        this.$refs.input.selectionStart === 0
-      ) {
-        this.updateSelf()
-      }
-
       // The ordering is important here
       // allows new value to be updated
       // and then moves the index to the
@@ -353,24 +315,7 @@ export default {
       this.changeSelectedIndex(keyCode)
     },
     onTabDown (e) {
-      const menuIndex = this.getMenuIndex()
-
-      // When adding tags, if searching and
-      // there is not a filtered options,
-      // add the value to the tags list
-      if (this.combobox &&
-        this.multiple &&
-        this.internalSearch &&
-        menuIndex === -1
-      ) {
-        e.preventDefault()
-        e.stopPropagation()
-
-        return this.updateTags()
-      } else {
-        VSelect.methods.onTabDown.call(this, e)
-      }
-
+      VSelect.methods.onTabDown.call(this, e)
       this.updateSelf()
     },
     selectItem (item) {
@@ -389,10 +334,6 @@ export default {
         this.internalValue === ''
       ) {
         this.selectedItems = []
-      } else if (this.combobox && this.multiple) {
-        this.selectedItems = this.internalValue
-      } else if (this.combobox) {
-        this.selectedItems = [this.internalValue]
       } else {
         VSelect.methods.setSelectedItems.call(this)
         // #4273 Don't replace if searching
@@ -416,6 +357,9 @@ export default {
       this.internalValue = this.internalSearch
       this.$emit('change', this.internalSearch)
     },
+    updateSelf () {
+      this.updateAutocomplete()
+    },
     updateAutocomplete () {
       if (!this.searchIsDirty &&
         !this.internalValue
@@ -427,51 +371,6 @@ export default {
       )) {
         this.setSearch()
       }
-    },
-    updateCombobox () {
-      // When using chips and search is dirty
-      // avoid updating input
-      if (this.hasChips && !this.searchIsDirty) return
-
-      // The internal search is not matching
-      // the initial value, update the input
-      if (this.internalSearch !== this.internalValue) this.setValue()
-
-      // Reset search if using chips
-      // to avoid a double input
-      if (this.hasChips) this.internalSearch = undefined
-    },
-    updateSelf () {
-      if (this.combobox && this.multiple) this.updateTags()
-      else if (this.combobox) this.updateCombobox()
-      else this.updateAutocomplete()
-    },
-    // Maybe change to onBlur?
-    updateTags () {
-      const menuIndex = this.getMenuIndex()
-
-      // If the user is not searching
-      // and no menu item is selected
-      // do nothing
-      if (menuIndex < 0 &&
-        !this.searchIsDirty
-      ) return
-
-      const index = this.selectedItems.indexOf(this.internalSearch)
-      // If it already exists, do nothing
-      // this might need to change to bring
-      // the duplicated item to the last entered
-      if (index > -1) {
-        this.internalValue.splice(index, 1)
-      }
-
-      // If menu index is greater than 1
-      // the selection is handled elsewhere
-      // TODO: find out where
-      if (menuIndex > -1) return (this.internalSearch = null)
-
-      this.selectItem(this.internalSearch)
-      this.internalSearch = null
     }
   }
 }
