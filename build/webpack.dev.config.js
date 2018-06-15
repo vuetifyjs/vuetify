@@ -31,6 +31,17 @@ module.exports = merge(baseWebpackConfig, {
         options: { cache: true }
       },
       {
+        enforce: 'pre',
+        test: /\.ts$/,
+        exclude: /node_modules/,
+        loader: 'tslint-loader',
+        options: {
+          typeCheck: true,
+          configFile: resolve('../.tslint.js'),
+          tsConfigFile: resolve('../tsconfig.json')
+        }
+      },
+      {
         test: /\.vue$/,
         loader: 'vue-loader'
       },
