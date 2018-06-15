@@ -1,7 +1,7 @@
 import { test } from '@/test'
-import VAutocomplete from '@/components/VAutocomplete'
+import VCombobox from '@/components/VCombobox'
 
-test('VAutocomplete - combobox multiple', ({ mount, compileToFunctions }) => {
+test('VCombobox - multiple', ({ mount, compileToFunctions }) => {
   const app = document.createElement('div')
   app.setAttribute('data-app', true)
   document.body.appendChild(app)
@@ -10,10 +10,9 @@ test('VAutocomplete - combobox multiple', ({ mount, compileToFunctions }) => {
 
   function createTagsAutocomplete (propsData) {
     const change = jest.fn()
-    const wrapper = mount(VAutocomplete, {
+    const wrapper = mount(VCombobox, {
       attachToDocument: true,
       propsData: Object.assign({
-        combobox: true,
         multiple: true,
         value: []
       }, propsData)

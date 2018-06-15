@@ -9,13 +9,13 @@ import VTextField from '../VTextField/VTextField'
 import { keyCodes } from '../../util/helpers'
 
 export default {
-  name: 'v-autocomplete',
+  name: 'v-combobox',
 
   extends: VSelect,
 
   data: vm => ({
     attrsInput: null,
-    combobox: false,
+    combobox: true,
     editingIndex: -1,
     lazySearch: vm.searchInput,
     lazyValue: vm.value != null
