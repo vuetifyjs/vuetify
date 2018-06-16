@@ -15,7 +15,7 @@
   "scripts": {
     "watch": "cross-env TARGET=development webpack --config build/config.js --progress --hide-modules --watch",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.config.js --hot",
-    "build": "concurrently 'yarn build:dist --no-progress' 'yarn build:es5' -n'dist,es5' --kill-others-on-fail -r",
+    "build": "concurrently \"yarn build:dist --no-progress\" \"yarn build:es5\" -n\"dist,es5\" --kill-others-on-fail -r",
     "build:dev": "cross-env NODE_ENV=production node build/webpack.dev.config.js",
     "build:dist": "rimraf dist && cross-env NODE_ENV=production webpack --config build/config.js --progress --hide-modules",
     "build:es5": "rimraf es5 es5-temp && tsc -p tsconfig.dist.json && cross-env NODE_ENV=es5 babel es5-temp --out-dir es5 --source-maps -q",
@@ -26,10 +26,10 @@
     "test:win32": "cross-env NODE_ENV=test jest -i",
     "test:coverage": "yarn test --coverage",
     "test:types": "tsc -p ./types/test/tsconfig.json",
-    "lint": "concurrently 'tsc --noEmit --pretty' 'tslint -p . -c .tslint.js src/**/*.ts -t stylish' 'eslint --ext .js,.ts src' 'yarn test:types' --kill-others-on-fail -n 'tsc,tslint,eslint,types'",
+    "lint": "concurrently \"tsc --noEmit --pretty\" \"tslint -p . -c .tslint.js src/**/*.ts -t stylish\" \"eslint --ext .js,.ts src\" \"yarn test:types\" --kill-others-on-fail -n \"tsc,tslint,eslint,types\"",
     "preparecommitmsg": "node dev/prepare-commit-message.js",
     "commitmsg": "node dev/lint-commit-message.js",
-    "precommit": "node dev/warn-npm-install.js && concurrently 'yarn test' 'yarn lint' -n 'test,lint' --kill-others-on-fail"
+    "precommit": "node dev/warn-npm-install.js && concurrently \"yarn test\" \"yarn lint\" -n \"test,lint\" --kill-others-on-fail"
   },
   "description": "Vue.js 2 Semantic Component Framework",
   "devDependencies": {
