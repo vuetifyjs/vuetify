@@ -60,9 +60,11 @@ export default {
 
     genContent () {
       const options = {
+        attrs: this.getScopeIdAttrs(),
         staticClass: 'v-menu__content',
         'class': {
           [this.contentClass.trim()]: true,
+          'v-menu__content--auto': this.auto,
           'menuable__content__active': this.isActive,
           'theme--dark': this.dark,
           'theme--light': this.light

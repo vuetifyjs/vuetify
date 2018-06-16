@@ -10,11 +10,11 @@ theme(v-bottom-nav, "v-bottom-nav")
   bottom: 0
   box-shadow: 0 3px 14px 2px rgba(#000, .12)
   display: flex
+  left: 0
   justify-content: center
   transform: translate(0, 60px)
   transition: all .4s $transition.swing
   width: 100%
-  z-index: 4
 
   &--absolute
     position: absolute
@@ -24,6 +24,7 @@ theme(v-bottom-nav, "v-bottom-nav")
 
   &--fixed
     position: fixed
+    z-index: 4
 
   .v-btn
     background: transparent !important

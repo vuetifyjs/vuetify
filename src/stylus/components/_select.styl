@@ -27,11 +27,15 @@ theme(v-select, 'v-select')
   // then visible when autocomplete
   &:not(.v-autocomplete)
     input
-      caret-color: transparent !important
+      // IE11 refuses to hide blinking input
+      // because of this requires a min-height
+      font-size: 0
+      min-height: 32px
 
   .v-menu
     height: 100%
     flex: 1 1 auto
+    width: 100%
 
   .v-chip
     flex: 0 1 auto
@@ -40,22 +44,18 @@ theme(v-select, 'v-select')
     position: absolute
     left: 0
 
-  &.v-text-field--solo
-    .v-select__selections
-      padding: 4px 0
+  &.v-input--is-dirty
+    ::placeholder
+      color: transparent !important
 
-  &.v-text-field--box,
-  &.v-text-field--outline
-    &:not(.v-text-field--single-line)
-      &.v-input--is-dirty,
-      &.v-input--is-focused
-        .v-select__selections
-          padding-top: 24px
+  &.v-text-field--enclosed:not(.v-text-field--single-line)
+    .v-select__selections
+      padding-top: 24px
 
   // For specificity, hide caret
   &.v-text-field
     input
-      flex: 1 1 0
+      flex: 1 1 // Doesn't resize on IE11 with 3rd param
       margin-top: 0
       min-width: 0
       pointer-events: none
@@ -69,6 +69,23 @@ theme(v-select, 'v-select')
     input
       margin: 0
 
+    .v-select__selections
+      min-height: 42px
+
+    &.v-select--chips--small
+      .v-select__selections
+        min-height: 32px
+
+    &:not(.v-text-field--single-line)
+      &.v-text-field--box,
+      &.v-text-field--enclosed
+        .v-select__selections
+          min-height: 68px
+
+        &.v-select--chips--small
+          .v-select__selections
+            min-height: 56px
+
   &__selections
     align-items: center
     display: flex
@@ -80,13 +97,22 @@ theme(v-select, 'v-select')
     &--comma
       align-items: center
       display: inline-flex
-      margin-right: 4px
+      margin: 7px 4px 7px 0
 
   &__slot
     align-items: center
     display: flex
     height: 100%
     width: 100%
+
+  &:not(.v-text-field--single-line)
+    .v-select__slot
+      // If an input is a direct child
+      // there is no selections div
+      // and we must move input to
+      // the end of the container
+      > input
+        align-self: flex-end
 
 .v-select-list
   .v-list__tile__action

@@ -12,7 +12,7 @@ import Toggleable from '../../mixins/toggleable'
 import ClickOutside from '../../directives/click-outside'
 
 // Helpers
-import { getZIndex } from '../../util/helpers'
+import { getZIndex, convertToUnit } from '../../util/helpers'
 
 export default {
   name: 'v-dialog',
@@ -35,7 +35,7 @@ export default {
       animate: false,
       animateTimeout: null,
       isDependent: false,
-      stackClass: 'v-dialog__content__active',
+      stackClass: 'v-dialog__content--active',
       stackMinZIndex: 200
     }
   },
@@ -124,10 +124,12 @@ export default {
       ) return false
 
       // If we made it here, the click is outside
-      // and is active. If persistent, animate
-      // content
+      // and is active. If persistent, and the
+      // click is on the overlay, animate
       if (this.persistent) {
-        !this.noClickAnimation && this.animateClick()
+        if (!this.noClickAnimation &&
+          this.overlay === e.target
+        ) this.animateClick()
 
         return false
       }
@@ -176,8 +178,8 @@ export default {
 
     if (!this.fullscreen) {
       data.style = {
-        maxWidth: this.maxWidth === 'none' ? undefined : (isNaN(this.maxWidth) ? this.maxWidth : `${this.maxWidth}px`),
-        width: this.width === 'auto' ? undefined : (isNaN(this.width) ? this.width : `${this.width}px`)
+        maxWidth: this.maxWidth === 'none' ? undefined : convertToUnit(this.maxWidth),
+        width: this.width === 'auto' ? undefined : convertToUnit(this.width)
       }
     }
 
@@ -193,18 +195,22 @@ export default {
       }, [this.$slots.activator]))
     }
 
-    const dialog = h('transition', {
-      props: {
-        name: this.transition || '', // If false, show nothing
-        origin: this.origin
-      }
-    }, [h('div', data,
-      this.showLazyContent(this.$slots.default)
-    )])
+    let dialog = h('div', data, this.showLazyContent(this.$slots.default))
+    if (this.transition) {
+      dialog = h('transition', {
+        props: {
+          name: this.transition,
+          origin: this.origin
+        }
+      }, [dialog])
+    }
 
     children.push(h('div', {
       'class': this.contentClasses,
-      domProps: { tabIndex: -1 },
+      attrs: {
+        tabIndex: '-1',
+        ...this.getScopeIdAttrs()
+      },
       style: { zIndex: this.activeZIndex },
       ref: 'content'
     }, [dialog]))

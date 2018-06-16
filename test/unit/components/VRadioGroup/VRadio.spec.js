@@ -251,4 +251,19 @@ test('VRadio.vue', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
     expect(warning).toHaveBeenTipped()
   })
+
+  it('should check/uncheck the internal input', () => {
+    const wrapper = mount(VRadio)
+
+    expect(wrapper.vm.$refs.input.checked).toBe(false)
+
+    wrapper.setData({ isActive: true })
+
+    expect(wrapper.vm.$refs.input.checked).toBe(true)
+
+    wrapper.setData({ isActive: false })
+
+    expect(wrapper.vm.$refs.input.checked).toBe(false)
+    expect(warning).toHaveBeenTipped()
+  })
 })

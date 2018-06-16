@@ -48,12 +48,19 @@ export default {
     },
     vueMeta () {
       if (this.$vuetify.theme === false) return
+
+      const options = {
+        cssText: this.generatedStyles,
+        id: 'vuetify-theme-stylesheet',
+        type: 'text/css'
+      }
+
+      if (this.$vuetify.options.cspNonce) {
+        options.nonce = this.$vuetify.options.cspNonce
+      }
+
       return {
-        style: [{
-          cssText: this.generatedStyles,
-          type: 'text/css',
-          id: 'vuetify-theme-stylesheet'
-        }]
+        style: [options]
       }
     }
   },
@@ -82,8 +89,11 @@ export default {
       // Handled by metaInfo()/nuxt()
     } else if (typeof document === 'undefined' && this.$ssrContext) {
       // SSR
+      const nonce = this.$vuetify.options.cspNonce
+        ? ` nonce="${this.$vuetify.options.cspNonce}"`
+        : ''
       this.$ssrContext.head = this.$ssrContext.head || ''
-      this.$ssrContext.head += `<style type="text/css" id="vuetify-theme-stylesheet">${this.generatedStyles}</style>`
+      this.$ssrContext.head += `<style type="text/css" id="vuetify-theme-stylesheet"${nonce}>${this.generatedStyles}</style>`
     } else if (typeof document !== 'undefined') {
       // Client-side
       this.genStyle()

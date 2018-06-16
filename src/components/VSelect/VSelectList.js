@@ -70,6 +70,20 @@ export default {
     },
     tileActiveClass () {
       return Object.keys(this.addTextColorClassChecks()).join(' ')
+    },
+    staticNoDataTile () {
+      const tile = {
+        on: {
+          mousedown: e => e.preventDefault() // Prevent onBlur from being called
+        },
+        props: {
+          disabled: true
+        }
+      }
+
+      return this.$createElement(VListTile, tile, [
+        this.genTileContent(this.noDataText)
+      ])
     }
   },
 
@@ -193,7 +207,7 @@ export default {
       return (getPropertyFromItem(item, this.itemText, item) || '').toString()
     },
     getValue (item) {
-      return getPropertyFromItem(item, this.itemValue, item)
+      return getPropertyFromItem(item, this.itemValue, this.getText(item))
     }
   },
 
@@ -201,7 +215,7 @@ export default {
     const children = []
     for (const item of this.items) {
       if (this.hideSelected &&
-        this.selectedItems.indexOf(this.getValue(item)) > -1
+        this.selectedItems.indexOf(item) > -1
       ) continue
 
       if (item.header) children.push(this.genHeader(item))
@@ -209,14 +223,7 @@ export default {
       else children.push(this.genTile(item))
     }
 
-    if (!children.length) {
-      const noData = this.$slots['no-data']
-      if (noData) {
-        children.push(noData)
-      } else {
-        children.push(this.genTile(this.noDataText, true))
-      }
-    }
+    children.length || children.push(this.$slots['no-data'] || this.staticNoDataTile)
 
     return this.$createElement(VCard, {
       staticClass: 'v-select-list',

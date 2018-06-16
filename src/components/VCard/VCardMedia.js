@@ -1,3 +1,6 @@
+// Helpers
+import { convertToUnit } from '../../util/helpers'
+
 export default {
   name: 'v-card-media',
 
@@ -16,7 +19,7 @@ export default {
     const data = {
       'class': 'v-card__media',
       style: {
-        height: !isNaN(this.height) ? `${this.height}px` : this.height
+        height: convertToUnit(this.height)
       },
       on: this.$listeners
     }

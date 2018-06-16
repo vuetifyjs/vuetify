@@ -11,6 +11,9 @@ import ClickOutside from '../../directives/click-outside'
 import Resize from '../../directives/resize'
 import Touch from '../../directives/touch'
 
+// Helpers
+import { convertToUnit } from '../../util/helpers'
+
 export default {
   name: 'v-navigation-drawer',
 
@@ -80,9 +83,6 @@ export default {
      */
     applicationProperty () {
       return this.right ? 'right' : 'left'
-    },
-    calculatedHeight () {
-      return isNaN(this.height) ? this.height : `${this.height}px`
     },
     calculatedTransform () {
       if (this.isActive) return 0
@@ -161,7 +161,7 @@ export default {
     },
     styles () {
       const styles = {
-        height: this.calculatedHeight,
+        height: convertToUnit(this.height),
         marginTop: `${this.marginTop}px`,
         maxHeight: `calc(100% - ${this.maxHeight}px)`,
         transform: `translateX(${this.calculatedTransform}px)`,
@@ -327,7 +327,11 @@ export default {
         },
         transitionend: e => {
           this.$emit('transitionend', e)
-          window.dispatchEvent(new Event('resize'))
+
+          // IE11 does not support new Event('resize')
+          const resizeEvent = document.createEvent('UIEvents')
+          resizeEvent.initUIEvent('resize', true, false, window, 0)
+          window.dispatchEvent(resizeEvent)
         }
       }
     }

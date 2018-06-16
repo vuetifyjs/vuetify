@@ -8,6 +8,9 @@ import Detachable from '../../mixins/detachable'
 import Menuable from '../../mixins/menuable'
 import Toggleable from '../../mixins/toggleable'
 
+// Helpers
+import { convertToUnit } from '../../util/helpers'
+
 export default {
   name: 'v-tooltip',
 
@@ -108,7 +111,7 @@ export default {
     styles () {
       return {
         left: this.calculatedLeft,
-        maxWidth: isNaN(this.maxWidth) ? this.maxWidth : `${this.maxWidth}px`,
+        maxWidth: convertToUnit(this.maxWidth),
         opacity: this.isActive ? 0.9 : 0,
         top: this.calculatedTop,
         zIndex: this.zIndex || this.activeZIndex
@@ -138,7 +141,7 @@ export default {
         'menuable__content__active': this.isActive
       }),
       style: this.styles,
-      attrs: this.attrs,
+      attrs: this.getScopeIdAttrs(),
       directives: [{
         name: 'show',
         value: this.isContentActive

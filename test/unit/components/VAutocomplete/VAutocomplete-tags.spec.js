@@ -85,11 +85,16 @@ test('VAutocomplete - tags', ({ mount, compileToFunctions }) => {
     const menu = wrapper.first('.v-menu')
 
     input.trigger('focus')
-    await wrapper.vm.$nextTick()
-
     input.element.value = 'b'
     input.trigger('input')
     menu.trigger('keydown.down')
+
+    // Give DOM time to update
+    // list tile classes
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.isMenuActive).toBe(true)
+
     input.trigger('keydown.tab')
 
     expect(change).toBeCalledWith(['bar'])
@@ -269,6 +274,8 @@ test('VAutocomplete - tags', ({ mount, compileToFunctions }) => {
       delimiters: [', ', 'baz']
     })
 
+    await wrapper.vm.$nextTick()
+
     const input = wrapper.first('input')
     input.trigger('focus')
 
@@ -299,5 +306,34 @@ test('VAutocomplete - tags', ({ mount, compileToFunctions }) => {
     expect(change).toHaveBeenCalledTimes(2)
     expect(change).toHaveBeenCalledWith(['foo', 'foo,bar'])
     expect(input.element.value).toBe('')
+  })
+
+  it('should allow the editing of an existing value', async () => {
+    const { wrapper } = createTagsAutocomplete({
+      chips: true,
+      value: ['foo']
+    })
+
+    const change = jest.fn()
+    const chip = wrapper.first('.v-chip')
+    const input = wrapper.first('input')
+
+    wrapper.vm.$on('change', change)
+
+    expect(wrapper.vm.editingIndex).toBe(-1)
+    expect(wrapper.vm.internalSearch).toBe(undefined)
+
+    chip.trigger('dblclick')
+
+    expect(wrapper.vm.editingIndex).toBe(0)
+    expect(wrapper.vm.internalSearch).toBe('foo')
+
+    input.element.value = 'foobar'
+    input.trigger('input')
+    input.trigger('keydown.enter')
+
+    await wrapper.vm.$nextTick()
+
+    expect(change).toBeCalledWith(['foobar'])
   })
 })

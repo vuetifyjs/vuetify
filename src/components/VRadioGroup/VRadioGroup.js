@@ -84,15 +84,12 @@ export default {
 
   methods: {
     genDefaultSlot () {
-      return [this.genRadioGroup()]
-    },
-    genRadioGroup () {
       return this.$createElement('div', {
         staticClass: 'v-input--radio-group__input',
         attrs: {
           role: 'radiogroup'
         }
-      }, this.$slots.default)
+      }, VInput.methods.genDefaultSlot.call(this))
     },
     onRadioChange (value) {
       if (this.disabled) return
@@ -104,7 +101,7 @@ export default {
       this.$nextTick(this.validate)
     },
     onRadioBlur (e) {
-      if (!e.relatedTarget || !e.relatedTarget.classList.contains('radio')) {
+      if (!e.relatedTarget || !e.relatedTarget.classList.contains('v-radio')) {
         this.hasInput = true
         this.$emit('blur', e)
       }

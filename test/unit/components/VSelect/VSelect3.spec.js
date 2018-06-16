@@ -15,12 +15,12 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.vm.isMenuActive).toBe(false)
 
-    // Box should not trigger from wrapper clicks
     wrapper.setProps({ box: true })
     wrapper.trigger('mouseup')
 
-    expect(wrapper.vm.isMenuActive).toBe(false)
+    expect(wrapper.vm.isMenuActive).toBe(true)
 
+    wrapper.setData({ isMenuActive: false })
     wrapper.setProps({ box: false, solo: true })
     wrapper.trigger('mouseup')
 
@@ -51,5 +51,39 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     wrapper.setProps({ auto: true })
 
     expect(wrapper.vm.virtualizedItems.length).toBe(100)
+  })
+
+  it('should fallback to using text as value if none present', () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        items: [{
+          text: 'foo'
+        }]
+      }
+    })
+
+    expect(wrapper.vm.getValue(wrapper.vm.items[0])).toBe('foo')
+  })
+
+  it('should accept arrays as values', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        items: [
+          { text: 'Foo', value: ['bar'] }
+        ]
+      }
+    })
+
+    const input = jest.fn()
+    wrapper.vm.$on('input', input)
+
+    wrapper.vm.selectItem(wrapper.vm.items[0])
+
+    await wrapper.vm.$nextTick()
+
+    expect(input).toBeCalledWith(['bar'])
+    expect(wrapper.vm.selectedItems).toEqual([
+      { text: 'Foo', value: ['bar'] }
+    ])
   })
 })

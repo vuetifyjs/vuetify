@@ -7,16 +7,16 @@ v-input($material)
   textarea::placeholder
     color: $material.text.disabled
 
-  &:not(.v-input--has-state)
+  &:not(.v-input--is-disabled)
     input,
     textarea
       color: $material.text.primary
 
-    &--is-disabled
-      .v-input__label,
-      input,
-      textarea
-        color: $material.text.disabled
+  &--is-disabled
+    .v-label,
+    input,
+    textarea
+      color: $material.text.disabled
 
 theme(v-input, "v-input")
 
@@ -25,12 +25,11 @@ theme(v-input, "v-input")
   display: flex
   flex: 1 1 auto
   font-size: 16px
-  margin-top: 28px // 12px for label, 16px for spec
+  margin-top: 16px // 12px for label, 16px for spec
   text-align: left
-  transition: $primary-transition
 
   .v-progress-linear
-    top: 100%
+    top: calc(100% - 1px)
     left: 0
     margin: 0
     position: absolute
@@ -44,13 +43,10 @@ theme(v-input, "v-input")
     &:active
       outline: none
 
-  .progress-linear
-    bottom: -1px
-    height: 2px
-    left: 0
-    margin: 0
-    padding: 0
-    position: absolute
+  .v-label
+    cursor: text
+    height: 20px
+    line-height: 20px
 
   &__append-outer,
   &__prepend-outer
@@ -63,17 +59,19 @@ theme(v-input, "v-input")
       user-select: none
 
   &__append-outer
-    margin-left: 16px
+    margin-left: 9px
 
   &__prepend-outer
-    margin-right: 16px
+    margin-right: 9px
 
   &__control
     display: flex
+    flex-direction: column
     height: auto
     flex-grow: 1
     flex-wrap: wrap
     position: relative
+    width: 100% // For IE11
 
   &__icon
     align-items: center
@@ -90,9 +88,10 @@ theme(v-input, "v-input")
   &__slot
     align-items: center
     color: inherit
+    cursor: text
     display: flex
     margin-bottom: 8px
-    min-height: 32px
+    min-height: inherit
     position: relative
     transition: $primary-transition
     width: 100%
@@ -101,7 +100,8 @@ theme(v-input, "v-input")
     pointer-events: none
 
   &--is-loading
-    .v-input__slot:before
+    .v-input__slot:before,
+    .v-input__slot:after
       display: none
 
   &--hide-details

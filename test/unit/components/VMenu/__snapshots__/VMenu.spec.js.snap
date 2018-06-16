@@ -31,7 +31,7 @@ exports[`VMenu.js should render component with custom auto and match snapshot 1`
 <div class="v-menu"
      style="display: inline-block;"
 >
-  <div class="v-menu__content"
+  <div class="v-menu__content v-menu__content--auto"
        style="max-height: 200px; min-width: 16px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
   >
   </div>

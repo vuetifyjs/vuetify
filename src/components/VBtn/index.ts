@@ -5,4 +5,5 @@ VBtn.install = function install (Vue) {
   Vue.component(VBtn.options.name, VBtn)
 }
 
+export { VBtn }
 export default VBtn

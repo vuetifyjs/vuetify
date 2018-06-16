@@ -208,6 +208,6 @@ function update (el: HTMLElement, binding: VNodeDirective) {
 export default {
   name: 'ripple',
   bind: directive,
-  unbind: unbind,
-  update: update
+  unbind,
+  update
 }

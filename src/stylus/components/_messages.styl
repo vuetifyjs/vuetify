@@ -5,7 +5,11 @@
 v-messages($material)
   color: $material.text.secondary
 
+v-messages-rtl()
+  text-align: right
+
 theme(v-messages, "v-messages")
+rtl(v-messages-rtl, "v-messages")
 
 .v-messages
   flex: 1 1 auto
@@ -16,5 +20,7 @@ theme(v-messages, "v-messages")
 
   &__message
     line-height: 1
-    position: absolute
-    transition: $primary-transition
+    word-break: break-word
+    overflow-wrap: break-word
+    word-wrap: break-word
+    hyphens: auto

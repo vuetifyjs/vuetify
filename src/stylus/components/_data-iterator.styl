@@ -6,11 +6,11 @@ v-dataiterator($material)
     color: rgba($material.fg-color, $material.secondary-text-percent)
 
     &__select
-      .input-group--select
-        .input-group__selections__comma
+      .v-select
+        .v-select__selection--comma
           color: rgba($material.fg-color, $material.secondary-text-percent) !important
 
-        .input-group__append-icon
+        .v-input__append-inner
           color: rgba($material.fg-color, $material.secondary-text-percent) !important
 
 theme(v-dataiterator, "v-data-iterator")
@@ -45,10 +45,10 @@ theme(v-dataiterator, "v-data-iterator")
     justify-content: center
     margin-right: 14px
 
-    .input-group--select
+    .v-select
       margin: 13px 0 13px 34px
       padding: 0
       position: initial
 
-      .input-group__selections__comma
+      .v-select__selection--comma
         font-size: 12px

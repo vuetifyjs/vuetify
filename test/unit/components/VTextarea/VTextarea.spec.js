@@ -2,39 +2,29 @@ import { test } from '@/test'
 import VTextarea from '@/components/VTextarea'
 import Vue from 'vue'
 
-const tabClick = 'Injection "tabClick" not found'
-const tabsWarning = '[Vuetify] The v-tab component must be used inside a v-tabs'
-const stub = {
-  name: 'router-link',
-
-  props: {
-    to: [String, Object]
-  },
-
-  render (h) {
-    return h('a', {
-      domProps: { href: this.to }
-    })
-  }
-}
-
 test('VTextarea.vue', ({ mount }) => {
-  it('should have no resize handle', async () => {
-    const wrapper = mount(VTextarea)
+  it('should calculate element height when using auto-grow prop', async () => {
+    const wrapper = mount(VTextarea, {
+      attachToDocument: true,
+      propsData: {
+        value: '',
+        autoGrow: true
+      }
+    })
+    const input = jest.fn(value => wrapper.setData({ value }))
+    wrapper.vm.$on('input', input)
 
-    expect(wrapper.vm.noResizeHandle).toBe(false)
+    const el = wrapper.find('textarea')[0]
 
-    wrapper.setProps({ noResize: true })
+    el.trigger('focus')
+    await wrapper.vm.$nextTick()
+    el.element.value = 'this is a really long text that should hopefully make auto-grow kick in. maybe?'.replace(/\s/g, '\n')
+    el.trigger('input')
+    await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.noResizeHandle).toBe(true)
-
-    wrapper.setProps({ noResize: false, autoGrow: true })
-
-    expect(wrapper.vm.noResizeHandle).toBe(true)
-
-    wrapper.setProps({ autoGrow: false })
-
-    expect(wrapper.vm.noResizeHandle).toBe(false)
+    // TODO: switch to e2e, jest doesn't do inline styles
+    expect(wrapper.html()).toMatchSnapshot()
+    expect(el.element.style.getPropertyValue('height').length).not.toBe(0)
   })
 
   it('should watch lazy value', async () => {
@@ -68,41 +58,8 @@ test('VTextarea.vue', ({ mount }) => {
       methods: { calculateInputHeight }
     })
 
-
+    await new Promise(resolve => setTimeout(resolve, 0))
     expect(calculateInputHeight).toBeCalled()
-  })
-
-  it('should calculate input height', async () => {
-    const wrapper = mount(VTextarea, {
-      propsData: {
-        autoGrow: true
-      }
-    })
-
-    await wrapper.vm.$nextTick()
-
-    expect(wrapper.vm.inputHeight).toBe(120)
-
-    wrapper.setData({ inputHeight: 200 })
-
-    expect(wrapper.vm.inputHeight).toBe(200)
-
-    wrapper.vm.calculateInputHeight()
-
-    await wrapper.vm.$nextTick()
-
-    expect(wrapper.vm.inputHeight).toBe(120)
-
-    wrapper.vm.calculateInputHeight()
-
-    await wrapper.vm.$nextTick()
-
-    delete wrapper.vm.$refs.input
-    wrapper.vm.calculateInputHeight()
-
-    await wrapper.vm.$nextTick()
-
-    expect(wrapper.vm.inputHeight).toBe(120)
   })
 
   it('should stop propagation', async () => {
@@ -124,11 +81,11 @@ test('VTextarea.vue', ({ mount }) => {
     expect(stopPropagation).toBeCalled()
   })
 
-  it.skip('should render no-resize the same if already auto-grow', () => {
+  it('should render no-resize the same if already auto-grow', () => {
     const wrappers = [
-      { autoGrow:true, multiLine: true },
-      { autoGrow:true, textarea: true }
-    ].map(propsData => mount(VTextField,{propsData}))
+      { autoGrow: true, outline: false },
+      { autoGrow: true, outline: true }
+    ].map(propsData => mount(VTextarea,{ propsData }))
 
     wrappers.forEach(async wrapper => {
       await wrapper.vm.$nextTick()
@@ -141,5 +98,19 @@ test('VTextarea.vue', ({ mount }) => {
 
       expect(html2).toBe(html1)
     })
+  })
+
+  it('should emit keydown event', () => {
+    const wrapper = mount(VTextarea)
+    const keydown = jest.fn()
+    const textarea = wrapper.first('textarea')
+    wrapper.vm.$on('keydown', keydown)
+
+    textarea.trigger('focus')
+    textarea.element.value = 'foobar'
+    textarea.trigger('input')
+    textarea.trigger('keydown.enter')
+
+    expect(keydown).toBeCalled()
   })
 })
