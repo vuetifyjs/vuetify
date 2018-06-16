@@ -134,7 +134,7 @@ test('VDataIterator.js', ({ mount, compileToFunctions }) => {
     data.propsData.search = '    '
     const wrapper = mount(VDataIterator, data)
 
-    expect(wrapper.instance().filteredItems).toHaveLength(data.propsData.items.length)
+    expect(wrapper.vm.filteredItems).toHaveLength(data.propsData.items.length)
 
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })

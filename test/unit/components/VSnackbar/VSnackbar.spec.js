@@ -52,7 +52,7 @@ test('VSnackbar.vue', ({ mount }) => {
 
     const value = jest.fn()
 
-    wrapper.instance().$on('input', value)
+    wrapper.vm.$on('input', value)
     wrapper.setProps({ value: true })
     wrapper.update()
 
@@ -80,7 +80,7 @@ test('VSnackbar.vue', ({ mount }) => {
 
     const value = jest.fn()
 
-    wrapper.instance().$on('input', value)
+    wrapper.vm.$on('input', value)
 
     await wrapper.vm.$nextTick()
 

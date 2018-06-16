@@ -73,7 +73,7 @@ test('VSlider.vue', ({ mount }) => {
     })
 
     const input = jest.fn()
-    wrapper.instance().$on('input', input)
+    wrapper.vm.$on('input', input)
 
     wrapper.setProps({ value: 0 })
     await wrapper.vm.$nextTick()
@@ -96,7 +96,7 @@ test('VSlider.vue', ({ mount }) => {
     })
 
     const input = jest.fn()
-    wrapper.instance().$on('input', input)
+    wrapper.vm.$on('input', input)
 
     wrapper.setProps({ min: 6 })
     await wrapper.vm.$nextTick()

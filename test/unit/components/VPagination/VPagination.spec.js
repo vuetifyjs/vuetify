@@ -17,8 +17,8 @@ test('VPagination.vue', ({ mount }) => {
     const previous = jest.fn()
     const next = jest.fn()
 
-    wrapper.instance().$on('previous', previous)
-    wrapper.instance().$on('next', next)
+    wrapper.vm.$on('previous', previous)
+    wrapper.vm.$on('next', next)
 
     const navigation = wrapper.findAll('.v-pagination__navigation')
     navigation[0].trigger('click')
@@ -43,7 +43,7 @@ test('VPagination.vue', ({ mount }) => {
 
     const cb = jest.fn()
 
-    wrapper.instance().$on('input', cb)
+    wrapper.vm.$on('input', cb)
 
     const navigation = wrapper.findAll('.v-pagination__item')
     navigation[1].trigger('click')

@@ -82,7 +82,7 @@ test('VBottomNav.js', ({ mount }) => {
     const btn = wrapper.find('.v-btn')
 
     const change = jest.fn()
-    wrapper.instance().$on('update:active', change)
+    wrapper.vm.$on('update:active', change)
 
     btn.trigger('click')
     expect(change).toBeCalledWith(0)

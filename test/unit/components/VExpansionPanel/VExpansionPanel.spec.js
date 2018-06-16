@@ -110,7 +110,7 @@ test('VExpansionPanel.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    wrapper.instance().$on('input', fn)
+    wrapper.vm.$on('input', fn)
 
     await wrapper.vm.$nextTick()
     expect(wrapper.findAll('.v-expansion-panel__container--active').length).toBe(2)
@@ -132,7 +132,7 @@ test('VExpansionPanel.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    wrapper.instance().$on('input', input)
+    wrapper.vm.$on('input', input)
 
     await wrapper.vm.$nextTick()
     expect(wrapper.findAll('.v-expansion-panel__container--active').length).toBe(0)

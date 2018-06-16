@@ -18,7 +18,7 @@ test('VMenu.js', ({ mount }) => {
 
     const activator = wrapper.find('.v-menu__activator')
     const input = jest.fn()
-    wrapper.instance().$on('input', input)
+    wrapper.vm.$on('input', input)
     activator.trigger('click')
 
     await wrapper.vm.$nextTick()

@@ -229,15 +229,15 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
   it('should only filter on data specified in headers', async () => {
     const wrapper = mount(VDataTable, dataTableTestDataFilter())
 
-    expect(wrapper.instance().filteredItems).toHaveLength(1)
+    expect(wrapper.vm.filteredItems).toHaveLength(1)
     wrapper.setProps({
       search: 'outside'
     })
-    expect(wrapper.instance().filteredItems).toHaveLength(0)
+    expect(wrapper.vm.filteredItems).toHaveLength(0)
     wrapper.setProps({
       search: 'baz'
     })
-    expect(wrapper.instance().filteredItems).toHaveLength(1)
+    expect(wrapper.vm.filteredItems).toHaveLength(1)
 
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
@@ -247,7 +247,7 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
     data.propsData.search = '    '
     const wrapper = mount(VDataTable, data)
 
-    expect(wrapper.instance().filteredItems).toHaveLength(data.propsData.items.length)
+    expect(wrapper.vm.filteredItems).toHaveLength(data.propsData.items.length)
 
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
@@ -373,7 +373,7 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
 
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.instance().filteredItems).toHaveLength(2)
+    expect(wrapper.vm.filteredItems).toHaveLength(2)
     expect(pagination).toHaveBeenCalledWith(Object.assign({}, data.propsData.pagination, { totalItems: 2 }))
 
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
@@ -398,13 +398,13 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
 
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.instance().computedPagination.page).toBe(2)
+    expect(wrapper.vm.computedPagination.page).toBe(2)
 
     wrapper.setProps({ totalItems: 10 })
 
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.instance().computedPagination.page).toBe(2)
+    expect(wrapper.vm.computedPagination.page).toBe(2)
 
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })

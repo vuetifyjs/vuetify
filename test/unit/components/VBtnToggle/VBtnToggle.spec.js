@@ -51,9 +51,9 @@ test('VBtnToggle.vue', ({ mount }) => {
     })
 
     const change = jest.fn()
-    wrapper.instance().$on('change', change)
+    wrapper.vm.$on('change', change)
 
-    wrapper.instance().updateValue(0)
+    wrapper.vm.updateValue(0)
 
     await wrapper.vm.$nextTick()
 
@@ -77,9 +77,9 @@ test('VBtnToggle.vue', ({ mount }) => {
     })
 
     const change = jest.fn()
-    wrapper.instance().$on('change', change)
+    wrapper.vm.$on('change', change)
 
-    wrapper.instance().updateValue(0)
+    wrapper.vm.updateValue(0)
 
     await wrapper.vm.$nextTick()
 
@@ -104,9 +104,9 @@ test('VBtnToggle.vue', ({ mount }) => {
     })
 
     const change = jest.fn()
-    wrapper.instance().$on('change', change)
+    wrapper.vm.$on('change', change)
 
-    wrapper.instance().updateValue(1)
+    wrapper.vm.updateValue(1)
 
     await wrapper.vm.$nextTick()
 
@@ -131,9 +131,9 @@ test('VBtnToggle.vue', ({ mount }) => {
     })
 
     const change = jest.fn()
-    wrapper.instance().$on('change', change)
+    wrapper.vm.$on('change', change)
 
-    wrapper.instance().updateValue(2)
+    wrapper.vm.updateValue(2)
 
     await wrapper.vm.$nextTick()
 
@@ -156,9 +156,9 @@ test('VBtnToggle.vue', ({ mount }) => {
     })
 
     const change = jest.fn()
-    wrapper.instance().$on('change', change)
+    wrapper.vm.$on('change', change)
 
-    wrapper.instance().updateValue(2)
+    wrapper.vm.updateValue(2)
 
     await wrapper.vm.$nextTick()
 
@@ -183,9 +183,9 @@ test('VBtnToggle.vue', ({ mount }) => {
     })
 
     const change = jest.fn()
-    wrapper.instance().$on('change', change)
+    wrapper.vm.$on('change', change)
 
-    wrapper.instance().updateValue(2)
+    wrapper.vm.updateValue(2)
 
     await wrapper.vm.$nextTick()
 
@@ -208,7 +208,7 @@ test('VBtnToggle.vue', ({ mount }) => {
     })
 
     const change = jest.fn()
-    wrapper.instance().$on('change', change)
+    wrapper.vm.$on('change', change)
 
     wrapper.vm.$children[1].testUnregister()
     wrapper.update()
@@ -232,7 +232,7 @@ test('VBtnToggle.vue', ({ mount }) => {
     })
 
     const change = jest.fn()
-    wrapper.instance().$on('change', change)
+    wrapper.vm.$on('change', change)
 
     wrapper.vm.$children[1].testUnregister()
     wrapper.update()
