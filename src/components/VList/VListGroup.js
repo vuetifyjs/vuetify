@@ -111,14 +111,12 @@ export default {
       return this.$createElement(VIcon, icon)
     },
     genAppendIcon () {
-      const icon = !this.subGroup ? this.appendIcon : false
-
-      if (!icon && !this.$slots.appendIcon) return null
+      if (!this.appendIcon && !this.$slots.appendIcon) return null
 
       return this.$createElement('div', {
         staticClass: 'v-list__group__header__append-icon'
       }, [
-        this.$slots.appendIcon || this.genIcon(icon)
+        this.$slots.appendIcon || this.genIcon(this.appendIcon)
       ])
     },
     genGroup () {
