@@ -6,17 +6,31 @@ v-toolbar($material)
   background-color: $material.app-bar
   color: $material.text.primary
 
+v-toolbar-content($direction)
+  margin-{$direction}: 0
+
+  &.v-btn--icon
+    margin-{$direction}: -6px
+
+  &.v-menu .v-menu__activator,
+  &.v-tooltip span
+    > .v-btn
+      margin-{$direction}: 0
+
+    > .v-btn--icon
+      margin-{$direction}: -6px
+
 theme(v-toolbar, "v-toolbar")
 
 .v-toolbar
   bootable()
   elevation(4)
 
-  display: block
   position: relative
   width: 100%
-  will-change: padding-left
+  will-change: padding-left, padding-right
 
+  // TODO: Do we even need this?
   .v-text-field--enclosed,
   .v-text-field--box
     margin: 0
@@ -33,7 +47,6 @@ theme(v-toolbar, "v-toolbar")
     font-size: $headings.h6.size
     font-weight: $headings.h6.weight
     letter-spacing: $headings.h6.letter-spacing
-    margin-left: $grid-gutters.lg
     white-space: nowrap
     overflow: hidden
     text-overflow: ellipsis
@@ -41,50 +54,28 @@ theme(v-toolbar, "v-toolbar")
     &:not(:first-child)
       margin-left: 20px
 
-  &__content, &__extension
+  &__content,
+  &__extension
     align-items: center
     display: flex
+    padding: 0 $grid-gutters.xl
+
+    @media $display-breakpoints.sm-and-down
+      padding: 0 $grid-gutters.lg
+
+    .v-btn--icon
+      margin: 6px
+
+    > *:first-child
+      v-toolbar-content(left)
+
+    > *:last-child
+      v-toolbar-content(right)
 
     > .v-list
       flex: 1 1 auto
       margin: 0 !important // come back to this
       max-height: 100%
-
-    > .v-btn:not(.v-btn--icon)
-      margin-left: $grid-gutters.sm
-      margin-right: $grid-gutters.sm
-
-    > .v-btn--icon,
-    > .v-menu > .v-menu__activator > .v-btn,
-    > .v-tooltip .v-btn
-      margin-left: 6px
-      margin-right: 6px
-
-    > .v-btn:first-child
-      margin-left: $grid-gutters.lg
-
-    > .v-btn:last-child
-      margin-right: $grid-gutters.lg
-
-    > .v-btn--icon:first-child
-      margin-left: 10px
-
-    > .v-btn--icon:last-child
-      margin-right: 10px
-
-    > .v-menu:first-child,
-    > .v-tooltip:first-child
-      margin-left: $grid-gutters.sm
-
-    > .v-menu:last-child,
-    > .v-tooltip:last-child
-      margin-right: $grid-gutters.sm
-
-    > *:not(.v-btn):not(.v-menu):not(.v-tooltip):first-child:not(:only-child)
-      margin-left: $grid-gutters.lg
-
-    > *:not(.v-btn):not(.v-menu):not(.v-tooltip):last-child:not(:only-child)
-      margin-right: $grid-gutters.lg
 
   &__items
     display: flex
@@ -104,9 +95,6 @@ theme(v-toolbar, "v-toolbar")
     .v-menu__activator
       height: inherit
       margin: 0
-
-  @media all and (max-width: $grid-breakpoints.sm) and (orientation: portrait)
-    v-toolbar-content(7px)
 
 /** Types */
 .v-toolbar
@@ -145,18 +133,3 @@ theme(v-toolbar, "v-toolbar")
 
   &--clipped
     z-index: 3
-
-  &--prominent
-    v-toolbar-content(15px)
-
-  &--dense
-    v-toolbar-content(7px)
-
-v-toolbar-content(left)
-  .v-toolbar__content,
-  .v-toolbar__extension
-    > *:first-child
-      margin-left: left
-
-    > *:last-child
-      margin-right: left

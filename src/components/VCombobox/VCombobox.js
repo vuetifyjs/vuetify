@@ -23,9 +23,11 @@ export default {
     menuCanShow () {
       if (!this.isFocused) return false
 
-      return this.hideSelected
+      const filtered = this.hideSelected
         ? this.filteredItems.length - this.selectedItems.length > 0
         : this.filteredItems.length > 0
+
+      return filtered || (!!this.$slots['no-data'] && !this.hideNoData)
     }
   },
 

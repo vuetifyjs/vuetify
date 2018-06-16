@@ -70,6 +70,20 @@ export default {
     },
     tileActiveClass () {
       return Object.keys(this.addTextColorClassChecks()).join(' ')
+    },
+    staticNoDataTile () {
+      const tile = {
+        on: {
+          mousedown: e => e.preventDefault() // Prevent onBlur from being called
+        },
+        props: {
+          disabled: true
+        }
+      }
+
+      return this.$createElement(VListTile, tile, [
+        this.genTileContent(this.noDataText)
+      ])
     }
   },
 
@@ -209,14 +223,7 @@ export default {
       else children.push(this.genTile(item))
     }
 
-    if (!children.length) {
-      const noData = this.$slots['no-data']
-      if (noData) {
-        children.push(noData)
-      } else {
-        children.push(this.genTile(this.noDataText, true))
-      }
-    }
+    children.length || children.push(this.$slots['no-data'] || this.staticNoDataTile)
 
     return this.$createElement(VCard, {
       staticClass: 'v-select-list',

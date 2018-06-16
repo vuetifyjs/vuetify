@@ -11,6 +11,9 @@ import ClickOutside from '../../directives/click-outside'
 import Resize from '../../directives/resize'
 import Touch from '../../directives/touch'
 
+// Helpers
+import { convertToUnit } from '../../util/helpers'
+
 export default {
   name: 'v-navigation-drawer',
 
@@ -80,9 +83,6 @@ export default {
      */
     applicationProperty () {
       return this.right ? 'right' : 'left'
-    },
-    calculatedHeight () {
-      return isNaN(this.height) ? this.height : `${this.height}px`
     },
     calculatedTransform () {
       if (this.isActive) return 0
@@ -161,7 +161,7 @@ export default {
     },
     styles () {
       const styles = {
-        height: this.calculatedHeight,
+        height: convertToUnit(this.height),
         marginTop: `${this.marginTop}px`,
         maxHeight: `calc(100% - ${this.maxHeight}px)`,
         transform: `translateX(${this.calculatedTransform}px)`,
