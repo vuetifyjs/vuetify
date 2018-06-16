@@ -145,7 +145,7 @@ export default {
         !this.labelValue
       ) ? 16 : 0
 
-      return (this.$vuetify.rtl !== this.reverse) ? {
+      return (!this.$vuetify.rtl !== !this.reverse) ? {
         left: 'auto',
         right: offset
       } : {
