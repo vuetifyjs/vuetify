@@ -55,7 +55,7 @@ test('VRangeSlider.vue', ({ mount }) => {
     const wrapper = mount(VRangeSlider, {
       methods: { setInternalValue }
     })
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     expect(wrapper.vm.activeThumb).toBe(null)
     input.trigger('focus')
@@ -91,7 +91,7 @@ test('VRangeSlider.vue', ({ mount }) => {
     expect(wrapper.vm.isActive).toBe(false)
     expect(wrapper.vm.activeThumb).toBe(null)
 
-    const container = wrapper.first('.v-slider__thumb-container')
+    const container = wrapper.find('.v-slider__thumb-container')
 
     container.trigger('mousedown')
 
@@ -113,7 +113,7 @@ test('VRangeSlider.vue', ({ mount }) => {
 
     expect(wrapper.vm.isActive).toBe(false)
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
     input.trigger('focus')
 
     expect(wrapper.vm.isActive).toBe(false)

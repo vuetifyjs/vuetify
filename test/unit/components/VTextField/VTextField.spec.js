@@ -193,7 +193,7 @@ test('VTextField.js', ({ mount }) => {
   it('should start validating on blur', async () => {
     const wrapper = mount(VTextField)
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
     expect(wrapper.vm.shouldValidate).toEqual(false)
     input.trigger('focus')
     await wrapper.vm.$nextTick()
@@ -356,7 +356,7 @@ test('VTextField.js', ({ mount }) => {
     wrapper.vm.onBlur()
     expect(wrapper.vm.internalChange).toBe(false)
 
-    wrapper.first('input').trigger('keydown')
+    wrapper.find('input').trigger('keydown')
 
     expect(wrapper.vm.internalChange).toBe(true)
   })
@@ -553,7 +553,7 @@ test('VTextField.js', ({ mount }) => {
       }
     })
 
-    wrapper.first('.v-input__icon--clear .v-icon').trigger('click')
+    wrapper.find('.v-input__icon--clear .v-icon').trigger('click')
 
     expect(clearIconCb).toBeCalled()
   })
@@ -600,7 +600,7 @@ test('VTextField.js', ({ mount }) => {
       }
     })
 
-    const label = wrapper.first('label')
+    const label = wrapper.find('label')
 
     expect(label.element.getAttribute('for')).toBe('bar')
   })
@@ -612,7 +612,7 @@ test('VTextField.js', ({ mount }) => {
       }
     })
 
-    expect(wrapper.first('.v-input__icon--append-outer .v-icon').element.innerHTML).toBe('search')
+    expect(wrapper.find('.v-input__icon--append-outer .v-icon').element.innerHTML).toBe('search')
   })
 
   // TODO: revisit this, it seems correct in practice because of onBlur()
@@ -638,7 +638,7 @@ test('VTextField.js', ({ mount }) => {
       }
     })
 
-    const counter = wrapper.first('.v-counter')
+    const counter = wrapper.find('.v-counter')
 
     expect(counter.element.innerHTML).toBe('0 / 25')
 
@@ -678,7 +678,7 @@ test('VTextField.js', ({ mount }) => {
       }
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     expect(input.element.autocomplete).toBe('off')
   })
@@ -688,14 +688,14 @@ test('VTextField.js', ({ mount }) => {
       attrs: { id: 'foo' }
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
     expect(wrapper.element.id).toBe('')
     expect(input.element.id).toBe('foo')
   })
 
   it('should fire change event when pressing enter', () => {
     const wrapper = mount(VTextField)
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
     const change = jest.fn()
 
     wrapper.vm.$on('change', change)
@@ -730,7 +730,7 @@ test('VTextField.js', ({ mount }) => {
         label: 'Foobar'
       }
     })
-    const label = wrapper.first('.v-label')
+    const label = wrapper.find('.v-label')
 
 
     for (const type of dirtyTypes) {

@@ -42,7 +42,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const item = wrapper.first('div.v-list--disabled')
+    const item = wrapper.find('div.v-list--disabled')
 
     expect(item.element.getAttribute('disabled')).toBe('disabled')
   })
@@ -148,7 +148,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     const blur = jest.fn()
     wrapper.vm.$on('blur', blur)
 
-    const menu = wrapper.first('.v-input__slot')
+    const menu = wrapper.find('.v-input__slot')
 
     menu.trigger('click')
 
@@ -168,7 +168,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
   it('should render aria-hidden=true on arrow icon', async () => {
     const wrapper = mount(VSelect)
 
-    const icon = wrapper.first('.v-icon')
+    const icon = wrapper.find('.v-icon')
     expect(icon.hasAttribute('aria-hidden')).toBe(true)
   })
 
@@ -247,7 +247,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     })
 
     await wrapper.vm.$nextTick()
-    const chip = wrapper.first('.v-chip')
+    const chip = wrapper.find('.v-chip')
 
     expect(!!chip).toBe(true)
   })
@@ -296,7 +296,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.isMenuActive).toBe(false)
 
-    wrapper.first('.v-input__append-inner').trigger('click')
+    wrapper.find('.v-input__append-inner').trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.isMenuActive).toBe(false)
   })
@@ -392,7 +392,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const list = wrapper.first('.v-list')
+    const list = wrapper.find('.v-list')
 
     expect(wrapper.vm.$slots['no-data']).toBeTruthy()
     expect(list.html()).toMatchSnapshot()
@@ -436,8 +436,8 @@ test('VSelect', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const icon = wrapper.first('.v-icon')
-    const slot = wrapper.first('.v-input__slot')
+    const icon = wrapper.find('.v-icon')
+    const slot = wrapper.find('.v-input__slot')
 
     expect(wrapper.vm.isMenuActive).toBe(false)
 

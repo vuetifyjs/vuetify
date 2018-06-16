@@ -34,7 +34,7 @@ test('VAutocomplete - combobox', ({ mount, shallow }) => {
     const event = jest.fn()
     wrapper.vm.$on('input', event)
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
     input.trigger('focus')
     await wrapper.vm.$nextTick()
 
@@ -102,7 +102,7 @@ test('VAutocomplete - combobox', ({ mount, shallow }) => {
     })
 
     const change = jest.fn()
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     wrapper.vm.$on('change', change)
     wrapper.vm.$on('input', change)

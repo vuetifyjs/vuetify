@@ -16,7 +16,7 @@ test('VSwitch.js', ({ mount }) => {
 
     wrapper.setProps({ ripple: true })
 
-    ripple = wrapper.first('.v-input--selection-controls__ripple')
+    ripple = wrapper.find('.v-input--selection-controls__ripple')
 
     await wrapper.vm.$nextTick()
 
@@ -33,11 +33,11 @@ test('VSwitch.js', ({ mount }) => {
 
     const change = jest.fn()
     wrapper.vm.$on('change', change)
-    touch(wrapper.first('.v-input--selection-controls__ripple')).start(0, 0).end(20, 0)
+    touch(wrapper.find('.v-input--selection-controls__ripple')).start(0, 0).end(20, 0)
     expect(change).toBeCalledWith(true)
 
     wrapper.setProps({ inputValue: true })
-    touch(wrapper.first('.v-input--selection-controls__ripple')).start(0, 0).end(-20, 0)
+    touch(wrapper.find('.v-input--selection-controls__ripple')).start(0, 0).end(-20, 0)
     expect(change).toBeCalledWith(false)
   })
 
@@ -50,11 +50,11 @@ test('VSwitch.js', ({ mount }) => {
 
     const change = jest.fn()
     wrapper.vm.$on('change', change)
-    touch(wrapper.first('.v-input--selection-controls__ripple')).start(0, 0).end(-20, 0)
+    touch(wrapper.find('.v-input--selection-controls__ripple')).start(0, 0).end(-20, 0)
     expect(change).not.toBeCalled()
 
     wrapper.setProps({ inputValue: true })
-    touch(wrapper.first('.v-input--selection-controls__ripple')).start(0, 0).end(20, 0)
+    touch(wrapper.find('.v-input--selection-controls__ripple')).start(0, 0).end(20, 0)
     expect(change).not.toBeCalled()
   })
 })

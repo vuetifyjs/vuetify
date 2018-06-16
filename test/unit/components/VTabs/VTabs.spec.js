@@ -464,7 +464,7 @@ test('VTabs', ({ mount, shallow }) => {
 
     expect(wrapper.vm.tabs.length).toBe(1)
 
-    const tab = wrapper.first(VTab)
+    const tab = wrapper.find(VTab)
 
     tab.vm.$destroy()
 

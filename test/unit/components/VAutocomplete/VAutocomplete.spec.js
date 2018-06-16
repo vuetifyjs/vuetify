@@ -13,7 +13,7 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
       }
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     expect(input.element.getAttribute('autocomplete')).toBe('on')
 
@@ -41,7 +41,7 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
       }
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     const update = jest.fn()
     wrapper.vm.$on('update:searchInput', update)
@@ -104,7 +104,7 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
 
     await wrapper.vm.$nextTick()
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     input.trigger('focus')
     input.element.value = 2
@@ -134,7 +134,7 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
 
     expect(wrapper.vm.$el.getAttribute('role')).toBeFalsy()
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
     expect(input.element.getAttribute('role')).toBe('combobox')
   })
 
@@ -188,7 +188,7 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
   it('should show input when focused and autocomplete', async () => {
     const wrapper = shallow(VAutocomplete)
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     expect(input.hasStyle('display', 'none'))
 
@@ -211,7 +211,7 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
     // Wait for watcher
     await wrapper.vm.$nextTick()
 
-    const tile = wrapper.first('.v-list__tile__title')
+    const tile = wrapper.find('.v-list__tile__title')
 
     expect(tile.text()).toBe('No data available')
   })
@@ -224,7 +224,7 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
       }
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
     input.trigger('focus')
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.isMenuActive).toBe(false)
@@ -250,7 +250,7 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
       propsData: { combobox: true }
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     const change = jest.fn()
     wrapper.vm.$on('change', change)
@@ -383,8 +383,8 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
       }
     })
 
-    const slot = wrapper.first('.v-input__slot')
-    const input = wrapper.first('input')
+    const slot = wrapper.find('.v-input__slot')
+    const input = wrapper.find('input')
 
     // Focus input should only focus
     input.trigger('focus')
@@ -502,7 +502,7 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
     const select = jest.fn()
     wrapper.vm.$refs.input.select = select
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
     input.trigger('focus')
 
     await wrapper.vm.$nextTick()
@@ -524,7 +524,7 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
       propsData: { disabled: true },
       methods: { onFocus }
     })
-    const slot = wrapper.first('.v-input__slot')
+    const slot = wrapper.find('.v-input__slot')
 
     slot.trigger('click')
 
@@ -555,9 +555,9 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
       }
     })
 
-    const input = wrapper.first('input')
-    const menu = wrapper.first('.v-menu')
-    const tile = wrapper.first('.v-list__tile')
+    const input = wrapper.find('input')
+    const menu = wrapper.find('.v-menu')
+    const tile = wrapper.find('.v-list__tile')
 
     input.trigger('focus')
     input.element.value = 'foo'
@@ -601,7 +601,7 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
       }
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     expect(wrapper.vm.isMenuActive).toBe(false)
 
@@ -641,8 +641,8 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
     })
 
     expect(wrapper.vm.isMenuActive).toBe(false)
-    const slot = wrapper.first('.v-input__slot')
-    const item = wrapper.first('.v-list__tile')
+    const slot = wrapper.find('.v-input__slot')
+    const item = wrapper.find('.v-list__tile')
     slot.trigger('click')
 
     expect(wrapper.vm.isMenuActive).toBe(true)
@@ -664,7 +664,7 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
     })
 
     const chips = wrapper.findAll('.v-chip')
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     expect(chips[0].element.classList.contains('v-chip--disabled')).toBe(true)
 
@@ -689,7 +689,7 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
       }
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
     input.element.value = 'foo'
     input.trigger('input')
 
@@ -705,7 +705,7 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
   it('should hide menu when no data', async () => {
     const wrapper = mount(VAutocomplete)
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
     input.trigger('focus')
     input.element.value = 'foo'
     input.trigger('input')
@@ -758,7 +758,7 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
       }
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
     input.trigger('focus')
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.menuCanShow).toBe(true)
@@ -768,7 +768,7 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
   it('should not update search if selectedIndex is > -1', () => {
     const wrapper = mount(VAutocomplete)
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     input.trigger('focus')
     input.element.value = 'foo'
@@ -796,8 +796,8 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
       }
     })
 
-    const icon = wrapper.first('.v-input__append-inner .v-icon')
-    const input = wrapper.first('input')
+    const icon = wrapper.find('.v-input__append-inner .v-icon')
+    const input = wrapper.find('input')
 
     input.element.value = 'foobar'
     input.trigger('input')
@@ -814,7 +814,7 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
       propsData: { contentClass: 'foobar' }
     })
 
-    const content = wrapper.first('.v-autocomplete__content')
+    const content = wrapper.find('.v-autocomplete__content')
 
     expect(content.element.classList.contains('foobar')).toBe(true)
   })
@@ -827,7 +827,7 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
       }
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     await wrapper.vm.$nextTick()
     wrapper.setProps({ items: [{ text: 'foo', value: 1 }] })

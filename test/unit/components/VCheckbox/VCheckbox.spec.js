@@ -9,7 +9,7 @@ test('VCheckbox.js', ({ mount }) => {
       }
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     const change = jest.fn()
     wrapper.vm.$on('change', change)
@@ -26,7 +26,7 @@ test('VCheckbox.js', ({ mount }) => {
       }
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     const change = jest.fn()
     wrapper.vm.$on('change', change)
@@ -77,7 +77,7 @@ test('VCheckbox.js', ({ mount }) => {
       }
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     expect(input.getAttribute('role')).toBe('checkbox')
     expect(input.getAttribute('aria-checked')).toBe('false')
@@ -97,7 +97,7 @@ test('VCheckbox.js', ({ mount }) => {
       attrs: {}
     })
 
-    const inputGroup = wrapper.first('input')
+    const inputGroup = wrapper.find('input')
     expect(inputGroup.getAttribute('aria-label')).toBe('Test')
   })
 
@@ -108,7 +108,7 @@ test('VCheckbox.js', ({ mount }) => {
       }
     })
 
-    const inputGroup = wrapper.first('input')
+    const inputGroup = wrapper.find('input')
     expect(inputGroup.element.getAttribute('aria-label')).toBeFalsy()
   })
 
@@ -121,7 +121,7 @@ test('VCheckbox.js', ({ mount }) => {
 
     const change = jest.fn()
     wrapper.vm.$on('change', change)
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     input.trigger('keydown.enter')
     input.trigger('keydown.space')
@@ -156,7 +156,7 @@ test('VCheckbox.js', ({ mount }) => {
 
     const change = jest.fn()
     wrapper.vm.$on('change', change)
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     input.trigger('keydown.enter')
     expect(change).not.toBeCalled()
@@ -173,7 +173,7 @@ test('VCheckbox.js', ({ mount }) => {
       }
     })
 
-    const ripple = wrapper.first('.v-input--selection-controls__ripple')
+    const ripple = wrapper.find('.v-input--selection-controls__ripple')
 
     expect(ripple.element._ripple.enabled).toBe(true)
     expect(ripple.element._ripple.centered).toBe(true)
@@ -191,7 +191,7 @@ test('VCheckbox.js', ({ mount }) => {
       }
     })
 
-    const ripple = wrapper.first('.v-input--selection-controls__ripple')
+    const ripple = wrapper.find('.v-input--selection-controls__ripple')
 
     expect(ripple.element._ripple.enabled).toBe(false)
 
@@ -376,7 +376,7 @@ test('VCheckbox.js', ({ mount }) => {
       propsData: { id: 'foo' }
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
     expect(input.element.id).toBe('foo')
   })
 

@@ -103,7 +103,7 @@ test('VTextarea.vue', ({ mount }) => {
   it('should emit keydown event', () => {
     const wrapper = mount(VTextarea)
     const keydown = jest.fn()
-    const textarea = wrapper.first('textarea')
+    const textarea = wrapper.find('textarea')
     wrapper.vm.$on('keydown', keydown)
 
     textarea.trigger('focus')

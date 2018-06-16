@@ -66,7 +66,7 @@ test('VExpansionPanel.js', ({ mount, compileToFunctions }) => {
     wrapper.setProps({ value: 0 })
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.first('.v-expansion-panel__container--active')).not.toBe(null)
+    expect(wrapper.find('.v-expansion-panel__container--active')).not.toBe(null)
   })
 
   it('should show content on mount using v-model', async () => {
@@ -80,7 +80,7 @@ test('VExpansionPanel.js', ({ mount, compileToFunctions }) => {
     })
 
     await wrapper.vm.$nextTick()
-    expect(wrapper.first('.v-expansion-panel__container--active')).not.toBe(null)
+    expect(wrapper.find('.v-expansion-panel__container--active')).not.toBe(null)
   })
 
   it('should allow array v-model when using expand prop', async () => {

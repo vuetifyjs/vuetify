@@ -16,7 +16,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     for (const key of ['up', 'down', 'space', 'enter']) {
       input.trigger('focus')
@@ -65,7 +65,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const clear = wrapper.first('.v-icon')
+    const clear = wrapper.find('.v-icon')
 
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.internalValue).toBe(1)
@@ -88,7 +88,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const clear = wrapper.first('.v-icon')
+    const clear = wrapper.find('.v-icon')
 
     const change = jest.fn()
     wrapper.vm.$on('change', change)
@@ -193,7 +193,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.vm.selectedItems).toHaveLength(1)
     wrapper.trigger('click')
-    const item = wrapper.first('div.v-list__tile__action')
+    const item = wrapper.find('div.v-list__tile__action')
     item.trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.selectedItems).toHaveLength(0)
@@ -209,7 +209,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const clear = wrapper.first('.v-input__icon--clear .v-icon')
+    const clear = wrapper.find('.v-input__icon--clear .v-icon')
 
     clear.trigger('click')
 
@@ -282,7 +282,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     const selectItem = jest.fn()
     wrapper.setMethods({ selectItem })
 
-    let el = wrapper.first('.v-list__tile')
+    let el = wrapper.find('.v-list__tile')
 
     el.element.click()
 
@@ -349,7 +349,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     wrapper.vm.$on('input', input)
 
     expect(wrapper.vm.internalValue).toEqual('foo')
-    wrapper.first('.v-chip__close').trigger('click')
+    wrapper.find('.v-chip__close').trigger('click')
 
     expect(input).toBeCalled()
 
@@ -361,7 +361,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     wrapper.vm.$on('change', change)
 
     expect(wrapper.vm.internalValue).toEqual(['foo', 'bar'])
-    wrapper.first('.v-chip__close').trigger('click')
+    wrapper.find('.v-chip__close').trigger('click')
 
     await wrapper.vm.$nextTick()
 
@@ -383,7 +383,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.vm.selectedIndex).toBe(-1)
 
-    const foo = wrapper.first('.v-chip--select-multi')
+    const foo = wrapper.find('.v-chip--select-multi')
     foo.trigger('click')
 
     expect(wrapper.vm.selectedIndex).toBe(0)
@@ -398,7 +398,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     await wrapper.vm.$nextTick()
 
-    wrapper.first('.v-chip--select-multi').trigger('click')
+    wrapper.find('.v-chip--select-multi').trigger('click')
 
     expect(wrapper.vm.selectedIndex).toBe(1)
     expect(onFocus).toHaveBeenCalledTimes(2)
@@ -461,8 +461,8 @@ test('VSelect', ({ mount, compileToFunctions }) => {
       }
     })
 
-    expect(wrapper.first('.v-text-field__prefix').element.innerHTML).toBe('$')
-    expect(wrapper.first('.v-text-field__suffix').element.innerHTML).toBe('lbs')
+    expect(wrapper.find('.v-text-field__prefix').element.innerHTML).toBe('$')
+    expect(wrapper.find('.v-text-field__suffix').element.innerHTML).toBe('lbs')
 
     wrapper.setProps({ prefix: undefined, suffix: undefined })
 
@@ -483,7 +483,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
       }
     })
 
-    wrapper.first('.v-input__icon--clear .v-icon').trigger('click')
+    wrapper.find('.v-input__icon--clear .v-icon').trigger('click')
 
     expect(clearIconCb).toBeCalled()
   })
@@ -528,8 +528,8 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     const wrapper = mount(VSelect, {
       propsData: { items: ['foo', 'bar'] }
     })
-    const slot = wrapper.first('.v-input__slot')
-    const input = wrapper.first('input')
+    const slot = wrapper.find('.v-input__slot')
+    const input = wrapper.find('input')
 
     expect(wrapper.vm.isMenuActive).toBe(false)
     slot.trigger('click')

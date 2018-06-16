@@ -36,12 +36,12 @@ test('VRadio.vue', ({ mount }) => {
       }
     })
 
-    let inputGroup = wrapper.first('input')
+    let inputGroup = wrapper.find('input')
     expect(inputGroup.getAttribute('role')).toBe('radio')
     expect(inputGroup.getAttribute('aria-checked')).toBe('false')
 
     wrapper.setData({ 'isActive': true })
-    inputGroup = wrapper.first('input')
+    inputGroup = wrapper.find('input')
     expect(inputGroup.getAttribute('aria-checked')).toBe('true')
     expect(wrapper.html()).toMatchSnapshot()
 
@@ -60,7 +60,7 @@ test('VRadio.vue', ({ mount }) => {
       }
     })
 
-    const inputGroup = wrapper.first('input')
+    const inputGroup = wrapper.find('input')
     expect(inputGroup.getAttribute('aria-label')).toBe('Test')
     expect(wrapper.html()).toMatchSnapshot()
 
@@ -78,7 +78,7 @@ test('VRadio.vue', ({ mount }) => {
       }
     })
 
-    const inputGroup = wrapper.first('input')
+    const inputGroup = wrapper.find('input')
     expect(inputGroup.element.getAttribute('aria-label')).toBeFalsy()
     expect(wrapper.html()).toMatchSnapshot()
 
@@ -164,7 +164,7 @@ test('VRadio.vue', ({ mount }) => {
     const change = jest.fn()
     wrapper.vm.$on('change', change)
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     input.trigger('focus')
     input.trigger('keydown.enter')

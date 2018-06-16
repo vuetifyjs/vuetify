@@ -25,7 +25,7 @@ test('VAutocomplete - tags', ({ mount, compileToFunctions }) => {
   it('should create new values when tagging', async () => {
     const { wrapper, change } = createTagsAutocomplete()
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     input.trigger('focus')
     input.element.value = 'foo'
@@ -40,7 +40,7 @@ test('VAutocomplete - tags', ({ mount, compileToFunctions }) => {
       value: ['foo', 'bar']
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     input.trigger('focus')
     await wrapper.vm.$nextTick()
@@ -58,7 +58,7 @@ test('VAutocomplete - tags', ({ mount, compileToFunctions }) => {
       value: ['foo', 'bar']
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     input.trigger('focus')
     input.trigger('keydown.left')
@@ -81,8 +81,8 @@ test('VAutocomplete - tags', ({ mount, compileToFunctions }) => {
       items: ['bar']
     })
 
-    const input = wrapper.first('input')
-    const menu = wrapper.first('.v-menu')
+    const input = wrapper.find('input')
+    const menu = wrapper.find('.v-menu')
 
     input.trigger('focus')
     input.element.value = 'b'
@@ -106,7 +106,7 @@ test('VAutocomplete - tags', ({ mount, compileToFunctions }) => {
       items: ['bar']
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     input.trigger('focus')
 
@@ -126,7 +126,7 @@ test('VAutocomplete - tags', ({ mount, compileToFunctions }) => {
       items: ['bar']
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     input.trigger('focus')
     await wrapper.vm.$nextTick()
@@ -146,7 +146,7 @@ test('VAutocomplete - tags', ({ mount, compileToFunctions }) => {
       items: ['foo', 'bar']
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     input.trigger('focus')
     input.element.value = 'b'
@@ -162,7 +162,7 @@ test('VAutocomplete - tags', ({ mount, compileToFunctions }) => {
       value: ['foo', 'bar']
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     input.trigger('focus')
     await wrapper.vm.$nextTick()
@@ -178,7 +178,7 @@ test('VAutocomplete - tags', ({ mount, compileToFunctions }) => {
   it('should add tag with valid search value on blur', async () => {
     const { wrapper, change } = createTagsAutocomplete()
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     input.trigger('focus')
     input.element.value = 'bar'
@@ -194,7 +194,7 @@ test('VAutocomplete - tags', ({ mount, compileToFunctions }) => {
       value: ['foo', 'bar']
     })
 
-    let input = wrapper.first('input')
+    let input = wrapper.find('input')
 
     input.trigger('focus')
     input.trigger('keydown.left')
@@ -225,9 +225,9 @@ test('VAutocomplete - tags', ({ mount, compileToFunctions }) => {
       value: ['foo', 'bar']
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
     const chip = wrapper.findAll('.v-chip')[1]
-    const close = chip.first('.v-chip__close')
+    const close = chip.find('.v-chip__close')
 
     input.trigger('focus')
     chip.trigger('click')
@@ -252,7 +252,7 @@ test('VAutocomplete - tags', ({ mount, compileToFunctions }) => {
       value: ['foo', 'bar']
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     input.trigger('focus')
     expect(wrapper.vm.selectedIndex).toBe(-1)
@@ -276,7 +276,7 @@ test('VAutocomplete - tags', ({ mount, compileToFunctions }) => {
 
     await wrapper.vm.$nextTick()
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
     input.trigger('focus')
 
     input.element.value = 'foo,'
@@ -315,8 +315,8 @@ test('VAutocomplete - tags', ({ mount, compileToFunctions }) => {
     })
 
     const change = jest.fn()
-    const chip = wrapper.first('.v-chip')
-    const input = wrapper.first('input')
+    const chip = wrapper.find('.v-chip')
+    const input = wrapper.find('input')
 
     wrapper.vm.$on('change', change)
 

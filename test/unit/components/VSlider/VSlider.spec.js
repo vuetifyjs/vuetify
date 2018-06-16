@@ -58,7 +58,7 @@ test('VSlider.vue', ({ mount }) => {
       }
     })
 
-    const slider = wrapper.first('input')
+    const slider = wrapper.find('input')
 
     expect(slider.element.getAttribute('tabindex')).toBe('-1')
     expect(warning).toHaveBeenTipped()
@@ -119,7 +119,7 @@ test('VSlider.vue', ({ mount }) => {
     const input = jest.fn()
     wrapper.vm.$on('input', input)
 
-    const slider = wrapper.first('input')
+    const slider = wrapper.find('input')
 
     slider.trigger('keydown.space')
     expect(input).not.toBeCalled()
@@ -186,7 +186,7 @@ test('VSlider.vue', ({ mount }) => {
       }
     })
 
-    const label = wrapper.first('.v-label')
+    const label = wrapper.find('.v-label')
 
     expect(label.element.getAttribute('for')).toBe('foo')
 
@@ -197,7 +197,7 @@ test('VSlider.vue', ({ mount }) => {
       }
     })
 
-    const label2 = wrapper2.first('.v-label')
+    const label2 = wrapper2.find('.v-label')
 
     expect(label2.element.getAttribute('for')).toBe(null)
 
@@ -213,7 +213,7 @@ test('VSlider.vue', ({ mount }) => {
       attachToDocument: true
     })
 
-    const container = wrapper.first('.v-slider__thumb-container')
+    const container = wrapper.find('.v-slider__thumb-container')
 
     expect(wrapper.vm.isActive).toBe(false)
 
@@ -233,7 +233,7 @@ test('VSlider.vue', ({ mount }) => {
       attachToDocument: true
     })
 
-    const container = wrapper.first('.v-slider__thumb-container')
+    const container = wrapper.find('.v-slider__thumb-container')
 
     expect(wrapper.vm.keyPressed).toBe(0)
     expect(wrapper.vm.isActive).toBe(false)
@@ -370,7 +370,7 @@ test('VSlider.vue', ({ mount }) => {
     wrapper.vm.$on('focus', focus)
     wrapper.vm.$on('blur', blur)
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     expect(wrapper.vm.isActive).toBe(false)
     expect(wrapper.vm.isFocused).toBe(false)
@@ -410,7 +410,7 @@ test('VSlider.vue', ({ mount }) => {
 
     const change = jest.fn()
     wrapper.vm.$on('change', change)
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     input.trigger('click')
 
@@ -428,8 +428,8 @@ test('VSlider.vue', ({ mount }) => {
       }
     })
 
-    const input = wrapper.first('input')
-    const thumb = wrapper.first('.v-slider__thumb-container')
+    const input = wrapper.find('input')
+    const thumb = wrapper.find('.v-slider__thumb-container')
 
     input.trigger('focus')
 
@@ -513,7 +513,7 @@ test('VSlider.vue', ({ mount }) => {
       methods: { parseKeyDown }
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     input.trigger('focus')
 

@@ -73,7 +73,7 @@ test('VOverflowBtn', ({ mount }) => {
       }
     })
 
-    const btn = wrapper.first('.v-btn')
+    const btn = wrapper.find('.v-btn')
 
     btn.trigger('click')
 

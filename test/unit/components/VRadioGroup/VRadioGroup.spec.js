@@ -48,7 +48,7 @@ test('VRadioGroup.vue', ({ mount }) => {
       }
     })
 
-    const find = wrapper.first(stub)
+    const find = wrapper.find(stub)
 
     expect(find.vm.isMandatory()).toBe(true)
 
@@ -78,8 +78,8 @@ test('VRadioGroup.vue', ({ mount }) => {
     const radios = wrapper.findAll(VRadio)
     const one = radios[0]
     const two = radios[1]
-    const inputOne = one.first('input')
-    const inputTwo = two.first('input')
+    const inputOne = one.find('input')
+    const inputTwo = two.find('input')
 
     inputOne.trigger('focus')
     inputOne.trigger('keydown.enter')
@@ -157,7 +157,7 @@ test('VRadioGroup.vue', ({ mount }) => {
       }
     })
 
-    const radio = wrapper.first(VRadio)
+    const radio = wrapper.find(VRadio)
 
     expect(wrapper.vm.internalValue).toBe(null)
     expect(radio.vm.isActive).toBe(false)
@@ -185,7 +185,7 @@ test('VRadioGroup.vue', ({ mount }) => {
       }
     })
 
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
 
     expect(input.element.tabIndex).toBe(2)
   })
@@ -200,7 +200,7 @@ test('VRadioGroup.vue', ({ mount }) => {
       }
     })
 
-    const radio = wrapper.first(VRadio)
+    const radio = wrapper.find(VRadio)
 
     expect(wrapper.vm.radios.length).toBe(1)
 
@@ -220,7 +220,7 @@ test('VRadioGroup.vue', ({ mount }) => {
 
     const blur = jest.fn()
     const event = jest.fn()
-    const input = wrapper.first('input')
+    const input = wrapper.find('input')
     wrapper.vm.$on('blur', blur)
     wrapper.vm.$on('input', event)
 
@@ -288,8 +288,8 @@ test('VRadioGroup.vue', ({ mount }) => {
       }
     })
 
-    const radio = wrapper.first(VRadio)
-    const input = radio.first('input')
+    const radio = wrapper.find(VRadio)
+    const input = radio.find('input')
 
     expect(wrapper.vm.shouldValidate).toBe(false)
 
