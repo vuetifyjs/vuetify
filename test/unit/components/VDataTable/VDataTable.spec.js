@@ -157,7 +157,7 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
     const headers = wrapper.findAll('thead:first-of-type > tr:first-of-type > th')
 
     expect(
-      headers.map(h => h.attributes()['aria-sort'])
+      headers.wrappers.map(h => h.attributes()['aria-sort'])
     ).toEqual(['ascending', 'none', 'none'])
 
     wrapper.setProps({
@@ -168,7 +168,7 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
     })
 
     expect(
-      headers.map(h => h.attributes()['aria-sort'])
+      headers.wrappers.map(h => h.attributes()['aria-sort'])
     ).toEqual(['none', 'none', 'ascending'])
 
     expect('Unable to locate target [data-app]').toHaveBeenTipped()

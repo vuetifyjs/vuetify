@@ -141,7 +141,7 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const [leftButton, rightButton] = wrapper.findAll('.v-date-picker-header button')
+    const [leftButton, rightButton] = wrapper.findAll('.v-date-picker-header button').wrappers
 
     leftButton.trigger('click')
     expect(wrapper.vm.tableDate).toBe('2004')
