@@ -52,7 +52,7 @@ test('VBottomNav.js', ({ mount }) => {
       }
     })
 
-    expect(wrapper.hasClass('v-bottom-nav--active')).toBe(false)
+    expect(wrapper.classes()).not.toContain('v-bottom-nav--active')
     expect(wrapper.html()).toMatchSnapshot()
   })
 

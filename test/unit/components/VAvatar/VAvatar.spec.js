@@ -31,7 +31,7 @@ test('VAvatar.vue', ({ mount, functionalContext }) => {
       class: { 'active': true }
     }))
 
-    expect(wrapper.hasClass('active')).toBe(false)
+    expect(wrapper.classes()).not.toContain('active')
     expect(wrapperTwo.classes()).toContain('active')
     expect(wrapperThree.classes()).toContain('active')
     expect(wrapperFour.classes()).toContain('active')

@@ -80,7 +80,7 @@ test('VListTile.vue', ({ mount }) => {
     })
 
     const link = wrapper.find('a')
-    expect(link.hasClass(wrapper.instance().activeClass)).toBe(false)
+    expect(link.classes()).not.toContain(wrapper.instance().activeClass)
   })
 
   it('should have activeClass when toggled', () => {
@@ -92,7 +92,7 @@ test('VListTile.vue', ({ mount }) => {
     })
 
     const link = wrapper.find('a')
-    expect(link.hasClass(wrapper.instance().activeClass)).toBe(true)
+    expect(link.classes()).toContain(wrapper.instance().activeClass)
   })
 
   it('should have --link class when href prop present', () => {
