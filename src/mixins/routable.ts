@@ -1,4 +1,6 @@
 import Vue, { VNodeData } from 'vue'
+import { PropValidator } from 'vue/types/options'
+
 import Ripple from '../directives/ripple'
 
 export default Vue.extend({
@@ -15,7 +17,7 @@ export default Vue.extend({
     exact: {
       type: Boolean,
       default: undefined
-    },
+    } as PropValidator<boolean | undefined>,
     exactActiveClass: String,
     href: [String, Object],
     to: [String, Object],
@@ -58,6 +60,7 @@ export default Vue.extend({
         let activeClass = this.activeClass
         let exactActiveClass = this.exactActiveClass || activeClass
 
+        // TODO: apply only in VListTile
         if ((this as any).proxyClass) {
           activeClass += ' ' + (this as any).proxyClass
           exactActiveClass += ' ' + (this as any).proxyClass

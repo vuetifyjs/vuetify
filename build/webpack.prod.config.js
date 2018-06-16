@@ -1,5 +1,7 @@
 const merge = require('webpack-merge')
-const baseWebpackConfig = require('./webpack.base.config')
+const HappyPack = require('happypack')
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
+const { config: baseWebpackConfig, happyThreadPool } = require('./webpack.base.config')
 
 // Helpers
 const resolve = file => require('path').resolve(__dirname, file)
@@ -29,9 +31,26 @@ module.exports = merge(baseWebpackConfig, {
     rules: [
       {
         test: /\.[jt]s$/,
-        loaders: ['babel-loader', 'ts-loader'],
+        use: 'happypack/loader?id=scripts',
         exclude: /node_modules/
       }
     ]
-  }
+  },
+  plugins: [
+    new ForkTsCheckerWebpackPlugin({
+      checkSyntacticErrors: true,
+      tsconfig: resolve('../tsconfig.json')
+    }),
+    new HappyPack({
+      id: 'scripts',
+      threadPool: happyThreadPool,
+      loaders: [
+        'babel-loader',
+        {
+          loader: 'ts-loader',
+          options: { happyPackMode: true }
+        }
+      ]
+    })
+  ]
 })

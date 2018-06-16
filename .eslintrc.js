@@ -63,11 +63,8 @@ module.exports = {
     {
       files: '**/*.ts',
       rules: {
-        // https://github.com/eslint/typescript-eslint-parser#known-issues
+        // https://github.com/eslint/typescript-eslint-parser/issues/416
         'no-undef': 'off',
-
-        // https://github.com/eslint/typescript-eslint-parser/issues/445
-        // 'typescript/no-unused-vars': 'error'
 
         // https://github.com/eslint/eslint/issues/10260
         'space-infix-ops': false,
@@ -78,7 +75,9 @@ module.exports = {
         // Can't overload function exports with this enabled
         'import/export': false,
 
+        // https://github.com/eslint/typescript-eslint-parser/issues/445
         // https://github.com/eslint/typescript-eslint-parser/issues/457
+        // enabled in tslint instead
         'no-unused-vars': false,
         // 'typescript/no-unused-vars': 'error',
 
