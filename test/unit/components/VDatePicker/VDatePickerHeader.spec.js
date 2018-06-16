@@ -20,7 +20,7 @@ test('VDatePickerHeader.js', ({ mount }) => {
       }
     })
 
-    expect(wrapper.find('.v-date-picker-header__value strong').element.textContent).toBe('2005')
+    expect(wrapper.find('.v-date-picker-header__value strong').text()).toBe('2005')
   })
 
   it('should render prev/next icons', () => {
@@ -32,8 +32,8 @@ test('VDatePickerHeader.js', ({ mount }) => {
       }
     })
 
-    expect(wrapper.find('.v-icon').element.textContent).toBe('foo')
-    expect(wrapper.findAll('.v-icon')[1].element.textContent).toBe('bar')
+    expect(wrapper.find('.v-icon').text()).toBe('foo')
+    expect(wrapper.findAll('.v-icon')[1].text()).toBe('bar')
   })
 
   it('should render component with own formatter and match snapshot', () => {
@@ -44,7 +44,7 @@ test('VDatePickerHeader.js', ({ mount }) => {
       }
     })
 
-    expect(wrapper.find('.v-date-picker-header__value strong').element.textContent).toBe('(2005-11)')
+    expect(wrapper.find('.v-date-picker-header__value strong').text()).toBe('(2005-11)')
   })
 
   it('should render colored component and match snapshot', () => {

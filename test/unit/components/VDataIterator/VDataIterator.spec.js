@@ -30,7 +30,7 @@ test('VDataIterator.js', ({ mount, compileToFunctions }) => {
     expect(wrapper.html()).toMatchSnapshot()
 
     const content = wrapper.find('.v-data-iterator div div')
-    expect(content.element.textContent).toBe('No matching records found')
+    expect(content.text()).toBe('No matching records found')
 
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
@@ -62,7 +62,7 @@ test('VDataIterator.js', ({ mount, compileToFunctions }) => {
     expect(wrapper.html()).toMatchSnapshot()
 
     const content = wrapper.find('.v-data-iterator div div')
-    expect(content.element.textContent).toBe('No data available')
+    expect(content.text()).toBe('No data available')
 
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })

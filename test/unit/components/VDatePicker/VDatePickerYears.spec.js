@@ -20,8 +20,8 @@ test('VDatePickerYears.js', ({ mount }) => {
       }
     })
 
-    expect(wrapper.find('li:first-child').element.textContent).toBe('1238')
-    expect(wrapper.find('li:last-child').element.textContent).toBe('1234')
+    expect(wrapper.find('li:first-child').text()).toBe('1238')
+    expect(wrapper.find('li:last-child').text()).toBe('1234')
   })
 
   it('should not allow min to be greater then max', async () => {
@@ -32,8 +32,8 @@ test('VDatePickerYears.js', ({ mount }) => {
       }
     })
     expect(wrapper.findAll('li').length).toBe(1)
-    expect(wrapper.find('li').element.textContent).toBe('1234')
-    expect(wrapper.find('li').element.textContent).toBe('1234')
+    expect(wrapper.find('li').text()).toBe('1234')
+    expect(wrapper.find('li').text()).toBe('1234')
   })
 
   it('should emit event on year click', async () => {
@@ -59,6 +59,6 @@ test('VDatePickerYears.js', ({ mount }) => {
       }
     })
 
-    expect(wrapper.find('li').element.textContent).toBe('(1001)')
+    expect(wrapper.find('li').text()).toBe('(1001)')
   })
 })
