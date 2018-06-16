@@ -121,7 +121,7 @@ test('VCarousel.js', ({ mount }) => {
       slots: {
         default: [1, 2, 3].map(i => {
           return {
-            vNode: vm.$createElement(VCarouselItem, { attrs: { src: i.toString() } })
+            render: h => h(VCarouselItem, { attrs: { src: i.toString() } })
           }
         })
       }
