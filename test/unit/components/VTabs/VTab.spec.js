@@ -26,9 +26,9 @@ test('VTab', ({ mount }) => {
       }
     })
 
-    expect(wrapper.find('.v-tabs__item').vNode.elm.tagName).toBe('A')
+    expect(wrapper.find('.v-tabs__item').element.tagName).toBe('A')
     wrapper.setProps({ disabled: true })
-    expect(wrapper.find('.v-tabs__item').vNode.elm.tagName).toBe('DIV')
+    expect(wrapper.find('.v-tabs__item').element.tagName).toBe('DIV')
 
     expect(tabClick).toHaveBeenWarned()
     expect(tabsWarning).toHaveBeenTipped()
