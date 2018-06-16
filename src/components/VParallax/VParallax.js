@@ -89,7 +89,7 @@ export default {
     return h('div', {
       staticClass: 'v-parallax',
       style: {
-        height: `${this.normalizedHeight}px`
+        height: `${this.height}px`
       },
       on: this.$listeners
     }, [container, content])
