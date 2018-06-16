@@ -1,16 +1,16 @@
 import { test } from '@/test'
 import VCombobox from '@/components/VCombobox'
 
-test('VCombobox - multiple', ({ mount, compileToFunctions }) => {
+test('VCombobox - multiple', ({ shallow, compileToFunctions }) => {
   const app = document.createElement('div')
   app.setAttribute('data-app', true)
   document.body.appendChild(app)
   const backspace = new Event('keydown')
   backspace.keyCode = 8
 
-  function createTagsAutocomplete (propsData) {
+  function createMultipleCombobox (propsData) {
     const change = jest.fn()
-    const wrapper = mount(VCombobox, {
+    const wrapper = shallow(VCombobox, {
       attachToDocument: true,
       propsData: Object.assign({
         multiple: true,
@@ -23,7 +23,7 @@ test('VCombobox - multiple', ({ mount, compileToFunctions }) => {
   }
 
   it('should create new values when tagging', async () => {
-    const { wrapper, change } = createTagsAutocomplete()
+    const { wrapper, change } = createMultipleCombobox()
 
     const input = wrapper.first('input')
 
@@ -36,7 +36,7 @@ test('VCombobox - multiple', ({ mount, compileToFunctions }) => {
   })
 
   it('should change selectedIndex with keyboard', async () => {
-    const { wrapper } = createTagsAutocomplete({
+    const { wrapper } = createMultipleCombobox({
       value: ['foo', 'bar']
     })
 
@@ -54,7 +54,7 @@ test('VCombobox - multiple', ({ mount, compileToFunctions }) => {
   })
 
   it('should delete a tagged item when selected and backspace/delete is pressed', async () => {
-    const { wrapper, change } = createTagsAutocomplete({
+    const { wrapper, change } = createMultipleCombobox({
       value: ['foo', 'bar']
     })
 
@@ -77,7 +77,7 @@ test('VCombobox - multiple', ({ mount, compileToFunctions }) => {
   })
 
   it('should add a tag on tab using the first suggestion', async () => {
-    const { wrapper, change } = createTagsAutocomplete({
+    const { wrapper, change } = createMultipleCombobox({
       items: ['bar']
     })
 
@@ -102,7 +102,7 @@ test('VCombobox - multiple', ({ mount, compileToFunctions }) => {
   })
 
   it('should add a tag on tab using the current searchValue', async () => {
-    const { wrapper, change } = createTagsAutocomplete({
+    const { wrapper, change } = createMultipleCombobox({
       items: ['bar']
     })
 
@@ -122,7 +122,7 @@ test('VCombobox - multiple', ({ mount, compileToFunctions }) => {
   })
 
   it('should add a tag on enter using the current searchValue', async () => {
-    const { wrapper, change } = createTagsAutocomplete({
+    const { wrapper, change } = createMultipleCombobox({
       items: ['bar']
     })
 
@@ -141,7 +141,7 @@ test('VCombobox - multiple', ({ mount, compileToFunctions }) => {
   })
 
   it('should add a tag on left arrow and select the previous tag', async () => {
-    const { wrapper, change } = createTagsAutocomplete({
+    const { wrapper, change } = createMultipleCombobox({
       value: ['foo'],
       items: ['foo', 'bar']
     })
@@ -158,7 +158,7 @@ test('VCombobox - multiple', ({ mount, compileToFunctions }) => {
   })
 
   it('should remove a duplicate tag and add it to the end', async () => {
-    const { wrapper, change } = createTagsAutocomplete({
+    const { wrapper, change } = createMultipleCombobox({
       value: ['foo', 'bar']
     })
 
@@ -176,7 +176,7 @@ test('VCombobox - multiple', ({ mount, compileToFunctions }) => {
   })
 
   it('should add tag with valid search value on blur', async () => {
-    const { wrapper, change } = createTagsAutocomplete()
+    const { wrapper, change } = createMultipleCombobox()
 
     const input = wrapper.first('input')
 
@@ -189,7 +189,7 @@ test('VCombobox - multiple', ({ mount, compileToFunctions }) => {
   })
 
   it('should be able to add a tag from user input after deleting a tag with delete', async () => {
-    const { wrapper, change } = createTagsAutocomplete({
+    const { wrapper, change } = createMultipleCombobox({
       multiple: true,
       value: ['foo', 'bar']
     })
@@ -217,11 +217,10 @@ test('VCombobox - multiple', ({ mount, compileToFunctions }) => {
   })
 
   it('should be able to add a tag from user input after clicking a deletable chip', async () => {
-    const { wrapper, change } = createTagsAutocomplete({
+    const { wrapper, change } = createMultipleCombobox({
       chips: true,
       clearable: true,
       deletableChips: true,
-      combobox: true,
       multiple: true,
       value: ['foo', 'bar']
     })
@@ -247,9 +246,8 @@ test('VCombobox - multiple', ({ mount, compileToFunctions }) => {
 
   // This test is actually almost useless
   it('should not change search when selecting an index', () => {
-    const { wrapper } = createTagsAutocomplete({
+    const { wrapper } = createMultipleCombobox({
       chips: true,
-      combobox: true,
       multiple: true,
       value: ['foo', 'bar']
     })
@@ -272,7 +270,7 @@ test('VCombobox - multiple', ({ mount, compileToFunctions }) => {
   })
 
   it('should create new items when a delimiter is entered', async () => {
-    const { wrapper, change } = createTagsAutocomplete({
+    const { wrapper, change } = createMultipleCombobox({
       delimiters: [', ', 'baz']
     })
 
@@ -311,7 +309,7 @@ test('VCombobox - multiple', ({ mount, compileToFunctions }) => {
   })
 
   it('should allow the editing of an existing value', async () => {
-    const { wrapper } = createTagsAutocomplete({
+    const { wrapper } = createMultipleCombobox({
       chips: true,
       value: ['foo']
     })
@@ -337,5 +335,49 @@ test('VCombobox - multiple', ({ mount, compileToFunctions }) => {
     await wrapper.vm.$nextTick()
 
     expect(change).toBeCalledWith(['foobar'])
+  })
+
+  it('should react to tabs', async () => {
+    const updateTags = jest.fn()
+    const wrapper = shallow(VCombobox, {
+      propsData: {
+        items: ['fizz', 'buzz'],
+        multiple: true
+      },
+      methods: {
+        updateTags
+      }
+    })
+
+    const input = wrapper.first('input')
+    const menu = wrapper.first('.v-menu')
+    const tile = wrapper.first('.v-list__tile')
+
+    input.trigger('focus')
+    input.element.value = 'foo'
+    input.trigger('input')
+    input.trigger('keydown.tab')
+
+    expect(wrapper.vm.getMenuIndex()).toBe(-1)
+    expect(updateTags).toBeCalled()
+
+    input.trigger('focus')
+    input.element.value = 'fizz'
+    input.trigger('input')
+    menu.trigger('keydown.down')
+
+    // Allow dom to update class for
+    // selected tile
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.isMenuActive).toBe(true)
+    expect(wrapper.vm.getMenuIndex()).toBe(0)
+
+    input.trigger('keydown.tab')
+
+    // We overwrite update tags so above
+    // is does not persist
+    expect(wrapper.vm.internalValue).toEqual(['fizz'])
+    expect(updateTags).toHaveBeenCalledTimes(2)
   })
 })

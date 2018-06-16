@@ -1,7 +1,7 @@
 import { test } from '@/test'
 import VCombobox from '@/components/VCombobox'
 
-test('VCombobox', ({ mount, shallow }) => {
+test('VCombobox', ({ shallow }) => {
   const app = document.createElement('div')
   app.setAttribute('data-app', true)
   document.body.appendChild(app)
@@ -89,7 +89,7 @@ test('VCombobox', ({ mount, shallow }) => {
   })
 
   it('should clear value', async () => {
-    const wrapper = mount(VCombobox, {
+    const wrapper = shallow(VCombobox, {
       attachToDocument: true
     })
 
@@ -117,71 +117,17 @@ test('VCombobox', ({ mount, shallow }) => {
   })
 
   it('should call methods on blur', () => {
-    const updateTags = jest.fn()
     const updateCombobox = jest.fn()
     const wrapper = shallow(VCombobox, {
       attachToDocument: true,
       methods: {
-        updateCombobox,
-        updateTags
+        updateCombobox
       }
     })
 
     wrapper.vm.onEnterDown()
 
     expect(updateCombobox).toHaveBeenCalledTimes(1)
-
-    wrapper.setProps({
-      multiple: true
-    })
-
-    wrapper.vm.onEnterDown()
-
-    expect(updateTags).toHaveBeenCalledTimes(1)
-  })
-
-  it('should react to tabs', async () => {
-    const updateTags = jest.fn()
-    const wrapper = shallow(VCombobox, {
-      propsData: {
-        items: ['fizz', 'buzz'],
-        multiple: true
-      },
-      methods: {
-        updateTags
-      }
-    })
-
-    const input = wrapper.first('input')
-    const menu = wrapper.first('.v-menu')
-    const tile = wrapper.first('.v-list__tile')
-
-    input.trigger('focus')
-    input.element.value = 'foo'
-    input.trigger('input')
-    input.trigger('keydown.tab')
-
-    expect(wrapper.vm.getMenuIndex()).toBe(-1)
-    expect(updateTags).toBeCalled()
-
-    input.trigger('focus')
-    input.element.value = 'fizz'
-    input.trigger('input')
-    menu.trigger('keydown.down')
-
-    // Allow dom to update class for
-    // selected tile
-    await wrapper.vm.$nextTick()
-
-    expect(wrapper.vm.isMenuActive).toBe(true)
-    expect(wrapper.vm.getMenuIndex()).toBe(0)
-
-    input.trigger('keydown.tab')
-
-    // We overwrite update tags so above
-    // is does not persist
-    expect(wrapper.vm.internalValue).toEqual(['fizz'])
-    expect(updateTags).toHaveBeenCalledTimes(2)
   })
 
   it('should emit custom value on blur', async () => {
@@ -216,7 +162,6 @@ test('VCombobox', ({ mount, shallow }) => {
       attachToDocument: true,
       propsData: {
         items: ['foo', 'bar', 'fizz'],
-        combobox: true,
         searchInput: 'foobar'
       }
     })
