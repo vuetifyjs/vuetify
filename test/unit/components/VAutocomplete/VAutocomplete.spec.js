@@ -132,7 +132,7 @@ test('VAutocomplete.js', ({ mount, shallowMount, compileToFunctions }) => {
   it('should render role=combobox correctly when autocomplete', async () => {
     const wrapper = shallowMount(VAutocomplete)
 
-    expect(wrapper.vm.$el.attributes()['role']).toBeFalsy()
+    expect(wrapper.attributes()['role']).toBeFalsy()
 
     const input = wrapper.find('input')
     expect(input.attributes()['role']).toBe('combobox')

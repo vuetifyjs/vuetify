@@ -61,6 +61,6 @@ test('VApp.js', ({ mount }) => {
 
     el = document.getElementById('vuetify-theme-stylesheet')
     expect(el).toBeTruthy()
-    expect(el.attributes()['nonce']).toBe('asdfghjkl')
+    expect(el.getAttribute('nonce')).toBe('asdfghjkl')
   })
 })
