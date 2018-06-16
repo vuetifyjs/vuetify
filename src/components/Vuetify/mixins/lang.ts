@@ -3,20 +3,19 @@ import { getObjectValueByPath } from '../../../util/helpers'
 import { VuetifyUseOptions as Options } from 'types'
 import { VuetifyLanguage, VuetifyLocale } from 'types/lang'
 import { consoleError, consoleWarn } from '../../../util/console'
+import { VueConstructor } from 'vue'
 
-const LANG_PREFIX = '$vuetify.lang.'
 const fallback = Symbol('Lang fallback')
 
 function getTranslation (locale: VuetifyLocale, key: string, usingFallback = false): string {
-  const shortKey = key.replace(LANG_PREFIX, '')
-  let translation = getObjectValueByPath(locale, shortKey, fallback) as string | typeof fallback
+  let translation = getObjectValueByPath(locale, key, fallback) as string | typeof fallback
 
   if (translation === fallback) {
     if (usingFallback) {
-      consoleError(`Translation key "${shortKey}" not found in fallback`)
+      consoleError(`Translation key "${key}" not found in fallback`)
       translation = key
     } else {
-      consoleWarn(`Translation key "${shortKey}" not found, falling back to default`)
+      consoleWarn(`Translation key "${key}" not found, falling back to default`)
       translation = getTranslation(en, key, true)
     }
   }
@@ -29,8 +28,6 @@ export default function lang (config: Options['lang'] = {}): VuetifyLanguage {
     locales: Object.assign({ en }, config.locales),
     current: config.current || 'en',
     t (key, ...params) {
-      if (!key.startsWith(LANG_PREFIX)) return key
-
       const translation = getTranslation(this.locales[this.current], key)
 
       return translation.replace(/\{(\d+)\}/g, (match: string, index: string) => {
