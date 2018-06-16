@@ -9,7 +9,7 @@ test('VSnackbar.vue', ({ mount }) => {
       }
     })
 
-    expect(wrapper.hasClass('v-snack')).toBe(true)
+    expect(wrapper.classes()).toContain('v-snack')
   })
 
   it('should have a v-snack__wrapper with a color class', () => {

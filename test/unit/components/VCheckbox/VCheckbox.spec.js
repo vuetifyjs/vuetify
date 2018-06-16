@@ -79,14 +79,14 @@ test('VCheckbox.js', ({ mount }) => {
 
     const input = wrapper.find('input')
 
-    expect(input.getAttribute('role')).toBe('checkbox')
-    expect(input.getAttribute('aria-checked')).toBe('false')
+    expect(input.attributes()['role']).toBe('checkbox')
+    expect(input.attributes()['aria-checked']).toBe('false')
 
     wrapper.setProps({ 'inputValue': true })
-    expect(input.getAttribute('aria-checked')).toBe('true')
+    expect(input.attributes()['aria-checked']).toBe('true')
 
     wrapper.setProps({ 'indeterminate': true })
-    expect(input.getAttribute('aria-checked')).toBe('mixed')
+    expect(input.attributes()['aria-checked']).toBe('mixed')
   })
 
   it('should render aria-label attribute with label value on input group', () => {
@@ -98,7 +98,7 @@ test('VCheckbox.js', ({ mount }) => {
     })
 
     const inputGroup = wrapper.find('input')
-    expect(inputGroup.getAttribute('aria-label')).toBe('Test')
+    expect(inputGroup.attributes()['aria-label']).toBe('Test')
   })
 
   it('should not render aria-label attribute with no label value on input group', () => {
@@ -109,7 +109,7 @@ test('VCheckbox.js', ({ mount }) => {
     })
 
     const inputGroup = wrapper.find('input')
-    expect(inputGroup.element.getAttribute('aria-label')).toBeFalsy()
+    expect(inputGroup.element.attributes()['aria-label']).toBeFalsy()
   })
 
   it('should toggle on space and enter with default toggleKeys', () => {

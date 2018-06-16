@@ -13,7 +13,7 @@ test('VDivider.js', ({ mount, compileToFunctions, functionalContext }) => {
       props: { inset: true }
     }))
 
-    expect(wrapper.hasClass('v-divider--inset')).toBe(true)
+    expect(wrapper.classes()).toContain('v-divider--inset')
   })
 
   it('should render a light component', () => {
@@ -21,7 +21,7 @@ test('VDivider.js', ({ mount, compileToFunctions, functionalContext }) => {
       props: { light: true }
     }))
 
-    expect(wrapper.hasClass('theme--light')).toBe(true)
+    expect(wrapper.classes()).toContain('theme--light')
   })
 
   it('should render a dark component', () => {
@@ -29,7 +29,7 @@ test('VDivider.js', ({ mount, compileToFunctions, functionalContext }) => {
       props: { dark: true }
     }))
 
-    expect(wrapper.hasClass('theme--dark')).toBe(true)
+    expect(wrapper.classes()).toContain('theme--dark')
   })
 
   it('should render a dark component', () => {
@@ -37,6 +37,6 @@ test('VDivider.js', ({ mount, compileToFunctions, functionalContext }) => {
       props: { vertical: true }
     }))
 
-    expect(wrapper.hasClass('v-divider--vertical')).toBe(true)
+    expect(wrapper.classes()).toContain('v-divider--vertical')
   })
 })

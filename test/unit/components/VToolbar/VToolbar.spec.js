@@ -18,8 +18,8 @@ test('VToolbar.vue', ({ mount }) => {
       }
     })
 
-    expect(wrapper.element.classList).toContain('blue')
-    expect(wrapper.element.classList).toContain('lighten-1')
+    expect(wrapper.classes()).toContain('blue')
+    expect(wrapper.classes()).toContain('lighten-1')
   })
 
   it('should render an extended toolbar', () => {

@@ -13,6 +13,6 @@ test('VCounter.js', ({ mount, compileToFunctions }) => {
     const context = functionalContext({ props: { value: 15, max: 10 }}, 'add')
     const wrapper = mount(VCounter, context)
 
-    expect(wrapper.element.classList).toContain('error--text')
+    expect(wrapper.classes()).toContain('error--text')
   })
 })

@@ -31,7 +31,7 @@ test('VExpansionPanel.js', ({ mount, compileToFunctions }) => {
       inset: true
     }))
 
-    expect(wrapper.hasClass('v-expansion-panel--inset')).toBe(true)
+    expect(wrapper.classes()).toContain('v-expansion-panel--inset')
   })
 
   it('should render popout component', () => {
@@ -39,7 +39,7 @@ test('VExpansionPanel.js', ({ mount, compileToFunctions }) => {
       popout: true
     }))
 
-    expect(wrapper.hasClass('v-expansion-panel--popout')).toBe(true)
+    expect(wrapper.classes()).toContain('v-expansion-panel--popout')
   })
 
   it('should render an expanded component and match snapshot', async () => {

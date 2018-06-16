@@ -56,8 +56,8 @@ test('VDatePickerHeader.js', ({ mount }) => {
     })
 
     const strong = wrapper.find('.v-date-picker-header__value strong')
-    expect(strong.hasClass('green--text')).toBe(true)
-    expect(strong.hasClass('text--lighten-1')).toBe(true)
+    expect(strong.classes()).toContain('green--text')
+    expect(strong.classes()).toContain('text--lighten-1')
   })
 
   it('should render component with default slot and match snapshot', () => {
@@ -131,8 +131,8 @@ test('VDatePickerHeader.js', ({ mount }) => {
       value: 2006
     })
     await wrapper.vm.$nextTick()
-    expect(wrapper.find('.v-date-picker-header__value strong').hasClass('tab-transition-enter')).toBe(true)
-    expect(wrapper.find('.v-date-picker-header__value strong').hasClass('tab-transition-enter-active')).toBe(true)
+    expect(wrapper.find('.v-date-picker-header__value strong').classes()).toContain('tab-transition-enter')
+    expect(wrapper.find('.v-date-picker-header__value strong').classes()).toContain('tab-transition-enter-active')
   })
 
   it('should watch value and run reverse transition', async () => {
@@ -146,8 +146,8 @@ test('VDatePickerHeader.js', ({ mount }) => {
       value: 2004
     })
     await wrapper.vm.$nextTick()
-    expect(wrapper.find('.v-date-picker-header__value strong').hasClass('tab-reverse-transition-enter')).toBe(true)
-    expect(wrapper.find('.v-date-picker-header__value strong').hasClass('tab-reverse-transition-enter-active')).toBe(true)
+    expect(wrapper.find('.v-date-picker-header__value strong').classes()).toContain('tab-reverse-transition-enter')
+    expect(wrapper.find('.v-date-picker-header__value strong').classes()).toContain('tab-reverse-transition-enter-active')
   })
 
 })

@@ -367,7 +367,7 @@ test('VMenu.js', ({ mount }) => {
 
     await new Promise(resolve => requestAnimationFrame(resolve))
 
-    expect(content.getAttribute('style')).toMatchSnapshot()
+    expect(content.attributes()['style']).toMatchSnapshot()
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 })

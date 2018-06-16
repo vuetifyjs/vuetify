@@ -10,7 +10,7 @@ test('VLabel', ({ mount, functionalContext }) => {
       }
     }))
 
-    expect(wrapper.element.classList.contains('pink--text')).toBe(true)
+    expect(wrapper.classes()).toContain('pink--text')
   })
 
   it('should position itself absolutely', () => {

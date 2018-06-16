@@ -9,8 +9,8 @@ test('VSystemBar.vue', ({ mount }) => {
       }
     })
 
-    expect(wrapper.element.classList).toContain('blue')
-    expect(wrapper.element.classList).toContain('lighten-1')
+    expect(wrapper.classes()).toContain('blue')
+    expect(wrapper.classes()).toContain('lighten-1')
   })
 
   it('should render system bar with fixed prop', () => {
@@ -20,7 +20,7 @@ test('VSystemBar.vue', ({ mount }) => {
       }
     })
 
-    expect(wrapper.element.classList).toContain('v-system-bar--fixed')
+    expect(wrapper.classes()).toContain('v-system-bar--fixed')
   })
 
   it('should render system bar with absolute prop', () => {
@@ -30,7 +30,7 @@ test('VSystemBar.vue', ({ mount }) => {
       }
     })
 
-    expect(wrapper.element.classList).toContain('v-system-bar--absolute')
+    expect(wrapper.classes()).toContain('v-system-bar--absolute')
   })
 
   it('should update height when window prop change', async () => {

@@ -24,7 +24,7 @@ test('VBottomNav.js', ({ mount }) => {
       }
     })
 
-    expect(wrapper.hasClass('v-bottom-nav')).toBe(true)
+    expect(wrapper.classes()).toContain('v-bottom-nav')
     expect(wrapper.html()).toMatchSnapshot()
   })
 
@@ -39,8 +39,8 @@ test('VBottomNav.js', ({ mount }) => {
       }
     })
 
-    expect(wrapper.hasClass('v-bottom-nav--absolute')).toBe(true)
-    expect(wrapper.hasClass('v-bottom-nav--shift')).toBe(true)
+    expect(wrapper.classes()).toContain('v-bottom-nav--absolute')
+    expect(wrapper.classes()).toContain('v-bottom-nav--shift')
     expect(wrapper.html()).toMatchSnapshot()
   })
 
@@ -64,7 +64,7 @@ test('VBottomNav.js', ({ mount }) => {
       }
     })
 
-    expect(wrapper.hasClass('v-bottom-nav--active')).toBe(true)
+    expect(wrapper.classes()).toContain('v-bottom-nav--active')
     expect(wrapper.html()).toMatchSnapshot()
   })
 

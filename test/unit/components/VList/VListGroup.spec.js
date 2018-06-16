@@ -89,9 +89,9 @@ test('VListGroup.js', ({ mount }) => {
 
     const header = wrapper.find('.v-list__group__header__prepend-icon')
 
-    expect(header.hasClass('foo')).toBe(true)
+    expect(header.classes()).toContain('foo')
     wrapper.setProps({ activeClass: 'bar' })
-    expect(header.hasClass('bar')).toBe(true)
+    expect(header.classes()).toContain('bar')
 
     expect('Injection "listClick" not found').toHaveBeenWarned()
     expect(warning).toHaveBeenTipped()

@@ -25,7 +25,7 @@ test('VAlert.vue', ({ mount }) => {
 
     wrapper.setProps({ value: true })
     await wrapper.vm.$nextTick()
-    expect(wrapper.hasClass('foo-enter')).toBe(true)
+    expect(wrapper.classes()).toContain('foo-enter')
   })
 
   it('should render component with outline prop', async () => {
@@ -33,7 +33,7 @@ test('VAlert.vue', ({ mount }) => {
       propsData: { outline: true }
     })
 
-    expect(wrapper.hasClass('v-alert--outline')).toBe(true)
+    expect(wrapper.classes()).toContain('v-alert--outline')
   })
 
   it('should be dismissible', async () => {

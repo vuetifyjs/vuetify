@@ -157,7 +157,7 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
     const headers = wrapper.findAll('thead:first-of-type > tr:first-of-type > th')
 
     expect(
-      headers.map(h => h.getAttribute('aria-sort'))
+      headers.map(h => h.attributes()['aria-sort'])
     ).toEqual(['ascending', 'none', 'none'])
 
     wrapper.setProps({
@@ -168,7 +168,7 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
     })
 
     expect(
-      headers.map(h => h.getAttribute('aria-sort'))
+      headers.map(h => h.attributes()['aria-sort'])
     ).toEqual(['none', 'none', 'ascending'])
 
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
@@ -328,7 +328,7 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
     data.propsData.headersLength = 11
     const wrapper = mount(VDataTable, data)
 
-    expect(wrapper.find('tr.v-datatable__progress th').getAttribute('colspan')).toBe('11')
+    expect(wrapper.find('tr.v-datatable__progress th').attributes()['colspan']).toBe('11')
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 

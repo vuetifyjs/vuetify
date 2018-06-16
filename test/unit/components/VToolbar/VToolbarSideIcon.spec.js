@@ -7,7 +7,7 @@ test('VToolbarSideIcon.js', ({ mount, functionalContext }) => {
     const context = functionalContext()
     const wrapper = mount(VToolbarSideIcon, context)
 
-    expect(wrapper.find('i').hasClass('material-icons')).toBe(true)
+    expect(wrapper.find('i').classes()).toContain('material-icons')
     expect(wrapper.html()).toMatchSnapshot()
   })
 
@@ -17,7 +17,7 @@ test('VToolbarSideIcon.js', ({ mount, functionalContext }) => {
     const context = functionalContext({}, iconWrapper.vNode)
     const wrapper = mount(VToolbarSideIcon, context)
 
-    expect(wrapper.find('i').hasClass('fa-add')).toBe(true)
+    expect(wrapper.find('i').classes()).toContain('fa-add')
     expect(wrapper.html()).toMatchSnapshot()
   })
 
@@ -41,7 +41,7 @@ test('VToolbarSideIcon.js', ({ mount, functionalContext }) => {
     })
     const wrapper = mount(VToolbarSideIcon, context)
 
-    expect(wrapper.hasClass('theme--dark')).toBe(true)
+    expect(wrapper.classes()).toContain('theme--dark')
   })
 
   it('should pass through css classes to button component', () => {
@@ -50,7 +50,7 @@ test('VToolbarSideIcon.js', ({ mount, functionalContext }) => {
     })
     const wrapper = mount(VToolbarSideIcon, context)
 
-    expect(wrapper.hasClass('hidden-sm-and-up')).toBe(true)
+    expect(wrapper.classes()).toContain('hidden-sm-and-up')
   })
 
   it('should pass through directives to button component', () => {

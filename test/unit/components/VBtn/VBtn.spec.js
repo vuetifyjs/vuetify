@@ -65,7 +65,7 @@ test('VBtn.js', ({ mount, compileToFunctions }) => {
     })
 
     expect(wrapper.is('a')).toBe(true)
-    expect(wrapper.getAttribute('href')).toBe('http://www.google.com')
+    expect(wrapper.attributes()['href']).toBe('http://www.google.com')
     expect(wrapper.html()).toMatchSnapshot()
   })
 
@@ -143,7 +143,7 @@ test('VBtn.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    expect(wrapper.hasClass('foo')).toBe(true)
+    expect(wrapper.classes()).toContain('foo')
   })
 
   it('should have v-btn--depressed class when using depressed prop', () => {
@@ -153,7 +153,7 @@ test('VBtn.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    expect(wrapper.hasClass('v-btn--depressed')).toBe(true)
+    expect(wrapper.classes()).toContain('v-btn--depressed')
   })
 
   it('should have v-btn--flat class when using flat and depressed props', () => {
@@ -164,7 +164,7 @@ test('VBtn.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    expect(wrapper.hasClass('v-btn--flat')).toBe(true)
+    expect(wrapper.classes()).toContain('v-btn--flat')
   })
 
   it('should have v-btn--outline and v-btn--depressed classes when using outline prop', () => {
@@ -174,7 +174,7 @@ test('VBtn.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    expect(wrapper.hasClass('v-btn--outline')).toBe(true)
-    expect(wrapper.hasClass('v-btn--depressed')).toBe(true)
+    expect(wrapper.classes()).toContain('v-btn--outline')
+    expect(wrapper.classes()).toContain('v-btn--depressed')
   })
 })

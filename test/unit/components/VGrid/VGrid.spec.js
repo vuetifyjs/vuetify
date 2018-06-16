@@ -10,10 +10,11 @@ test('VFlex', ({ mount, functionalContext }) => {
       }
     }))
 
-    expect(wrapper.hasAttribute('foo')).toBe(false)
-    expect(wrapper.hasAttribute('bar')).toBe(false)
-    expect(wrapper.hasClass('foo')).toBe(true)
-    expect(wrapper.hasClass('bar')).toBe(false)
+    expect(wrapper.attributes('foo')).not.toContain('foo')
+    expect(wrapper.attributes('bar')).not.toContain('bar')
+
+    expect(wrapper.classes('foo')).toContain('foo')
+    expect(wrapper.classes('bar')).not.toContain('bar')
   })
 
   it('should pass the id attr', () => {
@@ -33,6 +34,6 @@ test('VFlex', ({ mount, functionalContext }) => {
       attrs: { slot: 'content' }
     }))
 
-    expect(wrapper.element.classList.contains('slot')).toBe(false)
+    expect(wrapper.classes()).not.toContain('slot')
   })
 })

@@ -273,7 +273,7 @@ test('VTabs', ({ mount, shallow }) => {
     })
 
     const slider = wrapper.find(VTabsSlider)
-    expect(slider.hasClass('pink')).toBe(true)
+    expect(slider.classes()).toContain('pink')
   })
 
   it('should handle touch events and remove container transition', async () => {

@@ -119,12 +119,12 @@ test('VDataIterator.js', ({ mount, compileToFunctions }) => {
     const wrapper = mount(component)
 
     const mainDiv = wrapper.find('.v-data-iterator')
-    expect(mainDiv.hasAttribute('id')).toBe(false)
+    expect(mainDiv.attributes()).not.toContain('id')
 
     var button = mainDiv.find('button')
-    expect(button.getAttribute('id')).toBe('testButtonId')
-    // expect(button.hasClass('v-btn--block')).toBe(true) // TODO: enable when migrating to vue-test-utils
-    expect(button.hasClass('test__class')).toBe(true)
+    expect(button.attributes()['id']).toBe('testButtonId')
+    // expect(button.classes()).toContain('v-btn--block') // TODO: enable when migrating to vue-test-utils
+    expect(button.classes()).toContain('test__class')
 
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })

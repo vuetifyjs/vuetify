@@ -15,13 +15,13 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
 
     const input = wrapper.find('input')
 
-    expect(input.element.getAttribute('autocomplete')).toBe('on')
+    expect(input.element.attributes()['autocomplete']).toBe('on')
 
     wrapper.setProps({ browserAutocomplete: 'off' })
 
     await wrapper.vm.$nextTick()
 
-    expect(input.element.getAttribute('autocomplete')).toBe('off')
+    expect(input.element.attributes()['autocomplete']).toBe('off')
   })
 
   it('should have explicit tabindex passed through when autocomplete', () => {
@@ -132,10 +132,10 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
   it('should render role=combobox correctly when autocomplete', async () => {
     const wrapper = shallow(VAutocomplete)
 
-    expect(wrapper.vm.$el.getAttribute('role')).toBeFalsy()
+    expect(wrapper.vm.$el.attributes()['role']).toBeFalsy()
 
     const input = wrapper.find('input')
-    expect(input.element.getAttribute('role')).toBe('combobox')
+    expect(input.element.attributes()['role']).toBe('combobox')
   })
 
   it('should not duplicate items after items update when caching is turned on', async () => {
@@ -663,10 +663,10 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
       }
     })
 
-    const chips = wrapper.findAll('.v-chip')
+    const chip = wrapper.find('.v-chip')
     const input = wrapper.find('input')
 
-    expect(chips[0].element.classList.contains('v-chip--disabled')).toBe(true)
+    expect(chip.classes()).toContain('v-chip--disabled')
 
     input.trigger('focus')
     input.trigger('keydown.left')
@@ -816,7 +816,7 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
 
     const content = wrapper.find('.v-autocomplete__content')
 
-    expect(content.element.classList.contains('foobar')).toBe(true)
+    expect(content.classes()).toContain('foobar')
   })
 
   it('should update the displayed value when items changes', async () => {

@@ -13,7 +13,7 @@ test('VApp.js', ({ mount }) => {
     const wrapper = mount(VApp)
     const app = wrapper.find('.application')
 
-    expect(app.getAttribute('data-app')).toBe('true')
+    expect(app.attributes()['data-app']).toBe('true')
   })
 
   it('should allow a custom id', () => {
@@ -24,7 +24,7 @@ test('VApp.js', ({ mount }) => {
     })
     const app = wrapper.find('.application')
 
-    expect(app.getAttribute('id')).toBe('inspire')
+    expect(app.attributes()['id']).toBe('inspire')
     expect(wrapper.html()).toMatchSnapshot()
   })
 
@@ -61,6 +61,6 @@ test('VApp.js', ({ mount }) => {
 
     el = document.getElementById('vuetify-theme-stylesheet')
     expect(el).toBeTruthy()
-    expect(el.getAttribute('nonce')).toBe('asdfghjkl')
+    expect(el.attributes()['nonce']).toBe('asdfghjkl')
   })
 })

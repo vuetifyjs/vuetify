@@ -37,12 +37,12 @@ test('VRadio.vue', ({ mount }) => {
     })
 
     let inputGroup = wrapper.find('input')
-    expect(inputGroup.getAttribute('role')).toBe('radio')
-    expect(inputGroup.getAttribute('aria-checked')).toBe('false')
+    expect(inputGroup.attributes()['role']).toBe('radio')
+    expect(inputGroup.attributes()['aria-checked']).toBe('false')
 
     wrapper.setData({ 'isActive': true })
     inputGroup = wrapper.find('input')
-    expect(inputGroup.getAttribute('aria-checked')).toBe('true')
+    expect(inputGroup.attributes()['aria-checked']).toBe('true')
     expect(wrapper.html()).toMatchSnapshot()
 
     expect(warning).toHaveBeenTipped()
@@ -61,7 +61,7 @@ test('VRadio.vue', ({ mount }) => {
     })
 
     const inputGroup = wrapper.find('input')
-    expect(inputGroup.getAttribute('aria-label')).toBe('Test')
+    expect(inputGroup.attributes()['aria-label']).toBe('Test')
     expect(wrapper.html()).toMatchSnapshot()
 
     expect(warning).toHaveBeenTipped()
@@ -79,7 +79,7 @@ test('VRadio.vue', ({ mount }) => {
     })
 
     const inputGroup = wrapper.find('input')
-    expect(inputGroup.element.getAttribute('aria-label')).toBeFalsy()
+    expect(inputGroup.element.attributes()['aria-label']).toBeFalsy()
     expect(wrapper.html()).toMatchSnapshot()
 
     expect(warning).toHaveBeenTipped()
@@ -94,7 +94,7 @@ test('VRadio.vue', ({ mount }) => {
     })
 
     const input = wrapper.find('input')
-    expect(input.getAttribute('name')).toBe('name')
+    expect(input.attributes()['name']).toBe('name')
     expect(wrapper.html()).toMatchSnapshot()
 
     expect(warning).toHaveBeenTipped()

@@ -44,7 +44,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     const item = wrapper.find('div.v-list--disabled')
 
-    expect(item.element.getAttribute('disabled')).toBe('disabled')
+    expect(item.element.attributes()['disabled']).toBe('disabled')
   })
 
   it('should render v-select correctly when using v-list-tile in item scope slot', async () => {
@@ -169,7 +169,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     const wrapper = mount(VSelect)
 
     const icon = wrapper.find('.v-icon')
-    expect(icon.hasAttribute('aria-hidden')).toBe(true)
+    expect(icon.attributes()).toContain('aria-hidden')
   })
 
   it('should only show items if they are in items', async () => {
@@ -232,7 +232,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     })
 
     const menu = wrapper.find('.v-menu__content')
-    expect(menu.element.classList).toContain('v-menu-class')
+    expect(menu.classes()).toContain('v-menu-class')
   })
 
   it('should have deletable chips', async () => {

@@ -5,7 +5,7 @@ test('VAvatar.vue', ({ mount, functionalContext }) => {
   it('should have an v-avatar class', () => {
     const wrapper = mount(VAvatar, functionalContext())
 
-    expect(wrapper.hasClass('v-avatar')).toBe(true)
+    expect(wrapper.classes()).toContain('v-avatar')
     expect(wrapper.html()).toMatchSnapshot()
   })
 
@@ -16,7 +16,7 @@ test('VAvatar.vue', ({ mount, functionalContext }) => {
       }
     }))
 
-    expect(wrapper.hasClass('v-avatar--tile')).toBe(true)
+    expect(wrapper.classes()).toContain('v-avatar--tile')
   })
 
   it('should accept custom or no class declarations', () => {
@@ -32,8 +32,8 @@ test('VAvatar.vue', ({ mount, functionalContext }) => {
     }))
 
     expect(wrapper.hasClass('active')).toBe(false)
-    expect(wrapperTwo.hasClass('active')).toBe(true)
-    expect(wrapperThree.hasClass('active')).toBe(true)
-    expect(wrapperFour.hasClass('active')).toBe(true)
+    expect(wrapperTwo.classes()).toContain('active')
+    expect(wrapperThree.classes()).toContain('active')
+    expect(wrapperFour.classes()).toContain('active')
   })
 })

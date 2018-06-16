@@ -48,7 +48,7 @@ test('VPicker.js', ({ mount, compileToFunctions }) => {
   })
 
     const title = wrapper.find('.v-picker__title')
-    expect(title.hasClass('orange')).toBe(true)
-    expect(title.hasClass('lighten-1')).toBe(true)
+    expect(title.classes()).toContain('orange')
+    expect(title.classes()).toContain('lighten-1')
   })
 })

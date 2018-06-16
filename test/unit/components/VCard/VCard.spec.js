@@ -45,8 +45,8 @@ test('VCard.vue', ({ mount }) => {
       }
     })
 
-    expect(wrapper.element.classList).toContain('blue')
-    expect(wrapper.element.classList).toContain('lighten-1')
+    expect(wrapper.classes()).toContain('blue')
+    expect(wrapper.classes()).toContain('lighten-1')
   })
 
   it('should render a tile card', () => {
@@ -83,7 +83,7 @@ test('VCard.vue', ({ mount }) => {
       }
     })
 
-    expect(wrapper.hasClass('v-card--tile')).toBe(true)
+    expect(wrapper.classes()).toContain('v-card--tile')
     expect(wrapper.html()).toMatchSnapshot()
   })
 })

@@ -14,15 +14,15 @@ test('VIcon.js', ({ mount, compileToFunctions }) => {
     const context = functionalContext({ props: { color: 'green lighten-1' } }, 'add')
     const wrapper = mount(VIcon, context)
 
-    expect(wrapper.element.classList).toContain('green--text')
-    expect(wrapper.element.classList).toContain('text--lighten-1')
+    expect(wrapper.classes()).toContain('green--text')
+    expect(wrapper.classes()).toContain('text--lighten-1')
   })
 
   it('should render a disabled component', () => {
     const context = functionalContext({ props: { disabled: true } }, 'add')
     const wrapper = mount(VIcon, context)
 
-    expect(wrapper.element.classList).toContain('v-icon--disabled')
+    expect(wrapper.classes()).toContain('v-icon--disabled')
   })
 
   it('should not set font size if none provided', () => {
@@ -66,21 +66,21 @@ test('VIcon.js', ({ mount, compileToFunctions }) => {
     const context = functionalContext({ props: { left: true } }, 'add')
     const wrapper = mount(VIcon, context)
 
-    expect(wrapper.element.classList).toContain('v-icon--left')
+    expect(wrapper.classes()).toContain('v-icon--left')
   })
 
   it('should render a right aligned component', () => {
     const context = functionalContext({ props: { right: true } }, 'add')
     const wrapper = mount(VIcon, context)
 
-    expect(wrapper.element.classList).toContain('v-icon--right')
+    expect(wrapper.classes()).toContain('v-icon--right')
   })
 
   it('should render a component with aria-hidden attr', () => {
     const context = functionalContext({ attrs: { 'aria-hidden': 'foo' } }, 'add')
     const wrapper = mount(VIcon, context)
 
-    expect(wrapper.element.getAttribute('aria-hidden')).toBe('foo')
+    expect(wrapper.element.attributes()['aria-hidden']).toBe('foo')
   })
 
   it('should allow third-party icons when using <icon>- prefix', () => {

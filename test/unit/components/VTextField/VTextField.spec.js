@@ -18,7 +18,7 @@ test('VTextField.js', ({ mount }) => {
     })
 
     const input = wrapper.find('input')
-    expect(input.getAttribute('required')).toBe('required')
+    expect(input.attributes()['required']).toBe('required')
   })
 
   it('should pass events to internal input field', () => {
@@ -45,7 +45,7 @@ test('VTextField.js', ({ mount }) => {
     })
 
     const inputGroup = wrapper.find('input')
-    expect(inputGroup.getAttribute('aria-label')).toBe('Test')
+    expect(inputGroup.attributes()['aria-label']).toBe('Test')
   })
 
   it('should not render aria-label attribute on text field element with no label value or id', () => {
@@ -57,7 +57,7 @@ test('VTextField.js', ({ mount }) => {
     })
 
     const inputGroup = wrapper.find('input')
-    expect(inputGroup.element.getAttribute('aria-label')).toBeFalsy()
+    expect(inputGroup.element.attributes()['aria-label']).toBeFalsy()
   })
 
   it('should not render aria-label attribute on text field element with id', () => {
@@ -71,7 +71,7 @@ test('VTextField.js', ({ mount }) => {
     })
 
     const inputGroup = wrapper.find('input')
-    expect(inputGroup.element.getAttribute('aria-label')).toBeFalsy()
+    expect(inputGroup.element.attributes()['aria-label']).toBeFalsy()
   })
 
   it('should start out as invalid', () => {
@@ -135,7 +135,7 @@ test('VTextField.js', ({ mount }) => {
 
     const input = wrapper.find('input')
 
-    expect(input.getAttribute('readonly')).toBe('readonly')
+    expect(input.attributes()['readonly']).toBe('readonly')
   })
 
   it('should clear input value', async () => {
@@ -275,7 +275,7 @@ test('VTextField.js', ({ mount }) => {
 
     const prepend = wrapper.find('.v-input__icon--append .v-icon')
     expect(prepend.text()).toBe('check')
-    expect(prepend.element.classList).not.toContain('input-group__icon-cb')
+    expect(prepend.classes()).not.toContain('input-group__icon-cb')
   })
 
   it('should not emit change event if value has not changed', async () => {
@@ -602,7 +602,7 @@ test('VTextField.js', ({ mount }) => {
 
     const label = wrapper.find('label')
 
-    expect(label.element.getAttribute('for')).toBe('bar')
+    expect(label.element.attributes()['for']).toBe('bar')
   })
 
   it('should render an appended outer icon', () => {
@@ -738,15 +738,15 @@ test('VTextField.js', ({ mount }) => {
 
       await wrapper.vm.$nextTick()
 
-      expect(label.element.classList).toContain('v-label--active')
-      expect(wrapper.vm.$el.classList).toContain('v-input--is-label-active')
+      expect(label.classes()).toContain('v-label--active')
+      expect(wrapper.classes()).toContain('v-input--is-label-active')
 
       wrapper.setProps({ type: undefined })
 
       await wrapper.vm.$nextTick()
 
-      expect(label.element.classList).not.toContain('v-label--active')
-      expect(wrapper.vm.$el.classList).not.toContain('v-input--is-label-active')
+      expect(label.classes()).not.toContain('v-label--active')
+      expect(wrapper.classes()).not.toContain('v-input--is-label-active')
     }
   })
 })

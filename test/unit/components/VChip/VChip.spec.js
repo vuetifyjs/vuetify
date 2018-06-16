@@ -5,7 +5,7 @@ test('VChip.vue', ({ mount, compileToFunctions }) => {
   it('should have a v-chip class', () => {
     const wrapper = mount(VChip)
 
-    expect(wrapper.hasClass('v-chip')).toBe(true)
+    expect(wrapper.classes()).toContain('v-chip')
     expect(wrapper.html()).toMatchSnapshot()
   })
 
@@ -34,8 +34,8 @@ test('VChip.vue', ({ mount, compileToFunctions }) => {
       }
     })
 
-    expect(wrapper.element.classList).toContain('blue')
-    expect(wrapper.element.classList).toContain('green--text')
+    expect(wrapper.classes()).toContain('blue')
+    expect(wrapper.classes()).toContain('green--text')
   })
 
   it('should render a disabled chip', () => {
@@ -45,7 +45,7 @@ test('VChip.vue', ({ mount, compileToFunctions }) => {
       }
     })
 
-    expect(wrapper.element.classList).toContain('v-chip--disabled')
+    expect(wrapper.classes()).toContain('v-chip--disabled')
   })
 
   it('should render a colored outline chip', () => {
@@ -56,8 +56,8 @@ test('VChip.vue', ({ mount, compileToFunctions }) => {
       }
     })
 
-    expect(wrapper.element.classList).toContain('blue')
-    expect(wrapper.element.classList).toContain('blue--text')
+    expect(wrapper.classes()).toContain('blue')
+    expect(wrapper.classes()).toContain('blue--text')
   })
 
   it('should render a colored outline chip with text color', () => {
@@ -69,7 +69,7 @@ test('VChip.vue', ({ mount, compileToFunctions }) => {
       }
     })
 
-    expect(wrapper.element.classList).toContain('blue')
-    expect(wrapper.element.classList).toContain('green--text')
+    expect(wrapper.classes()).toContain('blue')
+    expect(wrapper.classes()).toContain('green--text')
   })
 })
