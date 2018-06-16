@@ -17,6 +17,13 @@ theme(selection-control, "v-input--selection-controls")
 rtl(v-selection-control-rtl, "v-input--selection-controls")
 
 .v-input--selection-controls
+  padding: 4px 0
+
+  .v-input__append-outer,
+  .v-input__prepend-outer
+    margin-top: 0
+    margin-bottom: 0
+
   &__input
     color: inherit
     display: inline-flex
@@ -24,7 +31,6 @@ rtl(v-selection-control-rtl, "v-input--selection-controls")
     height: 24px
     position: relative
     margin-right: 8px
-    margin-top: 4px
     transition: color .2s cubic-bezier(.25,.8,.25,1), transform .3s cubic-bezier(.25,.8,.25,1)
     width: 24px
 
@@ -55,7 +61,9 @@ rtl(v-selection-control-rtl, "v-input--selection-controls")
       transition: inherit
 
   .v-label
-    top: 2px
+    align-items: center
+    display: inline-flex
+    top: 0
     user-select: none
 
   &.v-input--is-focused,

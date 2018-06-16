@@ -1,7 +1,7 @@
 import { test } from '@/test'
 import VRangeSlider from '@/components/VRangeSlider'
 
-const warning = '[Vuetify] Missing v-app or a non-body wrapping element with the [data-app] attribute in "v-range-slider"'
+const warning = '[Vuetify] Missing v-app or a non-body wrapping element with the [data-app] attribute'
 
 test('VRangeSlider.vue', ({ mount }) => {
 

@@ -49,6 +49,23 @@ test('VTimePickerClock.js', ({ mount }) => {
     expect(input).toBeCalledWith(3)
   })
 
+  it('should emit input event on wheel if scrollable and has allowedValues', () => {
+    const wrapper = mount(VTimePickerClock, {
+      propsData: {
+        max: 10,
+        min: 1,
+        value: 6,
+        scrollable: true,
+        allowedValues: val => !(val % 3)
+      }
+    })
+
+    const input = jest.fn()
+    wrapper.vm.$on('input', input)
+    wrapper.trigger('wheel')
+    expect(input).toBeCalledWith(9)
+  })
+
   it('should not emit input event on wheel if not scrollable', () => {
     const wrapper = mount(VTimePickerClock, {
       propsData: {
@@ -77,10 +94,10 @@ test('VTimePickerClock.js', ({ mount }) => {
     const change = jest.fn()
     wrapper.vm.$on('change', change)
 
+    wrapper.vm.valueOnMouseUp = 55
     wrapper.trigger('mouseup')
-    expect(change).toBeCalledWith(59)
+    expect(change).toBeCalledWith(55)
 
-    wrapper.setProps({ value: 55 })
     wrapper.trigger('touchend')
     expect(change).toBeCalledWith(55)
   })
@@ -101,8 +118,9 @@ test('VTimePickerClock.js', ({ mount }) => {
     expect(change).not.toBeCalled()
 
     wrapper.vm.isDragging = true
+    wrapper.vm.valueOnMouseUp = 58
     wrapper.trigger('mouseleave')
-    expect(change).toBeCalledWith(59)
+    expect(change).toBeCalledWith(58)
   })
 
   it('should calculate angle', () => {

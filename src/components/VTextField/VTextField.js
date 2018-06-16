@@ -18,6 +18,7 @@ import Ripple from '../../directives/ripple'
 import {
   keyCodes
 } from '../../util/helpers'
+import { deprecate } from '../../util/console'
 
 const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
 
@@ -41,6 +42,8 @@ export default {
 
   props: {
     appendOuterIcon: String,
+    /** @deprecated */
+    appendOuterIconCb: Function,
     autofocus: Boolean,
     box: Boolean,
     browserAutocomplete: String,
@@ -61,6 +64,9 @@ export default {
     outline: Boolean,
     placeholder: String,
     prefix: String,
+    prependInnerIcon: String,
+    /** @deprecated */
+    prependInnerIconCb: Function,
     reverse: Boolean,
     singleLine: Boolean,
     solo: Boolean,
@@ -116,7 +122,12 @@ export default {
         this.badInput
     },
     isEnclosed () {
-      return this.isSolo || this.hasOutline || this.fullWidth
+      return (
+        this.box ||
+        this.isSolo ||
+        this.hasOutline ||
+        this.fullWidth
+      )
     },
     isLabelActive () {
       return this.isDirty || dirtyTypes.includes(this.type)
@@ -126,6 +137,24 @@ export default {
     },
     isSolo () {
       return this.solo || this.soloInverted
+    },
+    labelPosition () {
+      const offset = (this.prefix && !this.labelValue) ? 16 : 0
+
+      return (!this.$vuetify.rtl !== !this.reverse) ? {
+        left: 'auto',
+        right: offset
+      } : {
+        left: offset,
+        right: 'auto'
+      }
+    },
+    showLabel () {
+      return this.hasLabel && (!this.isSingle || (!this.isLabelActive && !this.placeholder))
+    },
+    labelValue () {
+      return !this.isSingle &&
+        Boolean(this.isFocused || this.isLabelActive || this.placeholder)
     }
   },
 
@@ -151,8 +180,6 @@ export default {
           this.$emit('input', this.lazyValue)
         })
       } else this.lazyValue = val
-
-      if (this.internalChange) this.internalChange = false
     }
   },
 
@@ -178,13 +205,41 @@ export default {
 
       if (this.$slots['append-outer']) {
         slot.push(this.$slots['append-outer'])
-      } else if (this.$slots['append-outer-icon']) {
-        slot.push(this.$slots['append-outer-icon'])
       } else if (this.appendOuterIcon) {
         slot.push(this.genIcon('appendOuter'))
       }
 
       return this.genSlot('append', 'outer', slot)
+    },
+    genPrependInnerSlot () {
+      const slot = []
+
+      if (this.$slots['prepend-inner']) {
+        slot.push(this.$slots['prepend-inner'])
+      } else if (this.prependInnerIcon) {
+        slot.push(this.genIcon('prependInner'))
+      }
+
+      return this.genSlot('prepend', 'inner', slot)
+    },
+    genIconSlot () {
+      const slot = []
+
+      if (this.$slots['append']) {
+        slot.push(this.$slots['append'])
+      } else if (this.appendIcon) {
+        slot.push(this.genIcon('append'))
+      }
+
+      return this.genSlot('append', 'inner', slot)
+    },
+    genInputSlot () {
+      const input = VInput.methods.genInputSlot.call(this)
+
+      const prepend = this.genPrependInnerSlot()
+      prepend && input.children.unshift(prepend)
+
+      return input
     },
     genClearIcon () {
       if (!this.clearable) return null
@@ -193,8 +248,14 @@ export default {
         ? false
         : 'clear'
 
+      if (this.clearIconCb) deprecate(':clear-icon-cb', '@click:clear', this)
+
       return this.genSlot('append', 'inner', [
-        this.genIcon(icon, this.clearIconCb || this.clearableCallback)
+        this.genIcon(
+          icon,
+          (!this.$listeners['click:clear'] && this.clearIconCb) || this.clearableCallback,
+          false
+        )
       ])
     },
     genCounter () {
@@ -218,62 +279,23 @@ export default {
       ]
     },
     genLabel () {
-      if (!this.hasLabel ||
-        (this.isSingle &&
-        (this.isDirty || !!this.placeholder))
-      ) return null
-
-      const isSingleLine = this.isSingle
-      let value = 0
-      let left = 'auto'
-      let right = 'auto'
-
-      // Create spacing
-      if ((this.prefix || this.reverse) &&
-        (isSingleLine || !this.isFocused) &&
-        !this.isDirty
-      ) value = 16
-
-      // Check if RTL
-      if (this.$vuetify.rtl) right = value
-      else left = value
-
-      // Check if reversed
-      if (this.reverse) {
-        const direction = right
-        right = left
-        left = direction
-      }
+      if (!this.showLabel) return null
 
       const data = {
         props: {
           absolute: true,
           color: this.validationState,
           disabled: this.disabled,
-          focused: !isSingleLine && (this.isFocused || !!this.validationState),
-          left,
-          right,
-          value: Boolean(!isSingleLine &&
-            (this.isFocused || this.isDirty || this.placeholder))
+          focused: !this.isSingle && (this.isFocused || !!this.validationState),
+          left: this.labelPosition.left,
+          right: this.labelPosition.right,
+          value: this.labelValue
         }
       }
 
       if (this.$attrs.id) data.props.for = this.$attrs.id
 
       return this.$createElement(VLabel, data, this.$slots.label || this.label)
-    },
-    genIconSlot () {
-      const slot = []
-
-      if (this.$slots['append']) {
-        slot.push(this.$slots['append'])
-      } else if (this.$slots['append-icon']) {
-        slot.push(this.$slots['append-icon'])
-      } else if (this.appendIcon) {
-        slot.push(this.genIcon('append'))
-      }
-
-      return this.genSlot('append', 'inner', slot)
     },
     genInput () {
       const listeners = Object.assign({}, this.$listeners)
@@ -288,7 +310,6 @@ export default {
           ...this.$attrs,
           autofocus: this.autofocus,
           disabled: this.disabled,
-          required: this.required,
           readonly: this.readonly,
           tabindex: this.tabindex,
           type: this.type,
@@ -360,6 +381,7 @@ export default {
       }
     },
     onInput (e) {
+      this.internalChange = true
       this.mask && this.resetSelections(e.target)
       this.internalValue = e.target.value
       this.badInput = e.target.validity && e.target.validity.badInput

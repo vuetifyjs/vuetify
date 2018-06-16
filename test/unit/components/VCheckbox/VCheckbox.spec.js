@@ -347,6 +347,29 @@ test('VCheckbox.js', ({ mount }) => {
     expect(change).toBeCalledWith([{b: 1}, {c: 1}])
   })
 
+  it('should work with custom true- and false-value', () => {
+    const wrapper = mount(VCheckbox, {
+      propsData: {
+        trueValue: 'on',
+        falseValue: 'off',
+        inputValue: null
+      }
+    })
+
+    const ripple = wrapper.find('.v-input--selection-controls__ripple')[0]
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    ripple.trigger('click')
+    expect(change).toBeCalledWith('on')
+
+    ripple.trigger('click')
+    expect(change).toBeCalledWith('off')
+
+    expect(change).toHaveBeenCalledTimes(2)
+  })
+
   // https://github.com/vuetifyjs/vuetify/issues/2119
   it('should put id on internal input', () => {
     const wrapper = mount(VCheckbox, {

@@ -436,6 +436,8 @@ export default {
       }
     },
     onKeyDown (e) {
+      if (this.disabled || this.readonly) return
+
       const value = this.parseKeyDown(e)
 
       if (value == null) return

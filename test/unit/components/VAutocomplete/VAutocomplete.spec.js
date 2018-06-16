@@ -1,7 +1,7 @@
 import { test } from '@/test'
 import VAutocomplete from '@/components/VAutocomplete'
 
-test('VAutocomplete.js', ({ mount, shallow }) => {
+test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
   const app = document.createElement('div')
   app.setAttribute('data-app', true)
   document.body.appendChild(app)
@@ -273,8 +273,6 @@ test('VAutocomplete.js', ({ mount, shallow }) => {
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.isMenuActive).toBe(false)
   })
-
-
 
   it('should change selected index', async () => {
     const wrapper = shallow(VAutocomplete, {
@@ -750,6 +748,22 @@ test('VAutocomplete.js', ({ mount, shallow }) => {
     expect(wrapper.vm.menuCanShow).toBe(false)
   })
 
+  it('should not hide menu when no data but has no-data slot', async () => {
+    const wrapper = mount(VAutocomplete, {
+      propsData: {
+        combobox: true
+      },
+      slots: {
+        'no-data': [compileToFunctions('<span>show me</span>')]
+      }
+    })
+
+    const input = wrapper.first('input')
+    input.trigger('focus')
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.menuCanShow).toBe(true)
+  })
+
   // https://github.com/vuetifyjs/vuetify/issues/2834
   it('should not update search if selectedIndex is > -1', () => {
     const wrapper = mount(VAutocomplete)
@@ -803,5 +817,21 @@ test('VAutocomplete.js', ({ mount, shallow }) => {
     const content = wrapper.first('.v-autocomplete__content')
 
     expect(content.element.classList.contains('foobar')).toBe(true)
+  })
+
+  it('should update the displayed value when items changes', async () => {
+    const wrapper = mount(VAutocomplete, {
+      propsData: {
+        value: 1,
+        items: []
+      }
+    })
+
+    const input = wrapper.first('input')
+
+    await wrapper.vm.$nextTick()
+    wrapper.setProps({ items: [{ text: 'foo', value: 1 }] })
+    await wrapper.vm.$nextTick()
+    expect(input.element.value).toBe('foo')
   })
 })

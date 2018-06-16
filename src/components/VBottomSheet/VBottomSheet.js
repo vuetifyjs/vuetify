@@ -37,7 +37,7 @@ export default {
         ...this.$listeners
       },
       props: {
-        contentClass: contentClass,
+        contentClass,
         noClickAnimation: true,
         transition: 'bottom-sheet-transition',
         value: this.value

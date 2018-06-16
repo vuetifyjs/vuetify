@@ -60,10 +60,10 @@ const Vuetify: VuetifyPlugin = {
 
 /* istanbul ignore next */
 function checkVueVersion (Vue: VueConstructor) {
-  const vueDep = __REQUIRED_VUE__
+  const vueDep = __REQUIRED_VUE__ as string
 
-  const required = vueDep.split('.').map(v => v.replace(/\D/g, ''))
-  const actual = Vue.version.split('.')
+  const required = vueDep.split('.').map(v => v.replace(/\D/g, '')).map(Number)
+  const actual = Vue.version.split('.').map(Number)
 
   // Simple semver caret range comparison
   const passes =

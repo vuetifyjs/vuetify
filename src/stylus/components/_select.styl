@@ -48,18 +48,14 @@ theme(v-select, 'v-select')
     ::placeholder
       color: transparent !important
 
-  &.v-text-field--box,
-  &.v-text-field--outline
-    &:not(.v-text-field--single-line)
-      &.v-input--is-dirty,
-      &.v-input--is-focused
-        .v-select__selections
-          padding-top: 24px
+  &.v-text-field--enclosed:not(.v-text-field--single-line)
+    .v-select__selections
+      padding-top: 24px
 
   // For specificity, hide caret
   &.v-text-field
     input
-      flex: 1 1 0
+      flex: 1 1 // Doesn't resize on IE11 with 3rd param
       margin-top: 0
       min-width: 0
       pointer-events: none
