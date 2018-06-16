@@ -207,7 +207,10 @@ export default {
 
     children.push(h('div', {
       'class': this.contentClasses,
-      domProps: { tabIndex: -1 },
+      attrs: {
+        tabIndex: '-1',
+        ...this.getScopeIdAttrs()
+      },
       style: { zIndex: this.activeZIndex },
       ref: 'content'
     }, [dialog]))

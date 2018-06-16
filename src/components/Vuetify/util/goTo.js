@@ -34,11 +34,11 @@ function getTargetLocation (target, settings) {
   }
 
   if (target instanceof Element) {
-    location = target.getBoundingClientRect().top + window.scrollY
+    location = target.getBoundingClientRect().top + window.pageYOffset
   } else if (typeof target === 'string') {
     const targetEl = document.querySelector(target)
     if (!targetEl) throw new TypeError(`Target element "${target}" not found.`)
-    location = targetEl.getBoundingClientRect().top + window.scrollY
+    location = targetEl.getBoundingClientRect().top + window.pageYOffset
   } else if (typeof target === 'number') {
     location = target
   } else {

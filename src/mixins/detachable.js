@@ -55,6 +55,12 @@ export default {
   },
 
   methods: {
+    getScopeIdAttrs () {
+      const scopeId = this.$vnode && this.$vnode.context.$options._scopeId
+      return scopeId && {
+        [scopeId]: ''
+      }
+    },
     initDetach () {
       if (this._isDestroyed ||
         !this.$refs.content ||

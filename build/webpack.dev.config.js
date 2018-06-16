@@ -59,8 +59,7 @@ module.exports = merge(baseWebpackConfig, {
     new VueLoaderPlugin(),
     new ForkTsCheckerWebpackPlugin({
       checkSyntacticErrors: true,
-      tsconfig: resolve('../tsconfig.json'),
-      tslint: resolve('../.tslint.js')
+      tsconfig: resolve('../tsconfig.json')
     }),
     new HappyPack({
       id: 'ts',
