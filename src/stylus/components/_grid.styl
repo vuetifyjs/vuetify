@@ -51,9 +51,6 @@
   // https://github.com/vuetifyjs/vuetify/issues/3873
   min-width: 0
 
-  > .flex
-    max-width: 100%
-
   &.row
     flex-direction: row
 
@@ -65,6 +62,9 @@
 
     &.reverse
       flex-direction: column-reverse
+
+    > .flex
+      max-width: 100%
 
   &.wrap
     flex-wrap: wrap
@@ -88,6 +88,7 @@ for $size, $width in $grid-breakpoints
 .flex,
 .child-flex > *
   flex: 1 1 auto
+  max-width: 100%
 
 .align
   &-start
