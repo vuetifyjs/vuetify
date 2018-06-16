@@ -44,7 +44,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     const item = wrapper.find('div.v-list--disabled')
 
-    expect(item.element.attributes()['disabled']).toBe('disabled')
+    expect(item.attributes()['disabled']).toBe('disabled')
   })
 
   it('should render v-select correctly when using v-list-tile in item scope slot', async () => {

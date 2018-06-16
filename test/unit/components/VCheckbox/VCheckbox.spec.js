@@ -109,7 +109,7 @@ test('VCheckbox.js', ({ mount }) => {
     })
 
     const inputGroup = wrapper.find('input')
-    expect(inputGroup.element.attributes()['aria-label']).toBeFalsy()
+    expect(inputGroup.attributes()['aria-label']).toBeFalsy()
   })
 
   it('should toggle on space and enter with default toggleKeys', () => {

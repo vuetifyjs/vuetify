@@ -79,7 +79,7 @@ test('VRadio.vue', ({ mount }) => {
     })
 
     const inputGroup = wrapper.find('input')
-    expect(inputGroup.element.attributes()['aria-label']).toBeFalsy()
+    expect(inputGroup.attributes()['aria-label']).toBeFalsy()
     expect(wrapper.html()).toMatchSnapshot()
 
     expect(warning).toHaveBeenTipped()

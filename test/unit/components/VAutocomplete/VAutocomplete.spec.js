@@ -15,13 +15,13 @@ test('VAutocomplete.js', ({ mount, shallowMount, compileToFunctions }) => {
 
     const input = wrapper.find('input')
 
-    expect(input.element.attributes()['autocomplete']).toBe('on')
+    expect(input.attributes()['autocomplete']).toBe('on')
 
     wrapper.setProps({ browserAutocomplete: 'off' })
 
     await wrapper.vm.$nextTick()
 
-    expect(input.element.attributes()['autocomplete']).toBe('off')
+    expect(input.attributes()['autocomplete']).toBe('off')
   })
 
   it('should have explicit tabindex passed through when autocomplete', () => {
@@ -135,7 +135,7 @@ test('VAutocomplete.js', ({ mount, shallowMount, compileToFunctions }) => {
     expect(wrapper.vm.$el.attributes()['role']).toBeFalsy()
 
     const input = wrapper.find('input')
-    expect(input.element.attributes()['role']).toBe('combobox')
+    expect(input.attributes()['role']).toBe('combobox')
   })
 
   it('should not duplicate items after items update when caching is turned on', async () => {

@@ -60,7 +60,7 @@ test('VSlider.vue', ({ mount }) => {
 
     const slider = wrapper.find('input')
 
-    expect(slider.element.attributes()['tabindex']).toBe('-1')
+    expect(slider.attributes()['tabindex']).toBe('-1')
     expect(warning).toHaveBeenTipped()
   })
 
@@ -188,7 +188,7 @@ test('VSlider.vue', ({ mount }) => {
 
     const label = wrapper.find('.v-label')
 
-    expect(label.element.attributes()['for']).toBe('foo')
+    expect(label.attributes()['for']).toBe('foo')
 
     const wrapper2 = mount(VSlider, {
       attachToDocument: true,
@@ -199,7 +199,7 @@ test('VSlider.vue', ({ mount }) => {
 
     const label2 = wrapper2.find('.v-label')
 
-    expect(label2.element.attributes()['for']).toBe(null)
+    expect(label2.attributes()['for']).toBe(null)
 
     expect(warning).toHaveBeenTipped()
   })

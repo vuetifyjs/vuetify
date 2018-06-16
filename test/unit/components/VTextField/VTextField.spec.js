@@ -57,7 +57,7 @@ test('VTextField.js', ({ mount }) => {
     })
 
     const inputGroup = wrapper.find('input')
-    expect(inputGroup.element.attributes()['aria-label']).toBeFalsy()
+    expect(inputGroup.attributes()['aria-label']).toBeFalsy()
   })
 
   it('should not render aria-label attribute on text field element with id', () => {
@@ -71,7 +71,7 @@ test('VTextField.js', ({ mount }) => {
     })
 
     const inputGroup = wrapper.find('input')
-    expect(inputGroup.element.attributes()['aria-label']).toBeFalsy()
+    expect(inputGroup.attributes()['aria-label']).toBeFalsy()
   })
 
   it('should start out as invalid', () => {
@@ -602,7 +602,7 @@ test('VTextField.js', ({ mount }) => {
 
     const label = wrapper.find('label')
 
-    expect(label.element.attributes()['for']).toBe('bar')
+    expect(label.attributes()['for']).toBe('bar')
   })
 
   it('should render an appended outer icon', () => {

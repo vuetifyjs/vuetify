@@ -80,7 +80,7 @@ test('VIcon.js', ({ mount, compileToFunctions }) => {
     const context = functionalContext({ attrs: { 'aria-hidden': 'foo' } }, 'add')
     const wrapper = mount(VIcon, context)
 
-    expect(wrapper.element.attributes()['aria-hidden']).toBe('foo')
+    expect(wrapper.attributes()['aria-hidden']).toBe('foo')
   })
 
   it('should allow third-party icons when using <icon>- prefix', () => {
