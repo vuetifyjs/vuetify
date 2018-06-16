@@ -226,7 +226,7 @@ test('VAutocomplete - tags', ({ mount, compileToFunctions }) => {
     })
 
     const input = wrapper.find('input')
-    const chip = wrapper.findAll('.v-chip')[1]
+    const chip = wrapper.findAll('.v-chip').at(1)
     const close = chip.find('.v-chip__close')
 
     input.trigger('focus')

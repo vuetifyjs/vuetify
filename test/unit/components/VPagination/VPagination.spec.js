@@ -21,8 +21,8 @@ test('VPagination.vue', ({ mount }) => {
     wrapper.vm.$on('next', next)
 
     const navigation = wrapper.findAll('.v-pagination__navigation')
-    navigation[0].trigger('click')
-    navigation[1].trigger('click')
+    navigation.at(0).trigger('click')
+    navigation.at(1).trigger('click')
 
     expect(next).toBeCalled()
     expect(previous).toBeCalled()
@@ -46,7 +46,7 @@ test('VPagination.vue', ({ mount }) => {
     wrapper.vm.$on('input', cb)
 
     const navigation = wrapper.findAll('.v-pagination__item')
-    navigation[1].trigger('click')
+    navigation.at(1).trigger('click')
 
     expect(cb).toBeCalledWith(2)
   })

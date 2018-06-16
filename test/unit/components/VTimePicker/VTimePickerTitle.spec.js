@@ -56,7 +56,7 @@ test('VTimePickerTitle.js', ({ mount }) => {
 
     wrapper.find('.v-time-picker-title__ampm .v-picker__title__btn.active').trigger('click')
     expect(period).not.toBeCalled()
-    wrapper.findAll('.v-time-picker-title__ampm .v-picker__title__btn:not(.active)')[0].trigger('click')
+    wrapper.findAll('.v-time-picker-title__ampm .v-picker__title__btn:not(.active)').at(0).trigger('click')
     expect(period).toBeCalledWith('am')
 
     wrapper.setProps({
@@ -64,7 +64,7 @@ test('VTimePickerTitle.js', ({ mount }) => {
       minute: 13,
       period: 'am'
     })
-    wrapper.findAll('.v-time-picker-title__ampm .v-picker__title__btn:not(.active)')[0].trigger('click')
+    wrapper.findAll('.v-time-picker-title__ampm .v-picker__title__btn:not(.active)').at(0).trigger('click')
     expect(period).toBeCalledWith('pm')
   })
 
@@ -80,13 +80,13 @@ test('VTimePickerTitle.js', ({ mount }) => {
     const selectingHour = jest.fn()
     wrapper.vm.$on('update:selectingHour', selectingHour)
 
-    wrapper.findAll('.v-time-picker-title__time .v-picker__title__btn')[1].trigger('click')
+    wrapper.findAll('.v-time-picker-title__time .v-picker__title__btn').at(1).trigger('click')
     expect(selectingHour).not.toBeCalled()
     wrapper.find('.v-time-picker-title__time .v-picker__title__btn').trigger('click')
     expect(selectingHour).toBeCalledWith(true)
     wrapper.setProps({ selectingHour: true })
     await wrapper.vm.$nextTick()
-    wrapper.findAll('.v-time-picker-title__time .v-picker__title__btn')[1].trigger('click')
+    wrapper.findAll('.v-time-picker-title__time .v-picker__title__btn').at(1).trigger('click')
     expect(selectingHour).toBeCalledWith(false)
   })
 })

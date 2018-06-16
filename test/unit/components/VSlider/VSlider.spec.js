@@ -500,8 +500,8 @@ test('VSlider.vue', ({ mount }) => {
     const ticks = wrapper.findAll('.v-slider__ticks')
 
     expect(ticks.length).toBe(2)
-    expect(ticks[0].element.firstChild.innerHTML).toBe('foo')
-    expect(ticks[1].element.firstChild.innerHTML).toBe('bar')
+    expect(ticks.at(0).element.firstChild.innerHTML).toBe('foo')
+    expect(ticks.at(1).element.firstChild.innerHTML).toBe('bar')
 
     expect(warning).toHaveBeenTipped()
   })

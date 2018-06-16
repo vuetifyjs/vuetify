@@ -88,7 +88,7 @@ test('VInput.js', ({ mount }) => {
     wrapper.vm.$on('click', click)
 
     const prepend = wrapper.find('.v-icon')
-    const append = wrapper.findAll('.v-icon')[1]
+    const append = wrapper.findAll('.v-icon').at(1)
     const slot = wrapper.find('.v-input__slot')
 
     prepend.trigger('click')

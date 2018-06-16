@@ -113,7 +113,7 @@ test('VBottomNav.js', ({ mount }) => {
 
     wrapper.vm.$on('update:active', update)
 
-    const btn = wrapper.findAll('.v-btn')[1]
+    const btn = wrapper.findAll('.v-btn').at(1)
     btn.trigger('click')
 
     await wrapper.vm.$nextTick()

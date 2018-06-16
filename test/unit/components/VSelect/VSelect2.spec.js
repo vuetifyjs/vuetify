@@ -389,7 +389,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect(wrapper.vm.selectedIndex).toBe(0)
     expect(onFocus).toHaveBeenCalledTimes(1)
 
-    wrapper.findAll('.v-chip--select-multi')[1].trigger('click')
+    wrapper.findAll('.v-chip--select-multi').at(1).trigger('click')
 
     expect(wrapper.vm.selectedIndex).toBe(1)
     expect(onFocus).toHaveBeenCalledTimes(2)

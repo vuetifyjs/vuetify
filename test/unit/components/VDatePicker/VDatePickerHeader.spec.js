@@ -33,7 +33,7 @@ test('VDatePickerHeader.js', ({ mount }) => {
     })
 
     expect(wrapper.find('.v-icon').text()).toBe('foo')
-    expect(wrapper.findAll('.v-icon')[1].text()).toBe('bar')
+    expect(wrapper.findAll('.v-icon').at(1).text()).toBe('bar')
   })
 
   it('should render component with own formatter and match snapshot', () => {
@@ -100,7 +100,7 @@ test('VDatePickerHeader.js', ({ mount }) => {
     wrapper.find('button').trigger('click')
     expect(input).toBeCalledWith('2005-11')
 
-    wrapper.findAll('button')[1].trigger('click')
+    wrapper.findAll('button').at(1).trigger('click')
     expect(input).toBeCalledWith('2006-01')
   })
 

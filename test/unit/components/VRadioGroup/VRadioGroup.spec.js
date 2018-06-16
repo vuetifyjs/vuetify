@@ -76,8 +76,8 @@ test('VRadioGroup.vue', ({ mount }) => {
     expect(wrapper.vm.radios.length).toBe(2)
 
     const radios = wrapper.findAll(VRadio)
-    const one = radios[0]
-    const two = radios[1]
+    const one = radios.at(0)
+    const two = radios.at(1)
     const inputOne = one.find('input')
     const inputTwo = two.find('input')
 
@@ -117,8 +117,8 @@ test('VRadioGroup.vue', ({ mount }) => {
     expect(wrapper.vm.radios.length).toBe(2)
 
     const radios = wrapper.findAll(VRadio)
-    const one = radios[0]
-    const two = radios[1]
+    const one = radios.at(0)
+    const two = radios.at(1)
 
     expect(wrapper.vm.internalValue).toBe(null)
     expect(one.vm.isActive).toBe(false)

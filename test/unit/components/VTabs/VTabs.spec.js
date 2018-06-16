@@ -126,7 +126,7 @@ test('VTabs', ({ mount, shallowMount }) => {
     await ssrBootable()
 
     const tabs = wrapper.find(VTabs)
-    const tab = wrapper.findAll(VTab)[1]
+    const tab = wrapper.findAll(VTab).at(1)
     const input = jest.fn()
 
     tabs.vm.$on('input', input)

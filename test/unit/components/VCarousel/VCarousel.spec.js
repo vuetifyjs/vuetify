@@ -178,7 +178,7 @@ test('VCarousel.js', ({ mount }) => {
     const input = jest.fn()
     wrapper.vm.$children[0].$on('input', input)
 
-    wrapper.findAll('.v-carousel__controls__item')[2].trigger('click')
+    wrapper.findAll('.v-carousel__controls__item').at(2).trigger('click')
     await wrapper.vm.$nextTick()
     expect(input).toBeCalledWith(2)
   })
