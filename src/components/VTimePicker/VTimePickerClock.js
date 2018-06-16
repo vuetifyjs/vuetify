@@ -159,7 +159,9 @@ export default {
     },
     onMouseUp () {
       this.isDragging = false
-      this.valueOnMouseUp !== null && this.isAllowed(this.valueOnMouseUp) && this.$emit('change', this.valueOnMouseUp)
+      if (this.valueOnMouseUp !== null && this.isAllowed(this.valueOnMouseUp)) {
+        this.$emit('change', this.valueOnMouseUp)
+      }
     },
     onDragMove (e) {
       e.preventDefault()
