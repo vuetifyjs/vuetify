@@ -1,17 +1,18 @@
+import Vue from 'vue'
+
 /**
  * Delayable
  *
  * @mixin
  *
- * Changes the open or close
- * delay time for elements
+ * Changes the open or close delay time for elements
  */
-export default {
+export default Vue.extend({
   name: 'delayable',
 
   data: () => ({
-    openTimeout: null,
-    closeTimeout: null
+    openTimeout: undefined as number | undefined,
+    closeTimeout: undefined as number | undefined
   }),
 
   props: {
@@ -27,30 +28,21 @@ export default {
 
   methods: {
     /**
-     * Clear any pending delay
-     * timers from executing
-     *
-     * @return {void}
+     * Clear any pending delay timers from executing
      */
-    clearDelay () {
+    clearDelay (): void {
       clearTimeout(this.openTimeout)
       clearTimeout(this.closeTimeout)
     },
     /**
-     * Runs callback after
-     * a specified delay
-     *
-     * @param  {String}   type
-     * @param  {Function} cb
-     *
-     * @return {void}
+     * Runs callback after a specified delay
      */
-    runDelay (type, cb) {
+    runDelay (type: 'open' | 'close', cb: () => void): void {
       this.clearDelay()
 
-      const delay = parseInt(this[`${type}Delay`], 10)
+      const delay = parseInt((this as any)[`${type}Delay`], 10)
 
-      this[`${type}Timeout`] = setTimeout(cb, delay)
+      ;(this as any)[`${type}Timeout`] = setTimeout(cb, delay)
     }
   }
-}
+})
