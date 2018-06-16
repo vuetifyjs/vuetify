@@ -31,6 +31,8 @@ export default function lang (config: Options['lang'] = {}): VuetifyLanguage {
     t (key, ...params) {
       if (!key.startsWith(LANG_PREFIX)) return key
 
+      if (config.t) return config.t(key, ...params)
+
       const translation = getTranslation(this.locales[this.current], key)
 
       return translation.replace(/\{(\d+)\}/g, (match: string, index: string) => {
