@@ -190,9 +190,6 @@ export default {
     isDirty () {
       return this.selectedItems.length > 0
     },
-    isMulti () {
-      return this.multiple
-    },
     menuProps () {
       return {
         closeOnClick: false,
@@ -206,7 +203,7 @@ export default {
     listData () {
       return {
         props: {
-          action: this.isMulti && !this.isHidingSelected,
+          action: this.multiple && !this.isHidingSelected,
           color: this.color,
           dark: this.dark,
           dense: this.dense,
@@ -284,7 +281,7 @@ export default {
       this.isMenuActive = true
     },
     clearableCallback () {
-      this.internalValue = this.isMulti ? [] : null
+      this.internalValue = this.multiple ? [] : null
       this.$emit('change', this.internalValue)
       this.$nextTick(() => this.$refs.input.focus())
 
@@ -514,7 +511,7 @@ export default {
       this.$emit('blur', e)
     },
     onChipInput (item) {
-      if (this.isMulti) this.selectItem(item)
+      if (this.multiple) this.selectItem(item)
       else this.internalValue = null
 
       // If all items have been deleted,
@@ -621,7 +618,7 @@ export default {
       }
     },
     selectItem (item) {
-      if (!this.isMulti) {
+      if (!this.multiple) {
         this.internalValue = this.returnObject ? item : this.getValue(item)
         this.isMenuActive = false
       } else {
@@ -647,7 +644,7 @@ export default {
     },
     setSelectedItems () {
       const selectedItems = []
-      const values = !this.isMulti || !Array.isArray(this.internalValue)
+      const values = !this.multiple || !Array.isArray(this.internalValue)
         ? [this.internalValue]
         : this.internalValue
 
