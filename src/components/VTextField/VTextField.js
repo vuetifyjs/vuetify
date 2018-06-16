@@ -139,11 +139,7 @@ export default {
       return this.solo || this.soloInverted
     },
     labelPosition () {
-      const offset = (
-        (this.prefix || this.reverse) &&
-        (this.isSingle || !this.isFocused) &&
-        !this.labelValue
-      ) ? 16 : 0
+      const offset = (this.prefix && !this.labelValue) ? 16 : 0
 
       return (!this.$vuetify.rtl !== !this.reverse) ? {
         left: 'auto',
