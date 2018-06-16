@@ -408,9 +408,9 @@ export default {
     },
     genListWithSlot () {
       return this.$createElement(VSelectList, this.listData, [
-        this.$slots['no-data'] ? this.$createElement('div', {
+        this.$createElement('template', {
           slot: 'no-data'
-        }, this.$slots['no-data']) : null
+        }, this.$slots['no-data'])
       ])
     },
     genMenu (activator) {
@@ -651,9 +651,9 @@ export default {
     },
     setSelectedItems () {
       const selectedItems = []
-      const values = Array.isArray(this.internalValue)
-        ? this.internalValue
-        : [this.internalValue]
+      const values = !this.isMulti || !Array.isArray(this.internalValue)
+        ? [this.internalValue]
+        : this.internalValue
 
       for (const value of values) {
         const index = this.allItems.findIndex(v => this.valueComparator(

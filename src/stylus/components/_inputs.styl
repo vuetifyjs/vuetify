@@ -44,7 +44,7 @@ theme(v-input, "v-input")
       outline: none
 
   .v-label
-    cursor: auto
+    cursor: text
     height: 20px
     line-height: 20px
 
@@ -59,17 +59,19 @@ theme(v-input, "v-input")
       user-select: none
 
   &__append-outer
-    margin-left: 16px
+    margin-left: 9px
 
   &__prepend-outer
-    margin-right: 16px
+    margin-right: 9px
 
   &__control
     display: flex
+    flex-direction: column
     height: auto
     flex-grow: 1
     flex-wrap: wrap
     position: relative
+    width: 100% // For IE11
 
   &__icon
     align-items: center
@@ -86,6 +88,7 @@ theme(v-input, "v-input")
   &__slot
     align-items: center
     color: inherit
+    cursor: text
     display: flex
     margin-bottom: 8px
     min-height: inherit

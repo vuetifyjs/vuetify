@@ -1,3 +1,6 @@
+import Vue, { VNode } from 'vue'
+import { toggleable } from './toggleable'
+
 /**
  * Bootable
  * @mixin
@@ -6,7 +9,7 @@
  * Looks for change in "isActive" to automatically boot
  * Otherwise can be set manually
  */
-export default {
+export default Vue.extend<toggleable>().extend({
   name: 'bootable',
 
   data: () => ({
@@ -18,7 +21,7 @@ export default {
   },
 
   computed: {
-    hasContent () {
+    hasContent (): boolean {
       return this.isBooted || !this.lazy || this.isActive
     }
   },
@@ -30,8 +33,8 @@ export default {
   },
 
   methods: {
-    showLazyContent (content) {
+    showLazyContent (content: VNode[]): VNode[] | null {
       return this.hasContent ? content : null
     }
   }
-}
+})

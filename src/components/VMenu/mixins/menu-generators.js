@@ -60,6 +60,7 @@ export default {
 
     genContent () {
       const options = {
+        attrs: this.getScopeIdAttrs(),
         staticClass: 'v-menu__content',
         'class': {
           [this.contentClass.trim()]: true,

@@ -75,7 +75,7 @@ export default {
     shouldValidate () {
       return this.externalError || (!this.isResetting && (
         this.validateOnBlur
-          ? this.hasInput && this.hasFocused && !this.isFocused
+          ? this.hasFocused && !this.isFocused
           : (this.hasInput || this.hasFocused)
       ))
     },
@@ -171,7 +171,7 @@ export default {
     validate (force = false, value = this.internalValue) {
       const errorBucket = []
 
-      if (force) this.hasInput = true
+      if (force) this.hasInput = this.hasFocused = true
 
       for (let index = 0; index < this.rules.length; index++) {
         const rule = this.rules[index]
