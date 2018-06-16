@@ -14,9 +14,9 @@ test('VSpeedDial.js', ({ mount }) => {
       slots: {
         default: [compileToFunctions('<span>test</span>')]
       },
-      data: {
+      data: () => ({
         isActive: true
-      }
+      })
     })
 
     expect(wrapper.html()).toMatchSnapshot()

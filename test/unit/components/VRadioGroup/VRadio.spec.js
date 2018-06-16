@@ -27,9 +27,9 @@ test('VRadio.vue', ({ mount }) => {
 
   it('should render role and aria-checked attributes on input group', () => {
     const wrapper = mount(VRadio, {
-      data: {
+      data: () => ({
         isActive: false
-      },
+      }),
       provide: {
         name: () => 'name',
         isMandatory: () => false

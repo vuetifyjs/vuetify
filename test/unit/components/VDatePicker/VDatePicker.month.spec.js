@@ -11,9 +11,9 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
         type: 'month',
         reactive: true
       },
-      data: {
+      data: () => ({
         activePicker: 'YEAR'
-      }
+      })
     })
 
     const input = jest.fn()
@@ -35,9 +35,9 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
         type: 'month',
         allowedDates: () => false
       },
-      data: {
+      data: () => ({
         activePicker: 'YEAR'
-      }
+      })
     })
 
     wrapper.vm.$on('input', cb);
@@ -166,9 +166,9 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
 
   it('should select year', async () => {
     const wrapper = mount(VDatePicker, {
-      data: {
+      data: () => ({
         activePicker: 'YEAR'
-      },
+      }),
       propsData: {
         type: 'month',
         value: '2005-11'
