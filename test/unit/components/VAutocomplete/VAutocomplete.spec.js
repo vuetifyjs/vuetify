@@ -1,13 +1,13 @@
 import { test } from '@/test'
 import VAutocomplete from '@/components/VAutocomplete'
 
-test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
+test('VAutocomplete.js', ({ mount, shallowMount, compileToFunctions }) => {
   const app = document.createElement('div')
   app.setAttribute('data-app', true)
   document.body.appendChild(app)
 
   it('should allow changing of browser autocomplete', async () => {
-    const wrapper = shallow(VAutocomplete, {
+    const wrapper = shallowMount(VAutocomplete, {
       propsData: {
         browserAutocomplete: 'on'
       }
@@ -25,7 +25,7 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
   })
 
   it('should have explicit tabindex passed through when autocomplete', () => {
-    const wrapper = shallow(VAutocomplete, {
+    const wrapper = shallowMount(VAutocomplete, {
       propsData: {
         tabindex: 10
       }
@@ -36,7 +36,7 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
   })
 
   it('should emit search input changes', async () => {
-    const wrapper = shallow(VAutocomplete, {
+    const wrapper = shallowMount(VAutocomplete, {
       propsData: {
       }
     })
@@ -55,7 +55,7 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
   })
 
   it('should filter autocomplete search results', async () => {
-    const wrapper = shallow(VAutocomplete, {
+    const wrapper = shallowMount(VAutocomplete, {
       propsData: { items: ['foo', 'bar'] }
     })
 
@@ -66,7 +66,7 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
   })
 
   it('should filter numeric primitives', () => {
-    const wrapper = shallow(VAutocomplete, {
+    const wrapper = shallowMount(VAutocomplete, {
       propsData: {
         items: [1, 2]
       }
@@ -79,7 +79,7 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
   })
 
   it('should activate when search changes and not active', async () => {
-    const wrapper = shallow(VAutocomplete, {
+    const wrapper = shallowMount(VAutocomplete, {
       propsData: {
         items: [1, 2, 3, 4],
         multiple: true
@@ -95,7 +95,7 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
   })
 
   it('should set searchValue to null when deactivated', async () => {
-    const wrapper = shallow(VAutocomplete, {
+    const wrapper = shallowMount(VAutocomplete, {
       propsData: {
         items: [1, 2, 3, 4],
         multiple: true
@@ -130,7 +130,7 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
   })
 
   it('should render role=combobox correctly when autocomplete', async () => {
-    const wrapper = shallow(VAutocomplete)
+    const wrapper = shallowMount(VAutocomplete)
 
     expect(wrapper.vm.$el.attributes()['role']).toBeFalsy()
 
@@ -139,7 +139,7 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
   })
 
   it('should not duplicate items after items update when caching is turned on', async () => {
-    const wrapper = shallow(VAutocomplete, {
+    const wrapper = shallowMount(VAutocomplete, {
       propsData: {
         cacheItems: true,
         returnObject: true,
@@ -156,7 +156,7 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
   })
 
   it('should cache items', async () => {
-    const wrapper = shallow(VAutocomplete, {
+    const wrapper = shallowMount(VAutocomplete, {
       propsData: { cacheItems: true }
     })
 
@@ -171,7 +171,7 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
   })
 
   it('should cache items passed via prop', async () => {
-    const wrapper = shallow(VAutocomplete, {
+    const wrapper = shallowMount(VAutocomplete, {
       propsData: {
         cacheItems: true,
         items: [1, 2, 3, 4]
@@ -186,7 +186,7 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
   })
 
   it('should show input when focused and autocomplete', async () => {
-    const wrapper = shallow(VAutocomplete)
+    const wrapper = shallowMount(VAutocomplete)
 
     const input = wrapper.find('input')
 
@@ -198,7 +198,7 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
   })
 
   it('should not filter text with no items', async () => {
-    const wrapper = shallow(VAutocomplete, {
+    const wrapper = shallowMount(VAutocomplete, {
       propsData: {
         items: ['foo', 'bar']
       }
@@ -217,7 +217,7 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
   })
 
   it('should not display menu when tab focused', async () => {
-    const wrapper = shallow(VAutocomplete, {
+    const wrapper = shallowMount(VAutocomplete, {
       propsData: {
         items: [1 ,2],
         value: 1
@@ -246,7 +246,7 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
   })
 
   it('should emit custom value on blur', async () => {
-    const wrapper = shallow(VAutocomplete, {
+    const wrapper = shallowMount(VAutocomplete, {
       propsData: { combobox: true }
     })
 
@@ -275,7 +275,7 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
   })
 
   it('should change selected index', async () => {
-    const wrapper = shallow(VAutocomplete, {
+    const wrapper = shallowMount(VAutocomplete, {
       attachToDocument: true,
       propsData: {
         items: ['foo', 'bar', 'fizz'],
@@ -427,7 +427,7 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
   })
 
   it('should have the correct selected item', async () => {
-    const wrapper = shallow(VAutocomplete, {
+    const wrapper = shallowMount(VAutocomplete, {
       propsData: {
         items: ['foo', 'bar', 'fizz'],
         multiple: true,
@@ -446,7 +446,7 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
   })
 
   it('should reset lazySearch', async () => {
-    const wrapper = shallow(VAutocomplete, {
+    const wrapper = shallowMount(VAutocomplete, {
       propsData: {
         chips: true,
         items: ['foo', 'bar', 'fizz'],
@@ -469,7 +469,7 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
     const updateTags = jest.fn()
     const updateCombobox = jest.fn()
     const updateAutocomplete = jest.fn()
-    const wrapper = shallow(VAutocomplete, {
+    const wrapper = shallowMount(VAutocomplete, {
       methods: {
         updateAutocomplete,
         updateCombobox,
@@ -633,7 +633,7 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
 
   // https://github.com/vuetifyjs/vuetify/issues/3793
   it('should reset menu index after selection', async () => {
-    const wrapper = shallow(VAutocomplete, {
+    const wrapper = shallowMount(VAutocomplete, {
       propsData: {
         items: ['foo', 'bar'],
         value: 'foo'

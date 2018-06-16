@@ -27,7 +27,7 @@ const Component = (items = ['foo', 'bar']) => {
 
 const ssrBootable = () => new Promise(resolve => requestAnimationFrame(resolve))
 
-test('VTabs', ({ mount, shallow }) => {
+test('VTabs', ({ mount, shallowMount }) => {
   it('should provide', () => {
     const wrapper = mount(Component())
 

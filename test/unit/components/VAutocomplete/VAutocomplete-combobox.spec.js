@@ -1,13 +1,13 @@
 import { test } from '@/test'
 import VAutocomplete from '@/components/VAutocomplete'
 
-test('VAutocomplete - combobox', ({ mount, shallow }) => {
+test('VAutocomplete - combobox', ({ mount, shallowMount }) => {
   const app = document.createElement('div')
   app.setAttribute('data-app', true)
   document.body.appendChild(app)
 
   it('should evaluate the range of an integer', async () => {
-    const wrapper = shallow(VAutocomplete, {
+    const wrapper = shallowMount(VAutocomplete, {
       propsData: {
         combobox: true,
         value: 11
@@ -23,7 +23,7 @@ test('VAutocomplete - combobox', ({ mount, shallow }) => {
   })
 
   it('should not use search input when blurring', async () => {
-    const wrapper = shallow(VAutocomplete, {
+    const wrapper = shallowMount(VAutocomplete, {
       attachToDocument: true,
       propsData: {
         combobox: true,
@@ -51,7 +51,7 @@ test('VAutocomplete - combobox', ({ mount, shallow }) => {
 
   it('should not use search input if an option is selected from the menu', async () => {
     const item = { value: 123, text: 'Foo' }
-    const wrapper = shallow(VAutocomplete, {
+    const wrapper = shallowMount(VAutocomplete, {
       propsData: {
         combobox: true,
         items: [item]
@@ -74,7 +74,7 @@ test('VAutocomplete - combobox', ({ mount, shallow }) => {
   })
 
   it('should not populate search field if value is falsey', async () => {
-    const wrapper = shallow(VAutocomplete, {
+    const wrapper = shallowMount(VAutocomplete, {
       propsData: {
         combobox: true
       }

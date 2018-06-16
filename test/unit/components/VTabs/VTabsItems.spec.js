@@ -3,7 +3,7 @@ import { createRange } from '@/util/helpers'
 import VTabItem from '@/components/VTabs/VTabItem'
 import VTabsItems from '@/components/VTabs/VTabsItems'
 
-test('VTabsItems', ({ mount, shallow }) => {
+test('VTabsItems', ({ mount, shallowMount }) => {
   it('should have no active item with no children', () => {
     const wrapper = mount(VTabsItems)
 
@@ -11,7 +11,7 @@ test('VTabsItems', ({ mount, shallow }) => {
   })
 
   it('should return currently active item', async () => {
-    const wrapper = shallow(VTabsItems, {
+    const wrapper = shallowMount(VTabsItems, {
       propsData: {
         value: 'foo'
       },
