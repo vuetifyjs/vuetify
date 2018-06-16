@@ -288,7 +288,7 @@ test('VTabs', ({ mount, shallowMount }) => {
 
     expect(wrapper.vm.startX).toBe(0)
     wrapper.vm.onTouchStart({ touchstartX: 0 })
-    expect(container.hasStyle('transition', 'none')).toBe(true)
+    expect(container.element.style.transition).toBe('none')
 
     wrapper.vm.onTouchMove({ touchmoveX: -100 })
     expect(wrapper.vm.scrollOffset).toBe(100)

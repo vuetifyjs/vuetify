@@ -64,6 +64,6 @@ test('VToolbarSideIcon.js', ({ mount, functionalContext }) => {
     })
     const wrapper = mount(VToolbarSideIcon, context)
 
-    expect(wrapper.hasStyle('display', 'none')).toBe(true)
+    expect(wrapper.element.style.display).toBe('none')
   })
 })

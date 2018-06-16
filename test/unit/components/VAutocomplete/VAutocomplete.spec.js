@@ -190,11 +190,11 @@ test('VAutocomplete.js', ({ mount, shallowMount, compileToFunctions }) => {
 
     const input = wrapper.find('input')
 
-    expect(input.hasStyle('display', 'none'))
+    expect(input.element.style.display).toBe('none')
 
     wrapper.trigger('focus')
 
-    expect(input.hasStyle('display', 'block'))
+    expect(input.element.style.display).toBe('block')
   })
 
   it('should not filter text with no items', async () => {

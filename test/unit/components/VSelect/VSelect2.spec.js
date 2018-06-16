@@ -140,7 +140,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
       }
     })
 
-    expect(wrapper.find('input').hasStyle('display', 'block'))
+    expect(wrapper.find('input').element.style.display).toBe('block')
   })
 
   it('should not show input with placeholder and dirty', async () => {
@@ -153,7 +153,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
       }
     })
 
-    expect(wrapper.find('input').hasStyle('display', 'none'))
+    expect(wrapper.find('input').element.style.display).toBe('none')
   })
 
   // #1704

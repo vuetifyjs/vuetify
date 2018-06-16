@@ -67,13 +67,13 @@ test('VCard.vue', ({ mount }) => {
       }
     })
 
-    expect(wrapper.hasStyle('height', heightpx)).toBe(true)
+    expect(wrapper.element.style.height).toBe(heightpx)
     expect(wrapper.html()).toMatchSnapshot()
 
     wrapper.setProps({
       height: 401
     })
-    expect(wrapper.hasStyle('height', '401px')).toBe(true)
+    expect(wrapper.element.style.height).toBe('401px')
   })
 
   it('should render a tile card', () => {
