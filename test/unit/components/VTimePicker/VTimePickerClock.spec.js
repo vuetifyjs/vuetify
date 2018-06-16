@@ -94,10 +94,10 @@ test('VTimePickerClock.js', ({ mount }) => {
     const change = jest.fn()
     wrapper.vm.$on('change', change)
 
+    wrapper.vm.valueOnMouseUp = 55
     wrapper.trigger('mouseup')
-    expect(change).toBeCalledWith(59)
+    expect(change).toBeCalledWith(55)
 
-    wrapper.setProps({ value: 55 })
     wrapper.trigger('touchend')
     expect(change).toBeCalledWith(55)
   })
@@ -118,8 +118,9 @@ test('VTimePickerClock.js', ({ mount }) => {
     expect(change).not.toBeCalled()
 
     wrapper.vm.isDragging = true
+    wrapper.vm.valueOnMouseUp = 58
     wrapper.trigger('mouseleave')
-    expect(change).toBeCalledWith(59)
+    expect(change).toBeCalledWith(58)
   })
 
   it('should calculate angle', () => {
