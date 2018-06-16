@@ -137,7 +137,7 @@ export default {
         !this.labelValue
       ) ? 16 : 0
 
-      return (this.$vuetify.rtl ^ this.reverse) ? {
+      return (this.$vuetify.rtl !== this.reverse) ? {
         left: 'auto',
         right: offset
       } : {
@@ -149,7 +149,8 @@ export default {
       return this.hasLabel && (!this.isSingle || (!this.isLabelActive && !this.placeholder))
     },
     labelValue () {
-      return Boolean(!this.isSingle && (this.isFocused || this.isLabelActive || this.placeholder))
+      return !this.isSingle &&
+        Boolean(this.isFocused || this.isLabelActive || this.placeholder)
     }
   },
 
