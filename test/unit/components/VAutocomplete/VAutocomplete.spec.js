@@ -1,7 +1,7 @@
 import { test } from '@/test'
 import VAutocomplete from '@/components/VAutocomplete'
 
-test('VAutocomplete.js', ({ mount, shallow }) => {
+test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
   const app = document.createElement('div')
   app.setAttribute('data-app', true)
   document.body.appendChild(app)
@@ -746,6 +746,22 @@ test('VAutocomplete.js', ({ mount, shallow }) => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.menuCanShow).toBe(false)
+  })
+
+  it('should not hide menu when no data but has no-data slot', async () => {
+    const wrapper = mount(VAutocomplete, {
+      propsData: {
+        combobox: true
+      },
+      slots: {
+        'no-data': [compileToFunctions('<span>show me</span>')]
+      }
+    })
+
+    const input = wrapper.first('input')
+    input.trigger('focus')
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.menuCanShow).toBe(true)
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/2834

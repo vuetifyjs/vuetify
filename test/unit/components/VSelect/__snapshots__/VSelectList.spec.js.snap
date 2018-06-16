@@ -1,5 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`VSelect should display no-data-text when item slot is provided 1`] = `
+
+<div class="v-select-list v-card"
+     style="height: auto;"
+>
+  <div class="v-list">
+    <div disabled="disabled"
+         class="v-list--disabled"
+    >
+      <div class="v-list__tile v-list__tile--disabled">
+        <div class="v-list__tile__content">
+          <div class="v-list__tile__title">
+            this is ok
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
 exports[`VSelect should generate children 1`] = `
 
 <div class="v-select-list v-card"
