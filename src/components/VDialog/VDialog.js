@@ -12,7 +12,7 @@ import Toggleable from '../../mixins/toggleable'
 import ClickOutside from '../../directives/click-outside'
 
 // Helpers
-import { getZIndex } from '../../util/helpers'
+import { getZIndex, convertToUnit } from '../../util/helpers'
 
 export default {
   name: 'v-dialog',
@@ -178,8 +178,8 @@ export default {
 
     if (!this.fullscreen) {
       data.style = {
-        maxWidth: this.maxWidth === 'none' ? undefined : (isNaN(this.maxWidth) ? this.maxWidth : `${this.maxWidth}px`),
-        width: this.width === 'auto' ? undefined : (isNaN(this.width) ? this.width : `${this.width}px`)
+        maxWidth: this.maxWidth === 'none' ? undefined : convertToUnit(this.maxWidth),
+        width: this.width === 'auto' ? undefined : convertToUnit(this.width)
       }
     }
 

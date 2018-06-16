@@ -1,32 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VTextField.js should calculate element height when using auto-grow prop 1`] = `
-
-<div class="input-group input-group--focused input-group--dirty input-group--text-field input-group--multi-line input-group--no-resize primary--text">
-  <div class="input-group__input">
-    <textarea tabindex="0"
-              rows="5"
-              style="height: 120px;"
-    >
-    </textarea>
-  </div>
-  <div class="input-group__details">
-  </div>
-</div>
-
-`;
-
 exports[`VTextField.js should have prefix and suffix 1`] = `
 
 <div class="v-input v-text-field v-text-field--prefix">
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-text-field__slot">
-        <label aria-hidden="true"
-               class="v-label"
-               style="left: 16px; position: absolute;"
-        >
-        </label>
         <div class="v-text-field__prefix">
           $
         </div>
@@ -55,11 +34,6 @@ exports[`VTextField.js should not display counter when set to false 1`] = `
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-text-field__slot">
-        <label aria-hidden="true"
-               class="v-label"
-               style="left: 0px; position: absolute;"
-        >
-        </label>
         <input maxlength="50"
                tabindex="0"
                type="text"
@@ -86,11 +60,6 @@ exports[`VTextField.js should not display counter when set to false 2`] = `
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-text-field__slot">
-        <label aria-hidden="true"
-               class="v-label"
-               style="left: 0px; position: absolute;"
-        >
-        </label>
         <input maxlength="50"
                tabindex="0"
                type="text"
@@ -114,11 +83,6 @@ exports[`VTextField.js should render component and match snapshot 1`] = `
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-text-field__slot">
-        <label aria-hidden="true"
-               class="v-label"
-               style="left: 0px; position: absolute;"
-        >
-        </label>
         <input tabindex="0"
                type="text"
         >
@@ -141,11 +105,6 @@ exports[`VTextField.js should render component with async loading and custom pro
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-text-field__slot">
-        <label aria-hidden="true"
-               class="v-label"
-               style="left: 0px; position: absolute;"
-        >
-        </label>
         <input tabindex="0"
                type="text"
         >
@@ -184,11 +143,6 @@ exports[`VTextField.js should render component with async loading and match snap
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-text-field__slot">
-        <label aria-hidden="true"
-               class="v-label"
-               style="left: 0px; position: absolute;"
-        >
-        </label>
         <input tabindex="0"
                type="text"
         >

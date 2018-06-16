@@ -16,7 +16,9 @@ export default {
     return {
       defaultColor: 'accent',
       inputValue: this.value,
-      isDragging: false
+      isDragging: false,
+      valueOnMouseDown: null,
+      valueOnMouseUp: null
     }
   },
 
@@ -87,8 +89,17 @@ export default {
   methods: {
     wheel (e) {
       e.preventDefault()
-      const value = this.displayedValue + Math.sign(e.wheelDelta || 1)
-      this.update((value - this.min + this.count) % this.count + this.min)
+
+      const delta = Math.sign(e.wheelDelta || 1)
+      let value = this.displayedValue
+      do {
+        value = value + delta
+        value = (value - this.min + this.count) % this.count + this.min
+      } while (!this.isAllowed(value) && value !== this.displayedValue)
+
+      if (value !== this.displayedValue) {
+        this.update(value)
+      }
     },
     handScale (value) {
       return this.double && (value - this.min >= this.roundCount) ? (this.innerRadius / this.radius) : (this.outerRadius / this.radius)
@@ -141,12 +152,16 @@ export default {
     onMouseDown (e) {
       e.preventDefault()
 
+      this.valueOnMouseDown = null
+      this.valueOnMouseUp = null
       this.isDragging = true
       this.onDragMove(e)
     },
     onMouseUp () {
       this.isDragging = false
-      this.isAllowed(this.inputValue) && this.$emit('change', this.inputValue)
+      if (this.valueOnMouseUp !== null && this.isAllowed(this.valueOnMouseUp)) {
+        this.$emit('change', this.valueOnMouseUp)
+      }
     },
     onDragMove (e) {
       e.preventDefault()
@@ -162,14 +177,23 @@ export default {
         this.min + (insideClick ? this.roundCount : 0)
 
       // Necessary to fix edge case when selecting left part of max value
+      let newValue
       if (handAngle >= (360 - this.degreesPerUnit / 2)) {
-        this.update(insideClick ? this.max : this.min)
+        newValue = insideClick ? this.max : this.min
       } else {
-        this.update(value)
+        newValue = value
+      }
+
+      if (this.isAllowed(value)) {
+        if (this.valueOnMouseDown === null) {
+          this.valueOnMouseDown = newValue
+        }
+        this.valueOnMouseUp = newValue
+        this.update(newValue)
       }
     },
     update (value) {
-      if (this.inputValue !== value && this.isAllowed(value)) {
+      if (this.inputValue !== value) {
         this.inputValue = value
         this.$emit('input', value)
       }
@@ -190,7 +214,8 @@ export default {
     const data = {
       staticClass: 'v-time-picker-clock',
       class: {
-        'v-time-picker-clock--indeterminate': this.value == null
+        'v-time-picker-clock--indeterminate': this.value == null,
+        ...this.themeClasses
       },
       on: {
         mousedown: this.onMouseDown,

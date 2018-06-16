@@ -161,3 +161,21 @@ exports[`VDialog.js should render component with custom width (max-width) and ma
 </div>
 
 `;
+
+exports[`VDialog.js should render component with custom width and match snapshot 1`] = `
+
+<div class="v-dialog__container"
+     style="display: block;"
+>
+  <div class="v-dialog__content"
+       tabindex="-1"
+       style="z-index: 0;"
+  >
+    <div class="v-dialog"
+         style="width: 50%; display: none;"
+    >
+    </div>
+  </div>
+</div>
+
+`;

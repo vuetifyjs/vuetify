@@ -18,6 +18,9 @@ import Position from './mixins/menu-position'
 import ClickOutside from '../../directives/click-outside'
 import Resize from '../../directives/resize'
 
+// Helpers
+import { convertToUnit } from '../../util/helpers'
+
 export default {
   name: 'v-menu',
 
@@ -87,11 +90,7 @@ export default {
       return `${this.calcXOverflow(this.calcLeftAuto())}px`
     },
     calculatedMaxHeight () {
-      return this.auto
-        ? '200px'
-        : isNaN(this.maxHeight)
-          ? this.maxHeight
-          : `${this.maxHeight}px`
+      return this.auto ? '200px' : convertToUnit(this.maxHeight)
     },
     calculatedMaxWidth () {
       return isNaN(this.maxWidth)

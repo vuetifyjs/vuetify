@@ -245,7 +245,7 @@ export default {
         this.defaultPagination.rowsPerPage = this.rowsPerPageItems[0]
       }
 
-      this.defaultPagination.totalItems = this.itemsLength
+      this.defaultPagination.totalItems = this.items.length
 
       this.updatePagination(
         Object.assign({}, this.defaultPagination, this.pagination)

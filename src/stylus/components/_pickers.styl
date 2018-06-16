@@ -6,9 +6,6 @@
 v-picker($material)
   color: $material.text.primary
 
-  .v-picker__body
-    background: $material.picker.body
-
 dark(v-picker, 'v-picker')
 
 v-picker-title($material)
@@ -16,6 +13,11 @@ v-picker-title($material)
     background: $material.picker.title
 
 theme(v-picker-title, "v-picker")
+
+v-picker-body($material)
+  background: $material.picker.body
+
+theme(v-picker-body, 'v-picker__body')
 
 .v-picker
   border-radius: $card-border-radius

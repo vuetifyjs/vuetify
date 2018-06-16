@@ -3,6 +3,7 @@ import '../../stylus/components/_inputs.styl'
 
 // Components
 import VIcon from '../VIcon'
+import VLabel from '../VLabel'
 import VMessages from '../VMessages'
 
 // Mixins
@@ -15,6 +16,7 @@ import {
   convertToUnit,
   kebabCase
 } from '../../util/helpers'
+import { deprecate } from '../../util/console'
 
 export default {
   name: 'v-input',
@@ -32,13 +34,16 @@ export default {
 
   props: {
     appendIcon: String,
+    /** @deprecated */
     appendIconCb: Function,
     disabled: Boolean,
     height: [Number, String],
     hideDetails: Boolean,
     hint: String,
+    label: String,
     persistentHint: Boolean,
     prependIcon: String,
+    /** @deprecated */
     prependIconCb: Function,
     readonly: Boolean,
     tabindex: { default: 0 },
@@ -69,6 +74,9 @@ export default {
         this.hint &&
         (this.persistentHint || this.isFocused)
     },
+    hasLabel () {
+      return Boolean(this.$slots.label || this.label)
+    },
     // Proxy for `lazyValue`
     // This allows an input
     // to function without
@@ -86,7 +94,7 @@ export default {
       return !!this.lazyValue
     },
     isDisabled () {
-      return this.disabled || this.readonly
+      return Boolean(this.disabled || this.readonly)
     },
     isLabelActive () {
       return this.isDirty
@@ -101,6 +109,13 @@ export default {
 
   methods: {
     genContent () {
+      return [
+        this.genPrependSlot(),
+        this.genControl(),
+        this.genAppendSlot()
+      ]
+    },
+    genControl () {
       return this.$createElement('div', {
         staticClass: 'v-input__control'
       }, [
@@ -109,29 +124,38 @@ export default {
       ])
     },
     genDefaultSlot () {
-      return this.$slots.default
+      return [
+        this.genLabel(),
+        this.$slots.default
+      ]
     },
-    genIcon (type, cb) {
+    // TODO: remove shouldDeprecate (2.0), used for clearIcon
+    genIcon (type, cb, shouldDeprecate = true) {
       const icon = this[`${type}Icon`]
+      const eventName = `click:${kebabCase(type)}`
       cb = cb || this[`${type}IconCb`]
+
+      if (shouldDeprecate && type && cb) {
+        deprecate(`:${type}-icon-cb`, `@${eventName}`, this)
+      }
 
       const data = {
         props: {
           color: this.validationState,
           disabled: this.disabled
         },
-        on: !cb
+        on: !(this.$listeners[eventName] || cb)
           ? null
           : {
             click: e => {
               e.preventDefault()
               e.stopPropagation()
 
-              cb(e)
+              this.$emit(eventName, e)
+              cb && cb(e)
             },
-            // Container has mouseup event
-            // that will trigger menu open
-            // if enclosed
+            // Container has mouseup event that will
+            // trigger menu open if enclosed
             mouseup: e => {
               e.preventDefault()
               e.stopPropagation()
@@ -162,6 +186,17 @@ export default {
         this.genProgress()
       ])
     },
+    genLabel () {
+      if (!this.hasLabel) return null
+
+      return this.$createElement(VLabel, {
+        props: {
+          color: this.validationState,
+          focused: this.hasState,
+          for: this.$attrs.id
+        }
+      }, this.$slots.label || this.label)
+    },
     genMessages () {
       if (this.hideDetails) return null
 
@@ -189,11 +224,7 @@ export default {
     genPrependSlot () {
       const slot = []
 
-      // Backwards compat
-      // TODO: Deprecate prepend-icon slot 2.0
-      if (this.$slots['prepend-icon']) {
-        slot.push(this.$slots['prepend-icon'])
-      } else if (this.$slots['prepend']) {
+      if (this.$slots['prepend']) {
         slot.push(this.$slots['prepend'])
       } else if (this.prependIcon) {
         slot.push(this.genIcon('prepend'))
@@ -210,8 +241,6 @@ export default {
       // backwards compat
       if (this.$slots['append']) {
         slot.push(this.$slots['append'])
-      } else if (this.$slots['append-icon']) {
-        slot.push(this.$slots['append-icon'])
       } else if (this.appendIcon) {
         slot.push(this.genIcon('append'))
       }
@@ -238,10 +267,6 @@ export default {
         mousedown: this.onMouseDown,
         mouseup: this.onMouseUp
       }
-    }, [
-      this.genPrependSlot(),
-      this.genContent(),
-      this.genAppendSlot()
-    ])
+    }, this.genContent())
   }
 }

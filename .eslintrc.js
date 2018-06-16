@@ -9,7 +9,8 @@ module.exports = {
     'standard'
   ],
   env: {
-    browser: true
+    browser: true,
+    es6: true
   },
   globals: {
     'expect': true,
@@ -54,17 +55,16 @@ module.exports = {
         asyncArrow: 'always'
       }
     ],
-    'no-return-await': 'warn'
+    'no-return-await': 'warn',
+    'object-shorthand': ['error', 'always'],
+    'no-extra-semi': 'error'
   },
   overrides: [
     {
       files: '**/*.ts',
       rules: {
-        // https://github.com/eslint/typescript-eslint-parser#known-issues
+        // https://github.com/eslint/typescript-eslint-parser/issues/416
         'no-undef': 'off',
-
-        // https://github.com/eslint/typescript-eslint-parser/issues/445
-        // 'typescript/no-unused-vars': 'error'
 
         // https://github.com/eslint/eslint/issues/10260
         'space-infix-ops': false,
@@ -75,9 +75,14 @@ module.exports = {
         // Can't overload function exports with this enabled
         'import/export': false,
 
+        // https://github.com/eslint/typescript-eslint-parser/issues/445
         // https://github.com/eslint/typescript-eslint-parser/issues/457
+        // enabled in tslint instead
         'no-unused-vars': false,
         // 'typescript/no-unused-vars': 'error',
+
+        // https://github.com/eslint/typescript-eslint-parser/issues/443
+        // 'no-redeclare': false,
 
         'typescript/adjacent-overload-signatures': 'error',
         'typescript/member-delimiter-style': ['error', {
