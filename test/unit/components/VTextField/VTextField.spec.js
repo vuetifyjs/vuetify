@@ -81,7 +81,7 @@ test('VTextField.js', ({ mount }) => {
       }
     })
 
-    expect(wrapper.data().valid).toEqual(false)
+    expect(wrapper.vm.valid).toEqual(false)
   })
 
   it('should start validating on input', async () => {

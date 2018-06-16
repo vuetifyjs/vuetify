@@ -64,7 +64,7 @@ test('VSnackbar.vue', ({ mount }) => {
 
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.data().isActive).toBe(false)
+    expect(wrapper.vm.isActive).toBe(false)
     expect(value).toBeCalledWith(false)
   })
 
@@ -90,7 +90,7 @@ test('VSnackbar.vue', ({ mount }) => {
 
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.data().isActive).toBe(false)
+    expect(wrapper.vm.isActive).toBe(false)
     expect(value).toBeCalledWith(false)
   })
 })

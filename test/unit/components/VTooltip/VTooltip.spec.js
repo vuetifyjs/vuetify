@@ -49,7 +49,7 @@ test('VTooltip.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    expect(wrapper.data().isActive).toBe(true)
+    expect(wrapper.vm.isActive).toBe(true)
     expect(wrapper.html()).toMatchSnapshot()
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
