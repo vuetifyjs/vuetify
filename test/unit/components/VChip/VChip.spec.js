@@ -14,7 +14,7 @@ test('VChip.vue', ({ mount, compileToFunctions }) => {
       propsData: { close: true }
     })
 
-    const close = wrapper.find('.v-chip__close')[0]
+    const close = wrapper.find('.v-chip__close')
 
     const input = jest.fn(value => wrapper.setProps({ value }))
     wrapper.vm.$on('input', input)

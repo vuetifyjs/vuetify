@@ -7,7 +7,7 @@ test('VToolbarSideIcon.js', ({ mount, functionalContext }) => {
     const context = functionalContext()
     const wrapper = mount(VToolbarSideIcon, context)
 
-    expect(wrapper.find('i')[0].hasClass('material-icons')).toBe(true)
+    expect(wrapper.find('i').hasClass('material-icons')).toBe(true)
     expect(wrapper.html()).toMatchSnapshot()
   })
 
@@ -17,7 +17,7 @@ test('VToolbarSideIcon.js', ({ mount, functionalContext }) => {
     const context = functionalContext({}, iconWrapper.vNode)
     const wrapper = mount(VToolbarSideIcon, context)
 
-    expect(wrapper.find('i')[0].hasClass('fa-add')).toBe(true)
+    expect(wrapper.find('i').hasClass('fa-add')).toBe(true)
     expect(wrapper.html()).toMatchSnapshot()
   })
 

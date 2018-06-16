@@ -7,7 +7,7 @@ test('VRadioGroup.vue', ({ mount }) => {
 
     expect(wrapper.html()).toMatchSnapshot()
 
-    const radioGroup = wrapper.find('.v-input--radio-group__input')[0]
+    const radioGroup = wrapper.find('.v-input--radio-group__input')
     expect(radioGroup.getAttribute('role')).toBe('radiogroup')
   })
 
@@ -75,7 +75,7 @@ test('VRadioGroup.vue', ({ mount }) => {
 
     expect(wrapper.vm.radios.length).toBe(2)
 
-    const radios = wrapper.find(VRadio)
+    const radios = wrapper.findAll(VRadio)
     const one = radios[0]
     const two = radios[1]
     const inputOne = one.first('input')
@@ -116,7 +116,7 @@ test('VRadioGroup.vue', ({ mount }) => {
 
     expect(wrapper.vm.radios.length).toBe(2)
 
-    const radios = wrapper.find(VRadio)
+    const radios = wrapper.findAll(VRadio)
     const one = radios[0]
     const two = radios[1]
 

@@ -34,7 +34,7 @@ test('VForm.js', ({ mount }) => {
 
     const wrapper = mount(component)
 
-    const btn = wrapper.find('button')[0]
+    const btn = wrapper.find('button')
 
     btn.trigger('click')
 

@@ -38,7 +38,7 @@ test('VTimePicker.js', ({ mount }) => {
       }
     })
 
-    expect(wrapper.find('.v-picker__title')).toHaveLength(0)
+    expect(wrapper.findAll('.v-picker__title')).toHaveLength(0)
   })
 
   it('should accept a date object for a value', async () => {
@@ -280,7 +280,7 @@ test('VTimePicker.js', ({ mount }) => {
     })
 
     const wrapper = mount(component)
-    expect(wrapper.find('.v-picker__actions .scoped-slot')).toHaveLength(1)
+    expect(wrapper.findAll('.v-picker__actions .scoped-slot')).toHaveLength(1)
   })
 
   it('should calculate allowed minute/hour callback', async () => {

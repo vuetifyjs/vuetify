@@ -11,7 +11,7 @@ test('VApp.js', ({ mount }) => {
 
   it('should have data-app attribute', () => {
     const wrapper = mount(VApp)
-    const app = wrapper.find('.application')[0]
+    const app = wrapper.find('.application')
 
     expect(app.getAttribute('data-app')).toBe('true')
   })
@@ -22,7 +22,7 @@ test('VApp.js', ({ mount }) => {
         id: 'inspire'
       }
     })
-    const app = wrapper.find('.application')[0]
+    const app = wrapper.find('.application')
 
     expect(app.getAttribute('id')).toBe('inspire')
     expect(wrapper.html()).toMatchSnapshot()

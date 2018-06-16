@@ -78,7 +78,7 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.html()).toMatchSnapshot()
 
-    const content = wrapper.find('table.v-datatable tbody > tr > td')[0]
+    const content = wrapper.find('table.v-datatable tbody > tr > td')
     expect(content.element.textContent).toBe('No matching records found')
 
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
@@ -91,7 +91,7 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.html()).toMatchSnapshot()
 
-    const content = wrapper.find('table.v-datatable tbody > tr > td')[0]
+    const content = wrapper.find('table.v-datatable tbody > tr > td')
     expect(content.element.textContent).toBe('No data available')
 
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
@@ -136,7 +136,7 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
     data.propsData.noDataText = 'foo'
     const wrapper = mount(VDataTable, data)
 
-    expect(wrapper.find('tbody td')[0].html()).toMatchSnapshot()
+    expect(wrapper.find('tbody td').html()).toMatchSnapshot()
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
@@ -146,7 +146,7 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
     data.propsData.search = "no such item"
     const wrapper = mount(VDataTable, data)
 
-    expect(wrapper.find('tbody tr td')[0].html()).toMatchSnapshot()
+    expect(wrapper.find('tbody tr td').html()).toMatchSnapshot()
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
@@ -154,7 +154,7 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
     const data = dataTableTestData()
     const wrapper = mount(VDataTable, data)
 
-    const headers = wrapper.find('thead:first-of-type > tr:first-of-type > th')
+    const headers = wrapper.findAll('thead:first-of-type > tr:first-of-type > th')
 
     expect(
       headers.map(h => h.getAttribute('aria-sort'))
@@ -222,7 +222,7 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
       }
     }))
 
-    expect(wrapper.find('.v-datatable__progress')).toHaveLength(1)
+    expect(wrapper.findAll('.v-datatable__progress')).toHaveLength(1)
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
@@ -263,7 +263,7 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
       }
     }))
 
-    expect(wrapper.find('table tbody tr.custom-class').length).toBe(1)
+    expect(wrapper.findAll('table tbody tr.custom-class').length).toBe(1)
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
@@ -279,7 +279,7 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
       }
     }))
 
-    expect(wrapper.find('table tbody tr td.custom-class').length).toBe(1)
+    expect(wrapper.findAll('table tbody tr td.custom-class').length).toBe(1)
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
@@ -295,7 +295,7 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
       }
     }))
 
-    expect(wrapper.find('table tbody tr td div.custom-class').length).toBe(1)
+    expect(wrapper.findAll('table tbody tr td div.custom-class').length).toBe(1)
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
@@ -328,7 +328,7 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
     data.propsData.headersLength = 11
     const wrapper = mount(VDataTable, data)
 
-    expect(wrapper.find('tr.v-datatable__progress th')[0].getAttribute('colspan')).toBe('11')
+    expect(wrapper.find('tr.v-datatable__progress th').getAttribute('colspan')).toBe('11')
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 

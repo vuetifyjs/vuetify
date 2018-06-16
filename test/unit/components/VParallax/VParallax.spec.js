@@ -18,7 +18,7 @@ test('VParallax.js', ({ mount }) => {
       }
     })
 
-    const img = wrapper.find('img')[0]
+    const img = wrapper.find('img')
     expect(img.getAttribute('alt')).toBe('name')
     expect(wrapper.html()).toMatchSnapshot()
   })

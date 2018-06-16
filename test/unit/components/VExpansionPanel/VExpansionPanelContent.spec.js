@@ -58,7 +58,7 @@ test('VExpansionPanelContent.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    expect(wrapper.find('.v-icon')[0].element.textContent).toBe('block')
+    expect(wrapper.find('.v-icon').element.textContent).toBe('block')
   })
 
   it('should toggle panel on header click', async () => {

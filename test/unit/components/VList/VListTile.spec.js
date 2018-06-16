@@ -18,9 +18,9 @@ test('VListTile.vue', ({ mount }) => {
     })
 
     expect(wrapper.is('div')).toBe(true)
-    expect(wrapper.find('div')).toHaveLength(2)
-    expect(wrapper.find('a')).toHaveLength(0)
-    expect(wrapper.find('.v-list__tile--link')).toHaveLength(0)
+    expect(wrapper.findAll('div')).toHaveLength(2)
+    expect(wrapper.findAll('a')).toHaveLength(0)
+    expect(wrapper.findAll('.v-list__tile--link')).toHaveLength(0)
   })
 
   it('should render with a tag when tag is specified', () => {
@@ -31,14 +31,14 @@ test('VListTile.vue', ({ mount }) => {
     })
 
     expect(wrapper.is('div')).toBe(true)
-    expect(wrapper.find('code')).toHaveLength(1)
+    expect(wrapper.findAll('code')).toHaveLength(1)
   })
 
   it('should render with a div when href and to are not used', () => {
     const wrapper = mount(VListTile)
 
     expect(wrapper.is('div')).toBe(true)
-    expect(wrapper.find('div')).toHaveLength(2)
+    expect(wrapper.findAll('div')).toHaveLength(2)
     expect(wrapper.html()).toMatchSnapshot()
   })
 
@@ -49,7 +49,7 @@ test('VListTile.vue', ({ mount }) => {
       }
     })
 
-    const a = wrapper.find('a')[0]
+    const a = wrapper.find('a')
 
     expect(wrapper.is('div')).toBe(true)
     expect(a.getAttribute('href')).toBe('http://www.google.com')
@@ -68,7 +68,7 @@ test('VListTile.vue', ({ mount }) => {
     })
 
     expect(wrapper.is('div')).toBe(true)
-    expect(wrapper.find('button')).toHaveLength(1)
+    expect(wrapper.findAll('button')).toHaveLength(1)
     expect(wrapper.html()).toMatchSnapshot()
   })
 
@@ -79,7 +79,7 @@ test('VListTile.vue', ({ mount }) => {
       }
     })
 
-    const link = wrapper.find('a')[0]
+    const link = wrapper.find('a')
     expect(link.hasClass(wrapper.instance().activeClass)).toBe(false)
   })
 
@@ -91,7 +91,7 @@ test('VListTile.vue', ({ mount }) => {
       }
     })
 
-    const link = wrapper.find('a')[0]
+    const link = wrapper.find('a')
     expect(link.hasClass(wrapper.instance().activeClass)).toBe(true)
   })
 

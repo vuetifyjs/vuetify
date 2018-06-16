@@ -255,7 +255,7 @@ test('VBtnToggle.vue', ({ mount }) => {
       }
     })
 
-    const btn = wrapper.find('.v-btn')[0]
+    const btn = wrapper.find('.v-btn')
 
     expect(btn.getAttribute('data-only-child')).toBe('true')
   })
@@ -274,7 +274,7 @@ test('VBtnToggle.vue', ({ mount }) => {
     const change = jest.fn()
     wrapper.vm.$on('change', change)
 
-    wrapper.find('button').forEach((button, i) => {
+    wrapper.findAll('button').forEach((button, i) => {
       button.trigger('click')
 
       expect(change).toBeCalledWith(verifyValues[i])

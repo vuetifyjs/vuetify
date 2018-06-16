@@ -497,7 +497,7 @@ test('VSlider.vue', ({ mount }) => {
       }
     })
 
-    const ticks = wrapper.find('.v-slider__ticks')
+    const ticks = wrapper.findAll('.v-slider__ticks')
 
     expect(ticks.length).toBe(2)
     expect(ticks[0].element.firstChild.innerHTML).toBe('foo')

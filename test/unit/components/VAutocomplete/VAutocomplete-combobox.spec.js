@@ -43,7 +43,7 @@ test('VAutocomplete - combobox', ({ mount, shallow }) => {
 
     expect(wrapper.vm.internalSearch).toBe('1')
 
-    const list = wrapper.find('.v-list > div')[1]
+    const list = wrapper.findAll('.v-list > div')[1]
     list.trigger('click')
     await wrapper.vm.$nextTick()
     expect(event).toBeCalledWith(12)

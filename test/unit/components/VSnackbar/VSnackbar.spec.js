@@ -20,8 +20,8 @@ test('VSnackbar.vue', ({ mount }) => {
       }
     })
 
-    expect(wrapper.find('.v-snack__wrapper.orange')).toHaveLength(1)
-    expect(wrapper.find('.v-snack__wrapper.lighten-2')).toHaveLength(1)
+    expect(wrapper.findAll('.v-snack__wrapper.orange')).toHaveLength(1)
+    expect(wrapper.findAll('.v-snack__wrapper.lighten-2')).toHaveLength(1)
   })
 
   it('should have a v-snack__content class only when active', async () => {
@@ -32,13 +32,13 @@ test('VSnackbar.vue', ({ mount }) => {
       }
     })
 
-    expect(wrapper.find('div .v-snack__content')).toHaveLength(0)
+    expect(wrapper.findAll('div .v-snack__content')).toHaveLength(0)
 
     wrapper.setProps({ value: true })
 
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.find('div .v-snack__content')).toHaveLength(1)
+    expect(wrapper.findAll('div .v-snack__content')).toHaveLength(1)
   })
 
   it('should timeout correctly', async () => {

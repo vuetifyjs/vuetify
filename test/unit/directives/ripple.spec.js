@@ -20,7 +20,7 @@ test('VRipple', ({ mount }) => {
 
     const wrapper = mount(testComponent)
 
-    const div = wrapper.find('div')[0]
+    const div = wrapper.find('div')
     expect(div.element._ripple.enabled).toBe(true)
   })
 
@@ -50,7 +50,7 @@ test('VRipple', ({ mount }) => {
       }
     })
 
-    const div = wrapper.find('div')[0]
+    const div = wrapper.find('div')
     expect(div.element._ripple.enabled).toBe(true)
 
     wrapper.setProps({ ripple: false })

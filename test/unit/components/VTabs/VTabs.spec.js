@@ -31,12 +31,12 @@ test('VTabs', ({ mount, shallow }) => {
   it('should provide', () => {
     const wrapper = mount(Component())
 
-    const tab = wrapper.find(VTab)[0]
+    const tab = wrapper.find(VTab)
     expect(typeof tab.vm.tabClick).toBe('function')
     expect(typeof tab.vm.tabs.register).toBe('function')
     expect(typeof tab.vm.tabs.unregister).toBe('function')
 
-    const items = wrapper.find(VTabsItems)[0]
+    const items = wrapper.find(VTabsItems)
     expect(typeof items.vm.registerItems).toBe('function')
     expect(typeof items.vm.unregisterItems).toBe('function')
   })
@@ -48,12 +48,12 @@ test('VTabs', ({ mount, shallow }) => {
       }
     })
 
-    const tab = wrapper.find(VTab)[0]
+    const tab = wrapper.find(VTab)
     expect(wrapper.vm.tabs.length).toBe(1)
     tab.destroy()
     expect(wrapper.vm.tabs.length).toBe(0)
 
-    const items = wrapper.find(VTabsItems)[0]
+    const items = wrapper.find(VTabsItems)
     expect(typeof wrapper.vm.tabItems).toBe('function')
     items.destroy()
     expect(wrapper.vm.tabItems).toBe(null)
@@ -64,9 +64,9 @@ test('VTabs', ({ mount, shallow }) => {
       attachToDocument: true
     })
 
-    const tabs = wrapper.find(VTabs)[0]
-    const tab = wrapper.find(VTab)[0]
-    const item = wrapper.find(VTabItem)[0]
+    const tabs = wrapper.find(VTabs)
+    const tab = wrapper.find(VTab)
+    const item = wrapper.find(VTabItem)
 
     expect(tabs.vm.activeIndex).toBe(-1)
     expect(tab.vm.isActive).toBe(false)
@@ -81,7 +81,7 @@ test('VTabs', ({ mount, shallow }) => {
   it('should call slider on application resize', async () => {
     const wrapper = mount(Component())
 
-    const tabs = wrapper.find(VTabs)[0]
+    const tabs = wrapper.find(VTabs)
 
     expect(tabs.vm.resizeTimeout).toBe(null)
     tabs.vm.$vuetify.application.left = 100
@@ -101,7 +101,7 @@ test('VTabs', ({ mount, shallow }) => {
 
     await ssrBootable()
 
-    const tabs = wrapper.find(VTabs)[0]
+    const tabs = wrapper.find(VTabs)
 
     tabs.setData({ scrollOffset: 1 })
     tabs.vm.onResize()
@@ -125,8 +125,8 @@ test('VTabs', ({ mount, shallow }) => {
 
     await ssrBootable()
 
-    const tabs = wrapper.find(VTabs)[0]
-    const tab = wrapper.find(VTab)[1]
+    const tabs = wrapper.find(VTabs)
+    const tab = wrapper.findAll(VTab)[1]
     const input = jest.fn()
 
     tabs.vm.$on('input', input)
@@ -198,7 +198,7 @@ test('VTabs', ({ mount, shallow }) => {
 
     wrapper.setData({ isOverflowing: true })
     await wrapper.vm.$nextTick()
-    expect(wrapper.find('.v-tabs__wrapper--show-arrows')).toHaveLength(1)
+    expect(wrapper.findAll('.v-tabs__wrapper--show-arrows')).toHaveLength(1)
     expect(wrapper.html()).toMatchSnapshot()
   })
 
@@ -231,7 +231,7 @@ test('VTabs', ({ mount, shallow }) => {
     wrapper.setData({ scrollOffset: -1 })
     await wrapper.vm.$nextTick()
 
-    const next = wrapper.find('.v-tabs__icon--next')[0]
+    const next = wrapper.find('.v-tabs__icon--next')
     next.trigger('click')
     await wrapper.vm.$nextTick()
     expect(scrollTo).toHaveBeenCalledWith('next')
@@ -252,7 +252,7 @@ test('VTabs', ({ mount, shallow }) => {
     })
     await ssrBootable()
 
-    const tabsWrapper = wrapper.find('.v-tabs__wrapper')[0]
+    const tabsWrapper = wrapper.find('.v-tabs__wrapper')
 
     touch(tabsWrapper).start(0, 0)
     touch(tabsWrapper).end(0, 0)
@@ -272,7 +272,7 @@ test('VTabs', ({ mount, shallow }) => {
       }
     })
 
-    const slider = wrapper.find(VTabsSlider)[0]
+    const slider = wrapper.find(VTabsSlider)
     expect(slider.hasClass('pink')).toBe(true)
   })
 
@@ -282,7 +282,7 @@ test('VTabs', ({ mount, shallow }) => {
     })
 
     wrapper.setData({ isOverflowing: true })
-    const container = wrapper.find('.v-tabs__container')[0]
+    const container = wrapper.find('.v-tabs__container')
 
     await ssrBootable()
 
@@ -314,7 +314,7 @@ test('VTabs', ({ mount, shallow }) => {
 
     await ssrBootable()
 
-    expect(wrapper.find(VTabsItems).length).toBe(1)
+    expect(wrapper.findAll(VTabsItems).length).toBe(1)
   })
 
   it('should scroll active item into view if off screen', async () => {
@@ -382,7 +382,7 @@ test('VTabs', ({ mount, shallow }) => {
 
     await ssrBootable()
 
-    const slider = wrapper.find('.v-tabs__slider')
+    const slider = wrapper.findAll('.v-tabs__slider')
     expect(slider).toHaveLength(0)
   })
 

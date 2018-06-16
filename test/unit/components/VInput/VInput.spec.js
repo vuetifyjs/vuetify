@@ -87,8 +87,8 @@ test('VInput.js', ({ mount }) => {
     const click = jest.fn()
     wrapper.vm.$on('click', click)
 
-    const prepend = wrapper.find('.v-icon')[0]
-    const append = wrapper.find('.v-icon')[1]
+    const prepend = wrapper.find('.v-icon')
+    const append = wrapper.findAll('.v-icon')[1]
     const slot = wrapper.first('.v-input__slot')
 
     prepend.trigger('click')

@@ -10,7 +10,7 @@ test('VSwitch.js', ({ mount }) => {
       }
     })
 
-    let ripple = wrapper.find('.v-input--selection-controls__ripple')
+    let ripple = wrapper.findAll('.v-input--selection-controls__ripple')
 
     expect(ripple.length).toBe(0)
 

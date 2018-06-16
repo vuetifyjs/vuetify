@@ -157,7 +157,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect(wrapper.vm.isFocused).toBe(true)
     expect(wrapper.vm.isMenuActive).toBe(true)
 
-    const item = wrapper.find('div a.v-list__tile')[0]
+    const item = wrapper.find('div a.v-list__tile')
     item.trigger('click')
 
     await wrapper.vm.$nextTick()
@@ -231,7 +231,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const menu = wrapper.find('.v-menu__content')[0]
+    const menu = wrapper.find('.v-menu__content')
     expect(menu.element.classList).toContain('v-menu-class')
   })
 
@@ -259,7 +259,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const tileTitle = wrapper.find('.v-list__tile__title')[0]
+    const tileTitle = wrapper.find('.v-list__tile__title')
     expect(tileTitle.html()).toMatchSnapshot()
   })
 

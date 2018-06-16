@@ -118,7 +118,7 @@ test('VDialog.js', ({ mount, compileToFunctions }) => {
     wrapper.vm.$on('input', input)
 
     expect(wrapper.vm.isActive).toBe(false)
-    wrapper.find('.v-dialog__activator')[0].trigger('click')
+    wrapper.find('.v-dialog__activator').trigger('click')
     expect(wrapper.vm.isActive).toBe(true)
     await wrapper.vm.$nextTick()
     expect(input).toBeCalledWith(true)
@@ -140,7 +140,7 @@ test('VDialog.js', ({ mount, compileToFunctions }) => {
     wrapper.vm.$on('input', input)
 
     expect(wrapper.vm.isActive).toBe(false)
-    wrapper.find('.v-dialog__activator')[0].trigger('click')
+    wrapper.find('.v-dialog__activator').trigger('click')
     expect(wrapper.vm.isActive).toBe(false)
     await wrapper.vm.$nextTick()
     expect(input).not.toBeCalled()

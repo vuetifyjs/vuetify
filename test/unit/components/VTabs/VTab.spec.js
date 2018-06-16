@@ -26,9 +26,9 @@ test('VTab', ({ mount }) => {
       }
     })
 
-    expect(wrapper.find('.v-tabs__item')[0].vNode.elm.tagName).toBe('A')
+    expect(wrapper.find('.v-tabs__item').vNode.elm.tagName).toBe('A')
     wrapper.setProps({ disabled: true })
-    expect(wrapper.find('.v-tabs__item')[0].vNode.elm.tagName).toBe('DIV')
+    expect(wrapper.find('.v-tabs__item').vNode.elm.tagName).toBe('DIV')
 
     expect(tabClick).toHaveBeenWarned()
     expect(tabsWarning).toHaveBeenTipped()
@@ -53,7 +53,7 @@ test('VTab', ({ mount }) => {
       }
     })
 
-    const item = wrapper.find(VTab)[0]
+    const item = wrapper.find(VTab)
     item.destroy()
 
     expect(register).toHaveBeenCalled()
@@ -78,7 +78,7 @@ test('VTab', ({ mount }) => {
       }
     })
 
-    const tab = wrapper.find(VTab)[0]
+    const tab = wrapper.find(VTab)
     tab.vm.$on('click', click)
     const event = new Event('click')
     tab.vm.click(event)

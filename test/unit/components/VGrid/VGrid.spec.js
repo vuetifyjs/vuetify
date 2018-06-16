@@ -23,7 +23,7 @@ test('VFlex', ({ mount, functionalContext }) => {
       }
     }))
 
-    expect(wrapper.find('#test')).toHaveLength(1)
+    expect(wrapper.findAll('#test')).toHaveLength(1)
   })
 
   // TODO: Remove once resolved

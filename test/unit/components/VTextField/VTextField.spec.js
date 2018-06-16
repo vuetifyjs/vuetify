@@ -17,7 +17,7 @@ test('VTextField.js', ({ mount }) => {
       }
     })
 
-    const input = wrapper.find('input')[0]
+    const input = wrapper.find('input')
     expect(input.getAttribute('required')).toBe('required')
   })
 
@@ -30,7 +30,7 @@ test('VTextField.js', ({ mount }) => {
     }
     const wrapper = mount(component)
 
-    const input = wrapper.find('input')[0]
+    const input = wrapper.find('input')
     input.trigger('keyUp', { keyCode: 65 })
 
     expect(keyup).toBeCalled()
@@ -44,7 +44,7 @@ test('VTextField.js', ({ mount }) => {
       attrs: {}
     })
 
-    const inputGroup = wrapper.find('input')[0]
+    const inputGroup = wrapper.find('input')
     expect(inputGroup.getAttribute('aria-label')).toBe('Test')
   })
 
@@ -56,7 +56,7 @@ test('VTextField.js', ({ mount }) => {
       attrs: {}
     })
 
-    const inputGroup = wrapper.find('input')[0]
+    const inputGroup = wrapper.find('input')
     expect(inputGroup.element.getAttribute('aria-label')).toBeFalsy()
   })
 
@@ -70,7 +70,7 @@ test('VTextField.js', ({ mount }) => {
       }
     })
 
-    const inputGroup = wrapper.find('input')[0]
+    const inputGroup = wrapper.find('input')
     expect(inputGroup.element.getAttribute('aria-label')).toBeFalsy()
   })
 
@@ -116,14 +116,14 @@ test('VTextField.js', ({ mount }) => {
       }
     })
 
-    expect(wrapper.find('.v-counter')[0]).not.toBe(undefined)
+    expect(wrapper.find('.v-counter')).not.toBe(undefined)
     expect(wrapper.html()).toMatchSnapshot()
 
     wrapper.setProps({ counter: false })
     await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect(wrapper.find('.v-counter')[0]).toBe(undefined)
+    expect(wrapper.find('.v-counter')).toBe(undefined)
   })
 
   it('should have readonly attribute', () => {
@@ -133,7 +133,7 @@ test('VTextField.js', ({ mount }) => {
       }
     })
 
-    const input = wrapper.find('input')[0]
+    const input = wrapper.find('input')
 
     expect(input.getAttribute('readonly')).toBe('readonly')
   })
@@ -146,7 +146,7 @@ test('VTextField.js', ({ mount }) => {
       }
     })
 
-    const clear = wrapper.find('.v-input__icon--clear .v-icon')[0]
+    const clear = wrapper.find('.v-input__icon--clear .v-icon')
     const input = jest.fn()
     wrapper.vm.$on('input', input)
 
@@ -169,7 +169,7 @@ test('VTextField.js', ({ mount }) => {
       }
     })
 
-    const icon = wrapper.find('.v-input__icon--append .v-icon')[0]
+    const icon = wrapper.find('.v-input__icon--append .v-icon')
     icon.trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.internalValue).toBe('foo')
@@ -184,7 +184,7 @@ test('VTextField.js', ({ mount }) => {
       }
     })
 
-    const icon = wrapper.find('.v-input__icon--append .v-icon')[0]
+    const icon = wrapper.find('.v-input__icon--append .v-icon')
     icon.trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.internalValue).toBe('foo')
@@ -209,7 +209,7 @@ test('VTextField.js', ({ mount }) => {
       }
     })
 
-    const input = wrapper.find('input')[0]
+    const input = wrapper.find('input')
 
     input.element.value = 'fgh'
     input.trigger('input')
@@ -221,7 +221,7 @@ test('VTextField.js', ({ mount }) => {
   it('should update if value is changed externally', async () => {
     const wrapper = mount(VTextField, {})
 
-    const input = wrapper.find('input')[0]
+    const input = wrapper.find('input')
 
     wrapper.setProps({ value: 'fgh' })
     expect(input.element.value).toBe('fgh')
@@ -248,7 +248,7 @@ test('VTextField.js', ({ mount }) => {
     }
     const wrapper = mount(component)
 
-    const input = wrapper.find('input')[0]
+    const input = wrapper.find('input')
 
     input.trigger('focus')
     await wrapper.vm.$nextTick()
@@ -273,7 +273,7 @@ test('VTextField.js', ({ mount }) => {
       }
     })
 
-    const prepend = wrapper.find('.v-input__icon--append .v-icon')[0]
+    const prepend = wrapper.find('.v-input__icon--append .v-icon')
     expect(prepend.text()).toBe('check')
     expect(prepend.element.classList).not.toContain('input-group__icon-cb')
   })
@@ -294,7 +294,7 @@ test('VTextField.js', ({ mount }) => {
     }
     const wrapper = mount(component)
 
-    const input = wrapper.find('input')[0]
+    const input = wrapper.find('input')
 
     input.trigger('focus')
     await wrapper.vm.$nextTick()
@@ -402,7 +402,7 @@ test('VTextField.js', ({ mount }) => {
     }
 
     const wrapper = mount(component)
-    const input = wrapper.find('input')[0]
+    const input = wrapper.find('input')
 
     expect(value).toBe('4-4')
 
@@ -433,7 +433,7 @@ test('VTextField.js', ({ mount }) => {
     }
 
     const wrapper = mount(component)
-    const input = wrapper.find('input')[0]
+    const input = wrapper.find('input')
 
     expect(value).toBe('44')
 
@@ -476,7 +476,7 @@ test('VTextField.js', ({ mount }) => {
       }
     })
 
-    const input = wrapper.find('input')[0]
+    const input = wrapper.find('input')
 
     expect(input.element.value).toBe('1-2-3')
 

@@ -43,7 +43,7 @@ test('VCheckbox.js', ({ mount }) => {
       }
     })
 
-    const ripple = wrapper.find('input')[0]
+    const ripple = wrapper.find('input')
 
     const change = jest.fn()
     wrapper.vm.$on('change', change)
@@ -61,7 +61,7 @@ test('VCheckbox.js', ({ mount }) => {
       attrs: {}
     })
 
-    const label = wrapper.find('label')[0]
+    const label = wrapper.find('label')
 
     const change = jest.fn()
     wrapper.vm.$on('change', change)
@@ -209,7 +209,7 @@ test('VCheckbox.js', ({ mount }) => {
       }
     })
 
-    const ripple = wrapper.find('.v-input--selection-controls__ripple')
+    const ripple = wrapper.findAll('.v-input--selection-controls__ripple')
 
     expect(ripple).toHaveLength(0)
   })
@@ -221,7 +221,7 @@ test('VCheckbox.js', ({ mount }) => {
       }
     })
 
-    const ripple = wrapper.find('.v-input--selection-controls__ripple')[0]
+    const ripple = wrapper.find('.v-input--selection-controls__ripple')
 
     expect(ripple.element._ripple.enabled).toBe(true)
     expect(ripple.element._ripple.centered).toBe(true)
@@ -235,7 +235,7 @@ test('VCheckbox.js', ({ mount }) => {
       }
     })
 
-    const ripple = wrapper.find('.v-input--selection-controls__ripple')[0]
+    const ripple = wrapper.find('.v-input--selection-controls__ripple')
 
     const change = jest.fn()
     wrapper.vm.$on('change', change)
@@ -252,7 +252,7 @@ test('VCheckbox.js', ({ mount }) => {
       }
     })
 
-    const ripple = wrapper.find('.v-input--selection-controls__ripple')[0]
+    const ripple = wrapper.find('.v-input--selection-controls__ripple')
 
     const change = jest.fn()
     wrapper.vm.$on('change', change)
@@ -269,7 +269,7 @@ test('VCheckbox.js', ({ mount }) => {
       }
     })
 
-    const ripple = wrapper.find('.v-input--selection-controls__ripple')[0]
+    const ripple = wrapper.find('.v-input--selection-controls__ripple')
 
     const change = jest.fn()
     wrapper.vm.$on('change', change)
@@ -286,7 +286,7 @@ test('VCheckbox.js', ({ mount }) => {
       }
     })
 
-    const ripple = wrapper.find('.v-input--selection-controls__ripple')[0]
+    const ripple = wrapper.find('.v-input--selection-controls__ripple')
 
     const change = jest.fn()
     wrapper.vm.$on('change', change)
@@ -304,7 +304,7 @@ test('VCheckbox.js', ({ mount }) => {
       }
     })
 
-    const ripple = wrapper.find('.v-input--selection-controls__ripple')[0]
+    const ripple = wrapper.find('.v-input--selection-controls__ripple')
 
     const change = jest.fn()
     wrapper.vm.$on('change', change)
@@ -321,7 +321,7 @@ test('VCheckbox.js', ({ mount }) => {
       }
     })
 
-    const ripple = wrapper.find('.v-input--selection-controls__ripple')[0]
+    const ripple = wrapper.find('.v-input--selection-controls__ripple')
 
     const change = jest.fn()
     wrapper.vm.$on('change', change)
@@ -338,7 +338,7 @@ test('VCheckbox.js', ({ mount }) => {
       }
     })
 
-    const ripple = wrapper.find('.v-input--selection-controls__ripple')[0]
+    const ripple = wrapper.find('.v-input--selection-controls__ripple')
 
     const change = jest.fn()
     wrapper.vm.$on('change', change)
@@ -356,7 +356,7 @@ test('VCheckbox.js', ({ mount }) => {
       }
     })
 
-    const ripple = wrapper.find('.v-input--selection-controls__ripple')[0]
+    const ripple = wrapper.find('.v-input--selection-controls__ripple')
 
     const change = jest.fn()
     wrapper.vm.$on('change', change)

@@ -21,7 +21,7 @@ test('VExpansionPanel.js', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.html()).toMatchSnapshot()
 
-    wrapper.find('.v-expansion-panel__header')[0].trigger('click')
+    wrapper.find('.v-expansion-panel__header').trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
   })
@@ -49,7 +49,7 @@ test('VExpansionPanel.js', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.html()).toMatchSnapshot()
 
-    wrapper.find('.v-expansion-panel__header')[0].trigger('click')
+    wrapper.find('.v-expansion-panel__header').trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
   })
@@ -95,7 +95,7 @@ test('VExpansionPanel.js', ({ mount, compileToFunctions }) => {
     })
 
     await wrapper.vm.$nextTick()
-    expect(wrapper.find('.v-expansion-panel__container--active').length).toBe(2)
+    expect(wrapper.findAll('.v-expansion-panel__container--active').length).toBe(2)
   })
 
   it('should reset v-model when disabling expand', async () => {
@@ -113,7 +113,7 @@ test('VExpansionPanel.js', ({ mount, compileToFunctions }) => {
     wrapper.instance().$on('input', fn)
 
     await wrapper.vm.$nextTick()
-    expect(wrapper.find('.v-expansion-panel__container--active').length).toBe(2)
+    expect(wrapper.findAll('.v-expansion-panel__container--active').length).toBe(2)
 
     wrapper.setProps({ expand: false })
     await wrapper.vm.$nextTick()
@@ -135,7 +135,7 @@ test('VExpansionPanel.js', ({ mount, compileToFunctions }) => {
     wrapper.instance().$on('input', input)
 
     await wrapper.vm.$nextTick()
-    expect(wrapper.find('.v-expansion-panel__container--active').length).toBe(0)
+    expect(wrapper.findAll('.v-expansion-panel__container--active').length).toBe(0)
 
     wrapper.setProps({ expand: false })
     await wrapper.vm.$nextTick()
@@ -176,6 +176,6 @@ test('VExpansionPanel.js', ({ mount, compileToFunctions }) => {
     wrapper.setProps({ expand: true })
     await wrapper.vm.$nextTick()
     expect(input).toHaveBeenCalledWith([false, true])
-    expect(wrapper.find('.v-expansion-panel__container--active').length).toBe(1)
+    expect(wrapper.findAll('.v-expansion-panel__container--active').length).toBe(1)
   })
 })

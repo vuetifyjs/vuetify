@@ -31,7 +31,7 @@ test('detachable.js', ({ mount }) => {
       }
     })
 
-    const detach = wrapper.find(localMock)[0]
+    const detach = wrapper.find(localMock)
 
     expect(detach.vm.hasDetached).toBe(true)
 
@@ -51,7 +51,7 @@ test('detachable.js', ({ mount }) => {
       }
     })
 
-    const detach = wrapper.find(localMock)[0]
+    const detach = wrapper.find(localMock)
 
     expect(detach.vm.hasDetached).toBe(false)
 

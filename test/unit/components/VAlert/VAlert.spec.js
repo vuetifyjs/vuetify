@@ -44,7 +44,7 @@ test('VAlert.vue', ({ mount }) => {
       }
     })
 
-    const icon = wrapper.find('.v-alert__dismissible')[0]
+    const icon = wrapper.find('.v-alert__dismissible')
 
     const input = jest.fn(value => wrapper.setProps({ value }))
     wrapper.vm.$on('input', input)
@@ -62,7 +62,7 @@ test('VAlert.vue', ({ mount }) => {
       }
     })
 
-    const icon = wrapper.find('.v-alert__icon')[0]
+    const icon = wrapper.find('.v-alert__icon')
 
     expect(icon.text()).toBe('list')
   })
@@ -114,7 +114,7 @@ test('VAlert.vue', ({ mount }) => {
       }
     })
 
-    const icon = wrapper.find('.v-alert__icon')[0]
+    const icon = wrapper.find('.v-alert__icon')
 
     expect(icon.text()).toBe('block')
   })

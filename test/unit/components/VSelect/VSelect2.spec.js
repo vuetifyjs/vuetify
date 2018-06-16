@@ -40,7 +40,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const clear = wrapper.find('.v-icon')[0]
+    const clear = wrapper.find('.v-icon')
 
     const input = jest.fn()
     wrapper.vm.$on('input', input)
@@ -140,7 +140,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
       }
     })
 
-    expect(wrapper.find('input')[0].hasStyle('display', 'block'))
+    expect(wrapper.find('input').hasStyle('display', 'block'))
   })
 
   it('should not show input with placeholder and dirty', async () => {
@@ -153,7 +153,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
       }
     })
 
-    expect(wrapper.find('input')[0].hasStyle('display', 'none'))
+    expect(wrapper.find('input').hasStyle('display', 'none'))
   })
 
   // #1704
@@ -172,7 +172,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     await wrapper.vm.$nextTick()
 
-    const selections = wrapper.find('.v-select__selection')
+    const selections = wrapper.findAll('.v-select__selection')
 
     expect(selections.length).toBeGreaterThan(0)
   })
@@ -389,7 +389,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect(wrapper.vm.selectedIndex).toBe(0)
     expect(onFocus).toHaveBeenCalledTimes(1)
 
-    wrapper.find('.v-chip--select-multi')[1].trigger('click')
+    wrapper.findAll('.v-chip--select-multi')[1].trigger('click')
 
     expect(wrapper.vm.selectedIndex).toBe(1)
     expect(onFocus).toHaveBeenCalledTimes(2)
@@ -468,8 +468,8 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.find('.v-text-field__prefix').length).toBe(0)
-    expect(wrapper.find('.v-text-field__suffix').length).toBe(0)
+    expect(wrapper.findAll('.v-text-field__prefix').length).toBe(0)
+    expect(wrapper.findAll('.v-text-field__suffix').length).toBe(0)
   })
 
   it('should use custom clear icon cb', () => {
@@ -503,7 +503,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     await wrapper.vm.$nextTick()
 
-    const selections = wrapper.find('.v-select__selection')
+    const selections = wrapper.findAll('.v-select__selection')
 
     expect(selections.length).toEqual(1)
   })

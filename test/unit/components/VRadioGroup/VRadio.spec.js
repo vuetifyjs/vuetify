@@ -93,7 +93,7 @@ test('VRadio.vue', ({ mount }) => {
       }
     })
 
-    const input = wrapper.find('input')[0]
+    const input = wrapper.find('input')
     expect(input.getAttribute('name')).toBe('name')
     expect(wrapper.html()).toMatchSnapshot()
 
@@ -132,7 +132,7 @@ test('VRadio.vue', ({ mount }) => {
       }
     })
 
-    const ripple = wrapper.find('.v-input--selection-controls__ripple')
+    const ripple = wrapper.findAll('.v-input--selection-controls__ripple')
 
     expect(ripple).toHaveLength(0)
 
@@ -150,7 +150,7 @@ test('VRadio.vue', ({ mount }) => {
       }
     })
 
-    const ripple = wrapper.find('.v-input--selection-controls__ripple')[0]
+    const ripple = wrapper.find('.v-input--selection-controls__ripple')
 
     expect(ripple.element._ripple.enabled).toBe(true)
     expect(ripple.element._ripple.centered).toBe(true)

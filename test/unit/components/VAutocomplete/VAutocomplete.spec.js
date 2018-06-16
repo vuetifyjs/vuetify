@@ -663,7 +663,7 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
       }
     })
 
-    const chips = wrapper.find('.v-chip')
+    const chips = wrapper.findAll('.v-chip')
     const input = wrapper.first('input')
 
     expect(chips[0].element.classList.contains('v-chip--disabled')).toBe(true)

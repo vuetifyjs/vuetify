@@ -67,7 +67,7 @@ test('VBadge.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const badge = wrapper.find('.v-badge__badge')[0]
+    const badge = wrapper.find('.v-badge__badge')
     expect(badge.hasClass('green')).toBe(true)
     expect(badge.hasClass('lighten-1')).toBe(true)
   })

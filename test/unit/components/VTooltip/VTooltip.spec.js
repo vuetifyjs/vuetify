@@ -78,7 +78,7 @@ test('VTooltip.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const activator = wrapper.find('.v-tooltip__content + span')[0]
+    const activator = wrapper.find('.v-tooltip__content + span')
     const cb = jest.fn()
     wrapper.instance().$on('input', cb)
 

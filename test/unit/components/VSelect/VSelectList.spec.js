@@ -110,12 +110,12 @@ test('VSelect', ({ mount, compileToFunctions }) => {
       }
     })
 
-    expect(wrapper.find('.v-list__tile').length).toBe(2)
+    expect(wrapper.findAll('.v-list__tile').length).toBe(2)
 
     wrapper.setProps({ selectedItems: ['foo', 'bar'] })
 
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.find('.v-list__tile').length).toBe(1)
+    expect(wrapper.findAll('.v-list__tile').length).toBe(1)
   })
 })

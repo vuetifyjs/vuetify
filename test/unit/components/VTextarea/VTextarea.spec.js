@@ -14,7 +14,7 @@ test('VTextarea.vue', ({ mount }) => {
     const input = jest.fn(value => wrapper.setData({ value }))
     wrapper.vm.$on('input', input)
 
-    const el = wrapper.find('textarea')[0]
+    const el = wrapper.find('textarea')
 
     el.trigger('focus')
     await wrapper.vm.$nextTick()
