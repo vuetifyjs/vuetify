@@ -123,7 +123,6 @@ export default {
       // to avoid a double input
       if (this.hasChips) this.internalSearch = undefined
     },
-    // Maybe change to onBlur?
     updateTags () {
       const menuIndex = this.getMenuIndex()
 
