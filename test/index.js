@@ -3,6 +3,11 @@ import { mount, shallowMount } from '@vue/test-utils'
 import toHaveBeenWarnedInit from '@/test/util/to-have-been-warned'
 import Vuetify from '@/components/Vuetify'
 import { compileToFunctions } from 'vue-template-compiler'
+import VueTestUtils from '@vue/test-utils'
+
+// TODO: maybe better to fix the real problem
+// Replacing "Vue.component('tset', {...})" with "{...}" seems to work
+VueTestUtils.config.logModifiedComponents = false
 
 export function test(name, cb) {
   toHaveBeenWarnedInit()
