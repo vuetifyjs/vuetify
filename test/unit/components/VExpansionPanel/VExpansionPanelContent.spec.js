@@ -1,7 +1,7 @@
 import { test } from '@/test'
 import VExpansionPanelContent from '@/components/VExpansionPanel/VExpansionPanelContent'
 
-const registrableWarning = '[Vuetify] The v-expansion-panel component must be used inside a v-expansion-panel-content'
+const registrableWarning = '[Vuetify] The v-expansion-panel-content component must be used inside a v-expansion-panel'
 
 function expansionPanelProvide (additional) {
   return Object.assign({
