@@ -54,7 +54,6 @@ test('VSnackbar.vue', ({ mount }) => {
 
     wrapper.vm.$on('input', value)
     wrapper.setProps({ value: true })
-    wrapper.update()
 
     await wrapper.vm.$nextTick()
 

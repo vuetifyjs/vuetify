@@ -211,7 +211,6 @@ test('VBtnToggle.vue', ({ mount }) => {
     wrapper.vm.$on('change', change)
 
     wrapper.vm.$children[1].testUnregister()
-    wrapper.update()
 
     await wrapper.vm.$nextTick()
 
@@ -235,7 +234,6 @@ test('VBtnToggle.vue', ({ mount }) => {
     wrapper.vm.$on('change', change)
 
     wrapper.vm.$children[1].testUnregister()
-    wrapper.update()
 
     await wrapper.vm.$nextTick()
 
