@@ -16,25 +16,25 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect(wrapper.vm.isMenuActive).toBe(false)
 
     wrapper.setProps({ box: true })
-    wrapper.trigger('mouseup')
+    wrapper.first('.v-input__slot').trigger('mouseup')
 
     expect(wrapper.vm.isMenuActive).toBe(true)
 
     wrapper.setData({ isMenuActive: false })
     wrapper.setProps({ box: false, solo: true })
-    wrapper.trigger('mouseup')
+    wrapper.first('.v-input__slot').trigger('mouseup')
 
     expect(wrapper.vm.isMenuActive).toBe(true)
 
     wrapper.setData({ isMenuActive: false })
     wrapper.setProps({ solo: false, soloInverted: true })
-    wrapper.trigger('mouseup')
+    wrapper.first('.v-input__slot').trigger('mouseup')
 
     expect(wrapper.vm.isMenuActive).toBe(true)
 
     wrapper.setData({ isMenuActive: false })
     wrapper.setProps({ soloInverted: false, outline: true })
-    wrapper.trigger('mouseup')
+    wrapper.first('.v-input__slot').trigger('mouseup')
 
     expect(wrapper.vm.isMenuActive).toBe(true)
   })
