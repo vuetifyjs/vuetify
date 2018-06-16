@@ -141,7 +141,7 @@ export default {
         'menuable__content__active': this.isActive
       }),
       style: this.styles,
-      attrs: this.attrs,
+      attrs: this.getScopeIdAttrs(),
       directives: [{
         name: 'show',
         value: this.isContentActive
