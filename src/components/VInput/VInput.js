@@ -179,7 +179,11 @@ export default {
         staticClass: 'v-input__slot',
         style: { height: convertToUnit(this.height) },
         directives: this.directivesInput,
-        on: { click: this.onClick },
+        on: {
+          click: this.onClick,
+          mousedown: this.onMouseDown,
+          mouseup: this.onMouseUp
+        },
         ref: 'input-slot'
       }, [
         this.genDefaultSlot(),
@@ -262,11 +266,7 @@ export default {
     return h('div', {
       staticClass: 'v-input',
       attrs: this.attrsInput,
-      'class': this.classesInput,
-      on: {
-        mousedown: this.onMouseDown,
-        mouseup: this.onMouseUp
-      }
+      'class': this.classesInput
     }, this.genContent())
   }
 }

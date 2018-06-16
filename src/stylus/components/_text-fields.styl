@@ -6,9 +6,8 @@ v-text-field($material)
     background-color: $material.input-bottom-line
 
   &:not(.v-input--has-state)
-    &:hover
-      .v-input__slot:before
-        background-color: $material.text.primary
+    .v-input__slot:hover:before
+      background-color: $material.text.primary
 
   &.v-input--is-disabled
     .v-input__slot:before
@@ -45,16 +44,15 @@ v-text-field($material)
       background: $material.text-fields.box
 
     &:not(.v-input--is-focused)
-      .v-input__slot
-        &:hover
-          background: $material.text-fields.box-hover
+      .v-input__slot:hover
+        background: $material.text-fields.box-hover
 
   &--outline
     .v-input__slot
       border: 2px solid $material.text.secondary
 
-    &:not(.v-input--is-focused):hover
-      .v-input__slot
+    &:not(.v-input--is-focused)
+      .v-input__slot:hover
         border: 2px solid $material.text.primary
 
 v-text-field-rtl()
