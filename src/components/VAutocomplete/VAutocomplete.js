@@ -74,6 +74,11 @@ export default {
     computedItems () {
       return this.filteredItems
     },
+    displayedItemsCount () {
+      return this.hideSelected
+        ? this.filteredItems.length - this.selectedItems.length
+        : this.filteredItems.length
+    },
     /**
      * The range of the current input text
      *
@@ -116,11 +121,7 @@ export default {
     menuCanShow () {
       if (!this.isFocused) return false
 
-      const filtered = this.hideSelected
-        ? this.filteredItems.length - this.selectedItems.length > 0
-        : this.filteredItems.length > 0
-
-      return filtered || !this.hideNoData
+      return (this.displayedItemsCount > 0) || !this.hideNoData
     },
     menuProps () {
       return Object.assign(VSelect.computed.menuProps.call(this), {
