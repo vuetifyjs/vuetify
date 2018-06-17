@@ -398,13 +398,13 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect(list.html()).toMatchSnapshot()
   })
 
-  it('should use slotted before-list', () => {
+  it('should use slotted prepend-item', () => {
     const wrapper = mount(VSelect, {
       propsData: {
         items: ['foo']
       },
       slots: {
-        'before-list': [{
+        'prepend-item': [{
           render: h => h('div', 'foo')
         }]
       }
@@ -412,17 +412,17 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     const list = wrapper.first('.v-list')
 
-    expect(wrapper.vm.$slots['before-list']).toBeTruthy()
+    expect(wrapper.vm.$slots['prepend-item']).toBeTruthy()
     expect(list.html()).toMatchSnapshot()
   })
 
-  it('should use slotted after-list', () => {
+  it('should use slotted append-item', () => {
     const wrapper = mount(VSelect, {
       propsData: {
         items: ['foo']
       },
       slots: {
-        'after-list': [{
+        'append-item': [{
           render: h => h('div', 'foo')
         }]
       }
@@ -430,7 +430,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     const list = wrapper.first('.v-list')
 
-    expect(wrapper.vm.$slots['after-list']).toBeTruthy()
+    expect(wrapper.vm.$slots['append-item']).toBeTruthy()
     expect(list.html()).toMatchSnapshot()
   })
 

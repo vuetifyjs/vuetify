@@ -229,7 +229,7 @@ export default {
       }
     },
     staticList () {
-      if (this.$slots['no-data'] || this.$slots['before-list'] || this.$slots['after-list']) {
+      if (this.$slots['no-data'] || this.$slots['prepend-item'] || this.$slots['append-item']) {
         consoleError('assert: staticList should not be called if slots are used')
       }
 
@@ -400,14 +400,14 @@ export default {
     },
     genList () {
       // If there's no slots, we can use a cached VNode to improve performance
-      if (this.$slots['no-data'] || this.$slots['before-list'] || this.$slots['after-list']) {
+      if (this.$slots['no-data'] || this.$slots['prepend-item'] || this.$slots['append-item']) {
         return this.genListWithSlot()
       } else {
         return this.staticList
       }
     },
     genListWithSlot () {
-      const slots = ['before-list', 'no-data', 'after-list']
+      const slots = ['prepend-item', 'no-data', 'append-item']
         .filter(slotName => this.$slots[slotName])
         .map(slotName => this.$createElement('template', {
           slot: slotName
