@@ -41,7 +41,10 @@ export default {
 
   computed: {
     activeIndex () {
-      return this.items.findIndex((item, index) => (item.id || index.toString()) === this.lazyValue)
+      return this.items.findIndex((item, index) => {
+        return item.id === this.lazyValue ||
+          index === this.lazyValue
+      })
     },
     activeItem () {
       if (!this.items.length) return undefined
@@ -53,8 +56,6 @@ export default {
         return this.lazyValue
       },
       set (val) {
-        val = val.toString()
-
         this.lazyValue = val
 
         if (this.tabProxy) this.tabProxy(val)
