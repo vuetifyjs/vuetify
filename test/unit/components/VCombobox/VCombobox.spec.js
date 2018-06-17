@@ -1,15 +1,14 @@
 import { test } from '@/test'
-import VAutocomplete from '@/components/VAutocomplete'
+import VCombobox from '@/components/VCombobox'
 
-test('VAutocomplete - combobox', ({ mount, shallow }) => {
+test('VCombobox', ({ shallow }) => {
   const app = document.createElement('div')
   app.setAttribute('data-app', true)
   document.body.appendChild(app)
 
   it('should evaluate the range of an integer', async () => {
-    const wrapper = shallow(VAutocomplete, {
+    const wrapper = shallow(VCombobox, {
       propsData: {
-        combobox: true,
         value: 11
       }
     })
@@ -23,10 +22,9 @@ test('VAutocomplete - combobox', ({ mount, shallow }) => {
   })
 
   it('should not use search input when blurring', async () => {
-    const wrapper = shallow(VAutocomplete, {
+    const wrapper = shallow(VCombobox, {
       attachToDocument: true,
       propsData: {
-        combobox: true,
         items: [1, 12]
       }
     })
@@ -51,9 +49,8 @@ test('VAutocomplete - combobox', ({ mount, shallow }) => {
 
   it('should not use search input if an option is selected from the menu', async () => {
     const item = { value: 123, text: 'Foo' }
-    const wrapper = shallow(VAutocomplete, {
+    const wrapper = shallow(VCombobox, {
       propsData: {
-        combobox: true,
         items: [item]
       }
     })
@@ -74,11 +71,7 @@ test('VAutocomplete - combobox', ({ mount, shallow }) => {
   })
 
   it('should not populate search field if value is falsey', async () => {
-    const wrapper = shallow(VAutocomplete, {
-      propsData: {
-        combobox: true
-      }
-    })
+    const wrapper = shallow(VCombobox)
 
     const event = jest.fn()
     wrapper.vm.$on('input', event)
@@ -96,9 +89,8 @@ test('VAutocomplete - combobox', ({ mount, shallow }) => {
   })
 
   it('should clear value', async () => {
-    const wrapper = mount(VAutocomplete, {
-      attachToDocument: true,
-      propsData: { combobox: true }
+    const wrapper = shallow(VCombobox, {
+      attachToDocument: true
     })
 
     const change = jest.fn()
@@ -122,5 +114,73 @@ test('VAutocomplete - combobox', ({ mount, shallow }) => {
 
     expect(wrapper.vm.internalValue).toBe('')
     expect(change).toHaveBeenCalledTimes(4)
+  })
+
+  it('should call methods on blur', () => {
+    const updateCombobox = jest.fn()
+    const wrapper = shallow(VCombobox, {
+      attachToDocument: true,
+      methods: {
+        updateCombobox
+      }
+    })
+
+    wrapper.vm.onEnterDown()
+
+    expect(updateCombobox).toHaveBeenCalledTimes(1)
+  })
+
+  it('should emit custom value on blur', async () => {
+    const wrapper = shallow(VCombobox)
+
+    const input = wrapper.first('input')
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    input.trigger('focus')
+    await wrapper.vm.$nextTick()
+
+    input.element.value = 'foo'
+    input.trigger('input')
+
+    input.trigger('blur')
+    expect(change).toHaveBeenCalledWith('foo')
+
+    input.trigger('keydown.esc')
+    expect(wrapper.vm.isMenuActive).toBe(false)
+
+    input.element.value = ''
+    input.trigger('input')
+
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isMenuActive).toBe(false)
+  })
+
+  it('should conditionally show the menu', async () => {
+    const wrapper = shallow(VCombobox, {
+      attachToDocument: true,
+      propsData: {
+        items: ['foo', 'bar', 'fizz'],
+        searchInput: 'foobar'
+      }
+    })
+
+    const slot = wrapper.first('.v-input__slot')
+    const input = wrapper.first('input')
+
+    // Focus input should only focus
+    input.trigger('focus')
+
+    expect(wrapper.vm.isFocused).toBe(true)
+    expect(wrapper.vm.isMenuActive).toBe(false)
+
+    expect(wrapper.vm.menuCanShow).toBe(false)
+
+    slot.trigger('click')
+
+    expect(wrapper.vm.isMenuActive).toBe(false)
+
+    // TODO: Add expects for tags when impl
   })
 })
