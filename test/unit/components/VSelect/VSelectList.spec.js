@@ -48,28 +48,6 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect(wrapper.vm.$slots['no-data'].length).toBe(1)
   })
 
-  it('should use before-list slot', () => {
-    const wrapper = mount(VSelectList, {
-      slots: {
-        'before-list': [{
-          render: h => h('div', 'foo')
-        }]
-      }
-    })
-    expect(wrapper.vm.$slots['before-list'].length).toBe(1)
-  })
-
-  it('should use after-list slot', () => {
-    const wrapper = mount(VSelectList, {
-      slots: {
-        'after-list': [{
-          render: h => h('div', 'foo')
-        }]
-      }
-    })
-    expect(wrapper.vm.$slots['after-list'].length).toBe(1)
-  })
-
   it('should generate children', () => {
     const wrapper = mount(VSelectList, {
       propsData: {
