@@ -3,6 +3,9 @@ import {
   VTabReverseTransition
 } from '../transitions'
 
+// Helpers
+import { convertToUnit } from '../../util/helpers'
+
 export default {
   name: 'v-stepper-content',
 
@@ -39,7 +42,7 @@ export default {
       if (!this.isVertical) return {}
 
       return {
-        height: !isNaN(this.height) ? `${this.height}px` : this.height
+        height: convertToUnit(this.height)
       }
     },
     wrapperClasses () {

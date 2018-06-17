@@ -7,7 +7,7 @@ export default {
   computed: {
     activeIndex () {
       return this.tabs.findIndex((tab, index) => {
-        const id = tab.action === tab ? index.toString() : tab.action
+        const id = tab.action === tab ? index : tab.action
         return id === this.lazyValue
       })
     },
@@ -29,9 +29,6 @@ export default {
         return this.lazyValue
       },
       set (val) {
-        // Always use strings
-        val = val.toString()
-
         this.lazyValue = val
         this.$emit('input', val)
       }

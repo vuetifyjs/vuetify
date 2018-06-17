@@ -1,4 +1,9 @@
+import Vue, { VNode, ComponentOptions } from 'vue'
 import VProgressLinear from '../components/VProgressLinear'
+
+interface colorable extends Vue {
+  color?: string
+}
 
 /**
  * Loadable
@@ -9,7 +14,7 @@ import VProgressLinear from '../components/VProgressLinear'
  * Can use a default bar with a specific color
  * or designate a custom progress linear bar
  */
-export default {
+export default Vue.extend<colorable>().extend({
   name: 'loadable',
 
   props: {
@@ -20,10 +25,11 @@ export default {
   },
 
   methods: {
-    genProgress () {
+    genProgress (): VNode | VNode[] | null {
       if (this.loading === false) return null
 
-      return this.$slots.progress || this.$createElement(VProgressLinear, {
+      // TODO: uncast
+      return this.$slots.progress || this.$createElement(VProgressLinear as ComponentOptions<Vue>, {
         props: {
           color: (this.loading === true || this.loading === '')
             ? (this.color || 'primary')
@@ -34,4 +40,4 @@ export default {
       })
     }
   }
-}
+})
