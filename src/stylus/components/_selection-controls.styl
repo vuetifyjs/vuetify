@@ -38,6 +38,9 @@ rtl(v-selection-control-rtl, "v-input--selection-controls")
       position: absolute
       opacity: 0
 
+    & + .v-label
+      flex: 1 1
+
   &__ripple
     cursor: pointer
     height: 48px
@@ -60,11 +63,12 @@ rtl(v-selection-control-rtl, "v-input--selection-controls")
       transform: scale(0.2)
       transition: inherit
 
-  .v-label
+  &.v-input .v-label
     align-items: center
     display: inline-flex
     top: 0
     user-select: none
+    height: auto
 
   &.v-input--is-focused,
   .v-radio--is-focused
