@@ -19,6 +19,11 @@ function createMessage (message: string, vm?: any, parent?: any): string | void 
   )
 }
 
+export function consoleInfo (message: string, vm?: any, parent?: any): void {
+  const newMessage = createMessage(message, vm, parent)
+  newMessage != null && console.info(newMessage)
+}
+
 export function consoleWarn (message: string, vm?: any, parent?: any): void {
   const newMessage = createMessage(message, vm, parent)
   newMessage != null && console.warn(newMessage)
