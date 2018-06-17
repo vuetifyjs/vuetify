@@ -90,7 +90,7 @@ export default {
           }
         }
       }, [
-        this.$createElement(VIcon, change < 0 ? this.prevIcon : this.nextIcon)
+        this.$createElement(VIcon, ((change < 0) === !this.$vuetify.rtl) ? this.prevIcon : this.nextIcon)
       ])
     },
     calculateChange (sign) {
@@ -113,7 +113,7 @@ export default {
 
       const transition = this.$createElement('transition', {
         props: {
-          name: this.isReversing ? 'tab-reverse-transition' : 'tab-transition'
+          name: (this.isReversing === !this.$vuetify.rtl) ? 'tab-reverse-transition' : 'tab-transition'
         }
       }, [header])
 
