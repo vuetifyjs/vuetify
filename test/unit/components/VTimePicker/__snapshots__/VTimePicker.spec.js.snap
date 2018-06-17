@@ -2,9 +2,7 @@
 
 exports[`VTimePicker.js should accept a date object for a value 1`] = `
 
-<div class="v-picker v-picker--time v-card"
-     style="height: auto;"
->
+<div class="v-picker v-card v-picker--time">
   <div class="v-picker__title primary">
     <div class="v-time-picker-title">
       <div class="v-time-picker-title__time">
@@ -108,9 +106,7 @@ exports[`VTimePicker.js should accept a date object for a value 1`] = `
 
 exports[`VTimePicker.js should accept a value 1`] = `
 
-<div class="v-picker v-picker--time v-card"
-     style="height: auto;"
->
+<div class="v-picker v-card v-picker--time">
   <div class="v-picker__title primary">
     <div class="v-time-picker-title">
       <div class="v-time-picker-title__time">
@@ -214,9 +210,7 @@ exports[`VTimePicker.js should accept a value 1`] = `
 
 exports[`VTimePicker.js should change am/pm when updated from model 1`] = `
 
-<div class="v-picker v-picker--time v-card"
-     style="height: auto;"
->
+<div class="v-picker v-card v-picker--time">
   <div class="v-picker__title primary">
     <div class="v-time-picker-title">
       <div class="v-time-picker-title__time">
@@ -320,9 +314,7 @@ exports[`VTimePicker.js should change am/pm when updated from model 1`] = `
 
 exports[`VTimePicker.js should render colored time picker 1`] = `
 
-<div class="v-picker v-picker--time v-card"
-     style="height: auto;"
->
+<div class="v-picker v-card v-picker--time">
   <div class="v-picker__title orange darken-1">
     <div class="v-time-picker-title">
       <div class="v-time-picker-title__time">
@@ -426,9 +418,7 @@ exports[`VTimePicker.js should render colored time picker 1`] = `
 
 exports[`VTimePicker.js should render colored time picker 2`] = `
 
-<div class="v-picker v-picker--time v-card"
-     style="height: auto;"
->
+<div class="v-picker v-card v-picker--time">
   <div class="v-picker__title orange darken-1">
     <div class="v-time-picker-title">
       <div class="v-time-picker-title__time">
@@ -532,9 +522,7 @@ exports[`VTimePicker.js should render colored time picker 2`] = `
 
 exports[`VTimePicker.js should render dark time picker 1`] = `
 
-<div class="v-picker v-picker--time v-card theme--dark"
-     style="height: auto;"
->
+<div class="v-picker v-card v-picker--time theme--dark">
   <div class="v-picker__title">
     <div class="v-time-picker-title">
       <div class="v-time-picker-title__time">
@@ -638,9 +626,7 @@ exports[`VTimePicker.js should render dark time picker 1`] = `
 
 exports[`VTimePicker.js should render landscape component 1`] = `
 
-<div class="v-picker v-picker--time v-card v-picker--landscape"
-     style="height: auto;"
->
+<div class="v-picker v-card v-picker--time v-picker--landscape">
   <div class="v-picker__title v-picker__title--landscape primary">
     <div class="v-time-picker-title">
       <div class="v-time-picker-title__time">

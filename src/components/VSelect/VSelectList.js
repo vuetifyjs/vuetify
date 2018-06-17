@@ -1,5 +1,6 @@
+import '../../stylus/components/_cards.styl'
+
 // Components
-import VCard from '../VCard'
 import VCheckbox from '../VCheckbox'
 import VDivider from '../VDivider'
 import VSubheader from '../VSubheader'
@@ -225,12 +226,9 @@ export default {
 
     children.length || children.push(this.$slots['no-data'] || this.staticNoDataTile)
 
-    return this.$createElement(VCard, {
-      staticClass: 'v-select-list',
-      props: {
-        dark: this.dark,
-        light: this.light
-      }
+    return this.$createElement('div', {
+      staticClass: 'v-select-list v-card',
+      'class': this.themeClasses
     }, [
       this.$createElement(VList, {
         props: {
