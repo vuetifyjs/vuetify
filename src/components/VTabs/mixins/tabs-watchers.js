@@ -13,7 +13,7 @@ export default {
       if (!tab) return
 
       const action = tab.action
-      this.tabItems && this.tabItems(action === tab ? this.tabs.indexOf(tab).toString() : action)
+      this.tabItems && this.tabItems(action === tab ? this.tabs.indexOf(tab) : action)
     },
     alignWithTitle: 'callSlider',
     centered: 'callSlider',

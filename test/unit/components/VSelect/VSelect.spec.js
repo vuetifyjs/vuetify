@@ -452,7 +452,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     const event = new Event('mouseup')
     Object.defineProperty(event, 'target', { writable: false, value: icon.element })
 
-    wrapper.element.dispatchEvent(event)
+    slot.element.dispatchEvent(event)
 
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.isMenuActive).toBe(false)

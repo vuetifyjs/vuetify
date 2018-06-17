@@ -516,4 +516,67 @@ test('VTabs', ({ mount, shallow }) => {
 
     expect(setWidths).toHaveBeenCalledTimes(2)
   })
+
+  it('should set input value when using indexes or action', async () => {
+    let wrapper = mount(VTabs, {
+      slots: {
+        default: [VTab, VTab, VTab]
+      }
+    })
+
+    let tabs = wrapper.find(VTab)
+
+    expect(wrapper.vm.inputValue).toBe(undefined)
+
+    // No action should use index
+    wrapper.vm.tabClick(tabs[0].vm)
+    expect(wrapper.vm.inputValue).toBe(0)
+    wrapper.vm.tabClick(tabs[2].vm)
+    expect(wrapper.vm.inputValue).toBe(2)
+
+    wrapper = mount(VTabs, {
+      slots: {
+        default: [
+          {
+            extends: VTab,
+            props: {
+              href: {
+                type: String,
+                default: 'foo'
+              }
+            }
+          },
+          {
+            extends: VTab,
+            props: {
+              href: {
+                type: String,
+                default: 'foobar'
+              }
+            }
+          },
+          {
+            extends: VTab,
+            props: {
+              href: {
+                type: String,
+                default: 'fizzbuzz'
+              }
+            }
+          }
+        ]
+      }
+    })
+
+    tabs = wrapper.find(VTab)
+
+    expect(wrapper.vm.inputValue).toBe(undefined)
+
+    wrapper.vm.tabClick(tabs[1].vm)
+    expect(wrapper.vm.inputValue).toBe('foobar')
+    wrapper.vm.tabClick(tabs[2].vm)
+    expect(wrapper.vm.inputValue).toBe('fizzbuzz')
+    wrapper.vm.tabClick(tabs[0].vm)
+    expect(wrapper.vm.inputValue).toBe('foo')
+  })
 })

@@ -245,35 +245,6 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
     expect(wrapper.vm.isMenuActive).toBe(false)
   })
 
-  it('should emit custom value on blur', async () => {
-    const wrapper = shallow(VAutocomplete, {
-      propsData: { combobox: true }
-    })
-
-    const input = wrapper.first('input')
-
-    const change = jest.fn()
-    wrapper.vm.$on('change', change)
-
-    input.trigger('focus')
-    await wrapper.vm.$nextTick()
-
-    input.element.value = 'foo'
-    input.trigger('input')
-
-    input.trigger('blur')
-    expect(change).toHaveBeenCalledWith('foo')
-
-    input.trigger('keydown.esc')
-    expect(wrapper.vm.isMenuActive).toBe(false)
-
-    input.element.value = ''
-    input.trigger('input')
-
-    await wrapper.vm.$nextTick()
-    expect(wrapper.vm.isMenuActive).toBe(false)
-  })
-
   it('should change selected index', async () => {
     const wrapper = shallow(VAutocomplete, {
       attachToDocument: true,
@@ -411,18 +382,6 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
     expect(wrapper.vm.isMenuActive).toBe(false)
     expect(wrapper.vm.menuCanShow).toBe(true)
 
-    // Should not show menu
-    wrapper.setProps({
-      combobox: true,
-      searchInput: 'foobar'
-    })
-
-    expect(wrapper.vm.menuCanShow).toBe(false)
-
-    slot.trigger('click')
-
-    expect(wrapper.vm.isMenuActive).toBe(false)
-
     // TODO: Add expects for tags when impl
   })
 
@@ -466,35 +425,16 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
   })
 
   it('should call methods on blur', () => {
-    const updateTags = jest.fn()
-    const updateCombobox = jest.fn()
     const updateAutocomplete = jest.fn()
     const wrapper = shallow(VAutocomplete, {
       methods: {
-        updateAutocomplete,
-        updateCombobox,
-        updateTags
+        updateAutocomplete
       }
     })
 
     wrapper.vm.onEnterDown()
 
     expect(updateAutocomplete).toHaveBeenCalledTimes(1)
-
-    wrapper.setProps({ combobox: true })
-
-    wrapper.vm.onEnterDown()
-
-    expect(updateCombobox).toHaveBeenCalledTimes(1)
-
-    wrapper.setProps({
-      combobox: false,
-      tags: true
-    })
-
-    wrapper.vm.onEnterDown()
-
-    expect(updateTags).toHaveBeenCalledTimes(1)
   })
 
   it('should select input text on focus', async () => {
@@ -541,50 +481,6 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
     slot.trigger('click')
 
     expect(onFocus).toBeCalled()
-  })
-
-  it('should react to tabs', async () => {
-    const updateTags = jest.fn()
-    const wrapper = mount(VAutocomplete, {
-      propsData: {
-        items: ['fizz', 'buzz'],
-        tags: true
-      },
-      methods: {
-        updateTags
-      }
-    })
-
-    const input = wrapper.first('input')
-    const menu = wrapper.first('.v-menu')
-    const tile = wrapper.first('.v-list__tile')
-
-    input.trigger('focus')
-    input.element.value = 'foo'
-    input.trigger('input')
-    input.trigger('keydown.tab')
-
-    expect(wrapper.vm.getMenuIndex()).toBe(-1)
-    expect(updateTags).toBeCalled()
-
-    input.trigger('focus')
-    input.element.value = 'fizz'
-    input.trigger('input')
-    menu.trigger('keydown.down')
-
-    // Allow dom to update class for
-    // selected tile
-    await wrapper.vm.$nextTick()
-
-    expect(wrapper.vm.isMenuActive).toBe(true)
-    expect(wrapper.vm.getMenuIndex()).toBe(0)
-
-    input.trigger('keydown.tab')
-
-    // We overwrite update tags so above
-    // is does not persist
-    expect(wrapper.vm.internalValue).toEqual(['fizz'])
-    expect(updateTags).toHaveBeenCalledTimes(2)
   })
 
   it('should react to keydown', () => {

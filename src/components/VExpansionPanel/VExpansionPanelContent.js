@@ -14,7 +14,7 @@ import { consoleWarn } from '../../util/console'
 export default {
   name: 'v-expansion-panel-content',
 
-  mixins: [Bootable, Toggleable, Rippleable, RegistrableInject('expansionPanel', 'v-expansion-panel', 'v-expansion-panel-content')],
+  mixins: [Bootable, Toggleable, Rippleable, RegistrableInject('expansionPanel', 'v-expansion-panel-content', 'v-expansion-panel')],
 
   directives: {
     ClickOutside

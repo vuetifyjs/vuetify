@@ -167,8 +167,8 @@ exports[`VDialog.js should render component with custom width and match snapshot
 <div class="v-dialog__container"
      style="display: block;"
 >
-  <div class="v-dialog__content"
-       tabindex="-1"
+  <div tabindex="-1"
+       class="v-dialog__content"
        style="z-index: 0;"
   >
     <div class="v-dialog"

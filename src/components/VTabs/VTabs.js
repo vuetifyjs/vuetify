@@ -147,10 +147,10 @@ export default {
       this.setOverflow()
     },
     findActiveLink () {
-      if (!this.tabs.length || this.lazyValue) return
+      if (!this.tabs.length) return
 
       const activeIndex = this.tabs.findIndex((tabItem, index) => {
-        const id = tabItem.action === tabItem ? index.toString() : tabItem.action
+        const id = tabItem.action === tabItem ? index : tabItem.action
         return id === this.lazyValue ||
           tabItem.$el.firstChild.className.indexOf(this.activeClass) > -1
       })
