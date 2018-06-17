@@ -24,11 +24,11 @@ exports[`VSelect should only show items if they are in items 1`] = `
               <div class="v-select__selection v-select__selection--comma">
                 foo
               </div>
-              <input disabled="disabled"
+              <input readonly="readonly"
                      tabindex="0"
                      type="text"
                      autocomplete="on"
-                     aria-disabled="false"
+                     aria-readonly="false"
               >
             </div>
             <div class="v-input__append-inner">
@@ -68,11 +68,11 @@ exports[`VSelect should only show items if they are in items 2`] = `
         <div class="v-menu__activator">
           <div class="v-select__slot">
             <div class="v-select__selections">
-              <input disabled="disabled"
+              <input readonly="readonly"
                      tabindex="0"
                      type="text"
                      autocomplete="on"
-                     aria-disabled="false"
+                     aria-readonly="false"
               >
             </div>
             <div class="v-input__append-inner">
@@ -115,11 +115,11 @@ exports[`VSelect should only show items if they are in items 3`] = `
               <div class="v-select__selection v-select__selection--comma">
                 bar
               </div>
-              <input disabled="disabled"
+              <input readonly="readonly"
                      tabindex="0"
                      type="text"
                      autocomplete="on"
-                     aria-disabled="false"
+                     aria-readonly="false"
               >
             </div>
             <div class="v-input__append-inner">
@@ -165,11 +165,11 @@ exports[`VSelect should only show items if they are in items 4`] = `
               <div class="v-select__selection v-select__selection--comma">
                 bar
               </div>
-              <input disabled="disabled"
+              <input readonly="readonly"
                      tabindex="0"
                      type="text"
                      autocomplete="on"
-                     aria-disabled="false"
+                     aria-readonly="false"
               >
             </div>
             <div class="v-input__append-inner">
@@ -209,11 +209,11 @@ exports[`VSelect should render v-select correctly when not using scope slot 1`] 
         <div class="v-menu__activator">
           <div class="v-select__slot">
             <div class="v-select__selections">
-              <input disabled="disabled"
+              <input readonly="readonly"
                      tabindex="0"
                      type="text"
                      autocomplete="on"
-                     aria-disabled="false"
+                     aria-readonly="false"
               >
             </div>
             <div class="v-input__append-inner">
@@ -253,11 +253,11 @@ exports[`VSelect should render v-select correctly when not using v-list-tile in 
         <div class="v-menu__activator">
           <div class="v-select__slot">
             <div class="v-select__selections">
-              <input disabled="disabled"
+              <input readonly="readonly"
                      tabindex="0"
                      type="text"
                      autocomplete="on"
-                     aria-disabled="false"
+                     aria-readonly="false"
               >
             </div>
             <div class="v-input__append-inner">
@@ -302,11 +302,11 @@ exports[`VSelect should render v-select correctly when using v-list-tile in item
                   1
                 </div>
               </div>
-              <input disabled="disabled"
+              <input readonly="readonly"
                      tabindex="0"
                      type="text"
                      autocomplete="on"
-                     aria-disabled="false"
+                     aria-readonly="false"
               >
             </div>
             <div class="v-input__append-inner">
@@ -349,11 +349,11 @@ exports[`VSelect should use scoped slot for selection generation 1`] = `
               <div>
                 foo - from slot
               </div>
-              <input disabled="disabled"
+              <input readonly="readonly"
                      tabindex="0"
                      type="text"
                      autocomplete="on"
-                     aria-disabled="false"
+                     aria-readonly="false"
               >
             </div>
             <div class="v-input__append-inner">

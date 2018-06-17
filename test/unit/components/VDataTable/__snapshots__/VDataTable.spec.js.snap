@@ -79,11 +79,11 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
                 <div class="v-menu__activator">
                   <div class="v-select__slot">
                     <div class="v-select__selections">
-                      <input disabled="disabled"
+                      <input readonly="readonly"
                              tabindex="0"
                              type="text"
                              autocomplete="on"
-                             aria-disabled="false"
+                             aria-readonly="false"
                       >
                     </div>
                     <div class="v-input__append-inner">
@@ -266,11 +266,11 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
                 <div class="v-menu__activator">
                   <div class="v-select__slot">
                     <div class="v-select__selections">
-                      <input disabled="disabled"
+                      <input readonly="readonly"
                              tabindex="0"
                              type="text"
                              autocomplete="on"
-                             aria-disabled="false"
+                             aria-readonly="false"
                       >
                     </div>
                     <div class="v-input__append-inner">
@@ -455,11 +455,11 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
                 <div class="v-menu__activator">
                   <div class="v-select__slot">
                     <div class="v-select__selections">
-                      <input disabled="disabled"
+                      <input readonly="readonly"
                              tabindex="0"
                              type="text"
                              autocomplete="on"
-                             aria-disabled="false"
+                             aria-readonly="false"
                       >
                     </div>
                     <div class="v-input__append-inner">
