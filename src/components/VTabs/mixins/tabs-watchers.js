@@ -16,10 +16,15 @@ export default {
       this.tabItems && this.tabItems(action === tab ? this.tabs.indexOf(tab) : action)
     },
     alignWithTitle: 'callSlider',
+    centerActiveTab (val) {
+      val && this.callSlider()
+    },
     centered: 'callSlider',
     fixedTabs: 'callSlider',
     hasArrows (val) {
       if (!val) this.scrollOffset = 0
+      this.setWidths()
+      this.callSlider()
     },
     isBooted: 'findActiveLink',
     lazyValue: 'updateTabs',
@@ -31,10 +36,7 @@ export default {
     '$vuetify.application.right': 'onResize',
     scrollOffset (val) {
       this.$refs.container.style.transform = `translateX(${-val}px)`
-      if (this.hasArrows) {
-        this.prevIconVisible = this.checkPrevIcon()
-        this.nextIconVisible = this.checkNextIcon()
-      }
+      this.hasArrows && this.checkIcons()
     }
   }
 }

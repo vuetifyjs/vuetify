@@ -77,7 +77,9 @@ export default {
   },
 
   watch: {
-    tabs: 'onResize'
+    tabs () {
+      this.$nextTick(this.onResize)
+    }
   },
 
   mounted () {
@@ -109,6 +111,7 @@ export default {
         if (!activeTab || !activeTab.$el) return
         this.sliderWidth = activeTab.$el.scrollWidth
         this.sliderLeft = activeTab.$el.offsetLeft
+        this.centerActiveTab && this.centerActiveTabInWrapper()
       })
     },
     /**
@@ -140,11 +143,20 @@ export default {
     setWidths () {
       const bar = this.$refs.bar ? this.$refs.bar.clientWidth : 0
       const container = this.$refs.container ? this.$refs.container.clientWidth : 0
-      const wrapper = this.$refs.wrapper ? this.$refs.wrapper.clientWidth : 0
+      const wrapper = bar ? (bar - 80 * this.hasArrows) : 0
 
       this.widths = { bar, container, wrapper }
 
       this.setOverflow()
+    },
+    centerActiveTabInWrapper () {
+      if (!this.activeTab || !this.isOverflowing) {
+        return
+      }
+
+      const previousWidths = this.tabs.slice(0, this.activeIndex).reduce((sum, tab) => sum + tab.$el.offsetWidth, 0)
+      let newOffset = previousWidths + this.activeTab.$el.offsetWidth / 2 - this.widths.wrapper / 2
+      this.scrollOffset = Math.min(this.maxScrollOffset, Math.max(0, newOffset))
     },
     findActiveLink () {
       if (!this.tabs.length) return
@@ -211,7 +223,7 @@ export default {
     },
     tabClick (tab) {
       this.inputValue = tab.action === tab ? this.tabs.indexOf(tab) : tab.action
-      this.scrollIntoView()
+      this.centerActiveTab || this.scrollIntoView()
     },
     tabProxy (val) {
       this.lazyValue = val

@@ -197,7 +197,6 @@ test('VTabs', ({ mount, shallow }) => {
     })
 
     wrapper.setData({ isOverflowing: true })
-    await wrapper.vm.$nextTick()
     expect(wrapper.find('.v-tabs__wrapper--show-arrows')).toHaveLength(1)
     expect(wrapper.html()).toMatchSnapshot()
   })
@@ -216,7 +215,7 @@ test('VTabs', ({ mount, shallow }) => {
 
     expect(wrapper.vm.genIcon('prev')).toBe(null)
 
-    // // Mock display state
+    // Mock display state
     wrapper.setData({ isOverflowing: true, scrollOffset: 1 })
     wrapper.setProps({ showArrows: true })
     wrapper.vm.$vuetify.breakpoint.width = 800

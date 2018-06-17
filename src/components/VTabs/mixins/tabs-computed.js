@@ -36,6 +36,9 @@ export default {
     isMobile () {
       return this.$vuetify.breakpoint.width < this.mobileBreakPoint
     },
+    maxScrollOffset () {
+      return this.widths.container - this.widths.wrapper
+    },
     sliderStyles () {
       return {
         left: `${this.sliderLeft}px`,
