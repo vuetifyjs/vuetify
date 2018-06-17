@@ -3,16 +3,10 @@
 
 /* Themes */
 
-v-picker($material)
-  color: $material.text.primary
-
-dark(v-picker, 'v-picker')
-
 v-picker-title($material)
-  .v-picker__title
-    background: $material.picker.title
+  background: $material.picker.title
 
-theme(v-picker-title, "v-picker")
+theme(v-picker-title, "v-picker__title")
 
 v-picker-body($material)
   background: $material.picker.body
@@ -25,10 +19,6 @@ theme(v-picker-body, 'v-picker__body')
   display: inline-flex
   flex-direction: column
   vertical-align: top
-
-  .card__row--actions
-    border: none
-    margin-top: -20px
 
 .v-picker--full-width
   display: flex
