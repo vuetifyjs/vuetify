@@ -3,7 +3,7 @@
 exports[`VCarousel.js should render component and match snapshot 1`] = `
 
 <div class="v-carousel">
-  <div class="v-carousel__left">
+  <div class="v-carousel__prev">
     <button type="button"
             class="v-btn v-btn--icon theme--dark"
     >
@@ -17,7 +17,7 @@ exports[`VCarousel.js should render component and match snapshot 1`] = `
       </div>
     </button>
   </div>
-  <div class="v-carousel__right">
+  <div class="v-carousel__next">
     <button type="button"
             class="v-btn v-btn--icon theme--dark"
     >
@@ -40,7 +40,7 @@ exports[`VCarousel.js should render component and match snapshot 1`] = `
 exports[`VCarousel.js should render component with custom duration between image cycles and match snapshot 1`] = `
 
 <div class="v-carousel">
-  <div class="v-carousel__left">
+  <div class="v-carousel__prev">
     <button type="button"
             class="v-btn v-btn--icon theme--dark"
     >
@@ -54,7 +54,7 @@ exports[`VCarousel.js should render component with custom duration between image
       </div>
     </button>
   </div>
-  <div class="v-carousel__right">
+  <div class="v-carousel__next">
     <button type="button"
             class="v-btn v-btn--icon theme--dark"
     >
@@ -77,7 +77,7 @@ exports[`VCarousel.js should render component with custom duration between image
 exports[`VCarousel.js should render component with custom icon and match snapshot 1`] = `
 
 <div class="v-carousel">
-  <div class="v-carousel__left">
+  <div class="v-carousel__prev">
     <button type="button"
             class="v-btn v-btn--icon theme--dark"
     >
@@ -91,7 +91,7 @@ exports[`VCarousel.js should render component with custom icon and match snapsho
       </div>
     </button>
   </div>
-  <div class="v-carousel__right">
+  <div class="v-carousel__next">
     <button type="button"
             class="v-btn v-btn--icon theme--dark"
     >
@@ -180,7 +180,7 @@ exports[`VCarousel.js should render component with custom icon and match snapsho
 exports[`VCarousel.js should render component with custom next icon and match snapshot 1`] = `
 
 <div class="v-carousel">
-  <div class="v-carousel__left">
+  <div class="v-carousel__prev">
     <button type="button"
             class="v-btn v-btn--icon theme--dark"
     >
@@ -194,7 +194,7 @@ exports[`VCarousel.js should render component with custom next icon and match sn
       </div>
     </button>
   </div>
-  <div class="v-carousel__right">
+  <div class="v-carousel__next">
     <button type="button"
             class="v-btn v-btn--icon theme--dark"
     >
@@ -217,7 +217,7 @@ exports[`VCarousel.js should render component with custom next icon and match sn
 exports[`VCarousel.js should render component with custom prev icon and match snapshot 1`] = `
 
 <div class="v-carousel">
-  <div class="v-carousel__left">
+  <div class="v-carousel__prev">
     <button type="button"
             class="v-btn v-btn--icon theme--dark"
     >
@@ -231,7 +231,7 @@ exports[`VCarousel.js should render component with custom prev icon and match sn
       </div>
     </button>
   </div>
-  <div class="v-carousel__right">
+  <div class="v-carousel__next">
     <button type="button"
             class="v-btn v-btn--icon theme--dark"
     >
@@ -254,7 +254,7 @@ exports[`VCarousel.js should render component with custom prev icon and match sn
 exports[`VCarousel.js should render component with image cycling off and match snapshot 1`] = `
 
 <div class="v-carousel">
-  <div class="v-carousel__left">
+  <div class="v-carousel__prev">
     <button type="button"
             class="v-btn v-btn--icon theme--dark"
     >
@@ -268,7 +268,7 @@ exports[`VCarousel.js should render component with image cycling off and match s
       </div>
     </button>
   </div>
-  <div class="v-carousel__right">
+  <div class="v-carousel__next">
     <button type="button"
             class="v-btn v-btn--icon theme--dark"
     >
@@ -291,7 +291,7 @@ exports[`VCarousel.js should render component with image cycling off and match s
 exports[`VCarousel.js should render component with selected active item 1`] = `
 
 <div class="v-carousel">
-  <div class="v-carousel__left">
+  <div class="v-carousel__prev">
     <button type="button"
             class="v-btn v-btn--icon theme--dark"
     >
@@ -305,7 +305,7 @@ exports[`VCarousel.js should render component with selected active item 1`] = `
       </div>
     </button>
   </div>
-  <div class="v-carousel__right">
+  <div class="v-carousel__next">
     <button type="button"
             class="v-btn v-btn--icon theme--dark"
     >
@@ -394,7 +394,7 @@ exports[`VCarousel.js should render component with selected active item 1`] = `
 exports[`VCarousel.js should render component without delimiters 1`] = `
 
 <div class="v-carousel">
-  <div class="v-carousel__left">
+  <div class="v-carousel__prev">
     <button type="button"
             class="v-btn v-btn--icon theme--dark"
     >
@@ -408,7 +408,7 @@ exports[`VCarousel.js should render component without delimiters 1`] = `
       </div>
     </button>
   </div>
-  <div class="v-carousel__right">
+  <div class="v-carousel__next">
     <button type="button"
             class="v-btn v-btn--icon theme--dark"
     >
@@ -459,7 +459,7 @@ exports[`VCarousel.js should render component without delimiters 1`] = `
 exports[`VCarousel.js should render component without next icon and match snapshot 1`] = `
 
 <div class="v-carousel">
-  <div class="v-carousel__left">
+  <div class="v-carousel__prev">
     <button type="button"
             class="v-btn v-btn--icon theme--dark"
     >
@@ -482,7 +482,7 @@ exports[`VCarousel.js should render component without next icon and match snapsh
 exports[`VCarousel.js should render component without prev icon and match snapshot 1`] = `
 
 <div class="v-carousel">
-  <div class="v-carousel__right">
+  <div class="v-carousel__next">
     <button type="button"
             class="v-btn v-btn--icon theme--dark"
     >
