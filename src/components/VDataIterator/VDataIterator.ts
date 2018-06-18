@@ -5,10 +5,6 @@ import { getObjectValueByPath } from '../../util/helpers'
 
 function wrapInArray<T> (v: T | Array<T>): Array<T> { return Array.isArray(v) ? v : [v] }
 
-type BooleanMap = {
-  [key: string]: boolean
-}
-
 export default Vue.extend({
   name: 'v-data-iterator',
 
@@ -196,8 +192,8 @@ export default Vue.extend({
   data () {
     return {
       searchItemsLength: 0,
-      selection: {} as BooleanMap,
-      expansion: {} as BooleanMap,
+      selection: {} as Record<string, boolean>,
+      expansion: {} as Record<string, boolean>,
       options: {
         sortBy: wrapInArray(this.sortBy),
         sortDesc: wrapInArray(this.sortDesc),
@@ -334,7 +330,7 @@ export default Vue.extend({
       this.expansion = {}
     },
     toggleSelected (): void {
-      const selection: BooleanMap = {}
+      const selection: Record<string, boolean> = {}
 
       this.computedItems.forEach((item: any) => {
         const value = item[this.itemKey]

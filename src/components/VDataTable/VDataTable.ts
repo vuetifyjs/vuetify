@@ -14,14 +14,14 @@ import mixins from '../../util/mixins'
 import { VNode, CreateElement, VNodeData, VNodeChildren, VNodeChildrenArrayContents } from 'vue'
 import { PropValidator } from 'vue/types/options'
 
-export type TableHeader = {
+export interface TableHeader {
   text: string
   value: string
-  align: 'left' | 'center' | 'right'
-  sortable: boolean
-  class: string | string[]
-  width: string
-  filter: (v: any) => boolean
+  align?: 'left' | 'center' | 'right'
+  sortable?: boolean
+  class?: string | string[]
+  width?: string | number | null
+  filter?: (v: any) => boolean
 }
 
 export default mixins(VDataIterator).extend({
@@ -75,10 +75,11 @@ export default mixins(VDataIterator).extend({
 
   methods: {
     searchItems (items: any[]) {
-      const headers = this.headers.filter((h: TableHeader) => h.filter)
-
-      if (headers.length) {
-        items = items.filter(i => headers.every((h: TableHeader) => h.filter(i[h.value])))
+      // If we have column-specific filters, run them here
+      // Right now an item has to pass all filters, this might not be ideal
+      const filterableHeaders = this.headers.filter(h => !!h.filter)
+      if (filterableHeaders.length) {
+        items = items.filter(i => filterableHeaders.every(h => h.filter!(i[h.value])))
         this.searchItemsLength = items.length
       }
 
