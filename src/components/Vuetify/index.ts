@@ -4,7 +4,7 @@ import icons from './mixins/icons'
 import options from './mixins/options'
 import genLang from './mixins/lang'
 import { consoleWarn } from '../../util/console'
-import goTo from './util/goTo'
+import goTo from './goTo'
 import { VueConstructor } from 'vue/types'
 import { Vuetify as VuetifyPlugin } from 'types'
 
