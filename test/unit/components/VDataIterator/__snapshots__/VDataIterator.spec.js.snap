@@ -47,9 +47,7 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
                 <div class="v-menu__content v-menu__content--auto"
                      style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
                 >
-                  <div class="v-select-list v-card"
-                       style="height: auto;"
-                  >
+                  <div class="v-select-list v-card">
                     <div class="v-list">
                       <div>
                         <a class="v-list__tile v-list__tile--link v-list__tile--active primary--text">
@@ -192,9 +190,7 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
                 <div class="v-menu__content v-menu__content--auto"
                      style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
                 >
-                  <div class="v-select-list v-card"
-                       style="height: auto;"
-                  >
+                  <div class="v-select-list v-card">
                     <div class="v-list">
                       <div>
                         <a class="v-list__tile v-list__tile--link v-list__tile--active primary--text">
@@ -328,9 +324,7 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
                 <div class="v-menu__content v-menu__content--auto"
                      style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
                 >
-                  <div class="v-select-list v-card"
-                       style="height: auto;"
-                  >
+                  <div class="v-select-list v-card">
                     <div class="v-list">
                       <div>
                         <a class="v-list__tile v-list__tile--link v-list__tile--active primary--text">
@@ -468,9 +462,7 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
                 <div class="v-menu__content v-menu__content--auto"
                      style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
                 >
-                  <div class="v-select-list v-card"
-                       style="height: auto;"
-                  >
+                  <div class="v-select-list v-card">
                     <div class="v-list">
                       <div>
                         <a class="v-list__tile v-list__tile--link v-list__tile--active primary--text">

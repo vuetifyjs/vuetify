@@ -2,9 +2,7 @@
 
 exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
 
-<div class="v-picker v-picker--date v-card"
-     style="height: auto;"
->
+<div class="v-picker v-card v-picker--date">
   <div class="v-picker__title orange darken-1">
     <div class="v-date-picker-title">
       <div class="v-picker__title__btn v-date-picker-title__year">
@@ -373,9 +371,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
 
 exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
 
-<div class="v-picker v-picker--date v-card"
-     style="height: auto;"
->
+<div class="v-picker v-card v-picker--date">
   <div class="v-picker__title orange darken-1">
     <div class="v-date-picker-title">
       <div class="v-picker__title__btn v-date-picker-title__year">
@@ -744,9 +740,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
 
 exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
 
-<div class="v-picker v-picker--date v-card theme--dark"
-     style="height: auto;"
->
+<div class="v-picker v-card v-picker--date theme--dark">
   <div class="v-picker__title">
     <div class="v-date-picker-title">
       <div class="v-picker__title__btn v-date-picker-title__year">
@@ -1126,9 +1120,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
 
 exports[`VDatePicker.js should match snapshot with default settings 1`] = `
 
-<div class="v-picker v-picker--date v-card"
-     style="height: auto;"
->
+<div class="v-picker v-card v-picker--date">
   <div class="v-picker__title primary">
     <div class="v-date-picker-title">
       <div class="v-picker__title__btn v-date-picker-title__year">
@@ -1530,9 +1522,7 @@ exports[`VDatePicker.js should match snapshot with year icon 1`] = `
 
 exports[`VDatePicker.js should render component with min/max props 1`] = `
 
-<div class="v-picker v-picker--date v-card"
-     style="height: auto;"
->
+<div class="v-picker v-card v-picker--date">
   <div class="v-picker__title primary">
     <div class="v-date-picker-title">
       <div class="v-picker__title__btn v-date-picker-title__year">
@@ -1928,9 +1918,7 @@ exports[`VDatePicker.js should render component with min/max props 1`] = `
 
 exports[`VDatePicker.js should render component with min/max props 2`] = `
 
-<div class="v-picker v-picker--date v-card"
-     style="height: auto;"
->
+<div class="v-picker v-card v-picker--date">
   <div class="v-picker__title primary">
     <div class="v-date-picker-title">
       <div class="v-picker__title__btn v-date-picker-title__year">
@@ -2492,9 +2480,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
 
 exports[`VDatePicker.js should render component with min/max props 3`] = `
 
-<div class="v-picker v-picker--date v-card"
-     style="height: auto;"
->
+<div class="v-picker v-card v-picker--date">
   <div class="v-picker__title primary">
     <div class="v-date-picker-title">
       <div class="v-picker__title__btn v-date-picker-title__year active">
@@ -3063,9 +3049,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
 
 exports[`VDatePicker.js should render readonly picker 1`] = `
 
-<div class="v-picker v-picker--date v-card"
-     style="height: auto;"
->
+<div class="v-picker v-card v-picker--date">
   <div class="v-picker__title primary">
     <div class="v-date-picker-title"
          style="pointer-events: none;"

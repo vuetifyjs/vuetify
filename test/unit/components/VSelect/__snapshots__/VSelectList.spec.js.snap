@@ -2,9 +2,7 @@
 
 exports[`VSelect should display no-data-text when item slot is provided 1`] = `
 
-<div class="v-select-list v-card"
-     style="height: auto;"
->
+<div class="v-select-list v-card">
   <div class="v-list">
     <div disabled="disabled"
          class="v-list--disabled"
@@ -24,9 +22,7 @@ exports[`VSelect should display no-data-text when item slot is provided 1`] = `
 
 exports[`VSelect should generate children 1`] = `
 
-<div class="v-select-list v-card"
-     style="height: auto;"
->
+<div class="v-select-list v-card">
   <div class="v-list">
     <div class="v-subheader">
       true

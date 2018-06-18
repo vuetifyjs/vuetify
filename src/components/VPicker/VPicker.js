@@ -1,7 +1,5 @@
 import '../../stylus/components/_pickers.styl'
-
-// Components
-import VCard from '../VCard'
+import '../../stylus/components/_cards.styl'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
@@ -77,8 +75,8 @@ export default {
   },
 
   render (h) {
-    return h(VCard, {
-      staticClass: 'v-picker',
+    return h('div', {
+      staticClass: 'v-picker v-card',
       'class': {
         'v-picker--landscape': this.landscape,
         ...this.themeClasses
