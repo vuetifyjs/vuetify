@@ -197,15 +197,19 @@ export default {
   },
 
   watch: {
+    // eslint-disable-next-line object-shorthand
     'options.sortBy': function (v) {
       this.$emit('update:sortBy', !this.multiSort && !Array.isArray(this.sortBy) ? v[0] : v)
     },
+    // eslint-disable-next-line object-shorthand
     'options.sortDesc': function (v) {
       this.$emit('update:sortDesc', !this.multiSort && !Array.isArray(this.sortBy) ? v[0] : v)
     },
+    // eslint-disable-next-line object-shorthand
     'options.page': function (v) {
       this.$emit('update:page', v)
     },
+    // eslint-disable-next-line object-shorthand
     'options.rowsPerPage': function (v) {
       this.$emit('update:rowsPerPage', v)
     },
