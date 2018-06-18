@@ -82,6 +82,8 @@ export interface VuetifyIcons {
   radioOn: string
   radioOff: string
   edit: string
+  first: string
+  last: string
 }
 
 export interface VuetifyApplication {
