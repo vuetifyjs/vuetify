@@ -20,7 +20,7 @@ export interface TableHeader {
   align?: 'left' | 'center' | 'right'
   sortable?: boolean
   class?: string | string[]
-  width?: string | number | null
+  width?: string | number
   filter?: (v: any) => boolean
 }
 
@@ -68,7 +68,7 @@ export default mixins(VDataIterator).extend({
     isFlexWidth (): boolean {
       return this.static ? false : this.headers.some((h: TableHeader) => !!h.width && !isNaN(Number(h.width)))
     },
-    widths (): any[] {
+    widths (): (string | number | null)[] {
       return this.static ? [] : this.headers.map((h: TableHeader) => h.width || (this.isFlexWidth ? 1 : null))
     }
   },
