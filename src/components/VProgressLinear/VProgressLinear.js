@@ -85,22 +85,21 @@ export default {
 
   methods: {
     genDeterminate (h) {
-      return h('div', {
+      return h('div', this.setBackground(this.color, {
         ref: 'front',
         staticClass: `v-progress-linear__bar__determinate`,
-        class: this.addBackgroundColorClassChecks(),
         style: {
           width: `${this.effectiveWidth}%`
         }
-      })
+      }))
     },
     genBar (h, name) {
-      return h('div', {
+      return h('div', this.setBackground(this.color, {
         staticClass: 'v-progress-linear__bar__indeterminate',
-        class: this.addBackgroundColorClassChecks({
+        class: {
           [name]: true
-        })
-      })
+        }
+      }))
     },
     genIndeterminate (h) {
       return h('div', {

@@ -66,25 +66,21 @@ export default {
   },
 
   computed: {
-    classes () {
-      const classes = {
-        'v-radio--is-disabled': this.isDisabled,
-        'v-radio--is-focused': this.isFocused,
-        'theme--dark': this.dark,
-        'theme--light': this.light
-      }
+    computedData () {
+      const setColor = (!this.parentError && this.isActive) ? this.setText : (c, v) => v
 
-      if (!this.parentError && this.isActive) {
-        return this.addTextColorClassChecks(classes)
-      }
-
-      return classes
+      return setColor(this.color, {
+        staticClass: 'v-radio',
+        'class': {
+          'v-radio--is-disabled': this.isDisabled,
+          'v-radio--is-focused': this.isFocused,
+          'theme--dark': this.dark,
+          'theme--light': this.light
+        }
+      })
     },
-    classesSelectable () {
-      return this.addTextColorClassChecks(
-        {},
-        this.isActive ? this.color : this.validationStateProxy
-      )
+    computedColor () {
+      return this.isActive ? this.color : this.validationStateProxy
     },
     computedIcon () {
       return this.isActive
@@ -154,12 +150,8 @@ export default {
           'aria-checked': this.isActive.toString(),
           ...this.$attrs
         }),
-        this.genRipple({
-          'class': this.classesSelectable
-        }),
-        this.$createElement(VIcon, {
-          'class': this.classesSelectable
-        }, this.computedIcon)
+        this.genRipple(this.setText(this.computedColor, {})),
+        this.$createElement(VIcon, this.setText(this.computedColor, {}), this.computedIcon)
       ])
     },
     onFocus () {
@@ -179,10 +171,7 @@ export default {
   },
 
   render (h) {
-    return h('div', {
-      staticClass: 'v-radio',
-      class: this.classes
-    }, [
+    return h('div', this.computedData, [
       this.genRadio(),
       this.genLabel()
     ])

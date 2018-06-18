@@ -78,18 +78,18 @@ export default {
   },
 
   render (h) {
-    const data = {
+    const data = this.setBackground(this.color, {
       staticClass: 'v-footer',
-      'class': this.addBackgroundColorClassChecks({
+      'class': {
         'v-footer--absolute': this.absolute,
         'v-footer--fixed': !this.absolute && (this.app || this.fixed),
         'v-footer--inset': this.inset,
         'theme--dark': this.dark,
         'theme--light': this.light
-      }),
+      },
       style: this.styles,
       ref: 'content'
-    }
+    })
 
     return h('footer', data, this.$slots.default)
   }

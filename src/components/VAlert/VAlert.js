@@ -28,19 +28,9 @@ export default {
     }
   },
 
-  data: () => ({
-    defaultColor: 'error'
-  }),
-
   computed: {
-    classes () {
-      const color = (this.type && !this.color) ? this.type : this.computedColor
-      const classes = {
-        'v-alert--outline': this.outline
-      }
-
-      return this.outline ? this.addTextColorClassChecks(classes, color)
-        : this.addBackgroundColorClassChecks(classes, color)
+    computedColor () {
+      return (this.type && !this.color) ? this.type : (this.color || 'error')
     },
     computedIcon () {
       if (this.icon || !this.type) return this.icon
@@ -78,15 +68,18 @@ export default {
       children.push(close)
     }
 
-    const alert = h('div', {
+    const setColor = this.outline ? this.setText : this.setBackground
+    const alert = h('div', setColor(this.computedColor, {
       staticClass: 'v-alert',
-      'class': this.classes,
+      'class': {
+        'v-alert--outline': this.outline
+      },
       directives: [{
         name: 'show',
         value: this.isActive
       }],
       on: this.$listeners
-    }, children)
+    }), children)
 
     if (!this.transition) return alert
 

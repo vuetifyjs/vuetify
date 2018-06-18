@@ -11,12 +11,6 @@ export default {
 
   mixins: [Colorable],
 
-  data () {
-    return {
-      defaultColor: 'primary'
-    }
-  },
-
   props: {
     format: {
       type: Function,
@@ -49,16 +43,16 @@ export default {
   methods: {
     genYearItem (year) {
       const formatted = this.formatter(`${year}`)
+      const active = parseInt(this.value, 10) === year
+      const setColor = active ? this.setText : (c, v) => v
 
-      return this.$createElement('li', {
+      return this.$createElement('li', setColor(this.color || 'primary', {
         key: year,
-        'class': parseInt(this.value, 10) === year
-          ? this.addTextColorClassChecks({ active: true })
-          : {},
+        'class': { active },
         on: {
           click: () => this.$emit('input', year)
         }
-      }, formatted)
+      }), formatted)
     },
     genYearItems () {
       const children = []

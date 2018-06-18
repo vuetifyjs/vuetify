@@ -107,9 +107,10 @@ export default {
       return this.$vuetify.application.bar
     },
     classes () {
-      return this.addBackgroundColorClassChecks({
+      return {
         'v-toolbar': true,
-        'elevation-0': this.flat || (!this.isActive &&
+        'elevation-0': this.flat || (
+          !this.isActive &&
           !this.tabs &&
           !this.scrollToolbarOffScreen
         ),
@@ -121,9 +122,8 @@ export default {
         'v-toolbar--fixed': !this.absolute && (this.app || this.fixed),
         'v-toolbar--floating': this.floating,
         'v-toolbar--prominent': this.prominent,
-        'theme--dark': this.dark,
-        'theme--light': this.light
-      })
+        ...this.themeClasses
+      }
     },
     computedPaddingLeft () {
       if (!this.app || this.clippedLeft) return 0
@@ -228,11 +228,11 @@ export default {
     this.isExtended = this.extended || !!this.$slots.extension
 
     const children = []
-    const data = {
+    const data = this.setBackground(this.color, {
       'class': this.classes,
       style: this.styles,
       on: this.$listeners
-    }
+    })
 
     data.directives = [{
       arg: this.scrollTarget,

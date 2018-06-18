@@ -21,8 +21,7 @@ export default {
 
   data () {
     return {
-      isReversing: false,
-      defaultColor: 'accent'
+      isReversing: false
     }
   },
 
@@ -103,13 +102,13 @@ export default {
       }
     },
     genHeader () {
-      const header = this.$createElement('strong', {
-        'class': this.disabled ? undefined : this.addTextColorClassChecks(),
+      const setColor = this.disabled ? (c, v) => v : this.setText
+      const header = this.$createElement('strong', setColor(this.color || 'accent', {
         key: String(this.value),
         on: {
           click: () => this.$emit('toggle')
         }
-      }, [this.$slots.default || this.formatter(String(this.value))])
+      }), [this.$slots.default || this.formatter(String(this.value))])
 
       const transition = this.$createElement('transition', {
         props: {

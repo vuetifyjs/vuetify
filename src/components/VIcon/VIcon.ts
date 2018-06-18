@@ -42,7 +42,11 @@ function keys<O> (o: O) {
   return Object.keys(o) as (keyof O)[]
 }
 
-const addTextColorClassChecks = Colorable.options.methods.addTextColorClassChecks
+function calculateExplicitSize (props: any): any {
+  const { small, medium, large, xLarge } = props
+  const sizes = { small, medium, large, xLarge }
+  return keys(sizes).find(key => sizes[key] && !!key)
+}
 
 export default mixins(Colorable, Themeable).extend({
   name: 'v-icon',
@@ -68,9 +72,7 @@ export default mixins(Colorable, Themeable).extend({
   },
 
   render (h, { props, data, parent, listeners = {}, children = [] }): VNode {
-    const { small, medium, large, xLarge } = props
-    const sizes = { small, medium, large, xLarge }
-    const explicitSize = keys(sizes).find(key => sizes[key] && !!key)
+    const explicitSize = calculateExplicitSize(props)
     const fontSize = (explicitSize && SIZE_MAP[explicitSize]) || convertToUnit(props.size)
 
     const newChildren: VNodeChildren = []
@@ -113,8 +115,8 @@ export default mixins(Colorable, Themeable).extend({
       data.attrs['aria-hidden'] = true
     }
 
-    const classes = {
-      ...(props.color && addTextColorClassChecks.call(props, {}, props.color)),
+    const setColor = props.color ? Colorable.options.methods.setText : (c: string, v: any) => v
+    const classes: any = {
       'v-icon--disabled': props.disabled,
       'v-icon--left': props.left,
       'v-icon--link': listeners.click || listeners['!click'],
@@ -130,11 +132,11 @@ export default mixins(Colorable, Themeable).extend({
     data.staticClass = [
       'v-icon',
       data.staticClass,
-      Object.keys(classes).filter(k => classes[k]).join(' '),
+      Object.keys(classes).filter((c: string) => classes[c]).join(' '),
       iconType,
       isCustomIcon ? iconName : null
     ].filter(val => !!val).join(' ').trim()
 
-    return h('i', data, newChildren)
+    return h('i', setColor(props.color, data), newChildren)
   }
 })

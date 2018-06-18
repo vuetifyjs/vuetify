@@ -36,8 +36,7 @@ export default {
         staticClass: 'v-input--selection-controls__input'
       }, [
         this.genInput('checkbox'),
-        this.genRipple({
-          'class': this.classesSelectable,
+        this.genRipple(this.setText(this.computedColor, {
           directives: [{
             name: 'touch',
             value: {
@@ -45,7 +44,7 @@ export default {
               right: this.onSwipeRight
             }
           }]
-        }),
+        })),
         this.genSwitchPart('track'),
         this.genSwitchPart('thumb')
       ])
@@ -55,10 +54,9 @@ export default {
     // this avoids a visual issue where
     // the color takes too long to transition
     genSwitchPart (target) {
-      return this.$createElement('div', {
-        staticClass: `v-input--switch__${target}`,
-        'class': this.classesSelectable
-      })
+      return this.$createElement('div', this.setText(this.computedColor, {
+        staticClass: `v-input--switch__${target}`
+      }))
     },
     onSwipeLeft () {
       if (this.isActive) this.onChange()

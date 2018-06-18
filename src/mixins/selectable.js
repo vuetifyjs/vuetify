@@ -45,11 +45,8 @@ export default {
   },
 
   computed: {
-    classesSelectable () {
-      return this.addTextColorClassChecks(
-        {},
-        this.isDirty ? this.color : this.validationState
-      )
+    computedColor () {
+      return this.isActive ? (this.color || 'accent') : this.validationState
     },
     isMultiple () {
       return this.multiple === true || (this.multiple === null && Array.isArray(this.internalValue))

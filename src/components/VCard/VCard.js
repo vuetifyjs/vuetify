@@ -32,7 +32,7 @@ export default {
 
   computed: {
     classes () {
-      return this.addBackgroundColorClassChecks({
+      return {
         'v-card': true,
         'v-card--flat': this.flat,
         'v-card--horizontal': this.horizontal,
@@ -41,7 +41,7 @@ export default {
         'v-card--tile': this.tile,
         'theme--light': this.light,
         'theme--dark': this.dark
-      })
+      }
     },
     styles () {
       const style = {
@@ -61,10 +61,10 @@ export default {
   },
 
   render (h) {
-    const { tag, data } = this.generateRouteLink()
+    const { tag, data } = this.generateRouteLink(this.classes)
 
     data.style = this.styles
 
-    return h(tag, data, this.$slots.default)
+    return h(tag, this.setBackground(this.color, data), this.$slots.default)
   }
 }

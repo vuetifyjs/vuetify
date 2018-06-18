@@ -72,13 +72,13 @@ export default {
   },
 
   render (h) {
-    return h('div', {
+    return h('div', this.setBackground(this.color, {
       staticClass: 'v-bottom-nav',
-      class: this.addBackgroundColorClassChecks(this.classes),
+      'class': this.classes,
       style: {
         height: `${parseInt(this.computedHeight)}px`
       },
       ref: 'content'
-    }, this.$slots.default)
+    }), this.$slots.default)
   }
 }

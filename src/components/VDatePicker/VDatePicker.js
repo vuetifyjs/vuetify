@@ -21,7 +21,6 @@ export default {
     const now = new Date()
     return {
       activePicker: this.type.toUpperCase(),
-      defaultColor: 'accent',
       inputDay: null,
       inputMonth: null,
       inputYear: null,

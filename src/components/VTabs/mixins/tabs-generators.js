@@ -10,14 +10,11 @@ import VIcon from '../../VIcon'
 export default {
   methods: {
     genBar (items) {
-      return this.$createElement('div', {
+      return this.$createElement('div', this.setBackground(this.color, {
         staticClass: 'v-tabs__bar',
-        'class': this.addBackgroundColorClassChecks({
-          'theme--dark': this.dark,
-          'theme--light': this.light
-        }),
+        'class': this.themeClasses,
         ref: 'bar'
-      }, [
+      }), [
         this.genTransition('prev'),
         this.genWrapper(
           this.genContainer(items)

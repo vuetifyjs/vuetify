@@ -69,12 +69,8 @@ export default {
             ? 'mixed'
             : this.isActive.toString()
         }),
-        this.genRipple({
-          'class': this.classesSelectable
-        }),
-        this.$createElement(VIcon, {
-          'class': this.classesSelectable
-        }, this.computedIcon)
+        this.genRipple(this.setText(this.computedColor, {})),
+        this.$createElement(VIcon, this.setText(this.computedColor, {}), this.computedIcon)
       ])
     },
     genDefaultSlot () {

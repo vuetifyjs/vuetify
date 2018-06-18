@@ -161,6 +161,6 @@ test('VIcon.js', ({ mount, compileToFunctions }) => {
       }
     }))
 
-    expect(wrapper.element.className).toBe('v-icon primary--text fa fa-lock')
+    expect(wrapper.element.className).toBe('v-icon fa fa-lock primary--text')
   })
 })

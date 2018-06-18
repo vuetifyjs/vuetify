@@ -134,12 +134,12 @@ export default {
   },
 
   render (h) {
-    const tooltip = h('div', {
+    const tooltip = h('div', this.setBackground(this.color, {
       staticClass: 'v-tooltip__content',
-      'class': this.addBackgroundColorClassChecks({
+      'class': {
         [this.contentClass]: true,
         'menuable__content__active': this.isActive
-      }),
+      },
       style: this.styles,
       attrs: this.getScopeIdAttrs(),
       directives: [{
@@ -147,7 +147,7 @@ export default {
         value: this.isContentActive
       }],
       ref: 'content'
-    }, this.showLazyContent(this.$slots.default))
+    }), this.showLazyContent(this.$slots.default))
 
     return h(this.tag, {
       staticClass: 'v-tooltip',

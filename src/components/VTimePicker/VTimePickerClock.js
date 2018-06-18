@@ -14,7 +14,6 @@ export default {
 
   data () {
     return {
-      defaultColor: 'accent',
       inputValue: this.value,
       isDragging: false,
       valueOnMouseDown: null,
@@ -111,16 +110,14 @@ export default {
       const children = []
 
       for (let value = this.min; value <= this.max; value = value + this.step) {
-        const classes = {
-          active: value === this.displayedValue,
-          disabled: !this.isAllowed(value)
-        }
-
-        children.push(this.$createElement('span', {
-          'class': this.addBackgroundColorClassChecks(classes, value === this.value ? this.computedColor : null),
+        children.push(this.$createElement('span', this.setBackground(value === this.value ? (this.color || 'accent') : null, {
+          'class': {
+            active: value === this.displayedValue,
+            disabled: !this.isAllowed(value)
+          },
           style: this.getTransform(value),
           domProps: { innerHTML: `<span>${this.format(value)}</span>` }
-        }))
+        })))
       }
 
       return children
@@ -128,14 +125,13 @@ export default {
     genHand () {
       const scale = `scaleY(${this.handScale(this.displayedValue)})`
       const angle = this.rotate + this.degreesPerUnit * (this.displayedValue - this.min)
-
-      return this.$createElement('div', {
+      const setColor = this.value == null ? (c, v) => v : this.setBackground
+      return this.$createElement('div', setColor(this.color || 'accent', {
         staticClass: 'v-time-picker-clock__hand',
-        'class': this.value == null ? {} : this.addBackgroundColorClassChecks(),
         style: {
           transform: `rotate(${angle}deg) ${scale}`
         }
-      })
+      }))
     },
     getTransform (i) {
       const { x, y } = this.getPosition(i)

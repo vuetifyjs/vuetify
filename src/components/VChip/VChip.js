@@ -27,7 +27,7 @@ export default {
 
   computed: {
     classes () {
-      const classes = this.addBackgroundColorClassChecks({
+      return {
         'v-chip--disabled': this.disabled,
         'v-chip--selected': this.selected,
         'v-chip--label': this.label,
@@ -36,11 +36,7 @@ export default {
         'v-chip--removable': this.close,
         'theme--light': this.light,
         'theme--dark': this.dark
-      })
-
-      return (this.textColor || this.outline)
-        ? this.addTextColorClassChecks(classes, this.textColor || this.color)
-        : classes
+      }
     }
   },
 
@@ -73,7 +69,7 @@ export default {
   },
 
   render (h) {
-    const data = {
+    const data = this.setBackground(this.color, {
       staticClass: 'v-chip',
       'class': this.classes,
       attrs: { tabindex: this.disabled ? -1 : 0 },
@@ -82,8 +78,10 @@ export default {
         value: this.isActive
       }],
       on: this.$listeners
-    }
+    })
 
-    return h('span', data, [this.genContent(h)])
+    const setText = (this.textColor || this.outline) ? this.setText : (c, v) => v
+
+    return h('span', setText(this.textColor || this.color, data), [this.genContent(h)])
   }
 }

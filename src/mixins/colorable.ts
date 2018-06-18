@@ -1,5 +1,7 @@
 import Vue from 'vue'
 
+const isCssColor = (color: string) => color.match(/^(#|rgba?\(|hsla?\()/)
+
 export default Vue.extend({
   name: 'colorable',
 
@@ -7,40 +9,35 @@ export default Vue.extend({
     color: String
   },
 
-  data () {
-    return {
-      defaultColor: null
-    }
-  },
-
-  computed: {
-    computedColor (): string | null {
-      return this.color || this.defaultColor
-    }
-  },
-
   methods: {
-    addBackgroundColorClassChecks<T, C extends string> (obj?: T, color?: C): T & Record<C, true> {
-      const classes: any = Object.assign({}, obj)
-      const selectedColor = color === undefined ? this.computedColor : color
-
-      if (selectedColor) {
-        classes[selectedColor] = true
+    setBackground<C extends string> (color: C, data: any): any {
+      if (color && isCssColor(color)) {
+        data['style'] = data['style'] || {}
+        data['style']['background-color'] = `${color} !important`
+      } else if (color) {
+        data['class'] = Object.assign({}, data['class'], {
+          [color]: true
+        })
       }
 
-      return classes
+      return data
     },
-    addTextColorClassChecks (obj?: any, color?: string | null): any {
-      const classes = Object.assign({}, obj)
-      if (color === undefined) color = this.computedColor
 
-      if (color) {
+    setText<C extends string> (color: C, data: any): any {
+      if (color && isCssColor(color)) {
+        data['style'] = data['style'] || {}
+        data['style']['color'] = `${color} !important`
+        data['style']['border-color'] = `${color} !important`
+      } else if (color) {
         const [colorName, colorModifier] = color.toString().trim().split(' ')
-        classes[colorName + '--text'] = true
-        colorModifier && (classes['text--' + colorModifier] = true)
+        data['class'] = Object.assign({}, data['class'], {
+          [colorName + '--text']: true
+        })
+        if (colorModifier) {
+          data['class']['text--' + colorModifier] = !!colorModifier
+        }
       }
-
-      return classes
+      return data
     }
   }
 })

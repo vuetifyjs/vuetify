@@ -43,11 +43,10 @@ export default {
     },
 
     classes () {
-      return this.addTextColorClassChecks({
-        'v-progress-circular': true,
+      return {
         'v-progress-circular--indeterminate': this.indeterminate,
         'v-progress-circular--button': this.button
-      })
+      }
     },
 
     normalizedValue () {
@@ -128,13 +127,14 @@ export default {
   },
 
   render (h) {
-    const info = h('div', { class: 'v-progress-circular__info' }, [this.$slots.default])
+    const info = h('div', { staticClass: 'v-progress-circular__info' }, [this.$slots.default])
     const svg = this.genSvg(h)
 
-    return h('div', {
+    return h('div', this.setText(this.color, {
+      staticClass: 'v-progress-circular',
       class: this.classes,
       style: this.styles,
       on: this.$listeners
-    }, [svg, info])
+    }), [svg, info])
   }
 }

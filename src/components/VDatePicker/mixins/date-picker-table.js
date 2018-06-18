@@ -11,7 +11,6 @@ export default {
 
   data () {
     return {
-      defaultColor: 'accent',
       isReversing: false
     }
   },
@@ -60,11 +59,8 @@ export default {
   },
 
   methods: {
-    genButtonClasses (value, isAllowed, isFloating) {
-      const isSelected = value === this.value
-      const isCurrent = value === this.current
-
-      const classes = {
+    genButtonClasses (value, isAllowed, isFloating, isSelected, isCurrent) {
+      return {
         'v-btn--active': isSelected,
         'v-btn--flat': !isSelected,
         'v-btn--icon': isSelected && isAllowed && isFloating,
@@ -74,17 +70,16 @@ export default {
         'v-btn--outline': isCurrent && !isSelected,
         ...this.themeClasses
       }
-
-      if (isSelected) return this.addBackgroundColorClassChecks(classes)
-      if (isCurrent) return this.addTextColorClassChecks(classes)
-      return classes
     },
     genButton (value, isFloating) {
       const isAllowed = isDateAllowed(value, this.min, this.max, this.allowedDates)
+      const isSelected = value === this.value
+      const isCurrent = value === this.current
+      const setColor = isSelected ? this.setBackground : (isCurrent ? this.setText : (c, v) => v)
 
-      return this.$createElement('button', {
+      return this.$createElement('button', setColor(this.color || 'accent', {
         staticClass: 'v-btn',
-        'class': this.genButtonClasses(value, isAllowed, isFloating),
+        'class': this.genButtonClasses(value, isAllowed, isFloating, isSelected, isCurrent),
         attrs: {
           type: 'button'
         },
@@ -95,7 +90,7 @@ export default {
         on: (this.disabled || !isAllowed) ? {} : {
           click: () => this.$emit('input', value)
         }
-      })
+      }))
     },
     wheel (e) {
       e.preventDefault()

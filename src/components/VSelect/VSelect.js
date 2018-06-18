@@ -345,17 +345,15 @@ export default {
         this.getDisabled(item)
       )
 
-      const classes = index === this.selectedIndex
-        ? this.addTextColorClassChecks()
-        : {}
+      const setColor = index === this.selectedIndex ? this.setText : (c, v) => v
 
-      classes['v-select__selection--disabled'] = isDisabled
-
-      return this.$createElement('div', {
+      return this.$createElement('div', setColor(this.color, {
         staticClass: 'v-select__selection v-select__selection--comma',
-        'class': classes,
+        'class': {
+          'v-select__selection--disabled': isDisabled
+        },
         key
-      }, `${this.getText(item)}${last ? '' : ', '}`)
+      }), `${this.getText(item)}${last ? '' : ', '}`)
     },
     genDefaultSlot () {
       const selections = this.genSelections()

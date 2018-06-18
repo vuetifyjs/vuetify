@@ -70,7 +70,7 @@ export default {
       return this.selectedItems.map(item => this.getValue(item))
     },
     tileActiveClass () {
-      return Object.keys(this.addTextColorClassChecks()).join(' ')
+      return Object.keys(this.setText(this.color, {}).class || {}).join(' ')
     },
     staticNoDataTile () {
       const tile = {
@@ -102,7 +102,7 @@ export default {
       return this.$createElement(VListTileAction, data, [
         this.$createElement(VCheckbox, {
           props: {
-            color: this.computedColor,
+            color: this.color,
             inputValue
           }
         })

@@ -58,7 +58,7 @@ const VBtn = mixins(
 
   computed: {
     classes (): any {
-      const classes = {
+      return {
         'v-btn': true,
         [this.activeClass]: this.isActive,
         'v-btn--absolute': this.absolute,
@@ -81,10 +81,6 @@ const VBtn = mixins(
         'v-btn--top': this.top,
         ...this.themeClasses
       }
-
-      return (!this.outline && !this.flat)
-        ? this.addBackgroundColorClassChecks(classes)
-        : this.addTextColorClassChecks(classes)
     }
   },
 
@@ -137,7 +133,8 @@ const VBtn = mixins(
   },
 
   render (h): VNode {
-    const { tag, data } = this.generateRouteLink()
+    const setColor = (!this.outline && !this.flat) ? this.setBackground : this.setText
+    const { tag, data } = this.generateRouteLink(this.classes)
     const children = [this.genContent()]
 
     tag === 'button' && (data.attrs!.type = this.type)
@@ -147,7 +144,7 @@ const VBtn = mixins(
       ? this.value
       : JSON.stringify(this.value)
 
-    return h(tag, data, children)
+    return h(tag, setColor(this.color, data), children)
   }
 })
 

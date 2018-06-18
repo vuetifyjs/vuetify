@@ -52,11 +52,10 @@ export default {
 
   methods: {
     genBackground () {
-      return this.$createElement('div', {
+      return this.$createElement('div', this.setBackground(this.color, {
         staticClass: 'v-jumbotron__background',
-        'class': this.addBackgroundColorClassChecks(),
         style: this.backgroundStyles
-      })
+      }))
     },
     genContent () {
       return this.$createElement('div', {
@@ -84,7 +83,7 @@ export default {
   },
 
   render (h) {
-    const { tag, data } = this.generateRouteLink()
+    const { tag, data } = this.generateRouteLink(this.classes)
     data.staticClass = 'v-jumbotron'
     data.style = this.styles
 

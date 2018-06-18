@@ -62,7 +62,6 @@ export default {
         'v-input--is-focused': this.isFocused,
         'v-input--is-loading': this.loading !== false,
         'v-input--is-readonly': this.readonly,
-        ...this.addTextColorClassChecks({}, this.validationState),
         ...this.themeClasses
       }
     },
@@ -263,10 +262,10 @@ export default {
   },
 
   render (h) {
-    return h('div', {
+    return h('div', this.setText(this.validationState, {
       staticClass: 'v-input',
       attrs: this.attrsInput,
       'class': this.classesInput
-    }, this.genContent())
+    }), this.genContent())
   }
 }

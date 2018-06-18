@@ -1,5 +1,6 @@
 import { test } from '@/test'
 import { VRadioGroup, VRadio } from '@/components/VRadioGroup'
+import { setTimeout } from 'timers';
 
 const warning = '[Vuetify] The v-radio component must be used inside a v-radio-group'
 
@@ -187,7 +188,7 @@ test('VRadio.vue', ({ mount }) => {
   it('should not generate own colors when parent is in error', async () => {
     const wrapper = mount(VRadio)
 
-    expect(wrapper.vm.classes).toEqual({
+    expect(wrapper.vm.computedData.class).toEqual({
       'theme--dark': false,
       'theme--light': false,
       'v-radio--is-disabled': false,
@@ -198,7 +199,7 @@ test('VRadio.vue', ({ mount }) => {
 
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.classes).toEqual({
+    expect(wrapper.vm.computedData.class).toEqual({
       'accent--text': true,
       'theme--dark': false,
       'theme--light': false,

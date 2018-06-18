@@ -28,11 +28,7 @@ export default {
     const size = convertToUnit(props.size)
     data.style.height = size
     data.style.width = size
-    data.class = [
-      data.class,
-      Colorable.options.methods.addBackgroundColorClassChecks.call(props, {}, props.color)
-    ]
 
-    return h('div', data, children)
+    return h('div', Colorable.options.methods.setBackground(props.color, data), children)
   }
 }
