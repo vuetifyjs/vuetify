@@ -5,7 +5,7 @@ import Colorable from '../../mixins/colorable'
 
 import {
   convertToUnit,
-  getObjectValueByPath
+  remapInternalIcon
 } from '../../util/helpers'
 
 import { VNode, VNodeChildren } from 'vue'
@@ -21,22 +21,6 @@ enum SIZE_MAP {
 
 function isFontAwesome5 (iconType: string): boolean {
   return ['fas', 'far', 'fal', 'fab'].some(val => iconType.includes(val))
-}
-
-const ICONS_PREFIX = '$vuetify.icons.'
-
-// This remaps internal names like '$vuetify.icons.cancel' to the current name
-// for that icon. Note the parent component is needed for $vuetify because
-// VIcon is a functional component. This function only looks at the
-// immediate parent, so it won't remap for a nested functional components.
-function remapInternalIcon (parent: object, iconName: string): string {
-  if (!iconName.startsWith(ICONS_PREFIX)) {
-    // return original icon name unchanged
-    return iconName
-  }
-
-  // Now look up icon indirection name, e.g. '$vuetify.icons.cancel':
-  return getObjectValueByPath(parent, iconName) || iconName
 }
 
 function keys<O> (o: O) {
