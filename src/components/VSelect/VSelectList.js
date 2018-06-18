@@ -226,11 +226,9 @@ export default {
 
     children.length || children.push(this.$slots['no-data'] || this.staticNoDataTile)
 
-    const prependItem = this.$slots['prepend-item']
-    if (prependItem) children.unshift(prependItem)
+    this.$slots['prepend-item'] && children.unshift(this.$slots['prepend-item'])
 
-    const appendItem = this.$slots['append-item']
-    if (appendItem) children.push(appendItem)
+    this.$slots['append-item'] && children.push(this.$slots['append-item'])
 
     return this.$createElement('div', {
       staticClass: 'v-select-list v-card',
