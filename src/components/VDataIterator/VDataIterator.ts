@@ -1,11 +1,18 @@
+import Vue, { VNode, CreateElement, VNodeChildren, VNodeChildrenArrayContents } from 'vue'
+import { PropValidator } from 'vue/types/options'
+
 import { getObjectValueByPath } from '../../util/helpers'
 
-const wrapInArray = v => Array.isArray(v) ? v : [v]
+function wrapInArray<T> (v: T | Array<T>): Array<T> { return Array.isArray(v) ? v : [v] }
 
-export default {
+type BooleanMap = {
+  [key: string]: boolean
+}
+
+export default Vue.extend({
   name: 'v-data-iterator',
 
-  provide () {
+  provide (): any {
     const dataIterator = {
       toggleSelected: this.toggleSelected,
       resetExpanded: this.resetExpanded,
@@ -79,24 +86,16 @@ export default {
   },
 
   props: {
-    items: {
-      type: Array,
-      default: () => ([])
-    },
+    items: Array as PropValidator<any[]>,
     itemKey: {
       type: String
     },
     customSort: {
       type: Function,
-      default: (items, sortBy, sortDesc) => {
+      default: (items: any[], sortBy: string[], sortDesc: boolean[]) => {
         if (sortBy === null) return items
 
-        if (!Array.isArray(sortBy)) {
-          sortBy = [sortBy]
-          sortDesc = [sortDesc]
-        }
-
-        return items.sort((a, b) => {
+        return items.sort((a: any, b: any): number => {
           for (let i = 0; i < sortBy.length; i++) {
             const sortKey = sortBy[i]
 
@@ -120,6 +119,8 @@ export default {
               if (sortA < sortB) return -1
             }
           }
+
+          return 0
         })
       }
     },
@@ -128,7 +129,7 @@ export default {
     // Also should we do built-in column filter in headers?
     customFilter: {
       type: Function,
-      default: (items, search, filter) => {
+      default: (items: any[], search: string) => {
         search = search.toString().toLowerCase()
         if (search.trim() === '') return items
 
@@ -144,13 +145,13 @@ export default {
       type: String
     },
     sortBy: {
-      type: [Array, String],
+      type: [String, Array],
       default: () => ([])
-    },
+    } as PropValidator<string | string[]>,
     sortDesc: {
-      type: [Array, Boolean],
+      type: [Boolean, Array],
       default: () => ([])
-    },
+    } as PropValidator<boolean | boolean[]>,
     rowsPerPage: {
       type: Number,
       default: 10
@@ -164,29 +165,39 @@ export default {
     },
     noResultsText: {
       type: String,
-      default: 'No matching records found'
+      default: '$vuetify.dataIterator.noResultsText'
     },
     noDataText: {
       type: String,
-      default: 'No data available'
+      default: '$vuetify.noDataText'
     },
+    loading: Boolean,
     loadingText: {
       type: String,
-      default: 'Please wait...'
+      default: '$vuetify.dataIterator.loadingText'
     },
     multiSort: {
       type: Boolean
     },
     mustSort: {
       type: Boolean
-    }
+    },
+    rowsPerPageItems: {
+      type: Array,
+      default: () => ([
+        { text: '5', value: 5 },
+        { text: '10', value: 10 },
+        { text: '15', value: 15 },
+        { text: 'All', value: -1 }
+      ])
+    } as PropValidator<any[]>
   },
 
   data () {
     return {
       searchItemsLength: 0,
-      selection: {},
-      expansion: {},
+      selection: {} as BooleanMap,
+      expansion: {} as BooleanMap,
       options: {
         sortBy: wrapInArray(this.sortBy),
         sortDesc: wrapInArray(this.sortDesc),
@@ -228,10 +239,10 @@ export default {
   },
 
   computed: {
-    hasSearch () {
+    hasSearch (): boolean {
       return typeof this.search !== 'undefined' && this.search !== null
     },
-    computedItems () {
+    computedItems (): any[] {
       let items = this.items.slice()
 
       if (this.serverItemsLength) return items
@@ -242,41 +253,41 @@ export default {
 
       return this.paginateItems(items)
     },
-    pageStart () {
+    pageStart (): number {
       return this.options.rowsPerPage === -1
         ? 0
         : (this.options.page - 1) * this.options.rowsPerPage
     },
-    pageStop () {
+    pageStop (): number {
       return this.options.rowsPerPage === -1
         ? this.itemsLength // TODO: Does this need to be something other (server-side, etc?)
         : this.options.page * this.options.rowsPerPage
     },
-    pageCount () {
+    pageCount (): number {
       // We can't simply use computedItems.length here since it's already sliced
       return this.options.rowsPerPage <= 0 ? 1 : Math.ceil(this.itemsLength / this.options.rowsPerPage)
     },
-    itemsLength () {
+    itemsLength (): number {
       if (typeof this.serverItemsLength !== 'undefined' && !isNaN(this.serverItemsLength)) return this.serverItemsLength
       if (this.hasSearch) return this.searchItemsLength
       return this.items.length
     },
-    everyItem () {
-      return this.computedItems.length && this.computedItems.every(i => this.isSelected(i))
+    everyItem (): boolean {
+      return !!this.computedItems.length && this.computedItems.every((i: any) => this.isSelected(i))
     },
-    someItems () {
-      return this.computedItems.some(i => this.isSelected(i))
+    someItems (): boolean {
+      return this.computedItems.some((i: any) => this.isSelected(i))
     }
   },
 
   methods: {
-    sortItems (items, sortBy, sortDesc) {
+    sortItems (items: any[], sortBy: string[], sortDesc: boolean[]): any[] {
       return this.customSort(items, sortBy, sortDesc)
     },
-    paginateItems (items) {
+    paginateItems (items: any[]): any[] {
       return items.slice(this.pageStart, this.pageStop)
     },
-    searchItems (items) {
+    searchItems (items: any[]): any[] {
       if (this.hasSearch) {
         items = this.customFilter(items, this.search)
         this.searchItemsLength = items.length
@@ -284,10 +295,10 @@ export default {
 
       return items
     },
-    sort (key) {
+    sort (key: string): void {
       let sortBy = this.options.sortBy.slice()
       let sortDesc = this.options.sortDesc.slice()
-      const sortByIndex = sortBy.findIndex(k => k === key)
+      const sortByIndex = sortBy.findIndex((k: string) => k === key)
 
       if (sortByIndex < 0) {
         if (!this.multiSort) {
@@ -307,31 +318,32 @@ export default {
 
       this.options = Object.assign(this.options, { sortBy, sortDesc })
     },
-    isSelected (item) {
+    isSelected (item: any): boolean {
       return this.selection[item[this.itemKey]]
     },
-    select (item, value = true) {
+    select (item: any, value = true): void {
       this.$set(this.selection, item[this.itemKey], value)
     },
-    isExpanded (item) {
+    isExpanded (item: any): boolean {
       return this.expansion[item[this.itemKey]]
     },
-    expand (item, value = true) {
+    expand (item: any, value = true): void {
       this.$set(this.expansion, item[this.itemKey], value)
     },
-    resetExpanded () {
+    resetExpanded (): void {
       this.expansion = {}
     },
-    toggleSelected (value) {
-      const selection = {}
+    toggleSelected (): void {
+      const selection: BooleanMap = {}
 
-      this.computedItems.forEach(item => {
-        selection[item[this.itemKey]] = !this.everyItem
+      this.computedItems.forEach((item: any) => {
+        const value = item[this.itemKey]
+        selection[value] = !this.everyItem
       })
 
       this.selection = Object.assign({}, this.selection, selection)
     },
-    createItemProps (item) {
+    createItemProps (item: any): any {
       const props = {
         item
       }
@@ -350,67 +362,69 @@ export default {
 
       return props
     },
-    computeSlots (name) {
-      const slots = []
+    computeSlots (name: string): VNodeChildrenArrayContents {
+      const slots: VNodeChildrenArrayContents = []
 
       if (this.$slots[name]) slots.push(...this.$slots[name])
       if (this.$scopedSlots[name]) {
-        const scoped = this.$scopedSlots[name](this._provided.dataIterator)
+        const scoped = this.$scopedSlots[name]((this as any)._provided.dataIterator) // TODO: type _provided somehow?
         Array.isArray(scoped) ? slots.push(...scoped) : slots.push(scoped)
       }
 
       return slots
     },
-    genHeaders (h) {
+    genHeaders (h: CreateElement): VNodeChildrenArrayContents {
       return this.computeSlots('header')
     },
-    genEmpty (h, content) {
+    genEmpty (h: CreateElement, content: any) {
       return h('div', content)
     },
-    genBodies (h) {
-      const bodies = []
+    genBodies (h: CreateElement): VNodeChildrenArrayContents {
+      const bodies: VNodeChildrenArrayContents = []
       if (!this.serverItemsLength && this.loading) {
-        const loading = this.$slots['loading'] || this.loadingText
-        bodies.push(this.genEmpty(h, loading))
+        const loading = this.$slots['loading'] || this.$vuetify.t(this.loadingText)
+        return [this.genEmpty(h, loading)]
       } else if (!this.itemsLength && !this.items.length) {
-        const noData = this.$slots['no-data'] || this.noDataText
-        bodies.push(this.genEmpty(h, noData))
+        const noData = this.$slots['no-data'] || this.$vuetify.t(this.noDataText)
+        return [this.genEmpty(h, noData)]
       } else if (!this.computedItems.length) {
-        const noResults = this.$slots['no-results'] || this.noResultsText
-        bodies.push(this.genEmpty(h, noResults))
+        const noResults = this.$slots['no-results'] || this.$vuetify.t(this.noResultsText)
+        return [this.genEmpty(h, noResults)]
       }
 
       bodies.push(this.$slots.default)
       bodies.push(...this.computeSlots('body'))
-      bodies.push(this.genItems(h))
+      bodies.push(...this.genItems(h))
 
       return bodies
     },
-    genItems (h) {
-      const items = []
+    genItems (h: CreateElement): VNodeChildrenArrayContents {
+      const items: VNodeChildrenArrayContents = []
 
       if (this.$scopedSlots.item) {
-        const items = this.computedItems.map(item => this.$scopedSlots.item(this.createItemProps(item)))
-        items.push(this.genBodyWrapper(h, items))
+        const slotItems = this.computedItems.map((item: any) => this.$scopedSlots.item(this.createItemProps(item)))
+        items.push(this.genBodyWrapper(h, slotItems))
       }
 
       return items
     },
-    genFooters (h) {
+    genFooters (h: CreateElement): VNodeChildrenArrayContents {
       return this.computeSlots('footer')
     },
-    genBodyWrapper (h, items) {
+    genBodyWrapper (h: CreateElement, items: any[]): VNode {
       return h('div', items)
     }
   },
 
-  render (h) {
-    return h('div', {
-      staticClass: 'v-data-iterator'
-    }, [
+  render (h): VNode {
+    const children: VNodeChildrenArrayContents = [
       ...this.genHeaders(h),
       ...this.genBodies(h),
       ...this.genFooters(h)
-    ])
+    ]
+
+    return h('div', {
+      staticClass: 'v-data-iterator'
+    }, children)
   }
-}
+})

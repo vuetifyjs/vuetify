@@ -10,11 +10,22 @@ import VRow from './VRow'
 import VCell from './VCell'
 
 import { groupByProperty } from '../../util/helpers'
+import mixins from '../../util/mixins'
+import { VNode, CreateElement, VNodeData, VNodeChildren, VNodeChildrenArrayContents } from 'vue'
+import { PropValidator } from 'vue/types/options'
 
-export default {
+export type TableHeader = {
+  text: string
+  value: string
+  align: 'left' | 'center' | 'right'
+  sortable: boolean
+  class: string | string[]
+  width: string
+  filter: (v: any) => boolean
+}
+
+export default mixins(VDataIterator).extend({
   name: 'v-data-table',
-
-  extends: VDataIterator,
 
   inheritAttrs: false,
 
@@ -43,11 +54,8 @@ export default {
   },
 
   props: {
-    dumb: Boolean,
-    headers: {
-      type: Array,
-      default: () => ([])
-    },
+    static: Boolean,
+    headers: Array as PropValidator<TableHeader[]>,
     showSelectAll: Boolean,
     hideActions: Boolean,
     hideHeader: Boolean,
@@ -56,44 +64,38 @@ export default {
     loading: Boolean
   },
 
-  data () {
-    return {
-      groupByIndices: []
-    }
-  },
-
   computed: {
-    isFlexWidth () {
-      return this.headers.some(h => h.width && !isNaN(h.width))
+    isFlexWidth (): boolean {
+      return this.static ? false : this.headers.some((h: TableHeader) => !!h.width && !isNaN(Number(h.width)))
     },
-    widths () {
-      return this.headers.map(h => h.width || (this.isFlexWidth ? 1 : null))
+    widths (): any[] {
+      return this.static ? [] : this.headers.map((h: TableHeader) => h.width || (this.isFlexWidth ? 1 : null))
     }
   },
 
   methods: {
-    searchItems (items) {
-      const columns = this.headers.filter(h => h.filter)
+    searchItems (items: any[]) {
+      const headers = this.headers.filter((h: TableHeader) => h.filter)
 
-      if (columns.length) {
-        items = items.filter(i => columns.every(column => column.filter(i[column.value])))
+      if (headers.length) {
+        items = items.filter(i => headers.every((h: TableHeader) => h.filter(i[h.value])))
         this.searchItemsLength = items.length
       }
 
-      items = VDataIterator.methods.searchItems.call(this, items)
+      items = VDataIterator.options.methods.searchItems.call(this, items)
 
       return items
     },
-    sortItems (items, sortBy, sortDesc) {
+    sortItems (items: any[], sortBy: string[], sortDesc: boolean[]) {
       sortBy = this.groupBy ? [this.groupBy, ...sortBy] : sortBy
       sortDesc = this.groupBy ? [false, ...sortDesc] : sortDesc
 
-      return VDataIterator.methods.sortItems.call(this, items, sortBy, sortDesc)
+      return VDataIterator.options.methods.sortItems.call(this, items, sortBy, sortDesc)
     },
-    genHeaders (h) {
+    genHeaders (h: CreateElement): VNodeChildrenArrayContents {
       const headers = this.computeSlots('header')
 
-      if (!this.hideHeader && !this.dumb) {
+      if (!this.hideHeader && !this.static) {
         headers.push(h(VTableHeaders, {
           props: {
             showSelectAll: this.showSelectAll
@@ -104,7 +106,7 @@ export default {
 
       return headers
     },
-    genItems (h) {
+    genItems (h: CreateElement): VNodeChildrenArrayContents {
       const items = []
 
       if (this.$scopedSlots.item) {
@@ -117,10 +119,10 @@ export default {
 
       return items
     },
-    genRows (items) {
-      return items.map(item => this.$scopedSlots.item(this.createItemProps(item)))
+    genRows (items: any[]): VNodeChildrenArrayContents {
+      return items.map((item: any) => this.$scopedSlots.item(this.createItemProps(item)))
     },
-    genGroupedRows (h, items, groupBy) {
+    genGroupedRows (h: CreateElement, items: any[], groupBy: string): VNodeChildrenArrayContents {
       const grouped = groupByProperty(items, groupBy)
       const groups = Object.keys(grouped)
 
@@ -142,10 +144,10 @@ export default {
 
       return rows
     },
-    genFooters (h) {
+    genFooters (h: CreateElement): VNodeChildrenArrayContents {
       const footers = this.computeSlots('footer')
 
-      if (!this.hideActions && !this.dumb) {
+      if (!this.hideActions && !this.static) {
         footers.push(h(VTableActions, {
           props: {
             itemsLength: this.itemsLength,
@@ -156,20 +158,20 @@ export default {
             rowsPerPageItems: this.rowsPerPageItems
           },
           on: {
-            'update:page': v => this.options.page = v,
-            'update:rowsPerPage': v => this.options.rowsPerPage = v
+            'update:page': (v: number) => this.options.page = v,
+            'update:rowsPerPage': (v: number) => this.options.rowsPerPage = v
           }
         }))
       }
 
       return [this.genBodyWrapper(h, footers)]
     },
-    genBodies (h) {
-      if (this.dumb) return this.$slots.default
+    genBodies (h: CreateElement): VNodeChildrenArrayContents {
+      if (this.static) return this.$slots.default
 
-      return VDataIterator.methods.genBodies.call(this, h)
+      return VDataIterator.options.methods.genBodies.call(this, h)
     },
-    genBodyWrapper (h, items) {
+    genBodyWrapper (h: CreateElement, items: VNode[]): VNode {
       return h('div', {
         staticClass: 'v-table__body',
         class: {
@@ -180,12 +182,12 @@ export default {
         }
       }, items)
     },
-    genEmpty (h, content) {
+    genEmpty (h: CreateElement, content: VNodeData): VNode {
       return h(VRow, [h(VCell, content)])
     }
   },
 
-  render (h) {
+  render (h): VNode {
     return h('div', {
       staticClass: 'v-table v-data-table'
     }, [
@@ -194,4 +196,4 @@ export default {
       ...this.genFooters(h)
     ])
   }
-}
+})

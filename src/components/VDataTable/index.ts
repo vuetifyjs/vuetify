@@ -19,7 +19,7 @@ export { VDataTable, VEditDialog, VTableOverflow, VRow, VCell, VCellCheckbox, VT
 
 /* istanbul ignore next */
 VDataTable.install = function install (Vue) {
-  Vue.component(VDataTable.name, VDataTable)
+  Vue.component(VDataTable.options.name, VDataTable)
   Vue.component(VEditDialog.name, VEditDialog)
   Vue.component(VTableOverflow.name, VTableOverflow)
   Vue.component(VCell.name, VCell)

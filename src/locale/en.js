@@ -1,5 +1,6 @@
 export default {
   dataIterator: {
+    loadingText: 'Please wait...',
     rowsPerPageText: 'Items per page:',
     rowsPerPageAll: 'All',
     pageText: '{0}-{1} of {2}',

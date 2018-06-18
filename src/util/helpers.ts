@@ -4,7 +4,7 @@ export function createSimpleFunctional (
   c: string,
   el = 'div',
   name?: string
-): FunctionalComponentOptions {
+): FunctionalComponentOptions & { name: string } {
   name = name || c.replace(/__/g, '-')
 
   // TODO: remove after close

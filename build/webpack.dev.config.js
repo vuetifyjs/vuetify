@@ -45,6 +45,14 @@ module.exports = merge(baseWebpackConfig, {
           'style-loader',
           'css-loader'
         ]
+      },
+      {
+        test: /\.stylus$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'stylus-loader'
+        ]
       }
     ]
   },
