@@ -30,7 +30,7 @@
     "preparecommitmsg": "node dev/prepare-commit-message.js",
     "commitmsg": "node dev/lint-commit-message.js",
     "precommit": "node dev/warn-npm-install.js && concurrently \"yarn test\" \"yarn lint\" -n \"test,lint\" --kill-others-on-fail",
-    "prepack": "npm install rimraf; npm run build:dist; npm run build:es5"
+    "prepack": "npm install; npm run build:dist; npm run build:es5"
   },
   "description": "Vue.js 2 Semantic Component Framework",
   "devDependencies": {
