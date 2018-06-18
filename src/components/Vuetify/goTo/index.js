@@ -5,7 +5,8 @@ import {
   offset,
   height,
   type,
-  isValid
+  isValidTarget,
+  isValidContainer
 } from './util'
 
 const defaults = {
@@ -30,8 +31,8 @@ export default function goTo (_target, _settings) {
 
     const settings = Object.assign({}, defaults, _settings)
 
-    if (isNaN(_target) && !isValid(_target)) throw new TypeError(`Target must be a Number/Selector/HTMLElement/VueComponent, received ${type(_target)} instead.`)
-    if (!isValid(settings.container)) throw new TypeError(`Container must be a Selector/HTMLElement/VueComponent, received ${type(settings.container)} instead.`)
+    if (!isValidTarget(_target)) throw new TypeError(`Target must be a Number/Selector/HTMLElement/VueComponent, received ${type(_target)} instead.`)
+    if (!isValidContainer(settings.container)) throw new TypeError(`Container must be a Selector/HTMLElement/VueComponent, received ${type(settings.container)} instead.`)
 
     const container = $(settings.container)
     const target = (isNaN(_target) ? offset($(_target)) : _target) - settings.offset

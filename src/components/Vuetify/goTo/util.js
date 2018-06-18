@@ -48,11 +48,20 @@ export function height (el) {
   return el.scrollHeight
 }
 
-export function isValid (target) {
+export function isValidTarget (target) {
   return (
     isHTMLElement(target) ||
     isVueComponent(target) ||
-    typeof target === 'string'
+    typeof target === 'string' ||
+    (!isNaN(parseFloat(target)) && isFinite(target))
+  )
+}
+
+export function isValidContainer (container) {
+  return (
+    isHTMLElement(container) ||
+    isVueComponent(container) ||
+    typeof container === 'string'
   )
 }
 
