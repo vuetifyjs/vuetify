@@ -1,20 +1,27 @@
+import Vue from 'vue'
+
 import Ripple from '../directives/ripple'
 
 /** @mixin */
-export default {
+export default Vue.extend({
   name: 'rippleable',
 
   directives: { Ripple },
 
   props: {
+    disabled: Boolean,
     ripple: {
       type: [Boolean, Object],
       default: true
     }
   },
 
+  data: () => ({
+    rippleClasses: null
+  }),
+
   methods: {
-    genRipple (data = {}) {
+    genRipple (data: any = {}) {
       if (!this.ripple) return null
 
       data.staticClass = 'v-input--selection-controls__ripple'
@@ -34,4 +41,4 @@ export default {
     },
     onChange () {}
   }
-}
+})

@@ -1,5 +1,9 @@
 import '../../stylus/components/_rating.styl'
 
+import { VNode, CreateElement, VNodeChildrenArrayContents } from 'vue'
+
+import mixins from '../../util/mixins'
+
 // Components
 import VIcon from '../VIcon'
 
@@ -10,10 +14,18 @@ import Rippleable from '../../mixins/rippleable'
 
 import { createRange, remapInternalIcon } from '../../util/helpers'
 
-export default {
-  name: 'v-rating',
+type ItemSlotProps = {
+  index: number
+  value: number
+  isFilled: boolean
+  isHalfFilled: boolean
+  isHovered: boolean
+  isHalfHovered: boolean
+  click: Function
+}
 
-  mixins: [Colorable, Sizeable, Rippleable],
+export default mixins(Colorable, Sizeable, Rippleable).extend({
+  name: 'v-rating',
 
   props: {
     backgroundColor: {
@@ -23,10 +35,6 @@ export default {
     color: {
       type: String,
       default: 'primary'
-    },
-    length: {
-      type: Number,
-      default: 5
     },
     emptyIcon: {
       type: String,
@@ -40,51 +48,47 @@ export default {
       type: String,
       default: '$vuetify.icons.ratingHalf'
     },
+    halfIncrements: Boolean,
+    length: {
+      type: Number,
+      default: 5
+    },
+    readonly: Boolean,
+    showHover: Boolean,
     value: {
       type: Number,
       required: true
-    },
-    showHover: {
-      type: Boolean
-    },
-    halfIncrements: {
-      type: Boolean
-    },
-    readonly: {
-      type: Boolean
     }
   },
 
-  data () {
-    return {
-      hoverIndex: null
-    }
-  },
+  data: () => ({
+    hoverIndex: -1
+  }),
 
   computed: {
-    isHovering () {
-      return this.showHover && this.hoverIndex !== null
+    isHovering (): boolean {
+      return this.showHover && this.hoverIndex >= 0
     }
   },
 
   methods: {
-    isHalfEvent (e) {
+    isHalfEvent (e: MouseEvent): boolean {
       if (this.halfIncrements) {
-        const rect = e.target.getBoundingClientRect()
-        if (e.offsetX < rect.width / 2) return true
+        const rect = e.target && (e.target as HTMLElement).getBoundingClientRect()
+        if (rect && e.offsetX < rect.width / 2) return true
       }
 
       return false
     },
-    createClickFn (i) {
-      return e => {
+    createClickFn (i: number): Function {
+      return (e: MouseEvent) => {
         if (this.readonly) return
 
         if (this.isHalfEvent(e)) this.$emit('input', i + 0.5)
         else this.$emit('input', i + 1)
       }
     },
-    createProps (i) {
+    createProps (i: number): ItemSlotProps {
       const click = this.createClickFn(i)
       const isHovered = Math.floor(this.hoverIndex) > i
       const isHalfHovered = this.halfIncrements && !isHovered && (this.hoverIndex - i) % 1 > 0
@@ -101,7 +105,7 @@ export default {
         click
       }
     },
-    getIconName (props) {
+    getIconName (props: ItemSlotProps): string {
       let iconName
 
       if (this.isHovering) {
@@ -112,7 +116,7 @@ export default {
 
       return remapInternalIcon(this, iconName)
     },
-    getColor (props) {
+    getColor (props: ItemSlotProps): string {
       if (this.isHovering) {
         if (props.isHovered || props.isHalfHovered) return this.color
       } else {
@@ -121,43 +125,41 @@ export default {
 
       return this.backgroundColor
     },
-    onMouseEnter (e, i) {
+    onMouseEnter (e: MouseEvent, i: number): void {
       if (this.isHalfEvent(e)) this.hoverIndex = i + 0.5
       else this.hoverIndex = i + 1
     },
-    onMouseLeave (e) {
-      this.hoverIndex = null
+    onMouseLeave (e: MouseEvent): void {
+      this.hoverIndex = -1
     },
-    genItem (h, i) {
+    genItem (h: CreateElement, i: number): VNode | VNodeChildrenArrayContents | string {
       const props = this.createProps(i)
 
       if (this.$scopedSlots.item) return this.$scopedSlots.item(props)
 
       let listeners = {
         click: props.click
-      }
+      } as any // TODO: Better solution to allow listeners.mousemove?
 
       if (this.showHover) {
         listeners = Object.assign(listeners, {
-          mouseenter: e => this.onMouseEnter(e, i),
+          mouseenter: (e: MouseEvent) => this.onMouseEnter(e, i),
           mouseleave: this.onMouseLeave
         })
 
-        if (this.halfIncrements) listeners.mousemove = e => this.onMouseEnter(e, i)
+        if (this.halfIncrements) listeners.mousemove = (e: MouseEvent) => this.onMouseEnter(e, i)
       }
 
       const { small, medium, large, xLarge } = this.$props
       const iconProps = { small, medium, large, xLarge }
 
       return h(VIcon, {
-        directives: !this.readonly && this.ripple && [
-          {
-            name: 'ripple',
-            value: {
-              circle: true
-            }
+        directives: !this.readonly && this.ripple && [{
+          name: 'ripple',
+          value: {
+            circle: true
           }
-        ],
+        }] as any, // TODO
         props: iconProps,
         class: this.addTextColorClassChecks({}, this.getColor(props)),
         on: listeners
@@ -165,7 +167,7 @@ export default {
     }
   },
 
-  render (h) {
+  render (h): VNode {
     const children = createRange(this.length).map(i => this.genItem(h, i))
 
     return h('div', {
@@ -175,4 +177,4 @@ export default {
       }
     }, children)
   }
-}
+})
