@@ -5,6 +5,24 @@ import { getObjectValueByPath, deepEqual } from '../../util/helpers'
 
 function wrapInArray<T> (v: T | Array<T>): Array<T> { return Array.isArray(v) ? v : [v] }
 
+export interface DataIteratorProvide {
+  toggleSelectAll: () => void
+  resetExpanded: () => void
+  sort: (column: string) => void // TODO: fix
+  items: any[]
+  page: number
+  rowsPerPage: number
+  pageCount: number
+  pageStart: number
+  pageStop: number
+  itemsLength: number
+  everyItem: boolean
+  someItems: boolean
+  sortBy: string[]
+  sortDesc: boolean[]
+  multiSort: boolean
+}
+
 export default Vue.extend({
   name: 'v-data-iterator',
 
@@ -208,22 +226,18 @@ export default Vue.extend({
   },
 
   watch: {
-    // eslint-disable-next-line object-shorthand
-    'options.sortBy': function (v, old) {
+    'options.sortBy' (v, old) {
       if (deepEqual(v, old)) return
       this.$emit('update:sortBy', !this.multiSort && !Array.isArray(this.sortBy) ? v[0] : v)
     },
-    // eslint-disable-next-line object-shorthand
-    'options.sortDesc': function (v, old) {
+    'options.sortDesc' (v, old) {
       if (deepEqual(v, old)) return
       this.$emit('update:sortDesc', !this.multiSort && !Array.isArray(this.sortBy) ? v[0] : v)
     },
-    // eslint-disable-next-line object-shorthand
-    'options.page': function (v) {
+    'options.page' (v) {
       this.$emit('update:page', v)
     },
-    // eslint-disable-next-line object-shorthand
-    'options.rowsPerPage': function (v) {
+    'options.rowsPerPage' (v) {
       this.$emit('update:rowsPerPage', v)
     },
     sortBy (v) {

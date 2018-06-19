@@ -11,7 +11,7 @@ import VCell from './VCell'
 
 import { groupByProperty } from '../../util/helpers'
 import mixins from '../../util/mixins'
-import { VNode, CreateElement, VNodeData, VNodeChildren, VNodeChildrenArrayContents } from 'vue'
+import { VNode, CreateElement, VNodeData, VNodeChildrenArrayContents } from 'vue'
 import { PropValidator } from 'vue/types/options'
 
 export interface TableHeader {
@@ -22,6 +22,14 @@ export interface TableHeader {
   class?: string | string[]
   width?: string | number
   filter?: (v: any) => boolean
+  type?: 'select-all'
+}
+
+export interface DataTableProvide {
+  headers: TableHeader[]
+  loading: Boolean
+  isFlexWidth: Boolean
+  widths: (string | number | null)[]
 }
 
 export default mixins(VDataIterator).extend({
