@@ -182,8 +182,8 @@ export default {
         }
       }]
     }, [
-      this.hideControls ? null : this.genIcon('left', this.prevIcon, this.prev),
-      this.hideControls ? null : this.genIcon('right', this.nextIcon, this.next),
+      this.hideControls ? null : this.genIcon('prev', this.$vuetify.rtl ? this.nextIcon : this.prevIcon, this.prev),
+      this.hideControls ? null : this.genIcon('next', this.$vuetify.rtl ? this.prevIcon : this.nextIcon, this.next),
       this.hideDelimiters ? null : this.genDelimiters(),
       this.$slots.default
     ])
