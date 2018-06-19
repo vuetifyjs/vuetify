@@ -152,4 +152,28 @@ test('VListTile.vue', ({ mount }) => {
 
     expect(wrapper.contains('.v-list__tile--link')).toBe(true)
   })
+
+  it('should have --hover class when hover prop present', () => {
+    const wrapper = mount(VListTile, {
+      propsData: {
+        hover: true
+      }
+    })
+
+    expect(wrapper.contains('.v-list__tile--hover')).toBe(true)
+  })
+
+  it('should not have --hover when both hover and inactive are used', () => {
+    const wrapper = mount(VListTile, {
+      propsData: {
+        hover: true,
+        inactive: true
+      }
+    })
+
+    expect(wrapper.is('div')).toBe(true)
+    expect(wrapper.find('div')).toHaveLength(2)
+    expect(wrapper.find('a')).toHaveLength(0)
+    expect(wrapper.find('.v-list__tile--hover')).toHaveLength(0)
+  })
 })
