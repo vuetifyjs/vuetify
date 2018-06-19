@@ -1,26 +1,32 @@
+import Vue, { VNode } from 'vue'
+
 import VCell from './VCell'
 import VCheckbox from '../VCheckbox'
 
-export default {
+export default Vue.extend({
   name: 'v-cell-checkbox',
+
   model: {
     prop: 'inputValue',
     event: 'change'
   },
+
   props: {
     inputValue: Boolean,
     head: Boolean
   },
+
   inheritAttrs: false,
-  render (h) {
-    const checkbox = h(VCheckbox, {
+
+  render (h): VNode {
+    const checkbox = h((VCheckbox as any), { // TODO: fix when converted to ts
       props: {
         hideDetails: true,
         inputValue: this.inputValue,
         ...this.$attrs
       },
       on: {
-        change: v => this.$emit('change', v)
+        change: (v: any) => this.$emit('change', v)
       }
     })
 
@@ -31,4 +37,4 @@ export default {
       staticClass: 'v-cell-checkbox'
     }, [checkbox])
   }
-}
+})

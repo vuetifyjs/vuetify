@@ -23,7 +23,7 @@ VDataTable.install = function install (Vue) {
   Vue.component(VEditDialog.name, VEditDialog)
   Vue.component(VTableOverflow.name, VTableOverflow)
   Vue.component(VCell.name, VCell)
-  Vue.component(VCellCheckbox.name, VCellCheckbox)
+  Vue.component(VCellCheckbox.options.name, VCellCheckbox)
   Vue.component(VRow.options.name, VRow)
   Vue.component(VTableActions.options.name, VTableActions)
   Vue.component(VTableHeaders.options.name, VTableHeaders)
