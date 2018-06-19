@@ -1,13 +1,17 @@
-export default {
+import Vue, { VNode, CreateElement } from 'vue'
+import { DataTableProvide } from './VDataTable'
+import inject from '../../util/inject'
+
+export default inject<DataTableProvide>()('dataTable').extend({
   name: 'v-row',
-  inject: ['dataTable'],
-  render (h) {
+
+  render (h: CreateElement): VNode {
     const content = this.$slots.default ? this.$slots.default : []
     const widths = this.dataTable.widths
     const isFlexWidth = this.dataTable.isFlexWidth
 
-    content.forEach((c, i) => {
-      if (!c.fnOptions || !c.fnOptions.name === 'v-cell' || !widths[i]) return
+    content.forEach((c: any, i: number) => {
+      if (!c.fnOptions || c.fnOptions.name !== 'v-cell' || !widths[i]) return
 
       if (isFlexWidth) {
         c.data.style = `flex-grow: ${widths[i]}`
@@ -20,4 +24,4 @@ export default {
       staticClass: 'v-row'
     }, content)
   }
-}
+})

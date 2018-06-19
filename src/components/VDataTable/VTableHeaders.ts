@@ -1,11 +1,16 @@
+import { VNode, CreateElement } from 'vue'
+import { injectTwo } from '../../util/inject'
+import { DataTableProvide } from './VDataTable'
+import { DataIteratorProvide } from '../VDataIterator/VDataIterator'
+
 import VCellCheckbox from './VCellCheckbox'
 import VRow from './VRow'
 import VCell from './VCell'
 import VIcon from '../VIcon'
 
-export default {
+export default injectTwo<DataIteratorProvide, DataTableProvide>()('dataIterator', 'dataTable').extend({
   name: 'v-table-headers',
-  inject: ['dataIterator', 'dataTable'],
+
   props: {
     showSelectAll: Boolean,
     sortIcon: {
@@ -13,8 +18,9 @@ export default {
       default: '$vuetify.icons.sort'
     }
   },
+
   methods: {
-    genSelectAll (h, classes = []) {
+    genSelectAll (h: CreateElement, classes: string | string[] = []) {
       return h(VCellCheckbox, {
         class: classes,
         props: {
@@ -29,11 +35,12 @@ export default {
         }
       })
     },
-    genSortIcon (h, column) {
+    genSortIcon (h: CreateElement) {
       return h(VIcon, [this.sortIcon])
     }
   },
-  render (h) {
+
+  render (h: CreateElement): VNode {
     const headers = this.dataTable.headers.map(c => {
       if (c.type === 'select-all') return this.genSelectAll(h, c.class)
 
@@ -47,7 +54,7 @@ export default {
         h('span', [c.text])
       ]
 
-      const listeners = {}
+      const listeners: any = {}
 
       if (sortable) {
         listeners['click'] = () => {
@@ -66,7 +73,7 @@ export default {
 
         children.push(this.genSortIcon(h))
 
-        this.dataIterator.multiSort && beingSorted && children.push(h('span', { class: 'badge' }, [sortIndex + 1]))
+        this.dataIterator.multiSort && beingSorted && children.push(h('span', { class: 'badge' }, [String(sortIndex + 1)]))
       }
 
       return h(VCell, {
@@ -84,4 +91,4 @@ export default {
       class: 'v-table__header'
     }, [h(VRow, headers)])
   }
-}
+})
