@@ -269,11 +269,7 @@ export default {
   },
 
   mounted () {
-    // If instance is being destroyed
-    // do not run mounted functions
-    if (this._isDestroyed) return
-
-    this.content = this.$refs.menu.$refs.content
+    this.content = this.$refs.menu && this.$refs.menu.$refs.content
   },
 
   methods: {
