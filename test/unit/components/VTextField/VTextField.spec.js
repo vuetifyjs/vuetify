@@ -106,7 +106,7 @@ test('VTextField.js', ({ mount }) => {
     expect(wrapper.vm.shouldValidate).toEqual(false)
   })
 
-  it('should not display counter when set to false', async () => {
+  it('should not display counter when set to false/undefined/null', async () => {
     const wrapper = mount(VTextField, {
       propsData: {
         counter: true
@@ -123,6 +123,16 @@ test('VTextField.js', ({ mount }) => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.find('.v-counter')[0]).toBe(undefined)
+
+    wrapper.setProps({ counter: undefined })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.find('.v-counter')[0]).toBe(undefined)
+
+    wrapper.setProps({ counter: null })
+    await wrapper.vm.$nextTick()
+
     expect(wrapper.find('.v-counter')[0]).toBe(undefined)
   })
 

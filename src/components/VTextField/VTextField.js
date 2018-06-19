@@ -259,7 +259,7 @@ export default {
       ])
     },
     genCounter () {
-      if (this.counter === false) return null
+      if (this.counter === false || this.counter == null) return null
 
       const value = (this.internalValue || '').length
       const max = this.counter === true ? this.$attrs.maxlength : this.counter
