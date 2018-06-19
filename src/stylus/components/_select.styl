@@ -23,14 +23,6 @@ theme(v-select, 'v-select')
 
 .v-select
   position: relative // For **attach** prop
-  // This is here to avoid making it transparent
-  // then visible when autocomplete
-  &:not(.v-autocomplete)
-    input
-      // IE11 refuses to hide blinking input
-      // because of this requires a min-height
-      font-size: 0
-      min-height: 32px
 
   .v-menu
     height: 100%
@@ -52,7 +44,6 @@ theme(v-select, 'v-select')
     .v-select__selections
       padding-top: 24px
 
-  // For specificity, hide caret
   &.v-text-field
     input
       flex: 1 1 // Doesn't resize on IE11 with 3rd param

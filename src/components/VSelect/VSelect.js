@@ -526,8 +526,12 @@ export default {
     onClick () {
       if (this.isDisabled) return
 
-      this.onFocus()
       this.isMenuActive = true
+
+      if (!this.isFocused) {
+        this.isFocused = true
+        this.$emit('focus')
+      }
     },
     onEnterDown () {
       this.onBlur()
