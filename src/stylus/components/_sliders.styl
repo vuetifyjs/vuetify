@@ -13,7 +13,6 @@ v-slider($material)
 
   .v-slider__ticks
     border-color: $material.text.primary
-    border-style: solid
     color: $material.text.secondary
 
   &:not(.v-input--is-dirty)
@@ -27,9 +26,6 @@ v-slider($material)
       .v-slider__thumb
         border: 3px solid $material.slider.active
 
-    .v-slider__ticks:first-child
-      border-color: transparent
-
   &.v-input--is-disabled
     .v-slider__thumb
       border: 5px solid $material.slider.disabled
@@ -37,7 +33,6 @@ v-slider($material)
   &.v-input--is-disabled.v-input--is-dirty
     .v-slider__thumb
       background: $material.slider.disabled
-      border: 0px solid transparent
 
   &.v-input--slider--is-active
     .v-slider__track
@@ -85,6 +80,9 @@ rtl(v-slider-rtl, "v-input--slider")
   &.v-input--is-disabled
     .v-slider__thumb
       transform: translateY(-50%) scale(.45)
+    &.v-input--is-dirty
+      .v-slider__thumb
+        border: 0px solid transparent
 
   .v-input__slot > *:first-child:not(:only-child)
     margin-right: 16px
@@ -160,6 +158,7 @@ rtl(v-slider-rtl, "v-input--slider")
 
   &__ticks
     opacity: 0
+    border-style: solid
     transition: .3s $transition.swing
 
     > span
@@ -174,6 +173,10 @@ rtl(v-slider-rtl, "v-input--slider")
 
     &:last-child > span
       transform: translateX(-100%)
+
+  &:not(.v-input--is-dirty)
+    .v-slider__ticks:first-child
+      border-color: transparent
 
   &__thumb-container
     position: absolute
