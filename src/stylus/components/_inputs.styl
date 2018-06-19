@@ -3,14 +3,14 @@
 
 /* Theme */
 v-input($material)
-  input::placeholder,
-  textarea::placeholder
-    color: $material.text.disabled
-
   &:not(.v-input--is-disabled)
     input,
     textarea
       color: $material.text.primary
+
+  input::placeholder,
+  textarea::placeholder
+    color: $material.text.disabled
 
   &--is-disabled
     .v-label,

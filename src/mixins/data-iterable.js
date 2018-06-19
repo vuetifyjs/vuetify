@@ -48,7 +48,7 @@ export default {
     mustSort: Boolean,
     noResultsText: {
       type: String,
-      default: '$vuetify.lang.dataIterator.noResultsText'
+      default: '$vuetify.dataIterator.noResultsText'
     },
     nextIcon: {
       type: String,
@@ -66,7 +66,7 @@ export default {
           10,
           25,
           {
-            text: '$vuetify.lang.dataIterator.rowsPerPageAll',
+            text: '$vuetify.dataIterator.rowsPerPageAll',
             value: -1
           }
         ]
@@ -74,7 +74,7 @@ export default {
     },
     rowsPerPageText: {
       type: String,
-      default: '$vuetify.lang.dataIterator.rowsPerPageText'
+      default: '$vuetify.dataIterator.rowsPerPageText'
     },
     selectAll: [Boolean, String],
     search: {
@@ -385,7 +385,7 @@ export default {
           }
         },
         attrs: {
-          'aria-label': this.$vuetify.t('$vuetify.lang.dataIterator.prevPage')
+          'aria-label': this.$vuetify.t('$vuetify.dataIterator.prevPage')
         }
       }, [this.$createElement(VIcon, this.prevIcon)])
     },
@@ -410,7 +410,7 @@ export default {
           }
         },
         attrs: {
-          'aria-label': this.$vuetify.t('$vuetify.lang.dataIterator.nextPage')
+          'aria-label': this.$vuetify.t('$vuetify.dataIterator.nextPage')
         }
       }, [this.$createElement(VIcon, this.nextIcon)])
     },
@@ -455,7 +455,7 @@ export default {
             pageStop: stop,
             itemsLength: this.itemsLength
           })
-          : this.$vuetify.t('$vuetify.lang.dataIterator.pageText', this.pageStart + 1, stop, this.itemsLength)
+          : this.$vuetify.t('$vuetify.dataIterator.pageText', this.pageStart + 1, stop, this.itemsLength)
       }
 
       return this.$createElement('div', {

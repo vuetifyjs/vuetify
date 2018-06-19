@@ -36,7 +36,6 @@ export default {
     classes () {
       const color = (this.type && !this.color) ? this.type : this.computedColor
       const classes = {
-        'v-alert--dismissible': this.dismissible,
         'v-alert--outline': this.outline
       }
 
