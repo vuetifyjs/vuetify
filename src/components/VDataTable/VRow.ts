@@ -1,8 +1,8 @@
 import Vue, { VNode, CreateElement } from 'vue'
 import { DataTableProvide } from './VDataTable'
-import inject from '../../util/inject'
+import { injectOne } from '../../util/inject'
 
-export default inject<DataTableProvide>()('dataTable').extend({
+export default injectOne<DataTableProvide>()('dataTable').extend({
   name: 'v-row',
 
   render (h: CreateElement): VNode {
