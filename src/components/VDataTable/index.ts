@@ -24,12 +24,12 @@ VDataTable.install = function install (Vue) {
   Vue.component(VTableOverflow.name, VTableOverflow)
   Vue.component(VCell.name, VCell)
   Vue.component(VCellCheckbox.name, VCellCheckbox)
-  Vue.component(VRow.name, VRow)
-  Vue.component(VTableActions.name, VTableActions)
-  Vue.component(VTableHeaders.name, VTableHeaders)
+  Vue.component(VRow.options.name, VRow)
+  Vue.component(VTableActions.options.name, VTableActions)
+  Vue.component(VTableHeaders.options.name, VTableHeaders)
   Vue.component(VRowExpandable.name, VRowExpandable)
   Vue.component(VRowGroup.name, VRowGroup)
-  Vue.component(VTableProgress.name, VTableProgress)
+  Vue.component(VTableProgress.options.name, VTableProgress)
 }
 
 export default VDataTable

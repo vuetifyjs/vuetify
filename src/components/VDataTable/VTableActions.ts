@@ -6,7 +6,7 @@ import { DataIteratorProvide } from '../VDataIterator/VDataIterator'
 import VBtn from '../VBtn'
 import VIcon from '../VIcon'
 import VSelect from '../VSelect'
-import { PropValidator } from 'vue/types/options';
+import { PropValidator } from 'vue/types/options'
 
 export default injectOne<DataIteratorProvide>()('dataIterator').extend({
   name: 'v-table-actions',
@@ -38,7 +38,7 @@ export default injectOne<DataIteratorProvide>()('dataIterator').extend({
         { text: '15', value: 15 },
         { text: 'All', value: -1 }
       ])
-    } as PropValidator<{ text: string, value: number }[]>,
+    } as PropValidator<any[]>,
     rowsPerPageText: {
       type: String,
       default: 'Rows per page:'
@@ -83,7 +83,7 @@ export default injectOne<DataIteratorProvide>()('dataIterator').extend({
           ? this.dataIterator.itemsLength
           : this.dataIterator.pageStop
 
-          children = this.$scopedSlots.pageText
+        children = this.$scopedSlots.pageText
           ? [this.$scopedSlots.pageText({
             pageStart: this.dataIterator.pageStart + 1,
             pageStop: stop,
@@ -102,7 +102,7 @@ export default injectOne<DataIteratorProvide>()('dataIterator').extend({
         props: {
           disabled,
           icon: true,
-          flat: true,
+          flat: true
           // dark: this.dark, // TODO: add mixin
           // light: this.light // TODO: add mixin
         },
