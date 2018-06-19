@@ -27,8 +27,8 @@ VDataTable.install = function install (Vue) {
   Vue.component(VRow.options.name, VRow)
   Vue.component(VTableActions.options.name, VTableActions)
   Vue.component(VTableHeaders.options.name, VTableHeaders)
-  Vue.component(VRowExpandable.name, VRowExpandable)
-  Vue.component(VRowGroup.name, VRowGroup)
+  Vue.component(VRowExpandable.options.name, VRowExpandable)
+  Vue.component(VRowGroup.options.name, VRowGroup)
   Vue.component(VTableProgress.options.name, VTableProgress)
 }
 

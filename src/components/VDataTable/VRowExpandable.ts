@@ -1,6 +1,8 @@
+import Vue, { VNode, CreateElement, VNodeChildrenArrayContents } from 'vue'
+
 import ExpandTransitionGenerator from '../transitions/expand-transition'
 
-export default {
+export default Vue.extend({
   name: 'v-row-expandable',
   props: {
     value: {
@@ -23,7 +25,7 @@ export default {
       this.isActive = !this.isActive
       this.$emit('input', this.isActive)
     },
-    genTransition (h) {
+    genTransition (h: CreateElement): VNode {
       const wrapper = h('div', {
         class: 'v-row-expandable__wrapper'
       }, this.$slots.expansion)
@@ -34,26 +36,31 @@ export default {
         children.push(wrapper)
       }
 
-      const transition = h('transition', {
+      return h('transition', {
         on: ExpandTransitionGenerator('v-row-expandable--expanded')
       }, children)
-
-      return transition
     },
-    genRow (h) {
-      const hasScopedSlot = !!this.$scopedSlots.default
-      return hasScopedSlot ? this.$scopedSlots.default({ expanded: this.isActive, toggle: this.toggle }) : this.$slots.default
+    genRow (h: CreateElement): string | VNodeChildrenArrayContents {
+      const content: VNodeChildrenArrayContents = []
+
+      if (this.$scopedSlots.default) {
+        content.push(this.$scopedSlots.default({ expanded: this.isActive, toggle: this.toggle }))
+      } else {
+        content.push(this.$slots.default)
+      }
+
+      return content
     }
   },
   created () {
     this.isActive = this.value
   },
-  render (h) {
+  render (h): VNode {
     return h('div', {
       staticClass: 'v-row-expandable'
     }, [
-      this.genRow(h),
+      ...this.genRow(h),
       this.genTransition(h)
     ])
   }
-}
+})

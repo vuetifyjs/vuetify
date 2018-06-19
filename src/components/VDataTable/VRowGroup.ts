@@ -1,12 +1,15 @@
+import { CreateElement, VNodeChildrenArrayContents, VNode } from 'vue'
+import mixins from '../../util/mixins'
+
 import VRowExpandable from './VRowExpandable'
 import VCell from './VCell'
 import VRow from './VRow'
 import VBtn from '../VBtn'
 import VIcon from '../VIcon'
 
-export default {
+export default mixins(VRowExpandable).extend({
   name: 'v-row-group',
-  extends: VRowExpandable,
+
   props: {
     value: {
       type: Boolean,
@@ -21,12 +24,12 @@ export default {
     }
   },
   methods: {
-    genRow (h) {
+    genRow (h: CreateElement): VNodeChildrenArrayContents {
       if (this.$slots.header) return this.$slots.header
 
-      if (this.disableExpansion) return null
+      if (this.disableExpansion) return []
 
-      return h(VRow, {
+      return [h(VRow, {
         staticClass: 'v-row-group__header'
       }, [
         h(VCell, [
@@ -47,7 +50,7 @@ export default {
           ]),
           this.$slots.cell
         ])
-      ])
+      ])]
     }
   }
-}
+})
