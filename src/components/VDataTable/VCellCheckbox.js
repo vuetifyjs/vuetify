@@ -8,6 +8,7 @@ export default {
     event: 'change'
   },
   props: {
+    inputValue: Boolean,
     head: Boolean
   },
   inheritAttrs: false,
@@ -15,9 +16,12 @@ export default {
     const checkbox = h(VCheckbox, {
       props: {
         hideDetails: true,
+        inputValue: this.inputValue,
         ...this.$attrs
       },
-      on: this.$listeners
+      on: {
+        change: v => this.$emit('change', v)
+      }
     })
 
     return h(VCell, {

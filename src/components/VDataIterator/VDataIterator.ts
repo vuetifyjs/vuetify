@@ -1,7 +1,7 @@
 import Vue, { VNode, CreateElement, VNodeChildren, VNodeChildrenArrayContents } from 'vue'
 import { PropValidator } from 'vue/types/options'
 
-import { getObjectValueByPath } from '../../util/helpers'
+import { getObjectValueByPath, deepEqual } from '../../util/helpers'
 
 function wrapInArray<T> (v: T | Array<T>): Array<T> { return Array.isArray(v) ? v : [v] }
 
@@ -10,7 +10,7 @@ export default Vue.extend({
 
   provide (): any {
     const dataIterator = {
-      toggleSelected: this.toggleSelected,
+      toggleSelectAll: this.toggleSelectAll,
       resetExpanded: this.resetExpanded,
       sort: this.sort
     }
@@ -186,7 +186,11 @@ export default Vue.extend({
         { text: '15', value: 15 },
         { text: 'All', value: -1 }
       ])
-    } as PropValidator<any[]>
+    } as PropValidator<any[]>,
+    selected: Array as PropValidator<any[]>,
+    singleSelect: Boolean, // TODO: Better name to fit in with similar functionality in other components?
+    expanded: Array as PropValidator<any[]>,
+    singleExpand: Boolean // TODO: Better name to fit in with similar functionality in other components?
   },
 
   data () {
@@ -205,11 +209,13 @@ export default Vue.extend({
 
   watch: {
     // eslint-disable-next-line object-shorthand
-    'options.sortBy': function (v) {
+    'options.sortBy': function (v, old) {
+      if (deepEqual(v, old)) return
       this.$emit('update:sortBy', !this.multiSort && !Array.isArray(this.sortBy) ? v[0] : v)
     },
     // eslint-disable-next-line object-shorthand
-    'options.sortDesc': function (v) {
+    'options.sortDesc': function (v, old) {
+      if (deepEqual(v, old)) return
       this.$emit('update:sortDesc', !this.multiSort && !Array.isArray(this.sortBy) ? v[0] : v)
     },
     // eslint-disable-next-line object-shorthand
@@ -231,6 +237,34 @@ export default Vue.extend({
     },
     rowsPerPage (v) {
       this.options.rowsPerPage = v
+    },
+    selected (v) {
+      const selection: Record<string, boolean> = {}
+      v.forEach((i: any) => selection[getObjectValueByPath(i, this.itemKey)] = true)
+      this.selection = selection
+    },
+    expanded (v) {
+      const expansion: Record<string, boolean> = {}
+      v.forEach((i: any) => expansion[getObjectValueByPath(i, this.itemKey)] = true)
+      this.expansion = expansion
+    },
+    selection: {
+      handler (v, old) {
+        if (deepEqual(v, old)) return
+        const keys = Object.keys(this.selection).filter(k => this.selection[k])
+        const selected = !keys.length ? [] : this.items.filter(i => keys.includes(String(getObjectValueByPath(i, this.itemKey))))
+        this.$emit('update:selected', selected)
+      },
+      deep: true
+    },
+    expansion: {
+      handler (v, old) {
+        if (deepEqual(v, old)) return
+        const keys = Object.keys(this.expansion)
+        const expanded = !keys.length ? [] : this.items.filter(i => keys.includes(String(getObjectValueByPath(i, this.itemKey))))
+        this.$emit('update:expanded', expanded)
+      },
+      deep: true
     }
   },
 
@@ -315,26 +349,40 @@ export default Vue.extend({
       this.options = Object.assign(this.options, { sortBy, sortDesc })
     },
     isSelected (item: any): boolean {
-      return this.selection[item[this.itemKey]]
+      return this.selection[getObjectValueByPath(item, this.itemKey)]
     },
     select (item: any, value = true): void {
-      this.$set(this.selection, item[this.itemKey], value)
+      const selection = this.singleSelect ? {} : Object.assign({}, this.selection)
+      const key = getObjectValueByPath(item, this.itemKey)
+
+      if (value) selection[key] = true
+      else delete selection[key]
+
+      this.selection = selection
+      this.$emit('item-selected', { item, value })
     },
     isExpanded (item: any): boolean {
-      return this.expansion[item[this.itemKey]]
+      return this.expansion[getObjectValueByPath(item, this.itemKey)]
     },
     expand (item: any, value = true): void {
-      this.$set(this.expansion, item[this.itemKey], value)
+      const expansion = this.singleExpand ? {} : Object.assign({}, this.expansion)
+      const key = getObjectValueByPath(item, this.itemKey)
+
+      if (value) expansion[key] = true
+      else delete expansion[key]
+
+      this.expansion = expansion
+      this.$emit('item-expanded', { item, value })
     },
     resetExpanded (): void {
       this.expansion = {}
     },
-    toggleSelected (): void {
+    toggleSelectAll (): void {
       const selection: Record<string, boolean> = {}
 
       this.computedItems.forEach((item: any) => {
-        const value = item[this.itemKey]
-        selection[value] = !this.everyItem
+        const key = getObjectValueByPath(item, this.itemKey)
+        selection[key] = !this.everyItem
       })
 
       this.selection = Object.assign({}, this.selection, selection)
@@ -389,8 +437,12 @@ export default Vue.extend({
       }
 
       bodies.push(this.$slots.default)
-      bodies.push(...this.computeSlots('body'))
-      bodies.push(...this.genItems(h))
+
+      const slots = this.computeSlots('body')
+      if (slots.length) bodies.push(this.genBodyWrapper(h, slots))
+
+      const items = this.genItems(h)
+      if (items.length) bodies.push(...items)
 
       return bodies
     },

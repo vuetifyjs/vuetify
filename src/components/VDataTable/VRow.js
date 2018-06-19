@@ -2,12 +2,12 @@ export default {
   name: 'v-row',
   inject: ['dataTable'],
   render (h) {
-    const cells = this.$slots.default ? this.$slots.default.filter(e => !!e.tag) : []
-
+    const content = this.$slots.default ? this.$slots.default : []
     const widths = this.dataTable.widths
     const isFlexWidth = this.dataTable.isFlexWidth
-    cells.forEach((c, i) => {
-      if (!widths[i]) return
+
+    content.forEach((c, i) => {
+      if (!c.fnOptions || !c.fnOptions.name === 'v-cell' || !widths[i]) return
 
       if (isFlexWidth) {
         c.data.style = `flex-grow: ${widths[i]}`
@@ -18,6 +18,6 @@ export default {
 
     return h('div', {
       staticClass: 'v-row'
-    }, cells)
+    }, content)
   }
 }

@@ -60,7 +60,7 @@ export default mixins(VDataIterator).extend({
     hideActions: Boolean,
     hideHeader: Boolean,
     groupBy: String,
-    fixedHeight: String,
+    height: String,
     loading: Boolean
   },
 
@@ -165,7 +165,7 @@ export default mixins(VDataIterator).extend({
         }))
       }
 
-      return [this.genBodyWrapper(h, footers)]
+      return footers
     },
     genBodies (h: CreateElement): VNodeChildrenArrayContents {
       if (this.static) return this.$slots.default
@@ -176,10 +176,10 @@ export default mixins(VDataIterator).extend({
       return h('div', {
         staticClass: 'v-table__body',
         class: {
-          'v-table__body--fixed': this.fixedHeight
+          'v-table__body--fixed': !!this.height
         },
         style: {
-          height: this.fixedHeight
+          height: this.height
         }
       }, items)
     },

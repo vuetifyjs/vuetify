@@ -14,8 +14,9 @@ export default {
     }
   },
   methods: {
-    genSelectAll (h) {
+    genSelectAll (h, classes = []) {
       return h(VCellCheckbox, {
+        class: classes,
         props: {
           head: true
         },
@@ -24,7 +25,7 @@ export default {
           indeterminate: !this.dataIterator.everyItem && this.dataIterator.someItems
         },
         on: {
-          change: () => this.dataIterator.toggleSelected()
+          change: () => this.dataIterator.toggleSelectAll()
         }
       })
     },
@@ -34,6 +35,8 @@ export default {
   },
   render (h) {
     const headers = this.dataTable.headers.map(c => {
+      if (c.type === 'select-all') return this.genSelectAll(h, c.class)
+
       const sortable = c.sortable == null || c.sortable
 
       const classes = {
