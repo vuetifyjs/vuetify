@@ -22,6 +22,15 @@ test('VCarousel.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should render component in RTL mode and match snapshot', async () => {
+    const wrapper = mount(VCarousel)
+    wrapper.vm.$vuetify.rtl = true
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+    wrapper.vm.$vuetify.rtl = undefined
+  })
+
   it('should render component with image cycling off and match snapshot', async () => {
     const wrapper = mount(VCarousel, {
       propsData: {
