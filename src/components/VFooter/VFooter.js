@@ -78,7 +78,7 @@ export default {
   },
 
   render (h) {
-    const data = this.setBackground(this.color, {
+    const data = this.setBackgroundColor(this.color, {
       staticClass: 'v-footer',
       'class': {
         'v-footer--absolute': this.absolute,

@@ -134,7 +134,7 @@ export default {
   },
 
   render (h) {
-    const tooltip = h('div', this.setBackground(this.color, {
+    const tooltip = h('div', this.setBackgroundColor(this.color, {
       staticClass: 'v-tooltip__content',
       'class': {
         [this.contentClass]: true,

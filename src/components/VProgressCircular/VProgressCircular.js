@@ -130,7 +130,7 @@ export default {
     const info = h('div', { staticClass: 'v-progress-circular__info' }, [this.$slots.default])
     const svg = this.genSvg(h)
 
-    return h('div', this.setText(this.color, {
+    return h('div', this.setTextColor(this.color, {
       staticClass: 'v-progress-circular',
       class: this.classes,
       style: this.styles,

@@ -37,7 +37,7 @@ export default {
   },
 
   render (h) {
-    const badge = this.$slots.badge ? [h('span', this.setBackground(this.color, {
+    const badge = this.$slots.badge ? [h('span', this.setBackgroundColor(this.color, {
       staticClass: 'v-badge__badge',
       attrs: this.attrs,
       directives: [{

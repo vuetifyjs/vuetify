@@ -44,7 +44,7 @@ export default {
     genYearItem (year) {
       const formatted = this.formatter(`${year}`)
       const active = parseInt(this.value, 10) === year
-      const setColor = active ? this.setText : (c, v) => v
+      const setColor = active ? this.setTextColor : (c, v) => v
 
       return this.$createElement('li', setColor(this.color || 'primary', {
         key: year,

@@ -110,7 +110,7 @@ export default {
       const children = []
 
       for (let value = this.min; value <= this.max; value = value + this.step) {
-        children.push(this.$createElement('span', this.setBackground(value === this.value ? (this.color || 'accent') : null, {
+        children.push(this.$createElement('span', this.setBackgroundColor(value === this.value ? (this.color || 'accent') : null, {
           'class': {
             active: value === this.displayedValue,
             disabled: !this.isAllowed(value)
@@ -125,7 +125,7 @@ export default {
     genHand () {
       const scale = `scaleY(${this.handScale(this.displayedValue)})`
       const angle = this.rotate + this.degreesPerUnit * (this.displayedValue - this.min)
-      const setColor = this.value == null ? (c, v) => v : this.setBackground
+      const setColor = this.value == null ? (c, v) => v : this.setBackgroundColor
       return this.$createElement('div', setColor(this.color || 'accent', {
         staticClass: 'v-time-picker-clock__hand',
         style: {

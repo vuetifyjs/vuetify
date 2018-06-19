@@ -228,7 +228,7 @@ export default {
     this.isExtended = this.extended || !!this.$slots.extension
 
     const children = []
-    const data = this.setBackground(this.color, {
+    const data = this.setBackgroundColor(this.color, {
       'class': this.classes,
       style: this.styles,
       on: this.$listeners

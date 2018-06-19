@@ -52,7 +52,7 @@ export default {
 
   methods: {
     genBackground () {
-      return this.$createElement('div', this.setBackground(this.color, {
+      return this.$createElement('div', this.setBackgroundColor(this.color, {
         staticClass: 'v-jumbotron__background',
         style: this.backgroundStyles
       }))

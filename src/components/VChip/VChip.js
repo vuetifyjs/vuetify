@@ -69,7 +69,7 @@ export default {
   },
 
   render (h) {
-    const data = this.setBackground(this.color, {
+    const data = this.setBackgroundColor(this.color, {
       staticClass: 'v-chip',
       'class': this.classes,
       attrs: { tabindex: this.disabled ? -1 : 0 },
@@ -80,8 +80,8 @@ export default {
       on: this.$listeners
     })
 
-    const setText = (this.textColor || this.outline) ? this.setText : (c, v) => v
+    const setTextColor = (this.textColor || this.outline) ? this.setTextColor : (c, v) => v
 
-    return h('span', setText(this.textColor || this.color, data), [this.genContent(h)])
+    return h('span', setTextColor(this.textColor || this.color, data), [this.genContent(h)])
   }
 }

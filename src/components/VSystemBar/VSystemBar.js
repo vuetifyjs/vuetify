@@ -64,6 +64,6 @@ export default {
       }
     }
 
-    return h('div', this.setBackground(this.color, data), this.$slots.default)
+    return h('div', this.setBackgroundColor(this.color, data), this.$slots.default)
   }
 }

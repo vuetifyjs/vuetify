@@ -36,7 +36,7 @@ export default {
         staticClass: 'v-input--selection-controls__input'
       }, [
         this.genInput('checkbox'),
-        this.genRipple(this.setText(this.computedColor, {
+        this.genRipple(this.setTextColor(this.computedColor, {
           directives: [{
             name: 'touch',
             value: {
@@ -54,7 +54,7 @@ export default {
     // this avoids a visual issue where
     // the color takes too long to transition
     genSwitchPart (target) {
-      return this.$createElement('div', this.setText(this.computedColor, {
+      return this.$createElement('div', this.setTextColor(this.computedColor, {
         staticClass: `v-input--switch__${target}`
       }))
     },

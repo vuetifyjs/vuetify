@@ -29,6 +29,6 @@ export default {
     data.style.height = size
     data.style.width = size
 
-    return h('div', Colorable.options.methods.setBackground(props.color, data), children)
+    return h('div', Colorable.options.methods.setBackgroundColor(props.color, data), children)
   }
 }

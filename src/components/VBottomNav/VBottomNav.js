@@ -72,7 +72,7 @@ export default {
   },
 
   render (h) {
-    return h('div', this.setBackground(this.color, {
+    return h('div', this.setBackgroundColor(this.color, {
       staticClass: 'v-bottom-nav',
       'class': this.classes,
       style: {

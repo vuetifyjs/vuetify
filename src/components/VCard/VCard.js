@@ -65,6 +65,6 @@ export default {
 
     data.style = this.styles
 
-    return h(tag, this.setBackground(this.color, data), this.$slots.default)
+    return h(tag, this.setBackgroundColor(this.color, data), this.$slots.default)
   }
 }

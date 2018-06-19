@@ -34,7 +34,7 @@ export default {
 
   methods: {
     genTitle () {
-      return this.$createElement('div', this.setBackground(this.computedTitleColor, {
+      return this.$createElement('div', this.setBackgroundColor(this.computedTitleColor, {
         staticClass: 'v-picker__title',
         'class': {
           'v-picker__title--landscape': this.landscape

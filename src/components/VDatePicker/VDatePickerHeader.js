@@ -102,7 +102,7 @@ export default {
       }
     },
     genHeader () {
-      const setColor = this.disabled ? (c, v) => v : this.setText
+      const setColor = this.disabled ? (c, v) => v : this.setTextColor
       const header = this.$createElement('strong', setColor(this.color || 'accent', {
         key: String(this.value),
         on: {

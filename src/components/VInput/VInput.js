@@ -262,7 +262,7 @@ export default {
   },
 
   render (h) {
-    return h('div', this.setText(this.validationState, {
+    return h('div', this.setTextColor(this.validationState, {
       staticClass: 'v-input',
       attrs: this.attrsInput,
       'class': this.classesInput

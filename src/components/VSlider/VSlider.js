@@ -309,7 +309,7 @@ export default {
       }, ticks)
     },
     genThumb () {
-      return this.$createElement('div', this.setBackground(this.computedThumbColor, {
+      return this.$createElement('div', this.setBackgroundColor(this.computedThumbColor, {
         staticClass: 'v-slider__thumb'
       }))
     },
@@ -319,7 +319,7 @@ export default {
       const thumbLabelContent = this.getLabel(value)
       this.showThumbLabel && children.push(this.genThumbLabel(thumbLabelContent))
 
-      return this.$createElement('div', this.setText(this.computedThumbColor, {
+      return this.$createElement('div', this.setTextColor(this.computedThumbColor, {
         staticClass: 'v-slider__thumb-container',
         'class': {
           'v-slider__thumb-container--is-active': isActive,
@@ -350,7 +350,7 @@ export default {
             }
           ]
         }, [
-          this.$createElement('div', this.setBackground(this.computedThumbColor, {
+          this.$createElement('div', this.setBackgroundColor(this.computedThumbColor, {
             staticClass: 'v-slider__thumb-label',
             style: {
               height: size,
@@ -362,11 +362,11 @@ export default {
     },
     genTrackContainer () {
       const children = [
-        this.$createElement('div', this.setBackground(this.computedTrackColor, {
+        this.$createElement('div', this.setBackgroundColor(this.computedTrackColor, {
           staticClass: 'v-slider__track',
           style: this.trackStyles
         })),
-        this.$createElement('div', this.setBackground(this.computedColor, {
+        this.$createElement('div', this.setBackgroundColor(this.computedColor, {
           staticClass: 'v-slider__track-fill',
           style: this.trackFillStyles
         }))

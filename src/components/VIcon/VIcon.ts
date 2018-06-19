@@ -115,7 +115,7 @@ export default mixins(Colorable, Themeable).extend({
       data.attrs['aria-hidden'] = true
     }
 
-    const setColor = props.color ? Colorable.options.methods.setText : (c: string, v: any) => v
+    const setColor = props.color ? Colorable.options.methods.setTextColor : (c: string, v: any) => v
     const classes: any = {
       'v-icon--disabled': props.disabled,
       'v-icon--left': props.left,
@@ -132,7 +132,7 @@ export default mixins(Colorable, Themeable).extend({
     data.staticClass = [
       'v-icon',
       data.staticClass,
-      Object.keys(classes).filter((c: string) => classes[c]).join(' '),
+      Object.keys(classes).filter(k => classes[k]).join(' '),
       iconType,
       isCustomIcon ? iconName : null
     ].filter(val => !!val).join(' ').trim()

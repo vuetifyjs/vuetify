@@ -85,7 +85,7 @@ export default {
 
   methods: {
     genDeterminate (h) {
-      return h('div', this.setBackground(this.color, {
+      return h('div', this.setBackgroundColor(this.color, {
         ref: 'front',
         staticClass: `v-progress-linear__bar__determinate`,
         style: {
@@ -94,7 +94,7 @@ export default {
       }))
     },
     genBar (h, name) {
-      return h('div', this.setBackground(this.color, {
+      return h('div', this.setBackgroundColor(this.color, {
         staticClass: 'v-progress-linear__bar__indeterminate',
         class: {
           [name]: true

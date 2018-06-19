@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-const isCssColor = (color: string) => color.match(/^(#|rgba?\(|hsla?\()/)
+const isCssColor = (color: string) => color.match(/^(#|(rgb|hsl)a?\()/)
 
 export default Vue.extend({
   name: 'colorable',
@@ -10,10 +10,11 @@ export default Vue.extend({
   },
 
   methods: {
-    setBackground<C extends string> (color: C, data: any): any {
+    setBackgroundColor<C extends string> (color: C, data: any): any {
       if (color && isCssColor(color)) {
-        data['style'] = data['style'] || {}
-        data['style']['background-color'] = `${color} !important`
+        data['style'] = Object.assign({}, data['style'], {
+          'background-color': `${color} !important`
+        })
       } else if (color) {
         data['class'] = Object.assign({}, data['class'], {
           [color]: true
@@ -23,11 +24,12 @@ export default Vue.extend({
       return data
     },
 
-    setText<C extends string> (color: C, data: any): any {
+    setTextColor<C extends string> (color: C, data: any): any {
       if (color && isCssColor(color)) {
-        data['style'] = data['style'] || {}
-        data['style']['color'] = `${color} !important`
-        data['style']['border-color'] = `${color} !important`
+        data['style'] = Object.assign({}, data['style'], {
+          'color': `${color} !important`,
+          'border-color': `${color} !important`
+        })
       } else if (color) {
         const [colorName, colorModifier] = color.toString().trim().split(' ')
         data['class'] = Object.assign({}, data['class'], {

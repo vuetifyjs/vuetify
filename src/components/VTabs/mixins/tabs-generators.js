@@ -10,7 +10,7 @@ import VIcon from '../../VIcon'
 export default {
   methods: {
     genBar (items) {
-      return this.$createElement('div', this.setBackground(this.color, {
+      return this.$createElement('div', this.setBackgroundColor(this.color, {
         staticClass: 'v-tabs__bar',
         'class': this.themeClasses,
         ref: 'bar'

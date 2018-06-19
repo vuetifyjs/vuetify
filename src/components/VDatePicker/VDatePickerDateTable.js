@@ -68,7 +68,7 @@ export default {
       } else {
         eventColor = this.eventColor[date]
       }
-      return this.$createElement('div', this.setBackground(eventColor || this.color || 'accent', {
+      return this.$createElement('div', this.setBackgroundColor(eventColor || this.color || 'accent', {
         staticClass: 'v-date-picker-table__event'
       }))
     },

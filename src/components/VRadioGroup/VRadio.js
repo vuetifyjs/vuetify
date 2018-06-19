@@ -67,7 +67,7 @@ export default {
 
   computed: {
     computedData () {
-      const setColor = (!this.parentError && this.isActive) ? this.setText : (c, v) => v
+      const setColor = (!this.parentError && this.isActive) ? this.setTextColor : (c, v) => v
 
       return setColor(this.color, {
         staticClass: 'v-radio',
@@ -150,8 +150,8 @@ export default {
           'aria-checked': this.isActive.toString(),
           ...this.$attrs
         }),
-        this.genRipple(this.setText(this.computedColor, {})),
-        this.$createElement(VIcon, this.setText(this.computedColor, {}), this.computedIcon)
+        this.genRipple(this.setTextColor(this.computedColor, {})),
+        this.$createElement(VIcon, this.setTextColor(this.computedColor, {}), this.computedIcon)
       ])
     },
     onFocus () {

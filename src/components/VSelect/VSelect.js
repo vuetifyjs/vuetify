@@ -345,7 +345,7 @@ export default {
         this.getDisabled(item)
       )
 
-      const setColor = index === this.selectedIndex ? this.setText : (c, v) => v
+      const setColor = index === this.selectedIndex ? this.setTextColor : (c, v) => v
 
       return this.$createElement('div', setColor(this.color, {
         staticClass: 'v-select__selection v-select__selection--comma',

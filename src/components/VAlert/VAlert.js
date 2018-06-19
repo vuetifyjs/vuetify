@@ -68,7 +68,7 @@ export default {
       children.push(close)
     }
 
-    const setColor = this.outline ? this.setText : this.setBackground
+    const setColor = this.outline ? this.setTextColor : this.setBackgroundColor
     const alert = h('div', setColor(this.computedColor, {
       staticClass: 'v-alert',
       'class': {

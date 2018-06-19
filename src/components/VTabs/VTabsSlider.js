@@ -6,7 +6,7 @@ export default {
   mixins: [Colorable],
 
   render (h) {
-    return h('div', this.setBackground(this.color || 'accent', {
+    return h('div', this.setBackgroundColor(this.color || 'accent', {
       staticClass: 'v-tabs__slider'
     }))
   }

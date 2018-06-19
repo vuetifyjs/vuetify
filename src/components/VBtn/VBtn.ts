@@ -133,7 +133,7 @@ const VBtn = mixins(
   },
 
   render (h): VNode {
-    const setColor = (!this.outline && !this.flat) ? this.setBackground : this.setText
+    const setColor = (!this.outline && !this.flat) ? this.setBackgroundColor : this.setTextColor
     const { tag, data } = this.generateRouteLink(this.classes)
     const children = [this.genContent()]
 

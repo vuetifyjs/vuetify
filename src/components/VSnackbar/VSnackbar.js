@@ -74,7 +74,7 @@ export default {
           class: this.classes,
           on: this.$listeners
         }, [
-          h('div', this.setBackground(this.color, {
+          h('div', this.setBackgroundColor(this.color, {
             staticClass: 'v-snack__wrapper'
           }), [
             h('div', {
