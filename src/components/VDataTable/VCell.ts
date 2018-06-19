@@ -1,3 +1,5 @@
+import { VNode, CreateElement } from 'vue'
+
 export default {
   name: 'v-cell',
 
@@ -9,7 +11,8 @@ export default {
     }
   },
 
-  render (h, { data, slots, props }) {
+  render (h: CreateElement, context: any): VNode {
+    const { data, slots, props } = context
     const resolvedSlots = slots()
     const staticClass = `${props.head ? 'v-head' : 'v-cell'} ${data.staticClass || ''}`
 
