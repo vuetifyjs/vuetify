@@ -19,6 +19,7 @@ v-list($material)
 
   .v-list__tile--link:hover,
   .v-list__tile--highlighted,
+  .v-list__tile--hover:hover,
   .v-list__group__header:hover
     background: $material.list-tile.hover
 
@@ -62,7 +63,8 @@ theme(v-list, "v-list")
     transition: $primary-transition
     user-select: none
 
-    &--link
+    &--link,
+    &--hover
       cursor: pointer
 
     &__content,
