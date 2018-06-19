@@ -45,7 +45,7 @@ export default {
     hideHeaders: Boolean,
     rowsPerPageText: {
       type: String,
-      default: '$vuetify.lang.dataTable.rowsPerPageText'
+      default: '$vuetify.dataTable.rowsPerPageText'
     },
     customFilter: {
       type: Function,
