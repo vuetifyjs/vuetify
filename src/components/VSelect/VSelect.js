@@ -417,14 +417,7 @@ export default {
         props[prop] = this[prop]
       }
 
-      // These styles encompass the prepend
-      // and append icons. Change activator
-      // to the entire component
-      if (this.isSolo) {
-        props.activator = this.$el
-      } else {
-        props.activator = this.$refs['input-slot']
-      }
+      props.activator = this.$refs['input-slot']
 
       Object.assign(props, this.menuProps)
 
