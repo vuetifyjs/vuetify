@@ -131,7 +131,7 @@ export default mixins(Colorable, Themeable).extend({
     data.staticClass = [
       'v-icon',
       data.staticClass,
-      Object.keys(classes).filter(k => classes[k]).join(' '),
+      keys(classes).filter(k => classes[k]).join(' '),
       iconType,
       isCustomIcon ? iconName : null
     ].filter(val => !!val).join(' ').trim()

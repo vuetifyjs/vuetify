@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import { VNodeData } from 'vue/types/vnode'
 
-function isCssColor (color: string | undefined | null | false): boolean {
+function isCssColor (color?: string | null | false): boolean {
   return !!color && !!color.match(/^(#|(rgb|hsl)a?\()/)
 }
 
@@ -13,33 +13,37 @@ export default Vue.extend({
   },
 
   methods: {
-    setBackgroundColor (color: string | undefined | null | false, data: VNodeData = {}): VNodeData {
+    setBackgroundColor (color?: string | null | false, data: VNodeData = {}): VNodeData {
       if (isCssColor(color)) {
-        data['style'] = Object.assign(data['style'] || {}, {
+        data.style = {
+          ...data.style,
           'background-color': `${color} !important`
-        })
+        }
       } else if (color) {
-        data['class'] = Object.assign(data['class'] || {}, {
+        data.class = {
+          ...data.class,
           [color]: true
-        })
+        }
       }
 
       return data
     },
 
-    setTextColor (color: string | undefined, data: VNodeData = {}): VNodeData {
+    setTextColor (color?: string, data: VNodeData = {}): VNodeData {
       if (isCssColor(color)) {
-        data['style'] = Object.assign(data['style'] || {}, {
+        data.style = {
+          ...data.style,
           'color': `${color} !important`,
           'border-color': `${color} !important`
-        })
+        }
       } else if (color) {
-        const [colorName, colorModifier] = color.toString().trim().split(' ')
-        data['class'] = Object.assign(data['class'] || {}, {
+        const [colorName, colorModifier] = color.toString().trim().split(' ', 2) as (string | undefined)[]
+        data.class = {
+          ...data.class,
           [colorName + '--text']: true
-        })
+        }
         if (colorModifier) {
-          data['class']['text--' + colorModifier] = !!colorModifier
+          data.class['text--' + colorModifier] = true
         }
       }
       return data
