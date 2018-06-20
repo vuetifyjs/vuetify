@@ -291,6 +291,11 @@ export default {
 
       this.activateMenu()
     },
+    onEnterDown () {
+      // Avoid invoking this method
+      // will cause updateSelf to
+      // be called emptying search
+    },
     onInput (e) {
       if (this.selectedIndex > -1) return
 

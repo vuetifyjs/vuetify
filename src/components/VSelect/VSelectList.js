@@ -76,9 +76,6 @@ export default {
       const tile = {
         on: {
           mousedown: e => e.preventDefault() // Prevent onBlur from being called
-        },
-        props: {
-          disabled: true
         }
       }
 

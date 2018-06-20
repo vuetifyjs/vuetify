@@ -398,16 +398,6 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect(list.html()).toMatchSnapshot()
   })
 
-  it('should assign self as activator when solo or box', () => {
-    const wrapper = mount(VSelect, {
-      propsData: { solo: true }
-    })
-
-    wrapper.trigger('click')
-
-    expect(wrapper.vm.$refs.menu.activator).toEqual(wrapper.vm.$el)
-  })
-
   it('should use scoped slot for selection generation', () => {
     const wrapper = mount({
       render (h) {

@@ -88,11 +88,11 @@ export default {
         'v-text-field--single-line': this.isSingle,
         'v-text-field--solo': this.isSolo,
         'v-text-field--solo-inverted': this.soloInverted,
+        'v-text-field--solo-flat': this.flat,
         'v-text-field--box': this.box,
         'v-text-field--enclosed': this.isEnclosed,
         'v-text-field--reverse': this.reverse,
-        'v-text-field--outline': this.hasOutline,
-        'elevation-0': this.flat
+        'v-text-field--outline': this.hasOutline
       }
     },
     directivesInput () {

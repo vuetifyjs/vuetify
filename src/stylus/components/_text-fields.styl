@@ -314,8 +314,9 @@ rtl(v-text-field-rtl, "v-text-field")
       min-height: 48px
       padding: 0
 
-    .v-input__slot
-      elevation(2)
+    &:not(.v-text-field--solo-flat)
+      .v-input__slot
+        elevation(2)
 
     .v-text-field__slot
       align-items: center
