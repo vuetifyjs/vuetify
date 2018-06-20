@@ -4,14 +4,14 @@ import VBtn from '../VBtn'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
+import mixins from '../../util/mixins'
+import { VNode } from 'vue'
 
-export default {
+export default mixins(Colorable).extend({
   name: 'v-timeline-item',
 
-  mixins: [Colorable],
-
   props: {
-    icon: [Boolean, String],
+    icon: String,
     color: String,
     iconColor: String,
     left: Boolean,
@@ -32,6 +32,8 @@ export default {
       }, this.icon)
     },
     genBtn () {
+      const children = this.icon ? [this.genIcon()] : []
+
       return this.$createElement(VBtn, {
         staticClass: 'v-timeline-item__btn',
         props: {
@@ -39,28 +41,26 @@ export default {
           color: this.color,
           fab: true
         }
-      }, [this.icon ? this.genIcon() : null])
+      }, children)
     },
     genOpposite () {
-      if (this.$slots.opposite) {
-        return this.$createElement('div', {
-          staticClass: 'v-timeline-item__opposite'
-        }, [this.$slots.opposite])
-      }
+      return this.$createElement('div', {
+        staticClass: 'v-timeline-item__opposite'
+      }, [this.$slots.opposite])
     }
   },
 
-  render (h) {
+  render (h): VNode {
+    const children = [this.genBtn(), this.genBody()]
+
+    if (this.$slots.opposite) children.push(this.genOpposite())
+
     return h('div', {
       staticClass: 'v-timeline-item',
       class: {
         'v-timeline-item--left': this.left,
         'v-timeline-item--right': this.right
       }
-    }, [
-      this.genBtn(),
-      this.genBody(),
-      this.genOpposite()
-    ])
+    }, children)
   }
-}
+})

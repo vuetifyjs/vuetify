@@ -1,6 +1,7 @@
 import '../../stylus/components/_timeline.styl'
+import Vue, { VNode } from 'vue'
 
-export default {
+export default Vue.extend({
   name: 'v-timeline',
 
   props: {
@@ -9,7 +10,7 @@ export default {
   },
 
   computed: {
-    classes () {
+    classes (): {} {
       return {
         'v-timeline--left': this.left,
         'v-timeline--right': this.right
@@ -17,10 +18,10 @@ export default {
     }
   },
 
-  render (h) {
+  render (h): VNode {
     return h('div', {
       staticClass: 'v-timeline',
       'class': this.classes
     }, this.$slots.default)
   }
-}
+})

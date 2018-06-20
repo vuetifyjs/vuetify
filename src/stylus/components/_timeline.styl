@@ -8,7 +8,7 @@ v-timeline($material)
 theme(v-timeline, "v-timeline")
 
 .v-timeline
-  padding-bottom: 24px
+  padding-top: 24px
   position: relative
 
   &:before
@@ -23,7 +23,7 @@ theme(v-timeline, "v-timeline")
   .v-timeline-item
     display: flex
     flex-direction: row-reverse
-    margin-bottom: 24px
+    padding-bottom: 24px
 
     &:nth-child(odd):not(.v-timeline-item--right), &--left
       flex-direction: row
@@ -61,7 +61,7 @@ theme(v-timeline, "v-timeline")
       &:nth-child(odd):not(.v-timeline-item--right), &--left
         flex-direction: row-reverse
 
-      .v-btn
+      &__btn
         left: 0
         transition: color .3s $transition.swing
 
