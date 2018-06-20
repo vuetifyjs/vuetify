@@ -223,7 +223,7 @@ export default {
       }
     },
     staticList () {
-      if (this.$slots['no-data']) {
+      if (this.$slots['no-data'] || this.$scopedSlots.item) {
         consoleError('assert: staticList should not be called if slots are used')
       }
 
