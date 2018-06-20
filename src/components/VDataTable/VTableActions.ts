@@ -1,5 +1,5 @@
 import { VNode, CreateElement, VNodeChildrenArrayContents } from 'vue'
-import { injectOne } from '../../util/inject'
+import { injectTwo } from '../../util/inject'
 import { DataIteratorProvide } from '../VDataIterator/VDataIterator'
 
 // import VRow from './VRow'
@@ -7,8 +7,9 @@ import VBtn from '../VBtn'
 import VIcon from '../VIcon'
 import VSelect from '../VSelect'
 import { PropValidator } from 'vue/types/options'
+import { DataTableProvide } from './VDataTable'
 
-export default injectOne<DataIteratorProvide>()('dataIterator').extend({
+export default injectTwo<DataIteratorProvide, DataTableProvide>()('dataIterator', 'dataTable').extend({
   name: 'v-table-actions',
 
   inheritAttrs: false,
@@ -141,8 +142,15 @@ export default injectOne<DataIteratorProvide>()('dataIterator').extend({
   },
 
   render (h: CreateElement): VNode {
+    const width = this.dataTable && this.dataTable.isPixelWidth
+      ? this.dataTable.widths.reduce((acc, curr) => Number(acc) + Number(String(curr).slice(0, -2)), 0)
+      : null
+
     return h('div', {
-      staticClass: 'v-data-table__actions'
+      staticClass: 'v-data-table__actions',
+      style: {
+        width: `${width}px`
+      }
     }, [
       this.genRowsPerPageSelect(h),
       this.genPagination(h),

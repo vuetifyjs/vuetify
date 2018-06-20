@@ -9,7 +9,7 @@ import VTableProgress from './VTableProgress'
 import VRow from './VRow'
 import VCell from './VCell'
 
-import { groupByProperty } from '../../util/helpers'
+import { groupByProperty, getObjectValueByPath } from '../../util/helpers'
 import mixins from '../../util/mixins'
 import { VNode, CreateElement, VNodeData, VNodeChildrenArrayContents } from 'vue'
 import { PropValidator } from 'vue/types/options'
@@ -23,13 +23,16 @@ export interface TableHeader {
   width?: string | number
   filter?: (v: any) => boolean
   type?: 'select-all'
+  sort?: (a: any, b: any) => number
 }
 
 export interface DataTableProvide {
   headers: TableHeader[]
   loading: Boolean
   isFlexWidth: Boolean
+  isPixelWidth: Boolean
   widths: (string | number | null)[]
+  tableWidth: string | number | null
 }
 
 export default mixins(VDataIterator).extend({
@@ -58,31 +61,89 @@ export default mixins(VDataIterator).extend({
       get: () => this.widths
     })
 
+    Object.defineProperty(dataTable, 'isPixelWidth', {
+      get: () => this.isPixelWidth
+    })
+
+    Object.defineProperty(dataTable, 'tableWidth', {
+      get: () => this.tableWidth
+    })
+
     return { dataTable }
   },
 
   props: {
-    static: Boolean,
+    customSort: {
+      type: Function,
+      default: (items: any[], sortBy: string[], sortDesc: boolean[], headers: Record<string, TableHeader>): any[] => {
+        if (sortBy === null) return items
+
+        return items.sort((a: any, b: any): number => {
+          for (let i = 0; i < sortBy.length; i++) {
+            const sortKey = sortBy[i]
+
+            let sortA = getObjectValueByPath(a, sortKey)
+            let sortB = getObjectValueByPath(b, sortKey)
+
+            if (sortDesc[i]) {
+              [sortA, sortB] = [sortB, sortA]
+            }
+
+            if (headers[sortKey]) return headers[sortKey].sort!(sortA, sortB)
+
+            // Check if both cannot be evaluated
+            if (sortA === null && sortB === null) {
+              return 0
+            }
+
+            [sortA, sortB] = [sortA, sortB].map(s => (s || '').toString().toLocaleLowerCase())
+
+            if (sortA !== sortB) {
+              if (!isNaN(sortA) && !isNaN(sortB)) return Number(sortA) - Number(sortB)
+              if (sortA > sortB) return 1
+              if (sortA < sortB) return -1
+            }
+          }
+
+          return 0
+        })
+      }
+    },
+    groupBy: String,
     headers: Array as PropValidator<TableHeader[]>,
-    showSelectAll: Boolean,
+    height: String,
     hideActions: Boolean,
     hideHeader: Boolean,
-    groupBy: String,
-    height: String,
-    loading: Boolean
+    loading: Boolean,
+    showSelectAll: Boolean,
+    static: Boolean
   },
 
   computed: {
+    tableWidth (): string | number | null {
+      return this.isPixelWidth ? this.widths.reduce((acc, curr) => Number(acc) + Number(String(curr).slice(0, -2)), 0) : null
+    },
     isFlexWidth (): boolean {
       return this.static ? false : this.headers.some((h: TableHeader) => !!h.width && !isNaN(Number(h.width)))
     },
+    isPixelWidth (): boolean {
+      return this.static ? false : this.headers.some((h: TableHeader) => !!h.width && String(h.width).indexOf('px') >= 0)
+    },
     widths (): (string | number | null)[] {
       return this.static ? [] : this.headers.map((h: TableHeader) => h.width || (this.isFlexWidth ? 1 : null))
+    },
+    headersWithCustomSort (): Record<string, TableHeader> {
+      const headers: Record<string, TableHeader> = {}
+      for (let i = 0; i < this.headers.length; i++) {
+        const header = this.headers[i]
+        if (header.sort) headers[header.value] = header
+      }
+      return headers
     }
   },
 
   methods: {
-    searchItems (items: any[]) {
+    searchItems (items: any[]): any[] {
       // If we have column-specific filters, run them here
       // Right now an item has to pass all filters, this might not be ideal
       const filterableHeaders = this.headers.filter(h => !!h.filter)
@@ -95,11 +156,11 @@ export default mixins(VDataIterator).extend({
 
       return items
     },
-    sortItems (items: any[], sortBy: string[], sortDesc: boolean[]) {
+    sortItems (items: any[], sortBy: string[], sortDesc: boolean[]): any[] {
       sortBy = this.groupBy ? [this.groupBy, ...sortBy] : sortBy
       sortDesc = this.groupBy ? [false, ...sortDesc] : sortDesc
 
-      return VDataIterator.options.methods.sortItems.call(this, items, sortBy, sortDesc)
+      return this.customSort(items, sortBy, sortDesc, this.headersWithCustomSort)
     },
     genHeaders (h: CreateElement): VNodeChildrenArrayContents {
       const headers = this.computeSlots('header')

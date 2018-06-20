@@ -33,7 +33,10 @@ export function injectOne<TA> () {
 export function injectTwo<TA, TB> () {
   return function inject<A extends string, B extends string> (a: A, b: B): VueConstructor<Vue & { [K in A]: TA } & { [K in B]: TB }> {
     return Vue.extend({
-      inject: [a, b]
+      inject: {
+        [a]: { default: null },
+        [b]: { default: null }
+      }
     })
   }
 }

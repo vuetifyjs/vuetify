@@ -10,18 +10,24 @@ export default injectOne<DataTableProvide>()('dataTable').extend({
     const widths = this.dataTable.widths
     const isFlexWidth = this.dataTable.isFlexWidth
 
-    content.forEach((c: any, i: number) => {
-      if (!c.fnOptions || c.fnOptions.name !== 'v-cell' || !widths[i]) return
+    let i = 0
+    content.forEach((c: any) => {
+      if (!c.fnOptions || !c.fnOptions.name.startsWith('v-cell') || !widths[i]) return
 
       if (isFlexWidth) {
         c.data.style = `flex-grow: ${widths[i]}`
       } else {
         c.data.style = `flex: none; width: ${widths[i]}`
       }
+
+      i += 1
     })
 
     return h('div', {
-      staticClass: 'v-row'
+      staticClass: 'v-row',
+      style: {
+        width: `${this.dataTable.tableWidth}px`
+      }
     }, content)
   }
 })
