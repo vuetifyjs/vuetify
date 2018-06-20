@@ -67,7 +67,7 @@ export default {
 
   computed: {
     computedData () {
-      const setColor = (!this.parentError && this.isActive) ? this.setTextColor : (c, v) => v
+      const setColor = (!this.parentError && this.isActive) ? this.setTextColor : this.doNotApplyColor
 
       return setColor(this.color, {
         staticClass: 'v-radio',

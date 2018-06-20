@@ -80,7 +80,7 @@ export default {
       on: this.$listeners
     })
 
-    const setTextColor = (this.textColor || this.outline) ? this.setTextColor : (c, v) => v
+    const setTextColor = (this.textColor || this.outline) ? this.setTextColor : this.doNotApplyColor
 
     return h('span', setTextColor(this.textColor || this.color, data), [this.genContent(h)])
   }

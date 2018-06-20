@@ -1,6 +1,9 @@
 import Vue from 'vue'
+import { VNodeData } from 'vue/types/vnode'
 
-const isCssColor = (color: string) => color.match(/^(#|(rgb|hsl)a?\()/)
+function isCssColor (color: string | undefined): boolean {
+  return !!color && !!color.match(/^(#|(rgb|hsl)a?\()/)
+}
 
 export default Vue.extend({
   name: 'colorable',
@@ -10,8 +13,8 @@ export default Vue.extend({
   },
 
   methods: {
-    setBackgroundColor<C extends string> (color: C, data: any): any {
-      if (color && isCssColor(color)) {
+    setBackgroundColor (color: string | undefined, data: VNodeData): VNodeData {
+      if (isCssColor(color)) {
         data['style'] = Object.assign({}, data['style'], {
           'background-color': `${color} !important`
         })
@@ -24,8 +27,8 @@ export default Vue.extend({
       return data
     },
 
-    setTextColor<C extends string> (color: C, data: any): any {
-      if (color && isCssColor(color)) {
+    setTextColor (color: string | undefined, data: VNodeData): VNodeData {
+      if (isCssColor(color)) {
         data['style'] = Object.assign({}, data['style'], {
           'color': `${color} !important`,
           'border-color': `${color} !important`
@@ -39,6 +42,10 @@ export default Vue.extend({
           data['class']['text--' + colorModifier] = !!colorModifier
         }
       }
+      return data
+    },
+
+    doNotApplyColor (color: string | undefined, data: VNodeData): VNodeData {
       return data
     }
   }

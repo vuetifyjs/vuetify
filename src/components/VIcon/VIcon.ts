@@ -115,7 +115,7 @@ export default mixins(Colorable, Themeable).extend({
       data.attrs['aria-hidden'] = true
     }
 
-    const setColor = props.color ? Colorable.options.methods.setTextColor : (c: string, v: any) => v
+    const setColor = props.color ? Colorable.options.methods.setTextColor : Colorable.options.methods.doNotApplyColor
     const classes: any = {
       'v-icon--disabled': props.disabled,
       'v-icon--left': props.left,
