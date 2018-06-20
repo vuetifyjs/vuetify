@@ -115,7 +115,7 @@ export default mixins(Colorable, Themeable).extend({
       data.attrs['aria-hidden'] = true
     }
 
-    const classes: any = {
+    const classes = {
       'v-icon--disabled': props.disabled,
       'v-icon--left': props.left,
       'v-icon--link': listeners.click || listeners['!click'],
