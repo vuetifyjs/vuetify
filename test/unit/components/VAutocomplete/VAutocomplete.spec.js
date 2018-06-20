@@ -424,19 +424,6 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
     expect(wrapper.vm.lazySearch).toBe(null)
   })
 
-  it('should call methods on blur', () => {
-    const updateAutocomplete = jest.fn()
-    const wrapper = shallow(VAutocomplete, {
-      methods: {
-        updateAutocomplete
-      }
-    })
-
-    wrapper.vm.onEnterDown()
-
-    expect(updateAutocomplete).toHaveBeenCalledTimes(1)
-  })
-
   it('should select input text on focus', async () => {
     const wrapper = mount(VAutocomplete)
     const select = jest.fn()

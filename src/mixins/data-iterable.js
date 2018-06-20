@@ -387,7 +387,7 @@ export default {
         attrs: {
           'aria-label': this.$vuetify.t('$vuetify.dataIterator.prevPage')
         }
-      }, [this.$createElement(VIcon, this.prevIcon)])
+      }, [this.$createElement(VIcon, this.$vuetify.rtl ? this.nextIcon : this.prevIcon)])
     },
     genNextIcon () {
       const pagination = this.computedPagination
@@ -412,7 +412,7 @@ export default {
         attrs: {
           'aria-label': this.$vuetify.t('$vuetify.dataIterator.nextPage')
         }
-      }, [this.$createElement(VIcon, this.nextIcon)])
+      }, [this.$createElement(VIcon, this.$vuetify.rtl ? this.prevIcon : this.nextIcon)])
     },
     genSelect () {
       return this.$createElement('div', {

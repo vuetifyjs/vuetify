@@ -13,6 +13,10 @@ module.exports = {
   jsRules: {},
   rules: {
     'use-type-alias': true,
+    'no-inferrable-types': true,
+    'unified-signatures': true,
+    'use-default-type-parameter': true,
+    'no-undefined-argument': true,
 
     /* typestrict overrides */
 

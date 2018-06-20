@@ -43,7 +43,7 @@ export default {
 
   computed: {
     computedTransition () {
-      return this.isReversing ? 'tab-reverse-transition' : 'tab-transition'
+      return (this.isReversing === !this.$vuetify.rtl) ? 'tab-reverse-transition' : 'tab-transition'
     },
     displayedMonth () {
       return this.tableDate.split('-')[1] - 1

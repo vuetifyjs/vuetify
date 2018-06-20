@@ -61,6 +61,11 @@ export default {
 
       return chip
     },
+    // Requires a manual definition
+    // to overwrite removal in v-autocomplete
+    onEnterDown () {
+      VSelect.methods.onEnterDown.call(this)
+    },
     onKeyDown (e) {
       const keyCode = e.keyCode
 

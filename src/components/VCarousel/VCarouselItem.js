@@ -31,7 +31,7 @@ export default {
 
   computed: {
     computedTransition () {
-      return this.reverse ? this.reverseTransition : this.transition
+      return (this.reverse === !this.$vuetify.rtl) ? this.reverseTransition : this.transition
     }
   },
 
