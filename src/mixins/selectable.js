@@ -21,13 +21,14 @@ export default {
   },
 
   data: vm => ({
+    defaultColor: 'accent',
     lazyValue: vm.inputValue
   }),
 
   props: {
     color: {
       type: String,
-      default: 'accent'
+      default: ''
     },
     id: String,
     inputValue: null,

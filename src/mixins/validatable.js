@@ -85,7 +85,7 @@ export default {
     validationState () {
       if (this.hasError && this.shouldValidate) return 'error'
       if (this.hasSuccess && this.shouldValidate) return 'success'
-      if (this.hasColor) return this.color
+      if (this.hasColor) return this.color || this.defaultColor
       return null
     },
     validationTarget () {
