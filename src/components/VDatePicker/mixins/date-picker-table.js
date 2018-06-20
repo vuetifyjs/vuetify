@@ -59,7 +59,7 @@ export default {
   },
 
   methods: {
-    genButtonClasses (value, isAllowed, isFloating, isSelected, isCurrent) {
+    genButtonClasses (isAllowed, isFloating, isSelected, isCurrent) {
       return {
         'v-btn--active': isSelected,
         'v-btn--flat': !isSelected,
@@ -80,7 +80,7 @@ export default {
 
       return this.$createElement('button', setColor(color, {
         staticClass: 'v-btn',
-        'class': this.genButtonClasses(value, isAllowed, isFloating, isSelected, isCurrent),
+        'class': this.genButtonClasses(isAllowed, isFloating, isSelected, isCurrent),
         attrs: {
           type: 'button'
         },
