@@ -196,7 +196,7 @@ export default mixins(VDataIterator).extend({
       const grouped = groupByProperty(items, groupBy)
       const groups = Object.keys(grouped)
 
-      const rows = []
+      const rows: VNodeChildrenArrayContents = []
       for (let i = 0; i < groups.length; i++) {
         const group = groups[i]
 
@@ -220,11 +220,6 @@ export default mixins(VDataIterator).extend({
       if (!this.hideActions && !this.static) {
         footers.push(h(VTableActions, {
           props: {
-            itemsLength: this.itemsLength,
-            pageStart: this.pageStart,
-            pageStop: this.pageStop,
-            page: this.options.page,
-            rowsPerPage: this.options.rowsPerPage,
             rowsPerPageItems: this.rowsPerPageItems
           },
           on: {
