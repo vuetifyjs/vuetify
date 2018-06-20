@@ -125,8 +125,8 @@ export default {
     genHand () {
       const scale = `scaleY(${this.handScale(this.displayedValue)})`
       const angle = this.rotate + this.degreesPerUnit * (this.displayedValue - this.min)
-      const setColor = this.value == null ? this.doNotApplyColor : this.setBackgroundColor
-      return this.$createElement('div', setColor(this.color || 'accent', {
+      const color = (this.value != null) && (this.color || 'accent')
+      return this.$createElement('div', this.setBackgroundColor(color, {
         staticClass: 'v-time-picker-clock__hand',
         style: {
           transform: `rotate(${angle}deg) ${scale}`

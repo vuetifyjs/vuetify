@@ -75,11 +75,10 @@ export default {
       const isAllowed = isDateAllowed(value, this.min, this.max, this.allowedDates)
       const isSelected = value === this.value
       const isCurrent = value === this.current
-      const setColor = isSelected
-        ? this.setBackgroundColor
-        : (isCurrent ? this.setTextColor : this.doNotApplyColor)
+      const setColor = isSelected ? this.setBackgroundColor : this.setTextColor
+      const color = (isSelected || isCurrent) && (this.color || 'accent')
 
-      return this.$createElement('button', setColor(this.color || 'accent', {
+      return this.$createElement('button', setColor(color, {
         staticClass: 'v-btn',
         'class': this.genButtonClasses(value, isAllowed, isFloating, isSelected, isCurrent),
         attrs: {

@@ -102,8 +102,8 @@ export default {
       }
     },
     genHeader () {
-      const setColor = this.disabled ? this.doNotApplyColor : this.setTextColor
-      const header = this.$createElement('strong', setColor(this.color || 'accent', {
+      const color = !this.disabled && (this.color || 'accent')
+      const header = this.$createElement('strong', this.setTextColor(color, {
         key: String(this.value),
         on: {
           click: () => this.$emit('toggle')

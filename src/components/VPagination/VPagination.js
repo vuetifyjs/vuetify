@@ -134,8 +134,8 @@ export default {
       ])
     },
     genItem (h, i) {
-      const setColor = (i === this.value) ? this.setBackgroundColor : this.doNotApplyColor
-      return h('button', setColor(this.color || 'primary', {
+      const color = (i === this.value) && (this.color || 'primary')
+      return h('button', this.setBackgroundColor(color, {
         staticClass: 'v-pagination__item',
         class: {
           'v-pagination__item--active': i === this.value

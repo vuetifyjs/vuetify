@@ -46,7 +46,7 @@ export default {
 
   computed: {
     computedColor () {
-      return this.isActive ? (this.color || 'accent') : this.validationState
+      return this.isActive ? this.color : this.validationState
     },
     isMultiple () {
       return this.multiple === true || (this.multiple === null && Array.isArray(this.internalValue))

@@ -69,8 +69,8 @@ export default {
             ? 'mixed'
             : this.isActive.toString()
         }),
-        this.genRipple(this.setTextColor(this.computedColor, {})),
-        this.$createElement(VIcon, this.setTextColor(this.computedColor, {}), this.computedIcon)
+        this.genRipple(this.setTextColor(this.computedColor)),
+        this.$createElement(VIcon, this.setTextColor(this.computedColor), this.computedIcon)
       ])
     },
     genDefaultSlot () {

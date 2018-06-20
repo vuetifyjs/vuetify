@@ -70,7 +70,7 @@ export default {
       return this.selectedItems.map(item => this.getValue(item))
     },
     tileActiveClass () {
-      return Object.keys(this.setTextColor(this.color, {}).class || {}).join(' ')
+      return Object.keys(this.setTextColor(this.color).class || {}).join(' ')
     },
     staticNoDataTile () {
       const tile = {

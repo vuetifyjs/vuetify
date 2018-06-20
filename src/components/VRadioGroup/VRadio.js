@@ -48,7 +48,7 @@ export default {
 
   props: {
     color: {
-      type: [Boolean, String],
+      type: String,
       default: 'accent'
     },
     disabled: Boolean,
@@ -67,9 +67,7 @@ export default {
 
   computed: {
     computedData () {
-      const setColor = (!this.parentError && this.isActive) ? this.setTextColor : this.doNotApplyColor
-
-      return setColor(this.color, {
+      return this.setTextColor(!this.parentError && this.isActive && this.color, {
         staticClass: 'v-radio',
         'class': {
           'v-radio--is-disabled': this.isDisabled,
@@ -150,8 +148,8 @@ export default {
           'aria-checked': this.isActive.toString(),
           ...this.$attrs
         }),
-        this.genRipple(this.setTextColor(this.computedColor, {})),
-        this.$createElement(VIcon, this.setTextColor(this.computedColor, {}), this.computedIcon)
+        this.genRipple(this.setTextColor(this.computedColor)),
+        this.$createElement(VIcon, this.setTextColor(this.computedColor), this.computedIcon)
       ])
     },
     onFocus () {

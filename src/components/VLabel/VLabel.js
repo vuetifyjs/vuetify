@@ -51,7 +51,6 @@ export default {
       }
     }
 
-    const setColor = props.focused ? Colorable.options.methods.setTextColor : Colorable.options.methods.doNotApplyColor
-    return h('label', setColor(props.color, data), children)
+    return h('label', Colorable.options.methods.setTextColor(props.focused && props.color, data), children)
   }
 }

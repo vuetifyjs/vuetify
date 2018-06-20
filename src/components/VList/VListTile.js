@@ -68,8 +68,7 @@ export default {
 
     data.attrs = Object.assign({}, data.attrs, this.$attrs)
 
-    const setColor = this.disabled ? this.doNotApplyColor : this.setTextColor
-    return h('div', setColor(this.color, {
+    return h('div', this.setTextColor(!this.disabled && this.color, {
       'class': this.listClasses,
       attrs: {
         disabled: this.disabled
