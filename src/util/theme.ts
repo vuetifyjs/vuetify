@@ -1,13 +1,13 @@
 import { colorToInt, intToHex } from './colorUtils'
 import * as sRGB from './color/transformSRGB'
 import * as LAB from './color/transformCIELAB'
-import { VuetifyTheme, RGB, VuetifyParsedTheme } from 'types'
+import { VuetifyTheme, RGB } from 'types'
 
 /**
  * @param {VuetifyTheme} theme
- * @returns {VuetifyParsedTheme}
+ * @returns {VuetifyTheme}
  */
-export function parse (theme: VuetifyTheme): VuetifyParsedTheme {
+export function parse (theme: VuetifyTheme): VuetifyTheme {
   const colors = Object.keys(theme)
   const parsedTheme: any = {}
 
@@ -24,9 +24,6 @@ export function parse (theme: VuetifyTheme): VuetifyParsedTheme {
 /**
  * Generate the CSS for a base color (.primary)
  *
- * @param {string} name - The color name
- * @param {RGB} value - The color value
- * @returns {string}
  */
 export const genBaseColor = (name: string, value: RGB): string => {
   const rgb = intToHex(value)
@@ -47,13 +44,8 @@ export const genBaseColor = (name: string, value: RGB): string => {
 /**
  * Generate the CSS for a variant color (.primary.darken-2)
  *
- * @param {string} name - The color name
- * @param {RGB} value - The color value
- * @param {string} type - The variant type (darken/lighten)
- * @param {number} n - The darken/lighten step number
- * @returns {string}
  */
-export const genVariantColor = (name: string, value: RGB, type: string, n: number): string => {
+export const genVariantColor = (name: string, value: RGB, type: 'darken' | 'lighten', n: number): string => {
   const rgb = intToHex(value)
   return `
 .${name}.${type}-${n} {

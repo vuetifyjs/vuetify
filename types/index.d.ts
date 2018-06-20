@@ -117,8 +117,7 @@ export interface VuetifyBreakpoint {
 export type RGB = number
 export type XYZ = [number, number, number]
 export type LAB = [number, number, number]
-export type VuetifyThemeItem = string | number
-export type VuetifyParsedThemeItem = RGB
+export type VuetifyThemeItem = string | RGB
 
 export interface VuetifyTheme {
   [name: string]: VuetifyThemeItem
@@ -132,21 +131,9 @@ export interface VuetifyTheme {
   success: VuetifyThemeItem
 }
 
-export interface VuetifyParsedTheme {
-  [name: string]: VuetifyParsedThemeItem
-
-  primary: VuetifyParsedThemeItem
-  accent: VuetifyParsedThemeItem
-  secondary: VuetifyParsedThemeItem
-  info: VuetifyParsedThemeItem
-  warning: VuetifyParsedThemeItem
-  error: VuetifyParsedThemeItem
-  success: VuetifyParsedThemeItem
-}
-
 export interface VuetifyThemeCache {
-  get: (parsedTheme: VuetifyParsedTheme) => string | null
-  set: (parsedTheme: VuetifyParsedTheme, css: string) => void
+  get: (parsedTheme: VuetifyTheme) => string | null
+  set: (parsedTheme: VuetifyTheme, css: string) => void
 }
 
 export interface VuetifyOptions {
