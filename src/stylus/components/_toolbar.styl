@@ -75,10 +75,18 @@ theme(v-toolbar, "v-toolbar")
     > .v-list
       flex: 1 1 auto
       max-height: 100%
-      margin: 0 -($grid-gutters.xl)
+
+    > .v-list:first-child
+      margin-left: '-%s' % $grid-gutters.xl
 
       @media $display-breakpoints.sm-and-down
-        margin: 0 -($grid-gutters.lg)
+        margin-left: '-%s' % $grid-gutters.lg
+
+    > .v-list:last-child
+      margin-right: '-%s' % $grid-gutters.xl
+
+      @media $display-breakpoints.sm-and-down
+        margin-right: '-%s' % $grid-gutters.lg
 
   &__items
     display: flex
