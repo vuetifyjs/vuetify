@@ -13,6 +13,13 @@ export default {
 
   extends: VAutocomplete,
 
+  props: {
+    returnObject: {
+      type: Boolean,
+      default: true
+    }
+  },
+
   computed: {
     hasSlot () {
       return VSelect.computed.hasSlot.call(this) || this.multiple
