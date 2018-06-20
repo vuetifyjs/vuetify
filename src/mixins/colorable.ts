@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import { VNodeData } from 'vue/types/vnode'
 
-function isCssColor (color?: string | null | false): boolean {
+function isCssColor (color?: string | false): boolean {
   return !!color && !!color.match(/^(#|(rgb|hsl)a?\()/)
 }
 
@@ -13,7 +13,7 @@ export default Vue.extend({
   },
 
   methods: {
-    setBackgroundColor (color?: string | null | false, data: VNodeData = {}): VNodeData {
+    setBackgroundColor (color?: string | false, data: VNodeData = {}): VNodeData {
       if (isCssColor(color)) {
         data.style = {
           ...data.style,
@@ -29,7 +29,7 @@ export default Vue.extend({
       return data
     },
 
-    setTextColor (color?: string, data: VNodeData = {}): VNodeData {
+    setTextColor (color?: string | false, data: VNodeData = {}): VNodeData {
       if (isCssColor(color)) {
         data.style = {
           ...data.style,
