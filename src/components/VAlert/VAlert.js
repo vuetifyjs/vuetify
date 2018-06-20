@@ -44,30 +44,39 @@ export default {
     }
   },
 
-  render (h) {
-    const children = [h('div', this.$slots.default)]
+  methods: {
+    genIcon () {
+      if (!this.computedIcon) return null
 
-    if (this.computedIcon) {
-      children.unshift(h(VIcon, {
+      return this.$createElement(VIcon, {
         'class': 'v-alert__icon'
-      }, this.computedIcon))
-    }
+      }, this.computedIcon)
+    },
 
-    if (this.dismissible) {
-      const close = h('a', {
+    genDismissible () {
+      if (!this.dismissible) return null
+
+      return this.$createElement('a', {
         'class': 'v-alert__dismissible',
-        on: { click: () => this.$emit('input', false) }
+        on: {
+          click: () => this.$emit('input', false)
+        }
       }, [
-        h(VIcon, {
+        this.$createElement(VIcon, {
           props: {
             right: true
           }
         }, '$vuetify.icons.cancel')
       ])
-
-      children.push(close)
     }
+  },
 
+  render (h) {
+    const children = [
+      this.genIcon(),
+      h('div', this.$slots.default),
+      this.genDismissible()
+    ]
     const setColor = this.outline ? this.setTextColor : this.setBackgroundColor
     const alert = h('div', setColor(this.computedColor, {
       staticClass: 'v-alert',
