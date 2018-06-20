@@ -1,4 +1,4 @@
-import { XYZ, LAB } from 'types'
+import { XYZ, LAB } from 'src/util/colorUtils'
 
 const delta = 0.20689655172413793 // 6÷29
 

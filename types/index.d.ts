@@ -1,6 +1,7 @@
 import Vue, { PluginFunction, PluginObject, VueConstructor, DirectiveFunction, DirectiveOptions } from 'vue'
 import { VuetifyLanguage } from './lang'
 import './alacarte'
+import { RGB } from '../src/util/colorUtils'
 
 declare const Vuetify: Vuetify
 export default Vuetify
@@ -114,9 +115,6 @@ export interface VuetifyBreakpoint {
   xsOnly: boolean
 }
 
-export type RGB = number
-export type XYZ = [number, number, number]
-export type LAB = [number, number, number]
 export type VuetifyThemeItem = string | RGB
 
 export interface VuetifyTheme {

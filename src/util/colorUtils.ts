@@ -1,5 +1,8 @@
 import { consoleWarn } from './console'
-import { RGB } from 'types'
+
+export type RGB = number
+export type XYZ = [number, number, number]
+export type LAB = [number, number, number]
 
 // TODO: remove with TS 3.0
 type unknown = string | number | symbol | boolean | object | null | undefined

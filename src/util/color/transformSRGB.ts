@@ -1,4 +1,4 @@
-import { RGB, XYZ } from 'types'
+import { RGB, XYZ } from 'src/util/colorUtils'
 
 // For converting XYZ to sRGB
 const srgbForwardMatrix = [

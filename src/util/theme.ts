@@ -1,12 +1,8 @@
-import { colorToInt, intToHex } from './colorUtils'
+import { colorToInt, intToHex, RGB } from './colorUtils'
 import * as sRGB from './color/transformSRGB'
 import * as LAB from './color/transformCIELAB'
-import { VuetifyTheme, RGB } from 'types'
+import { VuetifyTheme } from 'types'
 
-/**
- * @param {VuetifyTheme} theme
- * @returns {VuetifyTheme}
- */
 export function parse (theme: VuetifyTheme): VuetifyTheme {
   const colors = Object.keys(theme)
   const parsedTheme: any = {}
@@ -23,7 +19,6 @@ export function parse (theme: VuetifyTheme): VuetifyTheme {
 
 /**
  * Generate the CSS for a base color (.primary)
- *
  */
 export const genBaseColor = (name: string, value: RGB): string => {
   const rgb = intToHex(value)
@@ -43,7 +38,6 @@ export const genBaseColor = (name: string, value: RGB): string => {
 
 /**
  * Generate the CSS for a variant color (.primary.darken-2)
- *
  */
 export const genVariantColor = (name: string, value: RGB, type: 'darken' | 'lighten', n: number): string => {
   const rgb = intToHex(value)
