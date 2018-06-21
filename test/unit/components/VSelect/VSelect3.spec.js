@@ -86,4 +86,23 @@ test('VSelect', ({ mount, compileToFunctions }) => {
       { text: 'Foo', value: ['bar'] }
     ])
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/4359
+  // Vue modifies the `on` property of the
+  // computed `listData` — easiest way to fix
+  it('should select value when using a scoped slot', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        items: ['foo', 'bar']
+      },
+      slots: {
+        'no-data': [() => ({
+          render: h => h('div', 'No Data')
+        })]
+      }
+    })
+
+    // Will be undefined if fails
+    expect(wrapper.vm.listData.on).toBeTruthy()
+  })
 })

@@ -15,10 +15,7 @@ export default {
 
   props: {
     flat: Boolean,
-    height: {
-      type: String,
-      default: 'auto'
-    },
+    height: [Number, String],
     hover: Boolean,
     img: String,
     raised: Boolean,

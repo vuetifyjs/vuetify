@@ -405,8 +405,12 @@ export default {
         .map(slotName => this.$createElement('template', {
           slot: slotName
         }, this.$slots[slotName]))
-
-      return this.$createElement(VSelectList, this.listData, slots)
+      // Requires destructuring due to Vue
+      // modifying the `on` property when passed
+      // as a referenced object
+      return this.$createElement(VSelectList, {
+        ...this.listData
+      }, slots)
     },
     genMenu (activator) {
       const props = {

@@ -40,7 +40,7 @@ export default {
         keyCodes.up,
         keyCodes.enter
       ].includes(e.keyCode)
-      ) e.stopPropagation()
+      ) e.preventDefault()
 
       if ([keyCodes.esc, keyCodes.tab].includes(e.keyCode)) {
         return this.isActive = false
