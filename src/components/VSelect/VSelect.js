@@ -400,7 +400,12 @@ export default {
       }
     },
     genListWithSlot () {
-      return this.$createElement(VSelectList, this.listData, [
+      // Requires destructuring due to Vue
+      // modifying the `on` property when passed
+      // as a referenced object
+      return this.$createElement(VSelectList, {
+        ...this.listData
+      }, [
         this.$createElement('template', {
           slot: 'no-data'
         }, this.$slots['no-data'])
