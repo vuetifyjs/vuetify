@@ -79,6 +79,8 @@
     "mini-css-extract-plugin": "^0.4.0",
     "optimize-css-assets-webpack-plugin": "^4.0.2",
     "postcss-loader": "^2.1.5",
+    "posthtml-parser": "^0.4.1",
+    "posthtml-render": "^1.1.4",
     "pug": "^2.0.3",
     "pug-loader": "^2.4.0",
     "rimraf": "^2.6.2",
@@ -118,7 +120,8 @@
   "jest": {
     "verbose": false,
     "roots": [
-      "<rootDir>/test/unit"
+      "<rootDir>/test/unit",
+      "<rootDir>/test/integration"
     ],
     "moduleFileExtensions": [
       "ts",
