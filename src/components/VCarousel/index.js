@@ -3,10 +3,8 @@ import VCarouselItem from './VCarouselItem'
 
 export { VCarousel, VCarouselItem }
 
-/* istanbul ignore next */
-VCarousel.install = function install (Vue) {
-  Vue.component(VCarousel.name, VCarousel)
-  Vue.component(VCarouselItem.name, VCarouselItem)
+VCarousel.$_vuetify_subcomponents = {
+  VCarouselItem
 }
 
 export default VCarousel

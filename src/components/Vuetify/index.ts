@@ -53,9 +53,20 @@ const Vuetify: VuetifyPlugin = {
     }
 
     if (opts.components) {
-      Object.values(opts.components).forEach(component => {
-        Vue.use(component)
-      })
+      for (const key in opts.components) {
+        const component: any = opts.components[key]
+        if (component.install) {
+          Vue.use(component)
+        } else {
+          Vue.component(key, component)
+          if (component.$_vuetify_subcomponents) {
+            for (const key in component.$_vuetify_subcomponents) {
+              const subcomponent = component.$_vuetify_subcomponents[key]
+              Vue.component(key, subcomponent)
+            }
+          }
+        }
+      }
     }
   },
   version: __VUETIFY_VERSION__

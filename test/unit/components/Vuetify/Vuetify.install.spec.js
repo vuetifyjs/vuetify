@@ -10,10 +10,13 @@ test('Vuetify.install.js', () => {
     Vue.directive = jest.fn()
     Vue.use = jest.fn()
 
+    const noopInstallPack = { install: () => { } }
+
     Vuetify.installed = false
     Vuetify.install(Vue, {
       components: {
-        component: 'foobarbaz'
+        ComponentPack: noopInstallPack,
+        OneComponent: {}
       },
       directives: {
         directive: {
@@ -31,9 +34,9 @@ test('Vuetify.install.js', () => {
       }
     })
 
-    expect(Vue.use.mock.calls).toEqual([['foobarbaz']])
+    expect(Vue.use.mock.calls).toEqual([[noopInstallPack]])
     expect(Vue.directive.mock.calls).toEqual([["foobarbaz", {"name": "foobarbaz"}]])
-    expect(Vue.component.mock.calls).toEqual([["v-foobarbaz", {"name": "v-foobarbaz"}]])
+    expect(Vue.component.mock.calls).toEqual([["v-foobarbaz", {"name": "v-foobarbaz"}],["OneComponent", {}]])
 
     Vue.use = jest.fn()
     Vuetify.install(Vue, {

@@ -14,14 +14,12 @@ export {
   VDatePickerYears
 }
 
-/* istanbul ignore next */
-VDatePicker.install = function install (Vue) {
-  Vue.component(VDatePicker.name, VDatePicker)
-  Vue.component(VDatePickerTitle.name, VDatePickerTitle)
-  Vue.component(VDatePickerHeader.name, VDatePickerHeader)
-  Vue.component(VDatePickerDateTable.name, VDatePickerDateTable)
-  Vue.component(VDatePickerMonthTable.name, VDatePickerMonthTable)
-  Vue.component(VDatePickerYears.name, VDatePickerYears)
+VDatePicker.$_vuetify_subcomponents = {
+  VDatePickerTitle,
+  VDatePickerHeader,
+  VDatePickerDateTable,
+  VDatePickerMonthTable,
+  VDatePickerYears
 }
 
 export default VDatePicker

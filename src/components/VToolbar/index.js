@@ -10,12 +10,10 @@ const VToolbarItems = createSimpleFunctional('v-toolbar__items')
 
 export { VToolbar, VToolbarSideIcon, VToolbarTitle, VToolbarItems }
 
-/* istanbul ignore next */
-VToolbar.install = function install (Vue) {
-  Vue.component(VToolbar.name, VToolbar)
-  Vue.component(VToolbarItems.name, VToolbarItems)
-  Vue.component(VToolbarTitle.name, VToolbarTitle)
-  Vue.component(VToolbarSideIcon.name, VToolbarSideIcon)
+VToolbar.$_vuetify_subcomponents = {
+  VToolbarItems,
+  VToolbarTitle,
+  VToolbarSideIcon
 }
 
 export default VToolbar

@@ -8,11 +8,9 @@ export {
   VTimePickerTitle
 }
 
-/* istanbul ignore next */
-VTimePicker.install = function install (Vue) {
-  Vue.component(VTimePicker.name, VTimePicker)
-  Vue.component(VTimePickerClock.name, VTimePickerClock)
-  Vue.component(VTimePickerTitle.name, VTimePickerTitle)
+VTimePicker.$_vuetify_subcomponents = {
+  VTimePickerClock,
+  VTimePickerTitle
 }
 
 export default VTimePicker

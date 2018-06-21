@@ -70,11 +70,6 @@ const wrapper = {
   }
 }
 
-/* istanbul ignore next */
-wrapper.install = function install (Vue) {
-  Vue.component(VSelect.name, wrapper)
-}
-
 export { wrapper as VSelect }
 
 export default wrapper

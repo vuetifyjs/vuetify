@@ -124,7 +124,7 @@ test('a-la-carte import', () => {
     const app = Vue.extend({ render })
     mount(app)
   })
-  it.skip('should render pascal sink', async () => {
+  it('should render pascal sink', async () => {
     const { render } = await pascalSink
     const app = Vue.extend({ render })
     mount(app)

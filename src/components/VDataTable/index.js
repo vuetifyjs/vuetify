@@ -9,11 +9,9 @@ const VTableOverflow = createSimpleFunctional('v-table__overflow')
 
 export { VDataTable, VEditDialog, VTableOverflow }
 
-/* istanbul ignore next */
-VDataTable.install = function install (Vue) {
-  Vue.component(VDataTable.name, VDataTable)
-  Vue.component(VEditDialog.name, VEditDialog)
-  Vue.component(VTableOverflow.name, VTableOverflow)
+VDataTable.$_vuetify_subcomponents = {
+  VEditDialog,
+  VTableOverflow
 }
 
 export default VDataTable

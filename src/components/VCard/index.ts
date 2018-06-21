@@ -9,13 +9,11 @@ const VCardText = Vue.extend(createSimpleFunctional('v-card__text'))
 
 export { VCard, VCardMedia, VCardTitle, VCardActions, VCardText }
 
-/* istanbul ignore next */
-VCard.install = function install (Vue) {
-  Vue.component(VCard.options.name, VCard)
-  Vue.component(VCardMedia.options.name, VCardMedia)
-  Vue.component(VCardTitle.options.name, VCardTitle)
-  Vue.component(VCardActions.options.name, VCardActions)
-  Vue.component(VCardText.options.name, VCardText)
+VCard.$_vuetify_subcomponents = {
+  VCardMedia,
+  VCardTitle,
+  VCardActions,
+  VCardText
 }
 
 export default VCard
