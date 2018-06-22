@@ -49,7 +49,7 @@ export default {
     classesSelectable () {
       return this.addTextColorClassChecks(
         {},
-        this.isDirty ? this.color : this.validationState
+        this.isDirty ? this.color || this.defaultColor : this.validationState
       )
     },
     isMultiple () {
