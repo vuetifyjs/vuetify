@@ -102,11 +102,7 @@ theme(button, "v-btn")
 
 /** Types */
 .v-btn
-  &--flat
-    background-color: transparent !important
-    box-shadow: none !important
-
-  &:not(.v-btn--depressed)
+  &:not(.v-btn--depressed):not(.v-btn--flat)
     will-change: box-shadow
     elevation(2)
 
@@ -141,7 +137,7 @@ theme(button, "v-btn")
     &.v-btn--absolute
       z-index: 4
 
-    &:not(.v-btn--depressed)
+    &:not(.v-btn--depressed):not(.v-btn--flat)
       elevation(6)
 
       &:active
