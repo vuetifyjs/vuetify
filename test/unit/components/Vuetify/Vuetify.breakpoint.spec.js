@@ -1,4 +1,4 @@
-import { test } from '@/test'
+import { test, resizeWindow } from '@/test'
 import breakpointMixin from '@/components/Vuetify/mixins/breakpoint'
 
 test('breakpoint.ts', ({ mount }) => {
@@ -249,5 +249,15 @@ test('breakpoint.ts', ({ mount }) => {
         expect(breakpoint[flag]).toBe(expectedValue)
       })
     })
+  })
+
+  it('should update breakpoint on window resize', async () => {
+    const wrapper = mount({
+      mixins: [breakpointMixin],
+      render: h => h('div')
+    })
+
+    await resizeWindow(715)
+    expect(wrapper.vm.breakpoint.width).toBe(715)
   })
 })
