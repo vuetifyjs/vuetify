@@ -1,7 +1,7 @@
-import VApp from '@/components/VApp'
 import { test } from '@/test'
+import breakpointMixin from '@/components/Vuetify/mixins/breakpoint'
 
-test('breakpoint.js', ({ mount }) => {
+test('breakpoint.ts', ({ mount }) => {
   const scenarios = [
     {
       description: 'Huawei Smartwatch',
@@ -231,7 +231,10 @@ test('breakpoint.js', ({ mount }) => {
 
   scenarios.forEach(scenario => {
     it('should calculate breakpoint for ' + scenario.description, () => {
-      const wrapper = mount(VApp)
+      const wrapper = mount({
+        mixins: [breakpointMixin],
+        render: h => h('div')
+      })
       wrapper.setData({
         clientWidth: scenario.width,
         clientHeight: scenario.height
