@@ -204,7 +204,7 @@ export default {
       return {
         props: {
           action: this.multiple && !this.isHidingSelected,
-          color: this.color || this.defaultColor,
+          color: this.color,
           dark: this.dark,
           dense: this.dense,
           hideSelected: this.hideSelected,

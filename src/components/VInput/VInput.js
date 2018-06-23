@@ -68,7 +68,7 @@ export default {
         'v-input--is-focused': this.isFocused,
         'v-input--is-loading': this.loading !== false,
         'v-input--is-readonly': this.readonly,
-        ...this.addTextColorClassChecks({}, this.validationState || this.color || ''),
+        ...this.addTextColorClassChecks({}, this.validationState),
         ...this.themeClasses
       }
     },

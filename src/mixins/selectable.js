@@ -21,14 +21,13 @@ export default {
   },
 
   data: vm => ({
-    defaultColor: 'accent',
     lazyValue: vm.inputValue
   }),
 
   props: {
     color: {
       type: String,
-      default: ''
+      default: 'accent'
     },
     id: String,
     inputValue: null,
@@ -49,7 +48,7 @@ export default {
     classesSelectable () {
       return this.addTextColorClassChecks(
         {},
-        this.isDirty ? this.color || this.defaultColor : this.validationState
+        this.isDirty ? this.color : this.validationState
       )
     },
     isMultiple () {

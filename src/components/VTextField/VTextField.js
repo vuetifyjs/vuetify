@@ -35,7 +35,6 @@ export default {
 
   data: () => ({
     badInput: false,
-    defaultColor: 'primary',
     initialValue: null,
     internalChange: false,
     isClearing: false
@@ -54,6 +53,10 @@ export default {
       default: '$vuetify.icons.clear'
     },
     clearIconCb: Function,
+    color: {
+      type: String,
+      default: 'primary'
+    },
     counter: [Boolean, Number, String],
     flat: Boolean,
     fullWidth: Boolean,
@@ -70,11 +73,6 @@ export default {
     soloInverted: Boolean,
     suffix: String,
     textarea: Boolean, // TODO: Deprecate
-    // TODO: use on-* colors instead (MD2)
-    textColor: {
-      type: String,
-      default: ''
-    },
     type: {
       type: String,
       default: 'text'
@@ -305,7 +303,6 @@ export default {
 
       const data = {
         style: {},
-        class: this.textColor ? this.addTextColorClassChecks({}, this.textColor || '') : undefined,
         domProps: {
           value: this.maskText(this.lazyValue)
         },
