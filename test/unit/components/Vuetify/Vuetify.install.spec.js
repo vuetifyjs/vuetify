@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import Vuetify from '@/components/Vuetify'
+import Vuetify, { checkVueVersion } from '@/components/Vuetify'
 import { test } from '@/test'
 
 test('Vuetify.install.js', () => {
@@ -46,5 +46,20 @@ test('Vuetify.install.js', () => {
     Vue.component = component
     Vue.directive = directive
     Vue.use = use
+  })
+
+  describe('should warn about an unsupported version of Vue', () => {
+    it('older version', () => {
+      checkVueVersion({ version: '2.5.0' }, '^2.5.10')
+      expect('Vuetify requires Vue version ^2.5.10').toHaveBeenTipped()
+    })
+
+    it('newer version', () => {
+      checkVueVersion({ version: '2.5.12' }, '^2.5.10')
+    })
+
+    it('newer, prerelease version', () => {
+      checkVueVersion({ version: '2.5.17-beta.0' }, '^2.5.10')
+    })
   })
 })

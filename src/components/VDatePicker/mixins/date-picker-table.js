@@ -119,9 +119,7 @@ export default {
 
       return this.$createElement('div', {
         staticClass,
-        class: {
-          ...this.themeClasses
-        },
+        class: this.themeClasses,
         on: this.scrollable ? { wheel: this.wheel } : undefined,
         directives: [touchDirective]
       }, [transition])

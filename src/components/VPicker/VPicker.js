@@ -57,9 +57,7 @@ export default {
     genBody () {
       return this.$createElement('div', {
         staticClass: 'v-picker__body',
-        'class': {
-          ...this.themeClasses
-        },
+        'class': this.themeClasses,
         style: this.fullWidth ? undefined : {
           width: this.width + 'px'
         }

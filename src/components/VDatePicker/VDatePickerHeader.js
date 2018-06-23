@@ -129,9 +129,7 @@ export default {
   render () {
     return this.$createElement('div', {
       staticClass: 'v-date-picker-header',
-      class: {
-        ...this.themeClasses
-      }
+      class: this.themeClasses
     }, [
       this.genBtn(-1),
       this.genHeader(),
