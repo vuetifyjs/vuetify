@@ -9,16 +9,11 @@ import { keyCodes } from '../../util/helpers'
 import VBtn from '../VBtn'
 import VMenu from '../VMenu'
 
+/* @vue/component */
 export default {
   name: 'v-edit-dialog',
 
   mixins: [ Returnable ],
-
-  data () {
-    return {
-      isActive: false
-    }
-  },
 
   props: {
     cancelText: {
@@ -33,6 +28,12 @@ export default {
     transition: {
       type: String,
       default: 'slide-x-reverse-transition'
+    }
+  },
+
+  data () {
+    return {
+      isActive: false
     }
   },
 

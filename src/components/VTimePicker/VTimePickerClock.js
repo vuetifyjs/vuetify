@@ -4,6 +4,7 @@ import '../../stylus/components/_time-picker-clock.styl'
 import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
 
+/* @vue/component */
 export default {
   name: 'v-time-picker-clock',
 
@@ -11,15 +12,6 @@ export default {
     Colorable,
     Themeable
   ],
-
-  data () {
-    return {
-      inputValue: this.value,
-      isDragging: false,
-      valueOnMouseDown: null,
-      valueOnMouseUp: null
-    }
-  },
 
   props: {
     allowedValues: Function,
@@ -50,6 +42,15 @@ export default {
       default: 1
     },
     value: Number
+  },
+
+  data () {
+    return {
+      inputValue: this.value,
+      isDragging: false,
+      valueOnMouseDown: null,
+      valueOnMouseUp: null
+    }
   },
 
   computed: {

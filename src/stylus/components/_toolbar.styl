@@ -14,10 +14,10 @@ v-toolbar-content($direction)
 
   &.v-menu .v-menu__activator,
   &.v-tooltip span
-    > .v-btn
+    .v-btn
       margin-{$direction}: 0
 
-    > .v-btn--icon
+    .v-btn--icon
       margin-{$direction}: -6px
 
 theme(v-toolbar, "v-toolbar")
@@ -75,10 +75,18 @@ theme(v-toolbar, "v-toolbar")
     > .v-list
       flex: 1 1 auto
       max-height: 100%
-      margin: 0 -($grid-gutters.xl)
+
+    > .v-list:first-child
+      margin-left: '-%s' % $grid-gutters.xl
 
       @media $display-breakpoints.sm-and-down
-        margin: 0 -($grid-gutters.lg)
+        margin-left: '-%s' % $grid-gutters.lg
+
+    > .v-list:last-child
+      margin-right: '-%s' % $grid-gutters.xl
+
+      @media $display-breakpoints.sm-and-down
+        margin-right: '-%s' % $grid-gutters.lg
 
   &__items
     display: flex

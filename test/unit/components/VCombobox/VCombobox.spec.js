@@ -67,7 +67,7 @@ test('VCombobox', ({ shallow }) => {
     wrapper.setData({ isMenuActive: false })
     await wrapper.vm.$nextTick()
 
-    expect(event).toBeCalledWith(123)
+    expect(event).toBeCalledWith(item)
   })
 
   it('should not populate search field if value is falsey', async () => {

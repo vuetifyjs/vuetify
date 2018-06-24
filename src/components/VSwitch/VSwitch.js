@@ -7,14 +7,15 @@ import Selectable from '../../mixins/selectable'
 // Directives
 import Touch from '../../directives/touch'
 
+/* @vue/component */
 export default {
   name: 'v-switch',
+
+  directives: { Touch },
 
   mixins: [
     Selectable
   ],
-
-  directives: { Touch },
 
   computed: {
     classes () {

@@ -7,6 +7,7 @@ import {
 // Utilities
 import { getObjectValueByPath } from '../../util/helpers'
 
+/* @vue/component */
 export default {
   name: 'v-tab',
 
@@ -17,12 +18,6 @@ export default {
 
   inject: ['tabClick'],
 
-  data () {
-    return {
-      isActive: false
-    }
-  },
-
   props: {
     activeClass: {
       type: String,
@@ -31,6 +26,12 @@ export default {
     ripple: {
       type: [Boolean, Object],
       default: true
+    }
+  },
+
+  data () {
+    return {
+      isActive: false
     }
   },
 

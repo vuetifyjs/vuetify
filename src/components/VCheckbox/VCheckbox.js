@@ -8,16 +8,13 @@ import VIcon from '../VIcon'
 // Mixins
 import Selectable from '../../mixins/selectable'
 
+/* @vue/component */
 export default {
   name: 'v-checkbox',
 
   mixins: [
     Selectable
   ],
-
-  data: vm => ({
-    inputIndeterminate: vm.indeterminate
-  }),
 
   props: {
     indeterminate: Boolean,
@@ -34,6 +31,10 @@ export default {
       default: '$vuetify.icons.checkboxOff'
     }
   },
+
+  data: vm => ({
+    inputIndeterminate: vm.indeterminate
+  }),
 
   computed: {
     classes () {

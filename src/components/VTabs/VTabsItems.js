@@ -6,12 +6,13 @@ import {
 // Directives
 import Touch from '../../directives/touch'
 
+/* @vue/component */
 export default {
   name: 'v-tabs-items',
 
-  mixins: [RegistrableProvide('tabs')],
-
   directives: { Touch },
+
+  mixins: [RegistrableProvide('tabs')],
 
   inject: {
     registerItems: {
@@ -25,18 +26,18 @@ export default {
     }
   },
 
+  props: {
+    cycle: Boolean,
+    touchless: Boolean,
+    value: [Number, String]
+  },
+
   data () {
     return {
       items: [],
       lazyValue: this.value,
       reverse: false
     }
-  },
-
-  props: {
-    cycle: Boolean,
-    touchless: Boolean,
-    value: [Number, String]
   },
 
   computed: {

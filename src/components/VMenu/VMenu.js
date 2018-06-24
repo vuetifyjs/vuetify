@@ -21,8 +21,14 @@ import Resize from '../../directives/resize'
 // Helpers
 import { convertToUnit } from '../../util/helpers'
 
+/* @vue/component */
 export default {
   name: 'v-menu',
+
+  directives: {
+    ClickOutside,
+    Resize
+  },
 
   mixins: [
     Activator,
@@ -36,22 +42,6 @@ export default {
     Returnable,
     Toggleable
   ],
-
-  directives: {
-    ClickOutside,
-    Resize
-  },
-
-  data () {
-    return {
-      defaultOffset: 8,
-      maxHeightAutoDefault: '200px',
-      startIndex: 3,
-      stopIndex: 0,
-      hasJustFocused: false,
-      resizeTimeout: null
-    }
-  },
 
   props: {
     auto: Boolean,
@@ -80,6 +70,17 @@ export default {
     transition: {
       type: [Boolean, String],
       default: 'v-menu-transition'
+    }
+  },
+
+  data () {
+    return {
+      defaultOffset: 8,
+      maxHeightAutoDefault: '200px',
+      startIndex: 3,
+      stopIndex: 0,
+      hasJustFocused: false,
+      resizeTimeout: null
     }
   },
 

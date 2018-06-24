@@ -16,8 +16,16 @@ import {
 // Utils
 import { keyCodes } from '../../util/helpers'
 
+/* @vue/component */
 export default {
   name: 'v-radio',
+
+  mixins: [
+    Colorable,
+    Rippleable,
+    RegistrableInject('radio', 'v-radio', 'v-radio-group'),
+    Themeable
+  ],
 
   inheritAttrs: false,
 
@@ -32,19 +40,6 @@ export default {
       default: false
     }
   },
-
-  mixins: [
-    Colorable,
-    Rippleable,
-    RegistrableInject('radio', 'v-radio', 'v-radio-group'),
-    Themeable
-  ],
-
-  data: () => ({
-    isActive: false,
-    isFocused: false,
-    parentError: false
-  }),
 
   props: {
     color: {
@@ -64,6 +59,12 @@ export default {
     readonly: Boolean,
     value: null
   },
+
+  data: () => ({
+    isActive: false,
+    isFocused: false,
+    parentError: false
+  }),
 
   computed: {
     computedData () {
@@ -160,6 +161,8 @@ export default {
       this.$emit('blur', e)
     },
     onChange () {
+      if (this.isDisabled) return
+
       const mandatory = !!this.isMandatory && this.isMandatory()
 
       if (!this.disabled && (!this.isActive || !mandatory)) {

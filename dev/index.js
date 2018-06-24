@@ -4,6 +4,7 @@ import Boilerplate from './Boilerplate'
 import Vuetify from 'vuetify'
 import VueRouter from 'vue-router'
 import router from './router'
+import '@mdi/font/css/materialdesignicons.css'
 
 Vue.config.performance = true
 

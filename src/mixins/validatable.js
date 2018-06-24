@@ -5,6 +5,7 @@ import { consoleError } from '../util/console'
 // Mixins
 import Colorable from './colorable'
 
+/* @vue/component */
 export default {
   name: 'validatable',
 
@@ -12,15 +13,6 @@ export default {
     Colorable,
     RegistrableInject('form')
   ],
-
-  data: () => ({
-    errorBucket: [],
-    hasColor: false,
-    hasFocused: false,
-    hasInput: false,
-    isResetting: false,
-    valid: false
-  }),
 
   props: {
     error: Boolean,
@@ -47,6 +39,15 @@ export default {
     },
     validateOnBlur: Boolean
   },
+
+  data: () => ({
+    errorBucket: [],
+    hasColor: false,
+    hasFocused: false,
+    hasInput: false,
+    isResetting: false,
+    valid: false
+  }),
 
   computed: {
     hasError () {

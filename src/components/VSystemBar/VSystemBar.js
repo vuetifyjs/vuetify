@@ -4,6 +4,7 @@ import Applicationable from '../../mixins/applicationable'
 import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
 
+/* @vue/component */
 export default {
   name: 'v-system-bar',
 

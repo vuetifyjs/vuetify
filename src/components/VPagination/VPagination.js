@@ -6,18 +6,13 @@ import Resize from '../../directives/resize'
 
 import Colorable from '../../mixins/colorable'
 
+/* @vue/component */
 export default {
   name: 'v-pagination',
 
-  mixins: [Colorable],
-
   directives: { Resize },
 
-  data () {
-    return {
-      maxButtons: 0
-    }
-  },
+  mixins: [Colorable],
 
   props: {
     circle: Boolean,
@@ -39,6 +34,12 @@ export default {
     value: {
       type: Number,
       default: 0
+    }
+  },
+
+  data () {
+    return {
+      maxButtons: 0
     }
   },
 

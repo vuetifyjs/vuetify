@@ -5,6 +5,7 @@ import '../../stylus/components/_cards.styl'
 import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
 
+/* @vue/component */
 export default {
   name: 'v-picker',
 
@@ -21,6 +22,12 @@ export default {
       type: [Number, String],
       default: 290,
       validator: value => parseInt(value, 10) > 0
+    }
+  },
+
+  data () {
+    return {
+      defaultColor: 'primary'
     }
   },
 

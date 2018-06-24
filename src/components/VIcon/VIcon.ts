@@ -48,6 +48,7 @@ function calculateExplicitSize (props: any): any {
   return keys(sizes).find(key => sizes[key] && !!key)
 }
 
+/* @vue/component */
 export default mixins(Colorable, Themeable).extend({
   name: 'v-icon',
 

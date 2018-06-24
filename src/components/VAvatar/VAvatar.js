@@ -4,6 +4,7 @@ import '../../stylus/components/_avatars.styl'
 import Colorable from '../../mixins/colorable'
 import { convertToUnit } from '../../util/helpers'
 
+/* @vue/component */
 export default {
   name: 'v-avatar',
 

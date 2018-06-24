@@ -4,6 +4,7 @@ import '../../stylus/components/_dividers.styl'
 // Mixins
 import Themeable from '../../mixins/themeable'
 
+/* @vue/component */
 export default {
   name: 'v-divider',
 

@@ -18,26 +18,9 @@ import { consoleWarn } from '../util/console'
  * providing selection, pagination, sorting and filtering.
  *
  */
+/* @vue/component */
 export default {
   name: 'data-iterable',
-
-  data () {
-    return {
-      searchLength: 0,
-      defaultPagination: {
-        descending: false,
-        page: 1,
-        rowsPerPage: 5,
-        sortBy: null,
-        totalItems: 0
-      },
-      expanded: {},
-      actionsClasses: 'v-data-iterator__actions',
-      actionsRangeControlsClasses: 'v-data-iterator__actions__range-controls',
-      actionsSelectClasses: 'v-data-iterator__actions__select',
-      actionsPaginationClasses: 'v-data-iterator__actions__pagination'
-    }
-  },
 
   mixins: [Filterable, Loadable, Themeable],
 
@@ -156,6 +139,22 @@ export default {
       default: () => {}
     }
   },
+
+  data: () => ({
+    searchLength: 0,
+    defaultPagination: {
+      descending: false,
+      page: 1,
+      rowsPerPage: 5,
+      sortBy: null,
+      totalItems: 0
+    },
+    expanded: {},
+    actionsClasses: 'v-data-iterator__actions',
+    actionsRangeControlsClasses: 'v-data-iterator__actions__range-controls',
+    actionsSelectClasses: 'v-data-iterator__actions__select',
+    actionsPaginationClasses: 'v-data-iterator__actions__pagination'
+  }),
 
   computed: {
     computedPagination () {

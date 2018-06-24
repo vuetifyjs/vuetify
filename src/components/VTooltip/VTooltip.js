@@ -11,15 +11,11 @@ import Toggleable from '../../mixins/toggleable'
 // Helpers
 import { convertToUnit } from '../../util/helpers'
 
+/* @vue/component */
 export default {
   name: 'v-tooltip',
 
   mixins: [Colorable, Delayable, Dependent, Detachable, Menuable, Toggleable],
-
-  data: () => ({
-    calculatedMinWidth: 0,
-    closeDependents: false
-  }),
 
   props: {
     debounce: {
@@ -44,6 +40,11 @@ export default {
       default: null
     }
   },
+
+  data: () => ({
+    calculatedMinWidth: 0,
+    closeDependents: false
+  }),
 
   computed: {
     calculatedLeft () {
@@ -119,6 +120,10 @@ export default {
     }
   },
 
+  mounted () {
+    this.value && this.callActivate()
+  },
+
   methods: {
     activate () {
       // Update coordinates and dimensions of menu
@@ -127,10 +132,6 @@ export default {
       // Start the transition
       requestAnimationFrame(this.startTransition)
     }
-  },
-
-  mounted () {
-    this.value && this.callActivate()
   },
 
   render (h) {

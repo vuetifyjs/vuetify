@@ -18,6 +18,7 @@ import {
 } from '../../util/helpers'
 import { deprecate } from '../../util/console'
 
+/* @vue/component */
 export default {
   name: 'v-input',
 
@@ -26,11 +27,6 @@ export default {
     Themeable,
     Validatable
   ],
-
-  data: vm => ({
-    lazyValue: vm.value,
-    isFocused: false
-  }),
 
   props: {
     appendIcon: String,
@@ -49,6 +45,11 @@ export default {
     tabindex: { default: 0 },
     value: { required: false }
   },
+
+  data: vm => ({
+    lazyValue: vm.value,
+    isFocused: false
+  }),
 
   computed: {
     classesInput () {

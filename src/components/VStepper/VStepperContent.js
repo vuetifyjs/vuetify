@@ -6,8 +6,16 @@ import {
 // Helpers
 import { convertToUnit } from '../../util/helpers'
 
+/* @vue/component */
 export default {
   name: 'v-stepper-content',
+
+  props: {
+    step: {
+      type: [Number, String],
+      required: true
+    }
+  },
 
   data () {
     return {
@@ -17,13 +25,6 @@ export default {
       isActive: null,
       isReverse: false,
       isVertical: false
-    }
-  },
-
-  props: {
-    step: {
-      type: [Number, String],
-      required: true
     }
   },
 

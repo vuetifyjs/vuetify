@@ -9,16 +9,17 @@ import { toggleable } from './toggleable'
  * Looks for change in "isActive" to automatically boot
  * Otherwise can be set manually
  */
+/* @vue/component */
 export default Vue.extend<toggleable>().extend({
   name: 'bootable',
-
-  data: () => ({
-    isBooted: false
-  }),
 
   props: {
     lazy: Boolean
   },
+
+  data: () => ({
+    isBooted: false
+  }),
 
   computed: {
     hasContent (): boolean {

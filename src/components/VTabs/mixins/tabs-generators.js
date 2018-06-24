@@ -7,6 +7,7 @@ import VIcon from '../../VIcon'
  *
  * @mixin
  */
+/* @vue/component */
 export default {
   methods: {
     genBar (items) {

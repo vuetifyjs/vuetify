@@ -20,8 +20,14 @@ import {
 import Resize from '../../directives/resize'
 import Touch from '../../directives/touch'
 
+/* @vue/component */
 export default {
   name: 'v-tabs',
+
+  directives: {
+    Resize,
+    Touch
+  },
 
   mixins: [
     RegistrableProvide('tabs'),
@@ -34,11 +40,6 @@ export default {
     TabsWatchers,
     Themeable
   ],
-
-  directives: {
-    Resize,
-    Touch
-  },
 
   provide () {
     return {

@@ -7,10 +7,11 @@ import Colorable from '../../mixins/colorable'
 // Helpers
 import { convertToUnit } from '../../util/helpers'
 
+/* @vue/component */
 export default {
-  functional: true,
-
   name: 'v-label',
+
+  functional: true,
 
   props: {
     absolute: Boolean,

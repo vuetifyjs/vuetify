@@ -4,19 +4,13 @@ import VJumbotron from '../VJumbotron'
 // Mixins
 import { inject as RegistrableInject } from '../../mixins/registrable'
 
+/* @vue/component */
 export default {
   name: 'v-carousel-item',
 
   mixins: [RegistrableInject('carousel', 'v-carousel-item', 'v-carousel')],
 
   inheritAttrs: false,
-
-  data () {
-    return {
-      active: false,
-      reverse: false
-    }
-  },
 
   props: {
     transition: {
@@ -29,16 +23,16 @@ export default {
     }
   },
 
-  computed: {
-    computedTransition () {
-      return (this.reverse === !this.$vuetify.rtl) ? this.reverseTransition : this.transition
+  data () {
+    return {
+      active: false,
+      reverse: false
     }
   },
 
-  methods: {
-    open (id, reverse) {
-      this.active = this._uid === id
-      this.reverse = reverse
+  computed: {
+    computedTransition () {
+      return (this.reverse === !this.$vuetify.rtl) ? this.reverseTransition : this.transition
     }
   },
 
@@ -48,6 +42,13 @@ export default {
 
   beforeDestroy () {
     this.carousel.unregister(this._uid, this.open)
+  },
+
+  methods: {
+    open (id, reverse) {
+      this.active = this._uid === id
+      this.reverse = reverse
+    }
   },
 
   render (h) {

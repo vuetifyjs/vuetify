@@ -5,6 +5,7 @@ import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
 import Toggleable from '../../mixins/toggleable'
 
+/* @vue/component */
 export default {
   name: 'v-chip',
 

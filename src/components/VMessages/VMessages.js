@@ -4,6 +4,7 @@ import '../../stylus/components/_messages.styl'
 // Mixins
 import Colorable from '../../mixins/colorable'
 
+/* @vue/component */
 export default {
   name: 'v-messages',
 
