@@ -7,8 +7,10 @@ test('VRadio.vue', ({ mount }) => {
   it('should advise about v-radio-group being necessary', () => {
     mount(VRadio, {
       provide: {
-        name: () => 'name',
-        isMandatory: () => false,
+        radioGroup: () => ({
+          name: 'name',
+          mandatory: false
+        })
       }
     })
 
@@ -31,8 +33,11 @@ test('VRadio.vue', ({ mount }) => {
         isActive: false
       },
       provide: {
-        name: () => 'name',
-        isMandatory: () => false
+        radioGroup: () => ({
+          name: 'name',
+          mandatory: false,
+          validationState: false
+        })
       }
     })
 
@@ -55,8 +60,11 @@ test('VRadio.vue', ({ mount }) => {
       },
       attrs: {},
       provide: {
-        name: () => 'name',
-        isMandatory: () => false
+        radioGroup: () => ({
+          name: 'name',
+          mandatory: false,
+          validationState: false
+        })
       }
     })
 
@@ -73,8 +81,11 @@ test('VRadio.vue', ({ mount }) => {
         label: null
       },
       provide: {
-        name: () => 'name',
-        isMandatory: () => false
+        radioGroup: () => ({
+          name: 'name',
+          mandatory: false,
+          validationState: false
+        })
       }
     })
 
@@ -88,8 +99,11 @@ test('VRadio.vue', ({ mount }) => {
   it('should render proper input name', () => {
     const wrapper = mount(VRadio, {
       provide: {
-        name: () => 'name',
-        isMandatory: () => false
+        radioGroup: () => ({
+          name: 'name',
+          mandatory: false,
+          validationState: false
+        })
       }
     })
 
@@ -107,12 +121,14 @@ test('VRadio.vue', ({ mount }) => {
     const wrapper = mount(VRadio, {
       attachToDocument: true,
       provide: {
-        name: () => 'name',
+        radioGroup: () => ({
+          name: 'name',
+          mandatory: false
+        }),
         radio: {
-          register: register,
-          unregister: unregister
-        },
-        isMandatory: () => false
+          register,
+          unregister
+        }
       }
     })
 
@@ -127,8 +143,10 @@ test('VRadio.vue', ({ mount }) => {
         ripple: false
       },
       provide: {
-        name: () => 'name',
-        isMandatory: () => false
+        radioGroup: () => ({
+          name: 'name',
+          mandatory: false
+        })
       }
     })
 
@@ -145,8 +163,10 @@ test('VRadio.vue', ({ mount }) => {
         ripple: true
       },
       provide: {
-        name: () => 'name',
-        isMandatory: () => false
+        radioGroup: () => ({
+          name: 'name',
+          mandatory: false
+        })
       }
     })
 
@@ -212,7 +232,9 @@ test('VRadio.vue', ({ mount }) => {
   it('should inject isMandatory', () => {
     const wrapper = mount(VRadio, {
       provide: {
-        isMandatory: () => true
+        radioGroup: () => ({
+          mandatory: true
+        })
       }
     })
 

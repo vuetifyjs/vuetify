@@ -39,7 +39,7 @@ test('VRadioGroup.vue', ({ mount }) => {
   it('should provide isMandatory', () => {
     const stub = {
       name: 'stub',
-      inject: ['isMandatory'],
+      inject: ['radioGroup'],
       render: h => null
     }
     const wrapper = mount(VRadioGroup, {
@@ -50,11 +50,11 @@ test('VRadioGroup.vue', ({ mount }) => {
 
     const find = wrapper.first(stub)
 
-    expect(find.vm.isMandatory()).toBe(true)
+    expect(find.vm.radioGroup().mandatory).toBe(true)
 
     wrapper.setProps({ mandatory: false })
 
-    expect(find.vm.isMandatory()).toBe(false)
+    expect(find.vm.radioGroup().mandatory).toBe(false)
   })
 
   it('should toggle radio', async () => {

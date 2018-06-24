@@ -28,11 +28,7 @@ export default {
 
   provide () {
     return {
-      isDisabled: () => this.disabled,
-      isMandatory: () => this.mandatory,
-      isReadonly: () => this.readonly,
-      name: () => this.name,
-      validationState: () => this.validationState
+      radioGroup: () => this
     }
   },
 

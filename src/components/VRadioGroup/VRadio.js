@@ -22,19 +22,7 @@ export default {
   inheritAttrs: false,
 
   inject: {
-    name: {
-      default: false
-    },
-    isDisabled: {
-      default: false
-    },
-    isMandatory: {
-      default: false
-    },
-    isReadonly: {
-      default: false
-    },
-    validationState: {
+    radioGroup: {
       default: false
     }
   },
@@ -101,13 +89,13 @@ export default {
       return this.isActive || !!this.validationStateProxy
     },
     validationStateProxy () {
-      return this.validationState && this.validationState()
+      return this.radioGroup && this.radioGroup().validationState
     },
     isRadioDisabled () {
-      return this.disabled || (this.isDisabled && this.isDisabled())
+      return this.disabled || (this.radioGroup && this.radioGroup().disabled)
     },
     isRadioReadonly () {
-      return this.readonly || (this.isReadonly && this.isReadonly())
+      return this.readonly || (this.radioGroup && this.radioGroup().readonly)
     }
   },
 
@@ -124,7 +112,7 @@ export default {
       return this.$createElement('input', {
         attrs: Object.assign({}, attrs, {
           'aria-label': this.label,
-          name: this.name && this.name(),
+          name: this.radioGroup && this.radioGroup().name,
           role: type,
           type,
           checked: this.isActive
@@ -181,7 +169,7 @@ export default {
     onChange () {
       if (this.isRadioDisabled || this.isRadioReadonly) return
 
-      const mandatory = !!this.isMandatory && this.isMandatory()
+      const mandatory = !!this.radioGroup && this.radioGroup().mandatory
 
       if (!this.isRadioDisabled && (!this.isActive || !mandatory)) {
         this.$emit('change', this.value)
