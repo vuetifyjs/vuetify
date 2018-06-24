@@ -19,7 +19,7 @@ test('resize.js', () => {
     expect(window.removeEventListener).toBeCalledWith('resize', callback, { passive: true })
   })
 
-  it('shoud not run the callback in quite mode', () => {
+  it('shoud not run the callback in quiet mode', () => {
     const callback = jest.fn()
     const window = {
       addEventListener: jest.fn(),
