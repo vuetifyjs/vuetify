@@ -25,7 +25,13 @@ export default {
     name: {
       default: false
     },
+    isDisabled: {
+      default: false
+    },
     isMandatory: {
+      default: false
+    },
+    isReadonly: {
       default: false
     },
     validationState: {
@@ -68,7 +74,7 @@ export default {
   computed: {
     classes () {
       const classes = {
-        'v-radio--is-disabled': this.disabled,
+        'v-radio--is-disabled': this.isRadioDisabled,
         'v-radio--is-focused': this.isFocused,
         'theme--dark': this.dark,
         'theme--light': this.light
@@ -94,11 +100,14 @@ export default {
     hasState () {
       return this.isActive || !!this.validationStateProxy
     },
-    isDisabled () {
-      return this.disabled || this.readonly
-    },
     validationStateProxy () {
       return this.validationState && this.validationState()
+    },
+    isRadioDisabled () {
+      return this.disabled || (this.isDisabled && this.isDisabled())
+    },
+    isRadioReadonly () {
+      return this.readonly || (this.isReadonly && this.isReadonly())
     }
   },
 
@@ -170,11 +179,11 @@ export default {
       this.$emit('blur', e)
     },
     onChange () {
-      if (this.isDisabled) return
+      if (this.isRadioDisabled || this.isRadioReadonly) return
 
       const mandatory = !!this.isMandatory && this.isMandatory()
 
-      if (!this.disabled && (!this.isActive || !mandatory)) {
+      if (!this.isRadioDisabled && (!this.isActive || !mandatory)) {
         this.$emit('change', this.value)
       }
     }

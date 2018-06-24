@@ -298,4 +298,36 @@ test('VRadioGroup.vue', ({ mount }) => {
 
     expect(wrapper.vm.shouldValidate).toBe(true)
   })
+
+  it('should make radios disabled', async () => {
+    const wrapper = mount(VRadioGroup, {
+      slots: {
+        default: [VRadio]
+      }
+    })
+
+    const radio = wrapper.first(VRadio)
+    expect(radio.vm.isRadioDisabled).toBe(false)
+
+    wrapper.setProps({
+      disabled: true
+    })
+    expect(radio.vm.isRadioDisabled).toBe(true)
+  })
+
+  it('should make radios readonly', async () => {
+    const wrapper = mount(VRadioGroup, {
+      slots: {
+        default: [VRadio]
+      }
+    })
+
+    const radio = wrapper.first(VRadio)
+    expect(radio.vm.isRadioReadonly).toBe(false)
+
+    wrapper.setProps({
+      readonly: true
+    })
+    expect(radio.vm.isRadioReadonly).toBe(true)
+  })
 })
