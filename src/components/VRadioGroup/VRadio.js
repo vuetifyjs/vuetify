@@ -21,12 +21,6 @@ export default {
 
   inheritAttrs: false,
 
-  inject: {
-    radioGroup: {
-      default: false
-    }
-  },
-
   mixins: [
     Colorable,
     Rippleable,
@@ -62,7 +56,7 @@ export default {
   computed: {
     classes () {
       const classes = {
-        'v-radio--is-disabled': this.isRadioDisabled,
+        'v-radio--is-disabled': this.isDisabled,
         'v-radio--is-focused': this.isFocused,
         'theme--dark': this.dark,
         'theme--light': this.light
@@ -77,7 +71,7 @@ export default {
     classesSelectable () {
       return this.addTextColorClassChecks(
         {},
-        this.isActive ? this.color : this.validationStateProxy
+        this.isActive ? this.color : this.radio.validationState || false
       )
     },
     computedIcon () {
@@ -86,16 +80,13 @@ export default {
         : this.offIcon
     },
     hasState () {
-      return this.isActive || !!this.validationStateProxy
+      return this.isActive || !!this.radio.validationState
     },
-    validationStateProxy () {
-      return this.radioGroup && this.radioGroup().validationState
+    isDisabled () {
+      return this.disabled || !!this.radio.disabled
     },
-    isRadioDisabled () {
-      return this.disabled || (this.radioGroup && this.radioGroup().disabled)
-    },
-    isRadioReadonly () {
-      return this.readonly || (this.radioGroup && this.radioGroup().readonly)
+    isReadonly () {
+      return this.readonly || !!this.radio.readonly
     }
   },
 
@@ -112,7 +103,7 @@ export default {
       return this.$createElement('input', {
         attrs: Object.assign({}, attrs, {
           'aria-label': this.label,
-          name: this.radioGroup && this.radioGroup().name,
+          name: this.radio.name || false,
           role: type,
           type,
           checked: this.isActive
@@ -138,7 +129,7 @@ export default {
           for: this.id
         },
         props: {
-          color: this.validationStateProxy,
+          color: this.radio.validationState || false,
           focused: this.hasState
         }
       }, this.$slots.label || this.label)
@@ -167,11 +158,9 @@ export default {
       this.$emit('blur', e)
     },
     onChange () {
-      if (this.isRadioDisabled || this.isRadioReadonly) return
+      if (this.isDisabled || this.isReadonly) return
 
-      const mandatory = !!this.radioGroup && this.radioGroup().mandatory
-
-      if (!this.isRadioDisabled && (!this.isActive || !mandatory)) {
+      if (!this.isDisabled && (!this.isActive || !this.radio.mandatory)) {
         this.$emit('change', this.value)
       }
     }

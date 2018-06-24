@@ -39,7 +39,7 @@ test('VRadioGroup.vue', ({ mount }) => {
   it('should provide isMandatory', () => {
     const stub = {
       name: 'stub',
-      inject: ['radioGroup'],
+      inject: ['radio'],
       render: h => null
     }
     const wrapper = mount(VRadioGroup, {
@@ -48,13 +48,13 @@ test('VRadioGroup.vue', ({ mount }) => {
       }
     })
 
-    const find = wrapper.first(stub)
+    const child = wrapper.first(stub)
 
-    expect(find.vm.radioGroup().mandatory).toBe(true)
+    expect(child.vm.radio.mandatory).toBe(true)
 
     wrapper.setProps({ mandatory: false })
 
-    expect(find.vm.radioGroup().mandatory).toBe(false)
+    expect(child.vm.radio.mandatory).toBe(false)
   })
 
   it('should toggle radio', async () => {
@@ -307,12 +307,12 @@ test('VRadioGroup.vue', ({ mount }) => {
     })
 
     const radio = wrapper.first(VRadio)
-    expect(radio.vm.isRadioDisabled).toBe(false)
+    expect(radio.vm.isDisabled).toBe(false)
 
     wrapper.setProps({
       disabled: true
     })
-    expect(radio.vm.isRadioDisabled).toBe(true)
+    expect(radio.vm.isDisabled).toBe(true)
   })
 
   it('should make radios readonly', async () => {
@@ -323,11 +323,11 @@ test('VRadioGroup.vue', ({ mount }) => {
     })
 
     const radio = wrapper.first(VRadio)
-    expect(radio.vm.isRadioReadonly).toBe(false)
+    expect(radio.vm.isReadonly).toBe(false)
 
     wrapper.setProps({
       readonly: true
     })
-    expect(radio.vm.isRadioReadonly).toBe(true)
+    expect(radio.vm.isReadonly).toBe(true)
   })
 })

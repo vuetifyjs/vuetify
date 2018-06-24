@@ -28,7 +28,7 @@ export default {
 
   provide () {
     return {
-      radioGroup: () => this
+      radio: this
     }
   },
 
