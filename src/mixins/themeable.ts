@@ -3,6 +3,21 @@ import Vue from 'vue'
 export default Vue.extend({
   name: 'themeable',
 
+  provide () {
+    return {
+      theme: this
+    }
+  },
+
+  inject: {
+    theme: {
+      default: {
+        dark: false,
+        light: false
+      }
+    }
+  },
+
   props: {
     dark: Boolean,
     light: Boolean
@@ -11,8 +26,8 @@ export default Vue.extend({
   computed: {
     themeClasses (): any {
       return {
-        'theme--light': this.light,
-        'theme--dark': this.dark
+        'theme--dark': (this.dark && !this.light) || this.theme.dark,
+        'theme--light': (this.light && !this.dark) || this.theme.light
       }
     }
   }
