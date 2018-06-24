@@ -2,6 +2,7 @@ import '../../stylus/components/_progress-circular.styl'
 
 import Colorable from '../../mixins/colorable'
 
+/* @vue/component */
 export default {
   name: 'v-progress-circular',
 

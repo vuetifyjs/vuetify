@@ -3,6 +3,7 @@
  *
  * @mixin
  */
+/* @vue/component */
 export default {
   computed: {
     activeIndex () {

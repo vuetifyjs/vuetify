@@ -5,6 +5,7 @@
  *
  * Used for creating the DOM elements for VMenu
  */
+/* @vue/component */
 export default {
   methods: {
     genActivator () {

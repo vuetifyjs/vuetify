@@ -14,8 +14,13 @@ import ClickOutside from '../../directives/click-outside'
 // Helpers
 import { getZIndex, convertToUnit } from '../../util/helpers'
 
+/* @vue/component */
 export default {
   name: 'v-dialog',
+
+  directives: {
+    ClickOutside
+  },
 
   mixins: [
     Dependent,
@@ -25,20 +30,6 @@ export default {
     Stackable,
     Toggleable
   ],
-
-  directives: {
-    ClickOutside
-  },
-
-  data () {
-    return {
-      animate: false,
-      animateTimeout: null,
-      isDependent: false,
-      stackClass: 'v-dialog__content--active',
-      stackMinZIndex: 200
-    }
-  },
 
   props: {
     disabled: Boolean,
@@ -62,6 +53,16 @@ export default {
     transition: {
       type: [String, Boolean],
       default: 'dialog-transition'
+    }
+  },
+
+  data () {
+    return {
+      animate: false,
+      animateTimeout: null,
+      isDependent: false,
+      stackClass: 'v-dialog__content--active',
+      stackMinZIndex: 200
     }
   },
 

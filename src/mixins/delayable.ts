@@ -10,11 +10,6 @@ import Vue from 'vue'
 export default Vue.extend({
   name: 'delayable',
 
-  data: () => ({
-    openTimeout: undefined as number | undefined,
-    closeTimeout: undefined as number | undefined
-  }),
-
   props: {
     openDelay: {
       type: [Number, String],
@@ -25,6 +20,11 @@ export default Vue.extend({
       default: 200
     }
   },
+
+  data: () => ({
+    openTimeout: undefined as number | undefined,
+    closeTimeout: undefined as number | undefined
+  }),
 
   methods: {
     /**

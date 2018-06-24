@@ -14,6 +14,7 @@ interface colorable extends Vue {
  * Can use a default bar with a specific color
  * or designate a custom progress linear bar
  */
+/* @vue/component */
 export default Vue.extend<colorable>().extend({
   name: 'loadable',
 

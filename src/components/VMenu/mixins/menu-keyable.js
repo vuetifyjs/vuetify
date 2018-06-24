@@ -11,6 +11,7 @@
 // Utils
 import { keyCodes } from '../../../util/helpers'
 
+/* @vue/component */
 export default {
   data: () => ({
     listIndex: -1,

@@ -6,6 +6,7 @@ import Toggleable from '../../mixins/toggleable'
 import { factory as PositionableFactory } from '../../mixins/positionable'
 import Transitionable from '../../mixins/transitionable'
 
+/* @vue/component */
 export default {
   name: 'v-badge',
 

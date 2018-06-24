@@ -34,14 +34,15 @@ const fakeMenuable = {
   props: Menuable.props
 }
 
+/* @vue/component */
 export default {
   name: 'v-select',
-
-  extends: VTextField,
 
   directives: {
     ClickOutside
   },
+
+  extends: VTextField,
 
   mixins: [
     fakeVMenu,
@@ -50,23 +51,6 @@ export default {
     Dependent,
     Filterable
   ],
-
-  data: vm => ({
-    attrsInput: { role: 'combobox' },
-    cachedItems: vm.cacheItems ? vm.items : [],
-    content: null,
-    isBooted: false,
-    isMenuActive: false,
-    lastItem: 20,
-    // As long as a value is defined, show it
-    // Otherwise, check if multiple
-    // to determine which default to provide
-    lazyValue: vm.value != null
-      ? vm.value
-      : vm.multiple ? [] : undefined,
-    selectedIndex: -1,
-    selectedItems: []
-  }),
 
   props: {
     appendIcon: {
@@ -126,6 +110,23 @@ export default {
     singleLine: Boolean
   },
 
+  data: vm => ({
+    attrsInput: { role: 'combobox' },
+    cachedItems: vm.cacheItems ? vm.items : [],
+    content: null,
+    isBooted: false,
+    isMenuActive: false,
+    lastItem: 20,
+    // As long as a value is defined, show it
+    // Otherwise, check if multiple
+    // to determine which default to provide
+    lazyValue: vm.value != null
+      ? vm.value
+      : vm.multiple ? [] : undefined,
+    selectedIndex: -1,
+    selectedItems: []
+  }),
+
   computed: {
     /* All items that the select has */
     allItems () {
@@ -152,10 +153,12 @@ export default {
             this.onKeyDown(e)
           }
 
+          /* eslint-disable vue/no-side-effects-in-computed-properties */
           this.isMenuActive = false
           this.isFocused = false
           this.editingIndex = -1
           this.selectedIndex = -1
+          /* eslint-enable vue/no-side-effects-in-computed-properties */
         },
         args: {
           closeConditional: e => {

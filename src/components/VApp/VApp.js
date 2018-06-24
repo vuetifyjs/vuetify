@@ -9,18 +9,19 @@ import Themeable from '../../mixins/themeable'
 // Directives
 import Resize from '../../directives/resize'
 
+/* @vue/component */
 export default {
   name: 'v-app',
+
+  directives: {
+    Resize
+  },
 
   mixins: [
     AppBreakpoint,
     AppTheme,
     Themeable
   ],
-
-  directives: {
-    Resize
-  },
 
   props: {
     id: {
@@ -39,14 +40,14 @@ export default {
     }
   },
 
-  mounted () {
-    this.$vuetify.dark = this.dark
-  },
-
   watch: {
     dark () {
       this.$vuetify.dark = this.dark
     }
+  },
+
+  mounted () {
+    this.$vuetify.dark = this.dark
   },
 
   render (h) {
