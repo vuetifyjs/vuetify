@@ -39,6 +39,10 @@ theme(v-input, "v-input")
 
   input,
   textarea
+    // Remove Firefox red outline
+    &:required
+      box-shadow: none
+
     &:focus,
     &:active
       outline: none
