@@ -301,33 +301,35 @@ test('VRadioGroup.vue', ({ mount }) => {
 
   it('should make radios disabled', async () => {
     const wrapper = mount(VRadioGroup, {
+      propsData: {
+        disabled: true
+      },
       slots: {
         default: [VRadio]
       }
     })
 
+    const onChange = jest.fn()
     const radio = wrapper.first(VRadio)
-    expect(radio.vm.isDisabled).toBe(false)
-
-    wrapper.setProps({
-      disabled: true
-    })
-    expect(radio.vm.isDisabled).toBe(true)
+    radio.vm.$on('change', onChange)
+    radio.first('input').trigger('change')
+    expect(onChange).not.toBeCalled()
   })
 
   it('should make radios readonly', async () => {
     const wrapper = mount(VRadioGroup, {
+      propsData: {
+        readonly: true
+      },
       slots: {
         default: [VRadio]
       }
     })
 
+    const onChange = jest.fn()
     const radio = wrapper.first(VRadio)
-    expect(radio.vm.isReadonly).toBe(false)
-
-    wrapper.setProps({
-      readonly: true
-    })
-    expect(radio.vm.isReadonly).toBe(true)
+    radio.vm.$on('change', onChange)
+    radio.first('input').trigger('change')
+    expect(onChange).not.toBeCalled()
   })
 })
