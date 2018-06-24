@@ -6,14 +6,11 @@ import VIcon from '../VIcon'
 // Mixins
 import PickerButton from '../../mixins/picker-button'
 
+/* @vue/component */
 export default {
   name: 'v-date-picker-title',
 
   mixins: [PickerButton],
-
-  data: () => ({
-    isReversing: false
-  }),
 
   props: {
     date: {
@@ -32,6 +29,10 @@ export default {
       type: String
     }
   },
+
+  data: () => ({
+    isReversing: false
+  }),
 
   computed: {
     computedTransition () {

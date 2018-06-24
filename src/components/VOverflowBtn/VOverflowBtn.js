@@ -10,6 +10,7 @@ import VBtn from '../VBtn'
 
 import { consoleWarn } from '../../util/console'
 
+/* @vue/component */
 export default {
   name: 'v-overflow-btn',
 

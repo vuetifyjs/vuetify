@@ -22,6 +22,7 @@ import {
   getPropertyFromItem
 } from '../../util/helpers'
 
+/* @vue/component */
 export default {
   name: 'v-select-list',
 

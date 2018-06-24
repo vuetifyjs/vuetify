@@ -15,8 +15,18 @@ import {
   unmaskText
 } from '../util/mask'
 
+/* @vue/component */
 export default {
   name: 'maskable',
+
+  props: {
+    dontFillMaskBlanks: Boolean,
+    mask: {
+      type: [Object, String],
+      default: null
+    },
+    returnMaskedValue: Boolean
+  },
 
   data: () => ({
     selection: 0,
@@ -31,15 +41,6 @@ export default {
       'time-with-seconds': '##:##:##'
     }
   }),
-
-  props: {
-    dontFillMaskBlanks: Boolean,
-    mask: {
-      type: [Object, String],
-      default: null
-    },
-    returnMaskedValue: Boolean
-  },
 
   computed: {
     masked () {

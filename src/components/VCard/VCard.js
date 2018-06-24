@@ -8,6 +8,7 @@ import Themeable from '../../mixins/themeable'
 // Helpers
 import { convertToUnit } from '../../util/helpers'
 
+/* @vue/component */
 export default {
   name: 'v-card',
 

@@ -6,12 +6,13 @@ import Transitionable from '../../mixins/transitionable'
 
 import ClickOutside from '../../directives/click-outside'
 
+/* @vue/component */
 export default {
   name: 'v-speed-dial',
 
-  mixins: [Positionable, Toggleable, Transitionable],
-
   directives: { ClickOutside },
+
+  mixins: [Positionable, Toggleable, Transitionable],
 
   props: {
     direction: {

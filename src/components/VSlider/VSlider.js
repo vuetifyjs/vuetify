@@ -20,21 +20,13 @@ import {
 } from '../../util/helpers'
 import { consoleWarn } from '../../util/console'
 
+/* @vue/component */
 export default {
   name: 'v-slider',
 
-  extends: VInput,
-
   directives: { ClickOutside },
 
-  data: vm => ({
-    app: {},
-    defaultColor: 'primary',
-    isActive: false,
-    keyPressed: 0,
-    lazyValue: typeof vm.value !== 'undefined' ? vm.value : Number(vm.min),
-    oldValue: null
-  }),
+  extends: VInput,
 
   props: {
     alwaysDirty: Boolean,
@@ -85,6 +77,15 @@ export default {
     },
     value: [Number, String]
   },
+
+  data: vm => ({
+    app: {},
+    defaultColor: 'primary',
+    isActive: false,
+    keyPressed: 0,
+    lazyValue: typeof vm.value !== 'undefined' ? vm.value : Number(vm.min),
+    oldValue: null
+  }),
 
   computed: {
     classes () {

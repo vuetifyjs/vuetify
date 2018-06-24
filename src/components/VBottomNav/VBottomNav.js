@@ -6,6 +6,7 @@ import Applicationable from '../../mixins/applicationable'
 import ButtonGroup from '../../mixins/button-group'
 import Colorable from '../../mixins/colorable'
 
+/* @vue/component */
 export default {
   name: 'v-bottom-nav',
 
@@ -26,13 +27,7 @@ export default {
       validator: v => !isNaN(parseInt(v))
     },
     shift: Boolean,
-    value: { required: false }
-  },
-
-  watch: {
-    active () {
-      this.update()
-    }
+    value: null
   },
 
   computed: {
@@ -46,6 +41,12 @@ export default {
     },
     computedHeight () {
       return parseInt(this.height)
+    }
+  },
+
+  watch: {
+    active () {
+      this.update()
     }
   },
 
