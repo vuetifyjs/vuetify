@@ -13,7 +13,7 @@ export default Vue.extend<Themeable>().extend({
 
   provide (): object {
     return {
-      theme: this
+      theme: this.themeableProvide
     }
   },
 
@@ -36,6 +36,14 @@ export default Vue.extend<Themeable>().extend({
     } as PropValidator<boolean | null>
   },
 
+  data () {
+    return {
+      themeableProvide: {
+        isDark: false
+      }
+    }
+  },
+
   computed: {
     isDark (): boolean {
       if (this.dark === true) {
@@ -54,6 +62,17 @@ export default Vue.extend<Themeable>().extend({
         'theme--dark': this.isDark,
         'theme--light': !this.isDark
       }
+    }
+  },
+
+  watch: {
+    isDark: {
+      handler (newVal, oldVal) {
+        if (newVal !== oldVal) {
+          this.themeableProvide.isDark = this.isDark
+        }
+      },
+      immediate: true
     }
   }
 })
