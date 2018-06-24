@@ -24,7 +24,7 @@
     "test": "node build/run-tests.js",
     "test:unix": "cross-env NODE_ENV=test jest",
     "test:win32": "cross-env NODE_ENV=test jest -i",
-    "test:coverage": "yarn test --coverage",
+    "test:coverage": "yarn test --coverage --mapCoverage",
     "test:types": "tsc -p ./types/test/tsconfig.json",
     "lint": "concurrently \"tsc --noEmit --pretty\" \"tslint -p . -c .tslint.js src/**/*.ts -t stylish\" \"eslint --ext .js,.ts src\" \"yarn test:types\" --kill-others-on-fail -n \"tsc,tslint,eslint,types\"",
     "preparecommitmsg": "node dev/prepare-commit-message.js",
