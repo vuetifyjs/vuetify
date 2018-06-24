@@ -4,7 +4,7 @@ export default {
       const col = this.$createElement('th', {
         staticClass: 'column',
         attrs: {
-          colspan: this.headerColumns
+          colspan: this.headerColumns + (this.fixedHeaderEnabled && this.scrollbarWidth > 0)
         }
       }, [this.genProgress()])
 

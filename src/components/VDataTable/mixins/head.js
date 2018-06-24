@@ -12,7 +12,47 @@ export default {
   },
 
   methods: {
-    genTHead () {
+    genColgroup () {
+      return this.$createElement('colgroup', {}, [...this.genCols()])
+    },
+    genColgroupForFixedHeader () {
+      return this.$createElement('colgroup', {}, [
+        ...this.genCols(),
+        (this.scrollbarWidth > 0) ? this.$createElement('col', {
+          attrs: {
+            width: this.scrollbarWidth
+          }
+        }) : undefined
+      ])
+    },
+    genCols () {
+      return (this.columnsWidth) ? this.columnsWidth.map(
+        colWidth => this.$createElement('col', {
+          attrs: {
+            width: colWidth
+          }
+        })
+      ) : []
+    },
+    genFixedHeader () {
+      if (!this.fixedHeaderEnabled) return // disabled fixed header if height is not specify
+
+      return this.$createElement('div', {
+        'class': { 'v-table__header-wrapper': true }
+      }, [
+        this.$createElement('table', {
+          'class': this.classes
+        }, [
+          this.genColgroupForFixedHeader(),
+          this.genTHead(true)
+        ])
+      ])
+    },
+    genDefaultHeader () {
+      if (this.height !== undefined) return
+      return this.genTHead()
+    },
+    genTHead (isHeader = false) {
       if (this.hideHeaders) return // Exit Early since no headers are needed.
 
       let children = []
@@ -39,7 +79,11 @@ export default {
           on: { change: this.toggle }
         })
 
-        this.hasSelectAll && row.unshift(this.$createElement('th', [checkbox]))
+        this.hasSelectAll && row.unshift(this.$createElement('th', [ this.genHeaderWrapper([ checkbox ]) ]))
+
+        if (isHeader && this.scrollbarWidth > 0) {
+          row.push(this.$createElement('th', [ this.genHeaderWrapper(['']) ]))
+        }
 
         children = [this.genTR(row), this.genTProgress()]
       }
@@ -62,7 +106,6 @@ export default {
         attrs: {
           role: 'columnheader',
           scope: 'col',
-          width: header.width || null,
           'aria-label': header[this.headerText] || '',
           'aria-sort': 'none'
         }
@@ -81,8 +124,14 @@ export default {
         classes.push(header.class)
       }
       data.class = classes
-
-      return [data, children]
+      return [data, [ this.genHeaderWrapper(children) ]]
+    },
+    genHeaderWrapper (children) {
+      // for measurement of the actual width of header items
+      return this.$createElement(
+        'span',
+        children
+      )
     },
     genHeaderSortingData (header, children, data, classes) {
       if (!('value' in header)) {

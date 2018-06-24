@@ -32,12 +32,31 @@ v-table($material)
 theme(v-table, "v-table")
 
 .v-table
+  width: 100%
+  &__wrapper
+    position: relative
+    overflow: hidden
+    display: flex
+    flex-wrap: wrap
+    flex: 0 0 auto
+  &__header-wrapper
+  &__footer-wrapper
+    position: relative
+    overflow: hidden
+    flex: 0 0 100%
   &__overflow
     width: 100%
-    overflow-x: auto
-    overflow-y: hidden
+    overflow: auto
+    flex: 0 0 100%
+
+.fixed
+  top: 0px
+  position: sticky
 
 table.v-table
+  word-break: break-all
+  word-wrap: break-word
+  table-layout: fixed
   border-radius: 2px
   border-collapse: collapse
   border-spacing: 0
@@ -65,6 +84,9 @@ table.v-table
 
       > div
         width: 100%
+
+      > span
+        display: inline-block
 
   tbody
     tr

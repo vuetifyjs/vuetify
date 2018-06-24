@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import { test } from '@/test'
 import VDataTable from '@/components/VDataTable'
+import Resize from '@/directives/resize'
 
-test('VDataTable.vue', ({ mount, compileToFunctions }) => {
+test('VDataTable.vue', ({ mount, shallow, compileToFunctions }) => {
   function dataTableTestData () {
     return {
       propsData: {
@@ -323,6 +324,54 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
+  it('should match display when width is specified', () => {
+    const data = dataTableTestData()
+    data.propsData.headers[0].width = 100
+    data.propsData.headers[1].width = 200
+    data.propsData.headers[2].width = 300
+    const wrapper = mount(VDataTable, data)
+
+    wrapper.update()
+
+    expect(wrapper.find('table colgroup')[0].html()).toMatchSnapshot()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should determine width automatically when width not specify', async () => {
+    // specify the width for the first column only
+    const data = dataTableTestData()
+    data.propsData.headers[0].width = 100
+
+    const wrapper = shallow(VDataTable, {
+      ...data,
+      computed: {
+        minColumnsWidth: () => [50, 250, 100]
+      },
+      methods: {
+        getContainerWidth: () => 500
+      }
+    })
+
+    await wrapper.vm.$nextTick()
+
+    /*
+     * User specify the width of the first column as 100px
+     * The width of the table is 500px
+     * The first column has taken up width of 100px
+     * The remaining width for the 2nd and thr 3rd column are 400px(500px-100px)
+     * The minimum width for the remaining 2 colunns are 350px(250px+100px)
+     * This leave 50px(400px-350px) of exessive space to distribute across the remaining 2 columns
+     *
+     * Thus the final width calculated:
+     *  - 2nd column: 275px(250px+(50px/2 remaining columns))
+     *  - 3rd column: 125px(100px+(50px/2 remaining columns))
+     */
+    expect(wrapper.find('table colgroup col')[0].getAttribute('width')).toBe('100')
+    expect(wrapper.find('table colgroup col')[1].getAttribute('width')).toBe('275')
+    expect(wrapper.find('table colgroup col')[2].getAttribute('width')).toBe('125')
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
   it('should render correct colspan when using headers-length prop', async () => {
     const data = dataTableTestData()
     data.propsData.headersLength = 11
@@ -424,7 +473,6 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
     expect(wrapper.vm.selected.hasOwnProperty(1)).toBe(false)
     expect(wrapper.vm.selected.hasOwnProperty(2)).toBe(true)
     expect(wrapper.vm.selected[2]).toBe(true)
-
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 })
