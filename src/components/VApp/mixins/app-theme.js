@@ -8,7 +8,7 @@ export default {
 
   computed: {
     parsedTheme () {
-      return Theme.parse(this.$vuetify.theme)
+      return Theme.parse(this.$vuetify.theme.colors)
     },
     /** @return string */
     generatedStyles () {
@@ -47,7 +47,7 @@ export default {
       return css
     },
     vueMeta () {
-      if (this.$vuetify.theme === false) return
+      if (this.$vuetify.theme.colors === false) return
 
       const options = {
         cssText: this.generatedStyles,
@@ -82,7 +82,7 @@ export default {
   },
 
   created () {
-    if (this.$vuetify.theme === false) return
+    if (this.$vuetify.theme.colors === false) return
 
     if (this.$meta) {
       // Vue-meta

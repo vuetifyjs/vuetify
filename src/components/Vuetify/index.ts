@@ -22,7 +22,6 @@ const Vuetify: VuetifyPlugin = {
       data: {
         application,
         breakpoint: {},
-        dark: false,
         icons: icons(opts.iconfont, opts.icons),
         lang,
         options: options(opts.options),

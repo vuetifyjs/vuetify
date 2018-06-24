@@ -16,7 +16,7 @@ export interface VuetifyUseOptions {
   directives?: Record<string, VuetifyDirective>
   components?: Record<string, PluginObject<any> | PluginFunction<never>>
   /** @see https://vuetifyjs.com/style/theme */
-  theme?: Partial<VuetifyTheme> | false
+  theme?: VuetifyTheme
   /**
    * Select a base icon font to use. Note that none of these are included, you must install them yourself
    *
@@ -115,17 +115,21 @@ export interface VuetifyBreakpoint {
 }
 
 export type VuetifyThemeItem = string | number
+export type VuetifyThemeMode = boolean
 
 export interface VuetifyTheme {
-  [name: string]: VuetifyThemeItem
+  dark?: VuetifyThemeMode,
+  colors?: {
+    [name: string]: VuetifyThemeItem
 
-  primary: VuetifyThemeItem
-  accent: VuetifyThemeItem
-  secondary: VuetifyThemeItem
-  info: VuetifyThemeItem
-  warning: VuetifyThemeItem
-  error: VuetifyThemeItem
-  success: VuetifyThemeItem
+    primary: VuetifyThemeItem
+    accent: VuetifyThemeItem
+    secondary: VuetifyThemeItem
+    info: VuetifyThemeItem
+    warning: VuetifyThemeItem
+    error: VuetifyThemeItem
+    success: VuetifyThemeItem
+  }
 }
 
 export interface VuetifyThemeCache {

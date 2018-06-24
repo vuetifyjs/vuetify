@@ -11,11 +11,12 @@ const THEME_DEFAULTS = {
   warning: '#FFC107'    // amber.base
 }
 
-export default function theme (theme: VuetifyUseOptions['theme'] = {}): VuetifyTheme | false {
-  if (theme === false) return false
-
+export default function theme (theme: VuetifyUseOptions['theme'] = {}): VuetifyTheme {
   return {
-    ...THEME_DEFAULTS,
-    ...theme
+    dark: theme.dark,
+    colors: theme.colors === false ? false : {
+      ...THEME_DEFAULTS,
+      ...theme.colors
+    }
   }
 }
