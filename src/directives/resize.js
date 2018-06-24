@@ -2,7 +2,7 @@ function inserted (el, binding) {
   const callback = binding.value
   const options = binding.options || { passive: true }
 
-  el.ownerDocument.defaultView.addEventListener('resize', callback, options)
+  window.addEventListener('resize', callback, options)
   el._onResize = {
     callback,
     options
@@ -16,7 +16,7 @@ function inserted (el, binding) {
 function unbind (el) {
   const { callback, options } = el._onResize
 
-  el.ownerDocument.defaultView.removeEventListener('resize', callback, options)
+  window.removeEventListener('resize', callback, options)
   delete el._onResize
 }
 

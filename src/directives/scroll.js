@@ -1,11 +1,11 @@
 function inserted (el, binding) {
   const callback = binding.value
   const options = binding.options || { passive: true }
-  let target = binding.arg || el.ownerDocument.defaultView
+  let target = binding.arg || window
   if (target === 'undefined') return
 
-  if (target !== el.ownerDocument.defaultView) {
-    target = el.ownerDocument.querySelector(target)
+  if (target !== window) {
+    target = document.querySelector(target)
   }
 
   target.addEventListener('scroll', callback, options)
