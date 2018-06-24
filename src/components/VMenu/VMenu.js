@@ -24,6 +24,8 @@ import { convertToUnit } from '../../util/helpers'
 export default {
   name: 'v-menu',
 
+  abstract: true,
+
   mixins: [
     Activator,
     Dependent,

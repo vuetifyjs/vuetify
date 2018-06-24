@@ -4,6 +4,8 @@ import '../../stylus/components/_app.styl'
 import AppTheme from './mixins/app-theme'
 import AppBreakpoint from './mixins/app-breakpoint'
 
+import Themeable from '../../mixins/themeable'
+
 // Directives
 import Resize from '../../directives/resize'
 
@@ -12,7 +14,8 @@ export default {
 
   mixins: [
     AppBreakpoint,
-    AppTheme
+    AppTheme,
+    Themeable
   ],
 
   directives: {
@@ -30,8 +33,8 @@ export default {
   computed: {
     classes () {
       return {
-        [`theme--${this.dark ? 'dark' : 'light'}`]: true,
-        'application--is-rtl': this.$vuetify.rtl
+        'application--is-rtl': this.$vuetify.rtl,
+        ...this.themeClasses
       }
     }
   },
