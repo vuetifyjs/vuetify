@@ -68,7 +68,7 @@ export default {
   computed: {
     classes () {
       const classes = {
-        'v-radio--is-disabled': this.isDisabled,
+        'v-radio--is-disabled': this.disabled,
         'v-radio--is-focused': this.isFocused,
         'theme--dark': this.dark,
         'theme--light': this.light
@@ -170,6 +170,8 @@ export default {
       this.$emit('blur', e)
     },
     onChange () {
+      if (this.isDisabled) return
+
       const mandatory = !!this.isMandatory && this.isMandatory()
 
       if (!this.disabled && (!this.isActive || !mandatory)) {
