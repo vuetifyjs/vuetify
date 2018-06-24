@@ -1,5 +1,6 @@
 import Routable from '../../mixins/routable'
 
+/* @vue/component */
 export default {
   name: 'v-breadcrumbs-item',
 

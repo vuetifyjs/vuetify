@@ -6,6 +6,7 @@
  * Used for calculating an automatic position (used for VSelect)
  * Will position the VMenu content properly over the VSelect
  */
+/* @vue/component */
 export default {
   methods: {
     // Revisit this

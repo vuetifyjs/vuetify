@@ -1,5 +1,6 @@
 import ExpandTransitionGenerator from '../../transitions/expand-transition'
 
+/* @vue/component */
 export default {
   methods: {
     genTBody () {

@@ -1,13 +1,14 @@
+/* @vue/component */
 export default {
   name: 'returnable',
-
-  data: () => ({
-    originalValue: null
-  }),
 
   props: {
     returnValue: null
   },
+
+  data: () => ({
+    originalValue: null
+  }),
 
   watch: {
     isActive (val) {

@@ -1,4 +1,5 @@
 export default function Grid (name) {
+  /* @vue/component */
   return {
     name: `v-${name}`,
 

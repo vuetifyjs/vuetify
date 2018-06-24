@@ -1,6 +1,6 @@
 import Ripple from '../directives/ripple'
 
-/** @mixin */
+/* @vue/component */
 export default {
   name: 'rippleable',
 

@@ -4,6 +4,7 @@ import rebuildSlots from '../../util/rebuildFunctionalSlots'
 import { deprecate } from '../../util/console'
 
 // TODO: remove this in v2.0
+/* @vue/component */
 const wrapper = {
   functional: true,
 
