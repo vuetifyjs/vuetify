@@ -19,6 +19,9 @@ const Vuetify: VuetifyPlugin = {
     const lang = genLang(opts.lang)
 
     Vue.prototype.$vuetify = new Vue({
+      mixins: [
+        theme(opts.theme)
+      ],
       data: {
         application,
         breakpoint: {},
@@ -26,8 +29,7 @@ const Vuetify: VuetifyPlugin = {
         icons: icons(opts.iconfont, opts.icons),
         lang,
         options: options(opts.options),
-        rtl: opts.rtl,
-        theme: theme(opts.theme)
+        rtl: opts.rtl
       },
       methods: {
         goTo,
