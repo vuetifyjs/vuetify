@@ -9,21 +9,13 @@ import { provide as RegistrableProvide } from '../../mixins/registrable'
 
 import Touch from '../../directives/touch'
 
+/* @vue/component */
 export default {
   name: 'v-carousel',
 
-  mixins: [Bootable, Themeable, RegistrableProvide('carousel')],
-
   directives: { Touch },
 
-  data () {
-    return {
-      inputValue: null,
-      items: [],
-      slideTimeout: null,
-      reverse: false
-    }
-  },
+  mixins: [Bootable, Themeable, RegistrableProvide('carousel')],
 
   props: {
     cycle: {
@@ -50,6 +42,15 @@ export default {
       default: '$vuetify.icons.prev'
     },
     value: Number
+  },
+
+  data () {
+    return {
+      inputValue: null,
+      items: [],
+      slideTimeout: null,
+      reverse: false
+    }
   },
 
   watch: {

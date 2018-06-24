@@ -12,6 +12,7 @@ function searchChildren (children) {
   return results
 }
 
+/* @vue/component */
 export default {
   name: 'dependent',
 
@@ -19,6 +20,17 @@ export default {
     return {
       closeDependents: true,
       isDependent: true
+    }
+  },
+
+  watch: {
+    isActive (val) {
+      if (val) return
+
+      const openDependents = this.getOpenDependents()
+      for (let index = 0; index < openDependents.length; index++) {
+        openDependents[index].isActive = false
+      }
     }
   },
 
@@ -44,17 +56,6 @@ export default {
       result.push(...this.getOpenDependentElements())
 
       return result
-    }
-  },
-
-  watch: {
-    isActive (val) {
-      if (val) return
-
-      const openDependents = this.getOpenDependents()
-      for (let index = 0; index < openDependents.length; index++) {
-        openDependents[index].isActive = false
-      }
     }
   }
 }

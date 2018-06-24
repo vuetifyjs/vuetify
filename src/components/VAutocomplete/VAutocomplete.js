@@ -8,19 +8,11 @@ import VTextField from '../VTextField/VTextField'
 // Utils
 import { keyCodes } from '../../util/helpers'
 
+/* @vue/component */
 export default {
   name: 'v-autocomplete',
 
   extends: VSelect,
-
-  data: vm => ({
-    attrsInput: null,
-    editingIndex: -1,
-    lazySearch: vm.searchInput,
-    lazyValue: vm.value != null
-      ? vm.value
-      : vm.multiple ? [] : undefined
-  }),
 
   props: {
     allowOverflow: {
@@ -63,6 +55,15 @@ export default {
       default: false
     }
   },
+
+  data: vm => ({
+    attrsInput: null,
+    editingIndex: -1,
+    lazySearch: vm.searchInput,
+    lazyValue: vm.value != null
+      ? vm.value
+      : vm.multiple ? [] : undefined
+  }),
 
   computed: {
     classes () {

@@ -8,6 +8,7 @@ import VAutocomplete from '../VAutocomplete/VAutocomplete'
 // Utils
 import { keyCodes } from '../../util/helpers'
 
+/* @vue/component */
 export default {
   name: 'v-combobox',
 

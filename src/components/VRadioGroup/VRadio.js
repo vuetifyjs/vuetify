@@ -16,10 +16,9 @@ import {
 // Utils
 import { keyCodes } from '../../util/helpers'
 
+/* @vue/component */
 export default {
   name: 'v-radio',
-
-  inheritAttrs: false,
 
   mixins: [
     Colorable,
@@ -28,11 +27,7 @@ export default {
     Themeable
   ],
 
-  data: () => ({
-    isActive: false,
-    isFocused: false,
-    parentError: false
-  }),
+  inheritAttrs: false,
 
   props: {
     color: {
@@ -52,6 +47,12 @@ export default {
     readonly: Boolean,
     value: null
   },
+
+  data: () => ({
+    isActive: false,
+    isFocused: false,
+    parentError: false
+  }),
 
   computed: {
     classes () {

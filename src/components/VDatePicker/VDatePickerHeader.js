@@ -11,6 +11,7 @@ import Themeable from '../../mixins/themeable'
 // Utils
 import { createNativeLocaleFormatter, monthChange } from './util'
 
+/* @vue/component */
 export default {
   name: 'v-date-picker-header',
 
@@ -18,13 +19,6 @@ export default {
     Colorable,
     Themeable
   ],
-
-  data () {
-    return {
-      isReversing: false,
-      defaultColor: 'accent'
-    }
-  },
 
   props: {
     disabled: Boolean,
@@ -49,6 +43,13 @@ export default {
     value: {
       type: [Number, String],
       required: true
+    }
+  },
+
+  data () {
+    return {
+      isReversing: false,
+      defaultColor: 'accent'
     }
   },
 

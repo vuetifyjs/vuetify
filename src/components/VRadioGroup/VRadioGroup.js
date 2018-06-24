@@ -11,6 +11,7 @@ import {
   provide as RegistrableProvide
 } from '../../mixins/registrable'
 
+/* @vue/component */
 export default {
   name: 'v-radio-group',
 
@@ -31,11 +32,6 @@ export default {
       radio: this
     }
   },
-
-  data: () => ({
-    internalTabIndex: -1,
-    radios: []
-  }),
 
   props: {
     column: {
@@ -60,10 +56,10 @@ export default {
     }
   },
 
-  watch: {
-    hasError: 'setErrorState',
-    internalValue: 'setActiveRadio'
-  },
+  data: () => ({
+    internalTabIndex: -1,
+    radios: []
+  }),
 
   computed: {
     classes () {
@@ -73,6 +69,11 @@ export default {
         'v-input--radio-group--row': this.row
       }
     }
+  },
+
+  watch: {
+    hasError: 'setErrorState',
+    internalValue: 'setActiveRadio'
   },
 
   mounted () {
