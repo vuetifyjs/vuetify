@@ -42,7 +42,7 @@ test('click-outside.js', () => {
   })
 
   it('should call the callback when closeConditional returns true', async () => {
-    const { registeredHandler, el, callback } = bootstrap({ closeConditional: () => true })
+    const { registeredHandler, callback } = bootstrap({ closeConditional: () => true })
     const event = { clientX: 5, clientY: 20}
 
     registeredHandler(event)
@@ -51,7 +51,7 @@ test('click-outside.js', () => {
   })
 
   it('should not call the callback when closeConditional returns false', async () => {
-    const { registeredHandler, el, callback } = bootstrap({ closeConditional: () => false })
+    const { registeredHandler, callback } = bootstrap({ closeConditional: () => false })
 
     registeredHandler({ clientX: 5, clientY: 20})
     await new Promise(resolve => setTimeout(resolve))
@@ -59,7 +59,7 @@ test('click-outside.js', () => {
   })
 
   it('should not call the callback when closeConditional is not provided', async () => {
-    const { registeredHandler, el, callback } = bootstrap()
+    const { registeredHandler, callback } = bootstrap()
 
     registeredHandler({ clientX: 5, clientY: 20})
     await new Promise(resolve => setTimeout(resolve))
@@ -67,7 +67,7 @@ test('click-outside.js', () => {
   })
 
   it('should not call the callback when clicked in element', async () => {
-    const { registeredHandler, el, callback } = bootstrap({ closeConditional: () => true })
+    const { registeredHandler, callback } = bootstrap({ closeConditional: () => true })
 
     registeredHandler({ clientX: 105, clientY: 120})
     await new Promise(resolve => setTimeout(resolve))
@@ -75,7 +75,7 @@ test('click-outside.js', () => {
   })
 
   it('should not call the callback when clicked in elements', async () => {
-    const { registeredHandler, el, callback } = bootstrap({
+    const { registeredHandler, callback } = bootstrap({
       closeConditional: () => true,
       include: () => [{
         getBoundingClientRect: () => ({
@@ -93,7 +93,7 @@ test('click-outside.js', () => {
   })
 
   it('should not call the callback when event is not fired by user action', async () => {
-    const { registeredHandler, el, callback } = bootstrap({ closeConditional: () => true })
+    const { registeredHandler, callback } = bootstrap({ closeConditional: () => true })
 
     registeredHandler({ clientX: 5, clientY: 20, isTrusted: false })
     await new Promise(resolve => setTimeout(resolve))
