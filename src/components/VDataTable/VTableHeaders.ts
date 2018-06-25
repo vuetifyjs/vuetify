@@ -24,10 +24,10 @@ export default injectTwo<DataIteratorProvide, DataTableProvide>()('dataIterator'
       return h(VCellCheckbox, {
         class: classes,
         props: {
-          head: true
+          head: true,
+          inputValue: this.dataIterator.everyItem
         },
         attrs: {
-          inputValue: this.dataIterator.everyItem,
           indeterminate: !this.dataIterator.everyItem && this.dataIterator.someItems
         },
         on: {

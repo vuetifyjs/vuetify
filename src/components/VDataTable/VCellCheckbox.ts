@@ -1,10 +1,14 @@
-import Vue, { VNode } from 'vue'
+import Vue, { VNode, ComponentOptions } from 'vue'
 
 import VCell from './VCell'
 import VCheckbox from '../VCheckbox'
 
+import { wrapInArray } from '../../util/helpers'
+
 export default Vue.extend({
   name: 'v-cell-checkbox',
+
+  functional: true,
 
   model: {
     prop: 'inputValue',
@@ -16,23 +20,21 @@ export default Vue.extend({
     head: Boolean
   },
 
-  inheritAttrs: false,
-
-  render (h): VNode {
-    const checkbox = h((VCheckbox as any), { // TODO: fix when converted to ts
+  render (h, { data, props }): VNode {
+    const checkbox = h(VCheckbox as ComponentOptions<Vue>, {
       props: {
         hideDetails: true,
-        inputValue: this.inputValue,
-        ...this.$attrs
+        inputValue: props.inputValue,
+        ...data.attrs
       },
       on: {
-        change: (v: any) => this.$emit('change', v)
+        change: (v: any) => wrapInArray(data.on!.change).forEach(f => f(v))
       }
     })
 
     return h(VCell, {
       props: {
-        head: this.head
+        head: props.head
       },
       staticClass: 'v-cell-checkbox'
     }, [checkbox])

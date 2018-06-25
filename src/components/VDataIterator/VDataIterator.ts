@@ -1,9 +1,7 @@
 import Vue, { VNode, CreateElement, VNodeChildren, VNodeChildrenArrayContents } from 'vue'
 import { PropValidator } from 'vue/types/options'
 
-import { getObjectValueByPath, deepEqual } from '../../util/helpers'
-
-function wrapInArray<T> (v: T | Array<T>): Array<T> { return Array.isArray(v) ? v : [v] }
+import { getObjectValueByPath, deepEqual, wrapInArray } from '../../util/helpers'
 
 export interface DataIteratorProvide {
   toggleSelectAll: () => void
