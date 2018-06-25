@@ -109,6 +109,7 @@ export default mixins(VDataIterator).extend({
         })
       }
     },
+    dense: Boolean,
     groupBy: String,
     headers: Array as PropValidator<TableHeader[]>,
     height: String,
@@ -254,7 +255,10 @@ export default mixins(VDataIterator).extend({
 
   render (h): VNode {
     return h('div', {
-      staticClass: 'v-table v-data-table'
+      staticClass: 'v-table v-data-table',
+      class: {
+        'v-data-table--dense': this.dense
+      }
     }, [
       ...this.genHeaders(h),
       ...this.genBodies(h),
