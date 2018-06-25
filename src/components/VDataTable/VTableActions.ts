@@ -42,11 +42,9 @@ export default injectTwo<DataIteratorProvide, DataTableProvide>()('dataIterator'
     } as PropValidator<any[]>,
     rowsPerPageText: {
       type: String,
-      default: 'Rows per page:'
+      default: '$vuetify.dataTable.rowsPerPageText'
     },
-    showFirstLastPage: {
-      type: Boolean
-    }
+    showFirstLastPage: Boolean // TODO: Better name?
   },
 
   methods: {
@@ -54,7 +52,7 @@ export default injectTwo<DataIteratorProvide, DataTableProvide>()('dataIterator'
       return h('div', {
         staticClass: 'v-data-table__actions__select'
       }, [
-        this.rowsPerPageText,
+        this.$vuetify.t(this.rowsPerPageText),
         h(VSelect, {
           attrs: {
             'aria-label': this.rowsPerPageText
