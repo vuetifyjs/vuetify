@@ -131,7 +131,7 @@ export default mixins(VDataIterator).extend({
       return this.static ? false : this.headers.some((h: TableHeader) => !!h.width && String(h.width).indexOf('px') >= 0)
     },
     widths (): (string | number | null)[] {
-      return this.static ? [] : this.headers.map((h: TableHeader) => h.width || (this.isFlexWidth ? 1 : null))
+      return this.static ? [] : this.headers.map((h: TableHeader) => h.width || (this.isFlexWidth && h.type !== 'select-all' ? 1 : null))
     },
     headersWithCustomSort (): Record<string, TableHeader> {
       const headers: Record<string, TableHeader> = {}

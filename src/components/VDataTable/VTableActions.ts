@@ -142,9 +142,7 @@ export default injectTwo<DataIteratorProvide, DataTableProvide>()('dataIterator'
   },
 
   render (h: CreateElement): VNode {
-    const width = this.dataTable && this.dataTable.isPixelWidth
-      ? this.dataTable.widths.reduce((acc, curr) => Number(acc) + Number(String(curr).slice(0, -2)), 0)
-      : null
+    const width = this.dataTable && this.dataTable.tableWidth
 
     return h('div', {
       staticClass: 'v-data-table__actions',
