@@ -1,22 +1,15 @@
 import '../../stylus/components/_pickers.styl'
-
-// Components
-import VCard from '../VCard'
+import '../../stylus/components/_cards.styl'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
 
+/* @vue/component */
 export default {
   name: 'v-picker',
 
   mixins: [Colorable, Themeable],
-
-  data () {
-    return {
-      defaultColor: 'primary'
-    }
-  },
 
   props: {
     fullWidth: Boolean,
@@ -32,6 +25,12 @@ export default {
     }
   },
 
+  data () {
+    return {
+      defaultColor: 'primary'
+    }
+  },
+
   computed: {
     computedTitleColor () {
       const darkTheme = this.dark || (!this.light && this.$vuetify.dark)
@@ -43,9 +42,9 @@ export default {
   methods: {
     genTitle () {
       return this.$createElement('div', {
-        staticClass: 'picker__title',
+        staticClass: 'v-picker__title',
         'class': this.addBackgroundColorClassChecks({
-          'picker__title--landscape': this.landscape
+          'v-picker__title--landscape': this.landscape
         }, this.computedTitleColor)
       }, this.$slots.title)
     },
@@ -58,7 +57,8 @@ export default {
     },
     genBody () {
       return this.$createElement('div', {
-        staticClass: 'picker__body',
+        staticClass: 'v-picker__body',
+        'class': this.themeClasses,
         style: this.fullWidth ? undefined : {
           width: this.width + 'px'
         }
@@ -68,16 +68,16 @@ export default {
     },
     genActions () {
       return this.$createElement('div', {
-        staticClass: 'picker__actions card__actions'
+        staticClass: 'v-picker__actions v-card__actions'
       }, this.$slots.actions)
     }
   },
 
   render (h) {
-    return h(VCard, {
-      staticClass: 'picker',
+    return h('div', {
+      staticClass: 'v-picker v-card',
       'class': {
-        'picker--landscape': this.landscape,
+        'v-picker--landscape': this.landscape,
         ...this.themeClasses
       }
     }, [

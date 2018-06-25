@@ -6,15 +6,15 @@ test('console.js', () => {
     consoleWarn('foo')
     expect('[Vuetify] foo').toHaveBeenTipped()
 
-    consoleWarn('bar', { $options: { name: 'baz' } })
-    expect('[Vuetify] bar in "baz"').toHaveBeenTipped()
+    consoleWarn('bar', { _isVue: true, $options: { name: 'baz' } })
+    expect('[Vuetify] bar\n\n(found in <Baz>)').toHaveBeenTipped()
   })
 
   it('should generate an error', () => {
     consoleError('foo')
     expect('[Vuetify] foo').toHaveBeenWarned()
 
-    consoleError('bar', { $options: { name: 'baz' } })
-    expect('[Vuetify] bar in "baz"').toHaveBeenWarned()
+    consoleError('bar', { _isVue: true, $options: { name: 'baz' } })
+    expect('[Vuetify] bar\n\n(found in <Baz>)').toHaveBeenWarned()
   })
 })

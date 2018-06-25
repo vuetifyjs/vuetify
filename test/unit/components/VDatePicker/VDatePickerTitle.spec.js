@@ -34,7 +34,7 @@ test('VDatePickerTitle.js', ({ mount }) => {
       }
     })
 
-    expect(wrapper.find('.date-picker-title__year')[0].html()).toMatchSnapshot()
+    expect(wrapper.find('.v-date-picker-title__year')[0].html()).toMatchSnapshot()
   })
 
   it('should emit input event on year/date click', () => {
@@ -49,14 +49,14 @@ test('VDatePickerTitle.js', ({ mount }) => {
     const input = jest.fn(value => wrapper.setProps({ selectingYear: value }))
     wrapper.vm.$on('update:selectingYear', input)
 
-    wrapper.find('.date-picker-title__date')[0].trigger('click')
+    wrapper.find('.v-date-picker-title__date')[0].trigger('click')
     expect(input).not.toBeCalled()
-    wrapper.find('.date-picker-title__year')[0].trigger('click')
+    wrapper.find('.v-date-picker-title__year')[0].trigger('click')
     expect(input).toBeCalledWith(true)
-    wrapper.find('.date-picker-title__date')[0].trigger('click')
+    wrapper.find('.v-date-picker-title__date')[0].trigger('click')
     expect(input).toBeCalledWith(false)
-    wrapper.find('.date-picker-title__year')[0].trigger('click')
-    wrapper.find('.date-picker-title__year')[0].trigger('click')
+    wrapper.find('.v-date-picker-title__year')[0].trigger('click')
+    wrapper.find('.v-date-picker-title__year')[0].trigger('click')
     expect(input).toBeCalledWith(false)
   })
 

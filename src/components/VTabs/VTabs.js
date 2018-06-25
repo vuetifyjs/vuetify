@@ -20,8 +20,14 @@ import {
 import Resize from '../../directives/resize'
 import Touch from '../../directives/touch'
 
+/* @vue/component */
 export default {
   name: 'v-tabs',
+
+  directives: {
+    Resize,
+    Touch
+  },
 
   mixins: [
     RegistrableProvide('tabs'),
@@ -34,11 +40,6 @@ export default {
     TabsWatchers,
     Themeable
   ],
-
-  directives: {
-    Resize,
-    Touch
-  },
 
   provide () {
     return {
@@ -147,10 +148,10 @@ export default {
       this.setOverflow()
     },
     findActiveLink () {
-      if (!this.tabs.length || this.lazyValue) return
+      if (!this.tabs.length) return
 
       const activeIndex = this.tabs.findIndex((tabItem, index) => {
-        const id = tabItem.action === tabItem ? index.toString() : tabItem.action
+        const id = tabItem.action === tabItem ? index : tabItem.action
         return id === this.lazyValue ||
           tabItem.$el.firstChild.className.indexOf(this.activeClass) > -1
       })
@@ -238,7 +239,7 @@ export default {
     const { tab, slider, items, item } = this.parseNodes()
 
     return h('div', {
-      staticClass: 'tabs',
+      staticClass: 'v-tabs',
       directives: [{
         name: 'resize',
         arg: 400,

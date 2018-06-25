@@ -5,4 +5,5 @@ VProgressLinear.install = function install (Vue) {
   Vue.component(VProgressLinear.name, VProgressLinear)
 }
 
+export { VProgressLinear }
 export default VProgressLinear

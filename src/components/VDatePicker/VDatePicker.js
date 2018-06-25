@@ -12,33 +12,11 @@ import Picker from '../../mixins/picker'
 import { pad, createNativeLocaleFormatter } from './util'
 import isDateAllowed from './util/isDateAllowed'
 
+/* @vue/component */
 export default {
   name: 'v-date-picker',
 
   mixins: [Picker],
-
-  data () {
-    const now = new Date()
-    return {
-      activePicker: this.type.toUpperCase(),
-      defaultColor: 'accent',
-      inputDay: null,
-      inputMonth: null,
-      inputYear: null,
-      isReversing: false,
-      now,
-      // tableDate is a string in 'YYYY' / 'YYYY-M' format (leading zero for month is not required)
-      tableDate: (() => {
-        if (this.pickerDate) {
-          return this.pickerDate
-        }
-
-        const date = this.value || `${now.getFullYear()}-${now.getMonth() + 1}`
-        const type = this.type === 'date' ? 'month' : 'year'
-        return this.sanitizeDateString(date, type)
-      })()
-    }
-  },
 
   props: {
     allowedDates: Function,
@@ -77,12 +55,12 @@ export default {
     },
     nextIcon: {
       type: String,
-      default: 'chevron_right'
+      default: '$vuetify.icons.next'
     },
     pickerDate: String,
     prevIcon: {
       type: String,
-      default: 'chevron_left'
+      default: '$vuetify.icons.prev'
     },
     reactive: Boolean,
     readonly: Boolean,
@@ -108,6 +86,29 @@ export default {
       default: null
     },
     yearIcon: String
+  },
+
+  data () {
+    const now = new Date()
+    return {
+      activePicker: this.type.toUpperCase(),
+      defaultColor: 'accent',
+      inputDay: null,
+      inputMonth: null,
+      inputYear: null,
+      isReversing: false,
+      now,
+      // tableDate is a string in 'YYYY' / 'YYYY-M' format (leading zero for month is not required)
+      tableDate: (() => {
+        if (this.pickerDate) {
+          return this.pickerDate
+        }
+
+        const date = this.value || `${now.getFullYear()}-${now.getMonth() + 1}`
+        const type = this.type === 'date' ? 'month' : 'year'
+        return this.sanitizeDateString(date, type)
+      })()
+    }
   },
 
   computed: {
@@ -200,6 +201,13 @@ export default {
     }
   },
 
+  created () {
+    if (this.pickerDate !== this.tableDate) {
+      this.$emit('update:pickerDate', this.tableDate)
+    }
+    this.setInputDate()
+  },
+
   methods: {
     isDateAllowed (value) {
       return isDateAllowed(value, this.min, this.max, this.allowedDates)
@@ -256,8 +264,10 @@ export default {
         props: {
           nextIcon: this.nextIcon,
           color: this.color,
+          dark: this.dark,
           disabled: this.readonly,
           format: this.headerDateFormat,
+          light: this.light,
           locale: this.locale,
           min: this.activePicker === 'DATE' ? this.minMonth : this.minYear,
           max: this.activePicker === 'DATE' ? this.maxMonth : this.maxYear,
@@ -276,11 +286,13 @@ export default {
           allowedDates: this.allowedDates,
           color: this.color,
           current: this.current,
+          dark: this.dark,
           disabled: this.readonly,
           events: this.events,
           eventColor: this.eventColor,
           firstDayOfWeek: this.firstDayOfWeek,
           format: this.dayFormat,
+          light: this.light,
           locale: this.locale,
           min: this.min,
           max: this.max,
@@ -301,8 +313,10 @@ export default {
           allowedDates: this.type === 'month' ? this.allowedDates : null,
           color: this.color,
           current: this.current ? this.sanitizeDateString(this.current, 'month') : null,
+          dark: this.dark,
           disabled: this.readonly,
           format: this.monthFormat,
+          light: this.light,
           locale: this.locale,
           min: this.minMonth,
           max: this.maxMonth,
@@ -369,14 +383,7 @@ export default {
     }
   },
 
-  created () {
-    if (this.pickerDate !== this.tableDate) {
-      this.$emit('update:pickerDate', this.tableDate)
-    }
-    this.setInputDate()
-  },
-
-  render (h) {
-    return this.genPicker('picker--date')
+  render () {
+    return this.genPicker('v-picker--date')
   }
 }

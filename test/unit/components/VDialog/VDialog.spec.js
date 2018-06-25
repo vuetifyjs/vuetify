@@ -50,7 +50,6 @@ test('VDialog.js', ({ mount, compileToFunctions }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
   it('should render a scrollable component and match snapshot', () => {
@@ -86,6 +85,17 @@ test('VDialog.js', ({ mount, compileToFunctions }) => {
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
+  it('should render component with custom width and match snapshot', () => {
+    const wrapper = mount(VDialog, {
+      propsData: {
+        width: '50%'
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
   it('should render component with custom transition and match snapshot', () => {
     const wrapper = mount(VDialog, {
       propsData: {
@@ -108,7 +118,7 @@ test('VDialog.js', ({ mount, compileToFunctions }) => {
     wrapper.vm.$on('input', input)
 
     expect(wrapper.vm.isActive).toBe(false)
-    wrapper.find('.dialog__activator')[0].trigger('click')
+    wrapper.find('.v-dialog__activator')[0].trigger('click')
     expect(wrapper.vm.isActive).toBe(true)
     await wrapper.vm.$nextTick()
     expect(input).toBeCalledWith(true)
@@ -130,7 +140,7 @@ test('VDialog.js', ({ mount, compileToFunctions }) => {
     wrapper.vm.$on('input', input)
 
     expect(wrapper.vm.isActive).toBe(false)
-    wrapper.find('.dialog__activator')[0].trigger('click')
+    wrapper.find('.v-dialog__activator')[0].trigger('click')
     expect(wrapper.vm.isActive).toBe(false)
     await wrapper.vm.$nextTick()
     expect(input).not.toBeCalled()

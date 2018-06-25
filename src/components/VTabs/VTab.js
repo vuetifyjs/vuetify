@@ -7,6 +7,7 @@ import {
 // Utilities
 import { getObjectValueByPath } from '../../util/helpers'
 
+/* @vue/component */
 export default {
   name: 'v-tab',
 
@@ -17,16 +18,10 @@ export default {
 
   inject: ['tabClick'],
 
-  data () {
-    return {
-      isActive: false
-    }
-  },
-
   props: {
     activeClass: {
       type: String,
-      default: 'tabs__item--active'
+      default: 'v-tabs__item--active'
     },
     ripple: {
       type: [Boolean, Object],
@@ -34,11 +29,17 @@ export default {
     }
   },
 
+  data () {
+    return {
+      isActive: false
+    }
+  },
+
   computed: {
     classes () {
       return {
-        'tabs__item': true,
-        'tabs__item--disabled': this.disabled,
+        'v-tabs__item': true,
+        'v-tabs__item--disabled': this.disabled,
         [this.activeClass]: !this.to && this.isActive
       }
     },
@@ -116,7 +117,7 @@ export default {
     data.ref = 'link'
 
     return h('div', {
-      staticClass: 'tabs__div'
+      staticClass: 'v-tabs__div'
     }, [h(tag, data, this.$slots.default)])
   }
 }

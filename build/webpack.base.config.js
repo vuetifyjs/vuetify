@@ -1,20 +1,59 @@
+require('dotenv').config()
+
+const os = require('os')
+const HappyPack = require('happypack')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 
-const resolve = file => require('path').resolve(__dirname, file)
+const isProd = process.env.NODE_ENV === 'production'
+const extractCSS = isProd || process.env.TARGET === 'development'
 
-module.exports = {
+exports.happyThreadPool = HappyPack.ThreadPool({
+  size: Math.min(os.cpus().length, 4)
+})
+
+const cssLoaders = [
+  // https://github.com/webpack-contrib/mini-css-extract-plugin#user-content-advanced-configuration-example
+  // TODO: remove style-loader: https://github.com/webpack-contrib/mini-css-extract-plugin/issues/34
+  extractCSS ? MiniCssExtractPlugin.loader : 'style-loader',
+  { loader: 'css-loader', options: { sourceMap: !isProd } },
+  { loader: 'postcss-loader', options: { sourceMap: !isProd } },
+  { loader: 'stylus-loader', options: { sourceMap: !isProd } }
+]
+
+const plugins = [
+  new FriendlyErrorsWebpackPlugin({
+    clearConsole: true
+  })
+]
+
+extractCSS || plugins.push(
+  new HappyPack({
+    id: 'stylus',
+    threadPool: exports.happyThreadPool,
+    loaders: cssLoaders
+  })
+)
+
+exports.config = {
+  mode: isProd ? 'production' : 'development',
   resolve: {
-    extensions: ['*', '.js', '.json', '.vue'],
-    alias: {
-      '@': resolve('../src')
-    }
+    extensions: ['*', '.js', '.json', '.vue', '.ts']
   },
   node: {
     fs: 'empty'
   },
-  plugins: [
-    new FriendlyErrorsWebpackPlugin({
-      clearConsole: true
-    })
-  ]
+  module: {
+    rules: [
+      {
+        test: /\.styl$/,
+        use: extractCSS ? cssLoaders : 'happypack/loader?id=stylus'
+      }
+    ]
+  },
+  plugins,
+  performance: {
+    hints: false
+  },
+  stats: { children: false }
 }

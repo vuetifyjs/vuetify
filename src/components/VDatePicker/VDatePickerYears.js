@@ -6,16 +6,11 @@ import Colorable from '../../mixins/colorable'
 // Utils
 import { createNativeLocaleFormatter } from './util'
 
+/* @vue/component */
 export default {
   name: 'v-date-picker-years',
 
   mixins: [Colorable],
-
-  data () {
-    return {
-      defaultColor: 'primary'
-    }
-  },
 
   props: {
     format: {
@@ -31,6 +26,12 @@ export default {
     value: [Number, String]
   },
 
+  data () {
+    return {
+      defaultColor: 'primary'
+    }
+  },
+
   computed: {
     formatter () {
       return this.format || createNativeLocaleFormatter(this.locale, { year: 'numeric', timeZone: 'UTC' }, { length: 4 })
@@ -38,7 +39,12 @@ export default {
   },
 
   mounted () {
-    this.$el.scrollTop = this.$el.scrollHeight / 2 - this.$el.offsetHeight / 2
+    const activeItem = this.$el.getElementsByClassName('active')[0]
+    if (activeItem) {
+      this.$el.scrollTop = activeItem.offsetTop - this.$el.offsetHeight / 2 + activeItem.offsetHeight / 2
+    } else {
+      this.$el.scrollTop = this.$el.scrollHeight / 2 - this.$el.offsetHeight / 2
+    }
   },
 
   methods: {
@@ -69,9 +75,9 @@ export default {
     }
   },
 
-  render (h) {
+  render () {
     return this.$createElement('ul', {
-      staticClass: 'date-picker-years',
+      staticClass: 'v-date-picker-years',
       ref: 'years'
     }, this.genYearItems())
   }

@@ -83,7 +83,7 @@ test('VCard.vue', ({ mount }) => {
       }
     })
 
-    expect(wrapper.hasClass('card--tile')).toBe(true)
+    expect(wrapper.hasClass('v-card--tile')).toBe(true)
     expect(wrapper.html()).toMatchSnapshot()
   })
 })

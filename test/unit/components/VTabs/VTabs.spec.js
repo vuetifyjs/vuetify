@@ -198,7 +198,7 @@ test('VTabs', ({ mount, shallow }) => {
 
     wrapper.setData({ isOverflowing: true })
     await wrapper.vm.$nextTick()
-    expect(wrapper.find('.tabs__wrapper--show-arrows')).toHaveLength(1)
+    expect(wrapper.find('.v-tabs__wrapper--show-arrows')).toHaveLength(1)
     expect(wrapper.html()).toMatchSnapshot()
   })
 
@@ -231,7 +231,7 @@ test('VTabs', ({ mount, shallow }) => {
     wrapper.setData({ scrollOffset: -1 })
     await wrapper.vm.$nextTick()
 
-    const next = wrapper.find('.tabs__icon--next')[0]
+    const next = wrapper.find('.v-tabs__icon--next')[0]
     next.trigger('click')
     await wrapper.vm.$nextTick()
     expect(scrollTo).toHaveBeenCalledWith('next')
@@ -252,7 +252,7 @@ test('VTabs', ({ mount, shallow }) => {
     })
     await ssrBootable()
 
-    const tabsWrapper = wrapper.find('.tabs__wrapper')[0]
+    const tabsWrapper = wrapper.find('.v-tabs__wrapper')[0]
 
     touch(tabsWrapper).start(0, 0)
     touch(tabsWrapper).end(0, 0)
@@ -282,7 +282,7 @@ test('VTabs', ({ mount, shallow }) => {
     })
 
     wrapper.setData({ isOverflowing: true })
-    const container = wrapper.find('.tabs__container')[0]
+    const container = wrapper.find('.v-tabs__container')[0]
 
     await ssrBootable()
 
@@ -382,7 +382,7 @@ test('VTabs', ({ mount, shallow }) => {
 
     await ssrBootable()
 
-    const slider = wrapper.find('.tabs__slider')
+    const slider = wrapper.find('.v-tabs__slider')
     expect(slider).toHaveLength(0)
   })
 
@@ -515,5 +515,68 @@ test('VTabs', ({ mount, shallow }) => {
     await resizeWindow(800)
 
     expect(setWidths).toHaveBeenCalledTimes(2)
+  })
+
+  it('should set input value when using indexes or action', async () => {
+    let wrapper = mount(VTabs, {
+      slots: {
+        default: [VTab, VTab, VTab]
+      }
+    })
+
+    let tabs = wrapper.find(VTab)
+
+    expect(wrapper.vm.inputValue).toBe(undefined)
+
+    // No action should use index
+    wrapper.vm.tabClick(tabs[0].vm)
+    expect(wrapper.vm.inputValue).toBe(0)
+    wrapper.vm.tabClick(tabs[2].vm)
+    expect(wrapper.vm.inputValue).toBe(2)
+
+    wrapper = mount(VTabs, {
+      slots: {
+        default: [
+          {
+            extends: VTab,
+            props: {
+              href: {
+                type: String,
+                default: 'foo'
+              }
+            }
+          },
+          {
+            extends: VTab,
+            props: {
+              href: {
+                type: String,
+                default: 'foobar'
+              }
+            }
+          },
+          {
+            extends: VTab,
+            props: {
+              href: {
+                type: String,
+                default: 'fizzbuzz'
+              }
+            }
+          }
+        ]
+      }
+    })
+
+    tabs = wrapper.find(VTab)
+
+    expect(wrapper.vm.inputValue).toBe(undefined)
+
+    wrapper.vm.tabClick(tabs[1].vm)
+    expect(wrapper.vm.inputValue).toBe('foobar')
+    wrapper.vm.tabClick(tabs[2].vm)
+    expect(wrapper.vm.inputValue).toBe('fizzbuzz')
+    wrapper.vm.tabClick(tabs[0].vm)
+    expect(wrapper.vm.inputValue).toBe('foo')
   })
 })

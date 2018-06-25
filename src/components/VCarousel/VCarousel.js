@@ -9,21 +9,13 @@ import { provide as RegistrableProvide } from '../../mixins/registrable'
 
 import Touch from '../../directives/touch'
 
+/* @vue/component */
 export default {
   name: 'v-carousel',
 
-  mixins: [Bootable, Themeable, RegistrableProvide('carousel')],
-
   directives: { Touch },
 
-  data () {
-    return {
-      inputValue: null,
-      items: [],
-      slideTimeout: null,
-      reverse: false
-    }
-  },
+  mixins: [Bootable, Themeable, RegistrableProvide('carousel')],
 
   props: {
     cycle: {
@@ -32,7 +24,7 @@ export default {
     },
     delimiterIcon: {
       type: String,
-      default: 'fiber_manual_record'
+      default: '$vuetify.icons.delimiter'
     },
     hideControls: Boolean,
     hideDelimiters: Boolean,
@@ -43,13 +35,22 @@ export default {
     },
     nextIcon: {
       type: [Boolean, String],
-      default: 'chevron_right'
+      default: '$vuetify.icons.next'
     },
     prevIcon: {
       type: [Boolean, String],
-      default: 'chevron_left'
+      default: '$vuetify.icons.prev'
     },
     value: Number
+  },
+
+  data () {
+    return {
+      inputValue: null,
+      items: [],
+      slideTimeout: null,
+      reverse: false
+    }
   },
 
   watch: {
@@ -93,14 +94,14 @@ export default {
   methods: {
     genDelimiters () {
       return this.$createElement('div', {
-        staticClass: 'carousel__controls'
+        staticClass: 'v-carousel__controls'
       }, this.genItems())
     },
     genIcon (direction, icon, fn) {
       if (!icon) return null
 
       return this.$createElement('div', {
-        staticClass: `carousel__${direction}`
+        staticClass: `v-carousel__${direction}`
       }, [
         this.$createElement(VBtn, {
           props: {
@@ -120,8 +121,8 @@ export default {
       return this.items.map((item, index) => {
         return this.$createElement(VBtn, {
           class: {
-            'carousel__controls__item': true,
-            'carousel__controls__item--active': index === this.inputValue
+            'v-carousel__controls__item': true,
+            'v-carousel__controls__item--active': index === this.inputValue
           },
           props: {
             icon: true,
@@ -173,7 +174,7 @@ export default {
 
   render (h) {
     return h('div', {
-      staticClass: 'carousel',
+      staticClass: 'v-carousel',
       directives: [{
         name: 'touch',
         value: {
@@ -182,8 +183,8 @@ export default {
         }
       }]
     }, [
-      this.hideControls ? null : this.genIcon('left', this.prevIcon, this.prev),
-      this.hideControls ? null : this.genIcon('right', this.nextIcon, this.next),
+      this.hideControls ? null : this.genIcon('prev', this.$vuetify.rtl ? this.nextIcon : this.prevIcon, this.prev),
+      this.hideControls ? null : this.genIcon('next', this.$vuetify.rtl ? this.prevIcon : this.nextIcon, this.next),
       this.hideDelimiters ? null : this.genDelimiters(),
       this.$slots.default
     ])

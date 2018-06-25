@@ -2,16 +2,11 @@ import '../../stylus/components/_parallax.styl'
 
 import Translatable from '../../mixins/translatable'
 
+/* @vue/component */
 export default {
   name: 'v-parallax',
 
   mixins: [Translatable],
-
-  data () {
-    return {
-      isBooted: false
-    }
-  },
 
   props: {
     alt: String,
@@ -20,6 +15,12 @@ export default {
       default: 500
     },
     src: String
+  },
+
+  data () {
+    return {
+      isBooted: false
+    }
   },
 
   computed: {
@@ -66,7 +67,7 @@ export default {
 
   render (h) {
     const imgData = {
-      staticClass: 'parallax__image',
+      staticClass: 'v-parallax__image',
       style: this.styles,
       attrs: {
         src: this.src
@@ -77,19 +78,19 @@ export default {
     if (this.alt) imgData.attrs.alt = this.alt
 
     const container = h('div', {
-      staticClass: 'parallax__image-container'
+      staticClass: 'v-parallax__image-container'
     }, [
       h('img', imgData)
     ])
 
     const content = h('div', {
-      staticClass: 'parallax__content'
+      staticClass: 'v-parallax__content'
     }, this.$slots.default)
 
     return h('div', {
-      staticClass: 'parallax',
+      staticClass: 'v-parallax',
       style: {
-        height: `${this.normalizedHeight}px`
+        height: `${this.height}px`
       },
       on: this.$listeners
     }, [container, content])

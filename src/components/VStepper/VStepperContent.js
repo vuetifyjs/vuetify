@@ -3,8 +3,19 @@ import {
   VTabReverseTransition
 } from '../transitions'
 
+// Helpers
+import { convertToUnit } from '../../util/helpers'
+
+/* @vue/component */
 export default {
   name: 'v-stepper-content',
+
+  props: {
+    step: {
+      type: [Number, String],
+      required: true
+    }
+  },
 
   data () {
     return {
@@ -17,17 +28,10 @@ export default {
     }
   },
 
-  props: {
-    step: {
-      type: [Number, String],
-      required: true
-    }
-  },
-
   computed: {
     classes () {
       return {
-        'stepper__content': true
+        'v-stepper__content': true
       }
     },
     computedTransition () {
@@ -39,12 +43,12 @@ export default {
       if (!this.isVertical) return {}
 
       return {
-        height: !isNaN(this.height) ? `${this.height}px` : this.height
+        height: convertToUnit(this.height)
       }
     },
     wrapperClasses () {
       return {
-        'stepper__wrapper': true
+        'v-stepper__wrapper': true
       }
     }
   },

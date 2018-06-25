@@ -1,62 +1,56 @@
 const merge = require('webpack-merge')
-const baseWebpackConfig = require('./webpack.base.config')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-
-// Only enable CSS sourcemaps when using `yarn watch`
-const cssSourceMaps = process.env.TARGET === 'development'
-const extractPlugin = ExtractTextPlugin.extract({
-  use: [
-    { loader: 'css-loader', options: { sourceMap: cssSourceMaps } },
-    { loader: 'postcss-loader', options: { sourceMap: cssSourceMaps } },
-    { loader: 'stylus-loader', options: { sourceMap: cssSourceMaps } }
-  ]
-})
+const HappyPack = require('happypack')
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
+const { config: baseWebpackConfig, happyThreadPool } = require('./webpack.base.config')
 
 // Helpers
 const resolve = file => require('path').resolve(__dirname, file)
 
 module.exports = merge(baseWebpackConfig, {
   entry: {
-    app: './src/index.js'
+    app: './src/index.ts'
   },
   output: {
     path: resolve('../dist'),
     publicPath: '/dist/',
     library: 'Vuetify',
     libraryTarget: 'umd',
-    libraryExport: 'default'
+    libraryExport: 'default',
+    // See https://github.com/webpack/webpack/issues/6522
+    globalObject: 'typeof self !== \'undefined\' ? self : this'
+  },
+  externals: {
+    vue: {
+      commonjs: 'vue',
+      commonjs2: 'vue',
+      amd: 'vue',
+      root: 'Vue'
+    }
   },
   module: {
-    noParse: /es6-promise\.js$/, // avoid webpack shimming process
     rules: [
       {
-        test: /\.vue$/,
-        use: [
-          {
-            loader: 'vue-loader',
-            options: {
-              loaders: {
-                stylus: extractPlugin
-              }
-            }
-          },
-          'eslint-loader'
-        ],
-        exclude: /node_modules/
-      },
-      {
-        test: /\.js$/,
-        loaders: ['babel-loader', 'eslint-loader'],
-        exclude: /node_modules/
-      },
-      {
-        test: /\.styl$/,
-        use: extractPlugin,
+        test: /\.[jt]s$/,
+        use: 'happypack/loader?id=scripts',
         exclude: /node_modules/
       }
     ]
   },
-  performance: {
-    hints: false
-  }
+  plugins: [
+    new ForkTsCheckerWebpackPlugin({
+      checkSyntacticErrors: true,
+      tsconfig: resolve('../tsconfig.json')
+    }),
+    new HappyPack({
+      id: 'scripts',
+      threadPool: happyThreadPool,
+      loaders: [
+        'babel-loader',
+        {
+          loader: 'ts-loader',
+          options: { happyPackMode: true }
+        }
+      ]
+    })
+  ]
 })

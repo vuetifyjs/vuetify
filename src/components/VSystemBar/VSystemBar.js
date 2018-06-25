@@ -4,6 +4,7 @@ import Applicationable from '../../mixins/applicationable'
 import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
 
+/* @vue/component */
 export default {
   name: 'v-system-bar',
 
@@ -29,11 +30,11 @@ export default {
   computed: {
     classes () {
       return this.addBackgroundColorClassChecks(Object.assign({
-        'system-bar--lights-out': this.lightsOut,
-        'system-bar--absolute': this.absolute,
-        'system-bar--fixed': !this.absolute && (this.app || this.fixed),
-        'system-bar--status': this.status,
-        'system-bar--window': this.window
+        'v-system-bar--lights-out': this.lightsOut,
+        'v-system-bar--absolute': this.absolute,
+        'v-system-bar--fixed': !this.absolute && (this.app || this.fixed),
+        'v-system-bar--status': this.status,
+        'v-system-bar--window': this.window
       }, this.themeClasses))
     },
     computedHeight () {
@@ -56,7 +57,7 @@ export default {
 
   render (h) {
     const data = {
-      staticClass: 'system-bar',
+      staticClass: 'v-system-bar',
       'class': this.classes,
       style: {
         height: `${this.computedHeight}px`

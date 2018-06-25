@@ -1,6 +1,6 @@
 @import '../bootstrap'
 
-.snack
+.v-snack
   position: fixed
   display: flex
   align-items: center
@@ -37,20 +37,20 @@
     justify-content: space-between
     overflow: hidden
 
-    .btn
+    .v-btn
       color: $snackbar-color
       flex: 0 0 auto
+      padding: 8px
       margin: 0 0 0 24px
       height: auto
       min-width: auto
       width: auto
 
       &__content
-        padding: 8px
-        margin: -8px
+        margin: -2px
 
-        &::before
-          display: none
+      &::before
+        display: none
 
   &--multi-line &__content
     height: 80px
@@ -63,14 +63,14 @@
     // https://stackoverflow.com/questions/35111090/text-in-a-flex-container-doesnt-wrap-in-ie11
     align-items: stretch
 
-    .btn
-      &.btn //specificity
+    .v-btn
+      &.v-btn //specificity
         justify-content: flex-end
+        padding: 0
         margin-left: 0
         margin-top: 24px
 
       &__content
-        padding: 0
         flex: 0 0 auto
         margin: 0
 
@@ -78,7 +78,7 @@
     height: auto
 
 @media $display-breakpoints.sm-and-up
-  .snack
+  .v-snack
     &__wrapper
       width: auto
       max-width: 568px
@@ -86,9 +86,9 @@
       margin: 0 auto
       border-radius: 2px
 
-      .snack--left &
+      .v-snack--left &
         margin-left: 0
-      .snack--right &
+      .v-snack--right &
         margin-right: 0
 
     &--left, &--right
@@ -98,29 +98,29 @@
       &^[0]--bottom
         transform: translateY(0 - $snackbar-corner-offset)
 
-    &__content .btn:first-of-type
-      margin-left: 48px
+    &__content .v-btn:first-of-type
+      margin-left: 42px
 
-.snack-transition
+.v-snack-transition
   &-enter-active,
   &-leave-active
     transition: transform .4s $transition.swing
-    .snack__content
+    .v-snack__content
       transition: opacity .3s linear .1s
 
   &-enter
-    .snack__content
+    .v-snack__content
       opacity: 0
 
   &-enter-to,
   &-leave
-    .snack__content
+    .v-snack__content
       opacity: 1
 
   &-enter,
   &-leave-to
-    &.snack.snack--top
+    &.v-snack.v-snack--top
       // Extra 8px to hide the bottom shadow
       transform: translateY(calc(-100% - 8px))
-    &.snack.snack--bottom
+    &.v-snack.v-snack--bottom
       transform: translateY(100%)

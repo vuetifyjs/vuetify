@@ -6,6 +6,7 @@ import Applicationable from '../../mixins/applicationable'
 import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
 
+/* @vue/component */
 export default {
   name: 'v-footer',
 
@@ -79,11 +80,11 @@ export default {
 
   render (h) {
     const data = {
-      staticClass: 'footer',
+      staticClass: 'v-footer',
       'class': this.addBackgroundColorClassChecks({
-        'footer--absolute': this.absolute,
-        'footer--fixed': !this.absolute && (this.app || this.fixed),
-        'footer--inset': this.inset,
+        'v-footer--absolute': this.absolute,
+        'v-footer--fixed': !this.absolute && (this.app || this.fixed),
+        'v-footer--inset': this.inset,
         'theme--dark': this.dark,
         'theme--light': this.light
       }),

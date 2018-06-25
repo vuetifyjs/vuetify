@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VMessages.js should allow HTML 1`] = `
+
+<div class="v-messages">
+  <div class="v-messages__wrapper">
+    <div class="v-messages__message">
+      <a href="#">
+        a link
+      </a>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VMessages.js should show messages 1`] = `
+
+<div class="v-messages">
+  <div class="v-messages__wrapper">
+    <div class="v-messages__message">
+      foo
+    </div>
+    <div class="v-messages__message">
+      bar
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VMessages.js should show messages 2`] = `
+
+<div class="v-messages">
+  <div class="v-messages__wrapper">
+    <div class="v-messages__message message-transition-leave message-transition-leave-active">
+      foo
+    </div>
+    <div class="v-messages__message message-transition-leave message-transition-leave-active">
+      bar
+    </div>
+    <div class="v-messages__message message-transition-move"
+         style="display: none;"
+    >
+    </div>
+  </div>
+</div>
+
+`;

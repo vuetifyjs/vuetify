@@ -1,5 +1,6 @@
 import ExpandTransitionGenerator from '../../transitions/expand-transition'
 
+/* @vue/component */
 export default {
   methods: {
     genTBody () {
@@ -12,7 +13,7 @@ export default {
 
       if (this.isExpanded(props.item)) {
         const expand = this.$createElement('div', {
-          class: 'datatable__expand-content',
+          class: 'v-datatable__expand-content',
           key: props.item[this.itemKey]
         }, this.$scopedSlots.expand(props))
 
@@ -20,15 +21,15 @@ export default {
       }
 
       const transition = this.$createElement('transition-group', {
-        class: 'datatable__expand-col',
+        class: 'v-datatable__expand-col',
         attrs: { colspan: this.headerColumns },
         props: {
           tag: 'td'
         },
-        on: ExpandTransitionGenerator('datatable__expand-col--expanded')
+        on: ExpandTransitionGenerator('v-datatable__expand-col--expanded')
       }, children)
 
-      return this.genTR([transition], { class: 'datatable__expand-row' })
+      return this.genTR([transition], { class: 'v-datatable__expand-row' })
     },
     genFilteredItems () {
       if (!this.$scopedSlots.items) {
@@ -43,7 +44,7 @@ export default {
 
         rows.push(this.hasTag(row, 'td')
           ? this.genTR(row, {
-            key: index,
+            key: this.itemKey ? props.item[this.itemKey] : index,
             attrs: { active: this.isSelected(item) }
           })
           : row)

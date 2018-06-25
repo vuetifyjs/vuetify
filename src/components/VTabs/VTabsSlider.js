@@ -1,5 +1,6 @@
 import Colorable from '../../mixins/colorable'
 
+/* @vue/component */
 export default {
   name: 'v-tabs-slider',
 
@@ -11,7 +12,7 @@ export default {
 
   render (h) {
     return h('div', {
-      staticClass: 'tabs__slider',
+      staticClass: 'v-tabs__slider',
       class: this.addBackgroundColorClassChecks()
     })
   }

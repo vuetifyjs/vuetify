@@ -1,6 +1,7 @@
 import VBtn from '../../components/VBtn'
 import VIcon from '../../components/VIcon'
 
+/* @vue/component */
 export default {
   name: 'v-toolbar-side-icon',
 
@@ -8,8 +9,8 @@ export default {
 
   render (h, { slots, listeners, props, data }) {
     const classes = data.staticClass
-      ? `${data.staticClass} toolbar__side-icon`
-      : 'toolbar__side-icon'
+      ? `${data.staticClass} v-toolbar__side-icon`
+      : 'v-toolbar__side-icon'
 
     const d = Object.assign(data, {
       staticClass: classes,
@@ -21,6 +22,6 @@ export default {
 
     const defaultSlot = slots().default
 
-    return h(VBtn, d, defaultSlot || [h(VIcon, 'menu')])
+    return h(VBtn, d, defaultSlot || [h(VIcon, '$vuetify.icons.menu')])
   }
 }

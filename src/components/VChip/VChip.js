@@ -5,6 +5,7 @@ import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
 import Toggleable from '../../mixins/toggleable'
 
+/* @vue/component */
 export default {
   name: 'v-chip',
 
@@ -28,12 +29,12 @@ export default {
   computed: {
     classes () {
       const classes = this.addBackgroundColorClassChecks({
-        'chip--disabled': this.disabled,
-        'chip--selected': this.selected,
-        'chip--label': this.label,
-        'chip--outline': this.outline,
-        'chip--small': this.small,
-        'chip--removable': this.close,
+        'v-chip--disabled': this.disabled,
+        'v-chip--selected': this.selected,
+        'v-chip--label': this.label,
+        'v-chip--outline': this.outline,
+        'v-chip--small': this.small,
+        'v-chip--removable': this.close,
         'theme--light': this.light,
         'theme--dark': this.dark
       })
@@ -47,7 +48,7 @@ export default {
   methods: {
     genClose (h) {
       const data = {
-        staticClass: 'chip__close',
+        staticClass: 'v-chip__close',
         on: {
           click: e => {
             e.stopPropagation()
@@ -58,7 +59,7 @@ export default {
       }
 
       return h('div', data, [
-        h(VIcon, 'cancel')
+        h(VIcon, '$vuetify.icons.delete')
       ])
     },
     genContent (h) {
@@ -67,14 +68,14 @@ export default {
       this.close && children.push(this.genClose(h))
 
       return h('span', {
-        staticClass: 'chip__content'
+        staticClass: 'v-chip__content'
       }, children)
     }
   },
 
   render (h) {
     const data = {
-      staticClass: 'chip',
+      staticClass: 'v-chip',
       'class': this.classes,
       attrs: { tabindex: this.disabled ? -1 : 0 },
       directives: [{

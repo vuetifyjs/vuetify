@@ -8,15 +8,14 @@ import Detachable from '../../mixins/detachable'
 import Menuable from '../../mixins/menuable'
 import Toggleable from '../../mixins/toggleable'
 
+// Helpers
+import { convertToUnit } from '../../util/helpers'
+
+/* @vue/component */
 export default {
   name: 'v-tooltip',
 
   mixins: [Colorable, Delayable, Dependent, Detachable, Menuable, Toggleable],
-
-  data: () => ({
-    calculatedMinWidth: 0,
-    closeDependents: false
-  }),
 
   props: {
     debounce: {
@@ -41,6 +40,11 @@ export default {
       default: null
     }
   },
+
+  data: () => ({
+    calculatedMinWidth: 0,
+    closeDependents: false
+  }),
 
   computed: {
     calculatedLeft () {
@@ -86,10 +90,10 @@ export default {
     },
     classes () {
       return {
-        'tooltip--top': this.top,
-        'tooltip--right': this.right,
-        'tooltip--bottom': this.bottom,
-        'tooltip--left': this.left
+        'v-tooltip--top': this.top,
+        'v-tooltip--right': this.right,
+        'v-tooltip--bottom': this.bottom,
+        'v-tooltip--left': this.left
       }
     },
     computedTransition () {
@@ -108,12 +112,16 @@ export default {
     styles () {
       return {
         left: this.calculatedLeft,
-        maxWidth: isNaN(this.maxWidth) ? this.maxWidth : `${this.maxWidth}px`,
+        maxWidth: convertToUnit(this.maxWidth),
         opacity: this.isActive ? 0.9 : 0,
         top: this.calculatedTop,
         zIndex: this.zIndex || this.activeZIndex
       }
     }
+  },
+
+  mounted () {
+    this.value && this.callActivate()
   },
 
   methods: {
@@ -126,28 +134,24 @@ export default {
     }
   },
 
-  mounted () {
-    this.value && this.callActivate()
-  },
-
   render (h) {
     const tooltip = h('div', {
-      staticClass: 'tooltip__content',
+      staticClass: 'v-tooltip__content',
       'class': this.addBackgroundColorClassChecks({
         [this.contentClass]: true,
         'menuable__content__active': this.isActive
       }),
       style: this.styles,
-      attrs: this.attrs,
+      attrs: this.getScopeIdAttrs(),
       directives: [{
         name: 'show',
         value: this.isContentActive
       }],
       ref: 'content'
-    }, this.$slots.default)
+    }, this.showLazyContent(this.$slots.default))
 
     return h(this.tag, {
-      staticClass: 'tooltip',
+      staticClass: 'v-tooltip',
       'class': this.classes
     }, [
       h('transition', {

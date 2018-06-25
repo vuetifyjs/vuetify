@@ -1,20 +1,31 @@
 @import '../bootstrap'
 
-.carousel
+v-carousel-rtl()
+  &__prev
+    left: auto
+    right: 5px
+
+  &__next
+    left: 5px
+    right: auto
+
+rtl(v-carousel-rtl, "v-carousel")
+
+.v-carousel
   height: 500px
   width: 100%
   position: relative
   overflow: hidden
   elevation(2)
 
-  &__left,
-  &__right
+  &__prev,
+  &__next
     position: absolute
     top: 50%
     z-index: 1
     transform: translateY(-50%)
 
-    .btn
+    .v-btn
       color: #FFFFFF
       margin: 0 !important
       height: auto
@@ -26,10 +37,10 @@
       &:hover
         background: none
 
-  &__left
+  &__prev
     left: 5px
-    
-  &__right
+
+  &__next
     right: 5px
 
   &__controls

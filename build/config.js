@@ -1,52 +1,47 @@
-const base = require('./webpack.prod.config')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
-const OptimizeJsPlugin = require('optimize-js-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+
+const base = require('./webpack.prod.config')
 const version = process.env.VERSION || require('../package.json').version
 
 const builds = {
   development: {
     config: {
+      devtool: 'source-map',
+      mode: 'development',
       output: {
         filename: 'vuetify.js',
         libraryTarget: 'umd'
       },
       plugins: [
-        new ExtractTextPlugin('vuetify.css'),
-        new webpack.SourceMapDevToolPlugin({
-          filename: '[file].map',
-          // Only enable CSS sourcemaps when using `yarn watch`
-          exclude: process.env.TARGET === 'development' ? undefined : /.*\.css$/
+        new MiniCssExtractPlugin({
+          filename: 'vuetify.css'
         })
       ]
     }
   },
   production: {
     config: {
+      mode: 'production',
       output: {
         filename: 'vuetify.min.js',
         libraryTarget: 'umd'
       },
       plugins: [
-        new ExtractTextPlugin('vuetify.min.css')
-      ]
+        new MiniCssExtractPlugin({
+          filename: 'vuetify.min.css'
+        })
+      ],
+      performance: {
+        hints: 'warning',
+        maxEntrypointSize: 500000
+      }
     },
     env: 'production'
-  },
-  /*
-  esm: {
-    filename: 'vuetify.esm.js',
-    libraryTarget: 'esm',
-    env: 'production'
-  },
-  commonjs: {
-    filename: 'vuetify.common.js',
-    libraryTarget: 'commonjs',
-    env: 'production'
   }
-  */
 }
 
 function genConfig (opts) {
@@ -60,18 +55,6 @@ function genConfig (opts) {
 
   if (opts.env) {
     config.plugins = config.plugins.concat([
-      new webpack.optimize.UglifyJsPlugin({
-        sourceMap: false
-      }),
-      new OptimizeCssAssetsPlugin({
-        assetNameRegExp: /\.css$/g,
-        cssProcessor: require('cssnano'),
-        cssProcessorOptions: {
-          discardComments: { removeAll: true },
-          postcssZindex: false
-        },
-        canPrint: false
-      }),
       new webpack.BannerPlugin({
         banner: `/*!
 * Vuetify v${version}
@@ -80,12 +63,26 @@ function genConfig (opts) {
 */     `,
         raw: true,
         entryOnly: true
-      }),
-      new OptimizeJsPlugin({
-        sourceMap: false
-      }),
-      new webpack.optimize.ModuleConcatenationPlugin()
+      })
     ])
+    config.optimization = {
+      minimizer: [
+        new UglifyJsPlugin({
+          cache: true,
+          parallel: true,
+          sourceMap: true
+        }),
+        new OptimizeCssAssetsPlugin({
+          assetNameRegExp: /\.css$/g,
+          cssProcessor: require('cssnano'),
+          cssProcessorOptions: {
+            discardComments: { removeAll: true },
+            postcssZindex: false
+          },
+          canPrint: false
+        })
+      ]
+    }
   }
 
   return config

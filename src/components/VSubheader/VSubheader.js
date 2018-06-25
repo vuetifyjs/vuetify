@@ -2,6 +2,7 @@ import '../../stylus/components/_subheaders.styl'
 
 import Themeable from '../../mixins/themeable'
 
+/* @vue/component */
 export default {
   name: 'v-subheader',
 
@@ -14,9 +15,9 @@ export default {
   },
 
   render (h, { data, children, props }) {
-    data.staticClass = (`subheader ${data.staticClass || ''}`).trim()
+    data.staticClass = (`v-subheader ${data.staticClass || ''}`).trim()
 
-    if (props.inset) data.staticClass += ' subheader--inset'
+    if (props.inset) data.staticClass += ' v-subheader--inset'
     if (props.light) data.staticClass += ' theme--light'
     if (props.dark) data.staticClass += ' theme--dark'
 

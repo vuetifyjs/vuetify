@@ -2,6 +2,7 @@ import '../../stylus/components/_steppers.styl'
 
 import Themeable from '../../mixins/themeable'
 
+/* @vue/component */
 export default {
   name: 'v-stepper',
 
@@ -11,6 +12,13 @@ export default {
     return {
       stepClick: this.stepClick
     }
+  },
+
+  props: {
+    nonLinear: Boolean,
+    altLabels: Boolean,
+    vertical: Boolean,
+    value: [Number, String]
   },
 
   data () {
@@ -23,21 +31,14 @@ export default {
     }
   },
 
-  props: {
-    nonLinear: Boolean,
-    altLabels: Boolean,
-    vertical: Boolean,
-    value: [Number, String]
-  },
-
   computed: {
     classes () {
       return {
-        'stepper': true,
-        'stepper--is-booted': this.isBooted,
-        'stepper--vertical': this.vertical,
-        'stepper--alt-labels': this.altLabels,
-        'stepper--non-linear': this.nonLinear,
+        'v-stepper': true,
+        'v-stepper--is-booted': this.isBooted,
+        'v-stepper--vertical': this.vertical,
+        'v-stepper--alt-labels': this.altLabels,
+        'v-stepper--non-linear': this.nonLinear,
         'theme--dark': this.dark,
         'theme--light': this.light
       }
@@ -75,10 +76,9 @@ export default {
       this.content = []
       for (let index = 0; index < this.$children.length; index++) {
         const child = this.$children[index]
-        // TODO: use the component name instead of tag
-        if (child.$options._componentTag === 'v-stepper-step') {
+        if (child.$options.name === 'v-stepper-step') {
           this.steps.push(child)
-        } else if (child.$options._componentTag === 'v-stepper-content') {
+        } else if (child.$options.name === 'v-stepper-content') {
           child.isVertical = this.vertical
           this.content.push(child)
         }
