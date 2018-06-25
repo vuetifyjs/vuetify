@@ -114,25 +114,25 @@ export default injectTwo<DataIteratorProvide, DataTableProvide>()('dataIterator'
       }, [h(VIcon, icon)])
     },
 
-    genIcons (h: CreateElement): VNodeChildrenArrayContents {
+    genIcons (h: CreateElement) {
       const icons: VNodeChildrenArrayContents = []
 
       icons.push(this.genIcon(h, () => {
         this.dataIterator.page = this.dataIterator.page - 1
-      }, this.dataIterator.page === 1, 'Previous page', this.prevIcon))
+      }, this.dataIterator.page === 1, 'Previous page', this.$vuetify.rtl ? this.nextIcon : this.prevIcon))
 
       icons.push(this.genIcon(h, () => {
         this.dataIterator.page = this.dataIterator.page + 1
-      }, this.dataIterator.rowsPerPage < 0 || this.dataIterator.page * this.dataIterator.rowsPerPage >= this.dataIterator.itemsLength || this.dataIterator.pageStop < 0, 'Next page', this.nextIcon))
+      }, this.dataIterator.rowsPerPage < 0 || this.dataIterator.page * this.dataIterator.rowsPerPage >= this.dataIterator.itemsLength || this.dataIterator.pageStop < 0, 'Next page', this.$vuetify.rtl ? this.prevIcon : this.nextIcon))
 
       if (this.showFirstLastPage) {
         icons.unshift(this.genIcon(h, () => {
           this.dataIterator.page = 1
-        }, this.dataIterator.page === 1, 'First page', this.firstIcon))
+        }, this.dataIterator.page === 1, 'First page', this.$vuetify.rtl ? this.lastIcon : this.firstIcon))
 
         icons.push(this.genIcon(h, () => {
           this.dataIterator.page = this.dataIterator.pageCount
-        }, this.dataIterator.page === this.dataIterator.pageCount || this.dataIterator.rowsPerPage === -1, 'Last page', this.lastIcon))
+        }, this.dataIterator.page === this.dataIterator.pageCount || this.dataIterator.rowsPerPage === -1, 'Last page', this.$vuetify.rtl ? this.firstIcon : this.lastIcon))
       }
 
       return icons
