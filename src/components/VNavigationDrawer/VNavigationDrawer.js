@@ -328,12 +328,11 @@ export default {
         transitionend: e => {
           this.$emit('transitionend', e)
 
-          if(e.srcElement.localName === 'aside') {
-            // IE11 does not support new Event('resize')
-            const resizeEvent = document.createEvent('UIEvents')
-            resizeEvent.initUIEvent('resize', true, false, window, 0)
-            window.dispatchEvent(resizeEvent)
-          }
+          if (e.target !== e.currentTarget) return
+          // IE11 does not support new Event('resize')
+          const resizeEvent = document.createEvent('UIEvents')
+          resizeEvent.initUIEvent('resize', true, false, window, 0)
+          window.dispatchEvent(resizeEvent)
         }
       }
     }
