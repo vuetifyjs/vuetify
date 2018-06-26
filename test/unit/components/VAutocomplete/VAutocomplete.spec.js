@@ -226,7 +226,9 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
 
     const input = wrapper.first('input')
     input.trigger('focus')
+
     await wrapper.vm.$nextTick()
+
     expect(wrapper.vm.isMenuActive).toBe(false)
 
     wrapper.setProps({
@@ -236,13 +238,12 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
       ]
     })
 
-    input.trigger('blur')
     await wrapper.vm.$nextTick()
 
-    input.trigger('focus')
-    await wrapper.vm.$nextTick()
-
-    expect(wrapper.vm.isMenuActive).toBe(false)
+    // Once items refresh active will
+    // be updated to openif already
+    // focused
+    expect(wrapper.vm.isMenuActive).toBe(true)
   })
 
   it('should change selected index', async () => {
@@ -716,5 +717,29 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
     wrapper.setProps({ items: [{ text: 'foo', value: 1 }] })
     await wrapper.vm.$nextTick()
     expect(input.element.value).toBe('foo')
+  })
+
+  it('should show menu when items are added and hide-no-data', async () => {
+    const wrapper = mount(VAutocomplete, {
+      propsData: {
+        hideNoData: true,
+        items: []
+      }
+    })
+
+    const input = wrapper.first('input')
+
+    input.trigger('focus')
+
+    expect(wrapper.vm.isMenuActive).toBe(false)
+    expect(wrapper.vm.isFocused).toBe(true)
+
+    wrapper.setProps({
+      items: ['Foo', 'Bar']
+    })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.isMenuActive).toBe(true)
   })
 })
