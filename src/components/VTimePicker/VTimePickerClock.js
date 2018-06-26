@@ -111,7 +111,8 @@ export default {
       const children = []
 
       for (let value = this.min; value <= this.max; value = value + this.step) {
-        children.push(this.$createElement('span', this.setBackgroundColor(value === this.value ? (this.color || 'accent') : null, {
+        const color = value === this.value && (this.color || 'accent')
+        children.push(this.$createElement('span', this.setBackgroundColor(color, {
           'class': {
             active: value === this.displayedValue,
             disabled: !this.isAllowed(value)
