@@ -38,7 +38,8 @@ rtl(v-selection-control-rtl, "v-input--selection-controls")
       position: absolute
       opacity: 0
 
-    & + .v-label
+    & + .v-label.v-label
+      user-select: none
       cursor: pointer
       flex: 1 1
 
@@ -68,7 +69,6 @@ rtl(v-selection-control-rtl, "v-input--selection-controls")
     align-items: center
     display: inline-flex
     top: 0
-    user-select: none
     height: auto
 
   &.v-input--is-focused,

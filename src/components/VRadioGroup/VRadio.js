@@ -143,7 +143,7 @@ export default {
           'aria-checked': this.isActive.toString(),
           ...this.$attrs
         }),
-        this.genRipple({
+        !this.isDisabled && this.genRipple({
           'class': this.classesSelectable
         }),
         this.$createElement(VIcon, {
