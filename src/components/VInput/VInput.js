@@ -7,6 +7,7 @@ import VLabel from '../VLabel'
 import VMessages from '../VMessages'
 
 // Mixins
+import Colorable from '../../mixins/colorable'
 import Loadable from '../../mixins/loadable'
 import Themeable from '../../mixins/themeable'
 import Validatable from '../../mixins/validatable'
@@ -23,6 +24,7 @@ export default {
   name: 'v-input',
 
   mixins: [
+    Colorable,
     Loadable,
     Themeable,
     Validatable
@@ -32,6 +34,10 @@ export default {
     appendIcon: String,
     /** @deprecated */
     appendIconCb: Function,
+    backgroundColor: {
+      type: String,
+      default: ''
+    },
     disabled: Boolean,
     height: [Number, String],
     hideDetails: Boolean,
@@ -178,6 +184,7 @@ export default {
     genInputSlot () {
       return this.$createElement('div', {
         staticClass: 'v-input__slot',
+        class: this.addBackgroundColorClassChecks({}, this.backgroundColor),
         style: { height: convertToUnit(this.height) },
         directives: this.directivesInput,
         on: {
