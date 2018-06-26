@@ -1,4 +1,4 @@
-import '../../stylus/components/_tables.styl'
+// import '../../stylus/components/_tables.styl'
 import '../../stylus/components/_data-table.styl'
 
 import VDataIterator from '../VDataIterator'
@@ -255,7 +255,7 @@ export default mixins(VDataIterator).extend({
 
   render (h): VNode {
     return h('div', {
-      staticClass: 'v-table v-data-table',
+      staticClass: 'v-data-table',
       class: {
         'v-data-table--dense': this.dense
       }

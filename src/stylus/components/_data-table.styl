@@ -3,42 +3,67 @@
 
 /* Theme */
 v-data-table($material)
+  background-color: $material.cards
+  color: $material.text.primary
+
   .v-table__header
-    .v-head.sortable
-      i
-        color: rgba($material.fg-color, $material.disabledORhints-text-percent)
+    .v-row
+      &:first-child
+        .v-head
+          border-bottom: 1px solid rgba($material.fg-color, $material.divider-percent)
 
-      &:hover
-        color: rgba($material.fg-color, $material.primary-text-percent)
+    .v-head
+      color: rgba($material.text-color, $material.secondary-text-percent)
 
-      &.active
-        color: rgba($material.fg-color, $material.primary-text-percent)
+  .v-table__body
+    .v-row
+      // &:not(:last-child)
+      //   border-bottom: 1px solid rgba($material.fg-color, $material.divider-percent)
 
-        i
-          color: rgba($material.fg-color, $material.primary-text-percent)
+      &[active]
+        background: $material.table.active
 
-  .v-datatable__actions
-    background-color: $material.cards
-    color: rgba($material.fg-color, $material.secondary-text-percent)
-    border-top: 1px solid rgba($material.fg-color, $material.divider-percent)
+      &:hover:not(.datatable__expand-row)
+        background: $material.table.hover
 
-    &__select
-      .input-group--select
-        .input-group__selections__comma
-          color: rgba($material.fg-color, $material.secondary-text-percent) !important
-
-        .input-group__append-icon
-          color: rgba($material.fg-color, $material.secondary-text-percent) !important
+  .v-table__footer
+    .v-row
+      border-top: 1px solid rgba($material.fg-color, $material.divider-percent)
 
 theme(v-data-table, "v-data-table")
 
 .v-data-table
-  .v-table__body
-    &--fixed
-      overflow-y: auto
+  display: flex
+  flex: 1 1 auto
+  flex-flow: column nowrap
+  overflow-x: auto
+  width: 100%
+  max-width: 100%
 
-  .v-table__header
-    .v-head.sortable
+  &.v-data-table--dense
+    .v-cell
+      height: 24px
+    .v-head
+      height: 32px
+
+// .v-table__header, .v-table__body
+.v-cell, .v-head
+  &:not(:nth-child(1)), &:first-child
+    padding: 0 24px
+
+.v-table__header
+  .v-row
+    height: 56px
+
+  .v-head
+    font-weight: 500
+    font-size: 12px
+    transition: .3s $transition.swing
+    white-space: nowrap
+    user-select: none
+
+    &.sortable
+      pointer-events: auto
       cursor: pointer
       outline: 0
 
@@ -64,13 +89,72 @@ theme(v-data-table, "v-data-table")
           i
             transform: rotate(-180deg)
 
+.v-table__body
+  .v-row
+    transition: background $primary-transition
+    will-change: background
+
+  .v-cell
+    font-weight: 400
+    font-size: 13px
+
+.v-cell-checkbox
+  flex: 0 1 auto !important
+
+  .v-input
+    margin-top: 0
+
+.v-cell
+  height: 48px
+
+.v-head
+  height: 56px
+
+  .badge
+    border: 0px
+    border-radius: 50%
+    background-color: lightgrey // TODO: theme
+    min-width: 16px
+    min-height: 16px
+    height: 16px
+    width: 16px
+    color: white // TODO: theme
+    font-size: 0.8rem
+
+.v-cell, .v-head
+  display: flex
+  flex: 1 0 auto
+  align-items: center
+
+.v-head
+  font-weight: bold
+
+.v-head > .v-cell
+  white-space: normal
+
+.v-row
+  width: 100%
+  display: flex
+  flex-direction: row
+  flex: 1 0 auto
+
+.v-row, .v-row-expandable
+  &:not(:last-child)
+    .v-cell
+      border-bottom: 1px solid rgba(0,0,0,.12) // TODO: theme
+
+.v-cell, .v-head
+  flex: 1
+  word-break: break-word
+  overflow: hidden
+  text-overflow: ellipsis
+
 /** Actions */
 .v-data-table__actions
   display: flex
   justify-content: flex-end
   align-items: center
   font-size: 12px
-  // flex-wrap: wrap-reverse
 
   .v-btn
     color: inherit
@@ -115,6 +199,10 @@ theme(v-data-table, "v-data-table")
       top: -2px
       margin: 0 0 -2px
 
+.v-row-expandable
+  &__wrapper
+    transition: all 0.3s ease-out
+
 .v-data-table__expand
   &-row
     border: none !important
@@ -124,7 +212,7 @@ theme(v-data-table, "v-data-table")
     height: 0px !important
 
     &--expanded
-      border-bottom: 1px solid rgba(0,0,0,0.12)
+      border-bottom: 1px solid rgba(0,0,0,0.12) // TODO: theme
 
   &-content
     transition: height $primary-transition
