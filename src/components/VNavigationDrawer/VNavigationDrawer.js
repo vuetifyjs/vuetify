@@ -326,9 +326,9 @@ export default {
           this.$emit('update:miniVariant', false)
         },
         transitionend: e => {
+          if (e.target !== e.currentTarget) return
           this.$emit('transitionend', e)
 
-          if (e.target !== e.currentTarget) return
           // IE11 does not support new Event('resize')
           const resizeEvent = document.createEvent('UIEvents')
           resizeEvent.initUIEvent('resize', true, false, window, 0)
