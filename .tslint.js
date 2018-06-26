@@ -12,6 +12,7 @@ module.exports = {
   },
   jsRules: {},
   rules: {
+    'array-type': [true, 'array'],
     'use-type-alias': true,
     'no-inferrable-types': true,
     'unified-signatures': true,

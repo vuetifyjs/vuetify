@@ -3,15 +3,11 @@ import { VRadioGroup, VRadio } from '@/components/VRadioGroup'
 import { setTimeout } from 'timers';
 
 const warning = '[Vuetify] The v-radio component must be used inside a v-radio-group'
+const error = 'TypeError: this.radio.register is not a function'
 
 test('VRadio.vue', ({ mount }) => {
   it('should advise about v-radio-group being necessary', () => {
-    mount(VRadio, {
-      provide: {
-        name: () => 'name',
-        isMandatory: () => false,
-      }
-    })
+    mount(VRadio)
 
     expect(warning).toHaveBeenTipped()
   })
@@ -32,8 +28,10 @@ test('VRadio.vue', ({ mount }) => {
         isActive: false
       },
       provide: {
-        name: () => 'name',
-        isMandatory: () => false
+        radio: {
+          name: 'name',
+          isMandatory: false
+        }
       }
     })
 
@@ -46,7 +44,7 @@ test('VRadio.vue', ({ mount }) => {
     expect(inputGroup.getAttribute('aria-checked')).toBe('true')
     expect(wrapper.html()).toMatchSnapshot()
 
-    expect(warning).toHaveBeenTipped()
+    expect(error).toHaveBeenWarned()
   })
 
   it('should render aria-label attribute with label value on input group', () => {
@@ -56,8 +54,10 @@ test('VRadio.vue', ({ mount }) => {
       },
       attrs: {},
       provide: {
-        name: () => 'name',
-        isMandatory: () => false
+        radio: {
+          name: 'name',
+          isMandatory: false
+        }
       }
     })
 
@@ -65,7 +65,7 @@ test('VRadio.vue', ({ mount }) => {
     expect(inputGroup.getAttribute('aria-label')).toBe('Test')
     expect(wrapper.html()).toMatchSnapshot()
 
-    expect(warning).toHaveBeenTipped()
+    expect(error).toHaveBeenWarned()
   })
 
   it('should not render aria-label attribute with no label value on input group', () => {
@@ -74,8 +74,10 @@ test('VRadio.vue', ({ mount }) => {
         label: null
       },
       provide: {
-        name: () => 'name',
-        isMandatory: () => false
+        radio: {
+          name: 'name',
+          isMandatory: false
+        }
       }
     })
 
@@ -83,14 +85,16 @@ test('VRadio.vue', ({ mount }) => {
     expect(inputGroup.element.getAttribute('aria-label')).toBeFalsy()
     expect(wrapper.html()).toMatchSnapshot()
 
-    expect(warning).toHaveBeenTipped()
+    expect(error).toHaveBeenWarned()
   })
 
   it('should render proper input name', () => {
     const wrapper = mount(VRadio, {
       provide: {
-        name: () => 'name',
-        isMandatory: () => false
+        radio: {
+          name: 'name',
+          isMandatory: false
+        }
       }
     })
 
@@ -98,7 +102,7 @@ test('VRadio.vue', ({ mount }) => {
     expect(input.getAttribute('name')).toBe('name')
     expect(wrapper.html()).toMatchSnapshot()
 
-    expect(warning).toHaveBeenTipped()
+    expect(error).toHaveBeenWarned()
   })
 
   it('should register and unregister', () => {
@@ -108,12 +112,12 @@ test('VRadio.vue', ({ mount }) => {
     const wrapper = mount(VRadio, {
       attachToDocument: true,
       provide: {
-        name: () => 'name',
         radio: {
+          name: 'name',
+          isMandatory: false,
           register: register,
           unregister: unregister
-        },
-        isMandatory: () => false
+        }
       }
     })
 
@@ -128,8 +132,10 @@ test('VRadio.vue', ({ mount }) => {
         ripple: false
       },
       provide: {
-        name: () => 'name',
-        isMandatory: () => false
+        radio: {
+          name: 'name',
+          isMandatory: false
+        }
       }
     })
 
@@ -137,7 +143,7 @@ test('VRadio.vue', ({ mount }) => {
 
     expect(ripple).toHaveLength(0)
 
-    expect(warning).toHaveBeenTipped()
+    expect(error).toHaveBeenWarned()
   })
 
   it('should render ripple when ripple prop is true', () => {
@@ -146,8 +152,10 @@ test('VRadio.vue', ({ mount }) => {
         ripple: true
       },
       provide: {
-        name: () => 'name',
-        isMandatory: () => false
+        radio: {
+          name: 'name',
+          isMandatory: false
+        }
       }
     })
 
@@ -156,7 +164,7 @@ test('VRadio.vue', ({ mount }) => {
     expect(ripple.element._ripple.enabled).toBe(true)
     expect(ripple.element._ripple.centered).toBe(true)
 
-    expect(warning).toHaveBeenTipped()
+    expect(error).toHaveBeenWarned()
   })
 
   it('should toggle when space or enter is pressed', () => {
@@ -213,7 +221,10 @@ test('VRadio.vue', ({ mount }) => {
   it('should inject isMandatory', () => {
     const wrapper = mount(VRadio, {
       provide: {
-        isMandatory: () => true
+        radio: {
+          mandatory: true,
+          register: jest.fn()
+        }
       }
     })
 
@@ -233,7 +244,6 @@ test('VRadio.vue', ({ mount }) => {
     wrapper.vm.onChange()
 
     expect(change).toBeCalled()
-    expect(warning).toHaveBeenTipped()
   })
 
 
