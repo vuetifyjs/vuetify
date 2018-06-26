@@ -33,6 +33,7 @@ export interface DataTableProvide {
   isPixelWidth: Boolean
   widths: (string | number | null)[]
   tableWidth: string | number | null
+  showSelectAll: boolean
 }
 
 export default mixins(VDataIterator).extend({
@@ -67,6 +68,10 @@ export default mixins(VDataIterator).extend({
 
     Object.defineProperty(dataTable, 'tableWidth', {
       get: () => this.tableWidth
+    })
+
+    Object.defineProperty(dataTable, 'showSelectAll', {
+      get: () => this.showSelectAll
     })
 
     return { dataTable }

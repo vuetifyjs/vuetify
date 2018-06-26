@@ -13,6 +13,7 @@ export default injectOne<DataTableProvide>()('dataTable').extend({
     let i = 0
     content.forEach((c: any) => {
       if (!widths[i] || !c.fnOptions || !c.fnOptions.name.startsWith('v-cell')) return
+      if (i === 0 && c.fnOptions.name.startsWith('v-cell-checkbox') && this.dataTable.showSelectAll) return
 
       if (isFlexWidth) {
         c.data.style = `flex-grow: ${widths[i]} !important`
