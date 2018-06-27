@@ -29,9 +29,7 @@ export default {
 
   provide () {
     return {
-      isMandatory: () => this.mandatory,
-      name: () => this.name,
-      validationState: () => this.validationState
+      radio: this
     }
   },
 

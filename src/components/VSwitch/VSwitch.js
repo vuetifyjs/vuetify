@@ -37,7 +37,7 @@ export default {
         staticClass: 'v-input--selection-controls__input'
       }, [
         this.genInput('checkbox'),
-        this.genRipple({
+        !this.disabled && this.genRipple({
           'class': this.classesSelectable,
           directives: [{
             name: 'touch',

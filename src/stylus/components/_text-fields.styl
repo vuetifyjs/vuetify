@@ -231,7 +231,9 @@ rtl(v-text-field-rtl, "v-text-field")
       &:before
         height: 2px
 
-  &--enclosed
+  &.v-text-field--enclosed
+    margin: 0
+
     &:not(.v-text-field--box)
       .v-progress-linear__background
         display: none
@@ -305,8 +307,6 @@ rtl(v-text-field-rtl, "v-text-field")
         transition: border $primary-transition
 
   &.v-text-field--solo
-    margin: 0
-
     .v-label
       top: calc(50% - 10px)
 
