@@ -186,7 +186,10 @@ export default {
 
     if (this.$slots.activator) {
       children.push(h('div', {
-        'class': 'v-dialog__activator',
+        staticClass: 'v-dialog__activator',
+        'class': {
+          'v-dialog__activator--disabled': this.disabled
+        },
         on: {
           click: e => {
             e.stopPropagation()

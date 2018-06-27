@@ -27,6 +27,15 @@
   &:not(.v-dialog--fullscreen)
     max-height: 90%
 
+  &__activator
+    cursor: pointer
+
+    *
+      cursor: pointer
+
+    &--disabled
+      pointer-events: none
+
   &__container
     display: inline-block
     vertical-align: middle
