@@ -354,8 +354,10 @@ export default {
         this.selectedItems = []
       } else {
         VSelect.methods.setSelectedItems.call(this)
+
         // #4273 Don't replace if searching
-        !this.isSearching && this.setSearch()
+        // #4403 Don't replace is focused
+        if (!this.isFocused) this.setSearch()
       }
     },
     setSearch () {
