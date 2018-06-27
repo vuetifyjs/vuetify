@@ -72,6 +72,7 @@ export default {
     // Requires a manual definition
     // to overwrite removal in v-autocomplete
     onEnterDown () {
+      this.updateSelf()
       VSelect.methods.onEnterDown.call(this)
     },
     onKeyDown (e) {
@@ -144,6 +145,10 @@ export default {
       if (menuIndex < 0 &&
         !this.searchIsDirty
       ) return
+
+      if (this.editingIndex > -1) {
+        return this.updateEditing()
+      }
 
       const index = this.selectedItems.indexOf(this.internalSearch)
       // If it already exists, do nothing

@@ -169,6 +169,8 @@ export default {
       if (val) {
         this.$refs.input &&
           this.$refs.input.select()
+      } else {
+        this.updateSelf()
       }
     },
     isMenuActive (val) {
@@ -290,10 +292,6 @@ export default {
         ? VSelect.methods.genSelections.call(this)
         : []
     },
-    onBlur (e) {
-      this.updateSelf()
-      VSelect.methods.onBlur.call(this, e)
-    },
     onClick () {
       if (this.isDisabled) return
 
@@ -339,8 +337,7 @@ export default {
     selectItem (item) {
       // Currently only supports items:<string[]>
       if (this.editingIndex > -1) {
-        this.internalValue.splice(this.editingIndex, 1, this.internalSearch)
-        this.editingIndex = -1
+        this.updateEditing()
       } else {
         VSelect.methods.selectItem.call(this, item)
       }
@@ -376,6 +373,10 @@ export default {
     setValue () {
       this.internalValue = this.internalSearch
       this.$emit('change', this.internalSearch)
+    },
+    updateEditing () {
+      this.internalValue.splice(this.editingIndex, 1, this.internalSearch)
+      this.editingIndex = -1
     },
     updateSelf () {
       this.updateAutocomplete()

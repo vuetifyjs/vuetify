@@ -144,7 +144,7 @@ test('VCombobox', ({ shallow }) => {
     input.element.value = 'foo'
     input.trigger('input')
 
-    input.trigger('blur')
+    input.trigger('keydown.tab')
     expect(change).toHaveBeenCalledWith('foo')
 
     input.trigger('keydown.esc')
