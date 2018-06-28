@@ -15,6 +15,10 @@ export default {
   extends: VAutocomplete,
 
   props: {
+    delimiters: {
+      type: Array,
+      default: () => ([])
+    },
     returnObject: {
       type: Boolean,
       default: true

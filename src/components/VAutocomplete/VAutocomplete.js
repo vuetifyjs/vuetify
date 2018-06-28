@@ -23,7 +23,6 @@ export default {
       type: String,
       default: 'off'
     },
-    delimiters: Array,
     filter: {
       type: Function,
       default: (item, queryText, itemText) => {
