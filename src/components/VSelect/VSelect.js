@@ -156,7 +156,6 @@ export default {
           /* eslint-disable vue/no-side-effects-in-computed-properties */
           this.isMenuActive = false
           this.isFocused = false
-          this.editingIndex = -1
           this.selectedIndex = -1
           /* eslint-enable vue/no-side-effects-in-computed-properties */
         },

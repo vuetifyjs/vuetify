@@ -80,7 +80,7 @@ exports[`VMenu.js should render component with custom closeOnContentClick and ma
 
 exports[`VMenu.js should render component with custom disabled and match snapshot 1`] = `
 
-<div class="v-menu v-menu--disabled"
+<div class="v-menu"
      style="display: inline-block;"
 >
   <div class="v-menu__content"

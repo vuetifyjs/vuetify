@@ -189,9 +189,6 @@ export default {
   render (h) {
     const data = {
       staticClass: 'v-menu',
-      class: {
-        'v-menu--disabled': this.disabled
-      },
       style: {
         display: this.fullWidth ? 'block' : 'inline-block'
       },
