@@ -26,17 +26,7 @@ export interface TableHeader {
   sort?: (a: any, b: any) => number
 }
 
-export interface DataTableProvide {
-  headers: TableHeader[]
-  loading: Boolean
-  isFlexWidth: Boolean
-  isPixelWidth: Boolean
-  widths: (string | number | null)[]
-  tableWidth: string | number | null
-  showSelectAll: boolean
-}
-
-export default mixins(VDataIterator).extend({
+const VDataTable = mixins(VDataIterator).extend({
   name: 'v-data-table',
 
   inheritAttrs: false,
@@ -44,34 +34,14 @@ export default mixins(VDataIterator).extend({
   provide () {
     const dataTable = {}
 
-    Object.defineProperty(dataTable, 'headers', {
-      get: () => this.headers,
-      enumerable: true
-    })
-
-    Object.defineProperty(dataTable, 'loading', {
-      get: () => this.loading,
-      enumerable: true
-    })
-
-    Object.defineProperty(dataTable, 'isFlexWidth', {
-      get: () => this.isFlexWidth
-    })
-
-    Object.defineProperty(dataTable, 'widths', {
-      get: () => this.widths
-    })
-
-    Object.defineProperty(dataTable, 'isPixelWidth', {
-      get: () => this.isPixelWidth
-    })
-
-    Object.defineProperty(dataTable, 'tableWidth', {
-      get: () => this.tableWidth
-    })
-
-    Object.defineProperty(dataTable, 'showSelectAll', {
-      get: () => this.showSelectAll
+    Object.defineProperties(dataTable, {
+      headers: { get: () => this.headers },
+      loading: { get: () => this.loading },
+      isFlexWidth: { get: () => this.isFlexWidth },
+      widths: { get: () => this.widths },
+      isPixelWidth: { get: () => this.isPixelWidth },
+      tableWidth: { get: () => this.tableWidth },
+      showSelectAll: { get: () => this.showSelectAll }
     })
 
     return { dataTable }
@@ -271,3 +241,8 @@ export default mixins(VDataIterator).extend({
     ])
   }
 })
+
+export type DataTableProvide = Pick<InstanceType<typeof VDataTable>,
+  'headers' | 'loading' | 'isFlexWidth' | 'isPixelWidth' | 'widths' | 'tableWidth' | 'showSelectAll'>
+
+export default VDataTable
