@@ -6,8 +6,13 @@ import Toggleable from '../../mixins/toggleable'
 // Directives
 import Ripple from '../../directives/ripple'
 
+/* @vue/component */
 export default {
   name: 'v-list-tile',
+
+  directives: {
+    Ripple
+  },
 
   mixins: [
     Colorable,
@@ -15,15 +20,7 @@ export default {
     Toggleable
   ],
 
-  directives: {
-    Ripple
-  },
-
   inheritAttrs: false,
-
-  data: () => ({
-    proxyClass: 'list__tile--active'
-  }),
 
   props: {
     activeClass: {
@@ -35,21 +32,25 @@ export default {
     tag: String
   },
 
+  data: () => ({
+    proxyClass: 'v-list__tile--active'
+  }),
+
   computed: {
     listClasses () {
       return this.disabled
-        ? 'text--disabled'
+        ? 'v-list--disabled'
         : this.color
           ? this.addTextColorClassChecks()
           : this.defaultColor
     },
     classes () {
       return {
-        'list__tile': true,
-        'list__tile--link': this.isLink && !this.inactive,
-        'list__tile--avatar': this.avatar,
-        'list__tile--disabled': this.disabled,
-        'list__tile--active': !this.to && this.isActive,
+        'v-list__tile': true,
+        'v-list__tile--link': this.isLink && !this.inactive,
+        'v-list__tile--avatar': this.avatar,
+        'v-list__tile--disabled': this.disabled,
+        'v-list__tile--active': !this.to && this.isActive,
         [this.activeClass]: this.isActive
       }
     },

@@ -1,3 +1,4 @@
+/* @vue/component */
 export default {
   name: 'v-card-title',
 
@@ -8,9 +9,9 @@ export default {
   },
 
   render (h, { data, props, children }) {
-    data.staticClass = (`card__title ${data.staticClass || ''}`).trim()
+    data.staticClass = (`v-card__title ${data.staticClass || ''}`).trim()
 
-    if (props.primaryTitle) data.staticClass += ' card__title--primary'
+    if (props.primaryTitle) data.staticClass += ' v-card__title--primary'
 
     return h('div', data, children)
   }

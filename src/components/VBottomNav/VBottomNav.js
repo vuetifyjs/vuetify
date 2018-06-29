@@ -6,6 +6,7 @@ import Applicationable from '../../mixins/applicationable'
 import ButtonGroup from '../../mixins/button-group'
 import Colorable from '../../mixins/colorable'
 
+/* @vue/component */
 export default {
   name: 'v-bottom-nav',
 
@@ -26,26 +27,26 @@ export default {
       validator: v => !isNaN(parseInt(v))
     },
     shift: Boolean,
-    value: { required: false }
-  },
-
-  watch: {
-    active () {
-      this.update()
-    }
+    value: null
   },
 
   computed: {
     classes () {
       return {
-        'bottom-nav--absolute': this.absolute,
-        'bottom-nav--fixed': !this.absolute && (this.app || this.fixed),
-        'bottom-nav--shift': this.shift,
-        'bottom-nav--active': this.value
+        'v-bottom-nav--absolute': this.absolute,
+        'v-bottom-nav--fixed': !this.absolute && (this.app || this.fixed),
+        'v-bottom-nav--shift': this.shift,
+        'v-bottom-nav--active': this.value
       }
     },
     computedHeight () {
       return parseInt(this.height)
+    }
+  },
+
+  watch: {
+    active () {
+      this.update()
     }
   },
 
@@ -73,7 +74,7 @@ export default {
 
   render (h) {
     return h('div', {
-      staticClass: 'bottom-nav',
+      staticClass: 'v-bottom-nav',
       class: this.addBackgroundColorClassChecks(this.classes),
       style: {
         height: `${parseInt(this.computedHeight)}px`

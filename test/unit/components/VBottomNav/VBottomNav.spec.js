@@ -17,14 +17,14 @@ function createBtn (val = null) {
 }
 
 test('VBottomNav.js', ({ mount }) => {
-  it('should have a bottom-nav class', () => {
+  it('should have a v-bottom-nav class', () => {
     const wrapper = mount(VBottomNav, {
       slots: {
         default: [VBtn, VBtn]
       }
     })
 
-    expect(wrapper.hasClass('bottom-nav')).toBe(true)
+    expect(wrapper.hasClass('v-bottom-nav')).toBe(true)
     expect(wrapper.html()).toMatchSnapshot()
   })
 
@@ -39,8 +39,8 @@ test('VBottomNav.js', ({ mount }) => {
       }
     })
 
-    expect(wrapper.hasClass('bottom-nav--absolute')).toBe(true)
-    expect(wrapper.hasClass('bottom-nav--shift')).toBe(true)
+    expect(wrapper.hasClass('v-bottom-nav--absolute')).toBe(true)
+    expect(wrapper.hasClass('v-bottom-nav--shift')).toBe(true)
     expect(wrapper.html()).toMatchSnapshot()
   })
 
@@ -52,7 +52,7 @@ test('VBottomNav.js', ({ mount }) => {
       }
     })
 
-    expect(wrapper.hasClass('bottom-nav--active')).toBe(false)
+    expect(wrapper.hasClass('v-bottom-nav--active')).toBe(false)
     expect(wrapper.html()).toMatchSnapshot()
   })
 
@@ -64,11 +64,11 @@ test('VBottomNav.js', ({ mount }) => {
       }
     })
 
-    expect(wrapper.hasClass('bottom-nav--active')).toBe(true)
+    expect(wrapper.hasClass('v-bottom-nav--active')).toBe(true)
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should output active btn when clicked', () => {
+  it('should output active v-btn when clicked', () => {
     const wrapper = mount(VBottomNav, {
       propsData: { value: true, active: 1 },
       slots: {
@@ -79,7 +79,7 @@ test('VBottomNav.js', ({ mount }) => {
       }
     })
 
-    const btn = wrapper.find('.btn')[0]
+    const btn = wrapper.find('.v-btn')[0]
 
     const change = jest.fn()
     wrapper.instance().$on('update:active', change)
@@ -113,7 +113,7 @@ test('VBottomNav.js', ({ mount }) => {
 
     wrapper.vm.$on('update:active', update)
 
-    const btn = wrapper.find('.btn')[1]
+    const btn = wrapper.find('.v-btn')[1]
     btn.trigger('click')
 
     await wrapper.vm.$nextTick()

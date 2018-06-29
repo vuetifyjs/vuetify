@@ -7,7 +7,7 @@ test('VIcon.js', ({ mount, compileToFunctions }) => {
     const wrapper = mount(VIcon, context)
 
     expect(wrapper.text()).toBe('add')
-    expect(wrapper.element.className).toBe('icon material-icons')
+    expect(wrapper.element.className).toBe('v-icon material-icons')
   })
 
   it('should render a colored component', () => {
@@ -22,7 +22,7 @@ test('VIcon.js', ({ mount, compileToFunctions }) => {
     const context = functionalContext({ props: { disabled: true } }, 'add')
     const wrapper = mount(VIcon, context)
 
-    expect(wrapper.element.classList).toContain('icon--disabled')
+    expect(wrapper.element.classList).toContain('v-icon--disabled')
   })
 
   it('should not set font size if none provided', () => {
@@ -66,14 +66,14 @@ test('VIcon.js', ({ mount, compileToFunctions }) => {
     const context = functionalContext({ props: { left: true } }, 'add')
     const wrapper = mount(VIcon, context)
 
-    expect(wrapper.element.classList).toContain('icon--left')
+    expect(wrapper.element.classList).toContain('v-icon--left')
   })
 
   it('should render a right aligned component', () => {
     const context = functionalContext({ props: { right: true } }, 'add')
     const wrapper = mount(VIcon, context)
 
-    expect(wrapper.element.classList).toContain('icon--right')
+    expect(wrapper.element.classList).toContain('v-icon--right')
   })
 
   it('should render a component with aria-hidden attr', () => {
@@ -88,7 +88,7 @@ test('VIcon.js', ({ mount, compileToFunctions }) => {
     const wrapper = mount(VIcon, context)
 
     expect(wrapper.text()).toBe('')
-    expect(wrapper.element.className).toBe('icon fa fa-add')
+    expect(wrapper.element.className).toBe('v-icon fa fa-add')
   })
 
   it('should support font awesome 5 icons when using <icon>- prefix', () => {
@@ -96,7 +96,7 @@ test('VIcon.js', ({ mount, compileToFunctions }) => {
     const wrapper = mount(VIcon, context)
 
     expect(wrapper.text()).toBe('')
-    expect(wrapper.element.className).toBe('icon fab fa-facebook')
+    expect(wrapper.element.className).toBe('v-icon fab fa-facebook')
   })
 
   it('should allow the use of v-text', () => {
@@ -105,7 +105,7 @@ test('VIcon.js', ({ mount, compileToFunctions }) => {
     }))
 
     expect(wrapper.text()).toBe('')
-    expect(wrapper.element.className).toBe('icon fa fa-home')
+    expect(wrapper.element.className).toBe('v-icon fa fa-home')
   })
 
   it('should allow the use of v-html', () => {
@@ -114,7 +114,23 @@ test('VIcon.js', ({ mount, compileToFunctions }) => {
     }))
 
     expect(wrapper.text()).toBe('')
-    expect(wrapper.element.className).toBe('icon fa fa-home')
+    expect(wrapper.element.className).toBe('v-icon fa fa-home')
+  })
+
+  it('should render MD left icon from $vuetify.icons.checkboxOn', () => {
+    const context = functionalContext({}, '$vuetify.icons.checkboxOn')
+    const wrapper = mount(VIcon, context)
+
+    expect(wrapper.text()).toBe('check_box')
+    expect(wrapper.element.className).toBe('v-icon material-icons')
+  })
+
+  it('should render MD left icon from $vuetify.icons.prev', () => {
+    const context = functionalContext({}, '$vuetify.icons.prev')
+    const wrapper = mount(VIcon, context)
+
+    expect(wrapper.text()).toBe('chevron_left')
+    expect(wrapper.element.className).toBe('v-icon material-icons')
   })
 
   it('set font size from helper prop', async () => {
@@ -145,6 +161,6 @@ test('VIcon.js', ({ mount, compileToFunctions }) => {
       }
     }))
 
-    expect(wrapper.element.className).toBe('icon primary--text fa fa-lock')
+    expect(wrapper.element.className).toBe('v-icon primary--text fa fa-lock')
   })
 })

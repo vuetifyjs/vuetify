@@ -1,10 +1,11 @@
 // Components
 import VAvatar from '../VAvatar'
 
+/* @vue/component */
 export default {
-  functional: true,
-
   name: 'v-list-tile-avatar',
+
+  functional: true,
 
   props: {
     color: String,
@@ -16,7 +17,7 @@ export default {
   },
 
   render (h, { data, children, props }) {
-    data.staticClass = (`list__tile__avatar ${data.staticClass || ''}`).trim()
+    data.staticClass = (`v-list__tile__avatar ${data.staticClass || ''}`).trim()
 
     const avatar = h(VAvatar, {
       props: {

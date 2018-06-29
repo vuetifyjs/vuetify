@@ -7,17 +7,18 @@ import AppBreakpoint from './mixins/app-breakpoint'
 // Directives
 import Resize from '../../directives/resize'
 
+/* @vue/component */
 export default {
   name: 'v-app',
+
+  directives: {
+    Resize
+  },
 
   mixins: [
     AppBreakpoint,
     AppTheme
   ],
-
-  directives: {
-    Resize
-  },
 
   props: {
     id: {
@@ -30,19 +31,20 @@ export default {
   computed: {
     classes () {
       return {
-        [`theme--${this.dark ? 'dark' : 'light'}`]: true
+        [`theme--${this.dark ? 'dark' : 'light'}`]: true,
+        'application--is-rtl': this.$vuetify.rtl
       }
     }
-  },
-
-  mounted () {
-    this.$vuetify.dark = this.dark
   },
 
   watch: {
     dark () {
       this.$vuetify.dark = this.dark
     }
+  },
+
+  mounted () {
+    this.$vuetify.dark = this.dark
   },
 
   render (h) {

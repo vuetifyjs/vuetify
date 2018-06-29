@@ -5,22 +5,23 @@
 button($material)
   color: $material.text.primary
 
-  &.btn--disabled
+  &.v-btn--disabled
     color: $material.buttons.disabled !important
 
-    .icon
+    .v-icon,
+    .v-btn__loading
       color: $material.buttons.disabled !important
 
-    &:not(.btn--icon):not(.btn--flat)
+    &:not(.v-btn--icon):not(.v-btn--flat)
       background-color: $material.buttons.focused !important
 
-  &:not(.btn--icon):not(.btn--flat)
+  &:not(.v-btn--icon):not(.v-btn--flat)
     background-color: $material.app-bar
 
-theme(button, "btn")
+theme(button, "v-btn")
 
 /** Base Spec */
-.btn
+.v-btn
   align-items: center
   border-radius: $button-border-radius
   display: inline-flex
@@ -34,15 +35,15 @@ theme(button, "btn")
   outline: 0
   text-transform: $button-text-transform
   text-decoration: none
-  transition: .3s $transition.swing, color 1ms
+  transition: $primary-transition, color 1ms
   position: relative
   vertical-align: middle
   user-select: none
 
 
 /** Psuedo */
-.btn
-  &__content:before
+.v-btn
+  &:before
     border-radius: inherit
     color: inherit
     content: ''
@@ -54,28 +55,16 @@ theme(button, "btn")
     transition: $primary-transition
     width: 100%
 
-/** Sizes */
-.btn
-  &--small
-    font-size: $button-small-font-size
-    height: $button-small-height
-
-    .btn__content
-      padding: $button-small-padding
-
-  &--large
-    font-size: $button-large-font-size
-    height: $button-large-height
-
-    .btn__content
-      padding: $button-large-padding
-
 /** Content */
-.btn
+.v-btn
+  padding: $button-padding
+
   &--active,
   &:hover,
   &:focus
-    .btn__content:before
+    position: relative
+
+    &:before
       background-color: currentColor
 
   &__content
@@ -87,37 +76,42 @@ theme(button, "btn")
     flex: 1 0 auto
     justify-content: center
     margin: 0 auto
-    padding: $button-padding
+    // Fixes bug where IE11 moves
+    // button content when clicked
+    // https://stackoverflow.com/questions/10305658/prevent-button-from-shifting-during-click-in-ie
+    position: relative
     transition: $primary-transition
     white-space: nowrap
     width: inherit
 
+/** Sizes */
+.v-btn
+  &--small
+    font-size: $button-small-font-size
+    height: $button-small-height
+    padding: $button-small-padding
+
+  &--large
+    font-size: $button-large-font-size
+    height: $button-large-height
+    padding: $button-large-padding
+
 /** Icons */
-.btn .btn__content .icon
+.v-btn .v-btn__content .v-icon
   color: inherit
 
 /** Types */
-.btn
+.v-btn
   &--flat
     background-color: transparent !important
     box-shadow: none !important
 
-  &:not(.btn--depressed)
+  &:not(.v-btn--depressed)
     will-change: box-shadow
     elevation(2)
 
     &:active
       elevation(8)
-
-    // Fixes bug where IE11 moves
-    // button content when clicked
-    // https://stackoverflow.com/questions/10305658/prevent-button-from-shifting-during-click-in-ie
-    &:active,
-    &:focus
-      .btn__content
-        position: relative
-        top: 0
-        left: 0
 
   &--icon
     background: transparent
@@ -127,13 +121,13 @@ theme(button, "btn")
     min-width: 0
     width: $button-height
 
-    &.btn--small
+    &.v-btn--small
       width: $button-small-height
 
-    &.btn--large
+    &.v-btn--large
       width: $button-large-height
 
-    .btn__content:before
+    &:before
       border-radius: 50%
 
   &--floating
@@ -143,25 +137,24 @@ theme(button, "btn")
     width: $button-floating-width
     padding: 0
 
-    &.btn--fixed,
-    &.btn--absolute
+    &.v-btn--fixed,
+    &.v-btn--absolute
       z-index: 4
 
-    &:not(.btn--depressed)
+    &:not(.v-btn--depressed)
       elevation(6)
 
       &:active
         elevation(12)
 
-    .btn__content
+    .v-btn__content
       flex: 1 1 auto
       margin: 0
-      padding: 0
 
     &:after
       border-radius: 50%
 
-    .btn__content
+    .v-btn__content
       :not(:only-child)
         transition: $primary-transition
 
@@ -180,8 +173,8 @@ theme(button, "btn")
           left: 0
           top: 0
 
-    &.btn--active
-      .btn__content
+    &.v-btn--active
+      .v-btn__content
         :not(:only-child)
           &:first-child
             opacity: 0
@@ -191,70 +184,70 @@ theme(button, "btn")
             opacity: 1
             transform: rotate(0)
 
-    .icon
+    .v-icon
       height: inherit
       width: inherit
 
-    &.btn--small
+    &.v-btn--small
       height: $button-floating-small-width
       width: $button-floating-small-width
 
-      .icon
+      .v-icon
         font-size: $button-floating-small-icon-width
 
 
-    &.btn--large
+    &.v-btn--large
       height: $button-floating-large-width
       width: $button-floating-large-width
 
-      .icon
+      .v-icon
         font-size: $button-floating-large-icon-width
 
   &--reverse
-    .btn__content
+    .v-btn__content
       flex-direction: row-reverse
 
-    &.btn--column
-      .btn__content
+    &.v-btn--column
+      .v-btn__content
         flex-direction: column-reverse
 
   &--fixed, &--absolute
     margin: 0
 
-  // Position must have prepended .btn
+  // Position must have prepended .v-btn
   // to account for tooltip
   // TODO: Remove this once tooltips are
   // converted to elements
-  &.btn--absolute
+  &.v-btn--absolute
     position: absolute
 
-  &.btn--fixed
+  &.v-btn--fixed
     position: fixed
 
   &--top
-    &:not(.btn--absolute)
+    &:not(.v-btn--absolute)
       top: $grid-gutters.lg
 
-    &.btn--absolute
+    &.v-btn--absolute
       top: -($button-floating-width / 2)
 
-      &.btn--small
+      &.v-btn--small
         top: -($button-floating-small-width / 2)
 
-      &.btn--large
+      &.v-btn--large
         top: -($button-floating-large-width / 2)
 
   &--bottom
-    &:not(.btn--absolute)
+    &:not(.v-btn--absolute)
       bottom: $grid-gutters.lg
 
-    &.btn--absolute
+    &.v-btn--absolute
       bottom: -($button-floating-width / 2)
 
-      &.btn--small
+      &.v-btn--small
         bottom: -($button-floating-small-width / 2)
 
-      &.btn--large
+      &.v-btn--large
         bottom: -($button-floating-large-width / 2)
 
   &--left
@@ -264,22 +257,25 @@ theme(button, "btn")
     right: $grid-gutters.lg
 
 /** Disabled */
-.btn
-  &.btn--disabled
+.v-btn
+  &.v-btn--disabled
     box-shadow: none !important
     pointer-events: none
 
-.btn--icon
-  .btn__content
-    padding: 0
+  &:not(.v-btn--disabled):not(.v-btn--floating):not(.v-btn--icon)
+    .v-btn__content .v-icon
+      transition: none
+
+.v-btn--icon
+  padding: 0
 
 
 /** Loader */
-.btn
+.v-btn
   &--loader
     pointer-events: none
 
-    .btn__content
+    .v-btn__content
       opacity: 0
 
   &__loading
@@ -292,7 +288,7 @@ theme(button, "btn")
     top: 0
     width: 100%
 
-    .icon
+    .v-icon
       &--left
         margin-right: 1rem
         line-height: inherit
@@ -303,8 +299,8 @@ theme(button, "btn")
 
 
 /** Custom Buttons */
-.btn
-  &.btn--outline
+.v-btn
+  &.v-btn--outline
     border: 1px solid currentColor
     background: transparent !important
     box-shadow: none
@@ -326,8 +322,8 @@ theme(button, "btn")
 
 
 /** Button w/ directional Icon */
-.btn
-  .icon
+.v-btn
+  .v-icon
     &--right
       margin-left: 16px
 
@@ -336,7 +332,7 @@ theme(button, "btn")
 
 
 /** Themes */
-.btn
+.v-btn
   &.primary,
   &.secondary,
   &.accent,

@@ -10,8 +10,11 @@ import SSRBootable from '../../mixins/ssr-bootable'
 // Directives
 import Scroll from '../../directives/scroll'
 
+/* @vue/component */
 export default {
   name: 'v-toolbar',
+
+  directives: { Scroll },
 
   mixins: [
     Applicationable('top', [
@@ -25,26 +28,6 @@ export default {
     SSRBootable,
     Themeable
   ],
-
-  directives: { Scroll },
-
-  data: () => ({
-    activeTimeout: null,
-    currentScroll: 0,
-    heights: {
-      mobileLandscape: 48,
-      mobile: 56,
-      desktop: 64,
-      dense: 48
-    },
-    isActive: true,
-    isExtended: false,
-    isScrollingUp: false,
-    previousScroll: null,
-    previousScrollDirection: null,
-    savedScroll: 0,
-    target: null
-  }),
 
   props: {
     card: Boolean,
@@ -66,6 +49,7 @@ export default {
     manualScroll: Boolean,
     prominent: Boolean,
     scrollOffScreen: Boolean,
+    scrollToolbarOffScreen: Boolean,
     scrollTarget: String,
     scrollThreshold: {
       type: Number,
@@ -73,6 +57,24 @@ export default {
     },
     tabs: Boolean
   },
+
+  data: () => ({
+    activeTimeout: null,
+    currentScroll: 0,
+    heights: {
+      mobileLandscape: 48,
+      mobile: 56,
+      desktop: 64,
+      dense: 48
+    },
+    isActive: true,
+    isExtended: false,
+    isScrollingUp: false,
+    previousScroll: null,
+    previousScrollDirection: null,
+    savedScroll: 0,
+    target: null
+  }),
 
   computed: {
     computedContentHeight () {
@@ -107,16 +109,19 @@ export default {
     },
     classes () {
       return this.addBackgroundColorClassChecks({
-        'toolbar': true,
-        'elevation-0': this.flat || (!this.isActive && !this.tabs),
-        'toolbar--absolute': this.absolute,
-        'toolbar--card': this.card,
-        'toolbar--clipped': this.clippedLeft || this.clippedRight,
-        'toolbar--dense': this.dense,
-        'toolbar--extended': this.isExtended,
-        'toolbar--fixed': !this.absolute && (this.app || this.fixed),
-        'toolbar--floating': this.floating,
-        'toolbar--prominent': this.prominent,
+        'v-toolbar': true,
+        'elevation-0': this.flat || (!this.isActive &&
+          !this.tabs &&
+          !this.scrollToolbarOffScreen
+        ),
+        'v-toolbar--absolute': this.absolute,
+        'v-toolbar--card': this.card,
+        'v-toolbar--clipped': this.clippedLeft || this.clippedRight,
+        'v-toolbar--dense': this.dense,
+        'v-toolbar--extended': this.isExtended,
+        'v-toolbar--fixed': !this.absolute && (this.app || this.fixed),
+        'v-toolbar--floating': this.floating,
+        'v-toolbar--prominent': this.prominent,
         'theme--dark': this.dark,
         'theme--light': this.light
       })
@@ -133,7 +138,9 @@ export default {
     },
     computedTransform () {
       return !this.isActive
-        ? -this.computedHeight
+        ? this.scrollToolbarOffScreen
+          ? -this.computedContentHeight
+          : -this.computedHeight
         : 0
     },
     currentThreshold () {
@@ -171,7 +178,7 @@ export default {
     manualScroll (val) {
       this.isActive = !val
     },
-    isScrollingUp (val) {
+    isScrollingUp () {
       this.savedScroll = this.savedScroll || this.currentScroll
     }
   },
@@ -190,7 +197,8 @@ export default {
 
   methods: {
     onScroll () {
-      if (!this.scrollOffScreen ||
+      if ((!this.scrollOffScreen &&
+        !this.scrollToolbarOffScreen) ||
         this.manualScroll ||
         typeof window === 'undefined'
       ) return
@@ -234,14 +242,14 @@ export default {
     }]
 
     children.push(h('div', {
-      staticClass: 'toolbar__content',
+      staticClass: 'v-toolbar__content',
       style: { height: `${this.computedContentHeight}px` },
       ref: 'content'
     }, this.$slots.default))
 
     if (this.isExtended) {
       children.push(h('div', {
-        staticClass: 'toolbar__extension',
+        staticClass: 'v-toolbar__extension',
         style: { height: `${this.computedExtensionHeight}px` }
       }, this.$slots.extension))
     }

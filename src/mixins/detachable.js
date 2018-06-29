@@ -9,6 +9,7 @@ function validateAttachTarget (val) {
   return val.nodeType === Node.ELEMENT_NODE
 }
 
+/* @vue/component */
 export default {
   name: 'detachable',
 
@@ -25,8 +26,20 @@ export default {
     }
   },
 
+  data: () => ({
+    hasDetached: false
+  }),
+
+  watch: {
+    attach () {
+      this.hasDetached = false
+      this.initDetach()
+    },
+    hasContent: 'initDetach'
+  },
+
   mounted () {
-    this.initDetach()
+    !this.lazy && this.initDetach()
   },
 
   deactivated () {
@@ -39,13 +52,20 @@ export default {
     // IE11 Fix
     try {
       this.$refs.content.parentNode.removeChild(this.$refs.content)
-    } catch (e) {}
+    } catch (e) { console.log(e) }
   },
 
   methods: {
+    getScopeIdAttrs () {
+      const scopeId = this.$vnode && this.$vnode.context.$options._scopeId
+      return scopeId && {
+        [scopeId]: ''
+      }
+    },
     initDetach () {
       if (this._isDestroyed ||
         !this.$refs.content ||
+        this.hasDetached ||
         // Leave menu in place if attached
         // and dev has not changed target
         this.attach === '' || // If used as a boolean prop (<v-menu attach>)
@@ -74,6 +94,8 @@ export default {
         this.$refs.content,
         target.firstChild
       )
+
+      this.hasDetached = true
     }
   }
 }

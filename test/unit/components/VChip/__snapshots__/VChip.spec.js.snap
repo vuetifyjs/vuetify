@@ -3,12 +3,12 @@
 exports[`VChip.vue should be removable 1`] = `
 
 <span tabindex="0"
-      class="chip chip--removable"
+      class="v-chip v-chip--removable"
 >
-  <span class="chip__content">
-    <div class="chip__close">
+  <span class="v-chip__content">
+    <div class="v-chip__close">
       <i aria-hidden="true"
-         class="icon material-icons"
+         class="v-icon material-icons"
       >
         cancel
       </i>
@@ -21,13 +21,13 @@ exports[`VChip.vue should be removable 1`] = `
 exports[`VChip.vue should be removable 2`] = `
 
 <span tabindex="0"
-      class="chip chip--removable"
+      class="v-chip v-chip--removable"
       style="display: none;"
 >
-  <span class="chip__content">
-    <div class="chip__close">
+  <span class="v-chip__content">
+    <div class="v-chip__close">
       <i aria-hidden="true"
-         class="icon material-icons"
+         class="v-icon material-icons"
       >
         cancel
       </i>
@@ -37,12 +37,12 @@ exports[`VChip.vue should be removable 2`] = `
 
 `;
 
-exports[`VChip.vue should have a chip class 1`] = `
+exports[`VChip.vue should have a v-chip class 1`] = `
 
 <span tabindex="0"
-      class="chip"
+      class="v-chip"
 >
-  <span class="chip__content">
+  <span class="v-chip__content">
   </span>
 </span>
 

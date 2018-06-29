@@ -1,26 +1,22 @@
 @import '../bootstrap'
 
-.menu
+.v-menu
   display: inline-block
   position: relative
   vertical-align: middle
 
-  &--disabled
-    cursor: default
-
-    .menu__activator,
-    .menu__activator > *
-      cursor: default
-      pointer-events: none
-
   &__activator
     align-items: center
     cursor: pointer
-    height: inherit
+    display: flex
+    height: 100%
     position: relative
 
-    input[readonly]
+    *
       cursor: pointer
+
+    &--disabled
+      pointer-events: none
 
   &__content
     position: absolute
@@ -38,53 +34,43 @@
     &--active
       pointer-events: none
 
-    &--dropdown
-      border-top-left-radius: 0
-      border-top-right-radius: 0
-      border-top: 1px solid $material-light.dividers
-
     & > .card
       contain: content
       backface-visibility: hidden
 
-  > .menu__content
+  > .v-menu__content
     max-width: none
 
   &-transition
     &-enter
-      .list__tile
+      .v-list__tile
         min-width: 0
-        transition-delay: .4s
-        opacity: 0
-        transform: translateY(-15px)
         pointer-events: none
 
     &-enter-to
-      .list__tile
+      .v-list__tile
         pointer-events: auto
-        opacity: 1
+        transition-delay: .1s
 
-      .list__tile--active
-        transform: none !important
-
+    &-leave-active,
     &-leave-to
-      transform: translateY(-10px)
-
-    &-leave-active, &-leave-to
       pointer-events: none
 
-    &-enter, &-leave-to
+    &-enter,
+    &-leave-to
       opacity: 0
 
-    &-enter-to, &-leave
-      opacity: 1
+    &-enter-active,
+    &-leave-active
+      transition: all .3s $transition.fast-in-fast-out
 
-    &-enter-active, &-leave-active
-      transition: all .5s $transition.swing
+.v-menu-transition-enter
+  &.v-menu__content--auto
+    .v-list__tile
+        opacity: 0
+        transform: translateY(-15px)
 
-.menu-transition-enter
-  &.menu__content--auto
-    .list__tile--active
+    .v-list__tile--active
       opacity: 1
       transform: none !important
       pointer-events: auto

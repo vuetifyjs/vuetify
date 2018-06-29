@@ -18,8 +18,17 @@ import Position from './mixins/menu-position'
 import ClickOutside from '../../directives/click-outside'
 import Resize from '../../directives/resize'
 
+// Helpers
+import { convertToUnit } from '../../util/helpers'
+
+/* @vue/component */
 export default {
   name: 'v-menu',
+
+  directives: {
+    ClickOutside,
+    Resize
+  },
 
   mixins: [
     Activator,
@@ -33,22 +42,6 @@ export default {
     Returnable,
     Toggleable
   ],
-
-  directives: {
-    ClickOutside,
-    Resize
-  },
-
-  data () {
-    return {
-      defaultOffset: 8,
-      maxHeightAutoDefault: '200px',
-      startIndex: 3,
-      stopIndex: 0,
-      hasJustFocused: false,
-      resizeTimeout: null
-    }
-  },
 
   props: {
     auto: Boolean,
@@ -76,7 +69,18 @@ export default {
     },
     transition: {
       type: [Boolean, String],
-      default: 'menu-transition'
+      default: 'v-menu-transition'
+    }
+  },
+
+  data () {
+    return {
+      defaultOffset: 8,
+      maxHeightAutoDefault: '200px',
+      startIndex: 3,
+      stopIndex: 0,
+      hasJustFocused: false,
+      resizeTimeout: null
     }
   },
 
@@ -87,11 +91,7 @@ export default {
       return `${this.calcXOverflow(this.calcLeftAuto())}px`
     },
     calculatedMaxHeight () {
-      return this.auto
-        ? '200px'
-        : isNaN(this.maxHeight)
-          ? this.maxHeight
-          : `${this.maxHeight}px`
+      return this.auto ? '200px' : convertToUnit(this.maxHeight)
     },
     calculatedMaxWidth () {
       return isNaN(this.maxWidth)
@@ -135,6 +135,9 @@ export default {
         transformOrigin: this.origin,
         zIndex: this.zIndex || this.activeZIndex
       }
+    },
+    tileHeight () {
+      return this.dense ? 36 : 48
     }
   },
 
@@ -185,10 +188,7 @@ export default {
 
   render (h) {
     const data = {
-      staticClass: 'menu',
-      class: {
-        'menu--disabled': this.disabled
-      },
+      staticClass: 'v-menu',
       style: {
         display: this.fullWidth ? 'block' : 'inline-block'
       },

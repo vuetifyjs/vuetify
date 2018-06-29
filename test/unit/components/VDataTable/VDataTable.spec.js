@@ -26,6 +26,24 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
     }
   }
 
+  function dataTableNestedTestData () {
+    return {
+      propsData: {
+        value: [{ nested: { value: { id: 1, name: 'bar' } } }],
+        itemKey: 'nested.value.id',
+        headers: [
+          { text: 'ID', value: 'nested.value.id' },
+          { text: 'Name', value: 'nested.value.name' },
+        ],
+        items: [
+          { nested: { value: { id: 0, name: 'foo' } } },
+          { nested: { value: { id: 1, name: 'bar' } } },
+          { nested: { value: { id: 2, name: 'baz' } } }
+        ]
+      }
+    }
+  }
+
   function dataTableTestDataFilter () {
     return {
       propsData: {
@@ -60,7 +78,7 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.html()).toMatchSnapshot()
 
-    const content = wrapper.find('table.datatable tbody > tr > td')[0]
+    const content = wrapper.find('table.v-datatable tbody > tr > td')[0]
     expect(content.element.textContent).toBe('No matching records found')
 
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
@@ -73,7 +91,7 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.html()).toMatchSnapshot()
 
-    const content = wrapper.find('table.datatable tbody > tr > td')[0]
+    const content = wrapper.find('table.v-datatable tbody > tr > td')[0]
     expect(content.element.textContent).toBe('No data available')
 
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
@@ -204,7 +222,7 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
       }
     }))
 
-    expect(wrapper.find('.datatable__progress')).toHaveLength(1)
+    expect(wrapper.find('.v-datatable__progress')).toHaveLength(1)
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
@@ -302,6 +320,111 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
     wrapper.vm.value.push(wrapper.vm.items[1]);
     wrapper.vm.value.push(wrapper.vm.items[2]);
     expect(wrapper.vm.everyItem).toBe(true);
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should render correct colspan when using headers-length prop', async () => {
+    const data = dataTableTestData()
+    data.propsData.headersLength = 11
+    const wrapper = mount(VDataTable, data)
+
+    expect(wrapper.find('tr.v-datatable__progress th')[0].getAttribute('colspan')).toBe('11')
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should not emit pagination event after load (#3585)', async () => {
+    const data = dataTableTestDataFilter()
+    data.propsData.totalItems = 0
+    data.propsData.search = ''
+    data.propsData.pagination = {}
+
+    const wrapper = mount(VDataTable, data)
+    const pagination = jest.fn()
+    wrapper.vm.$on('update:pagination', pagination)
+
+    await wrapper.vm.$nextTick()
+
+    expect(pagination).toHaveBeenCalledTimes(0)
+
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should emit correct totalItems property in pagination when searching (#3511)', async () => {
+    const data = {
+      propsData: {
+        pagination: {
+          rowsPerPage: 5,
+          descending: false,
+          page: 1,
+          sortBy: 'calories'
+        },
+        headers: [{ text: 'Calories', value: 'calories' }],
+        items: [{ calories: 19 }, { calories: 19 }, { calories: 152 }]
+      }
+    }
+
+    const wrapper = mount(VDataTable, data)
+    const pagination = jest.fn()
+    wrapper.vm.$on('update:pagination', pagination)
+
+    await wrapper.vm.$nextTick()
+
+    wrapper.setProps({ search: '9' })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.instance().filteredItems).toHaveLength(2)
+    expect(pagination).toHaveBeenCalledWith(Object.assign({}, data.propsData.pagination, { totalItems: 2 }))
+
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should not reset page when total-items prop changes (#3766)', async () => {
+    const data = {
+      propsData: {
+        pagination: {
+          rowsPerPage: 1,
+          descending: false,
+          page: 2,
+          sortBy: 'calories'
+        },
+        totalItems: 3,
+        headers: [{ text: 'Calories', value: 'calories' }],
+        items: [{ calories: 19 }, { calories: 19 }, { calories: 152 }]
+      }
+    }
+
+    const wrapper = mount(VDataTable, data)
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.instance().computedPagination.page).toBe(2)
+
+    wrapper.setProps({ totalItems: 10 })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.instance().computedPagination.page).toBe(2)
+
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should allow selection using nested values', async () => {
+    const data = dataTableNestedTestData()
+    const wrapper = mount(VDataTable, data)
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.selected.hasOwnProperty(1)).toBe(true)
+    expect(wrapper.vm.selected[1]).toBe(true)
+
+    wrapper.setProps({ value: [{ nested: { value: { id: 2, name: 'baz' } } }] })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.selected.hasOwnProperty(1)).toBe(false)
+    expect(wrapper.vm.selected.hasOwnProperty(2)).toBe(true)
+    expect(wrapper.vm.selected[2]).toBe(true)
+
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 })

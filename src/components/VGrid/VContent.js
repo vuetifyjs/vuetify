@@ -4,6 +4,7 @@ import '../../stylus/components/_content.styl'
 // Mixins
 import SSRBootable from '../../mixins/ssr-bootable'
 
+/* @vue/component */
 export default {
   name: 'v-content',
 
@@ -33,8 +34,7 @@ export default {
 
   render (h) {
     const data = {
-      staticClass: 'content',
-      'class': this.classes,
+      staticClass: 'v-content',
       style: this.styles,
       ref: 'content'
     }
@@ -42,7 +42,7 @@ export default {
     return h(this.tag, data, [
       h(
         'div',
-        { staticClass: 'content--wrap' },
+        { staticClass: 'v-content__wrap' },
         this.$slots.default
       )
     ])

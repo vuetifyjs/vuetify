@@ -1,24 +1,15 @@
-require('dotenv').config()
+const path = require('path')
 const merge = require('webpack-merge')
-const baseWebpackConfig = require('./webpack.base.config')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-const WriteFilePlugin = require('write-file-webpack-plugin')
-const webpack = require('webpack')
+const HappyPack = require('happypack')
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const { config: baseWebpackConfig, happyThreadPool } = require('./webpack.base.config')
 
 // Helpers
-const resolve = file => require('path').resolve(__dirname, file)
-
-const extractPlugin = ExtractTextPlugin.extract({
-  use: [
-    { loader: 'css-loader', options: { sourceMap: true } },
-    { loader: 'postcss-loader', options: { sourceMap: true } },
-    { loader: 'stylus-loader', options: { sourceMap: true } }
-  ]
-})
+const resolve = file => path.resolve(__dirname, file)
 
 module.exports = merge(baseWebpackConfig, {
-  devtool: '#cheap-module-eval-source-map',
+  devtool: 'source-map',
   entry: ['babel-polyfill', './dev/index.js'],
   output: {
     filename: '[name].js',
@@ -27,41 +18,43 @@ module.exports = merge(baseWebpackConfig, {
     library: 'Vuetify'
   },
   resolve: {
-    extensions: ['*', '.js', '.json', '.vue'],
     alias: {
       vuetify: resolve('../src'),
       'vue$': 'vue/dist/vue.esm.js'
     }
   },
   module: {
-    noParse: /es6-promise\.js$/, // avoid webpack shimming process
     rules: [
       {
         test: /\.vue$/,
-        loaders: [{
-          loader: 'vue-loader',
-          options: {
-            loaders: {
-              stylus: extractPlugin
-            }
-          }
-        }, 'eslint-loader'],
+        loader: 'vue-loader'
+      },
+      {
+        test: /\.ts$/,
+        use: 'happypack/loader?id=ts',
         exclude: /node_modules/
       },
       {
         test: /\.js$/,
-        loaders: ['babel-loader', 'eslint-loader'],
+        use: 'happypack/loader?id=js',
         exclude: /node_modules/
       },
       {
-        test: /\.styl$/,
-        loaders: extractPlugin,
-        exclude: /node_modules/
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader'
+        ]
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)(\?.*)?$/,
+        loader: 'url-loader',
+        query: {
+          limit: 10000,
+          name: 'img/[name].[hash:7].[ext]'
+        }
       }
     ]
-  },
-  performance: {
-    hints: false
   },
   devServer: {
     contentBase: resolve('../dev'),
@@ -71,16 +64,30 @@ module.exports = merge(baseWebpackConfig, {
     disableHostCheck: true
   },
   plugins: [
-    new ExtractTextPlugin({
-      filename: '[name].css',
-      allChunks: true
+    new VueLoaderPlugin(),
+    new ForkTsCheckerWebpackPlugin({
+      checkSyntacticErrors: true,
+      tsconfig: resolve('../tsconfig.json')
     }),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': "'development'"
+    new HappyPack({
+      id: 'ts',
+      threadPool: happyThreadPool,
+      loaders: [
+        'babel-loader',
+        {
+          loader: 'ts-loader',
+          options: {
+            appendTsSuffixTo: [/\.vue$/],
+            happyPackMode: true
+          }
+        },
+        'eslint-loader?cache=true?emitWarning=true'
+      ]
     }),
-    new BundleAnalyzerPlugin({ openAnalyzer: false }),
-    new WriteFilePlugin({
-      test: /\.css$/
+    new HappyPack({
+      id: 'js',
+      threadPool: happyThreadPool,
+      loaders: ['babel-loader', 'eslint-loader?cache=true?emitWarning=true']
     })
   ]
 })

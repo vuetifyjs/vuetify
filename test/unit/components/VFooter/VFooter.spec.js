@@ -5,7 +5,7 @@ test('VFooter.js', ({ mount, functionalContext }) => {
   it('should render component and match snapshot', () => {
     const wrapper = mount(VFooter)
 
-    expect(wrapper.element.classList).toContain('footer')
+    expect(wrapper.element.classList).toContain('v-footer')
   })
 
   it('should render a colored footer', () => {
@@ -26,7 +26,7 @@ test('VFooter.js', ({ mount, functionalContext }) => {
       }
     })
 
-    expect(wrapper.element.classList).toContain('footer--absolute')
+    expect(wrapper.element.classList).toContain('v-footer--absolute')
   })
 
   it('should render a fixed positioned component and match snapshot', () => {
@@ -36,7 +36,7 @@ test('VFooter.js', ({ mount, functionalContext }) => {
       }
     })
 
-    expect(wrapper.element.classList).toContain('footer--fixed')
+    expect(wrapper.element.classList).toContain('v-footer--fixed')
   })
 
   it('should render a fixed and absolute positioned and match snapshot', () => {
@@ -47,9 +47,9 @@ test('VFooter.js', ({ mount, functionalContext }) => {
       }
     })
 
-    expect(wrapper.element.classList).toContain('footer--absolute')
+    expect(wrapper.element.classList).toContain('v-footer--absolute')
     wrapper.setProps({ absolute: false })
-    expect(wrapper.element.classList).toContain('footer--fixed')
+    expect(wrapper.element.classList).toContain('v-footer--fixed')
   })
 
   it('should get the right padding with app prop', async () => {

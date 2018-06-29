@@ -9,27 +9,26 @@ import VIcon from '../VIcon'
 
 import ClickOutside from '../../directives/click-outside'
 
+import { consoleWarn } from '../../util/console'
+
+/* @vue/component */
 export default {
   name: 'v-expansion-panel-content',
-
-  mixins: [Bootable, Toggleable, Rippleable, RegistrableInject('expansionPanel', 'v-expansion-panel', 'v-expansion-panel-content')],
 
   directives: {
     ClickOutside
   },
 
-  inject: ['focusable', 'panelClick'],
+  mixins: [Bootable, Toggleable, Rippleable, RegistrableInject('expansionPanel', 'v-expansion-panel-content', 'v-expansion-panel')],
 
-  data () {
-    return {
-      height: 'auto'
-    }
-  },
+  inject: ['expansionPanel'],
 
   props: {
+    disabled: Boolean,
+    readonly: Boolean,
     expandIcon: {
       type: String,
-      default: 'keyboard_arrow_down'
+      default: '$vuetify.icons.expand'
     },
     hideActions: Boolean,
     ripple: {
@@ -38,61 +37,97 @@ export default {
     }
   },
 
+  data: () => ({
+    height: 'auto'
+  }),
+
+  computed: {
+    containerClasses () {
+      return {
+        'v-expansion-panel__container--active': this.isActive,
+        'v-expansion-panel__container--disabled': this.isDisabled
+      }
+    },
+    isDisabled () {
+      return this.expansionPanel.disabled || this.disabled
+    },
+    isReadonly () {
+      return this.expansionPanel.readonly || this.readonly
+    }
+  },
+
+  mounted () {
+    this.expansionPanel.register(this._uid, this.toggle)
+
+    // Can be removed once fully deprecated
+    if (typeof this.value !== 'undefined') consoleWarn('v-model has been deprecated', this)
+  },
+
+  beforeDestroy () {
+    this.expansionPanel.unregister(this._uid)
+  },
+
   methods: {
+    onKeydown (e) {
+      // Ensure element is the activeElement
+      if (
+        e.keyCode === 13 &&
+        this.$el === document.activeElement
+      ) this.expansionPanel.panelClick(this._uid)
+    },
+    onHeaderClick () {
+      this.isReadonly || this.expansionPanel.panelClick(this._uid)
+    },
     genBody () {
       return this.$createElement('div', {
         ref: 'body',
-        class: 'expansion-panel__body',
-        directives: [
-          {
-            name: 'show',
-            value: this.isActive
-          }
-        ]
+        class: 'v-expansion-panel__body',
+        directives: [{
+          name: 'show',
+          value: this.isActive
+        }]
       }, this.showLazyContent(this.$slots.default))
     },
     genHeader () {
       return this.$createElement('div', {
-        staticClass: 'expansion-panel__header',
+        staticClass: 'v-expansion-panel__header',
         directives: [{
           name: 'ripple',
           value: this.ripple
         }],
         on: {
-          click: () => this.panelClick(this._uid)
+          click: this.onHeaderClick
         }
       }, [
         this.$slots.header,
         this.genIcon()
       ])
     },
-    genIcon (h) {
+    genIcon () {
       if (this.hideActions) return null
 
       const icon = this.$slots.actions ||
         this.$createElement(VIcon, this.expandIcon)
 
-      return this.$createElement('div', {
-        staticClass: 'header__icon'
-      }, [icon])
+      return this.$createElement('transition', {
+        attrs: { name: 'fade-transition' }
+      }, [
+        this.$createElement('div', {
+          staticClass: 'header__icon',
+          directives: [{
+            name: 'show',
+            value: !this.isDisabled
+          }]
+        }, [icon])
+      ])
     },
-    toggle (uid) {
-      const isActive = this._uid === uid && !this.isActive
-
-      if (isActive) this.isBooted = true
+    toggle (active) {
+      if (active) this.isBooted = true
 
       // We treat bootable differently
       // Needs time to calc height
-      this.$nextTick(() => (this.isActive = isActive))
+      this.$nextTick(() => (this.isActive = active))
     }
-  },
-
-  mounted () {
-    this.expansionPanel.register(this._uid, this.toggle)
-  },
-
-  beforeDestroy () {
-    this.expansionPanel.unregister(this._uid)
   },
 
   render (h) {
@@ -102,21 +137,13 @@ export default {
     children.push(h(VExpandTransition, [this.genBody()]))
 
     return h('li', {
-      staticClass: 'expansion-panel__container',
-      'class': {
-        'expansion-panel__container--active': this.isActive
-      },
+      staticClass: 'v-expansion-panel__container',
+      class: this.containerClasses,
       attrs: {
-        tabindex: 0
+        tabindex: this.isReadonly || this.isDisabled ? null : 0
       },
       on: {
-        keydown: e => {
-          // Ensure element is focusable and the activeElement
-          if (this.focusable &&
-            this.$el === document.activeElement &&
-            e.keyCode === 13
-          ) this.panelClick(this._uid)
-        }
+        keydown: this.onKeydown
       }
     }, children)
   }

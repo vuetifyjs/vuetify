@@ -12,10 +12,15 @@ import Toggleable from '../../mixins/toggleable'
 import ClickOutside from '../../directives/click-outside'
 
 // Helpers
-import { getZIndex } from '../../util/helpers'
+import { getZIndex, convertToUnit } from '../../util/helpers'
 
+/* @vue/component */
 export default {
   name: 'v-dialog',
+
+  directives: {
+    ClickOutside
+  },
 
   mixins: [
     Dependent,
@@ -26,23 +31,12 @@ export default {
     Toggleable
   ],
 
-  directives: {
-    ClickOutside
-  },
-
-  data () {
-    return {
-      isDependent: false,
-      stackClass: 'dialog__content__active',
-      stackMinZIndex: 200
-    }
-  },
-
   props: {
     disabled: Boolean,
     persistent: Boolean,
     fullscreen: Boolean,
     fullWidth: Boolean,
+    noClickAnimation: Boolean,
     maxWidth: {
       type: [String, Number],
       default: 'none'
@@ -62,20 +56,31 @@ export default {
     }
   },
 
+  data () {
+    return {
+      animate: false,
+      animateTimeout: null,
+      isDependent: false,
+      stackClass: 'v-dialog__content--active',
+      stackMinZIndex: 200
+    }
+  },
+
   computed: {
     classes () {
       return {
-        [(`dialog ${this.contentClass}`).trim()]: true,
-        'dialog--active': this.isActive,
-        'dialog--persistent': this.persistent,
-        'dialog--fullscreen': this.fullscreen,
-        'dialog--scrollable': this.scrollable
+        [(`v-dialog ${this.contentClass}`).trim()]: true,
+        'v-dialog--active': this.isActive,
+        'v-dialog--persistent': this.persistent,
+        'v-dialog--fullscreen': this.fullscreen,
+        'v-dialog--scrollable': this.scrollable,
+        'v-dialog--animated': this.animate
       }
     },
     contentClasses () {
       return {
-        'dialog__content': true,
-        'dialog__content__active': this.isActive
+        'v-dialog__content': true,
+        'v-dialog__content--active': this.isActive
       }
     }
   },
@@ -101,12 +106,38 @@ export default {
   },
 
   methods: {
+    animateClick () {
+      this.animate = false
+      // Needed for when clicking very fast
+      // outside of the dialog
+      this.$nextTick(() => {
+        this.animate = true
+        clearTimeout(this.animateTimeout)
+        this.animateTimeout = setTimeout(() => (this.animate = false), 150)
+      })
+    },
     closeConditional (e) {
+      // If the dialog content contains
+      // the click event, or if the
+      // dialog is not active
+      if (this.$refs.content.contains(e.target) ||
+        !this.isActive
+      ) return false
+
+      // If we made it here, the click is outside
+      // and is active. If persistent, and the
+      // click is on the overlay, animate
+      if (this.persistent) {
+        if (!this.noClickAnimation &&
+          this.overlay === e.target
+        ) this.animateClick()
+
+        return false
+      }
+
       // close dialog if !persistent, clicked outside and we're the topmost dialog.
       // Since this should only be called in a capture event (bottom up), we shouldn't need to stop propagation
-      return this.isActive && !this.persistent &&
-        getZIndex(this.$refs.content) >= this.getMaxZIndex() &&
-        !this.$refs.content.contains(e.target)
+      return getZIndex(this.$refs.content) >= this.getMaxZIndex()
     },
     show () {
       !this.fullscreen && !this.hideOverlay && this.genOverlay()
@@ -148,14 +179,17 @@ export default {
 
     if (!this.fullscreen) {
       data.style = {
-        maxWidth: this.maxWidth === 'none' ? undefined : (isNaN(this.maxWidth) ? this.maxWidth : `${this.maxWidth}px`),
-        width: this.width === 'auto' ? undefined : (isNaN(this.width) ? this.width : `${this.width}px`)
+        maxWidth: this.maxWidth === 'none' ? undefined : convertToUnit(this.maxWidth),
+        width: this.width === 'auto' ? undefined : convertToUnit(this.width)
       }
     }
 
     if (this.$slots.activator) {
       children.push(h('div', {
-        'class': 'dialog__activator',
+        staticClass: 'v-dialog__activator',
+        'class': {
+          'v-dialog__activator--disabled': this.disabled
+        },
         on: {
           click: e => {
             e.stopPropagation()
@@ -165,24 +199,28 @@ export default {
       }, [this.$slots.activator]))
     }
 
-    const dialog = h('transition', {
-      props: {
-        name: this.transition || '', // If false, show nothing
-        origin: this.origin
-      }
-    }, [h('div', data,
-      this.showLazyContent(this.$slots.default)
-    )])
+    let dialog = h('div', data, this.showLazyContent(this.$slots.default))
+    if (this.transition) {
+      dialog = h('transition', {
+        props: {
+          name: this.transition,
+          origin: this.origin
+        }
+      }, [dialog])
+    }
 
     children.push(h('div', {
       'class': this.contentClasses,
-      domProps: { tabIndex: -1 },
+      attrs: {
+        tabIndex: '-1',
+        ...this.getScopeIdAttrs()
+      },
       style: { zIndex: this.activeZIndex },
       ref: 'content'
     }, [dialog]))
 
     return h('div', {
-      staticClass: 'dialog__container',
+      staticClass: 'v-dialog__container',
       style: {
         display: (!this.$slots.activator || this.fullWidth) ? 'block' : 'inline-block'
       }

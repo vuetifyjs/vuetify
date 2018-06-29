@@ -2,8 +2,8 @@
 
 exports[`VListTileAvatar.js should render component and match snapshot 1`] = `
 
-<div class="list__tile__avatar">
-  <div class="avatar"
+<div class="v-list__tile__avatar">
+  <div class="v-avatar"
        style="height: 40px; width: 40px;"
   >
   </div>

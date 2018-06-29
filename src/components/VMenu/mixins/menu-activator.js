@@ -6,6 +6,7 @@
  * Handles the click and hover activation
  * Supports slotted and detached activators
  */
+/* @vue/component */
 export default {
   methods: {
     activatorClickHandler (e) {
@@ -20,7 +21,7 @@ export default {
         this.isActive = false
       }
     },
-    mouseEnterHandler (e) {
+    mouseEnterHandler () {
       this.runDelay('open', () => {
         if (this.hasJustFocused) return
 

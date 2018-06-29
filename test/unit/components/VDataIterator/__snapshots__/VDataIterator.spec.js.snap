@@ -2,105 +2,111 @@
 
 exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
 
-<div class="data-iterator">
+<div class="v-data-iterator">
   <div>
   </div>
   <div>
     <span>
       footer
     </span>
-    <div class="data-iterator__actions">
-      <div class="data-iterator__actions__select">
+    <div class="v-data-iterator__actions">
+      <div class="v-data-iterator__actions__select">
         Items per page:
-        <div tabindex="0"
-             data-uid="16"
-             aria-label="Items per page:"
-             role="combobox"
-             class="input-group input-group--append-icon input-group--hide-details input-group--text-field input-group--select input-group--auto primary--text"
+        <div role="combobox"
+             class="v-input v-text-field v-select v-input--hide-details v-input--is-label-active v-input--is-dirty"
         >
-          <div class="input-group__input">
-            <div class="input-group__selections"
-                 style="overflow: hidden;"
-            >
-              <input aria-label="Items per page:"
-                     disabled="disabled"
-                     tabindex="-1"
-                     class="input-group--select__autocomplete"
-                     style="display: none;"
+          <div class="v-input__control">
+            <div class="v-input__slot">
+              <div class="v-menu"
+                   style="display: inline-block;"
               >
-            </div>
-            <div class="menu"
-                 style="display: inline-block;"
-            >
-              <div class="menu__content menu__content--select menu__content--auto"
-                   style="max-height: 200px; min-width: 75px; max-width: auto; top: 18px; left: 12px; z-index: 0; display: none;"
-              >
-                <div class="card"
-                     style="height: auto;"
+                <div class="v-menu__activator">
+                  <div class="v-select__slot">
+                    <div class="v-select__selections">
+                      <div class="v-select__selection v-select__selection--comma">
+                        5
+                      </div>
+                      <input readonly="readonly"
+                             tabindex="0"
+                             type="text"
+                             autocomplete="on"
+                             aria-readonly="false"
+                      >
+                    </div>
+                    <div class="v-input__append-inner">
+                      <div class="v-input__icon v-input__icon--append">
+                        <i aria-hidden="true"
+                           class="v-icon material-icons"
+                        >
+                          arrow_drop_down
+                        </i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="v-menu__content v-menu__content--auto"
+                     style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
                 >
-                  <div class="list">
-                    <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
-                            5
+                  <div class="v-select-list v-card">
+                    <div class="v-list">
+                      <div>
+                        <a class="v-list__tile v-list__tile--link v-list__tile--active primary--text">
+                          <div class="v-list__tile__content">
+                            <div class="v-list__tile__title">
+                              5
+                            </div>
                           </div>
-                        </div>
-                      </a>
-                    </div>
-                    <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
-                            10
+                        </a>
+                      </div>
+                      <div>
+                        <a class="v-list__tile v-list__tile--link">
+                          <div class="v-list__tile__content">
+                            <div class="v-list__tile__title">
+                              10
+                            </div>
                           </div>
-                        </div>
-                      </a>
-                    </div>
-                    <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
-                            25
+                        </a>
+                      </div>
+                      <div>
+                        <a class="v-list__tile v-list__tile--link">
+                          <div class="v-list__tile__content">
+                            <div class="v-list__tile__title">
+                              25
+                            </div>
                           </div>
-                        </div>
-                      </a>
-                    </div>
-                    <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
-                            All
+                        </a>
+                      </div>
+                      <div>
+                        <a class="v-list__tile v-list__tile--link">
+                          <div class="v-list__tile__content">
+                            <div class="v-list__tile__title">
+                              All
+                            </div>
                           </div>
-                        </div>
-                      </a>
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <i aria-hidden="true"
-               class="icon material-icons input-group__append-icon input-group__icon-cb"
-            >
-              arrow_drop_down
-            </i>
-          </div>
-          <div class="input-group__details">
+            <div class="v-text-field__details">
+            </div>
           </div>
         </div>
       </div>
-      <div class="data-iterator__actions__range-controls">
-        <div class="data-iterator__actions__pagination">
+      <div class="v-data-iterator__actions__range-controls">
+        <div class="v-data-iterator__actions__pagination">
           1-3 of 3
         </div>
         <button disabled="disabled"
                 type="button"
-                class="btn btn--disabled btn--flat btn--icon"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--icon"
                 aria-label="Previous page"
         >
-          <div class="btn__content">
+          <div class="v-btn__content">
             <i aria-hidden="true"
-               class="icon material-icons"
+               class="v-icon material-icons"
             >
               chevron_left
             </i>
@@ -108,12 +114,12 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
         </button>
         <button disabled="disabled"
                 type="button"
-                class="btn btn--disabled btn--flat btn--icon"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--icon"
                 aria-label="Next page"
         >
-          <div class="btn__content">
+          <div class="v-btn__content">
             <i aria-hidden="true"
-               class="icon material-icons"
+               class="v-icon material-icons"
             >
               chevron_right
             </i>
@@ -128,7 +134,7 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
 
 exports[`VDataIterator.js should match a snapshot - hideActions and no footer slot 1`] = `
 
-<div class="data-iterator">
+<div class="v-data-iterator">
   <div>
   </div>
 </div>
@@ -137,7 +143,7 @@ exports[`VDataIterator.js should match a snapshot - hideActions and no footer sl
 
 exports[`VDataIterator.js should match a snapshot - no data 1`] = `
 
-<div class="data-iterator">
+<div class="v-data-iterator">
   <div>
     <div class="text-xs-center"
          style="width: 100%;"
@@ -146,98 +152,104 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
     </div>
   </div>
   <div>
-    <div class="data-iterator__actions">
-      <div class="data-iterator__actions__select">
+    <div class="v-data-iterator__actions">
+      <div class="v-data-iterator__actions__select">
         Items per page:
-        <div tabindex="0"
-             data-uid="28"
-             aria-label="Items per page:"
-             role="combobox"
-             class="input-group input-group--append-icon input-group--hide-details input-group--text-field input-group--select input-group--auto primary--text"
+        <div role="combobox"
+             class="v-input v-text-field v-select v-input--hide-details v-input--is-label-active v-input--is-dirty"
         >
-          <div class="input-group__input">
-            <div class="input-group__selections"
-                 style="overflow: hidden;"
-            >
-              <input aria-label="Items per page:"
-                     disabled="disabled"
-                     tabindex="-1"
-                     class="input-group--select__autocomplete"
-                     style="display: none;"
+          <div class="v-input__control">
+            <div class="v-input__slot">
+              <div class="v-menu"
+                   style="display: inline-block;"
               >
-            </div>
-            <div class="menu"
-                 style="display: inline-block;"
-            >
-              <div class="menu__content menu__content--select menu__content--auto"
-                   style="max-height: 200px; min-width: 75px; max-width: auto; top: 18px; left: 12px; z-index: 0; display: none;"
-              >
-                <div class="card"
-                     style="height: auto;"
+                <div class="v-menu__activator">
+                  <div class="v-select__slot">
+                    <div class="v-select__selections">
+                      <div class="v-select__selection v-select__selection--comma">
+                        5
+                      </div>
+                      <input readonly="readonly"
+                             tabindex="0"
+                             type="text"
+                             autocomplete="on"
+                             aria-readonly="false"
+                      >
+                    </div>
+                    <div class="v-input__append-inner">
+                      <div class="v-input__icon v-input__icon--append">
+                        <i aria-hidden="true"
+                           class="v-icon material-icons"
+                        >
+                          arrow_drop_down
+                        </i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="v-menu__content v-menu__content--auto"
+                     style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
                 >
-                  <div class="list">
-                    <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
-                            5
+                  <div class="v-select-list v-card">
+                    <div class="v-list">
+                      <div>
+                        <a class="v-list__tile v-list__tile--link v-list__tile--active primary--text">
+                          <div class="v-list__tile__content">
+                            <div class="v-list__tile__title">
+                              5
+                            </div>
                           </div>
-                        </div>
-                      </a>
-                    </div>
-                    <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
-                            10
+                        </a>
+                      </div>
+                      <div>
+                        <a class="v-list__tile v-list__tile--link">
+                          <div class="v-list__tile__content">
+                            <div class="v-list__tile__title">
+                              10
+                            </div>
                           </div>
-                        </div>
-                      </a>
-                    </div>
-                    <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
-                            25
+                        </a>
+                      </div>
+                      <div>
+                        <a class="v-list__tile v-list__tile--link">
+                          <div class="v-list__tile__content">
+                            <div class="v-list__tile__title">
+                              25
+                            </div>
                           </div>
-                        </div>
-                      </a>
-                    </div>
-                    <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
-                            All
+                        </a>
+                      </div>
+                      <div>
+                        <a class="v-list__tile v-list__tile--link">
+                          <div class="v-list__tile__content">
+                            <div class="v-list__tile__title">
+                              All
+                            </div>
                           </div>
-                        </div>
-                      </a>
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <i aria-hidden="true"
-               class="icon material-icons input-group__append-icon input-group__icon-cb"
-            >
-              arrow_drop_down
-            </i>
-          </div>
-          <div class="input-group__details">
+            <div class="v-text-field__details">
+            </div>
           </div>
         </div>
       </div>
-      <div class="data-iterator__actions__range-controls">
-        <div class="data-iterator__actions__pagination">
+      <div class="v-data-iterator__actions__range-controls">
+        <div class="v-data-iterator__actions__pagination">
           –
         </div>
         <button disabled="disabled"
                 type="button"
-                class="btn btn--disabled btn--flat btn--icon"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--icon"
                 aria-label="Previous page"
         >
-          <div class="btn__content">
+          <div class="v-btn__content">
             <i aria-hidden="true"
-               class="icon material-icons"
+               class="v-icon material-icons"
             >
               chevron_left
             </i>
@@ -245,12 +257,12 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
         </button>
         <button disabled="disabled"
                 type="button"
-                class="btn btn--disabled btn--flat btn--icon"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--icon"
                 aria-label="Next page"
         >
-          <div class="btn__content">
+          <div class="v-btn__content">
             <i aria-hidden="true"
-               class="icon material-icons"
+               class="v-icon material-icons"
             >
               chevron_right
             </i>
@@ -265,7 +277,7 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
 
 exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
 
-<div class="data-iterator">
+<div class="v-data-iterator">
   <div>
     <div class="text-xs-center"
          style="width: 100%;"
@@ -274,98 +286,104 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
     </div>
   </div>
   <div>
-    <div class="data-iterator__actions">
-      <div class="data-iterator__actions__select">
+    <div class="v-data-iterator__actions">
+      <div class="v-data-iterator__actions__select">
         Items per page:
-        <div tabindex="0"
-             data-uid="2"
-             aria-label="Items per page:"
-             role="combobox"
-             class="input-group input-group--append-icon input-group--hide-details input-group--text-field input-group--select input-group--auto primary--text"
+        <div role="combobox"
+             class="v-input v-text-field v-select v-input--hide-details v-input--is-label-active v-input--is-dirty"
         >
-          <div class="input-group__input">
-            <div class="input-group__selections"
-                 style="overflow: hidden;"
-            >
-              <input aria-label="Items per page:"
-                     disabled="disabled"
-                     tabindex="-1"
-                     class="input-group--select__autocomplete"
-                     style="display: none;"
+          <div class="v-input__control">
+            <div class="v-input__slot">
+              <div class="v-menu"
+                   style="display: inline-block;"
               >
-            </div>
-            <div class="menu"
-                 style="display: inline-block;"
-            >
-              <div class="menu__content menu__content--select menu__content--auto"
-                   style="max-height: 200px; min-width: 75px; max-width: auto; top: 18px; left: 12px; z-index: 0; display: none;"
-              >
-                <div class="card"
-                     style="height: auto;"
+                <div class="v-menu__activator">
+                  <div class="v-select__slot">
+                    <div class="v-select__selections">
+                      <div class="v-select__selection v-select__selection--comma">
+                        5
+                      </div>
+                      <input readonly="readonly"
+                             tabindex="0"
+                             type="text"
+                             autocomplete="on"
+                             aria-readonly="false"
+                      >
+                    </div>
+                    <div class="v-input__append-inner">
+                      <div class="v-input__icon v-input__icon--append">
+                        <i aria-hidden="true"
+                           class="v-icon material-icons"
+                        >
+                          arrow_drop_down
+                        </i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="v-menu__content v-menu__content--auto"
+                     style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
                 >
-                  <div class="list">
-                    <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
-                            5
+                  <div class="v-select-list v-card">
+                    <div class="v-list">
+                      <div>
+                        <a class="v-list__tile v-list__tile--link v-list__tile--active primary--text">
+                          <div class="v-list__tile__content">
+                            <div class="v-list__tile__title">
+                              5
+                            </div>
                           </div>
-                        </div>
-                      </a>
-                    </div>
-                    <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
-                            10
+                        </a>
+                      </div>
+                      <div>
+                        <a class="v-list__tile v-list__tile--link">
+                          <div class="v-list__tile__content">
+                            <div class="v-list__tile__title">
+                              10
+                            </div>
                           </div>
-                        </div>
-                      </a>
-                    </div>
-                    <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
-                            25
+                        </a>
+                      </div>
+                      <div>
+                        <a class="v-list__tile v-list__tile--link">
+                          <div class="v-list__tile__content">
+                            <div class="v-list__tile__title">
+                              25
+                            </div>
                           </div>
-                        </div>
-                      </a>
-                    </div>
-                    <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
-                            All
+                        </a>
+                      </div>
+                      <div>
+                        <a class="v-list__tile v-list__tile--link">
+                          <div class="v-list__tile__content">
+                            <div class="v-list__tile__title">
+                              All
+                            </div>
                           </div>
-                        </div>
-                      </a>
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <i aria-hidden="true"
-               class="icon material-icons input-group__append-icon input-group__icon-cb"
-            >
-              arrow_drop_down
-            </i>
-          </div>
-          <div class="input-group__details">
+            <div class="v-text-field__details">
+            </div>
           </div>
         </div>
       </div>
-      <div class="data-iterator__actions__range-controls">
-        <div class="data-iterator__actions__pagination">
+      <div class="v-data-iterator__actions__range-controls">
+        <div class="v-data-iterator__actions__pagination">
           –
         </div>
         <button disabled="disabled"
                 type="button"
-                class="btn btn--disabled btn--flat btn--icon"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--icon"
                 aria-label="Previous page"
         >
-          <div class="btn__content">
+          <div class="v-btn__content">
             <i aria-hidden="true"
-               class="icon material-icons"
+               class="v-icon material-icons"
             >
               chevron_left
             </i>
@@ -373,12 +391,12 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
         </button>
         <button disabled="disabled"
                 type="button"
-                class="btn btn--disabled btn--flat btn--icon"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--icon"
                 aria-label="Next page"
         >
-          <div class="btn__content">
+          <div class="v-btn__content">
             <i aria-hidden="true"
-               class="icon material-icons"
+               class="v-icon material-icons"
             >
               chevron_right
             </i>
@@ -393,7 +411,7 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
 
 exports[`VDataIterator.js should match a snapshot - with data 1`] = `
 
-<div class="data-iterator">
+<div class="v-data-iterator">
   <span>
     <div>
       b
@@ -406,98 +424,104 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
     </div>
   </span>
   <div>
-    <div class="data-iterator__actions">
-      <div class="data-iterator__actions__select">
+    <div class="v-data-iterator__actions">
+      <div class="v-data-iterator__actions__select">
         Items per page:
-        <div tabindex="0"
-             data-uid="42"
-             aria-label="Items per page:"
-             role="combobox"
-             class="input-group input-group--append-icon input-group--hide-details input-group--text-field input-group--select input-group--auto primary--text"
+        <div role="combobox"
+             class="v-input v-text-field v-select v-input--hide-details v-input--is-label-active v-input--is-dirty"
         >
-          <div class="input-group__input">
-            <div class="input-group__selections"
-                 style="overflow: hidden;"
-            >
-              <input aria-label="Items per page:"
-                     disabled="disabled"
-                     tabindex="-1"
-                     class="input-group--select__autocomplete"
-                     style="display: none;"
+          <div class="v-input__control">
+            <div class="v-input__slot">
+              <div class="v-menu"
+                   style="display: inline-block;"
               >
-            </div>
-            <div class="menu"
-                 style="display: inline-block;"
-            >
-              <div class="menu__content menu__content--select menu__content--auto"
-                   style="max-height: 200px; min-width: 75px; max-width: auto; top: 18px; left: 12px; z-index: 0; display: none;"
-              >
-                <div class="card"
-                     style="height: auto;"
+                <div class="v-menu__activator">
+                  <div class="v-select__slot">
+                    <div class="v-select__selections">
+                      <div class="v-select__selection v-select__selection--comma">
+                        5
+                      </div>
+                      <input readonly="readonly"
+                             tabindex="0"
+                             type="text"
+                             autocomplete="on"
+                             aria-readonly="false"
+                      >
+                    </div>
+                    <div class="v-input__append-inner">
+                      <div class="v-input__icon v-input__icon--append">
+                        <i aria-hidden="true"
+                           class="v-icon material-icons"
+                        >
+                          arrow_drop_down
+                        </i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="v-menu__content v-menu__content--auto"
+                     style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
                 >
-                  <div class="list">
-                    <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
-                            5
+                  <div class="v-select-list v-card">
+                    <div class="v-list">
+                      <div>
+                        <a class="v-list__tile v-list__tile--link v-list__tile--active primary--text">
+                          <div class="v-list__tile__content">
+                            <div class="v-list__tile__title">
+                              5
+                            </div>
                           </div>
-                        </div>
-                      </a>
-                    </div>
-                    <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
-                            10
+                        </a>
+                      </div>
+                      <div>
+                        <a class="v-list__tile v-list__tile--link">
+                          <div class="v-list__tile__content">
+                            <div class="v-list__tile__title">
+                              10
+                            </div>
                           </div>
-                        </div>
-                      </a>
-                    </div>
-                    <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
-                            25
+                        </a>
+                      </div>
+                      <div>
+                        <a class="v-list__tile v-list__tile--link">
+                          <div class="v-list__tile__content">
+                            <div class="v-list__tile__title">
+                              25
+                            </div>
                           </div>
-                        </div>
-                      </a>
-                    </div>
-                    <div>
-                      <a class="list__tile list__tile--link">
-                        <div class="list__tile__content">
-                          <div class="list__tile__title">
-                            All
+                        </a>
+                      </div>
+                      <div>
+                        <a class="v-list__tile v-list__tile--link">
+                          <div class="v-list__tile__content">
+                            <div class="v-list__tile__title">
+                              All
+                            </div>
                           </div>
-                        </div>
-                      </a>
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <i aria-hidden="true"
-               class="icon material-icons input-group__append-icon input-group__icon-cb"
-            >
-              arrow_drop_down
-            </i>
-          </div>
-          <div class="input-group__details">
+            <div class="v-text-field__details">
+            </div>
           </div>
         </div>
       </div>
-      <div class="data-iterator__actions__range-controls">
-        <div class="data-iterator__actions__pagination">
+      <div class="v-data-iterator__actions__range-controls">
+        <div class="v-data-iterator__actions__pagination">
           1-3 of 3
         </div>
         <button disabled="disabled"
                 type="button"
-                class="btn btn--disabled btn--flat btn--icon"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--icon"
                 aria-label="Previous page"
         >
-          <div class="btn__content">
+          <div class="v-btn__content">
             <i aria-hidden="true"
-               class="icon material-icons"
+               class="v-icon material-icons"
             >
               chevron_left
             </i>
@@ -505,12 +529,12 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
         </button>
         <button disabled="disabled"
                 type="button"
-                class="btn btn--disabled btn--flat btn--icon"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--icon"
                 aria-label="Next page"
         >
-          <div class="btn__content">
+          <div class="v-btn__content">
             <i aria-hidden="true"
-               class="icon material-icons"
+               class="v-icon material-icons"
             >
               chevron_right
             </i>
@@ -519,6 +543,42 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
       </div>
     </div>
   </div>
+</div>
+
+`;
+
+exports[`VDataIterator.js should match a snapshot - with data 2`] = `
+
+<div class="v-data-iterator__actions__range-controls">
+  <div class="v-data-iterator__actions__pagination">
+    1-3 of 3
+  </div>
+  <button disabled="disabled"
+          type="button"
+          class="v-btn v-btn--disabled v-btn--flat v-btn--icon"
+          aria-label="Previous page"
+  >
+    <div class="v-btn__content">
+      <i aria-hidden="true"
+         class="v-icon material-icons"
+      >
+        chevron_right
+      </i>
+    </div>
+  </button>
+  <button disabled="disabled"
+          type="button"
+          class="v-btn v-btn--disabled v-btn--flat v-btn--icon"
+          aria-label="Next page"
+  >
+    <div class="v-btn__content">
+      <i aria-hidden="true"
+         class="v-icon material-icons"
+      >
+        chevron_left
+      </i>
+    </div>
+  </button>
 </div>
 
 `;

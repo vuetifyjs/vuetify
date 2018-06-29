@@ -1,7 +1,7 @@
 @import '../bootstrap'
 @import '../theme'
 
-small-dialog($material)
+v-small-dialog($material)
   &__content
     background: $material.cards
 
@@ -11,9 +11,9 @@ small-dialog($material)
   a
     color: rgba($material.fg-color, $material.primary-text-percent)
 
-theme(small-dialog, "small-dialog")
+theme(v-small-dialog, "v-small-dialog")
 
-.small-dialog
+.v-small-dialog
   display: block
   width: 100%
   height: 100%
@@ -34,5 +34,5 @@ theme(small-dialog, "small-dialog")
     > *
       width: 100%
 
-  .menu__activator
+  .v-menu__activator
     height: 100%

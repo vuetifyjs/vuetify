@@ -2,6 +2,7 @@ import '../../stylus/components/_progress-circular.styl'
 
 import Colorable from '../../mixins/colorable'
 
+/* @vue/component */
 export default {
   name: 'v-progress-circular',
 
@@ -44,9 +45,9 @@ export default {
 
     classes () {
       return this.addTextColorClassChecks({
-        'progress-circular': true,
-        'progress-circular--indeterminate': this.indeterminate,
-        'progress-circular--button': this.button
+        'v-progress-circular': true,
+        'v-progress-circular--indeterminate': this.indeterminate,
+        'v-progress-circular--button': this.button
       })
     },
 
@@ -99,7 +100,7 @@ export default {
   methods: {
     genCircle (h, name, offset) {
       return h('circle', {
-        class: `progress-circular__${name}`,
+        class: `v-progress-circular__${name}`,
         attrs: {
           fill: 'transparent',
           cx: 2 * this.viewBoxSize,
@@ -128,7 +129,7 @@ export default {
   },
 
   render (h) {
-    const info = h('div', { class: 'progress-circular__info' }, [this.$slots.default])
+    const info = h('div', { class: 'v-progress-circular__info' }, [this.$slots.default])
     const svg = this.genSvg(h)
 
     return h('div', {

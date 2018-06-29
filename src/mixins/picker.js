@@ -5,6 +5,7 @@ import VPicker from '../components/VPicker'
 import Colorable from './colorable'
 import Themeable from './themeable'
 
+/* @vue/component */
 export default {
   name: 'picker',
 
@@ -37,7 +38,7 @@ export default {
     genPicker (staticClass) {
       return this.$createElement(VPicker, {
         staticClass,
-        class: this.fullWidth ? ['picker--full-width'] : [],
+        class: this.fullWidth ? ['v-picker--full-width'] : [],
         props: {
           color: this.headerColor || this.color,
           dark: this.dark,

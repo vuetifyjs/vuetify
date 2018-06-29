@@ -22,6 +22,15 @@ test('VCarousel.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should render component in RTL mode and match snapshot', async () => {
+    const wrapper = mount(VCarousel)
+    wrapper.vm.$vuetify.rtl = true
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+    wrapper.vm.$vuetify.rtl = undefined
+  })
+
   it('should render component with image cycling off and match snapshot', async () => {
     const wrapper = mount(VCarousel, {
       propsData: {
@@ -62,7 +71,7 @@ test('VCarousel.js', ({ mount }) => {
     })
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.find('.carousel__left .icon')[0].text()).toBe('stop')
+    expect(wrapper.find('.v-carousel__prev .v-icon')[0].text()).toBe('stop')
     expect(wrapper.html()).toMatchSnapshot()
   })
 
@@ -74,7 +83,7 @@ test('VCarousel.js', ({ mount }) => {
     })
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.contains('.carousel__left')).toBe(false)
+    expect(wrapper.contains('.v-carousel__prev')).toBe(false)
     expect(wrapper.html()).toMatchSnapshot()
   })
 
@@ -86,7 +95,7 @@ test('VCarousel.js', ({ mount }) => {
     })
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.find('.carousel__right .icon')[0].text()).toBe('stop')
+    expect(wrapper.find('.v-carousel__next .v-icon')[0].text()).toBe('stop')
     expect(wrapper.html()).toMatchSnapshot()
   })
 
@@ -98,7 +107,7 @@ test('VCarousel.js', ({ mount }) => {
     })
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.contains('.carousel__right')).toBe(false)
+    expect(wrapper.contains('.v-carousel__next')).toBe(false)
     expect(wrapper.html()).toMatchSnapshot()
   })
 
@@ -152,8 +161,8 @@ test('VCarousel.js', ({ mount }) => {
     const wrapper = mount(component)
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.find('.carousel__left')).toHaveLength(0)
-    expect(wrapper.find('.carousel__right')).toHaveLength(0)
+    expect(wrapper.find('.v-carousel__prev')).toHaveLength(0)
+    expect(wrapper.find('.v-carousel__next')).toHaveLength(0)
   })
 
   it('should change item on swipe', async () => {
@@ -178,7 +187,7 @@ test('VCarousel.js', ({ mount }) => {
     const input = jest.fn()
     wrapper.vm.$children[0].$on('input', input)
 
-    wrapper.find('.carousel__controls__item')[2].trigger('click')
+    wrapper.find('.v-carousel__controls__item')[2].trigger('click')
     await wrapper.vm.$nextTick()
     expect(input).toBeCalledWith(2)
   })

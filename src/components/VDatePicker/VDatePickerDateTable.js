@@ -1,17 +1,20 @@
 // Mixins
 import Colorable from '../../mixins/colorable'
 import DatePickerTable from './mixins/date-picker-table'
+import Themeable from '../../mixins/themeable'
 
 // Utils
 import { pad, createNativeLocaleFormatter, monthChange } from './util'
 import { createRange } from '../../util/helpers'
 
+/* @vue/component */
 export default {
   name: 'v-date-picker-date-table',
 
   mixins: [
     Colorable,
-    DatePickerTable
+    DatePickerTable,
+    Themeable
   ],
 
   props: {
@@ -67,7 +70,7 @@ export default {
         eventColor = this.eventColor[date]
       }
       return this.$createElement('div', {
-        staticClass: 'date-picker-table__event',
+        staticClass: 'v-date-picker-table__event',
         class: this.addBackgroundColorClassChecks({}, eventColor || this.color)
       })
     },
@@ -118,8 +121,8 @@ export default {
     }
   },
 
-  render (h) {
-    return this.genTable('date-picker-table date-picker-table--date', [
+  render () {
+    return this.genTable('v-date-picker-table v-date-picker-table--date', [
       this.genTHead(),
       this.genTBody()
     ])

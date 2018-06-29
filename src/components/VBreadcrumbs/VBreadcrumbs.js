@@ -1,5 +1,6 @@
 import '../../stylus/components/_breadcrumbs.styl'
 
+/* @vue/component */
 export default {
   name: 'v-breadcrumbs',
 
@@ -16,7 +17,7 @@ export default {
   computed: {
     classes () {
       return {
-        'breadcrumbs--large': this.large
+        'v-breadcrumbs--large': this.large
       }
     },
     computedDivider () {
@@ -49,7 +50,7 @@ export default {
 
       const h = this.$createElement
       const children = []
-      const dividerData = { staticClass: 'breadcrumbs__divider' }
+      const dividerData = { staticClass: 'v-breadcrumbs__divider' }
 
       let createDividers = false
       for (let i = 0; i < this.$slots.default.length; i++) {
@@ -75,7 +76,7 @@ export default {
 
   render (h) {
     return h('ul', {
-      staticClass: 'breadcrumbs',
+      staticClass: 'v-breadcrumbs',
       'class': this.classes,
       style: this.styles
     }, this.genChildren())

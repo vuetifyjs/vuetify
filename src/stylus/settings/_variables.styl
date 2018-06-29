@@ -16,7 +16,7 @@ $grid-breakpoints := {
   xl: (1920px - 16px) // https://material.io/guidelines/layout/responsive-ui.html#responsive-ui-breakpoints
 }
 
-$grid-gutter = 8px
+$grid-gutter := 8px
 $grid-columns := 12
 $grid-gutters := {
   xs: ($grid-gutter / 4)
@@ -93,13 +93,14 @@ $font-weights := {
 
 // Headings
 // ============================================================
+$heading-font-family := $body-font-family
 $headings := {
-  h1: { size: 112px, weight: 300, line-height: 1, letter-spacing: -.04em },
-  h2: { size: 56px, weight: 400, line-height: 1.35, letter-spacing: -.02em },
-  h3: { size: 45px, weight: 400, line-height: 48px, letter-spacing: normal },
-  h4: { size: 34px, weight: 400, line-height: 40px, letter-spacing: normal },
-  h5: { size: 24px, weight: 400, line-height: 32px, letter-spacing: normal },
-  h6: { size: 20px, weight: 500, line-height: 1, letter-spacing: .02em },
+  h1: { size: 112px, weight: 300, line-height: 1, letter-spacing: -.04em, font-family: $heading-font-family },
+  h2: { size: 56px, weight: 400, line-height: 1.35, letter-spacing: -.02em, font-family: $heading-font-family },
+  h3: { size: 45px, weight: 400, line-height: 48px, letter-spacing: normal, font-family: $heading-font-family },
+  h4: { size: 34px, weight: 400, line-height: 40px, letter-spacing: normal, font-family: $heading-font-family },
+  h5: { size: 24px, weight: 400, line-height: 32px, letter-spacing: normal, font-family: $heading-font-family },
+  h6: { size: 20px, weight: 500, line-height: 1, letter-spacing: .02em, font-family: $heading-font-family },
   subheading: { size: 16px, weight: 400 },
   body-2: { size: 14px, weight: 500 },
   body-1: { size: 14px, weight: 400 },
@@ -202,7 +203,7 @@ $chip-outline-background := transparent !important
 $chip-outline-color := $grey.base
 $chip-height := 32px
 $chip-margin := 4px
-$chip-small-height := 26px
+$chip-small-height := 24px
 $chip-small-font-size := 20px
 $chip-icon-offset := 12px
 $chip-icon-negative-offset := -8px
@@ -291,16 +292,9 @@ $snackbar-corner-offset := 24px
 // Tab
 $tab-text-transform := uppercase
 
-/* Text Input */
-$input-group-padding := 18px 0 0
-$input-font-size := 16px
-$input-height := 30px
-$input-group-text-field-label-top := 18px
-
-
 // Directives
 // ============================================================
 
 // Ripple animation
-$ripple-animation-transition := .4s $transition.linear-out-slow-in
+$ripple-animation-transition := .3s $transition.linear-out-slow-in
 $ripple-animation-visible-opacity := .15

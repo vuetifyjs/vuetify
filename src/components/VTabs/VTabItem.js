@@ -11,13 +11,9 @@ import {
 
 import Touch from '../../directives/touch'
 
+/* @vue/component */
 export default {
   name: 'v-tab-item',
-
-  mixins: [
-    Bootable,
-    RegistrableInject('tabs', 'v-tab-item', 'v-tabs-items')
-  ],
 
   components: {
     VTabTransition,
@@ -28,12 +24,10 @@ export default {
     Touch
   },
 
-  data () {
-    return {
-      isActive: false,
-      reverse: false
-    }
-  },
+  mixins: [
+    Bootable,
+    RegistrableInject('tabs', 'v-tab-item', 'v-tabs-items')
+  ],
 
   props: {
     id: String,
@@ -47,17 +41,16 @@ export default {
     }
   },
 
-  computed: {
-    computedTransition () {
-      return this.reverse ? this.reverseTransition : this.transition
+  data () {
+    return {
+      isActive: false,
+      reverse: false
     }
   },
 
-  methods: {
-    toggle (target, reverse, showTransition, index) {
-      this.$el.style.transition = !showTransition ? 'none' : null
-      this.reverse = reverse
-      this.isActive = (this.id || index.toString()) === target
+  computed: {
+    computedTransition () {
+      return this.reverse ? this.reverseTransition : this.transition
     }
   },
 
@@ -69,9 +62,18 @@ export default {
     this.tabs.unregister(this)
   },
 
+  methods: {
+    toggle (target, reverse, showTransition, index) {
+      this.$el.style.transition = !showTransition ? 'none' : null
+      this.reverse = reverse
+      this.isActive = this.id === target ||
+        index === target
+    }
+  },
+
   render (h) {
     const data = {
-      staticClass: 'tabs__content',
+      staticClass: 'v-tabs__content',
       directives: [{
         name: 'show',
         value: this.isActive

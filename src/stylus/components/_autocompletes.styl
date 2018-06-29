@@ -1,0 +1,28 @@
+.v-autocomplete
+  &.v-input,
+  .v-menu__activator,
+  .v-menu__activator *
+    cursor: text
+
+  input
+    align-self: center
+
+  &--is-selecting-index
+    input
+      opacity: 0
+
+  // When a single select, does not have
+  // selections padding
+  &.v-text-field--enclosed:not(.v-text-field--solo)
+    .v-select__slot > input
+      margin-top: 24px
+
+  &:not(.v-input--is-disabled).v-select.v-text-field
+    input
+      pointer-events: auto
+
+  &__content.v-menu__content
+    border-radius: 0
+
+    .v-card
+      border-radius: 0

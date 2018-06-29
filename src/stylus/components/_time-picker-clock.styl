@@ -2,7 +2,7 @@
 @import '../theme'
 
 /** Themes */
-time-picker-clock($material)
+v-time-picker-clock($material)
   background: $material.picker.clock
 
   > span.disabled
@@ -12,7 +12,7 @@ time-picker-clock($material)
       color: $material-dark.buttons.disabled
 
   &--indeterminate
-    .time-picker-clock__hand
+    .v-time-picker-clock__hand
       background-color: $material.picker.indeterminateTime
 
       &:after
@@ -21,9 +21,9 @@ time-picker-clock($material)
     > span.active
       background-color: $material.picker.indeterminateTime
 
-theme(time-picker-clock, "time-picker-clock")
+theme(v-time-picker-clock, "v-time-picker-clock")
 
-.time-picker-clock
+.v-time-picker-clock
   border-radius: 100%
   position: relative
   transition: $primary-transition

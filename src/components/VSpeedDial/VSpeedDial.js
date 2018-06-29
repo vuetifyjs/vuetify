@@ -6,12 +6,13 @@ import Transitionable from '../../mixins/transitionable'
 
 import ClickOutside from '../../directives/click-outside'
 
+/* @vue/component */
 export default {
   name: 'v-speed-dial',
 
-  mixins: [Positionable, Toggleable, Transitionable],
-
   directives: { ClickOutside },
+
+  mixins: [Positionable, Toggleable, Transitionable],
 
   props: {
     direction: {
@@ -31,14 +32,14 @@ export default {
   computed: {
     classes () {
       return {
-        'speed-dial': true,
-        'speed-dial--top': this.top,
-        'speed-dial--right': this.right,
-        'speed-dial--bottom': this.bottom,
-        'speed-dial--left': this.left,
-        'speed-dial--absolute': this.absolute,
-        'speed-dial--fixed': this.fixed,
-        [`speed-dial--direction-${this.direction}`]: true
+        'v-speed-dial': true,
+        'v-speed-dial--top': this.top,
+        'v-speed-dial--right': this.right,
+        'v-speed-dial--bottom': this.bottom,
+        'v-speed-dial--left': this.left,
+        'v-speed-dial--absolute': this.absolute,
+        'v-speed-dial--fixed': this.fixed,
+        [`v-speed-dial--direction-${this.direction}`]: true
       }
     }
   },
@@ -70,7 +71,7 @@ export default {
     }
 
     const list = h('transition-group', {
-      'class': 'speed-dial__list',
+      'class': 'v-speed-dial__list',
       props: {
         name: this.transition,
         mode: this.mode,

@@ -5,15 +5,17 @@
  *
  * Used for creating the DOM elements for VMenu
  */
+/* @vue/component */
 export default {
   methods: {
     genActivator () {
       if (!this.$slots.activator) return null
 
       const options = {
-        staticClass: 'menu__activator',
+        staticClass: 'v-menu__activator',
         'class': {
-          'menu__activator--active': this.hasJustFocused || this.isActive
+          'v-menu__activator--active': this.hasJustFocused || this.isActive,
+          'v-menu__activator--disabled': this.disabled
         },
         ref: 'activator',
         on: {}
@@ -41,7 +43,7 @@ export default {
 
     genDirectives () {
       // Do not add click outside for hover menu
-      const directives = !this.openOnHover ? [{
+      const directives = !this.openOnHover && this.closeOnClick ? [{
         name: 'click-outside',
         value: () => (this.isActive = false),
         args: {
@@ -60,9 +62,11 @@ export default {
 
     genContent () {
       const options = {
-        staticClass: 'menu__content',
+        attrs: this.getScopeIdAttrs(),
+        staticClass: 'v-menu__content',
         'class': {
           [this.contentClass.trim()]: true,
+          'v-menu__content--auto': this.auto,
           'menuable__content__active': this.isActive,
           'theme--dark': this.dark,
           'theme--light': this.light

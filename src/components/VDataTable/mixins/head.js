@@ -3,11 +3,12 @@ import { consoleWarn } from '../../../util/console'
 import VCheckbox from '../../VCheckbox'
 import VIcon from '../../VIcon'
 
+/* @vue/component */
 export default {
   props: {
     sortIcon: {
       type: String,
-      default: 'arrow_upward'
+      default: '$vuetify.icons.sort'
     }
   },
 
