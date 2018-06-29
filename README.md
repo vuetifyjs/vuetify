@@ -1,4 +1,3 @@
-
 <p align="center">
   <a href="https://vuetifyjs.com" target="_blank">
     <img width="100"src="https://vuetifyjs.com/static/doc-images/logo.svg">
@@ -39,7 +38,23 @@
 
 <br>
 
-<h2 align="center">Supporting Vuetify</h2>
+<h2 align="center">Professionally-supported Vuetify.js now available</h2>
+<p>Tidelift gives software development teams a single source for purchasing and maintaining their software, with professional-grade assurances from the experts who know it best, while seamlessly integrating with existing tools.</p>
+
+<div align="center">
+  <a href="http://tidelift.com/subscription/npm/vuetify">
+    <p align="center">
+      <img src="https://pbs.twimg.com/profile_images/953693944528896006/7pSbgJHd_bigger.jpg" alt="Get supported with Tidelift" />
+    </p>
+    <p align="center">
+      Get supported Vuetify.js with the Tidelift Subscription
+    </p>
+  </a>
+</div>
+
+<br>
+
+<h2 align="center">Supporting through Patreon</h2>
 <p>Vuetify is an open source MIT project that has been made possible due to the generous contributions by <a href="https://github.com/vuetifyjs/vuetify/blob/dev/BACKERS.md">community backers</a>. If you are interested in supporting this project, please consider becoming a patron.</p>
 
 <p align="center">
@@ -47,11 +62,7 @@
     <img src="https://c5.patreon.com/external/logo/become_a_patron_button.png" alt="Become a Patron" />
   </a>
 </p>
-
-<br>
-<h3 align="center">Patrons</h3>
-
-<h4 align="center">Diamond</h4>
+<p align="center"><b>Diamond</b></p>
 
 <p align="center">
   <a href="https://careers.lmax.com/?utm_source=vuetify&utm_medium=github-link&utm_campaign=lmax-careers">
@@ -97,7 +108,7 @@ Vuetify supports all **modern browsers**, including IE11 and Safari 9+ (using po
 
 You can find the Vuetify documentation <a href="https://vuetifyjs.com" target="_blank">on the website</a>.
 
-## One minute Quick-start
+## One Click Quick-start
 
 [Codepen link](https://codepen.io/johnjleider/pen/jYZwVZ)
 ```html
@@ -109,11 +120,18 @@ You can find the Vuetify documentation <a href="https://vuetifyjs.com" target="_
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 </head>
 <body>
-  <div id="app">
+  <div>
     <v-app>
+      <v-toolbar app>
+        <v-toolbar-title>My Application</v-toolbar-title>
+      </v-toolbar>
+      <v-navigation-drawer app></v-navigation-drawer>
       <v-content>
-        <v-container>Hello world</v-container>
+        <v-container fluid>
+          Hello World
+        </v-container>
       </v-content>
+      <v-footer></v-footer>
     </v-app>
   </div>
 
@@ -126,6 +144,14 @@ You can find the Vuetify documentation <a href="https://vuetifyjs.com" target="_
   </script>
 </body>
 </html>
+```
+
+## Vue CLI-3 Install
+
+``` bash
+vue create my-app
+// THEN
+vue add vuetify
 ```
 
 ## Installation
