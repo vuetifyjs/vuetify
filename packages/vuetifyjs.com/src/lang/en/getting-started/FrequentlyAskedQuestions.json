@@ -60,7 +60,7 @@
     },
     {
       "q": "Relative images are not working in `v-card` components",
-      "a": "Vue loader converts relative paths into require functions automatically for you. Unfortunately, this is not the case when it comes to custom components. You can circumvent this issue by using `require`.<br><br>`<v-card :src=\"require(\"path/to/img/img.jpg\")\""
+      "a": "Vue loader converts relative paths into require functions automatically for you. Unfortunately, this is not the case when it comes to custom components. You can circumvent this issue by using `require`.<br><br>`<v-card :src=\"require('path/to/img/img.jpg')\">`"
     }
   ],
   "questionHeader": "Have something that you think belongs here?",
