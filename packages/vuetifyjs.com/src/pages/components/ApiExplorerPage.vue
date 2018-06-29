@@ -192,7 +192,7 @@
           namespace = 'Motion'
           subtext = 'Transition'
           icon = 'mdi-clock-fast'
-        } else if (api[text] && api[text].props.length === 0) {
+        } else if (api[text] && api[text].props && api[text].props.length === 0) {
           namespace = 'Components'
           subtext = 'Functional Components'
           icon = 'mdi-view-stream'
