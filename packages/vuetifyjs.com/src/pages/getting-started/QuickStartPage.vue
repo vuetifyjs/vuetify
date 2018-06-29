@@ -28,7 +28,7 @@
         markup(lang="bash")
           | $ yarn global add @vue/cli
           | // OR
-          | $ npm install vue-cli -g
+          | $ npm install @vue/cli -g
 
         app-alert(info :value="`${namespace}.vueCliText2`")
 
