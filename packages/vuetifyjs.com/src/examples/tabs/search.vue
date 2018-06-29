@@ -10,7 +10,7 @@
         class="mx-3"
         flat
         label="Search"
-        prepend-icon="search"
+        prepend-inner-icon="search"
         solo-inverted
       ></v-text-field>
 
