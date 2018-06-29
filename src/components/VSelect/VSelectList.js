@@ -139,9 +139,7 @@ export default {
       item,
       disabled = null,
       avatar = false,
-      value = this.parsedItems.indexOf(
-        this.getValue(item)
-      ) !== -1
+      value = this.hasItem(item)
     ) {
       if (item === Object(item)) {
         avatar = this.getAvatar(item)
@@ -192,6 +190,9 @@ export default {
         })]
       )
     },
+    hasItem (item) {
+      return this.parsedItems.indexOf(this.getValue(item)) > -1
+    },
     needsTile (tile) {
       return tile.componentOptions == null ||
         tile.componentOptions.Ctor.options.name !== 'v-list-tile'
@@ -214,7 +215,7 @@ export default {
     const children = []
     for (const item of this.items) {
       if (this.hideSelected &&
-        this.selectedItems.indexOf(item) > -1
+        this.hasItem(item)
       ) continue
 
       if (item.header) children.push(this.genHeader(item))

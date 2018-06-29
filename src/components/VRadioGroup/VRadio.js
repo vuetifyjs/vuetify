@@ -137,7 +137,7 @@ export default {
           'aria-checked': this.isActive.toString(),
           ...this.$attrs
         }),
-        this.genRipple(this.setTextColor(this.computedColor)),
+        !this.isDisabled && this.genRipple(this.setTextColor(this.computedColor)),
         this.$createElement(VIcon, this.setTextColor(this.computedColor), this.computedIcon)
       ])
     },
