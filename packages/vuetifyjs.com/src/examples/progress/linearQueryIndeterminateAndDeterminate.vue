@@ -31,16 +31,19 @@
         this.query = true
         this.show = true
         this.value = 0
-        this.query = false
 
-        this.interval = setInterval(() => {
-          if (this.value === 100) {
-            clearInterval(this.interval)
-            this.show = false
-            return setTimeout(this.queryAndIndeterminate, 2000)
-          }
-          this.value += 25
-        }, 1000)
+        setTimeout(() => {
+          this.query = false
+
+          this.interval = setInterval(() => {
+            if (this.value === 100) {
+              clearInterval(this.interval)
+              this.show = false
+              return setTimeout(this.queryAndIndeterminate, 2000)
+            }
+            this.value += 25
+          }, 1000)
+        }, 2500)
       }
     }
   }
