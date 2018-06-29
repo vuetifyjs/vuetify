@@ -63,11 +63,10 @@ export default {
   },
 
   methods: {
-    toggle (target, reverse, showTransition, index) {
+    toggle (isActive, reverse, showTransition) {
       this.$el.style.transition = !showTransition ? 'none' : null
       this.reverse = reverse
-      this.isActive = this.id === target ||
-        index === target
+      this.isActive = isActive
     }
   },
 
