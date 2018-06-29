@@ -589,7 +589,8 @@
   "textarea": {
     "components": ["v-textarea"],
     "examples": [
-      "multiLine"
+      "multiLine",
+      "autoGrow"
     ],
     "spec": false
   },

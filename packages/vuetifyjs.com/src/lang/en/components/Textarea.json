@@ -1,10 +1,14 @@
 {
   "header": "Textarea",
   "headerText": "Textarea components are used for collecting large amounts of textual data.",
-  "examples": [{
+  "examples": {
     "multiLine": {
       "header": "Multi-Line",
       "desc": "A multi-line text-field is useful for larger amounts of text."
+    },
+    "autoGrow": {
+      "header": "Auto grow",
+      "desc": "Textarea can automatically resize when entered text exceeds its size."
     }
-  }]
+  }
 }
