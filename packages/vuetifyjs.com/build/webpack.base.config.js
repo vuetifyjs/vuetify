@@ -1,35 +1,51 @@
+require('dotenv').config()
+
 const path = require('path')
 const webpack = require('webpack')
 const vueConfig = require('./vue-loader.config')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 const isProd = process.env.NODE_ENV === 'production'
 const resolve = (file) => path.resolve(__dirname, file)
 
-let plugins = []
+let plugins = [
+  new webpack.DefinePlugin({
+    'process.env': JSON.stringify(process.env)
+  }),
+  new VueLoaderPlugin()
+]
 
 module.exports = {
   devtool: isProd
     ? false
-    : 'eval-source-map',
+    : 'source-map',
+  mode: isProd ? 'production' : 'development',
   output: {
-    path: resolve('../public'),
-    publicPath: '/public/',
+    path: resolve('../dist'),
+    publicPath: '/dist/',
     filename: '[name].[chunkhash].js',
     chunkFilename: '[name].[chunkhash].js'
   },
   resolve: {
     extensions: ['*', '.js', '.json', '.vue'],
     alias: {
-      '@': path.resolve(__dirname, '../'),
-      'vue$': 'vue/dist/vue.common.js'
+      '@': path.resolve(__dirname, '../src'),
+      // Make sure *our* version of vue is always loaded. This is needed for `yarn link vuetify` to work
+      'vue$': path.resolve(__dirname, '../node_modules/vue/dist/vue.common.js')
     },
     symlinks: false
   },
   module: {
     noParse: /es6-promise\.js$/, // avoid webpack shimming process
     rules: [
+      {
+        // Load sourcemaps from vuetify, both css + js
+        test: /\.(js|css)$/,
+        loader: 'source-map-loader',
+        include: path.resolve(__dirname, '../node_modules/vuetify'),
+        enforce: 'pre'
+      },
       {
         test: /\.vue$/,
         loader: 'vue-loader',
@@ -41,17 +57,8 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          loader: 'css-loader',
-          options: {
-            minimize: isProd
-          }
-        })
-      },
-      {
-        test: /\.styl$/,
-        loader: ['style-loader', `css-loader?minimize=${isProd}`, 'stylus-loader']
+        test: /\.pug$/,
+        loader: 'pug-plain-loader'
       },
       {
         test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)(\?.*)?$/,
@@ -67,18 +74,10 @@ module.exports = {
     maxEntrypointSize: 300000,
     hints: isProd ? 'warning' : false
   },
+  stats: { children: false },
   plugins
 }
 
 plugins.push(
-  new ExtractTextPlugin({
-    filename: 'common.[chunkhash].css'
-  }),
   new FriendlyErrorsPlugin()
-)
-
-isProd && plugins.push(
-  new webpack.optimize.UglifyJsPlugin({
-    compress: { warnings: false }
-  })
 )
