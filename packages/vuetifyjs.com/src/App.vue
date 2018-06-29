@@ -41,10 +41,10 @@
       this.snackbar({
         color: 'default',
         close: true,
-        id: 'may-2018-update-19449773',
-        text: 'Go To Update',
-        msg: '**New Patreon Update** — _May 2018 Update_',
-        href: 'https://www.patreon.com/posts/may-2018-update-19449773',
+        id: 'v1-docs-link',
+        text: 'v1.0 Docs',
+        msg: 'If you need v1.0 docs navigate here',
+        href: 'https://v1.vuetifyjs.com',
         timeout: 0
       })
     },
