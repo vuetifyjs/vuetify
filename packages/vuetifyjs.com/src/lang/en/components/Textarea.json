@@ -1,0 +1,10 @@
+{
+  "header": "Textarea",
+  "headerText": "Textarea components are used for collecting large amounts of textual data.",
+  "examples": [{
+    "multiLine": {
+      "header": "Multi-Line",
+      "desc": "A multi-line text-field is useful for larger amounts of text."
+    }
+  }]
+}

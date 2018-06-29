@@ -1,0 +1,668 @@
+{
+  "alerts": {
+    "components": ["v-alert"],
+    "examples": [
+      "contextual",
+      "closable",
+      "icon",
+      "transition",
+      "outline"
+    ],
+    "spec": false
+  },
+  "autocompletes": {
+    "components": [
+      "v-autocomplete"
+    ],
+    "examples": [
+      { "file": "autocomplete", "newIn": "1.1" },
+      { "file": "api", "newIn": "1.1" },
+      { "file": "scopedSlots", "newIn": "1.1" },
+      { "file": "customFilter", "newIn": "1.1" },
+      { "file": "asynchronous", "newIn": "1.1" },
+      { "file": "advanced", "newIn": "1.1" }
+    ]
+  },
+  "avatars": {
+    "components": ["v-avatar"],
+    "examples": [
+      "standard",
+      "advanced",
+      "iconAndText"
+    ],
+    "spec": false
+  },
+  "badges": {
+    "components": ["v-badge"],
+    "examples": [
+      "character",
+      "overlap",
+      "inline",
+      "icon",
+      "visibility"
+    ],
+    "spec": false
+  },
+  "bottom-navigation": {
+    "components": ["v-bottom-nav"],
+    "examples": [
+      "iconsAndText",
+      "colorAndShift",
+      "toggle"
+    ],
+    "spec": false
+  },
+  "bottom-sheets": {
+    "components": ["v-bottom-sheet"],
+    "examples": [
+      "standard",
+      "inset"
+    ],
+    "spec": false
+  },
+  "breadcrumbs": {
+    "components": [
+      "v-breadcrumbs",
+      "v-breadcrumbs-item"
+    ],
+    "examples": [
+      "textDividers",
+      "iconDividers"
+    ],
+    "spec": false
+  },
+  "buttons": {
+    "components": ["v-btn"],
+    "examples": [
+      "usage",
+      "flat",
+      "raised",
+      "depressed",
+      "dropdown",
+      "toggle",
+      "icon",
+      "floating",
+      "loaders",
+      "sizing",
+      "outline",
+      "round",
+      "block",
+      {
+        "file": "appBar" ,
+        "newIn": "1.1"
+      }
+    ],
+    "spec": false
+  },
+  "cards": {
+    "components": [
+      "v-card",
+      "v-card-media",
+      "v-card-title",
+      "v-card-actions"
+    ],
+    "examples": [
+      "components",
+      "mediaWithText",
+      "horizontal",
+      "grids",
+      "customActions"
+    ],
+    "spec": false
+  },
+  "carousels": {
+    "components": [
+      "v-carousel",
+      "v-carousel-item"
+    ],
+    "examples": [
+      "default",
+      "customTransition",
+      "customIcons",
+      "hideControls",
+      "hideDelimiters"
+    ],
+    "spec": false
+  },
+  "chips": {
+    "components": ["v-chip"],
+    "examples": [
+      "default",
+      "colored",
+      "icon",
+      "outline",
+      "label",
+      "closable",
+      "inSelects"
+    ],
+    "spec": false
+  },
+  "combobox": {
+    "components": [
+      "v-combobox"
+    ],
+    "examples": [
+      { "file": "combobox", "newIn": "1.1" },
+      "noData",
+      { "file": "advanced", "newIn": "1.1" },
+      "comboboxMultiple"
+    ]
+  },
+  "data-iterator": {
+    "components": ["v-data-iterator"],
+    "examples": [
+      "simple",
+      "slots"
+    ],
+    "spec": false
+  },
+  "data-tables": {
+    "components": [
+      "v-data-table",
+      "v-edit-dialog"
+    ],
+    "examples": [
+      "standard",
+      "noData",
+      "headers",
+      "headerCell",
+      "progress",
+      "footer",
+      "expand",
+      "pageText",
+      "select",
+      "search",
+      "customIcons",
+      "paginate",
+      "sort",
+      "server",
+      "headerless",
+      "editdialog",
+      "crud"
+    ],
+    "spec": false
+  },
+  "date-pickers": {
+    "components": ["v-date-picker"],
+    "examples": [
+      "dateLight",
+      "dateColorable",
+      "dateDialogAndMenu",
+      "dateFormatting",
+      "dateAllowedDates",
+      "dateWidth",
+      "dateBirthday",
+      "datePickerDate",
+      "dateEvents",
+      "dateInternationalization",
+      "dateIcons",
+      "dateReadonly",
+      "dateCurrent",
+      "monthLight",
+      "monthColorable",
+      "monthDialogAndMenu",
+      "monthAllowedMonths",
+      "monthWidth",
+      "monthInternationalization",
+      "monthIcons",
+      "monthReadonly",
+      "monthCurrent"
+    ],
+    "spec": false
+  },
+  "dialogs": {
+    "components": ["v-dialog"],
+    "examples": [
+      "simple",
+      "withoutActivator",
+      "modal",
+      "fullscreen",
+      "form",
+      "scrollable",
+      "overflowed",
+      "advanced",
+      "loader"
+    ],
+    "spec": false
+  },
+  "dividers": {
+    "components": ["v-divider"],
+    "examples": [
+      "fullBleed",
+      "lightAndDark",
+      "inset",
+      "subheaders",
+      "dividerList",
+      "dividerListPortrait",
+      { "file": "vertical", "newIn": "1.1" }
+    ],
+    "spec": false
+  },
+  "expansion-panels": {
+    "components": [
+      "v-expansion-panel",
+      "v-expansion-panel-content"
+    ],
+    "examples": [
+      "accordion",
+      "expand",
+      "external",
+      "disabledAndReadonly",
+      "popout",
+      "customIcons",
+      "focusable"
+    ],
+    "spec": false
+  },
+  "floating-action-buttons": {
+    "components": [
+      "v-speed-dial",
+      "v-btn"
+    ],
+    "examples": [
+      "promotedAction",
+      "small",
+      "displayAnimation",
+      "lateralScreens",
+      "speedDial"
+    ],
+    "spec": false
+  },
+  "footer": {
+    "components": ["v-footer"],
+    "examples": [
+      "default",
+      "companyFooter",
+      "indigoFooter",
+      "tealFooter"
+    ],
+    "spec": false
+  },
+  "forms": {
+    "components": ["v-form"],
+    "examples": [
+      "basicValidation",
+      "validationWithSubmitAndClear",
+      "vuelidate",
+      "veeValidate"
+    ],
+    "spec": false
+  },
+  "grid": {
+    "components": ["v-container", "v-layout", "v-flex", "v-spacer"],
+    "examples": [
+      "grid",
+      "offset",
+      "order",
+      "directionAndAlign",
+      "rowColumnBreakpoint",
+      "nestedGrid",
+      "uniqueLayouts",
+      "spacer",
+      "tags"
+    ],
+    "spec": false
+  },
+  "grid-lists": {
+    "components": ["v-container", "v-layout", "v-flex", "v-spacer"],
+    "examples": [
+      "default",
+      "subheader"
+    ],
+    "spec": false
+  },
+  "icons": {
+    "components": ["v-icon"],
+    "examples": [
+      "standard",
+      "fontAwesome",
+      "mdi",
+      "color",
+      "buttons",
+      {
+        "file": "clickable",
+        "newIn": "1.1"
+      }
+    ],
+    "spec": false
+  },
+  "inputs": {
+    "components": ["v-input"],
+    "examples": ["usage"],
+    "spec": false
+  },
+  "jumbotrons": {
+    "components": ["v-jumbotron"],
+    "examples": [
+      "usage",
+      "color",
+      "gradient",
+      "gradientWithImage"
+    ],
+    "spec": false
+  },
+  "lists": {
+    "components": [
+      "v-list",
+      "v-list-tile",
+      "v-list-group",
+      "v-list-tile-action",
+      "v-list-tile-avatar",
+      "v-list-tile-content",
+      "v-list-tile-title",
+      "v-list-tile-sub-title",
+      "v-list-tile-action-text"
+    ],
+    "examples": [
+      "avatarTwoLines",
+      "avatarTitleAndAction",
+      "iconTwoLinesAndAction",
+      "avatarThreeLines",
+      "avatarSubheaderTitleAndAction",
+      "subheadingsAndDividers",
+      "cardList",
+      "titleSubtitleActionsAndActionText",
+      "actionTitleAndSubtitle",
+      "expansionLists"
+    ],
+    "spec": false
+  },
+  "menus": {
+    "components": ["v-menu"],
+    "examples": [
+      "activator",
+      "absolute",
+      "absoluteWithoutActivator",
+      "hover",
+      "menus",
+      "customTransition",
+      "popover"
+    ],
+    "spec": false
+  },
+  "navigation-drawers": {
+    "components": ["v-navigation-drawer"],
+    "examples": [
+      "permanent",
+      "permanentClipped",
+      "permanentFloating",
+      "persistent",
+      "mini",
+      "temporary",
+      "dark",
+      "combined",
+      "nested"
+    ],
+    "spec": false
+  },
+  "overflow-btns": {
+    "components": ["v-overflow-btn"],
+    "examples": [],
+    "spec": false
+  },
+  "paginations": {
+    "components": ["v-pagination"],
+    "examples": [
+      "short",
+      "long",
+      "limit",
+      "round",
+      "icons",
+      "disabled"
+    ],
+    "spec": false
+  },
+  "parallax": {
+    "components": ["v-parallax"],
+    "examples": [
+      "default",
+      "content",
+      "customHeight"
+    ],
+    "spec": false
+  },
+  "progress": {
+    "components": [
+      "v-progress-circular",
+      "v-progress-linear"
+    ],
+    "examples": [
+      "circularDefault",
+      "circularColored",
+      "circularIndeterminate",
+      "circularSizeAndWidth",
+      "circularRotate",
+      "linearDeterminate",
+      "linearIndeterminate",
+      "linearBuffer",
+      "linearQueryIndeterminateAndDeterminate",
+      "linearCustomHeightAndContextualColors",
+      "linearCustomColors"
+    ],
+    "spec": false
+  },
+  "resizing": {
+    "components": ["v-resize"],
+    "examples": [
+      "default"
+    ]
+  },
+  "ripples": {
+    "components": ["v-ripple"],
+    "examples": [
+      "buttons",
+      "customColor",
+      "tabs",
+      "navigationDrawers",
+      "toolbars",
+      "expansionPanels",
+      "customRipple",
+      "htmlElement"
+    ],
+    "spec": false
+  },
+  "scrolling": {
+    "components": ["$vuetify"],
+    "examples": [
+      "usage"
+    ],
+    "spec": false
+  },
+  "selection-controls": {
+    "components": [
+      "v-radio-group",
+      "v-radio",
+      "v-checkbox",
+      "v-switch"
+    ],
+    "examples": [
+      "example",
+      "checkboxesBoolean",
+      "checkboxesArray",
+      "checkboxesStates",
+      "checkboxesColors",
+      "checkboxesInlineTexfield",
+      "radiosDefault",
+      "radiosDirection",
+      "radiosColors",
+      "switchesBoolean",
+      "switchesArray",
+      "switchesStates",
+      "switchesColors"
+    ],
+    "spec": false
+  },
+  "selects": {
+    "components": ["v-select"],
+    "examples": [
+      "usage",
+      "light",
+      "icons",
+      "multiple",
+      "customTextAndValue"
+    ],
+    "spec": false
+  },
+  "sliders": {
+    "components": ["v-slider", "v-range-slider"],
+    "examples": [
+      "usage",
+      "thumb",
+      { "file": "customThumb", "newIn": "1.1" },
+      { "file": "ticks", "newIn": "1.1" },
+      "discrete",
+      "icons",
+      "editableNumericValue",
+      "customColors",
+      "validation",
+      { "file": "range", "newIn": "1.1" },
+      "minMax"
+    ],
+    "spec": false
+  },
+  "snackbars": {
+    "components": ["v-snackbar"],
+    "examples": [
+      "position",
+      "contextual"
+    ],
+    "spec": false
+  },
+  "steppers": {
+    "components": [
+      "v-stepper",
+      "v-stepper-step",
+      "v-stepper-content",
+      "v-stepper-header"
+    ],
+    "examples": [
+      "example",
+      "editable",
+      "nonEditable",
+      "optional",
+      "horizontal",
+      "vertical",
+      "linear",
+      "nonLinear",
+      "alternateLabels",
+      "error",
+      "alternateError",
+      "verticalError",
+      "dynamic"
+    ],
+    "spec": false
+  },
+  "subheaders": {
+    "components": ["v-subheader"],
+    "examples": [
+      "list",
+      "grid",
+      "menu",
+      "social"
+    ],
+    "spec": false
+  },
+  "tabs": {
+    "components": [
+      "v-tabs",
+      "v-tab",
+      "v-tabs-items",
+      "v-tab-item",
+      "v-tabs-slider"
+    ],
+    "examples": [
+      "toolbar",
+      "fixedTabs",
+      "right",
+      "content",
+      "search",
+      "iconsAndText",
+      "desktop",
+      "alignWithTitle",
+      "grow",
+      "overflowToMenu",
+      "pagination",
+      "icons"
+    ],
+    "spec": false
+  },
+  "textarea": {
+    "components": ["v-textarea"],
+    "examples": [
+      "multiLine"
+    ],
+    "spec": false
+  },
+  "text-fields": {
+    "components": ["v-text-field"],
+    "examples": [
+      "usage",
+      "singleLine",
+      "disabledAndReadonly",
+      "icon",
+      "clearable",
+      "iconEvents",
+      "characterCounter",
+      "password",
+      "validation",
+      "fullWidthWithCharacterCounter",
+      "hint",
+      "prefixesAndSuffixes",
+      "customValidation",
+      "box",
+      "solo",
+      "outline",
+      "customColors",
+      "masks",
+      "progressBar"
+    ],
+    "spec": false
+  },
+  "time-pickers": {
+    "components": ["v-time-picker"],
+    "examples": [
+      "timeLight",
+      "timeColorable",
+      "timeDialogAndMenu",
+      "time24hFormat",
+      "timeAllowedTimes",
+      "timeWidth"
+    ],
+    "spec": false
+  },
+  "toolbars": {
+    "components": [
+      "v-toolbar",
+      "v-system-bar"
+    ],
+    "examples": [
+      "usage",
+      "appBar",
+      "appBarItems",
+      "appBarExtension",
+      "columnWidthWithHierarchy",
+      "flexibleAndCard",
+      "floatingWithSearch",
+      "variations",
+      "prominent",
+      "dense",
+      "scrolling",
+      "appBarMenu",
+      "systemBarsStatusWindow"
+    ],
+    "spec": false
+  },
+  "tooltips": {
+    "components": ["v-tooltip"],
+    "examples": [
+      "default",
+      "alignment",
+      "visibility"
+    ],
+    "spec": false
+  },
+  "touch-support": {
+    "components": ["v-touch"],
+    "examples": ["default"]
+  }
+}

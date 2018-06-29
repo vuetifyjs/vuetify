@@ -13,6 +13,9 @@ module.exports = {
     'plugin:vue/recommended',
     'standard'
   ],
+  plugins: [
+    'json'
+  ],
   globals: {
     docsearch: true
   },

@@ -1,38 +1,90 @@
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const base = require('./webpack.base.config')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+
+const isProd = process.env.NODE_ENV === 'production'
+
+const cssLoaders = [
+  isProd ? MiniCssExtractPlugin.loader : {
+    loader: 'vue-style-loader',
+    options: { sourceMap: !isProd }
+  },
+  {
+    loader: 'css-loader',
+    options: { sourceMap: !isProd }
+  }
+]
 
 const config = merge(base, {
   entry: {
-    app: './assets/entry-client.js'
+    app: './src/entry-client.js'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: cssLoaders
+      },
+      {
+        test: /\.stylus$/,
+        use: [
+          ...cssLoaders,
+          {
+            loader: 'stylus-loader',
+            options: { sourceMap: false } // stylus-loader sucks at sourcemaps
+          }
+        ]
+      }
+    ]
   },
   plugins: [
     // strip dev-only code in Vue source
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
       'process.env.VUE_ENV': '"client"'
     }),
-    // extract vendor chunks for better caching
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: function (module) {
-        // a module is extracted into the vendor chunk if...
-        return (
-          // it's inside node_modules
-          /node_modules/.test(module.context) &&
-          // and not a CSS file (due to extract-text-webpack-plugin limitation)
-          !(/\.css$/.test(module.request))
-        )
-      }
-    }),
-    // extract webpack runtime & manifest to avoid vendor chunk hash changing
-    // on every build.
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'manifest'
-    }),
     new VueSSRClientPlugin()
-  ]
+  ],
+  optimization: {
+    minimize: isProd,
+    runtimeChunk: 'single',
+    splitChunks: {
+      chunks: 'all',
+      minSize: 30000,
+      minChunks: 1,
+      maxAsyncRequests: 20,
+      maxInitialRequests: 5,
+      name: true,
+      cacheGroups: {
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true
+        },
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10
+        }
+      }
+    }
+  }
 })
+
+if (isProd) {
+  config.plugins.push(
+    new MiniCssExtractPlugin({
+      filename: 'common.[chunkhash].css'
+    })
+  )
+} else {
+  config.plugins.push(
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+      openAnalyzer: false
+    })
+  )
+}
 
 module.exports = config

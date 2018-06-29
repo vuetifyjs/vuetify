@@ -1,0 +1,59 @@
+{
+  "header": "Expansion Panel",
+  "headerText": "The `v-expansion-panel` component is useful for reducing vertical space with large amounts of information. The default functionality of the component is to only display one expansion-panel body at a time, however, with the `expandable` property, the expansion-panel can remain open until explicitly closed.",
+  "examples": {
+    "accordion": {
+      "header": "Accordion",
+      "desc": "Accordion expansion panels can only have 1 panel open at a time."
+    },
+    "expand": {
+      "header": "Expand",
+      "desc": "Expand expansion panels will stay open until closed. When providing a model, any value not specified will be interpreted at false.",
+      "uninverted": true
+    },
+    "external": {
+      "header": "External control",
+      "desc": "Expansion panels can be controlled externally by modifying the `v-model`. Its value corresponds to a zero-based index of the currently opened expansion panel content. If `expand` prop is used then it is an array of booleans where the index corresponds to the index of the content."
+    },
+    "disabledAndReadonly": {
+      "header": "Disabled and readonly",
+      "desc": "Both the expansion panel and its content supports the `disabled` and `readonly` props."
+    },
+    "popout": {
+      "header": "Popout & Inset",
+      "desc": "The expansion panel also has two alternative designs you can activate with the props `popout` and `inset`.",
+      "inverted": true
+    },
+    "customIcons": {
+      "header": "Custom icon",
+      "desc": "Expand action icon can be customized with `expand-icon` prop."
+    },
+    "focusable": {
+      "header": "Focusable",
+      "desc": "The expansion panel headers can be made focusable with the prop `focusable`.",
+      "uninverted": true
+    }
+  },
+  "props": {
+    "v-expansion-panel": {
+      "disabled": "Disables entire expansion panel",
+      "expand": "Leaves expansion-panel open when selecting another",
+      "focusable": "Makes the expansion panel headers focusable",
+      "inset": "Makes the expansion panel open with a inset style",
+      "popout": "Makes the expansion panel open with an popout style",
+      "readonly": "Makes entire expansion panel read only.",
+      "value": "Controls the opened/closed state of content in the expansion-panel. Corresponds to a zero-based index of the currently opened content. If `expand` prop is used then it is an array of booleans where the index corresponds to the index of the content."
+    },
+    "v-expansion-panel-content": {
+      "disabled": "Disables expansion panel content",
+      "expandIcon": "Set the expand action icon",
+      "hideActions": "Hide the expand icon in the content header",
+      "readonly": "Makes expansion panel content read only.",
+      "value": "Controls the opened/closed state of content"
+    }
+  },
+  "slots": {
+    "actions": "Expansion header actions",
+    "header": "Expansion header content"
+  }
+}

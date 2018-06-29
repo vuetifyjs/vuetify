@@ -1,0 +1,50 @@
+{
+  "header": "Slider",
+  "headerText": "Компонент `v-slider` является лучшей визуализацией ввода чисел. Он используется для обработки числовых пользовательских данных.",
+  "components": ["v-slider"],
+  "examples": {
+    "usage": {
+      "header": "Usage",
+      "desc": "Sliders reflect a range of values along a bar, from which users may select a single value. They are ideal for adjusting settings such as volume, brightness, or applying image filters."
+    },
+    "thumb": {
+      "header": "Thumb",
+      "desc": "You can display a `thumb-label` while sliding or always. It It can have a custom color by setting `thumb-color` and a custom size with `thumb-size`. With `always-dirty` its color will never change, even when on `min` value."
+    },
+    "ticks": {
+      "header": "Ticks",
+      "desc": "Tick marks represent predetermined values to which the user can move the slider."
+    },
+    "discrete": {
+      "header": "Дискретный",
+      "desc": "Дискретные слайдеры предлагают визуализатор, который отображает точное текущее значение. С помощью свойства `step` вы можете запретить выбор значений за пределами шагов."
+    },
+    "icons": {
+      "header": "Иконки",
+      "desc": "Вы можете добавлять иконки в слайдер с помощью свойств `append-icon` и `preend-icon`."
+    },
+    "editableNumericValue": {
+      "header": "С редактируемым числовым значением",
+      "desc": "Слайдеры можно комбинировать с другими компонентами для лучшего отображения."
+    },
+    "customColors": {
+      "header": "Пользовательские цвета",
+      "desc": "Вы можете использовать различные цвета используя свойства `color`, `track-color` и `thumb-color`."
+    },
+    "range": {
+      "header": "Range",
+      "desc": "Range sliders."
+    },
+    "minMax": {
+      "header": "Min & Max values",
+      "desc": "You can set `min` and `max` values of sliders."
+    }
+  },
+  "props": {
+    "step": "Если значение больше 0, задает интервал шагов для тиков",
+    "thumbColor": "Установка визуализации и цвета метки визуализации",
+    "thumbLabel": "Показать визуализатор",
+    "ticks": "",
+    "trackColor": "Устанавливает цвет дорожки"
+  }
+}
