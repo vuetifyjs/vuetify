@@ -79,23 +79,4 @@ test('VOverflowBtn', ({ mount }) => {
 
     expect(callback).toBeCalled()
   })
-
-  it('should call correct method on update self', async () => {
-    const updateCombobox = jest.fn()
-    const wrapper = mount(VOverflowBtn, {
-      methods: { updateCombobox }
-    })
-
-    wrapper.vm.updateSelf()
-
-    expect(updateCombobox).not.toBeCalled()
-
-    wrapper.setProps({ editable: true })
-
-    await wrapper.vm.$nextTick()
-
-    wrapper.vm.updateSelf()
-
-    expect(updateCombobox).toBeCalled()
-  })
 })
