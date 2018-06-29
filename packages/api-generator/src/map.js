@@ -317,6 +317,7 @@ module.exports = {
     ]
   },
   'v-autocomplete': VSelect,
+  'v-combobox': VSelect,
   'v-avatar': {
     slots: ['default']
   },
