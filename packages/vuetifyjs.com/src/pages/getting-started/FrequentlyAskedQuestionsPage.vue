@@ -2,26 +2,16 @@
   doc-view
     template(slot-scope="{ namespace }")
       section#frequently-asked-questions
-      v-text-field(
-        label="Search"
-        single-line
-        clearable
-        prepend-icon="filter_list"
-        solo
-        v-model="search"
-        ref="search"
-      ).mb-3
-      v-expansion-panel(expand).mb-5
-        v-expansion-panel-content(
-          v-for="(faq, i) in faqs"
-          v-bind:key="i"
-        )
-          div(slot="header").pr-5
-            markdown(:source="faq.q").question
-          v-divider
-          v-card(color="grey lighten-4")
-            v-card-text
-              markdown(:source="faq.a").answer
+      template(
+        v-for="(faq, i) in faqs"
+      )
+        div.subheading
+          markdown {{ faq.q }}
+        v-divider
+        v-card.mb-5.flat
+          v-card-text
+            markdown {{ faq.a }}
+
       v-fade-transition
         div(
           v-if="!faqs.length"
@@ -50,10 +40,6 @@
 
 <script>
   export default {
-    data: () => ({
-      search: ''
-    }),
-
     computed: {
       gotchas () {
         return this.$t('GettingStarted.FrequentlyAskedQuestions.gotchas')
