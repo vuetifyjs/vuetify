@@ -3,7 +3,7 @@
     template(slot-scope="{ namespace }")
       section#frequently-asked-questions
       template(
-        v-for="(faq, i) in faqs"
+        v-for="(faq, i) in gotchas"
       )
         div.subheading
           markdown {{ faq.q }}
@@ -11,17 +11,6 @@
         v-card.mb-5.flat
           v-card-text
             markdown {{ faq.a }}
-
-      v-fade-transition
-        div(
-          v-if="!faqs.length"
-        ).text-xs-center.mb-5
-          h3 {{ $t(`${namespace}.noResultsFound`) }}
-          v-btn(
-            color="primary"
-            flat
-            @click="resetSearch"
-          ) {{ $t(`${namespace}.resetSearch`) }}
 
       div.text-xs-center
         div.mb-3
@@ -43,21 +32,6 @@
     computed: {
       gotchas () {
         return this.$t('GettingStarted.FrequentlyAskedQuestions.gotchas')
-      },
-      faqs () {
-        return this.gotchas.filter(qa => {
-          const answer = qa.a.toLowerCase()
-          const question = qa.q.toLowerCase()
-          const search = (this.search || '').toLowerCase()
-          return answer.indexOf(search) > -1 ||
-            question.indexOf(search) > -1
-        })
-      }
-    },
-    methods: {
-      resetSearch () {
-        this.search = ''
-        this.$refs.search.focus()
       }
     }
   }
