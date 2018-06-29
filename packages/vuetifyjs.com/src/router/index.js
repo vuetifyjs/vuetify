@@ -84,7 +84,8 @@ export function createRouter (store) {
     id: 'UA-75262397-3',
     router,
     autoTracking: {
-      page: process.env.NODE_ENV !== 'development'
+      page: process.env.NODE_ENV !== 'development',
+      pageviewOnLoad: false
     },
     debug: process.env.DEBUG ? {
       enabled: true,
