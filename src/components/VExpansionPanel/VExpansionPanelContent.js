@@ -7,17 +7,11 @@ import { inject as RegistrableInject } from '../../mixins/registrable'
 
 import VIcon from '../VIcon'
 
-import ClickOutside from '../../directives/click-outside'
-
 import { consoleWarn } from '../../util/console'
 
 /* @vue/component */
 export default {
   name: 'v-expansion-panel-content',
-
-  directives: {
-    ClickOutside
-  },
 
   mixins: [Bootable, Toggleable, Rippleable, RegistrableInject('expansionPanel', 'v-expansion-panel-content', 'v-expansion-panel')],
 

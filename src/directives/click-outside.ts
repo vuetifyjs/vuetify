@@ -1,8 +1,24 @@
+import { VNodeDirective } from 'vue/types/vnode'
+
+interface ClickOutsideBindingArgs {
+  closeConditional?: (e: Event) => boolean
+  include?: () => HTMLElement[]
+}
+
+interface ClickOutsideDirective extends VNodeDirective {
+  value: (e: Event) => void
+  args?: ClickOutsideBindingArgs
+}
+
+interface ClickOutsideHTMLElement extends HTMLElement {
+  _clickOutside: EventListenerOrEventListenerObject
+}
+
 function closeConditional () {
   return false
 }
 
-function directive (e, el, binding) {
+function directive (e: PointerEvent, el: HTMLElement, binding: ClickOutsideDirective): void {
   // Args may not always be supplied
   binding.args = binding.args || {}
 
@@ -40,7 +56,7 @@ function directive (e, el, binding) {
   }, 0)
 }
 
-function clickedInEls (e, elements) {
+function clickedInEls (e: PointerEvent, elements: HTMLElement[]): boolean {
   // Get position of click
   const { clientX: x, clientY: y } = e
   // Loop over all included elements to see if click was in any of them
@@ -51,7 +67,7 @@ function clickedInEls (e, elements) {
   return false
 }
 
-function clickedInEl (el, x, y) {
+function clickedInEl (el: HTMLElement, x: number, y: number): boolean {
   // Get bounding rect for element
   // (we're in capturing event and we want to check for multiple elements,
   //  so can't use target.)
@@ -69,8 +85,8 @@ export default {
   // sure that the root element is
   // available, iOS does not support
   // clicks on body
-  inserted (el, binding) {
-    const onClick = e => directive(e, el, binding)
+  inserted (el: ClickOutsideHTMLElement, binding: ClickOutsideDirective) {
+    const onClick = (e: Event) => directive(e as PointerEvent, el, binding)
     // iOS does not recognize click events on document
     // or body, this is the entire purpose of the v-app
     // component and [data-app], stop removing this
@@ -80,7 +96,7 @@ export default {
     el._clickOutside = onClick
   },
 
-  unbind (el) {
+  unbind (el: ClickOutsideHTMLElement) {
     const app = document.querySelector('[data-app]') ||
       document.body // This is only for unit tests
     app && app.removeEventListener('click', el._clickOutside, true)

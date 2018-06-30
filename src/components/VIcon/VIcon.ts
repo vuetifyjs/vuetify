@@ -4,7 +4,8 @@ import Themeable from '../../mixins/themeable'
 import Colorable from '../../mixins/colorable'
 import {
   convertToUnit,
-  getObjectValueByPath
+  getObjectValueByPath,
+  keys
 } from '../../util/helpers'
 
 import { VNode, VNodeChildren } from 'vue'
@@ -36,10 +37,6 @@ function remapInternalIcon (parent: object, iconName: string): string {
 
   // Now look up icon indirection name, e.g. '$vuetify.icons.cancel':
   return getObjectValueByPath(parent, iconName) || iconName
-}
-
-function keys<O> (o: O) {
-  return Object.keys(o) as (keyof O)[]
 }
 
 const addTextColorClassChecks = Colorable.options.methods.addTextColorClassChecks
