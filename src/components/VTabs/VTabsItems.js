@@ -118,7 +118,7 @@ export default {
     },
     updateItems () {
       for (let index = this.items.length; --index >= 0;) {
-        this.items[index].toggle(this.lazyValue, this.reverse, this.isBooted, index)
+        this.items[index].toggle(this.activeIndex === index, this.reverse, this.isBooted)
       }
       this.isBooted = true
     }

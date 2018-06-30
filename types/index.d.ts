@@ -54,6 +54,7 @@ export interface VuetifyObject extends Vue {
 declare module 'vue/types/vue' {
   export interface Vue {
     $vuetify: VuetifyObject
+    _uid: string
   }
 }
 
