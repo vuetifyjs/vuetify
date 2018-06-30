@@ -16,6 +16,7 @@ const wrapper = {
   },
 
   render (h, { props, data, slots, parent }) {
+    delete data.model
     const children = rebuildSlots(slots(), h)
 
     if (props.textarea) {
