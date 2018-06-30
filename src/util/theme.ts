@@ -55,7 +55,7 @@ export const genVariantColor = (name: string, value: RGB, type: 'darken' | 'ligh
 }`
 }
 
-export function genVariations (name: string, value: RGB): Array<RGB> {
+export function genVariations (name: string, value: RGB): RGB[] {
   const values = Array(10)
   values[0] = genBaseColor(name, value)
 
