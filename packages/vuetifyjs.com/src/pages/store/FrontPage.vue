@@ -7,18 +7,15 @@
       indeterminate
     />
     <v-jumbotron
+      v-if="products.length > 0"
       height="100%"
       gradient="to bottom, rgb(255,255,255), rgba(66,165,245, .05), rgba(66,165,245, .4)"
     >
-      <transition-group name="fade-transition">
-        <template v-if="products.length > 0">
-          <store-free-shipping key="shipping" />
+      <store-free-shipping key="shipping" />
 
-          <store-cta key="cta" />
+      <store-cta key="cta" />
 
-          <store-categories key="categories" />
-        </template>
-      </transition-group>
+      <store-categories key="categories" />
     </v-jumbotron>
   </section>
 </template>

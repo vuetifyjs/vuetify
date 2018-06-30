@@ -5,8 +5,8 @@
     dense
   >
     <v-btn
-      v-for="link in links"
-      :key="link.text"
+      v-for="(link, i) in links"
+      :key="i"
       :to="link.to"
       class="subheading font-weight-light text-capitalize"
       color="grey darken-1"
@@ -48,13 +48,12 @@
 
   export default {
     data: () => ({
-      home: [
+      links: [
         {
           to: { name: 'store/Front' },
+          href: 0,
           text: 'Store Front'
-        }
-      ],
-      front: [
+        },
         {
           href: '#theme',
           text: 'Theme'
@@ -75,13 +74,7 @@
     }),
 
     computed: {
-      ...mapState('store', ['checkout']),
-      ...mapState('route', ['from', 'name']),
-      links () {
-        return this.name === 'store/Front'
-          ? this.front
-          : this.home
-      }
+      ...mapState('store', ['checkout'])
     }
   }
 </script>
