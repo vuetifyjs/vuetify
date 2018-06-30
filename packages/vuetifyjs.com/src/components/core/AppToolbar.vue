@@ -4,14 +4,15 @@
     color="primary"
     dark
     fixed
-    height="58px"
+    height="58"
+    extension-height="42"
     :flat="isHome"
     :manual-scroll="isManualScrolled"
     ref="toolbar"
   )#app-toolbar
     v-toolbar-side-icon(
       @click="$store.commit('app/DRAWER_TOGGLE')"
-      v-show="!stateless && $vuetify.breakpoint.mdAndDown"
+      v-show="!stateless"
     )
     router-link(:to="{ name: 'home/Home' }").d-flex
       img(
@@ -41,7 +42,6 @@
         offset-y
         left
         attach
-        v-show="!isStore"
       )
         v-btn(
           slot="activator"
@@ -74,8 +74,7 @@
       v-btn(
         flat
         style="min-width: 64px"
-        v-show="!isStore"
-        :to="{ name: 'store/Index' }"
+        :to="{ name: 'store/Front' }"
       )
         translatable(i18n="Vuetify.AppToolbar.store")
         span.hidden-sm-and-down {{ $t('Vuetify.AppToolbar.store' )}}
@@ -88,7 +87,6 @@
         left
         offset-y
         max-height="500"
-        v-show="!isStore"
       )
         v-btn(
           flat
@@ -133,7 +131,6 @@
         left
         offset-y
         max-height="500"
-        v-show="!isStore"
       )
         v-btn(
           flat
@@ -161,7 +158,6 @@
         left
         offset-y
         attach
-        v-show="!isStore"
       ).hidden-xs-only
         v-btn(
           slot="activator"
@@ -180,31 +176,23 @@
             v-list-tile-content
               v-list-tile-title {{ release }}
 
-      v-btn(
-        v-if="isStore && cart"
-        flat
-        :to="{ name: 'store/Cart' }"
-        dark
-      )
-        v-badge(color="red" left :value="cart.lineItems.length")
-          template(slot="badge") {{ cart.lineItems.length }}
-          v-icon(left) shopping_cart
-        span {{ $t('Vuetify.AppToolbar.cart' )}}
+    store-toolbar(
+      v-if="isStore"
+      slot="extension"
+    )
 </template>
 
 <script>
+  // Components
+  import StoreToolbar from '@/components/store/Toolbar'
+
   // Utilities
   import { mapState, mapMutations } from 'vuex'
-  import asyncData from '@/util/asyncData'
   import languages from '@/data/i18n/languages.json'
 
   export default {
-    mixins: [asyncData],
-
-    asyncData ({ store, route }) {
-      return store.state.store.cart && route.name.startsWith('store/')
-        ? Promise.resolve()
-        : store.dispatch('store/getCheckout')
+    components: {
+      StoreToolbar
     },
 
     data: vm => ({
@@ -226,9 +214,6 @@
         'stateless',
         'currentVersion'
       ]),
-      ...mapState('store', {
-        cart: state => state.checkout
-      }),
       ...mapState(['route']),
       backPath () {
         return this.route.from.path === '/'
@@ -283,4 +268,7 @@
         text-transform capitalize
         font-size 16px
         font-weight 300
+
+    .v-toolbar__extension
+      padding: 0
 </style>

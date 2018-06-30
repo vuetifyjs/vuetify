@@ -1,5 +1,8 @@
 <template lang="pug">
-  example-view(:data="data" v-if="exists")
+  example-view(
+    v-if="exists"
+    :data="data"
+  )
     slot
   not-found(v-else)
 </template>

@@ -521,7 +521,7 @@
     "description": "Create a custom Material Design theme for your next application.",
     "keywords": "material theme, theme generator, material theme generator, vuetify theme generator"
   },
-  "store": {
+  "store/": {
     "h1": "Vuetify Store",
     "title": "Store",
     "description": "Vuetify Themes, fitted soft t-shirts, vinyl stickers and more.",

@@ -1,7 +1,7 @@
 <template>
   <v-container class="page pb-5">
     <div class="text-xs-center">
-      <v-btn :to="{ name: 'store/Index' }" flat class="mb-5" exact>
+      <v-btn :to="{ name: 'store/Front' }" flat class="mb-5" exact>
         <v-icon>chevron_left</v-icon>
         Back to store
       </v-btn>
