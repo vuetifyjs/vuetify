@@ -1,14 +1,24 @@
 <template>
   <section id="store-front">
+    <v-progress-linear
+      v-if="!products.length"
+      key="progress"
+      class="ma-0"
+      indeterminate
+    />
     <v-jumbotron
       height="100%"
       gradient="to bottom, rgb(255,255,255), rgba(66,165,245, .05), rgba(66,165,245, .4)"
     >
-      <store-free-shipping />
+      <transition-group name="fade-transition">
+        <template v-if="products.length > 0">
+          <store-free-shipping key="shipping" />
 
-      <store-cta />
+          <store-cta key="cta" />
 
-      <store-categories />
+          <store-categories key="categories" />
+        </template>
+      </transition-group>
     </v-jumbotron>
   </section>
 </template>
@@ -19,11 +29,18 @@
   import StoreCta from '@/components/store/Cta'
   import StoreFreeShipping from '@/components/store/FreeShipping'
 
+  // Helpers
+  import { mapState } from 'vuex'
+
   export default {
     components: {
       StoreCategories,
       StoreCta,
       StoreFreeShipping
+    },
+
+    computed: {
+      ...mapState('store', ['products'])
     }
   }
 </script>
