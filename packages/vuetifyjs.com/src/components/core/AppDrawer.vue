@@ -1,7 +1,6 @@
 <template lang="pug">
   v-navigation-drawer(
     app
-    fixed
     v-model="inputValue"
     :stateless="isFullscreen"
   )#app-drawer
