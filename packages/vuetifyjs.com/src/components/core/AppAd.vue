@@ -6,7 +6,7 @@
       img="/doc-images/ads/store-ad-1.png"
       tile
       width="130px"
-      :to="{ name: 'store/Index' }"
+      :to="{ name: 'store/Front' }"
     ).mb-3
 </template>
 

@@ -10,7 +10,7 @@
         v-btn(
           color="primary"
           large
-          :to="{ name: 'store/Index' }"
+          :to="{ name: 'store/Front' }"
           v-if="!hasItems"
         )
           span {{ $t('Vuetify.Store.backToStore') }}
@@ -59,7 +59,7 @@
         div.caption.grey--text You will be re-directed to Shopify to complete your purchase
         v-btn(
           flat
-          :to="{ name: 'store/Index' }"
+          :to="{ name: 'store/Front' }"
           exact
           outline
           large
@@ -79,7 +79,7 @@
 
 <script>
   // Components
-  import StoreHeader from '@/components/store/StoreHeader'
+  import StoreHeader from '@/components/store/Header'
 
   // Utilities
   import shopifyClient from '@/util/shopifyClient'

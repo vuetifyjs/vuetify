@@ -107,19 +107,30 @@
   },
   {
     "page": "store/Index",
-    "route": "store"
-  },
-  {
-    "page": "store/Cart",
-    "route": "store/cart"
-  },
-  {
-    "page": "store/ThankYou",
-    "route": "store/thank-you"
-  },
-  {
-    "page": "Licensing",
-    "route": "licensing"
+    "route": "store",
+    "children": [
+      {
+        "page": "store/Front",
+        "route": ""
+      },
+      {
+        "page": "store/Cart",
+        "route": "cart"
+      },
+      {
+        "page": "store/ThankYou",
+        "route": "thank-you"
+      },
+      {
+        "page": "store/Licensing",
+        "route": "licensing"
+      },
+      {
+        "page": "store/Product",
+        "route": "product/:id",
+        "props": true
+      }
+    ]
   },
   {
     "page": "guides/SSR",

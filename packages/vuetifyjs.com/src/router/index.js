@@ -19,37 +19,34 @@ function getLanguageCookie () {
 }
 
 export function createRouter (store) {
-  function route (path, view, fullscreen, props) {
+  function route (path, view, fullscreen, props, children) {
+    const hasChildren = Array.isArray(children)
+
     return {
       path: path,
       meta: { fullscreen },
-      name: view,
+      name: hasChildren ? undefined : view,
       props,
-      component: () => import(`@/pages/${view}Page.vue`)
+      component: () => import(`@/pages/${view}Page.vue`),
+      children: hasChildren
+        ? children.map(r => route(
+          r.route,
+          r.page,
+          r.fullscreen,
+          r.props,
+          r.children
+        ))
+        : []
     }
   }
 
-  const routes = [
-    // Temp until I figure out a way
-    // to implement this into admin
-    route(
-      'store/product/:id',
-      'store/Product',
-      null,
-      r => ({ id: r.params.id })
-    )
-  ]
-
-  routes.push(
-    ...Routes.map(r => {
-      return route(
-        r.route,
-        r.page,
-        r.fullscreen,
-        r.props
-      )
-    })
-  )
+  const routes = Routes.map(r => route(
+    r.route,
+    r.page,
+    r.fullscreen,
+    r.props,
+    r.children
+  ))
 
   const router = new Router({
     base: release ? `/releases/${release}` : __dirname,

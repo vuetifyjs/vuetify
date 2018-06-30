@@ -320,7 +320,7 @@
         return array
       },
       snackHandler () {
-        this.$router.push({ name: 'store/Index' })
+        this.$router.push({ name: 'store/Front' })
       }
     }
   }

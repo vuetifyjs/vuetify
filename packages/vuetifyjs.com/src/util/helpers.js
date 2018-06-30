@@ -18,6 +18,12 @@ export function capitalize (str) {
   return `${str.substr(0, 1).toUpperCase()}${str.slice(1)}`
 }
 
+export function shortId (id) {
+  // atob() but for node
+  const arr = Buffer.from(id, 'base64').toString('binary').split('/')
+  return arr[arr.length - 1]
+}
+
 export function getLongId (id) {
   // btoa() but for node
   return Buffer.from(`gid://shopify/Product/${id}`, 'binary').toString('base64')

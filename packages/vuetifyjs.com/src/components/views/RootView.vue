@@ -1,6 +1,10 @@
 <template lang="pug">
-  router-view(v-if="languageIsValid")
-  not-found-page(v-else to="/en/")
+  v-slide-y-transition(mode="out-in")
+    router-view(
+      v-if="languageIsValid"
+      :key="$route.path"
+    )
+    not-found-page(v-else to="/en/")
 </template>
 
 <script>
@@ -10,6 +14,8 @@
   import NotFoundPage from '@/pages/general/404Page.vue'
 
   export default {
+    name: 'RootView',
+
     components: {
       NotFoundPage
     },

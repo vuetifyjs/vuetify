@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-container(pt-5)#store-product
+  section#store-product.pt-5
     v-progress-linear(
       indeterminate
       :active="dataLoading"
@@ -74,7 +74,7 @@
                   flat
                   large
                   outline
-                  :to="{ name: 'store/Index' }"
+                  :to="{ name: 'store/Front' }"
                 ).mx-0
                   span(v-text="$t('Vuetify.Store.backToStore')")
 
