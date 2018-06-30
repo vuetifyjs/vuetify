@@ -8,19 +8,11 @@ import VTextField from '../VTextField/VTextField'
 // Utils
 import { keyCodes } from '../../util/helpers'
 
+/* @vue/component */
 export default {
   name: 'v-autocomplete',
 
   extends: VSelect,
-
-  data: vm => ({
-    attrsInput: null,
-    editingIndex: -1,
-    lazySearch: vm.searchInput,
-    lazyValue: vm.value != null
-      ? vm.value
-      : vm.multiple ? [] : undefined
-  }),
 
   props: {
     allowOverflow: {
@@ -31,7 +23,6 @@ export default {
       type: String,
       default: 'off'
     },
-    delimiters: Array,
     filter: {
       type: Function,
       default: (item, queryText, itemText) => {
@@ -63,6 +54,15 @@ export default {
       default: false
     }
   },
+
+  data: vm => ({
+    attrsInput: null,
+    editingIndex: -1,
+    lazySearch: vm.searchInput,
+    lazyValue: vm.value != null
+      ? vm.value
+      : vm.multiple ? [] : undefined
+  }),
 
   computed: {
     classes () {
@@ -168,12 +168,25 @@ export default {
       if (val) {
         this.$refs.input &&
           this.$refs.input.select()
+      } else {
+        this.updateSelf()
       }
     },
     isMenuActive (val) {
       if (val || !this.hasSlot) return
 
       this.lazySearch = null
+    },
+    items (val) {
+      // If we are focused, the menu
+      // is not active and items change
+      // User is probably async loading
+      // items, try to activate the menu
+      if (
+        this.isFocused &&
+        !this.isMenuActive &&
+        val.length
+      ) this.activateMenu()
     },
     searchInput (val) {
       this.lazySearch = val
@@ -278,10 +291,6 @@ export default {
         ? VSelect.methods.genSelections.call(this)
         : []
     },
-    onBlur (e) {
-      this.updateSelf()
-      VSelect.methods.onBlur.call(this, e)
-    },
     onClick () {
       if (this.isDisabled) return
 
@@ -327,8 +336,7 @@ export default {
     selectItem (item) {
       // Currently only supports items:<string[]>
       if (this.editingIndex > -1) {
-        this.internalValue.splice(this.editingIndex, 1, this.internalSearch)
-        this.editingIndex = -1
+        this.updateEditing()
       } else {
         VSelect.methods.selectItem.call(this, item)
       }
@@ -342,8 +350,10 @@ export default {
         this.selectedItems = []
       } else {
         VSelect.methods.setSelectedItems.call(this)
+
         // #4273 Don't replace if searching
-        !this.isSearching && this.setSearch()
+        // #4403 Don't replace is focused
+        if (!this.isFocused) this.setSearch()
       }
     },
     setSearch () {
@@ -362,6 +372,10 @@ export default {
     setValue () {
       this.internalValue = this.internalSearch
       this.$emit('change', this.internalSearch)
+    },
+    updateEditing () {
+      this.internalValue.splice(this.editingIndex, 1, this.internalSearch)
+      this.editingIndex = -1
     },
     updateSelf () {
       this.updateAutocomplete()

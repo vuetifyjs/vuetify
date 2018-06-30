@@ -1,12 +1,13 @@
 module.exports = {
   root: true,
-  parser: 'typescript-eslint-parser',
   parserOptions: {
+    parser: 'typescript-eslint-parser',
     ecmaVersion: 2017,
     sourceType: 'module'
   },
   extends: [
-    'standard'
+    'standard',
+    'plugin:vue/recommended'
   ],
   env: {
     browser: true,
@@ -57,7 +58,12 @@ module.exports = {
     ],
     'no-return-await': 'warn',
     'object-shorthand': ['error', 'always'],
-    'no-extra-semi': 'error'
+    'no-extra-semi': 'error',
+
+    'vue/name-property-casing': false,
+    'vue/require-default-prop': false,
+    'vue/require-prop-types': false,
+    'vue/prop-name-casing': 'error'
   },
   overrides: [
     {

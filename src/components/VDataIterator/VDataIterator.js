@@ -2,6 +2,7 @@ import '../../stylus/components/_data-iterator.styl'
 
 import DataIterable from '../../mixins/data-iterable'
 
+/* @vue/component */
 export default {
   name: 'v-data-iterator',
 
@@ -33,6 +34,10 @@ export default {
         'theme--light': this.light
       }
     }
+  },
+
+  created () {
+    this.initPagination()
   },
 
   methods: {
@@ -92,10 +97,6 @@ export default {
       if (!children.length) return null
       return this.$createElement('div', children)
     }
-  },
-
-  created () {
-    this.initPagination()
   },
 
   render (h) {

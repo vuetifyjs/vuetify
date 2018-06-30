@@ -8,6 +8,7 @@ import Themeable from '../../mixins/themeable'
 // Helpers
 import { convertToUnit } from '../../util/helpers'
 
+/* @vue/component */
 export default {
   name: 'v-card',
 
@@ -15,10 +16,7 @@ export default {
 
   props: {
     flat: Boolean,
-    height: {
-      type: String,
-      default: 'auto'
-    },
+    height: [Number, String],
     hover: Boolean,
     img: String,
     raised: Boolean,

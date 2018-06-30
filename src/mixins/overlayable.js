@@ -3,8 +3,13 @@ import '../stylus/components/_overlay.styl'
 // Utils
 import { keyCodes } from '../util/helpers'
 
+/* @vue/component */
 export default {
   name: 'overlayable',
+
+  props: {
+    hideOverlay: Boolean
+  },
 
   data () {
     return {
@@ -13,10 +18,6 @@ export default {
       overlayTimeout: null,
       overlayTransitionDuration: 500 + 150 // transition + delay
     }
-  },
-
-  props: {
-    hideOverlay: Boolean
   },
 
   beforeDestroy () {

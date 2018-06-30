@@ -1,6 +1,7 @@
 import { factory as PositionableFactory } from './positionable'
 
 export default function applicationable (value, events = []) {
+  /* @vue/component */
   return {
     name: 'applicationable',
 

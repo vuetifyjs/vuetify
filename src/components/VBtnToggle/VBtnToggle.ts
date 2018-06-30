@@ -9,6 +9,7 @@ import ButtonGroup from '../../mixins/button-group'
 import Themeable from '../../mixins/themeable'
 import { consoleWarn } from '../../util/console'
 
+/* @vue/component */
 const VBtnToggle = mixins(ButtonGroup, Themeable).extend({
   name: 'v-btn-toggle',
 
@@ -47,6 +48,12 @@ const VBtnToggle = mixins(ButtonGroup, Themeable).extend({
         this.update()
       },
       deep: true
+    }
+  },
+
+  created () {
+    if (this.multiple && !Array.isArray(this.inputValue)) {
+      consoleWarn('Model must be bound to an array if the multiple property is true.', this)
     }
   },
 
@@ -93,12 +100,6 @@ const VBtnToggle = mixins(ButtonGroup, Themeable).extend({
       }
 
       this.$emit('change', items)
-    }
-  },
-
-  created () {
-    if (this.multiple && !Array.isArray(this.inputValue)) {
-      consoleWarn('Model must be bound to an array if the multiple property is true.', this)
     }
   },
 

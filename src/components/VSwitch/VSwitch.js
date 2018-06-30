@@ -7,14 +7,15 @@ import Selectable from '../../mixins/selectable'
 // Directives
 import Touch from '../../directives/touch'
 
+/* @vue/component */
 export default {
   name: 'v-switch',
+
+  directives: { Touch },
 
   mixins: [
     Selectable
   ],
-
-  directives: { Touch },
 
   computed: {
     classes () {
@@ -36,7 +37,7 @@ export default {
         staticClass: 'v-input--selection-controls__input'
       }, [
         this.genInput('checkbox'),
-        this.genRipple({
+        !this.disabled && this.genRipple({
           'class': this.classesSelectable,
           directives: [{
             name: 'touch',

@@ -7,6 +7,7 @@ import VLabel from '../VLabel'
 import VMessages from '../VMessages'
 
 // Mixins
+import Colorable from '../../mixins/colorable'
 import Loadable from '../../mixins/loadable'
 import Themeable from '../../mixins/themeable'
 import Validatable from '../../mixins/validatable'
@@ -18,24 +19,25 @@ import {
 } from '../../util/helpers'
 import { deprecate } from '../../util/console'
 
+/* @vue/component */
 export default {
   name: 'v-input',
 
   mixins: [
+    Colorable,
     Loadable,
     Themeable,
     Validatable
   ],
 
-  data: vm => ({
-    lazyValue: vm.value,
-    isFocused: false
-  }),
-
   props: {
     appendIcon: String,
     /** @deprecated */
     appendIconCb: Function,
+    backgroundColor: {
+      type: String,
+      default: ''
+    },
     disabled: Boolean,
     height: [Number, String],
     hideDetails: Boolean,
@@ -49,6 +51,11 @@ export default {
     tabindex: { default: 0 },
     value: { required: false }
   },
+
+  data: vm => ({
+    lazyValue: vm.value,
+    isFocused: false
+  }),
 
   computed: {
     classesInput () {
@@ -177,6 +184,7 @@ export default {
     genInputSlot () {
       return this.$createElement('div', {
         staticClass: 'v-input__slot',
+        class: this.addBackgroundColorClassChecks({}, this.backgroundColor),
         style: { height: convertToUnit(this.height) },
         directives: this.directivesInput,
         on: {

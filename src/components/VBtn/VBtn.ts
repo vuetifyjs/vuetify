@@ -23,6 +23,7 @@ const VBtn = mixins(
   Themeable,
   ToggleableFactory('inputValue'),
   RegistrableInject('buttonGroup')
+  /* @vue/component */
 ).extend({
   name: 'v-btn',
 
@@ -88,6 +89,18 @@ const VBtn = mixins(
     }
   },
 
+  mounted () {
+    if (this.buttonGroup) {
+      this.buttonGroup.register(this)
+    }
+  },
+
+  beforeDestroy () {
+    if (this.buttonGroup) {
+      this.buttonGroup.unregister(this)
+    }
+  },
+
   methods: {
     // Prevent focus to match md spec
     click (e: MouseEvent): void {
@@ -121,18 +134,6 @@ const VBtn = mixins(
       }
 
       return this.$createElement('span', { 'class': 'v-btn__loading' }, children)
-    }
-  },
-
-  mounted () {
-    if (this.buttonGroup) {
-      this.buttonGroup.register(this)
-    }
-  },
-
-  beforeDestroy () {
-    if (this.buttonGroup) {
-      this.buttonGroup.unregister(this)
     }
   },
 

@@ -6,15 +6,9 @@ import Touch from '../../../directives/touch'
 // Utils
 import isDateAllowed from '.././util/isDateAllowed'
 
+/* @vue/component */
 export default {
   directives: { Touch },
-
-  data () {
-    return {
-      defaultColor: 'accent',
-      isReversing: false
-    }
-  },
 
   props: {
     allowedDates: Function,
@@ -40,6 +34,11 @@ export default {
       required: false
     }
   },
+
+  data: () => ({
+    defaultColor: 'accent',
+    isReversing: false
+  }),
 
   computed: {
     computedTransition () {
@@ -119,9 +118,7 @@ export default {
 
       return this.$createElement('div', {
         staticClass,
-        class: {
-          ...this.themeClasses
-        },
+        class: this.themeClasses,
         on: this.scrollable ? { wheel: this.wheel } : undefined,
         directives: [touchDirective]
       }, [transition])

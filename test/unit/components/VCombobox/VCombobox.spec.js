@@ -67,7 +67,7 @@ test('VCombobox', ({ shallow }) => {
     wrapper.setData({ isMenuActive: false })
     await wrapper.vm.$nextTick()
 
-    expect(event).toBeCalledWith(123)
+    expect(event).toBeCalledWith(item)
   })
 
   it('should not populate search field if value is falsey', async () => {
@@ -144,7 +144,7 @@ test('VCombobox', ({ shallow }) => {
     input.element.value = 'foo'
     input.trigger('input')
 
-    input.trigger('blur')
+    input.trigger('keydown.tab')
     expect(change).toHaveBeenCalledWith('foo')
 
     input.trigger('keydown.esc')

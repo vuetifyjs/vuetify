@@ -22,23 +22,17 @@ import { deprecate } from '../../util/console'
 
 const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
 
+/* @vue/component */
 export default {
   name: 'v-text-field',
+
+  directives: { Ripple },
 
   extends: VInput,
 
   mixins: [Maskable],
 
-  directives: { Ripple },
-
   inheritAttrs: false,
-
-  data: () => ({
-    badInput: false,
-    initialValue: null,
-    internalChange: false,
-    isClearing: false
-  }),
 
   props: {
     appendOuterIcon: String,
@@ -78,6 +72,13 @@ export default {
       default: 'text'
     }
   },
+
+  data: () => ({
+    badInput: false,
+    initialValue: null,
+    internalChange: false,
+    isClearing: false
+  }),
 
   computed: {
     classes () {
