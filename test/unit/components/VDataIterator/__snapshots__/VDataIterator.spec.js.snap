@@ -90,8 +90,6 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
                 </div>
               </div>
             </div>
-            <div class="v-text-field__details">
-            </div>
           </div>
         </div>
       </div>
@@ -233,8 +231,6 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
                 </div>
               </div>
             </div>
-            <div class="v-text-field__details">
-            </div>
           </div>
         </div>
       </div>
@@ -366,8 +362,6 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="v-text-field__details">
             </div>
           </div>
         </div>
@@ -504,8 +498,6 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="v-text-field__details">
             </div>
           </div>
         </div>
