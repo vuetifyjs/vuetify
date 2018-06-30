@@ -258,3 +258,7 @@ export const keyCodes = Object.freeze({
   pageup: 33,
   pagedown: 34
 })
+
+export function keys<O> (o: O) {
+  return Object.keys(o) as (keyof O)[]
+}
