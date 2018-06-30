@@ -27,12 +27,12 @@
       data () {
         return {
           folder: 'scrolling',
-          components: this.components.scrolling.components,
+          components: this.components.goto.components,
           examples: this.examples
         }
       },
       examples () {
-        const component = this.components['scrolling']
+        const component = this.components['goto']
 
         if (!component) return []
 

@@ -288,6 +288,13 @@
     ],
     "spec": false
   },
+  "goto": {
+    "components": ["$vuetify"],
+    "examples": [
+      "usage"
+    ],
+    "spec": false
+  },
   "grid": {
     "components": ["v-container", "v-layout", "v-flex", "v-spacer"],
     "examples": [
@@ -462,9 +469,10 @@
     "spec": false
   },
   "scrolling": {
-    "components": ["$vuetify"],
+    "components": ["v-scroll"],
     "examples": [
-      "usage"
+      "default",
+      "options"
     ],
     "spec": false
   },
