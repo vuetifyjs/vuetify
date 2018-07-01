@@ -6,7 +6,7 @@
       class="my-0"
       height="4"
     )
-    v-container(grid-list-xl).pa-0
+    v-container(grid-list-xl)
       v-layout(wrap)
         v-flex(
           xs12
@@ -16,7 +16,7 @@
           order-md1
           style="max-width: 500px;"
         ).text-xs-center.mx-auto
-          v-carousel(:cycle="false").elevation-0
+          v-carousel(:cycle="false" light).elevation-0
             v-carousel-item(
               v-for="(item, i) in product.images"
               :key="i"
@@ -26,12 +26,17 @@
             )
 
         v-flex(xs12 md6 order-md2)
-          h2(v-text="product.title").display-2.primary--text.mb-3
+          h2(v-text="product.title").display-1.mb-3.font-weight-bold
 
           div.mb-5
-            span(v-if="onSale").mr-3.strike.display-1.grey--text.text--lighten-1
+            span(v-if="onSale").text--line-through.display-1.grey--text.text--darken-2
               | ${{ select.compareAtPrice }}
-            span.display-1.green--text
+            span(
+              :class="{\
+                'red--text text--lighten-2': onSale,\
+                'grey--text text--darken-2': !onSale\
+              }"
+            ).display-1
               span.mr-1 ${{ select.price }}
               span(v-if="onSale").subheading Sale
 

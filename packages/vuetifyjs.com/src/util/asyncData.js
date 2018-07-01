@@ -18,21 +18,5 @@ export default {
         route: this.$route
       }).then(() => { this.dataLoading = false })
     }
-  },
-
-  beforeRouteUpdate (to, from, next) {
-    const { asyncData } = this.$options
-    if (asyncData) {
-      this.dataLoading = true
-      asyncData({
-        store: this.$store,
-        route: to
-      }).then(() => {
-        this.dataLoading = false
-        next()
-      }).catch(next)
-    } else {
-      next()
-    }
   }
 }

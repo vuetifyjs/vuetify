@@ -77,7 +77,7 @@
         :to="{ name: 'store/Front' }"
       )
         translatable(i18n="Vuetify.AppToolbar.store")
-        v-badge(color="red")
+        v-badge(color="red lighten-2")
           v-icon(
             v-if="storeSale"
             slot="badge"
