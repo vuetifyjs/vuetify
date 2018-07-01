@@ -14,8 +14,6 @@
   import NotFoundPage from '@/pages/general/404Page.vue'
 
   export default {
-    name: 'RootView',
-
     components: {
       NotFoundPage
     },
@@ -43,7 +41,6 @@
 
     created () {
       this.$i18n.locale = this.lang
-      // if (this.$ssrContext && !this.languageIsValid) this.$ssrContext.res.status(404)
     },
 
     async beforeRouteUpdate (to, from, next) {
@@ -52,7 +49,7 @@
 
       if (this.loadedLangs.indexOf(locale) < 0) {
         await import(
-          /* webpackChunkName: "lang-[request]" */
+          /* webpackChunkName: "lang" */
           /* webpackMode: "lazy-once" */
           `@/lang/${localeFile}`
         ).then(msgs => this.$i18n.setLocaleMessage(locale, msgs.default))
