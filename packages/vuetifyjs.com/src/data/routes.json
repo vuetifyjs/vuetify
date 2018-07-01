@@ -1,11 +1,5 @@
 [
   {
-    "base": "",
-    "page": "home/Home",
-    "route": "",
-    "fullscreen": true
-  },
-  {
     "page": "getting-started/QuickStart",
     "route": "getting-started/quick-start"
   },
