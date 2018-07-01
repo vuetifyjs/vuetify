@@ -5,7 +5,7 @@
     dense
   >
     <v-btn
-      v-for="(link, i) in links"
+      v-for="(link, i) in links.slice(0, stop)"
       :key="i"
       :to="link.to"
       class="subheading font-weight-light text-capitalize"
@@ -76,7 +76,12 @@
     }),
 
     computed: {
-      ...mapState('store', ['checkout'])
+      ...mapState('store', ['checkout']),
+      stop () {
+        return this.$route.name === 'store/Front' &&
+          !this.$vuetify.breakpoint.smAndDown
+          ? -1 : 1
+      }
     }
   }
 </script>
