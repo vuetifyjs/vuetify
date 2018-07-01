@@ -519,7 +519,7 @@ export default {
         this.$emit('focus')
       }
     },
-    onClickOutside (e) {
+    onClickOutside () {
       this.isMenuActive = false
       this.isFocused = false
       this.selectedIndex = -1
