@@ -3,25 +3,21 @@
 </template>
 
 <script>
-  // Utilities
-  import { mapMutations } from 'vuex'
+  // Mixins
+  import asyncData from '@/util/asyncData'
 
   export default {
+    mixins: [asyncData],
 
     asyncData ({ store }) {
-      if (typeof localStorage !== 'undefined') {
-        store.dispatch('store/getCheckout')
-      }
-    },
-
-    created () {
-      // this.drawer(false)
-    },
-
-    methods: {
-      ...mapMutations('app', {
-        drawer: 'DRAWER'
-      })
+      return typeof localStorage !== 'undefined'
+        ? store.dispatch('store/getCheckout')
+        : Promise.resolve()
     }
   }
 </script>
+
+<style lang="stylus">
+  .text--line-through
+    text-decoration: line-through
+</style>

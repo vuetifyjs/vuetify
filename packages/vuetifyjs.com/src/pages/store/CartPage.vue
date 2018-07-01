@@ -96,10 +96,7 @@
     asyncData ({ store }) {
       return typeof window === 'undefined'
         ? Promise.resolve()
-        : Promise.all([
-          store.dispatch('store/getCheckout'),
-          store.dispatch('store/getProducts')
-        ])
+        : store.dispatch('store/getCheckout')
     },
 
     data () {

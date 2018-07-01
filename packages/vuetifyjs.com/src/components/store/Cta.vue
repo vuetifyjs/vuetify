@@ -61,7 +61,7 @@
                 >
                   <v-chip
                     class="white--text"
-                    color="red"
+                    color="red lighten-2"
                     disabled
                     small
                   >

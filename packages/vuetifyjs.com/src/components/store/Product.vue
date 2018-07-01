@@ -35,8 +35,11 @@
               v-text="`$${compareAtPrice}`"
             />
             <span
-              :class="compareAtPrice ? 'red--text' : 'grey--text'"
-              class="headline text--darken-2"
+              :class="{
+                'red--text text--lighten-2': compareAtPrice,
+                'grey--text text--darken-2': !compareAtPrice
+              }"
+              class="headline"
               v-text="`$${price}`"
             />
           </div>
@@ -97,7 +100,4 @@
   // Temp fix until update
   .v-divider--vertical
     max-width: 1px
-
-  .text--line-through
-    text-decoration: line-through
 </style>

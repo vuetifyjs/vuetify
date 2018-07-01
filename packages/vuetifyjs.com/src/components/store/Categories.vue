@@ -27,8 +27,7 @@
             <v-flex
               :key="`${j}${j}`"
               d-flex
-              xl4
-              lg5
+              xl5
               sm6
               xs12
             >

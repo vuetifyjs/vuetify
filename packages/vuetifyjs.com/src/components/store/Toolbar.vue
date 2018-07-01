@@ -8,6 +8,9 @@
       v-for="(link, i) in links.slice(0, stop)"
       :key="i"
       :to="link.to"
+      :class="{
+        'hidden-xs-only': i !== 0
+      }"
       class="subheading font-weight-light text-capitalize"
       color="grey darken-1"
       exact
@@ -28,8 +31,11 @@
       <span v-text="$t('Vuetify.AppToolbar.cart')" />
 
       <v-badge
+        v-if="checkout"
         :value="checkout.lineItems.length"
+        class="pr-2"
         color="red"
+        overlap
       >
         <template slot="badge">
           {{ checkout.lineItems.length }}
@@ -78,9 +84,7 @@
     computed: {
       ...mapState('store', ['checkout']),
       stop () {
-        return this.$route.name === 'store/Front' &&
-          !this.$vuetify.breakpoint.smAndDown
-          ? -1 : 1
+        return this.$route.name === 'store/Front' ? -1 : 1
       }
     }
   }
