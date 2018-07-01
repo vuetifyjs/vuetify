@@ -34,7 +34,9 @@
         <template slot="badge">
           {{ checkout.lineItems.length }}
         </template>
-        <v-icon right>mdi-cart-outline</v-icon>
+        <v-icon right>
+          {{ checkout.lineItems.length > 0 ? 'mdi-cart' : 'mdi-cart-outline' }}
+        </v-icon>
       </v-badge>
     </v-btn>
   </v-toolbar>
