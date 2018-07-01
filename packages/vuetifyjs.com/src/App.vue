@@ -1,6 +1,6 @@
 <template>
   <v-fade-transition appear>
-    <documentation v-if="!examples" />
+    <core-documentation v-if="!examples" />
     <div
       v-else
       id="app"
@@ -11,7 +11,6 @@
 </template>
 
 <script>
-  import Documentation from '@/components/core/Documentation'
   import Meta from '@/mixins/meta'
 
   // Utilities
@@ -23,10 +22,6 @@
   } from 'vuex'
 
   export default {
-    components: {
-      Documentation
-    },
-
     mixins: [asyncData, Meta],
 
     asyncData ({ store }) {

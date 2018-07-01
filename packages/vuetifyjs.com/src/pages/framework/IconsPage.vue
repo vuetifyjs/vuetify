@@ -1,10 +1,10 @@
 <template lang="pug">
-  doc-view
+  views-doc
     section#usage
-      section-head(value="Generic.Pages.usage")
-      section-text(value="Framework.Icons.usageText1")
+      helpers-section-head(value="Generic.Pages.usage")
+      helpers-section-text(value="Framework.Icons.usageText1")
 
-      markup(lang="js")
+      helpers-markup(lang="js")
         | import Vue from 'vue'
         | import Vuetify from 'vuetify'
         |
@@ -12,28 +12,28 @@
         |   iconfont: 'mdi' // 'md' || 'mdi' || 'fa' || 'fa4'
         | })
 
-      section-text(value="Framework.Icons.usageText2")
+      helpers-section-text(value="Framework.Icons.usageText2")
 
     section#installing-fonts
-      section-head(value="Framework.Icons.installHeader")
-      section-text(value="Framework.Icons.installText1")
+      helpers-section-head(value="Framework.Icons.installHeader")
+      helpers-section-text(value="Framework.Icons.installText1")
 
-      section-subheader(value="Framework.Icons.installMD")
-      section-text(value="Framework.Icons.installMDText1")
+      helpers-section-subheader(value="Framework.Icons.installMD")
+      helpers-section-text(value="Framework.Icons.installMDText1")
 
-      markup(lang="html")
+      helpers-markup(lang="html")
         | &lt;link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet"&gt;
 
-      section-text(value="Framework.Icons.installMDText2")
+      helpers-section-text(value="Framework.Icons.installMDText2")
 
-      markup(lang="cli")
+      helpers-markup(lang="cli")
         | $ yarn add material-design-icons-iconfont -D
         | // or
         | $ npm install material-design-icons-iconfont -D
 
-      section-text(value="Framework.Icons.installMDText3")
+      helpers-section-text(value="Framework.Icons.installMDText3")
 
-      markup(lang="js")
+      helpers-markup(lang="js")
         | // main.js
         | import 'material-design-icons-iconfont/dist/material-design-icons.css' // Ensure you are using css-loader
         | import Vue from 'vue'
@@ -41,16 +41,16 @@
         |
         | Vue.use(Vuetify)
 
-      section-subheader(value="Framework.Icons.installMDI")
+      helpers-section-subheader(value="Framework.Icons.installMDI")
 
-      markup(lang="cli")
+      helpers-markup(lang="cli")
         | $ yarn add @mdi/font -D
         | // or
         | $ npm install @mdi/font -D
 
-      section-text(value="Framework.Icons.installMDIText1")
+      helpers-section-text(value="Framework.Icons.installMDIText1")
 
-      markup(lang="js")
+      helpers-markup(lang="js")
         | // app.js
         | import '@mdi/font/css/materialdesignicons.css' // Ensure you are using css-loader
         | import Vue from 'vue'
@@ -58,16 +58,16 @@
         |
         | Vue.use(Vuetify)
 
-      section-subheader(value="Framework.Icons.installFA")
+      helpers-section-subheader(value="Framework.Icons.installFA")
       p Coming soon
-      section-subheader(value="Framework.Icons.installFA4")
+      helpers-section-subheader(value="Framework.Icons.installFA4")
       p Coming soon
 
     section#using-custom-icons
-      section-head(value="Framework.Icons.customIconsHeader")
-      section-text(value="Framework.Icons.customIconsText1")
+      helpers-section-head(value="Framework.Icons.customIconsHeader")
+      helpers-section-text(value="Framework.Icons.customIconsText1")
 
-      markup(lang="js")
+      helpers-markup(lang="js")
         | import Vue from 'vue'
         | import Vuetify from 'vuetify'
         |
@@ -79,9 +79,9 @@
         |   }
         | })
 
-      section-text(value="Framework.Icons.customIconsText2")
+      helpers-section-text(value="Framework.Icons.customIconsText2")
 
-      markup(lang="js")
+      helpers-markup(lang="js")
         | import Vue from 'vue'
         | import Vuetify from 'vuetify'
         |
@@ -116,10 +116,10 @@
         | })
 
     section#reusable-custom-icons
-      section-head(value="Framework.Icons.reusableHeader")
-      section-text(value="Framework.Icons.reusableText1")
+      helpers-section-head(value="Framework.Icons.reusableHeader")
+      helpers-section-text(value="Framework.Icons.reusableText1")
 
-      markup(lang="js")
+      helpers-markup(lang="js")
         | import Vue from 'vue'
         | import Vuetify from 'vuetify'
         |
@@ -136,9 +136,9 @@
         |   }
         | })
 
-      section-text(value="Framework.Icons.reusableText2")
+      helpers-section-text(value="Framework.Icons.reusableText2")
 
-      markup(lang="vue")
+      helpers-markup(lang="vue")
         | &lt;template&gt;
         |   &lt;v-icon&gt;$vuetify.icons.product&lt;/v-icon&gt;
         |
@@ -167,10 +167,10 @@
         | &lt;/script&gt;
 
     section#custom-components
-      section-head(value="Framework.Icons.customComponentHeader")
-      section-text(value="Framework.Icons.customComponentText1")
+      helpers-section-head(value="Framework.Icons.customComponentHeader")
+      helpers-section-text(value="Framework.Icons.customComponentText1")
 
-      markup(lang="vue")
+      helpers-markup(lang="vue")
         | &lt;template&gt;
         |   &lt;div class="my-component"&gt;
         |     &lt;v-icon v-text="icon"&gt;&lt;/v-icon&gt;

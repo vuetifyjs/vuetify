@@ -1,23 +1,23 @@
 <template lang="pug">
-  doc-view
+  views-doc
     template(slot-scope="{ namespace }")
       section#theme-generator
-        section-head(:value="`${namespace}.themeGeneratorHeader`")
-        section-text(:value="`${namespace}.themeGeneratorText1`")
+        helpers-section-head(:value="`${namespace}.themeGeneratorHeader`")
+        helpers-section-text(:value="`${namespace}.themeGeneratorText1`")
 
       section#light-and-dark
-        section-head(:value="`${namespace}.lightAndDarkHeader`")
-        section-text(:value="`${namespace}.lightAndDarkText1`")
-        markup(lang="html")
+        helpers-section-head(:value="`${namespace}.lightAndDarkHeader`")
+        helpers-section-text(:value="`${namespace}.lightAndDarkText1`")
+        helpers-markup(lang="html")
           |&lt;v-app dark&gt;
           | ...
           |&lt;/v-app&gt;
-        section-text(:value="`${namespace}.lightAndDarkText2`")
+        helpers-section-text(:value="`${namespace}.lightAndDarkText2`")
 
       section#customizing
-        section-head(:value="`${namespace}.customizingHeader`")
-        section-text(:value="`${namespace}.customizingText1`")
-        markup(lang="javascript")
+        helpers-section-head(:value="`${namespace}.customizingHeader`")
+        helpers-section-text(:value="`${namespace}.customizingText1`")
+        helpers-markup(lang="javascript")
           | {
           |   primary: '#1976D2',
           |   secondary: '#424242',
@@ -27,8 +27,8 @@
           |   success: '#4CAF50',
           |   warning: '#FFC107'
           | }
-        section-text(:value="`${namespace}.customizingText2`")
-        markup(lang="javascript")
+        helpers-section-text(:value="`${namespace}.customizingText2`")
+        helpers-markup(lang="javascript")
           | Vue.use(Vuetify, {
           |   theme: {
           |     primary: '#3f51b5',
@@ -37,8 +37,8 @@
           |     error: '#b71c1c'
           |   }
           | })
-        section-text(:value="`${namespace}.customizingText3`")
-        markup(lang="javascript")
+        helpers-section-text(:value="`${namespace}.customizingText3`")
+        helpers-markup(lang="javascript")
           | import colors from 'vuetify/es5/util/colors'
           |
           | Vue.use(Vuetify, {
@@ -49,16 +49,16 @@
           |     error: colors.red.accent3
           |   }
           | })
-        section-text(:value="`${namespace}.customizingText4`")
-        section-text(:value="`${namespace}.customizingText5`")
-        markup(lang="javascript")
+        helpers-section-text(:value="`${namespace}.customizingText4`")
+        helpers-section-text(:value="`${namespace}.customizingText5`")
+        helpers-markup(lang="javascript")
           | this.$vuetify.theme.primary = '#4caf50'
 
       section#options
-        section-head(:value="`${namespace}.optionHeader`")
-        section-text(:value="`${namespace}.optionText1`")
-        section-text(:value="`${namespace}.optionText2`")
-        markup(lang="javascript")
+        helpers-section-head(:value="`${namespace}.optionHeader`")
+        helpers-section-text(:value="`${namespace}.optionText1`")
+        helpers-section-text(:value="`${namespace}.optionText2`")
+        helpers-markup(lang="javascript")
           | Vue.use(Vuetify, {
           |   theme: {
           |     primary: 'red',
@@ -69,8 +69,8 @@
           |   }
           | })
         h3.mb-3 {{ $t(`${namespace}.optionHeader2`) }}
-        section-text(:value="`${namespace}.optionText3`")
-        markup(lang="javascript")
+        helpers-section-text(:value="`${namespace}.optionText3`")
+        helpers-markup(lang="javascript")
           | Vue.use(Vuetify, {
           |   options: {
           |     minifyTheme: function (css) {
@@ -81,8 +81,8 @@
           |   }
           | })
         h3.mb-3 {{ $t(`${namespace}.optionHeader3`) }}
-        section-text(:value="`${namespace}.optionText4`")
-        markup(lang="javascript")
+        helpers-section-text(:value="`${namespace}.optionText4`")
+        helpers-markup(lang="javascript")
           | const themeCache = LRU({
           |   max: 10,
           |   maxAge: 1000 * 60 * 60 // 1 hour
@@ -95,16 +95,16 @@
           | })
 
       section#stylus-guide
-        section-head(:value="`${namespace}.stylusHeader`")
-        section-text(:value="`${namespace}.stylusText1`")
+        helpers-section-head(:value="`${namespace}.stylusHeader`")
+        helpers-section-text(:value="`${namespace}.stylusText1`")
         h3.mb-3 {{ $t(`${namespace}.stylusHeader2`) }}
-        section-text(:value="`${namespace}.stylusText2`")
-        markup(lang="cli")
+        helpers-section-text(:value="`${namespace}.stylusText2`")
+        helpers-markup(lang="cli")
           | $ npm i stylus stylus-loader style-loader css-loader --save-dev
           |// or
           | $ yarn add -D stylus stylus-loader style-loader css-loader
-        section-text(:value="`${namespace}.stylusText3`")
-        markup(lang="javascript")
+        helpers-section-text(:value="`${namespace}.stylusText3`")
+        helpers-markup(lang="javascript")
           | module: {
           |   rules: [
           |     {
@@ -113,18 +113,18 @@
           |     }
           |   ]
           | }
-        section-text(:value="`${namespace}.stylusText4`")
-        markup(lang="stylus")
+        helpers-section-text(:value="`${namespace}.stylusText4`")
+        helpers-markup(lang="stylus")
           | // main.styl
           | @import '~vuetify/src/stylus/main'
-        section-text(:value="`${namespace}.stylusText5`")
-        markup(lang="javascript")
+        helpers-section-text(:value="`${namespace}.stylusText5`")
+        helpers-markup(lang="javascript")
           | // app.js
           | import './stylus/main.styl'
-        section-text(:value="`${namespace}.stylusText6`")
+        helpers-section-text(:value="`${namespace}.stylusText6`")
         h3.mb-3 {{ $t(`${namespace}.stylusHeader3`) }}
-        section-text(:value="`${namespace}.stylusText7`")
-        markup(lang="stylus")
+        helpers-section-text(:value="`${namespace}.stylusText7`")
+        helpers-markup(lang="stylus")
           | $body-font-family = 'Open Sans'
           | $alert-font-size = 18px
           | &nbsp;

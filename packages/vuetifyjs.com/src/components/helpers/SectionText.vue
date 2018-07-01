@@ -1,6 +1,6 @@
 <template lang="pug">
   div.text-xs-justify
-    translatable(:i18n="value")
+    translation-translatable(:i18n="value")
     markdown(:source="$t(value)")
 </template>
 

@@ -1,5 +1,5 @@
 <template lang="pug">
-  doc-view#sandbox-view
+  views-doc#sandbox-view
     section
       v-layout
         v-flex(xs12).text-xs-center

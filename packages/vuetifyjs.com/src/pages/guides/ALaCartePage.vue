@@ -1,6 +1,6 @@
 <template lang="pug">
-  doc-view
-    section-text(slot="sup" :value="`Guides.ALaCarte.headerText2`")
+  views-doc
+    helpers-section-text(slot="sup" :value="`Guides.ALaCarte.headerText2`")
     template(slot-scope="{ namespace }")
       textarea(
         :style="{ position: 'absolute', left: '-1000px', top: '-1000px' }"
@@ -8,9 +8,9 @@
         ref="copy"
       )
       section#importing-components
-        section-head(:value="`${namespace}.importHeader`")
-        section-text(:value="`${namespace}.importText1`")
-        markup(lang="js")
+        helpers-section-head(:value="`${namespace}.importHeader`")
+        helpers-section-text(:value="`${namespace}.importText1`")
+        helpers-markup(lang="js")
           |// .babelrc
           |["transform-imports", {
           |  "vuetify": {
@@ -18,8 +18,8 @@
           |    "preventFullImport": true
           |  }
           |}]
-        app-alert(:value="`${namespace}.alert2`" error)
-        markup(lang="js")
+        core-alert(:value="`${namespace}.alert2`" error)
+        helpers-markup(lang="js")
           |// main.js
           |import Vue from 'vue'
           |import App from './App.vue'
@@ -45,9 +45,9 @@
           |     Ripple
           |   }
           |})
-        app-alert(:value="`${namespace}.alert3`" info)
-        section-text(:value="`${namespace}.importText2`")
-        markup(lang="js")
+        core-alert(:value="`${namespace}.alert3`" info)
+        helpers-section-text(:value="`${namespace}.importText2`")
+        helpers-markup(lang="js")
           |// main.js
           |// Without `transform-imports` package
           |import Vue from 'vue'
@@ -64,8 +64,8 @@
           |   directives,
           |   transitions,
           |})
-        section-text(:value="`${namespace}.importText3`")
-        markup(lang="js")
+        helpers-section-text(:value="`${namespace}.importText3`")
+        helpers-markup(lang="js")
           |// .vue files
           |import * as VCard from 'vuetify/es5/components/VCard'
           |
@@ -76,20 +76,20 @@
           |}
 
       section#required-styles
-        section-head(:value="`${namespace}.styleHeader`")
-        section-text(:value="`${namespace}.styleText1`")
-        markup(lang="cli")
+        helpers-section-head(:value="`${namespace}.styleHeader`")
+        helpers-section-text(:value="`${namespace}.styleText1`")
+        helpers-markup(lang="cli")
           |$ npm install --save-dev stylus stylus-loader
           |# or
           |$ yarn add --dev stylus stylus-loader
-        section-text(:value="`${namespace}.styleText2`")
-        markup(lang="js")
+        helpers-section-text(:value="`${namespace}.styleText2`")
+        helpers-markup(lang="js")
           |// src/main.js
           |require('vuetify/src/stylus/app.styl')
 
       section#component-name-list
-        section-head(:value="`${namespace}.componentNameListHeader`")
-        section-text(:value="`${namespace}.componentNameListText1`")
+        helpers-section-head(:value="`${namespace}.componentNameListHeader`")
+        helpers-section-text(:value="`${namespace}.componentNameListText1`")
         v-card
           v-card-title
             v-spacer

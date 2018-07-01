@@ -1,5 +1,5 @@
 <template lang="pug">
-  doc-view
+  views-doc
     template(slot-scope="{ namespace }")
       section#frequently-asked-questions
       template(
@@ -14,9 +14,9 @@
 
       div.text-xs-center
         div.mb-3
-          translatable(:i18n="`${namespace}.questionHeader`")
+          translation-translatable(:i18n="`${namespace}.questionHeader`")
             span {{ $t(`${namespace}.questionHeader`) }}
-        translatable(:i18n="`${namespace}.questionButton`")
+        translation-translatable(:i18n="`${namespace}.questionButton`")
           v-btn(
             outline
             color="success"

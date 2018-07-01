@@ -1,5 +1,5 @@
 <template>
-  <doc-view>
+  <views-doc>
     <v-layout wrap mb-5>
       <v-flex
         xs12
@@ -98,7 +98,7 @@
                 v-if="hasTab(tabItem)"
                 flat
               >
-                <parameters
+                <helpers-parameters
                   :headers="headers[tabItem]"
                   :items="currentApi[tabItem]"
                   :namespace="currentProxy.namespace"
@@ -113,19 +113,19 @@
         </v-card>
       </v-flex>
     </v-layout>
-  </doc-view>
+  </views-doc>
 </template>
 
 <script>
   import api from 'api-generator'
   import { camel } from '@/util/helpers'
   import { mapState } from 'vuex'
-  import ExampleView from '@/components/views/ExampleView'
+  import Example from '@/components/views/Example'
 
   export default {
     name: 'ApiExplorerPage',
 
-    extends: ExampleView,
+    extends: Example,
 
     data: () => ({
       current: null,

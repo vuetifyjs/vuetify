@@ -1,8 +1,8 @@
 <template lang="pug">
-  doc-view
+  views-doc
     template(slot-scope="{ namespace }")
       section#playground
-        section-head(:value="`${namespace}.playgroundHeader`")
+        helpers-section-head(:value="`${namespace}.playgroundHeader`")
         v-container(fluid)
           v-layout(row)
             v-flex(xs4)

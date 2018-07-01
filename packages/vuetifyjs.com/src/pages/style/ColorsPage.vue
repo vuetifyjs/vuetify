@@ -1,23 +1,23 @@
 <template lang="pug">
-  doc-view
+  views-doc
     template(slot-scope="{ namespace }")
       section#classes
-        section-head(:value="`${namespace}.classesHeader`")
-        section-text(:value="`${namespace}.classesText`")
-        example(
+        helpers-section-head(:value="`${namespace}.classesHeader`")
+        helpers-section-text(:value="`${namespace}.classesText`")
+        helpers-example(
           readonly
           file="colors/classes"
         )
-        section-text(:value="`${namespace}.classesText2`")
-        example(
+        helpers-section-text(:value="`${namespace}.classesText2`")
+        helpers-example(
           readonly
           file="colors/textClasses"
         )
 
       section#javascript-color-pack
-        section-head(:value="`${namespace}.javascriptPackHeader`")
-        section-text(:value="`${namespace}.javascriptPackText`")
-        markup(lang="js")
+        helpers-section-head(:value="`${namespace}.javascriptPackHeader`")
+        helpers-section-text(:value="`${namespace}.javascriptPackText`")
+        helpers-markup(lang="js")
           | // src/index.js
           |
           | // Libraries
@@ -36,24 +36,24 @@
           | })
 
       section#stylus-color-pack
-        section-head(:value="`${namespace}.stylusPackHeader`")
-        section-text(:value="`${namespace}.stylusPackText`")
-        markup(lang="stylus").mb-3
+        helpers-section-head(:value="`${namespace}.stylusPackHeader`")
+        helpers-section-text(:value="`${namespace}.stylusPackText`")
+        helpers-markup(lang="stylus").mb-3
           | // src/assets/stylus/main.styl
           |
           | $color-pack = false
           |
           | @import '~vuetify/src/stylus/main'
-        section-text(:value="`${namespace}.stylusPackText2`")
-        markup(lang="js").mb-3
+        helpers-section-text(:value="`${namespace}.stylusPackText2`")
+        helpers-markup(lang="js").mb-3
           | // src/index.js
           |
           | import './assets/stylus/main.styl'
           | // or
           | require('./assets/stylus/main.styl')
-        app-alert(error :value="`${namespace}.alert`")
-        section-text(:value="`${namespace}.stylusPackText3`")
-        markup(lang="vue")
+        core-alert(error :value="`${namespace}.alert`")
+        helpers-section-text(:value="`${namespace}.stylusPackText3`")
+        helpers-markup(lang="vue")
           | &lt;style lang="stylus"&gt;
           |   $color-pack = false
           |
@@ -61,8 +61,8 @@
           | &lt;/style&gt;
 
       section#material-colors
-        section-head(:value="`${namespace}.colorHeader`")
-        section-text(:value="`${namespace}.colorText`")
+        helpers-section-head(:value="`${namespace}.colorHeader`")
+        helpers-section-text(:value="`${namespace}.colorText`")
         v-container(fluid grid-list-xl).pa-0
           v-layout(row wrap)
             v-flex(xs12).mb-3

@@ -1,33 +1,18 @@
 <template>
   <v-app v-cloak>
-    <app-drawer />
+    <core-drawer />
 
-    <app-toolbar />
+    <core-toolbar />
 
-    <app-view />
+    <core-view />
 
-    <app-fab />
+    <core-fab />
 
-    <app-snackbar />
+    <core-snackbar />
   </v-app>
 </template>
 
 <script>
-  import AppDrawer from '@/components/core/AppDrawer'
-  import AppFab from '@/components/core/AppFab'
-  import AppSnackbar from '@/components/core/AppSnackbar'
-  import AppToolbar from '@/components/core/AppToolbar'
-  import AppView from '@/components/core/AppView'
-
   export default {
-    name: 'Documentation',
-
-    components: {
-      AppDrawer,
-      AppFab,
-      AppSnackbar,
-      AppToolbar,
-      AppView
-    }
   }
 </script>

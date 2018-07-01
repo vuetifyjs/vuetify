@@ -1,5 +1,5 @@
 <template lang="pug">
-  doc-view#typography-page
+  views-doc#typography-page
     template(slot-scope="{ namespace }")
       section WIP
       section#font-size

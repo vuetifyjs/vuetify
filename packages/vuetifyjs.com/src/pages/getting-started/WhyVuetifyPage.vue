@@ -1,5 +1,5 @@
 <template lang="pug">
-  doc-view
+  views-doc
     template(slot-scope="{ namespace }")
       section#why-vuetify
         v-layout(row wrap).mb-5
@@ -25,10 +25,10 @@
                           size="100px"
                         )
                     div.px-3
-                    translatable(:i18n="`${namespace}.philosophies[${i}].title`")
+                    translation-translatable(:i18n="`${namespace}.philosophies[${i}].title`")
                     v-card-title.headline.layout.justify-center
                       span(v-text="$t(`${namespace}.philosophies[${i}].title`)")
-                    translatable(:i18n="`${namespace}.philosophies[${i}].caption`")
+                    translation-translatable(:i18n="`${namespace}.philosophies[${i}].caption`")
                     v-card-text.caption.text-xs-justify
                       markdown(:source="$t(`${namespace}.philosophies[${i}].caption`)")
 
@@ -39,22 +39,22 @@
               v-flex(xs12 md7).mb-5
                 section.text-xs-justify
                   div(v-for="(p, i) in whyText" :key="i")
-                    translatable(:i18n="`${namespace}.whyText[${i}]`")
+                    translation-translatable(:i18n="`${namespace}.whyText[${i}]`")
                       markdown(:source="$t(`${namespace}.whyText[${i}]`)")
 
                 section#design-principles
-                  section-head(:value="`${namespace}.designHeader`")
-                  section-text(:value="`${namespace}.designText`")
+                  helpers-section-head(:value="`${namespace}.designHeader`")
+                  helpers-section-text(:value="`${namespace}.designText`")
 
                 section#vibrant-community
-                  section-head(:value="`${namespace}.communityHeader`")
-                  section-text(:value="`${namespace}.communityText`")
+                  helpers-section-head(:value="`${namespace}.communityHeader`")
+                  helpers-section-text(:value="`${namespace}.communityText`")
 
                 section#framework-comparison
-                  section-head(:value="`${namespace}.comparisonHeader`")
-                  section-text(:value="`${namespace}.comparisonText`")
+                  helpers-section-head(:value="`${namespace}.comparisonHeader`")
+                  helpers-section-text(:value="`${namespace}.comparisonText`")
 
-                  translatable(:i18n="`${namespace}.featuresHeader`")
+                  translation-translatable(:i18n="`${namespace}.featuresHeader`")
                     v-subheader {{ $t(`${namespace}.featuresHeader`) }}
                   v-layout(row wrap justify-center)
                     v-flex(xs12)
@@ -67,7 +67,7 @@
                           avatar
                           :class="{ 'grey lighten-3': i % 2 === 0 }"
                         )
-                          translatable(:i18n="`${namespace}.featuresList[${i}]`")
+                          translation-translatable(:i18n="`${namespace}.featuresList[${i}]`")
                           v-list-tile-content
                             v-list-tile-title.subheading
                               span {{ $t(`${namespace}.featuresList[${i}]`) }}
@@ -83,7 +83,7 @@
                         v-list-tile-avatar
                           v-avatar
                             img(src="/doc-images/john.jpg")
-                        translatable(:i18n="`${namespace}.authorOfVuetify`")
+                        translation-translatable(:i18n="`${namespace}.authorOfVuetify`")
                         v-list-tile-content
                           v-list-tile-title John Leider
                           v-list-tile-sub-title {{ $t(`${namespace}.authorOfVuetify`) }}
@@ -96,7 +96,7 @@
                             ).grey--text
                               v-icon mail
                             span {{ $t(`${namespace}.contactMe`) }}
-                    translatable(:i18n="`${namespace}.letterFromAuthor`")
+                    translation-translatable(:i18n="`${namespace}.letterFromAuthor`")
                     v-card-text {{ $t(`${namespace}.letterFromAuthor`) }}
                     v-card-text.text-xs-right <em>&mdash;John Leider</em>
 

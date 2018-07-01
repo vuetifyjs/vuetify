@@ -5,10 +5,11 @@ import 'event-source-polyfill'
 // Packages
 import Vue from 'vue'
 import Vuetify from 'vuetify'
-import VeeValidate from 'vee-validate'
 import axios from 'axios'
 
 // Bootstrap
+import '@/components'
+import '@/plugins'
 import { createStore } from '@/store/index'
 import { createRouter } from '@/router/index'
 import { createI18n } from '@/i18n/index'
@@ -16,27 +17,8 @@ import { sync } from 'vuex-router-sync'
 
 // Application
 import App from './App.vue'
-import Components from '@/components'
 
 Vue.config.performance = process.env.NODE_ENV === 'development'
-
-// Requests
-Vue.prototype.$http = axios.create({ baseURL: '/' })
-
-Vue.use(VeeValidate, { inject: false })
-Vue.use(Vuetify, {
-  theme: {
-    primary: '#1867C0',
-    secondary: '#5CBBF6',
-    tertiary: '#E57373',
-    accent: '#005CAF'
-  }
-})
-
-// Bootstrap application components
-Object.keys(Components).forEach(key => {
-  Vue.component(key, Components[key])
-})
 
 // Expose a factory function that creates a fresh set of store, router,
 // app instances on each call (which is called for each SSR request)

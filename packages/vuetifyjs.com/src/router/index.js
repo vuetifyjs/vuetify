@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import VueAnalytics from 'vue-analytics'
 import Routes from '@/data/routes.json'
 import scrollBehavior from './scroll-behavior'
+import Root from '@/components/views/Root'
 
 Vue.use(Router)
 
@@ -55,7 +56,7 @@ export function createRouter (store) {
     routes: [
       {
         path: '/:lang([a-z]{2,3}|[a-z]{2,3}-[a-zA-Z]{4}|[a-z]{2,3}-[A-Z]{2,3})',
-        component: () => import(/* webpackChunkName: "routes" */'@/components/views/RootView.vue'),
+        component: Root,
         props: route => ({ lang: route.params.lang }),
         children: routes
       },

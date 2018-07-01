@@ -1,5 +1,5 @@
 <template lang="pug">
-  example-view(:data="data")
+  views-example(:data="data")
     section
 </template>
 

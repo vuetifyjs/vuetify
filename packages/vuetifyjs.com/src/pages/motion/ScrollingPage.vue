@@ -1,20 +1,20 @@
 <template lang="pug">
-  example-view(:data="data")
+  views-example(:data="data")
     section(slot-scope="props")
-      section-head(value="Motion.Scrolling.firstHeader")#first
-      section-text(value="Motion.Scrolling.loremIpsum")
-      section-text(value="Motion.Scrolling.loremIpsum")
-      section-text(value="Motion.Scrolling.loremIpsum")
+      helpers-section-head(value="Motion.Scrolling.firstHeader")#first
+      helpers-section-text(value="Motion.Scrolling.loremIpsum")
+      helpers-section-text(value="Motion.Scrolling.loremIpsum")
+      helpers-section-text(value="Motion.Scrolling.loremIpsum")
 
-      section-head(value="Motion.Scrolling.secondHeader")#second
-      section-text(value="Motion.Scrolling.loremIpsum")
-      section-text(value="Motion.Scrolling.loremIpsum")
-      section-text(value="Motion.Scrolling.loremIpsum")
+      helpers-section-head(value="Motion.Scrolling.secondHeader")#second
+      helpers-section-text(value="Motion.Scrolling.loremIpsum")
+      helpers-section-text(value="Motion.Scrolling.loremIpsum")
+      helpers-section-text(value="Motion.Scrolling.loremIpsum")
 
-      section-head(value="Motion.Scrolling.thirdHeader")#third
-      section-text(value="Motion.Scrolling.loremIpsum")
-      section-text(value="Motion.Scrolling.loremIpsum")
-      section-text(value="Motion.Scrolling.loremIpsum")
+      helpers-section-head(value="Motion.Scrolling.thirdHeader")#third
+      helpers-section-text(value="Motion.Scrolling.loremIpsum")
+      helpers-section-text(value="Motion.Scrolling.loremIpsum")
+      helpers-section-text(value="Motion.Scrolling.loremIpsum")
 </template>
 
 <script>
