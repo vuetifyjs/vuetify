@@ -11,7 +11,7 @@ export default {
       commit('SET_PRODUCT', product)
     })
   },
-  getCheckout ({ dispatch, commit }, fresh = false) {
+  async getCheckout ({ dispatch, commit }, fresh = false) {
     let checkout
     const checkoutId = localStorage.getItem('vuetify_shopify_checkout_id')
 
@@ -27,6 +27,6 @@ export default {
       }
       commit('SET_CHECKOUT', checkout)
       localStorage.setItem('vuetify_shopify_checkout_id', checkout.id)
-    })
+    }).catch(() => dispatch('getCheckout', true))
   }
 }
