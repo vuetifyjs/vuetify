@@ -48,6 +48,14 @@
     "size": "50"
   },
   {
+    "name": "DigitalMaas",
+    "href": "https://www.digitalmaas.com/",
+    "logo": "backers/digital-maas.svg",
+    "type": "Patron",
+    "pledge": "Palladium ($250)",
+    "size": "50"
+  },
+  {
     "name": "Deister Software",
     "href": "http://www.deister.es/",
     "logo": "backers/deister-logo-light.png",
