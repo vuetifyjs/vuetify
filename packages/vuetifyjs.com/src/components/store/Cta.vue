@@ -54,7 +54,21 @@
                 :src="highlight.variants[0].image.src"
                 contain
                 height="135px"
-              />
+              >
+                <div
+                  v-if="highlight.isOnSale"
+                  class="grow text-xs-right"
+                >
+                  <v-chip
+                    class="white--text"
+                    color="red"
+                    disabled
+                    small
+                  >
+                    {{ $t('Vuetify.Store.onSale') }}
+                  </v-chip>
+                </div>
+              </v-card-media>
             </v-card>
           </v-flex>
         </v-layout>
@@ -66,7 +80,10 @@
 <script>
   // Helpers
   import { mapState } from 'vuex'
-  import { shortId } from '@/util/helpers'
+  import {
+    isOnSale,
+    shortId
+  } from '@/util/helpers'
 
   export default {
     data: () => ({
@@ -81,9 +98,16 @@
       products: {
         immediate: true,
         handler () {
-          this.highlights = this.products.slice(0, 4).map(product =>
-            Object.assign({ value: false }, product)
-          )
+          this.highlights = this.products.map(product =>
+            Object.assign({
+              isOnSale: isOnSale(product.variants),
+              value: false
+            }, product)
+          ).sort((a, b) => {
+            return a.isOnSale
+              ? -1
+              : b.isOnSale ? 1 : 0
+          }).slice(0, 4)
         }
       }
     },

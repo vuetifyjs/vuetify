@@ -32,12 +32,7 @@
               sm6
               xs12
             >
-              <store-product
-                :price="product.variants[0].price"
-                :src="product.variants[0].image.src"
-                :title="product.title"
-                :value="product"
-              />
+              <store-product :value="product" />
             </v-flex>
           </template>
         </v-layout>

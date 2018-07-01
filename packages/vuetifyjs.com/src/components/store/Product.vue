@@ -29,8 +29,14 @@
               class="grey--text mb-4"
               v-text="description"
             />
-            <div
-              class="headline green--text text--darken-2"
+            <span
+              v-if="compareAtPrice"
+              class="headline grey--text text--darken-2 text--line-through"
+              v-text="`$${compareAtPrice}`"
+            />
+            <span
+              :class="compareAtPrice ? 'red--text' : 'grey--text'"
+              class="headline text--darken-2"
               v-text="`$${price}`"
             />
           </div>
@@ -43,24 +49,11 @@
 <script>
   // Utilities
   import {
-    isOnSale,
     shortId
   } from '@/util/helpers'
 
   export default {
     props: {
-      price: {
-        type: String,
-        required: true
-      },
-      src: {
-        type: String,
-        required: true
-      },
-      title: {
-        type: String,
-        required: true
-      },
       value: {
         type: Object,
         required: true
@@ -75,11 +68,26 @@
 
         return description.slice(0, 52) + '...'
       },
-      isOnSale () {
-        return isOnSale(this.value.variants)
+      price () {
+        return this.value.variants[0].price
+      },
+      compareAtPrice () {
+        for (const variant of this.value.variants) {
+          const diff = parseFloat(variant.price) < parseFloat(variant.compareAtPrice)
+
+          if (diff) return variant.compareAtPrice
+        }
+
+        return false
       },
       shortId () {
         return shortId(this.value.id)
+      },
+      src () {
+        return this.value.variants[0].image.src
+      },
+      title () {
+        return this.value.title
       }
     }
   }
@@ -89,4 +97,7 @@
   // Temp fix until update
   .v-divider--vertical
     max-width: 1px
+
+  .text--line-through
+    text-decoration: line-through
 </style>
