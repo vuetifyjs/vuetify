@@ -77,8 +77,14 @@
         :to="{ name: 'store/Front' }"
       )
         translatable(i18n="Vuetify.AppToolbar.store")
-        span.hidden-sm-and-down {{ $t('Vuetify.AppToolbar.store' )}}
-        v-icon.hidden-md-and-up store
+        v-badge(color="red")
+          v-icon(
+            v-if="storeSale"
+            slot="badge"
+            v-text="storeSale"
+          )
+          span.hidden-sm-and-down {{ $t('Vuetify.AppToolbar.store' )}}
+          v-icon.hidden-md-and-up store
 
     v-toolbar-items
       v-menu(
@@ -187,7 +193,11 @@
   import StoreToolbar from '@/components/store/Toolbar'
 
   // Utilities
-  import { mapState, mapMutations } from 'vuex'
+  import {
+    mapGetters,
+    mapMutations,
+    mapState
+  } from 'vuex'
   import languages from '@/data/i18n/languages.json'
 
   export default {
@@ -204,6 +214,7 @@
     }),
 
     computed: {
+      ...mapGetters('store', ['storeSale']),
       ...mapState('translation', [
         'isTranslating'
       ]),
