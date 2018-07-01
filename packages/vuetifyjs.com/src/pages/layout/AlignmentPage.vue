@@ -1,9 +1,9 @@
 <template lang="pug">
-  doc-view
+  views-doc
     template(slot-scope="{ namespace }")
       section#examples
-        section-head(value="Generic.Pages.examples")
-        example(
+        helpers-section-head(value="Generic.Pages.examples")
+        helpers-example(
           file="alignment/example"
         )
 </template>

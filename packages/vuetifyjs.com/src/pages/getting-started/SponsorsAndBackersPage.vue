@@ -1,8 +1,8 @@
 <template lang="pug">
-  doc-view
+  views-doc
     template(slot-scope="{ namespace }")
       section#sponsors-and-backers
-        section-head(value="GettingStarted.SponsorsAndBackers.backersHeader")
+        helpers-section-head(value="GettingStarted.SponsorsAndBackers.backersHeader")
         v-divider.mb-3
         v-list(dense).transparent
           v-list-tile
@@ -73,7 +73,7 @@
                 :alt="backer.name"
                 :style="`max-width: ${backer.Size || 150}px;`"
               ).supporter
-        section-head(value="GettingStarted.SponsorsAndBackers.affiliatesHeader")
+        helpers-section-head(value="GettingStarted.SponsorsAndBackers.affiliatesHeader")
         v-divider.mb-3
         v-container(fluid grid-list-md).mb-5.affiliate3
           v-layout(
@@ -96,7 +96,7 @@
                 :alt="affiliate.name"
                 style="max-width: 150px;"
               ).supporter
-        section-head(value="GettingStarted.SponsorsAndBackers.sponsorsHeader")
+        helpers-section-head(value="GettingStarted.SponsorsAndBackers.sponsorsHeader")
         v-divider.mb-3
         v-container(fluid).mb-3
           v-layout(
@@ -120,9 +120,9 @@
               ).supporter
         div.text-xs-center
           div.mb-3
-            translatable(i18n="GettingStarted.SponsorsAndBackers.questionHeader")
+            translation-translatable(i18n="GettingStarted.SponsorsAndBackers.questionHeader")
               span {{ $t('GettingStarted.SponsorsAndBackers.questionHeader') }}
-          translatable(i18n="GettingStarted.SponsorsAndBackers.questionButton")
+          translation-translatable(i18n="GettingStarted.SponsorsAndBackers.questionButton")
             v-btn(
               outline
               color="success"

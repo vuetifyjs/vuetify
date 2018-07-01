@@ -1,6 +1,6 @@
 <template lang="pug">
   v-container(v-bind="$attrs").page
-    app-back-fab(:to="to" v-if="to != null && !noBack")
+    core-back-fab(:to="to" v-if="to != null && !noBack")
     slot(:namespace="namespace")
 </template>
 

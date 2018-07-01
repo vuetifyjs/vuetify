@@ -1,5 +1,5 @@
 <template lang="pug">
-  doc-view
+  views-doc
     section#highlights
       table.v-table.elevation-1.mb-5
         tbody
@@ -14,9 +14,9 @@
               div(v-html="roadmap.name").body-2
               span(v-html="roadmap.date")
             td
-              translatable(:i18n="`${roadmap.namespace}.desc`")
+              translation-translatable(:i18n="`${roadmap.namespace}.desc`")
                 markdown(:source="roadmap.desc")
-      support-vuetify
+      misc-support-vuetify
 </template>
 
 <script>

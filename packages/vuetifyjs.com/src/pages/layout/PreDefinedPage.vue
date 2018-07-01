@@ -1,13 +1,13 @@
 <template lang="pug">
-  doc-view
-    app-alert(error :value="`Layout.PreDefined.alert1`" slot="sup")
+  views-doc
+    core-alert(error :value="`Layout.PreDefined.alert1`" slot="sup")
 
     template(slot-scope="{ namespace }")
       section#default-markup
-        section-head(:value="`${namespace}.markupHeader`")
-        section-text(:value="`${namespace}.markupText`")
+        helpers-section-head(:value="`${namespace}.markupHeader`")
+        helpers-section-text(:value="`${namespace}.markupText`")
 
-        markup(lang='html')
+        helpers-markup(lang='html')
           |&lt;v-app&gt;
           |   &lt;v-navigation-drawer app&gt;&lt;/v-navigation-drawer&gt;
           |   &lt;v-toolbar app&gt;&lt;/v-toolbar&gt;
@@ -19,11 +19,11 @@
           |   &lt;v-footer app&gt;&lt;/v-footer&gt;
           |&lt;/v-app&gt;
 
-        app-alert(info :value="`${namespace}.alert2`" slot="sup")
+        core-alert(info :value="`${namespace}.alert2`" slot="sup")
 
       section#all-about-app
-        section-head(:value="`${namespace}.appHeader`")
-        section-text(:value="`${namespace}.appText`")
+        helpers-section-head(:value="`${namespace}.appHeader`")
+        helpers-section-text(:value="`${namespace}.appText`")
 
       section#layouts
         v-container(fluid grid-list-xl).pa-0

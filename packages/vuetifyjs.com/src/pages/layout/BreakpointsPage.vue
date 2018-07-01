@@ -1,13 +1,13 @@
 <template lang="pug">
-  doc-view
+  views-doc
     template(slot-scope="{ namespace }")
       section#breakpoints
-        grid
+        misc-grid
 
       section#breakpoint-object
-        section-head(value="Layout.Breakpoints.breakpointHeader")
-        section-text(value="Layout.Breakpoints.breakpointText1")
-        markup(lang="js")
+        helpers-section-head(value="Layout.Breakpoints.breakpointHeader")
+        helpers-section-text(value="Layout.Breakpoints.breakpointText1")
+        helpers-markup(lang="js")
           | export default {
           |   mounted () {
           |     console.log(this.$vuetify.breakpoint)
@@ -24,8 +24,8 @@
           |     }
           |   }
           | }
-        section-text(value="Layout.Breakpoints.breakpointText2")
-        markup(lang="js")
+        helpers-section-text(value="Layout.Breakpoints.breakpointText2")
+        helpers-markup(lang="js")
           | export default {
           |   data: () => ({
           |     isMobile: false
@@ -45,14 +45,14 @@
           |     }
           |   }
           | }
-        section-text(value="Layout.Breakpoints.breakpointText3")
-        markup(lang="html")
+        helpers-section-text(value="Layout.Breakpoints.breakpointText3")
+        helpers-markup(lang="html")
           | &lt;v-dialog :fullscreen="$vuetify.breakpoint.xsOnly"&gt;
           | &nbsp;&nbsp;&nbsp;&nbsp;...
           | &lt;/v-dialog&gt;
-        section-text(value="Layout.Breakpoints.breakpointText4")
+        helpers-section-text(value="Layout.Breakpoints.breakpointText4")
         ul.browser-list.pb-2
-        markup(lang="ts")
+        helpers-markup(lang="ts")
           | {
           |   xs: boolean
           |   xsOnly: boolean

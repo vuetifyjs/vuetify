@@ -1,7 +1,7 @@
 <template>
   <section id="sponsors-and-backers">
     <div class="text-xs-center">
-      <section-head value="Vuetify.Home.proudlySponsoredBy" />
+      <helpers-section-head value="Vuetify.Home.proudlySponsoredBy" />
     </div>
     <v-container>
       <v-layout>

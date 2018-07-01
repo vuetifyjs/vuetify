@@ -1,5 +1,5 @@
 <template lang="pug">
-  fullscreen-view(no-back)#theme-generator
+  views-fullscreen(no-back)#theme-generator
     v-btn(
       fab
       top
@@ -86,8 +86,17 @@
 
 <script>
   import colors from 'vuetify/es5/util/colors'
-  import Components from '@/components/generator'
   import { Swatches } from 'vue-color'
+
+  const files = require.context(
+    '@/components/generator',
+    false,
+    /\.vue$/
+  )
+
+  const components = files.keys().map(file => {
+    return `Generator${file.replace(/\.\/|.vue/g, '')}`
+  })
 
   export default {
     components: {
@@ -99,7 +108,7 @@
         active: 'primary',
         backupTheme: {},
         color: '',
-        components: Components,
+        components,
         current: 1,
         dark: false,
         dialog: false,
@@ -115,7 +124,7 @@
           success: colors.green.base
         },
         to: null,
-        total: Components.length
+        total: components.length
       }
     },
 

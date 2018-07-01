@@ -1,7 +1,5 @@
 <script>
   export default {
-    name: 'AppTableOfContents',
-
     props: {
       discovery: {
         type: Boolean,
@@ -100,7 +98,7 @@
         })
 
         return this.$createElement('li', [
-          this.$createElement('translatable', {
+          this.$createElement('translation-translatable', {
             props: {
               i18n: item.text
             }

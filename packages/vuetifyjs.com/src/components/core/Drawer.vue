@@ -19,7 +19,7 @@
             :src="`/doc-images/${diamond.logo}`"
             :alt="diamond.Name"
           )
-      patreon-btn
+      misc-patreon-btn
     v-container(fluid)
       v-text-field(
         placeholder="Search"

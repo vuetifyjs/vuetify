@@ -8,7 +8,7 @@
         style="text-decoration: none;"
       ).mr-2
         v-icon(color="accent") mdi-pound
-      translatable(:i18n="header").d-inline-flex.align-center
+      translation-translatable(:i18n="header").d-inline-flex.align-center
         span(v-text="$t(header)")
         v-chip(
           v-if="newIn"
@@ -22,7 +22,7 @@
 
     //- Description
     // TODO: make independant of english locale
-    translatable(v-if="$te(desc, 'en')" :i18n="desc")
+    translation-translatable(v-if="$te(desc, 'en')" :i18n="desc")
       markdown(:source="$t(desc)")
 
     v-card(:class="{ 'elevation-0': readonly }").mt-4
@@ -81,7 +81,7 @@
             ) {{ tab }}
             v-tabs-items(class="grey lighten-3")
               v-tab-item(v-for="tab in tabs" :key="tab")
-                markup(:lang="getLang(tab)" v-if="parsed[tab]").ma-0
+                helpers-markup(:lang="getLang(tab)" v-if="parsed[tab]").ma-0
                   | {{ parsed[tab] }}
 
       v-divider(v-if="!readonly")
@@ -91,7 +91,7 @@
         component(:is="component")
 
     //- Codepen
-    codepen(ref="codepen" :pen="parsed")
+    helpers-codepen(ref="codepen" :pen="parsed")
 </template>
 
 <script>

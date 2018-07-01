@@ -1,16 +1,16 @@
 <template lang="pug">
-  example-view(:data="data")
+  views-example(:data="data")
     section(slot-scope="props")#create-your-own
-      section-head(value="Motion.Transitions.createYourOwnHeader")
-      section-text(value="Motion.Transitions.createYourOwnText1")
-      markup(lang="javascript")
+      helpers-section-head(value="Motion.Transitions.createYourOwnHeader")
+      helpers-section-text(value="Motion.Transitions.createYourOwnText1")
+      helpers-markup(lang="javascript")
         | import { createSimpleTransition } from 'vuetify/es5/util/helpers'
         | &nbsp;
         | const myTransition = createSimpleTransition('my-transition')
         | &nbsp;
         | Vue.component('my-transition', myTransition)
-      section-text(value="Motion.Transitions.createYourOwnText2")
-      markup(lang="stylus")
+      helpers-section-text(value="Motion.Transitions.createYourOwnText2")
+      helpers-markup(lang="stylus")
         | .fade-transition
         |   &-leave-active
         |     position: absolute

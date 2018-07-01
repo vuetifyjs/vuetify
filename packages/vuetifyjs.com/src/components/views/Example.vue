@@ -1,12 +1,12 @@
 <template lang="pug">
-  doc-view(
+  views-doc(
     :toc="toc"
     :id="folder"
   )
     template(slot-scope="{ namespace }")
       section(v-if="usage")#usage
-        section-head(value="Generic.Pages.usage")
-        example(
+        helpers-section-head(value="Generic.Pages.usage")
+        helpers-example(
           :new-in="usage.new"
           :file="`${folder}/${usage.file}`"
           :inverted="usage.inverted"
@@ -17,7 +17,7 @@
         )
 
       section#api
-        section-head(value="Generic.Pages.api")
+        helpers-section-head(value="Generic.Pages.api")
         v-card
           v-tabs(
             v-model="tab"
@@ -55,7 +55,7 @@
               :key="i"
             )
               v-card(flat v-if="hasTab(tabItem)")
-                parameters(
+                helpers-parameters(
                   :headers="headers[tabItem]"
                   :items="currentApi[tabItem]"
                   :namespace="namespace"
@@ -66,18 +66,18 @@
                 )
 
       section(v-if="supplemental.length > 0")#supplemental
-        section-head(value="Generic.Pages.supplemental")
+        helpers-section-head(value="Generic.Pages.supplemental")
         component(
           v-for="sup in supplemental"
           :key="sup"
-          :is="sup"
+          :is="`Misc${sup}`"
         )
 
       slot(name="top")
       section(v-if="examples.length > 1")#examples
-        section-head(value="Generic.Pages.examples")
+        helpers-section-head(value="Generic.Pages.examples")
         template(v-for="(example, i) in examples.slice(1)")
-          example(
+          helpers-example(
             :header="example.header"
             :new-in="example.newIn"
             :file="`${folder}/${example.file}`"

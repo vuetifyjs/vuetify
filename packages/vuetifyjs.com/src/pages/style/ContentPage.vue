@@ -1,26 +1,26 @@
 <template lang="pug">
-  doc-view#content-page
+  views-doc#content-page
     template(slot-scope="{ namespace }")
       section#blockquote
-        section-head(:value="`${namespace}.blockquoteHeader`")
+        helpers-section-head(:value="`${namespace}.blockquoteHeader`")
         blockquote.blockquote.mb-5 {{ lorem }}
 
       section#paragraphs
-        section-head(:value="`${namespace}.paragraphsHeader`")
+        helpers-section-head(:value="`${namespace}.paragraphsHeader`")
         p {{ lorem }}
         p {{ lorem }}
 
       section#code
-        section-head(:value="`${namespace}.codeHeader`")
-        section-text(:value="`${namespace}.codeText`")
+        helpers-section-head(:value="`${namespace}.codeHeader`")
+        helpers-section-text(:value="`${namespace}.codeText`")
 
       section#variables
-        section-head(:value="`${namespace}.variablesHeader`")
-        section-text(:value="`${namespace}.variablesText`")
+        helpers-section-head(:value="`${namespace}.variablesHeader`")
+        helpers-section-text(:value="`${namespace}.variablesText`")
 
       section#user-input
-        section-head(:value="`${namespace}.userInputHeader`")
-        section-text(:value="`${namespace}.userInputText`")
+        helpers-section-head(:value="`${namespace}.userInputHeader`")
+        helpers-section-text(:value="`${namespace}.userInputText`")
 
 </template>
 

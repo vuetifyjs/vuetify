@@ -6,7 +6,7 @@
         v-layout
           v-flex(xs12)
             h2.text-xs-center.headline.mb-3.grey--text
-              translatable(i18n="Vuetify.Home.proudlySponsoredBy")
+              translation-translatable(i18n="Vuetify.Home.proudlySponsoredBy")
                 span {{ $t('Vuetify.Home.proudlySponsoredBy') }}
 
             v-layout(row wrap justify-center align-center)
@@ -34,7 +34,7 @@
 
               v-flex(xs12).my-3
                 h3.text-xs-center.headline.mb-3.grey--text
-                  translatable(i18n="Vuetify.Home.specialSponsors")
+                  translation-translatable(i18n="Vuetify.Home.specialSponsors")
                     span {{ $t('Vuetify.Home.specialSponsors') }}
 
               v-flex(xs12).text-xs-center.mb-5
@@ -53,7 +53,7 @@
                   )
 
               v-flex(xs12).text-xs-center
-                translatable(i18n="Vuetify.Home.becomeSponsor")
+                translation-translatable(i18n="Vuetify.Home.becomeSponsor")
                 v-btn(
                   :to="{ name: 'getting-started/SponsorsAndBackers' }"
                   color="primary"
@@ -65,9 +65,9 @@
     section#checked-features.mb-5
       v-container
         h2.text-xs-center.headline.mb-5.grey--text
-          translatable(i18n="Vuetify.Home.checkFeaturesTitle")
+          translation-translatable(i18n="Vuetify.Home.checkFeaturesTitle")
           span {{ $t("Vuetify.Home.checkFeaturesTitle") }}
-          translatable(i18n="Vuetify.Home.checkFeaturesTitleCtd")
+          translation-translatable(i18n="Vuetify.Home.checkFeaturesTitleCtd")
             span {{ $t("Vuetify.Home.checkFeaturesTitleCtd") }}
         v-layout(row wrap justify-center)
           v-flex(
@@ -84,7 +84,7 @@
                 color="green"
                 size="36px"
               ).mr-3 check
-              translatable(:i18n="`Vuetify.Home.checkFeatures[${i}]`")
+              translation-translatable(:i18n="`Vuetify.Home.checkFeatures[${i}]`")
                 span.subheading {{ $t(`Vuetify.Home.checkFeatures[${i}]`) }}
           v-flex(
             mx-3
@@ -100,13 +100,13 @@
                 color="green"
                 size="36px"
               ).mr-3 check
-              translatable(:i18n="`Vuetify.Home.checkFeaturesCtd[${i}]`")
+              translation-translatable(:i18n="`Vuetify.Home.checkFeaturesCtd[${i}]`")
                 span.subheading {{ $t(`Vuetify.Home.checkFeaturesCtd[${i}]`) }}
 
     section#using-vuetify.mb-5
       v-container(grid-list-xl)
         h2.text-xs-center.headline.mb-5.grey--text
-          translatable(i18n="Vuetify.Home.madeWithVuetify")
+          translation-translatable(i18n="Vuetify.Home.madeWithVuetify")
           span {{ $t("Vuetify.Home.madeWithVuetify") }}
         v-layout(wrap)
           v-flex(
@@ -155,7 +155,7 @@
                     height="64px"
                     width="64px"
                   ).mb-2
-                  translatable(i18n="Vuetify.Home.callout")
+                  translation-translatable(i18n="Vuetify.Home.callout")
                     span(v-text="$t('Vuetify.Home.callout')").subheading
 
             v-layout(justify-center).mb-3

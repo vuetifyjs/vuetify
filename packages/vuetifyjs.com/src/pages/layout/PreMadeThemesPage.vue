@@ -1,5 +1,5 @@
 <template lang="pug">
-  doc-view
+  views-doc
     section#themes-view
       v-container.pa-0(fluid grid-list-xl)
         v-layout(row wrap)
@@ -12,16 +12,16 @@
               v-card-media(:src='template.screenshot' height="350px")
               v-card-title.align-center
                 h2.headline.mb-0 {{ template.title }}
-                  translatable(:i18n="`${template.namespace}.tag`" v-if="template.tag")
+                  translation-translatable(:i18n="`${template.namespace}.tag`" v-if="template.tag")
                     v-chip(label small color="indigo" text-color="white" ) {{ template.tag.toUpperCase() }}
-                  translatable(i18n="Layout.PreMadeThemes.free" v-else)
+                  translation-translatable(i18n="Layout.PreMadeThemes.free" v-else)
                     v-chip(label small color="blue-grey" text-color="white") {{ $t('Layout.PreMadeThemes.free').toUpperCase() }}
                 v-spacer
               v-divider
-              translatable(:i18n="`${template.namespace}.description`")
+              translation-translatable(:i18n="`${template.namespace}.description`")
                 v-card-text(style="min-height: 95px") {{ template.description }}
               v-card-actions
-                translatable(i18n="Layout.PreMadeThemes.demo" v-if="!template.price")
+                translation-translatable(i18n="Layout.PreMadeThemes.demo" v-if="!template.price")
                   v-btn(
                     flat
                     color="success"
@@ -30,14 +30,14 @@
                     rel="noopener"
                   ) {{ $t('Layout.PreMadeThemes.demo') }}
                 v-spacer
-                translatable(i18n="Layout.PreMadeThemes.buy" v-if="template.price")
+                translation-translatable(i18n="Layout.PreMadeThemes.buy" v-if="template.price")
                   v-btn(
                     color="primary"
                     flat
                     :to="{ name: 'store/Product', params: { id: '813199294506' }}"
                   ) {{ $t('Layout.PreMadeThemes.buy') }}
                     v-icon(right) mdi-arrow-right
-                translatable(i18n="Layout.PreMadeThemes.sourceCode" v-else)
+                translation-translatable(i18n="Layout.PreMadeThemes.sourceCode" v-else)
                   v-btn(
                     flat
                     color="success"

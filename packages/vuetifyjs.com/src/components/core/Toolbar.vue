@@ -34,7 +34,7 @@
         v-show="isHome"
         :to="{ name: 'getting-started/QuickStart' }"
       )
-        translatable(:i18n="$vuetify.breakpoint.mdAndUp ? 'Vuetify.AppToolbar.documentation' : 'Vuetify.AppToolbar.docs'")
+        translation-translatable(:i18n="$vuetify.breakpoint.mdAndUp ? 'Vuetify.AppToolbar.documentation' : 'Vuetify.AppToolbar.docs'")
         span.hidden-md-and-up {{ $t('Vuetify.AppToolbar.docs' )}}
         span.hidden-sm-and-down {{ $t('Vuetify.AppToolbar.documentation' )}}
       v-menu(
@@ -76,7 +76,7 @@
         style="min-width: 64px"
         :to="{ name: 'store/Front' }"
       )
-        translatable(i18n="Vuetify.AppToolbar.store")
+        translation-translatable(i18n="Vuetify.AppToolbar.store")
         v-badge(color="red lighten-2")
           v-icon(
             v-if="storeSale"
@@ -99,7 +99,7 @@
           slot="activator"
           style="min-width: 64px"
         )
-          translatable(i18n="Vuetify.AppToolbar.ecosystem").hidden-sm-and-down
+          translation-translatable(i18n="Vuetify.AppToolbar.ecosystem").hidden-sm-and-down
             span.mr-1 {{ $t('Vuetify.AppToolbar.ecosystem' )}}
           v-icon.hidden-sm-and-down mdi-menu-down
           v-icon.hidden-md-and-up mdi-earth
@@ -142,7 +142,7 @@
           flat
           slot="activator"
         )
-          translatable(i18n="Vuetify.AppToolbar.support").hidden-sm-and-down
+          translation-translatable(i18n="Vuetify.AppToolbar.support").hidden-sm-and-down
             span.mr-1 {{ $t('Vuetify.AppToolbar.support' )}}
           v-icon.hidden-sm-and-down mdi-menu-down
           v-icon.hidden-md-and-up mdi-lifebuoy

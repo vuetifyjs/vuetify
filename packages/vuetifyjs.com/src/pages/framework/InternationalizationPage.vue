@@ -1,10 +1,10 @@
 <template lang="pug">
-  doc-view
+  views-doc
     section#api
-      section-head(value="Generic.Pages.api")
+      helpers-section-head(value="Generic.Pages.api")
       v-card(class="mb-5")
         div(class="py-1")
-          parameters(
+          helpers-parameters(
             :headers="headers"
             :items="items"
             namespace="Guides"
@@ -13,9 +13,9 @@
           )
 
     section#getting-started
-      section-head(value="Framework.Internationalization.gettingStarted")
-      section-text(value="Framework.Internationalization.gettingStartedText")
-      markup(lang="js")
+      helpers-section-head(value="Framework.Internationalization.gettingStarted")
+      helpers-section-text(value="Framework.Internationalization.gettingStartedText")
+      helpers-markup(lang="js")
         | import Vuetify from 'vuetify'
         | import sv from './i18n/vuetify/sv'
         |
@@ -37,17 +37,17 @@
         |})
 
     section#create-translation
-      section-head(value="Framework.Internationalization.createTranslation")
-      section-text(value="Framework.Internationalization.createTranslationText")
+      helpers-section-head(value="Framework.Internationalization.createTranslation")
+      helpers-section-text(value="Framework.Internationalization.createTranslationText")
 
-      markup(lang="js")
+      helpers-markup(lang="js")
         | export default {{ enLocale }}
 
     section#custom-components
-      section-head(value="Framework.Internationalization.customComponents")
-      section-text(value="Framework.Internationalization.customComponentsText")
+      helpers-section-head(value="Framework.Internationalization.customComponents")
+      helpers-section-text(value="Framework.Internationalization.customComponentsText")
 
-      markup(lang="vue")
+      helpers-markup(lang="vue")
         | &lt;template&gt;
         |   &lt;div class="my-component"&gt;
         |     {{ '{{ $vuetify.t(\'my-component.text\') \}\}' }}
@@ -55,11 +55,11 @@
         | &lt;/template&gt;
 
     section#vue-i18n
-      section-head(value="Framework.Internationalization.vueI18nHeader")
-      section-text(value="Framework.Internationalization.vueI18nText1")
-      section-text(value="Framework.Internationalization.vueI18nText2")
+      helpers-section-head(value="Framework.Internationalization.vueI18nHeader")
+      helpers-section-text(value="Framework.Internationalization.vueI18nText1")
+      helpers-section-text(value="Framework.Internationalization.vueI18nText2")
 
-      markup(lang="js")
+      helpers-markup(lang="js")
         | import VueI18n from 'vue-i18n'
 
         | Vue.use(VueI18n)
@@ -96,10 +96,10 @@
         | })
 
     section#rtl
-      section-head(value="Framework.Internationalization.rtlHeader")
-      section-text(value="Framework.Internationalization.rtlText1")
+      helpers-section-head(value="Framework.Internationalization.rtlHeader")
+      helpers-section-text(value="Framework.Internationalization.rtlText1")
 
-      markup(lang="js")
+      helpers-markup(lang="js")
         | import Vue from 'vue'
         | import Vuetify from 'vuetify'
         |
@@ -107,7 +107,7 @@
         |   rtl: true
         | })
 
-      section-text(value="Framework.Internationalization.rtlText2")
+      helpers-section-text(value="Framework.Internationalization.rtlText2")
 </template>
 
 <script>

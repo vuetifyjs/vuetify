@@ -2,38 +2,29 @@
   v-container.page
     v-layout
       v-flex(xs12 md9)
-        page-head(
+        helpers-page-head(
           :header="header"
           :text="headerText"
         )
           div(slot="sup")
             slot(name="sup")
         slot(:namespace="namespace")
-        app-footer-alt
+        core-footer-alt
       v-flex(md3 hidden-sm-and-down)
-        app-table-of-contents(
+        core-table-of-contents(
           :threshold="50"
           :offset="85"
           :items="computedToc"
         )
-          app-ad
+          core-ad
 </template>
 
 <script>
-  import AppAd from '@/components/core/AppAd'
-  import AppFooterAlt from '@/components/core/AppFooterAlt'
-  import AppTableOfContents from '@/components/core/AppTableOfContents'
   import { mapState } from 'vuex'
   import { camel } from '@/util/helpers'
   import { getObjectValueByPath } from 'vuetify/es5/util/helpers'
 
   export default {
-    components: {
-      AppAd,
-      AppFooterAlt,
-      AppTableOfContents
-    },
-
     props: {
       toc: {
         type: String,

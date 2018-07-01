@@ -1,5 +1,5 @@
 <template lang="pug">
-  translatable(i18n="Vuetify.AppDrawer.becomeASponsor")
+  translation-translatable(i18n="Vuetify.AppDrawer.becomeASponsor")
     v-btn(
       dark
       style="background-color: #F96854 !important;"

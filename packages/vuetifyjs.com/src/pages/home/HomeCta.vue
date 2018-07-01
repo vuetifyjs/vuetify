@@ -59,7 +59,7 @@
               color="white"
               large
             >
-              <translatable v-if="btn.lang" :i18n="btn.lang"/>
+              <translation-translatable v-if="btn.lang" :i18n="btn.lang"/>
               <v-icon
                 v-if="btn.icon"
                 left
@@ -95,18 +95,18 @@
               :src="$t(`Vuetify.Home.features[${i}].img`)"
             >
             <v-card-text>
-              <translatable :i18n="`Vuetify.Home.features[${i}].title`">
+              <translation-translatable :i18n="`Vuetify.Home.features[${i}].title`">
                 <h3
                   class="subheading font-weight-bold"
                   v-text="$t(`Vuetify.Home.features[${i}].title`)"
                 />
-              </translatable>
-              <translatable :i18n="`Vuetify.Home.features[${i}].text`">
+              </translation-translatable>
+              <translation-translatable :i18n="`Vuetify.Home.features[${i}].text`">
                 <p
                   class="mb-2"
                   v-text="$t(`Vuetify.Home.features[${i}].text`)"
                 />
-              </translatable>
+              </translation-translatable>
             </v-card-text>
           </v-card>
         </v-flex>

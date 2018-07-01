@@ -1,17 +1,17 @@
 <template lang="pug">
-  doc-view
+  views-doc
     template(slot-scope="{ namespace }")
       section#visibility
-        section-head(:value="`${namespace}.visibilityHeader`")
-        section-text(:value="`${namespace}.visibilityText`")
-        section-text(:value="`${namespace}.breakpointText`")
+        helpers-section-head(:value="`${namespace}.visibilityHeader`")
+        helpers-section-text(:value="`${namespace}.visibilityText`")
+        helpers-section-text(:value="`${namespace}.breakpointText`")
         ul.browser-list.pb-2
           li(
             v-for="item in breakpoints"
             :key="item"
           )
             markdown(:source="item")
-        section-text(:value="`${namespace}.conditionText`")
+        helpers-section-text(:value="`${namespace}.conditionText`")
         ul.browser-list.pb-2
           li(
             v-for="item in conditions"
@@ -20,8 +20,8 @@
             markdown(:source="item")
 
       section#display
-        section-head(:value="`${namespace}.displayHeader`")
-        section-text(:value="`${namespace}.displayText`")
+        helpers-section-head(:value="`${namespace}.displayHeader`")
+        helpers-section-text(:value="`${namespace}.displayText`")
         ul.browser-list.pb-2
           li(
             v-for="item in displays"
@@ -30,8 +30,8 @@
             markdown(:source="item")
 
       section#examples
-        section-head(value="Generic.Pages.examples")
-        example(
+        helpers-section-head(value="Generic.Pages.examples")
+        helpers-example(
           readonly
           file="display/hiddenElements"
         )

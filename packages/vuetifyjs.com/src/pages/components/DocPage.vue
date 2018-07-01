@@ -1,5 +1,5 @@
 <template lang="pug">
-  example-view(
+  views-example(
     v-if="exists"
     :data="data"
   )
