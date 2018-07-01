@@ -49,6 +49,16 @@ export function createRouter (store) {
     r.children
   ))
 
+  routes.unshift({
+    path: '/',
+    name: 'home/Home',
+    meta: { fullscreen: true },
+    component: () => import(
+      /* webpackChunkName: "home" */
+      '@/pages/home/HomePage.vue'
+    )
+  })
+
   const router = new Router({
     base: release ? `/releases/${release}` : __dirname,
     mode: release ? 'hash' : 'history',
