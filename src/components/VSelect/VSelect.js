@@ -148,17 +148,7 @@ export default {
       return [{
         name: 'click-outside',
         // TODO: Check into this firing when it shouldn't
-        value: e => {
-          if (this.isMenuActive) {
-            this.onKeyDown(e)
-          }
-
-          /* eslint-disable vue/no-side-effects-in-computed-properties */
-          this.isMenuActive = false
-          this.isFocused = false
-          this.selectedIndex = -1
-          /* eslint-enable vue/no-side-effects-in-computed-properties */
-        },
+        value: this.onClickOutside,
         args: {
           closeConditional: e => {
             return (
@@ -529,6 +519,11 @@ export default {
         this.$emit('focus')
       }
     },
+    onClickOutside (e) {
+      this.isMenuActive = false
+      this.isFocused = false
+      this.selectedIndex = -1
+    },
     onEnterDown () {
       this.onBlur()
     },
@@ -548,7 +543,7 @@ export default {
       ].includes(keyCode)) this.activateMenu()
 
       // This should do something different
-      if (e.keyCode === keyCodes.enter) return this.onEnterDown()
+      if (keyCode === keyCodes.enter) return this.onEnterDown()
 
       // If escape deactivate the menu
       if (keyCode === keyCodes.esc) return this.onEscDown(e)
