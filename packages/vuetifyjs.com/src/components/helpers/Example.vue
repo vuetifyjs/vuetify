@@ -37,7 +37,7 @@
           v-btn(
             icon
             tag="a"
-            :href="`https://github.com/vuetifyjs/vuetifyjs.com/tree/master/examples/${file}.vue`"
+            :href="`https://github.com/vuetifyjs/vuetifyjs.com/tree/master/src/examples/${file}.vue`"
             target="_blank"
             slot="activator"
           )
