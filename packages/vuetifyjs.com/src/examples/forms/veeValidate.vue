@@ -43,6 +43,11 @@
 </template>
 
 <script>
+  import Vue from 'vue'
+  import VeeValidate from 'vee-validate'
+
+  Vue.use(VeeValidate)
+
   export default {
     $_veeValidate: {
       validator: 'new'
