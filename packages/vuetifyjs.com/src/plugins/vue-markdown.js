@@ -1,5 +1,9 @@
 // Packages
 import Vue from 'vue'
-import Markdown from 'vue-markdown'
 
-Vue.component('markdown', Markdown)
+Vue.component('markdown', () => ({
+  component: import(
+    /* webpackChunkName: "markdown" */
+    'vue-markdown'
+  )
+}))
