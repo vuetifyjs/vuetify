@@ -108,8 +108,7 @@
 
     asyncData ({ store, route }) {
       const longId = getLongId(route.params.id)
-      // TODO: only fetch once
-      typeof window !== 'undefined' && store.dispatch('store/getCheckout')
+
       return store.state.store.products.length && findProduct(store, longId)
         ? Promise.resolve()
         : store.dispatch('store/getProduct', longId)
