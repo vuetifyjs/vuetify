@@ -25,7 +25,13 @@
     },
 
     computed: {
-      ...mapState('translation', ['buttons', 'isTranslating']),
+      ...mapState('translation', ['buttons']),
+      // $store becomes undefined when built
+      isTranslating () {
+        if (!this.$store) return false
+
+        return this.$store.state.translation.isTranslating
+      },
       status () {
         const state = this.buttons.find(b => b.key === this.i18n)
         return state ? state.status : 'unchanged'
@@ -42,6 +48,7 @@
         return this.$i18n.locale
       }
     },
+
     watch: {
       value: {
         handler: 'fetchStatus',
