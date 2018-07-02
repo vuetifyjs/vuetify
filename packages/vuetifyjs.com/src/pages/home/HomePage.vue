@@ -158,34 +158,32 @@
                   translation-translatable(i18n="Vuetify.Home.callout")
                     span(v-text="$t('Vuetify.Home.callout')").subheading
 
-            v-layout(justify-center).mb-3
-              a(
-                v-for="(social, i) in socials"
-                :href="social.href"
-                :key="i"
-                :title="social.title"
-                target="_blank"
-                rel="noopener"
-              ).social.mx-3
-                v-icon(v-text="social.icon")
-
-            v-layout(column text-xs-center)
-              div Released under the&nbsp;
+            v-flex(xs12)
+              v-layout(justify-center).mb-3
                 a(
-                  href="https://opensource.org/licenses/MIT"
-                  rel="noopener"
-                  style="text-decoration: none;"
+                  v-for="(social, i) in socials"
+                  :href="social.href"
+                  :key="i"
+                  :title="social.title"
                   target="_blank"
-                  v-text="$t('Vuetify.Home.mit')"
-                ).body-2.white--text
-              div Copyright &copy; 2016-{{ (new Date()).getFullYear() }} Vuetify, LLC
+                  rel="noopener"
+                ).social.mx-3
+                  v-icon(v-text="social.icon")
+
+            v-flex(xs12)
+              v-layout(column text-xs-center)
+                div Released under the&nbsp;
+                  a(
+                    href="https://opensource.org/licenses/MIT"
+                    rel="noopener"
+                    style="text-decoration: none;"
+                    target="_blank"
+                    v-text="$t('Vuetify.Home.mit')"
+                  ).body-2.white--text
+                div Copyright &copy; 2016-{{ (new Date()).getFullYear() }} Vuetify, LLC
 </template>
 
 <script>
-  // Components
-  import HomeCta from './HomeCta'
-  import HomeSponsors from './HomeSponsors'
-
   // Mixins
   import Message from '@/mixins/message'
 
@@ -196,8 +194,7 @@
 
   export default {
     components: {
-      HomeCta,
-      HomeSponsors
+      HomeCta: () => import('./Cta')
     },
 
     mixins: [Message],
