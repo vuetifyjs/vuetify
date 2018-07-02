@@ -19,11 +19,28 @@ v-table($material)
       &:not(:last-child)
         border-bottom: 1px solid rgba($material.fg-color, $material.divider-percent)
 
-      &[active]
-        background: $material.table.active
+  &:not(.row-spans)
+    tbody
+      tr
+        &[active]
+          background: $material.table.active
 
-      &:hover:not(.datatable__expand-row)
+        &:hover:not(.datatable__expand-row)
+          background: $material.table.hover
+
+  &.row-spans
+    tbody
+      &:not(:last-child)
+        border-bottom: 1px solid rgba($material.fg-color, $material.divider-percent)
+
+      &:hover
         background: $material.table.hover
+
+      tr
+        &[active]
+          background: $material.table.active
+          + tr
+            background: $material.table.active
 
   tfoot
     tr
