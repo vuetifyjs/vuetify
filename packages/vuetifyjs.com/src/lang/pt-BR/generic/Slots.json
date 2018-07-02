@@ -1,0 +1,7 @@
+{
+  "activator": "Quando usado, ativa o componente ao ser clicado (ou ao passar o mouse para componentes específicos). Interrompe manualmente a propagação do evento. Sem esse slot, se você ativar o componente através de seu model, será necessário parar manualmente a propagação do evento",
+  "badge": "O slot que será usado para o marcador (badge)",
+  "default": "Slot padrão do Vue",
+  "label": "Substitui o label padrão",
+  "progress": "Slot para a barra de progresso (exibido quando a propriedade **loading** não é igual ao Boolean False)"
+}
