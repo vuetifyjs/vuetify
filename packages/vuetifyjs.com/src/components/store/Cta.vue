@@ -18,7 +18,7 @@
         >
           <v-card-media
             height="100%"
-            src="/doc-images/store/angryman.png"
+            src="https://s3.amazonaws.com/vuetify-docs/images/store/angryman.png"
           />
         </v-card>
       </v-flex>

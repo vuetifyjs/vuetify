@@ -2,7 +2,7 @@
   <v-layout row>
     <v-flex xs12 sm6 offset-sm3>
       <v-card>
-        <v-card-media src="/doc-images/lists/ali.png" height="300px">
+        <v-card-media src="https://s3.amazonaws.com/vuetify-docs/images/lists/ali.png" height="300px">
           <v-layout column class="media">
             <v-card-title>
               <v-btn dark icon>

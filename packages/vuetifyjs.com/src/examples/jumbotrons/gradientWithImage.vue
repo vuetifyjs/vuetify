@@ -2,7 +2,7 @@
   <v-jumbotron
     :gradient="gradient"
     dark
-    src="/doc-images/parallax/material2.jpg"
+    src="https://s3.amazonaws.com/vuetify-docs/images/parallax/material2.jpg"
   >
     <v-container fill-height>
       <v-layout align-center>

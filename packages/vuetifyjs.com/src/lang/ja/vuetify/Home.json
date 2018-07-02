@@ -6,17 +6,17 @@
   "getHelp": "助けて",
   "features": [
     {
-      "img": "/doc-images/feature1.svg",
+      "img": "https://s3.amazonaws.com/vuetify-docs/images/home/feature1.svg",
       "title": "プロジェクトテンプレート",
       "text": "8つのvue-cli用のテンプレートを用意しています。シンプルなHTMLからSSRを使用した本格的なものまで、数分で作成できます。"
     },
     {
-      "img": "/doc-images/feature2.svg",
+      "img": "https://s3.amazonaws.com/vuetify-docs/images/home/feature2.svg",
       "title": "セマンティックコンポーネント",
       "text": "80種類以上のコンポーネントが用意されており、どんなアプリケーションにも対応することができます。"
     },
     {
-      "img": "/doc-images/feature3.svg",
+      "img": "https://s3.amazonaws.com/vuetify-docs/images/home/feature3.svg",
       "title": "活発なコミュニティ",
       "text": "つまづいてしまったらすぐに助けが必要です。Discord上でコミュニティによるチャットサポートを用意しています。"
     }

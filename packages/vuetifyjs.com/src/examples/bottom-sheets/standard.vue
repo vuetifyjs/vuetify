@@ -19,7 +19,7 @@
           <v-list-tile-avatar>
             <v-avatar size="32px" tile>
               <img
-                :src="`/doc-images/bottom-sheets/${tile.img}`"
+                :src="`https://s3.amazonaws.com/vuetify-docs/images/bottom-sheets/${tile.img}`"
                 :alt="tile.title"
               >
             </v-avatar>

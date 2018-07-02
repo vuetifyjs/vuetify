@@ -8,7 +8,7 @@
   "sourceCode": "소스코드",
   "templates": [
     {
-      "screenshot": "/doc-images/starter/vuetify-premium.jpg",
+      "screenshot": "https://s3.amazonaws.com/vuetify-docs/images/starter/vuetify-premium.jpg",
       "title": "알파 테마 (Alpha Theme)",
       "tag": "프리미엄",
       "description": "Complete theme experience including enhanced vue-cli, full documentation, 5 custom components and much more!",
@@ -16,14 +16,14 @@
       "demoUrl": ""
     },
     {
-      "screenshot": "/doc-images/starter/vuetify-parallax-starter.png",
+      "screenshot": "https://s3.amazonaws.com/vuetify-docs/images/starter/vuetify-parallax-starter.png",
       "title": "Parallax",
       "description": "This beautiful single page parallax is a great home page for any application.",
       "sourceUrl": "vuetifyjs/parallax-starter",
       "demoUrl": "/themes/parallax-starter"
     },
     {
-      "screenshot": "/doc-images/starter/vuetify-blog-starter.png",
+      "screenshot": "https://s3.amazonaws.com/vuetify-docs/images/starter/vuetify-blog-starter.png",
       "title": "블로그",
       "description": "A simple template that features a clean interface for creating a blog or blog-like application.",
       "sourceUrl": "vuetifyjs/blog-starter",

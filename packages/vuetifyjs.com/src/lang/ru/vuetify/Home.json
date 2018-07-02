@@ -6,17 +6,17 @@
   "getHelp": "Помогите",
   "features": [
     {
-      "img": "/doc-images/feature1.svg",
+      "img": "https://s3.amazonaws.com/vuetify-docs/images/home/feature1.svg",
       "title": "Готовые компоненты для вашего проекта",
       "text": "Vuetify готов из коробки к работе с 8 готовыми шаблонами vue-cli. От простого html до полномасштабного SSR. Вы стартуете свой проект за считанные минуты."
     },
     {
-      "img": "/doc-images/feature2.svg",
+      "img": "https://s3.amazonaws.com/vuetify-docs/images/home/feature2.svg",
       "title": "Семантика Material Components",
       "text": "Будьте готовы заполучить огромное количество специализированных компонентов в свое распоряжение. С более чем 80 компонентами, у вас будет решение для любого приложения."
     },
     {
-      "img": "/doc-images/feature3.svg",
+      "img": "https://s3.amazonaws.com/vuetify-docs/images/home/feature3.svg",
       "title": "Хорошее сообщество",
       "text": "Когда вы сталкиваетесь с проблемой, вам нужна помощь сразу. Vuetify предлагает поддержку чата в нашем огромном сообществе Discord."
     }

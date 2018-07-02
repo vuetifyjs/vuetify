@@ -23,7 +23,7 @@
             v-bind:key="backer.title"
           ).text-xs-center.mx-3
             img(
-              :src="`/doc-images/backers/${backer.src}`"
+              :src="`https://s3.amazonaws.com/vuetify-docs/images/backers/${backer.src}`"
               :alt="backer.title"
             )
 
@@ -42,7 +42,7 @@
             v-bind:key="backer.title"
           ).text-xs-center.mx-3
             img(
-              :src="`/doc-images/backers/${backer.src}`"
+              :src="`https://s3.amazonaws.com/vuetify-docs/images/backers/${backer.src}`"
               :alt="backer.title"
             )
 
@@ -61,7 +61,7 @@
             v-bind:key="backer.title"
           ).text-xs-center.mx-3
             img(
-              :src="`/doc-images/backers/${backer.src}`"
+              :src="`https://s3.amazonaws.com/vuetify-docs/images/backers/${backer.src}`"
               :alt="backer.title"
               style="max-width: 175px;"
             )
@@ -79,7 +79,7 @@
             v-bind:key="affiliate.title"
           ).text-xs-center.mx-3
             img(
-              :src="`/doc-images/affiliates/${affiliate.src}`"
+              :src="`https://s3.amazonaws.com/vuetify-docs/images/affiliates/${affiliate.src}`"
               :alt="affiliate.title"
               style="max-width: 175px;"
             )
@@ -96,7 +96,7 @@
             v-bind:key="sponsor.title"
           ).text-xs-center.mx-3
             img(
-              :src="`/doc-images/${sponsor.src}`"
+              :src="`https://s3.amazonaws.com/vuetify-docs/images/${sponsor.src}`"
               alt="sponsor.title"
             )
 

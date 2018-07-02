@@ -12,7 +12,7 @@
       <v-card
         slot="activator"
         class="portrait"
-        img="/doc-images/cards/girl.jpg"
+        img="https://s3.amazonaws.com/vuetify-docs/images/cards/girl.jpg"
         height="300"
         width="600"
       ></v-card>
