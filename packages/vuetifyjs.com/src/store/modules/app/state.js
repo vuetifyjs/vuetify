@@ -240,16 +240,12 @@ export default () => ({
           href: 'introduction'
         },
         {
+          text: 'Layout.Spacing.playgroundHeader',
+          href: 'playground'
+        },
+        {
           text: 'Generic.Pages.howItWorks',
           href: 'how-it-works'
-        },
-        {
-          text: 'Generic.Pages.examples',
-          href: 'examples'
-        },
-        {
-          text: 'Layout.Spacing.horizontalHeader',
-          href: 'horizontal-centering'
         }
       ]
     },
