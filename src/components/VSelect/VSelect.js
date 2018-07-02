@@ -147,8 +147,7 @@ export default {
     directives () {
       return [{
         name: 'click-outside',
-        // TODO: Check into this firing when it shouldn't
-        value: this.onClickOutside,
+        value: this.blur,
         args: {
           closeConditional: e => {
             return (
@@ -265,6 +264,13 @@ export default {
   },
 
   methods: {
+    /** @public */
+    blur () {
+      this.isMenuActive = false
+      this.isFocused = false
+      this.selectedIndex = -1
+    },
+    /** @public */
     activateMenu () {
       this.isMenuActive = true
     },
@@ -518,11 +524,6 @@ export default {
         this.isFocused = true
         this.$emit('focus')
       }
-    },
-    onClickOutside () {
-      this.isMenuActive = false
-      this.isFocused = false
-      this.selectedIndex = -1
     },
     onEnterDown () {
       this.onBlur()
