@@ -17,7 +17,7 @@
   const title = 'Vuetify Example Pen'
 
   const cssResources = [
-    'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons',
+    'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons',
     `https://unpkg.com/vuetify@${version}/dist/vuetify.min.css`
   ]
 
@@ -47,7 +47,6 @@
 
         return additional
           .replace(/(<codepen-additional.*?>|<\/codepen-additional>$)/g, '')
-          .replace(/\/doc-images\//g, 'https://vuetifyjs.com/doc-images/')
           .replace(/\n {2}/g, '\n')
           .trim() + (additional ? '\n\n' : '')
       },
@@ -67,7 +66,6 @@
         return (this.pen.script || '')
           .replace(replace, '')
           .replace(imports, '')
-          .replace(/\/doc-images\//g, 'https://vuetifyjs.com/doc-images/')
           .replace(/\n {2}/g, '\n')
           .trim()
       },
@@ -81,7 +79,6 @@
         const template = this.pen.template || ''
 
         return template
-          .replace(/\/doc-images\//g, 'https://vuetifyjs.com/doc-images/')
           .replace(/(<template>|<\/template>$)/g, '')
           .replace(/\n/g, '\n  ')
           .trim()
