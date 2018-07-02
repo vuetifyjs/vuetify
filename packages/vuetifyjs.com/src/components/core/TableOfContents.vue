@@ -1,4 +1,6 @@
 <script>
+  import { goTo } from '@/util/helpers'
+
   export default {
     props: {
       discovery: {
@@ -92,7 +94,7 @@
               e.stopPropagation()
               e.preventDefault()
 
-              vm.$vuetify.goTo(index && id).then(() => (document.location.hash = index ? id : ''))
+              goTo.call(vm, index && id)
             }
           }
         })
