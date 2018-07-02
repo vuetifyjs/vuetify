@@ -202,7 +202,7 @@
     },
 
     mounted () {
-      this.init()
+      import('docsearch.js').then(this.init)
     },
 
     methods: {
@@ -225,10 +225,7 @@
         }
         return { name: `${item.group}/${camel(subItem.name)}` }
       },
-      init () {
-        this.initDocSearch()
-      },
-      initDocSearch () {
+      init ({ default: docsearch }) {
         const vm = this
 
         this.docSearch = docsearch({
