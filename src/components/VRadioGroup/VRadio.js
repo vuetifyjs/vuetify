@@ -131,7 +131,9 @@ export default {
         },
         props: {
           color: this.radio.validationState || false,
-          focused: this.hasState
+          dark: this.dark,
+          focused: this.hasState,
+          light: this.light
         }
       }, this.$slots.label || this.label)
     },

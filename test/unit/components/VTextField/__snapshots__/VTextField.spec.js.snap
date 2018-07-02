@@ -1,5 +1,37 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`VTextField.js should correctly pass theme props to label and counter 1`] = `
+
+<div class="v-input v-text-field theme--light">
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-text-field__slot">
+        <label aria-hidden="true"
+               class="v-label theme--light"
+               style="left: 0px; position: absolute;"
+        >
+          Foobar
+        </label>
+        <input tabindex="0"
+               type="text"
+               aria-label="Foobar"
+        >
+      </div>
+    </div>
+    <div class="v-text-field__details">
+      <div class="v-messages theme--light">
+        <div class="v-messages__wrapper">
+        </div>
+      </div>
+      <div class="v-counter theme--light">
+        0
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
 exports[`VTextField.js should have prefix and suffix 1`] = `
 
 <div class="v-input v-text-field v-text-field--prefix">

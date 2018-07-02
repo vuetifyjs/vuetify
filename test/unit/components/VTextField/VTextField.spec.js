@@ -759,4 +759,16 @@ test('VTextField.js', ({ mount }) => {
       expect(wrapper.vm.$el.classList).not.toContain('v-input--is-label-active')
     }
   })
+
+  it('should correctly pass theme props to label and counter', () => {
+    const wrapper = mount(VTextField, {
+      propsData: {
+        counter: true,
+        label: 'Foobar',
+        light: true
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })
