@@ -25,6 +25,11 @@ theme(v-overflow-btn, "v-overflow-btn")
 .v-overflow-btn
   margin-top: 12px
 
+  &:not(.v-overflow-btn--editable)
+    .v-menu__activator,
+    .v-menu__activator *
+      cursor: pointer
+
   .v-select__slot
     height: 48px
 
@@ -41,6 +46,7 @@ theme(v-overflow-btn, "v-overflow-btn")
       content: none
 
   .v-label
+    margin-left: 16px
     top: calc(50% - 10px)
 
   .v-input__append-inner
@@ -50,6 +56,7 @@ theme(v-overflow-btn, "v-overflow-btn")
     align-items: center
     margin-top: 0
     padding: 0
+    flex-shrink: 0
 
   .v-input__append-outer,
   .v-input__prepend-outer
@@ -69,7 +76,10 @@ theme(v-overflow-btn, "v-overflow-btn")
   &.v-input--is-focused,
   &.v-select--is-menu-active
     .v-input__slot
-      elevation(8)
+      elevation(2)
+
+  .v-select__selections
+    width: 0px
 
   &--segmented
     .v-select__selections
@@ -87,3 +97,8 @@ theme(v-overflow-btn, "v-overflow-btn")
 
           &::before
             background-color: transparent
+
+  &--editable
+    .v-input__append-inner,
+    .v-input__append-inner *
+      cursor: pointer

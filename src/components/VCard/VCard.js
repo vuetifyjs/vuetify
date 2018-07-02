@@ -1,9 +1,14 @@
 import '../../stylus/components/_cards.styl'
 
+// Mixins
 import Colorable from '../../mixins/colorable'
 import Routable from '../../mixins/routable'
 import Themeable from '../../mixins/themeable'
 
+// Helpers
+import { convertToUnit } from '../../util/helpers'
+
+/* @vue/component */
 export default {
   name: 'v-card',
 
@@ -11,10 +16,7 @@ export default {
 
   props: {
     flat: Boolean,
-    height: {
-      type: String,
-      default: 'auto'
-    },
+    height: [Number, String],
     hover: Boolean,
     img: String,
     raised: Boolean,
@@ -41,7 +43,7 @@ export default {
     },
     styles () {
       const style = {
-        height: isNaN(this.height) ? this.height : `${this.height}px`
+        height: convertToUnit(this.height)
       }
 
       if (this.img) {
@@ -49,7 +51,7 @@ export default {
       }
 
       if (this.width) {
-        style.width = isNaN(this.width) ? this.width : `${this.width}px`
+        style.width = convertToUnit(this.width)
       }
 
       return style

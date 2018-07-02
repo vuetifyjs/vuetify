@@ -1,10 +1,11 @@
 // Styles
 import '../../stylus/components/_counters.styl'
 
+/* @vue/component */
 export default {
-  functional: true,
-
   name: 'v-counter',
+
+  functional: true,
 
   props: {
     value: {

@@ -22,23 +22,17 @@ import { deprecate } from '../../util/console'
 
 const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
 
+/* @vue/component */
 export default {
   name: 'v-text-field',
+
+  directives: { Ripple },
 
   extends: VInput,
 
   mixins: [Maskable],
 
-  directives: { Ripple },
-
   inheritAttrs: false,
-
-  data: () => ({
-    badInput: false,
-    initialValue: null,
-    internalChange: false,
-    isClearing: false
-  }),
 
   props: {
     appendOuterIcon: String,
@@ -79,6 +73,13 @@ export default {
     }
   },
 
+  data: () => ({
+    badInput: false,
+    initialValue: null,
+    internalChange: false,
+    isClearing: false
+  }),
+
   computed: {
     classes () {
       return {
@@ -88,11 +89,11 @@ export default {
         'v-text-field--single-line': this.isSingle,
         'v-text-field--solo': this.isSolo,
         'v-text-field--solo-inverted': this.soloInverted,
+        'v-text-field--solo-flat': this.flat,
         'v-text-field--box': this.box,
         'v-text-field--enclosed': this.isEnclosed,
         'v-text-field--reverse': this.reverse,
-        'v-text-field--outline': this.hasOutline,
-        'elevation-0': this.flat
+        'v-text-field--outline': this.hasOutline
       }
     },
     directivesInput () {
@@ -139,34 +140,22 @@ export default {
       return this.solo || this.soloInverted
     },
     labelPosition () {
-      let value = 0
-      let left = 'auto'
-      let right = 'auto'
+      const offset = (this.prefix && !this.labelValue) ? 16 : 0
 
-      // Create spacing
-      if ((this.prefix || this.reverse) &&
-        (this.isSingle || !this.isFocused) &&
-        !this.isDirty
-      ) value = 16
-
-      // Check if RTL
-      if (this.$vuetify.rtl) right = value
-      else left = value
-
-      // Check if reversed
-      if (this.reverse) {
-        const direction = right
-        right = left
-        left = direction
-      }
-
-      return {
-        left,
-        right
+      return (!this.$vuetify.rtl !== !this.reverse) ? {
+        left: 'auto',
+        right: offset
+      } : {
+        left: offset,
+        right: 'auto'
       }
     },
     showLabel () {
       return this.hasLabel && (!this.isSingle || (!this.isLabelActive && !this.placeholder))
+    },
+    labelValue () {
+      return !this.isSingle &&
+        Boolean(this.isFocused || this.isLabelActive || this.placeholder)
     }
   },
 
@@ -271,7 +260,7 @@ export default {
       ])
     },
     genCounter () {
-      if (this.counter === false) return null
+      if (this.counter === false || this.counter == null) return null
 
       const value = (this.internalValue || '').length
       const max = this.counter === true ? this.$attrs.maxlength : this.counter
@@ -293,17 +282,15 @@ export default {
     genLabel () {
       if (!this.showLabel) return null
 
-      const isSingleLine = this.isSingle
       const data = {
         props: {
           absolute: true,
           color: this.validationState,
           disabled: this.disabled,
-          focused: !isSingleLine && (this.isFocused || !!this.validationState),
+          focused: !this.isSingle && (this.isFocused || !!this.validationState),
           left: this.labelPosition.left,
           right: this.labelPosition.right,
-          value: Boolean(!isSingleLine &&
-            (this.isFocused || this.isLabelActive || this.placeholder))
+          value: this.labelValue
         }
       }
 

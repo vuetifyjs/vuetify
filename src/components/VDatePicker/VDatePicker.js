@@ -12,33 +12,11 @@ import Picker from '../../mixins/picker'
 import { pad, createNativeLocaleFormatter } from './util'
 import isDateAllowed from './util/isDateAllowed'
 
+/* @vue/component */
 export default {
   name: 'v-date-picker',
 
   mixins: [Picker],
-
-  data () {
-    const now = new Date()
-    return {
-      activePicker: this.type.toUpperCase(),
-      defaultColor: 'accent',
-      inputDay: null,
-      inputMonth: null,
-      inputYear: null,
-      isReversing: false,
-      now,
-      // tableDate is a string in 'YYYY' / 'YYYY-M' format (leading zero for month is not required)
-      tableDate: (() => {
-        if (this.pickerDate) {
-          return this.pickerDate
-        }
-
-        const date = this.value || `${now.getFullYear()}-${now.getMonth() + 1}`
-        const type = this.type === 'date' ? 'month' : 'year'
-        return this.sanitizeDateString(date, type)
-      })()
-    }
-  },
 
   props: {
     allowedDates: Function,
@@ -108,6 +86,29 @@ export default {
       default: null
     },
     yearIcon: String
+  },
+
+  data () {
+    const now = new Date()
+    return {
+      activePicker: this.type.toUpperCase(),
+      defaultColor: 'accent',
+      inputDay: null,
+      inputMonth: null,
+      inputYear: null,
+      isReversing: false,
+      now,
+      // tableDate is a string in 'YYYY' / 'YYYY-M' format (leading zero for month is not required)
+      tableDate: (() => {
+        if (this.pickerDate) {
+          return this.pickerDate
+        }
+
+        const date = this.value || `${now.getFullYear()}-${now.getMonth() + 1}`
+        const type = this.type === 'date' ? 'month' : 'year'
+        return this.sanitizeDateString(date, type)
+      })()
+    }
   },
 
   computed: {
@@ -198,6 +199,13 @@ export default {
         this.$emit('input', this.isDateAllowed(date) ? date : null)
       }
     }
+  },
+
+  created () {
+    if (this.pickerDate !== this.tableDate) {
+      this.$emit('update:pickerDate', this.tableDate)
+    }
+    this.setInputDate()
   },
 
   methods: {
@@ -373,13 +381,6 @@ export default {
         this.inputDay = this.inputDay || this.now.getDate()
       }
     }
-  },
-
-  created () {
-    if (this.pickerDate !== this.tableDate) {
-      this.$emit('update:pickerDate', this.tableDate)
-    }
-    this.setInputDate()
   },
 
   render () {

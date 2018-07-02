@@ -34,14 +34,15 @@ const fakeMenuable = {
   props: Menuable.props
 }
 
+/* @vue/component */
 export default {
   name: 'v-select',
-
-  extends: VTextField,
 
   directives: {
     ClickOutside
   },
+
+  extends: VTextField,
 
   mixins: [
     fakeVMenu,
@@ -50,23 +51,6 @@ export default {
     Dependent,
     Filterable
   ],
-
-  data: vm => ({
-    attrsInput: { role: 'combobox' },
-    cachedItems: vm.cacheItems ? vm.items : [],
-    content: null,
-    isBooted: false,
-    isMenuActive: false,
-    lastItem: 20,
-    // As long as a value is defined, show it
-    // Otherwise, check if multiple
-    // to determine which default to provide
-    lazyValue: vm.value != null
-      ? vm.value
-      : vm.multiple ? [] : undefined,
-    selectedIndex: -1,
-    selectedItems: []
-  }),
 
   props: {
     appendIcon: {
@@ -126,6 +110,23 @@ export default {
     singleLine: Boolean
   },
 
+  data: vm => ({
+    attrsInput: { role: 'combobox' },
+    cachedItems: vm.cacheItems ? vm.items : [],
+    content: null,
+    isBooted: false,
+    isMenuActive: false,
+    lastItem: 20,
+    // As long as a value is defined, show it
+    // Otherwise, check if multiple
+    // to determine which default to provide
+    lazyValue: vm.value != null
+      ? vm.value
+      : vm.multiple ? [] : undefined,
+    selectedIndex: -1,
+    selectedItems: []
+  }),
+
   computed: {
     /* All items that the select has */
     allItems () {
@@ -152,10 +153,11 @@ export default {
             this.onKeyDown(e)
           }
 
+          /* eslint-disable vue/no-side-effects-in-computed-properties */
           this.isMenuActive = false
           this.isFocused = false
-          this.editingIndex = -1
           this.selectedIndex = -1
+          /* eslint-enable vue/no-side-effects-in-computed-properties */
         },
         args: {
           closeConditional: e => {
@@ -190,9 +192,6 @@ export default {
     isDirty () {
       return this.selectedItems.length > 0
     },
-    isMulti () {
-      return this.multiple
-    },
     menuProps () {
       return {
         closeOnClick: false,
@@ -206,7 +205,7 @@ export default {
     listData () {
       return {
         props: {
-          action: this.isMulti && !this.isHidingSelected,
+          action: this.multiple && !this.isHidingSelected,
           color: this.color,
           dark: this.dark,
           dense: this.dense,
@@ -272,11 +271,7 @@ export default {
   },
 
   mounted () {
-    // If instance is being destroyed
-    // do not run mounted functions
-    if (this._isDestroyed) return
-
-    this.content = this.$refs.menu.$refs.content
+    this.content = this.$refs.menu && this.$refs.menu.$refs.content
   },
 
   methods: {
@@ -284,7 +279,7 @@ export default {
       this.isMenuActive = true
     },
     clearableCallback () {
-      this.internalValue = this.isMulti ? [] : null
+      this.internalValue = this.multiple ? [] : null
       this.$emit('change', this.internalValue)
       this.$nextTick(() => this.$refs.input.focus())
 
@@ -407,7 +402,12 @@ export default {
       }
     },
     genListWithSlot () {
-      return this.$createElement(VSelectList, this.listData, [
+      // Requires destructuring due to Vue
+      // modifying the `on` property when passed
+      // as a referenced object
+      return this.$createElement(VSelectList, {
+        ...this.listData
+      }, [
         this.$createElement('template', {
           slot: 'no-data'
         }, this.$slots['no-data'])
@@ -424,14 +424,7 @@ export default {
         props[prop] = this[prop]
       }
 
-      // These styles encompass the prepend
-      // and append icons. Change activator
-      // to the entire component
-      if (this.isSolo) {
-        props.activator = this.$el
-      } else {
-        props.activator = this.$refs['input-slot']
-      }
+      props.activator = this.$refs['input-slot']
 
       Object.assign(props, this.menuProps)
 
@@ -514,7 +507,7 @@ export default {
       this.$emit('blur', e)
     },
     onChipInput (item) {
-      if (this.isMulti) this.selectItem(item)
+      if (this.multiple) this.selectItem(item)
       else this.internalValue = null
 
       // If all items have been deleted,
@@ -529,8 +522,12 @@ export default {
     onClick () {
       if (this.isDisabled) return
 
-      this.onFocus()
       this.isMenuActive = true
+
+      if (!this.isFocused) {
+        this.isFocused = true
+        this.$emit('focus')
+      }
     },
     onEnterDown () {
       this.onBlur()
@@ -621,7 +618,7 @@ export default {
       }
     },
     selectItem (item) {
-      if (!this.isMulti) {
+      if (!this.multiple) {
         this.internalValue = this.returnObject ? item : this.getValue(item)
         this.isMenuActive = false
       } else {
@@ -647,7 +644,7 @@ export default {
     },
     setSelectedItems () {
       const selectedItems = []
-      const values = !this.isMulti || !Array.isArray(this.internalValue)
+      const values = !this.multiple || !Array.isArray(this.internalValue)
         ? [this.internalValue]
         : this.internalValue
 

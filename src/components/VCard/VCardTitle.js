@@ -1,3 +1,4 @@
+/* @vue/component */
 export default {
   name: 'v-card-title',
 

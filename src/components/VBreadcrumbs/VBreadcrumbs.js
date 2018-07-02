@@ -1,5 +1,6 @@
 import '../../stylus/components/_breadcrumbs.styl'
 
+/* @vue/component */
 export default {
   name: 'v-breadcrumbs',
 

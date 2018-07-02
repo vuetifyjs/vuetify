@@ -4,16 +4,11 @@ import Colorable from '../../mixins/colorable'
 import Toggleable from '../../mixins/toggleable'
 import { factory as PositionableFactory } from '../../mixins/positionable'
 
+/* @vue/component */
 export default {
   name: 'v-snackbar',
 
   mixins: [Colorable, Toggleable, PositionableFactory(['absolute', 'top', 'bottom', 'left', 'right'])],
-
-  data () {
-    return {
-      activeTimeout: {}
-    }
-  },
 
   props: {
     autoHeight: Boolean,
@@ -24,6 +19,12 @@ export default {
       default: 6000
     },
     vertical: Boolean
+  },
+
+  data () {
+    return {
+      activeTimeout: {}
+    }
   },
 
   computed: {
@@ -48,6 +49,10 @@ export default {
     }
   },
 
+  mounted () {
+    this.setTimeout()
+  },
+
   methods: {
     setTimeout () {
       clearTimeout(this.activeTimeout)
@@ -58,10 +63,6 @@ export default {
         }, this.timeout)
       }
     }
-  },
-
-  mounted () {
-    this.setTimeout()
   },
 
   render (h) {

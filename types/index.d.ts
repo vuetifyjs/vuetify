@@ -34,7 +34,7 @@ export interface VuetifyUseOptions {
   icons?: Partial<VuetifyIcons>
   /** @see https://vuetifyjs.com/style/theme#options */
   options?: Partial<VuetifyOptions>
-  lang?: Partial<Pick<VuetifyLanguage, 'locales' | 'current'>>
+  lang?: Partial<VuetifyLanguage>
   rtl?: boolean
 }
 
@@ -54,6 +54,7 @@ export interface VuetifyObject extends Vue {
 declare module 'vue/types/vue' {
   export interface Vue {
     $vuetify: VuetifyObject
+    _uid: string
   }
 }
 

@@ -4,6 +4,8 @@ import '../../stylus/components/_textarea.styl'
 // Extensions
 import VTextField from '../VTextField/VTextField'
 
+import { consoleInfo } from '../../util/console'
+
 /* @vue/component */
 export default {
   name: 'v-textarea',
@@ -59,6 +61,11 @@ export default {
     setTimeout(() => {
       this.autoGrow && this.calculateInputHeight()
     }, 0)
+
+    // TODO: remove (2.0)
+    if (this.autoGrow && this.noResize) {
+      consoleInfo('"no-resize" is now implied when using "auto-grow", and can be removed', this)
+    }
   },
 
   methods: {

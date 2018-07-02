@@ -13,6 +13,19 @@ test('VDatePickerHeader.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should render component in RTL mode and match snapshot', async () => {
+    const wrapper = mount(VDatePickerHeader, {
+      propsData: {
+        value: '2005-11'
+      }
+    })
+    wrapper.vm.$vuetify.rtl = true
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+    wrapper.vm.$vuetify.rtl = undefined
+  })
+
   it('should render component with year value and match snapshot', () => {
     const wrapper = mount(VDatePickerHeader, {
       propsData: {

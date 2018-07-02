@@ -5,6 +5,7 @@ import VPicker from '../components/VPicker'
 import Colorable from './colorable'
 import Themeable from './themeable'
 
+/* @vue/component */
 export default {
   name: 'picker',
 

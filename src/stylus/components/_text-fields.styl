@@ -6,9 +6,8 @@ v-text-field($material)
     background-color: $material.input-bottom-line
 
   &:not(.v-input--has-state)
-    &:hover
-      .v-input__slot:before
-        background-color: $material.text.primary
+    .v-input__slot:hover:before
+      background-color: $material.text.primary
 
   &.v-input--is-disabled
     .v-input__slot:before
@@ -45,16 +44,15 @@ v-text-field($material)
       background: $material.text-fields.box
 
     &:not(.v-input--is-focused)
-      .v-input__slot
-        &:hover
-          background: $material.text-fields.box-hover
+      .v-input__slot:hover
+        background: $material.text-fields.box-hover
 
   &--outline
     .v-input__slot
       border: 2px solid $material.text.secondary
 
-    &:not(.v-input--is-focused):hover
-      .v-input__slot
+    &:not(.v-input--is-focused)
+      .v-input__slot:hover
         border: 2px solid $material.text.primary
 
 v-text-field-rtl()
@@ -82,12 +80,23 @@ v-text-field-rtl()
       transform-origin: top left
 
   &__prefix
+    text-align: left
     padding-right: 0
     padding-left: 4px
 
   &__suffix
     padding-left: 0
     padding-right: 4px
+
+  &--reverse
+    .v-text-field__prefix
+      text-align: right
+      padding-left: 0
+      padding-right: 4px
+
+    .v-text-field__suffix
+      padding-left: 0
+      padding-right: 4px
 
 theme(v-text-field, "v-text-field")
 rtl(v-text-field-rtl, "v-text-field")
@@ -167,11 +176,23 @@ rtl(v-text-field-rtl, "v-text-field")
     align-self: center
 
   &__prefix
+    width: 16px
+    text-align: right
     padding-right: 4px
 
   &__suffix
     padding-left: 4px
     white-space: nowrap
+
+  &--reverse
+    .v-text-field__prefix
+      text-align: left
+      padding-right: 0
+      padding-left: 4px
+
+    .v-text-field__suffix
+      padding-left: 0
+      padding-right: 4px
 
   &__slot
     display: flex
@@ -184,7 +205,7 @@ rtl(v-text-field-rtl, "v-text-field")
     position: relative
 
     .v-input__slot
-      align-items: flex-start
+      align-items: stretch
 
     input
       margin-top: 22px
@@ -210,7 +231,9 @@ rtl(v-text-field-rtl, "v-text-field")
       &:before
         height: 2px
 
-  &--enclosed
+  &.v-text-field--enclosed
+    margin: 0
+
     &:not(.v-text-field--box)
       .v-progress-linear__background
         display: none
@@ -284,8 +307,6 @@ rtl(v-text-field-rtl, "v-text-field")
         transition: border $primary-transition
 
   &.v-text-field--solo
-    margin: 0
-
     .v-label
       top: calc(50% - 10px)
 
@@ -293,8 +314,9 @@ rtl(v-text-field-rtl, "v-text-field")
       min-height: 48px
       padding: 0
 
-    .v-input__slot
-      elevation(2)
+    &:not(.v-text-field--solo-flat)
+      .v-input__slot
+        elevation(2)
 
     .v-text-field__slot
       align-items: center

@@ -1,3 +1,4 @@
+/* @vue/component */
 export default {
   name: 'translatable',
 
@@ -13,14 +14,6 @@ export default {
   },
 
   computed: {
-    normalizedHeight () {
-      if (this.jumbotron) {
-        return isNaN(this.height) ? this.height : `${this.height}px`
-      }
-
-      return Number(this.height.toString().replace(/(^[0-9]*$)/, '$1'))
-    },
-
     imgHeight () {
       return this.objHeight()
     }
@@ -42,7 +35,7 @@ export default {
 
       this.percentScrolled = (
         (this.windowBottom - this.elOffsetTop) /
-        (this.normalizedHeight + this.windowHeight)
+        (parseInt(this.height) + this.windowHeight)
       )
 
       this.parallax = Math.round(this.parallaxDist * this.percentScrolled)
@@ -56,7 +49,7 @@ export default {
       const offset = this.$el.getBoundingClientRect()
 
       this.scrollTop = window.pageYOffset
-      this.parallaxDist = this.imgHeight - this.normalizedHeight
+      this.parallaxDist = this.imgHeight - this.height
       this.elOffsetTop = offset.top + this.scrollTop
       this.windowHeight = window.innerHeight
       this.windowBottom = this.scrollTop + this.windowHeight

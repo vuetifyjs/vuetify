@@ -1,18 +1,20 @@
+import { XYZ, LAB } from 'src/util/colorUtils'
+
 const delta = 0.20689655172413793 // 6÷29
 
-const cielabForwardTransform = t => (
+const cielabForwardTransform = (t: number): number => (
   t > delta ** 3
     ? Math.cbrt(t)
     : (t / (3 * delta ** 2)) + 4 / 29
 )
 
-const cielabReverseTransform = t => (
+const cielabReverseTransform = (t: number): number => (
   t > delta
     ? t ** 3
     : (3 * delta ** 2) * (t - 4 / 29)
 )
 
-export function fromXYZ (xyz) {
+export function fromXYZ (xyz: XYZ): LAB {
   const transform = cielabForwardTransform
   const transformedY = transform(xyz[1])
 
@@ -23,7 +25,7 @@ export function fromXYZ (xyz) {
   ]
 }
 
-export function toXYZ (lab) {
+export function toXYZ (lab: LAB): XYZ {
   const transform = cielabReverseTransform
   const Ln = (lab[0] + 16) / 116
   return [
