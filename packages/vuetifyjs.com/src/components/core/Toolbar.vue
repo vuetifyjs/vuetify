@@ -16,7 +16,7 @@
     )
     router-link(:to="{ name: 'home/Home' }").d-flex
       img(
-        src="/v-alt.svg"
+        src="https://s3.amazonaws.com/vuetify-docs/images/logos/v-alt.svg"
         height="38px"
         width="38px"
       )

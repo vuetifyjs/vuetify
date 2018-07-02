@@ -2,7 +2,7 @@
   <v-layout>
     <v-flex xs12 sm6 offset-sm3>
       <v-card>
-        <v-card-media src="/doc-images/cards/desert.jpg" height="200px">
+        <v-card-media src="https://s3.amazonaws.com/vuetify-docs/images/cards/desert.jpg" height="200px">
         </v-card-media>
         <v-card-title primary-title>
           <div>

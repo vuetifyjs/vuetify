@@ -3,7 +3,7 @@
     <v-flex xs12 sm6 offset-sm3>
       <v-card>
         <v-card-media
-          src="/doc-images/cards/desert.jpg"
+          src="https://s3.amazonaws.com/vuetify-docs/images/cards/desert.jpg"
           height="200px"
         ></v-card-media>
 

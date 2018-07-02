@@ -57,7 +57,7 @@
                   v-icon(dark).green--text check
           v-flex(xs12 sm4).layout.align-center.justify-center
             img(
-              src="/doc-images/logo.svg"
+              src="https://s3.amazonaws.com/vuetify-docs/images/logos/logo.svg"
               alt="Vuetify"
               width="150px"
             ).my-5
@@ -71,7 +71,7 @@
             v-list-tile(avatar tag="div")
               v-list-tile-avatar
                 v-avatar
-                  img(src="/doc-images/john.jpg")
+                  img(src="https://s3.amazonaws.com/vuetify-docs/images/john.jpg")
               v-list-tile-content
                 v-list-tile-title John Leider
                 v-list-tile-sub-title Author of Vuetify.js

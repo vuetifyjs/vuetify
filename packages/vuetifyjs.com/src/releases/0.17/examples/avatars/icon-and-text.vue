@@ -4,7 +4,7 @@
       <v-icon dark>account_circle</v-icon>
     </v-avatar>
     <v-avatar>
-      <img src="/doc-images/john.jpg" alt="John">
+      <img src="https://s3.amazonaws.com/vuetify-docs/images/john.jpg" alt="John">
     </v-avatar>
     <v-badge overlap color="red">
       <span slot="badge">3</span>

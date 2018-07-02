@@ -7,7 +7,7 @@
   "sourceCode": "源代码",
   "templates": [
     {
-      "screenshot": "/doc-images/starter/vuetify-premium.jpg",
+      "screenshot": "https://s3.amazonaws.com/vuetify-docs/images/starter/vuetify-premium.jpg",
       "title": "Startup",
       "tag": "付费",
       "description": "使用这个精美的手工Material设计风格模版来展示您的企业或者个人介绍主页。",
@@ -15,14 +15,14 @@
       "demoUrl": ""
     },
     {
-      "screenshot": "/doc-images/starter/vuetify-parallax-starter.png",
+      "screenshot": "https://s3.amazonaws.com/vuetify-docs/images/starter/vuetify-parallax-starter.png",
       "title": "视差",
       "description": "这种漂亮的单页视差风格是非常棒的应用主页。",
       "sourceUrl": "vuetifyjs/parallax-starter",
       "demoUrl": "/themes/parallax-starter"
     },
     {
-      "screenshot": "/doc-images/starter/vuetify-blog-starter.png",
+      "screenshot": "https://s3.amazonaws.com/vuetify-docs/images/starter/vuetify-blog-starter.png",
       "title": "博客",
       "description": "一个用来构建清新界面的博客类应用程序的简单模版。",
       "sourceUrl": "vuetifyjs/blog-starter",

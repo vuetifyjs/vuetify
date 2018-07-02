@@ -9,7 +9,7 @@
       rel="noopener"
       small
     )
-      img(src="/doc-images/patreon-dark.png" width="24px").mr-2
+      img(src="https://s3.amazonaws.com/vuetify-docs/images/social/patreon-dark.png" width="24px").mr-2
       span(v-text="$t('Vuetify.AppDrawer.becomeASponsor')").caption
 </template>
 

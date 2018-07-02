@@ -14,16 +14,16 @@
       return {
         items: [
           {
-            src: '/doc-images/carousel/squirrel.jpg'
+            src: 'https://s3.amazonaws.com/vuetify-docs/images/carousel/squirrel.jpg'
           },
           {
-            src: '/doc-images/carousel/sky.jpg'
+            src: 'https://s3.amazonaws.com/vuetify-docs/images/carousel/sky.jpg'
           },
           {
-            src: '/doc-images/carousel/bird.jpg'
+            src: 'https://s3.amazonaws.com/vuetify-docs/images/carousel/bird.jpg'
           },
           {
-            src: '/doc-images/carousel/planet.jpg'
+            src: 'https://s3.amazonaws.com/vuetify-docs/images/carousel/planet.jpg'
           }
         ]
       }
