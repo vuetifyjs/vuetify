@@ -1,0 +1,21 @@
+{
+  "header": "Breadcrumbs",
+  "headerText": "O componente `v-breadcrumbs` é um auxiliar de navegação por páginas. Ele aceita um ícone **Material Icons** ou caracteres como divisor. Uma matriz de objetos que contém os campos _href_, _text_ e o opcional _disabled_ pode ser atribuída à propriedade **items** do componente.  Além disso, um slot existe para mais controle dos breadcrumbs, utilizando `v-breadcrumbs-item` ou outra marcação personalizada.",
+  "examples": {
+    "textDividers": {
+      "header": "Divisores de texto",
+      "desc": "Por padrão, breadcrumb usa um divisor de texto. Este pode ser qualquer string."
+    },
+    "iconDividers": {
+      "header": "Divisores de ícone",
+      "desc": "Para a variante de ícone, breadcrumbs podem usar qualquer ícone da Material Design Icons."
+    }
+  },
+  "props": {
+    "divider": "Especifica o caractere divisor",
+    "icons": "Especifica que os divisores serão ícones",
+    "justifyCenter": "Centraliza o breadcrumb",
+    "justifyEnd": "Alinha o breadcrumb no final",
+    "large": "Aumenta o tamanho da fonte do texto do item do breadcrumb"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "header": "Carousel",
+  "headerText": "O componente `v-carousel` é usado para exibir diversos conteúdos visuais de forma rotativa com temporizador.",
+  "examples": {
+    "default": {
+      "header": "Padrão",
+      "desc": "Por padrão um carrossel tem uma transição de slide.",
+      "uninverted": true
+    },
+    "customTransition": {
+      "header": "Transição personalizada",
+      "desc": "Você também pode aplicar sua própria transição personalizada.",
+      "uninverted": true
+    },
+    "customIcons": {
+      "header": "Ícones personalizados",
+      "desc": "Você também pode alterar o ícone do delimitador do carrossel e os ícones anterior/próximo.",
+      "uninverted": true
+    },
+    "hideControls": {
+      "header": "Ocultar controles",
+      "desc": "Você pode ocultar os controles inferiores com a propriedade `hide-controls`.",
+      "uninverted": true
+    }
+  },
+  "props": {
+    "nextIcon": "Mixins.Input.props.appendIcon",
+    "prevIcon": "Mixins.Input.props.prependIcon",
+    "cycle": "Determina se o carrossel deve circular entre as imagens",
+    "delimiterIcon": "Define o ícone do delimitador do carrossel",
+    "hideControls": "Oculta os controles de navegação",
+    "hideDelimiters": "Oculta o painel com delimitadores do carrossel",
+    "interval": "A duração entre ciclos de imagem",
+    "reverseTransition": "Define a transição reversa",
+    "src": "O caminho da imagem",
+    "transition": "Mixins.Transitionable.props.transition"
+  }
+}

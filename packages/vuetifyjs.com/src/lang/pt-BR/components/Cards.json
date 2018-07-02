@@ -1,0 +1,37 @@
+{
+  "header": "Card",
+  "headerText": "O componente `v-card` é um componente versátil que pode ser usado para qualquer coisa, desde um painel até uma imagem estática. O componente **card** possui inúmeros componentes auxiliares para tornar a marcação tão fácil quanto possível. Componentes que não possuem opções listadas usam componente funcional do **Vue** para uma renderização mais rápida e servem como facilitadores na construção da marcação.",
+  "examples": {
+    "components": {
+      "header": "Componentes",
+      "desc": "Um cartão possui 4 componentes básicos: `v-card-media`, `v-card-title`, `v-card-text` e `v-card-actions`."
+    },
+    "mediaWithText": {
+      "header": "Mídia com texto",
+      "desc": "Usando o sistema de layout, podemos adicionar texto personalizado em qualquer lugar dentro do plano de fundo."
+    },
+    "horizontal": {
+      "header": "Cartões horizontais",
+      "desc": "Usando `v-flex`, você pode criar cartões horizontais personalizados. use a propriedade `contain` para encolher o `v-card-media` para caber dentro da área, em vez de cobrí-la."
+    },
+    "grids": {
+      "header": "Grades",
+      "desc": "Usando listas de grade você pode criar belos layouts."
+    },
+    "customActions": {
+      "header": "Ações personalizadas",
+      "desc": "Com um simples condicional você pode facilmente adicionar texto suplementar que fica escondido até que seja aberto."
+    }
+  },
+  "props": {
+    "contain": "Altera o tamanho do fundo para conter a imagem",
+    "flat": "Remove a sombra do cartão",
+    "height": "Define manualmente a altura do cartão",
+    "hover": "Aplica uma elevação mais alta ao passar o mouse",
+    "img": "Especifica uma imagem de fundo",
+    "primaryTitle": "Aplica preenchimento específico do título principal",
+    "raised": "Especifica uma elevação padrão mais alta",
+    "src": "A imagem para exibir como plano de fundo",
+    "tile": "Transforme o cartão em formato de azulejo, removendo o arredondamento da borda"
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "header": "Button",
+  "headerText": "O componente `v-btn` substitui o tema do botão html padrão pelo material design com grande variedade de opções. Qualquer classe de ajuda de cor pode ser usada para alterar a cor do fundo ou texto.",
+  "examples": {
+    "usage": {
+      "header": "Uso",
+      "desc": ""
+    },
+    "flat": {
+      "header": "Plano",
+      "desc": "Botões planos não tem sombra ou fundo. O contorno do botão é exibido somente ao passar o mouse."
+    },
+    "raised": {
+      "header": "Em relevo",
+      "desc": "Os botões em relevo têm sombra que aumenta quando clicado. Este é o estilo padrão."
+    },
+    "depressed": {
+      "header": "Rebaixado",
+      "desc": "Botões rebaixados ainda mantêm a sua cor de fundo, mas não tem sombra."
+    },
+    "dropdown": {
+      "header": "Variantes de Botão com Menu Suspenso",
+      "desc": "Os botões com menu suspenso são seleções normais com estilo adicional.",
+      "uninverted": true
+    },
+    "toggle": {
+      "header": "Botão de Alternância",
+      "desc": "Botões de alternância são, essencialmente, botões estilo rádio ou caixas de seleção, dependendo das propriedades selecionadas. Este componente é compatível com o componente `v-toolbar`."
+    },
+    "icon": {
+      "header": "Ícone",
+      "desc": "Ícones podem ser usados para o contúdo principal de um botão."
+    },
+    "floating": {
+      "header": "Flutuante",
+      "desc": "Botões flutuantes são redondos e geralmente contêm um ícone."
+    },
+    "loaders": {
+      "header": "Carregamento",
+      "desc": "Usando a propriedade de carregamento (loading), você pode notificar um usuário de que está ocorrendo um processamento. O comportamento padrão é usar um componente `v-progress-circular`, mas isso pode ser personalizado."
+    },
+    "sizing": {
+      "header": "Dimensionamento",
+      "desc": "Botões podem receber diferentes opções de tamanhos para se adequarem a uma infinidade de cenários."
+    },
+    "outline": {
+      "header": "Contorno",
+      "desc": "Botões com contorno herdam suas bordas da cor atual aplicada."
+    },
+    "round": {
+      "header": "Arredondado",
+      "desc": "Botões arredondados comportam da mesma maneira que botões comuns, mas possuem cantos arredondadas."
+    },
+    "block": {
+      "header": "Bloco",
+      "desc": "Botões de bloco preenchem toda a largura disponível."
+    }
+  },
+  "props": {
+    "v-btn": {
+      "block": "Expande o botão para 100% do espaço disponível",
+      "depressed": "Remove a sombra do botão",
+      "fab": "Torna o bottão redondo",
+      "flat": "Remove a cor de fundo do botão",
+      "icon": "Designa o botão como ícone - redondo e plano",
+      "inputValue": "Controla o estado ativo do botão",
+      "large": "Botão de tamanho grande",
+      "loading": "Adiciona uma animação de ícone de carregamento",
+      "outline": "O botão terá um contorno",
+      "round": "O botão terá cantos arredondados",
+      "small": "Botão de tamanho pequeno",
+      "type": "Define o tipo do botão"
+    }
+  }
+}
