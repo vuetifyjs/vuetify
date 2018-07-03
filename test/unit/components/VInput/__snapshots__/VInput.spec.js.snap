@@ -1,8 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VInput.js should apply theme to label and messages 1`] = `
+exports[`VInput.js should apply theme to label, counter, messages and icons 1`] = `
 
 <div class="v-input theme--light">
+  <div class="v-input__prepend-outer">
+    <div class="v-input__icon v-input__icon--prepend">
+      <i aria-hidden="true"
+         class="v-icon theme--light material-icons"
+      >
+        prepend
+      </i>
+    </div>
+  </div>
   <div class="v-input__control">
     <div class="v-input__slot">
       <label aria-hidden="true"
@@ -18,6 +27,15 @@ exports[`VInput.js should apply theme to label and messages 1`] = `
           bar
         </div>
       </div>
+    </div>
+  </div>
+  <div class="v-input__append-outer">
+    <div class="v-input__icon v-input__icon--append">
+      <i aria-hidden="true"
+         class="v-icon theme--light material-icons"
+      >
+        append
+      </i>
     </div>
   </div>
 </div>

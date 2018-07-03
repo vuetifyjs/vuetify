@@ -149,7 +149,11 @@ export default {
           'class': this.classesSelectable
         }),
         this.$createElement(VIcon, {
-          'class': this.classesSelectable
+          'class': this.classesSelectable,
+          props: {
+            light: this.light,
+            dark: this.dark
+          }
         }, this.computedIcon)
       ])
     },

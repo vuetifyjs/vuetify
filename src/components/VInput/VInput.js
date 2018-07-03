@@ -149,7 +149,9 @@ export default {
       const data = {
         props: {
           color: this.validationState,
-          disabled: this.disabled
+          disabled: this.disabled,
+          light: this.light,
+          dark: this.dark
         },
         on: !(this.$listeners[eventName] || cb)
           ? null
