@@ -183,4 +183,35 @@ test('VCombobox', ({ shallow }) => {
 
     // TODO: Add expects for tags when impl
   })
+
+  it('should return an object', () => {
+    const items = [
+      { text: 'Programming', value: 0 },
+      { text: 'Design', value: 1 },
+      { text: 'Vue', value: 2 },
+      { text: 'Vuetify', value: 3 }
+    ]
+    const wrapper = shallow(VCombobox, {
+      propsData: {
+        items
+      }
+    })
+
+    const input = wrapper.first('input')
+    const event = jest.fn()
+    wrapper.vm.$on('input', event)
+
+    input.trigger('focus')
+    input.element.value = 'Programming'
+    input.trigger('input')
+    wrapper.vm.selectItem(items[0])
+
+    expect(wrapper.vm.isFocused).toBe(true)
+    expect(event).toBeCalledWith(items[0])
+
+    input.trigger('keydown.tab')
+
+    expect(wrapper.vm.isFocused).toBe(false)
+    expect(wrapper.vm.internalValue).toEqual(items[0])
+  })
 })
