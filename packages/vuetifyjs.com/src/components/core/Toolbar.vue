@@ -14,7 +14,7 @@
       @click="$store.commit('app/DRAWER_TOGGLE')"
       v-show="!stateless"
     )
-    router-link(:to="{ name: 'home/Home' }").d-flex
+    router-link(:to="logoLink").d-flex
       img(
         src="https://s3.amazonaws.com/vuetify-docs/images/logos/v-alt.svg"
         height="38px"
@@ -30,13 +30,15 @@
     v-spacer
     v-toolbar-items
       v-btn(
-        flat
         v-show="isHome"
-        :to="{ name: 'getting-started/QuickStart' }"
+        :to="logoLink"
+        class="hidden-xs-only"
+        flat
+        style="min-width: 48px"
       )
         translation-translatable(:i18n="$vuetify.breakpoint.mdAndUp ? 'Vuetify.AppToolbar.documentation' : 'Vuetify.AppToolbar.docs'")
-        span.hidden-md-and-up {{ $t('Vuetify.AppToolbar.docs' )}}
         span.hidden-sm-and-down {{ $t('Vuetify.AppToolbar.documentation' )}}
+        v-icon.hidden-md-and-up mdi-file-document-box
       v-menu(
         bottom
         offset-y
@@ -46,11 +48,11 @@
         v-btn(
           slot="activator"
           flat
-          style="min-width: 64px"
+          style="min-width: 48px"
         )
           img(
             :src="`https://countryflags.io/${currentLanguage.country}/flat/32.png`"
-            width="32px"
+            width="26px"
           )
         v-list(light)
           v-list-tile(
@@ -72,9 +74,9 @@
             v-list-tile-title New translation
     v-toolbar-items
       v-btn(
-        flat
-        style="min-width: 64px"
         :to="{ name: 'store/Front' }"
+        flat
+        style="min-width: 48px"
       )
         translation-translatable(i18n="Vuetify.AppToolbar.store")
         v-badge(color="red lighten-2")
@@ -97,12 +99,13 @@
         v-btn(
           flat
           slot="activator"
-          style="min-width: 64px"
+          style="min-width: 48px"
         )
           translation-translatable(i18n="Vuetify.AppToolbar.ecosystem").hidden-sm-and-down
             span.mr-1 {{ $t('Vuetify.AppToolbar.ecosystem' )}}
           v-icon.hidden-sm-and-down mdi-menu-down
           v-icon.hidden-md-and-up mdi-earth
+
         v-list(light)
           v-subheader(light) {{ $t('Vuetify.AppToolbar.quickLinks' )}}
           v-list-tile(
@@ -116,8 +119,11 @@
               v-icon(light) {{ ecosystem.icon }}
             v-list-tile-content
               v-list-tile-title {{ ecosystem.text }}
+
           v-divider(light)
+
           v-subheader(light) {{ $t('Vuetify.AppToolbar.social' )}}
+
           v-list-tile(
             target="_blank"
             rel="noopener"
@@ -130,7 +136,6 @@
             v-list-tile-content
               v-list-tile-title {{ social.text }}
 
-      v-toolbar-items
       v-menu(
         attach
         bottom
@@ -141,6 +146,7 @@
         v-btn(
           flat
           slot="activator"
+          style="min-width: 48px"
         )
           translation-translatable(i18n="Vuetify.AppToolbar.support").hidden-sm-and-down
             span.mr-1 {{ $t('Vuetify.AppToolbar.support' )}}
@@ -243,6 +249,11 @@
       },
       isStore () {
         return this.$route.name.startsWith('store/')
+      },
+      logoLink () {
+        return this.isHome
+          ? { name: 'getting-started/QuickStart' }
+          : { name: 'home/Home' }
       }
     },
 
