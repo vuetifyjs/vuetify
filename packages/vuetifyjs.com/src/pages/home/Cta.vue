@@ -6,7 +6,7 @@
   >
     <a
       class="v-chip v-chip--tidelift white--text"
-      href="http://tidelift.com/subscription/npm/vuetify"
+      href="https://tidelift.com/subscription/npm/vuetify?utm_source=vuetify&utm_medium=referral&utm_campaign=homepage"
       rel="noopener"
       target="_blank"
     >
