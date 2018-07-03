@@ -18,6 +18,7 @@
       helpers-section-head(value="Framework.Icons.installHeader")
       helpers-section-text(value="Framework.Icons.installText1")
 
+      // Material Icons
       helpers-section-subheader(value="Framework.Icons.installMD")
       helpers-section-text(value="Framework.Icons.installMDText1")
 
@@ -41,6 +42,7 @@
         |
         | Vue.use(Vuetify)
 
+      // MDI
       helpers-section-subheader(value="Framework.Icons.installMDI")
 
       helpers-markup(lang="cli")
@@ -58,10 +60,57 @@
         |
         | Vue.use(Vuetify)
 
+      // FA
       helpers-section-subheader(value="Framework.Icons.installFA")
-      p Coming soon
+      helpers-section-text(value="Framework.Icons.installFAText1")
+
+      helpers-markup(lang="html")
+        | &lt;link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet"&gt;
+
+      helpers-section-text(value="Framework.Icons.installFAText2")
+
+      helpers-markup(lang="cli")
+        | $ yarn add @fortawesome/fontawesome-free -D
+        | // or
+        | $ npm install @fortawesome/fontawesome-free -D
+
+      helpers-section-text(value="Framework.Icons.installFAText3")
+
+      helpers-markup(lang="js")
+        | // main.js
+        | import '@fortawesome/fontawesome-free/css/all.css' // Ensure you are using css-loader
+        | import Vue from 'vue'
+        | import Vuetify from 'vuetify'
+        |
+        | Vue.use(Vuetify, {
+        |  iconfont: 'fa'
+        | })
+
+      // FA4
       helpers-section-subheader(value="Framework.Icons.installFA4")
-      p Coming soon
+      helpers-section-text(value="Framework.Icons.installFA4Text1")
+
+      helpers-markup(lang="html")
+        | &lt;link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet"&gt;
+
+      helpers-section-text(value="Framework.Icons.installFA4Text2")
+
+      helpers-markup(lang="cli")
+        | $ yarn add font-awesome@4.7.0 -D -D
+        | // or
+        | $ npm install font-awesome@4.7.0 -D -D
+
+      helpers-section-text(value="Framework.Icons.installFA4Text3")
+
+      helpers-markup(lang="js")
+        | // main.js
+        | import 'font-awesome/css/font-awesome.min.css' // Ensure you are using css-loader
+        | import Vue from 'vue'
+        | import Vuetify from 'vuetify'
+        |
+        | Vue.use(Vuetify, {
+        |  iconfont: 'fa4'
+        | })
 
     section#using-custom-icons
       helpers-section-head(value="Framework.Icons.customIconsHeader")
