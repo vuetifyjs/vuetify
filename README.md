@@ -42,7 +42,7 @@
 <p>Tidelift gives software development teams a single source for purchasing and maintaining their software, with professional-grade assurances from the experts who know it best, while seamlessly integrating with existing tools.</p>
 
 <div align="center">
-  <a href="http://tidelift.com/subscription/npm/vuetify">
+  <a href="https://tidelift.com/subscription/npm/vuetify?utm_source=vuetify&utm_medium=referral&utm_campaign=readme">
     <p align="center">
       <img src="https://pbs.twimg.com/profile_images/953693944528896006/7pSbgJHd_bigger.jpg" alt="Get supported with Tidelift" />
     </p>
