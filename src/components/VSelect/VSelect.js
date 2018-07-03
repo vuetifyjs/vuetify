@@ -58,7 +58,10 @@ export default {
       default: '$vuetify.icons.dropdown'
     },
     appendIconCb: Function,
-    attach: Boolean,
+    attach: {
+      type: null,
+      default: false
+    },
     auto: Boolean,
     browserAutocomplete: {
       type: String,
@@ -437,6 +440,8 @@ export default {
         this.attach === 'attach' // If bound as boolean prop in pug (v-menu(attach))
       ) {
         props.attach = this.$el
+      } else {
+        props.attach = this.attach
       }
 
       return this.$createElement(VMenu, {
