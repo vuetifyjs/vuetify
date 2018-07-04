@@ -55,7 +55,13 @@ v-stepper($material)
     .v-stepper__content:not(:last-child)
       border-left: 1px solid rgba($material.fg-color, $material.divider-percent)
 
+v-stepper-rtl()
+  .v-stepper__step__step
+    margin-right: 0
+    margin-left: 12px
+
 theme(v-stepper, "v-stepper")
+rtl(v-stepper-rtl, "v-stepper")
 
 .v-stepper
   overflow: hidden
