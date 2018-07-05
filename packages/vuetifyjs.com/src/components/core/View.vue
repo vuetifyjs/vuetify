@@ -10,9 +10,7 @@
 
   export default {
     computed: {
-      ...mapState('translation', {
-        isTranslating: state => state.isTranslating
-      })
+      ...mapState('translation', ['isTranslating'])
     }
   }
 </script>
