@@ -2,7 +2,7 @@ import 'vuetify/dist/vuetify.css'
 import '@mdi/font/css/materialdesignicons.css'
 import 'docsearch.js/dist/cdn/docsearch.min.css'
 import 'es6-promise/auto'
-import { createApp } from './app'
+import { createApp } from './main'
 
 const { app, router, store } = createApp()
 
