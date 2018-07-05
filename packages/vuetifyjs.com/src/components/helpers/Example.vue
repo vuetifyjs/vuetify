@@ -84,7 +84,7 @@
             ) {{ tab }}
             v-tabs-items(class="grey lighten-3")
               v-tab-item(v-for="tab in tabs" :key="tab")
-                helpers-markup(:lang="getLang(tab)" v-if="parsed[tab]").ma-0
+                helpers-markup(lang="html" v-if="parsed[tab]").ma-0
                   | {{ parsed[tab] }}
 
       v-divider(v-if="!readonly")

@@ -103,6 +103,7 @@
     overflow-y: hidden
     margin-bottom: 16px
     background: #2d2d2d
+    color: #fff
 
     pre, code
       margin: 0
@@ -154,6 +155,7 @@
         opacity: 0
 
     .v-icon
+      color: inherit
       position: absolute
       right: 0
       transition: opacity .2s ease-in
