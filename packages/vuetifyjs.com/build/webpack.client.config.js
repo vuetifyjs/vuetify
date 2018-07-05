@@ -10,7 +10,7 @@ const isProd = process.env.NODE_ENV === 'production'
 const cssLoaders = [
   isProd ? MiniCssExtractPlugin.loader : {
     loader: 'vue-style-loader',
-    options: { sourceMap: !isProd }
+    options: { sourceMap: false }
   },
   {
     loader: 'css-loader',
