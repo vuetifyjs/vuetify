@@ -10,7 +10,7 @@
   "repository": "vuetifyjs/vuetify",
   "main": "dist/vuetify.js",
   "module": "dist/vuetify.js",
-  "unpkg": "dist/vuetify.js",
+  "jsdelivr": "dist/vuetify.js",
   "types": "types/index.d.ts",
   "scripts": {
     "watch": "cross-env TARGET=development webpack --config build/config.js --progress --hide-modules --watch",
