@@ -119,7 +119,7 @@ You can find the Vuetify documentation <a href="https://vuetifyjs.com" target="_
 <html>
 <head>
   <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
-  <link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 </head>
 <body>
@@ -138,8 +138,8 @@ You can find the Vuetify documentation <a href="https://vuetifyjs.com" target="_
     </v-app>
   </div>
 
-  <script src="https://unpkg.com/vue/dist/vue.js"></script>
-  <script src="https://unpkg.com/vuetify/dist/vuetify.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
   <script>
     new Vue({
       el: '#app'
@@ -181,7 +181,7 @@ Vue.use(Vuetify)
 For including styles, you can either place the below styles in your `index.html`
 ```html
 <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
-<link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
 ```
 Or you can import it to your webpack entry point
 ```javascript
