@@ -19,6 +19,8 @@ const serverInfo =
 
 const availableLanguages = require('./src/data/i18n/languages').map(lang => lang.locale)
 
+const startTime = new Date()
+
 const app = express()
 
 function createRenderer (bundle, options) {
@@ -115,6 +117,15 @@ function render (req, res) {
   res.cookie('currentLanguage', req.params[0], {
     maxAge: 1000 * 60 * 60 * 24 * 7 // 7 days
   })
+
+  if (!/^\/store/.test(req.params[1])) {
+    res.setHeader('Last-Modified', startTime.toUTCString())
+    res.setHeader('Cache-Control', 'public, must-revalidate')
+
+    if (req.fresh) {
+      return res.status(304).end()
+    }
+  }
 
   const handleError = err => {
     if (err.url) {
