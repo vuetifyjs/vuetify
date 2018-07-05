@@ -6,6 +6,10 @@ const chokidar = require('chokidar')
 const clientConfig = require('./webpack.client.config')
 const serverConfig = require('./webpack.server.config')
 
+// Increase node heap size to prevent crashes
+const v8 = require('v8')
+v8.setFlagsFromString('--max_old_space_size=4096')
+
 const readFile = (fs, file) => {
   try {
     return fs.readFileSync(path.join(clientConfig.output.path, file), 'utf-8')
@@ -24,7 +28,8 @@ module.exports = function setupDevServer (app, templatePath, cb) {
       ready()
       cb(bundle, {
         template,
-        clientManifest
+        clientManifest,
+        shouldPrefetch: () => false
       })
     }
   }

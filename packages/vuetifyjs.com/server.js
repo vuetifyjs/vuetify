@@ -50,7 +50,8 @@ if (isProd) {
   const clientManifest = require('./dist/vue-ssr-client-manifest.json')
   renderer = createRenderer(bundle, {
     template,
-    clientManifest
+    clientManifest,
+    shouldPrefetch: () => false
   })
 } else {
   // In development: setup the dev server with watch and hot-reload,

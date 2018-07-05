@@ -8,7 +8,6 @@ const isProd = process.env.NODE_ENV === 'production'
 
 module.exports = merge(base, {
   target: 'node',
-  devtool: 'source-map',
   entry: './src/entry-server.js',
   output: {
     filename: 'server-bundle.js',
@@ -35,5 +34,9 @@ module.exports = merge(base, {
       'process.env.VUE_ENV': '"server"'
     }),
     new VueSSRServerPlugin()
-  ]
+  ],
+  optimization: {
+    minimize: false,
+    splitChunks: false
+  }
 })

@@ -5,7 +5,7 @@
     :value="true"
   ).my-4.app-alert
     translation-translatable(:i18n="value")
-    markdown(:source="$t(value)")
+    helpers-markdown(:source="$t(value)")
 </template>
 
 <script>

@@ -30,7 +30,7 @@
                       span(v-text="$t(`${namespace}.philosophies[${i}].title`)")
                     translation-translatable(:i18n="`${namespace}.philosophies[${i}].caption`")
                     v-card-text.caption.text-xs-justify
-                      markdown(:source="$t(`${namespace}.philosophies[${i}].caption`)")
+                      helpers-markdown(:source="$t(`${namespace}.philosophies[${i}].caption`)")
 
       v-layout(row wrap).mb-5
         v-flex(xs12)
@@ -40,7 +40,7 @@
                 section.text-xs-justify
                   div(v-for="(p, i) in whyText" :key="i")
                     translation-translatable(:i18n="`${namespace}.whyText[${i}]`")
-                      markdown(:source="$t(`${namespace}.whyText[${i}]`)")
+                      helpers-markdown(:source="$t(`${namespace}.whyText[${i}]`)")
 
                 section#design-principles
                   helpers-section-head(:value="`${namespace}.designHeader`")
