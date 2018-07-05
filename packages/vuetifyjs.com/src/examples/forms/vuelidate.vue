@@ -114,8 +114,8 @@
 <codepen-resources lang="json">
   {
     "js": [
-      "https://unpkg.com/vuelidate/dist/vuelidate.min.js",
-      "https://unpkg.com/vuelidate/dist/validators.min.js"
+      "https://cdn.jsdelivr.net/npm/vuelidate/dist/vuelidate.min.js",
+      "https://cdn.jsdelivr.net/npm/vuelidate/dist/validators.min.js"
     ]
   }
 </codepen-resources>
