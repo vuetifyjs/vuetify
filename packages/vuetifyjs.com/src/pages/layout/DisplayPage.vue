@@ -10,14 +10,14 @@
             v-for="item in breakpoints"
             :key="item"
           )
-            markdown(:source="item")
+            helpers-markdown(:source="item")
         helpers-section-text(:value="`${namespace}.conditionText`")
         ul.browser-list.pb-2
           li(
             v-for="item in conditions"
             :key="item"
           )
-            markdown(:source="item")
+            helpers-markdown(:source="item")
 
       section#display
         helpers-section-head(:value="`${namespace}.displayHeader`")
@@ -27,7 +27,7 @@
             v-for="item in displays"
             :key="item"
           )
-            markdown(:source="item")
+            helpers-markdown(:source="item")
 
       section#examples
         helpers-section-head(value="Generic.Pages.examples")

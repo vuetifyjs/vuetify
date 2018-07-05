@@ -17,7 +17,7 @@
     //- Description
     // TODO: make independant of english locale
     translation-translatable(v-if="$te(desc, 'en')" :i18n="desc")
-      markdown(
+      helpers-markdown(
         v-if="$t(desc)"
         :source="$t(desc)"
       )

@@ -2,7 +2,7 @@
   <h2 class="section-head headline primary--text mb-3">
     <translation-translatable :i18n="value">
       <v-layout align-center>
-        <markdown :source="translation" />
+        <helpers-markdown :source="translation" />
 
         <a
           :href="`#${id}`"

@@ -14,7 +14,7 @@
         ).mb-4.px-5
           span {{ $t('Vuetify.Store.backToStore') }}
           v-icon(right) mdi-arrow-right
-        markdown(:source="$t('Vuetify.Store.thankYouBack')").caption
+        helpers-markdown(:source="$t('Vuetify.Store.thankYouBack')").caption
 </template>
 
 <script>

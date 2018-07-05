@@ -2,9 +2,9 @@
   section.page-head
     h1.display-1.primary--text#introduction
       translation-translatable(:i18n="header")
-        markdown(:source="$t(header)")
+        helpers-markdown(:source="$t(header)")
     translation-translatable(:i18n="text")
-      markdown(:source="$t(text)")
+      helpers-markdown(:source="$t(text)")
     slot(name="sup")
 </template>
 

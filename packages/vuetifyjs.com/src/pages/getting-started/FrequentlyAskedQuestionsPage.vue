@@ -6,11 +6,11 @@
         v-for="(faq, i) in gotchas"
       )
         div.subheading
-          markdown {{ faq.q }}
+          helpers-markdown {{ faq.q }}
         v-divider
         v-card.mb-5.flat
           v-card-text
-            markdown {{ faq.a }}
+            helpers-markdown {{ faq.a }}
 
       div.text-xs-center
         div.mb-3

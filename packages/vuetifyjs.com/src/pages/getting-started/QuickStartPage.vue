@@ -150,7 +150,7 @@
         helpers-markup(lang="json")
           | // .babelrc
           | {
-          |    "presets": ["@babel/preset-env"]
+          |   "presets": ["@babel/preset-env"]
           | }
 
         helpers-markup(lang="javascript")

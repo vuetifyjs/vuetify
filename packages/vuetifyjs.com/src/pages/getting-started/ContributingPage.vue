@@ -7,23 +7,23 @@
           ul.browser-list
             li
               translation-translatable(:i18n="`${namespace}.issue1`")
-                markdown(:source="$t(`${namespace}.issue1`)")
+                helpers-markdown(:source="$t(`${namespace}.issue1`)")
             ul.browser-list
               li
                 translation-translatable(:i18n="`${namespace}.issue2`")
-                  markdown(:source="$t(`${namespace}.issue2`)")
+                  helpers-markdown(:source="$t(`${namespace}.issue2`)")
             li
               translation-translatable(:i18n="`${namespace}.issue3`")
-                markdown(:source="$t(`${namespace}.issue3`)")
+                helpers-markdown(:source="$t(`${namespace}.issue3`)")
             li
               translation-translatable(:i18n="`${namespace}.issue4`")
-                markdown(:source="$t(`${namespace}.issue4`)")
+                helpers-markdown(:source="$t(`${namespace}.issue4`)")
             li
               translation-translatable(:i18n="`${namespace}.issue5`")
-                markdown(:source="$t(`${namespace}.issue5`)")
+                helpers-markdown(:source="$t(`${namespace}.issue5`)")
             li
               translation-translatable(:i18n="`${namespace}.issue6`")
-                markdown(:source="$t(`${namespace}.issue6`)")
+                helpers-markdown(:source="$t(`${namespace}.issue6`)")
       section#pull-requests
         helpers-section-head(:value="`${namespace}.pullRequestsHeader`")
         div.mb-3
@@ -33,7 +33,7 @@
               :key="n"
             )
               translation-translatable(:i18n="`${namespace}.pullRequest${n}`")
-                markdown(:source="$t(`${namespace}.pullRequest${n}`)")
+                helpers-markdown(:source="$t(`${namespace}.pullRequest${n}`)")
       section#local-dev
         helpers-section-head(:value="`${namespace}.localDevHeader`")
         helpers-section-text(:value="`${namespace}.localDevText1`").mb-5

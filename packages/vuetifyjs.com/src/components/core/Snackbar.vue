@@ -16,7 +16,7 @@
       >
         {{ computedIcon }}
       </v-icon>
-      <markdown
+      <helpers-markdown
         :source="snackbar.msg"
         class="snack-markdown"
       />

@@ -15,21 +15,21 @@
             v-for="item in properties"
             :key="item"
           )
-            markdown(:source="item")
+            helpers-markdown(:source="item")
         helpers-section-text(:value="`${namespace}.directionText`")
         ul.browser-list.pb-2
           li(
             v-for="item in directions"
             :key="item"
           )
-            markdown(:source="item")
+            helpers-markdown(:source="item")
         helpers-section-text(:value="`${namespace}.sizeText`")
         ul.browser-list
           li(
             v-for="item in sizes"
             :key="item"
           )
-            markdown(:source="item")
+            helpers-markdown(:source="item")
 </template>
 
 <script>

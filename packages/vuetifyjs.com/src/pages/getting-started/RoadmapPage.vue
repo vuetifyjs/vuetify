@@ -15,7 +15,7 @@
               span(v-html="roadmap.date")
             td
               translation-translatable(:i18n="`${roadmap.namespace}.desc`")
-                markdown(:source="roadmap.desc")
+                helpers-markdown(:source="roadmap.desc")
       misc-support-vuetify
 </template>
 
