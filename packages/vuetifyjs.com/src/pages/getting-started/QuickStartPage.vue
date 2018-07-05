@@ -60,7 +60,7 @@
           | &lt;html&gt;
           | &lt;head&gt;
           |   &lt;link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet"&gt;
-          |   &lt;link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet"&gt;
+          |   &lt;link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet"&gt;
           |   &lt;meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui"&gt;
           | &lt;/head&gt;
           | &lt;body&gt;
@@ -72,8 +72,8 @@
           |     &lt;/v-app&gt;
           |   &lt;/div&gt;
           | &nbsp;
-          |   &lt;script src="https://unpkg.com/vue/dist/vue.js"&gt;&lt;/script&gt;
-          |   &lt;script src="https://unpkg.com/vuetify/dist/vuetify.js"&gt;&lt;/script&gt;
+          |   &lt;script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"&gt;&lt;/script&gt;
+          |   &lt;script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"&gt;&lt;/script&gt;
           |   &lt;script&gt;
           |     new Vue({ el: '#app' })
           |   &lt;/script&gt;
