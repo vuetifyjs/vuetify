@@ -1,4 +1,4 @@
-## Veutify Feature Request
+## Vuetify Feature Request
 
 
 ## Feature Description:

@@ -1,9 +1,9 @@
-## Veutify Bug Report
+## Vuetify Bug Report
 
 ### Bug Description:
 <!--- Describe the bug you've encountered at a high level -->
 
-##### Veutify Version:
+##### Vuetify Version:
 <!--- Vuetify Version Bug Occured On-->
 
 ##### Vue Version:
