@@ -5,7 +5,7 @@
     dark
     fixed
     height="58"
-    extension-height="42"
+    extension-height="48"
     :flat="isHome"
     :manual-scroll="isManualScrolled"
     ref="toolbar"
