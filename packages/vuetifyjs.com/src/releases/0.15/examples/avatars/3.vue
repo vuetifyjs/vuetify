@@ -4,7 +4,7 @@
       <v-icon dark>account_circle</v-icon>
     </v-avatar>
     <v-avatar>
-      <img src="https://s3.amazonaws.com/vuetify-docs/images/john.jpg" alt="John">
+      <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John">
     </v-avatar>
     <v-avatar
       class="purple red--after"

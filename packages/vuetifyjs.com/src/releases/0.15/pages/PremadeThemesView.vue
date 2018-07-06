@@ -54,7 +54,7 @@
     data: () => ({
       templates: [
         {
-          screenshot: 'https://s3.amazonaws.com/vuetify-docs/images/starter/vuetify-premium.jpg',
+          screenshot: 'https://cdn.vuetifyjs.com/images/starter/vuetify-premium.jpg',
           title: 'Startup',
           tag: 'PREMIUM',
           description: 'Showcase your Company or personal portfolio with this beautifully hand-crafted Material design template.',
@@ -62,14 +62,14 @@
           demoUrl: ''
         },
         {
-          screenshot: 'https://s3.amazonaws.com/vuetify-docs/images/starter/vuetify-parallax-starter.png',
+          screenshot: 'https://cdn.vuetifyjs.com/images/starter/vuetify-parallax-starter.png',
           title: 'Parallax',
           description:'This beautiful single page parallax is a great home page for any application.',
           sourceUrl: 'vuetifyjs/parallax-starter',
           demoUrl: '/themes/parallax-starter'
         },
         {
-          screenshot: 'https://s3.amazonaws.com/vuetify-docs/images/starter/vuetify-blog-starter.png',
+          screenshot: 'https://cdn.vuetifyjs.com/images/starter/vuetify-blog-starter.png',
           title: 'Blog',
           description:'A simple template that features a clean interface for creating a blog or blog-like application.',
           sourceUrl: 'vuetifyjs/blog-starter',

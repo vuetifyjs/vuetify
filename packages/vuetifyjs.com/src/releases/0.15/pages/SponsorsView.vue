@@ -25,7 +25,7 @@
             v-bind:key="sponsor.title"
           ).text-xs-center.mx-3
             img(
-              :src="`https://s3.amazonaws.com/vuetify-docs/images/${sponsor.src}`"
+              :src="`https://cdn.vuetifyjs.com/images/${sponsor.src}`"
               alt="sponsor.title"
             )
 
@@ -47,7 +47,7 @@
             v-bind:key="backer.title"
           ).text-xs-center.mx-3
             img(
-              :src="`https://s3.amazonaws.com/vuetify-docs/images/backers/${backer.src}`"
+              :src="`https://cdn.vuetifyjs.com/images/backers/${backer.src}`"
               :alt="backer.title"
             )
       v-list.transparent
@@ -66,7 +66,7 @@
             v-bind:key="backer.title"
           ).text-xs-center.mx-3
             img(
-              :src="`https://s3.amazonaws.com/vuetify-docs/images/backers/${backer.src}`"
+              :src="`https://cdn.vuetifyjs.com/images/backers/${backer.src}`"
               :alt="backer.title"
             )
 

@@ -36,10 +36,10 @@
     data () {
       return {
         items: [
-          { icon: true, title: 'Jason Oner', avatar: 'https://s3.amazonaws.com/vuetify-docs/images/lists/1.jpg' },
-          { title: 'Travis Howard', avatar: 'https://s3.amazonaws.com/vuetify-docs/images/lists/2.jpg' },
-          { title: 'Ali Connors', avatar: 'https://s3.amazonaws.com/vuetify-docs/images/lists/3.jpg' },
-          { title: 'Cindy Baker', avatar: 'https://s3.amazonaws.com/vuetify-docs/images/lists/4.jpg' },
+          { icon: true, title: 'Jason Oner', avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg' },
+          { title: 'Travis Howard', avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg' },
+          { title: 'Ali Connors', avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg' },
+          { title: 'Cindy Baker', avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg' },
         ]
       }
     }

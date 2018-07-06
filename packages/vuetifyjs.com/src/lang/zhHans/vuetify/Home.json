@@ -6,17 +6,17 @@
   "getHelp": "帮帮我",
   "features": [
     {
-      "img": "https://s3.amazonaws.com/vuetify-docs/images/home/feature1.svg",
+      "img": "https://cdn.vuetifyjs.com/images/home/feature1.svg",
       "title": "开箱即用的项目脚手架",
       "text": "Vuetify已预先制作了8个vue-cli模板。从简单的HTML到全面的服务端渲染（SSR）项目，都只需几分钟就能创建完毕。"
     },
     {
-      "img": "https://s3.amazonaws.com/vuetify-docs/images/home/feature2.svg",
+      "img": "https://cdn.vuetifyjs.com/images/home/feature2.svg",
       "title": "语义化的Material组件",
       "text": "已为你需要在项目中使用的很多专用组件做好准备。一共拥有80多个组件，是一个适用于任何应用的解决方案。"
     },
     {
-      "img": "https://s3.amazonaws.com/vuetify-docs/images/home/feature3.svg",
+      "img": "https://cdn.vuetifyjs.com/images/home/feature3.svg",
       "title": "充满活力的社区",
       "text": "当遇到问题时，您可以立即向我们请求协助。Vuetify借助Discord服务成立了正在不断壮大社区，为您提供即时聊天支持。"
     }

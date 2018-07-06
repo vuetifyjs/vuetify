@@ -16,7 +16,7 @@
     )
     router-link(:to="logoLink").d-flex
       img(
-        src="https://s3.amazonaws.com/vuetify-docs/images/logos/v-alt.svg"
+        src="https://cdn.vuetifyjs.com/images/logos/v-alt.svg"
         height="38px"
         width="38px"
       )

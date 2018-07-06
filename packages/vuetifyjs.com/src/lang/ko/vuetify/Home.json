@@ -6,17 +6,17 @@
   "getHelp": "도움",
   "features": [
     {
-      "img": "https://s3.amazonaws.com/vuetify-docs/images/home/feature1.svg",
+      "img": "https://cdn.vuetifyjs.com/images/home/feature1.svg",
       "title": "준비된 프로젝트 템플릿",
       "text": "Vuetify엔 미리 만들어진 8 개의 vue-cli 템플릿이 준비되어 있습니다. 간단한 HTML에서 본격적인 SSR에 이르기까지 단 몇 분이면 시작할 수 있습니다."
     },
     {
-      "img": "https://s3.amazonaws.com/vuetify-docs/images/home/feature2.svg",
+      "img": "https://cdn.vuetifyjs.com/images/home/feature2.svg",
       "title": "시맨틱 머티리얼 컴포넌트",
       "text": "마음껏 사용할 수 있는 전문적인 컴포넌트들의 함대가 준비되어 있습니다. 80개가 넘는 컴포넌트들과 함께 어떤 어플리케이션이든 솔루션을 제공합니다."
     },
     {
-      "img": "https://s3.amazonaws.com/vuetify-docs/images/home/feature3.svg",
+      "img": "https://cdn.vuetifyjs.com/images/home/feature3.svg",
       "title": "활발한 커뮤니티",
       "text": "난관에 부딪혔을때, 여러분은 바로 도움이 필요합니다. Vuetify 는 디스코드에 있는 나날이 커가는 커뮤니티에서 채팅 지원을 받으세요."
     }

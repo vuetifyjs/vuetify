@@ -37,7 +37,7 @@
           d-flex>
           <v-layout align-center>
             <v-flex xs12>
-              <img class="logo" src="https://s3.amazonaws.com/vuetify-docs/images/logos/logo.svg" width="50px" alt="">
+              <img class="logo" src="https://cdn.vuetifyjs.com/images/logos/logo.svg" width="50px" alt="">
             </v-flex>
           </v-layout>
         </v-flex>

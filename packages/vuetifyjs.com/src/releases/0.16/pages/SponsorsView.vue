@@ -25,7 +25,7 @@
             v-bind:key="backer.title"
           ).text-xs-center.mx-3
             img(
-              :src="`https://s3.amazonaws.com/vuetify-docs/images/backers/${backer.src}`"
+              :src="`https://cdn.vuetifyjs.com/images/backers/${backer.src}`"
               :alt="backer.title"
             )
       v-list.transparent
@@ -45,7 +45,7 @@
             v-bind:key="backer.title"
           ).text-xs-center.mx-3
             img(
-              :src="`https://s3.amazonaws.com/vuetify-docs/images/backers/${backer.src}`"
+              :src="`https://cdn.vuetifyjs.com/images/backers/${backer.src}`"
               :alt="backer.title"
             )
 
@@ -62,7 +62,7 @@
             v-bind:key="affiliate.title"
           ).text-xs-center.mx-3
             img(
-              :src="`https://s3.amazonaws.com/vuetify-docs/images/affiliates/${affiliate.src}`"
+              :src="`https://cdn.vuetifyjs.com/images/affiliates/${affiliate.src}`"
               :alt="affiliate.title"
               width="150px"
             )
@@ -79,7 +79,7 @@
             v-bind:key="sponsor.title"
           ).text-xs-center.mx-3
             img(
-              :src="`https://s3.amazonaws.com/vuetify-docs/images/${sponsor.src}`"
+              :src="`https://cdn.vuetifyjs.com/images/${sponsor.src}`"
               alt="sponsor.title"
             )
 
