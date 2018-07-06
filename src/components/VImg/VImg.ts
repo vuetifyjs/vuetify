@@ -10,7 +10,7 @@ interface srcObject {
 }
 
 export default Vue.extend({
-  name: 'v-image',
+  name: 'v-img',
 
   inheritAttrs: false,
 
@@ -46,16 +46,26 @@ export default Vue.extend({
     }
   },
 
-  beforeMount () {
-    if (this.lazySrc) {
-      const lazyImg = new Image()
-      lazyImg.src = this.computedLazySrc
-      this.pollForSize(lazyImg, null)
-      this.loadImage()
+  watch: {
+    src (val) {
+      if (!this.isLoading) this.init()
+      else this.loadImage()
     }
   },
 
+  beforeMount () {
+    this.init()
+  },
+
   methods: {
+    init () {
+      if (this.lazySrc) {
+        const lazyImg = new Image()
+        lazyImg.src = this.computedLazySrc
+        this.pollForSize(lazyImg, null)
+        this.loadImage()
+      }
+    },
     onLoad () {
       this.isLoading = false
       this.$emit('load', this.src)
