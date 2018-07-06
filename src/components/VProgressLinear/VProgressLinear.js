@@ -116,13 +116,9 @@ export default {
       ])
     },
     genContent (h) {
-      const children = [this.$slots.default]
-
-      if (typeof children[0] !== 'undefined') {
-        return h('div', {
-          staticClass: 'progress-linear__content'
-        }, children)
-      }
+      return this.$slots.default && h('div', {
+        staticClass: 'v-progress-linear__content'
+      }, this.$slots.default)
     }
   },
 
