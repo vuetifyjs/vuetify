@@ -58,7 +58,9 @@ export default {
     genSwitchPart (target) {
       return this.$createElement('div', {
         staticClass: `v-input--switch__${target}`,
-        'class': this.classesSelectable
+        'class': this.classesSelectable,
+        // Avoid cache collision
+        key: target
       })
     },
     onSwipeLeft () {
