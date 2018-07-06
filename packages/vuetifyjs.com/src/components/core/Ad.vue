@@ -3,7 +3,7 @@
     v-card(
       flat
       height="205px"
-      img="https://s3.amazonaws.com/vuetify-docs/images/ads/store-ad-1.png"
+      img="https://cdn.vuetifyjs.com/images/ads/store-ad-1.png"
       tile
       width="130px"
       :to="{ name: 'store/Front' }"

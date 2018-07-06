@@ -3,7 +3,7 @@
     class="pa-3"
     flat
     height="300px"
-    img="https://s3.amazonaws.com/vuetify-docs/images/toolbar/map.jpg"
+    img="https://cdn.vuetifyjs.com/images/toolbar/map.jpg"
   >
     <v-toolbar
       dense

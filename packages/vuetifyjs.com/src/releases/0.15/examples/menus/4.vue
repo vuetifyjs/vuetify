@@ -1,7 +1,7 @@
 <template>
   <div class="text-xs-center">
     <v-menu offset-y v-model="showMenu" :position-absolutely="true" full-width>
-      <v-card class="portrait" img="https://s3.amazonaws.com/vuetify-docs/images/cards/girl.jpg" height="300px" slot="activator"></v-card>
+      <v-card class="portrait" img="https://cdn.vuetifyjs.com/images/cards/girl.jpg" height="300px" slot="activator"></v-card>
       <v-list>
         <v-list-tile v-for="item in items" :key="item.title" @click="">
           <v-list-tile-title>{{ item.title }}</v-list-tile-title>

@@ -1,7 +1,7 @@
 <template lang="pug">
   #home-view(v-scroll="onScroll")
     v-toolbar(fixed :class="[toolbar ? 'toolbar--home' : 'hidden']" app).white.text-xs-center
-      img(src="https://s3.amazonaws.com/vuetify-docs/images/logos/header-logo.svg" height="38px")
+      img(src="https://cdn.vuetifyjs.com/images/logos/header-logo.svg" height="38px")
       v-spacer
       v-toolbar-items
         v-btn(
@@ -25,7 +25,7 @@
       v-container(grid-list-xl)
         v-layout(row wrap)
           v-flex(xs12 md4).text-xs-center
-            img(src="https://s3.amazonaws.com/vuetify-docs/images/logos/logo.svg").logo
+            img(src="https://cdn.vuetifyjs.com/images/logos/logo.svg").logo
           v-flex(xs12 md8).text-xs-center.text-md-left
             v-layout(row wrap :class="{\
               'justify-center': $vuetify.breakpoint.smAndDown\
@@ -57,17 +57,17 @@
             v-card-text.py-5
               v-layout(row wrap)
                 v-flex(xs12 md4).text-xs-center.my-3
-                  img(src="https://s3.amazonaws.com/vuetify-docs/images/home/feature1.svg")
+                  img(src="https://cdn.vuetifyjs.com/images/home/feature1.svg")
                   h3.mt-4.mb-3 Vue-CLI Templates
                   p Vuetify comes ready to go with 8 pre-made vue-cli templates. From simple html to full-blown SSR, you are ready to go in minutes.
 
                 v-flex(xs12 md4).text-xs-center.my-3
-                  img(src="https://s3.amazonaws.com/vuetify-docs/images/home/feature2.svg")
+                  img(src="https://cdn.vuetifyjs.com/images/home/feature2.svg")
                   h3.mt-4.mb-3 Custom Layouts
                   p Each and every available layout from the Material design spec is at your disposal. Create unique and flexible user interfaces that fit the scope of any project.
 
                 v-flex(xs12 md4).text-xs-center.my-3
-                  img(src="https://s3.amazonaws.com/vuetify-docs/images/home/feature3.svg")
+                  img(src="https://cdn.vuetifyjs.com/images/home/feature3.svg")
                   h3.mt-4.mb-3 Semantic Material Components
                   p Be prepared for an armada of specialized components at your disposal. With over 80 in total, there is a solution for any application.
 
@@ -97,27 +97,27 @@
                       target="_blank" rel="noopener"
                     )
                       div.display-1.my-3.primary--text Patreon
-                      img(src="https://s3.amazonaws.com/vuetify-docs/images/social/patreon.png" width="125px")
+                      img(src="https://cdn.vuetifyjs.com/images/social/patreon.png" width="125px")
                   v-flex(xs12 sm3)
                     a(
                       href="https://paypal.me/vuetify"
                       target="_blank" rel="noopener"
                     )
                       div.display-1.my-3.primary--text PayPal
-                      img(src="https://s3.amazonaws.com/vuetify-docs/images/social/paypal.png" width="125px")
+                      img(src="https://cdn.vuetifyjs.com/images/social/paypal.png" width="125px")
 
       section#footer-hero.mb-0
         v-container
           v-layout(row wrap)
             v-flex(xs12 md8 lg10)
-              img(src="https://s3.amazonaws.com/vuetify-docs/images/logos/logo.svg" height="90px")
+              img(src="https://cdn.vuetifyjs.com/images/logos/logo.svg" height="90px")
               h2.mt-4.mb-5 Supercharge Your Development with the Power of Vue and Material Design
 
     footer
       v-layout(row wrap)
         v-flex(xs6 sm3).vuetify
           h5
-            img(src="https://s3.amazonaws.com/vuetify-docs/images/logos/logo.svg")
+            img(src="https://cdn.vuetifyjs.com/images/logos/logo.svg")
             span Vuetify
           ul
             li
@@ -174,17 +174,17 @@
           {
             title: 'BrowserStack',
             href: 'https://www.browserstack.com/',
-            src: 'https://s3.amazonaws.com/vuetify-docs/images/sponsors/browser-stack.svg'
+            src: 'https://cdn.vuetifyjs.com/images/sponsors/browser-stack.svg'
           },
           {
             title: 'Cloudflare',
             href: 'https://www.cloudflare.com/',
-            src: 'https://s3.amazonaws.com/vuetify-docs/images/sponsors/cloudflare.svg'
+            src: 'https://cdn.vuetifyjs.com/images/sponsors/cloudflare.svg'
           },
           {
             title: 'LMAX Exchange',
             href: 'https://careers.lmax.com/?utm_source=vuetify&utm_medium=logo-link&utm_campaign=lmax-careers',
-            src: 'https://s3.amazonaws.com/vuetify-docs/images/backers/lmax-exchange.png'
+            src: 'https://cdn.vuetifyjs.com/images/backers/lmax-exchange.png'
           }
         ],
         toolbar: false

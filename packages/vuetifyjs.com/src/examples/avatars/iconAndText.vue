@@ -10,7 +10,7 @@
 
     <v-avatar>
       <img
-        src="https://s3.amazonaws.com/vuetify-docs/images/john.jpg"
+        src="https://cdn.vuetifyjs.com/images/john.jpg"
         alt="John"
       >
     </v-avatar>

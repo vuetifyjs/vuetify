@@ -5,7 +5,7 @@
         <v-card-media
           class="white--text"
           height="200px"
-          src="https://s3.amazonaws.com/vuetify-docs/images/cards/docks.jpg"
+          src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
         >
           <v-container fill-height fluid>
             <v-layout fill-height>

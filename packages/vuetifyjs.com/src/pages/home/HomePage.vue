@@ -27,7 +27,7 @@
                   v-else
                 )
                   img(
-                    :src="`https://s3.amazonaws.com/vuetify-docs/images/${supporter.logo}`"
+                    :src="`https://cdn.vuetifyjs.com/images/${supporter.logo}`"
                     :height="supporter.size || 'auto'"
                     :style="{ maxHeight: `${supporter.size}px` }"
                   )
@@ -47,7 +47,7 @@
                   @click="$ga.event('home sponsor click', 'click', 'HALO Platform')"
                 )
                   img(
-                    src="https://s3.amazonaws.com/vuetify-docs/images/special/halo.png"
+                    src="https://cdn.vuetifyjs.com/images/special/halo.png"
                     height="120"
                     style="{ maxHeight: '120px' }"
                   )
@@ -135,7 +135,7 @@
             @click="$ga.event('home mwvjs click', 'click', 'madewithvuejs')"
           )
             img(
-              src="https://s3.amazonaws.com/vuetify-docs/images/home/powered-by-madewithvue-1.svg"
+              src="https://cdn.vuetifyjs.com/images/home/powered-by-madewithvue-1.svg"
               height="65px"
             )
 
@@ -151,7 +151,7 @@
               h5.mb-3
                 v-layout(align-center justify-center column)
                   img(
-                    src="https://s3.amazonaws.com/vuetify-docs/images/logos/v-alt.svg"
+                    src="https://cdn.vuetifyjs.com/images/logos/v-alt.svg"
                     height="64px"
                     width="64px"
                   ).mb-2

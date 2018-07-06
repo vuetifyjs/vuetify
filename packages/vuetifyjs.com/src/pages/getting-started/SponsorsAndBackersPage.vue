@@ -24,7 +24,7 @@
               @click="$ga.event('backers page click', 'click', backer.name)"
             ).text-xs-center.ma-3
               img(
-                :src="`https://s3.amazonaws.com/vuetify-docs/images/${backer.logo}`"
+                :src="`https://cdn.vuetifyjs.com/images/${backer.logo}`"
                 :alt="backer.name"
               ).supporter
 
@@ -44,7 +44,7 @@
               @click="$ga.event('backers page click', 'click', backer.name)"
             ).text-xs-center.ma-3
               img(
-                :src="`https://s3.amazonaws.com/vuetify-docs/images/${backer.logo}`"
+                :src="`https://cdn.vuetifyjs.com/images/${backer.logo}`"
                 :alt="backer.name"
               ).supporter
 
@@ -69,7 +69,7 @@
               @click="$ga.event('backers page click', 'click', backer.name)"
             ).text-xs-center.ma-3
               img(
-                :src="`https://s3.amazonaws.com/vuetify-docs/images/${backer.logo}`"
+                :src="`https://cdn.vuetifyjs.com/images/${backer.logo}`"
                 :alt="backer.name"
                 :style="`max-width: ${backer.Size || 150}px;`"
               ).supporter
@@ -92,7 +92,7 @@
               @click="$ga.event('backers page click', 'click', affiliate.name)"
             ).text-xs-center.mx-3
               img(
-                :src="`https://s3.amazonaws.com/vuetify-docs/images/${affiliate.logo}`"
+                :src="`https://cdn.vuetifyjs.com/images/${affiliate.logo}`"
                 :alt="affiliate.name"
                 style="max-width: 150px;"
               ).supporter
@@ -114,7 +114,7 @@
               @click="$ga.event('backers page click', 'click', sponsor.name)"
             ).text-xs-center.mx-3
               img(
-                :src="`https://s3.amazonaws.com/vuetify-docs/images/${sponsor.logo}`"
+                :src="`https://cdn.vuetifyjs.com/images/${sponsor.logo}`"
                 alt="sponsor.name"
                 style="max-width: 150px;"
               ).supporter

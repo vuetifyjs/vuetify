@@ -16,7 +16,7 @@
           @click="$ga.event('drawer sponsor click', 'click', diamond.name)"
         )
           img.diamond-sponsor(
-            :src="`https://s3.amazonaws.com/vuetify-docs/images/${diamond.logo}`"
+            :src="`https://cdn.vuetifyjs.com/images/${diamond.logo}`"
             :alt="diamond.Name"
           )
       misc-patreon-btn
@@ -42,7 +42,7 @@
         @click="$ga.event('drawer jobs click', 'click', 'vuejobs')"
       )
         img(
-          src="https://s3.amazonaws.com/vuetify-docs/images/affiliates/vuejobs-logo.svg"
+          src="https://cdn.vuetifyjs.com/images/affiliates/vuejobs-logo.svg"
           alt="VueJobs"
           title="VueJobs"
           width="30%"
