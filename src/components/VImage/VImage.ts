@@ -15,6 +15,7 @@ export default Vue.extend({
   inheritAttrs: false,
 
   props: {
+    aspectRatio: [String, Number],
     src: {
       type: String,
       required: true
@@ -26,61 +27,65 @@ export default Vue.extend({
   data () {
     return {
       isLoading: !!this.lazySrc,
-      aspectRatio: undefined as number | undefined
+      computedAspectRatio: undefined as number | undefined
     }
   },
 
   computed: {
     currentSrc (): string {
       return (this.lazySrc && this.isLoading)
-        ? this.actualLazySrc
+        ? this.computedLazySrc
         : this.src
     },
-    actualLazySrc (): string {
+    computedLazySrc (): string {
       return typeof this.lazySrc === 'string' ? this.lazySrc : this.lazySrc.src
     },
-    aspectStyle (): {} | undefined {
-      return this.aspectRatio ? { 'padding-bottom': this.aspectRatio * 100 + '%' } : undefined
+    aspectStyle (): object | undefined {
+      const aspectRatio = this.aspectRatio || this.computedAspectRatio
+      return aspectRatio ? { 'padding-bottom': +aspectRatio * 100 + '%' } : undefined
     }
   },
 
   beforeMount () {
     if (this.lazySrc) {
       const lazyImg = new Image()
-      lazyImg.src = this.actualLazySrc
-      this.pollForSize(lazyImg)
+      lazyImg.src = this.computedLazySrc
+      this.pollForSize(lazyImg, null)
       this.loadImage()
     }
   },
 
   methods: {
+    onLoad () {
+      this.isLoading = false
+      this.$emit('load', this.src)
+    },
     loadImage () {
       const image = new Image()
-      this.pollForSize(image)
-      image.onload = () => {
-        console.log('loaded', performance.now())
-        this.isLoading = false
-        this.$emit('load', this.src)
+
+      if (image.decode) {
+        image.src = this.src
+        image.decode().then(this.onLoad)
+      } else {
+        image.onload = this.onLoad
+        image.src = this.src
       }
-      image.src = this.src
+
+      this.aspectRatio || this.pollForSize(image)
     },
-    pollForSize (img: HTMLImageElement) {
-      const timeout = 100
-
-      const poll = () => {
-        const { naturalHeight, naturalWidth } = img
-
-        if (naturalHeight || naturalWidth) {
-          this.aspectRatio = naturalHeight / naturalWidth
-          console.log(this.aspectRatio, performance.now())
-        } else {
-          console.log('no')
-          setTimeout(poll, timeout)
-        }
-      }
-
+    pollForSize (img: HTMLImageElement, timeout: number | null = 100) {
       if (!(img.naturalHeight || img.naturalWidth)) {
-        setTimeout(poll, timeout)
+        const poll = () => {
+          const { naturalHeight, naturalWidth } = img
+
+          if (naturalHeight || naturalWidth) {
+            this.computedAspectRatio = naturalHeight / naturalWidth
+          } else {
+            setTimeout(poll, timeout)
+          }
+        }
+
+        timeout != null ? setTimeout(poll, timeout) : poll()
       }
     }
   },

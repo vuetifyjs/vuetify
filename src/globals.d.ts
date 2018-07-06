@@ -13,6 +13,10 @@ declare global {
     Vue: VueConstructor
   }
 
+  interface HTMLImageElement {
+    decode: () => Promise<never>
+  }
+
   export const __VUETIFY_VERSION__: string
   export const __REQUIRED_VUE__: string
 }
