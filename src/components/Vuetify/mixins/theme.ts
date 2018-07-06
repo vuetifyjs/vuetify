@@ -1,6 +1,7 @@
-import { VuetifyUseOptions, VuetifyTheme } from 'types'
+import { VuetifyUseOptions, VuetifyTheme, VuetifyObject } from 'types'
 import { intToHex } from '../../../util/colorUtils'
 import * as Theme from '../../../util/theme'
+import mixins from '../../../util/mixins'
 
 /* eslint-disable no-multi-spaces */
 const THEME_DEFAULTS = {
@@ -14,8 +15,8 @@ const THEME_DEFAULTS = {
 }
 
 export default function theme (theme: VuetifyUseOptions['theme'] = {}) {
-  return {
-    data: () => ({
+  return mixins().extend({
+    data: () => <VuetifyObject>({
       style: null,
       theme: !theme ? false : {
         ...THEME_DEFAULTS,
@@ -24,11 +25,10 @@ export default function theme (theme: VuetifyUseOptions['theme'] = {}) {
     }),
 
     computed: {
-      parsedTheme (): object {
+      parsedTheme (): VuetifyTheme {
         return Theme.parse(this.theme)
       },
-      /** @return string */
-      generatedStyles () {
+      generatedStyles (): string {
         const theme = this.parsedTheme as any
         let css
 
@@ -113,7 +113,7 @@ export default function theme (theme: VuetifyUseOptions['theme'] = {}) {
         this.$ssrContext.head += `<style type="text/css" id="vuetify-theme-stylesheet"${nonce}>${this.generatedStyles}</style>`
       } else if (typeof document !== 'undefined') {
         // Client-side
-        this.genStyle(this.cspNonce)
+        this.genStyle()
         this.applyTheme()
       }
     },
@@ -129,12 +129,12 @@ export default function theme (theme: VuetifyUseOptions['theme'] = {}) {
           style = document.createElement('style')
           style.type = 'text/css'
           style.id = 'vuetify-theme-stylesheet'
-          if (this.cspNonce) style.setAttribute('nonce', this.cspNonce)
+          if (this.options.cspNonce) style.setAttribute('nonce', this.options.cspNonce)
           document.head.appendChild(style)
         }
 
         this.style = style
       }
     }
-  }
+  })
 }

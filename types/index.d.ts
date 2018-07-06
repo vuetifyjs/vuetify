@@ -44,11 +44,12 @@ export interface VuetifyObject extends Vue {
   readonly goTo: <T extends string | number | HTMLElement | Vue>(target: T, options?: VuetifyGoToOptions) => Promise<T>
   readonly t: VuetifyLanguage['t']
   application: VuetifyApplication
-  theme: VuetifyTheme
+  theme: VuetifyTheme | boolean
   icons: VuetifyIcons
   lang: VuetifyLanguage
   options: VuetifyOptions
-  rtl: boolean
+  rtl: boolean,
+  style: HTMLElement | null
 }
 
 declare module 'vue/types/vue' {
