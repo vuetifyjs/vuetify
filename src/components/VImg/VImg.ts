@@ -3,9 +3,12 @@ import '../../stylus/components/_images.styl'
 import Vue, { VNode } from 'vue'
 import { VFadeTransition } from '../transitions'
 import { PropValidator } from 'vue/types/options'
+import { consoleError } from '../../util/console'
 
+// not intended for public use, this is passed in by vuetify-loader
 interface srcObject {
   src: string
+  lazySrc: string
   aspect: number
 }
 
@@ -17,32 +20,40 @@ export default Vue.extend({
   props: {
     aspectRatio: [String, Number],
     src: {
-      type: String,
+      type: [String, Object],
       required: true
-    },
-    lazySrc: [String, Object] as PropValidator<string | srcObject>
+    } as PropValidator<string | srcObject>,
+    lazySrc: String
     // lazy: [Boolean, String] // TODO: only load when visible
   },
 
   data () {
     return {
-      isLoading: !!this.lazySrc,
+      isLoading: false,
       computedAspectRatio: undefined as number | undefined
     }
   },
 
   computed: {
     currentSrc (): string {
-      return (this.lazySrc && this.isLoading)
+      return (this.computedLazySrc && this.isLoading)
         ? this.computedLazySrc
-        : this.src
+        : this.computedSrc
+    },
+    computedSrc (): string {
+      return typeof this.src === 'string' ? this.src : this.src.src
     },
     computedLazySrc (): string {
-      return typeof this.lazySrc === 'string' ? this.lazySrc : this.lazySrc.src
+      return typeof this.src === 'string'
+        ? this.lazySrc
+        : this.lazySrc || this.src.lazySrc
     },
     aspectStyle (): object | undefined {
-      const aspectRatio = this.aspectRatio || this.computedAspectRatio
-      return aspectRatio ? { 'padding-bottom': +aspectRatio * 100 + '%' } : undefined
+      const srcAspect = typeof this.src !== 'string'
+        ? this.src.aspect
+        : undefined
+      const aspectRatio = +this.aspectRatio || srcAspect || this.computedAspectRatio
+      return aspectRatio ? { 'padding-bottom': aspectRatio * 100 + '%' } : undefined
     }
   },
 
@@ -53,13 +64,17 @@ export default Vue.extend({
     }
   },
 
+  created () {
+    this.isLoading = !!this.computedLazySrc
+  },
+
   beforeMount () {
     this.init()
   },
 
   methods: {
     init () {
-      if (this.lazySrc) {
+      if (this.computedLazySrc) {
         const lazyImg = new Image()
         lazyImg.src = this.computedLazySrc
         this.pollForSize(lazyImg, null)
@@ -70,17 +85,23 @@ export default Vue.extend({
       this.isLoading = false
       this.$emit('load', this.src)
     },
+    onError () {
+      consoleError('Image load failed\n\nsrc: ' + this.computedSrc, this)
+      this.$emit('error', this.src)
+    },
     loadImage () {
       const image = new Image()
 
-      if (image.decode) {
-        image.src = this.src
-        image.decode().then(this.onLoad)
-      } else {
-        image.onload = this.onLoad
-        image.src = this.src
+      image.onload = () => {
+        if (image.decode) {
+          image.decode().then(this.onLoad)
+        } else {
+          this.onLoad()
+        }
       }
+      image.onerror = this.onError
 
+      image.src = this.computedSrc
       this.aspectRatio || this.pollForSize(image)
     },
     pollForSize (img: HTMLImageElement, timeout: number | null = 100) {

@@ -1,4 +1,4 @@
-import VImg from './Vimg'
+import VImg from './VImg'
 
 /* istanbul ignore next */
 VImg.install = function install (Vue) {
