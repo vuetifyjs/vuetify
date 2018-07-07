@@ -7,7 +7,7 @@
     clearable
     prepend-icon="filter_list"
     solo
-    tags
+    multiple
   >
     <template slot="selection" slot-scope="data">
       <v-chip
