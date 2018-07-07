@@ -1,6 +1,6 @@
 import application from './mixins/application'
 import breakpoint from './mixins/breakpoint'
-import ThemeService, { initTheme } from './services/ThemeService'
+import ThemeService from './services/ThemeService'
 import icons from './mixins/icons'
 import options from './mixins/options'
 import genLang from './mixins/lang'
@@ -21,7 +21,8 @@ const Vuetify: VuetifyPlugin = {
 
     Vue.prototype.$vuetify = new Vue({
       mixins: [
-        breakpoint
+        breakpoint,
+        ThemeService(opts)
       ],
       data: {
         application,
@@ -29,17 +30,13 @@ const Vuetify: VuetifyPlugin = {
         icons: icons(opts.iconfont, opts.icons),
         lang,
         options: options(opts.options),
-        rtl: opts.rtl,
-        theme: initTheme(opts.theme)
+        rtl: opts.rtl
       },
       methods: {
         goTo,
         t: lang.t.bind(lang)
       }
     })
-
-    /* eslint-disable-next-line no-new */
-    new ThemeService()
 
     if (opts.transitions) {
       Object.values(opts.transitions).forEach(transition => {

@@ -1,4 +1,4 @@
-/* eslint-disable import/no-duplicates */
+/* eslint-disable import/no-duplicates, no-new */
 import Vue from 'vue'
 import { intToHex } from '../../../util/colorUtils'
 import * as Theme from '../../../util/theme'
@@ -17,23 +17,35 @@ const THEME_DEFAULTS = {
   warning: '#FFC107'    // amber.base
 }
 
-export function initTheme (theme: VuetifyUseOptions['theme'] = {}): VuetifyTheme | false {
-  if (theme === false) return false
+export default function ThemeService (options: VuetifyUseOptions) {
+  options.theme !== false && setTimeout(() => {
+    new ServiceInstance()
+  }, 0)
+
+  return Vue.extend({
+    data: () => ({
+      theme: initTheme(options)
+    })
+  })
+}
+
+function initTheme (options: VuetifyUseOptions = {}): VuetifyTheme | false {
+  if (options.theme === false) return false
 
   return {
     ...THEME_DEFAULTS,
-    ...theme
+    ...options.theme
   }
 }
 
-export default Vue.extend({
+const ServiceInstance = Vue.extend({
   data: () => ({
     style: null as HTMLStyleElement | null
   }),
 
   computed: {
     parsedTheme (): ParsedTheme {
-      return this.$vuetify.theme ? Theme.parse(this.$vuetify.theme): {}
+      return Theme.parse(this.$vuetify.theme)
     },
     generatedStyles (): string {
       const theme = this.parsedTheme
@@ -71,8 +83,6 @@ export default Vue.extend({
       return css
     },
     vueMeta (): object | undefined {
-      if (this.$vuetify.theme as any === false) return
-
       const options: Record<string, any> = {
         cssText: this.generatedStyles,
         id: 'vuetify-theme-stylesheet',
@@ -106,8 +116,6 @@ export default Vue.extend({
   },
 
   created () {
-    if (this.$vuetify.theme as any === false) return
-
     if (this.$meta) {
       // Vue-meta
       // Handled by metaInfo()/nuxt()
