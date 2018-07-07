@@ -34,7 +34,7 @@ export default {
         'v-chip--label': this.label,
         'v-chip--outline': this.outline,
         'v-chip--small': this.small,
-        'v-chip--removable': this.close && !this.disabled,
+        'v-chip--removable': this.close,
         'theme--light': this.light,
         'theme--dark': this.dark
       })
@@ -65,7 +65,7 @@ export default {
     genContent (h) {
       const children = [this.$slots.default]
 
-      this.close && !this.disabled && children.push(this.genClose(h))
+      this.close && children.push(this.genClose(h))
 
       return h('span', {
         staticClass: 'v-chip__content'
