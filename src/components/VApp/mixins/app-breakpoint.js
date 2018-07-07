@@ -7,20 +7,19 @@
  *
  * Useful to e.g. adapt the user interface from inside a Vue component
  * as opposed to using CSS classes. The breakpoint pixel values and
- * range names are taken from Vuetify (https://github.com/vuetifyjs).
+ * range names are taken from https://github.com/vuetifyjs/vuetify/blob/81ee82bd206cd0c4457aaff56bdcd5111cbecdcf/src/stylus/settings/_variables.styl.
  *
  * Use within a component:
  *
- *   import breakpoint from './breakpoint.js'
- *
  *   export default {
- *     name: 'my-component',
- *     mixins: [breakpoint],
+ *     mounted() {
+ *       console.log(this.$vuetify.breakpoint)
+ *     }
  *     ...
  *
- * Then inside a template:
+ * Or inside a template:
  *
- *   <div v-if="$breakpoint.smAndDown">...</div>
+ *   <div v-if="$vuetify.breakpoint.smAndDown">...</div>
  */
 const breakpoint = {
   data () {
