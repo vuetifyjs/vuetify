@@ -56,7 +56,8 @@ export default {
     // the color takes too long to transition
     genSwitchPart (target) {
       return this.$createElement('div', this.setTextColor(this.computedColor, {
-        staticClass: `v-input--switch__${target}`
+        staticClass: `v-input--switch__${target}`,
+        key: target
       }))
     },
     onSwipeLeft () {

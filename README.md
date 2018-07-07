@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://vuetifyjs.com" target="_blank">
-    <img width="100"src="https://vuetifyjs.com/static/doc-images/logo.svg">
+    <img width="100"src="https://vuetifyjs.com/doc-images/logo.svg">
   </a>
 </p>
 
@@ -42,7 +42,7 @@
 <p>Tidelift gives software development teams a single source for purchasing and maintaining their software, with professional-grade assurances from the experts who know it best, while seamlessly integrating with existing tools.</p>
 
 <div align="center">
-  <a href="http://tidelift.com/subscription/npm/vuetify">
+  <a href="https://tidelift.com/subscription/npm/vuetify?utm_source=vuetify&utm_medium=referral&utm_campaign=readme">
     <p align="center">
       <img src="https://pbs.twimg.com/profile_images/953693944528896006/7pSbgJHd_bigger.jpg" alt="Get supported with Tidelift" />
     </p>
@@ -66,13 +66,13 @@
 
 <p align="center">
   <a href="https://careers.lmax.com/?utm_source=vuetify&utm_medium=github-link&utm_campaign=lmax-careers">
-    <img height="70px" src="https://vuetifyjs.com/static/doc-images/backers/lmax-exchange.png">
+    <img height="70px" src="https://vuetifyjs.com/doc-images/backers/lmax-exchange.png">
   </a><br>
   <a href="http://intygrate.com/?ref=vuetify-github">
-    <img height="70px" src="https://vuetifyjs.com/static/doc-images/backers/intygrate.png">
+    <img height="70px" src="https://vuetifyjs.com/doc-images/backers/intygrate.png">
   </a><br>
   <a href="http://resaleai.com/?ref=vuetify-github">
-    <img height="70px" src="https://vuetifyjs.com/static/doc-images/backers/resaleai_logo_blue.svg">
+    <img height="70px" src="https://vuetifyjs.com/doc-images/backers/resaleai_logo_blue.svg">
   </a>
 </p>
 
@@ -80,13 +80,16 @@
 
 <p align="center">
   <a href="http://www.eikospartners.com/?ref=vuetify-github">
-    <img height="40px" src="https://vuetifyjs.com/static/doc-images/backers/eikos-partners.webp">
+    <img height="40px" src="https://vuetifyjs.com/doc-images/backers/eikos-partners.webp">
   </a>
   <a href="https://application.rategenius.com/?ref=vuetify-github">
-    <img height="40px" src="https://vuetifyjs.com/static/doc-images/backers/rate-genius.png">
+    <img height="40px" src="https://vuetifyjs.com/doc-images/backers/rate-genius.png">
   </a>
   <a href="http://quitt.ch/?ref=vuetify-github">
-    <img height="40px" src="https://vuetifyjs.com/static/doc-images/backers/quitt.png">
+    <img height="40px" src="https://vuetifyjs.com/doc-images/backers/quitt.png">
+  </a>
+  <a href="https://www.digitalmaas.com/?ref=vuetify-github">
+    <img height="40px" src="https://vuetifyjs.com/doc-images/backers/digital-maas.svg">
   </a>
 </p>
 
@@ -116,7 +119,7 @@ You can find the Vuetify documentation <a href="https://vuetifyjs.com" target="_
 <html>
 <head>
   <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
-  <link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 </head>
 <body>
@@ -135,8 +138,8 @@ You can find the Vuetify documentation <a href="https://vuetifyjs.com" target="_
     </v-app>
   </div>
 
-  <script src="https://unpkg.com/vue/dist/vue.js"></script>
-  <script src="https://unpkg.com/vuetify/dist/vuetify.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
   <script>
     new Vue({
       el: '#app'
@@ -178,7 +181,7 @@ Vue.use(Vuetify)
 For including styles, you can either place the below styles in your `index.html`
 ```html
 <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
-<link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
 ```
 Or you can import it to your webpack entry point
 ```javascript
