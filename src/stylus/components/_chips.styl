@@ -5,6 +5,9 @@ v-chip($material)
   background: $material.chips.background
   color: $material.chips.color
 
+  &--disabled
+    color: $material.text.disabled
+
 theme(v-chip, "v-chip")
 
 .v-chip
@@ -47,7 +50,7 @@ theme(v-chip, "v-chip")
       height: 100%
       width: 100%
 
-  &:focus,
+  &:focus:not(.v-chip--disabled),
   &--active,
   &--selected
     border-color: rgba(#000, .13)

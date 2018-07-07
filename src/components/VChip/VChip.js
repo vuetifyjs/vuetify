@@ -30,11 +30,11 @@ export default {
     classes () {
       const classes = this.addBackgroundColorClassChecks({
         'v-chip--disabled': this.disabled,
-        'v-chip--selected': this.selected,
+        'v-chip--selected': this.selected && !this.disabled,
         'v-chip--label': this.label,
         'v-chip--outline': this.outline,
         'v-chip--small': this.small,
-        'v-chip--removable': this.close,
+        'v-chip--removable': this.close && !this.disabled,
         'theme--light': this.light,
         'theme--dark': this.dark
       })
@@ -65,7 +65,7 @@ export default {
     genContent (h) {
       const children = [this.$slots.default]
 
-      this.close && children.push(this.genClose(h))
+      this.close && !this.disabled && children.push(this.genClose(h))
 
       return h('span', {
         staticClass: 'v-chip__content'
