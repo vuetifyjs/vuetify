@@ -21,7 +21,11 @@
           prepend-icon="access_time"
           readonly
         ></v-text-field>
-        <v-time-picker v-model="time" @change="$refs.menu.save(time)"></v-time-picker>
+        <v-time-picker
+          v-if="menu2"
+          v-model="time"
+          @change="$refs.menu.save(time)"
+        ></v-time-picker>
       </v-menu>
     </v-flex>
     <v-spacer></v-spacer>
@@ -42,7 +46,10 @@
           prepend-icon="access_time"
           readonly
         ></v-text-field>
-        <v-time-picker v-model="time" actions>
+        <v-time-picker
+          v-if="modal2"
+          v-model="time"
+        >
           <v-spacer></v-spacer>
           <v-btn flat color="primary" @click="modal2 = false">Cancel</v-btn>
           <v-btn flat color="primary" @click="$refs.dialog.save(time)">OK</v-btn>
