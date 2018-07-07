@@ -262,7 +262,7 @@ export default {
     genCounter () {
       if (this.counter === false || this.counter == null) return null
 
-      const value = (this.internalValue || '').length
+      const value = (this.internalValue || '').toString().length
       const max = this.counter === true ? this.$attrs.maxlength : this.counter
 
       return this.$createElement(VCounter, {
