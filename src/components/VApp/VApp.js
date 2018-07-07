@@ -1,8 +1,5 @@
 import '../../stylus/components/_app.styl'
 
-// Component level mixins
-import AppTheme from './mixins/app-theme'
-
 // Directives
 import Resize from '../../directives/resize'
 
@@ -13,10 +10,6 @@ export default {
   directives: {
     Resize
   },
-
-  mixins: [
-    AppTheme
-  ],
 
   props: {
     id: {

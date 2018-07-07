@@ -3,9 +3,11 @@ import * as sRGB from './color/transformSRGB'
 import * as LAB from './color/transformCIELAB'
 import { VuetifyTheme } from 'types'
 
-export function parse (theme: VuetifyTheme): VuetifyTheme {
+export type ParsedTheme = Record<string, RGB>
+
+export function parse (theme: VuetifyTheme): ParsedTheme {
   const colors = Object.keys(theme)
-  const parsedTheme: any = {}
+  const parsedTheme: ParsedTheme = {}
 
   for (let i = 0; i < colors.length; ++i) {
     const name = colors[i]
