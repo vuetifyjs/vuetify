@@ -1,19 +1,21 @@
+/* eslint-disable import/no-duplicates */
+import Vue from 'vue'
 import { intToHex } from '../../../util/colorUtils'
 import * as Theme from '../../../util/theme'
+import { ParsedTheme } from '../../../util/theme'
 
-export default {
+export default Vue.extend({
   data: () => ({
-    style: null
+    style: null as HTMLStyleElement | null
   }),
 
   computed: {
-    parsedTheme () {
-      return Theme.parse(this.$vuetify.theme)
+    parsedTheme (): ParsedTheme {
+      return this.$vuetify.theme ? Theme.parse(this.$vuetify.theme): {}
     },
-    /** @return string */
-    generatedStyles () {
+    generatedStyles (): string {
       const theme = this.parsedTheme
-      let css
+      let css: string | null
 
       if (this.$vuetify.options.themeCache != null) {
         css = this.$vuetify.options.themeCache.get(theme)
@@ -46,10 +48,10 @@ export default {
 
       return css
     },
-    vueMeta () {
-      if (this.$vuetify.theme === false) return
+    vueMeta (): object | undefined {
+      if (this.$vuetify.theme as any === false) return
 
-      const options = {
+      const options: Record<string, any> = {
         cssText: this.generatedStyles,
         id: 'vuetify-theme-stylesheet',
         type: 'text/css'
@@ -66,23 +68,23 @@ export default {
   },
 
   // Regular vue-meta
-  metaInfo () {
+  metaInfo (): object | undefined {
     return this.vueMeta
   },
 
   // Nuxt
-  head () {
+  head (): object | undefined {
     return this.vueMeta
   },
 
   watch: {
     generatedStyles () {
-      !this.meta && this.applyTheme()
+      this.$meta || this.applyTheme()
     }
   },
 
   created () {
-    if (this.$vuetify.theme === false) return
+    if (this.$vuetify.theme as any === false) return
 
     if (this.$meta) {
       // Vue-meta
@@ -106,7 +108,7 @@ export default {
       if (this.style) this.style.innerHTML = this.generatedStyles
     },
     genStyle () {
-      let style = document.getElementById('vuetify-theme-stylesheet')
+      let style = document.getElementById('vuetify-theme-stylesheet') as HTMLStyleElement | null
 
       if (!style) {
         style = document.createElement('style')
@@ -121,4 +123,4 @@ export default {
       this.style = style
     }
   }
-}
+})

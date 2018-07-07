@@ -18,6 +18,10 @@ declare global {
 }
 
 declare module 'vue/types/vue' {
+  export interface Vue {
+    $meta?: Record<string, any>
+  }
+
   export type OptionsVue<Instance extends Vue, Data, Methods, Computed, Props, Options = {}> = VueConstructor<
     CombinedVueInstance<Instance, Data, Methods, Computed, Props> & Vue,
     Options

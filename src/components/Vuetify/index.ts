@@ -1,5 +1,6 @@
 import application from './mixins/application'
 import theme from './mixins/theme'
+import ThemeService from './mixins/app-theme'
 import icons from './mixins/icons'
 import options from './mixins/options'
 import genLang from './mixins/lang'
@@ -17,6 +18,9 @@ const Vuetify: VuetifyPlugin = {
     checkVueVersion(Vue)
 
     const lang = genLang(opts.lang)
+
+    /* eslint-disable-next-line no-new */
+    new ThemeService()
 
     Vue.prototype.$vuetify = new Vue({
       data: {

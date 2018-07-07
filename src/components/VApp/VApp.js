@@ -1,7 +1,6 @@
 import '../../stylus/components/_app.styl'
 
 // Component level mixins
-import AppTheme from './mixins/app-theme'
 import AppBreakpoint from './mixins/app-breakpoint'
 
 // Directives
@@ -16,8 +15,7 @@ export default {
   },
 
   mixins: [
-    AppBreakpoint,
-    AppTheme
+    AppBreakpoint
   ],
 
   props: {

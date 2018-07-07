@@ -130,8 +130,8 @@ export interface VuetifyTheme {
 }
 
 export interface VuetifyThemeCache {
-  get: (parsedTheme: VuetifyTheme) => string | null
-  set: (parsedTheme: VuetifyTheme, css: string) => void
+  get: (parsedTheme: Record<string, number>) => string | null
+  set: (parsedTheme: Record<string, number>, css: string) => void
 }
 
 export interface VuetifyOptions {
