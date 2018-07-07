@@ -1,48 +1,44 @@
-## Vuetify Bug Report
+---
+name: Bug report
+about: Find something broken?
+---
 
-### Bug Description:
-<!--- Describe the bug you've encountered at a high level -->
+<!--
+Before submitting an issue:
+  Search the repo and ensure your issue doesn't already exist. If so, it may:
+    - Have already been fixed in an unreleased version.
+    - Have been closed without a solution. Please create a new issue instead of commenting on the old one.
+  Create a minimal reproduction to illustrate the issue.
+    Do not include any more than is needed to reproduce the bug
+    Here's a CodePen template to start you off: https://template.vuetifyjs.com
 
-##### Vuetify Version:
-<!--- Vuetify Version Bug Occured On-->
+You may remove sections if they aren't relevant, but please supply as much information as possible. Incomplete issues will be closed.
+-->
 
-##### Vue Version:
-<!--- Vue Version Bug Occured On-->
+<!-- not from package.json, use console.log(Vuetify.version) -->
+### Versions and Environment
+Vuetify:
+Vue:
+Browsers:
+OS:
 
-##### Operating System:
-<!--- Operating System Bug Occured On-->
+<!-- OPTIONAL: if this works in a different version -->
+### Previously worked in:
+Vuetify:
+Vue:
 
-##### Affected Browsers:
-<!--- Browsers Affected by Bug -->
+### Steps to reproduce
+<!-- What should we do to your link to make the bug happen? -->
 
-##### Reproduction Link (Please only use [Codepen](https://codepen.io/johnjleider/pen/bgJOrX), [JSFiddle](https://www.jsfiddle.com/), [CodeSandbox](https://codesandbox.io/s/vue) or a github repo):
-<!--- Link depicting a reproduction of the described bug -->
+### Expected Behavior
+<!-- What did you expect to happen? -->
 
-----------------------
+### Actual Behavior
+<!-- What actually happened? -->
 
-- [ ] This used to work
-<!--- Check the above box if this bug was not encountered in previous versions -->
+### Reproduction Link
+<!-- Required, see above for information -->
 
-##### If this used to work, last known working version:
-
-
-### Steps to Reproduce:
-<!--- Thorough steps for reproduction -->
-
-1. Step 1
-
-2. Step 2
-
-3. etc.
-
-
-### Expected Functionality:
-<!--- How do you think this should behave? -->
-
-
-### Actual Functionality:
-<!--- How is it actually behaving? -->
-
-
-
-#### Additional Comments (optional):
+---
+<!-- OPTIONAL: -->
+### Additional Comments:
