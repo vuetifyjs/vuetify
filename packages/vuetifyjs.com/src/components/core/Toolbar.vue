@@ -51,7 +51,7 @@
           style="min-width: 48px"
         )
           img(
-            :src="`https://countryflags.io/${currentLanguage.country}/flat/32.png`"
+            :src="`https://cdn.vuetifyjs.com/images/flags/${currentLanguage.country}.png`"
             width="26px"
           )
         v-list(light)
@@ -63,7 +63,7 @@
           )
             v-list-tile-avatar(tile size="24px")
               img(
-                :src="`https://countryflags.io/${language.country}/flat/24.png`"
+                :src="`https://cdn.vuetifyjs.com/images/flags/${language.country}.png`"
                 width="24px"
               )
             v-list-tile-title {{language.name}}
