@@ -18,9 +18,6 @@ const Vuetify: VuetifyPlugin = {
 
     const lang = genLang(opts.lang)
 
-    /* eslint-disable-next-line no-new */
-    new ThemeService()
-
     Vue.prototype.$vuetify = new Vue({
       data: {
         application,
@@ -37,6 +34,9 @@ const Vuetify: VuetifyPlugin = {
         t: lang.t.bind(lang)
       }
     })
+
+    /* eslint-disable-next-line no-new */
+    new ThemeService()
 
     if (opts.transitions) {
       Object.values(opts.transitions).forEach(transition => {
