@@ -114,6 +114,11 @@ export default {
         this.genBar(h, 'long'),
         this.genBar(h, 'short')
       ])
+    },
+    genContent (h) {
+      return this.$slots.default && h('div', {
+        staticClass: 'v-progress-linear__content'
+      }, this.$slots.default)
     }
   },
 
@@ -142,7 +147,8 @@ export default {
       on: this.$listeners
     }, [
       background,
-      bar
+      bar,
+      this.genContent(h)
     ])
   }
 }
