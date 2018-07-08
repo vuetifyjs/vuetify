@@ -147,6 +147,11 @@ export default {
     computedItems () {
       return this.allItems
     },
+    counterValue () {
+      return this.multiple
+        ? this.selectedItems.length
+        : (this.getValue(this.selectedItems[0]) || '').toString().length
+    },
     directives () {
       return [{
         name: 'click-outside',
