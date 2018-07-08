@@ -5,6 +5,7 @@ import OptionsService from './services/OptionsService'
 import ThemeService from './services/ThemeService'
 import genLang from './mixins/lang'
 import { consoleWarn } from '../../util/console'
+import { createEmptyVNode } from './../../util/helpers'
 import goTo from './util/goTo'
 import { VueConstructor } from 'vue/types'
 import { Vuetify as VuetifyPlugin } from 'types'
@@ -32,22 +33,15 @@ const Vuetify: VuetifyPlugin = {
         lang,
         rtl: opts.rtl
       },
-      created () {
-        const services = this.$options.mounted as void | Function[]
-
-        if (!services) return
-
-        // Services register by using
-        // the mounted hook
-        this.$nextTick(() => {
-          for (const service of services) service()
-        })
-      },
       methods: {
         goTo,
         t: lang.t.bind(lang)
-      }
+      },
+      render: h => createEmptyVNode(h)
     })
+
+    // Mount to nothing so service hooks are called
+    Vue.prototype.$vuetify.$mount()
 
     if (opts.transitions) {
       Object.values(opts.transitions).forEach(transition => {

@@ -122,11 +122,10 @@ const iconSets = {
 export default function IconsService (options: VuetifyUseOptions) {
   return Vue.extend({
     data: () => ({
-      icons: Object.assign(
-        {},
-        iconSets[options.iconfont || 'md'],
-        options.icons
-      )
+      icons: {
+        ...iconSets[options.iconfont || 'md'],
+        ...options.icons
+      }
     })
   })
 }
