@@ -7,7 +7,8 @@
       tile
       width="130px"
       :to="{ name: 'store/Front' }"
-    ).mb-3
+    )
+    div#codefund_ad
 </template>
 
 <script>
@@ -19,8 +20,7 @@
 
       const script = document.createElement('script')
       script.type = 'text/javascript'
-      script.src = '//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=vuetifyjscom'
-      script.id = '_carbonads_js'
+      script.src = '//codefund.io/scripts/50bda123-f278-4574-88e2-c7401f869261/embed.js'
 
       this.$el.append(script)
     }
@@ -28,47 +28,12 @@
 </script>
 
 <style lang="stylus">
-  #carbonads
-    display: flex
-    justify-content: flex-start
-    // position: fixed
-    // bottom: 140px
-    // right: 24px
-    background-color: hsla(0, 0%, 98%, .9)
-    z-index: 3
-    margin-bottom: 48px
+  #cf_ad
+    max-width: 160px
 
-    .duck
-      display: none
+    .cf-wrapper
+      border-radius: 4px
 
-    a
-      color: rgba(#000, .87)
-      display: inline-block
-      max-width: 130px
-      text-decoration: none
-
-      &.carbon-poweredby
-        color: rgba(#000, .56)
-        text-transform: uppercase
-        letter-spacing: 1px
-        font-size: 9px !important
-
-      &.carbon-text
-        display: block
-        font-size: 12px
-        margin-bottom: .5em
-
-  // .ads
-  //   @media $display-breakpoints.lg-and-up
-  //     padding: 0 !important
-  //     flex-basis: 0 !important
-
-  //   @media only screen and (max-width: 1550px)
-  //     #carbonads
-  //       position: initial
-  //       margin-bottom: 25px
-
-  //   @media $display-breakpoints.xs-only
-  //     #carbonads
-  //       margin-bottom: 50px
+      .cf-img-wrapper
+        margin-bottom: 16px
 </style>
