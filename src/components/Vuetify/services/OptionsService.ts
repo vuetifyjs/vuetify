@@ -11,7 +11,7 @@ const OPTIONS_DEFAULTS = {
   cspNonce: null
 }
 
-export default function OptionService (options: VuetifyUseOptions) {
+export default function OptionsService (options: VuetifyUseOptions) {
   return Vue.extend({
     data: () => ({
       options: Object.assign(
