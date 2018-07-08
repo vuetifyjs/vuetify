@@ -1,8 +1,8 @@
 import application from './mixins/application'
 import breakpoint from './mixins/breakpoint'
+import OptionsService from './services/OptionsService'
 import ThemeService from './services/ThemeService'
 import icons from './mixins/icons'
-import options from './mixins/options'
 import genLang from './mixins/lang'
 import { consoleWarn } from '../../util/console'
 import goTo from './util/goTo'
@@ -22,6 +22,7 @@ const Vuetify: VuetifyPlugin = {
     Vue.prototype.$vuetify = new Vue({
       mixins: [
         breakpoint,
+        OptionsService(opts),
         ThemeService(opts)
       ],
       data: {
@@ -29,7 +30,6 @@ const Vuetify: VuetifyPlugin = {
         dark: false,
         icons: icons(opts.iconfont, opts.icons),
         lang,
-        options: options(opts.options),
         rtl: opts.rtl
       },
       created () {
