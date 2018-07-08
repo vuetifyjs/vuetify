@@ -161,7 +161,7 @@
     margin: 0 24px
     width: 200px
 
-    li a
+    li a.subheading
       padding-left: 18px
       text-decoration: none
       border-left: 2px solid transparent
