@@ -150,7 +150,7 @@ export default {
     counterValue () {
       return this.multiple
         ? this.selectedItems.length
-        : (this.getValue(this.selectedItems[0]) || '').toString().length
+        : (this.getText(this.selectedItems[0]) || '').toString().length
     },
     directives () {
       return [{
