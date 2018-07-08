@@ -1,3 +1,9 @@
+// Libs
+import Vue from 'vue'
+
+// Types
+import { VuetifyUseOptions } from 'types'
+
 // Maps internal Vuetify icon names to actual Material Design icon names.
 const ICONS_MATERIAL = {
   'complete': 'check',
@@ -113,6 +119,14 @@ const iconSets = {
   fa4: ICONS_FONTAWESOME4
 }
 
-export default function icons (iconfont = 'md', icons = {}) {
-  return Object.assign({}, iconSets[iconfont] || iconSets.md, icons)
+export default function IconsService (options: VuetifyUseOptions) {
+  return Vue.extend({
+    data: () => ({
+      icons: Object.assign(
+        {},
+        iconSets[options.iconfont || 'md'],
+        options.icons
+      )
+    })
+  })
 }
