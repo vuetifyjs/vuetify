@@ -1,10 +1,10 @@
 import Vue from 'vue'
-import ThemeService from '@/components/Vuetify/services/ThemeService'
+import { ServiceInstance } from '@/components/Vuetify/services/ThemeService'
 import { test } from '@/test'
 
 test('Vuetify.theme', ({ mount }) => {
   it('should watch theme', async () => {
-    const vm = new ThemeService()
+    const vm = new ServiceInstance()
 
     expect(vm.style).toMatchSnapshot()
     vm.$vuetify.theme.primary = '#000'
@@ -18,7 +18,7 @@ test('Vuetify.theme', ({ mount }) => {
     el.parentNode.removeChild(el)
 
     Vue.prototype.$vuetify.options.cspNonce = 'asdfghjkl'
-    const vm = new ThemeService()
+    const vm = new ServiceInstance()
 
     el = document.getElementById('vuetify-theme-stylesheet')
     expect(el).toBeTruthy()

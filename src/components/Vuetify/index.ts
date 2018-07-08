@@ -32,6 +32,17 @@ const Vuetify: VuetifyPlugin = {
         options: options(opts.options),
         rtl: opts.rtl
       },
+      created () {
+        const services = this.$options.mounted as void | Function[]
+
+        if (!services) return
+
+        // Services register by using
+        // the mounted hook
+        this.$nextTick(() => {
+          for (const service of services) service()
+        })
+      },
       methods: {
         goTo,
         t: lang.t.bind(lang)

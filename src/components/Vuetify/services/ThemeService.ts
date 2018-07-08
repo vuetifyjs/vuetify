@@ -4,41 +4,9 @@ import { intToHex } from '../../../util/colorUtils'
 import * as Theme from '../../../util/theme'
 
 import { ParsedTheme } from '../../../util/theme'
-import { VuetifyUseOptions, VuetifyTheme } from 'types'
+import { VuetifyUseOptions } from 'types'
 
-/* eslint-disable no-multi-spaces */
-const THEME_DEFAULTS = {
-  primary: '#1976D2',   // blue.darken2
-  secondary: '#424242', // grey.darken3
-  accent: '#82B1FF',    // blue.accent1
-  error: '#FF5252',     // red.accent2
-  info: '#2196F3',      // blue.base
-  success: '#4CAF50',   // green.base
-  warning: '#FFC107'    // amber.base
-}
-
-export default function ThemeService (options: VuetifyUseOptions) {
-  options.theme !== false && setTimeout(() => {
-    new ServiceInstance()
-  }, 0)
-
-  return Vue.extend({
-    data: () => ({
-      theme: initTheme(options)
-    })
-  })
-}
-
-function initTheme (options: VuetifyUseOptions = {}): VuetifyTheme | false {
-  if (options.theme === false) return false
-
-  return {
-    ...THEME_DEFAULTS,
-    ...options.theme
-  }
-}
-
-const ServiceInstance = Vue.extend({
+export const ServiceInstance = Vue.extend({
   data: () => ({
     style: null as HTMLStyleElement | null
   }),
@@ -154,3 +122,30 @@ const ServiceInstance = Vue.extend({
     }
   }
 })
+
+/* eslint-disable no-multi-spaces */
+const THEME_DEFAULTS = {
+  primary: '#1976D2',   // blue.darken2
+  secondary: '#424242', // grey.darken3
+  accent: '#82B1FF',    // blue.accent1
+  error: '#FF5252',     // red.accent2
+  info: '#2196F3',      // blue.base
+  success: '#4CAF50',   // green.base
+  warning: '#FFC107'    // amber.base
+}
+
+export default function ThemeService (options: VuetifyUseOptions) {
+  return Vue.extend({
+    data: () => ({
+      theme: options.theme !== false
+        ? {
+          ...THEME_DEFAULTS,
+          ...options.theme
+        } : false
+    }),
+
+    mounted () {
+      options.theme !== false && new ServiceInstance()
+    }
+  })
+}
