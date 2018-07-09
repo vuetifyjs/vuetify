@@ -4,6 +4,7 @@
   elevation(24)
   border-radius: $card-border-radius
   margin: 24px
+  overflow-y: auto
   pointer-events: auto
   transition: .3s $transition.fast-in-fast-out
   width: 100%
@@ -25,6 +26,15 @@
 
   &:not(.v-dialog--fullscreen)
     max-height: 90%
+
+  &__activator
+    cursor: pointer
+
+    *
+      cursor: pointer
+
+    &--disabled
+      pointer-events: none
 
   &__container
     display: inline-block

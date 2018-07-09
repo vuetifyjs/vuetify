@@ -4,9 +4,6 @@
 /** Theme */
 selection-control($material)
   &.v-input--is-disabled
-    label
-      color: $material.text.disabled
-
     .v-icon
       // needed for helper override
       color: $material.buttons.disabled !important
@@ -20,20 +17,32 @@ theme(selection-control, "v-input--selection-controls")
 rtl(v-selection-control-rtl, "v-input--selection-controls")
 
 .v-input--selection-controls
+  padding: 4px 0
+
+  .v-input__append-outer,
+  .v-input__prepend-outer
+    margin-top: 0
+    margin-bottom: 0
+
   &__input
     color: inherit
     display: inline-flex
-    flex: 0 1 auto
+    flex: 0 0 auto
     height: 24px
     position: relative
     margin-right: 8px
-    margin-top: 4px
     transition: color .2s cubic-bezier(.25,.8,.25,1), transform .3s cubic-bezier(.25,.8,.25,1)
     width: 24px
+    user-select: none
 
     input
       position: absolute
       opacity: 0
+
+    // Sibling selector to avoid targeting v-radio-group's label
+    & + .v-label
+      user-select: none
+      cursor: pointer
 
   &__ripple
     cursor: pointer
@@ -57,9 +66,11 @@ rtl(v-selection-control-rtl, "v-input--selection-controls")
       transform: scale(0.2)
       transition: inherit
 
-  .v-label
-    top: 2px
-    user-select: none
+  &.v-input .v-label
+    align-items: center
+    display: inline-flex
+    top: 0
+    height: auto
 
   &.v-input--is-focused,
   .v-radio--is-focused

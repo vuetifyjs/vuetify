@@ -6,6 +6,7 @@ import Colorable from '../../mixins/colorable'
 import Toggleable from '../../mixins/toggleable'
 import Transitionable from '../../mixins/transitionable'
 
+/* @vue/component */
 export default {
   name: 'v-alert',
 
@@ -36,7 +37,6 @@ export default {
     classes () {
       const color = (this.type && !this.color) ? this.type : this.computedColor
       const classes = {
-        'v-alert--dismissible': this.dismissible,
         'v-alert--outline': this.outline
       }
 

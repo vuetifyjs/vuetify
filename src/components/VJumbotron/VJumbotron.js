@@ -5,6 +5,7 @@ import Colorable from '../../mixins/colorable'
 import Routable from '../../mixins/routable'
 import Themeable from '../../mixins/themeable'
 
+/* @vue/component */
 export default {
   name: 'v-jumbotron',
 

@@ -35,22 +35,14 @@ test('VInput.js', ({ mount }) => {
       render: h => h('div', slot)
     })
     const wrapper = mount(VInput, {
-      slots: { 'prepend-icon': [el('prepend-icon')] }
+      slots: { 'append': [el('append')] }
     })
     const wrapper2 = mount(VInput, {
-      slots: { 'append-icon': [el('append-icon')] }
-    })
-    const wrapper3 = mount(VInput, {
       slots: { 'prepend': [el('prepend')] }
-    })
-    const wrapper4 = mount(VInput, {
-      slots: { 'append': [el('append')] }
     })
 
     expect(wrapper.html()).toMatchSnapshot()
     expect(wrapper2.html()).toMatchSnapshot()
-    expect(wrapper3.html()).toMatchSnapshot()
-    expect(wrapper4.html()).toMatchSnapshot()
   })
 
   it('should generate an icon and match snapshot', () => {
@@ -171,5 +163,44 @@ test('VInput.js', ({ mount }) => {
 
     wrapper.setProps({ errorMessages: 'required', error: false })
     expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should be disabled', () => {
+    const wrapper = mount(VInput)
+
+    expect(wrapper.vm.isDisabled).toBe(false)
+
+    wrapper.setProps({ disabled: true })
+
+    expect(wrapper.vm.isDisabled).toBe(true)
+
+    wrapper.setProps({
+      disabled: undefined,
+      readonly: true
+    })
+
+    expect(wrapper.vm.isDisabled).toBe(true)
+
+    wrapper.setProps({ readonly: undefined })
+
+    expect(wrapper.vm.isDisabled).toBe(false)
+  })
+
+  it('should render a label', () => {
+    const wrapper = mount(VInput, {
+      propsData: { label: 'foo' }
+    })
+
+    expect(wrapper.vm.hasLabel).toBe(true)
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    const wrapper2 = mount(VInput, {
+      slots: {
+        label: [{ render: h => h('div', 'foo') }]
+      }
+    })
+
+    expect(wrapper2.html()).toMatchSnapshot()
   })
 })

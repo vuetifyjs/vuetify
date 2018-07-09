@@ -398,16 +398,6 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect(list.html()).toMatchSnapshot()
   })
 
-  it('should assign self as activator when solo or box', () => {
-    const wrapper = mount(VSelect, {
-      propsData: { solo: true }
-    })
-
-    wrapper.trigger('click')
-
-    expect(wrapper.vm.$refs.menu.activator).toEqual(wrapper.vm.$el)
-  })
-
   it('should use scoped slot for selection generation', () => {
     const wrapper = mount({
       render (h) {
@@ -452,7 +442,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     const event = new Event('mouseup')
     Object.defineProperty(event, 'target', { writable: false, value: icon.element })
 
-    wrapper.element.dispatchEvent(event)
+    slot.element.dispatchEvent(event)
 
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.isMenuActive).toBe(false)

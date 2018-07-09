@@ -3,17 +3,17 @@
 
 /* Theme */
 v-input($material)
-  input::placeholder,
-  textarea::placeholder
-    color: $material.text.disabled
-
   &:not(.v-input--is-disabled)
     input,
     textarea
       color: $material.text.primary
 
+  input::placeholder,
+  textarea::placeholder
+    color: $material.text.disabled
+
   &--is-disabled
-    .v-input__label,
+    .v-label,
     input,
     textarea
       color: $material.text.disabled
@@ -39,17 +39,17 @@ theme(v-input, "v-input")
 
   input,
   textarea
+    // Remove Firefox red outline
+    &:invalid
+      box-shadow: none
+
     &:focus,
     &:active
       outline: none
 
-  .progress-linear
-    bottom: -1px
-    height: 2px
-    left: 0
-    margin: 0
-    padding: 0
-    position: absolute
+  .v-label
+    height: 20px
+    line-height: 20px
 
   &__append-outer,
   &__prepend-outer
@@ -62,17 +62,19 @@ theme(v-input, "v-input")
       user-select: none
 
   &__append-outer
-    margin-left: 16px
+    margin-left: 9px
 
   &__prepend-outer
-    margin-right: 16px
+    margin-right: 9px
 
   &__control
     display: flex
+    flex-direction: column
     height: auto
     flex-grow: 1
     flex-wrap: wrap
     position: relative
+    width: 100% // For IE11
 
   &__icon
     align-items: center

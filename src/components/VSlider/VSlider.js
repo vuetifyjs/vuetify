@@ -2,7 +2,6 @@
 import '../../stylus/components/_sliders.styl'
 
 // Components
-import VLabel from '../VLabel'
 import { VScaleTransition } from '../transitions'
 
 // Extensions
@@ -21,21 +20,13 @@ import {
 } from '../../util/helpers'
 import { consoleWarn } from '../../util/console'
 
+/* @vue/component */
 export default {
   name: 'v-slider',
 
-  extends: VInput,
-
   directives: { ClickOutside },
 
-  data: vm => ({
-    app: {},
-    defaultColor: 'primary',
-    isActive: false,
-    keyPressed: 0,
-    lazyValue: typeof vm.value !== 'undefined' ? vm.value : Number(vm.min),
-    oldValue: null
-  }),
+  extends: VInput,
 
   props: {
     alwaysDirty: Boolean,
@@ -86,6 +77,15 @@ export default {
     },
     value: [Number, String]
   },
+
+  data: vm => ({
+    app: {},
+    defaultColor: 'primary',
+    isActive: false,
+    keyPressed: 0,
+    lazyValue: typeof vm.value !== 'undefined' ? vm.value : Number(vm.min),
+    oldValue: null
+  }),
 
   computed: {
     classes () {
@@ -141,7 +141,7 @@ export default {
       }
     },
     stepNumeric () {
-      return this.step > 0 ? parseFloat(this.step) : 1
+      return this.step > 0 ? parseFloat(this.step) : 0
     },
     trackFillStyles () {
       let left = this.$vuetify.rtl ? 'auto' : 0
@@ -232,20 +232,6 @@ export default {
 
       return children
     },
-    genLabel () {
-      if (!this.label) return null
-
-      const data = {
-        props: {
-          color: this.validationState,
-          focused: !!this.validationState
-        }
-      }
-
-      if (this.$attrs.id) data.props.for = this.$attrs.id
-
-      return this.$createElement(VLabel, data, this.$slots.label || this.label)
-    },
     genListeners () {
       return Object.assign({}, {
         blur: this.onBlur,
@@ -262,7 +248,7 @@ export default {
           name: this.name,
           role: 'slider',
           tabindex: this.disabled ? -1 : undefined,
-          type: 'slider',
+          type: 'range',
           value: this.internalValue,
           readonly: true,
           'aria-readonly': String(this.readonly)
@@ -451,6 +437,8 @@ export default {
       }
     },
     onKeyDown (e) {
+      if (this.disabled || this.readonly) return
+
       const value = this.parseKeyDown(e)
 
       if (value == null) return
@@ -490,7 +478,7 @@ export default {
       if (![pageup, pagedown, end, home, left, right, down, up].includes(e.keyCode)) return
 
       e.preventDefault()
-      const step = this.stepNumeric
+      const step = this.stepNumeric || 1
       const steps = (this.max - this.min) / step
       if ([left, right, down, up].includes(e.keyCode)) {
         this.keyPressed += 1
@@ -513,6 +501,7 @@ export default {
       return value
     },
     roundValue (value) {
+      if (!this.stepNumeric) return value
       // Format input value using the same number
       // of decimals places as in the step prop
       const trimmedStep = this.step.toString().trim()
@@ -520,7 +509,7 @@ export default {
         ? (trimmedStep.length - trimmedStep.indexOf('.') - 1)
         : 0
 
-      const newValue = 1 * Math.round(value / this.stepNumeric) * this.stepNumeric
+      const newValue = Math.round(value / this.stepNumeric) * this.stepNumeric
 
       return parseFloat(Math.min(newValue, this.max).toFixed(decimals))
     },

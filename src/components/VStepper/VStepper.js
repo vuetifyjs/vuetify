@@ -2,6 +2,7 @@ import '../../stylus/components/_steppers.styl'
 
 import Themeable from '../../mixins/themeable'
 
+/* @vue/component */
 export default {
   name: 'v-stepper',
 
@@ -13,6 +14,13 @@ export default {
     }
   },
 
+  props: {
+    nonLinear: Boolean,
+    altLabels: Boolean,
+    vertical: Boolean,
+    value: [Number, String]
+  },
+
   data () {
     return {
       inputValue: null,
@@ -21,13 +29,6 @@ export default {
       content: [],
       isReverse: false
     }
-  },
-
-  props: {
-    nonLinear: Boolean,
-    altLabels: Boolean,
-    vertical: Boolean,
-    value: [Number, String]
   },
 
   computed: {
@@ -75,10 +76,9 @@ export default {
       this.content = []
       for (let index = 0; index < this.$children.length; index++) {
         const child = this.$children[index]
-        // TODO: use the component name instead of tag
-        if (child.$options._componentTag === 'v-stepper-step') {
+        if (child.$options.name === 'v-stepper-step') {
           this.steps.push(child)
-        } else if (child.$options._componentTag === 'v-stepper-content') {
+        } else if (child.$options.name === 'v-stepper-content') {
           child.isVertical = this.vertical
           this.content.push(child)
         }

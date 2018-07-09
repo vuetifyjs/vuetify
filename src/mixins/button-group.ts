@@ -5,6 +5,7 @@ import { consoleWarn } from '../util/console'
 
 import { VBtn } from '../components/VBtn/VBtn'
 
+/* @vue/component */
 export default mixins(RegistrableProvide('buttonGroup')).extend({
   name: 'button-group',
 
@@ -20,6 +21,14 @@ export default mixins(RegistrableProvide('buttonGroup')).extend({
 
   watch: {
     buttons: 'update'
+  },
+
+  mounted () {
+    this.update()
+  },
+
+  beforeDestroy () {
+    this.isDestroying = true
   },
 
   methods: {
@@ -119,13 +128,5 @@ export default mixins(RegistrableProvide('buttonGroup')).extend({
 
       this.listeners[0]()
     }
-  },
-
-  mounted () {
-    this.update()
-  },
-
-  beforeDestroy () {
-    this.isDestroying = true
   }
 })

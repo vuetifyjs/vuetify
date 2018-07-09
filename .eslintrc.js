@@ -1,15 +1,17 @@
 module.exports = {
   root: true,
-  parser: 'typescript-eslint-parser',
   parserOptions: {
+    parser: 'typescript-eslint-parser',
     ecmaVersion: 2017,
     sourceType: 'module'
   },
   extends: [
-    'standard'
+    'standard',
+    'plugin:vue/recommended'
   ],
   env: {
-    browser: true
+    browser: true,
+    es6: true
   },
   globals: {
     'expect': true,
@@ -54,17 +56,21 @@ module.exports = {
         asyncArrow: 'always'
       }
     ],
-    'no-return-await': 'warn'
+    'no-return-await': 'warn',
+    'object-shorthand': ['error', 'always'],
+    'no-extra-semi': 'error',
+
+    'vue/name-property-casing': false,
+    'vue/require-default-prop': false,
+    'vue/require-prop-types': false,
+    'vue/prop-name-casing': 'error'
   },
   overrides: [
     {
       files: '**/*.ts',
       rules: {
-        // https://github.com/eslint/typescript-eslint-parser#known-issues
+        // https://github.com/eslint/typescript-eslint-parser/issues/416
         'no-undef': 'off',
-
-        // https://github.com/eslint/typescript-eslint-parser/issues/445
-        // 'typescript/no-unused-vars': 'error'
 
         // https://github.com/eslint/eslint/issues/10260
         'space-infix-ops': false,
@@ -75,7 +81,9 @@ module.exports = {
         // Can't overload function exports with this enabled
         'import/export': false,
 
+        // https://github.com/eslint/typescript-eslint-parser/issues/445
         // https://github.com/eslint/typescript-eslint-parser/issues/457
+        // enabled in tslint instead
         'no-unused-vars': false,
         // 'typescript/no-unused-vars': 'error',
 

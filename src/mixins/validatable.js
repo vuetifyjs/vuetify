@@ -5,6 +5,7 @@ import { consoleError } from '../util/console'
 // Mixins
 import Colorable from './colorable'
 
+/* @vue/component */
 export default {
   name: 'validatable',
 
@@ -12,15 +13,6 @@ export default {
     Colorable,
     RegistrableInject('form')
   ],
-
-  data: () => ({
-    errorBucket: [],
-    hasColor: false,
-    hasFocused: false,
-    hasInput: false,
-    isResetting: false,
-    valid: false
-  }),
 
   props: {
     error: Boolean,
@@ -48,14 +40,23 @@ export default {
     validateOnBlur: Boolean
   },
 
+  data: () => ({
+    errorBucket: [],
+    hasColor: false,
+    hasFocused: false,
+    hasInput: false,
+    isResetting: false,
+    valid: false
+  }),
+
   computed: {
     hasError () {
-      return this.errorMessages.length > 0 ||
+      return this.internalErrorMessages.length > 0 ||
         this.errorBucket.length > 0 ||
         this.error
     },
     externalError () {
-      return this.errorMessages.length > 0 || this.error
+      return this.internalErrorMessages.length > 0 || this.error
     },
     // TODO: Add logic that allows the user to enable based
     // upon a good validation
@@ -69,10 +70,13 @@ export default {
     hasState () {
       return this.shouldValidate && (this.hasError || this.hasSuccess)
     },
+    internalErrorMessages () {
+      return this.errorMessages || ''
+    },
     shouldValidate () {
       return this.externalError || (!this.isResetting && (
         this.validateOnBlur
-          ? this.hasInput && this.hasFocused && !this.isFocused
+          ? this.hasFocused && !this.isFocused
           : (this.hasInput || this.hasFocused)
       ))
     },
@@ -86,7 +90,7 @@ export default {
       return null
     },
     validationTarget () {
-      const target = this.errorMessages.length > 0
+      const target = this.internalErrorMessages.length > 0
         ? this.errorMessages
         : this.successMessages.length > 0
           ? this.successMessages
@@ -168,7 +172,7 @@ export default {
     validate (force = false, value = this.internalValue) {
       const errorBucket = []
 
-      if (force) this.hasInput = true
+      if (force) this.hasInput = this.hasFocused = true
 
       for (let index = 0; index < this.rules.length; index++) {
         const rule = this.rules[index]

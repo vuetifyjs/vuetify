@@ -78,11 +78,6 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
               >
                 <div class="v-menu__activator">
                   <div class="v-select__slot">
-                    <label aria-hidden="true"
-                           class="v-label"
-                           style="left: 0px; position: absolute;"
-                    >
-                    </label>
                     <div class="v-select__selections">
                       <input readonly="readonly"
                              tabindex="0"
@@ -105,9 +100,7 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
                 <div class="v-menu__content v-menu__content--auto"
                      style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
                 >
-                  <div class="v-select-list v-card"
-                       style="height: auto;"
-                  >
+                  <div class="v-select-list v-card">
                     <div class="v-list">
                       <div>
                         <a class="v-list__tile v-list__tile--link">
@@ -270,11 +263,6 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
               >
                 <div class="v-menu__activator">
                   <div class="v-select__slot">
-                    <label aria-hidden="true"
-                           class="v-label"
-                           style="left: 0px; position: absolute;"
-                    >
-                    </label>
                     <div class="v-select__selections">
                       <input readonly="readonly"
                              tabindex="0"
@@ -297,9 +285,7 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
                 <div class="v-menu__content v-menu__content--auto"
                      style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
                 >
-                  <div class="v-select-list v-card"
-                       style="height: auto;"
-                  >
+                  <div class="v-select-list v-card">
                     <div class="v-list">
                       <div>
                         <a class="v-list__tile v-list__tile--link">
@@ -464,11 +450,6 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
               >
                 <div class="v-menu__activator">
                   <div class="v-select__slot">
-                    <label aria-hidden="true"
-                           class="v-label"
-                           style="left: 0px; position: absolute;"
-                    >
-                    </label>
                     <div class="v-select__selections">
                       <input readonly="readonly"
                              tabindex="0"
@@ -491,9 +472,7 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
                 <div class="v-menu__content v-menu__content--auto"
                      style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
                 >
-                  <div class="v-select-list v-card"
-                       style="height: auto;"
-                  >
+                  <div class="v-select-list v-card">
                     <div class="v-list">
                       <div>
                         <a class="v-list__tile v-list__tile--link">

@@ -4,6 +4,7 @@ import '../../stylus/components/_messages.styl'
 // Mixins
 import Colorable from '../../mixins/colorable'
 
+/* @vue/component */
 export default {
   name: 'v-messages',
 
@@ -27,7 +28,7 @@ export default {
       return this.$createElement('transition-group', {
         staticClass: 'v-messages__wrapper',
         attrs: {
-          name: 'slide-y-transition',
+          name: 'message-transition',
           tag: 'div'
         }
       }, this.value.map(m => this.genMessage(m)))

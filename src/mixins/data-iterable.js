@@ -18,26 +18,9 @@ import { consoleWarn } from '../util/console'
  * providing selection, pagination, sorting and filtering.
  *
  */
+/* @vue/component */
 export default {
   name: 'data-iterable',
-
-  data () {
-    return {
-      searchLength: 0,
-      defaultPagination: {
-        descending: false,
-        page: 1,
-        rowsPerPage: 5,
-        sortBy: null,
-        totalItems: 0
-      },
-      expanded: {},
-      actionsClasses: 'v-data-iterator__actions',
-      actionsRangeControlsClasses: 'v-data-iterator__actions__range-controls',
-      actionsSelectClasses: 'v-data-iterator__actions__select',
-      actionsPaginationClasses: 'v-data-iterator__actions__pagination'
-    }
-  },
 
   mixins: [Filterable, Loadable, Themeable],
 
@@ -48,7 +31,7 @@ export default {
     mustSort: Boolean,
     noResultsText: {
       type: String,
-      default: '$vuetify.lang.dataIterator.noResultsText'
+      default: '$vuetify.dataIterator.noResultsText'
     },
     nextIcon: {
       type: String,
@@ -66,7 +49,7 @@ export default {
           10,
           25,
           {
-            text: '$vuetify.lang.dataIterator.rowsPerPageAll',
+            text: '$vuetify.dataIterator.rowsPerPageAll',
             value: -1
           }
         ]
@@ -74,7 +57,7 @@ export default {
     },
     rowsPerPageText: {
       type: String,
-      default: '$vuetify.lang.dataIterator.rowsPerPageText'
+      default: '$vuetify.dataIterator.rowsPerPageText'
     },
     selectAll: [Boolean, String],
     search: {
@@ -156,6 +139,22 @@ export default {
       default: () => {}
     }
   },
+
+  data: () => ({
+    searchLength: 0,
+    defaultPagination: {
+      descending: false,
+      page: 1,
+      rowsPerPage: 5,
+      sortBy: null,
+      totalItems: 0
+    },
+    expanded: {},
+    actionsClasses: 'v-data-iterator__actions',
+    actionsRangeControlsClasses: 'v-data-iterator__actions__range-controls',
+    actionsSelectClasses: 'v-data-iterator__actions__select',
+    actionsPaginationClasses: 'v-data-iterator__actions__pagination'
+  }),
 
   computed: {
     computedPagination () {
@@ -245,7 +244,7 @@ export default {
         this.defaultPagination.rowsPerPage = this.rowsPerPageItems[0]
       }
 
-      this.defaultPagination.totalItems = this.itemsLength
+      this.defaultPagination.totalItems = this.items.length
 
       this.updatePagination(
         Object.assign({}, this.defaultPagination, this.pagination)
@@ -385,9 +384,9 @@ export default {
           }
         },
         attrs: {
-          'aria-label': this.$vuetify.t('$vuetify.lang.dataIterator.prevPage')
+          'aria-label': this.$vuetify.t('$vuetify.dataIterator.prevPage')
         }
-      }, [this.$createElement(VIcon, this.prevIcon)])
+      }, [this.$createElement(VIcon, this.$vuetify.rtl ? this.nextIcon : this.prevIcon)])
     },
     genNextIcon () {
       const pagination = this.computedPagination
@@ -410,9 +409,9 @@ export default {
           }
         },
         attrs: {
-          'aria-label': this.$vuetify.t('$vuetify.lang.dataIterator.nextPage')
+          'aria-label': this.$vuetify.t('$vuetify.dataIterator.nextPage')
         }
-      }, [this.$createElement(VIcon, this.nextIcon)])
+      }, [this.$createElement(VIcon, this.$vuetify.rtl ? this.prevIcon : this.nextIcon)])
     },
     genSelect () {
       return this.$createElement('div', {
@@ -455,7 +454,7 @@ export default {
             pageStop: stop,
             itemsLength: this.itemsLength
           })
-          : this.$vuetify.t('$vuetify.lang.dataIterator.pageText', this.pageStart + 1, stop, this.itemsLength)
+          : this.$vuetify.t('$vuetify.dataIterator.pageText', this.pageStart + 1, stop, this.itemsLength)
       }
 
       return this.$createElement('div', {

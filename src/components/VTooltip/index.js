@@ -5,4 +5,5 @@ VTooltip.install = function install (Vue) {
   Vue.component(VTooltip.name, VTooltip)
 }
 
+export { VTooltip }
 export default VTooltip

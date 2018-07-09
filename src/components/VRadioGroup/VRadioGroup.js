@@ -11,6 +11,7 @@ import {
   provide as RegistrableProvide
 } from '../../mixins/registrable'
 
+/* @vue/component */
 export default {
   name: 'v-radio-group',
 
@@ -28,16 +29,9 @@ export default {
 
   provide () {
     return {
-      isMandatory: () => this.mandatory,
-      name: () => this.name,
-      validationState: () => this.validationState
+      radio: this
     }
   },
-
-  data: () => ({
-    internalTabIndex: -1,
-    radios: []
-  }),
 
   props: {
     column: {
@@ -62,10 +56,10 @@ export default {
     }
   },
 
-  watch: {
-    hasError: 'setErrorState',
-    internalValue: 'setActiveRadio'
-  },
+  data: () => ({
+    internalTabIndex: -1,
+    radios: []
+  }),
 
   computed: {
     classes () {
@@ -77,6 +71,11 @@ export default {
     }
   },
 
+  watch: {
+    hasError: 'setErrorState',
+    internalValue: 'setActiveRadio'
+  },
+
   mounted () {
     this.setErrorState(this.hasError)
     this.setActiveRadio()
@@ -84,15 +83,12 @@ export default {
 
   methods: {
     genDefaultSlot () {
-      return [this.genRadioGroup()]
-    },
-    genRadioGroup () {
       return this.$createElement('div', {
         staticClass: 'v-input--radio-group__input',
         attrs: {
           role: 'radiogroup'
         }
-      }, this.$slots.default)
+      }, VInput.methods.genDefaultSlot.call(this))
     },
     onRadioChange (value) {
       if (this.disabled) return

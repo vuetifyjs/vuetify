@@ -1,6 +1,6 @@
 import Ripple from '../directives/ripple'
 
-/** @mixin */
+/* @vue/component */
 export default {
   name: 'rippleable',
 
@@ -24,7 +24,7 @@ export default {
       data.directives = data.directives || []
       data.directives.push({
         name: 'ripple',
-        value: this.ripple && !this.disabled && { center: true }
+        value: { center: true }
       })
       data.on = Object.assign({
         click: this.onChange

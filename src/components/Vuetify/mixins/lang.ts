@@ -4,7 +4,7 @@ import { VuetifyUseOptions as Options } from 'types'
 import { VuetifyLanguage, VuetifyLocale } from 'types/lang'
 import { consoleError, consoleWarn } from '../../../util/console'
 
-const LANG_PREFIX = '$vuetify.lang.'
+const LANG_PREFIX = '$vuetify.'
 const fallback = Symbol('Lang fallback')
 
 function getTranslation (locale: VuetifyLocale, key: string, usingFallback = false): string {
@@ -30,6 +30,8 @@ export default function lang (config: Options['lang'] = {}): VuetifyLanguage {
     current: config.current || 'en',
     t (key, ...params) {
       if (!key.startsWith(LANG_PREFIX)) return key
+
+      if (config.t) return config.t(key, ...params)
 
       const translation = getTranslation(this.locales[this.current], key)
 

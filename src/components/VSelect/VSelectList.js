@@ -1,5 +1,6 @@
+import '../../stylus/components/_cards.styl'
+
 // Components
-import VCard from '../VCard'
 import VCheckbox from '../VCheckbox'
 import VDivider from '../VDivider'
 import VSubheader from '../VSubheader'
@@ -21,6 +22,7 @@ import {
   getPropertyFromItem
 } from '../../util/helpers'
 
+/* @vue/component */
 export default {
   name: 'v-select-list',
 
@@ -70,6 +72,17 @@ export default {
     },
     tileActiveClass () {
       return Object.keys(this.addTextColorClassChecks()).join(' ')
+    },
+    staticNoDataTile () {
+      const tile = {
+        on: {
+          mousedown: e => e.preventDefault() // Prevent onBlur from being called
+        }
+      }
+
+      return this.$createElement(VListTile, tile, [
+        this.genTileContent(this.noDataText)
+      ])
     }
   },
 
@@ -126,9 +139,7 @@ export default {
       item,
       disabled = null,
       avatar = false,
-      value = this.parsedItems.indexOf(
-        this.getValue(item)
-      ) !== -1
+      value = this.hasItem(item)
     ) {
       if (item === Object(item)) {
         avatar = this.getAvatar(item)
@@ -179,6 +190,9 @@ export default {
         })]
       )
     },
+    hasItem (item) {
+      return this.parsedItems.indexOf(this.getValue(item)) > -1
+    },
     needsTile (tile) {
       return tile.componentOptions == null ||
         tile.componentOptions.Ctor.options.name !== 'v-list-tile'
@@ -201,7 +215,7 @@ export default {
     const children = []
     for (const item of this.items) {
       if (this.hideSelected &&
-        this.selectedItems.indexOf(item) > -1
+        this.hasItem(item)
       ) continue
 
       if (item.header) children.push(this.genHeader(item))
@@ -209,21 +223,11 @@ export default {
       else children.push(this.genTile(item))
     }
 
-    if (!children.length) {
-      const noData = this.$slots['no-data']
-      if (noData) {
-        children.push(noData)
-      } else {
-        children.push(this.genTile(this.noDataText, true))
-      }
-    }
+    children.length || children.push(this.$slots['no-data'] || this.staticNoDataTile)
 
-    return this.$createElement(VCard, {
-      staticClass: 'v-select-list',
-      props: {
-        dark: this.dark,
-        light: this.light
-      }
+    return this.$createElement('div', {
+      staticClass: 'v-select-list v-card',
+      'class': this.themeClasses
     }, [
       this.$createElement(VList, {
         props: {

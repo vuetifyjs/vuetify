@@ -20,8 +20,14 @@ import {
 import Resize from '../../directives/resize'
 import Touch from '../../directives/touch'
 
+/* @vue/component */
 export default {
   name: 'v-tabs',
+
+  directives: {
+    Resize,
+    Touch
+  },
 
   mixins: [
     RegistrableProvide('tabs'),
@@ -34,11 +40,6 @@ export default {
     TabsWatchers,
     Themeable
   ],
-
-  directives: {
-    Resize,
-    Touch
-  },
 
   provide () {
     return {
@@ -147,10 +148,10 @@ export default {
       this.setOverflow()
     },
     findActiveLink () {
-      if (!this.tabs.length || this.lazyValue) return
+      if (!this.tabs.length) return
 
       const activeIndex = this.tabs.findIndex((tabItem, index) => {
-        const id = tabItem.action === tabItem ? index.toString() : tabItem.action
+        const id = tabItem.action === tabItem ? index : tabItem.action
         return id === this.lazyValue ||
           tabItem.$el.firstChild.className.indexOf(this.activeClass) > -1
       })
@@ -200,7 +201,10 @@ export default {
       const totalWidth = this.widths.wrapper + this.scrollOffset
       const { clientWidth, offsetLeft } = this.activeTab.$el
       const itemOffset = clientWidth + offsetLeft
-      const additionalOffset = clientWidth * 0.3
+      let additionalOffset = clientWidth * 0.3
+      if (this.activeIndex === this.tabs.length - 1) {
+        additionalOffset = 0 // don't add an offset if selecting the last tab
+      }
 
       /* istanbul ignore else */
       if (offsetLeft < this.scrollOffset) {

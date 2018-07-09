@@ -2,9 +2,7 @@
 
 exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
 
-<div class="v-picker v-picker--date v-card"
-     style="height: auto;"
->
+<div class="v-picker v-card v-picker--date">
   <div class="v-picker__title orange darken-1">
     <div class="v-date-picker-title">
       <div class="v-picker__title__btn v-date-picker-title__year">
@@ -373,9 +371,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
 
 exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
 
-<div class="v-picker v-picker--date v-card"
-     style="height: auto;"
->
+<div class="v-picker v-card v-picker--date">
   <div class="v-picker__title orange darken-1">
     <div class="v-date-picker-title">
       <div class="v-picker__title__btn v-date-picker-title__year">
@@ -744,9 +740,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
 
 exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
 
-<div class="v-picker v-picker--date v-card theme--dark"
-     style="height: auto;"
->
+<div class="v-picker v-card v-picker--date theme--dark">
   <div class="v-picker__title">
     <div class="v-date-picker-title">
       <div class="v-picker__title__btn v-date-picker-title__year">
@@ -759,13 +753,13 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
       </div>
     </div>
   </div>
-  <div class="v-picker__body"
+  <div class="v-picker__body theme--dark"
        style="width: 290px;"
   >
     <div>
-      <div class="v-date-picker-header">
+      <div class="v-date-picker-header theme--dark">
         <button type="button"
-                class="v-btn v-btn--icon"
+                class="v-btn v-btn--icon theme--dark"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
@@ -781,7 +775,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
           </strong>
         </div>
         <button type="button"
-                class="v-btn v-btn--icon"
+                class="v-btn v-btn--icon theme--dark"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
@@ -792,7 +786,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
           </div>
         </button>
       </div>
-      <div class="v-date-picker-table v-date-picker-table--date">
+      <div class="v-date-picker-table v-date-picker-table--date theme--dark">
         <table>
           <thead>
             <tr>
@@ -829,7 +823,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
                 >
                   <div class="v-btn__content">
                     1
@@ -838,7 +832,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
                 >
                   <div class="v-btn__content">
                     2
@@ -847,7 +841,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
                 >
                   <div class="v-btn__content">
                     3
@@ -856,7 +850,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
                 >
                   <div class="v-btn__content">
                     4
@@ -867,7 +861,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
             <tr>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
                 >
                   <div class="v-btn__content">
                     5
@@ -876,7 +870,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
                 >
                   <div class="v-btn__content">
                     6
@@ -885,7 +879,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--active v-btn--icon v-btn--floating accent"
+                        class="v-btn v-btn--active v-btn--icon v-btn--floating theme--dark accent"
                 >
                   <div class="v-btn__content">
                     7
@@ -894,7 +888,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
                 >
                   <div class="v-btn__content">
                     8
@@ -903,7 +897,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
                 >
                   <div class="v-btn__content">
                     9
@@ -912,7 +906,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
                 >
                   <div class="v-btn__content">
                     10
@@ -921,7 +915,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
                 >
                   <div class="v-btn__content">
                     11
@@ -932,7 +926,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
             <tr>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
                 >
                   <div class="v-btn__content">
                     12
@@ -941,7 +935,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
                 >
                   <div class="v-btn__content">
                     13
@@ -950,7 +944,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
                 >
                   <div class="v-btn__content">
                     14
@@ -959,7 +953,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
                 >
                   <div class="v-btn__content">
                     15
@@ -968,7 +962,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
                 >
                   <div class="v-btn__content">
                     16
@@ -977,7 +971,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
                 >
                   <div class="v-btn__content">
                     17
@@ -986,7 +980,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
                 >
                   <div class="v-btn__content">
                     18
@@ -997,7 +991,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
             <tr>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
                 >
                   <div class="v-btn__content">
                     19
@@ -1006,7 +1000,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
                 >
                   <div class="v-btn__content">
                     20
@@ -1015,7 +1009,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
                 >
                   <div class="v-btn__content">
                     21
@@ -1024,7 +1018,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
                 >
                   <div class="v-btn__content">
                     22
@@ -1033,7 +1027,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
                 >
                   <div class="v-btn__content">
                     23
@@ -1042,7 +1036,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
                 >
                   <div class="v-btn__content">
                     24
@@ -1051,7 +1045,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
                 >
                   <div class="v-btn__content">
                     25
@@ -1062,7 +1056,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
             <tr>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
                 >
                   <div class="v-btn__content">
                     26
@@ -1071,7 +1065,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
                 >
                   <div class="v-btn__content">
                     27
@@ -1080,7 +1074,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
                 >
                   <div class="v-btn__content">
                     28
@@ -1089,7 +1083,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
                 >
                   <div class="v-btn__content">
                     29
@@ -1098,7 +1092,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
                 >
                   <div class="v-btn__content">
                     30
@@ -1107,7 +1101,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
                 >
                   <div class="v-btn__content">
                     31
@@ -1126,9 +1120,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
 
 exports[`VDatePicker.js should match snapshot with default settings 1`] = `
 
-<div class="v-picker v-picker--date v-card"
-     style="height: auto;"
->
+<div class="v-picker v-card v-picker--date">
   <div class="v-picker__title primary">
     <div class="v-date-picker-title">
       <div class="v-picker__title__btn v-date-picker-title__year">
@@ -1530,9 +1522,7 @@ exports[`VDatePicker.js should match snapshot with year icon 1`] = `
 
 exports[`VDatePicker.js should render component with min/max props 1`] = `
 
-<div class="v-picker v-picker--date v-card"
-     style="height: auto;"
->
+<div class="v-picker v-card v-picker--date">
   <div class="v-picker__title primary">
     <div class="v-date-picker-title">
       <div class="v-picker__title__btn v-date-picker-title__year">
@@ -1928,9 +1918,7 @@ exports[`VDatePicker.js should render component with min/max props 1`] = `
 
 exports[`VDatePicker.js should render component with min/max props 2`] = `
 
-<div class="v-picker v-picker--date v-card"
-     style="height: auto;"
->
+<div class="v-picker v-card v-picker--date">
   <div class="v-picker__title primary">
     <div class="v-date-picker-title">
       <div class="v-picker__title__btn v-date-picker-title__year">
@@ -2492,9 +2480,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
 
 exports[`VDatePicker.js should render component with min/max props 3`] = `
 
-<div class="v-picker v-picker--date v-card"
-     style="height: auto;"
->
+<div class="v-picker v-card v-picker--date">
   <div class="v-picker__title primary">
     <div class="v-date-picker-title">
       <div class="v-picker__title__btn v-date-picker-title__year active">
@@ -3063,9 +3049,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
 
 exports[`VDatePicker.js should render readonly picker 1`] = `
 
-<div class="v-picker v-picker--date v-card"
-     style="height: auto;"
->
+<div class="v-picker v-card v-picker--date">
   <div class="v-picker__title primary">
     <div class="v-date-picker-title"
          style="pointer-events: none;"

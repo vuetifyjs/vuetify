@@ -10,8 +10,11 @@ import SSRBootable from '../../mixins/ssr-bootable'
 // Directives
 import Scroll from '../../directives/scroll'
 
+/* @vue/component */
 export default {
   name: 'v-toolbar',
+
+  directives: { Scroll },
 
   mixins: [
     Applicationable('top', [
@@ -25,26 +28,6 @@ export default {
     SSRBootable,
     Themeable
   ],
-
-  directives: { Scroll },
-
-  data: () => ({
-    activeTimeout: null,
-    currentScroll: 0,
-    heights: {
-      mobileLandscape: 48,
-      mobile: 56,
-      desktop: 64,
-      dense: 48
-    },
-    isActive: true,
-    isExtended: false,
-    isScrollingUp: false,
-    previousScroll: null,
-    previousScrollDirection: null,
-    savedScroll: 0,
-    target: null
-  }),
 
   props: {
     card: Boolean,
@@ -74,6 +57,24 @@ export default {
     },
     tabs: Boolean
   },
+
+  data: () => ({
+    activeTimeout: null,
+    currentScroll: 0,
+    heights: {
+      mobileLandscape: 48,
+      mobile: 56,
+      desktop: 64,
+      dense: 48
+    },
+    isActive: true,
+    isExtended: false,
+    isScrollingUp: false,
+    previousScroll: null,
+    previousScrollDirection: null,
+    savedScroll: 0,
+    target: null
+  }),
 
   computed: {
     computedContentHeight () {

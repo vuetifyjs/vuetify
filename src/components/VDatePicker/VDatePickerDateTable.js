@@ -1,17 +1,20 @@
 // Mixins
 import Colorable from '../../mixins/colorable'
 import DatePickerTable from './mixins/date-picker-table'
+import Themeable from '../../mixins/themeable'
 
 // Utils
 import { pad, createNativeLocaleFormatter, monthChange } from './util'
 import { createRange } from '../../util/helpers'
 
+/* @vue/component */
 export default {
   name: 'v-date-picker-date-table',
 
   mixins: [
     Colorable,
-    DatePickerTable
+    DatePickerTable,
+    Themeable
   ],
 
   props: {

@@ -1,12 +1,17 @@
 import '../../stylus/components/_progress-linear.styl'
 
+// Mixins
 import Colorable from '../../mixins/colorable'
+
+// Helpers
+import { convertToUnit } from '../../util/helpers'
 
 import {
   VFadeTransition,
   VSlideXTransition
 } from '../transitions'
 
+/* @vue/component */
 export default {
   name: 'v-progress-linear',
 
@@ -72,7 +77,7 @@ export default {
         : parseFloat(this.backgroundOpacity)
 
       return {
-        height: this.active ? `${this.height}px` : 0,
+        height: this.active ? convertToUnit(this.height) : 0,
         opacity: backgroundOpacity,
         width: `${this.bufferValue}%`
       }
@@ -132,7 +137,7 @@ export default {
         'v-progress-linear--query': this.query
       },
       style: {
-        height: `${this.height}px`
+        height: convertToUnit(this.height)
       },
       on: this.$listeners
     }, [

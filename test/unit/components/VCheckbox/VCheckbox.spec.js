@@ -180,7 +180,7 @@ test('VCheckbox.js', ({ mount }) => {
 
     wrapper.setProps({ disabled: true })
 
-    expect(ripple.element._ripple.enabled).toBe(false)
+    expect(wrapper.contains('.v-input--selection-controls__ripple')).toBe(false)
   })
 
   it('should set ripple centered property when enabled', () => {
@@ -191,12 +191,11 @@ test('VCheckbox.js', ({ mount }) => {
       }
     })
 
-    const ripple = wrapper.first('.v-input--selection-controls__ripple')
-
-    expect(ripple.element._ripple.enabled).toBe(false)
+    expect(wrapper.contains('.v-input--selection-controls__ripple')).toBe(false)
 
     wrapper.setProps({ disabled: false })
 
+    const ripple = wrapper.first('.v-input--selection-controls__ripple')
     expect(ripple.element._ripple.enabled).toBe(true)
     expect(ripple.element._ripple.centered).toBe(true)
   })
@@ -345,6 +344,29 @@ test('VCheckbox.js', ({ mount }) => {
 
     ripple.trigger('click')
     expect(change).toBeCalledWith([{b: 1}, {c: 1}])
+  })
+
+  it('should work with custom true- and false-value', () => {
+    const wrapper = mount(VCheckbox, {
+      propsData: {
+        trueValue: 'on',
+        falseValue: 'off',
+        inputValue: null
+      }
+    })
+
+    const ripple = wrapper.find('.v-input--selection-controls__ripple')[0]
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    ripple.trigger('click')
+    expect(change).toBeCalledWith('on')
+
+    ripple.trigger('click')
+    expect(change).toBeCalledWith('off')
+
+    expect(change).toHaveBeenCalledTimes(2)
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/2119

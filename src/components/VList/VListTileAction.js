@@ -1,7 +1,8 @@
+/* @vue/component */
 export default {
-  functional: true,
-
   name: 'v-list-tile-action',
+
+  functional: true,
 
   render (h, { data, children }) {
     data.staticClass = data.staticClass ? `v-list__tile__action ${data.staticClass}` : 'v-list__tile__action'

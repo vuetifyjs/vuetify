@@ -6,6 +6,7 @@
  * Used for calculating an automatic position (used for VSelect)
  * Will position the VMenu content properly over the VSelect
  */
+/* @vue/component */
 export default {
   methods: {
     // Revisit this
@@ -29,7 +30,9 @@ export default {
         )
       }
 
-      this.$refs.content.scrollTop = scrollTop
+      if (this.$refs.content) {
+        this.$refs.content.scrollTop = scrollTop
+      }
     },
     calcLeftAuto () {
       if (this.isAttached) return 0
