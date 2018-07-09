@@ -201,15 +201,33 @@ test('VTextField.js', ({ mount }) => {
   })
 
   it('should start validating on blur', async () => {
-    const wrapper = mount(VTextField)
+    const rule = jest.fn().mockReturnValue(true)
+    const wrapper = mount(VTextField, {
+      propsData: {
+        rules: [rule],
+        validateOnBlur: true
+      }
+    })
 
     const input = wrapper.first('input')
     expect(wrapper.vm.shouldValidate).toEqual(false)
+
+    // Rules are called once on mount
+    expect(rule).toHaveBeenCalledTimes(1)
+
     input.trigger('focus')
     await wrapper.vm.$nextTick()
+
+    input.element.value = 'f'
+    input.trigger('input')
+    await wrapper.vm.$nextTick()
+    expect(rule).toHaveBeenCalledTimes(1)
+
     input.trigger('blur')
     await wrapper.vm.$nextTick()
+
     expect(wrapper.vm.shouldValidate).toEqual(true)
+    expect(rule).toHaveBeenCalledTimes(2)
   })
 
   it('should keep its value on blur', async () => {

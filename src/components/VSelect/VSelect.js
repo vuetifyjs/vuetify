@@ -147,6 +147,11 @@ export default {
     computedItems () {
       return this.allItems
     },
+    counterValue () {
+      return this.multiple
+        ? this.selectedItems.length
+        : (this.getText(this.selectedItems[0]) || '').toString().length
+    },
     directives () {
       return [{
         name: 'click-outside',
@@ -234,7 +239,8 @@ export default {
   },
 
   watch: {
-    internalValue () {
+    internalValue (val) {
+      this.initialValue = val
       this.$emit('change', this.internalValue)
       this.setSelectedItems()
     },
@@ -379,7 +385,7 @@ export default {
         selections,
         this.suffix ? this.genAffix('suffix') : null,
         this.genClearIcon(),
-        this.genSlot('append', 'inner', [this.genIcon('append')])
+        this.genIconSlot()
       ])
 
       return [this.genMenu(activator)]

@@ -96,6 +96,9 @@ export default {
         'v-text-field--outline': this.hasOutline
       }
     },
+    counterValue () {
+      return (this.internalValue || '').toString().length
+    },
     directivesInput () {
       return []
     },
@@ -262,15 +265,14 @@ export default {
     genCounter () {
       if (this.counter === false || this.counter == null) return null
 
-      const value = (this.internalValue || '').length
       const max = this.counter === true ? this.$attrs.maxlength : this.counter
 
       return this.$createElement(VCounter, {
         props: {
           dark: this.dark,
           light: this.light,
-          max,
-          value
+          value: this.counterValue,
+          max
         }
       })
     },

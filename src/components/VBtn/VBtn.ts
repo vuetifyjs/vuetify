@@ -121,8 +121,7 @@ const VBtn = mixins(
       const children: VNodeChildren = []
 
       if (!this.$slots.loader) {
-        // TODO: uncast
-        children.push(this.$createElement(VProgressCircular as ComponentOptions<Vue>, {
+        children.push(this.$createElement(VProgressCircular, {
           props: {
             indeterminate: true,
             size: 26,
