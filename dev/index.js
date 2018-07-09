@@ -13,7 +13,12 @@ Vue.use(VueRouter)
 
 Vue.component(Boilerplate.name, Boilerplate)
 
-new Vue({
+const vm = new Vue({
   render: h => h(App),
   router
-}).$mount('#app')
+})
+
+// Prevent layout jump while waiting for styles
+window.addEventListener('load', () => {
+  vm.$mount('#app')
+})
