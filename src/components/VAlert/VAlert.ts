@@ -1,13 +1,18 @@
+// Styles
 import '../../stylus/components/_alerts.styl'
 
+// Components
 import VIcon from '../VIcon'
 
+// Mixins
 import Colorable from '../../mixins/colorable'
 import Toggleable from '../../mixins/toggleable'
 import Transitionable from '../../mixins/transitionable'
 
+// Types
 import mixins from '../../util/mixins'
 
+/* @vue/component */
 export default mixins(Colorable, Toggleable, Transitionable).extend({
   name: 'v-alert',
 
