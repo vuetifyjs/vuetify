@@ -137,6 +137,10 @@ export default {
     pagination: {
       type: Object,
       default: () => {}
+    },
+    expanded: {
+      type: Array,
+      default: () => ([])
     }
   },
 
@@ -233,7 +237,16 @@ export default {
       })
     },
     'computedPagination.sortBy': 'resetPagination',
-    'computedPagination.descending': 'resetPagination'
+    'computedPagination.descending': 'resetPagination',
+    expanded (items) {
+      if (!Array.isArray(items)) return
+
+      this.expandedKeys = {}
+      const keys = items.map(item => getObjectValueByPath(item, this.itemKey))
+      for (let i = 0; i < keys.length; i++) {
+        this.$set(this.expandedKeys, keys[i], true)
+      }
+    }
   },
 
   methods: {
@@ -265,7 +278,7 @@ export default {
       return this.selected[getObjectValueByPath(item, this.itemKey)]
     },
     isExpanded (item) {
-      return this.expanded[getObjectValueByPath(item, this.itemKey)]
+      return this.expandedKeys[getObjectValueByPath(item, this.itemKey)]
     },
     filteredItemsImpl (...additionalFilterArgs) {
       if (this.totalItems) return this.items
@@ -338,18 +351,20 @@ export default {
       })
 
       Object.defineProperty(props, 'expanded', {
-        get: () => this.expanded[itemKey],
+        get: () => this.expandedKeys[itemKey],
         set: value => {
           if (itemKey == null) {
             consoleWarn(`"${keyProp}" attribute must be defined for item`, this)
           }
 
           if (!this.expand) {
-            for (const key in this.expanded) {
-              this.expanded.hasOwnProperty(key) && this.$set(this.expanded, key, false)
+            for (const key in this.expandedKeys) {
+              this.expandedKeys.hasOwnProperty(key) && this.$set(this.expandedKeys, key, false)
             }
           }
-          this.$set(this.expanded, itemKey, value)
+          this.$set(this.expandedKeys, itemKey, value)
+
+          this.$emit('update:expanded', this.items.filter(item => this.expandedKeys[getObjectValueByPath(item, keyProp)]))
         }
       })
 
