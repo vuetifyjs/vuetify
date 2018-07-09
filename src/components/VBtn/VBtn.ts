@@ -15,6 +15,7 @@ import Routable from '../../mixins/routable'
 import Themeable from '../../mixins/themeable'
 import { factory as ToggleableFactory } from '../../mixins/toggleable'
 import { inject as RegistrableInject } from '../../mixins/registrable'
+import { RippleOptions } from '../../directives/ripple'
 
 const VBtn = mixins(
   Colorable,
@@ -42,8 +43,8 @@ const VBtn = mixins(
     outline: Boolean,
     ripple: {
       type: [Boolean, Object],
-      default: true
-    },
+      default: null
+    } as PropValidator<RippleOptions | boolean | null>,
     round: Boolean,
     small: Boolean,
     tag: {
@@ -86,6 +87,11 @@ const VBtn = mixins(
       return (!this.outline && !this.flat)
         ? this.addBackgroundColorClassChecks(classes)
         : this.addTextColorClassChecks(classes)
+    },
+    computedRipple (): RippleOptions | boolean {
+      const defaultRipple = this.icon || this.fab ? { circle: true } : true
+      if (this.disabled) return false
+      else return this.ripple !== null ? this.ripple : defaultRipple
     }
   },
 

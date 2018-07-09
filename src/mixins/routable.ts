@@ -1,7 +1,7 @@
 import Vue, { VNodeData } from 'vue'
 import { PropValidator } from 'vue/types/options'
 
-import Ripple from '../directives/ripple'
+import Ripple, { RippleOptions } from '../directives/ripple'
 
 export default Vue.extend({
   name: 'routable',
@@ -28,6 +28,12 @@ export default Vue.extend({
     target: String
   },
 
+  computed: {
+    computedRipple (): RippleOptions | boolean {
+      return (this.ripple && !this.disabled) ? this.ripple : false
+    }
+  },
+
   methods: {
     /* eslint-disable-next-line no-unused-vars */
     click (e: MouseEvent): void { /**/ },
@@ -41,8 +47,8 @@ export default Vue.extend({
         props: {},
         directives: [{
           name: 'ripple',
-          value: (this.ripple && !this.disabled) ? this.ripple : false
-        }] as any, // TODO
+          value: this.computedRipple
+        }] as any, // TODO: remove as any when vuejs/vue#8013 is fixed
         [this.to ? 'nativeOn' : 'on']: {
           ...this.$listeners,
           click: this.click
