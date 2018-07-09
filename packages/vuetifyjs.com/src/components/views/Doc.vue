@@ -10,7 +10,10 @@
             slot(name="sup")
         slot(:namespace="namespace")
         core-footer-alt
-      v-flex(md3 hidden-sm-and-down)
+      v-flex(
+        v-if="$vuetify.breakpoint.mdAndUp"
+        md3
+      )
         core-table-of-contents(
           :threshold="50"
           :offset="85"
