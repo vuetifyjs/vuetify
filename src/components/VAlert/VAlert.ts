@@ -10,6 +10,7 @@ import Toggleable from '../../mixins/toggleable'
 import Transitionable from '../../mixins/transitionable'
 
 // Types
+import { VNode } from 'vue/types'
 import mixins from '../../util/mixins'
 
 /* @vue/component */
@@ -47,7 +48,7 @@ export default mixins(Colorable, Toggleable, Transitionable).extend({
       return this.outline ? this.addTextColorClassChecks(classes, color)
         : this.addBackgroundColorClassChecks(classes, color)
     },
-    computedIcon (): string | undefined {
+    computedIcon (): string | void {
       if (this.icon || !this.type) return this.icon
 
       switch (this.type) {
@@ -59,7 +60,7 @@ export default mixins(Colorable, Toggleable, Transitionable).extend({
     }
   },
 
-  render (h) {
+  render (h): VNode {
     const children = [h('div', this.$slots.default)]
 
     if (this.computedIcon) {
