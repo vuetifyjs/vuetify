@@ -147,21 +147,15 @@ export default {
     computedItems () {
       return this.allItems
     },
+    counterValue () {
+      return this.multiple
+        ? this.selectedItems.length
+        : (this.getText(this.selectedItems[0]) || '').toString().length
+    },
     directives () {
       return [{
         name: 'click-outside',
-        // TODO: Check into this firing when it shouldn't
-        value: e => {
-          if (this.isMenuActive) {
-            this.onKeyDown(e)
-          }
-
-          /* eslint-disable vue/no-side-effects-in-computed-properties */
-          this.isMenuActive = false
-          this.isFocused = false
-          this.selectedIndex = -1
-          /* eslint-enable vue/no-side-effects-in-computed-properties */
-        },
+        value: this.blur,
         args: {
           closeConditional: e => {
             return (
@@ -245,7 +239,8 @@ export default {
   },
 
   watch: {
-    internalValue () {
+    internalValue (val) {
+      this.initialValue = val
       this.$emit('change', this.internalValue)
       this.setSelectedItems()
     },
@@ -278,6 +273,14 @@ export default {
   },
 
   methods: {
+    /** @public */
+    blur () {
+      this.isMenuActive = false
+      this.isFocused = false
+      this.$refs.input.blur()
+      this.selectedIndex = -1
+    },
+    /** @public */
     activateMenu () {
       this.isMenuActive = true
     },
@@ -382,7 +385,7 @@ export default {
         selections,
         this.suffix ? this.genAffix('suffix') : null,
         this.genClearIcon(),
-        this.genSlot('append', 'inner', [this.genIcon('append')])
+        this.genIconSlot()
       ])
 
       return [this.genMenu(activator)]
@@ -553,7 +556,7 @@ export default {
       ].includes(keyCode)) this.activateMenu()
 
       // This should do something different
-      if (e.keyCode === keyCodes.enter) return this.onEnterDown()
+      if (keyCode === keyCodes.enter) return this.onEnterDown()
 
       // If escape deactivate the menu
       if (keyCode === keyCodes.esc) return this.onEscDown(e)

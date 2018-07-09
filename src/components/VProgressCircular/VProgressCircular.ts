@@ -1,12 +1,12 @@
 import '../../stylus/components/_progress-circular.styl'
 
 import Colorable from '../../mixins/colorable'
+import mixins from '../../util/mixins'
+import { CreateElement, VNode, VNodeChildrenArrayContents } from 'vue'
 
 /* @vue/component */
-export default {
+export default mixins(Colorable).extend({
   name: 'v-progress-circular',
-
-  mixins: [Colorable],
 
   props: {
     button: Boolean,
@@ -35,15 +35,15 @@ export default {
   },
 
   computed: {
-    calculatedSize () {
+    calculatedSize (): number {
       return Number(this.size) + (this.button ? 8 : 0)
     },
 
-    circumference () {
+    circumference (): number {
       return 2 * Math.PI * this.radius
     },
 
-    classes () {
+    classes (): object {
       return this.addTextColorClassChecks({
         'v-progress-circular': true,
         'v-progress-circular--indeterminate': this.indeterminate,
@@ -51,7 +51,7 @@ export default {
       })
     },
 
-    normalizedValue () {
+    normalizedValue (): number {
       if (this.value < 0) {
         return 0
       }
@@ -63,42 +63,42 @@ export default {
       return this.value
     },
 
-    radius () {
+    radius (): number {
       return 20
     },
 
-    strokeDashArray () {
+    strokeDashArray (): number {
       return Math.round(this.circumference * 1000) / 1000
     },
 
-    strokeDashOffset () {
+    strokeDashOffset (): string {
       return ((100 - this.normalizedValue) / 100) * this.circumference + 'px'
     },
 
-    strokeWidth () {
-      return this.width / this.size * this.viewBoxSize * 2
+    strokeWidth (): number {
+      return this.width / +this.size * this.viewBoxSize * 2
     },
 
-    styles () {
+    styles (): object {
       return {
         height: `${this.calculatedSize}px`,
         width: `${this.calculatedSize}px`
       }
     },
 
-    svgStyles () {
+    svgStyles (): object {
       return {
         transform: `rotate(${this.rotate}deg)`
       }
     },
 
-    viewBoxSize () {
-      return this.radius / (1 - this.width / this.size)
+    viewBoxSize (): number {
+      return this.radius / (1 - this.width / +this.size)
     }
   },
 
   methods: {
-    genCircle (h, name, offset) {
+    genCircle (h: CreateElement, name: string, offset: string | number): VNode {
       return h('circle', {
         class: `v-progress-circular__${name}`,
         attrs: {
@@ -112,11 +112,11 @@ export default {
         }
       })
     },
-    genSvg (h) {
+    genSvg (h: CreateElement): VNode {
       const children = [
         this.indeterminate || this.genCircle(h, 'underlay', 0),
         this.genCircle(h, 'overlay', this.strokeDashOffset)
-      ]
+      ] as VNodeChildrenArrayContents
 
       return h('svg', {
         style: this.svgStyles,
@@ -128,7 +128,7 @@ export default {
     }
   },
 
-  render (h) {
+  render (h): VNode {
     const info = h('div', { class: 'v-progress-circular__info' }, [this.$slots.default])
     const svg = this.genSvg(h)
 
@@ -138,4 +138,4 @@ export default {
       on: this.$listeners
     }, [svg, info])
   }
-}
+})

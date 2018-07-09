@@ -1,3 +1,4 @@
+// Styles
 import '../../stylus/components/_badges.styl'
 
 // Mixins
@@ -6,11 +7,18 @@ import Toggleable from '../../mixins/toggleable'
 import { factory as PositionableFactory } from '../../mixins/positionable'
 import Transitionable from '../../mixins/transitionable'
 
-/* @vue/component */
-export default {
-  name: 'v-badge',
+// Types
+import { VNode } from 'vue'
+import mixins from '../../util/mixins'
 
-  mixins: [Colorable, Toggleable, PositionableFactory(['left', 'bottom']), Transitionable],
+export default mixins(
+  Colorable,
+  Toggleable,
+  PositionableFactory(['left', 'bottom']),
+  Transitionable
+/* @vue/component */
+).extend({
+  name: 'v-badge',
 
   props: {
     color: {
@@ -28,7 +36,7 @@ export default {
   },
 
   computed: {
-    classes () {
+    classes (): object {
       return {
         'v-badge--bottom': this.bottom,
         'v-badge--left': this.left,
@@ -37,7 +45,7 @@ export default {
     }
   },
 
-  render (h) {
+  render (h): VNode {
     const badge = this.$slots.badge ? [h('span', {
       staticClass: 'v-badge__badge',
       'class': this.addBackgroundColorClassChecks(),
@@ -45,8 +53,8 @@ export default {
       directives: [{
         name: 'show',
         value: this.isActive
-      }]
-    }, this.$slots.badge)] : null
+      }] as any
+    }, this.$slots.badge)] : undefined
 
     return h('span', {
       staticClass: 'v-badge',
@@ -62,4 +70,4 @@ export default {
       }, badge)
     ])
   }
-}
+})

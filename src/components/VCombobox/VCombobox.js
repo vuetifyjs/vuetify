@@ -26,6 +26,11 @@ export default {
   },
 
   computed: {
+    counterValue () {
+      return this.multiple
+        ? this.selectedItems.length
+        : (this.internalSearch || '').toString().length
+    },
     hasSlot () {
       return VSelect.computed.hasSlot.call(this) || this.multiple
     },
