@@ -1,16 +1,18 @@
 import { createSimpleFunctional } from '../../util/helpers'
 import VCard from './VCard'
+import VCardExpansion from './VCardExpansion'
 import VCardMedia from './VCardMedia'
 import VCardTitle from './VCardTitle'
 
 const VCardActions = createSimpleFunctional('v-card__actions')
 const VCardText = createSimpleFunctional('v-card__text')
 
-export { VCard, VCardMedia, VCardTitle, VCardActions, VCardText }
+export { VCard, VCardExpansion, VCardMedia, VCardTitle, VCardActions, VCardText }
 
 /* istanbul ignore next */
 VCard.install = function install (Vue) {
   Vue.component(VCard.name, VCard)
+  Vue.component(VCardExpansion.name, VCardExpansion)
   Vue.component(VCardMedia.name, VCardMedia)
   Vue.component(VCardTitle.name, VCardTitle)
   Vue.component(VCardActions.name, VCardActions)

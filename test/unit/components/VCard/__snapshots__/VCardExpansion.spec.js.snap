@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VCardExpansion.js should render dropdown class 1`] = `
+
+<div class="v-card__expansion v-card__expansion--dropdown">
+  <div class="fake-text">
+  </div>
+</div>
+
+`;
+
+exports[`VCardExpansion.js should render with cover class 1`] = `
+
+<div class="v-card__expansion v-card__expansion--cover">
+  <div class="fake-text">
+  </div>
+</div>
+
+`;
