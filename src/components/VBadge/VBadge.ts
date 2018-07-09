@@ -8,7 +8,7 @@ import { factory as PositionableFactory } from '../../mixins/positionable'
 import Transitionable from '../../mixins/transitionable'
 
 // Types
-import { VNode, VNodeData } from 'vue'
+import { VNode } from 'vue'
 import mixins from '../../util/mixins'
 
 export default mixins(

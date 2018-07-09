@@ -1,7 +1,7 @@
 // Styles
 import '../../stylus/components/_buttons.styl'
 
-import Vue, { VNode, ComponentOptions, VNodeChildren } from 'vue'
+import { VNode, VNodeChildren } from 'vue'
 import { PropValidator } from 'vue/types/options'
 import mixins from '../../util/mixins'
 
