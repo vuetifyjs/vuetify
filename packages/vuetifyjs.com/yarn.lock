@@ -7626,9 +7626,9 @@ vuelidate@^0.6.2:
   version "0.6.2"
   resolved "https://registry.yarnpkg.com/vuelidate/-/vuelidate-0.6.2.tgz#b417f5367407b047a2548119b25db56fe2bd5753"
 
-vuetify@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-1.1.1.tgz#8d8f64306a45aaf862487addae8decf082dac0a3"
+vuetify@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-1.1.2.tgz#d8bfcaf6d7c6e94af4541652e66c6652939c8018"
 
 vuex-router-sync@^5.0.0:
   version "5.0.0"
