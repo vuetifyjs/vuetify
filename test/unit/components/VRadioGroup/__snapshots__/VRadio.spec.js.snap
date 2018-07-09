@@ -88,7 +88,6 @@ exports[`VRadio.vue should render role and aria-checked attributes on input grou
            name="name"
            role="radio"
            type="radio"
-           checked="checked"
     >
     <div class="v-input--selection-controls__ripple accent--text">
     </div>
@@ -139,7 +138,6 @@ exports[`VRadio.vue should use custom icons 2`] = `
     <input aria-checked="true"
            role="radio"
            type="radio"
-           checked="checked"
     >
     <div class="v-input--selection-controls__ripple accent--text">
     </div>
