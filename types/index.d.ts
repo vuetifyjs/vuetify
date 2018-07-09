@@ -88,6 +88,7 @@ export interface VuetifyIcons {
 export interface VuetifyApplication {
   bar: number
   bottom: number
+  footer: number
   left: number
   right: number
   top: number
