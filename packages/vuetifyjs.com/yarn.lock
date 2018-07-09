@@ -7579,6 +7579,10 @@ vue-loader@^15.2.4:
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
 
+vue-no-ssr@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/vue-no-ssr/-/vue-no-ssr-0.2.2.tgz#e1a0ef0ba39fc54972edd71a2ae11a7988312b19"
+
 vue-prism-component@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/vue-prism-component/-/vue-prism-component-1.0.1.tgz#9e4ecb9b2577b598daef453e8b4637a780d118ae"

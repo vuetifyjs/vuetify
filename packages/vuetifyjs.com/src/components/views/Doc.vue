@@ -10,16 +10,17 @@
             slot(name="sup")
         slot(:namespace="namespace")
         core-footer-alt
-      v-flex(
-        v-if="$vuetify.breakpoint.mdAndUp"
-        md3
-      )
-        core-table-of-contents(
-          :threshold="50"
-          :offset="85"
-          :items="computedToc"
+      no-ssr
+        v-flex(
+          v-if="$vuetify.breakpoint.mdAndUp"
+          md3
         )
-          core-ad
+          core-table-of-contents(
+            :threshold="50"
+            :offset="85"
+            :items="computedToc"
+          )
+            core-ad
 </template>
 
 <script>

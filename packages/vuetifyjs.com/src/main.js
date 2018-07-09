@@ -6,6 +6,7 @@ import 'event-source-polyfill'
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 import axios from 'axios'
+import NoSSR from 'vue-no-ssr'
 
 // Bootstrap
 import '@/components'
@@ -17,6 +18,8 @@ import { sync } from 'vuex-router-sync'
 
 // Application
 import App from './App.vue'
+
+Vue.component(NoSSR.name, NoSSR)
 
 Vue.config.performance = process.env.NODE_ENV === 'development'
 
