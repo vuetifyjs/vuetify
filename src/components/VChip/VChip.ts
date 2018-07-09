@@ -1,15 +1,16 @@
 import '../../stylus/components/_chips.styl'
 
+import { CreateElement, VNode, VNodeChildren } from 'vue'
+import mixins from '../../util/mixins'
+
 import VIcon from '../VIcon'
 import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
 import Toggleable from '../../mixins/toggleable'
 
 /* @vue/component */
-export default {
+export default mixins(Colorable, Themeable, Toggleable).extend({
   name: 'v-chip',
-
-  mixins: [Colorable, Themeable, Toggleable],
 
   props: {
     close: Boolean,
@@ -27,7 +28,7 @@ export default {
   },
 
   computed: {
-    classes () {
+    classes (): object {
       const classes = this.addBackgroundColorClassChecks({
         'v-chip--disabled': this.disabled,
         'v-chip--selected': this.selected && !this.disabled,
@@ -46,11 +47,11 @@ export default {
   },
 
   methods: {
-    genClose (h) {
+    genClose (h: CreateElement): VNode {
       const data = {
         staticClass: 'v-chip__close',
         on: {
-          click: e => {
+          click: (e: Event) => {
             e.stopPropagation()
 
             this.$emit('input', false)
@@ -62,8 +63,8 @@ export default {
         h(VIcon, '$vuetify.icons.delete')
       ])
     },
-    genContent (h) {
-      const children = [this.$slots.default]
+    genContent (h: CreateElement): VNode {
+      const children: VNodeChildren = [this.$slots.default]
 
       this.close && children.push(this.genClose(h))
 
@@ -81,10 +82,10 @@ export default {
       directives: [{
         name: 'show',
         value: this.isActive
-      }],
+      }] as any,
       on: this.$listeners
     }
 
     return h('span', data, [this.genContent(h)])
   }
-}
+})
