@@ -140,7 +140,7 @@ export default {
     genIcon (type, cb, shouldDeprecate = true) {
       const icon = this[`${type}Icon`]
       const eventName = `click:${kebabCase(type)}`
-      cb = cb || this[`${type}IconCb`]
+      cb = cb || this[`${type}IconCb`] || this.$listeners[eventName]
 
       if (shouldDeprecate && type && cb) {
         deprecate(`:${type}-icon-cb`, `@${eventName}`, this)

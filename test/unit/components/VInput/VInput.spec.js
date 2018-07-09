@@ -78,9 +78,11 @@ test('VInput.js', ({ mount }) => {
     const wrapper = mount(VInput, {
       propsData: {
         prependIcon: 'list',
-        prependIconCb: cb,
-        appendIcon: 'search',
-        appendIconCb: cb
+        appendIcon: 'search'
+      },
+      listeners: {
+        'click:prepend': cb,
+        'click:append': cb
       }
     })
 
