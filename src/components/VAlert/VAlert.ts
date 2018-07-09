@@ -1,16 +1,20 @@
+// Styles
 import '../../stylus/components/_alerts.styl'
 
+// Components
 import VIcon from '../VIcon'
 
+// Mixins
 import Colorable from '../../mixins/colorable'
 import Toggleable from '../../mixins/toggleable'
 import Transitionable from '../../mixins/transitionable'
 
-/* @vue/component */
-export default {
-  name: 'v-alert',
+// Types
+import mixins from '../../util/mixins'
 
-  mixins: [Colorable, Toggleable, Transitionable],
+/* @vue/component */
+export default mixins(Colorable, Toggleable, Transitionable).extend({
+  name: 'v-alert',
 
   props: {
     dismissible: Boolean,
@@ -18,7 +22,7 @@ export default {
     outline: Boolean,
     type: {
       type: String,
-      validator (val) {
+      validator (val: string) {
         return [
           'info',
           'error',
@@ -34,7 +38,7 @@ export default {
   }),
 
   computed: {
-    classes () {
+    classes (): object {
       const color = (this.type && !this.color) ? this.type : this.computedColor
       const classes = {
         'v-alert--outline': this.outline
@@ -43,7 +47,7 @@ export default {
       return this.outline ? this.addTextColorClassChecks(classes, color)
         : this.addBackgroundColorClassChecks(classes, color)
     },
-    computedIcon () {
+    computedIcon (): string | undefined {
       if (this.icon || !this.type) return this.icon
 
       switch (this.type) {
@@ -67,7 +71,7 @@ export default {
     if (this.dismissible) {
       const close = h('a', {
         'class': 'v-alert__dismissible',
-        on: { click: () => this.$emit('input', false) }
+        on: { click: () => { this.isActive = false } }
       }, [
         h(VIcon, {
           props: {
@@ -85,7 +89,7 @@ export default {
       directives: [{
         name: 'show',
         value: this.isActive
-      }],
+      }] as any,
       on: this.$listeners
     }, children)
 
@@ -99,4 +103,4 @@ export default {
       }
     }, [alert])
   }
-}
+})
