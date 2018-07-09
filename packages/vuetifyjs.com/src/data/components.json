@@ -72,7 +72,7 @@
     "spec": false
   },
   "buttons": {
-    "components": ["v-btn"],
+    "components": ["v-btn", "v-btn-toggle"],
     "examples": [
       "usage",
       "flat",
