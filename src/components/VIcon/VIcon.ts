@@ -1,14 +1,18 @@
 import '../../stylus/components/_icons.styl'
 
+// Mixins
 import Themeable from '../../mixins/themeable'
 import Colorable from '../../mixins/colorable'
+
+// Util
 import {
   convertToUnit,
   getObjectValueByPath,
   keys
 } from '../../util/helpers'
 
-import { VNode, VNodeChildren } from 'vue'
+// Types
+import { CreateElement, VNode, VNodeChildren } from 'vue'
 import mixins from '../../util/mixins'
 
 enum SIZE_MAP {
@@ -65,7 +69,7 @@ export default mixins(Colorable, Themeable).extend({
     xLarge: Boolean
   },
 
-  render (h, { props, data, parent, listeners = {}, children = [] }): VNode {
+  render (h: CreateElement, { props, data, parent, listeners = {}, children = [] }): VNode {
     const { small, medium, large, xLarge } = props
     const sizes = { small, medium, large, xLarge }
     const explicitSize = keys(sizes).find(key => sizes[key] && !!key)
