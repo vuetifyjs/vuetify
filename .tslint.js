@@ -21,8 +21,8 @@ module.exports = {
 
     /* typestrict overrides */
 
-    // Don't check params, for abstract methods
-    'no-unused-variable': [true, { 'check-parameters': false }],
+    // Handled by tsc
+    'no-unused-variable': false,
 
     // Useless with vue
     'no-invalid-this': false,
