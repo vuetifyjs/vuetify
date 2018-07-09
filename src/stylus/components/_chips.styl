@@ -5,6 +5,9 @@ v-chip($material)
   background: $material.chips.background
   color: $material.chips.color
 
+  &--disabled
+    color: $material.text.disabled
+
 theme(v-chip, "v-chip")
 
 .v-chip
@@ -47,7 +50,7 @@ theme(v-chip, "v-chip")
       height: 100%
       width: 100%
 
-  &:focus,
+  &:focus:not(.v-chip--disabled),
   &--active,
   &--selected
     border-color: rgba(#000, .13)
@@ -107,6 +110,10 @@ theme(v-chip, "v-chip")
 
       &:hover
         opacity: 1
+
+  &--disabled
+    .v-chip__close
+      pointer-events: none
 
   &--select-multi
     margin: $chip-margin $chip-margin $chip-margin 0

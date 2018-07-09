@@ -82,6 +82,9 @@ export default {
         'v-dialog__content': true,
         'v-dialog__content--active': this.isActive
       }
+    },
+    hasOverlay () {
+      return this.persistent || !this.hideOverlay
     }
   },
 
@@ -140,7 +143,8 @@ export default {
       return getZIndex(this.$refs.content) >= this.getMaxZIndex()
     },
     show () {
-      !this.fullscreen && !this.hideOverlay && this.genOverlay()
+      const overlayClass = this.hideOverlay ? 'v-overlay--transparent' : ''
+      !this.fullscreen && this.hasOverlay && this.genOverlay(overlayClass)
       this.fullscreen && this.hideScroll()
       this.$refs.content.focus()
       this.$listeners.keydown && this.bind()
