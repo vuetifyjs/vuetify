@@ -175,7 +175,9 @@ test('VTextField.js', ({ mount }) => {
       propsData: {
         value: 'foo',
         appendIcon: 'block',
-        appendIconCb
+      },
+      listeners: {
+        'click:append': appendIconCb
       }
     })
 
@@ -575,9 +577,11 @@ test('VTextField.js', ({ mount }) => {
     const clearIconCb = jest.fn()
     const wrapper = mount(VTextField, {
       propsData: {
-        clearIconCb,
         clearable: true,
         value: 'foo'
+      },
+      listeners: {
+        'click:clear': clearIconCb
       }
     })
 

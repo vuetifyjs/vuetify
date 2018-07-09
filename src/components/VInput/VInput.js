@@ -140,7 +140,7 @@ export default {
     genIcon (type, cb, shouldDeprecate = true) {
       const icon = this[`${type}Icon`]
       const eventName = `click:${kebabCase(type)}`
-      cb = cb || this[`${type}IconCb`] || this.$listeners[eventName]
+      cb = cb || this[`${type}IconCb`]
 
       if (shouldDeprecate && type && cb) {
         deprecate(`:${type}-icon-cb`, `@${eventName}`, this)
@@ -159,7 +159,11 @@ export default {
               e.stopPropagation()
 
               this.$emit(eventName, e)
-              cb && cb(e)
+              if (this.$listeners[eventName]) {
+                this.$listeners[eventName](e)
+              } else if (cb) {
+                cb(e)
+              }
             },
             // Container has mouseup event that will
             // trigger menu open if enclosed

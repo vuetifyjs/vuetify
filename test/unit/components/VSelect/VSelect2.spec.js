@@ -476,13 +476,13 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     const clearIconCb = jest.fn()
     const wrapper = mount(VSelect, {
       propsData: {
-        clearIconCb,
         clearable: true,
         items: ['foo'],
         value: 'foo'
       }
     })
 
+    wrapper.vm.$on('click:clear', clearIconCb)
     wrapper.first('.v-input__icon--clear .v-icon').trigger('click')
 
     expect(clearIconCb).toBeCalled()
