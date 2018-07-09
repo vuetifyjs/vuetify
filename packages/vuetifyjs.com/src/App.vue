@@ -47,10 +47,10 @@
       this.snackbar({
         color: 'default',
         close: true,
-        id: 'v1-docs-link',
-        text: 'v1.0 Docs',
-        msg: 'If you need v1.0 docs navigate here',
-        href: 'https://v1.vuetifyjs.com',
+        id: 'june-2018-update-19968284',
+        text: 'Go To Update',
+        msg: '**New Patreon Update** — _June 2018 Update_',
+        href: 'https://www.patreon.com/posts/june-2018-update-19968284',
         timeout: 0
       })
     },
