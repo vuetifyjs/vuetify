@@ -42,6 +42,7 @@
     "vue": "^2.5.16",
     "vue-analytics": "^5.12.2",
     "vue-i18n": "^7.8.1",
+    "vue-no-ssr": "^0.2.2",
     "vue-router": "^3.0.1",
     "vue-server-renderer": "^2.5.16",
     "vuelidate": "^0.6.2",
