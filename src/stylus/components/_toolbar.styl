@@ -88,6 +88,9 @@ theme(v-toolbar, "v-toolbar")
       @media $display-breakpoints.sm-and-down
         margin-right: '-%s' % $grid-gutters.lg
 
+    > .v-btn
+      flex-shrink: 0;
+   
   &__items
     display: flex
     height: inherit
