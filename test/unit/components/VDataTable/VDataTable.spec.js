@@ -59,6 +59,80 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
     }
   }
 
+  function noWrappedExpandSlotsData () {
+    return {
+      headers: [
+        {
+          text: 'Dessert (100g serving)',
+          align: 'left',
+          sortable: false,
+          value: 'name'
+        }
+      ],
+      items: [
+        {
+          value: false,
+          name: 'Frozen Yogurt',
+          ingredients: [
+            {
+              value: false,
+              name: `Something 1`,
+              id: `1-1`
+            }
+          ]
+        }
+      ]
+    }
+  }
+
+  function wrapperForNoWrappedExpandSlots (noWrappedExpandSlots) {
+    const vm = new Vue()
+
+    const items = (props) => {
+      return vm.$createElement('tr',
+        {
+          on: {
+            click: () => props.expanded = !props.expanded
+          },
+          attrs: { class: 'item' }
+        },
+        [ vm.$createElement('td', [props.item.name]) ]
+      )
+    }
+
+    const expand = (props) => {
+      return  props.item.ingredients.map((ingredient) => {
+            return vm.$createElement('tr',
+              {
+                attrs: { class: 'nested' }
+              },
+              [ vm.$createElement('td', [ingredient.name], { key: ingredient.id }) ]
+            )
+          }
+        )
+    }
+
+    const wrapper = mount(Vue.component('test', {
+        render (h) {
+          return h(VDataTable, {
+            props: {
+              noWrappedExpandSlots: noWrappedExpandSlots,
+              itemKey: 'name',
+              items: this.items,
+              headers: this.headers
+            },
+            scopedSlots: {
+              items,
+              expand
+            }
+          })
+        },
+        data: noWrappedExpandSlotsData
+    }))
+
+    return wrapper
+  }
+
   // TODO: This doesn't actually test anything
   it.skip('should be able to filter null and undefined values', async () => {
     const data = dataTableTestData()
@@ -320,6 +394,25 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
     wrapper.vm.value.push(wrapper.vm.items[1]);
     wrapper.vm.value.push(wrapper.vm.items[2]);
     expect(wrapper.vm.everyItem).toBe(true);
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+
+  it('should render expand slot as direct child', async () => {
+    const wrapper = wrapperForNoWrappedExpandSlots(true)
+
+    wrapper.find('tr.item')[0].element.click()
+    await wrapper.vm.$nextTick()
+    expect(wrapper.find('tr.nested')[0].element.parentElement.tagName).toBe('TBODY')
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should render expand slot as indirect child', async () => {
+    const wrapper = wrapperForNoWrappedExpandSlots(false)
+
+    wrapper.find('tr.item')[0].element.click()
+    await wrapper.vm.$nextTick()
+    expect(wrapper.find('tr.nested')[0].element.parentElement.tagName).toBe('DIV')
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 

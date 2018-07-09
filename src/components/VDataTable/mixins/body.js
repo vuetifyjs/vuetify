@@ -8,16 +8,25 @@ export default {
 
       return this.$createElement('tbody', children)
     },
+
+    genWrappedExpandedRow (props) {
+      return this.$createElement('div', {
+        class: 'v-datatable__expand-content',
+        key: props.item[this.itemKey]
+      }, this.$scopedSlots.expand(props))
+    },
+
     genExpandedRow (props) {
       const children = []
 
       if (this.isExpanded(props.item)) {
-        const expand = this.$createElement('div', {
-          class: 'v-datatable__expand-content',
-          key: props.item[this.itemKey]
-        }, this.$scopedSlots.expand(props))
+        const expand = this.noWrappedExpandSlots ? this.$scopedSlots.expand(props) : this.genWrappedExpandedRow(props)
 
         children.push(expand)
+      }
+
+      if (this.noWrappedExpandSlots) {
+        return children
       }
 
       const transition = this.$createElement('transition-group', {

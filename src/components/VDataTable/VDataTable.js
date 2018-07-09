@@ -39,6 +39,10 @@ export default {
       type: String,
       default: '$vuetify.dataTable.rowsPerPageText'
     },
+    noWrappedExpandSlots: {
+      type: Boolean,
+      default: false
+    },
     customFilter: {
       type: Function,
       default: (items, search, filter, headers) => {
