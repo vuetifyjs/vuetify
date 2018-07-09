@@ -61,7 +61,9 @@ export default {
         'class': {
           ...this.classesSelectable,
           ...this.themeClasses
-        }
+        },
+        // Avoid cache collision
+        key: target
       })
     },
     onSwipeLeft () {

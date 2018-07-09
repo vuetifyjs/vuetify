@@ -30,7 +30,7 @@ export default {
     classes () {
       const classes = this.addBackgroundColorClassChecks({
         'v-chip--disabled': this.disabled,
-        'v-chip--selected': this.selected,
+        'v-chip--selected': this.selected && !this.disabled,
         'v-chip--label': this.label,
         'v-chip--outline': this.outline,
         'v-chip--small': this.small,

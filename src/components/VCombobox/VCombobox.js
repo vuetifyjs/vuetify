@@ -134,7 +134,7 @@ export default {
 
       // The internal search is not matching
       // the initial value, update the input
-      if (this.internalSearch !== this.internalValue) this.setValue()
+      if (this.internalSearch !== this.getText(this.internalValue)) this.setValue()
 
       // Reset search if using chips
       // to avoid a double input
