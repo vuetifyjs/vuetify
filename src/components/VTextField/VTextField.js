@@ -271,8 +271,8 @@ export default {
         props: {
           dark: this.dark,
           light: this.light,
-          value: this.counterValue,
-          max
+          max,
+          value: this.counterValue
         }
       })
     },
