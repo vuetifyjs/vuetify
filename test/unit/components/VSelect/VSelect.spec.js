@@ -447,4 +447,30 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.isMenuActive).toBe(false)
   })
+
+  it('should emit a single change event', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        attach: true,
+        items: ['foo', 'bar']
+      }
+    })
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    const menu = wrapper.first('.v-input__slot')
+
+    menu.trigger('click')
+    await wrapper.vm.$nextTick()
+
+    wrapper.vm.selectItem('foo')
+    await wrapper.vm.$nextTick()
+
+    wrapper.vm.blur()
+    await wrapper.vm.$nextTick()
+
+    expect(change.mock.calls).toEqual([['foo']])
+  })
 })
