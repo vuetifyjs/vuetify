@@ -50,6 +50,9 @@ test('VAlert.vue', ({ mount }) => {
     wrapper.vm.$on('input', input)
 
     icon.trigger('click')
+
+    await wrapper.vm.$nextTick()
+
     expect(input).toBeCalledWith(false)
     expect(wrapper.html()).toMatchSnapshot()
   })

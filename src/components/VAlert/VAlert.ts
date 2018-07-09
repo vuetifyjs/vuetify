@@ -1,16 +1,21 @@
+// Styles
 import '../../stylus/components/_alerts.styl'
 
+// Components
 import VIcon from '../VIcon'
 
+// Mixins
 import Colorable from '../../mixins/colorable'
 import Toggleable from '../../mixins/toggleable'
 import Transitionable from '../../mixins/transitionable'
 
-/* @vue/component */
-export default {
-  name: 'v-alert',
+// Types
+import { VNode } from 'vue/types'
+import mixins from '../../util/mixins'
 
-  mixins: [Colorable, Toggleable, Transitionable],
+/* @vue/component */
+export default mixins(Colorable, Toggleable, Transitionable).extend({
+  name: 'v-alert',
 
   props: {
     dismissible: Boolean,
@@ -18,7 +23,7 @@ export default {
     outline: Boolean,
     type: {
       type: String,
-      validator (val) {
+      validator (val: string) {
         return [
           'info',
           'error',
@@ -30,10 +35,10 @@ export default {
   },
 
   computed: {
-    computedColor () {
+    computedColor (): string {
       return (this.type && !this.color) ? this.type : (this.color || 'error')
     },
-    computedIcon () {
+    computedIcon (): string | void {
       if (this.icon || !this.type) return this.icon
 
       switch (this.type) {
@@ -46,7 +51,7 @@ export default {
   },
 
   methods: {
-    genIcon () {
+    genIcon (): VNode | null {
       if (!this.computedIcon) return null
 
       return this.$createElement(VIcon, {
@@ -54,14 +59,12 @@ export default {
       }, this.computedIcon)
     },
 
-    genDismissible () {
+    genDismissible (): VNode | null {
       if (!this.dismissible) return null
 
       return this.$createElement('a', {
         'class': 'v-alert__dismissible',
-        on: {
-          click: () => this.$emit('input', false)
-        }
+        on: { click: () => { this.isActive = false } }
       }, [
         this.$createElement(VIcon, {
           props: {
@@ -72,12 +75,12 @@ export default {
     }
   },
 
-  render (h) {
+  render (h): VNode {
     const children = [
       this.genIcon(),
       h('div', this.$slots.default),
       this.genDismissible()
-    ]
+    ] as any
     const setColor = this.outline ? this.setTextColor : this.setBackgroundColor
     const alert = h('div', setColor(this.computedColor, {
       staticClass: 'v-alert',
@@ -87,7 +90,7 @@ export default {
       directives: [{
         name: 'show',
         value: this.isActive
-      }],
+      }] as any,
       on: this.$listeners
     }), children)
 
@@ -101,4 +104,4 @@ export default {
       }
     }, [alert])
   }
-}
+})

@@ -100,9 +100,11 @@ export default {
           'aria-label': this.label,
           name: this.radio.name || false,
           role: type,
-          type,
-          checked: this.isActive
+          type
         }),
+        domProps: {
+          checked: this.isActive
+        },
         on: {
           blur: this.onBlur,
           change: this.onChange,
