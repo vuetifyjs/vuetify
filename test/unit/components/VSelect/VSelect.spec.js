@@ -448,6 +448,34 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect(wrapper.vm.isMenuActive).toBe(false)
   })
 
+  it('should calculate the counter value', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        items: ['foo'],
+        value: 'foo'
+      }
+    })
+
+    expect(wrapper.vm.counterValue).toBe(3)
+
+    wrapper.setProps({
+      items: [{
+        text: 'foobarbaz',
+        value: 'foo'
+      }]
+    })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.counterValue).toBe(9)
+
+    wrapper.setProps({
+      items: ['foo', 'bar', 'baz'],
+      multiple: true,
+      value: ['foo', 'bar']
+    })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.counterValue).toBe(2)
+  })
+
   it('should emit a single change event', async () => {
     const wrapper = mount(VSelect, {
       attachToDocument: true,
