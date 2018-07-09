@@ -277,7 +277,7 @@ export default {
     blur () {
       this.isMenuActive = false
       this.isFocused = false
-      this.$refs.input.blur()
+      this.$refs.input && this.$refs.input.blur()
       this.selectedIndex = -1
     },
     /** @public */
