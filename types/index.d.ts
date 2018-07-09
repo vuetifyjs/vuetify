@@ -92,6 +92,9 @@ export interface VuetifyApplication {
   left: number
   right: number
   top: number
+  bind (uid: string, target: string, value: number): void
+  unbind (uid: string, target: string): void
+  update (target: string): void
 }
 
 export interface VuetifyBreakpoint {

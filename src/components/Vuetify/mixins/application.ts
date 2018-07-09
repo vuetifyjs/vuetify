@@ -1,3 +1,9 @@
+export type TargetProp = 'bar' | 'bottom' | 'footer' | 'left' | 'right' | 'top'
+
+interface TargetPropValues {
+  [uid: string]: number
+}
+
 export default {
   bar: 0,
   bottom: 0,
@@ -6,27 +12,27 @@ export default {
   right: 0,
   top: 0,
   components: {
-    bar: {},
-    bottom: {},
-    footer: {},
-    left: {},
-    right: {},
-    top: {}
+    bar: {} as TargetPropValues,
+    bottom: {} as TargetPropValues,
+    footer: {} as TargetPropValues,
+    left: {} as TargetPropValues,
+    right: {} as TargetPropValues,
+    top: {} as TargetPropValues
   },
-  bind (uid, target, value) {
+  bind (uid: string, target: TargetProp, value: number): void {
     if (!this.components[target]) return
 
     this.components[target] = { [uid]: value }
     this.update(target)
   },
-  unbind (uid, target) {
+  unbind (uid: string, target: TargetProp): void {
     if (this.components[target][uid] == null) return
 
-    delete this.components[target][uid]
+    delete (this.components as any)[target][uid]
     this.update(target)
   },
-  update (target) {
+  update (target: TargetProp): void {
     this[target] = Object.values(this.components[target])
-      .reduce((acc, cur) => (acc + cur), 0)
+      .reduce((acc: number, cur: number): number => (acc + cur), 0)
   }
 }
