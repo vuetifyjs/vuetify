@@ -11,12 +11,12 @@ import Transitionable from '../../mixins/transitionable'
 import { VNode, VNodeData } from 'vue'
 import mixins from '../../util/mixins'
 
-/* @vue/component */
 export default mixins(
   Colorable,
   Toggleable,
   PositionableFactory(['left', 'bottom']),
   Transitionable
+/* @vue/component */
 ).extend({
   name: 'v-badge',
 
