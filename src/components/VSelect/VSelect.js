@@ -153,29 +153,13 @@ export default {
         : (this.getText(this.selectedItems[0]) || '').toString().length
     },
     directives () {
-      return [{
+      return this.isFocused ? [{
         name: 'click-outside',
         value: this.blur,
         args: {
-          closeConditional: e => {
-            return (
-              // Check if click originates
-              // from within the content
-              (
-                !!this.content &&
-                !this.content.contains(e.target)
-              ) &&
-              // Check if click originates
-              // from within the element
-              (
-                !!this.$el &&
-                !this.$el.contains(e.target) &&
-                e.target !== this.$el
-              )
-            )
-          }
+          closeConditional: this.closeConditional
         }
-      }]
+      }] : undefined
     },
     dynamicHeight () {
       return 'auto'
@@ -290,6 +274,18 @@ export default {
       this.$nextTick(() => this.$refs.input.focus())
 
       if (this.openOnClear) this.isMenuActive = true
+    },
+    closeConditional (e) {
+      return (
+        // Click originates from outside the menu content
+        !!this.content &&
+        !this.content.contains(e.target) &&
+
+        // Click originates from outside the element
+        !!this.$el &&
+        !this.$el.contains(e.target) &&
+        e.target !== this.$el
+      )
     },
     filterDuplicates (arr) {
       const uniqueValues = new Map()
