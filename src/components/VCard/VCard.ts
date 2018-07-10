@@ -43,9 +43,9 @@ export default mixins(Colorable, Routable, Themeable).extend({
       })
     },
     styles (): object {
-      const style = {
+      const style: Record<string, any> = {
         height: convertToUnit(this.height)
-      } as any
+      }
 
       if (this.img) {
         style.background = `url("${this.img}") center center / cover no-repeat`
