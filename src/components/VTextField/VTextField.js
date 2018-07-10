@@ -338,6 +338,8 @@ export default {
       return this.$createElement('input', data)
     },
     genMessages () {
+      if (this.hideDetails) return null
+
       return this.$createElement('div', {
         staticClass: 'v-text-field__details'
       }, [
