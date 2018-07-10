@@ -13,7 +13,6 @@ import mixins from '../../util/mixins'
 import { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
 
-/* @vue/component */
 export default mixins(
   Applicationable('bottom', [
     'height',
@@ -21,6 +20,7 @@ export default mixins(
   ]),
   ButtonGroup,
   Colorable
+  /* @vue/component */
 ).extend({
   name: 'v-bottom-nav',
 
