@@ -8,7 +8,10 @@ import Colorable from '../../mixins/colorable'
 
 // Util
 import mixins from '../../util/mixins'
+
+// Types
 import { VNode } from 'vue'
+import { PropValidator } from 'vue/types/options'
 
 /* @vue/component */
 export default mixins(
@@ -29,7 +32,7 @@ export default mixins(
       validator: (v: string | number): boolean => !isNaN(parseInt(v))
     },
     shift: Boolean,
-    value: null
+    value: null as any as PropValidator<any>
   },
 
   computed: {
