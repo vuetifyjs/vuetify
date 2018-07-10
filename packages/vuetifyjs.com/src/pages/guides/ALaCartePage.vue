@@ -87,7 +87,7 @@
           |// src/main.js
           |require('vuetify/src/stylus/app.styl')
 
-      section#component-name-list
+      section#ui-component-name-list
         helpers-section-head(:value="`${namespace}.componentNameListHeader`")
         helpers-section-text(:value="`${namespace}.componentNameListText1`")
         v-card
@@ -123,7 +123,7 @@
                   v-model="props.selected"
                 )
               td(class="text-xs-right")
-                span(v-if="props.item.name !== 'directives'") <{{ props.item.name }}></{{ props.item.name }}>
+                code(v-if="props.item.name !== 'directives'") <{{ props.item.name }}>
               td(class="text-xs-right") {{ props.item.component }}
               td(class="text-xs-right") {{ props.item.group }}
             template(slot="footer")
