@@ -1,5 +1,5 @@
 <template>
-  <v-autocomplete
+  <v-combobox
     v-model="chips"
     :items="items"
     label="Your favorite hobbies"
@@ -19,7 +19,7 @@
         <span>(interest)</span>
       </v-chip>
     </template>
-  </v-autocomplete>
+  </v-combobox>
 </template>
 
 <script>
