@@ -1,0 +1,43 @@
+{
+  "indexHeader": "欢迎光临我们的新商店！",
+  "indexSubheader": "加速您的开发",
+  "cartHeader": "您的购物车",
+  "cartSubheader": "您几乎就要完成了！",
+  "cartEmptySubheader": "你的购物车空空如也",
+  "thankYouHeader": "谢谢！",
+  "thankYouSubheader": "您的购买有助于支持Vuetify的持续维护和开发",
+  "helpSupport": "帮助支持Vuetify正在进行的开发，并为您和您的团队获得一些纪念品！",
+  "checkout": "去结账",
+  "addToCart": "加入购物车",
+  "details": "商品详情",
+  "description": "商品描述",
+  "back": "返回",
+  "backToStore": "继续购买",
+  "thankYouBack": "出现问题？<br>请到[社区](https://community.vuetifyjs.com)反馈。",
+  "onSale": "低价出售",
+  "cartHeaders": [
+    {
+      "text": "商品",
+      "value": false,
+      "sortable": false
+    },
+    {
+      "text": "名称",
+      "value": false,
+      "sortable": false
+    },
+    {
+      "text": "价格",
+      "align": "right",
+      "value": false,
+      "sortable": false
+    },
+    {
+      "text": "数量",
+      "align": "right",
+      "value": false,
+      "sortable": false,
+      "width": "50px"
+    }
+  ]
+}
