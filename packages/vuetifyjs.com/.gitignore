@@ -8,3 +8,4 @@ npm-debug.log
 .vscode
 yarn-error.log
 *.swp
+.node-version

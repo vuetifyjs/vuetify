@@ -1,0 +1,20 @@
+{
+    "header": "Data iterator",
+    "headerText": "El componente `v-data-iterator` se utiliza para mostrar datos, y comparte la mayor parte de su funcionalidad con el componente `v-data-table`. Algunas características incluyen ordenamiento, búsqueda, paginación y selección.",
+    "components": [
+        "v-data-iterator"
+    ],
+    "examples": [
+        {
+            "simple": {
+                "header": "Simple",
+                "desc": "`v-data-iterator` te permite personalizar exactamente cómo quieres mostrar tus datos. En este ejemplo estamos usando un grid list con cards. Podemos usar la prop `content-tag` (junto con `content-class` y `content-props`) para especificar cómo se debería ver el componente que envuelve a los elementos de la lista."
+            }
+        }
+    ],
+    "props": {
+        "contentClass": "Aplica una clase personalizada al elemento que envuelve a loss elementos de la lista",
+        "contentProps": "Aplica props personalizadas al elemento que envuelve a los elementos de la lista",
+        "contentTag": "Especifica qué etiqueta debe ser utilizada por el elemento que envuelve a los elementos de la lista"
+    }
+}

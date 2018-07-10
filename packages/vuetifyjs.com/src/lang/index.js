@@ -1,15 +1,17 @@
 import en from './en'
+import esMX from './es-MX'
+import ja from './ja'
+import ko from './ko'
 import ptBR from './pt-BR'
 import ru from './ru'
-import ko from './ko'
 import zhHans from './zhHans'
-import ja from './ja'
 
 export {
   en,
+  esMX,
+  ja,
+  ko,
   ptBR,
   ru,
-  ko,
-  zhHans,
-  ja
+  zhHans
 }
