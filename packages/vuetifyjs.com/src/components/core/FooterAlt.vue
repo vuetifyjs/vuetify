@@ -6,8 +6,13 @@
       height="90"
       :key="$route.path"
     ).app-footer.justify-center
-      v-layout(justify-space-between).ma-0
-        v-flex(v-if="prev")
+      v-layout
+        v-flex(
+          v-if="prev"
+          xs4
+          sm5
+          md6
+        )
           router-link(:to="genPath(prev)").d-inline-flex.align-center
             v-btn(
               color="primary"
@@ -18,9 +23,10 @@
               v-icon chevron_left
             span(v-text="prev.title").subheading.no-wrap.hidden-xs-only
         v-flex(
-          :mr-5="$vuetify.breakpoint.xsOnly"
-          :pr-4="$vuetify.breakpoint.xsOnly"
           v-if="next"
+          xs4
+          sm5
+          md6
         ).text-xs-right
           router-link(:to="genPath(next)").d-inline-flex.align-center
             span(v-text="next.title").subheading.no-wrap.hidden-xs-only
