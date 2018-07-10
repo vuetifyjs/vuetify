@@ -299,6 +299,7 @@
     "components": ["v-container", "v-layout", "v-flex", "v-spacer"],
     "examples": [
       "grid",
+      "playground",
       "offset",
       "order",
       "directionAndAlign",
