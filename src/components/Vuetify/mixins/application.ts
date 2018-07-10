@@ -1,7 +1,7 @@
 export type TargetProp = 'bar' | 'bottom' | 'footer' | 'left' | 'right' | 'top'
 
 interface TargetPropValues {
-  [uid: string]: number
+  [uid: number]: number
 }
 
 export default {
