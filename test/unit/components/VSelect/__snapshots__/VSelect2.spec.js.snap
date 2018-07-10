@@ -8,7 +8,7 @@ exports[`VSelect should add color to selected index 1`] = `
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-menu"
-           style="display: inline-block;"
+           style="display: block;"
       >
         <div class="v-menu__activator">
           <div class="v-select__slot">
@@ -55,7 +55,7 @@ exports[`VSelect should be clearable with prop, dirty and multi select 1`] = `
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-menu"
-           style="display: inline-block;"
+           style="display: block;"
       >
         <div class="v-menu__activator">
           <div class="v-select__slot">
@@ -111,7 +111,7 @@ exports[`VSelect should be clearable with prop, dirty and single select 1`] = `
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-menu"
-           style="display: inline-block;"
+           style="display: block;"
       >
         <div class="v-menu__activator">
           <div class="v-select__slot">

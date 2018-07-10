@@ -6,7 +6,7 @@ exports[`VOverflowBtn should use default autocomplete selections 1`] = `
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-menu"
-           style="display: inline-block;"
+           style="display: block;"
       >
         <div class="v-menu__activator">
           <div class="v-select__slot">
@@ -50,7 +50,7 @@ exports[`VOverflowBtn should use default autocomplete selections 2`] = `
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-menu"
-           style="display: inline-block;"
+           style="display: block;"
       >
         <div class="v-menu__activator">
           <div class="v-select__slot">

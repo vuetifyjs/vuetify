@@ -190,7 +190,7 @@ export default {
     const data = {
       staticClass: 'v-menu',
       style: {
-        display: this.fullWidth ? 'block' : 'inline-block'
+        display: 'block'
       },
       directives: [{
         arg: 500,
