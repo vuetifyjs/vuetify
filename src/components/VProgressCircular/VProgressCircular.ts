@@ -1,7 +1,10 @@
 import '../../stylus/components/_progress-circular.styl'
 
+// Mixins
 import Colorable from '../../mixins/colorable'
 import mixins from '../../util/mixins'
+
+// Types
 import { CreateElement, VNode, VNodeChildrenArrayContents } from 'vue'
 
 /* @vue/component */
@@ -128,7 +131,7 @@ export default mixins(Colorable).extend({
     }
   },
 
-  render (h): VNode {
+  render (h: CreateElement): VNode {
     const info = h('div', { class: 'v-progress-circular__info' }, [this.$slots.default])
     const svg = this.genSvg(h)
 

@@ -269,8 +269,10 @@ export default {
 
       return this.$createElement(VCounter, {
         props: {
-          value: this.counterValue,
-          max
+          dark: this.dark,
+          light: this.light,
+          max,
+          value: this.counterValue
         }
       })
     },
@@ -288,9 +290,11 @@ export default {
         props: {
           absolute: true,
           color: this.validationState,
+          dark: this.dark,
           disabled: this.disabled,
           focused: !this.isSingle && (this.isFocused || !!this.validationState),
           left: this.labelPosition.left,
+          light: this.light,
           right: this.labelPosition.right,
           value: this.labelValue
         }

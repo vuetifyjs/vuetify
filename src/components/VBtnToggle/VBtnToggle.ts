@@ -1,12 +1,15 @@
 import '../../stylus/components/_button-toggle.styl'
 
-import { VNode } from 'vue'
+// Types
+import { CreateElement, VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
 
+// Mixins
 import mixins from '../../util/mixins'
-
 import ButtonGroup from '../../mixins/button-group'
 import Themeable from '../../mixins/themeable'
+
+// Util
 import { consoleWarn } from '../../util/console'
 
 /* @vue/component */
@@ -103,7 +106,7 @@ const VBtnToggle = mixins(ButtonGroup, Themeable).extend({
     }
   },
 
-  render (h): VNode {
+  render (h: CreateElement): VNode {
     return h('div', { class: this.classes }, this.$slots.default)
   }
 })

@@ -1,7 +1,8 @@
 // Styles
 import '../../stylus/components/_buttons.styl'
 
-import { VNode, VNodeChildren } from 'vue'
+// Types
+import { CreateElement, VNode, VNodeChildren } from 'vue'
 import { PropValidator } from 'vue/types/options'
 import mixins from '../../util/mixins'
 
@@ -136,7 +137,7 @@ const VBtn = mixins(
     }
   },
 
-  render (h): VNode {
+  render (h: CreateElement): VNode {
     const { tag, data } = this.generateRouteLink()
     const children = [this.genContent()]
 

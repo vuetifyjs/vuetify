@@ -7,6 +7,7 @@ import Colorable from '../../mixins/colorable'
 import { convertToUnit } from '../../util/helpers'
 import mixins from '../../util/mixins'
 
+// Types
 import { CreateElement, VNode } from 'vue'
 
 import {
@@ -118,7 +119,7 @@ export default mixins(Colorable).extend({
     }
   },
 
-  render (h): VNode {
+  render (h: CreateElement): VNode {
     const fade = h(VFadeTransition, this.indeterminate ? [this.genIndeterminate(h)] : [])
     const slide = h(VSlideXTransition, this.indeterminate ? [] : [this.genDeterminate(h)])
 
