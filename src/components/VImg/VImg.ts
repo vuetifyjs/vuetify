@@ -152,13 +152,11 @@ export default Vue.extend({
       style: this.aspectStyle
     }, [
       h('transition', {
-        attrs: {
-          name: this.transition,
-          mode: 'in-out'
-        }
-      }, [
-        this.isLoading && placeholder ? placeholder : image
-      ])
+        attrs: { name: this.transition }
+      }, [image]),
+      this.isLoading ? h('transition', {
+        attrs: { name: this.transition }
+      }, [placeholder]) : []
     ])
   }
 })
