@@ -56,8 +56,9 @@
       <v-text-field
         solo-inverted
         flat
+        hide-details
         label="Search"
-        prepend-icon="search"
+        prepend-inner-icon="search"
       ></v-text-field>
       <v-spacer></v-spacer>
     </v-toolbar>
