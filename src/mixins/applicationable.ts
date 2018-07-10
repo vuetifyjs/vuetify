@@ -4,7 +4,7 @@ import { TargetProp } from 'src/components/Vuetify/mixins/application'
 // Util
 import mixins from '../util/mixins'
 
-export default function applicationable (value: TargetProp, events = []) {
+export default function applicationable (value: TargetProp, events: string[] = []) {
   /* @vue/component */
   return mixins(PositionableFactory(['absolute', 'fixed'])).extend({
     name: 'applicationable',
