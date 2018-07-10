@@ -1,4 +1,4 @@
-import { CreateElement, VNode, VNodeDirective, FunctionalComponentOptions } from 'vue'
+import { VNode, VNodeDirective, FunctionalComponentOptions } from 'vue'
 
 export function createSimpleFunctional (
   c: string,
@@ -15,7 +15,7 @@ export function createSimpleFunctional (
     name,
     functional: true,
 
-    render (h: CreateElement, { data, children }): VNode {
+    render (h, { data, children }): VNode {
       data.staticClass = (`${c} ${data.staticClass || ''}`).trim()
 
       return h(el, data, children)
@@ -40,7 +40,7 @@ export function createSimpleTransition (
       }
     },
 
-    render (h: CreateElement, context): VNode {
+    render (h, context): VNode {
       context.data = context.data || {}
       context.data.props = { name }
       context.data.on = context.data.on || {}
@@ -82,7 +82,7 @@ export function createJavaScriptTransition (
       }
     },
 
-    render (h: CreateElement, context): VNode {
+    render (h, context): VNode {
       const data = {
         props: {
           ...context.props,

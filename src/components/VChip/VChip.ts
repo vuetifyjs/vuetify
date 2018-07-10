@@ -78,7 +78,7 @@ export default mixins(Colorable, Themeable, Toggleable).extend({
     }
   },
 
-  render (h: CreateElement): VNode {
+  render (h): VNode {
     const data = {
       staticClass: 'v-chip',
       'class': this.classes,
