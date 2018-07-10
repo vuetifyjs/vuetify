@@ -54,7 +54,7 @@ export interface VuetifyObject extends Vue {
 declare module 'vue/types/vue' {
   export interface Vue {
     $vuetify: VuetifyObject
-    _uid: string
+    _uid: number
   }
 }
 
@@ -92,8 +92,8 @@ export interface VuetifyApplication {
   left: number
   right: number
   top: number
-  bind (uid: string, target: string, value: number): void
-  unbind (uid: string, target: string): void
+  bind (uid: number, target: string, value: number): void
+  unbind (uid: number, target: string): void
   update (target: string): void
 }
 

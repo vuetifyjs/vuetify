@@ -19,13 +19,13 @@ export default {
     right: {} as TargetPropValues,
     top: {} as TargetPropValues
   },
-  bind (uid: string, target: TargetProp, value: number): void {
+  bind (uid: number, target: TargetProp, value: number): void {
     if (!this.components[target]) return
 
     this.components[target] = { [uid]: value }
     this.update(target)
   },
-  unbind (uid: string, target: TargetProp): void {
+  unbind (uid: number, target: TargetProp): void {
     if (this.components[target][uid] == null) return
 
     delete (this.components as any)[target][uid]
