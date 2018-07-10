@@ -7,12 +7,14 @@ import Themeable from '../../mixins/themeable'
 
 // Helpers
 import { convertToUnit } from '../../util/helpers'
+import mixins from '../../util/mixins'
+
+// Types
+import { VNode } from 'vue'
 
 /* @vue/component */
-export default {
+export default mixins(Colorable, Routable, Themeable).extend({
   name: 'v-card',
-
-  mixins: [Colorable, Routable, Themeable],
 
   props: {
     flat: Boolean,
@@ -29,11 +31,10 @@ export default {
   },
 
   computed: {
-    classes () {
+    classes (): object {
       return this.addBackgroundColorClassChecks({
         'v-card': true,
         'v-card--flat': this.flat,
-        'v-card--horizontal': this.horizontal,
         'v-card--hover': this.hover,
         'v-card--raised': this.raised,
         'v-card--tile': this.tile,
@@ -41,10 +42,10 @@ export default {
         'theme--dark': this.dark
       })
     },
-    styles () {
+    styles (): object {
       const style = {
         height: convertToUnit(this.height)
-      }
+      } as any
 
       if (this.img) {
         style.background = `url("${this.img}") center center / cover no-repeat`
@@ -58,11 +59,11 @@ export default {
     }
   },
 
-  render (h) {
+  render (h): VNode {
     const { tag, data } = this.generateRouteLink()
 
     data.style = this.styles
 
     return h(tag, data, this.$slots.default)
   }
-}
+})
