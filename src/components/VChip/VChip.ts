@@ -1,9 +1,13 @@
 import '../../stylus/components/_chips.styl'
 
+// Types
 import { CreateElement, VNode, VNodeChildren } from 'vue'
 import mixins from '../../util/mixins'
 
+// Components
 import VIcon from '../VIcon'
+
+// Mixins
 import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
 import Toggleable from '../../mixins/toggleable'
@@ -74,7 +78,7 @@ export default mixins(Colorable, Themeable, Toggleable).extend({
     }
   },
 
-  render (h) {
+  render (h: CreateElement): VNode {
     const data = {
       staticClass: 'v-chip',
       'class': this.classes,

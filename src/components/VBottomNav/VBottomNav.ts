@@ -6,32 +6,37 @@ import Applicationable from '../../mixins/applicationable'
 import ButtonGroup from '../../mixins/button-group'
 import Colorable from '../../mixins/colorable'
 
-/* @vue/component */
-export default {
-  name: 'v-bottom-nav',
+// Util
+import mixins from '../../util/mixins'
 
-  mixins: [
-    Applicationable('bottom', [
-      'height',
-      'value'
-    ]),
-    ButtonGroup,
-    Colorable
-  ],
+// Types
+import { VNode } from 'vue'
+import { PropValidator } from 'vue/types/options'
+
+export default mixins(
+  Applicationable('bottom', [
+    'height',
+    'value'
+  ]),
+  ButtonGroup,
+  Colorable
+  /* @vue/component */
+).extend({
+  name: 'v-bottom-nav',
 
   props: {
     active: [Number, String],
     height: {
       default: 56,
       type: [Number, String],
-      validator: v => !isNaN(parseInt(v))
+      validator: (v: string | number): boolean => !isNaN(parseInt(v))
     },
     shift: Boolean,
-    value: null
+    value: null as any as PropValidator<any>
   },
 
   computed: {
-    classes () {
+    classes (): object {
       return {
         'v-bottom-nav--absolute': this.absolute,
         'v-bottom-nav--fixed': !this.absolute && (this.app || this.fixed),
@@ -39,7 +44,7 @@ export default {
         'v-bottom-nav--active': this.value
       }
     },
-    computedHeight () {
+    computedHeight (): number {
       return parseInt(this.height)
     }
   },
@@ -51,28 +56,23 @@ export default {
   },
 
   methods: {
-    isSelected (i) {
+    isSelected (i: number): boolean {
       const item = this.getValue(i)
       return this.active === item
     },
-    /**
-     * Update the application layout
-     *
-     * @return {number}
-     */
-    updateApplication () {
+    updateApplication (): number {
       return !this.value
         ? 0
         : this.computedHeight
     },
-    updateValue (i) {
+    updateValue (i: number) {
       const item = this.getValue(i)
 
       this.$emit('update:active', item)
     }
   },
 
-  render (h) {
+  render (h): VNode {
     return h('div', {
       staticClass: 'v-bottom-nav',
       class: this.addBackgroundColorClassChecks(this.classes),
@@ -82,4 +82,4 @@ export default {
       ref: 'content'
     }, this.$slots.default)
   }
-}
+})

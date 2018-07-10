@@ -203,4 +203,19 @@ test('VInput.js', ({ mount }) => {
 
     expect(wrapper2.html()).toMatchSnapshot()
   })
+
+  it('should apply theme to label, counter, messages and icons', () => {
+    const wrapper = mount(VInput, {
+      propsData: {
+        label: 'foo',
+        hint: 'bar',
+        persistentHint: true,
+        light: true,
+        prependIcon: 'prepend',
+        appendIcon: 'append'
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

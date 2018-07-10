@@ -8,7 +8,7 @@ import { factory as PositionableFactory } from '../../mixins/positionable'
 import Transitionable from '../../mixins/transitionable'
 
 // Types
-import { VNode } from 'vue'
+import { CreateElement, VNode } from 'vue'
 import mixins from '../../util/mixins'
 
 export default mixins(
@@ -45,7 +45,7 @@ export default mixins(
     }
   },
 
-  render (h): VNode {
+  render (h: CreateElement): VNode {
     const badge = this.$slots.badge ? [h('span', {
       staticClass: 'v-badge__badge',
       'class': this.addBackgroundColorClassChecks(),

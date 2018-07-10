@@ -143,8 +143,6 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
                 </div>
               </div>
             </div>
-            <div class="v-text-field__details">
-            </div>
           </div>
         </div>
       </div>
@@ -327,8 +325,6 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="v-text-field__details">
             </div>
           </div>
         </div>
@@ -514,8 +510,6 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="v-text-field__details">
             </div>
           </div>
         </div>
