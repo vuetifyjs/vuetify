@@ -17,6 +17,7 @@
         chips
         label="To"
         full-width
+        hide-details
         hide-no-data
         hide-selected
         multiple
