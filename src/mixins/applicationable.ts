@@ -1,18 +1,20 @@
 import { factory as PositionableFactory } from './positionable'
+import { TargetProp } from 'src/components/Vuetify/mixins/application'
 
-export default function applicationable (value, events = []) {
+// Util
+import mixins from '../util/mixins'
+
+export default function applicationable (value: TargetProp, events = []) {
   /* @vue/component */
-  return {
+  return mixins(PositionableFactory(['absolute', 'fixed'])).extend({
     name: 'applicationable',
-
-    mixins: [PositionableFactory(['absolute', 'fixed'])],
 
     props: {
       app: Boolean
     },
 
     computed: {
-      applicationProperty () {
+      applicationProperty (): TargetProp {
         return value
       }
     },
@@ -20,7 +22,7 @@ export default function applicationable (value, events = []) {
     watch: {
       // If previous value was app
       // reset the provided prop
-      app (x, prev) {
+      app (x: boolean, prev: boolean) {
         prev
           ? this.removeApplication(true)
           : this.callUpdate()
@@ -60,7 +62,7 @@ export default function applicationable (value, events = []) {
           this.updateApplication()
         )
       },
-      removeApplication (force) {
+      removeApplication (force = false) {
         if (!force && !this.app) return
 
         this.$vuetify.application.unbind(
@@ -68,7 +70,7 @@ export default function applicationable (value, events = []) {
           this.applicationProperty
         )
       },
-      updateApplication: () => {}
+      updateApplication: () => 0
     }
-  }
+  })
 }
