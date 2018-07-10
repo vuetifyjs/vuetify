@@ -1,0 +1,40 @@
+{
+    "header": "Pagination",
+    "headerText": "El componente `v-pagination` es utilizado para separar grandes conjuntos de datos de maner que sea más fácil para el usuario consumir la información. Dependiendo de la longitud que sea proveída, el componente de paginación escalará automáticamente. Para mantener la página actual, simplemente agrega un atributo `v-model`.",
+    "components": [
+        "v-pagination"
+    ],
+    "examples": [
+        {
+            "short": {
+                "header": "Corto",
+                "desc": "La paginación muestra todas las páginas si el contenedor padre es lo suficientemente grande.."
+            },
+            "long": {
+                "header": "Largo",
+                "desc": "Cuando el número de botones de páginas excede el contenedor padre, el componente truncará la lista."
+            },
+            "limit": {
+                "header": "Límite",
+                "desc": "También puedes configurar manualmente el número máximo de botones de páginas visibles con la prop `total-visible`."
+            },
+            "round": {
+                "header": "Redondo",
+                "desc": "El estilo alterno para paginación es circular."
+            },
+            "disabled": {
+                "header": "Deshabilitado",
+                "desc": "Los elementos de paginación pueden ser desactivados manualmente."
+            }
+        }
+    ],
+    "props": {
+        "circle": "Los elementos de paginación son de forma circular",
+        "disabled": "Deshabilita el componente",
+        "length": "La longitud del paginador",
+        "nextIcon": "Especifica el ícono para _siguiente_",
+        "prevIcon": "Especifica el ícono para _anterior_",
+        "totalVisible": "Especifica el máximo total visible de números de paginación",
+        "value": "La página seleccionada actual"
+    }
+}

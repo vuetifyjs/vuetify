@@ -5,6 +5,11 @@
     "country": "us"
   },
   {
+    "name": "Español",
+    "locale": "es-MX",
+    "country": "mx"
+  },
+  {
     "name": "Português",
     "locale": "pt-BR",
     "country": "br"

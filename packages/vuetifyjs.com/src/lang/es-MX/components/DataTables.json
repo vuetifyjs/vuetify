@@ -1,0 +1,96 @@
+{
+    "header": "Data table",
+    "headerText": "El componente `v-data-table` se utilizar para mostrar datos tabulares. Sus características incluyen ordenamiento, búsqueda, paginación, edición _inline_, tooltips en los encabezados y selección de filas..",
+    "components": [
+        "v-data-table",
+        "v-edit-dialog"
+    ],
+    "examples": [
+        {
+            "standard": {
+                "header": "Standard",
+                "desc": "El data-table estándar contiene datos sin ninguna funcionalidad adicional. Puedes elegir no mostrar las acciones que te permiten controlar la paginación de la información en la tabla usando la prop `hide-actions`."
+            },
+            "noData": {
+                "header": "Slot: no-data",
+                "desc": "El slot `no-data` puede mostrar HTML personalizado cuando no hay datos."
+            },
+            "headers": {
+                "header": "Slot: items y headers",
+                "desc": "Los slots `items` y `headers` pueden aceptar ya sea una colección de etiquetas <kbd>td/th</kbd>, o si quieres controlar toda la fila, una etiqueta <kbd>tr</kbd>."
+            },
+            "headerCell": {
+                "header": "Slot: headerCell",
+                "desc": "Si sólo quieres aplicar cierto markup común o algún efecto en cada una de las celdas del encabezado, puedes usar el slot `headerCell`. En este ejemplo se usa para aplicar un tooltip a cada encabezado."
+            },
+            "progress": {
+                "header": "Slot: progress",
+                "desc": "También hay un slot `progress` para cuando quieres personalizar la presentación de los datos en el estado `loading` (cargando) de la tabla. Por default es un estado `indeterminate` de un `v-progress-linear`"
+            },
+            "footer": {
+                "header": "Slot: footer",
+                "desc": "Hay también un slot `footer` para cuando quieres agregar cierta funcionalidad extra a las tablas. Por ejemplo un filtrado por columna o una búsqueda."
+            },
+            "expand": {
+                "header": "Slot: expand",
+                "desc": "El componente `v-data-table` también soporta filas expandibles utilizando el slot `expand`. Puedes usar la prop `expand` para prevenir que las filas expandidas se cierren al hacer click en una fila distinta."
+            },
+            "pageText": {
+                "header": "Slot: page-text",
+                "desc": "Puedes personalizar el texto que se muestra en la página para el total de elementos utilizando el slot `page-text`."
+            },
+            "select": {
+                "header": "Filas seleccionables",
+                "desc": "Las filas seleccionables te permiten llevar a cabo acciones en todas las filas o en filas en particular."
+            },
+            "search": {
+                "header": "Búsqueda con un slot personalizado no-results",
+                "desc": "La tabla expone una prop `search` que te permite filtar tus datos.."
+            },
+            "paginate": {
+                "header": "Paginación externa",
+                "desc": "La paginación puede ser controlada externamente al utilizar la prop `pagination`. Recuerda que debes aplicar el modificador `.sync`."
+            },
+            "sort": {
+                "header": "Ordenamiento externo.",
+                "desc": "El ordenamiento también puede ser controlado externamente al utilizar la prop `pagination`. Recuerda que debes aplicar el modificador `.sync`. Puedes también utilizar esa prop para configurar la columna ordenada por default."
+            },
+            "server": {
+                "header": "Paginación y ordenamiento del lado del servidor",
+                "desc": "Si estás cargando datos desde un backend y quieres paginar y ordenar los resultados antes de mostrarlos, puedes utilizar la prop `total-items`. Al definir esta prop estarás deshabilitando el ordenamiento y paginación que vienen con el componente y en su lugar necesitarás utilizar la prop `pagination` para que escuche los cambios. Utilizar la prop `loading` para mosrtar una barra de progreso mientras obtienes los datos."
+            },
+            "headerless": {
+                "header": "Tablas sin encabezados",
+                "desc": "Agregando la prop `hide-headers` creas una tabla sin encabezados."
+            },
+            "editdialog": {
+                "header": "Edición Inline",
+                "desc": "El componente `v-edit-dialog` se utiliza para la edición _inline_ dentro de los data tables."
+            },
+            "crud": {
+                "header": "CRUD Actions",
+                "desc": "Un data-table con acciones de Crear, Leer, Actualizar y Borrar (CRUD en inglés) que utiliza un componente `v-dialog` para editar cada fila"
+            }
+        }
+    ],
+    "props": {
+        "v-edit-dialog": {
+            "cancelText": "Configura el texto default para el botón de cancelar cuando se utiliza la prop **large**",
+            "lazy": "Mixins.Bootable.props.lazy",
+            "large": "Agrega botones de _submit_ y _cancel_ al diálogo.",
+            "saveText": "Configura el texto default para el botón de guardar cuando se usa la prop **large**",
+            "transition": "Mixins.Transitionable.props.transition"
+        },
+        "v-data-table": {
+            "headerText": "Si se utiliza un objeto, el valor del texto para el encabezado",
+            "headers": "Un arreglo de objetos en el que cada uno describe el encabezado de una columna. Ve el ejemplo de abajo para una definición de todas las propiedades.",
+            "hideHeaders": "Esconder los encabezados de la tabla"
+        }
+    },
+    "scopedSlots": {
+        "v-data-table": {
+            "headerCell": "Slot para personalizar las celdas de encabezado",
+            "headers": "Slot para personalizar el encabezado completo"
+        }
+    }
+}
