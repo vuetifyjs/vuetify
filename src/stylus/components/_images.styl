@@ -5,7 +5,28 @@
   transition: padding-bottom .2s ease-in-out
   overflow: hidden
 
-  &__image
+  &__image,
+  &__placeholder
     position: absolute
+    top: 0
     left: 0
+
+  &__image
+    &--preload
+      filter: blur(5px)
+
+    .v-image--contain &
+      width: 100%
+      height: auto
+      top: 50%
+      transform: translateY(-50%)
+
+    .v-image--cover &
+      width: auto
+      height: 100%
+      left: 50%
+      transform: translateX(-50%)
+
+  &__placeholder
     width: 100%
+    height: 100%

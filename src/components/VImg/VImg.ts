@@ -1,8 +1,8 @@
 import '../../stylus/components/_images.styl'
 
 import Vue, { VNode } from 'vue'
-import { VFadeTransition } from '../transitions'
 import { PropValidator } from 'vue/types/options'
+
 import { consoleError } from '../../util/console'
 
 // not intended for public use, this is passed in by vuetify-loader
@@ -19,12 +19,17 @@ export default Vue.extend({
 
   props: {
     aspectRatio: [String, Number],
+    contain: Boolean,
     src: {
       type: [String, Object],
       required: true
     } as PropValidator<string | srcObject>,
-    lazySrc: String
+    lazySrc: String,
     // lazy: [Boolean, String] // TODO: only load when visible
+    transition: {
+      type: String,
+      default: 'fade-transition'
+    }
   },
 
   data () {
@@ -36,7 +41,7 @@ export default Vue.extend({
 
   computed: {
     currentSrc (): string {
-      return (this.computedLazySrc && this.isLoading)
+      return this.isLoading
         ? this.computedLazySrc
         : this.computedSrc
     },
@@ -65,7 +70,7 @@ export default Vue.extend({
   },
 
   created () {
-    this.isLoading = !!this.computedLazySrc
+    this.isLoading = true
   },
 
   beforeMount () {
@@ -78,8 +83,8 @@ export default Vue.extend({
         const lazyImg = new Image()
         lazyImg.src = this.computedLazySrc
         this.pollForSize(lazyImg, null)
-        this.loadImage()
       }
+      this.loadImage()
     },
     onLoad () {
       this.isLoading = false
@@ -122,21 +127,37 @@ export default Vue.extend({
   },
 
   render (h): VNode {
+    const image = h('img', {
+      staticClass: 'v-image__image',
+      class: {
+        'v-image__image--preload': this.isLoading
+      },
+      attrs: {
+        src: this.currentSrc,
+        ...this.$attrs
+      },
+      key: this.currentSrc
+    })
+
+    const placeholder = this.$slots.placeholder && h('div', {
+      staticClass: 'v-image__placeholder'
+    }, this.$slots.placeholder)
+
     return h('div', {
       staticClass: 'v-image',
+      class: {
+        'v-image--contain': this.contain,
+        'v-image--cover': !this.contain
+      },
       style: this.aspectStyle
     }, [
-      h(VFadeTransition, {
-        attrs: { mode: 'in-out' }
+      h('transition', {
+        attrs: {
+          name: this.transition,
+          mode: 'in-out'
+        }
       }, [
-        h('img', {
-          class: 'v-image__image',
-          attrs: {
-            src: this.currentSrc,
-            ...this.$attrs
-          },
-          key: this.currentSrc
-        })
+        this.isLoading && placeholder ? placeholder : image
       ])
     ])
   }
