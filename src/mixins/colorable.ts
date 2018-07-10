@@ -9,12 +9,12 @@ export default Vue.extend({
 
   data () {
     return {
-      defaultColor: null
+      defaultColor: undefined
     }
   },
 
   computed: {
-    computedColor (): string | null {
+    computedColor (): string | undefined {
       return this.color || this.defaultColor
     }
   },

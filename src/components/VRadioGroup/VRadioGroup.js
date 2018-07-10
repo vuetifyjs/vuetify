@@ -107,7 +107,6 @@ export default {
     },
     register (radio) {
       radio.isActive = this.valueComparator(this.internalValue, radio.value)
-      radio.$refs.input.tabIndex = radio.$refs.input.tabIndex > 0 ? radio.$refs.input.tabIndex : 0
       radio.$on('change', this.onRadioChange)
       radio.$on('blur', this.onRadioBlur)
       this.radios.push(radio)

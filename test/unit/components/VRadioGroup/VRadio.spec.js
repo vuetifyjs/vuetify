@@ -245,7 +245,6 @@ test('VRadio.vue', ({ mount }) => {
     expect(change).toBeCalled()
   })
 
-
   it('should use custom icons', () => {
     const wrapper = mount(VRadio, {
       propsData: {
