@@ -275,4 +275,15 @@ test('VRadio.vue', ({ mount }) => {
     expect(wrapper.vm.$refs.input.checked).toBe(false)
     expect(warning).toHaveBeenTipped()
   })
+
+  it('should render themed component', () => {
+    const wrapper = mount(VRadio, {
+      propsData: {
+        light: true
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect(warning).toHaveBeenTipped()
+  })
 })
