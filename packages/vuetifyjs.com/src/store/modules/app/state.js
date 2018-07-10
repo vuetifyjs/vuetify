@@ -280,12 +280,8 @@ export default () => ({
           href: 'required-styles'
         },
         {
-          text: 'Guides.ALaCarte.applicationHeader',
-          href: 'application'
-        },
-        {
           text: 'Guides.ALaCarte.componentNameListHeader',
-          href: 'component-name-list'
+          href: 'ui-component-name-list'
         }
       ],
       ServerSideRendering: [
