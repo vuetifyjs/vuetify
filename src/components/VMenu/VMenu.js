@@ -189,6 +189,7 @@ export default {
   render (h) {
     const data = {
       staticClass: 'v-menu',
+      class: { 'v-menu--block': this.fullWidth && this.$slots.activator },
       directives: [{
         arg: 500,
         name: 'resize',
@@ -197,10 +198,6 @@ export default {
       on: {
         keydown: this.changeListIndex
       }
-    }
-
-    if (this.$slots.activator) {
-      data.style = { display: this.fullWidth ? 'block' : 'inline-block' }
     }
 
     return h('div', data, [

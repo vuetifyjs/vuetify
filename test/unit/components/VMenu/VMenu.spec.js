@@ -8,7 +8,8 @@ test('VMenu.js', ({ mount }) => {
   it('should work', async () => {
     const wrapper = mount(VMenu, {
       propsData: {
-        value: false
+        value: false,
+        fullWidth: true
       },
       slots: {
         activator: [VBtn],
