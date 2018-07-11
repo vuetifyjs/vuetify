@@ -2,7 +2,7 @@ import VBottomNav from './VBottomNav'
 
 /* istanbul ignore next */
 VBottomNav.install = function install (Vue) {
-  Vue.component(VBottomNav.name, VBottomNav)
+  Vue.component(VBottomNav.options.name, VBottomNav)
 }
 
 export { VBottomNav }

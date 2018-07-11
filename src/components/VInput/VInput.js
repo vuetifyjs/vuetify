@@ -149,7 +149,9 @@ export default {
       const data = {
         props: {
           color: this.validationState,
-          disabled: this.disabled
+          dark: this.dark,
+          disabled: this.disabled,
+          light: this.light
         },
         on: !(this.$listeners[eventName] || cb)
           ? null
@@ -204,8 +206,10 @@ export default {
       return this.$createElement(VLabel, {
         props: {
           color: this.validationState,
+          dark: this.dark,
           focused: this.hasState,
-          for: this.$attrs.id
+          for: this.$attrs.id,
+          light: this.light
         }
       }, this.$slots.label || this.label)
     },
@@ -219,6 +223,8 @@ export default {
       return this.$createElement(VMessages, {
         props: {
           color: this.hasHint ? '' : this.validationState,
+          dark: this.dark,
+          light: this.light,
           value: (this.hasMessages || this.hasHint) ? messages : []
         }
       })

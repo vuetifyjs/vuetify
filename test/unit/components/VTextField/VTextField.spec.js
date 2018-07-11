@@ -777,4 +777,22 @@ test('VTextField.js', ({ mount }) => {
       expect(wrapper.vm.$el.classList).not.toContain('v-input--is-label-active')
     }
   })
+
+  it('should apply theme to label, counter, messages and icons', () => {
+    const wrapper = mount(VTextField, {
+      propsData: {
+        counter: true,
+        label: 'foo',
+        hint: 'bar',
+        persistentHint: true,
+        light: true,
+        prependIcon: 'prepend',
+        appendIcon: 'append',
+        prependInnerIcon: 'prepend-inner',
+        appendOuterIcon: 'append-outer'
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })
