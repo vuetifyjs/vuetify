@@ -19,6 +19,7 @@ export default Vue.extend({
   inheritAttrs: false,
 
   props: {
+    alt: String,
     aspectRatio: [String, Number],
     contain: Boolean,
     src: {
@@ -28,7 +29,10 @@ export default Vue.extend({
     lazySrc: String,
     srcset: String,
     sizes: String,
-    // lazy: [Boolean, String] // TODO: only load when visible
+    position: {
+      type: String,
+      default: 'center center'
+    },
     transition: {
       type: String,
       default: 'fade-transition'
@@ -37,6 +41,7 @@ export default Vue.extend({
 
   data () {
     return {
+      currentSrc: '', // Set from srcset
       image: null as HTMLImageElement | null,
       isLoading: false,
       computedAspectRatio: undefined as number | undefined
@@ -44,11 +49,6 @@ export default Vue.extend({
   },
 
   computed: {
-    currentSrc (): string {
-      return this.isLoading
-        ? this.computedLazySrc
-        : this.computedSrc
-    },
     computedSrc (): string {
       return typeof this.src === 'string' ? this.src : this.src.src
     },
@@ -73,7 +73,8 @@ export default Vue.extend({
     src (val) {
       if (!this.isLoading) this.init()
       else this.loadImage()
-    }
+    },
+    '$vuetify.breakpoint.width': 'onResize'
   },
 
   created () {
@@ -94,12 +95,16 @@ export default Vue.extend({
       this.loadImage()
     },
     onLoad () {
+      if (this.image) this.currentSrc = this.image.currentSrc
       this.isLoading = false
       this.$emit('load', this.src)
     },
     onError () {
       consoleError('Image load failed\n\nsrc: ' + this.computedSrc, this)
       this.$emit('error', this.src)
+    },
+    onResize () {
+      if (this.image) this.currentSrc = this.image.currentSrc
     },
     loadImage () {
       const image = new Image()
@@ -118,6 +123,7 @@ export default Vue.extend({
       image.sizes = this.sizes
       this.computedSrcset && (image.srcset = this.computedSrcset)
       this.aspectRatio || this.pollForSize(image)
+      this.currentSrc = image.currentSrc
     },
     pollForSize (img: HTMLImageElement, timeout: number | null = 100) {
       if (!(img.naturalHeight || img.naturalWidth)) {
@@ -137,22 +143,20 @@ export default Vue.extend({
   },
 
   render (h): VNode {
-    const attrs = this.isLoading ? undefined : {
-      srcset: this.srcset,
-      sizes: this.sizes
-    }
+    const src = this.isLoading ? this.computedLazySrc : this.currentSrc
 
-    const image = h('img', {
+    const image = h('div', {
       staticClass: 'v-image__image',
       class: {
-        'v-image__image--preload': this.isLoading
+        'v-image__image--preload': this.isLoading,
+        'v-image__image--contain': this.contain,
+        'v-image__image--cover': !this.contain
       },
-      attrs: {
-        src: this.currentSrc,
-        ...attrs,
-        ...this.$attrs
+      style: {
+        backgroundImage: src ? `url("${src}")` : undefined,
+        backgroundPosition: this.position
       },
-      key: this.currentSrc
+      key: +this.isLoading
     })
 
     const placeholder = this.$slots.placeholder && h('div', {
@@ -161,14 +165,18 @@ export default Vue.extend({
 
     return h('div', {
       staticClass: 'v-image',
-      class: {
-        'v-image--contain': this.contain,
-        'v-image--cover': !this.contain
-      },
-      style: this.aspectStyle
+      style: this.aspectStyle,
+      attrs: {
+        role: this.alt ? 'img' : undefined,
+        'aria-label': this.alt,
+        ...this.$attrs
+      }
     }, [
       h('transition', {
-        attrs: { name: this.transition }
+        attrs: {
+          name: this.transition,
+          mode: 'in-out'
+        }
       }, [image]),
       this.isLoading ? h('transition', {
         attrs: { name: this.transition }
