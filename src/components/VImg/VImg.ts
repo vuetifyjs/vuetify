@@ -17,8 +17,6 @@ interface srcObject {
 export default Vue.extend({
   name: 'v-img',
 
-  inheritAttrs: false,
-
   props: {
     alt: String,
     aspectRatio: [String, Number],
@@ -38,6 +36,7 @@ export default Vue.extend({
       type: String,
       default: 'fade-transition'
     },
+    height: [String, Number],
     maxHeight: [String, Number]
   },
 
@@ -166,16 +165,16 @@ export default Vue.extend({
 
     return h('div', {
       staticClass: 'v-image',
-      style: this.maxHeight ? {
+      style: {
+        height: convertToUnit(this.height),
         maxHeight: convertToUnit(this.maxHeight)
-      } : undefined,
+      },
       attrs: {
         role: this.alt ? 'img' : undefined,
-        'aria-label': this.alt,
-        ...this.$attrs
+        'aria-label': this.alt
       }
     }, [
-      h('div', { style: this.aspectStyle }),
+      h('div', { style: this.aspectStyle, staticClass: 'v-image__sizer' }),
       h('transition', {
         attrs: {
           name: this.transition,

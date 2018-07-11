@@ -3,6 +3,7 @@
 .v-image
   position: relative
   overflow: hidden
+  flex: 1 1 auto
 
   &__image,
   &__placeholder
@@ -23,3 +24,6 @@
 
     &--cover
       background-size: cover
+
+  &__sizer
+    transition: padding-bottom 0.2s $transition.swing
