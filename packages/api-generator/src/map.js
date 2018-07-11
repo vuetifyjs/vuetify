@@ -187,17 +187,6 @@ const validatableEvents = [
   }
 ]
 
-const inputFunctions = [
-  {
-    name: 'append-icon-cb',
-    signature: '() => void'
-  },
-  {
-    name: 'prepend-icon-cb',
-    signature: '() => void'
-  }
-]
-
 const inputEvents = [
   {
     name: 'click:prepend',
@@ -256,8 +245,7 @@ const VSelect = {
       name: 'update:searchInput',
       value: 'string'
     }
-  ].concat(validatableEvents),
-  functions: inputFunctions
+  ].concat(validatableEvents)
 }
 
 module.exports = {
@@ -391,8 +379,7 @@ module.exports = {
     slots: ['default']
   },
   'v-checkbox': {
-    slots: inputSlots.concat(['label']),
-    functions: inputFunctions
+    slots: inputSlots.concat(['label'])
   },
   'v-chip': {
     slots: ['default'],
@@ -654,8 +641,7 @@ module.exports = {
     slots: ['default']
   },
   'v-switch': {
-    slots: inputSlots.concat(['label']),
-    functions: inputFunctions
+    slots: inputSlots.concat(['label'])
   },
   'v-radio': {
     events: [
@@ -672,8 +658,7 @@ module.exports = {
         name: 'change',
         value: 'any'
       }
-    ].concat(validatableEvents),
-    functions: inputFunctions
+    ].concat(validatableEvents)
   },
   'v-snackbar': {
     slots: ['default']
@@ -697,8 +682,7 @@ module.exports = {
         name: 'end',
         value: 'number'
       }
-    ].concat(validatableEvents),
-    functions: inputFunctions
+    ].concat(validatableEvents)
   },
   'v-range-slider': {
     events: [
@@ -718,8 +702,7 @@ module.exports = {
         name: 'end',
         value: 'array'
       }
-    ].concat(validatableEvents),
-    functions: inputFunctions
+    ].concat(validatableEvents)
   },
   'v-speed-dial': {
     slots: ['activator', 'default']
@@ -786,8 +769,7 @@ module.exports = {
         name: 'click:append-outer',
         value: 'Event'
       }
-    ].concat(validatableEvents),
-    functions: inputFunctions
+    ].concat(validatableEvents)
   },
   'v-time-picker': {
     events: [
