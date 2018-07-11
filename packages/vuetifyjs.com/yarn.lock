@@ -446,7 +446,7 @@ anymatch@^2.0.0:
 
 api-generator@vuetifyjs/api-generator:
   version "1.0.0"
-  resolved "https://codeload.github.com/vuetifyjs/api-generator/tar.gz/97bfd56020d88e281f039f63e5959a0639064b33"
+  resolved "https://codeload.github.com/vuetifyjs/api-generator/tar.gz/7ffdf2dade95a366564596fde951234499831cbd"
 
 aproba@^1.0.3, aproba@^1.1.1:
   version "1.2.0"
