@@ -519,8 +519,6 @@ export default {
       if (this.selectedItems.length === 0) {
         this.isMenuActive = true
       }
-
-      this.editingIndex = -1
       this.selectedIndex = -1
     },
     onClick () {
