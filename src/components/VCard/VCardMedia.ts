@@ -4,6 +4,7 @@ import { convertToUnit } from '../../util/helpers'
 // Types
 import Vue, { VNode } from 'vue'
 
+/* @vue/component */
 export default Vue.extend({
   name: 'v-card-media',
 
