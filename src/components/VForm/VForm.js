@@ -3,23 +3,24 @@ import '../../stylus/components/_forms.styl'
 
 import { provide as RegistrableProvide } from '../../mixins/registrable'
 
+/* @vue/component */
 export default {
   name: 'v-form',
 
+  mixins: [RegistrableProvide('form')],
+
   inheritAttrs: false,
 
-  mixins: [RegistrableProvide('form')],
+  props: {
+    value: Boolean,
+    lazyValidation: Boolean
+  },
 
   data () {
     return {
       inputs: [],
       errorBag: {}
     }
-  },
-
-  props: {
-    value: Boolean,
-    lazyValidation: Boolean
   },
 
   watch: {

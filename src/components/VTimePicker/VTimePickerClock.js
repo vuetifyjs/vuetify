@@ -4,6 +4,7 @@ import '../../stylus/components/_time-picker-clock.styl'
 import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
 
+/* @vue/component */
 export default {
   name: 'v-time-picker-clock',
 
@@ -11,14 +12,6 @@ export default {
     Colorable,
     Themeable
   ],
-
-  data () {
-    return {
-      defaultColor: 'accent',
-      inputValue: this.value,
-      isDragging: false
-    }
-  },
 
   props: {
     allowedValues: Function,
@@ -49,6 +42,16 @@ export default {
       default: 1
     },
     value: Number
+  },
+
+  data () {
+    return {
+      defaultColor: 'accent',
+      inputValue: this.value,
+      isDragging: false,
+      valueOnMouseDown: null,
+      valueOnMouseUp: null
+    }
   },
 
   computed: {
@@ -150,12 +153,16 @@ export default {
     onMouseDown (e) {
       e.preventDefault()
 
+      this.valueOnMouseDown = null
+      this.valueOnMouseUp = null
       this.isDragging = true
       this.onDragMove(e)
     },
     onMouseUp () {
       this.isDragging = false
-      this.isAllowed(this.inputValue) && this.$emit('change', this.inputValue)
+      if (this.valueOnMouseUp !== null && this.isAllowed(this.valueOnMouseUp)) {
+        this.$emit('change', this.valueOnMouseUp)
+      }
     },
     onDragMove (e) {
       e.preventDefault()
@@ -171,14 +178,23 @@ export default {
         this.min + (insideClick ? this.roundCount : 0)
 
       // Necessary to fix edge case when selecting left part of max value
+      let newValue
       if (handAngle >= (360 - this.degreesPerUnit / 2)) {
-        this.update(insideClick ? this.max : this.min)
+        newValue = insideClick ? this.max : this.min
       } else {
-        this.update(value)
+        newValue = value
+      }
+
+      if (this.isAllowed(value)) {
+        if (this.valueOnMouseDown === null) {
+          this.valueOnMouseDown = newValue
+        }
+        this.valueOnMouseUp = newValue
+        this.update(newValue)
       }
     },
     update (value) {
-      if (this.inputValue !== value && this.isAllowed(value)) {
+      if (this.inputValue !== value) {
         this.inputValue = value
         this.$emit('input', value)
       }

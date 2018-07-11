@@ -2,16 +2,11 @@ import '../../stylus/components/_parallax.styl'
 
 import Translatable from '../../mixins/translatable'
 
+/* @vue/component */
 export default {
   name: 'v-parallax',
 
   mixins: [Translatable],
-
-  data () {
-    return {
-      isBooted: false
-    }
-  },
 
   props: {
     alt: String,
@@ -20,6 +15,12 @@ export default {
       default: 500
     },
     src: String
+  },
+
+  data () {
+    return {
+      isBooted: false
+    }
   },
 
   computed: {
@@ -89,7 +90,7 @@ export default {
     return h('div', {
       staticClass: 'v-parallax',
       style: {
-        height: `${this.normalizedHeight}px`
+        height: `${this.height}px`
       },
       on: this.$listeners
     }, [container, content])

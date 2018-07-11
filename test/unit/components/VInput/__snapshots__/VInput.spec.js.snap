@@ -1,5 +1,47 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`VInput.js should apply theme to label, counter, messages and icons 1`] = `
+
+<div class="v-input theme--light">
+  <div class="v-input__prepend-outer">
+    <div class="v-input__icon v-input__icon--prepend">
+      <i aria-hidden="true"
+         class="v-icon theme--light material-icons"
+      >
+        prepend
+      </i>
+    </div>
+  </div>
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <label aria-hidden="true"
+             class="v-label theme--light"
+             style="left: 0px; position: relative;"
+      >
+        foo
+      </label>
+    </div>
+    <div class="v-messages theme--light">
+      <div class="v-messages__wrapper">
+        <div class="v-messages__message">
+          bar
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="v-input__append-outer">
+    <div class="v-input__icon v-input__icon--append">
+      <i aria-hidden="true"
+         class="v-icon theme--light material-icons"
+      >
+        append
+      </i>
+    </div>
+  </div>
+</div>
+
+`;
+
 exports[`VInput.js should be in an error state 1`] = `
 
 <div class="v-input v-input--has-state error--text">

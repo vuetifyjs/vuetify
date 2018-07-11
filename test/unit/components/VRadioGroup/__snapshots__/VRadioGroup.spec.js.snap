@@ -15,7 +15,6 @@ exports[`VRadioGroup.vue should be in error when v-radio-group is 1`] = `
             <input aria-checked="false"
                    role="radio"
                    type="radio"
-                   tabindex="0"
             >
             <div class="v-input--selection-controls__ripple error--text">
             </div>
@@ -57,7 +56,6 @@ exports[`VRadioGroup.vue should be in error when v-radio-group is 2`] = `
             <input aria-checked="false"
                    role="radio"
                    type="radio"
-                   tabindex="0"
             >
             <div class="v-input--selection-controls__ripple">
             </div>

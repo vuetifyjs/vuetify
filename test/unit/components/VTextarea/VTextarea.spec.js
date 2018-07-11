@@ -2,22 +2,6 @@ import { test } from '@/test'
 import VTextarea from '@/components/VTextarea'
 import Vue from 'vue'
 
-const tabClick = 'Injection "tabClick" not found'
-const tabsWarning = '[Vuetify] The v-tab component must be used inside a v-tabs'
-const stub = {
-  name: 'router-link',
-
-  props: {
-    to: [String, Object]
-  },
-
-  render (h) {
-    return h('a', {
-      domProps: { href: this.to }
-    })
-  }
-}
-
 test('VTextarea.vue', ({ mount }) => {
   it('should calculate element height when using auto-grow prop', async () => {
     const wrapper = mount(VTextarea, {

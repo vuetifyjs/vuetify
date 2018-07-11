@@ -7,24 +7,15 @@ import { inject as RegistrableInject } from '../../mixins/registrable'
 
 import VIcon from '../VIcon'
 
-import ClickOutside from '../../directives/click-outside'
-
 import { consoleWarn } from '../../util/console'
 
+/* @vue/component */
 export default {
   name: 'v-expansion-panel-content',
 
-  mixins: [Bootable, Toggleable, Rippleable, RegistrableInject('expansionPanel', 'v-expansion-panel', 'v-expansion-panel-content')],
-
-  directives: {
-    ClickOutside
-  },
+  mixins: [Bootable, Toggleable, Rippleable, RegistrableInject('expansionPanel', 'v-expansion-panel-content', 'v-expansion-panel')],
 
   inject: ['expansionPanel'],
-
-  data: () => ({
-    height: 'auto'
-  }),
 
   props: {
     disabled: Boolean,
@@ -40,6 +31,10 @@ export default {
     }
   },
 
+  data: () => ({
+    height: 'auto'
+  }),
+
   computed: {
     containerClasses () {
       return {
@@ -53,6 +48,17 @@ export default {
     isReadonly () {
       return this.expansionPanel.readonly || this.readonly
     }
+  },
+
+  mounted () {
+    this.expansionPanel.register(this._uid, this.toggle)
+
+    // Can be removed once fully deprecated
+    if (typeof this.value !== 'undefined') consoleWarn('v-model has been deprecated', this)
+  },
+
+  beforeDestroy () {
+    this.expansionPanel.unregister(this._uid)
   },
 
   methods: {
@@ -116,17 +122,6 @@ export default {
       // Needs time to calc height
       this.$nextTick(() => (this.isActive = active))
     }
-  },
-
-  mounted () {
-    this.expansionPanel.register(this._uid, this.toggle)
-
-    // Can be removed once fully deprecated
-    if (typeof this.value !== 'undefined') consoleWarn('v-model has been deprecated', this)
-  },
-
-  beforeDestroy () {
-    this.expansionPanel.unregister(this._uid)
   },
 
   render (h) {

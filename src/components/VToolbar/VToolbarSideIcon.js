@@ -1,6 +1,7 @@
 import VBtn from '../../components/VBtn'
 import VIcon from '../../components/VIcon'
 
+/* @vue/component */
 export default {
   name: 'v-toolbar-side-icon',
 

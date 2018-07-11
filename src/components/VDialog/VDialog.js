@@ -12,10 +12,15 @@ import Toggleable from '../../mixins/toggleable'
 import ClickOutside from '../../directives/click-outside'
 
 // Helpers
-import { getZIndex } from '../../util/helpers'
+import { getZIndex, convertToUnit } from '../../util/helpers'
 
+/* @vue/component */
 export default {
   name: 'v-dialog',
+
+  directives: {
+    ClickOutside
+  },
 
   mixins: [
     Dependent,
@@ -25,20 +30,6 @@ export default {
     Stackable,
     Toggleable
   ],
-
-  directives: {
-    ClickOutside
-  },
-
-  data () {
-    return {
-      animate: false,
-      animateTimeout: null,
-      isDependent: false,
-      stackClass: 'v-dialog__content--active',
-      stackMinZIndex: 200
-    }
-  },
 
   props: {
     disabled: Boolean,
@@ -65,6 +56,16 @@ export default {
     }
   },
 
+  data () {
+    return {
+      animate: false,
+      animateTimeout: null,
+      isDependent: false,
+      stackClass: 'v-dialog__content--active',
+      stackMinZIndex: 200
+    }
+  },
+
   computed: {
     classes () {
       return {
@@ -81,6 +82,9 @@ export default {
         'v-dialog__content': true,
         'v-dialog__content--active': this.isActive
       }
+    },
+    hasOverlay () {
+      return this.persistent || !this.hideOverlay
     }
   },
 
@@ -139,7 +143,8 @@ export default {
       return getZIndex(this.$refs.content) >= this.getMaxZIndex()
     },
     show () {
-      !this.fullscreen && !this.hideOverlay && this.genOverlay()
+      const overlayClass = this.hideOverlay ? 'v-overlay--transparent' : ''
+      !this.fullscreen && this.hasOverlay && this.genOverlay(overlayClass)
       this.fullscreen && this.hideScroll()
       this.$refs.content.focus()
       this.$listeners.keydown && this.bind()
@@ -178,14 +183,17 @@ export default {
 
     if (!this.fullscreen) {
       data.style = {
-        maxWidth: this.maxWidth === 'none' ? undefined : (isNaN(this.maxWidth) ? this.maxWidth : `${this.maxWidth}px`),
-        width: this.width === 'auto' ? undefined : (isNaN(this.width) ? this.width : `${this.width}px`)
+        maxWidth: this.maxWidth === 'none' ? undefined : convertToUnit(this.maxWidth),
+        width: this.width === 'auto' ? undefined : convertToUnit(this.width)
       }
     }
 
     if (this.$slots.activator) {
       children.push(h('div', {
-        'class': 'v-dialog__activator',
+        staticClass: 'v-dialog__activator',
+        'class': {
+          'v-dialog__activator--disabled': this.disabled
+        },
         on: {
           click: e => {
             e.stopPropagation()
@@ -207,7 +215,10 @@ export default {
 
     children.push(h('div', {
       'class': this.contentClasses,
-      domProps: { tabIndex: -1 },
+      attrs: {
+        tabIndex: '-1',
+        ...this.getScopeIdAttrs()
+      },
       style: { zIndex: this.activeZIndex },
       ref: 'content'
     }, [dialog]))

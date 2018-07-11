@@ -3,6 +3,7 @@ import '../../stylus/components/_expansion-panel.styl'
 import Themeable from '../../mixins/themeable'
 import { provide as RegistrableProvide } from '../../mixins/registrable'
 
+/* @vue/component */
 export default {
   name: 'v-expansion-panel',
 
@@ -13,11 +14,6 @@ export default {
       expansionPanel: this
     }
   },
-
-  data: () => ({
-    items: [],
-    open: []
-  }),
 
   props: {
     disabled: Boolean,
@@ -31,6 +27,11 @@ export default {
       default: () => null
     }
   },
+
+  data: () => ({
+    items: [],
+    open: []
+  }),
 
   computed: {
     classes () {
@@ -67,6 +68,10 @@ export default {
     value (v) {
       this.updateFromValue(v)
     }
+  },
+
+  mounted () {
+    this.value !== null && this.updateFromValue(this.value)
   },
 
   methods: {
@@ -110,10 +115,6 @@ export default {
       this.items.splice(index, 1)
       this.open.splice(index, 1)
     }
-  },
-
-  mounted () {
-    this.value !== null && this.updateFromValue(this.value)
   },
 
   render (h) {

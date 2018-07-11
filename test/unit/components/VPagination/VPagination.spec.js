@@ -29,6 +29,21 @@ test('VPagination.vue', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should render component in RTL mode and match snapshot', async () => {
+    jest.useFakeTimers()
+    const wrapper = mount(VPagination, {
+      propsData: {
+        length: 5,
+        value: 2
+      }
+    })
+    wrapper.vm.$vuetify.rtl = true
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+    wrapper.vm.$vuetify.rtl = undefined
+  })
+
   it('emits an event when pagination item is clicked', async () => {
     jest.useFakeTimers()
     const wrapper = mount(VPagination, {

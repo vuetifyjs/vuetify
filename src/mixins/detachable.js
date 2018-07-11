@@ -9,14 +9,11 @@ function validateAttachTarget (val) {
   return val.nodeType === Node.ELEMENT_NODE
 }
 
+/* @vue/component */
 export default {
   name: 'detachable',
 
   mixins: [Bootable],
-
-  data: () => ({
-    hasDetached: false
-  }),
 
   props: {
     attach: {
@@ -28,6 +25,10 @@ export default {
       default: ''
     }
   },
+
+  data: () => ({
+    hasDetached: false
+  }),
 
   watch: {
     attach () {
@@ -55,6 +56,12 @@ export default {
   },
 
   methods: {
+    getScopeIdAttrs () {
+      const scopeId = this.$vnode && this.$vnode.context.$options._scopeId
+      return scopeId && {
+        [scopeId]: ''
+      }
+    },
     initDetach () {
       if (this._isDestroyed ||
         !this.$refs.content ||

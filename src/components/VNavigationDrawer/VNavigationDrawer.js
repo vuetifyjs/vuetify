@@ -11,8 +11,18 @@ import ClickOutside from '../../directives/click-outside'
 import Resize from '../../directives/resize'
 import Touch from '../../directives/touch'
 
+// Helpers
+import { convertToUnit } from '../../util/helpers'
+
+/* @vue/component */
 export default {
   name: 'v-navigation-drawer',
+
+  directives: {
+    ClickOutside,
+    Resize,
+    Touch
+  },
 
   mixins: [
     Applicationable(null, [
@@ -24,20 +34,6 @@ export default {
     SSRBootable,
     Themeable
   ],
-
-  directives: {
-    ClickOutside,
-    Resize,
-    Touch
-  },
-
-  data: () => ({
-    isActive: false,
-    touchArea: {
-      left: 0,
-      right: 0
-    }
-  }),
 
   props: {
     clipped: Boolean,
@@ -69,6 +65,14 @@ export default {
     value: { required: false }
   },
 
+  data: () => ({
+    isActive: false,
+    touchArea: {
+      left: 0,
+      right: 0
+    }
+  }),
+
   computed: {
     /**
      * Used for setting an app
@@ -80,9 +84,6 @@ export default {
      */
     applicationProperty () {
       return this.right ? 'right' : 'left'
-    },
-    calculatedHeight () {
-      return isNaN(this.height) ? this.height : `${this.height}px`
     },
     calculatedTransform () {
       if (this.isActive) return 0
@@ -161,7 +162,7 @@ export default {
     },
     styles () {
       const styles = {
-        height: this.calculatedHeight,
+        height: convertToUnit(this.height),
         marginTop: `${this.marginTop}px`,
         maxHeight: `calc(100% - ${this.maxHeight}px)`,
         transform: `translateX(${this.calculatedTransform}px)`,
@@ -326,6 +327,7 @@ export default {
           this.$emit('update:miniVariant', false)
         },
         transitionend: e => {
+          if (e.target !== e.currentTarget) return
           this.$emit('transitionend', e)
 
           // IE11 does not support new Event('resize')
