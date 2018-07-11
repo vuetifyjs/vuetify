@@ -60,7 +60,7 @@
     "description": ""
   },
   "v-autocomplete/attach": {
-    "type": "boolean",
+    "type": "any",
     "description": ""
   },
   "v-autocomplete/allow-overflow": {
@@ -1140,7 +1140,7 @@
     "description": ""
   },
   "v-combobox/attach": {
-    "type": "boolean",
+    "type": "any",
     "description": ""
   },
   "v-combobox/allow-overflow": {
@@ -2603,6 +2603,50 @@
     "type": "boolean",
     "description": ""
   },
+  "v-img/srcset": {
+    "type": "string",
+    "description": ""
+  },
+  "v-img/alt": {
+    "type": "string",
+    "description": ""
+  },
+  "v-img/aspect-ratio": {
+    "type": "string|number",
+    "description": ""
+  },
+  "v-img/contain": {
+    "type": "boolean",
+    "description": ""
+  },
+  "v-img/height": {
+    "type": "string|number",
+    "description": ""
+  },
+  "v-img/lazy-src": {
+    "type": "string",
+    "description": ""
+  },
+  "v-img/max-height": {
+    "type": "string|number",
+    "description": ""
+  },
+  "v-img/position": {
+    "type": "string",
+    "description": ""
+  },
+  "v-img/sizes": {
+    "type": "string",
+    "description": ""
+  },
+  "v-img/src": {
+    "type": "string|object",
+    "description": ""
+  },
+  "v-img/transition": {
+    "type": "string",
+    "description": ""
+  },
   "v-input/append-icon-cb": {
     "type": "function",
     "description": ""
@@ -3224,7 +3268,7 @@
     "description": ""
   },
   "v-overflow-btn/attach": {
-    "type": "boolean",
+    "type": "any",
     "description": ""
   },
   "v-overflow-btn/allow-overflow": {
@@ -4084,7 +4128,7 @@
     "description": ""
   },
   "v-select/attach": {
-    "type": "boolean",
+    "type": "any",
     "description": ""
   },
   "v-select/allow-overflow": {

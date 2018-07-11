@@ -866,6 +866,22 @@
     ],
     "description": ""
   },
+  "v-img": {
+    "attributes": [
+      "alt",
+      "aspect-ratio",
+      "contain",
+      "height",
+      "lazy-src",
+      "max-height",
+      "position",
+      "sizes",
+      "src",
+      "srcset",
+      "transition"
+    ],
+    "description": ""
+  },
   "v-input": {
     "attributes": [
       "append-icon",
