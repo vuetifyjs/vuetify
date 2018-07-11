@@ -58,7 +58,10 @@ export default {
       default: '$vuetify.icons.dropdown'
     },
     appendIconCb: Function,
-    attach: Boolean,
+    attach: {
+      type: null,
+      default: false
+    },
     auto: Boolean,
     browserAutocomplete: {
       type: String,
@@ -144,42 +147,19 @@ export default {
     computedItems () {
       return this.allItems
     },
+    counterValue () {
+      return this.multiple
+        ? this.selectedItems.length
+        : (this.getText(this.selectedItems[0]) || '').toString().length
+    },
     directives () {
-      return [{
+      return this.isFocused ? [{
         name: 'click-outside',
-        // TODO: Check into this firing when it shouldn't
-        value: e => {
-          if (this.isMenuActive) {
-            this.onKeyDown(e)
-          }
-
-          /* eslint-disable vue/no-side-effects-in-computed-properties */
-          this.isMenuActive = false
-          this.isFocused = false
-          this.editingIndex = -1
-          this.selectedIndex = -1
-          /* eslint-enable vue/no-side-effects-in-computed-properties */
-        },
+        value: this.blur,
         args: {
-          closeConditional: e => {
-            return (
-              // Check if click originates
-              // from within the content
-              (
-                !!this.content &&
-                !this.content.contains(e.target)
-              ) &&
-              // Check if click originates
-              // from within the element
-              (
-                !!this.$el &&
-                !this.$el.contains(e.target) &&
-                e.target !== this.$el
-              )
-            )
-          }
+          closeConditional: this.closeConditional
         }
-      }]
+      }] : undefined
     },
     dynamicHeight () {
       return 'auto'
@@ -243,7 +223,8 @@ export default {
   },
 
   watch: {
-    internalValue () {
+    internalValue (val) {
+      this.initialValue = val
       this.$emit('change', this.internalValue)
       this.setSelectedItems()
     },
@@ -276,6 +257,14 @@ export default {
   },
 
   methods: {
+    /** @public */
+    blur () {
+      this.isMenuActive = false
+      this.isFocused = false
+      this.$refs.input && this.$refs.input.blur()
+      this.selectedIndex = -1
+    },
+    /** @public */
     activateMenu () {
       this.isMenuActive = true
     },
@@ -285,6 +274,18 @@ export default {
       this.$nextTick(() => this.$refs.input.focus())
 
       if (this.openOnClear) this.isMenuActive = true
+    },
+    closeConditional (e) {
+      return (
+        // Click originates from outside the menu content
+        !!this.content &&
+        !this.content.contains(e.target) &&
+
+        // Click originates from outside the element
+        !!this.$el &&
+        !this.$el.contains(e.target) &&
+        e.target !== this.$el
+      )
     },
     filterDuplicates (arr) {
       const uniqueValues = new Map()
@@ -380,7 +381,7 @@ export default {
         selections,
         this.suffix ? this.genAffix('suffix') : null,
         this.genClearIcon(),
-        this.genSlot('append', 'inner', [this.genIcon('append')])
+        this.genIconSlot()
       ])
 
       return [this.genMenu(activator)]
@@ -438,6 +439,8 @@ export default {
         this.attach === 'attach' // If bound as boolean prop in pug (v-menu(attach))
       ) {
         props.attach = this.$el
+      } else {
+        props.attach = this.attach
       }
 
       return this.$createElement(VMenu, {
@@ -549,7 +552,7 @@ export default {
       ].includes(keyCode)) this.activateMenu()
 
       // This should do something different
-      if (e.keyCode === keyCodes.enter) return this.onEnterDown()
+      if (keyCode === keyCodes.enter) return this.onEnterDown()
 
       // If escape deactivate the menu
       if (keyCode === keyCodes.esc) return this.onEscDown(e)

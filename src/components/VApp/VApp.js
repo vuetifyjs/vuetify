@@ -2,7 +2,6 @@ import '../../stylus/components/_app.styl'
 
 // Component level mixins
 import AppTheme from './mixins/app-theme'
-import AppBreakpoint from './mixins/app-breakpoint'
 
 import Themeable from '../../mixins/themeable'
 
@@ -18,7 +17,6 @@ export default {
   },
 
   mixins: [
-    AppBreakpoint,
     AppTheme,
     Themeable
   ],
@@ -55,11 +53,7 @@ export default {
       staticClass: 'application',
       'class': this.classes,
       attrs: { 'data-app': true },
-      domProps: { id: this.id },
-      directives: [{
-        name: 'resize',
-        value: this.onResize
-      }]
+      domProps: { id: this.id }
     }
 
     const wrapper = h('div', { staticClass: 'application--wrap' }, this.$slots.default)

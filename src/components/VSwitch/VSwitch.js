@@ -37,7 +37,7 @@ export default {
         staticClass: 'v-input--selection-controls__input'
       }, [
         this.genInput('checkbox'),
-        this.genRipple({
+        !this.disabled && this.genRipple({
           'class': this.classesSelectable,
           directives: [{
             name: 'touch',
@@ -58,7 +58,12 @@ export default {
     genSwitchPart (target) {
       return this.$createElement('div', {
         staticClass: `v-input--switch__${target}`,
-        'class': this.classesSelectable
+        'class': {
+          ...this.classesSelectable,
+          ...this.themeClasses
+        },
+        // Avoid cache collision
+        key: target
       })
     },
     onSwipeLeft () {

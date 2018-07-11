@@ -70,11 +70,15 @@ export default {
             ? 'mixed'
             : this.isActive.toString()
         }),
-        this.genRipple({
+        !this.disabled && this.genRipple({
           'class': this.classesSelectable
         }),
         this.$createElement(VIcon, {
-          'class': this.classesSelectable
+          'class': this.classesSelectable,
+          props: {
+            dark: this.dark,
+            light: this.light
+          }
         }, this.computedIcon)
       ])
     },

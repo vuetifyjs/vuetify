@@ -46,6 +46,11 @@ test('VChip.vue', ({ mount, compileToFunctions }) => {
     })
 
     expect(wrapper.element.classList).toContain('v-chip--disabled')
+
+    wrapper.setProps({
+      close: true
+    })
+    expect(wrapper.find('.v-chip__close')).toHaveLength(1)
   })
 
   it('should render a colored outline chip', () => {

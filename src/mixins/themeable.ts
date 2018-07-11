@@ -57,7 +57,7 @@ export default Vue.extend<Themeable>().extend({
         return this.theme.isDark
       }
     },
-    themeClasses (): Record<string, boolean> {
+    themeClasses (): object {
       return {
         'theme--dark': this.isDark,
         'theme--light': !this.isDark

@@ -1,7 +1,8 @@
 // Styles
 import '../../stylus/components/_buttons.styl'
 
-import Vue, { VNode, ComponentOptions, VNodeChildren } from 'vue'
+// Types
+import { CreateElement, VNode, VNodeChildren } from 'vue'
 import { PropValidator } from 'vue/types/options'
 import mixins from '../../util/mixins'
 
@@ -121,8 +122,7 @@ const VBtn = mixins(
       const children: VNodeChildren = []
 
       if (!this.$slots.loader) {
-        // TODO: uncast
-        children.push(this.$createElement(VProgressCircular as ComponentOptions<Vue>, {
+        children.push(this.$createElement(VProgressCircular, {
           props: {
             indeterminate: true,
             size: 26,
@@ -137,7 +137,7 @@ const VBtn = mixins(
     }
   },
 
-  render (h): VNode {
+  render (h: CreateElement): VNode {
     const { tag, data } = this.generateRouteLink()
     const children = [this.genContent()]
 

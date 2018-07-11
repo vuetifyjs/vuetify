@@ -201,7 +201,10 @@ export default {
       const totalWidth = this.widths.wrapper + this.scrollOffset
       const { clientWidth, offsetLeft } = this.activeTab.$el
       const itemOffset = clientWidth + offsetLeft
-      const additionalOffset = clientWidth * 0.3
+      let additionalOffset = clientWidth * 0.3
+      if (this.activeIndex === this.tabs.length - 1) {
+        additionalOffset = 0 // don't add an offset if selecting the last tab
+      }
 
       /* istanbul ignore else */
       if (offsetLeft < this.scrollOffset) {
@@ -215,7 +218,7 @@ export default {
       this.scrollIntoView()
     },
     tabProxy (val) {
-      this.lazyValue = val
+      this.inputValue = val
     },
     registerItems (fn) {
       this.tabItems = fn

@@ -27,6 +27,15 @@
   &:not(.v-dialog--fullscreen)
     max-height: 90%
 
+  &__activator
+    cursor: pointer
+
+    *
+      cursor: pointer
+
+    &--disabled
+      pointer-events: none
+
   &__container
     display: inline-block
     vertical-align: middle
@@ -47,6 +56,7 @@
     animation-timing-function: $transition.fast-in-fast-out
 
   &--fullscreen
+    border-radius: 0
     margin 0
     height 100%
     position fixed
