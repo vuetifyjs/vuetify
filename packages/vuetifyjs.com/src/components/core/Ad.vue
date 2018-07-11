@@ -1,13 +1,5 @@
 <template lang="pug">
   li
-    v-card(
-      flat
-      height="205px"
-      img="https://cdn.vuetifyjs.com/images/ads/store-ad-1.png"
-      tile
-      width="130px"
-      :to="{ name: 'store/Front' }"
-    )
     div#codefund_ad
 </template>
 
@@ -20,7 +12,7 @@
 
       const script = document.createElement('script')
       script.type = 'text/javascript'
-      script.src = '//codefund.io/scripts/50bda123-f278-4574-88e2-c7401f869261/embed.js'
+      script.src = '//codefund.io/scripts/50bda123-f278-4574-88e2-c7401f869261/embed.js?template=vertical'
 
       this.$el.append(script)
     }
@@ -29,7 +21,7 @@
 
 <style lang="stylus">
   #cf_ad
-    max-width: 160px
+    margin: 0 auto 0 20px !important
 
     .cf-wrapper
       border-radius: 4px

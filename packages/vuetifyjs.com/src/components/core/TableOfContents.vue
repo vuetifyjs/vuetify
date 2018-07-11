@@ -79,7 +79,7 @@
         const id = `#${item.href}`
 
         const link = this.$createElement('a', {
-          staticClass: 'subheading mb-3 d-block',
+          staticClass: 'body-2 mb-3 d-block',
           'class': {
             'primary--text': isActive,
             'grey--text text--darken-1': !isActive
@@ -161,9 +161,12 @@
     margin: 0 24px
     width: 200px
 
-    li a.subheading
+    li a.body-2
       padding-left: 18px
       text-decoration: none
       border-left: 2px solid transparent
       transition: color .1s ease-in
+
+    li:last-child
+      margin-top: 24px
 </style>
