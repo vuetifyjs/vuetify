@@ -125,8 +125,8 @@ module.exports = {
       },
       {
         "name": "attach",
-        "type": "boolean",
-        "default": "false",
+        "type": "any",
+        "default": false,
         "source": "v-select"
       },
       {
@@ -246,7 +246,7 @@ module.exports = {
       {
         "name": "filter",
         "type": "function",
-        "default": "(item: object, queryText: string, itemText: string): boolean",
+        "default": "(item: object, queryText: string, itemText: string) => boolean",
         "source": null
       },
       {
@@ -753,7 +753,7 @@ module.exports = {
       {
         "name": "valueComparator",
         "type": "function",
-        "default": "(a: any, b: any): boolean",
+        "default": "(a: any, b: any) => boolean",
         "source": "comparable"
       },
       {
@@ -776,8 +776,6 @@ module.exports = {
     "slots": [
       "append",
       "prepend",
-      "prepend-icon",
-      "append-icon",
       "default",
       "no-data",
       "label",
@@ -824,11 +822,11 @@ module.exports = {
     "functions": [
       {
         "name": "append-icon-cb",
-        "signature": "(): void"
+        "signature": "() => void"
       },
       {
         "name": "prepend-icon-cb",
-        "signature": "(): void"
+        "signature": "() => void"
       }
     ]
   },
@@ -2051,19 +2049,17 @@ module.exports = {
     "slots": [
       "append",
       "prepend",
-      "prepend-icon",
-      "append-icon",
       "default",
       "label"
     ],
     "functions": [
       {
         "name": "append-icon-cb",
-        "signature": "(): void"
+        "signature": "() => void"
       },
       {
         "name": "prepend-icon-cb",
-        "signature": "(): void"
+        "signature": "() => void"
       }
     ]
   },
@@ -2179,8 +2175,8 @@ module.exports = {
       },
       {
         "name": "attach",
-        "type": "boolean",
-        "default": "false",
+        "type": "any",
+        "default": false,
         "source": "v-select"
       },
       {
@@ -2379,7 +2375,7 @@ module.exports = {
       {
         "name": "filter",
         "type": "function",
-        "default": "(item: object, queryText: string, itemText: string): boolean",
+        "default": "(item: object, queryText: string, itemText: string) => boolean",
         "source": "v-autocomplete"
       },
       {
@@ -2822,7 +2818,7 @@ module.exports = {
       {
         "name": "valueComparator",
         "type": "function",
-        "default": "(a: any, b: any): boolean",
+        "default": "(a: any, b: any) => boolean",
         "source": "comparable"
       }
     ],
@@ -2836,8 +2832,6 @@ module.exports = {
     "slots": [
       "append",
       "prepend",
-      "prepend-icon",
-      "append-icon",
       "default",
       "no-data",
       "label",
@@ -2884,11 +2878,11 @@ module.exports = {
     "functions": [
       {
         "name": "append-icon-cb",
-        "signature": "(): void"
+        "signature": "() => void"
       },
       {
         "name": "prepend-icon-cb",
-        "signature": "(): void"
+        "signature": "() => void"
       }
     ]
   },
@@ -4983,6 +4977,89 @@ module.exports = {
       "default"
     ]
   },
+  "v-img": {
+    "props": [
+      {
+        "name": "srcset",
+        "type": "string",
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "alt",
+        "type": "string",
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "aspectRatio",
+        "type": [
+          "string",
+          "number"
+        ],
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "contain",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "height",
+        "type": [
+          "string",
+          "number"
+        ],
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "lazySrc",
+        "type": "string",
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "maxHeight",
+        "type": [
+          "string",
+          "number"
+        ],
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "position",
+        "type": "string",
+        "default": "'center center'",
+        "source": null
+      },
+      {
+        "name": "sizes",
+        "type": "string",
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "src",
+        "type": [
+          "string",
+          "object"
+        ],
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "transition",
+        "type": "string",
+        "default": "'fade-transition'",
+        "source": null
+      }
+    ],
+    "mixins": []
+  },
   "v-input": {
     "props": [
       {
@@ -6159,8 +6236,8 @@ module.exports = {
       },
       {
         "name": "attach",
-        "type": "boolean",
-        "default": "false",
+        "type": "any",
+        "default": false,
         "source": "v-select"
       },
       {
@@ -7315,8 +7392,6 @@ module.exports = {
     "slots": [
       "append",
       "prepend",
-      "prepend-icon",
-      "append-icon",
       "default",
       "label"
     ],
@@ -7333,11 +7408,11 @@ module.exports = {
     "functions": [
       {
         "name": "append-icon-cb",
-        "signature": "(): void"
+        "signature": "() => void"
       },
       {
         "name": "prepend-icon-cb",
-        "signature": "(): void"
+        "signature": "() => void"
       }
     ]
   },
@@ -7732,11 +7807,11 @@ module.exports = {
     "functions": [
       {
         "name": "append-icon-cb",
-        "signature": "(): void"
+        "signature": "() => void"
       },
       {
         "name": "prepend-icon-cb",
-        "signature": "(): void"
+        "signature": "() => void"
       }
     ]
   },
@@ -7768,8 +7843,8 @@ module.exports = {
       },
       {
         "name": "attach",
-        "type": "boolean",
-        "default": "false",
+        "type": "any",
+        "default": false,
         "source": null
       },
       {
@@ -8378,7 +8453,7 @@ module.exports = {
       {
         "name": "valueComparator",
         "type": "function",
-        "default": "(a: any, b: any): boolean",
+        "default": "(a: any, b: any) => boolean",
         "source": "comparable"
       },
       {
@@ -8392,7 +8467,7 @@ module.exports = {
       },
       {
         "name": "filter",
-        "default": "(item: object, queryText: string, itemText: string): boolean"
+        "default": "(item: object, queryText: string, itemText: string) => boolean"
       }
     ],
     "mixins": [
@@ -8405,8 +8480,6 @@ module.exports = {
     "slots": [
       "append",
       "prepend",
-      "prepend-icon",
-      "append-icon",
       "default",
       "no-data",
       "label",
@@ -8453,11 +8526,11 @@ module.exports = {
     "functions": [
       {
         "name": "append-icon-cb",
-        "signature": "(): void"
+        "signature": "() => void"
       },
       {
         "name": "prepend-icon-cb",
-        "signature": "(): void"
+        "signature": "() => void"
       }
     ]
   },
@@ -8773,11 +8846,11 @@ module.exports = {
     "functions": [
       {
         "name": "append-icon-cb",
-        "signature": "(): void"
+        "signature": "() => void"
       },
       {
         "name": "prepend-icon-cb",
-        "signature": "(): void"
+        "signature": "() => void"
       }
     ]
   },
@@ -9356,19 +9429,17 @@ module.exports = {
     "slots": [
       "append",
       "prepend",
-      "prepend-icon",
-      "append-icon",
       "default",
       "label"
     ],
     "functions": [
       {
         "name": "append-icon-cb",
-        "signature": "(): void"
+        "signature": "() => void"
       },
       {
         "name": "prepend-icon-cb",
-        "signature": "(): void"
+        "signature": "() => void"
       }
     ]
   },
@@ -10485,6 +10556,10 @@ module.exports = {
         "value": "string"
       },
       {
+        "name": "click:append-outer",
+        "value": "Event"
+      },
+      {
         "name": "update:error",
         "value": "boolean"
       }
@@ -10492,11 +10567,11 @@ module.exports = {
     "functions": [
       {
         "name": "append-icon-cb",
-        "signature": "(): void"
+        "signature": "() => void"
       },
       {
         "name": "prepend-icon-cb",
-        "signature": "(): void"
+        "signature": "() => void"
       }
     ]
   },

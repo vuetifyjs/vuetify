@@ -190,25 +190,36 @@ const validatableEvents = [
 const inputFunctions = [
   {
     name: 'append-icon-cb',
-    signature: '(): void'
+    signature: '() => void'
   },
   {
     name: 'prepend-icon-cb',
-    signature: '(): void'
+    signature: '() => void'
   }
 ]
 
-const inputSlots = ['append', 'prepend', 'prepend-icon', 'append-icon', 'default']
+const inputEvents = [
+  {
+    name: 'click:prepend',
+    value: 'Event'
+  },
+  {
+    name: 'click:append',
+    value: 'Event'
+  }
+]
+
+const inputSlots = ['append', 'prepend', 'default']
 
 const VSelect = {
   props: [
     {
       name: 'filter',
-      default: '(item: object, queryText: string, itemText: string): boolean'
+      default: '(item: object, queryText: string, itemText: string) => boolean'
     },
     {
       name: 'valueComparator',
-      default: '(a: any, b: any): boolean'
+      default: '(a: any, b: any) => boolean'
     }
   ],
   slots: inputSlots.concat(['no-data', 'label', 'progress']),
@@ -770,6 +781,10 @@ module.exports = {
       {
         name: 'change',
         value: 'string'
+      },
+      {
+        name: 'click:append-outer',
+        value: 'Event'
       }
     ].concat(validatableEvents),
     functions: inputFunctions
