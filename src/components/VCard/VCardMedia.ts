@@ -1,8 +1,11 @@
 // Helpers
 import { convertToUnit } from '../../util/helpers'
 
+// Types
+import Vue, { VNode } from 'vue'
+
 /* @vue/component */
-export default {
+export default Vue.extend({
   name: 'v-card-media',
 
   props: {
@@ -16,7 +19,7 @@ export default {
     }
   },
 
-  render (h) {
+  render (h): VNode {
     const data = {
       'class': 'v-card__media',
       style: {
@@ -42,4 +45,4 @@ export default {
 
     return h('div', data, children)
   }
-}
+})
