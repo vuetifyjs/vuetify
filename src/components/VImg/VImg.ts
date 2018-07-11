@@ -8,6 +8,7 @@ import { consoleError } from '../../util/console'
 // not intended for public use, this is passed in by vuetify-loader
 interface srcObject {
   src: string
+  srcset?: string
   lazySrc: string
   aspect: number
 }
@@ -25,6 +26,8 @@ export default Vue.extend({
       required: true
     } as PropValidator<string | srcObject>,
     lazySrc: String,
+    srcset: String,
+    sizes: String,
     // lazy: [Boolean, String] // TODO: only load when visible
     transition: {
       type: String,
@@ -34,6 +37,7 @@ export default Vue.extend({
 
   data () {
     return {
+      image: null as HTMLImageElement | null,
       isLoading: false,
       computedAspectRatio: undefined as number | undefined
     }
@@ -47,6 +51,9 @@ export default Vue.extend({
     },
     computedSrc (): string {
       return typeof this.src === 'string' ? this.src : this.src.src
+    },
+    computedSrcset (): string | undefined {
+      return typeof this.src === 'string' ? this.srcset : this.src.srcset
     },
     computedLazySrc (): string {
       return typeof this.src === 'string'
@@ -96,6 +103,7 @@ export default Vue.extend({
     },
     loadImage () {
       const image = new Image()
+      this.image = image
 
       image.onload = () => {
         if (image.decode) {
@@ -107,6 +115,8 @@ export default Vue.extend({
       image.onerror = this.onError
 
       image.src = this.computedSrc
+      image.sizes = this.sizes
+      this.computedSrcset && (image.srcset = this.computedSrcset)
       this.aspectRatio || this.pollForSize(image)
     },
     pollForSize (img: HTMLImageElement, timeout: number | null = 100) {
@@ -127,6 +137,11 @@ export default Vue.extend({
   },
 
   render (h): VNode {
+    const attrs = this.isLoading ? undefined : {
+      srcset: this.srcset,
+      sizes: this.sizes
+    }
+
     const image = h('img', {
       staticClass: 'v-image__image',
       class: {
@@ -134,6 +149,7 @@ export default Vue.extend({
       },
       attrs: {
         src: this.currentSrc,
+        ...attrs,
         ...this.$attrs
       },
       key: this.currentSrc
