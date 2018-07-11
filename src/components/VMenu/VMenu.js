@@ -190,7 +190,7 @@ export default {
     const data = {
       staticClass: 'v-menu',
       style: {
-        display: !this.fullWidth && this.$slots.activator ? 'inline-block' : 'block'
+        display: null
       },
       directives: [{
         arg: 500,
@@ -200,6 +200,10 @@ export default {
       on: {
         keydown: this.changeListIndex
       }
+    }
+
+    if (this.$slots.activator) {
+      data.style.display = this.fullWidth ? 'block' : 'inline-block'
     }
 
     return h('div', data, [
