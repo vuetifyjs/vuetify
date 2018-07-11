@@ -818,16 +818,6 @@ module.exports = {
         "name": "update:error",
         "value": "boolean"
       }
-    ],
-    "functions": [
-      {
-        "name": "append-icon-cb",
-        "signature": "() => void"
-      },
-      {
-        "name": "prepend-icon-cb",
-        "signature": "() => void"
-      }
     ]
   },
   "v-avatar": {
@@ -2051,16 +2041,6 @@ module.exports = {
       "prepend",
       "default",
       "label"
-    ],
-    "functions": [
-      {
-        "name": "append-icon-cb",
-        "signature": "() => void"
-      },
-      {
-        "name": "prepend-icon-cb",
-        "signature": "() => void"
-      }
     ]
   },
   "v-chip": {
@@ -2873,16 +2853,6 @@ module.exports = {
       {
         "name": "update:error",
         "value": "boolean"
-      }
-    ],
-    "functions": [
-      {
-        "name": "append-icon-cb",
-        "signature": "() => void"
-      },
-      {
-        "name": "prepend-icon-cb",
-        "signature": "() => void"
       }
     ]
   },
@@ -7404,16 +7374,6 @@ module.exports = {
         "name": "update:error",
         "value": "boolean"
       }
-    ],
-    "functions": [
-      {
-        "name": "append-icon-cb",
-        "signature": "() => void"
-      },
-      {
-        "name": "prepend-icon-cb",
-        "signature": "() => void"
-      }
     ]
   },
   "v-radio": {
@@ -7802,16 +7762,6 @@ module.exports = {
       {
         "name": "update:error",
         "value": "boolean"
-      }
-    ],
-    "functions": [
-      {
-        "name": "append-icon-cb",
-        "signature": "() => void"
-      },
-      {
-        "name": "prepend-icon-cb",
-        "signature": "() => void"
       }
     ]
   },
@@ -8522,16 +8472,6 @@ module.exports = {
         "name": "update:error",
         "value": "boolean"
       }
-    ],
-    "functions": [
-      {
-        "name": "append-icon-cb",
-        "signature": "() => void"
-      },
-      {
-        "name": "prepend-icon-cb",
-        "signature": "() => void"
-      }
     ]
   },
   "v-slider": {
@@ -8841,16 +8781,6 @@ module.exports = {
       {
         "name": "update:error",
         "value": "boolean"
-      }
-    ],
-    "functions": [
-      {
-        "name": "append-icon-cb",
-        "signature": "() => void"
-      },
-      {
-        "name": "prepend-icon-cb",
-        "signature": "() => void"
       }
     ]
   },
@@ -9431,16 +9361,6 @@ module.exports = {
       "prepend",
       "default",
       "label"
-    ],
-    "functions": [
-      {
-        "name": "append-icon-cb",
-        "signature": "() => void"
-      },
-      {
-        "name": "prepend-icon-cb",
-        "signature": "() => void"
-      }
     ]
   },
   "v-system-bar": {
@@ -10562,16 +10482,6 @@ module.exports = {
       {
         "name": "update:error",
         "value": "boolean"
-      }
-    ],
-    "functions": [
-      {
-        "name": "append-icon-cb",
-        "signature": "() => void"
-      },
-      {
-        "name": "prepend-icon-cb",
-        "signature": "() => void"
       }
     ]
   },
