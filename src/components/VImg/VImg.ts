@@ -4,6 +4,7 @@ import Vue, { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
 
 import { consoleError } from '../../util/console'
+import { convertToUnit } from '../../util/helpers'
 
 // not intended for public use, this is passed in by vuetify-loader
 interface srcObject {
@@ -36,7 +37,8 @@ export default Vue.extend({
     transition: {
       type: String,
       default: 'fade-transition'
-    }
+    },
+    maxHeight: [String, Number]
   },
 
   data () {
@@ -165,13 +167,16 @@ export default Vue.extend({
 
     return h('div', {
       staticClass: 'v-image',
-      style: this.aspectStyle,
+      style: this.maxHeight ? {
+        maxHeight: convertToUnit(this.maxHeight)
+      } : undefined,
       attrs: {
         role: this.alt ? 'img' : undefined,
         'aria-label': this.alt,
         ...this.$attrs
       }
     }, [
+      h('div', { style: this.aspectStyle }),
       h('transition', {
         attrs: {
           name: this.transition,
