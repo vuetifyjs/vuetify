@@ -766,6 +766,10 @@ module.exports = {
         value: 'string'
       },
       {
+        name: 'click:prepend-inner',
+        value: 'Event'
+      },
+      {
         name: 'click:append-outer',
         value: 'Event'
       }
