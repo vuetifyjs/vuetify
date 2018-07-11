@@ -45,7 +45,7 @@ export default Vue.extend({
     return {
       currentSrc: '', // Set from srcset
       image: null as HTMLImageElement | null,
-      isLoading: false,
+      isLoading: true,
       computedAspectRatio: undefined as number | undefined
     }
   },
@@ -76,7 +76,7 @@ export default Vue.extend({
       if (!this.isLoading) this.init()
       else this.loadImage()
     },
-    '$vuetify.breakpoint.width': 'onResize'
+    '$vuetify.breakpoint.width': 'getSrc'
   },
 
   created () {
@@ -97,7 +97,7 @@ export default Vue.extend({
       this.loadImage()
     },
     onLoad () {
-      if (this.image) this.currentSrc = this.image.currentSrc
+      this.getSrc()
       this.isLoading = false
       this.$emit('load', this.src)
     },
@@ -105,7 +105,7 @@ export default Vue.extend({
       consoleError('Image load failed\n\nsrc: ' + this.computedSrc, this)
       this.$emit('error', this.src)
     },
-    onResize () {
+    getSrc () {
       if (this.image) this.currentSrc = this.image.currentSrc
     },
     loadImage () {
@@ -122,25 +122,24 @@ export default Vue.extend({
       image.onerror = this.onError
 
       image.src = this.computedSrc
-      image.sizes = this.sizes
+      this.sizes && (image.sizes = this.sizes)
       this.computedSrcset && (image.srcset = this.computedSrcset)
+
       this.aspectRatio || this.pollForSize(image)
       this.currentSrc = image.currentSrc
     },
     pollForSize (img: HTMLImageElement, timeout: number | null = 100) {
-      if (!(img.naturalHeight || img.naturalWidth)) {
-        const poll = () => {
-          const { naturalHeight, naturalWidth } = img
+      const poll = () => {
+        const { naturalHeight, naturalWidth } = img
 
-          if (naturalHeight || naturalWidth) {
-            this.computedAspectRatio = naturalHeight / naturalWidth
-          } else {
-            setTimeout(poll, timeout)
-          }
+        if (naturalHeight || naturalWidth) {
+          this.computedAspectRatio = naturalHeight / naturalWidth
+        } else {
+          timeout != null && setTimeout(poll, timeout)
         }
-
-        timeout != null ? setTimeout(poll, timeout) : poll()
       }
+
+      poll()
     }
   },
 
