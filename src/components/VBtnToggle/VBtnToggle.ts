@@ -1,19 +1,26 @@
 import '../../stylus/components/_button-toggle.styl'
 
 // Types
-import { VNode } from 'vue'
+import Vue, { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
 
 // Mixins
-import mixins from '../../util/mixins'
+import mixins, { ExtractVue } from '../../util/mixins'
 import ButtonGroup from '../../mixins/button-group'
 import Themeable from '../../mixins/themeable'
 
 // Util
 import { consoleWarn } from '../../util/console'
 
+interface options extends Vue {
+  $el:HTMLDivElement
+}
+
 /* @vue/component */
-const VBtnToggle = mixins(ButtonGroup, Themeable).extend({
+export default mixins<options &
+  ExtractVue<typeof ButtonGroup> &
+  ExtractVue<typeof Themeable>
+>(ButtonGroup, Themeable).extend({
   name: 'v-btn-toggle',
 
   model: {
@@ -110,9 +117,3 @@ const VBtnToggle = mixins(ButtonGroup, Themeable).extend({
     return h('div', { class: this.classes }, this.$slots.default)
   }
 })
-
-/* eslint-disable-next-line no-redeclare */
-export type VBtnToggle = InstanceType<typeof VBtnToggle> & {
-  $el: HTMLDivElement
-}
-export default VBtnToggle
