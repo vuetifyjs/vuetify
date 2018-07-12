@@ -5,7 +5,7 @@ import '../../stylus/components/_parallax.styl'
 import Translatable from '../../mixins/translatable'
 
 // Types
-import { VNode } from 'vue/types/vnode'
+import { VNode, VNodeData } from 'vue/types/vnode'
 import mixins from '../../util/mixins'
 
 export default mixins(Translatable).extend({
@@ -23,6 +23,16 @@ export default mixins(Translatable).extend({
   data: () => ({
     isBooted: false
   }),
+
+  computed: {
+    styles (): object {
+      return {
+        display: 'block',
+        opacity: this.isBooted ? 1 : 0,
+        transform: `translate(-50%, ${this.parallax}px)`
+      }
+    }
+  },
 
   watch: {
     parallax () {
@@ -56,21 +66,16 @@ export default mixins(Translatable).extend({
   },
 
   render (h): VNode {
-    const imgData = {
+    const imgData: VNodeData = {
       staticClass: 'v-parallax__image',
-      style: {
-        display: 'block',
-        opacity: this.isBooted ? 1 : 0,
-        transform: `translate(-50%, ${this.parallax}px)`
-      },
+      style: this.styles,
       attrs: {
-        alt: null as null | string,
         src: this.src
       },
       ref: 'img'
     }
 
-    if (this.alt) imgData.attrs.alt = this.alt
+    if (this.alt) imgData.attrs!.alt = this.alt
 
     const container = h('div', {
       staticClass: 'v-parallax__image-container'

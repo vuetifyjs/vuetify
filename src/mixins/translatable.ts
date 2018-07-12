@@ -36,7 +36,10 @@ export default Vue.extend({
       window.addEventListener('scroll', this.translate, false)
       window.addEventListener('resize', this.translate, false)
     },
-    objHeight: (): number => 0,
+    /** @abstract **/
+    objHeight (): number {
+      throw new Error('Not implemented !')
+    },
     translate () {
       this.calcDimensions()
 
