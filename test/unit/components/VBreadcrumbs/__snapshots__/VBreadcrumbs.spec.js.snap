@@ -81,14 +81,14 @@ exports[`VBreadcrumbs.js should use a custom divider slot 1`] = `
 
 exports[`VBreadcrumbs.js should use custom justify props 1`] = `
 
-<ul class="v-breadcrumbs">
+<ul class="v-breadcrumbs justify-center">
 </ul>
 
 `;
 
 exports[`VBreadcrumbs.js should use custom justify props 2`] = `
 
-<ul class="v-breadcrumbs">
+<ul class="v-breadcrumbs justify-end">
 </ul>
 
 `;

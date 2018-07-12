@@ -5,8 +5,8 @@ export { VBreadcrumbs, VBreadcrumbsItem }
 
 /* istanbul ignore next */
 VBreadcrumbs.install = function install (Vue) {
-  Vue.component(VBreadcrumbs.name, VBreadcrumbs)
-  Vue.component(VBreadcrumbsItem.name, VBreadcrumbsItem)
+  Vue.component(VBreadcrumbs.options.name, VBreadcrumbs)
+  Vue.component(VBreadcrumbsItem.options.name, VBreadcrumbsItem)
 }
 
 export default VBreadcrumbs
