@@ -60,7 +60,6 @@ export default {
     return {
       animate: false,
       animateTimeout: null,
-      isDependent: false,
       stackClass: 'v-dialog__content--active',
       stackMinZIndex: 200
     }

@@ -12,7 +12,6 @@ import VTextField from '../VTextField/VTextField'
 
 // Mixins
 import Comparable from '../../mixins/comparable'
-import Dependent from '../../mixins/dependent'
 import Filterable from '../../mixins/filterable'
 import Menuable from '../../mixins/menuable'
 
@@ -48,7 +47,6 @@ export default {
     fakeVMenu,
     fakeMenuable,
     Comparable,
-    Dependent,
     Filterable
   ],
 
