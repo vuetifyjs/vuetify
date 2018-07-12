@@ -1,12 +1,15 @@
+// Style
 import '../../stylus/components/_parallax.styl'
 
+// Mixins
 import Translatable from '../../mixins/translatable'
 
-/* @vue/component */
-export default {
-  name: 'v-parallax',
+// Types
+import { VNode } from 'vue/types/vnode'
+import mixins from '../../util/mixins'
 
-  mixins: [Translatable],
+export default mixins(Translatable).extend({
+  name: 'v-parallax',
 
   props: {
     alt: String,
@@ -17,21 +20,9 @@ export default {
     src: String
   },
 
-  data () {
-    return {
-      isBooted: false
-    }
-  },
-
-  computed: {
-    styles () {
-      return {
-        display: 'block',
-        opacity: this.isBooted ? 1 : 0,
-        transform: `translate(-50%, ${this.parallax}px)`
-      }
-    }
-  },
+  data: () => ({
+    isBooted: false
+  }),
 
   watch: {
     parallax () {
@@ -45,28 +36,35 @@ export default {
 
   methods: {
     init () {
-      if (!this.$refs.img) return
+      const img = this.$refs.img as HTMLImageElement
 
-      if (this.$refs.img.complete) {
+      if (!img) return
+
+      if (img.complete) {
         this.translate()
         this.listeners()
       } else {
-        this.$refs.img.addEventListener('load', () => {
+        img.addEventListener('load', () => {
           this.translate()
           this.listeners()
         }, false)
       }
     },
     objHeight () {
-      return this.$refs.img.naturalHeight
+      return (this.$refs.img as HTMLImageElement).naturalHeight
     }
   },
 
-  render (h) {
+  render (h): VNode {
     const imgData = {
       staticClass: 'v-parallax__image',
-      style: this.styles,
+      style: {
+        display: 'block',
+        opacity: this.isBooted ? 1 : 0,
+        transform: `translate(-50%, ${this.parallax}px)`
+      },
       attrs: {
+        alt: null as null | string,
         src: this.src
       },
       ref: 'img'
@@ -92,4 +90,4 @@ export default {
       on: this.$listeners
     }, [container, content])
   }
-}
+})
