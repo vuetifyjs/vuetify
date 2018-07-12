@@ -1,20 +1,24 @@
-/* @vue/component */
-export default {
+import Vue from 'vue'
+
+export default Vue.extend({
   name: 'translatable',
 
-  data () {
-    return {
-      parallax: null,
-      parallaxDist: null,
-      percentScrolled: null,
-      scrollTop: null,
-      windowHeight: null,
-      windowBottom: null
-    }
+  props: {
+    height: Number
   },
 
+  data: () => ({
+    elOffsetTop: 0,
+    parallax: 0,
+    parallaxDist: 0,
+    percentScrolled: 0,
+    scrollTop: 0,
+    windowHeight: 0,
+    windowBottom: 0
+  }),
+
   computed: {
-    imgHeight () {
+    imgHeight (): number {
       return this.objHeight()
     }
   },
@@ -25,11 +29,21 @@ export default {
   },
 
   methods: {
+    calcDimensions () {
+      this.scrollTop = window.pageYOffset
+      this.parallaxDist = this.imgHeight - this.height
+      this.windowHeight = window.innerHeight
+      this.windowBottom = this.scrollTop + this.windowHeight
+
+      if (!this.elOffsetTop) {
+        this.elOffsetTop = this.$el.getBoundingClientRect().top + this.scrollTop
+      }
+    },
     listeners () {
       window.addEventListener('scroll', this.translate, false)
       window.addEventListener('resize', this.translate, false)
     },
-
+    objHeight: (): number => 0,
     translate () {
       this.calcDimensions()
 
@@ -39,20 +53,6 @@ export default {
       )
 
       this.parallax = Math.round(this.parallaxDist * this.percentScrolled)
-
-      if (this.translated) {
-        this.translated()
-      }
-    },
-
-    calcDimensions () {
-      const offset = this.$el.getBoundingClientRect()
-
-      this.scrollTop = window.pageYOffset
-      this.parallaxDist = this.imgHeight - this.height
-      this.elOffsetTop = offset.top + this.scrollTop
-      this.windowHeight = window.innerHeight
-      this.windowBottom = this.scrollTop + this.windowHeight
     }
   }
-}
+})
