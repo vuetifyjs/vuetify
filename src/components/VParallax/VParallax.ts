@@ -5,10 +5,17 @@ import '../../stylus/components/_parallax.styl'
 import Translatable from '../../mixins/translatable'
 
 // Types
+import Vue from 'vue'
 import { VNode, VNodeData } from 'vue/types/vnode'
-import mixins from '../../util/mixins'
+import mixins, { ExtractVue } from '../../util/mixins'
 
-export default mixins(Translatable).extend({
+interface options extends Vue {
+  $refs: {
+    img: HTMLImageElement
+  }
+}
+
+export default mixins<options & ExtractVue<typeof Translatable>>(Translatable).extend({
   name: 'v-parallax',
 
   props: {
@@ -46,7 +53,7 @@ export default mixins(Translatable).extend({
 
   methods: {
     init () {
-      const img = this.$refs.img as HTMLImageElement
+      const img = this.$refs.img
 
       if (!img) return
 
@@ -61,7 +68,7 @@ export default mixins(Translatable).extend({
       }
     },
     objHeight () {
-      return (this.$refs.img as HTMLImageElement).naturalHeight
+      return this.$refs.img.naturalHeight
     }
   },
 
