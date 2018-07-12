@@ -1,5 +1,6 @@
 import Vue, { VNode } from 'vue'
-import { toggleable } from './toggleable'
+import { Toggleable } from './toggleable'
+import { ExtractVue } from '../util/mixins'
 
 /**
  * Bootable
@@ -10,7 +11,7 @@ import { toggleable } from './toggleable'
  * Otherwise can be set manually
  */
 /* @vue/component */
-export default Vue.extend<toggleable>().extend({
+export default Vue.extend<ExtractVue<Toggleable>>().extend({
   name: 'bootable',
 
   props: {

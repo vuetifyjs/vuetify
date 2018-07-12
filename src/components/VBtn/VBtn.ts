@@ -2,9 +2,9 @@
 import '../../stylus/components/_buttons.styl'
 
 // Types
-import { VNode, VNodeChildren } from 'vue'
+import Vue, { VNode, VNodeChildren } from 'vue'
 import { PropValidator } from 'vue/types/options'
-import mixins from '../../util/mixins'
+import mixins, { ExtractVue } from '../../util/mixins'
 
 // Components
 import VProgressCircular from '../VProgressCircular'
@@ -14,10 +14,25 @@ import Colorable from '../../mixins/colorable'
 import Positionable from '../../mixins/positionable'
 import Routable from '../../mixins/routable'
 import Themeable from '../../mixins/themeable'
-import { factory as ToggleableFactory } from '../../mixins/toggleable'
-import { inject as RegistrableInject } from '../../mixins/registrable'
+import { Toggleable, factory as ToggleableFactory } from '../../mixins/toggleable'
+import { Registrable, inject as RegistrableInject } from '../../mixins/registrable'
 
-const VBtn = mixins(
+interface options extends Vue {
+  $el: HTMLButtonElement | HTMLAnchorElement
+}
+
+export default mixins<options &
+/* eslint-disable indent */
+  ExtractVue<
+    typeof Colorable,
+    typeof Routable,
+    typeof Positionable,
+    typeof Themeable,
+    Toggleable<'inputValue'>,
+    Registrable<'buttonGroup'>
+  >
+/* eslint-enable indent */
+>(
   Colorable,
   Routable,
   Positionable,
@@ -151,9 +166,3 @@ const VBtn = mixins(
     return h(tag, data, children)
   }
 })
-
-/* eslint-disable-next-line no-redeclare */
-export type VBtn = InstanceType<typeof VBtn> & {
-  $el: HTMLButtonElement | HTMLAnchorElement
-}
-export default VBtn

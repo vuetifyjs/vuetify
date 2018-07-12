@@ -1,4 +1,4 @@
-/* eslint-disable max-len, import/export */
+/* eslint-disable max-len, import/export, no-use-before-define */
 import Vue, { VueConstructor } from 'vue'
 
 export default function mixins<A extends Vue> (CtorA: VueConstructor<A>): VueConstructor<A>
@@ -16,4 +16,5 @@ export default function mixins (...args: VueConstructor[]): VueConstructor {
  * Returns the instance type from a VueConstructor
  * Useful for adding types when using mixins().extend()
  */
-export type ExtractVue<T extends VueConstructor> = T extends VueConstructor<infer V> ? V : never
+export type ExtractVue<A extends VueConstructor, B extends VueConstructor = VueConstructor, C extends VueConstructor = VueConstructor, D extends VueConstructor = VueConstructor, E extends VueConstructor = VueConstructor, F extends VueConstructor = VueConstructor> = ExtractOne<A> & ExtractOne<B> & ExtractOne<C> & ExtractOne<D> & ExtractOne<E> & ExtractOne<F>
+type ExtractOne<T extends VueConstructor> = T extends VueConstructor<infer V> ? V : never

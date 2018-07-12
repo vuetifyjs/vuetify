@@ -13,7 +13,7 @@ import Themeable from '../../mixins/themeable'
 import { consoleWarn } from '../../util/console'
 
 /* @vue/component */
-const VBtnToggle = mixins(ButtonGroup, Themeable).extend({
+export default mixins(ButtonGroup, Themeable).extend({
   name: 'v-btn-toggle',
 
   model: {
@@ -110,9 +110,3 @@ const VBtnToggle = mixins(ButtonGroup, Themeable).extend({
     return h('div', { class: this.classes }, this.$slots.default)
   }
 })
-
-/* eslint-disable-next-line no-redeclare */
-export type VBtnToggle = InstanceType<typeof VBtnToggle> & {
-  $el: HTMLDivElement
-}
-export default VBtnToggle
