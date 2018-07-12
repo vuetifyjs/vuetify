@@ -59,9 +59,6 @@ export default {
     },
     objHeight () {
       return this.$refs.img.naturalHeight
-    },
-    elOffsetTop () {
-      return this.$el.offsetTop
     }
   },
 
