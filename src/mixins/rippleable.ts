@@ -1,7 +1,10 @@
 import Ripple from '../directives/ripple'
 
+// Types
+import Vue, { VNode, VNodeData, VNodeDirective } from 'vue'
+
 /* @vue/component */
-export default {
+export default Vue.extend({
   name: 'rippleable',
 
   directives: { Ripple },
@@ -14,18 +17,16 @@ export default {
   },
 
   methods: {
-    genRipple (data = {}) {
+    genRipple (data: VNodeData = {}): VNode | null {
       if (!this.ripple) return null
 
       data.staticClass = 'v-input--selection-controls__ripple'
-
-      if (this.rippleClasses) data.staticClass += ` ${this.rippleClasses}`
 
       data.directives = data.directives || []
       data.directives.push({
         name: 'ripple',
         value: { center: true }
-      })
+      } as VNodeDirective)
       data.on = Object.assign({
         click: this.onChange
       }, this.$listeners)
@@ -34,4 +35,4 @@ export default {
     },
     onChange () {}
   }
-}
+})
