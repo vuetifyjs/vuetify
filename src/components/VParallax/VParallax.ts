@@ -15,6 +15,7 @@ interface options extends Vue {
   }
 }
 
+/* @vue/component */
 export default mixins<options & ExtractVue<typeof Translatable>>(Translatable).extend({
   name: 'v-parallax',
 
