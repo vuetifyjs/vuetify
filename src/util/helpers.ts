@@ -1,4 +1,4 @@
-import { CreateElement, VNode, VNodeDirective, FunctionalComponentOptions } from 'vue'
+import Vue, { CreateElement, VNode, VNodeDirective, FunctionalComponentOptions } from 'vue'
 
 export function createSimpleFunctional (
   c: string,
@@ -261,4 +261,11 @@ export const keyCodes = Object.freeze({
 
 export function keys<O> (o: O) {
   return Object.keys(o) as (keyof O)[]
+}
+
+export function localizeNumber (this: Vue, num: Number, locale?: string, useGrouping = false) {
+  if (!locale) {
+    locale = this.$vuetify.lang.current
+  }
+  return num.toLocaleString(locale, { useGrouping })
 }

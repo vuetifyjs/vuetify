@@ -6,7 +6,7 @@ import Filterable from './filterable'
 import Themeable from './themeable'
 import Loadable from './loadable'
 
-import { getObjectValueByPath, isObject } from '../util/helpers'
+import { getObjectValueByPath, isObject, localizeNumber } from '../util/helpers'
 import { consoleWarn } from '../util/console'
 
 /**
@@ -42,18 +42,7 @@ export default {
       default: '$vuetify.icons.prev'
     },
     rowsPerPageItems: {
-      type: Array,
-      default () {
-        return [
-          5,
-          10,
-          25,
-          {
-            text: '$vuetify.dataIterator.rowsPerPageAll',
-            value: -1
-          }
-        ]
-      }
+      type: Array
     },
     rowsPerPageText: {
       type: String,
@@ -157,13 +146,27 @@ export default {
   }),
 
   computed: {
+    currentLocale () {
+      return this.$vuetify.lang.current
+    },
     computedPagination () {
       return this.hasPagination
         ? this.pagination
         : this.defaultPagination
     },
+    defaultRowsPerPageItems () {
+      return [
+        localizeNumber(5, this.currentLocale),
+        localizeNumber(10, this.currentLocale),
+        localizeNumber(25, this.currentLocale),
+        {
+          text: '$vuetify.dataIterator.rowsPerPageAll',
+          value: -1
+        }
+      ]
+    },
     computedRowsPerPageItems () {
-      return this.rowsPerPageItems.map(item => {
+      return (this.rowsPerPageItems || this.defaultRowsPerPageItems).map(item => {
         return isObject(item)
           ? Object.assign({}, item, {
             text: this.$vuetify.t(item.text)
@@ -238,10 +241,12 @@ export default {
 
   methods: {
     initPagination () {
-      if (!this.rowsPerPageItems.length) {
-        consoleWarn(`The prop 'rows-per-page-items' can not be empty`, this)
-      } else {
-        this.defaultPagination.rowsPerPage = this.rowsPerPageItems[0]
+      if (this.rowsPerPageItems) {
+        if (!this.rowsPerPageItems.length) {
+          consoleWarn(`The prop 'rows-per-page-items' can not be empty`, this)
+        } else {
+          this.defaultPagination.rowsPerPage = this.rowsPerPageItems[0]
+        }
       }
 
       this.defaultPagination.totalItems = this.items.length
@@ -454,7 +459,10 @@ export default {
             pageStop: stop,
             itemsLength: this.itemsLength
           })
-          : this.$vuetify.t('$vuetify.dataIterator.pageText', this.pageStart + 1, stop, this.itemsLength)
+          : this.$vuetify.t('$vuetify.dataIterator.pageText',
+            localizeNumber(this.pageStart + 1, this.currentLocale),
+            localizeNumber(stop, this.currentLocale),
+            localizeNumber(this.itemsLength, this.currentLocale))
       }
 
       return this.$createElement('div', {
@@ -473,7 +481,7 @@ export default {
       return [this.$createElement('div', {
         'class': this.actionsClasses
       }, [
-        this.rowsPerPageItems.length > 1 ? this.genSelect() : null,
+        this.computedRowsPerPageItems.length > 1 ? this.genSelect() : null,
         rangeControls
       ])]
     }
