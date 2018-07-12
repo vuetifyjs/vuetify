@@ -49,7 +49,7 @@ export default mixins(
     const badge = this.$slots.badge ? [h('span', {
       staticClass: 'v-badge__badge',
       'class': this.addBackgroundColorClassChecks(),
-      attrs: this.attrs,
+      attrs: this.$attrs,
       directives: [{
         name: 'show',
         value: this.isActive

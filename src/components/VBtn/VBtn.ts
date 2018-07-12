@@ -14,7 +14,7 @@ import Colorable from '../../mixins/colorable'
 import Positionable from '../../mixins/positionable'
 import Routable from '../../mixins/routable'
 import Themeable from '../../mixins/themeable'
-import Toggleable, { factory as ToggleableFactory } from '../../mixins/toggleable'
+import { Toggleable, factory as ToggleableFactory } from '../../mixins/toggleable'
 import { Registrable, inject as RegistrableInject } from '../../mixins/registrable'
 
 interface options extends Vue {
@@ -22,12 +22,16 @@ interface options extends Vue {
 }
 
 export default mixins<options &
-  ExtractVue<typeof Colorable> &
-  ExtractVue<typeof Routable> &
-  ExtractVue<typeof Positionable> &
-  ExtractVue<typeof Themeable> &
-  ExtractVue<typeof Toggleable> &
-  ExtractVue<Registrable<string>>
+/* eslint-disable indent */
+  ExtractVue<
+    typeof Colorable,
+    typeof Routable,
+    typeof Positionable,
+    typeof Themeable,
+    Toggleable<'inputValue'>,
+    Registrable<'buttonGroup'>
+  >
+/* eslint-enable indent */
 >(
   Colorable,
   Routable,
