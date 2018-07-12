@@ -2,6 +2,8 @@ import Vue, { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
 import { deprecate } from '../../util/console'
 
+import { VBreadcrumbsDivider } from '.'
+
 import '../../stylus/components/_breadcrumbs.styl'
 
 /* @vue/component */
@@ -68,12 +70,10 @@ export default Vue.extend({
       return children
     },
     genDivider () {
-      return this.$createElement('li', {
-        staticClass: 'v-breadcrumbs__divider'
-      }, this.$slots.divider ? this.$slots.divider : this.divider)
+      return this.$createElement(VBreadcrumbsDivider, this.$slots.divider ? this.$slots.divider : this.divider)
     },
     genItems () {
-      if (!this.$scopedSlots.item) return undefined
+      if (!this.$scopedSlots.item) return this.$slots.default
 
       const items = []
 
