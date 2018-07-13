@@ -154,25 +154,24 @@ export default {
         ? this.pagination
         : this.defaultPagination
     },
-    defaultRowsPerPageItems () {
-      return [
-        localizeNumber(5, this.currentLocale),
-        localizeNumber(10, this.currentLocale),
-        localizeNumber(25, this.currentLocale),
-        {
-          text: '$vuetify.dataIterator.rowsPerPageAll',
-          value: -1
-        }
-      ]
-    },
     computedRowsPerPageItems () {
-      return (this.rowsPerPageItems || this.defaultRowsPerPageItems).map(item => {
-        return isObject(item)
-          ? Object.assign({}, item, {
-            text: this.$vuetify.t(item.text)
-          })
-          : item
-      })
+      if (this.rowsPerPageItems) {
+        return this.rowsPerPageItems.map(item => {
+          return isObject(item)
+            ? Object.assign({}, item, {
+              text: this.$vuetify.t(item.text)
+            })
+            : item
+        })
+      } else {
+        // Default rows per page items
+        return [
+          { value: 5, text: localizeNumber(5, this.currentLocale) },
+          { value: 10, text: localizeNumber(10, this.currentLocale) },
+          { value: 25, text: localizeNumber(25, this.currentLocale) },
+          { value: -1, text: this.$vuetify.t('$vuetify.dataIterator.rowsPerPageAll') }
+        ]
+      }
     },
     hasPagination () {
       const pagination = this.pagination || {}
