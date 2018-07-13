@@ -1,4 +1,9 @@
-import Vue, { CreateElement, VNode, VNodeDirective, FunctionalComponentOptions } from 'vue'
+import Vue, {
+  CreateElement,
+  VNode,
+  VNodeDirective,
+  FunctionalComponentOptions
+} from 'vue'
 
 export function createSimpleFunctional (
   c: string,
