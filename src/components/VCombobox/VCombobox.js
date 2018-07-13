@@ -157,17 +157,19 @@ export default {
       this.editingIndex = -1
     },
     updateCombobox () {
-      // When using chips and search is dirty
-      // avoid updating input
-      if (this.hasChips && !this.searchIsDirty) return
+      const isUsingSlot = Boolean(this.$scopedSlots.selection) || this.hasChips
+
+      // If search is not dirty and is
+      // using slot, do nothing
+      if (isUsingSlot && !this.searchIsDirty) return
 
       // The internal search is not matching
-      // the initial value, update the input
+      // the internal value, update the input
       if (this.internalSearch !== this.getText(this.internalValue)) this.setValue()
 
-      // Reset search if using chips
+      // Reset search if using slot
       // to avoid a double input
-      if (this.hasChips) this.internalSearch = undefined
+      if (isUsingSlot) this.internalSearch = undefined
     },
     updateSelf () {
       this.multiple ? this.updateTags() : this.updateCombobox()
