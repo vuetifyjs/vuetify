@@ -146,4 +146,38 @@ test('VForm.js', ({ mount }) => {
     await new Promise(resolve => setTimeout(resolve, 0))
     expect(Object.keys(wrapper.vm.errorBag).length).toBe(0)
   })
+
+  it('should register and unregister items', () => {
+    const wrapper = mount(VForm, {
+      slots: {
+        default: [VTextField]
+      }
+    })
+
+    expect(wrapper.vm.inputs.length).toBe(1)
+
+    const input = wrapper.vm.inputs[0]
+
+    // Should not modify inputs if
+    // does not exist
+    wrapper.vm.unregister({ _uid: input._uid + 1 })
+
+    expect(wrapper.vm.inputs.length).toBe(1)
+
+    wrapper.vm.unregister(input)
+
+    expect(wrapper.vm.inputs.length).toBe(0)
+
+    // Add back input
+    wrapper.vm.register(input)
+
+    expect(wrapper.vm.inputs.length).toBe(1)
+
+    const shouldValidate = jest.fn()
+    wrapper.vm.watchers[0].shouldValidate = shouldValidate
+
+    wrapper.vm.unregister(input)
+
+    expect(shouldValidate).toBeCalled()
+  })
 })
