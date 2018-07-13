@@ -3,7 +3,6 @@ import Ripple from '../directives/ripple'
 // Types
 import Vue, { VNode, VNodeData, VNodeDirective } from 'vue'
 
-/* @vue/component */
 export default Vue.extend({
   name: 'rippleable',
 
