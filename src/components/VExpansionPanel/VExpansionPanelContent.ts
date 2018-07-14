@@ -9,7 +9,7 @@ import VIcon from '../VIcon'
 import VExpansionPanel from '.'
 
 import mixins, { ExtractVue } from '../../util/mixins'
-import Vue, { VNode } from '../../../node_modules/vue'
+import Vue, { VNode } from 'vue'
 
 import { consoleWarn } from '../../util/console'
 
