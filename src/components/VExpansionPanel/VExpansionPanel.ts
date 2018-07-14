@@ -6,8 +6,8 @@ import Themeable from '../../mixins/themeable'
 import { provide as RegistrableProvide } from '../../mixins/registrable'
 
 import mixins from '../../util/mixins'
-import { VNode } from '../../../node_modules/vue'
-import { PropValidator } from '../../../node_modules/vue/types/options'
+import { VNode } from 'vue'
+import { PropValidator } from 'vue/types/options'
 
 type VExpansionPanelContentInstance = InstanceType<typeof VExpansionPanelContent>
 
@@ -51,9 +51,9 @@ export default mixins(Themeable, RegistrableProvide('expansionPanel')).extend({
   },
 
   watch: {
-    expand (val) {
+    expand (v: boolean) {
       let openIndex = -1
-      if (!val) {
+      if (!v) {
         // Close all panels unless only one is open
         const openCount = this.open.reduce((acc, val) => val ? acc + 1 : acc, 0)
         const open = Array(this.items.length).fill(false)
@@ -69,9 +69,9 @@ export default mixins(Themeable, RegistrableProvide('expansionPanel')).extend({
         this.open = open
       }
 
-      this.$emit('input', val ? this.open : (openIndex > -1 ? openIndex : null))
+      this.$emit('input', v ? this.open : (openIndex > -1 ? openIndex : null))
     },
-    value (v) {
+    value (v: number | number[]) {
       this.updateFromValue(v)
     }
   },
