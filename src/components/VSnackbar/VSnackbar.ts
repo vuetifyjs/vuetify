@@ -5,10 +5,14 @@ import Toggleable from '../../mixins/toggleable'
 import { factory as PositionableFactory } from '../../mixins/positionable'
 
 import mixins from '../../util/mixins'
-import { VNode } from '../../../node_modules/vue'
+import { VNode } from 'vue'
 
+export default mixins(
+  Colorable,
+  Toggleable,
+  PositionableFactory(['absolute', 'top', 'bottom', 'left', 'right'])
 /* @vue/component */
-export default mixins(Colorable, Toggleable, PositionableFactory(['absolute', 'top', 'bottom', 'left', 'right'])).extend({
+).extend({
   name: 'v-snackbar',
 
   props: {
