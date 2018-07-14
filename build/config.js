@@ -77,7 +77,8 @@ function genConfig (opts) {
           cssProcessor: require('cssnano'),
           cssProcessorOptions: {
             discardComments: { removeAll: true },
-            postcssZindex: false
+            postcssZindex: false,
+            reduceIdents: false
           },
           canPrint: false
         })

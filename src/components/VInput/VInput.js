@@ -161,7 +161,11 @@ export default {
               e.stopPropagation()
 
               this.$emit(eventName, e)
-              cb && cb(e)
+              if (this.$listeners[eventName]) {
+                this.$listeners[eventName](e)
+              } else if (cb) {
+                cb(e)
+              }
             },
             // Container has mouseup event that will
             // trigger menu open if enclosed

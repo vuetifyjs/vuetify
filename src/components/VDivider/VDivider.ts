@@ -2,7 +2,7 @@
 import '../../stylus/components/_dividers.styl'
 
 // Types
-import Vue, { CreateElement, VNode } from 'vue'
+import Vue, { VNode } from 'vue'
 
 // Mixins
 import Themeable from '../../mixins/themeable'
@@ -18,7 +18,7 @@ export default Vue.extend({
     vertical: Boolean
   },
 
-  render (h: CreateElement, { props, data }): VNode {
+  render (h, { props, data }): VNode {
     data.staticClass = (`v-divider ${data.staticClass || ''}`).trim()
 
     if (props.inset) data.staticClass += ' v-divider--inset'

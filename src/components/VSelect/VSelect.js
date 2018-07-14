@@ -12,7 +12,6 @@ import VTextField from '../VTextField/VTextField'
 
 // Mixins
 import Comparable from '../../mixins/comparable'
-import Dependent from '../../mixins/dependent'
 import Filterable from '../../mixins/filterable'
 import Menuable from '../../mixins/menuable'
 
@@ -48,7 +47,6 @@ export default {
     fakeVMenu,
     fakeMenuable,
     Comparable,
-    Dependent,
     Filterable
   ],
 
@@ -519,8 +517,6 @@ export default {
       if (this.selectedItems.length === 0) {
         this.isMenuActive = true
       }
-
-      this.editingIndex = -1
       this.selectedIndex = -1
     },
     onClick () {

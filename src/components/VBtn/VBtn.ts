@@ -2,7 +2,7 @@
 import '../../stylus/components/_buttons.styl'
 
 // Types
-import { CreateElement, VNode, VNodeChildren } from 'vue'
+import { VNode, VNodeChildren } from 'vue'
 import { PropValidator } from 'vue/types/options'
 import mixins from '../../util/mixins'
 
@@ -17,7 +17,7 @@ import Themeable from '../../mixins/themeable'
 import { factory as ToggleableFactory } from '../../mixins/toggleable'
 import { inject as RegistrableInject } from '../../mixins/registrable'
 
-const VBtn = mixins(
+export default mixins(
   Colorable,
   Routable,
   Positionable,
@@ -137,7 +137,7 @@ const VBtn = mixins(
     }
   },
 
-  render (h: CreateElement): VNode {
+  render (h): VNode {
     const { tag, data } = this.generateRouteLink()
     const children = [this.genContent()]
 
@@ -151,9 +151,3 @@ const VBtn = mixins(
     return h(tag, data, children)
   }
 })
-
-/* eslint-disable-next-line no-redeclare */
-export type VBtn = InstanceType<typeof VBtn> & {
-  $el: HTMLButtonElement | HTMLAnchorElement
-}
-export default VBtn
