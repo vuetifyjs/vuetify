@@ -4,11 +4,12 @@ import Colorable from '../../mixins/colorable'
 import Toggleable from '../../mixins/toggleable'
 import { factory as PositionableFactory } from '../../mixins/positionable'
 
-/* @vue/component */
-export default {
-  name: 'v-snackbar',
+import mixins from '../../util/mixins'
+import { VNode } from '../../../node_modules/vue'
 
-  mixins: [Colorable, Toggleable, PositionableFactory(['absolute', 'top', 'bottom', 'left', 'right'])],
+/* @vue/component */
+export default mixins(Colorable, Toggleable, PositionableFactory(['absolute', 'top', 'bottom', 'left', 'right'])).extend({
+  name: 'v-snackbar',
 
   props: {
     autoHeight: Boolean,
@@ -23,12 +24,12 @@ export default {
 
   data () {
     return {
-      activeTimeout: {}
+      activeTimeout: -1
     }
   },
 
   computed: {
-    classes () {
+    classes (): object {
       return {
         'v-snack--active': this.isActive,
         'v-snack--absolute': this.absolute,
@@ -55,17 +56,17 @@ export default {
 
   methods: {
     setTimeout () {
-      clearTimeout(this.activeTimeout)
+      window.clearTimeout(this.activeTimeout)
 
       if (this.isActive && this.timeout) {
-        this.activeTimeout = setTimeout(() => {
+        this.activeTimeout = window.setTimeout(() => {
           this.isActive = false
         }, this.timeout)
       }
     }
   },
 
-  render (h) {
+  render (h): VNode {
     const children = []
 
     if (this.isActive) {
@@ -91,4 +92,4 @@ export default {
       attrs: { name: 'v-snack-transition' }
     }, children)
   }
-}
+})
