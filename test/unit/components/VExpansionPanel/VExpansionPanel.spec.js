@@ -54,11 +54,10 @@ test('VExpansionPanel.js', ({ mount, compileToFunctions }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  // TODO: Enable again when using vue-test-utils and https://github.com/vuejs/vue-test-utils/issues/824 is solved
-  it.skip('should show content on v-model change', async () => {
+  it('should show content on v-model change', async () => {
     const wrapper = mount(VExpansionPanel, {
       slots: {
-        default: VExpansionPanelContent
+        default: VExpansionPanelContent.options
       }
     })
 
@@ -70,14 +69,13 @@ test('VExpansionPanel.js', ({ mount, compileToFunctions }) => {
     expect(wrapper.first('.v-expansion-panel__container--active')).not.toBe(null)
   })
 
-  // TODO: Enable again when using vue-test-utils and https://github.com/vuejs/vue-test-utils/issues/824 is solved
-  it.skip('should show content on mount using v-model', async () => {
+  it('should show content on mount using v-model', async () => {
     const wrapper = mount(VExpansionPanel, {
       propsData: {
         value: 0
       },
       slots: {
-        default: VExpansionPanelContent
+        default: VExpansionPanelContent.options
       }
     })
 
