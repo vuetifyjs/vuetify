@@ -159,13 +159,11 @@ rtl(v-text-field-rtl, "v-text-field")
       background-position: bottom
       background-size: 3px 1px
       background-repeat: repeat-x
-      height: 0
       border-style: solid
       border-width: thin 0 0 0
 
     &:after
       border-color: currentColor
-      height: 0
       border-style: solid
       border-width: thin 0 thin 0
       transform: scaleX(0)
@@ -235,7 +233,8 @@ rtl(v-text-field-rtl, "v-text-field")
       border-top-right-radius: 4px
 
       &:before
-        height: 2px
+        border-style: solid
+        border-width: thin 0 thin 0
 
   &.v-text-field--enclosed
     margin: 0
