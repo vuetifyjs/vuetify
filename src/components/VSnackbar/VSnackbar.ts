@@ -5,7 +5,7 @@ import Toggleable from '../../mixins/toggleable'
 import { factory as PositionableFactory } from '../../mixins/positionable'
 
 import mixins from '../../util/mixins'
-import { VNode } from 'vue'
+import { VNode, VNodeChildrenArrayContents } from 'vue'
 
 export default mixins(
   Colorable,
@@ -71,7 +71,7 @@ export default mixins(
   },
 
   render (h): VNode {
-    const children = []
+    const children: VNodeChildrenArrayContents = []
 
     if (this.isActive) {
       children.push(
