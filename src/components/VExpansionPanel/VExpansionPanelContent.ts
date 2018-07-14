@@ -16,7 +16,6 @@ import { consoleWarn } from '../../util/console'
 type VExpansionPanelInstance = InstanceType<typeof VExpansionPanel>
 
 interface options extends Vue {
-  $el: HTMLButtonElement | HTMLAnchorElement
   expansionPanel: VExpansionPanelInstance
 }
 
