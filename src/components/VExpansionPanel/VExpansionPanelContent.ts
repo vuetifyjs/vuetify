@@ -83,7 +83,7 @@ export default mixins<options &
   },
 
   methods: {
-    onKeydown (e: any) {
+    onKeydown (e: KeyboardEvent) {
       // Ensure element is the activeElement
       if (
         e.keyCode === 13 &&
