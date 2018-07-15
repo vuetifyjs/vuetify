@@ -1,5 +1,6 @@
 import { getZIndex } from '../util/helpers'
 
+/* @vue/component */
 export default {
   name: 'stackable',
 

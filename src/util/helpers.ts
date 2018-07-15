@@ -1,4 +1,4 @@
-import { VNode, VNodeDirective, FunctionalComponentOptions } from 'vue'
+import { CreateElement, VNode, VNodeDirective, FunctionalComponentOptions } from 'vue'
 
 export function createSimpleFunctional (
   c: string,
@@ -15,7 +15,7 @@ export function createSimpleFunctional (
     name,
     functional: true,
 
-    render (h, { data, children }) {
+    render (h: CreateElement, { data, children }): VNode {
       data.staticClass = (`${c} ${data.staticClass || ''}`).trim()
 
       return h(el, data, children)
@@ -40,7 +40,7 @@ export function createSimpleTransition (
       }
     },
 
-    render (h, context) {
+    render (h: CreateElement, context): VNode {
       context.data = context.data || {}
       context.data.props = { name }
       context.data.on = context.data.on || {}
@@ -82,7 +82,7 @@ export function createJavaScriptTransition (
       }
     },
 
-    render (h, context) {
+    render (h: CreateElement, context): VNode {
       const data = {
         props: {
           ...context.props,
@@ -221,10 +221,14 @@ export function filterChildren (array: VNode[] = [], tag: string): VNode[] {
   })
 }
 
-export function convertToUnit (str: string | number, unit = 'px'): string {
-  return isNaN(+str)
-    ? str as string // TODO: this is wrong but I cbf fixing it
-    : `${Number(str)}${unit}`
+export function convertToUnit (str: string | number | null | undefined, unit = 'px'): string | undefined {
+  if (str == null || str === '') {
+    return undefined
+  } else if (isNaN(+str!)) {
+    return String(str)
+  } else {
+    return `${Number(str)}${unit}`
+  }
 }
 
 export function kebabCase (str: string): string {
@@ -263,3 +267,7 @@ export function groupByProperty (xs: Array<any>, key: string) {
 }
 
 export function wrapInArray<T> (v: T | Array<T>): Array<T> { return Array.isArray(v) ? v : [v] }
+
+export function keys<O> (o: O) {
+  return Object.keys(o) as (keyof O)[]
+}

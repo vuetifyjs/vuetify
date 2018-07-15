@@ -3,8 +3,13 @@ import '../stylus/components/_overlay.styl'
 // Utils
 import { keyCodes } from '../util/helpers'
 
+/* @vue/component */
 export default {
   name: 'overlayable',
+
+  props: {
+    hideOverlay: Boolean
+  },
 
   data () {
     return {
@@ -15,8 +20,10 @@ export default {
     }
   },
 
-  props: {
-    hideOverlay: Boolean
+  computed: {
+    hasOverlay () {
+      return !this.hideOverlay
+    }
   },
 
   beforeDestroy () {
@@ -24,11 +31,11 @@ export default {
   },
 
   methods: {
-    genOverlay () {
+    genOverlay (overlayClass = '') {
       // If fn is called and timeout is active
       // or overlay already exists
       // cancel removal of overlay and re-add active
-      if ((!this.isActive || this.hideOverlay) ||
+      if ((!this.isActive || !this.hasOverlay) ||
         (this.isActive && this.overlayTimeout) ||
         this.overlay
       ) {
@@ -39,7 +46,7 @@ export default {
       }
 
       this.overlay = document.createElement('div')
-      this.overlay.className = 'v-overlay'
+      this.overlay.className = `v-overlay ${overlayClass}`
 
       if (this.absolute) this.overlay.className += ' v-overlay--absolute'
 

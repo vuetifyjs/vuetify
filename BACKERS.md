@@ -11,6 +11,7 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - [Eikos Partners](http://www.eikospartners.com/)
 - [rateGenius](https://application.rategenius.com/)
 - [quitt](https://quitt.ch/)
+- [DigitalMaas](https://www.digitalmaas.com/)
 
 ### $100+
 - [Anthony Gherghetta](https://gorilladash.com/)
@@ -19,12 +20,12 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - [Xavier Escoté](http://www.deister.net/)
 - [Steve Gehrman](https://cocoatech.com/)
 - [Cycloid](https://www.cycloid.io/)
-- [LiveCasino](https://livecasino.com/) <!-- Vidar hwang -->
 - [Nate Controls](http://www.natecontrols.com/) <!-- Brad Stewart -->
 - [Zweidenker](http://zweidenker.de) <!-- Christian Denker -->
 - [Software IDM](https://softwareidm.com/) <!-- Peter Sidebotham -->
 - [Hohenstein Laboratories](https://www.hohenstein.de/en/home/home.xhtml)
 - [P2L Technologies](https://p2l.tech/) <!-- Blaise Laflamme -->
+- Terence Tsang
 
 ### $20+
 - Michael Marti
@@ -41,6 +42,7 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - Juha Vehnia
 - Max Hodges
 - Kent Johnson
+- Working Group Two
 
 ### $10+
 - Kevin Pilard
@@ -70,25 +72,27 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - Alvin Wang
 - Jadranko Dragoje
 - Charles McKeever
-- Caleb B
 - Stanislovas Janonis
-- Jamie Sartell
 - Brandon Deo
 - Idea Junction Ltd.
 - Michael Hipp
 - Keyur Desai
 - Casey Dwyer
-- King of Kings
 - Bohdan Kokotko
 - Blaine Landowski
 - Paul Whittemore
-- Abdelkarim Mateos
 - Alexander Weiher
 - Helmi
 - Hexodus
-- David Hanson
 - Pierre Vanhulst
-- Johannes Eriksson
 - Brett Lindenberg
 - Randall Adams
+- Andrew Harvey
+- Cảnh Kiều
+- Dave Willenberg
+- James Chang
+- Maxence Rose
+- Omar Abu Samra
+- MEHMET SAGLAM
+- bizzy.tv
 - Philipp Naderer-Puiu

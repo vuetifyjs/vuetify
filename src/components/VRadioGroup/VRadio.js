@@ -16,22 +16,9 @@ import {
 // Utils
 import { keyCodes } from '../../util/helpers'
 
+/* @vue/component */
 export default {
   name: 'v-radio',
-
-  inheritAttrs: false,
-
-  inject: {
-    name: {
-      default: false
-    },
-    isMandatory: {
-      default: false
-    },
-    validationState: {
-      default: false
-    }
-  },
 
   mixins: [
     Colorable,
@@ -40,11 +27,7 @@ export default {
     Themeable
   ],
 
-  data: () => ({
-    isActive: false,
-    isFocused: false,
-    parentError: false
-  }),
+  inheritAttrs: false,
 
   props: {
     color: {
@@ -65,6 +48,12 @@ export default {
     value: null
   },
 
+  data: () => ({
+    isActive: false,
+    isFocused: false,
+    parentError: false
+  }),
+
   computed: {
     classes () {
       const classes = {
@@ -83,7 +72,7 @@ export default {
     classesSelectable () {
       return this.addTextColorClassChecks(
         {},
-        this.isActive ? this.color : this.validationStateProxy
+        this.isActive ? this.color : this.radio.validationState || false
       )
     },
     computedIcon () {
@@ -92,13 +81,13 @@ export default {
         : this.offIcon
     },
     hasState () {
-      return this.isActive || !!this.validationStateProxy
+      return this.isActive || !!this.radio.validationState
     },
     isDisabled () {
-      return this.disabled || this.readonly
+      return this.disabled || !!this.radio.disabled
     },
-    validationStateProxy () {
-      return this.validationState && this.validationState()
+    isReadonly () {
+      return this.readonly || !!this.radio.readonly
     }
   },
 
@@ -115,11 +104,13 @@ export default {
       return this.$createElement('input', {
         attrs: Object.assign({}, attrs, {
           'aria-label': this.label,
-          name: this.name && this.name(),
+          name: this.radio.name || false,
           role: type,
-          type,
-          checked: this.isActive
+          type
         }),
+        domProps: {
+          checked: this.isActive
+        },
         on: {
           blur: this.onBlur,
           change: this.onChange,
@@ -141,8 +132,10 @@ export default {
           for: this.id
         },
         props: {
-          color: this.validationStateProxy,
-          focused: this.hasState
+          color: this.radio.validationState || false,
+          dark: this.dark,
+          focused: this.hasState,
+          light: this.light
         }
       }, this.$slots.label || this.label)
     },
@@ -154,11 +147,15 @@ export default {
           'aria-checked': this.isActive.toString(),
           ...this.$attrs
         }),
-        this.genRipple({
+        !this.isDisabled && this.genRipple({
           'class': this.classesSelectable
         }),
         this.$createElement(VIcon, {
-          'class': this.classesSelectable
+          'class': this.classesSelectable,
+          props: {
+            dark: this.dark,
+            light: this.light
+          }
         }, this.computedIcon)
       ])
     },
@@ -170,9 +167,9 @@ export default {
       this.$emit('blur', e)
     },
     onChange () {
-      const mandatory = !!this.isMandatory && this.isMandatory()
+      if (this.isDisabled || this.isReadonly) return
 
-      if (!this.disabled && (!this.isActive || !mandatory)) {
+      if (!this.isDisabled && (!this.isActive || !this.radio.mandatory)) {
         this.$emit('change', this.value)
       }
     }

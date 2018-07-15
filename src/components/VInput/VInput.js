@@ -7,6 +7,7 @@ import VLabel from '../VLabel'
 import VMessages from '../VMessages'
 
 // Mixins
+import Colorable from '../../mixins/colorable'
 import Loadable from '../../mixins/loadable'
 import Themeable from '../../mixins/themeable'
 import Validatable from '../../mixins/validatable'
@@ -18,24 +19,25 @@ import {
 } from '../../util/helpers'
 import { deprecate } from '../../util/console'
 
+/* @vue/component */
 export default {
   name: 'v-input',
 
   mixins: [
+    Colorable,
     Loadable,
     Themeable,
     Validatable
   ],
 
-  data: vm => ({
-    lazyValue: vm.value,
-    isFocused: false
-  }),
-
   props: {
     appendIcon: String,
     /** @deprecated */
     appendIconCb: Function,
+    backgroundColor: {
+      type: String,
+      default: ''
+    },
     disabled: Boolean,
     height: [Number, String],
     hideDetails: Boolean,
@@ -49,6 +51,11 @@ export default {
     tabindex: { default: 0 },
     value: { required: false }
   },
+
+  data: vm => ({
+    lazyValue: vm.value,
+    isFocused: false
+  }),
 
   computed: {
     classesInput () {
@@ -142,7 +149,9 @@ export default {
       const data = {
         props: {
           color: this.validationState,
-          disabled: this.disabled
+          dark: this.dark,
+          disabled: this.disabled,
+          light: this.light
         },
         on: !(this.$listeners[eventName] || cb)
           ? null
@@ -177,6 +186,7 @@ export default {
     genInputSlot () {
       return this.$createElement('div', {
         staticClass: 'v-input__slot',
+        class: this.addBackgroundColorClassChecks({}, this.backgroundColor),
         style: { height: convertToUnit(this.height) },
         directives: this.directivesInput,
         on: {
@@ -196,8 +206,10 @@ export default {
       return this.$createElement(VLabel, {
         props: {
           color: this.validationState,
+          dark: this.dark,
           focused: this.hasState,
-          for: this.$attrs.id
+          for: this.$attrs.id,
+          light: this.light
         }
       }, this.$slots.label || this.label)
     },
@@ -211,6 +223,8 @@ export default {
       return this.$createElement(VMessages, {
         props: {
           color: this.hasHint ? '' : this.validationState,
+          dark: this.dark,
+          light: this.light,
           value: (this.hasMessages || this.hasHint) ? messages : []
         }
       })

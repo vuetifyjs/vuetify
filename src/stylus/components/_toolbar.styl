@@ -14,10 +14,10 @@ v-toolbar-content($direction)
 
   &.v-menu .v-menu__activator,
   &.v-tooltip span
-    > .v-btn
+    .v-btn
       margin-{$direction}: 0
 
-    > .v-btn--icon
+    .v-btn--icon
       margin-{$direction}: -6px
 
 theme(v-toolbar, "v-toolbar")
@@ -74,8 +74,19 @@ theme(v-toolbar, "v-toolbar")
 
     > .v-list
       flex: 1 1 auto
-      margin: 0 !important // come back to this
       max-height: 100%
+
+    > .v-list:first-child
+      margin-left: '-%s' % $grid-gutters.xl
+
+      @media $display-breakpoints.sm-and-down
+        margin-left: '-%s' % $grid-gutters.lg
+
+    > .v-list:last-child
+      margin-right: '-%s' % $grid-gutters.xl
+
+      @media $display-breakpoints.sm-and-down
+        margin-right: '-%s' % $grid-gutters.lg
 
   &__items
     display: flex
@@ -102,9 +113,10 @@ theme(v-toolbar, "v-toolbar")
   .v-btn-toggle
     elevation(0)
 
-  .v-overflow-btn
+  .v-input
     margin: 0
 
+  .v-overflow-btn
     .v-input__control,
     .v-input__slot
       &:before

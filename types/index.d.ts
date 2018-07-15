@@ -34,7 +34,7 @@ export interface VuetifyUseOptions {
   icons?: Partial<VuetifyIcons>
   /** @see https://vuetifyjs.com/style/theme#options */
   options?: Partial<VuetifyOptions>
-  lang?: Partial<Pick<VuetifyLanguage, 'locales' | 'current'>>
+  lang?: Partial<VuetifyLanguage>
   rtl?: boolean
 }
 
@@ -54,6 +54,7 @@ export interface VuetifyObject extends Vue {
 declare module 'vue/types/vue' {
   export interface Vue {
     $vuetify: VuetifyObject
+    _uid: number
   }
 }
 
@@ -89,9 +90,13 @@ export interface VuetifyIcons {
 export interface VuetifyApplication {
   bar: number
   bottom: number
+  footer: number
   left: number
   right: number
   top: number
+  bind (uid: number, target: string, value: number): void
+  unbind (uid: number, target: string): void
+  update (target: string): void
 }
 
 export interface VuetifyBreakpoint {

@@ -1,7 +1,8 @@
 // Styles
 import '../../stylus/components/_buttons.styl'
 
-import Vue, { VNode, ComponentOptions, VNodeChildren } from 'vue'
+// Types
+import { CreateElement, VNode, VNodeChildren } from 'vue'
 import { PropValidator } from 'vue/types/options'
 import mixins from '../../util/mixins'
 
@@ -23,6 +24,7 @@ const VBtn = mixins(
   Themeable,
   ToggleableFactory('inputValue'),
   RegistrableInject('buttonGroup')
+  /* @vue/component */
 ).extend({
   name: 'v-btn',
 
@@ -88,6 +90,18 @@ const VBtn = mixins(
     }
   },
 
+  mounted () {
+    if (this.buttonGroup) {
+      this.buttonGroup.register(this)
+    }
+  },
+
+  beforeDestroy () {
+    if (this.buttonGroup) {
+      this.buttonGroup.unregister(this)
+    }
+  },
+
   methods: {
     // Prevent focus to match md spec
     click (e: MouseEvent): void {
@@ -108,8 +122,7 @@ const VBtn = mixins(
       const children: VNodeChildren = []
 
       if (!this.$slots.loader) {
-        // TODO: uncast
-        children.push(this.$createElement(VProgressCircular as ComponentOptions<Vue>, {
+        children.push(this.$createElement(VProgressCircular, {
           props: {
             indeterminate: true,
             size: 26,
@@ -124,19 +137,7 @@ const VBtn = mixins(
     }
   },
 
-  mounted () {
-    if (this.buttonGroup) {
-      this.buttonGroup.register(this)
-    }
-  },
-
-  beforeDestroy () {
-    if (this.buttonGroup) {
-      this.buttonGroup.unregister(this)
-    }
-  },
-
-  render (h): VNode {
+  render (h: CreateElement): VNode {
     const { tag, data } = this.generateRouteLink()
     const children = [this.genContent()]
 

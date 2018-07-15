@@ -8,6 +8,7 @@ import Comparable from './comparable'
 // Utils
 import { keyCodes } from '../util/helpers'
 
+/* @vue/component */
 export default {
   name: 'selectable',
 
@@ -19,10 +20,6 @@ export default {
     prop: 'inputValue',
     event: 'change'
   },
-
-  data: vm => ({
-    lazyValue: vm.inputValue
-  }),
 
   props: {
     color: {
@@ -43,6 +40,10 @@ export default {
       default: () => [keyCodes.enter, keyCodes.space]
     }
   },
+
+  data: vm => ({
+    lazyValue: vm.inputValue
+  }),
 
   computed: {
     classesSelectable () {

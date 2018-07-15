@@ -6,6 +6,7 @@ import PickerButton from '../../mixins/picker-button'
 // Utils
 import { pad } from '../VDatePicker/util'
 
+/* @vue/component */
 export default {
   name: 'v-time-picker-title',
 

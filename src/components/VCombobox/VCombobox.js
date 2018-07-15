@@ -8,12 +8,29 @@ import VAutocomplete from '../VAutocomplete/VAutocomplete'
 // Utils
 import { keyCodes } from '../../util/helpers'
 
+/* @vue/component */
 export default {
   name: 'v-combobox',
 
   extends: VAutocomplete,
 
+  props: {
+    delimiters: {
+      type: Array,
+      default: () => ([])
+    },
+    returnObject: {
+      type: Boolean,
+      default: true
+    }
+  },
+
   computed: {
+    counterValue () {
+      return this.multiple
+        ? this.selectedItems.length
+        : (this.internalSearch || '').toString().length
+    },
     hasSlot () {
       return VSelect.computed.hasSlot.call(this) || this.multiple
     },
@@ -60,6 +77,12 @@ export default {
       }
 
       return chip
+    },
+    // Requires a manual definition
+    // to overwrite removal in v-autocomplete
+    onEnterDown () {
+      this.updateSelf()
+      VSelect.methods.onEnterDown.call(this)
     },
     onKeyDown (e) {
       const keyCode = e.keyCode
@@ -116,7 +139,7 @@ export default {
 
       // The internal search is not matching
       // the initial value, update the input
-      if (this.internalSearch !== this.internalValue) this.setValue()
+      if (this.internalSearch !== this.getText(this.internalValue)) this.setValue()
 
       // Reset search if using chips
       // to avoid a double input
@@ -131,6 +154,10 @@ export default {
       if (menuIndex < 0 &&
         !this.searchIsDirty
       ) return
+
+      if (this.editingIndex > -1) {
+        return this.updateEditing()
+      }
 
       const index = this.selectedItems.indexOf(this.internalSearch)
       // If it already exists, do nothing
