@@ -15,12 +15,25 @@ v-data-table($material)
     .v-head
       color: rgba($material.text-color, $material.secondary-text-percent)
 
+      &.sortable
+        i
+          color: rgba($material.fg-color, $material.disabledORhints-text-percent)
+
+        &:hover
+          color: rgba($material.fg-color, $material.primary-text-percent)
+
+        &.active
+          color: rgba($material.fg-color, $material.primary-text-percent)
+
+          i
+            color: rgba($material.fg-color, $material.primary-text-percent)
+
   .v-table__body
     .v-row
       // &:not(:last-child)
       //   border-bottom: 1px solid rgba($material.fg-color, $material.divider-percent)
 
-      &[active]
+      &.active
         background: $material.table.active
 
       &:hover:not(.datatable__expand-row)
