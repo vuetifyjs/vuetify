@@ -16,13 +16,13 @@ export default injectOne<DataTableProvide>()('dataTable').extend({
   },
 
   render (h): VNode {
-    const children = []
+    const children: VNodeChildrenArrayContents = []
 
     if (this.dataTable.loading) {
       children.push(h(VRow, [
-        h(VProgressLinear as ComponentOptions<Vue>, {
+        h((VProgressLinear as ComponentOptions<Vue>), {
           props: {
-            height: this.height,
+            height: 2,
             active: true,
             indeterminate: true
           }
