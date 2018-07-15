@@ -4,19 +4,31 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 export interface RequestOptions {
+  data: any
   ignoreCache?: boolean
-  headers?: {[key: string]:string}
+  headers?: {
+    [key: string]: string
+  }
+  onError: any
+  onProgress: any
+  onSuccess: any
+  onTimeout: any
   // 0 (or negative) to wait forever
   timeout?: number
 }
 
 export const DEFAULT_REQUEST_OPTIONS = {
+  data: null,
   ignoreCache: false,
   headers: {
-    Accept: 'application/json, text/javascript, text/plain',
+    Accept: 'application/json, text/javascript, text/plain'
   },
+  onError: () => {},
+  onProgress: () => {},
+  onSuccess: () => {},
+  onTimeout: () => {},
   // default max duration for a request
-  timeout: 5000,
+  timeout: 5000
 }
 
 export interface RequestResult {
@@ -28,50 +40,51 @@ export interface RequestResult {
   headers: string
 }
 
-function queryParams(params: any = {}) {
+function queryParams (params: any = {}) {
   return Object.keys(params)
-      .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
-      .join('&')
+    .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
+    .join('&')
 }
 
-function withQuery(url: string, params: any = {}) {
+function withQuery (url: string, params: any = {}) {
   const queryString = queryParams(params)
   return queryString ? url + (url.indexOf('?') === -1 ? '?' : '&') + queryString : url
 }
 
-function parseXHRResult(xhr: XMLHttpRequest): RequestResult {
+function parseXHRResult (xhr: XMLHttpRequest): RequestResult {
   return {
     ok: xhr.status >= 200 && xhr.status < 300,
     status: xhr.status,
     statusText: xhr.statusText,
     headers: xhr.getAllResponseHeaders(),
     data: xhr.responseText,
-    json: <T>() => JSON.parse(xhr.responseText) as T,
+    json: () => JSON.parse(xhr.responseText)
   }
 }
 
-function errorResponse(xhr: XMLHttpRequest, message: string | null = null): RequestResult {
+function errorResponse (xhr: XMLHttpRequest, message: string | null = null): RequestResult {
   return {
     ok: false,
     status: xhr.status,
     statusText: xhr.statusText,
     headers: xhr.getAllResponseHeaders(),
     data: message || xhr.statusText,
-    json: <T>() => JSON.parse(message || xhr.statusText) as T,
+    json: () => JSON.parse(message || xhr.statusText)
   }
 }
 
-export function request(method: 'get' | 'post',
+export default function request (
+  method: 'get' | 'post',
   url: string,
   queryParams: any = {},
   body: any = null,
-  options: RequestOptions = DEFAULT_REQUEST_OPTIONS) {
-
+  options: RequestOptions = DEFAULT_REQUEST_OPTIONS
+) {
   const ignoreCache = options.ignoreCache || DEFAULT_REQUEST_OPTIONS.ignoreCache
   const headers = options.headers || DEFAULT_REQUEST_OPTIONS.headers
   const timeout = options.timeout || DEFAULT_REQUEST_OPTIONS.timeout
 
-  return new Promise<RequestResult>((resolve, reject) => {
+  return new Promise<RequestResult>(resolve => {
     const xhr = new XMLHttpRequest()
     xhr.open(method, withQuery(url, queryParams))
 
@@ -85,19 +98,35 @@ export function request(method: 'get' | 'post',
 
     xhr.timeout = timeout
 
-    xhr.onload = evt => {
-      resolve(parseXHRResult(xhr))
+    if (xhr.upload) {
+      xhr.upload.onprogress = (e: ProgressEvent) => {
+        options.onProgress(e,
+          e.total > 0 ? e.loaded / e.total * 100 : 0
+        )
+      }
     }
 
-    xhr.onerror = evt => {
-      resolve(errorResponse(xhr, 'Failed to make request.'))
+    xhr.onload = (e: Event): void => {
+      resolve(
+        options.onSuccess(e, parseXHRResult(xhr))
+      )
     }
 
-    xhr.ontimeout = evt => {
-      resolve(errorResponse(xhr, 'Request took longer than expected.'))
+    xhr.onerror = (e: Event): void => {
+      resolve(
+        options.onError(e, errorResponse(xhr))
+      )
     }
 
-    if (method === 'post' && body) {
+    xhr.ontimeout = (e: Event): void => {
+      resolve(
+        options.onTimeout(e, errorResponse(xhr))
+      )
+    }
+
+    if (options.data) {
+      xhr.send(options.data)
+    } else if (method === 'post' && body) {
       xhr.setRequestHeader('Content-Type', 'application/json')
       xhr.send(JSON.stringify(body))
     } else {

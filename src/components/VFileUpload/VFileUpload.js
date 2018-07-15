@@ -1,14 +1,25 @@
+// Styles
 import '../../stylus/components/_file-uploads.styl'
+
+// Components
+import VProgressLinear from '../VProgressLinear'
 import VTextField from '../VTextField/VTextField'
-import { VBtn } from '../VBtn'
-import { VProgressLinear } from '../VProgressLinear'
+
+// Mixins
+import Uploadable from '../../mixins/uploadable'
 
 export default {
   name: 'VFileUpload',
 
   extends: VTextField,
 
+  mixins: [Uploadable],
+
   props: {
+    appendIcon: {
+      type: String,
+      default: '$vuetify.icons.file'
+    },
     readonly: {
       type: Boolean,
       default: true
@@ -16,19 +27,21 @@ export default {
   },
 
   data: () => ({
-    files: []
+    //
   }),
 
   computed: {
     classes () {
-      return Object.assign(
-        {},
-        VTextField.computed.classes.call(this),
-        { 'v-file-upload': true }
-      )
+      return {
+        'v-file-upload': true,
+        ...VTextField.computed.classes.call(this)
+      }
     },
     isLabelActive () {
       return this.isDirty
+    },
+    shouldShowProgress () {
+      return this.loading || this.isUploading || this.uploadProgress > 0
     }
   },
 
@@ -39,7 +52,7 @@ export default {
       this.onChange()
     },
     genFiles () {
-      return this.files.map(file =>
+      return this.internalFiles.map(file =>
         this.$createElement('div', {
           staticClass: 'v-file-upload__selection'
         }, file.name)
@@ -49,49 +62,43 @@ export default {
       const input = VTextField.methods.genInput.call(this)
 
       input.data.attrs.type = 'file'
-      input.data.on.change = this.onChange
+      input.data.on.change = this.onFileChange
 
       return [
         input,
         this.genFiles()
       ]
     },
-    genAppendSlot () {
-      return this.$createElement(VBtn, {
-        props: {
-          color: this.color
-        },
-        on: {
-          click: this.onClick
-        }
-      }, 'Click to Upload')
-    },
     genProgress () {
+      if (!this.shouldShowProgress) return null
+
       return this.$slots.progress || this.$createElement(VProgressLinear, {
         props: {
-          active: false,
-          color: 'primary',
-          height: 2
+          active: this.isUploading,
+          color: this.color,
+          height: 2,
+          value: this.uploadProgress
         }
       })
     },
-    onChange (e) {
-      this.$emit('')
-      this.setFiles()
+    genIconSlot () {
+      const slot = []
+
+      if (this.$slots['append']) {
+        slot.push(this.$slots['append'])
+      } else if (this.appendIcon) {
+        slot.push(this.genIcon('append', this.onClick, false))
+      }
+
+      return this.genSlot('append', 'inner', slot)
+    },
+    getInput () {
+      return this.$refs.input
     },
     onClick (e) {
-      if (e.target !== this.$refs.input) {
-        this.$refs.input.click()
-      }
+      this.openFiles(e)
     },
-    onFocus (e) {
-      //
-    },
-    onMouseUp (e) {
-      //
-    },
-    setFiles () {
-      this.files = Array.from(this.$refs.input.files)
-    }
+    onFocus () { /* */ },
+    onMouseUp () { /* */ }
   }
 }

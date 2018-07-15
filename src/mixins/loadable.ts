@@ -25,9 +25,15 @@ export default Vue.extend<colorable>().extend({
     }
   },
 
+  computed: {
+    shouldShowProgress (): boolean {
+      return this.loading === true
+    }
+  },
+
   methods: {
     genProgress (): VNode | VNode[] | null {
-      if (this.loading === false) return null
+      if (!this.shouldShowProgress) return null
 
       return this.$slots.progress || this.$createElement(VProgressLinear, {
         props: {

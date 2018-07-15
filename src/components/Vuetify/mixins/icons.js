@@ -5,6 +5,7 @@ const ICONS_MATERIAL = {
   'close': 'close',
   'delete': 'cancel', // delete (e.g. v-chip close)
   'clear': 'clear',
+  'file': 'cloud_upload',
   'success': 'check_circle',
   'info': 'info',
   'warning': 'priority_high',
@@ -32,6 +33,7 @@ const ICONS_MDI = {
   'close': 'mdi-close',
   'delete': 'mdi-close-circle', // delete (e.g. v-chip close)
   'clear': 'mdi-close',
+  'file': 'mdi-cloud-upload',
   'success': 'mdi-check-circle',
   'info': 'mdi-information',
   'warning': 'mdi-exclamation',
@@ -59,6 +61,7 @@ const ICONS_FONTAWESOME4 = {
   'close': 'fa fa-times',
   'delete': 'fa fa-times-circle', // delete (e.g. v-chip close)
   'clear': 'fa fa-times-circle', // delete (e.g. v-chip close)
+  'file': 'fa fa-cloud-upload',
   'success': 'fa fa-check-circle',
   'info': 'fa fa-info-circle',
   'warning': 'fa fa-exclamation',
@@ -86,6 +89,7 @@ const ICONS_FONTAWESOME = {
   'close': 'fas fa-times',
   'delete': 'fas fa-times-circle', // delete (e.g. v-chip close)
   'clear': 'fas fa-times-circle', // delete (e.g. v-chip close)
+  'file': 'fas fa-cloud-upload',
   'success': 'fas fa-check-circle',
   'info': 'fas fa-info-circle',
   'warning': 'fas fa-exclamation',
