@@ -1,4 +1,4 @@
-import Vue, { VNode, CreateElement, VNodeChildren, VNodeChildrenArrayContents } from 'vue'
+import Vue, { VNode, CreateElement, VNodeChildrenArrayContents } from 'vue'
 import { PropValidator } from 'vue/types/options'
 
 import { getObjectValueByPath, deepEqual, wrapInArray } from '../../util/helpers'
@@ -31,67 +31,31 @@ export default Vue.extend({
       sort: this.sort
     }
 
-    Object.defineProperty(dataIterator, 'items', {
-      get: () => this.computedItems
-    })
-
-    Object.defineProperty(dataIterator, 'page', {
-      get: () => this.options.page,
-      set: v => this.options.page = v,
-      enumerable: true
-    })
-
-    Object.defineProperty(dataIterator, 'rowsPerPage', {
-      get: () => this.options.rowsPerPage,
-      set: v => this.options.rowsPerPage = v,
-      enumerable: true
-    })
-
-    Object.defineProperty(dataIterator, 'pageCount', {
-      get: () => this.pageCount,
-      enumerable: true
-    })
-
-    Object.defineProperty(dataIterator, 'pageStart', {
-      get: () => this.pageStart,
-      enumerable: true
-    })
-
-    Object.defineProperty(dataIterator, 'pageStop', {
-      get: () => this.pageStop,
-      enumerable: true
-    })
-
-    Object.defineProperty(dataIterator, 'itemsLength', {
-      get: () => this.itemsLength,
-      enumerable: true
-    })
-
-    Object.defineProperty(dataIterator, 'everyItem', {
-      get: () => this.everyItem,
-      enumerable: true
-    })
-
-    Object.defineProperty(dataIterator, 'someItems', {
-      get: () => this.someItems,
-      enumerable: true
-    })
-
-    Object.defineProperty(dataIterator, 'sortBy', {
-      get: () => this.options.sortBy,
-      set: v => this.options.sortBy = v,
-      enumerable: true
-    })
-
-    Object.defineProperty(dataIterator, 'sortDesc', {
-      get: () => this.options.sortDesc,
-      set: v => this.options.sortDesc = v,
-      enumerable: true
-    })
-
-    Object.defineProperty(dataIterator, 'multiSort', {
-      get: () => this.multiSort,
-      enumerable: true
+    Object.defineProperties(dataIterator, {
+      items: { get: () => this.computedItems },
+      page: {
+        get: () => this.options.page,
+        set: v => this.options.page = v
+      },
+      rowsPerPage: {
+        get: () => this.options.rowsPerPage,
+        set: v => this.options.rowsPerPage = v
+      },
+      pageCount: { get: () => this.pageCount },
+      pageStart: { get: () => this.pageStart },
+      pageStop: { get: () => this.pageStop },
+      itemsLength: { get: () => this.itemsLength },
+      everyItem: { get: () => this.everyItem },
+      someItems: { get: () => this.someItems },
+      sortBy: {
+        get: () => this.options.sortBy,
+        set: v => this.options.sortBy = v
+      },
+      sortDesc: {
+        get: () => this.options.sortDesc,
+        set: v => this.options.sortDesc = v
+      },
+      multiSort: { get: () => this.multiSort }
     })
 
     return { dataIterator }

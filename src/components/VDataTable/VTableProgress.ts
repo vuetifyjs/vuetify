@@ -1,4 +1,4 @@
-import Vue, { VNode, ComponentOptions } from 'vue'
+import Vue, { VNode, ComponentOptions, VNodeChildrenArrayContents } from 'vue'
 import { injectOne } from '../../util/inject'
 import { DataTableProvide } from './VDataTable'
 

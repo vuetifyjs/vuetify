@@ -1,4 +1,4 @@
-import { CreateElement, VNodeChildrenArrayContents, VNode } from 'vue'
+import { CreateElement, VNodeChildrenArrayContents } from 'vue'
 import mixins from '../../util/mixins'
 
 import VRowExpandable from './VRowExpandable'

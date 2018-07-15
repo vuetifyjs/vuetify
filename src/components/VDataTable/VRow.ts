@@ -1,4 +1,4 @@
-import Vue, { VNode, CreateElement } from 'vue'
+import { VNode, CreateElement } from 'vue'
 import { DataTableProvide } from './VDataTable'
 import { injectOne } from '../../util/inject'
 
