@@ -118,6 +118,13 @@ const VDataTable = mixins(VDataIterator).extend({
     }
   },
 
+  created () {
+    if (typeof this.sortBy === 'undefined') {
+      const firstSortable = this.headers.find(h => !('sortable' in h) || !!h.sortable)
+      if (firstSortable) this.options.sortBy = [firstSortable.value]
+    }
+  },
+
   methods: {
     searchItems (items: any[]): any[] {
       // If we have column-specific filters, run them here
