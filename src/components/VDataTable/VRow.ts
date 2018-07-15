@@ -5,6 +5,13 @@ import { injectOne } from '../../util/inject'
 export default injectOne<DataTableProvide>()('dataTable').extend({
   name: 'v-row',
 
+  props: {
+    active: {
+      type: Boolean,
+      default: false
+    }
+  },
+
   render (h: CreateElement): VNode {
     const content = this.$slots.default ? this.$slots.default : []
     const widths = this.dataTable.widths
@@ -26,6 +33,9 @@ export default injectOne<DataTableProvide>()('dataTable').extend({
 
     return h('div', {
       staticClass: 'v-row',
+      class: {
+        active: this.active
+      },
       style: {
         width: `${this.dataTable.tableWidth}px`
       }
