@@ -15,7 +15,10 @@ export default Vue.extend({
       type: String,
       default: '/'
     },
-    items: Array as PropValidator<any[]>,
+    items: {
+      type: Array,
+      default: () => ([])
+    } as PropValidator<any[]>,
     large: Boolean,
     justifyCenter: Boolean,
     justifyEnd: Boolean
@@ -91,6 +94,7 @@ export default Vue.extend({
 
   render (h): VNode {
     const children = this.$slots.default ? this.genChildren() : this.genItems()
+    // const children: any[] = []
 
     return h('ul', {
       staticClass: 'v-breadcrumbs',
