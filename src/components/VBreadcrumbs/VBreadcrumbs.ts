@@ -2,7 +2,7 @@ import Vue, { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
 import { deprecate } from '../../util/console'
 
-import { VBreadcrumbsDivider } from '.'
+import { VBreadcrumbsDivider, VBreadcrumbsItem } from '.'
 
 import '../../stylus/components/_breadcrumbs.styl'
 
@@ -15,7 +15,7 @@ export default Vue.extend({
       type: String,
       default: '/'
     },
-    items: Array as PropValidator<object[]>,
+    items: Array as PropValidator<any[]>,
     large: Boolean,
     justifyCenter: Boolean,
     justifyEnd: Boolean
@@ -73,12 +73,14 @@ export default Vue.extend({
       return this.$createElement(VBreadcrumbsDivider, this.$slots.divider ? this.$slots.divider : this.divider)
     },
     genItems () {
-      if (!this.$scopedSlots.item) return this.$slots.default
-
       const items = []
+      const hasSlot = !!this.$scopedSlots.item
 
       for (let i = 0; i < this.items.length; i++) {
-        items.push(this.$scopedSlots.item({ item: this.items[i] }))
+        const item = this.items[i]
+
+        if (hasSlot) items.push(this.$scopedSlots.item({ item }))
+        else items.push(this.$createElement(VBreadcrumbsItem, { props: item }, [item.text]))
 
         if (i < this.items.length - 1) items.push(this.genDivider())
       }
