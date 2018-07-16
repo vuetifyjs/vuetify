@@ -94,7 +94,6 @@ export default Vue.extend({
 
   render (h): VNode {
     const children = this.$slots.default ? this.genChildren() : this.genItems()
-    // const children: any[] = []
 
     return h('ul', {
       staticClass: 'v-breadcrumbs',
