@@ -80,7 +80,7 @@ export default Vue.extend({
         const item = this.items[i]
 
         if (hasSlot) items.push(this.$scopedSlots.item({ item }))
-        else items.push(this.$createElement(VBreadcrumbsItem, { props: item }, [item.text]))
+        else items.push(this.$createElement(VBreadcrumbsItem, { key: item.text, props: item }, [item.text]))
 
         if (i < this.items.length - 1) items.push(this.genDivider())
       }
