@@ -61,13 +61,27 @@
         )
       },
       script () {
-        const replace = /(export default {|<script>|<\/script>|}([^}]*)$)/g
         const imports = /(import*) ([^'\n]*) from ([^\n]*)/g
-        return (this.pen.script || '')
-          .replace(replace, '')
+        let component = /export default {([\s\S]*)}/g.exec(this.pen.script || '')
+
+        component = ((component && component[1]) || '')
+          .replace(/\n {2}/g, '\n')
+          .trim()
+
+        let script = /<script>([\s\S]*)export default {/g.exec(this.pen.script || '')
+
+        script = ((script && script[1]) || '')
           .replace(imports, '')
           .replace(/\n {2}/g, '\n')
           .trim()
+
+        script += script ? '\n\n' : ''
+
+        return this.additionalScript + script +
+          `new Vue({
+  el: '#app',
+  ${component}
+})`
       },
       style () {
         return {
@@ -102,11 +116,7 @@
           css: this.style.content,
           css_pre_processor: this.style.language ? this.style.language[1] : 'none',
           css_external: [...this.additionalResources.css, ...cssResources].join(';'),
-          js: this.additionalScript +
-            `new Vue({
-  el: '#app',
-  ${this.script}
-})`,
+          js: this.script,
           js_pre_processor: 'babel',
           js_external: [...this.additionalResources.js, ...jsResources].join(';'),
           editors: this.editors

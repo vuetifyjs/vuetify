@@ -46,6 +46,8 @@
   import Vue from 'vue'
   import VeeValidate from 'vee-validate'
 
+  Vue.use(VeeValidate)
+
   export default {
     $_veeValidate: {
       validator: 'new'
@@ -104,7 +106,3 @@
     "js": ["https://cdn.jsdelivr.net/npm/vee-validate@latest/dist/vee-validate.js"]
   }
 </codepen-resources>
-
-<codepen-additional>
-  Vue.use(VeeValidate)
-</codepen-additional>
