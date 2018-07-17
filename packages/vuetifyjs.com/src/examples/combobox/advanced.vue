@@ -24,9 +24,9 @@
       </v-list-tile>
     </template>
     <template
+      v-if="item === Object(item)"
       slot="selection"
       slot-scope="{ item, parent, selected }"
-      v-if="item === Object(item)"
     >
       <v-chip
         :color="`${item.color} lighten-3`"
@@ -59,11 +59,11 @@
           @keyup.enter="edit(index, item)"
         ></v-text-field>
         <v-chip
+          v-else
           :color="`${item.color} lighten-3`"
           dark
           label
           small
-          v-else
         >
           {{ item.text }}
         </v-chip>

@@ -1,4 +1,2 @@
-/src/examples/**/*
-/src/public/**/*
-/src/releases/**/*
-/dist/**/*
+/src/public
+/src/releases

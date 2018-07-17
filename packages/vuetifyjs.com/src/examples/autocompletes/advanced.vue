@@ -33,9 +33,9 @@
         slot-scope="{ item, selected }"
       >
         <v-chip
+          :selected="selected"
           color="blue-grey"
           class="white--text"
-          :selected="selected"
         >
           <v-icon left>mdi-coin</v-icon>
           <span v-text="item.name"></span>
@@ -61,9 +61,9 @@
       </template>
     </v-autocomplete>
     <v-tabs
+      slot="extension"
       :hide-slider="!model"
       color="transparent"
-      slot="extension"
       slider-color="blue-grey"
     >
       <v-tab :disabled="!model">News</v-tab>

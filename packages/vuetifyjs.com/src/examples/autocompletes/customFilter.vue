@@ -11,15 +11,15 @@
       <v-icon>mdi-account</v-icon>
       <v-toolbar-title class="font-weight-light">User Profile</v-toolbar-title>
       <v-spacer></v-spacer>
-        <v-btn
-          color="purple darken-3"
-          fab
-          small
-          @click="isEditing = !isEditing"
-        >
-          <v-icon v-if="isEditing">mdi-close</v-icon>
-          <v-icon v-else>mdi-pencil</v-icon>
-        </v-btn>
+      <v-btn
+        color="purple darken-3"
+        fab
+        small
+        @click="isEditing = !isEditing"
+      >
+        <v-icon v-if="isEditing">mdi-close</v-icon>
+        <v-icon v-else>mdi-pencil</v-icon>
+      </v-btn>
     </v-toolbar>
     <v-card-text>
       <v-text-field

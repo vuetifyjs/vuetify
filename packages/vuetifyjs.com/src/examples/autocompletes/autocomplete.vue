@@ -13,14 +13,14 @@
         prepend-icon="mdi-city"
       >
         <v-slide-x-reverse-transition
-          mode="out-in"
           slot="append-outer"
+          mode="out-in"
         >
           <v-icon
             :color="isEditing ? 'success' : 'info'"
             :key="`icon-${isEditing}`"
-            v-text="isEditing ? 'mdi-check-outline' : 'mdi-circle-edit-outline'"
             @click="isEditing = !isEditing"
+            v-text="isEditing ? 'mdi-check-outline' : 'mdi-circle-edit-outline'"
           ></v-icon>
         </v-slide-x-reverse-transition>
       </v-autocomplete>
