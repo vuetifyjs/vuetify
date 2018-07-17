@@ -82,8 +82,14 @@
               active-class=""
               class="body-2"
             ) {{ tab }}
-            v-tabs-items(class="grey lighten-3")
-              v-tab-item(v-for="tab in tabs" :key="tab")
+            v-tabs-items(
+              style="background: #2d2d2d;"
+            )
+              v-tab-item(
+                v-for="tab in tabs"
+                :id="null"
+                :key="tab"
+              )
                 helpers-markup(lang="html" v-if="parsed[tab]").ma-0
                   | {{ parsed[tab] }}
 
@@ -237,7 +243,7 @@
         this.$refs.codepen.submit()
       },
       togglePanel () {
-        const panel = this.$refs.panel.items[0].uid
+        const panel = this.$refs.panel.items[0]._uid
 
         this.$refs.panel.panelClick(panel)
       }
