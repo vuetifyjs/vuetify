@@ -36,7 +36,7 @@ export default {
       return this.$createElement('div', {
         staticClass: 'v-input--selection-controls__input'
       }, [
-        this.genInput('checkbox'),
+        this.genInput('checkbox', this.$attrs),
         !this.disabled && this.genRipple({
           'class': this.classesSelectable,
           directives: [{

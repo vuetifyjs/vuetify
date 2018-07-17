@@ -318,7 +318,6 @@ export default {
           autofocus: this.autofocus,
           disabled: this.disabled,
           readonly: this.readonly,
-          tabindex: this.tabindex,
           type: this.type,
           'aria-label': (!this.$attrs || !this.$attrs.id) && this.label // Label `for` will be set if we have an id
         },
