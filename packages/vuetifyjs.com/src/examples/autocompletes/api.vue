@@ -33,7 +33,7 @@
     </v-card-text>
     <v-divider></v-divider>
     <v-expand-transition>
-      <v-list class="red lighten-3" v-if="model">
+      <v-list v-if="model" class="red lighten-3">
         <v-list-tile
           v-for="(field, i) in fields"
           :key="i"
@@ -60,6 +60,8 @@
 </template>
 
 <script>
+  import axios from 'axios'
+
   export default {
     data: () => ({
       descriptionLimit: 60,

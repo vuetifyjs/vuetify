@@ -27,8 +27,8 @@
             transition="slide-y-transition"
           >
             <v-btn
-              icon
               slot="activator"
+              icon
             >
               <v-icon>more_vert</v-icon>
             </v-btn>

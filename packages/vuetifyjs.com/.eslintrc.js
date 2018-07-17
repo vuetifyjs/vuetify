@@ -42,7 +42,7 @@ module.exports = {
       }
     },
     {
-      files: 'examples/**/*.vue',
+      files: 'src/examples/**/*.vue',
       rules: {
         "vue/valid-v-on": false,
         "vue/no-parsing-error": false, // This rule doesn't allow empty event listeners
@@ -58,7 +58,7 @@ module.exports = {
       }
     },
     {
-      files: 'examples/layouts/**/*.vue',
+      files: 'src/examples/layouts/**/*.vue',
       rules: {
         "vue/order-in-components": false,
         "vue/require-default-prop": false
