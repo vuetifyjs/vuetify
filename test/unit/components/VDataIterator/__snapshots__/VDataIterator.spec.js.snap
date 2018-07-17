@@ -25,7 +25,6 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
                         5
                       </div>
                       <input readonly="readonly"
-                             tabindex="0"
                              type="text"
                              autocomplete="on"
                              aria-readonly="false"
@@ -164,7 +163,6 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
                         5
                       </div>
                       <input readonly="readonly"
-                             tabindex="0"
                              type="text"
                              autocomplete="on"
                              aria-readonly="false"
@@ -294,7 +292,6 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
                         5
                       </div>
                       <input readonly="readonly"
-                             tabindex="0"
                              type="text"
                              autocomplete="on"
                              aria-readonly="false"
@@ -428,7 +425,6 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
                         5
                       </div>
                       <input readonly="readonly"
-                             tabindex="0"
                              type="text"
                              autocomplete="on"
                              aria-readonly="false"

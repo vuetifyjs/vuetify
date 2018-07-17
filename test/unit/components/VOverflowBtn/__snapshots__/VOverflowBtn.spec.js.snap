@@ -13,7 +13,6 @@ exports[`VOverflowBtn should use default autocomplete selections 1`] = `
                 foo
               </div>
               <input readonly="readonly"
-                     tabindex="0"
                      type="text"
                      autocomplete="off"
               >
@@ -59,7 +58,6 @@ exports[`VOverflowBtn should use default autocomplete selections 2`] = `
                 </div>
               </button>
               <input readonly="readonly"
-                     tabindex="0"
                      type="text"
                      autocomplete="off"
               >
