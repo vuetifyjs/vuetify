@@ -73,9 +73,7 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
         >
           <div class="v-input__control">
             <div class="v-input__slot">
-              <div class="v-menu"
-                   style="display: inline-block;"
-              >
+              <div class="v-menu v-menu--inline">
                 <div class="v-menu__activator">
                   <div class="v-select__slot">
                     <div class="v-select__selections">
@@ -256,9 +254,7 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
         >
           <div class="v-input__control">
             <div class="v-input__slot">
-              <div class="v-menu"
-                   style="display: inline-block;"
-              >
+              <div class="v-menu v-menu--inline">
                 <div class="v-menu__activator">
                   <div class="v-select__slot">
                     <div class="v-select__selections">
@@ -441,9 +437,7 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
         >
           <div class="v-input__control">
             <div class="v-input__slot">
-              <div class="v-menu"
-                   style="display: inline-block;"
-              >
+              <div class="v-menu v-menu--inline">
                 <div class="v-menu__activator">
                   <div class="v-select__slot">
                     <div class="v-select__selections">
