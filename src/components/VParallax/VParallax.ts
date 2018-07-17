@@ -1,12 +1,23 @@
+// Style
 import '../../stylus/components/_parallax.styl'
 
+// Mixins
 import Translatable from '../../mixins/translatable'
 
-/* @vue/component */
-export default {
-  name: 'v-parallax',
+// Types
+import Vue from 'vue'
+import { VNode, VNodeData } from 'vue/types/vnode'
+import mixins, { ExtractVue } from '../../util/mixins'
 
-  mixins: [Translatable],
+interface options extends Vue {
+  $refs: {
+    img: HTMLImageElement
+  }
+}
+
+/* @vue/component */
+export default mixins<options & ExtractVue<typeof Translatable>>(Translatable).extend({
+  name: 'v-parallax',
 
   props: {
     alt: String,
@@ -17,14 +28,12 @@ export default {
     src: String
   },
 
-  data () {
-    return {
-      isBooted: false
-    }
-  },
+  data: () => ({
+    isBooted: false
+  }),
 
   computed: {
-    styles () {
+    styles (): object {
       return {
         display: 'block',
         opacity: this.isBooted ? 1 : 0,
@@ -45,13 +54,15 @@ export default {
 
   methods: {
     init () {
-      if (!this.$refs.img) return
+      const img = this.$refs.img
 
-      if (this.$refs.img.complete) {
+      if (!img) return
+
+      if (img.complete) {
         this.translate()
         this.listeners()
       } else {
-        this.$refs.img.addEventListener('load', () => {
+        img.addEventListener('load', () => {
           this.translate()
           this.listeners()
         }, false)
@@ -59,14 +70,11 @@ export default {
     },
     objHeight () {
       return this.$refs.img.naturalHeight
-    },
-    elOffsetTop () {
-      return this.$el.offsetTop
     }
   },
 
-  render (h) {
-    const imgData = {
+  render (h): VNode {
+    const imgData: VNodeData = {
       staticClass: 'v-parallax__image',
       style: this.styles,
       attrs: {
@@ -75,7 +83,7 @@ export default {
       ref: 'img'
     }
 
-    if (this.alt) imgData.attrs.alt = this.alt
+    if (this.alt) imgData.attrs!.alt = this.alt
 
     const container = h('div', {
       staticClass: 'v-parallax__image-container'
@@ -95,4 +103,4 @@ export default {
       on: this.$listeners
     }, [container, content])
   }
-}
+})

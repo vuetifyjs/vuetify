@@ -131,7 +131,7 @@ export default mixins(Colorable).extend({
     }
   },
 
-  render (h: CreateElement): VNode {
+  render (h): VNode {
     const info = h('div', { class: 'v-progress-circular__info' }, [this.$slots.default])
     const svg = this.genSvg(h)
 

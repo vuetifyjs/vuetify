@@ -25,6 +25,10 @@ export default {
     }
   },
 
+  data: () => ({
+    editingIndex: -1
+  }),
+
   computed: {
     counterValue () {
       return this.multiple
@@ -78,6 +82,11 @@ export default {
 
       return chip
     },
+    onChipInput (item) {
+      VSelect.methods.onChipInput.call(this, item)
+
+      this.editingIndex = -1
+    },
     // Requires a manual definition
     // to overwrite removal in v-autocomplete
     onEnterDown () {
@@ -120,6 +129,16 @@ export default {
 
       VAutocomplete.methods.onTabDown.call(this, e)
     },
+    selectItem (item) {
+      // Currently only supports items:<string[]>
+      if (this.editingIndex > -1) {
+        this.updateEditing()
+      } else {
+        VSelect.methods.selectItem.call(this, item)
+      }
+
+      this.setSearch()
+    },
     setSelectedItems () {
       if (this.internalValue == null ||
         this.internalValue === ''
@@ -129,21 +148,31 @@ export default {
         this.selectedItems = this.multiple ? this.internalValue : [this.internalValue]
       }
     },
-    updateSelf () {
-      this.multiple ? this.updateTags() : this.updateCombobox()
+    updateEditing () {
+      const value = this.internalValue.slice()
+      value[this.editingIndex] = this.internalSearch
+
+      this.internalValue = value
+
+      this.editingIndex = -1
     },
     updateCombobox () {
-      // When using chips and search is dirty
-      // avoid updating input
-      if (this.hasChips && !this.searchIsDirty) return
+      const isUsingSlot = Boolean(this.$scopedSlots.selection) || this.hasChips
+
+      // If search is not dirty and is
+      // using slot, do nothing
+      if (isUsingSlot && !this.searchIsDirty) return
 
       // The internal search is not matching
-      // the initial value, update the input
+      // the internal value, update the input
       if (this.internalSearch !== this.getText(this.internalValue)) this.setValue()
 
-      // Reset search if using chips
+      // Reset search if using slot
       // to avoid a double input
-      if (this.hasChips) this.internalSearch = undefined
+      if (isUsingSlot) this.internalSearch = undefined
+    },
+    updateSelf () {
+      this.multiple ? this.updateTags() : this.updateCombobox()
     },
     updateTags () {
       const menuIndex = this.getMenuIndex()

@@ -3,11 +3,11 @@
 
 v-text-field($material)
   .v-input__slot:before
-    background-color: $material.input-bottom-line
+    border-color: $material.input-bottom-line
 
   &:not(.v-input--has-state)
     .v-input__slot:hover:before
-      background-color: $material.text.primary
+      border-color: $material.text.primary
 
   &.v-input--is-disabled
     .v-input__slot:before
@@ -159,11 +159,13 @@ rtl(v-text-field-rtl, "v-text-field")
       background-position: bottom
       background-size: 3px 1px
       background-repeat: repeat-x
-      height: 1px
+      border-style: solid
+      border-width: thin 0 0 0
 
     &:after
-      background-color: currentColor
-      height: 2px
+      border-color: currentColor
+      border-style: solid
+      border-width: thin 0 thin 0
       transform: scaleX(0)
 
   &__details
@@ -231,7 +233,8 @@ rtl(v-text-field-rtl, "v-text-field")
       border-top-right-radius: 4px
 
       &:before
-        height: 2px
+        border-style: solid
+        border-width: thin 0 thin 0
 
   &.v-text-field--enclosed
     margin: 0

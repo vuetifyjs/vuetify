@@ -20,22 +20,16 @@ export default {
     }
   },
 
-  computed: {
-    hasOverlay () {
-      return !this.hideOverlay
-    }
-  },
-
   beforeDestroy () {
     this.removeOverlay()
   },
 
   methods: {
-    genOverlay (overlayClass = '') {
+    genOverlay () {
       // If fn is called and timeout is active
       // or overlay already exists
       // cancel removal of overlay and re-add active
-      if ((!this.isActive || !this.hasOverlay) ||
+      if ((!this.isActive || this.hideOverlay) ||
         (this.isActive && this.overlayTimeout) ||
         this.overlay
       ) {
@@ -46,7 +40,7 @@ export default {
       }
 
       this.overlay = document.createElement('div')
-      this.overlay.className = `v-overlay ${overlayClass}`
+      this.overlay.className = 'v-overlay'
 
       if (this.absolute) this.overlay.className += ' v-overlay--absolute'
 
