@@ -6,10 +6,10 @@
     </v-layout>
     <v-layout row wrap>
       <v-flex xs6>
-        <v-switch value input-value="true" ></v-switch>
+        <v-switch value input-value="true"></v-switch>
       </v-flex>
       <v-flex xs6>
-        <v-switch ></v-switch>
+        <v-switch></v-switch>
       </v-flex>
     </v-layout>
     <v-layout row wrap class="dark--text">

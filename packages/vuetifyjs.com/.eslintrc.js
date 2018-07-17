@@ -38,7 +38,12 @@ module.exports = {
           "baseIndent": 1,
           "switchCase": 1,
           "ignores": []
-        }]
+        }],
+        "vue/html-closing-bracket-newline": ["error", {
+          "singleline": "never",
+          "multiline": "always"
+        }],
+        "vue/html-closing-bracket-spacing": "error"
       }
     },
     {
