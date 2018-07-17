@@ -59,7 +59,7 @@
               color="white"
               large
             >
-              <translation-translatable v-if="btn.lang" :i18n="btn.lang"/>
+              <translation-translatable v-if="btn.lang" :i18n="btn.lang" />
               <v-icon
                 v-if="btn.icon"
                 left

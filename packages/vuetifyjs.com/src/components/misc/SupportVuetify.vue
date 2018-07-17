@@ -11,7 +11,8 @@
           :style="{ order: $vuetify.breakpoint.xs ? '2' : '1' }"
           d-flex
           pl-1
-          xs10>
+          xs10
+        >
           <v-layout align-center row wrap>
             <v-flex
               display-1
@@ -19,7 +20,8 @@
               patreon
               d-flex
               xs12
-              sm6>
+              sm6
+            >
               PATREON
             </v-flex>
             <v-flex hidden-xs-only patreon-bar mr-4 />
@@ -34,7 +36,8 @@
           align-center
           text-xs-center
           xs2
-          d-flex>
+          d-flex
+        >
           <v-layout align-center>
             <v-flex xs12>
               <img class="logo" src="https://cdn.vuetifyjs.com/images/logos/logo.svg" width="50px" alt="">

@@ -17,8 +17,7 @@
                 <v-card-media
                   :src="`https://unsplash.it/150/300?image=${Math.floor(Math.random() * 100) + 1}`"
                   height="150px"
-                >
-                </v-card-media>
+                ></v-card-media>
               </v-card>
             </v-flex>
           </v-layout>

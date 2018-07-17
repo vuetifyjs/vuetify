@@ -18,7 +18,8 @@
                 v-for="n in alignmentsAvailable"
                 :key="n"
                 :label="n === '' ? 'Nothing' : n"
-                :value="n"></v-radio>
+                :value="n"
+              ></v-radio>
             </v-radio-group>
           </v-flex>
           <v-flex xs12 md4>
@@ -27,7 +28,8 @@
                 v-for="n in justifyAvailable"
                 :key="n"
                 :label="n === '' ? 'Nothing' : n"
-                :value="n"></v-radio>
+                :value="n"
+              ></v-radio>
             </v-radio-group>
           </v-flex>
           <v-flex xs12 md4>
@@ -36,16 +38,19 @@
                 <v-checkbox
                   v-model="reverse"
                   label="reverse"
-                  hide-details></v-checkbox>
+                  hide-details
+                ></v-checkbox>
                 <v-checkbox
                   v-model="fillHeight"
                   label="fill-height"
-                  hide-details></v-checkbox>
+                  hide-details
+                ></v-checkbox>
                 <v-radio
                   v-for="n in flexDirectionAvailable"
                   :key="n"
                   :label="n === '' ? 'Nothing' : n"
-                  :value="n"></v-radio>
+                  :value="n"
+                ></v-radio>
               </v-radio-group>
             </v-layout>
           </v-flex>

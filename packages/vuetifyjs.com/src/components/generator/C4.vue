@@ -11,10 +11,10 @@
         <v-container grid-list-md>
           <v-layout wrap>
             <v-flex xs12 sm6 md4>
-              <v-text-field :rules="[required]" label="Legal first name" required/>
+              <v-text-field :rules="[required]" label="Legal first name" required />
             </v-flex>
             <v-flex xs12 sm6 md4>
-              <v-text-field label="Legal middle name" hint="example of helper text only on focus"/>
+              <v-text-field label="Legal middle name" hint="example of helper text only on focus" />
             </v-flex>
             <v-flex xs12 sm6 md4>
               <v-text-field
@@ -26,7 +26,7 @@
               />
             </v-flex>
             <v-flex xs12>
-              <v-text-field :rules="[required]" label="Email" required/>
+              <v-text-field :rules="[required]" label="Email" required />
             </v-flex>
             <v-flex xs12>
               <v-text-field
@@ -62,7 +62,7 @@
       </v-form>
     </v-card-text>
     <v-card-actions>
-      <v-spacer/>
+      <v-spacer />
       <v-btn color="primary" flat>Close</v-btn>
       <v-btn color="primary" flat>Save</v-btn>
     </v-card-actions>
