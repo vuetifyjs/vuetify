@@ -114,10 +114,6 @@ export default {
   watch: {
     rules: {
       handler (newVal, oldVal) {
-        // TODO: This handler seems to trigger when input changes, even though
-        // rules array stays the same? Solved it like this for now
-        if (newVal.length === oldVal.length) return
-
         this.validate()
       },
       deep: true
