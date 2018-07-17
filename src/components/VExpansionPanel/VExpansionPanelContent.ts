@@ -3,19 +3,39 @@ import { VExpandTransition } from '../transitions'
 import Bootable from '../../mixins/bootable'
 import Toggleable from '../../mixins/toggleable'
 import Rippleable from '../../mixins/rippleable'
-import { inject as RegistrableInject } from '../../mixins/registrable'
+import { Registrable, inject as RegistrableInject } from '../../mixins/registrable'
 
 import VIcon from '../VIcon'
+import VExpansionPanel from '.'
+
+import mixins, { ExtractVue } from '../../util/mixins'
+import Vue, { VNode } from 'vue'
 
 import { consoleWarn } from '../../util/console'
 
-/* @vue/component */
-export default {
+type VExpansionPanelInstance = InstanceType<typeof VExpansionPanel>
+
+interface options extends Vue {
+  expansionPanel: VExpansionPanelInstance
+}
+
+export default mixins<options &
+/* eslint-disable indent */
+  ExtractVue<
+    typeof Bootable,
+    typeof Toggleable,
+    typeof Rippleable,
+    Registrable<'expansionPanel'>
+  >
+/* eslint-enable indent */
+>(
+  Bootable,
+  Toggleable,
+  Rippleable,
+  RegistrableInject('expansionPanel', 'v-expansion-panel-content', 'v-expansion-panel')
+  /* @vue/component */
+).extend({
   name: 'v-expansion-panel-content',
-
-  mixins: [Bootable, Toggleable, Rippleable, RegistrableInject('expansionPanel', 'v-expansion-panel-content', 'v-expansion-panel')],
-
-  inject: ['expansionPanel'],
 
   props: {
     disabled: Boolean,
@@ -36,33 +56,33 @@ export default {
   }),
 
   computed: {
-    containerClasses () {
+    containerClasses (): object {
       return {
         'v-expansion-panel__container--active': this.isActive,
         'v-expansion-panel__container--disabled': this.isDisabled
       }
     },
-    isDisabled () {
+    isDisabled (): boolean {
       return this.expansionPanel.disabled || this.disabled
     },
-    isReadonly () {
+    isReadonly (): boolean {
       return this.expansionPanel.readonly || this.readonly
     }
   },
 
   mounted () {
-    this.expansionPanel.register(this._uid, this.toggle)
+    this.expansionPanel.register(this)
 
     // Can be removed once fully deprecated
     if (typeof this.value !== 'undefined') consoleWarn('v-model has been deprecated', this)
   },
 
   beforeDestroy () {
-    this.expansionPanel.unregister(this._uid)
+    this.expansionPanel.unregister(this)
   },
 
   methods: {
-    onKeydown (e) {
+    onKeydown (e: KeyboardEvent) {
       // Ensure element is the activeElement
       if (
         e.keyCode === 13 &&
@@ -79,29 +99,28 @@ export default {
         directives: [{
           name: 'show',
           value: this.isActive
-        }]
+        }] as any
       }, this.showLazyContent(this.$slots.default))
     },
     genHeader () {
+      const children = [...this.$slots.header]
+
+      if (!this.hideActions) children.push(this.genIcon())
+
       return this.$createElement('div', {
         staticClass: 'v-expansion-panel__header',
         directives: [{
           name: 'ripple',
           value: this.ripple
-        }],
+        }] as any,
         on: {
           click: this.onHeaderClick
         }
-      }, [
-        this.$slots.header,
-        this.genIcon()
-      ])
+      }, children)
     },
     genIcon () {
-      if (this.hideActions) return null
-
       const icon = this.$slots.actions ||
-        this.$createElement(VIcon, this.expandIcon)
+        [this.$createElement(VIcon, this.expandIcon)]
 
       return this.$createElement('transition', {
         attrs: { name: 'fade-transition' }
@@ -111,11 +130,11 @@ export default {
           directives: [{
             name: 'show',
             value: !this.isDisabled
-          }]
-        }, [icon])
+          }] as any
+        }, icon)
       ])
     },
-    toggle (active) {
+    toggle (active: boolean) {
       if (active) this.isBooted = true
 
       // We treat bootable differently
@@ -124,7 +143,7 @@ export default {
     }
   },
 
-  render (h) {
+  render (h): VNode {
     const children = []
 
     this.$slots.header && children.push(this.genHeader())
@@ -141,4 +160,4 @@ export default {
       }
     }, children)
   }
-}
+})

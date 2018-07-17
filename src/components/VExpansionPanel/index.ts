@@ -5,8 +5,8 @@ export { VExpansionPanel, VExpansionPanelContent }
 
 /* istanbul ignore next */
 VExpansionPanel.install = function install (Vue) {
-  Vue.component(VExpansionPanel.name, VExpansionPanel)
-  Vue.component(VExpansionPanelContent.name, VExpansionPanelContent)
+  Vue.component(VExpansionPanel.options.name, VExpansionPanel)
+  Vue.component(VExpansionPanelContent.options.name, VExpansionPanelContent)
 }
 
 export default VExpansionPanel
