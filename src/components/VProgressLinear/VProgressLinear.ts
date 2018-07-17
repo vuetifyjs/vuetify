@@ -7,6 +7,7 @@ import Colorable from '../../mixins/colorable'
 import { convertToUnit } from '../../util/helpers'
 import mixins from '../../util/mixins'
 
+// Types
 import { CreateElement, VNode } from 'vue'
 
 import {

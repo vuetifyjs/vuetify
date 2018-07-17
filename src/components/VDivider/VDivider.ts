@@ -1,6 +1,7 @@
 // Styles
 import '../../stylus/components/_dividers.styl'
 
+// Types
 import Vue, { VNode } from 'vue'
 
 // Mixins

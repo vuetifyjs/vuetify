@@ -1,7 +1,10 @@
 import '../../stylus/components/_progress-circular.styl'
 
+// Mixins
 import Colorable from '../../mixins/colorable'
 import mixins from '../../util/mixins'
+
+// Types
 import { CreateElement, VNode, VNodeChildrenArrayContents } from 'vue'
 
 /* @vue/component */

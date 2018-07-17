@@ -106,6 +106,31 @@ exports[`VRadio.vue should render role and aria-checked attributes on input grou
 
 `;
 
+exports[`VRadio.vue should render themed component 1`] = `
+
+<div class="v-radio theme--light">
+  <div class="v-input--selection-controls__input">
+    <input aria-checked="false"
+           role="radio"
+           type="radio"
+    >
+    <div class="v-input--selection-controls__ripple">
+    </div>
+    <i aria-hidden="true"
+       class="v-icon theme--light material-icons"
+    >
+      radio_button_unchecked
+    </i>
+  </div>
+  <label aria-hidden="true"
+         class="v-label theme--light"
+         style="left: 0px; position: relative;"
+  >
+  </label>
+</div>
+
+`;
+
 exports[`VRadio.vue should use custom icons 1`] = `
 
 <div class="v-radio">

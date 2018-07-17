@@ -71,7 +71,12 @@ export default {
             : this.isActive.toString()
         }),
         !this.disabled && this.genRipple(this.setTextColor(this.computedColor)),
-        this.$createElement(VIcon, this.setTextColor(this.computedColor), this.computedIcon)
+        this.$createElement(VIcon, this.setTextColor(this.computedColor, {
+          props: {
+            dark: this.dark,
+            light: this.light
+          }
+        }), this.computedIcon)
       ])
     },
     genDefaultSlot () {

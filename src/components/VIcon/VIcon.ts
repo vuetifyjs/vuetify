@@ -1,13 +1,17 @@
 import '../../stylus/components/_icons.styl'
 
+// Mixins
 import Themeable from '../../mixins/themeable'
 import Colorable from '../../mixins/colorable'
+
+// Util
 import {
   convertToUnit,
   getObjectValueByPath,
   keys
 } from '../../util/helpers'
 
+// Types
 import { VNode, VNodeChildren } from 'vue'
 import mixins from '../../util/mixins'
 

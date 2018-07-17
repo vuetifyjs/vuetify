@@ -57,6 +57,11 @@ export default {
     genSwitchPart (target) {
       return this.$createElement('div', this.setTextColor(this.computedColor, {
         staticClass: `v-input--switch__${target}`,
+        'class': {
+          ...this.classesSelectable,
+          ...this.themeClasses
+        },
+        // Avoid cache collision
         key: target
       }))
     },

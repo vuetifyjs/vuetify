@@ -1,11 +1,16 @@
 // Styles
 import '../../stylus/components/_counters.styl'
 
+// Mixins
+import Themeable from '../../mixins/themeable'
+
 /* @vue/component */
 export default {
   name: 'v-counter',
 
   functional: true,
+
+  mixins: [Themeable],
 
   props: {
     value: {
@@ -23,7 +28,10 @@ export default {
 
     return h('div', {
       staticClass: 'v-counter',
-      class: isGreater ? ['error--text'] : []
+      class: {
+        'error--text': isGreater,
+        ...Themeable.options.computed.themeClasses.call(props)
+      }
     }, content)
   }
 }

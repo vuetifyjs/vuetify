@@ -127,7 +127,9 @@ export default {
         },
         props: {
           color: this.radio.validationState || false,
-          focused: this.hasState
+          dark: this.dark,
+          focused: this.hasState,
+          light: this.light
         }
       }, this.$slots.label || this.label)
     },
@@ -140,7 +142,12 @@ export default {
           ...this.$attrs
         }),
         !this.isDisabled && this.genRipple(this.setTextColor(this.computedColor)),
-        this.$createElement(VIcon, this.setTextColor(this.computedColor), this.computedIcon)
+        this.$createElement(VIcon, this.setTextColor(this.computedColor, {
+          props: {
+            dark: this.dark,
+            light: this.light
+          }
+        }), this.computedIcon)
       ])
     },
     onFocus () {

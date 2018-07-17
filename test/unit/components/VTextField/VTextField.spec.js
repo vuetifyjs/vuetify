@@ -175,7 +175,9 @@ test('VTextField.js', ({ mount }) => {
       propsData: {
         value: 'foo',
         appendIcon: 'block',
-        appendIconCb
+      },
+      listeners: {
+        'click:append': appendIconCb
       }
     })
 
@@ -575,9 +577,11 @@ test('VTextField.js', ({ mount }) => {
     const clearIconCb = jest.fn()
     const wrapper = mount(VTextField, {
       propsData: {
-        clearIconCb,
         clearable: true,
         value: 'foo'
+      },
+      listeners: {
+        'click:clear': clearIconCb
       }
     })
 
@@ -776,5 +780,23 @@ test('VTextField.js', ({ mount }) => {
       expect(label.element.classList).not.toContain('v-label--active')
       expect(wrapper.vm.$el.classList).not.toContain('v-input--is-label-active')
     }
+  })
+
+  it('should apply theme to label, counter, messages and icons', () => {
+    const wrapper = mount(VTextField, {
+      propsData: {
+        counter: true,
+        label: 'foo',
+        hint: 'bar',
+        persistentHint: true,
+        light: true,
+        prependIcon: 'prepend',
+        appendIcon: 'append',
+        prependInnerIcon: 'prepend-inner',
+        appendOuterIcon: 'append-outer'
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })
