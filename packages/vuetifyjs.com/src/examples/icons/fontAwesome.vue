@@ -16,6 +16,6 @@
 
 <codepen-resources lang="json">
   {
-    "js": ["https://use.fontawesome.com/releases/v5.0.6/js/all.js"]
+    "css": ["https://use.fontawesome.com/releases/v5.1.0/css/all.css"]
   }
 </codepen-resources>
