@@ -122,6 +122,7 @@
       flex-wrap: wrap
       align-items: center
       vertical-align: middle
+      white-space: pre-wrap
 
       &:before
         display: none
