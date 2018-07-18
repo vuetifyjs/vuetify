@@ -9,16 +9,6 @@ v-text-field($material)
     .v-input__slot:hover:before
       border-color: $material.text.primary
 
-  &.v-input--is-disabled
-    .v-input__slot:before
-      background-color: transparent
-      background-image: linear-gradient(
-        to right,
-        $material.text.disabled 0,
-        $material.text.disabled 33%,
-        transparent 0
-      )
-
   &__prefix,
   &__suffix
     color: $material.text.secondary
@@ -155,10 +145,6 @@ rtl(v-text-field-rtl, "v-text-field")
       width: 100%
 
     &:before
-      background-color: transparent
-      background-position: bottom
-      background-size: 3px 1px
-      background-repeat: repeat-x
       border-style: solid
       border-width: thin 0 0 0
 
@@ -167,6 +153,10 @@ rtl(v-text-field-rtl, "v-text-field")
       border-style: solid
       border-width: thin 0 thin 0
       transform: scaleX(0)
+
+  &.v-input--is-disabled
+    .v-input__slot::before
+      border-style: dashed
 
   &__details
     display: flex
