@@ -314,12 +314,12 @@ export default {
           value: this.maskText(this.lazyValue)
         },
         attrs: {
+          'aria-label': (!this.$attrs || !this.$attrs.id) && this.label, // Label `for` will be set if we have an id
           ...this.$attrs,
           autofocus: this.autofocus,
           disabled: this.disabled,
           readonly: this.readonly,
-          type: this.type,
-          'aria-label': (!this.$attrs || !this.$attrs.id) && this.label // Label `for` will be set if we have an id
+          type: this.type
         },
         on: Object.assign(listeners, {
           blur: this.onBlur,

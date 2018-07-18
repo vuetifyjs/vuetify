@@ -29,8 +29,8 @@ exports[`VTextField.js should apply theme to label, counter, messages and icons 
         >
           foo
         </label>
-        <input type="text"
-               aria-label="foo"
+        <input aria-label="foo"
+               type="text"
         >
       </div>
       <div class="v-input__append-inner">
