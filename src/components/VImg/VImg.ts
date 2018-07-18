@@ -2,12 +2,13 @@ import '../../stylus/components/_images.styl'
 
 import Vue, { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
+import { VNodeChildrenArrayContents } from 'vue/types/vnode'
 
 import { consoleError } from '../../util/console'
 import { convertToUnit } from '../../util/helpers'
 
 // not intended for public use, this is passed in by vuetify-loader
-interface srcObject {
+export interface srcObject {
   src: string
   srcset?: string
   lazySrc: string
@@ -67,6 +68,35 @@ export default Vue.extend({
         : undefined
       const aspectRatio = +this.aspectRatio || srcAspect || this.computedAspectRatio
       return aspectRatio ? { 'padding-bottom': aspectRatio * 100 + '%' } : undefined
+    },
+    __cachedSizer (): VNode {
+      return this.$createElement('div', { style: this.aspectStyle, staticClass: 'v-image__sizer' })
+    },
+    __cachedImage (): VNode | never[] {
+      if (!(this.computedSrc || this.computedLazySrc)) return []
+
+      const src = this.isLoading ? this.computedLazySrc : this.currentSrc
+
+      return this.$createElement('transition', {
+        attrs: {
+          name: this.transition,
+          mode: 'in-out'
+        }
+      }, [
+        this.$createElement('div', {
+          staticClass: 'v-image__image',
+          class: {
+            'v-image__image--preload': this.isLoading,
+            'v-image__image--contain': this.contain,
+            'v-image__image--cover': !this.contain
+          },
+          style: {
+            backgroundImage: src ? `url("${src}")` : undefined,
+            backgroundPosition: this.position
+          },
+          key: +this.isLoading
+        })
+      ])
     }
   },
 
@@ -76,10 +106,6 @@ export default Vue.extend({
       else this.loadImage()
     },
     '$vuetify.breakpoint.width': 'getSrc'
-  },
-
-  created () {
-    this.isLoading = true
   },
 
   beforeMount () {
@@ -93,7 +119,7 @@ export default Vue.extend({
         lazyImg.src = this.computedLazySrc
         this.pollForSize(lazyImg, null)
       }
-      this.loadImage()
+      if (this.computedSrc) this.loadImage()
     },
     onLoad () {
       this.getSrc()
@@ -139,30 +165,23 @@ export default Vue.extend({
       }
 
       poll()
+    },
+    __genPlaceholder (): VNode | never[] {
+      if (this.$slots.placeholder) {
+        const placeholder = this.$createElement('div', {
+          staticClass: 'v-image__placeholder'
+        }, this.$slots.placeholder)
+
+        return this.$createElement('transition', {
+          attrs: { name: this.transition }
+        }, this.isLoading ? [placeholder] : [])
+      } else {
+        return [] // TODO: vue's types don't allow undefined
+      }
     }
   },
 
   render (h): VNode {
-    const src = this.isLoading ? this.computedLazySrc : this.currentSrc
-
-    const image = h('div', {
-      staticClass: 'v-image__image',
-      class: {
-        'v-image__image--preload': this.isLoading,
-        'v-image__image--contain': this.contain,
-        'v-image__image--cover': !this.contain
-      },
-      style: {
-        backgroundImage: src ? `url("${src}")` : undefined,
-        backgroundPosition: this.position
-      },
-      key: +this.isLoading
-    })
-
-    const placeholder = this.$slots.placeholder && h('div', {
-      staticClass: 'v-image__placeholder'
-    }, this.$slots.placeholder)
-
     return h('div', {
       staticClass: 'v-image',
       style: {
@@ -174,16 +193,9 @@ export default Vue.extend({
         'aria-label': this.alt
       }
     }, [
-      h('div', { style: this.aspectStyle, staticClass: 'v-image__sizer' }),
-      h('transition', {
-        attrs: {
-          name: this.transition,
-          mode: 'in-out'
-        }
-      }, [image]),
-      this.isLoading ? h('transition', {
-        attrs: { name: this.transition }
-      }, [placeholder]) : []
+      this.__cachedSizer,
+      this.__cachedImage,
+      this.__genPlaceholder()
     ])
   }
 })
