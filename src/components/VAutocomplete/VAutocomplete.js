@@ -58,7 +58,7 @@ export default {
   data: vm => ({
     attrsInput: null,
     lazySearch: vm.searchInput,
-    lazyValue: vm.value != null
+    lazyValue: vm.value !== undefined
       ? vm.value
       : vm.multiple ? [] : undefined
   }),
@@ -338,9 +338,7 @@ export default {
       this.setSearch()
     },
     setSelectedItems () {
-      if (this.internalValue == null ||
-        this.internalValue === ''
-      ) {
+      if (this.internalValue === undefined) {
         this.selectedItems = []
       } else {
         VSelect.methods.setSelectedItems.call(this)
