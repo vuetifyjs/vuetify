@@ -113,7 +113,7 @@ export default {
 
   watch: {
     rules: {
-      handler (newVal, oldVal) {
+      handler () {
         this.validate()
       },
       deep: true
