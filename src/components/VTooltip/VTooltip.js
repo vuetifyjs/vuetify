@@ -66,6 +66,9 @@ export default {
         )
       }
 
+      if (this.nudgeLeft) left -= parseInt(this.nudgeLeft)
+      if (this.nudgeRight) left += parseInt(this.nudgeRight)
+
       return `${this.calcXOverflow(left)}px`
     },
     calculatedTop () {
@@ -85,6 +88,9 @@ export default {
           (content.height / 2)
         )
       }
+
+      if (this.nudgeTop) top -= parseInt(this.nudgeTop)
+      if (this.nudgeBottom) top += parseInt(this.nudgeBottom)
 
       return `${this.calcYOverflow(top + this.pageYOffset)}px`
     },
