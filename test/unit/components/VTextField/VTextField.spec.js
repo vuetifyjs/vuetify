@@ -170,22 +170,24 @@ test('VTextField.js', ({ mount }) => {
   })
 
   it('should not clear input if not clearable and has appended icon (with callback)', async () => {
-    const appendIconCb = jest.fn()
+    const click = jest.fn()
     const wrapper = mount(VTextField, {
       propsData: {
         value: 'foo',
         appendIcon: 'block',
       },
       listeners: {
-        'click:append': appendIconCb
+        'click:append': click
       }
     })
+
+    wrapper.vm.$on('click:append', click)
 
     const icon = wrapper.find('.v-input__icon--append .v-icon')[0]
     icon.trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.internalValue).toBe('foo')
-    expect(appendIconCb.mock.calls).toHaveLength(1)
+    expect(click.mock.calls).toHaveLength(1)
   })
 
   it('should not clear input if not clearable and has appended icon (without callback)', async () => {
@@ -574,20 +576,22 @@ test('VTextField.js', ({ mount }) => {
   })
 
   it('should use a custom clear callback', async () => {
-    const clearIconCb = jest.fn()
+    const clear = jest.fn()
     const wrapper = mount(VTextField, {
       propsData: {
         clearable: true,
         value: 'foo'
       },
       listeners: {
-        'click:clear': clearIconCb
+        'click:clear': clear
       }
     })
 
+    wrapper.vm.$on('click:clear', clear)
+
     wrapper.first('.v-input__icon--clear .v-icon').trigger('click')
 
-    expect(clearIconCb).toBeCalled()
+    expect(clear).toBeCalled()
   })
 
   it('should not generate label', () => {
