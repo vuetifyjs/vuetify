@@ -1,6 +1,7 @@
 <template lang="pug">
   v-toolbar(
     app
+    clipped-right
     color="primary"
     dark
     fixed

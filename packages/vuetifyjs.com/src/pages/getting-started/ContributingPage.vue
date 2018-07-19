@@ -34,7 +34,7 @@
             )
               translation-translatable(:i18n="`${namespace}.pullRequest${n}`")
                 helpers-markdown(:source="$t(`${namespace}.pullRequest${n}`)")
-      section#local-dev
+      section#setup-local-dev
         helpers-section-head(:value="`${namespace}.localDevHeader`")
         helpers-section-text(:value="`${namespace}.localDevText1`").mb-5
         helpers-markup(lang="cli").mb-5

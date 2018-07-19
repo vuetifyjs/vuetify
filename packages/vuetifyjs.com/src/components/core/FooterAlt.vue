@@ -24,6 +24,7 @@
             span(v-text="prev.title").subheading.no-wrap.hidden-xs-only
         v-flex(
           v-if="next"
+          :class="{ 'offset-xs4 offset-sm5 offsetmd-6': !prev }"
           xs4
           sm5
           md6

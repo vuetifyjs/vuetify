@@ -1,7 +1,7 @@
 <template lang="pug">
   v-container.page
     v-layout
-      v-flex(xs12 md9)
+      v-flex(xs12)
         helpers-page-head(
           :header="header"
           :text="headerText"
@@ -10,36 +10,13 @@
             slot(name="sup")
         slot(:namespace="namespace")
         core-footer-alt
-      no-ssr
-        v-flex(
-          v-if="$vuetify.breakpoint.mdAndUp"
-          md3
-        )
-          core-table-of-contents(
-            :threshold="50"
-            :offset="85"
-            :items="computedToc"
-          )
-            core-ad
 </template>
 
 <script>
-  import { mapState } from 'vuex'
   import { camel } from '@/util/helpers'
-  import { getObjectValueByPath } from 'vuetify/es5/util/helpers'
 
   export default {
-    props: {
-      toc: {
-        type: String,
-        default: null
-      }
-    },
-
     computed: {
-      ...mapState({
-        tocs: state => state.app.tablesOfContents
-      }),
       header () {
         return `${this.namespace}.header`
       },
@@ -53,9 +30,6 @@
         if (route.length === 1) route.unshift('vuetify')
 
         return route.map(s => camel(s)).join('.')
-      },
-      computedToc () {
-        return getObjectValueByPath(this.tocs, this.toc || this.namespace) || []
       }
     }
   }

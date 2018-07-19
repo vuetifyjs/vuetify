@@ -1,18 +1,22 @@
-<template lang="pug">
-  v-fab-transition
-    //- style="bottom: 52px"
-    v-btn(
+<template>
+  <v-fab-transition>
+    <v-btn
+      v-scroll="onScroll"
+      v-show="fab"
+      :style="{
+        bottom: $vuetify.breakpoint.smOnly ? '64px' : ''
+      }"
       fab
       dark
       fixed
       bottom
       right
       color="red"
-      v-scroll="onScroll"
-      v-show="fab"
       @click="toTop"
-    )
-      v-icon keyboard_arrow_up
+    >
+      <v-icon>keyboard_arrow_up</v-icon>
+    </v-btn>
+  </v-fab-transition>
 </template>
 
 <script>
