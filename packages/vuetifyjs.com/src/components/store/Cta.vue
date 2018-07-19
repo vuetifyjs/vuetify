@@ -51,7 +51,7 @@
               @mouseleave="highlight.value = false"
             >
               <v-card-media
-                :src="highlight.variants[0].image.src"
+                :src="getSrc(highlight)"
                 contain
                 height="135px"
               >
@@ -113,6 +113,13 @@
     },
 
     methods: {
+      getSrc (highlight) {
+        if (highlight.images.length > 0) {
+          return highlight.images[0].src
+        }
+
+        return highlight.variants[0].image.src
+      },
       shortId: shortId
     }
   }

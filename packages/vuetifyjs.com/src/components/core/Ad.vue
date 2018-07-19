@@ -1,7 +1,7 @@
 <template>
   <div id="ad__container">
     <v-system-bar
-      v-if="viewport === 'xs' && !isHome"
+      v-if="viewport === 'xs' && shouldShowAd"
       v-show="$vuetify.breakpoint.xsOnly"
       :app="$vuetify.breakpoint.xsOnly"
       class="white"
@@ -11,7 +11,7 @@
     </v-system-bar>
 
     <v-bottom-nav
-      v-else-if="viewport === 'sm' && !isHome"
+      v-else-if="viewport === 'sm' && shouldShowAd"
       :value="$vuetify.breakpoint.smOnly"
       app
       height="48"
@@ -20,7 +20,7 @@
     </v-bottom-nav>
 
     <v-navigation-drawer
-      v-else-if="viewport === 'md' && !isHome"
+      v-else-if="viewport === 'md' && shouldShowAd"
       :value="$vuetify.breakpoint.mdAndUp"
       app
       class="transparent pa-3"
@@ -60,8 +60,11 @@
 
     computed: {
       ...mapState('route', ['path', 'name']),
-      isHome () {
-        return this.name === 'home/Home'
+      shouldShowAd () {
+        return (
+          this.name !== 'home/Home' &&
+          this.name.indexOf('store/') < 0
+        )
       }
     },
 
