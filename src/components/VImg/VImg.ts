@@ -9,7 +9,6 @@ import VResponsive from '../VResponsive'
 
 // Utils
 import { consoleError } from '../../util/console'
-import { convertToUnit } from '../../util/helpers'
 
 // not intended for public use, this is passed in by vuetify-loader
 export interface srcObject {
