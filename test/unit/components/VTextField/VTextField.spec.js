@@ -170,20 +170,24 @@ test('VTextField.js', ({ mount }) => {
   })
 
   it('should not clear input if not clearable and has appended icon (with callback)', async () => {
-    const appendIconCb = jest.fn()
+    const click = jest.fn()
     const wrapper = mount(VTextField, {
       propsData: {
         value: 'foo',
         appendIcon: 'block',
-        appendIconCb
+      },
+      listeners: {
+        'click:append': click
       }
     })
+
+    wrapper.vm.$on('click:append', click)
 
     const icon = wrapper.find('.v-input__icon--append .v-icon')[0]
     icon.trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.internalValue).toBe('foo')
-    expect(appendIconCb.mock.calls).toHaveLength(1)
+    expect(click.mock.calls).toHaveLength(1)
   })
 
   it('should not clear input if not clearable and has appended icon (without callback)', async () => {
@@ -572,18 +576,22 @@ test('VTextField.js', ({ mount }) => {
   })
 
   it('should use a custom clear callback', async () => {
-    const clearIconCb = jest.fn()
+    const clear = jest.fn()
     const wrapper = mount(VTextField, {
       propsData: {
-        clearIconCb,
         clearable: true,
         value: 'foo'
+      },
+      listeners: {
+        'click:clear': clear
       }
     })
 
+    wrapper.vm.$on('click:clear', clear)
+
     wrapper.first('.v-input__icon--clear .v-icon').trigger('click')
 
-    expect(clearIconCb).toBeCalled()
+    expect(clear).toBeCalled()
   })
 
   it('should not generate label', () => {
@@ -776,5 +784,23 @@ test('VTextField.js', ({ mount }) => {
       expect(label.element.classList).not.toContain('v-label--active')
       expect(wrapper.vm.$el.classList).not.toContain('v-input--is-label-active')
     }
+  })
+
+  it('should apply theme to label, counter, messages and icons', () => {
+    const wrapper = mount(VTextField, {
+      propsData: {
+        counter: true,
+        label: 'foo',
+        hint: 'bar',
+        persistentHint: true,
+        light: true,
+        prependIcon: 'prepend',
+        appendIcon: 'append',
+        prependInnerIcon: 'prepend-inner',
+        appendOuterIcon: 'append-outer'
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

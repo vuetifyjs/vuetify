@@ -66,6 +66,7 @@ export default {
         staticClass: 'v-input--selection-controls__input'
       }, [
         this.genInput('checkbox', {
+          ...this.$attrs,
           'aria-checked': this.inputIndeterminate
             ? 'mixed'
             : this.isActive.toString()
@@ -74,7 +75,11 @@ export default {
           'class': this.classesSelectable
         }),
         this.$createElement(VIcon, {
-          'class': this.classesSelectable
+          'class': this.classesSelectable,
+          props: {
+            dark: this.dark,
+            light: this.light
+          }
         }, this.computedIcon)
       ])
     },

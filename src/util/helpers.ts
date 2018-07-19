@@ -5,17 +5,12 @@ export function createSimpleFunctional (
   el = 'div',
   name?: string
 ): FunctionalComponentOptions {
-  name = name || c.replace(/__/g, '-')
-
-  // TODO: remove after close
-  // https://github.com/vuetifyjs/vuetify/issues/1561
-  name = name.split('-')[0] === 'v' ? name : `v-${name}`
-
   return {
-    name,
+    name: name || c.replace(/__/g, '-'),
+
     functional: true,
 
-    render (h, { data, children }) {
+    render (h, { data, children }): VNode {
       data.staticClass = (`${c} ${data.staticClass || ''}`).trim()
 
       return h(el, data, children)
@@ -40,7 +35,7 @@ export function createSimpleTransition (
       }
     },
 
-    render (h, context) {
+    render (h, context): VNode {
       context.data = context.data || {}
       context.data.props = { name }
       context.data.on = context.data.on || {}
@@ -82,7 +77,7 @@ export function createJavaScriptTransition (
       }
     },
 
-    render (h, context) {
+    render (h, context): VNode {
       const data = {
         props: {
           ...context.props,

@@ -12,7 +12,6 @@ import VTextField from '../VTextField/VTextField'
 
 // Mixins
 import Comparable from '../../mixins/comparable'
-import Dependent from '../../mixins/dependent'
 import Filterable from '../../mixins/filterable'
 import Menuable from '../../mixins/menuable'
 
@@ -48,7 +47,6 @@ export default {
     fakeVMenu,
     fakeMenuable,
     Comparable,
-    Dependent,
     Filterable
   ],
 
@@ -153,29 +151,13 @@ export default {
         : (this.getText(this.selectedItems[0]) || '').toString().length
     },
     directives () {
-      return [{
+      return this.isFocused ? [{
         name: 'click-outside',
         value: this.blur,
         args: {
-          closeConditional: e => {
-            return (
-              // Check if click originates
-              // from within the content
-              (
-                !!this.content &&
-                !this.content.contains(e.target)
-              ) &&
-              // Check if click originates
-              // from within the element
-              (
-                !!this.$el &&
-                !this.$el.contains(e.target) &&
-                e.target !== this.$el
-              )
-            )
-          }
+          closeConditional: this.closeConditional
         }
-      }]
+      }] : undefined
     },
     dynamicHeight () {
       return 'auto'
@@ -277,7 +259,7 @@ export default {
     blur () {
       this.isMenuActive = false
       this.isFocused = false
-      this.$refs.input.blur()
+      this.$refs.input && this.$refs.input.blur()
       this.selectedIndex = -1
     },
     /** @public */
@@ -290,6 +272,18 @@ export default {
       this.$nextTick(() => this.$refs.input.focus())
 
       if (this.openOnClear) this.isMenuActive = true
+    },
+    closeConditional (e) {
+      return (
+        // Click originates from outside the menu content
+        !!this.content &&
+        !this.content.contains(e.target) &&
+
+        // Click originates from outside the element
+        !!this.$el &&
+        !this.$el.contains(e.target) &&
+        e.target !== this.$el
+      )
     },
     filterDuplicates (arr) {
       const uniqueValues = new Map()
@@ -523,8 +517,6 @@ export default {
       if (this.selectedItems.length === 0) {
         this.isMenuActive = true
       }
-
-      this.editingIndex = -1
       this.selectedIndex = -1
     },
     onClick () {

@@ -4,6 +4,7 @@ import '../../stylus/components/_avatars.styl'
 import Colorable from '../../mixins/colorable'
 import { convertToUnit } from '../../util/helpers'
 
+// Types
 import { VNode } from 'vue'
 import mixins from '../../util/mixins'
 

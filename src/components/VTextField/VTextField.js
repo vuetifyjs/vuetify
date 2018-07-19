@@ -269,8 +269,10 @@ export default {
 
       return this.$createElement(VCounter, {
         props: {
-          value: this.counterValue,
-          max
+          dark: this.dark,
+          light: this.light,
+          max,
+          value: this.counterValue
         }
       })
     },
@@ -288,9 +290,11 @@ export default {
         props: {
           absolute: true,
           color: this.validationState,
+          dark: this.dark,
           disabled: this.disabled,
           focused: !this.isSingle && (this.isFocused || !!this.validationState),
           left: this.labelPosition.left,
+          light: this.light,
           right: this.labelPosition.right,
           value: this.labelValue
         }
@@ -310,13 +314,12 @@ export default {
           value: this.maskText(this.lazyValue)
         },
         attrs: {
+          'aria-label': (!this.$attrs || !this.$attrs.id) && this.label, // Label `for` will be set if we have an id
           ...this.$attrs,
           autofocus: this.autofocus,
           disabled: this.disabled,
           readonly: this.readonly,
-          tabindex: this.tabindex,
-          type: this.type,
-          'aria-label': (!this.$attrs || !this.$attrs.id) && this.label // Label `for` will be set if we have an id
+          type: this.type
         },
         on: Object.assign(listeners, {
           blur: this.onBlur,
@@ -334,6 +337,8 @@ export default {
       return this.$createElement('input', data)
     },
     genMessages () {
+      if (this.hideDetails) return null
+
       return this.$createElement('div', {
         staticClass: 'v-text-field__details'
       }, [

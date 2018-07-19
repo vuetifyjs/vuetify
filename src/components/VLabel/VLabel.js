@@ -3,6 +3,7 @@ import '../../stylus/components/_labels.styl'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
+import Themeable from '../../mixins/themeable'
 
 // Helpers
 import { convertToUnit } from '../../util/helpers'
@@ -12,6 +13,8 @@ export default {
   name: 'v-label',
 
   functional: true,
+
+  mixins: [Themeable],
 
   props: {
     absolute: Boolean,
@@ -38,7 +41,8 @@ export default {
       staticClass: 'v-label',
       'class': {
         'v-label--active': props.value,
-        'v-label--is-disabled': props.disabled
+        'v-label--is-disabled': props.disabled,
+        ...Themeable.options.computed.themeClasses.call(props)
       },
       attrs: {
         for: props.for,
