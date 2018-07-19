@@ -126,7 +126,7 @@ export default mixins<options &
         attrs: { name: 'fade-transition' }
       }, [
         this.$createElement('div', {
-          staticClass: 'header__icon',
+          staticClass: 'v-expansion-panel__header__icon',
           directives: [{
             name: 'show',
             value: !this.isDisabled
