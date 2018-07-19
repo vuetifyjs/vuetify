@@ -1,9 +1,13 @@
 import '../../stylus/components/_images.styl'
 
-import Vue, { VNode } from 'vue'
+// Types
+import { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
-import { VNodeChildrenArrayContents } from 'vue/types/vnode'
 
+// Components
+import VResponsive from '../VResponsive'
+
+// Utils
 import { consoleError } from '../../util/console'
 import { convertToUnit } from '../../util/helpers'
 
@@ -15,12 +19,11 @@ export interface srcObject {
   aspect: number
 }
 
-export default Vue.extend({
+export default VResponsive.extend({
   name: 'v-img',
 
   props: {
     alt: String,
-    aspectRatio: [String, Number],
     contain: Boolean,
     src: {
       type: [String, Object],
@@ -36,9 +39,7 @@ export default Vue.extend({
     transition: {
       type: String,
       default: 'fade-transition'
-    },
-    height: [String, Number],
-    maxHeight: [String, Number]
+    }
   },
 
   data () {
@@ -46,7 +47,7 @@ export default Vue.extend({
       currentSrc: '', // Set from srcset
       image: null as HTMLImageElement | null,
       isLoading: true,
-      computedAspectRatio: undefined as number | undefined
+      calculatedAspectRatio: undefined as number | undefined
     }
   },
 
@@ -62,15 +63,11 @@ export default Vue.extend({
         ? this.lazySrc
         : this.lazySrc || this.src.lazySrc
     },
-    aspectStyle (): object | undefined {
+    computedAspectRatio (): number | undefined {
       const srcAspect = typeof this.src !== 'string'
         ? this.src.aspect
         : undefined
-      const aspectRatio = +this.aspectRatio || srcAspect || this.computedAspectRatio
-      return aspectRatio ? { 'padding-bottom': aspectRatio * 100 + '%' } : undefined
-    },
-    __cachedSizer (): VNode {
-      return this.$createElement('div', { style: this.aspectStyle, staticClass: 'v-image__sizer' })
+      return Number(this.aspectRatio || srcAspect || this.calculatedAspectRatio)
     },
     __cachedImage (): VNode | never[] {
       if (!(this.computedSrc || this.computedLazySrc)) return []
@@ -101,7 +98,7 @@ export default Vue.extend({
   },
 
   watch: {
-    src (val) {
+    src () {
       if (!this.isLoading) this.init()
       else this.loadImage()
     },
@@ -158,7 +155,7 @@ export default Vue.extend({
         const { naturalHeight, naturalWidth } = img
 
         if (naturalHeight || naturalWidth) {
-          this.computedAspectRatio = naturalHeight / naturalWidth
+          this.calculatedAspectRatio = naturalHeight / naturalWidth
         } else {
           timeout != null && setTimeout(poll, timeout)
         }
@@ -166,7 +163,7 @@ export default Vue.extend({
 
       poll()
     },
-    __genPlaceholder (): VNode | never[] {
+    __genPlaceholder (): VNode | void {
       if (this.$slots.placeholder) {
         const placeholder = this.$createElement('div', {
           staticClass: 'v-image__placeholder'
@@ -175,27 +172,27 @@ export default Vue.extend({
         return this.$createElement('transition', {
           attrs: { name: this.transition }
         }, this.isLoading ? [placeholder] : [])
-      } else {
-        return [] // TODO: vue's types don't allow undefined
       }
     }
   },
 
   render (h): VNode {
-    return h('div', {
-      staticClass: 'v-image',
-      style: {
-        height: convertToUnit(this.height),
-        maxHeight: convertToUnit(this.maxHeight)
-      },
-      attrs: {
-        role: this.alt ? 'img' : undefined,
-        'aria-label': this.alt
-      }
-    }, [
+    const node = VResponsive.options.render.call(this, h)
+
+    node.data.staticClass += ' v-image'
+
+    node.attrs = {
+      role: this.alt ? 'img' : undefined,
+      'aria-label': this.alt
+    }
+
+    node.children = [
       this.__cachedSizer,
       this.__cachedImage,
-      this.__genPlaceholder()
-    ])
+      this.__genPlaceholder(),
+      this.genContent()
+    ]
+
+    return h(node.tag, node.data, node.children)
   }
 })

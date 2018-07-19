@@ -1,12 +1,11 @@
 @import '../bootstrap'
 
 .v-image
-  position: relative
-  overflow: hidden
-  flex: 1 1 auto
+  z-index: 0
 
   &__image,
   &__placeholder
+    z-index: -1
     position: absolute
     top: 0
     left: 0
@@ -24,7 +23,3 @@
 
     &--cover
       background-size: cover
-
-  &__sizer
-    transition: padding-bottom 0.2s $transition.swing
-    float: left
