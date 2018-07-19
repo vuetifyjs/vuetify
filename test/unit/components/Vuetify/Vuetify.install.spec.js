@@ -10,13 +10,11 @@ test('Vuetify.install.js', () => {
     Vue.directive = jest.fn()
     Vue.use = jest.fn()
 
-    const noopInstallPack = { install: () => { } }
-
     Vuetify.installed = false
     Vuetify.install(Vue, {
       components: {
-        ComponentPack: noopInstallPack,
-        OneComponent: {}
+        OneComponent: {},
+        SecondComponent: { $_vuetify_subcomponents: { HisChild: {} } }
       },
       directives: {
         directive: {
@@ -34,9 +32,16 @@ test('Vuetify.install.js', () => {
       }
     })
 
-    expect(Vue.use.mock.calls).toEqual([[noopInstallPack]])
-    expect(Vue.directive.mock.calls).toEqual([["foobarbaz", {"name": "foobarbaz"}]])
-    expect(Vue.component.mock.calls).toEqual([["v-foobarbaz", {"name": "v-foobarbaz"}],["OneComponent", {}]])
+    expect(Vue.use.mock.calls).toEqual([])
+    expect(Vue.directive.mock.calls).toEqual([
+      ['foobarbaz', { name: 'foobarbaz' }]
+    ])
+    expect(Vue.component.mock.calls).toEqual([
+      ['v-foobarbaz', { name: 'v-foobarbaz' }],
+      ['OneComponent', {}],
+      ['SecondComponent', { $_vuetify_subcomponents: { HisChild: {} } }],
+      ['HisChild', {}]
+    ])
 
     Vue.use = jest.fn()
     Vuetify.install(Vue, {
@@ -46,9 +51,7 @@ test('Vuetify.install.js', () => {
     })
     expect(Vue.use).not.toBeCalled()
 
-    Vue.component = component
-    Vue.directive = directive
-    Vue.use = use
+    Object.assign(Vue, { component, directive, use })
   })
 
   describe('should warn about an unsupported version of Vue', () => {
