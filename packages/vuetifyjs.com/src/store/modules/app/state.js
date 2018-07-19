@@ -3,6 +3,29 @@ import deprecatedIn from '@/data/deprecatedIn'
 import newIn from '@/data/newIn'
 import removed from '@/data/removed'
 
+const docPage = [
+  {
+    text: 'Generic.Pages.introduction',
+    href: 'introduction'
+  },
+  {
+    text: 'Generic.Pages.usage',
+    href: 'usage'
+  },
+  {
+    text: 'Generic.Pages.api',
+    href: 'api'
+  },
+  {
+    text: 'Generic.Pages.supplemental',
+    href: 'supplemental'
+  },
+  {
+    text: 'Generic.Pages.examples',
+    href: 'examples'
+  }
+]
+
 export default () => ({
   appDrawer: null,
   appFooter: true,
@@ -25,28 +48,30 @@ export default () => ({
   removed,
   stateless: false,
   tablesOfContents: {
-    Components: [
-      {
-        text: 'Generic.Pages.introduction',
-        href: 'introduction'
-      },
-      {
-        text: 'Generic.Pages.usage',
-        href: 'usage'
-      },
-      {
-        text: 'Generic.Pages.api',
-        href: 'api'
-      },
-      {
-        text: 'Generic.Pages.supplemental',
-        href: 'supplemental'
-      },
-      {
-        text: 'Generic.Pages.examples',
-        href: 'examples'
-      }
-    ],
+    Components: {
+      Doc: [
+        {
+          text: 'Generic.Pages.introduction',
+          href: 'introduction'
+        },
+        {
+          text: 'Generic.Pages.usage',
+          href: 'usage'
+        },
+        {
+          text: 'Generic.Pages.api',
+          href: 'api'
+        },
+        {
+          text: 'Generic.Pages.supplemental',
+          href: 'supplemental'
+        },
+        {
+          text: 'Generic.Pages.examples',
+          href: 'examples'
+        }
+      ]
+    },
     GettingStarted: {
       QuickStart: [
         {
@@ -81,7 +106,7 @@ export default () => ({
       WhyVuetify: [
         {
           text: 'GettingStarted.WhyVuetify.header',
-          href: 'why-vuetify'
+          href: 'introduction'
         },
         {
           text: 'GettingStarted.WhyVuetify.designHeader',
@@ -89,18 +114,36 @@ export default () => ({
         },
         {
           text: 'GettingStarted.WhyVuetify.communityHeader',
-          href: 'vibrant-community'
+          href: 'active-help'
         },
         {
           text: 'GettingStarted.WhyVuetify.comparisonHeader',
-          href: 'framework-comparison'
+          href: 'comparison-to-other-frameworks'
+        }
+      ],
+      Contributing: [
+        {
+          text: 'GettingStarted.Contributing.header',
+          href: 'introduction'
+        },
+        {
+          text: 'GettingStarted.Contributing.issuesHeader',
+          href: 'reporting-issues'
+        },
+        {
+          text: 'GettingStarted.Contributing.pullRequestsHeader',
+          href: 'pull-requests'
+        },
+        {
+          text: 'GettingStarted.Contributing.localDevHeader',
+          href: 'setup-local-dev'
         }
       ]
     },
     Framework: {
       Icons: [
         {
-          text: 'Generic.Pages.introduction',
+          text: 'Framework.Icons.header',
           href: 'introduction'
         },
         {
@@ -126,7 +169,7 @@ export default () => ({
       ],
       Internationalization: [
         {
-          text: 'Generic.Pages.introduction',
+          text: 'Framework.Internationalization.header',
           href: 'introduction'
         },
         {
@@ -163,36 +206,22 @@ export default () => ({
         },
         {
           text: 'Layout.PreDefined.markupHeader',
-          href: 'default-markup'
+          href: 'default-application-markup'
         },
         {
           text: 'Layout.PreDefined.appHeader',
           href: 'all-about-app'
         }
       ],
-      Grid: [
+      Grid: docPage,
+      GridLists: docPage,
+      Breakpoints: [
         {
-          text: 'Generic.Pages.introduction',
+          text: 'Layout.Breakpoints.header',
           href: 'introduction'
         },
         {
-          text: 'Generic.Pages.usage',
-          href: 'usage'
-        },
-        {
-          text: 'Generic.Pages.api',
-          href: 'api'
-        },
-        {
-          text: 'Generic.Pages.supplemental',
-          href: 'supplemental'
-        },
-        {
-          text: 'Generic.Pages.examples',
-          href: 'examples'
-        },
-        {
-          text: 'Layout.Grid.breakpointHeader',
+          text: 'Layout.Breakpoints.breakpointHeader',
           href: 'breakpoint-object'
         }
       ],
@@ -250,6 +279,20 @@ export default () => ({
       ]
     },
     Motion: {
+      Scrolling: [
+        {
+          text: 'Motion.Scrolling.header',
+          href: 'introduction'
+        },
+        {
+          text: 'Generic.Pages.usage',
+          href: 'usage'
+        },
+        {
+          text: 'Generic.Pages.api',
+          href: 'api'
+        }
+      ],
       Transitions: [
         {
           text: 'Motion.Transitions.header',
@@ -284,7 +327,7 @@ export default () => ({
           href: 'ui-component-name-list'
         }
       ],
-      ServerSideRendering: [
+      SSR: [
         {
           text: 'Guides.ServerSideRendering.header',
           href: 'introduction'
@@ -376,6 +419,10 @@ export default () => ({
           href: 'introduction'
         },
         {
+          text: 'Additional.Generator.header',
+          href: 'theme-generator'
+        },
+        {
           text: 'Style.Theme.lightAndDarkHeader',
           href: 'light-and-dark'
         },
@@ -390,6 +437,32 @@ export default () => ({
         {
           text: 'Style.Theme.stylusHeader',
           href: 'stylus-guide'
+        }
+      ],
+      Content: [
+        {
+          text: 'Style.Content.header',
+          href: 'introduction'
+        },
+        {
+          text: 'Style.Content.blockquoteHeader',
+          href: 'block-quote'
+        },
+        {
+          text: 'Style.Content.paragraphsHeader',
+          href: 'paragraphs'
+        },
+        {
+          text: 'Style.Content.codeHeader',
+          href: 'code'
+        },
+        {
+          text: 'Style.Content.variablesHeader',
+          href: 'variables'
+        },
+        {
+          text: 'Style.Content.userInputHeader',
+          href: 'user-input'
         }
       ]
     }

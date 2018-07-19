@@ -46,11 +46,11 @@
                   helpers-section-head(:value="`${namespace}.designHeader`")
                   helpers-section-text(:value="`${namespace}.designText`")
 
-                section#vibrant-community
+                section#active-help
                   helpers-section-head(:value="`${namespace}.communityHeader`")
                   helpers-section-text(:value="`${namespace}.communityText`")
 
-                section#framework-comparison
+                section#comparison-to-other-frameworks
                   helpers-section-head(:value="`${namespace}.comparisonHeader`")
                   helpers-section-text(:value="`${namespace}.comparisonText`")
 
