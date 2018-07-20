@@ -260,4 +260,20 @@ test('breakpoint.ts', ({ mount }) => {
     await resizeWindow(715)
     expect(wrapper.vm.breakpoint.width).toBe(715)
   })
+
+  it('should allow to override default thresholds', async () => {
+    const wrapper = mount({
+      mixins: [breakpointMixin],
+      render: h => h('div')
+    })
+
+    await resizeWindow(401)
+    expect(wrapper.vm.breakpoint.xs).toBe(true)
+
+    wrapper.vm.breakpoint.thresholds.xs = 400
+    expect(wrapper.vm.breakpoint.xs).toBe(false)
+
+    await resizeWindow(399)
+    expect(wrapper.vm.breakpoint.xs).toBe(true)
+  })
 })
