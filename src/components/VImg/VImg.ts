@@ -51,27 +51,25 @@ export default VResponsive.extend({
   },
 
   computed: {
-    computedSrc (): string {
-      return typeof this.src === 'string' ? this.src : this.src.src
-    },
-    computedSrcset (): string | undefined {
-      return typeof this.src === 'string' ? this.srcset : this.src.srcset
-    },
-    computedLazySrc (): string {
+    normalisedSrc (): srcObject {
       return typeof this.src === 'string'
-        ? this.lazySrc
-        : this.lazySrc || this.src.lazySrc
-    },
-    computedAspectRatio (): number | undefined {
-      const srcAspect = typeof this.src !== 'string'
-        ? this.src.aspect
-        : undefined
-      return Number(this.aspectRatio || srcAspect || this.calculatedAspectRatio)
+        ? {
+          src: this.src,
+          srcset: this.srcset,
+          lazySrc: this.lazySrc,
+          aspect: Number(this.aspectRatio || this.calculatedAspectRatio)
+        }
+        : {
+          ...this.src,
+          srcset: this.srcset || this.src.srcset,
+          lazySrc: this.lazySrc || this.src.lazySrc,
+          aspect: Number(this.aspectRatio || this.src.aspect || this.calculatedAspectRatio)
+        }
     },
     __cachedImage (): VNode | never[] {
-      if (!(this.computedSrc || this.computedLazySrc)) return []
+      if (!(this.normalisedSrc.src || this.normalisedSrc.lazySrc)) return []
 
-      const src = this.isLoading ? this.computedLazySrc : this.currentSrc
+      const src = this.isLoading ? this.normalisedSrc.lazySrc : this.currentSrc
 
       return this.$createElement('transition', {
         attrs: {
@@ -110,12 +108,12 @@ export default VResponsive.extend({
 
   methods: {
     init () {
-      if (this.computedLazySrc) {
+      if (this.normalisedSrc.lazySrc) {
         const lazyImg = new Image()
-        lazyImg.src = this.computedLazySrc
+        lazyImg.src = this.normalisedSrc.lazySrc
         this.pollForSize(lazyImg, null)
       }
-      if (this.computedSrc) this.loadImage()
+      if (this.normalisedSrc.src) this.loadImage()
     },
     onLoad () {
       this.getSrc()
@@ -123,7 +121,7 @@ export default VResponsive.extend({
       this.$emit('load', this.src)
     },
     onError () {
-      consoleError('Image load failed\n\nsrc: ' + this.computedSrc, this)
+      consoleError('Image load failed\n\nsrc: ' + this.normalisedSrc.src, this)
       this.$emit('error', this.src)
     },
     getSrc () {
@@ -142,9 +140,9 @@ export default VResponsive.extend({
       }
       image.onerror = this.onError
 
-      image.src = this.computedSrc
+      image.src = this.normalisedSrc.src
       this.sizes && (image.sizes = this.sizes)
-      this.computedSrcset && (image.srcset = this.computedSrcset)
+      this.normalisedSrc.srcset && (image.srcset = this.normalisedSrc.srcset)
 
       this.aspectRatio || this.pollForSize(image)
       this.currentSrc = image.currentSrc
