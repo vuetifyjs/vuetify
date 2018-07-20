@@ -5,7 +5,11 @@ Vue.component('breakpoint', {
     const name: string = this.$vuetify.breakpoint.name
     const numbers: number[] = [
       this.$vuetify.breakpoint.height,
-      this.$vuetify.breakpoint.width
+      this.$vuetify.breakpoint.width,
+      this.$vuetify.breakpoint.scrollbarOffset
+    ]
+    const objects: Object[] = [
+      this.$vuetify.breakpoint.thresholds
     ]
     const booleans: boolean[] = [
       this.$vuetify.breakpoint.lg,

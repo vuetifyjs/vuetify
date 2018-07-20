@@ -121,6 +121,8 @@ export interface VuetifyBreakpoint {
   xlOnly: boolean
   xs: boolean
   xsOnly: boolean
+  thresholds: Object
+  scrollbarOffset: number
 }
 
 export type VuetifyThemeItem = string | number | {

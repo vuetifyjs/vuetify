@@ -15,16 +15,23 @@ export default Vue.extend({
   data: () => ({
     clientHeight: getClientHeight(),
     clientWidth: getClientWidth(),
-    resizeTimeout: undefined as number | undefined
+    resizeTimeout: undefined as number | undefined,
+    thresholds: {
+      xs: 600,
+      sm: 960,
+      md: 1280,
+      lg: 1920
+    },
+    scrollbarOffset: 16
   }),
 
   computed: {
     breakpoint (): VuetifyBreakpoint {
-      const xs = this.clientWidth < 600
-      const sm = this.clientWidth < 960 && !xs
-      const md = this.clientWidth < (1280 - 16) && !(sm || xs)
-      const lg = this.clientWidth < (1920 - 16) && !(md || sm || xs)
-      const xl = this.clientWidth >= (1920 - 16)
+      const xs = this.clientWidth < this.thresholds.xs
+      const sm = this.clientWidth < this.thresholds.sm && !xs
+      const md = this.clientWidth < (this.thresholds.md - this.scrollbarOffset) && !(sm || xs)
+      const lg = this.clientWidth < (this.thresholds.lg - this.scrollbarOffset) && !(md || sm || xs)
+      const xl = this.clientWidth >= (this.thresholds.lg - this.scrollbarOffset)
 
       const xsOnly = xs
       const smOnly = sm
@@ -83,7 +90,9 @@ export default Vue.extend({
 
         // For custom breakpoint logic.
         width: this.clientWidth,
-        height: this.clientHeight
+        height: this.clientHeight,
+        thresholds: this.thresholds,
+        scrollbarOffset: this.scrollbarOffset
       }
     }
   },
