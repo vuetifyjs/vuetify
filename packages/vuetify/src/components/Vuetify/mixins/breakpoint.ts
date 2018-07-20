@@ -22,16 +22,16 @@ export default Vue.extend({
       md: 1280,
       lg: 1920
     },
-    scrollbarOffset: 16
+    scrollbarWidth: 16
   }),
 
   computed: {
     breakpoint (): VuetifyBreakpoint {
       const xs = this.clientWidth < this.thresholds.xs
       const sm = this.clientWidth < this.thresholds.sm && !xs
-      const md = this.clientWidth < (this.thresholds.md - this.scrollbarOffset) && !(sm || xs)
-      const lg = this.clientWidth < (this.thresholds.lg - this.scrollbarOffset) && !(md || sm || xs)
-      const xl = this.clientWidth >= (this.thresholds.lg - this.scrollbarOffset)
+      const md = this.clientWidth < (this.thresholds.md - this.scrollbarWidth) && !(sm || xs)
+      const lg = this.clientWidth < (this.thresholds.lg - this.scrollbarWidth) && !(md || sm || xs)
+      const xl = this.clientWidth >= (this.thresholds.lg - this.scrollbarWidth)
 
       const xsOnly = xs
       const smOnly = sm
@@ -92,7 +92,7 @@ export default Vue.extend({
         width: this.clientWidth,
         height: this.clientHeight,
         thresholds: this.thresholds,
-        scrollbarOffset: this.scrollbarOffset
+        scrollbarWidth: this.scrollbarWidth
       }
     }
   },
