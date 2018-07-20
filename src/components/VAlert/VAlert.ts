@@ -21,6 +21,7 @@ export default mixins(Colorable, Toggleable, Transitionable).extend({
     dismissible: Boolean,
     icon: String,
     outline: Boolean,
+    flat: Boolean,
     type: {
       type: String,
       validator (val: string) {
@@ -81,11 +82,12 @@ export default mixins(Colorable, Toggleable, Transitionable).extend({
       h('div', this.$slots.default),
       this.genDismissible()
     ] as any
-    const setColor = this.outline ? this.setTextColor : this.setBackgroundColor
+    const setColor = (this.outline || this.flat) ? this.setTextColor : this.setBackgroundColor
     const alert = h('div', setColor(this.computedColor, {
       staticClass: 'v-alert',
       'class': {
-        'v-alert--outline': this.outline
+        'v-alert--outline': this.outline,
+        'v-alert--flat': this.flat
       },
       directives: [{
         name: 'show',
