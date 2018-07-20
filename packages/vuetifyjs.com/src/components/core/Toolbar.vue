@@ -179,6 +179,11 @@
           span.mr-1 {{ currentVersion }}
           v-icon mdi-menu-down
         v-list(light)
+          v-list-tile(href="https://v1.vuetifyjs.com")
+            v-list-tile-avatar
+              v-icon(light) mdi-package
+            v-list-tile-content
+              v-list-tile-title 1.10
           v-list-tile(
             v-for="release in releases"
             :key="release"
