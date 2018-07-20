@@ -267,7 +267,7 @@ export default {
       this.isMenuActive = true
     },
     clearableCallback () {
-      this.internalValue = this.multiple ? [] : null
+      this.internalValue = this.multiple ? [] : undefined
       this.$emit('change', this.internalValue)
       this.$nextTick(() => this.$refs.input.focus())
 

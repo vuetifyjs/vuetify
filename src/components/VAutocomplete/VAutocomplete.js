@@ -270,7 +270,7 @@ export default {
       }
     },
     clearableCallback () {
-      this.internalSearch = null
+      this.internalSearch = undefined
 
       VSelect.methods.clearableCallback.call(this)
     },
