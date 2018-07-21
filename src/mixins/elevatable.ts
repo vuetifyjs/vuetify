@@ -1,5 +1,15 @@
 import Vue from 'vue'
 
+export interface IElevatable {
+  elevation: number
+}
+
+export const getElevationClasses = (context: IElevatable) => {
+  return {
+    [`elevation-${context.elevation}`]: true
+  }
+}
+
 export default Vue.extend({
   name: 'elevatable',
 
@@ -10,13 +20,9 @@ export default Vue.extend({
     }
   },
 
-  computed: {
-    elevationClass (): object {
-      const elevation = this.elevation
-
-      return {
-        [`elevation-${elevation}`]: true
-      }
+  methods: {
+    getElevationClasses () {
+      return getElevationClasses(this)
     }
   }
 })
