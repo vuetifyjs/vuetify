@@ -12,7 +12,7 @@ export default Vue.extend({
 
   computed: {
     elevationClass (): object {
-      const elevation = this.elevation || 0
+      const elevation = this.elevation
 
       return {
         [`elevation-${elevation}`]: true
