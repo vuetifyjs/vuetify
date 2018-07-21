@@ -29,7 +29,7 @@ export default mixins(Elevatable, Colorable, Themeable).extend({
         'v-paper': true,
         'v-paper--square': this.square,
         ...this.themeClasses,
-        ...this.elevationClass
+        ...this.getElevationClasses()
       })
     }
   },
