@@ -2,10 +2,22 @@ import { test } from '@/test'
 import VPaper from '@/components/VPaper'
 
 test('VPaper.vue', ({ mount }) => {
-  it('should render component and match snapshot', () => {
+  it('should render component', () => {
     const wrapper = mount(VPaper)
 
     expect(wrapper.element.classList).toContain('v-paper')
+    expect(wrapper.element.classList).toContain('elevation-0')
+  })
+
+  it('should render component with the proper elevation', () => {
+    const wrapper = mount(VPaper, {
+      propsData: {
+        elevation: 10
+      }
+    })
+
+    expect(wrapper.element.classList).toContain('v-paper')
+    expect(wrapper.element.classList).toContain('elevation-10')
   })
 
   it('should render a squared paper', () => {

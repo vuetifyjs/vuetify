@@ -3,6 +3,7 @@ import '../../stylus/components/_paper.styl'
 // Mixins
 import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
+import Elevationable from '../../mixins/elevationable'
 
 // Helpers
 import mixins from '../../util/mixins'
@@ -11,7 +12,7 @@ import mixins from '../../util/mixins'
 import { VNode } from 'vue'
 
 /* @vue/component */
-export default mixins(Colorable, Themeable).extend({
+export default mixins(Elevationable, Colorable, Themeable).extend({
   name: 'v-paper',
 
   props: {
@@ -28,7 +29,8 @@ export default mixins(Colorable, Themeable).extend({
       return this.addBackgroundColorClassChecks({
         'v-paper': true,
         'v-paper--square': this.square,
-        ...this.themeClasses
+        ...this.themeClasses,
+        ...this.elevationClass
       })
     }
   },
