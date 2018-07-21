@@ -168,7 +168,7 @@ export default {
           ? Object.assign({}, item, {
             text: this.$vuetify.t(item.text)
           })
-          : item
+          : { value: item, text: Number(item).toLocaleString(this.$vuetify.lang.current) }
       })
     },
     hasPagination () {
@@ -454,7 +454,8 @@ export default {
             pageStop: stop,
             itemsLength: this.itemsLength
           })
-          : this.$vuetify.t('$vuetify.dataIterator.pageText', this.pageStart + 1, stop, this.itemsLength)
+          : this.$vuetify.t('$vuetify.dataIterator.pageText',
+            ...([this.pageStart + 1, stop, this.itemsLength].map(n => Number(n).toLocaleString(this.$vuetify.lang.current))))
       }
 
       return this.$createElement('div', {
