@@ -599,7 +599,8 @@
     "components": ["v-textarea"],
     "examples": [
       "multiLine",
-      "autoGrow"
+      "autoGrow",
+      "signupBox"
     ],
     "spec": false
   },
