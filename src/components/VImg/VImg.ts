@@ -18,6 +18,7 @@ export interface srcObject {
   aspect: number
 }
 
+/* @vue/component */
 export default VResponsive.extend({
   name: 'v-img',
 
@@ -26,7 +27,7 @@ export default VResponsive.extend({
     contain: Boolean,
     src: {
       type: [String, Object],
-      required: true
+      default: ''
     } as PropValidator<string | srcObject>,
     lazySrc: String,
     srcset: String,
@@ -51,6 +52,9 @@ export default VResponsive.extend({
   },
 
   computed: {
+    computedAspectRatio (): number {
+      return this.normalisedSrc.aspect
+    },
     normalisedSrc (): srcObject {
       return typeof this.src === 'string'
         ? {
@@ -60,7 +64,7 @@ export default VResponsive.extend({
           aspect: Number(this.aspectRatio || this.calculatedAspectRatio)
         }
         : {
-          ...this.src,
+          src: this.src.src,
           srcset: this.srcset || this.src.srcset,
           lazySrc: this.lazySrc || this.src.lazySrc,
           aspect: Number(this.aspectRatio || this.src.aspect || this.calculatedAspectRatio)
@@ -152,7 +156,7 @@ export default VResponsive.extend({
         const { naturalHeight, naturalWidth } = img
 
         if (naturalHeight || naturalWidth) {
-          this.calculatedAspectRatio = naturalHeight / naturalWidth
+          this.calculatedAspectRatio = naturalWidth / naturalHeight
         } else {
           timeout != null && setTimeout(poll, timeout)
         }
