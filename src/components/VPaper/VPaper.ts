@@ -20,8 +20,7 @@ export default mixins(Elevatable, Colorable, Themeable).extend({
     tag: {
       type: String,
       default: 'div'
-    },
-    elevation: Number
+    }
   },
 
   computed: {
