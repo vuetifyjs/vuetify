@@ -6,13 +6,13 @@ export default Vue.extend({
   props: {
     elevation: {
       type: Number,
-      default: () => 0
+      default: 0
     }
   },
 
   computed: {
     elevationClass (): object {
-      const elevation = this.elevation || 0;
+      const elevation = this.elevation || 0
 
       return {
         [`elevation-${elevation}`]: true
