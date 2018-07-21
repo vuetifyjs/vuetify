@@ -81,6 +81,9 @@ export default {
         'v-dialog__content': true,
         'v-dialog__content--active': this.isActive
       }
+    },
+    resetScroll () {
+       document.getElementsByClassName('dialog dialog--active')[0].scrollTop = 0;
     }
   },
 
@@ -90,6 +93,7 @@ export default {
         this.show()
       } else {
         this.removeOverlay()
+        this.resetScroll()
         this.unbind()
       }
     }
