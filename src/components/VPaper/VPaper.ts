@@ -3,7 +3,7 @@ import '../../stylus/components/_paper.styl'
 // Mixins
 import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
-import Elevationable from '../../mixins/elevationable'
+import Elevatable from '../../mixins/elevatable'
 
 // Helpers
 import mixins from '../../util/mixins'
@@ -12,7 +12,7 @@ import mixins from '../../util/mixins'
 import { VNode } from 'vue'
 
 /* @vue/component */
-export default mixins(Elevationable, Colorable, Themeable).extend({
+export default mixins(Elevatable, Colorable, Themeable).extend({
   name: 'v-paper',
 
   props: {

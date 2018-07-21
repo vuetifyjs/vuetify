@@ -1,7 +1,7 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-  name: 'elevationable',
+  name: 'elevatable',
 
   props: {
     elevation: {
