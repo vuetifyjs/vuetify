@@ -600,7 +600,7 @@
     "examples": [
       "multiLine",
       "autoGrow",
-      "signupBox"
+      { "file": "signupBox", "newIn": "1.1" }
     ],
     "spec": false
   },
