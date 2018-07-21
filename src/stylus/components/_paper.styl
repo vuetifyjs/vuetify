@@ -1,0 +1,15 @@
+@import '../bootstrap'
+@import '../theme'
+
+/* Themes */
+v-paper($material)
+  background-color: $material.cards
+
+theme(v-paper, "v-paper")
+
+.v-paper
+  display: block
+  border-radius: $paper-border-radius
+
+  &--square
+    border-radius: 0
