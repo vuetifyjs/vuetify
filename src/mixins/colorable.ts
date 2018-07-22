@@ -1,33 +1,44 @@
 import Vue from 'vue'
 
-export interface IColorable {
-  color: string;
-  // TODO Probably remove this from the mixin
-  computedColor?: string;
+export interface ClassesObject {
+  [key: string]: boolean
 }
 
-export const addBackgroundColorClassChecks = <T, C extends string>(context: IColorable, currentClasses?: T, color?: C): T & Record<C, true> => {
-  const classes: any = Object.assign({}, currentClasses)
-  const selectedColor = color === undefined ? context.computedColor : color
+export type ColorString = string | undefined | null | false
 
-  if (selectedColor) {
-    classes[selectedColor] = true
+function addColor (
+  classes: ClassesObject = {},
+  color?: ColorString
+): ClassesObject {
+  const obj = {
+    ...classes
   }
 
-  return classes
+  if (color) obj[color] = true
+
+  return obj
 }
 
-export const addTextColorClassChecks = (context: IColorable, currentClasses?: any, color?: string | null): any => {
-  const classes = Object.assign({}, currentClasses)
-  if (color === undefined) color = context.computedColor
+export function addBackgroundColorClassChecks (
+  classes: ClassesObject = {},
+  color?: ColorString
+): ClassesObject {
+  return addColor(classes, color)
+}
 
+export function addTextColorClassChecks (
+  classes: ClassesObject = {},
+  color?: ColorString
+): ClassesObject {
   if (color) {
     const [colorName, colorModifier] = color.toString().trim().split(' ')
-    classes[colorName + '--text'] = true
-    colorModifier && (classes['text--' + colorModifier] = true)
+
+    color = `${colorName}--text`
+
+    if (colorModifier) color += ` text--${colorModifier}`
   }
 
-  return classes
+  return addColor(classes, color)
 }
 
 export default Vue.extend({
@@ -37,24 +48,39 @@ export default Vue.extend({
     color: String
   },
 
-  data() {
+  data () {
     return {
       defaultColor: undefined
     }
   },
 
   computed: {
-    computedColor(): string | undefined {
+    computedColor (): string | undefined {
       return this.color || this.defaultColor
     }
   },
 
   methods: {
-    addBackgroundColorClassChecks<T, C extends string> (obj?: T, color?: C): T & Record<C, true> {
-      return addBackgroundColorClassChecks(this, obj, color)
+    addBackgroundColorClassChecks (
+      classes?: ClassesObject,
+      color?: ColorString
+    ): ClassesObject {
+      return addBackgroundColorClassChecks(
+        classes,
+        this.getFinalColorClass(color)
+      )
     },
-    addTextColorClassChecks(obj?: any, color?: string | null): Record<string, true> {
-      return addTextColorClassChecks(this, obj, color)
+    addTextColorClassChecks (
+      classes?: ClassesObject,
+      color?: ColorString
+    ): ClassesObject {
+      return addTextColorClassChecks(
+        classes,
+        this.getFinalColorClass(color)
+      )
+    },
+    getFinalColorClass (color: ColorString) {
+      return color === undefined ? this.computedColor : color
     }
   }
 })

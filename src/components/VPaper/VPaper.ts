@@ -1,38 +1,69 @@
 import '../../stylus/components/_paper.styl'
 
-import Vue, { VNode } from 'vue'
+import { VNode } from 'vue'
 
 // Mixins
-import Colorable, { addBackgroundColorClassChecks } from '../../mixins/colorable'
-import Themeable, { getThemeClasses } from '../../mixins/themeable'
-import Elevatable, { getElevationClasses } from '../../mixins/elevatable'
+import Colorable from '../../mixins/colorable'
+import Themeable from '../../mixins/themeable'
+import mixins from '../../util/mixins'
 
-export default Vue.extend({
+export default mixins(
+  Colorable,
+  Themeable
+).extend({
   name: 'v-paper',
 
-  functional: true,
+  data () {
+    return {
+      isMouseOver: false as boolean
+    }
+  },
 
   props: {
-    ...Colorable.options.props,
-    ...Themeable.options.props,
-    ...Elevatable.options.props,
+    angled: Boolean,
+    elevation: {
+      type: [Number, String],
+      default: 0
+    },
+    hover: [Number, String],
     square: Boolean,
+    tile: Boolean,
     tag: {
       type: String,
       default: 'div'
     }
   },
 
-  render (h, context: any): VNode {
-    const data = {
-      class: addBackgroundColorClassChecks(context, {
+  computed: {
+    classes (): object {
+      return this.addBackgroundColorClassChecks({
         'v-paper': true,
-        'v-paper--square': context.props.square,
-        ...getThemeClasses(context),
-        ...getElevationClasses(context)
-      })
+        'v-paper--angled': this.angled,
+        ...this.themeClasses,
+        [`elevation-${this.computedElevation}`]: true
+      }, this.color)
+    },
+    listeners (): object {
+      return !this.hover ? {} : {
+        mouseenter: () => {
+          this.isMouseOver = true
+        },
+        mouseleave: () => {
+          this.isMouseOver = false
+        }
+      }
+    },
+    computedElevation (): string | number {
+      return this.isMouseOver ? this.hover : this.elevation
     }
+  },
 
-    return h(context.tag, data, context.children)
+  render (h): VNode {
+    return h(this.tag, {
+      class: this.classes,
+      on: {
+        ...this.listeners
+      }
+    }, this.$slots.default)
   }
 })

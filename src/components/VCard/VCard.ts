@@ -1,46 +1,55 @@
+// Styles
 import '../../stylus/components/_cards.styl'
 
+// Components
+import VPaper from '../VPaper'
+
 // Mixins
-import Colorable from '../../mixins/colorable'
 import Routable from '../../mixins/routable'
-import Themeable from '../../mixins/themeable'
 
 // Helpers
 import { convertToUnit } from '../../util/helpers'
-import mixins from '../../util/mixins'
 
 // Types
 import { VNode } from 'vue'
+import mixins from '../../util/mixins'
+import { deprecate } from '../../util/console'
 
 /* @vue/component */
-export default mixins(Colorable, Routable, Themeable).extend({
+export default VPaper.extend(mixins(Routable).extend({
   name: 'v-card',
 
   props: {
+    elevation: {
+      type: [Number, String],
+      default: 1
+    },
     flat: Boolean,
     height: [Number, String],
-    hover: Boolean,
+    /* @deprecated */
     img: String,
+    /* @deprecated */
     raised: Boolean,
-    tag: {
-      type: String,
-      default: 'div'
-    },
-    tile: Boolean,
-    width: [String, Number]
+    width: [Number, String]
   },
 
   computed: {
     classes (): object {
-      return this.addBackgroundColorClassChecks({
+      return {
         'v-card': true,
-        'v-card--flat': this.flat,
-        'v-card--hover': this.hover,
-        'v-card--raised': this.raised,
-        'v-card--tile': this.tile,
-        'theme--light': this.light,
-        'theme--dark': this.dark
-      })
+        ...VPaper.options.computed.classes.call(this)
+      }
+    },
+    computedElevation (): number | string {
+      if (this.raised) {
+        deprecate('<v-card raised>', '<v-card elevation="3">', this)
+
+        return 3
+      }
+
+      return this.flat
+        ? 0
+        : VPaper.options.computed.computedElevation.call(this)
     },
     styles (): object {
       const style: Record<string, any> = {
@@ -48,6 +57,8 @@ export default mixins(Colorable, Routable, Themeable).extend({
       }
 
       if (this.img) {
+        deprecate('<v-card img="...">', 'a nested <v-img>', this)
+
         style.background = `url("${this.img}") center center / cover no-repeat`
       }
 
@@ -63,7 +74,11 @@ export default mixins(Colorable, Routable, Themeable).extend({
     const { tag, data } = this.generateRouteLink()
 
     data.style = this.styles
+    data.on = {
+      ...data.on,
+      ...VPaper.options.computed.listeners.call(this)
+    }
 
     return h(tag, data, this.$slots.default)
   }
-})
+}))

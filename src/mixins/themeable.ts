@@ -1,17 +1,5 @@
 import Vue from 'vue'
 
-export interface IThemeable {
-  light?: boolean
-  dark?: boolean
-}
-
-export const getThemeClasses = (context: IThemeable) => {
-  return {
-    'theme--light': context.light,
-    'theme--dark': context.dark
-  }
-}
-
 export default Vue.extend({
   name: 'themeable',
 
@@ -22,7 +10,10 @@ export default Vue.extend({
 
   computed: {
     themeClasses (): object {
-      return getThemeClasses(this)
+      return {
+        'theme--light': this.light,
+        'theme--dark': this.dark
+      }
     }
   }
 })
