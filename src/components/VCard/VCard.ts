@@ -16,7 +16,7 @@ import mixins from '../../util/mixins'
 import { deprecate } from '../../util/console'
 
 /* @vue/component */
-export default VPaper.extend(mixins(Routable).extend({
+export default mixins(Routable, VPaper).extend({
   name: 'v-card',
 
   props: {
@@ -81,4 +81,4 @@ export default VPaper.extend(mixins(Routable).extend({
 
     return h(tag, data, this.$slots.default)
   }
-}))
+})
