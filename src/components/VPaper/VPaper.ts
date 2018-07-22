@@ -1,21 +1,21 @@
 import '../../stylus/components/_paper.styl'
 
+import Vue, { VNode } from 'vue'
+
 // Mixins
-import Colorable from '../../mixins/colorable'
-import Themeable from '../../mixins/themeable'
-import Elevatable from '../../mixins/elevatable'
+import Colorable, { addBackgroundColorClassChecks } from '../../mixins/colorable'
+import Themeable, { getThemeClasses } from '../../mixins/themeable'
+import Elevatable, { getElevationClasses } from '../../mixins/elevatable'
 
-// Helpers
-import mixins from '../../util/mixins'
-
-// Types
-import { VNode } from 'vue'
-
-/* @vue/component */
-export default mixins(Elevatable, Colorable, Themeable).extend({
+export default Vue.extend({
   name: 'v-paper',
 
+  functional: true,
+
   props: {
+    ...Colorable.options.props,
+    ...Themeable.options.props,
+    ...Elevatable.options.props,
     square: Boolean,
     tag: {
       type: String,
@@ -23,22 +23,16 @@ export default mixins(Elevatable, Colorable, Themeable).extend({
     }
   },
 
-  computed: {
-    classes (): object {
-      return this.addBackgroundColorClassChecks({
+  render (h, context: any): VNode {
+    const data = {
+      class: addBackgroundColorClassChecks(context, {
         'v-paper': true,
-        'v-paper--square': this.square,
-        ...this.themeClasses,
-        ...this.getElevationClasses()
+        'v-paper--square': context.props.square,
+        ...getThemeClasses(context),
+        ...getElevationClasses(context)
       })
     }
-  },
 
-  render (h): VNode {
-    const data = {
-      class: this.classes
-    }
-
-    return h(this.tag, data, this.$slots.default)
+    return h(context.tag, data, context.children)
   }
 })

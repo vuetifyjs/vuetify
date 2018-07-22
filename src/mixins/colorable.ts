@@ -6,7 +6,7 @@ export interface IColorable {
   computedColor?: string;
 }
 
-const addBackgroundColorClassChecks = <T, C extends string>(context: IColorable, currentClasses?: T, color?: C): T & Record<C, true> => {
+export const addBackgroundColorClassChecks = <T, C extends string>(context: IColorable, currentClasses?: T, color?: C): T & Record<C, true> => {
   const classes: any = Object.assign({}, currentClasses)
   const selectedColor = color === undefined ? context.computedColor : color
 
@@ -17,7 +17,7 @@ const addBackgroundColorClassChecks = <T, C extends string>(context: IColorable,
   return classes
 }
 
-const addTextColorClassChecks = (context: IColorable, currentClasses?: any, color?: string | null): any => {
+export const addTextColorClassChecks = (context: IColorable, currentClasses?: any, color?: string | null): any => {
   const classes = Object.assign({}, currentClasses)
   if (color === undefined) color = context.computedColor
 
