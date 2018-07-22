@@ -3,8 +3,6 @@
 exports[`VImg should display placeholders 1`] = `
 
 <div class="v-responsive v-image">
-  <div class="v-responsive__sizer">
-  </div>
   <div class="v-image__image v-image__image--preload v-image__image--cover"
        style="background-image: url(lazy_src); background-position: center center;"
   >
@@ -73,8 +71,6 @@ exports[`VImg should have aria attributes 1`] = `
 exports[`VImg should load 1`] = `
 
 <div class="v-responsive v-image">
-  <div class="v-responsive__sizer">
-  </div>
   <div class="v-image__image v-image__image--preload v-image__image--cover"
        style="background-position: center center;"
   >
@@ -168,8 +164,6 @@ exports[`VImg should update src 2`] = `
 exports[`VImg should update src while still loading 1`] = `
 
 <div class="v-responsive v-image">
-  <div class="v-responsive__sizer">
-  </div>
   <div class="v-image__image v-image__image--preload v-image__image--cover"
        style="background-position: center center;"
   >

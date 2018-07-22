@@ -27,7 +27,9 @@ export default Vue.extend({
         ? { paddingBottom: (1 / this.computedAspectRatio) * 100 + '%' }
         : undefined
     },
-    __cachedSizer (): VNode {
+    __cachedSizer (): VNode | never[] {
+      if (!this.aspectStyle) return []
+
       return this.$createElement('div', {
         style: this.aspectStyle,
         staticClass: 'v-responsive__sizer'
