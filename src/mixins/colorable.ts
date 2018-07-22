@@ -10,9 +10,7 @@ function addColor (
   classes: ClassesObject = {},
   color?: ColorString
 ): ClassesObject {
-  const obj = {
-    ...classes
-  }
+  const obj = { ...classes }
 
   if (color) obj[color] = true
 
@@ -48,11 +46,9 @@ export default Vue.extend({
     color: String
   },
 
-  data () {
-    return {
-      defaultColor: undefined
-    }
-  },
+  data: () => ({
+    defaultColor: undefined as undefined | string
+  }),
 
   computed: {
     computedColor (): string | undefined {
@@ -67,7 +63,7 @@ export default Vue.extend({
     ): ClassesObject {
       return addBackgroundColorClassChecks(
         classes,
-        this.getFinalColorClass(color)
+        color === undefined ? this.computedColor : color
       )
     },
     addTextColorClassChecks (
@@ -76,11 +72,8 @@ export default Vue.extend({
     ): ClassesObject {
       return addTextColorClassChecks(
         classes,
-        this.getFinalColorClass(color)
+        color === undefined ? this.computedColor : color
       )
-    },
-    getFinalColorClass (color: ColorString) {
-      return color === undefined ? this.computedColor : color
     }
   }
 })
