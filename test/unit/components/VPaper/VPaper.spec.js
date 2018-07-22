@@ -6,8 +6,6 @@ test('VPaper.vue', ({ mount }) => {
     const context = functionalContext()
     const wrapper = mount(VPaper, context)
 
-    console.log(wrapper.element.classList)
-
     expect(wrapper.element.classList).toContain('v-paper')
     expect(wrapper.element.classList).toContain('elevation-0')
   })
