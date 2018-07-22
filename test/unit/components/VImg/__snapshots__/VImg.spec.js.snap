@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VImg should have aria attributes 1`] = `
+
+<div role="img"
+     aria-label="this is not a decorative image"
+     class="v-responsive v-image"
+>
+  <div class="v-responsive__sizer">
+  </div>
+  <div class="v-image__image v-image__image--cover"
+       style="background-image: url(LOAD_SUCCESS_SRC); background-position: center center;"
+  >
+  </div>
+  <div class="v-responsive__content">
+  </div>
+</div>
+
+`;
+
+exports[`VImg should load 1`] = `
+
+<div class="v-responsive v-image">
+  <div class="v-responsive__sizer">
+  </div>
+  <div class="v-image__image v-image__image--cover"
+       style="background-image: url(./image.png); background-position: center center;"
+  >
+  </div>
+  <div class="v-responsive__content">
+  </div>
+</div>
+
+`;
+
+exports[`VImg should load 2`] = `
+
+<div class="v-responsive v-image">
+  <div class="v-responsive__sizer">
+  </div>
+  <div class="v-image__image v-image__image--cover"
+       style="background-image: url(./image.png); background-position: center center;"
+  >
+  </div>
+  <div class="v-responsive__content">
+  </div>
+</div>
+
+`;

@@ -19,8 +19,8 @@ export default Vue.extend({
   },
 
   computed: {
-    computedAspectRatio (): number | undefined {
-      return this.aspectRatio ? +this.aspectRatio : undefined
+    computedAspectRatio (): number {
+      return Number(this.aspectRatio)
     },
     aspectStyle (): object | undefined {
       return this.computedAspectRatio
