@@ -9,11 +9,12 @@ const VCardText = Vue.extend(createSimpleFunctional('v-card__text'))
 
 export { VCard, VCardMedia, VCardTitle, VCardActions, VCardText }
 
-VCard.$_vuetify_subcomponents = {
-  VCardMedia,
-  VCardTitle,
-  VCardActions,
-  VCardText
+export default {
+  $_vuetify_subcomponents: {
+    VCard,
+    VCardMedia,
+    VCardTitle,
+    VCardActions,
+    VCardText
+  }
 }
-
-export default VCard

@@ -12,15 +12,16 @@ export const VListTileContent = createSimpleFunctional('v-list__tile__content', 
 export const VListTileTitle = createSimpleFunctional('v-list__tile__title', 'div')
 export const VListTileSubTitle = createSimpleFunctional('v-list__tile__sub-title', 'div')
 
-VList.$_vuetify_subcomponents = {
-  VListGroup,
-  VListTile,
-  VListTileAction,
-  VListTileActionText,
-  VListTileAvatar,
-  VListTileContent,
-  VListTileSubTitle,
-  VListTileTitle
+export default {
+  $_vuetify_subcomponents: {
+    VList,
+    VListGroup,
+    VListTile,
+    VListTileAction,
+    VListTileActionText,
+    VListTileAvatar,
+    VListTileContent,
+    VListTileSubTitle,
+    VListTileTitle
+  }
 }
-
-export default VList

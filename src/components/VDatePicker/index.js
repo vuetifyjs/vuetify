@@ -14,12 +14,13 @@ export {
   VDatePickerYears
 }
 
-VDatePicker.$_vuetify_subcomponents = {
-  VDatePickerTitle,
-  VDatePickerHeader,
-  VDatePickerDateTable,
-  VDatePickerMonthTable,
-  VDatePickerYears
+export default {
+  $_vuetify_subcomponents: {
+    VDatePicker,
+    VDatePickerTitle,
+    VDatePickerHeader,
+    VDatePickerDateTable,
+    VDatePickerMonthTable,
+    VDatePickerYears
+  }
 }
-
-export default VDatePicker

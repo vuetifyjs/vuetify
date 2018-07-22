@@ -16,14 +16,12 @@ export {
   VSpacer
 }
 
-const VGrid = {}
-
-VGrid.$_vuetify_subcomponents = {
-  VContainer,
-  VContent,
-  VFlex,
-  VLayout,
-  VSpacer
+export default {
+  $_vuetify_subcomponents: {
+    VContainer,
+    VContent,
+    VFlex,
+    VLayout,
+    VSpacer
+  }
 }
-
-export default VGrid

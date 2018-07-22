@@ -3,8 +3,9 @@ import VCarouselItem from './VCarouselItem'
 
 export { VCarousel, VCarouselItem }
 
-VCarousel.$_vuetify_subcomponents = {
-  VCarouselItem
+export default {
+  $_vuetify_subcomponents: {
+    VCarousel,
+    VCarouselItem
+  }
 }
-
-export default VCarousel

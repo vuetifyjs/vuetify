@@ -54,12 +54,10 @@ import VTextField from '../../src/components/VTextField'
 import VTimePicker from '../../src/components/VTimePicker'
 import VToolbar from '../../src/components/VToolbar'
 import VTooltip from '../../src/components/VTooltip'
+import Transitions from '../../src/components/transitions'
 import Vuetify from '../../src/components/Vuetify'
-import { mount } from 'avoriaz'
-import { test } from './describe'
-import { kebabSink, pascalSink } from './fixtures/fixtures'
 
-test('a-la-carte import', () => {
+describe('a-la-carte import', () => {
   Vue.use(Vuetify, {
     components: {
       VAlert,
@@ -116,17 +114,17 @@ test('a-la-carte import', () => {
       VTextField,
       VTimePicker,
       VToolbar,
-      VTooltip
+      VTooltip,
+      Transitions
     }
   })
-  it('should render kebab sink', async () => {
-    const { render } = await kebabSink
-    const app = Vue.extend({ render })
-    mount(app)
+  const registeredComponents = Object.keys(Vue.options.components).sort()
+  it('should register all subcomponents', () => {
+    expect(registeredComponents).toMatchSnapshot()
   })
-  it('should render pascal sink', async () => {
-    const { render } = await pascalSink
-    const app = Vue.extend({ render })
-    mount(app)
+  it('should register all names in PascalCase', () => {
+    registeredComponents.forEach(name =>
+      expect(name).toMatch(/^(?:[A-Z][a-z]*)+$/)
+    )
   })
 })

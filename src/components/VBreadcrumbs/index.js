@@ -3,8 +3,9 @@ import VBreadcrumbsItem from './VBreadcrumbsItem'
 
 export { VBreadcrumbs, VBreadcrumbsItem }
 
-VBreadcrumbs.$_vuetify_subcomponents = {
-  VBreadcrumbsItem
+export default {
+  $_vuetify_subcomponents: {
+    VBreadcrumbs,
+    VBreadcrumbsItem
+  }
 }
-
-export default VBreadcrumbs

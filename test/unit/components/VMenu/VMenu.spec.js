@@ -1,6 +1,6 @@
-import VBtn from '@/components/VBtn'
-import VCard from '@/components/VCard'
-import VMenu from '@/components/VMenu'
+import VBtn from '@/components/VBtn/VBtn'
+import VCard from '@/components/VCard/VCard'
+import VMenu from '@/components/VMenu/VMenu'
 import { test } from '@/test'
 
 // TODO: Most of these have exactly the same snapshots

@@ -14,7 +14,7 @@ test('Vuetify.install.js', () => {
     Vuetify.install(Vue, {
       components: {
         OneComponent: {},
-        SecondComponent: { $_vuetify_subcomponents: { HisChild: {} } }
+        ComponentPack: { $_vuetify_subcomponents: { HisChild: {} } }
       },
       directives: {
         directive: {
@@ -39,7 +39,6 @@ test('Vuetify.install.js', () => {
     expect(Vue.component.mock.calls).toEqual([
       ['v-foobarbaz', { name: 'v-foobarbaz' }],
       ['OneComponent', {}],
-      ['SecondComponent', { $_vuetify_subcomponents: { HisChild: {} } }],
       ['HisChild', {}]
     ])
 

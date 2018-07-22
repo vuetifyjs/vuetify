@@ -3,8 +3,9 @@ import VRadio from './VRadio'
 
 export { VRadioGroup, VRadio }
 
-VRadioGroup.$_vuetify_subcomponents = {
-  VRadio
+export default {
+  $_vuetify_subcomponents: {
+    VRadioGroup,
+    VRadio
+  }
 }
-
-export default VRadioGroup

@@ -4,12 +4,14 @@ import VTabsItems from './VTabsItems'
 import VTabItem from './VTabItem'
 import VTabsSlider from './VTabsSlider'
 
-export { VTabs, VTabItem, VTab, VTabsItems, VTabsSlider }
+export { VTabs, VTab, VTabItem, VTabsItems, VTabsSlider }
 
-VTabs.$_vuetify_subcomponents = {
-  VTabsItems,
-  VTabItem,
-  VTabsSlider
+export default {
+  $_vuetify_subcomponents: {
+    VTabs,
+    VTab,
+    VTabsItems,
+    VTabItem,
+    VTabsSlider
+  }
 }
-
-export default VTabs

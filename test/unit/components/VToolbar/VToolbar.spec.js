@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import { test, resizeWindow } from '@/test'
-import VApp from '@/components/VApp'
-import VToolbar from '@/components/VToolbar'
+import VApp from '@/components/VApp/VApp'
+import VToolbar from '@/components/VToolbar/VToolbar'
 
 const scrollWindow = y => {
   global.pageYOffset = y
