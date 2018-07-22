@@ -117,6 +117,7 @@ export default VResponsive.extend({
         lazyImg.src = this.normalisedSrc.lazySrc
         this.pollForSize(lazyImg, null)
       }
+      /* istanbul ignore else */
       if (this.normalisedSrc.src) this.loadImage()
     },
     onLoad () {
@@ -129,6 +130,7 @@ export default VResponsive.extend({
       this.$emit('error', this.src)
     },
     getSrc () {
+      /* istanbul ignore else */
       if (this.image) this.currentSrc = this.image.currentSrc
     },
     loadImage () {
@@ -136,6 +138,7 @@ export default VResponsive.extend({
       this.image = image
 
       image.onload = () => {
+        /* istanbul ignore if */
         if (image.decode) {
           image.decode().then(this.onLoad)
         } else {
