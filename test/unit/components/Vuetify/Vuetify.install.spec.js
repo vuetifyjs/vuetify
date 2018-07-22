@@ -3,7 +3,7 @@ import Vuetify, { checkVueVersion } from '@/components/Vuetify'
 import { test } from '@/test'
 
 test('Vuetify.install.js', () => {
-  it('should install transitions, directives and components', async () => {
+  it('should register components and directives', async () => {
     const { component, directive, use } = Vue
 
     Vue.component = jest.fn()
@@ -20,15 +20,6 @@ test('Vuetify.install.js', () => {
         directive: {
           name: 'foobarbaz'
         }
-      },
-      transitions: {
-        transition: {
-          name: 'transition'
-        },
-        'v-foobarbaz': {
-          name: 'v-foobarbaz'
-        },
-        'undefined': {}
       }
     })
 
@@ -37,7 +28,6 @@ test('Vuetify.install.js', () => {
       ['foobarbaz', { name: 'foobarbaz' }]
     ])
     expect(Vue.component.mock.calls).toEqual([
-      ['v-foobarbaz', { name: 'v-foobarbaz' }],
       ['OneComponent', {}],
       ['HisChild', {}]
     ])

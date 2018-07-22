@@ -37,14 +37,6 @@ const Vuetify: VuetifyPlugin = {
       }
     })
 
-    if (opts.transitions) {
-      Object.values(opts.transitions).forEach(transition => {
-        if (transition.name !== undefined && transition.name.startsWith('v-')) {
-          Vue.component(transition.name, transition)
-        }
-      })
-    }
-
     if (opts.directives) {
       Object.values(opts.directives).forEach(directive => {
         Vue.directive(directive.name, directive)
