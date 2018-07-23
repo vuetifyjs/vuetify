@@ -180,34 +180,22 @@ exports[`VCarousel.js should render component with custom icon and match snapsho
       </div>
     </button>
   </div>
-  <div class="v-jumbotron tab-transition-enter tab-transition-enter-active"
+  <div class="v-responsive v-image v-carousel__item tab-transition-enter tab-transition-enter-active"
        style="height: 100%;"
   >
-    <div class="v-jumbotron__wrapper">
-      <div class="v-jumbotron__background">
-      </div>
-      <div class="v-jumbotron__content">
-      </div>
+    <div class="v-responsive__content">
     </div>
   </div>
-  <div class="v-jumbotron"
+  <div class="v-responsive v-image v-carousel__item"
        style="height: 100%; display: none;"
   >
-    <div class="v-jumbotron__wrapper">
-      <div class="v-jumbotron__background">
-      </div>
-      <div class="v-jumbotron__content">
-      </div>
+    <div class="v-responsive__content">
     </div>
   </div>
-  <div class="v-jumbotron"
+  <div class="v-responsive v-image v-carousel__item"
        style="height: 100%; display: none;"
   >
-    <div class="v-jumbotron__wrapper">
-      <div class="v-jumbotron__background">
-      </div>
-      <div class="v-jumbotron__content">
-      </div>
+    <div class="v-responsive__content">
     </div>
   </div>
 </div>
@@ -394,34 +382,22 @@ exports[`VCarousel.js should render component with selected active item 1`] = `
       </div>
     </button>
   </div>
-  <div class="v-jumbotron"
+  <div class="v-responsive v-image v-carousel__item"
        style="height: 100%; display: none;"
   >
-    <div class="v-jumbotron__wrapper">
-      <div class="v-jumbotron__background">
-      </div>
-      <div class="v-jumbotron__content">
-      </div>
+    <div class="v-responsive__content">
     </div>
   </div>
-  <div class="v-jumbotron tab-transition-enter tab-transition-enter-active"
+  <div class="v-responsive v-image v-carousel__item tab-transition-enter tab-transition-enter-active"
        style="height: 100%;"
   >
-    <div class="v-jumbotron__wrapper">
-      <div class="v-jumbotron__background">
-      </div>
-      <div class="v-jumbotron__content">
-      </div>
+    <div class="v-responsive__content">
     </div>
   </div>
-  <div class="v-jumbotron"
+  <div class="v-responsive v-image v-carousel__item"
        style="height: 100%; display: none;"
   >
-    <div class="v-jumbotron__wrapper">
-      <div class="v-jumbotron__background">
-      </div>
-      <div class="v-jumbotron__content">
-      </div>
+    <div class="v-responsive__content">
     </div>
   </div>
 </div>
@@ -459,34 +435,22 @@ exports[`VCarousel.js should render component without delimiters 1`] = `
       </div>
     </button>
   </div>
-  <div class="v-jumbotron tab-transition-enter tab-transition-enter-active"
+  <div class="v-responsive v-image v-carousel__item tab-transition-enter tab-transition-enter-active"
        style="height: 100%;"
   >
-    <div class="v-jumbotron__wrapper">
-      <div class="v-jumbotron__background">
-      </div>
-      <div class="v-jumbotron__content">
-      </div>
+    <div class="v-responsive__content">
     </div>
   </div>
-  <div class="v-jumbotron"
+  <div class="v-responsive v-image v-carousel__item"
        style="height: 100%; display: none;"
   >
-    <div class="v-jumbotron__wrapper">
-      <div class="v-jumbotron__background">
-      </div>
-      <div class="v-jumbotron__content">
-      </div>
+    <div class="v-responsive__content">
     </div>
   </div>
-  <div class="v-jumbotron"
+  <div class="v-responsive v-image v-carousel__item"
        style="height: 100%; display: none;"
   >
-    <div class="v-jumbotron__wrapper">
-      <div class="v-jumbotron__background">
-      </div>
-      <div class="v-jumbotron__content">
-      </div>
+    <div class="v-responsive__content">
     </div>
   </div>
 </div>

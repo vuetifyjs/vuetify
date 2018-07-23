@@ -119,7 +119,7 @@ export default mixins(Colorable).extend({
     }
   },
 
-  render (h: CreateElement): VNode {
+  render (h): VNode {
     const fade = h(VFadeTransition, this.indeterminate ? [this.genIndeterminate(h)] : [])
     const slide = h(VSlideXTransition, this.indeterminate ? [] : [this.genDeterminate(h)])
 

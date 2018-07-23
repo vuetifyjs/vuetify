@@ -12,7 +12,7 @@ import {
 } from '../../util/helpers'
 
 // Types
-import { CreateElement, VNode, VNodeChildren } from 'vue'
+import { VNode, VNodeChildren } from 'vue'
 import mixins from '../../util/mixins'
 
 enum SIZE_MAP {
@@ -69,7 +69,7 @@ export default mixins(Colorable, Themeable).extend({
     xLarge: Boolean
   },
 
-  render (h: CreateElement, { props, data, parent, listeners = {}, children = [] }): VNode {
+  render (h, { props, data, parent, listeners = {}, children = [] }): VNode {
     const { small, medium, large, xLarge } = props
     const sizes = { small, medium, large, xLarge }
     const explicitSize = keys(sizes).find(key => sizes[key] && !!key)

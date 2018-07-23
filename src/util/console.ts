@@ -35,7 +35,7 @@ export function consoleError (message: string, vm?: any, parent?: any): void {
 }
 
 export function deprecate (original: string, replacement: string, vm?: any, parent?: any) {
-  process.env.NODE_ENV === 'development' && consoleWarn(`'${original}' is deprecated, use '${replacement}' instead`, vm, parent)
+  consoleWarn(`'${original}' is deprecated, use '${replacement}' instead`, vm, parent)
 }
 
 /**

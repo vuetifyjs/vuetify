@@ -48,7 +48,6 @@ export default {
     /** @deprecated */
     prependIconCb: Function,
     readonly: Boolean,
-    tabindex: { default: 0 },
     value: { required: false }
   },
 

@@ -26,7 +26,7 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
 
   it('should have explicit tabindex passed through when autocomplete', () => {
     const wrapper = shallow(VAutocomplete, {
-      propsData: {
+      attrs: {
         tabindex: 10
       }
     })

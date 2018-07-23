@@ -57,7 +57,6 @@ export default {
 
   data: vm => ({
     attrsInput: null,
-    editingIndex: -1,
     lazySearch: vm.searchInput,
     lazyValue: vm.value != null
       ? vm.value
@@ -334,12 +333,7 @@ export default {
       this.updateSelf()
     },
     selectItem (item) {
-      // Currently only supports items:<string[]>
-      if (this.editingIndex > -1) {
-        this.updateEditing()
-      } else {
-        VSelect.methods.selectItem.call(this, item)
-      }
+      VSelect.methods.selectItem.call(this, item)
 
       this.setSearch()
     },
@@ -372,10 +366,6 @@ export default {
     setValue () {
       this.internalValue = this.internalSearch
       this.$emit('change', this.internalSearch)
-    },
-    updateEditing () {
-      this.internalValue.splice(this.editingIndex, 1, this.internalSearch)
-      this.editingIndex = -1
     },
     updateSelf () {
       this.updateAutocomplete()

@@ -5,7 +5,7 @@ import Colorable from '../../mixins/colorable'
 import { convertToUnit } from '../../util/helpers'
 
 // Types
-import { CreateElement, VNode } from 'vue'
+import { VNode } from 'vue'
 import mixins from '../../util/mixins'
 
 /* @vue/component */
@@ -25,7 +25,7 @@ export default mixins(Colorable).extend({
     tile: Boolean
   },
 
-  render (h: CreateElement, { data, props, children }): VNode {
+  render (h, { data, props, children }): VNode {
     data.staticClass = (`v-avatar ${data.staticClass || ''}`).trim()
 
     if (props.tile) data.staticClass += ' v-avatar--tile'
