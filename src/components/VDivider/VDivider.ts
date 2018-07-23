@@ -2,12 +2,12 @@
 import '../../stylus/components/_dividers.styl'
 
 // Types
-import Vue, { VNode } from 'vue'
+import { VNode } from 'vue'
 
 // Mixins
-import Themeable from '../../mixins/themeable'
+import Themeable, { functionalThemeClasses } from '../../mixins/themeable'
 
-export default Vue.extend({
+export default Themeable.extend({
   name: 'v-divider',
 
   functional: true,
@@ -18,13 +18,16 @@ export default Vue.extend({
     vertical: Boolean
   },
 
-  render (h, { props, data }): VNode {
-    data.staticClass = (`v-divider ${data.staticClass || ''}`).trim()
+  render (h, context): VNode {
+    const { props, data } = context
 
-    if (props.inset) data.staticClass += ' v-divider--inset'
-    if (props.vertical) data.staticClass += ' v-divider--vertical'
-    if (props.light) data.staticClass += ' theme--light'
-    if (props.dark) data.staticClass += ' theme--dark'
+    data.class = {
+      'v-divider': true,
+      'v-divider--inset': props.inset,
+      'v-divider--vertical': props.vertical,
+      ...functionalThemeClasses(context),
+      ...data.class
+    }
 
     return h('hr', data)
   }

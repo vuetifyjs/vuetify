@@ -189,7 +189,6 @@ export default {
           dense: this.dense,
           hideSelected: this.hideSelected,
           items: this.virtualizedItems,
-          light: this.light,
           noDataText: this.$vuetify.t(this.noDataText),
           selectedItems: this.selectedItems,
           itemAvatar: this.itemAvatar,

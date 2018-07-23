@@ -1,7 +1,7 @@
 import '../../stylus/components/_icons.styl'
 
 // Mixins
-import Themeable from '../../mixins/themeable'
+import Themeable, { functionalThemeClasses } from '../../mixins/themeable'
 import Colorable from '../../mixins/colorable'
 
 // Util
@@ -69,7 +69,9 @@ export default mixins(Colorable, Themeable).extend({
     xLarge: Boolean
   },
 
-  render (h, { props, data, parent, listeners = {}, children = [] }): VNode {
+  /* eslint-disable max-statements */
+  render (h, context): VNode {
+    const { props, data, parent, listeners = {}, children = [] } = context
     const { small, medium, large, xLarge } = props
     const sizes = { small, medium, large, xLarge }
     const explicitSize = keys(sizes).find(key => sizes[key] && !!key)
@@ -121,8 +123,7 @@ export default mixins(Colorable, Themeable).extend({
       'v-icon--left': props.left,
       'v-icon--link': listeners.click || listeners['!click'],
       'v-icon--right': props.right,
-      'theme--dark': props.dark,
-      'theme--light': props.light
+      ...functionalThemeClasses(context)
     }
 
     // Order classes
