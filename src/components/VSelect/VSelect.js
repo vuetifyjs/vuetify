@@ -186,7 +186,6 @@ export default {
         props: {
           action: this.multiple && !this.isHidingSelected,
           color: this.color,
-          dark: this.dark,
           dense: this.dense,
           hideSelected: this.hideSelected,
           items: this.virtualizedItems,
@@ -319,7 +318,6 @@ export default {
         staticClass: 'v-chip--select-multi',
         props: {
           close: this.deletableChips && !isDisabled,
-          dark: this.dark,
           disabled: isDisabled,
           selected: index === this.selectedIndex,
           small: this.smallChips

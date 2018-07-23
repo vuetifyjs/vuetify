@@ -122,8 +122,7 @@ export default {
         'v-toolbar--fixed': !this.absolute && (this.app || this.fixed),
         'v-toolbar--floating': this.floating,
         'v-toolbar--prominent': this.prominent,
-        'theme--dark': this.dark,
-        'theme--light': this.light
+        ...this.themeClasses
       })
     },
     computedPaddingLeft () {

@@ -14,8 +14,7 @@ export default {
       return this.$createElement('div', {
         staticClass: 'v-tabs__bar',
         'class': this.addBackgroundColorClassChecks({
-          'theme--dark': this.dark,
-          'theme--light': this.light
+          ...this.themeClasses
         }),
         ref: 'bar'
       }, [

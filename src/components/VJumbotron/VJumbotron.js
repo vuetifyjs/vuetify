@@ -42,10 +42,7 @@ export default {
       return styles
     },
     classes () {
-      return {
-        'theme--dark': this.dark,
-        'theme--light': this.light
-      }
+      return this.themeClasses
     },
     styles () {
       return {
