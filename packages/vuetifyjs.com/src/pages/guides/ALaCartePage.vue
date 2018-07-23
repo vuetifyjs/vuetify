@@ -59,10 +59,9 @@
           |Vue.use(Vuetify, {
           |   components: {
           |      VApp,
-          |      Vuetify
+          |      transitions
           |   },
-          |   directives,
-          |   transitions,
+          |   directives
           |})
         helpers-section-text(:value="`${namespace}.importText3`")
         helpers-markup(lang="js")
