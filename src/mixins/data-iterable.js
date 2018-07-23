@@ -467,7 +467,8 @@ export default {
       }, [
         this.genPagination(),
         this.genPrevIcon(),
-        this.genNextIcon()
+        this.genNextIcon(),
+        this.$slots['actions-extras'] ? this.$createElement('div', {}, this.$slots['actions-extras']) : null
       ])
 
       return [this.$createElement('div', {
