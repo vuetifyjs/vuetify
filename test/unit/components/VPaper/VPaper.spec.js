@@ -9,27 +9,27 @@ test('VPaper.vue', ({ mount }) => {
       }
     })
 
-    expect(wrapper.vm.$el.classList.contains('elevation-0')).toBe(true)
+    // expect(wrapper.vm.$el.classList.contains('elevation-0')).toBe(true)
 
-    const listeners = wrapper.vm.$options.computed.listeners
+    // const listeners = wrapper.vm.$options.computed.listeners
 
-    // Should not bind listeners if hover is undefined
-    expect(listeners.call({ hover: undefined })).toEqual({})
+    // // Should not bind listeners if hover is undefined
+    // expect(listeners.call({ hover: undefined })).toEqual({})
 
-    const events = listeners.call(wrapper.vm)
+    // const events = listeners.call(wrapper.vm)
 
-    events.mouseenter()
+    // events.mouseenter()
 
-    await wrapper.vm.$nextTick()
+    // await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.isMouseOver).toBe(true)
-    expect(wrapper.vm.$el.classList.contains('elevation-5')).toBe(true)
+    // expect(wrapper.vm.isMouseOver).toBe(true)
+    // expect(wrapper.vm.$el.classList.contains('elevation-5')).toBe(true)
 
-    events.mouseleave()
+    // events.mouseleave()
 
-    await wrapper.vm.$nextTick()
+    // await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.isMouseOver).toBe(false)
-    expect(wrapper.vm.$el.classList.contains('elevation-5')).toBe(false)
+    // expect(wrapper.vm.isMouseOver).toBe(false)
+    // expect(wrapper.vm.$el.classList.contains('elevation-5')).toBe(false)
   })
 })

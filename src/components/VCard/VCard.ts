@@ -3,7 +3,6 @@ import '../../stylus/components/_cards.styl'
 
 // Components
 import { VPaper } from '../VPaper'
-import { VResponsive } from '../VResponsive'
 
 // Mixins
 import Routable from '../../mixins/routable'
@@ -29,10 +28,12 @@ export default mixins(
       default: 1
     },
     flat: Boolean,
+    height: [Number, String],
     /* @deprecated */
     img: String,
     /* @deprecated */
     raised: Boolean,
+    tile: Boolean,
     width: [Number, String]
   },
 
@@ -40,7 +41,8 @@ export default mixins(
     classes (): object {
       return {
         ...VPaper.options.computed.classes.call(this),
-        'v-card': true
+        'v-card': true,
+        'v-card--tile': this.tile
       }
     },
     computedElevation (): number | string {
@@ -62,7 +64,7 @@ export default mixins(
     },
     styles (): object {
       const style: Record<string, any> = {
-        ...VResponsive.options.computed.styles.call(this)
+        height: convertToUnit(this.height)
       }
 
       if (this.img) {
@@ -88,9 +90,6 @@ export default mixins(
       ...VPaper.options.computed.listeners.call(this)
     }
 
-    return h(tag, data, [
-      this.__cachedSizer,
-      this.genContent()
-    ])
+    return h(tag, data, this.$slots.default)
   }
 })
