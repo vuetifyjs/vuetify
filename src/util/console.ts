@@ -19,6 +19,11 @@ function createMessage (message: string, vm?: any, parent?: any): string | void 
   )
 }
 
+export function consoleInfo (message: string, vm?: any, parent?: any): void {
+  const newMessage = createMessage(message, vm, parent)
+  newMessage != null && console.info(newMessage)
+}
+
 export function consoleWarn (message: string, vm?: any, parent?: any): void {
   const newMessage = createMessage(message, vm, parent)
   newMessage != null && console.warn(newMessage)
@@ -30,7 +35,7 @@ export function consoleError (message: string, vm?: any, parent?: any): void {
 }
 
 export function deprecate (original: string, replacement: string, vm?: any, parent?: any) {
-  process.env.NODE_ENV === 'development' && consoleWarn(`'${original}' is deprecated, use '${replacement}' instead`, vm, parent)
+  consoleWarn(`'${original}' is deprecated, use '${replacement}' instead`, vm, parent)
 }
 
 /**
@@ -42,7 +47,7 @@ const classify = (str: string) => str
   .replace(classifyRE, c => c.toUpperCase())
   .replace(/[-_]/g, '')
 
-const formatComponentName = (vm: any, includeFile?: boolean) => {
+function formatComponentName (vm: any, includeFile?: boolean): string {
   if (vm.$root === vm) {
     return '<Root>'
   }
@@ -64,7 +69,7 @@ const formatComponentName = (vm: any, includeFile?: boolean) => {
   )
 }
 
-const generateComponentTrace = (vm: any) => {
+function generateComponentTrace (vm: any): string {
   if (vm._isVue && vm.$parent) {
     const tree = []
     let currentRecursiveSequence = 0

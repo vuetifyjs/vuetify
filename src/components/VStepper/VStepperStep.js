@@ -4,19 +4,13 @@ import VIcon from '../VIcon'
 // Directives
 import Ripple from '../../directives/ripple'
 
+/* @vue/component */
 export default {
   name: 'v-stepper-step',
 
   directives: { Ripple },
 
   inject: ['stepClick'],
-
-  data () {
-    return {
-      isActive: false,
-      isInactive: true
-    }
-  },
 
   props: {
     color: {
@@ -42,6 +36,13 @@ export default {
       default: () => []
     },
     step: [Number, String]
+  },
+
+  data () {
+    return {
+      isActive: false,
+      isInactive: true
+    }
   },
 
   computed: {

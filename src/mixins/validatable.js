@@ -5,6 +5,7 @@ import { consoleError } from '../util/console'
 // Mixins
 import Colorable from './colorable'
 
+/* @vue/component */
 export default {
   name: 'validatable',
 
@@ -12,15 +13,6 @@ export default {
     Colorable,
     RegistrableInject('form')
   ],
-
-  data: () => ({
-    errorBucket: [],
-    hasColor: false,
-    hasFocused: false,
-    hasInput: false,
-    isResetting: false,
-    valid: false
-  }),
 
   props: {
     error: Boolean,
@@ -47,6 +39,15 @@ export default {
     },
     validateOnBlur: Boolean
   },
+
+  data: () => ({
+    errorBucket: [],
+    hasColor: false,
+    hasFocused: false,
+    hasInput: false,
+    isResetting: false,
+    valid: false
+  }),
 
   computed: {
     hasError () {
@@ -112,11 +113,7 @@ export default {
 
   watch: {
     rules: {
-      handler (newVal, oldVal) {
-        // TODO: This handler seems to trigger when input changes, even though
-        // rules array stays the same? Solved it like this for now
-        if (newVal.length === oldVal.length) return
-
+      handler () {
         this.validate()
       },
       deep: true
@@ -125,14 +122,12 @@ export default {
       // If it's the first time we're setting input,
       // mark it with hasInput
       this.hasInput = true
-      this.$nextTick(this.validate)
+      this.validateOnBlur || this.$nextTick(this.validate)
     },
     isFocused (val) {
-      if (!val) this.hasFocused = true
-      // If we're not focused, and it's the first time
-      // we're defocusing, set shouldValidate to true
-      if (!val && !this.hasFocused) {
-        this.$emit('update:error', this.errorBucket.length > 0)
+      if (!val) {
+        this.hasFocused = true
+        this.validateOnBlur && this.validate()
       }
     },
     isResetting () {

@@ -89,9 +89,6 @@
   &-enter
     transform: translate(100%, 0)
 
-  &-enter-to
-    transform: translate(0, 0)
-
   &-leave, &-leave-active
     position: absolute
     top: 0
@@ -128,11 +125,6 @@
 
   &-leave, &-leave-active
     position: absolute
-
-.application--is-rtl
-  .message-transition
-    &-leave, &-leave-active
-      right: 0
 
 .slide-y-transition
   &-enter-active, &-leave-active

@@ -8,15 +8,14 @@ import Detachable from '../../mixins/detachable'
 import Menuable from '../../mixins/menuable'
 import Toggleable from '../../mixins/toggleable'
 
+// Helpers
+import { convertToUnit } from '../../util/helpers'
+
+/* @vue/component */
 export default {
   name: 'v-tooltip',
 
   mixins: [Colorable, Delayable, Dependent, Detachable, Menuable, Toggleable],
-
-  data: () => ({
-    calculatedMinWidth: 0,
-    closeDependents: false
-  }),
 
   props: {
     debounce: {
@@ -42,6 +41,11 @@ export default {
     }
   },
 
+  data: () => ({
+    calculatedMinWidth: 0,
+    closeDependents: false
+  }),
+
   computed: {
     calculatedLeft () {
       const { activator, content } = this.dimensions
@@ -62,6 +66,9 @@ export default {
         )
       }
 
+      if (this.nudgeLeft) left -= parseInt(this.nudgeLeft)
+      if (this.nudgeRight) left += parseInt(this.nudgeRight)
+
       return `${this.calcXOverflow(left)}px`
     },
     calculatedTop () {
@@ -81,6 +88,9 @@ export default {
           (content.height / 2)
         )
       }
+
+      if (this.nudgeTop) top -= parseInt(this.nudgeTop)
+      if (this.nudgeBottom) top += parseInt(this.nudgeBottom)
 
       return `${this.calcYOverflow(top + this.pageYOffset)}px`
     },
@@ -108,12 +118,16 @@ export default {
     styles () {
       return {
         left: this.calculatedLeft,
-        maxWidth: isNaN(this.maxWidth) ? this.maxWidth : `${this.maxWidth}px`,
+        maxWidth: convertToUnit(this.maxWidth),
         opacity: this.isActive ? 0.9 : 0,
         top: this.calculatedTop,
         zIndex: this.zIndex || this.activeZIndex
       }
     }
+  },
+
+  mounted () {
+    this.value && this.callActivate()
   },
 
   methods: {
@@ -126,10 +140,6 @@ export default {
     }
   },
 
-  mounted () {
-    this.value && this.callActivate()
-  },
-
   render (h) {
     const tooltip = h('div', {
       staticClass: 'v-tooltip__content',
@@ -138,7 +148,7 @@ export default {
         'menuable__content__active': this.isActive
       }),
       style: this.styles,
-      attrs: this.attrs,
+      attrs: this.getScopeIdAttrs(),
       directives: [{
         name: 'show',
         value: this.isContentActive

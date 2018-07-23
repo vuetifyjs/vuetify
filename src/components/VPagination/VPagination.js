@@ -6,19 +6,13 @@ import Resize from '../../directives/resize'
 
 import Colorable from '../../mixins/colorable'
 
+/* @vue/component */
 export default {
   name: 'v-pagination',
 
-  mixins: [Colorable],
-
   directives: { Resize },
 
-  data () {
-    return {
-      maxButtons: 0,
-      defaultColor: 'primary'
-    }
-  },
+  mixins: [Colorable],
 
   props: {
     circle: Boolean,
@@ -40,6 +34,13 @@ export default {
     value: {
       type: Number,
       default: 0
+    }
+  },
+
+  data () {
+    return {
+      maxButtons: 0,
+      defaultColor: 'primary'
     }
   },
 
@@ -156,9 +157,9 @@ export default {
 
   render (h) {
     const children = [
-      this.genIcon(h, this.prevIcon, this.value <= 1, this.previous),
+      this.genIcon(h, this.$vuetify.rtl ? this.nextIcon : this.prevIcon, this.value <= 1, this.previous),
       this.genItems(h),
-      this.genIcon(h, this.nextIcon, this.value >= this.length, this.next)
+      this.genIcon(h, this.$vuetify.rtl ? this.prevIcon : this.nextIcon, this.value >= this.length, this.next)
     ]
 
     return h('ul', {

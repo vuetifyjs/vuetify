@@ -7,6 +7,7 @@ import Themeable from '../../mixins/themeable'
 import { pad, createNativeLocaleFormatter, monthChange } from './util'
 import { createRange } from '../../util/helpers'
 
+/* @vue/component */
 export default {
   name: 'v-date-picker-date-table',
 

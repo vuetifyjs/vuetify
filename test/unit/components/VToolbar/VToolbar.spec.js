@@ -126,10 +126,10 @@ test('VToolbar.vue', ({ mount }) => {
     })
     Vue.set(wrapper.vm.$vuetify.breakpoint, 'width', 200)
     Vue.set(wrapper.vm.$vuetify.breakpoint, 'height', 100)
-    expect(wrapper.vm.computedContentHeight).toBe(wrapper.vm.heights.mobileLandscape)
+    expect(wrapper.vm.computedContentHeight).toBe(wrapper.vm.heights.desktop)
     Vue.set(wrapper.vm.$vuetify.breakpoint, 'width', 100)
     Vue.set(wrapper.vm.$vuetify.breakpoint, 'height', 200)
-    expect(wrapper.vm.computedContentHeight).toBe(wrapper.vm.heights.mobile)
+    expect(wrapper.vm.computedContentHeight).toBe(wrapper.vm.heights.desktop)
   })
 
   it('should set margin top', () => {

@@ -17,17 +17,15 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
         >
           <div class="v-input__control">
             <div class="v-input__slot">
-              <div class="v-menu"
-                   style="display: inline-block;"
-              >
+              <div class="v-menu v-menu--inline">
                 <div class="v-menu__activator">
                   <div class="v-select__slot">
                     <div class="v-select__selections">
                       <div class="v-select__selection v-select__selection--comma">
                         5
                       </div>
-                      <input readonly="readonly"
-                             tabindex="0"
+                      <input aria-label="Items per page:"
+                             readonly="readonly"
                              type="text"
                              autocomplete="on"
                              aria-readonly="false"
@@ -47,9 +45,7 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
                 <div class="v-menu__content v-menu__content--auto"
                      style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
                 >
-                  <div class="v-select-list v-card"
-                       style="height: auto;"
-                  >
+                  <div class="v-select-list v-card">
                     <div class="v-list">
                       <div>
                         <a class="v-list__tile v-list__tile--link v-list__tile--active primary--text">
@@ -91,8 +87,6 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="v-text-field__details">
             </div>
           </div>
         </div>
@@ -162,17 +156,15 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
         >
           <div class="v-input__control">
             <div class="v-input__slot">
-              <div class="v-menu"
-                   style="display: inline-block;"
-              >
+              <div class="v-menu v-menu--inline">
                 <div class="v-menu__activator">
                   <div class="v-select__slot">
                     <div class="v-select__selections">
                       <div class="v-select__selection v-select__selection--comma">
                         5
                       </div>
-                      <input readonly="readonly"
-                             tabindex="0"
+                      <input aria-label="Items per page:"
+                             readonly="readonly"
                              type="text"
                              autocomplete="on"
                              aria-readonly="false"
@@ -192,9 +184,7 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
                 <div class="v-menu__content v-menu__content--auto"
                      style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
                 >
-                  <div class="v-select-list v-card"
-                       style="height: auto;"
-                  >
+                  <div class="v-select-list v-card">
                     <div class="v-list">
                       <div>
                         <a class="v-list__tile v-list__tile--link v-list__tile--active primary--text">
@@ -236,8 +226,6 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="v-text-field__details">
             </div>
           </div>
         </div>
@@ -298,17 +286,15 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
         >
           <div class="v-input__control">
             <div class="v-input__slot">
-              <div class="v-menu"
-                   style="display: inline-block;"
-              >
+              <div class="v-menu v-menu--inline">
                 <div class="v-menu__activator">
                   <div class="v-select__slot">
                     <div class="v-select__selections">
                       <div class="v-select__selection v-select__selection--comma">
                         5
                       </div>
-                      <input readonly="readonly"
-                             tabindex="0"
+                      <input aria-label="Items per page:"
+                             readonly="readonly"
                              type="text"
                              autocomplete="on"
                              aria-readonly="false"
@@ -328,9 +314,7 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
                 <div class="v-menu__content v-menu__content--auto"
                      style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
                 >
-                  <div class="v-select-list v-card"
-                       style="height: auto;"
-                  >
+                  <div class="v-select-list v-card">
                     <div class="v-list">
                       <div>
                         <a class="v-list__tile v-list__tile--link v-list__tile--active primary--text">
@@ -372,8 +356,6 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="v-text-field__details">
             </div>
           </div>
         </div>
@@ -438,17 +420,15 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
         >
           <div class="v-input__control">
             <div class="v-input__slot">
-              <div class="v-menu"
-                   style="display: inline-block;"
-              >
+              <div class="v-menu v-menu--inline">
                 <div class="v-menu__activator">
                   <div class="v-select__slot">
                     <div class="v-select__selections">
                       <div class="v-select__selection v-select__selection--comma">
                         5
                       </div>
-                      <input readonly="readonly"
-                             tabindex="0"
+                      <input aria-label="Items per page:"
+                             readonly="readonly"
                              type="text"
                              autocomplete="on"
                              aria-readonly="false"
@@ -468,9 +448,7 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
                 <div class="v-menu__content v-menu__content--auto"
                      style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
                 >
-                  <div class="v-select-list v-card"
-                       style="height: auto;"
-                  >
+                  <div class="v-select-list v-card">
                     <div class="v-list">
                       <div>
                         <a class="v-list__tile v-list__tile--link v-list__tile--active primary--text">
@@ -513,8 +491,6 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
                 </div>
               </div>
             </div>
-            <div class="v-text-field__details">
-            </div>
           </div>
         </div>
       </div>
@@ -551,6 +527,42 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
       </div>
     </div>
   </div>
+</div>
+
+`;
+
+exports[`VDataIterator.js should match a snapshot - with data 2`] = `
+
+<div class="v-data-iterator__actions__range-controls">
+  <div class="v-data-iterator__actions__pagination">
+    1-3 of 3
+  </div>
+  <button disabled="disabled"
+          type="button"
+          class="v-btn v-btn--disabled v-btn--flat v-btn--icon"
+          aria-label="Previous page"
+  >
+    <div class="v-btn__content">
+      <i aria-hidden="true"
+         class="v-icon material-icons"
+      >
+        chevron_right
+      </i>
+    </div>
+  </button>
+  <button disabled="disabled"
+          type="button"
+          class="v-btn v-btn--disabled v-btn--flat v-btn--icon"
+          aria-label="Next page"
+  >
+    <div class="v-btn__content">
+      <i aria-hidden="true"
+         class="v-icon material-icons"
+      >
+        chevron_left
+      </i>
+    </div>
+  </button>
 </div>
 
 `;

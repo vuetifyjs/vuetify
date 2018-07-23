@@ -11,6 +11,7 @@
 // Utils
 import { keyCodes } from '../../../util/helpers'
 
+/* @vue/component */
 export default {
   data: () => ({
     listIndex: -1,
@@ -40,7 +41,7 @@ export default {
         keyCodes.up,
         keyCodes.enter
       ].includes(e.keyCode)
-      ) e.stopPropagation()
+      ) e.preventDefault()
 
       if ([keyCodes.esc, keyCodes.tab].includes(e.keyCode)) {
         return this.isActive = false

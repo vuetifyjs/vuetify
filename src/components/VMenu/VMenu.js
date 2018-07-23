@@ -18,8 +18,17 @@ import Position from './mixins/menu-position'
 import ClickOutside from '../../directives/click-outside'
 import Resize from '../../directives/resize'
 
+// Helpers
+import { convertToUnit } from '../../util/helpers'
+
+/* @vue/component */
 export default {
   name: 'v-menu',
+
+  directives: {
+    ClickOutside,
+    Resize
+  },
 
   mixins: [
     Activator,
@@ -33,22 +42,6 @@ export default {
     Returnable,
     Toggleable
   ],
-
-  directives: {
-    ClickOutside,
-    Resize
-  },
-
-  data () {
-    return {
-      defaultOffset: 8,
-      maxHeightAutoDefault: '200px',
-      startIndex: 3,
-      stopIndex: 0,
-      hasJustFocused: false,
-      resizeTimeout: null
-    }
-  },
 
   props: {
     auto: Boolean,
@@ -80,6 +73,17 @@ export default {
     }
   },
 
+  data () {
+    return {
+      defaultOffset: 8,
+      maxHeightAutoDefault: '200px',
+      startIndex: 3,
+      stopIndex: 0,
+      hasJustFocused: false,
+      resizeTimeout: null
+    }
+  },
+
   computed: {
     calculatedLeft () {
       if (!this.auto) return this.calcLeft()
@@ -87,11 +91,7 @@ export default {
       return `${this.calcXOverflow(this.calcLeftAuto())}px`
     },
     calculatedMaxHeight () {
-      return this.auto
-        ? '200px'
-        : isNaN(this.maxHeight)
-          ? this.maxHeight
-          : `${this.maxHeight}px`
+      return this.auto ? '200px' : convertToUnit(this.maxHeight)
     },
     calculatedMaxWidth () {
       return isNaN(this.maxWidth)
@@ -189,12 +189,7 @@ export default {
   render (h) {
     const data = {
       staticClass: 'v-menu',
-      class: {
-        'v-menu--disabled': this.disabled
-      },
-      style: {
-        display: this.fullWidth ? 'block' : 'inline-block'
-      },
+      class: { 'v-menu--inline': !this.fullWidth && this.$slots.activator },
       directives: [{
         arg: 500,
         name: 'resize',

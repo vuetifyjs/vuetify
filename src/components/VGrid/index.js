@@ -6,7 +6,7 @@ import VContainer from './VContainer'
 import VFlex from './VFlex'
 import VLayout from './VLayout'
 
-const VSpacer = createSimpleFunctional('spacer')
+const VSpacer = createSimpleFunctional('spacer', 'div', 'v-spacer')
 
 export {
   VContainer,
