@@ -8332,6 +8332,12 @@ vue@^2.5.16:
   version "2.5.16"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.16.tgz#07edb75e8412aaeed871ebafa99f4672584a0085"
 
+vuetify-loader@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/vuetify-loader/-/vuetify-loader-0.1.1.tgz#a2d11af0c980bcf73b44eaea2f5a803392e168c7"
+  dependencies:
+    loader-utils "^1.1.0"
+
 walker@~1.0.5:
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/walker/-/walker-1.0.7.tgz#2f7f9b8fd10d677262b18a884e28d19618e028fb"

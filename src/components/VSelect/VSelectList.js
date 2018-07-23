@@ -204,7 +204,7 @@ export default {
       return Boolean(getPropertyFromItem(item, this.itemDisabled, false))
     },
     getText (item) {
-      return (getPropertyFromItem(item, this.itemText, item) || '').toString()
+      return String(getPropertyFromItem(item, this.itemText, item))
     },
     getValue (item) {
       return getPropertyFromItem(item, this.itemValue, this.getText(item))
@@ -218,7 +218,8 @@ export default {
         this.hasItem(item)
       ) continue
 
-      if (item.header) children.push(this.genHeader(item))
+      if (item == null) children.push(this.genTile(item))
+      else if (item.header) children.push(this.genHeader(item))
       else if (item.divider) children.push(this.genDivider(item))
       else children.push(this.genTile(item))
     }
