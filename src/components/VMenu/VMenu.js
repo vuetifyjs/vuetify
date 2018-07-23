@@ -25,8 +25,6 @@ import { convertToUnit } from '../../util/helpers'
 export default {
   name: 'v-menu',
 
-  abstract: true,
-
   directives: {
     ClickOutside,
     Resize
