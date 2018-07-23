@@ -57,10 +57,7 @@ export default {
 
   data: vm => ({
     attrsInput: null,
-    lazySearch: vm.searchInput,
-    lazyValue: vm.value != null
-      ? vm.value
-      : vm.multiple ? [] : undefined
+    lazySearch: vm.searchInput
   }),
 
   computed: {
@@ -273,7 +270,7 @@ export default {
       }
     },
     clearableCallback () {
-      this.internalSearch = null
+      this.internalSearch = undefined
 
       VSelect.methods.clearableCallback.call(this)
     },
@@ -338,17 +335,11 @@ export default {
       this.setSearch()
     },
     setSelectedItems () {
-      if (this.internalValue == null ||
-        this.internalValue === ''
-      ) {
-        this.selectedItems = []
-      } else {
-        VSelect.methods.setSelectedItems.call(this)
+      VSelect.methods.setSelectedItems.call(this)
 
-        // #4273 Don't replace if searching
-        // #4403 Don't replace is focused
-        if (!this.isFocused) this.setSearch()
-      }
+      // #4273 Don't replace if searching
+      // #4403 Don't replace if focused
+      if (!this.isFocused) this.setSearch()
     },
     setSearch () {
       // Wait for nextTick so selectedItem

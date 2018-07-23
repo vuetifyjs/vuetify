@@ -136,7 +136,7 @@ export default {
       return marginTop
     },
     maxHeight () {
-      if (!this.hasApp) return '100%'
+      if (!this.hasApp) return null
 
       const maxHeight = (
         this.$vuetify.application.bottom +
@@ -175,7 +175,7 @@ export default {
       const styles = {
         height: convertToUnit(this.height),
         marginTop: `${this.marginTop}px`,
-        maxHeight: `calc(100% - ${this.maxHeight}px)`,
+        maxHeight: `calc(100% - ${+this.maxHeight}px)`,
         transform: `translateX(${this.calculatedTransform}px)`,
         width: `${this.calculatedWidth}px`
       }
