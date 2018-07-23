@@ -1,47 +1,35 @@
-import { test, functionalContext } from '@/test'
+import { test } from '@/test'
 import VPaper from '@/components/VPaper'
 
 test('VPaper.vue', ({ mount }) => {
-  it.skip('should render component', () => {
-    const context = functionalContext()
-    const wrapper = mount(VPaper, context)
-
-    expect(wrapper.element.classList).toContain('v-paper')
-    expect(wrapper.element.classList).toContain('elevation-0')
-  })
-
-  it.skip('should render component wit.skiph the proper elevation', () => {
-    const context = functionalContext({
-      props: {
-        elevation: 10
+  it('should change elevation on mouseover', async () => {
+    const wrapper = mount(VPaper, {
+      propsData: {
+        hover: 5
       }
     })
-    const wrapper = mount(VPaper, context)
 
-    expect(wrapper.element.classList).toContain('v-paper')
-    expect(wrapper.element.classList).toContain('elevation-10')
-  })
+    expect(wrapper.vm.$el.classList.contains('elevation-0')).toBe(true)
 
-  it.skip('should render a squared paper', () => {
-    const context = functionalContext({
-      props: {
-        square: true
-      }
-    })
-    const wrapper = mount(VPaper, context)
+    const listeners = wrapper.vm.$options.computed.listeners
 
-    expect(wrapper.element.classList).toContain('v-paper--square')
-  })
+    // Should not bind listeners if hover is undefined
+    expect(listeners.call({ hover: undefined })).toEqual({})
 
-  it.skip('should render a colored paper', () => {
-    const context = functionalContext({
-      props: {
-        color: 'blue lighten-1'
-      }
-    })
-    const wrapper = mount(VPaper, context)
+    const events = listeners.call(wrapper.vm)
 
-    expect(wrapper.element.classList).toContain('blue')
-    expect(wrapper.element.classList).toContain('lighten-1')
+    events.mouseenter()
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.isMouseOver).toBe(true)
+    expect(wrapper.vm.$el.classList.contains('elevation-5')).toBe(true)
+
+    events.mouseleave()
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.isMouseOver).toBe(false)
+    expect(wrapper.vm.$el.classList.contains('elevation-5')).toBe(false)
   })
 })

@@ -2,12 +2,16 @@ import '../../stylus/components/_paper.styl'
 
 import { VNode } from 'vue'
 
+// Components
+import { VResponsive } from '../VResponsive'
+
 // Mixins
 import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
 import mixins from '../../util/mixins'
 
 export default mixins(
+  VResponsive,
   Colorable,
   Themeable
 ).extend({
@@ -20,7 +24,6 @@ export default mixins(
   },
 
   props: {
-    angled: Boolean,
     elevation: {
       type: [Number, String],
       default: 0
@@ -37,14 +40,15 @@ export default mixins(
   computed: {
     classes (): object {
       return this.addBackgroundColorClassChecks({
+        ...VResponsive.options.computed.classes.call(this),
         'v-paper': true,
-        'v-paper--angled': this.angled,
+        'v-paper--tile': this.tile,
         ...this.themeClasses,
         [`elevation-${this.computedElevation}`]: true
       }, this.color)
     },
     listeners (): object {
-      return !this.hover ? {} : {
+      return this.hover === undefined ? {} : {
         mouseenter: () => {
           this.isMouseOver = true
         },
@@ -59,11 +63,13 @@ export default mixins(
   },
 
   render (h): VNode {
-    return h(this.tag, {
-      class: this.classes,
-      on: {
-        ...this.listeners
-      }
-    }, this.$slots.default)
+    const node = VResponsive.options.render.call(this, h)
+
+    node.on = {
+      ...node.on,
+      ...this.listeners
+    }
+
+    return h(node.tag, node.data, node.children)
   }
 })

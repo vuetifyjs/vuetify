@@ -12,6 +12,7 @@ import mixins from '../../util/mixins'
 // Types
 import { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
+import { ClassesObject } from './../../mixins/colorable'
 
 export default mixins(
   Applicationable('bottom', [
@@ -75,7 +76,7 @@ export default mixins(
   render (h): VNode {
     return h('div', {
       staticClass: 'v-bottom-nav',
-      class: this.addBackgroundColorClassChecks(this.classes),
+      class: this.addBackgroundColorClassChecks(this.classes as ClassesObject),
       style: {
         height: `${parseInt(this.computedHeight)}px`
       },

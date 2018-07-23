@@ -2,7 +2,8 @@
 import '../../stylus/components/_cards.styl'
 
 // Components
-import VPaper from '../VPaper'
+import { VPaper } from '../VPaper'
+import { VResponsive } from '../VResponsive'
 
 // Mixins
 import Routable from '../../mixins/routable'
@@ -16,7 +17,10 @@ import mixins from '../../util/mixins'
 import { deprecate } from '../../util/console'
 
 /* @vue/component */
-export default mixins(Routable, VPaper).extend({
+export default mixins(
+  Routable,
+  VPaper
+).extend({
   name: 'v-card',
 
   props: {
@@ -25,7 +29,6 @@ export default mixins(Routable, VPaper).extend({
       default: 1
     },
     flat: Boolean,
-    height: [Number, String],
     /* @deprecated */
     img: String,
     /* @deprecated */
@@ -36,8 +39,8 @@ export default mixins(Routable, VPaper).extend({
   computed: {
     classes (): object {
       return {
-        'v-card': true,
-        ...VPaper.options.computed.classes.call(this)
+        ...VPaper.options.computed.classes.call(this),
+        'v-card': true
       }
     },
     computedElevation (): number | string {
@@ -47,13 +50,19 @@ export default mixins(Routable, VPaper).extend({
         return 3
       }
 
+      if (this.hover === '' && this.isMouseOver) {
+        deprecate('<v-card hover>', '<v-card hover="8">', this)
+
+        return 8
+      }
+
       return this.flat
         ? 0
         : VPaper.options.computed.computedElevation.call(this)
     },
     styles (): object {
       const style: Record<string, any> = {
-        height: convertToUnit(this.height)
+        ...VResponsive.options.computed.styles.call(this)
       }
 
       if (this.img) {
@@ -79,6 +88,9 @@ export default mixins(Routable, VPaper).extend({
       ...VPaper.options.computed.listeners.call(this)
     }
 
-    return h(tag, data, this.$slots.default)
+    return h(tag, data, [
+      this.__cachedSizer,
+      this.genContent()
+    ])
   }
 })

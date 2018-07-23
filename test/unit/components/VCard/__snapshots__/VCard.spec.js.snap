@@ -2,51 +2,65 @@
 
 exports[`VCard.vue should render a card with custom height 1`] = `
 
-<div class="v-card"
+<div class="v-responsive v-paper elevation-1 v-card"
      style="height: 400px;"
 >
+  <div class="v-responsive__content">
+  </div>
 </div>
 
 `;
 
 exports[`VCard.vue should render a flat card 1`] = `
 
-<div class="v-card v-card--flat">
+<div class="v-responsive v-paper elevation-0 v-card">
+  <div class="v-responsive__content">
+  </div>
 </div>
 
 `;
 
 exports[`VCard.vue should render a raised card 1`] = `
 
-<div class="v-card v-card--raised">
+<div class="v-responsive v-paper elevation-3 v-card">
+  <div class="v-responsive__content">
+  </div>
 </div>
 
 `;
 
 exports[`VCard.vue should render a tile card 1`] = `
 
-<div class="v-card v-card--tile">
+<div class="v-responsive v-paper v-paper--tile elevation-1 v-card">
+  <div class="v-responsive__content">
+  </div>
 </div>
 
 `;
 
 exports[`VCard.vue should render a tile card 2`] = `
 
-<div class="v-card v-card--tile">
+<div class="v-responsive v-paper v-paper--tile elevation-1 v-card">
+  <div class="v-responsive__content">
+  </div>
 </div>
 
 `;
 
 exports[`VCard.vue should render card with img 1`] = `
 
-<div class="v-card">
+<div class="v-responsive v-paper elevation-1 v-card">
+  <div class="v-responsive__content">
+  </div>
 </div>
 
 `;
 
 exports[`VCard.vue should render component and match snapshot 1`] = `
 
-<div class="v-card">
+<div class="v-responsive v-paper elevation-1 v-card">
+  <div class="v-responsive__content">
+  </div>
 </div>
 
 `;
