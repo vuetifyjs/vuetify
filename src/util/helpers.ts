@@ -262,3 +262,11 @@ export const keyCodes = Object.freeze({
 export function keys<O> (o: O) {
   return Object.keys(o) as (keyof O)[]
 }
+
+export function convertToObject (attr: undefined | string | string[] | object[] | object): object {
+  if (!attr) return {}
+  if (Array.isArray(attr)) return { [attr.join(' ')]: true }
+  if (typeof attr === 'string') return { [attr]: true }
+
+  return attr
+}

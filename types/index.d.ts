@@ -167,3 +167,11 @@ export interface VuetifyGoToOptions {
   offset?: number
   easing?: VuetifyGoToEasing
 }
+
+export interface ClassesObject {
+  [key: string]: boolean
+}
+
+export interface StylesObject {
+  [key: string]: any
+}

@@ -324,7 +324,7 @@ exports[`VMenu.js should work 1`] = `
   <div class="v-menu__content menuable__content__active"
        style="max-height: auto; min-width: 0px; max-width: auto; top: 12px; left: 0px; z-index: 8; display: none; z-index: 8;"
   >
-    <div class="v-card">
+    <div class="v-paper v-card elevation-1">
     </div>
   </div>
 </div>

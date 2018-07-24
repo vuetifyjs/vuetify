@@ -1,68 +1,125 @@
+// Styles
 import '../../stylus/components/_cards.styl'
 
+// Components
+import { VPaper } from '../VPaper'
+
 // Mixins
-import Colorable from '../../mixins/colorable'
 import Routable from '../../mixins/routable'
-import Themeable from '../../mixins/themeable'
 
 // Helpers
+import { addPaperClasses, addPaperStyles } from '../VPaper/VPaper'
 import { convertToUnit } from '../../util/helpers'
+import { deprecate } from '../../util/console'
 import mixins from '../../util/mixins'
 
 // Types
 import { VNode } from 'vue'
+import { ClassesObject } from './../../../types'
 
 /* @vue/component */
-export default mixins(Colorable, Routable, Themeable).extend({
+export default mixins(
+  VPaper,
+  Routable
+).extend({
   name: 'v-card',
 
+  functional: false,
+
+  data: () => ({
+    isMouseOver: false as boolean
+  }),
+
   props: {
-    flat: Boolean,
-    height: [Number, String],
-    hover: Boolean,
-    img: String,
-    raised: Boolean,
-    tag: {
-      type: String,
-      default: 'div'
+    ...VPaper.options.props,
+    elevation: {
+      type: [Number, String],
+      default: 1
     },
-    tile: Boolean,
-    width: [String, Number]
+    flat: Boolean,
+    hover: [Number, String],
+    /* @deprecated */
+    img: String,
+    /* @deprecated */
+    raised: Boolean,
+    tile: Boolean
   },
 
   computed: {
-    classes (): object {
-      return this.addBackgroundColorClassChecks({
-        'v-card': true,
-        'v-card--flat': this.flat,
-        'v-card--hover': this.hover,
-        'v-card--raised': this.raised,
-        'v-card--tile': this.tile,
-        'theme--light': this.light,
-        'theme--dark': this.dark
-      })
+    classes (): ClassesObject {
+      return {
+        'v-paper v-card': true,
+        'v-card--tile': this.tile
+      }
+    },
+    computedElevation (): number | string {
+      if (this.raised) {
+        deprecate('<v-card raised>', '<v-card elevation="3">', this)
+
+        return 3
+      }
+
+      if (this.hover === '' && this.isMouseOver) {
+        deprecate('<v-card hover>', '<v-card hover="8">', this)
+
+        return 8
+      }
+
+      return this.flat
+        ? 0
+        : this.isMouseOver ? this.hover : this.elevation
+    },
+    listeners (): object {
+      return this.hover === undefined ? {} : {
+        mouseenter: (e: Event) => {
+          this.isMouseOver = true
+          this.$emit('mouseenter', e)
+        },
+        mouseleave: (e: Event) => {
+          this.isMouseOver = false
+          this.$emit('mouseleave', e)
+        }
+      }
     },
     styles (): object {
-      const style: Record<string, any> = {
-        height: convertToUnit(this.height)
-      }
+      if (!this.img) return {}
 
-      if (this.img) {
-        style.background = `url("${this.img}") center center / cover no-repeat`
-      }
+      deprecate('<v-card img="...">', 'a nested <v-img>', this)
 
-      if (this.width) {
-        style.width = convertToUnit(this.width)
+      return {
+        background: `url("${this.img}") center center / cover no-repeat`
       }
-
-      return style
     }
   },
 
   render (h): VNode {
     const { tag, data } = this.generateRouteLink()
 
-    data.style = this.styles
+    data.class = {
+      ...data.class,
+      ...addPaperClasses({
+        color: this.color,
+        dark: this.dark,
+        light: this.light,
+        elevation: this.computedElevation
+      })
+    }
+
+    data.style = {
+      ...data.style,
+      ...this.styles,
+      ...addPaperStyles({
+        height: convertToUnit(this.height),
+        maxHeight: convertToUnit(this.maxHeight),
+        maxWidth: convertToUnit(this.maxWidth),
+        width: convertToUnit(this.width)
+      })
+    }
+
+    data.on = {
+      ...data.on,
+      ...this.listeners
+    }
 
     return h(tag, data, this.$slots.default)
   }

@@ -184,7 +184,6 @@ export default VResponsive.extend({
     const node = VResponsive.options.render.call(this, h)
 
     node.data.staticClass += ' v-image'
-
     node.data.attrs = {
       role: this.alt ? 'img' : undefined,
       'aria-label': this.alt

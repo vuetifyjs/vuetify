@@ -12,6 +12,7 @@ import mixins from '../../util/mixins'
 // Types
 import { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
+import { ClassesObject } from './../../../types'
 
 export default mixins(
   Applicationable('bottom', [
@@ -36,7 +37,7 @@ export default mixins(
   },
 
   computed: {
-    classes (): object {
+    classes (): ClassesObject {
       return {
         'v-bottom-nav--absolute': this.absolute,
         'v-bottom-nav--fixed': !this.absolute && (this.app || this.fixed),

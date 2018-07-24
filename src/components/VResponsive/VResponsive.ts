@@ -19,13 +19,19 @@ export default Vue.extend({
   },
 
   computed: {
-    computedAspectRatio (): number {
-      return Number(this.aspectRatio)
-    },
     aspectStyle (): object | undefined {
       return this.computedAspectRatio
         ? { paddingBottom: (1 / this.computedAspectRatio) * 100 + '%' }
         : undefined
+    },
+    computedAspectRatio (): number {
+      return Number(this.aspectRatio)
+    },
+    styles (): object {
+      return {
+        height: convertToUnit(this.height),
+        maxHeight: convertToUnit(this.maxHeight)
+      }
     },
     __cachedSizer (): VNode | never[] {
       if (!this.aspectStyle) return []
@@ -48,10 +54,7 @@ export default Vue.extend({
   render (h): VNode {
     return h('div', {
       staticClass: 'v-responsive',
-      style: {
-        height: convertToUnit(this.height),
-        maxHeight: convertToUnit(this.maxHeight)
-      }
+      style: this.styles
     }, [
       this.__cachedSizer,
       this.genContent()

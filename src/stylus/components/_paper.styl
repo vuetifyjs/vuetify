@@ -1,0 +1,12 @@
+@import '../bootstrap'
+@import '../theme'
+
+/* Themes */
+v-paper($material)
+  background-color: $material.cards
+  color: $material.text.primary
+
+theme(v-paper, "v-paper")
+
+.v-paper
+  transition: $primary-transition

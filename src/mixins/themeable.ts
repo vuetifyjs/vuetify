@@ -1,4 +1,16 @@
+// Types
 import Vue from 'vue'
+import { ClassesObject } from './../../types'
+
+export function addTheme (
+  light: boolean,
+  dark: boolean
+): ClassesObject {
+  return {
+    'theme--dark': dark,
+    'theme--light': light
+  }
+}
 
 export default Vue.extend({
   name: 'themeable',
@@ -10,10 +22,7 @@ export default Vue.extend({
 
   computed: {
     themeClasses (): object {
-      return {
-        'theme--light': this.light,
-        'theme--dark': this.dark
-      }
+      return addTheme(this.light, this.dark)
     }
   }
 })
