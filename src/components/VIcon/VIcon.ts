@@ -123,7 +123,7 @@ export default mixins(Colorable, Themeable).extend({
       'v-icon--left': props.left,
       'v-icon--link': listeners.click || listeners['!click'],
       'v-icon--right': props.right,
-      ...functionalThemeClasses(context)
+      ...functionalThemeClasses(context, false)
     }
 
     // Order classes
