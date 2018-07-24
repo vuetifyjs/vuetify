@@ -52,12 +52,6 @@ export default VResponsive.extend({
   },
 
   computed: {
-    classes () {
-      return {
-        ...VResponsive.options.computed.classes.call(this),
-        'v-image': true
-      }
-    },
     computedAspectRatio (): number {
       return this.normalisedSrc.aspect
     },
@@ -189,6 +183,7 @@ export default VResponsive.extend({
   render (h): VNode {
     const node = VResponsive.options.render.call(this, h)
 
+    node.data.staticClass += ' v-image'
     node.data.attrs = {
       role: this.alt ? 'img' : undefined,
       'aria-label': this.alt

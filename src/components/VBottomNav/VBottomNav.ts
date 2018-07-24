@@ -1,3 +1,4 @@
+
 // Styles
 import '../../stylus/components/_bottom-navs.styl'
 
@@ -12,7 +13,7 @@ import mixins from '../../util/mixins'
 // Types
 import { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
-import { ClassesObject } from './../../mixins/colorable'
+import { ClassesObject } from './../../../types'
 
 export default mixins(
   Applicationable('bottom', [
@@ -37,7 +38,7 @@ export default mixins(
   },
 
   computed: {
-    classes (): object {
+    classes (): ClassesObject {
       return {
         'v-bottom-nav--absolute': this.absolute,
         'v-bottom-nav--fixed': !this.absolute && (this.app || this.fixed),
@@ -76,7 +77,7 @@ export default mixins(
   render (h): VNode {
     return h('div', {
       staticClass: 'v-bottom-nav',
-      class: this.addBackgroundColorClassChecks(this.classes as ClassesObject),
+      class: this.addBackgroundColorClassChecks(this.classes),
       style: {
         height: `${parseInt(this.computedHeight)}px`
       },

@@ -1,8 +1,6 @@
+// Types
 import Vue from 'vue'
-
-export interface ClassesObject {
-  [key: string]: boolean
-}
+import { ClassesObject } from './../../types'
 
 export type ColorString = string | undefined | null | false
 
@@ -10,31 +8,30 @@ function addColor (
   classes: ClassesObject = {},
   color?: ColorString
 ): ClassesObject {
-  const obj = { ...classes }
-
-  if (color) obj[color] = true
-
-  return obj
+  return {
+    ...classes,
+    [`${color}`]: true
+  }
 }
 
 export function addBackgroundColorClassChecks (
   classes: ClassesObject = {},
   color?: ColorString
 ): ClassesObject {
-  return addColor(classes, color)
+  return color ? addColor(classes, color) : classes
 }
 
 export function addTextColorClassChecks (
   classes: ClassesObject = {},
   color?: ColorString
 ): ClassesObject {
-  if (color) {
-    const [colorName, colorModifier] = color.toString().trim().split(' ')
+  if (!color) return classes
 
-    color = `${colorName}--text`
+  const [colorName, colorModifier] = color.toString().trim().split(' ')
 
-    if (colorModifier) color += ` text--${colorModifier}`
-  }
+  color = `${colorName}--text`
+
+  if (colorModifier) color += ` text--${colorModifier}`
 
   return addColor(classes, color)
 }

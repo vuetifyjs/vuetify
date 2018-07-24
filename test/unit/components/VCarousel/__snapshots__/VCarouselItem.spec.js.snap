@@ -2,7 +2,7 @@
 
 exports[`VCarouselItem.js should render component and match snapshot 1`] = `
 
-<div class="v-carousel__item v-responsive v-image"
+<div class="v-responsive v-image v-carousel__item"
      style="height: 100%; display: none;"
 >
   <div class="v-responsive__content">
@@ -13,7 +13,7 @@ exports[`VCarouselItem.js should render component and match snapshot 1`] = `
 
 exports[`VCarouselItem.js should throw warning when not used inside v-carousel 1`] = `
 
-<div class="v-carousel__item v-responsive v-image"
+<div class="v-responsive v-image v-carousel__item"
      style="height: 100%; display: none;"
 >
   <div class="v-responsive__content">

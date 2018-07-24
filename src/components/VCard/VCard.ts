@@ -8,12 +8,14 @@ import { VPaper } from '../VPaper'
 import Routable from '../../mixins/routable'
 
 // Helpers
+import { addPaperClasses } from '../VPaper/VPaper'
 import { convertToUnit } from '../../util/helpers'
+import { deprecate } from '../../util/console'
+import mixins from '../../util/mixins'
 
 // Types
 import { VNode } from 'vue'
-import mixins from '../../util/mixins'
-import { deprecate } from '../../util/console'
+import { ClassesObject } from './../../../types'
 
 /* @vue/component */
 export default mixins(
@@ -22,6 +24,12 @@ export default mixins(
 ).extend({
   name: 'v-card',
 
+  functional: false,
+
+  data: () => ({
+    isMouseOver: false as boolean
+  }),
+
   props: {
     elevation: {
       type: [Number, String],
@@ -29,6 +37,7 @@ export default mixins(
     },
     flat: Boolean,
     height: [Number, String],
+    hover: [Number, String],
     /* @deprecated */
     img: String,
     /* @deprecated */
@@ -38,10 +47,9 @@ export default mixins(
   },
 
   computed: {
-    classes (): object {
+    classes (): ClassesObject {
       return {
-        ...VPaper.options.computed.classes.call(this),
-        'v-card': true,
+        'v-paper v-card': true,
         'v-card--tile': this.tile
       }
     },
@@ -60,7 +68,17 @@ export default mixins(
 
       return this.flat
         ? 0
-        : VPaper.options.computed.computedElevation.call(this)
+        : this.isMouseOver ? this.hover : this.elevation
+    },
+    listeners (): object {
+      return this.hover === undefined ? {} : {
+        mouseenter: () => {
+          this.isMouseOver = true
+        },
+        mouseleave: () => {
+          this.isMouseOver = false
+        }
+      }
     },
     styles (): object {
       const style: Record<string, any> = {
@@ -84,10 +102,20 @@ export default mixins(
   render (h): VNode {
     const { tag, data } = this.generateRouteLink()
 
+    data.class = {
+      ...data.class,
+      ...addPaperClasses({
+        color: this.color,
+        dark: this.dark,
+        light: this.light,
+        elevation: this.computedElevation
+      })
+    }
+
     data.style = this.styles
     data.on = {
       ...data.on,
-      ...VPaper.options.computed.listeners.call(this)
+      ...this.listeners
     }
 
     return h(tag, data, this.$slots.default)
