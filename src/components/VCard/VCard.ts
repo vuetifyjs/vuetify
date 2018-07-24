@@ -72,11 +72,13 @@ export default mixins(
     },
     listeners (): object {
       return this.hover === undefined ? {} : {
-        mouseenter: () => {
+        mouseenter: (e: Event) => {
           this.isMouseOver = true
+          this.$emit('mouseenter', e)
         },
-        mouseleave: () => {
+        mouseleave: (e: Event) => {
           this.isMouseOver = false
+          this.$emit('mouseleave', e)
         }
       }
     },
