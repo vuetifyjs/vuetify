@@ -35,7 +35,7 @@ export default mixins(Colorable, Elevatable, Themeable).extend({
   functional: true,
 
   props: {
-    // TODO: inherit these (same as v-card)
+    // TODO: inherit these (same as v-icon)
     color: String,
     dark: Boolean,
     light: Boolean,
