@@ -6,8 +6,11 @@ import Colorable, { addBackgroundColorClassChecks } from '../../mixins/colorable
 import Elevatable, { addElevation } from '../../mixins/elevatable'
 import Themeable, { addTheme } from '../../mixins/themeable'
 
+// Utilities
+import mixins from '../../util/mixins'
+
 // Types
-import Vue, { VNode } from 'vue'
+import { VNode } from 'vue'
 import { ClassesObject } from './../../../types'
 import { ColorString } from './../../mixins/colorable'
 
@@ -25,15 +28,19 @@ export function addPaperClasses (props: PaperClasses): ClassesObject {
   }, props.color)
 }
 
-export default Vue.extend({
+/* @vue/component */
+export default mixins(Colorable, Elevatable, Themeable).extend({
   name: 'v-paper',
 
   functional: true,
 
   props: {
-    ...Colorable.options.props,
-    ...Elevatable.options.props,
-    ...Themeable.options.props,
+    // TODO: inherit these (same as v-card)
+    color: String,
+    dark: Boolean,
+    light: Boolean,
+    elevation: [Number, String],
+
     tag: {
       type: String,
       default: 'div'
