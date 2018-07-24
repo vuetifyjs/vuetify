@@ -34,7 +34,7 @@ const classifyBreakpoint = (width: number) => values.findIndex(bp => width < bp)
 /**
  * A Vue mixin to get the current width/height and the associated breakpoint.
  *
- *   <div v-if="$breakpoint.smAndDown">...</div>
+ *   <div v-if="$vuetify.breakpoint.smAndDown">...</div>
  *
  */
 export default Vue.extend({
