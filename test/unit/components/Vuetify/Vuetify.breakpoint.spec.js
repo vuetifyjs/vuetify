@@ -230,16 +230,13 @@ test('breakpoint.ts', ({ mount }) => {
   ]
 
   scenarios.forEach(scenario => {
-    it('should calculate breakpoint for ' + scenario.description, () => {
+    it('should calculate breakpoint for ' + scenario.description, async () => {
       const wrapper = mount({
         mixins: [breakpointMixin],
         render: h => h('div')
       })
-      wrapper.setData({
-        clientWidth: scenario.width,
-        clientHeight: scenario.height
-      })
-      const breakpoint = wrapper.vm.breakpoint
+      await resizeWindow(scenario.width, scenario.height)
+      const breakpoint = wrapper.vm
 
       expect(breakpoint.width).toBe(scenario.width)
       expect(breakpoint.height).toBe(scenario.height)
@@ -258,6 +255,6 @@ test('breakpoint.ts', ({ mount }) => {
     })
 
     await resizeWindow(715)
-    expect(wrapper.vm.breakpoint.width).toBe(715)
+    expect(wrapper.vm.width).toBe(715)
   })
 })

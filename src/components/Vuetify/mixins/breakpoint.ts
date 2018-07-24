@@ -8,69 +8,24 @@ const breakpoints = {
   lg: 1920 - 16,
   xl: Infinity
 }
-const keys = Object.keys(breakpoints)
+const keys = Object.keys(breakpoints) as (keyof typeof breakpoints)[]
 const values = Object.values(breakpoints)
-
-type bit3 = [boolean, boolean, boolean]
-type bit5 = [boolean, boolean, boolean, boolean, boolean]
-const false5: bit5 = [false, false, false, false, false]
-/**
- * Creates array of length 5 with all values false except at position `pos`
- */
-const one = (pos: number) => {
-  const mask = false5.slice() as bit5
-  mask[pos] = true
-  return mask
-}
-/**
- * Not created on the fly because there are multiple references to each
- */
-const tr: bit3[] = [
-  [false, false, false],
-  [true, false, false],
-  [true, true, false],
-  [true, true, true]
-]
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
-const breakpointExplainations: Omit<
-VuetifyBreakpoint,
-'width' | 'height'
->[] = keys.map((name, i) => {
-  const mask = one(i)
-  const [xs, sm, md, lg, xl] = mask
-  const [xsOnly, smOnly, mdOnly, lgOnly, xlOnly] = mask
-
-  const [smAndUp, mdAndUp, lgAndUp] = tr[Math.min(i, 3)]
-  const [lgAndDown, mdAndDown, smAndDown] = tr[Math.min(4 - i, 3)]
-
-  return {
-    // Definite breakpoint.
-    xs,
-    sm,
-    md,
-    lg,
-    xl,
-
-    // Useful e.g. to construct CSS class names dynamically.
-    name,
-
-    // Breakpoint ranges.
-    xsOnly,
-    smOnly,
-    smAndDown,
-    smAndUp,
-    mdOnly,
-    mdAndDown,
-    mdAndUp,
-    lgOnly,
-    lgAndDown,
-    lgAndUp,
-    xlOnly
-  }
+type Static = Omit<VuetifyBreakpoint, 'width' | 'height'>
+const breakpointExplainations: Static[] = keys.map((name, rowIndex) => {
+  const result: Record<
+  string,
+  keyof Omit<VuetifyBreakpoint, 'width' | 'height'> | boolean
+  > = { name }
+  keys.forEach((key: keyof typeof breakpoints, i) => {
+    result[key] = result[`${key}Only`] = i === rowIndex
+    result[`${key}AndDown`] = i >= rowIndex
+    result[`${key}AndUp`] = i <= rowIndex
+  })
+  return result as Static
 })
 
-const classifyBreakpoint = (width: number) =>
-  values.findIndex(bp => width < bp)
+const classifyBreakpoint = (width: number) => values.findIndex(bp => width < bp)
 
 /**
  * A modified version of https://gist.github.com/cb109/b074a65f7595cffc21cea59ce8d15f9b
@@ -83,23 +38,25 @@ const classifyBreakpoint = (width: number) =>
  *
  */
 export default Vue.extend({
-  data: () => ({
-    clientHeight: getClientHeight(),
-    clientWidth: getClientWidth(),
-    resizeTimeout: undefined as number | undefined
-  }),
-
-  computed: {
-    breakpoint (): VuetifyBreakpoint {
-      const cl = classifyBreakpoint(this.clientWidth)
-
-      const bools = breakpointExplainations[cl]
-
-      return Object.assign(bools, {
-        // For custom breakpoint logic.
-        width: this.clientWidth,
-        height: this.clientHeight
-      })
+  data () {
+    const width = getClientWidth()
+    const height = getClientHeight()
+    const cl = classifyBreakpoint(width)
+    return Object.assign(
+      {
+        clientHeight: height,
+        clientWidth: width,
+        width,
+        height,
+        cl,
+        resizeTimeout: undefined as number | undefined
+      },
+      breakpointExplainations[cl]
+    )
+  },
+  watch: {
+    cl (clnumber: number) {
+      Object.assign(this, breakpointExplainations[clnumber])
     }
   },
 
@@ -126,8 +83,16 @@ export default Vue.extend({
       this.resizeTimeout = window.setTimeout(this.setDimensions, 200)
     },
     setDimensions (): void {
-      this.clientHeight = getClientHeight()
-      this.clientWidth = getClientWidth()
+      const width = getClientWidth()
+      const height = getClientHeight()
+      const cl = classifyBreakpoint(width)
+      Object.assign(this, {
+        clientHeight: height,
+        clientWidth: width,
+        width,
+        height,
+        cl
+      })
     }
   }
 })
