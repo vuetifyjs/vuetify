@@ -1,6 +1,77 @@
 import Vue from 'vue'
 import { VuetifyBreakpoint } from 'types'
 
+const breakpoints = {
+  xs: 600,
+  sm: 960,
+  md: 1280 - 16,
+  lg: 1920 - 16,
+  xl: Infinity
+}
+const keys = Object.keys(breakpoints)
+const values = Object.values(breakpoints)
+
+type bit3 = [boolean, boolean, boolean]
+type bit5 = [boolean, boolean, boolean, boolean, boolean]
+const false5: bit5 = [false, false, false, false, false]
+/**
+ * Creates array of length 5 with all values false except at position `pos`
+ */
+const one = (pos: number) => {
+  const mask = false5.slice() as bit5
+  mask[pos] = true
+  return mask
+}
+/**
+ * Not created on the fly because there are multiple references to each
+ */
+const tr: bit3[] = [
+  [false, false, false],
+  [true, false, false],
+  [true, true, false],
+  [true, true, true]
+]
+type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
+const breakpointExplainations: Omit<
+VuetifyBreakpoint,
+'width' | 'height'
+>[] = keys.map((name, i) => {
+  const mask = one(i)
+  const [xs, sm, md, lg, xl] = mask
+  const [xsOnly, smOnly, mdOnly, lgOnly, xlOnly] = mask
+
+  const [smAndUp, mdAndUp, lgAndUp] = tr[Math.min(i, 3)]
+  const [lgAndDown, mdAndDown, smAndDown] = tr[Math.min(4 - i, 3)]
+
+  return {
+    // Definite breakpoint.
+    xs,
+    sm,
+    md,
+    lg,
+    xl,
+
+    // Useful e.g. to construct CSS class names dynamically.
+    name,
+
+    // Breakpoint ranges.
+    xsOnly,
+    smOnly,
+    smAndDown,
+    smAndUp,
+    mdOnly,
+    mdAndDown,
+    mdAndUp,
+    lgOnly,
+    lgAndDown,
+    lgAndUp,
+    xlOnly
+  }
+})
+
+const classifyBreakpoint = (width: number) =>
+  values.findIndex(bp => width < bp)
+
 /**
  * A modified version of https://gist.github.com/cb109/b074a65f7595cffc21cea59ce8d15f9b
  */
@@ -20,71 +91,15 @@ export default Vue.extend({
 
   computed: {
     breakpoint (): VuetifyBreakpoint {
-      const xs = this.clientWidth < 600
-      const sm = this.clientWidth < 960 && !xs
-      const md = this.clientWidth < (1280 - 16) && !(sm || xs)
-      const lg = this.clientWidth < (1920 - 16) && !(md || sm || xs)
-      const xl = this.clientWidth >= (1920 - 16)
+      const cl = classifyBreakpoint(this.clientWidth)
 
-      const xsOnly = xs
-      const smOnly = sm
-      const smAndDown = (xs || sm) && !(md || lg || xl)
-      const smAndUp = !xs && (sm || md || lg || xl)
-      const mdOnly = md
-      const mdAndDown = (xs || sm || md) && !(lg || xl)
-      const mdAndUp = !(xs || sm) && (md || lg || xl)
-      const lgOnly = lg
-      const lgAndDown = (xs || sm || md || lg) && !xl
-      const lgAndUp = !(xs || sm || md) && (lg || xl)
-      const xlOnly = xl
+      const bools = breakpointExplainations[cl]
 
-      let name
-      switch (true) {
-        case (xs):
-          name = 'xs'
-          break
-        case (sm):
-          name = 'sm'
-          break
-        case (md):
-          name = 'md'
-          break
-        case (lg):
-          name = 'lg'
-          break
-        default:
-          name = 'xl'
-          break
-      }
-
-      return {
-        // Definite breakpoint.
-        xs,
-        sm,
-        md,
-        lg,
-        xl,
-
-        // Useful e.g. to construct CSS class names dynamically.
-        name,
-
-        // Breakpoint ranges.
-        xsOnly,
-        smOnly,
-        smAndDown,
-        smAndUp,
-        mdOnly,
-        mdAndDown,
-        mdAndUp,
-        lgOnly,
-        lgAndDown,
-        lgAndUp,
-        xlOnly,
-
+      return Object.assign(bools, {
         // For custom breakpoint logic.
         width: this.clientWidth,
         height: this.clientHeight
-      }
+      })
     }
   },
 
@@ -121,10 +136,7 @@ export default Vue.extend({
 // https://stackoverflow.com/questions/1248081
 function getClientWidth () {
   if (typeof document === 'undefined') return 0 // SSR
-  return Math.max(
-    document.documentElement.clientWidth,
-    window.innerWidth || 0
-  )
+  return Math.max(document.documentElement.clientWidth, window.innerWidth || 0)
 }
 
 function getClientHeight () {
