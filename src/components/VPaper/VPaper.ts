@@ -9,8 +9,16 @@ import Themeable, { addTheme } from '../../mixins/themeable'
 // Types
 import Vue, { VNode } from 'vue'
 import { ClassesObject } from './../../../types'
+import { ColorString } from './../../mixins/colorable'
 
-export function addPaperClasses (props: any): ClassesObject {
+interface PaperClasses {
+  color?: ColorString
+  dark: boolean
+  elevation: string | number
+  light: boolean
+}
+
+export function addPaperClasses (props: PaperClasses): ClassesObject {
   return addBackgroundColorClassChecks({
     ...addTheme(props.light, props.dark),
     ...addElevation(props.elevation)
@@ -26,10 +34,6 @@ export default Vue.extend({
     ...Colorable.options.props,
     ...Elevatable.options.props,
     ...Themeable.options.props,
-    elevation: {
-      type: [Number, String],
-      default: 0
-    },
     tag: {
       type: String,
       default: 'div'
@@ -38,7 +42,12 @@ export default Vue.extend({
 
   render (h, { data, children, props }): VNode {
     data.staticClass = (`v-paper ${data.staticClass || ''}`).trim()
-    data.class = addPaperClasses(props)
+    data.class = addPaperClasses({
+      color: props.color,
+      dark: props.dark,
+      elevation: props.elevation,
+      light: props.light
+    })
 
     return h(props.tag, data, children)
   }

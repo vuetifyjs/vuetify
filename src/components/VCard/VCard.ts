@@ -40,6 +40,8 @@ export default mixins(
     hover: [Number, String],
     /* @deprecated */
     img: String,
+    maxHeight: [Number, String],
+    maxWidth: [Number, String],
     /* @deprecated */
     raised: Boolean,
     tile: Boolean,
@@ -82,17 +84,16 @@ export default mixins(
     },
     styles (): object {
       const style: Record<string, any> = {
-        height: convertToUnit(this.height)
+        height: convertToUnit(this.height),
+        maxHeight: convertToUnit(this.maxHeight),
+        maxWidth: convertToUnit(this.maxWidth),
+        width: convertToUnit(this.width)
       }
 
       if (this.img) {
         deprecate('<v-card img="...">', 'a nested <v-img>', this)
 
         style.background = `url("${this.img}") center center / cover no-repeat`
-      }
-
-      if (this.width) {
-        style.width = convertToUnit(this.width)
       }
 
       return style
