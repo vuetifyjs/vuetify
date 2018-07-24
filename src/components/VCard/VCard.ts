@@ -19,18 +19,16 @@ import { ClassesObject } from './../../../types'
 
 /* @vue/component */
 export default mixins(
-  Routable,
-  VPaper
+  Routable
 ).extend({
   name: 'v-card',
-
-  functional: false,
 
   data: () => ({
     isMouseOver: false as boolean
   }),
 
   props: {
+    ...VPaper.options.props,
     elevation: {
       type: [Number, String],
       default: 1
