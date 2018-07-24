@@ -86,4 +86,50 @@ test('VSelect', ({ mount, compileToFunctions }) => {
       { text: 'Foo', value: ['bar'] }
     ])
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/4359
+  // Vue modifies the `on` property of the
+  // computed `listData` — easiest way to fix
+  it('should select value when using a scoped slot', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        items: ['foo', 'bar']
+      },
+      slots: {
+        'no-data': [() => ({
+          render: h => h('div', 'No Data')
+        })]
+      }
+    })
+
+    // Will be undefined if fails
+    expect(wrapper.vm.listData.on).toBeTruthy()
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/4431
+  it('should accept null and "" as values', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        clearable: true,
+        items: [
+          { text: 'Foo', value: null },
+          { text: 'Bar', value: 'bar' }
+        ],
+        value: null
+      },
+    })
+
+    const icon = wrapper.first('.v-input__append-inner .v-icon')
+
+    expect(wrapper.vm.selectedItems.length).toBe(1)
+    expect(wrapper.vm.isDirty).toBe(true)
+
+    icon.trigger('click')
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.selectedItems.length).toBe(0)
+    expect(wrapper.vm.isDirty).toBe(false)
+    expect(wrapper.vm.internalValue).toBe(undefined)
+  })
 })

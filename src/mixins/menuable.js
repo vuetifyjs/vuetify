@@ -31,6 +31,7 @@ const dimensions = {
  * Can calculate X and Y axis overflows
  * As well as be manually positioned
  */
+/* @vue/component */
 export default {
   name: 'menuable',
 
@@ -39,16 +40,6 @@ export default {
     Stackable,
     Themeable
   ],
-
-  data: () => ({
-    absoluteX: 0,
-    absoluteY: 0,
-    dimensions: Object.assign({}, dimensions),
-    isContentActive: false,
-    pageYOffset: 0,
-    stackClass: 'v-menu__content--active',
-    stackMinZIndex: 6
-  }),
 
   props: {
     activator: {
@@ -98,6 +89,16 @@ export default {
       default: null
     }
   },
+
+  data: () => ({
+    absoluteX: 0,
+    absoluteY: 0,
+    dimensions: Object.assign({}, dimensions),
+    isContentActive: false,
+    pageYOffset: 0,
+    stackClass: 'v-menu__content--active',
+    stackMinZIndex: 6
+  }),
 
   computed: {
     computedLeft () {

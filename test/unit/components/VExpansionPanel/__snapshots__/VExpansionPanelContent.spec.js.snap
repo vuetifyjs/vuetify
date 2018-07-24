@@ -35,7 +35,7 @@ exports[`VExpansionPanelContent.js should render component and match snapshot 1`
     <span>
       header
     </span>
-    <div class="header__icon">
+    <div class="v-expansion-panel__header__icon">
       <span>
         actions
       </span>
@@ -79,7 +79,7 @@ exports[`VExpansionPanelContent.js should toggle panel on header click 1`] = `
     <span>
       header
     </span>
-    <div class="header__icon">
+    <div class="v-expansion-panel__header__icon">
       <i aria-hidden="true"
          class="v-icon material-icons"
       >

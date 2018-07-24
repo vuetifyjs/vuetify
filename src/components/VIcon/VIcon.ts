@@ -1,13 +1,17 @@
 import '../../stylus/components/_icons.styl'
 
+// Mixins
 import Themeable from '../../mixins/themeable'
 import Colorable from '../../mixins/colorable'
 
+// Util
 import {
   convertToUnit,
+  keys,
   remapInternalIcon
 } from '../../util/helpers'
 
+// Types
 import { VNode, VNodeChildren } from 'vue'
 import mixins from '../../util/mixins'
 
@@ -23,12 +27,9 @@ function isFontAwesome5 (iconType: string): boolean {
   return ['fas', 'far', 'fal', 'fab'].some(val => iconType.includes(val))
 }
 
-function keys<O> (o: O) {
-  return Object.keys(o) as (keyof O)[]
-}
-
 const addTextColorClassChecks = Colorable.options.methods.addTextColorClassChecks
 
+/* @vue/component */
 export default mixins(Colorable, Themeable).extend({
   name: 'v-icon',
 

@@ -5,16 +5,11 @@ import '../../stylus/components/_cards.styl'
 import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
 
+/* @vue/component */
 export default {
   name: 'v-picker',
 
   mixins: [Colorable, Themeable],
-
-  data () {
-    return {
-      defaultColor: 'primary'
-    }
-  },
 
   props: {
     fullWidth: Boolean,
@@ -27,6 +22,12 @@ export default {
       type: [Number, String],
       default: 290,
       validator: value => parseInt(value, 10) > 0
+    }
+  },
+
+  data () {
+    return {
+      defaultColor: 'primary'
     }
   },
 
@@ -57,9 +58,7 @@ export default {
     genBody () {
       return this.$createElement('div', {
         staticClass: 'v-picker__body',
-        'class': {
-          ...this.themeClasses
-        },
+        'class': this.themeClasses,
         style: this.fullWidth ? undefined : {
           width: this.width + 'px'
         }

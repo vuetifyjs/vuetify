@@ -5,6 +5,7 @@
  *
  * Used for creating the DOM elements for VMenu
  */
+/* @vue/component */
 export default {
   methods: {
     genActivator () {
@@ -13,7 +14,8 @@ export default {
       const options = {
         staticClass: 'v-menu__activator',
         'class': {
-          'v-menu__activator--active': this.hasJustFocused || this.isActive
+          'v-menu__activator--active': this.hasJustFocused || this.isActive,
+          'v-menu__activator--disabled': this.disabled
         },
         ref: 'activator',
         on: {}

@@ -7,7 +7,6 @@ v-range-slider($material)
     .v-slider.v-slider
       .v-slider__thumb
         background: $material.selection-controls.thumb.disabled
-        border-color: transparent
 
 theme(v-range-slider, "v-input--range-slider")
 
@@ -16,3 +15,8 @@ theme(v-range-slider, "v-input--range-slider")
   &.v-input--is-disabled
     .v-slider__track-fill
       display: none
+
+    &.v-input--slider
+      .v-slider.v-slider
+        .v-slider__thumb
+          border-color: transparent

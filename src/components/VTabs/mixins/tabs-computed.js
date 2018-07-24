@@ -3,6 +3,7 @@
  *
  * @mixin
  */
+/* @vue/component */
 export default {
   computed: {
     activeIndex () {
@@ -29,6 +30,8 @@ export default {
         return this.lazyValue
       },
       set (val) {
+        if (this.inputValue === val) return
+
         this.lazyValue = val
         this.$emit('input', val)
       }

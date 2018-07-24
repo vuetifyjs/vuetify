@@ -24,6 +24,7 @@ type ItemSlotProps = {
   click: Function
 }
 
+/* @vue/component */
 export default mixins(Colorable, Sizeable, Rippleable).extend({
   name: 'v-rating',
 

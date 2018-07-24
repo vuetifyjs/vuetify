@@ -1,15 +1,19 @@
 import '../../stylus/components/_button-toggle.styl'
 
+// Types
 import { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
 
+// Mixins
 import mixins from '../../util/mixins'
-
 import ButtonGroup from '../../mixins/button-group'
 import Themeable from '../../mixins/themeable'
+
+// Util
 import { consoleWarn } from '../../util/console'
 
-const VBtnToggle = mixins(ButtonGroup, Themeable).extend({
+/* @vue/component */
+export default mixins(ButtonGroup, Themeable).extend({
   name: 'v-btn-toggle',
 
   model: {
@@ -47,6 +51,12 @@ const VBtnToggle = mixins(ButtonGroup, Themeable).extend({
         this.update()
       },
       deep: true
+    }
+  },
+
+  created () {
+    if (this.multiple && !Array.isArray(this.inputValue)) {
+      consoleWarn('Model must be bound to an array if the multiple property is true.', this)
     }
   },
 
@@ -96,19 +106,7 @@ const VBtnToggle = mixins(ButtonGroup, Themeable).extend({
     }
   },
 
-  created () {
-    if (this.multiple && !Array.isArray(this.inputValue)) {
-      consoleWarn('Model must be bound to an array if the multiple property is true.', this)
-    }
-  },
-
   render (h): VNode {
     return h('div', { class: this.classes }, this.$slots.default)
   }
 })
-
-/* eslint-disable-next-line no-redeclare */
-export type VBtnToggle = InstanceType<typeof VBtnToggle> & {
-  $el: HTMLDivElement
-}
-export default VBtnToggle
