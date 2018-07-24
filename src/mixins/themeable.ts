@@ -8,12 +8,7 @@ interface Themeable extends Vue {
   }
 }
 
-/**
- * @param context
- * @param auto Will not inherit from parent if disabled
- */
-export function functionalThemeClasses (context: RenderContext, auto = true): object {
-  if (!auto && !(context.props.light || context.props.dark)) return {}
+export function functionalThemeClasses (context: RenderContext): object {
   const vm = {
     ...context.props,
     ...context.injections
