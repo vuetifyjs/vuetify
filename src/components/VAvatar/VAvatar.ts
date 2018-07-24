@@ -1,22 +1,24 @@
+// Styles
 import '../../stylus/components/_avatars.styl'
 
 // Mixins
-import Colorable from '../../mixins/colorable'
 import { convertToUnit } from '../../util/helpers'
 
 // Types
 import { VNode } from 'vue'
-import mixins from '../../util/mixins'
+import { VPaper } from '../VPaper'
 
 /* @vue/component */
-export default mixins(Colorable).extend({
+export default VPaper.extend({
   name: 'v-avatar',
 
-  functional: true,
-
   props: {
+    ...VPaper.options.props,
     // TODO: inherit these
     color: String,
+    dark: Boolean,
+    light: Boolean,
+    elevation: [Number, String],
 
     size: {
       type: [Number, String],
@@ -25,22 +27,24 @@ export default mixins(Colorable).extend({
     tile: Boolean
   },
 
-  render (h, { data, props, children }): VNode {
-    data.staticClass = (`v-avatar ${data.staticClass || ''}`).trim()
+  render (h, ctx): VNode {
+    const render = VPaper.options.render.call(null, h, ctx)
+    const { props } = ctx
 
-    if (props.tile) data.staticClass += ' v-avatar--tile'
+    render.data.staticClass += ' v-avatar'
+
+    if (props.tile) render.data.staticClass += ' v-avatar--tile'
+
+    if (props.height || props.width) return render
 
     const size = convertToUnit(props.size)
-    data.style = {
-      height: size,
-      width: size,
-      ...data.style
-    }
-    data.class = [
-      data.class,
-      Colorable.options.methods.addBackgroundColorClassChecks.call(props, {}, props.color)
-    ]
 
-    return h('div', data, children)
+    render.data.style = {
+      ...render.data.style,
+      height: size,
+      width: size
+    }
+
+    return render
   }
 })

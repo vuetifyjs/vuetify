@@ -3,7 +3,9 @@
 import Vue from 'vue'
 import { ClassesObject } from './../../types'
 
-export function addElevation (elevation: number | string): ClassesObject {
+export function addElevation (elevation: number | string | undefined | boolean | null): ClassesObject {
+  if (elevation == null || typeof elevation === 'boolean') return {}
+
   return {
     [`elevation-${elevation}`]: true
   }

@@ -171,3 +171,7 @@ export interface VuetifyGoToOptions {
 export interface ClassesObject {
   [key: string]: boolean
 }
+
+export interface StylesObject {
+  [key: string]: any
+}

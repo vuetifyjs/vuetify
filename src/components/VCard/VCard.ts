@@ -8,7 +8,7 @@ import { VPaper } from '../VPaper'
 import Routable from '../../mixins/routable'
 
 // Helpers
-import { addPaperClasses } from '../VPaper/VPaper'
+import { addPaperClasses, addPaperStyles } from '../VPaper/VPaper'
 import { convertToUnit } from '../../util/helpers'
 import { deprecate } from '../../util/console'
 import mixins from '../../util/mixins'
@@ -19,9 +19,12 @@ import { ClassesObject } from './../../../types'
 
 /* @vue/component */
 export default mixins(
+  VPaper,
   Routable
 ).extend({
   name: 'v-card',
+
+  functional: false,
 
   data: () => ({
     isMouseOver: false as boolean
@@ -34,16 +37,12 @@ export default mixins(
       default: 1
     },
     flat: Boolean,
-    height: [Number, String],
     hover: [Number, String],
     /* @deprecated */
     img: String,
-    maxHeight: [Number, String],
-    maxWidth: [Number, String],
     /* @deprecated */
     raised: Boolean,
-    tile: Boolean,
-    width: [Number, String]
+    tile: Boolean
   },
 
   computed: {
@@ -83,20 +82,13 @@ export default mixins(
       }
     },
     styles (): object {
-      const style: Record<string, any> = {
-        height: convertToUnit(this.height),
-        maxHeight: convertToUnit(this.maxHeight),
-        maxWidth: convertToUnit(this.maxWidth),
-        width: convertToUnit(this.width)
+      if (!this.img) return {}
+
+      deprecate('<v-card img="...">', 'a nested <v-img>', this)
+
+      return {
+        background: `url("${this.img}") center center / cover no-repeat`
       }
-
-      if (this.img) {
-        deprecate('<v-card img="...">', 'a nested <v-img>', this)
-
-        style.background = `url("${this.img}") center center / cover no-repeat`
-      }
-
-      return style
     }
   },
 
@@ -113,7 +105,17 @@ export default mixins(
       })
     }
 
-    data.style = this.styles
+    data.style = {
+      ...data.style,
+      ...this.styles,
+      ...addPaperStyles({
+        height: convertToUnit(this.height),
+        maxHeight: convertToUnit(this.maxHeight),
+        maxWidth: convertToUnit(this.maxWidth),
+        width: convertToUnit(this.width)
+      })
+    }
+
     data.on = {
       ...data.on,
       ...this.listeners

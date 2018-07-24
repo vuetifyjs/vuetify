@@ -11,8 +11,9 @@ import mixins from '../../util/mixins'
 
 // Types
 import { VNode } from 'vue'
-import { ClassesObject } from './../../../types'
+import { ClassesObject, StylesObject } from './../../../types'
 import { ColorString } from './../../mixins/colorable'
+import { convertToUnit, convertToObject } from '../../util/helpers'
 
 interface PaperClasses {
   color?: ColorString
@@ -21,11 +22,27 @@ interface PaperClasses {
   light: boolean
 }
 
+interface PaperStyles {
+  height: string | number | undefined
+  maxHeight: string | number | undefined
+  maxWidth: string | number | undefined
+  width: string | number | undefined
+}
+
 export function addPaperClasses (props: PaperClasses): ClassesObject {
   return addBackgroundColorClassChecks({
     ...addTheme(props.light, props.dark),
     ...addElevation(props.elevation)
   }, props.color)
+}
+
+export function addPaperStyles (styles: PaperStyles): StylesObject {
+  return {
+    height: convertToUnit(styles.height),
+    maxHeight: convertToUnit(styles.maxHeight),
+    maxWidth: convertToUnit(styles.maxWidth),
+    width: convertToUnit(styles.width)
+  }
 }
 
 /* @vue/component */
@@ -41,6 +58,10 @@ export default mixins(Colorable, Elevatable, Themeable).extend({
     light: Boolean,
     elevation: [Number, String],
 
+    height: [Number, String],
+    maxHeight: [Number, String],
+    maxWidth: [Number, String],
+    width: [Number, String],
     tag: {
       type: String,
       default: 'div'
@@ -49,12 +70,28 @@ export default mixins(Colorable, Elevatable, Themeable).extend({
 
   render (h, { data, children, props }): VNode {
     data.staticClass = (`v-paper ${data.staticClass || ''}`).trim()
-    data.class = addPaperClasses({
-      color: props.color,
-      dark: props.dark,
-      elevation: props.elevation,
-      light: props.light
-    })
+
+    const classes = convertToObject(data.class)
+    const styles = convertToObject(data.style)
+
+    data.class = {
+      ...classes,
+      ...addPaperClasses({
+        color: props.color,
+        dark: props.dark,
+        elevation: props.elevation,
+        light: props.light
+      })
+    }
+    data.style = {
+      ...styles,
+      ...addPaperStyles({
+        height: props.height,
+        maxHeight: props.maxHeight,
+        maxWidth: props.maxWidth,
+        width: props.width
+      })
+    }
 
     return h(props.tag, data, children)
   }
