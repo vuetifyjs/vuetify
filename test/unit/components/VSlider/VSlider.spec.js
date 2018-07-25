@@ -119,15 +119,15 @@ test('VSlider.vue', ({ mount }) => {
     })
 
     const input = jest.fn()
-    wrapper.instance().$on('input', input)
+    wrapper.vm.$on('input', input)
 
     wrapper.setProps({ value: 5 })
     await wrapper.vm.$nextTick()
-    expect(input).toBeCalledWith(6)
+    expect(input).toHaveBeenLastCalledWith(6)
 
     wrapper.setProps({ value: 7 })
     await wrapper.vm.$nextTick()
-    expect(input).toBeCalledWith(6)
+    expect(input).toHaveBeenLastCalledWith(6)
 
     expect(warning).toHaveBeenTipped()
   })
