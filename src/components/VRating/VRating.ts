@@ -142,11 +142,9 @@ export default mixins(
       }
     },
     getIconName (props: ItemSlotProps): string {
-      if (props.isHovered || props.isFilled) return this.fullIcon
-
-      return (this.isHovering && props.isHalfHovered) || (!this.isHovering && props.isHalfFilled)
-        ? this.halfIcon
-        : this.emptyIcon
+      const isFull = this.isHovering ? props.isHovered : props.isFilled
+      const isHalf = this.isHovering ? props.isHalfHovered : props.isHalfFilled
+      return isFull ? this.fullIcon : isHalf ? this.halfIcon : this.emptyIcon
     },
     getColor (props: ItemSlotProps): string {
       if (this.isHovering) {
