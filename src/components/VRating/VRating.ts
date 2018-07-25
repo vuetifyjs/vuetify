@@ -1,8 +1,5 @@
+// Styles
 import '../../stylus/components/_rating.styl'
-
-import { VNode, CreateElement, VNodeChildrenArrayContents } from 'vue'
-
-import mixins from '../../util/mixins'
 
 // Components
 import VIcon from '../VIcon'
@@ -11,8 +8,14 @@ import VIcon from '../VIcon'
 import Colorable from '../../mixins/colorable'
 import Sizeable from '../../mixins/sizeable'
 import Rippleable from '../../mixins/rippleable'
+import Themeable from '../../mixins/themeable'
 
-import { createRange, remapInternalIcon } from '../../util/helpers'
+// Utilities
+import { createRange } from '../../util/helpers'
+import mixins from '../../util/mixins'
+
+// Types
+import { VNode, VNodeDirective, VNodeChildrenArrayContents } from 'vue'
 
 type ItemSlotProps = {
   index: number
@@ -28,7 +31,8 @@ type ItemSlotProps = {
 export default mixins(
   Colorable,
   Rippleable,
-  Sizeable
+  Sizeable,
+  Themeable
 ).extend({
   name: 'v-rating',
 
@@ -71,6 +75,33 @@ export default mixins(
   }),
 
   computed: {
+    directives (): VNodeDirective[] {
+      if (this.readonly || !this.ripple) return []
+
+      return [{
+        name: 'ripple',
+        value: { circle: true }
+      } as VNodeDirective]
+    },
+    iconProps (): object {
+      const {
+        dark,
+        medium,
+        large,
+        light,
+        small,
+        xLarge
+      } = this.$props
+
+      return {
+        dark,
+        medium,
+        large,
+        light,
+        small,
+        xLarge
+      }
+    },
     isHovering (): boolean {
       return this.showHover && this.hoverIndex >= 0
     }
@@ -111,15 +142,11 @@ export default mixins(
       }
     },
     getIconName (props: ItemSlotProps): string {
-      let iconName
+      if (props.isHovered || props.isFilled) return this.fullIcon
 
-      if (this.isHovering) {
-        iconName = props.isHovered ? this.fullIcon : props.isHalfHovered ? this.halfIcon : this.emptyIcon
-      } else {
-        iconName = props.isFilled ? this.fullIcon : props.isHalfFilled ? this.halfIcon : this.emptyIcon
-      }
-
-      return remapInternalIcon(this, iconName)
+      return (this.isHovering && props.isHalfHovered) || (!this.isHovering && props.isHalfFilled)
+        ? this.halfIcon
+        : this.emptyIcon
     },
     getColor (props: ItemSlotProps): string {
       if (this.isHovering) {
@@ -137,35 +164,27 @@ export default mixins(
     onMouseLeave (e: MouseEvent): void {
       this.hoverIndex = -1
     },
-    genItem (h: CreateElement, i: number): VNode | VNodeChildrenArrayContents | string {
+    genItem (i: number): VNode | VNodeChildrenArrayContents | string {
       const props = this.createProps(i)
 
       if (this.$scopedSlots.item) return this.$scopedSlots.item(props)
 
-      let listeners = {
+      const listeners: Record<string, Function>= {
         click: props.click
-      } as any // TODO: Better solution to allow listeners.mousemove?
-
-      if (this.showHover) {
-        listeners = Object.assign(listeners, {
-          mouseenter: (e: MouseEvent) => this.onMouseEnter(e, i),
-          mouseleave: this.onMouseLeave
-        })
-
-        if (this.halfIncrements) listeners.mousemove = (e: MouseEvent) => this.onMouseEnter(e, i)
       }
 
-      const { small, medium, large, xLarge } = this.$props
-      const iconProps = { small, medium, large, xLarge }
+      if (this.showHover) {
+        listeners.mouseenter = (e: MouseEvent) => this.onMouseEnter(e, i)
+        listeners.mouseleave = this.onMouseLeave
 
-      return h(VIcon, {
-        directives: !this.readonly && this.ripple && [{
-          name: 'ripple',
-          value: {
-            circle: true
-          }
-        }] as any, // TODO
-        props: iconProps,
+        if (this.halfIncrements) {
+          listeners.mousemove = (e: MouseEvent) => this.onMouseEnter(e, i)
+        }
+      }
+
+      return this.$createElement(VIcon, {
+        directives: this.directives,
+        props: this.iconProps,
         class: this.addTextColorClassChecks({}, this.getColor(props)),
         on: listeners
       }, [this.getIconName(props)])
@@ -173,7 +192,7 @@ export default mixins(
   },
 
   render (h): VNode {
-    const children = createRange(this.length).map(i => this.genItem(h, i))
+    const children = createRange(this.length).map(i => this.genItem(i))
 
     return h('div', {
       staticClass: 'v-rating',

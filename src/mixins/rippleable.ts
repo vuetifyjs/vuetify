@@ -17,10 +17,6 @@ export default Vue.extend({
     }
   },
 
-  data: () => ({
-    rippleClasses: null
-  }),
-
   methods: {
     genRipple (data: VNodeData = {}): VNode | null {
       if (!this.ripple) return null
