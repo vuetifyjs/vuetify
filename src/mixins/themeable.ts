@@ -9,7 +9,7 @@ export default Vue.extend({
   },
 
   computed: {
-    themeClasses (): any {
+    themeClasses (): object {
       return {
         'theme--light': this.light,
         'theme--dark': this.dark

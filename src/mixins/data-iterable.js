@@ -18,26 +18,9 @@ import { consoleWarn } from '../util/console'
  * providing selection, pagination, sorting and filtering.
  *
  */
+/* @vue/component */
 export default {
   name: 'data-iterable',
-
-  data () {
-    return {
-      searchLength: 0,
-      defaultPagination: {
-        descending: false,
-        page: 1,
-        rowsPerPage: 5,
-        sortBy: null,
-        totalItems: 0
-      },
-      expanded: {},
-      actionsClasses: 'v-data-iterator__actions',
-      actionsRangeControlsClasses: 'v-data-iterator__actions__range-controls',
-      actionsSelectClasses: 'v-data-iterator__actions__select',
-      actionsPaginationClasses: 'v-data-iterator__actions__pagination'
-    }
-  },
 
   mixins: [Filterable, Loadable, Themeable],
 
@@ -156,6 +139,22 @@ export default {
       default: () => {}
     }
   },
+
+  data: () => ({
+    searchLength: 0,
+    defaultPagination: {
+      descending: false,
+      page: 1,
+      rowsPerPage: 5,
+      sortBy: null,
+      totalItems: 0
+    },
+    expanded: {},
+    actionsClasses: 'v-data-iterator__actions',
+    actionsRangeControlsClasses: 'v-data-iterator__actions__range-controls',
+    actionsSelectClasses: 'v-data-iterator__actions__select',
+    actionsPaginationClasses: 'v-data-iterator__actions__pagination'
+  }),
 
   computed: {
     computedPagination () {
@@ -387,7 +386,7 @@ export default {
         attrs: {
           'aria-label': this.$vuetify.t('$vuetify.dataIterator.prevPage')
         }
-      }, [this.$createElement(VIcon, this.prevIcon)])
+      }, [this.$createElement(VIcon, this.$vuetify.rtl ? this.nextIcon : this.prevIcon)])
     },
     genNextIcon () {
       const pagination = this.computedPagination
@@ -412,7 +411,7 @@ export default {
         attrs: {
           'aria-label': this.$vuetify.t('$vuetify.dataIterator.nextPage')
         }
-      }, [this.$createElement(VIcon, this.nextIcon)])
+      }, [this.$createElement(VIcon, this.$vuetify.rtl ? this.prevIcon : this.nextIcon)])
     },
     genSelect () {
       return this.$createElement('div', {

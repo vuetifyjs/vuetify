@@ -13,6 +13,13 @@ declare global {
     Vue: VueConstructor
   }
 
+  interface HTMLImageElement {
+    decode: () => Promise<never>
+  }
+
+  function parseInt(s: string | number, radix?: number): number
+  function parseFloat(string: string | number): number
+
   export const __VUETIFY_VERSION__: string
   export const __REQUIRED_VUE__: string
 }

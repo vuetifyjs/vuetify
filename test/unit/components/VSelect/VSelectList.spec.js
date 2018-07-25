@@ -118,4 +118,15 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.find('.v-list__tile').length).toBe(1)
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/4431
+  it('should display falsy items', () => {
+    const wrapper = mount(VSelectList, {
+      propsData: {
+        items: [0, null, false, undefined, '']
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

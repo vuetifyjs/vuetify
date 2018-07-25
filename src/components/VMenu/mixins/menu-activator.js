@@ -6,6 +6,7 @@
  * Handles the click and hover activation
  * Supports slotted and detached activators
  */
+/* @vue/component */
 export default {
   methods: {
     activatorClickHandler (e) {
