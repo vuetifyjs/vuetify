@@ -1,4 +1,6 @@
-export default {
+import Vue from 'vue'
+
+export default Vue.extend({
   props: {
     large: Boolean,
     medium: Boolean,
@@ -8,4 +10,4 @@ export default {
     small: Boolean,
     xLarge: Boolean
   }
-}
+})
