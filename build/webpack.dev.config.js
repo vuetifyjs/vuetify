@@ -3,6 +3,7 @@ const merge = require('webpack-merge')
 const HappyPack = require('happypack')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const { VuetifyProgressiveModule } = require('vuetify-loader')
 const { config: baseWebpackConfig, happyThreadPool } = require('./webpack.base.config')
 
 // Helpers
@@ -27,7 +28,12 @@ module.exports = merge(baseWebpackConfig, {
     rules: [
       {
         test: /\.vue$/,
-        loader: 'vue-loader'
+        loader: 'vue-loader',
+        options: {
+          compilerOptions: {
+            modules: [VuetifyProgressiveModule]
+          }
+        }
       },
       {
         test: /\.ts$/,
@@ -47,12 +53,27 @@ module.exports = merge(baseWebpackConfig, {
         ]
       },
       {
-        test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)(\?.*)?$/,
-        loader: 'url-loader',
-        query: {
-          limit: 10000,
-          name: 'img/[name].[hash:7].[ext]'
-        }
+        test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/,
+        oneOf: [
+          {
+            test: /\.(png|jpe?g|gif)$/,
+            resourceQuery: /vuetify-preload/,
+            use: [
+              'vuetify-loader/progressive-loader',
+              {
+                loader: 'url-loader',
+                options: { limit: 8000 }
+              }
+            ]
+          },
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 10000,
+              name: 'img/[name].[hash:7].[ext]'
+            }
+          }
+        ]
       }
     ]
   },

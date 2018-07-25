@@ -690,7 +690,7 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
 
     icon.trigger('click')
 
-    expect(wrapper.vm.internalSearch).toBe(null)
+    expect(wrapper.vm.internalSearch).toBe(undefined)
   })
 
   it('should propagate content class', () => {

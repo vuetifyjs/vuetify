@@ -320,6 +320,106 @@ exports[`VPagination.vue should only render start and end of range if length is 
 
 `;
 
+exports[`VPagination.vue should only render start and end of range if value is equals "left" 1`] = `
+
+<ul class="v-pagination">
+  <li>
+    <button class="v-pagination__navigation">
+      <i aria-hidden="true"
+         class="v-icon material-icons"
+      >
+        chevron_left
+      </i>
+    </button>
+  </li>
+  <li>
+    <button class="v-pagination__item">
+      1
+    </button>
+  </li>
+  <li>
+    <button class="v-pagination__item v-pagination__item--active primary">
+      2
+    </button>
+  </li>
+  <li>
+    <span class="v-pagination__more">
+      ...
+    </span>
+  </li>
+  <li>
+    <button class="v-pagination__item">
+      99
+    </button>
+  </li>
+  <li>
+    <button class="v-pagination__item">
+      100
+    </button>
+  </li>
+  <li>
+    <button class="v-pagination__navigation">
+      <i aria-hidden="true"
+         class="v-icon material-icons"
+      >
+        chevron_right
+      </i>
+    </button>
+  </li>
+</ul>
+
+`;
+
+exports[`VPagination.vue should only render start and end of range if value is equals "right" 1`] = `
+
+<ul class="v-pagination">
+  <li>
+    <button class="v-pagination__navigation">
+      <i aria-hidden="true"
+         class="v-icon material-icons"
+      >
+        chevron_left
+      </i>
+    </button>
+  </li>
+  <li>
+    <button class="v-pagination__item">
+      1
+    </button>
+  </li>
+  <li>
+    <button class="v-pagination__item">
+      2
+    </button>
+  </li>
+  <li>
+    <span class="v-pagination__more">
+      ...
+    </span>
+  </li>
+  <li>
+    <button class="v-pagination__item v-pagination__item--active primary">
+      99
+    </button>
+  </li>
+  <li>
+    <button class="v-pagination__item">
+      100
+    </button>
+  </li>
+  <li>
+    <button class="v-pagination__navigation">
+      <i aria-hidden="true"
+         class="v-icon material-icons"
+      >
+        chevron_right
+      </i>
+    </button>
+  </li>
+</ul>
+
+`;
+
 exports[`VPagination.vue should render component in RTL mode and match snapshot 1`] = `
 
 <ul class="v-pagination">
