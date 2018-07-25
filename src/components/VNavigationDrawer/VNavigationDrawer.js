@@ -14,8 +14,15 @@ import Touch from '../../directives/touch'
 // Helpers
 import { convertToUnit } from '../../util/helpers'
 
+/* @vue/component */
 export default {
   name: 'v-navigation-drawer',
+
+  directives: {
+    ClickOutside,
+    Resize,
+    Touch
+  },
 
   mixins: [
     Applicationable(null, [
@@ -27,20 +34,6 @@ export default {
     SSRBootable,
     Themeable
   ],
-
-  directives: {
-    ClickOutside,
-    Resize,
-    Touch
-  },
-
-  data: () => ({
-    isActive: false,
-    touchArea: {
-      left: 0,
-      right: 0
-    }
-  }),
 
   props: {
     clipped: Boolean,
@@ -71,6 +64,14 @@ export default {
     },
     value: { required: false }
   },
+
+  data: () => ({
+    isActive: false,
+    touchArea: {
+      left: 0,
+      right: 0
+    }
+  }),
 
   computed: {
     /**
@@ -113,6 +114,10 @@ export default {
         'theme--light': this.light
       }
     },
+    hasApp () {
+      return this.app &&
+        (!this.isMobile && !this.temporary)
+    },
     isMobile () {
       return !this.stateless &&
         !this.permanent &&
@@ -120,7 +125,8 @@ export default {
         this.$vuetify.breakpoint.width < parseInt(this.mobileBreakPoint, 10)
     },
     marginTop () {
-      if (!this.app) return 0
+      if (!this.hasApp) return 0
+
       let marginTop = this.$vuetify.application.bar
 
       marginTop += this.clipped
@@ -130,11 +136,17 @@ export default {
       return marginTop
     },
     maxHeight () {
-      if (!this.app) return '100%'
+      if (!this.hasApp) return null
 
-      return this.clipped
-        ? this.$vuetify.application.top + this.$vuetify.application.bottom
-        : this.$vuetify.application.bottom
+      const maxHeight = (
+        this.$vuetify.application.bottom +
+        this.$vuetify.application.footer +
+        this.$vuetify.application.bar
+      )
+
+      if (!this.clipped) return maxHeight
+
+      return maxHeight + this.$vuetify.application.top
     },
     reactsToClick () {
       return !this.stateless &&
@@ -163,7 +175,7 @@ export default {
       const styles = {
         height: convertToUnit(this.height),
         marginTop: `${this.marginTop}px`,
-        maxHeight: `calc(100% - ${this.maxHeight}px)`,
+        maxHeight: `calc(100% - ${+this.maxHeight}px)`,
         transform: `translateX(${this.calculatedTransform}px)`,
         width: `${this.calculatedWidth}px`
       }
@@ -326,6 +338,7 @@ export default {
           this.$emit('update:miniVariant', false)
         },
         transitionend: e => {
+          if (e.target !== e.currentTarget) return
           this.$emit('transitionend', e)
 
           // IE11 does not support new Event('resize')

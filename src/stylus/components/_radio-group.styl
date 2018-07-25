@@ -1,12 +1,6 @@
 @import '../bootstrap'
 @import '../theme'
 
-radiogroup($material)
-  .input-group--selection-controls
-    //
-
-theme(radiogroup, "radio-group")
-
 .v-input--radio-group
   .v-radio
     margin-bottom: 8px
@@ -14,6 +8,9 @@ theme(radiogroup, "radio-group")
   &__input
     display: flex
     width: 100%
+
+    & > .v-label
+      padding-bottom: 8px
 
   &--row
     .v-input--radio-group__input

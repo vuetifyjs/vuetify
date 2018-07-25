@@ -14,8 +14,13 @@ import ClickOutside from '../../directives/click-outside'
 // Helpers
 import { getZIndex, convertToUnit } from '../../util/helpers'
 
+/* @vue/component */
 export default {
   name: 'v-dialog',
+
+  directives: {
+    ClickOutside
+  },
 
   mixins: [
     Dependent,
@@ -25,20 +30,6 @@ export default {
     Stackable,
     Toggleable
   ],
-
-  directives: {
-    ClickOutside
-  },
-
-  data () {
-    return {
-      animate: false,
-      animateTimeout: null,
-      isDependent: false,
-      stackClass: 'v-dialog__content--active',
-      stackMinZIndex: 200
-    }
-  },
 
   props: {
     disabled: Boolean,
@@ -62,6 +53,15 @@ export default {
     transition: {
       type: [String, Boolean],
       default: 'dialog-transition'
+    }
+  },
+
+  data () {
+    return {
+      animate: false,
+      animateTimeout: null,
+      stackClass: 'v-dialog__content--active',
+      stackMinZIndex: 200
     }
   },
 
@@ -185,7 +185,10 @@ export default {
 
     if (this.$slots.activator) {
       children.push(h('div', {
-        'class': 'v-dialog__activator',
+        staticClass: 'v-dialog__activator',
+        'class': {
+          'v-dialog__activator--disabled': this.disabled
+        },
         on: {
           click: e => {
             e.stopPropagation()

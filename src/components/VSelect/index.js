@@ -5,6 +5,7 @@ import VCombobox from '../VCombobox'
 import rebuildSlots from '../../util/rebuildFunctionalSlots'
 import { deprecate } from '../../util/console'
 
+/* @vue/component */
 const wrapper = {
   functional: true,
 
@@ -12,19 +13,24 @@ const wrapper = {
 
   props: {
     // VAutoComplete
+    /** @deprecated */
     autocomplete: Boolean,
+    /** @deprecated */
     combobox: Boolean,
     multiple: Boolean,
     /** @deprecated */
     tags: Boolean,
-
     // VOverflowBtn
+    /** @deprecated */
     editable: Boolean,
+    /** @deprecated */
     overflow: Boolean,
+    /** @deprecated */
     segmented: Boolean
   },
 
   render (h, { props, data, slots, parent }) {
+    delete data.model
     const children = rebuildSlots(slots(), h)
 
     if (props.autocomplete) {

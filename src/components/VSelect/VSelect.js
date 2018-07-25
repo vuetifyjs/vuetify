@@ -12,7 +12,6 @@ import VTextField from '../VTextField/VTextField'
 
 // Mixins
 import Comparable from '../../mixins/comparable'
-import Dependent from '../../mixins/dependent'
 import Filterable from '../../mixins/filterable'
 import Menuable from '../../mixins/menuable'
 
@@ -34,39 +33,22 @@ const fakeMenuable = {
   props: Menuable.props
 }
 
+/* @vue/component */
 export default {
   name: 'v-select',
-
-  extends: VTextField,
 
   directives: {
     ClickOutside
   },
 
+  extends: VTextField,
+
   mixins: [
     fakeVMenu,
     fakeMenuable,
     Comparable,
-    Dependent,
     Filterable
   ],
-
-  data: vm => ({
-    attrsInput: { role: 'combobox' },
-    cachedItems: vm.cacheItems ? vm.items : [],
-    content: null,
-    isBooted: false,
-    isMenuActive: false,
-    lastItem: 20,
-    // As long as a value is defined, show it
-    // Otherwise, check if multiple
-    // to determine which default to provide
-    lazyValue: vm.value != null
-      ? vm.value
-      : vm.multiple ? [] : undefined,
-    selectedIndex: -1,
-    selectedItems: []
-  }),
 
   props: {
     appendIcon: {
@@ -74,7 +56,10 @@ export default {
       default: '$vuetify.icons.dropdown'
     },
     appendIconCb: Function,
-    attach: Boolean,
+    attach: {
+      type: null,
+      default: false
+    },
     auto: Boolean,
     browserAutocomplete: {
       type: String,
@@ -126,6 +111,23 @@ export default {
     singleLine: Boolean
   },
 
+  data: vm => ({
+    attrsInput: { role: 'combobox' },
+    cachedItems: vm.cacheItems ? vm.items : [],
+    content: null,
+    isBooted: false,
+    isMenuActive: false,
+    lastItem: 20,
+    // As long as a value is defined, show it
+    // Otherwise, check if multiple
+    // to determine which default to provide
+    lazyValue: vm.value !== undefined
+      ? vm.value
+      : vm.multiple ? [] : undefined,
+    selectedIndex: -1,
+    selectedItems: []
+  }),
+
   computed: {
     /* All items that the select has */
     allItems () {
@@ -143,40 +145,19 @@ export default {
     computedItems () {
       return this.allItems
     },
+    counterValue () {
+      return this.multiple
+        ? this.selectedItems.length
+        : (this.getText(this.selectedItems[0]) || '').toString().length
+    },
     directives () {
-      return [{
+      return this.isFocused ? [{
         name: 'click-outside',
-        // TODO: Check into this firing when it shouldn't
-        value: e => {
-          if (this.isMenuActive) {
-            this.onKeyDown(e)
-          }
-
-          this.isMenuActive = false
-          this.isFocused = false
-          this.editingIndex = -1
-          this.selectedIndex = -1
-        },
+        value: this.blur,
         args: {
-          closeConditional: e => {
-            return (
-              // Check if click originates
-              // from within the content
-              (
-                !!this.content &&
-                !this.content.contains(e.target)
-              ) &&
-              // Check if click originates
-              // from within the element
-              (
-                !!this.$el &&
-                !this.$el.contains(e.target) &&
-                e.target !== this.$el
-              )
-            )
-          }
+          closeConditional: this.closeConditional
         }
-      }]
+      }] : undefined
     },
     dynamicHeight () {
       return 'auto'
@@ -240,7 +221,8 @@ export default {
   },
 
   watch: {
-    internalValue () {
+    internalValue (val) {
+      this.initialValue = val
       this.$emit('change', this.internalValue)
       this.setSelectedItems()
     },
@@ -269,23 +251,39 @@ export default {
   },
 
   mounted () {
-    // If instance is being destroyed
-    // do not run mounted functions
-    if (this._isDestroyed) return
-
-    this.content = this.$refs.menu.$refs.content
+    this.content = this.$refs.menu && this.$refs.menu.$refs.content
   },
 
   methods: {
+    /** @public */
+    blur () {
+      this.isMenuActive = false
+      this.isFocused = false
+      this.$refs.input && this.$refs.input.blur()
+      this.selectedIndex = -1
+    },
+    /** @public */
     activateMenu () {
       this.isMenuActive = true
     },
     clearableCallback () {
-      this.internalValue = this.multiple ? [] : null
+      this.internalValue = this.multiple ? [] : undefined
       this.$emit('change', this.internalValue)
       this.$nextTick(() => this.$refs.input.focus())
 
       if (this.openOnClear) this.isMenuActive = true
+    },
+    closeConditional (e) {
+      return (
+        // Click originates from outside the menu content
+        !!this.content &&
+        !this.content.contains(e.target) &&
+
+        // Click originates from outside the element
+        !!this.$el &&
+        !this.$el.contains(e.target) &&
+        e.target !== this.$el
+      )
     },
     filterDuplicates (arr) {
       const uniqueValues = new Map()
@@ -381,7 +379,7 @@ export default {
         selections,
         this.suffix ? this.genAffix('suffix') : null,
         this.genClearIcon(),
-        this.genSlot('append', 'inner', [this.genIcon('append')])
+        this.genIconSlot()
       ])
 
       return [this.genMenu(activator)]
@@ -404,7 +402,12 @@ export default {
       }
     },
     genListWithSlot () {
-      return this.$createElement(VSelectList, this.listData, [
+      // Requires destructuring due to Vue
+      // modifying the `on` property when passed
+      // as a referenced object
+      return this.$createElement(VSelectList, {
+        ...this.listData
+      }, [
         this.$createElement('template', {
           slot: 'no-data'
         }, this.$slots['no-data'])
@@ -421,14 +424,7 @@ export default {
         props[prop] = this[prop]
       }
 
-      // These styles encompass the prepend
-      // and append icons. Change activator
-      // to the entire component
-      if (this.isSolo) {
-        props.activator = this.$el
-      } else {
-        props.activator = this.$refs['input-slot']
-      }
+      props.activator = this.$refs['input-slot']
 
       Object.assign(props, this.menuProps)
 
@@ -441,6 +437,8 @@ export default {
         this.attach === 'attach' // If bound as boolean prop in pug (v-menu(attach))
       ) {
         props.attach = this.$el
+      } else {
+        props.attach = this.attach
       }
 
       return this.$createElement(VMenu, {
@@ -519,15 +517,17 @@ export default {
       if (this.selectedItems.length === 0) {
         this.isMenuActive = true
       }
-
-      this.editingIndex = -1
       this.selectedIndex = -1
     },
     onClick () {
       if (this.isDisabled) return
 
-      this.onFocus()
       this.isMenuActive = true
+
+      if (!this.isFocused) {
+        this.isFocused = true
+        this.$emit('focus')
+      }
     },
     onEnterDown () {
       this.onBlur()
@@ -548,7 +548,7 @@ export default {
       ].includes(keyCode)) this.activateMenu()
 
       // This should do something different
-      if (e.keyCode === keyCodes.enter) return this.onEnterDown()
+      if (keyCode === keyCodes.enter) return this.onEnterDown()
 
       // If escape deactivate the menu
       if (keyCode === keyCodes.esc) return this.onEscDown(e)

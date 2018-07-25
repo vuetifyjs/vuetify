@@ -9,17 +9,11 @@ import {
   deepEqual
 } from '../../util/helpers'
 
+/* @vue/component */
 export default {
   name: 'v-range-slider',
 
   extends: VSlider,
-
-  data: vm => ({
-    activeThumb: null,
-    lazyValue: !vm.value.length
-      ? [0, 0]
-      : vm.value
-  }),
 
   props: {
     value: {
@@ -27,6 +21,13 @@ export default {
       default: () => ([])
     }
   },
+
+  data: vm => ({
+    activeThumb: null,
+    lazyValue: !vm.value.length
+      ? [0, 0]
+      : vm.value
+  }),
 
   computed: {
     classes () {

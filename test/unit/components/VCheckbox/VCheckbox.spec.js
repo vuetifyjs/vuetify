@@ -180,7 +180,7 @@ test('VCheckbox.js', ({ mount }) => {
 
     wrapper.setProps({ disabled: true })
 
-    expect(ripple.element._ripple.enabled).toBe(false)
+    expect(wrapper.contains('.v-input--selection-controls__ripple')).toBe(false)
   })
 
   it('should set ripple centered property when enabled', () => {
@@ -191,12 +191,11 @@ test('VCheckbox.js', ({ mount }) => {
       }
     })
 
-    const ripple = wrapper.first('.v-input--selection-controls__ripple')
-
-    expect(ripple.element._ripple.enabled).toBe(false)
+    expect(wrapper.contains('.v-input--selection-controls__ripple')).toBe(false)
 
     wrapper.setProps({ disabled: false })
 
+    const ripple = wrapper.first('.v-input--selection-controls__ripple')
     expect(ripple.element._ripple.enabled).toBe(true)
     expect(ripple.element._ripple.centered).toBe(true)
   })
@@ -395,6 +394,16 @@ test('VCheckbox.js', ({ mount }) => {
     wrapper.setData({ value: 'fizz'})
     expect(wrapper.html()).toMatchSnapshot()
     wrapper.setData({ value: 'buzz'})
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render themed component', () => {
+    const wrapper = mount(VCheckbox, {
+      propsData: {
+        light: true
+      }
+    })
+
     expect(wrapper.html()).toMatchSnapshot()
   })
 })

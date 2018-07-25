@@ -2,6 +2,7 @@ import '../../stylus/components/_steppers.styl'
 
 import Themeable from '../../mixins/themeable'
 
+/* @vue/component */
 export default {
   name: 'v-stepper',
 
@@ -13,6 +14,13 @@ export default {
     }
   },
 
+  props: {
+    nonLinear: Boolean,
+    altLabels: Boolean,
+    vertical: Boolean,
+    value: [Number, String]
+  },
+
   data () {
     return {
       inputValue: null,
@@ -21,13 +29,6 @@ export default {
       content: [],
       isReverse: false
     }
-  },
-
-  props: {
-    nonLinear: Boolean,
-    altLabels: Boolean,
-    vertical: Boolean,
-    value: [Number, String]
   },
 
   computed: {

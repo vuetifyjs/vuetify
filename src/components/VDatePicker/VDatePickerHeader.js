@@ -11,6 +11,7 @@ import Themeable from '../../mixins/themeable'
 // Utils
 import { createNativeLocaleFormatter, monthChange } from './util'
 
+/* @vue/component */
 export default {
   name: 'v-date-picker-header',
 
@@ -18,13 +19,6 @@ export default {
     Colorable,
     Themeable
   ],
-
-  data () {
-    return {
-      isReversing: false,
-      defaultColor: 'accent'
-    }
-  },
 
   props: {
     disabled: Boolean,
@@ -49,6 +43,13 @@ export default {
     value: {
       type: [Number, String],
       required: true
+    }
+  },
+
+  data () {
+    return {
+      isReversing: false,
+      defaultColor: 'accent'
     }
   },
 
@@ -90,7 +91,7 @@ export default {
           }
         }
       }, [
-        this.$createElement(VIcon, change < 0 ? this.prevIcon : this.nextIcon)
+        this.$createElement(VIcon, ((change < 0) === !this.$vuetify.rtl) ? this.prevIcon : this.nextIcon)
       ])
     },
     calculateChange (sign) {
@@ -113,7 +114,7 @@ export default {
 
       const transition = this.$createElement('transition', {
         props: {
-          name: this.isReversing ? 'tab-reverse-transition' : 'tab-transition'
+          name: (this.isReversing === !this.$vuetify.rtl) ? 'tab-reverse-transition' : 'tab-transition'
         }
       }, [header])
 
@@ -129,9 +130,7 @@ export default {
   render () {
     return this.$createElement('div', {
       staticClass: 'v-date-picker-header',
-      class: {
-        ...this.themeClasses
-      }
+      class: this.themeClasses
     }, [
       this.genBtn(-1),
       this.genHeader(),
