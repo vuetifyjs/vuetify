@@ -132,4 +132,24 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect(wrapper.vm.isDirty).toBe(false)
     expect(wrapper.vm.internalValue).toBe(undefined)
   })
+
+  it('should only calls change once when clearing', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        clearable: true,
+        value: 'foo'
+      }
+    })
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    const icon = wrapper.first('.v-input__icon > .v-icon')
+
+    icon.trigger('click')
+
+    await wrapper.vm.$nextTick()
+
+    expect(change).toHaveBeenCalledTimes(1)
+  })
 })
