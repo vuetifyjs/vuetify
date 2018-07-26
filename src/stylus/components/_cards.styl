@@ -14,7 +14,6 @@ theme(v-card, "v-card")
   min-width: 0
   position: relative
   text-decoration: none
-  elevation(1)
 
   > *:first-child:not(.v-btn):not(.v-chip)
     border-top-left-radius: inherit
@@ -24,22 +23,13 @@ theme(v-card, "v-card")
     border-bottom-left-radius: inherit
     border-bottom-right-radius: inherit
 
-  &--raised
-    elevation(3)
-
   &--tile
     border-radius: 0
-
-  &--flat
-    elevation(0)
 
   &--hover
     cursor: pointer
     transition: all .4s cubic-bezier(.25, .8, .25, 1)
     transition-property: box-shadow
-
-    &:hover
-      elevation(8)
 
   &__title
     align-items: center
