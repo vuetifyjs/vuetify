@@ -66,7 +66,7 @@ export default {
   },
 
   watch: {
-    expand: function expand() {
+    expand: function expand () {
       if (this.controlled) {
         this.isActive = !this.isActive
       }
