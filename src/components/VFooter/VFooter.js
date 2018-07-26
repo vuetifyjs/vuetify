@@ -70,8 +70,6 @@ export default {
      * @return {number}
      */
     updateApplication () {
-      if (this.inset) return 0
-
       const height = parseInt(this.height)
 
       return isNaN(height)
