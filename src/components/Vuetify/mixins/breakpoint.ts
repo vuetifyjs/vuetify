@@ -17,7 +17,7 @@ const breakpointExplainations: Static[] = keys.map((name, rowIndex) => {
   string,
   keyof Omit<VuetifyBreakpoint, 'width' | 'height'> | boolean
   > = { name }
-  keys.forEach((key: keyof typeof breakpoints, i) => {
+  keys.forEach((key, i) => {
     result[key] = result[`${key}Only`] = i === rowIndex
     result[`${key}AndDown`] = i >= rowIndex
     result[`${key}AndUp`] = i <= rowIndex
@@ -106,8 +106,5 @@ function getClientWidth () {
 
 function getClientHeight () {
   if (typeof document === 'undefined') return 0 // SSR
-  return Math.max(
-    document.documentElement.clientHeight,
-    window.innerHeight || 0
-  )
+  return Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
 }
