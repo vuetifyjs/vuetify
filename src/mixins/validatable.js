@@ -1,4 +1,4 @@
-
+import { deepEqual } from '../util/helpers'
 import { inject as RegistrableInject } from './registrable'
 import { consoleError } from '../util/console'
 
@@ -113,7 +113,8 @@ export default {
 
   watch: {
     rules: {
-      handler () {
+      handler (newVal, oldVal) {
+        if (deepEqual(newVal, oldVal)) return
         this.validate()
       },
       deep: true
