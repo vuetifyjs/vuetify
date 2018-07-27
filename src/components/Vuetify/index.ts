@@ -34,7 +34,7 @@ const Vuetify: VuetifyPlugin = {
         t: lang.t.bind(lang)
       }
     })
-    Vue.prototype.$vuetify.breakpoint=new Vue(breakpoint)
+    Vue.prototype.$vuetify.breakpoint = new Vue(breakpoint)
 
     if (opts.transitions) {
       Object.values(opts.transitions).forEach(transition => {

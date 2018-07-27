@@ -8,8 +8,9 @@ const breakpoints = {
   lg: 1920 - 16,
   xl: Infinity
 }
+
 const keys = Object.keys(breakpoints) as (keyof typeof breakpoints)[]
-const values = Object.values(breakpoints)
+
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
 type Static = Omit<VuetifyBreakpoint, 'width' | 'height'>
 const breakpointExplainations: Static[] = keys.map((name, rowIndex) => {
@@ -25,6 +26,7 @@ const breakpointExplainations: Static[] = keys.map((name, rowIndex) => {
   return result as Static
 })
 
+const values = Object.values(breakpoints)
 const classifyBreakpoint = (width: number) => values.findIndex(bp => width < bp)
 
 /**
@@ -41,21 +43,22 @@ export default Vue.extend({
   data () {
     const width = getClientWidth()
     const height = getClientHeight()
-    const cl = classifyBreakpoint(width)
+    const viewportRangeIndex = classifyBreakpoint(width)
     return Object.assign(
       {
+        ...breakpointExplainations[viewportRangeIndex],
         clientHeight: height,
         clientWidth: width,
         width,
         height,
-        cl,
+        viewportRangeIndex,
         resizeTimeout: undefined as number | undefined
-      },
-      breakpointExplainations[cl]
+      }
+
     )
   },
   watch: {
-    cl (clnumber: number) {
+    viewportRangeIndex (clnumber: number) {
       Object.assign(this, breakpointExplainations[clnumber])
     }
   },
@@ -85,13 +88,13 @@ export default Vue.extend({
     setDimensions (): void {
       const width = getClientWidth()
       const height = getClientHeight()
-      const cl = classifyBreakpoint(width)
+      const viewportRangeIndex = classifyBreakpoint(width)
       Object.assign(this, {
         clientHeight: height,
         clientWidth: width,
         width,
         height,
-        cl
+        viewportRangeIndex
       })
     }
   }
