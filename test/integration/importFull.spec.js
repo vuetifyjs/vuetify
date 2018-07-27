@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import Vuetify from '../../src/'
+import Vuetify from '@/'
 
 describe('full import', () => {
   Vue.use(Vuetify)
@@ -7,6 +7,7 @@ describe('full import', () => {
   it('should register all subcomponents', () => {
     expect(registeredComponents).toMatchSnapshot()
   })
+
   it('should register all names in PascalCase', () => {
     registeredComponents.forEach(name =>
       expect(name).toMatch(/^(?:[A-Z][a-z]*)+$/)
