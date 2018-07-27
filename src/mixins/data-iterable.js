@@ -465,10 +465,11 @@ export default {
       const rangeControls = this.$createElement('div', {
         'class': this.actionsRangeControlsClasses
       }, [
+        this.$slots['actions-prepend'] ? this.$createElement('div', {}, this.$slots['actions-prepend']) : null,
         this.genPagination(),
         this.genPrevIcon(),
         this.genNextIcon(),
-        this.$slots['actions-extras'] ? this.$createElement('div', {}, this.$slots['actions-extras']) : null
+        this.$slots['actions-append'] ? this.$createElement('div', {}, this.$slots['actions-append']) : null
       ])
 
       return [this.$createElement('div', {
