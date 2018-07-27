@@ -178,7 +178,9 @@ export default {
         openOnClick: false,
         value: this.isMenuActive,
         offsetY: this.offsetY,
-        nudgeBottom: this.offsetY ? 1 : 0 // convert to int
+        nudgeBottom: this.nudgeBottom
+          ? this.nudgeBottom
+          : this.offsetY ? 1 : 0 // convert to int
       }
     },
     listData () {

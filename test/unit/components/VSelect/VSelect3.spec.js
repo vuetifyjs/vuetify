@@ -152,4 +152,23 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     expect(change).toHaveBeenCalledTimes(1)
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/4713
+  it('should nudge select menu', () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        nudgeTop: 5,
+        nudgeRight: 5,
+        nudgeBottom: 5,
+        nudgeLeft: 5
+      }
+    })
+
+    const menu = wrapper.vm.$refs.menu
+
+    expect(menu.nudgeTop).toBe(5)
+    expect(menu.nudgeRight).toBe(5)
+    expect(menu.nudgeBottom).toBe(5)
+    expect(menu.nudgeLeft).toBe(5)
+  })
 })
