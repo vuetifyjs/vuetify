@@ -48,7 +48,6 @@ export default {
     /** @deprecated */
     prependIconCb: Function,
     readonly: Boolean,
-    tabindex: { default: 0 },
     value: { required: false }
   },
 
@@ -161,11 +160,7 @@ export default {
               e.stopPropagation()
 
               this.$emit(eventName, e)
-              if (this.$listeners[eventName]) {
-                this.$listeners[eventName](e)
-              } else if (cb) {
-                cb(e)
-              }
+              cb && cb(e)
             },
             // Container has mouseup event that will
             // trigger menu open if enclosed

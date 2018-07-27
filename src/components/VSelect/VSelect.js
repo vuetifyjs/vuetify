@@ -121,7 +121,7 @@ export default {
     // As long as a value is defined, show it
     // Otherwise, check if multiple
     // to determine which default to provide
-    lazyValue: vm.value != null
+    lazyValue: vm.value !== undefined
       ? vm.value
       : vm.multiple ? [] : undefined,
     selectedIndex: -1,
@@ -178,7 +178,9 @@ export default {
         openOnClick: false,
         value: this.isMenuActive,
         offsetY: this.offsetY,
-        nudgeBottom: this.offsetY ? 1 : 0 // convert to int
+        nudgeBottom: this.nudgeBottom
+          ? this.nudgeBottom
+          : this.offsetY ? 1 : 0 // convert to int
       }
     },
     listData () {
@@ -267,8 +269,7 @@ export default {
       this.isMenuActive = true
     },
     clearableCallback () {
-      this.internalValue = this.multiple ? [] : null
-      this.$emit('change', this.internalValue)
+      this.internalValue = this.multiple ? [] : undefined
       this.$nextTick(() => this.$refs.input.focus())
 
       if (this.openOnClear) this.isMenuActive = true

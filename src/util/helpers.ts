@@ -58,7 +58,7 @@ export function createSimpleTransition (
 export function createJavaScriptTransition (
   name: string,
   functions: Record<string, () => any>,
-  css = true,
+  css = false,
   mode = 'in-out'
 ): FunctionalComponentOptions {
   return {
@@ -129,6 +129,11 @@ export function getNestedValue (obj: any, path: (string | number)[], fallback?: 
 
 export function deepEqual (a: any, b: any): boolean {
   if (a === b) return true
+
+  if (a instanceof Date && b instanceof Date) {
+    // If the values are Date, they were convert to timestamp with getTime and compare it
+    if (a.getTime() !== b.getTime()) return false
+  }
 
   if (a !== Object(a) || b !== Object(b)) {
     // If the values aren't objects, they were already checked for equality

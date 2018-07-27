@@ -189,9 +189,7 @@ export default {
   render (h) {
     const data = {
       staticClass: 'v-menu',
-      style: {
-        display: this.fullWidth ? 'block' : 'inline-block'
-      },
+      class: { 'v-menu--inline': !this.fullWidth && this.$slots.activator },
       directives: [{
         arg: 500,
         name: 'resize',

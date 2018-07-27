@@ -247,7 +247,7 @@ export default {
           'aria-label': this.label,
           name: this.name,
           role: 'slider',
-          tabindex: this.disabled ? -1 : undefined,
+          tabindex: this.disabled ? -1 : this.$attrs.tabindex,
           type: 'range',
           value: this.internalValue,
           readonly: true,
