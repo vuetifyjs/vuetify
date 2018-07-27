@@ -59,6 +59,29 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
     }
   }
 
+  function dataTableTestSortData () {
+    return {
+      propsData: {
+        locale: 'de',
+        pagination: {
+          sortBy: 'col1',
+          rowsPerPage: 5,
+          page: 1
+        },
+        headers: [
+          { text: 'First Column', value: 'col1', class: 'a-string' },
+        ],
+        items: [
+          { col1: 'Anna' },
+          { col1: 'Lidia' },
+          { col1: 'Robert' },
+          { col1: 'Łucja' },
+          { col1: 'Walter' },
+        ]
+      }
+    }
+  }
+
   // TODO: This doesn't actually test anything
   it.skip('should be able to filter null and undefined values', async () => {
     const data = dataTableTestData()
@@ -425,6 +448,30 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
     expect(wrapper.vm.selected.hasOwnProperty(2)).toBe(true)
     expect(wrapper.vm.selected[2]).toBe(true)
 
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should match a snapshot with sorted in Germany', () => {
+    const data = dataTableTestSortData()
+
+    const vm = new Vue()
+    const items = props => vm.$createElement('td', [props.item.col1])
+    const component = Vue.component('test', {
+      render (h) {
+        return h(VDataTable, {
+          props: {
+            ...data.propsData
+          },
+          scopedSlots: {
+            items
+          }
+        })
+      }
+    })
+
+    const wrapper = mount(component)
+
+    expect(wrapper.html()).toMatchSnapshot()
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 })
