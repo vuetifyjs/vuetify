@@ -77,6 +77,11 @@ theme(v-select, 'v-select')
           .v-select__selections
             min-height: 56px
 
+  &.v-text-field--reverse
+    .v-select__slot,
+    .v-select__selections
+      flex-direction: row-reverse
+
   &__selections
     align-items: center
     display: flex
