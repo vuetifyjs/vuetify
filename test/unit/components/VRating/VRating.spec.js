@@ -75,7 +75,7 @@ test('VRating.js', ({ mount }) => {
 
     const wrapper = mount(VRating, {
       propsData: {
-        showHover: true
+        hover: true
       }
     })
 
@@ -140,7 +140,7 @@ test('VRating.js', ({ mount }) => {
     const wrapper = mount(VRating, {
       propsData: {
         halfIncrements: true,
-        showHover: true
+        hover: true
       },
       methods: { onMouseEnter }
     })
@@ -155,7 +155,7 @@ test('VRating.js', ({ mount }) => {
   it('should reset hoverIndex on mouse leave', () => {
     jest.useFakeTimers()
     const wrapper = mount(VRating, {
-      propsData: { showHover: true }
+      propsData: { hover: true }
     })
 
     const icon = wrapper.first('.v-icon')

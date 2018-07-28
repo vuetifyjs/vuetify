@@ -65,7 +65,7 @@ export default mixins(
       default: 5
     },
     readonly: Boolean,
-    showHover: Boolean,
+    hover: Boolean,
     value: {
       type: Number,
       default: 0
@@ -108,7 +108,7 @@ export default mixins(
       }
     },
     isHovering (): boolean {
-      return this.showHover && this.hoverIndex >= 0
+      return this.hover && this.hoverIndex >= 0
     }
   },
 
@@ -188,7 +188,7 @@ export default mixins(
         click: props.click
       }
 
-      if (this.showHover) {
+      if (this.hover) {
         listeners.mouseenter = (e: MouseEvent) => this.onMouseEnter(e, i)
         listeners.mouseleave = this.onMouseLeave
 
