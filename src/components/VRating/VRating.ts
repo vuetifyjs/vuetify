@@ -6,6 +6,7 @@ import VIcon from '../VIcon'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
+import Delayable from '../../mixins/delayable'
 import Sizeable from '../../mixins/sizeable'
 import Rippleable from '../../mixins/rippleable'
 import Themeable from '../../mixins/themeable'
@@ -21,15 +22,16 @@ type ItemSlotProps = {
   index: number
   value: number
   isFilled: boolean
-  isHalfFilled: boolean
+  isHalfFilled?: boolean | undefined
   isHovered: boolean
-  isHalfHovered: boolean
+  isHalfHovered?: boolean | undefined
   click: Function
 }
 
 /* @vue/component */
 export default mixins(
   Colorable,
+  Delayable,
   Rippleable,
   Sizeable,
   Themeable
@@ -66,13 +68,16 @@ export default mixins(
     showHover: Boolean,
     value: {
       type: Number,
-      required: true
+      default: 0
     }
   },
 
-  data: () => ({
-    hoverIndex: -1
-  }),
+  data () {
+    return {
+      hoverIndex: -1,
+      internalValue: this.value
+    }
+  },
 
   computed: {
     directives (): VNodeDirective[] {
@@ -107,43 +112,46 @@ export default mixins(
     }
   },
 
-  methods: {
-    isHalfEvent (e: MouseEvent): boolean {
-      if (this.halfIncrements) {
-        const rect = e.target && (e.target as HTMLElement).getBoundingClientRect()
-        if (rect && e.offsetX < rect.width / 2) return true
-      }
-
-      return false
+  watch: {
+    internalValue (val) {
+      val !== this.value && this.$emit('input', val)
     },
+    value (val) {
+      this.internalValue = val
+    }
+  },
+
+  methods: {
     createClickFn (i: number): Function {
       return (e: MouseEvent) => {
         if (this.readonly) return
 
-        if (this.isHalfEvent(e)) this.$emit('input', i + 0.5)
-        else this.$emit('input', i + 1)
+        this.internalValue = this.genHoverIndex(e, i)
       }
     },
     createProps (i: number): ItemSlotProps {
-      const click = this.createClickFn(i)
-      const isHovered = Math.floor(this.hoverIndex) > i
-      const isHalfHovered = this.halfIncrements && !isHovered && (this.hoverIndex - i) % 1 > 0
-      const isFilled = Math.floor(this.value) > i
-      const isHalfFilled = this.halfIncrements && !isFilled && (this.value - i) % 1 > 0
-
-      return {
+      const props: ItemSlotProps = {
         index: i,
-        value: this.value,
-        isFilled,
-        isHalfFilled,
-        isHovered,
-        isHalfHovered,
-        click
+        value: this.internalValue,
+        click: this.createClickFn(i),
+        isFilled: Math.floor(this.internalValue) > i,
+        isHovered: Math.floor(this.hoverIndex) > i
       }
+
+      if (this.halfIncrements) {
+        props.isHalfHovered = !props.isHovered && (this.hoverIndex - i) % 1 > 0
+        props.isHalfFilled = !props.isFilled && (this.internalValue - i) % 1 > 0
+      }
+
+      return props
+    },
+    genHoverIndex (e: MouseEvent, i: number) {
+      return i + (this.isHalfEvent(e) ? 0.5 : 1)
     },
     getIconName (props: ItemSlotProps): string {
       const isFull = this.isHovering ? props.isHovered : props.isFilled
       const isHalf = this.isHovering ? props.isHalfHovered : props.isHalfFilled
+
       return isFull ? this.fullIcon : isHalf ? this.halfIcon : this.emptyIcon
     },
     getColor (props: ItemSlotProps): string {
@@ -155,12 +163,21 @@ export default mixins(
 
       return this.backgroundColor
     },
-    onMouseEnter (e: MouseEvent, i: number): void {
-      if (this.isHalfEvent(e)) this.hoverIndex = i + 0.5
-      else this.hoverIndex = i + 1
+    isHalfEvent (e: MouseEvent): boolean {
+      if (this.halfIncrements) {
+        const rect = e.target && (e.target as HTMLElement).getBoundingClientRect()
+        if (rect && e.offsetX < rect.width / 2) return true
+      }
+
+      return false
     },
-    onMouseLeave (e: MouseEvent): void {
-      this.hoverIndex = -1
+    onMouseEnter (e: MouseEvent, i: number): void {
+      this.runDelay('open', () => {
+        this.hoverIndex = this.genHoverIndex(e, i)
+      })
+    },
+    onMouseLeave (): void {
+      this.runDelay('close', () => (this.hoverIndex = -1))
     },
     genItem (i: number): VNode | VNodeChildrenArrayContents | string {
       const props = this.createProps(i)
