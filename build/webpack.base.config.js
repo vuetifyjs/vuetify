@@ -27,14 +27,6 @@ const plugins = [
   })
 ]
 
-extractCSS || plugins.push(
-  new HappyPack({
-    id: 'stylus',
-    threadPool: exports.happyThreadPool,
-    loaders: cssLoaders
-  })
-)
-
 exports.config = {
   mode: isProd ? 'production' : 'development',
   resolve: {
@@ -46,8 +38,8 @@ exports.config = {
   module: {
     rules: [
       {
-        test: /\.styl$/,
-        use: extractCSS ? cssLoaders : 'happypack/loader?id=stylus'
+        test: /\.styl(us)?$/,
+        use: cssLoaders
       }
     ]
   },
