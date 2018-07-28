@@ -55,6 +55,9 @@ export default {
       // eslint-disable-next-line no-unused-expressions
       this.overlay.clientHeight // Force repaint
       requestAnimationFrame(() => {
+        // https://github.com/vuetifyjs/vuetify/issues/4678
+        if (!this.overlay) return
+
         this.overlay.className += ' v-overlay--active'
 
         if (this.activeZIndex !== undefined) {

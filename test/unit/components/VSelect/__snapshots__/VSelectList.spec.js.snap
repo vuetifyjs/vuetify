@@ -1,5 +1,58 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`VSelect should display falsy items 1`] = `
+
+<div class="v-select-list v-card">
+  <div class="v-list">
+    <div>
+      <a class="v-list__tile v-list__tile--link">
+        <div class="v-list__tile__content">
+          <div class="v-list__tile__title">
+            0
+          </div>
+        </div>
+      </a>
+    </div>
+    <div>
+      <a class="v-list__tile v-list__tile--link">
+        <div class="v-list__tile__content">
+          <div class="v-list__tile__title">
+            null
+          </div>
+        </div>
+      </a>
+    </div>
+    <div>
+      <a class="v-list__tile v-list__tile--link">
+        <div class="v-list__tile__content">
+          <div class="v-list__tile__title">
+            false
+          </div>
+        </div>
+      </a>
+    </div>
+    <div>
+      <a class="v-list__tile v-list__tile--link">
+        <div class="v-list__tile__content">
+          <div class="v-list__tile__title">
+            undefined
+          </div>
+        </div>
+      </a>
+    </div>
+    <div>
+      <a class="v-list__tile v-list__tile--link">
+        <div class="v-list__tile__content">
+          <div class="v-list__tile__title">
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+`;
+
 exports[`VSelect should display no-data-text when item slot is provided 1`] = `
 
 <div class="v-select-list v-card">
