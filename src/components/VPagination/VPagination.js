@@ -63,7 +63,7 @@ export default {
       const left = Math.floor(maxLength / 2)
       const right = this.length - left + 1 + even
 
-      if (this.value >= left && this.value <= right) {
+      if (this.value > left && this.value < right) {
         const start = this.value - left + 2
         const end = this.value + left - 2 - even
 
