@@ -19,30 +19,6 @@ export default {
 
   mixins: [Picker],
 
-  data () {
-    const now = new Date()
-    return {
-      activePicker: this.type.toUpperCase(),
-      defaultColor: 'accent',
-      inputDay: null,
-      inputMonth: null,
-      inputYear: null,
-      isReversing: false,
-      now,
-      // tableDate is a string in 'YYYY' / 'YYYY-M' format (leading zero for month is not required)
-      tableDate: (() => {
-        if (this.pickerDate) {
-          return this.pickerDate
-        }
-
-        const date = (this.multiple ? this.value[this.value.length - 1] : this.value) ||
-          `${now.getFullYear()}-${now.getMonth() + 1}`
-        const type = this.type === 'date' ? 'month' : 'year'
-        return this.sanitizeDateString(date, type)
-      })()
-    }
-  },
-
   props: {
     allowedDates: Function,
     // Function formatting the day in date picker table
@@ -112,6 +88,30 @@ export default {
       default: null
     },
     yearIcon: String
+  },
+
+  data () {
+    const now = new Date()
+    return {
+      activePicker: this.type.toUpperCase(),
+      defaultColor: 'accent',
+      inputDay: null,
+      inputMonth: null,
+      inputYear: null,
+      isReversing: false,
+      now,
+      // tableDate is a string in 'YYYY' / 'YYYY-M' format (leading zero for month is not required)
+      tableDate: (() => {
+        if (this.pickerDate) {
+          return this.pickerDate
+        }
+
+        const date = (this.multiple ? this.value[this.value.length - 1] : this.value) ||
+          `${now.getFullYear()}-${now.getMonth() + 1}`
+        const type = this.type === 'date' ? 'month' : 'year'
+        return this.sanitizeDateString(date, type)
+      })()
+    }
   },
 
   computed: {
