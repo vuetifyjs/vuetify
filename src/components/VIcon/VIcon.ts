@@ -1,8 +1,9 @@
 import '../../stylus/components/_icons.styl'
 
 // Mixins
-import Themeable from '../../mixins/themeable'
 import Colorable from '../../mixins/colorable'
+import Sizeable from '../../mixins/sizeable'
+import Themeable from '../../mixins/themeable'
 
 // Util
 import {
@@ -30,7 +31,11 @@ function isFontAwesome5 (iconType: string): boolean {
 const addTextColorClassChecks = Colorable.options.methods.addTextColorClassChecks
 
 /* @vue/component */
-export default mixins(Colorable, Themeable).extend({
+export default mixins(
+  Colorable,
+  Sizeable,
+  Themeable
+).extend({
   name: 'v-icon',
 
   functional: true,
@@ -39,18 +44,16 @@ export default mixins(Colorable, Themeable).extend({
     // TODO: inherit these
     color: String,
     dark: Boolean,
-    light: Boolean,
-
     disabled: Boolean,
     large: Boolean,
-    left: Boolean,
+    light: Boolean,
     medium: Boolean,
-    right: Boolean,
-    size: {
-      type: [Number, String]
-    },
+    size: [Number, String],
     small: Boolean,
-    xLarge: Boolean
+    xLarge: Boolean,
+
+    left: Boolean,
+    right: Boolean
   },
 
   render (h, { props, data, parent, listeners = {}, children = [] }): VNode {
