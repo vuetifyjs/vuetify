@@ -113,7 +113,7 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
     expect(cb).not.toBeCalled()
   })
 
-  it('should emit input event with elected dates after click', async () => {
+  it('should emit input event with selected dates after click', async () => {
     const cb = jest.fn()
     const wrapper = mount(VDatePicker, {
       propsData: {
@@ -123,7 +123,7 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
     })
 
     wrapper.vm.$on('input', cb);
-    wrapper.find('.date-picker-table--date tbody tr+tr td:first-child button')[0].trigger('click')
+    wrapper.find('.v-date-picker-table--date tbody tr+tr td:first-child button')[0].trigger('click')
     expect(cb.mock.calls[0][0]).toHaveLength(3)
     expect(cb.mock.calls[0][0][2]).toBe('2013-05-05')
     expect(cb.mock.calls[0][0]).toEqual(
@@ -141,7 +141,7 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
     })
 
     wrapper.vm.$on('input', cb);
-    wrapper.find('.date-picker-table--date tbody tr+tr td:first-child button')[0].trigger('click')
+    wrapper.find('.v-date-picker-table--date tbody tr+tr td:first-child button')[0].trigger('click')
     expect(cb.mock.calls[0][0]).toHaveLength(2)
     expect(cb.mock.calls[0][0]).toEqual(expect.arrayContaining(['2013-05-07', '2013-05-08']))
     expect(cb.mock.calls[0][0]).not.toEqual(expect.arrayContaining(['2013-05-05']))
