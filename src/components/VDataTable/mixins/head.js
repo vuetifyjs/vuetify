@@ -27,7 +27,7 @@ export default {
 
         children = [this.hasTag(row, 'th') ? this.genTR(row) : row, this.genTProgress()]
       } else {
-        const row = this.headers.map(o => this.genHeader(o))
+        const row = this.headers.map((o, i) => this.genHeader(o, this.headerKey ? o[this.headerKey] : i))
         const checkbox = this.$createElement(VCheckbox, {
           props: {
             dark: this.dark,
@@ -47,19 +47,19 @@ export default {
 
       return this.$createElement('thead', [children])
     },
-    genHeader (header) {
+    genHeader (header, key) {
       const array = [
         this.$scopedSlots.headerCell
           ? this.$scopedSlots.headerCell({ header })
           : header[this.headerText]
       ]
 
-      return this.$createElement('th', ...this.genHeaderData(header, array))
+      return this.$createElement('th', ...this.genHeaderData(header, array, key))
     },
-    genHeaderData (header, children) {
+    genHeaderData (header, children, key) {
       const classes = ['column']
       const data = {
-        key: header[this.headerText],
+        key,
         attrs: {
           role: 'columnheader',
           scope: 'col',

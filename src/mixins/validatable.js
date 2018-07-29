@@ -1,4 +1,4 @@
-
+import { deepEqual } from '../util/helpers'
 import { inject as RegistrableInject } from './registrable'
 import { consoleError } from '../util/console'
 
@@ -114,10 +114,7 @@ export default {
   watch: {
     rules: {
       handler (newVal, oldVal) {
-        // TODO: This handler seems to trigger when input changes, even though
-        // rules array stays the same? Solved it like this for now
-        if (newVal.length === oldVal.length) return
-
+        if (deepEqual(newVal, oldVal)) return
         this.validate()
       },
       deep: true

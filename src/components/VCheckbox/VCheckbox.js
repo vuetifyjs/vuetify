@@ -66,6 +66,7 @@ export default {
         staticClass: 'v-input--selection-controls__input'
       }, [
         this.genInput('checkbox', {
+          ...this.$attrs,
           'aria-checked': this.inputIndeterminate
             ? 'mixed'
             : this.isActive.toString()

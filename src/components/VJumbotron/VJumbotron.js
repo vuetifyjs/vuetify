@@ -5,6 +5,9 @@ import Colorable from '../../mixins/colorable'
 import Routable from '../../mixins/routable'
 import Themeable from '../../mixins/themeable'
 
+// Utils
+import { deprecate } from '../../util/console'
+
 /* @vue/component */
 export default {
   name: 'v-jumbotron',
@@ -49,6 +52,10 @@ export default {
         height: this.height
       }
     }
+  },
+
+  mounted () {
+    deprecate('v-jumbotron', this.src ? 'v-img' : 'v-responsive', this)
   },
 
   methods: {

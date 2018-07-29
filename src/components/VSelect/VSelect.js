@@ -121,7 +121,7 @@ export default {
     // As long as a value is defined, show it
     // Otherwise, check if multiple
     // to determine which default to provide
-    lazyValue: vm.value != null
+    lazyValue: vm.value !== undefined
       ? vm.value
       : vm.multiple ? [] : undefined,
     selectedIndex: -1,
@@ -267,7 +267,7 @@ export default {
       this.isMenuActive = true
     },
     clearableCallback () {
-      this.internalValue = this.multiple ? [] : null
+      this.internalValue = this.multiple ? [] : undefined
       this.$emit('change', this.internalValue)
       this.$nextTick(() => this.$refs.input.focus())
 

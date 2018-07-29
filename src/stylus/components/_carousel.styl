@@ -18,6 +18,12 @@ rtl(v-carousel-rtl, "v-carousel")
   overflow: hidden
   elevation(2)
 
+  &__item
+    position: absolute
+    top: 0
+    width: 100%
+    transition: .3s $transition.swing
+
   &__prev,
   &__next
     position: absolute
