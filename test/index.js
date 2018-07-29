@@ -8,6 +8,7 @@ import VueTestUtils from '@vue/test-utils'
 // TODO: maybe better to fix the real problem
 // Replacing "Vue.component('tset', {...})" with "{...}" seems to work
 VueTestUtils.config.logModifiedComponents = false
+VueTestUtils.config.stubs.transition = false
 
 export function test(name, cb) {
   toHaveBeenWarnedInit()
