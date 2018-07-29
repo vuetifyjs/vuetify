@@ -507,8 +507,9 @@ export default {
       const decimals = trimmedStep.indexOf('.') > -1
         ? (trimmedStep.length - trimmedStep.indexOf('.') - 1)
         : 0
+      const offset = this.min % this.stepNumeric
 
-      const newValue = Math.round(value / this.stepNumeric) * this.stepNumeric
+      const newValue = Math.round((value - offset) / this.stepNumeric) * this.stepNumeric + offset
 
       return parseFloat(Math.min(newValue, this.max).toFixed(decimals))
     },
