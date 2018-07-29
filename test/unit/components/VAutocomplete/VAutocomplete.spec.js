@@ -626,7 +626,7 @@ test('VAutocomplete.js', ({ mount, shallowMount, compileToFunctions }) => {
     input.element.value = 'foo'
     input.trigger('input')
 
-    wrapper.setProps({ hideSelections: true })
+    wrapper.setProps({ hideSelected: true })
 
     expect(wrapper.vm.genSelections()).toEqual([])
   })

@@ -272,7 +272,7 @@ test('VBtnToggle.vue', ({ mount }) => {
     const change = jest.fn()
     wrapper.vm.$on('change', change)
 
-    wrapper.findAll('button').forEach((button, i) => {
+    wrapper.findAll('button').wrappers.forEach((button, i) => {
       button.trigger('click')
 
       expect(change).toBeCalledWith(verifyValues[i])
