@@ -10,7 +10,6 @@ export default Vue.extend({
   directives: { Ripple },
 
   props: {
-    disabled: Boolean,
     ripple: {
       type: [Boolean, Object],
       default: true
