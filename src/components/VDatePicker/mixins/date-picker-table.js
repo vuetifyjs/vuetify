@@ -6,15 +6,9 @@ import Touch from '../../../directives/touch'
 // Utils
 import isDateAllowed from '.././util/isDateAllowed'
 
+/* @vue/component */
 export default {
   directives: { Touch },
-
-  data () {
-    return {
-      defaultColor: 'accent',
-      isReversing: false
-    }
-  },
 
   props: {
     allowedDates: Function,
@@ -38,9 +32,14 @@ export default {
     value: [String, Array]
   },
 
+  data: () => ({
+    defaultColor: 'accent',
+    isReversing: false
+  }),
+
   computed: {
     computedTransition () {
-      return this.isReversing ? 'tab-reverse-transition' : 'tab-transition'
+      return (this.isReversing === !this.$vuetify.rtl) ? 'tab-reverse-transition' : 'tab-transition'
     },
     displayedMonth () {
       return this.tableDate.split('-')[1] - 1
@@ -116,9 +115,7 @@ export default {
 
       return this.$createElement('div', {
         staticClass,
-        class: {
-          ...this.themeClasses
-        },
+        class: this.themeClasses,
         on: this.scrollable ? { wheel: this.wheel } : undefined,
         directives: [touchDirective]
       }, [transition])

@@ -13,6 +13,7 @@ import { pad, createNativeLocaleFormatter } from './util'
 import isDateAllowed from './util/isDateAllowed'
 import { consoleWarn } from '../../util/console'
 
+/* @vue/component */
 export default {
   name: 'v-date-picker',
 
@@ -226,6 +227,15 @@ export default {
     }
   },
 
+  created () {
+    this.checkMultipleProp()
+
+    if (this.pickerDate !== this.tableDate) {
+      this.$emit('update:pickerDate', this.tableDate)
+    }
+    this.setInputDate()
+  },
+
   methods: {
     emitInput (newInput) {
       const output = this.multiple
@@ -417,15 +427,6 @@ export default {
         this.inputDay = this.inputDay || this.now.getDate()
       }
     }
-  },
-
-  created () {
-    this.checkMultipleProp()
-
-    if (this.pickerDate !== this.tableDate) {
-      this.$emit('update:pickerDate', this.tableDate)
-    }
-    this.setInputDate()
   },
 
   render () {

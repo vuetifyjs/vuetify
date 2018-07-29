@@ -7,6 +7,7 @@ import VLabel from '../VLabel'
 import VMessages from '../VMessages'
 
 // Mixins
+import Colorable from '../../mixins/colorable'
 import Loadable from '../../mixins/loadable'
 import Themeable from '../../mixins/themeable'
 import Validatable from '../../mixins/validatable'
@@ -16,24 +17,27 @@ import {
   convertToUnit,
   kebabCase
 } from '../../util/helpers'
+import { deprecate } from '../../util/console'
 
+/* @vue/component */
 export default {
   name: 'v-input',
 
   mixins: [
+    Colorable,
     Loadable,
     Themeable,
     Validatable
   ],
 
-  data: vm => ({
-    lazyValue: vm.value,
-    isFocused: false
-  }),
-
   props: {
     appendIcon: String,
+    /** @deprecated */
     appendIconCb: Function,
+    backgroundColor: {
+      type: String,
+      default: ''
+    },
     disabled: Boolean,
     height: [Number, String],
     hideDetails: Boolean,
@@ -41,11 +45,16 @@ export default {
     label: String,
     persistentHint: Boolean,
     prependIcon: String,
+    /** @deprecated */
     prependIconCb: Function,
     readonly: Boolean,
-    tabindex: { default: 0 },
     value: { required: false }
   },
+
+  data: vm => ({
+    lazyValue: vm.value,
+    isFocused: false
+  }),
 
   computed: {
     classesInput () {
@@ -106,6 +115,13 @@ export default {
 
   methods: {
     genContent () {
+      return [
+        this.genPrependSlot(),
+        this.genControl(),
+        this.genAppendSlot()
+      ]
+    },
+    genControl () {
       return this.$createElement('div', {
         staticClass: 'v-input__control'
       }, [
@@ -119,27 +135,35 @@ export default {
         this.$slots.default
       ]
     },
-    genIcon (type, cb) {
+    // TODO: remove shouldDeprecate (2.0), used for clearIcon
+    genIcon (type, cb, shouldDeprecate = true) {
       const icon = this[`${type}Icon`]
+      const eventName = `click:${kebabCase(type)}`
       cb = cb || this[`${type}IconCb`]
+
+      if (shouldDeprecate && type && cb) {
+        deprecate(`:${type}-icon-cb`, `@${eventName}`, this)
+      }
 
       const data = {
         props: {
           color: this.validationState,
-          disabled: this.disabled
+          dark: this.dark,
+          disabled: this.disabled,
+          light: this.light
         },
-        on: !cb
+        on: !(this.$listeners[eventName] || cb)
           ? null
           : {
             click: e => {
               e.preventDefault()
               e.stopPropagation()
 
-              cb(e)
+              this.$emit(eventName, e)
+              cb && cb(e)
             },
-            // Container has mouseup event
-            // that will trigger menu open
-            // if enclosed
+            // Container has mouseup event that will
+            // trigger menu open if enclosed
             mouseup: e => {
               e.preventDefault()
               e.stopPropagation()
@@ -161,9 +185,14 @@ export default {
     genInputSlot () {
       return this.$createElement('div', {
         staticClass: 'v-input__slot',
+        class: this.addBackgroundColorClassChecks({}, this.backgroundColor),
         style: { height: convertToUnit(this.height) },
         directives: this.directivesInput,
-        on: { click: this.onClick },
+        on: {
+          click: this.onClick,
+          mousedown: this.onMouseDown,
+          mouseup: this.onMouseUp
+        },
         ref: 'input-slot'
       }, [
         this.genDefaultSlot(),
@@ -176,8 +205,10 @@ export default {
       return this.$createElement(VLabel, {
         props: {
           color: this.validationState,
+          dark: this.dark,
           focused: this.hasState,
-          for: this.$attrs.id
+          for: this.$attrs.id,
+          light: this.light
         }
       }, this.$slots.label || this.label)
     },
@@ -191,6 +222,8 @@ export default {
       return this.$createElement(VMessages, {
         props: {
           color: this.hasHint ? '' : this.validationState,
+          dark: this.dark,
+          light: this.light,
           value: (this.hasMessages || this.hasHint) ? messages : []
         }
       })
@@ -208,11 +241,7 @@ export default {
     genPrependSlot () {
       const slot = []
 
-      // Backwards compat
-      // TODO: Deprecate prepend-icon slot 2.0
-      if (this.$slots['prepend-icon']) {
-        slot.push(this.$slots['prepend-icon'])
-      } else if (this.$slots['prepend']) {
+      if (this.$slots['prepend']) {
         slot.push(this.$slots['prepend'])
       } else if (this.prependIcon) {
         slot.push(this.genIcon('prepend'))
@@ -229,8 +258,6 @@ export default {
       // backwards compat
       if (this.$slots['append']) {
         slot.push(this.$slots['append'])
-      } else if (this.$slots['append-icon']) {
-        slot.push(this.$slots['append-icon'])
       } else if (this.appendIcon) {
         slot.push(this.genIcon('append'))
       }
@@ -252,15 +279,7 @@ export default {
     return h('div', {
       staticClass: 'v-input',
       attrs: this.attrsInput,
-      'class': this.classesInput,
-      on: {
-        mousedown: this.onMouseDown,
-        mouseup: this.onMouseUp
-      }
-    }, [
-      this.genPrependSlot(),
-      this.genContent(),
-      this.genAppendSlot()
-    ])
+      'class': this.classesInput
+    }, this.genContent())
   }
 }

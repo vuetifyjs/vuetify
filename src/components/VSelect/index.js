@@ -1,8 +1,11 @@
 import VSelect from './VSelect'
 import VOverflowBtn from '../VOverflowBtn'
 import VAutocomplete from '../VAutocomplete'
+import VCombobox from '../VCombobox'
 import rebuildSlots from '../../util/rebuildFunctionalSlots'
+import { deprecate } from '../../util/console'
 
+/* @vue/component */
 const wrapper = {
   functional: true,
 
@@ -10,48 +13,58 @@ const wrapper = {
 
   props: {
     // VAutoComplete
+    /** @deprecated */
     autocomplete: Boolean,
+    /** @deprecated */
     combobox: Boolean,
+    multiple: Boolean,
+    /** @deprecated */
     tags: Boolean,
-
     // VOverflowBtn
+    /** @deprecated */
     editable: Boolean,
+    /** @deprecated */
     overflow: Boolean,
+    /** @deprecated */
     segmented: Boolean
   },
 
   render (h, { props, data, slots, parent }) {
+    delete data.model
     const children = rebuildSlots(slots(), h)
 
     if (props.autocomplete) {
-      console.warn(`[Vuetify] '<v-select autocomplete>' is deprecated, use '<v-autocomplete>' instead in ${parent._name}`)
+      deprecate('<v-select autocomplete>', '<v-autocomplete>', wrapper, parent)
     }
     if (props.combobox) {
-      console.warn(`[Vuetify] '<v-select combobox>' is deprecated, use '<v-autocomplete combobox>' instead in ${parent._name}`)
+      deprecate('<v-select combobox>', '<v-combobox>', wrapper, parent)
     }
     if (props.tags) {
-      console.warn(`[Vuetify] '<v-select tags>' is deprecated, use '<v-autocomplete tags>' instead in ${parent._name}`)
+      deprecate('<v-select tags>', '<v-combobox multiple>', wrapper, parent)
     }
 
     if (props.overflow) {
-      console.warn(`[Vuetify] '<v-select overflow>' is deprecated, use '<v-overflow-btn>' instead in ${parent._name}`)
+      deprecate('<v-select overflow>', '<v-overflow-btn>', wrapper, parent)
     }
     if (props.segmented) {
-      console.warn(`[Vuetify] '<v-select segmented>' is deprecated, use '<v-overflow-btn segmented>' instead in ${parent._name}`)
+      deprecate('<v-select segmented>', '<v-overflow-btn segmented>', wrapper, parent)
     }
     if (props.editable) {
-      console.warn(`[Vuetify] '<v-select editable>' is deprecated, use '<v-overflow-btn editable>' instead in ${parent._name}`)
+      deprecate('<v-select editable>', '<v-overflow-btn editable>', wrapper, parent)
     }
 
-    if (props.autocomplete || props.combobox || props.tags) {
-      data.attrs.combobox = props.combobox
-      data.attrs.tags = props.tags
+    if (props.combobox || props.tags) {
+      data.attrs.multiple = props.tags
+      return h(VCombobox, data, children)
+    } else if (props.autocomplete) {
+      data.attrs.multiple = props.multiple
       return h(VAutocomplete, data, children)
     } else if (props.overflow || props.segmented || props.editable) {
       data.attrs.segmented = props.segmented
       data.attrs.editable = props.editable
       return h(VOverflowBtn, data, children)
     } else {
+      data.attrs.multiple = props.multiple
       return h(VSelect, data, children)
     }
   }

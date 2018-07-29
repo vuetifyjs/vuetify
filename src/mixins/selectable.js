@@ -8,6 +8,7 @@ import Comparable from './comparable'
 // Utils
 import { keyCodes } from '../util/helpers'
 
+/* @vue/component */
 export default {
   name: 'selectable',
 
@@ -19,10 +20,6 @@ export default {
     prop: 'inputValue',
     event: 'change'
   },
-
-  data: vm => ({
-    lazyValue: vm.inputValue
-  }),
 
   props: {
     color: {
@@ -44,6 +41,10 @@ export default {
     }
   },
 
+  data: vm => ({
+    lazyValue: vm.inputValue
+  }),
+
   computed: {
     classesSelectable () {
       return this.addTextColorClassChecks(
@@ -64,13 +65,13 @@ export default {
         return input.some(item => this.valueComparator(item, value))
       }
 
-      if (!this.trueValue || !this.falseValue) {
+      if (this.trueValue === undefined || this.falseValue === undefined) {
         return value
           ? this.valueComparator(value, input)
           : Boolean(input)
       }
 
-      return this.valueComparator(value, input)
+      return this.valueComparator(input, this.trueValue)
     },
     isDirty () {
       return this.isActive
@@ -132,11 +133,9 @@ export default {
         if (input.length === length) {
           input.push(value)
         }
-      } else if (this.trueValue || this.falseValue) {
-        // If has a true or false value set
-        input = this.valueComparator(this.trueValue, value) ? this.falseValue : this.trueValue
+      } else if (this.trueValue !== undefined && this.falseValue !== undefined) {
+        input = this.valueComparator(input, this.trueValue) ? this.falseValue : this.trueValue
       } else if (value) {
-        // If has a value set
         input = this.valueComparator(input, value) ? null : value
       } else {
         input = !input

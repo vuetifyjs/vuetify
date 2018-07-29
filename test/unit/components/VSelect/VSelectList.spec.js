@@ -48,6 +48,28 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect(wrapper.vm.$slots['no-data'].length).toBe(1)
   })
 
+  it('should display no-data-text when item slot is provided', async () => {
+    const vm = new Vue()
+    const itemSlot = () => vm.$createElement('div', ['this is not ok'])
+    const component = Vue.component('test', {
+      render (h) {
+        return h(VSelectList, {
+          props: {
+            items: [],
+            noDataText: 'this is ok'
+          },
+          scopedSlots: {
+            item: itemSlot,
+          }
+        })
+      }
+    })
+
+    const wrapper = mount(component)
+    await wrapper.vm.$nextTick()
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it('should generate children', () => {
     const wrapper = mount(VSelectList, {
       propsData: {
@@ -95,5 +117,16 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.find('.v-list__tile').length).toBe(1)
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/4431
+  it('should display falsy items', () => {
+    const wrapper = mount(VSelectList, {
+      propsData: {
+        items: [0, null, false, undefined, '']
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

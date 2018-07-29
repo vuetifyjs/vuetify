@@ -67,7 +67,7 @@ test('VDataIterator.js', ({ mount, compileToFunctions }) => {
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
-  it('should match a snapshot - with data', () => {
+  it('should match a snapshot - with data', async () => {
     const data = dataIteratorTestData()
 
     const vm = new Vue()
@@ -89,6 +89,12 @@ test('VDataIterator.js', ({ mount, compileToFunctions }) => {
     const wrapper = mount(component)
 
     expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.vm.$vuetify.rtl = true
+    await wrapper.vm.$nextTick()
+    expect(wrapper.find('.v-data-iterator__actions__range-controls')[0].html()).toMatchSnapshot()
+    wrapper.vm.$vuetify.rtl = undefined
+
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 

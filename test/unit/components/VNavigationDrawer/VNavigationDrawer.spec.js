@@ -205,4 +205,44 @@ test('VNavigationDrawer', ({ mount }) => {
     expect(wrapper.vm.isMobile).toBe(false)
     expect(wrapper.vm.$vuetify.application.left).toBe(300)
   })
+
+  it('should not have marginTop when temporary / isMobile', async () => {
+    const wrapper = mount(VNavigationDrawer, {
+      propsData: {
+        app: true
+      }
+    })
+
+    expect(wrapper.vm.marginTop).toBe(0)
+
+    wrapper.vm.$vuetify.application.bar = 24
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.marginTop).toBe(24)
+
+    await resizeWindow(640)
+
+    expect(wrapper.vm.marginTop).toBe(0)
+
+    await resizeWindow(1980)
+
+    expect(wrapper.vm.marginTop).toBe(24)
+
+    wrapper.setProps({ temporary: true })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.marginTop).toBe(0)
+
+    wrapper.setProps({ app: false, temporary: false })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.marginTop).toBe(0)
+
+    wrapper.setProps({ app: true })
+
+    expect(wrapper.vm.marginTop).toBe(24)
+  })
 })

@@ -29,6 +29,21 @@ test('VPagination.vue', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should render component in RTL mode and match snapshot', async () => {
+    jest.useFakeTimers()
+    const wrapper = mount(VPagination, {
+      propsData: {
+        length: 5,
+        value: 2
+      }
+    })
+    wrapper.vm.$vuetify.rtl = true
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+    wrapper.vm.$vuetify.rtl = undefined
+  })
+
   it('emits an event when pagination item is clicked', async () => {
     jest.useFakeTimers()
     const wrapper = mount(VPagination, {
@@ -110,6 +125,46 @@ test('VPagination.vue', ({ mount }) => {
 
     expect(wrapper.html()).toMatchSnapshot()
     expect(wrapper.find('.v-pagination__more').length).toEqual(2)
+  })
+
+  it('should only render start and end of range if value is equals "left"', async () => {
+    jest.useFakeTimers()
+    const wrapper = mount(VPagination, {
+      propsData: {
+        length: 100,
+        totalVisible: 5
+      }
+    })
+    const maxLength = wrapper.vm.totalVisible
+    const left = Math.floor(maxLength / 2)
+    wrapper.setProps({ value: left })
+    jest.runAllTimers()
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.find('.v-pagination__more').length).toEqual(1)
+  })
+
+  it('should only render start and end of range if value is equals "right"', async () => {
+    jest.useFakeTimers()
+    const wrapper = mount(VPagination, {
+      propsData: {
+        length: 100,
+        totalVisible: 5
+      }
+    })
+    const maxLength = wrapper.vm.totalVisible
+    const even = maxLength % 2 === 0 ? 1 : 0
+    const left = Math.floor(maxLength / 2)
+    const right = wrapper.vm.length - left + 1 + even
+    wrapper.setProps({ value: right })
+    jest.runAllTimers()
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.find('.v-pagination__more').length).toEqual(1)
   })
 
   it('should use totalVisible prop if defined', async () => {

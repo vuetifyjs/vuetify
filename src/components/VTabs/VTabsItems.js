@@ -6,12 +6,13 @@ import {
 // Directives
 import Touch from '../../directives/touch'
 
+/* @vue/component */
 export default {
   name: 'v-tabs-items',
 
-  mixins: [RegistrableProvide('tabs')],
-
   directives: { Touch },
+
+  mixins: [RegistrableProvide('tabs')],
 
   inject: {
     registerItems: {
@@ -25,6 +26,12 @@ export default {
     }
   },
 
+  props: {
+    cycle: Boolean,
+    touchless: Boolean,
+    value: [Number, String]
+  },
+
   data () {
     return {
       items: [],
@@ -33,15 +40,12 @@ export default {
     }
   },
 
-  props: {
-    cycle: Boolean,
-    touchless: Boolean,
-    value: [Number, String]
-  },
-
   computed: {
     activeIndex () {
-      return this.items.findIndex((item, index) => (item.id || index.toString()) === this.lazyValue)
+      return this.items.findIndex((item, index) => {
+        return item.id === this.lazyValue ||
+          index === this.lazyValue
+      })
     },
     activeItem () {
       if (!this.items.length) return undefined
@@ -53,8 +57,6 @@ export default {
         return this.lazyValue
       },
       set (val) {
-        val = val.toString()
-
         this.lazyValue = val
 
         if (this.tabProxy) this.tabProxy(val)
@@ -116,7 +118,7 @@ export default {
     },
     updateItems () {
       for (let index = this.items.length; --index >= 0;) {
-        this.items[index].toggle(this.lazyValue, this.reverse, this.isBooted, index)
+        this.items[index].toggle(this.activeIndex === index, this.reverse, this.isBooted)
       }
       this.isBooted = true
     }

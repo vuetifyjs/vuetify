@@ -5,17 +5,12 @@ export function createSimpleFunctional (
   el = 'div',
   name?: string
 ): FunctionalComponentOptions {
-  name = name || c.replace(/__/g, '-')
-
-  // TODO: remove after close
-  // https://github.com/vuetifyjs/vuetify/issues/1561
-  name = name.split('-')[0] === 'v' ? name : `v-${name}`
-
   return {
-    name,
+    name: name || c.replace(/__/g, '-'),
+
     functional: true,
 
-    render (h, { data, children }) {
+    render (h, { data, children }): VNode {
       data.staticClass = (`${c} ${data.staticClass || ''}`).trim()
 
       return h(el, data, children)
@@ -40,7 +35,7 @@ export function createSimpleTransition (
       }
     },
 
-    render (h, context) {
+    render (h, context): VNode {
       context.data = context.data || {}
       context.data.props = { name }
       context.data.on = context.data.on || {}
@@ -82,7 +77,7 @@ export function createJavaScriptTransition (
       }
     },
 
-    render (h, context) {
+    render (h, context): VNode {
       const data = {
         props: {
           ...context.props,
@@ -134,6 +129,11 @@ export function getNestedValue (obj: any, path: (string | number)[], fallback?: 
 
 export function deepEqual (a: any, b: any): boolean {
   if (a === b) return true
+
+  if (a instanceof Date && b instanceof Date) {
+    // If the values are Date, they were convert to timestamp with getTime and compare it
+    if (a.getTime() !== b.getTime()) return false
+  }
 
   if (a !== Object(a) || b !== Object(b)) {
     // If the values aren't objects, they were already checked for equality
@@ -221,10 +221,14 @@ export function filterChildren (array: VNode[] = [], tag: string): VNode[] {
   })
 }
 
-export function convertToUnit (str: string | number, unit = 'px'): string {
-  return isNaN(+str)
-    ? str as string // TODO: this is wrong but I cbf fixing it
-    : `${Number(str)}${unit}`
+export function convertToUnit (str: string | number | null | undefined, unit = 'px'): string | undefined {
+  if (str == null || str === '') {
+    return undefined
+  } else if (isNaN(+str!)) {
+    return String(str)
+  } else {
+    return `${Number(str)}${unit}`
+  }
 }
 
 export function kebabCase (str: string): string {
@@ -254,3 +258,7 @@ export const keyCodes = Object.freeze({
   pageup: 33,
   pagedown: 34
 })
+
+export function keys<O> (o: O) {
+  return Object.keys(o) as (keyof O)[]
+}

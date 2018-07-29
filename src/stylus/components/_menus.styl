@@ -1,18 +1,13 @@
 @import '../bootstrap'
 
 .v-menu
-  display: inline-block
+  display: block
   position: relative
   vertical-align: middle
 
-  &--disabled
-    cursor: default
-
-    .v-menu__activator,
-    .v-menu__activator > *
-      cursor: default
-      pointer-events: none
-
+  &--inline
+    display: inline-block
+    
   &__activator
     align-items: center
     cursor: pointer
@@ -20,8 +15,11 @@
     height: 100%
     position: relative
 
-    input[readonly]
+    *
       cursor: pointer
+
+    &--disabled
+      pointer-events: none
 
   &__content
     position: absolute
@@ -38,11 +36,6 @@
 
     &--active
       pointer-events: none
-
-    &--dropdown
-      border-top-left-radius: 0
-      border-top-right-radius: 0
-      border-top: 1px solid $material-light.dividers
 
     & > .card
       contain: content
