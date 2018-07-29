@@ -41,7 +41,7 @@ export default mixins(
   props: {
     backgroundColor: {
       type: String,
-      default: 'secondary'
+      default: 'accent'
     },
     color: {
       type: String,
@@ -95,6 +95,7 @@ export default mixins(
         large,
         light,
         small,
+        size,
         xLarge
       } = this.$props
 
@@ -103,6 +104,7 @@ export default mixins(
         medium,
         large,
         light,
+        size,
         small,
         xLarge
       }
