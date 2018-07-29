@@ -136,8 +136,8 @@
     vue-template-es2015-compiler "^1.6.0"
 
 "@vue/test-utils@^1.0.0-beta.19":
-  version "1.0.0-beta.19"
-  resolved "https://registry.yarnpkg.com/@vue/test-utils/-/test-utils-1.0.0-beta.19.tgz#a1ec452081f6c7a9fa245478e2de227953a30455"
+  version "1.0.0-beta.22"
+  resolved "https://registry.yarnpkg.com/@vue/test-utils/-/test-utils-1.0.0-beta.22.tgz#f630d556ead51c6ebc0584f7c15835f4508dc83f"
   dependencies:
     lodash "^4.17.4"
 
