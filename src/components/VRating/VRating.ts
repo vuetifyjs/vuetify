@@ -61,7 +61,7 @@ export default mixins(
     },
     halfIncrements: Boolean,
     length: {
-      type: Number,
+      type: [Number, String],
       default: 5
     },
     readonly: Boolean,
@@ -207,7 +207,7 @@ export default mixins(
   },
 
   render (h): VNode {
-    const children = createRange(this.length).map(i => this.genItem(i))
+    const children = createRange(Number(this.length)).map(i => this.genItem(i))
 
     return h('div', {
       staticClass: 'v-rating',
