@@ -7,6 +7,8 @@ import Bootable from '../../mixins/bootable'
 import Themeable from '../../mixins/themeable'
 import { provide as RegistrableProvide } from '../../mixins/registrable'
 
+import { convertToUnit } from '../../util/helpers'
+
 import Touch from '../../directives/touch'
 
 /* @vue/component */
@@ -41,7 +43,11 @@ export default {
       type: [Boolean, String],
       default: '$vuetify.icons.prev'
     },
-    value: Number
+    value: Number,
+    height: {
+      type: [Number, String],
+      default: null
+    }
   },
 
   data () {
@@ -181,7 +187,10 @@ export default {
           left: this.next,
           right: this.prev
         }
-      }]
+      }],
+      style: {
+        height: this.height ? convertToUnit(this.height) : null
+      }
     }, [
       this.hideControls ? null : this.genIcon('prev', this.$vuetify.rtl ? this.nextIcon : this.prevIcon, this.prev),
       this.hideControls ? null : this.genIcon('next', this.$vuetify.rtl ? this.prevIcon : this.nextIcon, this.next),
