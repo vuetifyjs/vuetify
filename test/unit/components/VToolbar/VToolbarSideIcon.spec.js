@@ -1,4 +1,4 @@
-import { test } from '@/test'
+import { test, textComponent } from '@/test'
 import VIcon from '@/components/VIcon'
 import { VToolbarSideIcon } from '@/components/VToolbar'
 
@@ -12,7 +12,9 @@ test('VToolbarSideIcon.js', ({ mount, functionalContext }) => {
   })
 
   it('should create slot icon when present', () => {
-    const iconWrapper = mount(VIcon, functionalContext({}, 'fa-add'))
+    const iconWrapper = mount(VIcon, {
+      slots: { default: textComponent('fa-add') }
+    })
 
     const context = functionalContext({}, iconWrapper.vNode)
     const wrapper = mount(VToolbarSideIcon, context)

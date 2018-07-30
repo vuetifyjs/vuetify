@@ -4,7 +4,7 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
 
 <div>
   <div class="v-table__overflow">
-    <table class="v-datatable v-table">
+    <table class="v-datatable v-table theme--light">
       <thead>
         <tr>
           <th role="columnheader"
@@ -16,7 +16,7 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
           >
             First Column
             <i aria-hidden="true"
-               class="v-icon material-icons"
+               class="v-icon material-icons theme--light"
                style="font-size: 16px;"
             >
               arrow_upward
@@ -39,7 +39,7 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
           >
             Third Column
             <i aria-hidden="true"
-               class="v-icon material-icons"
+               class="v-icon material-icons theme--light"
                style="font-size: 16px;"
             >
               arrow_upward
@@ -64,12 +64,12 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
       </tbody>
     </table>
   </div>
-  <div class="v-datatable v-table">
+  <div class="v-datatable v-table theme--light">
     <div class="v-datatable__actions">
       <div class="v-datatable__actions__select">
         Rows per page:
         <div role="combobox"
-             class="v-input v-text-field v-select v-input--hide-details"
+             class="v-input v-text-field v-select v-input--hide-details theme--light"
         >
           <div class="v-input__control">
             <div class="v-input__slot">
@@ -87,7 +87,7 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
                     <div class="v-input__append-inner">
                       <div class="v-input__icon v-input__icon--append">
                         <i aria-hidden="true"
-                           class="v-icon material-icons"
+                           class="v-icon material-icons theme--light"
                         >
                           arrow_drop_down
                         </i>
@@ -95,11 +95,11 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
                     </div>
                   </div>
                 </div>
-                <div class="v-menu__content v-menu__content--auto"
+                <div class="v-menu__content v-menu__content--auto theme--light "
                      style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
                 >
-                  <div class="v-select-list v-card">
-                    <div class="v-list">
+                  <div class="v-select-list v-card theme--light">
+                    <div class="v-list theme--light">
                       <div>
                         <a class="v-list__tile v-list__tile--link">
                           <div class="v-list__tile__content">
@@ -150,12 +150,12 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
         </div>
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--flat v-btn--icon"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--icon theme--light"
                 aria-label="Previous page"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
-               class="v-icon material-icons"
+               class="v-icon material-icons theme--light"
             >
               chevron_left
             </i>
@@ -163,12 +163,12 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
         </button>
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--flat v-btn--icon"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--icon theme--light"
                 aria-label="Next page"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
-               class="v-icon material-icons"
+               class="v-icon material-icons theme--light"
             >
               chevron_right
             </i>
@@ -185,7 +185,7 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
 
 <div>
   <div class="v-table__overflow">
-    <table class="v-datatable v-table">
+    <table class="v-datatable v-table theme--light">
       <thead>
         <tr>
           <th role="columnheader"
@@ -197,7 +197,7 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
           >
             First Column
             <i aria-hidden="true"
-               class="v-icon material-icons"
+               class="v-icon material-icons theme--light"
                style="font-size: 16px;"
             >
               arrow_upward
@@ -220,7 +220,7 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
           >
             Third Column
             <i aria-hidden="true"
-               class="v-icon material-icons"
+               class="v-icon material-icons theme--light"
                style="font-size: 16px;"
             >
               arrow_upward
@@ -245,12 +245,12 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
       </tbody>
     </table>
   </div>
-  <div class="v-datatable v-table">
+  <div class="v-datatable v-table theme--light">
     <div class="v-datatable__actions">
       <div class="v-datatable__actions__select">
         Rows per page:
         <div role="combobox"
-             class="v-input v-text-field v-select v-input--hide-details"
+             class="v-input v-text-field v-select v-input--hide-details theme--light"
         >
           <div class="v-input__control">
             <div class="v-input__slot">
@@ -268,7 +268,7 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
                     <div class="v-input__append-inner">
                       <div class="v-input__icon v-input__icon--append">
                         <i aria-hidden="true"
-                           class="v-icon material-icons"
+                           class="v-icon material-icons theme--light"
                         >
                           arrow_drop_down
                         </i>
@@ -276,11 +276,11 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
                     </div>
                   </div>
                 </div>
-                <div class="v-menu__content v-menu__content--auto"
+                <div class="v-menu__content v-menu__content--auto theme--light "
                      style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
                 >
-                  <div class="v-select-list v-card">
-                    <div class="v-list">
+                  <div class="v-select-list v-card theme--light">
+                    <div class="v-list theme--light">
                       <div>
                         <a class="v-list__tile v-list__tile--link">
                           <div class="v-list__tile__content">
@@ -331,12 +331,12 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
         </div>
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--flat v-btn--icon"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--icon theme--light"
                 aria-label="Previous page"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
-               class="v-icon material-icons"
+               class="v-icon material-icons theme--light"
             >
               chevron_left
             </i>
@@ -344,12 +344,12 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
         </button>
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--flat v-btn--icon"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--icon theme--light"
                 aria-label="Next page"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
-               class="v-icon material-icons"
+               class="v-icon material-icons theme--light"
             >
               chevron_right
             </i>
@@ -366,7 +366,7 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
 
 <div>
   <div class="v-table__overflow">
-    <table class="v-datatable v-table">
+    <table class="v-datatable v-table theme--light">
       <thead>
         <tr>
           <th role="columnheader"
@@ -378,7 +378,7 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
           >
             First Column
             <i aria-hidden="true"
-               class="v-icon material-icons"
+               class="v-icon material-icons theme--light"
                style="font-size: 16px;"
             >
               arrow_upward
@@ -401,7 +401,7 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
           >
             Third Column
             <i aria-hidden="true"
-               class="v-icon material-icons"
+               class="v-icon material-icons theme--light"
                style="font-size: 16px;"
             >
               arrow_upward
@@ -428,12 +428,12 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
       </tbody>
     </table>
   </div>
-  <div class="v-datatable v-table">
+  <div class="v-datatable v-table theme--light">
     <div class="v-datatable__actions">
       <div class="v-datatable__actions__select">
         Rows per page:
         <div role="combobox"
-             class="v-input v-text-field v-select v-input--hide-details"
+             class="v-input v-text-field v-select v-input--hide-details theme--light"
         >
           <div class="v-input__control">
             <div class="v-input__slot">
@@ -451,7 +451,7 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
                     <div class="v-input__append-inner">
                       <div class="v-input__icon v-input__icon--append">
                         <i aria-hidden="true"
-                           class="v-icon material-icons"
+                           class="v-icon material-icons theme--light"
                         >
                           arrow_drop_down
                         </i>
@@ -459,11 +459,11 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
                     </div>
                   </div>
                 </div>
-                <div class="v-menu__content v-menu__content--auto"
+                <div class="v-menu__content v-menu__content--auto theme--light "
                      style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
                 >
-                  <div class="v-select-list v-card">
-                    <div class="v-list">
+                  <div class="v-select-list v-card theme--light">
+                    <div class="v-list theme--light">
                       <div>
                         <a class="v-list__tile v-list__tile--link">
                           <div class="v-list__tile__content">
@@ -514,12 +514,12 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
         </div>
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--flat v-btn--icon"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--icon theme--light"
                 aria-label="Previous page"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
-               class="v-icon material-icons"
+               class="v-icon material-icons theme--light"
             >
               chevron_left
             </i>
@@ -527,12 +527,12 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
         </button>
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--flat v-btn--icon"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--icon theme--light"
                 aria-label="Next page"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
-               class="v-icon material-icons"
+               class="v-icon material-icons theme--light"
             >
               chevron_right
             </i>
@@ -549,7 +549,7 @@ exports[`VDataTable.vue should match a snapshot with single rows-per-page-items 
 
 <div>
   <div class="v-table__overflow">
-    <table class="v-datatable v-table">
+    <table class="v-datatable v-table theme--light">
       <thead>
         <tr>
           <th role="columnheader"
@@ -561,7 +561,7 @@ exports[`VDataTable.vue should match a snapshot with single rows-per-page-items 
           >
             First Column
             <i aria-hidden="true"
-               class="v-icon material-icons"
+               class="v-icon material-icons theme--light"
                style="font-size: 16px;"
             >
               arrow_upward
@@ -584,7 +584,7 @@ exports[`VDataTable.vue should match a snapshot with single rows-per-page-items 
           >
             Third Column
             <i aria-hidden="true"
-               class="v-icon material-icons"
+               class="v-icon material-icons theme--light"
                style="font-size: 16px;"
             >
               arrow_upward
@@ -602,7 +602,7 @@ exports[`VDataTable.vue should match a snapshot with single rows-per-page-items 
       </tbody>
     </table>
   </div>
-  <div class="v-datatable v-table">
+  <div class="v-datatable v-table theme--light">
     <div class="v-datatable__actions">
       <div class="v-datatable__actions__range-controls">
         <div class="v-datatable__actions__pagination">
@@ -610,24 +610,24 @@ exports[`VDataTable.vue should match a snapshot with single rows-per-page-items 
         </div>
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--flat v-btn--icon"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--icon theme--light"
                 aria-label="Previous page"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
-               class="v-icon material-icons"
+               class="v-icon material-icons theme--light"
             >
               chevron_left
             </i>
           </div>
         </button>
         <button type="button"
-                class="v-btn v-btn--flat v-btn--icon"
+                class="v-btn v-btn--flat v-btn--icon theme--light"
                 aria-label="Next page"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
-               class="v-icon material-icons"
+               class="v-icon material-icons theme--light"
             >
               chevron_right
             </i>

@@ -18,7 +18,9 @@ export default {
       class: {
         'v-subheader--inset': this.inset,
         ...this.themeClasses
-      }
+      },
+      attrs: this.$attrs,
+      on: this.$listeners
     }, this.$slots.default)
   }
 }

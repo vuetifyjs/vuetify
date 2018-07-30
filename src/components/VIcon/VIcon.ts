@@ -56,8 +56,10 @@ export default mixins(
     const data: VNodeData = {
       staticClass: 'v-icon',
       attrs: {
-        'aria-hidden': this.$attrs['aria-hidden'] == null ? true : undefined
-      }
+        'aria-hidden': true,
+        ...this.$attrs
+      },
+      on: this.$listeners
     }
 
     if (fontSize) data.style = { fontSize }
@@ -97,11 +99,11 @@ export default mixins(
         'v-icon--disabled': this.disabled,
         'v-icon--left': this.left,
         'v-icon--link': this.$listeners.click || this.$listeners['!click'],
-        'v-icon--right': this.right,
-        [iconType]: true,
-        ...this.themeClasses
+        'v-icon--right': this.right
       }),
-      isCustomIcon ? iconName : undefined
+      iconType,
+      isCustomIcon ? iconName : undefined,
+      this.themeClasses
     ]
 
     return h('i', data, newChildren)

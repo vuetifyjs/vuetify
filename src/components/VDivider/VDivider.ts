@@ -22,7 +22,9 @@ export default Themeable.extend({
         'v-divider--inset': this.inset,
         'v-divider--vertical': this.vertical,
         ...this.themeClasses
-      }
+      },
+      attrs: this.$attrs,
+      on: this.$listeners
     })
   }
 })

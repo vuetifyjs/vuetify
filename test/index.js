@@ -46,6 +46,17 @@ export function functionalContext(context = {}, children = []) {
   }
 }
 
+export function textComponent (text) {
+  return {
+    functional: true,
+    render (h) {
+      const node = h()
+      node.text = text
+      return node
+    }
+  }
+}
+
 //requestAnimationFrame polyfill | Milos Djakonovic ( @Miloshio ) | MIT | https://github.com/milosdjakonovic/requestAnimationFrame-polyfill
 export function rafPolyfill(w) {
   /**
