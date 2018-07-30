@@ -1,6 +1,9 @@
 import { test } from '@/test'
 import VCard from '@/components/VCard'
 
+const imgDeprecate = `'<v-card img="...">' is deprecated, use 'a nested <v-img>' instead`
+const raisedDeprecate = `'<v-card raised>' is deprecated, use '<v-card elevation="3">' instead`
+
 test('VCard.vue', ({ mount }) => {
   it('should render component and match snapshot', () => {
     const wrapper = mount(VCard)
@@ -16,6 +19,7 @@ test('VCard.vue', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
+    expect(imgDeprecate).toHaveBeenTipped()
   })
 
   it('should render a flat card', () => {
@@ -36,6 +40,7 @@ test('VCard.vue', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
+    expect(raisedDeprecate).toHaveBeenTipped()
   })
 
   it('should render a colored card', () => {

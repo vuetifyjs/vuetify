@@ -103,6 +103,7 @@ export default {
     genInput (type, attrs) {
       return this.$createElement('input', {
         attrs: Object.assign({}, attrs, {
+          'checked': this.isActive,
           'aria-label': this.label,
           name: this.radio.name || false,
           role: type,

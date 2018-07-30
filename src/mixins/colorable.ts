@@ -1,4 +1,40 @@
+// Types
 import Vue from 'vue'
+import { ClassesObject } from './../../types'
+
+export type ColorString = string | undefined | null | false
+
+function addColor (
+  classes: ClassesObject = {},
+  color?: ColorString
+): ClassesObject {
+  return {
+    ...classes,
+    [`${color}`]: true
+  }
+}
+
+export function addBackgroundColorClassChecks (
+  classes: ClassesObject = {},
+  color?: ColorString
+): ClassesObject {
+  return color ? addColor(classes, color) : classes
+}
+
+export function addTextColorClassChecks (
+  classes: ClassesObject = {},
+  color?: ColorString
+): ClassesObject {
+  if (!color) return classes
+
+  const [colorName, colorModifier] = color.toString().trim().split(' ')
+
+  color = `${colorName}--text`
+
+  if (colorModifier) color += ` text--${colorModifier}`
+
+  return addColor(classes, color)
+}
 
 export default Vue.extend({
   name: 'colorable',
@@ -7,11 +43,9 @@ export default Vue.extend({
     color: String
   },
 
-  data () {
-    return {
-      defaultColor: undefined
-    }
-  },
+  data: () => ({
+    defaultColor: undefined as undefined | string
+  }),
 
   computed: {
     computedColor (): string | undefined {
@@ -20,27 +54,23 @@ export default Vue.extend({
   },
 
   methods: {
-    addBackgroundColorClassChecks<T, C extends string> (obj?: T, color?: C): T & Record<C, true> {
-      const classes: any = Object.assign({}, obj)
-      const selectedColor = color === undefined ? this.computedColor : color
-
-      if (selectedColor) {
-        classes[selectedColor] = true
-      }
-
-      return classes
+    addBackgroundColorClassChecks (
+      classes?: ClassesObject,
+      color?: ColorString
+    ): ClassesObject {
+      return addBackgroundColorClassChecks(
+        classes,
+        color === undefined ? this.computedColor : color
+      )
     },
-    addTextColorClassChecks (obj?: any, color?: string | null): any {
-      const classes = Object.assign({}, obj)
-      if (color === undefined) color = this.computedColor
-
-      if (color) {
-        const [colorName, colorModifier] = color.toString().trim().split(' ')
-        classes[colorName + '--text'] = true
-        colorModifier && (classes['text--' + colorModifier] = true)
-      }
-
-      return classes
+    addTextColorClassChecks (
+      classes?: ClassesObject,
+      color?: ColorString
+    ): ClassesObject {
+      return addTextColorClassChecks(
+        classes,
+        color === undefined ? this.computedColor : color
+      )
     }
   }
 })

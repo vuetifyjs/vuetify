@@ -94,6 +94,7 @@ test('VFooter.js', ({ mount, functionalContext }) => {
 
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.computedPaddingLeft).toBe(300)
+    expect(wrapper.vm.$vuetify.application.footer).toBe(0)
   })
 
   it('should accept an auto height', async () => {

@@ -67,6 +67,7 @@ export default {
       }, [
         this.genInput('checkbox', {
           ...this.$attrs,
+          'checked': this.isActive,
           'aria-checked': this.inputIndeterminate
             ? 'mixed'
             : this.isActive.toString()
