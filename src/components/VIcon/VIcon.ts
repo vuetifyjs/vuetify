@@ -3,7 +3,7 @@ import '../../stylus/components/_icons.styl'
 // Mixins
 import Colorable from '../../mixins/colorable'
 import Sizeable from '../../mixins/sizeable'
-import Themeable, { functionalThemeClasses } from '../../mixins/themeable'
+import Themeable from '../../mixins/themeable'
 
 // Util
 import {
@@ -13,7 +13,7 @@ import {
 } from '../../util/helpers'
 
 // Types
-import { VNode, VNodeChildren } from 'vue'
+import { VNode, VNodeChildren, VNodeData } from 'vue'
 import mixins from '../../util/mixins'
 
 enum SIZE_MAP {
@@ -28,62 +28,55 @@ function isFontAwesome5 (iconType: string): boolean {
   return ['fas', 'far', 'fal', 'fab'].some(val => iconType.includes(val))
 }
 
-const addTextColorClassChecks = Colorable.options.methods.addTextColorClassChecks
-
-/* @vue/component */
 export default mixins(
   Colorable,
   Sizeable,
   Themeable
+/* @vue/component */
 ).extend({
   name: 'v-icon',
 
-  functional: true,
-
   props: {
-    // TODO: inherit these
-    color: String,
-    dark: Boolean,
     disabled: Boolean,
-    large: Boolean,
-    light: Boolean,
-    medium: Boolean,
-    size: [Number, String],
-    small: Boolean,
-    xLarge: Boolean,
-
     left: Boolean,
     right: Boolean
   },
 
-  /* eslint-disable max-statements */
-  render (h, context): VNode {
-    const { props, data, parent, listeners = {}, children = [] } = context
-    const { small, medium, large, xLarge } = props
-    const sizes = { small, medium, large, xLarge }
+  render (h): VNode {
+    const sizes = {
+      small: this.small,
+      medium: this.medium,
+      large: this.large,
+      xLarge: this.xLarge
+    }
     const explicitSize = keys(sizes).find(key => sizes[key] && !!key)
-    const fontSize = (explicitSize && SIZE_MAP[explicitSize]) || convertToUnit(props.size)
+    const fontSize = (explicitSize && SIZE_MAP[explicitSize]) || convertToUnit(this.size)
 
     const newChildren: VNodeChildren = []
+    const data: VNodeData = {
+      staticClass: 'v-icon',
+      attrs: {
+        'aria-hidden': this.$attrs['aria-hidden'] == null ? true : undefined
+      }
+    }
 
-    if (fontSize) data.style = { fontSize, ...data.style }
+    if (fontSize) data.style = { fontSize }
 
     let iconName = ''
-    if (children.length) iconName = children[0].text!
+    if (this.$slots.default) iconName = this.$slots.default[0].text!
     // Support usage of v-text and v-html
-    else if (data.domProps) {
-      iconName = data.domProps.textContent ||
-        data.domProps.innerHTML ||
+    else if (this.$vnode.data && this.$vnode.data.domProps) {
+      iconName = this.$vnode.data.domProps.textContent ||
+      this.$vnode.data.domProps.innerHTML ||
         iconName
 
-      // Remove nodes so it doesn't
-      // overwrite our changes
-      delete data.domProps.textContent
-      delete data.domProps.innerHTML
+      // Remove nodes so it doesn't overwrite our changes
+      delete this.$vnode.data.domProps.textContent
+      delete this.$vnode.data.domProps.innerHTML
     }
 
     // Remap internal names like '$vuetify.icons.cancel' to the current name for that icon
-    iconName = remapInternalIcon(parent, iconName)
+    iconName = remapInternalIcon(this, iconName)
 
     let iconType = 'material-icons'
     // Material Icon delimiter is _
@@ -99,31 +92,17 @@ export default mixins(
       // is Material Icon font
     } else newChildren.push(iconName)
 
-    data.attrs = data.attrs || {}
-    if (!('aria-hidden' in data.attrs)) {
-      data.attrs['aria-hidden'] = true
-    }
-
-    const classes = {
-      ...(props.color && addTextColorClassChecks.call(props, {}, props.color)),
-      'v-icon--disabled': props.disabled,
-      'v-icon--left': props.left,
-      'v-icon--link': listeners.click || listeners['!click'],
-      'v-icon--right': props.right,
-      ...functionalThemeClasses(context)
-    }
-
-    // Order classes
-    // * Component class
-    // * Vuetify classes
-    // * Icon Classes
-    data.staticClass = [
-      'v-icon',
-      data.staticClass,
-      Object.keys(classes).filter(k => classes[k]).join(' '),
-      iconType,
-      isCustomIcon ? iconName : null
-    ].filter(val => !!val).join(' ').trim()
+    data.class = [
+      this.addTextColorClassChecks({
+        'v-icon--disabled': this.disabled,
+        'v-icon--left': this.left,
+        'v-icon--link': this.$listeners.click || this.$listeners['!click'],
+        'v-icon--right': this.right,
+        [iconType]: true,
+        ...this.themeClasses
+      }),
+      isCustomIcon ? iconName : undefined
+    ]
 
     return h('i', data, newChildren)
   }
