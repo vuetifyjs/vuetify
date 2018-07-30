@@ -84,6 +84,15 @@ test('helpers.js', () => {
     expect(deepEqual({x: 1}, {})).toEqual(false)
     expect(deepEqual({x: {a: 1, b: 2}}, {x: {a: 1, b: 2}})).toEqual(true)
 
+    // Date
+    const currentDate = new Date
+    const futureDate = new Date(1000)
+
+    expect(deepEqual(currentDate, currentDate)).toEqual(true)
+    expect(deepEqual({date: currentDate}, {date: currentDate})).toEqual(true)
+    expect(deepEqual(currentDate, futureDate)).toEqual(false)
+    expect(deepEqual({date: currentDate}, {date: futureDate})).toEqual(false)
+
     const circular = {}
     circular.me = circular
 

@@ -1,14 +1,15 @@
 import '../../stylus/components/_icons.styl'
 
 // Mixins
-import Themeable, { functionalThemeClasses } from '../../mixins/themeable'
 import Colorable from '../../mixins/colorable'
+import Sizeable from '../../mixins/sizeable'
+import Themeable, { functionalThemeClasses } from '../../mixins/themeable'
 
 // Util
 import {
   convertToUnit,
-  getObjectValueByPath,
-  keys
+  keys,
+  remapInternalIcon
 } from '../../util/helpers'
 
 // Types
@@ -27,26 +28,14 @@ function isFontAwesome5 (iconType: string): boolean {
   return ['fas', 'far', 'fal', 'fab'].some(val => iconType.includes(val))
 }
 
-const ICONS_PREFIX = '$vuetify.icons.'
-
-// This remaps internal names like '$vuetify.icons.cancel' to the current name
-// for that icon. Note the parent component is needed for $vuetify because
-// VIcon is a functional component. This function only looks at the
-// immediate parent, so it won't remap for a nested functional components.
-function remapInternalIcon (parent: object, iconName: string): string {
-  if (!iconName.startsWith(ICONS_PREFIX)) {
-    // return original icon name unchanged
-    return iconName
-  }
-
-  // Now look up icon indirection name, e.g. '$vuetify.icons.cancel':
-  return getObjectValueByPath(parent, iconName) || iconName
-}
-
 const addTextColorClassChecks = Colorable.options.methods.addTextColorClassChecks
 
 /* @vue/component */
-export default mixins(Colorable, Themeable).extend({
+export default mixins(
+  Colorable,
+  Sizeable,
+  Themeable
+).extend({
   name: 'v-icon',
 
   functional: true,
@@ -55,18 +44,16 @@ export default mixins(Colorable, Themeable).extend({
     // TODO: inherit these
     color: String,
     dark: Boolean,
-    light: Boolean,
-
     disabled: Boolean,
     large: Boolean,
-    left: Boolean,
+    light: Boolean,
     medium: Boolean,
-    right: Boolean,
-    size: {
-      type: [Number, String]
-    },
+    size: [Number, String],
     small: Boolean,
-    xLarge: Boolean
+    xLarge: Boolean,
+
+    left: Boolean,
+    right: Boolean
   },
 
   /* eslint-disable max-statements */

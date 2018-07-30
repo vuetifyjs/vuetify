@@ -1,3 +1,4 @@
+// Directives
 import Ripple from '../directives/ripple'
 
 // Types

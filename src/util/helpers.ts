@@ -130,6 +130,11 @@ export function getNestedValue (obj: any, path: (string | number)[], fallback?: 
 export function deepEqual (a: any, b: any): boolean {
   if (a === b) return true
 
+  if (a instanceof Date && b instanceof Date) {
+    // If the values are Date, they were convert to timestamp with getTime and compare it
+    if (a.getTime() !== b.getTime()) return false
+  }
+
   if (a !== Object(a) || b !== Object(b)) {
     // If the values aren't objects, they were already checked for equality
     return false
@@ -253,6 +258,22 @@ export const keyCodes = Object.freeze({
   pageup: 33,
   pagedown: 34
 })
+
+const ICONS_PREFIX = '$vuetify.icons.'
+
+// This remaps internal names like '$vuetify.icons.cancel' to the current name
+// for that icon. Note the parent component is needed for $vuetify because
+// VIcon is a functional component. This function only looks at the
+// immediate parent, so it won't remap for a nested functional components.
+export function remapInternalIcon (parent: object, iconName: string): string {
+  if (!iconName.startsWith(ICONS_PREFIX)) {
+    // return original icon name unchanged
+    return iconName
+  }
+
+  // Now look up icon indirection name, e.g. '$vuetify.icons.cancel':
+  return getObjectValueByPath(parent, iconName) || iconName
+}
 
 export function keys<O> (o: O) {
   return Object.keys(o) as (keyof O)[]
