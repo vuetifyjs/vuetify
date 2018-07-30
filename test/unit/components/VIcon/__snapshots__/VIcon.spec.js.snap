@@ -6,7 +6,6 @@ exports[`VIcon.js set font size from helper prop 1`] = `
    class="v-icon material-icons theme--light"
    style="font-size: 16px;"
 >
-  foo
 </i>
 
 `;
@@ -17,7 +16,6 @@ exports[`VIcon.js set font size from helper prop 2`] = `
    class="v-icon material-icons theme--light"
    style="font-size: 28px;"
 >
-  foo
 </i>
 
 `;
@@ -28,7 +26,6 @@ exports[`VIcon.js set font size from helper prop 3`] = `
    class="v-icon material-icons theme--light"
    style="font-size: 36px;"
 >
-  foo
 </i>
 
 `;
@@ -39,7 +36,6 @@ exports[`VIcon.js set font size from helper prop 4`] = `
    class="v-icon material-icons theme--light"
    style="font-size: 40px;"
 >
-  foo
 </i>
 
 `;

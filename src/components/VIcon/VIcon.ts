@@ -13,7 +13,7 @@ import {
 } from '../../util/helpers'
 
 // Types
-import { VNode, VNodeChildren, VNodeData } from 'vue'
+import Vue, { VNode, VNodeChildren, VNodeData } from 'vue'
 import mixins from '../../util/mixins'
 
 enum SIZE_MAP {
@@ -28,7 +28,7 @@ function isFontAwesome5 (iconType: string): boolean {
   return ['fas', 'far', 'fal', 'fab'].some(val => iconType.includes(val))
 }
 
-export default mixins(
+const VIcon = mixins(
   Colorable,
   Sizeable,
   Themeable
@@ -66,16 +66,6 @@ export default mixins(
 
     let iconName = ''
     if (this.$slots.default) iconName = this.$slots.default[0].text!
-    // Support usage of v-text and v-html
-    else if (this.$vnode.data && this.$vnode.data.domProps) {
-      iconName = this.$vnode.data.domProps.textContent ||
-      this.$vnode.data.domProps.innerHTML ||
-        iconName
-
-      // Remove nodes so it doesn't overwrite our changes
-      delete this.$vnode.data.domProps.textContent
-      delete this.$vnode.data.domProps.innerHTML
-    }
 
     // Remap internal names like '$vuetify.icons.cancel' to the current name for that icon
     iconName = remapInternalIcon(this, iconName)
@@ -107,5 +97,31 @@ export default mixins(
     ]
 
     return h('i', data, newChildren)
+  }
+})
+
+export default Vue.extend({
+  name: 'v-icon',
+
+  $_wrapperFor: VIcon,
+
+  functional: true,
+
+  render (h, { data, children }): VNode {
+    let iconName = ''
+
+    // Support usage of v-text and v-html
+    if (data.domProps) {
+      iconName = data.domProps.textContent ||
+        data.domProps.innerHTML ||
+        iconName
+
+      // Remove nodes so it doesn't
+      // overwrite our changes
+      delete data.domProps.textContent
+      delete data.domProps.innerHTML
+    }
+
+    return h(VIcon, data, iconName ? [iconName] : children)
   }
 })
