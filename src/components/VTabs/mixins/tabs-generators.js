@@ -13,9 +13,7 @@ export default {
     genBar (items) {
       return this.$createElement('div', {
         staticClass: 'v-tabs__bar',
-        'class': this.addBackgroundColorClassChecks({
-          ...this.themeClasses
-        }),
+        'class': this.addBackgroundColorClassChecks(this.themeClasses),
         ref: 'bar'
       }, [
         this.genTransition('prev'),
