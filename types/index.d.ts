@@ -123,7 +123,18 @@ export interface VuetifyBreakpoint {
   xsOnly: boolean
 }
 
-export type VuetifyThemeItem = string | number
+export type VuetifyThemeItem = string | number | {
+  base: string | number
+  lighten5: string | number
+  lighten4: string | number
+  lighten3: string | number
+  lighten2: string | number
+  lighten1: string | number
+  darken1: string | number
+  darken2: string | number
+  darken3: string | number
+  darken4: string | number
+}
 
 export interface VuetifyTheme {
   [name: string]: VuetifyThemeItem
@@ -143,7 +154,6 @@ export interface VuetifyThemeCache {
 }
 
 export interface VuetifyOptions {
-  themeVariations: string[]
   minifyTheme: ((css: string) => string) | null
   themeCache: VuetifyThemeCache | null
   /** @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src#Unsafe_inline_script */
