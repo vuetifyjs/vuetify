@@ -20,7 +20,7 @@ exports[`VAlert.vue should be dismissible 1`] = `
   </div>
   <a class="v-alert__dismissible">
     <i aria-hidden="true"
-       class="v-icon v-icon--right material-icons"
+       class="v-icon v-icon--right material-icons theme--light"
     >
       cancel
     </i>
@@ -38,7 +38,7 @@ exports[`VAlert.vue should have a close icon 1`] = `
   </div>
   <a class="v-alert__dismissible">
     <i aria-hidden="true"
-       class="v-icon v-icon--right material-icons"
+       class="v-icon v-icon--right material-icons theme--light"
     >
       cancel
     </i>

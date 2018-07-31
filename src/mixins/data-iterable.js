@@ -373,9 +373,7 @@ export default {
         props: {
           disabled: this.computedPagination.page === 1,
           icon: true,
-          flat: true,
-          dark: this.dark,
-          light: this.light
+          flat: true
         },
         on: {
           click: () => {
@@ -398,9 +396,7 @@ export default {
         props: {
           disabled,
           icon: true,
-          flat: true,
-          dark: this.dark,
-          light: this.light
+          flat: true
         },
         on: {
           click: () => {

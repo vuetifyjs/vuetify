@@ -398,6 +398,42 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect(list.html()).toMatchSnapshot()
   })
 
+  it('should use slotted prepend-item', () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        items: ['foo']
+      },
+      slots: {
+        'prepend-item': [{
+          render: h => h('div', 'foo')
+        }]
+      }
+    })
+
+    const list = wrapper.first('.v-list')
+
+    expect(wrapper.vm.$slots['prepend-item']).toBeTruthy()
+    expect(list.html()).toMatchSnapshot()
+  })
+
+  it('should use slotted append-item', () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        items: ['foo']
+      },
+      slots: {
+        'append-item': [{
+          render: h => h('div', 'foo')
+        }]
+      }
+    })
+
+    const list = wrapper.first('.v-list')
+
+    expect(wrapper.vm.$slots['append-item']).toBeTruthy()
+    expect(list.html()).toMatchSnapshot()
+  })
+
   it('should use scoped slot for selection generation', () => {
     const wrapper = mount({
       render (h) {
