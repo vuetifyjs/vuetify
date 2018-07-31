@@ -70,8 +70,7 @@ export default {
       return {
         'v-datatable v-table': true,
         'v-datatable--select-all': this.selectAll !== false,
-        'theme--dark': this.dark,
-        'theme--light': this.light
+        ...this.themeClasses
       }
     },
     filteredItems () {
