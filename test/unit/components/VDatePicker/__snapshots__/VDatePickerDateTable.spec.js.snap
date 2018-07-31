@@ -664,7 +664,7 @@ exports[`VDatePickerDateTable.js should render component and match snapshot 1`] 
 
 exports[`VDatePickerDateTable.js should render component and match snapshot for multiple selection 1`] = `
 
-<div class="v-date-picker-table v-date-picker-table--date">
+<div class="v-date-picker-table v-date-picker-table--date theme--light">
   <table>
     <thead>
       <tr>
@@ -695,7 +695,7 @@ exports[`VDatePickerDateTable.js should render component and match snapshot for 
       <tr>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat v-btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating theme--light"
           >
             <div class="v-btn__content">
               1
@@ -704,7 +704,7 @@ exports[`VDatePickerDateTable.js should render component and match snapshot for 
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat v-btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating theme--light"
           >
             <div class="v-btn__content">
               2
@@ -713,7 +713,7 @@ exports[`VDatePickerDateTable.js should render component and match snapshot for 
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat v-btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating theme--light"
           >
             <div class="v-btn__content">
               3
@@ -722,7 +722,7 @@ exports[`VDatePickerDateTable.js should render component and match snapshot for 
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat v-btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating theme--light"
           >
             <div class="v-btn__content">
               4
@@ -731,7 +731,7 @@ exports[`VDatePickerDateTable.js should render component and match snapshot for 
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat v-btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating theme--light"
           >
             <div class="v-btn__content">
               5
@@ -740,7 +740,7 @@ exports[`VDatePickerDateTable.js should render component and match snapshot for 
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat v-btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating theme--light"
           >
             <div class="v-btn__content">
               6
@@ -749,7 +749,7 @@ exports[`VDatePickerDateTable.js should render component and match snapshot for 
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat v-btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating theme--light"
           >
             <div class="v-btn__content">
               7
@@ -760,7 +760,7 @@ exports[`VDatePickerDateTable.js should render component and match snapshot for 
       <tr>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat v-btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating theme--light"
           >
             <div class="v-btn__content">
               8
@@ -769,7 +769,7 @@ exports[`VDatePickerDateTable.js should render component and match snapshot for 
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat v-btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating theme--light"
           >
             <div class="v-btn__content">
               9
@@ -778,7 +778,7 @@ exports[`VDatePickerDateTable.js should render component and match snapshot for 
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat v-btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating theme--light"
           >
             <div class="v-btn__content">
               10
@@ -787,7 +787,7 @@ exports[`VDatePickerDateTable.js should render component and match snapshot for 
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat v-btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating theme--light"
           >
             <div class="v-btn__content">
               11
@@ -796,7 +796,7 @@ exports[`VDatePickerDateTable.js should render component and match snapshot for 
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat v-btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating theme--light"
           >
             <div class="v-btn__content">
               12
@@ -805,7 +805,7 @@ exports[`VDatePickerDateTable.js should render component and match snapshot for 
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat v-btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating theme--light"
           >
             <div class="v-btn__content">
               13
@@ -814,7 +814,7 @@ exports[`VDatePickerDateTable.js should render component and match snapshot for 
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat v-btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating theme--light"
           >
             <div class="v-btn__content">
               14
@@ -825,7 +825,7 @@ exports[`VDatePickerDateTable.js should render component and match snapshot for 
       <tr>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat v-btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating theme--light"
           >
             <div class="v-btn__content">
               15
@@ -834,7 +834,7 @@ exports[`VDatePickerDateTable.js should render component and match snapshot for 
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat v-btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating theme--light"
           >
             <div class="v-btn__content">
               16
@@ -843,7 +843,7 @@ exports[`VDatePickerDateTable.js should render component and match snapshot for 
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat v-btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating theme--light"
           >
             <div class="v-btn__content">
               17
@@ -852,7 +852,7 @@ exports[`VDatePickerDateTable.js should render component and match snapshot for 
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat v-btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating theme--light"
           >
             <div class="v-btn__content">
               18
@@ -861,7 +861,7 @@ exports[`VDatePickerDateTable.js should render component and match snapshot for 
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat v-btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating theme--light"
           >
             <div class="v-btn__content">
               19
@@ -870,7 +870,7 @@ exports[`VDatePickerDateTable.js should render component and match snapshot for 
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat v-btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating theme--light"
           >
             <div class="v-btn__content">
               20
@@ -879,7 +879,7 @@ exports[`VDatePickerDateTable.js should render component and match snapshot for 
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat v-btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating theme--light"
           >
             <div class="v-btn__content">
               21
@@ -890,7 +890,7 @@ exports[`VDatePickerDateTable.js should render component and match snapshot for 
       <tr>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat v-btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating theme--light"
           >
             <div class="v-btn__content">
               22
@@ -899,7 +899,7 @@ exports[`VDatePickerDateTable.js should render component and match snapshot for 
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat v-btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating theme--light"
           >
             <div class="v-btn__content">
               23
@@ -908,7 +908,7 @@ exports[`VDatePickerDateTable.js should render component and match snapshot for 
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat v-btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating theme--light"
           >
             <div class="v-btn__content">
               24
@@ -917,7 +917,7 @@ exports[`VDatePickerDateTable.js should render component and match snapshot for 
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat v-btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating theme--light"
           >
             <div class="v-btn__content">
               25
@@ -926,7 +926,7 @@ exports[`VDatePickerDateTable.js should render component and match snapshot for 
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat v-btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating theme--light"
           >
             <div class="v-btn__content">
               26
@@ -935,7 +935,7 @@ exports[`VDatePickerDateTable.js should render component and match snapshot for 
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat v-btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating theme--light"
           >
             <div class="v-btn__content">
               27
@@ -944,7 +944,7 @@ exports[`VDatePickerDateTable.js should render component and match snapshot for 
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat v-btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating theme--light"
           >
             <div class="v-btn__content">
               28
@@ -955,7 +955,7 @@ exports[`VDatePickerDateTable.js should render component and match snapshot for 
       <tr>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat v-btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating theme--light"
           >
             <div class="v-btn__content">
               29
@@ -964,7 +964,7 @@ exports[`VDatePickerDateTable.js should render component and match snapshot for 
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat v-btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating theme--light"
           >
             <div class="v-btn__content">
               30
@@ -973,7 +973,7 @@ exports[`VDatePickerDateTable.js should render component and match snapshot for 
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat v-btn--floating"
+                  class="v-btn v-btn--flat v-btn--floating theme--light"
           >
             <div class="v-btn__content">
               31
