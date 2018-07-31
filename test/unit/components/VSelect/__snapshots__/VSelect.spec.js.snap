@@ -11,7 +11,7 @@ exports[`VSelect should escape items in menu 1`] = `
 exports[`VSelect should only show items if they are in items 1`] = `
 
 <div role="combobox"
-     class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty"
+     class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty theme--light"
 >
   <div class="v-input__control">
     <div class="v-input__slot">
@@ -31,7 +31,7 @@ exports[`VSelect should only show items if they are in items 1`] = `
             <div class="v-input__append-inner">
               <div class="v-input__icon v-input__icon--append">
                 <i aria-hidden="true"
-                   class="v-icon material-icons"
+                   class="v-icon material-icons theme--light"
                 >
                   arrow_drop_down
                 </i>
@@ -42,7 +42,7 @@ exports[`VSelect should only show items if they are in items 1`] = `
       </div>
     </div>
     <div class="v-text-field__details">
-      <div class="v-messages">
+      <div class="v-messages theme--light">
         <div class="v-messages__wrapper">
         </div>
       </div>
@@ -55,7 +55,7 @@ exports[`VSelect should only show items if they are in items 1`] = `
 exports[`VSelect should only show items if they are in items 2`] = `
 
 <div role="combobox"
-     class="v-input v-text-field v-select"
+     class="v-input v-text-field v-select theme--light"
 >
   <div class="v-input__control">
     <div class="v-input__slot">
@@ -72,7 +72,7 @@ exports[`VSelect should only show items if they are in items 2`] = `
             <div class="v-input__append-inner">
               <div class="v-input__icon v-input__icon--append">
                 <i aria-hidden="true"
-                   class="v-icon material-icons"
+                   class="v-icon material-icons theme--light"
                 >
                   arrow_drop_down
                 </i>
@@ -83,7 +83,7 @@ exports[`VSelect should only show items if they are in items 2`] = `
       </div>
     </div>
     <div class="v-text-field__details">
-      <div class="v-messages">
+      <div class="v-messages theme--light">
         <div class="v-messages__wrapper">
         </div>
       </div>
@@ -96,7 +96,7 @@ exports[`VSelect should only show items if they are in items 2`] = `
 exports[`VSelect should only show items if they are in items 3`] = `
 
 <div role="combobox"
-     class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty"
+     class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty theme--light"
 >
   <div class="v-input__control">
     <div class="v-input__slot">
@@ -116,7 +116,7 @@ exports[`VSelect should only show items if they are in items 3`] = `
             <div class="v-input__append-inner">
               <div class="v-input__icon v-input__icon--append">
                 <i aria-hidden="true"
-                   class="v-icon material-icons"
+                   class="v-icon material-icons theme--light"
                 >
                   arrow_drop_down
                 </i>
@@ -127,7 +127,7 @@ exports[`VSelect should only show items if they are in items 3`] = `
       </div>
     </div>
     <div class="v-text-field__details">
-      <div class="v-messages">
+      <div class="v-messages theme--light">
         <div class="v-messages__wrapper">
         </div>
       </div>
@@ -140,7 +140,7 @@ exports[`VSelect should only show items if they are in items 3`] = `
 exports[`VSelect should only show items if they are in items 4`] = `
 
 <div role="combobox"
-     class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty"
+     class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty theme--light"
 >
   <div class="v-input__control">
     <div class="v-input__slot">
@@ -163,7 +163,7 @@ exports[`VSelect should only show items if they are in items 4`] = `
             <div class="v-input__append-inner">
               <div class="v-input__icon v-input__icon--append">
                 <i aria-hidden="true"
-                   class="v-icon material-icons"
+                   class="v-icon material-icons theme--light"
                 >
                   arrow_drop_down
                 </i>
@@ -174,7 +174,7 @@ exports[`VSelect should only show items if they are in items 4`] = `
       </div>
     </div>
     <div class="v-text-field__details">
-      <div class="v-messages">
+      <div class="v-messages theme--light">
         <div class="v-messages__wrapper">
         </div>
       </div>
@@ -187,7 +187,7 @@ exports[`VSelect should only show items if they are in items 4`] = `
 exports[`VSelect should render v-select correctly when not using scope slot 1`] = `
 
 <div role="combobox"
-     class="v-input v-text-field v-select"
+     class="v-input v-text-field v-select theme--light"
 >
   <div class="v-input__control">
     <div class="v-input__slot">
@@ -204,7 +204,7 @@ exports[`VSelect should render v-select correctly when not using scope slot 1`] 
             <div class="v-input__append-inner">
               <div class="v-input__icon v-input__icon--append">
                 <i aria-hidden="true"
-                   class="v-icon material-icons"
+                   class="v-icon material-icons theme--light"
                 >
                   arrow_drop_down
                 </i>
@@ -215,7 +215,7 @@ exports[`VSelect should render v-select correctly when not using scope slot 1`] 
       </div>
     </div>
     <div class="v-text-field__details">
-      <div class="v-messages">
+      <div class="v-messages theme--light">
         <div class="v-messages__wrapper">
         </div>
       </div>
@@ -228,7 +228,7 @@ exports[`VSelect should render v-select correctly when not using scope slot 1`] 
 exports[`VSelect should render v-select correctly when not using v-list-tile in item scope slot 1`] = `
 
 <div role="combobox"
-     class="v-input v-text-field v-select"
+     class="v-input v-text-field v-select theme--light"
 >
   <div class="v-input__control">
     <div class="v-input__slot">
@@ -245,7 +245,7 @@ exports[`VSelect should render v-select correctly when not using v-list-tile in 
             <div class="v-input__append-inner">
               <div class="v-input__icon v-input__icon--append">
                 <i aria-hidden="true"
-                   class="v-icon material-icons"
+                   class="v-icon material-icons theme--light"
                 >
                   arrow_drop_down
                 </i>
@@ -256,7 +256,7 @@ exports[`VSelect should render v-select correctly when not using v-list-tile in 
       </div>
     </div>
     <div class="v-text-field__details">
-      <div class="v-messages">
+      <div class="v-messages theme--light">
         <div class="v-messages__wrapper">
         </div>
       </div>
@@ -269,7 +269,7 @@ exports[`VSelect should render v-select correctly when not using v-list-tile in 
 exports[`VSelect should render v-select correctly when using v-list-tile in item scope slot 1`] = `
 
 <div role="combobox"
-     class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty"
+     class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty theme--light"
 >
   <div class="v-input__control">
     <div class="v-input__slot">
@@ -291,7 +291,7 @@ exports[`VSelect should render v-select correctly when using v-list-tile in item
             <div class="v-input__append-inner">
               <div class="v-input__icon v-input__icon--append">
                 <i aria-hidden="true"
-                   class="v-icon material-icons"
+                   class="v-icon material-icons theme--light"
                 >
                   arrow_drop_down
                 </i>
@@ -302,7 +302,7 @@ exports[`VSelect should render v-select correctly when using v-list-tile in item
       </div>
     </div>
     <div class="v-text-field__details">
-      <div class="v-messages">
+      <div class="v-messages theme--light">
         <div class="v-messages__wrapper">
         </div>
       </div>
@@ -315,7 +315,7 @@ exports[`VSelect should render v-select correctly when using v-list-tile in item
 exports[`VSelect should use scoped slot for selection generation 1`] = `
 
 <div role="combobox"
-     class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty"
+     class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty theme--light"
 >
   <div class="v-input__control">
     <div class="v-input__slot">
@@ -335,7 +335,7 @@ exports[`VSelect should use scoped slot for selection generation 1`] = `
             <div class="v-input__append-inner">
               <div class="v-input__icon v-input__icon--append">
                 <i aria-hidden="true"
-                   class="v-icon material-icons"
+                   class="v-icon material-icons theme--light"
                 >
                   arrow_drop_down
                 </i>
@@ -346,7 +346,7 @@ exports[`VSelect should use scoped slot for selection generation 1`] = `
       </div>
     </div>
     <div class="v-text-field__details">
-      <div class="v-messages">
+      <div class="v-messages theme--light">
         <div class="v-messages__wrapper">
         </div>
       </div>
@@ -358,7 +358,7 @@ exports[`VSelect should use scoped slot for selection generation 1`] = `
 
 exports[`VSelect should use slotted no-data 1`] = `
 
-<div class="v-list">
+<div class="v-list theme--light">
   <div>
     <a class="v-list__tile v-list__tile--link">
       <div class="v-list__tile__content">
