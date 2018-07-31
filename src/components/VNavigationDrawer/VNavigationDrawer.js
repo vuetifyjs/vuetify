@@ -110,8 +110,7 @@ export default {
         'v-navigation-drawer--open': this.isActive,
         'v-navigation-drawer--right': this.right,
         'v-navigation-drawer--temporary': this.temporary,
-        'theme--dark': this.dark,
-        'theme--light': this.light
+        ...this.themeClasses
       }
     },
     hasApp () {

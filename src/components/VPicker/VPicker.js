@@ -33,8 +33,7 @@ export default {
 
   computed: {
     computedTitleColor () {
-      const darkTheme = this.dark || (!this.light && this.$vuetify.dark)
-      const defaultTitleColor = darkTheme ? null : this.computedColor
+      const defaultTitleColor = this.isDark ? null : this.computedColor
       return this.color || defaultTitleColor
     }
   },

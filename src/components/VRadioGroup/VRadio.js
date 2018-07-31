@@ -59,8 +59,7 @@ export default {
       const classes = {
         'v-radio--is-disabled': this.isDisabled,
         'v-radio--is-focused': this.isFocused,
-        'theme--dark': this.dark,
-        'theme--light': this.light
+        ...this.themeClasses
       }
 
       if (!this.parentError && this.isActive) {

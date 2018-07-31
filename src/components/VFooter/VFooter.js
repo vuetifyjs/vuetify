@@ -85,8 +85,7 @@ export default {
         'v-footer--absolute': this.absolute,
         'v-footer--fixed': !this.absolute && (this.app || this.fixed),
         'v-footer--inset': this.inset,
-        'theme--dark': this.dark,
-        'theme--light': this.light
+        ...this.themeClasses
       }),
       style: this.styles,
       ref: 'content'

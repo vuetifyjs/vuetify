@@ -1,4 +1,5 @@
-import { VNode, VNodeDirective, FunctionalComponentOptions } from 'vue'
+import { Vue } from 'vue/types/vue'
+import { VNode, VNodeDirective, FunctionalComponentOptions } from 'vue/types'
 
 export function createSimpleFunctional (
   c: string,
@@ -258,6 +259,19 @@ export const keyCodes = Object.freeze({
   pageup: 33,
   pagedown: 34
 })
+
+const ICONS_PREFIX = '$vuetify.icons.'
+
+// This remaps internal names like '$vuetify.icons.cancel' to the current name
+// for that icon.
+export function remapInternalIcon (vm: Vue, iconName: string): string {
+  if (!iconName.startsWith(ICONS_PREFIX)) {
+    return iconName
+  }
+
+  // Now look up icon indirection name, e.g. '$vuetify.icons.cancel'
+  return getObjectValueByPath(vm, iconName, iconName)
+}
 
 export function keys<O> (o: O) {
   return Object.keys(o) as (keyof O)[]

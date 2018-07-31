@@ -20,7 +20,7 @@ export default {
 
   computed: {
     classes () {
-      return this.addTextColorClassChecks()
+      return this.addTextColorClassChecks(this.themeClasses)
     }
   },
 
@@ -48,10 +48,7 @@ export default {
   render (h) {
     return h('div', {
       staticClass: 'v-messages',
-      'class': {
-        ...this.classes,
-        ...this.themeClasses
-      }
+      class: this.classes
     }, [this.genChildren()])
   }
 }

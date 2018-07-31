@@ -34,6 +34,10 @@ export default {
       type: String,
       default: 'text'
     },
+    headerKey: {
+      type: String,
+      default: null
+    },
     hideHeaders: Boolean,
     rowsPerPageText: {
       type: String,
@@ -66,8 +70,7 @@ export default {
       return {
         'v-datatable v-table': true,
         'v-datatable--select-all': this.selectAll !== false,
-        'theme--dark': this.dark,
-        'theme--light': this.light
+        ...this.themeClasses
       }
     },
     filteredItems () {

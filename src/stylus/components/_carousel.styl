@@ -18,6 +18,12 @@ rtl(v-carousel-rtl, "v-carousel")
   overflow: hidden
   elevation(2)
 
+  &__item
+    position: absolute
+    top: 0
+    width: 100%
+    transition: .3s $transition.swing
+
   &__prev,
   &__next
     position: absolute
@@ -26,8 +32,7 @@ rtl(v-carousel-rtl, "v-carousel")
     transform: translateY(-50%)
 
     .v-btn
-      color: #FFFFFF
-      margin: 0 !important
+      margin: 0
       height: auto
       width: auto
 
@@ -57,20 +62,19 @@ rtl(v-carousel-rtl, "v-carousel")
     z-index: 1
 
     &__item
-      color: #FFFFFF
       margin: 0 8px !important
 
-      i
+      .v-icon
         opacity: .5
         transition: $primary-transition
 
       &--active
-        i
+        .v-icon
           opacity: 1
           vertical-align: middle
 
       &:hover
         background: none
 
-        i
+        .v-icon
           opacity: .8

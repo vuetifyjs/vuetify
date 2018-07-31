@@ -40,8 +40,7 @@ export default mixins(Colorable, Themeable, Toggleable).extend({
         'v-chip--outline': this.outline,
         'v-chip--small': this.small,
         'v-chip--removable': this.close,
-        'theme--light': this.light,
-        'theme--dark': this.dark
+        ...this.themeClasses
       })
 
       return (this.textColor || this.outline)
