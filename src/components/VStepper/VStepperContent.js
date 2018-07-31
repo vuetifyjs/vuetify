@@ -10,6 +10,12 @@ import { convertToUnit } from '../../util/helpers'
 export default {
   name: 'v-stepper-content',
 
+  inject: {
+    isVerticalProvided: {
+      from: 'isVertical'
+    }
+  },
+
   props: {
     step: {
       type: [Number, String],
@@ -24,7 +30,7 @@ export default {
       // previous comparison
       isActive: null,
       isReverse: false,
-      isVertical: false
+      isVertical: this.isVerticalProvided
     }
   },
 

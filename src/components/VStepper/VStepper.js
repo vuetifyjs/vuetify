@@ -10,7 +10,8 @@ export default {
 
   provide () {
     return {
-      stepClick: this.stepClick
+      stepClick: this.stepClick,
+      isVertical: this.vertical
     }
   },
 
