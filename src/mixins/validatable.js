@@ -158,12 +158,18 @@ export default {
   },
 
   methods: {
+    /** @public */
     reset () {
       this.isResetting = true
       this.internalValue = Array.isArray(this.internalValue)
         ? []
         : undefined
     },
+    /** @public */
+    resetValidation () {
+      this.isResetting = true
+    },
+    /** @public */
     validate (force = false, value = this.internalValue) {
       const errorBucket = []
 
