@@ -134,12 +134,9 @@ const directives = {}
 const installedComponents = Vue.options._base.options.components
 const installedDirectives = Vue.options._base.options.directives
 
-const kebabizeRE = /([^-])([A-Z])/g
-function kebabize (str) {
-  return str
-  .replace(kebabizeRE, '$1-$2')
-  .toLowerCase()
-  
+const hyphenateRE = /\B([A-Z])/g
+const hyphenate = str => {
+  return str.replace(hyphenateRE, '-$1').toLowerCase()
 }
 
 const componentNameRegex = /^(?:V[A-Z]|v-[a-z])/
@@ -150,8 +147,8 @@ for (const name in installedComponents) {
   if (component.options.$_wrapperFor) {
     component = Vue.extend(component.options.$_wrapperFor)
   }
-  
-  const kebabName = kebabize(name)
+
+  const kebabName = hyphenate(name)
   let options = parseComponent(component.options || component)
 
   if (map[kebabName]) {
