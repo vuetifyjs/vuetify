@@ -34,7 +34,8 @@ export default Vue.extend({
       if (isCssColor(color)) {
         data.style = {
           ...data.style,
-          'color': `${color}`
+          'color': `${color}`,
+          'caret-color': `${color}`
         }
       } else if (color) {
         const [colorName, colorModifier] = color.toString().trim().split(' ', 2) as (string | undefined)[]

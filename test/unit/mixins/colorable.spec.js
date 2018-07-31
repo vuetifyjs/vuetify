@@ -68,12 +68,14 @@ test('colorable.js', ({ mount }) => {
 
     expect(wrapper.vm.setTextColor('#01f', {})).toEqual({
       style: {
-        'color': '#01f'
+        'color': '#01f',
+        'caret-color': '#01f'
       }
     })
     expect(wrapper.vm.setTextColor('rgba(0, 1, 2, 0.5)', {})).toEqual({
       style: {
-        'color': 'rgba(0, 1, 2, 0.5)'
+        'color': 'rgba(0, 1, 2, 0.5)',
+        'caret-color': 'rgba(0, 1, 2, 0.5)'
       }
     })
   })
