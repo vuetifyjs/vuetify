@@ -15,6 +15,21 @@ test('VDatePickerDateTable.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should render component and match snapshot for multiple selection', () => {
+    const wrapper = mount(VDatePickerDateTable, {
+      propsData: {
+        tableDate: '2005-05',
+        current: '2005-07',
+        multiple: true,
+        selectedDates: ['2005-11-03', '2005-11-05', '2005-11-08'],
+        value: '2005-11-03'
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+
   it('should render component with events (array) and match snapshot', () => {
     const wrapper = mount(VDatePickerDateTable, {
       propsData: {
