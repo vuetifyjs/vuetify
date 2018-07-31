@@ -1,4 +1,3 @@
-import { compileToFunctions } from 'vue-template-compiler'
 import VDatePickerMonthTable from '@/components/VDatePicker/VDatePickerMonthTable'
 import { test } from '@/test'
 

@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import { test, touch } from '@/test'
-import VDatePicker from '@/components/VDatePicker'
-import VMenu from '@/components/VMenu'
+import VDatePicker from '@/components/VDatePicker/VDatePicker'
 
 test('VDatePicker.js', ({ mount, compileToFunctions }) => {
   it('should display the correct date in title and header', () => {

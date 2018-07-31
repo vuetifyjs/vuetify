@@ -10,11 +10,12 @@ export interface Vuetify {
 }
 
 export type VuetifyDirective = DirectiveOptions & { name: string }
+export type ComponentOrPack = VueConstructor | { $_vuetify_subcomponents: Record<string, ComponentOrPack> }
 
 export interface VuetifyUseOptions {
   transitions?: Record<string, VueConstructor>
   directives?: Record<string, VuetifyDirective>
-  components?: Record<string, PluginObject<any> | PluginFunction<never>>
+  components?: Record<string, ComponentOrPack>
   /** @see https://vuetifyjs.com/style/theme */
   theme?: Partial<VuetifyTheme> | false
   /**

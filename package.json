@@ -118,7 +118,8 @@
   "jest": {
     "verbose": false,
     "roots": [
-      "<rootDir>/test/unit"
+      "<rootDir>/test/unit",
+      "<rootDir>/test/integration"
     ],
     "moduleFileExtensions": [
       "ts",

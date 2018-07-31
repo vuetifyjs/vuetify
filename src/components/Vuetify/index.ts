@@ -7,13 +7,12 @@ import genLang from './mixins/lang'
 import { consoleWarn } from '../../util/console'
 import goTo from './util/goTo'
 import { VueConstructor } from 'vue/types'
-import { Vuetify as VuetifyPlugin } from 'types'
+import { Vuetify as VuetifyPlugin, VuetifyUseOptions } from 'types'
 
 const Vuetify: VuetifyPlugin = {
   install (Vue, opts = {}) {
     if ((this as any).installed) return
-
-    (this as any).installed = true
+    ;(this as any).installed = true
 
     checkVueVersion(Vue)
 
@@ -38,25 +37,24 @@ const Vuetify: VuetifyPlugin = {
       }
     })
 
-    if (opts.transitions) {
-      Object.values(opts.transitions).forEach(transition => {
-        if (transition.name !== undefined && transition.name.startsWith('v-')) {
-          Vue.component(transition.name, transition)
-        }
-      })
-    }
-
     if (opts.directives) {
       Object.values(opts.directives).forEach(directive => {
         Vue.directive(directive.name, directive)
       })
     }
 
-    if (opts.components) {
-      Object.values(opts.components).forEach(component => {
-        Vue.use(component)
-      })
-    }
+    (function registerComponents (components: VuetifyUseOptions['components']) {
+      if (components) {
+        for (const key in components) {
+          const component = components[key]
+          if (!registerComponents(component.$_vuetify_subcomponents)) {
+            Vue.component(key, component)
+          }
+        }
+        return true
+      }
+      return false
+    })(opts.components)
   },
   version: __VUETIFY_VERSION__
 }
