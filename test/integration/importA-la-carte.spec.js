@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import * as allComponents from '@/components'
 import VAlert from '@/components/VAlert'
 import VApp from '@/components/VApp'
 import VAutocomplete from '@/components/VAutocomplete'
@@ -39,6 +40,7 @@ import VParallax from '@/components/VParallax'
 import VPicker from '@/components/VPicker'
 import VProgressCircular from '@/components/VProgressCircular'
 import VProgressLinear from '@/components/VProgressLinear'
+import VRating from '@/components/VRating'
 import VRadioGroup from '@/components/VRadioGroup'
 import VRangeSlider from '@/components/VRangeSlider'
 import VResponsive from '@/components/VResponsive'
@@ -59,70 +61,74 @@ import VTooltip from '@/components/VTooltip'
 import Transitions from '@/components/transitions'
 import Vuetify from '@/components/Vuetify'
 
+const components = {
+  VAlert,
+  VApp,
+  VAutocomplete,
+  VAvatar,
+  VBadge,
+  VBottomNav,
+  VBottomSheet,
+  VBreadcrumbs,
+  VBtn,
+  VBtnToggle,
+  VCard,
+  VCarousel,
+  VCheckbox,
+  VChip,
+  VCombobox,
+  VCounter,
+  VDataIterator,
+  VDataTable,
+  VDatePicker,
+  VDialog,
+  VDivider,
+  VExpansionPanel,
+  VFooter,
+  VForm,
+  VGrid,
+  VIcon,
+  VImg,
+  VInput,
+  VJumbotron,
+  VLabel,
+  VList,
+  VMenu,
+  VMessages,
+  VNavigationDrawer,
+  VOverflowBtn,
+  VPagination,
+  VParallax,
+  VPicker,
+  VProgressCircular,
+  VProgressLinear,
+  VRating,
+  VRadioGroup,
+  VRangeSlider,
+  VResponsive,
+  VSelect,
+  VSlider,
+  VSnackbar,
+  VSpeedDial,
+  VStepper,
+  VSubheader,
+  VSwitch,
+  VSystemBar,
+  VTabs,
+  VTextarea,
+  VTextField,
+  VTimePicker,
+  VToolbar,
+  VTooltip,
+  Transitions
+}
+
 describe('a-la-carte import', () => {
   Vue.use(Vuetify, {
-    components: {
-      VAlert,
-      VApp,
-      VAutocomplete,
-      VAvatar,
-      VBadge,
-      VBottomNav,
-      VBottomSheet,
-      VBreadcrumbs,
-      VBtn,
-      VBtnToggle,
-      VCard,
-      VCarousel,
-      VCheckbox,
-      VChip,
-      VCombobox,
-      VCounter,
-      VDataIterator,
-      VDataTable,
-      VDatePicker,
-      VDialog,
-      VDivider,
-      VExpansionPanel,
-      VFooter,
-      VForm,
-      VGrid,
-      VIcon,
-      VImg,
-      VInput,
-      VJumbotron,
-      VLabel,
-      VList,
-      VMenu,
-      VMessages,
-      VNavigationDrawer,
-      VOverflowBtn,
-      VPagination,
-      VParallax,
-      VPicker,
-      VProgressCircular,
-      VProgressLinear,
-      VRadioGroup,
-      VRangeSlider,
-      VResponsive,
-      VSelect,
-      VSlider,
-      VSnackbar,
-      VSpeedDial,
-      VStepper,
-      VSubheader,
-      VSwitch,
-      VSystemBar,
-      VTabs,
-      VTextarea,
-      VTextField,
-      VTimePicker,
-      VToolbar,
-      VTooltip,
-      Transitions
-    }
+    components
   })
   const registeredComponents = Object.keys(Vue.options.components).sort()
+
   it('should register all subcomponents', () => {
     expect(registeredComponents).toMatchSnapshot()
   })
@@ -131,5 +137,9 @@ describe('a-la-carte import', () => {
     registeredComponents.forEach(name =>
       expect(name).toMatch(/^(?:[A-Z][a-z]*)+$/)
     )
+  })
+
+  it('should check all components', () => {
+    expect(Object.keys(components).sort()).toEqual(Object.keys(allComponents).sort())
   })
 })

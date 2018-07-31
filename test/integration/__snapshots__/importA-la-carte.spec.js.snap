@@ -81,6 +81,7 @@ Array [
   "VRadio",
   "VRadioGroup",
   "VRangeSlider",
+  "VRating",
   "VResponsive",
   "VRowExpandTransition",
   "VScaleTransition",
