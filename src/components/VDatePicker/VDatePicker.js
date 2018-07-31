@@ -207,11 +207,13 @@ export default {
         this.tableDate = this.sanitizeDateString(this.lastValue, 'year')
       }
     },
-    value () {
+    value (newValue, oldValue) {
       this.checkMultipleProp()
       this.setInputDate()
 
-      if (this.value && !this.pickerDate) {
+      if (!this.multiple && this.value && !this.pickerDate) {
+        this.tableDate = this.sanitizeDateString(this.inputDate, this.type === 'month' ? 'year' : 'month')
+      } else if (this.multiple && this.value.length && !oldValue.length && !this.pickerDate) {
         this.tableDate = this.sanitizeDateString(this.inputDate, this.type === 'month' ? 'year' : 'month')
       }
     },
