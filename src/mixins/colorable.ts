@@ -17,7 +17,8 @@ export default Vue.extend({
       if (isCssColor(color)) {
         data.style = {
           ...data.style,
-          'background-color': `${color}`
+          'background-color': `${color}`,
+          'border-color': `${color}`
         }
       } else if (color) {
         data.class = {
@@ -33,8 +34,7 @@ export default Vue.extend({
       if (isCssColor(color)) {
         data.style = {
           ...data.style,
-          'color': `${color}`,
-          'border-color': `${color}`
+          'color': `${color}`
         }
       } else if (color) {
         const [colorName, colorModifier] = color.toString().trim().split(' ', 2) as (string | undefined)[]
