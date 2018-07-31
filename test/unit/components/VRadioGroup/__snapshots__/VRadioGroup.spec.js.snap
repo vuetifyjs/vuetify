@@ -13,6 +13,7 @@ exports[`VRadioGroup.vue should be in error when v-radio-group is 1`] = `
         <div class="v-radio theme--light">
           <div class="v-input--selection-controls__input">
             <input aria-checked="false"
+                   name="v-radio-4"
                    role="radio"
                    type="radio"
             >
@@ -54,6 +55,7 @@ exports[`VRadioGroup.vue should be in error when v-radio-group is 2`] = `
         <div class="v-radio theme--light">
           <div class="v-input--selection-controls__input">
             <input aria-checked="false"
+                   name="v-radio-4"
                    role="radio"
                    type="radio"
             >

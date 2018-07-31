@@ -10,6 +10,8 @@ const scrollWindow = y => {
   return new Promise(resolve => setTimeout(resolve, 200))
 }
 
+const deprecateScrollToolbarOffScreen = `'scrollToolbarOffScreen' is deprecated, use 'scrollOffScreen' instead`
+
 test('VToolbar.vue', ({ mount }) => {
   it('should render a colored toolbar', () => {
     const wrapper = mount(VToolbar, {
@@ -209,6 +211,7 @@ test('VToolbar.vue', ({ mount }) => {
     wrapper.setProps({ scrollToolbarOffScreen: true })
 
     expect(wrapper.vm.computedTransform).toBe(-56)
+    expect(deprecateScrollToolbarOffScreen).toHaveBeenTipped()
   })
 
   it('should have a custom extension height', () => {

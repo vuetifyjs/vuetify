@@ -178,7 +178,9 @@ export default {
         openOnClick: false,
         value: this.isMenuActive,
         offsetY: this.offsetY,
-        nudgeBottom: this.offsetY ? 1 : 0 // convert to int
+        nudgeBottom: this.nudgeBottom
+          ? this.nudgeBottom
+          : this.offsetY ? 1 : 0 // convert to int
       }
     },
     listData () {
@@ -266,7 +268,6 @@ export default {
     },
     clearableCallback () {
       this.internalValue = this.multiple ? [] : undefined
-      this.$emit('change', this.internalValue)
       this.$nextTick(() => this.$refs.input.focus())
 
       if (this.openOnClear) this.isMenuActive = true
