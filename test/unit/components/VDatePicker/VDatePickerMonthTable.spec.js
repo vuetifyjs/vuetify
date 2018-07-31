@@ -1,4 +1,3 @@
-import { compileToFunctions } from 'vue-template-compiler'
 import VDatePickerMonthTable from '@/components/VDatePicker/VDatePickerMonthTable'
 import { test } from '@/test'
 
@@ -9,6 +8,18 @@ test('VDatePickerMonthTable.js', ({ mount }) => {
         tableDate: '2005',
         current: '2005-05',
         value: '2005-11'
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render component and match snapshot (multiple)', () => {
+    const wrapper = mount(VDatePickerMonthTable, {
+      propsData: {
+        tableDate: '2005',
+        current: '2005-05',
+        value: ['2005-11', '2005-10'],
       }
     })
 

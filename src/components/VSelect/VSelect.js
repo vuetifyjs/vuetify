@@ -178,7 +178,9 @@ export default {
         openOnClick: false,
         value: this.isMenuActive,
         offsetY: this.offsetY,
-        nudgeBottom: this.offsetY ? 1 : 0 // convert to int
+        nudgeBottom: this.nudgeBottom
+          ? this.nudgeBottom
+          : this.offsetY ? 1 : 0 // convert to int
       }
     },
     listData () {
@@ -186,11 +188,9 @@ export default {
         props: {
           action: this.multiple && !this.isHidingSelected,
           color: this.color,
-          dark: this.dark,
           dense: this.dense,
           hideSelected: this.hideSelected,
           items: this.virtualizedItems,
-          light: this.light,
           noDataText: this.$vuetify.t(this.noDataText),
           selectedItems: this.selectedItems,
           itemAvatar: this.itemAvatar,
@@ -207,7 +207,7 @@ export default {
       }
     },
     staticList () {
-      if (this.$slots['no-data']) {
+      if (this.$slots['no-data'] || this.$slots['prepend-item'] || this.$slots['append-item']) {
         consoleError('assert: staticList should not be called if slots are used')
       }
 
@@ -268,7 +268,6 @@ export default {
     },
     clearableCallback () {
       this.internalValue = this.multiple ? [] : undefined
-      this.$emit('change', this.internalValue)
       this.$nextTick(() => this.$refs.input.focus())
 
       if (this.openOnClear) this.isMenuActive = true
@@ -319,7 +318,6 @@ export default {
         staticClass: 'v-chip--select-multi',
         props: {
           close: this.deletableChips && !isDisabled,
-          dark: this.dark,
           disabled: isDisabled,
           selected: index === this.selectedIndex,
           small: this.smallChips
@@ -391,23 +389,24 @@ export default {
     },
     genList () {
       // If there's no slots, we can use a cached VNode to improve performance
-      if (this.$slots['no-data']) {
+      if (this.$slots['no-data'] || this.$slots['prepend-item'] || this.$slots['append-item']) {
         return this.genListWithSlot()
       } else {
         return this.staticList
       }
     },
     genListWithSlot () {
+      const slots = ['prepend-item', 'no-data', 'append-item']
+        .filter(slotName => this.$slots[slotName])
+        .map(slotName => this.$createElement('template', {
+          slot: slotName
+        }, this.$slots[slotName]))
       // Requires destructuring due to Vue
       // modifying the `on` property when passed
       // as a referenced object
       return this.$createElement(VSelectList, {
         ...this.listData
-      }, [
-        this.$createElement('template', {
-          slot: 'no-data'
-        }, this.$slots['no-data'])
-      ])
+      }, slots)
     },
     genMenu (activator) {
       const props = {

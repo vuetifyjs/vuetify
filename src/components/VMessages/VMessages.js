@@ -42,10 +42,7 @@ export default {
   render (h) {
     return h('div', this.setTextColor(this.color, {
       staticClass: 'v-messages',
-      'class': {
-        ...this.classes,
-        ...this.themeClasses
-      }
+      class: this.themeClasses
     }), [this.genChildren()])
   }
 }

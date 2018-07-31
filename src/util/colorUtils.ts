@@ -43,3 +43,7 @@ export function intToHex (color: RGB): string {
 
   return '#' + hexColor
 }
+
+export function colorToHex (color: unknown): string {
+  return intToHex(colorToInt(color))
+}

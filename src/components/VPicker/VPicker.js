@@ -25,16 +25,9 @@ export default {
     }
   },
 
-  data () {
-    return {
-      defaultColor: 'primary'
-    }
-  },
-
   computed: {
     computedTitleColor () {
-      const darkTheme = this.dark || (!this.light && this.$vuetify.dark)
-      const defaultTitleColor = darkTheme ? null : (this.color || 'primary')
+      const defaultTitleColor = this.isDark ? null : (this.color || 'primary')
       return this.color || defaultTitleColor
     }
   },

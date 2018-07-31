@@ -198,7 +198,7 @@ test('VRadio.vue', ({ mount }) => {
 
     expect(wrapper.vm.computedData.class).toEqual({
       'theme--dark': false,
-      'theme--light': false,
+      'theme--light': true,
       'v-radio--is-disabled': false,
       'v-radio--is-focused': false
     })
@@ -210,7 +210,7 @@ test('VRadio.vue', ({ mount }) => {
     expect(wrapper.vm.computedData.class).toEqual({
       'accent--text': true,
       'theme--dark': false,
-      'theme--light': false,
+      'theme--light': true,
       'v-radio--is-disabled': false,
       'v-radio--is-focused': false
     })

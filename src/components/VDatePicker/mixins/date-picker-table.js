@@ -29,10 +29,7 @@ export default {
       type: String,
       required: true
     },
-    value: {
-      type: String,
-      required: false
-    }
+    value: [String, Array]
   },
 
   data: () => ({
@@ -72,7 +69,7 @@ export default {
     },
     genButton (value, isFloating) {
       const isAllowed = isDateAllowed(value, this.min, this.max, this.allowedDates)
-      const isSelected = value === this.value
+      const isSelected = value === this.value || (Array.isArray(this.value) && this.value.indexOf(value) !== -1)
       const isCurrent = value === this.current
       const setColor = isSelected ? this.setBackgroundColor : this.setTextColor
       const color = (isSelected || isCurrent) && (this.color || 'accent')

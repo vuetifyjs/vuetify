@@ -232,13 +232,13 @@ export default {
       return children
     },
     genListeners () {
-      return Object.assign({}, {
+      return {
         blur: this.onBlur,
         click: this.onSliderClick,
         focus: this.onFocus,
         keydown: this.onKeyDown,
         keyup: this.onKeyUp
-      })
+      }
     },
     genInput () {
       return this.$createElement('input', {
@@ -247,7 +247,6 @@ export default {
           name: this.name,
           role: 'slider',
           tabindex: this.disabled ? -1 : this.$attrs.tabindex,
-          type: 'range',
           value: this.internalValue,
           readonly: true,
           'aria-readonly': String(this.readonly)
@@ -503,8 +502,9 @@ export default {
       const decimals = trimmedStep.indexOf('.') > -1
         ? (trimmedStep.length - trimmedStep.indexOf('.') - 1)
         : 0
+      const offset = this.min % this.stepNumeric
 
-      const newValue = Math.round(value / this.stepNumeric) * this.stepNumeric
+      const newValue = Math.round((value - offset) / this.stepNumeric) * this.stepNumeric + offset
 
       return parseFloat(Math.min(newValue, this.max).toFixed(decimals))
     },

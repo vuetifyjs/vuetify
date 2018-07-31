@@ -1,5 +1,4 @@
 const OPTIONS_DEFAULTS = {
-  themeVariations: ['primary', 'secondary', 'accent'],
   minifyTheme: null,
   themeCache: null,
   cspNonce: null
