@@ -48,12 +48,12 @@ test('colorable.js', ({ mount }) => {
 
     expect(wrapper.vm.setBackgroundColor('#01f', {})).toEqual({
       style: {
-        'background-color': '#01f !important'
+        'background-color': '#01f'
       }
     })
     expect(wrapper.vm.setBackgroundColor('rgba(0, 1, 2, 0.5)', {})).toEqual({
       style: {
-        'background-color': 'rgba(0, 1, 2, 0.5) !important'
+        'background-color': 'rgba(0, 1, 2, 0.5)'
       }
     })
   })
@@ -66,14 +66,14 @@ test('colorable.js', ({ mount }) => {
 
     expect(wrapper.vm.setTextColor('#01f', {})).toEqual({
       style: {
-        'color': '#01f !important',
-        'border-color': '#01f !important'
+        'color': '#01f',
+        'border-color': '#01f'
       }
     })
     expect(wrapper.vm.setTextColor('rgba(0, 1, 2, 0.5)', {})).toEqual({
       style: {
-        'color': 'rgba(0, 1, 2, 0.5) !important',
-        'border-color': 'rgba(0, 1, 2, 0.5) !important'
+        'color': 'rgba(0, 1, 2, 0.5)',
+        'border-color': 'rgba(0, 1, 2, 0.5)'
       }
     })
   })
