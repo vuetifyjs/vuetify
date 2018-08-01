@@ -156,6 +156,7 @@ export interface VuetifyThemeCache {
 export interface VuetifyOptions {
   minifyTheme: ((css: string) => string) | null
   themeCache: VuetifyThemeCache | null
+  useCssVariables: boolean
   /** @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src#Unsafe_inline_script */
   cspNonce: string | null
 }

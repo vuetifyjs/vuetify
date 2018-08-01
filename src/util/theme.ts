@@ -81,25 +81,61 @@ const genVariantColor = (name: string, variant: string, value: string): string =
 }`
 }
 
-export function genStyles (theme: ParsedTheme): string {
+const genColorVariableName = (name: string, variant = 'base'): string => `--v-${name}-${variant}`
+
+const genColorVariable = (name: string, variant = 'base'): string => `var(${genColorVariableName(name, variant)})`
+
+function genVariables (theme: ParsedTheme): string {
   const colors = Object.keys(theme)
 
   if (!colors.length) return ''
 
-  let css = `a { color: ${theme.primary.base}; }`
+  let css = ''
 
+  css += ':root {\n'
   for (let i = 0; i < colors.length; ++i) {
     const name = colors[i]
     const value = theme[name]
     if (typeof value === 'object') {
-      css += genBaseColor(name, value.base)
+      css += `  ${genColorVariableName(name)}: ${value.base};\n`
 
       const variants = Object.keys(value)
       for (let i = 0; i < variants.length; ++i) {
         const variant = variants[i]
         const variantValue = value[variant]
         if (variant !== 'base') {
-          css += genVariantColor(name, variant, variantValue)
+          css += `  ${genColorVariableName(name, variant)}: ${variantValue};\n`
+        }
+      }
+    }
+  }
+  css += '}\n\n'
+
+  return css
+}
+
+export function genStyles (theme: ParsedTheme, cssVar = false): string {
+  const colors = Object.keys(theme)
+
+  if (!colors.length) return ''
+
+  let css = cssVar ? genVariables(theme) : ''
+
+  const aColor = cssVar ? genColorVariable('primary') : theme.primary.base
+  css += `a { color: ${aColor}; }`
+
+  for (let i = 0; i < colors.length; ++i) {
+    const name = colors[i]
+    const value = theme[name]
+    if (typeof value === 'object') {
+      css += genBaseColor(name, cssVar ? genColorVariable(name) : value.base)
+
+      const variants = Object.keys(value)
+      for (let i = 0; i < variants.length; ++i) {
+        const variant = variants[i]
+        const variantValue = value[variant]
+        if (variant !== 'base') {
+          css += genVariantColor(name, variant, cssVar ? genColorVariable(name, variantValue) : variantValue)
         }
       }
     }
