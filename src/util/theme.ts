@@ -99,19 +99,20 @@ export function genStyles (theme: ParsedTheme, cssVar = false): string {
   for (let i = 0; i < colors.length; ++i) {
     const name = colors[i]
     const value = theme[name]
-    if (typeof value === 'object') {
-      css += genBaseColor(name, cssVar ? genColorVariable(name) : value.base)
-      cssVar && (variablesCss += `  ${genColorVariableName(name)}: ${value.base};\n`)
 
-      const variants = Object.keys(value)
-      for (let i = 0; i < variants.length; ++i) {
-        const variant = variants[i]
-        const variantValue = value[variant]
-        if (variant !== 'base') {
-          css += genVariantColor(name, variant, cssVar ? genColorVariable(name, variant) : variantValue)
-          cssVar && (variablesCss += `  ${genColorVariableName(name, variant)}: ${variantValue};\n`)
-        }
-      }
+    if (typeof value !== 'object') continue
+
+    css += genBaseColor(name, cssVar ? genColorVariable(name) : value.base)
+    cssVar && (variablesCss += `  ${genColorVariableName(name)}: ${value.base};\n`)
+
+    const variants = Object.keys(value)
+    for (let i = 0; i < variants.length; ++i) {
+      const variant = variants[i]
+      const variantValue = value[variant]
+      if (variant === 'base') continue
+
+      css += genVariantColor(name, variant, cssVar ? genColorVariable(name, variant) : variantValue)
+      cssVar && (variablesCss += `  ${genColorVariableName(name, variant)}: ${variantValue};\n`)
     }
   }
 
