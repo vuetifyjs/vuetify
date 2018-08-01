@@ -135,7 +135,7 @@ export function genStyles (theme: ParsedTheme, cssVar = false): string {
         const variant = variants[i]
         const variantValue = value[variant]
         if (variant !== 'base') {
-          css += genVariantColor(name, variant, cssVar ? genColorVariable(name, variantValue) : variantValue)
+          css += genVariantColor(name, variant, cssVar ? genColorVariable(name, variant) : variantValue)
         }
       }
     }
