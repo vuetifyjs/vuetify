@@ -332,4 +332,23 @@ test('VRadioGroup.vue', ({ mount }) => {
     radio.first('input').trigger('change')
     expect(onChange).not.toBeCalled()
   })
+
+  it('should reset', async () => {
+    const wrapper = mount(VRadioGroup, {
+      propsData: {
+        value: '0'
+      },
+      slots: {
+        default: [VRadio]
+      }
+    })
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    wrapper.vm.reset()
+    await wrapper.vm.$nextTick()
+
+    expect(change).toHaveBeenCalledTimes(1)
+    expect(change).toHaveBeenCalledWith(undefined)
+  })
 })

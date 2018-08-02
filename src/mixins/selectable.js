@@ -80,7 +80,7 @@ export default {
 
   watch: {
     inputValue (val) {
-      this.internalValue = val
+      this.lazyValue = val
     }
   },
 
