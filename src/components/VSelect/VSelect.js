@@ -203,7 +203,7 @@ export default {
 
       if (Array.isArray(normalisedProps)) {
         normalisedProps = normalisedProps.reduce((acc, p) => {
-          acc[p] = true
+          acc[p.trim()] = true
           return acc
         }, {})
       }
