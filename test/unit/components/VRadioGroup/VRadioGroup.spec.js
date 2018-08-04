@@ -311,9 +311,11 @@ test('VRadioGroup.vue', ({ mount }) => {
 
     const onChange = jest.fn()
     const radio = wrapper.first(VRadio)
+    const input = radio.first('input')
     radio.vm.$on('change', onChange)
     radio.first('input').trigger('change')
     expect(onChange).not.toBeCalled()
+    expect(input.html()).toMatchSnapshot()
   })
 
   it('should make radios readonly', async () => {

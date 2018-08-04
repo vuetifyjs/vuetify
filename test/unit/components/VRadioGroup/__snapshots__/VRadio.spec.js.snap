@@ -5,9 +5,9 @@ exports[`VRadio.vue should not render aria-label attribute with no label value o
 <div class="v-radio">
   <div class="v-input--selection-controls__input">
     <input aria-checked="false"
-           name="name"
            role="radio"
            type="radio"
+           name="name"
     >
     <div class="v-input--selection-controls__ripple">
     </div>
@@ -30,11 +30,11 @@ exports[`VRadio.vue should render aria-label attribute with label value on input
 
 <div class="v-radio">
   <div class="v-input--selection-controls__input">
-    <input aria-checked="false"
-           aria-label="Test"
-           name="name"
+    <input aria-label="Test"
+           aria-checked="false"
            role="radio"
            type="radio"
+           name="name"
     >
     <div class="v-input--selection-controls__ripple">
     </div>
@@ -59,9 +59,9 @@ exports[`VRadio.vue should render proper input name 1`] = `
 <div class="v-radio">
   <div class="v-input--selection-controls__input">
     <input aria-checked="false"
-           name="name"
            role="radio"
            type="radio"
+           name="name"
     >
     <div class="v-input--selection-controls__ripple">
     </div>
@@ -85,9 +85,9 @@ exports[`VRadio.vue should render role and aria-checked attributes on input grou
 <div class="v-radio accent--text">
   <div class="v-input--selection-controls__input">
     <input aria-checked="true"
-           name="name"
            role="radio"
            type="radio"
+           name="name"
     >
     <div class="v-input--selection-controls__ripple accent--text">
     </div>

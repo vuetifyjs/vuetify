@@ -406,4 +406,13 @@ test('VCheckbox.js', ({ mount }) => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should be disabled', () => {
+    const wrapper = mount(VCheckbox, {
+      propsData: { disabled: true }
+    })
+    const input = wrapper.first('input')
+
+    expect(input.html()).toMatchSnapshot()
+  })
 })

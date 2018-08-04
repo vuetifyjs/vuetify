@@ -1,5 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`VCheckbox.js should be disabled 1`] = `
+
+<input aria-checked="false"
+       disabled="disabled"
+       role="checkbox"
+       type="checkbox"
+>
+
+`;
+
 exports[`VCheckbox.js should render themed component 1`] = `
 
 <div class="v-input v-input--selection-controls v-input--checkbox theme--light">
