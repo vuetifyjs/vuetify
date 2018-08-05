@@ -113,8 +113,8 @@ export function genVariations (name: string, value: RGB): Record<string, string>
     base: intToHex(value)
   }
 
-  for (let i = 1, n = 5; i <= 5; ++i, --n) {
-    values[`lighten${i}`] = intToHex(lighten(value, n))
+  for (let i = 5; i > 0; --i) {
+    values[`lighten${i}`] = intToHex(lighten(value, i))
   }
 
   for (let i = 1; i <= 4; ++i) {
