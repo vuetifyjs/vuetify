@@ -2,10 +2,8 @@
 
 exports[`VMenu.js should render component with custom absolute and match snapshot 1`] = `
 
-<div class="v-menu"
-     style="display: inline-block;"
->
-  <div class="v-menu__content"
+<div class="v-menu">
+  <div class="v-menu__content theme--light "
        style="max-height: auto; min-width: 0px; max-width: auto; top: 12px; left: 0px; z-index: 0; display: none;"
   >
   </div>
@@ -15,10 +13,8 @@ exports[`VMenu.js should render component with custom absolute and match snapsho
 
 exports[`VMenu.js should render component with custom activator and match snapshot 1`] = `
 
-<div class="v-menu"
-     style="display: inline-block;"
->
-  <div class="v-menu__content"
+<div class="v-menu">
+  <div class="v-menu__content theme--light "
        style="max-height: auto; min-width: 0px; max-width: auto; top: 12px; left: 0px; z-index: 0; display: none;"
   >
   </div>
@@ -28,10 +24,8 @@ exports[`VMenu.js should render component with custom activator and match snapsh
 
 exports[`VMenu.js should render component with custom auto and match snapshot 1`] = `
 
-<div class="v-menu"
-     style="display: inline-block;"
->
-  <div class="v-menu__content v-menu__content--auto"
+<div class="v-menu">
+  <div class="v-menu__content v-menu__content--auto theme--light "
        style="max-height: 200px; min-width: 16px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
   >
   </div>
@@ -41,10 +35,8 @@ exports[`VMenu.js should render component with custom auto and match snapshot 1`
 
 exports[`VMenu.js should render component with custom bottom and match snapshot 1`] = `
 
-<div class="v-menu"
-     style="display: inline-block;"
->
-  <div class="v-menu__content"
+<div class="v-menu">
+  <div class="v-menu__content theme--light "
        style="max-height: auto; min-width: 0px; max-width: auto; top: 12px; left: 0px; z-index: 0; display: none;"
   >
   </div>
@@ -54,10 +46,8 @@ exports[`VMenu.js should render component with custom bottom and match snapshot 
 
 exports[`VMenu.js should render component with custom closeOnClick and match snapshot 1`] = `
 
-<div class="v-menu"
-     style="display: inline-block;"
->
-  <div class="v-menu__content"
+<div class="v-menu">
+  <div class="v-menu__content theme--light "
        style="max-height: auto; min-width: 0px; max-width: auto; top: 12px; left: 0px; z-index: 0; display: none;"
   >
   </div>
@@ -67,10 +57,8 @@ exports[`VMenu.js should render component with custom closeOnClick and match sna
 
 exports[`VMenu.js should render component with custom closeOnContentClick and match snapshot 1`] = `
 
-<div class="v-menu"
-     style="display: inline-block;"
->
-  <div class="v-menu__content"
+<div class="v-menu">
+  <div class="v-menu__content theme--light "
        style="max-height: auto; min-width: 0px; max-width: auto; top: 12px; left: 0px; z-index: 0; display: none;"
   >
   </div>
@@ -80,10 +68,8 @@ exports[`VMenu.js should render component with custom closeOnContentClick and ma
 
 exports[`VMenu.js should render component with custom disabled and match snapshot 1`] = `
 
-<div class="v-menu"
-     style="display: inline-block;"
->
-  <div class="v-menu__content"
+<div class="v-menu">
+  <div class="v-menu__content theme--light "
        style="max-height: auto; min-width: 0px; max-width: auto; top: 12px; left: 0px; z-index: 0; display: none;"
   >
   </div>
@@ -93,10 +79,8 @@ exports[`VMenu.js should render component with custom disabled and match snapsho
 
 exports[`VMenu.js should render component with custom fullWidth and match snapshot 1`] = `
 
-<div class="v-menu"
-     style="display: block;"
->
-  <div class="v-menu__content"
+<div class="v-menu">
+  <div class="v-menu__content theme--light "
        style="max-height: auto; min-width: 0px; max-width: auto; top: 12px; left: 0px; z-index: 0; display: none;"
   >
   </div>
@@ -106,10 +90,8 @@ exports[`VMenu.js should render component with custom fullWidth and match snapsh
 
 exports[`VMenu.js should render component with custom lazy and match snapshot 1`] = `
 
-<div class="v-menu"
-     style="display: inline-block;"
->
-  <div class="v-menu__content"
+<div class="v-menu">
+  <div class="v-menu__content theme--light "
        style="max-height: auto; min-width: 0px; max-width: auto; top: 12px; left: 0px; z-index: 0; display: none;"
   >
   </div>
@@ -119,10 +101,8 @@ exports[`VMenu.js should render component with custom lazy and match snapshot 1`
 
 exports[`VMenu.js should render component with custom left and match snapshot 1`] = `
 
-<div class="v-menu"
-     style="display: inline-block;"
->
-  <div class="v-menu__content"
+<div class="v-menu">
+  <div class="v-menu__content theme--light "
        style="max-height: auto; min-width: 0px; max-width: auto; top: 12px; left: 0px; z-index: 0; display: none;"
   >
   </div>
@@ -132,10 +112,8 @@ exports[`VMenu.js should render component with custom left and match snapshot 1`
 
 exports[`VMenu.js should render component with custom maxHeight and match snapshot 1`] = `
 
-<div class="v-menu"
-     style="display: inline-block;"
->
-  <div class="v-menu__content"
+<div class="v-menu">
+  <div class="v-menu__content theme--light "
        style="max-height: 100px; min-width: 0px; max-width: auto; top: 12px; left: 0px; z-index: 0; display: none;"
   >
   </div>
@@ -145,10 +123,8 @@ exports[`VMenu.js should render component with custom maxHeight and match snapsh
 
 exports[`VMenu.js should render component with custom maxWidth and match snapshot 1`] = `
 
-<div class="v-menu"
-     style="display: inline-block;"
->
-  <div class="v-menu__content"
+<div class="v-menu">
+  <div class="v-menu__content theme--light "
        style="max-height: auto; min-width: 0px; max-width: 100px; top: 12px; left: 0px; z-index: 0; display: none;"
   >
   </div>
@@ -158,10 +134,8 @@ exports[`VMenu.js should render component with custom maxWidth and match snapsho
 
 exports[`VMenu.js should render component with custom minWidth and match snapshot 1`] = `
 
-<div class="v-menu"
-     style="display: inline-block;"
->
-  <div class="v-menu__content"
+<div class="v-menu">
+  <div class="v-menu__content theme--light "
        style="max-height: auto; min-width: 100px; max-width: auto; top: 12px; left: 0px; z-index: 0; display: none;"
   >
   </div>
@@ -171,10 +145,8 @@ exports[`VMenu.js should render component with custom minWidth and match snapsho
 
 exports[`VMenu.js should render component with custom nudgeBottom and match snapshot 1`] = `
 
-<div class="v-menu"
-     style="display: inline-block;"
->
-  <div class="v-menu__content"
+<div class="v-menu">
+  <div class="v-menu__content theme--light "
        style="max-height: auto; min-width: 0px; max-width: auto; top: 100px; left: 0px; z-index: 0; display: none;"
   >
   </div>
@@ -184,10 +156,8 @@ exports[`VMenu.js should render component with custom nudgeBottom and match snap
 
 exports[`VMenu.js should render component with custom nudgeLeft and match snapshot 1`] = `
 
-<div class="v-menu"
-     style="display: inline-block;"
->
-  <div class="v-menu__content"
+<div class="v-menu">
+  <div class="v-menu__content theme--light "
        style="max-height: auto; min-width: 0px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
   >
   </div>
@@ -197,10 +167,8 @@ exports[`VMenu.js should render component with custom nudgeLeft and match snapsh
 
 exports[`VMenu.js should render component with custom nudgeRight and match snapshot 1`] = `
 
-<div class="v-menu"
-     style="display: inline-block;"
->
-  <div class="v-menu__content"
+<div class="v-menu">
+  <div class="v-menu__content theme--light "
        style="max-height: auto; min-width: 0px; max-width: auto; top: 12px; left: 100px; z-index: 0; display: none;"
   >
   </div>
@@ -210,10 +178,8 @@ exports[`VMenu.js should render component with custom nudgeRight and match snaps
 
 exports[`VMenu.js should render component with custom nudgeTop and match snapshot 1`] = `
 
-<div class="v-menu"
-     style="display: inline-block;"
->
-  <div class="v-menu__content"
+<div class="v-menu">
+  <div class="v-menu__content theme--light "
        style="max-height: auto; min-width: 0px; max-width: auto; top: 12px; left: 0px; z-index: 0; display: none;"
   >
   </div>
@@ -223,10 +189,8 @@ exports[`VMenu.js should render component with custom nudgeTop and match snapsho
 
 exports[`VMenu.js should render component with custom nudgeWidth and match snapshot 1`] = `
 
-<div class="v-menu"
-     style="display: inline-block;"
->
-  <div class="v-menu__content"
+<div class="v-menu">
+  <div class="v-menu__content theme--light "
        style="max-height: auto; min-width: 100px; max-width: auto; top: 12px; left: 0px; z-index: 0; display: none;"
   >
   </div>
@@ -236,10 +200,8 @@ exports[`VMenu.js should render component with custom nudgeWidth and match snaps
 
 exports[`VMenu.js should render component with custom offsetX and match snapshot 1`] = `
 
-<div class="v-menu"
-     style="display: inline-block;"
->
-  <div class="v-menu__content"
+<div class="v-menu">
+  <div class="v-menu__content theme--light "
        style="max-height: auto; min-width: 0px; max-width: auto; top: 12px; left: 0px; z-index: 0; display: none;"
   >
   </div>
@@ -249,10 +211,8 @@ exports[`VMenu.js should render component with custom offsetX and match snapshot
 
 exports[`VMenu.js should render component with custom offsetY and match snapshot 1`] = `
 
-<div class="v-menu"
-     style="display: inline-block;"
->
-  <div class="v-menu__content"
+<div class="v-menu">
+  <div class="v-menu__content theme--light "
        style="max-height: auto; min-width: 0px; max-width: auto; top: 12px; left: 0px; z-index: 0; display: none;"
   >
   </div>
@@ -262,10 +222,8 @@ exports[`VMenu.js should render component with custom offsetY and match snapshot
 
 exports[`VMenu.js should render component with custom openOnClick and match snapshot 1`] = `
 
-<div class="v-menu"
-     style="display: inline-block;"
->
-  <div class="v-menu__content"
+<div class="v-menu">
+  <div class="v-menu__content theme--light "
        style="max-height: auto; min-width: 0px; max-width: auto; top: 12px; left: 0px; z-index: 0; display: none;"
   >
   </div>
@@ -275,10 +233,8 @@ exports[`VMenu.js should render component with custom openOnClick and match snap
 
 exports[`VMenu.js should render component with custom openOnHover and match snapshot 1`] = `
 
-<div class="v-menu"
-     style="display: inline-block;"
->
-  <div class="v-menu__content"
+<div class="v-menu">
+  <div class="v-menu__content theme--light "
        style="max-height: auto; min-width: 0px; max-width: auto; top: 12px; left: 0px; z-index: 0; display: none;"
   >
   </div>
@@ -288,10 +244,8 @@ exports[`VMenu.js should render component with custom openOnHover and match snap
 
 exports[`VMenu.js should render component with custom origin and match snapshot 1`] = `
 
-<div class="v-menu"
-     style="display: inline-block;"
->
-  <div class="v-menu__content"
+<div class="v-menu">
+  <div class="v-menu__content theme--light "
        style="max-height: auto; min-width: 0px; max-width: auto; top: 12px; left: 0px; z-index: 0; display: none;"
   >
   </div>
@@ -301,10 +255,8 @@ exports[`VMenu.js should render component with custom origin and match snapshot 
 
 exports[`VMenu.js should render component with custom positionX and match snapshot 1`] = `
 
-<div class="v-menu"
-     style="display: inline-block;"
->
-  <div class="v-menu__content"
+<div class="v-menu">
+  <div class="v-menu__content theme--light "
        style="max-height: auto; min-width: 0px; max-width: auto; top: 12px; left: 0px; z-index: 0; display: none;"
   >
   </div>
@@ -314,10 +266,8 @@ exports[`VMenu.js should render component with custom positionX and match snapsh
 
 exports[`VMenu.js should render component with custom positionY and match snapshot 1`] = `
 
-<div class="v-menu"
-     style="display: inline-block;"
->
-  <div class="v-menu__content"
+<div class="v-menu">
+  <div class="v-menu__content theme--light "
        style="max-height: auto; min-width: 0px; max-width: auto; top: 12px; left: 0px; z-index: 0; display: none;"
   >
   </div>
@@ -327,10 +277,8 @@ exports[`VMenu.js should render component with custom positionY and match snapsh
 
 exports[`VMenu.js should render component with custom right and match snapshot 1`] = `
 
-<div class="v-menu"
-     style="display: inline-block;"
->
-  <div class="v-menu__content"
+<div class="v-menu">
+  <div class="v-menu__content theme--light "
        style="max-height: auto; min-width: 0px; max-width: auto; top: 12px; left: 0px; z-index: 0; display: none;"
   >
   </div>
@@ -340,10 +288,8 @@ exports[`VMenu.js should render component with custom right and match snapshot 1
 
 exports[`VMenu.js should render component with custom top and match snapshot 1`] = `
 
-<div class="v-menu"
-     style="display: inline-block;"
->
-  <div class="v-menu__content"
+<div class="v-menu">
+  <div class="v-menu__content theme--light "
        style="max-height: auto; min-width: 0px; max-width: auto; top: 12px; left: 0px; z-index: 0; display: none;"
   >
   </div>
@@ -353,10 +299,8 @@ exports[`VMenu.js should render component with custom top and match snapshot 1`]
 
 exports[`VMenu.js should render component with custom transition and match snapshot 1`] = `
 
-<div class="v-menu"
-     style="display: inline-block;"
->
-  <div class="v-menu__content"
+<div class="v-menu">
+  <div class="v-menu__content theme--light "
        style="max-height: auto; min-width: 0px; max-width: auto; top: 12px; left: 0px; z-index: 0; display: none;"
   >
   </div>
@@ -368,21 +312,19 @@ exports[`VMenu.js should round dimensions 1`] = `"max-height: auto; min-width: 1
 
 exports[`VMenu.js should work 1`] = `
 
-<div class="v-menu"
-     style="display: inline-block;"
->
+<div class="v-menu">
   <div class="v-menu__activator v-menu__activator--active">
     <button type="button"
-            class="v-btn"
+            class="v-btn theme--light"
     >
       <div class="v-btn__content">
       </div>
     </button>
   </div>
-  <div class="v-menu__content menuable__content__active"
+  <div class="v-menu__content menuable__content__active theme--light "
        style="max-height: auto; min-width: 0px; max-width: auto; top: 12px; left: 0px; z-index: 8; display: none; z-index: 8;"
   >
-    <div class="v-card">
+    <div class="v-card theme--light">
     </div>
   </div>
 </div>

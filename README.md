@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://vuetifyjs.com" target="_blank">
-    <img width="100"src="https://vuetifyjs.com/doc-images/logo.svg">
+    <img width="100"src="https://cdn.vuetifyjs.com/images/logos/logo.svg">
   </a>
 </p>
 
@@ -66,13 +66,13 @@
 
 <p align="center">
   <a href="https://careers.lmax.com/?utm_source=vuetify&utm_medium=github-link&utm_campaign=lmax-careers">
-    <img height="70px" src="https://vuetifyjs.com/doc-images/backers/lmax-exchange.png">
+    <img height="70px" src="https://cdn.vuetifyjs.com/images/backers/lmax-exchange.png">
   </a><br>
   <a href="http://intygrate.com/?ref=vuetify-github">
-    <img height="70px" src="https://vuetifyjs.com/doc-images/backers/intygrate.png">
+    <img height="70px" src="https://cdn.vuetifyjs.com/images/backers/intygrate.png">
   </a><br>
   <a href="http://resaleai.com/?ref=vuetify-github">
-    <img height="70px" src="https://vuetifyjs.com/doc-images/backers/resaleai_logo_blue.svg">
+    <img height="70px" src="https://cdn.vuetifyjs.com/images/backers/resaleai_logo_blue.svg">
   </a>
 </p>
 
@@ -80,16 +80,16 @@
 
 <p align="center">
   <a href="http://www.eikospartners.com/?ref=vuetify-github">
-    <img height="40px" src="https://vuetifyjs.com/doc-images/backers/eikos-partners.webp">
+    <img height="40px" src="https://cdn.vuetifyjs.com/images/backers/eikos-partners.png">
   </a>
   <a href="https://application.rategenius.com/?ref=vuetify-github">
-    <img height="40px" src="https://vuetifyjs.com/doc-images/backers/rate-genius.png">
+    <img height="40px" src="https://cdn.vuetifyjs.com/images/backers/rate-genius.png">
   </a>
   <a href="http://quitt.ch/?ref=vuetify-github">
-    <img height="40px" src="https://vuetifyjs.com/doc-images/backers/quitt.png">
+    <img height="40px" src="https://cdn.vuetifyjs.com/images/backers/quitt.png">
   </a>
   <a href="https://www.digitalmaas.com/?ref=vuetify-github">
-    <img height="40px" src="https://vuetifyjs.com/doc-images/backers/digital-maas.svg">
+    <img height="40px" src="https://cdn.vuetifyjs.com/images/backers/digital-maas.svg">
   </a>
 </p>
 
@@ -207,7 +207,7 @@ It is important to note that for each release, the detailed changes are document
 
 ### Contributing Guide
 
-You can report issues by following the [Issue Template](https://issues.vuetifyjs.com/) and you can create a minimal reproduction with a [CodePen template](https://template.vuetifyjs.com/) or a full project at [CodeSandbox](https://codesandbox.io/s/vue).
+You can request features using the [Feature Request Template](https://github.com/vuetifyjs/vuetify/issues/new?template=feature_request.md) or report bugs using the [Bug Report Template](https://github.com/vuetifyjs/vuetify/issues/new?template=bug_report.md) and create a minimal reproduction with a [CodePen template](https://template.vuetifyjs.com/) or a full project at [CodeSandbox](https://codesandbox.io/s/vue).
 
 ### Good First Issue
 

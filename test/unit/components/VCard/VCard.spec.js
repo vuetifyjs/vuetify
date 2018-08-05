@@ -1,5 +1,5 @@
 import { test } from '@/test'
-import VCard from '@/components/VCard'
+import VCard from '@/components/VCard/VCard'
 
 test('VCard.vue', ({ mount }) => {
   it('should render component and match snapshot', () => {

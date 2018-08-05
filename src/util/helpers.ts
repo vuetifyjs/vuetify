@@ -1,21 +1,17 @@
-import { VNode, VNodeDirective, FunctionalComponentOptions } from 'vue'
+import { Vue } from 'vue/types/vue'
+import { VNode, VNodeDirective, FunctionalComponentOptions } from 'vue/types'
 
 export function createSimpleFunctional (
   c: string,
   el = 'div',
   name?: string
 ): FunctionalComponentOptions {
-  name = name || c.replace(/__/g, '-')
-
-  // TODO: remove after close
-  // https://github.com/vuetifyjs/vuetify/issues/1561
-  name = name.split('-')[0] === 'v' ? name : `v-${name}`
-
   return {
-    name,
+    name: name || c.replace(/__/g, '-'),
+
     functional: true,
 
-    render (h, { data, children }) {
+    render (h, { data, children }): VNode {
       data.staticClass = (`${c} ${data.staticClass || ''}`).trim()
 
       return h(el, data, children)
@@ -40,7 +36,7 @@ export function createSimpleTransition (
       }
     },
 
-    render (h, context) {
+    render (h, context): VNode {
       context.data = context.data || {}
       context.data.props = { name }
       context.data.on = context.data.on || {}
@@ -63,7 +59,7 @@ export function createSimpleTransition (
 export function createJavaScriptTransition (
   name: string,
   functions: Record<string, () => any>,
-  css = true,
+  css = false,
   mode = 'in-out'
 ): FunctionalComponentOptions {
   return {
@@ -82,7 +78,7 @@ export function createJavaScriptTransition (
       }
     },
 
-    render (h, context) {
+    render (h, context): VNode {
       const data = {
         props: {
           ...context.props,
@@ -134,6 +130,11 @@ export function getNestedValue (obj: any, path: (string | number)[], fallback?: 
 
 export function deepEqual (a: any, b: any): boolean {
   if (a === b) return true
+
+  if (a instanceof Date && b instanceof Date) {
+    // If the values are Date, they were convert to timestamp with getTime and compare it
+    if (a.getTime() !== b.getTime()) return false
+  }
 
   if (a !== Object(a) || b !== Object(b)) {
     // If the values aren't objects, they were already checked for equality
@@ -258,6 +259,19 @@ export const keyCodes = Object.freeze({
   pageup: 33,
   pagedown: 34
 })
+
+const ICONS_PREFIX = '$vuetify.icons.'
+
+// This remaps internal names like '$vuetify.icons.cancel' to the current name
+// for that icon.
+export function remapInternalIcon (vm: Vue, iconName: string): string {
+  if (!iconName.startsWith(ICONS_PREFIX)) {
+    return iconName
+  }
+
+  // Now look up icon indirection name, e.g. '$vuetify.icons.cancel'
+  return getObjectValueByPath(vm, iconName, iconName)
+}
 
 export function keys<O> (o: O) {
   return Object.keys(o) as (keyof O)[]

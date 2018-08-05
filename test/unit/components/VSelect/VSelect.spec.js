@@ -398,6 +398,42 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect(list.html()).toMatchSnapshot()
   })
 
+  it('should use slotted prepend-item', () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        items: ['foo']
+      },
+      slots: {
+        'prepend-item': [{
+          render: h => h('div', 'foo')
+        }]
+      }
+    })
+
+    const list = wrapper.first('.v-list')
+
+    expect(wrapper.vm.$slots['prepend-item']).toBeTruthy()
+    expect(list.html()).toMatchSnapshot()
+  })
+
+  it('should use slotted append-item', () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        items: ['foo']
+      },
+      slots: {
+        'append-item': [{
+          render: h => h('div', 'foo')
+        }]
+      }
+    })
+
+    const list = wrapper.first('.v-list')
+
+    expect(wrapper.vm.$slots['append-item']).toBeTruthy()
+    expect(list.html()).toMatchSnapshot()
+  })
+
   it('should use scoped slot for selection generation', () => {
     const wrapper = mount({
       render (h) {
@@ -446,5 +482,59 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.isMenuActive).toBe(false)
+  })
+
+  it('should calculate the counter value', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        items: ['foo'],
+        value: 'foo'
+      }
+    })
+
+    expect(wrapper.vm.counterValue).toBe(3)
+
+    wrapper.setProps({
+      items: [{
+        text: 'foobarbaz',
+        value: 'foo'
+      }]
+    })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.counterValue).toBe(9)
+
+    wrapper.setProps({
+      items: ['foo', 'bar', 'baz'],
+      multiple: true,
+      value: ['foo', 'bar']
+    })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.counterValue).toBe(2)
+  })
+
+  it('should emit a single change event', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        attach: true,
+        items: ['foo', 'bar']
+      }
+    })
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    const menu = wrapper.first('.v-input__slot')
+
+    menu.trigger('click')
+    await wrapper.vm.$nextTick()
+
+    wrapper.vm.selectItem('foo')
+    await wrapper.vm.$nextTick()
+
+    wrapper.vm.blur()
+    await wrapper.vm.$nextTick()
+
+    expect(change.mock.calls).toEqual([['foo']])
   })
 })

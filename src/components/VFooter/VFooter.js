@@ -70,11 +70,11 @@ export default {
      * @return {number}
      */
     updateApplication () {
-      return isNaN(this.height)
-        ? this.$el
-          ? this.$el.clientHeight
-          : 0
-        : this.height
+      const height = parseInt(this.height)
+
+      return isNaN(height)
+        ? this.$el ? this.$el.clientHeight : 0
+        : height
     }
   },
 
@@ -85,8 +85,7 @@ export default {
         'v-footer--absolute': this.absolute,
         'v-footer--fixed': !this.absolute && (this.app || this.fixed),
         'v-footer--inset': this.inset,
-        'theme--dark': this.dark,
-        'theme--light': this.light
+        ...this.themeClasses
       }),
       style: this.styles,
       ref: 'content'

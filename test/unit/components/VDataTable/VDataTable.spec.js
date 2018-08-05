@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import { test } from '@/test'
-import VDataTable from '@/components/VDataTable'
+import VDataTable from '@/components/VDataTable/VDataTable'
 
 test('VDataTable.vue', ({ mount, compileToFunctions }) => {
   function dataTableTestData () {
