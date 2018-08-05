@@ -19,71 +19,71 @@ exports[`VApp.js should generate theme using css variables 1`] = `
 >
   :root {
   --v-primary-base: #000000;
-  --v-primary-lighten1: #777777;
-  --v-primary-lighten2: #5e5e5e;
+  --v-primary-lighten5: #777777;
+  --v-primary-lighten4: #5e5e5e;
   --v-primary-lighten3: #474747;
-  --v-primary-lighten4: #303030;
-  --v-primary-lighten5: #1b1b1b;
+  --v-primary-lighten2: #303030;
+  --v-primary-lighten1: #1b1b1b;
   --v-primary-darken1: #000000;
   --v-primary-darken2: #000000;
   --v-primary-darken3: #000000;
   --v-primary-darken4: #000000;
   --v-secondary-base: #424242;
-  --v-secondary-lighten1: #c1c1c1;
-  --v-secondary-lighten2: #a6a6a6;
+  --v-secondary-lighten5: #c1c1c1;
+  --v-secondary-lighten4: #a6a6a6;
   --v-secondary-lighten3: #8b8b8b;
-  --v-secondary-lighten4: #727272;
-  --v-secondary-lighten5: #595959;
+  --v-secondary-lighten2: #727272;
+  --v-secondary-lighten1: #595959;
   --v-secondary-darken1: #2c2c2c;
   --v-secondary-darken2: #171717;
   --v-secondary-darken3: #000000;
   --v-secondary-darken4: #000000;
   --v-accent-base: #82b1ff;
-  --v-accent-lighten1: #ffffff;
-  --v-accent-lighten2: #f8ffff;
+  --v-accent-lighten5: #ffffff;
+  --v-accent-lighten4: #f8ffff;
   --v-accent-lighten3: #daffff;
-  --v-accent-lighten4: #bce8ff;
-  --v-accent-lighten5: #9fccff;
+  --v-accent-lighten2: #bce8ff;
+  --v-accent-lighten1: #9fccff;
   --v-accent-darken1: #6596e2;
   --v-accent-darken2: #467dc6;
   --v-accent-darken3: #2364aa;
   --v-accent-darken4: #004c90;
   --v-error-base: #ff5252;
-  --v-error-lighten1: #ffe4d5;
-  --v-error-lighten2: #ffc6b9;
+  --v-error-lighten5: #ffe4d5;
+  --v-error-lighten4: #ffc6b9;
   --v-error-lighten3: #ffa99e;
-  --v-error-lighten4: #ff8c84;
-  --v-error-lighten5: #ff6f6a;
+  --v-error-lighten2: #ff8c84;
+  --v-error-lighten1: #ff6f6a;
   --v-error-darken1: #df323b;
   --v-error-darken2: #bf0025;
   --v-error-darken3: #9f0010;
   --v-error-darken4: #800000;
   --v-info-base: #2196f3;
-  --v-info-lighten1: #d4ffff;
-  --v-info-lighten2: #b5ffff;
+  --v-info-lighten5: #d4ffff;
+  --v-info-lighten4: #b5ffff;
   --v-info-lighten3: #95e8ff;
-  --v-info-lighten4: #75ccff;
-  --v-info-lighten5: #51b0ff;
+  --v-info-lighten2: #75ccff;
+  --v-info-lighten1: #51b0ff;
   --v-info-darken1: #007cd6;
   --v-info-darken2: #0064ba;
   --v-info-darken3: #004d9f;
   --v-info-darken4: #003784;
   --v-success-base: #4caf50;
-  --v-success-lighten1: #dcffd6;
-  --v-success-lighten2: #beffba;
+  --v-success-lighten5: #dcffd6;
+  --v-success-lighten4: #beffba;
   --v-success-lighten3: #a2ff9e;
-  --v-success-lighten4: #85e783;
-  --v-success-lighten5: #69cb69;
+  --v-success-lighten2: #85e783;
+  --v-success-lighten1: #69cb69;
   --v-success-darken1: #2d9437;
   --v-success-darken2: #00791e;
   --v-success-darken3: #006000;
   --v-success-darken4: #004700;
   --v-warning-base: #ffc107;
-  --v-warning-lighten1: #ffffae;
-  --v-warning-lighten2: #ffff91;
+  --v-warning-lighten5: #ffffae;
+  --v-warning-lighten4: #ffff91;
   --v-warning-lighten3: #ffff74;
-  --v-warning-lighten4: #fff956;
-  --v-warning-lighten5: #ffdd37;
+  --v-warning-lighten2: #fff956;
+  --v-warning-lighten1: #ffdd37;
   --v-warning-darken1: #e0a600;
   --v-warning-darken2: #c18c00;
   --v-warning-darken3: #a27300;
@@ -102,38 +102,16 @@ a { color: var(--v-primary-base); }
 .primary--text textarea {
   caret-color: var(--v-primary-base) !important;
 }
-.primary.lighten-1 {
-  background-color: var(--v-primary-lighten1) !important;
-  border-color: var(--v-primary-lighten1) !important;
+.primary.lighten-5 {
+  background-color: var(--v-primary-lighten5) !important;
+  border-color: var(--v-primary-lighten5) !important;
 }
-.primary--text.text--lighten-1 {
-  color: var(--v-primary-lighten1) !important;
+.primary--text.text--lighten-5 {
+  color: var(--v-primary-lighten5) !important;
 }
-.primary--text.text--lighten-1 input,
-.primary--text.text--lighten-1 textarea {
-  caret-color: var(--v-primary-lighten1) !important;
-}
-.primary.lighten-2 {
-  background-color: var(--v-primary-lighten2) !important;
-  border-color: var(--v-primary-lighten2) !important;
-}
-.primary--text.text--lighten-2 {
-  color: var(--v-primary-lighten2) !important;
-}
-.primary--text.text--lighten-2 input,
-.primary--text.text--lighten-2 textarea {
-  caret-color: var(--v-primary-lighten2) !important;
-}
-.primary.lighten-3 {
-  background-color: var(--v-primary-lighten3) !important;
-  border-color: var(--v-primary-lighten3) !important;
-}
-.primary--text.text--lighten-3 {
-  color: var(--v-primary-lighten3) !important;
-}
-.primary--text.text--lighten-3 input,
-.primary--text.text--lighten-3 textarea {
-  caret-color: var(--v-primary-lighten3) !important;
+.primary--text.text--lighten-5 input,
+.primary--text.text--lighten-5 textarea {
+  caret-color: var(--v-primary-lighten5) !important;
 }
 .primary.lighten-4 {
   background-color: var(--v-primary-lighten4) !important;
@@ -146,16 +124,38 @@ a { color: var(--v-primary-base); }
 .primary--text.text--lighten-4 textarea {
   caret-color: var(--v-primary-lighten4) !important;
 }
-.primary.lighten-5 {
-  background-color: var(--v-primary-lighten5) !important;
-  border-color: var(--v-primary-lighten5) !important;
+.primary.lighten-3 {
+  background-color: var(--v-primary-lighten3) !important;
+  border-color: var(--v-primary-lighten3) !important;
 }
-.primary--text.text--lighten-5 {
-  color: var(--v-primary-lighten5) !important;
+.primary--text.text--lighten-3 {
+  color: var(--v-primary-lighten3) !important;
 }
-.primary--text.text--lighten-5 input,
-.primary--text.text--lighten-5 textarea {
-  caret-color: var(--v-primary-lighten5) !important;
+.primary--text.text--lighten-3 input,
+.primary--text.text--lighten-3 textarea {
+  caret-color: var(--v-primary-lighten3) !important;
+}
+.primary.lighten-2 {
+  background-color: var(--v-primary-lighten2) !important;
+  border-color: var(--v-primary-lighten2) !important;
+}
+.primary--text.text--lighten-2 {
+  color: var(--v-primary-lighten2) !important;
+}
+.primary--text.text--lighten-2 input,
+.primary--text.text--lighten-2 textarea {
+  caret-color: var(--v-primary-lighten2) !important;
+}
+.primary.lighten-1 {
+  background-color: var(--v-primary-lighten1) !important;
+  border-color: var(--v-primary-lighten1) !important;
+}
+.primary--text.text--lighten-1 {
+  color: var(--v-primary-lighten1) !important;
+}
+.primary--text.text--lighten-1 input,
+.primary--text.text--lighten-1 textarea {
+  caret-color: var(--v-primary-lighten1) !important;
 }
 .primary.darken-1 {
   background-color: var(--v-primary-darken1) !important;
@@ -212,38 +212,16 @@ a { color: var(--v-primary-base); }
 .secondary--text textarea {
   caret-color: var(--v-secondary-base) !important;
 }
-.secondary.lighten-1 {
-  background-color: var(--v-secondary-lighten1) !important;
-  border-color: var(--v-secondary-lighten1) !important;
+.secondary.lighten-5 {
+  background-color: var(--v-secondary-lighten5) !important;
+  border-color: var(--v-secondary-lighten5) !important;
 }
-.secondary--text.text--lighten-1 {
-  color: var(--v-secondary-lighten1) !important;
+.secondary--text.text--lighten-5 {
+  color: var(--v-secondary-lighten5) !important;
 }
-.secondary--text.text--lighten-1 input,
-.secondary--text.text--lighten-1 textarea {
-  caret-color: var(--v-secondary-lighten1) !important;
-}
-.secondary.lighten-2 {
-  background-color: var(--v-secondary-lighten2) !important;
-  border-color: var(--v-secondary-lighten2) !important;
-}
-.secondary--text.text--lighten-2 {
-  color: var(--v-secondary-lighten2) !important;
-}
-.secondary--text.text--lighten-2 input,
-.secondary--text.text--lighten-2 textarea {
-  caret-color: var(--v-secondary-lighten2) !important;
-}
-.secondary.lighten-3 {
-  background-color: var(--v-secondary-lighten3) !important;
-  border-color: var(--v-secondary-lighten3) !important;
-}
-.secondary--text.text--lighten-3 {
-  color: var(--v-secondary-lighten3) !important;
-}
-.secondary--text.text--lighten-3 input,
-.secondary--text.text--lighten-3 textarea {
-  caret-color: var(--v-secondary-lighten3) !important;
+.secondary--text.text--lighten-5 input,
+.secondary--text.text--lighten-5 textarea {
+  caret-color: var(--v-secondary-lighten5) !important;
 }
 .secondary.lighten-4 {
   background-color: var(--v-secondary-lighten4) !important;
@@ -256,16 +234,38 @@ a { color: var(--v-primary-base); }
 .secondary--text.text--lighten-4 textarea {
   caret-color: var(--v-secondary-lighten4) !important;
 }
-.secondary.lighten-5 {
-  background-color: var(--v-secondary-lighten5) !important;
-  border-color: var(--v-secondary-lighten5) !important;
+.secondary.lighten-3 {
+  background-color: var(--v-secondary-lighten3) !important;
+  border-color: var(--v-secondary-lighten3) !important;
 }
-.secondary--text.text--lighten-5 {
-  color: var(--v-secondary-lighten5) !important;
+.secondary--text.text--lighten-3 {
+  color: var(--v-secondary-lighten3) !important;
 }
-.secondary--text.text--lighten-5 input,
-.secondary--text.text--lighten-5 textarea {
-  caret-color: var(--v-secondary-lighten5) !important;
+.secondary--text.text--lighten-3 input,
+.secondary--text.text--lighten-3 textarea {
+  caret-color: var(--v-secondary-lighten3) !important;
+}
+.secondary.lighten-2 {
+  background-color: var(--v-secondary-lighten2) !important;
+  border-color: var(--v-secondary-lighten2) !important;
+}
+.secondary--text.text--lighten-2 {
+  color: var(--v-secondary-lighten2) !important;
+}
+.secondary--text.text--lighten-2 input,
+.secondary--text.text--lighten-2 textarea {
+  caret-color: var(--v-secondary-lighten2) !important;
+}
+.secondary.lighten-1 {
+  background-color: var(--v-secondary-lighten1) !important;
+  border-color: var(--v-secondary-lighten1) !important;
+}
+.secondary--text.text--lighten-1 {
+  color: var(--v-secondary-lighten1) !important;
+}
+.secondary--text.text--lighten-1 input,
+.secondary--text.text--lighten-1 textarea {
+  caret-color: var(--v-secondary-lighten1) !important;
 }
 .secondary.darken-1 {
   background-color: var(--v-secondary-darken1) !important;
@@ -322,38 +322,16 @@ a { color: var(--v-primary-base); }
 .accent--text textarea {
   caret-color: var(--v-accent-base) !important;
 }
-.accent.lighten-1 {
-  background-color: var(--v-accent-lighten1) !important;
-  border-color: var(--v-accent-lighten1) !important;
+.accent.lighten-5 {
+  background-color: var(--v-accent-lighten5) !important;
+  border-color: var(--v-accent-lighten5) !important;
 }
-.accent--text.text--lighten-1 {
-  color: var(--v-accent-lighten1) !important;
+.accent--text.text--lighten-5 {
+  color: var(--v-accent-lighten5) !important;
 }
-.accent--text.text--lighten-1 input,
-.accent--text.text--lighten-1 textarea {
-  caret-color: var(--v-accent-lighten1) !important;
-}
-.accent.lighten-2 {
-  background-color: var(--v-accent-lighten2) !important;
-  border-color: var(--v-accent-lighten2) !important;
-}
-.accent--text.text--lighten-2 {
-  color: var(--v-accent-lighten2) !important;
-}
-.accent--text.text--lighten-2 input,
-.accent--text.text--lighten-2 textarea {
-  caret-color: var(--v-accent-lighten2) !important;
-}
-.accent.lighten-3 {
-  background-color: var(--v-accent-lighten3) !important;
-  border-color: var(--v-accent-lighten3) !important;
-}
-.accent--text.text--lighten-3 {
-  color: var(--v-accent-lighten3) !important;
-}
-.accent--text.text--lighten-3 input,
-.accent--text.text--lighten-3 textarea {
-  caret-color: var(--v-accent-lighten3) !important;
+.accent--text.text--lighten-5 input,
+.accent--text.text--lighten-5 textarea {
+  caret-color: var(--v-accent-lighten5) !important;
 }
 .accent.lighten-4 {
   background-color: var(--v-accent-lighten4) !important;
@@ -366,16 +344,38 @@ a { color: var(--v-primary-base); }
 .accent--text.text--lighten-4 textarea {
   caret-color: var(--v-accent-lighten4) !important;
 }
-.accent.lighten-5 {
-  background-color: var(--v-accent-lighten5) !important;
-  border-color: var(--v-accent-lighten5) !important;
+.accent.lighten-3 {
+  background-color: var(--v-accent-lighten3) !important;
+  border-color: var(--v-accent-lighten3) !important;
 }
-.accent--text.text--lighten-5 {
-  color: var(--v-accent-lighten5) !important;
+.accent--text.text--lighten-3 {
+  color: var(--v-accent-lighten3) !important;
 }
-.accent--text.text--lighten-5 input,
-.accent--text.text--lighten-5 textarea {
-  caret-color: var(--v-accent-lighten5) !important;
+.accent--text.text--lighten-3 input,
+.accent--text.text--lighten-3 textarea {
+  caret-color: var(--v-accent-lighten3) !important;
+}
+.accent.lighten-2 {
+  background-color: var(--v-accent-lighten2) !important;
+  border-color: var(--v-accent-lighten2) !important;
+}
+.accent--text.text--lighten-2 {
+  color: var(--v-accent-lighten2) !important;
+}
+.accent--text.text--lighten-2 input,
+.accent--text.text--lighten-2 textarea {
+  caret-color: var(--v-accent-lighten2) !important;
+}
+.accent.lighten-1 {
+  background-color: var(--v-accent-lighten1) !important;
+  border-color: var(--v-accent-lighten1) !important;
+}
+.accent--text.text--lighten-1 {
+  color: var(--v-accent-lighten1) !important;
+}
+.accent--text.text--lighten-1 input,
+.accent--text.text--lighten-1 textarea {
+  caret-color: var(--v-accent-lighten1) !important;
 }
 .accent.darken-1 {
   background-color: var(--v-accent-darken1) !important;
@@ -432,38 +432,16 @@ a { color: var(--v-primary-base); }
 .error--text textarea {
   caret-color: var(--v-error-base) !important;
 }
-.error.lighten-1 {
-  background-color: var(--v-error-lighten1) !important;
-  border-color: var(--v-error-lighten1) !important;
+.error.lighten-5 {
+  background-color: var(--v-error-lighten5) !important;
+  border-color: var(--v-error-lighten5) !important;
 }
-.error--text.text--lighten-1 {
-  color: var(--v-error-lighten1) !important;
+.error--text.text--lighten-5 {
+  color: var(--v-error-lighten5) !important;
 }
-.error--text.text--lighten-1 input,
-.error--text.text--lighten-1 textarea {
-  caret-color: var(--v-error-lighten1) !important;
-}
-.error.lighten-2 {
-  background-color: var(--v-error-lighten2) !important;
-  border-color: var(--v-error-lighten2) !important;
-}
-.error--text.text--lighten-2 {
-  color: var(--v-error-lighten2) !important;
-}
-.error--text.text--lighten-2 input,
-.error--text.text--lighten-2 textarea {
-  caret-color: var(--v-error-lighten2) !important;
-}
-.error.lighten-3 {
-  background-color: var(--v-error-lighten3) !important;
-  border-color: var(--v-error-lighten3) !important;
-}
-.error--text.text--lighten-3 {
-  color: var(--v-error-lighten3) !important;
-}
-.error--text.text--lighten-3 input,
-.error--text.text--lighten-3 textarea {
-  caret-color: var(--v-error-lighten3) !important;
+.error--text.text--lighten-5 input,
+.error--text.text--lighten-5 textarea {
+  caret-color: var(--v-error-lighten5) !important;
 }
 .error.lighten-4 {
   background-color: var(--v-error-lighten4) !important;
@@ -476,16 +454,38 @@ a { color: var(--v-primary-base); }
 .error--text.text--lighten-4 textarea {
   caret-color: var(--v-error-lighten4) !important;
 }
-.error.lighten-5 {
-  background-color: var(--v-error-lighten5) !important;
-  border-color: var(--v-error-lighten5) !important;
+.error.lighten-3 {
+  background-color: var(--v-error-lighten3) !important;
+  border-color: var(--v-error-lighten3) !important;
 }
-.error--text.text--lighten-5 {
-  color: var(--v-error-lighten5) !important;
+.error--text.text--lighten-3 {
+  color: var(--v-error-lighten3) !important;
 }
-.error--text.text--lighten-5 input,
-.error--text.text--lighten-5 textarea {
-  caret-color: var(--v-error-lighten5) !important;
+.error--text.text--lighten-3 input,
+.error--text.text--lighten-3 textarea {
+  caret-color: var(--v-error-lighten3) !important;
+}
+.error.lighten-2 {
+  background-color: var(--v-error-lighten2) !important;
+  border-color: var(--v-error-lighten2) !important;
+}
+.error--text.text--lighten-2 {
+  color: var(--v-error-lighten2) !important;
+}
+.error--text.text--lighten-2 input,
+.error--text.text--lighten-2 textarea {
+  caret-color: var(--v-error-lighten2) !important;
+}
+.error.lighten-1 {
+  background-color: var(--v-error-lighten1) !important;
+  border-color: var(--v-error-lighten1) !important;
+}
+.error--text.text--lighten-1 {
+  color: var(--v-error-lighten1) !important;
+}
+.error--text.text--lighten-1 input,
+.error--text.text--lighten-1 textarea {
+  caret-color: var(--v-error-lighten1) !important;
 }
 .error.darken-1 {
   background-color: var(--v-error-darken1) !important;
@@ -542,38 +542,16 @@ a { color: var(--v-primary-base); }
 .info--text textarea {
   caret-color: var(--v-info-base) !important;
 }
-.info.lighten-1 {
-  background-color: var(--v-info-lighten1) !important;
-  border-color: var(--v-info-lighten1) !important;
+.info.lighten-5 {
+  background-color: var(--v-info-lighten5) !important;
+  border-color: var(--v-info-lighten5) !important;
 }
-.info--text.text--lighten-1 {
-  color: var(--v-info-lighten1) !important;
+.info--text.text--lighten-5 {
+  color: var(--v-info-lighten5) !important;
 }
-.info--text.text--lighten-1 input,
-.info--text.text--lighten-1 textarea {
-  caret-color: var(--v-info-lighten1) !important;
-}
-.info.lighten-2 {
-  background-color: var(--v-info-lighten2) !important;
-  border-color: var(--v-info-lighten2) !important;
-}
-.info--text.text--lighten-2 {
-  color: var(--v-info-lighten2) !important;
-}
-.info--text.text--lighten-2 input,
-.info--text.text--lighten-2 textarea {
-  caret-color: var(--v-info-lighten2) !important;
-}
-.info.lighten-3 {
-  background-color: var(--v-info-lighten3) !important;
-  border-color: var(--v-info-lighten3) !important;
-}
-.info--text.text--lighten-3 {
-  color: var(--v-info-lighten3) !important;
-}
-.info--text.text--lighten-3 input,
-.info--text.text--lighten-3 textarea {
-  caret-color: var(--v-info-lighten3) !important;
+.info--text.text--lighten-5 input,
+.info--text.text--lighten-5 textarea {
+  caret-color: var(--v-info-lighten5) !important;
 }
 .info.lighten-4 {
   background-color: var(--v-info-lighten4) !important;
@@ -586,16 +564,38 @@ a { color: var(--v-primary-base); }
 .info--text.text--lighten-4 textarea {
   caret-color: var(--v-info-lighten4) !important;
 }
-.info.lighten-5 {
-  background-color: var(--v-info-lighten5) !important;
-  border-color: var(--v-info-lighten5) !important;
+.info.lighten-3 {
+  background-color: var(--v-info-lighten3) !important;
+  border-color: var(--v-info-lighten3) !important;
 }
-.info--text.text--lighten-5 {
-  color: var(--v-info-lighten5) !important;
+.info--text.text--lighten-3 {
+  color: var(--v-info-lighten3) !important;
 }
-.info--text.text--lighten-5 input,
-.info--text.text--lighten-5 textarea {
-  caret-color: var(--v-info-lighten5) !important;
+.info--text.text--lighten-3 input,
+.info--text.text--lighten-3 textarea {
+  caret-color: var(--v-info-lighten3) !important;
+}
+.info.lighten-2 {
+  background-color: var(--v-info-lighten2) !important;
+  border-color: var(--v-info-lighten2) !important;
+}
+.info--text.text--lighten-2 {
+  color: var(--v-info-lighten2) !important;
+}
+.info--text.text--lighten-2 input,
+.info--text.text--lighten-2 textarea {
+  caret-color: var(--v-info-lighten2) !important;
+}
+.info.lighten-1 {
+  background-color: var(--v-info-lighten1) !important;
+  border-color: var(--v-info-lighten1) !important;
+}
+.info--text.text--lighten-1 {
+  color: var(--v-info-lighten1) !important;
+}
+.info--text.text--lighten-1 input,
+.info--text.text--lighten-1 textarea {
+  caret-color: var(--v-info-lighten1) !important;
 }
 .info.darken-1 {
   background-color: var(--v-info-darken1) !important;
@@ -652,38 +652,16 @@ a { color: var(--v-primary-base); }
 .success--text textarea {
   caret-color: var(--v-success-base) !important;
 }
-.success.lighten-1 {
-  background-color: var(--v-success-lighten1) !important;
-  border-color: var(--v-success-lighten1) !important;
+.success.lighten-5 {
+  background-color: var(--v-success-lighten5) !important;
+  border-color: var(--v-success-lighten5) !important;
 }
-.success--text.text--lighten-1 {
-  color: var(--v-success-lighten1) !important;
+.success--text.text--lighten-5 {
+  color: var(--v-success-lighten5) !important;
 }
-.success--text.text--lighten-1 input,
-.success--text.text--lighten-1 textarea {
-  caret-color: var(--v-success-lighten1) !important;
-}
-.success.lighten-2 {
-  background-color: var(--v-success-lighten2) !important;
-  border-color: var(--v-success-lighten2) !important;
-}
-.success--text.text--lighten-2 {
-  color: var(--v-success-lighten2) !important;
-}
-.success--text.text--lighten-2 input,
-.success--text.text--lighten-2 textarea {
-  caret-color: var(--v-success-lighten2) !important;
-}
-.success.lighten-3 {
-  background-color: var(--v-success-lighten3) !important;
-  border-color: var(--v-success-lighten3) !important;
-}
-.success--text.text--lighten-3 {
-  color: var(--v-success-lighten3) !important;
-}
-.success--text.text--lighten-3 input,
-.success--text.text--lighten-3 textarea {
-  caret-color: var(--v-success-lighten3) !important;
+.success--text.text--lighten-5 input,
+.success--text.text--lighten-5 textarea {
+  caret-color: var(--v-success-lighten5) !important;
 }
 .success.lighten-4 {
   background-color: var(--v-success-lighten4) !important;
@@ -696,16 +674,38 @@ a { color: var(--v-primary-base); }
 .success--text.text--lighten-4 textarea {
   caret-color: var(--v-success-lighten4) !important;
 }
-.success.lighten-5 {
-  background-color: var(--v-success-lighten5) !important;
-  border-color: var(--v-success-lighten5) !important;
+.success.lighten-3 {
+  background-color: var(--v-success-lighten3) !important;
+  border-color: var(--v-success-lighten3) !important;
 }
-.success--text.text--lighten-5 {
-  color: var(--v-success-lighten5) !important;
+.success--text.text--lighten-3 {
+  color: var(--v-success-lighten3) !important;
 }
-.success--text.text--lighten-5 input,
-.success--text.text--lighten-5 textarea {
-  caret-color: var(--v-success-lighten5) !important;
+.success--text.text--lighten-3 input,
+.success--text.text--lighten-3 textarea {
+  caret-color: var(--v-success-lighten3) !important;
+}
+.success.lighten-2 {
+  background-color: var(--v-success-lighten2) !important;
+  border-color: var(--v-success-lighten2) !important;
+}
+.success--text.text--lighten-2 {
+  color: var(--v-success-lighten2) !important;
+}
+.success--text.text--lighten-2 input,
+.success--text.text--lighten-2 textarea {
+  caret-color: var(--v-success-lighten2) !important;
+}
+.success.lighten-1 {
+  background-color: var(--v-success-lighten1) !important;
+  border-color: var(--v-success-lighten1) !important;
+}
+.success--text.text--lighten-1 {
+  color: var(--v-success-lighten1) !important;
+}
+.success--text.text--lighten-1 input,
+.success--text.text--lighten-1 textarea {
+  caret-color: var(--v-success-lighten1) !important;
 }
 .success.darken-1 {
   background-color: var(--v-success-darken1) !important;
@@ -762,38 +762,16 @@ a { color: var(--v-primary-base); }
 .warning--text textarea {
   caret-color: var(--v-warning-base) !important;
 }
-.warning.lighten-1 {
-  background-color: var(--v-warning-lighten1) !important;
-  border-color: var(--v-warning-lighten1) !important;
+.warning.lighten-5 {
+  background-color: var(--v-warning-lighten5) !important;
+  border-color: var(--v-warning-lighten5) !important;
 }
-.warning--text.text--lighten-1 {
-  color: var(--v-warning-lighten1) !important;
+.warning--text.text--lighten-5 {
+  color: var(--v-warning-lighten5) !important;
 }
-.warning--text.text--lighten-1 input,
-.warning--text.text--lighten-1 textarea {
-  caret-color: var(--v-warning-lighten1) !important;
-}
-.warning.lighten-2 {
-  background-color: var(--v-warning-lighten2) !important;
-  border-color: var(--v-warning-lighten2) !important;
-}
-.warning--text.text--lighten-2 {
-  color: var(--v-warning-lighten2) !important;
-}
-.warning--text.text--lighten-2 input,
-.warning--text.text--lighten-2 textarea {
-  caret-color: var(--v-warning-lighten2) !important;
-}
-.warning.lighten-3 {
-  background-color: var(--v-warning-lighten3) !important;
-  border-color: var(--v-warning-lighten3) !important;
-}
-.warning--text.text--lighten-3 {
-  color: var(--v-warning-lighten3) !important;
-}
-.warning--text.text--lighten-3 input,
-.warning--text.text--lighten-3 textarea {
-  caret-color: var(--v-warning-lighten3) !important;
+.warning--text.text--lighten-5 input,
+.warning--text.text--lighten-5 textarea {
+  caret-color: var(--v-warning-lighten5) !important;
 }
 .warning.lighten-4 {
   background-color: var(--v-warning-lighten4) !important;
@@ -806,16 +784,38 @@ a { color: var(--v-primary-base); }
 .warning--text.text--lighten-4 textarea {
   caret-color: var(--v-warning-lighten4) !important;
 }
-.warning.lighten-5 {
-  background-color: var(--v-warning-lighten5) !important;
-  border-color: var(--v-warning-lighten5) !important;
+.warning.lighten-3 {
+  background-color: var(--v-warning-lighten3) !important;
+  border-color: var(--v-warning-lighten3) !important;
 }
-.warning--text.text--lighten-5 {
-  color: var(--v-warning-lighten5) !important;
+.warning--text.text--lighten-3 {
+  color: var(--v-warning-lighten3) !important;
 }
-.warning--text.text--lighten-5 input,
-.warning--text.text--lighten-5 textarea {
-  caret-color: var(--v-warning-lighten5) !important;
+.warning--text.text--lighten-3 input,
+.warning--text.text--lighten-3 textarea {
+  caret-color: var(--v-warning-lighten3) !important;
+}
+.warning.lighten-2 {
+  background-color: var(--v-warning-lighten2) !important;
+  border-color: var(--v-warning-lighten2) !important;
+}
+.warning--text.text--lighten-2 {
+  color: var(--v-warning-lighten2) !important;
+}
+.warning--text.text--lighten-2 input,
+.warning--text.text--lighten-2 textarea {
+  caret-color: var(--v-warning-lighten2) !important;
+}
+.warning.lighten-1 {
+  background-color: var(--v-warning-lighten1) !important;
+  border-color: var(--v-warning-lighten1) !important;
+}
+.warning--text.text--lighten-1 {
+  color: var(--v-warning-lighten1) !important;
+}
+.warning--text.text--lighten-1 input,
+.warning--text.text--lighten-1 textarea {
+  caret-color: var(--v-warning-lighten1) !important;
 }
 .warning.darken-1 {
   background-color: var(--v-warning-darken1) !important;
