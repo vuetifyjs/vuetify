@@ -59,8 +59,7 @@ export default {
       const classes = {
         'v-radio--is-disabled': this.isDisabled,
         'v-radio--is-focused': this.isFocused,
-        'theme--dark': this.dark,
-        'theme--light': this.light
+        ...this.themeClasses
       }
 
       if (!this.parentError && this.isActive) {
@@ -104,7 +103,8 @@ export default {
       return this.$createElement('input', {
         attrs: Object.assign({}, attrs, {
           'aria-label': this.label,
-          name: this.radio.name || false,
+          name: this.radio.name || (this.radio._uid ? 'v-radio-' + this.radio._uid : false),
+          value: this.value,
           role: type,
           type
         }),

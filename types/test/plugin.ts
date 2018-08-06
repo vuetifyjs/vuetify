@@ -35,7 +35,6 @@ Vuetify.install(Vue, {
     }
   },
   options: {
-    themeVariations: ['primary', 'secondary'],
     cspNonce: 'asdf123'
   }
 })

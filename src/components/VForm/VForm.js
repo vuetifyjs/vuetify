@@ -65,13 +65,27 @@ export default {
 
       return watchers
     },
+    /** @public */
     validate () {
       const errors = this.inputs.filter(input => !input.validate(true)).length
       return !errors
     },
+    /** @public */
     reset () {
       for (let i = this.inputs.length; i--;) {
         this.inputs[i].reset()
+      }
+      if (this.lazyValidation) {
+        // Account for timeout in validatable
+        setTimeout(() => {
+          this.errorBag = {}
+        }, 0)
+      }
+    },
+    /** @public */
+    resetValidation () {
+      for (let i = this.inputs.length; i--;) {
+        this.inputs[i].resetValidation()
       }
       if (this.lazyValidation) {
         // Account for timeout in validatable

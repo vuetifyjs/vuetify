@@ -94,7 +94,11 @@ export default {
      */
     scrollListener (e) {
       if (e.type === 'keydown') {
-        if (['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName)) return
+        if (
+          ['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName) ||
+          // https://github.com/vuetifyjs/vuetify/issues/4715
+          e.target.isContentEditable
+        ) return
 
         const up = [keyCodes.up, keyCodes.pageup]
         const down = [keyCodes.down, keyCodes.pagedown]

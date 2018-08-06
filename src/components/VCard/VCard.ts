@@ -38,8 +38,7 @@ export default mixins(Colorable, Routable, Themeable).extend({
         'v-card--hover': this.hover,
         'v-card--raised': this.raised,
         'v-card--tile': this.tile,
-        'theme--light': this.light,
-        'theme--dark': this.dark
+        ...this.themeClasses
       })
     },
     styles (): object {

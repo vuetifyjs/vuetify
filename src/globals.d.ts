@@ -51,7 +51,8 @@ declare module 'vue/types/vue' {
     Options = Record<string, any>
   > {
     version: string
-    install?: PluginFunction<never>
+    /* eslint-disable-next-line camelcase */
+    $_vuetify_subcomponents?: Record<string, VueConstructor>
     options: Options
 
     extend<Data, Methods, Computed, Options, PropNames extends string = never> (options?: ThisTypedComponentOptionsWithArrayProps<V, Data, Methods, Computed, PropNames> & Options): OptionsVue<V, Data, Methods, Computed, Record<PropNames, any>, Options>
