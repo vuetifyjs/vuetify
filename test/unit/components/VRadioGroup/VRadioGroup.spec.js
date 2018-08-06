@@ -82,15 +82,14 @@ test('VRadioGroup.vue', ({ mount }) => {
     const inputTwo = two.first('input')
 
     inputOne.trigger('focus')
-    inputOne.trigger('keydown.enter')
-
+    inputOne.trigger('change')
 
     expect(one.vm.isActive).toBe(true)
 
     wrapper.setProps({ disabled: true })
 
     inputTwo.trigger('focus')
-    inputTwo.trigger('keydown.enter')
+    inputTwo.trigger('change')
 
     await wrapper.vm.$nextTick()
 

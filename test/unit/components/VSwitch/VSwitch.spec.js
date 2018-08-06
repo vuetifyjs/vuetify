@@ -41,7 +41,7 @@ test('VSwitch.js', ({ mount }) => {
     expect(change).toBeCalledWith(false)
   })
 
-  it('shouldn not emit change event on swipe when not active', async () => {
+  it('should not emit change event on swipe when not active', async () => {
     const wrapper = mount(VSwitch, {
       props: {
         inputValue: false
