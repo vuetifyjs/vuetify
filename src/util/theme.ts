@@ -55,9 +55,6 @@ const genBaseColor = (name: string, value: string): string => {
 }
 .${name}--text {
   color: ${value} !important;
-}
-.${name}--text input,
-.${name}--text textarea {
   caret-color: ${value} !important;
 }`
 }
@@ -74,9 +71,6 @@ const genVariantColor = (name: string, variant: string, value: string): string =
 }
 .${name}--text.text--${type}-${n} {
   color: ${value} !important;
-}
-.${name}--text.text--${type}-${n} input,
-.${name}--text.text--${type}-${n} textarea {
   caret-color: ${value} !important;
 }`
 }
