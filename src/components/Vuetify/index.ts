@@ -1,11 +1,17 @@
+import OurVue from 'vue'
+
 import application from './mixins/application'
 import breakpoint from './mixins/breakpoint'
 import theme from './mixins/theme'
 import icons from './mixins/icons'
 import options from './mixins/options'
 import genLang from './mixins/lang'
-import { consoleWarn } from '../../util/console'
 import goTo from './util/goTo'
+
+// Utils
+import { consoleWarn, consoleError } from '../../util/console'
+
+// Types
 import { VueConstructor } from 'vue/types'
 import { Vuetify as VuetifyPlugin } from 'types'
 
@@ -14,6 +20,10 @@ const Vuetify: VuetifyPlugin = {
     if ((this as any).installed) return
 
     (this as any).installed = true
+
+    if (OurVue !== Vue) {
+      consoleError('Multiple instances of Vue detected\nSee https://github.com/vuetifyjs/vuetify/issues/4068\n\nIf you\'re seeing "$attrs is readonly", it\'s caused by this')
+    }
 
     checkVueVersion(Vue)
 
