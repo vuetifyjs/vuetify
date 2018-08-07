@@ -93,7 +93,7 @@ export default {
       },
       set (val) {
         this.lazyValue = val
-        this.$emit('input', val)
+        this.$emit(this.$_modelEvent, val)
       }
     },
     isDirty () {
@@ -111,6 +111,12 @@ export default {
     value (val) {
       this.lazyValue = val
     }
+  },
+
+  beforeCreate () {
+    // v-radio-group needs to emit a different event
+    // https://github.com/vuetifyjs/vuetify/issues/4752
+    this.$_modelEvent = (this.$options.model && this.$options.model.event) || 'input'
   },
 
   methods: {

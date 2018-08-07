@@ -9,6 +9,7 @@ import VLabel from '../VLabel'
 import Colorable from '../../mixins/colorable'
 import Rippleable from '../../mixins/rippleable'
 import Themeable from '../../mixins/themeable'
+import Selectable from '../../mixins/selectable'
 import {
   inject as RegistrableInject
 } from '../../mixins/registrable'
@@ -99,31 +100,11 @@ export default {
   },
 
   methods: {
-    genInput (type, attrs) {
-      return this.$createElement('input', {
-        attrs: Object.assign({}, attrs, {
-          'aria-label': this.label,
-          name: this.radio.name || (this.radio._uid ? 'v-radio-' + this.radio._uid : false),
-          value: this.value,
-          role: type,
-          type
-        }),
-        domProps: {
-          checked: this.isActive
-        },
-        on: {
-          blur: this.onBlur,
-          change: this.onChange,
-          focus: this.onFocus,
-          keydown: e => {
-            if ([keyCodes.enter, keyCodes.space].includes(e.keyCode)) {
-              e.preventDefault()
-              this.onChange()
-            }
-          }
-        },
-        ref: 'input'
-      })
+    genInput (...args) {
+      // We can't actually use the mixin directly because
+      // it's made for standalone components, but its
+      // genInput method is exactly what we need
+      return Selectable.methods.genInput.call(this, ...args)
     },
     genLabel () {
       return this.$createElement(VLabel, {
@@ -144,7 +125,8 @@ export default {
         staticClass: 'v-input--selection-controls__input'
       }, [
         this.genInput('radio', {
-          'aria-checked': this.isActive.toString(),
+          name: this.radio.name || (this.radio._uid ? 'v-radio-' + this.radio._uid : false),
+          value: this.value,
           ...this.$attrs
         }),
         !this.isDisabled && this.genRipple({
@@ -171,6 +153,12 @@ export default {
 
       if (!this.isDisabled && (!this.isActive || !this.radio.mandatory)) {
         this.$emit('change', this.value)
+      }
+    },
+    onKeydown (e) {
+      if ([keyCodes.enter, keyCodes.space].includes(e.keyCode)) {
+        e.preventDefault()
+        this.onChange()
       }
     }
   },

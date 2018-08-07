@@ -73,6 +73,9 @@ export default {
 
       return this.valueComparator(input, this.trueValue)
     },
+    isDisabled () {
+      return this.disabled
+    },
     isDirty () {
       return this.isActive
     }
@@ -80,7 +83,7 @@ export default {
 
   watch: {
     inputValue (val) {
-      this.internalValue = val
+      this.lazyValue = val
     }
   },
 
@@ -96,20 +99,25 @@ export default {
     },
     genInput (type, attrs) {
       return this.$createElement('input', {
-        attrs: Object.assign({}, {
+        attrs: Object.assign({
           'aria-label': this.label,
           'aria-checked': this.isActive.toString(),
+          disabled: this.isDisabled,
           id: this.id,
           role: type,
           type,
           value: this.inputValue
         }, attrs),
+        domProps: {
+          checked: this.isActive
+        },
         on: {
           blur: this.onBlur,
           change: this.onChange,
           focus: this.onFocus,
           keydown: this.onKeydown
-        }
+        },
+        ref: 'input'
       })
     },
     onBlur () {
