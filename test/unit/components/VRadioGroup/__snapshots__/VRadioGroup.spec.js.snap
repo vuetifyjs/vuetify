@@ -90,7 +90,7 @@ exports[`VRadioGroup.vue should make radios disabled 1`] = `
        disabled="disabled"
        role="radio"
        type="radio"
-       name="v-radio-43"
+       name="v-radio-54"
 >
 
 `;
