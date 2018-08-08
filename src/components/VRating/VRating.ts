@@ -128,7 +128,12 @@ export default mixins(
       return (e: MouseEvent) => {
         if (this.readonly) return
 
-        this.internalValue = this.genHoverIndex(e, i)
+        const newValue = this.genHoverIndex(e, i)
+        if (this.internalValue === newValue) {
+          this.internalValue = 0
+        } else {
+          this.internalValue = newValue
+        }
       }
     },
     createProps (i: number): ItemSlotProps {
