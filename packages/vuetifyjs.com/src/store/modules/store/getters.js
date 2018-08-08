@@ -8,9 +8,9 @@ export default {
       if (isOnSale(product.variants)) totalOnSale++
     }
 
-    if (totalOnSale > 9) {
+    if (totalOnSale > 4) {
       return 'mdi-tag-multiple'
-    } else if (totalOnSale > 4) {
+    } else if (totalOnSale > 2) {
       return 'mdi-tag'
     } else if (totalOnSale) {
       return 'mdi-tag-outline'

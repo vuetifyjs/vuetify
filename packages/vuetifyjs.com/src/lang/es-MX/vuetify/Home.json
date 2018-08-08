@@ -5,17 +5,17 @@
     "getStarted": "Iniciar",
     "features": [
         {
-            "img": "/doc-images/feature1.svg",
+            "img": "https://cdn.vuetifyjs.com/images/home/feature1.svg",
             "title": "Scaffolding Prefabricado de Proyectos",
             "text": "Vuetify viene preparado con 8 plantillas prefabricadas para el vue-cli. Desde html sencillo hasta SSR (Server Side Rendering | Renderizado del Lado del Servidor) estás listo para trabajar en minutos."
         },
         {
-            "img": "/doc-images/feature2.svg",
+            "img": "https://cdn.vuetifyjs.com/images/home/feature2.svg",
             "title": "Componentes Semánticos de Material",
             "text": "Prepárate para todo un ejército de componentes especializados a tu disposición. Con más de 80 en total, hay una solución para cualquier aplicación."
         },
         {
-            "img": "/doc-images/feature3.svg",
+            "img": "https://cdn.vuetifyjs.com/images/home/feature3.svg",
             "title": "Una Comunidad Vibrante",
             "text": "Cuando te encuentras con una piedra en el camino, necesitas ayuda inmediata. Vuetify te ofrece soporte via chat en nuestro servidor dentro de una creciente comunidad en Discord."
         }

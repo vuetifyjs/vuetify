@@ -121,6 +121,14 @@
     "pledge": "Gold ($50)"
   },
   {
+    "name": "madhead",
+    "href": "https://www.madhead.com/",
+    "logo": "backers/madhead.png",
+    "type": "Patron",
+    "pledge": "Gold ($50)",
+    "dark": true
+  },
+  {
     "name": "VueJobs",
     "logo": "affiliates/vuejobs-logo.svg",
     "href": "https://vuejobs.com/?utm_source=vuejobs&utm_medium=affiliates&utm_campaign=linking",
