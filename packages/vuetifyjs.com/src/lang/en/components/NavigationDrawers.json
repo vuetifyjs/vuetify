@@ -4,7 +4,7 @@
   "examples": {
     "permanent": {
       "header": "Default",
-      "desc": "The navigation drawer is primarily used to house links to the pages in your application"
+      "desc": "The navigation drawer is primarily used to house links to the pages in your application. Using `null` as the starting value for its `v-model` will initialize the drawer as closed on mobile and as open on desktop."
     },
     "permanentClipped": {
       "header": "Colored drawer",

@@ -4,7 +4,7 @@
   "vueCliHeader": "Vue CLI-3 Install",
   "vueCliText1": "Vue-CLI 3 is the next generation cli tool made to help you get started more easily than before. When you start your app with vue-cli you will also be able to get the official webpack updates and config changes, as well as Vuetify's updates without an arduous upgrade process.",
   "vueCliText2": "For information on how to use Vue-CLI-3, visit the [official documentation](https://cli.vuejs.org/guide/)",
-  "vueCliText3": "**Tip**: If you don't want to overwrite your current vue-cli because you still need vue init from version 2, then [try this](https://github.com/vuejs/vue-cli/blob/dev/docs/cli.md#pulling-vue-cli2x-templates-legacy).",
+  "vueCliText3": "**Tip**: If you don't want to overwrite your current vue-cli because you still need vue init from version 2, then [try this](https://cli.vuejs.org/guide/creating-a-project.html#pulling-2-x-templates-legacy).",
   "vueCliText4": "Once the cli is installed, you can generate a new project scaffold. Select the _default install_ unless you have specific packages that you need to include (e.g. _vuex_ or _vue-router_). This will create a new Vue project that's ready to go with your selected options.",
   "vueCliText5": "Now that you have an instantiated project, you can add the **[Vuetify package](https://github.com/vuetifyjs/vue-cli-plugin-vuetify)** using the cli.",
   "vueCliText6": "Keep in mind, if you are installing the Vuetify package on an _existing_ vue-cli-3 project, ensure you have a clean working directory in case there are issues with the merge.",

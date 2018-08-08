@@ -4,7 +4,7 @@
 module.exports = {
   apps: [{
     name: 'vuetify-docs',
-    script: 'yarn',
-    args: ['dev']
+    script: 'yarn.js',
+    args: 'dev'
   }]
 }
