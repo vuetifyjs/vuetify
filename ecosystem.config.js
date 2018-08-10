@@ -14,7 +14,7 @@ module.exports = {
       script: 'yarn.js',
       args: 'watch',
       env: {
-        NODE_ENV: 'development'
+        NODE_ENV: 'production'
       }
     }
   ]
