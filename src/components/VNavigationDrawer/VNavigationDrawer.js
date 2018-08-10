@@ -235,6 +235,9 @@ export default {
       if (val == null) return this.init()
 
       if (val !== this.isActive) this.isActive = val
+    },
+    applicationProperty (newVal, oldVal) {
+      this.$vuetify.application.unbind(this._uid, oldVal)
     }
   },
 
