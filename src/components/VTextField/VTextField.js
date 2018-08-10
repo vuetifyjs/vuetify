@@ -198,7 +198,7 @@ export default {
     },
     /** @public */
     blur () {
-      this.onBlur()
+      this.$refs.input ? this.$refs.input.blur() : this.onBlur()
     },
     clearableCallback () {
       this.internalValue = null
