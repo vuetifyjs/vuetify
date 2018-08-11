@@ -123,7 +123,7 @@ You can find the Vuetify documentation <a href="https://vuetifyjs.com" target="_
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 </head>
 <body>
-  <div>
+  <div id="app">
     <v-app>
       <v-toolbar app>
         <v-toolbar-title>My Application</v-toolbar-title>
