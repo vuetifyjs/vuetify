@@ -200,7 +200,7 @@ export function nextDay (timestamp: VTimestamp): VTimestamp {
 }
 
 export function nextDays (timestamp: VTimestamp, days: number = 1): VTimestamp {
-  while (days--) nextDay(timestamp)
+  while (--days >= 0) nextDay(timestamp)
   return timestamp
 }
 
