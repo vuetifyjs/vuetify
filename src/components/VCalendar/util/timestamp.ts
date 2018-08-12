@@ -34,7 +34,7 @@ export function validateTimestamp (input: any): boolean {
   return !!PARSE_REGEX.exec(input)
 }
 
-export function parseTimestamp (input: string, now?: Date): VTimestamp | null {
+export function parseTimestamp (input: string, now?: VTimestamp): VTimestamp | null {
   // YYYY-MM-DD hh:mm:ss
   let parts = PARSE_REGEX.exec(input)
 
@@ -72,14 +72,18 @@ export function getDayIdentifier (timestamp: VTimestamp): number {
   return timestamp.year * 1000000 + timestamp.month * 100 + (timestamp.day || 1)
 }
 
-export function updateRelative (timestamp: VTimestamp, now: Date, time: boolean = false): VTimestamp {
-  let a = now.getFullYear() * 1000000 + (now.getMonth() + 1) * 100 + (now.getDate())
+export function getTimeIdentifier (timestamp: VTimestamp): number {
+  return timestamp.hour * 100 + timestamp.minute
+}
+
+export function updateRelative (timestamp: VTimestamp, now: VTimestamp, time: boolean = false): VTimestamp {
+  let a = getDayIdentifier(now)
   let b = getDayIdentifier(timestamp)
   let present = a === b
 
   if (timestamp.hasTime && time && present) {
-    a = now.getHours() * 100 + now.getMinutes()
-    b = timestamp.hour * 100 + timestamp.minute
+    a = getTimeIdentifier(now)
+    b = getTimeIdentifier(timestamp)
     present = a === b
   }
 
@@ -90,7 +94,7 @@ export function updateRelative (timestamp: VTimestamp, now: Date, time: boolean 
   return timestamp
 }
 
-export function updateMinutes (timestamp: VTimestamp, minutes: number, now?: Date): VTimestamp {
+export function updateMinutes (timestamp: VTimestamp, minutes: number, now?: VTimestamp): VTimestamp {
   timestamp.hasTime = true
   timestamp.hour = Math.floor(minutes / MINUTES_IN_HOUR)
   timestamp.minute = minutes % MINUTES_IN_HOUR
@@ -229,19 +233,24 @@ export function getWeekdaySkips (weekdays: number[]): number[] {
       }
       skip++
     }
-    skips[k] = skip
+    skips[k] = filled[k] * skip
   }
   return skips
 }
 
-export function createDayList (start: VTimestamp, end: VTimestamp, now: Date, weekdaySkips: number[]): VTimestamp[] {
+export function createDayList (start: VTimestamp, end: VTimestamp, now: VTimestamp,
+  weekdaySkips: number[], max: number = 42): VTimestamp[] {
   let current = copyTimestamp(start)
   let stop = getDayIdentifier(end)
   let currentIdentifier = 0
   let days: VTimestamp[] = []
 
-  while (currentIdentifier !== stop) {
+  while (currentIdentifier !== stop && days.length < max) {
     currentIdentifier = getDayIdentifier(current)
+    if (weekdaySkips[current.weekday] === 0) {
+      current = nextDay(current)
+      continue
+    }
     let day = copyTimestamp(current)
     updateFormatted(day)
     updateRelative(day, now)
@@ -252,7 +261,8 @@ export function createDayList (start: VTimestamp, end: VTimestamp, now: Date, we
   return days
 }
 
-export function createIntervalList (timestamp: VTimestamp, first: number, minutes: number, count: number, now?: Date): VTimestamp[] {
+export function createIntervalList (timestamp: VTimestamp, first: number,
+  minutes: number, count: number, now?: VTimestamp): VTimestamp[] {
   let intervals: VTimestamp[] = []
 
   for (let i = 0; i < count; i++) {

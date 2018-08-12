@@ -2,34 +2,33 @@
 @import '../theme'
 
 v-calendar-daily($material)
+  background-color: $material.calendar.background-color
   .v-calendar-daily__head
     .v-calendar-daily__intervals-head
-      border-right: $material.calendar.interval-gutter-border;
+      border-right: $material.calendar.line-color 1px solid;
     .v-calendar-daily_head-day
-      border-right: $material.calendar.head-day-border-right;
-      border-bottom: $material.calendar.head-day-border-bottom;
-      color: $material.text-color;
+      border-right: $material.calendar.line-color 1px solid;
+      border-bottom: $material.calendar.line-color 1px solid;
+      color: $material.calendar.text-color;
       &.v-past
         .v-calendar-daily_head-weekday,
         .v-calendar-daily_head-day-label
-          color: $material.text.disabled
-      &.v-present
-        .v-calendar-daily_head-weekday,
-        .v-calendar-daily_head-day-label
-          color: $material.text.primary
+          color: $material.calendar.past-color
   .v-calendar-daily__body
     .v-calendar-daily__scroll-area
       .v-calendar-daily__pane
         .v-calendar-daily__day-container
           .v-calendar-daily__intervals-body
-            border-right: $material.calendar.interval-gutter-border;
+            border-right: $material.calendar.line-color 1px solid;
             .v-calendar-daily__interval-text
-              color: $material.calendar.interval-gutter-color;
+              color: $material.calendar.interval-color;
           .v-calendar-daily__day
-            border-right: $material.calendar.day-border-right;
-            border-bottom: $material.calendar.day-border-bottom;
+            border-right: $material.calendar.interval-line-color 1px solid;
+            border-bottom: $material.calendar.interval-line-color 1px solid;
             .v-calendar-daily__day-interval
-              border-bottom: $material.calendar.interval-border;
+              border-top: $material.calendar.interval-line-color 1px solid;
+              &:first-child
+                border-top: none !important;
 
 theme(v-calendar-daily, "v-calendar-daily")
 

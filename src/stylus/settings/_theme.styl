@@ -100,13 +100,12 @@ $material-light := {
   active-icon-percent: .54
   inactive-icon-percent: .38
   calendar: {
-    interval-gutter-border: $grey.lighten-1 1px solid
-    interval-gutter-color: $grey.darken-4
-    interval-border: $grey.lighten-1 1px solid
-    day-border-right: $grey.lighten-1 1px solid
-    day-border-bottom: $grey.lighten-1 1px solid
-    head-day-border-right: $grey.lighten-1 1px solid
-    head-day-border-bottom: $grey.lighten-1 1px solid
+    background-color: #fff
+    line-color: $grey.lighten-1
+    interval-color: $grey.darken-3
+    interval-line-color: $grey.lighten-2
+    text-color: #000
+    past-color: rgba(#000, .38)
   }
 }
 
@@ -203,14 +202,13 @@ $material-dark := {
   divider-percent: .12
   active-icon-percent: 1
   inactive-icon-percent: .50
-  calendar: { // TODO
-    interval-gutter-border: $grey.lighten-1 1px solid
-    interval-gutter-color: $grey.darken-4
-    interval-border: $grey.lighten-1 1px solid
-    day-border-right: $grey.lighten-1 1px solid
-    day-border-bottom: $grey.lighten-1 1px solid
-    head-day-border-right: $grey.lighten-1 1px solid
-    head-day-border-bottom: $grey.lighten-1 1px solid
+  calendar: {
+    background-color: #303030
+    line-color: $grey.base
+    interval-color: $grey.lighten-3
+    interval-line-color: $grey.darken-2
+    text-color: #fff
+    past-color: rgba(#fff, .50)
   }
 }
 

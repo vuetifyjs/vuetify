@@ -7,6 +7,8 @@ import { VNode } from 'vue'
 // Mixins
 import mixins from '../../util/mixins'
 import Themeable from '../../mixins/themeable'
+import Colorable from '../../mixins/colorable'
+import Times from './mixins/times'
 
 // Util
 import { validateNumber } from './util/validate'
@@ -26,7 +28,7 @@ import {
 type MouseHandler = (e: MouseEvent) => void
 
 /* @vue/component */
-export default mixins(Themeable).extend({
+export default mixins(Colorable, Themeable, Times).extend({
   name: 'v-calendar-daily',
 
   props: {
@@ -37,14 +39,18 @@ export default mixins(Themeable).extend({
     },
     end: {
       type: String,
-      required: true,
-      validate: validateTimestamp
+      validate: validateTimestamp,
+      default: '0000-00-00'
+    },
+    maxDays: {
+      type: Number,
+      default: 7
     },
     weekdays: {
       type: Array as () => number[],
       default: () => [0, 1, 2, 3, 4, 5, 6]
     },
-    hideWeekdays: {
+    hideHeader: {
       type: Boolean,
       default: false
     },
@@ -103,7 +109,7 @@ export default mixins(Themeable).extend({
   },
 
   data: () => ({
-    now: new Date()
+    defaultColor: 'primary'
   }),
 
   computed: {
@@ -135,20 +141,20 @@ export default mixins(Themeable).extend({
       return parseFloat(this.intervalHeight)
     },
     firstMinute (): number {
-      return this.parsedFirstInterval * this.parsedIntervalHeight
+      return this.parsedFirstInterval * this.parsedIntervalMinutes
     },
     bodyHeight (): number {
       return this.parsedIntervalCount * this.parsedIntervalHeight
     },
     days (): VTimestamp[] {
-      return createDayList(this.parsedStart, this.parsedEnd, this.now, this.weekdaySkips)
+      return createDayList(this.parsedStart, this.parsedEnd, this.times.today, this.weekdaySkips, this.maxDays)
     },
     intervals (): VTimestamp[][] {
       let days: VTimestamp[] = this.days
       let first: number = this.parsedFirstInterval
       let minutes: number = this.parsedIntervalMinutes
       let count: number = this.parsedIntervalCount
-      let now: Date = this.now
+      let now: VTimestamp = this.times.now
 
       return days.map(d => createIntervalList(d, first, minutes, count, now))
     },
@@ -221,7 +227,7 @@ export default mixins(Themeable).extend({
       let addMinutes: number = Math.floor(addIntervals * this.parsedIntervalMinutes)
       let minutes: number = baseMinutes + addMinutes
 
-      return updateMinutes(timestamp, minutes, this.now)
+      return updateMinutes(timestamp, minutes, this.times.now)
     },
 
     genHead (): VNode {
@@ -273,14 +279,20 @@ export default mixins(Themeable).extend({
     },
 
     genHeadWeekday (day: VTimestamp): VNode {
+      let color = day.present ? this.computedColor : null
+
       return this.$createElement('div', {
-        staticClass: 'v-calendar-daily_head-weekday'
+        staticClass: 'v-calendar-daily_head-weekday',
+        class: this.addTextColorClassChecks({}, color)
       }, this.weekdayFormatter(day, this.shortWeekdays))
     },
 
     genHeadDayLabel (day: VTimestamp): VNode {
+      let color = day.present ? this.computedColor : null
+
       return this.$createElement('div', {
         staticClass: 'v-calendar-daily_head-day-label',
+        class: this.addTextColorClassChecks({}, color),
         on: {
           click: this.getViewDayHandler(day)
         }
@@ -431,7 +443,7 @@ export default mixins(Themeable).extend({
     return h('div', {
       class: this.classes
     }, [
-      this.genHead(),
+      this.hideHeader ? '' : this.genHead(),
       this.genBody()
     ])
   }
