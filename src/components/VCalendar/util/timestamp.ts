@@ -142,12 +142,6 @@ export function copyTimestamp (timestamp: VTimestamp): VTimestamp {
   return { date, time, year, month, day, weekday, hour, minute, hasDay, hasTime, past, present, future }
 }
 
-export function floorTimestamp (timestamp: VTimestamp): VTimestamp {
-  timestamp.hour = 0
-  timestamp.minute = 0
-  return timestamp
-}
-
 export function padNumber (x: number, length: number): string {
   let padded = String(x)
   while (padded.length < length) {
