@@ -17,6 +17,8 @@ Array [
   "VBreadcrumbsItem",
   "VBtn",
   "VBtnToggle",
+  "VCalendar",
+  "VCalendarDaily",
   "VCard",
   "VCardActions",
   "VCardMedia",
