@@ -5,112 +5,14 @@ import '../../stylus/components/_calendar-daily.styl'
 import { VNode } from 'vue'
 
 // Mixins
-import mixins from '../../util/mixins'
-import Themeable from '../../mixins/themeable'
-import Colorable from '../../mixins/colorable'
-import Times from './mixins/times'
+import CalendarWithIntervals from './mixins/calendar-with-intervals'
 
 // Util
-import { validateNumber } from './util/validate'
-import {
-  VTimestamp,
-  VTimestampFormatter,
-  validateTimestamp,
-  parseTimestamp,
-  copyTimestamp,
-  updateMinutes,
-  getWeekdaySkips,
-  createDayList,
-  createIntervalList,
-  createNativeLocaleFormatter
-} from './util/timestamp'
-
-type MouseHandler = (e: MouseEvent) => void
+import { VTimestamp } from './util/timestamp'
 
 /* @vue/component */
-export default mixins(Colorable, Themeable, Times).extend({
+export default CalendarWithIntervals.extend({
   name: 'v-calendar-daily',
-
-  props: {
-    start: {
-      type: String,
-      required: true,
-      validate: validateTimestamp
-    },
-    end: {
-      type: String,
-      validate: validateTimestamp,
-      default: '0000-00-00'
-    },
-    maxDays: {
-      type: Number,
-      default: 7
-    },
-    weekdays: {
-      type: Array as () => number[],
-      default: () => [0, 1, 2, 3, 4, 5, 6]
-    },
-    hideHeader: {
-      type: Boolean,
-      default: false
-    },
-    shortWeekdays: {
-      type: Boolean,
-      default: true
-    },
-    shortIntervals: {
-      type: Boolean,
-      default: true
-    },
-    intervalHeight: {
-      type: [Number, String],
-      default: 40,
-      validate: validateNumber
-    },
-    intervalMinutes: {
-      type: [Number, String],
-      default: 60,
-      validate: validateNumber
-    },
-    firstInterval: {
-      type: [Number, String],
-      default: 0,
-      validate: validateNumber
-    },
-    intervalCount: {
-      type: [Number, String],
-      default: 24,
-      validate: validateNumber
-    },
-    weekdayFormat: {
-      type: Function, // VTimestampFormatter<string>,
-      default: null
-    },
-    dayFormat: {
-      type: Function, // VTimestampFormatter<string>,
-      default: null
-    },
-    intervalFormat: {
-      type: Function, // VTimestampFormatter<string>,
-      default: null
-    },
-    intervalStyle: {
-      type: Function, // (interval: VTimestamp): object
-      default: null
-    },
-    showIntervalLabel: {
-      type: Function, // (interval: VTimestamp): boolean
-      default: null
-    },
-    locale: {
-      type: String,
-      default: 'en-us'
-    }
-  },
-
-  data: () => ({
-    defaultColor: 'primary'
-  }),
 
   computed: {
     classes (): object {
@@ -118,117 +20,10 @@ export default mixins(Colorable, Themeable, Times).extend({
         'v-calendar-daily': true,
         ...this.themeClasses
       }
-    },
-    weekdaySkips (): number[] {
-      return getWeekdaySkips(this.weekdays)
-    },
-    parsedStart (): VTimestamp {
-      return parseTimestamp(this.start) as VTimestamp
-    },
-    parsedEnd (): VTimestamp {
-      return parseTimestamp(this.end) as VTimestamp
-    },
-    parsedFirstInterval (): number {
-      return parseInt(this.firstInterval)
-    },
-    parsedIntervalMinutes (): number {
-      return parseInt(this.intervalMinutes)
-    },
-    parsedIntervalCount (): number {
-      return parseInt(this.intervalCount)
-    },
-    parsedIntervalHeight (): number {
-      return parseFloat(this.intervalHeight)
-    },
-    firstMinute (): number {
-      return this.parsedFirstInterval * this.parsedIntervalMinutes
-    },
-    bodyHeight (): number {
-      return this.parsedIntervalCount * this.parsedIntervalHeight
-    },
-    days (): VTimestamp[] {
-      return createDayList(this.parsedStart, this.parsedEnd, this.times.today, this.weekdaySkips, this.maxDays)
-    },
-    intervals (): VTimestamp[][] {
-      let days: VTimestamp[] = this.days
-      let first: number = this.parsedFirstInterval
-      let minutes: number = this.parsedIntervalMinutes
-      let count: number = this.parsedIntervalCount
-      let now: VTimestamp = this.times.now
-
-      return days.map(d => createIntervalList(d, first, minutes, count, now))
-    },
-    intervalFormatter (): VTimestampFormatter<string> {
-      if (this.intervalFormat) {
-        return this.intervalFormat as VTimestampFormatter<string>
-      }
-
-      let longOptions = { timeZone: 'UTC', hour12: true, hour: '2-digit', minute: '2-digit' }
-      let shortOptions = { timeZone: 'UTC', hour12: true, hour: 'numeric', minute: '2-digit' }
-      let shortHourOptions = { timeZone: 'UTC', hour12: true, hour: 'numeric' }
-
-      return createNativeLocaleFormatter(
-        this.locale,
-        (tms, short) => short ? (tms.minute === 0 ? shortHourOptions : shortOptions) : longOptions
-      )
-    },
-    dayFormatter (): VTimestampFormatter<string> {
-      if (this.dayFormat) {
-        return this.dayFormat as VTimestampFormatter<string>
-      }
-
-      let options = { timeZone: 'UTC', day: 'numeric' }
-
-      return createNativeLocaleFormatter(
-        this.locale,
-        (tms, short) => options
-      )
-    },
-    weekdayFormatter (): VTimestampFormatter<string> {
-      if (this.weekdayFormat) {
-        return this.weekdayFormat as VTimestampFormatter<string>
-      }
-
-      let longOptions = { timeZone: 'UTC', weekday: 'long' }
-      let shortOptions = { timeZone: 'UTC', weekday: 'short' }
-
-      return createNativeLocaleFormatter(
-        this.locale,
-        (tms, short) => short ? shortOptions : longOptions
-      )
     }
   },
 
   methods: {
-
-    showIntervalLabelDefault (interval: VTimestamp): boolean {
-      let first: VTimestamp = this.intervals[0][0]
-      let isFirst: boolean = first.hour === interval.hour && first.minute === interval.minute
-      return !isFirst && interval.minute === 0
-    },
-
-    intervalStyleDefault (interval: VTimestamp): object | undefined {
-      return undefined
-    },
-
-    getRelativeClasses (timestamp: VTimestamp): object {
-      return {
-        'v-present': timestamp.present,
-        'v-past': timestamp.past,
-        'v-future': timestamp.future
-      }
-    },
-
-    getTimestampAtEvent (day: VTimestamp, e: MouseEvent): VTimestamp {
-      let timestamp: VTimestamp = copyTimestamp(day)
-      let bounds = (e.currentTarget as HTMLElement).getBoundingClientRect()
-      let baseMinutes: number = this.firstMinute
-      let addIntervals: number = (e.clientY - bounds.top) / this.parsedIntervalHeight
-      let addMinutes: number = Math.floor(addIntervals * this.parsedIntervalMinutes)
-      let minutes: number = baseMinutes + addMinutes
-
-      return updateMinutes(timestamp, minutes, this.times.now)
-    },
 
     genHead (): VNode {
       return this.$createElement('div', {
@@ -258,24 +53,14 @@ export default mixins(Colorable, Themeable, Times).extend({
         key: day.date,
         staticClass: 'v-calendar-daily_head-day',
         class: this.getRelativeClasses(day),
-        on: {
-          click: this.getClickDayHandler(day)
-        }
+        on: this.getDefaultMouseEventHandlers(':day', (e: MouseEvent) => {
+          return day
+        })
       }, [
         this.genHeadWeekday(day),
         this.genHeadDayLabel(day),
         slot ? slot(day) : ''
       ])
-    },
-
-    getClickDayHandler (day: VTimestamp): MouseHandler {
-      if (!this.$listeners['click:day']) {
-        return this.emptyMouseHandler
-      }
-
-      return (e: MouseEvent) => {
-        this.$emit('click:day', day)
-      }
     },
 
     genHeadWeekday (day: VTimestamp): VNode {
@@ -293,21 +78,13 @@ export default mixins(Colorable, Themeable, Times).extend({
       return this.$createElement('div', {
         staticClass: 'v-calendar-daily_head-day-label',
         class: this.addTextColorClassChecks({}, color),
-        on: {
-          click: this.getViewDayHandler(day)
-        }
+        on: this.getMouseEventHandlers({
+          'click:date': { event: 'click', stop: true },
+          'contextmenu:date': { event: 'contextmenu', stop: true, prevent: true, result: false }
+        }, (e: MouseEvent) => {
+          return day
+        })
       }, this.dayFormatter(day, false))
-    },
-
-    getViewDayHandler (day: VTimestamp): MouseHandler {
-      if (!this.$listeners['view-day']) {
-        return this.emptyMouseHandler
-      }
-
-      return (e: MouseEvent) => {
-        e.stopPropagation()
-        this.$emit('view-day', day)
-      }
     },
 
     genBody (): VNode {
@@ -358,23 +135,13 @@ export default mixins(Colorable, Themeable, Times).extend({
         key: day.date,
         staticClass: 'v-calendar-daily__day',
         class: this.getRelativeClasses(day),
-        on: {
-          click: this.getClickTimeHandler(day)
-        }
+        on: this.getDefaultMouseEventHandlers(':time', (e: MouseEvent) => {
+          return this.getTimestampAtEvent(day, e)
+        })
       }, [
         ...this.genDayIntervals(index),
         slot ? slot(day) : ''
       ])
-    },
-
-    getClickTimeHandler (day: VTimestamp): MouseHandler {
-      if (!this.$listeners['click:time']) {
-        return this.emptyMouseHandler
-      }
-
-      return (e: MouseEvent) => {
-        this.$emit('click:time', this.getTimestampAtEvent(day, e))
-      }
     },
 
     genDayIntervals (index: number): VNode[] {
@@ -402,7 +169,10 @@ export default mixins(Colorable, Themeable, Times).extend({
 
     genBodyIntervals (): VNode {
       let data = {
-        staticClass: 'v-calendar-daily__intervals-body'
+        staticClass: 'v-calendar-daily__intervals-body',
+        on: this.getDefaultMouseEventHandlers(':interval', (e: MouseEvent) => {
+          return this.getTimestampAtEvent(this.parsedStart, e)
+        })
       }
 
       return this.$createElement('div', data, this.genIntervalLabels())
@@ -432,16 +202,17 @@ export default mixins(Colorable, Themeable, Times).extend({
         label
         )
       ])
-    },
-
-    emptyMouseHandler (e: MouseEvent) {
-
     }
   },
 
   render (h): VNode {
     return h('div', {
-      class: this.classes
+      class: this.classes,
+      nativeOn: {
+        dragstart: (e: MouseEvent) => {
+          e.preventDefault()
+        }
+      }
     }, [
       this.hideHeader ? '' : this.genHead(),
       this.genBody()

@@ -1,19 +1,12 @@
 <template>
-  <v-app>
-    <router-view />
-  </v-app>
+  <playground></playground>
 </template>
 
 <script>
-export default {
-
-}
+  import Playground from './Playground'
+  export default {
+    components: {
+      Playground
+    }
+  }
 </script>
-
-<style>
-body, html, #app {
-  font-family: Roboto, sans-serif !important;
-  width: 100%;
-  height: 100%;
-}
-</style>
