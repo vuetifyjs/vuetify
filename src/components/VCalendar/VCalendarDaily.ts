@@ -23,6 +23,8 @@ import {
   createNativeLocaleFormatter
 } from './util/timestamp'
 
+type MouseHandler = (e: MouseEvent) => void
+
 /* @vue/component */
 export default mixins(Themeable).extend({
   name: 'v-calendar-daily',
@@ -251,15 +253,23 @@ export default mixins(Themeable).extend({
         staticClass: 'v-calendar-daily_head-day',
         class: this.getRelativeClasses(day),
         on: {
-          click: (e: MouseEvent) => {
-            this.$emit('click:day', day)
-          }
+          click: this.getClickDayHandler(day)
         }
       }, [
         this.genHeadWeekday(day),
         this.genHeadDayLabel(day),
         slot ? slot(day) : ''
       ])
+    },
+
+    getClickDayHandler (day: VTimestamp): MouseHandler {
+      if (!this.$listeners['click:day']) {
+        return this.emptyMouseHandler
+      }
+
+      return (e: MouseEvent) => {
+        this.$emit('click:day', day)
+      }
     },
 
     genHeadWeekday (day: VTimestamp): VNode {
@@ -272,12 +282,20 @@ export default mixins(Themeable).extend({
       return this.$createElement('div', {
         staticClass: 'v-calendar-daily_head-day-label',
         on: {
-          click: (e: MouseEvent) => {
-            e.stopPropagation()
-            this.$emit('view-day', day)
-          }
+          click: this.getViewDayHandler(day)
         }
       }, this.dayFormatter(day, false))
+    },
+
+    getViewDayHandler (day: VTimestamp): MouseHandler {
+      if (!this.$listeners['view-day']) {
+        return this.emptyMouseHandler
+      }
+
+      return (e: MouseEvent) => {
+        e.stopPropagation()
+        this.$emit('view-day', day)
+      }
     },
 
     genBody (): VNode {
@@ -329,14 +347,22 @@ export default mixins(Themeable).extend({
         staticClass: 'v-calendar-daily__day',
         class: this.getRelativeClasses(day),
         on: {
-          click: (e: MouseEvent) => {
-            this.$emit('click:time', this.getTimestampAtEvent(day, e))
-          }
+          click: this.getClickTimeHandler(day)
         }
       }, [
         ...this.genDayIntervals(index),
         slot ? slot(day) : ''
       ])
+    },
+
+    getClickTimeHandler (day: VTimestamp): MouseHandler {
+      if (!this.$listeners['click:time']) {
+        return this.emptyMouseHandler
+      }
+
+      return (e: MouseEvent) => {
+        this.$emit('click:time', this.getTimestampAtEvent(day, e))
+      }
     },
 
     genDayIntervals (index: number): VNode[] {
@@ -394,6 +420,10 @@ export default mixins(Themeable).extend({
         label
         )
       ])
+    },
+
+    emptyMouseHandler (e: MouseEvent) {
+
     }
   },
 
