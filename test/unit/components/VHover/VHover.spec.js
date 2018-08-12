@@ -2,7 +2,7 @@ import Vue from 'vue'
 import { test } from '@/test'
 import VHover from '@/components/VHover'
 
-test('VForm.js', ({ mount }) => {
+test('VHover', ({ mount }) => {
   it('should change class when hovered', async () => {
     const vm = new Vue()
     const item = props => vm.$createElement('div', {
