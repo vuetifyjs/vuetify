@@ -273,14 +273,7 @@ export function createIntervalList (timestamp: VTimestamp, first: number,
   for (let i = 0; i < count; i++) {
     let mins: number = (first + i) * minutes
     let int: VTimestamp = copyTimestamp(timestamp)
-    int.hasTime = true
-    int.hour = Math.floor(mins / MINUTES_IN_HOUR)
-    int.minute = mins % MINUTES_IN_HOUR
-    int.time = getTime(int)
-    if (now) {
-      updateRelative(int, now, true)
-    }
-    intervals.push(int)
+    intervals.push(updateMinutes(int, mins, now))
   }
 
   return intervals
