@@ -419,7 +419,7 @@ export default {
       const inheritedProps = Object.keys(VMenu.props).concat(Object.keys(Menuable.props))
 
       // Later this might be filtered
-      for (let prop of inheritedProps) {
+      for (const prop of inheritedProps) {
         props[prop] = this[prop]
       }
 

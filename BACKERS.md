@@ -40,7 +40,7 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - Joel Hatch
 - David Briscese
 - Juha Vehnia
-- Max Hodges
+- [White Rabbit Express](https://www.whiterabbitexpress.com/) <!-- Max Hodges -->
 - Kent Johnson
 - Working Group Two
 
