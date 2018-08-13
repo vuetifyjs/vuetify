@@ -187,7 +187,8 @@
           v-list-tile(
             v-for="release in releases"
             :key="release"
-            @click="changeToRelease(release)"
+            :href="`/releases/${release}`"
+            @click.prevent="changeToRelease(release)"
           )
             v-list-tile-avatar
               v-icon(light) mdi-package
