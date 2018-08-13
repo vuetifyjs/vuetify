@@ -38,10 +38,10 @@ export default Vue.extend({
       }, getEvent)
     },
     getMouseEventHandlers (events: MouseEvents, getEvent: MouseHandler): MouseEventsMap {
-      let on: MouseEventsMap = {}
+      const on: MouseEventsMap = {}
 
-      for (let event in events) {
-        let eventOptions = events[event]
+      for (const event in events) {
+        const eventOptions = events[event]
 
         if (!this.$listeners[event]) {
           continue
@@ -49,11 +49,11 @@ export default Vue.extend({
 
         // TODO somehow pull in modifiers
 
-        let prefix = eventOptions.passive ? '&' : ((eventOptions.once ? '~' : '') + (eventOptions.capture ? '!' : ''))
-        let key = prefix + eventOptions.event
+        const prefix = eventOptions.passive ? '&' : ((eventOptions.once ? '~' : '') + (eventOptions.capture ? '!' : ''))
+        const key = prefix + eventOptions.event
 
-        let handler: MouseHandler = e => {
-          let mouseEvent: MouseEvent = e as MouseEvent
+        const handler: MouseHandler = e => {
+          const mouseEvent: MouseEvent = e as MouseEvent
           if (eventOptions.button === undefined || (mouseEvent.buttons > 0 && mouseEvent.button === eventOptions.button)) {
             if (eventOptions.prevent) {
               e.preventDefault()

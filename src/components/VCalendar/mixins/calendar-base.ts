@@ -87,7 +87,7 @@ export default mixins(Colorable, Themeable, Times, Mouse).extend({
         return this.dayFormat as VTimestampFormatter<string>
       }
 
-      let options = { timeZone: 'UTC', day: 'numeric' }
+      const options = { timeZone: 'UTC', day: 'numeric' }
 
       return createNativeLocaleFormatter(
         this.locale,
@@ -99,8 +99,8 @@ export default mixins(Colorable, Themeable, Times, Mouse).extend({
         return this.weekdayFormat as VTimestampFormatter<string>
       }
 
-      let longOptions = { timeZone: 'UTC', weekday: 'long' }
-      let shortOptions = { timeZone: 'UTC', weekday: 'short' }
+      const longOptions = { timeZone: 'UTC', weekday: 'long' }
+      const shortOptions = { timeZone: 'UTC', weekday: 'short' }
 
       return createNativeLocaleFormatter(
         this.locale,

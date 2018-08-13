@@ -12,7 +12,7 @@ export interface TimesObject {
   today: VTimestamp
 }
 
-export let times: TimesObject = {
+export const times: TimesObject = {
   now: parseTimestamp('0000-00-00 00:00') as VTimestamp,
   today: parseTimestamp('0000-00-00') as VTimestamp
 }
@@ -53,13 +53,13 @@ export default Vue.extend({
       this.times.now.future = this.times.today.future = false
     },
     updateTimes (): void {
-      let now: VTimestamp = this.parsedNow || this.getNow()
+      const now: VTimestamp = this.parsedNow || this.getNow()
       this.updateDay(now, this.times.now)
       this.updateTime(now, this.times.now)
       this.updateDay(now, this.times.today)
     },
     getNow (): VTimestamp {
-      let now = new Date()
+      const now = new Date()
 
       return updateFormatted({
         date: '',

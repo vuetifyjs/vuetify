@@ -1,16 +1,16 @@
 
-let PARSE_REGEX: RegExp = /^(\d{1,4})-(\d{1,2})(-(\d{1,2}))?([^\d]+(\d{1,2}))?(:(\d{1,2}))?(:(\d{1,2}))?$/
+const PARSE_REGEX: RegExp = /^(\d{1,4})-(\d{1,2})(-(\d{1,2}))?([^\d]+(\d{1,2}))?(:(\d{1,2}))?(:(\d{1,2}))?$/
 
-let DAYS_IN_MONTH: number[] = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-let DAYS_IN_MONTH_LEAP: number[] = [0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-let DAYS_IN_MONTH_MIN: number = 28
-let MONTH_MAX: number = 12
-let MONTH_MIN: number = 1
-let DAY_MIN: number = 1
-let DAYS_IN_WEEK: number = 7
-let MINUTES_IN_HOUR: number = 60
-let HOURS_IN_DAY: number = 24
-let FIRST_HOUR: number = 0
+const DAYS_IN_MONTH: number[] = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+const DAYS_IN_MONTH_LEAP: number[] = [0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+const DAYS_IN_MONTH_MIN: number = 28
+const MONTH_MAX: number = 12
+const MONTH_MIN: number = 1
+const DAY_MIN: number = 1
+const DAYS_IN_WEEK: number = 7
+const MINUTES_IN_HOUR: number = 60
+const HOURS_IN_DAY: number = 24
+const FIRST_HOUR: number = 0
 
 export interface VTimestamp {
   date: string
@@ -30,19 +30,21 @@ export interface VTimestamp {
 
 export type VTimestampFormatter<R> = (timestamp: VTimestamp, short: boolean) => R
 
+export type VTimestampOperation = (timestamp: VTimestamp) => VTimestamp
+
 export function validateTimestamp (input: any): boolean {
   return !!PARSE_REGEX.exec(input)
 }
 
 export function parseTimestamp (input: string, now?: VTimestamp): VTimestamp | null {
   // YYYY-MM-DD hh:mm:ss
-  let parts = PARSE_REGEX.exec(input)
+  const parts = PARSE_REGEX.exec(input)
 
   if (!parts) {
     return null
   }
 
-  let timestamp: VTimestamp = {
+  const timestamp: VTimestamp = {
     date: input,
     time: '',
     year: parseInt(parts[1]),
@@ -121,11 +123,11 @@ export function updateFormatted (timestamp: VTimestamp): VTimestamp {
 
 export function getWeekday (timestamp: VTimestamp): number {
   if (timestamp.hasDay) {
-    let _ = Math.floor
-    let k = timestamp.day
-    let m = ((timestamp.month + 9) % MONTH_MAX) + 1
-    let C = _(timestamp.year / 100)
-    let Y = (timestamp.year % 100) - (timestamp.month <= 2 ? 1 : 0)
+    const _ = Math.floor
+    const k = timestamp.day
+    const m = ((timestamp.month + 9) % MONTH_MAX) + 1
+    const C = _(timestamp.year / 100)
+    const Y = (timestamp.year % 100) - (timestamp.month <= 2 ? 1 : 0)
 
     return (k + _(2.6 * m - 0.2) - 2 * C + Y + _(Y / 4) + _(C / 4)) % 7
   }
@@ -142,7 +144,7 @@ export function daysInMonth (year: number, month: number) {
 }
 
 export function copyTimestamp (timestamp: VTimestamp): VTimestamp {
-  let { date, time, year, month, day, weekday, hour, minute, hasDay, hasTime, past, present, future } = timestamp
+  const { date, time, year, month, day, weekday, hour, minute, hasDay, hasTime, past, present, future } = timestamp
 
   return { date, time, year, month, day, weekday, hour, minute, hasDay, hasTime, past, present, future }
 }
@@ -201,12 +203,6 @@ export function nextDay (timestamp: VTimestamp): VTimestamp {
   return timestamp
 }
 
-export function nextDays (timestamp: VTimestamp, days: number = 1): VTimestamp {
-  while (--days >= 0) nextDay(timestamp)
-
-  return timestamp
-}
-
 export function prevDay (timestamp: VTimestamp): VTimestamp {
   timestamp.day--
   timestamp.weekday = (timestamp.weekday + 6) % DAYS_IN_WEEK
@@ -222,16 +218,30 @@ export function prevDay (timestamp: VTimestamp): VTimestamp {
   return timestamp
 }
 
+export function relativeDays (timestamp: VTimestamp,
+  mover: VTimestampOperation = nextDay, days: number = 1): VTimestamp {
+  while (--days >= 0) mover(timestamp)
+
+  return timestamp
+}
+
+export function findWeekday (timestamp: VTimestamp, weekday: number,
+  mover: VTimestampOperation = nextDay, maxDays: number = 6): VTimestamp {
+  while (timestamp.weekday !== weekday && --maxDays >= 0) mover(timestamp)
+
+  return timestamp
+}
+
 export function getWeekdaySkips (weekdays: number[]): number[] {
-  let skips: number[] = [1, 1, 1, 1, 1, 1, 1]
-  let filled: number[] = [0, 0, 0, 0, 0, 0, 0]
+  const skips: number[] = [1, 1, 1, 1, 1, 1, 1]
+  const filled: number[] = [0, 0, 0, 0, 0, 0, 0]
   for (let i = 0; i < weekdays.length; i++) {
     filled[weekdays[i]] = 1
   }
   for (let k = 0; k < DAYS_IN_WEEK; k++) {
     let skip = 1
     for (let j = 1; j < DAYS_IN_WEEK; j++) {
-      let next = (k + j) % DAYS_IN_WEEK
+      const next = (k + j) % DAYS_IN_WEEK
       if (filled[next]) {
         break
       }
@@ -245,10 +255,10 @@ export function getWeekdaySkips (weekdays: number[]): number[] {
 
 export function createDayList (start: VTimestamp, end: VTimestamp, now: VTimestamp,
   weekdaySkips: number[], max: number = 42): VTimestamp[] {
+  const stop = getDayIdentifier(end)
+  const days: VTimestamp[] = []
   let current = copyTimestamp(start)
-  let stop = getDayIdentifier(end)
   let currentIdentifier = 0
-  let days: VTimestamp[] = []
 
   while (currentIdentifier !== stop && days.length < max) {
     currentIdentifier = getDayIdentifier(current)
@@ -256,11 +266,11 @@ export function createDayList (start: VTimestamp, end: VTimestamp, now: VTimesta
       current = nextDay(current)
       continue
     }
-    let day = copyTimestamp(current)
+    const day = copyTimestamp(current)
     updateFormatted(day)
     updateRelative(day, now)
     days.push(day)
-    current = nextDays(current, weekdaySkips[current.weekday])
+    current = relativeDays(current, nextDay, weekdaySkips[current.weekday])
   }
 
   return days
@@ -268,11 +278,11 @@ export function createDayList (start: VTimestamp, end: VTimestamp, now: VTimesta
 
 export function createIntervalList (timestamp: VTimestamp, first: number,
   minutes: number, count: number, now?: VTimestamp): VTimestamp[] {
-  let intervals: VTimestamp[] = []
+  const intervals: VTimestamp[] = []
 
   for (let i = 0; i < count; i++) {
-    let mins: number = (first + i) * minutes
-    let int: VTimestamp = copyTimestamp(timestamp)
+    const mins: number = (first + i) * minutes
+    const int: VTimestamp = copyTimestamp(timestamp)
     intervals.push(updateMinutes(int, mins, now))
   }
 
@@ -280,7 +290,7 @@ export function createIntervalList (timestamp: VTimestamp, first: number,
 }
 
 export function createNativeLocaleFormatter (locale: string, getOptions: VTimestampFormatter<object>): VTimestampFormatter<string> {
-  let emptyFormatter: VTimestampFormatter<string> = (t, s) => ''
+  const emptyFormatter: VTimestampFormatter<string> = (t, s) => ''
 
   if (typeof Intl === 'undefined' || typeof Intl.DateTimeFormat === 'undefined') {
     return emptyFormatter
@@ -289,8 +299,8 @@ export function createNativeLocaleFormatter (locale: string, getOptions: VTimest
   return (timestamp, short) => {
     try {
       const intlFormatter = new Intl.DateTimeFormat(locale || undefined, getOptions(timestamp, short))
-      let time = `${padNumber(timestamp.hour, 2)}:${padNumber(timestamp.minute, 2)}`
-      let date = timestamp.date
+      const time = `${padNumber(timestamp.hour, 2)}:${padNumber(timestamp.minute, 2)}`
+      const date = timestamp.date
       return intlFormatter.format(new Date(`${date}T${time}:00+00:00`))
     } catch (e) {
       return ''
