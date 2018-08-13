@@ -1,10 +1,28 @@
-import Vue, { VNode } from 'vue'
+// Mixins
+import Delayable from '../../mixins/delayable'
+
+// Utilities
+import mixins from '../../util/mixins'
 import { consoleWarn } from '../../util/console'
 
-export default Vue.extend({
+// Types
+import { VNode } from 'vue'
+
+export default mixins(Delayable).extend({
+  name: 'v-hover',
+
   data: () => ({
     hover: false
   }),
+
+  methods: {
+    __onMouseEnter () {
+      this.hover = true
+    },
+    __onMouseLeave () {
+      this.hover = false
+    }
+  },
 
   render (): any {
     if (!this.$scopedSlots.default) {
@@ -24,8 +42,12 @@ export default Vue.extend({
 
     element.data!.on = element.data!.on || {}
 
-    element.data!.on!.mouseenter = () => (this.hover = true)
-    element.data!.on!.mouseleave = () => (this.hover = false)
+    element.data!.on!.mouseenter = () => {
+      this.runDelay('open', this.__onMouseEnter)
+    }
+    element.data!.on!.mouseleave = () => {
+      this.runDelay('close', this.__onMouseLeave)
+    }
 
     return element
   }

@@ -30,6 +30,14 @@ export function createSimpleTransition (
     functional: true,
 
     props: {
+      group: {
+        type: Boolean,
+        default: false
+      },
+      mode: {
+        type: String,
+        default: mode
+      },
       origin: {
         type: String,
         default: origin
@@ -37,21 +45,29 @@ export function createSimpleTransition (
     },
 
     render (h, context): VNode {
+      const tag = `transition${context.props.group ? '-group' : ''}`
       context.data = context.data || {}
-      context.data.props = { name }
+      context.data.props = {
+        name,
+        mode: context.props.mode
+      }
       context.data.on = context.data.on || {}
       if (!Object.isExtensible(context.data.on)) {
         context.data.on = { ...context.data.on }
       }
-
-      if (mode) context.data.props.mode = mode
 
       context.data.on.beforeEnter = (el: HTMLElement) => {
         el.style.transformOrigin = context.props.origin
         el.style.webkitTransformOrigin = context.props.origin
       }
 
-      return h('transition', context.data, context.children)
+      if (!context.props.mode) {
+        context.data.on.beforeLeave = (el: HTMLElement) => {
+          el.style.position = 'absolute'
+        }
+      }
+
+      return h(tag, context.data, context.children)
     }
   }
 }
@@ -59,7 +75,6 @@ export function createSimpleTransition (
 export function createJavaScriptTransition (
   name: string,
   functions: Record<string, () => any>,
-  css = false,
   mode = 'in-out'
 ): FunctionalComponentOptions {
   return {
@@ -68,10 +83,6 @@ export function createJavaScriptTransition (
     functional: true,
 
     props: {
-      css: {
-        type: Boolean,
-        default: css
-      },
       mode: {
         type: String,
         default: mode

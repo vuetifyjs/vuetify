@@ -26,13 +26,14 @@ test('VHover', ({ mount }) => {
 
     div.trigger('mouseenter')
 
-    await wrapper.vm.$nextTick()
+    await new Promise(resolve => setTimeout(resolve, 0))
 
     expect(div.element.classList.contains('fizzbuzz')).toBe(true)
 
     div.trigger('mouseleave')
 
-    await wrapper.vm.$nextTick()
+    // Wait for runDelay
+    await new Promise(resolve => setTimeout(resolve, 200))
 
     expect(div.element.classList.contains('fizzbuzz')).toBe(false)
   })
