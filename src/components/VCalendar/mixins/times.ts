@@ -60,7 +60,8 @@ export default Vue.extend({
     },
     getNow (): VTimestamp {
       let now = new Date()
-      let nowTimestamp: VTimestamp = {
+
+      return updateFormatted({
         date: '',
         time: '',
         year: now.getFullYear(),
@@ -74,8 +75,7 @@ export default Vue.extend({
         past: false,
         present: true,
         future: false
-      }
-      return updateFormatted(nowTimestamp)
+      })
     },
     updateDay (now: VTimestamp, target: VTimestamp): void {
       if (now.date !== target.date) {

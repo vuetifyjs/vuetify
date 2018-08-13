@@ -69,7 +69,7 @@ export function parseTimestamp (input: string, now?: VTimestamp): VTimestamp | n
 }
 
 export function getDayIdentifier (timestamp: VTimestamp): number {
-  return timestamp.year * 1000000 + timestamp.month * 100 + (timestamp.day || 1)
+  return timestamp.year * 1000000 + timestamp.month * 100 + timestamp.day
 }
 
 export function getTimeIdentifier (timestamp: VTimestamp): number {
@@ -102,17 +102,20 @@ export function updateMinutes (timestamp: VTimestamp, minutes: number, now?: VTi
   if (now) {
     updateRelative(timestamp, now, true)
   }
+
   return timestamp
 }
 
 export function updateWeekday (timestamp: VTimestamp): VTimestamp {
   timestamp.weekday = getWeekday(timestamp)
+
   return timestamp
 }
 
 export function updateFormatted (timestamp: VTimestamp): VTimestamp {
   timestamp.time = getTime(timestamp)
   timestamp.date = getDate(timestamp)
+
   return timestamp
 }
 
@@ -126,6 +129,7 @@ export function getWeekday (timestamp: VTimestamp): number {
 
     return (k + _(2.6 * m - 0.2) - 2 * C + Y + _(Y / 4) + _(C / 4)) % 7
   }
+
   return timestamp.weekday
 }
 
@@ -139,6 +143,7 @@ export function daysInMonth (year: number, month: number) {
 
 export function copyTimestamp (timestamp: VTimestamp): VTimestamp {
   let { date, time, year, month, day, weekday, hour, minute, hasDay, hasTime, past, present, future } = timestamp
+
   return { date, time, year, month, day, weekday, hour, minute, hasDay, hasTime, past, present, future }
 }
 
@@ -147,23 +152,24 @@ export function padNumber (x: number, length: number): string {
   while (padded.length < length) {
     padded = '0' + padded
   }
+
   return padded
 }
 
 export function getDate (timestamp: VTimestamp): string {
-  if (timestamp.hasDay) {
-    return `${padNumber(timestamp.year, 4)}-${padNumber(timestamp.month, 2)}-${padNumber(timestamp.day, 2)}`
-  } else {
-    return `${padNumber(timestamp.year, 4)}-${padNumber(timestamp.month, 2)}`
-  }
+  let str = `${padNumber(timestamp.year, 4)}-${padNumber(timestamp.month, 2)}`
+
+  if (timestamp.hasDay) str += `-${padNumber(timestamp.day, 2)}`
+
+  return str
 }
 
 export function getTime (timestamp: VTimestamp): string {
-  if (timestamp.hasTime) {
-    return `${padNumber(timestamp.hour, 2)}:${padNumber(timestamp.minute, 2)}`
-  } else {
+  if (!timestamp.hasTime) {
     return ''
   }
+
+  return `${padNumber(timestamp.hour, 2)}:${padNumber(timestamp.minute, 2)}`
 }
 
 export function nextMinutes (timestamp: VTimestamp, minutes: number): VTimestamp {
@@ -176,12 +182,13 @@ export function nextMinutes (timestamp: VTimestamp, minutes: number): VTimestamp
       timestamp.hour = FIRST_HOUR
     }
   }
+
   return timestamp
 }
 
 export function nextDay (timestamp: VTimestamp): VTimestamp {
   timestamp.day++
-  timestamp.weekday = ((timestamp.weekday || 0) + 1) % DAYS_IN_WEEK
+  timestamp.weekday = (timestamp.weekday + 1) % DAYS_IN_WEEK
   if (timestamp.day > DAYS_IN_MONTH_MIN && timestamp.day > daysInMonth(timestamp.year, timestamp.month)) {
     timestamp.day = DAY_MIN
     timestamp.month++
@@ -190,17 +197,19 @@ export function nextDay (timestamp: VTimestamp): VTimestamp {
       timestamp.year++
     }
   }
+
   return timestamp
 }
 
 export function nextDays (timestamp: VTimestamp, days: number = 1): VTimestamp {
   while (--days >= 0) nextDay(timestamp)
+
   return timestamp
 }
 
 export function prevDay (timestamp: VTimestamp): VTimestamp {
   timestamp.day--
-  timestamp.weekday = ((timestamp.weekday || 0) + 6) % DAYS_IN_WEEK
+  timestamp.weekday = (timestamp.weekday + 6) % DAYS_IN_WEEK
   if (timestamp.day < DAY_MIN) {
     timestamp.month--
     if (timestamp.month < MONTH_MIN) {
@@ -209,6 +218,7 @@ export function prevDay (timestamp: VTimestamp): VTimestamp {
     }
     timestamp.day = daysInMonth(timestamp.year, timestamp.month)
   }
+
   return timestamp
 }
 
@@ -229,6 +239,7 @@ export function getWeekdaySkips (weekdays: number[]): number[] {
     }
     skips[k] = filled[k] * skip
   }
+
   return skips
 }
 
@@ -289,7 +300,6 @@ export function createNativeLocaleFormatter (locale: string, getOptions: VTimest
       let date = timestamp.date
       return intlFormatter.format(new Date(`${date}T${time}:00+00:00`))
     } catch (e) {
-      window.console.log(e)
       return ''
     }
   }

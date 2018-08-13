@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-export type MouseHandler = (e: MouseEvent) => any
+export type MouseHandler = (e: MouseEvent | TouchEvent) => any
 
 export type MouseEvents = {
   [event: string]: {
@@ -41,7 +41,7 @@ export default Vue.extend({
       let on: MouseEventsMap = {}
 
       for (let event in events) {
-        let eventOptions = events[ event ]
+        let eventOptions = events[event]
 
         if (!this.$listeners[event]) {
           continue
@@ -52,8 +52,9 @@ export default Vue.extend({
         let prefix = eventOptions.passive ? '&' : ((eventOptions.once ? '~' : '') + (eventOptions.capture ? '!' : ''))
         let key = prefix + eventOptions.event
 
-        let handler: MouseHandler = (e: MouseEvent) => {
-          if (eventOptions.button === undefined || (e.buttons > 0 && e.button === eventOptions.button)) {
+        let handler: MouseHandler = e => {
+          let mouseEvent: MouseEvent = e as MouseEvent
+          if (eventOptions.button === undefined || (mouseEvent.buttons > 0 && mouseEvent.button === eventOptions.button)) {
             if (eventOptions.prevent) {
               e.preventDefault()
             }
@@ -62,6 +63,7 @@ export default Vue.extend({
             }
             this.$emit(event, getEvent(e))
           }
+
           return eventOptions.result
         }
 

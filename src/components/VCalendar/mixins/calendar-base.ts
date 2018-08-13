@@ -75,7 +75,12 @@ export default mixins(Colorable, Themeable, Times, Mouse).extend({
       return parseTimestamp(this.end) as VTimestamp
     },
     days (): VTimestamp[] {
-      return createDayList(this.parsedStart, this.parsedEnd, this.times.today, this.weekdaySkips)
+      return createDayList(
+        this.parsedStart,
+        this.parsedEnd,
+        this.times.today,
+        this.weekdaySkips
+      )
     },
     dayFormatter (): VTimestampFormatter<string> {
       if (this.dayFormat) {
@@ -105,7 +110,6 @@ export default mixins(Colorable, Themeable, Times, Mouse).extend({
   },
 
   methods: {
-
     getRelativeClasses (timestamp: VTimestamp): object {
       return {
         'v-present': timestamp.present,
@@ -113,6 +117,5 @@ export default mixins(Colorable, Themeable, Times, Mouse).extend({
         'v-future': timestamp.future
       }
     }
-
   }
 })

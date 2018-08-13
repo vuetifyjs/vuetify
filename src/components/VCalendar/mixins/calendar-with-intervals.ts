@@ -83,7 +83,13 @@ export default CalendarBase.extend({
       return this.parsedIntervalCount * this.parsedIntervalHeight
     },
     days (): VTimestamp[] {
-      return createDayList(this.parsedStart, this.parsedEnd, this.times.today, this.weekdaySkips, this.maxDays)
+      return createDayList(
+        this.parsedStart,
+        this.parsedEnd,
+        this.times.today,
+        this.weekdaySkips,
+        this.maxDays
+      )
     },
     intervals (): VTimestamp[][] {
       let days: VTimestamp[] = this.days
@@ -111,27 +117,27 @@ export default CalendarBase.extend({
   },
 
   methods: {
-
     showIntervalLabelDefault (interval: VTimestamp): boolean {
       let first: VTimestamp = this.intervals[0][0]
       let isFirst: boolean = first.hour === interval.hour && first.minute === interval.minute
       return !isFirst && interval.minute === 0
     },
-
     intervalStyleDefault (interval: VTimestamp): object | undefined {
       return undefined
     },
-
-    getTimestampAtEvent (day: VTimestamp, e: MouseEvent): VTimestamp {
+    getTimestampAtEvent (e: MouseEvent | TouchEvent, day: VTimestamp): VTimestamp {
       let timestamp: VTimestamp = copyTimestamp(day)
       let bounds = (e.currentTarget as HTMLElement).getBoundingClientRect()
       let baseMinutes: number = this.firstMinute
-      let addIntervals: number = (e.clientY - bounds.top) / this.parsedIntervalHeight
+      let touchEvent: TouchEvent = e as TouchEvent
+      let mouseEvent: MouseEvent = e as MouseEvent
+      let touches: TouchList = touchEvent.changedTouches || touchEvent.touches
+      let clientY: number = touches && touches[0] ? touches[0].clientY : mouseEvent.clientY
+      let addIntervals: number = (clientY - bounds.top) / this.parsedIntervalHeight
       let addMinutes: number = Math.floor(addIntervals * this.parsedIntervalMinutes)
       let minutes: number = baseMinutes + addMinutes
 
       return updateMinutes(timestamp, minutes, this.times.now)
     }
-
   }
 })
