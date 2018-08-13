@@ -40,7 +40,10 @@ const ripple = {
       container.className += ` ${value.class}`
     }
 
-    const size = Math.max(el.clientWidth, el.clientHeight) * (value.center ? 1 : 2)
+    const size = (
+      Math.min(el.clientWidth, el.clientHeight) *
+      (value.center ? 1 : el.clientWidth / el.clientHeight * 1.6)
+    )
     const halfSize = size / 2
     animation.className = 'v-ripple__animation'
     animation.style.width = `${size}px`
@@ -56,7 +59,7 @@ const ripple = {
 
     animation.classList.add('v-ripple__animation--enter')
     animation.classList.add('v-ripple__animation--visible')
-    style(animation, `translate(${x}px, ${y}px) scale3d(0, 0, 0)`)
+    style(animation, `translate(${x}px, ${y}px) scale3d(0.5, 0.5, 0.5)`)
     animation.dataset.activated = String(performance.now())
 
     setTimeout(() => {
@@ -77,7 +80,7 @@ const ripple = {
     else animation.dataset.isHiding = 'true'
 
     const diff = performance.now() - Number(animation.dataset.activated)
-    let delay = Math.max(300 - diff, 0)
+    const delay = Math.max(300 - diff, 0)
 
     setTimeout(() => {
       animation.classList.remove('v-ripple__animation--visible')

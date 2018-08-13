@@ -21,12 +21,12 @@ interface options extends Vue {
 
 export default mixins<options &
 /* eslint-disable indent */
-  ExtractVue<
+  ExtractVue<[
     typeof Bootable,
     typeof Toggleable,
     typeof Rippleable,
     Registrable<'expansionPanel'>
-  >
+  ]>
 /* eslint-enable indent */
 >(
   Bootable,
