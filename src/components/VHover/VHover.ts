@@ -1,5 +1,6 @@
 // Mixins
 import Delayable from '../../mixins/delayable'
+import Toggleable from '../../mixins/toggleable'
 
 // Utilities
 import mixins from '../../util/mixins'
@@ -8,45 +9,63 @@ import { consoleWarn } from '../../util/console'
 // Types
 import { VNode } from 'vue'
 
-export default mixins(Delayable).extend({
+export default mixins(
+  Delayable,
+  Toggleable
+).extend({
   name: 'v-hover',
 
-  data: () => ({
-    hover: false
-  }),
+  props: {
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    value: {
+      type: Boolean,
+      default: undefined
+    }
+  },
 
   methods: {
     __onMouseEnter () {
-      this.hover = true
+      this.isActive = true
     },
     __onMouseLeave () {
-      this.hover = false
+      this.isActive = false
     }
   },
 
   render (): any {
-    if (!this.$scopedSlots.default) {
-      consoleWarn('v-hover is missing a default scopedSlot', this)
+    if (!this.$scopedSlots.default && this.value === undefined) {
+      consoleWarn('v-hover is missing a default scopedSlot or bound value', this)
 
       return null
     }
+
+    let element = null
 
     // TODO: types are wrong - https://github.com/vuejs/vue/pull/8644
-    const element = this.$scopedSlots.default({ hover: this.hover }) as any as VNode
+    if (this.$scopedSlots.default) {
+      element = this.$scopedSlots.default({ hover: this.isActive }) as any as VNode
+    } else if (this.$slots.default.length === 1) {
+      element = this.$slots.default[0]
+    }
 
-    if (typeof element === 'string' || Array.isArray(element)) {
+    if (!element || typeof element === 'string' || Array.isArray(element)) {
       consoleWarn('v-hover should only contain a single element', this)
 
-      return null
+      return element
     }
 
-    element.data!.on = element.data!.on || {}
+    if (!this.disabled) {
+      element.data!.on = element.data!.on || {}
 
-    element.data!.on!.mouseenter = () => {
-      this.runDelay('open', this.__onMouseEnter)
-    }
-    element.data!.on!.mouseleave = () => {
-      this.runDelay('close', this.__onMouseLeave)
+      element.data!.on!.mouseenter = () => {
+        this.runDelay('open', this.__onMouseEnter)
+      }
+      element.data!.on!.mouseleave = () => {
+        this.runDelay('close', this.__onMouseLeave)
+      }
     }
 
     return element
