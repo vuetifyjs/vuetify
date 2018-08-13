@@ -64,6 +64,7 @@ export default mixins(
       type: [Number, String],
       default: 5
     },
+    clearable: Boolean,
     readonly: Boolean,
     hover: Boolean,
     value: {
@@ -129,7 +130,7 @@ export default mixins(
         if (this.readonly) return
 
         const newValue = this.genHoverIndex(e, i)
-        if (this.internalValue === newValue) {
+        if (this.clearable && this.internalValue === newValue) {
           this.internalValue = 0
         } else {
           this.internalValue = newValue
