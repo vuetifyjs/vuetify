@@ -1,14 +1,14 @@
 export default {
   dataIterator: {
-    rowsPerPageText: 'Objet par page :',
-    rowsPerPageAll: 'Tout',
+    rowsPerPageText: 'Élements par page:',
+    rowsPerPageAll: 'Tous',
     pageText: '{0}-{1} de {2}',
-    noResultsText: "Pas d'enregistrements corespondant trouvé",
+    noResultsText: 'Aucun enregistrement correspondant trouvé',
     nextPage: 'Page suivante',
     prevPage: 'Page précédente'
   },
   dataTable: {
-    rowsPerPageText: 'Ligne par page :'
+    rowsPerPageText: 'Lignes par page:'
   },
-  noDataText: 'Aucune données disponible'
+  noDataText: 'Aucune donnée disponible'
 }
