@@ -1,6 +1,7 @@
 const OPTIONS_DEFAULTS = {
   minifyTheme: null,
   themeCache: null,
+  customProperties: false,
   cspNonce: null
 }
 

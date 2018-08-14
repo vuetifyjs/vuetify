@@ -19,7 +19,7 @@ export default {
         if (css != null) return css
       }
 
-      css = Theme.genStyles(theme)
+      css = Theme.genStyles(theme, this.$vuetify.options.customProperties)
 
       if (this.$vuetify.options.minifyTheme != null) {
         css = this.$vuetify.options.minifyTheme(css)
