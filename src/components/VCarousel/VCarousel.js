@@ -3,7 +3,6 @@ import '../../stylus/components/_carousel.styl'
 import VBtn from '../VBtn'
 import VIcon from '../VIcon'
 
-import Bootable from '../../mixins/bootable'
 import Themeable from '../../mixins/themeable'
 import { provide as RegistrableProvide } from '../../mixins/registrable'
 
@@ -15,7 +14,7 @@ export default {
 
   directives: { Touch },
 
-  mixins: [Bootable, Themeable, RegistrableProvide('carousel')],
+  mixins: [Themeable, RegistrableProvide('carousel')],
 
   props: {
     cycle: {
