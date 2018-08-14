@@ -29,14 +29,14 @@ export default {
 
   computed: {
     classes () {
-      return this.addBackgroundColorClassChecks({
+      return {
         'v-system-bar--lights-out': this.lightsOut,
         'v-system-bar--absolute': this.absolute,
         'v-system-bar--fixed': !this.absolute && (this.app || this.fixed),
         'v-system-bar--status': this.status,
         'v-system-bar--window': this.window,
         ...this.themeClasses
-      })
+      }
     },
     computedHeight () {
       if (this.height) return parseInt(this.height)
@@ -65,6 +65,6 @@ export default {
       }
     }
 
-    return h('div', data, this.$slots.default)
+    return h('div', this.setBackgroundColor(this.color, data), this.$slots.default)
   }
 }

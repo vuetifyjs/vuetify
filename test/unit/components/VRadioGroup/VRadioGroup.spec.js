@@ -82,15 +82,14 @@ test('VRadioGroup.vue', ({ mount }) => {
     const inputTwo = two.first('input')
 
     inputOne.trigger('focus')
-    inputOne.trigger('keydown.enter')
-
+    inputOne.trigger('change')
 
     expect(one.vm.isActive).toBe(true)
 
     wrapper.setProps({ disabled: true })
 
     inputTwo.trigger('focus')
-    inputTwo.trigger('keydown.enter')
+    inputTwo.trigger('change')
 
     await wrapper.vm.$nextTick()
 
@@ -311,9 +310,11 @@ test('VRadioGroup.vue', ({ mount }) => {
 
     const onChange = jest.fn()
     const radio = wrapper.first(VRadio)
+    const input = radio.first('input')
     radio.vm.$on('change', onChange)
     radio.first('input').trigger('change')
     expect(onChange).not.toBeCalled()
+    expect(input.html()).toMatchSnapshot()
   })
 
   it('should make radios readonly', async () => {
@@ -331,5 +332,24 @@ test('VRadioGroup.vue', ({ mount }) => {
     radio.vm.$on('change', onChange)
     radio.first('input').trigger('change')
     expect(onChange).not.toBeCalled()
+  })
+
+  it('should reset', async () => {
+    const wrapper = mount(VRadioGroup, {
+      propsData: {
+        value: '0'
+      },
+      slots: {
+        default: [VRadio]
+      }
+    })
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    wrapper.vm.reset()
+    await wrapper.vm.$nextTick()
+
+    expect(change).toHaveBeenCalledTimes(1)
+    expect(change).toHaveBeenCalledWith(undefined)
   })
 })

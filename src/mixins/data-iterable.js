@@ -422,8 +422,10 @@ export default {
             items: this.computedRowsPerPageItems,
             value: this.computedPagination.rowsPerPage,
             hideDetails: true,
-            auto: true,
-            minWidth: '75px'
+            menuProps: {
+              auto: true,
+              minWidth: '75px'
+            }
           },
           on: {
             input: val => {

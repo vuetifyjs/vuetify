@@ -1,5 +1,7 @@
 import '../../stylus/components/_menus.styl'
 
+import Vue from 'vue'
+
 // Mixins
 import Delayable from '../../mixins/delayable'
 import Dependent from '../../mixins/dependent'
@@ -22,7 +24,7 @@ import Resize from '../../directives/resize'
 import { convertToUnit } from '../../util/helpers'
 
 /* @vue/component */
-export default {
+export default Vue.extend({
   name: 'v-menu',
 
   directives: {
@@ -205,4 +207,4 @@ export default {
       this.genTransition()
     ])
   }
-}
+})

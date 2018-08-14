@@ -32,14 +32,14 @@ export default mixins(Colorable, Routable, Themeable).extend({
 
   computed: {
     classes (): object {
-      return this.addBackgroundColorClassChecks({
+      return {
         'v-card': true,
         'v-card--flat': this.flat,
         'v-card--hover': this.hover,
         'v-card--raised': this.raised,
         'v-card--tile': this.tile,
         ...this.themeClasses
-      })
+      }
     },
     styles (): object {
       const style: Record<string, any> = {
@@ -59,10 +59,10 @@ export default mixins(Colorable, Routable, Themeable).extend({
   },
 
   render (h): VNode {
-    const { tag, data } = this.generateRouteLink()
+    const { tag, data } = this.generateRouteLink(this.classes)
 
     data.style = this.styles
 
-    return h(tag, data, this.$slots.default)
+    return h(tag, this.setBackgroundColor(this.color, data), this.$slots.default)
   }
 })

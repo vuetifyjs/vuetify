@@ -85,8 +85,8 @@
   <a href="https://application.rategenius.com/?ref=vuetify-github">
     <img height="40px" src="https://cdn.vuetifyjs.com/images/backers/rate-genius.png">
   </a>
-  <a href="http://quitt.ch/?ref=vuetify-github">
-    <img height="40px" src="https://cdn.vuetifyjs.com/images/backers/quitt.png">
+  <a href="http://www.clearbluetechnologies.com/">
+    <img height="40px" src="https://cdn.vuetifyjs.com/images/backers/clear-blue.png">
   </a>
   <a href="https://www.digitalmaas.com/?ref=vuetify-github">
     <img height="40px" src="https://cdn.vuetifyjs.com/images/backers/digital-maas.svg">
@@ -123,7 +123,7 @@ You can find the Vuetify documentation <a href="https://vuetifyjs.com" target="_
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 </head>
 <body>
-  <div>
+  <div id="app">
     <v-app>
       <v-toolbar app>
         <v-toolbar-title>My Application</v-toolbar-title>

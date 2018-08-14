@@ -33,7 +33,7 @@ export default mixins(Colorable, Themeable, Toggleable).extend({
 
   computed: {
     classes (): object {
-      const classes = this.addBackgroundColorClassChecks({
+      return {
         'v-chip--disabled': this.disabled,
         'v-chip--selected': this.selected && !this.disabled,
         'v-chip--label': this.label,
@@ -41,11 +41,7 @@ export default mixins(Colorable, Themeable, Toggleable).extend({
         'v-chip--small': this.small,
         'v-chip--removable': this.close,
         ...this.themeClasses
-      })
-
-      return (this.textColor || this.outline)
-        ? this.addTextColorClassChecks(classes, this.textColor || this.color)
-        : classes
+      }
     }
   },
 
@@ -78,7 +74,7 @@ export default mixins(Colorable, Themeable, Toggleable).extend({
   },
 
   render (h): VNode {
-    const data = {
+    const data = this.setBackgroundColor(this.color, {
       staticClass: 'v-chip',
       'class': this.classes,
       attrs: { tabindex: this.disabled ? -1 : 0 },
@@ -87,8 +83,9 @@ export default mixins(Colorable, Themeable, Toggleable).extend({
         value: this.isActive
       }] as any,
       on: this.$listeners
-    }
+    })
 
-    return h('span', data, [this.genContent(h)])
+    const color = this.textColor || (this.outline && this.color)
+    return h('span', this.setTextColor(color, data), [this.genContent(h)])
   }
 })

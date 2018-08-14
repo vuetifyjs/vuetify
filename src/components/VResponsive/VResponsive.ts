@@ -51,7 +51,8 @@ export default Vue.extend({
       style: {
         height: convertToUnit(this.height),
         maxHeight: convertToUnit(this.maxHeight)
-      }
+      },
+      on: this.$listeners
     }, [
       this.__cachedSizer,
       this.genContent()

@@ -5,6 +5,9 @@
 .application
   display: flex
 
+  a
+    cursor: pointer
+
   &--is-rtl
     direction: rtl
 
@@ -20,9 +23,6 @@
 application($material)
   background: $material.background
   color: $material.text.primary
-
-  a
-    cursor: pointer
 
   .text
     &--primary
