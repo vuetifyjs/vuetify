@@ -54,7 +54,7 @@ test('VApp.js', ({ mount }) => {
   it('should generate theme using css variables', async () => {
     const wrapper = mount(VApp)
 
-    wrapper.vm.$vuetify.options.useCssVariables = true
+    wrapper.vm.$vuetify.options.customProperties = true
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.style).toMatchSnapshot()
   })
