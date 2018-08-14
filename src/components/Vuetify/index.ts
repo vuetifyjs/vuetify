@@ -24,6 +24,10 @@ const Vuetify: VuetifyPlugin = {
       consoleError('Multiple instances of Vue detected\nSee https://github.com/vuetifyjs/vuetify/issues/4068\n\nIf you\'re seeing "$attrs is readonly", it\'s caused by this')
     }
 
+    if (OurVue !== Vue) {
+      consoleError('Multiple instances of Vue detected\nSee https://github.com/vuetifyjs/vuetify/issues/4068\n\nIf you\'re seeing "$attrs is readonly", it\'s caused by this')
+    }
+
     checkVueVersion(Vue)
 
     const lang = genLang(opts.lang)

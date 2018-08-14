@@ -207,11 +207,6 @@ export default {
     onInternalSearchChanged (val) {
       this.updateMenuDimensions()
     },
-    activateMenu () {
-      if (this.menuCanShow) {
-        this.isMenuActive = true
-      }
-    },
     updateMenuDimensions () {
       if (this.isMenuActive &&
         this.$refs.menu
