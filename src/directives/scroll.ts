@@ -39,7 +39,6 @@ function unbind (el: ScrollHTMLElement) {
 }
 
 export default {
-  name: 'scroll',
   inserted,
   unbind
 }

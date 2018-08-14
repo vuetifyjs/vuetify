@@ -142,7 +142,6 @@ function unbind (el: TouchHTMLElement, binding: TouchVNodeDirective, vnode: VNod
 }
 
 export default {
-  name: 'touch',
   inserted,
   unbind
 }

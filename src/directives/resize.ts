@@ -35,7 +35,6 @@ function unbind (el: ResizeHTMLElement) {
 }
 
 export default {
-  name: 'resize',
   inserted,
   unbind
 }

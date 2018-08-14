@@ -78,8 +78,6 @@ function clickedInEl (el: HTMLElement, x: number, y: number): boolean {
 }
 
 export default {
-  name: 'click-outside',
-
   // [data-app] may not be found
   // if using bind, inserted makes
   // sure that the root element is
