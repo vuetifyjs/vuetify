@@ -419,7 +419,7 @@ export default {
       const inheritedProps = Object.keys(VMenu.props).concat(Object.keys(Menuable.props))
 
       // Later this might be filtered
-      for (let prop of inheritedProps) {
+      for (const prop of inheritedProps) {
         props[prop] = this[prop]
       }
 
@@ -569,7 +569,7 @@ export default {
         this.$nextTick(() => (this.isMenuActive = !this.isMenuActive))
       // If user is clicking in the container
       // and field is enclosed, activate it
-      } else if (this.isEnclosed) {
+      } else if (this.isEnclosed && !this.isDisabled) {
         this.isMenuActive = true
       }
 

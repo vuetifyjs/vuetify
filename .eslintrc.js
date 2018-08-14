@@ -59,6 +59,10 @@ module.exports = {
     'no-return-await': 'warn',
     'object-shorthand': ['error', 'always'],
     'no-extra-semi': 'error',
+    'prefer-const': ['error', {
+      'destructuring': 'all',
+      'ignoreReadBeforeAssign': true
+    }],
 
     'vue/name-property-casing': false,
     'vue/require-default-prop': false,

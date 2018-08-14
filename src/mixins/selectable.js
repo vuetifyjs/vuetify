@@ -73,9 +73,6 @@ export default {
 
       return this.valueComparator(input, this.trueValue)
     },
-    isDisabled () {
-      return this.disabled
-    },
     isDirty () {
       return this.isActive
     }
