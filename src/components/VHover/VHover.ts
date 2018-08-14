@@ -7,7 +7,7 @@ import mixins from '../../util/mixins'
 import { consoleWarn } from '../../util/console'
 
 // Types
-import { VNode } from 'vue'
+import { VNode, VNodeChildrenArrayContents } from 'vue'
 
 export default mixins(
   Delayable,
@@ -47,11 +47,10 @@ export default mixins(
       return null as any
     }
 
-    let element: VNode | VNode[] | string | undefined
+    let element: VNode | VNodeChildrenArrayContents | string | undefined
 
     if (this.$scopedSlots.default) {
-      // TODO: types are wrong - https://github.com/vuejs/vue/pull/8644
-      element = this.$scopedSlots.default({ hover: this.isActive }) as any as VNode
+      element = this.$scopedSlots.default({ hover: this.isActive })
     } else if (this.$slots.default.length === 1) {
       element = this.$slots.default[0]
     }
