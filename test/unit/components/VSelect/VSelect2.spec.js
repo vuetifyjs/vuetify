@@ -553,4 +553,158 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.vm.getMenuIndex()).toBe(1)
   })
+
+  it('should retain selection when retain-selection and chips & deletable-chips or clearable are set', async () => {
+    //for multiselect
+    const wrapper = mount(VSelect, {
+      propsData: {
+        value: ['bar', 'bizz'],
+        items: ['foo', 'bar', 'bizz'],
+        multiple: true,
+        chips: true,
+        deletableChips: true,
+        retainSelection: true
+      }
+    })
+
+    wrapper.setProps({
+      items: ['foo', 'bizz']
+    })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.selectedItems).toEqual(['bar', 'bizz'])
+
+    wrapper.setProps({
+      chips: false,
+      deletableChips: false,
+      clearable: true
+    })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.selectedItems).toEqual(['bar', 'bizz'])
+
+    //for single-select
+    const wrapper2 = mount(VSelect, {
+      propsData: {
+        value: 'bar',
+        items: ['foo', 'bar', 'bizz'],
+        chips: true,
+        deletableChips: true,
+        retainSelection: true
+      }
+    })
+
+    wrapper2.setProps({
+      items: ['foo', 'bizz']
+    })
+
+    await wrapper2.vm.$nextTick()
+
+    expect(wrapper2.vm.selectedItems).toEqual(['bar'])
+
+    wrapper2.setProps({
+      chips: false,
+      deletableChips: false,
+      clearable: true
+    })
+
+    await wrapper2.vm.$nextTick()
+
+    expect(wrapper2.vm.selectedItems).toEqual(['bar'])
+  })
+
+  it('should not retain selection when retain-selection and chips or deletable-chips or clearable are not set', async () => {
+    //for multiselect
+    const wrapper = mount(VSelect, {
+      propsData: {
+        value: ['bar', 'bizz'],
+        items: ['foo', 'bar', 'bizz'],
+        multiple: true,
+        chips: false,
+        deletableChips: true,
+        retainSelection: true
+      }
+    })
+
+    wrapper.setProps({
+      items: ['foo', 'bizz']
+    })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.selectedItems).not.toEqual(['bar', 'bizz'])
+
+    wrapper.setProps({
+      deletableChips: false,
+    })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.selectedItems).not.toEqual(['bar', 'bizz'])
+
+    wrapper.setProps({
+      chips: false,
+      deletableChips: false,
+      clearable: false
+    })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.selectedItems).not.toEqual(['bar', 'bizz'])
+
+    wrapper.setProps({
+      retainSelection: false,
+    })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.selectedItems).not.toEqual(['bar', 'bizz'])
+
+    //for single-select
+    const wrapper2 = mount(VSelect, {
+      propsData: {
+        value: 'bar',
+        items: ['foo', 'bar', 'bizz'],
+        chips: false,
+        deletableChips: true,
+        retainSelection: true
+      }
+    })
+
+    wrapper2.setProps({
+      items: ['foo', 'bizz']
+    })
+
+    await wrapper2.vm.$nextTick()
+
+    expect(wrapper2.vm.selectedItems).not.toEqual(['bar'])
+
+    wrapper2.setProps({
+      deletableChips: false,
+    })
+
+    await wrapper2.vm.$nextTick()
+
+    expect(wrapper2.vm.selectedItems).not.toEqual(['bar'])
+
+    wrapper2.setProps({
+      chips: false,
+      deletableChips: false,
+      clearable: false
+    })
+
+    await wrapper2.vm.$nextTick()
+
+    expect(wrapper2.vm.selectedItems).not.toEqual(['bar'])
+
+    wrapper2.setProps({
+      retainSelection: false,
+    })
+
+    await wrapper2.vm.$nextTick()
+
+    expect(wrapper2.vm.selectedItems).not.toEqual(['bar'])
+  })
 })

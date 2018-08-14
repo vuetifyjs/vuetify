@@ -108,7 +108,8 @@ export default {
       default: null
     },
     smallChips: Boolean,
-    singleLine: Boolean
+    singleLine: Boolean,
+    retainSelection: Boolean
   },
 
   data: vm => ({
@@ -647,14 +648,22 @@ export default {
         ? [this.internalValue]
         : this.internalValue
 
+      let findFrom = ''
+
+      if (this.retainSelection && ((this.chips && this.deletableChips) || this.clearable)) {
+        findFrom = 'internalValue'
+      } else {
+        findFrom = 'allItems'
+      }
+
       for (const value of values) {
-        const index = this.allItems.findIndex(v => this.valueComparator(
+        const index = Array.isArray(this[findFrom]) ? this[findFrom].findIndex(v => this.valueComparator(
           this.getValue(v),
           this.getValue(value)
-        ))
+        )) : selectedItems[0] = this[findFrom]
 
         if (index > -1) {
-          selectedItems.push(this.allItems[index])
+          selectedItems.push(this[findFrom][index])
         }
       }
 
