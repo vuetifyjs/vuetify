@@ -167,7 +167,7 @@ test('VRadio.vue', ({ mount }) => {
     expect(error).toHaveBeenWarned()
   })
 
-  it('should toggle when space or enter is pressed', () => {
+  it('should toggle on keypress', () => {
     const wrapper = mount(VRadio)
 
     const change = jest.fn()
@@ -175,20 +175,11 @@ test('VRadio.vue', ({ mount }) => {
 
     const input = wrapper.first('input')
 
-    input.trigger('focus')
-    input.trigger('keydown.enter')
-
+    input.trigger('change')
     expect(change).toHaveBeenCalledTimes(1)
 
-    input.trigger('keydown.space')
-    expect(change).toHaveBeenCalledTimes(2)
-
     input.trigger('keydown.tab')
-    expect(change).toHaveBeenCalledTimes(2)
-
-    expect(wrapper.vm.isFocused).toBe(true)
-    wrapper.vm.onBlur()
-    expect(wrapper.vm.isFocused).toBe(false)
+    expect(change).toHaveBeenCalledTimes(1)
 
     expect(warning).toHaveBeenTipped()
   })

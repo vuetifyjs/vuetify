@@ -5,9 +5,6 @@ import VInput from '../components/VInput'
 import Rippleable from './rippleable'
 import Comparable from './comparable'
 
-// Utils
-import { keyCodes } from '../util/helpers'
-
 /* @vue/component */
 export default {
   name: 'selectable',
@@ -34,11 +31,7 @@ export default {
       type: Boolean,
       default: null
     },
-    label: String,
-    toggleKeys: {
-      type: Array,
-      default: () => [keyCodes.enter, keyCodes.space]
-    }
+    label: String
   },
 
   data: vm => ({
@@ -150,14 +143,7 @@ export default {
     onFocus () {
       this.isFocused = true
     },
-    onKeydown (e) {
-      // Overwrite default behavior to only allow
-      // the specified keyCodes
-      if (this.toggleKeys.indexOf(e.keyCode) > -1) {
-        e.preventDefault()
-
-        this.onChange()
-      }
-    }
+    /** @abstract */
+    onKeydown (e) {}
   }
 }

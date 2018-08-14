@@ -14,9 +14,6 @@ import {
   inject as RegistrableInject
 } from '../../mixins/registrable'
 
-// Utils
-import { keyCodes } from '../../util/helpers'
-
 /* @vue/component */
 export default {
   name: 'v-radio',
@@ -146,12 +143,7 @@ export default {
         this.$emit('change', this.value)
       }
     },
-    onKeydown (e) {
-      if ([keyCodes.enter, keyCodes.space].includes(e.keyCode)) {
-        e.preventDefault()
-        this.onChange()
-      }
-    }
+    onKeydown () {}
   },
 
   render (h) {

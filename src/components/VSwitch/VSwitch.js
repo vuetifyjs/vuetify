@@ -7,6 +7,9 @@ import Selectable from '../../mixins/selectable'
 // Directives
 import Touch from '../../directives/touch'
 
+// Helpers
+import { keyCodes } from '../../util/helpers'
+
 /* @vue/component */
 export default {
   name: 'v-switch',
@@ -67,6 +70,12 @@ export default {
     },
     onSwipeRight () {
       if (!this.isActive) this.onChange()
+    },
+    onKeydown (e) {
+      if (
+        (e.keyCode === keyCodes.left && this.isActive) ||
+        (e.keyCode === keyCodes.right && !this.isActive)
+      ) this.onChange()
     }
   }
 }
