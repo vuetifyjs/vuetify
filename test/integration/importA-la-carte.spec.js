@@ -25,6 +25,7 @@ import VExpansionPanel from '@/components/VExpansionPanel'
 import VFooter from '@/components/VFooter'
 import VForm from '@/components/VForm'
 import VGrid from '@/components/VGrid'
+import VHover from '@/components/VHover'
 import VIcon from '@/components/VIcon'
 import VImg from '@/components/VImg'
 import VInput from '@/components/VInput'
@@ -87,6 +88,7 @@ const components = {
   VFooter,
   VForm,
   VGrid,
+  VHover,
   VIcon,
   VImg,
   VInput,
