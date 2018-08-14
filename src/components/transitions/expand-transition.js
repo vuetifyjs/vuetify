@@ -13,7 +13,11 @@ export default function (expandedParentClass = '') {
       el.style.display = 'block'
       expandedParentClass && el._parent.classList.add(expandedParentClass)
 
-      setTimeout(() => (el.style.height = `${el.scrollHeight}px`), 100)
+      setTimeout(() => {
+        el.style.height = !el.scrollHeight
+          ? 'auto'
+          : `${el.scrollHeight}px`
+      }, 100)
     },
 
     afterEnter (el) {
@@ -27,7 +31,7 @@ export default function (expandedParentClass = '') {
 
       // Set height before we transition to 0
       el.style.overflow = 'hidden'
-      el.style.height = `${el.offsetHeight}px`
+      el.style.height = `${el.scrollHeight}px`
 
       setTimeout(() => (el.style.height = 0), 100)
     },

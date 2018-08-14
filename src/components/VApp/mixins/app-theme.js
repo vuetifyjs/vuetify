@@ -1,4 +1,3 @@
-import { intToHex } from '../../../util/colorUtils'
 import * as Theme from '../../../util/theme'
 
 export default {
@@ -20,21 +19,7 @@ export default {
         if (css != null) return css
       }
 
-      const colors = Object.keys(theme)
-
-      if (!colors.length) return ''
-
-      css = `a { color: ${intToHex(theme.primary)}; }`
-
-      for (let i = 0; i < colors.length; ++i) {
-        const name = colors[i]
-        const value = theme[name]
-        if (this.$vuetify.options.themeVariations.includes(name)) {
-          css += Theme.genVariations(name, value).join('')
-        } else {
-          css += Theme.genBaseColor(name, value)
-        }
-      }
+      css = Theme.genStyles(theme)
 
       if (this.$vuetify.options.minifyTheme != null) {
         css = this.$vuetify.options.minifyTheme(css)

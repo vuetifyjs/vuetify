@@ -36,7 +36,7 @@ export default {
       return this.$createElement('div', {
         staticClass: 'v-input--selection-controls__input'
       }, [
-        this.genInput('checkbox'),
+        this.genInput('checkbox', this.$attrs),
         !this.disabled && this.genRipple({
           'class': this.classesSelectable,
           directives: [{
@@ -58,7 +58,10 @@ export default {
     genSwitchPart (target) {
       return this.$createElement('div', {
         staticClass: `v-input--switch__${target}`,
-        'class': this.classesSelectable,
+        'class': {
+          ...this.classesSelectable,
+          ...this.themeClasses
+        },
         // Avoid cache collision
         key: target
       })

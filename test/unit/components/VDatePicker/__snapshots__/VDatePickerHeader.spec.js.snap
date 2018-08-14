@@ -2,13 +2,13 @@
 
 exports[`VDatePickerHeader.js should render component and match snapshot 1`] = `
 
-<div class="v-date-picker-header">
+<div class="v-date-picker-header theme--light">
   <button type="button"
-          class="v-btn v-btn--icon"
+          class="v-btn v-btn--icon theme--light"
   >
     <div class="v-btn__content">
       <i aria-hidden="true"
-         class="v-icon material-icons"
+         class="v-icon material-icons theme--light"
       >
         chevron_left
       </i>
@@ -20,11 +20,11 @@ exports[`VDatePickerHeader.js should render component and match snapshot 1`] = `
     </strong>
   </div>
   <button type="button"
-          class="v-btn v-btn--icon"
+          class="v-btn v-btn--icon theme--light"
   >
     <div class="v-btn__content">
       <i aria-hidden="true"
-         class="v-icon material-icons"
+         class="v-icon material-icons theme--light"
       >
         chevron_right
       </i>
@@ -36,13 +36,13 @@ exports[`VDatePickerHeader.js should render component and match snapshot 1`] = `
 
 exports[`VDatePickerHeader.js should render component in RTL mode and match snapshot 1`] = `
 
-<div class="v-date-picker-header">
+<div class="v-date-picker-header theme--light">
   <button type="button"
-          class="v-btn v-btn--icon"
+          class="v-btn v-btn--icon theme--light"
   >
     <div class="v-btn__content">
       <i aria-hidden="true"
-         class="v-icon material-icons"
+         class="v-icon material-icons theme--light"
       >
         chevron_right
       </i>
@@ -54,11 +54,11 @@ exports[`VDatePickerHeader.js should render component in RTL mode and match snap
     </strong>
   </div>
   <button type="button"
-          class="v-btn v-btn--icon"
+          class="v-btn v-btn--icon theme--light"
   >
     <div class="v-btn__content">
       <i aria-hidden="true"
-         class="v-icon material-icons"
+         class="v-icon material-icons theme--light"
       >
         chevron_left
       </i>
@@ -70,13 +70,13 @@ exports[`VDatePickerHeader.js should render component in RTL mode and match snap
 
 exports[`VDatePickerHeader.js should render component with default slot and match snapshot 1`] = `
 
-<div class="v-date-picker-header">
+<div class="v-date-picker-header theme--light">
   <button type="button"
-          class="v-btn v-btn--icon"
+          class="v-btn v-btn--icon theme--light"
   >
     <div class="v-btn__content">
       <i aria-hidden="true"
-         class="v-icon material-icons"
+         class="v-icon material-icons theme--light"
       >
         chevron_left
       </i>
@@ -90,11 +90,11 @@ exports[`VDatePickerHeader.js should render component with default slot and matc
     </strong>
   </div>
   <button type="button"
-          class="v-btn v-btn--icon"
+          class="v-btn v-btn--icon theme--light"
   >
     <div class="v-btn__content">
       <i aria-hidden="true"
-         class="v-icon material-icons"
+         class="v-icon material-icons theme--light"
       >
         chevron_right
       </i>

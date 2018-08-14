@@ -9,7 +9,7 @@ interface TouchStoredHandlers {
 
 interface TouchHTMLElement extends HTMLElement {
   _touchHandlers: {
-    [_uid: string]: TouchStoredHandlers
+    [_uid: number]: TouchStoredHandlers
   }
 }
 

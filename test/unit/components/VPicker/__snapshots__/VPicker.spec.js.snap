@@ -2,13 +2,13 @@
 
 exports[`VPicker.js should render component with title and match snapshot 1`] = `
 
-<div class="v-picker v-card">
+<div class="v-picker v-card theme--light">
   <div class="v-picker__title primary">
     <span>
       title
     </span>
   </div>
-  <div class="v-picker__body"
+  <div class="v-picker__body theme--light"
        style="width: 290px;"
   >
     <span>
@@ -21,8 +21,8 @@ exports[`VPicker.js should render component with title and match snapshot 1`] = 
 
 exports[`VPicker.js should render component without title and match snapshot 1`] = `
 
-<div class="v-picker v-card">
-  <div class="v-picker__body"
+<div class="v-picker v-card theme--light">
+  <div class="v-picker__body theme--light"
        style="width: 290px;"
   >
     <span>

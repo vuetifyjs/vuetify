@@ -1,7 +1,8 @@
 // Styles
 import '../../stylus/components/_buttons.styl'
 
-import Vue, { VNode, ComponentOptions, VNodeChildren } from 'vue'
+// Types
+import { VNode, VNodeChildren } from 'vue'
 import { PropValidator } from 'vue/types/options'
 import mixins from '../../util/mixins'
 
@@ -16,7 +17,7 @@ import Themeable from '../../mixins/themeable'
 import { factory as ToggleableFactory } from '../../mixins/toggleable'
 import { inject as RegistrableInject } from '../../mixins/registrable'
 
-const VBtn = mixins(
+export default mixins(
   Colorable,
   Routable,
   Positionable,
@@ -121,8 +122,7 @@ const VBtn = mixins(
       const children: VNodeChildren = []
 
       if (!this.$slots.loader) {
-        // TODO: uncast
-        children.push(this.$createElement(VProgressCircular as ComponentOptions<Vue>, {
+        children.push(this.$createElement(VProgressCircular, {
           props: {
             indeterminate: true,
             size: 26,
@@ -151,9 +151,3 @@ const VBtn = mixins(
     return h(tag, data, children)
   }
 })
-
-/* eslint-disable-next-line no-redeclare */
-export type VBtn = InstanceType<typeof VBtn> & {
-  $el: HTMLButtonElement | HTMLAnchorElement
-}
-export default VBtn

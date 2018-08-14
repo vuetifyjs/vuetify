@@ -48,7 +48,6 @@ export default {
     /** @deprecated */
     prependIconCb: Function,
     readonly: Boolean,
-    tabindex: { default: 0 },
     value: { required: false }
   },
 
@@ -94,7 +93,7 @@ export default {
       },
       set (val) {
         this.lazyValue = val
-        this.$emit('input', val)
+        this.$emit(this.$_modelEvent, val)
       }
     },
     isDirty () {
@@ -112,6 +111,12 @@ export default {
     value (val) {
       this.lazyValue = val
     }
+  },
+
+  beforeCreate () {
+    // v-radio-group needs to emit a different event
+    // https://github.com/vuetifyjs/vuetify/issues/4752
+    this.$_modelEvent = (this.$options.model && this.$options.model.event) || 'input'
   },
 
   methods: {
@@ -149,7 +154,9 @@ export default {
       const data = {
         props: {
           color: this.validationState,
-          disabled: this.disabled
+          dark: this.dark,
+          disabled: this.disabled,
+          light: this.light
         },
         on: !(this.$listeners[eventName] || cb)
           ? null
@@ -204,8 +211,10 @@ export default {
       return this.$createElement(VLabel, {
         props: {
           color: this.validationState,
+          dark: this.dark,
           focused: this.hasState,
-          for: this.$attrs.id
+          for: this.$attrs.id,
+          light: this.light
         }
       }, this.$slots.label || this.label)
     },
@@ -219,6 +228,8 @@ export default {
       return this.$createElement(VMessages, {
         props: {
           color: this.hasHint ? '' : this.validationState,
+          dark: this.dark,
+          light: this.light,
           value: (this.hasMessages || this.hasHint) ? messages : []
         }
       })

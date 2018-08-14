@@ -59,6 +59,10 @@ module.exports = {
     'no-return-await': 'warn',
     'object-shorthand': ['error', 'always'],
     'no-extra-semi': 'error',
+    'prefer-const': ['error', {
+      'destructuring': 'all',
+      'ignoreReadBeforeAssign': true
+    }],
 
     'vue/name-property-casing': false,
     'vue/require-default-prop': false,
@@ -73,18 +77,18 @@ module.exports = {
         'no-undef': 'off',
 
         // https://github.com/eslint/eslint/issues/10260
-        'space-infix-ops': false,
+        'space-infix-ops': 'off',
 
         // https://github.com/nzakas/eslint-plugin-typescript/issues/127
         // 'typescript/prefer-namespace-keyword': 'error',
 
         // Can't overload function exports with this enabled
-        'import/export': false,
+        'import/export': 'off',
 
         // https://github.com/eslint/typescript-eslint-parser/issues/445
         // https://github.com/eslint/typescript-eslint-parser/issues/457
         // enabled in tslint instead
-        'no-unused-vars': false,
+        'no-unused-vars': 'off',
         // 'typescript/no-unused-vars': 'error',
 
         // https://github.com/eslint/typescript-eslint-parser/issues/443

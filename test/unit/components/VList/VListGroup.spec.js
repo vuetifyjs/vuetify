@@ -201,7 +201,7 @@ test('VListGroup.js', ({ mount }) => {
     expect(warning).toHaveBeenTipped()
   })
 
-  it('should return proper content from icon methods', () => {
+  it('should return proper content from icon methods', async () => {
     const wrapper = mount(VListGroup)
 
     expect(wrapper.vm.genPrependIcon()).toBe(null)
@@ -215,7 +215,7 @@ test('VListGroup.js', ({ mount }) => {
 
     expect(icon.text()).toBe('keyboard_arrow_down')
     wrapper.setProps({ appendIcon: 'list' })
-
+    await wrapper.vm.$nextTick()
     expect(icon.text()).toBe('list')
     expect('Injection "listClick" not found').toHaveBeenWarned()
     expect(warning).toHaveBeenTipped()

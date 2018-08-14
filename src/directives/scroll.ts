@@ -17,7 +17,7 @@ interface ScrollVNodeDirective extends VNodeDirective {
 function inserted (el: ScrollHTMLElement, binding: ScrollVNodeDirective) {
   const callback = binding.value
   const options = binding.options || { passive: true }
-  let target = binding.arg ? document.querySelector(binding.arg) : window
+  const target = binding.arg ? document.querySelector(binding.arg) : window
   if (!target) return
 
   target.addEventListener('scroll', callback, options)

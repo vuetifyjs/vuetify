@@ -110,9 +110,12 @@ export default {
         'v-navigation-drawer--open': this.isActive,
         'v-navigation-drawer--right': this.right,
         'v-navigation-drawer--temporary': this.temporary,
-        'theme--dark': this.dark,
-        'theme--light': this.light
+        ...this.themeClasses
       }
+    },
+    hasApp () {
+      return this.app &&
+        (!this.isMobile && !this.temporary)
     },
     isMobile () {
       return !this.stateless &&
@@ -121,7 +124,8 @@ export default {
         this.$vuetify.breakpoint.width < parseInt(this.mobileBreakPoint, 10)
     },
     marginTop () {
-      if (!this.app) return 0
+      if (!this.hasApp) return 0
+
       let marginTop = this.$vuetify.application.bar
 
       marginTop += this.clipped
@@ -131,11 +135,17 @@ export default {
       return marginTop
     },
     maxHeight () {
-      if (!this.app) return '100%'
+      if (!this.hasApp) return null
 
-      return this.clipped
-        ? this.$vuetify.application.top + this.$vuetify.application.bottom
-        : this.$vuetify.application.bottom
+      const maxHeight = (
+        this.$vuetify.application.bottom +
+        this.$vuetify.application.footer +
+        this.$vuetify.application.bar
+      )
+
+      if (!this.clipped) return maxHeight
+
+      return maxHeight + this.$vuetify.application.top
     },
     reactsToClick () {
       return !this.stateless &&
@@ -164,7 +174,7 @@ export default {
       const styles = {
         height: convertToUnit(this.height),
         marginTop: `${this.marginTop}px`,
-        maxHeight: `calc(100% - ${this.maxHeight}px)`,
+        maxHeight: `calc(100% - ${+this.maxHeight}px)`,
         transform: `translateX(${this.calculatedTransform}px)`,
         width: `${this.calculatedWidth}px`
       }
@@ -224,6 +234,9 @@ export default {
       if (val == null) return this.init()
 
       if (val !== this.isActive) this.isActive = val
+    },
+    applicationProperty (newVal, oldVal) {
+      this.$vuetify.application.unbind(this._uid, oldVal)
     }
   },
 

@@ -12,7 +12,6 @@ import VTextField from '../VTextField/VTextField'
 
 // Mixins
 import Comparable from '../../mixins/comparable'
-import Dependent from '../../mixins/dependent'
 import Filterable from '../../mixins/filterable'
 import Menuable from '../../mixins/menuable'
 
@@ -48,7 +47,6 @@ export default {
     fakeVMenu,
     fakeMenuable,
     Comparable,
-    Dependent,
     Filterable
   ],
 
@@ -124,7 +122,7 @@ export default {
     // As long as a value is defined, show it
     // Otherwise, check if multiple
     // to determine which default to provide
-    lazyValue: vm.value != null
+    lazyValue: vm.value !== undefined
       ? vm.value
       : vm.multiple ? [] : undefined,
     selectedIndex: -1,
@@ -148,30 +146,19 @@ export default {
     computedItems () {
       return this.allItems
     },
+    counterValue () {
+      return this.multiple
+        ? this.selectedItems.length
+        : (this.getText(this.selectedItems[0]) || '').toString().length
+    },
     directives () {
-      return [{
+      return this.isFocused ? [{
         name: 'click-outside',
         value: this.blur,
         args: {
-          closeConditional: e => {
-            return (
-              // Check if click originates
-              // from within the content
-              (
-                !!this.content &&
-                !this.content.contains(e.target)
-              ) &&
-              // Check if click originates
-              // from within the element
-              (
-                !!this.$el &&
-                !this.$el.contains(e.target) &&
-                e.target !== this.$el
-              )
-            )
-          }
+          closeConditional: this.closeConditional
         }
-      }]
+      }] : undefined
     },
     dynamicHeight () {
       return 'auto'
@@ -192,7 +179,9 @@ export default {
         openOnClick: false,
         value: this.isMenuActive,
         offsetY: this.offsetY,
-        nudgeBottom: this.offsetY ? 1 : 0 // convert to int
+        nudgeBottom: this.nudgeBottom
+          ? this.nudgeBottom
+          : this.offsetY ? 1 : 0 // convert to int
       }
     },
     listData () {
@@ -200,11 +189,9 @@ export default {
         props: {
           action: this.multiple && !this.isHidingSelected,
           color: this.color,
-          dark: this.dark,
           dense: this.dense,
           hideSelected: this.hideSelected,
           items: this.virtualizedItems,
-          light: this.light,
           noDataText: this.$vuetify.t(this.noDataText),
           selectedItems: this.selectedItems,
           itemAvatar: this.itemAvatar,
@@ -221,7 +208,7 @@ export default {
       }
     },
     staticList () {
-      if (this.$slots['no-data']) {
+      if (this.$slots['no-data'] || this.$slots['prepend-item'] || this.$slots['append-item']) {
         consoleError('assert: staticList should not be called if slots are used')
       }
 
@@ -235,7 +222,8 @@ export default {
   },
 
   watch: {
-    internalValue () {
+    internalValue (val) {
+      this.initialValue = val
       this.$emit('change', this.internalValue)
       this.setSelectedItems()
     },
@@ -272,7 +260,7 @@ export default {
     blur () {
       this.isMenuActive = false
       this.isFocused = false
-      this.$refs.input.blur()
+      this.$refs.input && this.$refs.input.blur()
       this.selectedIndex = -1
     },
     /** @public */
@@ -280,11 +268,22 @@ export default {
       this.isMenuActive = true
     },
     clearableCallback () {
-      this.internalValue = this.multiple ? [] : null
-      this.$emit('change', this.internalValue)
+      this.internalValue = this.multiple ? [] : undefined
       this.$nextTick(() => this.$refs.input.focus())
 
       if (this.openOnClear) this.isMenuActive = true
+    },
+    closeConditional (e) {
+      return (
+        // Click originates from outside the menu content
+        !!this.content &&
+        !this.content.contains(e.target) &&
+
+        // Click originates from outside the element
+        !!this.$el &&
+        !this.$el.contains(e.target) &&
+        e.target !== this.$el
+      )
     },
     filterDuplicates (arr) {
       const uniqueValues = new Map()
@@ -320,7 +319,6 @@ export default {
         staticClass: 'v-chip--select-multi',
         props: {
           close: this.deletableChips && !isDisabled,
-          dark: this.dark,
           disabled: isDisabled,
           selected: index === this.selectedIndex,
           small: this.smallChips
@@ -380,7 +378,7 @@ export default {
         selections,
         this.suffix ? this.genAffix('suffix') : null,
         this.genClearIcon(),
-        this.genSlot('append', 'inner', [this.genIcon('append')])
+        this.genIconSlot()
       ])
 
       return [this.genMenu(activator)]
@@ -396,23 +394,24 @@ export default {
     },
     genList () {
       // If there's no slots, we can use a cached VNode to improve performance
-      if (this.$slots['no-data']) {
+      if (this.$slots['no-data'] || this.$slots['prepend-item'] || this.$slots['append-item']) {
         return this.genListWithSlot()
       } else {
         return this.staticList
       }
     },
     genListWithSlot () {
+      const slots = ['prepend-item', 'no-data', 'append-item']
+        .filter(slotName => this.$slots[slotName])
+        .map(slotName => this.$createElement('template', {
+          slot: slotName
+        }, this.$slots[slotName]))
       // Requires destructuring due to Vue
       // modifying the `on` property when passed
       // as a referenced object
       return this.$createElement(VSelectList, {
         ...this.listData
-      }, [
-        this.$createElement('template', {
-          slot: 'no-data'
-        }, this.$slots['no-data'])
-      ])
+      }, slots)
     },
     genMenu (activator) {
       const props = {
@@ -421,7 +420,7 @@ export default {
       const inheritedProps = Object.keys(VMenu.props).concat(Object.keys(Menuable.props))
 
       // Later this might be filtered
-      for (let prop of inheritedProps) {
+      for (const prop of inheritedProps) {
         props[prop] = this[prop]
       }
 
@@ -518,8 +517,6 @@ export default {
       if (this.selectedItems.length === 0) {
         this.isMenuActive = true
       }
-
-      this.editingIndex = -1
       this.selectedIndex = -1
     },
     onClick () {
@@ -573,7 +570,7 @@ export default {
         this.$nextTick(() => (this.isMenuActive = !this.isMenuActive))
       // If user is clicking in the container
       // and field is enclosed, activate it
-      } else if (this.isEnclosed) {
+      } else if (this.isEnclosed && !this.isDisabled) {
         this.isMenuActive = true
       }
 

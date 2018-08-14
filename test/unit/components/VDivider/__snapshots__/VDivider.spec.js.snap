@@ -2,6 +2,6 @@
 
 exports[`VDivider.js should render component and match snapshot 1`] = `
 
-<hr class="v-divider">
+<hr class="v-divider theme--light">
 
 `;

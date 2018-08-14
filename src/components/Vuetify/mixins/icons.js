@@ -22,7 +22,10 @@ const ICONS_MATERIAL = {
   'dropdown': 'arrow_drop_down',
   'radioOn': 'radio_button_checked',
   'radioOff': 'radio_button_unchecked',
-  'edit': 'edit'
+  'edit': 'edit',
+  'ratingEmpty': 'star_border',
+  'ratingFull': 'star',
+  'ratingHalf': 'star_half'
 }
 
 // Maps internal Vuetify icon names to actual icons from materialdesignicons.com
@@ -49,7 +52,10 @@ const ICONS_MDI = {
   'dropdown': 'mdi-menu-down',
   'radioOn': 'mdi-radiobox-marked',
   'radioOff': 'mdi-radiobox-blank',
-  'edit': 'mdi-pencil'
+  'edit': 'mdi-pencil',
+  'ratingEmpty': 'mdi-star-outline',
+  'ratingFull': 'mdi-star',
+  'ratingHalf': 'mdi-star-half'
 }
 
 // Maps internal Vuetify icon names to actual Font-Awesome 4 icon names.
@@ -76,7 +82,10 @@ const ICONS_FONTAWESOME4 = {
   'dropdown': 'fa fa-caret-down',
   'radioOn': 'fa fa-dot-circle',
   'radioOff': 'fa fa-circle-o',
-  'edit': 'fa fa-pencil'
+  'edit': 'fa fa-pencil',
+  'ratingEmpty': 'fa fa-star-o',
+  'ratingFull': 'fa fa-star',
+  'ratingHalf': 'fa fa-star-half-o'
 }
 
 // Maps internal Vuetify icon names to actual Font-Awesome 5+ icon names.
@@ -103,7 +112,10 @@ const ICONS_FONTAWESOME = {
   'dropdown': 'fas fa-caret-down',
   'radioOn': 'far fa-dot-circle',
   'radioOff': 'far fa-circle',
-  'edit': 'fas fa-edit'
+  'edit': 'fas fa-edit',
+  'ratingEmpty': 'far fa-star',
+  'ratingFull': 'fas fa-star',
+  'ratingHalf': 'fas fa-star-half'
 }
 
 const iconSets = {

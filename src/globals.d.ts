@@ -1,6 +1,11 @@
 /* eslint-disable max-len */
 
-import { VueConstructor, ComponentOptions, PluginFunction, FunctionalComponentOptions } from 'vue'
+import {
+  VueConstructor,
+  ComponentOptions,
+  FunctionalComponentOptions,
+  VNodeData
+} from 'vue'
 import { CombinedVueInstance, Vue } from 'vue/types/vue'
 import {
   RecordPropsDefinition,
@@ -13,6 +18,13 @@ declare global {
     Vue: VueConstructor
   }
 
+  interface HTMLImageElement {
+    decode: () => Promise<never>
+  }
+
+  function parseInt(s: string | number, radix?: number): number
+  function parseFloat(string: string | number): number
+
   export const __VUETIFY_VERSION__: string
   export const __REQUIRED_VUE__: string
 }
@@ -22,6 +34,13 @@ declare module 'vue/types/vue' {
     CombinedVueInstance<Instance, Data, Methods, Computed, Props> & Vue,
     Options
   >
+
+  export interface Vue {
+    _uid: number
+
+    /** bindObjectListeners */
+     _g (data: VNodeData, value: {}): VNodeData
+  }
 
   export interface RawComponentOptions<
     V extends Vue = Vue,
@@ -44,7 +63,8 @@ declare module 'vue/types/vue' {
     Options = Record<string, any>
   > {
     version: string
-    install?: PluginFunction<never>
+    /* eslint-disable-next-line camelcase */
+    $_vuetify_subcomponents?: Record<string, VueConstructor>
     options: Options
 
     extend<Data, Methods, Computed, Options, PropNames extends string = never> (options?: ThisTypedComponentOptionsWithArrayProps<V, Data, Methods, Computed, PropNames> & Options): OptionsVue<V, Data, Methods, Computed, Record<PropNames, any>, Options>

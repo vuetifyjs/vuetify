@@ -3,12 +3,13 @@ import '../../stylus/components/_messages.styl'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
+import Themeable from '../../mixins/themeable'
 
 /* @vue/component */
 export default {
   name: 'v-messages',
 
-  mixins: [Colorable],
+  mixins: [Colorable, Themeable],
 
   props: {
     value: {
@@ -19,7 +20,7 @@ export default {
 
   computed: {
     classes () {
-      return this.addTextColorClassChecks()
+      return this.addTextColorClassChecks(this.themeClasses)
     }
   },
 
@@ -47,7 +48,7 @@ export default {
   render (h) {
     return h('div', {
       staticClass: 'v-messages',
-      'class': this.classes
+      class: this.classes
     }, [this.genChildren()])
   }
 }

@@ -197,7 +197,7 @@ test('VRadio.vue', ({ mount }) => {
 
     expect(wrapper.vm.classes).toEqual({
       'theme--dark': false,
-      'theme--light': false,
+      'theme--light': true,
       'v-radio--is-disabled': false,
       'v-radio--is-focused': false
     })
@@ -209,7 +209,7 @@ test('VRadio.vue', ({ mount }) => {
     expect(wrapper.vm.classes).toEqual({
       'accent--text': true,
       'theme--dark': false,
-      'theme--light': false,
+      'theme--light': true,
       'v-radio--is-disabled': false,
       'v-radio--is-focused': false
     })
@@ -245,7 +245,6 @@ test('VRadio.vue', ({ mount }) => {
     expect(change).toBeCalled()
   })
 
-
   it('should use custom icons', () => {
     const wrapper = mount(VRadio, {
       propsData: {
@@ -274,6 +273,17 @@ test('VRadio.vue', ({ mount }) => {
     wrapper.setData({ isActive: false })
 
     expect(wrapper.vm.$refs.input.checked).toBe(false)
+    expect(warning).toHaveBeenTipped()
+  })
+
+  it('should render themed component', () => {
+    const wrapper = mount(VRadio, {
+      propsData: {
+        light: true
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
     expect(warning).toHaveBeenTipped()
   })
 })

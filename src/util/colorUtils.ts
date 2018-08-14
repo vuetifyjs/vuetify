@@ -4,10 +4,7 @@ export type RGB = number
 export type XYZ = [number, number, number]
 export type LAB = [number, number, number]
 
-// TODO: remove with TS 3.0
-type unknown = string | number | symbol | boolean | object | null | undefined
-
-export function colorToInt (color: unknown): RGB {
+export function colorToInt (color: string | number | {}): RGB {
   let rgb
 
   if (typeof color === 'number') {
@@ -42,4 +39,8 @@ export function intToHex (color: RGB): string {
   if (hexColor.length < 6) hexColor = '0'.repeat(6 - hexColor.length) + hexColor
 
   return '#' + hexColor
+}
+
+export function colorToHex (color: string | number | {}): string {
+  return intToHex(colorToInt(color))
 }

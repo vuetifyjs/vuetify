@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VRating.js should render a scoped slot 1`] = `
+
+<div class="v-rating">
+  <span>
+    foobar
+  </span>
+  <span>
+    foobar
+  </span>
+  <span>
+    foobar
+  </span>
+  <span>
+    foobar
+  </span>
+  <span>
+    foobar
+  </span>
+</div>
+
+`;

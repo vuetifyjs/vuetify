@@ -396,4 +396,23 @@ test('VCheckbox.js', ({ mount }) => {
     wrapper.setData({ value: 'buzz'})
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should render themed component', () => {
+    const wrapper = mount(VCheckbox, {
+      propsData: {
+        light: true
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should be disabled', () => {
+    const wrapper = mount(VCheckbox, {
+      propsData: { disabled: true }
+    })
+    const input = wrapper.first('input')
+
+    expect(input.html()).toMatchSnapshot()
+  })
 })
