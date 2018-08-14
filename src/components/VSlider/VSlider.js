@@ -144,8 +144,8 @@ export default {
       return this.step > 0 ? parseFloat(this.step) : 0
     },
     trackFillStyles () {
-      let left = this.$vuetify.rtl ? 'auto' : 0
-      let right = this.$vuetify.rtl ? 0 : 'auto'
+      const left = this.$vuetify.rtl ? 'auto' : 0
+      const right = this.$vuetify.rtl ? 0 : 'auto'
       let width = `${this.inputWidth}%`
 
       if (this.disabled) width = `calc(${this.inputWidth}% - 8px)`
@@ -166,9 +166,9 @@ export default {
     },
     trackStyles () {
       const trackPadding = this.disabled ? `calc(${this.inputWidth}% + 8px)` : `${this.trackPadding}px`
-      let left = this.$vuetify.rtl ? 'auto' : trackPadding
-      let right = this.$vuetify.rtl ? trackPadding : 'auto'
-      let width = this.disabled
+      const left = this.$vuetify.rtl ? 'auto' : trackPadding
+      const right = this.$vuetify.rtl ? trackPadding : 'auto'
+      const width = this.disabled
         ? `calc(${100 - this.inputWidth}% - 8px)`
         : '100%'
 
@@ -483,7 +483,7 @@ export default {
         this.keyPressed += 1
 
         const increase = this.$vuetify.rtl ? [left, up] : [right, up]
-        let direction = increase.includes(e.keyCode) ? 1 : -1
+        const direction = increase.includes(e.keyCode) ? 1 : -1
         const multiplier = e.shiftKey ? 3 : (e.ctrlKey ? 2 : 1)
 
         value = value + (direction * step * multiplier)

@@ -173,13 +173,11 @@ test('VCombobox', ({ shallow }) => {
     input.trigger('focus')
 
     expect(wrapper.vm.isFocused).toBe(true)
-    expect(wrapper.vm.isMenuActive).toBe(false)
-
-    expect(wrapper.vm.menuCanShow).toBe(false)
+    expect(wrapper.vm.menuProps.value).toBe(false)
 
     slot.trigger('click')
 
-    expect(wrapper.vm.isMenuActive).toBe(false)
+    expect(wrapper.vm.menuProps.value).toBe(false)
 
     // TODO: Add expects for tags when impl
   })
