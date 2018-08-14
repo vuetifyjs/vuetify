@@ -102,6 +102,10 @@ test('VStepperContent.js', ({ mount }) => {
       attachToDocument: true,
       propsData: { step: 1 }
     })
+    
+    wrapper.setData({ isActive: false })
+    
+    await wrapper.vm.$nextTick()
 
     wrapper.setData({ isActive: true })
 
@@ -123,6 +127,10 @@ test('VStepperContent.js', ({ mount }) => {
       attachToDocument: true,
       propsData: { step: 1 }
     })
+
+    wrapper.setData({ isActive: false })
+    
+    await wrapper.vm.$nextTick()
 
     wrapper.setData({ isActive: true })
     
