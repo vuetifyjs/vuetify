@@ -284,21 +284,6 @@ export function remapInternalIcon (vm: Vue, iconName: string): string {
   return getObjectValueByPath(vm, iconName, iconName)
 }
 
-// credit: https://github.com/vuejs/vue/blob/25a688ee314d82b584ef0f192d4016b75664a616/src/core/instance/render-helpers/bind-object-listeners.js#L13
-export function combineListeners (on: any, listeners: any) {
-  const merged: Record<string, any> = {
-    ...on
-  }
-
-  for (const key in listeners) {
-    const existing = on[key]
-    const ours = listeners[key]
-    merged[key] = existing ? [].concat(existing, ours) : ours
-  }
-
-  return merged
-}
-
 export function keys<O> (o: O) {
   return Object.keys(o) as (keyof O)[]
 }

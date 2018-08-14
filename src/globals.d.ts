@@ -1,6 +1,11 @@
 /* eslint-disable max-len */
 
-import { VueConstructor, ComponentOptions, PluginFunction, FunctionalComponentOptions } from 'vue'
+import {
+  VueConstructor,
+  ComponentOptions,
+  FunctionalComponentOptions,
+  VNodeData
+} from 'vue'
 import { CombinedVueInstance, Vue } from 'vue/types/vue'
 import {
   RecordPropsDefinition,
@@ -29,6 +34,13 @@ declare module 'vue/types/vue' {
     CombinedVueInstance<Instance, Data, Methods, Computed, Props> & Vue,
     Options
   >
+
+  export interface Vue {
+    _uid: number
+
+    /** bindObjectListeners */
+     _g (data: VNodeData, value: {}): VNodeData
+  }
 
   export interface RawComponentOptions<
     V extends Vue = Vue,

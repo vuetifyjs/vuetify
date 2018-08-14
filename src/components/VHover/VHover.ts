@@ -5,15 +5,14 @@ import Toggleable from '../../mixins/toggleable'
 // Utilities
 import mixins from '../../util/mixins'
 import { consoleWarn } from '../../util/console'
-import { combineListeners } from '../../util/helpers'
 
 // Types
 import { VNode } from 'vue'
 
-/* @vue/component */
 export default mixins(
   Delayable,
   Toggleable
+  /* @vue/component */
 ).extend({
   name: 'v-hover',
 
@@ -30,21 +29,25 @@ export default mixins(
 
   methods: {
     onMouseEnter () {
-      this.isActive = true
+      this.runDelay('open', () => {
+        this.isActive = true
+      })
     },
     onMouseLeave () {
-      this.isActive = false
+      this.runDelay('close', () => {
+        this.isActive = false
+      })
     }
   },
 
-  render (): any {
+  render (): VNode {
     if (!this.$scopedSlots.default && this.value === undefined) {
       consoleWarn('v-hover is missing a default scopedSlot or bound value', this)
 
-      return null
+      return null as any
     }
 
-    let element = null
+    let element: VNode | VNode[] | string | undefined
 
     if (this.$scopedSlots.default) {
       // TODO: types are wrong - https://github.com/vuejs/vue/pull/8644
@@ -56,19 +59,13 @@ export default mixins(
     if (!element || typeof element === 'string' || Array.isArray(element)) {
       consoleWarn('v-hover should only contain a single element', this)
 
-      return element
+      return element as any
     }
 
     if (!this.disabled) {
-      element.data!.on = this.$listeners
-
-      element.data!.on = combineListeners(element.data!.on, {
-        mouseenter: () => {
-          this.runDelay('open', this.onMouseEnter)
-        },
-        mouseleave: () => {
-          this.runDelay('close', this.onMouseLeave)
-        }
+      this._g(element.data!, {
+        mouseenter: this.onMouseEnter,
+        mouseleave: this.onMouseLeave
       })
     }
 
