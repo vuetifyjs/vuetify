@@ -3,7 +3,8 @@ import {
   deepEqual,
   getNestedValue,
   getPropertyFromItem,
-  convertToUnit
+  convertToUnit,
+  combineListeners
 } from '@/util/helpers'
 
 test('helpers.js', () => {
@@ -181,5 +182,31 @@ test('helpers.js', () => {
     expect(convertToUnit('3.14vw')).toBe('3.14vw')
 
     expect(convertToUnit('foo')).toBe('foo')
+  })
+
+  it('should combine same listener types', () => {
+    const on = {
+      '!click': () => {},
+      click: () => {},
+      mouseenter: () => {},
+      mouseleave: () => {}
+    }
+
+    const listeners = {
+      '~click': () => {},
+      click: () => {},
+      mouseenter: () => {},
+      mouseleave: () => {}
+    }
+
+    const combined = combineListeners(on, listeners)
+
+    expect(combined).toEqual({
+      '!click': on['!click'],
+      '~click': listeners['~click'],
+      click: [on.click, listeners.click],
+      mouseenter: [on.mouseenter, listeners.mouseenter],
+      mouseleave: [on.mouseleave, listeners.mouseleave]
+    })
   })
 })

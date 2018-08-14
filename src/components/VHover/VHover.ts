@@ -5,10 +5,12 @@ import Toggleable from '../../mixins/toggleable'
 // Utilities
 import mixins from '../../util/mixins'
 import { consoleWarn } from '../../util/console'
+import { combineListeners } from '../../util/helpers'
 
 // Types
 import { VNode } from 'vue'
 
+/* @vue/component */
 export default mixins(
   Delayable,
   Toggleable
@@ -27,10 +29,10 @@ export default mixins(
   },
 
   methods: {
-    __onMouseEnter () {
+    onMouseEnter () {
       this.isActive = true
     },
-    __onMouseLeave () {
+    onMouseLeave () {
       this.isActive = false
     }
   },
@@ -44,8 +46,8 @@ export default mixins(
 
     let element = null
 
-    // TODO: types are wrong - https://github.com/vuejs/vue/pull/8644
     if (this.$scopedSlots.default) {
+      // TODO: types are wrong - https://github.com/vuejs/vue/pull/8644
       element = this.$scopedSlots.default({ hover: this.isActive }) as any as VNode
     } else if (this.$slots.default.length === 1) {
       element = this.$slots.default[0]
@@ -58,14 +60,16 @@ export default mixins(
     }
 
     if (!this.disabled) {
-      element.data!.on = element.data!.on || {}
+      element.data!.on = this.$listeners
 
-      element.data!.on!.mouseenter = () => {
-        this.runDelay('open', this.__onMouseEnter)
-      }
-      element.data!.on!.mouseleave = () => {
-        this.runDelay('close', this.__onMouseLeave)
-      }
+      element.data!.on = combineListeners(element.data!.on, {
+        mouseenter: () => {
+          this.runDelay('open', this.onMouseEnter)
+        },
+        mouseleave: () => {
+          this.runDelay('close', this.onMouseLeave)
+        }
+      })
     }
 
     return element
