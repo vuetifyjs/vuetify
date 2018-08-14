@@ -39,6 +39,11 @@ export default {
     },
     computedItems () {
       return this.segmented ? this.allItems : this.filteredItems
+    },
+    $_menuProps () {
+      const props = VAutocomplete.computed.$_menuProps.call(this)
+      props.transition = props.transition || 'v-menu-transition'
+      return props
     }
   },
 

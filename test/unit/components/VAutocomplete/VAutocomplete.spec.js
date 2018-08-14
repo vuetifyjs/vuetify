@@ -695,7 +695,9 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
 
   it('should propagate content class', () => {
     const wrapper = mount(VAutocomplete, {
-      propsData: { contentClass: 'foobar' }
+      propsData: {
+        menuProps: { contentClass: 'foobar' }
+      }
     })
 
     const content = wrapper.first('.v-autocomplete__content')

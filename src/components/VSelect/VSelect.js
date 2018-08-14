@@ -19,18 +19,14 @@ import Menuable from '../../mixins/menuable'
 import ClickOutside from '../../directives/click-outside'
 
 // Helpers
-import { getPropertyFromItem, keyCodes } from '../../util/helpers'
-import { consoleError } from '../../util/console'
+import { camelize, getPropertyFromItem, keyCodes } from '../../util/helpers'
+import { consoleError, consoleWarn } from '../../util/console'
 
-// For api-generator
-const fakeVMenu = {
-  name: 'v-menu',
-  props: VMenu.props // TODO: remove some, just for testing
-}
-
-const fakeMenuable = {
-  name: 'menuable',
-  props: Menuable.props
+export const defaultMenuProps = {
+  closeOnClick: false,
+  closeOnContentClick: false,
+  openOnClick: false,
+  maxHeight: 300
 }
 
 /* @vue/component */
@@ -44,8 +40,6 @@ export default {
   extends: VTextField,
 
   mixins: [
-    fakeVMenu,
-    fakeMenuable,
     Comparable,
     Filterable
   ],
@@ -68,7 +62,6 @@ export default {
     cacheItems: Boolean,
     chips: Boolean,
     clearable: Boolean,
-    contentClass: String,
     deletableChips: Boolean,
     dense: Boolean,
     hideSelected: Boolean,
@@ -92,23 +85,17 @@ export default {
       type: [String, Array, Function],
       default: 'value'
     },
-    maxHeight: {
-      type: [Number, String],
-      default: 300
-    },
-    minWidth: {
-      type: [Boolean, Number, String],
-      default: 0
+    menuProps: {
+      type: [String, Array, Object],
+      default: () => defaultMenuProps
     },
     multiple: Boolean,
-    multiLine: Boolean,
     openOnClear: Boolean,
     returnObject: Boolean,
     searchInput: {
       default: null
     },
-    smallChips: Boolean,
-    singleLine: Boolean
+    smallChips: Boolean
   },
 
   data: vm => ({
@@ -171,18 +158,6 @@ export default {
     isDirty () {
       return this.selectedItems.length > 0
     },
-    menuProps () {
-      return {
-        closeOnClick: false,
-        closeOnContentClick: false,
-        openOnClick: false,
-        value: this.isMenuActive,
-        offsetY: this.offsetY,
-        nudgeBottom: this.nudgeBottom
-          ? this.nudgeBottom
-          : this.offsetY ? 1 : 0 // convert to int
-      }
-    },
     listData () {
       return {
         props: {
@@ -214,9 +189,33 @@ export default {
       return this.$createElement(VSelectList, this.listData)
     },
     virtualizedItems () {
-      return !this.auto
-        ? this.computedItems.slice(0, this.lastItem)
-        : this.computedItems
+      return this.$_menuProps.auto
+        ? this.computedItems
+        : this.computedItems.slice(0, this.lastItem)
+    },
+    menuCanShow () { return true },
+    $_menuProps () {
+      let normalisedProps
+
+      normalisedProps = typeof this.menuProps === 'string'
+        ? this.menuProps.split(',')
+        : this.menuProps
+
+      if (Array.isArray(normalisedProps)) {
+        normalisedProps = normalisedProps.reduce((acc, p) => {
+          acc[p.trim()] = true
+          return acc
+        }, {})
+      }
+
+      return {
+        ...defaultMenuProps,
+        value: this.menuCanShow && this.isMenuActive,
+        nudgeBottom: this.nudgeBottom
+          ? this.nudgeBottom
+          : normalisedProps.offsetY ? 1 : 0, // convert to int
+        ...normalisedProps
+      }
     }
   },
 
@@ -409,19 +408,36 @@ export default {
       }, slots)
     },
     genMenu (activator) {
-      const props = {
-        contentClass: this.contentClass
-      }
-      const inheritedProps = Object.keys(VMenu.props).concat(Object.keys(Menuable.props))
-
-      // Later this might be filtered
-      for (const prop of inheritedProps) {
-        props[prop] = this[prop]
-      }
-
+      const props = this.$_menuProps
       props.activator = this.$refs['input-slot']
 
-      Object.assign(props, this.menuProps)
+      // Deprecate using menu props directly
+      // TODO: remove (2.0)
+      const inheritedProps = [...Object.keys(VMenu.options.props), ...Object.keys(Menuable.options.props)]
+
+      const deprecatedProps = Object.keys(this.$attrs).reduce((acc, attr) => {
+        if (inheritedProps.includes(camelize(attr))) acc.push(attr)
+        return acc
+      }, [])
+
+      for (const prop of deprecatedProps) {
+        props[camelize(prop)] = this.$attrs[prop]
+      }
+
+      // The warn process is a bit slow, so we won't do it in prod
+      if (process.env.NODE_ENV !== 'production') {
+        if (deprecatedProps.length) {
+          const multiple = deprecatedProps.length > 1
+          const replacement = JSON.stringify(deprecatedProps.reduce((acc, p) => {
+            acc[camelize(p)] = this.$attrs[p]
+            return acc
+          }, {}), null, multiple ? 2 : 0).replace(/"([^(")"]+)":/g, '$1:').replace(/"/g, '\'')
+          const props = deprecatedProps.map(p => `'${p}'`).join(', ')
+          const separator = multiple ? '\n' : '\''
+
+          consoleWarn(`${props} ${multiple ? 'are' : 'is'} deprecated, use ${separator}menu-props="${replacement}"${separator} instead`, this)
+        }
+      }
 
       // Attach to root el so that
       // menu covers prepend/append icons

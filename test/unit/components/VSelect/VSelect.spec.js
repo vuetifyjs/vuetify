@@ -226,7 +226,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     const wrapper = mount(VSelect, {
       propsData: {
-        contentClass: 'v-menu-class',
+        menuProps: { contentClass: 'v-menu-class' },
         items
       }
     })

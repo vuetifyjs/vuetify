@@ -287,3 +287,11 @@ export function remapInternalIcon (vm: Vue, iconName: string): string {
 export function keys<O> (o: O) {
   return Object.keys(o) as (keyof O)[]
 }
+
+/**
+ * Camelize a hyphen-delimited string.
+ */
+const camelizeRE = /-(\w)/g
+export const camelize = (str: string): string => {
+  return str.replace(camelizeRE, (_, c) => c ? c.toUpperCase() : '')
+}

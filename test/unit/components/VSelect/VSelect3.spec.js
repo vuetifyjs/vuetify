@@ -48,7 +48,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.vm.virtualizedItems.length).toBe(20)
 
-    wrapper.setProps({ auto: true })
+    wrapper.setProps({ menuProps: 'auto' })
 
     expect(wrapper.vm.virtualizedItems.length).toBe(100)
   })
@@ -157,10 +157,12 @@ test('VSelect', ({ mount, compileToFunctions }) => {
   it('should nudge select menu', () => {
     const wrapper = mount(VSelect, {
       propsData: {
-        nudgeTop: 5,
-        nudgeRight: 5,
-        nudgeBottom: 5,
-        nudgeLeft: 5
+        menuProps: {
+          nudgeTop: 5,
+          nudgeRight: 5,
+          nudgeBottom: 5,
+          nudgeLeft: 5
+        }
       }
     })
 
