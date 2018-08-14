@@ -147,8 +147,10 @@ rtl(v-text-field-rtl, "v-text-field")
       transform: translateY(-18px) scale(.75)
 
   & > .v-input__control > .v-input__slot
-    cursor: text
     transition: background $primary-transition
+
+  &:not(.v-select) > .v-input__control > .v-input__slot
+    cursor: text
 
     &:before,
     &:after
