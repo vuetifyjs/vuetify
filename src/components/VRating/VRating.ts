@@ -64,6 +64,7 @@ export default mixins(
       type: [Number, String],
       default: 5
     },
+    clearable: Boolean,
     readonly: Boolean,
     hover: Boolean,
     value: {
@@ -128,7 +129,12 @@ export default mixins(
       return (e: MouseEvent) => {
         if (this.readonly) return
 
-        this.internalValue = this.genHoverIndex(e, i)
+        const newValue = this.genHoverIndex(e, i)
+        if (this.clearable && this.internalValue === newValue) {
+          this.internalValue = 0
+        } else {
+          this.internalValue = newValue
+        }
       }
     },
     createProps (i: number): ItemSlotProps {
