@@ -107,7 +107,7 @@ export default {
   },
 
   render (h) {
-    const link = this.generateRouteLink()
+    const link = this.generateRouteLink(this.classes)
     const { data } = link
 
     // If disabled, use div as anchor tags do not support

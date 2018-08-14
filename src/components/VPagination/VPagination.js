@@ -39,8 +39,7 @@ export default {
 
   data () {
     return {
-      maxButtons: 0,
-      defaultColor: 'primary'
+      maxButtons: 0
     }
   },
 
@@ -136,15 +135,16 @@ export default {
       ])
     },
     genItem (h, i) {
-      return h('button', {
+      const color = (i === this.value) && (this.color || 'primary')
+      return h('button', this.setBackgroundColor(color, {
         staticClass: 'v-pagination__item',
-        class: (i === this.value) ? this.addBackgroundColorClassChecks({
-          'v-pagination__item--active': true
-        }) : {},
+        class: {
+          'v-pagination__item--active': i === this.value
+        },
         on: {
           click: () => this.$emit('input', i)
         }
-      }, [i])
+      }), [i])
     },
     genItems (h) {
       return this.items.map((i, index) => {

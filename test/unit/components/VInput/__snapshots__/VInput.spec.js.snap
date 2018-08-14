@@ -44,7 +44,7 @@ exports[`VInput.js should apply theme to label, counter, messages and icons 1`] 
 
 exports[`VInput.js should be in an error state 1`] = `
 
-<div class="v-input v-input--has-state error--text theme--light">
+<div class="v-input v-input--has-state theme--light error--text">
   <div class="v-input__control">
     <div class="v-input__slot">
     </div>
@@ -59,7 +59,7 @@ exports[`VInput.js should be in an error state 1`] = `
 
 exports[`VInput.js should be in an error state 2`] = `
 
-<div class="v-input v-input--has-state error--text theme--light">
+<div class="v-input v-input--has-state theme--light error--text">
   <div class="v-input__control">
     <div class="v-input__slot">
     </div>

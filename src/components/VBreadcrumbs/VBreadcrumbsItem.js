@@ -25,7 +25,7 @@ export default {
   },
 
   render (h) {
-    const { tag, data } = this.generateRouteLink()
+    const { tag, data } = this.generateRouteLink(this.classes)
 
     return h('li', [
       h(tag, data, this.$slots.default)

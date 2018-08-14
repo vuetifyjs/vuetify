@@ -80,7 +80,6 @@ export default {
 
   data: vm => ({
     app: {},
-    defaultColor: 'primary',
     isActive: false,
     keyPressed: 0,
     lazyValue: typeof vm.value !== 'undefined' ? vm.value : Number(vm.min),
@@ -111,14 +110,14 @@ export default {
     },
     computedColor () {
       if (this.disabled) return null
-      return this.validationState || this.color || this.defaultColor
+      return this.validationState || this.color || 'primary'
     },
     computedTrackColor () {
       return this.disabled ? null : (this.trackColor || null)
     },
     computedThumbColor () {
       if (this.disabled || !this.isDirty) return null
-      return this.validationState || this.thumbColor || this.color || this.defaultColor
+      return this.validationState || this.thumbColor || this.color || 'primary'
     },
     internalValue: {
       get () {
@@ -310,10 +309,9 @@ export default {
       }, ticks)
     },
     genThumb () {
-      return this.$createElement('div', {
-        staticClass: 'v-slider__thumb',
-        'class': this.addBackgroundColorClassChecks({}, this.computedThumbColor)
-      })
+      return this.$createElement('div', this.setBackgroundColor(this.computedThumbColor, {
+        staticClass: 'v-slider__thumb'
+      }))
     },
     genThumbContainer (value, valueWidth, isActive, onDrag) {
       const children = [this.genThumb()]
@@ -321,12 +319,12 @@ export default {
       const thumbLabelContent = this.getLabel(value)
       this.showThumbLabel && children.push(this.genThumbLabel(thumbLabelContent))
 
-      return this.$createElement('div', {
+      return this.$createElement('div', this.setTextColor(this.computedThumbColor, {
         staticClass: 'v-slider__thumb-container',
-        'class': this.addTextColorClassChecks({
+        'class': {
           'v-slider__thumb-container--is-active': isActive,
           'v-slider__thumb-container--show-label': this.showThumbLabel
-        }, this.computedThumbColor),
+        },
         style: {
           transition: this.trackTransition,
           left: `${this.$vuetify.rtl ? 100 - valueWidth : valueWidth}%`
@@ -335,7 +333,7 @@ export default {
           touchstart: onDrag,
           mousedown: onDrag
         }
-      }, children)
+      }), children)
     },
     genThumbLabel (content) {
       const size = convertToUnit(this.thumbSize)
@@ -352,29 +350,26 @@ export default {
             }
           ]
         }, [
-          this.$createElement('div', {
+          this.$createElement('div', this.setBackgroundColor(this.computedThumbColor, {
             staticClass: 'v-slider__thumb-label',
-            'class': this.addBackgroundColorClassChecks({}, this.computedThumbColor),
             style: {
               height: size,
               width: size
             }
-          }, [content])
+          }), [content])
         ])
       ])
     },
     genTrackContainer () {
       const children = [
-        this.$createElement('div', {
+        this.$createElement('div', this.setBackgroundColor(this.computedTrackColor, {
           staticClass: 'v-slider__track',
-          'class': this.addBackgroundColorClassChecks({}, this.computedTrackColor),
           style: this.trackStyles
-        }),
-        this.$createElement('div', {
+        })),
+        this.$createElement('div', this.setBackgroundColor(this.computedColor, {
           staticClass: 'v-slider__track-fill',
-          'class': this.addBackgroundColorClassChecks(),
           style: this.trackFillStyles
-        })
+        }))
       ]
 
       return this.$createElement('div', {

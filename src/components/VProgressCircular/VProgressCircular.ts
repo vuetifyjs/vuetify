@@ -47,11 +47,10 @@ export default mixins(Colorable).extend({
     },
 
     classes (): object {
-      return this.addTextColorClassChecks({
-        'v-progress-circular': true,
+      return {
         'v-progress-circular--indeterminate': this.indeterminate,
         'v-progress-circular--button': this.button
-      })
+      }
     },
 
     normalizedValue (): number {
@@ -132,13 +131,14 @@ export default mixins(Colorable).extend({
   },
 
   render (h): VNode {
-    const info = h('div', { class: 'v-progress-circular__info' }, [this.$slots.default])
+    const info = h('div', { staticClass: 'v-progress-circular__info' }, [this.$slots.default])
     const svg = this.genSvg(h)
 
-    return h('div', {
+    return h('div', this.setTextColor(this.color, {
+      staticClass: 'v-progress-circular',
       class: this.classes,
       style: this.styles,
       on: this.$listeners
-    }, [svg, info])
+    }), [svg, info])
   }
 })

@@ -338,24 +338,20 @@ export default {
       // Item may be an object
       // TODO: Remove JSON.stringify
       const key = JSON.stringify(this.getValue(item))
-
+      const color = index === this.selectedIndex && this.color
       const isDisabled = (
         this.disabled ||
         this.readonly ||
         this.getDisabled(item)
       )
 
-      const classes = index === this.selectedIndex
-        ? this.addTextColorClassChecks()
-        : {}
-
-      classes['v-select__selection--disabled'] = isDisabled
-
-      return this.$createElement('div', {
+      return this.$createElement('div', this.setTextColor(color, {
         staticClass: 'v-select__selection v-select__selection--comma',
-        'class': classes,
+        'class': {
+          'v-select__selection--disabled': isDisabled
+        },
         key
-      }, `${this.getText(item)}${last ? '' : ', '}`)
+      }), `${this.getText(item)}${last ? '' : ', '}`)
     },
     genDefaultSlot () {
       const selections = this.genSelections()

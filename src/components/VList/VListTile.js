@@ -39,10 +39,8 @@ export default {
   computed: {
     listClasses () {
       return this.disabled
-        ? 'v-list--disabled'
-        : this.color
-          ? this.addTextColorClassChecks()
-          : this.defaultColor
+        ? { 'v-list--disabled': true }
+        : undefined
     },
     classes () {
       return {
@@ -62,7 +60,7 @@ export default {
 
   render (h) {
     const isRouteLink = !this.inactive && this.isLink
-    const { tag, data } = isRouteLink ? this.generateRouteLink() : {
+    const { tag, data } = isRouteLink ? this.generateRouteLink(this.classes) : {
       tag: this.tag || 'div',
       data: {
         class: this.classes
@@ -71,7 +69,7 @@ export default {
 
     data.attrs = Object.assign({}, data.attrs, this.$attrs)
 
-    return h('div', {
+    return h('div', this.setTextColor(!this.disabled && this.color, {
       'class': this.listClasses,
       attrs: {
         disabled: this.disabled
@@ -79,6 +77,6 @@ export default {
       on: {
         ...this.$listeners
       }
-    }, [h(tag, data, this.$slots.default)])
+    }), [h(tag, data, this.$slots.default)])
   }
 }

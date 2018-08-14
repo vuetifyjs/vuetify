@@ -199,12 +199,11 @@ export default mixins(
         }
       }
 
-      return this.$createElement(VIcon, {
+      return this.$createElement(VIcon, this.setTextColor(this.getColor(props), {
         directives: this.directives,
         props: this.iconProps,
-        class: this.addTextColorClassChecks({}, this.getColor(props)),
         on: listeners
-      }, [this.getIconName(props)])
+      }), [this.getIconName(props)])
     }
   },
 
