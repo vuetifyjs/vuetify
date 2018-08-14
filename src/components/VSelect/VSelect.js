@@ -22,12 +22,12 @@ import ClickOutside from '../../directives/click-outside'
 import { camelize, getPropertyFromItem, keyCodes } from '../../util/helpers'
 import { consoleError, consoleWarn } from '../../util/console'
 
-export const defaultMenuProps = () => ({
+export const defaultMenuProps = {
   closeOnClick: false,
   closeOnContentClick: false,
   openOnClick: false,
   maxHeight: 300
-})
+}
 
 /* @vue/component */
 export default {
@@ -87,7 +87,7 @@ export default {
     },
     menuProps: {
       type: [String, Array, Object],
-      default: defaultMenuProps
+      default: () => defaultMenuProps
     },
     multiple: Boolean,
     openOnClear: Boolean,
@@ -209,6 +209,7 @@ export default {
       }
 
       return {
+        ...defaultMenuProps,
         value: this.menuCanShow && this.isMenuActive,
         nudgeBottom: this.nudgeBottom
           ? this.nudgeBottom

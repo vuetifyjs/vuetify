@@ -48,7 +48,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.vm.virtualizedItems.length).toBe(20)
 
-    wrapper.setProps({ menuProps: { auto: true } })
+    wrapper.setProps({ menuProps: 'auto' })
 
     expect(wrapper.vm.virtualizedItems.length).toBe(100)
   })

@@ -8,12 +8,12 @@ import VTextField from '../VTextField/VTextField'
 // Utils
 import { keyCodes } from '../../util/helpers'
 
-const defaultMenuProps = () => ({
-  ...VSelectMenuProps(),
+const defaultMenuProps = {
+  ...VSelectMenuProps,
   offsetY: true,
   offsetOverflow: true,
   transition: false
-})
+}
 
 /* @vue/component */
 export default {
@@ -50,7 +50,7 @@ export default {
     },
     menuProps: {
       type: VSelect.props.menuProps.type,
-      default: defaultMenuProps
+      default: () => defaultMenuProps
     }
   },
 
@@ -121,7 +121,10 @@ export default {
     $_menuProps () {
       const props = VSelect.computed.$_menuProps.call(this)
       props.contentClass = `v-autocomplete__content ${props.contentClass || ''}`.trim()
-      return props
+      return {
+        ...defaultMenuProps,
+        ...props
+      }
     },
     searchIsDirty () {
       return this.internalSearch != null &&
