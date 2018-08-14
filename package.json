@@ -13,7 +13,7 @@
   "jsdelivr": "dist/vuetify.js",
   "types": "types/index.d.ts",
   "scripts": {
-    "watch": "cross-env TARGET=production webpack --config build/config.js --progress --hide-modules --watch",
+    "watch": "cross-env TARGET=development webpack --config build/config.js --progress --hide-modules --watch",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.config.js --hot",
     "build": "concurrently \"yarn build:dist --no-progress\" \"yarn build:es5\" -n\"dist,es5\" --kill-others-on-fail -r",
     "build:dev": "cross-env NODE_ENV=production node build/webpack.dev.config.js",

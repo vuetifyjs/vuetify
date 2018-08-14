@@ -22,8 +22,10 @@ v-select($material)
 theme(v-select, 'v-select')
 
 .v-select
-  cursor: pointer
   position: relative // For **attach** prop
+
+  .v-input__slot
+    cursor: pointer
 
   .v-menu
     flex: 1 1 auto
