@@ -16,6 +16,10 @@ export default mixins(
   name: 'v-snackbar',
 
   props: {
+    appear: {
+      type: Boolean,
+      default: false,
+    },
     autoHeight: Boolean,
     multiLine: Boolean,
     // TODO: change this to closeDelay to match other API in delayable.js
@@ -92,7 +96,7 @@ export default mixins(
     }
 
     return h('transition', {
-      attrs: { name: 'v-snack-transition' }
+      attrs: { name: 'v-snack-transition', appear: this.appear }
     }, children)
   }
 })
