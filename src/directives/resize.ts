@@ -12,12 +12,12 @@ interface ResizeVNodeDirective extends VNodeDirective {
   options?: boolean | AddEventListenerOptions
 }
 
-function inserted (el: ResizeHTMLElement, binding: ResizeVNodeDirective) {
+function inserted (el: HTMLElement, binding: ResizeVNodeDirective) {
   const callback = binding.value
   const options = binding.options || { passive: true }
 
   window.addEventListener('resize', callback, options)
-  el._onResize = {
+  ;(el as ResizeHTMLElement)._onResize = {
     callback,
     options
   }
@@ -27,11 +27,11 @@ function inserted (el: ResizeHTMLElement, binding: ResizeVNodeDirective) {
   }
 }
 
-function unbind (el: ResizeHTMLElement) {
-  const { callback, options } = el._onResize
+function unbind (el: HTMLElement) {
+  const { callback, options } = (el as ResizeHTMLElement)._onResize
 
   window.removeEventListener('resize', callback, options)
-  delete el._onResize
+  delete (el as ResizeHTMLElement)._onResize
 }
 
 export default {
