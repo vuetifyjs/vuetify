@@ -5,7 +5,7 @@ export default {
     pageText: '{0}-{1} van {2}',
     noResultsText: 'Geen overeenkomende resultaten gevonden',
     nextPage: 'Volgende pagina',
-    prevPage: 'Previous page'
+    prevPage: 'Vorige pagina'
   },
   dataTable: {
     rowsPerPageText: 'Rijen per pagina:'
