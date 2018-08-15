@@ -100,10 +100,10 @@ test('VStepperContent.js', ({ mount }) => {
   it('should set height', async () => {
     const wrapper = mount(VStepperContent, {
       attachToDocument: true,
-      propsData: { step: 1, isVertical: true }
+      propsData: { step: 1 }
     })
     
-    wrapper.setData({ isActive: false })
+    wrapper.setData({ isActive: false, isVertical: true })
     await wrapper.vm.$nextTick()
 
     wrapper.setData({ isActive: true })
@@ -126,10 +126,10 @@ test('VStepperContent.js', ({ mount }) => {
   it('should set height only if isActive', async () => {
     const wrapper = mount(VStepperContent, {
       attachToDocument: true,
-      propsData: { step: 1, isVertical: true }
+      propsData: { step: 1 }
     })
 
-    wrapper.setData({ isActive: false })
+    wrapper.setData({ isActive: false, isVertical: true })
     await wrapper.vm.$nextTick()
 
     wrapper.setData({ isActive: true })
