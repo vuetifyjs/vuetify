@@ -1,5 +1,5 @@
 import { test, resizeWindow } from '@/test'
-import breakpointMixin from '@/components/Vuetify/mixins/breakpoint'
+import breakpointMixinFactory from '@/components/Vuetify/mixins/breakpoint'
 
 test('breakpoint.ts', ({ mount }) => {
   const scenarios = [
@@ -230,15 +230,13 @@ test('breakpoint.ts', ({ mount }) => {
   ]
 
   scenarios.forEach(scenario => {
-    it('should calculate breakpoint for ' + scenario.description, () => {
+    it('should calculate breakpoint for ' + scenario.description, async () => {
       const wrapper = mount({
-        mixins: [breakpointMixin],
+        mixins: [breakpointMixinFactory()],
         render: h => h('div')
       })
-      wrapper.setData({
-        clientWidth: scenario.width,
-        clientHeight: scenario.height
-      })
+
+      await resizeWindow(scenario.width, scenario.height)
       const breakpoint = wrapper.vm.breakpoint
 
       expect(breakpoint.width).toBe(scenario.width)
@@ -253,7 +251,7 @@ test('breakpoint.ts', ({ mount }) => {
 
   it('should update breakpoint on window resize', async () => {
     const wrapper = mount({
-      mixins: [breakpointMixin],
+      mixins: [breakpointMixinFactory()],
       render: h => h('div')
     })
 
@@ -263,7 +261,7 @@ test('breakpoint.ts', ({ mount }) => {
 
   it('should allow to override default thresholds', async () => {
     const wrapper = mount({
-      mixins: [breakpointMixin],
+      mixins: [breakpointMixinFactory()],
       render: h => h('div')
     })
 
