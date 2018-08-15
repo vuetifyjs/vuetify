@@ -435,7 +435,7 @@ export default {
           const props = deprecatedProps.map(p => `'${p}'`).join(', ')
           const separator = multiple ? '\n' : '\''
 
-          consoleWarn(`${props} ${multiple ? 'are' : 'is'} deprecated, use ${separator}menu-props="${replacement}"${separator} instead`, this)
+          consoleWarn(`${props} ${multiple ? 'are' : 'is'} deprecated, use ${separator}:menu-props="${replacement}"${separator} instead`, this)
         }
       }
 
