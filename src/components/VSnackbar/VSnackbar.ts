@@ -18,7 +18,7 @@ export default mixins(
   props: {
     appear: {
       type: Boolean,
-      default: false,
+      default: false
     },
     autoHeight: Boolean,
     multiLine: Boolean,
