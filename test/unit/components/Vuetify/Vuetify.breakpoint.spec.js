@@ -259,7 +259,7 @@ test('breakpoint.ts', ({ mount }) => {
     expect(wrapper.vm.breakpoint.width).toBe(715)
   })
 
-  it('should allow to override default thresholds', async () => {
+  it('should allow to change thresholds during runtime', async () => {
     const wrapper = mount({
       mixins: [breakpointMixinFactory()],
       render: h => h('div')
@@ -274,4 +274,24 @@ test('breakpoint.ts', ({ mount }) => {
     await resizeWindow(399)
     expect(wrapper.vm.breakpoint.xs).toBe(true)
   })
+
+  it('should allow to override defaults via factory args', async () => {
+    const wrapper = mount({
+      mixins: [
+        breakpointMixinFactory({
+          thresholds: {
+            xs: 400
+          }
+        })
+      ],
+      render: h => h('div')
+    })
+
+    await resizeWindow(401)
+    expect(wrapper.vm.breakpoint.xs).toBe(false)
+
+    await resizeWindow(399)
+    expect(wrapper.vm.breakpoint.xs).toBe(true)
+  })
+
 })
