@@ -104,10 +104,10 @@ test('VStepperContent.js', ({ mount }) => {
     })
     
     wrapper.setData({ isActive: false })
-    
     await wrapper.vm.$nextTick()
 
     wrapper.setData({ isActive: true })
+    await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.height).toBe(0)
 
@@ -116,6 +116,7 @@ test('VStepperContent.js', ({ mount }) => {
     expect(wrapper.vm.height).toBe('auto')
 
     wrapper.setData({ isActive: false })
+    await wrapper.vm.$nextTick()
 
     await new Promise(resolve => setTimeout(resolve, 10))
 
@@ -129,16 +130,15 @@ test('VStepperContent.js', ({ mount }) => {
     })
 
     wrapper.setData({ isActive: false })
-    
     await wrapper.vm.$nextTick()
 
     wrapper.setData({ isActive: true })
-    
     await wrapper.vm.$nextTick()
     
     expect(wrapper.vm.height).toBe(0)
     
     wrapper.setData({ isActive: false })
+    await wrapper.vm.$nextTick()
     
     await new Promise(resolve => setTimeout(resolve, 450))
 
