@@ -601,7 +601,7 @@ export default {
           this.content.scrollHeight -
           (this.content.scrollTop +
           this.content.clientHeight)
-        ) < 200
+        ) < 500
         if (showMoreItems && !this.isLoadingMoreItems) {
           if (typeof this.loadMoreItems === 'function') {
             this.isLoadingMoreItems = true
