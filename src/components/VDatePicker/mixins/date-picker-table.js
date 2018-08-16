@@ -87,7 +87,7 @@ export default {
         on: (this.disabled || !isAllowed) ? {} : {
           click: () => this.$emit('input', value),
           mouseenter: () => this.$emit('mouseenter', value),
-          mouseleave: () => this.$emit('mouseleave')
+          mouseleave: () => this.$emit('mouseleave', value)
         }
       }))
     },

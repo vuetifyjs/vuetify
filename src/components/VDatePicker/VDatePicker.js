@@ -287,21 +287,11 @@ export default {
       this.inputDay = parseInt(value.split('-')[2], 10)
       this.emitInput(this.inputDate)
     },
-    mouseEnter (value) {
-      this.inputYear = parseInt(value.split('-')[0], 10)
-      this.inputMonth = parseInt(value.split('-')[1], 10) - 1
-      this.inputDay = parseInt(value.split('-')[2], 10)
-      const output = this.multiple
-        ? (
-          this.value.indexOf(value) === -1
-            ? this.value.concat([value])
-            : this.value.filter(x => x !== value)
-        )
-        : value
-      this.$emit('mouseover', output)
+    dateMouseEnter (value) {
+      this.$emit('date-mouse-enter', value)
     },
-    mouseLeave () {
-      this.$emit('mouseover', null)
+    dateMouseLeave (value) {
+      this.$emit('date-mouse-leave', value)
     },
     genPickerTitle () {
       return this.$createElement(VDatePickerTitle, {
@@ -365,8 +355,8 @@ export default {
         ref: 'table',
         on: {
           input: this.dateClick,
-          mouseenter: this.mouseEnter,
-          mouseleave: this.mouseLeave,
+          mouseenter: this.dateMouseEnter,
+          mouseleave: this.dateMouseLeave,
           tableDate: value => this.tableDate = value
         }
       })
