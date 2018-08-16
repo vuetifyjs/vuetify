@@ -95,7 +95,6 @@ export default {
 
       this.hasInput = true
       this.internalValue = value
-      this.$emit('change', value)
       this.setActiveRadio()
       this.$nextTick(this.validate)
     },

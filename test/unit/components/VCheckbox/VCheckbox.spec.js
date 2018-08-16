@@ -15,6 +15,7 @@ test('VCheckbox.js', ({ mount }) => {
     wrapper.vm.$on('change', change)
 
     input.trigger('click')
+    expect(change).toHaveBeenCalledTimes(1)
     expect(change).toBeCalledWith(true)
   })
 
