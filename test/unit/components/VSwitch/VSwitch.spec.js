@@ -35,10 +35,12 @@ test('VSwitch.js', ({ mount }) => {
     wrapper.vm.$on('change', change)
     touch(wrapper.first('.v-input--selection-controls__ripple')).start(0, 0).end(20, 0)
     expect(change).toBeCalledWith(true)
+    expect(change).toHaveBeenCalledTimes(1)
 
     wrapper.setProps({ inputValue: true })
     touch(wrapper.first('.v-input--selection-controls__ripple')).start(0, 0).end(-20, 0)
     expect(change).toBeCalledWith(false)
+    expect(change).toHaveBeenCalledTimes(2)
   })
 
   it('shouldn not emit change event on swipe when not active', async () => {

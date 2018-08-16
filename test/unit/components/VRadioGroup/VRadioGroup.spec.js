@@ -73,6 +73,9 @@ test('VRadioGroup.vue', ({ mount }) => {
       }
     })
 
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
     expect(wrapper.vm.radios.length).toBe(2)
 
     const radios = wrapper.find(VRadio)
@@ -96,6 +99,8 @@ test('VRadioGroup.vue', ({ mount }) => {
 
     expect(one.vm.isActive).toBe(true)
     expect(two.vm.isActive).toBe(false)
+    expect(change).toHaveBeenCalledTimes(1)
+    expect(change).toHaveBeenCalledWith('foo')
   })
 
   it('should toggle radio - objects', async () => {
