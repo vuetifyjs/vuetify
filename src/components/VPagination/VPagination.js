@@ -5,6 +5,7 @@ import VIcon from '../VIcon'
 import Resize from '../../directives/resize'
 
 import Colorable from '../../mixins/colorable'
+import Themeable from '../../mixins/themeable'
 
 /* @vue/component */
 export default {
@@ -12,7 +13,7 @@ export default {
 
   directives: { Resize },
 
-  mixins: [Colorable],
+  mixins: [Colorable, Themeable],
 
   props: {
     circle: Boolean,
@@ -48,7 +49,8 @@ export default {
       return {
         'v-pagination': true,
         'v-pagination--circle': this.circle,
-        'v-pagination--disabled': this.disabled
+        'v-pagination--disabled': this.disabled,
+        ...this.themeClasses
       }
     },
 
