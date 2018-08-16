@@ -744,4 +744,45 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
 
     expect(wrapper.vm.isMenuActive).toBe(true)
   })
+
+  it('should open the menu when focused and items change', async () => {
+    const wrapper = mount(VAutocomplete, {
+      propsData: {
+        value: 1,
+        items: []
+      }
+    })
+
+    expect(wrapper.vm.isMenuActive).toBe(false)
+
+    const input = wrapper.first('input')
+    input.trigger('focus')
+
+    await wrapper.vm.$nextTick()
+    wrapper.setProps({ items: [{ text: 'foo', value: 1 }] })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.isMenuActive).toBe(true)
+  })
+
+  it('should not open the menu when focused and items change and configured not to', async () => {
+    const wrapper = mount(VAutocomplete, {
+      propsData: {
+        value: 1,
+        items: [],
+        openOnItemsChanged: false
+      }
+    })
+
+    expect(wrapper.vm.isMenuActive).toBe(false)
+
+    const input = wrapper.first('input')
+    input.trigger('focus')
+
+    await wrapper.vm.$nextTick()
+    wrapper.setProps({ items: [{ text: 'foo', value: 1 }] })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.isMenuActive).toBe(false)
+  })
 })
