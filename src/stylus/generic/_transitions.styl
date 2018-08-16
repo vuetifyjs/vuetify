@@ -154,6 +154,18 @@ transition-default()
   &-leave-to
     transform: translateY(15px)
 
+.scroll-y-transition
+  transition-default()
+
+  &-enter, &-leave-to
+    opacity: 0
+
+  &-enter
+    transform: translateY(-15px)
+
+  &-leave-to
+    transform: translateY(15px)
+
 .scroll-y-reverse-transition
   transition-default()
 
@@ -165,7 +177,6 @@ transition-default()
 
   &-leave-to
     transform: translateY(-15px)
-    transform: translateY(15px)
 
 .scroll-x-transition
   transition-default()
