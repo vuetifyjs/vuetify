@@ -1,14 +1,6 @@
 {
   "header": "Motion",
   "headerText": "Smooth animations help make a UI feel great. Using Vue's transition system and re-usable functional components, you can easily control the motion of your application. Most components can have their transition altered through the <code>transition</code> prop.",
-  "components": [
-    "v-fade-transition",
-    "v-slide-x-transition",
-    "v-slide-x-reverse-transition",
-    "v-slide-y-transition",
-    "v-slide-y-reverse-transition",
-    "v-scale-transition"
-  ],
   "examples": {
     "slideXTransitions": {
       "header": "Slide X transitions",

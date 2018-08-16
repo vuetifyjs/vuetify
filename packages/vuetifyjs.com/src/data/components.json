@@ -675,5 +675,22 @@
   "touch-support": {
     "components": ["v-touch"],
     "examples": ["default"]
+  },
+  "transitions": {
+    "components": [
+      "v-fade-transition",
+      "v-slide-x-transition",
+      "v-slide-x-reverse-transition",
+      "v-slide-y-transition",
+      "v-slide-y-reverse-transition",
+      "v-scale-transition"
+    ],
+    "examples": [
+      "slideXTransitions",
+      "slideYTransitions",
+      "scaleTransition",
+      "fadeTransition",
+      "customOrigin"
+    ]
   }
 }
