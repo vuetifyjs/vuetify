@@ -29,6 +29,7 @@ export default {
       required: true
     },
     scrollable: Boolean,
+    readonly: Boolean,
     rotate: {
       type: Number,
       default: 0
@@ -215,7 +216,7 @@ export default {
         'v-time-picker-clock--indeterminate': this.value == null,
         ...this.themeClasses
       },
-      on: {
+      on: this.readonly ? undefined : {
         mousedown: this.onMouseDown,
         mouseup: this.onMouseUp,
         mouseleave: () => (this.isDragging && this.onMouseUp()),
@@ -231,7 +232,7 @@ export default {
       ref: 'clock'
     }
 
-    this.scrollable && (data.on.wheel = this.wheel)
+    !this.readonly && this.scrollable && (data.on.wheel = this.wheel)
 
     return this.$createElement('div', data, [
       this.genHand(),
