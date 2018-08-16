@@ -116,7 +116,8 @@ export default {
       ? vm.value
       : vm.multiple ? [] : undefined,
     selectedIndex: -1,
-    selectedItems: []
+    selectedItems: [],
+    isLoadingMoreItems: false
   }),
 
   computed: {
@@ -601,10 +602,13 @@ export default {
           (this.content.scrollTop +
           this.content.clientHeight)
         ) < 200
-        if (showMoreItems) {
+        if (showMoreItems && !this.isLoadingMoreItems) {
           if (typeof this.loadMoreItems === 'function') {
+            this.isLoadingMoreItems = true
             this.loadMoreItems().then(() => {
               this.lastItem += 20
+            }).finally(() => {
+              this.isLoadingMoreItems = false
             })
           } else {
             this.lastItem += 20
