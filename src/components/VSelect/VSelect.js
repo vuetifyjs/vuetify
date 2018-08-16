@@ -596,6 +596,7 @@ export default {
       if (!this.isMenuActive) {
         requestAnimationFrame(() => (this.content.scrollTop = 0))
       } else {
+        // if there are no more items in the current item list and the loadMoreItems callback prop is not set, do nothing
         if (this.lastItem >= this.computedItems.length && this.loadMoreItems === null) return
         const showMoreItems = (
           this.content.scrollHeight -
@@ -603,6 +604,7 @@ export default {
           this.content.clientHeight)
         ) < 500
         if (showMoreItems && !this.isLoadingMoreItems) {
+          // if loadMoreItems prop is set, let the callback load more items
           if (typeof this.loadMoreItems === 'function') {
             this.isLoadingMoreItems = true
             this.loadMoreItems().then(() => {
@@ -610,6 +612,7 @@ export default {
             }).finally(() => {
               this.isLoadingMoreItems = false
             })
+            // else, default functionality load the next 20 items from the items prop
           } else {
             this.lastItem += 20
           }
