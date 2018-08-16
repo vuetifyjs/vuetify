@@ -69,6 +69,10 @@ export default {
       type: Array,
       default: () => []
     },
+    loadMoreItems: {
+      type: Function,
+      default: null
+    },
     itemAvatar: {
       type: [String, Array, Function],
       default: 'avatar'
@@ -591,16 +595,20 @@ export default {
       if (!this.isMenuActive) {
         requestAnimationFrame(() => (this.content.scrollTop = 0))
       } else {
-        if (this.lastItem >= this.computedItems.length) return
-
+        if (this.lastItem >= this.computedItems.length && this.loadMoreItems === null) return
         const showMoreItems = (
           this.content.scrollHeight -
           (this.content.scrollTop +
           this.content.clientHeight)
         ) < 200
-
         if (showMoreItems) {
-          this.lastItem += 20
+          if (typeof this.loadMoreItems === 'function') {
+            this.loadMoreItems().then(() => {
+              this.lastItem += 20
+            })
+          } else {
+            this.lastItem += 20
+          }
         }
       }
     },
