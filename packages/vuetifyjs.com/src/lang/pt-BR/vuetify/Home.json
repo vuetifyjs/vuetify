@@ -6,17 +6,17 @@
   "getHelp": "Obter ajuda",
   "features": [
     {
-      "img": "/doc-images/feature1.svg",
+      "img": "https://cdn.vuetifyjs.com/images/home/feature1.svg",
       "title": "Estruturas Prontas de Projetos",
       "text": "Vuetify vem pronto com 8 modelos pré-fabricados no vue-cli. Do simples HTML ao SSR completo, você estará pronto para desenvolver em minutos."
     },
     {
-      "img": "/doc-images/feature2.svg",
+      "img": "https://cdn.vuetifyjs.com/images/home/feature2.svg",
       "title": "Componentes do Material Semânticos",
       "text": "Esteja preparado para um conjunto de componentes especializados à sua disposição. Com mais de 80 no total, existe uma solução para qualquer aplicação."
     },
     {
-      "img": "/doc-images/feature3.svg",
+      "img": "https://cdn.vuetifyjs.com/images/home/feature3.svg",
       "title": "Comunidade Vibrante",
       "text": "Quando você se depara com um obstáculo, você precisa de assistência imediata. Vuetify oferece um chat de suporte em nossa crescente comunidade no Discord."
     }
