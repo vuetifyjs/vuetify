@@ -62,8 +62,14 @@ export function createSimpleTransition (
       }
 
       if (!context.props.mode) {
+        const group = context.props.group
+
         context.data.on.beforeLeave = (el: HTMLElement) => {
-          el.style.position = 'absolute'
+          // When using group, this helps Vue FLIP
+          // look correct when transitioning
+          // https://vuejs.org/v2/guide/transitions.html#List-Move-Transitions
+          if (group) el.style.display = 'none'
+          else el.style.position = 'absolute'
         }
       }
 
