@@ -5,6 +5,7 @@ html
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+  --thumb-size: 8px
 
 .application
   font-family: $body-font-family
@@ -13,3 +14,14 @@ html
 ::-ms-clear
 ::-ms-reveal
   display: none
+
+// Works on Chrome, Chrome for Android, Safari, Opera
+::-webkit-scrollbar {
+  width: var(--thumb-size)
+  height: var(--thumb-size)
+}
+::-webkit-scrollbar-thumb {
+  background-color: #cccccc
+  border-radius: calc(var(--thumb-size) / 2)
+  border: calc(var(--thumb-size) / 4) solid #ffffff
+}
