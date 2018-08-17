@@ -16,18 +16,7 @@ v-input--switch($material)
     .v-input--switch__track
       color: $material.selection-controls.track.disabled !important
 
-v-input--switch-rtl()
-  .v-input--selection-controls__ripple
-    left: auto
-    right: -14px
-
-  &.v-input--is-dirty
-    .v-input--selection-controls__ripple,
-    .v-input--switch__thumb
-      transform: translate(-16px, 0)
-
 theme(v-input--switch, "v-input--switch")
-rtl(v-input--switch-rtl, "v-input--switch")
 
 .v-input--switch
   &__track,

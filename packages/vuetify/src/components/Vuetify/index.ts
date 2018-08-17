@@ -41,6 +41,22 @@ const Vuetify: VuetifyPlugin = {
         rtl: opts.rtl,
         theme: theme(opts.theme)
       },
+      watch: {
+        rtl: {
+          handler (value: boolean) {
+            if (typeof document !== 'undefined')
+              document.documentElement!.dir = value ? 'rtl' : 'ltr'
+          },
+          immediate: true
+        },
+        'lang.current': {
+          handler (value: string) {
+            if (value && typeof document !== 'undefined')
+              document.documentElement!.lang = value
+          },
+          immediate: true
+        }
+      },
       methods: {
         goTo,
         t: lang.t.bind(lang)

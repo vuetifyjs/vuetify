@@ -30,12 +30,7 @@ export default {
   },
 
   computed: {
-    classes () {
-      return {
-        'application--is-rtl': this.$vuetify.rtl,
-        ...this.themeClasses
-      }
-    }
+    classes () { return this.themeClasses }
   },
 
   watch: {

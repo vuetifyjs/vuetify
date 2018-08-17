@@ -142,12 +142,20 @@ export default {
     computedPaddingLeft () {
       if (!this.app || this.clippedLeft) return 0
 
-      return this.$vuetify.application.left
+      if (this.$vuetify.rtl) {
+        return this.$vuetify.application.right
+      } else {
+        return this.$vuetify.application.left
+      }
     },
     computedPaddingRight () {
       if (!this.app || this.clippedRight) return 0
 
-      return this.$vuetify.application.right
+      if (this.$vuetify.rtl) {
+        return this.$vuetify.application.left
+      } else {
+        return this.$vuetify.application.right
+      }
     },
     computedTransform () {
       return !this.isActive

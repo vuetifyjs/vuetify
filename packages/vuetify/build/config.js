@@ -6,6 +6,7 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
 const base = require('./webpack.prod.config')
 const version = process.env.VERSION || require('../package.json').version
+const dirSuffix = process.env.DIRECTION ? `.${process.env.DIRECTION}` : ''
 
 const builds = {
   development: {
@@ -18,7 +19,7 @@ const builds = {
       },
       plugins: [
         new MiniCssExtractPlugin({
-          filename: 'vuetify.css'
+          filename: `vuetify${dirSuffix}.css`
         })
       ]
     }
@@ -32,7 +33,7 @@ const builds = {
       },
       plugins: [
         new MiniCssExtractPlugin({
-          filename: 'vuetify.min.css'
+          filename: `vuetify${dirSuffix}.min.css`
         })
       ],
       performance: {

@@ -68,51 +68,7 @@ v-text-field($material)
       .v-input__slot:hover
         border: 2px solid $material.text.primary
 
-v-text-field-rtl()
-  .v-label
-    transform-origin: top right
-
-  .v-counter
-    margin-left: 0
-    margin-right: 8px
-
-  &--enclosed
-    .v-input__append-outer
-      margin-left: 0
-      margin-right: 16px
-
-    .v-input__prepend-outer
-      margin-left: 16px
-      margin-right: 0
-
-  &--reverse
-    input
-      text-align: left
-
-    .v-label
-      transform-origin: top left
-
-  &__prefix
-    text-align: left
-    padding-right: 0
-    padding-left: 4px
-
-  &__suffix
-    padding-left: 0
-    padding-right: 4px
-
-  &--reverse
-    .v-text-field__prefix
-      text-align: right
-      padding-left: 0
-      padding-right: 4px
-
-    .v-text-field__suffix
-      padding-left: 0
-      padding-right: 4px
-
 theme(v-text-field, "v-text-field")
-rtl(v-text-field-rtl, "v-text-field")
 
 .v-text-field
   padding-top: $text-field-active-label-height

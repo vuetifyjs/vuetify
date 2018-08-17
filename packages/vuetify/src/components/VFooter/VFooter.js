@@ -52,11 +52,19 @@ export default {
       }
 
       if (this.computedPaddingLeft) {
-        styles.paddingLeft = `${this.computedPaddingLeft}px`
+        styles.paddingLeft = `${
+          this.$vuetify.rtl
+            ? this.computedPaddingRight
+            : this.computedPaddingLeft
+        }px`
       }
 
       if (this.computedPaddingRight) {
-        styles.paddingRight = `${this.computedPaddingRight}px`
+        styles.paddingRight = `${
+          this.$vuetify.rtl
+            ? this.computedPaddingLeft
+            : this.computedPaddingRight
+        }px`
       }
 
       if (this.computedMarginBottom) {

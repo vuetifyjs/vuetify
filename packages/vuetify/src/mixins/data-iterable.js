@@ -256,9 +256,7 @@ export default {
       )
     },
     updatePagination (val) {
-      const pagination = this.hasPagination
-        ? this.pagination
-        : this.defaultPagination
+      const pagination = this.computedPagination
       const updatedPagination = Object.assign({}, pagination, val)
       this.$emit('update:pagination', updatedPagination)
 

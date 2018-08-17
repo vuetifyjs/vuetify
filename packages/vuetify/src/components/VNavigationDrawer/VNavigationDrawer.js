@@ -90,7 +90,7 @@ export default {
     calculatedTransform () {
       if (this.isActive) return 0
 
-      return this.right
+      return Boolean(this.right) !== Boolean(this.$vuetify.rtl)
         ? this.calculatedWidth
         : -this.calculatedWidth
     },
