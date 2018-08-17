@@ -103,7 +103,7 @@ export default {
       this.height = 0
 
       // Give the collapsing element time to collapse
-      setTimeout(() => (this.height = (scrollHeight || 'auto')), 450)
+      setTimeout(() => this.isActive && (this.height = (scrollHeight || 'auto')), 450)
     },
     leave () {
       this.height = this.$refs.wrapper.clientHeight
