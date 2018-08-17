@@ -36,9 +36,7 @@ export default CalendarWithIntervals.extend({
     genHeadIntervals (): VNode {
       return this.$createElement('div', {
         staticClass: 'v-calendar-daily__intervals-head'
-      }, [
-
-      ])
+      })
     },
     genHeadDays (): VNode[] {
       return this.days.map(this.genHeadDay)
@@ -182,9 +180,7 @@ export default CalendarWithIntervals.extend({
       }, [
         this.$createElement('div', {
           staticClass: 'v-calendar-daily__interval-text'
-        },
-        label
-        )
+        }, label)
       ])
     }
   },
@@ -198,7 +194,7 @@ export default CalendarWithIntervals.extend({
         }
       }
     }, [
-      this.hideHeader ? '' : this.genHead(),
+      !this.hideHeader ? this.genHead() : '',
       this.genBody()
     ])
   }

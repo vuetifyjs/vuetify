@@ -40,9 +40,7 @@ export function parseTimestamp (input: string, now?: VTimestamp): VTimestamp | n
   // YYYY-MM-DD hh:mm:ss
   const parts = PARSE_REGEX.exec(input)
 
-  if (!parts) {
-    return null
-  }
+  if (!parts) return null
 
   const timestamp: VTimestamp = {
     date: input,

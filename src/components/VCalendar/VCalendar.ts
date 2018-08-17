@@ -20,10 +20,6 @@ export default CalendarWithIntervals.extend({
     }
   },
 
-  methods: {
-
-  },
-
   render (h): VNode {
     return h('div', {
       class: this.classes

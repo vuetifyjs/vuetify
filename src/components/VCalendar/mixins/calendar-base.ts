@@ -21,8 +21,6 @@ import {
 export default mixins(Colorable, Themeable, Times, Mouse).extend({
   name: 'calendar-base',
 
-  // depends on: maxDays
-
   props: {
     start: {
       type: String,

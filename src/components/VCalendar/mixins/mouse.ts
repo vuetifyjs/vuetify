@@ -43,9 +43,7 @@ export default Vue.extend({
       for (const event in events) {
         const eventOptions = events[event]
 
-        if (!this.$listeners[event]) {
-          continue
-        }
+        if (!this.$listeners[event]) continue
 
         // TODO somehow pull in modifiers
 
@@ -68,7 +66,7 @@ export default Vue.extend({
         }
 
         if (key in on) {
-          if (on[key] instanceof Array) {
+          if (Array.isArray(on[key])) {
             (on[key] as MouseHandler[]).push(handler)
           } else {
             on[key] = [on[key], handler] as MouseHandler[]
