@@ -29,6 +29,7 @@ export default VResponsive.extend({
       type: [String, Object],
       default: ''
     } as PropValidator<string | srcObject>,
+    gradient: String,
     lazySrc: String,
     srcset: String,
     sizes: String,
@@ -73,7 +74,11 @@ export default VResponsive.extend({
     __cachedImage (): VNode | never[] {
       if (!(this.normalisedSrc.src || this.normalisedSrc.lazySrc)) return []
 
+      const backgroundImage: string[] = []
       const src = this.isLoading ? this.normalisedSrc.lazySrc : this.currentSrc
+
+      if (this.gradient) backgroundImage.push(`linear-gradient(${this.gradient})`)
+      if (src) backgroundImage.push(`url("${src}")`)
 
       return this.$createElement('transition', {
         attrs: {
@@ -89,7 +94,7 @@ export default VResponsive.extend({
             'v-image__image--cover': !this.contain
           },
           style: {
-            backgroundImage: src ? `url("${src}")` : undefined,
+            backgroundImage: backgroundImage.join(', '),
             backgroundPosition: this.position
           },
           key: +this.isLoading
