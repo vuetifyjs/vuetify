@@ -47,7 +47,7 @@ export default {
     noFilter: Boolean,
     openOnItemsChanged: {
       type: Boolean,
-      default: true
+      default: false
     },
     searchInput: {
       default: undefined
