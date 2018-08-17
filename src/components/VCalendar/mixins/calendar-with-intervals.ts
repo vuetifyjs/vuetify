@@ -18,8 +18,6 @@ import {
 export default CalendarBase.extend({
   name: 'calendar-with-intervals',
 
-  // depends on: maxDays
-
   props: {
     maxDays: {
       type: Number,
