@@ -21,8 +21,7 @@ export default {
     noTitle: Boolean,
     width: {
       type: [Number, String],
-      default: 290,
-      validator: value => parseInt(value, 10) > 0
+      default: 290
     }
   },
 
@@ -38,7 +37,6 @@ export default {
     genPicker (staticClass) {
       return this.$createElement(VPicker, {
         staticClass,
-        class: this.fullWidth ? ['v-picker--full-width'] : [],
         props: {
           color: this.headerColor || this.color,
           dark: this.dark,
