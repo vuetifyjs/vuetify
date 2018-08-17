@@ -49,6 +49,23 @@ test('VTimePickerClock.js', ({ mount }) => {
     expect(input).toBeCalledWith(3)
   })
 
+  it('should not emit input event on wheel if readonly and scrollable', () => {
+    const wrapper = mount(VTimePickerClock, {
+      propsData: {
+        max: 10,
+        min: 1,
+        value: 6,
+        scrollable: true,
+        readonly: true
+      }
+    })
+
+    const input = jest.fn()
+    wrapper.vm.$on('input', input)
+    wrapper.trigger('wheel')
+    expect(input).not.toBeCalled()
+  })
+
   it('should emit input event on wheel if scrollable and has allowedValues', () => {
     const wrapper = mount(VTimePickerClock, {
       propsData: {
@@ -100,6 +117,27 @@ test('VTimePickerClock.js', ({ mount }) => {
 
     wrapper.trigger('touchend')
     expect(change).toBeCalledWith(55)
+  })
+
+  it('should not emit change event on mouseup/touchend if readonly', () => {
+    const wrapper = mount(VTimePickerClock, {
+      propsData: {
+        value: 59,
+        min: 0,
+        max: 60,
+        readonly: true
+      }
+    })
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    wrapper.vm.valueOnMouseUp = 55
+    wrapper.trigger('mouseup')
+    expect(change).not.toBeCalled()
+
+    wrapper.trigger('touchend')
+    expect(change).not.toBeCalled()
   })
 
   it('should emit change event on mouseleave', () => {
