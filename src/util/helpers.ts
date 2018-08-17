@@ -19,6 +19,15 @@ export function createSimpleFunctional (
   }
 }
 
+function mergeTransitions (
+  transitions: undefined | Function | Function[],
+  array: Function[]
+) {
+  if (Array.isArray(transitions)) return transitions.concat(array)
+  if (transitions) array.push(transitions)
+  return array
+}
+
 export function createSimpleTransition (
   name: string,
   origin = 'top center 0',
@@ -31,6 +40,14 @@ export function createSimpleTransition (
 
     props: {
       group: {
+        type: Boolean,
+        default: false
+      },
+      hideOnLeave: {
+        type: Boolean,
+        default: false
+      },
+      leaveAbsolute: {
         type: Boolean,
         default: false
       },
@@ -56,22 +73,26 @@ export function createSimpleTransition (
         context.data.on = { ...context.data.on }
       }
 
-      context.data.on.beforeEnter = (el: HTMLElement) => {
+      const ourBeforeEnter: Function[] = []
+      const ourLeave: Function[] = []
+      const absolute = (el: HTMLElement) => (el.style.position = 'absolute')
+
+      ourBeforeEnter.push((el: HTMLElement) => {
         el.style.transformOrigin = context.props.origin
         el.style.webkitTransformOrigin = context.props.origin
+      })
+
+      if (context.props.leaveAbsolute) ourLeave.push(absolute)
+      if (context.props.hideOnLeave) {
+        ourLeave.push((el: HTMLElement) => (el.style.display = 'none'))
       }
 
-      if (!context.props.mode) {
-        const group = context.props.group
+      const { beforeEnter, leave } = context.data.on
 
-        context.data.on.beforeLeave = (el: HTMLElement) => {
-          // When using group, this helps Vue FLIP
-          // look correct when transitioning
-          // https://vuejs.org/v2/guide/transitions.html#List-Move-Transitions
-          if (group) el.style.display = 'none'
-          else el.style.position = 'absolute'
-        }
-      }
+      // Type says Function | Function[] but
+      // will only work if provided a function
+      context.data.on.beforeEnter = () => mergeTransitions(beforeEnter, ourBeforeEnter)
+      context.data.on.leave = mergeTransitions(leave, ourLeave)
 
       return h(tag, context.data, context.children)
     }
