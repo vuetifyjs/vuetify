@@ -1,16 +1,10 @@
 import { VNodeDirective, VNode } from 'vue/types/vnode'
 import { keys } from '../util/helpers'
 
-interface TouchStoredHandlers {
+export interface TouchStoredHandlers {
   touchstart: (e: TouchEvent) => void
   touchend: (e: TouchEvent) => void
   touchmove: (e: TouchEvent) => void
-}
-
-interface TouchHTMLElement extends HTMLElement {
-  _touchHandlers: {
-    [_uid: number]: TouchStoredHandlers
-  }
 }
 
 interface TouchHandlers {
@@ -113,9 +107,9 @@ function createHandlers (value: TouchHandlers): TouchStoredHandlers {
   }
 }
 
-function inserted (el: TouchHTMLElement, binding: TouchVNodeDirective, vnode: VNode) {
+function inserted (el: HTMLElement, binding: TouchVNodeDirective, vnode: VNode) {
   const value = binding.value
-  const target = (value.parent ? el.parentNode : el) as TouchHTMLElement
+  const target = value.parent ? el.parentElement : el
   const options = value.options || { passive: true }
 
   // Needed to pass unit tests
@@ -130,13 +124,13 @@ function inserted (el: TouchHTMLElement, binding: TouchVNodeDirective, vnode: VN
   })
 }
 
-function unbind (el: TouchHTMLElement, binding: TouchVNodeDirective, vnode: VNode) {
-  const target = (binding.value.parent ? el.parentNode : el) as TouchHTMLElement
+function unbind (el: HTMLElement, binding: TouchVNodeDirective, vnode: VNode) {
+  const target = binding.value.parent ? el.parentElement : el
   if (!target) return
 
   const handlers = target._touchHandlers[vnode.context!._uid]
   keys(handlers).forEach(eventName => {
-    target.removeEventListener(eventName, handlers[eventName] as EventListener)
+    target.removeEventListener(eventName, handlers[eventName])
   })
   delete target._touchHandlers[vnode.context!._uid]
 }

@@ -12,10 +12,36 @@ import {
   ThisTypedComponentOptionsWithArrayProps,
   ThisTypedComponentOptionsWithRecordProps
 } from 'vue/types/options'
+import { TouchStoredHandlers } from './directives/touch'
 
 declare global {
   interface Window {
     Vue: VueConstructor
+  }
+
+  interface Element {
+    getElementsByClassName(classNames: string): NodeListOf<HTMLElement>
+  }
+
+  interface HTMLElement {
+    _clickOutside?: EventListenerOrEventListenerObject
+    _onResize?: {
+      callback: () => void
+      options?: boolean | AddEventListenerOptions
+    }
+    _ripple?: {
+      enabled?: boolean
+      centered?: boolean
+      class?: string
+    }
+    _onScroll?: {
+      callback: EventListenerOrEventListenerObject
+      options: boolean | AddEventListenerOptions
+      target: EventTarget
+    }
+    _touchHandlers: {
+      [_uid: number]: TouchStoredHandlers
+    }
   }
 
   interface HTMLImageElement {

@@ -5,20 +5,6 @@ function style (el: HTMLElement, value: string) {
   el.style['webkitTransform'] = value
 }
 
-declare global {
-  interface Element {
-    getElementsByClassName(classNames: string): NodeListOf<HTMLElement>
-  }
-
-  interface HTMLElement {
-    _ripple: undefined | {
-      enabled?: boolean
-      centered?: boolean
-      class?: string
-    }
-  }
-}
-
 interface RippleOptions {
   class?: string
   center?: boolean
