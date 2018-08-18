@@ -103,8 +103,8 @@ export default mixins(Colorable, Themeable).extend({
       setTimeout(() => (this.selected = this.value), 100)
     },
     onResize () {
-      const width = this.$el && this.$el.parentNode
-        ? (this.$el.parentNode as HTMLElement).clientWidth
+      const width = this.$el && this.$el.parentElement
+        ? this.$el.parentElement.clientWidth
         : window.innerWidth
 
       this.maxButtons = Math.floor((width - 96) / 42)
@@ -130,7 +130,7 @@ export default mixins(Colorable, Themeable).extend({
 
       return range
     },
-    genIcon (h: CreateElement, icon: string, disabled: boolean, fn: (e: Event) => void): VNode {
+    genIcon (h: CreateElement, icon: string, disabled: boolean, fn: EventListener): VNode {
       return h('li', [
         h('button', {
           staticClass: 'v-pagination__navigation',
@@ -154,7 +154,7 @@ export default mixins(Colorable, Themeable).extend({
       }), [i.toString()])
     },
     genItems (h: CreateElement): VNode[] {
-      return this.items.map((i: string | number, index: number) => {
+      return this.items.map((i, index) => {
         return h('li', { key: index }, [
           isNaN(Number(i)) ? h('span', { class: 'v-pagination__more' }, [i.toString()]) : this.genItem(h, i)
         ])
