@@ -71,13 +71,18 @@ export default VResponsive.extend({
           aspect: Number(this.aspectRatio || this.src.aspect || this.calculatedAspectRatio)
         }
     },
+    computedGradient (): string | null {
+      if (!this.gradient) return null
+      if (this.gradient.match(/^\s*(repeating-)?(linear|radial)-gradient/)) return this.gradient
+      return `linear-gradient(${this.gradient})`
+    },
     __cachedImage (): VNode | never[] {
-      if (!(this.normalisedSrc.src || this.normalisedSrc.lazySrc)) return []
+      if (!(this.normalisedSrc.src || this.normalisedSrc.lazySrc || this.gradient)) return []
 
       const backgroundImage: string[] = []
       const src = this.isLoading ? this.normalisedSrc.lazySrc : this.currentSrc
 
-      if (this.gradient) backgroundImage.push(`linear-gradient(${this.gradient})`)
+      if (this.computedGradient) backgroundImage.push(this.computedGradient)
       if (src) backgroundImage.push(`url("${src}")`)
 
       return this.$createElement('transition', {
