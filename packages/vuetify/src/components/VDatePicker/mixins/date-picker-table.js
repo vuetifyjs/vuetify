@@ -67,6 +67,17 @@ export default {
         ...this.themeClasses
       }
     },
+    genButtonEvents (value) {
+      const events = {
+        click: () => this.$emit('input', value)
+      }
+
+      if (this.$listeners.dblclick) {
+        events.dblclick = () => this.$listeners.dblclick(value)
+      }
+
+      return events
+    },
     genButton (value, isFloating) {
       const isAllowed = isDateAllowed(value, this.min, this.max, this.allowedDates)
       const isSelected = value === this.value || (Array.isArray(this.value) && this.value.indexOf(value) !== -1)
@@ -84,9 +95,7 @@ export default {
           disabled: !isAllowed,
           innerHTML: `<div class="v-btn__content">${this.formatter(value)}</div>`
         },
-        on: (this.disabled || !isAllowed) ? {} : {
-          click: () => this.$emit('input', value)
-        }
+        on: (this.disabled || !isAllowed) ? undefined : this.genButtonEvents(value)
       }))
     },
     wheel (e) {
