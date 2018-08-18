@@ -39,7 +39,7 @@ declare global {
       options: boolean | AddEventListenerOptions
       target: EventTarget
     }
-    _touchHandlers: {
+    _touchHandlers?: {
       [_uid: number]: TouchStoredHandlers
     }
   }

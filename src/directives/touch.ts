@@ -117,7 +117,7 @@ function inserted (el: HTMLElement, binding: TouchVNodeDirective, vnode: VNode) 
 
   const handlers = createHandlers(binding.value)
   target._touchHandlers = Object(target._touchHandlers)
-  target._touchHandlers[vnode.context!._uid] = handlers
+  target._touchHandlers![vnode.context!._uid] = handlers
 
   keys(handlers).forEach(eventName => {
     target.addEventListener(eventName, handlers[eventName] as EventListener, options)
@@ -126,7 +126,7 @@ function inserted (el: HTMLElement, binding: TouchVNodeDirective, vnode: VNode) 
 
 function unbind (el: HTMLElement, binding: TouchVNodeDirective, vnode: VNode) {
   const target = binding.value.parent ? el.parentElement : el
-  if (!target) return
+  if (!target || !target._touchHandlers) return
 
   const handlers = target._touchHandlers[vnode.context!._uid]
   keys(handlers).forEach(eventName => {
