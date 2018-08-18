@@ -200,7 +200,7 @@ test('VPagination.vue', ({ mount }) => {
       render: h => h('div', [h(VPagination)])
     })
 
-    const pagination = wrapper.first(VPagination)
+    const pagination = wrapper.first(VPagination.options)
 
     expect(pagination.vm.maxButtons).toBe(0)
 

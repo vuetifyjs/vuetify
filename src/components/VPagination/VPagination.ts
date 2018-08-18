@@ -2,18 +2,22 @@ import '../../stylus/components/_pagination.styl'
 
 import VIcon from '../VIcon'
 
+// Directives
 import Resize from '../../directives/resize'
 
+// Mixins
+import mixins from '../../util/mixins'
 import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
 
+// Types
+import { VNode, CreateElement } from 'vue'
+
 /* @vue/component */
-export default {
+export default mixins(Colorable, Themeable).extend({
   name: 'v-pagination',
 
   directives: { Resize },
-
-  mixins: [Colorable, Themeable],
 
   props: {
     circle: Boolean,
@@ -21,7 +25,7 @@ export default {
     length: {
       type: Number,
       default: 0,
-      validator: val => val % 1 === 0
+      validator: (val: number) => val % 1 === 0
     },
     totalVisible: [Number, String],
     nextIcon: {
@@ -40,12 +44,13 @@ export default {
 
   data () {
     return {
-      maxButtons: 0
+      maxButtons: 0,
+      selected: null as number | null
     }
   },
 
   computed: {
-    classes () {
+    classes (): object {
       return {
         'v-pagination': true,
         'v-pagination--circle': this.circle,
@@ -54,8 +59,8 @@ export default {
       }
     },
 
-    items () {
-      const maxLength = this.totalVisible || this.maxButtons
+    items (): (string | number)[] {
+      const maxLength = parseInt(this.totalVisible, 10) || this.maxButtons
       if (this.length <= maxLength) {
         return this.range(1, this.length)
       }
@@ -98,23 +103,23 @@ export default {
       setTimeout(() => (this.selected = this.value), 100)
     },
     onResize () {
-      const width = this.$el && this.$el.parentNode
-        ? this.$el.parentNode.clientWidth
+      const width = this.$el && this.$el.parentElement
+        ? this.$el.parentElement.clientWidth
         : window.innerWidth
 
       this.maxButtons = Math.floor((width - 96) / 42)
     },
-    next (e) {
+    next (e: Event) {
       e.preventDefault()
       this.$emit('input', this.value + 1)
       this.$emit('next')
     },
-    previous (e) {
+    previous (e: Event) {
       e.preventDefault()
       this.$emit('input', this.value - 1)
       this.$emit('previous')
     },
-    range (from, to) {
+    range (from: number, to: number) {
       const range = []
 
       from = from > 0 ? from : 1
@@ -125,7 +130,7 @@ export default {
 
       return range
     },
-    genIcon (h, icon, disabled, fn) {
+    genIcon (h: CreateElement, icon: string, disabled: boolean, fn: EventListener): VNode {
       return h('li', [
         h('button', {
           staticClass: 'v-pagination__navigation',
@@ -136,8 +141,8 @@ export default {
         }, [h(VIcon, [icon])])
       ])
     },
-    genItem (h, i) {
-      const color = (i === this.value) && (this.color || 'primary')
+    genItem (h: CreateElement, i: string | number): VNode {
+      const color: string | false = (i === this.value) && (this.color || 'primary')
       return h('button', this.setBackgroundColor(color, {
         staticClass: 'v-pagination__item',
         class: {
@@ -146,18 +151,18 @@ export default {
         on: {
           click: () => this.$emit('input', i)
         }
-      }), [i])
+      }), [i.toString()])
     },
-    genItems (h) {
+    genItems (h: CreateElement): VNode[] {
       return this.items.map((i, index) => {
         return h('li', { key: index }, [
-          isNaN(i) ? h('span', { class: 'v-pagination__more' }, [i]) : this.genItem(h, i)
+          isNaN(Number(i)) ? h('span', { class: 'v-pagination__more' }, [i.toString()]) : this.genItem(h, i)
         ])
       })
     }
   },
 
-  render (h) {
+  render (h): VNode {
     const children = [
       this.genIcon(h, this.$vuetify.rtl ? this.nextIcon : this.prevIcon, this.value <= 1, this.previous),
       this.genItems(h),
@@ -169,8 +174,8 @@ export default {
         modifiers: { quiet: true },
         name: 'resize',
         value: this.onResize
-      }],
+      }] as any,
       class: this.classes
     }, children)
   }
-}
+})
