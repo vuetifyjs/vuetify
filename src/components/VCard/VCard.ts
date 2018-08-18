@@ -1,7 +1,9 @@
+// Styles
 import '../../stylus/components/_cards.styl'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
+import Measurable from '../../mixins/measurable'
 import Routable from '../../mixins/routable'
 import Themeable from '../../mixins/themeable'
 
@@ -13,12 +15,16 @@ import mixins from '../../util/mixins'
 import { VNode } from 'vue'
 
 /* @vue/component */
-export default mixins(Colorable, Routable, Themeable).extend({
+export default mixins(
+  Colorable,
+  Measurable,
+  Routable,
+  Themeable
+).extend({
   name: 'v-card',
 
   props: {
     flat: Boolean,
-    height: [Number, String],
     hover: Boolean,
     img: String,
     raised: Boolean,
@@ -26,8 +32,7 @@ export default mixins(Colorable, Routable, Themeable).extend({
       type: String,
       default: 'div'
     },
-    tile: Boolean,
-    width: [String, Number]
+    tile: Boolean
   },
 
   computed: {
@@ -50,9 +55,10 @@ export default mixins(Colorable, Routable, Themeable).extend({
         style.background = `url("${this.img}") center center / cover no-repeat`
       }
 
-      if (this.width) {
-        style.width = convertToUnit(this.width)
-      }
+      if (this.height) style.height = convertToUnit(this.height)
+      if (this.maxHeight) style.maxHeight = convertToUnit(this.maxHeight)
+      if (this.maxWidth) style.maxWidth = convertToUnit(this.maxWidth)
+      if (this.width) style.width = convertToUnit(this.width)
 
       return style
     }
