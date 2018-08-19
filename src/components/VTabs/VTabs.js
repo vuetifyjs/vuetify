@@ -43,6 +43,9 @@ export default {
 
   provide () {
     return {
+      theme: {
+        isDark: this.theme.isDark
+      },
       tabClick: this.tabClick,
       tabProxy: this.tabProxy,
       registerItems: this.registerItems,
