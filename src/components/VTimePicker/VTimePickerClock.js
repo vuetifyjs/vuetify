@@ -45,7 +45,6 @@ export default {
     return {
       inputValue: this.value,
       isDragging: false,
-      size: 270,
       valueOnMouseDown: null,
       valueOnMouseUp: null
     }
@@ -73,10 +72,6 @@ export default {
     value (value) {
       this.inputValue = value
     }
-  },
-
-  mounted () {
-    this.size = this.$el.offsetWidth
   },
 
   methods: {
