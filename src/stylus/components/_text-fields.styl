@@ -227,8 +227,8 @@ rtl(v-text-field-rtl, "v-text-field")
       min-height: 56px
 
 
-  &--box&--prefix,
-  &--outline&--prefix
+  &--box&--prefix:not(&--single-line),
+  &--outline&--prefix:not(&--single-line)
     input
       margin-top: 15px
 
@@ -238,7 +238,7 @@ rtl(v-text-field-rtl, "v-text-field")
     .v-text-field__prefix
       padding-top: 8px
 
-  &--box&--prefix
+  &--box&--prefix:not(&--single-line)
     input
       margin-top: 16px
 
