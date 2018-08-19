@@ -54,9 +54,6 @@ export default {
     count () {
       return this.max - this.min + 1
     },
-    roundCount () {
-      return this.double ? (this.count / 2) : this.count
-    },
     degreesPerUnit () {
       return 360 / this.roundCount
     },
@@ -65,6 +62,12 @@ export default {
     },
     displayedValue () {
       return this.value == null ? this.min : this.value
+    },
+    innerRadius () {
+      return 0.62
+    },
+    roundCount () {
+      return this.double ? (this.count / 2) : this.count
     }
   },
 
@@ -93,7 +96,7 @@ export default {
       return this.double && (value - this.min >= this.roundCount)
     },
     handScale (value) {
-      return this.isInner(value) ? 0.6 : 1
+      return this.isInner(value) ? this.innerRadius : 1
     },
     isAllowed (value) {
       return !this.allowedValues || this.allowedValues(value)
@@ -167,7 +170,8 @@ export default {
       const center = { x: width / 2, y: -width / 2 }
       const coords = { x: clientX - left, y: top - clientY }
       const handAngle = Math.round(this.angle(center, coords) - this.rotate + 360) % 360
-      const insideClick = this.double && this.euclidean(center, coords) / width < 0.4 // (0.6 + 1) / 2 / 2
+      // (1 + this.innerRadius) / 4 = radius of the circle equally distant from inner and outer circles
+      const insideClick = this.double && this.euclidean(center, coords) / width < (1 + this.innerRadius) / 4
       const value = Math.round(handAngle / this.degreesPerUnit) +
         this.min + (insideClick ? this.roundCount : 0)
 

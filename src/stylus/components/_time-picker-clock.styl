@@ -8,7 +8,7 @@ v-time-picker-clock($material)
   .v-time-picker-clock__item--disabled
     color: $material.buttons.disabled
 
-    &--active
+    &.v-time-picker-clock__item--active
       color: $material-dark.buttons.disabled
 
   &--indeterminate
@@ -77,19 +77,16 @@ theme(v-time-picker-clock, "v-time-picker-clock")
     &--inner:after
       height: 14px
 
-.v-picker--landscape .v-time-picker-clock__container
-    padding: 20px
-
 .v-picker--full-width
   .v-time-picker-clock__container
     max-width: 290px
 
 .v-time-picker-clock__inner
   position: absolute
-  bottom: 24px
-  left: 24px
-  right: 24px
-  top: 24px
+  bottom: 27px
+  left: 27px
+  right: 27px
+  top: 27px
 
 .v-time-picker-clock__item
   align-items: center
