@@ -1,5 +1,6 @@
 // Mixins
 import Routable from '../../mixins/routable'
+import Themeable from '../../mixins/themeable'
 import {
   inject as RegistrableInject
 } from '../../mixins/registrable'
@@ -13,7 +14,8 @@ export default {
 
   mixins: [
     RegistrableInject('tabs', 'v-tab', 'v-tabs'),
-    Routable
+    Routable,
+    Themeable
   ],
 
   inject: ['tabClick'],
@@ -36,6 +38,9 @@ export default {
   },
 
   computed: {
+    isDark () {
+      return this.tabs.selfIsDark
+    },
     classes () {
       return {
         'v-tabs__item': true,
