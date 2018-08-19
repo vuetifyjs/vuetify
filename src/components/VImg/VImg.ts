@@ -140,6 +140,7 @@ export default VResponsive.extend({
       image.onload = () => {
         /* istanbul ignore if */
         if (image.decode) {
+          /* tslint:disable-next-line no-floating-promises */
           image.decode().then(this.onLoad)
         } else {
           this.onLoad()

@@ -1,20 +1,14 @@
 import '../../stylus/components/_icons.styl'
-
 // Mixins
 import Colorable from '../../mixins/colorable'
 import Sizeable from '../../mixins/sizeable'
 import Themeable from '../../mixins/themeable'
-
 // Util
-import {
-  convertToUnit,
-  keys,
-  remapInternalIcon
-} from '../../util/helpers'
-
+import { convertToUnit, keys, remapInternalIcon } from '../../util/helpers'
 // Types
 import Vue, { VNode, VNodeChildren, VNodeData } from 'vue'
 import mixins from '../../util/mixins'
+import { VuetifyIcon } from 'vuetify'
 
 enum SIZE_MAP {
   small = '16px',
@@ -32,7 +26,7 @@ const VIcon = mixins(
   Colorable,
   Sizeable,
   Themeable
-/* @vue/component */
+  /* @vue/component */
 ).extend({
   name: 'v-icon',
 
@@ -40,6 +34,16 @@ const VIcon = mixins(
     disabled: Boolean,
     left: Boolean,
     right: Boolean
+  },
+
+  methods: {
+    getIcon (): VuetifyIcon {
+      let iconName = ''
+      if (this.$slots.default) iconName = this.$slots.default[0].text!
+
+      // Remap internal names like '$vuetify.icons.cancel' to the current name for that icon
+      return remapInternalIcon(this, iconName)
+    }
   },
 
   render (h): VNode {
@@ -55,6 +59,12 @@ const VIcon = mixins(
     const newChildren: VNodeChildren = []
     const data: VNodeData = {
       staticClass: 'v-icon',
+      class: {
+        'v-icon--disabled': this.disabled,
+        'v-icon--left': this.left,
+        'v-icon--link': this.$listeners.click || this.$listeners['!click'],
+        'v-icon--right': this.right
+      },
       attrs: {
         'aria-hidden': true,
         ...this.$attrs
@@ -64,37 +74,37 @@ const VIcon = mixins(
 
     if (fontSize) data.style = { fontSize }
 
-    let iconName = ''
-    if (this.$slots.default) iconName = this.$slots.default[0].text!
+    const icon = this.getIcon()
+    if (typeof icon === 'string') {
+      let iconType = 'material-icons'
+      // Material Icon delimiter is _
+      // https://material.io/icons/
+      const delimiterIndex = icon.indexOf('-')
+      const isCustomIcon = delimiterIndex > -1
 
-    // Remap internal names like '$vuetify.icons.cancel' to the current name for that icon
-    iconName = remapInternalIcon(this, iconName)
+      if (isCustomIcon) {
+        iconType = icon.slice(0, delimiterIndex)
 
-    let iconType = 'material-icons'
-    // Material Icon delimiter is _
-    // https://material.io/icons/
-    const delimiterIndex = iconName.indexOf('-')
-    const isCustomIcon = delimiterIndex > -1
+        if (isFontAwesome5(iconType)) iconType = ''
+        // Assume if not a custom icon
+        // is Material Icon font
+      } else newChildren.push(icon)
 
-    if (isCustomIcon) {
-      iconType = iconName.slice(0, delimiterIndex)
-
-      if (isFontAwesome5(iconType)) iconType = ''
-      // Assume if not a custom icon
-      // is Material Icon font
-    } else newChildren.push(iconName)
-
-    data.class = {
-      'v-icon--disabled': this.disabled,
-      'v-icon--left': this.left,
-      'v-icon--link': this.$listeners.click || this.$listeners['!click'],
-      'v-icon--right': this.right,
-      [iconType]: true,
-      [iconName]: isCustomIcon,
-      ...this.themeClasses
+      data.class[iconType] = true
+      data.class[icon] = isCustomIcon
+    } else {
+      // Icon is component
+      data.class['v-icon--component'] = true
     }
 
-    return h('i', this.setTextColor(this.color, data), newChildren)
+    data.class = { ...data.class, ...this.themeClasses }
+
+    if (typeof icon === 'string') {
+      return h('i', this.setTextColor(this.color, data), newChildren)
+    } else {
+      // Icon is component
+      return h(icon, data)
+    }
   }
 })
 
