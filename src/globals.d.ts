@@ -55,6 +55,16 @@ declare global {
   export const __REQUIRED_VUE__: string
 }
 
+declare module 'vue/types/vnode' {
+  export interface VNodeData {
+    model?: {
+      callback: (v: any) => void
+      expression: string
+      value: any
+    }
+  }
+}
+
 declare module 'vue/types/vue' {
   export type OptionsVue<Instance extends Vue, Data, Methods, Computed, Props, Options = {}> = VueConstructor<
     CombinedVueInstance<Instance, Data, Methods, Computed, Props> & Vue,
