@@ -13,3 +13,13 @@ html
 ::-ms-clear
 ::-ms-reveal
   display: none
+
+// Works on Chrome, Chrome for Android, Safari, Opera
+::-webkit-scrollbar
+  width: 8px
+  height: 8px
+
+::-webkit-scrollbar-thumb
+  background-color: $grey.lighten-1
+  border-radius: calc(8px / 2)
+  border: calc(8px / 4) solid $shades.white
