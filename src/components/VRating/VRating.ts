@@ -47,6 +47,7 @@ export default mixins(
       type: String,
       default: 'primary'
     },
+    dense: Boolean,
     emptyIcon: {
       type: String,
       default: '$vuetify.icons.ratingEmpty'
@@ -219,7 +220,8 @@ export default mixins(
     return h('div', {
       staticClass: 'v-rating',
       class: {
-        'v-rating--readonly': this.readonly
+        'v-rating--readonly': this.readonly,
+        'v-rating--dense': this.dense
       }
     }, children)
   }
