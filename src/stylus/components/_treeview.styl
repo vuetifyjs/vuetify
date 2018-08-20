@@ -1,0 +1,33 @@
+@import '../bootstrap'
+@import '../theme'
+
+/* Theme */
+v-treeview($material)
+  color: $material.text.primary
+
+v-treeview($direction)
+  margin-{$direction}: 0
+
+theme(v-treeview, "v-treeview")
+
+.v-treeview
+
+  &-node
+    position: relative
+    margin-left: 12px
+
+    &--leaf
+      margin-left: 36px
+
+    &__root
+      display: flex
+
+      .v-input--checkbox
+        margin-top: 0
+
+    &__label
+      font-size: 1.2rem
+
+    &__spacer
+      width: 24px
+      height: 24px
