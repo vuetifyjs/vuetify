@@ -1,16 +1,21 @@
-export default {
+import Vue from 'vue'
+import { Prop } from 'vue/types/options'
+
+import { SparklineItem } from '../VSparkline'
+
+export default Vue.extend({
   props: {
     data: {
-      type: Array,
+      type: Array as Prop<SparklineItem[]>,
       required: true
     },
     gradient: {
-      type: Array,
+      type: Array as Prop<string[]>,
       required: true
     },
     gradientDirection: {
-      type: String,
-      validator: val => ['top', 'bottom', 'left', 'right'].indexOf(val) > -1,
+      type: String as Prop<'top' | 'bottom' | 'left' | 'right'>,
+      validator: (val: string) => ['top', 'bottom', 'left', 'right'].includes(val),
       default: 'top'
     },
     autoDraw: Boolean,
@@ -32,4 +37,4 @@ export default {
     lineWidth: Number,
     showLabel: Boolean
   }
-}
+})

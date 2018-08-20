@@ -1,10 +1,11 @@
+import { Point } from '../VSparkline'
 import { checkCollinear, getDistance, moveTo } from './math'
 
 /**
  * From https://github.com/unsplash/react-trend/blob/master/src/helpers/DOM.helpers.js#L18
  */
-export function genPath (points, radius) {
-  const start = points.shift()
+export function genPath (points: Point[], radius: number) {
+  const start = points.shift()!
 
   return (
     `M${start.x} ${start.y}` +

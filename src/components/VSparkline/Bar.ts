@@ -1,16 +1,17 @@
+import mixins from '../../util/mixins'
+import { VNode } from 'vue'
+
 import props from './mixins/props'
 import Rect from './components/rect'
 import Text from './components/text'
 import Gradient from './components/gradient'
 import { genPoints } from './helpers/core'
 
-export default {
+export default mixins(props).extend({
   name: 'bar',
 
-  mixins: [props],
-
-  render (h) {
-    if (!this.data || this.data.length < 2) return
+  render (h): VNode {
+    if (!this.data || this.data.length < 2) return undefined as never
     const { width, height, padding, lineWidth } = this
     const viewWidth = width || 300
     const viewHeight = height || 75
@@ -31,36 +32,32 @@ export default {
     props.lineWidth = lineWidth || (totalWidth - (padding || 5))
     props.offsetX = (totalWidth - props.lineWidth) / 2
 
-    return h(
-      'svg',
-      {
+    return h('svg', {
+      attrs: {
+        width: width || '100%',
+        height: height || '25%',
+        viewBox: `0 0 ${viewWidth} ${viewHeight}`
+      }
+    }, [
+      h(Gradient, { props }),
+      h(Rect, { props }),
+      this.showLabel ? h(Text, { props }) : undefined as never,
+      h('g', {
         attrs: {
-          width: width || '100%',
-          height: height || '25%',
-          viewBox: `0 0 ${viewWidth} ${viewHeight}`
+          transform: `scale(1,-1) translate(0,-${boundary.maxY})`,
+          'clip-path': `url(#${props.id}-clip)`,
+          fill: `url(#${props.id})`
         }
-      },
-      [
-        h(Gradient, { props }),
-        h(Rect, { props }),
-        this.showLabel && h(Text, { props }),
-        h('g', {
+      }, [
+        h('rect', {
           attrs: {
-            transform: `scale(1,-1) translate(0,-${boundary.maxY})`,
-            'clip-path': `url(#${props.id}-clip)`,
-            fill: `url(#${props.id})`
+            x: 0,
+            y: 0,
+            width: viewWidth,
+            height: viewHeight
           }
-        }, [
-          h('rect', {
-            attrs: {
-              x: 0,
-              y: 0,
-              width: viewWidth,
-              height: viewHeight
-            }
-          })
-        ])
-      ]
-    )
+        })
+      ])
+    ])
   }
-}
+})

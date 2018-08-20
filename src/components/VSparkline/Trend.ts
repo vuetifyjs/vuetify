@@ -1,13 +1,25 @@
+import { ExtractVue } from './../../util/mixins'
+import { VNode } from 'vue'
+import mixins from '../../util/mixins'
+
 import props from './mixins/props'
 import Path from './components/path'
 import Text from './components/text'
 import Gradient from './components/gradient'
 import { genPoints } from './helpers/core'
 
-export default {
+interface options {
+  $refs: {
+    path: InstanceType<typeof Path>
+  }
+}
+
+export default mixins<options & ExtractVue<typeof props>>(props).extend({
   name: 'trend',
 
-  mixins: [props],
+  data: () => ({
+    lastLength: 0
+  }),
 
   watch: {
     data: {
@@ -23,18 +35,18 @@ export default {
 
           path.style.transition = 'none'
           path.style.strokeDasharray = length + ' ' + length
-          path.style.strokeDashoffset = Math.abs(length - (this.lastLength || 0))
+          path.style.strokeDashoffset = Math.abs(length - (this.lastLength || 0)).toString()
           path.getBoundingClientRect()
           path.style.transition = `stroke-dashoffset ${this.autoDrawDuration}ms ${this.autoDrawEasing}`
-          path.style.strokeDashoffset = 0
+          path.style.strokeDashoffset = '0'
           this.lastLength = length
         })
       }
     }
   },
 
-  render (h) {
-    if (!this.data || this.data.length < 2) return
+  render (h): VNode {
+    if (!this.data || this.data.length < 2) return undefined as never
     const { width, height, padding } = this
     const viewWidth = width || 300
     const viewHeight = height || 75
@@ -50,24 +62,20 @@ export default {
     props.id = 'sparkline-trend-' + this._uid
     props.points = genPoints(this.data, boundary)
 
-    return h(
-      'svg',
-      {
-        attrs: {
-          'stroke-width': this.lineWidth || 1,
-          width: width || '100%',
-          height: height || '25%',
-          viewBox: `0 0 ${viewWidth} ${viewHeight}`
-        }
-      },
-      [
-        h(Gradient, { props }),
-        this.showLabel && h(Text, { props }),
-        h(Path, {
-          props,
-          ref: 'path'
-        })
-      ]
-    )
+    return h('svg', {
+      attrs: {
+        'stroke-width': this.lineWidth || 1,
+        width: width || '100%',
+        height: height || '25%',
+        viewBox: `0 0 ${viewWidth} ${viewHeight}`
+      }
+    }, [
+      h(Gradient, { props }),
+      this.showLabel ? h(Text, { props }) : undefined as never,
+      h(Path, {
+        props,
+        ref: 'path'
+      })
+    ])
   }
-}
+})
