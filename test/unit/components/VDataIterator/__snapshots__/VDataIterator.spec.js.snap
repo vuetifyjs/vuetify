@@ -48,7 +48,7 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
                   <div class="v-select-list v-card theme--light">
                     <div class="v-list theme--light">
                       <div>
-                        <a class="v-list__tile v-list__tile--link v-list__tile--active primary--text">
+                        <a class="v-list__tile v-list__tile--link v-list__tile--active theme--light primary--text">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
                               5
@@ -57,7 +57,7 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
                         </a>
                       </div>
                       <div>
-                        <a class="v-list__tile v-list__tile--link">
+                        <a class="v-list__tile v-list__tile--link theme--light">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
                               10
@@ -66,7 +66,7 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
                         </a>
                       </div>
                       <div>
-                        <a class="v-list__tile v-list__tile--link">
+                        <a class="v-list__tile v-list__tile--link theme--light">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
                               25
@@ -75,7 +75,7 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
                         </a>
                       </div>
                       <div>
-                        <a class="v-list__tile v-list__tile--link">
+                        <a class="v-list__tile v-list__tile--link theme--light">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
                               All
@@ -187,7 +187,7 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
                   <div class="v-select-list v-card theme--light">
                     <div class="v-list theme--light">
                       <div>
-                        <a class="v-list__tile v-list__tile--link v-list__tile--active primary--text">
+                        <a class="v-list__tile v-list__tile--link v-list__tile--active theme--light primary--text">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
                               5
@@ -196,7 +196,7 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
                         </a>
                       </div>
                       <div>
-                        <a class="v-list__tile v-list__tile--link">
+                        <a class="v-list__tile v-list__tile--link theme--light">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
                               10
@@ -205,7 +205,7 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
                         </a>
                       </div>
                       <div>
-                        <a class="v-list__tile v-list__tile--link">
+                        <a class="v-list__tile v-list__tile--link theme--light">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
                               25
@@ -214,7 +214,7 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
                         </a>
                       </div>
                       <div>
-                        <a class="v-list__tile v-list__tile--link">
+                        <a class="v-list__tile v-list__tile--link theme--light">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
                               All
@@ -317,7 +317,7 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
                   <div class="v-select-list v-card theme--light">
                     <div class="v-list theme--light">
                       <div>
-                        <a class="v-list__tile v-list__tile--link v-list__tile--active primary--text">
+                        <a class="v-list__tile v-list__tile--link v-list__tile--active theme--light primary--text">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
                               5
@@ -326,7 +326,7 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
                         </a>
                       </div>
                       <div>
-                        <a class="v-list__tile v-list__tile--link">
+                        <a class="v-list__tile v-list__tile--link theme--light">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
                               10
@@ -335,7 +335,7 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
                         </a>
                       </div>
                       <div>
-                        <a class="v-list__tile v-list__tile--link">
+                        <a class="v-list__tile v-list__tile--link theme--light">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
                               25
@@ -344,7 +344,7 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
                         </a>
                       </div>
                       <div>
-                        <a class="v-list__tile v-list__tile--link">
+                        <a class="v-list__tile v-list__tile--link theme--light">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
                               All
@@ -451,7 +451,7 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
                   <div class="v-select-list v-card theme--light">
                     <div class="v-list theme--light">
                       <div>
-                        <a class="v-list__tile v-list__tile--link v-list__tile--active primary--text">
+                        <a class="v-list__tile v-list__tile--link v-list__tile--active theme--light primary--text">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
                               5
@@ -460,7 +460,7 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
                         </a>
                       </div>
                       <div>
-                        <a class="v-list__tile v-list__tile--link">
+                        <a class="v-list__tile v-list__tile--link theme--light">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
                               10
@@ -469,7 +469,7 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
                         </a>
                       </div>
                       <div>
-                        <a class="v-list__tile v-list__tile--link">
+                        <a class="v-list__tile v-list__tile--link theme--light">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
                               25
@@ -478,7 +478,7 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
                         </a>
                       </div>
                       <div>
-                        <a class="v-list__tile v-list__tile--link">
+                        <a class="v-list__tile v-list__tile--link theme--light">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
                               All

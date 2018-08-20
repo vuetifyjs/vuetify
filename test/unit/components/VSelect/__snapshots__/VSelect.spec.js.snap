@@ -278,7 +278,7 @@ exports[`VSelect should render v-select correctly when using v-list-tile in item
           <div class="v-select__slot">
             <div class="v-select__selections">
               <div>
-                <div class="v-list__tile">
+                <div class="v-list__tile theme--light">
                   1
                 </div>
               </div>
@@ -360,7 +360,7 @@ exports[`VSelect should use slotted append-item 1`] = `
 
 <div class="v-list theme--light">
   <div>
-    <a class="v-list__tile v-list__tile--link">
+    <a class="v-list__tile v-list__tile--link theme--light">
       <div class="v-list__tile__content">
         <div class="v-list__tile__title">
           foo
@@ -379,7 +379,7 @@ exports[`VSelect should use slotted no-data 1`] = `
 
 <div class="v-list theme--light">
   <div>
-    <a class="v-list__tile v-list__tile--link">
+    <a class="v-list__tile v-list__tile--link theme--light">
       <div class="v-list__tile__content">
         <div class="v-list__tile__title">
           foo
@@ -398,7 +398,7 @@ exports[`VSelect should use slotted prepend-item 1`] = `
     foo
   </div>
   <div>
-    <a class="v-list__tile v-list__tile--link">
+    <a class="v-list__tile v-list__tile--link theme--light">
       <div class="v-list__tile__content">
         <div class="v-list__tile__title">
           foo
