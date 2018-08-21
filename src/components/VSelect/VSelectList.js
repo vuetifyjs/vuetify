@@ -6,10 +6,9 @@ import VDivider from '../VDivider'
 import VSubheader from '../VSubheader'
 import {
   VList,
-  VListTile,
-  VListTileAction,
-  VListTileContent,
-  VListTileTitle
+  VListItem,
+  VListItemAction,
+  VListItemContent
 } from '../VList'
 
 // Mixins
@@ -80,7 +79,7 @@ export default {
         }
       }
 
-      return this.$createElement(VListTile, tile, [
+      return this.$createElement(VListItem, tile, [
         this.genTileContent(this.noDataText)
       ])
     }
@@ -97,7 +96,7 @@ export default {
         }
       }
 
-      return this.$createElement(VListTileAction, data, [
+      return this.$createElement(VListItemAction, data, [
         this.$createElement(VCheckbox, {
           props: {
             color: this.color,
@@ -166,7 +165,7 @@ export default {
       }
 
       if (!this.$scopedSlots.item) {
-        return this.$createElement(VListTile, tile, [
+        return this.$createElement(VListItem, tile, [
           this.action && !this.hideSelected && this.items.length > 0
             ? this.genAction(item, value)
             : null,
@@ -178,14 +177,15 @@ export default {
       const scopedSlot = this.$scopedSlots.item({ parent, item, tile })
 
       return this.needsTile(scopedSlot)
-        ? this.$createElement(VListTile, tile, [scopedSlot])
+        ? this.$createElement(VListItem, tile, [scopedSlot])
         : scopedSlot
     },
     genTileContent (item) {
       const innerHTML = this.genFilteredText(this.getText(item))
 
-      return this.$createElement(VListTileContent,
-        [this.$createElement(VListTileTitle, {
+      return this.$createElement(VListItemContent,
+        [this.$createElement('div', {
+          staticClass: 'subtitle-1',
           domProps: { innerHTML }
         })]
       )
