@@ -36,7 +36,9 @@ export default {
     group: String,
     noAction: Boolean,
     prependIcon: String,
-    subGroup: Boolean
+    subGroup: Boolean,
+    controlled: Boolean,
+    expand: Boolean
   },
 
   data: () => ({
@@ -64,6 +66,11 @@ export default {
   },
 
   watch: {
+    expand: function expand () {
+      if (this.controlled) {
+        this.isActive = !this.isActive
+      }
+    },
     isActive (val) {
       if (!this.subGroup && val) {
         this.listClick(this._uid)
@@ -99,7 +106,7 @@ export default {
 
   methods: {
     click () {
-      if (this.disabled) return
+      if (this.disabled || this.controlled) return
 
       this.isActive = !this.isActive
     },
