@@ -86,15 +86,17 @@ theme(v-timeline, "v-timeline")
 
   @media $display-breakpoints.sm-and-down
     &:before
-      left: 19px // -1 for line width
+      left: 18px // -1 for line width
 
     .v-timeline-item
       &:nth-child(odd):not(.v-timeline-item--right), &--left
         flex-direction: row-reverse
 
-      &__btn
+      &__dot
         left: 0
-        transition: color .3s $transition.swing
+
+      &__dot--small
+        left: 7px // -1 for line width
 
       &__body
         max-width: calc(100% - 84px)
