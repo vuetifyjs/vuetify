@@ -111,8 +111,10 @@ export default mixins(Colorable, Themeable).extend({
     } else newChildren.push(iconName)
 
     data.attrs = data.attrs || {}
-    if (!('aria-hidden' in data.attrs)) {
+    if (!('aria-hidden' in data.attrs) && (!this.$listeners.click || !this.$listeners['!click']) {
       data.attrs['aria-hidden'] = true
+    } else if (this.$listeners.click || this.$listeners['!click']) {
+      data.attrs['role'] = 'button'
     }
 
     const classes = {
