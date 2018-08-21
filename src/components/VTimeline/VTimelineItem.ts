@@ -12,7 +12,10 @@ export default mixins(Colorable).extend({
 
   props: {
     icon: String,
-    color: String,
+    color: {
+      type: String,
+      default: 'primary'
+    },
     iconColor: String,
     left: Boolean,
     right: Boolean
@@ -37,6 +40,7 @@ export default mixins(Colorable).extend({
       return this.$createElement(VBtn, {
         staticClass: 'v-timeline-item__btn',
         props: {
+          small: true,
           absolute: true,
           color: this.color,
           fab: true

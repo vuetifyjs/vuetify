@@ -1,7 +1,17 @@
+// Styles
 import '../../stylus/components/_timeline.styl'
-import Vue, { VNode } from 'vue'
 
-export default Vue.extend({
+// Types
+import Vue, { VNode } from 'vue'
+import mixins from '../../util/mixins'
+
+// Mixins
+import Themeable from '../../mixins/themeable'
+
+/* @vue/component */
+export default mixins(
+  Themeable
+).extend({
   name: 'v-timeline',
 
   props: {
@@ -13,7 +23,8 @@ export default Vue.extend({
     classes (): {} {
       return {
         'v-timeline--left': this.left,
-        'v-timeline--right': this.right
+        'v-timeline--right': this.right,
+        ...this.themeClasses
       }
     }
   },
