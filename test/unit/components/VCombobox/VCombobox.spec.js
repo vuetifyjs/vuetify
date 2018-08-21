@@ -67,7 +67,7 @@ test('VCombobox', ({ shallow }) => {
     wrapper.setData({ isMenuActive: false })
     await wrapper.vm.$nextTick()
 
-    expect(event).toBeCalledWith(123)
+    expect(event).toBeCalledWith(item)
   })
 
   it('should not populate search field if value is falsey', async () => {
@@ -144,7 +144,7 @@ test('VCombobox', ({ shallow }) => {
     input.element.value = 'foo'
     input.trigger('input')
 
-    input.trigger('blur')
+    input.trigger('keydown.tab')
     expect(change).toHaveBeenCalledWith('foo')
 
     input.trigger('keydown.esc')
@@ -173,14 +173,43 @@ test('VCombobox', ({ shallow }) => {
     input.trigger('focus')
 
     expect(wrapper.vm.isFocused).toBe(true)
-    expect(wrapper.vm.isMenuActive).toBe(false)
-
-    expect(wrapper.vm.menuCanShow).toBe(false)
+    expect(wrapper.vm.$_menuProps.value).toBe(false)
 
     slot.trigger('click')
 
-    expect(wrapper.vm.isMenuActive).toBe(false)
+    expect(wrapper.vm.$_menuProps.value).toBe(false)
 
     // TODO: Add expects for tags when impl
+  })
+
+  it('should return an object', () => {
+    const items = [
+      { text: 'Programming', value: 0 },
+      { text: 'Design', value: 1 },
+      { text: 'Vue', value: 2 },
+      { text: 'Vuetify', value: 3 }
+    ]
+    const wrapper = shallow(VCombobox, {
+      propsData: {
+        items
+      }
+    })
+
+    const input = wrapper.first('input')
+    const event = jest.fn()
+    wrapper.vm.$on('input', event)
+
+    input.trigger('focus')
+    input.element.value = 'Programming'
+    input.trigger('input')
+    wrapper.vm.selectItem(items[0])
+
+    expect(wrapper.vm.isFocused).toBe(true)
+    expect(event).toBeCalledWith(items[0])
+
+    input.trigger('keydown.tab')
+
+    expect(wrapper.vm.isFocused).toBe(false)
+    expect(wrapper.vm.internalValue).toEqual(items[0])
   })
 })

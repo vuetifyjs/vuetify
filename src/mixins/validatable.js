@@ -1,10 +1,11 @@
-
+import { deepEqual } from '../util/helpers'
 import { inject as RegistrableInject } from './registrable'
 import { consoleError } from '../util/console'
 
 // Mixins
 import Colorable from './colorable'
 
+/* @vue/component */
 export default {
   name: 'validatable',
 
@@ -12,15 +13,6 @@ export default {
     Colorable,
     RegistrableInject('form')
   ],
-
-  data: () => ({
-    errorBucket: [],
-    hasColor: false,
-    hasFocused: false,
-    hasInput: false,
-    isResetting: false,
-    valid: false
-  }),
 
   props: {
     error: Boolean,
@@ -48,6 +40,15 @@ export default {
     validateOnBlur: Boolean
   },
 
+  data: () => ({
+    errorBucket: [],
+    hasColor: false,
+    hasFocused: false,
+    hasInput: false,
+    isResetting: false,
+    valid: false
+  }),
+
   computed: {
     hasError () {
       return this.internalErrorMessages.length > 0 ||
@@ -67,7 +68,7 @@ export default {
       return this.validations.length > 0
     },
     hasState () {
-      return this.shouldValidate && (this.hasError || this.hasSuccess)
+      return this.hasSuccess || (this.shouldValidate && this.hasError)
     },
     internalErrorMessages () {
       return this.errorMessages || ''
@@ -84,7 +85,7 @@ export default {
     },
     validationState () {
       if (this.hasError && this.shouldValidate) return 'error'
-      if (this.hasSuccess && this.shouldValidate) return 'success'
+      if (this.hasSuccess) return 'success'
       if (this.hasColor) return this.color
       return null
     },
@@ -113,10 +114,7 @@ export default {
   watch: {
     rules: {
       handler (newVal, oldVal) {
-        // TODO: This handler seems to trigger when input changes, even though
-        // rules array stays the same? Solved it like this for now
-        if (newVal.length === oldVal.length) return
-
+        if (deepEqual(newVal, oldVal)) return
         this.validate()
       },
       deep: true
@@ -125,14 +123,12 @@ export default {
       // If it's the first time we're setting input,
       // mark it with hasInput
       this.hasInput = true
-      this.$nextTick(this.validate)
+      this.validateOnBlur || this.$nextTick(this.validate)
     },
     isFocused (val) {
-      if (!val) this.hasFocused = true
-      // If we're not focused, and it's the first time
-      // we're defocusing, set shouldValidate to true
-      if (!val && !this.hasFocused) {
-        this.$emit('update:error', this.errorBucket.length > 0)
+      if (!val) {
+        this.hasFocused = true
+        this.validateOnBlur && this.validate()
       }
     },
     isResetting () {
@@ -162,12 +158,18 @@ export default {
   },
 
   methods: {
+    /** @public */
     reset () {
       this.isResetting = true
       this.internalValue = Array.isArray(this.internalValue)
         ? []
         : undefined
     },
+    /** @public */
+    resetValidation () {
+      this.isResetting = true
+    },
+    /** @public */
     validate (force = false, value = this.internalValue) {
       const errorBucket = []
 

@@ -7,14 +7,18 @@ import Selectable from '../../mixins/selectable'
 // Directives
 import Touch from '../../directives/touch'
 
+// Helpers
+import { keyCodes } from '../../util/helpers'
+
+/* @vue/component */
 export default {
   name: 'v-switch',
+
+  directives: { Touch },
 
   mixins: [
     Selectable
   ],
-
-  directives: { Touch },
 
   computed: {
     classes () {
@@ -35,9 +39,8 @@ export default {
       return this.$createElement('div', {
         staticClass: 'v-input--selection-controls__input'
       }, [
-        this.genInput('checkbox'),
-        this.genRipple({
-          'class': this.classesSelectable,
+        this.genInput('checkbox', this.$attrs),
+        !this.disabled && this.genRipple(this.setTextColor(this.computedColor, {
           directives: [{
             name: 'touch',
             value: {
@@ -45,7 +48,7 @@ export default {
               right: this.onSwipeRight
             }
           }]
-        }),
+        })),
         this.genSwitchPart('track'),
         this.genSwitchPart('thumb')
       ])
@@ -55,16 +58,24 @@ export default {
     // this avoids a visual issue where
     // the color takes too long to transition
     genSwitchPart (target) {
-      return this.$createElement('div', {
+      return this.$createElement('div', this.setTextColor(this.computedColor, {
         staticClass: `v-input--switch__${target}`,
-        'class': this.classesSelectable
-      })
+        'class': this.themeClasses,
+        // Avoid cache collision
+        key: target
+      }))
     },
     onSwipeLeft () {
       if (this.isActive) this.onChange()
     },
     onSwipeRight () {
       if (!this.isActive) this.onChange()
+    },
+    onKeydown (e) {
+      if (
+        (e.keyCode === keyCodes.left && this.isActive) ||
+        (e.keyCode === keyCodes.right && !this.isActive)
+      ) this.onChange()
     }
   }
 }

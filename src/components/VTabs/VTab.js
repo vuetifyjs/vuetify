@@ -1,5 +1,6 @@
 // Mixins
 import Routable from '../../mixins/routable'
+import Themeable from '../../mixins/themeable'
 import {
   inject as RegistrableInject
 } from '../../mixins/registrable'
@@ -7,21 +8,17 @@ import {
 // Utilities
 import { getObjectValueByPath } from '../../util/helpers'
 
+/* @vue/component */
 export default {
   name: 'v-tab',
 
   mixins: [
     RegistrableInject('tabs', 'v-tab', 'v-tabs'),
-    Routable
+    Routable,
+    Themeable
   ],
 
   inject: ['tabClick'],
-
-  data () {
-    return {
-      isActive: false
-    }
-  },
 
   props: {
     activeClass: {
@@ -34,7 +31,16 @@ export default {
     }
   },
 
+  data () {
+    return {
+      isActive: false
+    }
+  },
+
   computed: {
+    isDark () {
+      return this.tabs.selfIsDark
+    },
     classes () {
       return {
         'v-tabs__item': true,
@@ -106,7 +112,7 @@ export default {
   },
 
   render (h) {
-    const link = this.generateRouteLink()
+    const link = this.generateRouteLink(this.classes)
     const { data } = link
 
     // If disabled, use div as anchor tags do not support

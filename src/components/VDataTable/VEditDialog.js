@@ -2,6 +2,7 @@ import '../../stylus/components/_small-dialog.styl'
 
 // Mixins
 import Returnable from '../../mixins/returnable'
+import Themeable from '../../mixins/themeable'
 
 // Utils
 import { keyCodes } from '../../util/helpers'
@@ -9,16 +10,11 @@ import { keyCodes } from '../../util/helpers'
 import VBtn from '../VBtn'
 import VMenu from '../VMenu'
 
+/* @vue/component */
 export default {
   name: 'v-edit-dialog',
 
-  mixins: [ Returnable ],
-
-  data () {
-    return {
-      isActive: false
-    }
-  },
+  mixins: [Returnable, Themeable],
 
   props: {
     cancelText: {
@@ -33,6 +29,12 @@ export default {
     transition: {
       type: String,
       default: 'slide-x-reverse-transition'
+    }
+  },
+
+  data () {
+    return {
+      isActive: false
     }
   },
 
@@ -96,7 +98,8 @@ export default {
 
   render (h) {
     return h(VMenu, {
-      'class': 'v-small-dialog',
+      staticClass: 'v-small-dialog',
+      class: this.themeClasses,
       props: {
         contentClass: 'v-small-dialog__content',
         transition: this.transition,

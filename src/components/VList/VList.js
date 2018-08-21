@@ -7,6 +7,7 @@ import {
   provide as RegistrableProvide
 } from '../../mixins/registrable'
 
+/* @vue/component */
 export default {
   name: 'v-list',
 
@@ -21,10 +22,6 @@ export default {
     }
   },
 
-  data: () => ({
-    groups: []
-  }),
-
   props: {
     dense: Boolean,
     expand: Boolean,
@@ -33,6 +30,10 @@ export default {
     twoLine: Boolean
   },
 
+  data: () => ({
+    groups: []
+  }),
+
   computed: {
     classes () {
       return {
@@ -40,8 +41,7 @@ export default {
         'v-list--subheader': this.subheader,
         'v-list--two-line': this.twoLine,
         'v-list--three-line': this.threeLine,
-        'theme--dark': this.dark,
-        'theme--light': this.light
+        ...this.themeClasses
       }
     }
   },

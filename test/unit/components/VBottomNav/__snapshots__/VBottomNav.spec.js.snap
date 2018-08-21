@@ -6,13 +6,13 @@ exports[`VBottomNav.js should be hidden with a false value 1`] = `
      style="height: 56px;"
 >
   <button type="button"
-          class="v-btn"
+          class="v-btn theme--light"
   >
     <div class="v-btn__content">
     </div>
   </button>
   <button type="button"
-          class="v-btn"
+          class="v-btn theme--light"
   >
     <div class="v-btn__content">
     </div>
@@ -27,13 +27,13 @@ exports[`VBottomNav.js should be visible with a true value 1`] = `
      style="height: 56px;"
 >
   <button type="button"
-          class="v-btn"
+          class="v-btn theme--light"
   >
     <div class="v-btn__content">
     </div>
   </button>
   <button type="button"
-          class="v-btn"
+          class="v-btn theme--light"
   >
     <div class="v-btn__content">
     </div>
@@ -48,13 +48,13 @@ exports[`VBottomNav.js should have a v-bottom-nav class 1`] = `
      style="height: 56px;"
 >
   <button type="button"
-          class="v-btn"
+          class="v-btn theme--light"
   >
     <div class="v-btn__content">
     </div>
   </button>
   <button type="button"
-          class="v-btn"
+          class="v-btn theme--light"
   >
     <div class="v-btn__content">
     </div>
@@ -69,13 +69,13 @@ exports[`VBottomNav.js should have prop classes 1`] = `
      style="height: 56px;"
 >
   <button type="button"
-          class="v-btn"
+          class="v-btn theme--light"
   >
     <div class="v-btn__content">
     </div>
   </button>
   <button type="button"
-          class="v-btn"
+          class="v-btn theme--light"
   >
     <div class="v-btn__content">
     </div>

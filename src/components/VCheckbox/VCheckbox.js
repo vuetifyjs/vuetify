@@ -8,16 +8,13 @@ import VIcon from '../VIcon'
 // Mixins
 import Selectable from '../../mixins/selectable'
 
+/* @vue/component */
 export default {
   name: 'v-checkbox',
 
   mixins: [
     Selectable
   ],
-
-  data: vm => ({
-    inputIndeterminate: vm.indeterminate
-  }),
 
   props: {
     indeterminate: Boolean,
@@ -34,6 +31,10 @@ export default {
       default: '$vuetify.icons.checkboxOff'
     }
   },
+
+  data: vm => ({
+    inputIndeterminate: vm.indeterminate
+  }),
 
   computed: {
     classes () {
@@ -65,16 +66,18 @@ export default {
         staticClass: 'v-input--selection-controls__input'
       }, [
         this.genInput('checkbox', {
+          ...this.$attrs,
           'aria-checked': this.inputIndeterminate
             ? 'mixed'
             : this.isActive.toString()
         }),
-        this.genRipple({
-          'class': this.classesSelectable
-        }),
-        this.$createElement(VIcon, {
-          'class': this.classesSelectable
-        }, this.computedIcon)
+        !this.disabled && this.genRipple(this.setTextColor(this.computedColor)),
+        this.$createElement(VIcon, this.setTextColor(this.computedColor, {
+          props: {
+            dark: this.dark,
+            light: this.light
+          }
+        }), this.computedIcon)
       ])
     },
     genDefaultSlot () {

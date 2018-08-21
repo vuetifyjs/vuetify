@@ -4,6 +4,7 @@ import '../../stylus/components/_time-picker-clock.styl'
 import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
 
+/* @vue/component */
 export default {
   name: 'v-time-picker-clock',
 
@@ -11,16 +12,6 @@ export default {
     Colorable,
     Themeable
   ],
-
-  data () {
-    return {
-      defaultColor: 'accent',
-      inputValue: this.value,
-      isDragging: false,
-      valueOnMouseDown: null,
-      valueOnMouseUp: null
-    }
-  },
 
   props: {
     allowedValues: Function,
@@ -38,6 +29,7 @@ export default {
       required: true
     },
     scrollable: Boolean,
+    readonly: Boolean,
     rotate: {
       type: Number,
       default: 0
@@ -51,6 +43,15 @@ export default {
       default: 1
     },
     value: Number
+  },
+
+  data () {
+    return {
+      inputValue: this.value,
+      isDragging: false,
+      valueOnMouseDown: null,
+      valueOnMouseUp: null
+    }
   },
 
   computed: {
@@ -111,16 +112,15 @@ export default {
       const children = []
 
       for (let value = this.min; value <= this.max; value = value + this.step) {
-        const classes = {
-          active: value === this.displayedValue,
-          disabled: !this.isAllowed(value)
-        }
-
-        children.push(this.$createElement('span', {
-          'class': this.addBackgroundColorClassChecks(classes, value === this.value ? this.computedColor : null),
+        const color = value === this.value && (this.color || 'accent')
+        children.push(this.$createElement('span', this.setBackgroundColor(color, {
+          'class': {
+            active: value === this.displayedValue,
+            disabled: !this.isAllowed(value)
+          },
           style: this.getTransform(value),
           domProps: { innerHTML: `<span>${this.format(value)}</span>` }
-        }))
+        })))
       }
 
       return children
@@ -128,14 +128,13 @@ export default {
     genHand () {
       const scale = `scaleY(${this.handScale(this.displayedValue)})`
       const angle = this.rotate + this.degreesPerUnit * (this.displayedValue - this.min)
-
-      return this.$createElement('div', {
+      const color = (this.value != null) && (this.color || 'accent')
+      return this.$createElement('div', this.setBackgroundColor(color, {
         staticClass: 'v-time-picker-clock__hand',
-        'class': this.value == null ? {} : this.addBackgroundColorClassChecks(),
         style: {
           transform: `rotate(${angle}deg) ${scale}`
         }
-      })
+      }))
     },
     getTransform (i) {
       const { x, y } = this.getPosition(i)
@@ -217,7 +216,7 @@ export default {
         'v-time-picker-clock--indeterminate': this.value == null,
         ...this.themeClasses
       },
-      on: {
+      on: this.readonly ? undefined : {
         mousedown: this.onMouseDown,
         mouseup: this.onMouseUp,
         mouseleave: () => (this.isDragging && this.onMouseUp()),
@@ -233,7 +232,7 @@ export default {
       ref: 'clock'
     }
 
-    this.scrollable && (data.on.wheel = this.wheel)
+    !this.readonly && this.scrollable && (data.on.wheel = this.wheel)
 
     return this.$createElement('div', data, [
       this.genHand(),

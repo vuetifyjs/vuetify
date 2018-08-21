@@ -25,7 +25,6 @@ theme(v-input, "v-input")
   display: flex
   flex: 1 1 auto
   font-size: 16px
-  margin-top: 16px // 12px for label, 16px for spec
   text-align: left
 
   .v-progress-linear
@@ -39,12 +38,15 @@ theme(v-input, "v-input")
 
   input,
   textarea
+    // Remove Firefox red outline
+    &:invalid
+      box-shadow: none
+
     &:focus,
     &:active
       outline: none
 
   .v-label
-    cursor: text
     height: 20px
     line-height: 20px
 
@@ -88,7 +90,6 @@ theme(v-input, "v-input")
   &__slot
     align-items: center
     color: inherit
-    cursor: text
     display: flex
     margin-bottom: 8px
     min-height: inherit

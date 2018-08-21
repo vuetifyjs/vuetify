@@ -12,6 +12,7 @@ module.exports = {
   },
   jsRules: {},
   rules: {
+    'array-type': [true, 'array'],
     'use-type-alias': true,
     'no-inferrable-types': true,
     'unified-signatures': true,
@@ -20,8 +21,8 @@ module.exports = {
 
     /* typestrict overrides */
 
-    // Don't check params, for abstract methods
-    'no-unused-variable': [true, { 'check-parameters': false }],
+    // Handled by tsc
+    'no-unused-variable': false,
 
     // Useless with vue
     'no-invalid-this': false,

@@ -3,8 +3,10 @@ import VOverflowBtn from '../VOverflowBtn'
 import VAutocomplete from '../VAutocomplete'
 import VCombobox from '../VCombobox'
 import rebuildSlots from '../../util/rebuildFunctionalSlots'
+import dedupeModelListeners from '../../util/dedupeModelListeners'
 import { deprecate } from '../../util/console'
 
+/* @vue/component */
 const wrapper = {
   functional: true,
 
@@ -12,19 +14,24 @@ const wrapper = {
 
   props: {
     // VAutoComplete
+    /** @deprecated */
     autocomplete: Boolean,
+    /** @deprecated */
     combobox: Boolean,
     multiple: Boolean,
     /** @deprecated */
     tags: Boolean,
-
     // VOverflowBtn
+    /** @deprecated */
     editable: Boolean,
+    /** @deprecated */
     overflow: Boolean,
+    /** @deprecated */
     segmented: Boolean
   },
 
   render (h, { props, data, slots, parent }) {
+    dedupeModelListeners(data)
     const children = rebuildSlots(slots(), h)
 
     if (props.autocomplete) {
@@ -62,11 +69,6 @@ const wrapper = {
       return h(VSelect, data, children)
     }
   }
-}
-
-/* istanbul ignore next */
-wrapper.install = function install (Vue) {
-  Vue.component(VSelect.name, wrapper)
 }
 
 export { wrapper as VSelect }

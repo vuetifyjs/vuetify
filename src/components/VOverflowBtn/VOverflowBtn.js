@@ -10,6 +10,7 @@ import VBtn from '../VBtn'
 
 import { consoleWarn } from '../../util/console'
 
+/* @vue/component */
 export default {
   name: 'v-overflow-btn',
 
@@ -35,6 +36,14 @@ export default {
     },
     isSingle () {
       return true
+    },
+    computedItems () {
+      return this.segmented ? this.allItems : this.filteredItems
+    },
+    $_menuProps () {
+      const props = VAutocomplete.computed.$_menuProps.call(this)
+      props.transition = props.transition || 'v-menu-transition'
+      return props
     }
   },
 
@@ -58,13 +67,14 @@ export default {
       return input
     },
     genLabel () {
+      if (this.editable && this.isFocused) return null
+
       const label = VTextField.methods.genLabel.call(this)
 
       if (!label) return label
 
-      // Force 16px always
-      label.data.style.left = '16px'
-      delete label.data.style.position
+      // Reset previously set styles from parent
+      label.data.style = {}
 
       return label
     },
@@ -93,10 +103,6 @@ export default {
       } else {
         this.selectedItems = [this.internalValue]
       }
-    },
-    updateSelf () {
-      if (this.editable) this.updateCombobox()
-      else VAutocomplete.methods.updateSelf.call(this)
     }
   }
 }

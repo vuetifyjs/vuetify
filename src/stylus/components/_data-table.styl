@@ -25,7 +25,7 @@ v-datatable($material)
 theme(v-datatable, "v-datatable")
 
 .v-datatable
-  .v-input
+  .v-input--selection-controls
     margin: 0
 
   thead
@@ -35,7 +35,6 @@ theme(v-datatable, "v-datatable")
 
       i
         font-size: 16px
-        vertical-align: sub
         display: inline-block
         opacity: 0
         transition: .3s $transition.swing
@@ -105,8 +104,7 @@ theme(v-datatable, "v-datatable")
     padding: 0 !important
 
     .v-progress-linear
-      top: -2px
-      margin: 0 0 -2px
+      margin: 0
 
 .v-datatable__expand
   &-row

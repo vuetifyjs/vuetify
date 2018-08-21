@@ -5,16 +5,11 @@ import '../../stylus/components/_cards.styl'
 import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
 
+/* @vue/component */
 export default {
   name: 'v-picker',
 
   mixins: [Colorable, Themeable],
-
-  data () {
-    return {
-      defaultColor: 'primary'
-    }
-  },
 
   props: {
     fullWidth: Boolean,
@@ -32,20 +27,19 @@ export default {
 
   computed: {
     computedTitleColor () {
-      const darkTheme = this.dark || (!this.light && this.$vuetify.dark)
-      const defaultTitleColor = darkTheme ? null : this.computedColor
+      const defaultTitleColor = this.isDark ? null : (this.color || 'primary')
       return this.color || defaultTitleColor
     }
   },
 
   methods: {
     genTitle () {
-      return this.$createElement('div', {
+      return this.$createElement('div', this.setBackgroundColor(this.computedTitleColor, {
         staticClass: 'v-picker__title',
-        'class': this.addBackgroundColorClassChecks({
+        'class': {
           'v-picker__title--landscape': this.landscape
-        }, this.computedTitleColor)
-      }, this.$slots.title)
+        }
+      }), this.$slots.title)
     },
     genBodyTransition () {
       return this.$createElement('transition', {
@@ -57,9 +51,7 @@ export default {
     genBody () {
       return this.$createElement('div', {
         staticClass: 'v-picker__body',
-        'class': {
-          ...this.themeClasses
-        },
+        'class': this.themeClasses,
         style: this.fullWidth ? undefined : {
           width: this.width + 'px'
         }

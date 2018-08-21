@@ -2,25 +2,24 @@
 import '../../stylus/components/_autocompletes.styl'
 
 // Extensions
-import VSelect from '../VSelect/VSelect'
+import VSelect, { defaultMenuProps as VSelectMenuProps } from '../VSelect/VSelect'
 import VTextField from '../VTextField/VTextField'
 
 // Utils
 import { keyCodes } from '../../util/helpers'
 
+const defaultMenuProps = {
+  ...VSelectMenuProps,
+  offsetY: true,
+  offsetOverflow: true,
+  transition: false
+}
+
+/* @vue/component */
 export default {
   name: 'v-autocomplete',
 
   extends: VSelect,
-
-  data: vm => ({
-    attrsInput: null,
-    editingIndex: -1,
-    lazySearch: vm.searchInput,
-    lazyValue: vm.value != null
-      ? vm.value
-      : vm.multiple ? [] : undefined
-  }),
 
   props: {
     allowOverflow: {
@@ -31,7 +30,6 @@ export default {
       type: String,
       default: 'off'
     },
-    delimiters: Array,
     filter: {
       type: Function,
       default: (item, queryText, itemText) => {
@@ -47,22 +45,19 @@ export default {
     },
     hideNoData: Boolean,
     noFilter: Boolean,
-    offsetY: {
-      type: Boolean,
-      default: true
-    },
-    offsetOverflow: {
-      type: Boolean,
-      default: true
-    },
     searchInput: {
       default: undefined
     },
-    transition: {
-      type: [Boolean, String],
-      default: false
+    menuProps: {
+      type: VSelect.props.menuProps.type,
+      default: () => defaultMenuProps
     }
   },
+
+  data: vm => ({
+    attrsInput: null,
+    lazySearch: vm.searchInput
+  }),
 
   computed: {
     classes () {
@@ -123,11 +118,13 @@ export default {
 
       return (this.displayedItemsCount > 0) || !this.hideNoData
     },
-    menuProps () {
-      return Object.assign(VSelect.computed.menuProps.call(this), {
-        contentClass: (`v-autocomplete__content ${this.contentClass || ''}`).trim(),
-        value: this.menuCanShow && this.isMenuActive
-      })
+    $_menuProps () {
+      const props = VSelect.computed.$_menuProps.call(this)
+      props.contentClass = `v-autocomplete__content ${props.contentClass || ''}`.trim()
+      return {
+        ...defaultMenuProps,
+        ...props
+      }
     },
     searchIsDirty () {
       return this.internalSearch != null &&
@@ -168,12 +165,25 @@ export default {
       if (val) {
         this.$refs.input &&
           this.$refs.input.select()
+      } else {
+        this.updateSelf()
       }
     },
     isMenuActive (val) {
       if (val || !this.hasSlot) return
 
       this.lazySearch = null
+    },
+    items (val) {
+      // If we are focused, the menu
+      // is not active and items change
+      // User is probably async loading
+      // items, try to activate the menu
+      if (
+        this.isFocused &&
+        !this.isMenuActive &&
+        val.length
+      ) this.activateMenu()
     },
     searchInput (val) {
       this.lazySearch = val
@@ -197,11 +207,6 @@ export default {
     },
     onInternalSearchChanged (val) {
       this.updateMenuDimensions()
-    },
-    activateMenu () {
-      if (this.menuCanShow) {
-        this.isMenuActive = true
-      }
     },
     updateMenuDimensions () {
       if (this.isMenuActive &&
@@ -261,7 +266,7 @@ export default {
       }
     },
     clearableCallback () {
-      this.internalSearch = null
+      this.internalSearch = undefined
 
       VSelect.methods.clearableCallback.call(this)
     },
@@ -277,10 +282,6 @@ export default {
       return this.hasSlot || this.multiple
         ? VSelect.methods.genSelections.call(this)
         : []
-    },
-    onBlur (e) {
-      this.updateSelf()
-      VSelect.methods.onBlur.call(this, e)
     },
     onClick () {
       if (this.isDisabled) return
@@ -325,26 +326,16 @@ export default {
       this.updateSelf()
     },
     selectItem (item) {
-      // Currently only supports items:<string[]>
-      if (this.editingIndex > -1) {
-        this.internalValue.splice(this.editingIndex, 1, this.internalSearch)
-        this.editingIndex = -1
-      } else {
-        VSelect.methods.selectItem.call(this, item)
-      }
+      VSelect.methods.selectItem.call(this, item)
 
       this.setSearch()
     },
     setSelectedItems () {
-      if (this.internalValue == null ||
-        this.internalValue === ''
-      ) {
-        this.selectedItems = []
-      } else {
-        VSelect.methods.setSelectedItems.call(this)
-        // #4273 Don't replace if searching
-        !this.isSearching && this.setSearch()
-      }
+      VSelect.methods.setSelectedItems.call(this)
+
+      // #4273 Don't replace if searching
+      // #4403 Don't replace if focused
+      if (!this.isFocused) this.setSearch()
     },
     setSearch () {
       // Wait for nextTick so selectedItem

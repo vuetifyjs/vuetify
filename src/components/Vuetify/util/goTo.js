@@ -68,8 +68,8 @@ export default function goTo (target, options) {
     if (!easingFunction) throw new TypeError(`Easing function '${settings.easing}' not found.`)
 
     function step (currentTime) {
-      let progressPercentage = Math.min(1, ((currentTime - startTime) / settings.duration))
-      let targetPosition = Math.floor(startLocation + distanceToScroll * easingFunction(progressPercentage))
+      const progressPercentage = Math.min(1, ((currentTime - startTime) / settings.duration))
+      const targetPosition = Math.floor(startLocation + distanceToScroll * easingFunction(progressPercentage))
 
       window.scrollTo(0, targetPosition)
 

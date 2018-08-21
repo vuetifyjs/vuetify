@@ -7,17 +7,15 @@ import VIcon from '../../VIcon'
  *
  * @mixin
  */
+/* @vue/component */
 export default {
   methods: {
     genBar (items) {
-      return this.$createElement('div', {
+      return this.$createElement('div', this.setBackgroundColor(this.color, {
         staticClass: 'v-tabs__bar',
-        'class': this.addBackgroundColorClassChecks({
-          'theme--dark': this.dark,
-          'theme--light': this.light
-        }),
+        'class': this.themeClasses,
         ref: 'bar'
-      }, [
+      }), [
         this.genTransition('prev'),
         this.genWrapper(
           this.genContainer(items)

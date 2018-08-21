@@ -22,23 +22,17 @@ import { deprecate } from '../../util/console'
 
 const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
 
+/* @vue/component */
 export default {
   name: 'v-text-field',
+
+  directives: { Ripple },
 
   extends: VInput,
 
   mixins: [Maskable],
 
-  directives: { Ripple },
-
   inheritAttrs: false,
-
-  data: () => ({
-    badInput: false,
-    initialValue: null,
-    internalChange: false,
-    isClearing: false
-  }),
 
   props: {
     appendOuterIcon: String,
@@ -79,6 +73,13 @@ export default {
     }
   },
 
+  data: () => ({
+    badInput: false,
+    initialValue: null,
+    internalChange: false,
+    isClearing: false
+  }),
+
   computed: {
     classes () {
       return {
@@ -94,6 +95,9 @@ export default {
         'v-text-field--reverse': this.reverse,
         'v-text-field--outline': this.hasOutline
       }
+    },
+    counterValue () {
+      return (this.internalValue || '').toString().length
     },
     directivesInput () {
       return []
@@ -194,7 +198,7 @@ export default {
     },
     /** @public */
     blur () {
-      this.onBlur()
+      this.$refs.input ? this.$refs.input.blur() : this.onBlur()
     },
     clearableCallback () {
       this.internalValue = null
@@ -261,13 +265,14 @@ export default {
     genCounter () {
       if (this.counter === false || this.counter == null) return null
 
-      const value = (this.internalValue || '').length
       const max = this.counter === true ? this.$attrs.maxlength : this.counter
 
       return this.$createElement(VCounter, {
         props: {
-          value,
-          max
+          dark: this.dark,
+          light: this.light,
+          max,
+          value: this.counterValue
         }
       })
     },
@@ -285,9 +290,11 @@ export default {
         props: {
           absolute: true,
           color: this.validationState,
+          dark: this.dark,
           disabled: this.disabled,
           focused: !this.isSingle && (this.isFocused || !!this.validationState),
           left: this.labelPosition.left,
+          light: this.light,
           right: this.labelPosition.right,
           value: this.labelValue
         }
@@ -307,13 +314,12 @@ export default {
           value: this.maskText(this.lazyValue)
         },
         attrs: {
+          'aria-label': (!this.$attrs || !this.$attrs.id) && this.label, // Label `for` will be set if we have an id
           ...this.$attrs,
           autofocus: this.autofocus,
           disabled: this.disabled,
           readonly: this.readonly,
-          tabindex: this.tabindex,
-          type: this.type,
-          'aria-label': (!this.$attrs || !this.$attrs.id) && this.label // Label `for` will be set if we have an id
+          type: this.type
         },
         on: Object.assign(listeners, {
           blur: this.onBlur,
@@ -331,6 +337,8 @@ export default {
       return this.$createElement('input', data)
     },
     genMessages () {
+      if (this.hideDetails) return null
+
       return this.$createElement('div', {
         staticClass: 'v-text-field__details'
       }, [
@@ -403,15 +411,7 @@ export default {
       VInput.methods.onMouseDown.call(this, e)
     },
     onMouseUp (e) {
-      // Default click handler is on slot,
-      // Mouse events are to enable specific
-      // input types when clicked
-      if (
-        (this.isSolo || this.hasOutline) &&
-        document.activeElement !== this.$refs.input
-      ) {
-        this.$refs.input.focus()
-      }
+      this.focus()
 
       VInput.methods.onMouseUp.call(this, e)
     }

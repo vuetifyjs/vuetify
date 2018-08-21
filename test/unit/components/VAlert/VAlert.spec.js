@@ -50,6 +50,9 @@ test('VAlert.vue', ({ mount }) => {
     wrapper.vm.$on('input', input)
 
     icon.trigger('click')
+
+    await wrapper.vm.$nextTick()
+
     expect(input).toBeCalledWith(false)
     expect(wrapper.html()).toMatchSnapshot()
   })
@@ -80,19 +83,19 @@ test('VAlert.vue', ({ mount }) => {
       }
     })
 
-    expect(wrapper.vm.classes.error).toBe(true)
+    expect(wrapper.vm.computedColor).toBe('error')
 
     wrapper.setProps({ 'type': 'success' })
     await wrapper.vm.$nextTick()
-    expect(wrapper.vm.classes.success).toBe(true)
+    expect(wrapper.vm.computedColor).toBe('success')
 
     wrapper.setProps({ 'type': 'warning' })
     await wrapper.vm.$nextTick()
-    expect(wrapper.vm.classes.warning).toBe(true)
+    expect(wrapper.vm.computedColor).toBe('warning')
 
     wrapper.setProps({ 'type': 'info' })
     await wrapper.vm.$nextTick()
-    expect(wrapper.vm.classes.info).toBe(true)
+    expect(wrapper.vm.computedColor).toBe('info')
   })
 
   it('should allow overriding color for contextual alert', async () => {
@@ -103,7 +106,7 @@ test('VAlert.vue', ({ mount }) => {
       }
     })
 
-    expect(wrapper.vm.classes.primary).toBe(true)
+    expect(wrapper.vm.computedColor).toBe('primary')
   })
 
   it('should allow overriding icon for contextual alert', async () => {

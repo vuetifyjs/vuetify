@@ -18,26 +18,9 @@ import { consoleWarn } from '../util/console'
  * providing selection, pagination, sorting and filtering.
  *
  */
+/* @vue/component */
 export default {
   name: 'data-iterable',
-
-  data () {
-    return {
-      searchLength: 0,
-      defaultPagination: {
-        descending: false,
-        page: 1,
-        rowsPerPage: 5,
-        sortBy: null,
-        totalItems: 0
-      },
-      expanded: {},
-      actionsClasses: 'v-data-iterator__actions',
-      actionsRangeControlsClasses: 'v-data-iterator__actions__range-controls',
-      actionsSelectClasses: 'v-data-iterator__actions__select',
-      actionsPaginationClasses: 'v-data-iterator__actions__pagination'
-    }
-  },
 
   mixins: [Filterable, Loadable, Themeable],
 
@@ -156,6 +139,22 @@ export default {
       default: () => {}
     }
   },
+
+  data: () => ({
+    searchLength: 0,
+    defaultPagination: {
+      descending: false,
+      page: 1,
+      rowsPerPage: 5,
+      sortBy: null,
+      totalItems: 0
+    },
+    expanded: {},
+    actionsClasses: 'v-data-iterator__actions',
+    actionsRangeControlsClasses: 'v-data-iterator__actions__range-controls',
+    actionsSelectClasses: 'v-data-iterator__actions__select',
+    actionsPaginationClasses: 'v-data-iterator__actions__pagination'
+  }),
 
   computed: {
     computedPagination () {
@@ -374,9 +373,7 @@ export default {
         props: {
           disabled: this.computedPagination.page === 1,
           icon: true,
-          flat: true,
-          dark: this.dark,
-          light: this.light
+          flat: true
         },
         on: {
           click: () => {
@@ -399,9 +396,7 @@ export default {
         props: {
           disabled,
           icon: true,
-          flat: true,
-          dark: this.dark,
-          light: this.light
+          flat: true
         },
         on: {
           click: () => {
@@ -427,8 +422,10 @@ export default {
             items: this.computedRowsPerPageItems,
             value: this.computedPagination.rowsPerPage,
             hideDetails: true,
-            auto: true,
-            minWidth: '75px'
+            menuProps: {
+              auto: true,
+              minWidth: '75px'
+            }
           },
           on: {
             input: val => {
@@ -474,8 +471,10 @@ export default {
       return [this.$createElement('div', {
         'class': this.actionsClasses
       }, [
+        this.$slots['actions-prepend'] ? this.$createElement('div', {}, this.$slots['actions-prepend']) : null,
         this.rowsPerPageItems.length > 1 ? this.genSelect() : null,
-        rangeControls
+        rangeControls,
+        this.$slots['actions-append'] ? this.$createElement('div', {}, this.$slots['actions-append']) : null
       ])]
     }
   }

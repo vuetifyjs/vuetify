@@ -1,9 +1,11 @@
 import VTextField from './VTextField'
 import VTextarea from '../VTextarea/VTextarea'
 import rebuildSlots from '../../util/rebuildFunctionalSlots'
+import dedupeModelListeners from '../../util/dedupeModelListeners'
 import { deprecate } from '../../util/console'
 
 // TODO: remove this in v2.0
+/* @vue/component */
 const wrapper = {
   functional: true,
 
@@ -15,6 +17,8 @@ const wrapper = {
   },
 
   render (h, { props, data, slots, parent }) {
+    dedupeModelListeners(data)
+
     const children = rebuildSlots(slots(), h)
 
     if (props.textarea) {
@@ -32,11 +36,6 @@ const wrapper = {
       return h(VTextField, data, children)
     }
   }
-}
-
-/* istanbul ignore next */
-wrapper.install = function install (Vue) {
-  Vue.component(VTextField.name, wrapper)
 }
 
 export { wrapper as VTextField }

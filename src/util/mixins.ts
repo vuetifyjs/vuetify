@@ -1,14 +1,21 @@
-/* eslint-disable max-len, import/export */
-import Vue, { VueConstructor, ComponentOptions } from 'vue'
+/* eslint-disable max-len, import/export, no-use-before-define */
+import Vue, { VueConstructor } from 'vue'
 
-type Component<T extends Vue> = ComponentOptions<T> | VueConstructor<T>
-
-export default function mixins<A extends Vue> (CtorA: Component<A>): VueConstructor<A>
-export default function mixins<A extends Vue, B extends Vue> (CtorA: Component<A>, CtorB: Component<B>): VueConstructor<A & B>
-export default function mixins<A extends Vue, B extends Vue, C extends Vue> (CtorA: Component<A>, CtorB: Component<B>, CtorC: Component<C>): VueConstructor<A & B & C>
-export default function mixins<A extends Vue, B extends Vue, C extends Vue, D extends Vue> (CtorA: Component<A>, CtorB: Component<B>, CtorC: Component<C>, CtorD: Component<D>): VueConstructor<A & B & C & D>
-export default function mixins<A extends Vue, B extends Vue, C extends Vue, D extends Vue, E extends Vue> (CtorA: Component<A>, CtorB: Component<B>, CtorC: Component<C>, CtorD: Component<D>, CtorE: Component<E>): VueConstructor<A & B & C & D & E>
-export default function mixins<A extends Vue, B extends Vue, C extends Vue, D extends Vue, E extends Vue, F extends Vue> (CtorA: Component<A>, CtorB: Component<B>, CtorC: Component<C>, CtorD: Component<D>, CtorE: Component<E>, CtorF: Component<F>): VueConstructor<A & B & C & D & E & F>
-export default function mixins (...args: Component<Vue>[]): any {
+export default function mixins<T extends VueConstructor[]> (...args: T): ExtractVue<T> extends infer V ? V extends Vue ? VueConstructor<V> : never : never
+export default function mixins<T extends Vue> (...args: VueConstructor[]): VueConstructor<T>
+export default function mixins (...args: VueConstructor[]): VueConstructor {
   return Vue.extend({ mixins: args })
 }
+
+/**
+ * Returns the instance type from a VueConstructor
+ * Useful for adding types when using mixins().extend()
+ */
+export type ExtractVue<T extends VueConstructor | VueConstructor[]> = T extends (infer U)[]
+  ? UnionToIntersection<
+    U extends VueConstructor<infer V> ? V : never
+  >
+  : T extends VueConstructor<infer V> ? V : never
+
+type UnionToIntersection<U> =
+  (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never

@@ -22,6 +22,7 @@ import {
   getPropertyFromItem
 } from '../../util/helpers'
 
+/* @vue/component */
 export default {
   name: 'v-select-list',
 
@@ -70,7 +71,7 @@ export default {
       return this.selectedItems.map(item => this.getValue(item))
     },
     tileActiveClass () {
-      return Object.keys(this.addTextColorClassChecks()).join(' ')
+      return Object.keys(this.setTextColor(this.color).class || {}).join(' ')
     },
     staticNoDataTile () {
       const tile = {
@@ -99,7 +100,7 @@ export default {
       return this.$createElement(VListTileAction, data, [
         this.$createElement(VCheckbox, {
           props: {
-            color: this.computedColor,
+            color: this.color,
             inputValue
           }
         })
@@ -138,9 +139,7 @@ export default {
       item,
       disabled = null,
       avatar = false,
-      value = this.parsedItems.indexOf(
-        this.getValue(item)
-      ) !== -1
+      value = this.hasItem(item)
     ) {
       if (item === Object(item)) {
         avatar = this.getAvatar(item)
@@ -191,6 +190,9 @@ export default {
         })]
       )
     },
+    hasItem (item) {
+      return this.parsedItems.indexOf(this.getValue(item)) > -1
+    },
     needsTile (tile) {
       return tile.componentOptions == null ||
         tile.componentOptions.Ctor.options.name !== 'v-list-tile'
@@ -202,7 +204,7 @@ export default {
       return Boolean(getPropertyFromItem(item, this.itemDisabled, false))
     },
     getText (item) {
-      return (getPropertyFromItem(item, this.itemText, item) || '').toString()
+      return String(getPropertyFromItem(item, this.itemText, item))
     },
     getValue (item) {
       return getPropertyFromItem(item, this.itemValue, this.getText(item))
@@ -213,15 +215,20 @@ export default {
     const children = []
     for (const item of this.items) {
       if (this.hideSelected &&
-        this.selectedItems.indexOf(item) > -1
+        this.hasItem(item)
       ) continue
 
-      if (item.header) children.push(this.genHeader(item))
+      if (item == null) children.push(this.genTile(item))
+      else if (item.header) children.push(this.genHeader(item))
       else if (item.divider) children.push(this.genDivider(item))
       else children.push(this.genTile(item))
     }
 
     children.length || children.push(this.$slots['no-data'] || this.staticNoDataTile)
+
+    this.$slots['prepend-item'] && children.unshift(this.$slots['prepend-item'])
+
+    this.$slots['append-item'] && children.push(this.$slots['append-item'])
 
     return this.$createElement('div', {
       staticClass: 'v-select-list v-card',

@@ -14,19 +14,11 @@ const rangeHours12am = createRange(12)
 const rangeHours12pm = rangeHours12am.map(v => v + 12)
 const rangeMinutes = createRange(60)
 
+/* @vue/component */
 export default {
   name: 'v-time-picker',
 
   mixins: [Picker],
-
-  data () {
-    return {
-      inputHour: null,
-      inputMinute: null,
-      period: 'am',
-      selectingHour: true
-    }
-  },
 
   props: {
     allowedHours: Function,
@@ -40,8 +32,18 @@ export default {
     },
     min: String,
     max: String,
+    readonly: Boolean,
     scrollable: Boolean,
     value: null
+  },
+
+  data () {
+    return {
+      inputHour: null,
+      inputMinute: null,
+      period: 'am',
+      selectingHour: true
+    }
   },
 
   computed: {
@@ -83,6 +85,10 @@ export default {
 
   watch: {
     value: 'setInputData'
+  },
+
+  mounted () {
+    this.setInputData(this.value)
   },
 
   methods: {
@@ -165,6 +171,7 @@ export default {
           light: this.light,
           max: this.selectingHour ? (this.isAmPm && this.period === 'am' ? 11 : 23) : 59,
           min: this.selectingHour && this.isAmPm && this.period === 'pm' ? 12 : 0,
+          readonly: this.readonly,
           scrollable: this.scrollable,
           size: this.width - ((!this.fullWidth && this.landscape) ? 80 : 20),
           step: this.selectingHour ? 1 : 5,
@@ -194,6 +201,7 @@ export default {
           hour: this.inputHour,
           minute: this.inputMinute,
           period: this.period,
+          readonly: this.readonly,
           selectingHour: this.selectingHour
         },
         on: {
@@ -204,10 +212,6 @@ export default {
         slot: 'title'
       })
     }
-  },
-
-  mounted () {
-    this.setInputData(this.value)
   },
 
   render () {

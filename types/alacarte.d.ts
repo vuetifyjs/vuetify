@@ -4,20 +4,19 @@ declare module 'vuetify/es5/components/Vuetify' {
   export default Vuetify
 }
 
-// TODO: transitions
 declare module 'vuetify/es5/components/*' {
-  import { PluginFunction, PluginObject, VueConstructor, ComponentOptions } from 'vue'
+  import { ComponentOrPack } from 'vuetify'
+  import { VueConstructor } from 'vue'
 
-  interface PluginConstructor extends VueConstructor {
-    install: PluginFunction<never>
+  const VuetifyComponent: {
+    // FIX: The & VueConstructor is a lie.
+    // This might not be a valid component.
+    // But registering arbitrary objects as components is the status quo.
+    default: ComponentOrPack & VueConstructor
+    [key: string]: ComponentOrPack & VueConstructor
   }
 
-  const Component: {
-    default: PluginConstructor,
-    [key: string]: PluginConstructor
-  }
-
-  export = Component
+  export = VuetifyComponent
 }
 
 declare module 'vuetify/es5/directives' {

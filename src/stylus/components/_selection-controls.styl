@@ -17,29 +17,36 @@ theme(selection-control, "v-input--selection-controls")
 rtl(v-selection-control-rtl, "v-input--selection-controls")
 
 .v-input--selection-controls
-  padding: 4px 0
+  margin-top: $input-top-spacing
+  padding-top: 4px
 
   .v-input__append-outer,
   .v-input__prepend-outer
     margin-top: 0
     margin-bottom: 0
 
+  .v-input__slot
+    margin-bottom: 12px
+
   &__input
     color: inherit
     display: inline-flex
-    flex: 0 1 auto
+    flex: 0 0 auto
     height: 24px
     position: relative
     margin-right: 8px
     transition: color .2s cubic-bezier(.25,.8,.25,1), transform .3s cubic-bezier(.25,.8,.25,1)
     width: 24px
+    user-select: none
 
     input
       position: absolute
       opacity: 0
 
+    // Sibling selector to avoid targeting v-radio-group's label
     & + .v-label
-      flex: 1 1
+      user-select: none
+      cursor: pointer
 
   &__ripple
     cursor: pointer
@@ -67,7 +74,6 @@ rtl(v-selection-control-rtl, "v-input--selection-controls")
     align-items: center
     display: inline-flex
     top: 0
-    user-select: none
     height: auto
 
   &.v-input--is-focused,

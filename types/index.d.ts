@@ -10,11 +10,12 @@ export interface Vuetify {
 }
 
 export type VuetifyDirective = DirectiveOptions & { name: string }
+export type ComponentOrPack = VueConstructor | { $_vuetify_subcomponents: Record<string, ComponentOrPack> }
 
 export interface VuetifyUseOptions {
   transitions?: Record<string, VueConstructor>
   directives?: Record<string, VuetifyDirective>
-  components?: Record<string, PluginObject<any> | PluginFunction<never>>
+  components?: Record<string, ComponentOrPack>
   /** @see https://vuetifyjs.com/style/theme */
   theme?: Partial<VuetifyTheme> | false
   /**
@@ -82,14 +83,21 @@ export interface VuetifyIcons {
   radioOn: string
   radioOff: string
   edit: string
+  ratingEmpty: string
+  ratingFull: string
+  ratingHalf: string
 }
 
 export interface VuetifyApplication {
   bar: number
   bottom: number
+  footer: number
   left: number
   right: number
   top: number
+  bind (uid: number, target: string, value: number): void
+  unbind (uid: number, target: string): void
+  update (target: string): void
 }
 
 export interface VuetifyBreakpoint {
@@ -114,7 +122,18 @@ export interface VuetifyBreakpoint {
   xsOnly: boolean
 }
 
-export type VuetifyThemeItem = string | number
+export type VuetifyThemeItem = string | number | {
+  base: string | number
+  lighten5: string | number
+  lighten4: string | number
+  lighten3: string | number
+  lighten2: string | number
+  lighten1: string | number
+  darken1: string | number
+  darken2: string | number
+  darken3: string | number
+  darken4: string | number
+}
 
 export interface VuetifyTheme {
   [name: string]: VuetifyThemeItem
@@ -134,9 +153,9 @@ export interface VuetifyThemeCache {
 }
 
 export interface VuetifyOptions {
-  themeVariations: string[]
   minifyTheme: ((css: string) => string) | null
   themeCache: VuetifyThemeCache | null
+  customProperties: boolean
   /** @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src#Unsafe_inline_script */
   cspNonce: string | null
 }

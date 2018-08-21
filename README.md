@@ -1,7 +1,6 @@
-
 <p align="center">
   <a href="https://vuetifyjs.com" target="_blank">
-    <img width="100"src="https://vuetifyjs.com/static/doc-images/logo.svg">
+    <img width="100"src="https://cdn.vuetifyjs.com/images/logos/logo.svg">
   </a>
 </p>
 
@@ -39,7 +38,23 @@
 
 <br>
 
-<h2 align="center">Supporting Vuetify</h2>
+<h2 align="center">Professionally-supported Vuetify.js now available</h2>
+<p>Tidelift gives software development teams a single source for purchasing and maintaining their software, with professional-grade assurances from the experts who know it best, while seamlessly integrating with existing tools.</p>
+
+<div align="center">
+  <a href="https://tidelift.com/subscription/npm/vuetify?utm_source=vuetify&utm_medium=referral&utm_campaign=readme">
+    <p align="center">
+      <img src="https://pbs.twimg.com/profile_images/953693944528896006/7pSbgJHd_bigger.jpg" alt="Get supported with Tidelift" />
+    </p>
+    <p align="center">
+      Get supported Vuetify.js with the Tidelift Subscription
+    </p>
+  </a>
+</div>
+
+<br>
+
+<h2 align="center">Supporting through Patreon</h2>
 <p>Vuetify is an open source MIT project that has been made possible due to the generous contributions by <a href="https://github.com/vuetifyjs/vuetify/blob/dev/BACKERS.md">community backers</a>. If you are interested in supporting this project, please consider becoming a patron.</p>
 
 <p align="center">
@@ -47,21 +62,17 @@
     <img src="https://c5.patreon.com/external/logo/become_a_patron_button.png" alt="Become a Patron" />
   </a>
 </p>
-
-<br>
-<h3 align="center">Patrons</h3>
-
-<h4 align="center">Diamond</h4>
+<p align="center"><b>Diamond</b></p>
 
 <p align="center">
   <a href="https://careers.lmax.com/?utm_source=vuetify&utm_medium=github-link&utm_campaign=lmax-careers">
-    <img height="70px" src="https://vuetifyjs.com/static/doc-images/backers/lmax-exchange.png">
+    <img height="70px" src="https://cdn.vuetifyjs.com/images/backers/lmax-exchange.png">
   </a><br>
   <a href="http://intygrate.com/?ref=vuetify-github">
-    <img height="70px" src="https://vuetifyjs.com/static/doc-images/backers/intygrate.png">
+    <img height="70px" src="https://cdn.vuetifyjs.com/images/backers/intygrate.png">
   </a><br>
   <a href="http://resaleai.com/?ref=vuetify-github">
-    <img height="70px" src="https://vuetifyjs.com/static/doc-images/backers/resaleai_logo_blue.svg">
+    <img height="70px" src="https://cdn.vuetifyjs.com/images/backers/resaleai_logo_blue.svg">
   </a>
 </p>
 
@@ -69,13 +80,16 @@
 
 <p align="center">
   <a href="http://www.eikospartners.com/?ref=vuetify-github">
-    <img height="40px" src="https://vuetifyjs.com/static/doc-images/backers/eikos-partners.webp">
+    <img height="40px" src="https://cdn.vuetifyjs.com/images/backers/eikos-partners.png">
   </a>
   <a href="https://application.rategenius.com/?ref=vuetify-github">
-    <img height="40px" src="https://vuetifyjs.com/static/doc-images/backers/rate-genius.png">
+    <img height="40px" src="https://cdn.vuetifyjs.com/images/backers/rate-genius.png">
   </a>
-  <a href="http://quitt.ch/?ref=vuetify-github">
-    <img height="40px" src="https://vuetifyjs.com/static/doc-images/backers/quitt.png">
+  <a href="http://www.clearbluetechnologies.com/">
+    <img height="40px" src="https://cdn.vuetifyjs.com/images/backers/clear-blue.png">
+  </a>
+  <a href="https://www.digitalmaas.com/?ref=vuetify-github">
+    <img height="40px" src="https://cdn.vuetifyjs.com/images/backers/digital-maas.svg">
   </a>
 </p>
 
@@ -97,7 +111,7 @@ Vuetify supports all **modern browsers**, including IE11 and Safari 9+ (using po
 
 You can find the Vuetify documentation <a href="https://vuetifyjs.com" target="_blank">on the website</a>.
 
-## One minute Quick-start
+## One Click Quick-start
 
 [Codepen link](https://codepen.io/johnjleider/pen/jYZwVZ)
 ```html
@@ -105,20 +119,27 @@ You can find the Vuetify documentation <a href="https://vuetifyjs.com" target="_
 <html>
 <head>
   <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
-  <link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 </head>
 <body>
   <div id="app">
     <v-app>
+      <v-toolbar app>
+        <v-toolbar-title>My Application</v-toolbar-title>
+      </v-toolbar>
+      <v-navigation-drawer app></v-navigation-drawer>
       <v-content>
-        <v-container>Hello world</v-container>
+        <v-container fluid>
+          Hello World
+        </v-container>
       </v-content>
+      <v-footer></v-footer>
     </v-app>
   </div>
 
-  <script src="https://unpkg.com/vue/dist/vue.js"></script>
-  <script src="https://unpkg.com/vuetify/dist/vuetify.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
   <script>
     new Vue({
       el: '#app'
@@ -126,6 +147,14 @@ You can find the Vuetify documentation <a href="https://vuetifyjs.com" target="_
   </script>
 </body>
 </html>
+```
+
+## Vue CLI-3 Install
+
+``` bash
+vue create my-app
+// THEN
+vue add vuetify
 ```
 
 ## Installation
@@ -152,7 +181,7 @@ Vue.use(Vuetify)
 For including styles, you can either place the below styles in your `index.html`
 ```html
 <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
-<link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
 ```
 Or you can import it to your webpack entry point
 ```javascript
@@ -178,7 +207,7 @@ It is important to note that for each release, the detailed changes are document
 
 ### Contributing Guide
 
-You can report issues by following the [Issue Template](https://issues.vuetifyjs.com/) and you can create a minimal reproduction with a [CodePen template](https://template.vuetifyjs.com/) or a full project at [CodeSandbox](https://codesandbox.io/s/vue).
+You can request features using the [Feature Request Template](https://github.com/vuetifyjs/vuetify/issues/new?template=feature_request.md) or report bugs using the [Bug Report Template](https://github.com/vuetifyjs/vuetify/issues/new?template=bug_report.md) and create a minimal reproduction with a [CodePen template](https://template.vuetifyjs.com/) or a full project at [CodeSandbox](https://codesandbox.io/s/vue).
 
 ### Good First Issue
 

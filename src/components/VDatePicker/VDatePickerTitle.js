@@ -6,14 +6,11 @@ import VIcon from '../VIcon'
 // Mixins
 import PickerButton from '../../mixins/picker-button'
 
+/* @vue/component */
 export default {
   name: 'v-date-picker-title',
 
   mixins: [PickerButton],
-
-  data: () => ({
-    isReversing: false
-  }),
 
   props: {
     date: {
@@ -32,6 +29,10 @@ export default {
       type: String
     }
   },
+
+  data: () => ({
+    isReversing: false
+  }),
 
   computed: {
     computedTransition () {
@@ -57,7 +58,7 @@ export default {
       return this.genPickerButton('selectingYear', true, [
         this.year,
         this.yearIcon ? this.genYearIcon() : null
-      ], 'v-date-picker-title__year')
+      ], false, 'v-date-picker-title__year')
     },
     genTitleText () {
       return this.$createElement('transition', {
@@ -72,7 +73,7 @@ export default {
       ])
     },
     genTitleDate (title) {
-      return this.genPickerButton('selectingYear', false, this.genTitleText(title), 'v-date-picker-title__date')
+      return this.genPickerButton('selectingYear', false, this.genTitleText(title), false, 'v-date-picker-title__date')
     }
   },
 

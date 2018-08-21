@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import { test } from '@/test'
-import VExpansionPanel from '@/components/VExpansionPanel'
+import VExpansionPanel from '@/components/VExpansionPanel/VExpansionPanel'
 import VExpansionPanelContent from '@/components/VExpansionPanel/VExpansionPanelContent'
 
 const createPanel = props => {
@@ -57,7 +57,7 @@ test('VExpansionPanel.js', ({ mount, compileToFunctions }) => {
   it('should show content on v-model change', async () => {
     const wrapper = mount(VExpansionPanel, {
       slots: {
-        default: VExpansionPanelContent
+        default: VExpansionPanelContent.options
       }
     })
 
@@ -75,7 +75,7 @@ test('VExpansionPanel.js', ({ mount, compileToFunctions }) => {
         value: 0
       },
       slots: {
-        default: VExpansionPanelContent
+        default: VExpansionPanelContent.options
       }
     })
 

@@ -6,16 +6,11 @@ import Colorable from '../../mixins/colorable'
 // Utils
 import { createNativeLocaleFormatter } from './util'
 
+/* @vue/component */
 export default {
   name: 'v-date-picker-years',
 
   mixins: [Colorable],
-
-  data () {
-    return {
-      defaultColor: 'primary'
-    }
-  },
 
   props: {
     format: {
@@ -29,6 +24,12 @@ export default {
     min: [Number, String],
     max: [Number, String],
     value: [Number, String]
+  },
+
+  data () {
+    return {
+      defaultColor: 'primary'
+    }
   },
 
   computed: {
@@ -49,16 +50,16 @@ export default {
   methods: {
     genYearItem (year) {
       const formatted = this.formatter(`${year}`)
+      const active = parseInt(this.value, 10) === year
+      const color = active && (this.color || 'primary')
 
-      return this.$createElement('li', {
+      return this.$createElement('li', this.setTextColor(color, {
         key: year,
-        'class': parseInt(this.value, 10) === year
-          ? this.addTextColorClassChecks({ active: true })
-          : {},
+        'class': { active },
         on: {
           click: () => this.$emit('input', year)
         }
-      }, formatted)
+      }), formatted)
     },
     genYearItems () {
       const children = []

@@ -3,27 +3,18 @@ import '../../stylus/components/_carousel.styl'
 import VBtn from '../VBtn'
 import VIcon from '../VIcon'
 
-import Bootable from '../../mixins/bootable'
 import Themeable from '../../mixins/themeable'
 import { provide as RegistrableProvide } from '../../mixins/registrable'
 
 import Touch from '../../directives/touch'
 
+/* @vue/component */
 export default {
   name: 'v-carousel',
 
-  mixins: [Bootable, Themeable, RegistrableProvide('carousel')],
-
   directives: { Touch },
 
-  data () {
-    return {
-      inputValue: null,
-      items: [],
-      slideTimeout: null,
-      reverse: false
-    }
-  },
+  mixins: [Themeable, RegistrableProvide('carousel')],
 
   props: {
     cycle: {
@@ -50,6 +41,21 @@ export default {
       default: '$vuetify.icons.prev'
     },
     value: Number
+  },
+
+  data () {
+    return {
+      inputValue: null,
+      items: [],
+      slideTimeout: null,
+      reverse: false
+    }
+  },
+
+  computed: {
+    isDark () {
+      return this.dark || !this.light
+    }
   },
 
   watch: {
@@ -104,9 +110,7 @@ export default {
       }, [
         this.$createElement(VBtn, {
           props: {
-            icon: true,
-            dark: this.dark || !this.light,
-            light: this.light
+            icon: true
           },
           on: { click: fn }
         }, [
@@ -125,9 +129,7 @@ export default {
           },
           props: {
             icon: true,
-            small: true,
-            dark: this.dark || !this.light,
-            light: this.light
+            small: true
           },
           key: index,
           on: { click: this.select.bind(this, index) }

@@ -6,6 +6,7 @@ import PickerButton from '../../mixins/picker-button'
 // Utils
 import { pad } from '../VDatePicker/util'
 
+/* @vue/component */
 export default {
   name: 'v-time-picker-title',
 
@@ -19,6 +20,7 @@ export default {
       type: String,
       validator: period => period === 'am' || period === 'pm'
     },
+    readonly: Boolean,
     selectingHour: Boolean
   },
 
@@ -44,8 +46,8 @@ export default {
       return this.$createElement('div', {
         staticClass: 'v-time-picker-title__ampm'
       }, [
-        this.genPickerButton('period', 'am', 'am'),
-        this.genPickerButton('period', 'pm', 'pm')
+        this.genPickerButton('period', 'am', 'am', this.readonly),
+        this.genPickerButton('period', 'pm', 'pm', this.readonly)
       ])
     }
   },

@@ -38,7 +38,7 @@ theme(v-list, "v-list")
 .v-list
   list-style-type: none
   padding: $list-top-padding 0 $list-bottom-padding
-  transition: height .3s $transition.fast-out-slow-in
+  transition: $primary-transition
 
   .v-input
     .v-messages
@@ -47,6 +47,10 @@ theme(v-list, "v-list")
   .v-input,
   .v-input__slot
     margin: 0
+
+  // TODO: Remove for List rewrite v2.0
+  > div
+    transition: inherit
 
   &__tile
     align-items: center
@@ -60,10 +64,10 @@ theme(v-list, "v-list")
     position: relative
     text-decoration: none
     transition: $primary-transition
-    user-select: none
 
     &--link
       cursor: pointer
+      user-select: none
 
     &__content,
     &__action
@@ -106,6 +110,10 @@ theme(v-list, "v-list")
 
       .v-radio.v-radio
         margin: 0
+
+      // QoL when using selection controls in actions
+      .v-input--selection-controls
+        padding: 0
 
       &-text
         color: $list-action-text-font-color
@@ -213,6 +221,7 @@ theme(v-list, "v-list")
     &:after
       content: ''
       height: 1px
+      left: 0
       position: absolute
       transition: $primary-transition
       width: 100%

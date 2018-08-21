@@ -1,27 +1,39 @@
+import OurVue from 'vue'
+
 import application from './mixins/application'
+import breakpoint from './mixins/breakpoint'
 import theme from './mixins/theme'
 import icons from './mixins/icons'
 import options from './mixins/options'
 import genLang from './mixins/lang'
-import { consoleWarn } from '../../util/console'
 import goTo from './util/goTo'
+
+// Utils
+import { consoleWarn, consoleError } from '../../util/console'
+
+// Types
 import { VueConstructor } from 'vue/types'
-import { Vuetify as VuetifyPlugin } from 'types'
+import { Vuetify as VuetifyPlugin, VuetifyUseOptions } from 'types'
 
 const Vuetify: VuetifyPlugin = {
   install (Vue, opts = {}) {
     if ((this as any).installed) return
+    ;(this as any).installed = true
 
-    (this as any).installed = true
+    if (OurVue !== Vue) {
+      consoleError('Multiple instances of Vue detected\nSee https://github.com/vuetifyjs/vuetify/issues/4068\n\nIf you\'re seeing "$attrs is readonly", it\'s caused by this')
+    }
 
     checkVueVersion(Vue)
 
     const lang = genLang(opts.lang)
 
     Vue.prototype.$vuetify = new Vue({
+      mixins: [
+        breakpoint
+      ],
       data: {
         application,
-        breakpoint: {},
         dark: false,
         icons: icons(opts.iconfont, opts.icons),
         lang,
@@ -35,35 +47,33 @@ const Vuetify: VuetifyPlugin = {
       }
     })
 
-    if (opts.transitions) {
-      Object.values(opts.transitions).forEach(transition => {
-        if (transition.name !== undefined && transition.name.startsWith('v-')) {
-          Vue.component(transition.name, transition)
-        }
-      })
-    }
-
     if (opts.directives) {
-      Object.values(opts.directives).forEach(directive => {
-        Vue.directive(directive.name, directive)
-      })
+      for (const name in opts.directives) {
+        Vue.directive(name, opts.directives[name])
+      }
     }
 
-    if (opts.components) {
-      Object.values(opts.components).forEach(component => {
-        Vue.use(component)
-      })
-    }
+    (function registerComponents (components: VuetifyUseOptions['components']) {
+      if (components) {
+        for (const key in components) {
+          const component = components[key]
+          if (!registerComponents(component.$_vuetify_subcomponents)) {
+            Vue.component(key, component)
+          }
+        }
+        return true
+      }
+      return false
+    })(opts.components)
   },
   version: __VUETIFY_VERSION__
 }
 
-/* istanbul ignore next */
-function checkVueVersion (Vue: VueConstructor) {
-  const vueDep = __REQUIRED_VUE__ as string
+export function checkVueVersion (Vue: VueConstructor, requiredVue?: string) {
+  const vueDep = requiredVue || __REQUIRED_VUE__
 
-  const required = vueDep.split('.').map(v => v.replace(/\D/g, '')).map(Number)
-  const actual = Vue.version.split('.').map(Number)
+  const required = vueDep.split('.', 3).map(v => v.replace(/\D/g, '')).map(Number)
+  const actual = Vue.version.split('.', 3).map(n => parseInt(n, 10))
 
   // Simple semver caret range comparison
   const passes =

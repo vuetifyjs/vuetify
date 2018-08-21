@@ -3,10 +3,9 @@ import VTimelineItem from './VTimelineItem'
 
 export { VTimeline, VTimelineItem }
 
-/* istanbul ignore next */
-VTimeline.install = function install (Vue) {
-  Vue.component(VTimeline.options.name, VTimeline)
-  Vue.component(VTimelineItem.options.name, VTimelineItem)
+export default {
+  $_vuetify_subcomponents: {
+    VTimeline,
+    VTimelineItem
+  }
 }
-
-export default VTimeline

@@ -109,6 +109,29 @@ test('VSlider.vue', ({ mount }) => {
     expect(warning).toHaveBeenTipped()
   })
 
+  it('should round value with offset correct', async () => {
+    const wrapper = mount(VSlider, {
+      propsData: {
+        min: 3,
+        max: 15,
+        step: 3
+      }
+    })
+
+    const input = jest.fn()
+    wrapper.vm.$on('input', input)
+
+    wrapper.setProps({ value: 5 })
+    await wrapper.vm.$nextTick()
+    expect(input).toHaveBeenLastCalledWith(6)
+
+    wrapper.setProps({ value: 7 })
+    await wrapper.vm.$nextTick()
+    expect(input).toHaveBeenLastCalledWith(6)
+
+    expect(warning).toHaveBeenTipped()
+  })
+
   it('should react to keydown event', async () => {
     const wrapper = mount(VSlider, {
       propsData: {
@@ -327,6 +350,30 @@ test('VSlider.vue', ({ mount }) => {
     expect(wrapper.vm.roundValue(7.667)).toBe(8)
 
     wrapper.setProps({ step: 2.5 })
+
+    expect(wrapper.vm.roundValue(5.667)).toBe(5)
+
+    expect(warning).toHaveBeenTipped()
+  })
+
+  it('should return a rounded value with offset', () => {
+    const wrapper = mount(VSlider, {
+      propsData: { step: 0 }
+    })
+
+    expect(wrapper.vm.roundValue(1.234)).toBe(1.234)
+
+    wrapper.setProps({ step: 1, step: 2 })
+
+    expect(wrapper.vm.roundValue(1.234)).toBe(2)
+
+    wrapper.setProps({ step: 4, min: 2 })
+
+    expect(wrapper.vm.roundValue(5.667)).toBe(6)
+
+    expect(wrapper.vm.roundValue(7.667)).toBe(6)
+
+    wrapper.setProps({ step: 2.5, min: 5 })
 
     expect(wrapper.vm.roundValue(5.667)).toBe(5)
 
