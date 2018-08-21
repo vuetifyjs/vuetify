@@ -9,10 +9,10 @@ import VIcon from '../VIcon'
 import Themeable from '../../mixins/themeable'
 import Colorable from '../../mixins/colorable'
 
-/* @vue/component */
 export default mixins(
   Colorable,
   Themeable
+/* @vue/component */
 ).extend({
   name: 'v-timeline-item',
 

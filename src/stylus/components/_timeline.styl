@@ -37,10 +37,7 @@ theme(v-timeline, "v-timeline")
       elevation(1)
 
       position: absolute
-      display: flex
       align-self: center
-      justify-content: center
-      align-items: center
       border-radius: 50%
       width: 38px
       height: 38px
@@ -52,10 +49,12 @@ theme(v-timeline, "v-timeline")
         left: calc(50% - 12px)
 
         .v-timeline-item__inner-dot
+          margin: 3px
           width: 18px
           height: 18px
 
     &__inner-dot
+      margin: 4px
       display: flex
       justify-content: center
       align-items: center
