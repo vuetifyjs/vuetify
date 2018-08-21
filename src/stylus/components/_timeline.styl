@@ -6,11 +6,20 @@ v-timeline($material)
     background: $material.timeline.active
 
   .v-timeline-item
-
     &__dot
       background: $material.cards
 
+    &:nth-child(odd):not(.v-timeline-item--right), &--left
+      .v-timeline-item__body:before
+        border-color: transparent transparent transparent black
+
+    &:nth-child(even):not(.v-timeline-item--left), &--right
+      .v-timeline-item__body:before
+        border-color: transparent black transparent transparent
+
 theme(v-timeline, "v-timeline")
+
+$wedge-size := 10px
 
 .v-timeline
   padding-top: 24px
@@ -32,6 +41,23 @@ theme(v-timeline, "v-timeline")
 
     &:nth-child(odd):not(.v-timeline-item--right), &--left
       flex-direction: row
+
+      .v-timeline-item__body:before
+        border-width: $wedge-size 0 $wedge-size $wedge-size
+        right: -($wedge-size)
+
+      .v-timeline-item__opposite
+        margin-left: 112px
+        text-align: left
+
+    &:nth-child(even):not(.v-timeline-item--left), &--right
+      .v-timeline-item__body:before
+        border-width: $wedge-size $wedge-size $wedge-size 0
+        left: -($wedge-size)
+
+      .v-timeline-item__opposite
+        margin-right: 112px
+        text-align: right
 
     &__dot
       elevation(1)
@@ -63,25 +89,21 @@ theme(v-timeline, "v-timeline")
       height: 30px
 
     &__body
+      position: relative
       height: 100%
       flex: 1 1 100%
       max-width: calc(50% - 36px)
+
+      &:before
+        content: ''
+        position: absolute
+        border-style: solid
+        top: 'calc(50% - %s)' % $wedge-size
 
     &__opposite
       flex: 1 1 auto
       align-self: center
       max-width: calc(50% - 36px)
-
-    &:nth-child(odd):not(.v-timeline-item--right), &--left
-      .v-timeline-item__opposite
-        margin-left: 112px
-        text-align: left
-
-    &:nth-child(even):not(.v-timeline-item--left), &--right
-      .v-timeline-item__opposite
-        margin-right: 112px
-        text-align: right
-
 
   @media $display-breakpoints.sm-and-down
     &:before
