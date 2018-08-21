@@ -366,16 +366,20 @@ export default {
         selections.children.push(input)
       }
 
-      const activator = this.genSelectSlot([
-        this.genLabel(),
-        this.prefix ? this.genAffix('prefix') : null,
-        selections,
-        this.suffix ? this.genAffix('suffix') : null,
-        this.genClearIcon(),
-        this.genIconSlot()
-      ])
-
-      return [this.genMenu(activator)]
+      return [
+        this.genMenu(),
+        this.$createElement('div', {
+          staticClass: 'v-select__slot',
+          directives: this.directives
+        }, [
+          this.genLabel(),
+          this.prefix ? this.genAffix('prefix') : null,
+          selections,
+          this.suffix ? this.genAffix('suffix') : null,
+          this.genClearIcon(),
+          this.genIconSlot()
+        ])
+      ]
     },
     genInput () {
       const input = VTextField.methods.genInput.call(this)
@@ -407,7 +411,7 @@ export default {
         ...this.listData
       }, slots)
     },
-    genMenu (activator) {
+    genMenu () {
       const props = this.$_menuProps
       props.activator = this.$refs['input-slot']
 
@@ -461,7 +465,7 @@ export default {
           }
         },
         ref: 'menu'
-      }, [activator, this.genList()])
+      }, [this.genList()])
     },
     genSelections () {
       let length = this.selectedItems.length
@@ -486,13 +490,6 @@ export default {
 
       return this.$createElement('div', {
         staticClass: 'v-select__selections'
-      }, children)
-    },
-    genSelectSlot (children) {
-      return this.$createElement('div', {
-        staticClass: 'v-select__slot',
-        directives: this.directives,
-        slot: 'activator'
       }, children)
     },
     genSlotSelection (item, index) {
