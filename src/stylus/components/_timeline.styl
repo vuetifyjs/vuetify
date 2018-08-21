@@ -3,7 +3,12 @@
 
 v-timeline($material)
   &:before
-    background: $material.dividers
+    background: $material.timeline.active
+
+  .v-timeline-item
+
+    &__dot
+      background: $material.cards
 
 theme(v-timeline, "v-timeline")
 
@@ -28,19 +33,45 @@ theme(v-timeline, "v-timeline")
     &:nth-child(odd):not(.v-timeline-item--right), &--left
       flex-direction: row
 
-    &__btn
+    &__dot
+      elevation(1)
+
+      position: absolute
+      display: flex
       align-self: center
-      left: calc(50% - 20px)
+      justify-content: center
+      align-items: center
+      border-radius: 50%
+      width: 38px
+      height: 38px
+      left: calc(50% - 19px)
+
+      &--small
+        width: 24px
+        height: 24px
+        left: calc(50% - 12px)
+
+        .v-timeline-item__inner-dot
+          width: 18px
+          height: 18px
+
+    &__inner-dot
+      display: flex
+      justify-content: center
+      align-items: center
+      border-radius: 50%
+      width: 30px
+      height: 30px
 
     &__body
       height: 100%
       flex: 1 1 100%
-      max-width: calc(50% - 56px)
+      max-width: calc(50% - 36px)
 
     &__opposite
       flex: 1 1 auto
       align-self: center
-      max-width: calc(50% - 56px)
+      max-width: calc(50% - 36px)
 
     &:nth-child(odd):not(.v-timeline-item--right), &--left
       .v-timeline-item__opposite

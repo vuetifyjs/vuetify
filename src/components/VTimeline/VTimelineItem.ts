@@ -1,24 +1,31 @@
-// Components
-import VIcon from '../VIcon'
-import VBtn from '../VBtn'
-
-// Mixins
-import Colorable from '../../mixins/colorable'
+// Types
 import mixins from '../../util/mixins'
 import { VNode } from 'vue'
 
-export default mixins(Colorable).extend({
+// Components
+import VIcon from '../VIcon'
+
+// Mixins
+import Themeable from '../../mixins/themeable'
+import Colorable from '../../mixins/colorable'
+
+/* @vue/component */
+export default mixins(
+  Colorable,
+  Themeable
+).extend({
   name: 'v-timeline-item',
 
   props: {
-    icon: String,
     color: {
       type: String,
       default: 'primary'
     },
+    icon: String,
     iconColor: String,
     left: Boolean,
-    right: Boolean
+    right: Boolean,
+    small: Boolean
   },
 
   methods: {
@@ -30,22 +37,32 @@ export default mixins(Colorable).extend({
     genIcon () {
       return this.$createElement(VIcon, {
         props: {
-          color: this.iconColor
+          color: this.iconColor,
+          dark: !this.theme.isDark,
+          small: this.small
         }
       }, this.icon)
     },
-    genBtn () {
-      const children = this.icon ? [this.genIcon()] : []
+    genInnerDot () {
+      const children = []
 
-      return this.$createElement(VBtn, {
-        staticClass: 'v-timeline-item__btn',
-        props: {
-          small: true,
-          absolute: true,
-          color: this.color,
-          fab: true
+      this.icon && children.push(this.genIcon())
+
+      let data = {
+        staticClass: 'v-timeline-item__inner-dot'
+      }
+
+      data = this.setBackgroundColor(this.color, data)
+
+      return this.$createElement('div', data, children)
+    },
+    genDot () {
+      return this.$createElement('div', {
+        staticClass: 'v-timeline-item__dot',
+        class: {
+          'v-timeline-item__dot--small': this.small
         }
-      }, children)
+      }, [this.genInnerDot()])
     },
     genOpposite () {
       return this.$createElement('div', {
@@ -55,7 +72,7 @@ export default mixins(Colorable).extend({
   },
 
   render (h): VNode {
-    const children = [this.genBtn(), this.genBody()]
+    const children = [this.genDot(), this.genBody()]
 
     if (this.$slots.opposite) children.push(this.genOpposite())
 
@@ -63,7 +80,8 @@ export default mixins(Colorable).extend({
       staticClass: 'v-timeline-item',
       class: {
         'v-timeline-item--left': this.left,
-        'v-timeline-item--right': this.right
+        'v-timeline-item--right': this.right,
+        ...this.themeClasses
       }
     }, children)
   }
