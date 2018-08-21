@@ -615,7 +615,7 @@ exports[`VSlider.vue should reverse label location when inverse 2`] = `
 
 `;
 
-exports[`VSlider.vue should not display label but should add aria-label when invisibleLabel 1`] = `
+exports[`VSlider.vue should not display label but should add aria-label when hideLabel 1`] = `
 
 <div class="v-input v-input--slider theme--light">
   <div class="v-input__control">
@@ -663,7 +663,7 @@ exports[`VSlider.vue should not display label but should add aria-label when inv
 
 `;
 
-exports[`VSlider.vue should not display label but should add aria-label when invisibleLabel 2`] = `
+exports[`VSlider.vue should not display label but should add aria-label when hideLabel 2`] = `
 
 <div class="v-input v-input--slider theme--light">
   <div class="v-input__control">

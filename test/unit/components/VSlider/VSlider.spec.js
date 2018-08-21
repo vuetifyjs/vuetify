@@ -536,14 +536,14 @@ test('VSlider.vue', ({ mount }) => {
     wrapper.vm.$vuetify.rtl = undefined
   })
 
-  it('should not display label but should add aria-label when invisibleLabel', () => {
+  it('should not display label but should add aria-label when hideLabel', () => {
     const wrapper = mount(VSlider, {
       propsData: { label: 'foo' }
     })
 
     expect(wrapper.html()).toMatchSnapshot()
 
-    wrapper.setProps({ invisibleLabel: true })
+    wrapper.setProps({ hideLabel: true })
 
     expect(wrapper.html()).toMatchSnapshot()
     expect(warning).toHaveBeenTipped()

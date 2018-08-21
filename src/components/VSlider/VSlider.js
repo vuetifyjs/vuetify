@@ -31,7 +31,7 @@ export default {
   props: {
     alwaysDirty: Boolean,
     inverseLabel: Boolean,
-    invisibleLabel: Boolean,
+    hideLabel: Boolean,
     label: String,
     min: {
       type: [Number, String],
@@ -223,7 +223,7 @@ export default {
 
   methods: {
     genDefaultSlot () {
-      const children = [this.invisibleLabel ? null : this.genLabel()]
+      const children = [this.hideLabel ? null : this.genLabel()]
       const slider = this.genSlider()
       this.inverseLabel
         ? children.unshift(slider)
