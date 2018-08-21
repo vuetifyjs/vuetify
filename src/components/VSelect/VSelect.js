@@ -367,7 +367,6 @@ export default {
       }
 
       return [
-        this.genMenu(),
         this.$createElement('div', {
           staticClass: 'v-select__slot',
           directives: this.directives
@@ -378,7 +377,8 @@ export default {
           this.suffix ? this.genAffix('suffix') : null,
           this.genClearIcon(),
           this.genIconSlot()
-        ])
+        ]),
+        this.genMenu()
       ]
     },
     genInput () {
@@ -544,7 +544,6 @@ export default {
       e.preventDefault()
       this.isMenuActive = false
     },
-    // Detect tab and call original onBlur method
     onKeyDown (e) {
       const keyCode = e.keyCode
 
@@ -554,6 +553,8 @@ export default {
         keyCodes.space,
         keyCodes.up, keyCodes.down
       ].includes(keyCode)) this.activateMenu()
+
+      if (this.isMenuActive && this.$refs.menu) this.$refs.menu.changeListIndex(e)
 
       // This should do something different
       if (keyCode === keyCodes.enter) return this.onEnterDown()
