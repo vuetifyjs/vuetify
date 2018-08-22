@@ -178,4 +178,43 @@ test('VExpansionPanel.js', ({ mount, compileToFunctions }) => {
     expect(input).toHaveBeenCalledWith([false, true])
     expect(wrapper.find('.v-expansion-panel__container--active').length).toBe(1)
   })
+
+  it('should unregister content', async () => {
+    const wrapper = mount(VExpansionPanel, {
+      slots: {
+        default: [VExpansionPanelContent]
+      }
+    })
+
+    const content = wrapper.first(VExpansionPanelContent.options)
+
+    expect(wrapper.vm.items.length).toBe(1)
+
+    content.destroy()
+
+    expect(wrapper.vm.items.length).toBe(0)
+  })
+
+  it('should update from value', async () => {
+    const updatePanels = jest.fn()
+    const wrapper = mount(VExpansionPanel, {
+      methods: { updatePanels }
+    })
+
+    wrapper.vm.updateFromValue([true])
+
+    expect(updatePanels).not.toBeCalled()
+
+    wrapper.vm.updateFromValue(0)
+
+    expect(updatePanels).toBeCalledWith([true])
+
+    wrapper.vm.updateFromValue('foo')
+
+    expect(updatePanels).toBeCalledWith('foo')
+
+    wrapper.vm.updateFromValue(null)
+
+    expect(updatePanels).toBeCalledWith([])
+  })
 })
