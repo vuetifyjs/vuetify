@@ -21,7 +21,7 @@ test('VExpansionPanel.js', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.html()).toMatchSnapshot()
 
-    wrapper.find('.v-expansion-panel__header')[0].trigger('click')
+    wrapper.find('.v-expansion-panel__activator')[0].trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
   })
@@ -49,7 +49,7 @@ test('VExpansionPanel.js', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.html()).toMatchSnapshot()
 
-    wrapper.find('.v-expansion-panel__header')[0].trigger('click')
+    wrapper.find('.v-expansion-panel__activator')[0].trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
   })

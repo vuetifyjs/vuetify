@@ -73,7 +73,7 @@ test('VExpansionPanelContent.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    wrapper.first('.v-expansion-panel__header').trigger('click')
+    wrapper.first('.v-expansion-panel__activator').trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
   })
