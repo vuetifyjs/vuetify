@@ -79,9 +79,6 @@ export default mixins<options &
 
   beforeMount () {
     this.expansionPanel.register(this)
-
-    // Can be removed once fully deprecated
-    if (typeof this.value !== 'undefined') consoleWarn('v-model has been deprecated', this)
   },
 
   beforeDestroy () {
