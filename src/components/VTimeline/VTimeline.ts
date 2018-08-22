@@ -2,7 +2,7 @@
 import '../../stylus/components/_timeline.styl'
 
 // Types
-import Vue, { VNode } from 'vue'
+import { VNode } from 'vue'
 import mixins from '../../util/mixins'
 
 // Mixins

@@ -1,6 +1,6 @@
 // Types
 import mixins from '../../util/mixins'
-import { VNode } from 'vue'
+import { VNode, VNodeData } from 'vue'
 
 // Components
 import VIcon from '../VIcon'
@@ -34,7 +34,7 @@ export default mixins(
         staticClass: 'v-timeline-item__body'
       }, this.$slots.default)
     },
-    genIcon () {
+    genIcon (): VNode {
       return this.$createElement(VIcon, {
         props: {
           color: this.iconColor,
@@ -48,13 +48,12 @@ export default mixins(
 
       this.icon && children.push(this.genIcon())
 
-      let data = {
-        staticClass: 'v-timeline-item__inner-dot'
-      }
+      const data: VNodeData = this.setBackgroundColor(this.color)
 
-      data = this.setBackgroundColor(this.color, data)
-
-      return this.$createElement('div', data, children)
+      return this.$createElement('div', {
+        staticClass: 'v-timeline-item__inner-dot',
+        ...data
+      }, children)
     },
     genDot () {
       return this.$createElement('div', {

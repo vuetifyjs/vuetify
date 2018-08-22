@@ -9,13 +9,12 @@ v-timeline($material)
     &__dot
       background: $material.cards
 
-    &:nth-child(odd):not(.v-timeline-item--right), &--left
-      .v-timeline-item__body:before
-        border-color: transparent transparent transparent black
+    &__body
+      &:before
+        border-color: transparent $material.dividers transparent transparent
 
-    &:nth-child(even):not(.v-timeline-item--left), &--right
-      .v-timeline-item__body:before
-        border-color: transparent black transparent transparent
+      &:after
+        border-color: transparent $material.cards transparent transparent
 
 theme(v-timeline, "v-timeline")
 
@@ -42,21 +41,20 @@ $wedge-size := 10px
     &:nth-child(odd):not(.v-timeline-item--right), &--left
       flex-direction: row
 
-      .v-timeline-item__body:before
-        border-width: $wedge-size 0 $wedge-size $wedge-size
+      .v-timeline-item__body:before, .v-timeline-item__body:after
+        transform: rotate(180deg)
         right: -($wedge-size)
 
       .v-timeline-item__opposite
-        margin-left: 112px
+        margin-left: 72px
         text-align: left
 
     &:nth-child(even):not(.v-timeline-item--left), &--right
-      .v-timeline-item__body:before
-        border-width: $wedge-size $wedge-size $wedge-size 0
+      .v-timeline-item__body:before, .v-timeline-item__body:after
         left: -($wedge-size)
 
       .v-timeline-item__opposite
-        margin-right: 112px
+        margin-right: 72px
         text-align: right
 
     &__dot
@@ -94,11 +92,15 @@ $wedge-size := 10px
       flex: 1 1 100%
       max-width: calc(50% - 36px)
 
-      &:before
+      &:before, &:after
         content: ''
         position: absolute
         border-style: solid
+        border-width: $wedge-size $wedge-size $wedge-size 0
         top: 'calc(50% - %s)' % $wedge-size
+
+      &:before
+        top: 'calc(50% - %s + 2px)' % $wedge-size
 
     &__opposite
       flex: 1 1 auto
@@ -112,6 +114,12 @@ $wedge-size := 10px
     .v-timeline-item
       &:nth-child(odd):not(.v-timeline-item--right), &--left
         flex-direction: row-reverse
+
+        .v-timeline-item__body
+          &:before, &:after
+            right: initial
+            left: -($wedge-size)
+            transform: none
 
       &__dot
         left: 0
