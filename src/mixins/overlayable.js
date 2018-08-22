@@ -3,8 +3,13 @@ import '../stylus/components/_overlay.styl'
 // Utils
 import { keyCodes } from '../util/helpers'
 
+/* @vue/component */
 export default {
   name: 'overlayable',
+
+  props: {
+    hideOverlay: Boolean
+  },
 
   data () {
     return {
@@ -13,10 +18,6 @@ export default {
       overlayTimeout: null,
       overlayTransitionDuration: 500 + 150 // transition + delay
     }
-  },
-
-  props: {
-    hideOverlay: Boolean
   },
 
   beforeDestroy () {
@@ -54,6 +55,9 @@ export default {
       // eslint-disable-next-line no-unused-expressions
       this.overlay.clientHeight // Force repaint
       requestAnimationFrame(() => {
+        // https://github.com/vuetifyjs/vuetify/issues/4678
+        if (!this.overlay) return
+
         this.overlay.className += ' v-overlay--active'
 
         if (this.activeZIndex !== undefined) {
@@ -90,7 +94,11 @@ export default {
      */
     scrollListener (e) {
       if (e.type === 'keydown') {
-        if (['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName)) return
+        if (
+          ['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName) ||
+          // https://github.com/vuetifyjs/vuetify/issues/4715
+          e.target.isContentEditable
+        ) return
 
         const up = [keyCodes.up, keyCodes.pageup]
         const down = [keyCodes.down, keyCodes.pagedown]

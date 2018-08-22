@@ -35,22 +35,14 @@ test('VInput.js', ({ mount }) => {
       render: h => h('div', slot)
     })
     const wrapper = mount(VInput, {
-      slots: { 'prepend-icon': [el('prepend-icon')] }
+      slots: { 'append': [el('append')] }
     })
     const wrapper2 = mount(VInput, {
-      slots: { 'append-icon': [el('append-icon')] }
-    })
-    const wrapper3 = mount(VInput, {
       slots: { 'prepend': [el('prepend')] }
-    })
-    const wrapper4 = mount(VInput, {
-      slots: { 'append': [el('append')] }
     })
 
     expect(wrapper.html()).toMatchSnapshot()
     expect(wrapper2.html()).toMatchSnapshot()
-    expect(wrapper3.html()).toMatchSnapshot()
-    expect(wrapper4.html()).toMatchSnapshot()
   })
 
   it('should generate an icon and match snapshot', () => {
@@ -86,14 +78,18 @@ test('VInput.js', ({ mount }) => {
     const wrapper = mount(VInput, {
       propsData: {
         prependIcon: 'list',
-        prependIconCb: cb,
-        appendIcon: 'search',
-        appendIconCb: cb
+        appendIcon: 'search'
+      },
+      listeners: {
+        'click:prepend': cb,
+        'click:append': cb
       }
     })
 
     const click = jest.fn()
     wrapper.vm.$on('click', click)
+    wrapper.vm.$on('click:prepend', cb)
+    wrapper.vm.$on('click:append', cb)
 
     const prepend = wrapper.find('.v-icon')[0]
     const append = wrapper.find('.v-icon')[1]
@@ -210,5 +206,20 @@ test('VInput.js', ({ mount }) => {
     })
 
     expect(wrapper2.html()).toMatchSnapshot()
+  })
+
+  it('should apply theme to label, counter, messages and icons', () => {
+    const wrapper = mount(VInput, {
+      propsData: {
+        label: 'foo',
+        hint: 'bar',
+        persistentHint: true,
+        light: true,
+        prependIcon: 'prepend',
+        appendIcon: 'append'
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

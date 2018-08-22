@@ -11,6 +11,7 @@ import {
   provide as RegistrableProvide
 } from '../../mixins/registrable'
 
+/* @vue/component */
 export default {
   name: 'v-radio-group',
 
@@ -28,16 +29,9 @@ export default {
 
   provide () {
     return {
-      isMandatory: () => this.mandatory,
-      name: () => this.name,
-      validationState: () => this.validationState
+      radio: this
     }
   },
-
-  data: () => ({
-    internalTabIndex: -1,
-    radios: []
-  }),
 
   props: {
     column: {
@@ -62,10 +56,10 @@ export default {
     }
   },
 
-  watch: {
-    hasError: 'setErrorState',
-    internalValue: 'setActiveRadio'
-  },
+  data: () => ({
+    internalTabIndex: -1,
+    radios: []
+  }),
 
   computed: {
     classes () {
@@ -75,6 +69,11 @@ export default {
         'v-input--radio-group--row': this.row
       }
     }
+  },
+
+  watch: {
+    hasError: 'setErrorState',
+    internalValue: 'setActiveRadio'
   },
 
   mounted () {
@@ -96,7 +95,6 @@ export default {
 
       this.hasInput = true
       this.internalValue = value
-      this.$emit('change', value)
       this.setActiveRadio()
       this.$nextTick(this.validate)
     },
@@ -108,7 +106,6 @@ export default {
     },
     register (radio) {
       radio.isActive = this.valueComparator(this.internalValue, radio.value)
-      radio.$refs.input.tabIndex = radio.$refs.input.tabIndex > 0 ? radio.$refs.input.tabIndex : 0
       radio.$on('change', this.onRadioChange)
       radio.$on('blur', this.onRadioBlur)
       this.radios.push(radio)

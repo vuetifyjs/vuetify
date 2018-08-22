@@ -25,6 +25,25 @@ const Component = (items = ['foo', 'bar']) => {
   }
 }
 
+const ImplicitVTabsItems = (items = ['foo', 'bar']) => {
+  return {
+    inheritAttrs: false,
+
+    render (h) {
+      return h(VTabs, {
+        attrs: this.$attrs
+      }, [
+        items.map(item => h(VTab, {
+          props: { href: `#${item}` }
+        })),
+        items.map(item => h(VTabItem, {
+          props: { id: item }
+        }))
+      ])
+    }
+  }
+}
+
 const ssrBootable = () => new Promise(resolve => requestAnimationFrame(resolve))
 
 test('VTabs', ({ mount, shallow }) => {
@@ -37,6 +56,7 @@ test('VTabs', ({ mount, shallow }) => {
     expect(typeof tab.vm.tabs.unregister).toBe('function')
 
     const items = wrapper.find(VTabsItems)[0]
+    expect(typeof items.vm.tabProxy).toBe('function')
     expect(typeof items.vm.registerItems).toBe('function')
     expect(typeof items.vm.unregisterItems).toBe('function')
   })
@@ -515,5 +535,85 @@ test('VTabs', ({ mount, shallow }) => {
     await resizeWindow(800)
 
     expect(setWidths).toHaveBeenCalledTimes(2)
+  })
+
+  it('should set input value when using indexes or action', async () => {
+    let wrapper = mount(VTabs, {
+      slots: {
+        default: [VTab, VTab, VTab]
+      }
+    })
+
+    let tabs = wrapper.find(VTab)
+
+    expect(wrapper.vm.inputValue).toBe(undefined)
+
+    // No action should use index
+    wrapper.vm.tabClick(tabs[0].vm)
+    expect(wrapper.vm.inputValue).toBe(0)
+    wrapper.vm.tabClick(tabs[2].vm)
+    expect(wrapper.vm.inputValue).toBe(2)
+
+    wrapper = mount(VTabs, {
+      slots: {
+        default: [
+          {
+            extends: VTab,
+            props: {
+              href: {
+                type: String,
+                default: 'foo'
+              }
+            }
+          },
+          {
+            extends: VTab,
+            props: {
+              href: {
+                type: String,
+                default: 'foobar'
+              }
+            }
+          },
+          {
+            extends: VTab,
+            props: {
+              href: {
+                type: String,
+                default: 'fizzbuzz'
+              }
+            }
+          }
+        ]
+      }
+    })
+
+    tabs = wrapper.find(VTab)
+
+    expect(wrapper.vm.inputValue).toBe(undefined)
+
+    wrapper.vm.tabClick(tabs[1].vm)
+    expect(wrapper.vm.inputValue).toBe('foobar')
+    wrapper.vm.tabClick(tabs[2].vm)
+    expect(wrapper.vm.inputValue).toBe('fizzbuzz')
+    wrapper.vm.tabClick(tabs[0].vm)
+    expect(wrapper.vm.inputValue).toBe('foo')
+  })
+
+  it('should emit input if swiping', async () => {
+    const wrapper = mount(ImplicitVTabsItems())
+
+    const tabs = wrapper.find(VTabs)[0]
+
+    const input = jest.fn()
+    tabs.vm.$on('input', input)
+
+    const items = wrapper.find(VTabsItems)[0]
+
+    items.vm.onSwipe('next')
+
+    await wrapper.vm.$nextTick()
+
+    expect(input).toHaveBeenCalledTimes(1)
   })
 })

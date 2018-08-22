@@ -15,11 +15,7 @@ import {
 // Transitions
 import { VExpandTransition } from '../transitions'
 
-/**
- * List group
- *
- * @component
- */
+/* @vue/component */
 export default {
   name: 'v-list-group',
 
@@ -30,10 +26,6 @@ export default {
   ],
 
   inject: ['listClick'],
-
-  data: () => ({
-    groups: []
-  }),
 
   props: {
     activeClass: {
@@ -50,6 +42,10 @@ export default {
     prependIcon: String,
     subGroup: Boolean
   },
+
+  data: () => ({
+    groups: []
+  }),
 
   computed: {
     groupClasses () {

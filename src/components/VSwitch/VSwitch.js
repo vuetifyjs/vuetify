@@ -7,14 +7,15 @@ import Selectable from '../../mixins/selectable'
 // Directives
 import Touch from '../../directives/touch'
 
+/* @vue/component */
 export default {
   name: 'v-switch',
+
+  directives: { Touch },
 
   mixins: [
     Selectable
   ],
-
-  directives: { Touch },
 
   computed: {
     classes () {
@@ -35,8 +36,8 @@ export default {
       return this.$createElement('div', {
         staticClass: 'v-input--selection-controls__input'
       }, [
-        this.genInput('checkbox'),
-        this.genRipple({
+        this.genInput('checkbox', this.$attrs),
+        !this.disabled && this.genRipple({
           'class': this.classesSelectable,
           directives: [{
             name: 'touch',
@@ -57,7 +58,12 @@ export default {
     genSwitchPart (target) {
       return this.$createElement('div', {
         staticClass: `v-input--switch__${target}`,
-        'class': this.classesSelectable
+        'class': {
+          ...this.classesSelectable,
+          ...this.themeClasses
+        },
+        // Avoid cache collision
+        key: target
       })
     },
     onSwipeLeft () {

@@ -9,7 +9,7 @@ v-expansion-panel($material)
     color: $material.text.primary
 
     .v-expansion-panel__header
-      .header__icon
+      .v-expansion-panel__header__icon
         .v-icon
           color: $material.icons.active
 
@@ -42,7 +42,7 @@ theme(v-expansion-panel, "v-expansion-panel")
     &:first-child
       border-top: none !important
 
-    .header__icon
+    .v-expansion-panel__header__iconnel__header__icon
       margin-left: auto
 
     &--disabled
@@ -51,7 +51,7 @@ theme(v-expansion-panel, "v-expansion-panel")
 
     &--active
       > .v-expansion-panel__header
-        .header__icon .v-icon
+        .v-expansion-panel__header__icon .v-icon
           transform: rotate(-180deg)
 
   &__header
@@ -62,7 +62,7 @@ theme(v-expansion-panel, "v-expansion-panel")
     padding: 12px 24px
     height: 48px
 
-    > *:not(.header__icon)
+    > *:not(.v-expansion-panel__header__icon)
       flex: 1 1 auto
 
   &__body

@@ -3,11 +3,13 @@ import '../../stylus/components/_messages.styl'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
+import Themeable from '../../mixins/themeable'
 
+/* @vue/component */
 export default {
   name: 'v-messages',
 
-  mixins: [Colorable],
+  mixins: [Colorable, Themeable],
 
   props: {
     value: {
@@ -27,7 +29,7 @@ export default {
       return this.$createElement('transition-group', {
         staticClass: 'v-messages__wrapper',
         attrs: {
-          name: 'slide-y-transition',
+          name: 'message-transition',
           tag: 'div'
         }
       }, this.value.map(m => this.genMessage(m)))
@@ -46,7 +48,10 @@ export default {
   render (h) {
     return h('div', {
       staticClass: 'v-messages',
-      'class': this.classes
+      'class': {
+        ...this.classes,
+        ...this.themeClasses
+      }
     }, [this.genChildren()])
   }
 }

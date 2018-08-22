@@ -73,7 +73,7 @@ test('detachable.js', ({ mount }) => {
       }
     })
 
-    expect('[Vuetify] Unable to locate target [data-app] in "mock"').toHaveBeenTipped()
+    expect('[Vuetify] Unable to locate target [data-app]').toHaveBeenTipped()
 
     expect(wrapper.vm.initDetach()).toBe(undefined)
 
@@ -105,7 +105,7 @@ test('detachable.js', ({ mount }) => {
 
     wrapper.vm.initDetach()
 
-    expect('[Vuetify] Unable to locate target .bar in "mock"').toHaveBeenTipped()
+    expect('[Vuetify] Unable to locate target .bar').toHaveBeenTipped()
 
     delete wrapper.vm.$refs.content
     wrapper.vm.$destroy()

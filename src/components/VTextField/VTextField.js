@@ -18,29 +18,26 @@ import Ripple from '../../directives/ripple'
 import {
   keyCodes
 } from '../../util/helpers'
+import { deprecate } from '../../util/console'
 
 const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
 
+/* @vue/component */
 export default {
   name: 'v-text-field',
+
+  directives: { Ripple },
 
   extends: VInput,
 
   mixins: [Maskable],
 
-  directives: { Ripple },
-
   inheritAttrs: false,
-
-  data: () => ({
-    badInput: false,
-    initialValue: null,
-    internalChange: false,
-    isClearing: false
-  }),
 
   props: {
     appendOuterIcon: String,
+    /** @deprecated */
+    appendOuterIconCb: Function,
     autofocus: Boolean,
     box: Boolean,
     browserAutocomplete: String,
@@ -61,6 +58,9 @@ export default {
     outline: Boolean,
     placeholder: String,
     prefix: String,
+    prependInnerIcon: String,
+    /** @deprecated */
+    prependInnerIconCb: Function,
     reverse: Boolean,
     singleLine: Boolean,
     solo: Boolean,
@@ -73,6 +73,13 @@ export default {
     }
   },
 
+  data: () => ({
+    badInput: false,
+    initialValue: null,
+    internalChange: false,
+    isClearing: false
+  }),
+
   computed: {
     classes () {
       return {
@@ -82,12 +89,15 @@ export default {
         'v-text-field--single-line': this.isSingle,
         'v-text-field--solo': this.isSolo,
         'v-text-field--solo-inverted': this.soloInverted,
+        'v-text-field--solo-flat': this.flat,
         'v-text-field--box': this.box,
         'v-text-field--enclosed': this.isEnclosed,
         'v-text-field--reverse': this.reverse,
-        'v-text-field--outline': this.hasOutline,
-        'elevation-0': this.flat
+        'v-text-field--outline': this.hasOutline
       }
+    },
+    counterValue () {
+      return (this.internalValue || '').toString().length
     },
     directivesInput () {
       return []
@@ -116,7 +126,12 @@ export default {
         this.badInput
     },
     isEnclosed () {
-      return this.isSolo || this.hasOutline || this.fullWidth
+      return (
+        this.box ||
+        this.isSolo ||
+        this.hasOutline ||
+        this.fullWidth
+      )
     },
     isLabelActive () {
       return this.isDirty || dirtyTypes.includes(this.type)
@@ -128,34 +143,22 @@ export default {
       return this.solo || this.soloInverted
     },
     labelPosition () {
-      let value = 0
-      let left = 'auto'
-      let right = 'auto'
+      const offset = (this.prefix && !this.labelValue) ? 16 : 0
 
-      // Create spacing
-      if ((this.prefix || this.reverse) &&
-        (this.isSingle || !this.isFocused) &&
-        !this.isDirty
-      ) value = 16
-
-      // Check if RTL
-      if (this.$vuetify.rtl) right = value
-      else left = value
-
-      // Check if reversed
-      if (this.reverse) {
-        const direction = right
-        right = left
-        left = direction
-      }
-
-      return {
-        left,
-        right
+      return (!this.$vuetify.rtl !== !this.reverse) ? {
+        left: 'auto',
+        right: offset
+      } : {
+        left: offset,
+        right: 'auto'
       }
     },
     showLabel () {
       return this.hasLabel && (!this.isSingle || (!this.isLabelActive && !this.placeholder))
+    },
+    labelValue () {
+      return !this.isSingle &&
+        Boolean(this.isFocused || this.isLabelActive || this.placeholder)
     }
   },
 
@@ -181,8 +184,6 @@ export default {
           this.$emit('input', this.lazyValue)
         })
       } else this.lazyValue = val
-
-      if (this.internalChange) this.internalChange = false
     }
   },
 
@@ -197,7 +198,7 @@ export default {
     },
     /** @public */
     blur () {
-      this.onBlur()
+      this.$refs.input ? this.$refs.input.blur() : this.onBlur()
     },
     clearableCallback () {
       this.internalValue = null
@@ -208,13 +209,41 @@ export default {
 
       if (this.$slots['append-outer']) {
         slot.push(this.$slots['append-outer'])
-      } else if (this.$slots['append-outer-icon']) {
-        slot.push(this.$slots['append-outer-icon'])
       } else if (this.appendOuterIcon) {
         slot.push(this.genIcon('appendOuter'))
       }
 
       return this.genSlot('append', 'outer', slot)
+    },
+    genPrependInnerSlot () {
+      const slot = []
+
+      if (this.$slots['prepend-inner']) {
+        slot.push(this.$slots['prepend-inner'])
+      } else if (this.prependInnerIcon) {
+        slot.push(this.genIcon('prependInner'))
+      }
+
+      return this.genSlot('prepend', 'inner', slot)
+    },
+    genIconSlot () {
+      const slot = []
+
+      if (this.$slots['append']) {
+        slot.push(this.$slots['append'])
+      } else if (this.appendIcon) {
+        slot.push(this.genIcon('append'))
+      }
+
+      return this.genSlot('append', 'inner', slot)
+    },
+    genInputSlot () {
+      const input = VInput.methods.genInputSlot.call(this)
+
+      const prepend = this.genPrependInnerSlot()
+      prepend && input.children.unshift(prepend)
+
+      return input
     },
     genClearIcon () {
       if (!this.clearable) return null
@@ -223,20 +252,27 @@ export default {
         ? false
         : 'clear'
 
+      if (this.clearIconCb) deprecate(':clear-icon-cb', '@click:clear', this)
+
       return this.genSlot('append', 'inner', [
-        this.genIcon(icon, this.clearIconCb || this.clearableCallback)
+        this.genIcon(
+          icon,
+          (!this.$listeners['click:clear'] && this.clearIconCb) || this.clearableCallback,
+          false
+        )
       ])
     },
     genCounter () {
-      if (this.counter === false) return null
+      if (this.counter === false || this.counter == null) return null
 
-      const value = (this.internalValue || '').length
       const max = this.counter === true ? this.$attrs.maxlength : this.counter
 
       return this.$createElement(VCounter, {
         props: {
-          value,
-          max
+          dark: this.dark,
+          light: this.light,
+          max,
+          value: this.counterValue
         }
       })
     },
@@ -250,36 +286,23 @@ export default {
     genLabel () {
       if (!this.showLabel) return null
 
-      const isSingleLine = this.isSingle
       const data = {
         props: {
           absolute: true,
           color: this.validationState,
+          dark: this.dark,
           disabled: this.disabled,
-          focused: !isSingleLine && (this.isFocused || !!this.validationState),
+          focused: !this.isSingle && (this.isFocused || !!this.validationState),
           left: this.labelPosition.left,
+          light: this.light,
           right: this.labelPosition.right,
-          value: Boolean(!isSingleLine &&
-            (this.isFocused || this.isLabelActive || this.placeholder))
+          value: this.labelValue
         }
       }
 
       if (this.$attrs.id) data.props.for = this.$attrs.id
 
       return this.$createElement(VLabel, data, this.$slots.label || this.label)
-    },
-    genIconSlot () {
-      const slot = []
-
-      if (this.$slots['append']) {
-        slot.push(this.$slots['append'])
-      } else if (this.$slots['append-icon']) {
-        slot.push(this.$slots['append-icon'])
-      } else if (this.appendIcon) {
-        slot.push(this.genIcon('append'))
-      }
-
-      return this.genSlot('append', 'inner', slot)
     },
     genInput () {
       const listeners = Object.assign({}, this.$listeners)
@@ -291,13 +314,12 @@ export default {
           value: this.maskText(this.lazyValue)
         },
         attrs: {
+          'aria-label': (!this.$attrs || !this.$attrs.id) && this.label, // Label `for` will be set if we have an id
           ...this.$attrs,
           autofocus: this.autofocus,
           disabled: this.disabled,
           readonly: this.readonly,
-          tabindex: this.tabindex,
-          type: this.type,
-          'aria-label': (!this.$attrs || !this.$attrs.id) && this.label // Label `for` will be set if we have an id
+          type: this.type
         },
         on: Object.assign(listeners, {
           blur: this.onBlur,
@@ -315,6 +337,8 @@ export default {
       return this.$createElement('input', data)
     },
     genMessages () {
+      if (this.hideDetails) return null
+
       return this.$createElement('div', {
         staticClass: 'v-text-field__details'
       }, [
@@ -365,6 +389,7 @@ export default {
       }
     },
     onInput (e) {
+      this.internalChange = true
       this.mask && this.resetSelections(e.target)
       this.internalValue = e.target.value
       this.badInput = e.target.validity && e.target.validity.badInput
@@ -386,15 +411,7 @@ export default {
       VInput.methods.onMouseDown.call(this, e)
     },
     onMouseUp (e) {
-      // Default click handler is on slot,
-      // Mouse events are to enable specific
-      // input types when clicked
-      if (
-        (this.isSolo || this.hasOutline) &&
-        document.activeElement !== this.$refs.input
-      ) {
-        this.$refs.input.focus()
-      }
+      this.focus()
 
       VInput.methods.onMouseUp.call(this, e)
     }

@@ -8,6 +8,7 @@ import Comparable from './comparable'
 // Utils
 import { keyCodes } from '../util/helpers'
 
+/* @vue/component */
 export default {
   name: 'selectable',
 
@@ -19,10 +20,6 @@ export default {
     prop: 'inputValue',
     event: 'change'
   },
-
-  data: vm => ({
-    lazyValue: vm.inputValue
-  }),
 
   props: {
     color: {
@@ -44,6 +41,10 @@ export default {
     }
   },
 
+  data: vm => ({
+    lazyValue: vm.inputValue
+  }),
+
   computed: {
     classesSelectable () {
       return this.addTextColorClassChecks(
@@ -64,13 +65,13 @@ export default {
         return input.some(item => this.valueComparator(item, value))
       }
 
-      if (!this.trueValue || !this.falseValue) {
+      if (this.trueValue === undefined || this.falseValue === undefined) {
         return value
           ? this.valueComparator(value, input)
           : Boolean(input)
       }
 
-      return this.valueComparator(value, input)
+      return this.valueComparator(input, this.trueValue)
     },
     isDirty () {
       return this.isActive
@@ -79,7 +80,7 @@ export default {
 
   watch: {
     inputValue (val) {
-      this.internalValue = val
+      this.lazyValue = val
     }
   },
 
@@ -95,20 +96,25 @@ export default {
     },
     genInput (type, attrs) {
       return this.$createElement('input', {
-        attrs: Object.assign({}, {
+        attrs: Object.assign({
           'aria-label': this.label,
           'aria-checked': this.isActive.toString(),
+          disabled: this.isDisabled,
           id: this.id,
           role: type,
           type,
           value: this.inputValue
         }, attrs),
+        domProps: {
+          checked: this.isActive
+        },
         on: {
           blur: this.onBlur,
           change: this.onChange,
           focus: this.onFocus,
           keydown: this.onKeydown
-        }
+        },
+        ref: 'input'
       })
     },
     onBlur () {
@@ -132,19 +138,16 @@ export default {
         if (input.length === length) {
           input.push(value)
         }
-      } else if (this.trueValue || this.falseValue) {
-        // If has a true or false value set
-        input = this.valueComparator(this.trueValue, value) ? this.falseValue : this.trueValue
+      } else if (this.trueValue !== undefined && this.falseValue !== undefined) {
+        input = this.valueComparator(input, this.trueValue) ? this.falseValue : this.trueValue
       } else if (value) {
-        // If has a value set
         input = this.valueComparator(input, value) ? null : value
       } else {
         input = !input
       }
 
       this.validate(true, input)
-      this.lazyValue = input
-      this.$emit('change', input)
+      this.internalValue = input
     },
     onFocus () {
       this.isFocused = true

@@ -3,8 +3,19 @@ import {
   VTabReverseTransition
 } from '../transitions'
 
+// Helpers
+import { convertToUnit } from '../../util/helpers'
+
+/* @vue/component */
 export default {
   name: 'v-stepper-content',
+
+  props: {
+    step: {
+      type: [Number, String],
+      required: true
+    }
+  },
 
   data () {
     return {
@@ -14,13 +25,6 @@ export default {
       isActive: null,
       isReverse: false,
       isVertical: false
-    }
-  },
-
-  props: {
-    step: {
-      type: [Number, String],
-      required: true
     }
   },
 
@@ -39,7 +43,7 @@ export default {
       if (!this.isVertical) return {}
 
       return {
-        height: !isNaN(this.height) ? `${this.height}px` : this.height
+        height: convertToUnit(this.height)
       }
     },
     wrapperClasses () {
@@ -99,7 +103,7 @@ export default {
       this.height = 0
 
       // Give the collapsing element time to collapse
-      setTimeout(() => (this.height = (scrollHeight || 'auto')), 450)
+      setTimeout(() => this.isActive && (this.height = (scrollHeight || 'auto')), 450)
     },
     leave () {
       this.height = this.$refs.wrapper.clientHeight

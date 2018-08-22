@@ -39,7 +39,7 @@ test('VRadioGroup.vue', ({ mount }) => {
   it('should provide isMandatory', () => {
     const stub = {
       name: 'stub',
-      inject: ['isMandatory'],
+      inject: ['radio'],
       render: h => null
     }
     const wrapper = mount(VRadioGroup, {
@@ -48,13 +48,13 @@ test('VRadioGroup.vue', ({ mount }) => {
       }
     })
 
-    const find = wrapper.first(stub)
+    const child = wrapper.first(stub)
 
-    expect(find.vm.isMandatory()).toBe(true)
+    expect(child.vm.radio.mandatory).toBe(true)
 
     wrapper.setProps({ mandatory: false })
 
-    expect(find.vm.isMandatory()).toBe(false)
+    expect(child.vm.radio.mandatory).toBe(false)
   })
 
   it('should toggle radio', async () => {
@@ -72,6 +72,9 @@ test('VRadioGroup.vue', ({ mount }) => {
         default: [stub('foo'), stub('bar')]
       }
     })
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
 
     expect(wrapper.vm.radios.length).toBe(2)
 
@@ -96,6 +99,8 @@ test('VRadioGroup.vue', ({ mount }) => {
 
     expect(one.vm.isActive).toBe(true)
     expect(two.vm.isActive).toBe(false)
+    expect(change).toHaveBeenCalledTimes(1)
+    expect(change).toHaveBeenCalledWith('foo')
   })
 
   it('should toggle radio - objects', async () => {
@@ -297,5 +302,60 @@ test('VRadioGroup.vue', ({ mount }) => {
     input.trigger('blur')
 
     expect(wrapper.vm.shouldValidate).toBe(true)
+  })
+
+  it('should make radios disabled', async () => {
+    const wrapper = mount(VRadioGroup, {
+      propsData: {
+        disabled: true
+      },
+      slots: {
+        default: [VRadio]
+      }
+    })
+
+    const onChange = jest.fn()
+    const radio = wrapper.first(VRadio)
+    const input = radio.first('input')
+    radio.vm.$on('change', onChange)
+    radio.first('input').trigger('change')
+    expect(onChange).not.toBeCalled()
+    expect(input.html()).toMatchSnapshot()
+  })
+
+  it('should make radios readonly', async () => {
+    const wrapper = mount(VRadioGroup, {
+      propsData: {
+        readonly: true
+      },
+      slots: {
+        default: [VRadio]
+      }
+    })
+
+    const onChange = jest.fn()
+    const radio = wrapper.first(VRadio)
+    radio.vm.$on('change', onChange)
+    radio.first('input').trigger('change')
+    expect(onChange).not.toBeCalled()
+  })
+
+  it('should reset', async () => {
+    const wrapper = mount(VRadioGroup, {
+      propsData: {
+        value: '0'
+      },
+      slots: {
+        default: [VRadio]
+      }
+    })
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    wrapper.vm.reset()
+    await wrapper.vm.$nextTick()
+
+    expect(change).toHaveBeenCalledTimes(1)
+    expect(change).toHaveBeenCalledWith(undefined)
   })
 })

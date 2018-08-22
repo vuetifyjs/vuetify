@@ -9,17 +9,11 @@ import { keyCodes } from '../../util/helpers'
 import VBtn from '../VBtn'
 import VMenu from '../VMenu'
 
+/* @vue/component */
 export default {
   name: 'v-edit-dialog',
 
   mixins: [ Returnable ],
-
-  data () {
-    return {
-      isActive: false,
-      isSaving: false
-    }
-  },
 
   props: {
     cancelText: {
@@ -37,15 +31,27 @@ export default {
     }
   },
 
+  data () {
+    return {
+      isActive: false
+    }
+  },
+
   watch: {
     isActive (val) {
-      val && setTimeout(this.focus, 50) // Give DOM time to paint
+      if (val) {
+        this.$emit('open')
+        setTimeout(this.focus, 50) // Give DOM time to paint
+      } else {
+        this.$emit('close')
+      }
     }
   },
 
   methods: {
     cancel () {
       this.isActive = false
+      this.$emit('cancel')
     },
     focus () {
       const input = this.$refs.content.querySelector('input')
@@ -66,7 +72,10 @@ export default {
         'class': 'v-small-dialog__actions'
       }, [
         this.genButton(this.cancel, this.cancelText),
-        this.genButton(() => this.save(this.returnValue), this.saveText)
+        this.genButton(() => {
+          this.save(this.returnValue)
+          this.$emit('save')
+        }, this.saveText)
       ])
     },
     genContent () {
@@ -75,7 +84,10 @@ export default {
           keydown: e => {
             const input = this.$refs.content.querySelector('input')
             e.keyCode === keyCodes.esc && this.cancel()
-            e.keyCode === keyCodes.enter && input && this.save(input.value)
+            if (e.keyCode === keyCodes.enter && input) {
+              this.save(input.value)
+              this.$emit('save')
+            }
           }
         },
         ref: 'content'

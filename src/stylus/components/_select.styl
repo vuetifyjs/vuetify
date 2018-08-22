@@ -23,17 +23,11 @@ theme(v-select, 'v-select')
 
 .v-select
   position: relative // For **attach** prop
-  // This is here to avoid making it transparent
-  // then visible when autocomplete
-  &:not(.v-autocomplete)
-    input
-      // IE11 refuses to hide blinking input
-      // because of this requires a min-height
-      font-size: 0
-      min-height: 32px
+
+  & > .v-input__control > .v-input__slot
+    cursor: pointer
 
   .v-menu
-    height: 100%
     flex: 1 1 auto
     width: 100%
 
@@ -48,15 +42,10 @@ theme(v-select, 'v-select')
     ::placeholder
       color: transparent !important
 
-  &.v-text-field--box,
-  &.v-text-field--outline
-    &:not(.v-text-field--single-line)
-      &.v-input--is-dirty,
-      &.v-input--is-focused
-        .v-select__selections
-          padding-top: 24px
+  &.v-text-field--enclosed:not(.v-text-field--single-line)
+    .v-select__selections
+      padding-top: 24px
 
-  // For specificity, hide caret
   &.v-text-field
     input
       flex: 1 1 // Doesn't resize on IE11 with 3rd param
@@ -90,6 +79,11 @@ theme(v-select, 'v-select')
           .v-select__selections
             min-height: 56px
 
+  &.v-text-field--reverse
+    .v-select__slot,
+    .v-select__selections
+      flex-direction: row-reverse
+
   &__selections
     align-items: center
     display: flex
@@ -98,6 +92,8 @@ theme(v-select, 'v-select')
     line-height: 18px
 
   &__selection
+    max-width: 90%
+
     &--comma
       align-items: center
       display: inline-flex
@@ -106,7 +102,6 @@ theme(v-select, 'v-select')
   &__slot
     align-items: center
     display: flex
-    height: 100%
     width: 100%
 
   &:not(.v-text-field--single-line)
@@ -117,10 +112,3 @@ theme(v-select, 'v-select')
       // the end of the container
       > input
         align-self: flex-end
-
-.v-select-list
-  .v-list__tile__action
-    .v-input--selection-controls
-      .v-input__slot
-        &:after, &:before
-          display: none
