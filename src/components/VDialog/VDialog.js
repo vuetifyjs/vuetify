@@ -199,15 +199,7 @@ export default {
       }, [this.$slots.activator]))
     }
 
-    let dialog = h('div', data, [
-      this.$createElement(SlotProvider, {
-        props: {
-          provide: {
-            theme: { isDark: this.$vuetify.dark || this.dark }
-          }
-        }
-      }, this.showLazyContent(this.$slots.default))
-    ])
+    let dialog = h('div', data, this.showLazyContent(this.$slots.default))
     if (this.transition) {
       dialog = h('transition', {
         props: {
@@ -225,7 +217,15 @@ export default {
       },
       style: { zIndex: this.activeZIndex },
       ref: 'content'
-    }, [dialog]))
+    }, [
+      this.$createElement(SlotProvider, {
+        props: {
+          provide: {
+            theme: { isDark: this.$vuetify.dark || this.dark }
+          }
+        }
+      }, [dialog])
+    ]))
 
     return h('div', {
       staticClass: 'v-dialog__container',
