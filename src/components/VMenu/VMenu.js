@@ -198,7 +198,7 @@ export default Vue.extend({
         value: this.onResize
       }],
       on: {
-        keydown: this.changeListIndex
+        keydown: this.onKeyDown
       }
     }
 
