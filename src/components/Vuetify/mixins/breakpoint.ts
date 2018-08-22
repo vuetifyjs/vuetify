@@ -1,6 +1,34 @@
 import Vue from 'vue'
 import { VuetifyBreakpoint } from 'types'
 
+const breakpoints = {
+  xs: 600,
+  sm: 960,
+  md: 1280 - 16,
+  lg: 1920 - 16,
+  xl: Infinity
+}
+
+const keys = Object.keys(breakpoints) as (keyof typeof breakpoints)[]
+
+type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
+type Static = Omit<VuetifyBreakpoint, 'width' | 'height'>
+const breakpointExplainations: Static[] = keys.map((name, rowIndex) => {
+  const result: Record<
+  string,
+  keyof Omit<VuetifyBreakpoint, 'width' | 'height'> | boolean
+  > = { name }
+  keys.forEach((key, i) => {
+    result[key] = result[`${key}Only`] = i === rowIndex
+    result[`${key}AndDown`] = i >= rowIndex
+    result[`${key}AndUp`] = i <= rowIndex
+  })
+  return result as Static
+})
+
+const values = Object.values(breakpoints)
+const classifyBreakpoint = (width: number) => values.findIndex(bp => width < bp)
+
 /**
  * A modified version of https://gist.github.com/cb109/b074a65f7595cffc21cea59ce8d15f9b
  */
@@ -8,83 +36,30 @@ import { VuetifyBreakpoint } from 'types'
 /**
  * A Vue mixin to get the current width/height and the associated breakpoint.
  *
- *   <div v-if="$breakpoint.smAndDown">...</div>
+ *   <div v-if="$vuetify.breakpoint.smAndDown">...</div>
  *
  */
 export default Vue.extend({
-  data: () => ({
-    clientHeight: getClientHeight(),
-    clientWidth: getClientWidth(),
-    resizeTimeout: undefined as number | undefined
-  }),
-
-  computed: {
-    breakpoint (): VuetifyBreakpoint {
-      const xs = this.clientWidth < 600
-      const sm = this.clientWidth < 960 && !xs
-      const md = this.clientWidth < (1280 - 16) && !(sm || xs)
-      const lg = this.clientWidth < (1920 - 16) && !(md || sm || xs)
-      const xl = this.clientWidth >= (1920 - 16)
-
-      const xsOnly = xs
-      const smOnly = sm
-      const smAndDown = (xs || sm) && !(md || lg || xl)
-      const smAndUp = !xs && (sm || md || lg || xl)
-      const mdOnly = md
-      const mdAndDown = (xs || sm || md) && !(lg || xl)
-      const mdAndUp = !(xs || sm) && (md || lg || xl)
-      const lgOnly = lg
-      const lgAndDown = (xs || sm || md || lg) && !xl
-      const lgAndUp = !(xs || sm || md) && (lg || xl)
-      const xlOnly = xl
-
-      let name
-      switch (true) {
-        case (xs):
-          name = 'xs'
-          break
-        case (sm):
-          name = 'sm'
-          break
-        case (md):
-          name = 'md'
-          break
-        case (lg):
-          name = 'lg'
-          break
-        default:
-          name = 'xl'
-          break
+  data () {
+    const width = getClientWidth()
+    const height = getClientHeight()
+    const viewportRangeIndex = classifyBreakpoint(width)
+    return Object.assign(
+      {
+        ...breakpointExplainations[viewportRangeIndex],
+        clientHeight: height,
+        clientWidth: width,
+        width,
+        height,
+        viewportRangeIndex,
+        resizeTimeout: undefined as number | undefined
       }
 
-      return {
-        // Definite breakpoint.
-        xs,
-        sm,
-        md,
-        lg,
-        xl,
-
-        // Useful e.g. to construct CSS class names dynamically.
-        name,
-
-        // Breakpoint ranges.
-        xsOnly,
-        smOnly,
-        smAndDown,
-        smAndUp,
-        mdOnly,
-        mdAndDown,
-        mdAndUp,
-        lgOnly,
-        lgAndDown,
-        lgAndUp,
-        xlOnly,
-
-        // For custom breakpoint logic.
-        width: this.clientWidth,
-        height: this.clientHeight
-      }
+    )
+  },
+  watch: {
+    viewportRangeIndex (clnumber: number) {
+      Object.assign(this, breakpointExplainations[clnumber])
     }
   },
 
@@ -111,8 +86,16 @@ export default Vue.extend({
       this.resizeTimeout = window.setTimeout(this.setDimensions, 200)
     },
     setDimensions (): void {
-      this.clientHeight = getClientHeight()
-      this.clientWidth = getClientWidth()
+      const width = getClientWidth()
+      const height = getClientHeight()
+      const viewportRangeIndex = classifyBreakpoint(width)
+      Object.assign(this, {
+        clientHeight: height,
+        clientWidth: width,
+        width,
+        height,
+        viewportRangeIndex
+      })
     }
   }
 })
@@ -121,16 +104,10 @@ export default Vue.extend({
 // https://stackoverflow.com/questions/1248081
 function getClientWidth () {
   if (typeof document === 'undefined') return 0 // SSR
-  return Math.max(
-    document.documentElement.clientWidth,
-    window.innerWidth || 0
-  )
+  return Math.max(document.documentElement.clientWidth, window.innerWidth || 0)
 }
 
 function getClientHeight () {
   if (typeof document === 'undefined') return 0 // SSR
-  return Math.max(
-    document.documentElement.clientHeight,
-    window.innerHeight || 0
-  )
+  return Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
 }

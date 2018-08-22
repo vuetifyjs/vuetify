@@ -29,9 +29,6 @@ const Vuetify: VuetifyPlugin = {
     const lang = genLang(opts.lang)
 
     Vue.prototype.$vuetify = new Vue({
-      mixins: [
-        breakpoint
-      ],
       data: {
         application,
         dark: false,
@@ -46,6 +43,7 @@ const Vuetify: VuetifyPlugin = {
         t: lang.t.bind(lang)
       }
     })
+    Vue.prototype.$vuetify.breakpoint = new Vue(breakpoint)
 
     if (opts.directives) {
       for (const name in opts.directives) {
