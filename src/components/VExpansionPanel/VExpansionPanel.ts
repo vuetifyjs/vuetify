@@ -1,10 +1,15 @@
+// Styles
 import '../../stylus/components/_expansion-panel.styl'
 
+// Components
 import { VExpansionPanelContent } from '.'
 
+// Mixins
+import Elevatable from '../../mixins/elevatable'
 import Themeable from '../../mixins/themeable'
 import { provide as RegistrableProvide } from '../../mixins/registrable'
 
+// Utilities
 import mixins from '../../util/mixins'
 import { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
@@ -12,7 +17,10 @@ import { PropValidator } from 'vue/types/options'
 type VExpansionPanelContentInstance = InstanceType<typeof VExpansionPanelContent>
 
 /* @vue/component */
-export default mixins(Themeable, RegistrableProvide('expansionPanel')).extend({
+export default mixins(
+  Themeable,
+  RegistrableProvide('expansionPanel')
+).extend({
   name: 'v-expansion-panel',
 
   provide (): object {
@@ -124,7 +132,7 @@ export default mixins(Themeable, RegistrableProvide('expansionPanel')).extend({
   },
 
   render (h): VNode {
-    return h('ul', {
+    return h('div', {
       staticClass: 'v-expansion-panel',
       class: this.classes
     }, this.$slots.default)
