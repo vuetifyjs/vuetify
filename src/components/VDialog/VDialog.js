@@ -203,7 +203,7 @@ export default {
       this.$createElement(SlotProvider, {
         props: {
           provide: {
-            theme: { isDark: this.$vuetify.dark }
+            theme: { isDark: this.$vuetify.dark || this.dark }
           }
         }
       }, this.showLazyContent(this.$slots.default))
