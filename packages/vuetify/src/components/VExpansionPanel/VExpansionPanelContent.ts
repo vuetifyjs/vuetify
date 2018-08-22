@@ -70,7 +70,7 @@ export default mixins<options &
     }
   },
 
-  mounted () {
+  beforeMount () {
     this.expansionPanel.register(this)
 
     // Can be removed once fully deprecated
@@ -137,9 +137,7 @@ export default mixins<options &
     toggle (active: boolean) {
       if (active) this.isBooted = true
 
-      // We treat bootable differently
-      // Needs time to calc height
-      this.$nextTick(() => (this.isActive = active))
+      this.isActive = active
     }
   },
 
