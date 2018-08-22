@@ -104,8 +104,7 @@ export default mixins(
     updatePanels (open: boolean[]) {
       this.open = open
       for (let i = 0; i < this.items.length; i++) {
-        const active = open && open[i]
-        this.items[i].toggle(active)
+        this.items[i].toggle(open && open[i])
       }
     },
     panelClick (uid: number) {
@@ -121,8 +120,9 @@ export default mixins(
       if (this.expand) this.$emit('input', open)
     },
     register (content: VExpansionPanelContentInstance) {
-      this.items.push(content)
-      this.open.push(false)
+      const i = this.items.push(content) - 1
+      this.value !== null && this.updateFromValue(this.value)
+      content.toggle(this.open[i])
     },
     unregister (content: VExpansionPanelContentInstance) {
       const index = this.items.findIndex(i => i._uid === content._uid)
