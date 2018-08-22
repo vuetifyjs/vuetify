@@ -13,6 +13,7 @@ import ClickOutside from '../../directives/click-outside'
 
 // Helpers
 import { getZIndex, convertToUnit } from '../../util/helpers'
+import SlotProvider from '../../util/SlotProvider'
 
 /* @vue/component */
 export default {
@@ -198,7 +199,15 @@ export default {
       }, [this.$slots.activator]))
     }
 
-    let dialog = h('div', data, this.showLazyContent(this.$slots.default))
+    let dialog = h('div', data, [
+      this.$createElement(SlotProvider, {
+        props: {
+          provide: {
+            theme: { isDark: this.$vuetify.dark }
+          }
+        }
+      }, this.showLazyContent(this.$slots.default))
+    ])
     if (this.transition) {
       dialog = h('transition', {
         props: {

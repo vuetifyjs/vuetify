@@ -1,10 +1,5 @@
-/**
- * Menu generators
- *
- * @mixin
- *
- * Used for creating the DOM elements for VMenu
- */
+import SlotProvider from '../../../util/SlotProvider'
+
 /* @vue/component */
 export default {
   methods: {
@@ -85,7 +80,15 @@ export default {
       !this.disabled && this.openOnHover && (options.on.mouseenter = this.mouseEnterHandler)
       this.openOnHover && (options.on.mouseleave = this.mouseLeaveHandler)
 
-      return this.$createElement('div', options, this.showLazyContent(this.$slots.default))
+      return this.$createElement('div', options, [
+        this.$createElement(SlotProvider, {
+          props: {
+            provide: {
+              theme: { isDark: this.$vuetify.dark }
+            }
+          }
+        }, this.showLazyContent(this.$slots.default))
+      ])
     }
   }
 }
