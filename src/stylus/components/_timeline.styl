@@ -3,7 +3,7 @@
 
 v-timeline($material)
   &:before
-    background: $material.timeline.active
+    background: $material.dividers
 
   .v-timeline-item
     &__dot
@@ -17,8 +17,6 @@ v-timeline($material)
         border-color: transparent $material.cards transparent transparent
 
 theme(v-timeline, "v-timeline")
-
-$wedge-size := 10px
 
 .v-timeline
   padding-top: 24px
@@ -43,7 +41,7 @@ $wedge-size := 10px
 
       .v-timeline-item__body:before, .v-timeline-item__body:after
         transform: rotate(180deg)
-        right: -($wedge-size)
+        right: -($timeline-wedge-size)
 
       .v-timeline-item__opposite
         margin-left: 72px
@@ -51,7 +49,7 @@ $wedge-size := 10px
 
     &:nth-child(even):not(.v-timeline-item--left), &--right
       .v-timeline-item__body:before, .v-timeline-item__body:after
-        left: -($wedge-size)
+        left: -($timeline-wedge-size)
 
       .v-timeline-item__opposite
         margin-right: 72px
@@ -96,11 +94,11 @@ $wedge-size := 10px
         content: ''
         position: absolute
         border-style: solid
-        border-width: $wedge-size $wedge-size $wedge-size 0
-        top: 'calc(50% - %s)' % $wedge-size
+        border-width: $timeline-wedge-size $timeline-wedge-size $timeline-wedge-size 0
+        top: 'calc(50% - %s)' % $timeline-wedge-size
 
       &:before
-        top: 'calc(50% - %s + 2px)' % $wedge-size
+        top: 'calc(50% - %s + 2px)' % $timeline-wedge-size
 
     &__opposite
       flex: 1 1 auto
@@ -118,7 +116,7 @@ $wedge-size := 10px
         .v-timeline-item__body
           &:before, &:after
             right: initial
-            left: -($wedge-size)
+            left: -($timeline-wedge-size)
             transform: none
 
       &__dot
