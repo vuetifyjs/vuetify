@@ -538,9 +538,12 @@ test('VSelect', ({mount, compileToFunctions}) => {
     expect(change.mock.calls).toEqual([['foo']])
   })
 
-  it('should call callback on scroll', () => {
-    const loadMore = jest.fn();
-
+  it('should call callback on scroll', async () => {
+    const loadMore = jest.fn(function () {
+      return new Promise((resolve, reject) => {
+        resolve();
+      });
+    });
     const wrapper = mount(VSelect, {
       attachToDocument: true,
       propsData: {
@@ -549,13 +552,59 @@ test('VSelect', ({mount, compileToFunctions}) => {
       }
     });
 
-    document.querySelector('.v-input__slot').click();
-    document.querySelector('.v-input__slot').click();
+    const menu = wrapper.first('.v-input__slot')
 
-    setTimeout(() => {
-      document.querySelector('.v-menu__content.menuable__content__active').scrollTo(0,750);
-      expect(loadMore).toBeCalled()
-    }, 500);
+    menu.trigger('click');
+    await wrapper.vm.$nextTick();
+    menu.trigger('click');
+    await wrapper.vm.$nextTick();
+    wrapper.vm.onScroll();
+    await wrapper.vm.$nextTick();
+    expect(loadMore).toBeCalled();
+
+
+  })
+  it('should call not crash on reject on callback', async () => {
+    const loadMore = jest.fn(function () {
+      return new Promise((resolve, reject) => {
+        reject();
+      });
+    });
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        loadMoreItems: loadMore,
+        items: ['foo', 'foo', 'foo', 'foo', 'foo', 'foo', 'foo', 'foo', 'foo', 'foo', 'foo', 'foo', 'foo', 'foo', 'foo', 'foo', 'foo', 'foo', 'foo', 'foo']
+      }
+    });
+
+    const menu = wrapper.first('.v-input__slot')
+
+    menu.trigger('click');
+    await wrapper.vm.$nextTick();
+    menu.trigger('click');
+    await wrapper.vm.$nextTick();
+    wrapper.vm.onScroll();
+    await wrapper.vm.$nextTick();
+    expect(loadMore).toBeCalled();
+  })
+
+  it('should not call callback on scroll and raise lastItem', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        items: ['foo1', 'foo2', 'foo3', 'foo4', 'foo5', 'foo6', 'foo7', 'foo8', 'foo9', 'foo10', 'foo11', 'foo12', 'foo13', 'foo14', 'foo15', 'foo16', 'foo17', 'foo18', 'foo19', 'foo20', 'foo21', 'foo22', 'foo23']
+      }
+    });
+
+    const menu = wrapper.first('.v-input__slot')
+    menu.trigger('click');
+    await wrapper.vm.$nextTick();
+    menu.trigger('click');
+    await wrapper.vm.$nextTick();
+    wrapper.vm.onScroll();
+    await wrapper.vm.$nextTick();
+    expect(wrapper.vm.lastItem).toBeGreaterThan(20);
 
   })
 });

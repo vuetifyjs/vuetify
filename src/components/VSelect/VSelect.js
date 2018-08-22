@@ -609,7 +609,8 @@ export default {
             this.isLoadingMoreItems = true
             this.loadMoreItems().then(() => {
               this.lastItem += 20
-            }).finally(() => {
+              this.isLoadingMoreItems = false
+            }).catch(() => {
               this.isLoadingMoreItems = false
             })
             // else, default functionality load the next 20 items from the items prop
