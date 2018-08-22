@@ -4,7 +4,8 @@ export default function (expandedParentClass = '') {
   return {
     enter (el, done) {
       el._parent = el.parentNode
-      el._height = el.style.height
+      el._height = el._height != null ? el._height : el.style.height
+
       addOnceEventListener(el, 'transitionend', done)
 
       // Get height that is to be scrolled
