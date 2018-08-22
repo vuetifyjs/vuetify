@@ -25,16 +25,18 @@ const Vuetify: VuetifyPlugin = {
         dark: false,
         icons: icons(opts.iconfont, opts.icons),
         lang,
-        options: options(opts.options),
         rtl: opts.rtl,
         theme: theme(opts.theme)
-      },
-      methods: {
-        goTo,
-        t: lang.t.bind(lang)
       }
     })
-    Vue.prototype.$vuetify.breakpoint = new Vue(breakpoint)
+
+    Object.assign(Vue.prototype.$vuetify, {
+      // application:new Vue({data:application}),
+      breakpoint: new Vue(breakpoint),
+      options: options(opts.options),
+      goTo,
+      t: lang.t.bind(lang)
+    })
 
     if (opts.transitions) {
       Object.values(opts.transitions).forEach(transition => {
