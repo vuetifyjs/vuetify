@@ -15,15 +15,13 @@ export default mixins(
   name: 'v-timeline',
 
   props: {
-    right: Boolean,
-    left: Boolean
+    dense: Boolean
   },
 
   computed: {
     classes (): {} {
       return {
-        'v-timeline--left': this.left,
-        'v-timeline--right': this.right,
+        'v-timeline--dense': this.dense,
         ...this.themeClasses
       }
     }

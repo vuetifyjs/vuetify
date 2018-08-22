@@ -44,7 +44,7 @@ theme(v-timeline, "v-timeline")
         right: -($timeline-wedge-size)
 
       .v-timeline-item__opposite
-        margin-left: 72px
+        margin-left: 96px
         text-align: left
 
     &:nth-child(even):not(.v-timeline-item--left), &--right
@@ -52,7 +52,7 @@ theme(v-timeline, "v-timeline")
         left: -($timeline-wedge-size)
 
       .v-timeline-item__opposite
-        margin-right: 72px
+        margin-right: 96px
         text-align: right
 
     &__dot
@@ -88,7 +88,7 @@ theme(v-timeline, "v-timeline")
       position: relative
       height: 100%
       flex: 1 1 100%
-      max-width: calc(50% - 36px)
+      max-width: calc(50% - 48px)
 
       &:before, &:after
         content: ''
@@ -103,9 +103,9 @@ theme(v-timeline, "v-timeline")
     &__opposite
       flex: 1 1 auto
       align-self: center
-      max-width: calc(50% - 36px)
+      max-width: calc(50% - 48px)
 
-  @media $display-breakpoints.sm-and-down
+  &--dense
     &:before
       left: 18px // -1 for line width
 
@@ -126,7 +126,7 @@ theme(v-timeline, "v-timeline")
         left: 7px // -1 for line width
 
       &__body
-        max-width: calc(100% - 84px)
+        max-width: calc(100% - 64px)
 
       &__opposite
         display: none
