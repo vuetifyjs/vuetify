@@ -9,7 +9,7 @@ v-timeline($material)
     &__dot
       background: $material.cards
 
-    &__body
+    .v-card
       &:before
         border-color: transparent $shadow-key-ambient-opacity transparent transparent
 
@@ -39,7 +39,7 @@ theme(v-timeline, "v-timeline")
     &:nth-child(odd):not(.v-timeline-item--right), &--left
       flex-direction: row
 
-      .v-timeline-item__body:before, .v-timeline-item__body:after
+      .v-card:before, .v-card:after
         transform: rotate(180deg)
         right: -($timeline-wedge-size)
 
@@ -48,7 +48,7 @@ theme(v-timeline, "v-timeline")
         text-align: left
 
     &:nth-child(even):not(.v-timeline-item--left), &--right
-      .v-timeline-item__body:before, .v-timeline-item__body:after
+      .v-card:before, .v-card:after
         left: -($timeline-wedge-size)
 
       .v-timeline-item__opposite
@@ -90,6 +90,7 @@ theme(v-timeline, "v-timeline")
       flex: 1 1 100%
       max-width: calc(50% - 48px)
 
+    .v-card
       &:before, &:after
         content: ''
         position: absolute
@@ -113,7 +114,7 @@ theme(v-timeline, "v-timeline")
       &:nth-child(odd):not(.v-timeline-item--right), &--left
         flex-direction: row-reverse
 
-        .v-timeline-item__body
+        .v-card
           &:before, &:after
             right: initial
             left: -($timeline-wedge-size)
