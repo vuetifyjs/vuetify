@@ -13,6 +13,7 @@ import ClickOutside from '../../directives/click-outside'
 
 // Helpers
 import { getZIndex, convertToUnit } from '../../util/helpers'
+import SlotProvider from '../../util/SlotProvider'
 
 /* @vue/component */
 export default {
@@ -216,7 +217,15 @@ export default {
       },
       style: { zIndex: this.activeZIndex },
       ref: 'content'
-    }, [dialog]))
+    }, [
+      this.$createElement(SlotProvider, {
+        props: {
+          provide: {
+            theme: { isDark: this.$vuetify.dark || this.dark }
+          }
+        }
+      }, [dialog])
+    ]))
 
     return h('div', {
       staticClass: 'v-dialog__container',

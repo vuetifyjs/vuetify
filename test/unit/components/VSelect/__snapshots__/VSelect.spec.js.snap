@@ -15,30 +15,28 @@ exports[`VSelect should only show items if they are in items 1`] = `
 >
   <div class="v-input__control">
     <div class="v-input__slot">
-      <div class="v-menu v-menu--inline">
-        <div class="v-menu__activator">
-          <div class="v-select__slot">
-            <div class="v-select__selections">
-              <div class="v-select__selection v-select__selection--comma">
-                foo
-              </div>
-              <input readonly="readonly"
-                     type="text"
-                     autocomplete="on"
-                     aria-readonly="false"
-              >
-            </div>
-            <div class="v-input__append-inner">
-              <div class="v-input__icon v-input__icon--append">
-                <i aria-hidden="true"
-                   class="v-icon material-icons theme--light"
-                >
-                  arrow_drop_down
-                </i>
-              </div>
-            </div>
+      <div class="v-select__slot">
+        <div class="v-select__selections">
+          <div class="v-select__selection v-select__selection--comma">
+            foo
+          </div>
+          <input readonly="readonly"
+                 type="text"
+                 autocomplete="on"
+                 aria-readonly="false"
+          >
+        </div>
+        <div class="v-input__append-inner">
+          <div class="v-input__icon v-input__icon--append">
+            <i aria-hidden="true"
+               class="v-icon material-icons theme--light"
+            >
+              arrow_drop_down
+            </i>
           </div>
         </div>
+      </div>
+      <div class="v-menu">
       </div>
     </div>
     <div class="v-text-field__details">
@@ -59,27 +57,25 @@ exports[`VSelect should only show items if they are in items 2`] = `
 >
   <div class="v-input__control">
     <div class="v-input__slot">
-      <div class="v-menu v-menu--inline">
-        <div class="v-menu__activator">
-          <div class="v-select__slot">
-            <div class="v-select__selections">
-              <input readonly="readonly"
-                     type="text"
-                     autocomplete="on"
-                     aria-readonly="false"
-              >
-            </div>
-            <div class="v-input__append-inner">
-              <div class="v-input__icon v-input__icon--append">
-                <i aria-hidden="true"
-                   class="v-icon material-icons theme--light"
-                >
-                  arrow_drop_down
-                </i>
-              </div>
-            </div>
+      <div class="v-select__slot">
+        <div class="v-select__selections">
+          <input readonly="readonly"
+                 type="text"
+                 autocomplete="on"
+                 aria-readonly="false"
+          >
+        </div>
+        <div class="v-input__append-inner">
+          <div class="v-input__icon v-input__icon--append">
+            <i aria-hidden="true"
+               class="v-icon material-icons theme--light"
+            >
+              arrow_drop_down
+            </i>
           </div>
         </div>
+      </div>
+      <div class="v-menu">
       </div>
     </div>
     <div class="v-text-field__details">
@@ -100,30 +96,28 @@ exports[`VSelect should only show items if they are in items 3`] = `
 >
   <div class="v-input__control">
     <div class="v-input__slot">
-      <div class="v-menu v-menu--inline">
-        <div class="v-menu__activator">
-          <div class="v-select__slot">
-            <div class="v-select__selections">
-              <div class="v-select__selection v-select__selection--comma">
-                bar
-              </div>
-              <input readonly="readonly"
-                     type="text"
-                     autocomplete="on"
-                     aria-readonly="false"
-              >
-            </div>
-            <div class="v-input__append-inner">
-              <div class="v-input__icon v-input__icon--append">
-                <i aria-hidden="true"
-                   class="v-icon material-icons theme--light"
-                >
-                  arrow_drop_down
-                </i>
-              </div>
-            </div>
+      <div class="v-select__slot">
+        <div class="v-select__selections">
+          <div class="v-select__selection v-select__selection--comma">
+            bar
+          </div>
+          <input readonly="readonly"
+                 type="text"
+                 autocomplete="on"
+                 aria-readonly="false"
+          >
+        </div>
+        <div class="v-input__append-inner">
+          <div class="v-input__icon v-input__icon--append">
+            <i aria-hidden="true"
+               class="v-icon material-icons theme--light"
+            >
+              arrow_drop_down
+            </i>
           </div>
         </div>
+      </div>
+      <div class="v-menu">
       </div>
     </div>
     <div class="v-text-field__details">
@@ -144,33 +138,31 @@ exports[`VSelect should only show items if they are in items 4`] = `
 >
   <div class="v-input__control">
     <div class="v-input__slot">
-      <div class="v-menu v-menu--inline">
-        <div class="v-menu__activator">
-          <div class="v-select__slot">
-            <div class="v-select__selections">
-              <div class="v-select__selection v-select__selection--comma">
-                foo,
-              </div>
-              <div class="v-select__selection v-select__selection--comma">
-                bar
-              </div>
-              <input readonly="readonly"
-                     type="text"
-                     autocomplete="on"
-                     aria-readonly="false"
-              >
-            </div>
-            <div class="v-input__append-inner">
-              <div class="v-input__icon v-input__icon--append">
-                <i aria-hidden="true"
-                   class="v-icon material-icons theme--light"
-                >
-                  arrow_drop_down
-                </i>
-              </div>
-            </div>
+      <div class="v-select__slot">
+        <div class="v-select__selections">
+          <div class="v-select__selection v-select__selection--comma">
+            foo,
+          </div>
+          <div class="v-select__selection v-select__selection--comma">
+            bar
+          </div>
+          <input readonly="readonly"
+                 type="text"
+                 autocomplete="on"
+                 aria-readonly="false"
+          >
+        </div>
+        <div class="v-input__append-inner">
+          <div class="v-input__icon v-input__icon--append">
+            <i aria-hidden="true"
+               class="v-icon material-icons theme--light"
+            >
+              arrow_drop_down
+            </i>
           </div>
         </div>
+      </div>
+      <div class="v-menu">
       </div>
     </div>
     <div class="v-text-field__details">
@@ -191,27 +183,25 @@ exports[`VSelect should render v-select correctly when not using scope slot 1`] 
 >
   <div class="v-input__control">
     <div class="v-input__slot">
-      <div class="v-menu v-menu--inline">
-        <div class="v-menu__activator">
-          <div class="v-select__slot">
-            <div class="v-select__selections">
-              <input readonly="readonly"
-                     type="text"
-                     autocomplete="on"
-                     aria-readonly="false"
-              >
-            </div>
-            <div class="v-input__append-inner">
-              <div class="v-input__icon v-input__icon--append">
-                <i aria-hidden="true"
-                   class="v-icon material-icons theme--light"
-                >
-                  arrow_drop_down
-                </i>
-              </div>
-            </div>
+      <div class="v-select__slot">
+        <div class="v-select__selections">
+          <input readonly="readonly"
+                 type="text"
+                 autocomplete="on"
+                 aria-readonly="false"
+          >
+        </div>
+        <div class="v-input__append-inner">
+          <div class="v-input__icon v-input__icon--append">
+            <i aria-hidden="true"
+               class="v-icon material-icons theme--light"
+            >
+              arrow_drop_down
+            </i>
           </div>
         </div>
+      </div>
+      <div class="v-menu">
       </div>
     </div>
     <div class="v-text-field__details">
@@ -232,27 +222,25 @@ exports[`VSelect should render v-select correctly when not using v-list-tile in 
 >
   <div class="v-input__control">
     <div class="v-input__slot">
-      <div class="v-menu v-menu--inline">
-        <div class="v-menu__activator">
-          <div class="v-select__slot">
-            <div class="v-select__selections">
-              <input readonly="readonly"
-                     type="text"
-                     autocomplete="on"
-                     aria-readonly="false"
-              >
-            </div>
-            <div class="v-input__append-inner">
-              <div class="v-input__icon v-input__icon--append">
-                <i aria-hidden="true"
-                   class="v-icon material-icons theme--light"
-                >
-                  arrow_drop_down
-                </i>
-              </div>
-            </div>
+      <div class="v-select__slot">
+        <div class="v-select__selections">
+          <input readonly="readonly"
+                 type="text"
+                 autocomplete="on"
+                 aria-readonly="false"
+          >
+        </div>
+        <div class="v-input__append-inner">
+          <div class="v-input__icon v-input__icon--append">
+            <i aria-hidden="true"
+               class="v-icon material-icons theme--light"
+            >
+              arrow_drop_down
+            </i>
           </div>
         </div>
+      </div>
+      <div class="v-menu">
       </div>
     </div>
     <div class="v-text-field__details">
@@ -273,32 +261,30 @@ exports[`VSelect should render v-select correctly when using v-list-tile in item
 >
   <div class="v-input__control">
     <div class="v-input__slot">
-      <div class="v-menu v-menu--inline">
-        <div class="v-menu__activator">
-          <div class="v-select__slot">
-            <div class="v-select__selections">
-              <div>
-                <div class="v-list__tile theme--light">
-                  1
-                </div>
-              </div>
-              <input readonly="readonly"
-                     type="text"
-                     autocomplete="on"
-                     aria-readonly="false"
-              >
-            </div>
-            <div class="v-input__append-inner">
-              <div class="v-input__icon v-input__icon--append">
-                <i aria-hidden="true"
-                   class="v-icon material-icons theme--light"
-                >
-                  arrow_drop_down
-                </i>
-              </div>
+      <div class="v-select__slot">
+        <div class="v-select__selections">
+          <div>
+            <div class="v-list__tile theme--light">
+              1
             </div>
           </div>
+          <input readonly="readonly"
+                 type="text"
+                 autocomplete="on"
+                 aria-readonly="false"
+          >
         </div>
+        <div class="v-input__append-inner">
+          <div class="v-input__icon v-input__icon--append">
+            <i aria-hidden="true"
+               class="v-icon material-icons theme--light"
+            >
+              arrow_drop_down
+            </i>
+          </div>
+        </div>
+      </div>
+      <div class="v-menu">
       </div>
     </div>
     <div class="v-text-field__details">
@@ -319,30 +305,28 @@ exports[`VSelect should use scoped slot for selection generation 1`] = `
 >
   <div class="v-input__control">
     <div class="v-input__slot">
-      <div class="v-menu v-menu--inline">
-        <div class="v-menu__activator">
-          <div class="v-select__slot">
-            <div class="v-select__selections">
-              <div>
-                foo - from slot
-              </div>
-              <input readonly="readonly"
-                     type="text"
-                     autocomplete="on"
-                     aria-readonly="false"
-              >
-            </div>
-            <div class="v-input__append-inner">
-              <div class="v-input__icon v-input__icon--append">
-                <i aria-hidden="true"
-                   class="v-icon material-icons theme--light"
-                >
-                  arrow_drop_down
-                </i>
-              </div>
-            </div>
+      <div class="v-select__slot">
+        <div class="v-select__selections">
+          <div>
+            foo - from slot
+          </div>
+          <input readonly="readonly"
+                 type="text"
+                 autocomplete="on"
+                 aria-readonly="false"
+          >
+        </div>
+        <div class="v-input__append-inner">
+          <div class="v-input__icon v-input__icon--append">
+            <i aria-hidden="true"
+               class="v-icon material-icons theme--light"
+            >
+              arrow_drop_down
+            </i>
           </div>
         </div>
+      </div>
+      <div class="v-menu">
       </div>
     </div>
     <div class="v-text-field__details">

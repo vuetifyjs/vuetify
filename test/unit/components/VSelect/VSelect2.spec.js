@@ -2,7 +2,7 @@ import { test } from '@/test'
 import VSelect from '@/components/VSelect/VSelect'
 import VChip from '@/components/VChip'
 
-test('VSelect', ({ mount, compileToFunctions }) => {
+test('VSelect2', ({ mount, compileToFunctions }) => {
   const app = document.createElement('div')
   app.setAttribute('data-app', true)
   document.body.appendChild(app)
@@ -351,7 +351,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect(wrapper.vm.internalValue).toEqual('foo')
     wrapper.first('.v-chip__close').trigger('click')
 
-    expect(input).toBeCalled()
+    expect(input).toHaveBeenCalledTimes(1)
 
     wrapper.setProps({
       items: ['foo', 'bar'],
@@ -359,6 +359,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
       value: ['foo', 'bar']
     })
     wrapper.vm.$on('change', change)
+    await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.internalValue).toEqual(['foo', 'bar'])
     wrapper.first('.v-chip__close').trigger('click')
