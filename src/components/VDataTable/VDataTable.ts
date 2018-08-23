@@ -245,7 +245,8 @@ const VDataTable = mixins(VDataIterator).extend({
       staticClass: 'v-data-table',
       class: {
         'v-data-table--dense': this.dense,
-        'v-data-table--fixed': !!this.height
+        'v-data-table--fixed': !!this.height,
+        ...this.themeClasses
       }
     }, children)
   }

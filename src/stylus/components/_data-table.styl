@@ -8,9 +8,8 @@ v-data-table($material)
 
   .v-table__header
     .v-row
-      &:first-child
-        .v-head
-          border-bottom: 1px solid rgba($material.fg-color, $material.divider-percent)
+      .v-head
+        border-bottom: 1px solid rgba($material.fg-color, $material.divider-percent)
 
     .v-head
       color: rgba($material.text-color, $material.secondary-text-percent)
@@ -121,6 +120,7 @@ theme(v-data-table, "v-data-table")
 
   .v-input
     margin-top: 0
+    padding-top: 0
 
 .v-cell
   height: 48px

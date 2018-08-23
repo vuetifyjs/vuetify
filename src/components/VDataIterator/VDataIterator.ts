@@ -1,6 +1,12 @@
-import Vue, { VNode, CreateElement, VNodeChildrenArrayContents } from 'vue'
+// Types
+import { VNode, CreateElement, VNodeChildrenArrayContents } from 'vue'
 import { PropValidator } from 'vue/types/options'
 
+// Mixins
+import Themeable from '../../mixins/themeable'
+
+// Utils
+import mixins from '../../util/mixins'
 import { getObjectValueByPath, deepEqual, wrapInArray } from '../../util/helpers'
 
 export interface DataIteratorProvide {
@@ -21,7 +27,10 @@ export interface DataIteratorProvide {
   multiSort: boolean
 }
 
-export default Vue.extend({
+export default mixins(
+  Themeable
+  /* @vue/component */
+).extend({
   name: 'v-data-iterator',
 
   provide (): any {
@@ -448,7 +457,8 @@ export default Vue.extend({
     ]
 
     return h('div', {
-      staticClass: 'v-data-iterator'
+      staticClass: 'v-data-iterator',
+      class: this.themeClasses
     }, children)
   }
 })
