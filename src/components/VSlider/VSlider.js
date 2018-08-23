@@ -31,7 +31,6 @@ export default {
   props: {
     alwaysDirty: Boolean,
     inverseLabel: Boolean,
-    hideLabel: Boolean,
     label: String,
     min: {
       type: [Number, String],
@@ -223,7 +222,7 @@ export default {
 
   methods: {
     genDefaultSlot () {
-      const children = [this.hideLabel ? null : this.genLabel()]
+      const children = [this.genLabel()]
       const slider = this.genSlider()
       this.inverseLabel
         ? children.unshift(slider)
@@ -252,7 +251,8 @@ export default {
           'aria-readonly': String(this.readonly),
           'aria-valuemin': this.min,
           'aria-valuemax': this.max,
-          'aria-valuenow': this.internalValue
+          'aria-valuenow': this.internalValue,
+          ...this.$attrs
         },
         on: this.genListeners(),
         ref: 'input'
