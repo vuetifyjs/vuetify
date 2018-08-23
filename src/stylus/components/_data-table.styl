@@ -28,7 +28,7 @@ v-data-table($material)
           i
             color: rgba($material.fg-color, $material.primary-text-percent)
 
-  .v-table__body
+  .v-data-table__body
     .v-row
       // &:not(:last-child)
       //   border-bottom: 1px solid rgba($material.fg-color, $material.divider-percent)
@@ -53,13 +53,19 @@ theme(v-data-table, "v-data-table")
   width: 100%
   max-width: 100%
 
-  &.v-data-table--dense
+  &--dense
     .v-cell
       height: 24px
     .v-head
       height: 32px
 
-// .v-table__header, .v-table__body
+  &--fixed
+    .v-table__header, .v-table__actions
+      margin-right: 17px
+
+    .v-data-table__body
+      overflow-y: scroll
+
 .v-cell, .v-head
   &:not(:nth-child(1)), &:first-child
     padding: 0 24px
@@ -101,7 +107,7 @@ theme(v-data-table, "v-data-table")
           i
             transform: rotate(-180deg)
 
-.v-table__body
+.v-data-table__body
   .v-row
     transition: background $primary-transition
     will-change: background

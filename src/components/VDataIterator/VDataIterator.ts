@@ -399,7 +399,7 @@ export default Vue.extend({
     genEmpty (h: CreateElement, content: any) {
       return h('div', content)
     },
-    genBodies (h: CreateElement): VNodeChildrenArrayContents {
+    genBodies (h: CreateElement) {
       const bodies: VNodeChildrenArrayContents = []
       if (!this.serverItemsLength && this.loading) {
         const loading = this.$slots['loading'] || this.$vuetify.t(this.loadingText)
@@ -415,12 +415,12 @@ export default Vue.extend({
       bodies.push(this.$slots.default)
 
       const slots = this.computeSlots('body')
-      if (slots.length) bodies.push(this.genBodyWrapper(h, slots))
+      if (slots.length) bodies.push(slots)
 
       const items = this.genItems(h)
       if (items.length) bodies.push(...items)
 
-      return bodies
+      return this.genBodyWrapper(h, bodies)
     },
     genItems (h: CreateElement): VNodeChildrenArrayContents {
       const items: VNodeChildrenArrayContents = []
@@ -443,7 +443,7 @@ export default Vue.extend({
   render (h): VNode {
     const children: VNodeChildrenArrayContents = [
       ...this.genHeaders(h),
-      ...this.genBodies(h),
+      this.genBodies(h),
       ...this.genFooters(h)
     ]
 

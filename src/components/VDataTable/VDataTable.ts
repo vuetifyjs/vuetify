@@ -164,9 +164,9 @@ const VDataTable = mixins(VDataIterator).extend({
 
       if (this.$scopedSlots.item) {
         if (this.groupBy) {
-          items.push(this.genBodyWrapper(h, this.genGroupedRows(h, this.computedItems, this.groupBy)))
+          items.push(this.genGroupedRows(h, this.computedItems, this.groupBy))
         } else {
-          items.push(this.genBodyWrapper(h, this.genRows(this.computedItems)))
+          items.push(this.genRows(this.computedItems))
         }
       }
 
@@ -214,38 +214,40 @@ const VDataTable = mixins(VDataIterator).extend({
 
       return footers
     },
-    genBodies (h: CreateElement): VNodeChildrenArrayContents {
+    genBodies (h: CreateElement) {
       if (this.static) return this.$slots.default
-
-      return VDataIterator.options.methods.genBodies.call(this, h)
+      else return VDataIterator.options.methods.genBodies.call(this, h)
     },
-    genBodyWrapper (h: CreateElement, items: VNode[]): VNode {
+    genBodyWrapper (h: CreateElement, items: any[]) {
       return h('div', {
-        staticClass: 'v-table__body',
+        staticClass: 'v-data-table__body',
         class: {
-          'v-table__body--fixed': !!this.height
+          'v-data-table__body--fixed': !!this.height
         },
         style: {
           height: this.height
         }
       }, items)
     },
-    genEmpty (h: CreateElement, content: VNodeData): VNode {
+    genEmpty (h: CreateElement, content: VNodeData) {
       return h(VRow, [h(VCell, content)])
     }
   },
 
   render (h): VNode {
+    const children: VNodeChildrenArrayContents = [
+      ...this.genHeaders(h),
+      this.genBodies(h),
+      ...this.genFooters(h)
+    ]
+
     return h('div', {
       staticClass: 'v-data-table',
       class: {
-        'v-data-table--dense': this.dense
+        'v-data-table--dense': this.dense,
+        'v-data-table--fixed': !!this.height
       }
-    }, [
-      ...this.genHeaders(h),
-      ...this.genBodies(h),
-      ...this.genFooters(h)
-    ])
+    }, children)
   }
 })
 
