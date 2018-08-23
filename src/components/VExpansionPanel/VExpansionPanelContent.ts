@@ -17,8 +17,6 @@ import { VSubtitle1 } from '../typography'
 import mixins, { ExtractVue } from '../../util/mixins'
 import Vue, { VNode } from 'vue'
 
-import { consoleWarn } from '../../util/console'
-
 type VExpansionPanelInstance = InstanceType<typeof VExpansionPanel>
 
 interface options extends Vue {

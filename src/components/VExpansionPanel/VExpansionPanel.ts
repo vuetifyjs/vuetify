@@ -5,7 +5,6 @@ import '../../stylus/components/_expansion-panel.styl'
 import { VExpansionPanelContent } from '.'
 
 // Mixins
-import Elevatable from '../../mixins/elevatable'
 import Themeable from '../../mixins/themeable'
 import { provide as RegistrableProvide } from '../../mixins/registrable'
 
