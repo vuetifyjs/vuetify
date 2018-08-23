@@ -187,6 +187,48 @@ export default Vue.extend({
     }
   },
 
+  computed: {
+    hasSearch (): boolean {
+      return typeof this.search !== 'undefined' && this.search !== null
+    },
+    computedItems (): any[] {
+      let items = this.items.slice()
+
+      if (this.serverItemsLength) return items
+
+      items = this.searchItems(items)
+
+      items = this.sortItems(items, this.options.sortBy, this.options.sortDesc)
+
+      return this.paginateItems(items)
+    },
+    pageStart (): number {
+      return this.options.rowsPerPage === -1
+        ? 0
+        : (this.options.page - 1) * this.options.rowsPerPage
+    },
+    pageStop (): number {
+      return this.options.rowsPerPage === -1
+        ? this.itemsLength // TODO: Does this need to be something other (server-side, etc?)
+        : this.options.page * this.options.rowsPerPage
+    },
+    pageCount (): number {
+      // We can't simply use computedItems.length here since it's already sliced
+      return this.options.rowsPerPage <= 0 ? 1 : Math.ceil(this.itemsLength / this.options.rowsPerPage)
+    },
+    itemsLength (): number {
+      if (typeof this.serverItemsLength !== 'undefined' && !isNaN(this.serverItemsLength)) return this.serverItemsLength
+      if (this.hasSearch) return this.searchItemsLength
+      return this.items.length
+    },
+    everyItem (): boolean {
+      return !!this.computedItems.length && this.computedItems.every((i: any) => this.isSelected(i))
+    },
+    someItems (): boolean {
+      return this.computedItems.some((i: any) => this.isSelected(i))
+    }
+  },
+
   watch: {
     'options.sortBy' (v, old) {
       if (deepEqual(v, old)) return
@@ -241,48 +283,6 @@ export default Vue.extend({
         this.$emit('update:expanded', expanded)
       },
       deep: true
-    }
-  },
-
-  computed: {
-    hasSearch (): boolean {
-      return typeof this.search !== 'undefined' && this.search !== null
-    },
-    computedItems (): any[] {
-      let items = this.items.slice()
-
-      if (this.serverItemsLength) return items
-
-      items = this.searchItems(items)
-
-      items = this.sortItems(items, this.options.sortBy, this.options.sortDesc)
-
-      return this.paginateItems(items)
-    },
-    pageStart (): number {
-      return this.options.rowsPerPage === -1
-        ? 0
-        : (this.options.page - 1) * this.options.rowsPerPage
-    },
-    pageStop (): number {
-      return this.options.rowsPerPage === -1
-        ? this.itemsLength // TODO: Does this need to be something other (server-side, etc?)
-        : this.options.page * this.options.rowsPerPage
-    },
-    pageCount (): number {
-      // We can't simply use computedItems.length here since it's already sliced
-      return this.options.rowsPerPage <= 0 ? 1 : Math.ceil(this.itemsLength / this.options.rowsPerPage)
-    },
-    itemsLength (): number {
-      if (typeof this.serverItemsLength !== 'undefined' && !isNaN(this.serverItemsLength)) return this.serverItemsLength
-      if (this.hasSearch) return this.searchItemsLength
-      return this.items.length
-    },
-    everyItem (): boolean {
-      return !!this.computedItems.length && this.computedItems.every((i: any) => this.isSelected(i))
-    },
-    someItems (): boolean {
-      return this.computedItems.some((i: any) => this.isSelected(i))
     }
   },
 

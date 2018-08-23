@@ -20,6 +20,9 @@ export default Vue.extend({
       this.isActive = v
     }
   },
+  created () {
+    this.isActive = this.value
+  },
   methods: {
     toggle () {
       this.isActive = !this.isActive
@@ -51,9 +54,6 @@ export default Vue.extend({
 
       return content
     }
-  },
-  created () {
-    this.isActive = this.value
   },
   render (h): VNode {
     return h('div', {
