@@ -1,5 +1,5 @@
 // Components
-import VJumbotron from '../VJumbotron'
+import { VImg } from '../VImg'
 
 // Mixins
 import { inject as RegistrableInject } from '../../mixins/registrable'
@@ -52,7 +52,8 @@ export default {
   },
 
   render (h) {
-    const item = h(VJumbotron, {
+    const item = h(VImg, {
+      staticClass: 'v-carousel__item',
       props: {
         ...this.$attrs,
         height: '100%'

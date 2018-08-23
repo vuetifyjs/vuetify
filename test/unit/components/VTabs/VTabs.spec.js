@@ -1,6 +1,6 @@
 import { test, touch, resizeWindow } from '@/test'
 import { createRange } from '@/util/helpers'
-import VTabs from '@/components/VTabs'
+import VTabs from '@/components/VTabs/VTabs'
 import VTab from '@/components/VTabs/VTab'
 import VTabItem from '@/components/VTabs/VTabItem'
 import VTabsItems from '@/components/VTabs/VTabsItems'

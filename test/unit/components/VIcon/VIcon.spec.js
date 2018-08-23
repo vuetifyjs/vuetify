@@ -7,7 +7,7 @@ test('VIcon.js', ({ mount, compileToFunctions }) => {
     const wrapper = mount(VIcon, context)
 
     expect(wrapper.text()).toBe('add')
-    expect(wrapper.element.className).toBe('v-icon material-icons')
+    expect(wrapper.element.className).toBe('v-icon material-icons theme--light')
   })
 
   it('should render a colored component', () => {
@@ -88,7 +88,7 @@ test('VIcon.js', ({ mount, compileToFunctions }) => {
     const wrapper = mount(VIcon, context)
 
     expect(wrapper.text()).toBe('')
-    expect(wrapper.element.className).toBe('v-icon fa fa-add')
+    expect(wrapper.element.className).toBe('v-icon fa fa-add theme--light')
   })
 
   it('should support font awesome 5 icons when using <icon>- prefix', () => {
@@ -96,7 +96,7 @@ test('VIcon.js', ({ mount, compileToFunctions }) => {
     const wrapper = mount(VIcon, context)
 
     expect(wrapper.text()).toBe('')
-    expect(wrapper.element.className).toBe('v-icon fab fa-facebook')
+    expect(wrapper.element.className).toBe('v-icon fab fa-facebook theme--light')
   })
 
   it('should allow the use of v-text', () => {
@@ -105,7 +105,7 @@ test('VIcon.js', ({ mount, compileToFunctions }) => {
     }))
 
     expect(wrapper.text()).toBe('')
-    expect(wrapper.element.className).toBe('v-icon fa fa-home')
+    expect(wrapper.element.className).toBe('v-icon fa fa-home theme--light')
   })
 
   it('should allow the use of v-html', () => {
@@ -114,7 +114,7 @@ test('VIcon.js', ({ mount, compileToFunctions }) => {
     }))
 
     expect(wrapper.text()).toBe('')
-    expect(wrapper.element.className).toBe('v-icon fa fa-home')
+    expect(wrapper.element.className).toBe('v-icon fa fa-home theme--light')
   })
 
   it('should render MD left icon from $vuetify.icons.checkboxOn', () => {
@@ -122,7 +122,7 @@ test('VIcon.js', ({ mount, compileToFunctions }) => {
     const wrapper = mount(VIcon, context)
 
     expect(wrapper.text()).toBe('check_box')
-    expect(wrapper.element.className).toBe('v-icon material-icons')
+    expect(wrapper.element.className).toBe('v-icon material-icons theme--light')
   })
 
   it('should render MD left icon from $vuetify.icons.prev', () => {
@@ -130,7 +130,7 @@ test('VIcon.js', ({ mount, compileToFunctions }) => {
     const wrapper = mount(VIcon, context)
 
     expect(wrapper.text()).toBe('chevron_left')
-    expect(wrapper.element.className).toBe('v-icon material-icons')
+    expect(wrapper.element.className).toBe('v-icon material-icons theme--light')
   })
 
   it('set font size from helper prop', async () => {
@@ -161,6 +161,6 @@ test('VIcon.js', ({ mount, compileToFunctions }) => {
       }
     }))
 
-    expect(wrapper.element.className).toBe('v-icon primary--text fa fa-lock')
+    expect(wrapper.element.className).toBe('v-icon fa fa-lock theme--light primary--text')
   })
 })

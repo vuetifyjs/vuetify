@@ -17,19 +17,18 @@ const VTableOverflow = createSimpleFunctional('v-table__overflow')
 
 export { VDataTable, VEditDialog, VTableOverflow, VRow, VCell, VCellCheckbox, VTableActions }
 
-/* istanbul ignore next */
-VDataTable.install = function install (Vue) {
-  Vue.component(VDataTable.options.name, VDataTable)
-  Vue.component(VEditDialog.name, VEditDialog)
-  Vue.component(VTableOverflow.name, VTableOverflow)
-  Vue.component(VCell.name, VCell)
-  Vue.component(VCellCheckbox.options.name, VCellCheckbox)
-  Vue.component(VRow.options.name, VRow)
-  Vue.component(VTableActions.options.name, VTableActions)
-  Vue.component(VTableHeaders.options.name, VTableHeaders)
-  Vue.component(VRowExpandable.options.name, VRowExpandable)
-  Vue.component(VRowGroup.options.name, VRowGroup)
-  Vue.component(VTableProgress.options.name, VTableProgress)
+export default {
+  $_vuetify_subcomponents: {
+    VDataTable,
+    VEditDialog,
+    VTableOverflow,
+    VRow,
+    VRowGroup,
+    VRowExpandable,
+    VCell,
+    VCellCheckbox,
+    VTableActions,
+    VTableHeaders,
+    VTableProgress
+  }
 }
-
-export default VDataTable

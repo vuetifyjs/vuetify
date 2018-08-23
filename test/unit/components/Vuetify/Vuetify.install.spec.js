@@ -3,7 +3,7 @@ import Vuetify, { checkVueVersion } from '@/components/Vuetify'
 import { test } from '@/test'
 
 test('Vuetify.install.js', () => {
-  it('should install transitions, directives and components', async () => {
+  it('should register components and directives', async () => {
     const { component, directive, use } = Vue
 
     Vue.component = jest.fn()
@@ -13,27 +13,24 @@ test('Vuetify.install.js', () => {
     Vuetify.installed = false
     Vuetify.install(Vue, {
       components: {
-        component: 'foobarbaz'
+        OneComponent: {},
+        ComponentPack: { $_vuetify_subcomponents: { HisChild: {} } }
       },
       directives: {
-        directive: {
+        foobarbaz: {
           name: 'foobarbaz'
         }
-      },
-      transitions: {
-        transition: {
-          name: 'transition'
-        },
-        'v-foobarbaz': {
-          name: 'v-foobarbaz'
-        },
-        'undefined': {}
       }
     })
 
-    expect(Vue.use.mock.calls).toEqual([['foobarbaz']])
-    expect(Vue.directive.mock.calls).toEqual([["foobarbaz", {"name": "foobarbaz"}]])
-    expect(Vue.component.mock.calls).toEqual([["v-foobarbaz", {"name": "v-foobarbaz"}]])
+    expect(Vue.use.mock.calls).toEqual([])
+    expect(Vue.directive.mock.calls).toEqual([
+      ['foobarbaz', { name: 'foobarbaz' }]
+    ])
+    expect(Vue.component.mock.calls).toEqual([
+      ['OneComponent', {}],
+      ['HisChild', {}]
+    ])
 
     Vue.use = jest.fn()
     Vuetify.install(Vue, {
@@ -43,9 +40,7 @@ test('Vuetify.install.js', () => {
     })
     expect(Vue.use).not.toBeCalled()
 
-    Vue.component = component
-    Vue.directive = directive
-    Vue.use = use
+    Object.assign(Vue, { component, directive, use })
   })
 
   describe('should warn about an unsupported version of Vue', () => {

@@ -69,10 +69,9 @@ export default {
       } else {
         eventColor = this.eventColor[date]
       }
-      return this.$createElement('div', {
-        staticClass: 'v-date-picker-table__event',
-        class: this.addBackgroundColorClassChecks({}, eventColor || this.color)
-      })
+      return this.$createElement('div', this.setBackgroundColor(eventColor || this.color || 'accent', {
+        staticClass: 'v-date-picker-table__event'
+      }))
     },
     // Returns number of the days from the firstDayOfWeek to the first day of the current month
     weekDaysBeforeFirstDayOfTheMonth () {

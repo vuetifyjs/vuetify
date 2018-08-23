@@ -80,7 +80,6 @@ export default {
 
   data: vm => ({
     app: {},
-    defaultColor: 'primary',
     isActive: false,
     keyPressed: 0,
     lazyValue: typeof vm.value !== 'undefined' ? vm.value : Number(vm.min),
@@ -111,14 +110,14 @@ export default {
     },
     computedColor () {
       if (this.disabled) return null
-      return this.validationState || this.color || this.defaultColor
+      return this.validationState || this.color || 'primary'
     },
     computedTrackColor () {
       return this.disabled ? null : (this.trackColor || null)
     },
     computedThumbColor () {
       if (this.disabled || !this.isDirty) return null
-      return this.validationState || this.thumbColor || this.color || this.defaultColor
+      return this.validationState || this.thumbColor || this.color || 'primary'
     },
     internalValue: {
       get () {
@@ -144,8 +143,8 @@ export default {
       return this.step > 0 ? parseFloat(this.step) : 0
     },
     trackFillStyles () {
-      let left = this.$vuetify.rtl ? 'auto' : 0
-      let right = this.$vuetify.rtl ? 0 : 'auto'
+      const left = this.$vuetify.rtl ? 'auto' : 0
+      const right = this.$vuetify.rtl ? 0 : 'auto'
       let width = `${this.inputWidth}%`
 
       if (this.disabled) width = `calc(${this.inputWidth}% - 8px)`
@@ -166,9 +165,9 @@ export default {
     },
     trackStyles () {
       const trackPadding = this.disabled ? `calc(${this.inputWidth}% + 8px)` : `${this.trackPadding}px`
-      let left = this.$vuetify.rtl ? 'auto' : trackPadding
-      let right = this.$vuetify.rtl ? trackPadding : 'auto'
-      let width = this.disabled
+      const left = this.$vuetify.rtl ? 'auto' : trackPadding
+      const right = this.$vuetify.rtl ? trackPadding : 'auto'
+      const width = this.disabled
         ? `calc(${100 - this.inputWidth}% - 8px)`
         : '100%'
 
@@ -233,13 +232,13 @@ export default {
       return children
     },
     genListeners () {
-      return Object.assign({}, {
+      return {
         blur: this.onBlur,
         click: this.onSliderClick,
         focus: this.onFocus,
         keydown: this.onKeyDown,
         keyup: this.onKeyUp
-      })
+      }
     },
     genInput () {
       return this.$createElement('input', {
@@ -247,8 +246,7 @@ export default {
           'aria-label': this.label,
           name: this.name,
           role: 'slider',
-          tabindex: this.disabled ? -1 : undefined,
-          type: 'range',
+          tabindex: this.disabled ? -1 : this.$attrs.tabindex,
           value: this.internalValue,
           readonly: true,
           'aria-readonly': String(this.readonly)
@@ -311,10 +309,9 @@ export default {
       }, ticks)
     },
     genThumb () {
-      return this.$createElement('div', {
-        staticClass: 'v-slider__thumb',
-        'class': this.addBackgroundColorClassChecks({}, this.computedThumbColor)
-      })
+      return this.$createElement('div', this.setBackgroundColor(this.computedThumbColor, {
+        staticClass: 'v-slider__thumb'
+      }))
     },
     genThumbContainer (value, valueWidth, isActive, onDrag) {
       const children = [this.genThumb()]
@@ -322,12 +319,12 @@ export default {
       const thumbLabelContent = this.getLabel(value)
       this.showThumbLabel && children.push(this.genThumbLabel(thumbLabelContent))
 
-      return this.$createElement('div', {
+      return this.$createElement('div', this.setTextColor(this.computedThumbColor, {
         staticClass: 'v-slider__thumb-container',
-        'class': this.addTextColorClassChecks({
+        'class': {
           'v-slider__thumb-container--is-active': isActive,
           'v-slider__thumb-container--show-label': this.showThumbLabel
-        }, this.computedThumbColor),
+        },
         style: {
           transition: this.trackTransition,
           left: `${this.$vuetify.rtl ? 100 - valueWidth : valueWidth}%`
@@ -336,7 +333,7 @@ export default {
           touchstart: onDrag,
           mousedown: onDrag
         }
-      }, children)
+      }), children)
     },
     genThumbLabel (content) {
       const size = convertToUnit(this.thumbSize)
@@ -353,29 +350,26 @@ export default {
             }
           ]
         }, [
-          this.$createElement('div', {
+          this.$createElement('div', this.setBackgroundColor(this.computedThumbColor, {
             staticClass: 'v-slider__thumb-label',
-            'class': this.addBackgroundColorClassChecks({}, this.computedThumbColor),
             style: {
               height: size,
               width: size
             }
-          }, [content])
+          }), [content])
         ])
       ])
     },
     genTrackContainer () {
       const children = [
-        this.$createElement('div', {
+        this.$createElement('div', this.setBackgroundColor(this.computedTrackColor, {
           staticClass: 'v-slider__track',
-          'class': this.addBackgroundColorClassChecks({}, this.computedTrackColor),
           style: this.trackStyles
-        }),
-        this.$createElement('div', {
+        })),
+        this.$createElement('div', this.setBackgroundColor(this.computedColor, {
           staticClass: 'v-slider__track-fill',
-          'class': this.addBackgroundColorClassChecks(),
           style: this.trackFillStyles
-        })
+        }))
       ]
 
       return this.$createElement('div', {
@@ -484,7 +478,7 @@ export default {
         this.keyPressed += 1
 
         const increase = this.$vuetify.rtl ? [left, up] : [right, up]
-        let direction = increase.includes(e.keyCode) ? 1 : -1
+        const direction = increase.includes(e.keyCode) ? 1 : -1
         const multiplier = e.shiftKey ? 3 : (e.ctrlKey ? 2 : 1)
 
         value = value + (direction * step * multiplier)
@@ -508,8 +502,9 @@ export default {
       const decimals = trimmedStep.indexOf('.') > -1
         ? (trimmedStep.length - trimmedStep.indexOf('.') - 1)
         : 0
+      const offset = this.min % this.stepNumeric
 
-      const newValue = Math.round(value / this.stepNumeric) * this.stepNumeric
+      const newValue = Math.round((value - offset) / this.stepNumeric) * this.stepNumeric + offset
 
       return parseFloat(Math.min(newValue, this.max).toFixed(decimals))
     },

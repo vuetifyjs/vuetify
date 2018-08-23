@@ -6,7 +6,7 @@ exports[`VTextField.js should apply theme to label, counter, messages and icons 
   <div class="v-input__prepend-outer">
     <div class="v-input__icon v-input__icon--prepend">
       <i aria-hidden="true"
-         class="v-icon theme--light material-icons"
+         class="v-icon material-icons theme--light"
       >
         prepend
       </i>
@@ -17,7 +17,7 @@ exports[`VTextField.js should apply theme to label, counter, messages and icons 
       <div class="v-input__prepend-inner">
         <div class="v-input__icon v-input__icon--prepend-inner">
           <i aria-hidden="true"
-             class="v-icon theme--light prepend prepend-inner"
+             class="v-icon prepend prepend-inner theme--light"
           >
           </i>
         </div>
@@ -29,15 +29,14 @@ exports[`VTextField.js should apply theme to label, counter, messages and icons 
         >
           foo
         </label>
-        <input tabindex="0"
+        <input aria-label="foo"
                type="text"
-               aria-label="foo"
         >
       </div>
       <div class="v-input__append-inner">
         <div class="v-input__icon v-input__icon--append">
           <i aria-hidden="true"
-             class="v-icon theme--light material-icons"
+             class="v-icon material-icons theme--light"
           >
             append
           </i>
@@ -60,7 +59,7 @@ exports[`VTextField.js should apply theme to label, counter, messages and icons 
   <div class="v-input__append-outer">
     <div class="v-input__icon v-input__icon--append-outer">
       <i aria-hidden="true"
-         class="v-icon theme--light append append-outer"
+         class="v-icon append append-outer theme--light"
       >
       </i>
     </div>
@@ -71,23 +70,21 @@ exports[`VTextField.js should apply theme to label, counter, messages and icons 
 
 exports[`VTextField.js should have prefix and suffix 1`] = `
 
-<div class="v-input v-text-field v-text-field--prefix">
+<div class="v-input v-text-field v-text-field--prefix theme--light">
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-text-field__slot">
         <div class="v-text-field__prefix">
           $
         </div>
-        <input tabindex="0"
-               type="text"
-        >
+        <input type="text">
         <div class="v-text-field__suffix">
           .com
         </div>
       </div>
     </div>
     <div class="v-text-field__details">
-      <div class="v-messages">
+      <div class="v-messages theme--light">
         <div class="v-messages__wrapper">
         </div>
       </div>
@@ -99,22 +96,21 @@ exports[`VTextField.js should have prefix and suffix 1`] = `
 
 exports[`VTextField.js should not display counter when set to false/undefined/null 1`] = `
 
-<div class="v-input v-text-field">
+<div class="v-input v-text-field theme--light">
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-text-field__slot">
         <input maxlength="50"
-               tabindex="0"
                type="text"
         >
       </div>
     </div>
     <div class="v-text-field__details">
-      <div class="v-messages">
+      <div class="v-messages theme--light">
         <div class="v-messages__wrapper">
         </div>
       </div>
-      <div class="v-counter">
+      <div class="v-counter theme--light">
         0 / 50
       </div>
     </div>
@@ -125,18 +121,17 @@ exports[`VTextField.js should not display counter when set to false/undefined/nu
 
 exports[`VTextField.js should not display counter when set to false/undefined/null 2`] = `
 
-<div class="v-input v-text-field">
+<div class="v-input v-text-field theme--light">
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-text-field__slot">
         <input maxlength="50"
-               tabindex="0"
                type="text"
         >
       </div>
     </div>
     <div class="v-text-field__details">
-      <div class="v-messages">
+      <div class="v-messages theme--light">
         <div class="v-messages__wrapper">
         </div>
       </div>
@@ -148,17 +143,15 @@ exports[`VTextField.js should not display counter when set to false/undefined/nu
 
 exports[`VTextField.js should render component and match snapshot 1`] = `
 
-<div class="v-input v-text-field">
+<div class="v-input v-text-field theme--light">
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-text-field__slot">
-        <input tabindex="0"
-               type="text"
-        >
+        <input type="text">
       </div>
     </div>
     <div class="v-text-field__details">
-      <div class="v-messages">
+      <div class="v-messages theme--light">
         <div class="v-messages__wrapper">
         </div>
       </div>
@@ -170,13 +163,11 @@ exports[`VTextField.js should render component and match snapshot 1`] = `
 
 exports[`VTextField.js should render component with async loading and custom progress and match snapshot 1`] = `
 
-<div class="v-input v-text-field v-input--is-loading">
+<div class="v-input v-text-field v-input--is-loading theme--light">
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-text-field__slot">
-        <input tabindex="0"
-               type="text"
-        >
+        <input type="text">
       </div>
       <div class="v-progress-linear"
            style="height: 7px;"
@@ -196,7 +187,7 @@ exports[`VTextField.js should render component with async loading and custom pro
       </div>
     </div>
     <div class="v-text-field__details">
-      <div class="v-messages">
+      <div class="v-messages theme--light">
         <div class="v-messages__wrapper">
         </div>
       </div>
@@ -208,13 +199,11 @@ exports[`VTextField.js should render component with async loading and custom pro
 
 exports[`VTextField.js should render component with async loading and match snapshot 1`] = `
 
-<div class="v-input v-text-field v-input--is-loading">
+<div class="v-input v-text-field v-input--is-loading theme--light">
   <div class="v-input__control">
     <div class="v-input__slot">
       <div class="v-text-field__slot">
-        <input tabindex="0"
-               type="text"
-        >
+        <input type="text">
       </div>
       <div class="v-progress-linear"
            style="height: 2px;"
@@ -234,7 +223,7 @@ exports[`VTextField.js should render component with async loading and match snap
       </div>
     </div>
     <div class="v-text-field__details">
-      <div class="v-messages">
+      <div class="v-messages theme--light">
         <div class="v-messages__wrapper">
         </div>
       </div>

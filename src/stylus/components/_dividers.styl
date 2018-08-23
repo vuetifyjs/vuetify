@@ -2,28 +2,31 @@
 @import '../theme'
 
 v-divider($material)
-  background-color: $material.dividers
+  border-color: $material.dividers
 
 theme(v-divider, "v-divider")
 
 .v-divider
-  border: none
   display: block
-  height: 1px
-  flex: 1 1
-  min-height: 1px
-  width: 100%
+  flex: 1 1 0px
+  max-width: 100%
+  height: 0px
+  max-height: 0px
+  border: solid
+  border-width: thin 0 0 0
+  transition: inherit
 
   &--inset:not(.v-divider--vertical)
     margin-left: 72px
-    width: calc(100% - 72px)
+    max-width: calc(100% - 72px)
 
   &--vertical
-    flex: 0 1 auto
+    width: 0px
+    max-width: 0px
     height: 100%
-    max-width: 1px
-    min-width: 1px
-    width: 1px
+    max-height: 100%
+    border: solid
+    border-width: 0 thin 0 0
 
     &.v-divider--inset
-      height: calc(100% - 16px)
+      max-height: calc(100% - 16px)

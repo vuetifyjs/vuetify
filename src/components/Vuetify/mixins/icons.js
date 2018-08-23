@@ -23,6 +23,9 @@ const ICONS_MATERIAL = {
   'radioOn': 'radio_button_checked',
   'radioOff': 'radio_button_unchecked',
   'edit': 'edit',
+  'ratingEmpty': 'star_border',
+  'ratingFull': 'star',
+  'ratingHalf': 'star_half',
   'first': 'first_page',
   'last': 'last_page'
 }
@@ -52,8 +55,11 @@ const ICONS_MDI = {
   'radioOn': 'mdi-radiobox-marked',
   'radioOff': 'mdi-radiobox-blank',
   'edit': 'mdi-pencil',
-  'first': 'page-first',
-  'last': 'page-last'
+  'ratingEmpty': 'mdi-star-outline',
+  'ratingFull': 'mdi-star',
+  'ratingHalf': 'mdi-star-half',
+  'first': 'mdi-page-first',
+  'last': 'mdi-page-last'
 }
 
 // Maps internal Vuetify icon names to actual Font-Awesome 4 icon names.
@@ -81,6 +87,9 @@ const ICONS_FONTAWESOME4 = {
   'radioOn': 'fa fa-dot-circle',
   'radioOff': 'fa fa-circle-o',
   'edit': 'fa fa-pencil',
+  'ratingEmpty': 'fa fa-star-o',
+  'ratingFull': 'fa fa-star',
+  'ratingHalf': 'fa fa-star-half-o',
   'first': 'fa fa-step-backward',
   'last': 'fa fa-step-forward'
 }
@@ -110,6 +119,9 @@ const ICONS_FONTAWESOME = {
   'radioOn': 'far fa-dot-circle',
   'radioOff': 'far fa-circle',
   'edit': 'fas fa-edit',
+  'ratingEmpty': 'far fa-star',
+  'ratingFull': 'fas fa-star',
+  'ratingHalf': 'fas fa-star-half',
   'first': 'fas fa-step-backward',
   'last': 'fas fa-step-forward'
 }

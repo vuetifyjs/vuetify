@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import { test } from '@/test'
-import VTimePicker from '@/components/VTimePicker'
-import VMenu from '@/components/VMenu'
+import VTimePicker from '@/components/VTimePicker/VTimePicker'
 
 test('VTimePicker.js', ({ mount }) => {
   it('should accept a value', async () => {

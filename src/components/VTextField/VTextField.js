@@ -198,7 +198,7 @@ export default {
     },
     /** @public */
     blur () {
-      this.onBlur()
+      this.$refs.input ? this.$refs.input.blur() : this.onBlur()
     },
     clearableCallback () {
       this.internalValue = null
@@ -314,13 +314,12 @@ export default {
           value: this.maskText(this.lazyValue)
         },
         attrs: {
+          'aria-label': (!this.$attrs || !this.$attrs.id) && this.label, // Label `for` will be set if we have an id
           ...this.$attrs,
           autofocus: this.autofocus,
           disabled: this.disabled,
           readonly: this.readonly,
-          tabindex: this.tabindex,
-          type: this.type,
-          'aria-label': (!this.$attrs || !this.$attrs.id) && this.label // Label `for` will be set if we have an id
+          type: this.type
         },
         on: Object.assign(listeners, {
           blur: this.onBlur,
@@ -412,15 +411,7 @@ export default {
       VInput.methods.onMouseDown.call(this, e)
     },
     onMouseUp (e) {
-      // Default click handler is on slot,
-      // Mouse events are to enable specific
-      // input types when clicked
-      if (
-        (this.isSolo || this.hasOutline) &&
-        document.activeElement !== this.$refs.input
-      ) {
-        this.$refs.input.focus()
-      }
+      this.focus()
 
       VInput.methods.onMouseUp.call(this, e)
     }

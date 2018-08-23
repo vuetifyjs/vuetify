@@ -1,5 +1,8 @@
 import Vue, { VNode } from 'vue'
-import { toggleable } from './toggleable'
+
+interface Toggleable extends Vue {
+  isActive?: boolean
+}
 
 /**
  * Bootable
@@ -10,7 +13,7 @@ import { toggleable } from './toggleable'
  * Otherwise can be set manually
  */
 /* @vue/component */
-export default Vue.extend<toggleable>().extend({
+export default Vue.extend<Vue & Toggleable>().extend({
   name: 'bootable',
 
   props: {
@@ -22,7 +25,7 @@ export default Vue.extend<toggleable>().extend({
   }),
 
   computed: {
-    hasContent (): boolean {
+    hasContent (): boolean | undefined {
       return this.isBooted || !this.lazy || this.isActive
     }
   },
@@ -34,8 +37,8 @@ export default Vue.extend<toggleable>().extend({
   },
 
   methods: {
-    showLazyContent (content: VNode[]): VNode[] | null {
-      return this.hasContent ? content : null
+    showLazyContent (content: VNode[]): VNode[] | undefined {
+      return this.hasContent ? content : undefined
     }
   }
 })

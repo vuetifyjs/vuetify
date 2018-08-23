@@ -48,7 +48,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.vm.virtualizedItems.length).toBe(20)
 
-    wrapper.setProps({ auto: true })
+    wrapper.setProps({ menuProps: 'auto' })
 
     expect(wrapper.vm.virtualizedItems.length).toBe(100)
   })
@@ -104,5 +104,73 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     // Will be undefined if fails
     expect(wrapper.vm.listData.on).toBeTruthy()
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/4431
+  it('should accept null and "" as values', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        clearable: true,
+        items: [
+          { text: 'Foo', value: null },
+          { text: 'Bar', value: 'bar' }
+        ],
+        value: null
+      },
+    })
+
+    const icon = wrapper.first('.v-input__append-inner .v-icon')
+
+    expect(wrapper.vm.selectedItems.length).toBe(1)
+    expect(wrapper.vm.isDirty).toBe(true)
+
+    icon.trigger('click')
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.selectedItems.length).toBe(0)
+    expect(wrapper.vm.isDirty).toBe(false)
+    expect(wrapper.vm.internalValue).toBe(undefined)
+  })
+
+  it('should only calls change once when clearing', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        clearable: true,
+        value: 'foo'
+      }
+    })
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    const icon = wrapper.first('.v-input__icon > .v-icon')
+
+    icon.trigger('click')
+
+    await wrapper.vm.$nextTick()
+
+    expect(change).toHaveBeenCalledTimes(1)
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/4713
+  it('should nudge select menu', () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        menuProps: {
+          nudgeTop: 5,
+          nudgeRight: 5,
+          nudgeBottom: 5,
+          nudgeLeft: 5
+        }
+      }
+    })
+
+    const menu = wrapper.vm.$refs.menu
+
+    expect(menu.nudgeTop).toBe(5)
+    expect(menu.nudgeRight).toBe(5)
+    expect(menu.nudgeBottom).toBe(5)
+    expect(menu.nudgeLeft).toBe(5)
   })
 })

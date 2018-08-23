@@ -13,6 +13,7 @@ import ClickOutside from '../../directives/click-outside'
 
 // Helpers
 import { getZIndex, convertToUnit } from '../../util/helpers'
+import SlotProvider from '../../util/SlotProvider'
 
 /* @vue/component */
 export default {
@@ -60,7 +61,6 @@ export default {
     return {
       animate: false,
       animateTimeout: null,
-      isDependent: false,
       stackClass: 'v-dialog__content--active',
       stackMinZIndex: 200
     }
@@ -82,9 +82,6 @@ export default {
         'v-dialog__content': true,
         'v-dialog__content--active': this.isActive
       }
-    },
-    hasOverlay () {
-      return this.persistent || !this.hideOverlay
     }
   },
 
@@ -143,8 +140,7 @@ export default {
       return getZIndex(this.$refs.content) >= this.getMaxZIndex()
     },
     show () {
-      const overlayClass = this.hideOverlay ? 'v-overlay--transparent' : ''
-      !this.fullscreen && this.hasOverlay && this.genOverlay(overlayClass)
+      !this.fullscreen && !this.hideOverlay && this.genOverlay()
       this.fullscreen && this.hideScroll()
       this.$refs.content.focus()
       this.$listeners.keydown && this.bind()
@@ -221,7 +217,15 @@ export default {
       },
       style: { zIndex: this.activeZIndex },
       ref: 'content'
-    }, [dialog]))
+    }, [
+      this.$createElement(SlotProvider, {
+        props: {
+          provide: {
+            theme: { isDark: this.$vuetify.dark || this.dark }
+          }
+        }
+      }, [dialog])
+    ]))
 
     return h('div', {
       staticClass: 'v-dialog__container',
