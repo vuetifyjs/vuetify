@@ -134,6 +134,12 @@ export default mixins(Colorable).extend({
 
     return h('div', {
       staticClass: 'v-progress-linear',
+      attrs: {
+        'role': 'progressbar',
+        'aria-valuemin': 0,
+        'aria-valuemax': this.bufferValue,
+        'aria-valuenow': this.indeterminate ? undefined : this.value
+      },
       class: {
         'v-progress-linear--query': this.query
       },
