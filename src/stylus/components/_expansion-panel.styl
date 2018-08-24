@@ -6,9 +6,8 @@ v-expansion-panel($material)
   .v-expansion-panel__container
     background: $material.cards
 
-    &:not(:first-child)
-      &:before
-        border-color: $material.dividers
+    &::after
+      border-color: $material.dividers
 
     &--disabled
       color: $material.text.disabled
@@ -23,6 +22,8 @@ theme(v-expansion-panel, "v-expansion-panel")
   display: flex
   flex-wrap: wrap
   justify-content: center
+  position: relative
+  z-index: 1
 
   &__activator
     display: flex
@@ -51,8 +52,23 @@ theme(v-expansion-panel, "v-expansion-panel")
       z-index: -1
       transition: inherit
 
+    &:not(:first-child)::after
+      content: ''
+      position: absolute
+      top: 0
+      left: 0
+      right: 0
+      border-top: thin solid
+      transition: opacity $primary-transition
+
     &--active
       margin: $spacers.three.y 0
+
+      &::after
+        opacity: 0
+
+      + .v-expansion-panel__container::after
+        opacity: 0
 
       .v-expansion-panel__container::before
         elevation(3)
