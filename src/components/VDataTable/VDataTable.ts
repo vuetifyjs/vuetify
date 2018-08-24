@@ -145,6 +145,19 @@ const VDataTable = mixins(VDataIterator).extend({
 
       return this.customSort(items, sortBy, sortDesc, this.headersWithCustomSort)
     },
+    hasRow (content: string | VNodeChildrenArrayContents) {
+      content = wrapInArray(content)
+      return content.some((el: any) => {
+        return el.componentOptions && el.componentOptions.tag === 'v-row'
+      })
+    },
+    genRow (content: string | VNodeChildrenArrayContents, active: boolean) {
+      return this.$createElement(VRow, {
+        props: {
+          active
+        }
+      }, content)
+    },
     genHeaders (h: CreateElement): VNodeChildrenArrayContents {
       const headers = this.computeSlots('header')
 
@@ -173,7 +186,13 @@ const VDataTable = mixins(VDataIterator).extend({
       return items
     },
     genRows (items: any[]): VNodeChildrenArrayContents {
-      return items.map((item: any) => this.$scopedSlots.item(this.createItemProps(item)))
+      return items.map((item: any) => {
+        const row = this.$scopedSlots.item(this.createItemProps(item))
+        const active = this.isSelected(item)
+
+        if (this.hasRow(row)) return row
+        else return this.genRow(row, active)
+      })
     },
     genGroupedRows (h: CreateElement, items: any[], groupBy: string): VNodeChildrenArrayContents {
       const grouped = groupByProperty(items, groupBy)
