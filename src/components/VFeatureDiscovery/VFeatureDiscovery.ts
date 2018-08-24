@@ -3,46 +3,50 @@ import '../../stylus/components/_feature-discovery.styl'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
-import Overlayable from '../../mixins/overlayable'
 import Toggleable from '../../mixins/toggleable'
+import Themeable from '../../mixins/themeable'
+import { factory as PositionableFactory } from '../../mixins/positionable'
+
+// Types
+import { VNode, VNodeChildren } from 'vue'
+import mixins from '../../util/mixins'
 
 // Directives
 import ClickOutside from '../../directives/click-outside'
 
-export default {
+export default mixins(
+  Colorable,
+  Toggleable,
+  Themeable,
+  PositionableFactory(['left', 'top'])
+/* @vue/component */
+).extend({
   name: 'v-feature-discovery',
 
-  directives: {
-    ClickOutside
-  },
-
-  mixins: [
-    Colorable,
-    Overlayable,
-    Toggleable
-  ],
+  directives: { ClickOutside },
 
   props: {
     persistent: Boolean,
-    top: Boolean,
-    left: Boolean,
     flat: Boolean,
+    color: {
+      type: String,
+      default: 'primary'
+    },
     height: {
       default: 400,
       type: [Number, String],
-      validator: v => !isNaN(parseInt(v))
+      validator: (v: string | number): boolean => !isNaN(parseInt(v))
+    },
+    value: {
+      default: true
     }
   },
 
-  data: () => ({
-    initiated: false
-  }),
-
   computed: {
-    classes () {
+    classes (): object {
       return {
         'v-feature-discovery--flat': this.flat,
-        'v-feature-discovery--active': this.isActive && this.initiated,
+        'v-feature-discovery--active': this.isActive,
         'v-feature-discovery--top-left': this.top && this.left,
         'v-feature-discovery--top-right': this.top && !this.left,
         'v-feature-discovery--bottom-left': !this.top && this.left,
@@ -50,64 +54,38 @@ export default {
         ...this.themeClasses
       }
     },
-    OuterContainerClasses () {
+    OuterContainerClasses (): object {
       return {
         [`justify-${this.left ? 'start' : 'end'}`]: true,
         [`align-${this.top ? 'baseline' : 'end'}`]: true
       }
     },
-    titleClasses () {
+    innerContentClasses (): any {
       return {
-        'mr-4': this.left && !this.top,
-        'ml-4 mt-3': !this.left && !this.top,
-        'align-end': true
+        title: {
+          'mr-4': this.left && !this.top,
+          'ml-4 mt-3': !this.left && !this.top,
+          'align-end': true
+        },
+        text: {
+          'align-center': true
+        },
+        actions: {
+          'mr-5': this.left && this.top,
+          'ml-5': !this.left && this.top
+        }
       }
     },
-    actionsClasses () {
-      return {
-        'mr-5': this.left && this.top,
-        'ml-5': !this.left && this.top
-      }
-    },
-    textClasses () {
-      return {
-        'align-center': true
-      }
-    },
-    computedHeight () {
+    computedHeight (): number {
       return parseInt(this.height)
     }
   },
 
-  watch: {
-    isActive (val) {
-      if (val) this.genOverlay()
-      else this.removeOverlay()
-    }
-  },
-
   methods: {
-    init () {
-      if (this.isActive) {
-        this.genOverlay()
-      }
-      this.initiated = true
-    },
-
-    genDirectives () {
-      const directives = [{
-        name: 'click-outside',
-        value: () => (this.isActive = false),
-        args: {
-          closeConditional: this.closeConditional
-        }
-      }]
-      return directives
-    },
-    closeConditional (e) {
+    closeConditional (): boolean {
       return !this.persistent && this.isActive
     },
-    genContent () {
+    genContent (): VNode {
       return this.$createElement(
         'div',
         {
@@ -117,7 +95,7 @@ export default {
         [this.genContainer()]
       )
     },
-    genContainer () {
+    genContainer (): VNode {
       return this.$createElement(
         'div',
         {
@@ -130,21 +108,22 @@ export default {
         [this.genInnerContainer()]
       )
     },
-    genInnerContainer () {
+    genInnerContainer (): VNode {
+      const children: VNodeChildren = this.genInnerContent()
       return this.$createElement(
         'div',
         { staticClass: 'v-feature-discovery-inner-container layout pa-2 column fill-height' },
-        [this.genInnerContent()]
+        children
       )
     },
-    genInnerContent () {
+    genInnerContent (): VNodeChildren {
       const content = ['title', 'text', 'actions']
       return content.map(x => {
         return this.$createElement(
           'div',
           {
             staticClass: `v-feature-discovery-${x} flex d-flex text-xs-center`,
-            class: this[`${x}Classes`]
+            'class': this.innerContentClasses[x]
           },
           [this.$slots[x]]
         )
@@ -152,13 +131,15 @@ export default {
     }
   },
 
-  mounted () {
-    this.init()
-  },
-
-  render (h) {
+  render (h): VNode {
     const data = {
-      directives: this.genDirectives(),
+      directives: [{
+        name: 'click-outside',
+        value: () => (this.isActive = false),
+        args: {
+          closeConditional: this.closeConditional
+        }
+      }] as any,
       staticClass: 'v-feature-discovery',
       class: this.classes,
       style: {
@@ -170,20 +151,6 @@ export default {
 
     const children = [this.genContent()]
 
-    // const featureDiscoveryTitle = h('div', {
-    //   staticClass: 'v-feature-discovery-title flex d-flex text-xs-center',
-    //   class: this.featureDiscoveryTitleClasses
-    // }, [this.$slots.title])
-    //
-    // const featureDiscoveryText = h('div', {
-    //   staticClass: 'v-feature-discovery-text flex d-flex text-xs-center align-center'
-    // }, [this.$slots.text])
-    //
-    // const featureDiscoveryActions = h('div', {
-    //   staticClass: 'v-feature-discovery-actions flex d-flex text-xs-center align-baseline',
-    //   class: this.featureDiscoveryActionsClasses
-    // }, [this.$slots.actions])
-
     return h('div', this.setBackgroundColor(this.color, data), children)
   }
-}
+})
