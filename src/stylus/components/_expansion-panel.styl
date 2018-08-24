@@ -23,7 +23,6 @@ theme(v-expansion-panel, "v-expansion-panel")
   display: flex
   flex-wrap: wrap
   justify-content: center
-  elevation(2)
 
   &__activator
     display: flex
@@ -35,6 +34,17 @@ theme(v-expansion-panel, "v-expansion-panel")
     position: relative
     outline: none
     transition: $primary-transition
+    elevation(2)
+
+    &:not(:first-child):after
+      content: ''
+      height: 3px
+      background-color: inherit
+      width: 100%
+      position: absolute
+      bottom: 100%
+      left: 0
+      right: 0
 
     &:before
       border-color: transparent
@@ -48,6 +58,15 @@ theme(v-expansion-panel, "v-expansion-panel")
       transition: inherit
 
     &--active
+      margin: $spacers.three.y 0
+
+      .v-expansion-panel__container
+        elevation(3)
+
+      &:after,
+      + .v-expansion-panel__container:after
+        opacity: 0
+
       > .v-expansion-panel__activator
         .v-list__item__icon > .v-icon
           transform: rotate(-180deg)
@@ -74,14 +93,11 @@ theme(v-expansion-panel, "v-expansion-panel")
 
   &--popout,
   &--inset
-    elevation(0)
-
     .v-expansion-panel__container
       max-width: 95%
 
       &--active
         margin: $spacers.three.x
-        elevation(3)
 
         &:before
           opacity: 0
