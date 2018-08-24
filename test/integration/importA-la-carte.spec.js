@@ -22,6 +22,7 @@ import VDatePicker from '@/components/VDatePicker'
 import VDialog from '@/components/VDialog'
 import VDivider from '@/components/VDivider'
 import VExpansionPanel from '@/components/VExpansionPanel'
+import VFeatureDiscovery from '@/components/VFeatureDiscovery'
 import VFooter from '@/components/VFooter'
 import VForm from '@/components/VForm'
 import VGrid from '@/components/VGrid'
@@ -85,6 +86,7 @@ const components = {
   VDialog,
   VDivider,
   VExpansionPanel,
+  VFeatureDiscovery,
   VFooter,
   VForm,
   VGrid,
