@@ -15,10 +15,10 @@ import { PropValidator } from 'vue/types/options'
 
 type VExpansionPanelContentInstance = InstanceType<typeof VExpansionPanelContent>
 
-/* @vue/component */
 export default mixins(
   Themeable,
   RegistrableProvide('expansionPanel')
+  /* @vue/component */
 ).extend({
   name: 'v-expansion-panel',
 
