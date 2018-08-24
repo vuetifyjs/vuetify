@@ -59,7 +59,10 @@ exports[`VBtn.js should render component with loader and match snapshot 1`] = `
   <div class="v-btn__content">
   </div>
   <span class="v-btn__loading">
-    <div class="v-progress-circular v-progress-circular--indeterminate"
+    <div role="progressbar"
+         aria-valuemin="0"
+         aria-valuemax="100"
+         class="v-progress-circular v-progress-circular--indeterminate"
          style="height: 26px; width: 26px;"
     >
       <svg xmlns="http://www.w3.org/2000/svg"
