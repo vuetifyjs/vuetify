@@ -17,7 +17,7 @@ import { PropValidator } from 'vue/types/options'
 export interface TableHeader {
   text: string
   value: string
-  align?: 'left' | 'center' | 'right'
+  align?: 'start' | 'center' | 'end'
   sortable?: boolean
   class?: string | string[]
   width?: string | number
