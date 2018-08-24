@@ -73,7 +73,8 @@ export default mixins(
   props: {
     items: Array as PropValidator<any[]>,
     itemKey: {
-      type: String
+      type: String,
+      default: 'id'
     },
     customSort: {
       type: Function,
