@@ -136,12 +136,6 @@ export default mixins(Colorable).extend({
 
     return h('div', this.setTextColor(this.color, {
       staticClass: 'v-progress-circular',
-      attrs: {
-        'role': 'progressbar',
-        'aria-valuemin': 0,
-        'aria-valuemax': 100,
-        'aria-valuenow': this.indeterminate ? undefined : this.normalizedValue
-      },
       class: this.classes,
       style: this.styles,
       on: this.$listeners
