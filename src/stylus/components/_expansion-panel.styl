@@ -34,38 +34,23 @@ theme(v-expansion-panel, "v-expansion-panel")
     position: relative
     outline: none
     transition: $primary-transition
-    elevation(2)
 
-    &:not(:first-child):after
+    &::before
+      elevation(2)
       content: ''
-      height: 3px
-      background-color: inherit
-      width: 100%
       position: absolute
-      bottom: 100%
-      left: 0
-      right: 0
-
-    &:before
-      border-color: transparent
-      border-style: solid
-      border-width: thin 0 0 0
-      content: ''
-      left: 0
-      position: absolute
-      right: 0
       top: 0
+      bottom: 0
+      left: 0
+      right: 0
+      z-index: -1
       transition: inherit
 
     &--active
       margin: $spacers.three.y 0
 
-      .v-expansion-panel__container
+      .v-expansion-panel__container::before
         elevation(3)
-
-      &:after,
-      + .v-expansion-panel__container:after
-        opacity: 0
 
       > .v-expansion-panel__activator
         .v-list__item__icon > .v-icon
@@ -98,9 +83,6 @@ theme(v-expansion-panel, "v-expansion-panel")
 
       &--active
         margin: $spacers.three.x
-
-        &:before
-          opacity: 0
 
   &--popout
     .v-expansion-panel__container--active
