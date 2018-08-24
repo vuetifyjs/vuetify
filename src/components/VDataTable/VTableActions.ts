@@ -78,17 +78,15 @@ export default injectTwo<DataIteratorProvide, DataTableProvide>()('dataIterator'
       let children: VNodeChildrenArrayContents = ['–']
 
       if (this.dataIterator.itemsLength) {
-        const stop = this.dataIterator.itemsLength < this.dataIterator.pageStop || this.dataIterator.pageStop < 0
-          ? this.dataIterator.itemsLength
+        const itemsLength = this.dataIterator.itemsLength
+        const pageStart = this.dataIterator.pageStart + 1
+        const pageStop = itemsLength < this.dataIterator.pageStop || this.dataIterator.pageStop < 0
+          ? itemsLength
           : this.dataIterator.pageStop
 
         children = this.$scopedSlots.pageText
-          ? [this.$scopedSlots.pageText({
-            pageStart: this.dataIterator.pageStart + 1,
-            pageStop: stop,
-            itemsLength: this.dataIterator.itemsLength
-          })]
-          : [`${this.dataIterator.pageStart + 1}-${stop} of ${this.dataIterator.itemsLength}`]
+          ? [this.$scopedSlots.pageText({ pageStart, pageStop, itemsLength })]
+          : [`${pageStart}-${pageStop} of ${itemsLength}`]
       }
 
       return h('div', {
