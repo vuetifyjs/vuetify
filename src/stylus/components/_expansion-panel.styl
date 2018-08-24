@@ -42,7 +42,7 @@ theme(v-expansion-panel, "v-expansion-panel")
     transition: $primary-transition
 
     &::before
-      elevation(2)
+      elevation(1)
       content: ''
       position: absolute
       top: 0
@@ -74,8 +74,8 @@ theme(v-expansion-panel, "v-expansion-panel")
         &::after
           opacity: 0
 
-      .v-expansion-panel__container::before
-        elevation(3)
+      &::before
+        elevation(2)
 
       > .v-expansion-panel__activator
         padding: 8px 0
@@ -98,3 +98,13 @@ theme(v-expansion-panel, "v-expansion-panel")
 
       &::after
         opacity: 1
+
+  &--inset
+    .v-expansion-panel__container
+      &--active
+        max-width: "calc(100% - %s)" % ($spacers.three.x * 2)
+
+  &--popout
+    .v-expansion-panel__container
+      &:not(.v-expansion-panel__container--active)
+        max-width: "calc(100% - %s)" % ($spacers.three.x * 2)

@@ -33,6 +33,9 @@ export default mixins(
     disabled: Boolean,
     readonly: Boolean,
     multiple: Boolean,
+    focusable: Boolean,
+    inset: Boolean,
+    popout: Boolean,
     value: {
       type: [Number, Array],
       default: () => null
@@ -48,6 +51,9 @@ export default mixins(
     classes (): object {
       return {
         'v-expansion-panel--accordion': this.accordion,
+        'v-expansion-panel--focusable': this.focusable,
+        'v-expansion-panel--popout': this.popout,
+        'v-expansion-panel--inset': this.inset,
         ...this.themeClasses
       }
     }
