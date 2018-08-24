@@ -335,7 +335,7 @@ export default mixins(
       this.options = Object.assign(this.options, { sortBy, sortDesc })
     },
     isSelected (item: any): boolean {
-      return this.selection[getObjectValueByPath(item, this.itemKey)]
+      return this.selection[getObjectValueByPath(item, this.itemKey)] || false
     },
     select (item: any, value = true): void {
       const selection = this.singleSelect ? {} : Object.assign({}, this.selection)
@@ -348,7 +348,7 @@ export default mixins(
       this.$emit('item-selected', { item, value })
     },
     isExpanded (item: any): boolean {
-      return this.expansion[getObjectValueByPath(item, this.itemKey)]
+      return this.expansion[getObjectValueByPath(item, this.itemKey)] || false
     },
     expand (item: any, value = true): void {
       const expansion = this.singleExpand ? {} : Object.assign({}, this.expansion)
