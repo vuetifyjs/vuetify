@@ -92,28 +92,9 @@ theme(v-expansion-panel, "v-expansion-panel")
     align-self: center
     margin-left: auto
 
-  &--popout,
-  &--popin,
-  &--inset
-    .v-expansion-panel__container--active::before
-      opacity: 0
-
-  &--popout,
-  &--inset
-    .v-expansion-panel__container--active
-      margin: $spacers.three.x
-
-  &--popin
-    .v-expansion-panel__container--active
-      margin: $spacers.three.y 0
-
-  &--popout
+  &--accordion
     .v-expansion-panel__container
-      max-width: 95%
+      margin-top: 0
 
-      &--active
-        max-width: 100%
-
-  &--inset
-    .v-expansion-panel__container--active
-      max-width: 95%
+      &::after
+        opacity: 1

@@ -29,13 +29,10 @@ export default mixins(
   },
 
   props: {
+    accordion: Boolean,
     disabled: Boolean,
     readonly: Boolean,
-    expand: Boolean,
-    focusable: Boolean,
-    inset: Boolean,
-    popin: Boolean,
-    popout: Boolean,
+    multiple: Boolean,
     value: {
       type: [Number, Array],
       default: () => null
@@ -50,17 +47,14 @@ export default mixins(
   computed: {
     classes (): object {
       return {
-        'v-expansion-panel--focusable': this.focusable,
-        'v-expansion-panel--popin': this.popin,
-        'v-expansion-panel--popout': this.popout,
-        'v-expansion-panel--inset': this.inset,
+        'v-expansion-panel--accordion': this.accordion,
         ...this.themeClasses
       }
     }
   },
 
   watch: {
-    expand (v: boolean) {
+    multiple (v: boolean) {
       let openIndex = -1
       if (!v) {
         // Close all panels unless only one is open
@@ -91,7 +85,7 @@ export default mixins(
 
   methods: {
     updateFromValue (v: number | number[]) {
-      if (Array.isArray(v) && !this.expand) return
+      if (Array.isArray(v) && !this.multiple) return
 
       let open = Array(this.items.length).fill(false)
       if (typeof v === 'number') {
@@ -109,16 +103,16 @@ export default mixins(
       }
     },
     panelClick (uid: number) {
-      const open = this.expand ? this.open.slice() : Array(this.items.length).fill(false)
+      const open = this.multiple ? this.open.slice() : Array(this.items.length).fill(false)
       for (let i = 0; i < this.items.length; i++) {
         if (this.items[i]._uid === uid) {
           open[i] = !this.open[i]
-          !this.expand && this.$emit('input', open[i] ? i : null)
+          !this.multiple && this.$emit('input', open[i] ? i : null)
         }
       }
 
       this.updatePanels(open)
-      if (this.expand) this.$emit('input', open)
+      if (this.multiple) this.$emit('input', open)
     },
     register (content: VExpansionPanelContentInstance) {
       const i = this.items.push(content) - 1

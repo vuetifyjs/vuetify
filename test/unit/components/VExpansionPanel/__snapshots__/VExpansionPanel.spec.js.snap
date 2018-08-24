@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VExpansionPanel.js should render an expanded component and match snapshot 1`] = `
+exports[`VExpansionPanel.js should render a multiple component and match snapshot 1`] = `
 
 <div class="v-expansion-panel theme--light">
   <div tabindex="0"
@@ -30,7 +30,7 @@ exports[`VExpansionPanel.js should render an expanded component and match snapsh
 
 `;
 
-exports[`VExpansionPanel.js should render an expanded component and match snapshot 2`] = `
+exports[`VExpansionPanel.js should render a multiple component and match snapshot 2`] = `
 
 <div class="v-expansion-panel theme--light">
   <div tabindex="0"
@@ -51,7 +51,7 @@ exports[`VExpansionPanel.js should render an expanded component and match snapsh
       </div>
     </div>
     <div class="v-expansion-panel__body expand-transition-enter expand-transition-enter-active"
-         style="overflow: hidden; height: 0px; display: block;"
+         style="overflow: hidden; height: 0px;"
     >
       content
     </div>
@@ -111,7 +111,7 @@ exports[`VExpansionPanel.js should render component and match snapshot 2`] = `
       </div>
     </div>
     <div class="v-expansion-panel__body expand-transition-enter expand-transition-enter-active"
-         style="overflow: hidden; height: 0px; display: block;"
+         style="overflow: hidden; height: 0px;"
     >
       content
     </div>
