@@ -110,10 +110,12 @@ export default mixins(Colorable, Themeable).extend({
       // is Material Icon font
     } else newChildren.push(iconName)
 
+    let hasClickListener = this.$listeners.click || this.$listeners['!click']
+    
     data.attrs = data.attrs || {}
-    if (!('aria-hidden' in data.attrs) && (!this.$listeners.click || !this.$listeners['!click']) {
+    if (!('aria-hidden' in data.attrs) && !hasClickListener) {
       data.attrs['aria-hidden'] = true
-    } else if (this.$listeners.click || this.$listeners['!click']) {
+    } else if (hasClickListener) {
       data.attrs['role'] = 'button'
     }
 
@@ -121,7 +123,7 @@ export default mixins(Colorable, Themeable).extend({
       ...(props.color && addTextColorClassChecks.call(props, {}, props.color)),
       'v-icon--disabled': props.disabled,
       'v-icon--left': props.left,
-      'v-icon--link': listeners.click || listeners['!click'],
+      'v-icon--link': hasClickListener,
       'v-icon--right': props.right,
       'theme--dark': props.dark,
       'theme--light': props.light
