@@ -144,6 +144,7 @@ export default mixins<options &
 
       return h(VListItem, [
         this.$slots.header ||
+        (this.$scopedSlots.header && this.$scopedSlots.header({ open: this.isActive })) ||
         h(VListItemContent, [h(VSubtitle1, this.title)])
       ])
     },
