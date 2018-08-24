@@ -34,6 +34,7 @@ export default mixins(
     expand: Boolean,
     focusable: Boolean,
     inset: Boolean,
+    popin: Boolean,
     popout: Boolean,
     value: {
       type: [Number, Array],
@@ -50,6 +51,7 @@ export default mixins(
     classes (): object {
       return {
         'v-expansion-panel--focusable': this.focusable,
+        'v-expansion-panel--popin': this.popin,
         'v-expansion-panel--popout': this.popout,
         'v-expansion-panel--inset': this.inset,
         ...this.themeClasses
