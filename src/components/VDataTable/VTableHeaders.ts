@@ -71,7 +71,8 @@ export default injectTwo<DataIteratorProvide, DataTableProvide>()('dataIterator'
         classes['asc'] = beingSorted && !isDesc
         classes['desc'] = beingSorted && isDesc
 
-        children.push(this.genSortIcon(h))
+        if (c.align === 'end') children.unshift(this.genSortIcon(h))
+        else children.push(this.genSortIcon(h))
 
         this.dataIterator.multiSort && beingSorted && children.push(h('span', { class: 'badge' }, [String(sortIndex + 1)]))
       }
