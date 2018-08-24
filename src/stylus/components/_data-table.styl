@@ -66,13 +66,13 @@ theme(v-data-table, "v-data-table")
       overflow-y: scroll
 
 .v-cell, .v-head
-  &:not(:nth-child(1)), &:first-child
-    padding: 0 24px
+  // &:not(:nth-child(1)), &:first-child
+  padding: 0 16px
+
+.v-cell-checkbox + .v-cell, .v-cell-checkbox + .v-head
+  padding-left: 0
 
 .v-table__header
-  .v-row
-    height: 56px
-
   .v-head
     font-weight: 500
     font-size: 12px
@@ -86,7 +86,7 @@ theme(v-data-table, "v-data-table")
       outline: 0
 
       i
-        font-size: 16px
+        font-size: 18px
         display: inline-block
         opacity: 0
         transition: .3s $transition.swing
@@ -116,17 +116,21 @@ theme(v-data-table, "v-data-table")
     font-size: 13px
 
 .v-cell-checkbox
+  padding-right: 12px
   flex: 0 1 auto !important
 
   .v-input
     margin-top: 0
     padding-top: 0
 
+  .v-input--selection-controls__input
+    margin-right: 0
+
 .v-cell
-  height: 48px
+  height: 47px
 
 .v-head
-  height: 56px
+  height: 48px
 
   .badge
     border: 0px
