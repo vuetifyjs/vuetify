@@ -124,6 +124,13 @@ export default mixins(Colorable).extend({
 
     const bar = h('div', {
       staticClass: 'v-progress-linear__bar',
+      attrs: {
+        'role': 'progressbar',
+        'aria-valuemin': 0,
+        'aria-valuemax': this.bufferValue,
+        'aria-valuenow': this.indeterminate ? undefined : this.value
+
+      },
       style: this.styles
     }, [fade, slide])
     const background = h('div', {
