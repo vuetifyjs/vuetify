@@ -5,10 +5,7 @@ global-color($color_name, $color_value)
 
   .{$color_name}--text
     color $color_value !important
-
-    input,
-    textarea
-      caret-color: $color_value !important
+    caret-color: $color_value !important
 
 global-color-accent($color_name, $color_value, $color_type)
   .{$color_name}
@@ -19,10 +16,7 @@ global-color-accent($color_name, $color_value, $color_type)
   .{$color_name}--text
     &.text--{$color_type}
       color: $color_value !important
-
-      input,
-      textarea
-        caret-color: $color_value !important
+      caret-color: $color_value !important
 
 // Put the loop in a function so it can't leak
 create-global-colors()

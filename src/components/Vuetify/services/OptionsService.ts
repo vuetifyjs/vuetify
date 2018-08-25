@@ -5,9 +5,9 @@ import Vue from 'vue'
 import { VuetifyUseOptions } from 'types'
 
 const OPTIONS_DEFAULTS = {
-  themeVariations: ['primary', 'secondary', 'accent'],
   minifyTheme: null,
   themeCache: null,
+  customProperties: false,
   cspNonce: null
 }
 

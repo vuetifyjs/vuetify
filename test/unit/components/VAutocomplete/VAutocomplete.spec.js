@@ -26,7 +26,7 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
 
   it('should have explicit tabindex passed through when autocomplete', () => {
     const wrapper = shallow(VAutocomplete, {
-      propsData: {
+      attrs: {
         tabindex: 10
       }
     })
@@ -690,12 +690,14 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
 
     icon.trigger('click')
 
-    expect(wrapper.vm.internalSearch).toBe(null)
+    expect(wrapper.vm.internalSearch).toBe(undefined)
   })
 
   it('should propagate content class', () => {
     const wrapper = mount(VAutocomplete, {
-      propsData: { contentClass: 'foobar' }
+      propsData: {
+        menuProps: { contentClass: 'foobar' }
+      }
     })
 
     const content = wrapper.first('.v-autocomplete__content')

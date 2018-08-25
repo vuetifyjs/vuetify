@@ -6,10 +6,3 @@ exports[`menuable.js should match snapshot 1`] = `
 </div>
 
 `;
-
-exports[`menuable.js should match snapshot 2`] = `
-
-<div class="v-input--selection-controls__ripple foo">
-</div>
-
-`;

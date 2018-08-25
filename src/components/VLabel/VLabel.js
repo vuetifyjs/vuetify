@@ -3,6 +3,7 @@ import '../../stylus/components/_labels.styl'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
+import Themeable, { functionalThemeClasses } from '../../mixins/themeable'
 
 // Helpers
 import { convertToUnit } from '../../util/helpers'
@@ -12,6 +13,8 @@ export default {
   name: 'v-label',
 
   functional: true,
+
+  mixins: [Themeable],
 
   props: {
     absolute: Boolean,
@@ -33,12 +36,14 @@ export default {
     value: Boolean
   },
 
-  render (h, { children, listeners, props }) {
+  render (h, ctx) {
+    const { children, listeners, props } = ctx
     const data = {
       staticClass: 'v-label',
       'class': {
         'v-label--active': props.value,
-        'v-label--is-disabled': props.disabled
+        'v-label--is-disabled': props.disabled,
+        ...functionalThemeClasses(ctx)
       },
       attrs: {
         for: props.for,
@@ -52,10 +57,6 @@ export default {
       }
     }
 
-    if (props.focused) {
-      data.class = Colorable.options.methods.addTextColorClassChecks(data.class, props.color)
-    }
-
-    return h('label', data, children)
+    return h('label', Colorable.options.methods.setTextColor(props.focused && props.color, data), children)
   }
 }

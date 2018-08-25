@@ -3,6 +3,7 @@ import VOverflowBtn from '../VOverflowBtn'
 import VAutocomplete from '../VAutocomplete'
 import VCombobox from '../VCombobox'
 import rebuildSlots from '../../util/rebuildFunctionalSlots'
+import dedupeModelListeners from '../../util/dedupeModelListeners'
 import { deprecate } from '../../util/console'
 
 /* @vue/component */
@@ -30,7 +31,7 @@ const wrapper = {
   },
 
   render (h, { props, data, slots, parent }) {
-    delete data.model
+    dedupeModelListeners(data)
     const children = rebuildSlots(slots(), h)
 
     if (props.autocomplete) {
@@ -68,11 +69,6 @@ const wrapper = {
       return h(VSelect, data, children)
     }
   }
-}
-
-/* istanbul ignore next */
-wrapper.install = function install (Vue) {
-  Vue.component(VSelect.name, wrapper)
 }
 
 export { wrapper as VSelect }

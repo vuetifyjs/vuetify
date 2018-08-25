@@ -1,4 +1,4 @@
-import VCarousel from '@/components/VCarousel'
+import VCarousel from '@/components/VCarousel/VCarousel'
 import VCarouselItem from '@/components/VCarousel/VCarouselItem'
 import { test, touch } from '@/test'
 import Vue from 'vue'

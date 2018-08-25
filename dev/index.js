@@ -14,11 +14,14 @@ Vue.use(VueRouter)
 Vue.component(Boilerplate.name, Boilerplate)
 
 const vm = new Vue({
-  render: h => h(App),
+  data: () => ({ isLoaded: document.readyState === 'complete' }),
+  render (h) {
+    return this.isLoaded ? h(App) : undefined
+  },
   router
-})
+}).$mount('#app')
 
 // Prevent layout jump while waiting for styles
-window.addEventListener('load', () => {
-  vm.$mount('#app')
+vm.isLoaded || window.addEventListener('load', () => {
+  vm.isLoaded = true
 })

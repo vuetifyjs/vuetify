@@ -1,20 +1,68 @@
 /* eslint-disable max-len */
 
-import { VueConstructor, ComponentOptions, PluginFunction, FunctionalComponentOptions } from 'vue'
+import {
+  VueConstructor,
+  ComponentOptions,
+  FunctionalComponentOptions,
+  VNodeData
+} from 'vue'
 import { CombinedVueInstance, Vue } from 'vue/types/vue'
 import {
   RecordPropsDefinition,
   ThisTypedComponentOptionsWithArrayProps,
   ThisTypedComponentOptionsWithRecordProps
 } from 'vue/types/options'
+import { TouchStoredHandlers } from './directives/touch'
 
 declare global {
   interface Window {
     Vue: VueConstructor
   }
 
+  interface Element {
+    getElementsByClassName(classNames: string): NodeListOf<HTMLElement>
+  }
+
+  interface HTMLElement {
+    _clickOutside?: EventListenerOrEventListenerObject
+    _onResize?: {
+      callback: () => void
+      options?: boolean | AddEventListenerOptions
+    }
+    _ripple?: {
+      enabled?: boolean
+      centered?: boolean
+      class?: string
+    }
+    _onScroll?: {
+      callback: EventListenerOrEventListenerObject
+      options: boolean | AddEventListenerOptions
+      target: EventTarget
+    }
+    _touchHandlers?: {
+      [_uid: number]: TouchStoredHandlers
+    }
+  }
+
+  interface HTMLImageElement {
+    decode: () => Promise<never>
+  }
+
+  function parseInt(s: string | number, radix?: number): number
+  function parseFloat(string: string | number): number
+
   export const __VUETIFY_VERSION__: string
   export const __REQUIRED_VUE__: string
+}
+
+declare module 'vue/types/vnode' {
+  export interface VNodeData {
+    model?: {
+      callback: (v: any) => void
+      expression: string
+      value: any
+    }
+  }
 }
 
 declare module 'vue/types/vue' {
@@ -26,6 +74,13 @@ declare module 'vue/types/vue' {
     CombinedVueInstance<Instance, Data, Methods, Computed, Props> & Vue,
     Options
   >
+
+  export interface Vue {
+    _uid: number
+
+    /** bindObjectListeners */
+     _g (data: VNodeData, value: {}): VNodeData
+  }
 
   export interface RawComponentOptions<
     V extends Vue = Vue,
@@ -48,7 +103,8 @@ declare module 'vue/types/vue' {
     Options = Record<string, any>
   > {
     version: string
-    install?: PluginFunction<never>
+    /* eslint-disable-next-line camelcase */
+    $_vuetify_subcomponents?: Record<string, VueConstructor>
     options: Options
 
     extend<Data, Methods, Computed, Options, PropNames extends string = never> (options?: ThisTypedComponentOptionsWithArrayProps<V, Data, Methods, Computed, PropNames> & Options): OptionsVue<V, Data, Methods, Computed, Record<PropNames, any>, Options>

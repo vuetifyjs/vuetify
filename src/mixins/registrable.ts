@@ -6,7 +6,7 @@ function generateWarning (child: string, parent: string) {
   return () => consoleWarn(`The ${child} component must be used inside a ${parent}`)
 }
 
-type Registrable<T extends string> = ExtendedVue<Vue, {
+export type Registrable<T extends string> = ExtendedVue<Vue, {
   [K in T]: {
     register (...props: any[]): void
     unregister (self: any): void

@@ -1,10 +1,8 @@
 /* eslint-disable import/no-duplicates, no-new */
 import Vue from 'vue'
-import { intToHex } from '../../../util/colorUtils'
 import * as Theme from '../../../util/theme'
 
-import { ParsedTheme } from '../../../util/theme'
-import { VuetifyUseOptions } from 'types'
+import { VuetifyUseOptions, ParsedTheme } from 'types'
 
 export const ServiceInstance = Vue.extend({
   data: () => ({
@@ -24,21 +22,7 @@ export const ServiceInstance = Vue.extend({
         if (css != null) return css
       }
 
-      const colors = Object.keys(theme)
-
-      if (!colors.length) return ''
-
-      css = `a { color: ${intToHex(theme.primary)}; }`
-
-      for (let i = 0; i < colors.length; ++i) {
-        const name = colors[i]
-        const value = theme[name]
-        if (this.$vuetify.options.themeVariations.includes(name)) {
-          css += Theme.genVariations(name, value).join('')
-        } else {
-          css += Theme.genBaseColor(name, value)
-        }
-      }
+      css = Theme.genStyles(theme, this.$vuetify.options.customProperties)
 
       if (this.$vuetify.options.minifyTheme != null) {
         css = this.$vuetify.options.minifyTheme(css)

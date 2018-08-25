@@ -2,30 +2,30 @@
 
 exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
 
-<div class="v-picker v-card v-picker--date">
+<div class="v-picker v-card v-picker--date theme--light">
   <div class="v-picker__title orange darken-1">
     <div class="v-date-picker-title">
       <div class="v-picker__title__btn v-date-picker-title__year">
         2005
       </div>
-      <div class="v-picker__title__btn v-date-picker-title__date active">
+      <div class="v-picker__title__btn v-date-picker-title__date v-picker__title__btn--active">
         <div>
           Tue, Nov 1
         </div>
       </div>
     </div>
   </div>
-  <div class="v-picker__body"
+  <div class="v-picker__body theme--light"
        style="width: 290px;"
   >
     <div>
-      <div class="v-date-picker-header">
+      <div class="v-date-picker-header theme--light">
         <button type="button"
-                class="v-btn v-btn--icon"
+                class="v-btn v-btn--icon theme--light"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
-               class="v-icon material-icons"
+               class="v-icon material-icons theme--light"
             >
               chevron_left
             </i>
@@ -37,18 +37,18 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
           </strong>
         </div>
         <button type="button"
-                class="v-btn v-btn--icon"
+                class="v-btn v-btn--icon theme--light"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
-               class="v-icon material-icons"
+               class="v-icon material-icons theme--light"
             >
               chevron_right
             </i>
           </div>
         </button>
       </div>
-      <div class="v-date-picker-table v-date-picker-table--date">
+      <div class="v-date-picker-table v-date-picker-table--date theme--light">
         <table>
           <thead>
             <tr>
@@ -83,7 +83,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--active v-btn--icon v-btn--floating primary"
+                        class="v-btn v-btn--active v-btn--icon v-btn--floating theme--light primary"
                 >
                   <div class="v-btn__content">
                     1
@@ -92,7 +92,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     2
@@ -101,7 +101,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     3
@@ -110,7 +110,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     4
@@ -119,7 +119,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     5
@@ -130,7 +130,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
             <tr>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     6
@@ -139,7 +139,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     7
@@ -148,7 +148,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     8
@@ -157,7 +157,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     9
@@ -166,7 +166,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     10
@@ -175,7 +175,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     11
@@ -184,7 +184,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     12
@@ -195,7 +195,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
             <tr>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     13
@@ -204,7 +204,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     14
@@ -213,7 +213,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     15
@@ -222,7 +222,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     16
@@ -231,7 +231,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     17
@@ -240,7 +240,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     18
@@ -249,7 +249,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     19
@@ -260,7 +260,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
             <tr>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     20
@@ -269,7 +269,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     21
@@ -278,7 +278,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     22
@@ -287,7 +287,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     23
@@ -296,7 +296,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     24
@@ -305,7 +305,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     25
@@ -314,7 +314,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     26
@@ -325,7 +325,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
             <tr>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     27
@@ -334,7 +334,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     28
@@ -343,7 +343,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     29
@@ -352,7 +352,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     30
@@ -371,30 +371,30 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
 
 exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
 
-<div class="v-picker v-card v-picker--date">
+<div class="v-picker v-card v-picker--date theme--light">
   <div class="v-picker__title orange darken-1">
     <div class="v-date-picker-title">
       <div class="v-picker__title__btn v-date-picker-title__year">
         2005
       </div>
-      <div class="v-picker__title__btn v-date-picker-title__date active">
+      <div class="v-picker__title__btn v-date-picker-title__date v-picker__title__btn--active">
         <div>
           Tue, Nov 1
         </div>
       </div>
     </div>
   </div>
-  <div class="v-picker__body"
+  <div class="v-picker__body theme--light"
        style="width: 290px;"
   >
     <div>
-      <div class="v-date-picker-header">
+      <div class="v-date-picker-header theme--light">
         <button type="button"
-                class="v-btn v-btn--icon"
+                class="v-btn v-btn--icon theme--light"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
-               class="v-icon material-icons"
+               class="v-icon material-icons theme--light"
             >
               chevron_left
             </i>
@@ -406,18 +406,18 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
           </strong>
         </div>
         <button type="button"
-                class="v-btn v-btn--icon"
+                class="v-btn v-btn--icon theme--light"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
-               class="v-icon material-icons"
+               class="v-icon material-icons theme--light"
             >
               chevron_right
             </i>
           </div>
         </button>
       </div>
-      <div class="v-date-picker-table v-date-picker-table--date">
+      <div class="v-date-picker-table v-date-picker-table--date theme--light">
         <table>
           <thead>
             <tr>
@@ -452,7 +452,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--active v-btn--icon v-btn--floating orange darken-1"
+                        class="v-btn v-btn--active v-btn--icon v-btn--floating theme--light orange darken-1"
                 >
                   <div class="v-btn__content">
                     1
@@ -461,7 +461,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     2
@@ -470,7 +470,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     3
@@ -479,7 +479,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     4
@@ -488,7 +488,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     5
@@ -499,7 +499,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
             <tr>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     6
@@ -508,7 +508,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     7
@@ -517,7 +517,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     8
@@ -526,7 +526,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     9
@@ -535,7 +535,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     10
@@ -544,7 +544,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     11
@@ -553,7 +553,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     12
@@ -564,7 +564,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
             <tr>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     13
@@ -573,7 +573,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     14
@@ -582,7 +582,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     15
@@ -591,7 +591,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     16
@@ -600,7 +600,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     17
@@ -609,7 +609,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     18
@@ -618,7 +618,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     19
@@ -629,7 +629,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
             <tr>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     20
@@ -638,7 +638,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     21
@@ -647,7 +647,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     22
@@ -656,7 +656,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     23
@@ -665,7 +665,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     24
@@ -674,7 +674,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     25
@@ -683,7 +683,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     26
@@ -694,7 +694,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
             <tr>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     27
@@ -703,7 +703,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     28
@@ -712,7 +712,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     29
@@ -721,7 +721,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     30
@@ -746,7 +746,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
       <div class="v-picker__title__btn v-date-picker-title__year">
         2013
       </div>
-      <div class="v-picker__title__btn v-date-picker-title__date active">
+      <div class="v-picker__title__btn v-date-picker-title__date v-picker__title__btn--active">
         <div>
           Tue, May 7
         </div>
@@ -763,7 +763,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
-               class="v-icon material-icons"
+               class="v-icon material-icons theme--dark"
             >
               chevron_left
             </i>
@@ -779,7 +779,7 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
-               class="v-icon material-icons"
+               class="v-icon material-icons theme--dark"
             >
               chevron_right
             </i>
@@ -1120,30 +1120,30 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
 
 exports[`VDatePicker.js should match snapshot with default settings 1`] = `
 
-<div class="v-picker v-card v-picker--date">
+<div class="v-picker v-card v-picker--date theme--light">
   <div class="v-picker__title primary">
     <div class="v-date-picker-title">
       <div class="v-picker__title__btn v-date-picker-title__year">
         2013
       </div>
-      <div class="v-picker__title__btn v-date-picker-title__date active">
+      <div class="v-picker__title__btn v-date-picker-title__date v-picker__title__btn--active">
         <div>
           Tue, May 7
         </div>
       </div>
     </div>
   </div>
-  <div class="v-picker__body"
+  <div class="v-picker__body theme--light"
        style="width: 290px;"
   >
     <div>
-      <div class="v-date-picker-header">
+      <div class="v-date-picker-header theme--light">
         <button type="button"
-                class="v-btn v-btn--icon"
+                class="v-btn v-btn--icon theme--light"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
-               class="v-icon material-icons"
+               class="v-icon material-icons theme--light"
             >
               chevron_left
             </i>
@@ -1155,18 +1155,18 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
           </strong>
         </div>
         <button type="button"
-                class="v-btn v-btn--icon"
+                class="v-btn v-btn--icon theme--light"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
-               class="v-icon material-icons"
+               class="v-icon material-icons theme--light"
             >
               chevron_right
             </i>
           </div>
         </button>
       </div>
-      <div class="v-date-picker-table v-date-picker-table--date">
+      <div class="v-date-picker-table v-date-picker-table--date theme--light">
         <table>
           <thead>
             <tr>
@@ -1203,7 +1203,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     1
@@ -1212,7 +1212,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     2
@@ -1221,7 +1221,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     3
@@ -1230,7 +1230,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     4
@@ -1241,7 +1241,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
             <tr>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     5
@@ -1250,7 +1250,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     6
@@ -1259,7 +1259,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--active v-btn--icon v-btn--floating accent"
+                        class="v-btn v-btn--active v-btn--icon v-btn--floating theme--light accent"
                 >
                   <div class="v-btn__content">
                     7
@@ -1268,7 +1268,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     8
@@ -1277,7 +1277,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     9
@@ -1286,7 +1286,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     10
@@ -1295,7 +1295,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     11
@@ -1306,7 +1306,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
             <tr>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     12
@@ -1315,7 +1315,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     13
@@ -1324,7 +1324,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     14
@@ -1333,7 +1333,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     15
@@ -1342,7 +1342,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     16
@@ -1351,7 +1351,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     17
@@ -1360,7 +1360,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     18
@@ -1371,7 +1371,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
             <tr>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     19
@@ -1380,7 +1380,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     20
@@ -1389,7 +1389,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     21
@@ -1398,7 +1398,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     22
@@ -1407,7 +1407,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     23
@@ -1416,7 +1416,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     24
@@ -1425,7 +1425,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     25
@@ -1436,7 +1436,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
             <tr>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     26
@@ -1445,7 +1445,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     27
@@ -1454,7 +1454,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     28
@@ -1463,7 +1463,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     29
@@ -1472,7 +1472,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     30
@@ -1481,7 +1481,7 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     31
@@ -1505,12 +1505,12 @@ exports[`VDatePicker.js should match snapshot with year icon 1`] = `
     <div class="v-picker__title__btn v-date-picker-title__year">
       2005
       <i aria-hidden="true"
-         class="v-icon theme--dark material-icons"
+         class="v-icon material-icons theme--dark"
       >
         year
       </i>
     </div>
-    <div class="v-picker__title__btn v-date-picker-title__date active">
+    <div class="v-picker__title__btn v-date-picker-title__date v-picker__title__btn--active">
       <div>
         Tue, Nov 1
       </div>
@@ -1522,31 +1522,31 @@ exports[`VDatePicker.js should match snapshot with year icon 1`] = `
 
 exports[`VDatePicker.js should render component with min/max props 1`] = `
 
-<div class="v-picker v-card v-picker--date">
+<div class="v-picker v-card v-picker--date theme--light">
   <div class="v-picker__title primary">
     <div class="v-date-picker-title">
       <div class="v-picker__title__btn v-date-picker-title__year">
         2013
       </div>
-      <div class="v-picker__title__btn v-date-picker-title__date active">
+      <div class="v-picker__title__btn v-date-picker-title__date v-picker__title__btn--active">
         <div>
           Mon, Jan 7
         </div>
       </div>
     </div>
   </div>
-  <div class="v-picker__body"
+  <div class="v-picker__body theme--light"
        style="width: 290px;"
   >
     <div>
-      <div class="v-date-picker-header">
+      <div class="v-date-picker-header theme--light">
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--icon"
+                class="v-btn v-btn--disabled v-btn--icon theme--light"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
-               class="v-icon material-icons"
+               class="v-icon material-icons theme--light"
             >
               chevron_left
             </i>
@@ -1559,18 +1559,18 @@ exports[`VDatePicker.js should render component with min/max props 1`] = `
         </div>
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--icon"
+                class="v-btn v-btn--disabled v-btn--icon theme--light"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
-               class="v-icon material-icons"
+               class="v-icon material-icons theme--light"
             >
               chevron_right
             </i>
           </div>
         </button>
       </div>
-      <div class="v-date-picker-table v-date-picker-table--date">
+      <div class="v-date-picker-table v-date-picker-table--date theme--light">
         <table>
           <thead>
             <tr>
@@ -1605,7 +1605,7 @@ exports[`VDatePicker.js should render component with min/max props 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -1615,7 +1615,7 @@ exports[`VDatePicker.js should render component with min/max props 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -1625,7 +1625,7 @@ exports[`VDatePicker.js should render component with min/max props 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     3
@@ -1634,7 +1634,7 @@ exports[`VDatePicker.js should render component with min/max props 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     4
@@ -1643,7 +1643,7 @@ exports[`VDatePicker.js should render component with min/max props 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     5
@@ -1654,7 +1654,7 @@ exports[`VDatePicker.js should render component with min/max props 1`] = `
             <tr>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     6
@@ -1663,7 +1663,7 @@ exports[`VDatePicker.js should render component with min/max props 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--active v-btn--icon v-btn--floating accent"
+                        class="v-btn v-btn--active v-btn--icon v-btn--floating theme--light accent"
                 >
                   <div class="v-btn__content">
                     7
@@ -1672,7 +1672,7 @@ exports[`VDatePicker.js should render component with min/max props 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     8
@@ -1681,7 +1681,7 @@ exports[`VDatePicker.js should render component with min/max props 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     9
@@ -1690,7 +1690,7 @@ exports[`VDatePicker.js should render component with min/max props 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     10
@@ -1699,7 +1699,7 @@ exports[`VDatePicker.js should render component with min/max props 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     11
@@ -1708,7 +1708,7 @@ exports[`VDatePicker.js should render component with min/max props 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     12
@@ -1719,7 +1719,7 @@ exports[`VDatePicker.js should render component with min/max props 1`] = `
             <tr>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     13
@@ -1728,7 +1728,7 @@ exports[`VDatePicker.js should render component with min/max props 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     14
@@ -1737,7 +1737,7 @@ exports[`VDatePicker.js should render component with min/max props 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     15
@@ -1746,7 +1746,7 @@ exports[`VDatePicker.js should render component with min/max props 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     16
@@ -1755,7 +1755,7 @@ exports[`VDatePicker.js should render component with min/max props 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     17
@@ -1764,7 +1764,7 @@ exports[`VDatePicker.js should render component with min/max props 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -1774,7 +1774,7 @@ exports[`VDatePicker.js should render component with min/max props 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -1786,7 +1786,7 @@ exports[`VDatePicker.js should render component with min/max props 1`] = `
             <tr>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -1796,7 +1796,7 @@ exports[`VDatePicker.js should render component with min/max props 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -1806,7 +1806,7 @@ exports[`VDatePicker.js should render component with min/max props 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -1816,7 +1816,7 @@ exports[`VDatePicker.js should render component with min/max props 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -1826,7 +1826,7 @@ exports[`VDatePicker.js should render component with min/max props 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -1836,7 +1836,7 @@ exports[`VDatePicker.js should render component with min/max props 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -1846,7 +1846,7 @@ exports[`VDatePicker.js should render component with min/max props 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -1858,7 +1858,7 @@ exports[`VDatePicker.js should render component with min/max props 1`] = `
             <tr>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -1868,7 +1868,7 @@ exports[`VDatePicker.js should render component with min/max props 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -1878,7 +1878,7 @@ exports[`VDatePicker.js should render component with min/max props 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -1888,7 +1888,7 @@ exports[`VDatePicker.js should render component with min/max props 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -1898,7 +1898,7 @@ exports[`VDatePicker.js should render component with min/max props 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -1918,31 +1918,31 @@ exports[`VDatePicker.js should render component with min/max props 1`] = `
 
 exports[`VDatePicker.js should render component with min/max props 2`] = `
 
-<div class="v-picker v-card v-picker--date">
+<div class="v-picker v-card v-picker--date theme--light">
   <div class="v-picker__title primary">
     <div class="v-date-picker-title">
       <div class="v-picker__title__btn v-date-picker-title__year">
         2013
       </div>
-      <div class="v-picker__title__btn v-date-picker-title__date active">
+      <div class="v-picker__title__btn v-date-picker-title__date v-picker__title__btn--active">
         <div>
           Mon, Jan 7
         </div>
       </div>
     </div>
   </div>
-  <div class="v-picker__body"
+  <div class="v-picker__body theme--light"
        style="width: 290px;"
   >
     <div class="fade-transition-leave fade-transition-leave-active">
-      <div class="v-date-picker-header">
+      <div class="v-date-picker-header theme--light">
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--icon"
+                class="v-btn v-btn--disabled v-btn--icon theme--light"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
-               class="v-icon material-icons"
+               class="v-icon material-icons theme--light"
             >
               chevron_left
             </i>
@@ -1955,18 +1955,18 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
         </div>
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--icon"
+                class="v-btn v-btn--disabled v-btn--icon theme--light"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
-               class="v-icon material-icons"
+               class="v-icon material-icons theme--light"
             >
               chevron_right
             </i>
           </div>
         </button>
       </div>
-      <div class="v-date-picker-table v-date-picker-table--date">
+      <div class="v-date-picker-table v-date-picker-table--date theme--light">
         <table>
           <thead>
             <tr>
@@ -2001,7 +2001,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2011,7 +2011,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2021,7 +2021,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     3
@@ -2030,7 +2030,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     4
@@ -2039,7 +2039,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     5
@@ -2050,7 +2050,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
             <tr>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     6
@@ -2059,7 +2059,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--active v-btn--icon v-btn--floating accent"
+                        class="v-btn v-btn--active v-btn--icon v-btn--floating theme--light accent"
                 >
                   <div class="v-btn__content">
                     7
@@ -2068,7 +2068,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     8
@@ -2077,7 +2077,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     9
@@ -2086,7 +2086,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     10
@@ -2095,7 +2095,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     11
@@ -2104,7 +2104,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     12
@@ -2115,7 +2115,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
             <tr>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     13
@@ -2124,7 +2124,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     14
@@ -2133,7 +2133,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     15
@@ -2142,7 +2142,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     16
@@ -2151,7 +2151,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     17
@@ -2160,7 +2160,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2170,7 +2170,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2182,7 +2182,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
             <tr>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2192,7 +2192,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2202,7 +2202,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2212,7 +2212,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2222,7 +2222,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2232,7 +2232,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2242,7 +2242,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2254,7 +2254,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
             <tr>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2264,7 +2264,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2274,7 +2274,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2284,7 +2284,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2294,7 +2294,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2308,14 +2308,14 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
       </div>
     </div>
     <div class="fade-transition-enter fade-transition-enter-active">
-      <div class="v-date-picker-header">
+      <div class="v-date-picker-header theme--light">
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--icon"
+                class="v-btn v-btn--disabled v-btn--icon theme--light"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
-               class="v-icon material-icons"
+               class="v-icon material-icons theme--light"
             >
               chevron_left
             </i>
@@ -2328,24 +2328,24 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
         </div>
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--icon"
+                class="v-btn v-btn--disabled v-btn--icon theme--light"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
-               class="v-icon material-icons"
+               class="v-icon material-icons theme--light"
             >
               chevron_right
             </i>
           </div>
         </button>
       </div>
-      <div class="v-date-picker-table v-date-picker-table--month">
+      <div class="v-date-picker-table v-date-picker-table--month theme--light">
         <table>
           <tbody>
             <tr>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--active v-btn--depressed accent"
+                        class="v-btn v-btn--active v-btn--depressed theme--light accent"
                 >
                   <div class="v-btn__content">
                     Jan
@@ -2354,7 +2354,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2364,7 +2364,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2376,7 +2376,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
             <tr>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2386,7 +2386,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2396,7 +2396,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2408,7 +2408,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
             <tr>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2418,7 +2418,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2428,7 +2428,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2440,7 +2440,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
             <tr>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2450,7 +2450,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2460,7 +2460,7 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2480,10 +2480,10 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
 
 exports[`VDatePicker.js should render component with min/max props 3`] = `
 
-<div class="v-picker v-card v-picker--date">
+<div class="v-picker v-card v-picker--date theme--light">
   <div class="v-picker__title primary">
     <div class="v-date-picker-title">
-      <div class="v-picker__title__btn v-date-picker-title__year active">
+      <div class="v-picker__title__btn v-date-picker-title__year v-picker__title__btn--active">
         2013
       </div>
       <div class="v-picker__title__btn v-date-picker-title__date">
@@ -2493,18 +2493,18 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
       </div>
     </div>
   </div>
-  <div class="v-picker__body"
+  <div class="v-picker__body theme--light"
        style="width: 290px;"
   >
     <div class="fade-transition-leave fade-transition-leave-active">
-      <div class="v-date-picker-header">
+      <div class="v-date-picker-header theme--light">
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--icon"
+                class="v-btn v-btn--disabled v-btn--icon theme--light"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
-               class="v-icon material-icons"
+               class="v-icon material-icons theme--light"
             >
               chevron_left
             </i>
@@ -2517,18 +2517,18 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
         </div>
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--icon"
+                class="v-btn v-btn--disabled v-btn--icon theme--light"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
-               class="v-icon material-icons"
+               class="v-icon material-icons theme--light"
             >
               chevron_right
             </i>
           </div>
         </button>
       </div>
-      <div class="v-date-picker-table v-date-picker-table--date">
+      <div class="v-date-picker-table v-date-picker-table--date theme--light">
         <table>
           <thead>
             <tr>
@@ -2563,7 +2563,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2573,7 +2573,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2583,7 +2583,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     3
@@ -2592,7 +2592,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     4
@@ -2601,7 +2601,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     5
@@ -2612,7 +2612,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
             <tr>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     6
@@ -2621,7 +2621,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--active v-btn--icon v-btn--floating accent"
+                        class="v-btn v-btn--active v-btn--icon v-btn--floating theme--light accent"
                 >
                   <div class="v-btn__content">
                     7
@@ -2630,7 +2630,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     8
@@ -2639,7 +2639,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     9
@@ -2648,7 +2648,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     10
@@ -2657,7 +2657,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     11
@@ -2666,7 +2666,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     12
@@ -2677,7 +2677,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
             <tr>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     13
@@ -2686,7 +2686,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     14
@@ -2695,7 +2695,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     15
@@ -2704,7 +2704,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     16
@@ -2713,7 +2713,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     17
@@ -2722,7 +2722,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2732,7 +2732,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2744,7 +2744,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
             <tr>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2754,7 +2754,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2764,7 +2764,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2774,7 +2774,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2784,7 +2784,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2794,7 +2794,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2804,7 +2804,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2816,7 +2816,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
             <tr>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2826,7 +2826,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2836,7 +2836,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2846,7 +2846,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2856,7 +2856,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2870,14 +2870,14 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
       </div>
     </div>
     <div class="fade-transition-leave fade-transition-leave-active">
-      <div class="v-date-picker-header">
+      <div class="v-date-picker-header theme--light">
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--icon"
+                class="v-btn v-btn--disabled v-btn--icon theme--light"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
-               class="v-icon material-icons"
+               class="v-icon material-icons theme--light"
             >
               chevron_left
             </i>
@@ -2890,24 +2890,24 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
         </div>
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--icon"
+                class="v-btn v-btn--disabled v-btn--icon theme--light"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
-               class="v-icon material-icons"
+               class="v-icon material-icons theme--light"
             >
               chevron_right
             </i>
           </div>
         </button>
       </div>
-      <div class="v-date-picker-table v-date-picker-table--month">
+      <div class="v-date-picker-table v-date-picker-table--month theme--light">
         <table>
           <tbody>
             <tr>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--active v-btn--depressed accent"
+                        class="v-btn v-btn--active v-btn--depressed theme--light accent"
                 >
                   <div class="v-btn__content">
                     Jan
@@ -2916,7 +2916,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2926,7 +2926,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2938,7 +2938,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
             <tr>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2948,7 +2948,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2958,7 +2958,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2970,7 +2970,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
             <tr>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2980,7 +2980,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -2990,7 +2990,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -3002,7 +3002,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
             <tr>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -3012,7 +3012,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -3022,7 +3022,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--disabled"
+                        class="v-btn v-btn--flat v-btn--disabled theme--light"
                         disabled
                 >
                   <div class="v-btn__content">
@@ -3049,7 +3049,7 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
 
 exports[`VDatePicker.js should render readonly picker 1`] = `
 
-<div class="v-picker v-card v-picker--date">
+<div class="v-picker v-card v-picker--date theme--light">
   <div class="v-picker__title primary">
     <div class="v-date-picker-title"
          style="pointer-events: none;"
@@ -3057,25 +3057,25 @@ exports[`VDatePicker.js should render readonly picker 1`] = `
       <div class="v-picker__title__btn v-date-picker-title__year">
         2013
       </div>
-      <div class="v-picker__title__btn v-date-picker-title__date active">
+      <div class="v-picker__title__btn v-date-picker-title__date v-picker__title__btn--active">
         <div>
           Tue, May 7
         </div>
       </div>
     </div>
   </div>
-  <div class="v-picker__body"
+  <div class="v-picker__body theme--light"
        style="width: 290px;"
   >
     <div style="pointer-events: none;">
-      <div class="v-date-picker-header">
+      <div class="v-date-picker-header theme--light">
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--icon"
+                class="v-btn v-btn--disabled v-btn--icon theme--light"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
-               class="v-icon material-icons"
+               class="v-icon material-icons theme--light"
             >
               chevron_left
             </i>
@@ -3088,18 +3088,18 @@ exports[`VDatePicker.js should render readonly picker 1`] = `
         </div>
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--icon"
+                class="v-btn v-btn--disabled v-btn--icon theme--light"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
-               class="v-icon material-icons"
+               class="v-icon material-icons theme--light"
             >
               chevron_right
             </i>
           </div>
         </button>
       </div>
-      <div class="v-date-picker-table v-date-picker-table--date">
+      <div class="v-date-picker-table v-date-picker-table--date theme--light">
         <table>
           <thead>
             <tr>
@@ -3136,7 +3136,7 @@ exports[`VDatePicker.js should render readonly picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     1
@@ -3145,7 +3145,7 @@ exports[`VDatePicker.js should render readonly picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     2
@@ -3154,7 +3154,7 @@ exports[`VDatePicker.js should render readonly picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     3
@@ -3163,7 +3163,7 @@ exports[`VDatePicker.js should render readonly picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     4
@@ -3174,7 +3174,7 @@ exports[`VDatePicker.js should render readonly picker 1`] = `
             <tr>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     5
@@ -3183,7 +3183,7 @@ exports[`VDatePicker.js should render readonly picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     6
@@ -3192,7 +3192,7 @@ exports[`VDatePicker.js should render readonly picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--active v-btn--icon v-btn--floating v-btn--disabled accent"
+                        class="v-btn v-btn--active v-btn--icon v-btn--floating v-btn--disabled theme--light accent"
                 >
                   <div class="v-btn__content">
                     7
@@ -3201,7 +3201,7 @@ exports[`VDatePicker.js should render readonly picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     8
@@ -3210,7 +3210,7 @@ exports[`VDatePicker.js should render readonly picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     9
@@ -3219,7 +3219,7 @@ exports[`VDatePicker.js should render readonly picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     10
@@ -3228,7 +3228,7 @@ exports[`VDatePicker.js should render readonly picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     11
@@ -3239,7 +3239,7 @@ exports[`VDatePicker.js should render readonly picker 1`] = `
             <tr>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     12
@@ -3248,7 +3248,7 @@ exports[`VDatePicker.js should render readonly picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     13
@@ -3257,7 +3257,7 @@ exports[`VDatePicker.js should render readonly picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     14
@@ -3266,7 +3266,7 @@ exports[`VDatePicker.js should render readonly picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     15
@@ -3275,7 +3275,7 @@ exports[`VDatePicker.js should render readonly picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     16
@@ -3284,7 +3284,7 @@ exports[`VDatePicker.js should render readonly picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     17
@@ -3293,7 +3293,7 @@ exports[`VDatePicker.js should render readonly picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     18
@@ -3304,7 +3304,7 @@ exports[`VDatePicker.js should render readonly picker 1`] = `
             <tr>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     19
@@ -3313,7 +3313,7 @@ exports[`VDatePicker.js should render readonly picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     20
@@ -3322,7 +3322,7 @@ exports[`VDatePicker.js should render readonly picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     21
@@ -3331,7 +3331,7 @@ exports[`VDatePicker.js should render readonly picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     22
@@ -3340,7 +3340,7 @@ exports[`VDatePicker.js should render readonly picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     23
@@ -3349,7 +3349,7 @@ exports[`VDatePicker.js should render readonly picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     24
@@ -3358,7 +3358,7 @@ exports[`VDatePicker.js should render readonly picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     25
@@ -3369,7 +3369,7 @@ exports[`VDatePicker.js should render readonly picker 1`] = `
             <tr>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     26
@@ -3378,7 +3378,7 @@ exports[`VDatePicker.js should render readonly picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     27
@@ -3387,7 +3387,7 @@ exports[`VDatePicker.js should render readonly picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     28
@@ -3396,7 +3396,7 @@ exports[`VDatePicker.js should render readonly picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     29
@@ -3405,7 +3405,7 @@ exports[`VDatePicker.js should render readonly picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     30
@@ -3414,7 +3414,7 @@ exports[`VDatePicker.js should render readonly picker 1`] = `
               </td>
               <td>
                 <button type="button"
-                        class="v-btn v-btn--flat v-btn--floating"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
                 >
                   <div class="v-btn__content">
                     31

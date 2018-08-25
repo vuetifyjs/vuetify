@@ -2,14 +2,10 @@
 
 exports[`VCarouselItem.js should render component and match snapshot 1`] = `
 
-<div class="v-jumbotron"
+<div class="v-responsive v-image v-carousel__item"
      style="height: 100%; display: none;"
 >
-  <div class="v-jumbotron__wrapper">
-    <div class="v-jumbotron__background">
-    </div>
-    <div class="v-jumbotron__content">
-    </div>
+  <div class="v-responsive__content">
   </div>
 </div>
 
@@ -17,14 +13,10 @@ exports[`VCarouselItem.js should render component and match snapshot 1`] = `
 
 exports[`VCarouselItem.js should throw warning when not used inside v-carousel 1`] = `
 
-<div class="v-jumbotron"
+<div class="v-responsive v-image v-carousel__item"
      style="height: 100%; display: none;"
 >
-  <div class="v-jumbotron__wrapper">
-    <div class="v-jumbotron__background">
-    </div>
-    <div class="v-jumbotron__content">
-    </div>
+  <div class="v-responsive__content">
   </div>
 </div>
 

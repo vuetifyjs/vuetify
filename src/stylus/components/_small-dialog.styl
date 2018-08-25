@@ -2,16 +2,12 @@
 @import '../theme'
 
 v-small-dialog($material)
-  &__content
-    background: $material.cards
-
-  &__actions
-    background: $material.cards
-
   a
     color: rgba($material.fg-color, $material.primary-text-percent)
 
 theme(v-small-dialog, "v-small-dialog")
+theme(@($material) { background: $material.cards }, "v-small-dialog__content")
+theme(@($material) { background: $material.cards }, "v-small-dialog__actions")
 
 .v-small-dialog
   display: block
@@ -23,6 +19,7 @@ theme(v-small-dialog, "v-small-dialog")
 
   &__actions
     text-align: right
+    white-space: pre
 
   a
     display: flex
