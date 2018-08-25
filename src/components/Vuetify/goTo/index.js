@@ -19,8 +19,6 @@ import {
  * @param {String|Function}                 _settings.easing
  */
 export default function goTo (_target, _settings) {
-  if (typeof window === 'undefined') return reject('Window is undefined.')
-
   const defaults = {
     container: document.scrollingElement || document.body || document.documentElement,
     duration: 500,
@@ -29,6 +27,7 @@ export default function goTo (_target, _settings) {
   }
 
   return new Promise((resolve, reject) => {
+    if (typeof window === 'undefined') return reject('Window is undefined.')
 
     const settings = Object.assign({}, defaults, _settings)
 
