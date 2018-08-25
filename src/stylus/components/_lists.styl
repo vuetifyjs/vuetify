@@ -46,8 +46,8 @@ theme(v-list, "v-list")
 
   &__avatar
     align-self: center
-    margin-bottom: 16px
-    margin-top: 16px
+    margin-bottom: 8px
+    margin-top: 8px
 
     &--left
       margin-right: 16px
@@ -79,6 +79,12 @@ theme(v-list, "v-list")
   &__avatar,
   &__icon
     display: inline-flex
+
+  &--two-line,
+  &--three-line
+    .v-list__item__avatar
+      margin-bottom: 16px
+      margin-top: 16px
 
   &--two-line
     min-height: 64px
