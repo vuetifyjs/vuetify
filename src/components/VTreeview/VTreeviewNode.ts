@@ -1,24 +1,20 @@
-import Vue, { VNode, VNodeChildrenArrayContents } from 'vue'
+import { VNode } from 'vue'
 import { VTreeviewNode } from '.'
 import { VIcon } from '../VIcon'
 
-import { inject as RegistrableInject, provide as RegistrableProvide } from '../../mixins/registrable'
+import { inject as RegistrableInject } from '../../mixins/registrable'
 import mixins from '../../util/mixins'
 
 export default mixins(
-  RegistrableInject('treeview'),
-  RegistrableProvide('treeview')
+  RegistrableInject('treeview')
+  /* @vue/component */
 ).extend({
   name: 'v-treeview-node',
 
-  provide (): object {
-    const treeview = {
-      register: this.register,
-      unregister: this.unregister,
-      updateParent: this.updateParent
+  inject: {
+    treeview: {
+      default: null
     }
-
-    return { treeview }
   },
 
   props: {
@@ -36,6 +32,7 @@ export default mixins(
     isOpen: false,
     isSelected: false,
     isIndeterminate: false,
+    isActive: false,
     children: [] as any[]
   }),
 
@@ -46,7 +43,9 @@ export default mixins(
     scopedProps (): object {
       return {
         data: this.data,
-        isLeaf: this.isLeaf
+        leaf: this.isLeaf,
+        selected: this.isSelected,
+        active: this.isActive
       }
     },
     computedIcon (): string {
@@ -65,39 +64,22 @@ export default mixins(
   },
 
   methods: {
-    register (child: InstanceType<typeof VTreeviewNode>) {
-      this.children.push(child)
-
-      this.treeview.register(child)
-    },
-    unregister (child: InstanceType<typeof VTreeviewNode>) {
-      this.children = this.children.filter((c: any) => c._uid !== child._uid)
-
-      this.treeview.unregister(child)
-    },
-    updateParent () {
-      if (!this.isLeaf) {
-        const numberOfSelectedChildren = this.children.reduce((count, c) => count + c.isSelected, 0)
-
-        this.isSelected = numberOfSelectedChildren === this.children.length
-        this.isIndeterminate = !this.isSelected && numberOfSelectedChildren > 0
-      }
-
-      this.treeview.updateParent()
-    },
-    updateChildren () {
-      this.children.forEach(c => c.isSelected = this.isSelected)
-    },
     genLabel () {
-      if (this.$scopedSlots.label) return this.$scopedSlots.label(this.scopedProps)
+      const children = []
 
-      const children = [this.data.name]
-
-      if (this.data.icon) children.unshift(this.$createElement(VIcon, [this.data.icon]))
+      if (this.data.icon) children.push(this.$createElement(VIcon, [this.data.icon]))
+      children.push(this.data.name)
 
       return this.$createElement('label', {
         slot: 'label',
         staticClass: 'v-treeview-node__label'
+      }, children)
+    },
+    genContent () {
+      const children = [this.genLabel(), this.genActions()]
+
+      return this.$createElement('div', {
+        staticClass: 'v-treeview-node__content'
       }, children)
     },
     genToggle () {
@@ -105,7 +87,9 @@ export default mixins(
         staticClass: 'v-treeview-node__toggle',
         slot: 'prepend',
         on: {
-          click: () => {
+          click: (e: MouseEvent) => {
+            e.stopPropagation()
+
             this.isOpen = !this.isOpen
           }
         }
@@ -116,28 +100,34 @@ export default mixins(
     },
     genCheckbox () {
       return this.$createElement(VIcon, {
+        staticClass: 'v-treeview-node__checkbox',
         on: {
-          click: () => {
-            this.isSelected = !this.isSelected
+          click: (e: MouseEvent) => {
+            e.stopPropagation()
 
-            if (this.isLeaf) {
-              this.treeview.updateParent()
-            } else {
-              this.updateChildren()
-              this.updateParent()
-            }
+            this.isSelected = !this.isSelected
+            this.isIndeterminate = false
+            this.treeview.updateSelected(this._uid, this.isSelected)
           }
         }
       }, [this.computedIcon])
     },
     genNode (): VNode {
-      const children = [this.genLabel(), this.genActions()]
+      const children = [this.genContent()]
 
       if (this.selectable) children.unshift(this.genCheckbox())
       if (!this.isLeaf) children.unshift(this.genToggle())
 
       return this.$createElement('div', {
-        staticClass: 'v-treeview-node__root'
+        staticClass: 'v-treeview-node__root',
+        class: {
+          'v-treeview-node__root--active': this.isActive
+        },
+        on: {
+          click: () => {
+            this.treeview.updateActive(this._uid, !this.isActive)
+          }
+        }
       }, children)
     },
     genChild (data: any): VNode {

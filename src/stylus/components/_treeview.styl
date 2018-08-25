@@ -13,21 +13,35 @@ theme(v-treeview, "v-treeview")
 .v-treeview
 
   &-node
-    position: relative
-    margin-left: 12px
+    margin-left: 24px
 
     &--leaf
-      margin-left: 36px
+      margin-left: 48px
 
     &__root
       display: flex
+      align-items: center
+      height: 32px
 
-      .v-input--checkbox
-        margin-top: 0
+      &--active
+        background: rgba(0,0,0,0.15)
+
+    &__content
+      width: 100%
+      display: flex
+      align-items: center
+      justify-content: space-between
+      padding-left: 4px
 
     &__label
       font-size: 1.2rem
 
+      .v-icon
+        padding-right: 8px
+
     &__spacer
       width: 24px
       height: 24px
+
+    &__checkbox
+      padding-left: 4px
