@@ -1,5 +1,5 @@
 import { Vue } from 'vue/types/vue'
-import { VNode, VNodeDirective, FunctionalComponentOptions, CreateElement } from 'vue/types'
+import { VNode, VNodeDirective, FunctionalComponentOptions } from 'vue/types'
 
 export function createSimpleFunctional (
   c: string,
@@ -128,13 +128,6 @@ export function createJavaScriptTransition (
       return h('transition', data, context.children)
     }
   }
-}
-
-export const createEmptyVNode = (h: CreateElement, text = ''): VNode => {
-  const node = h()
-  node.text = text
-  node.isComment = true
-  return node
 }
 
 export type BindingConfig = Pick<VNodeDirective, 'arg' | 'modifiers' | 'value'>

@@ -10,7 +10,6 @@ import goTo from './util/goTo'
 
 // Utils
 import { consoleWarn, consoleError } from '../../util/console'
-import { createEmptyVNode } from '../../util/helpers'
 
 // Types
 import { VueConstructor } from 'vue/types'
@@ -29,7 +28,7 @@ const Vuetify: VuetifyPlugin = {
 
     const lang = genLang(opts.lang)
 
-    Vue.prototype.$vuetify = new Vue({
+    const vuetify = Vue.prototype.$vuetify = new Vue({
       mixins: [
         breakpoint,
         IconsService(opts),
@@ -45,12 +44,11 @@ const Vuetify: VuetifyPlugin = {
       methods: {
         goTo,
         t: lang.t.bind(lang)
-      },
-      render: h => createEmptyVNode(h)
+      }
     })
 
-    // Mount to nothing so service hooks are called
-    Vue.prototype.$vuetify.$mount()
+    const services = vuetify.$options.mounted as Function[] | undefined
+    services && services.forEach(service => service())
 
     if (opts.directives) {
       for (const name in opts.directives) {
