@@ -9,13 +9,6 @@ import {
   isValidContainer
 } from './util'
 
-const defaults = {
-  container: document.scrollingElement || document.body || document.documentElement,
-  duration: 500,
-  offset: 0,
-  easing: 'easeInOutCubic'
-}
-
 /**
  * @param {Number|String|HTMLElement|VueComponent} _target
  * @param {Object}                                 _settings - Optional
@@ -26,8 +19,16 @@ const defaults = {
  * @param {String|Function}                 _settings.easing
  */
 export default function goTo (_target, _settings) {
+  if (typeof window === 'undefined') return reject('Window is undefined.')
+
+  const defaults = {
+    container: document.scrollingElement || document.body || document.documentElement,
+    duration: 500,
+    offset: 0,
+    easing: 'easeInOutCubic'
+  }
+
   return new Promise((resolve, reject) => {
-    if (typeof window === 'undefined') return reject('Window is undefined.')
 
     const settings = Object.assign({}, defaults, _settings)
 
