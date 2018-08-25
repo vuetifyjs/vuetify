@@ -1,47 +1,78 @@
 import { colorToInt, intToHex, colorToHex, RGB } from './colorUtils'
 import * as sRGB from './color/transformSRGB'
 import * as LAB from './color/transformCIELAB'
-import { VuetifyTheme } from 'types'
+import { VuetifyTheme, VuetifyThemeSet, VuetifyThemeItem } from 'types'
 
 interface ParsedThemeItem {
-  base: string
-  lighten5: string
-  lighten4: string
-  lighten3: string
-  lighten2: string
-  lighten1: string
-  darken1: string
-  darken2: string
-  darken3: string
-  darken4: string
+  base?: string
+  lighten5?: string
+  lighten4?: string
+  lighten3?: string
+  lighten2?: string
+  lighten1?: string
+  darken1?: string
+  darken2?: string
+  darken3?: string
+  darken4?: string
 
-  [name: string]: string
+  [name: string]: string | undefined
 }
 
-interface ParsedTheme {
-  [name: string]: ParsedThemeItem
+interface ParsedThemeSet {
+  background?: ParsedThemeItem
+  primary?: ParsedThemeItem
+  accent?: ParsedThemeItem
+  secondary?: ParsedThemeItem
+  info?: ParsedThemeItem
+  warning?: ParsedThemeItem
+  error?: ParsedThemeItem
+  success?: ParsedThemeItem
+
+  [name: string]: ParsedThemeItem | undefined
 }
 
-export function parse (theme: VuetifyTheme | Record<string, number | string>, isItem = false): ParsedTheme {
-  const colors = Object.keys(theme)
-  const parsedTheme: any = {}
+class ParsedTheme {
+  light: ParsedThemeSet = {};
+  dark: ParsedThemeSet = {};
 
-  for (let i = 0; i < colors.length; ++i) {
-    const name = colors[i]
-    const value = theme[name]
+  [name: string]: ParsedThemeSet
+}
 
-    if (isItem) {
-      if (name === 'base' || name.startsWith('lighten') || name.startsWith('darken')) {
-        parsedTheme[name] = colorToHex(value)
-      }
-    } else if (typeof value === 'object') {
-      parsedTheme[name] = parse(value, true)
+export function parse (theme: VuetifyTheme): ParsedTheme {
+  const parsedTheme = new ParsedTheme()
+
+  for (const key in theme) {
+    const value = theme[key]
+    parsedTheme[key] = parseSet(value)
+  }
+  return parsedTheme
+}
+
+export function parseSet (themeSet: VuetifyThemeSet): ParsedThemeSet {
+  const parsedThemeSet: ParsedThemeSet = {}
+
+  for (const key in themeSet) {
+    const value = themeSet[key]
+    if (typeof value === 'object') {
+      parsedThemeSet[key] = parseItem(value)
     } else {
-      parsedTheme[name] = genVariations(name, colorToInt(value))
+      if (key === 'background') parsedThemeSet[key] = { base: colorToHex(value) }
+      else { parsedThemeSet[key] = genVariations(colorToInt(value)) }
     }
   }
 
-  return parsedTheme
+  return parsedThemeSet
+}
+
+export function parseItem (themeItem: VuetifyThemeItem): ParsedThemeItem {
+  const parsedItem: ParsedThemeItem = {}
+
+  for (const key in themeItem) {
+    const value = themeItem[key]
+    parsedItem[key] = colorToHex(value)
+  }
+
+  return parsedItem
 }
 
 /**
@@ -79,22 +110,25 @@ const genColorVariableName = (name: string, variant = 'base'): string => `--v-${
 
 const genColorVariable = (name: string, variant = 'base'): string => `var(${genColorVariableName(name, variant)})`
 
-export function genStyles (theme: ParsedTheme, cssVar = false): string {
-  const colors = Object.keys(theme)
+export function genStyles (theme: ParsedTheme, cssVar = false, isDark = false): string {
+  const themeSet = isDark ? theme.dark : theme.light
+  const colors = Object.keys(themeSet)
 
   if (!colors.length) return ''
 
   let variablesCss = ''
   let css = ''
 
-  const aColor = cssVar ? genColorVariable('primary') : theme.primary.base
+  if (typeof themeSet.primary === 'undefined' ||
+    typeof themeSet.primary.base === 'undefined') return ''
+  const aColor = cssVar ? genColorVariable('primary') : themeSet.primary.base
   css += `a { color: ${aColor}; }`
 
   for (let i = 0; i < colors.length; ++i) {
     const name = colors[i]
-    const value = theme[name]
+    const value = themeSet[name]
 
-    if (typeof value !== 'object') continue
+    if (typeof value !== 'object' || typeof value.base === 'undefined') continue
 
     css += genBaseColor(name, cssVar ? genColorVariable(name) : value.base)
     cssVar && (variablesCss += `  ${genColorVariableName(name)}: ${value.base};\n`)
@@ -103,7 +137,7 @@ export function genStyles (theme: ParsedTheme, cssVar = false): string {
     for (let i = 0; i < variants.length; ++i) {
       const variant = variants[i]
       const variantValue = value[variant]
-      if (variant === 'base') continue
+      if (typeof variantValue === 'undefined' || variant === 'base') continue
 
       css += genVariantColor(name, variant, cssVar ? genColorVariable(name, variant) : variantValue)
       cssVar && (variablesCss += `  ${genColorVariableName(name, variant)}: ${variantValue};\n`)
@@ -117,8 +151,8 @@ export function genStyles (theme: ParsedTheme, cssVar = false): string {
   return variablesCss + css
 }
 
-export function genVariations (name: string, value: RGB): Record<string, string> {
-  const values: Record<string, string> = {
+export function genVariations (value: RGB): ParsedThemeItem {
+  const values: ParsedThemeItem = {
     base: intToHex(value)
   }
 

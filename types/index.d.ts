@@ -122,7 +122,9 @@ export interface VuetifyBreakpoint {
   xsOnly: boolean
 }
 
-export type VuetifyThemeItem = string | number | {
+export interface VuetifyThemeItem {
+  [name: string]: string | number
+
   base: string | number
   lighten5: string | number
   lighten4: string | number
@@ -135,16 +137,23 @@ export type VuetifyThemeItem = string | number | {
   darken4: string | number
 }
 
-export interface VuetifyTheme {
-  [name: string]: VuetifyThemeItem
+export interface VuetifyThemeSet {
+  [name: string]: VuetifyThemeItem | string | number
 
-  primary: VuetifyThemeItem
-  accent: VuetifyThemeItem
-  secondary: VuetifyThemeItem
-  info: VuetifyThemeItem
-  warning: VuetifyThemeItem
-  error: VuetifyThemeItem
-  success: VuetifyThemeItem
+  primary: VuetifyThemeItem | string | number
+  accent: VuetifyThemeItem | string | number
+  secondary: VuetifyThemeItem | string | number
+  info: VuetifyThemeItem | string | number
+  warning: VuetifyThemeItem | string | number
+  error: VuetifyThemeItem | string | number
+  success: VuetifyThemeItem | string | number
+}
+
+export interface VuetifyTheme {
+  [name: string]: VuetifyThemeSet
+
+  light: VuetifyThemeSet
+  dark: VuetifyThemeSet
 }
 
 export interface VuetifyThemeCache {

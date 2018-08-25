@@ -46,7 +46,7 @@ test('VApp.js', ({ mount }) => {
     const wrapper = mount(VApp)
 
     expect(wrapper.vm.style).toMatchSnapshot()
-    wrapper.vm.$vuetify.theme.primary = '#000'
+    wrapper.vm.$vuetify.theme.light.primary = '#000'
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.style).toMatchSnapshot()
   })
