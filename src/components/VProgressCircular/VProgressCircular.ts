@@ -32,7 +32,7 @@ export default mixins(Colorable).extend({
     },
 
     value: {
-      type: Number,
+      type: [Number, String],
       default: 0
     }
   },
@@ -62,7 +62,7 @@ export default mixins(Colorable).extend({
         return 100
       }
 
-      return this.value
+      return parseInt(this.value, 10)
     },
 
     radius (): number {
