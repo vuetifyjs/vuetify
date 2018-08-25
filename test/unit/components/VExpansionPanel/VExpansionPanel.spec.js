@@ -21,35 +21,19 @@ test('VExpansionPanel.js', ({ mount, compileToFunctions }) => {
 
     expect(wrapper.html()).toMatchSnapshot()
 
-    wrapper.find('.v-expansion-panel__header')[0].trigger('click')
+    wrapper.find('.v-expansion-panel__activator')[0].trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render inset component', () => {
+  it('should render a multiple component and match snapshot', async () => {
     const wrapper = mount(createPanel({
-      inset: true
-    }))
-
-    expect(wrapper.hasClass('v-expansion-panel--inset')).toBe(true)
-  })
-
-  it('should render popout component', () => {
-    const wrapper = mount(createPanel({
-      popout: true
-    }))
-
-    expect(wrapper.hasClass('v-expansion-panel--popout')).toBe(true)
-  })
-
-  it('should render an expanded component and match snapshot', async () => {
-    const wrapper = mount(createPanel({
-      expand: true
+      multiple: true
     }))
 
     expect(wrapper.html()).toMatchSnapshot()
 
-    wrapper.find('.v-expansion-panel__header')[0].trigger('click')
+    wrapper.find('.v-expansion-panel__activator')[0].trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
   })
@@ -83,10 +67,10 @@ test('VExpansionPanel.js', ({ mount, compileToFunctions }) => {
     expect(wrapper.first('.v-expansion-panel__container--active')).not.toBe(null)
   })
 
-  it('should allow array v-model when using expand prop', async () => {
+  it('should allow array v-model when using multiple prop', async () => {
     const wrapper = mount(VExpansionPanel, {
       propsData: {
-        expand: true,
+        multiple: true,
         value: [1, 3]
       },
       slots: {
@@ -98,11 +82,11 @@ test('VExpansionPanel.js', ({ mount, compileToFunctions }) => {
     expect(wrapper.find('.v-expansion-panel__container--active').length).toBe(2)
   })
 
-  it('should reset v-model when disabling expand', async () => {
+  it('should reset v-model when disabling multiple', async () => {
     const fn = jest.fn()
     const wrapper = mount(VExpansionPanel, {
       propsData: {
-        expand: true,
+        multiple: true,
         value: [true, true]
       },
       slots: {
@@ -115,16 +99,16 @@ test('VExpansionPanel.js', ({ mount, compileToFunctions }) => {
     await wrapper.vm.$nextTick()
     expect(wrapper.find('.v-expansion-panel__container--active').length).toBe(2)
 
-    wrapper.setProps({ expand: false })
+    wrapper.setProps({ multiple: false })
     await wrapper.vm.$nextTick()
     expect(fn).toHaveBeenCalledWith(null)
   })
 
-  it('should reset v-model when disabling expand', async () => {
+  it('should reset v-model when disabling multiple', async () => {
     const input = jest.fn()
     const wrapper = mount(VExpansionPanel, {
       propsData: {
-        expand: true,
+        multiple: true,
         value: [false]
       },
       slots: {
@@ -137,16 +121,16 @@ test('VExpansionPanel.js', ({ mount, compileToFunctions }) => {
     await wrapper.vm.$nextTick()
     expect(wrapper.find('.v-expansion-panel__container--active').length).toBe(0)
 
-    wrapper.setProps({ expand: false })
+    wrapper.setProps({ multiple: false })
     await wrapper.vm.$nextTick()
     expect(input).toHaveBeenCalledWith(null)
   })
 
-  it('should keep a single item open when disabling expand', async () => {
+  it('should keep a single item open when disabling multiple', async () => {
     const input = jest.fn()
     const wrapper = mount(VExpansionPanel, {
       propsData: {
-        expand: true,
+        multiple: true,
         value: [false, true]
       },
       slots: {
@@ -155,16 +139,16 @@ test('VExpansionPanel.js', ({ mount, compileToFunctions }) => {
     })
     wrapper.vm.$on('input', input)
 
-    wrapper.setProps({ expand: false })
+    wrapper.setProps({ multiple: false })
     await wrapper.vm.$nextTick()
     expect(input).toHaveBeenCalledWith(1)
   })
 
-  it('should keep the current item open when enabling expand', async () => {
+  it('should keep the current item open when enabling multiple', async () => {
     const input = jest.fn()
     const wrapper = mount(VExpansionPanel, {
       propsData: {
-        expand: false,
+        multiple: false,
         value: 1
       },
       slots: {
@@ -173,9 +157,48 @@ test('VExpansionPanel.js', ({ mount, compileToFunctions }) => {
     })
     wrapper.vm.$on('input', input)
 
-    wrapper.setProps({ expand: true })
+    wrapper.setProps({ multiple: true })
     await wrapper.vm.$nextTick()
     expect(input).toHaveBeenCalledWith([false, true])
     expect(wrapper.find('.v-expansion-panel__container--active').length).toBe(1)
+  })
+
+  it('should unregister content', async () => {
+    const wrapper = mount(VExpansionPanel, {
+      slots: {
+        default: [VExpansionPanelContent]
+      }
+    })
+
+    const content = wrapper.first(VExpansionPanelContent.options)
+
+    expect(wrapper.vm.items.length).toBe(1)
+
+    content.destroy()
+
+    expect(wrapper.vm.items.length).toBe(0)
+  })
+
+  it('should update from value', async () => {
+    const updatePanels = jest.fn()
+    const wrapper = mount(VExpansionPanel, {
+      methods: { updatePanels }
+    })
+
+    wrapper.vm.updateFromValue([true])
+
+    expect(updatePanels).not.toBeCalled()
+
+    wrapper.vm.updateFromValue(0)
+
+    expect(updatePanels).toBeCalledWith([true])
+
+    wrapper.vm.updateFromValue('foo')
+
+    expect(updatePanels).toBeCalledWith('foo')
+
+    wrapper.vm.updateFromValue(null)
+
+    expect(updatePanels).toBeCalledWith([])
   })
 })

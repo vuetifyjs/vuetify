@@ -1,45 +1,150 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VExpansionPanelContent.js should render an expanded component and match snapshot 1`] = `
+exports[`VExpansionPanelContent.js should not have tabindex if readonly or disabled 1`] = `
 
-<li tabindex="0"
-    class="v-expansion-panel__container"
+<div tabindex="0"
+     class="v-expansion-panel__container"
 >
+  <div class="v-expansion-panel__activator">
+    <div class="v-list__item">
+      <div class="v-list__item__content">
+        <div class="subtitle-1">
+        </div>
+      </div>
+    </div>
+    <div class="v-list__item__icon v-expansion-panel__icon">
+      <i aria-hidden="true"
+         class="v-icon material-icons theme--light"
+      >
+        keyboard_arrow_down
+      </i>
+    </div>
+  </div>
   <div class="v-expansion-panel__body"
        style="display: none;"
   >
   </div>
-</li>
+</div>
+
+`;
+
+exports[`VExpansionPanelContent.js should not have tabindex if readonly or disabled 2`] = `
+
+<div class="v-expansion-panel__container v-expansion-panel__container--disabled">
+  <div class="v-expansion-panel__activator">
+    <div class="v-list__item">
+      <div class="v-list__item__content">
+        <div class="subtitle-1">
+        </div>
+      </div>
+    </div>
+    <div class="v-list__item__icon v-expansion-panel__icon fade-transition-leave fade-transition-leave-active">
+      <i aria-hidden="true"
+         class="v-icon material-icons theme--light"
+      >
+        keyboard_arrow_down
+      </i>
+    </div>
+  </div>
+  <div class="v-expansion-panel__body"
+       style="display: none;"
+  >
+  </div>
+</div>
+
+`;
+
+exports[`VExpansionPanelContent.js should not have tabindex if readonly or disabled 3`] = `
+
+<div class="v-expansion-panel__container">
+  <div class="v-expansion-panel__activator">
+    <div class="v-list__item">
+      <div class="v-list__item__content">
+        <div class="subtitle-1">
+        </div>
+      </div>
+    </div>
+    <div class="v-list__item__icon v-expansion-panel__icon fade-transition-enter fade-transition-enter-active">
+      <i aria-hidden="true"
+         class="v-icon material-icons theme--light"
+      >
+        keyboard_arrow_down
+      </i>
+    </div>
+  </div>
+  <div class="v-expansion-panel__body"
+       style="display: none;"
+  >
+  </div>
+</div>
+
+`;
+
+exports[`VExpansionPanelContent.js should render an expanded component and match snapshot 1`] = `
+
+<div tabindex="0"
+     class="v-expansion-panel__container"
+>
+  <div class="v-expansion-panel__activator">
+    <div class="v-list__item">
+      <div class="v-list__item__content">
+        <div class="subtitle-1">
+        </div>
+      </div>
+    </div>
+    <div class="v-list__item__icon v-expansion-panel__icon">
+      <i aria-hidden="true"
+         class="v-icon material-icons theme--light"
+      >
+        keyboard_arrow_down
+      </i>
+    </div>
+  </div>
+  <div class="v-expansion-panel__body"
+       style="display: none;"
+  >
+  </div>
+</div>
 
 `;
 
 exports[`VExpansionPanelContent.js should render an expanded component with lazy prop and match snapshot 1`] = `
 
-<li tabindex="0"
-    class="v-expansion-panel__container"
+<div tabindex="0"
+     class="v-expansion-panel__container"
 >
+  <div class="v-expansion-panel__activator">
+    <div class="v-list__item">
+      <div class="v-list__item__content">
+        <div class="subtitle-1">
+        </div>
+      </div>
+    </div>
+    <div class="v-list__item__icon v-expansion-panel__icon">
+      <i aria-hidden="true"
+         class="v-icon material-icons theme--light"
+      >
+        keyboard_arrow_down
+      </i>
+    </div>
+  </div>
   <div class="v-expansion-panel__body"
        style="display: none;"
   >
   </div>
-</li>
+</div>
 
 `;
 
 exports[`VExpansionPanelContent.js should render component and match snapshot 1`] = `
 
-<li tabindex="0"
-    class="v-expansion-panel__container"
+<div tabindex="0"
+     class="v-expansion-panel__container"
 >
-  <div class="v-expansion-panel__header">
+  <div class="v-expansion-panel__activator">
     <span>
-      header
+      activator
     </span>
-    <div class="v-expansion-panel__header__icon">
-      <span>
-        actions
-      </span>
-    </div>
   </div>
   <div class="v-expansion-panel__body"
        style="display: none;"
@@ -48,38 +153,42 @@ exports[`VExpansionPanelContent.js should render component and match snapshot 1`
       default
     </span>
   </div>
-</li>
+</div>
 
 `;
 
 exports[`VExpansionPanelContent.js should respect hideActions prop 1`] = `
 
-<li tabindex="0"
-    class="v-expansion-panel__container"
+<div tabindex="0"
+     class="v-expansion-panel__container"
 >
-  <div class="v-expansion-panel__header">
-    <span>
-      header
-    </span>
+  <div class="v-expansion-panel__activator">
+    <div class="v-list__item">
+      <span>
+        header
+      </span>
+    </div>
   </div>
   <div class="v-expansion-panel__body"
        style="display: none;"
   >
   </div>
-</li>
+</div>
 
 `;
 
 exports[`VExpansionPanelContent.js should toggle panel on header click 1`] = `
 
-<li tabindex="0"
-    class="v-expansion-panel__container v-expansion-panel__container--active"
+<div tabindex="0"
+     class="v-expansion-panel__container v-expansion-panel__container--active"
 >
-  <div class="v-expansion-panel__header">
-    <span>
-      header
-    </span>
-    <div class="v-expansion-panel__header__icon">
+  <div class="v-expansion-panel__activator">
+    <div class="v-list__item">
+      <span>
+        header
+      </span>
+    </div>
+    <div class="v-list__item__icon v-expansion-panel__icon">
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
       >
@@ -88,9 +197,9 @@ exports[`VExpansionPanelContent.js should toggle panel on header click 1`] = `
     </div>
   </div>
   <div class="v-expansion-panel__body expand-transition-enter expand-transition-enter-active"
-       style="overflow: hidden; height: 0px; display: block;"
+       style="overflow: hidden; height: 0px;"
   >
   </div>
-</li>
+</div>
 
 `;

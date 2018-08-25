@@ -1,18 +1,25 @@
+// Styles
 import '../../stylus/components/_expansion-panel.styl'
 
+// Components
 import { VExpansionPanelContent } from '.'
 
+// Mixins
 import Themeable from '../../mixins/themeable'
 import { provide as RegistrableProvide } from '../../mixins/registrable'
 
+// Utilities
 import mixins from '../../util/mixins'
 import { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
 
 type VExpansionPanelContentInstance = InstanceType<typeof VExpansionPanelContent>
 
-/* @vue/component */
-export default mixins(Themeable, RegistrableProvide('expansionPanel')).extend({
+export default mixins(
+  Themeable,
+  RegistrableProvide('expansionPanel')
+  /* @vue/component */
+).extend({
   name: 'v-expansion-panel',
 
   provide (): object {
@@ -22,9 +29,10 @@ export default mixins(Themeable, RegistrableProvide('expansionPanel')).extend({
   },
 
   props: {
+    accordion: Boolean,
     disabled: Boolean,
     readonly: Boolean,
-    expand: Boolean,
+    multiple: Boolean,
     focusable: Boolean,
     inset: Boolean,
     popout: Boolean,
@@ -42,6 +50,7 @@ export default mixins(Themeable, RegistrableProvide('expansionPanel')).extend({
   computed: {
     classes (): object {
       return {
+        'v-expansion-panel--accordion': this.accordion,
         'v-expansion-panel--focusable': this.focusable,
         'v-expansion-panel--popout': this.popout,
         'v-expansion-panel--inset': this.inset,
@@ -51,7 +60,7 @@ export default mixins(Themeable, RegistrableProvide('expansionPanel')).extend({
   },
 
   watch: {
-    expand (v: boolean) {
+    multiple (v: boolean) {
       let openIndex = -1
       if (!v) {
         // Close all panels unless only one is open
@@ -82,7 +91,7 @@ export default mixins(Themeable, RegistrableProvide('expansionPanel')).extend({
 
   methods: {
     updateFromValue (v: number | number[]) {
-      if (Array.isArray(v) && !this.expand) return
+      if (Array.isArray(v) && !this.multiple) return
 
       let open = Array(this.items.length).fill(false)
       if (typeof v === 'number') {
@@ -96,25 +105,25 @@ export default mixins(Themeable, RegistrableProvide('expansionPanel')).extend({
     updatePanels (open: boolean[]) {
       this.open = open
       for (let i = 0; i < this.items.length; i++) {
-        const active = open && open[i]
-        this.items[i].toggle(active)
+        this.items[i].toggle(open && open[i])
       }
     },
     panelClick (uid: number) {
-      const open = this.expand ? this.open.slice() : Array(this.items.length).fill(false)
+      const open = this.multiple ? this.open.slice() : Array(this.items.length).fill(false)
       for (let i = 0; i < this.items.length; i++) {
         if (this.items[i]._uid === uid) {
           open[i] = !this.open[i]
-          !this.expand && this.$emit('input', open[i] ? i : null)
+          !this.multiple && this.$emit('input', open[i] ? i : null)
         }
       }
 
       this.updatePanels(open)
-      if (this.expand) this.$emit('input', open)
+      if (this.multiple) this.$emit('input', open)
     },
     register (content: VExpansionPanelContentInstance) {
-      this.items.push(content)
-      this.open.push(false)
+      const i = this.items.push(content) - 1
+      this.value !== null && this.updateFromValue(this.value)
+      content.toggle(this.open[i])
     },
     unregister (content: VExpansionPanelContentInstance) {
       const index = this.items.findIndex(i => i._uid === content._uid)
@@ -124,7 +133,7 @@ export default mixins(Themeable, RegistrableProvide('expansionPanel')).extend({
   },
 
   render (h): VNode {
-    return h('ul', {
+    return h('div', {
       staticClass: 'v-expansion-panel',
       class: this.classes
     }, this.$slots.default)

@@ -17,6 +17,7 @@ test('VExpansionPanelContent.js', ({ mount, compileToFunctions }) => {
     const wrapper = mount(VExpansionPanelContent, {
       slots: {
         actions: [compileToFunctions('<span>actions</span>')],
+        activator: [compileToFunctions('<span>activator</span>')],
         default: [compileToFunctions('<span>default</span>')],
         header: [compileToFunctions('<span>header</span>')]
       },
@@ -73,7 +74,7 @@ test('VExpansionPanelContent.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    wrapper.first('.v-expansion-panel__header').trigger('click')
+    wrapper.first('.v-expansion-panel__activator').trigger('click')
     await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
   })
@@ -100,6 +101,51 @@ test('VExpansionPanelContent.js', ({ mount, compileToFunctions }) => {
         expansionPanel: expansionPanelProvide()
       }
     })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should call panelClick on enter down', async () => {
+    const expansionPanel = expansionPanelProvide()
+
+    expansionPanel.panelClick = jest.fn()
+
+    const wrapper = mount(VExpansionPanelContent, {
+      provide: { expansionPanel }
+    })
+
+    wrapper.vm.$el.focus()
+
+    expect(document.activeElement === wrapper.vm.$el).toBe(true)
+    expect(expansionPanel.panelClick).not.toBeCalled()
+
+    wrapper.trigger('keydown.enter')
+
+    expect(expansionPanel.panelClick).toBeCalled()
+
+    wrapper.trigger('keydown.tab')
+
+    expect(expansionPanel.panelClick).toHaveBeenCalledTimes(1)
+  })
+
+  it('should not have tabindex if readonly or disabled', async () => {
+    const wrapper = mount(VExpansionPanelContent, {
+      provide: {
+        expansionPanel: expansionPanelProvide()
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({ disabled: true })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({ disabled: false, readonly: true })
+
+    await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
   })
