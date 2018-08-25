@@ -1,9 +1,40 @@
+// Types
 import { VNode } from 'vue'
+
+// Components
 import { VTreeviewNode } from '.'
 import { VIcon } from '../VIcon'
 
+// Mixins
 import { inject as RegistrableInject } from '../../mixins/registrable'
+
+// Utils
 import mixins from '../../util/mixins'
+import { getObjectValueByPath } from '../../util/helpers'
+
+export const VTreeviewNodeProps = {
+  selectable: Boolean,
+  indeterminateIcon: {
+    type: String,
+    default: '$vuetify.icons.checkboxIndeterminate'
+  },
+  onIcon: {
+    type: String,
+    default: '$vuetify.icons.checkboxOn'
+  },
+  offIcon: {
+    type: String,
+    default: '$vuetify.icons.checkboxOff'
+  },
+  itemText: {
+    type: String,
+    default: 'name'
+  },
+  itemChildren: {
+    type: String,
+    default: 'children'
+  }
+}
 
 export default mixins(
   RegistrableInject('treeview')
@@ -22,10 +53,7 @@ export default mixins(
       type: Object,
       default: () => null
     },
-    selectable: Boolean,
-    indeterminateIcon: String,
-    onIcon: String,
-    offIcon: String
+    ...VTreeviewNodeProps
   },
 
   data: () => ({
@@ -42,7 +70,7 @@ export default mixins(
     },
     scopedProps (): object {
       return {
-        data: this.data,
+        item: this.data,
         leaf: this.isLeaf,
         selected: this.isSelected,
         active: this.isActive
@@ -55,7 +83,7 @@ export default mixins(
     }
   },
 
-  created (): void {
+  created () {
     this.treeview.register(this)
   },
 
@@ -65,18 +93,19 @@ export default mixins(
 
   methods: {
     genLabel () {
-      const children = []
-
-      if (this.data.icon) children.push(this.$createElement(VIcon, [this.data.icon]))
-      children.push(this.data.name)
-
       return this.$createElement('label', {
         slot: 'label',
         staticClass: 'v-treeview-node__label'
-      }, children)
+      }, [getObjectValueByPath(this.data, this.itemText)])
     },
     genContent () {
-      const children = [this.genLabel(), this.genActions()]
+      const children = []
+
+      if (this.$scopedSlots.prepend) children.push(this.$scopedSlots.prepend(this.scopedProps))
+
+      children.push(this.genLabel())
+
+      if (this.$scopedSlots.append) children.push(this.$scopedSlots.append(this.scopedProps))
 
       return this.$createElement('div', {
         staticClass: 'v-treeview-node__content'
@@ -94,9 +123,6 @@ export default mixins(
           }
         }
       }, [this.isOpen ? 'arrow_drop_down' : 'arrow_right'])
-    },
-    genActions () {
-      return this.$scopedSlots.actions && this.$scopedSlots.actions(this.scopedProps)
     },
     genCheckbox () {
       return this.$createElement(VIcon, {
@@ -137,19 +163,23 @@ export default mixins(
           selectable: this.selectable,
           indeterminateIcon: this.indeterminateIcon,
           offIcon: this.offIcon,
-          onIcon: this.onIcon
+          onIcon: this.onIcon,
+          itemText: this.itemText,
+          itemChildren: this.itemChildren
         },
         scopedSlots: this.$scopedSlots
       })
     },
     genChildren (): any {
+      const children = getObjectValueByPath(this.data, this.itemChildren)
+
       return this.$createElement('div', {
         staticClass: 'v-treeview-node__children',
         directives: [{
           name: 'show',
           value: this.isOpen
         }] as any
-      }, this.data.children.map(this.genChild))
+      }, children.map(this.genChild))
     }
   },
 

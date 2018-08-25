@@ -7,7 +7,7 @@ import { PropValidator } from '../../../node_modules/vue/types/options'
 import mixins from '../../util/mixins'
 
 // Components
-import { VTreeviewNode } from '.'
+import VTreeviewNode, { VTreeviewNodeProps } from './VTreeviewNode'
 
 // Mixins
 import { provide as RegistrableProvide } from '../../mixins/registrable'
@@ -44,20 +44,8 @@ export default mixins(
       type: Array,
       default: () => ([])
     } as PropValidator<any[]>,
-    indeterminateIcon: {
-      type: String,
-      default: '$vuetify.icons.checkboxIndeterminate'
-    },
-    onIcon: {
-      type: String,
-      default: '$vuetify.icons.checkboxOn'
-    },
-    offIcon: {
-      type: String,
-      default: '$vuetify.icons.checkboxOff'
-    },
-    selectable: Boolean,
-    multipleActive: Boolean
+    multipleActive: Boolean,
+    ...VTreeviewNodeProps
   },
 
   data: () => ({
