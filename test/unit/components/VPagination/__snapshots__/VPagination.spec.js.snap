@@ -2,11 +2,11 @@
 
 exports[`VPagination.vue emits an event when next or previous is clicked 1`] = `
 
-<ul class="v-pagination">
+<ul class="v-pagination theme--light">
   <li>
     <button class="v-pagination__navigation">
       <i aria-hidden="true"
-         class="v-icon material-icons"
+         class="v-icon material-icons theme--light"
       >
         chevron_left
       </i>
@@ -40,7 +40,7 @@ exports[`VPagination.vue emits an event when next or previous is clicked 1`] = `
   <li>
     <button class="v-pagination__navigation">
       <i aria-hidden="true"
-         class="v-icon material-icons"
+         class="v-icon material-icons theme--light"
       >
         chevron_right
       </i>
@@ -52,11 +52,11 @@ exports[`VPagination.vue emits an event when next or previous is clicked 1`] = `
 
 exports[`VPagination.vue should only render middle of range if length is big and value is somewhere in the middle 1`] = `
 
-<ul class="v-pagination">
+<ul class="v-pagination theme--light">
   <li>
     <button class="v-pagination__navigation">
       <i aria-hidden="true"
-         class="v-icon material-icons"
+         class="v-icon material-icons theme--light"
       >
         chevron_left
       </i>
@@ -175,7 +175,7 @@ exports[`VPagination.vue should only render middle of range if length is big and
   <li>
     <button class="v-pagination__navigation">
       <i aria-hidden="true"
-         class="v-icon material-icons"
+         class="v-icon material-icons theme--light"
       >
         chevron_right
       </i>
@@ -187,11 +187,11 @@ exports[`VPagination.vue should only render middle of range if length is big and
 
 exports[`VPagination.vue should only render start and end of range if length is big 1`] = `
 
-<ul class="v-pagination">
+<ul class="v-pagination theme--light">
   <li>
     <button class="v-pagination__navigation v-pagination__navigation--disabled">
       <i aria-hidden="true"
-         class="v-icon material-icons"
+         class="v-icon material-icons theme--light"
       >
         chevron_left
       </i>
@@ -310,7 +310,107 @@ exports[`VPagination.vue should only render start and end of range if length is 
   <li>
     <button class="v-pagination__navigation">
       <i aria-hidden="true"
-         class="v-icon material-icons"
+         class="v-icon material-icons theme--light"
+      >
+        chevron_right
+      </i>
+    </button>
+  </li>
+</ul>
+
+`;
+
+exports[`VPagination.vue should only render start and end of range if value is equals "left" 1`] = `
+
+<ul class="v-pagination theme--light">
+  <li>
+    <button class="v-pagination__navigation">
+      <i aria-hidden="true"
+         class="v-icon material-icons theme--light"
+      >
+        chevron_left
+      </i>
+    </button>
+  </li>
+  <li>
+    <button class="v-pagination__item">
+      1
+    </button>
+  </li>
+  <li>
+    <button class="v-pagination__item v-pagination__item--active primary">
+      2
+    </button>
+  </li>
+  <li>
+    <span class="v-pagination__more">
+      ...
+    </span>
+  </li>
+  <li>
+    <button class="v-pagination__item">
+      99
+    </button>
+  </li>
+  <li>
+    <button class="v-pagination__item">
+      100
+    </button>
+  </li>
+  <li>
+    <button class="v-pagination__navigation">
+      <i aria-hidden="true"
+         class="v-icon material-icons theme--light"
+      >
+        chevron_right
+      </i>
+    </button>
+  </li>
+</ul>
+
+`;
+
+exports[`VPagination.vue should only render start and end of range if value is equals "right" 1`] = `
+
+<ul class="v-pagination theme--light">
+  <li>
+    <button class="v-pagination__navigation">
+      <i aria-hidden="true"
+         class="v-icon material-icons theme--light"
+      >
+        chevron_left
+      </i>
+    </button>
+  </li>
+  <li>
+    <button class="v-pagination__item">
+      1
+    </button>
+  </li>
+  <li>
+    <button class="v-pagination__item">
+      2
+    </button>
+  </li>
+  <li>
+    <span class="v-pagination__more">
+      ...
+    </span>
+  </li>
+  <li>
+    <button class="v-pagination__item v-pagination__item--active primary">
+      99
+    </button>
+  </li>
+  <li>
+    <button class="v-pagination__item">
+      100
+    </button>
+  </li>
+  <li>
+    <button class="v-pagination__navigation">
+      <i aria-hidden="true"
+         class="v-icon material-icons theme--light"
       >
         chevron_right
       </i>
@@ -322,11 +422,11 @@ exports[`VPagination.vue should only render start and end of range if length is 
 
 exports[`VPagination.vue should render component in RTL mode and match snapshot 1`] = `
 
-<ul class="v-pagination">
+<ul class="v-pagination theme--light">
   <li>
     <button class="v-pagination__navigation">
       <i aria-hidden="true"
-         class="v-icon material-icons"
+         class="v-icon material-icons theme--light"
       >
         chevron_right
       </i>
@@ -360,7 +460,7 @@ exports[`VPagination.vue should render component in RTL mode and match snapshot 
   <li>
     <button class="v-pagination__navigation">
       <i aria-hidden="true"
-         class="v-icon material-icons"
+         class="v-icon material-icons theme--light"
       >
         chevron_left
       </i>
@@ -372,11 +472,11 @@ exports[`VPagination.vue should render component in RTL mode and match snapshot 
 
 exports[`VPagination.vue should render disabled buttons with length equals to 0 1`] = `
 
-<ul class="v-pagination">
+<ul class="v-pagination theme--light">
   <li>
     <button class="v-pagination__navigation v-pagination__navigation--disabled">
       <i aria-hidden="true"
-         class="v-icon material-icons"
+         class="v-icon material-icons theme--light"
       >
         chevron_left
       </i>
@@ -385,7 +485,7 @@ exports[`VPagination.vue should render disabled buttons with length equals to 0 
   <li>
     <button class="v-pagination__navigation v-pagination__navigation--disabled">
       <i aria-hidden="true"
-         class="v-icon material-icons"
+         class="v-icon material-icons theme--light"
       >
         chevron_right
       </i>
@@ -397,11 +497,11 @@ exports[`VPagination.vue should render disabled buttons with length equals to 0 
 
 exports[`VPagination.vue should use totalVisible prop if defined 1`] = `
 
-<ul class="v-pagination">
+<ul class="v-pagination theme--light">
   <li>
     <button class="v-pagination__navigation">
       <i aria-hidden="true"
-         class="v-icon material-icons"
+         class="v-icon material-icons theme--light"
       >
         chevron_left
       </i>
@@ -460,7 +560,7 @@ exports[`VPagination.vue should use totalVisible prop if defined 1`] = `
   <li>
     <button class="v-pagination__navigation">
       <i aria-hidden="true"
-         class="v-icon material-icons"
+         class="v-icon material-icons theme--light"
       >
         chevron_right
       </i>

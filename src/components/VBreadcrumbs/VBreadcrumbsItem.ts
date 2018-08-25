@@ -26,7 +26,7 @@ export default mixins(Routable).extend({
   },
 
   render (h): VNode {
-    const { tag, data } = this.generateRouteLink()
+    const { tag, data } = this.generateRouteLink(this.classes)
 
     return h('li', [
       h(tag, data, this.$slots.default)

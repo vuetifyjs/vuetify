@@ -1,11 +1,9 @@
-import Vue from 'vue'
-import { ExtendedVue } from 'vue/types/vue'
+import Vue, { VueConstructor } from 'vue'
 
-export interface toggleable extends Vue{
-  isActive: boolean
-}
+/* eslint-disable-next-line no-use-before-define */
+export type Toggleable<T extends string = 'value'> = VueConstructor<Vue & { isActive: boolean } & Record<T, any>>
 
-export function factory<T extends string> (prop?: T, event?: string): ExtendedVue<Vue, { isActive: boolean }, {}, {}, Record<T, any>>
+export function factory<T extends string = 'value'> (prop?: T, event?: string): Toggleable<T>
 export function factory (prop = 'value', event = 'input') {
   return Vue.extend({
     name: 'toggleable',
@@ -33,6 +31,7 @@ export function factory (prop = 'value', event = 'input') {
   })
 }
 
+/* eslint-disable-next-line no-redeclare */
 const Toggleable = factory()
 
 export default Toggleable

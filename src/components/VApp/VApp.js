@@ -3,6 +3,8 @@ import '../../stylus/components/_app.styl'
 // Component level mixins
 import AppTheme from './mixins/app-theme'
 
+import Themeable from '../../mixins/themeable'
+
 // Directives
 import Resize from '../../directives/resize'
 
@@ -15,7 +17,8 @@ export default {
   },
 
   mixins: [
-    AppTheme
+    AppTheme,
+    Themeable
   ],
 
   props: {
@@ -29,8 +32,8 @@ export default {
   computed: {
     classes () {
       return {
-        [`theme--${this.dark ? 'dark' : 'light'}`]: true,
-        'application--is-rtl': this.$vuetify.rtl
+        'application--is-rtl': this.$vuetify.rtl,
+        ...this.themeClasses
       }
     }
   },

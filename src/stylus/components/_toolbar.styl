@@ -88,6 +88,10 @@ theme(v-toolbar, "v-toolbar")
       @media $display-breakpoints.sm-and-down
         margin-right: '-%s' % $grid-gutters.lg
 
+  &__extension
+    > .v-toolbar__title
+      margin-left: 72px
+
   &__items
     display: flex
     height: inherit
@@ -95,13 +99,14 @@ theme(v-toolbar, "v-toolbar")
     padding: 0
 
     .v-btn
-      align-items: stretch
+      align-items: center
+      align-self: center
 
     .v-tooltip,
     .v-tooltip > span
       height: inherit
 
-    .v-btn,
+    .v-btn:not(.v-btn--floating):not(.v-btn--icon),
     .v-menu,
     .v-menu__activator
       height: inherit

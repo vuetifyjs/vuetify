@@ -5,6 +5,9 @@ import Colorable from '../../mixins/colorable'
 import Routable from '../../mixins/routable'
 import Themeable from '../../mixins/themeable'
 
+// Utils
+import { deprecate } from '../../util/console'
+
 /* @vue/component */
 export default {
   name: 'v-jumbotron',
@@ -39,10 +42,7 @@ export default {
       return styles
     },
     classes () {
-      return {
-        'theme--dark': this.dark,
-        'theme--light': this.light
-      }
+      return this.themeClasses
     },
     styles () {
       return {
@@ -51,13 +51,16 @@ export default {
     }
   },
 
+  mounted () {
+    deprecate('v-jumbotron', this.src ? 'v-img' : 'v-responsive', this)
+  },
+
   methods: {
     genBackground () {
-      return this.$createElement('div', {
+      return this.$createElement('div', this.setBackgroundColor(this.color, {
         staticClass: 'v-jumbotron__background',
-        'class': this.addBackgroundColorClassChecks(),
         style: this.backgroundStyles
-      })
+      }))
     },
     genContent () {
       return this.$createElement('div', {
@@ -85,7 +88,7 @@ export default {
   },
 
   render (h) {
-    const { tag, data } = this.generateRouteLink()
+    const { tag, data } = this.generateRouteLink(this.classes)
     data.staticClass = 'v-jumbotron'
     data.style = this.styles
 

@@ -18,12 +18,6 @@ export default {
     }
   },
 
-  computed: {
-    classes () {
-      return this.addTextColorClassChecks()
-    }
-  },
-
   methods: {
     genChildren () {
       return this.$createElement('transition-group', {
@@ -46,12 +40,9 @@ export default {
   },
 
   render (h) {
-    return h('div', {
+    return h('div', this.setTextColor(this.color, {
       staticClass: 'v-messages',
-      'class': {
-        ...this.classes,
-        ...this.themeClasses
-      }
-    }, [this.genChildren()])
+      class: this.themeClasses
+    }), [this.genChildren()])
   }
 }

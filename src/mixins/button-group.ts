@@ -3,7 +3,9 @@ import mixins from '../util/mixins'
 import { provide as RegistrableProvide } from './registrable'
 import { consoleWarn } from '../util/console'
 
-import { VBtn } from '../components/VBtn/VBtn'
+import VBtn from '../components/VBtn/VBtn'
+
+type VBtnInstance = InstanceType<typeof VBtn>
 
 /* @vue/component */
 export default mixins(RegistrableProvide('buttonGroup')).extend({
@@ -14,7 +16,7 @@ export default mixins(RegistrableProvide('buttonGroup')).extend({
   },
 
   data: () => ({
-    buttons: [] as VBtn[],
+    buttons: [] as VBtnInstance[],
     listeners: [] as (() => void)[],
     isDestroying: false
   }),
@@ -74,13 +76,13 @@ export default mixins(RegistrableProvide('buttonGroup')).extend({
 
       this.ensureMandatoryInvariant(selected.length > 0)
     },
-    register (button: VBtn): void {
+    register (button: VBtnInstance): void {
       const index = this.buttons.length
       this.buttons.push(button)
       this.listeners.push(this.updateValue.bind(this, index))
       button.$on('click', this.listeners[index])
     },
-    unregister (buttonToUnregister: VBtn): void {
+    unregister (buttonToUnregister: VBtnInstance): void {
       // Basic cleanup if we're destroying
       if (this.isDestroying) {
         const index = this.buttons.indexOf(buttonToUnregister)
@@ -92,7 +94,7 @@ export default mixins(RegistrableProvide('buttonGroup')).extend({
 
       this.redoRegistrations(buttonToUnregister)
     },
-    redoRegistrations (buttonToUnregister: VBtn): void {
+    redoRegistrations (buttonToUnregister: VBtnInstance): void {
       let selectedCount = 0
 
       const buttons = []

@@ -78,14 +78,18 @@ test('VInput.js', ({ mount }) => {
     const wrapper = mount(VInput, {
       propsData: {
         prependIcon: 'list',
-        prependIconCb: cb,
-        appendIcon: 'search',
-        appendIconCb: cb
+        appendIcon: 'search'
+      },
+      listeners: {
+        'click:prepend': cb,
+        'click:append': cb
       }
     })
 
     const click = jest.fn()
     wrapper.vm.$on('click', click)
+    wrapper.vm.$on('click:prepend', cb)
+    wrapper.vm.$on('click:append', cb)
 
     const prepend = wrapper.find('.v-icon')[0]
     const append = wrapper.find('.v-icon')[1]

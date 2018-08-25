@@ -103,6 +103,19 @@ for $size, $width in $grid-breakpoints
   &-baseline
     align-items: baseline
 
+.align-self
+  &-start
+    align-self: flex-start
+
+  &-end
+    align-self: flex-end
+
+  &-center
+    align-self: center
+
+  &-baseline
+    align-self: baseline
+
 .align-content
   &-start
     align-content: flex-start
@@ -134,6 +147,19 @@ for $size, $width in $grid-breakpoints
 
   &-space-between
     justify-content: space-between
+
+.justify-self
+  &-start
+    justify-self: flex-start
+
+  &-end
+    justify-self: flex-end
+
+  &-center
+    justify-self: center
+
+  &-baseline
+    justify-self: baseline
 
 .spacer
   flex-grow: 1 !important
@@ -173,6 +199,7 @@ for $size, $width in $grid-breakpoints
 .d-inline-flex
   display: inline-flex !important
 
+// TODO: Remove this in v2.0 (╯°□°）╯︵ ┻━┻
 .d-flex,
 .d-inline-flex
   > *

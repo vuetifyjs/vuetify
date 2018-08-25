@@ -30,8 +30,7 @@ export default {
       return {
         'v-data-iterator': true,
         'v-data-iterator--select-all': this.selectAll !== false,
-        'theme--dark': this.dark,
-        'theme--light': this.light
+        ...this.themeClasses
       }
     }
   },

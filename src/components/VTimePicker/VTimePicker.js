@@ -32,6 +32,7 @@ export default {
     },
     min: String,
     max: String,
+    readonly: Boolean,
     scrollable: Boolean,
     value: null
   },
@@ -170,6 +171,7 @@ export default {
           light: this.light,
           max: this.selectingHour ? (this.isAmPm && this.period === 'am' ? 11 : 23) : 59,
           min: this.selectingHour && this.isAmPm && this.period === 'pm' ? 12 : 0,
+          readonly: this.readonly,
           scrollable: this.scrollable,
           size: this.width - ((!this.fullWidth && this.landscape) ? 80 : 20),
           step: this.selectingHour ? 1 : 5,
@@ -199,6 +201,7 @@ export default {
           hour: this.inputHour,
           minute: this.inputMinute,
           period: this.period,
+          readonly: this.readonly,
           selectingHour: this.selectingHour
         },
         on: {

@@ -3,7 +3,6 @@ import '../../stylus/components/_carousel.styl'
 import VBtn from '../VBtn'
 import VIcon from '../VIcon'
 
-import Bootable from '../../mixins/bootable'
 import Themeable from '../../mixins/themeable'
 import { provide as RegistrableProvide } from '../../mixins/registrable'
 
@@ -15,7 +14,7 @@ export default {
 
   directives: { Touch },
 
-  mixins: [Bootable, Themeable, RegistrableProvide('carousel')],
+  mixins: [Themeable, RegistrableProvide('carousel')],
 
   props: {
     cycle: {
@@ -50,6 +49,12 @@ export default {
       items: [],
       slideTimeout: null,
       reverse: false
+    }
+  },
+
+  computed: {
+    isDark () {
+      return this.dark || !this.light
     }
   },
 
@@ -105,9 +110,7 @@ export default {
       }, [
         this.$createElement(VBtn, {
           props: {
-            icon: true,
-            dark: this.dark || !this.light,
-            light: this.light
+            icon: true
           },
           on: { click: fn }
         }, [
@@ -126,9 +129,7 @@ export default {
           },
           props: {
             icon: true,
-            small: true,
-            dark: this.dark || !this.light,
-            light: this.light
+            small: true
           },
           key: index,
           on: { click: this.select.bind(this, index) }

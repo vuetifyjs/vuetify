@@ -4,7 +4,7 @@
 v-select($material)
   // Needs an explicit color to override
   // higher level color
-  &__selections
+  .v-select__selections
     color: $material.text.primary
 
   &.v-input--is-disabled
@@ -22,12 +22,10 @@ v-select($material)
 theme(v-select, 'v-select')
 
 .v-select
-  cursor: pointer
   position: relative // For **attach** prop
 
-  .v-menu
-    flex: 1 1 auto
-    width: 100%
+  & > .v-input__control > .v-input__slot
+    cursor: pointer
 
   .v-chip
     flex: 0 1 auto
@@ -77,6 +75,11 @@ theme(v-select, 'v-select')
           .v-select__selections
             min-height: 56px
 
+  &.v-text-field--reverse
+    .v-select__slot,
+    .v-select__selections
+      flex-direction: row-reverse
+
   &__selections
     align-items: center
     display: flex
@@ -93,9 +96,9 @@ theme(v-select, 'v-select')
       margin: 7px 4px 7px 0
 
   &__slot
+    position: relative
     align-items: center
     display: flex
-    height: 100%
     width: 100%
 
   &:not(.v-text-field--single-line)

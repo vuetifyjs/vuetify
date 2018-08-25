@@ -1,14 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VDatePickerMonthTable.js should render component and match snapshot 1`] = `
+exports[`VDatePickerMonthTable.js should render component and match snapshot (multiple) 1`] = `
 
-<div class="v-date-picker-table v-date-picker-table--month">
+<div class="v-date-picker-table v-date-picker-table--month theme--light">
   <table>
     <tbody>
       <tr>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat"
+                  class="v-btn v-btn--flat theme--light"
           >
             <div class="v-btn__content">
               Jan
@@ -17,7 +17,7 @@ exports[`VDatePickerMonthTable.js should render component and match snapshot 1`]
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat"
+                  class="v-btn v-btn--flat theme--light"
           >
             <div class="v-btn__content">
               Feb
@@ -26,7 +26,7 @@ exports[`VDatePickerMonthTable.js should render component and match snapshot 1`]
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat"
+                  class="v-btn v-btn--flat theme--light"
           >
             <div class="v-btn__content">
               Mar
@@ -37,7 +37,7 @@ exports[`VDatePickerMonthTable.js should render component and match snapshot 1`]
       <tr>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat"
+                  class="v-btn v-btn--flat theme--light"
           >
             <div class="v-btn__content">
               Apr
@@ -46,7 +46,7 @@ exports[`VDatePickerMonthTable.js should render component and match snapshot 1`]
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat v-btn--outline accent--text"
+                  class="v-btn v-btn--flat v-btn--outline theme--light accent--text"
           >
             <div class="v-btn__content">
               May
@@ -55,7 +55,7 @@ exports[`VDatePickerMonthTable.js should render component and match snapshot 1`]
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat"
+                  class="v-btn v-btn--flat theme--light"
           >
             <div class="v-btn__content">
               Jun
@@ -66,7 +66,7 @@ exports[`VDatePickerMonthTable.js should render component and match snapshot 1`]
       <tr>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat"
+                  class="v-btn v-btn--flat theme--light"
           >
             <div class="v-btn__content">
               Jul
@@ -75,7 +75,7 @@ exports[`VDatePickerMonthTable.js should render component and match snapshot 1`]
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat"
+                  class="v-btn v-btn--flat theme--light"
           >
             <div class="v-btn__content">
               Aug
@@ -84,7 +84,7 @@ exports[`VDatePickerMonthTable.js should render component and match snapshot 1`]
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat"
+                  class="v-btn v-btn--flat theme--light"
           >
             <div class="v-btn__content">
               Sep
@@ -95,7 +95,7 @@ exports[`VDatePickerMonthTable.js should render component and match snapshot 1`]
       <tr>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat"
+                  class="v-btn v-btn--active v-btn--depressed theme--light accent"
           >
             <div class="v-btn__content">
               Oct
@@ -104,7 +104,7 @@ exports[`VDatePickerMonthTable.js should render component and match snapshot 1`]
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--active v-btn--depressed accent"
+                  class="v-btn v-btn--active v-btn--depressed theme--light accent"
           >
             <div class="v-btn__content">
               Nov
@@ -113,7 +113,134 @@ exports[`VDatePickerMonthTable.js should render component and match snapshot 1`]
         </td>
         <td>
           <button type="button"
-                  class="v-btn v-btn--flat"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Dec
+            </div>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+`;
+
+exports[`VDatePickerMonthTable.js should render component and match snapshot 1`] = `
+
+<div class="v-date-picker-table v-date-picker-table--month theme--light">
+  <table>
+    <tbody>
+      <tr>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Jan
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Feb
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Mar
+            </div>
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Apr
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat v-btn--outline theme--light accent--text"
+          >
+            <div class="v-btn__content">
+              May
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Jun
+            </div>
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Jul
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Aug
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Sep
+            </div>
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Oct
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--active v-btn--depressed theme--light accent"
+          >
+            <div class="v-btn__content">
+              Nov
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
           >
             <div class="v-btn__content">
               Dec

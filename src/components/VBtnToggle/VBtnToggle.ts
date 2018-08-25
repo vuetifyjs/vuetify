@@ -1,7 +1,7 @@
 import '../../stylus/components/_button-toggle.styl'
 
 // Types
-import { CreateElement, VNode } from 'vue'
+import { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
 
 // Mixins
@@ -13,7 +13,7 @@ import Themeable from '../../mixins/themeable'
 import { consoleWarn } from '../../util/console'
 
 /* @vue/component */
-const VBtnToggle = mixins(ButtonGroup, Themeable).extend({
+export default mixins(ButtonGroup, Themeable).extend({
   name: 'v-btn-toggle',
 
   model: {
@@ -34,8 +34,7 @@ const VBtnToggle = mixins(ButtonGroup, Themeable).extend({
       return {
         'v-btn-toggle': true,
         'v-btn-toggle--selected': this.hasValue,
-        'theme--light': this.light,
-        'theme--dark': this.dark
+        ...this.themeClasses
       }
     },
     hasValue (): boolean {
@@ -106,13 +105,7 @@ const VBtnToggle = mixins(ButtonGroup, Themeable).extend({
     }
   },
 
-  render (h: CreateElement): VNode {
+  render (h): VNode {
     return h('div', { class: this.classes }, this.$slots.default)
   }
 })
-
-/* eslint-disable-next-line no-redeclare */
-export type VBtnToggle = InstanceType<typeof VBtnToggle> & {
-  $el: HTMLDivElement
-}
-export default VBtnToggle

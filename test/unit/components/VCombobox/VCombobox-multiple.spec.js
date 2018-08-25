@@ -315,10 +315,12 @@ test('VCombobox - multiple', ({ shallow, compileToFunctions }) => {
     })
 
     const change = jest.fn()
+    const internal = jest.fn()
     const chip = wrapper.first('.v-chip')
     const input = wrapper.first('input')
 
     wrapper.vm.$on('change', change)
+    wrapper.vm.$watch('internalValue', internal)
 
     expect(wrapper.vm.editingIndex).toBe(-1)
     expect(wrapper.vm.internalSearch).toBe(undefined)
@@ -335,6 +337,7 @@ test('VCombobox - multiple', ({ shallow, compileToFunctions }) => {
     await wrapper.vm.$nextTick()
 
     expect(change).toBeCalledWith(['foobar'])
+    expect(internal).toBeCalledWith(['foobar'], ['foo'])
   })
 
   it('should react to tabs', async () => {
@@ -350,8 +353,6 @@ test('VCombobox - multiple', ({ shallow, compileToFunctions }) => {
     })
 
     const input = wrapper.first('input')
-    const menu = wrapper.first('.v-menu')
-    const tile = wrapper.first('.v-list__tile')
 
     input.trigger('focus')
     input.element.value = 'foo'
@@ -359,12 +360,12 @@ test('VCombobox - multiple', ({ shallow, compileToFunctions }) => {
     input.trigger('keydown.tab')
 
     expect(wrapper.vm.getMenuIndex()).toBe(-1)
-    expect(updateTags).toBeCalled()
+    expect(updateTags).toHaveBeenCalledTimes(1)
 
     input.trigger('focus')
     input.element.value = 'fizz'
     input.trigger('input')
-    menu.trigger('keydown.down')
+    input.trigger('keydown.down')
 
     // Allow dom to update class for
     // selected tile
