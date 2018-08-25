@@ -1,13 +1,24 @@
-import Vue, { VNode } from 'vue'
-import { PropValidator } from 'vue/types/options'
-import { deprecate } from '../../util/console'
-
-import { VBreadcrumbsDivider, VBreadcrumbsItem } from '.'
-
+// Styles
 import '../../stylus/components/_breadcrumbs.styl'
 
-/* @vue/component */
-export default Vue.extend({
+// Types
+import { VNode } from 'vue'
+import { PropValidator } from 'vue/types/options'
+
+// Components
+import { VBreadcrumbsDivider, VBreadcrumbsItem } from '.'
+
+// Mixins
+import Themeable from '../../mixins/themeable'
+
+// Utils
+import { deprecate } from '../../util/console'
+import mixins from '../../util/mixins'
+
+export default mixins(
+  Themeable
+  /* @vue/component */
+).extend({
   name: 'v-breadcrumbs',
 
   props: {
@@ -29,7 +40,8 @@ export default Vue.extend({
       return {
         'v-breadcrumbs--large': this.large,
         'justify-center': this.justifyCenter,
-        'justify-end': this.justifyEnd
+        'justify-end': this.justifyEnd,
+        ...this.themeClasses
       }
     }
   },
@@ -41,12 +53,6 @@ export default Vue.extend({
   },
 
   methods: {
-    /**
-     * Add dividers between
-     * v-breadcrumbs-item
-     *
-     * @return {array}
-     */
     genChildren () {
       if (!this.$slots.default) return undefined
 
