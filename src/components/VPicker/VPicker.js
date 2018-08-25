@@ -25,28 +25,21 @@ export default {
     }
   },
 
-  data () {
-    return {
-      defaultColor: 'primary'
-    }
-  },
-
   computed: {
     computedTitleColor () {
-      const darkTheme = this.dark || (!this.light && this.$vuetify.dark)
-      const defaultTitleColor = darkTheme ? null : this.computedColor
+      const defaultTitleColor = this.isDark ? null : (this.color || 'primary')
       return this.color || defaultTitleColor
     }
   },
 
   methods: {
     genTitle () {
-      return this.$createElement('div', {
+      return this.$createElement('div', this.setBackgroundColor(this.computedTitleColor, {
         staticClass: 'v-picker__title',
-        'class': this.addBackgroundColorClassChecks({
+        'class': {
           'v-picker__title--landscape': this.landscape
-        }, this.computedTitleColor)
-      }, this.$slots.title)
+        }
+      }), this.$slots.title)
     },
     genBodyTransition () {
       return this.$createElement('transition', {

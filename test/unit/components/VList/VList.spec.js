@@ -1,4 +1,4 @@
-import VList from '@/components/VList'
+import VList from '@/components/VList/VList'
 import { test } from '@/test'
 
 // TODO: Test actual behaviour instead of classes

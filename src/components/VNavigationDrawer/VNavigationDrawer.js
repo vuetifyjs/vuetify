@@ -110,8 +110,7 @@ export default {
         'v-navigation-drawer--open': this.isActive,
         'v-navigation-drawer--right': this.right,
         'v-navigation-drawer--temporary': this.temporary,
-        'theme--dark': this.dark,
-        'theme--light': this.light
+        ...this.themeClasses
       }
     },
     hasApp () {
@@ -235,6 +234,9 @@ export default {
       if (val == null) return this.init()
 
       if (val !== this.isActive) this.isActive = val
+    },
+    applicationProperty (newVal, oldVal) {
+      this.$vuetify.application.unbind(this._uid, oldVal)
     }
   },
 

@@ -68,7 +68,7 @@ export default {
       return this.validations.length > 0
     },
     hasState () {
-      return this.shouldValidate && (this.hasError || this.hasSuccess)
+      return this.hasSuccess || (this.shouldValidate && this.hasError)
     },
     internalErrorMessages () {
       return this.errorMessages || ''
@@ -85,7 +85,7 @@ export default {
     },
     validationState () {
       if (this.hasError && this.shouldValidate) return 'error'
-      if (this.hasSuccess && this.shouldValidate) return 'success'
+      if (this.hasSuccess) return 'success'
       if (this.hasColor) return this.color
       return null
     },
@@ -158,12 +158,18 @@ export default {
   },
 
   methods: {
+    /** @public */
     reset () {
       this.isResetting = true
       this.internalValue = Array.isArray(this.internalValue)
         ? []
         : undefined
     },
+    /** @public */
+    resetValidation () {
+      this.isResetting = true
+    },
+    /** @public */
     validate (force = false, value = this.internalValue) {
       const errorBucket = []
 

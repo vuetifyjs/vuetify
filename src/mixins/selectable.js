@@ -5,9 +5,6 @@ import VInput from '../components/VInput'
 import Rippleable from './rippleable'
 import Comparable from './comparable'
 
-// Utils
-import { keyCodes } from '../util/helpers'
-
 /* @vue/component */
 export default {
   name: 'selectable',
@@ -34,11 +31,7 @@ export default {
       type: Boolean,
       default: null
     },
-    label: String,
-    toggleKeys: {
-      type: Array,
-      default: () => [keyCodes.enter, keyCodes.space]
-    }
+    label: String
   },
 
   data: vm => ({
@@ -46,11 +39,8 @@ export default {
   }),
 
   computed: {
-    classesSelectable () {
-      return this.addTextColorClassChecks(
-        {},
-        this.isDirty ? this.color : this.validationState
-      )
+    computedColor () {
+      return this.isActive ? this.color : this.validationState
     },
     isMultiple () {
       return this.multiple === true || (this.multiple === null && Array.isArray(this.internalValue))
@@ -80,7 +70,7 @@ export default {
 
   watch: {
     inputValue (val) {
-      this.internalValue = val
+      this.lazyValue = val
     }
   },
 
@@ -96,20 +86,25 @@ export default {
     },
     genInput (type, attrs) {
       return this.$createElement('input', {
-        attrs: Object.assign({}, {
+        attrs: Object.assign({
           'aria-label': this.label,
           'aria-checked': this.isActive.toString(),
+          disabled: this.isDisabled,
           id: this.id,
           role: type,
           type,
           value: this.inputValue
         }, attrs),
+        domProps: {
+          checked: this.isActive
+        },
         on: {
           blur: this.onBlur,
           change: this.onChange,
           focus: this.onFocus,
           keydown: this.onKeydown
-        }
+        },
+        ref: 'input'
       })
     },
     onBlur () {
@@ -142,20 +137,12 @@ export default {
       }
 
       this.validate(true, input)
-      this.lazyValue = input
-      this.$emit('change', input)
+      this.internalValue = input
     },
     onFocus () {
       this.isFocused = true
     },
-    onKeydown (e) {
-      // Overwrite default behavior to only allow
-      // the specified keyCodes
-      if (this.toggleKeys.indexOf(e.keyCode) > -1) {
-        e.preventDefault()
-
-        this.onChange()
-      }
-    }
+    /** @abstract */
+    onKeydown (e) {}
   }
 }

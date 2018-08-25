@@ -1,3 +1,5 @@
+import Vue from 'vue'
+
 import Positionable from './positionable'
 
 import Stackable from './stackable'
@@ -32,7 +34,7 @@ const dimensions = {
  * As well as be manually positioned
  */
 /* @vue/component */
-export default {
+export default Vue.extend({
   name: 'menuable',
 
   mixins: [
@@ -344,4 +346,4 @@ export default {
       })
     }
   }
-}
+})

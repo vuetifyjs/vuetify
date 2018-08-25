@@ -1,18 +1,19 @@
 import '../../stylus/components/_icons.styl'
 
 // Mixins
-import Themeable from '../../mixins/themeable'
 import Colorable from '../../mixins/colorable'
+import Sizeable from '../../mixins/sizeable'
+import Themeable from '../../mixins/themeable'
 
 // Util
 import {
   convertToUnit,
-  getObjectValueByPath,
-  keys
+  keys,
+  remapInternalIcon
 } from '../../util/helpers'
 
 // Types
-import { VNode, VNodeChildren } from 'vue'
+import Vue, { VNode, VNodeChildren, VNodeData } from 'vue'
 import mixins from '../../util/mixins'
 
 enum SIZE_MAP {
@@ -27,74 +28,47 @@ function isFontAwesome5 (iconType: string): boolean {
   return ['fas', 'far', 'fal', 'fab'].some(val => iconType.includes(val))
 }
 
-const ICONS_PREFIX = '$vuetify.icons.'
-
-// This remaps internal names like '$vuetify.icons.cancel' to the current name
-// for that icon. Note the parent component is needed for $vuetify because
-// VIcon is a functional component. This function only looks at the
-// immediate parent, so it won't remap for a nested functional components.
-function remapInternalIcon (parent: object, iconName: string): string {
-  if (!iconName.startsWith(ICONS_PREFIX)) {
-    // return original icon name unchanged
-    return iconName
-  }
-
-  // Now look up icon indirection name, e.g. '$vuetify.icons.cancel':
-  return getObjectValueByPath(parent, iconName) || iconName
-}
-
-const addTextColorClassChecks = Colorable.options.methods.addTextColorClassChecks
-
+const VIcon = mixins(
+  Colorable,
+  Sizeable,
+  Themeable
 /* @vue/component */
-export default mixins(Colorable, Themeable).extend({
+).extend({
   name: 'v-icon',
 
-  functional: true,
-
   props: {
-    // TODO: inherit these
-    color: String,
-    dark: Boolean,
-    light: Boolean,
-
     disabled: Boolean,
-    large: Boolean,
     left: Boolean,
-    medium: Boolean,
-    right: Boolean,
-    size: {
-      type: [Number, String]
-    },
-    small: Boolean,
-    xLarge: Boolean
+    right: Boolean
   },
 
-  render (h, { props, data, parent, listeners = {}, children = [] }): VNode {
-    const { small, medium, large, xLarge } = props
-    const sizes = { small, medium, large, xLarge }
+  render (h): VNode {
+    const sizes = {
+      small: this.small,
+      medium: this.medium,
+      large: this.large,
+      xLarge: this.xLarge
+    }
     const explicitSize = keys(sizes).find(key => sizes[key] && !!key)
-    const fontSize = (explicitSize && SIZE_MAP[explicitSize]) || convertToUnit(props.size)
+    const fontSize = (explicitSize && SIZE_MAP[explicitSize]) || convertToUnit(this.size)
 
     const newChildren: VNodeChildren = []
-
-    if (fontSize) data.style = { fontSize, ...data.style }
-
-    let iconName = ''
-    if (children.length) iconName = children[0].text!
-    // Support usage of v-text and v-html
-    else if (data.domProps) {
-      iconName = data.domProps.textContent ||
-        data.domProps.innerHTML ||
-        iconName
-
-      // Remove nodes so it doesn't
-      // overwrite our changes
-      delete data.domProps.textContent
-      delete data.domProps.innerHTML
+    const data: VNodeData = {
+      staticClass: 'v-icon',
+      attrs: {
+        'aria-hidden': true,
+        ...this.$attrs
+      },
+      on: this.$listeners
     }
 
+    if (fontSize) data.style = { fontSize }
+
+    let iconName = ''
+    if (this.$slots.default) iconName = this.$slots.default[0].text!
+
     // Remap internal names like '$vuetify.icons.cancel' to the current name for that icon
-    iconName = remapInternalIcon(parent, iconName)
+    iconName = remapInternalIcon(this, iconName)
 
     let iconType = 'material-icons'
     // Material Icon delimiter is _
@@ -110,33 +84,42 @@ export default mixins(Colorable, Themeable).extend({
       // is Material Icon font
     } else newChildren.push(iconName)
 
-    data.attrs = data.attrs || {}
-    if (!('aria-hidden' in data.attrs)) {
-      data.attrs['aria-hidden'] = true
+    data.class = {
+      'v-icon--disabled': this.disabled,
+      'v-icon--left': this.left,
+      'v-icon--link': this.$listeners.click || this.$listeners['!click'],
+      'v-icon--right': this.right,
+      [iconType]: true,
+      [iconName]: isCustomIcon,
+      ...this.themeClasses
     }
 
-    const classes = {
-      ...(props.color && addTextColorClassChecks.call(props, {}, props.color)),
-      'v-icon--disabled': props.disabled,
-      'v-icon--left': props.left,
-      'v-icon--link': listeners.click || listeners['!click'],
-      'v-icon--right': props.right,
-      'theme--dark': props.dark,
-      'theme--light': props.light
+    return h('i', this.setTextColor(this.color, data), newChildren)
+  }
+})
+
+export default Vue.extend({
+  name: 'v-icon',
+
+  $_wrapperFor: VIcon,
+
+  functional: true,
+
+  render (h, { data, children }): VNode {
+    let iconName = ''
+
+    // Support usage of v-text and v-html
+    if (data.domProps) {
+      iconName = data.domProps.textContent ||
+        data.domProps.innerHTML ||
+        iconName
+
+      // Remove nodes so it doesn't
+      // overwrite our changes
+      delete data.domProps.textContent
+      delete data.domProps.innerHTML
     }
 
-    // Order classes
-    // * Component class
-    // * Vuetify classes
-    // * Icon Classes
-    data.staticClass = [
-      'v-icon',
-      data.staticClass,
-      Object.keys(classes).filter(k => classes[k]).join(' '),
-      iconType,
-      isCustomIcon ? iconName : null
-    ].filter(val => !!val).join(' ').trim()
-
-    return h('i', data, newChildren)
+    return h(VIcon, data, iconName ? [iconName] : children)
   }
 })

@@ -1,6 +1,8 @@
 import Vue, { VNode } from 'vue'
-import { Toggleable } from './toggleable'
-import { ExtractVue } from '../util/mixins'
+
+interface Toggleable extends Vue {
+  isActive?: boolean
+}
 
 /**
  * Bootable
@@ -11,7 +13,7 @@ import { ExtractVue } from '../util/mixins'
  * Otherwise can be set manually
  */
 /* @vue/component */
-export default Vue.extend<ExtractVue<Toggleable>>().extend({
+export default Vue.extend<Vue & Toggleable>().extend({
   name: 'bootable',
 
   props: {
@@ -23,7 +25,7 @@ export default Vue.extend<ExtractVue<Toggleable>>().extend({
   }),
 
   computed: {
-    hasContent (): boolean {
+    hasContent (): boolean | undefined {
       return this.isBooted || !this.lazy || this.isActive
     }
   },

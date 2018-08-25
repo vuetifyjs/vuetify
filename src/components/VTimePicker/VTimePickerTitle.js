@@ -20,6 +20,7 @@ export default {
       type: String,
       validator: period => period === 'am' || period === 'pm'
     },
+    readonly: Boolean,
     selectingHour: Boolean
   },
 
@@ -45,8 +46,8 @@ export default {
       return this.$createElement('div', {
         staticClass: 'v-time-picker-title__ampm'
       }, [
-        this.genPickerButton('period', 'am', 'am'),
-        this.genPickerButton('period', 'pm', 'pm')
+        this.genPickerButton('period', 'am', 'am', this.readonly),
+        this.genPickerButton('period', 'pm', 'pm', this.readonly)
       ])
     }
   },

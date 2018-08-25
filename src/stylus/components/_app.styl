@@ -5,6 +5,9 @@
 .application
   display: flex
 
+  a
+    cursor: pointer
+
   &--is-rtl
     direction: rtl
 
@@ -21,9 +24,6 @@ application($material)
   background: $material.background
   color: $material.text.primary
 
-  a
-    cursor: pointer
-
   .text
     &--primary
       color: $material.text.primary !important
@@ -34,7 +34,7 @@ application($material)
     &--disabled
       color: $material.text.disabled !important
 
-app(application)
+theme(application, 'application')
 
 +firefox()
   @media print
