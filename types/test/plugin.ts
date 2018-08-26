@@ -11,16 +11,19 @@ Vuetify.install(Vue, {
 
 Vuetify.install(Vue, {
   theme: {
-    primary: '#123456',
-    accent: '#123456',
-    secondary: '#123456',
-    info: '#123456',
-    warning: '#123456',
-    error: '#123456',
-    success: '#123456',
+    light: {
+      background: '#FFFFFF',
+      primary: '#123456',
+      accent: '#123456',
+      secondary: '#123456',
+      info: '#123456',
+      warning: '#123456',
+      error: '#123456',
+      success: '#123456',
 
-    'something-else': '#123456',
-    'as-number': 123456
+      'something-else': '#123456',
+      'as-number': 123456
+    }
   },
   iconfont: 'fa',
   icons: {

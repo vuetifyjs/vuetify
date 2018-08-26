@@ -33,6 +33,7 @@ export default {
     classes () {
       return {
         'application--is-rtl': this.$vuetify.rtl,
+        'background': true,
         ...this.themeClasses
       }
     }

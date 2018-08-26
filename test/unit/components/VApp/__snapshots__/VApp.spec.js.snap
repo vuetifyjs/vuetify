@@ -3,7 +3,7 @@
 exports[`VApp.js should allow a custom id 1`] = `
 
 <div data-app="true"
-     class="application theme--light"
+     class="application background theme--light"
      id="inspire"
 >
   <div class="application--wrap">
@@ -18,6 +18,7 @@ exports[`VApp.js should generate theme using css variables 1`] = `
   type="text/css"
 >
   :root {
+  --v-background-base: #fafafa;
   --v-primary-base: #000000;
   --v-primary-lighten5: #777777;
   --v-primary-lighten4: #5e5e5e;
@@ -91,6 +92,14 @@ exports[`VApp.js should generate theme using css variables 1`] = `
 }
 
 a { color: var(--v-primary-base); }
+.background {
+  background-color: var(--v-background-base) !important;
+  border-color: var(--v-background-base) !important;
+}
+.background--text {
+  color: var(--v-background-base) !important;
+  caret-color: var(--v-background-base) !important;
+}
 .primary {
   background-color: var(--v-primary-base) !important;
   border-color: var(--v-primary-base) !important;
@@ -657,7 +666,7 @@ a { color: var(--v-primary-base); }
 exports[`VApp.js should match a snapshot 1`] = `
 
 <div data-app="true"
-     class="application theme--light"
+     class="application background theme--light"
      id="app"
 >
   <div class="application--wrap">
@@ -672,6 +681,14 @@ exports[`VApp.js should watch theme 1`] = `
   type="text/css"
 >
   a { color: #1976d2; }
+.background {
+  background-color: #fafafa !important;
+  border-color: #fafafa !important;
+}
+.background--text {
+  color: #fafafa !important;
+  caret-color: #fafafa !important;
+}
 .primary {
   background-color: #1976d2 !important;
   border-color: #1976d2 !important;
@@ -1241,6 +1258,14 @@ exports[`VApp.js should watch theme 2`] = `
   type="text/css"
 >
   a { color: #000000; }
+.background {
+  background-color: #fafafa !important;
+  border-color: #fafafa !important;
+}
+.background--text {
+  color: #fafafa !important;
+  caret-color: #fafafa !important;
+}
 .primary {
   background-color: #000000 !important;
   border-color: #000000 !important;

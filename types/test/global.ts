@@ -34,12 +34,22 @@ Vue.component('theme', {
     // this.$vuetify.theme = { primary: 123 }
 
     Object.assign(this.$vuetify.theme, {
-      primary: 123
+      light: {
+        primary: 123
+      }
     })
 
     this.$vuetify.theme = {
       ...this.$vuetify.theme,
-      primary: 132
+      light: {
+        primary: 132,
+        secondary: '#424242',
+        accent: '#82B1FF',
+        error: '#FF5252',
+        info: '#2196F3',
+        success: '#4CAF50',
+        warning: '#FFC107'
+      }
     }
   }
 })
