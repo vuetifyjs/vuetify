@@ -1,23 +1,18 @@
-import './stylus/app.styl'
-import VuetifyComponent from './components/Vuetify'
+import install from ''
 import * as components from './components'
 import * as directives from './directives'
-import { VueConstructor } from 'vue'
-import { Vuetify as VuetifyPlugin, VuetifyUseOptions } from 'types'
 
-const Vuetify: VuetifyPlugin = {
-  install (Vue: VueConstructor, args?: VuetifyUseOptions): void {
-    Vue.use(VuetifyComponent, {
-      components,
-      directives,
-      ...args
-    })
-  },
-  version: __VUETIFY_VERSION__
+const version = '__VUETIFY_VERSION__'
+
+export {
+  version,
+  components,
+  directives
 }
 
-if (typeof window !== 'undefined' && window.Vue) {
-  window.Vue.use(Vuetify)
+export default {
+  install,
+  version,
+  components,
+  directives
 }
-
-export default Vuetify
