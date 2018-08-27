@@ -126,3 +126,17 @@ theme(v-datatable, "v-datatable")
     > .card
       border-radius: 0
       box-shadow: none
+
+.v-datatable__group
+  &-col
+    padding: 0 !important
+    cursor: pointer
+
+    &--active
+      .v-datatable__group__expand-icon
+        .v-icon
+          transform: rotate(-180deg)
+
+  &-content
+    display: flex
+    align-items: center
