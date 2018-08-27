@@ -539,6 +539,226 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
 
 `;
 
+exports[`VDataTable.vue should match a snapshot - with group 1`] = `
+
+<div>
+  <div class="v-table__overflow">
+    <table class="v-datatable v-table theme--light">
+      <thead>
+        <tr>
+          <th role="columnheader"
+              scope="col"
+              aria-label="First Column: Sorted ascending. Activate to sort descending."
+              aria-sort="ascending"
+              tabindex="0"
+              class="column sortable active asc text-xs-left"
+          >
+            First Column
+            <i aria-hidden="true"
+               class="v-icon material-icons theme--light"
+               style="font-size: 16px;"
+            >
+              arrow_upward
+            </i>
+          </th>
+          <th role="columnheader"
+              scope="col"
+              aria-label="Second Column: Not sorted. Activate to sort ascending."
+              aria-sort="none"
+              tabindex="0"
+              class="column sortable text-xs-left"
+          >
+            Second Column
+            <i aria-hidden="true"
+               class="v-icon material-icons theme--light"
+               style="font-size: 16px;"
+            >
+              arrow_upward
+            </i>
+          </th>
+        </tr>
+        <tr class="v-datatable__progress">
+          <th colspan="2"
+              class="column"
+          >
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="v-datatable__group-row">
+          <td colspan="2"
+              class="v-datatable__group-col"
+          >
+            <div class="v-datatable__group-content">
+              <div class="v-datatable__group__expand-icon">
+                <i aria-hidden="true"
+                   class="v-icon material-icons theme--light"
+                >
+                  keyboard_arrow_down
+                </i>
+              </div>
+              <span>
+                Group 1 - A
+              </span>
+            </div>
+          </td>
+        </tr>
+        <tr class="v-datatable__group-row">
+          <td colspan="2"
+              class="v-datatable__group-col"
+          >
+            <div class="v-datatable__group-content">
+              <div class="v-datatable__group__expand-icon">
+                <i aria-hidden="true"
+                   class="v-icon material-icons theme--light"
+                >
+                  keyboard_arrow_down
+                </i>
+              </div>
+              <span>
+                Group 2 - B
+              </span>
+            </div>
+          </td>
+        </tr>
+        <tr class="v-datatable__group-row">
+          <td colspan="2"
+              class="v-datatable__group-col"
+          >
+            <div class="v-datatable__group-content">
+              <div class="v-datatable__group__expand-icon">
+                <i aria-hidden="true"
+                   class="v-icon material-icons theme--light"
+                >
+                  keyboard_arrow_down
+                </i>
+              </div>
+              <span>
+                Group 3 - C
+              </span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="v-datatable v-table theme--light">
+    <div class="v-datatable__actions">
+      <div class="v-datatable__actions__select">
+        Rows per page:
+        <div role="combobox"
+             class="v-input v-text-field v-select v-input--hide-details v-input--is-label-active v-input--is-dirty theme--light"
+        >
+          <div class="v-input__control">
+            <div class="v-input__slot">
+              <div class="v-select__slot">
+                <div class="v-select__selections">
+                  <div class="v-select__selection v-select__selection--comma">
+                    5
+                  </div>
+                  <input aria-label="Rows per page:"
+                         readonly="readonly"
+                         type="text"
+                         autocomplete="on"
+                         aria-readonly="false"
+                  >
+                </div>
+                <div class="v-input__append-inner">
+                  <div class="v-input__icon v-input__icon--append">
+                    <i aria-hidden="true"
+                       class="v-icon material-icons theme--light"
+                    >
+                      arrow_drop_down
+                    </i>
+                  </div>
+                </div>
+              </div>
+              <div class="v-menu">
+                <div class="v-menu__content v-menu__content--auto theme--light "
+                     style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
+                >
+                  <div class="v-select-list v-card theme--light">
+                    <div class="v-list theme--light">
+                      <div>
+                        <a class="v-list__tile v-list__tile--link v-list__tile--active theme--light primary--text">
+                          <div class="v-list__tile__content">
+                            <div class="v-list__tile__title">
+                              5
+                            </div>
+                          </div>
+                        </a>
+                      </div>
+                      <div>
+                        <a class="v-list__tile v-list__tile--link theme--light">
+                          <div class="v-list__tile__content">
+                            <div class="v-list__tile__title">
+                              10
+                            </div>
+                          </div>
+                        </a>
+                      </div>
+                      <div>
+                        <a class="v-list__tile v-list__tile--link theme--light">
+                          <div class="v-list__tile__content">
+                            <div class="v-list__tile__title">
+                              25
+                            </div>
+                          </div>
+                        </a>
+                      </div>
+                      <div>
+                        <a class="v-list__tile v-list__tile--link theme--light">
+                          <div class="v-list__tile__content">
+                            <div class="v-list__tile__title">
+                              All
+                            </div>
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="v-datatable__actions__range-controls">
+        <div class="v-datatable__actions__pagination">
+          1-5 of 6
+        </div>
+        <button disabled="disabled"
+                type="button"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--icon theme--light"
+                aria-label="Previous page"
+        >
+          <div class="v-btn__content">
+            <i aria-hidden="true"
+               class="v-icon material-icons theme--light"
+            >
+              chevron_left
+            </i>
+          </div>
+        </button>
+        <button type="button"
+                class="v-btn v-btn--flat v-btn--icon theme--light"
+                aria-label="Next page"
+        >
+          <div class="v-btn__content">
+            <i aria-hidden="true"
+               class="v-icon material-icons theme--light"
+            >
+              chevron_right
+            </i>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
 exports[`VDataTable.vue should match a snapshot with single rows-per-page-items 1`] = `
 
 <div>
