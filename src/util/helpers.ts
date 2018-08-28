@@ -1,4 +1,5 @@
-import { VNode, VNodeDirective, FunctionalComponentOptions } from 'vue'
+import { Vue } from 'vue/types/vue'
+import { VNode, VNodeDirective, FunctionalComponentOptions } from 'vue/types'
 
 export function createSimpleFunctional (
   c: string,
@@ -18,6 +19,15 @@ export function createSimpleFunctional (
   }
 }
 
+function mergeTransitions (
+  transitions: undefined | Function | Function[],
+  array: Function[]
+) {
+  if (Array.isArray(transitions)) return transitions.concat(array)
+  if (transitions) array.push(transitions)
+  return array
+}
+
 export function createSimpleTransition (
   name: string,
   origin = 'top center 0',
@@ -29,6 +39,22 @@ export function createSimpleTransition (
     functional: true,
 
     props: {
+      group: {
+        type: Boolean,
+        default: false
+      },
+      hideOnLeave: {
+        type: Boolean,
+        default: false
+      },
+      leaveAbsolute: {
+        type: Boolean,
+        default: false
+      },
+      mode: {
+        type: String,
+        default: mode
+      },
       origin: {
         type: String,
         default: origin
@@ -36,21 +62,39 @@ export function createSimpleTransition (
     },
 
     render (h, context): VNode {
+      const tag = `transition${context.props.group ? '-group' : ''}`
       context.data = context.data || {}
-      context.data.props = { name }
+      context.data.props = {
+        name,
+        mode: context.props.mode
+      }
       context.data.on = context.data.on || {}
       if (!Object.isExtensible(context.data.on)) {
         context.data.on = { ...context.data.on }
       }
 
-      if (mode) context.data.props.mode = mode
+      const ourBeforeEnter: Function[] = []
+      const ourLeave: Function[] = []
+      const absolute = (el: HTMLElement) => (el.style.position = 'absolute')
 
-      context.data.on.beforeEnter = (el: HTMLElement) => {
+      ourBeforeEnter.push((el: HTMLElement) => {
         el.style.transformOrigin = context.props.origin
         el.style.webkitTransformOrigin = context.props.origin
+      })
+
+      if (context.props.leaveAbsolute) ourLeave.push(absolute)
+      if (context.props.hideOnLeave) {
+        ourLeave.push((el: HTMLElement) => (el.style.display = 'none'))
       }
 
-      return h('transition', context.data, context.children)
+      const { beforeEnter, leave } = context.data.on
+
+      // Type says Function | Function[] but
+      // will only work if provided a function
+      context.data.on.beforeEnter = () => mergeTransitions(beforeEnter, ourBeforeEnter)
+      context.data.on.leave = mergeTransitions(leave, ourLeave)
+
+      return h(tag, context.data, context.children)
     }
   }
 }
@@ -58,7 +102,6 @@ export function createSimpleTransition (
 export function createJavaScriptTransition (
   name: string,
   functions: Record<string, () => any>,
-  css = false,
   mode = 'in-out'
 ): FunctionalComponentOptions {
   return {
@@ -67,10 +110,6 @@ export function createJavaScriptTransition (
     functional: true,
 
     props: {
-      css: {
-        type: Boolean,
-        default: css
-      },
       mode: {
         type: String,
         default: mode
@@ -259,6 +298,27 @@ export const keyCodes = Object.freeze({
   pagedown: 34
 })
 
+const ICONS_PREFIX = '$vuetify.icons.'
+
+// This remaps internal names like '$vuetify.icons.cancel' to the current name
+// for that icon.
+export function remapInternalIcon (vm: Vue, iconName: string): string {
+  if (!iconName.startsWith(ICONS_PREFIX)) {
+    return iconName
+  }
+
+  // Now look up icon indirection name, e.g. '$vuetify.icons.cancel'
+  return getObjectValueByPath(vm, iconName, iconName)
+}
+
 export function keys<O> (o: O) {
   return Object.keys(o) as (keyof O)[]
+}
+
+/**
+ * Camelize a hyphen-delimited string.
+ */
+const camelizeRE = /-(\w)/g
+export const camelize = (str: string): string => {
+  return str.replace(camelizeRE, (_, c) => c ? c.toUpperCase() : '')
 }

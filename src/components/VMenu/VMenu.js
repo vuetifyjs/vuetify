@@ -1,5 +1,7 @@
 import '../../stylus/components/_menus.styl'
 
+import Vue from 'vue'
+
 // Mixins
 import Delayable from '../../mixins/delayable'
 import Dependent from '../../mixins/dependent'
@@ -20,9 +22,10 @@ import Resize from '../../directives/resize'
 
 // Helpers
 import { convertToUnit } from '../../util/helpers'
+import SlotProvider from '../../util/SlotProvider'
 
 /* @vue/component */
-export default {
+export default Vue.extend({
   name: 'v-menu',
 
   directives: {
@@ -196,13 +199,19 @@ export default {
         value: this.onResize
       }],
       on: {
-        keydown: this.changeListIndex
+        keydown: this.onKeyDown
       }
     }
 
     return h('div', data, [
       this.genActivator(),
-      this.genTransition()
+      this.$createElement(SlotProvider, {
+        props: {
+          provide: {
+            theme: { isDark: this.$vuetify.dark || this.dark }
+          }
+        }
+      }, [this.genTransition()])
     ])
   }
-}
+})

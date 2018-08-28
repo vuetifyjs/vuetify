@@ -68,7 +68,6 @@ export default {
         'v-input--is-focused': this.isFocused,
         'v-input--is-loading': this.loading !== false,
         'v-input--is-readonly': this.readonly,
-        ...this.addTextColorClassChecks({}, this.validationState),
         ...this.themeClasses
       }
     },
@@ -189,9 +188,8 @@ export default {
       ])
     },
     genInputSlot () {
-      return this.$createElement('div', {
+      return this.$createElement('div', this.setBackgroundColor(this.backgroundColor, {
         staticClass: 'v-input__slot',
-        class: this.addBackgroundColorClassChecks({}, this.backgroundColor),
         style: { height: convertToUnit(this.height) },
         directives: this.directivesInput,
         on: {
@@ -200,7 +198,7 @@ export default {
           mouseup: this.onMouseUp
         },
         ref: 'input-slot'
-      }, [
+      }), [
         this.genDefaultSlot(),
         this.genProgress()
       ])
@@ -282,10 +280,10 @@ export default {
   },
 
   render (h) {
-    return h('div', {
+    return h('div', this.setTextColor(this.validationState, {
       staticClass: 'v-input',
       attrs: this.attrsInput,
       'class': this.classesInput
-    }, this.genContent())
+    }), this.genContent())
   }
 }

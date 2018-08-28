@@ -52,6 +52,12 @@ export default {
     }
   },
 
+  computed: {
+    isDark () {
+      return this.dark || !this.light
+    }
+  },
+
   watch: {
     items () {
       if (this.inputValue >= this.items.length) {
@@ -104,9 +110,7 @@ export default {
       }, [
         this.$createElement(VBtn, {
           props: {
-            icon: true,
-            dark: this.dark || !this.light,
-            light: this.light
+            icon: true
           },
           on: { click: fn }
         }, [
@@ -125,9 +129,7 @@ export default {
           },
           props: {
             icon: true,
-            small: true,
-            dark: this.dark || !this.light,
-            light: this.light
+            small: true
           },
           key: index,
           on: { click: this.select.bind(this, index) }

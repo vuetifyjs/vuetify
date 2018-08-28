@@ -1,7 +1,7 @@
 import VCounter from '@/components/VCounter'
 import { test, functionalContext } from '@/test'
 
-test('VCounter.js', ({ mount, compileToFunctions }) => {
+test('VCounter.js', ({ mount }) => {
   it('should render component', () => {
     const context = functionalContext({ props: { value: 5, max: 10 }})
     const wrapper = mount(VCounter, context)

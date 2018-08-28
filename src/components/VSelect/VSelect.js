@@ -13,24 +13,19 @@ import VTextField from '../VTextField/VTextField'
 // Mixins
 import Comparable from '../../mixins/comparable'
 import Filterable from '../../mixins/filterable'
-import Menuable from '../../mixins/menuable'
 
 // Directives
 import ClickOutside from '../../directives/click-outside'
 
 // Helpers
-import { getPropertyFromItem, keyCodes } from '../../util/helpers'
-import { consoleError } from '../../util/console'
+import { camelize, getPropertyFromItem, keyCodes } from '../../util/helpers'
+import { consoleError, consoleWarn } from '../../util/console'
 
-// For api-generator
-const fakeVMenu = {
-  name: 'v-menu',
-  props: VMenu.props // TODO: remove some, just for testing
-}
-
-const fakeMenuable = {
-  name: 'menuable',
-  props: Menuable.props
+export const defaultMenuProps = {
+  closeOnClick: false,
+  closeOnContentClick: false,
+  openOnClick: false,
+  maxHeight: 300
 }
 
 /* @vue/component */
@@ -44,8 +39,6 @@ export default {
   extends: VTextField,
 
   mixins: [
-    fakeVMenu,
-    fakeMenuable,
     Comparable,
     Filterable
   ],
@@ -60,7 +53,6 @@ export default {
       type: null,
       default: false
     },
-    auto: Boolean,
     browserAutocomplete: {
       type: String,
       default: 'on'
@@ -68,7 +60,6 @@ export default {
     cacheItems: Boolean,
     chips: Boolean,
     clearable: Boolean,
-    contentClass: String,
     deletableChips: Boolean,
     dense: Boolean,
     hideSelected: Boolean,
@@ -92,23 +83,17 @@ export default {
       type: [String, Array, Function],
       default: 'value'
     },
-    maxHeight: {
-      type: [Number, String],
-      default: 300
-    },
-    minWidth: {
-      type: [Boolean, Number, String],
-      default: 0
+    menuProps: {
+      type: [String, Array, Object],
+      default: () => defaultMenuProps
     },
     multiple: Boolean,
-    multiLine: Boolean,
     openOnClear: Boolean,
     returnObject: Boolean,
     searchInput: {
       default: null
     },
-    smallChips: Boolean,
-    singleLine: Boolean
+    smallChips: Boolean
   },
 
   data: vm => ({
@@ -171,28 +156,14 @@ export default {
     isDirty () {
       return this.selectedItems.length > 0
     },
-    menuProps () {
-      return {
-        closeOnClick: false,
-        closeOnContentClick: false,
-        openOnClick: false,
-        value: this.isMenuActive,
-        offsetY: this.offsetY,
-        nudgeBottom: this.nudgeBottom
-          ? this.nudgeBottom
-          : this.offsetY ? 1 : 0 // convert to int
-      }
-    },
     listData () {
       return {
         props: {
           action: this.multiple && !this.isHidingSelected,
           color: this.color,
-          dark: this.dark,
           dense: this.dense,
           hideSelected: this.hideSelected,
           items: this.virtualizedItems,
-          light: this.light,
           noDataText: this.$vuetify.t(this.noDataText),
           selectedItems: this.selectedItems,
           itemAvatar: this.itemAvatar,
@@ -209,16 +180,40 @@ export default {
       }
     },
     staticList () {
-      if (this.$slots['no-data']) {
+      if (this.$slots['no-data'] || this.$slots['prepend-item'] || this.$slots['append-item']) {
         consoleError('assert: staticList should not be called if slots are used')
       }
 
       return this.$createElement(VSelectList, this.listData)
     },
     virtualizedItems () {
-      return !this.auto
-        ? this.computedItems.slice(0, this.lastItem)
-        : this.computedItems
+      return this.$_menuProps.auto
+        ? this.computedItems
+        : this.computedItems.slice(0, this.lastItem)
+    },
+    menuCanShow () { return true },
+    $_menuProps () {
+      let normalisedProps
+
+      normalisedProps = typeof this.menuProps === 'string'
+        ? this.menuProps.split(',')
+        : this.menuProps
+
+      if (Array.isArray(normalisedProps)) {
+        normalisedProps = normalisedProps.reduce((acc, p) => {
+          acc[p.trim()] = true
+          return acc
+        }, {})
+      }
+
+      return {
+        ...defaultMenuProps,
+        value: this.menuCanShow && this.isMenuActive,
+        nudgeBottom: this.nudgeBottom
+          ? this.nudgeBottom
+          : normalisedProps.offsetY ? 1 : 0, // convert to int
+        ...normalisedProps
+      }
     }
   },
 
@@ -320,7 +315,6 @@ export default {
         staticClass: 'v-chip--select-multi',
         props: {
           close: this.deletableChips && !isDisabled,
-          dark: this.dark,
           disabled: isDisabled,
           selected: index === this.selectedIndex,
           small: this.smallChips
@@ -341,24 +335,20 @@ export default {
       // Item may be an object
       // TODO: Remove JSON.stringify
       const key = JSON.stringify(this.getValue(item))
-
+      const color = index === this.selectedIndex && this.color
       const isDisabled = (
         this.disabled ||
         this.readonly ||
         this.getDisabled(item)
       )
 
-      const classes = index === this.selectedIndex
-        ? this.addTextColorClassChecks()
-        : {}
-
-      classes['v-select__selection--disabled'] = isDisabled
-
-      return this.$createElement('div', {
+      return this.$createElement('div', this.setTextColor(color, {
         staticClass: 'v-select__selection v-select__selection--comma',
-        'class': classes,
+        'class': {
+          'v-select__selection--disabled': isDisabled
+        },
         key
-      }, `${this.getText(item)}${last ? '' : ', '}`)
+      }), `${this.getText(item)}${last ? '' : ', '}`)
     },
     genDefaultSlot () {
       const selections = this.genSelections()
@@ -374,16 +364,20 @@ export default {
         selections.children.push(input)
       }
 
-      const activator = this.genSelectSlot([
-        this.genLabel(),
-        this.prefix ? this.genAffix('prefix') : null,
-        selections,
-        this.suffix ? this.genAffix('suffix') : null,
-        this.genClearIcon(),
-        this.genIconSlot()
-      ])
-
-      return [this.genMenu(activator)]
+      return [
+        this.$createElement('div', {
+          staticClass: 'v-select__slot',
+          directives: this.directives
+        }, [
+          this.genLabel(),
+          this.prefix ? this.genAffix('prefix') : null,
+          selections,
+          this.suffix ? this.genAffix('suffix') : null,
+          this.genClearIcon(),
+          this.genIconSlot()
+        ]),
+        this.genMenu()
+      ]
     },
     genInput () {
       const input = VTextField.methods.genInput.call(this)
@@ -396,38 +390,67 @@ export default {
     },
     genList () {
       // If there's no slots, we can use a cached VNode to improve performance
-      if (this.$slots['no-data']) {
+      if (this.$slots['no-data'] || this.$slots['prepend-item'] || this.$slots['append-item']) {
         return this.genListWithSlot()
       } else {
         return this.staticList
       }
     },
     genListWithSlot () {
+      const slots = ['prepend-item', 'no-data', 'append-item']
+        .filter(slotName => this.$slots[slotName])
+        .map(slotName => this.$createElement('template', {
+          slot: slotName
+        }, this.$slots[slotName]))
       // Requires destructuring due to Vue
       // modifying the `on` property when passed
       // as a referenced object
       return this.$createElement(VSelectList, {
         ...this.listData
-      }, [
-        this.$createElement('template', {
-          slot: 'no-data'
-        }, this.$slots['no-data'])
-      ])
+      }, slots)
     },
-    genMenu (activator) {
-      const props = {
-        contentClass: this.contentClass
-      }
-      const inheritedProps = Object.keys(VMenu.props).concat(Object.keys(Menuable.props))
-
-      // Later this might be filtered
-      for (let prop of inheritedProps) {
-        props[prop] = this[prop]
-      }
-
+    genMenu () {
+      const props = this.$_menuProps
       props.activator = this.$refs['input-slot']
 
-      Object.assign(props, this.menuProps)
+      // Deprecate using menu props directly
+      // TODO: remove (2.0)
+      const inheritedProps = Object.keys(VMenu.options.props)
+
+      const deprecatedProps = Object.keys(this.$attrs).reduce((acc, attr) => {
+        if (inheritedProps.includes(camelize(attr))) acc.push(attr)
+        return acc
+      }, [])
+
+      for (const prop of deprecatedProps) {
+        props[camelize(prop)] = this.$attrs[prop]
+      }
+
+      if (process.env.NODE_ENV !== 'production') {
+        if (deprecatedProps.length) {
+          const multiple = deprecatedProps.length > 1
+          let replacement = deprecatedProps.reduce((acc, p) => {
+            acc[camelize(p)] = this.$attrs[p]
+            return acc
+          }, {})
+          const props = deprecatedProps.map(p => `'${p}'`).join(', ')
+          const separator = multiple ? '\n' : '\''
+
+          const onlyBools = Object.keys(replacement).every(prop => {
+            const propType = VMenu.options.props[prop]
+            const value = replacement[prop]
+            return value === true || ((propType.type || propType) === Boolean && value === '')
+          })
+
+          if (onlyBools) {
+            replacement = Object.keys(replacement).join(', ')
+          } else {
+            replacement = JSON.stringify(replacement, null, multiple ? 2 : 0).replace(/"([^(")"]+)":/g, '$1:').replace(/"/g, '\'')
+          }
+
+          consoleWarn(`${props} ${multiple ? 'are' : 'is'} deprecated, use ${separator}:menu-props="${replacement}"${separator} instead`, this)
+        }
+      }
 
       // Attach to root el so that
       // menu covers prepend/append icons
@@ -451,7 +474,7 @@ export default {
           }
         },
         ref: 'menu'
-      }, [activator, this.genList()])
+      }, [this.genList()])
     },
     genSelections () {
       let length = this.selectedItems.length
@@ -476,13 +499,6 @@ export default {
 
       return this.$createElement('div', {
         staticClass: 'v-select__selections'
-      }, children)
-    },
-    genSelectSlot (children) {
-      return this.$createElement('div', {
-        staticClass: 'v-select__slot',
-        directives: this.directives,
-        slot: 'activator'
       }, children)
     },
     genSlotSelection (item, index) {
@@ -537,7 +553,6 @@ export default {
       e.preventDefault()
       this.isMenuActive = false
     },
-    // Detect tab and call original onBlur method
     onKeyDown (e) {
       const keyCode = e.keyCode
 
@@ -547,6 +562,8 @@ export default {
         keyCodes.space,
         keyCodes.up, keyCodes.down
       ].includes(keyCode)) this.activateMenu()
+
+      if (this.isMenuActive && this.$refs.menu) this.$refs.menu.changeListIndex(e)
 
       // This should do something different
       if (keyCode === keyCodes.enter) return this.onEnterDown()

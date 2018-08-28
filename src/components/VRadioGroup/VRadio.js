@@ -14,9 +14,6 @@ import {
   inject as RegistrableInject
 } from '../../mixins/registrable'
 
-// Utils
-import { keyCodes } from '../../util/helpers'
-
 /* @vue/component */
 export default {
   name: 'v-radio',
@@ -32,7 +29,7 @@ export default {
 
   props: {
     color: {
-      type: [Boolean, String],
+      type: String,
       default: 'accent'
     },
     disabled: Boolean,
@@ -56,25 +53,18 @@ export default {
   }),
 
   computed: {
-    classes () {
-      const classes = {
-        'v-radio--is-disabled': this.isDisabled,
-        'v-radio--is-focused': this.isFocused,
-        'theme--dark': this.dark,
-        'theme--light': this.light
-      }
-
-      if (!this.parentError && this.isActive) {
-        return this.addTextColorClassChecks(classes)
-      }
-
-      return classes
+    computedData () {
+      return this.setTextColor(!this.parentError && this.isActive && this.color, {
+        staticClass: 'v-radio',
+        'class': {
+          'v-radio--is-disabled': this.isDisabled,
+          'v-radio--is-focused': this.isFocused,
+          ...this.themeClasses
+        }
+      })
     },
-    classesSelectable () {
-      return this.addTextColorClassChecks(
-        {},
-        this.isActive ? this.color : this.radio.validationState || false
-      )
+    computedColor () {
+      return this.isActive ? this.color : this.radio.validationState || false
     },
     computedIcon () {
       return this.isActive
@@ -130,16 +120,13 @@ export default {
           value: this.value,
           ...this.$attrs
         }),
-        !this.isDisabled && this.genRipple({
-          'class': this.classesSelectable
-        }),
-        this.$createElement(VIcon, {
-          'class': this.classesSelectable,
+        !this.isDisabled && this.genRipple(this.setTextColor(this.computedColor)),
+        this.$createElement(VIcon, this.setTextColor(this.computedColor, {
           props: {
             dark: this.dark,
             light: this.light
           }
-        }, this.computedIcon)
+        }), this.computedIcon)
       ])
     },
     onFocus () {
@@ -156,19 +143,11 @@ export default {
         this.$emit('change', this.value)
       }
     },
-    onKeydown (e) {
-      if ([keyCodes.enter, keyCodes.space].includes(e.keyCode)) {
-        e.preventDefault()
-        this.onChange()
-      }
-    }
+    onKeydown () {}
   },
 
   render (h) {
-    return h('div', {
-      staticClass: 'v-radio',
-      class: this.classes
-    }, [
+    return h('div', this.computedData, [
       this.genRadio(),
       this.genLabel()
     ])

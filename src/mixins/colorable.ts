@@ -1,4 +1,9 @@
 import Vue from 'vue'
+import { VNodeData } from 'vue/types/vnode'
+
+function isCssColor (color?: string | false): boolean {
+  return !!color && !!color.match(/^(#|(rgb|hsl)a?\()/)
+}
 
 export default Vue.extend({
   name: 'colorable',
@@ -7,40 +12,42 @@ export default Vue.extend({
     color: String
   },
 
-  data () {
-    return {
-      defaultColor: undefined
-    }
-  },
-
-  computed: {
-    computedColor (): string | undefined {
-      return this.color || this.defaultColor
-    }
-  },
-
   methods: {
-    addBackgroundColorClassChecks<T, C extends string> (obj?: T, color?: C): T & Record<C, true> {
-      const classes: any = Object.assign({}, obj)
-      const selectedColor = color === undefined ? this.computedColor : color
-
-      if (selectedColor) {
-        classes[selectedColor] = true
+    setBackgroundColor (color?: string | false, data: VNodeData = {}): VNodeData {
+      if (isCssColor(color)) {
+        data.style = {
+          ...data.style,
+          'background-color': `${color}`,
+          'border-color': `${color}`
+        }
+      } else if (color) {
+        data.class = {
+          ...data.class,
+          [color]: true
+        }
       }
 
-      return classes
+      return data
     },
-    addTextColorClassChecks (obj?: any, color?: string | null): any {
-      const classes = Object.assign({}, obj)
-      if (color === undefined) color = this.computedColor
 
-      if (color) {
-        const [colorName, colorModifier] = color.toString().trim().split(' ')
-        classes[colorName + '--text'] = true
-        colorModifier && (classes['text--' + colorModifier] = true)
+    setTextColor (color?: string | false, data: VNodeData = {}): VNodeData {
+      if (isCssColor(color)) {
+        data.style = {
+          ...data.style,
+          'color': `${color}`,
+          'caret-color': `${color}`
+        }
+      } else if (color) {
+        const [colorName, colorModifier] = color.toString().trim().split(' ', 2) as (string | undefined)[]
+        data.class = {
+          ...data.class,
+          [colorName + '--text']: true
+        }
+        if (colorModifier) {
+          data.class['text--' + colorModifier] = true
+        }
       }
-
-      return classes
+      return data
     }
   }
 })

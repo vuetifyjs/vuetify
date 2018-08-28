@@ -43,6 +43,7 @@ export default {
 
   provide () {
     return {
+      tabs: this,
       tabClick: this.tabClick,
       tabProxy: this.tabProxy,
       registerItems: this.registerItems,
@@ -73,6 +74,22 @@ export default {
         bar: 0,
         container: 0,
         wrapper: 0
+      }
+    }
+  },
+
+  computed: {
+    isDark () {
+      // Always inherit from parent
+      return this.theme.isDark
+    },
+    selfIsDark () {
+      return Themeable.options.computed.isDark.call(this)
+    },
+    themeClasses () {
+      return {
+        'theme--dark': this.selfIsDark,
+        'theme--light': !this.selfIsDark
       }
     }
   },

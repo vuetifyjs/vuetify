@@ -10,7 +10,7 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 ### $250+
 - [Eikos Partners](http://www.eikospartners.com/)
 - [rateGenius](https://application.rategenius.com/)
-- [quitt](https://quitt.ch/)
+- [Clearblue Technologies](http://www.clearbluetechnologies.com/)
 - [DigitalMaas](https://www.digitalmaas.com/)
 
 ### $100+
@@ -40,7 +40,7 @@ You can join them in supporting Vuetify.js by [pledging on Patreon](https://www.
 - Joel Hatch
 - David Briscese
 - Juha Vehnia
-- Max Hodges
+- [White Rabbit Express](https://www.whiterabbitexpress.com/) <!-- Max Hodges -->
 - Kent Johnson
 - Working Group Two
 

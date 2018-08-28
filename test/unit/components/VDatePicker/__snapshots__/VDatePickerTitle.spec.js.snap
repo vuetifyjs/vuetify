@@ -6,7 +6,7 @@ exports[`VDatePickerTitle.js should render component and match snapshot 1`] = `
   <div class="v-picker__title__btn v-date-picker-title__year">
     1234
   </div>
-  <div class="v-picker__title__btn v-date-picker-title__date active">
+  <div class="v-picker__title__btn v-date-picker-title__date v-picker__title__btn--active">
     <div>
       2005-11-01
     </div>
@@ -18,7 +18,7 @@ exports[`VDatePickerTitle.js should render component and match snapshot 1`] = `
 exports[`VDatePickerTitle.js should render component when selecting year and match snapshot 1`] = `
 
 <div class="v-date-picker-title">
-  <div class="v-picker__title__btn v-date-picker-title__year active">
+  <div class="v-picker__title__btn v-date-picker-title__year v-picker__title__btn--active">
     1234
   </div>
   <div class="v-picker__title__btn v-date-picker-title__date">
@@ -35,7 +35,7 @@ exports[`VDatePickerTitle.js should render year icon 1`] = `
 <div class="v-picker__title__btn v-date-picker-title__year">
   1234
   <i aria-hidden="true"
-     class="v-icon theme--dark material-icons"
+     class="v-icon material-icons theme--dark"
   >
     year
   </i>

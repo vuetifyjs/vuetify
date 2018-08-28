@@ -1,9 +1,28 @@
-import { colorToInt, intToHex, RGB } from './colorUtils'
+import { colorToInt, intToHex, colorToHex, RGB } from './colorUtils'
 import * as sRGB from './color/transformSRGB'
 import * as LAB from './color/transformCIELAB'
 import { VuetifyTheme } from 'types'
 
-export function parse (theme: VuetifyTheme): VuetifyTheme {
+interface ParsedThemeItem {
+  base: string
+  lighten5: string
+  lighten4: string
+  lighten3: string
+  lighten2: string
+  lighten1: string
+  darken1: string
+  darken2: string
+  darken3: string
+  darken4: string
+
+  [name: string]: string
+}
+
+interface ParsedTheme {
+  [name: string]: ParsedThemeItem
+}
+
+export function parse (theme: VuetifyTheme | Record<string, number | string>, isItem = false): ParsedTheme {
   const colors = Object.keys(theme)
   const parsedTheme: any = {}
 
@@ -11,7 +30,15 @@ export function parse (theme: VuetifyTheme): VuetifyTheme {
     const name = colors[i]
     const value = theme[name]
 
-    parsedTheme[name] = colorToInt(value)
+    if (isItem) {
+      if (name === 'base' || name.startsWith('lighten') || name.startsWith('darken')) {
+        parsedTheme[name] = colorToHex(value)
+      }
+    } else if (typeof value === 'object') {
+      parsedTheme[name] = parse(value, true)
+    } else {
+      parsedTheme[name] = genVariations(name, colorToInt(value))
+    }
   }
 
   return parsedTheme
@@ -20,51 +47,87 @@ export function parse (theme: VuetifyTheme): VuetifyTheme {
 /**
  * Generate the CSS for a base color (.primary)
  */
-export const genBaseColor = (name: string, value: RGB): string => {
-  const rgb = intToHex(value)
+const genBaseColor = (name: string, value: string): string => {
   return `
 .${name} {
-  background-color: ${rgb} !important;
-  border-color: ${rgb} !important;
+  background-color: ${value} !important;
+  border-color: ${value} !important;
 }
 .${name}--text {
-  color: ${rgb} !important;
-}
-.${name}--text input,
-.${name}--text textarea {
-  caret-color: ${rgb} !important;
+  color: ${value} !important;
+  caret-color: ${value} !important;
 }`
 }
 
 /**
  * Generate the CSS for a variant color (.primary.darken-2)
  */
-export const genVariantColor = (name: string, value: RGB, type: 'darken' | 'lighten', n: number): string => {
-  const rgb = intToHex(value)
+const genVariantColor = (name: string, variant: string, value: string): string => {
+  const [type, n] = variant.split(/(\d)/, 2)
   return `
 .${name}.${type}-${n} {
-  background-color: ${rgb} !important;
-  border-color: ${rgb} !important;
+  background-color: ${value} !important;
+  border-color: ${value} !important;
 }
 .${name}--text.text--${type}-${n} {
-  color: ${rgb} !important;
-}
-.${name}--text.text--${type}-${n} input,
-.${name}--text.text--${type}-${n} textarea {
-  caret-color: ${rgb} !important;
+  color: ${value} !important;
+  caret-color: ${value} !important;
 }`
 }
 
-export function genVariations (name: string, value: RGB): RGB[] {
-  const values = Array(10)
-  values[0] = genBaseColor(name, value)
+const genColorVariableName = (name: string, variant = 'base'): string => `--v-${name}-${variant}`
 
-  for (let i = 1, n = 5; i <= 5; ++i, --n) {
-    values[i] = genVariantColor(name, lighten(value, n), 'lighten', n)
+const genColorVariable = (name: string, variant = 'base'): string => `var(${genColorVariableName(name, variant)})`
+
+export function genStyles (theme: ParsedTheme, cssVar = false): string {
+  const colors = Object.keys(theme)
+
+  if (!colors.length) return ''
+
+  let variablesCss = ''
+  let css = ''
+
+  const aColor = cssVar ? genColorVariable('primary') : theme.primary.base
+  css += `a { color: ${aColor}; }`
+
+  for (let i = 0; i < colors.length; ++i) {
+    const name = colors[i]
+    const value = theme[name]
+
+    if (typeof value !== 'object') continue
+
+    css += genBaseColor(name, cssVar ? genColorVariable(name) : value.base)
+    cssVar && (variablesCss += `  ${genColorVariableName(name)}: ${value.base};\n`)
+
+    const variants = Object.keys(value)
+    for (let i = 0; i < variants.length; ++i) {
+      const variant = variants[i]
+      const variantValue = value[variant]
+      if (variant === 'base') continue
+
+      css += genVariantColor(name, variant, cssVar ? genColorVariable(name, variant) : variantValue)
+      cssVar && (variablesCss += `  ${genColorVariableName(name, variant)}: ${variantValue};\n`)
+    }
+  }
+
+  if (cssVar) {
+    variablesCss = `:root {\n${variablesCss}}\n\n`
+  }
+
+  return variablesCss + css
+}
+
+export function genVariations (name: string, value: RGB): Record<string, string> {
+  const values: Record<string, string> = {
+    base: intToHex(value)
+  }
+
+  for (let i = 5; i > 0; --i) {
+    values[`lighten${i}`] = intToHex(lighten(value, i))
   }
 
   for (let i = 1; i <= 4; ++i) {
-    values[i + 5] = genVariantColor(name, darken(value, i), 'darken', i)
+    values[`darken${i}`] = intToHex(darken(value, i))
   }
 
   return values

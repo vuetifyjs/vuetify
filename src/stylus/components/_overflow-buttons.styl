@@ -25,10 +25,8 @@ theme(v-overflow-btn, "v-overflow-btn")
 .v-overflow-btn
   margin-top: 12px
 
-  &:not(.v-overflow-btn--editable)
-    .v-menu__activator,
-    .v-menu__activator *
-      cursor: pointer
+  &:not(.v-overflow-btn--editable) > .v-input__control > .v-input__slot
+    cursor: pointer
 
   .v-select__slot
     height: 48px

@@ -4,7 +4,7 @@
 v-select($material)
   // Needs an explicit color to override
   // higher level color
-  &__selections
+  .v-select__selections
     color: $material.text.primary
 
   &.v-input--is-disabled
@@ -26,10 +26,6 @@ theme(v-select, 'v-select')
 
   & > .v-input__control > .v-input__slot
     cursor: pointer
-
-  .v-menu
-    flex: 1 1 auto
-    width: 100%
 
   .v-chip
     flex: 0 1 auto
@@ -100,6 +96,7 @@ theme(v-select, 'v-select')
       margin: 7px 4px 7px 0
 
   &__slot
+    position: relative
     align-items: center
     display: flex
     width: 100%

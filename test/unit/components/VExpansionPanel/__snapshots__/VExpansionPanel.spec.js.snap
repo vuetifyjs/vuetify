@@ -2,7 +2,7 @@
 
 exports[`VExpansionPanel.js should render an expanded component and match snapshot 1`] = `
 
-<ul class="v-expansion-panel">
+<ul class="v-expansion-panel theme--light">
   <li tabindex="0"
       class="v-expansion-panel__container"
   >
@@ -12,7 +12,7 @@ exports[`VExpansionPanel.js should render an expanded component and match snapsh
       </div>
       <div class="v-expansion-panel__header__icon">
         <i aria-hidden="true"
-           class="v-icon material-icons"
+           class="v-icon material-icons theme--light"
         >
           keyboard_arrow_down
         </i>
@@ -30,7 +30,7 @@ exports[`VExpansionPanel.js should render an expanded component and match snapsh
 
 exports[`VExpansionPanel.js should render an expanded component and match snapshot 2`] = `
 
-<ul class="v-expansion-panel">
+<ul class="v-expansion-panel theme--light">
   <li tabindex="0"
       class="v-expansion-panel__container v-expansion-panel__container--active"
   >
@@ -40,13 +40,13 @@ exports[`VExpansionPanel.js should render an expanded component and match snapsh
       </div>
       <div class="v-expansion-panel__header__icon">
         <i aria-hidden="true"
-           class="v-icon material-icons"
+           class="v-icon material-icons theme--light"
         >
           keyboard_arrow_down
         </i>
       </div>
     </div>
-    <div class="v-expansion-panel__body"
+    <div class="v-expansion-panel__body expand-transition-enter expand-transition-enter-active"
          style="overflow: hidden; height: 0px; display: block;"
     >
       content
@@ -58,7 +58,7 @@ exports[`VExpansionPanel.js should render an expanded component and match snapsh
 
 exports[`VExpansionPanel.js should render component and match snapshot 1`] = `
 
-<ul class="v-expansion-panel">
+<ul class="v-expansion-panel theme--light">
   <li tabindex="0"
       class="v-expansion-panel__container"
   >
@@ -68,7 +68,7 @@ exports[`VExpansionPanel.js should render component and match snapshot 1`] = `
       </div>
       <div class="v-expansion-panel__header__icon">
         <i aria-hidden="true"
-           class="v-icon material-icons"
+           class="v-icon material-icons theme--light"
         >
           keyboard_arrow_down
         </i>
@@ -86,7 +86,7 @@ exports[`VExpansionPanel.js should render component and match snapshot 1`] = `
 
 exports[`VExpansionPanel.js should render component and match snapshot 2`] = `
 
-<ul class="v-expansion-panel">
+<ul class="v-expansion-panel theme--light">
   <li tabindex="0"
       class="v-expansion-panel__container v-expansion-panel__container--active"
   >
@@ -96,13 +96,13 @@ exports[`VExpansionPanel.js should render component and match snapshot 2`] = `
       </div>
       <div class="v-expansion-panel__header__icon">
         <i aria-hidden="true"
-           class="v-icon material-icons"
+           class="v-icon material-icons theme--light"
         >
           keyboard_arrow_down
         </i>
       </div>
     </div>
-    <div class="v-expansion-panel__body"
+    <div class="v-expansion-panel__body expand-transition-enter expand-transition-enter-active"
          style="overflow: hidden; height: 0px; display: block;"
     >
       content
@@ -114,7 +114,7 @@ exports[`VExpansionPanel.js should render component and match snapshot 2`] = `
 
 exports[`VExpansionPanel.js should show content on v-model change 1`] = `
 
-<ul class="v-expansion-panel">
+<ul class="v-expansion-panel theme--light">
   <li tabindex="0"
       class="v-expansion-panel__container"
   >

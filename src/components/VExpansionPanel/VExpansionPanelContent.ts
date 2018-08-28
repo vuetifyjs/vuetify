@@ -6,7 +6,7 @@ import Rippleable from '../../mixins/rippleable'
 import { Registrable, inject as RegistrableInject } from '../../mixins/registrable'
 
 import VIcon from '../VIcon'
-import VExpansionPanel from '.'
+import VExpansionPanel from './VExpansionPanel'
 
 import mixins, { ExtractVue } from '../../util/mixins'
 import Vue, { VNode } from 'vue'
@@ -21,12 +21,12 @@ interface options extends Vue {
 
 export default mixins<options &
 /* eslint-disable indent */
-  ExtractVue<
+  ExtractVue<[
     typeof Bootable,
     typeof Toggleable,
     typeof Rippleable,
     Registrable<'expansionPanel'>
-  >
+  ]>
 /* eslint-enable indent */
 >(
   Bootable,

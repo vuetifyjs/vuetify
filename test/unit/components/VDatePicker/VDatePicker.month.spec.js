@@ -1,7 +1,5 @@
-import Vue from 'vue'
 import { test } from '@/test'
-import VDatePicker from '@/components/VDatePicker'
-import VMenu from '@/components/VMenu'
+import VDatePicker from '@/components/VDatePicker/VDatePicker'
 
 test('VDatePicker.js', ({ mount, compileToFunctions }) => {
   it('should emit input event on year click (reactive picker)', async () => {

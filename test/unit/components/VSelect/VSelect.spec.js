@@ -226,7 +226,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     const wrapper = mount(VSelect, {
       propsData: {
-        contentClass: 'v-menu-class',
+        menuProps: { contentClass: 'v-menu-class' },
         items
       }
     })
@@ -395,6 +395,42 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     const list = wrapper.first('.v-list')
 
     expect(wrapper.vm.$slots['no-data']).toBeTruthy()
+    expect(list.html()).toMatchSnapshot()
+  })
+
+  it('should use slotted prepend-item', () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        items: ['foo']
+      },
+      slots: {
+        'prepend-item': [{
+          render: h => h('div', 'foo')
+        }]
+      }
+    })
+
+    const list = wrapper.first('.v-list')
+
+    expect(wrapper.vm.$slots['prepend-item']).toBeTruthy()
+    expect(list.html()).toMatchSnapshot()
+  })
+
+  it('should use slotted append-item', () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        items: ['foo']
+      },
+      slots: {
+        'append-item': [{
+          render: h => h('div', 'foo')
+        }]
+      }
+    })
+
+    const list = wrapper.first('.v-list')
+
+    expect(wrapper.vm.$slots['append-item']).toBeTruthy()
     expect(list.html()).toMatchSnapshot()
   })
 
