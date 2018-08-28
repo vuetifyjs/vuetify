@@ -439,7 +439,7 @@ anymatch@^2.0.0:
 
 api-generator@vuetifyjs/api-generator:
   version "1.0.0"
-  resolved "https://codeload.github.com/vuetifyjs/api-generator/tar.gz/3bd034679562f614ea32d86f08a21a0e99cf6fc2"
+  resolved "https://codeload.github.com/vuetifyjs/api-generator/tar.gz/d860b382f53c955af44fb31d7bf39c541cca7a8b"
 
 aproba@^1.0.3, aproba@^1.1.1:
   version "1.2.0"
@@ -7472,9 +7472,9 @@ vuelidate@^0.6.2:
   version "0.6.2"
   resolved "https://registry.yarnpkg.com/vuelidate/-/vuelidate-0.6.2.tgz#b417f5367407b047a2548119b25db56fe2bd5753"
 
-vuetify@^1.2.0-beta.3:
-  version "1.2.0-beta.3"
-  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-1.2.0-beta.3.tgz#4b3abc873fdcbd79f7078b27f56e5d94a865615a"
+vuetify@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-1.2.0.tgz#def94061a49a2973ae971467d365bf4275697607"
 
 vuex-router-sync@^5.0.0:
   version "5.0.0"
