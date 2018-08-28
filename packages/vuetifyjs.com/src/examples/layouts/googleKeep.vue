@@ -1,5 +1,5 @@
 <template>
-  <v-app id="inspire">
+  <v-app id="keep">
     <v-navigation-drawer
       v-model="drawer"
       fixed
@@ -52,7 +52,7 @@
     </v-navigation-drawer>
     <v-toolbar color="amber" app absolute clipped-left>
       <v-toolbar-side-icon @click.native="drawer = !drawer"></v-toolbar-side-icon>
-      <span class="title ml-3 mr-5">Google&nbsp;<span class="text">Keep</span></span>
+      <span class="title ml-3 mr-5">Google&nbsp;<span class="font-weight-light">Keep</span></span>
       <v-text-field
         solo-inverted
         flat
@@ -118,16 +118,8 @@
   }
 </script>
 
-<style>
-  #keep main .container {
-    height: 660px;
-  }
-
-  .v-navigation-drawer__border {
-    display: none;
-  }
-
-  .text {
-    font-weight: 400;
-  }
+<style lang="stylus">
+  #keep
+    .v-navigation-drawer__border
+      display: none
 </style>

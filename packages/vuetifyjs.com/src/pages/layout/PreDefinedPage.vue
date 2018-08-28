@@ -39,7 +39,7 @@
                 target="_blank"
                 rel="noopener"
               )
-                v-card-media(height="250px" :src="genSrc(layout.name)")
+                v-img(height="250px" :src="genSrc(layout.name)")
                   v-layout(align-center)
                     v-flex.text-xs-center
                       div(:class="[layout.dark ? 'white--text' : '']").title {{ layout.name }}

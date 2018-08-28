@@ -47,7 +47,7 @@
         v-card-text
           v-btn(
             color="blue darken-2 white--text"
-            @click.stop="dialog = true"
+            @click="dialog = true"
           ) EXPORT THEME
         v-list
           v-list-tile(

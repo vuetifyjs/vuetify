@@ -29,11 +29,12 @@
   },
   "props": {
     "disabled": "Components.Inputs.props.disabled",
-    "large": "Makes the icon large **(36px)**",
+    "large": "Mixins.Sizeable.props.large",
     "left": "Places icon on the left, when used inside a button",
-    "medium": "Makes the icon medium **(28px)**",
+    "medium": "Mixins.Sizeable.props.medium",
     "right": "Places icon on the right, when used inside a button",
-    "small": "Makes the icon small **(16px)**",
-    "xLarge": "Makes the icon extra large **(40px)**"
+    "size": "Mixins.Sizeable.props.size",
+    "small": "Mixins.Sizeable.props.small",
+    "xLarge": "Mixins.Sizeable.props.xLarge"
   }
 }

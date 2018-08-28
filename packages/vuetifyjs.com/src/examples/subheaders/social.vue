@@ -38,7 +38,7 @@
           md4
         >
           <v-card>
-            <v-card-media
+            <v-img
               :src="`https://picsum.photos/200/300?image=${getImage()}`"
               height="300px"
             >
@@ -46,7 +46,7 @@
                 class="headline white--text pl-3 pt-3"
                 v-text="card.title"
               ></span>
-            </v-card-media>
+            </v-img>
 
             <v-card-actions class="white justify-center">
               <v-btn

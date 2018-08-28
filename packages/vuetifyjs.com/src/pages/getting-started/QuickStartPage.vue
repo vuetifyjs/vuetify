@@ -37,6 +37,7 @@
 
         helpers-markup(lang="bash")
           | $ vue create my-app
+          | $ cd my-app
 
         helpers-section-text(:value="`${namespace}.vueCliText5`")
 

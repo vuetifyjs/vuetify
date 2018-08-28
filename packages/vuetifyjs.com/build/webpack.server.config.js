@@ -7,6 +7,7 @@ const VueSSRServerPlugin = require('vue-server-renderer/server-plugin')
 const isProd = process.env.NODE_ENV === 'production'
 
 module.exports = merge(base, {
+  name: 'server',
   target: 'node',
   entry: './src/entry-server.js',
   output: {
@@ -17,7 +18,7 @@ module.exports = merge(base, {
   // https://github.com/liady/webpack-node-externals
   externals: nodeExternals({
     // do not externalize CSS files in case we need to import it from a dep
-    whitelist: isProd ? /\.css$/ : [/\.css$/, 'vuetify']
+    whitelist: isProd ? undefined : 'vuetify'
   }),
   module: {
     rules: [
@@ -37,6 +38,8 @@ module.exports = merge(base, {
   ],
   optimization: {
     minimize: false,
-    splitChunks: false
+    splitChunks: false,
+    removeAvailableModules: isProd,
+    removeEmptyChunks: isProd
   }
 })

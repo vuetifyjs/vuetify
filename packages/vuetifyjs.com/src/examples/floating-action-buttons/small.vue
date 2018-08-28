@@ -11,7 +11,7 @@
             bottom
             left
             absolute
-            @click.native.stop="dialog = !dialog"
+            @click="dialog = !dialog"
           >
             <v-icon>add</v-icon>
           </v-btn>

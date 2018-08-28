@@ -8,11 +8,10 @@
   "customizingText1": "By default, Vuetify has a standard theme applied for all components.",
   "customizingText2": "This can be easily changed. Simply pass a **theme** property to the `Vue.use` function. You can choose to modify all or only some of the theme properties, with the remaining inheriting from the default.",
   "customizingText3": "You can also use the pre-defined material colors.",
-  "customizingText4": "Under the hood, Vuetify will generate css classes based upon these values that will be accessible in the DOM. These classes will follow the same markup as other helper classes, `primary` or `secondary--text` for example.",
+  "customizingText4": "Under the hood, Vuetify will generate css classes based upon these values that will be accessible in the DOM. These classes will follow the same markup as other helper classes, `primary` or `secondary--text` for example. If you supply an entire color object (as in `colors.purple` above), the lighten/darken variations will be used directly instead of being generated.",
   "customizingText5": "These values will also be made available on the instance **$vuetify** object under the **theme** property. This allows you to _dynamically_ modify your theme. Behind the scenes, Vuetify will regenerate and update your theme classes, seamlessly updating your application.",
   "optionHeader": "Options",
   "optionText1": "Vuetify generates theme styles at run-time for SPA's and server side for SSR applications. The generated styles will be placed in a `<style>` tag with the **id** of **vuetify-theme-stylesheet**.",
-  "optionText2": "By default, **primary**, **secondary** and **accent** will have darken and lighten classes created. This allows you to follow the same syntax as working with regular colors, i.e. `class=\"primary darken-1\"`. This can be changed during the plugin bootstrap:",
   "optionHeader2": "Minification",
   "optionText3": "For SSR applications, you can pass a callback function to **$vuetify.options.minifyTheme** to reduce the initial page size. When using this option, it is recommended to also use **themeCache**.",
   "optionHeader3": "Caching",
@@ -28,5 +27,9 @@
   "stylusHeader3": "Changing values",
   "stylusText7": "Now that stylus is configured, you can set default values for the stylus variables that you wish to change. These must be declared _before_ the import and will automatically override the Vuetify defaults.",
   "themeGeneratorHeader": "Theme generator",
-  "themeGeneratorText1": "Discover and generate new color themes for your **Vuetify** applications using our [Theme Generator](/theme-generator) tool."
+  "themeGeneratorText1": "Discover and generate new color themes for your **Vuetify** applications using our [Theme Generator](/theme-generator) tool.",
+  "variantsSubheader": "Custom theme variants",
+  "variantsText1": "While Vuetify automatically generates _lighten_ and _darken_ variants for theme colors, you may want to control this yourself. Simply pass a theme object that contains the variants that you wish to modify. Anything not provided will still be generated for you.",
+  "variantsText2": "You can now import your custom theme object and apply it to Vuetify",
+  "variantsText3": "Below is a full list of the overwritable keys on the theme object:"
 }

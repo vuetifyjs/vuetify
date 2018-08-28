@@ -1,7 +1,7 @@
 {
   "header": "Display",
   "headerText": "The display helpers allow you to control the display of content. This includes being conditionally visible based upon the current viewport, or the actual element display type.",
-  
+
   "visibilityHeader": "Visibility",
   "visibilityText": "Conditionally display an element based upon the current **viewport**. These classes can be applied using the following format `hidden-{breakpoint}-{condition}`",
   "breakpointText": "The _breakpoint_ sets the viewport size:",
@@ -26,5 +26,13 @@
     "`d-inline-block` - sets the element display property to `inline-block`",
     "`d-block` - sets the element display property to `block`",
     "`d-inline` - sets the element display property to `inline`"
+  ],
+  "exampleText": "Resize your screen to see the elements conditionally hide.",
+  "overflowHeader": "Overflow",
+  "overflowText": "Set the overflow for an element with `overflow-{axis}-hidden` or simply `overflow-hidden`.",
+  "overflows": [
+    "`overflow-hidden` - hide overflow on both the x and y axis",
+    "`overflow-y-hidden` - hide overflow on the y axis",
+    "`overflow-x-hidden` - hide overflow on the x axis"
   ]
 }

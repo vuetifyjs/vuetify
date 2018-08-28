@@ -3,6 +3,10 @@
     template(slot-scope="{ namespace }")
       section(v-if="usage")#usage
         helpers-section-head(value="Generic.Pages.usage")
+        helpers-section-text(
+          v-if="$te(`${namespace}.examples.usage.desc`)"
+          :value="`${namespace}.examples.usage.desc`"
+        )
         helpers-example(
           :new-in="usage.new"
           :file="`${folder}/${usage.file}`"
@@ -33,7 +37,7 @@
               single-line
               v-bind:items="components"
               v-model="current"
-              auto
+              menu-props="auto"
               :disabled="components.length < 2"
             )
             v-spacer

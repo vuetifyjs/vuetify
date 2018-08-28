@@ -22,19 +22,24 @@
         :source="$t(desc)"
       )
 
-    v-card(:class="{ 'elevation-0': readonly }").mt-4
+    v-card(
+      :dark="invertedProxy"
+      :class="{ 'elevation-0': readonly }"
+    ).mt-4
       //- Example options
-      v-toolbar(flat dense card v-if="!readonly").pr-1
+      v-toolbar(
+        flat dense card v-if="!readonly"
+      ).pr-1
         v-btn(
           :href="`#${id}`"
           icon
           @click.prevent.stop="goTo"
         )
-          v-icon(color="grey darken-1") mdi-pound-box
+          v-icon(:color="iconColor") mdi-pound-box
         v-spacer
         v-tooltip(lazy top v-if="hasInverted")
           v-btn(icon slot="activator" @click="invertedProxy = !invertedProxy")
-            v-icon(color="grey darken-1") invert_colors
+            v-icon(:color="iconColor") invert_colors
           span Invert colors
         v-tooltip(lazy top)
           v-btn(
@@ -44,7 +49,7 @@
             target="_blank"
             slot="activator"
           )
-            v-icon(color="grey darken-1") fab fa-github
+            v-icon(:color="iconColor") fab fa-github
           span View on Github
         v-tooltip(lazy top)
           v-btn(
@@ -52,7 +57,7 @@
             @click="sendToCodepen"
             slot="activator"
           )
-            v-icon(color="grey darken-1") fab fa-codepen
+            v-icon(:color="iconColor") fab fa-codepen
           span Edit in codepen
         v-tooltip(lazy top)
           v-btn(
@@ -60,7 +65,7 @@
             @click.stop="togglePanel"
             slot="activator"
           )
-            v-icon(color="grey darken-1") code
+            v-icon(:color="iconColor") code
           span View source
 
       //- Example markup
@@ -72,7 +77,6 @@
           v-divider(v-if="!readonly")
           v-tabs(
             ref="tabs"
-            color="grey lighten-4"
             v-show="!readonly"
           )
             v-tab(
@@ -167,6 +171,9 @@
     computed: {
       currentColor () {
         return this.$store.state.currentColor
+      },
+      iconColor () {
+        return 'grey ' + (this.invertedProxy ? 'lighten-1' : 'darken-1')
       },
       exampleClasses () {
         return {

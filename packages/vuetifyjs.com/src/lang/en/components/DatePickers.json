@@ -22,6 +22,10 @@
       "header": "Date pickers - Allowed dates",
       "desc": "You can specify allowed dates using arrays, objects, and functions."
     },
+    "dateMultiple": {
+      "header": "Date pickers - Mutiple",
+      "desc": "Date picker can now select multiple dates with the `multiple` prop. If using `multiple` then date picker expects its model to be an array."
+    },
     "dateWidth": {
       "header": "Date pickers - Setting picker width",
       "desc": "You can specify allowed the picker's width or make it full width."
@@ -69,6 +73,10 @@
     "monthAllowedMonths": {
       "header": "Month pickers - Allowed months",
       "desc": "You can specify allowed months using arrays, objects, and functions."
+    },
+    "monthMultiple": {
+      "header": "Month pickers - Multiple",
+      "desc": "Month pickers can now select multiple months with the `multiple` prop. If using `multiple` then the month picker expects its model to be an array."
     },
     "monthWidth": {
       "header": "Month pickers - Setting picker width",

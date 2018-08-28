@@ -5,7 +5,7 @@
       :loading="dialog"
       class="white--text"
       color="purple darken-2"
-      @click.stop="dialog = true"
+      @click="dialog = true"
     >
       Start loading
     </v-btn>

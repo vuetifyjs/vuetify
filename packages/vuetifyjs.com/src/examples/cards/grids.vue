@@ -1,6 +1,6 @@
 <template>
-  <v-layout column>
-    <v-flex xs12 sm6 offset-sm3>
+  <v-layout justify-center>
+    <v-flex xs12 sm6>
       <v-toolbar color="indigo" dark>
         <v-toolbar-side-icon></v-toolbar-side-icon>
         <v-toolbar-title>Discover</v-toolbar-title>
@@ -22,7 +22,7 @@
               :key="card.title"
             >
               <v-card>
-                <v-card-media
+                <v-img
                   :src="card.src"
                   height="200px"
                 >
@@ -37,7 +37,7 @@
                       </v-flex>
                     </v-layout>
                   </v-container>
-                </v-card-media>
+                </v-img>
 
                 <v-card-actions>
                   <v-spacer></v-spacer>

@@ -131,7 +131,7 @@
       color="pink"
       dark
       fixed
-      @click.stop="dialog = !dialog"
+      @click="dialog = !dialog"
     >
       <v-icon>add</v-icon>
     </v-btn>

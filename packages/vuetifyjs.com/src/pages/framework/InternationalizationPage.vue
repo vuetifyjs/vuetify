@@ -15,14 +15,23 @@
     section#getting-started
       helpers-section-head(value="Framework.Internationalization.gettingStarted")
       helpers-section-text(value="Framework.Internationalization.gettingStartedText")
+      helpers-section-text(value="Framework.Internationalization.availableLocalesText")
       helpers-markup(lang="js")
         | import Vuetify from 'vuetify'
+        |
+        | // Translation provided by Vuetify (javascript)
+        | import zhHans from 'vuetify/es5/locale/zh-Hans'
+        |
+        | // Translation provided by Vuetify (typescript)
+        | import pl from 'vuetify/src/locale/pl'
+        |
+        | // Your own translation file
         | import sv from './i18n/vuetify/sv'
         |
         | Vue.use(Vuetify, {
         |   lang: {
-        |     locales: { sv },
-        |     current: 'sv'
+        |     locales: { zhHans, pl, sv },
+        |     current: 'zhHans'
         |   }
         | })
         |

@@ -14,10 +14,10 @@
               xs4
             >
               <v-card flat tile>
-                <v-card-media
+                <v-img
                   :src="`https://unsplash.it/150/300?image=${Math.floor(Math.random() * 100) + 1}`"
                   height="150px"
-                ></v-card-media>
+                ></v-img>
               </v-card>
             </v-flex>
           </v-layout>

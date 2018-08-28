@@ -2,10 +2,10 @@
   <v-layout>
     <v-flex xs12 sm6 offset-sm3>
       <v-card>
-        <v-card-media
+        <v-img
           src="https://cdn.vuetifyjs.com/images/cards/desert.jpg"
-          height="200px"
-        ></v-card-media>
+          aspect-ratio="2.75"
+        ></v-img>
 
         <v-card-title primary-title>
           <div>

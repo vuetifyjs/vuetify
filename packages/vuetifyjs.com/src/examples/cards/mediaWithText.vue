@@ -2,7 +2,7 @@
   <v-layout>
     <v-flex xs12 sm6 offset-sm3>
       <v-card>
-        <v-card-media
+        <v-img
           class="white--text"
           height="200px"
           src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
@@ -14,7 +14,7 @@
               </v-flex>
             </v-layout>
           </v-container>
-        </v-card-media>
+        </v-img>
         <v-card-title>
           <div>
             <span class="grey--text">Number 10</span><br>

@@ -31,9 +31,6 @@ let plugins = [
 ]
 
 module.exports = {
-  devtool: isProd
-    ? false
-    : 'source-map',
   mode: isProd ? 'production' : 'development',
   output: {
     path: resolve('../dist'),

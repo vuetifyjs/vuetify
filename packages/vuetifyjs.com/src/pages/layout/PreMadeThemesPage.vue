@@ -9,7 +9,7 @@
             v-bind:key="template.title"
           )
             v-card(height="100%")
-              v-card-media(:src='template.screenshot' height="350px")
+              v-img(:src='template.screenshot' height="350px")
               v-card-title.align-center
                 h2.headline.mb-0 {{ template.title }}
                   translation-translatable(:i18n="`${template.namespace}.tag`" v-if="template.tag")

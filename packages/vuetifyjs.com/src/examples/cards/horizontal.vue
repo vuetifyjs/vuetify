@@ -38,11 +38,11 @@
             <v-card color="cyan darken-2" class="white--text">
               <v-layout>
                 <v-flex xs5>
-                  <v-card-media
+                  <v-img
                     src="https://cdn.vuetifyjs.com/images/cards/foster.jpg"
                     height="125px"
                     contain
-                  ></v-card-media>
+                  ></v-img>
                 </v-flex>
                 <v-flex xs7>
                   <v-card-title primary-title>
@@ -80,11 +80,11 @@
                   </v-card-title>
                 </v-flex>
                 <v-flex xs5>
-                  <v-card-media
+                  <v-img
                     src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"
                     height="125px"
                     contain
-                  ></v-card-media>
+                  ></v-img>
                 </v-flex>
               </v-layout>
               <v-divider light></v-divider>

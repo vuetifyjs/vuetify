@@ -90,10 +90,10 @@
           </v-list-tile>
         </v-list>
 
-        <v-card-media
+        <v-img
           src="https://picsum.photos/250/300?image=1027"
           height="200px"
-        ></v-card-media>
+        ></v-img>
       </v-card>
     </v-flex>
   </v-layout>

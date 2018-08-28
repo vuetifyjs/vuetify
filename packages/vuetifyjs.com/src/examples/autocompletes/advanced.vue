@@ -105,6 +105,7 @@
 
 <codepen-resources lang="json">
   {
-    "js": ["https://cdn.jsdelivr.net/npm/axios@0.18.0/dist/axios.min.js"]
+    "js": ["https://cdn.jsdelivr.net/npm/axios@0.18.0/dist/axios.min.js"],
+    "css": ["https://cdn.materialdesignicons.com/2.5.94/css/materialdesignicons.min.css"]
   }
 </codepen-resources>
