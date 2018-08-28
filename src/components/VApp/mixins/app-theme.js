@@ -47,7 +47,7 @@ export default {
       return css
     },
     vueMeta () {
-      if (this.$vuetify.theme === false) return
+      if (this.$vuetify.theme === false) return {}
 
       const options = {
         cssText: this.generatedStyles,
