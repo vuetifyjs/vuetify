@@ -1,6 +1,7 @@
 import 'vuetify/dist/vuetify.css'
 import '@mdi/font/css/materialdesignicons.css'
 import 'docsearch.js/dist/cdn/docsearch.min.css'
+import 'prismjs/themes/prism-tomorrow.css'
 import 'es6-promise/auto'
 import { createApp } from './main'
 

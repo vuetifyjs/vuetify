@@ -20,7 +20,7 @@
       </v-btn>
     </v-toolbar>
     <v-card class="elevation-0">
-      <v-card-media height="240px" class="grey lighten-2" />
+      <v-responsive height="240px" class="grey lighten-2" />
       <v-card-text style="position: relative; height: 325px">
         <v-btn
           absolute

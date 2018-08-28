@@ -140,11 +140,7 @@
             )
 
     section#footer
-      v-jumbotron(
-        dark
-        gradient="to top, #1867c0, #5CBBF6"
-        height="auto"
-      )
+      v-responsive(style="background: linear-gradient(to top, #1867c0, #5CBBF6)").white--text
         v-container.mt-4.mb-3
           v-layout(row wrap)
             v-flex(xs12)
@@ -168,7 +164,7 @@
                   target="_blank"
                   rel="noopener"
                 ).social.mx-3
-                  v-icon(v-text="social.icon")
+                  v-icon(dark v-text="social.icon")
 
             v-flex(xs12)
               v-layout(column text-xs-center)

@@ -2,7 +2,7 @@
   <v-layout row>
     <v-flex xs12 sm6 offset-sm3>
       <v-card>
-        <v-card-media
+        <v-img
           src="https://cdn.vuetifyjs.com/images/lists/ali.png"
           height="300px"
         >
@@ -32,7 +32,7 @@
               <div class="display-1 pl-5 pt-5">Ali Conners</div>
             </v-card-title>
           </v-layout>
-        </v-card-media>
+        </v-img>
 
         <v-list two-line>
           <v-list-tile @click="">

@@ -10,11 +10,21 @@
     "v-combobox": {
       "delimiters": "1.1"
     },
+    "v-date-picker": {
+      "multiple": "1.2"
+    },
     "v-dialog": {
       "no-click-animation": "1.1"
     },
     "v-divider": {
       "vertical": "1.1"
+    },
+    "v-rating": {
+      "usage": "1.2",
+      "incremented": "1.2",
+      "slots": "1.2",
+      "card": "1.2",
+      "advanced": "1.2"
     },
     "v-text-field": {
       "append-outer-icon": "1.1",
@@ -24,7 +34,8 @@
       "reverse": "1.1"
     },
     "v-select": {
-      "small-chips": "1.1"
+      "small-chips": "1.1",
+      "menu-props": "1.2"
     },
     "v-slider": {
       "always-dirty": "1.1",

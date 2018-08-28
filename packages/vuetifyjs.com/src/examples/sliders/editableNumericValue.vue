@@ -1,9 +1,9 @@
 <template>
   <v-card class="e4">
-    <v-card-media
+    <v-responsive
       :style="{ background: `rgb(${red}, ${green}, ${blue})` }"
       height="300px"
-    ></v-card-media>
+    ></v-responsive>
 
     <v-card-text>
       <v-container

@@ -1,9 +1,9 @@
 <template>
   <div>
     <v-layout row justify-center>
-      <v-btn color="primary" dark @click.stop="dialog = true">Open Dialog 1</v-btn>
-      <v-btn color="primary" dark @click.stop="dialog2 = true">Open Dialog 2</v-btn>
-      <v-btn color="primary" dark @click.stop="dialog3 = true">Open Dialog 3</v-btn>
+      <v-btn color="primary" dark @click="dialog = true">Open Dialog 1</v-btn>
+      <v-btn color="primary" dark @click="dialog2 = true">Open Dialog 2</v-btn>
+      <v-btn color="primary" dark @click="dialog3 = true">Open Dialog 3</v-btn>
       <v-menu bottom offset-y>
         <v-btn slot="activator">A Menu</v-btn>
         <v-list>
@@ -41,7 +41,7 @@
             </v-menu>
           </v-toolbar>
           <v-card-text>
-            <v-btn color="primary" dark @click.stop="dialog2 = !dialog2">Open Dialog 2</v-btn>
+            <v-btn color="primary" dark @click="dialog2 = !dialog2">Open Dialog 2</v-btn>
             <v-tooltip right>
               <v-btn slot="activator">Tool Tip Activator</v-btn>
               Tool Tip
@@ -103,7 +103,7 @@
             Dialog 2
           </v-card-title>
           <v-card-text>
-            <v-btn color="primary" dark @click.stop="dialog3 = !dialog3">Open Dialog 3</v-btn>
+            <v-btn color="primary" dark @click="dialog3 = !dialog3">Open Dialog 3</v-btn>
             <v-select
               :items="select"
               label="A Select List"
@@ -111,7 +111,7 @@
             ></v-select>
           </v-card-text>
           <v-card-actions>
-            <v-btn color="primary" flat @click.stop="dialog2=false">Close</v-btn>
+            <v-btn color="primary" flat @click="dialog2=false">Close</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -132,7 +132,7 @@
             </v-menu>
           </v-card-title>
           <v-card-actions>
-            <v-btn color="primary" flat @click.stop="dialog3=false">Close</v-btn>
+            <v-btn color="primary" flat @click="dialog3=false">Close</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>

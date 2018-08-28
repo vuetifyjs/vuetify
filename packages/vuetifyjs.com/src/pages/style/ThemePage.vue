@@ -43,7 +43,7 @@
           |
           | Vue.use(Vuetify, {
           |   theme: {
-          |     primary: colors.purple.base,
+          |     primary: colors.purple,
           |     secondary: colors.grey.darken1,
           |     accent: colors.shades.black,
           |     error: colors.red.accent3
@@ -54,20 +54,52 @@
         helpers-markup(lang="javascript")
           | this.$vuetify.theme.primary = '#4caf50'
 
+        helpers-section-subheader(:value="`${namespace}.variantsSubheader`")
+        helpers-section-text(:value="`${namespace}.variantsText1`")
+        helpers-markup(lang="javascript")
+          | // src/theme.js
+          | import colors from 'vuetify/es5/util/colors'
+          |
+          | export default {
+          |   primary: {
+          |     base: colors.purple.base,
+          |     darken1: colors.purple.darken2
+          |   },
+          |   secondary: colors.indigo,
+          |   // All keys will generate theme styles,
+          |   // Here we add a custom `tertiary` color
+          |   tertiary: colors.pink.base
+          | }
+
+        helpers-section-text(:value="`${namespace}.variantsText2`")
+        helpers-markup(lang="javascript")
+          | // src/index.js
+          | import Vue from 'vue'
+          | import Vuetify from 'vuetify'
+          | import theme from './theme'
+          |
+          | Vue.use(Vuetify, { theme })
+
+        helpers-section-text(:value="`${namespace}.variantsText3`")
+        helpers-markup(lang="typescript")
+          | interface ParsedThemeItem {
+          |   base: string
+          |   lighten5: string
+          |   lighten4: string
+          |   lighten3: string
+          |   lighten2: string
+          |   lighten1: string
+          |   darken1: string
+          |   darken2: string
+          |   darken3: string
+          |   darken4: string
+          |
+          |   [name: string]: string
+          | }
+
       section#options
         helpers-section-head(:value="`${namespace}.optionHeader`")
         helpers-section-text(:value="`${namespace}.optionText1`")
-        helpers-section-text(:value="`${namespace}.optionText2`")
-        helpers-markup(lang="javascript")
-          | Vue.use(Vuetify, {
-          |   theme: {
-          |     primary: 'red',
-          |     secondary: 'purple'
-          |   },
-          |   options: {
-          |     themeVariations: ['primary', 'secondary']
-          |   }
-          | })
         h3.mb-3 {{ $t(`${namespace}.optionHeader2`) }}
         helpers-section-text(:value="`${namespace}.optionText3`")
         helpers-markup(lang="javascript")

@@ -18,7 +18,6 @@
 
 <script>
   import 'prismjs'
-  import 'prismjs/themes/prism-tomorrow.css'
   import 'prismjs/components/prism-bash.js'
   import 'prismjs/components/prism-css.js'
   import 'prismjs/components/prism-javascript.js'

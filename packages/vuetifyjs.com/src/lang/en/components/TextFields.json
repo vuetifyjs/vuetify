@@ -27,6 +27,10 @@
       "header": "Icon events",
       "desc": "`click:prepend`, `click:append`, `click:append-outer`, and `click:clear` will be emitted when you click on the respective icon. Note that these events will not be fired if the slot is used instead. "
     },
+    "iconSlots": {
+      "header": "Icon slots",
+      "desc": "Instead of using prepend / append / append-outer icons you can use slots to extend input's functionality."
+    },
     "characterCounter": {
       "header": "Character counter",
       "desc": "Use a `counter` prop to inform a user of the character limit. The counter does not perform any validation by itself. You will need to pair it with either the internal validation system, or a 3rd party library. You can use it on regular, box or outline text fields."

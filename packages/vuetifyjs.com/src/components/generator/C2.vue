@@ -7,7 +7,7 @@
       <v-toolbar-title class="headline white--text">Text</v-toolbar-title>
     </v-toolbar>
     <v-card class="elevation-0">
-      <v-card-media height="200px" class="grey lighten-2" />
+      <v-responsive height="200px" class="grey lighten-2" />
       <v-tabs :scrollable="false" grow color="primary">
         <v-tab
           v-for="tab in 3"

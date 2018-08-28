@@ -22,7 +22,7 @@
           div(slot="append-outer") -
 
         v-select(
-          :items="sizes"
+          :items="sizes.slice(1)"
           :label="$t('Layout.Spacing.size')"
           v-model="paddingSize"
         )
@@ -67,7 +67,7 @@
   export default {
     data: () => ({
       directions: ['t', 'b', 'l', 'r', 'x', 'y', 'a'],
-      sizes: ['0', '1', '2', '3', '4', '5'],
+      sizes: ['auto', '0', '1', '2', '3', '4', '5'],
       paddingDirection: 'a',
       paddingSize: '2',
       marginDirection: 'a',

@@ -1,8 +1,16 @@
 <template lang="pug">
   views-doc#typography-page
     template(slot-scope="{ namespace }")
-      section WIP
-      section#font-size
+      section#font-sizes
+        helpers-section-head(:value="`${namespace}.fontHeader`")
+        helpers-section-text(:value="`${namespace}.fontText`")
+        ul.pb-2
+          li(
+            v-for="item in fonts"
+            :key="item"
+          )
+            helpers-markdown(:source="item")
+
         v-card(
           color="teal"
           dark
@@ -19,6 +27,20 @@
             v-flex(:class="`${text[0]}`") {{ text[1] }}
 
       section#font-weights
+        helpers-section-head(:value="`${namespace}.weightsHeader`")
+        helpers-section-text(:value="`${namespace}.weightsText`")
+        ul.pb-2
+          li(
+            v-for="item in fontWeights"
+            :key="item"
+          )
+            helpers-markdown(:source="item")
+
+        helpers-section-text(:value="`${namespace}.italicText`")
+        ul.pb-2
+          li
+            helpers-markdown(:source="$t(`${namespace}.italic`)")
+
         v-card(
           flat
         ).pa-5
@@ -35,10 +57,19 @@
             div(:class="`${weight[1]} my-2 display-2 font-italic`") {{ weight[0] }}
             kbd .{{ weight[1] }}.font-italic
 
-      section#typeface.hidden-sm-and-down
+      section#text-transforms
+        helpers-section-head(:value="`${namespace}.transformHeader`")
+        helpers-section-text(:value="`${namespace}.transformText`")
+        ul.pb-2
+          li(
+            v-for="item in transforms"
+            :key="item"
+          )
+            helpers-markdown(:source="item")
+
         v-card(
           flat
-        ).pa-5
+        ).pa-5.hidden-sm-and-down
           v-layout(
             align-center
             justify-space-between
@@ -48,6 +79,21 @@
           ).my-3
             v-flex(:class="type[1]" v-html="type[0]")
             v-flex.hidden-md-and-down.text-xs-right.text-uppercase.grey--text {{ type[2] }}
+
+      section#text-wrapping
+        helpers-section-head(:value="`${namespace}.wrapHeader`")
+        helpers-section-text(:value="`${namespace}.wrapText`")
+        ul.pb-2
+          li(
+            v-for="item in wraps"
+            :key="item"
+          )
+            helpers-markdown(:source="item")
+
+        helpers-example(
+          readonly
+          file="typography/truncate"
+        )
 </template>
 
 <script>
@@ -94,7 +140,22 @@
         ['STATIONERY', 'display-4 font-weight-thin', 'Thin'],
         ['POSITION, MOMENTUM & SPIN', 'display-2 font-weight-light', 'Condensed Light']
       ]
-    })
+    }),
+
+    computed: {
+      fonts () {
+        return this.$t('Style.Typography.fonts')
+      },
+      fontWeights () {
+        return this.$t('Style.Typography.weights')
+      },
+      transforms () {
+        return this.$t('Style.Typography.transforms')
+      },
+      wraps () {
+        return this.$t('Style.Typography.wraps')
+      }
+    }
   }
 </script>
 

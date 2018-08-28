@@ -8,7 +8,7 @@
         <v-select
           :items="states"
           v-model="e1"
-          auto
+          menu-props="auto"
           label="Select"
           hide-details
           prepend-icon="map"
@@ -23,7 +23,7 @@
           :items="states"
           v-model="e2"
           append-outer-icon="map"
-          auto
+          menu-props="auto"
           hide-details
           label="Select"
           single-line

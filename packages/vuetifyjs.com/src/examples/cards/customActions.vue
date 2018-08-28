@@ -2,11 +2,11 @@
   <v-layout row>
     <v-flex xs12 sm6 offset-sm3>
       <v-card>
-        <v-card-media
+        <v-img
           src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
           height="200px"
         >
-        </v-card-media>
+        </v-img>
 
         <v-card-title primary-title>
           <div>

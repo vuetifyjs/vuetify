@@ -21,6 +21,10 @@
     "customOrigin": {
       "header": "Custom Origin",
       "desc": "Programmatically control the transition origin with a simple prop."
+    },
+    "todo": {
+      "header": "Todo list",
+      "desc": "Using multiple custom transitions, it is easy to bring a simple todo list to life!"
     }
   },
   "createYourOwnHeader": "Create your own",

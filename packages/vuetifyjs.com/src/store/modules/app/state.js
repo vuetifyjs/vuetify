@@ -245,6 +245,10 @@ export default () => ({
           href: 'visibility'
         },
         {
+          text: 'Layout.Display.overflowHeader',
+          href: 'overflow'
+        },
+        {
           text: 'Layout.Display.displayHeader',
           href: 'display'
         },
@@ -437,6 +441,24 @@ export default () => ({
         {
           text: 'Style.Theme.stylusHeader',
           href: 'stylus-guide'
+        }
+      ],
+      Typography: [
+        {
+          text: 'Style.Typography.fontHeader',
+          href: 'font-sizes'
+        },
+        {
+          text: 'Style.Typography.weightsHeader',
+          href: 'font-weights'
+        },
+        {
+          text: 'Style.Typography.transformHeader',
+          href: 'text-transforms'
+        },
+        {
+          text: 'Style.Typography.wrapHeader',
+          href: 'text-wrapping'
         }
       ],
       Content: [

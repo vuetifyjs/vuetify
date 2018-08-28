@@ -20,6 +20,7 @@
 
 <codepen-resources lang="json">
   {
-  "js": ["https://use.fontawesome.com/releases/v5.0.6/js/all.js"]
+  "js": ["https://use.fontawesome.com/releases/v5.0.6/js/all.js"],
+    "css": ["https://cdn.materialdesignicons.com/2.5.94/css/materialdesignicons.min.css"]
   }
 </codepen-resources>

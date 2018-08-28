@@ -3,7 +3,6 @@ const merge = require('webpack-merge')
 const base = require('./webpack.base.config')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 const isProd = process.env.NODE_ENV === 'production'
 
@@ -19,6 +18,10 @@ const cssLoaders = [
 ]
 
 const config = merge(base, {
+  name: 'client',
+  devtool: isProd
+    ? false
+    : 'source-map',
   entry: {
     app: './src/entry-client.js'
   },
@@ -50,7 +53,9 @@ const config = merge(base, {
   optimization: {
     minimize: isProd,
     runtimeChunk: 'single',
-    splitChunks: {
+    removeAvailableModules: isProd,
+    removeEmptyChunks: isProd,
+    splitChunks: isProd && {
       chunks: 'all',
       minSize: 30000,
       minChunks: 1,
@@ -76,13 +81,6 @@ if (isProd) {
   config.plugins.push(
     new MiniCssExtractPlugin({
       filename: 'common.[chunkhash].css'
-    })
-  )
-} else {
-  config.plugins.push(
-    new BundleAnalyzerPlugin({
-      analyzerMode: 'static',
-      openAnalyzer: false
     })
   )
 }

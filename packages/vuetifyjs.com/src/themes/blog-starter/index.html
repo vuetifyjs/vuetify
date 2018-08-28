@@ -31,7 +31,7 @@
         <v-flex xs12 md5 offset-md2>
           <div v-for="post in posts" :key="post.title">
             <v-card class="my-3" hover>
-              <v-card-media
+              <v-img
                 class="white--text"
                 height="190px"
                 :src="post.imgUrl"
@@ -43,7 +43,7 @@
                     </v-flex>
                   </v-layout>
                 </v-container>
-              </v-card-media>
+              </v-img>
               <v-card-text>
                 {{ post.content }}
               </v-card-text>

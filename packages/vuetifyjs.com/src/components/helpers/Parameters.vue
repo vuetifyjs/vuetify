@@ -196,8 +196,8 @@
           description = this.$t(genericDesc)
           devPrepend = `**GENERIC (${item.source})** - `
         } else {
-          description = `${item.source}`
-          devPrepend = `**MISSING DESCRIPTION** - `
+          description = ''
+          devPrepend = `**MISSING DESCRIPTION** - ${item.source}`
         }
 
         const prepend = process.env.NODE_ENV === 'development' ? devPrepend : ''

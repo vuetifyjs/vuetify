@@ -1,4 +1,5 @@
 import Alignment from './Alignment'
+import AspectRatios from './AspectRatios'
 import Breakpoints from './Breakpoints'
 import Display from './Display'
 import Elevation from './Elevation'
@@ -11,6 +12,7 @@ import Spacing from './Spacing'
 
 export default {
   Alignment,
+  AspectRatios,
   Breakpoints,
   Display,
   Elevation,

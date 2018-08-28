@@ -76,10 +76,10 @@
           </v-list-tile>
         </v-list>
 
-        <v-card-media
+        <v-img
           src="https://picsum.photos/700?image=996"
           height="200px"
-        ></v-card-media>
+        ></v-img>
       </v-card>
     </v-flex>
   </v-layout>

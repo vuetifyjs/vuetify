@@ -10,6 +10,14 @@
     ],
     "spec": false
   },
+  "aspect-ratios": {
+    "components": [
+      "v-responsive"
+    ],
+    "examples": [
+      { "file": "ratios", "newIn": "1.2" }
+    ]
+  },
   "autocompletes": {
     "components": [
       "v-autocomplete"
@@ -97,9 +105,10 @@
   "cards": {
     "components": [
       "v-card",
+      "v-card-actions",
       "v-card-media",
-      "v-card-title",
-      "v-card-actions"
+      "v-card-text",
+      "v-card-title"
     ],
     "examples": [
       "components",
@@ -190,6 +199,7 @@
       "dateDialogAndMenu",
       "dateFormatting",
       "dateAllowedDates",
+      { "file": "dateMultiple", "newIn": "1.2" },
       "dateWidth",
       "dateBirthday",
       "datePickerDate",
@@ -202,6 +212,7 @@
       "monthColorable",
       "monthDialogAndMenu",
       "monthAllowedMonths",
+      { "file": "monthMultiple", "newIn": "1.2" },
       "monthWidth",
       "monthInternationalization",
       "monthIcons",
@@ -319,6 +330,14 @@
     ],
     "spec": false
   },
+  "hover": {
+    "components": ["v-hover"],
+    "examples": [
+      { "file": "default", "newIn": "1.2" },
+      { "file": "transition", "newIn": "1.2" }
+    ],
+    "spec": false
+  },
   "icons": {
     "components": ["v-icon"],
     "examples": [
@@ -331,6 +350,17 @@
         "file": "clickable",
         "newIn": "1.1"
       }
+    ],
+    "spec": false
+  },
+  "images": {
+    "components": ["v-img"],
+    "examples": [
+      "usage",
+      "containCover",
+      "maxHeight",
+      "ratio",
+      "gradients"
     ],
     "spec": false
   },
@@ -449,6 +479,18 @@
     ],
     "spec": false
   },
+  "ratings": {
+    "components": ["v-rating"],
+    "examples": [
+      { "file": "default", "newIn": "1.2" },
+      { "file": "sizes", "newIn": "1.2" },
+      { "file": "length", "newIn": "1.2" },
+      { "file": "increments", "newIn": "1.2" },
+      { "file": "slots", "newIn": "1.2" },
+      { "file": "card", "newIn": "1.2" },
+      { "file": "advanced", "newIn": "1.2" }
+    ]
+  },
   "resizing": {
     "components": ["v-resize"],
     "examples": [
@@ -508,7 +550,9 @@
       "light",
       "icons",
       "multiple",
-      "customTextAndValue"
+      "customTextAndValue",
+      { "file": "slots", "newIn": "1.2" },
+      "selectionAppearance"
     ],
     "spec": false
   },
@@ -613,6 +657,7 @@
       "icon",
       "clearable",
       "iconEvents",
+      "iconSlots",
       "characterCounter",
       "password",
       "validation",
@@ -679,6 +724,10 @@
   "transitions": {
     "components": [
       "v-fade-transition",
+      "v-scroll-x-transition",
+      "v-scroll-x-reverse-transition",
+      "v-scroll-y-transition",
+      "v-scroll-y-reverse-transition",
       "v-slide-x-transition",
       "v-slide-x-reverse-transition",
       "v-slide-y-transition",
@@ -690,7 +739,8 @@
       "slideYTransitions",
       "scaleTransition",
       "fadeTransition",
-      "customOrigin"
+      "customOrigin",
+      { "file": "todo", "newIn": "1.2" }
     ]
   }
 }

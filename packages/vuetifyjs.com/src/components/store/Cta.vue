@@ -16,7 +16,7 @@
           height="100%"
           tile
         >
-          <v-card-media
+          <v-img
             height="100%"
             src="https://cdn.vuetifyjs.com/images/store/angryman.png"
           />
@@ -50,7 +50,7 @@
               @mouseenter="highlight.value = true"
               @mouseleave="highlight.value = false"
             >
-              <v-card-media
+              <v-img
                 :src="getSrc(highlight)"
                 contain
                 height="135px"
@@ -68,7 +68,7 @@
                     {{ $t('Vuetify.Store.onSale') }}
                   </v-chip>
                 </div>
-              </v-card-media>
+              </v-img>
             </v-card>
           </v-flex>
         </v-layout>

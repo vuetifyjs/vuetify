@@ -12,6 +12,7 @@ import Picker from './Picker'
 import Positionable from './Positionable'
 import Rippleable from './Rippleable'
 import Routable from './Routable'
+import Sizeable from './Sizeable'
 import Soloable from './Soloable'
 import Themeable from './Themeable'
 import Transitionable from './Transitionable'
@@ -32,6 +33,7 @@ export default {
   Positionable,
   Rippleable,
   Routable,
+  Sizeable,
   Soloable,
   Themeable,
   Transitionable,

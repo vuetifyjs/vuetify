@@ -1,8 +1,7 @@
 <template>
-  <v-jumbotron
-    dark
-    gradient="to bottom, #1867c0, #5CBBF6"
-    height="auto"
+  <v-responsive
+    class="white--text"
+    style="background: linear-gradient(to bottom, #1867c0, #5CBBF6)"
   >
     <a
       class="v-chip v-chip--tidelift white--text"
@@ -25,10 +24,7 @@
         </span>
       </span>
     </a>
-    <v-container
-      fill-height
-      my-3
-    >
+    <v-container my-3>
       <v-layout
         align-center
         justify-center
@@ -71,10 +67,7 @@
         </v-flex>
       </v-layout>
     </v-container>
-    <v-container
-      grid-list-xl
-      my-3
-    >
+    <v-container grid-list-xl my-3>
       <v-layout wrap>
         <v-flex
           v-for="(_, i) in 3"
@@ -112,7 +105,7 @@
         </v-flex>
       </v-layout>
     </v-container>
-  </v-jumbotron>
+  </v-responsive>
 </template>
 
 <script>
@@ -164,7 +157,6 @@
     position: absolute !important
     right: -24px
     text-decoration: none
-    top: -20px
 
     .v-chip__content
       cursor: pointer !important

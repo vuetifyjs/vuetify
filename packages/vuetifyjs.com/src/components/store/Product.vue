@@ -6,7 +6,7 @@
     <v-container>
       <v-layout>
         <v-flex xs5>
-          <v-card-media
+          <v-img
             :src="src"
             contain
             height="150"
