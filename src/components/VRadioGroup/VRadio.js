@@ -28,6 +28,7 @@ export default {
   inheritAttrs: false,
 
   props: {
+    autofocus: Boolean,
     color: {
       type: String,
       default: 'accent'
@@ -84,6 +85,7 @@ export default {
 
   mounted () {
     this.radio.register(this)
+    this.autofocus && this.$refs.input.focus()
   },
 
   beforeDestroy () {
@@ -116,6 +118,7 @@ export default {
         staticClass: 'v-input--selection-controls__input'
       }, [
         this.genInput('radio', {
+          autofocus: this.autofocus,
           name: this.radio.name || (this.radio._uid ? 'v-radio-' + this.radio._uid : false),
           value: this.value,
           ...this.$attrs

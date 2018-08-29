@@ -17,6 +17,7 @@ export default {
   ],
 
   props: {
+    autofocus: Boolean,
     indeterminate: Boolean,
     indeterminateIcon: {
       type: String,
@@ -60,6 +61,10 @@ export default {
     }
   },
 
+  mounted () {
+    this.autofocus && this.$refs.input.focus()
+  },
+
   methods: {
     genCheckbox () {
       return this.$createElement('div', {
@@ -69,7 +74,8 @@ export default {
           ...this.$attrs,
           'aria-checked': this.inputIndeterminate
             ? 'mixed'
-            : this.isActive.toString()
+            : this.isActive.toString(),
+          autofocus: this.autofocus
         }),
         !this.disabled && this.genRipple(this.setTextColor(this.computedColor)),
         this.$createElement(VIcon, this.setTextColor(this.computedColor, {
