@@ -8,7 +8,7 @@ import { PropValidator } from 'vue/types/options'
 import VResponsive from '../VResponsive'
 
 // Utils
-import { consoleError } from '../../util/console'
+import { consoleError, consoleWarn } from '../../util/console'
 
 // not intended for public use, this is passed in by vuetify-loader
 export interface srcObject {
@@ -130,8 +130,13 @@ export default VResponsive.extend({
       this.isLoading = false
       this.$emit('load', this.src)
     },
-    onError () {
-      consoleError('Image load failed\n\nsrc: ' + this.normalisedSrc.src, this)
+    onError (err: ErrorEvent) {
+      consoleError(
+        `Image load failed\n\n` +
+        `src: ${this.normalisedSrc.src}` +
+        (err.message ? `\nOriginal error: ${err.message}` : ''),
+        this
+      )
       this.$emit('error', this.src)
     },
     getSrc () {
@@ -145,7 +150,14 @@ export default VResponsive.extend({
       image.onload = () => {
         /* istanbul ignore if */
         if (image.decode) {
-          image.decode().then(this.onLoad)
+          image.decode().catch((err: DOMException) => {
+            consoleWarn(
+              `Failed to decode image, trying to render anyway\n\n` +
+              `src: ${this.normalisedSrc.src}` +
+              (err.message ? `\nOriginal error: ${err.message}` : ''),
+              this
+            )
+          }).then(this.onLoad)
         } else {
           this.onLoad()
         }
