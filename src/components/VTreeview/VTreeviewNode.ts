@@ -26,6 +26,14 @@ export const VTreeviewNodeProps = {
     type: String,
     default: '$vuetify.icons.checkboxOff'
   },
+  toggleIcon: {
+    type: String,
+    default: 'arrow_right'
+  },
+  itemKey: {
+    type: String,
+    default: 'id'
+  },
   itemText: {
     type: String,
     default: 'name'
@@ -49,7 +57,7 @@ export default mixins(
   },
 
   props: {
-    data: {
+    item: {
       type: Object,
       default: () => null
     },
@@ -57,20 +65,20 @@ export default mixins(
   },
 
   data: () => ({
-    isOpen: false,
-    isSelected: false,
-    isIndeterminate: false,
-    isActive: false,
+    isOpen: false, // Node is open/expanded
+    isSelected: false, // Node is selected (checkbox)
+    isIndeterminate: false, // Node has at least one selected child
+    isActive: false, // Node is selected (row)
     children: [] as any[]
   }),
 
   computed: {
     isLeaf (): boolean {
-      return !this.data.children
+      return !this.item.children.length
     },
     scopedProps (): object {
       return {
-        item: this.data,
+        item: this.item,
         leaf: this.isLeaf,
         selected: this.isSelected,
         active: this.isActive
@@ -96,7 +104,7 @@ export default mixins(
       return this.$createElement('label', {
         slot: 'label',
         staticClass: 'v-treeview-node__label'
-      }, [getObjectValueByPath(this.data, this.itemText)])
+      }, [getObjectValueByPath(this.item, this.itemText)])
     },
     genContent () {
       const children = []
@@ -114,6 +122,9 @@ export default mixins(
     genToggle () {
       return this.$createElement(VIcon, {
         staticClass: 'v-treeview-node__toggle',
+        class: {
+          'v-treeview-node__toggle--open': this.isOpen
+        },
         slot: 'prepend',
         on: {
           click: (e: MouseEvent) => {
@@ -122,7 +133,7 @@ export default mixins(
             this.isOpen = !this.isOpen
           }
         }
-      }, [this.isOpen ? 'arrow_drop_down' : 'arrow_right'])
+      }, [this.toggleIcon])
     },
     genCheckbox () {
       return this.$createElement(VIcon, {
@@ -156,10 +167,10 @@ export default mixins(
         }
       }, children)
     },
-    genChild (data: any): VNode {
+    genChild (item: any): VNode {
       return this.$createElement(VTreeviewNode, {
         props: {
-          data,
+          item,
           selectable: this.selectable,
           indeterminateIcon: this.indeterminateIcon,
           offIcon: this.offIcon,
@@ -171,7 +182,7 @@ export default mixins(
       })
     },
     genChildren (): any {
-      const children = getObjectValueByPath(this.data, this.itemChildren)
+      const children = getObjectValueByPath(this.item, this.itemChildren)
 
       return this.$createElement('div', {
         staticClass: 'v-treeview-node__children',
