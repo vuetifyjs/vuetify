@@ -4,8 +4,15 @@ import '../../stylus/components/_slide.styl'
 // Types
 import Vue, { VNode, VNodeChildren, VNodeDirective } from 'vue'
 
+interface options extends Vue {
+  $refs: {
+    container: HTMLElement
+    content: HTMLElement
+  }
+}
+
 /* @vue/component */
-export default Vue.extend({
+export default Vue.extend<options>().extend({
   data () {
     return {
       scrollOffset: 0,
