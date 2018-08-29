@@ -136,7 +136,7 @@ export default VResponsive.extend({
     },
     getSrc () {
       /* istanbul ignore else */
-      if (this.image) this.currentSrc = this.image.currentSrc
+      if (this.image) this.currentSrc = this.image.currentSrc || this.image.src
     },
     loadImage () {
       const image = new Image()
@@ -157,7 +157,7 @@ export default VResponsive.extend({
       this.normalisedSrc.srcset && (image.srcset = this.normalisedSrc.srcset)
 
       this.aspectRatio || this.pollForSize(image)
-      this.currentSrc = image.currentSrc
+      this.getSrc()
     },
     pollForSize (img: HTMLImageElement, timeout: number | null = 100) {
       const poll = () => {
