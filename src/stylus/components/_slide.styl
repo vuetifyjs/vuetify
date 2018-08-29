@@ -1,0 +1,21 @@
+@import '../bootstrap'
+
+.v-slide
+  contain: content
+  display: flex
+  white-space: nowrap
+
+  &__content
+    display: block
+    flex: 1 1 auto
+    overflow: hidden
+    padding: 16px
+
+
+  &__container
+    display: flex
+    flex: 1 0 auto
+    transition: transform .6s $transition.swing
+
+    > *
+      flex: 1 0 100%
