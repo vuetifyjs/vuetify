@@ -125,7 +125,7 @@ export default mixins(
         if (node.value._uid === uid) node.value.isActive = value
         else if (!this.multipleActive) node.value.isActive = false
 
-        if (node.value.isActive) active.push(node.value.data)
+        if (node.value.isActive) active.push(node.value.item)
       })
 
       this.$emit('update:active', active)
@@ -150,7 +150,7 @@ export default mixins(
 
       const selected: any[] = []
       this.updateNodes(this.tree, (n: TreeNode) => {
-        if (n.value.isSelected) selected.push(n.value.data)
+        if (n.value.isSelected) selected.push(n.value.item)
       })
 
       this.$emit('update:selected', selected)
