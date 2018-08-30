@@ -38,7 +38,7 @@ export default VResponsive.extend({
       default: 'center center'
     },
     transition: {
-      type: String,
+      type: [Boolean, String],
       default: 'fade-transition'
     }
   },
@@ -80,26 +80,28 @@ export default VResponsive.extend({
       if (this.gradient) backgroundImage.push(`linear-gradient(${this.gradient})`)
       if (src) backgroundImage.push(`url("${src}")`)
 
+      const image = this.$createElement('div', {
+        staticClass: 'v-image__image',
+        class: {
+          'v-image__image--preload': this.isLoading,
+          'v-image__image--contain': this.contain,
+          'v-image__image--cover': !this.contain
+        },
+        style: {
+          backgroundImage: backgroundImage.join(', '),
+          backgroundPosition: this.position
+        },
+        key: +this.isLoading
+      })
+
+      if (!this.transition) return image
+
       return this.$createElement('transition', {
         attrs: {
           name: this.transition,
           mode: 'in-out'
         }
-      }, [
-        this.$createElement('div', {
-          staticClass: 'v-image__image',
-          class: {
-            'v-image__image--preload': this.isLoading,
-            'v-image__image--contain': this.contain,
-            'v-image__image--cover': !this.contain
-          },
-          style: {
-            backgroundImage: backgroundImage.join(', '),
-            backgroundPosition: this.position
-          },
-          key: +this.isLoading
-        })
-      ])
+      }, [image])
     }
   },
 
@@ -186,13 +188,17 @@ export default VResponsive.extend({
     },
     __genPlaceholder (): VNode | void {
       if (this.$slots.placeholder) {
-        const placeholder = this.$createElement('div', {
-          staticClass: 'v-image__placeholder'
-        }, this.$slots.placeholder)
+        const placeholder = this.isLoading
+          ? [this.$createElement('div', {
+            staticClass: 'v-image__placeholder'
+          }, this.$slots.placeholder)]
+          : []
+
+        if (!this.transition) return placeholder[0]
 
         return this.$createElement('transition', {
           attrs: { name: this.transition }
-        }, this.isLoading ? [placeholder] : [])
+        }, placeholder)
       }
     }
   },
