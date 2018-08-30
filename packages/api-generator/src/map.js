@@ -153,6 +153,8 @@ const dataIterableEvents = [
 ]
 
 const dataIterableSlots = [
+  { name: 'actions-append', source: 'data-iterable' },
+  { name: 'actions-prepend', source: 'data-iterable' },
   { name: 'footer', source: 'data-iterable' },
   { name: 'noData', source: 'data-iterable' },
   { name: 'noResults', source: 'data-iterable' }
