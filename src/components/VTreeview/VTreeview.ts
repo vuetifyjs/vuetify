@@ -89,36 +89,28 @@ export default mixins(
 
         this.state[key] = !children.length ? state : this.calculateState(this.children[key], oldState)
 
-        const vnode = this.vnodes[key]
-        if (vnode) {
-          vnode.isSelected = this.state[key].isSelected
-          vnode.isIndeterminate = this.state[key].isIndeterminate
-        }
+        this.updateVnodeState(key)
       }
     },
     register (node: VTreeviewNodeInstance) {
       const key = getObjectValueByPath(node.item, this.itemKey)
       this.vnodes[key] = node
 
-      const state = this.state[key]
-      if (state) {
-        node.isSelected = state.isSelected
-        node.isIndeterminate = state.isIndeterminate
-      }
+      this.updateVnodeState(key)
     },
     unregister (node: VTreeviewNodeInstance) {
       const key = getObjectValueByPath(node.item, this.itemKey)
       delete this.vnodes[key]
     },
     updateActive (key: string | number, value: boolean) {
-      this.active = {}
-
       if (!this.multipleActive) {
         Object.keys(this.active).forEach(active => {
           const vnode = this.vnodes[active]
           if (vnode) vnode.isActive = false
         })
       }
+
+      this.active = {}
 
       if (value) this.active[key] = value
 
@@ -153,15 +145,7 @@ export default mixins(
 
       const all = [key, ...descendants, ...parents]
 
-      all.forEach(item => {
-        const vnode = this.vnodes[item]
-
-        if (!vnode) return
-
-        const state = this.state[item]
-        vnode.isSelected = state.isSelected
-        vnode.isIndeterminate = state.isIndeterminate
-      })
+      all.forEach(this.updateVnodeState)
 
       this.$emit('selected', Object.keys(this.state).filter(k => this.state[k].isSelected).map(k => isNaN(Number(k)) ? k : Number(k)))
     },
@@ -187,6 +171,15 @@ export default mixins(
       }
 
       return parents
+    },
+    updateVnodeState (key: string | number) {
+      const vnode = this.vnodes[key]
+      const state = this.state[key]
+
+      if (vnode && state) {
+        vnode.isSelected = state.isSelected
+        vnode.isIndeterminate = state.isIndeterminate
+      }
     }
   },
 
