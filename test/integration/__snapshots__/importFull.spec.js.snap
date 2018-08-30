@@ -69,6 +69,7 @@ Array [
   "VIcon",
   "VImg",
   "VInput",
+  "VItemGroup",
   "VJumbotron",
   "VLabel",
   "VLayout",
