@@ -11,6 +11,8 @@ import VTreeviewNode, { VTreeviewNodeProps } from './VTreeviewNode'
 
 // Mixins
 import { provide as RegistrableProvide } from '../../mixins/registrable'
+
+// Utils
 import { getObjectValueByPath } from '../../util/helpers'
 
 type VTreeviewNodeInstance = InstanceType<typeof VTreeviewNode>
