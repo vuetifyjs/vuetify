@@ -4,7 +4,6 @@ import '../../stylus/components/_treeview.styl'
 // Types
 import { VNode, VNodeChildrenArrayContents } from 'vue'
 import { PropValidator } from '../../../node_modules/vue/types/options'
-import mixins from '../../util/mixins'
 
 // Components
 import VTreeviewNode, { VTreeviewNodeProps } from './VTreeviewNode'
@@ -14,6 +13,7 @@ import { provide as RegistrableProvide } from '../../mixins/registrable'
 
 // Utils
 import { getObjectValueByPath } from '../../util/helpers'
+import mixins from '../../util/mixins'
 
 type VTreeviewNodeInstance = InstanceType<typeof VTreeviewNode>
 
@@ -123,8 +123,8 @@ export default mixins(
 
       const parents = this.getParents(key)
 
-      parents.forEach(key => {
-        const children = this.children[key] || []
+      parents.forEach(parent => {
+        const children = this.children[parent] || []
         const counts = children.reduce((counts: number[], child: string | number) => {
           counts[0] += +this.state[child].isSelected
           counts[1] += +this.state[child].isIndeterminate
@@ -134,7 +134,7 @@ export default mixins(
         const isSelected = counts[0] === children.length
         const isIndeterminate = !isSelected && (counts[0] > 0 || counts[1] > 0)
 
-        this.state[key] = { isSelected, isIndeterminate }
+        this.state[parent] = { isSelected, isIndeterminate }
       })
 
       const all = [key, ...descendants, ...parents]
