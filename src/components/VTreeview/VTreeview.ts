@@ -59,9 +59,11 @@ export default mixins(
   watch: {
     items: {
       handler () {
+        const oldState = Object.assign({}, this.state)
+        this.state = {}
         this.parents = {}
         this.children = {}
-        this.buildTree(this.items)
+        this.buildTree(this.items, oldState)
       },
       deep: true,
       immediate: true
@@ -69,7 +71,7 @@ export default mixins(
   },
 
   methods: {
-    buildTree (items: any[], parent = null) {
+    buildTree (items: any[], oldState: Record<string | number, NodeState>, parent = null) {
       for (let i = 0; i < items.length; i++) {
         const item = items[i]
         const key = getObjectValueByPath(item, this.itemKey)
@@ -77,12 +79,21 @@ export default mixins(
 
         this.parents[key] = parent
         this.children[key] = children.map((c: any) => getObjectValueByPath(c, this.itemKey))
-        this.state[key] = {
-          isSelected: this.state[key] ? this.state[key].isSelected : false,
-          isIndeterminate: this.state[key] ? this.state[key].isIndeterminate : false
+
+        this.buildTree(children, oldState, key)
+
+        const state = {
+          isSelected: oldState.hasOwnProperty(key) ? oldState[key].isSelected : false,
+          isIndeterminate: oldState.hasOwnProperty(key) ? oldState[key].isIndeterminate : false
         }
 
-        this.buildTree(children, key)
+        this.state[key] = !children.length ? state : this.calculateState(this.children[key], oldState)
+
+        const vnode = this.vnodes[key]
+        if (vnode) {
+          vnode.isSelected = this.state[key].isSelected
+          vnode.isIndeterminate = this.state[key].isIndeterminate
+        }
       }
     },
     register (node: VTreeviewNodeInstance) {
@@ -114,6 +125,18 @@ export default mixins(
       const vnode = this.vnodes[key]
       if (vnode) vnode.isActive = value
     },
+    calculateState (children: any[], state: Record<string | number, NodeState>) {
+      const counts = children.reduce((counts: number[], child: string | number) => {
+        counts[0] += +(state.hasOwnProperty(child) ? state[child].isSelected : false)
+        counts[1] += +(state.hasOwnProperty(child) ? state[child].isIndeterminate : false)
+        return counts
+      }, [0, 0])
+
+      const isSelected = !!children.length && counts[0] === children.length
+      const isIndeterminate = !isSelected && (counts[0] > 0 || counts[1] > 0)
+
+      return { isSelected, isIndeterminate }
+    },
     updateSelected (key: string | number, state: NodeState) {
       const descendants = [key, ...this.getDescendants(key)]
 
@@ -125,16 +148,7 @@ export default mixins(
 
       parents.forEach(parent => {
         const children = this.children[parent] || []
-        const counts = children.reduce((counts: number[], child: string | number) => {
-          counts[0] += +this.state[child].isSelected
-          counts[1] += +this.state[child].isIndeterminate
-          return counts
-        }, [0, 0])
-
-        const isSelected = counts[0] === children.length
-        const isIndeterminate = !isSelected && (counts[0] > 0 || counts[1] > 0)
-
-        this.state[parent] = { isSelected, isIndeterminate }
+        this.state[parent] = this.calculateState(children, this.state)
       })
 
       const all = [key, ...descendants, ...parents]

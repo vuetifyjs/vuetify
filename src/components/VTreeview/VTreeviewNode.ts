@@ -173,6 +173,7 @@ export default mixins(
     },
     genChild (item: any): VNode {
       return this.$createElement(VTreeviewNode, {
+        key: getObjectValueByPath(item, this.itemKey),
         props: {
           item,
           selectable: this.selectable,
