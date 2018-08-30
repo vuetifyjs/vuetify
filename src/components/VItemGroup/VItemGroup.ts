@@ -3,30 +3,39 @@ import '../../stylus/components/_item-group.styl'
 
 // Mixins
 import Proxyable from '../../mixins/proxyable'
-import { provide as RegistrableProvide } from '../../mixins/registrable'
+import { provide as RegistrableProvide, Registrable } from '../../mixins/registrable'
 
 // Utilities
-import mixins from '../../util/mixins'
+import mixins, { ExtractVue } from '../../util/mixins'
 import { consoleWarn } from '../../util/console'
 
 // Types
-import Vue, { VNode, VNodeData } from 'vue/types'
+import Vue, { VNode } from 'vue/types'
 
-interface Groupable extends Vue {
-  toggle: Function
-  value: undefined | null | number | string
+interface GroupableComponent extends Vue {
+  toggle: (v: boolean) => void
+  value: unknown
 }
 
-interface HTMLCollection {
-  [Symbol.iterator](): IterableIterator<HTMLElement>
+type Groupable = GroupableComponent | Element
+
+interface options {
+  $refs: {
+    container: Element
+  }
 }
 
-type Toggleable = Groupable | HTMLElement
-
-/* @vue/component */
-export default mixins(
-  Proxyable('inputValue'),
+export default mixins<options &
+/* eslint-disable indent */
+  ExtractVue<[
+    typeof Proxyable,
+    Registrable<'group'>
+  ]>
+/* eslint-enable indent */
+>(
+  Proxyable,
   RegistrableProvide('group')
+  /* @vue/component */
 ).extend({
   name: 'v-item-group',
 
@@ -49,28 +58,29 @@ export default mixins(
       internalLazyValue: this.value !== undefined
         ? this.value
         : this.multiple ? [] : undefined,
-      items: [] as Toggleable[]
+      items: [] as Groupable[]
     }
   },
 
   computed: {
-    classes (): VNodeData['class'] {
+    classes (): object {
       return {
         'v-item-group--horizontal': this.horizontal
       }
     },
-    selectedItems (): Toggleable[] {
+    selectedItems (): Groupable[] {
       return this.items.filter((item, index) => {
         return this.toggleMethod(this.getValue(item, index))
       })
     },
-    toggleMethod (): Function {
+    toggleMethod (): (v: any) => boolean {
       if (!this.multiple) {
         return (v: any) => this.internalValue === v
       }
 
-      if (Array.isArray(this.internalValue)) {
-        return (v: any) => ((this.internalValue || []) as string[]).includes(v)
+      const internalValue = this.internalValue
+      if (Array.isArray(internalValue)) {
+        return (v: any) => internalValue.includes(v)
       }
 
       return () => false
@@ -82,15 +92,15 @@ export default mixins(
   },
 
   created () {
-    if (this.multiple && !Array.isArray(this.inputValue)) {
+    if (this.multiple && !Array.isArray(this.value)) {
       consoleWarn('Model must be bound to an array if the multiple property is true.', this)
     }
   },
 
   mounted () {
     if (this.registerChildren) {
-      const container = (this.$refs.container as HTMLElement)
-      const children = [...container.children] as HTMLCollection
+      const container = this.$refs.container
+      const children = [...container.children]
 
       for (const child of children) {
         this.register(child)
@@ -101,8 +111,8 @@ export default mixins(
   },
 
   methods: {
-    getValue (item: Toggleable, i: number): string | number {
-      if (item instanceof HTMLElement) {
+    getValue (item: Groupable, i: number): unknown {
+      if (item instanceof Element) {
         const value = item.getAttribute('data-value')
 
         return value || i
@@ -122,19 +132,19 @@ export default mixins(
         ? this.updateMultiple(value)
         : this.updateSingle(value)
     },
-    register (item: Toggleable) {
-      if (item instanceof HTMLElement) {
+    register (item: Groupable) {
+      if (item instanceof Element) {
         this.registerElement(item)
       } else {
         this.registerComponent(item)
       }
     },
-    registerComponent (item: Groupable) {
+    registerComponent (item: GroupableComponent) {
       const index = this.items.push(item) - 1
 
       item.$on('click', () => this.onClick(index))
     },
-    registerElement (item: HTMLElement) {
+    registerElement (item: Element) {
       const index = this.items.push(item) - 1
 
       if (!item.getAttribute('data-value')) {
@@ -154,7 +164,7 @@ export default mixins(
 
       if (this.registerChildren) return
 
-      (this.items as Groupable[]).forEach((item, i) => {
+      (this.items as GroupableComponent[]).forEach((item, i) => {
         const value = this.getValue(item, i)
 
         item.toggle(this.toggleMethod(value))
@@ -194,22 +204,22 @@ export default mixins(
 
       this.internalValue = isSame ? undefined : value
     },
-    unregister (item: Toggleable) {
-      if (item instanceof HTMLElement) {
+    unregister (item: Groupable) {
+      if (item instanceof Element) {
         this.unregisterElement(item)
       } else {
         this.unregisterComponent(item)
       }
     },
-    unregisterComponent (item: Groupable) {
-      this.items = (this.items as Groupable[]).filter(component => {
+    unregisterComponent (item: GroupableComponent) {
+      this.items = (this.items as GroupableComponent[]).filter(component => {
         return component._uid !== item._uid
       })
     },
-    unregisterElement (item: HTMLElement) {
+    unregisterElement (item: Element) {
       const value = item.getAttribute('data-value')
 
-      this.items = (this.items as HTMLElement[]).filter(element => {
+      this.items = (this.items as Element[]).filter(element => {
         return element.getAttribute('data-value') !== value
       })
     }
