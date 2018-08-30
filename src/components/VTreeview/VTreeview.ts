@@ -11,16 +11,14 @@ import VTreeviewNode, { VTreeviewNodeProps } from './VTreeviewNode'
 
 // Mixins
 import { provide as RegistrableProvide } from '../../mixins/registrable'
+import { getObjectValueByPath } from '../../util/helpers'
 
 type VTreeviewNodeInstance = InstanceType<typeof VTreeviewNode>
 
-/* eslint-disable no-use-before-define */
-type TreeNode = {
-  value: VTreeviewNodeInstance
-  parent: TreeNode | null
-  children: TreeNode[]
+type NodeState = {
+  isSelected: boolean
+  isIndeterminate: boolean
 }
-/* eslint-enable no-use-before-define */
 
 export default mixins(
   RegistrableProvide('treeview')
@@ -49,111 +47,130 @@ export default mixins(
   },
 
   data: () => ({
-    tree: [] as TreeNode[]
+    parents: {} as Record<string | number, string | null>,
+    children: {} as Record<string | number, (string | number)[]>,
+    vnodes: {} as Record<string | number, VTreeviewNodeInstance>,
+    state: {} as Record<string | number, NodeState>,
+    active: {} as Record<string | number, boolean>
   }),
 
+  watch: {
+    items: {
+      handler () {
+        this.parents = {}
+        this.children = {}
+        this.buildTree(this.items)
+      },
+      deep: true,
+      immediate: true
+    }
+  },
+
   methods: {
-    register (child: VTreeviewNodeInstance) {
-      const parentUid = child.$parent._uid
-      if (parentUid === this._uid) {
-        this.tree.push(this.createNode(child))
-      } else {
-        const parent = this.findNode(this.tree, parentUid)
-        parent!.children.push(this.createNode(child, parent))
+    buildTree (items: any[], parent = null) {
+      for (let i = 0; i < items.length; i++) {
+        const item = items[i]
+        const key = getObjectValueByPath(item, this.itemKey)
+        const children = getObjectValueByPath(item, this.itemChildren, [])
+
+        this.parents[key] = parent
+        this.children[key] = children.map((c: any) => getObjectValueByPath(c, this.itemKey))
+        this.state[key] = {
+          isSelected: this.state[key] ? this.state[key].isSelected : false,
+          isIndeterminate: this.state[key] ? this.state[key].isIndeterminate : false
+        }
+
+        this.buildTree(children, key)
       }
     },
-    unregister (child: VTreeviewNodeInstance) {
-      const node = this.findNode(this.tree, child._uid)
+    register (node: VTreeviewNodeInstance) {
+      const key = getObjectValueByPath(node.item, this.itemKey)
+      this.vnodes[key] = node
 
-      if (!node) return
-
-      const parent = node.parent
-
-      if (parent) parent.children = parent.children.filter((c: TreeNode) => c.value._uid !== child._uid)
-      else this.tree = this.tree.filter((c: TreeNode) => c.value._uid !== child._uid)
-    },
-    createNode (value: VTreeviewNodeInstance, parent: TreeNode | null = null): TreeNode {
-      return { value, parent, children: [] }
-    },
-    findNode (nodes: TreeNode[], uid: number): TreeNode | null {
-      for (let i = 0; i < nodes.length; i++) {
-        const node = nodes[i]
-
-        if (node.value._uid === uid) return node
-
-        const found = this.findNode(node.children, uid)
-
-        if (found) return found
-      }
-
-      return null
-    },
-    updateNodes (nodes: TreeNode[], callback: (node: TreeNode) => void) {
-      for (let i = 0; i < nodes.length; i++) {
-        const node = nodes[i]
-
-        callback(node)
-
-        this.updateNodes(node.children, callback)
+      const state = this.state[key]
+      if (state) {
+        node.isSelected = state.isSelected
+        node.isIndeterminate = state.isIndeterminate
       }
     },
-    getDescendantNodes (node: TreeNode, descendants: TreeNode[] = []) {
-      if (!node) return []
+    unregister (node: VTreeviewNodeInstance) {
+      const key = getObjectValueByPath(node.item, this.itemKey)
+      delete this.vnodes[key]
+    },
+    updateActive (key: string | number, value: boolean) {
+      this.active = {}
 
-      descendants.push(...node.children)
+      if (!this.multipleActive) {
+        Object.keys(this.active).forEach(active => {
+          const vnode = this.vnodes[active]
+          if (vnode) vnode.isActive = false
+        })
+      }
 
-      for (let i = 0; i < node.children.length; i++) {
-        descendants = this.getDescendantNodes(node.children[i], descendants)
+      if (value) this.active[key] = value
+
+      const vnode = this.vnodes[key]
+      if (vnode) vnode.isActive = value
+    },
+    updateSelected (key: string | number, state: NodeState) {
+      const descendants = [key, ...this.getDescendants(key)]
+
+      descendants.forEach(descendant => {
+        this.state[descendant] = state
+      })
+
+      const parents = this.getParents(key)
+
+      parents.forEach(key => {
+        const children = this.children[key] || []
+        const counts = children.reduce((counts: number[], child: string | number) => {
+          counts[0] += +this.state[child].isSelected
+          counts[1] += +this.state[child].isIndeterminate
+          return counts
+        }, [0, 0])
+
+        const isSelected = counts[0] === children.length
+        const isIndeterminate = !isSelected && (counts[0] > 0 || counts[1] > 0)
+
+        this.state[key] = { isSelected, isIndeterminate }
+      })
+
+      const all = [key, ...descendants, ...parents]
+
+      all.forEach(item => {
+        const vnode = this.vnodes[item]
+
+        if (!vnode) return
+
+        const state = this.state[item]
+        vnode.isSelected = state.isSelected
+        vnode.isIndeterminate = state.isIndeterminate
+      })
+
+      this.$emit('selected', Object.keys(this.state).filter(k => this.state[k].isSelected).map(k => isNaN(Number(k)) ? k : Number(k)))
+    },
+    getDescendants (key: string | number, descendants: (string | number)[] = []) {
+      const children = this.children[key]
+
+      descendants.push(...children)
+
+      for (let i = 0; i < children.length; i++) {
+        descendants = this.getDescendants(children[i], descendants)
       }
 
       return descendants
     },
-    getParentNodes (node: TreeNode | null) {
-      node = node!.parent
+    getParents (key: string | number) {
+      let parent = this.parents[key]
 
       const parents = []
-      while (node !== null) {
-        parents.push(node)
-        node = node.parent
+
+      while (parent !== null) {
+        parents.push(parent)
+        parent = this.parents[parent]
       }
 
       return parents
-    },
-    updateActive (uid: number, value: boolean) {
-      const active: any[] = []
-      this.updateNodes(this.tree, (node: TreeNode) => {
-        if (node.value._uid === uid) node.value.isActive = value
-        else if (!this.multipleActive) node.value.isActive = false
-
-        if (node.value.isActive) active.push(node.value.item)
-      })
-
-      this.$emit('update:active', active)
-    },
-    updateSelected (uid: number, value: boolean) {
-      const node = this.findNode(this.tree, uid)
-
-      if (!node) return
-
-      this.getDescendantNodes(node)
-        .forEach((c: TreeNode) => {
-          c.value.isSelected = value
-          c.value.isIndeterminate = false
-        })
-
-      this.getParentNodes(node)
-        .forEach((p: TreeNode) => {
-          const count = p.children.reduce((count: number, c: any) => count + (c.value.isSelected || c.value.isIndeterminate), 0)
-          p.value.isSelected = count === p.children.length
-          p.value.isIndeterminate = !p.value.isSelected && count > 0
-        })
-
-      const selected: any[] = []
-      this.updateNodes(this.tree, (n: TreeNode) => {
-        if (n.value.isSelected) selected.push(n.value.item)
-      })
-
-      this.$emit('update:selected', selected)
     }
   },
 

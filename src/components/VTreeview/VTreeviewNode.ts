@@ -68,13 +68,15 @@ export default mixins(
     isOpen: false, // Node is open/expanded
     isSelected: false, // Node is selected (checkbox)
     isIndeterminate: false, // Node has at least one selected child
-    isActive: false, // Node is selected (row)
-    children: [] as any[]
+    isActive: false // Node is selected (row)
   }),
 
   computed: {
+    key (): string {
+      return getObjectValueByPath(this.item, this.itemKey)
+    },
     isLeaf (): boolean {
-      return !this.item.children.length
+      return !this.item.children || !this.item.children.length
     },
     scopedProps (): object {
       return {
@@ -144,7 +146,8 @@ export default mixins(
 
             this.isSelected = !this.isSelected
             this.isIndeterminate = false
-            this.treeview.updateSelected(this._uid, this.isSelected)
+
+            this.treeview.updateSelected(this.key, { isSelected: this.isSelected, isIndeterminate: this.isIndeterminate })
           }
         }
       }, [this.computedIcon])
@@ -162,7 +165,8 @@ export default mixins(
         },
         on: {
           click: () => {
-            this.treeview.updateActive(this._uid, !this.isActive)
+            this.isActive = !this.isActive
+            this.treeview.updateActive(this.key, this.isActive)
           }
         }
       }, children)
@@ -185,12 +189,8 @@ export default mixins(
       const children = getObjectValueByPath(this.item, this.itemChildren)
 
       return this.$createElement('div', {
-        staticClass: 'v-treeview-node__children',
-        directives: [{
-          name: 'show',
-          value: this.isOpen
-        }] as any
-      }, children.map(this.genChild))
+        staticClass: 'v-treeview-node__children'
+      }, this.isOpen ? children.map(this.genChild) : [])
     }
   },
 
