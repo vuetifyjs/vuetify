@@ -15,23 +15,10 @@ test('VItemGroup.ts', ({ mount }) => {
     expect('Model must be bound to an array if the multiple property is true').toHaveBeenTipped()
   })
 
-  it('should register components and elements', () => {
+  it('should register elements', () => {
     const wrapper = mount(VItemGroup)
-    const Mock = Vue.extend({
-      mixins: [Groupable],
-      data: () => ({ value: 'foo' })
-    })
-    const component = new Mock()
     const el = document.createElement('div')
     el.setAttribute('data-value', 'bar')
-
-    wrapper.vm.register(component)
-
-    expect(wrapper.vm.items.length).toBe(1)
-
-    wrapper.vm.unregister(component)
-
-    expect(wrapper.vm.items.length).toBe(0)
 
     wrapper.vm.register(el)
 
@@ -45,11 +32,12 @@ test('VItemGroup.ts', ({ mount }) => {
   it('should return the items value', () => {
     const wrapper = mount(VItemGroup)
 
-    expect(wrapper.vm.getValue({}, 0)).toBe(0)
-    expect(wrapper.vm.getValue({ value: null }, 1)).toBe(1)
-    expect(wrapper.vm.getValue({ value: undefined }, 2)).toBe(2)
-    expect(wrapper.vm.getValue({ value: '' }, 3)).toBe(3)
-    expect(wrapper.vm.getValue({ value: 'foo' })).toBe('foo')
+    const el = document.createElement('div')
+    const el2 = document.createElement('div')
+    el2.setAttribute('data-value', 'foo')
+
+    expect(wrapper.vm.getValue(el, 0)).toBe(0)
+    expect(wrapper.vm.getValue(el2, 1)).toBe('foo')
   })
 
   it('should update state from child clicks', () => {

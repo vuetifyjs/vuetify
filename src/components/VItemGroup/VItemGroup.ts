@@ -10,14 +10,7 @@ import mixins, { ExtractVue } from '../../util/mixins'
 import { consoleWarn } from '../../util/console'
 
 // Types
-import Vue, { VNode } from 'vue/types'
-
-interface GroupableComponent extends Vue {
-  toggle: (v: boolean) => void
-  value: unknown
-}
-
-type Groupable = GroupableComponent | Element
+import { VNode } from 'vue/types'
 
 interface options {
   $refs: {
@@ -40,6 +33,10 @@ export default mixins<options &
   name: 'v-item-group',
 
   props: {
+    activeClass: {
+      type: String,
+      default: 'v-item--active'
+    },
     horizontal: Boolean,
     mandatory: Boolean,
     max: {
@@ -58,7 +55,7 @@ export default mixins<options &
       internalLazyValue: this.value !== undefined
         ? this.value
         : this.multiple ? [] : undefined,
-      items: [] as Groupable[]
+      items: [] as Element[]
     }
   },
 
@@ -68,7 +65,7 @@ export default mixins<options &
         'v-item-group--horizontal': this.horizontal
       }
     },
-    selectedItems (): Groupable[] {
+    selectedItems (): Element[] {
       return this.items.filter((item, index) => {
         return this.toggleMethod(this.getValue(item, index))
       })
@@ -98,31 +95,23 @@ export default mixins<options &
   },
 
   mounted () {
-    if (this.registerChildren) {
+    this.init()
+  },
+
+  methods: {
+    getValue (item: Element, i: number): unknown {
+      const value = item.getAttribute('data-value')
+
+      return value || i
+    },
+    init () {
       const container = this.$refs.container
       const children = [...container.children]
 
       for (const child of children) {
         this.register(child)
       }
-    }
 
-    this.init()
-  },
-
-  methods: {
-    getValue (item: Groupable, i: number): unknown {
-      if (item instanceof Element) {
-        const value = item.getAttribute('data-value')
-
-        return value || i
-      } else if (item.value == null || item.value === '') {
-        return i
-      } else {
-        return item.value
-      }
-    },
-    init () {
       this.updateItemsState()
     },
     onClick (index: number) {
@@ -132,19 +121,7 @@ export default mixins<options &
         ? this.updateMultiple(value)
         : this.updateSingle(value)
     },
-    register (item: Groupable) {
-      if (item instanceof Element) {
-        this.registerElement(item)
-      } else {
-        this.registerComponent(item)
-      }
-    },
-    registerComponent (item: GroupableComponent) {
-      const index = this.items.push(item) - 1
-
-      item.$on('click', () => this.onClick(index))
-    },
-    registerElement (item: Element) {
+    register (item: Element) {
       const index = this.items.push(item) - 1
 
       if (!item.getAttribute('data-value')) {
@@ -162,12 +139,11 @@ export default mixins<options &
         return
       }
 
-      if (this.registerChildren) return
-
-      (this.items as GroupableComponent[]).forEach((item, i) => {
+      this.items.forEach((item, i) => {
         const value = this.getValue(item, i)
+        const method = this.toggleMethod(value) ? 'add' : 'remove'
 
-        item.toggle(this.toggleMethod(value))
+        item.classList[method](this.activeClass)
       })
     },
     updateMultiple (value: any) {
@@ -204,19 +180,7 @@ export default mixins<options &
 
       this.internalValue = isSame ? undefined : value
     },
-    unregister (item: Groupable) {
-      if (item instanceof Element) {
-        this.unregisterElement(item)
-      } else {
-        this.unregisterComponent(item)
-      }
-    },
-    unregisterComponent (item: GroupableComponent) {
-      this.items = (this.items as GroupableComponent[]).filter(component => {
-        return component._uid !== item._uid
-      })
-    },
-    unregisterElement (item: Element) {
+    unregister (item: Element) {
       const value = item.getAttribute('data-value')
 
       this.items = (this.items as Element[]).filter(element => {
