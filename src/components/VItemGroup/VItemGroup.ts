@@ -72,12 +72,12 @@ export default mixins<options &
     },
     toggleMethod (): (v: any) => boolean {
       if (!this.multiple) {
-        return (v: any) => this.internalValue === v
+        return (v: any) => this.internalValue === String(v)
       }
 
       const internalValue = this.internalValue
       if (Array.isArray(internalValue)) {
-        return (v: any) => internalValue.includes(v)
+        return (v: any) => internalValue.includes(String(v))
       }
 
       return () => false
@@ -134,10 +134,7 @@ export default mixins<options &
       if (this.mandatory &&
         !this.selectedItems.length &&
         this.items.length > 0
-      ) {
-        this.internalValue = this.getValue(this.items[0], 0)
-        return
-      }
+      ) return this.onClick(0)
 
       this.items.forEach((item, i) => {
         const value = this.getValue(item, i)
