@@ -71,7 +71,10 @@ export default mixins(
   },
 
   props: {
-    items: Array as PropValidator<any[]>,
+    items: {
+      type: Array,
+      default: () => ([])
+    } as PropValidator<any[]>,
     itemKey: {
       type: String,
       default: 'id'

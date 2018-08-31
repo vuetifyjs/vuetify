@@ -9,7 +9,7 @@ import VTableProgress from './VTableProgress'
 import VRow from './VRow'
 import VCell from './VCell'
 
-import { groupByProperty, getObjectValueByPath } from '../../util/helpers'
+import { groupByProperty, getObjectValueByPath, wrapInArray } from '../../util/helpers'
 import mixins from '../../util/mixins'
 import { VNode, CreateElement, VNodeData, VNodeChildrenArrayContents } from 'vue'
 import { PropValidator } from 'vue/types/options'
@@ -86,7 +86,10 @@ const VDataTable = mixins(VDataIterator).extend({
     },
     dense: Boolean,
     groupBy: String,
-    headers: Array as PropValidator<TableHeader[]>,
+    headers: {
+      type: Array,
+      default: () => ([])
+    } as PropValidator<TableHeader[]>,
     height: String,
     hideActions: Boolean,
     hideHeader: Boolean,
