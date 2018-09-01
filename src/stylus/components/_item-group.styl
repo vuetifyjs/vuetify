@@ -1,20 +1,12 @@
 @import '../bootstrap'
 
 .v-item-group
+  display: flex
+  flex: 1 0 auto
+  flex-wrap: wrap
+  position: relative
   transition: $primary-transition
 
-  &__container
-    display: flex
-    flex: 1 0 auto
-    flex-wrap: wrap
-    position: relative
-    transition: $primary-transition
-
-  &--horizontal
-    contain: content
-    display: flex
-    overflow: hidden
-
-    .v-item-group__container
-      flex-wrap: nowrap
-      white-space: nowrap
+  > *
+    cursor: pointer
+    flex: 1 1 auto

@@ -36,16 +36,14 @@ test('VItemGroup.ts', ({ mount }) => {
     const el2 = document.createElement('div')
     el2.setAttribute('data-value', 'foo')
 
-    expect(wrapper.vm.getValue(el, 0)).toBe(0)
-    expect(wrapper.vm.getValue(el2, 1)).toBe('foo')
+    expect(wrapper.vm.getValue(null)).toBe(null)
+    expect(wrapper.vm.getValue(el)).toBe(null)
+    expect(wrapper.vm.getValue(el2)).toBe('foo')
   })
 
   it('should update state from child clicks', () => {
     const change = jest.fn()
     const wrapper = mount(VItemGroup, {
-      propsData: {
-        registerChildren: true
-      },
       slots: {
         default: [
           { render: h => h('div') },
@@ -62,8 +60,7 @@ test('VItemGroup.ts', ({ mount }) => {
 
     expect(wrapper.vm.items.length).toBe(2)
 
-    const container = wrapper.first('.v-item-group__container')
-    const [ child1, child2 ] = container.element.children
+    const [ child1, child2 ] = wrapper.vm.$el.children
 
     child1.click()
     expect(change).toBeCalledWith('0')
@@ -114,7 +111,6 @@ test('VItemGroup.ts', ({ mount }) => {
     wrapper.setProps({ value: '0' })
 
     expect(wrapper.vm.toggleMethod('0')).toBe(false)
-    expect('Model must be bound to an array if the multiple property is true').toHaveBeenTipped()
   })
 
   it('should add active class to children', async () => {
@@ -161,9 +157,7 @@ test('VItemGroup.ts', ({ mount }) => {
     expect(wrapper.vm.selectedItems.length).toBe(1)
     expect(wrapper.vm.internalValue).toBe('0')
 
-    wrapper.setData({ multiple: true, value: [] })
-
-    await wrapper.vm.$nextTick()
+    wrapper.setProps({ multiple: true })
 
     // Manually update selected items
     wrapper.vm.updateItemsState()

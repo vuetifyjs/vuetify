@@ -37,7 +37,6 @@ export default mixins<options &
       type: String,
       default: 'v-item--active'
     },
-    horizontal: Boolean,
     mandatory: Boolean,
     max: {
       type: [Number, String],
@@ -59,14 +58,9 @@ export default mixins<options &
   },
 
   computed: {
-    classes (): object {
-      return {
-        'v-item-group--horizontal': this.horizontal
-      }
-    },
     selectedItems (): Element[] {
-      return this.items.filter((item, index) => {
-        return this.toggleMethod(this.getValue(item, index))
+      return this.items.filter(item => {
+        return this.toggleMethod(this.getValue(item))
       })
     },
     // Convert value to string
@@ -82,8 +76,6 @@ export default mixins<options &
       if (Array.isArray(internalValue)) {
         return (v: any) => internalValue.includes(String(v))
       }
-
-      consoleWarn('Model must be bound to an array if the multiple property is true.', this)
 
       return () => false
     }
@@ -103,21 +95,28 @@ export default mixins<options &
     this.init()
   },
 
+  updated () {
+    this.items = []
+    const children = [...this.$el.children]
+
+    children.forEach(this.register)
+  },
+
   methods: {
-    getValue (item: Element, i: number): unknown {
-      return item.getAttribute('data-value') || i
+    getValue (item: Element | null): string | null {
+      if (!item) return item
+
+      return item.getAttribute('data-value')
     },
     init () {
-      [...this.$refs.container.children].forEach(this.register)
+      [...this.$el.children].forEach(this.register)
 
       this.updateItemsState()
     },
-    onClick (index: number) {
-      const value = this.getValue(this.items[index], index)
-
-      this.multiple
-        ? this.updateMultiple(value)
-        : this.updateSingle(value)
+    onClick (e: Event) {
+      this.updateInternalValue(
+        this.getValue(e.currentTarget as Element)
+      )
     },
     register (item: Element) {
       const index = this.items.push(item) - 1
@@ -126,23 +125,35 @@ export default mixins<options &
         item.setAttribute('data-value', String(index))
       }
 
-      item.addEventListener('click', () => this.onClick(index))
+      item.addEventListener('click', this.onClick)
     },
     updateItemsState () {
       if (this.mandatory &&
         !this.selectedItems.length &&
         this.items.length > 0
-      ) return this.onClick(0)
+      ) {
+        return this.updateInternalValue(
+          this.getValue(this.items[0])
+        )
+      }
 
-      this.items.forEach((item, i) => {
-        const value = this.getValue(item, i)
+      this.items.forEach(item => {
+        const value = this.getValue(item)
         const method = this.toggleMethod(value) ? 'add' : 'remove'
 
         item.classList[method](this.activeClass)
       })
     },
+    updateInternalValue (value: any) {
+      this.multiple
+        ? this.updateMultiple(value)
+        : this.updateSingle(value)
+    },
     updateMultiple (value: any) {
-      const internalValue = ((this.internalValue || []) as string[]).slice()
+      const defaultValue = Array.isArray(this.internalValue)
+        ? this.internalValue
+        : []
+      const internalValue = defaultValue.slice()
       const index = internalValue.findIndex(val => val === value)
 
       if (
@@ -176,23 +187,21 @@ export default mixins<options &
       this.internalValue = isSame ? undefined : value
     },
     unregister (item: Element) {
-      const value = item.getAttribute('data-value')
-
       this.items = (this.items as Element[]).filter(element => {
-        return element.getAttribute('data-value') !== value
+        const isRemoved = element !== item
+
+        if (isRemoved) {
+          item.removeEventListener('click', this.onClick)
+        }
+
+        return isRemoved
       })
     }
   },
 
   render (h): VNode {
     return h('div', {
-      staticClass: 'v-item-group',
-      class: this.classes
-    }, [
-      h('div', {
-        staticClass: 'v-item-group__container',
-        ref: 'container'
-      }, this.$slots.default)
-    ])
+      staticClass: 'v-item-group'
+    }, this.$slots.default)
   }
 })
