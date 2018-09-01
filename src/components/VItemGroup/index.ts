@@ -1,4 +1,14 @@
+import VItem from './VItem'
 import VItemGroup from './VItemGroup'
 
-export { VItemGroup }
-export default VItemGroup
+export {
+  VItem,
+  VItemGroup
+}
+
+export default {
+  $_vuetify_subcomponents: {
+    VItem,
+    VItemGroup
+  }
+}

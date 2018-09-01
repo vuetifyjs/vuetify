@@ -1,7 +1,7 @@
 import Vue from 'vue'
 
 // Components
-import VItemGroup from '../components/VItemGroup'
+import VItemGroup from '../components/VItemGroup/VItemGroup'
 
 // Mixins
 import { inject as RegistrableInject } from './registrable'
