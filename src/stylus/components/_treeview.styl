@@ -60,16 +60,7 @@ theme(v-treeview, "v-treeview")
         transform: rotate(90deg)
 
       &--loading
-        animation: rotation 1s infinite linear
+        animation: progress-circular-rotate 1s linear infinite
 
     &__children
       transition: all $treeview-transition
-
-@-webkit-keyframes rotation {
-  from {
-    -webkit-transform: rotate(0deg)
-  }
-  to {
-    -webkit-transform: rotate(359deg)
-  }
-}
