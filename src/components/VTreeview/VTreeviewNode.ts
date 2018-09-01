@@ -1,7 +1,8 @@
 // Types
-import { VNode } from 'vue'
+import { VNode, VNodeChildrenArrayContents } from 'vue'
 
 // Components
+import { VExpandTransition } from '../transitions'
 import { VTreeviewNode } from '.'
 import { VIcon } from '../VIcon'
 
@@ -50,7 +51,8 @@ export const VTreeviewNodeProps = {
     type: String,
     default: 'children'
   },
-  loadChildren: Function
+  loadChildren: Function,
+  transition: Boolean
 }
 
 export default mixins(
@@ -78,7 +80,7 @@ export default mixins(
     isSelected: false, // Node is selected (checkbox)
     isIndeterminate: false, // Node has at least one selected child
     isActive: false, // Node is selected (row)
-    isLoading: false // Is loading children
+    isLoading: false
   }),
 
   computed: {
@@ -116,6 +118,8 @@ export default mixins(
 
   methods: {
     async checkChildren () {
+      // TODO: Potential issue with always trying
+      // to load children if response is empty?
       if (!this.children || this.children.length || !this.loadChildren) return
 
       this.isLoading = true
@@ -129,13 +133,11 @@ export default mixins(
       }, [this.text])
     },
     genContent () {
-      const children = []
-
-      if (this.$scopedSlots.prepend) children.push(this.$scopedSlots.prepend(this.scopedProps))
-
-      children.push(this.genLabel())
-
-      if (this.$scopedSlots.append) children.push(this.$scopedSlots.append(this.scopedProps))
+      const children = [
+        this.$scopedSlots.prepend && this.$scopedSlots.prepend(this.scopedProps),
+        this.genLabel(),
+        this.$scopedSlots.append && this.$scopedSlots.append(this.scopedProps)
+      ]
 
       return this.$createElement('div', {
         staticClass: 'v-treeview-node__content'
@@ -179,7 +181,8 @@ export default mixins(
             this.isSelected = !this.isSelected
             this.isIndeterminate = false
 
-            this.treeview.updateSelected(this.key, { isSelected: this.isSelected, isIndeterminate: this.isIndeterminate })
+            this.treeview.updateSelected(this.key, this.isSelected)
+            this.treeview.emitSelected()
           }
         }
       }, [this.computedIcon])
@@ -215,22 +218,31 @@ export default mixins(
           loadingIcon: this.loadingIcon,
           itemText: this.itemText,
           itemChildren: this.itemChildren,
-          loadChildren: this.loadChildren
+          loadChildren: this.loadChildren,
+          transition: this.transition
         },
         scopedSlots: this.$scopedSlots
       })
     },
-    genChildren (): any {
+    genChildrenWrapper (): any {
+      if (!this.isOpen || !this.children) return null
+
+      const children = [this.children.map(this.genChild)]
+
       return this.$createElement('div', {
         staticClass: 'v-treeview-node__children'
-      }, this.isOpen ? this.children!.map(this.genChild) : [])
+      }, children)
+    },
+    genTransition () {
+      return this.$createElement(VExpandTransition, [this.genChildrenWrapper()])
     }
   },
 
   render (h): VNode {
     const children = [this.genNode()]
 
-    if (this.children) children.push(this.genChildren())
+    if (this.transition) children.push(this.genTransition())
+    else children.push(this.genChildrenWrapper())
 
     return h('div', {
       staticClass: 'v-treeview-node',
