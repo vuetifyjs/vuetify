@@ -3,6 +3,7 @@ import '../../stylus/components/_item-group.styl'
 
 // Mixins
 import Proxyable from '../../mixins/proxyable'
+import Groupable from '../../mixins/groupable'
 
 // Utilities
 import mixins from '../../util/mixins'
@@ -11,8 +12,16 @@ import { consoleWarn } from '../../util/console'
 // Types
 import { VNode } from 'vue/types'
 
+type GroupableInstance = InstanceType<typeof Groupable>
+
 export default mixins(Proxyable).extend({
   name: 'v-item-group',
+
+  provide (): object {
+    return {
+      itemGroup: this
+    }
+  },
 
   props: {
     activeClass: {

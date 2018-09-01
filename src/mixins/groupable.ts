@@ -6,7 +6,7 @@ import mixins from '../util/mixins'
 import { consoleWarn } from '../util/console'
 
 export default mixins(
-  RegistrableInject('group')
+  RegistrableInject('itemGroup')
 ).extend({
   name: 'groupable',
 
@@ -33,11 +33,11 @@ export default mixins(
       consoleWarn('Implementing component is missing a value property', this)
     }
 
-    this.group && this.group.register(this)
+    this.itemGroup && this.itemGroup.register(this)
   },
 
   beforeDestroy () {
-    this.group && this.group.unregister(this)
+    this.itemGroup && this.itemGroup.unregister(this)
   },
 
   methods: {
