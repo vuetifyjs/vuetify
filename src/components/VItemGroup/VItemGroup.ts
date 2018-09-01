@@ -3,25 +3,33 @@ import '../../stylus/components/_item-group.styl'
 
 // Mixins
 import Proxyable from '../../mixins/proxyable'
-import Groupable from '../../mixins/groupable'
+import { provide as RegistrableProvide, Registrable } from '../../mixins/registrable'
 
 // Utilities
-import mixins from '../../util/mixins'
+import mixins, { ExtractVue } from '../../util/mixins'
 import { consoleWarn } from '../../util/console'
 
 // Types
-import { VNode } from 'vue/types'
+import Vue, { VNode } from 'vue/types'
 
-type GroupableInstance = InstanceType<typeof Groupable>
+interface GroupableComponent extends Vue {
+  toggle: (v: boolean) => void
+  value: unknown
+}
 
-export default mixins(Proxyable).extend({
+export default mixins<
+/* eslint-disable indent */
+  ExtractVue<[
+    typeof Proxyable,
+    Registrable<'group'>
+  ]>
+/* eslint-enable indent */
+>(
+  Proxyable,
+  RegistrableProvide('group')
+  /* @vue/component */
+).extend({
   name: 'v-item-group',
-
-  provide (): object {
-    return {
-      itemGroup: this
-    }
-  },
 
   props: {
     activeClass: {
@@ -44,14 +52,14 @@ export default mixins(Proxyable).extend({
       internalLazyValue: this.value !== undefined
         ? this.value
         : this.multiple ? [] : undefined,
-      items: [] as Element[]
+      items: [] as GroupableComponent[]
     }
   },
 
   computed: {
-    selectedItems (): Element[] {
-      return this.items.filter(item => {
-        return this.toggleMethod(this.getValue(item))
+    selectedItems (): GroupableComponent[] {
+      return this.items.filter((item, index) => {
+        return this.toggleMethod(this.getValue(item, index))
       })
     },
     // Convert value to string
@@ -59,13 +67,12 @@ export default mixins(Proxyable).extend({
     // always be a string
     toggleMethod (): (v: any) => boolean {
       if (!this.multiple) {
-        return (v: any) => this.internalValue === String(v)
+        return (v: any) => this.internalValue === v
       }
 
       const internalValue = this.internalValue
-
       if (Array.isArray(internalValue)) {
-        return (v: any) => internalValue.includes(String(v))
+        return (v: any) => internalValue.includes(v)
       }
 
       return () => false
@@ -86,37 +93,24 @@ export default mixins(Proxyable).extend({
     this.init()
   },
 
-  updated () {
-    this.items = []
-    const children = [...this.$el.children]
-
-    children.forEach(this.register)
-  },
-
   methods: {
-    getValue (item: Element | null): string | null {
-      if (!item) return item
-
-      return item.getAttribute('data-value')
+    getValue (item: GroupableComponent, i: number): unknown {
+      return item.value == null || item.value === ''
+        ? i
+        : item.value
     },
     init () {
-      [...this.$el.children].forEach(this.register)
-
       this.updateItemsState()
     },
-    onClick (e: Event) {
+    onClick (index: number) {
       this.updateInternalValue(
-        this.getValue(e.currentTarget as Element)
+        this.getValue(this.items[index], index)
       )
     },
-    register (item: Element) {
+    register (item: GroupableComponent) {
       const index = this.items.push(item) - 1
 
-      if (!item.getAttribute('data-value')) {
-        item.setAttribute('data-value', String(index))
-      }
-
-      item.addEventListener('click', this.onClick)
+      item.$on('click', () => this.onClick(index))
     },
     updateItemsState () {
       if (this.mandatory &&
@@ -124,15 +118,14 @@ export default mixins(Proxyable).extend({
         this.items.length > 0
       ) {
         return this.updateInternalValue(
-          this.getValue(this.items[0])
+          this.getValue(this.items[0], 0)
         )
       }
 
-      this.items.forEach(item => {
-        const value = this.getValue(item)
-        const method = this.toggleMethod(value) ? 'add' : 'remove'
+      this.items.forEach((item, i) => {
+        const value = this.getValue(item, i)
 
-        item.classList[method](this.activeClass)
+        item.toggle(this.toggleMethod(value))
       })
     },
     updateInternalValue (value: any) {
@@ -177,15 +170,9 @@ export default mixins(Proxyable).extend({
 
       this.internalValue = isSame ? undefined : value
     },
-    unregister (item: Element) {
-      this.items = (this.items as Element[]).filter(element => {
-        const isRemoved = element !== item
-
-        if (isRemoved) {
-          item.removeEventListener('click', this.onClick)
-        }
-
-        return isRemoved
+    unregister (item: GroupableComponent) {
+      this.items = this.items.filter(component => {
+        return component._uid !== item._uid
       })
     }
   },
