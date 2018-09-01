@@ -3,33 +3,15 @@ import '../../stylus/components/_item-group.styl'
 
 // Mixins
 import Proxyable from '../../mixins/proxyable'
-import { provide as RegistrableProvide, Registrable } from '../../mixins/registrable'
 
 // Utilities
-import mixins, { ExtractVue } from '../../util/mixins'
+import mixins from '../../util/mixins'
 import { consoleWarn } from '../../util/console'
 
 // Types
 import { VNode } from 'vue/types'
 
-interface options {
-  $refs: {
-    container: Element
-  }
-}
-
-export default mixins<options &
-/* eslint-disable indent */
-  ExtractVue<[
-    typeof Proxyable,
-    Registrable<'group'>
-  ]>
-/* eslint-enable indent */
->(
-  Proxyable,
-  RegistrableProvide('group')
-  /* @vue/component */
-).extend({
+export default mixins(Proxyable).extend({
   name: 'v-item-group',
 
   props: {
