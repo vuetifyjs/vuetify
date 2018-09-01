@@ -9,6 +9,7 @@ import { inject as RegistrableInject } from './registrable'
 // Utilities
 import mixins from '../util/mixins'
 import { consoleWarn } from '../util/console'
+import { PropValidator } from 'vue/types/options'
 
 type VItemGroupInstance = InstanceType<typeof VItemGroup>
 
@@ -22,7 +23,8 @@ export default mixins<options>(
   name: 'groupable',
 
   props: {
-    activeClass: String
+    activeClass: String,
+    value: null as any as PropValidator<any>
   },
 
   data: () => ({

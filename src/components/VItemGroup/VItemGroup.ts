@@ -3,32 +3,18 @@ import '../../stylus/components/_item-group.styl'
 
 // Mixins
 import Proxyable from '../../mixins/proxyable'
-import { provide as RegistrableProvide, Registrable } from '../../mixins/registrable'
+import Groupable from '../../mixins/groupable'
 
 // Utilities
-import mixins, { ExtractVue } from '../../util/mixins'
+import mixins from '../../util/mixins'
 import { consoleWarn } from '../../util/console'
 
 // Types
-import Vue, { VNode } from 'vue/types'
+import { VNode } from 'vue/types'
 
-interface GroupableComponent extends Vue {
-  toggle: (v: boolean) => void
-  value: unknown
-}
+type GroupableInstance = InstanceType<typeof Groupable>
 
-export default mixins<
-/* eslint-disable indent */
-  ExtractVue<[
-    typeof Proxyable,
-    Registrable<'group'>
-  ]>
-/* eslint-enable indent */
->(
-  Proxyable,
-  RegistrableProvide('group')
-  /* @vue/component */
-).extend({
+export default mixins(Proxyable).extend({
   name: 'v-item-group',
 
   props: {
@@ -52,12 +38,12 @@ export default mixins<
       internalLazyValue: this.value !== undefined
         ? this.value
         : this.multiple ? [] : undefined,
-      items: [] as GroupableComponent[]
+      items: [] as GroupableInstance[]
     }
   },
 
   computed: {
-    selectedItems (): GroupableComponent[] {
+    selectedItems (): GroupableInstance[] {
       return this.items.filter((item, index) => {
         return this.toggleMethod(this.getValue(item, index))
       })
@@ -94,7 +80,7 @@ export default mixins<
   },
 
   methods: {
-    getValue (item: GroupableComponent, i: number): unknown {
+    getValue (item: GroupableInstance, i: number): unknown {
       return item.value == null || item.value === ''
         ? i
         : item.value
@@ -107,7 +93,7 @@ export default mixins<
         this.getValue(this.items[index], index)
       )
     },
-    register (item: GroupableComponent) {
+    register (item: GroupableInstance) {
       const index = this.items.push(item) - 1
 
       item.$on('click', () => this.onClick(index))
@@ -170,7 +156,7 @@ export default mixins<
 
       this.internalValue = isSame ? undefined : value
     },
-    unregister (item: GroupableComponent) {
+    unregister (item: GroupableInstance) {
       this.items = this.items.filter(component => {
         return component._uid !== item._uid
       })
