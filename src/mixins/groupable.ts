@@ -1,3 +1,8 @@
+import Vue from 'vue'
+
+// Components
+import VItemGroup from '../components/VItemGroup'
+
 // Mixins
 import { inject as RegistrableInject } from './registrable'
 
@@ -5,7 +10,13 @@ import { inject as RegistrableInject } from './registrable'
 import mixins from '../util/mixins'
 import { consoleWarn } from '../util/console'
 
-export default mixins(
+type VItemGroupInstance = InstanceType<typeof VItemGroup>
+
+interface options extends Vue {
+  itemGroup: VItemGroupInstance
+}
+
+export default mixins<options>(
   RegistrableInject('itemGroup')
 ).extend({
   name: 'groupable',
