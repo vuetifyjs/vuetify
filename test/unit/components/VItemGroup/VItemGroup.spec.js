@@ -90,4 +90,133 @@ test('VItemGroup.ts', ({ mount }) => {
     child1.click()
     expect(change).toBeCalledWith(['foo'])
   })
+
+  it('should have a conditional method for toggling items', () => {
+    const wrapper = mount(VItemGroup)
+
+    expect(wrapper.vm.toggleMethod('0')).toBe(false)
+
+    wrapper.setProps({ value: '0' })
+
+    expect(wrapper.vm.toggleMethod('0')).toBe(true)
+
+    wrapper.setProps({
+      multiple: true,
+      value: []
+    })
+
+    expect(wrapper.vm.toggleMethod('0')).toBe(false)
+
+    wrapper.setProps({ value: ['0'] })
+
+    expect(wrapper.vm.toggleMethod('0')).toBe(true)
+
+    wrapper.setProps({ value: '0' })
+
+    expect(wrapper.vm.toggleMethod('0')).toBe(false)
+    expect('Model must be bound to an array if the multiple property is true').toHaveBeenTipped()
+  })
+
+  it('should add active class to children', async () => {
+    const wrapper = mount(VItemGroup, {
+      slots: {
+        default: [
+          { render: h => h('div', { staticClass: 'foobar' }) },
+          { render: h => h('div', { staticClass: 'foobar' }) }
+        ]
+      }
+    })
+
+    const [first, second] = wrapper.find('.foobar')
+
+    expect(first.element.classList.contains('v-item--active')).toBe(false)
+
+    first.trigger('click')
+
+    await wrapper.vm.$nextTick()
+
+    expect(first.element.classList.contains('v-item--active')).toBe(true)
+
+    expect(wrapper.vm.selectedItems).toEqual([first.element])
+
+    second.trigger('click')
+
+    await wrapper.vm.$nextTick()
+
+    expect(second.element.classList.contains('v-item--active')).toBe(true)
+
+    expect(wrapper.vm.selectedItems).toEqual([second.element])
+  })
+
+  it('should select the first item if mandatory and no value', async () => {
+    const wrapper = mount(VItemGroup, {
+      propsData: { mandatory: true },
+      slots: {
+        default: [
+          { render: h => h('div', { staticClass: 'foobar' }) }
+        ]
+      }
+    })
+
+    expect(wrapper.vm.selectedItems.length).toBe(1)
+    expect(wrapper.vm.internalValue).toBe('0')
+
+    wrapper.setData({ multiple: true, value: [] })
+
+    await wrapper.vm.$nextTick()
+
+    // Manually update selected items
+    wrapper.vm.updateItemsState()
+
+    expect(wrapper.vm.selectedItems.length).toBe(1)
+    expect(wrapper.vm.internalValue).toEqual(['0'])
+  })
+
+  it('should update a single item group', () => {
+    const wrapper = mount(VItemGroup)
+
+    // Toggling on and off
+    wrapper.vm.updateSingle('foo')
+    expect(wrapper.vm.internalValue).toBe('foo')
+    wrapper.vm.updateSingle('foo')
+    expect(wrapper.vm.internalValue).toBe(undefined)
+
+    wrapper.setProps({ mandatory: true })
+
+    // Toggling off single mandatory
+    wrapper.vm.updateSingle('foo')
+    expect(wrapper.vm.internalValue).toBe('foo')
+    wrapper.vm.updateSingle('foo')
+    expect(wrapper.vm.internalValue).toBe('foo')
+  })
+
+  it('should update a multiple item group', () => {
+    const wrapper = mount(VItemGroup, {
+      propsData: { multiple: true }
+    })
+
+    // Toggling on and off
+    wrapper.vm.updateMultiple('foo')
+    expect(wrapper.vm.internalValue).toEqual(['foo'])
+    wrapper.vm.updateMultiple('foo')
+    expect(wrapper.vm.internalValue).toEqual([])
+
+    wrapper.setProps({ mandatory: true })
+
+    // Toggling off single mandatory
+    wrapper.vm.updateMultiple('foo')
+    expect(wrapper.vm.internalValue).toEqual(['foo'])
+    wrapper.vm.updateMultiple('foo')
+    expect(wrapper.vm.internalValue).toEqual(['foo'])
+
+    wrapper.setProps({ max: 3 })
+
+    // Should enforce maximum selection
+    wrapper.vm.updateMultiple('bar')
+    expect(wrapper.vm.internalValue).toEqual(['foo', 'bar'])
+    wrapper.vm.updateMultiple('fizz')
+    expect(wrapper.vm.internalValue).toEqual(['foo', 'bar', 'fizz'])
+    wrapper.vm.updateMultiple('buzz')
+    expect(wrapper.vm.internalValue).toEqual(['foo', 'bar', 'fizz'])
+  })
 })

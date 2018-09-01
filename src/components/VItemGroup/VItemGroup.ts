@@ -43,8 +43,7 @@ export default mixins<options &
       type: [Number, String],
       default: null
     },
-    multiple: Boolean,
-    registerChildren: Boolean
+    multiple: Boolean
   },
 
   data () {
@@ -70,15 +69,21 @@ export default mixins<options &
         return this.toggleMethod(this.getValue(item, index))
       })
     },
+    // Convert value to string
+    // HTML data-attribute will
+    // always be a string
     toggleMethod (): (v: any) => boolean {
       if (!this.multiple) {
         return (v: any) => this.internalValue === String(v)
       }
 
       const internalValue = this.internalValue
+
       if (Array.isArray(internalValue)) {
         return (v: any) => internalValue.includes(String(v))
       }
+
+      consoleWarn('Model must be bound to an array if the multiple property is true.', this)
 
       return () => false
     }
@@ -89,7 +94,7 @@ export default mixins<options &
   },
 
   created () {
-    if (this.multiple && !Array.isArray(this.value)) {
+    if (this.multiple && !Array.isArray(this.internalValue)) {
       consoleWarn('Model must be bound to an array if the multiple property is true.', this)
     }
   },
@@ -100,17 +105,10 @@ export default mixins<options &
 
   methods: {
     getValue (item: Element, i: number): unknown {
-      const value = item.getAttribute('data-value')
-
-      return value || i
+      return item.getAttribute('data-value') || i
     },
     init () {
-      const container = this.$refs.container
-      const children = [...container.children]
-
-      for (const child of children) {
-        this.register(child)
-      }
+      [...this.$refs.container.children].forEach(this.register)
 
       this.updateItemsState()
     },
