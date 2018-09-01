@@ -1,5 +1,5 @@
 // Types
-import { VNode, VNodeChildrenArrayContents } from 'vue'
+import { VNode } from 'vue'
 
 // Components
 import { VExpandTransition } from '../transitions'
