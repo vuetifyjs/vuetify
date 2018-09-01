@@ -62,6 +62,9 @@ theme(v-treeview, "v-treeview")
       &--loading
         animation: rotation 1s infinite linear
 
+    &__children
+      transition: all $treeview-transition
+
 @-webkit-keyframes rotation {
   from {
     -webkit-transform: rotate(0deg)
