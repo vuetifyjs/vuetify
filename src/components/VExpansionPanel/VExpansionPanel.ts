@@ -9,17 +9,11 @@ import mixins from '../../util/mixins'
 import { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
 
-type VExpansionPanelContentInstance = InstanceType<typeof VExpansionPanelContent>
+interface VExpansionPanelContentInstance extends InstanceType<typeof VExpansionPanelContent> {}
 
 /* @vue/component */
 export default mixins(Themeable, RegistrableProvide('expansionPanel')).extend({
   name: 'v-expansion-panel',
-
-  provide (): object {
-    return {
-      expansionPanel: this
-    }
-  },
 
   props: {
     disabled: Boolean,

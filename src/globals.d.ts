@@ -96,17 +96,17 @@ declare module 'vue/types/vue' {
 
   interface VueConstructor<
     V extends Vue = Vue,
-    Options = Record<string, any>
+    Options = {}
   > {
     version: string
     /* eslint-disable-next-line camelcase */
     $_vuetify_subcomponents?: Record<string, VueConstructor>
     options: Options
 
-    extend<Data, Methods, Computed, Options, PropNames extends string = never> (options?: ThisTypedComponentOptionsWithArrayProps<V, Data, Methods, Computed, PropNames> & Options): OptionsVue<V, Data, Methods, Computed, Record<PropNames, any>, Options>
-    extend<Data, Methods, Computed, Props, Options> (options?: ThisTypedComponentOptionsWithRecordProps<V, Data, Methods, Computed, Props> & Options): OptionsVue<V, Data, Methods, Computed, Props, Options>
-    extend<Options, PropNames extends string = never> (definition: FunctionalComponentOptions<Record<PropNames, any>, PropNames[]> & Options): OptionsVue<V, {}, {}, {}, Record<PropNames, any>, Options>
-    extend<Props, Options> (definition: FunctionalComponentOptions<Props, RecordPropsDefinition<Props>> & Options): OptionsVue<V, {}, {}, {}, Props, Options>
+    extend<Data, Methods, Computed, ExtendOptions, PropNames extends string = never> (options?: ThisTypedComponentOptionsWithArrayProps<V, Data, Methods, Computed, PropNames> & ExtendOptions): OptionsVue<V, Data, Methods, Computed, Record<PropNames, any>, Options & ExtendOptions>
+    extend<Data, Methods, Computed, Props, ExtendOptions> (options?: ThisTypedComponentOptionsWithRecordProps<V, Data, Methods, Computed, Props> & ExtendOptions): OptionsVue<V, Data, Methods, Computed, Props, Options & ExtendOptions>
+    extend<ExtendOptions, PropNames extends string = never> (definition: FunctionalComponentOptions<Record<PropNames, any>, PropNames[]> & ExtendOptions): OptionsVue<V, {}, {}, {}, Record<PropNames, any>, Options & ExtendOptions>
+    extend<Props, ExtendOptions> (definition: FunctionalComponentOptions<Props, RecordPropsDefinition<Props>> & ExtendOptions): OptionsVue<V, {}, {}, {}, Props, Options & ExtendOptions>
     extend<V extends Vue = Vue> (options?: ComponentOptions<V> & Options): OptionsVue<V, {}, {}, {}, {}, Options>
   }
 }

@@ -3,36 +3,21 @@ import { VExpandTransition } from '../transitions'
 import Bootable from '../../mixins/bootable'
 import Toggleable from '../../mixins/toggleable'
 import Rippleable from '../../mixins/rippleable'
-import { Registrable, inject as RegistrableInject } from '../../mixins/registrable'
+import { inject as RegistrableInject } from '../../mixins/registrable'
 
 import VIcon from '../VIcon'
 import VExpansionPanel from './VExpansionPanel'
 
-import mixins, { ExtractVue } from '../../util/mixins'
-import Vue, { VNode } from 'vue'
+import mixins from '../../util/mixins'
+import { VNode } from 'vue'
 
 import { consoleWarn } from '../../util/console'
 
-type VExpansionPanelInstance = InstanceType<typeof VExpansionPanel>
-
-interface options extends Vue {
-  expansionPanel: VExpansionPanelInstance
-}
-
-export default mixins<options &
-/* eslint-disable indent */
-  ExtractVue<[
-    typeof Bootable,
-    typeof Toggleable,
-    typeof Rippleable,
-    Registrable<'expansionPanel'>
-  ]>
-/* eslint-enable indent */
->(
+export default mixins(
   Bootable,
   Toggleable,
   Rippleable,
-  RegistrableInject('expansionPanel', 'v-expansion-panel-content', 'v-expansion-panel')
+  RegistrableInject<typeof VExpansionPanel>()('expansionPanel', 'v-expansion-panel-content', 'v-expansion-panel')
   /* @vue/component */
 ).extend({
   name: 'v-expansion-panel-content',
