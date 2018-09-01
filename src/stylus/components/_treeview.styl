@@ -33,8 +33,14 @@ theme(v-treeview, "v-treeview")
       align-items: center
       padding-left: 4px
 
+      // TODO: this is temporary fix for d-flex * shenanigans
+      .v-btn
+        flex-grow: 0 !important
+        flex-shrink: 1 !important
+
     &__label
       font-size: 1.2rem
+      padding-left: 0.25rem
 
       .v-icon
         padding-right: 8px
@@ -44,8 +50,23 @@ theme(v-treeview, "v-treeview")
       height: 24px
 
     &__checkbox
+      user-select: none
       padding-left: 4px
 
     &__toggle
+      user-select: none
+
       &--open
         transform: rotate(90deg)
+
+      &--loading
+        animation: rotation 1s infinite linear
+
+@-webkit-keyframes rotation {
+  from {
+    -webkit-transform: rotate(0deg)
+  }
+  to {
+    -webkit-transform: rotate(359deg)
+  }
+}

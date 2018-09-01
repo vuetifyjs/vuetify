@@ -12,7 +12,7 @@ import VTreeviewNode, { VTreeviewNodeProps } from './VTreeviewNode'
 import { provide as RegistrableProvide } from '../../mixins/registrable'
 
 // Utils
-import { getObjectValueByPath } from '../../util/helpers'
+import { getObjectValueByPath, deepEqual } from '../../util/helpers'
 import mixins from '../../util/mixins'
 
 type VTreeviewNodeInstance = InstanceType<typeof VTreeviewNode>
@@ -44,6 +44,7 @@ export default mixins(
       type: Array,
       default: () => ([])
     } as PropValidator<any[]>,
+    selected: Array as PropValidator<(string | number)[]>,
     multipleActive: Boolean,
     ...VTreeviewNodeProps
   },
@@ -66,6 +67,14 @@ export default mixins(
         this.buildTree(this.items, oldState)
       },
       deep: true,
+      immediate: true
+    },
+    selected: {
+      handler (newVal, oldVal) {
+        if (!newVal || deepEqual(newVal, oldVal)) return
+
+        this.selected.forEach(key => this.updateSelected(key, { isSelected: true, isIndeterminate: false }))
+      },
       immediate: true
     }
   },
@@ -131,23 +140,24 @@ export default mixins(
     },
     updateSelected (key: string | number, state: NodeState) {
       const descendants = [key, ...this.getDescendants(key)]
-
       descendants.forEach(descendant => {
         this.state[descendant] = state
       })
 
       const parents = this.getParents(key)
-
       parents.forEach(parent => {
         const children = this.children[parent] || []
         this.state[parent] = this.calculateState(children, this.state)
       })
 
       const all = [key, ...descendants, ...parents]
-
       all.forEach(this.updateVnodeState)
 
-      this.$emit('selected', Object.keys(this.state).filter(k => this.state[k].isSelected).map(k => isNaN(Number(k)) ? k : Number(k)))
+      const selected = Object.keys(this.state)
+        .filter(k => this.state[k].isSelected)
+        .map(k => isNaN(Number(k)) ? k : Number(k))
+
+      this.$emit('update:selected', selected)
     },
     getDescendants (key: string | number, descendants: (string | number)[] = []) {
       const children = this.children[key]
