@@ -54,9 +54,6 @@ export default mixins(Proxyable).extend({
         return this.toggleMethod(this.getValue(item, index))
       })
     },
-    // Convert value to string
-    // HTML data-attribute will
-    // always be a string
     toggleMethod (): (v: any) => boolean {
       if (!this.multiple) {
         return (v: any) => this.internalValue === v
@@ -102,7 +99,10 @@ export default mixins(Proxyable).extend({
     register (item: GroupableInstance) {
       const index = this.items.push(item) - 1
 
-      item.$on('click', () => this.onClick(index))
+      item.$on('change', () => this.onClick(index))
+    },
+    unregister (item: GroupableInstance) {
+      this.items.splice(this.items.indexOf(item), 1)
     },
     updateItemsState () {
       if (this.mandatory &&
@@ -117,7 +117,7 @@ export default mixins(Proxyable).extend({
       this.items.forEach((item, i) => {
         const value = this.getValue(item, i)
 
-        item.toggle(this.toggleMethod(value))
+        item.isActive = this.toggleMethod(value)
       })
     },
     updateInternalValue (value: any) {
@@ -161,11 +161,6 @@ export default mixins(Proxyable).extend({
       if (this.mandatory && isSame) return
 
       this.internalValue = isSame ? undefined : value
-    },
-    unregister (item: GroupableInstance) {
-      this.items = this.items.filter(component => {
-        return component._uid !== item._uid
-      })
     }
   },
 

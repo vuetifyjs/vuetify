@@ -8,9 +8,8 @@ import { consoleWarn } from '../../util/console'
 // Types
 import { VNode, VNodeChildrenArrayContents } from 'vue/types/vnode'
 
-export default mixins(
-  Groupable
-).extend({
+/* @vue/component */
+export default mixins(Groupable).extend({
   name: 'v-item',
 
   render (): VNode {
@@ -24,7 +23,10 @@ export default mixins(
 
     /* istanbul ignore else */
     if (this.$scopedSlots.default) {
-      element = this.$scopedSlots.default({ active: this.isActive })
+      element = this.$scopedSlots.default({
+        active: this.isActive,
+        toggle: this.toggle
+      })
     }
 
     if (!element || typeof element === 'string' || Array.isArray(element)) {
@@ -33,13 +35,11 @@ export default mixins(
       return element as any
     }
 
-    if (!this.disabled) {
-      element.data = element.data || {}
-
-      this._g(element.data, {
-        click: this.onClick
-      })
-    }
+    element.data = element.data || {}
+    element.data!.class = [
+      element.data!.class,
+      { [this.activeClass]: this.isActive }
+    ]
 
     return element
   }

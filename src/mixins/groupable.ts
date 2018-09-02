@@ -18,7 +18,8 @@ interface options extends Vue {
 }
 
 export default mixins<options>(
-  RegistrableInject('itemGroup')
+  RegistrableInject('itemGroup', 'v-item', 'v-item-group')
+  /* @vue/component */
 ).extend({
   name: 'groupable',
 
@@ -41,10 +42,11 @@ export default mixins<options>(
 
   computed: {
     groupClasses (): object {
-      if (!this.activeClass) return {}
+      const activeClass = this.activeClass || this.itemGroup.activeClass
+      if (!activeClass) return {}
 
       return {
-        [this.activeClass]: this.isActive
+        [activeClass]: this.isActive
       }
     }
   },
@@ -62,11 +64,16 @@ export default mixins<options>(
   },
 
   methods: {
-    onClick (e: Event) {
-      this.$emit('click', e)
-    },
-    toggle (isActive: boolean) {
-      this.isActive = isActive
+    toggle (isActive?: boolean) {
+      const oldVal = this.isActive
+      if (typeof isActive === 'boolean') {
+        this.isActive = isActive
+      } else {
+        this.isActive = !this.isActive
+      }
+      if (this.isActive !== oldVal) {
+        this.$emit('change', this.isActive)
+      }
     }
   }
 })

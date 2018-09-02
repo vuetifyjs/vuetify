@@ -4,7 +4,7 @@ import VItem from '@/components/VItemGroup/VItem'
 import VItemGroup from '@/components/VItemGroup/VItemGroup'
 
 const vm = new Vue()
-const defaultSlot = () => vm.$createElement('div', 'foobar')
+const defaultSlot = ({ toggle }) => vm.$createElement('div', { on: { click: toggle } }, 'foobar')
 
 const Mock = {
   name: 'test',
