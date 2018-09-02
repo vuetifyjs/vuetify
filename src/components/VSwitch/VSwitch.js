@@ -11,6 +11,9 @@ import Touch from '../../directives/touch'
 import { VFabTransition } from '../transitions'
 import VProgressCircular from '../VProgressCircular/VProgressCircular'
 
+// Helpers
+import { keyCodes } from '../../util/helpers'
+
 /* @vue/component */
 export default {
   name: 'v-switch',
@@ -34,11 +37,10 @@ export default {
         'v-input--selection-controls v-input--switch': true
       }
     },
-    switchClasses () {
-      return {
-        ...(this.loading ? undefined : this.classesSelectable),
-        ...this.themeClasses
-      }
+    switchData () {
+      return this.setTextColor(this.loading ? undefined : this.computedColor, {
+        class: this.themeClasses
+      })
     }
   },
 
@@ -54,8 +56,7 @@ export default {
         staticClass: 'v-input--selection-controls__input'
       }, [
         this.genInput('checkbox', this.$attrs),
-        !this.disabled && this.genRipple({
-          'class': this.classesSelectable,
+        !this.disabled && this.genRipple(this.setTextColor(this.computedColor, {
           directives: [{
             name: 'touch',
             value: {
@@ -63,14 +64,14 @@ export default {
               right: this.onSwipeRight
             }
           }]
-        }),
+        })),
         this.$createElement('div', {
           staticClass: 'v-input--switch__track',
-          class: this.switchClasses
+          ...this.switchData
         }),
         this.$createElement('div', {
           staticClass: 'v-input--switch__thumb',
-          class: this.switchClasses
+          ...this.switchData
         }, [this.genProgress()])
       ])
     },
@@ -95,6 +96,12 @@ export default {
     },
     onSwipeRight () {
       if (!this.isActive) this.onChange()
+    },
+    onKeydown (e) {
+      if (
+        (e.keyCode === keyCodes.left && this.isActive) ||
+        (e.keyCode === keyCodes.right && !this.isActive)
+      ) this.onChange()
     }
   }
 }

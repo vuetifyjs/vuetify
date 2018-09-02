@@ -88,22 +88,21 @@ export default mixins(Colorable).extend({
 
   methods: {
     genDeterminate (h: CreateElement): VNode {
-      return h('div', {
+      return h('div', this.setBackgroundColor(this.color, {
         ref: 'front',
         staticClass: `v-progress-linear__bar__determinate`,
-        class: this.addBackgroundColorClassChecks(),
         style: {
           width: `${this.effectiveWidth}%`
         }
-      })
+      }))
     },
     genBar (h: CreateElement, name: string): VNode {
-      return h('div', {
+      return h('div', this.setBackgroundColor(this.color, {
         staticClass: 'v-progress-linear__bar__indeterminate',
-        class: this.addBackgroundColorClassChecks({
+        class: {
           [name]: true
-        })
-      })
+        }
+      }))
     },
     genIndeterminate (h: CreateElement): VNode {
       return h('div', {

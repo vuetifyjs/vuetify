@@ -13,16 +13,50 @@ test('VBreadcrumbs.js', ({ mount, compileToFunctions }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should inject slot to children', () => {
+  it('should render items without slot', () => {
     const { render } = compileToFunctions(`
-      <v-breadcrumbs>
-        <v-breadcrumbs-item v-for="i in 4" :key="i"/>
+      <v-breadcrumbs :items="items"></v-breadcrumbs>
+    `)
+
+    const component = Vue.component('test', {
+      components: {
+        VBreadcrumbs, VBreadcrumbsItem
+      },
+      data: () => ({
+        items: [
+          { text: 'a' },
+          { text: 'b' },
+          { text: 'c' },
+          { text: 'd' }
+        ]
+      }),
+      render
+    })
+    const wrapper = mount(component)
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should use slot to render items if present', () => {
+    const { render } = compileToFunctions(`
+      <v-breadcrumbs :items="items">
+        <v-breadcrumbs-item slot="item" slot-scope="props" :key="props.item.text">
+          {{ props.item.text.toUpperCase() }}
+        </v-breadcrumbs-item>
       </v-breadcrumbs>
     `)
     const component = Vue.component('test', {
       components: {
         VBreadcrumbs, VBreadcrumbsItem
       },
+      data: () => ({
+        items: [
+          { text: 'a' },
+          { text: 'b' },
+          { text: 'c' },
+          { text: 'd' }
+        ]
+      }),
       render
     })
     const wrapper = mount(component)
@@ -32,16 +66,22 @@ test('VBreadcrumbs.js', ({ mount, compileToFunctions }) => {
 
   it('should use a custom divider slot', () => {
     const { render } = compileToFunctions(`
-      <v-breadcrumbs>
+      <v-breadcrumbs :items="items">
         <template slot="divider">/divider/</template>
-        <v-breadcrumbs-item/>
-        <v-breadcrumbs-item/>
       </v-breadcrumbs>
     `)
     const component = Vue.component('test', {
       components: {
         VBreadcrumbs, VBreadcrumbsItem
       },
+      data: () => ({
+        items: [
+          { text: 'a' },
+          { text: 'b' },
+          { text: 'c' },
+          { text: 'd' }
+        ]
+      }),
       render
     })
     const wrapper = mount(component)
@@ -49,34 +89,23 @@ test('VBreadcrumbs.js', ({ mount, compileToFunctions }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  // TODO: Inline styles not working in jest?
-  it('should use custom justify props', () => {
-    const wrapper = mount(VBreadcrumbs)
-
-    wrapper.setProps({ justifyCenter: true, justifyEnd: false })
-    expect(wrapper.html()).toMatchSnapshot()
-
-    wrapper.setProps({ justifyCenter: false, justifyEnd: true })
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-
-  it('should not create dividers for non-items', () => {
-    const { render } = compileToFunctions(`
-      <v-breadcrumbs>
-        <span></span>
-        <v-breadcrumbs-item/>
-        <span></span>
-        <v-breadcrumbs-item/>
-      </v-breadcrumbs>
-    `)
-    const component = Vue.component('test', {
-      components: {
-        VBreadcrumbs, VBreadcrumbsItem
+  it('should show deprecation notice when using justify-end and justify-start', () => {
+    const wrapper = mount(VBreadcrumbs, {
+      propsData: {
+        justifyEnd: true,
+        justifyCenter: true
       },
-      render
+      slots: {
+        default: [{ render: h => h('div') }]
+      }
     })
-    const wrapper = mount(component)
+
+    expect(wrapper.find('.justify-end').length).not.toBe(0)
+    expect(wrapper.find('.justify-center').length).not.toBe(0)
     expect(wrapper.html()).toMatchSnapshot()
+    expect(`'justify-end' is deprecated, use 'class="justify-end"' instead`).toHaveBeenTipped()
+    expect(`'justify-center' is deprecated, use 'class="justify-center"' instead`).toHaveBeenTipped()
+    expect(`'default slot' is deprecated, use ':items and scoped slot "item"' instead`).toHaveBeenTipped()
   })
 
   // TODO: this always passes in jest, needs to be e2e

@@ -199,7 +199,7 @@ export default {
     },
     /** @public */
     blur () {
-      this.onBlur()
+      this.$refs.input ? this.$refs.input.blur() : this.onBlur()
     },
     clearableCallback () {
       this.internalValue = null
@@ -413,15 +413,7 @@ export default {
       VInput.methods.onMouseDown.call(this, e)
     },
     onMouseUp (e) {
-      // Default click handler is on slot,
-      // Mouse events are to enable specific
-      // input types when clicked
-      if (
-        (this.isSolo || this.hasOutline) &&
-        document.activeElement !== this.$refs.input
-      ) {
-        this.$refs.input.focus()
-      }
+      this.focus()
 
       VInput.methods.onMouseUp.call(this, e)
     }

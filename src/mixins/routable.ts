@@ -31,13 +31,13 @@ export default Vue.extend({
   methods: {
     /* eslint-disable-next-line no-unused-vars */
     click (e: MouseEvent): void { /**/ },
-    generateRouteLink () {
+    generateRouteLink (classes: any) {
       let exact = this.exact
       let tag
 
       const data: VNodeData = {
         attrs: { disabled: this.disabled },
-        class: (this as any).classes,
+        class: classes,
         props: {},
         directives: [{
           name: 'ripple',

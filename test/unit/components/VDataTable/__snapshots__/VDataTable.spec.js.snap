@@ -73,35 +73,33 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
         >
           <div class="v-input__control">
             <div class="v-input__slot">
-              <div class="v-menu v-menu--inline">
-                <div class="v-menu__activator">
-                  <div class="v-select__slot">
-                    <div class="v-select__selections">
-                      <input aria-label="Rows per page:"
-                             readonly="readonly"
-                             type="text"
-                             autocomplete="on"
-                             aria-readonly="false"
-                      >
-                    </div>
-                    <div class="v-input__append-inner">
-                      <div class="v-input__icon v-input__icon--append">
-                        <i aria-hidden="true"
-                           class="v-icon material-icons theme--light"
-                        >
-                          arrow_drop_down
-                        </i>
-                      </div>
-                    </div>
+              <div class="v-select__slot">
+                <div class="v-select__selections">
+                  <input aria-label="Rows per page:"
+                         readonly="readonly"
+                         type="text"
+                         autocomplete="on"
+                         aria-readonly="false"
+                  >
+                </div>
+                <div class="v-input__append-inner">
+                  <div class="v-input__icon v-input__icon--append">
+                    <i aria-hidden="true"
+                       class="v-icon material-icons theme--light"
+                    >
+                      arrow_drop_down
+                    </i>
                   </div>
                 </div>
+              </div>
+              <div class="v-menu">
                 <div class="v-menu__content v-menu__content--auto theme--light "
                      style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
                 >
                   <div class="v-select-list v-card theme--light">
                     <div class="v-list theme--light">
                       <div>
-                        <a class="v-list__tile v-list__tile--link">
+                        <a class="v-list__tile v-list__tile--link theme--light">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
                               5
@@ -110,7 +108,7 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
                         </a>
                       </div>
                       <div>
-                        <a class="v-list__tile v-list__tile--link">
+                        <a class="v-list__tile v-list__tile--link theme--light">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
                               10
@@ -119,7 +117,7 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
                         </a>
                       </div>
                       <div>
-                        <a class="v-list__tile v-list__tile--link">
+                        <a class="v-list__tile v-list__tile--link theme--light">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
                               25
@@ -128,7 +126,7 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
                         </a>
                       </div>
                       <div>
-                        <a class="v-list__tile v-list__tile--link">
+                        <a class="v-list__tile v-list__tile--link theme--light">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
                               All
@@ -254,35 +252,33 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
         >
           <div class="v-input__control">
             <div class="v-input__slot">
-              <div class="v-menu v-menu--inline">
-                <div class="v-menu__activator">
-                  <div class="v-select__slot">
-                    <div class="v-select__selections">
-                      <input aria-label="Rows per page:"
-                             readonly="readonly"
-                             type="text"
-                             autocomplete="on"
-                             aria-readonly="false"
-                      >
-                    </div>
-                    <div class="v-input__append-inner">
-                      <div class="v-input__icon v-input__icon--append">
-                        <i aria-hidden="true"
-                           class="v-icon material-icons theme--light"
-                        >
-                          arrow_drop_down
-                        </i>
-                      </div>
-                    </div>
+              <div class="v-select__slot">
+                <div class="v-select__selections">
+                  <input aria-label="Rows per page:"
+                         readonly="readonly"
+                         type="text"
+                         autocomplete="on"
+                         aria-readonly="false"
+                  >
+                </div>
+                <div class="v-input__append-inner">
+                  <div class="v-input__icon v-input__icon--append">
+                    <i aria-hidden="true"
+                       class="v-icon material-icons theme--light"
+                    >
+                      arrow_drop_down
+                    </i>
                   </div>
                 </div>
+              </div>
+              <div class="v-menu">
                 <div class="v-menu__content v-menu__content--auto theme--light "
                      style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
                 >
                   <div class="v-select-list v-card theme--light">
                     <div class="v-list theme--light">
                       <div>
-                        <a class="v-list__tile v-list__tile--link">
+                        <a class="v-list__tile v-list__tile--link theme--light">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
                               5
@@ -291,7 +287,7 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
                         </a>
                       </div>
                       <div>
-                        <a class="v-list__tile v-list__tile--link">
+                        <a class="v-list__tile v-list__tile--link theme--light">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
                               10
@@ -300,7 +296,7 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
                         </a>
                       </div>
                       <div>
-                        <a class="v-list__tile v-list__tile--link">
+                        <a class="v-list__tile v-list__tile--link theme--light">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
                               25
@@ -309,7 +305,7 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
                         </a>
                       </div>
                       <div>
-                        <a class="v-list__tile v-list__tile--link">
+                        <a class="v-list__tile v-list__tile--link theme--light">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
                               All
@@ -437,35 +433,33 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
         >
           <div class="v-input__control">
             <div class="v-input__slot">
-              <div class="v-menu v-menu--inline">
-                <div class="v-menu__activator">
-                  <div class="v-select__slot">
-                    <div class="v-select__selections">
-                      <input aria-label="Rows per page:"
-                             readonly="readonly"
-                             type="text"
-                             autocomplete="on"
-                             aria-readonly="false"
-                      >
-                    </div>
-                    <div class="v-input__append-inner">
-                      <div class="v-input__icon v-input__icon--append">
-                        <i aria-hidden="true"
-                           class="v-icon material-icons theme--light"
-                        >
-                          arrow_drop_down
-                        </i>
-                      </div>
-                    </div>
+              <div class="v-select__slot">
+                <div class="v-select__selections">
+                  <input aria-label="Rows per page:"
+                         readonly="readonly"
+                         type="text"
+                         autocomplete="on"
+                         aria-readonly="false"
+                  >
+                </div>
+                <div class="v-input__append-inner">
+                  <div class="v-input__icon v-input__icon--append">
+                    <i aria-hidden="true"
+                       class="v-icon material-icons theme--light"
+                    >
+                      arrow_drop_down
+                    </i>
                   </div>
                 </div>
+              </div>
+              <div class="v-menu">
                 <div class="v-menu__content v-menu__content--auto theme--light "
                      style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
                 >
                   <div class="v-select-list v-card theme--light">
                     <div class="v-list theme--light">
                       <div>
-                        <a class="v-list__tile v-list__tile--link">
+                        <a class="v-list__tile v-list__tile--link theme--light">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
                               5
@@ -474,7 +468,7 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
                         </a>
                       </div>
                       <div>
-                        <a class="v-list__tile v-list__tile--link">
+                        <a class="v-list__tile v-list__tile--link theme--light">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
                               10
@@ -483,7 +477,7 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
                         </a>
                       </div>
                       <div>
-                        <a class="v-list__tile v-list__tile--link">
+                        <a class="v-list__tile v-list__tile--link theme--light">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
                               25
@@ -492,7 +486,7 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
                         </a>
                       </div>
                       <div>
-                        <a class="v-list__tile v-list__tile--link">
+                        <a class="v-list__tile v-list__tile--link theme--light">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
                               All

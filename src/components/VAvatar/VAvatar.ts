@@ -36,11 +36,7 @@ export default mixins(Colorable).extend({
       width: size,
       ...data.style
     }
-    data.class = [
-      data.class,
-      Colorable.options.methods.addBackgroundColorClassChecks.call(props, {}, props.color)
-    ]
 
-    return h('div', data, children)
+    return h('div', Colorable.options.methods.setBackgroundColor(props.color, data), children)
   }
 })

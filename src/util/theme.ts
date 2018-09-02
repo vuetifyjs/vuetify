@@ -55,9 +55,6 @@ const genBaseColor = (name: string, value: string): string => {
 }
 .${name}--text {
   color: ${value} !important;
-}
-.${name}--text input,
-.${name}--text textarea {
   caret-color: ${value} !important;
 }`
 }
@@ -74,38 +71,50 @@ const genVariantColor = (name: string, variant: string, value: string): string =
 }
 .${name}--text.text--${type}-${n} {
   color: ${value} !important;
-}
-.${name}--text.text--${type}-${n} input,
-.${name}--text.text--${type}-${n} textarea {
   caret-color: ${value} !important;
 }`
 }
 
-export function genStyles (theme: ParsedTheme): string {
+const genColorVariableName = (name: string, variant = 'base'): string => `--v-${name}-${variant}`
+
+const genColorVariable = (name: string, variant = 'base'): string => `var(${genColorVariableName(name, variant)})`
+
+export function genStyles (theme: ParsedTheme, cssVar = false): string {
   const colors = Object.keys(theme)
 
   if (!colors.length) return ''
 
-  let css = `a { color: ${theme.primary.base}; }`
+  let variablesCss = ''
+  let css = ''
+
+  const aColor = cssVar ? genColorVariable('primary') : theme.primary.base
+  css += `a { color: ${aColor}; }`
 
   for (let i = 0; i < colors.length; ++i) {
     const name = colors[i]
     const value = theme[name]
-    if (typeof value === 'object') {
-      css += genBaseColor(name, value.base)
 
-      const variants = Object.keys(value)
-      for (let i = 0; i < variants.length; ++i) {
-        const variant = variants[i]
-        const variantValue = value[variant]
-        if (variant !== 'base') {
-          css += genVariantColor(name, variant, variantValue)
-        }
-      }
+    if (typeof value !== 'object') continue
+
+    css += genBaseColor(name, cssVar ? genColorVariable(name) : value.base)
+    cssVar && (variablesCss += `  ${genColorVariableName(name)}: ${value.base};\n`)
+
+    const variants = Object.keys(value)
+    for (let i = 0; i < variants.length; ++i) {
+      const variant = variants[i]
+      const variantValue = value[variant]
+      if (variant === 'base') continue
+
+      css += genVariantColor(name, variant, cssVar ? genColorVariable(name, variant) : variantValue)
+      cssVar && (variablesCss += `  ${genColorVariableName(name, variant)}: ${variantValue};\n`)
     }
   }
 
-  return css
+  if (cssVar) {
+    variablesCss = `:root {\n${variablesCss}}\n\n`
+  }
+
+  return variablesCss + css
 }
 
 export function genVariations (name: string, value: RGB): Record<string, string> {

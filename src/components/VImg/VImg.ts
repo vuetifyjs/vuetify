@@ -8,7 +8,7 @@ import { PropValidator } from 'vue/types/options'
 import VResponsive from '../VResponsive'
 
 // Utils
-import { consoleError } from '../../util/console'
+import { consoleError, consoleWarn } from '../../util/console'
 
 // not intended for public use, this is passed in by vuetify-loader
 export interface srcObject {
@@ -29,6 +29,7 @@ export default VResponsive.extend({
       type: [String, Object],
       default: ''
     } as PropValidator<string | srcObject>,
+    gradient: String,
     lazySrc: String,
     srcset: String,
     sizes: String,
@@ -73,7 +74,11 @@ export default VResponsive.extend({
     __cachedImage (): VNode | never[] {
       if (!(this.normalisedSrc.src || this.normalisedSrc.lazySrc)) return []
 
+      const backgroundImage: string[] = []
       const src = this.isLoading ? this.normalisedSrc.lazySrc : this.currentSrc
+
+      if (this.gradient) backgroundImage.push(`linear-gradient(${this.gradient})`)
+      if (src) backgroundImage.push(`url("${src}")`)
 
       return this.$createElement('transition', {
         attrs: {
@@ -89,7 +94,7 @@ export default VResponsive.extend({
             'v-image__image--cover': !this.contain
           },
           style: {
-            backgroundImage: src ? `url("${src}")` : undefined,
+            backgroundImage: backgroundImage.join(', '),
             backgroundPosition: this.position
           },
           key: +this.isLoading
@@ -125,13 +130,18 @@ export default VResponsive.extend({
       this.isLoading = false
       this.$emit('load', this.src)
     },
-    onError () {
-      consoleError('Image load failed\n\nsrc: ' + this.normalisedSrc.src, this)
+    onError (err: ErrorEvent) {
+      consoleError(
+        `Image load failed\n\n` +
+        `src: ${this.normalisedSrc.src}` +
+        (err.message ? `\nOriginal error: ${err.message}` : ''),
+        this
+      )
       this.$emit('error', this.src)
     },
     getSrc () {
       /* istanbul ignore else */
-      if (this.image) this.currentSrc = this.image.currentSrc
+      if (this.image) this.currentSrc = this.image.currentSrc || this.image.src
     },
     loadImage () {
       const image = new Image()
@@ -140,7 +150,14 @@ export default VResponsive.extend({
       image.onload = () => {
         /* istanbul ignore if */
         if (image.decode) {
-          image.decode().then(this.onLoad)
+          image.decode().catch((err: DOMException) => {
+            consoleWarn(
+              `Failed to decode image, trying to render anyway\n\n` +
+              `src: ${this.normalisedSrc.src}` +
+              (err.message ? `\nOriginal error: ${err.message}` : ''),
+              this
+            )
+          }).then(this.onLoad)
         } else {
           this.onLoad()
         }
@@ -152,7 +169,7 @@ export default VResponsive.extend({
       this.normalisedSrc.srcset && (image.srcset = this.normalisedSrc.srcset)
 
       this.aspectRatio || this.pollForSize(image)
-      this.currentSrc = image.currentSrc
+      this.getSrc()
     },
     pollForSize (img: HTMLImageElement, timeout: number | null = 100) {
       const poll = () => {

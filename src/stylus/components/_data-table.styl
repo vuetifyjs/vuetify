@@ -35,7 +35,6 @@ theme(v-datatable, "v-datatable")
 
       i
         font-size: 16px
-        vertical-align: sub
         display: inline-block
         opacity: 0
         transition: .3s $transition.swing
@@ -92,6 +91,9 @@ theme(v-datatable, "v-datatable")
       padding: 0
       position: initial
 
+    .v-select__selections
+      flex-wrap: nowrap
+
       .v-select__selection--comma
         font-size: 12px
 
@@ -105,8 +107,7 @@ theme(v-datatable, "v-datatable")
     padding: 0 !important
 
     .v-progress-linear
-      top: -2px
-      margin: 0 0 -2px
+      margin: 0
 
 .v-datatable__expand
   &-row

@@ -17,7 +17,7 @@ test('Vuetify.install.js', () => {
         ComponentPack: { $_vuetify_subcomponents: { HisChild: {} } }
       },
       directives: {
-        directive: {
+        foobarbaz: {
           name: 'foobarbaz'
         }
       }

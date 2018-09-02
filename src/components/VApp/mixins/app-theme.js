@@ -19,7 +19,7 @@ export default {
         if (css != null) return css
       }
 
-      css = Theme.genStyles(theme)
+      css = Theme.genStyles(theme, this.$vuetify.options.customProperties)
 
       if (this.$vuetify.options.minifyTheme != null) {
         css = this.$vuetify.options.minifyTheme(css)
@@ -32,7 +32,7 @@ export default {
       return css
     },
     vueMeta () {
-      if (this.$vuetify.theme === false) return
+      if (this.$vuetify.theme === false) return {}
 
       const options = {
         cssText: this.generatedStyles,
