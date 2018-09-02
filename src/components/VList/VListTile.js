@@ -31,6 +31,7 @@ export default {
     },
     avatar: Boolean,
     inactive: Boolean,
+    hover: Boolean,
     tag: String
   },
 
@@ -50,6 +51,7 @@ export default {
         'v-list__tile--link': this.isLink && !this.inactive,
         'v-list__tile--avatar': this.avatar,
         'v-list__tile--disabled': this.disabled,
+        'v-list__tile--hover': this.hover && !this.isLink && !this.inactive,
         'v-list__tile--active': !this.to && this.isActive,
         ...this.themeClasses,
         [this.activeClass]: this.isActive
