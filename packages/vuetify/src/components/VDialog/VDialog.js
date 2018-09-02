@@ -135,7 +135,7 @@ export default {
       // click is on the overlay, animate
       if (this.persistent) {
         if (!this.noClickAnimation &&
-          this.overlay === e.target
+          this.overlay.$el === e.target
         ) this.animateClick()
 
         return false
