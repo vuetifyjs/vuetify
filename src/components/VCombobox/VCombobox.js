@@ -89,7 +89,9 @@ export default {
     },
     // Requires a manual definition
     // to overwrite removal in v-autocomplete
-    onEnterDown () {
+    onEnterDown (e) {
+      e.preventDefault()
+
       VSelect.methods.onEnterDown.call(this)
 
       // If has menu index, let v-select-list handle
