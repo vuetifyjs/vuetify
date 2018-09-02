@@ -18,6 +18,15 @@ exports[`VListTileAction.js should render component with many children and match
 
 `;
 
+exports[`VListTileAction.js should render component with one children and match snapshot 1`] = `
+
+<div class="v-list__tile__action">
+  <div>
+  </div>
+</div>
+
+`;
+
 exports[`VListTileAction.js should render component with static class and match snapshot 1`] = `
 
 <div class="v-list__tile__action static-class">
