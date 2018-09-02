@@ -17,7 +17,11 @@ export default Vue.extend<Vue & Toggleable>().extend({
   name: 'bootable',
 
   props: {
-    lazy: Boolean
+    lazy: Boolean,
+    keepContentAlive: {
+      type: Boolean,
+      default: true
+    }
   },
 
   data: () => ({
@@ -26,6 +30,7 @@ export default Vue.extend<Vue & Toggleable>().extend({
 
   computed: {
     hasContent (): boolean | undefined {
+      if (!this.keepContentAlive) return this.isActive
       return this.isBooted || !this.lazy || this.isActive
     }
   },

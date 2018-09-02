@@ -63,6 +63,28 @@ test('bootable.js', ({ mount }) => {
     expect(wrapper.vm.showLazyContent('content')).toBe('content')
   })
 
+  it('should not show if booted, not active and keep-content-alive is false', async () => {
+    const wrapper = mount({
+      data: () => ({
+        isActive: false
+      }),
+      mixins: [Bootable],
+      render: h => h('div')
+    }, {
+      propsData: {
+        keepContentAlive: false
+      }
+    })
+
+    expect(wrapper.vm.showLazyContent('content1')).toBe(null)
+
+    wrapper.setData({ isActive: true })
+    expect(wrapper.vm.showLazyContent('content2')).toBe('content2')
+
+    wrapper.setData({ isActive: false })
+    expect(wrapper.vm.showLazyContent('content3')).toBe(null)
+  })
+
   it('should boot', async () => {
     const wrapper = mount({
       data: () => ({ isActive: false }),
