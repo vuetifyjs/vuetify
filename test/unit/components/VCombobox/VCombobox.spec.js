@@ -212,4 +212,25 @@ test('VCombobox', ({ shallow }) => {
     expect(wrapper.vm.isFocused).toBe(false)
     expect(wrapper.vm.internalValue).toEqual(items[0])
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/5008
+  it('should select item if menu index is greater than -1', async () => {
+    const wrapper = shallow(VCombobox, {
+      propsData: {
+        items: ['foo']
+      }
+    })
+
+    const input = wrapper.first('input')
+
+    input.trigger('focus')
+    input.trigger('keydown.enter')
+    input.trigger('keydown.down')
+
+    expect(wrapper.vm.getMenuIndex()).toBe(0)
+
+    input.trigger('keydown.enter')
+
+    expect(wrapper.vm.internalValue).toBe('foo')
+  })
 })
