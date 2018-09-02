@@ -29,6 +29,10 @@ export default {
     transition: {
       type: String,
       default: 'slide-x-reverse-transition'
+    },
+    openOnHover: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -108,7 +112,8 @@ export default {
         value: this.isActive,
         closeOnClick: !this.persistent,
         closeOnContentClick: false,
-        lazy: this.lazy
+        lazy: this.lazy,
+        openOnHover: this.openOnHover
       },
       on: {
         input: val => (this.isActive = val)
