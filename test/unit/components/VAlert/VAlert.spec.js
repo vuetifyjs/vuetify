@@ -36,6 +36,14 @@ test('VAlert.vue', ({ mount }) => {
     expect(wrapper.hasClass('v-alert--outline')).toBe(true)
   })
 
+  it('should render component with flat prop', async () => {
+    const wrapper = mount(VAlert, {
+      propsData: { flat: true }
+    })
+
+    expect(wrapper.hasClass('v-alert--flat')).toBe(true)
+  })
+
   it('should be dismissible', async () => {
     const wrapper = mount(VAlert, {
       propsData: {
