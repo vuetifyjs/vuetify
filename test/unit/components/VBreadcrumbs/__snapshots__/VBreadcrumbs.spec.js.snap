@@ -46,6 +46,8 @@ exports[`VBreadcrumbs.js should render items without slot 1`] = `
 exports[`VBreadcrumbs.js should show deprecation notice when using justify-end and justify-start 1`] = `
 
 <ul class="v-breadcrumbs justify-center justify-end theme--light">
+  <div>
+  </div>
 </ul>
 
 `;

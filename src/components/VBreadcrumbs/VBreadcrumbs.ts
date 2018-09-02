@@ -53,7 +53,8 @@ export default mixins(
   },
 
   methods: {
-    genChildren () {
+    /* @deprecated */
+    genChildren /* istanbul ignore next */ () {
       if (!this.$slots.default) return undefined
 
       const children = []
