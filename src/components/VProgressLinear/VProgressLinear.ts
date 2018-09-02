@@ -53,26 +53,6 @@ export default mixins(Colorable).extend({
   },
 
   computed: {
-    styles (): object {
-      const styles: Record<string, any> = {}
-
-      if (!this.active) {
-        styles.height = 0
-      }
-
-      if (!this.indeterminate && parseInt(this.bufferValue, 10) !== 100) {
-        styles.width = `${this.bufferValue}%`
-      }
-
-      return styles
-    },
-    effectiveWidth (): number {
-      if (!this.bufferValue) {
-        return 0
-      }
-
-      return +this.value * 100 / +this.bufferValue
-    },
     backgroundStyle (): object {
       const backgroundOpacity = this.backgroundOpacity == null
         ? (this.backgroundColor ? 1 : 0.3)
@@ -81,8 +61,54 @@ export default mixins(Colorable).extend({
       return {
         height: this.active ? convertToUnit(this.height) : 0,
         opacity: backgroundOpacity,
-        width: `${this.bufferValue}%`
+        width: `${this.normalizedBufer}%`
       }
+    },
+
+    effectiveWidth (): number {
+      if (!this.normalizedBufer) {
+        return 0
+      }
+
+      return +this.normalizedValue * 100 / +this.normalizedBufer
+    },
+
+    normalizedBufer (): number {
+      if (this.bufferValue < 0) {
+        return 0
+      }
+
+      if (this.bufferValue > 100) {
+        return 100
+      }
+
+      return parseInt(this.bufferValue, 10)
+    },
+
+    normalizedValue (): number {
+      if (this.value < 0) {
+        return 0
+      }
+
+      if (this.value > 100) {
+        return 100
+      }
+
+      return parseInt(this.value, 10)
+    },
+
+    styles (): object {
+      const styles: Record<string, any> = {}
+
+      if (!this.active) {
+        styles.height = 0
+      }
+
+      if (!this.indeterminate && parseInt(this.normalizedBufer, 10) !== 100) {
+        styles.width = `${this.normalizedBufer}%`
+      }
+
+      return styles
     }
   },
 
@@ -134,6 +160,12 @@ export default mixins(Colorable).extend({
 
     return h('div', {
       staticClass: 'v-progress-linear',
+      attrs: {
+        'role': 'progressbar',
+        'aria-valuemin': 0,
+        'aria-valuemax': this.normalizedBufer,
+        'aria-valuenow': this.indeterminate ? undefined : this.normalizedValue
+      },
       class: {
         'v-progress-linear--query': this.query
       },
