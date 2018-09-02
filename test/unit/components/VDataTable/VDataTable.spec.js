@@ -59,6 +59,26 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
     }
   }
 
+  function dataTableTestDataGroup () {
+    return {
+      propsData: {
+        headers: [
+          { text: 'First Column', value: 'col1' },
+          { text: 'Second Column', value: 'col2' }
+        ],
+        items: [
+          { col1: 'val1', col2: 1, category: 'A' },
+          { col1: 'val2', col2: 2, category: 'C' },
+          { col1: 'val3', col2: 3, category: 'B' },
+          { col1: 'val4', col2: 4, category: 'C' },
+          { col1: 'val5', col2: 5, category: 'A' },
+          { col1: 'val6', col2: 6, category: 'C' }
+        ],
+        groupKey: 'category'
+      }
+    }
+  }
+
   // TODO: This doesn't actually test anything
   it.skip('should be able to filter null and undefined values', async () => {
     const data = dataTableTestData()
@@ -424,6 +444,135 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
     expect(wrapper.vm.selected.hasOwnProperty(1)).toBe(false)
     expect(wrapper.vm.selected.hasOwnProperty(2)).toBe(true)
     expect(wrapper.vm.selected[2]).toBe(true)
+
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  function createGroupComponent(propsData = {}) {
+    const data = dataTableTestDataGroup()
+
+    return Vue.component('test', {
+      props: {
+        tableProps: {}
+      },
+      render (h) {
+        return h(VDataTable, {
+          props: Object.assign(data.propsData, propsData, this.tableProps),
+          on: propsData.on || {},
+          scopedSlots: {
+            items: props => [h('td', props.item.col1), h('td', props.item.col2)],
+            group: props => h('span', `Group ${props.groupIndex + 1} - ${props.groupName}`)
+          }
+        })
+      }
+    })
+  }
+  it('should match a snapshot - with group', () => {
+    const wrapper = mount(createGroupComponent())
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should only render group rows by default when `group` slot is present', () => {
+    const wrapper = mount(createGroupComponent())
+
+    const allRows = wrapper.find('table.v-datatable tbody > tr')
+    expect(allRows).toHaveLength(3)
+
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should render/unrender all rows in the same group when the group is expanded/collapsed', async() => {
+    const wrapper = mount(createGroupComponent())
+
+    const rowGroupA = wrapper.find('table.v-datatable tbody > tr > td.v-datatable__group-col')[0]
+    expect(rowGroupA.text()).toContain('Group 1 - A')
+    rowGroupA.trigger('click')
+    await wrapper.vm.$nextTick()
+
+    const lengthOfGroupA = dataTableTestDataGroup().propsData.items.filter(item => item.category === 'A').length
+    const allRows1 = wrapper.find('table.v-datatable tbody > tr')
+    expect(allRows1).toHaveLength(3 + lengthOfGroupA)
+
+    rowGroupA.trigger('click')
+    await wrapper.vm.$nextTick()
+
+    const allRows2 = wrapper.find('table.v-datatable tbody > tr')
+    expect(allRows2).toHaveLength(3)
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should sort rows by group, then by `sortBy` column within a group', async() => {
+    const pagination = {
+      sortBy: 'col1',
+      descending: false,
+      rowsPerPage: 10,
+      page: 1
+    }
+    const wrapper = mount(createGroupComponent({ pagination }))
+
+    const rowGroups = wrapper.find('table.v-datatable tbody > tr > td.v-datatable__group-col')
+    rowGroups.forEach(rowGroup => rowGroup.trigger('click')) // expand all groups
+    await wrapper.vm.$nextTick()
+
+    const allRowsAsc = wrapper.find('table.v-datatable tbody > tr > td:first-child')
+    expect(allRowsAsc[0].text()).toContain('Group 1 - A')
+    expect(allRowsAsc[1].text()).toBe('val1')
+    expect(allRowsAsc[2].text()).toBe('val5')
+    expect(allRowsAsc[3].text()).toContain('Group 2 - B')
+    expect(allRowsAsc[4].text()).toBe('val3')
+    expect(allRowsAsc[5].text()).toContain('Group 3 - C')
+    expect(allRowsAsc[6].text()).toBe('val2')
+    expect(allRowsAsc[7].text()).toBe('val4')
+    expect(allRowsAsc[8].text()).toBe('val6')
+
+    wrapper.setProps({
+      tableProps: {
+        pagination: Object.assign({}, pagination, { descending: true })
+      }
+    })
+    await wrapper.vm.$nextTick()
+
+    const allRowsDesc = wrapper.find('table.v-datatable tbody > tr > td:first-child')
+    expect(allRowsDesc[0].text()).toContain('Group 1 - A')
+    expect(allRowsDesc[1].text()).toBe('val5')
+    expect(allRowsDesc[2].text()).toBe('val1')
+    expect(allRowsDesc[3].text()).toContain('Group 2 - B')
+    expect(allRowsDesc[4].text()).toBe('val3')
+    expect(allRowsDesc[5].text()).toContain('Group 3 - C')
+    expect(allRowsDesc[6].text()).toBe('val6')
+    expect(allRowsDesc[7].text()).toBe('val4')
+    expect(allRowsDesc[8].text()).toBe('val2')
+
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should emit `group` event when a group is expanded/collapsed', async() => {
+    const mockGroupEventHandler = jest.fn()
+    const wrapper = mount(createGroupComponent({
+      on: {
+        group: mockGroupEventHandler
+      }
+    }))
+
+    wrapper.find('table.v-datatable tbody > tr > td.v-datatable__group-col')[0].trigger('click')
+    await wrapper.vm.$nextTick()
+
+    expect(mockGroupEventHandler).toHaveBeenCalledWith({
+      active: true,
+      groupIndex: 0,
+      groupName: 'A'
+    })
+
+    wrapper.find('table.v-datatable tbody > tr > td.v-datatable__group-col')[0].trigger('click')
+    await wrapper.vm.$nextTick()
+
+    expect(mockGroupEventHandler).toHaveBeenCalledWith({
+      active: false,
+      groupIndex: 0,
+      groupName: 'A'
+    })
 
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
