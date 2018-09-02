@@ -67,6 +67,10 @@ export default {
       type: Array,
       default: () => []
     },
+    loadMoreItems: {
+      type: Function,
+      default: null
+    },
     itemAvatar: {
       type: [String, Array, Function],
       default: 'avatar'
@@ -110,7 +114,8 @@ export default {
       ? vm.value
       : vm.multiple ? [] : undefined,
     selectedIndex: -1,
-    selectedItems: []
+    selectedItems: [],
+    isLoadingMoreItems: false
   }),
 
   computed: {
@@ -598,16 +603,27 @@ export default {
       if (!this.isMenuActive) {
         requestAnimationFrame(() => (this.content.scrollTop = 0))
       } else {
-        if (this.lastItem >= this.computedItems.length) return
-
+        // if there are no more items in the current item list and the loadMoreItems callback prop is not set, do nothing
+        if (this.lastItem >= this.computedItems.length && this.loadMoreItems === null) return
         const showMoreItems = (
           this.content.scrollHeight -
           (this.content.scrollTop +
           this.content.clientHeight)
-        ) < 200
-
-        if (showMoreItems) {
-          this.lastItem += 20
+        ) < 500
+        if (showMoreItems && !this.isLoadingMoreItems) {
+          // if loadMoreItems prop is set, let the callback load more items
+          if (typeof this.loadMoreItems === 'function') {
+            this.isLoadingMoreItems = true
+            this.loadMoreItems().then(() => {
+              this.lastItem += 20
+              this.isLoadingMoreItems = false
+            }).catch(() => {
+              this.isLoadingMoreItems = false
+            })
+            // else, default functionality load the next 20 items from the items prop
+          } else {
+            this.lastItem += 20
+          }
         }
       }
     },

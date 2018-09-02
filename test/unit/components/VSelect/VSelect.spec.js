@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { test } from '@/test'
+import {test} from '@/test'
 import VSelect from '@/components/VSelect/VSelect'
 import {
   VListTile,
@@ -8,13 +8,13 @@ import {
 } from '@/components/VList'
 import VAutocomplete from '@/components/VAutocomplete'
 
-test('VSelect', ({ mount, compileToFunctions }) => {
+test('VSelect', ({mount, compileToFunctions}) => {
   const app = document.createElement('div')
   app.setAttribute('data-app', true)
   document.body.appendChild(app)
 
   it('should return numeric 0', async () => {
-    const item = { value: 0, text: '0' }
+    const item = {value: 0, text: '0'}
     const wrapper = mount(VSelect, {
       propsData: {
         value: null,
@@ -48,25 +48,25 @@ test('VSelect', ({ mount, compileToFunctions }) => {
   })
 
   it('should render v-select correctly when using v-list-tile in item scope slot', async () => {
-    const items = Array.from({ length: 2 }, (x, i) => ({ value: i, text: `Text ${i}` }))
+    const items = Array.from({length: 2}, (x, i) => ({value: i, text: `Text ${i}`}))
 
     const vm = new Vue({
       components: {
         VListTile
       }
     })
-    const itemSlot = ({ item, tile }) => vm.$createElement('v-list-tile', {
+    const itemSlot = ({item, tile}) => vm.$createElement('v-list-tile', {
       on: tile.on,
       props: tile.props,
       class: item.value % 2 === 0 ? '' : 'red lighten-1'
     }, [
       item.text
     ])
-    const selectionSlot = ({ item }) => vm.$createElement('v-list-tile', item.value)
+    const selectionSlot = ({item}) => vm.$createElement('v-list-tile', item.value)
     const component = Vue.component('test', {
-      render (h) {
+      render(h) {
         return h(VSelect, {
-          props: { items, value: 1 },
+          props: {items, value: 1},
           scopedSlots: {
             item: itemSlot,
             selection: selectionSlot
@@ -85,7 +85,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
   })
 
   it('should render v-select correctly when not using v-list-tile in item scope slot', async () => {
-    const items = Array.from({ length: 2 }, (x, i) => ({ value: i, text: `Text ${i}` }))
+    const items = Array.from({length: 2}, (x, i) => ({value: i, text: `Text ${i}`}))
 
     const vm = new Vue({
       components: {
@@ -93,16 +93,16 @@ test('VSelect', ({ mount, compileToFunctions }) => {
         VListTileContent
       }
     })
-    const itemSlot = ({ item }) => vm.$createElement('v-list-tile-content', {
+    const itemSlot = ({item}) => vm.$createElement('v-list-tile-content', {
       class: item.value % 2 === 0 ? '' : 'red lighten-1'
     }, [
       vm.$createElement('v-list-tile-title', [item.value])
     ])
     const component = Vue.component('test', {
-      render (h) {
+      render(h) {
         return h(VSelect, {
-          props: { items },
-          scopedSlots: { item: itemSlot }
+          props: {items},
+          scopedSlots: {item: itemSlot}
         })
       }
     })
@@ -117,12 +117,12 @@ test('VSelect', ({ mount, compileToFunctions }) => {
   })
 
   it('should render v-select correctly when not using scope slot', async () => {
-    const items = Array.from({ length: 2 }, (x, i) => ({ value: i, text: `Text ${i}` }))
+    const items = Array.from({length: 2}, (x, i) => ({value: i, text: `Text ${i}`}))
 
     const component = Vue.component('test', {
-      render (h) {
+      render(h) {
         return h(VSelect, {
-          props: { items }
+          props: {items}
         })
       }
     })
@@ -184,7 +184,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect(wrapper.vm.selectedItems).toEqual(['foo'])
     expect(wrapper.html()).toMatchSnapshot()
 
-    wrapper.setProps({ value: 'bar' })
+    wrapper.setProps({value: 'bar'})
 
     await wrapper.vm.$nextTick()
 
@@ -192,7 +192,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect(wrapper.vm.selectedItems).toEqual([])
     expect(wrapper.html()).toMatchSnapshot()
 
-    wrapper.setProps({ items: ['foo', 'bar'] })
+    wrapper.setProps({items: ['foo', 'bar']})
 
     await wrapper.vm.$nextTick()
 
@@ -200,7 +200,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect(wrapper.vm.selectedItems).toEqual(['bar'])
     expect(wrapper.html()).toMatchSnapshot()
 
-    wrapper.setProps({ value: ['foo', 'bar'], multiple: true })
+    wrapper.setProps({value: ['foo', 'bar'], multiple: true})
 
     await wrapper.vm.$nextTick()
 
@@ -217,8 +217,8 @@ test('VSelect', ({ mount, compileToFunctions }) => {
       }
     })
 
-    wrapper.setProps({ items: [{ text: 'foo', value: 1 }] })
-    expect(wrapper.vm.selectedItems).toContainEqual({ text: 'foo', value: 1 })
+    wrapper.setProps({items: [{text: 'foo', value: 1}]})
+    expect(wrapper.vm.selectedItems).toContainEqual({text: 'foo', value: 1})
   })
 
   it('should render select menu with content class', async () => {
@@ -226,7 +226,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     const wrapper = mount(VSelect, {
       propsData: {
-        menuProps: { contentClass: 'v-menu-class' },
+        menuProps: {contentClass: 'v-menu-class'},
         items
       }
     })
@@ -374,7 +374,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect(wrapper.vm.internalValue).toBe(undefined)
 
     const wrapper2 = mount(VSelect, {
-      propsData: { multiple: true }
+      propsData: {multiple: true}
     })
 
     expect(wrapper2.vm.internalValue).toEqual([])
@@ -436,14 +436,14 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
   it('should use scoped slot for selection generation', () => {
     const wrapper = mount({
-      render (h) {
+      render(h) {
         return h(VSelect, {
           attrs: {
             items: ['foo', 'bar'],
             value: 'foo'
           },
           scopedSlots: {
-            selection: ({ item }) => {
+            selection: ({item}) => {
               return h('div', item + ' - from slot')
             }
           }
@@ -476,7 +476,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     // Mock mouseup event with a target of
     // the inner icon element
     const event = new Event('mouseup')
-    Object.defineProperty(event, 'target', { writable: false, value: icon.element })
+    Object.defineProperty(event, 'target', {writable: false, value: icon.element})
 
     slot.element.dispatchEvent(event)
 
@@ -537,4 +537,74 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     expect(change.mock.calls).toEqual([['foo']])
   })
-})
+
+  it('should call callback on scroll', async () => {
+    const loadMore = jest.fn(function () {
+      return new Promise((resolve, reject) => {
+        resolve();
+      });
+    });
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        loadMoreItems: loadMore,
+        items: ['foo', 'foo', 'foo', 'foo', 'foo', 'foo', 'foo', 'foo', 'foo', 'foo', 'foo', 'foo', 'foo', 'foo', 'foo', 'foo', 'foo', 'foo', 'foo', 'foo']
+      }
+    });
+
+    const menu = wrapper.first('.v-input__slot')
+
+    menu.trigger('click');
+    await wrapper.vm.$nextTick();
+    menu.trigger('click');
+    await wrapper.vm.$nextTick();
+    wrapper.vm.onScroll();
+    await wrapper.vm.$nextTick();
+    expect(loadMore).toBeCalled();
+
+
+  })
+  it('should call not crash on reject on callback', async () => {
+    const loadMore = jest.fn(function () {
+      return new Promise((resolve, reject) => {
+        reject();
+      });
+    });
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        loadMoreItems: loadMore,
+        items: ['foo', 'foo', 'foo', 'foo', 'foo', 'foo', 'foo', 'foo', 'foo', 'foo', 'foo', 'foo', 'foo', 'foo', 'foo', 'foo', 'foo', 'foo', 'foo', 'foo']
+      }
+    });
+
+    const menu = wrapper.first('.v-input__slot')
+
+    menu.trigger('click');
+    await wrapper.vm.$nextTick();
+    menu.trigger('click');
+    await wrapper.vm.$nextTick();
+    wrapper.vm.onScroll();
+    await wrapper.vm.$nextTick();
+    expect(loadMore).toBeCalled();
+  })
+
+  it('should not call callback on scroll and raise lastItem', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        items: ['foo1', 'foo2', 'foo3', 'foo4', 'foo5', 'foo6', 'foo7', 'foo8', 'foo9', 'foo10', 'foo11', 'foo12', 'foo13', 'foo14', 'foo15', 'foo16', 'foo17', 'foo18', 'foo19', 'foo20', 'foo21', 'foo22', 'foo23']
+      }
+    });
+
+    const menu = wrapper.first('.v-input__slot')
+    menu.trigger('click');
+    await wrapper.vm.$nextTick();
+    menu.trigger('click');
+    await wrapper.vm.$nextTick();
+    wrapper.vm.onScroll();
+    await wrapper.vm.$nextTick();
+    expect(wrapper.vm.lastItem).toBeGreaterThan(20);
+
+  })
+});
