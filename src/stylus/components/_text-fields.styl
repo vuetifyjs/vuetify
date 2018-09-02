@@ -228,6 +228,22 @@ rtl(v-text-field-rtl, "v-text-field")
     .v-input__slot
       min-height: 56px
 
+
+  &--box&--prefix:not(&--single-line),
+  &--outline&--prefix:not(&--single-line)
+    input
+      margin-top: 15px
+
+    .v-label
+      top: 10px
+
+    .v-text-field__prefix
+      padding-top: 8px
+
+  &--box&--prefix:not(&--single-line)
+    input
+      margin-top: 16px
+
   &--box
     .v-input__slot
       border-top-left-radius: 4px
