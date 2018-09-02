@@ -41,6 +41,7 @@ export default mixins(
     large: Boolean,
     loading: Boolean,
     outline: Boolean,
+    plain: Boolean,
     ripple: {
       type: [Boolean, Object],
       default: true
@@ -75,6 +76,7 @@ export default mixins(
         'v-btn--left': this.left,
         'v-btn--loader': this.loading,
         'v-btn--outline': this.outline,
+        'v-btn--plain': this.plain,
         'v-btn--depressed': (this.depressed && !this.flat) || this.outline,
         'v-btn--right': this.right,
         'v-btn--round': this.round,

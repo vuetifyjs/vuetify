@@ -156,6 +156,16 @@ test('VBtn.js', ({ mount, compileToFunctions }) => {
     expect(wrapper.hasClass('v-btn--depressed')).toBe(true)
   })
 
+  it('should have v-btn--plain class when using plain prop', () => {
+    const wrapper = mount(VBtn, {
+      propsData: {
+        plain: true
+      }
+    })
+
+    expect(wrapper.hasClass('v-btn--plain')).toBe(true)
+  })
+
   it('should have v-btn--flat class when using flat and depressed props', () => {
     const wrapper = mount(VBtn, {
       propsData: {
