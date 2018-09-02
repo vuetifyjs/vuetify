@@ -1,6 +1,9 @@
 @import '../bootstrap'
 
 .v-overlay
+  align-items: center
+  display: flex
+  justify-content: center
   position: fixed
   top: 0
   left: 0
@@ -11,7 +14,7 @@
   // z-index, we want the transition
   // timing to affect its changing
   // https://github.com/vuetifyjs/vuetify/issues/2146
-  transition: .3s $transition.swing
+  transition: $primary-transition
   // This is the standard index
   z-index: 5
 
@@ -35,6 +38,7 @@
     // https://github.com/vuetifyjs/vuetify/issues/2146
     transition-delay: 150ms
     width: 100%
+    will-change: opacity
 
   &--active
     pointer-events: auto

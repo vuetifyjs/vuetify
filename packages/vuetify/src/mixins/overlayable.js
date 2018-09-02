@@ -2,6 +2,7 @@ import '../stylus/components/_overlay.styl'
 
 // Utils
 import { keyCodes } from '../util/helpers'
+import VOverlay from '../components/VOverlay'
 
 /* @vue/component */
 export default {
@@ -13,10 +14,7 @@ export default {
 
   data () {
     return {
-      overlay: null,
-      overlayOffset: 0,
-      overlayTimeout: null,
-      overlayTransitionDuration: 500 + 150 // transition + delay
+      overlay: null
     }
   },
 
@@ -25,68 +23,39 @@ export default {
   },
 
   methods: {
-    genOverlay () {
-      // If fn is called and timeout is active
-      // or overlay already exists
-      // cancel removal of overlay and re-add active
-      if ((!this.isActive || this.hideOverlay) ||
-        (this.isActive && this.overlayTimeout) ||
-        this.overlay
-      ) {
-        clearTimeout(this.overlayTimeout)
+    createOverlay () {
+      const overlay = new VOverlay()
 
-        return this.overlay &&
-          this.overlay.classList.add('v-overlay--active')
-      }
-
-      this.overlay = document.createElement('div')
-      this.overlay.className = 'v-overlay'
-
-      if (this.absolute) this.overlay.className += ' v-overlay--absolute'
-
-      this.hideScroll()
+      overlay.$mount()
 
       const parent = this.absolute
         ? this.$el.parentNode
         : document.querySelector('[data-app]')
 
-      parent && parent.insertBefore(this.overlay, parent.firstChild)
+      parent && parent.insertBefore(overlay.$el, parent.firstChild)
 
-      // eslint-disable-next-line no-unused-expressions
-      this.overlay.clientHeight // Force repaint
+      this.overlay = overlay
+    },
+    genOverlay () {
+      if (!this.overlay) this.createOverlay()
+
+      this.hideScroll()
+
+      this.overlay.zIndex = this.activeZIndex && this.activeZIndex
+
       requestAnimationFrame(() => {
-        // https://github.com/vuetifyjs/vuetify/issues/4678
-        if (!this.overlay) return
-
-        this.overlay.className += ' v-overlay--active'
-
-        if (this.activeZIndex !== undefined) {
-          this.overlay.style.zIndex = this.activeZIndex - 1
-        }
+        this.overlay.isActive = true
       })
-
-      return true
     },
     removeOverlay () {
-      if (!this.overlay) {
-        return this.showScroll()
-      }
+      if (!this.overlay) return this.showScroll()
 
-      this.overlay.classList.remove('v-overlay--active')
+      this.overlay.isActive = false
 
-      this.overlayTimeout = setTimeout(() => {
-        // IE11 Fix
-        try {
-          if (this.overlay && this.overlay.parentNode) {
-            this.overlay.parentNode.removeChild(this.overlay)
-          }
-          this.overlay = null
-          this.showScroll()
-        } catch (e) { console.log(e) }
-
-        clearTimeout(this.overlayTimeout)
-        this.overlayTimeout = null
-      }, this.overlayTransitionDuration)
+      this.$nextTick(() => {
+        this.overlay.$destroy()
+        this.overlay = null
+      })
     },
     /**
      * @param {Event} e
