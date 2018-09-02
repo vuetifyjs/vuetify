@@ -23,7 +23,15 @@ export default mixins<options>(
   name: 'groupable',
 
   props: {
-    activeClass: String,
+    activeClass: {
+      type: String,
+      default (): any {
+        if (!this.itemGroup) return undefined
+
+        return this.itemGroup.activeClass
+      }
+    },
+    disabled: Boolean,
     value: null as any as PropValidator<any>
   },
 

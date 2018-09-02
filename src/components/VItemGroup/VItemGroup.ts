@@ -17,6 +17,12 @@ type GroupableInstance = InstanceType<typeof Groupable>
 export default mixins(Proxyable).extend({
   name: 'v-item-group',
 
+  provide (): object {
+    return {
+      itemGroup: this
+    }
+  },
+
   props: {
     activeClass: {
       type: String,
