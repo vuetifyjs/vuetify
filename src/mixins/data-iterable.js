@@ -82,9 +82,13 @@ export default {
         ))
       }
     },
+    locale: {
+      type: String,
+      default: 'en'
+    },
     customSort: {
       type: Function,
-      default: (items, index, isDescending) => {
+      default: (items, index, isDescending, locale) => {
         if (index === null) return items
 
         return items.sort((a, b) => {
@@ -110,10 +114,7 @@ export default {
               (s || '').toString().toLocaleLowerCase()
             ))
 
-          if (sortA > sortB) return 1
-          if (sortA < sortB) return -1
-
-          return 0
+          return sortA.localeCompare(sortB, locale)
         })
       }
     },
@@ -280,7 +281,8 @@ export default {
       items = this.customSort(
         items,
         this.computedPagination.sortBy,
-        this.computedPagination.descending
+        this.computedPagination.descending,
+        this.locale
       )
 
       return this.hideActions &&
