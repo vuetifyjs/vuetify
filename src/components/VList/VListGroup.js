@@ -4,6 +4,10 @@ import VIcon from '../../components/VIcon'
 // Mixins
 import Bootable from '../../mixins/bootable'
 import Toggleable from '../../mixins/toggleable'
+
+// Utils
+import { keyCodes } from '../../util/helpers'
+
 import {
   inject as RegistrableInject
 } from '../../mixins/registrable'
@@ -103,6 +107,13 @@ export default {
 
       this.isActive = !this.isActive
     },
+    onKeydown (e) {
+      if (e.target === this.$el) e.stopPropagation()
+      if (this.disabled) return
+      if (e.keyCode === keyCodes.enter) {
+        this.isActive = !this.isActive
+      }
+    },
     genIcon (icon) {
       return this.$createElement(VIcon, icon)
     },
@@ -120,9 +131,13 @@ export default {
     genGroup () {
       return this.$createElement('div', {
         staticClass: 'v-list__group__header',
+        attrs: {
+          tabindex: '0'
+        },
         'class': this.headerClasses,
         on: Object.assign({}, {
-          click: this.click
+          click: this.click,
+          keydown: this.onKeydown
         }, this.$listeners),
         ref: 'item'
       }, [
