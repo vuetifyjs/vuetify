@@ -15,6 +15,10 @@ theme(v-treeview, "v-treeview")
   &-node
     margin-left: 24px
 
+    &--active
+      > .v-treeview-node__root
+        background: rgba(0,0,0,0.15)
+
     &--leaf
       margin-left: 48px
 
@@ -22,9 +26,6 @@ theme(v-treeview, "v-treeview")
       display: flex
       align-items: center
       height: 32px
-
-      &--active
-        background: rgba(0,0,0,0.15)
 
     &__content
       display: flex
@@ -55,9 +56,10 @@ theme(v-treeview, "v-treeview")
 
     &__toggle
       user-select: none
+      transform: rotate(-90deg)
 
       &--open
-        transform: rotate(90deg)
+        transform: none
 
       &--loading
         animation: progress-circular-rotate 1s linear infinite

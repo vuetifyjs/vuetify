@@ -3,7 +3,7 @@ import { VNode } from 'vue'
 
 // Components
 import { VExpandTransition } from '../transitions'
-import { VTreeviewNode } from '.'
+import VTreeviewNode from './VTreeviewNode'
 import { VIcon } from '../VIcon'
 
 // Mixins
@@ -31,13 +31,13 @@ export const VTreeviewNodeProps = {
     type: String,
     default: '$vuetify.icons.checkboxOff'
   },
-  toggleIcon: {
+  expandIcon: {
     type: String,
-    default: 'arrow_right'
+    default: '$vuetify.icons.subgroup'
   },
   loadingIcon: {
     type: String,
-    default: 'cached'
+    default: '$vuetify.icons.loading'
   },
   itemKey: {
     type: String,
@@ -162,7 +162,7 @@ export default mixins(
             this.isOpen = !this.isOpen
           }
         }
-      }, [this.isLoading ? this.loadingIcon : this.toggleIcon])
+      }, [this.isLoading ? this.loadingIcon : this.expandIcon])
     },
     genCheckbox () {
       return this.$createElement(VIcon, {
@@ -178,11 +178,14 @@ export default mixins(
 
             await this.checkChildren()
 
-            this.isSelected = !this.isSelected
-            this.isIndeterminate = false
+            // We nextTick here so that items watch in VTreeview has a chance to run first
+            this.$nextTick(() => {
+              this.isSelected = !this.isSelected
+              this.isIndeterminate = false
 
-            this.treeview.updateSelected(this.key, this.isSelected)
-            this.treeview.emitSelected()
+              this.treeview.updateSelected(this.key, this.isSelected)
+              this.treeview.emitSelected()
+            })
           }
         }
       }, [this.computedIcon])
@@ -195,9 +198,6 @@ export default mixins(
 
       return this.$createElement('div', {
         staticClass: 'v-treeview-node__root',
-        class: {
-          'v-treeview-node__root--active': this.isActive
-        },
         on: {
           click: () => {
             this.isActive = !this.isActive
@@ -247,7 +247,9 @@ export default mixins(
     return h('div', {
       staticClass: 'v-treeview-node',
       class: {
-        'v-treeview-node--leaf': !this.children
+        'v-treeview-node--leaf': !this.children,
+        'v-treeview-node--active': this.isActive,
+        'v-treeview-node--selected': this.isSelected
       }
     }, children)
   }

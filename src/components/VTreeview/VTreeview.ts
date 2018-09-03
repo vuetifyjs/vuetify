@@ -26,6 +26,11 @@ type NodeState = {
   isIndeterminate: boolean
 }
 
+function ston (s: string | number) {
+  const n = Number(s)
+  return !isNaN(n) ? n : s
+}
+
 export default mixins(
   RegistrableProvide('treeview')
   /* @vue/component */
@@ -57,20 +62,32 @@ export default mixins(
 
   data: () => ({
     nodes: {} as Record<string | number, NodeState>,
-    internalSelected: [] as (string | number)[]
+    selectedCache: [] as (string | number)[],
+    activeCache: [] as (string | number)[]
   }),
 
   watch: {
     items: {
       handler () {
+        // We only care if nodes are removed or added
+        if (Object.keys(this.nodes).length === this.countItems(this.items)) return
+
+        const oldSelectedCache = this.selectedCache.slice()
+        this.selectedCache = []
+        this.activeCache = []
         this.buildTree(this.items, Object.assign({}, this.nodes))
+
+        // Only emit selected if selection has changed
+        // as a result of items changing. This fixes a
+        // potential double emit when selecting a node
+        // with dynamic children
+        if (!deepEqual(oldSelectedCache, this.selectedCache)) this.emitSelected()
       },
-      deep: true,
-      immediate: true
+      deep: true
     },
     selected: {
       handler (newVal, oldVal) {
-        if (!newVal || deepEqual(newVal, this.internalSelected)) return
+        if (!newVal || deepEqual(newVal, this.selectedCache)) return
 
         this.selected.forEach(key => this.updateSelected(key, true))
         this.emitSelected()
@@ -79,7 +96,20 @@ export default mixins(
     }
   },
 
+  created () {
+    this.buildTree(this.items, {})
+  },
+
   methods: {
+    countItems (items: any[], count = 0) {
+      for (let i = 0; i < items.length; i++) {
+        const item = items[i]
+        count += 1
+        count += item.children ? this.countItems(item.children) : 0
+      }
+
+      return count
+    },
     buildTree (items: any[], oldState: Record<string | number, NodeState>, parent = null) {
       for (let i = 0; i < items.length; i++) {
         const item = items[i]
@@ -87,7 +117,7 @@ export default mixins(
         const children = getObjectValueByPath(item, this.itemChildren, [])
 
         const node: any = {
-          vnode: null,
+          vnode: oldState.hasOwnProperty(key) ? oldState[key].vnode : null,
           parent,
           children: children.map((c: any) => getObjectValueByPath(c, this.itemKey))
         }
@@ -99,6 +129,10 @@ export default mixins(
         node.isActive = oldState.hasOwnProperty(key) ? oldState[key].isActive : false
 
         this.nodes[key] = !children.length ? node : this.calculateState(node, oldState)
+
+        // Don't forget to rebuild cache
+        if (this.nodes[key].isSelected) this.selectedCache.push(key)
+        if (this.nodes[key].isActive) this.activeCache.push(key)
 
         this.updateVnodeState(key)
       }
@@ -115,16 +149,20 @@ export default mixins(
     },
     updateActive (key: string | number, value: boolean) {
       if (!this.multipleActive) {
-        Object.keys(this.nodes).forEach(active => {
+        this.activeCache.forEach(active => {
           this.nodes[active].isActive = false
-
           this.updateVnodeState(active)
         })
+
+        this.activeCache = []
       }
 
-      if (value) this.nodes[key].isActive = value
+      this.nodes[key].isActive = value
+      if (value) this.activeCache.push(key)
 
       this.updateVnodeState(key)
+
+      this.$emit('update:active', this.activeCache)
     },
     calculateState (node: NodeState, state: Record<string | number, NodeState>) {
       const counts = node.children.reduce((counts: number[], child: string | number) => {
@@ -141,26 +179,29 @@ export default mixins(
     updateSelected (key: string | number, isSelected: boolean) {
       if (!this.nodes.hasOwnProperty(key)) return
 
+      const changed: Record<string | number, boolean> = {}
+
       const descendants = [key, ...this.getDescendants(key)]
       descendants.forEach(descendant => {
         this.nodes[descendant].isSelected = isSelected
         this.nodes[descendant].isIndeterminate = false
+        changed[descendant] = isSelected
       })
 
       const parents = this.getParents(key)
       parents.forEach(parent => {
         this.nodes[parent] = this.calculateState(this.nodes[parent], this.nodes)
+        changed[parent] = this.nodes[parent].isSelected
       })
 
       const all = [key, ...descendants, ...parents]
       all.forEach(this.updateVnodeState)
 
-      this.internalSelected = Object.keys(this.nodes)
-        .filter(k => this.nodes[k].isSelected)
-        .map(k => isNaN(Number(k)) ? k : Number(k))
+      this.selectedCache = this.selectedCache.filter(k => changed[ston(k)] !== false)
+      this.selectedCache.push(...Object.keys(changed).filter(k => changed[k] === true).map(ston))
     },
     emitSelected () {
-      this.$emit('update:selected', this.internalSelected)
+      this.$emit('update:selected', this.selectedCache)
     },
     getDescendants (key: string | number, descendants: (string | number)[] = []) {
       const children = this.nodes[key].children
