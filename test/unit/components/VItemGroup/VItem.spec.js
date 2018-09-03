@@ -41,4 +41,28 @@ test('VItem', ({ mount }) => {
     expect('v-item should only contain a single element').toHaveBeenTipped()
     expect(registrableWarning).toHaveBeenTipped()
   })
+
+  it('should match snapshot activeClass', async () => {
+    const Mock = {
+      name: 'test',
+
+      render: h => h(VItem, {
+        props: { activeClass: 'foo' },
+        scopedSlots: {
+          default: () => h('div')
+        }
+      })
+    }
+
+    const wrapper = mount(Mock)
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect(registrableWarning).toHaveBeenTipped()
+
+    wrapper.vm.$children[0].isActive = true
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })
