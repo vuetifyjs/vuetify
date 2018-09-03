@@ -23,7 +23,14 @@ export default mixins<options>(
   name: 'groupable',
 
   props: {
-    activeClass: String,
+    activeClass: {
+      type: String,
+      default (): string | undefined {
+        if (!this.itemGroup) return undefined
+
+        return this.itemGroup.activeClass
+      }
+    } as any as PropValidator<string>,
     disabled: Boolean,
     value: null as any as PropValidator<any>
   },
@@ -36,12 +43,10 @@ export default mixins<options>(
 
   computed: {
     groupClasses (): object {
-      const activeClass = this.activeClass || this.itemGroup.activeClass
-
-      if (!activeClass) return {}
+      if (!this.activeClass) return {}
 
       return {
-        [activeClass]: this.isActive
+        [this.activeClass]: this.isActive
       }
     }
   },
