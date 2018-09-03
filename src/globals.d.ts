@@ -19,6 +19,10 @@ declare global {
     Vue: VueConstructor
   }
 
+  interface HTMLCollection {
+    [Symbol.iterator] (): IterableIterator<Element>
+  }
+
   interface Element {
     getElementsByClassName(classNames: string): NodeListOf<HTMLElement>
   }

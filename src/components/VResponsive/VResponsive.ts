@@ -1,21 +1,21 @@
 import '../../stylus/components/_responsive.styl'
 
+// Mixins
+import Measurable, { NumberOrNumberString } from '../../mixins/measurable'
+
 // Types
-import Vue, { VNode } from 'vue'
-import { PropValidator } from 'vue/types/options'
+import { VNode } from 'vue'
 
 // Utils
+import mixins from '../../util/mixins'
 import { convertToUnit } from '../../util/helpers'
 
-type UnknownProp = PropValidator<string | number | undefined>
-
-export default Vue.extend({
+/* @vue/component */
+export default mixins(Measurable).extend({
   name: 'v-responsive',
 
   props: {
-    aspectRatio: [String, Number] as UnknownProp,
-    height: [String, Number] as UnknownProp,
-    maxHeight: [String, Number] as UnknownProp
+    aspectRatio: [String, Number] as NumberOrNumberString
   },
 
   computed: {
@@ -50,7 +50,9 @@ export default Vue.extend({
       staticClass: 'v-responsive',
       style: {
         height: convertToUnit(this.height),
-        maxHeight: convertToUnit(this.maxHeight)
+        maxHeight: convertToUnit(this.maxHeight),
+        maxWidth: convertToUnit(this.maxWidth),
+        width: convertToUnit(this.width)
       },
       on: this.$listeners
     }, [

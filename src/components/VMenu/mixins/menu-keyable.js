@@ -35,7 +35,7 @@ export default {
   },
 
   methods: {
-    changeListIndex (e) {
+    onKeyDown (e) {
       if ([
         keyCodes.down,
         keyCodes.up,
@@ -47,6 +47,9 @@ export default {
         return this.isActive = false
       }
 
+      this.changeListIndex(e)
+    },
+    changeListIndex (e) {
       // For infinite scroll and autocomplete, re-evaluate children
       this.getTiles()
 

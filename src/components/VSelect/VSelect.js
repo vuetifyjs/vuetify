@@ -13,7 +13,6 @@ import VTextField from '../VTextField/VTextField'
 // Mixins
 import Comparable from '../../mixins/comparable'
 import Filterable from '../../mixins/filterable'
-import Menuable from '../../mixins/menuable'
 
 // Directives
 import ClickOutside from '../../directives/click-outside'
@@ -54,7 +53,6 @@ export default {
       type: null,
       default: false
     },
-    auto: Boolean,
     browserAutocomplete: {
       type: String,
       default: 'on'
@@ -366,16 +364,20 @@ export default {
         selections.children.push(input)
       }
 
-      const activator = this.genSelectSlot([
-        this.genLabel(),
-        this.prefix ? this.genAffix('prefix') : null,
-        selections,
-        this.suffix ? this.genAffix('suffix') : null,
-        this.genClearIcon(),
-        this.genIconSlot()
-      ])
-
-      return [this.genMenu(activator)]
+      return [
+        this.$createElement('div', {
+          staticClass: 'v-select__slot',
+          directives: this.directives
+        }, [
+          this.genLabel(),
+          this.prefix ? this.genAffix('prefix') : null,
+          selections,
+          this.suffix ? this.genAffix('suffix') : null,
+          this.genClearIcon(),
+          this.genIconSlot()
+        ]),
+        this.genMenu()
+      ]
     },
     genInput () {
       const input = VTextField.methods.genInput.call(this)
@@ -407,13 +409,13 @@ export default {
         ...this.listData
       }, slots)
     },
-    genMenu (activator) {
+    genMenu () {
       const props = this.$_menuProps
       props.activator = this.$refs['input-slot']
 
       // Deprecate using menu props directly
       // TODO: remove (2.0)
-      const inheritedProps = [...Object.keys(VMenu.options.props), ...Object.keys(Menuable.options.props)]
+      const inheritedProps = Object.keys(VMenu.options.props)
 
       const deprecatedProps = Object.keys(this.$attrs).reduce((acc, attr) => {
         if (inheritedProps.includes(camelize(attr))) acc.push(attr)
@@ -424,16 +426,27 @@ export default {
         props[camelize(prop)] = this.$attrs[prop]
       }
 
-      // The warn process is a bit slow, so we won't do it in prod
       if (process.env.NODE_ENV !== 'production') {
         if (deprecatedProps.length) {
           const multiple = deprecatedProps.length > 1
-          const replacement = JSON.stringify(deprecatedProps.reduce((acc, p) => {
+          let replacement = deprecatedProps.reduce((acc, p) => {
             acc[camelize(p)] = this.$attrs[p]
             return acc
-          }, {}), null, multiple ? 2 : 0).replace(/"([^(")"]+)":/g, '$1:').replace(/"/g, '\'')
+          }, {})
           const props = deprecatedProps.map(p => `'${p}'`).join(', ')
           const separator = multiple ? '\n' : '\''
+
+          const onlyBools = Object.keys(replacement).every(prop => {
+            const propType = VMenu.options.props[prop]
+            const value = replacement[prop]
+            return value === true || ((propType.type || propType) === Boolean && value === '')
+          })
+
+          if (onlyBools) {
+            replacement = Object.keys(replacement).join(', ')
+          } else {
+            replacement = JSON.stringify(replacement, null, multiple ? 2 : 0).replace(/"([^(")"]+)":/g, '$1:').replace(/"/g, '\'')
+          }
 
           consoleWarn(`${props} ${multiple ? 'are' : 'is'} deprecated, use ${separator}:menu-props="${replacement}"${separator} instead`, this)
         }
@@ -461,7 +474,7 @@ export default {
           }
         },
         ref: 'menu'
-      }, [activator, this.genList()])
+      }, [this.genList()])
     },
     genSelections () {
       let length = this.selectedItems.length
@@ -486,13 +499,6 @@ export default {
 
       return this.$createElement('div', {
         staticClass: 'v-select__selections'
-      }, children)
-    },
-    genSelectSlot (children) {
-      return this.$createElement('div', {
-        staticClass: 'v-select__slot',
-        directives: this.directives,
-        slot: 'activator'
       }, children)
     },
     genSlotSelection (item, index) {
@@ -547,7 +553,6 @@ export default {
       e.preventDefault()
       this.isMenuActive = false
     },
-    // Detect tab and call original onBlur method
     onKeyDown (e) {
       const keyCode = e.keyCode
 
@@ -557,6 +562,8 @@ export default {
         keyCodes.space,
         keyCodes.up, keyCodes.down
       ].includes(keyCode)) this.activateMenu()
+
+      if (this.isMenuActive && this.$refs.menu) this.$refs.menu.changeListIndex(e)
 
       // This should do something different
       if (keyCode === keyCodes.enter) return this.onEnterDown()
