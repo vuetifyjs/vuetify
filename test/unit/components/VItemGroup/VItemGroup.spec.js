@@ -5,6 +5,7 @@ import VItemGroup from '@/components/VItemGroup/VItemGroup'
 
 const vm = new Vue()
 const defaultSlot = ({ toggle }) => vm.$createElement('div', { on: { click: toggle } }, 'foobar')
+const valueWarning = '[Vuetify] Implementing component is missing a value property'
 
 const Mock = {
   name: 'test',
@@ -53,6 +54,8 @@ test('VItemGroup.ts', ({ mount }) => {
     item.destroy()
 
     expect(wrapper.vm.items.length).toBe(0)
+
+    expect(valueWarning).toHaveBeenTipped()
   })
 
   it('should update state from child clicks', () => {
@@ -96,6 +99,8 @@ test('VItemGroup.ts', ({ mount }) => {
 
     child1.click()
     expect(change).toBeCalledWith([1])
+
+    expect(valueWarning).toHaveBeenTipped()
   })
 
   it('should have a conditional method for toggling items', () => {
@@ -141,6 +146,8 @@ test('VItemGroup.ts', ({ mount }) => {
 
     expect(wrapper.vm.selectedItems.length).toBe(1)
     expect(wrapper.vm.internalValue).toEqual([0])
+
+    expect(valueWarning).toHaveBeenTipped()
   })
 
   it('should update a single item group', () => {
@@ -231,5 +238,7 @@ test('VItemGroup.ts', ({ mount }) => {
     first.destroy()
 
     expect(change).toBeCalledWith(undefined)
+
+    expect(valueWarning).toHaveBeenTipped()
   })
 })

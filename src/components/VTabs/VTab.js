@@ -1,9 +1,7 @@
 // Mixins
+import Groupable from '../../mixins/groupable'
 import Routable from '../../mixins/routable'
 import Themeable from '../../mixins/themeable'
-import {
-  inject as RegistrableInject
-} from '../../mixins/registrable'
 
 // Utilities
 import { getObjectValueByPath } from '../../util/helpers'
@@ -13,43 +11,33 @@ export default {
   name: 'v-tab',
 
   mixins: [
-    RegistrableInject('tabs', 'v-tab', 'v-tabs'),
     Routable,
+    // Must be after routable
+    // to overwrite activeClass
+    Groupable,
     Themeable
   ],
 
-  inject: ['tabClick'],
-
   props: {
-    activeClass: {
-      type: String,
-      default: 'v-tabs__item--active'
-    },
     ripple: {
       type: [Boolean, Object],
       default: true
     }
   },
 
-  data () {
-    return {
-      isActive: false
-    }
-  },
-
   computed: {
     isDark () {
-      return this.tabs.selfIsDark
+      return this.itemGroup.selfIsDark
     },
     classes () {
       return {
         'v-tabs__item': true,
         'v-tabs__item--disabled': this.disabled,
-        [this.activeClass]: !this.to && this.isActive
+        ...this.groupClasses
       }
     },
-    action () {
-      let to = this.to || this.href
+    value () {
+      let to = this.to || this.href || ''
 
       if (this.$router &&
         this.to === Object(this.to)
@@ -63,9 +51,7 @@ export default {
         to = resolve.href
       }
 
-      return typeof to === 'string'
-        ? to.replace('#', '')
-        : this
+      return to.replace('#', '')
     }
   },
 
@@ -74,12 +60,7 @@ export default {
   },
 
   mounted () {
-    this.tabs.register(this)
     this.onRouteChange()
-  },
-
-  beforeDestroy () {
-    this.tabs.unregister(this)
   },
 
   methods: {
@@ -93,7 +74,7 @@ export default {
 
       this.$emit('click', e)
 
-      this.to || this.tabClick(this)
+      this.to || this.toggle()
     },
     onRouteChange () {
       if (!this.to || !this.$refs.link) return
@@ -102,12 +83,9 @@ export default {
 
       this.$nextTick(() => {
         if (getObjectValueByPath(this.$refs.link, path)) {
-          this.tabClick(this)
+          this.toggle()
         }
       })
-    },
-    toggle (action) {
-      this.isActive = (action === this) || (action === this.action)
     }
   },
 

@@ -3,6 +3,7 @@ import { test } from '@/test'
 import VItem from '@/components/VItemGroup/VItem'
 
 const registrableWarning = '[Vuetify] The v-item component must be used inside a v-item-group'
+const valueWarning = '[Vuetify] Implementing component is missing a value property'
 
 const vm = new Vue()
 const defaultSlot = () => vm.$createElement('div', 'foobar')
@@ -22,6 +23,7 @@ test('VItem', ({ mount }) => {
     mount(VItem)
 
     expect('v-item is missing a default scopedSlot').toHaveBeenTipped()
+    expect(valueWarning).toHaveBeenTipped()
     expect(registrableWarning).toHaveBeenTipped()
   })
 
@@ -39,6 +41,7 @@ test('VItem', ({ mount }) => {
     mount(Mock)
 
     expect('v-item should only contain a single element').toHaveBeenTipped()
+    expect(valueWarning).toHaveBeenTipped()
     expect(registrableWarning).toHaveBeenTipped()
   })
 
@@ -64,5 +67,7 @@ test('VItem', ({ mount }) => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
+
+    expect(valueWarning).toHaveBeenTipped()
   })
 })

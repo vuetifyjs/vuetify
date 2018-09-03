@@ -12,7 +12,7 @@ import { consoleWarn } from '../../util/console'
 // Types
 import { VNode } from 'vue/types'
 
-type GroupableInstance = InstanceType<typeof Groupable>
+type GroupableInstance = InstanceType<typeof Groupable> & { value?: any }
 
 export default mixins(Proxyable).extend({
   name: 'v-item-group',
