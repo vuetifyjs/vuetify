@@ -1,8 +1,13 @@
-import Vue from 'vue'
+import Vue, { VueConstructor } from 'vue'
 
-type InternalValue = undefined | null | number | number[] | string | string[]
+/* eslint-disable-next-line no-use-before-define */
+export type Proxyable<T extends string = 'value'> = VueConstructor<Vue & {
+  internalLazyValue: unknown
+  internalValue: unknown
+} & Record<T, any>>
 
-export default function proxyable (
+export function factory<T extends string = 'value'> (prop?: T, event?: string): Proxyable<T>
+export function factory (
   prop = 'value',
   event = 'change'
 ) {
@@ -22,13 +27,13 @@ export default function proxyable (
 
     data () {
       return {
-        internalLazyValue: this[prop] as InternalValue
+        internalLazyValue: this[prop] as unknown
       }
     },
 
     computed: {
       internalValue: {
-        get (): InternalValue {
+        get (): unknown {
           return this.internalLazyValue
         },
         set (val: any) {
@@ -46,3 +51,8 @@ export default function proxyable (
     }
   })
 }
+
+/* eslint-disable-next-line no-redeclare */
+const Proxyable = factory()
+
+export default Proxyable

@@ -1,8 +1,8 @@
 import { test } from '@/test'
-import Proxyable from '@/mixins/proxyable'
+import Proxyable, { factory as Proxy } from '@/mixins/proxyable'
 
 const Mock = {
-  mixins: [Proxyable()],
+  mixins: [Proxyable],
 
   render: h => h('div')
 }
@@ -35,7 +35,7 @@ test('proxyable.ts', ({ mount }) => {
   it('should use provided prop and event arguments', () => {
     const input = jest.fn()
     const wrapper = mount({
-      mixins: [Proxyable('input', 'update:input-value')],
+      mixins: [Proxy('input', 'update:input-value')],
       render: h => h('div')
     }, {
       propsData: {

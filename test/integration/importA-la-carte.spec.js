@@ -29,6 +29,7 @@ import VHover from '@/components/VHover'
 import VIcon from '@/components/VIcon'
 import VImg from '@/components/VImg'
 import VInput from '@/components/VInput'
+import VItemGroup from '@/components/VItemGroup'
 import VJumbotron from '@/components/VJumbotron'
 import VLabel from '@/components/VLabel'
 import VList from '@/components/VList'
@@ -92,6 +93,7 @@ const components = {
   VIcon,
   VImg,
   VInput,
+  VItemGroup,
   VJumbotron,
   VLabel,
   VList,
