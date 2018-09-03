@@ -143,6 +143,9 @@ export default mixins(Proxyable).extend({
         return this.updateMandatory()
       }
 
+      // TODO: Make this smarter so it
+      // doesn't have to iterate every
+      // child in an update
       this.items.forEach((item, i) => {
         const value = this.getValue(item, i)
 
