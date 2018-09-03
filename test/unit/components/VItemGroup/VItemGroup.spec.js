@@ -190,4 +190,46 @@ test('VItemGroup.ts', ({ mount }) => {
     wrapper.vm.updateMultiple('buzz')
     expect(wrapper.vm.internalValue).toEqual(['foo', 'bar', 'fizz'])
   })
+
+  it('should update value if mandatory and dynamic items', async () => {
+    const wrapper = mount(VItemGroup, {
+      propsData: {
+        multiple: true,
+        value: [3]
+      },
+      slots: {
+        default: [
+          Mock,
+          Mock,
+          Mock,
+          Mock
+        ]
+      }
+    })
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    const [first, second, third, fourth] = wrapper.find(Mock)
+
+    fourth.destroy()
+
+    expect(change).toBeCalledWith([])
+
+    wrapper.setProps({ mandatory: true, value: [2] })
+
+    third.destroy()
+
+    expect(change).toBeCalledWith([1])
+
+    wrapper.setProps({ multiple: false, value: 1 })
+
+    second.destroy()
+
+    expect(change).toBeCalledWith(0)
+
+    first.destroy()
+
+    expect(change).toBeCalledWith(undefined)
+  })
 })

@@ -54,6 +54,11 @@ export default mixins(Proxyable).extend({
         return this.toggleMethod(this.getValue(item, index))
       })
     },
+    selectedValues (): any[] {
+      return Array.isArray(this.internalValue)
+        ? this.internalValue
+        : [this.internalValue]
+    },
     toggleMethod (): (v: any) => boolean {
       if (!this.multiple) {
         return (v: any) => this.internalValue === v
@@ -91,27 +96,51 @@ export default mixins(Proxyable).extend({
     init () {
       this.updateItemsState()
     },
-    onClick (index: number) {
+    onClick (item: GroupableInstance, index: number) {
       this.updateInternalValue(
-        this.getValue(this.items[index], index)
+        this.getValue(item, index)
       )
     },
     register (item: GroupableInstance) {
       const index = this.items.push(item) - 1
 
-      item.$on('change', () => this.onClick(index))
+      item.$on('change', () => this.onClick(item, index))
     },
     unregister (item: GroupableInstance) {
-      this.items.splice(this.items.indexOf(item), 1)
+      const index = this.items.indexOf(item)
+      const value = this.getValue(item, index)
+
+      this.items.splice(index, 1)
+
+      const valueIndex = this.selectedValues.indexOf(value)
+
+      // Items is not selected, do nothing
+      if (valueIndex < 0) return
+
+      // If not mandatory, use regular update process
+      if (!this.mandatory) {
+        return this.updateInternalValue(value)
+      }
+
+      // Remove the value
+      if (this.multiple && Array.isArray(this.internalValue)) {
+        this.internalValue = this.internalValue.filter(v => v !== value)
+      } else {
+        this.internalValue = undefined
+      }
+
+      // If mandatory and we have no selection
+      // add the last item as value
+      /* istanbul ignore else */
+      if (!this.selectedItems.length) {
+        this.updateMandatory(true)
+      }
     },
     updateItemsState () {
       if (this.mandatory &&
-        !this.selectedItems.length &&
-        this.items.length > 0
+        !this.selectedItems.length
       ) {
-        return this.updateInternalValue(
-          this.getValue(this.items[0], 0)
-        )
+        return this.updateMandatory()
       }
 
       this.items.forEach((item, i) => {
@@ -124,6 +153,15 @@ export default mixins(Proxyable).extend({
       this.multiple
         ? this.updateMultiple(value)
         : this.updateSingle(value)
+    },
+    updateMandatory (last?: boolean) {
+      if (!this.items.length) return
+
+      const index = last ? this.items.length - 1 : 0
+
+      this.updateInternalValue(
+        this.getValue(this.items[index], index)
+      )
     },
     updateMultiple (value: any) {
       const defaultValue = Array.isArray(this.internalValue)
