@@ -8,7 +8,6 @@ import { inject as RegistrableInject } from './registrable'
 
 // Utilities
 import mixins from '../util/mixins'
-import { consoleWarn } from '../util/console'
 import { PropValidator } from 'vue/types/options'
 
 type VItemGroupInstance = InstanceType<typeof VItemGroup>
@@ -24,25 +23,21 @@ export default mixins<options>(
   name: 'groupable',
 
   props: {
-    activeClass: {
-      type: String,
-      default (): any {
-        if (!this.itemGroup) return undefined
-
-        return this.itemGroup.activeClass
-      }
-    },
+    activeClass: String,
     disabled: Boolean,
     value: null as any as PropValidator<any>
   },
 
-  data: () => ({
-    isActive: false
-  }),
+  data () {
+    return {
+      isActive: false
+    }
+  },
 
   computed: {
     groupClasses (): object {
       const activeClass = this.activeClass || this.itemGroup.activeClass
+
       if (!activeClass) return {}
 
       return {
@@ -52,10 +47,6 @@ export default mixins<options>(
   },
 
   created () {
-    if (!('value' in this)) {
-      consoleWarn('Implementing component is missing a value property', this)
-    }
-
     this.itemGroup && this.itemGroup.register(this)
   },
 
@@ -64,16 +55,8 @@ export default mixins<options>(
   },
 
   methods: {
-    toggle (isActive?: boolean) {
-      const oldVal = this.isActive
-      if (typeof isActive === 'boolean') {
-        this.isActive = isActive
-      } else {
-        this.isActive = !this.isActive
-      }
-      if (this.isActive !== oldVal) {
-        this.$emit('change', this.isActive)
-      }
+    toggle () {
+      this.$emit('change')
     }
   }
 })
