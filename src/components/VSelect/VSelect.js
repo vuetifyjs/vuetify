@@ -566,7 +566,7 @@ export default {
       if (this.isMenuActive && this.$refs.menu) this.$refs.menu.changeListIndex(e)
 
       // This should do something different
-      if (keyCode === keyCodes.enter) return this.onEnterDown()
+      if (keyCode === keyCodes.enter) return this.onEnterDown(e)
 
       // If escape deactivate the menu
       if (keyCode === keyCodes.esc) return this.onEscDown(e)

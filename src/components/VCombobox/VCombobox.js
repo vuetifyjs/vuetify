@@ -89,9 +89,15 @@ export default {
     },
     // Requires a manual definition
     // to overwrite removal in v-autocomplete
-    onEnterDown () {
-      this.updateSelf()
+    onEnterDown (e) {
+      e.preventDefault()
+
       VSelect.methods.onEnterDown.call(this)
+
+      // If has menu index, let v-select-list handle
+      if (this.getMenuIndex() > -1) return
+
+      this.updateSelf()
     },
     onKeyDown (e) {
       const keyCode = e.keyCode

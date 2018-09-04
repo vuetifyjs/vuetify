@@ -22,7 +22,7 @@ import Resize from '../../directives/resize'
 
 // Helpers
 import { convertToUnit } from '../../util/helpers'
-import SlotProvider from '../../util/SlotProvider'
+import ThemeProvider from '../../util/ThemeProvider'
 
 /* @vue/component */
 export default Vue.extend({
@@ -205,11 +205,9 @@ export default Vue.extend({
 
     return h('div', data, [
       this.genActivator(),
-      this.$createElement(SlotProvider, {
+      this.$createElement(ThemeProvider, {
         props: {
-          provide: {
-            theme: { isDark: this.$vuetify.dark || this.dark }
-          }
+          dark: this.$vuetify.dark || this.dark
         }
       }, [this.genTransition()])
     ])
