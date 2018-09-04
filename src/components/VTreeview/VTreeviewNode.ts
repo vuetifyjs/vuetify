@@ -98,7 +98,9 @@ export default mixins(
         item: this.item,
         leaf: !this.children,
         selected: this.isSelected,
-        active: this.isActive
+        indeterminate: this.isIndeterminate,
+        active: this.isActive,
+        open: this.isOpen
       }
     },
     computedIcon (): string {

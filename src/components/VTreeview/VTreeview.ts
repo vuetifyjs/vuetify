@@ -38,15 +38,7 @@ export default mixins(
   name: 'v-treeview',
 
   provide (): object {
-    const treeview = {
-      register: this.register,
-      unregister: this.unregister,
-      updateActive: this.updateActive,
-      updateSelected: this.updateSelected,
-      emitSelected: this.emitSelected
-    }
-
-    return { treeview }
+    return { treeview: this }
   },
 
   props: {
@@ -75,7 +67,7 @@ export default mixins(
         const oldSelectedCache = this.selectedCache.slice()
         this.selectedCache = []
         this.activeCache = []
-        this.buildTree(this.items, Object.assign({}, this.nodes))
+        this.buildTree(this.items)
 
         // Only emit selected if selection has changed
         // as a result of items changing. This fixes a
@@ -86,8 +78,8 @@ export default mixins(
       deep: true
     },
     selected: {
-      handler (newVal, oldVal) {
-        if (!newVal || deepEqual(newVal, this.selectedCache)) return
+      handler (v) {
+        if (!v || deepEqual(v, this.selectedCache)) return
 
         this.selected.forEach(key => this.updateSelected(key, true))
         this.emitSelected()
@@ -97,7 +89,7 @@ export default mixins(
   },
 
   created () {
-    this.buildTree(this.items, {})
+    this.buildTree(this.items)
   },
 
   methods: {
@@ -110,25 +102,28 @@ export default mixins(
 
       return count
     },
-    buildTree (items: any[], oldState: Record<string | number, NodeState>, parent = null) {
+    buildTree (items: any[], parent = null) {
       for (let i = 0; i < items.length; i++) {
         const item = items[i]
         const key = getObjectValueByPath(item, this.itemKey)
         const children = getObjectValueByPath(item, this.itemChildren, [])
+        const oldNode = this.nodes.hasOwnProperty(key) ? this.nodes[key] : {
+          isSelected: false, isIndeterminate: false, isActive: false, vnode: null
+        } as NodeState
 
         const node: any = {
-          vnode: oldState.hasOwnProperty(key) ? oldState[key].vnode : null,
+          vnode: oldNode.vnode,
           parent,
           children: children.map((c: any) => getObjectValueByPath(c, this.itemKey))
         }
 
-        this.buildTree(children, oldState, key)
+        this.buildTree(children, key)
 
-        node.isSelected = oldState.hasOwnProperty(key) ? oldState[key].isSelected : false
-        node.isIndeterminate = oldState.hasOwnProperty(key) ? oldState[key].isIndeterminate : false
-        node.isActive = oldState.hasOwnProperty(key) ? oldState[key].isActive : false
+        node.isSelected = oldNode.isSelected
+        node.isIndeterminate = oldNode.isIndeterminate
+        node.isActive = oldNode.isActive
 
-        this.nodes[key] = !children.length ? node : this.calculateState(node, oldState)
+        this.nodes[key] = !children.length ? node : this.calculateState(node, this.nodes)
 
         // Don't forget to rebuild cache
         if (this.nodes[key].isSelected) this.selectedCache.push(key)
