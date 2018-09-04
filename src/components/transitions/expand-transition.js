@@ -3,7 +3,6 @@ import { addOnceEventListener } from '../../util/helpers'
 export default function (expandedParentClass = '') {
   return {
     enter (el, done) {
-      console.log('enter')
       el._parent = el.parentNode
       el._height = el._height != null ? el._height : el.style.height
 

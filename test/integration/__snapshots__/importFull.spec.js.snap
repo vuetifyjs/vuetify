@@ -142,5 +142,7 @@ Array [
   "VToolbarSideIcon",
   "VToolbarTitle",
   "VTooltip",
+  "VTreeview",
+  "VTreeviewNode",
 ]
 `;
