@@ -2,7 +2,11 @@
 
 exports[`VProgressCircular.js should render component and match snapshot 1`] = `
 
-<div class="v-progress-circular"
+<div role="progressbar"
+     aria-valuemin="0"
+     aria-valuemax="100"
+     aria-valuenow="33"
+     class="v-progress-circular"
      style="height: 32px; width: 32px;"
 >
   <svg xmlns="http://www.w3.org/2000/svg"
@@ -40,7 +44,11 @@ exports[`VProgressCircular.js should render component and match snapshot 1`] = `
 
 exports[`VProgressCircular.js should render component with button prop and match snapshot 1`] = `
 
-<div class="v-progress-circular v-progress-circular--button"
+<div role="progressbar"
+     aria-valuemin="0"
+     aria-valuemax="100"
+     aria-valuenow="33"
+     class="v-progress-circular v-progress-circular--button"
      style="height: 40px; width: 40px;"
 >
   <svg xmlns="http://www.w3.org/2000/svg"
@@ -75,7 +83,11 @@ exports[`VProgressCircular.js should render component with button prop and match
 
 exports[`VProgressCircular.js should render component with color prop and match snapshot 1`] = `
 
-<div class="v-progress-circular orange--text text--lighten-1"
+<div role="progressbar"
+     aria-valuemin="0"
+     aria-valuemax="100"
+     aria-valuenow="33"
+     class="v-progress-circular orange--text text--lighten-1"
      style="height: 32px; width: 32px;"
 >
   <svg xmlns="http://www.w3.org/2000/svg"
@@ -110,7 +122,11 @@ exports[`VProgressCircular.js should render component with color prop and match 
 
 exports[`VProgressCircular.js should render component with fill prop and match snapshot 1`] = `
 
-<div class="v-progress-circular"
+<div role="progressbar"
+     aria-valuemin="0"
+     aria-valuemax="100"
+     aria-valuenow="33"
+     class="v-progress-circular"
      style="height: 32px; width: 32px;"
 >
   <svg xmlns="http://www.w3.org/2000/svg"
@@ -145,7 +161,10 @@ exports[`VProgressCircular.js should render component with fill prop and match s
 
 exports[`VProgressCircular.js should render component with indeterminate prop and match snapshot 1`] = `
 
-<div class="v-progress-circular v-progress-circular--indeterminate"
+<div role="progressbar"
+     aria-valuemin="0"
+     aria-valuemax="100"
+     class="v-progress-circular v-progress-circular--indeterminate"
      style="height: 32px; width: 32px;"
 >
   <svg xmlns="http://www.w3.org/2000/svg"
@@ -170,7 +189,11 @@ exports[`VProgressCircular.js should render component with indeterminate prop an
 
 exports[`VProgressCircular.js should render component with rotate prop and match snapshot 1`] = `
 
-<div class="v-progress-circular"
+<div role="progressbar"
+     aria-valuemin="0"
+     aria-valuemax="100"
+     aria-valuenow="33"
+     class="v-progress-circular"
      style="height: 32px; width: 32px;"
 >
   <svg xmlns="http://www.w3.org/2000/svg"
@@ -205,7 +228,11 @@ exports[`VProgressCircular.js should render component with rotate prop and match
 
 exports[`VProgressCircular.js should render component with size prop and match snapshot 1`] = `
 
-<div class="v-progress-circular"
+<div role="progressbar"
+     aria-valuemin="0"
+     aria-valuemax="100"
+     aria-valuenow="33"
+     class="v-progress-circular"
      style="height: 17px; width: 17px;"
 >
   <svg xmlns="http://www.w3.org/2000/svg"
@@ -240,7 +267,11 @@ exports[`VProgressCircular.js should render component with size prop and match s
 
 exports[`VProgressCircular.js should render component with width prop and match snapshot 1`] = `
 
-<div class="v-progress-circular"
+<div role="progressbar"
+     aria-valuemin="0"
+     aria-valuemax="100"
+     aria-valuenow="33"
+     class="v-progress-circular"
      style="height: 32px; width: 32px;"
 >
   <svg xmlns="http://www.w3.org/2000/svg"

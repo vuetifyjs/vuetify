@@ -97,7 +97,8 @@ export default {
         this.$vuetify.breakpoint.mdAndUp
       ) return this.heights.desktop
 
-      if (this.$vuetify.breakpoint.width >
+      if (this.$vuetify.breakpoint.smAndDown &&
+        this.$vuetify.breakpoint.width >
         this.$vuetify.breakpoint.height
       ) return this.heights.mobileLandscape
 

@@ -50,6 +50,12 @@ export default function (expandedParentClass = '') {
 
     afterLeave (el) {
       expandedParentClass && el._parent && el._parent.classList.remove(expandedParentClass)
+
+      // If user supplied height
+      // leave it
+      if (el._height) return
+
+      el.style.height = null
     }
   }
 }
