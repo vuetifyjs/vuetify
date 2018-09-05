@@ -102,7 +102,7 @@ export default mixins(
 
       return count
     },
-    buildTree (items: any[], parent = null) {
+    buildTree (items: any[], parent: (string | number | null) = null) {
       for (let i = 0; i < items.length; i++) {
         const item = items[i]
         const key = getObjectValueByPath(item, this.itemKey)
@@ -119,8 +119,15 @@ export default mixins(
 
         this.buildTree(children, key)
 
-        node.isSelected = oldNode.isSelected
-        node.isIndeterminate = oldNode.isIndeterminate
+        // This fixed bug with dynamic children resetting selected parent state
+        if (!this.nodes.hasOwnProperty(key) && parent !== null && this.nodes.hasOwnProperty(parent)) {
+          node.isSelected = this.nodes[parent].isSelected
+          node.isIndeterminate = this.nodes[parent].isIndeterminate
+        } else {
+          node.isSelected = oldNode.isSelected
+          node.isIndeterminate = oldNode.isIndeterminate
+        }
+
         node.isActive = oldNode.isActive
 
         this.nodes[key] = !children.length ? node : this.calculateState(node, this.nodes)

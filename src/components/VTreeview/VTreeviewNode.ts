@@ -12,6 +12,7 @@ import { inject as RegistrableInject } from '../../mixins/registrable'
 // Utils
 import mixins from '../../util/mixins'
 import { getObjectValueByPath } from '../../util/helpers'
+import { PropValidator } from 'vue/types/options'
 
 export const VTreeviewNodeProps = {
   selectable: Boolean,
@@ -51,7 +52,7 @@ export const VTreeviewNodeProps = {
     type: String,
     default: 'children'
   },
-  loadChildren: Function,
+  loadChildren: Function as PropValidator<(item: any) => Promise<void>>,
   transition: Boolean
 }
 
