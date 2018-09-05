@@ -119,14 +119,17 @@ export default mixins(
   },
 
   methods: {
-    async checkChildren () {
-      // TODO: Potential issue with always trying
-      // to load children if response is empty?
-      if (!this.children || this.children.length || !this.loadChildren) return
+    checkChildren (): Promise<void> {
+      return new Promise(resolve => {
+        // TODO: Potential issue with always trying
+        // to load children if response is empty?
+        if (!this.children || this.children.length || !this.loadChildren) return resolve()
 
-      this.isLoading = true
-      await this.loadChildren(this.item)
-      this.isLoading = false
+        this.isLoading = true
+        resolve(this.loadChildren(this.item))
+      }).then(() => {
+        this.isLoading = false
+      })
     },
     genLabel () {
       return this.$createElement('label', {
@@ -154,14 +157,14 @@ export default mixins(
         },
         slot: 'prepend',
         on: {
-          click: async (e: MouseEvent) => {
+          click: (e: MouseEvent) => {
             e.stopPropagation()
 
             if (this.isLoading) return
 
-            await this.checkChildren()
-
-            this.isOpen = !this.isOpen
+            this.checkChildren().then(() => {
+              this.isOpen = !this.isOpen
+            })
           }
         }
       }, [this.isLoading ? this.loadingIcon : this.expandIcon])
@@ -173,20 +176,20 @@ export default mixins(
           color: this.isSelected ? this.selectedColor : undefined
         },
         on: {
-          click: async (e: MouseEvent) => {
+          click: (e: MouseEvent) => {
             e.stopPropagation()
 
             if (this.isLoading) return
 
-            await this.checkChildren()
+            this.checkChildren().then(() => {
+              // We nextTick here so that items watch in VTreeview has a chance to run first
+              this.$nextTick(() => {
+                this.isSelected = !this.isSelected
+                this.isIndeterminate = false
 
-            // We nextTick here so that items watch in VTreeview has a chance to run first
-            this.$nextTick(() => {
-              this.isSelected = !this.isSelected
-              this.isIndeterminate = false
-
-              this.treeview.updateSelected(this.key, this.isSelected)
-              this.treeview.emitSelected()
+                this.treeview.updateSelected(this.key, this.isSelected)
+                this.treeview.emitSelected()
+              })
             })
           }
         }
