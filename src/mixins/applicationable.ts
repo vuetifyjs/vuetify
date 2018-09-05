@@ -26,6 +26,9 @@ export default function applicationable (value: TargetProp, events: string[] = [
         prev
           ? this.removeApplication(true)
           : this.callUpdate()
+      },
+      applicationProperty (newVal, oldVal) {
+        this.$vuetify.application.unbind(this._uid, oldVal)
       }
     },
 
