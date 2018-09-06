@@ -96,7 +96,7 @@ export default {
       set (val) {
         this.lazySearch = val
 
-        this.$emit('update:searchInput', val)
+        this.$emit('update:search-input', val)
       }
     },
     isAnyValueAllowed () {

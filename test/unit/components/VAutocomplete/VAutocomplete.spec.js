@@ -44,7 +44,7 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
     const input = wrapper.first('input')
 
     const update = jest.fn()
-    wrapper.vm.$on('update:searchInput', update)
+    wrapper.vm.$on('update:search-input', update)
 
     input.element.value = 'test'
     input.trigger('input')
