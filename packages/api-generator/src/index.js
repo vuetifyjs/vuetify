@@ -195,6 +195,14 @@ function writeJsonFile (obj, file) {
   })
 }
 
+function writePlainFile (content, file) {
+  const stream = fs.createWriteStream(file)
+
+  stream.once('open', () => {
+    stream.write(content)
+    stream.end()
+  })
+}
 
 const tags = Object.keys(components).reduce((t, k) => {
   t[k] = {
@@ -227,8 +235,21 @@ const attributes = Object.keys(components).reduce((attrs, k) => {
   return Object.assign(attrs, tmp)
 }, {})
 
+const fakeComponents = `import Vue from 'vue'\n\n` + Object.keys(components).map(component => {
+  const propType = type => {
+    if (type === 'any') return 'null'
+    if (Array.isArray(type)) return `[${type.map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(',')}]`
+    return type.charAt(0).toUpperCase() + type.slice(1)
+  }
+  const quoteProp = name => name.match(/-/) ? `'${name}'` : name
+  let props = components[component].props.map(prop => `    ${quoteProp(prop.name)}: ${propType(prop.type)}`).join(',\n')
+  if (props) props = `\n  props: {\n${props}\n  }\n`
+  return `// noinspection JSUnresolvedFunction\nVue.component('${component}', {${props}})`
+}).join('\n')
+
 writeJsonFile(tags, 'dist/tags.json')
 writeJsonFile(attributes, 'dist/attributes.json')
+writePlainFile(fakeComponents, 'dist/fakeComponents.js')
 
 components['$vuetify'] = map['$vuetify']
 
