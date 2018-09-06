@@ -18,5 +18,6 @@ dev/*css
 /es5-temp
 /dist
 /release
+/.rpt2_cache
 .env
 yarn-error.log
