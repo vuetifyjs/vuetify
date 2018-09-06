@@ -60,7 +60,6 @@ export default {
         'class': {
           'v-menu__content--auto': this.auto,
           'menuable__content__active': this.isActive,
-          ...this.themeClasses,
           [this.contentClass.trim()]: true
         },
         style: this.styles,

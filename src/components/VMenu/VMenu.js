@@ -207,7 +207,8 @@ export default Vue.extend({
       this.genActivator(),
       this.$createElement(ThemeProvider, {
         props: {
-          dark: this.$vuetify.dark || this.dark
+          dark: !this.light && (this.$vuetify.dark || this.dark),
+          light: !this.dark && (this.light || !this.$vuetify.dark)
         }
       }, [this.genTransition()])
     ])
