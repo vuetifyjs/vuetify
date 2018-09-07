@@ -11,10 +11,7 @@ v-timeline($material)
 
     .v-card
       &:before
-        border-color: transparent $shadow-key-ambient-opacity transparent transparent
-
-      &:after
-        border-color: transparent $material.cards transparent transparent
+        border-right-color: $shadow-key-ambient-opacity
 
 theme(v-timeline, "v-timeline")
 
@@ -41,7 +38,7 @@ theme(v-timeline, "v-timeline")
 
       .v-card:before, .v-card:after
         transform: rotate(180deg)
-        right: -($timeline-wedge-size)
+        left: 100%
 
       .v-timeline-item__opposite
         margin-left: 96px
@@ -49,7 +46,7 @@ theme(v-timeline, "v-timeline")
 
     &:nth-child(even):not(.v-timeline-item--left), &--right
       .v-card:before, .v-card:after
-        left: -($timeline-wedge-size)
+        right: 100%
 
       .v-timeline-item__opposite
         margin-right: 96px
@@ -94,9 +91,13 @@ theme(v-timeline, "v-timeline")
       &:before, &:after
         content: ''
         position: absolute
-        border-style: solid
-        border-width: $timeline-wedge-size $timeline-wedge-size $timeline-wedge-size 0
+        border-top: $timeline-wedge-size solid transparent
+        border-bottom: $timeline-wedge-size solid transparent
+        border-right: $timeline-wedge-size solid black
         top: 'calc(50% - %s)' % $timeline-wedge-size
+
+      &:after
+        border-right-color: inherit
 
       &:before
         top: 'calc(50% - %s + 2px)' % $timeline-wedge-size
