@@ -1594,8 +1594,8 @@ vue@^2.5.16:
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.16.tgz#07edb75e8412aaeed871ebafa99f4672584a0085"
 
 vuetify@^1.0.18:
-  version "1.0.18"
-  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-1.0.18.tgz#56289ba7c6e5eee3d4ee4dacd5e7dded4aee4c08"
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-1.2.3.tgz#519bab56c31420892912c0c7dbd23e790c9287bb"
 
 wide-align@^1.1.0:
   version "1.1.2"
