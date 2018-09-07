@@ -107,6 +107,11 @@ theme(v-timeline, "v-timeline")
       align-self: center
       max-width: calc(50% - 48px)
 
+  &--clipped
+    &:before
+      height: calc(100% - 72px)
+      top: 36px
+
   &--dense
     &:before
       left: 18px // -1 for line width
