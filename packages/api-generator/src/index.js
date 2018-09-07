@@ -237,12 +237,17 @@ const attributes = Object.keys(components).reduce((attrs, k) => {
 
 const fakeComponents = `import Vue from 'vue'\n\n` + Object.keys(components).map(component => {
   const propType = type => {
-    if (type === 'any') return 'null'
+    if (type === 'any' || typeof type === 'undefined') return 'null'
     if (Array.isArray(type)) return `[${type.map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(',')}]`
     return type.charAt(0).toUpperCase() + type.slice(1)
   }
   const quoteProp = name => name.match(/-/) ? `'${name}'` : name
-  let props = components[component].props.map(prop => `    ${quoteProp(prop.name)}: ${propType(prop.type)}`).join(',\n')
+  const componentProps = components[component].props
+  componentProps.sort((a, b) => {
+    if (a.name < b.name) return -1;
+    return a.name === b.name ? 0 : 1;
+  })
+  let props = componentProps.map(prop => `    ${quoteProp(prop.name)}: ${propType(prop.type)}`).join(',\n')
   if (props) props = `\n  props: {\n${props}\n  }\n`
   return `// noinspection JSUnresolvedFunction\nVue.component('${component}', {${props}})`
 }).join('\n')
