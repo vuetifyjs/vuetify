@@ -235,26 +235,35 @@ const attributes = Object.keys(components).reduce((attrs, k) => {
   return Object.assign(attrs, tmp)
 }, {})
 
-const fakeComponents = `import Vue from 'vue'\n\n` + Object.keys(components).map(component => {
-  const propType = type => {
-    if (type === 'any' || typeof type === 'undefined') return 'null'
-    if (Array.isArray(type)) return `[${type.map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(',')}]`
-    return type.charAt(0).toUpperCase() + type.slice(1)
-  }
-  const quoteProp = name => name.match(/-/) ? `'${name}'` : name
-  const componentProps = components[component].props
-  componentProps.sort((a, b) => {
-    if (a.name < b.name) return -1;
-    return a.name === b.name ? 0 : 1;
-  })
-  let props = componentProps.map(prop => `    ${quoteProp(prop.name)}: ${propType(prop.type)}`).join(',\n')
-  if (props) props = `\n  props: {\n${props}\n  }\n`
-  return `// noinspection JSUnresolvedFunction\nVue.component('${component}', {${props}})`
-}).join('\n')
+const fakeComponents = ts => {
+  const imports = [
+    `import Vue from 'vue'`
+  ]
+  if (ts) imports.push(`import { PropValidator } from 'vue/types/options'`)
+  const inspection = ts ? '' : `// noinspection JSUnresolvedFunction\n`
+
+  return `${imports.join('\n')}\n\n` + Object.keys(components).map(component => {
+    const propType = type => {
+      if (type === 'any' || typeof type === 'undefined') return ts ? 'null as any as PropValidator<any>' : 'null'
+      if (Array.isArray(type)) return `[${type.map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(',')}]`
+      return type.charAt(0).toUpperCase() + type.slice(1)
+    }
+    const quoteProp = name => name.match(/-/) ? `'${name}'` : name
+    const componentProps = components[component].props
+    componentProps.sort((a, b) => {
+      if (a.name < b.name) return -1;
+      return a.name === b.name ? 0 : 1;
+    })
+    let props = componentProps.map(prop => `    ${quoteProp(prop.name)}: ${propType(prop.type)}`).join(',\n')
+    if (props) props = `\n  props: {\n${props}\n  }\n`
+    return `${inspection}Vue.component('${component}', {${props}})`
+  }).join('\n')
+}
 
 writeJsonFile(tags, 'dist/tags.json')
 writeJsonFile(attributes, 'dist/attributes.json')
-writePlainFile(fakeComponents, 'dist/fakeComponents.js')
+writePlainFile(fakeComponents(false), 'dist/fakeComponents.js')
+writePlainFile(fakeComponents(true), 'dist/fakeComponents.ts')
 
 components['$vuetify'] = map['$vuetify']
 
