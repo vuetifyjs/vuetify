@@ -1,6 +1,6 @@
 import Vue from 'vue'
+import { PropValidator } from 'vue/types/options'
 
-// noinspection JSUnresolvedFunction
 Vue.component('v-app', {
   props: {
     dark: Boolean,
@@ -8,7 +8,6 @@ Vue.component('v-app', {
     light: Boolean
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-alert', {
   props: {
     color: String,
@@ -19,10 +18,9 @@ Vue.component('v-alert', {
     outline: Boolean,
     transition: String,
     type: String,
-    value: null
+    value: null as any as PropValidator<any>
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-autocomplete', {
   props: {
     allowOverflow: Boolean,
@@ -30,7 +28,7 @@ Vue.component('v-autocomplete', {
     appendIconCb: Function,
     appendOuterIcon: String,
     appendOuterIconCb: Function,
-    attach: null,
+    attach: null as any as PropValidator<any>,
     autofocus: Boolean,
     backgroundColor: String,
     box: Boolean,
@@ -86,7 +84,7 @@ Vue.component('v-autocomplete', {
     returnObject: Boolean,
     reverse: Boolean,
     rules: Array,
-    searchInput: null,
+    searchInput: null as any as PropValidator<any>,
     singleLine: Boolean,
     smallChips: Boolean,
     solo: Boolean,
@@ -97,11 +95,10 @@ Vue.component('v-autocomplete', {
     textarea: Boolean,
     type: String,
     validateOnBlur: Boolean,
-    value: null,
+    value: null as any as PropValidator<any>,
     valueComparator: Function
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-avatar', {
   props: {
     color: String,
@@ -109,7 +106,6 @@ Vue.component('v-avatar', {
     tile: Boolean
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-badge', {
   props: {
     bottom: Boolean,
@@ -119,10 +115,9 @@ Vue.component('v-badge', {
     origin: String,
     overlap: Boolean,
     transition: String,
-    value: null
+    value: null as any as PropValidator<any>
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-bottom-nav', {
   props: {
     absolute: Boolean,
@@ -133,10 +128,9 @@ Vue.component('v-bottom-nav', {
     height: [Number,String],
     mandatory: Boolean,
     shift: Boolean,
-    value: null
+    value: null as any as PropValidator<any>
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-bottom-sheet', {
   props: {
     disabled: Boolean,
@@ -146,10 +140,9 @@ Vue.component('v-bottom-sheet', {
     lazy: Boolean,
     maxWidth: [String,Number],
     persistent: Boolean,
-    value: null
+    value: null as any as PropValidator<any>
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-breadcrumbs', {
   props: {
     dark: Boolean,
@@ -160,7 +153,6 @@ Vue.component('v-breadcrumbs', {
     light: Boolean
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-breadcrumbs-item', {
   props: {
     activeClass: String,
@@ -177,7 +169,6 @@ Vue.component('v-breadcrumbs-item', {
     to: [String,Object]
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-btn', {
   props: {
     absolute: Boolean,
@@ -196,7 +187,7 @@ Vue.component('v-btn', {
     flat: Boolean,
     href: [String,Object],
     icon: Boolean,
-    inputValue: null,
+    inputValue: null as any as PropValidator<any>,
     large: Boolean,
     left: Boolean,
     light: Boolean,
@@ -213,20 +204,18 @@ Vue.component('v-btn', {
     to: [String,Object],
     top: Boolean,
     type: String,
-    value: null
+    value: null as any as PropValidator<any>
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-btn-toggle', {
   props: {
     dark: Boolean,
-    inputValue: null,
+    inputValue: null as any as PropValidator<any>,
     light: Boolean,
     mandatory: Boolean,
     multiple: Boolean
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-card', {
   props: {
     activeClass: String,
@@ -255,7 +244,6 @@ Vue.component('v-card', {
     width: [Number,String]
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-card-media', {
   props: {
     alt: String,
@@ -274,17 +262,13 @@ Vue.component('v-card-media', {
     width: [Number,String]
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-card-title', {
   props: {
     primaryTitle: Boolean
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-card-actions', {})
-// noinspection JSUnresolvedFunction
 Vue.component('v-card-text', {})
-// noinspection JSUnresolvedFunction
 Vue.component('v-carousel', {
   props: {
     cycle: Boolean,
@@ -299,14 +283,12 @@ Vue.component('v-carousel', {
     value: Number
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-carousel-item', {
   props: {
     reverseTransition: String,
     transition: String
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-checkbox', {
   props: {
     appendIcon: String,
@@ -318,14 +300,14 @@ Vue.component('v-checkbox', {
     error: Boolean,
     errorCount: [Number,String],
     errorMessages: [String,Array],
-    falseValue: null,
+    falseValue: null as any as PropValidator<any>,
     height: [Number,String],
     hideDetails: Boolean,
     hint: String,
     id: String,
     indeterminate: Boolean,
     indeterminateIcon: String,
-    inputValue: null,
+    inputValue: null as any as PropValidator<any>,
     label: String,
     light: Boolean,
     loading: [Boolean,String],
@@ -341,13 +323,12 @@ Vue.component('v-checkbox', {
     rules: Array,
     success: Boolean,
     successMessages: [String,Array],
-    trueValue: null,
+    trueValue: null as any as PropValidator<any>,
     validateOnBlur: Boolean,
-    value: null,
+    value: null as any as PropValidator<any>,
     valueComparator: Function
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-chip', {
   props: {
     close: Boolean,
@@ -363,7 +344,6 @@ Vue.component('v-chip', {
     value: Boolean
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-combobox', {
   props: {
     allowOverflow: Boolean,
@@ -371,7 +351,7 @@ Vue.component('v-combobox', {
     appendIconCb: Function,
     appendOuterIcon: String,
     appendOuterIconCb: Function,
-    attach: null,
+    attach: null as any as PropValidator<any>,
     autofocus: Boolean,
     backgroundColor: String,
     box: Boolean,
@@ -428,7 +408,7 @@ Vue.component('v-combobox', {
     returnObject: Boolean,
     reverse: Boolean,
     rules: Array,
-    searchInput: null,
+    searchInput: null as any as PropValidator<any>,
     singleLine: Boolean,
     smallChips: Boolean,
     solo: Boolean,
@@ -439,11 +419,10 @@ Vue.component('v-combobox', {
     textarea: Boolean,
     type: String,
     validateOnBlur: Boolean,
-    value: null,
+    value: null as any as PropValidator<any>,
     valueComparator: Function
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-counter', {
   props: {
     dark: Boolean,
@@ -452,7 +431,6 @@ Vue.component('v-counter', {
     value: [Number,String]
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-data-iterator', {
   props: {
     contentClass: String,
@@ -477,13 +455,12 @@ Vue.component('v-data-iterator', {
     prevIcon: String,
     rowsPerPageItems: Array,
     rowsPerPageText: String,
-    search: null,
+    search: null as any as PropValidator<any>,
     selectAll: [Boolean,String],
     totalItems: Number,
     value: Array
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-data-table', {
   props: {
     customFilter: Function,
@@ -510,30 +487,27 @@ Vue.component('v-data-table', {
     prevIcon: String,
     rowsPerPageItems: Array,
     rowsPerPageText: String,
-    search: null,
+    search: null as any as PropValidator<any>,
     selectAll: [Boolean,String],
     sortIcon: String,
     totalItems: Number,
     value: Array
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-edit-dialog', {
   props: {
-    cancelText: null,
+    cancelText: null as any as PropValidator<any>,
     dark: Boolean,
     large: Boolean,
     lazy: Boolean,
     light: Boolean,
     persistent: Boolean,
-    returnValue: null,
-    saveText: null,
+    returnValue: null as any as PropValidator<any>,
+    saveText: null as any as PropValidator<any>,
     transition: String
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-table-overflow', {})
-// noinspection JSUnresolvedFunction
 Vue.component('v-date-picker', {
   props: {
     allowedDates: Function,
@@ -569,7 +543,6 @@ Vue.component('v-date-picker', {
     yearIcon: String
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-date-picker-title', {
   props: {
     date: String,
@@ -579,7 +552,6 @@ Vue.component('v-date-picker-title', {
     yearIcon: String
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-date-picker-header', {
   props: {
     color: String,
@@ -595,7 +567,6 @@ Vue.component('v-date-picker-header', {
     value: [Number,String]
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-date-picker-date-table', {
   props: {
     allowedDates: Function,
@@ -617,7 +588,6 @@ Vue.component('v-date-picker-date-table', {
     weekdayFormat: Function
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-date-picker-month-table', {
   props: {
     allowedDates: Function,
@@ -635,7 +605,6 @@ Vue.component('v-date-picker-month-table', {
     value: [String,Array]
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-date-picker-years', {
   props: {
     color: String,
@@ -646,11 +615,10 @@ Vue.component('v-date-picker-years', {
     value: [Number,String]
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-dialog', {
   props: {
-    attach: null,
-    contentClass: null,
+    attach: null as any as PropValidator<any>,
+    contentClass: null as any as PropValidator<any>,
     disabled: Boolean,
     fullWidth: Boolean,
     fullscreen: Boolean,
@@ -660,14 +628,13 @@ Vue.component('v-dialog', {
     noClickAnimation: Boolean,
     origin: String,
     persistent: Boolean,
-    returnValue: null,
+    returnValue: null as any as PropValidator<any>,
     scrollable: Boolean,
     transition: [String,Boolean],
-    value: null,
+    value: null as any as PropValidator<any>,
     width: [String,Number]
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-divider', {
   props: {
     dark: Boolean,
@@ -676,7 +643,6 @@ Vue.component('v-divider', {
     vertical: Boolean
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-expansion-panel', {
   props: {
     dark: Boolean,
@@ -690,7 +656,6 @@ Vue.component('v-expansion-panel', {
     value: [Number,Array]
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-expansion-panel-content', {
   props: {
     disabled: Boolean,
@@ -699,10 +664,9 @@ Vue.component('v-expansion-panel-content', {
     lazy: Boolean,
     readonly: Boolean,
     ripple: [Boolean,Object],
-    value: null
+    value: null as any as PropValidator<any>
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-footer', {
   props: {
     absolute: Boolean,
@@ -715,14 +679,12 @@ Vue.component('v-footer', {
     light: Boolean
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-form', {
   props: {
     lazyValidation: Boolean,
     value: Boolean
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-container', {
   props: {
     alignBaseline: Boolean,
@@ -749,13 +711,11 @@ Vue.component('v-container', {
     wrap: Boolean
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-content', {
   props: {
     tag: String
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-flex', {
   props: {
     '(size)(1-12)': Boolean,
@@ -783,7 +743,6 @@ Vue.component('v-flex', {
     wrap: Boolean
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-layout', {
   props: {
     alignBaseline: Boolean,
@@ -810,9 +769,7 @@ Vue.component('v-layout', {
     wrap: Boolean
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-spacer', {})
-// noinspection JSUnresolvedFunction
 Vue.component('v-hover', {
   props: {
     closeDelay: [Number,String],
@@ -821,7 +778,6 @@ Vue.component('v-hover', {
     value: Boolean
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-icon', {
   props: {
     color: String,
@@ -837,7 +793,6 @@ Vue.component('v-icon', {
     xLarge: Boolean
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-img', {
   props: {
     alt: String,
@@ -856,7 +811,6 @@ Vue.component('v-img', {
     width: [Number,String]
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-input', {
   props: {
     appendIcon: String,
@@ -883,10 +837,9 @@ Vue.component('v-input', {
     success: Boolean,
     successMessages: [String,Array],
     validateOnBlur: Boolean,
-    value: null
+    value: null as any as PropValidator<any>
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-jumbotron', {
   props: {
     activeClass: String,
@@ -909,7 +862,6 @@ Vue.component('v-jumbotron', {
     to: [String,Object]
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-label', {
   props: {
     absolute: Boolean,
@@ -924,7 +876,6 @@ Vue.component('v-label', {
     value: Boolean
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-list', {
   props: {
     dark: Boolean,
@@ -936,7 +887,6 @@ Vue.component('v-list', {
     twoLine: Boolean
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-list-group', {
   props: {
     activeClass: String,
@@ -947,10 +897,9 @@ Vue.component('v-list-group', {
     noAction: Boolean,
     prependIcon: String,
     subGroup: Boolean,
-    value: null
+    value: null as any as PropValidator<any>
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-list-tile', {
   props: {
     activeClass: String,
@@ -970,14 +919,11 @@ Vue.component('v-list-tile', {
     tag: String,
     target: String,
     to: [String,Object],
-    value: null
+    value: null as any as PropValidator<any>
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-list-tile-action', {})
-// noinspection JSUnresolvedFunction
 Vue.component('v-list-tile-action-text', {})
-// noinspection JSUnresolvedFunction
 Vue.component('v-list-tile-avatar', {
   props: {
     color: String,
@@ -985,25 +931,21 @@ Vue.component('v-list-tile-avatar', {
     tile: Boolean
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-list-tile-content', {})
-// noinspection JSUnresolvedFunction
 Vue.component('v-list-tile-sub-title', {})
-// noinspection JSUnresolvedFunction
 Vue.component('v-list-tile-title', {})
-// noinspection JSUnresolvedFunction
 Vue.component('v-menu', {
   props: {
     absolute: Boolean,
-    activator: null,
+    activator: null as any as PropValidator<any>,
     allowOverflow: Boolean,
-    attach: null,
+    attach: null as any as PropValidator<any>,
     auto: Boolean,
     bottom: Boolean,
     closeDelay: [Number,String],
     closeOnClick: Boolean,
     closeOnContentClick: Boolean,
-    contentClass: null,
+    contentClass: null as any as PropValidator<any>,
     dark: Boolean,
     disabled: Boolean,
     fixed: Boolean,
@@ -1012,7 +954,7 @@ Vue.component('v-menu', {
     lazy: Boolean,
     left: Boolean,
     light: Boolean,
-    maxHeight: null,
+    maxHeight: null as any as PropValidator<any>,
     maxWidth: [Number,String],
     minWidth: [Number,String],
     nudgeBottom: [Number,String],
@@ -1029,15 +971,14 @@ Vue.component('v-menu', {
     origin: String,
     positionX: Number,
     positionY: Number,
-    returnValue: null,
+    returnValue: null as any as PropValidator<any>,
     right: Boolean,
     top: Boolean,
     transition: [Boolean,String],
-    value: null,
+    value: null as any as PropValidator<any>,
     zIndex: [Number,String]
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-messages', {
   props: {
     color: String,
@@ -1046,7 +987,6 @@ Vue.component('v-messages', {
     value: Array
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-navigation-drawer', {
   props: {
     absolute: Boolean,
@@ -1068,11 +1008,10 @@ Vue.component('v-navigation-drawer', {
     stateless: Boolean,
     temporary: Boolean,
     touchless: Boolean,
-    value: null,
+    value: null as any as PropValidator<any>,
     width: [Number,String]
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-overflow-btn', {
   props: {
     allowOverflow: Boolean,
@@ -1080,7 +1019,7 @@ Vue.component('v-overflow-btn', {
     appendIconCb: Function,
     appendOuterIcon: String,
     appendOuterIconCb: Function,
-    attach: null,
+    attach: null as any as PropValidator<any>,
     autofocus: Boolean,
     backgroundColor: String,
     box: Boolean,
@@ -1137,7 +1076,7 @@ Vue.component('v-overflow-btn', {
     returnObject: Boolean,
     reverse: Boolean,
     rules: Array,
-    searchInput: null,
+    searchInput: null as any as PropValidator<any>,
     segmented: Boolean,
     singleLine: Boolean,
     smallChips: Boolean,
@@ -1147,14 +1086,13 @@ Vue.component('v-overflow-btn', {
     successMessages: [String,Array],
     suffix: String,
     textarea: Boolean,
-    transition: null,
+    transition: null as any as PropValidator<any>,
     type: String,
     validateOnBlur: Boolean,
-    value: null,
+    value: null as any as PropValidator<any>,
     valueComparator: Function
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-pagination', {
   props: {
     circle: Boolean,
@@ -1169,7 +1107,6 @@ Vue.component('v-pagination', {
     value: Number
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-parallax', {
   props: {
     alt: String,
@@ -1177,7 +1114,6 @@ Vue.component('v-parallax', {
     src: String
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-picker', {
   props: {
     color: String,
@@ -1189,7 +1125,6 @@ Vue.component('v-picker', {
     width: [Number,String]
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-progress-circular', {
   props: {
     button: Boolean,
@@ -1201,7 +1136,6 @@ Vue.component('v-progress-circular', {
     width: Number
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-progress-linear', {
   props: {
     active: Boolean,
@@ -1215,7 +1149,6 @@ Vue.component('v-progress-linear', {
     value: [Number,String]
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-radio-group', {
   props: {
     appendIcon: String,
@@ -1246,11 +1179,10 @@ Vue.component('v-radio-group', {
     success: Boolean,
     successMessages: [String,Array],
     validateOnBlur: Boolean,
-    value: null,
+    value: null as any as PropValidator<any>,
     valueComparator: Function
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-radio', {
   props: {
     color: String,
@@ -1262,10 +1194,9 @@ Vue.component('v-radio', {
     onIcon: String,
     readonly: Boolean,
     ripple: [Boolean,Object],
-    value: null
+    value: null as any as PropValidator<any>
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-range-slider', {
   props: {
     alwaysDirty: Boolean,
@@ -1308,7 +1239,6 @@ Vue.component('v-range-slider', {
     value: Array
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-rating', {
   props: {
     backgroundColor: String,
@@ -1335,7 +1265,6 @@ Vue.component('v-rating', {
     xLarge: Boolean
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-responsive', {
   props: {
     aspectRatio: [String,Number],
@@ -1345,14 +1274,13 @@ Vue.component('v-responsive', {
     width: [Number,String]
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-select', {
   props: {
     appendIcon: String,
     appendIconCb: Function,
     appendOuterIcon: String,
     appendOuterIconCb: Function,
-    attach: null,
+    attach: null as any as PropValidator<any>,
     autofocus: Boolean,
     backgroundColor: String,
     box: Boolean,
@@ -1372,7 +1300,7 @@ Vue.component('v-select', {
     error: Boolean,
     errorCount: [Number,String],
     errorMessages: [String,Array],
-    filter: null,
+    filter: null as any as PropValidator<any>,
     flat: Boolean,
     fullWidth: Boolean,
     height: [Number,String],
@@ -1406,7 +1334,7 @@ Vue.component('v-select', {
     returnObject: Boolean,
     reverse: Boolean,
     rules: Array,
-    searchInput: null,
+    searchInput: null as any as PropValidator<any>,
     singleLine: Boolean,
     smallChips: Boolean,
     solo: Boolean,
@@ -1417,11 +1345,10 @@ Vue.component('v-select', {
     textarea: Boolean,
     type: String,
     validateOnBlur: Boolean,
-    value: null,
+    value: null as any as PropValidator<any>,
     valueComparator: Function
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-slider', {
   props: {
     alwaysDirty: Boolean,
@@ -1464,7 +1391,6 @@ Vue.component('v-slider', {
     value: [Number,String]
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-snackbar', {
   props: {
     absolute: Boolean,
@@ -1476,11 +1402,10 @@ Vue.component('v-snackbar', {
     right: Boolean,
     timeout: Number,
     top: Boolean,
-    value: null,
+    value: null as any as PropValidator<any>,
     vertical: Boolean
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-speed-dial', {
   props: {
     absolute: Boolean,
@@ -1494,10 +1419,9 @@ Vue.component('v-speed-dial', {
     right: Boolean,
     top: Boolean,
     transition: String,
-    value: null
+    value: null as any as PropValidator<any>
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-stepper', {
   props: {
     altLabels: Boolean,
@@ -1508,13 +1432,11 @@ Vue.component('v-stepper', {
     vertical: Boolean
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-stepper-content', {
   props: {
     step: [Number,String]
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-stepper-step', {
   props: {
     color: String,
@@ -1527,11 +1449,8 @@ Vue.component('v-stepper-step', {
     step: [Number,String]
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-stepper-header', {})
-// noinspection JSUnresolvedFunction
 Vue.component('v-stepper-items', {})
-// noinspection JSUnresolvedFunction
 Vue.component('v-subheader', {
   props: {
     dark: Boolean,
@@ -1539,7 +1458,6 @@ Vue.component('v-subheader', {
     light: Boolean
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-switch', {
   props: {
     appendIcon: String,
@@ -1551,12 +1469,12 @@ Vue.component('v-switch', {
     error: Boolean,
     errorCount: [Number,String],
     errorMessages: [String,Array],
-    falseValue: null,
+    falseValue: null as any as PropValidator<any>,
     height: [Number,String],
     hideDetails: Boolean,
     hint: String,
     id: String,
-    inputValue: null,
+    inputValue: null as any as PropValidator<any>,
     label: String,
     light: Boolean,
     loading: [Boolean,String],
@@ -1570,13 +1488,12 @@ Vue.component('v-switch', {
     rules: Array,
     success: Boolean,
     successMessages: [String,Array],
-    trueValue: null,
+    trueValue: null as any as PropValidator<any>,
     validateOnBlur: Boolean,
-    value: null,
+    value: null as any as PropValidator<any>,
     valueComparator: Function
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-system-bar', {
   props: {
     absolute: Boolean,
@@ -1591,7 +1508,6 @@ Vue.component('v-system-bar', {
     window: Boolean
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-tabs', {
   props: {
     alignWithTitle: Boolean,
@@ -1613,7 +1529,6 @@ Vue.component('v-tabs', {
     value: [Number,String]
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-tab', {
   props: {
     activeClass: String,
@@ -1632,7 +1547,6 @@ Vue.component('v-tab', {
     to: [String,Object]
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-tabs-items', {
   props: {
     cycle: Boolean,
@@ -1640,7 +1554,6 @@ Vue.component('v-tabs-items', {
     value: [Number,String]
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-tab-item', {
   props: {
     id: String,
@@ -1649,13 +1562,11 @@ Vue.component('v-tab-item', {
     transition: [Boolean,String]
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-tabs-slider', {
   props: {
     color: String
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-textarea', {
   props: {
     appendIcon: String,
@@ -1712,10 +1623,9 @@ Vue.component('v-textarea', {
     textarea: Boolean,
     type: String,
     validateOnBlur: Boolean,
-    value: null
+    value: null as any as PropValidator<any>
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-text-field', {
   props: {
     appendIcon: String,
@@ -1768,10 +1678,9 @@ Vue.component('v-text-field', {
     textarea: Boolean,
     type: String,
     validateOnBlur: Boolean,
-    value: null
+    value: null as any as PropValidator<any>
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-time-picker', {
   props: {
     allowedHours: Function,
@@ -1788,11 +1697,10 @@ Vue.component('v-time-picker', {
     noTitle: Boolean,
     readonly: Boolean,
     scrollable: Boolean,
-    value: null,
+    value: null as any as PropValidator<any>,
     width: [Number,String]
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-time-picker-clock', {
   props: {
     allowedValues: Function,
@@ -1811,7 +1719,6 @@ Vue.component('v-time-picker-clock', {
     value: Number
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-time-picker-title', {
   props: {
     ampm: Boolean,
@@ -1822,7 +1729,6 @@ Vue.component('v-time-picker-title', {
     selectingHour: Boolean
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-toolbar', {
   props: {
     absolute: Boolean,
@@ -1850,23 +1756,19 @@ Vue.component('v-toolbar', {
     tabs: Boolean
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-toolbar-items', {})
-// noinspection JSUnresolvedFunction
 Vue.component('v-toolbar-title', {})
-// noinspection JSUnresolvedFunction
 Vue.component('v-toolbar-side-icon', {})
-// noinspection JSUnresolvedFunction
 Vue.component('v-tooltip', {
   props: {
     absolute: Boolean,
-    activator: null,
+    activator: null as any as PropValidator<any>,
     allowOverflow: Boolean,
-    attach: null,
+    attach: null as any as PropValidator<any>,
     bottom: Boolean,
     closeDelay: [Number,String],
     color: String,
-    contentClass: null,
+    contentClass: null as any as PropValidator<any>,
     dark: Boolean,
     debounce: [Number,String],
     disabled: Boolean,
@@ -1890,11 +1792,10 @@ Vue.component('v-tooltip', {
     tag: String,
     top: Boolean,
     transition: String,
-    value: null,
-    zIndex: null
+    value: null as any as PropValidator<any>,
+    zIndex: null as any as PropValidator<any>
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-bottom-sheet-transition', {
   props: {
     group: Boolean,
@@ -1904,7 +1805,6 @@ Vue.component('v-bottom-sheet-transition', {
     origin: String
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-carousel-transition', {
   props: {
     group: Boolean,
@@ -1914,7 +1814,6 @@ Vue.component('v-carousel-transition', {
     origin: String
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-carousel-reverse-transition', {
   props: {
     group: Boolean,
@@ -1924,7 +1823,6 @@ Vue.component('v-carousel-reverse-transition', {
     origin: String
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-dialog-transition', {
   props: {
     group: Boolean,
@@ -1934,7 +1832,6 @@ Vue.component('v-dialog-transition', {
     origin: String
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-dialog-bottom-transition', {
   props: {
     group: Boolean,
@@ -1944,7 +1841,6 @@ Vue.component('v-dialog-bottom-transition', {
     origin: String
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-fab-transition', {
   props: {
     group: Boolean,
@@ -1954,7 +1850,6 @@ Vue.component('v-fab-transition', {
     origin: String
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-fade-transition', {
   props: {
     group: Boolean,
@@ -1964,7 +1859,6 @@ Vue.component('v-fade-transition', {
     origin: String
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-menu-transition', {
   props: {
     group: Boolean,
@@ -1974,7 +1868,6 @@ Vue.component('v-menu-transition', {
     origin: String
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-scale-transition', {
   props: {
     group: Boolean,
@@ -1984,7 +1877,6 @@ Vue.component('v-scale-transition', {
     origin: String
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-scroll-x-transition', {
   props: {
     group: Boolean,
@@ -1994,7 +1886,6 @@ Vue.component('v-scroll-x-transition', {
     origin: String
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-scroll-x-reverse-transition', {
   props: {
     group: Boolean,
@@ -2004,7 +1895,6 @@ Vue.component('v-scroll-x-reverse-transition', {
     origin: String
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-scroll-y-transition', {
   props: {
     group: Boolean,
@@ -2014,7 +1904,6 @@ Vue.component('v-scroll-y-transition', {
     origin: String
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-scroll-y-reverse-transition', {
   props: {
     group: Boolean,
@@ -2024,7 +1913,6 @@ Vue.component('v-scroll-y-reverse-transition', {
     origin: String
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-slide-x-transition', {
   props: {
     group: Boolean,
@@ -2034,7 +1922,6 @@ Vue.component('v-slide-x-transition', {
     origin: String
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-slide-x-reverse-transition', {
   props: {
     group: Boolean,
@@ -2044,7 +1931,6 @@ Vue.component('v-slide-x-reverse-transition', {
     origin: String
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-slide-y-transition', {
   props: {
     group: Boolean,
@@ -2054,7 +1940,6 @@ Vue.component('v-slide-y-transition', {
     origin: String
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-slide-y-reverse-transition', {
   props: {
     group: Boolean,
@@ -2064,7 +1949,6 @@ Vue.component('v-slide-y-reverse-transition', {
     origin: String
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-tab-reverse-transition', {
   props: {
     group: Boolean,
@@ -2074,7 +1958,6 @@ Vue.component('v-tab-reverse-transition', {
     origin: String
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-tab-transition', {
   props: {
     group: Boolean,
@@ -2084,13 +1967,11 @@ Vue.component('v-tab-transition', {
     origin: String
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-expand-transition', {
   props: {
     mode: String
   }
 })
-// noinspection JSUnresolvedFunction
 Vue.component('v-row-expand-transition', {
   props: {
     mode: String
