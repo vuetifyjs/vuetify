@@ -1,9 +1,10 @@
 import { test } from '@/test'
-import Vue from 'vue'
-import VTimeline from '@/components/VTimeline/VTimeline.js'
+import VTimeline from '@/components/VTimeline/VTimeline'
 
-test('VTimeline.js', ({ mount, compileToFunctions }) => {
-  it('should render a ul with class timeline', () => {
-    //
+test('VTimeline.js', ({ mount }) => {
+  it('should match snapshot', () => {
+    const wrapper = mount(VTimeline)
+
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })
