@@ -21,11 +21,20 @@ export default mixins(
       type: String,
       default: 'primary'
     },
+    fillDot: Boolean,
+    hideDot: Boolean,
     icon: String,
     iconColor: String,
+    large: Boolean,
     left: Boolean,
     right: Boolean,
     small: Boolean
+  },
+
+  computed: {
+    hasIcon (): boolean {
+      return !!this.icon || !!this.$slots.icon
+    }
   },
 
   methods: {
@@ -34,7 +43,11 @@ export default mixins(
         staticClass: 'v-timeline-item__body'
       }, this.$slots.default)
     },
-    genIcon (): VNode {
+    genIcon (): VNode | VNode[] {
+      if (this.$slots.icon) {
+        return this.$slots.icon
+      }
+
       return this.$createElement(VIcon, {
         props: {
           color: this.iconColor,
@@ -46,7 +59,7 @@ export default mixins(
     genInnerDot () {
       const children = []
 
-      this.icon && children.push(this.genIcon())
+      this.hasIcon && children.push(this.genIcon())
 
       const data: VNodeData = this.setBackgroundColor(this.color)
 
@@ -59,7 +72,8 @@ export default mixins(
       return this.$createElement('div', {
         staticClass: 'v-timeline-item__dot',
         class: {
-          'v-timeline-item__dot--small': this.small
+          'v-timeline-item__dot--small': this.small,
+          'v-timeline-item__dot--large': this.large
         }
       }, [this.genInnerDot()])
     },
@@ -71,13 +85,15 @@ export default mixins(
   },
 
   render (h): VNode {
-    const children = [this.genDot(), this.genBody()]
+    const children = [this.genBody()]
 
+    if (!this.hideDot) children.unshift(this.genDot())
     if (this.$slots.opposite) children.push(this.genOpposite())
 
     return h('div', {
       staticClass: 'v-timeline-item',
       class: {
+        'v-timeline-item--fill-dot': this.fillDot,
         'v-timeline-item--left': this.left,
         'v-timeline-item--right': this.right,
         ...this.themeClasses
