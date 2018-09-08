@@ -34,6 +34,7 @@ export default {
     appendIcon: String,
     /** @deprecated */
     appendIconCb: Function,
+    autofocus: Boolean,
     backgroundColor: {
       type: String,
       default: ''
@@ -110,6 +111,10 @@ export default {
     value (val) {
       this.lazyValue = val
     }
+  },
+
+  mounted () {
+    this.autofocus && this.$refs.input.focus()
   },
 
   beforeCreate () {

@@ -38,7 +38,6 @@ export default {
     appendOuterIcon: String,
     /** @deprecated */
     appendOuterIconCb: Function,
-    autofocus: Boolean,
     box: Boolean,
     browserAutocomplete: String,
     clearable: Boolean,
@@ -187,10 +186,6 @@ export default {
     }
   },
 
-  mounted () {
-    this.autofocus && this.onFocus()
-  },
-
   methods: {
     /** @public */
     focus () {
@@ -316,7 +311,6 @@ export default {
         attrs: {
           'aria-label': (!this.$attrs || !this.$attrs.id) && this.label, // Label `for` will be set if we have an id
           ...this.$attrs,
-          autofocus: this.autofocus,
           disabled: this.disabled,
           readonly: this.readonly,
           type: this.type
