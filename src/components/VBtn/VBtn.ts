@@ -5,6 +5,7 @@ import '../../stylus/components/_buttons.styl'
 import { VNode, VNodeChildren } from 'vue'
 import { PropValidator } from 'vue/types/options'
 import mixins from '../../util/mixins'
+import { RippleOptions } from '../../directives/ripple'
 
 // Components
 import VProgressCircular from '../VProgressCircular'
@@ -43,7 +44,7 @@ export default mixins(
     outline: Boolean,
     ripple: {
       type: [Boolean, Object],
-      default: true
+      default: null
     },
     round: Boolean,
     small: Boolean,
@@ -83,6 +84,11 @@ export default mixins(
         'v-btn--top': this.top,
         ...this.themeClasses
       }
+    },
+    computedRipple (): RippleOptions | boolean {
+      const defaultRipple = this.icon || this.fab ? { circle: true } : true
+      if (this.disabled) return false
+      else return this.ripple !== null ? this.ripple : defaultRipple
     }
   },
 
