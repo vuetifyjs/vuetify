@@ -80,7 +80,7 @@ export default mixins(
         'v-btn--round': this.round,
         'v-btn--router': this.to,
         'v-btn--small': this.small,
-        'v-btn--top': this.top,
+        // 'v-btn--top': this.top,
         ...this.themeClasses
       }
     }
