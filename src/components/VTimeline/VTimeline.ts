@@ -15,12 +15,14 @@ export default mixins(
   name: 'v-timeline',
 
   props: {
+    alignTop: Boolean,
     dense: Boolean
   },
 
   computed: {
     classes (): {} {
       return {
+        'v-timeline--align-top': this.alignTop,
         'v-timeline--dense': this.dense,
         ...this.themeClasses
       }

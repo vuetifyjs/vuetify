@@ -127,6 +127,26 @@ timeline-dots($dot-size, $inner-dot-size, $inner-dot-margin)
     top: 0
     width: 2px
 
+  &--align-top
+    .v-timeline-item
+      position: relative
+
+      &__dot
+        top: 6px
+
+        &--small
+          top: 12px
+
+        &--large
+          top: 0
+
+      .v-card
+        &:before
+          top: 'calc(0% + %s + 2px)' % $timeline-wedge-size
+
+        &:after
+          top: 'calc(0% + %s)' % $timeline-wedge-size
+
   &--dense
     &:before
       left: 18px // -1 for line width
