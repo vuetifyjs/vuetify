@@ -37,6 +37,7 @@ declare global {
       enabled?: boolean
       centered?: boolean
       class?: string
+      circle?: boolean
     }
     _onScroll?: {
       callback: EventListenerOrEventListenerObject
