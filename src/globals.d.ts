@@ -36,7 +36,7 @@ declare global {
     _ripple?: {
       enabled?: boolean
       centered?: boolean
-      class?: string,
+      class?: string
       circle?: boolean
     }
     _onScroll?: {
