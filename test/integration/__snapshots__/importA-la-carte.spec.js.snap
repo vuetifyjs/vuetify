@@ -123,6 +123,8 @@ Array [
   "VTimePicker",
   "VTimePickerClock",
   "VTimePickerTitle",
+  "VTimeline",
+  "VTimelineItem",
   "VToolbar",
   "VToolbarItems",
   "VToolbarSideIcon",
