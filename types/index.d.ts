@@ -58,7 +58,11 @@ declare module 'vue/types/vue' {
   }
 }
 
-export type VuetifyIcon = string | Component
+export type VuetifyIconComponent = {
+  component: Component
+  props?: object
+}
+export type VuetifyIcon = string | VuetifyIconComponent
 
 export interface VuetifyIcons {
   [name: string]: VuetifyIcon
