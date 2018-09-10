@@ -15,14 +15,12 @@ export default mixins(
   name: 'v-timeline',
 
   props: {
-    clipped: Boolean,
     dense: Boolean
   },
 
   computed: {
     classes (): {} {
       return {
-        'v-timeline--clipped': this.clipped,
         'v-timeline--dense': this.dense,
         ...this.themeClasses
       }
