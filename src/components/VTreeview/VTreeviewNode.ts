@@ -53,6 +53,7 @@ export const VTreeviewNodeProps = {
     default: 'children'
   },
   loadChildren: Function as PropValidator<(item: any) => Promise<void>>,
+  openOnClick: Boolean,
   transition: Boolean
 }
 
@@ -81,7 +82,8 @@ export default mixins(
     isSelected: false, // Node is selected (checkbox)
     isIndeterminate: false, // Node has at least one selected child
     isActive: false, // Node is selected (row)
-    isLoading: false
+    isLoading: false,
+    hasLoaded: false
   }),
 
   computed: {
@@ -124,13 +126,19 @@ export default mixins(
       return new Promise(resolve => {
         // TODO: Potential issue with always trying
         // to load children if response is empty?
-        if (!this.children || this.children.length || !this.loadChildren) return resolve()
+        if (!this.children || this.children.length || !this.loadChildren || this.hasLoaded) return resolve()
 
         this.isLoading = true
         resolve(this.loadChildren(this.item))
       }).then(() => {
         this.isLoading = false
+        this.hasLoaded = true
       })
+    },
+    open () {
+      this.isOpen = !this.isOpen
+      this.treeview.updateOpen(this.key, this.isOpen)
+      this.treeview.emitOpen()
     },
     genLabel () {
       return this.$createElement('label', {
@@ -163,9 +171,7 @@ export default mixins(
 
             if (this.isLoading) return
 
-            this.checkChildren().then(() => {
-              this.isOpen = !this.isOpen
-            })
+            this.checkChildren().then(() => this.open())
           }
         }
       }, [this.isLoading ? this.loadingIcon : this.expandIcon])
@@ -189,7 +195,7 @@ export default mixins(
                 this.isIndeterminate = false
 
                 this.treeview.updateSelected(this.key, this.isSelected)
-                this.treeview.onChange()
+                this.treeview.emitSelected()
               })
             })
           }
@@ -206,8 +212,12 @@ export default mixins(
         staticClass: 'v-treeview-node__root',
         on: {
           click: () => {
-            this.isActive = !this.isActive
-            this.treeview.updateActive(this.key, this.isActive)
+            if (this.openOnClick) {
+              this.open()
+            } else {
+              this.isActive = !this.isActive
+              this.treeview.updateActive(this.key, this.isActive)
+            }
           }
         }
       }, children)
@@ -226,7 +236,8 @@ export default mixins(
           itemText: this.itemText,
           itemChildren: this.itemChildren,
           loadChildren: this.loadChildren,
-          transition: this.transition
+          transition: this.transition,
+          openOnClick: this.openOnClick
         },
         scopedSlots: this.$scopedSlots
       })

@@ -24,6 +24,7 @@ type NodeState = {
   isActive: boolean
   isSelected: boolean
   isIndeterminate: boolean
+  isOpen: boolean
 }
 
 function ston (s: string | number) {
@@ -53,6 +54,10 @@ export default mixins(
       default: () => ([])
     } as PropValidator<any[]>,
     multipleActive: Boolean,
+    open: {
+      type: Array,
+      default: () => ([])
+    } as PropValidator<(string | number)[]>,
     value: {
       type: Array,
       default: () => ([])
@@ -63,7 +68,8 @@ export default mixins(
   data: () => ({
     nodes: {} as Record<string | number, NodeState>,
     selectedCache: [] as (string | number)[],
-    activeCache: [] as (string | number)[]
+    activeCache: [] as (string | number)[],
+    openCache: [] as (string | number)[]
   }),
 
   watch: {
@@ -81,7 +87,7 @@ export default mixins(
         // as a result of items changing. This fixes a
         // potential double emit when selecting a node
         // with dynamic children
-        if (!deepEqual(oldSelectedCache, this.selectedCache)) this.onChange()
+        if (!deepEqual(oldSelectedCache, this.selectedCache)) this.emitSelected()
       },
       deep: true
     },
@@ -89,13 +95,23 @@ export default mixins(
       if (!v || deepEqual(v, this.selectedCache)) return
 
       this.value.forEach(key => this.updateSelected(key, true))
-      this.onChange()
+      this.emitSelected()
+    },
+    open () {
+      if (deepEqual(this.openCache, this.open)) return
+
+      this.openCache.forEach(key => this.updateOpen(key, false))
+      this.open.forEach(key => this.updateOpen(key, true))
+      this.emitOpen()
     }
   },
 
   created () {
     this.buildTree(this.items)
     this.value.forEach(key => this.updateSelected(key, true))
+    this.emitSelected()
+    this.open.forEach(key => this.updateOpen(key, true))
+    this.emitOpen()
   },
 
   methods: {
@@ -114,7 +130,7 @@ export default mixins(
         const key = getObjectValueByPath(item, this.itemKey)
         const children = getObjectValueByPath(item, this.itemChildren, [])
         const oldNode = this.nodes.hasOwnProperty(key) ? this.nodes[key] : {
-          isSelected: false, isIndeterminate: false, isActive: false, vnode: null
+          isSelected: false, isIndeterminate: false, isActive: false, isOpen: false, vnode: null
         } as NodeState
 
         const node: any = {
@@ -135,12 +151,14 @@ export default mixins(
         }
 
         node.isActive = oldNode.isActive
+        node.isOpen = oldNode.isOpen
 
         this.nodes[key] = !children.length ? node : this.calculateState(node, this.nodes)
 
         // Don't forget to rebuild cache
         if (this.nodes[key].isSelected) this.selectedCache.push(key)
         if (this.nodes[key].isActive) this.activeCache.push(key)
+        if (this.nodes[key].isOpen) this.openCache.push(key)
 
         this.updateVnodeState(key)
       }
@@ -208,7 +226,26 @@ export default mixins(
       this.selectedCache = this.selectedCache.filter(k => changed[ston(k)] !== false)
       this.selectedCache.push(...Object.keys(changed).filter(k => changed[k] === true).map(ston))
     },
-    onChange () {
+    updateOpen (key: string | number, isOpen: boolean) {
+      if (!this.nodes.hasOwnProperty(key)) return
+
+      const node = this.nodes[key]
+
+      if (node.vnode && !node.vnode.hasLoaded) {
+        node.vnode.checkChildren().then(() => this.updateOpen(key, isOpen))
+      } else {
+        node.isOpen = isOpen
+
+        this.openCache = this.openCache.filter(k => this.nodes[k].isOpen || k !== key)
+        if (node.isOpen) this.openCache.push(key)
+
+        this.updateVnodeState(key)
+      }
+    },
+    emitOpen () {
+      this.$emit('update:open', this.openCache)
+    },
+    emitSelected () {
       this.$emit('change', this.selectedCache)
     },
     getDescendants (key: string | number, descendants: (string | number)[] = []) {
@@ -240,6 +277,7 @@ export default mixins(
         node.vnode.isSelected = node.isSelected
         node.vnode.isIndeterminate = node.isIndeterminate
         node.vnode.isActive = node.isActive
+        node.vnode.isOpen = node.isOpen
       }
     }
   },
