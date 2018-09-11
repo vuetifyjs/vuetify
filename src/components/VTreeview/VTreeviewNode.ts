@@ -189,7 +189,7 @@ export default mixins(
                 this.isIndeterminate = false
 
                 this.treeview.updateSelected(this.key, this.isSelected)
-                this.treeview.emitSelected()
+                this.treeview.onChange()
               })
             })
           }
@@ -222,6 +222,7 @@ export default mixins(
           offIcon: this.offIcon,
           onIcon: this.onIcon,
           loadingIcon: this.loadingIcon,
+          itemKey: this.itemKey,
           itemText: this.itemText,
           itemChildren: this.itemChildren,
           loadChildren: this.loadChildren,

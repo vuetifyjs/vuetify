@@ -41,14 +41,22 @@ export default mixins(
     return { treeview: this }
   },
 
+  model: {
+    prop: 'value',
+    event: 'change'
+  },
+
   props: {
+    active: Array as PropValidator<(string | number)[]>,
     items: {
       type: Array,
       default: () => ([])
     } as PropValidator<any[]>,
-    selected: Array as PropValidator<(string | number)[]>,
-    active: Array as PropValidator<(string | number)[]>,
     multipleActive: Boolean,
+    value: {
+      type: Array,
+      default: () => ([])
+    } as PropValidator<(string | number)[]>,
     ...VTreeviewNodeProps
   },
 
@@ -73,23 +81,21 @@ export default mixins(
         // as a result of items changing. This fixes a
         // potential double emit when selecting a node
         // with dynamic children
-        if (!deepEqual(oldSelectedCache, this.selectedCache)) this.emitSelected()
+        if (!deepEqual(oldSelectedCache, this.selectedCache)) this.onChange()
       },
       deep: true
     },
-    selected: {
-      handler (v) {
-        if (!v || deepEqual(v, this.selectedCache)) return
+    value (v) {
+      if (!v || deepEqual(v, this.selectedCache)) return
 
-        this.selected.forEach(key => this.updateSelected(key, true))
-        this.emitSelected()
-      },
-      immediate: true
+      this.value.forEach(key => this.updateSelected(key, true))
+      this.onChange()
     }
   },
 
   created () {
     this.buildTree(this.items)
+    this.value.forEach(key => this.updateSelected(key, true))
   },
 
   methods: {
@@ -202,8 +208,8 @@ export default mixins(
       this.selectedCache = this.selectedCache.filter(k => changed[ston(k)] !== false)
       this.selectedCache.push(...Object.keys(changed).filter(k => changed[k] === true).map(ston))
     },
-    emitSelected () {
-      this.$emit('update:selected', this.selectedCache)
+    onChange () {
+      this.$emit('change', this.selectedCache)
     },
     getDescendants (key: string | number, descendants: (string | number)[] = []) {
       const children = this.nodes[key].children

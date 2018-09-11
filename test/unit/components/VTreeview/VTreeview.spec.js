@@ -10,7 +10,7 @@ const threeLevels = [
   { id: 0, name: 'Root', children: [{ id: 1, name: 'Child', children: [{ id: 2, name: 'Grandchild' }] }, { id: 3, name: 'Child' }] }
 ]
 
-test('VTimePicker.js', ({ mount }) => {
+test('VTreeView.ts', ({ mount }) => {
   it('should render items', async () => {
     const wrapper = mount(VTreeview, {
       propsData: {
@@ -30,7 +30,7 @@ test('VTimePicker.js', ({ mount }) => {
     })
 
     const fn = jest.fn()
-    wrapper.vm.$on('update:selected', fn)
+    wrapper.vm.$on('change', fn)
 
     wrapper.find('.v-treeview-node__checkbox')[0].trigger('click')
     await wrapper.vm.$nextTick()
@@ -74,7 +74,7 @@ test('VTimePicker.js', ({ mount }) => {
     })
 
     const fn = jest.fn()
-    wrapper.vm.$on('update:selected', fn)
+    wrapper.vm.$on('change', fn)
 
     expect(wrapper.html()).toMatchSnapshot()
 
@@ -125,14 +125,14 @@ test('VTimePicker.js', ({ mount }) => {
     const wrapper = mount(VTreeview, {
       propsData: {
         items: [{ id: 0, name: 'Root', children: [{ id: 1, name: 'Child' }] }],
-        selected: []
+        value: []
       }
     })
 
     expect(wrapper.html()).toMatchSnapshot()
 
     wrapper.find('.v-treeview-node__toggle')[0].trigger('click')
-    wrapper.setProps({ selected: [1] })
+    wrapper.setProps({ value: [1] })
     await wrapper.vm.$nextTick()
 
     expect(wrapper.find('.v-treeview-node').length).toBe(2)
