@@ -215,9 +215,6 @@ export default mixins(
 
       return this.$createElement('div', {
         staticClass: 'v-treeview-node__root',
-        class: {
-          [this.activeClass]: this.isActive
-        },
         on: {
           click: () => {
             if (this.openOnClick && this.children) {
@@ -277,6 +274,7 @@ export default mixins(
     return h('div', {
       staticClass: 'v-treeview-node',
       class: {
+        [this.activeClass]: this.isActive,
         'v-treeview-node--leaf': !this.children,
         'v-treeview-node--click': this.openOnClick,
         'v-treeview-node--selected': this.isSelected
