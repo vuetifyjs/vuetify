@@ -25,7 +25,9 @@ const ICONS_MATERIAL = {
   'edit': 'edit',
   'ratingEmpty': 'star_border',
   'ratingFull': 'star',
-  'ratingHalf': 'star_half'
+  'ratingHalf': 'star_half',
+  'first': 'first_page',
+  'last': 'last_page'
 }
 
 // Maps internal Vuetify icon names to actual icons from materialdesignicons.com
@@ -55,7 +57,9 @@ const ICONS_MDI = {
   'edit': 'mdi-pencil',
   'ratingEmpty': 'mdi-star-outline',
   'ratingFull': 'mdi-star',
-  'ratingHalf': 'mdi-star-half'
+  'ratingHalf': 'mdi-star-half',
+  'first': 'mdi-page-first',
+  'last': 'mdi-page-last'
 }
 
 // Maps internal Vuetify icon names to actual Font-Awesome 4 icon names.
@@ -85,7 +89,9 @@ const ICONS_FONTAWESOME4 = {
   'edit': 'fa fa-pencil',
   'ratingEmpty': 'fa fa-star-o',
   'ratingFull': 'fa fa-star',
-  'ratingHalf': 'fa fa-star-half-o'
+  'ratingHalf': 'fa fa-star-half-o',
+  'first': 'fa fa-step-backward',
+  'last': 'fa fa-step-forward'
 }
 
 // Maps internal Vuetify icon names to actual Font-Awesome 5+ icon names.
@@ -115,7 +121,9 @@ const ICONS_FONTAWESOME = {
   'edit': 'fas fa-edit',
   'ratingEmpty': 'far fa-star',
   'ratingFull': 'fas fa-star',
-  'ratingHalf': 'fas fa-star-half'
+  'ratingHalf': 'fas fa-star-half',
+  'first': 'fas fa-step-backward',
+  'last': 'fas fa-step-forward'
 }
 
 const iconSets = {

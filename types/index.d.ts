@@ -86,6 +86,8 @@ export interface VuetifyIcons {
   ratingEmpty: string
   ratingFull: string
   ratingHalf: string
+  first: string
+  last: string
 }
 
 export interface VuetifyApplication {

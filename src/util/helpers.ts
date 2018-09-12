@@ -298,6 +298,15 @@ export const keyCodes = Object.freeze({
   pagedown: 34
 })
 
+export function groupByProperty (xs: Array<any>, key: string) {
+  return xs.reduce((rv, x) => {
+    (rv[x[key]] = rv[x[key]] || []).push(x)
+    return rv
+  }, {})
+}
+
+export function wrapInArray<T> (v: T | Array<T>): Array<T> { return Array.isArray(v) ? v : [v] }
+
 const ICONS_PREFIX = '$vuetify.icons.'
 
 // This remaps internal names like '$vuetify.icons.cancel' to the current name
