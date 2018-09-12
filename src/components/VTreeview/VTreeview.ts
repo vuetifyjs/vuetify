@@ -114,6 +114,8 @@ export default mixins(
     this.buildTree(this.items)
     this.value.forEach(key => this.updateSelected(key, true))
     this.emitSelected()
+    this.active.forEach(key => this.updateActive(key, true))
+    this.emitActive()
   },
 
   mounted () {
@@ -198,8 +200,6 @@ export default mixins(
       if (value) this.activeCache.push(key)
 
       this.updateVnodeState(key)
-
-      this.$emit('update:active', this.activeCache)
     },
     calculateState (node: NodeState, state: Record<string | number, NodeState>) {
       const counts = node.children.reduce((counts: number[], child: string | number) => {
@@ -258,6 +258,9 @@ export default mixins(
     },
     emitSelected () {
       this.$emit('change', this.selectedCache)
+    },
+    emitActive () {
+      this.$emit('update:active', this.activeCache)
     },
     getDescendants (key: string | number, descendants: (string | number)[] = []) {
       const children = this.nodes[key].children

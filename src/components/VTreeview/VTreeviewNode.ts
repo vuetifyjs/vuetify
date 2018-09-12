@@ -225,6 +225,7 @@ export default mixins(
             } else if (this.activatable) {
               this.isActive = !this.isActive
               this.treeview.updateActive(this.key, this.isActive)
+              this.treeview.emitActive()
             }
           }
         }
