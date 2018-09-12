@@ -15,6 +15,7 @@ import { getObjectValueByPath } from '../../util/helpers'
 import { PropValidator } from 'vue/types/options'
 
 export const VTreeviewNodeProps = {
+  activatable: Boolean,
   activeClass: {
     type: String,
     default: 'v-treeview-node--active'
@@ -221,7 +222,7 @@ export default mixins(
           click: () => {
             if (this.openOnClick && this.children) {
               this.open()
-            } else {
+            } else if (this.activatable) {
               this.isActive = !this.isActive
               this.treeview.updateActive(this.key, this.isActive)
             }
@@ -233,6 +234,7 @@ export default mixins(
       return this.$createElement(VTreeviewNode, {
         key: getObjectValueByPath(item, this.itemKey),
         props: {
+          activatable: this.activatable,
           activeClass: this.activeClass,
           item,
           selectable: this.selectable,
