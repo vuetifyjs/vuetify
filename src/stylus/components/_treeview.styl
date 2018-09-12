@@ -5,21 +5,18 @@
 v-treeview($material)
   color: $material.text.primary
 
-v-treeview($direction)
-  margin-{$direction}: 0
+  .v-treeview-node__root:hover,
+  .v-treeview-node--active
+    background: $material.dividers
 
 theme(v-treeview, "v-treeview")
 
 .v-treeview
-
   &-node
     margin-left: 24px
 
-    &--active
-      > .v-treeview-node__root
-        background: rgba(0,0,0,0.15)
-
-    &--click:not(&--leaf)
+    &--click
+      > .v-treeview-node__root,
       > .v-treeview-node__root > .v-treeview-node__content > *
         cursor: pointer
         user-select: none
@@ -46,7 +43,8 @@ theme(v-treeview, "v-treeview")
 
     &__label
       font-size: 1.2rem
-      padding-left: 0.25rem
+      padding: 0 4px
+      margin-left: 4px
 
       .v-icon
         padding-right: 8px

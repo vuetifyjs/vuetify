@@ -9,6 +9,7 @@ import { PropValidator } from '../../../node_modules/vue/types/options'
 import VTreeviewNode, { VTreeviewNodeProps } from './VTreeviewNode'
 
 // Mixins
+import Themeable from '../../mixins/themeable'
 import { provide as RegistrableProvide } from '../../mixins/registrable'
 
 // Utils
@@ -33,7 +34,8 @@ function ston (s: string | number) {
 }
 
 export default mixins(
-  RegistrableProvide('treeview')
+  RegistrableProvide('treeview'),
+  Themeable
   /* @vue/component */
 ).extend({
   name: 'v-treeview',
@@ -288,7 +290,8 @@ export default mixins(
       : this.$slots.default
 
     return h('div', {
-      staticClass: 'v-treeview'
+      staticClass: 'v-treeview',
+      class: this.themeClasses
     }, children)
   }
 })

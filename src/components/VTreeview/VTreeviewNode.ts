@@ -15,6 +15,10 @@ import { getObjectValueByPath } from '../../util/helpers'
 import { PropValidator } from 'vue/types/options'
 
 export const VTreeviewNodeProps = {
+  activeClass: {
+    type: String,
+    default: 'v-treeview-node--active'
+  },
   selectable: Boolean,
   selectedColor: {
     type: String,
@@ -210,6 +214,9 @@ export default mixins(
 
       return this.$createElement('div', {
         staticClass: 'v-treeview-node__root',
+        class: {
+          [this.activeClass]: this.isActive
+        },
         on: {
           click: () => {
             if (this.openOnClick && this.children) {
@@ -266,7 +273,6 @@ export default mixins(
       staticClass: 'v-treeview-node',
       class: {
         'v-treeview-node--leaf': !this.children,
-        'v-treeview-node--active': this.isActive,
         'v-treeview-node--click': this.openOnClick,
         'v-treeview-node--selected': this.isSelected
       }
