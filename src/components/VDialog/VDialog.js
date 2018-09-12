@@ -13,6 +13,7 @@ import ClickOutside from '../../directives/click-outside'
 
 // Helpers
 import { getZIndex, convertToUnit } from '../../util/helpers'
+import ThemeProvider from '../../util/ThemeProvider'
 
 /* @vue/component */
 export default {
@@ -216,7 +217,13 @@ export default {
       },
       style: { zIndex: this.activeZIndex },
       ref: 'content'
-    }, [dialog]))
+    }, [
+      this.$createElement(ThemeProvider, {
+        props: {
+          dark: this.$vuetify.dark || this.dark
+        }
+      }, [dialog])
+    ]))
 
     return h('div', {
       staticClass: 'v-dialog__container',

@@ -402,15 +402,15 @@ export default {
 
       if ('touches' in e) {
         this.app.addEventListener('touchmove', this.onMouseMove, options)
-        addOnceEventListener(this.app, 'touchend', this.onMouseUp)
+        addOnceEventListener(this.app, 'touchend', this.onSliderMouseUp)
       } else {
         this.app.addEventListener('mousemove', this.onMouseMove, options)
-        addOnceEventListener(this.app, 'mouseup', this.onMouseUp)
+        addOnceEventListener(this.app, 'mouseup', this.onSliderMouseUp)
       }
 
       this.$emit('start', this.internalValue)
     },
-    onMouseUp () {
+    onSliderMouseUp () {
       this.keyPressed = 0
       const options = { passive: true }
       this.isActive = false

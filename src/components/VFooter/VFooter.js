@@ -11,8 +11,9 @@ export default {
   name: 'v-footer',
 
   mixins: [
-    Applicationable('footer', [
-      'height'
+    Applicationable(null, [
+      'height',
+      'inset'
     ]),
     Colorable,
     Themeable
@@ -27,6 +28,9 @@ export default {
   },
 
   computed: {
+    applicationProperty () {
+      return this.inset ? 'insetFooter' : 'footer'
+    },
     computedMarginBottom () {
       if (!this.app) return
 

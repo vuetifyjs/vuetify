@@ -2,6 +2,7 @@
 import Colorable from '../../mixins/colorable'
 import Routable from '../../mixins/routable'
 import Toggleable from '../../mixins/toggleable'
+import Themeable from '../../mixins/themeable'
 
 // Directives
 import Ripple from '../../directives/ripple'
@@ -17,7 +18,8 @@ export default {
   mixins: [
     Colorable,
     Routable,
-    Toggleable
+    Toggleable,
+    Themeable
   ],
 
   inheritAttrs: false,
@@ -49,6 +51,7 @@ export default {
         'v-list__tile--avatar': this.avatar,
         'v-list__tile--disabled': this.disabled,
         'v-list__tile--active': !this.to && this.isActive,
+        ...this.themeClasses,
         [this.activeClass]: this.isActive
       }
     },
@@ -70,7 +73,7 @@ export default {
     data.attrs = Object.assign({}, data.attrs, this.$attrs)
 
     return h('div', this.setTextColor(!this.disabled && this.color, {
-      'class': this.listClasses,
+      class: this.listClasses,
       attrs: {
         disabled: this.disabled
       },

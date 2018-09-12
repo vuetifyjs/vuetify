@@ -20,13 +20,13 @@ export default {
   computed: {
     styles () {
       const {
-        bar, top, right, footer, bottom, left
+        bar, top, right, footer, insetFooter, bottom, left
       } = this.$vuetify.application
 
       return {
         paddingTop: `${top + bar}px`,
         paddingRight: `${right}px`,
-        paddingBottom: `${footer + bottom}px`,
+        paddingBottom: `${footer + insetFooter + bottom}px`,
         paddingLeft: `${left}px`
       }
     }

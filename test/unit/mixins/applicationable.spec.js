@@ -45,7 +45,7 @@ test('applicationable.js', ({ mount }) => {
       render: h => h('div')
     })
 
-    expect(wrapper.vm._watchers.length).toBe(5)
+    expect(wrapper.vm._watchers.length).toBe(6)
   })
 
   it('should call to remove application on destroy', async () => {

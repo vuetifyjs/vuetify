@@ -1,8 +1,11 @@
 import '../../stylus/components/_breadcrumbs.styl'
+import Themeable from '../../mixins/themeable'
 
 /* @vue/component */
 export default {
   name: 'v-breadcrumbs',
+
+  mixins: [Themeable],
 
   props: {
     divider: {
@@ -17,7 +20,8 @@ export default {
   computed: {
     classes () {
       return {
-        'v-breadcrumbs--large': this.large
+        'v-breadcrumbs--large': this.large,
+        ...this.themeClasses
       }
     },
     computedDivider () {

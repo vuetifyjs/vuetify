@@ -22,6 +22,7 @@ import Resize from '../../directives/resize'
 
 // Helpers
 import { convertToUnit } from '../../util/helpers'
+import ThemeProvider from '../../util/ThemeProvider'
 
 /* @vue/component */
 export default Vue.extend({
@@ -198,13 +199,17 @@ export default Vue.extend({
         value: this.onResize
       }],
       on: {
-        keydown: this.changeListIndex
+        keydown: this.onKeyDown
       }
     }
 
     return h('div', data, [
       this.genActivator(),
-      this.genTransition()
+      this.$createElement(ThemeProvider, {
+        props: {
+          dark: this.$vuetify.dark || this.dark
+        }
+      }, [this.genTransition()])
     ])
   }
 })

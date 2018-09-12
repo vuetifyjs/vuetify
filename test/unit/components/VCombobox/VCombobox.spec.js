@@ -116,7 +116,7 @@ test('VCombobox', ({ shallow }) => {
     expect(change).toHaveBeenCalledTimes(4)
   })
 
-  it('should call methods on blur', () => {
+  it('should call methods on blur', async () => {
     const updateCombobox = jest.fn()
     const wrapper = shallow(VCombobox, {
       attachToDocument: true,
@@ -125,8 +125,12 @@ test('VCombobox', ({ shallow }) => {
       }
     })
 
-    wrapper.vm.onEnterDown()
 
+    const e = { preventDefault: jest.fn() }
+    wrapper.vm.onEnterDown(e)
+
+    // https://github.com/vuetifyjs/vuetify/issues/4974
+    expect(e.preventDefault).toBeCalled()
     expect(updateCombobox).toHaveBeenCalledTimes(1)
   })
 
@@ -211,5 +215,26 @@ test('VCombobox', ({ shallow }) => {
 
     expect(wrapper.vm.isFocused).toBe(false)
     expect(wrapper.vm.internalValue).toEqual(items[0])
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/5008
+  it('should select item if menu index is greater than -1', async () => {
+    const wrapper = shallow(VCombobox, {
+      propsData: {
+        items: ['foo']
+      }
+    })
+
+    const input = wrapper.first('input')
+
+    input.trigger('focus')
+    input.trigger('keydown.enter')
+    input.trigger('keydown.down')
+
+    expect(wrapper.vm.getMenuIndex()).toBe(0)
+
+    input.trigger('keydown.enter')
+
+    expect(wrapper.vm.internalValue).toBe('foo')
   })
 })

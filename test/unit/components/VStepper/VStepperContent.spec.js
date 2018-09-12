@@ -9,7 +9,10 @@ test('VStepperContent.js', ({ mount }) => {
   it('should set height to auto', async () => {
     const wrapper = mount(VStepperContent, {
       attachToDocument: true,
-      propsData: { step: 0 }
+      propsData: { step: 0 },
+      provide: {
+        isVertical: false
+      }
     })
 
     expect(wrapper.vm.isActive).toBe(null)
@@ -23,7 +26,10 @@ test('VStepperContent.js', ({ mount }) => {
 
   it('should use reverse transition', () => {
     const wrapper = mount(VStepperContent, {
-      propsData: { step: 1 }
+      propsData: { step: 1 },
+      provide: {
+        isVertical: false
+      }
     })
 
     expect(wrapper.vm.computedTransition).toBe(VTabTransition)
@@ -38,6 +44,9 @@ test('VStepperContent.js', ({ mount }) => {
       attachToDocument: true,
       propsData: {
         step: 1
+      },
+      provide: {
+        isVertical: false
       }
     })
 
@@ -78,7 +87,10 @@ test('VStepperContent.js', ({ mount }) => {
 
   it('should toggle isActive state', () => {
     const wrapper = mount(VStepperContent, {
-      propsData: { step: 1 }
+      propsData: { step: 1 },
+      provide: {
+        isVertical: false
+      }
     })
 
     wrapper.vm.toggle(1, false)
@@ -100,10 +112,17 @@ test('VStepperContent.js', ({ mount }) => {
   it('should set height', async () => {
     const wrapper = mount(VStepperContent, {
       attachToDocument: true,
-      propsData: { step: 1 }
+      propsData: { step: 1 },
+      provide: {
+        isVertical: false
+      }
     })
 
-    wrapper.vm.enter()
+    wrapper.setData({ isActive: false, isVertical: true })
+    await wrapper.vm.$nextTick()
+
+    wrapper.setData({ isActive: true })
+    await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.height).toBe(0)
 
@@ -111,16 +130,45 @@ test('VStepperContent.js', ({ mount }) => {
 
     expect(wrapper.vm.height).toBe('auto')
 
-    wrapper.vm.leave()
+    wrapper.setData({ isActive: false })
+    await wrapper.vm.$nextTick()
 
     await new Promise(resolve => setTimeout(resolve, 10))
 
     expect(wrapper.vm.height).toBe(0)
   })
 
+  it('should set height only if isActive', async () => {
+    const wrapper = mount(VStepperContent, {
+      attachToDocument: true,
+      propsData: { step: 1 },
+      provide: {
+        isVertical: false
+      }
+    })
+
+    wrapper.setData({ isActive: false, isVertical: true })
+    await wrapper.vm.$nextTick()
+
+    wrapper.setData({ isActive: true })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.height).toBe(0)
+
+    wrapper.setData({ isActive: false })
+    await wrapper.vm.$nextTick()
+
+    await new Promise(resolve => setTimeout(resolve, 450))
+
+    expect(wrapper.vm.height).toBe(0)
+  })
+
   it('should reset height', async () => {
     const wrapper = mount(VStepperContent, {
-      propsData: { step: 1 }
+      propsData: { step: 1 },
+      provide: {
+        isVertical: false
+      }
     })
 
     const onTransition = jest.fn()

@@ -99,13 +99,14 @@ theme(v-toolbar, "v-toolbar")
     padding: 0
 
     .v-btn
-      align-items: stretch
+      align-items: center
+      align-self: center
 
     .v-tooltip,
     .v-tooltip > span
       height: inherit
 
-    .v-btn,
+    .v-btn:not(.v-btn--floating):not(.v-btn--icon),
     .v-menu,
     .v-menu__activator
       height: inherit

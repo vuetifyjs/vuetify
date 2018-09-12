@@ -18,6 +18,10 @@ export default {
   mixins: [Colorable, Delayable, Dependent, Detachable, Menuable, Toggleable],
 
   props: {
+    closeDelay: {
+      type: [Number, String],
+      default: 200
+    },
     debounce: {
       type: [Number, String],
       default: 0
