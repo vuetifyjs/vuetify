@@ -108,11 +108,12 @@ export default mixins(Colorable, Themeable, Times, Mouse).extend({
   },
 
   methods: {
-    getRelativeClasses (timestamp: VTimestamp): object {
+    getRelativeClasses (timestamp: VTimestamp, outside: boolean = false): object {
       return {
         'v-present': timestamp.present,
         'v-past': timestamp.past,
-        'v-future': timestamp.future
+        'v-future': timestamp.future,
+        'v-outside': outside
       }
     }
   }

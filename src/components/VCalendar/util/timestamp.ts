@@ -1,16 +1,16 @@
 
-const PARSE_REGEX: RegExp = /^(\d{1,4})-(\d{1,2})(-(\d{1,2}))?([^\d]+(\d{1,2}))?(:(\d{1,2}))?(:(\d{1,2}))?$/
+export const PARSE_REGEX: RegExp = /^(\d{1,4})-(\d{1,2})(-(\d{1,2}))?([^\d]+(\d{1,2}))?(:(\d{1,2}))?(:(\d{1,2}))?$/
 
-const DAYS_IN_MONTH: number[] = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-const DAYS_IN_MONTH_LEAP: number[] = [0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-const DAYS_IN_MONTH_MIN: number = 28
-const MONTH_MAX: number = 12
-const MONTH_MIN: number = 1
-const DAY_MIN: number = 1
-const DAYS_IN_WEEK: number = 7
-const MINUTES_IN_HOUR: number = 60
-const HOURS_IN_DAY: number = 24
-const FIRST_HOUR: number = 0
+export const DAYS_IN_MONTH: number[] = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+export const DAYS_IN_MONTH_LEAP: number[] = [0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+export const DAYS_IN_MONTH_MIN: number = 28
+export const MONTH_MAX: number = 12
+export const MONTH_MIN: number = 1
+export const DAY_MIN: number = 1
+export const DAYS_IN_WEEK: number = 7
+export const MINUTES_IN_HOUR: number = 60
+export const HOURS_IN_DAY: number = 24
+export const FIRST_HOUR: number = 0
 
 export interface VTimestamp {
   date: string
@@ -252,14 +252,20 @@ export function getWeekdaySkips (weekdays: number[]): number[] {
 }
 
 export function createDayList (start: VTimestamp, end: VTimestamp, now: VTimestamp,
-  weekdaySkips: number[], max: number = 42): VTimestamp[] {
+  weekdaySkips: number[], max: number = 42, min: number = 0): VTimestamp[] {
   const stop = getDayIdentifier(end)
   const days: VTimestamp[] = []
   let current = copyTimestamp(start)
   let currentIdentifier = 0
+  let stopped = currentIdentifier === stop
 
-  while (currentIdentifier !== stop && days.length < max) {
+  if (stop < getDayIdentifier(start)) {
+    return days
+  }
+
+  while ((!stopped || days.length < min) && days.length < max) {
     currentIdentifier = getDayIdentifier(current)
+    stopped = stopped || currentIdentifier === stop
     if (weekdaySkips[current.weekday] === 0) {
       current = nextDay(current)
       continue
@@ -279,8 +285,8 @@ export function createIntervalList (timestamp: VTimestamp, first: number,
   const intervals: VTimestamp[] = []
 
   for (let i = 0; i < count; i++) {
-    const mins: number = (first + i) * minutes
-    const int: VTimestamp = copyTimestamp(timestamp)
+    const mins = (first + i) * minutes
+    const int = copyTimestamp(timestamp)
     intervals.push(updateMinutes(int, mins, now))
   }
 

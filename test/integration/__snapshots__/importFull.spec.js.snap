@@ -32,6 +32,8 @@ Array [
   "VBtnToggle",
   "VCalendar",
   "VCalendarDaily",
+  "VCalendarMonthly",
+  "VCalendarWeekly",
   "VCard",
   "VCardActions",
   "VCardMedia",
