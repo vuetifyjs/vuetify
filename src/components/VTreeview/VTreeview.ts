@@ -61,6 +61,7 @@ export default mixins(
       type: Array,
       default: () => ([])
     } as PropValidator<(string | number)[]>,
+    openAll: Boolean,
     value: {
       type: Array,
       default: () => ([])
@@ -113,7 +114,14 @@ export default mixins(
     this.buildTree(this.items)
     this.value.forEach(key => this.updateSelected(key, true))
     this.emitSelected()
-    this.open.forEach(key => this.updateOpen(key, true))
+  },
+
+  mounted () {
+    if (this.openAll) {
+      Object.keys(this.nodes).forEach(key => this.updateOpen(ston(key), true))
+    } else {
+      this.open.forEach(key => this.updateOpen(key, true))
+    }
     this.emitOpen()
   },
 

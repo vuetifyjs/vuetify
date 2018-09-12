@@ -89,7 +89,8 @@ test('VTreeView.ts', ({ mount }) => {
   it('should emit active node when clicking on it', async () => {
     const wrapper = mount(VTreeview, {
       propsData: {
-        items: [{ id: 0, name: 'Root' }, { id: 1, name: 'Root' }]
+        items: [{ id: 0, name: 'Root' }, { id: 1, name: 'Root' }],
+        activatable: true
       }
     })
 
@@ -107,7 +108,8 @@ test('VTreeView.ts', ({ mount }) => {
     const wrapper = mount(VTreeview, {
       propsData: {
         items: [{ id: 0, name: 'Root' }, { id: 1, name: 'Root' }],
-        multipleActive: true
+        multipleActive: true,
+        activatable: true
       }
     })
 
@@ -137,6 +139,19 @@ test('VTreeView.ts', ({ mount }) => {
 
     expect(wrapper.find('.v-treeview-node').length).toBe(2)
     expect(wrapper.find('.v-treeview-node--selected').length).toBe(2)
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should open all children when using open-all prop', async () => {
+    const wrapper = mount(VTreeview, {
+      propsData: {
+        items: threeLevels,
+        openAll: true
+      }
+    })
+
+    await wrapper.vm.$nextTick()
+
     expect(wrapper.html()).toMatchSnapshot()
   })
 })
