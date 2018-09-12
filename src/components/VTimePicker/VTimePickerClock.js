@@ -101,12 +101,12 @@ export default {
     isAllowed (value) {
       return !this.allowedValues || this.allowedValues(value)
     },
-    genValues (h) {
+    genValues () {
       const children = []
 
       for (let value = this.min; value <= this.max; value = value + this.step) {
         const color = value === this.value && (this.color || 'accent')
-        children.push(h('span', this.setBackgroundColor(color, {
+        children.push(this.$createElement('span', this.setBackgroundColor(color, {
           staticClass: 'v-time-picker-clock__item',
           'class': {
             'v-time-picker-clock__item--active': value === this.displayedValue,
@@ -119,11 +119,11 @@ export default {
 
       return children
     },
-    genHand (h) {
+    genHand () {
       const scale = `scaleY(${this.handScale(this.displayedValue)})`
       const angle = this.rotate + this.degreesPerUnit * (this.displayedValue - this.min)
       const color = (this.value != null) && (this.color || 'accent')
-      return h('div', this.setBackgroundColor(color, {
+      return this.$createElement('div', this.setBackgroundColor(color, {
         staticClass: 'v-time-picker-clock__hand',
         'class': {
           'v-time-picker-clock__hand--inner': this.isInner(this.value)
@@ -234,8 +234,8 @@ export default {
       h('div', {
         staticClass: 'v-time-picker-clock__inner'
       }, [
-        this.genHand(h),
-        this.genValues(h)
+        this.genHand(),
+        this.genValues()
       ])
     ])
   }
