@@ -12,6 +12,9 @@ v-treeview($material)
 theme(v-treeview, "v-treeview")
 
 .v-treeview
+  > .v-treeview-node
+    margin-left: 0
+
   &-node
     margin-left: 24px
 
@@ -48,10 +51,6 @@ theme(v-treeview, "v-treeview")
 
       .v-icon
         padding-right: 8px
-
-    &__spacer
-      width: 24px
-      height: 24px
 
     &__checkbox
       user-select: none
