@@ -45,6 +45,10 @@ export default {
     },
     hideNoData: Boolean,
     noFilter: Boolean,
+    openOnItemsChanged: {
+      type: Boolean,
+      default: false
+    },
     searchInput: {
       default: undefined
     },
@@ -180,6 +184,7 @@ export default {
       // User is probably async loading
       // items, try to activate the menu
       if (
+        this.openOnItemsChanged &&
         this.isFocused &&
         !this.isMenuActive &&
         val.length
