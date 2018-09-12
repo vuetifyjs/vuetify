@@ -55,6 +55,7 @@ export default mixins(
       type: Array,
       default: () => ([])
     } as PropValidator<any[]>,
+    hoverable: Boolean,
     multipleActive: Boolean,
     open: {
       type: Array,
@@ -291,7 +292,10 @@ export default mixins(
 
     return h('div', {
       staticClass: 'v-treeview',
-      class: this.themeClasses
+      class: {
+        'v-treeview--hoverable': this.hoverable,
+        ...this.themeClasses
+      }
     }, children)
   }
 })
