@@ -236,6 +236,7 @@ export default mixins(
           activeClass: this.activeClass,
           item,
           selectable: this.selectable,
+          expandIcon: this.expandIcon,
           indeterminateIcon: this.indeterminateIcon,
           offIcon: this.offIcon,
           onIcon: this.onIcon,
