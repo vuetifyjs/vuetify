@@ -19,6 +19,11 @@ theme(v-treeview, "v-treeview")
       > .v-treeview-node__root
         background: rgba(0,0,0,0.15)
 
+    &--click:not(&--leaf)
+      > .v-treeview-node__root > .v-treeview-node__content > *
+        cursor: pointer
+        user-select: none
+
     &--leaf
       margin-left: 48px
 

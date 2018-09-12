@@ -267,6 +267,7 @@ export default mixins(
       class: {
         'v-treeview-node--leaf': !this.children,
         'v-treeview-node--active': this.isActive,
+        'v-treeview-node--click': this.openOnClick,
         'v-treeview-node--selected': this.isSelected
       }
     }, children)
