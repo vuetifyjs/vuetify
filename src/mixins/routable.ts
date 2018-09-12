@@ -1,7 +1,7 @@
 import Vue, { VNodeData } from 'vue'
 import { PropValidator } from 'vue/types/options'
 
-import Ripple from '../directives/ripple'
+import Ripple, { RippleOptions } from '../directives/ripple'
 
 export default Vue.extend({
   name: 'routable',
@@ -28,20 +28,26 @@ export default Vue.extend({
     target: String
   },
 
+  computed: {
+    computedRipple (): RippleOptions | boolean {
+      return (this.ripple && !this.disabled) ? this.ripple : false
+    }
+  },
+
   methods: {
     /* eslint-disable-next-line no-unused-vars */
     click (e: MouseEvent): void { /**/ },
-    generateRouteLink () {
+    generateRouteLink (classes: any) {
       let exact = this.exact
       let tag
 
       const data: VNodeData = {
         attrs: { disabled: this.disabled },
-        class: (this as any).classes,
+        class: classes,
         props: {},
         directives: [{
           name: 'ripple',
-          value: (this.ripple && !this.disabled) ? this.ripple : false
+          value: this.computedRipple
         }] as any, // TODO
         [this.to ? 'nativeOn' : 'on']: {
           ...this.$listeners,

@@ -1,16 +1,52 @@
 /* eslint-disable max-len */
 
-import { VueConstructor, ComponentOptions, PluginFunction, FunctionalComponentOptions } from 'vue'
+import {
+  VueConstructor,
+  ComponentOptions,
+  FunctionalComponentOptions,
+  VNodeData
+} from 'vue'
 import { CombinedVueInstance, Vue } from 'vue/types/vue'
 import {
   RecordPropsDefinition,
   ThisTypedComponentOptionsWithArrayProps,
   ThisTypedComponentOptionsWithRecordProps
 } from 'vue/types/options'
+import { TouchStoredHandlers } from './directives/touch'
 
 declare global {
   interface Window {
     Vue: VueConstructor
+  }
+
+  interface HTMLCollection {
+    [Symbol.iterator] (): IterableIterator<Element>
+  }
+
+  interface Element {
+    getElementsByClassName(classNames: string): NodeListOf<HTMLElement>
+  }
+
+  interface HTMLElement {
+    _clickOutside?: EventListenerOrEventListenerObject
+    _onResize?: {
+      callback: () => void
+      options?: boolean | AddEventListenerOptions
+    }
+    _ripple?: {
+      enabled?: boolean
+      centered?: boolean
+      class?: string
+      circle?: boolean
+    }
+    _onScroll?: {
+      callback: EventListenerOrEventListenerObject
+      options: boolean | AddEventListenerOptions
+      target: EventTarget
+    }
+    _touchHandlers?: {
+      [_uid: number]: TouchStoredHandlers
+    }
   }
 
   interface HTMLImageElement {
@@ -24,11 +60,28 @@ declare global {
   export const __REQUIRED_VUE__: string
 }
 
+declare module 'vue/types/vnode' {
+  export interface VNodeData {
+    model?: {
+      callback: (v: any) => void
+      expression: string
+      value: any
+    }
+  }
+}
+
 declare module 'vue/types/vue' {
   export type OptionsVue<Instance extends Vue, Data, Methods, Computed, Props, Options = {}> = VueConstructor<
     CombinedVueInstance<Instance, Data, Methods, Computed, Props> & Vue,
     Options
   >
+
+  export interface Vue {
+    _uid: number
+
+    /** bindObjectListeners */
+     _g (data: VNodeData, value: {}): VNodeData
+  }
 
   export interface RawComponentOptions<
     V extends Vue = Vue,

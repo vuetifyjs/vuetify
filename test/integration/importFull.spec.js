@@ -4,6 +4,8 @@ import Vuetify from '@/'
 describe('full import', () => {
   Vue.use(Vuetify)
   const registeredComponents = Object.keys(Vue.options.components).sort()
+  const registeredDirectives = Object.keys(Vue.options.directives).sort()
+
   it('should register all subcomponents', () => {
     expect(registeredComponents).toMatchSnapshot()
   })
@@ -12,5 +14,9 @@ describe('full import', () => {
     registeredComponents.forEach(name =>
       expect(name).toMatch(/^(?:[A-Z][a-z]*)+$/)
     )
+  })
+
+  it('should register all directives', () => {
+    expect(registeredDirectives).toMatchSnapshot()
   })
 })

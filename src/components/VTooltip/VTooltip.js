@@ -18,6 +18,10 @@ export default {
   mixins: [Colorable, Delayable, Dependent, Detachable, Menuable, Toggleable],
 
   props: {
+    closeDelay: {
+      type: [Number, String],
+      default: 200
+    },
     debounce: {
       type: [Number, String],
       default: 0
@@ -141,12 +145,12 @@ export default {
   },
 
   render (h) {
-    const tooltip = h('div', {
+    const tooltip = h('div', this.setBackgroundColor(this.color, {
       staticClass: 'v-tooltip__content',
-      'class': this.addBackgroundColorClassChecks({
+      'class': {
         [this.contentClass]: true,
         'menuable__content__active': this.isActive
-      }),
+      },
       style: this.styles,
       attrs: this.getScopeIdAttrs(),
       directives: [{
@@ -154,7 +158,7 @@ export default {
         value: this.isContentActive
       }],
       ref: 'content'
-    }, this.showLazyContent(this.$slots.default))
+    }), this.showLazyContent(this.$slots.default))
 
     return h(this.tag, {
       staticClass: 'v-tooltip',

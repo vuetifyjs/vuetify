@@ -80,6 +80,8 @@ test('VFooter.js', ({ mount, functionalContext }) => {
     wrapper.vm.$vuetify.application.bottom = 30
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.$vuetify.application.bottom).toBe(30)
+    wrapper.vm.$vuetify.application.bottom = 0
+    wrapper.vm.$vuetify.application.footer = 0
   })
 
   it('should have padding left when using inset', async () => {
@@ -105,5 +107,24 @@ test('VFooter.js', ({ mount, functionalContext }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should set conditional applicationable property', async () => {
+    const wrapper = mount(VFooter, {
+      propsData: {
+        app: true,
+        inset: true
+      }
+    })
+
+    expect(wrapper.vm.$vuetify.application.footer).toBe(0)
+    expect(wrapper.vm.$vuetify.application.insetFooter).toBe(32)
+
+    wrapper.setProps({ inset: false })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.$vuetify.application.footer).toBe(32)
+    expect(wrapper.vm.$vuetify.application.insetFooter).toBe(0)
   })
 })

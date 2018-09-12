@@ -26,9 +26,11 @@ import VExpansionPanel from '@/components/VExpansionPanel'
 import VFooter from '@/components/VFooter'
 import VForm from '@/components/VForm'
 import VGrid from '@/components/VGrid'
+import VHover from '@/components/VHover'
 import VIcon from '@/components/VIcon'
 import VImg from '@/components/VImg'
 import VInput from '@/components/VInput'
+import VItemGroup from '@/components/VItemGroup'
 import VJumbotron from '@/components/VJumbotron'
 import VLabel from '@/components/VLabel'
 import VList from '@/components/VList'
@@ -56,6 +58,7 @@ import VSystemBar from '@/components/VSystemBar'
 import VTabs from '@/components/VTabs'
 import VTextarea from '@/components/VTextarea'
 import VTextField from '@/components/VTextField'
+import VTimeline from '@/components/VTimeline'
 import VTimePicker from '@/components/VTimePicker'
 import VToolbar from '@/components/VToolbar'
 import VTooltip from '@/components/VTooltip'
@@ -89,9 +92,11 @@ const components = {
   VFooter,
   VForm,
   VGrid,
+  VHover,
   VIcon,
   VImg,
   VInput,
+  VItemGroup,
   VJumbotron,
   VLabel,
   VList,
@@ -119,6 +124,7 @@ const components = {
   VTabs,
   VTextarea,
   VTextField,
+  VTimeline,
   VTimePicker,
   VToolbar,
   VTooltip,

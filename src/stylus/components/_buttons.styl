@@ -145,6 +145,7 @@ theme(button, "v-btn")
     .v-btn__content
       flex: 1 1 auto
       margin: 0
+      height: 100%
 
     &:after
       border-radius: 50%
@@ -327,7 +328,7 @@ theme(button, "v-btn")
 
 
 /** Themes */
-.v-btn
+.v-btn:not(.v-btn--outline)
   &.primary,
   &.secondary,
   &.accent,

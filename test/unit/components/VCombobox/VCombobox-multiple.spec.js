@@ -353,8 +353,6 @@ test('VCombobox - multiple', ({ shallow, compileToFunctions }) => {
     })
 
     const input = wrapper.first('input')
-    const menu = wrapper.first('.v-menu')
-    const tile = wrapper.first('.v-list__tile')
 
     input.trigger('focus')
     input.element.value = 'foo'
@@ -362,12 +360,12 @@ test('VCombobox - multiple', ({ shallow, compileToFunctions }) => {
     input.trigger('keydown.tab')
 
     expect(wrapper.vm.getMenuIndex()).toBe(-1)
-    expect(updateTags).toBeCalled()
+    expect(updateTags).toHaveBeenCalledTimes(1)
 
     input.trigger('focus')
     input.element.value = 'fizz'
     input.trigger('input')
-    menu.trigger('keydown.down')
+    input.trigger('keydown.down')
 
     // Allow dom to update class for
     // selected tile

@@ -84,19 +84,17 @@ const VIcon = mixins(
       // is Material Icon font
     } else newChildren.push(iconName)
 
-    data.class = [
-      this.addTextColorClassChecks({
-        'v-icon--disabled': this.disabled,
-        'v-icon--left': this.left,
-        'v-icon--link': this.$listeners.click || this.$listeners['!click'],
-        'v-icon--right': this.right
-      }),
-      iconType,
-      isCustomIcon ? iconName : undefined,
-      this.themeClasses
-    ]
+    data.class = {
+      'v-icon--disabled': this.disabled,
+      'v-icon--left': this.left,
+      'v-icon--link': this.$listeners.click || this.$listeners['!click'],
+      'v-icon--right': this.right,
+      [iconType]: true,
+      [iconName]: isCustomIcon,
+      ...this.themeClasses
+    }
 
-    return h('i', data, newChildren)
+    return h('i', this.setTextColor(this.color, data), newChildren)
   }
 })
 

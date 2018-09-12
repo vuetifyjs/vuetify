@@ -28,4 +28,18 @@ test('VListTileAction.js', ({ mount, functionalContext }) => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should render component with one children and match snapshot', () => {
+
+    const visible = mount(Vue.component('visible', {
+      render: h => { if(true) return h('div') }
+    })).vNode
+    const notVisible = mount(Vue.component('notVisible', {
+      render: h => { if(false) return h('span') }
+    })).vNode
+
+    const wrapper = mount(VListTileAction, functionalContext({}, [visible, notVisible]))
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

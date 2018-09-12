@@ -8,7 +8,7 @@ import { PropValidator } from 'vue/types/options'
 import VResponsive from '../VResponsive'
 
 // Utils
-import { consoleError } from '../../util/console'
+import { consoleError, consoleWarn } from '../../util/console'
 
 // not intended for public use, this is passed in by vuetify-loader
 export interface srcObject {
@@ -29,6 +29,7 @@ export default VResponsive.extend({
       type: [String, Object],
       default: ''
     } as PropValidator<string | srcObject>,
+    gradient: String,
     lazySrc: String,
     srcset: String,
     sizes: String,
@@ -37,7 +38,7 @@ export default VResponsive.extend({
       default: 'center center'
     },
     transition: {
-      type: String,
+      type: [Boolean, String],
       default: 'fade-transition'
     }
   },
@@ -73,28 +74,34 @@ export default VResponsive.extend({
     __cachedImage (): VNode | never[] {
       if (!(this.normalisedSrc.src || this.normalisedSrc.lazySrc)) return []
 
+      const backgroundImage: string[] = []
       const src = this.isLoading ? this.normalisedSrc.lazySrc : this.currentSrc
+
+      if (this.gradient) backgroundImage.push(`linear-gradient(${this.gradient})`)
+      if (src) backgroundImage.push(`url("${src}")`)
+
+      const image = this.$createElement('div', {
+        staticClass: 'v-image__image',
+        class: {
+          'v-image__image--preload': this.isLoading,
+          'v-image__image--contain': this.contain,
+          'v-image__image--cover': !this.contain
+        },
+        style: {
+          backgroundImage: backgroundImage.join(', '),
+          backgroundPosition: this.position
+        },
+        key: +this.isLoading
+      })
+
+      if (!this.transition) return image
 
       return this.$createElement('transition', {
         attrs: {
           name: this.transition,
           mode: 'in-out'
         }
-      }, [
-        this.$createElement('div', {
-          staticClass: 'v-image__image',
-          class: {
-            'v-image__image--preload': this.isLoading,
-            'v-image__image--contain': this.contain,
-            'v-image__image--cover': !this.contain
-          },
-          style: {
-            backgroundImage: src ? `url("${src}")` : undefined,
-            backgroundPosition: this.position
-          },
-          key: +this.isLoading
-        })
-      ])
+      }, [image])
     }
   },
 
@@ -125,13 +132,18 @@ export default VResponsive.extend({
       this.isLoading = false
       this.$emit('load', this.src)
     },
-    onError () {
-      consoleError('Image load failed\n\nsrc: ' + this.normalisedSrc.src, this)
+    onError (err: ErrorEvent) {
+      consoleError(
+        `Image load failed\n\n` +
+        `src: ${this.normalisedSrc.src}` +
+        (err.message ? `\nOriginal error: ${err.message}` : ''),
+        this
+      )
       this.$emit('error', this.src)
     },
     getSrc () {
       /* istanbul ignore else */
-      if (this.image) this.currentSrc = this.image.currentSrc
+      if (this.image) this.currentSrc = this.image.currentSrc || this.image.src
     },
     loadImage () {
       const image = new Image()
@@ -140,7 +152,14 @@ export default VResponsive.extend({
       image.onload = () => {
         /* istanbul ignore if */
         if (image.decode) {
-          image.decode().then(this.onLoad)
+          image.decode().catch((err: DOMException) => {
+            consoleWarn(
+              `Failed to decode image, trying to render anyway\n\n` +
+              `src: ${this.normalisedSrc.src}` +
+              (err.message ? `\nOriginal error: ${err.message}` : ''),
+              this
+            )
+          }).then(this.onLoad)
         } else {
           this.onLoad()
         }
@@ -152,7 +171,7 @@ export default VResponsive.extend({
       this.normalisedSrc.srcset && (image.srcset = this.normalisedSrc.srcset)
 
       this.aspectRatio || this.pollForSize(image)
-      this.currentSrc = image.currentSrc
+      this.getSrc()
     },
     pollForSize (img: HTMLImageElement, timeout: number | null = 100) {
       const poll = () => {
@@ -169,13 +188,17 @@ export default VResponsive.extend({
     },
     __genPlaceholder (): VNode | void {
       if (this.$slots.placeholder) {
-        const placeholder = this.$createElement('div', {
-          staticClass: 'v-image__placeholder'
-        }, this.$slots.placeholder)
+        const placeholder = this.isLoading
+          ? [this.$createElement('div', {
+            staticClass: 'v-image__placeholder'
+          }, this.$slots.placeholder)]
+          : []
+
+        if (!this.transition) return placeholder[0]
 
         return this.$createElement('transition', {
           attrs: { name: this.transition }
-        }, this.isLoading ? [placeholder] : [])
+        }, placeholder)
       }
     }
   },

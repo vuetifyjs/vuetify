@@ -1,4 +1,4 @@
-export type TargetProp = 'bar' | 'bottom' | 'footer' | 'left' | 'right' | 'top'
+export type TargetProp = 'bar' | 'bottom' | 'footer' | 'insetFooter' | 'left' | 'right' | 'top'
 
 interface TargetPropValues {
   [uid: number]: number
@@ -8,6 +8,7 @@ export default {
   bar: 0,
   bottom: 0,
   footer: 0,
+  insetFooter: 0,
   left: 0,
   right: 0,
   top: 0,
@@ -15,6 +16,7 @@ export default {
     bar: {} as TargetPropValues,
     bottom: {} as TargetPropValues,
     footer: {} as TargetPropValues,
+    insetFooter: {} as TargetPropValues,
     left: {} as TargetPropValues,
     right: {} as TargetPropValues,
     top: {} as TargetPropValues

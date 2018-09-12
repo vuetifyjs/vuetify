@@ -57,10 +57,6 @@ export default {
       }
     }
 
-    if (props.focused) {
-      data.class = Colorable.options.methods.addTextColorClassChecks(data.class, props.color)
-    }
-
-    return h('label', data, children)
+    return h('label', Colorable.options.methods.setTextColor(props.focused && props.color, data), children)
   }
 }

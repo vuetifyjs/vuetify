@@ -1,5 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`full import should register all directives 1`] = `
+Array [
+  "ClickOutside",
+  "Resize",
+  "Ripple",
+  "Scroll",
+  "Touch",
+  "model",
+  "show",
+]
+`;
+
 exports[`full import should register all subcomponents 1`] = `
 Array [
   "KeepAlive",
@@ -14,6 +26,7 @@ Array [
   "VBottomSheet",
   "VBottomSheetTransition",
   "VBreadcrumbs",
+  "VBreadcrumbsDivider",
   "VBreadcrumbsItem",
   "VBtn",
   "VBtnToggle",
@@ -55,9 +68,12 @@ Array [
   "VFlex",
   "VFooter",
   "VForm",
+  "VHover",
   "VIcon",
   "VImg",
   "VInput",
+  "VItem",
+  "VItemGroup",
   "VJumbotron",
   "VLabel",
   "VLayout",
@@ -87,6 +103,10 @@ Array [
   "VResponsive",
   "VRowExpandTransition",
   "VScaleTransition",
+  "VScrollXReverseTransition",
+  "VScrollXTransition",
+  "VScrollYReverseTransition",
+  "VScrollYTransition",
   "VSelect",
   "VSlideXReverseTransition",
   "VSlideXTransition",
@@ -117,6 +137,8 @@ Array [
   "VTimePicker",
   "VTimePickerClock",
   "VTimePickerTitle",
+  "VTimeline",
+  "VTimelineItem",
   "VToolbar",
   "VToolbarItems",
   "VToolbarSideIcon",

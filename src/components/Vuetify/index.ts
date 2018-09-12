@@ -48,9 +48,9 @@ const Vuetify: VuetifyPlugin = {
     })
 
     if (opts.directives) {
-      Object.values(opts.directives).forEach(directive => {
-        Vue.directive(directive.name, directive)
-      })
+      for (const name in opts.directives) {
+        Vue.directive(name, opts.directives[name])
+      }
     }
 
     (function registerComponents (components: VuetifyUseOptions['components']) {

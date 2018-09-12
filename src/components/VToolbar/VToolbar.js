@@ -97,7 +97,8 @@ export default {
         this.$vuetify.breakpoint.mdAndUp
       ) return this.heights.desktop
 
-      if (this.$vuetify.breakpoint.width >
+      if (this.$vuetify.breakpoint.smAndDown &&
+        this.$vuetify.breakpoint.width >
         this.$vuetify.breakpoint.height
       ) return this.heights.mobileLandscape
 
@@ -120,9 +121,10 @@ export default {
       return this.$vuetify.application.bar
     },
     classes () {
-      return this.addBackgroundColorClassChecks({
+      return {
         'v-toolbar': true,
-        'elevation-0': this.flat || (!this.isActive &&
+        'elevation-0': this.flat || (
+          !this.isActive &&
           !this.tabs &&
           this.canScroll
         ),
@@ -135,7 +137,7 @@ export default {
         'v-toolbar--floating': this.floating,
         'v-toolbar--prominent': this.prominent,
         ...this.themeClasses
-      })
+      }
     },
     computedPaddingLeft () {
       if (!this.app || this.clippedLeft) return 0
@@ -239,11 +241,11 @@ export default {
     this.isExtended = this.extended || !!this.$slots.extension
 
     const children = []
-    const data = {
+    const data = this.setBackgroundColor(this.color, {
       'class': this.classes,
       style: this.styles,
       on: this.$listeners
-    }
+    })
 
     data.directives = [{
       arg: this.scrollTarget,

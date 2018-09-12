@@ -10,10 +10,6 @@ interface ClickOutsideDirective extends VNodeDirective {
   args?: ClickOutsideBindingArgs
 }
 
-interface ClickOutsideHTMLElement extends HTMLElement {
-  _clickOutside: EventListenerOrEventListenerObject
-}
-
 function closeConditional () {
   return false
 }
@@ -78,14 +74,12 @@ function clickedInEl (el: HTMLElement, x: number, y: number): boolean {
 }
 
 export default {
-  name: 'click-outside',
-
   // [data-app] may not be found
   // if using bind, inserted makes
   // sure that the root element is
   // available, iOS does not support
   // clicks on body
-  inserted (el: ClickOutsideHTMLElement, binding: ClickOutsideDirective) {
+  inserted (el: HTMLElement, binding: ClickOutsideDirective) {
     const onClick = (e: Event) => directive(e as PointerEvent, el, binding)
     // iOS does not recognize click events on document
     // or body, this is the entire purpose of the v-app
@@ -96,7 +90,9 @@ export default {
     el._clickOutside = onClick
   },
 
-  unbind (el: ClickOutsideHTMLElement) {
+  unbind (el: HTMLElement) {
+    if (!el._clickOutside) return
+
     const app = document.querySelector('[data-app]') ||
       document.body // This is only for unit tests
     app && app.removeEventListener('click', el._clickOutside, true)

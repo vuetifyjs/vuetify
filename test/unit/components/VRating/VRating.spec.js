@@ -43,6 +43,34 @@ test('VRating.js', ({ mount }) => {
     expect(input).toHaveBeenCalledWith(2)
   })
 
+  it('should not null the rating if clicked on the current value unless clearable', async () => {
+    const wrapper = mount(VRating)
+
+    const input = jest.fn()
+    wrapper.vm.$on('input', input)
+    expect(wrapper.vm.internalValue).toBe(0)
+
+    wrapper.setProps({ value: 1, clearable: false })
+
+    expect(wrapper.vm.internalValue).toBe(1)
+
+    const icon = wrapper.find('.v-icon')[0]
+
+    icon.trigger('click')
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.internalValue).toBe(1)
+
+    wrapper.setProps({ clearable: true })
+
+    icon.trigger('click')
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.internalValue).toBe(0)
+  })
+
   it('should not react to events when readonly', async () => {
     const wrapper = mount(VRating, {
       propsData: {

@@ -2,9 +2,7 @@
 @import '../theme'
 
 v-breadcrumbs($material)
-  li.v-breadcrumbs__divider,
-  li:last-child .v-breadcrumbs__item,
-  li .v-breadcrumbs__item--disabled
+  .v-breadcrumbs__divider, .v-breadcrumbs__item--disabled
     color: $material.text.disabled
 
 theme(v-breadcrumbs, "v-breadcrumbs")
@@ -25,10 +23,6 @@ theme(v-breadcrumbs, "v-breadcrumbs")
 
     .v-icon
       font-size: $breadcrumbs-item-large-font-size
-
-    &:last-child a
-      cursor: default
-      pointer-events: none
 
     &:nth-child(even)
       padding: $breadcrumbs-even-child-padding

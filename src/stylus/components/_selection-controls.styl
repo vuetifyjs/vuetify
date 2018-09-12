@@ -42,13 +42,18 @@ rtl(v-selection-control-rtl, "v-input--selection-controls")
     input
       position: absolute
       opacity: 0
+      width: 100%
+      height: 100%
+      cursor: pointer
+      user-select: none
 
     // Sibling selector to avoid targeting v-radio-group's label
     & + .v-label
-      user-select: none
       cursor: pointer
+      user-select: none
 
   &__ripple
+    border-radius: 50%
     cursor: pointer
     height: 48px
     position: absolute
@@ -58,7 +63,7 @@ rtl(v-selection-control-rtl, "v-input--selection-controls")
     top: calc(50% - 24px)
 
     &:before
-      border-radius: 50%
+      border-radius: inherit
       bottom: 0
       content: ''
       position: absolute

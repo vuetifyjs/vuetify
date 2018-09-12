@@ -58,26 +58,24 @@ export default CalendarWithIntervals.extend({
       ])
     },
     genHeadWeekday (day: VTimestamp): VNode {
-      const color = day.present ? this.computedColor : null
+      const color = day.present ? this.color : undefined
 
-      return this.$createElement('div', {
-        staticClass: 'v-calendar-daily_head-weekday',
-        class: this.addTextColorClassChecks({}, color)
-      }, this.weekdayFormatter(day, this.shortWeekdays))
+      return this.$createElement('div', this.setTextColor(color, {
+        staticClass: 'v-calendar-daily_head-weekday'
+      }), this.weekdayFormatter(day, this.shortWeekdays))
     },
     genHeadDayLabel (day: VTimestamp): VNode {
-      const color = day.present ? this.computedColor : null
+      const color = day.present ? this.color : undefined
 
-      return this.$createElement('div', {
+      return this.$createElement('div', this.setTextColor(color, {
         staticClass: 'v-calendar-daily_head-day-label',
-        class: this.addTextColorClassChecks({}, color),
         on: this.getMouseEventHandlers({
           'click:date': { event: 'click', stop: true },
           'contextmenu:date': { event: 'contextmenu', stop: true, prevent: true, result: false }
         }, e => {
           return day
         })
-      }, this.dayFormatter(day, false))
+      }), this.dayFormatter(day, false))
     },
     genBody (): VNode {
       return this.$createElement('div', {

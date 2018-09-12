@@ -80,10 +80,9 @@ export default mixins(
           class: this.classes,
           on: this.$listeners
         }, [
-          h('div', {
-            staticClass: 'v-snack__wrapper',
-            class: this.addBackgroundColorClassChecks()
-          }, [
+          h('div', this.setBackgroundColor(this.color, {
+            staticClass: 'v-snack__wrapper'
+          }), [
             h('div', {
               staticClass: 'v-snack__content'
             }, this.$slots.default)

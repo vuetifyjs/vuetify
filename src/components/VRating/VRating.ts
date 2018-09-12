@@ -47,6 +47,7 @@ export default mixins(
       type: String,
       default: 'primary'
     },
+    dense: Boolean,
     emptyIcon: {
       type: String,
       default: '$vuetify.icons.ratingEmpty'
@@ -64,6 +65,7 @@ export default mixins(
       type: [Number, String],
       default: 5
     },
+    clearable: Boolean,
     readonly: Boolean,
     hover: Boolean,
     value: {
@@ -128,7 +130,12 @@ export default mixins(
       return (e: MouseEvent) => {
         if (this.readonly) return
 
-        this.internalValue = this.genHoverIndex(e, i)
+        const newValue = this.genHoverIndex(e, i)
+        if (this.clearable && this.internalValue === newValue) {
+          this.internalValue = 0
+        } else {
+          this.internalValue = newValue
+        }
       }
     },
     createProps (i: number): ItemSlotProps {
@@ -199,12 +206,11 @@ export default mixins(
         }
       }
 
-      return this.$createElement(VIcon, {
+      return this.$createElement(VIcon, this.setTextColor(this.getColor(props), {
         directives: this.directives,
         props: this.iconProps,
-        class: this.addTextColorClassChecks({}, this.getColor(props)),
         on: listeners
-      }, [this.getIconName(props)])
+      }), [this.getIconName(props)])
     }
   },
 
@@ -214,7 +220,8 @@ export default mixins(
     return h('div', {
       staticClass: 'v-rating',
       class: {
-        'v-rating--readonly': this.readonly
+        'v-rating--readonly': this.readonly,
+        'v-rating--dense': this.dense
       }
     }, children)
   }

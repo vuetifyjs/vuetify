@@ -111,6 +111,7 @@ rtl(v-text-field-rtl, "v-text-field")
     line-height: 20px
     padding: 8px 0 8px
     max-width: 100%
+    min-width: 0px
     width: 100%
 
   .v-input__prepend-inner,
@@ -146,7 +147,8 @@ rtl(v-text-field-rtl, "v-text-field")
       max-width: 100%
       transform: translateY(-18px) scale(.75)
 
-  .v-input__slot
+  & > .v-input__control > .v-input__slot
+    cursor: text
     transition: background $primary-transition
 
     &:before,
@@ -201,7 +203,6 @@ rtl(v-text-field-rtl, "v-text-field")
   &__slot
     display: flex
     flex: 1 1 auto
-    height: 100%
     position: relative
 
   &--box,
