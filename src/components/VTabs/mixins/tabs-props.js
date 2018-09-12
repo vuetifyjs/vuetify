@@ -6,6 +6,10 @@
 /* @vue/component */
 export default {
   props: {
+    activeClass: {
+      type: String,
+      default: 'v-tabs__item--active'
+    },
     alignWithTitle: Boolean,
     centered: Boolean,
     fixedTabs: Boolean,
@@ -17,6 +21,10 @@ export default {
     },
     hideSlider: Boolean,
     iconsAndText: Boolean,
+    mandatory: {
+      type: Boolean,
+      default: true
+    },
     mobileBreakPoint: {
       type: [Number, String],
       default: 1264,

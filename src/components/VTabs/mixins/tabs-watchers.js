@@ -6,15 +6,21 @@
 /* @vue/component */
 export default {
   watch: {
-    activeTab (tab, prev) {
-      !prev && tab && this.updateTabs()
+    activeTab (val, oldVal) {
+      this.setOverflow()
 
-      setTimeout(this.callSlider, 0)
+      if (!val) return
 
-      if (!tab) return
+      this.tabItems && this.tabItems(
+        this.getValue(val, this.items.indexOf(val))
+      )
 
-      const action = tab.action
-      this.tabItems && this.tabItems(action === tab ? this.tabs.indexOf(tab) : action)
+      // Do nothing for first tab
+      // is handled from isBooted
+      // watcher
+      if (oldVal == null) return
+
+      this.callSlider()
     },
     alignWithTitle: 'callSlider',
     centered: 'callSlider',
@@ -22,12 +28,15 @@ export default {
     hasArrows (val) {
       if (!val) this.scrollOffset = 0
     },
-    isBooted: 'findActiveLink',
+    isBooted: 'init',
+    /* @deprecate */
+    internalValue (val) {
+      if (!this.$listeners['input']) return
+
+      this.$emit('input', val)
+    },
     lazyValue: 'updateTabs',
     right: 'callSlider',
-    value (val) {
-      this.lazyValue = val
-    },
     '$vuetify.application.left': 'onResize',
     '$vuetify.application.right': 'onResize',
     scrollOffset (val) {
