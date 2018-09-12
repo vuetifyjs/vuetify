@@ -233,6 +233,7 @@ export default mixins(
       return this.$createElement(VTreeviewNode, {
         key: getObjectValueByPath(item, this.itemKey),
         props: {
+          activeClass: this.activeClass,
           item,
           selectable: this.selectable,
           indeterminateIcon: this.indeterminateIcon,
