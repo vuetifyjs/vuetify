@@ -212,7 +212,7 @@ export default mixins(
         staticClass: 'v-treeview-node__root',
         on: {
           click: () => {
-            if (this.openOnClick) {
+            if (this.openOnClick && this.children) {
               this.open()
             } else {
               this.isActive = !this.isActive
