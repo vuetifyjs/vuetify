@@ -1,10 +1,8 @@
-// Types
-import { VNode } from 'vue'
-
 // Components
 import { VExpandTransition } from '../transitions'
-import VTreeviewNode from './VTreeviewNode'
 import { VIcon } from '../VIcon'
+import VTreeview from './VTreeview'
+import VTreeviewNode from './VTreeviewNode'
 
 // Mixins
 import { inject as RegistrableInject } from '../../mixins/registrable'
@@ -13,6 +11,15 @@ import { inject as RegistrableInject } from '../../mixins/registrable'
 import mixins from '../../util/mixins'
 import { getObjectValueByPath } from '../../util/helpers'
 import { PropValidator } from 'vue/types/options'
+
+// Types
+import Vue, { VNode } from 'vue'
+
+type VTreeViewInstance = InstanceType<typeof VTreeview>
+
+interface options extends Vue {
+  treeview: VTreeViewInstance
+}
 
 export const VTreeviewNodeProps = {
   activatable: Boolean,
@@ -62,7 +69,7 @@ export const VTreeviewNodeProps = {
   transition: Boolean
 }
 
-export default mixins(
+export default mixins<options>(
   RegistrableInject('treeview')
   /* @vue/component */
 ).extend({
