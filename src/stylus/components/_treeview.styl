@@ -16,7 +16,7 @@ theme(v-treeview, "v-treeview")
     margin-left: 0
 
   &-node
-    margin-left: 24px
+    margin-left: 28px
 
     &--click
       > .v-treeview-node__root,
@@ -25,19 +25,21 @@ theme(v-treeview, "v-treeview")
         user-select: none
 
     &--leaf
-      margin-left: 48px
+      margin-left: 56px
+
+      > .v-treeview-node__root
+        padding-left: 4px
 
     &__root
       display: flex
       align-items: center
-      height: 32px
+      height: 34px
 
     &__content
       display: flex
       flex-grow: 1
       flex-shrink: 0
       align-items: center
-      padding-left: 4px
 
       // TODO: this is temporary fix for d-flex * shenanigans
       .v-btn
@@ -46,17 +48,16 @@ theme(v-treeview, "v-treeview")
 
     &__label
       font-size: 1.2rem
-      padding: 0 4px
-      margin-left: 4px
+      margin-left: 8px
 
       .v-icon
         padding-right: 8px
 
     &__checkbox
       user-select: none
-      padding-left: 4px
 
     &__toggle
+      padding: 0 4px
       user-select: none
       transform: rotate(-90deg)
 
