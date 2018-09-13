@@ -50,7 +50,10 @@ export default mixins(
   },
 
   props: {
-    active: Array as PropValidator<(string | number)[]>,
+    active: {
+      type: Array,
+      default: () => ([])
+    } as PropValidator<(string | number)[]>,
     items: {
       type: Array,
       default: () => ([])
