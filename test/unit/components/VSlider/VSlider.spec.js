@@ -536,6 +536,17 @@ test('VSlider.vue', ({ mount }) => {
     wrapper.vm.$vuetify.rtl = undefined
   })
 
+  it('should display label and have different aria-label', () => {
+    const wrapper = mount(VSlider, {
+      propsData: { label: 'foo' },
+      attrs: {'aria-label': 'bar'}
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    expect(warning).toHaveBeenTipped()
+  })
+
   it('should display tick labels', () => {
     const wrapper = mount(VSlider, {
       propsData: {
