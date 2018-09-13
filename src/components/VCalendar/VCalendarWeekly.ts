@@ -8,19 +8,20 @@ import { VNode } from 'vue'
 import CalendarBase from './mixins/calendar-base'
 
 // Util
-import { validateNumber } from './util/validate'
-import { VTimestamp, findWeekday, createDayList, prevDay, copyTimestamp, getDayIdentifier } from './util/timestamp'
+import props from './util/props'
+import {
+  VTimestamp,
+  VTimestampFormatter,
+  createDayList,
+  getDayIdentifier,
+  createNativeLocaleFormatter
+} from './util/timestamp'
 
 /* @vue/component */
 export default CalendarBase.extend({
   name: 'v-calendar-weekly',
 
-  props: {
-    minWeeks: {
-      validate: validateNumber,
-      default: 1
-    }
-  },
+  props: props.weeks,
 
   computed: {
     classes (): object {
@@ -33,12 +34,9 @@ export default CalendarBase.extend({
       return parseInt(this.minWeeks)
     },
     days (): VTimestamp[] {
-      const weekdays = this.weekdays
-      const startWeekday = weekdays[0]
-      const endWeekday = weekdays[weekdays.length - 1]
-      const minDays = this.parsedMinWeeks * weekdays.length
-      const start = findWeekday(copyTimestamp(this.parsedStart), startWeekday, prevDay)
-      const end = findWeekday(copyTimestamp(this.parsedEnd), endWeekday)
+      const minDays = this.parsedMinWeeks * this.weekdays.length
+      const start = this.getStartOfWeek(this.parsedStart)
+      const end = this.getEndOfWeek(this.parsedEnd)
 
       return createDayList(
         start,
@@ -51,19 +49,29 @@ export default CalendarBase.extend({
     },
     todayWeek (): VTimestamp[] {
       const today = this.times.today
-      const weekdays = this.weekdays
-      const startWeekday = weekdays[0]
-      const endWeekday = weekdays[weekdays.length - 1]
-      const start = findWeekday(copyTimestamp(today), startWeekday, prevDay)
-      const end = findWeekday(copyTimestamp(today), endWeekday)
+      const start = this.getStartOfWeek(today)
+      const end = this.getEndOfWeek(today)
 
       return createDayList(
         start,
         end,
         today,
         this.weekdaySkips,
-        weekdays.length,
-        weekdays.length
+        this.weekdays.length,
+        this.weekdays.length
+      )
+    },
+    monthFormatter (): VTimestampFormatter<string> {
+      if (this.monthFormat) {
+        return this.monthFormat as VTimestampFormatter<string>
+      }
+
+      const longOptions = { timeZone: 'UTC', month: 'long' }
+      const shortOptions = { timeZone: 'UTC', month: 'short' }
+
+      return createNativeLocaleFormatter(
+        this.locale,
+        (tms, short) => short ? shortOptions : longOptions
       )
     }
   },
@@ -113,6 +121,7 @@ export default CalendarBase.extend({
       const outside = this.isOutside(day)
       const slot = this.$scopedSlots.day
       const slotData = { outside, ...day }
+      const hasMonth = day.day === 1 && this.showMonthOnFirst
 
       return this.$createElement('div', {
         key: day.date,
@@ -121,11 +130,13 @@ export default CalendarBase.extend({
         on: this.getDefaultMouseEventHandlers(':day', e => day)
       }, [
         this.genDayLabel(day),
+        hasMonth ? this.genDayMonth(day) : '',
         slot ? slot(slotData) : ''
       ])
     },
     genDayLabel (day: VTimestamp): VNode {
       const color = day.present ? this.color : undefined
+      const slot = this.$scopedSlots.dayLabel
 
       return this.$createElement('div', this.setTextColor(color, {
         staticClass: 'v-calendar-weekly__day-label',
@@ -133,7 +144,15 @@ export default CalendarBase.extend({
           'click:date': { event: 'click', stop: true },
           'contextmenu:date': { event: 'contextmenu', stop: true, prevent: true, result: false }
         }, e => day)
-      }), this.dayFormatter(day, false))
+      }), slot ? slot(day) : this.dayFormatter(day, false))
+    },
+    genDayMonth (day: VTimestamp): VNode | string {
+      const color = day.present ? this.color : undefined
+      const slot = this.$scopedSlots.dayMonth
+
+      return this.$createElement('div', this.setTextColor(color, {
+        staticClass: 'v-calendar-weekly__day-month'
+      }), slot ? slot(day) : this.monthFormatter(day, this.shortMonths))
     }
   },
 

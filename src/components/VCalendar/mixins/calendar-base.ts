@@ -7,60 +7,29 @@ import Times from './times'
 import Mouse from './mouse'
 
 // Util
+import props from '../util/props'
 import {
   VTimestamp,
   VTimestampFormatter,
-  validateTimestamp,
   parseTimestamp,
+  copyTimestamp,
   getWeekdaySkips,
+  findWeekday,
+  prevDay,
+  updateWeekday,
+  updateFormatted,
+  updateRelative,
+  daysInMonth,
   createDayList,
-  createNativeLocaleFormatter
+  createNativeLocaleFormatter,
+  DAY_MIN
 } from '../util/timestamp'
 
 /* @vue/component */
 export default mixins(Colorable, Themeable, Times, Mouse).extend({
   name: 'calendar-base',
 
-  props: {
-    start: {
-      type: String,
-      required: true,
-      validate: validateTimestamp
-    },
-    end: {
-      type: String,
-      validate: validateTimestamp,
-      default: '0000-00-00'
-    },
-    weekdays: {
-      type: Array as () => number[],
-      default: () => [0, 1, 2, 3, 4, 5, 6]
-    },
-    hideHeader: {
-      type: Boolean,
-      default: false
-    },
-    shortWeekdays: {
-      type: Boolean,
-      default: true
-    },
-    weekdayFormat: {
-      type: Function, // VTimestampFormatter<string>,
-      default: null
-    },
-    dayFormat: {
-      type: Function, // VTimestampFormatter<string>,
-      default: null
-    },
-    locale: {
-      type: String,
-      default: 'en-us'
-    }
-  },
-
-  data: () => ({
-    defaultColor: 'primary'
-  }),
+  props: props.base,
 
   computed: {
     weekdaySkips (): number[] {
@@ -115,6 +84,34 @@ export default mixins(Colorable, Themeable, Times, Mouse).extend({
         'v-future': timestamp.future,
         'v-outside': outside
       }
+    },
+    getStartOfWeek (timestamp: VTimestamp): VTimestamp {
+      const start = copyTimestamp(timestamp)
+      findWeekday(start, this.weekdays[0], prevDay)
+      updateFormatted(start)
+      updateRelative(start, this.times.today, start.hasTime)
+      return start
+    },
+    getEndOfWeek (timestamp: VTimestamp): VTimestamp {
+      const end = copyTimestamp(timestamp)
+      findWeekday(end, this.weekdays[this.weekdays.length - 1])
+      updateFormatted(end)
+      updateRelative(end, this.times.today, end.hasTime)
+      return end
+    },
+    getStartOfMonth (timestamp: VTimestamp): VTimestamp {
+      const start = copyTimestamp(timestamp)
+      start.day = DAY_MIN
+      updateWeekday(start)
+      updateFormatted(start)
+      return start
+    },
+    getEndOfMonth (timestamp: VTimestamp): VTimestamp {
+      const end = copyTimestamp(timestamp)
+      end.day = daysInMonth(end.year, end.month)
+      updateWeekday(end)
+      updateFormatted(end)
+      return end
     }
   }
 })

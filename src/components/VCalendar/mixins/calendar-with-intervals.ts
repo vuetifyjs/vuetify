@@ -3,7 +3,7 @@
 import CalendarBase from './calendar-base'
 
 // Util
-import { validateNumber } from '../util/validate'
+import props from '../util/props'
 import {
   VTimestamp,
   VTimestampFormatter,
@@ -18,48 +18,7 @@ import {
 export default CalendarBase.extend({
   name: 'calendar-with-intervals',
 
-  props: {
-    maxDays: {
-      type: Number,
-      default: 7
-    },
-    shortIntervals: {
-      type: Boolean,
-      default: true
-    },
-    intervalHeight: {
-      type: [Number, String],
-      default: 40,
-      validate: validateNumber
-    },
-    intervalMinutes: {
-      type: [Number, String],
-      default: 60,
-      validate: validateNumber
-    },
-    firstInterval: {
-      type: [Number, String],
-      default: 0,
-      validate: validateNumber
-    },
-    intervalCount: {
-      type: [Number, String],
-      default: 24,
-      validate: validateNumber
-    },
-    intervalFormat: {
-      type: Function, // VTimestampFormatter<string>,
-      default: null
-    },
-    intervalStyle: {
-      type: Function, // (interval: VTimestamp): object
-      default: null
-    },
-    showIntervalLabel: {
-      type: Function, // (interval: VTimestamp): boolean
-      default: null
-    }
-  },
+  props: props.intervals,
 
   computed: {
     parsedFirstInterval (): number {

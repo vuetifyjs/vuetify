@@ -53,6 +53,8 @@ theme(v-calendar-weekly, "v-calendar-weekly")
       &.v-present
         .v-calendar-weekly__day-label
           border: 1px solid currentColor;
+        .v-calendar-weekly__day-month
+          color: currentColor
 
       .v-calendar-weekly__day-label
         position: absolute;
@@ -70,3 +72,13 @@ theme(v-calendar-weekly, "v-calendar-weekly")
 
         &:hover
           text-decoration: underline;
+
+      .v-calendar-weekly__day-month
+        position: absolute;
+        text-decoration: none;
+        user-select: none;
+        box-shadow: none;
+        top: 0;
+        left: $calendar-weekly-day-month-left;
+        height: $calendar-weekly-day-label-size;
+        line-height: $calendar-weekly-day-label-size;
