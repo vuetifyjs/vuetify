@@ -15,8 +15,11 @@ import { provide as RegistrableProvide } from '../../mixins/registrable'
 // Utils
 import { getObjectValueByPath, deepEqual } from '../../util/helpers'
 import mixins from '../../util/mixins'
+import { consoleWarn } from '../../util/console'
 
 type VTreeviewNodeInstance = InstanceType<typeof VTreeviewNode>
+
+type NodeCache = (string | number)[]
 
 type NodeState = {
   parent: number | string | null
@@ -53,7 +56,7 @@ export default mixins(
     active: {
       type: Array,
       default: () => ([])
-    } as PropValidator<(string | number)[]>,
+    } as PropValidator<NodeCache>,
     items: {
       type: Array,
       default: () => ([])
@@ -63,20 +66,20 @@ export default mixins(
     open: {
       type: Array,
       default: () => ([])
-    } as PropValidator<(string | number)[]>,
+    } as PropValidator<NodeCache>,
     openAll: Boolean,
     value: {
       type: Array,
       default: () => ([])
-    } as PropValidator<(string | number)[]>,
+    } as PropValidator<NodeCache>,
     ...VTreeviewNodeProps
   },
 
   data: () => ({
     nodes: {} as Record<string | number, NodeState>,
-    selectedCache: [] as (string | number)[],
-    activeCache: [] as (string | number)[],
-    openCache: [] as (string | number)[]
+    selectedCache: [] as NodeCache,
+    activeCache: [] as NodeCache,
+    openCache: [] as NodeCache
   }),
 
   watch: {
@@ -98,14 +101,20 @@ export default mixins(
       },
       deep: true
     },
+    active (v) {
+      if (deepEqual(this.activeCache, v)) return
+
+      this.active.forEach(key => this.updateActive(key, true))
+      this.emitActive()
+    },
     value (v) {
       if (!v || deepEqual(v, this.selectedCache)) return
 
       this.value.forEach(key => this.updateSelected(key, true))
       this.emitSelected()
     },
-    open () {
-      if (deepEqual(this.openCache, this.open)) return
+    open (v) {
+      if (deepEqual(this.openCache, v)) return
 
       this.openCache.forEach(key => this.updateOpen(key, false))
       this.open.forEach(key => this.updateOpen(key, true))
@@ -122,24 +131,21 @@ export default mixins(
   },
 
   mounted () {
+    // Save the developer from themselves
+    if (this.$slots.prepend || this.$slots.append) {
+      consoleWarn('The prepend and append slots require a slot-scope attribute', this)
+    }
+
     if (this.openAll) {
       Object.keys(this.nodes).forEach(key => this.updateOpen(ston(key), true))
     } else {
       this.open.forEach(key => this.updateOpen(key, true))
     }
+
     this.emitOpen()
   },
 
   methods: {
-    countItems (items: any[], count = 0) {
-      for (let i = 0; i < items.length; i++) {
-        const item = items[i]
-        count += 1
-        count += item.children ? this.countItems(item.children) : 0
-      }
-
-      return count
-    },
     buildTree (items: any[], parent: (string | number | null) = null) {
       for (let i = 0; i < items.length; i++) {
         const item = items[i]
@@ -179,6 +185,59 @@ export default mixins(
         this.updateVnodeState(key)
       }
     },
+    countItems (items: any[]) {
+      let count = 0
+      for (let i = 0; i < items.length; i++) {
+        const item = items[i]
+        count += 1
+        count += item.children ? this.countItems(item.children) : 0
+      }
+
+      return count
+    },
+    calculateState (node: NodeState, state: Record<string | number, NodeState>) {
+      const counts = node.children.reduce((counts: number[], child: string | number) => {
+        counts[0] += +Boolean(state[child].isSelected)
+        counts[1] += +Boolean(state[child].isIndeterminate)
+        return counts
+      }, [0, 0])
+
+      node.isSelected = !!node.children.length && counts[0] === node.children.length
+      node.isIndeterminate = !node.isSelected && (counts[0] > 0 || counts[1] > 0)
+
+      return node
+    },
+    emitOpen () {
+      this.$emit('update:open', this.openCache)
+    },
+    emitSelected () {
+      this.$emit('change', this.selectedCache)
+    },
+    emitActive () {
+      this.$emit('update:active', this.activeCache)
+    },
+    getDescendants (key: string | number, descendants: NodeCache = []) {
+      const children = this.nodes[key].children
+
+      descendants.push(...children)
+
+      for (let i = 0; i < children.length; i++) {
+        descendants = this.getDescendants(children[i], descendants)
+      }
+
+      return descendants
+    },
+    getParents (key: string | number) {
+      let parent = this.nodes[key].parent
+
+      const parents = []
+      while (parent !== null) {
+        parents.push(parent)
+        parent = this.nodes[parent].parent
+      }
+
+      return parents
+    },
     register (node: VTreeviewNodeInstance) {
       const key = getObjectValueByPath(node.item, this.itemKey)
       this.nodes[key].vnode = node
@@ -199,22 +258,14 @@ export default mixins(
         this.activeCache = []
       }
 
-      this.nodes[key].isActive = value
+      const node = this.nodes[key]
+
+      if (!node) return
       if (value) this.activeCache.push(key)
 
+      node.isActive = value
+
       this.updateVnodeState(key)
-    },
-    calculateState (node: NodeState, state: Record<string | number, NodeState>) {
-      const counts = node.children.reduce((counts: number[], child: string | number) => {
-        counts[0] += +(state.hasOwnProperty(child) ? state[child].isSelected : false)
-        counts[1] += +(state.hasOwnProperty(child) ? state[child].isIndeterminate : false)
-        return counts
-      }, [0, 0])
-
-      node.isSelected = !!node.children.length && counts[0] === node.children.length
-      node.isIndeterminate = !node.isSelected && (counts[0] > 0 || counts[1] > 0)
-
-      return node
     },
     updateSelected (key: string | number, isSelected: boolean) {
       if (!this.nodes.hasOwnProperty(key)) return
@@ -238,7 +289,13 @@ export default mixins(
       all.forEach(this.updateVnodeState)
 
       this.selectedCache = this.selectedCache.filter(k => changed[ston(k)] !== false)
-      this.selectedCache.push(...Object.keys(changed).filter(k => changed[k] === true).map(ston))
+      Object.keys(changed).forEach(k => {
+        if (changed[k] === true) {
+          const cacheKey = ston(k)
+
+          !this.selectedCache.includes(cacheKey) && this.selectedCache.push(cacheKey)
+        }
+      })
     },
     updateOpen (key: string | number, isOpen: boolean) {
       if (!this.nodes.hasOwnProperty(key)) return
@@ -250,42 +307,11 @@ export default mixins(
       } else {
         node.isOpen = isOpen
 
-        this.openCache = this.openCache.filter(k => this.nodes[k].isOpen || k !== key)
+        this.openCache = this.openCache.filter(k => this.nodes[k].isOpen && k !== key)
         if (node.isOpen) this.openCache.push(key)
 
         this.updateVnodeState(key)
       }
-    },
-    emitOpen () {
-      this.$emit('update:open', this.openCache)
-    },
-    emitSelected () {
-      this.$emit('change', this.selectedCache)
-    },
-    emitActive () {
-      this.$emit('update:active', this.activeCache)
-    },
-    getDescendants (key: string | number, descendants: (string | number)[] = []) {
-      const children = this.nodes[key].children
-
-      descendants.push(...children)
-
-      for (let i = 0; i < children.length; i++) {
-        descendants = this.getDescendants(children[i], descendants)
-      }
-
-      return descendants
-    },
-    getParents (key: string | number) {
-      let parent = this.nodes[key].parent
-
-      const parents = []
-      while (parent !== null) {
-        parents.push(parent)
-        parent = this.nodes[parent].parent
-      }
-
-      return parents
     },
     updateVnodeState (key: string | number) {
       const node = this.nodes[key]
@@ -302,6 +328,7 @@ export default mixins(
   render (h): VNode {
     const children: VNodeChildrenArrayContents = this.items.length
       ? this.items.map(VTreeviewNode.options.methods.genChild.bind(this))
+      /* istanbul ignore next */
       : this.$slots.default
 
     return h('div', {

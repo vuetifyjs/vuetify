@@ -102,6 +102,11 @@ test('VTreeView.ts', ({ mount }) => {
 
     expect(fn).toHaveBeenCalledTimes(1)
     expect(fn).toHaveBeenCalledWith([0])
+
+    wrapper.find('.v-treeview-node__root')[0].trigger('click')
+    await wrapper.vm.$nextTick()
+
+    expect(fn).toHaveBeenCalledWith([])
   })
 
   it('should allow multiple active nodes with prop multipleActive', async () => {
@@ -140,6 +145,10 @@ test('VTreeView.ts', ({ mount }) => {
     expect(wrapper.find('.v-treeview-node').length).toBe(2)
     expect(wrapper.find('.v-treeview-node--selected').length).toBe(2)
     expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({ value: undefined })
+    await wrapper.vm.$nextTick()
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should open all children when using open-all prop', async () => {
@@ -153,5 +162,113 @@ test('VTreeView.ts', ({ mount }) => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should react to open changes', async () => {
+    const wrapper = mount(VTreeview, {
+      propsData: {
+        items: threeLevels,
+        open: [1]
+      }
+    })
+
+    wrapper.setProps({ open: [0, 1]})
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({ open: [0] })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({ open: [0, 1] })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    expect(wrapper.vm.openCache).toEqual([0, 1])
+
+    // Should not update open values that do not exist in the tree
+    wrapper.setProps({ open: [7] })
+
+    await wrapper.vm.$nextTick()
+    expect(wrapper.html()).toMatchSnapshot()
+
+    expect(wrapper.vm.openCache).toEqual([])
+  })
+
+  it('should update selected and active on created', async () => {
+    const wrapper = mount(VTreeview, {
+      propsData: {
+        items: threeLevels,
+        active: [2],
+        value: [1]
+      }
+    })
+
+    expect(wrapper.vm.activeCache).toEqual([2])
+    expect(wrapper.vm.selectedCache).toEqual([1, 2])
+  })
+
+  it('should react to changes for value, selected and activated', async () => {
+    const wrapper = mount(VTreeview, {
+      propsData: {
+        items: threeLevels,
+        active: [2],
+        value: [1]
+      }
+    })
+
+    wrapper.setProps({ active: [0] })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.activeCache).toEqual([0])
+
+    // Should not update values that do not exist in the tree
+
+    wrapper.setProps({ active: [7], value: [7] })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.activeCache).toEqual([])
+    expect(wrapper.vm.selectedCache).toEqual([1, 2])
+
+    // Should rebuild tree and reuse cached values
+
+    wrapper.setProps({ active: [0], items: singleRootTwoChildren })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.activeCache).toEqual([0])
+    expect(wrapper.vm.selectedCache).toEqual([1, 2, 0])
+  })
+
+  it('should accept string value for id', async () => {
+    const wrapper = mount(VTreeview, {
+      propsData: { itemKey: 'name' }
+    })
+
+    wrapper.setProps({ items: [{ name: 'Foobar' }]})
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.nodes['Foobar']).toBeTruthy()
+
+    wrapper.setProps({ value: ['Foobar'] })
+
+    await wrapper.vm.$nextTick()
+  })
+
+  it('should warn developer when using non-scoped slots', () => {
+    const wrapper = mount(VTreeview, {
+      slots: {
+        prepend: [{ render: h => h('div') }],
+        append: [{ render: h => h('div') }]
+      }
+    })
+
+    expect('[Vuetify] The prepend and append slots require a slot-scope attribute').toHaveBeenTipped()
   })
 })
