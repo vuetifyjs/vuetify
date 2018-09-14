@@ -37,6 +37,8 @@ export function factory (
           return this.internalLazyValue
         },
         set (val: any) {
+          if (val === this.internalLazyValue) return
+
           this.internalLazyValue = val
 
           this.$emit(event, val)

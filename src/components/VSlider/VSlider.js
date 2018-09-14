@@ -224,7 +224,6 @@ export default {
     genDefaultSlot () {
       const children = [this.genLabel()]
       const slider = this.genSlider()
-
       this.inverseLabel
         ? children.unshift(slider)
         : children.push(slider)
@@ -249,7 +248,11 @@ export default {
           tabindex: this.disabled ? -1 : this.$attrs.tabindex,
           value: this.internalValue,
           readonly: true,
-          'aria-readonly': String(this.readonly)
+          'aria-readonly': String(this.readonly),
+          'aria-valuemin': this.min,
+          'aria-valuemax': this.max,
+          'aria-valuenow': this.internalValue,
+          ...this.$attrs
         },
         on: this.genListeners(),
         ref: 'input'

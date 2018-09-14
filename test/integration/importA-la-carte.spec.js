@@ -57,9 +57,11 @@ import VSystemBar from '@/components/VSystemBar'
 import VTabs from '@/components/VTabs'
 import VTextarea from '@/components/VTextarea'
 import VTextField from '@/components/VTextField'
+import VTimeline from '@/components/VTimeline'
 import VTimePicker from '@/components/VTimePicker'
 import VToolbar from '@/components/VToolbar'
 import VTooltip from '@/components/VTooltip'
+import VTreeview from '@/components/VTreeview'
 import Transitions from '@/components/transitions'
 import Vuetify from '@/components/Vuetify'
 
@@ -121,9 +123,11 @@ const components = {
   VTabs,
   VTextarea,
   VTextField,
+  VTimeline,
   VTimePicker,
   VToolbar,
   VTooltip,
+  VTreeview,
   Transitions
 }
 
