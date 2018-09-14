@@ -4,7 +4,7 @@ export default {
 
   functional: true,
 
-  render (h, { data, children }) {
+  render (h, { data, children = [] }) {
     data.staticClass = data.staticClass ? `v-list__tile__action ${data.staticClass}` : 'v-list__tile__action'
     const filteredChild = children.filter(VNode => {
       return VNode.isComment === false && VNode.text !== ' '
