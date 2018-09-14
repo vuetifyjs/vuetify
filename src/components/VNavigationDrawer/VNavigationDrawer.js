@@ -2,6 +2,7 @@ import '../../stylus/components/_navigation-drawer.styl'
 
 // Mixins
 import Applicationable from '../../mixins/applicationable'
+import Dependent from '../../mixins/dependent'
 import Overlayable from '../../mixins/overlayable'
 import SSRBootable from '../../mixins/ssr-bootable'
 import Themeable from '../../mixins/themeable'
@@ -30,6 +31,7 @@ export default {
       'right',
       'width'
     ]),
+    Dependent,
     Overlayable,
     SSRBootable,
     Themeable
@@ -259,7 +261,8 @@ export default {
         name: 'click-outside',
         value: () => (this.isActive = false),
         args: {
-          closeConditional: this.closeConditional
+          closeConditional: this.closeConditional,
+          include: this.getOpenDependentElements
         }
       }]
 
