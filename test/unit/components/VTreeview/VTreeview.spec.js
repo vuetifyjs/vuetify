@@ -172,6 +172,9 @@ test('VTreeView.ts', ({ mount }) => {
       }
     })
 
+    const fn = jest.fn()
+
+    wrapper.vm.$on('update:open', fn)
     wrapper.setProps({ open: [0, 1]})
 
     await wrapper.vm.$nextTick()
@@ -190,7 +193,7 @@ test('VTreeView.ts', ({ mount }) => {
 
     expect(wrapper.html()).toMatchSnapshot()
 
-    expect(wrapper.vm.openCache).toEqual([0, 1])
+    expect(fn).toHaveBeenCalledWith([0, 1])
 
     // Should not update open values that do not exist in the tree
     wrapper.setProps({ open: [7] })
@@ -198,7 +201,7 @@ test('VTreeView.ts', ({ mount }) => {
     await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
 
-    expect(wrapper.vm.openCache).toEqual([])
+    expect(fn).toHaveBeenCalledWith([])
   })
 
   it('should update selected and active on created', async () => {
@@ -210,8 +213,12 @@ test('VTreeView.ts', ({ mount }) => {
       }
     })
 
-    expect(wrapper.vm.activeCache).toEqual([2])
-    expect(wrapper.vm.selectedCache).toEqual([1, 2])
+    // TODO: I can not find away in avoriaz
+    // to catch events being emitted from a
+    // lifecycle hook. We should not assert
+    // internal state.
+    expect([...wrapper.vm.activeCache]).toEqual([2])
+    expect([...wrapper.vm.selectedCache]).toEqual([1, 2])
   })
 
   it('should react to changes for value, selected and activated', async () => {
@@ -223,26 +230,31 @@ test('VTreeView.ts', ({ mount }) => {
       }
     })
 
+    const active = jest.fn()
+    const selected = jest.fn()
+    wrapper.vm.$on('update:active', active)
+    wrapper.vm.$on('change', selected)
+
     wrapper.setProps({ active: [0] })
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.activeCache).toEqual([0])
+    expect(active).toHaveBeenCalledWith([0])
 
     // Should not update values that do not exist in the tree
 
     wrapper.setProps({ active: [7], value: [7] })
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.activeCache).toEqual([])
-    expect(wrapper.vm.selectedCache).toEqual([1, 2])
+    expect(active).toHaveBeenCalledWith([])
+    expect(selected).toHaveBeenCalledWith([1, 2])
 
     // Should rebuild tree and reuse cached values
 
     wrapper.setProps({ active: [0], items: singleRootTwoChildren })
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.activeCache).toEqual([0])
-    expect(wrapper.vm.selectedCache).toEqual([1, 2, 0])
+    expect(active).toHaveBeenCalledWith([0])
+    expect(selected).toHaveBeenCalledWith([1, 2, 0])
   })
 
   it('should accept string value for id', async () => {
