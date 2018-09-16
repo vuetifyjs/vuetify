@@ -355,8 +355,8 @@ export default {
         ref: 'table',
         on: {
           input: this.dateClick,
-          mouseenter: this.dateMouseEnter,
-          mouseleave: this.dateMouseLeave,
+          dateMouseEnter: this.dateMouseEnter,
+          dateMouseLeave: this.dateMouseLeave,
           tableDate: value => this.tableDate = value
         }
       })
