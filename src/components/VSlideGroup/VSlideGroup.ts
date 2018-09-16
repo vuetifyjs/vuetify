@@ -6,25 +6,13 @@ import VItemGroup, { GroupableInstance } from '../VItemGroup/VItemGroup'
 
 // Types
 import Vue, { VNode, VNodeChildren, VNodeDirective } from 'vue'
-import mixins from '../../util/mixins'
 
 interface TouchWrapper extends TouchEvent {
   touchstartX: number
   touchmoveX: number
 }
 
-interface options extends Vue {
-  $refs: {
-    container: HTMLElement
-    content: HTMLElement
-  }
-}
-
-type VItemGroupInstance = InstanceType<typeof VItemGroup>
-
-export default mixins<VItemGroupInstance & options>(
-  VItemGroup
-).extend({
+export default VItemGroup.extend({
   name: 'v-slide-group',
 
   props: {
