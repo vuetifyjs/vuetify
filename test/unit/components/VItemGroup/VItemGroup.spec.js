@@ -54,11 +54,9 @@ test('VItemGroup.ts', ({ mount }) => {
     item.destroy()
 
     expect(wrapper.vm.items.length).toBe(0)
-
-    expect(valueWarning).toHaveBeenTipped()
   })
 
-  it('should update state from child clicks', () => {
+  it('should update state from child clicks', async () => {
     const change = jest.fn()
     const wrapper = mount(VItemGroup, {
       slots: {
@@ -76,7 +74,7 @@ test('VItemGroup.ts', ({ mount }) => {
     const [ child1, child2 ] = wrapper.vm.$el.children
 
     child1.click()
-    expect(change).toBeCalledWith(0)
+    expect(change).toBeCalled()
     expect(wrapper.vm.internalValue).toBe(0)
 
     child2.click()
@@ -99,8 +97,6 @@ test('VItemGroup.ts', ({ mount }) => {
 
     child1.click()
     expect(change).toBeCalledWith([1])
-
-    expect(valueWarning).toHaveBeenTipped()
   })
 
   it('should have a conditional method for toggling items', () => {
@@ -146,8 +142,6 @@ test('VItemGroup.ts', ({ mount }) => {
 
     expect(wrapper.vm.selectedItems.length).toBe(1)
     expect(wrapper.vm.internalValue).toEqual([0])
-
-    expect(valueWarning).toHaveBeenTipped()
   })
 
   it('should update a single item group', () => {
@@ -238,7 +232,5 @@ test('VItemGroup.ts', ({ mount }) => {
     first.destroy()
 
     expect(change).toBeCalledWith(undefined)
-
-    expect(valueWarning).toHaveBeenTipped()
   })
 })

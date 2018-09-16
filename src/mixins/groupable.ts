@@ -9,7 +9,6 @@ import { inject as RegistrableInject } from './registrable'
 // Utilities
 import mixins from '../util/mixins'
 import { PropValidator } from 'vue/types/options'
-import { consoleWarn } from '../util/console'
 
 type VItemGroupInstance = InstanceType<typeof VItemGroup>
 

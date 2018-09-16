@@ -47,7 +47,7 @@ import VRadioGroup from '@/components/VRadioGroup'
 import VRangeSlider from '@/components/VRangeSlider'
 import VResponsive from '@/components/VResponsive'
 import VSelect from '@/components/VSelect'
-import VSlide from '@/components/VSlide'
+import VSlideGroup from '@/components/VSlideGroup'
 import VSlider from '@/components/VSlider'
 import VSnackbar from '@/components/VSnackbar'
 import VSpeedDial from '@/components/VSpeedDial'
@@ -114,7 +114,7 @@ const components = {
   VRangeSlider,
   VResponsive,
   VSelect,
-  VSlide,
+  VSlideGroup,
   VSlider,
   VSnackbar,
   VSpeedDial,

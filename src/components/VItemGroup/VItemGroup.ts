@@ -106,7 +106,7 @@ export default mixins(Proxyable).extend({
         : item.value
     },
     init () {
-      this.updateItemsState()
+      !this.value && this.mandatory && this.updateMandatory()
     },
     onClick (item: GroupableInstance, index: number) {
       this.updateInternalValue(
@@ -115,7 +115,9 @@ export default mixins(Proxyable).extend({
     },
     register (item: GroupableInstance) {
       const index = this.items.push(item) - 1
+      const value = this.getValue(item, index)
 
+      item.isActive = this.toggleMethod(value)
       item.$on('change', () => this.onClick(item, index))
     },
     unregister (item: GroupableInstance) {

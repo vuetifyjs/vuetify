@@ -19,10 +19,10 @@
   &__container
     display: flex
     flex: 1 1 auto
-    // padding: 16px
     position: relative
     transition: transform .6s $transition.swing
 
-    > *
-      flex: 1 0 100%
+  &:not(&--show-all)
+    .v-slide-group__container > *
+      flex: 1 0 auto
       width: 100%

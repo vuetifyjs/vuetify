@@ -8,6 +8,11 @@ import VItemGroup, { GroupableInstance } from '../VItemGroup/VItemGroup'
 import Vue, { VNode, VNodeChildren, VNodeDirective } from 'vue'
 import mixins from '../../util/mixins'
 
+interface TouchWrapper extends TouchEvent {
+  touchstartX: number
+  touchmoveX: number
+}
+
 interface options extends Vue {
   $refs: {
     container: HTMLElement
@@ -17,11 +22,13 @@ interface options extends Vue {
 
 type VItemGroupInstance = InstanceType<typeof VItemGroup>
 
-export default mixins<VItemGroupInstance & options>(VItemGroup).extend({
+export default mixins<VItemGroupInstance & options>(
+  VItemGroup
+).extend({
   name: 'v-slide-group',
 
   props: {
-    linear: Boolean,
+    showAll: Boolean,
     mandatory: {
       type: Boolean,
       default: true
@@ -67,10 +74,12 @@ export default mixins<VItemGroupInstance & options>(VItemGroup).extend({
   },
 
   watch: {
-    selectedItems () {
-      if (!this.linear) return
+    selectedIndex (val, oldVal) {
+      this.isReversed = val < oldVal
 
-      this.setScrollOffset()
+      if (!this.isOverflowing) return
+
+      this.scrollIntoView()
     },
     scrollOffset (val: number) {
       this.$refs.container.style.transform = `translateX(${-val}px)`
@@ -117,9 +126,9 @@ export default mixins<VItemGroupInstance & options>(VItemGroup).extend({
         directives: [{
           name: 'touch',
           value: {
-            start: (e: TouchEvent) => this.overflowCheck(e, this.onTouchStart),
-            move: (e: TouchEvent) => this.overflowCheck(e, this.onTouchMove),
-            end: (e: TouchEvent) => this.overflowCheck(e, this.onTouchEnd)
+            start: (e: TouchWrapper) => this.overflowCheck(e, this.onTouchStart),
+            move: (e: TouchWrapper) => this.overflowCheck(e, this.onTouchMove),
+            end: (e: TouchWrapper) => this.overflowCheck(e, this.onTouchEnd)
           }
         }] as VNodeDirective[],
         ref: 'content'
@@ -140,22 +149,19 @@ export default mixins<VItemGroupInstance & options>(VItemGroup).extend({
       this.onClick(this.items[index], index)
     },
     next () {
-      this.isReversed = false
       this.direction(1)
     },
     prev () {
-      this.isReversed = true
       this.direction(-1)
     },
-    onTouchStart (e: TouchEvent) {
+    onTouchStart (e: TouchWrapper) {
       const { container } = this.$refs
 
       this.startX = this.scrollOffset + e.touchstartX
 
       container.style.transition = 'none'
-      container.style.willChange = 'transform'
     },
-    onTouchMove (e: TouchEvent) {
+    onTouchMove (e: TouchWrapper) {
       this.scrollOffset = this.startX - e.touchmoveX
     },
     onTouchEnd () {
@@ -163,7 +169,6 @@ export default mixins<VItemGroupInstance & options>(VItemGroup).extend({
       const maxScrollOffset = this.widths.container - this.widths.content
 
       container.style.transition = null
-      container.style.willChange = null
 
       if (this.scrollOffset > this.widths.container) {
         this.scrollOffset = maxScrollOffset
@@ -171,8 +176,34 @@ export default mixins<VItemGroupInstance & options>(VItemGroup).extend({
         this.scrollOffset = 0
       }
     },
-    overflowCheck (e: TouchEvent, fn: (e: TouchEvent) => void) {
+    overflowCheck (e: TouchWrapper, fn: (e: TouchWrapper) => void) {
       this.isOverflowing && fn(e)
+    },
+    scrollIntoView () {
+      /* istanbul ignore next */
+      if (!this.selectedItem) return
+      if (!this.isOverflowing) {
+        this.scrollOffset = 0
+        return
+      }
+
+      const totalWidth = this.widths.content + this.scrollOffset
+      const { clientWidth, offsetLeft } = this.selectedItem.$el
+      const itemOffset = clientWidth + offsetLeft
+      let additionalOffset = clientWidth * 0.3
+
+      if (this.selectedIndex === this.items.length - 1) {
+        additionalOffset = 0 // don't add an offset if selecting the last tab
+      }
+
+      /* istanbul ignore else */
+      if (!this.showAll) {
+        this.scrollOffset = this.selectedItem.$el.offsetLeft
+      } else if (offsetLeft < this.scrollOffset) {
+        this.scrollOffset = Math.max(offsetLeft - additionalOffset, 0)
+      } else if (totalWidth < itemOffset) {
+        this.scrollOffset -= totalWidth - itemOffset - additionalOffset
+      }
     },
     setOverflow () {
       const { content, container } = this.$refs
@@ -181,15 +212,6 @@ export default mixins<VItemGroupInstance & options>(VItemGroup).extend({
 
       this.widths.content = content.clientWidth
       this.widths.container = container.scrollWidth
-    },
-    setScrollOffset () {
-      if (!this.selectedItems.length) return
-
-      const el = this.selectedItems[0].$el
-
-      if (!el) return
-
-      this.scrollOffset = el.offsetLeft // - 16 // Account for padding
     }
   },
 
@@ -203,7 +225,10 @@ export default mixins<VItemGroupInstance & options>(VItemGroup).extend({
     append && children.push(append)
 
     return h('div', {
-      staticClass: 'v-item-group v-slide-group'
+      staticClass: 'v-item-group v-slide-group',
+      class: {
+        'v-slide-group--show-all': this.showAll
+      }
     }, children)
   }
 })
