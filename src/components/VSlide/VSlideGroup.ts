@@ -1,8 +1,12 @@
 // Styles
-import '../../stylus/components/_slide.styl'
+import '../../stylus/components/_slide-group.styl'
+
+// Extensions
+import VItemGroup, { GroupableInstance } from '../VItemGroup/VItemGroup'
 
 // Types
 import Vue, { VNode, VNodeChildren, VNodeDirective } from 'vue'
+import mixins from '../../util/mixins'
 
 interface options extends Vue {
   $refs: {
@@ -11,10 +15,30 @@ interface options extends Vue {
   }
 }
 
-/* @vue/component */
-export default Vue.extend<options>().extend({
+type VItemGroupInstance = InstanceType<typeof VItemGroup>
+
+export default mixins<VItemGroupInstance & options>(VItemGroup).extend({
+  name: 'v-slide-group',
+
+  props: {
+    linear: Boolean,
+    mandatory: {
+      type: Boolean,
+      default: true
+    },
+    reverseTransition: {
+      type: String,
+      default: 'slide-reverse-transition'
+    },
+    transition: {
+      type: String,
+      default: 'slide-transition'
+    }
+  },
+
   data () {
     return {
+      isReversed: false,
       scrollOffset: 0,
       startX: 0,
       widths: {
@@ -25,12 +49,29 @@ export default Vue.extend<options>().extend({
   },
 
   computed: {
+    computedTransition (): string {
+      return !this.isReversed
+        ? this.transition
+        : this.reverseTransition
+    },
     isOverflowing (): boolean {
       return this.widths.content < this.widths.container
+    },
+    selectedIndex (): number {
+      if (!this.selectedIndexes.length) return -1
+      return this.selectedIndexes[0]
+    },
+    selectedItem (): GroupableInstance {
+      return this.items[this.selectedIndex]
     }
   },
 
   watch: {
+    selectedItems () {
+      if (!this.linear) return
+
+      this.setScrollOffset()
+    },
     scrollOffset (val: number) {
       this.$refs.container.style.transform = `translateX(${-val}px)`
     }
@@ -53,19 +94,26 @@ export default Vue.extend<options>().extend({
         slot = this.$slots[affix]
       // Scoped slot
       } else if (this.$scopedSlots[affix]) {
-        slot = this.$scopedSlots[affix]({})
+        slot = this.$scopedSlots[affix]({
+          next: this.next,
+          prev: this.prev
+        })
       // Nothing
-      } else {
-        return slot
-      }
+      } else return slot
 
       return this.$createElement('div', {
-        staticClass: `v-slide__${affix}`
+        staticClass: `v-slide-group__${affix}`
       }, [slot])
+    },
+    genContainer (): VNode {
+      return this.$createElement('div', {
+        staticClass: 'v-slide-group__container',
+        ref: 'container'
+      }, this.$slots.default)
     },
     genContent (): VNode {
       return this.$createElement('div', {
-        staticClass: 'v-slide__content',
+        staticClass: 'v-slide-group__content',
         directives: [{
           name: 'touch',
           value: {
@@ -77,11 +125,27 @@ export default Vue.extend<options>().extend({
         ref: 'content'
       }, [this.genContainer()])
     },
-    genContainer (): VNode {
-      return this.$createElement('div', {
-        staticClass: 'v-slide__container',
-        ref: 'container'
-      }, this.$slots.default)
+    direction (next: number) {
+      if (!this.items.length) return
+
+      let index = next > 0 ? 0 : this.items.length - 1
+      const selectedIndex = this.selectedIndex
+
+      if (selectedIndex != null &&
+        this.items[selectedIndex + next]
+      ) {
+        index = selectedIndex + next
+      }
+
+      this.onClick(this.items[index], index)
+    },
+    next () {
+      this.isReversed = false
+      this.direction(1)
+    },
+    prev () {
+      this.isReversed = true
+      this.direction(-1)
     },
     onTouchStart (e: TouchEvent) {
       const { container } = this.$refs
@@ -115,8 +179,17 @@ export default Vue.extend<options>().extend({
 
       if (!content || !container) return
 
-      this.widths.content = content.offsetWidth
+      this.widths.content = content.clientWidth
       this.widths.container = container.scrollWidth
+    },
+    setScrollOffset () {
+      if (!this.selectedItems.length) return
+
+      const el = this.selectedItems[0].$el
+
+      if (!el) return
+
+      this.scrollOffset = el.offsetLeft // - 16 // Account for padding
     }
   },
 
@@ -130,7 +203,7 @@ export default Vue.extend<options>().extend({
     append && children.push(append)
 
     return h('div', {
-      staticClass: 'v-slide'
+      staticClass: 'v-item-group v-slide-group'
     }, children)
   }
 })

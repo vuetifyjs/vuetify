@@ -14,21 +14,21 @@ transition-default()
   &-leave-to
     transform: translateY(100%)
 
-.carousel-transition
+.slide-transition
   &-enter
     transform: translate(100%, 0)
 
   &-leave, &-leave-to
-    position: absolute
+    position: absolute !important
     top: 0
     transform: translate(-100%, 0)
 
-.carousel-reverse-transition
+.slide-reverse-transition
   &-enter
     transform: translate(-100%, 0)
 
   &-leave, &-leave-to
-    position: absolute
+    position: absolute !important
     top: 0
     transform: translate(100%, 0)
 

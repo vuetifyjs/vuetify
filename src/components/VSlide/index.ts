@@ -1,4 +1,14 @@
-import VSlide from './VSlide'
+import VSlideItem from './VSlideItem'
+import VSlideGroup from './VSlideGroup'
 
-export { VSlide }
-export default VSlide
+export {
+  VSlideGroup,
+  VSlideItem
+}
+
+export default {
+  $_vuetify_subcomponents: {
+    VSlideGroup,
+    VSlideItem
+  }
+}

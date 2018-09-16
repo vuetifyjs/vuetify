@@ -52,10 +52,6 @@ export default mixins<options>(
   },
 
   created () {
-    if (!('value' in this)) {
-      consoleWarn('Implementing component is missing a value property', this)
-    }
-
     this.itemGroup && this.itemGroup.register(this)
   },
 

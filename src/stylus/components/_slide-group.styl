@@ -1,21 +1,28 @@
 @import '../bootstrap'
 
-.v-slide
+.v-slide-group
   contain: content
   display: flex
-  white-space: nowrap
+  flex-wrap: nowrap
+
+  &__append,
+  &__prepend
+    align-items: center
+    display: flex
+    flex: 0 1 auto
 
   &__content
     display: block
     flex: 1 1 auto
     overflow: hidden
-    padding: 16px
-
 
   &__container
     display: flex
-    flex: 1 0 auto
+    flex: 1 1 auto
+    // padding: 16px
+    position: relative
     transition: transform .6s $transition.swing
 
     > *
       flex: 1 0 100%
+      width: 100%

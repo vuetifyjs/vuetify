@@ -12,7 +12,7 @@ import { consoleWarn } from '../../util/console'
 // Types
 import { VNode } from 'vue/types'
 
-type GroupableInstance = InstanceType<typeof Groupable> & { value?: any }
+export type GroupableInstance = InstanceType<typeof Groupable> & { value?: any }
 
 export default mixins(Proxyable).extend({
   name: 'v-item-group',
@@ -49,9 +49,21 @@ export default mixins(Proxyable).extend({
   },
 
   computed: {
+    selectedIndexes (): number[] {
+      const length = this.items.length
+      const indexes = []
+
+      for (let i = 0; i < length; i++) {
+        if (this.toggleMethod(this.getValue(this.items[i], i))) {
+          indexes.push(i)
+        }
+      }
+
+      return indexes
+    },
     selectedItems (): GroupableInstance[] {
       return this.items.filter((item, index) => {
-        return this.toggleMethod(this.getValue(item, index))
+        return this.selectedIndexes.includes(index)
       })
     },
     selectedValues (): any[] {
