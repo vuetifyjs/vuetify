@@ -12,7 +12,7 @@ import { consoleWarn } from '../../util/console'
 // Types
 import { VNode } from 'vue/types'
 
-type GroupableInstance = InstanceType<typeof Groupable> & { value?: any }
+export type GroupableInstance = InstanceType<typeof Groupable> & { value?: any }
 
 export default mixins(Proxyable).extend({
   name: 'v-item-group',
@@ -49,9 +49,21 @@ export default mixins(Proxyable).extend({
   },
 
   computed: {
+    selectedIndexes (): number[] {
+      const length = this.items.length
+      const indexes = []
+
+      for (let i = 0; i < length; i++) {
+        if (this.toggleMethod(this.getValue(this.items[i], i))) {
+          indexes.push(i)
+        }
+      }
+
+      return indexes
+    },
     selectedItems (): GroupableInstance[] {
       return this.items.filter((item, index) => {
-        return this.toggleMethod(this.getValue(item, index))
+        return this.selectedIndexes.includes(index)
       })
     },
     selectedValues (): any[] {
@@ -94,7 +106,7 @@ export default mixins(Proxyable).extend({
         : item.value
     },
     init () {
-      this.updateItemsState()
+      !this.value && this.mandatory && this.updateMandatory()
     },
     onClick (item: GroupableInstance, index: number) {
       this.updateInternalValue(
@@ -103,7 +115,9 @@ export default mixins(Proxyable).extend({
     },
     register (item: GroupableInstance) {
       const index = this.items.push(item) - 1
+      const value = this.getValue(item, index)
 
+      item.isActive = this.toggleMethod(value)
       item.$on('change', () => this.onClick(item, index))
     },
     unregister (item: GroupableInstance) {
