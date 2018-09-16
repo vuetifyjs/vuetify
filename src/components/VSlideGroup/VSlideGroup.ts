@@ -177,7 +177,7 @@ export default mixins<VItemGroupInstance & options>(
       }
     },
     overflowCheck (e: TouchWrapper, fn: (e: TouchWrapper) => void) {
-      this.isOverflowing && fn(e)
+      this.isOverflowing && this.showAll && fn(e)
     },
     scrollIntoView () {
       /* istanbul ignore next */
