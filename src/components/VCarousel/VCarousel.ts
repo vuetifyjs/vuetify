@@ -3,7 +3,6 @@ import '../../stylus/components/_carousel.styl'
 
 // Components
 import VBtn from '../VBtn'
-// import VCarouselItem from './VCarouselItem' TODO: Enable once converted to item-group
 import VIcon from '../VIcon'
 
 // Mixins
@@ -18,10 +17,8 @@ import mixins from '../../util/mixins'
 
 // Types
 import { VNode } from 'vue'
-import { PropValidator } from 'vue/types/options'
 import { VNodeDirective } from 'vue/types/vnode'
 
-// type CarouselItemInstance = InstanceType<typeof VCarouselItem> TODO: Enable once converted to item-group
 type CarouselItemInstance = {
   uid: number
   open: (uid: number, reverse: boolean) => void
@@ -50,8 +47,8 @@ export default mixins(
     interval: {
       type: [Number, String],
       default: 6000,
-      validator: value => value > 0
-    } as PropValidator<number>,
+      validator: (value: string | number) => value > 0
+    },
     nextIcon: {
       type: [Boolean, String],
       default: '$vuetify.icons.next'
