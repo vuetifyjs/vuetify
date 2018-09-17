@@ -127,7 +127,7 @@ export default mixins(
     },
     genIcon (
       direction: 'prev' | 'next',
-      icon: string | boolean,
+      icon: string,
       fn: () => void
     ): VNode {
       return this.$createElement('div', {
@@ -141,7 +141,7 @@ export default mixins(
         }, [
           this.$createElement(VIcon, {
             props: { 'size': '46px' }
-          }, String(icon))
+          }, icon)
         ])
       ])
     },
@@ -152,7 +152,7 @@ export default mixins(
         ? this.nextIcon
         : this.prevIcon
 
-      if (prevIcon) {
+      if (prevIcon && typeof prevIcon === 'string') {
         icons.push(this.genIcon('prev', prevIcon, this.prev))
       }
 
@@ -160,7 +160,7 @@ export default mixins(
         ? this.prevIcon
         : this.nextIcon
 
-      if (nextIcon) {
+      if (nextIcon && typeof nextIcon === 'string') {
         icons.push(this.genIcon('next', nextIcon, this.next))
       }
 
