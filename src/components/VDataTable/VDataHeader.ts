@@ -17,7 +17,7 @@ export default mixins<options>().extend({
   inject: ['dataTable'],
 
   props: {
-    showSelectAll: Boolean,
+    showSelect: Boolean,
     sortIcon: {
       type: String,
       default: '$vuetify.icons.sort'
@@ -52,7 +52,7 @@ export default mixins<options>().extend({
       const sortable = c.sortable == null || c.sortable
 
       const classes = {
-        [`justify-${c.align || 'start'}`]: true
+        [`text-xs-${c.align || 'left'}`]: true
       }
 
       const children = [
@@ -82,13 +82,20 @@ export default mixins<options>().extend({
         this.dataTable.multiSort && beingSorted && children.push(this.$createElement('span', { class: 'badge' }, [String(sortIndex + 1)]))
       }
 
+      const styles: any = {}
+
+      if (c.width) {
+        styles.width = c.width
+      }
+
       return this.$createElement('th', {
         class: classes,
+        style: styles,
         on: listeners
       }, children)
     })
 
-    if (this.showSelectAll) headers.unshift(this.genSelectAll())
+    if (this.showSelect) headers.unshift(this.genSelectAll())
 
     return this.$createElement('thead', {
       class: 'v-data-header'

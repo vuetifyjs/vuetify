@@ -123,20 +123,15 @@ export default mixins(
     mustSort: {
       type: Boolean
     },
-    itemsPerPageOptions: {
-      type: Array,
-      default: () => ([
-        { text: '5', value: 5 },
-        { text: '10', value: 10 },
-        { text: '15', value: 15 },
-        { text: 'All', value: -1 }
-      ])
-    } as PropValidator<any[]>,
     selected: Array as PropValidator<any[]>,
     singleSelect: Boolean, // TODO: Better name to fit in with similar functionality in other components?
     expanded: Array as PropValidator<any[]>,
     singleExpand: Boolean, // TODO: Better name to fit in with similar functionality in other components?
-    hideActions: Boolean
+    hideFooter: Boolean,
+    footerProps: {
+      type: Object,
+      default: () => ({})
+    } as PropValidator<any> // TODO: Type VDataFooter props here
   },
 
   data () {
@@ -404,14 +399,10 @@ export default mixins(
     genFooters (): VNodeChildrenArrayContents {
       const footers = this.computeSlots('footer')
 
-      if (!this.hideActions) {
+      if (!this.hideFooter) {
         footers.push(this.$createElement(VDataFooter, {
           props: {
-            itemsPerPageOptions: this.itemsPerPageOptions
-          },
-          on: {
-            'update:page': (v: number) => this.options.page = v,
-            'update:rowsPerPage': (v: number) => this.options.itemsPerPage = v
+            ...this.footerProps
           }
         }))
       }

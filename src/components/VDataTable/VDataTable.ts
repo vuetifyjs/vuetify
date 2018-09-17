@@ -1,8 +1,8 @@
 import '../../stylus/components/_data-table.styl'
 
 // Components
-import { VDataIterator, VDataFooter } from '../VDataIterator'
-import { VDataHeader, VRowGroup } from '.'
+import { VDataIterator } from '../VDataIterator'
+import { VDataHeader, VRowGroup, VRowSimple } from '.'
 
 // Utils
 import { getObjectValueByPath, wrapInArray, groupByProperty } from '../../util/helpers'
@@ -11,6 +11,7 @@ import { getObjectValueByPath, wrapInArray, groupByProperty } from '../../util/h
 import { VNodeChildrenArrayContents, VNode, VNodeData } from 'vue'
 import { PropValidator } from 'vue/types/options'
 import mixins from '../../util/mixins'
+import VCellCheckbox from './VCellCheckbox'
 
 export interface TableHeader {
   text: string
@@ -77,10 +78,9 @@ export default mixins(VDataIterator).extend({
       default: () => ([])
     } as PropValidator<TableHeader[]>,
     height: String,
-    hideActions: Boolean,
     hideHeader: Boolean,
     loading: Boolean,
-    showSelectAll: Boolean,
+    showSelect: Boolean,
     static: Boolean
   },
 
@@ -142,7 +142,7 @@ export default mixins(VDataIterator).extend({
       if (!this.hideHeader && !this.static) {
         headers.push(this.$createElement(VDataHeader, {
           props: {
-            showSelectAll: this.showSelectAll
+            showSelect: this.showSelect
           }
         }))
         // headers.push(h(VTableProgress))
@@ -159,6 +159,28 @@ export default mixins(VDataIterator).extend({
         } else {
           items.push(this.genRows(this.computedItems))
         }
+      } else {
+        items.push(...this.computedItems.map(item => {
+          const children = []
+          if (this.showSelect) {
+            children.push(this.$createElement(VCellCheckbox, {
+              slot: 'select',
+              props: {
+                inputValue: this.isSelected(item)
+              },
+              on: {
+                change: (v: any) => this.select(item, v)
+              }
+            }))
+          }
+
+          return this.$createElement(VRowSimple, {
+            props: {
+              item,
+              headers: this.headers
+            }
+          }, children)
+        }))
       }
 
       return this.genBodyWrapper(items)
@@ -207,19 +229,6 @@ export default mixins(VDataIterator).extend({
 
       return rows
     },
-    genFooters (): VNodeChildrenArrayContents {
-      const footers = this.computeSlots('footer')
-
-      if (!this.hideActions && !this.static) {
-        footers.push(this.$createElement(VDataFooter, {
-          props: {
-            itemsPerPageOptions: this.itemsPerPageOptions
-          }
-        }))
-      }
-
-      return footers
-    },
     genBodies () {
       if (this.static) return this.$slots.default
       else return VDataIterator.options.methods.genBodies.call(this)
@@ -248,6 +257,10 @@ export default mixins(VDataIterator).extend({
   },
 
   render (h): VNode {
+    const children: VNodeChildrenArrayContents = [this.genTable()]
+
+    if (!this.static) children.push(...this.genFooters())
+
     return h('div', {
       staticClass: 'v-data-table',
       class: {
@@ -255,9 +268,6 @@ export default mixins(VDataIterator).extend({
         'v-data-table--fixed': !!this.height,
         ...this.themeClasses
       }
-    }, [
-      this.genTable(),
-      ...this.genFooters()
-    ])
+    }, children)
   }
 })
