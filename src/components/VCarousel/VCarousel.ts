@@ -1,20 +1,40 @@
+// Styles
 import '../../stylus/components/_carousel.styl'
 
+// Components
 import VBtn from '../VBtn'
+// import VCarouselItem from './VCarouselItem' TODO: Enable once converted to item-group
 import VIcon from '../VIcon'
 
+// Mixins
 import Themeable from '../../mixins/themeable'
 import { provide as RegistrableProvide } from '../../mixins/registrable'
 
+// Directives
 import Touch from '../../directives/touch'
 
+// Utilities
+import mixins from '../../util/mixins'
+
+// Types
+import { VNode } from 'vue'
+import { PropValidator } from 'vue/types/options'
+import { VNodeDirective } from 'vue/types/vnode'
+
+// type CarouselItemInstance = InstanceType<typeof VCarouselItem> TODO: Enable once converted to item-group
+type CarouselItemInstance = {
+  uid: number
+  open: (uid: number, reverse: boolean) => void
+}
+
 /* @vue/component */
-export default {
+export default mixins(
+  Themeable,
+  RegistrableProvide('carousel')
+).extend({
   name: 'v-carousel',
 
   directives: { Touch },
-
-  mixins: [Themeable, RegistrableProvide('carousel')],
 
   props: {
     cycle: {
@@ -31,7 +51,7 @@ export default {
       type: [Number, String],
       default: 6000,
       validator: value => value > 0
-    },
+    } as PropValidator<number>,
     nextIcon: {
       type: [Boolean, String],
       default: '$vuetify.icons.next'
@@ -45,15 +65,15 @@ export default {
 
   data () {
     return {
-      inputValue: null,
-      items: [],
-      slideTimeout: null,
+      inputValue: null as any,
+      items: [] as CarouselItemInstance[],
+      slideTimeout: null as any,
       reverse: false
     }
   },
 
   computed: {
-    isDark () {
+    isDark (): boolean {
       return this.dark || !this.light
     }
   },
@@ -68,9 +88,12 @@ export default {
       // Evaluates items when inputValue changes to
       // account for dynamic changing of children
 
-      const uid = (this.items[this.inputValue] || {}).uid
+      const selectedItem = this.items[this.inputValue]
+
+      if (!selectedItem) return
+
       for (let index = this.items.length; --index >= 0;) {
-        this.items[index].open(uid, this.reverse)
+        this.items[index].open(selectedItem.uid, this.reverse)
       }
 
       this.$emit('input', this.inputValue)
@@ -97,14 +120,16 @@ export default {
   },
 
   methods: {
-    genDelimiters () {
+    genDelimiters (): VNode {
       return this.$createElement('div', {
         staticClass: 'v-carousel__controls'
       }, this.genItems())
     },
-    genIcon (direction, icon, fn) {
-      if (!icon) return null
-
+    genIcon (
+      direction: string,
+      icon: string | boolean,
+      fn: () => void
+    ): VNode {
       return this.$createElement('div', {
         staticClass: `v-carousel__${direction}`
       }, [
@@ -116,11 +141,32 @@ export default {
         }, [
           this.$createElement(VIcon, {
             props: { 'size': '46px' }
-          }, icon)
+          }, String(icon))
         ])
       ])
     },
-    genItems () {
+    genIcons (): VNode[] {
+      const icons = []
+
+      const prevIcon = this.$vuetify.rtl
+        ? this.nextIcon
+        : this.prevIcon
+
+      if (prevIcon) {
+        icons.push(this.genIcon('prev', prevIcon, this.prev))
+      }
+
+      const nextIcon = this.$vuetify.rtl
+        ? this.prevIcon
+        : this.nextIcon
+
+      if (nextIcon) {
+        icons.push(this.genIcon('next', nextIcon, this.next))
+      }
+
+      return icons
+    },
+    genItems (): VNode[] {
       return this.items.map((item, index) => {
         return this.$createElement(VBtn, {
           class: {
@@ -156,7 +202,7 @@ export default {
       this.reverse = true
       this.inputValue = (this.inputValue + this.items.length - 1) % this.items.length
     },
-    select (index) {
+    select (index: number) {
       this.reverse = index < this.inputValue
       this.inputValue = index
     },
@@ -165,15 +211,25 @@ export default {
 
       this.slideTimeout = setTimeout(() => this.next(), this.interval > 0 ? this.interval : 6000)
     },
-    register (uid, open) {
+    register (uid: number, open: () => void) {
       this.items.push({ uid, open })
     },
-    unregister (uid) {
+    unregister (uid: number) {
       this.items = this.items.filter(i => i.uid !== uid)
     }
   },
 
-  render (h) {
+  render (h): VNode {
+    const children = []
+
+    if (!this.hideControls) {
+      children.push(this.genIcons())
+    }
+
+    if (!this.hideDelimiters) {
+      children.push(this.genDelimiters())
+    }
+
     return h('div', {
       staticClass: 'v-carousel',
       directives: [{
@@ -182,12 +238,7 @@ export default {
           left: this.next,
           right: this.prev
         }
-      }]
-    }, [
-      this.hideControls ? null : this.genIcon('prev', this.$vuetify.rtl ? this.nextIcon : this.prevIcon, this.prev),
-      this.hideControls ? null : this.genIcon('next', this.$vuetify.rtl ? this.prevIcon : this.nextIcon, this.next),
-      this.hideDelimiters ? null : this.genDelimiters(),
-      this.$slots.default
-    ])
+      }] as VNodeDirective[]
+    }, [children, this.$slots.default])
   }
-}
+})
