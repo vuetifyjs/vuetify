@@ -10,9 +10,9 @@ import mixins from '../../util/mixins'
 // Types
 import { VNode, VNodeDirective } from 'vue'
 
-/* @vue/component */
 export default mixins(
   RegistrableInject('carousel', 'v-carousel-item', 'v-carousel')
+  /* @vue/component */
 ).extend({
   name: 'v-carousel-item',
 

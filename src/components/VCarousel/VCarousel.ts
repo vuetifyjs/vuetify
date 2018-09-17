@@ -27,10 +27,10 @@ type CarouselItemInstance = {
   open: (uid: number, reverse: boolean) => void
 }
 
-/* @vue/component */
 export default mixins(
   Themeable,
   RegistrableProvide('carousel')
+  /* @vue/component */
 ).extend({
   name: 'v-carousel',
 
@@ -65,9 +65,9 @@ export default mixins(
 
   data () {
     return {
-      inputValue: null as any,
+      inputValue: this.value,
       items: [] as CarouselItemInstance[],
-      slideTimeout: null as any,
+      slideTimeout: undefined as number | undefined,
       reverse: false
     }
   },
@@ -110,7 +110,7 @@ export default mixins(
         this.restartTimeout()
       } else {
         clearTimeout(this.slideTimeout)
-        this.slideTimeout = null
+        this.slideTimeout = undefined
       }
     }
   },
@@ -126,7 +126,7 @@ export default mixins(
       }, this.genItems())
     },
     genIcon (
-      direction: string,
+      direction: 'prev' | 'next',
       icon: string | boolean,
       fn: () => void
     ): VNode {
@@ -186,13 +186,17 @@ export default mixins(
     },
     restartTimeout () {
       this.slideTimeout && clearTimeout(this.slideTimeout)
-      this.slideTimeout = null
+      this.slideTimeout = undefined
 
       const raf = requestAnimationFrame || setTimeout
       raf(this.startTimeout)
     },
     init () {
-      this.inputValue = this.value || 0
+      if (this.value == null) {
+        this.inputValue = 0
+      } else {
+        this.startTimeout()
+      }
     },
     next () {
       this.reverse = false
@@ -209,7 +213,7 @@ export default mixins(
     startTimeout () {
       if (!this.cycle) return
 
-      this.slideTimeout = setTimeout(() => this.next(), this.interval > 0 ? this.interval : 6000)
+      this.slideTimeout = window.setTimeout(this.next, this.interval > 0 ? this.interval : 6000)
     },
     register (uid: number, open: () => void) {
       this.items.push({ uid, open })
