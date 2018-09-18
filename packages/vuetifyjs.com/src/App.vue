@@ -47,10 +47,10 @@
       this.snackbar({
         color: 'default',
         close: true,
-        id: 'our-point-of-vue-evolving-through-innovation-at-veoci-6cf4a47a08ca',
-        text: 'Go To Article',
-        msg: '**New Article** — _Our Point of Vue_',
-        href: 'https://medium.com/vuetify/our-point-of-vue-evolving-through-innovation-at-veoci-6cf4a47a08ca',
+        id: 'august-2018-21369715',
+        text: 'Go To Video',
+        msg: '**August 2018 Update**',
+        href: 'https://www.patreon.com/posts/august-2018-21369715',
         timeout: 0
       })
     },
