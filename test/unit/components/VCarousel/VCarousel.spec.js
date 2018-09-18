@@ -144,7 +144,7 @@ test('VCarousel.js', ({ mount }) => {
       })
     })
 
-    expect([].concat(...input.mock.calls)).toEqual([1, 2, 0])
+    expect([].concat(...input.mock.calls)).toEqual([2, 0, 1])
   })
 
   it('should render component without delimiters', async () => {

@@ -42,4 +42,18 @@ test('VListTileAction.js', ({ mount, functionalContext }) => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  it('should work with v-html', () => {
+    const wrapper = mount(VListTileAction, {
+      context: Object.assign({
+        domProps: {
+          innerHTML: '<b>something</b>'
+        },
+        data: {},
+        props: {}
+      })
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

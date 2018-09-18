@@ -1,5 +1,7 @@
+import Vue from 'vue'
+
 /* @vue/component */
-export default {
+export default Vue.extend({
   name: 'filterable',
 
   props: {
@@ -8,4 +10,4 @@ export default {
       default: '$vuetify.noDataText'
     }
   }
-}
+})
