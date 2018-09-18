@@ -8,9 +8,11 @@ export default Vue.extend({
   },
 
   data: () => ({
+    elOffsetTop: 0,
     parallax: 0,
     parallaxDist: 0,
     percentScrolled: 0,
+    scrollTop: 0,
     windowHeight: 0,
     windowBottom: 0
   }),
@@ -28,9 +30,13 @@ export default Vue.extend({
 
   methods: {
     calcDimensions () {
+      const offset = this.$el.getBoundingClientRect()
+
+      this.scrollTop = window.pageYOffset
       this.parallaxDist = this.imgHeight - this.height
+      this.elOffsetTop = offset.top + this.scrollTop
       this.windowHeight = window.innerHeight
-      this.windowBottom = window.pageYOffset + this.windowHeight
+      this.windowBottom = this.scrollTop + this.windowHeight
     },
     listeners () {
       window.addEventListener('scroll', this.translate, false)
@@ -44,7 +50,7 @@ export default Vue.extend({
       this.calcDimensions()
 
       this.percentScrolled = (
-        (this.windowBottom - this.$el.offsetTop) /
+        (this.windowBottom - this.elOffsetTop) /
         (parseInt(this.height) + this.windowHeight)
       )
 
