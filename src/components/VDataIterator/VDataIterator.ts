@@ -396,8 +396,8 @@ export default mixins(
 
       return null
     },
-    genFooters (): VNodeChildrenArrayContents {
-      const footers = this.computeSlots('footer')
+    genFooter (): VNodeChildrenArrayContents {
+      const footers = []
 
       if (!this.hideFooter) {
         footers.push(this.$createElement(VDataFooter, {
@@ -418,7 +418,8 @@ export default mixins(
     const children: VNodeChildrenArrayContents = [
       ...this.genHeaders(),
       ...this.genBodies(),
-      ...this.genFooters()
+      ...this.computeSlots('footer'),
+      ...this.genFooter()
     ]
 
     return h('div', {

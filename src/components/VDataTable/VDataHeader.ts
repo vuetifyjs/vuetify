@@ -56,7 +56,7 @@ export default mixins<options>().extend({
       }
 
       const children = [
-        this.$createElement('span', [c.text])
+        this.$scopedSlots.text ? this.$scopedSlots.text({ header: c }) : this.$createElement('span', [c.text])
       ]
 
       const listeners: any = {}

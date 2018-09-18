@@ -81,11 +81,13 @@ export default mixins(VDataIterator).extend({
     hideHeader: Boolean,
     loading: Boolean,
     showSelect: Boolean,
-    static: Boolean
+    static: Boolean,
+    calculateWidths: Boolean
   },
 
   data: () => ({
-    openCache: {} as { [key: string]: boolean }
+    openCache: {} as { [key: string]: boolean },
+    widths: [] as number[]
   }),
 
   computed: {
@@ -106,13 +108,30 @@ export default mixins(VDataIterator).extend({
     }
   },
 
+  mounted () {
+    if (this.calculateWidths) {
+      window.addEventListener('resize', this.calcWidths)
+      this.calcWidths()
+    }
+  },
+
+  beforeDestroy () {
+    if (this.calculateWidths) {
+      window.removeEventListener('resize', this.calcWidths)
+    }
+  },
+
   methods: {
+    calcWidths () {
+      const table = this.$refs.table as Element
+      this.widths = Array.from(table.querySelectorAll('th')).map(e => e.clientWidth)
+    },
     searchItems (items: any[]): any[] {
       // If we have column-specific filters, run them here
       // Right now an item has to pass all filters, this might not be ideal
       const filterableHeaders = this.headers.filter(h => !!h.filter)
       if (filterableHeaders.length) {
-        items = items.filter(i => filterableHeaders.every(h => h.filter!(i[h.value])))
+        items = items.filter(i => filterableHeaders.every(h => h.filter!(getObjectValueByPath(i, h.value))))
         this.searchItemsLength = items.length
       }
 
@@ -153,39 +172,38 @@ export default mixins(VDataIterator).extend({
     genItems (): VNodeChildrenArrayContents | VNode {
       const items: any[] = []
 
-      if (this.$scopedSlots.item) {
-        if (this.groupBy) {
-          items.push(this.genGroupedRows(this.computedItems, this.groupBy))
-        } else {
-          items.push(this.genRows(this.computedItems))
-        }
+      if (this.groupBy) {
+        items.push(this.genGroupedRows(this.computedItems, this.groupBy))
       } else {
-        items.push(...this.computedItems.map(item => {
-          const children = []
-          if (this.showSelect) {
-            children.push(this.$createElement(VCellCheckbox, {
-              slot: 'select',
-              props: {
-                inputValue: this.isSelected(item)
-              },
-              on: {
-                change: (v: any) => this.select(item, v)
-              }
-            }))
-          }
-
-          return this.$createElement(VRowSimple, {
-            props: {
-              item,
-              headers: this.headers
-            }
-          }, children)
-        }))
+        items.push(this.genRows(this.computedItems))
       }
 
       return this.genBodyWrapper(items)
     },
-    genRows (items: any[]): VNodeChildrenArrayContents {
+    genDefaultRows (items: any[]): VNodeChildrenArrayContents {
+      return items.map(item => {
+        const children = []
+        if (this.showSelect) {
+          children.push(this.$createElement(VCellCheckbox, {
+            slot: 'select',
+            props: {
+              inputValue: this.isSelected(item)
+            },
+            on: {
+              change: (v: any) => this.select(item, v)
+            }
+          }))
+        }
+
+        return this.$createElement(VRowSimple, {
+          props: {
+            item,
+            headers: this.headers
+          }
+        }, children)
+      })
+    },
+    genScopedRows (items: any[]): VNodeChildrenArrayContents {
       return items.map((item: any, i: number) => {
         const row = this.$scopedSlots.item(this.createItemProps(item)) as any
 
@@ -193,7 +211,14 @@ export default mixins(VDataIterator).extend({
         else return this.genRow({ key: getObjectValueByPath(item, this.itemKey) }, row)
       })
     },
-    genGroupedRow (group: string, items: any[]) {
+    genRows (items: any[]): VNodeChildrenArrayContents {
+      if (this.$scopedSlots.item) {
+        return this.genScopedRows(items)
+      } else {
+        return this.genDefaultRows(items)
+      }
+    },
+    genDefaultGroupedRow (group: string, items: any[]) {
       return this.$createElement(VRowGroup, {
         props: {
           open: !!this.openCache[group]
@@ -207,7 +232,7 @@ export default mixins(VDataIterator).extend({
           }, ['toggle']),
           this.$createElement('td', { attrs: { colspan: this.headers.length } }, [group])
         ]),
-        this.$createElement('template', { slot: 'items' }, this.genRows(items))
+        this.$createElement('template', { slot: 'items' }, this.genDefaultRows(items))
       ])
     },
     genGroupedRows (items: any[], groupBy: string): VNodeChildrenArrayContents {
@@ -223,7 +248,7 @@ export default mixins(VDataIterator).extend({
         if (this.$scopedSlots.group) {
           rows.push(this.$scopedSlots.group({ groupBy, group, items: grouped[group] }))
         } else {
-          rows.push(this.genGroupedRow(group, grouped[group]))
+          rows.push(this.genDefaultGroupedRow(group, grouped[group]))
         }
       }
 
@@ -252,14 +277,14 @@ export default mixins(VDataIterator).extend({
         style: {
           height: this.height
         }
-      }, [this.$createElement('table', children)])
+      }, [this.$createElement('table', { ref: 'table' }, children)])
     }
   },
 
   render (h): VNode {
     const children: VNodeChildrenArrayContents = [this.genTable()]
 
-    if (!this.static) children.push(...this.genFooters())
+    if (!this.static) children.push(...this.computeSlots('footer'), ...this.genFooter())
 
     return h('div', {
       staticClass: 'v-data-table',
