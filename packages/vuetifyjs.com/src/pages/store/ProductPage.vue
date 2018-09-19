@@ -16,14 +16,39 @@
           order-md1
           style="max-width: 500px;"
         ).text-xs-center.mx-auto
-          v-carousel(:cycle="false" light).elevation-0
-            v-carousel-item(
-              v-for="(item, i) in product.images"
-              :key="i"
-              :src="item.src"
-              :href="item.src"
-              target="_blank"
-            )
+          v-card.elevation-12
+            v-carousel(
+              v-model="carousel"
+              :cycle="false"
+              light
+              class="product-carousel"
+            ).elevation-0
+              v-carousel-item(
+                v-for="(item, i) in product.images"
+                :key="i"
+                :src="item.src"
+                contain
+                @click.stop="dialog = true"
+              )
+
+            v-dialog(v-model="dialog")
+              v-fade-transition
+                v-card(v-if="dialog")
+                  //- Bug with carousel and initial value
+                  v-carousel(
+                    :value="dialogCarousel"
+                    :cycle="false"
+                    light
+                    hide-delimiters
+                    style="height: 80vh;"
+                  ).elevation-0
+                    v-carousel-item(
+                      v-for="(item, i) in product.images"
+                      :key="i"
+                      :src="item.src"
+                      contain
+                      height="80vh"
+                    )
 
         v-flex(xs12 md6 order-md2)
           h2(v-text="product.title").display-1.mb-3.font-weight-bold
@@ -115,7 +140,10 @@
     },
 
     data: () => ({
+      carousel: null,
       cartLoading: false,
+      dialog: false,
+      dialogCarousel: false,
       select: {},
       quantity: 1
     }),
@@ -137,6 +165,16 @@
       },
       onSale () {
         return this.discount > 0
+      }
+    },
+
+    watch: {
+      dialog (val) {
+        if (val) {
+          this.$nextTick(() => {
+            this.dialogCarousel = this.carousel
+          })
+        }
       }
     },
 
@@ -181,6 +219,19 @@
     height: 100%
     display: flex
     flex-direction: column
+
+    .product-carousel
+      border-radius: inherit !important
+
+      .v-carousel__item
+        cursor: pointer
+
+      .v-carousel__controls
+        border-bottom-left-radius: inherit
+        border-bottom-right-radius: inherit
+
+        .v-btn
+          color: white !important
 
     .v-jumbotron
       &__image
