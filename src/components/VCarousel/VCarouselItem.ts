@@ -4,11 +4,17 @@ import { VImg } from '../VImg'
 // Mixins
 import { inject as RegistrableInject } from '../../mixins/registrable'
 
-/* @vue/component */
-export default {
-  name: 'v-carousel-item',
+// Utilities
+import mixins from '../../util/mixins'
 
-  mixins: [RegistrableInject('carousel', 'v-carousel-item', 'v-carousel')],
+// Types
+import { VNode, VNodeDirective } from 'vue'
+
+export default mixins(
+  RegistrableInject('carousel', 'v-carousel-item', 'v-carousel')
+  /* @vue/component */
+).extend({
+  name: 'v-carousel-item',
 
   inheritAttrs: false,
 
@@ -31,8 +37,10 @@ export default {
   },
 
   computed: {
-    computedTransition () {
-      return (this.reverse === !this.$vuetify.rtl) ? this.reverseTransition : this.transition
+    computedTransition (): string {
+      return (this.reverse === !this.$vuetify.rtl)
+        ? this.reverseTransition
+        : this.transition
     }
   },
 
@@ -41,17 +49,17 @@ export default {
   },
 
   beforeDestroy () {
-    this.carousel.unregister(this._uid, this.open)
+    this.carousel.unregister(this._uid)
   },
 
   methods: {
-    open (id, reverse) {
+    open (id: number, reverse: boolean) {
       this.active = this._uid === id
       this.reverse = reverse
     }
   },
 
-  render (h) {
+  render (h): VNode {
     const item = h(VImg, {
       staticClass: 'v-carousel__item',
       props: {
@@ -62,9 +70,9 @@ export default {
       directives: [{
         name: 'show',
         value: this.active
-      }]
+      }] as VNodeDirective[]
     }, this.$slots.default)
 
     return h('transition', { props: { name: this.computedTransition } }, [item])
   }
-}
+})

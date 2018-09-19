@@ -3,7 +3,6 @@ import Vue from 'vue'
 import Positionable from './positionable'
 
 import Stackable from './stackable'
-import Themeable from './themeable'
 
 /* eslint-disable object-property-newline */
 const dimensions = {
@@ -39,8 +38,7 @@ export default Vue.extend({
 
   mixins: [
     Positionable,
-    Stackable,
-    Themeable
+    Stackable
   ],
 
   props: {
@@ -52,6 +50,8 @@ export default Vue.extend({
     },
     allowOverflow: Boolean,
     inputActivator: Boolean,
+    light: Boolean,
+    dark: Boolean,
     maxWidth: {
       type: [Number, String],
       default: 'auto'

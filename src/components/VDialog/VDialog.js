@@ -38,6 +38,8 @@ export default {
     fullscreen: Boolean,
     fullWidth: Boolean,
     noClickAnimation: Boolean,
+    light: Boolean,
+    dark: Boolean,
     maxWidth: {
       type: [String, Number],
       default: 'none'
@@ -220,7 +222,8 @@ export default {
     }, [
       this.$createElement(ThemeProvider, {
         props: {
-          dark: this.$vuetify.dark || this.dark
+          dark: !this.light && (this.$vuetify.dark || this.dark),
+          light: !this.dark && (this.light || !this.$vuetify.dark)
         }
       }, [dialog])
     ]))

@@ -19,7 +19,8 @@ import { consoleWarn } from '../../util/console'
 
 type VTreeviewNodeInstance = InstanceType<typeof VTreeviewNode>
 
-type NodeCache = (string | number)[]
+type NodeCache = Set<string | number>
+type NodeArray = (string | number)[]
 
 type NodeState = {
   parent: number | string | null
@@ -56,7 +57,7 @@ export default mixins(
     active: {
       type: Array,
       default: () => ([])
-    } as PropValidator<NodeCache>,
+    } as PropValidator<NodeArray>,
     items: {
       type: Array,
       default: () => ([])
@@ -66,20 +67,20 @@ export default mixins(
     open: {
       type: Array,
       default: () => ([])
-    } as PropValidator<NodeCache>,
+    } as PropValidator<NodeArray>,
     openAll: Boolean,
     value: {
       type: Array,
       default: () => ([])
-    } as PropValidator<NodeCache>,
+    } as PropValidator<NodeArray>,
     ...VTreeviewNodeProps
   },
 
   data: () => ({
     nodes: {} as Record<string | number, NodeState>,
-    selectedCache: [] as NodeCache,
-    activeCache: [] as NodeCache,
-    openCache: [] as NodeCache
+    selectedCache: new Set() as NodeCache,
+    activeCache: new Set() as NodeCache,
+    openCache: new Set() as NodeCache
   }),
 
   watch: {
@@ -88,16 +89,17 @@ export default mixins(
         // We only care if nodes are removed or added
         if (Object.keys(this.nodes).length === this.countItems(this.items)) return
 
-        const oldSelectedCache = this.selectedCache.slice()
-        this.selectedCache = []
-        this.activeCache = []
+        const oldSelectedCache = [...this.selectedCache]
+        this.selectedCache = new Set()
+        this.activeCache = new Set()
+        this.openCache = new Set()
         this.buildTree(this.items)
 
         // Only emit selected if selection has changed
         // as a result of items changing. This fixes a
         // potential double emit when selecting a node
         // with dynamic children
-        if (!deepEqual(oldSelectedCache, this.selectedCache)) this.emitSelected()
+        if (!deepEqual(oldSelectedCache, [...this.selectedCache])) this.emitSelected()
       },
       deep: true
     },
@@ -178,9 +180,9 @@ export default mixins(
         this.nodes[key] = !children.length ? node : this.calculateState(node, this.nodes)
 
         // Don't forget to rebuild cache
-        if (this.nodes[key].isSelected) this.selectedCache.push(key)
-        if (this.nodes[key].isActive) this.activeCache.push(key)
-        if (this.nodes[key].isOpen) this.openCache.push(key)
+        if (this.nodes[key].isSelected) this.selectedCache.add(key)
+        if (this.nodes[key].isActive) this.activeCache.add(key)
+        if (this.nodes[key].isOpen) this.openCache.add(key)
 
         this.updateVnodeState(key)
       }
@@ -208,15 +210,15 @@ export default mixins(
       return node
     },
     emitOpen () {
-      this.$emit('update:open', this.openCache)
+      this.$emit('update:open', [...this.openCache])
     },
     emitSelected () {
-      this.$emit('change', this.selectedCache)
+      this.$emit('change', [...this.selectedCache])
     },
     emitActive () {
-      this.$emit('update:active', this.activeCache)
+      this.$emit('update:active', [...this.activeCache])
     },
-    getDescendants (key: string | number, descendants: NodeCache = []) {
+    getDescendants (key: string | number, descendants: NodeArray = []) {
       const children = this.nodes[key].children
 
       descendants.push(...children)
@@ -253,15 +255,14 @@ export default mixins(
         this.activeCache.forEach(active => {
           this.nodes[active].isActive = false
           this.updateVnodeState(active)
+          this.activeCache.delete(active)
         })
-
-        this.activeCache = []
       }
 
       const node = this.nodes[key]
 
       if (!node) return
-      if (value) this.activeCache.push(key)
+      if (value) this.activeCache.add(key)
 
       node.isActive = value
 
@@ -288,13 +289,8 @@ export default mixins(
       const all = [key, ...descendants, ...parents]
       all.forEach(this.updateVnodeState)
 
-      this.selectedCache = this.selectedCache.filter(k => changed[ston(k)] !== false)
       Object.keys(changed).forEach(k => {
-        if (changed[k] === true) {
-          const cacheKey = ston(k)
-
-          !this.selectedCache.includes(cacheKey) && this.selectedCache.push(cacheKey)
-        }
+        changed[k] === true ? this.selectedCache.add(ston(k)) : this.selectedCache.delete(ston(k))
       })
     },
     updateOpen (key: string | number, isOpen: boolean) {
@@ -307,8 +303,7 @@ export default mixins(
       } else {
         node.isOpen = isOpen
 
-        this.openCache = this.openCache.filter(k => this.nodes[k].isOpen && k !== key)
-        if (node.isOpen) this.openCache.push(key)
+        node.isOpen ? this.openCache.add(key) : this.openCache.delete(key)
 
         this.updateVnodeState(key)
       }

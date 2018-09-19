@@ -1,13 +1,16 @@
+import Vue from 'vue'
+
 /* @vue/component */
-export default {
+export default Vue.extend({
   name: 'returnable',
 
   props: {
-    returnValue: null
+    returnValue: null as any
   },
 
   data: () => ({
-    originalValue: null
+    isActive: false,
+    originalValue: null as any
   }),
 
   watch: {
@@ -21,9 +24,9 @@ export default {
   },
 
   methods: {
-    save (value) {
+    save (value: any) {
       this.originalValue = value
       this.isActive = false
     }
   }
-}
+})
