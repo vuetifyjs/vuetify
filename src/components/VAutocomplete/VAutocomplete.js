@@ -174,12 +174,15 @@ export default {
 
       this.lazySearch = null
     },
-    items (val) {
+    items (val, oldVal) {
       // If we are focused, the menu
-      // is not active and items change
+      // is not active, hide no data is enabled,
+      // and items change
       // User is probably async loading
       // items, try to activate the menu
       if (
+        !(oldVal && oldVal.length) &&
+        this.hideNoData &&
         this.isFocused &&
         !this.isMenuActive &&
         val.length
