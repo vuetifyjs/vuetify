@@ -13,18 +13,28 @@ export default Vue.extend({
     headers: Array as PropValidator<TableHeader[]>
   },
 
-  render (h, { props, listeners, slots }): VNode {
+  render (h, { props, slots, data }): VNode {
+    const computedSlots = slots()
+
     const columns = props.headers.map(header => {
       const classes = {
         [`text-xs-${header.align || 'left'}`]: true
       }
 
+      const children = []
+      const value = getObjectValueByPath(props.item, header.value)
+
+      if (data.scopedSlots && data.scopedSlots[header.value]) {
+        children.push(data.scopedSlots[header.value]({ item: props.item, header, value }))
+      } else {
+        children.push(value)
+      }
+
       return h('td', {
         class: classes
-      }, [getObjectValueByPath(props.item, header.value)])
+      }, children)
     }) as any
 
-    const computedSlots = slots()
     if (computedSlots.select) {
       columns.unshift(computedSlots.select)
     }

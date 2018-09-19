@@ -52,7 +52,8 @@ export default mixins<options>().extend({
       type: String,
       default: '$vuetify.dataIterator.itemsPerPageText'
     },
-    showFirstLastPage: Boolean // TODO: Better name?
+    showFirstLastPage: Boolean, // TODO: Better name?
+    showPageNumber: Boolean
   },
 
   methods: {
@@ -126,6 +127,10 @@ export default mixins<options>().extend({
       icons.push(this.genIcon(() => {
         this.dataIterator.options.page = this.dataIterator.options.page - 1
       }, this.dataIterator.options.page === 1, 'Previous page', this.$vuetify.rtl ? this.nextIcon : this.prevIcon))
+
+      if (this.showPageNumber) {
+        icons.push(this.$createElement('span', [this.dataIterator.options.page.toString()]))
+      }
 
       icons.push(this.genIcon(() => {
         this.dataIterator.options.page = this.dataIterator.options.page + 1

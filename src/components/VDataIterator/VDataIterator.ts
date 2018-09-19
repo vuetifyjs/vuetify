@@ -349,7 +349,7 @@ export default mixins(
 
       if (this.$slots[name]) slots.push(...this.$slots[name])
       if (this.$scopedSlots[name]) {
-        const scoped = this.$scopedSlots[name](this)
+        const scoped = this.$scopedSlots[name]({ items: this.computedItems })
         Array.isArray(scoped) ? slots.push(...scoped) : slots.push(scoped)
       }
 
@@ -377,7 +377,10 @@ export default mixins(
       bodies.push(this.$slots.default)
 
       const slots = this.computeSlots('body')
-      if (slots.length) bodies.push(slots)
+      if (slots.length) {
+        bodies.push(slots)
+        return bodies
+      }
 
       const items = this.genItems()
       if (items) bodies.push(items)

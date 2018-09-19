@@ -201,7 +201,8 @@ export default mixins(VDataIterator).extend({
           props: {
             item,
             headers: this.headers
-          }
+          },
+          scopedSlots: this.$scopedSlots
         }, children)
       })
     },
@@ -224,8 +225,10 @@ export default mixins(VDataIterator).extend({
       const open = !!this.openCache[group]
 
       const toggle = this.$createElement(VBtn, {
+        staticClass: 'ma-0',
         props: {
-          icon: true
+          icon: true,
+          small: true
         },
         on: {
           click: () => this.$set(this.openCache, group, !this.openCache[group])
@@ -268,7 +271,7 @@ export default mixins(VDataIterator).extend({
         if (!this.openCache.hasOwnProperty(group)) this.$set(this.openCache, group, true)
 
         if (this.$scopedSlots.group) {
-          rows.push(this.$scopedSlots.group({ groupBy, group, items: grouped[group] }))
+          rows.push(this.$scopedSlots.group({ groupBy, group, items: grouped[group], colspan: this.headers.length }))
         } else {
           rows.push(this.genDefaultGroupedRow(group, grouped[group]))
         }
