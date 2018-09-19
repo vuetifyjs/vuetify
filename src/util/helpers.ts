@@ -323,11 +323,11 @@ export const camelize = (str: string): string => {
   return str.replace(camelizeRE, (_, c) => c ? c.toUpperCase() : '')
 }
 
-export function groupByProperty (xs: Array<any>, key: string) {
+export function groupByProperty (xs: any[], key: string) {
   return xs.reduce((rv, x) => {
     (rv[x[key]] = rv[x[key]] || []).push(x)
     return rv
   }, {})
 }
 
-export function wrapInArray<T> (v: T | Array<T>): Array<T> { return Array.isArray(v) ? v : [v] }
+export function wrapInArray<T> (v: T | T[]): T[] { return Array.isArray(v) ? v : [v] }

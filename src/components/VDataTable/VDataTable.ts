@@ -2,7 +2,7 @@ import '../../stylus/components/_data-table.styl'
 
 // Components
 import { VDataIterator } from '../VDataIterator'
-import { VDataHeader, VRowGroup, VRowSimple } from '.'
+import { VDataHeader, VRowSimple, VRowGroup } from '.'
 
 // Utils
 import { getObjectValueByPath, wrapInArray, groupByProperty } from '../../util/helpers'
@@ -12,6 +12,8 @@ import { VNodeChildrenArrayContents, VNode, VNodeData } from 'vue'
 import { PropValidator } from 'vue/types/options'
 import mixins from '../../util/mixins'
 import VCellCheckbox from './VCellCheckbox'
+import { VBtn } from '../VBtn'
+import { VIcon } from '../VIcon'
 
 export interface TableHeader {
   text: string
@@ -219,25 +221,45 @@ export default mixins(VDataIterator).extend({
       }
     },
     genDefaultGroupedRow (group: string, items: any[]) {
+      const open = !!this.openCache[group]
+
+      const toggle = this.$createElement(VBtn, {
+        props: {
+          icon: true
+        },
+        on: {
+          click: () => this.$set(this.openCache, group, !this.openCache[group])
+        }
+      }, [this.$createElement(VIcon, [open ? 'remove' : 'add'])])
+
+      const column = this.$createElement('td', {
+        staticClass: 'text-xs-left',
+        attrs: {
+          colspan: this.headers.length
+        },
+        on: {
+
+        }
+      }, [toggle, group])
+
       return this.$createElement(VRowGroup, {
         props: {
-          open: !!this.openCache[group]
+          open
         }
       }, [
-        this.$createElement('tr', { slot: 'header', staticClass: 'v-row-group__header' }, [
-          this.$createElement('td', {
-            on: {
-              click: () => this.$set(this.openCache, group, !this.openCache[group])
-            }
-          }, ['toggle']),
-          this.$createElement('td', { attrs: { colspan: this.headers.length } }, [group])
-        ]),
+        this.$createElement('tr', { slot: 'header', staticClass: 'v-row-group__header' }, [column]),
         this.$createElement('template', { slot: 'items' }, this.genDefaultRows(items))
       ])
     },
     genGroupedRows (items: any[], groupBy: string): VNodeChildrenArrayContents {
       const grouped = groupByProperty(items, groupBy)
       const groups = Object.keys(grouped)
+
+      // TODO: Better way to do this? Sorting on group
+      const i = this.options.sortBy.findIndex(v => v === groupBy)
+      if (i > -1 && this.options.sortDesc[i]) {
+        groups.reverse()
+      }
 
       const rows: VNodeChildrenArrayContents = []
       for (let i = 0; i < groups.length; i++) {
