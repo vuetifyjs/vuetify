@@ -9,7 +9,6 @@ import { inject as RegistrableInject } from './registrable'
 // Utilities
 import mixins from '../util/mixins'
 import { PropValidator } from 'vue/types/options'
-import { consoleWarn } from '../util/console'
 
 type VItemGroupInstance = InstanceType<typeof VItemGroup>
 
@@ -52,10 +51,6 @@ export default mixins<options>(
   },
 
   created () {
-    if (!('value' in this)) {
-      consoleWarn('Implementing component is missing a value property', this)
-    }
-
     this.itemGroup && this.itemGroup.register(this)
   },
 
