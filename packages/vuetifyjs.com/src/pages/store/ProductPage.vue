@@ -143,7 +143,7 @@
       carousel: null,
       cartLoading: false,
       dialog: false,
-      dialogCarousel: false,
+      dialogCarousel: null,
       select: {},
       quantity: 1
     }),
