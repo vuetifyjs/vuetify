@@ -154,6 +154,9 @@ export default mixins(VDataIterator).extend({
         return el.tag === 'tr'
       })
     },
+    createSlotProps () {
+      return { items: this.computedItems, widths: this.widths }
+    },
     genRow (data: any, content: string | VNodeChildrenArrayContents) {
       return this.$createElement('tr', data, content)
     },

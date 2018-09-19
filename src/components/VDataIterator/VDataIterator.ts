@@ -344,12 +344,15 @@ export default mixins(
 
       return props
     },
+    createSlotProps () {
+      return { items: this.computedItems }
+    },
     computeSlots (name: string): VNodeChildrenArrayContents {
       const slots: VNodeChildrenArrayContents = []
 
       if (this.$slots[name]) slots.push(...this.$slots[name])
       if (this.$scopedSlots[name]) {
-        const scoped = this.$scopedSlots[name]({ items: this.computedItems })
+        const scoped = this.$scopedSlots[name](this.createSlotProps())
         Array.isArray(scoped) ? slots.push(...scoped) : slots.push(scoped)
       }
 
