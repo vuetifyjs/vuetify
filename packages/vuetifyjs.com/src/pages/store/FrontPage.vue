@@ -6,7 +6,7 @@
       class="ma-0"
       indeterminate
     />
-    <v-jumbotron
+    <v-img
       v-if="products.length > 0"
       height="100%"
       gradient="to bottom, rgb(255,255,255), rgba(66,165,245, .05), rgba(66,165,245, .4)"
@@ -16,7 +16,7 @@
       <store-cta key="cta" />
 
       <store-categories key="categories" />
-    </v-jumbotron>
+    </v-img>
   </section>
 </template>
 

@@ -84,7 +84,7 @@
     computed: {
       ...mapState('store', ['checkout']),
       stop () {
-        return this.$route.name === 'store/Front' ? -1 : 1
+        return this.$route.name === 'store/Front' ? this.links.length : 1
       }
     }
   }
