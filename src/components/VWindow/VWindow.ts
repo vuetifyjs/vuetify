@@ -1,30 +1,43 @@
 // Styles
 import '../../stylus/components/_windows.styl'
 
+// Mixins
+import Proxyable from '../../mixins/proxyable'
+
 // Utilities
 import {
   addOnceEventListener,
   convertToUnit
 } from '../../util/helpers'
+import mixins from '../../util/mixins'
 
 // Types
-import Vue from 'vue'
 import { VNode } from 'vue/types/vnode'
 
-/* @vue/component */
-export default Vue.extend({
+export default mixins(
+  Proxyable
+  /* @vue/component */
+).extend({
   name: 'v-window',
 
   props: {
     mode: String,
-    reverse: Boolean,
-    vertical: Boolean,
-    transition: String
+    reverse: {
+      type: Boolean,
+      default: undefined
+    },
+    transition: String,
+    value: {
+      type: Number,
+      default: undefined
+    },
+    vertical: Boolean
   },
 
   data: () => ({
     height: undefined as undefined | string,
-    isActive: false
+    isActive: false,
+    isReverse: false
   }),
 
   computed: {
@@ -32,9 +45,20 @@ export default Vue.extend({
       if (this.transition) return this.transition
 
       const axis = this.vertical ? 'y' : 'x'
-      const direction = this.reverse ? '-reverse' : ''
+      const direction = this.internalReverse ? '-reverse' : ''
 
       return `v-window-${axis}${direction}-transition`
+    },
+    internalReverse (): boolean {
+      return typeof this.reverse === 'undefined'
+        ? this.isReverse
+        : this.reverse
+    }
+  },
+
+  watch: {
+    internalValue (val, oldVal) {
+      this.isReverse = val < oldVal
     }
   },
 
@@ -67,6 +91,14 @@ export default Vue.extend({
         }
       }, [this.genTransition()])
     },
+    genDefaultSlot () {
+      if (!this.$slots.default ||
+        this.$slots.default.length === 1 ||
+        typeof this.value === 'undefined'
+      ) return this.$slots.default
+
+      return this.$slots.default.filter((node, i) => i === this.internalValue)
+    },
     genTransition (): VNode {
       return this.$createElement('transition', {
         props: {
@@ -79,7 +111,7 @@ export default Vue.extend({
           afterEnter: this.onAfterEnter,
           beforeLeave: this.onBeforeLeave
         }
-      }, this.$slots.default)
+      }, this.genDefaultSlot())
     }
   },
 
