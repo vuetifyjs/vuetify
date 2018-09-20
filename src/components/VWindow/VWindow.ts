@@ -39,6 +39,23 @@ export default Vue.extend({
   },
 
   methods: {
+    onAfterEnter () {
+      this.height = undefined
+      this.isActive = false
+    },
+    onBeforeEnter () {
+      this.isActive = true
+    },
+    onBeforeLeave (el: HTMLElement) {
+      this.height = convertToUnit(el.clientHeight)
+    },
+    onEnter (el: HTMLElement, done: () => void) {
+      addOnceEventListener(el, 'transitionend', done)
+
+      requestAnimationFrame(() => {
+        this.height = convertToUnit(el.clientHeight)
+      })
+    },
     genContainer (): VNode {
       return this.$createElement('div', {
         staticClass: 'v-window__container',
@@ -57,23 +74,10 @@ export default Vue.extend({
           mode: this.mode
         },
         on: {
-          beforeEnter: () => {
-            this.isActive = true
-          },
-          enter: (el: HTMLElement, done: () => void) => {
-            addOnceEventListener(el, 'transitionend', done)
-
-            requestAnimationFrame(() => {
-              this.height = convertToUnit(el.clientHeight)
-            })
-          },
-          afterEnter: () => {
-            this.height = undefined
-            this.isActive = false
-          },
-          beforeLeave: (el: HTMLElement) => {
-            this.height = convertToUnit(el.clientHeight)
-          }
+          beforeEnter: this.onBeforeEnter,
+          enter: this.onEnter,
+          afterEnter: this.onAfterEnter,
+          beforeLeave: this.onBeforeLeave
         }
       }, this.$slots.default)
     }
