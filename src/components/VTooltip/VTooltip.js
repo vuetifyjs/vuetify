@@ -130,6 +130,15 @@ export default {
     }
   },
 
+  watch: {
+    positionX () {
+      this.updateDimensions()
+    },
+    positionY () {
+      this.updateDimensions()
+    }
+  },
+
   mounted () {
     this.value && this.callActivate()
   },
