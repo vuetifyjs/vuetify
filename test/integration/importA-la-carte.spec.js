@@ -62,6 +62,7 @@ import VTimePicker from '@/components/VTimePicker'
 import VToolbar from '@/components/VToolbar'
 import VTooltip from '@/components/VTooltip'
 import VTreeview from '@/components/VTreeview'
+import VWindow from '@/components/VWindow'
 import Transitions from '@/components/transitions'
 import Vuetify from '@/components/Vuetify'
 
@@ -128,6 +129,7 @@ const components = {
   VToolbar,
   VTooltip,
   VTreeview,
+  VWindow,
   Transitions
 }
 

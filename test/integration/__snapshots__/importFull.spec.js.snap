@@ -144,5 +144,6 @@ Array [
   "VTooltip",
   "VTreeview",
   "VTreeviewNode",
+  "VWindow",
 ]
 `;
