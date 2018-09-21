@@ -427,4 +427,13 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
 
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
+
+  it('should display current page number', () => {
+    const data = dataTableTestData()
+    data.propsData.rowsPerPageItems = [1]
+    data.propsData.displayCurrentPageNumber = true
+    const wrapper = mount(VDataTable, data)
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

@@ -653,3 +653,101 @@ exports[`VDataTable.vue should match display no-results-text when no results 1`]
 </td>
 
 `;
+
+exports[`VDataTable.vue should display current page number 1`] = `
+
+<div>
+  <div class="v-table__overflow">
+    <table class="v-datatable v-table theme--light">
+      <thead>
+        <tr>
+          <th role="columnheader"
+              scope="col"
+              aria-label="First Column: Sorted ascending. Activate to sort descending."
+              aria-sort="ascending"
+              tabindex="0"
+              class="column sortable active asc text-xs-left a-string"
+          >
+            First Column
+            <i aria-hidden="true"
+               class="v-icon material-icons theme--light"
+               style="font-size: 16px;"
+            >
+              arrow_upward
+            </i>
+          </th>
+          <th role="columnheader"
+              scope="col"
+              aria-label="Second Column: Not sorted."
+              aria-sort="none"
+              class="column text-xs-left"
+          >
+            Second Column
+          </th>
+          <th role="columnheader"
+              scope="col"
+              aria-label="Third Column: Not sorted. Activate to sort ascending."
+              aria-sort="none"
+              tabindex="0"
+              class="column sortable text-xs-left an array"
+          >
+            Third Column
+            <i aria-hidden="true"
+               class="v-icon material-icons theme--light"
+               style="font-size: 16px;"
+            >
+              arrow_upward
+            </i>
+          </th>
+        </tr>
+        <tr class="v-datatable__progress">
+          <th colspan="3"
+              class="column"
+          >
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+  <div class="v-datatable v-table theme--light">
+    <div class="v-datatable__actions">
+      <div class="v-datatable__actions__range-controls">
+        <div class="v-datatable__actions__pagination">
+          1-1 of 3
+        </div>
+        <button disabled="disabled"
+                type="button"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--icon theme--light"
+                aria-label="Previous page"
+        >
+          <div class="v-btn__content">
+            <i aria-hidden="true"
+               class="v-icon material-icons theme--light"
+            >
+              chevron_left
+            </i>
+          </div>
+        </button>
+        <div>
+          1
+        </div>
+        <button type="button"
+                class="v-btn v-btn--flat v-btn--icon theme--light"
+                aria-label="Next page"
+        >
+          <div class="v-btn__content">
+            <i aria-hidden="true"
+               class="v-icon material-icons theme--light"
+            >
+              chevron_right
+            </i>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
