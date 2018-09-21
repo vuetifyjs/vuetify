@@ -29,6 +29,7 @@ export default {
     hideActions: Boolean,
     disableInitialSort: Boolean,
     mustSort: Boolean,
+    displayCurrentPageNumber: Boolean,
     noResultsText: {
       type: String,
       default: '$vuetify.dataIterator.noResultsText'
@@ -409,6 +410,11 @@ export default {
         }
       }, [this.$createElement(VIcon, this.$vuetify.rtl ? this.prevIcon : this.nextIcon)])
     },
+    genCurrentPageNumber () {
+      if (this.displayCurrentPageNumber) {
+        return this.$createElement('div', this.computedPagination.page)
+      }
+    },
     genSelect () {
       return this.$createElement('div', {
         'class': this.actionsSelectClasses
@@ -465,6 +471,7 @@ export default {
       }, [
         this.genPagination(),
         this.genPrevIcon(),
+        this.genCurrentPageNumber(),
         this.genNextIcon()
       ])
 
