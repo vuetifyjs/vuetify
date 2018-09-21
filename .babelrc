@@ -44,6 +44,11 @@
       "plugins": [
         "./build/babel-transform-stylus-paths.js"
       ]
+    },
+    "lib": {
+      "plugins": [
+        "./build/babel-transform-stylus-paths.js"
+      ]
     }
   }
 }
