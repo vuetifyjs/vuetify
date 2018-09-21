@@ -13,6 +13,13 @@ import { keyCodes } from '../../../util/helpers'
 
 /* @vue/component */
 export default {
+  props: {
+    keyable: {
+      type: Boolean,
+      default: true
+    }
+  },
+
   data: () => ({
     listIndex: -1,
     tiles: []
