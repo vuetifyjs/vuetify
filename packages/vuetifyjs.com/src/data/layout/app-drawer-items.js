@@ -10,7 +10,8 @@ export default [
       { name: 'FrequentlyAskedQuestions', title: 'Frequently asked questions' },
       { name: 'SponsorsAndBackers', title: 'Sponsors and backers' },
       { name: 'Contributing', title: 'Contributing' },
-      { name: 'Roadmap', title: 'Roadmap' }
+      { name: 'Roadmap', title: 'Roadmap' },
+      { name: 'Consulting', title: 'Consulting and support', badge: 'new' }
     ]
   },
   {

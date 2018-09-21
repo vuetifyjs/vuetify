@@ -53,6 +53,12 @@
     "description": "The upcoming planned features and new functionality coming to Vuetify. New vue components, new directives, and much much more!.",
     "keywords": "roadmap, future plans"
   },
+  "getting-started/consulting": {
+    "h1": "Consulting & Support",
+    "title": "Consulting & Support",
+    "description": "Get help and support from the creator of Vuetify, John Leider",
+    "keywords": "consulting, support, help"
+  },
   "framework/icons": {
     "h1": "Installing Icons",
     "title": "Installing Icons",
