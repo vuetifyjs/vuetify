@@ -24,6 +24,10 @@
     "route": "getting-started/roadmap"
   },
   {
+    "page": "getting-started/Consulting",
+    "route": "getting-started/consulting"
+  },
+  {
     "page": "framework/Icons",
     "route": "framework/icons"
   },
