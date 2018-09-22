@@ -39,9 +39,27 @@ export default {
       default: null
     },
     hideHeaders: Boolean,
+    rowsPerPageItems: {
+      type: Array,
+      default () {
+        return [
+          5,
+          10,
+          25,
+          {
+            text: '$vuetify.dataTable.rowsPerPageAll',
+            value: -1
+          }
+        ]
+      }
+    },
     rowsPerPageText: {
       type: String,
       default: '$vuetify.dataTable.rowsPerPageText'
+    },
+    rowsPerPageAll: {
+      type: String,
+      default: '$vuetify.dataTable.rowsPerPageAll'
     },
     customFilter: {
       type: Function,

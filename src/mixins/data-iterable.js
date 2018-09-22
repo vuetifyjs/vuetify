@@ -59,6 +59,10 @@ export default {
       type: String,
       default: '$vuetify.dataIterator.rowsPerPageText'
     },
+    rowsPerPageAll: {
+      type: String,
+      default: '$vuetify.dataIterator.rowsPerPageAll'
+    },
     selectAll: [Boolean, String],
     search: {
       required: false

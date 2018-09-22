@@ -8,7 +8,8 @@ export default {
     prevPage: 'صفحه قبل'
   },
   dataTable: {
-    rowsPerPageText: 'ردیف در صفحه:'
+    rowsPerPageText: 'ردیف در صفحه:',
+    rowsPerPageAll: 'همه'
   },
   noDataText: 'اطلاعاتی یافت نشد'
 }

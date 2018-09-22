@@ -8,7 +8,8 @@ export default {
     prevPage: 'Попередня сторінка'
   },
   dataTable: {
-    rowsPerPageText: 'Рядків на сторінці:'
+    rowsPerPageText: 'Рядків на сторінці:',
+    rowsPerPageAll: 'Всі'
   },
   noDataText: 'Немає даних для відображення'
 }

@@ -8,7 +8,8 @@ export default {
     prevPage: 'Προηγούμενη σελίδα'
   },
   dataTable: {
-    rowsPerPageText: 'Γραμμές ανά σελίδα:'
+    rowsPerPageText: 'Γραμμές ανά σελίδα:',
+    rowsPerPageAll: 'Όλα'
   },
   noDataText: 'Χωρίς δεδομένα'
 }

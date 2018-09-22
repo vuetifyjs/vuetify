@@ -8,7 +8,8 @@ export default {
     prevPage: 'Poprzednia strona'
   },
   dataTable: {
-    rowsPerPageText: 'Wierszy na stronie:'
+    rowsPerPageText: 'Wierszy na stronie:',
+    rowsPerPageAll: 'Wszystkie'
   },
   noDataText: 'Brak danych'
 }

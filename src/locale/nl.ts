@@ -8,7 +8,8 @@ export default {
     prevPage: 'Vorige pagina'
   },
   dataTable: {
-    rowsPerPageText: 'Rijen per pagina:'
+    rowsPerPageText: 'Rijen per pagina:',
+    rowsPerPageAll: 'Alles'
   },
   noDataText: 'Geen gegevens beschikbaar'
 }
