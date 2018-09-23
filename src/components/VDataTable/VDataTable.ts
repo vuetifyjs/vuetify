@@ -1,14 +1,14 @@
 import '../../stylus/components/_data-table.styl'
 
 // Components
+import { VDataHeader, VRowFunctional, VRowGroup, VDataHeaderMobile } from '.'
 import { VDataIterator } from '../VDataIterator'
-import { VDataHeader, VRowSimple, VRowGroup } from '.'
 
 // Utils
-import { getObjectValueByPath, wrapInArray, groupByProperty } from '../../util/helpers'
+import { getObjectValueByPath, wrapInArray, groupByProperty, convertToUnit } from '../../util/helpers'
 
 // Types
-import { VNodeChildrenArrayContents, VNode, VNodeData } from 'vue'
+import { VNodeChildrenArrayContents, VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
 import mixins from '../../util/mixins'
 import VCellCheckbox from './VCellCheckbox'
@@ -20,9 +20,11 @@ export interface TableHeader {
   value: string
   align?: 'start' | 'center' | 'end'
   sortable?: boolean
+  resizable?: boolean
+  divider?: boolean
   class?: string | string[]
   width?: string | number
-  type?: 'select-all'
+  type?: 'showExpand' | 'showSelect'
   filter?: (v: any) => boolean
   sort?: (a: any, b: any) => number
 }
@@ -39,7 +41,7 @@ export default mixins(VDataIterator).extend({
   props: {
     customSort: {
       type: Function,
-      default: (items: any[], sortBy: string[], sortDesc: boolean[], headers: Record<string, TableHeader>): any[] => {
+      default: (items: any[], sortBy: string[], sortDesc: boolean[], locale: string, headers: Record<string, TableHeader>): any[] => {
         if (sortBy === null) return items
 
         return items.sort((a: any, b: any): number => {
@@ -60,12 +62,13 @@ export default mixins(VDataIterator).extend({
               return 0
             }
 
-            [sortA, sortB] = [sortA, sortB].map(s => (s || '').toString().toLocaleLowerCase())
+            [sortA, sortB] = [sortA, sortB].map(s => (s || '').toString())
 
             if (sortA !== sortB) {
               if (!isNaN(sortA) && !isNaN(sortB)) return Number(sortA) - Number(sortB)
-              if (sortA > sortB) return 1
-              if (sortA < sortB) return -1
+              // if (sortA > sortB) return 1
+              // if (sortA < sortB) return -1
+              return sortA.localeCompare(sortB, locale)
             }
           }
 
@@ -80,17 +83,28 @@ export default mixins(VDataIterator).extend({
       default: () => ([])
     } as PropValidator<TableHeader[]>,
     height: String,
-    hideHeader: Boolean,
+    hideDefaultHeader: Boolean,
     loading: Boolean,
     showSelect: Boolean,
     static: Boolean,
-    calculateWidths: Boolean
+    calculateWidths: Boolean,
+    caption: String,
+    showExpand: Boolean
   },
 
-  data: () => ({
-    openCache: {} as { [key: string]: boolean },
-    widths: [] as number[]
-  }),
+  data () {
+    return {
+      openCache: {} as { [key: string]: boolean },
+      widths: [] as number[],
+      options: {
+        sortBy: wrapInArray(this.sortBy),
+        sortDesc: wrapInArray(this.sortDesc),
+        itemsPerPage: this.itemsPerPage,
+        page: this.page,
+        groupBy: this.groupBy
+      } // TODO: Better way than to reproduce this whole object?
+    }
+  },
 
   computed: {
     headersWithCustomSort (): Record<string, TableHeader> {
@@ -100,6 +114,27 @@ export default mixins(VDataIterator).extend({
         if (header.sort) headers[header.value] = header
       }
       return headers
+    },
+    computedHeaders (): TableHeader[] {
+      const headers = this.headers.filter(h => h.value === undefined || h.value !== this.options.groupBy)
+
+      if (this.showSelect) {
+        headers.unshift({ text: '', value: 'dataTable.select', sortable: false, width: '1px' })
+      }
+
+      if (this.showExpand) {
+        headers.unshift({ text: '', value: 'dataTable.expand', sortable: false, width: '1px' })
+      }
+
+      return headers
+    },
+    headersLength () {
+      return this.computedHeaders.length
+    },
+    computedWidths (): (string | undefined)[] {
+      return this.computedHeaders.map((h, i) => {
+        return convertToUnit(h.width || this.widths[i])
+      })
     }
   },
 
@@ -113,8 +148,9 @@ export default mixins(VDataIterator).extend({
   mounted () {
     if (this.calculateWidths) {
       window.addEventListener('resize', this.calcWidths)
-      this.calcWidths()
     }
+
+    this.calcWidths()
   },
 
   beforeDestroy () {
@@ -141,18 +177,11 @@ export default mixins(VDataIterator).extend({
 
       return items
     },
-    sortItems (items: any[], sortBy: string[], sortDesc: boolean[]): any[] {
-      sortBy = this.groupBy ? [this.groupBy, ...sortBy] : sortBy
-      sortDesc = this.groupBy ? [false, ...sortDesc] : sortDesc
+    sortItems (items: any[], sortBy: string[], sortDesc: boolean[], locale: string): any[] {
+      sortBy = this.options.groupBy ? [this.options.groupBy, ...sortBy] : sortBy
+      sortDesc = this.options.groupBy ? [false, ...sortDesc] : sortDesc
 
-      return this.customSort(items, sortBy, sortDesc, this.headersWithCustomSort)
-    },
-    hasRow (content: string | VNodeChildrenArrayContents) {
-      content = wrapInArray(content)
-      return content.some((el: any) => {
-        // return el.componentOptions && el.componentOptions.tag === 'v-row'
-        return el.tag === 'tr'
-      })
+      return this.customSort(items, sortBy, sortDesc, locale, this.headersWithCustomSort)
     },
     createSlotProps () {
       return { items: this.computedItems, widths: this.widths }
@@ -163,13 +192,8 @@ export default mixins(VDataIterator).extend({
     genHeaders (): VNodeChildrenArrayContents {
       const headers = this.computeSlots('header')
 
-      if (!this.hideHeader && !this.static) {
-        headers.push(this.$createElement(VDataHeader, {
-          props: {
-            showSelect: this.showSelect
-          }
-        }))
-        // headers.push(h(VTableProgress))
+      if (!this.hideDefaultHeader && !this.static) {
+        headers.push(this.$createElement(this.isMobile ? VDataHeaderMobile : VDataHeader))
       }
 
       return headers
@@ -177,8 +201,8 @@ export default mixins(VDataIterator).extend({
     genItems (): VNodeChildrenArrayContents | VNode {
       const items: any[] = []
 
-      if (this.groupBy) {
-        items.push(this.genGroupedRows(this.computedItems, this.groupBy))
+      if (this.options.groupBy) {
+        items.push(this.genGroupedRows(this.computedItems, this.options.groupBy))
       } else {
         items.push(this.genRows(this.computedItems))
       }
@@ -187,44 +211,69 @@ export default mixins(VDataIterator).extend({
     },
     genDefaultRows (items: any[]): VNodeChildrenArrayContents {
       return items.map(item => {
+        const scopedSlots: any = Object.keys(this.$scopedSlots).filter(k => k.startsWith('item.column.')).reduce((obj: any, k: string) => {
+          obj[k] = this.$scopedSlots[k]
+          return obj
+        }, {})
         const children = []
+
         if (this.showSelect) {
-          children.push(this.$createElement(VCellCheckbox, {
-            slot: 'select',
+          scopedSlots['item.column.dataTable.select'] = (props: any) => this.$createElement(VCellCheckbox, {
             props: {
               inputValue: this.isSelected(item)
             },
             on: {
               change: (v: any) => this.select(item, v)
             }
-          }))
+          })
         }
 
-        return this.$createElement(VRowSimple, {
-          props: {
-            item,
-            headers: this.headers
+        const expanded = this.isExpanded(item)
+
+        if (this.showExpand) {
+          scopedSlots['item.column.dataTable.expand'] = (props: any) => this.$createElement(VIcon, {
+            staticClass: 'expand__icon',
+            class: {
+              'expand__icon--active': expanded
+            },
+            on: {
+              click: () => this.expand(item, !expanded)
+            }
+          }, [this.$vuetify.icons.expand]) // TODO: prop?
+        }
+
+        const itemExpanded = this.$scopedSlots['item.expanded']
+
+        if (expanded && itemExpanded) {
+          children.push(this.$createElement('tr', {
+            staticClass: 'expanded expanded__content'
+          }, [itemExpanded({ item, headers: this.computedHeaders })]))
+        }
+
+        return this.$createElement(VRowFunctional, {
+          class: {
+            'expanded expanded__row': expanded
           },
-          scopedSlots: this.$scopedSlots
+          props: {
+            headers: this.computedHeaders,
+            item,
+            mobile: this.isMobile
+          },
+          scopedSlots
         }, children)
       })
     },
     genScopedRows (items: any[]): VNodeChildrenArrayContents {
       return items.map((item: any, i: number) => {
-        const row = this.$scopedSlots.item(this.createItemProps(item)) as any
-
-        if (this.hasRow(row)) return row
-        else return this.genRow({ key: getObjectValueByPath(item, this.itemKey) }, row)
+        const props = this.createItemProps(item)
+        props.headers = this.computedHeaders
+        return this.$scopedSlots.item(props)
       })
     },
     genRows (items: any[]): VNodeChildrenArrayContents {
-      if (this.$scopedSlots.item) {
-        return this.genScopedRows(items)
-      } else {
-        return this.genDefaultRows(items)
-      }
+      return this.$scopedSlots.item ? this.genScopedRows(items) : this.genDefaultRows(items)
     },
-    genDefaultGroupedRow (group: string, items: any[]) {
+    genDefaultGroupedRow (groupBy: string, group: string, items: any[]) {
       const open = !!this.openCache[group]
 
       const toggle = this.$createElement(VBtn, {
@@ -238,15 +287,23 @@ export default mixins(VDataIterator).extend({
         }
       }, [this.$createElement(VIcon, [open ? 'remove' : 'add'])])
 
+      const remove = this.$createElement(VBtn, {
+        staticClass: 'ma-0',
+        props: {
+          icon: true,
+          small: true
+        },
+        on: {
+          click: () => this.options.groupBy = ''
+        }
+      }, [this.$createElement(VIcon, ['close'])])
+
       const column = this.$createElement('td', {
         staticClass: 'text-xs-left',
         attrs: {
-          colspan: this.headers.length
-        },
-        on: {
-
+          colspan: this.headersLength
         }
-      }, [toggle, group])
+      }, [toggle, `${groupBy}: ${group}`, remove])
 
       return this.$createElement(VRowGroup, {
         props: {
@@ -254,7 +311,7 @@ export default mixins(VDataIterator).extend({
         }
       }, [
         this.$createElement('tr', { slot: 'header', staticClass: 'v-row-group__header' }, [column]),
-        this.$createElement('template', { slot: 'items' }, this.genDefaultRows(items))
+        this.$createElement('template', { slot: 'content' }, this.genDefaultRows(items))
       ])
     },
     genGroupedRows (items: any[], groupBy: string): VNodeChildrenArrayContents {
@@ -274,9 +331,15 @@ export default mixins(VDataIterator).extend({
         if (!this.openCache.hasOwnProperty(group)) this.$set(this.openCache, group, true)
 
         if (this.$scopedSlots.group) {
-          rows.push(this.$scopedSlots.group({ groupBy, group, items: grouped[group], colspan: this.headers.length }))
+          rows.push(this.$scopedSlots.group({
+            groupBy,
+            group,
+            items: grouped[group],
+            colspan: this.headersLength,
+            headers: this.computedHeaders
+          }))
         } else {
-          rows.push(this.genDefaultGroupedRow(group, grouped[group]))
+          rows.push(this.genDefaultGroupedRow(groupBy, group, grouped[group]))
         }
       }
 
@@ -291,14 +354,32 @@ export default mixins(VDataIterator).extend({
         staticClass: 'v-data-table__body'
       }, items)
     },
-    genEmpty (content: VNodeData) {
-      return this.$createElement('tr', [this.$createElement('td', content)])
+    genEmpty (content: VNodeChildrenArrayContents) {
+      return this.$createElement('tr', [this.$createElement('td', { attrs: { colspan: this.headersLength } }, content)])
+    },
+    genColGroup () {
+      const cols = this.computedHeaders.map((h, i) => this.$createElement('col', {
+        class: {
+          'divider': h.divider || h.resizable,
+          'resizable': h.resizable
+        },
+        style: {
+          width: this.computedWidths[i]
+        }
+      }))
+
+      return this.$createElement('colgroup', cols)
     },
     genTable () {
-      const children: VNodeChildrenArrayContents = [
-        ...this.genHeaders(),
-        ...this.genBodies()
-      ]
+      const children: VNodeChildrenArrayContents = []
+
+      children.push(this.genColGroup(), ...this.genHeaders())
+
+      children.push(...this.genBodies())
+
+      if (this.caption) {
+        children.unshift(this.$createElement('caption', [this.caption]))
+      }
 
       return this.$createElement('div', {
         staticClass: 'v-data-table__wrapper',
@@ -319,6 +400,7 @@ export default mixins(VDataIterator).extend({
       class: {
         'v-data-table--dense': this.dense,
         'v-data-table--fixed': !!this.height,
+        'v-data-table--mobile': this.isMobile,
         ...this.themeClasses
       }
     }, children)

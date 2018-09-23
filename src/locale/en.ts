@@ -4,6 +4,7 @@ export default {
     rowsPerPageAll: 'All',
     pageText: '{0}-{1} of {2}',
     noResultsText: 'No matching records found',
+    loadingText: 'Loading data...',
     nextPage: 'Next page',
     prevPage: 'Previous page'
   },

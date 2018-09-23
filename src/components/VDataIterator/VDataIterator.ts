@@ -33,7 +33,7 @@ export default mixins(
     },
     customSort: {
       type: Function,
-      default: (items: any[], sortBy: string[], sortDesc: boolean[]) => {
+      default: (items: any[], sortBy: string[], sortDesc: boolean[], locale: string) => {
         if (sortBy === null) return items
 
         return items.sort((a: any, b: any): number => {
@@ -56,8 +56,9 @@ export default mixins(
 
             if (sortA !== sortB) {
               if (!isNaN(sortA) && !isNaN(sortB)) return Number(sortA) - Number(sortB)
-              if (sortA > sortB) return 1
-              if (sortA < sortB) return -1
+              // if (sortA > sortB) return 1
+              // if (sortA < sortB) return -1
+              return sortA.localeCompare(sortB, locale)
             }
           }
 
@@ -123,15 +124,23 @@ export default mixins(
     mustSort: {
       type: Boolean
     },
-    selected: Array as PropValidator<any[]>,
+    value: Array as PropValidator<any[]>,
     singleSelect: Boolean, // TODO: Better name to fit in with similar functionality in other components?
     expanded: Array as PropValidator<any[]>,
     singleExpand: Boolean, // TODO: Better name to fit in with similar functionality in other components?
-    hideFooter: Boolean,
+    hideDefaultFooter: Boolean,
     footerProps: {
       type: Object,
       default: () => ({})
-    } as PropValidator<any> // TODO: Type VDataFooter props here
+    } as PropValidator<any>, // TODO: Type VDataFooter props here
+    locale: {
+      type: String,
+      default: 'en-us'
+    },
+    mobileBreakpoint: {
+      type: String,
+      default: 'sm'
+    }
   },
 
   data () {
@@ -159,7 +168,7 @@ export default mixins(
 
       items = this.searchItems(items)
 
-      items = this.sortItems(items, this.options.sortBy, this.options.sortDesc)
+      items = this.sortItems(items, this.options.sortBy, this.options.sortDesc, this.locale)
 
       return this.paginateItems(items)
     },
@@ -187,6 +196,9 @@ export default mixins(
     },
     someItems (): boolean {
       return this.computedItems.some((i: any) => this.isSelected(i))
+    },
+    isMobile (): boolean {
+      return this.$vuetify.breakpoint.name === this.mobileBreakpoint
     }
   },
 
@@ -222,17 +234,21 @@ export default mixins(
       v.forEach((i: any) => selection[getObjectValueByPath(i, this.itemKey)] = true)
       this.selection = selection
     },
-    expanded (v) {
-      const expansion: Record<string, boolean> = {}
-      v.forEach((i: any) => expansion[getObjectValueByPath(i, this.itemKey)] = true)
-      this.expansion = expansion
+    expanded: {
+      handler (v) {
+        if (!v) return
+        const expansion: Record<string, boolean> = {}
+        v.forEach((i: any) => expansion[getObjectValueByPath(i, this.itemKey)] = true)
+        this.expansion = expansion
+      },
+      immediate: true
     },
     selection: {
       handler (v, old) {
         if (deepEqual(v, old)) return
         const keys = Object.keys(this.selection).filter(k => this.selection[k])
         const selected = !keys.length ? [] : this.items.filter(i => keys.includes(String(getObjectValueByPath(i, this.itemKey))))
-        this.$emit('update:selected', selected)
+        this.$emit('input', selected)
       },
       deep: true
     },
@@ -248,8 +264,8 @@ export default mixins(
   },
 
   methods: {
-    sortItems (items: any[], sortBy: string[], sortDesc: boolean[]): any[] {
-      return this.customSort(items, sortBy, sortDesc)
+    sortItems (items: any[], sortBy: string[], sortDesc: boolean[], locale: string): any[] {
+      return this.customSort(items, sortBy, sortDesc, locale)
     },
     paginateItems (items: any[]): any[] {
       return items.slice(this.pageStart, this.pageStop)
@@ -361,7 +377,7 @@ export default mixins(
     genHeaders (): VNodeChildrenArrayContents {
       return this.computeSlots('header')
     },
-    genEmpty (content: any) {
+    genEmpty (content: VNodeChildrenArrayContents) {
       return this.$createElement('div', content)
     },
     genBodies () {
@@ -405,7 +421,7 @@ export default mixins(
     genFooter (): VNodeChildrenArrayContents {
       const footers = []
 
-      if (!this.hideFooter) {
+      if (!this.hideDefaultFooter) {
         footers.push(this.$createElement(VDataFooter, {
           props: {
             ...this.footerProps

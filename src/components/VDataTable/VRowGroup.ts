@@ -15,9 +15,9 @@ export default Vue.extend({
   render (h, { slots, props }): VNode {
     const computedSlots = slots()
     const children = []
-
+    console.log(computedSlots)
     if (computedSlots.header) children.push(...computedSlots.header)
-    if (computedSlots.items && props.open) children.push(...computedSlots.items)
+    if (computedSlots.content && props.open) children.push(...computedSlots.content)
     if (computedSlots.summary) children.push(...computedSlots.summary)
 
     return children as any

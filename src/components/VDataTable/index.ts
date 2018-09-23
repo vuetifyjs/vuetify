@@ -2,23 +2,43 @@ import { createSimpleFunctional } from '../../util/helpers'
 
 import VDataTable from './VDataTable'
 import VDataHeader from './VDataHeader'
+import VDataHeaderMobile from './VDataHeaderMobile'
 import VRowGroup from './VRowGroup'
 import VEditDialog from './VEditDialog'
-import VRowSimple from './VRowSimple'
+import VRow from './VRow'
+import VRowFunctional from './VRowFunctional'
+import VRowRegular from './VRowRegular'
+import VRowExpansion from './VRowExpansion'
 import VCellCheckbox from './VCellCheckbox'
 
 const VTableOverflow = createSimpleFunctional('v-table__overflow')
 
-export { VDataTable, VEditDialog, VTableOverflow, VDataHeader, VRowGroup, VRowSimple, VCellCheckbox }
+export {
+  VDataTable,
+  VEditDialog,
+  VTableOverflow,
+  VDataHeader,
+  VDataHeaderMobile,
+  VRowGroup,
+  VCellCheckbox,
+  VRow,
+  VRowRegular,
+  VRowFunctional,
+  VRowExpansion
+}
 
 export default {
   $_vuetify_subcomponents: {
     VDataTable,
-    VDataHeader,
-    VRowGroup,
-    VRowSimple,
     VEditDialog,
     VTableOverflow,
-    VCellCheckbox
+    VDataHeader,
+    VDataHeaderMobile,
+    VRowGroup,
+    VCellCheckbox,
+    VRow,
+    VRowRegular,
+    VRowFunctional,
+    VRowExpansion
   }
 }

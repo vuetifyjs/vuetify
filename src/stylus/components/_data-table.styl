@@ -44,6 +44,18 @@ v-data-table($material)
       &:hover:not(.datatable__expand-row)
         background: $material.table.hover
 
+      &.expanded
+        border-bottom: 0
+
+        // td:first-child
+          // border-left: 2px solid rgba($material.fg-color, $material.divider-percent)
+
+        &.expanded__row
+          background: $material.table.active
+
+        &.expanded__content
+          box-shadow: inset 0px 4px 8px -5px rgba(50, 50, 50, 0.75), inset 0px -4px 8px -5px rgba(50, 50, 50, 0.75)
+
   .v-table__footer
     .v-row
       border-top: 1px solid rgba($material.fg-color, $material.divider-percent)
@@ -52,10 +64,19 @@ theme(v-data-table, "v-data-table")
 
 .v-data-table
   table
-    overflow-x: auto
     width: 100%
     max-width: 100%
     border-collapse: collapse
+    // border-spacing: 0
+
+    colgroup
+      .divider
+        border-right: 1px solid lightgrey
+
+  &__wrapper
+    overflow-x: auto
+    width: 100%
+    display: block
 
   &--dense
     td
@@ -64,16 +85,24 @@ theme(v-data-table, "v-data-table")
       height: 32px
 
   &--fixed
-    th
-      position: sticky
-      top: 0
-      z-index: 10
+    thead
+      th
+        position: sticky
+        top: 0
+        z-index: 10
 
     .v-table__header, .v-table__actions
       margin-right: 17px
 
     .v-data-table__wrapper
       overflow-y: scroll
+
+  &--mobile
+    tr, td, th
+      display: block
+
+    td, th
+      padding: 14px
 
 td, th
   // &:not(:nth-child(1)), &:first-child
@@ -83,38 +112,69 @@ td, th
   padding-left: 0
 
 .v-data-header
+  &--mobile
+    th
+      height: initial
+
+      .v-select
+        margin-top: 0
+
+  &__progress
+    height: auto !important
+
+    th
+      height: auto !important
+      border: none !important
+      padding: 0
+
+      .v-progress-linear
+        margin: 0
+
   th
     font-weight: 500
     font-size: 12px
     transition: .3s $transition.swing
     white-space: nowrap
     user-select: none
+    position: relative
 
-    &.sortable
-      pointer-events: auto
-      cursor: pointer
-      outline: 0
+    .resize-handle
+      z-index: 10
+      position: absolute
+      right: -4px
+      top: 0
+      height: 100%
+      width: 8px
+      cursor: ew-resize
+
+      &:hover
+        background: grey
+
+  .sortable
+    pointer-events: auto
+    cursor: pointer
+    outline: 0
+
+    i
+      font-size: 18px
+      display: inline-block
+      opacity: 0
+      transition: .3s $transition.swing
+
+    &:focus,
+    &:hover
+      i
+        opacity: .6
+
+    &.active
+      transform: none
 
       i
-        font-size: 18px
-        display: inline-block
-        opacity: 0
-        transition: .3s $transition.swing
+        opacity: 1
 
-      &:focus,
-      &:hover
+      &.desc
         i
-          opacity: .6
-
-      &.active
-        transform: none
-
-        i
-          opacity: 1
-
-        &.desc
-          i
-            transform: rotate(-180deg)
+          transform: rotate(-180deg)
 
 .v-data-table__body
   .v-row
@@ -173,6 +233,7 @@ tr > th
 /** Actions */
 .v-data-table__actions
   display: flex
+  flex-wrap: wrap
   justify-content: flex-end
   align-items: center
   font-size: 12px
@@ -212,16 +273,6 @@ tr > th
       .v-select__selection--comma
         font-size: 12px
 
-.v-data-table__progress
-  height: auto !important
-
-  .v-row, .v-cell, .v-head
-    height: auto !important
-    border: none !important
-
-    .v-progress-linear
-      margin: 0
-
 .v-row-expandable
   &__wrapper
     transition: all 0.3s ease-out
@@ -250,3 +301,10 @@ tr > th
 
     td
       height: 35px
+
+.expand__icon
+  user-select: none
+  cursor: pointer
+
+  &--active
+    transform: rotate(-180deg)
