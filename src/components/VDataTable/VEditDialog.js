@@ -38,6 +38,18 @@ export default {
     }
   },
 
+  computed: {
+    contentClasses () {
+      const themeClassesString = Object
+        .keys(this.themeClasses)
+        .map(themeClass => this.themeClasses[themeClass] ? themeClass : null)
+        .filter(v => v)
+        .join(' ')
+
+      return `v-small-dialog__content ${themeClassesString}`
+    }
+  },
+
   watch: {
     isActive (val) {
       if (val) {
@@ -101,14 +113,14 @@ export default {
       staticClass: 'v-small-dialog',
       class: this.themeClasses,
       props: {
-        contentClass: 'v-small-dialog__content',
-        transition: this.transition,
-        origin: 'top right',
-        right: true,
-        value: this.isActive,
         closeOnClick: !this.persistent,
         closeOnContentClick: false,
-        lazy: this.lazy
+        contentClass: this.contentClasses,
+        lazy: this.lazy,
+        origin: 'top right',
+        right: true,
+        transition: this.transition,
+        value: this.isActive
       },
       on: {
         input: val => (this.isActive = val)
