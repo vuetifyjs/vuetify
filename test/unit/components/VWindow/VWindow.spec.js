@@ -5,6 +5,9 @@ import { test } from '@/test'
 test('VWindow.ts', ({ mount }) => {
   it('it should return the correct transition', async () => {
     const wrapper = mount(VWindow)
+    // Wait for booted
+    await wrapper.vm.$nextTick()
+
     expect(wrapper.vm.computedTransition).toBe('v-window-x-transition')
 
     wrapper.setData({ isReverse: true })

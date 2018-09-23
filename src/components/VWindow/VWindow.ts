@@ -7,13 +7,13 @@ import { VItemGroup } from '../VItemGroup'
 // Types
 import { VNode } from 'vue/types/vnode'
 
+/* @vue/component */
 export default VItemGroup.extend({
   name: 'v-window',
 
   props: {
     value: {
-      type: Number,
-      default: undefined
+      required: false
     },
     vertical: Boolean
   },
@@ -21,11 +21,14 @@ export default VItemGroup.extend({
   data: () => ({
     height: undefined as undefined | string,
     isActive: false,
+    isBooted: false,
     isReverse: false
   }),
 
   computed: {
     computedTransition (): string {
+      if (!this.isBooted) return ''
+
       const axis = this.vertical ? 'y' : 'x'
       const direction = this.isReverse ? '-reverse' : ''
 
@@ -42,6 +45,13 @@ export default VItemGroup.extend({
     internalIndex (val, oldVal) {
       this.isReverse = val < oldVal
     }
+  },
+
+  // Ensure no entry animation
+  mounted () {
+    this.$nextTick(() => {
+      this.isBooted = true
+    })
   },
 
   methods: {
