@@ -58,6 +58,7 @@ export default {
         attrs: this.getScopeIdAttrs(),
         staticClass: 'v-menu__content',
         'class': {
+          ...this.rootThemeClasses,
           'v-menu__content--auto': this.auto,
           'menuable__content__active': this.isActive,
           [this.contentClass.trim()]: true
