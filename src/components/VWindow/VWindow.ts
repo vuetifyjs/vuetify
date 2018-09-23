@@ -1,14 +1,11 @@
 // Styles
 import '../../stylus/components/_windows.styl'
 
-// Types
-import { VNode } from 'vue/types/vnode'
+// Components
 import { VItemGroup } from '../VItemGroup'
 
-import {
-  addOnceEventListener,
-  convertToUnit
-} from '../../util/helpers'
+// Types
+import { VNode } from 'vue/types/vnode'
 
 export default VItemGroup.extend({
   name: 'v-window',

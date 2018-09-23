@@ -1,29 +1,40 @@
+// Components
+import VWindow from './VWindow'
+
+// Mixins
 import Bootable from '../../mixins/bootable'
+import Groupable from '../../mixins/groupable'
 
-import {
-  inject as RegistrableInject
-} from '../../mixins/registrable'
+// Directives
+import Touch from '../../directives/touch'
 
+// Utilities
 import {
   addOnceEventListener,
   convertToUnit
 } from '../../util/helpers'
+import mixins, { ExtractVue } from '../../util/mixins'
 
-import Touch from '../../directives/touch'
-import groupable from '../../mixins/groupable'
+// Types
+import Vue from 'vue'
+import { VNode, VNodeDirective } from 'vue/types'
 
-/* @vue/component */
-export default {
+type VWindowInstance = InstanceType<typeof VWindow>
+
+interface options extends Vue {
+  itemGroup: VWindowInstance
+}
+
+export default mixins<options & ExtractVue<[typeof Bootable]>>(
+  Bootable,
+  Groupable
+  /* @vue/component */
+).extend({
   name: 'v-window-item',
 
   directives: {
     Touch
   },
-
-  mixins: [
-    Bootable,
-    groupable
-  ],
 
   props: {
     value: {
@@ -33,17 +44,7 @@ export default {
 
   data () {
     return {
-      isActive: false,
-      reverse: false
-    }
-  },
-
-  computed: {
-    computedTransition (): string {
-      const axis = this.itemGroup.vertical ? 'y' : 'x'
-      const direction = this.internalReverse ? '-reverse' : ''
-
-      return `v-window-${axis}${direction}-transition`
+      isActive: false
     }
   },
 
@@ -67,15 +68,15 @@ export default {
     }
   },
 
-  render (h) {
-    const data = {
+  render (h): VNode {
+    const div = h('div', {
       staticClass: 'v-window-item',
       directives: [{
         name: 'show',
         value: this.isActive
-      }],
+      }] as VNodeDirective[],
       on: this.$listeners
-    }
+    }, this.showLazyContent(this.$slots.default))
 
     return h('transition', {
       props: {
@@ -87,8 +88,6 @@ export default {
         beforeLeave: this.onBeforeLeave,
         enter: this.onEnter
       }
-    }, [
-      h('div', data, this.showLazyContent(this.$slots.default))
-    ])
+    }, [div])
   }
-}
+})

@@ -145,5 +145,6 @@ Array [
   "VTreeview",
   "VTreeviewNode",
   "VWindow",
+  "VWindowItem",
 ]
 `;
