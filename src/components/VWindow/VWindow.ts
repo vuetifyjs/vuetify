@@ -12,6 +12,10 @@ export default VItemGroup.extend({
   name: 'v-window',
 
   props: {
+    mandatory: {
+      type: Boolean,
+      default: true
+    },
     value: {
       required: false
     },
