@@ -1,9 +1,11 @@
-import Vue, { VNode } from 'vue'
-import VRowGroup from './VRowGroup'
-import { PropValidator } from 'vue/types/options'
-import { TableHeader } from './VDataTable'
-import { VRowFunctional } from '.'
+// Components
+import { VRowFunctional, VRowGroup } from '.'
 import VIcon from '../VIcon'
+
+// Types
+import Vue, { VNode } from 'vue'
+import { PropValidator } from 'vue/types/options'
+import TableHeader from './TableHeader'
 
 export default Vue.extend({
   name: 'v-row-expansion',

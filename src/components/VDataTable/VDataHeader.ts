@@ -86,7 +86,7 @@ export default mixins<options>().extend({
 
   render (h): VNode {
     const headers = this.dataTable.computedHeaders.map((c, i) => {
-      if (c.value === 'dataTable.select') return this.genSelectAll()
+      if (c.value === 'dataTableSelect') return this.genSelectAll()
 
       const classes = {
         [`text-xs-${c.align || 'left'}`]: true

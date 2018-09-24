@@ -1,9 +1,7 @@
-// Components
-import { TableHeader } from './VDataTable'
-
 // Types
 import Vue, { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
+import TableHeader from './TableHeader'
 
 // Utils
 import { getObjectValueByPath } from '../../util/helpers'
@@ -19,7 +17,7 @@ export default Vue.extend({
     mobile: Boolean
   },
 
-  render (h, { props, slots, data, children }): VNode {
+  render (h, { props, slots, data }): VNode {
     const computedSlots = slots()
 
     const columns = props.headers.map(header => {
@@ -30,10 +28,13 @@ export default Vue.extend({
       const children = []
       const value = getObjectValueByPath(props.item, header.value)
 
-      const scopedSlot = data.scopedSlots && data.scopedSlots[`item.column.${header.value}`]
+      const scopedSlot = data.scopedSlots && data.scopedSlots[header.value]
+      const regularSlot = computedSlots[header.value]
 
       if (scopedSlot) {
         children.push(scopedSlot({ item: props.item, header, value, mobile: props.mobile }))
+      } else if (regularSlot) {
+        children.push(regularSlot)
       } else {
         if (props.mobile) {
           children.push(h('div', { class: 'd-flex justify-content-between' }, [
@@ -50,23 +51,11 @@ export default Vue.extend({
       }, children)
     }) as any
 
-    if (computedSlots.prepend) {
-      columns.unshift(computedSlots.prepend)
-    }
-
-    if (computedSlots.append) {
-      columns.push(computedSlots.append)
-    }
-
     const tr = h('tr', {
       staticClass: data.staticClass,
       class: data.class,
       key: data.key
     }, columns)
-
-    if (children && children.length) {
-      return [tr, ...children] as any
-    }
 
     return tr
   }

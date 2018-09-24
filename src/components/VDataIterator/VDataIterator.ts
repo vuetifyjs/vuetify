@@ -139,7 +139,7 @@ export default mixins(
     },
     mobileBreakpoint: {
       type: String,
-      default: 'sm'
+      default: 'smAndDown'
     }
   },
 

@@ -101,6 +101,7 @@ export interface VuetifyApplication {
 }
 
 export interface VuetifyBreakpoint {
+  [key: string]: any
   height: number
   lg: boolean
   lgAndDown: boolean

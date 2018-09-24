@@ -22,18 +22,17 @@ export default mixins<options>().extend({
   },
 
   render (h): VNode {
-    const children: VNodeChildrenArrayContents = []
+    const scopedSlots: any = {}
 
-    if (this.dataTable.showSelect) {
-      children.push(h(VCellCheckbox, {
-        slot: 'select',
+    if (!this.$scopedSlots['dataTableSelect']) {
+      scopedSlots['dataTableSelect'] = (props: any) => h(VCellCheckbox, {
         props: {
           inputValue: this.dataTable.isSelected(this.item)
         },
         on: {
           change: (v: boolean) => this.dataTable.select(this.item, v)
         }
-      }))
+      }) as any
     }
 
     return h(VRowFunctional, {
@@ -41,7 +40,7 @@ export default mixins<options>().extend({
         item: this.item,
         headers: this.dataTable.computedHeaders
       },
-      scopedSlots: this.$scopedSlots
-    }, children)
+      scopedSlots: Object.assign({}, scopedSlots, this.$scopedSlots)
+    })
   }
 })
