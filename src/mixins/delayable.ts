@@ -17,7 +17,7 @@ export default Vue.extend({
     },
     closeDelay: {
       type: [Number, String],
-      default: 200
+      default: 0
     }
   },
 

@@ -7,11 +7,12 @@ exports[`VBreadcrumbs.js should have breadcrumbs classes 1`] = `
 
 `;
 
-exports[`VBreadcrumbs.js should inject slot to children 1`] = `
+exports[`VBreadcrumbs.js should render items without slot 1`] = `
 
 <ul class="v-breadcrumbs theme--light">
   <li>
     <a class="v-breadcrumbs__item">
+      a
     </a>
   </li>
   <li class="v-breadcrumbs__divider">
@@ -19,6 +20,7 @@ exports[`VBreadcrumbs.js should inject slot to children 1`] = `
   </li>
   <li>
     <a class="v-breadcrumbs__item">
+      b
     </a>
   </li>
   <li class="v-breadcrumbs__divider">
@@ -26,6 +28,7 @@ exports[`VBreadcrumbs.js should inject slot to children 1`] = `
   </li>
   <li>
     <a class="v-breadcrumbs__item">
+      c
     </a>
   </li>
   <li class="v-breadcrumbs__divider">
@@ -33,30 +36,18 @@ exports[`VBreadcrumbs.js should inject slot to children 1`] = `
   </li>
   <li>
     <a class="v-breadcrumbs__item">
+      d
     </a>
   </li>
 </ul>
 
 `;
 
-exports[`VBreadcrumbs.js should not create dividers for non-items 1`] = `
+exports[`VBreadcrumbs.js should show deprecation notice when using justify-end and justify-start 1`] = `
 
-<ul class="v-breadcrumbs theme--light">
-  <span>
-  </span>
-  <li>
-    <a class="v-breadcrumbs__item">
-    </a>
-  </li>
-  <span>
-  </span>
-  <li class="v-breadcrumbs__divider">
-    /
-  </li>
-  <li>
-    <a class="v-breadcrumbs__item">
-    </a>
-  </li>
+<ul class="v-breadcrumbs justify-center justify-end theme--light">
+  <div>
+  </div>
 </ul>
 
 `;
@@ -66,6 +57,7 @@ exports[`VBreadcrumbs.js should use a custom divider slot 1`] = `
 <ul class="v-breadcrumbs theme--light">
   <li>
     <a class="v-breadcrumbs__item">
+      a
     </a>
   </li>
   <li class="v-breadcrumbs__divider">
@@ -73,22 +65,61 @@ exports[`VBreadcrumbs.js should use a custom divider slot 1`] = `
   </li>
   <li>
     <a class="v-breadcrumbs__item">
+      b
+    </a>
+  </li>
+  <li class="v-breadcrumbs__divider">
+    /divider/
+  </li>
+  <li>
+    <a class="v-breadcrumbs__item">
+      c
+    </a>
+  </li>
+  <li class="v-breadcrumbs__divider">
+    /divider/
+  </li>
+  <li>
+    <a class="v-breadcrumbs__item">
+      d
     </a>
   </li>
 </ul>
 
 `;
 
-exports[`VBreadcrumbs.js should use custom justify props 1`] = `
+exports[`VBreadcrumbs.js should use slot to render items if present 1`] = `
 
 <ul class="v-breadcrumbs theme--light">
-</ul>
-
-`;
-
-exports[`VBreadcrumbs.js should use custom justify props 2`] = `
-
-<ul class="v-breadcrumbs theme--light">
+  <li>
+    <a class="v-breadcrumbs__item">
+      A
+    </a>
+  </li>
+  <li class="v-breadcrumbs__divider">
+    /
+  </li>
+  <li>
+    <a class="v-breadcrumbs__item">
+      B
+    </a>
+  </li>
+  <li class="v-breadcrumbs__divider">
+    /
+  </li>
+  <li>
+    <a class="v-breadcrumbs__item">
+      C
+    </a>
+  </li>
+  <li class="v-breadcrumbs__divider">
+    /
+  </li>
+  <li>
+    <a class="v-breadcrumbs__item">
+      D
+    </a>
+  </li>
 </ul>
 
 `;

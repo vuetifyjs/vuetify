@@ -34,10 +34,6 @@ export default {
       type: Number,
       default: 0
     },
-    size: {
-      type: [Number, String],
-      default: 270
-    },
     step: {
       type: Number,
       default: 1
@@ -58,26 +54,20 @@ export default {
     count () {
       return this.max - this.min + 1
     },
-    innerRadius () {
-      return this.radius - Math.max(this.radius * 0.4, 48)
-    },
-    outerRadius () {
-      return this.radius - 4
-    },
-    roundCount () {
-      return this.double ? (this.count / 2) : this.count
-    },
     degreesPerUnit () {
       return 360 / this.roundCount
     },
     degrees () {
       return this.degreesPerUnit * Math.PI / 180
     },
-    radius () {
-      return this.size / 2
-    },
     displayedValue () {
       return this.value == null ? this.min : this.value
+    },
+    innerRadius () {
+      return 0.62
+    },
+    roundCount () {
+      return this.double ? (this.count / 2) : this.count
     }
   },
 
@@ -102,8 +92,11 @@ export default {
         this.update(value)
       }
     },
+    isInner (value) {
+      return this.double && (value - this.min >= this.roundCount)
+    },
     handScale (value) {
-      return this.double && (value - this.min >= this.roundCount) ? (this.innerRadius / this.radius) : (this.outerRadius / this.radius)
+      return this.isInner(value) ? this.innerRadius : 1
     },
     isAllowed (value) {
       return !this.allowedValues || this.allowedValues(value)
@@ -114,9 +107,10 @@ export default {
       for (let value = this.min; value <= this.max; value = value + this.step) {
         const color = value === this.value && (this.color || 'accent')
         children.push(this.$createElement('span', this.setBackgroundColor(color, {
+          staticClass: 'v-time-picker-clock__item',
           'class': {
-            active: value === this.displayedValue,
-            disabled: !this.isAllowed(value)
+            'v-time-picker-clock__item--active': value === this.displayedValue,
+            'v-time-picker-clock__item--disabled': !this.isAllowed(value)
           },
           style: this.getTransform(value),
           domProps: { innerHTML: `<span>${this.format(value)}</span>` }
@@ -131,6 +125,9 @@ export default {
       const color = (this.value != null) && (this.color || 'accent')
       return this.$createElement('div', this.setBackgroundColor(color, {
         staticClass: 'v-time-picker-clock__hand',
+        'class': {
+          'v-time-picker-clock__hand--inner': this.isInner(this.value)
+        },
         style: {
           transform: `rotate(${angle}deg) ${scale}`
         }
@@ -138,14 +135,16 @@ export default {
     },
     getTransform (i) {
       const { x, y } = this.getPosition(i)
-      return { transform: `translate(${x}px, ${y}px)` }
+      return {
+        left: `${50 + x * 50}%`,
+        top: `${50 + y * 50}%`
+      }
     },
     getPosition (value) {
-      const radius = (this.radius - 24) * this.handScale(value)
       const rotateRadians = this.rotate * Math.PI / 180
       return {
-        x: Math.round(Math.sin((value - this.min) * this.degrees + rotateRadians) * radius),
-        y: Math.round(-Math.cos((value - this.min) * this.degrees + rotateRadians) * radius)
+        x: Math.sin((value - this.min) * this.degrees + rotateRadians) * this.handScale(value),
+        y: -Math.cos((value - this.min) * this.degrees + rotateRadians) * this.handScale(value)
       }
     },
     onMouseDown (e) {
@@ -171,7 +170,8 @@ export default {
       const center = { x: width / 2, y: -width / 2 }
       const coords = { x: clientX - left, y: top - clientY }
       const handAngle = Math.round(this.angle(center, coords) - this.rotate + 360) % 360
-      const insideClick = this.double && this.euclidean(center, coords) < (this.outerRadius + this.innerRadius) / 2 - 16
+      // (1 + this.innerRadius) / 4 = radius of the circle equally distant from inner and outer circles
+      const insideClick = this.double && this.euclidean(center, coords) / width < (1 + this.innerRadius) / 4
       const value = Math.round(handAngle / this.degreesPerUnit) +
         this.min + (insideClick ? this.roundCount : 0)
 
@@ -209,7 +209,7 @@ export default {
     }
   },
 
-  render () {
+  render (h) {
     const data = {
       staticClass: 'v-time-picker-clock',
       class: {
@@ -225,18 +225,18 @@ export default {
         mousemove: this.onDragMove,
         touchmove: this.onDragMove
       },
-      style: {
-        height: `${this.size}px`,
-        width: `${this.size}px`
-      },
       ref: 'clock'
     }
 
     !this.readonly && this.scrollable && (data.on.wheel = this.wheel)
 
-    return this.$createElement('div', data, [
-      this.genHand(),
-      this.genValues()
+    return h('div', data, [
+      h('div', {
+        staticClass: 'v-time-picker-clock__inner'
+      }, [
+        this.genHand(),
+        this.genValues()
+      ])
     ])
   }
 }

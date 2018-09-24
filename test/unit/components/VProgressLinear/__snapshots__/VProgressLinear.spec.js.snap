@@ -2,7 +2,11 @@
 
 exports[`VProgressLinear.js should render component and match snapshot 1`] = `
 
-<div class="v-progress-linear"
+<div role="progressbar"
+     aria-valuemin="0"
+     aria-valuemax="100"
+     aria-valuenow="33"
+     class="v-progress-linear"
      style="height: 7px;"
 >
   <div class="v-progress-linear__background primary"
@@ -21,7 +25,11 @@ exports[`VProgressLinear.js should render component and match snapshot 1`] = `
 
 exports[`VProgressLinear.js should render component with buffer value and match snapshot 1`] = `
 
-<div class="v-progress-linear"
+<div role="progressbar"
+     aria-valuemin="0"
+     aria-valuemax="80"
+     aria-valuenow="33"
+     class="v-progress-linear"
      style="height: 7px;"
 >
   <div class="v-progress-linear__background primary"
@@ -42,7 +50,11 @@ exports[`VProgressLinear.js should render component with buffer value and match 
 
 exports[`VProgressLinear.js should render component with buffer value and match snapshot 2`] = `
 
-<div class="v-progress-linear"
+<div role="progressbar"
+     aria-valuemin="0"
+     aria-valuemax="0"
+     aria-valuenow="33"
+     class="v-progress-linear"
      style="height: 7px;"
 >
   <div class="v-progress-linear__background primary"
@@ -63,7 +75,11 @@ exports[`VProgressLinear.js should render component with buffer value and match 
 
 exports[`VProgressLinear.js should render component with buffer value and value > buffer value and match snapshot 1`] = `
 
-<div class="v-progress-linear"
+<div role="progressbar"
+     aria-valuemin="0"
+     aria-valuemax="80"
+     aria-valuenow="90"
+     class="v-progress-linear"
      style="height: 7px;"
 >
   <div class="v-progress-linear__background primary"
@@ -84,7 +100,11 @@ exports[`VProgressLinear.js should render component with buffer value and value 
 
 exports[`VProgressLinear.js should render component with color and background color and match snapshot 1`] = `
 
-<div class="v-progress-linear"
+<div role="progressbar"
+     aria-valuemin="0"
+     aria-valuemax="100"
+     aria-valuenow="33"
+     class="v-progress-linear"
      style="height: 7px;"
 >
   <div class="v-progress-linear__background blue"
@@ -103,7 +123,11 @@ exports[`VProgressLinear.js should render component with color and background co
 
 exports[`VProgressLinear.js should render component with color and background color and opacity and match snapshot 1`] = `
 
-<div class="v-progress-linear"
+<div role="progressbar"
+     aria-valuemin="0"
+     aria-valuemax="100"
+     aria-valuenow="33"
+     class="v-progress-linear"
      style="height: 7px;"
 >
   <div class="v-progress-linear__background blue"
@@ -122,7 +146,11 @@ exports[`VProgressLinear.js should render component with color and background co
 
 exports[`VProgressLinear.js should render component with color and background opacity and match snapshot 1`] = `
 
-<div class="v-progress-linear"
+<div role="progressbar"
+     aria-valuemin="0"
+     aria-valuemax="100"
+     aria-valuenow="33"
+     class="v-progress-linear"
      style="height: 7px;"
 >
   <div class="v-progress-linear__background orange"
@@ -141,7 +169,11 @@ exports[`VProgressLinear.js should render component with color and background op
 
 exports[`VProgressLinear.js should render component with color and match snapshot 1`] = `
 
-<div class="v-progress-linear"
+<div role="progressbar"
+     aria-valuemin="0"
+     aria-valuemax="100"
+     aria-valuenow="33"
+     class="v-progress-linear"
      style="height: 7px;"
 >
   <div class="v-progress-linear__background orange"
@@ -160,7 +192,11 @@ exports[`VProgressLinear.js should render component with color and match snapsho
 
 exports[`VProgressLinear.js should render inactive component and match snapshot 1`] = `
 
-<div class="v-progress-linear"
+<div role="progressbar"
+     aria-valuemin="0"
+     aria-valuemax="100"
+     aria-valuenow="33"
+     class="v-progress-linear"
      style="height: 7px;"
 >
   <div class="v-progress-linear__background primary"
@@ -181,7 +217,10 @@ exports[`VProgressLinear.js should render inactive component and match snapshot 
 
 exports[`VProgressLinear.js should render indeterminate progress and match snapshot 1`] = `
 
-<div class="v-progress-linear"
+<div role="progressbar"
+     aria-valuemin="0"
+     aria-valuemax="100"
+     class="v-progress-linear"
      style="height: 7px;"
 >
   <div class="v-progress-linear__background primary"
@@ -202,7 +241,10 @@ exports[`VProgressLinear.js should render indeterminate progress and match snaps
 
 exports[`VProgressLinear.js should render indeterminate progress with query prop and match snapshot 1`] = `
 
-<div class="v-progress-linear"
+<div role="progressbar"
+     aria-valuemin="0"
+     aria-valuemax="100"
+     class="v-progress-linear"
      style="height: 7px;"
 >
   <div class="v-progress-linear__background primary"

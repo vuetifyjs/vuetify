@@ -32,11 +32,11 @@ theme(v-picker-body, 'v-picker__body')
 .v-picker__title__btn
   transition: $primary-transition
 
-  &:not(.active)
+  &:not(.v-picker__title__btn--active)
     opacity: .6
     cursor: pointer
 
-    &:hover
+    &:hover:not(:focus)
       opacity: 1
 
 .v-picker__title__btn--readonly
