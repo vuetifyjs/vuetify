@@ -78,6 +78,23 @@ test('VExpansionPanelContent.js', ({ mount, compileToFunctions }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should toggle panel on header icon click', async () => {
+    const wrapper = mount(VExpansionPanelContent, {
+      slots: {
+        header: [compileToFunctions('<span>header</span>')]
+      },
+      provide: {
+        expansionPanel: expansionPanelProvide({
+          panelClick: uid => wrapper.vm.toggle(uid)
+        })
+      }
+    })
+
+    wrapper.first('.v-expansion-panel__header__icon').trigger('click')
+    await wrapper.vm.$nextTick()
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it('should render an expanded component and match snapshot', () => {
     const wrapper = mount(VExpansionPanelContent, {
       propsData: {
