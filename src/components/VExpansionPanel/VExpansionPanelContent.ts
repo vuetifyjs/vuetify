@@ -130,7 +130,10 @@ export default mixins<options &
           directives: [{
             name: 'show',
             value: !this.isDisabled
-          }] as any
+          }] as any,
+          on: {
+            click: this.onHeaderClick
+          }
         }, icon)
       ])
     },
