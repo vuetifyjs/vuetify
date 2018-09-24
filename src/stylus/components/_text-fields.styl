@@ -103,6 +103,9 @@ theme(v-text-field, "v-text-field")
 rtl(v-text-field-rtl, "v-text-field")
 
 .v-text-field
+  padding-top: $text-field-active-label-height
+  margin-top: $input-top-spacing - $text-field-active-label-height
+
   input
     flex: 1 1 auto
     line-height: 20px
@@ -236,6 +239,7 @@ rtl(v-text-field-rtl, "v-text-field")
 
   &.v-text-field--enclosed
     margin: 0
+    padding: 0
 
     &:not(.v-text-field--box)
       .v-progress-linear__background

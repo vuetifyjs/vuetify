@@ -41,8 +41,7 @@ export default {
         'v-list--subheader': this.subheader,
         'v-list--two-line': this.twoLine,
         'v-list--three-line': this.threeLine,
-        'theme--dark': this.dark,
-        'theme--light': this.light
+        ...this.themeClasses
       }
     }
   },

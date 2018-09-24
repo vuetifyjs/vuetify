@@ -1,7 +1,8 @@
+import Vue from 'vue'
+
 import Positionable from './positionable'
 
 import Stackable from './stackable'
-import Themeable from './themeable'
 
 /* eslint-disable object-property-newline */
 const dimensions = {
@@ -32,13 +33,12 @@ const dimensions = {
  * As well as be manually positioned
  */
 /* @vue/component */
-export default {
+export default Vue.extend({
   name: 'menuable',
 
   mixins: [
     Positionable,
-    Stackable,
-    Themeable
+    Stackable
   ],
 
   props: {
@@ -50,6 +50,8 @@ export default {
     },
     allowOverflow: Boolean,
     inputActivator: Boolean,
+    light: Boolean,
+    dark: Boolean,
     maxWidth: {
       type: [Number, String],
       default: 'auto'
@@ -344,4 +346,4 @@ export default {
       })
     }
   }
-}
+})

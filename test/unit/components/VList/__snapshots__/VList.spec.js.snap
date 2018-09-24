@@ -2,35 +2,35 @@
 
 exports[`VList.js should render a dense component and match snapshot 1`] = `
 
-<div class="v-list v-list--dense">
+<div class="v-list v-list--dense theme--light">
 </div>
 
 `;
 
 exports[`VList.js should render a subheader component and match snapshot 1`] = `
 
-<div class="v-list v-list--subheader">
+<div class="v-list v-list--subheader theme--light">
 </div>
 
 `;
 
 exports[`VList.js should render a threeLine component and match snapshot 1`] = `
 
-<div class="v-list v-list--three-line">
+<div class="v-list v-list--three-line theme--light">
 </div>
 
 `;
 
 exports[`VList.js should render a twoLine component and match snapshot 1`] = `
 
-<div class="v-list v-list--two-line">
+<div class="v-list v-list--two-line theme--light">
 </div>
 
 `;
 
 exports[`VList.js should render component and match snapshot 1`] = `
 
-<div class="v-list">
+<div class="v-list theme--light">
 </div>
 
 `;

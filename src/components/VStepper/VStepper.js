@@ -10,7 +10,8 @@ export default {
 
   provide () {
     return {
-      stepClick: this.stepClick
+      stepClick: this.stepClick,
+      isVertical: this.vertical
     }
   },
 
@@ -39,8 +40,7 @@ export default {
         'v-stepper--vertical': this.vertical,
         'v-stepper--alt-labels': this.altLabels,
         'v-stepper--non-linear': this.nonLinear,
-        'theme--dark': this.dark,
-        'theme--light': this.light
+        ...this.themeClasses
       }
     }
   },

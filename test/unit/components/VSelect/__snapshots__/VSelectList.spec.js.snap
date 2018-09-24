@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VSelect should display falsy items 1`] = `
+exports[`VSelectList should display falsy items 1`] = `
 
-<div class="v-select-list v-card">
-  <div class="v-list">
+<div class="v-select-list v-card theme--light">
+  <div class="v-list theme--light">
     <div>
-      <a class="v-list__tile v-list__tile--link">
+      <a class="v-list__tile v-list__tile--link theme--light">
         <div class="v-list__tile__content">
           <div class="v-list__tile__title">
             0
@@ -14,7 +14,7 @@ exports[`VSelect should display falsy items 1`] = `
       </a>
     </div>
     <div>
-      <a class="v-list__tile v-list__tile--link">
+      <a class="v-list__tile v-list__tile--link theme--light">
         <div class="v-list__tile__content">
           <div class="v-list__tile__title">
             null
@@ -23,7 +23,7 @@ exports[`VSelect should display falsy items 1`] = `
       </a>
     </div>
     <div>
-      <a class="v-list__tile v-list__tile--link">
+      <a class="v-list__tile v-list__tile--link theme--light">
         <div class="v-list__tile__content">
           <div class="v-list__tile__title">
             false
@@ -32,7 +32,7 @@ exports[`VSelect should display falsy items 1`] = `
       </a>
     </div>
     <div>
-      <a class="v-list__tile v-list__tile--link">
+      <a class="v-list__tile v-list__tile--link theme--light">
         <div class="v-list__tile__content">
           <div class="v-list__tile__title">
             undefined
@@ -41,7 +41,7 @@ exports[`VSelect should display falsy items 1`] = `
       </a>
     </div>
     <div>
-      <a class="v-list__tile v-list__tile--link">
+      <a class="v-list__tile v-list__tile--link theme--light">
         <div class="v-list__tile__content">
           <div class="v-list__tile__title">
           </div>
@@ -53,12 +53,12 @@ exports[`VSelect should display falsy items 1`] = `
 
 `;
 
-exports[`VSelect should display no-data-text when item slot is provided 1`] = `
+exports[`VSelectList should display no-data-text when item slot is provided 1`] = `
 
-<div class="v-select-list v-card">
-  <div class="v-list">
+<div class="v-select-list v-card theme--light">
+  <div class="v-list theme--light">
     <div>
-      <div class="v-list__tile">
+      <div class="v-list__tile theme--light">
         <div class="v-list__tile__content">
           <div class="v-list__tile__title">
             this is ok
@@ -71,16 +71,16 @@ exports[`VSelect should display no-data-text when item slot is provided 1`] = `
 
 `;
 
-exports[`VSelect should generate children 1`] = `
+exports[`VSelectList should generate children 1`] = `
 
-<div class="v-select-list v-card">
-  <div class="v-list">
-    <div class="v-subheader">
+<div class="v-select-list v-card theme--light">
+  <div class="v-list theme--light">
+    <div class="v-subheader theme--light">
       true
     </div>
-    <hr class="v-divider">
+    <hr class="v-divider theme--light">
     <div>
-      <a class="v-list__tile v-list__tile--link">
+      <a class="v-list__tile v-list__tile--link theme--light">
         <div class="v-list__tile__content">
           <div class="v-list__tile__title">
             foo

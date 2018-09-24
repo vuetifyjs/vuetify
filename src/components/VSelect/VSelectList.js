@@ -71,7 +71,7 @@ export default {
       return this.selectedItems.map(item => this.getValue(item))
     },
     tileActiveClass () {
-      return Object.keys(this.addTextColorClassChecks()).join(' ')
+      return Object.keys(this.setTextColor(this.color).class || {}).join(' ')
     },
     staticNoDataTile () {
       const tile = {
@@ -100,7 +100,7 @@ export default {
       return this.$createElement(VListTileAction, data, [
         this.$createElement(VCheckbox, {
           props: {
-            color: this.computedColor,
+            color: this.color,
             inputValue
           }
         })
@@ -225,6 +225,10 @@ export default {
     }
 
     children.length || children.push(this.$slots['no-data'] || this.staticNoDataTile)
+
+    this.$slots['prepend-item'] && children.unshift(this.$slots['prepend-item'])
+
+    this.$slots['append-item'] && children.push(this.$slots['append-item'])
 
     return this.$createElement('div', {
       staticClass: 'v-select-list v-card',

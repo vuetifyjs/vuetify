@@ -13,6 +13,7 @@ import ClickOutside from '../../directives/click-outside'
 
 // Helpers
 import { getZIndex, convertToUnit } from '../../util/helpers'
+import ThemeProvider from '../../util/ThemeProvider'
 
 /* @vue/component */
 export default {
@@ -37,6 +38,8 @@ export default {
     fullscreen: Boolean,
     fullWidth: Boolean,
     noClickAnimation: Boolean,
+    light: Boolean,
+    dark: Boolean,
     maxWidth: {
       type: [String, Number],
       default: 'none'
@@ -216,7 +219,14 @@ export default {
       },
       style: { zIndex: this.activeZIndex },
       ref: 'content'
-    }, [dialog]))
+    }, [
+      this.$createElement(ThemeProvider, {
+        props: {
+          dark: !this.light && (this.$vuetify.dark || this.dark),
+          light: !this.dark && (this.light || !this.$vuetify.dark)
+        }
+      }, [dialog])
+    ]))
 
     return h('div', {
       staticClass: 'v-dialog__container',

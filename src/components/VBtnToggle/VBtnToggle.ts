@@ -34,8 +34,7 @@ export default mixins(ButtonGroup, Themeable).extend({
       return {
         'v-btn-toggle': true,
         'v-btn-toggle--selected': this.hasValue,
-        'theme--light': this.light,
-        'theme--dark': this.dark
+        ...this.themeClasses
       }
     },
     hasValue (): boolean {

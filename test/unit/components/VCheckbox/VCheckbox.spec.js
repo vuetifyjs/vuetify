@@ -113,7 +113,7 @@ test('VCheckbox.js', ({ mount }) => {
     expect(inputGroup.element.getAttribute('aria-label')).toBeFalsy()
   })
 
-  it('should toggle on space and enter with default toggleKeys', () => {
+  it('should toggle on keypress', async () => {
     const wrapper = mount(VCheckbox, {
       propsData: {
         inputValue: false
@@ -124,46 +124,14 @@ test('VCheckbox.js', ({ mount }) => {
     wrapper.vm.$on('change', change)
     const input = wrapper.first('input')
 
-    input.trigger('keydown.enter')
-    input.trigger('keydown.space')
+    input.trigger('focus')
+    await wrapper.vm.$nextTick()
 
-    expect(change.mock.calls).toHaveLength(2)
-  })
+    input.trigger('change')
+    await wrapper.vm.$nextTick()
+    input.trigger('change')
 
-  it('should not toggle on space or enter with blank toggleKeys', () => {
-    const wrapper = mount(VCheckbox, {
-      propsData: {
-        inputValue: false,
-        toggleKeys: []
-      }
-    })
-
-    const change = jest.fn()
-    wrapper.vm.$on('change', change)
-
-    wrapper.trigger('keydown.enter')
-    wrapper.trigger('keydown.space')
-
-    expect(change).not.toBeCalled()
-  })
-
-  it('should toggle only on custom toggleKeys', () => {
-    const wrapper = mount(VCheckbox, {
-      propsData: {
-        inputValue: false,
-        toggleKeys: [32] // space
-      }
-    })
-
-    const change = jest.fn()
-    wrapper.vm.$on('change', change)
-    const input = wrapper.first('input')
-
-    input.trigger('keydown.enter')
-    expect(change).not.toBeCalled()
-
-    input.trigger('keydown.space')
-    expect(change).toBeCalled()
+    expect(change.mock.calls).toEqual([[true], [false]])
   })
 
   it('should enable ripple based on disabled state', () => {

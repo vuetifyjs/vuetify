@@ -2,14 +2,14 @@
 
 exports[`VBreadcrumbs.js should have breadcrumbs classes 1`] = `
 
-<ul class="v-breadcrumbs">
+<ul class="v-breadcrumbs theme--light">
 </ul>
 
 `;
 
 exports[`VBreadcrumbs.js should inject slot to children 1`] = `
 
-<ul class="v-breadcrumbs">
+<ul class="v-breadcrumbs theme--light">
   <li>
     <a class="v-breadcrumbs__item">
     </a>
@@ -41,7 +41,7 @@ exports[`VBreadcrumbs.js should inject slot to children 1`] = `
 
 exports[`VBreadcrumbs.js should not create dividers for non-items 1`] = `
 
-<ul class="v-breadcrumbs">
+<ul class="v-breadcrumbs theme--light">
   <span>
   </span>
   <li>
@@ -63,7 +63,7 @@ exports[`VBreadcrumbs.js should not create dividers for non-items 1`] = `
 
 exports[`VBreadcrumbs.js should use a custom divider slot 1`] = `
 
-<ul class="v-breadcrumbs">
+<ul class="v-breadcrumbs theme--light">
   <li>
     <a class="v-breadcrumbs__item">
     </a>
@@ -81,14 +81,14 @@ exports[`VBreadcrumbs.js should use a custom divider slot 1`] = `
 
 exports[`VBreadcrumbs.js should use custom justify props 1`] = `
 
-<ul class="v-breadcrumbs">
+<ul class="v-breadcrumbs theme--light">
 </ul>
 
 `;
 
 exports[`VBreadcrumbs.js should use custom justify props 2`] = `
 
-<ul class="v-breadcrumbs">
+<ul class="v-breadcrumbs theme--light">
 </ul>
 
 `;

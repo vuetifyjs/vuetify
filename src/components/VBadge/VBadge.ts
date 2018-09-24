@@ -46,15 +46,14 @@ export default mixins(
   },
 
   render (h): VNode {
-    const badge = this.$slots.badge ? [h('span', {
+    const badge = this.$slots.badge ? [h('span', this.setBackgroundColor(this.color, {
       staticClass: 'v-badge__badge',
-      'class': this.addBackgroundColorClassChecks(),
       attrs: this.$attrs,
       directives: [{
         name: 'show',
         value: this.isActive
       }] as any
-    }, this.$slots.badge)] : undefined
+    }), this.$slots.badge)] as any : null
 
     return h('span', {
       staticClass: 'v-badge',

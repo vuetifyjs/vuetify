@@ -66,6 +66,9 @@ export default {
         )
       }
 
+      if (this.nudgeLeft) left -= parseInt(this.nudgeLeft)
+      if (this.nudgeRight) left += parseInt(this.nudgeRight)
+
       return `${this.calcXOverflow(left)}px`
     },
     calculatedTop () {
@@ -85,6 +88,9 @@ export default {
           (content.height / 2)
         )
       }
+
+      if (this.nudgeTop) top -= parseInt(this.nudgeTop)
+      if (this.nudgeBottom) top += parseInt(this.nudgeBottom)
 
       return `${this.calcYOverflow(top + this.pageYOffset)}px`
     },
@@ -135,12 +141,12 @@ export default {
   },
 
   render (h) {
-    const tooltip = h('div', {
+    const tooltip = h('div', this.setBackgroundColor(this.color, {
       staticClass: 'v-tooltip__content',
-      'class': this.addBackgroundColorClassChecks({
+      'class': {
         [this.contentClass]: true,
         'menuable__content__active': this.isActive
-      }),
+      },
       style: this.styles,
       attrs: this.getScopeIdAttrs(),
       directives: [{
@@ -148,7 +154,7 @@ export default {
         value: this.isContentActive
       }],
       ref: 'content'
-    }, this.showLazyContent(this.$slots.default))
+    }), this.showLazyContent(this.$slots.default))
 
     return h(this.tag, {
       staticClass: 'v-tooltip',

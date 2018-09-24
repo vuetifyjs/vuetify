@@ -34,19 +34,9 @@ export default mixins(Colorable, Toggleable, Transitionable).extend({
     }
   },
 
-  data: () => ({
-    defaultColor: 'error'
-  }),
-
   computed: {
-    classes (): object {
-      const color = (this.type && !this.color) ? this.type : this.computedColor
-      const classes = {
-        'v-alert--outline': this.outline
-      }
-
-      return this.outline ? this.addTextColorClassChecks(classes, color)
-        : this.addBackgroundColorClassChecks(classes, color)
+    computedColor (): string {
+      return (this.type && !this.color) ? this.type : (this.color || 'error')
     },
     computedIcon (): string | void {
       if (this.icon || !this.type) return this.icon
@@ -60,39 +50,49 @@ export default mixins(Colorable, Toggleable, Transitionable).extend({
     }
   },
 
-  render (h): VNode {
-    const children = [h('div', this.$slots.default)]
+  methods: {
+    genIcon (): VNode | null {
+      if (!this.computedIcon) return null
 
-    if (this.computedIcon) {
-      children.unshift(h(VIcon, {
+      return this.$createElement(VIcon, {
         'class': 'v-alert__icon'
-      }, this.computedIcon))
-    }
+      }, this.computedIcon)
+    },
 
-    if (this.dismissible) {
-      const close = h('a', {
+    genDismissible (): VNode | null {
+      if (!this.dismissible) return null
+
+      return this.$createElement('a', {
         'class': 'v-alert__dismissible',
         on: { click: () => { this.isActive = false } }
       }, [
-        h(VIcon, {
+        this.$createElement(VIcon, {
           props: {
             right: true
           }
         }, '$vuetify.icons.cancel')
       ])
-
-      children.push(close)
     }
+  },
 
-    const alert = h('div', {
+  render (h): VNode {
+    const children = [
+      this.genIcon(),
+      h('div', this.$slots.default),
+      this.genDismissible()
+    ] as any
+    const setColor = this.outline ? this.setTextColor : this.setBackgroundColor
+    const alert = h('div', setColor(this.computedColor, {
       staticClass: 'v-alert',
-      'class': this.classes,
+      'class': {
+        'v-alert--outline': this.outline
+      },
       directives: [{
         name: 'show',
         value: this.isActive
       }] as any,
       on: this.$listeners
-    }, children)
+    }), children)
 
     if (!this.transition) return alert
 

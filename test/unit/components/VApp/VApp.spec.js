@@ -51,6 +51,14 @@ test('VApp.js', ({ mount }) => {
     expect(wrapper.vm.style).toMatchSnapshot()
   })
 
+  it('should generate theme using css variables', async () => {
+    const wrapper = mount(VApp)
+
+    wrapper.vm.$vuetify.options.customProperties = true
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.style).toMatchSnapshot()
+  })
+
   it('should set a CSP nonce', async () => {
     // Delete the old stylesheet first
     let el = document.getElementById('vuetify-theme-stylesheet')

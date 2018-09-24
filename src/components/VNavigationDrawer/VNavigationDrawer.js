@@ -2,6 +2,7 @@ import '../../stylus/components/_navigation-drawer.styl'
 
 // Mixins
 import Applicationable from '../../mixins/applicationable'
+import Dependent from '../../mixins/dependent'
 import Overlayable from '../../mixins/overlayable'
 import SSRBootable from '../../mixins/ssr-bootable'
 import Themeable from '../../mixins/themeable'
@@ -30,6 +31,7 @@ export default {
       'right',
       'width'
     ]),
+    Dependent,
     Overlayable,
     SSRBootable,
     Themeable
@@ -110,8 +112,7 @@ export default {
         'v-navigation-drawer--open': this.isActive,
         'v-navigation-drawer--right': this.right,
         'v-navigation-drawer--temporary': this.temporary,
-        'theme--dark': this.dark,
-        'theme--light': this.light
+        ...this.themeClasses
       }
     },
     hasApp () {
@@ -235,9 +236,6 @@ export default {
       if (val == null) return this.init()
 
       if (val !== this.isActive) this.isActive = val
-    },
-    applicationProperty (newVal, oldVal) {
-      this.$vuetify.application.unbind(this._uid, oldVal)
     }
   },
 
@@ -263,7 +261,8 @@ export default {
         name: 'click-outside',
         value: () => (this.isActive = false),
         args: {
-          closeConditional: this.closeConditional
+          closeConditional: this.closeConditional,
+          include: this.getOpenDependentElements
         }
       }]
 

@@ -1,5 +1,6 @@
 import { test } from '@/test'
 import { VRadioGroup, VRadio } from '@/components/VRadioGroup'
+import { setTimeout } from 'timers';
 
 const warning = '[Vuetify] The v-radio component must be used inside a v-radio-group'
 const error = 'TypeError: this.radio.register is not a function'
@@ -166,7 +167,7 @@ test('VRadio.vue', ({ mount }) => {
     expect(error).toHaveBeenWarned()
   })
 
-  it('should toggle when space or enter is pressed', () => {
+  it('should toggle on keypress', () => {
     const wrapper = mount(VRadio)
 
     const change = jest.fn()
@@ -174,20 +175,11 @@ test('VRadio.vue', ({ mount }) => {
 
     const input = wrapper.first('input')
 
-    input.trigger('focus')
-    input.trigger('keydown.enter')
-
+    input.trigger('change')
     expect(change).toHaveBeenCalledTimes(1)
 
-    input.trigger('keydown.space')
-    expect(change).toHaveBeenCalledTimes(2)
-
     input.trigger('keydown.tab')
-    expect(change).toHaveBeenCalledTimes(2)
-
-    expect(wrapper.vm.isFocused).toBe(true)
-    wrapper.vm.onBlur()
-    expect(wrapper.vm.isFocused).toBe(false)
+    expect(change).toHaveBeenCalledTimes(1)
 
     expect(warning).toHaveBeenTipped()
   })
@@ -195,9 +187,9 @@ test('VRadio.vue', ({ mount }) => {
   it('should not generate own colors when parent is in error', async () => {
     const wrapper = mount(VRadio)
 
-    expect(wrapper.vm.classes).toEqual({
+    expect(wrapper.vm.computedData.class).toEqual({
       'theme--dark': false,
-      'theme--light': false,
+      'theme--light': true,
       'v-radio--is-disabled': false,
       'v-radio--is-focused': false
     })
@@ -206,10 +198,10 @@ test('VRadio.vue', ({ mount }) => {
 
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.classes).toEqual({
+    expect(wrapper.vm.computedData.class).toEqual({
       'accent--text': true,
       'theme--dark': false,
-      'theme--light': false,
+      'theme--light': true,
       'v-radio--is-disabled': false,
       'v-radio--is-focused': false
     })

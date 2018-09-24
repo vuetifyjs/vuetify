@@ -11,11 +11,3 @@ export {
   Scroll,
   Touch
 }
-
-export default function install (Vue) {
-  Vue.directive('click-outside', ClickOutside)
-  Vue.directive('ripple', Ripple)
-  Vue.directive('resize', Resize)
-  Vue.directive('scroll', Scroll)
-  Vue.directive('touch', Touch)
-}

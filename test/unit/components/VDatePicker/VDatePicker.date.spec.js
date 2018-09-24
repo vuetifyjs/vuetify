@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import { test, touch } from '@/test'
-import VDatePicker from '@/components/VDatePicker'
-import VMenu from '@/components/VMenu'
+import VDatePicker from '@/components/VDatePicker/VDatePicker'
 
 test('VDatePicker.js', ({ mount, compileToFunctions }) => {
   it('should display the correct date in title and header', () => {
@@ -111,6 +110,40 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
     wrapper.vm.$on('input', cb);
     wrapper.find('.v-date-picker-years li.active + li')[0].trigger('click')
     expect(cb).not.toBeCalled()
+  })
+
+  it('should emit input event with selected dates after click', async () => {
+    const cb = jest.fn()
+    const wrapper = mount(VDatePicker, {
+      propsData: {
+        multiple: true,
+        value: ['2013-05-07', '2013-05-08']
+      }
+    })
+
+    wrapper.vm.$on('input', cb);
+    wrapper.find('.v-date-picker-table--date tbody tr+tr td:first-child button')[0].trigger('click')
+    expect(cb.mock.calls[0][0]).toHaveLength(3)
+    expect(cb.mock.calls[0][0][2]).toBe('2013-05-05')
+    expect(cb.mock.calls[0][0]).toEqual(
+      expect.arrayContaining(['2013-05-07', '2013-05-08', '2013-05-05'])
+    )
+  })
+
+  it('should emit input without unselected dates after click', async () => {
+    const cb = jest.fn()
+    const wrapper = mount(VDatePicker, {
+      propsData: {
+        multiple: true,
+        value: ['2013-05-07', '2013-05-08', '2013-05-05']
+      }
+    })
+
+    wrapper.vm.$on('input', cb);
+    wrapper.find('.v-date-picker-table--date tbody tr+tr td:first-child button')[0].trigger('click')
+    expect(cb.mock.calls[0][0]).toHaveLength(2)
+    expect(cb.mock.calls[0][0]).toEqual(expect.arrayContaining(['2013-05-07', '2013-05-08']))
+    expect(cb.mock.calls[0][0]).not.toEqual(expect.arrayContaining(['2013-05-05']))
   })
 
   it('should be scrollable', async () => {

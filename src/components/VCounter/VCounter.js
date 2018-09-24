@@ -2,7 +2,7 @@
 import '../../stylus/components/_counters.styl'
 
 // Mixins
-import Themeable from '../../mixins/themeable'
+import Themeable, { functionalThemeClasses } from '../../mixins/themeable'
 
 /* @vue/component */
 export default {
@@ -20,7 +20,8 @@ export default {
     max: [Number, String]
   },
 
-  render (h, { props }) {
+  render (h, ctx) {
+    const { props } = ctx
     const max = parseInt(props.max, 10)
     const value = parseInt(props.value, 10)
     const content = max ? `${value} / ${max}` : props.value
@@ -30,7 +31,7 @@ export default {
       staticClass: 'v-counter',
       class: {
         'error--text': isGreater,
-        ...Themeable.options.computed.themeClasses.call(props)
+        ...functionalThemeClasses(ctx)
       }
     }, content)
   }
