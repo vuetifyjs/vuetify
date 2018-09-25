@@ -12,6 +12,12 @@ import { VNode, VNodeChildrenArrayContents } from 'vue/types/vnode'
 export default mixins(Groupable).extend({
   name: 'v-item',
 
+  props: {
+    value: {
+      required: false
+    }
+  },
+
   render (): VNode {
     if (!this.$scopedSlots.default) {
       consoleWarn('v-item is missing a default scopedSlot', this)
