@@ -77,7 +77,7 @@ export default VItemGroup.extend({
         style: {
           height: this.height
         }
-      }, [this.$slots.default])
+      }, this.$slots.default)
     }
   },
 
