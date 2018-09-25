@@ -3,7 +3,6 @@ import VTab from '@/components/VTabs/VTab'
 import Vue from 'vue'
 
 const tabClick = 'Injection "tabClick" not found'
-const tabsWarning = '[Vuetify] The v-item component must be used inside a v-item-group'
 const stub = {
   name: 'router-link',
 
@@ -29,8 +28,6 @@ test('VTab', ({ mount }) => {
     expect(wrapper.find('.v-tabs__item')[0].vNode.elm.tagName).toBe('A')
     wrapper.setProps({ disabled: true })
     expect(wrapper.find('.v-tabs__item')[0].vNode.elm.tagName).toBe('DIV')
-
-    expect(tabsWarning).toHaveBeenTipped()
   })
 
   it('should emit click event and prevent default', async () => {
@@ -58,7 +55,6 @@ test('VTab', ({ mount }) => {
     // Cannot figure out how to ensure this actually happens
     // expect(event.defaultPrevented).toBe(false)
     expect(click).toHaveBeenCalled()
-    expect(tabsWarning).toHaveBeenTipped()
   })
 
   it('should have the correct value', () => {
@@ -88,6 +84,5 @@ test('VTab', ({ mount }) => {
     wrapper.setProps({ to: { path: 'bar' }})
     expect(wrapper.vm.value).toBe('bar')
 
-    expect(tabsWarning).toHaveBeenTipped()
   })
 })

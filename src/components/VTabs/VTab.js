@@ -27,7 +27,7 @@ export default {
 
   computed: {
     isDark () {
-      return this.itemGroup.selfIsDark
+      return this.itemGroup && this.itemGroup.selfIsDark
     },
     classes () {
       return {

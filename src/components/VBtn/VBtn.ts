@@ -12,6 +12,7 @@ import VProgressCircular from '../VProgressCircular'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
+import Groupable from '../../mixins/groupable'
 import Positionable from '../../mixins/positionable'
 import Routable from '../../mixins/routable'
 import Themeable from '../../mixins/themeable'
@@ -20,6 +21,7 @@ import { inject as RegistrableInject } from '../../mixins/registrable'
 
 export default mixins(
   Colorable,
+  Groupable,
   Routable,
   Positionable,
   Themeable,
@@ -112,6 +114,8 @@ export default mixins(
       this.$el.blur()
 
       this.$emit('click', e)
+
+      this.itemGroup && this.toggle()
     },
     genContent (): VNode {
       return this.$createElement(

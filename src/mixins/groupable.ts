@@ -17,7 +17,7 @@ interface options extends Vue {
 }
 
 export default mixins<options>(
-  RegistrableInject('itemGroup', 'v-item', 'v-item-group')
+  RegistrableInject('itemGroup')
   /* @vue/component */
 ).extend({
   name: 'groupable',
