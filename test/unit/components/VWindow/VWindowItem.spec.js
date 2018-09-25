@@ -9,8 +9,6 @@ test('VWindowItem.ts', ({ mount }) => {
       }
     })
 
-    // TODO: No idea how to test the transition hooks
-
     const item = wrapper.first(VWindowItem.options)
     // Before enter
     expect(wrapper.vm.isActive).toBe(false)
@@ -26,36 +24,12 @@ test('VWindowItem.ts', ({ mount }) => {
 
     // After enter
     item.vm.onAfterEnter()
+    await new Promise(resolve => window.requestAnimationFrame(resolve))
     expect(wrapper.vm.height).toBe(undefined)
     expect(wrapper.vm.isActive).toBe(false)
 
     // Before leave
     item.vm.onBeforeLeave(el)
     expect(wrapper.vm.height).toBe('0px')
-  })
-
-  it.skip('should filter children when value provided', async () => {
-    const wrapper = mount(VWindow, {
-      propsData: {
-        value: 0
-      },
-      slots: {
-        default: [
-          { render: h => h('div', 'foo') },
-          { render: h => h('div', 'bar') }
-        ]
-      }
-    })
-
-    const html = wrapper.html()
-    expect(html).toMatchSnapshot()
-
-    wrapper.setProps({ value: 1 })
-
-    await wrapper.vm.$nextTick()
-
-    const html2 = wrapper.html()
-    expect(html2).toMatchSnapshot()
-    expect(html2).not.toEqual(html)
   })
 })

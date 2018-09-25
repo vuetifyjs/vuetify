@@ -50,8 +50,10 @@ export default mixins<options & ExtractVue<[typeof Bootable]>>(
 
   methods: {
     onAfterEnter () {
-      this.itemGroup.height = undefined
-      this.itemGroup.isActive = false
+      requestAnimationFrame(() => {
+        this.itemGroup.height = undefined
+        this.itemGroup.isActive = false
+      })
     },
     onBeforeEnter () {
       this.itemGroup.isActive = true

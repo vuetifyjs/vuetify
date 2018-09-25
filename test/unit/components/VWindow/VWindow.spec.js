@@ -33,12 +33,26 @@ test('VWindow.ts', ({ mount }) => {
       }
     })
 
+    // Reverse implicitly set by changed index
     wrapper.setProps({ value: 1 })
     await wrapper.vm.$nextTick()
-    expect(wrapper.vm.isReverse).toBe(false)
+    expect(wrapper.vm.internalReverse).toBe(false)
 
+    // Reverse implicitly set by changed index
     wrapper.setProps({ value: 0 })
     await wrapper.vm.$nextTick()
-    expect(wrapper.vm.isReverse).toBe(true)
+    expect(wrapper.vm.internalReverse).toBe(true)
+
+    // Reverse explicit prop override
+    wrapper.setProps({ reverse: false })
+    expect(wrapper.vm.internalReverse).toBe(false)
+
+    // Reverse explicit prop override
+    wrapper.setProps({ reverse: true })
+    expect(wrapper.vm.internalReverse).toBe(true)
+
+    // Reverts back to local isReverse
+    wrapper.setProps({ reverse: undefined })
+    expect(wrapper.vm.internalReverse).toBe(true)
   })
 })

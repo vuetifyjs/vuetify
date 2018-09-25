@@ -16,25 +16,31 @@ export default VItemGroup.extend({
       type: Boolean,
       default: true
     },
+    reverse: {
+      type: Boolean,
+      default: undefined
+    },
     value: {
       required: false
     },
     vertical: Boolean
   },
 
-  data: () => ({
-    height: undefined as undefined | string,
-    isActive: false,
-    isBooted: false,
-    isReverse: false
-  }),
+  data () {
+    return {
+      height: undefined as undefined | string,
+      isActive: false,
+      isBooted: false,
+      isReverse: false
+    }
+  },
 
   computed: {
     computedTransition (): string {
       if (!this.isBooted) return ''
 
       const axis = this.vertical ? 'y' : 'x'
-      const direction = this.isReverse ? '-reverse' : ''
+      const direction = this.internalReverse ? '-reverse' : ''
 
       return `v-window-${axis}${direction}-transition`
     },
@@ -42,6 +48,11 @@ export default VItemGroup.extend({
       return this.items.findIndex((item, i) => {
         return this.internalValue === this.getValue(item, i)
       })
+    },
+    internalReverse (): boolean {
+      if (this.reverse !== undefined) return this.reverse
+
+      return this.isReverse
     }
   },
 
@@ -53,9 +64,7 @@ export default VItemGroup.extend({
 
   // Ensure no entry animation
   mounted () {
-    this.$nextTick(() => {
-      this.isBooted = true
-    })
+    this.$nextTick(() => (this.isBooted = true))
   },
 
   methods: {
