@@ -47,10 +47,10 @@
       this.snackbar({
         color: 'default',
         close: true,
-        id: 'august-2018-21369715',
-        text: 'Go To Video',
-        msg: '**August 2018 Update**',
-        href: 'https://www.patreon.com/posts/august-2018-21369715',
+        id: '1m-to-pay-open-source-maintainers-on-tidelift',
+        text: 'Get details',
+        msg: '**$1M** to pay OSS maintainers',
+        href: 'https://blog.tidelift.com/1m-to-pay-open-source-maintainers-on-tidelift?utm_source=vuetify&utm_medium=referral&utm_campaign=news',
         timeout: 0
       })
     },
