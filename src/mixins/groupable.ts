@@ -1,8 +1,3 @@
-import Vue from 'vue'
-
-// Components
-import VItemGroup from '../components/VItemGroup/VItemGroup'
-
 // Mixins
 import { inject as RegistrableInject } from './registrable'
 
@@ -10,57 +5,61 @@ import { inject as RegistrableInject } from './registrable'
 import mixins from '../util/mixins'
 import { PropValidator } from 'vue/types/options'
 
-type VItemGroupInstance = InstanceType<typeof VItemGroup>
+export function factory<T extends string> (parent = 'itemGroup') {
+  return mixins(
+    RegistrableInject(parent)
+  ).extend({
+    name: 'groupable',
 
-interface options extends Vue {
-  itemGroup: VItemGroupInstance
+    props: {
+      activeClass: {
+        type: String,
+        default (): string | undefined {
+          if (!this[parent]) return undefined
+
+          return this[parent].activeClass
+        }
+      } as any as PropValidator<string>,
+      disabled: Boolean
+    },
+
+    data () {
+      return {
+        isActive: false
+      }
+    },
+
+    computed: {
+      groupClasses (): object {
+        if (!this.activeClass) return {}
+
+        return {
+          [this.activeClass]: this.isActive
+        }
+      }
+    },
+
+    created () {
+      this[parent] && this[parent].register(this)
+    },
+
+    beforeDestroy () {
+      this[parent] && this[parent].unregister(this)
+    },
+
+    methods: {
+      toggle () {
+        this.$emit('change')
+      }
+    }
+  })
 }
 
-export default mixins<options>(
-  RegistrableInject('itemGroup')
-  /* @vue/component */
-).extend({
-  name: 'groupable',
+const Groupable = factory()
 
-  props: {
-    activeClass: {
-      type: String,
-      default (): string | undefined {
-        if (!this.itemGroup) return undefined
+export default Groupable
 
-        return this.itemGroup.activeClass
-      }
-    } as any as PropValidator<string>,
-    disabled: Boolean
-  },
-
-  data () {
-    return {
-      isActive: false
-    }
-  },
-
-  computed: {
-    groupClasses (): object {
-      if (!this.activeClass) return {}
-
-      return {
-        [this.activeClass]: this.isActive
-      }
-    }
-  },
-
-  created () {
-    this.itemGroup && this.itemGroup.register(this)
-  },
-
-  beforeDestroy () {
-    this.itemGroup && this.itemGroup.unregister(this)
-  },
-
-  methods: {
-    toggle () {
-      this.$emit('change')
-    }
-  }
-})
+// export default mixins<options>(
+//   RegistrableInject('itemGroup')
+//   /* @vue/component */
+// ).extend()

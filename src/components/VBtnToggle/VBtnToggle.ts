@@ -8,6 +8,12 @@ import { VItemGroup } from '../VItemGroup'
 export default VItemGroup.extend({
   name: 'v-btn-toggle',
 
+  provide (): object {
+    return {
+      btnToggle: this
+    }
+  },
+
   props: {
     activeClass: {
       type: String,
