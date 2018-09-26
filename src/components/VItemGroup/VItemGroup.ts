@@ -15,7 +15,7 @@ import { VNode } from 'vue/types'
 
 type GroupableInstance = InstanceType<typeof Groupable> & { value?: any }
 
-export const Group = mixins(
+export const ItemGroupInstance = mixins(
   Proxyable,
   Themeable
 ).extend({
@@ -216,7 +216,7 @@ export const Group = mixins(
   }
 })
 
-export default Group.extend({
+export default ItemGroupInstance.extend({
   provide (): object {
     return {
       itemGroup: this

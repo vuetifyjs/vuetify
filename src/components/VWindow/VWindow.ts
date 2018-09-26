@@ -2,7 +2,7 @@
 import '../../stylus/components/_windows.styl'
 
 // Components
-import { Group } from '../VItemGroup/VItemGroup'
+import { ItemGroupInstance } from '../VItemGroup/VItemGroup'
 
 // Directives
 import Touch from '../../directives/touch'
@@ -11,14 +11,8 @@ import Touch from '../../directives/touch'
 import { VNode, VNodeDirective } from 'vue/types/vnode'
 
 /* @vue/component */
-export default Group.extend({
+export const WindowInstance = ItemGroupInstance.extend({
   name: 'v-window',
-
-  provide (): object {
-    return {
-      windowGroup: this
-    }
-  },
 
   directives: { Touch },
 
@@ -87,18 +81,20 @@ export default Group.extend({
       }, this.$slots.default)
     },
     init () {
-      Group.options.methods.init.call(this)
+      ItemGroupInstance.options.methods.init.call(this)
 
       // Ensure no entry animation
-      this.$nextTick(() => (this.isBooted = true))
+      this.isBooted = true
     },
     next () {
+      this.isReverse = false
       const nextIndex = (this.internalIndex + 1) % this.items.length
       const item = this.items[nextIndex]
 
       this.internalValue = this.getValue(item, nextIndex)
     },
     prev () {
+      this.isReverse = true
       const lastIndex = (this.internalIndex + this.items.length - 1) % this.items.length
       const item = this.items[lastIndex]
 
@@ -126,5 +122,13 @@ export default Group.extend({
     }
 
     return h('div', data, [this.genContainer()])
+  }
+})
+
+export default WindowInstance.extend({
+  provide (): object {
+    return {
+      windowGroup: this
+    }
   }
 })

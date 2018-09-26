@@ -2,7 +2,7 @@
 import '../../stylus/components/_carousel.styl'
 
 // Extensions
-import { VWindow } from '../VWindow'
+import { WindowInstance } from '../VWindow/VWindow'
 
 // Components
 import VBtn from '../VBtn'
@@ -23,13 +23,19 @@ import { convertToUnit } from '../../util/helpers'
 import { VNode } from 'vue'
 import { VNodeDirective } from 'vue/types/vnode'
 
-export default VWindow.extend(mixins<ExtractVue<[typeof VWindow]>>(
+export default WindowInstance.extend(mixins<ExtractVue<[typeof WindowInstance]>>(
   Themeable
   /* @vue/component */
 ).extend({
   name: 'v-carousel',
 
   directives: { Touch },
+
+  provide (): object {
+    return {
+      windowGroup: this
+    }
+  },
 
   props: {
     cycle: {
@@ -67,6 +73,7 @@ export default VWindow.extend(mixins<ExtractVue<[typeof VWindow]>>(
 
   data () {
     return {
+      changedByControls: false,
       internalHeight: this.height,
       slideTimeout: undefined as number | undefined
     }
@@ -166,23 +173,16 @@ export default VWindow.extend(mixins<ExtractVue<[typeof VWindow]>>(
         },
         on: {
           change: (val: any) => {
+            this.changedByControls = true
             this.internalValue = val
           }
         }
       }, children)
     },
     init () {
-      VWindow.options.methods.init.call(this)
+      WindowInstance.options.methods.init.call(this)
 
       this.startTimeout()
-    },
-    next () {
-      this.isReverse = false
-      VWindow.options.methods.next.call(this)
-    },
-    prev () {
-      this.isReverse = true
-      VWindow.options.methods.prev.call(this)
     },
     restartTimeout () {
       this.slideTimeout && clearTimeout(this.slideTimeout)
@@ -196,7 +196,13 @@ export default VWindow.extend(mixins<ExtractVue<[typeof VWindow]>>(
 
       this.slideTimeout = window.setTimeout(this.next, this.interval > 0 ? this.interval : 6000)
     },
-    updateReverse () { /* noop */ }
+    updateReverse (val: number, oldVal: number) {
+      if (this.changedByControls) {
+        this.changedByControls = false
+
+        WindowInstance.options.methods.updateReverse.call(this, val, oldVal)
+      }
+    }
   },
 
   render (h): VNode {

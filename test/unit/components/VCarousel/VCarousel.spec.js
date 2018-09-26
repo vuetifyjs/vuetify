@@ -114,7 +114,7 @@ test('VCarousel.ts', ({ mount }) => {
 
   // TODO: Use jest's fake timers
   it('should emit input event after interval', async () => {
-    const vm = mount(VCarousel).vm
+    const vm = new Vue()
     const wrapper = mount(VCarousel, {
       propsData: {
         value: 1,

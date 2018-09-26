@@ -1,5 +1,5 @@
 // Components
-import VWindow from './VWindow'
+import { WindowInstance } from './VWindow'
 
 // Mixins
 import Bootable from '../../mixins/bootable'
@@ -19,15 +19,14 @@ import mixins, { ExtractVue } from '../../util/mixins'
 import Vue from 'vue'
 import { VNode, VNodeDirective } from 'vue/types'
 
-type VWindowInstance = InstanceType<typeof VWindow>
+type VWindowInstance = InstanceType<typeof WindowInstance>
 
 interface options extends Vue {
   windowGroup: VWindowInstance
 }
 
-export default mixins<options & ExtractVue<[typeof Bootable]>>(
-  Bootable,
-  GroupableFactory('windowGroup', 'v-window-item', 'v-window')
+export const WindowItemInstance = mixins<options & ExtractVue<[typeof Bootable]>>(
+  Bootable
   /* @vue/component */
 ).extend({
   name: 'v-window-item',
@@ -37,6 +36,14 @@ export default mixins<options & ExtractVue<[typeof Bootable]>>(
   },
 
   props: {
+    reverseTransition: {
+      type: [Boolean, String],
+      default: undefined
+    },
+    transition: {
+      type: [Boolean, String],
+      default: undefined
+    },
     value: {
       required: false
     }
@@ -44,13 +51,22 @@ export default mixins<options & ExtractVue<[typeof Bootable]>>(
 
   data () {
     return {
-      isActive: false
+      isActive: false,
+      wasCancelled: false
     }
   },
 
   computed: {
-    computedTransition (): string {
-      return this.windowGroup.computedTransition
+    computedTransition (): string | boolean {
+      if (this.windowGroup.internalReverse) {
+        return typeof this.transition !== 'undefined'
+          ? this.transition || ''
+          : this.windowGroup.computedTransition
+      } else {
+        return typeof this.reverseTransition !== 'undefined'
+          ? this.reverseTransition || ''
+          : this.windowGroup.computedTransition
+      }
     }
   },
 
@@ -59,6 +75,11 @@ export default mixins<options & ExtractVue<[typeof Bootable]>>(
       return this.$slots.default
     },
     onAfterEnter () {
+      if (this.wasCancelled) {
+        this.wasCancelled = false
+        return
+      }
+
       requestAnimationFrame(() => {
         this.windowGroup.internalHeight = undefined
         this.windowGroup.isActive = false
@@ -69,6 +90,9 @@ export default mixins<options & ExtractVue<[typeof Bootable]>>(
     },
     onBeforeLeave (el: HTMLElement) {
       this.windowGroup.internalHeight = convertToUnit(el.clientHeight)
+    },
+    onEnterCancelled () {
+      this.wasCancelled = true
     },
     onEnter (el: HTMLElement, done: () => void) {
       addOnceEventListener(el, 'transitionend', done)
@@ -97,8 +121,13 @@ export default mixins<options & ExtractVue<[typeof Bootable]>>(
         afterEnter: this.onAfterEnter,
         beforeEnter: this.onBeforeEnter,
         beforeLeave: this.onBeforeLeave,
-        enter: this.onEnter
+        enter: this.onEnter,
+        enterCancelled: this.onEnterCancelled
       }
     }, [div])
   }
+})
+
+export default WindowItemInstance.extend({
+  mixins: [GroupableFactory('windowGroup', 'v-window-item', 'v-window')]
 })
