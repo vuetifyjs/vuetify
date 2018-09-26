@@ -15,17 +15,11 @@ import { VNode } from 'vue/types'
 
 type GroupableInstance = InstanceType<typeof Groupable> & { value?: any }
 
-export default mixins(
+export const Group = mixins(
   Proxyable,
   Themeable
 ).extend({
   name: 'v-item-group',
-
-  provide (): object {
-    return {
-      itemGroup: this
-    }
-  },
 
   props: {
     activeClass: {
@@ -219,5 +213,13 @@ export default mixins(
       staticClass: 'v-item-group',
       class: this.classes
     }, this.$slots.default)
+  }
+})
+
+export default Group.extend({
+  provide (): object {
+    return {
+      itemGroup: this
+    }
   }
 })

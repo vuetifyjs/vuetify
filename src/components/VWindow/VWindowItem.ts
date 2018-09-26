@@ -3,7 +3,7 @@ import VWindow from './VWindow'
 
 // Mixins
 import Bootable from '../../mixins/bootable'
-import Groupable from '../../mixins/groupable'
+import { factory as GroupableFactory } from '../../mixins/groupable'
 
 // Directives
 import Touch from '../../directives/touch'
@@ -22,12 +22,12 @@ import { VNode, VNodeDirective } from 'vue/types'
 type VWindowInstance = InstanceType<typeof VWindow>
 
 interface options extends Vue {
-  itemGroup: VWindowInstance
+  windowGroup: VWindowInstance
 }
 
 export default mixins<options & ExtractVue<[typeof Bootable]>>(
   Bootable,
-  Groupable
+  GroupableFactory('windowGroup')
   /* @vue/component */
 ).extend({
   name: 'v-window-item',
@@ -51,21 +51,21 @@ export default mixins<options & ExtractVue<[typeof Bootable]>>(
   methods: {
     onAfterEnter () {
       requestAnimationFrame(() => {
-        this.itemGroup.height = undefined
-        this.itemGroup.isActive = false
+        this.windowGroup.height = undefined
+        this.windowGroup.isActive = false
       })
     },
     onBeforeEnter () {
-      this.itemGroup.isActive = true
+      this.windowGroup.isActive = true
     },
     onBeforeLeave (el: HTMLElement) {
-      this.itemGroup.height = convertToUnit(el.clientHeight)
+      this.windowGroup.height = convertToUnit(el.clientHeight)
     },
     onEnter (el: HTMLElement, done: () => void) {
       addOnceEventListener(el, 'transitionend', done)
 
       requestAnimationFrame(() => {
-        this.itemGroup.height = convertToUnit(el.clientHeight)
+        this.windowGroup.height = convertToUnit(el.clientHeight)
       })
     }
   },
@@ -82,7 +82,7 @@ export default mixins<options & ExtractVue<[typeof Bootable]>>(
 
     return h('transition', {
       props: {
-        name: this.itemGroup.computedTransition
+        name: this.windowGroup.computedTransition
       },
       on: {
         afterEnter: this.onAfterEnter,

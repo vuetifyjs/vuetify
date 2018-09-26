@@ -2,14 +2,20 @@
 import '../../stylus/components/_windows.styl'
 
 // Components
-import { VItemGroup } from '../VItemGroup'
+import { Group } from '../VItemGroup/VItemGroup'
 
 // Types
 import { VNode } from 'vue/types/vnode'
 
 /* @vue/component */
-export default VItemGroup.extend({
+export default Group.extend({
   name: 'v-window',
+
+  provide (): object {
+    return {
+      windowGroup: this
+    }
+  },
 
   props: {
     mandatory: {
