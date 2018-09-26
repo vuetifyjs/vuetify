@@ -1,18 +1,12 @@
 // Styles
 import '../../stylus/components/_button-toggle.styl'
 
-// Extensions
-import { VItemGroup } from '../VItemGroup'
+// Mixins
+import ButtonGroup from '../../mixins/button-group'
 
 /* @vue/component */
-export default VItemGroup.extend({
+export default ButtonGroup.extend({
   name: 'v-btn-toggle',
-
-  provide (): object {
-    return {
-      btnToggle: this
-    }
-  },
 
   props: {
     activeClass: {
@@ -22,9 +16,9 @@ export default VItemGroup.extend({
   },
 
   computed: {
-    classes (): Record<string, boolean> {
+    classes (): object {
       return {
-        ...VItemGroup.options.computed.classes.call(this),
+        ...ButtonGroup.options.computed.classes.call(this),
         'v-btn-toggle': true,
         'v-btn-toggle--only-child': this.selectedItems.length === 1,
         'v-btn-toggle--selected': this.selectedItems.length > 0

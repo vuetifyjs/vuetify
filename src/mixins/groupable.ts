@@ -58,8 +58,3 @@ export function factory<T extends string> (parent = 'itemGroup') {
 const Groupable = factory()
 
 export default Groupable
-
-// export default mixins<options>(
-//   RegistrableInject('itemGroup')
-//   /* @vue/component */
-// ).extend()
