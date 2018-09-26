@@ -2,7 +2,7 @@
 import '../../stylus/components/_tabs.styl'
 
 // Extensions
-import VItemGroup from '../VItemGroup/VItemGroup'
+import { ItemGroupInstance } from '../VItemGroup/VItemGroup'
 
 // Component level mixins
 import TabsComputed from './mixins/tabs-computed'
@@ -30,7 +30,7 @@ export default {
     Touch
   },
 
-  extends: VItemGroup,
+  extends: ItemGroupInstance,
 
   mixins: [
     Colorable,
@@ -45,6 +45,7 @@ export default {
 
   provide () {
     return {
+      tabGroup: this,
       tabProxy: this.tabProxy,
       registerItems: this.registerItems,
       unregisterItems: this.unregisterItems
@@ -132,9 +133,7 @@ export default {
     // until DOM is
     // painted
     init () {
-      if (!this.isBooted) return
-
-      VItemGroup.options.methods.init.call(this)
+      ItemGroupInstance.options.methods.init.call(this)
       setTimeout(this.callSlider, 0)
     },
     /**
@@ -202,6 +201,7 @@ export default {
     },
     registerItems (fn) {
       this.tabItems = fn
+      fn(this.internalValue)
     },
     unregisterItems () {
       this.tabItems = null

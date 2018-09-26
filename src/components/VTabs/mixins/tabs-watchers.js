@@ -28,7 +28,6 @@ export default {
     hasArrows (val) {
       if (!val) this.scrollOffset = 0
     },
-    isBooted: 'init',
     /* @deprecate */
     internalValue (val) {
       if (!this.$listeners['input']) return

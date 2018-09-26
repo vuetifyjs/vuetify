@@ -16,69 +16,46 @@ test('VTabsItems', ({ mount, shallow }) => {
         value: 'foo'
       },
       slots: {
-        default: [{
-          render: h => h(VTabItem, {
-            props: { id: 'foo' }
-          })
-        }]
+        default: [VTabItem]
       }
     })
 
-    expect(wrapper.vm.activeIndex).toBe(0)
-    expect(wrapper.vm.activeItem).toBeTruthy()
-  })
+    await wrapper.vm.$nextTick()
 
-  it('should return lazy value', () => {
-    const wrapper = mount(VTabsItems)
-
-    expect(wrapper.vm.inputValue).toBe(undefined)
-    wrapper.setProps({ value: 'foo' })
-    expect(wrapper.vm.inputValue).toBe('foo')
-    expect(wrapper.vm.lazyValue).toBe('foo')
-  })
-
-  it('should emit input value when registerItems is not provided', () => {
-    const wrapper = mount(VTabsItems)
-    const input = jest.fn()
-    wrapper.vm.$on('input', input)
-
-    wrapper.vm.inputValue = 'foo'
-    expect(input).toHaveBeenCalled()
+    expect(wrapper.vm.internalIndex).toBe(0)
   })
 
   it('should react to touch', () => {
     const wrapper = mount(VTabsItems, {
-      propsData: { value: '1' },
+      propsData: { value: 1 },
       slots: {
         default: createRange(5).map(x => ({
-          render: h => h(VTabItem, {
-            props: { id: x.toString() }
-          })
+          render: h => h(VTabItem)
         }))
       }
     })
 
-    expect(wrapper.vm.inputValue).toBe('1')
+    expect(wrapper.vm.internalValue).toBe(1)
     touch(wrapper).start(0, 0).end(200, 0)
-    expect(wrapper.vm.inputValue).toBe('0')
+    expect(wrapper.vm.internalValue).toBe(0)
     // Without cycle, should stay on this index
     touch(wrapper).start(0, 0).end(200, 0)
-    expect(wrapper.vm.inputValue).toBe('0')
+    expect(wrapper.vm.internalValue).toBe(0)
 
     touch(wrapper).start(200, 0).end(0, 0)
-    expect(wrapper.vm.inputValue).toBe('1')
+    expect(wrapper.vm.internalValue).toBe(1)
 
-    wrapper.setProps({ value: '4' })
+    wrapper.setProps({ value: 4 })
     touch(wrapper).start(200, 0).end(0, 0)
-    expect(wrapper.vm.inputValue).toBe('4')
+    expect(wrapper.vm.internalValue).toBe(4)
 
     wrapper.setProps({ cycle: true })
-    wrapper.setProps({ value: '4' })
+    wrapper.setProps({ value: 4 })
     touch(wrapper).start(200, 0).end(0, 0)
-    expect(wrapper.vm.inputValue).toBe('0')
+    expect(wrapper.vm.internalValue).toBe(0)
 
-    wrapper.setProps({ value: '0' })
+    wrapper.setProps({ value: 0 })
     touch(wrapper).start(0, 0).end(200, 0)
-    expect(wrapper.vm.inputValue).toBe('4')
+    expect(wrapper.vm.internalValue).toBe(4)
   })
 })

@@ -18,27 +18,10 @@ const Component = (items = ['foo', 'bar']) => {
           props: { href: `#${item}` }
         })),
         h(VTabsItems, items.map(item => h(VTabItem, {
-          props: { id: item }
+          props: {
+            value: item
+          }
         })))
-      ])
-    }
-  }
-}
-
-const ImplicitVTabsItems = (items = ['foo', 'bar']) => {
-  return {
-    inheritAttrs: false,
-
-    render (h) {
-      return h(VTabs, {
-        attrs: this.$attrs
-      }, [
-        items.map(item => h(VTab, {
-          props: { href: `#${item}` }
-        })),
-        items.map(item => h(VTabItem, {
-          props: { id: item }
-        }))
       ])
     }
   }
@@ -46,7 +29,7 @@ const ImplicitVTabsItems = (items = ['foo', 'bar']) => {
 
 const ssrBootable = () => new Promise(resolve => requestAnimationFrame(resolve))
 
-test('VTabs', ({ mount, shallow }) => {
+test('VTabs', ({ mount }) => {
   it('should provide', () => {
     const wrapper = mount(Component())
 
@@ -105,33 +88,6 @@ test('VTabs', ({ mount, shallow }) => {
     expect(tabs.vm.scrollOffset).toBe(2)
   })
 
-  // it('should update model when route changes', async () => {
-  //   const $route = { path: 'bar' }
-  //   const wrapper = mount(Component(), {
-  //     globals: {
-  //       $route
-  //     }
-  //   })
-
-  //   await ssrBootable()
-
-  //   const tabs = wrapper.first(VTabs)
-  //   console.log(tabs.vm.internalValue)
-  //   const tab = wrapper.find(VTab)[1]
-  //   const change = jest.fn()
-  //   console.log(tabs.vm.internalValue)
-
-  //   tabs.vm.$on('change', change)
-  //   tab.trigger('click')
-  //   await wrapper.vm.$nextTick()
-  //   await wrapper.vm.$nextTick()
-  //   await wrapper.vm.$nextTick()
-
-  //   console.log(tabs.vm.internalValue)
-
-  //   expect(change).toHaveBeenCalledTimes(1)
-  // })
-
   it('should call method if overflowing', () => {
     const wrapper = mount(VTabs)
     const fn = jest.fn()
@@ -177,15 +133,6 @@ test('VTabs', ({ mount, shallow }) => {
     wrapper.setProps({ height: 112 })
     expect(wrapper.vm.containerStyles.height).toBe('112px')
   })
-
-  // it('should return lazy value when accessing input', async () => {
-  //   const wrapper = mount(VTabs)
-
-  //   expect(wrapper.vm.inputValue).toBe(undefined)
-  //   wrapper.setData({ lazyValue: 'foo' })
-  //   await wrapper.vm.$nextTick()
-  //   expect(wrapper.vm.inputValue).toBe('foo')
-  // })
 
   it('should show tabs arrows', async () => {
     const wrapper = mount(VTabs, {
@@ -406,35 +353,6 @@ test('VTabs', ({ mount, shallow }) => {
     expect(wrapper.vm.internalValue).toBe('bar')
   })
 
-  // This is an indirect way of testing call slider
-  it('should match active tab', async () => {
-    const wrapper = mount(VTabs, {
-      attachToDocument: true,
-      propsData: {
-        value: 'foo'
-      },
-      slots: {
-        default: [{
-          render: h => h(VTab, {
-            props: { href: '#bar' }
-          })
-        }]
-      }
-    })
-
-    wrapper.vm.callSlider()
-    await wrapper.vm.$nextTick()
-    expect((wrapper.vm.activeTab || {}).action === wrapper.vm.activeTab).toBe(true)
-
-    wrapper.setProps({ value: 'bar' })
-    await wrapper.vm.$nextTick()
-
-    expect((wrapper.vm.activeTab || {}).action === wrapper.vm.activeTab).toBe(false)
-    wrapper.vm.callSlider()
-    await wrapper.vm.$nextTick()
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-
   it('should not error if processing resize on destroy', () => {
     const wrapper = mount(VTabs, {
       slots: {
@@ -476,26 +394,5 @@ test('VTabs', ({ mount, shallow }) => {
     await resizeWindow(1800)
 
     expect(setWidths).toHaveBeenCalledTimes(2)
-  })
-
-  it('should emit input if swiping', async () => {
-    const wrapper = mount(ImplicitVTabsItems())
-
-    const tabs = wrapper.find(VTabs)[0]
-    const items = wrapper.find(VTabsItems)[0]
-    const change = jest.fn()
-    tabs.vm.$on('change', change)
-
-    await ssrBootable()
-
-    expect(change).toHaveBeenCalledTimes(1)
-
-    items.vm.onSwipe('next')
-
-    expect(change).toHaveBeenCalledTimes(2)
-
-    items.vm.onSwipe('prev')
-
-    expect(change).toHaveBeenCalledTimes(3)
   })
 })
