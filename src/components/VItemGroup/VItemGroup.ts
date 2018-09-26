@@ -87,7 +87,7 @@ export const Group = mixins(
   },
 
   mounted () {
-    this.init()
+    this.$nextTick(this.init)
   },
 
   methods: {

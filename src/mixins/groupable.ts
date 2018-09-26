@@ -5,9 +5,13 @@ import { inject as RegistrableInject } from './registrable'
 import mixins from '../util/mixins'
 import { PropValidator } from 'vue/types/options'
 
-export function factory<T extends string> (parent = 'itemGroup') {
+export function factory (
+  namespace = 'itemGroup',
+  child?: string,
+  parent?: string
+) {
   return mixins(
-    RegistrableInject(parent)
+    RegistrableInject(namespace, child, parent)
   ).extend({
     name: 'groupable',
 
@@ -15,9 +19,9 @@ export function factory<T extends string> (parent = 'itemGroup') {
       activeClass: {
         type: String,
         default (): string | undefined {
-          if (!this[parent]) return undefined
+          if (!this[namespace]) return undefined
 
-          return this[parent].activeClass
+          return this[namespace].activeClass
         }
       } as any as PropValidator<string>,
       disabled: Boolean
@@ -40,11 +44,11 @@ export function factory<T extends string> (parent = 'itemGroup') {
     },
 
     created () {
-      this[parent] && this[parent].register(this)
+      this[namespace] && this[namespace].register(this)
     },
 
     beforeDestroy () {
-      this[parent] && this[parent].unregister(this)
+      this[namespace] && this[namespace].unregister(this)
     },
 
     methods: {

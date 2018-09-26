@@ -131,6 +131,8 @@ test('VItemGroup.ts', ({ mount }) => {
       }
     })
 
+    await wrapper.vm.$nextTick()
+
     expect(wrapper.vm.selectedItems.length).toBe(1)
     expect(wrapper.vm.internalValue).toBe(0)
 

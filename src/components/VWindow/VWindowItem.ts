@@ -27,7 +27,7 @@ interface options extends Vue {
 
 export default mixins<options & ExtractVue<[typeof Bootable]>>(
   Bootable,
-  GroupableFactory('windowGroup')
+  GroupableFactory('windowGroup', 'v-window-item', 'v-window')
   /* @vue/component */
 ).extend({
   name: 'v-window-item',
@@ -48,10 +48,19 @@ export default mixins<options & ExtractVue<[typeof Bootable]>>(
     }
   },
 
+  computed: {
+    computedTransition (): string {
+      return this.windowGroup.computedTransition
+    }
+  },
+
   methods: {
+    genDefaultSlot () {
+      return this.$slots.default
+    },
     onAfterEnter () {
       requestAnimationFrame(() => {
-        this.windowGroup.height = undefined
+        this.windowGroup.internalHeight = undefined
         this.windowGroup.isActive = false
       })
     },
@@ -59,13 +68,13 @@ export default mixins<options & ExtractVue<[typeof Bootable]>>(
       this.windowGroup.isActive = true
     },
     onBeforeLeave (el: HTMLElement) {
-      this.windowGroup.height = convertToUnit(el.clientHeight)
+      this.windowGroup.internalHeight = convertToUnit(el.clientHeight)
     },
     onEnter (el: HTMLElement, done: () => void) {
       addOnceEventListener(el, 'transitionend', done)
 
       requestAnimationFrame(() => {
-        this.windowGroup.height = convertToUnit(el.clientHeight)
+        this.windowGroup.internalHeight = convertToUnit(el.clientHeight)
       })
     }
   },
@@ -78,11 +87,11 @@ export default mixins<options & ExtractVue<[typeof Bootable]>>(
         value: this.isActive
       }] as VNodeDirective[],
       on: this.$listeners
-    }, this.showLazyContent(this.$slots.default))
+    }, this.showLazyContent(this.genDefaultSlot()))
 
     return h('transition', {
       props: {
-        name: this.windowGroup.computedTransition
+        name: this.computedTransition
       },
       on: {
         afterEnter: this.onAfterEnter,

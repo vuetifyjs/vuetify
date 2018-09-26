@@ -17,19 +17,19 @@ test('VWindowItem.ts', ({ mount }) => {
 
     // Enter
     const el = document.createElement('div')
-    expect(wrapper.vm.height).toBe(undefined)
+    expect(wrapper.vm.internalHeight).toBe(undefined)
     item.vm.onEnter(el)
     await new Promise(resolve => window.requestAnimationFrame(resolve))
-    expect(wrapper.vm.height).toBe('0px')
+    expect(wrapper.vm.internalHeight).toBe('0px')
 
     // After enter
     item.vm.onAfterEnter()
     await new Promise(resolve => window.requestAnimationFrame(resolve))
-    expect(wrapper.vm.height).toBe(undefined)
+    expect(wrapper.vm.internalHeight).toBe(undefined)
     expect(wrapper.vm.isActive).toBe(false)
 
     // Before leave
     item.vm.onBeforeLeave(el)
-    expect(wrapper.vm.height).toBe('0px')
+    expect(wrapper.vm.internalHeight).toBe('0px')
   })
 })

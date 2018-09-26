@@ -55,4 +55,68 @@ test('VWindow.ts', ({ mount }) => {
     wrapper.setProps({ reverse: undefined })
     expect(wrapper.vm.internalReverse).toBe(true)
   })
+
+  it('should increment and decrement current value', async () => {
+    const wrapper = mount(VWindow, {
+      slots: {
+        default: [
+          VWindowItem,
+          VWindowItem,
+          VWindowItem
+        ]
+      }
+    })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.internalValue).toBe(0)
+
+    wrapper.vm.next()
+    expect(wrapper.vm.internalValue).toBe(1)
+
+    wrapper.vm.next()
+    expect(wrapper.vm.internalValue).toBe(2)
+
+    wrapper.vm.next()
+    expect(wrapper.vm.internalValue).toBe(0)
+
+    wrapper.vm.prev()
+    expect(wrapper.vm.internalValue).toBe(2)
+
+    wrapper.vm.prev()
+    expect(wrapper.vm.internalValue).toBe(1)
+
+    wrapper.vm.prev()
+    expect(wrapper.vm.internalValue).toBe(0)
+  })
+
+  it('should update model when internal index is greater than item count', async () => {
+    const wrapper = mount(VWindow, {
+      propsData: {
+        value: 2
+      },
+      slots: {
+        default: [
+          VWindowItem,
+          VWindowItem,
+          VWindowItem
+        ]
+      }
+    })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.internalValue).toBe(2)
+
+    const [item1, item2, item3] = wrapper.find(VWindowItem.options)
+
+    item3.destroy()
+    expect(wrapper.vm.internalValue).toBe(1)
+
+    item2.destroy()
+    expect(wrapper.vm.internalValue).toBe(0)
+
+    item1.destroy()
+    expect(wrapper.vm.internalValue).toBe(undefined)
+  })
 })

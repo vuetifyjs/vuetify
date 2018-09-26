@@ -1,32 +1,30 @@
 // Styles
 import '../../stylus/components/_carousel.styl'
 
+// Extensions
+import { VWindow } from '../VWindow'
+
 // Components
 import VBtn from '../VBtn'
 import VIcon from '../VIcon'
 
 // Mixins
+import ButtonGroup from '../../mixins/button-group'
 import Themeable from '../../mixins/themeable'
-import { provide as RegistrableProvide } from '../../mixins/registrable'
 
 // Directives
 import Touch from '../../directives/touch'
 
 // Utilities
-import mixins from '../../util/mixins'
+import mixins, { ExtractVue } from '../../util/mixins'
+import { convertToUnit } from '../../util/helpers'
 
 // Types
 import { VNode } from 'vue'
 import { VNodeDirective } from 'vue/types/vnode'
 
-type CarouselItemInstance = {
-  uid: number
-  open: (uid: number, reverse: boolean) => void
-}
-
-export default mixins(
-  Themeable,
-  RegistrableProvide('carousel')
+export default VWindow.extend(mixins<ExtractVue<[typeof VWindow]>>(
+  Themeable
   /* @vue/component */
 ).extend({
   name: 'v-carousel',
@@ -42,12 +40,20 @@ export default mixins(
       type: String,
       default: '$vuetify.icons.delimiter'
     },
+    height: {
+      type: [Number, String],
+      default: 500
+    },
     hideControls: Boolean,
     hideDelimiters: Boolean,
     interval: {
       type: [Number, String],
       default: 6000,
       validator: (value: string | number) => value > 0
+    },
+    mandatory: {
+      type: Boolean,
+      default: true
     },
     nextIcon: {
       type: [Boolean, String],
@@ -56,16 +62,13 @@ export default mixins(
     prevIcon: {
       type: [Boolean, String],
       default: '$vuetify.icons.prev'
-    },
-    value: Number
+    }
   },
 
   data () {
     return {
-      inputValue: this.value,
-      items: [] as CarouselItemInstance[],
-      slideTimeout: undefined as number | undefined,
-      reverse: false
+      internalHeight: this.height,
+      slideTimeout: undefined as number | undefined
     }
   },
 
@@ -76,32 +79,8 @@ export default mixins(
   },
 
   watch: {
-    items () {
-      if (this.inputValue >= this.items.length) {
-        this.inputValue = this.items.length - 1
-      }
-    },
-    inputValue () {
-      // Evaluates items when inputValue changes to
-      // account for dynamic changing of children
-
-      const selectedItem = this.items[this.inputValue]
-
-      if (!selectedItem) return
-
-      for (let index = this.items.length; --index >= 0;) {
-        this.items[index].open(selectedItem.uid, this.reverse)
-      }
-
-      this.$emit('input', this.inputValue)
-      this.restartTimeout()
-    },
-    value (val) {
-      this.inputValue = val
-    },
-    interval () {
-      this.restartTimeout()
-    },
+    internalValue: 'restartTimeout',
+    interval: 'restartTimeout',
     cycle (val) {
       if (val) {
         this.restartTimeout()
@@ -112,15 +91,11 @@ export default mixins(
     }
   },
 
-  mounted () {
-    this.init()
-  },
-
   methods: {
     genDelimiters (): VNode {
       return this.$createElement('div', {
         staticClass: 'v-carousel__controls'
-      }, this.genItems())
+      }, [this.genItems()])
     },
     genIcon (
       direction: 'prev' | 'next',
@@ -163,23 +138,51 @@ export default mixins(
 
       return icons
     },
-    genItems (): VNode[] {
-      return this.items.map((item, index) => {
-        return this.$createElement(VBtn, {
+    genItems (): VNode {
+      const length = this.items.length
+      const children = []
+
+      for (let i = 0; i < length; i++) {
+        const child = this.$createElement(VBtn, {
           class: {
-            'v-carousel__controls__item': true,
-            'v-carousel__controls__item--active': index === this.inputValue
+            'v-carousel__controls__item': true
           },
           props: {
             icon: true,
             small: true
-          },
-          key: index,
-          on: { click: this.select.bind(this, index) }
-        }, [this.$createElement(VIcon, {
-          props: { size: '18px' }
-        }, this.delimiterIcon)])
-      })
+          }
+        }, [
+          this.$createElement(VIcon, {
+            props: { size: 18 }
+          }, this.delimiterIcon)
+        ])
+
+        children.push(child)
+      }
+
+      return this.$createElement(ButtonGroup, {
+        props: {
+          value: this.internalValue
+        },
+        on: {
+          change: (val: any) => {
+            this.internalValue = val
+          }
+        }
+      }, children)
+    },
+    init () {
+      VWindow.options.methods.init.call(this)
+
+      this.startTimeout()
+    },
+    next () {
+      this.isReverse = false
+      VWindow.options.methods.next.call(this)
+    },
+    prev () {
+      this.isReverse = true
+      VWindow.options.methods.prev.call(this)
     },
     restartTimeout () {
       this.slideTimeout && clearTimeout(this.slideTimeout)
@@ -188,40 +191,33 @@ export default mixins(
       const raf = requestAnimationFrame || setTimeout
       raf(this.startTimeout)
     },
-    init () {
-      if (this.value == null) {
-        this.inputValue = 0
-      } else {
-        this.startTimeout()
-      }
-    },
-    next () {
-      this.reverse = false
-      this.inputValue = (this.inputValue + 1) % this.items.length
-    },
-    prev () {
-      this.reverse = true
-      this.inputValue = (this.inputValue + this.items.length - 1) % this.items.length
-    },
-    select (index: number) {
-      this.reverse = index < this.inputValue
-      this.inputValue = index
-    },
     startTimeout () {
       if (!this.cycle) return
 
       this.slideTimeout = window.setTimeout(this.next, this.interval > 0 ? this.interval : 6000)
     },
-    register (uid: number, open: () => void) {
-      this.items.push({ uid, open })
-    },
-    unregister (uid: number) {
-      this.items = this.items.filter(i => i.uid !== uid)
-    }
+    updateReverse () { /* noop */ }
   },
 
   render (h): VNode {
     const children = []
+    const data = {
+      staticClass: 'v-window v-carousel',
+      style: {
+        height: convertToUnit(this.height)
+      },
+      directives: [] as VNodeDirective[]
+    }
+
+    if (!this.touchless) {
+      data.directives.push({
+        name: 'touch',
+        value: {
+          left: this.next,
+          right: this.prev
+        }
+      } as VNodeDirective)
+    }
 
     if (!this.hideControls) {
       children.push(this.genIcons())
@@ -231,15 +227,6 @@ export default mixins(
       children.push(this.genDelimiters())
     }
 
-    return h('div', {
-      staticClass: 'v-carousel',
-      directives: [{
-        name: 'touch',
-        value: {
-          left: this.next,
-          right: this.prev
-        }
-      }] as VNodeDirective[]
-    }, [children, this.$slots.default])
+    return h('div', data, [children, this.genContainer()])
   }
-})
+}))

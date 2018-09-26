@@ -4,8 +4,11 @@ import '../../stylus/components/_windows.styl'
 // Components
 import { Group } from '../VItemGroup/VItemGroup'
 
+// Directives
+import Touch from '../../directives/touch'
+
 // Types
-import { VNode } from 'vue/types/vnode'
+import { VNode, VNodeDirective } from 'vue/types/vnode'
 
 /* @vue/component */
 export default Group.extend({
@@ -17,6 +20,8 @@ export default Group.extend({
     }
   },
 
+  directives: { Touch },
+
   props: {
     mandatory: {
       type: Boolean,
@@ -26,6 +31,7 @@ export default Group.extend({
       type: Boolean,
       default: undefined
     },
+    touchless: Boolean,
     value: {
       required: false
     },
@@ -34,7 +40,7 @@ export default Group.extend({
 
   data () {
     return {
-      height: undefined as undefined | string,
+      internalHeight: undefined as undefined | string,
       isActive: false,
       isBooted: false,
       isReverse: false
@@ -46,7 +52,9 @@ export default Group.extend({
       if (!this.isBooted) return ''
 
       const axis = this.vertical ? 'y' : 'x'
-      const direction = this.internalReverse ? '-reverse' : ''
+      const direction = this.internalReverse === !this.$vuetify.rtl
+        ? '-reverse'
+        : ''
 
       return `v-window-${axis}${direction}-transition`
     },
@@ -63,14 +71,7 @@ export default Group.extend({
   },
 
   watch: {
-    internalIndex (val, oldVal) {
-      this.isReverse = val < oldVal
-    }
-  },
-
-  // Ensure no entry animation
-  mounted () {
-    this.$nextTick(() => (this.isBooted = true))
+    internalIndex: 'updateReverse'
   },
 
   methods: {
@@ -81,15 +82,49 @@ export default Group.extend({
           'v-window__container--is-active': this.isActive
         },
         style: {
-          height: this.height
+          height: this.internalHeight
         }
       }, this.$slots.default)
+    },
+    init () {
+      Group.options.methods.init.call(this)
+
+      // Ensure no entry animation
+      this.$nextTick(() => (this.isBooted = true))
+    },
+    next () {
+      const nextIndex = (this.internalIndex + 1) % this.items.length
+      const item = this.items[nextIndex]
+
+      this.internalValue = this.getValue(item, nextIndex)
+    },
+    prev () {
+      const lastIndex = (this.internalIndex + this.items.length - 1) % this.items.length
+      const item = this.items[lastIndex]
+
+      this.internalValue = this.getValue(item, lastIndex)
+    },
+    updateReverse (val: number, oldVal: number) {
+      this.isReverse = val < oldVal
     }
   },
 
   render (h): VNode {
-    return h('div', {
-      staticClass: 'v-window'
-    }, [this.genContainer()])
+    const data = {
+      staticClass: 'v-window',
+      directives: [] as VNodeDirective[]
+    }
+
+    if (!this.touchless) {
+      data.directives.push({
+        name: 'touch',
+        value: {
+          left: this.next,
+          right: this.prev
+        }
+      } as VNodeDirective)
+    }
+
+    return h('div', data, [this.genContainer()])
   }
 })
