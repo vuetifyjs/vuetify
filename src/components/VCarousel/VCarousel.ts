@@ -10,26 +10,16 @@ import VIcon from '../VIcon'
 
 // Mixins
 import ButtonGroup from '../../mixins/button-group'
-import Themeable from '../../mixins/themeable'
-
-// Directives
-import Touch from '../../directives/touch'
 
 // Utilities
-import mixins, { ExtractVue } from '../../util/mixins'
 import { convertToUnit } from '../../util/helpers'
 
 // Types
 import { VNode } from 'vue'
 import { VNodeDirective } from 'vue/types/vnode'
 
-export default WindowInstance.extend(mixins<ExtractVue<[typeof WindowInstance]>>(
-  Themeable
-  /* @vue/component */
-).extend({
+export default WindowInstance.extend({
   name: 'v-carousel',
-
-  directives: { Touch },
 
   provide (): object {
     return {
@@ -235,4 +225,4 @@ export default WindowInstance.extend(mixins<ExtractVue<[typeof WindowInstance]>>
 
     return h('div', data, [children, this.genContainer()])
   }
-}))
+})
