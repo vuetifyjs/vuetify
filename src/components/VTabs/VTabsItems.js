@@ -31,6 +31,7 @@ export default {
 
   watch: {
     internalValue (val) {
+      /* istanbul ignore else */
       if (this.tabProxy) this.tabProxy(val)
     }
   },

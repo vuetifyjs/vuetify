@@ -1,61 +1,54 @@
-import { test, touch } from '@/test'
-import { createRange } from '@/util/helpers'
+import { test } from '@/test'
 import VTabItem from '@/components/VTabs/VTabItem'
 import VTabsItems from '@/components/VTabs/VTabsItems'
 
 test('VTabsItems', ({ mount, shallow }) => {
-  it('should have no active item with no children', () => {
-    const wrapper = mount(VTabsItems)
+  it('should pass internal value changes to tabProxy', async () => {
+    const tabProxy = jest.fn()
+    const wrapper = mount(VTabsItems, {
+      provide: { tabProxy }
+    })
 
-    expect(wrapper.vm.activeItem).toBe(undefined)
+    wrapper.vm.internalValue = 'foo'
+
+    await wrapper.vm.$nextTick()
+
+    expect(tabProxy).toBeCalledWith('foo')
   })
 
-  it('should return currently active item', async () => {
-    const wrapper = shallow(VTabsItems, {
+  it('should conditionally skip next and prev', async () => {
+    const wrapper = mount(VTabsItems, {
       propsData: {
-        value: 'foo'
+        value: 2
       },
       slots: {
-        default: [VTabItem]
+        default: [
+          VTabItem,
+          VTabItem,
+          VTabItem
+        ]
       }
     })
 
     await wrapper.vm.$nextTick()
+    expect(wrapper.vm.internalIndex).toBe(2)
 
-    expect(wrapper.vm.internalIndex).toBe(0)
-  })
-
-  it('should react to touch', () => {
-    const wrapper = mount(VTabsItems, {
-      propsData: { value: 1 },
-      slots: {
-        default: createRange(5).map(x => ({
-          render: h => h(VTabItem)
-        }))
-      }
-    })
-
-    expect(wrapper.vm.internalValue).toBe(1)
-    touch(wrapper).start(0, 0).end(200, 0)
-    expect(wrapper.vm.internalValue).toBe(0)
-    // Without cycle, should stay on this index
-    touch(wrapper).start(0, 0).end(200, 0)
-    expect(wrapper.vm.internalValue).toBe(0)
-
-    touch(wrapper).start(200, 0).end(0, 0)
-    expect(wrapper.vm.internalValue).toBe(1)
-
-    wrapper.setProps({ value: 4 })
-    touch(wrapper).start(200, 0).end(0, 0)
-    expect(wrapper.vm.internalValue).toBe(4)
-
-    wrapper.setProps({ cycle: true })
-    wrapper.setProps({ value: 4 })
-    touch(wrapper).start(200, 0).end(0, 0)
-    expect(wrapper.vm.internalValue).toBe(0)
+    wrapper.vm.next()
+    expect(wrapper.vm.internalIndex).toBe(2)
 
     wrapper.setProps({ value: 0 })
-    touch(wrapper).start(0, 0).end(200, 0)
-    expect(wrapper.vm.internalValue).toBe(4)
+
+    expect(wrapper.vm.internalIndex).toBe(0)
+
+    wrapper.vm.prev()
+    expect(wrapper.vm.internalIndex).toBe(0)
+
+    wrapper.setProps({ cycle: true })
+
+    wrapper.vm.prev()
+    expect(wrapper.vm.internalIndex).toBe(2)
+
+    wrapper.vm.next()
+    expect(wrapper.vm.internalIndex).toBe(0)
   })
 })

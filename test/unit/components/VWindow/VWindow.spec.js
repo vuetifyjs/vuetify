@@ -1,6 +1,6 @@
 import VWindow from '@/components/VWindow/VWindow'
 import VWindowItem from '@/components/VWindow/VWindowItem'
-import { test } from '@/test'
+import { test, touch } from '@/test'
 
 test('VWindow.ts', ({ mount }) => {
   it('it should return the correct transition', async () => {
@@ -118,5 +118,40 @@ test('VWindow.ts', ({ mount }) => {
 
     item1.destroy()
     expect(wrapper.vm.internalValue).toBe(undefined)
+  })
+
+  it('should react to touch', async () => {
+    const wrapper = mount(VWindow, {
+      propsData: { value: 1 },
+      slots: {
+        default: [
+          VWindowItem,
+          VWindowItem,
+          VWindowItem,
+          VWindowItem,
+          VWindowItem
+        ]
+      }
+    })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.internalValue).toBe(1)
+    touch(wrapper).start(0, 0).end(200, 0)
+    expect(wrapper.vm.internalValue).toBe(0)
+
+    touch(wrapper).start(0, 0).end(200, 0)
+    expect(wrapper.vm.internalValue).toBe(4)
+
+    touch(wrapper).start(200, 0).end(0, 0)
+    expect(wrapper.vm.internalValue).toBe(0)
+
+    wrapper.setProps({ value: 4 })
+    touch(wrapper).start(200, 0).end(0, 0)
+    expect(wrapper.vm.internalValue).toBe(0)
+
+    wrapper.setProps({ value: 0 })
+    touch(wrapper).start(0, 0).end(200, 0)
+    expect(wrapper.vm.internalValue).toBe(4)
   })
 })

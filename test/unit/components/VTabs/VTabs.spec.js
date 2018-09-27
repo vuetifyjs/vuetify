@@ -29,11 +29,18 @@ const Component = (items = ['foo', 'bar']) => {
 
 const ssrBootable = () => new Promise(resolve => requestAnimationFrame(resolve))
 
+// Avoriaz does not like extended
+// components with no render fn
+const Mock = {
+  name: 'v-tabs-items',
+  render: () => {}
+}
+
 test('VTabs', ({ mount }) => {
   it('should provide', () => {
     const wrapper = mount(Component())
 
-    const items = wrapper.find(VTabsItems)[0]
+    const items = wrapper.first(Mock)
     expect(typeof items.vm.tabProxy).toBe('function')
     expect(typeof items.vm.registerItems).toBe('function')
     expect(typeof items.vm.unregisterItems).toBe('function')
@@ -46,7 +53,7 @@ test('VTabs', ({ mount }) => {
       }
     })
 
-    const items = wrapper.find(VTabsItems)[0]
+    const items = wrapper.first(Mock)
     expect(typeof wrapper.vm.tabItems).toBe('function')
     items.destroy()
     expect(wrapper.vm.tabItems).toBe(null)
@@ -251,7 +258,7 @@ test('VTabs', ({ mount }) => {
 
     await ssrBootable()
 
-    expect(wrapper.find(VTabsItems).length).toBe(1)
+    expect(wrapper.find(Mock).length).toBe(1)
   })
 
   it('should scroll active item into view if off screen', async () => {

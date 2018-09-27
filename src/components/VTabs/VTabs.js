@@ -60,12 +60,10 @@ export default {
       nextIconVisible: false,
       prevIconVisible: false,
       resizeTimeout: null,
-      reverse: false,
       scrollOffset: 0,
       sliderWidth: null,
       sliderLeft: null,
       startX: 0,
-      tabsContainer: null,
       tabItems: null,
       transitionTime: 300,
       widths: {

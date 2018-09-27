@@ -83,6 +83,29 @@ test('VTab', ({ mount }) => {
     expect(wrapper.vm.value).toBe('/foo')
     wrapper.setProps({ to: { path: 'bar' }})
     expect(wrapper.vm.value).toBe('bar')
+  })
 
+  // Still unsure how to test actual implementation
+  it('should react to route change', async () => {
+    const instance = Vue.extend()
+    instance.component('router-link', stub)
+    const toggle = jest.fn()
+    const wrapper = mount(VTab, {
+      propsData: {
+        activeClass: 'bar',
+        to: 'foo'
+      },
+      methods: { toggle },
+      instance,
+      globals: {
+        $route: { path: '/foo' }
+      }
+    })
+
+    wrapper.vm.onRouteChange()
+
+    await wrapper.vm.$nextTick()
+
+    expect(toggle).not.toBeCalled()
   })
 })
