@@ -48,6 +48,12 @@ export default {
     changeModel (val) {
       this.internalValue = val
     },
+    // For backwards compatability with v1.2
+    getValue (item, i) {
+      if (item.id) return item.id
+
+      return WindowInstance.options.methods.getValue.call(this, item, i)
+    },
     next () {
       if (!this.cycle && this.internalIndex === this.items.length - 1) {
         return
