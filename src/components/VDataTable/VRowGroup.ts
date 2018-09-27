@@ -6,7 +6,7 @@ export default Vue.extend({
   functional: true,
 
   props: {
-    open: {
+    value: {
       type: Boolean,
       default: true
     },
@@ -24,7 +24,6 @@ export default Vue.extend({
   render (h, { slots, props }): VNode {
     const computedSlots = slots()
     const children = []
-    console.log(computedSlots)
 
     if (computedSlots.headerColumn) {
       children.push(h('tr', {
@@ -34,7 +33,7 @@ export default Vue.extend({
       children.push(...computedSlots.headerRow)
     }
 
-    if (computedSlots.content && props.open) children.push(...computedSlots.content)
+    if (computedSlots.content && props.value) children.push(...computedSlots.content)
 
     if (computedSlots.summaryColumn) {
       children.push(h('tr', {

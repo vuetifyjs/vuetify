@@ -2,7 +2,7 @@
 import { VDataTable, VCellCheckbox, VRowFunctional } from '.'
 
 // Types
-import Vue, { VNode, VNodeChildrenArrayContents } from 'vue'
+import Vue, { VNode } from 'vue'
 import mixins from '../../util/mixins'
 
 type VDataTableInstance = InstanceType<typeof VDataTable>

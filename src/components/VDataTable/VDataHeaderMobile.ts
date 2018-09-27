@@ -1,6 +1,6 @@
 import Vue, { VNode, VNodeChildrenArrayContents } from 'vue'
 import mixins from '../../util/mixins'
-import { VDataTable } from '.'
+import { VDataTable, VCellCheckbox } from '.'
 import VSelect from '../VSelect/VSelect'
 import VChip from '../VChip'
 import VIcon from '../VIcon'
@@ -24,6 +24,20 @@ export default mixins<options>().extend({
   },
 
   methods: {
+    genSelectAll () {
+      return this.$createElement(VCellCheckbox, {
+        props: {
+          head: true,
+          inputValue: this.dataTable.everyItem
+        },
+        attrs: {
+          indeterminate: !this.dataTable.everyItem && this.dataTable.someItems
+        },
+        on: {
+          change: () => this.dataTable.toggleSelectAll()
+        }
+      })
+    },
     genSortIcon () {
       return this.$createElement(VIcon, [this.sortIcon])
     },
@@ -88,13 +102,17 @@ export default mixins<options>().extend({
   render (h): VNode {
     const children: VNodeChildrenArrayContents = []
 
+    if (this.dataTable.showSelect) {
+      children.push(this.genSelectAll())
+    }
+
     children.push(this.genSortSelect())
 
     const th = h('th', {
       attrs: {
-        colspan: this.dataTable.headersLength
+        colspan: this.dataTable.computedHeaders.length
       }
-    }, [children])
+    }, [h('div', { staticClass: 'd-flex' }, children)])
 
     const tr = h('tr', [th])
 

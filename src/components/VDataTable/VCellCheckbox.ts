@@ -31,8 +31,9 @@ export default Vue.extend({
       }
     })
 
-    return h(props.head ? 'th' : 'td', {
-      staticClass: 'v-cell-checkbox'
-    }, [checkbox])
+    // return h(props.head ? 'th' : 'td', {
+    //   staticClass: 'v-cell-checkbox'
+    // }, [checkbox])
+    return checkbox
   }
 })

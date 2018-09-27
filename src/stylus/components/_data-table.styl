@@ -108,8 +108,10 @@ td, th
   // &:not(:nth-child(1)), &:first-child
   padding: 0 16px
 
-.v-cell-checkbox + .v-cell, .v-cell-checkbox + .v-head
-  padding-left: 0
+.v-simple-checkbox
+  position: relative
+  user-select: none
+  cursor: pointer
 
 .v-data-header
   &--mobile
@@ -185,15 +187,13 @@ td, th
     font-weight: 400
     font-size: 13px
 
-.v-cell-checkbox
-  padding-right: 12px
-
-  .v-input
+td, th
+  > .v-input
     margin-top: 0
     padding-top: 0
 
-  .v-input--selection-controls__input
-    margin-right: 0
+    .v-input--selection-controls__input
+      margin-right: 0
 
 td
   height: 47px

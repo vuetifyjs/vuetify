@@ -1,10 +1,11 @@
 import '../../stylus/components/_data-table.styl'
 
 // Components
-import { VDataHeader, VRowFunctional, VRowGroup, VDataHeaderMobile, VCellCheckbox } from '.'
+import { VDataHeader, VRowFunctional, VRowGroup, VDataHeaderMobile } from '.'
 import { VDataIterator } from '../VDataIterator'
 import { VBtn } from '../VBtn'
 import { VIcon } from '../VIcon'
+import { VSimpleCheckbox } from '../VCheckbox'
 
 // Utils
 import { getObjectValueByPath, wrapInArray, groupByProperty, convertToUnit } from '../../util/helpers'
@@ -79,9 +80,6 @@ export default mixins(VDataIterator).extend({
 
       return headers
     },
-    headersLength () {
-      return this.computedHeaders.length
-    },
     computedWidths (): (string | undefined)[] {
       return this.computedHeaders.map((h, i) => {
         return convertToUnit(h.width || this.widths[i])
@@ -127,9 +125,7 @@ export default mixins(VDataIterator).extend({
         this.searchItemsLength = items.length
       }
 
-      items = VDataIterator.options.methods.searchItems.call(this, items)
-
-      return items
+      return VDataIterator.options.methods.searchItems.call(this, items)
     },
     sortItems (items: any[], sortBy: string[], sortDesc: boolean[], locale: string): any[] {
       sortBy = this.options.groupBy ? [this.options.groupBy, ...sortBy] : sortBy
@@ -138,7 +134,7 @@ export default mixins(VDataIterator).extend({
       return this.customSort(items, sortBy, sortDesc, locale, this.headersWithCustomSort)
     },
     createSlotProps () {
-      return { items: this.computedItems, widths: this.widths }
+      return { items: this.computedItems, headers: this.computedHeaders, widths: this.widths }
     },
     genHeaders (): VNodeChildrenArrayContents {
       const headers = this.computeSlots('header')
@@ -158,6 +154,96 @@ export default mixins(VDataIterator).extend({
 
       return this.genBodyWrapper(items)
     },
+    genGroupedRows (items: any[], groupBy: string): VNodeChildrenArrayContents {
+      const grouped = groupByProperty(items, groupBy)
+      const groups = Object.keys(grouped)
+
+      // TODO: Better way to do this? Sorting on group
+      const i = this.options.sortBy.findIndex((v: string) => v === groupBy)
+      if (i > -1 && this.options.sortDesc[i]) {
+        groups.reverse()
+      }
+
+      return groups.map(group => {
+        if (!this.openCache.hasOwnProperty(group)) this.$set(this.openCache, group, true)
+
+        if (this.$scopedSlots.group) {
+          return this.$scopedSlots.group({
+            groupBy,
+            group,
+            items: grouped[group],
+            headers: this.computedHeaders
+          })
+        } else {
+          return this.genDefaultGroupedRow(groupBy, group, grouped[group])
+        }
+      })
+    },
+    genDefaultGroupedRow (groupBy: string, group: string, items: any[]) {
+      const isOpen = !!this.openCache[group]
+      const children: VNodeChildrenArrayContents = [
+        this.$createElement('template', { slot: 'content' }, this.genDefaultRows(items))
+      ]
+
+      if (this.$scopedSlots['group.header']) {
+        children.unshift(this.$createElement('template', { slot: 'headerColumn' }, [
+          this.$scopedSlots['group.header']({ group, groupBy, items, headers: this.computedHeaders })
+        ]))
+      } else {
+        const toggle = this.$createElement(VBtn, {
+          staticClass: 'ma-0',
+          props: {
+            icon: true,
+            small: true
+          },
+          on: {
+            click: () => this.$set(this.openCache, group, !this.openCache[group])
+          }
+        }, [this.$createElement(VIcon, [isOpen ? 'remove' : 'add'])])
+
+        const remove = this.$createElement(VBtn, {
+          staticClass: 'ma-0',
+          props: {
+            icon: true,
+            small: true
+          },
+          on: {
+            click: () => this.options.groupBy = ''
+          }
+        }, [this.$createElement(VIcon, ['close'])])
+
+        const column = this.$createElement('td', {
+          staticClass: 'text-xs-left',
+          attrs: {
+            colspan: this.computedHeaders.length
+          }
+        }, [toggle, `${groupBy}: ${group}`, remove])
+
+        children.unshift(this.$createElement('template', { slot: 'headerColumn' }, [column]))
+      }
+
+      if (this.$scopedSlots['group.summary']) {
+        children.push(this.$createElement('template', { slot: 'summaryColumn' }, [
+          this.$scopedSlots['group.summary']({ group, groupBy, items, headers: this.computedHeaders })
+        ]))
+      }
+
+      return this.$createElement(VRowGroup, {
+        props: {
+          value: isOpen
+        }
+      }, children)
+    },
+    genRows (items: any[]): VNodeChildrenArrayContents {
+      return this.$scopedSlots.item ? this.genScopedRows(items) : this.genDefaultRows(items)
+    },
+    genScopedRows (items: any[]): VNodeChildrenArrayContents {
+      return items.map((item: any) => {
+        const props = this.createItemProps(item)
+        props.headers = this.computedHeaders
+        return this.$scopedSlots.item(props)
+      })
+    },
     genDefaultRows (items: any[]): VNodeChildrenArrayContents {
       return this.$scopedSlots['item.expanded']
         ? items.map(item => this.genDefaultExpandedRow(item))
@@ -172,7 +258,7 @@ export default mixins(VDataIterator).extend({
 
       return this.$createElement(VRowGroup, {
         props: {
-          open: isExpanded
+          value: isExpanded
         }
       }, [
         this.$createElement('template', { slot: 'headerRow' }, [headerRow]),
@@ -186,12 +272,13 @@ export default mixins(VDataIterator).extend({
       }, {})
 
       if (this.showSelect) {
-        scopedSlots['dataTableSelect'] = (props: any) => this.$createElement(VCellCheckbox, {
+        scopedSlots['dataTableSelect'] = () => this.$createElement(VSimpleCheckbox, {
+          staticClass: 'v-data-table__checkbox',
           props: {
-            inputValue: this.isSelected(item)
+            value: this.isSelected(item)
           },
           on: {
-            change: (v: any) => this.select(item, v)
+            input: (v: any) => this.select(item, v)
           }
         })
       }
@@ -199,7 +286,7 @@ export default mixins(VDataIterator).extend({
       const expanded = this.isExpanded(item)
 
       if (this.showExpand) {
-        scopedSlots['dataTableExpand'] = (props: any) => this.$createElement(VIcon, {
+        scopedSlots['dataTableExpand'] = () => this.$createElement(VIcon, {
           staticClass: 'expand__icon',
           class: {
             'expand__icon--active': expanded
@@ -220,101 +307,6 @@ export default mixins(VDataIterator).extend({
         scopedSlots
       })
     },
-    genScopedRows (items: any[]): VNodeChildrenArrayContents {
-      return items.map((item: any, i: number) => {
-        const props = this.createItemProps(item)
-        props.headers = this.computedHeaders
-        return this.$scopedSlots.item(props)
-      })
-    },
-    genRows (items: any[]): VNodeChildrenArrayContents {
-      return this.$scopedSlots.item ? this.genScopedRows(items) : this.genDefaultRows(items)
-    },
-    genDefaultGroupedRow (groupBy: string, group: string, items: any[]) {
-      const open = !!this.openCache[group]
-      const children: VNodeChildrenArrayContents = [
-        this.$createElement('template', { slot: 'content' }, this.genDefaultRows(items))
-      ]
-
-      if (this.$scopedSlots['group.header']) {
-        children.unshift(this.$createElement('template', { slot: 'headerColumn' }, [
-          this.$scopedSlots['group.header']({ group, groupBy, items, headers: this.computedHeaders })
-        ]))
-      } else {
-        const toggle = this.$createElement(VBtn, {
-          staticClass: 'ma-0',
-          props: {
-            icon: true,
-            small: true
-          },
-          on: {
-            click: () => this.$set(this.openCache, group, !this.openCache[group])
-          }
-        }, [this.$createElement(VIcon, [open ? 'remove' : 'add'])])
-
-        const remove = this.$createElement(VBtn, {
-          staticClass: 'ma-0',
-          props: {
-            icon: true,
-            small: true
-          },
-          on: {
-            click: () => this.options.groupBy = ''
-          }
-        }, [this.$createElement(VIcon, ['close'])])
-
-        const column = this.$createElement('td', {
-          staticClass: 'text-xs-left',
-          attrs: {
-            colspan: this.headersLength
-          }
-        }, [toggle, `${groupBy}: ${group}`, remove])
-
-        children.unshift(this.$createElement('template', { slot: 'headerColumn' }, [column]))
-      }
-
-      if (this.$scopedSlots['group.summary']) {
-        children.push(this.$createElement('template', { slot: 'summaryColumn' }, [
-          this.$scopedSlots['group.summary']({ group, groupBy, items, headers: this.computedHeaders })
-        ]))
-      }
-      console.log(children)
-      return this.$createElement(VRowGroup, {
-        props: {
-          open
-        }
-      }, children)
-    },
-    genGroupedRows (items: any[], groupBy: string): VNodeChildrenArrayContents {
-      const grouped = groupByProperty(items, groupBy)
-      const groups = Object.keys(grouped)
-
-      // TODO: Better way to do this? Sorting on group
-      const i = this.options.sortBy.findIndex((v: string) => v === groupBy)
-      if (i > -1 && this.options.sortDesc[i]) {
-        groups.reverse()
-      }
-
-      const rows: VNodeChildrenArrayContents = []
-      for (let i = 0; i < groups.length; i++) {
-        const group = groups[i]
-
-        if (!this.openCache.hasOwnProperty(group)) this.$set(this.openCache, group, true)
-
-        if (this.$scopedSlots.group) {
-          rows.push(this.$scopedSlots.group({
-            groupBy,
-            group,
-            items: grouped[group],
-            headers: this.computedHeaders
-          }))
-        } else {
-          rows.push(this.genDefaultGroupedRow(groupBy, group, grouped[group]))
-        }
-      }
-
-      return rows
-    },
     genBodies () {
       if (this.static) return this.$slots.default
       else return VDataIterator.options.methods.genBodies.call(this)
@@ -325,7 +317,7 @@ export default mixins(VDataIterator).extend({
       }, items)
     },
     genEmpty (content: VNodeChildrenArrayContents) {
-      return this.$createElement('tr', [this.$createElement('td', { attrs: { colspan: this.headersLength } }, content)])
+      return this.$createElement('tr', [this.$createElement('td', { attrs: { colspan: this.computedHeaders.length } }, content)])
     },
     genColGroup () {
       const cols = this.computedHeaders.map((h, i) => this.$createElement('col', {

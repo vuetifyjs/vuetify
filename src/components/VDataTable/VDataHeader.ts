@@ -1,10 +1,11 @@
 import Vue, { VNode } from 'vue'
 import VDataTable from './VDataTable'
 
-import VCellCheckbox from './VCellCheckbox'
+// import VCellCheckbox from './VCellCheckbox'
 import VIcon from '../VIcon'
 import mixins from '../../util/mixins'
 import VProgressLinear from '../VProgressLinear'
+import { VSimpleCheckbox } from '../VCheckbox'
 
 type VDataTableInstance = InstanceType<typeof VDataTable>
 
@@ -33,17 +34,16 @@ export default mixins<options>().extend({
 
   methods: {
     genSelectAll (classes: string | string[] = []) {
-      return this.$createElement(VCellCheckbox, {
-        class: classes,
+      return this.$createElement(VSimpleCheckbox, {
+        staticClass: 'v-data-table__checkbox',
         props: {
-          head: true,
-          inputValue: this.dataTable.everyItem
+          value: this.dataTable.everyItem
         },
         attrs: {
           indeterminate: !this.dataTable.everyItem && this.dataTable.someItems
         },
         on: {
-          change: () => this.dataTable.toggleSelectAll()
+          input: () => this.dataTable.toggleSelectAll()
         }
       })
     },
@@ -64,7 +64,7 @@ export default mixins<options>().extend({
       const th = this.$createElement('th', {
         staticClass: 'column',
         attrs: {
-          colspan: this.dataTable.headersLength
+          colspan: this.dataTable.computedHeaders.length
         }
       }, [progress])
 
@@ -81,19 +81,46 @@ export default mixins<options>().extend({
           }
         }
       }, ['group'])
+    },
+    genResizeHandle (i: number) {
+      return this.$createElement('div', {
+        staticClass: 'resize-handle',
+        on: {
+          click: (e: MouseEvent) => {
+            e.stopPropagation()
+          },
+          dblclick: (e: MouseEvent) => {
+            e.stopPropagation()
+            this.$set(this.dataTable.widths, i, 1)
+            this.$nextTick(() => {
+              this.dataTable.calcWidths()
+            })
+          },
+          mousedown: (e: MouseEvent) => {
+            e.stopPropagation()
+            this.resize = { column: i, start: e.clientX }
+          }
+        }
+      })
     }
   },
 
   render (h): VNode {
     const headers = this.dataTable.computedHeaders.map((c, i) => {
-      if (c.value === 'dataTableSelect') return this.genSelectAll()
-
       const classes = {
         [`text-xs-${c.align || 'left'}`]: true
       }
-      const children = [
-        this.$scopedSlots.text ? this.$scopedSlots.text({ header: c }) : h('span', [c.text])
-      ]
+      if (c.class) {
+        Array.isArray(c.class) ? c.class.forEach(c => classes[c] = true) : classes[c.class] = true
+      }
+      const children = []
+
+      if (c.value === 'dataTableSelect') {
+        children.push(this.genSelectAll())
+      } else {
+        children.push(this.$scopedSlots.text ? this.$scopedSlots.text({ header: c }) : h('span', [c.text]))
+      }
+
       const listeners: any = {}
 
       if (c.sortable || !c.hasOwnProperty('sortable')) {
@@ -119,31 +146,8 @@ export default mixins<options>().extend({
 
       const groupable = this.dataTable.options.groupBy !== undefined
 
-      if (groupable) {
-        children.push(this.genGroupHandle(c.value))
-      }
-
-      if (c.resizable) {
-        children.push(h('div', {
-          staticClass: 'resize-handle',
-          on: {
-            click: (e: MouseEvent) => {
-              e.stopPropagation()
-            },
-            dblclick: (e: MouseEvent) => {
-              e.stopPropagation()
-              this.$set(this.dataTable.widths, i, 1)
-              this.$nextTick(() => {
-                this.dataTable.calcWidths()
-              })
-            },
-            mousedown: (e: MouseEvent) => {
-              e.stopPropagation()
-              this.resize = { column: i, start: e.clientX }
-            }
-          }
-        }))
-      }
+      if (groupable) children.push(this.genGroupHandle(c.value))
+      if (c.resizable) children.push(this.genResizeHandle(i))
 
       return h('th', {
         class: classes,
