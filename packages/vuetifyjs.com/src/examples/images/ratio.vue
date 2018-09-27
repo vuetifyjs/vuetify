@@ -51,7 +51,7 @@
 
 <style scoped>
   .v-navigation-drawer {
-    transition: none;
+    transition: none !important;
   }
 
   .lightbox {
