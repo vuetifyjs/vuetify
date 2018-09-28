@@ -11,6 +11,26 @@
         v-card.mb-5.flat
           v-card-text
             helpers-markdown {{ faq.a }}
+            helpers-markup(v-if="faq.a.indexOf('#modifying-options-of-a-loader')>-1", lang="js")
+              |// vue.config.js
+              |module.exports = {
+              |  chainWebpack: config => {
+              |    config.module
+              |      .rule('vue')
+              |      .use('vue-loader')
+              |      .loader('vue-loader')
+              |      .tap(options => Object.assign(options, {
+              |            transformAssetUrls: {
+              |               'v-img': ['src', 'lazy-src'],
+              |                'v-card': 'src',
+              |               'v-card-media': 'src',
+              |               'v-responsive': 'src',
+              |                //...
+              |            }
+              |            }))
+              |  }
+              |    //...
+              |}
 
       div.text-xs-center
         div.mb-3

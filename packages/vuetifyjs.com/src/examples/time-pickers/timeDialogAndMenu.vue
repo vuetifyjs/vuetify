@@ -24,6 +24,7 @@
         <v-time-picker
           v-if="menu2"
           v-model="time"
+          full-width
           @change="$refs.menu.save(time)"
         ></v-time-picker>
       </v-menu>
@@ -49,6 +50,7 @@
         <v-time-picker
           v-if="modal2"
           v-model="time"
+          full-width
         >
           <v-spacer></v-spacer>
           <v-btn flat color="primary" @click="modal2 = false">Cancel</v-btn>
