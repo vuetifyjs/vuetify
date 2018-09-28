@@ -41,6 +41,7 @@ import Snackbars from './Snackbars'
 import Steppers from './Steppers'
 import Subheaders from './Subheaders'
 import Tabs from './Tabs'
+import Timelines from './Timelines'
 import TemplateList from './TemplateList'
 import Textarea from './Textarea'
 import TextFields from './TextFields'
@@ -93,6 +94,7 @@ export default {
   Steppers,
   Subheaders,
   Tabs,
+  Timelines,
   TemplateList,
   Textarea,
   TextFields,

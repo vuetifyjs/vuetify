@@ -431,6 +431,12 @@
     "description": "Tabs component for the Vuetify framework.",
     "keywords": "tabs"
   },
+  "components/timelines": {
+    "h1": "Timelines",
+    "title": "Timelines",
+    "description": "Timeline component for the Vuetify framework.",
+    "keywords": "timeline, history"
+  },
   "components/textarea": {
     "h1": "Textareas",
     "title": "Textareas",
