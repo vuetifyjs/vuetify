@@ -2,13 +2,14 @@
 import '../../stylus/components/_carousel.styl'
 
 // Extensions
-import { BaseWindow } from '../VWindow/VWindow'
+import VWindow from '../VWindow/VWindow'
 
 // Components
 import VBtn from '../VBtn'
 import VIcon from '../VIcon'
 
 // Mixins
+// TODO: Move this into core components v2.0
 import ButtonGroup from '../../mixins/button-group'
 
 // Utilities
@@ -18,14 +19,8 @@ import { convertToUnit } from '../../util/helpers'
 import { VNode } from 'vue'
 import { VNodeDirective } from 'vue/types/vnode'
 
-export default BaseWindow.extend({
+export default VWindow.extend({
   name: 'v-carousel',
-
-  provide (): object {
-    return {
-      windowGroup: this
-    }
-  },
 
   props: {
     cycle: {
@@ -170,7 +165,7 @@ export default BaseWindow.extend({
       }, children)
     },
     init () {
-      BaseWindow.options.methods.init.call(this)
+      VWindow.options.methods.init.call(this)
 
       this.startTimeout()
     },
@@ -190,7 +185,7 @@ export default BaseWindow.extend({
       if (this.changedByControls) {
         this.changedByControls = false
 
-        BaseWindow.options.methods.updateReverse.call(this, val, oldVal)
+        VWindow.options.methods.updateReverse.call(this, val, oldVal)
       }
     }
   },

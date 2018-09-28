@@ -1,5 +1,5 @@
 // Mixins
-import Groupable from '../../mixins/groupable'
+import { factory as GroupableFactory } from '../../mixins/groupable'
 
 // Utilities
 import mixins from '../../util/mixins'
@@ -8,8 +8,10 @@ import { consoleWarn } from '../../util/console'
 // Types
 import { VNode, VNodeChildrenArrayContents } from 'vue/types/vnode'
 
-/* @vue/component */
-export default mixins(Groupable).extend({
+export default mixins(
+  GroupableFactory('itemGroup', 'v-item', 'v-item-group')
+  /* @vue/component */
+).extend({
   name: 'v-item',
 
   props: {

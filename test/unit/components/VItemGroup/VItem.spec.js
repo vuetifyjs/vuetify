@@ -2,11 +2,14 @@ import Vue from 'vue'
 import { test } from '@/test'
 import VItem from '@/components/VItemGroup/VItem'
 
+const itemWarning = '[Vuetify] The v-item component must be used inside a v-item-group'
+
 test('VItem', ({ mount }) => {
   it('should warn if missing default scopedSlot', () => {
     mount(VItem)
 
     expect('v-item is missing a default scopedSlot').toHaveBeenTipped()
+    expect(itemWarning).toHaveBeenTipped()
   })
 
   it('should warn if multiple elements', () => {
@@ -23,6 +26,7 @@ test('VItem', ({ mount }) => {
     mount(Mock)
 
     expect('v-item should only contain a single element').toHaveBeenTipped()
+    expect(itemWarning).toHaveBeenTipped()
   })
 
   it('should match snapshot activeClass', async () => {
@@ -46,5 +50,6 @@ test('VItem', ({ mount }) => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
+    expect(itemWarning).toHaveBeenTipped()
   })
 })
