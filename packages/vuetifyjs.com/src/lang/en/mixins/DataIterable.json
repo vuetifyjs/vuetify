@@ -21,6 +21,8 @@
     "value": "Selected row items"
   },
   "slots": {
+    "actions-append": "Slot to put custom elements before the actions in the footer.",
+    "actions-prepend": "Slot to put custom elements after the actions in the footer.",
     "footer": "Slot to specify an extra footer",
     "noData": "Displayed when there are no items (takes precedence over `no-results`)",
     "noResults": "Displayed when there are no filtered items"

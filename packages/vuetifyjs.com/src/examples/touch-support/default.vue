@@ -2,7 +2,9 @@
   <v-layout
     v-touch="{
       left: () => swipe('Left'),
-      right: () => swipe('Right')
+      right: () => swipe('Right'),
+      up: () => swipe('Up'),
+      down: () => swipe('Down')
     }"
     column
     align-center

@@ -1,59 +1,64 @@
 {
-    "header": "Dialog",
-    "headerText": "El componente `v-dialog` informa a los usuarios acerca de una tarea específica y puede contener información crítica, requerir decisiones o involucrar múltiples tareas. Utiliza los diálogos muy esporádicamente porque interrumpen.",
-    "components": [
-        "v-dialog"
-    ],
-    "examples": [
-        {
-            "simple": {
-                "header": "Diálogos simples",
-                "desc": "Al escoger una opción ésta se atrapa inmediatamente y el menú se cierra. Al tocar un área fuera del diálogo o presionar Atrás, se cancela la acción y el diálogo se cierra.",
-                "uninverted": true
-            },
-            "withoutActivator": {
-                "header": "Sin _activator_",
-                "desc": "Si por alguna razón no puedes utilizar el slot _activator_, asegúrate de agregar el modificador `.stop`al evento que acciona el diálogo.",
-                "uninverted": true
-            },
-            "modal": {
-                "header": "Modal",
-                "desc": "Similar a un Diálogo Simple, excepto porque no se cierra cuando tocas afuera del mismo..",
-                "uninverted": true
-            },
-            "fullscreen": {
-                "header": "Pantalla completa",
-                "desc": "Debido al espacio limitado, los diálogos en pantalla completa pueden ser más apropiados para dispositivos móviles que los diálogos que se usan en dispositivos con pantallas más grandes.",
-                "uninverted": true
-            },
-            "form": {
-                "header": "Formularios",
-                "desc": "Un ejemplo simple de un formulario dentro de un diálogo..",
-                "uninverted": true
-            },
-            "scrollable": {
-                "header": "_Scrollable_",
-                "desc": "Ejemplo de un diálogo con contenido que puede ser desplazado.",
-                "uninverted": true
-            },
-            "overflowed": {
-                "header": "_Overflowed_",
-                "desc": "Los modales que no caben dentro del espacio disponible en la ventana harán que el contenedor pueda ser desplazado.",
-                "uninverted": true
-            }
-        }
-    ],
-    "props": {
-        "disabled": "Deshabilita la posibilidad de abrir el diálogo.",
-        "fullWidth": "Especifica que el modal será forzado a 100% del ancho",
-        "fullscreen": "Cambia la distribución para ser mostrada en pantalla completa",
-        "hideOverlay": "Esconde el _overlay_",
-        "lazy": "Mixins.Bootable.props.lazy",
-        "maxWidth": "El ancho máximo del contenido",
-        "origin": "Mixins.Transitionable.props.origin",
-        "persistent": "Hacer click fuera no cerrará el diálogo",
-        "scrollable": "Cuando se asigna el valor `true`, espera un `card`, `card-title`, `card-text` y `card-actions`. Adicionalmente `card-text` debe tener una altura específica. Colocará `overflow-y` en el `card-text`.",
-        "transition": "Mixins.Transitionable.props.transition",
-        "width": "Configura el ancho del diálogo"
+  "header": "Dialog",
+  "headerText": "El componente `v-dialog` informa a los usuarios acerca de una tarea específica y puede contener información crítica, requerir decisiones o involucrar múltiples tareas. Utiliza los diálogos muy esporádicamente porque interrumpen.",
+  "examples": {
+    "simple": {
+      "header": "Diálogos simples",
+      "desc": "Al escoger una opción ésta se atrapa inmediatamente y el menú se cierra. Al tocar un área fuera del diálogo o presionar Atrás, se cancela la acción y el diálogo se cierra.",
+      "uninverted": true
+    },
+    "withoutActivator": {
+      "header": "Sin _activator_",
+      "desc": "Si por alguna razón no puedes utilizar el slot _activator_, asegúrate de agregar el modificador `.stop`al evento que acciona el diálogo.",
+      "uninverted": true
+    },
+    "modal": {
+      "header": "Modal",
+      "desc": "Similar a un Diálogo Simple, excepto porque no se cierra cuando tocas afuera del mismo..",
+      "uninverted": true
+    },
+    "fullscreen": {
+      "header": "Pantalla completa",
+      "desc": "Debido al espacio limitado, los diálogos en pantalla completa pueden ser más apropiados para dispositivos móviles que los diálogos que se usan en dispositivos con pantallas más grandes.",
+      "uninverted": true
+    },
+    "form": {
+      "header": "Formularios",
+      "desc": "Un ejemplo simple de un formulario dentro de un diálogo..",
+      "uninverted": true
+    },
+    "scrollable": {
+      "header": "_Scrollable_",
+      "desc": "Ejemplo de un diálogo con contenido que puede ser desplazado.",
+      "uninverted": true
+    },
+    "overflowed": {
+      "header": "_Overflowed_",
+      "desc": "Los modales que no caben dentro del espacio disponible en la ventana harán que el contenedor pueda ser desplazado.",
+      "uninverted": true
+    },
+    "advanced": {
+      "header": "Diálogos simples",
+      "desc": "Al escoger una opción inmediatamente se cierra el menú. Al tocar afuera del díalogo o al presionar 'Atrás' cancela la acción y cancela el diálogo.",
+      "uninverted": true
+    },
+    "loader": {
+      "header": "Loader",
+      "desc": "El componente `v-dialog`hace muy sencillo crear una experiencia de carga personalizada par tu aplicación."
     }
+  },
+  "props": {
+    "disabled": "Deshabilita la posibilidad de abrir el diálogo.",
+    "fullWidth": "Especifica que el modal será forzado a 100% del ancho",
+    "fullscreen": "Cambia la distribución para ser mostrada en pantalla completa",
+    "hideOverlay": "Esconde el _overlay_",
+    "lazy": "Mixins.Bootable.props.lazy",
+    "maxWidth": "El ancho máximo del contenido",
+    "noClickAnimation": "Deshabilita el efecto 'de rebote' cuando se hace click afuera de los contenidos del `v-dialog` cuando se usa la prop **persistent**",
+    "origin": "Mixins.Transitionable.props.origin",
+    "persistent": "Hacer click fuera no cerrará el diálogo",
+    "scrollable": "Cuando se asigna el valor `true`, espera un `card`, `card-title`, `card-text` y `card-actions`. Adicionalmente `card-text` debe tener una altura específica. Colocará `overflow-y` en el `card-text`.",
+    "transition": "Mixins.Transitionable.props.transition",
+    "width": "Configura el ancho del diálogo"
+  }
 }

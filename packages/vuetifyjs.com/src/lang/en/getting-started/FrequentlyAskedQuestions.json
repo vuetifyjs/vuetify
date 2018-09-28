@@ -59,8 +59,8 @@
       "a": "When not using the **activator** slot for `v-menu` and `v-dialog` for example, you must manually stop the _propagation_ of the click event. To do this, simply add the _.stop_ modifier to the click event, `@click.stop=\"myMethod\"`."
     },
     {
-      "q": "Relative images are not working in `v-card` components",
-      "a": "Vue loader converts relative paths into require functions automatically for you. Unfortunately, this is not the case when it comes to custom components. You can circumvent this issue by using `require`.<br><br>`<v-card :src=\"require('path/to/img/img.jpg')\">`"
+      "q": "Relative images are not working in `v-card` , `v-img` and other custom vuetify components",
+      "a": "Vue loader converts relative paths into require functions automatically for you. Unfortunately, this is not the case when it comes to custom components. You can circumvent this issue by using `require`.<br><br>`<v-card :src=\"require('path/to/img/img.jpg')\">`<br/><br/>If you're using Vuetify as a Vue-CLI 3 plugin, you can edit your project's [vue.config.js](https://cli.vuejs.org/config/#vue-config-js) file by modifying the options for [vue-loader](https://cli.vuejs.org/guide/webpack.html#modifying-options-of-a-loader)."
     }
   ],
   "questionHeader": "Have something that you think belongs here?",
