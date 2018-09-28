@@ -756,6 +756,15 @@
       { "file": "todo", "newIn": "1.2" }
     ]
   },
+  "treeview": {
+    "components": ["v-treeview"],
+    "examples": [
+      "usage",
+      "fileExplorer",
+      "country",
+      "directory"
+    ]
+  },
   "windows": {
     "components": ["v-window"],
     "examples": [
