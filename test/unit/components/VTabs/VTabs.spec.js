@@ -37,7 +37,7 @@ const Mock = {
 }
 
 test('VTabs', ({ mount }) => {
-  it('should provide', () => {
+  it.skip('should provide', () => {
     const wrapper = mount(Component())
 
     const items = wrapper.first(Mock)
@@ -46,7 +46,7 @@ test('VTabs', ({ mount }) => {
     expect(typeof items.vm.unregisterItems).toBe('function')
   })
 
-  it('should register items', async () => {
+  it.skip('should register items', async () => {
     const wrapper = mount(VTabs, {
       slots: {
         default: [VTab, VTabsItems]
@@ -59,7 +59,7 @@ test('VTabs', ({ mount }) => {
     expect(wrapper.vm.tabItems).toBe(null)
   })
 
-  it('should call slider on application resize', async () => {
+  it.skip('should call slider on application resize', async () => {
     const wrapper = mount(Component())
 
     const tabs = wrapper.find(VTabs)[0]
@@ -75,7 +75,7 @@ test('VTabs', ({ mount }) => {
     expect(tabs.vm.resizeTimeout).toBeTruthy()
   })
 
-  it('should reset offset on resize', async () => {
+  it.skip('should reset offset on resize', async () => {
     const wrapper = mount(Component(), {
       attachToDocument: true
     })
@@ -245,7 +245,7 @@ test('VTabs', ({ mount }) => {
     expect(wrapper.vm.scrollOffset).toBe(0)
   })
 
-  it('should generate a v-tabs-items if none present and has v-tab-item', async () => {
+  it.skip('should generate a v-tabs-items if none present and has v-tab-item', async () => {
     const wrapper = mount(VTabs, {
       propsData: { value: 'foo' },
       slots: {
