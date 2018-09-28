@@ -19,7 +19,7 @@ export const BaseItemGroup = mixins(
   Proxyable,
   Themeable
 ).extend({
-  name: 'v-item-group',
+  name: 'base-item-group',
 
   props: {
     activeClass: {
@@ -217,6 +217,8 @@ export const BaseItemGroup = mixins(
 })
 
 export default BaseItemGroup.extend({
+  name: 'v-item-group',
+
   provide (): object {
     return {
       itemGroup: this

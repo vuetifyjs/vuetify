@@ -11,8 +11,14 @@ import Touch from '../../directives/touch'
 import { VNode, VNodeDirective } from 'vue/types/vnode'
 
 /* @vue/component */
-export const BaseWindow = BaseItemGroup.extend({
+export default BaseItemGroup.extend({
   name: 'v-window',
+
+  provide (): object {
+    return {
+      windowGroup: this
+    }
+  },
 
   directives: { Touch },
 
@@ -84,7 +90,7 @@ export const BaseWindow = BaseItemGroup.extend({
       BaseItemGroup.options.methods.init.call(this)
 
       // Ensure no entry animation
-      this.isBooted = true
+      this.$nextTick(() => (this.isBooted = true))
     },
     next () {
       this.isReverse = false
@@ -122,13 +128,5 @@ export const BaseWindow = BaseItemGroup.extend({
     }
 
     return h('div', data, [this.genContainer()])
-  }
-})
-
-export default BaseWindow.extend({
-  provide (): object {
-    return {
-      windowGroup: this
-    }
   }
 })
