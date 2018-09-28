@@ -1,27 +1,19 @@
 // Extensions
-import { BaseWindowItem } from '../VWindow/VWindowItem'
+import VWindowItem from '../VWindow/VWindowItem'
 
 // Mixins
-import {
-  factory as GroupableFactory
-} from '../../mixins/groupable'
 import { deprecate } from '../../util/console'
 
 /* @vue/component */
-export default {
+export default VWindowItem.extend({
   name: 'v-tab-item',
-
-  mixins: [
-    BaseWindowItem,
-    GroupableFactory('windowGroup', 'v-tab-item', 'v-tabs-items')
-  ],
 
   props: {
     id: String
   },
 
   render (h) {
-    const render = BaseWindowItem.options.render.call(this, h)
+    const render = VWindowItem.options.render.call(this, h)
 
     // For backwards compatibility with v1.2
     if (this.id) {
@@ -33,4 +25,4 @@ export default {
 
     return render
   }
-}
+})

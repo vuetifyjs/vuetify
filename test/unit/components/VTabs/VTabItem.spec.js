@@ -1,7 +1,7 @@
 import { test } from '@/test'
 import VTabItem from '@/components/VTabs/VTabItem'
 
-const contentWarning = '[Vuetify] The v-tab-item component must be used inside a v-tabs-items'
+const contentWarning = '[Vuetify] The v-window-item component must be used inside a v-window'
 
 test('VTabItem', ({ mount }) => {
   it('should not wrap component in transition if false is used', () => {

@@ -1,17 +1,9 @@
 // Extensions
-import { BaseWindow } from '../VWindow/VWindow'
+import VWindow from '../VWindow/VWindow'
 
 /* @vue/component */
-export default {
+export default VWindow.extend({
   name: 'v-tabs-items',
-
-  extends: BaseWindow,
-
-  provide () {
-    return {
-      windowGroup: this
-    }
-  },
 
   inject: {
     registerItems: {
@@ -52,21 +44,21 @@ export default {
     getValue (item, i) {
       if (item.id) return item.id
 
-      return BaseWindow.options.methods.getValue.call(this, item, i)
+      return VWindow.options.methods.getValue.call(this, item, i)
     },
     next () {
       if (!this.cycle && this.internalIndex === this.items.length - 1) {
         return
       }
 
-      BaseWindow.options.methods.next.call(this)
+      VWindow.options.methods.next.call(this)
     },
     prev () {
       if (!this.cycle && this.internalIndex === 0) {
         return
       }
 
-      BaseWindow.options.methods.prev.call(this)
+      VWindow.options.methods.prev.call(this)
     }
   }
-}
+})
