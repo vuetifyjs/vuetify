@@ -1,17 +1,17 @@
 import Vue from 'vue'
-import { ExtendedVue } from 'vue/types/vue'
+import { VueConstructor } from 'vue/types/vue'
 import { consoleWarn } from '../util/console'
 
 function generateWarning (child: string, parent: string) {
   return () => consoleWarn(`The ${child} component must be used inside a ${parent}`)
 }
 
-export type Registrable<T extends string> = ExtendedVue<Vue, {
+export type Registrable<T extends string> = VueConstructor<Vue & {
   [K in T]: {
     register (...props: any[]): void
     unregister (self: any): void
   }
-}, {}, {}, {}>
+}>
 
 export function inject<T extends string> (namespace: T, child?: string, parent?: string): Registrable<T> {
   const defaultImpl = child && parent ? {

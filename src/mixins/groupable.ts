@@ -1,18 +1,25 @@
 // Mixins
-import { inject as RegistrableInject } from './registrable'
+import { Registrable, inject as RegistrableInject } from './registrable'
 
 // Utilities
-import mixins from '../util/mixins'
+import { ExtractVue } from '../util/mixins'
 import { PropValidator } from 'vue/types/options'
+import { VueConstructor } from 'vue'
 
-export function factory (
-  namespace = 'itemGroup',
+/* eslint-disable-next-line no-use-before-define */
+export type Groupable<T extends string> = VueConstructor<ExtractVue<Registrable<T>> & {
+  activeClass: string
+  isActive: boolean
+  groupClasses: object
+  toggle (): void
+}>
+
+export function factory<T extends string> (
+  namespace: T,
   child?: string,
   parent?: string
-) {
-  return mixins(
-    RegistrableInject(namespace, child, parent)
-  ).extend({
+): Groupable<T> {
+  return RegistrableInject(namespace, child, parent).extend({
     name: 'groupable',
 
     props: {
@@ -44,11 +51,11 @@ export function factory (
     },
 
     created () {
-      this[namespace] && this[namespace].register(this)
+      this[namespace] && (this[namespace] as any).register(this)
     },
 
     beforeDestroy () {
-      this[namespace] && this[namespace].unregister(this)
+      this[namespace] && (this[namespace] as any).unregister(this)
     },
 
     methods: {
@@ -59,6 +66,7 @@ export function factory (
   })
 }
 
-const Groupable = factory()
+/* eslint-disable-next-line no-redeclare */
+const Groupable = factory('itemGroup')
 
 export default Groupable
