@@ -455,6 +455,12 @@
     "description": "Tooltip components for the Vuetify framework.",
     "keywords": "tooltips"
   },
+  "components/windows": {
+    "h1": "Windows",
+    "title": "Windows",
+    "description": "Windows components for the Vuetify framework.",
+    "keywords": "windows, views, transition views"
+  },
   "directives/resizing": {
     "h1": "Resizing",
     "title": "Resizing",

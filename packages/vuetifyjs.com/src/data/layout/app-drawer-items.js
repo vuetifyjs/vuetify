@@ -134,7 +134,8 @@ export default [
       { name: 'subheaders', title: 'Subheaders' },
       { name: 'tabs', title: 'Tabs' },
       { name: 'toolbars', title: 'Toolbars' },
-      { name: 'tooltips', title: 'Tooltips' }
+      { name: 'tooltips', title: 'Tooltips' },
+      { name: 'windows', title: 'Windows', badge: 'new' }
     ]
   },
   {
