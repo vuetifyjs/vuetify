@@ -2,7 +2,7 @@
 import '../../stylus/components/_tabs.styl'
 
 // Extensions
-import { ItemGroupInstance } from '../VItemGroup/VItemGroup'
+import { BaseItemGroup } from '../VItemGroup/VItemGroup'
 
 // Component level mixins
 import TabsComputed from './mixins/tabs-computed'
@@ -30,7 +30,7 @@ export default {
     Touch
   },
 
-  extends: ItemGroupInstance,
+  extends: BaseItemGroup,
 
   mixins: [
     Colorable,
@@ -131,7 +131,7 @@ export default {
     // until DOM is
     // painted
     init () {
-      ItemGroupInstance.options.methods.init.call(this)
+      BaseItemGroup.options.methods.init.call(this)
       setTimeout(this.callSlider, 0)
     },
     /**

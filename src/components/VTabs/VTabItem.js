@@ -1,5 +1,5 @@
 // Extensions
-import { WindowItemInstance } from '../VWindow/VWindowItem'
+import { BaseWindowItem } from '../VWindow/VWindowItem'
 
 // Mixins
 import {
@@ -12,7 +12,7 @@ export default {
   name: 'v-tab-item',
 
   mixins: [
-    WindowItemInstance,
+    BaseWindowItem,
     GroupableFactory('windowGroup', 'v-tab-item', 'v-tabs-items')
   ],
 
@@ -21,7 +21,7 @@ export default {
   },
 
   render (h) {
-    const render = WindowItemInstance.options.render.call(this, h)
+    const render = BaseWindowItem.options.render.call(this, h)
 
     // For backwards compatibility with v1.2
     if (this.id) {

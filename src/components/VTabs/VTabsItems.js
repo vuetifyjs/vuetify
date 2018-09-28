@@ -1,11 +1,11 @@
 // Extensions
-import { WindowInstance } from '../VWindow/VWindow'
+import { BaseWindow } from '../VWindow/VWindow'
 
 /* @vue/component */
 export default {
   name: 'v-tabs-items',
 
-  extends: WindowInstance,
+  extends: BaseWindow,
 
   provide () {
     return {
@@ -52,21 +52,21 @@ export default {
     getValue (item, i) {
       if (item.id) return item.id
 
-      return WindowInstance.options.methods.getValue.call(this, item, i)
+      return BaseWindow.options.methods.getValue.call(this, item, i)
     },
     next () {
       if (!this.cycle && this.internalIndex === this.items.length - 1) {
         return
       }
 
-      WindowInstance.options.methods.next.call(this)
+      BaseWindow.options.methods.next.call(this)
     },
     prev () {
       if (!this.cycle && this.internalIndex === 0) {
         return
       }
 
-      WindowInstance.options.methods.prev.call(this)
+      BaseWindow.options.methods.prev.call(this)
     }
   }
 }
