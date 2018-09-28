@@ -2,7 +2,7 @@
 import '../../stylus/components/_windows.styl'
 
 // Components
-import { ItemGroupInstance } from '../VItemGroup/VItemGroup'
+import { BaseItemGroup } from '../VItemGroup/VItemGroup'
 
 // Directives
 import Touch from '../../directives/touch'
@@ -11,7 +11,7 @@ import Touch from '../../directives/touch'
 import { VNode, VNodeDirective } from 'vue/types/vnode'
 
 /* @vue/component */
-export const WindowInstance = ItemGroupInstance.extend({
+export const BaseWindow = BaseItemGroup.extend({
   name: 'v-window',
 
   directives: { Touch },
@@ -81,7 +81,7 @@ export const WindowInstance = ItemGroupInstance.extend({
       }, this.$slots.default)
     },
     init () {
-      ItemGroupInstance.options.methods.init.call(this)
+      BaseItemGroup.options.methods.init.call(this)
 
       // Ensure no entry animation
       this.isBooted = true
@@ -125,7 +125,7 @@ export const WindowInstance = ItemGroupInstance.extend({
   }
 })
 
-export default WindowInstance.extend({
+export default BaseWindow.extend({
   provide (): object {
     return {
       windowGroup: this

@@ -1,5 +1,5 @@
 // Components
-import { WindowInstance } from './VWindow'
+import { BaseWindow } from './VWindow'
 
 // Mixins
 import Bootable from '../../mixins/bootable'
@@ -19,13 +19,13 @@ import mixins, { ExtractVue } from '../../util/mixins'
 import Vue from 'vue'
 import { VNode, VNodeDirective } from 'vue/types'
 
-type VWindowInstance = InstanceType<typeof WindowInstance>
+type VBaseWindow = InstanceType<typeof BaseWindow>
 
 interface options extends Vue {
-  windowGroup: VWindowInstance
+  windowGroup: VBaseWindow
 }
 
-export const WindowItemInstance = mixins<options & ExtractVue<[typeof Bootable]>>(
+export const BaseWindowItem = mixins<options & ExtractVue<[typeof Bootable]>>(
   Bootable
   /* @vue/component */
 ).extend({
@@ -128,6 +128,6 @@ export const WindowItemInstance = mixins<options & ExtractVue<[typeof Bootable]>
   }
 })
 
-export default WindowItemInstance.extend({
+export default BaseWindowItem.extend({
   mixins: [GroupableFactory('windowGroup', 'v-window-item', 'v-window')]
 })

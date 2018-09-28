@@ -2,7 +2,7 @@
 import '../../stylus/components/_carousel.styl'
 
 // Extensions
-import { WindowInstance } from '../VWindow/VWindow'
+import { BaseWindow } from '../VWindow/VWindow'
 
 // Components
 import VBtn from '../VBtn'
@@ -18,7 +18,7 @@ import { convertToUnit } from '../../util/helpers'
 import { VNode } from 'vue'
 import { VNodeDirective } from 'vue/types/vnode'
 
-export default WindowInstance.extend({
+export default BaseWindow.extend({
   name: 'v-carousel',
 
   provide (): object {
@@ -170,7 +170,7 @@ export default WindowInstance.extend({
       }, children)
     },
     init () {
-      WindowInstance.options.methods.init.call(this)
+      BaseWindow.options.methods.init.call(this)
 
       this.startTimeout()
     },
@@ -190,7 +190,7 @@ export default WindowInstance.extend({
       if (this.changedByControls) {
         this.changedByControls = false
 
-        WindowInstance.options.methods.updateReverse.call(this, val, oldVal)
+        BaseWindow.options.methods.updateReverse.call(this, val, oldVal)
       }
     }
   },

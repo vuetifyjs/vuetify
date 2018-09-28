@@ -1,6 +1,6 @@
 // Components
 import { VImg } from '../VImg'
-import { WindowItemInstance } from '../VWindow/VWindowItem'
+import { BaseWindowItem } from '../VWindow/VWindowItem'
 
 // Mixins
 import { factory as GroupableFactory } from '../../mixins/groupable'
@@ -10,11 +10,11 @@ import { ExtractVue } from './../../util/mixins'
 import mixins from '../../util/mixins'
 
 // Types
-type options = ExtractVue<[typeof WindowItemInstance]>
+type options = ExtractVue<[typeof BaseWindowItem]>
 
 /* @vue/component */
 export default mixins<options>(
-  WindowItemInstance,
+  BaseWindowItem,
   GroupableFactory('windowGroup', 'v-carousel-item', 'v-carousel')
 ).extend({
   name: 'v-carousel-item',
