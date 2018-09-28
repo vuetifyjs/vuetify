@@ -47,6 +47,7 @@ import TextFields from './TextFields'
 import TimePickers from './TimePickers'
 import Toolbars from './Toolbars'
 import Tooltips from './Tooltips'
+import Windows from './Windows'
 
 export default {
   Alerts,
@@ -97,5 +98,6 @@ export default {
   TextFields,
   TimePickers,
   Toolbars,
-  Tooltips
+  Tooltips,
+  Windows
 }

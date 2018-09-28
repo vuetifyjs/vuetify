@@ -742,5 +742,13 @@
       "customOrigin",
       { "file": "todo", "newIn": "1.2" }
     ]
+  },
+  "windows": {
+    "components": ["v-window"],
+    "examples": [
+      "usage",
+      "onboarding",
+      "account"
+    ]
   }
 }
