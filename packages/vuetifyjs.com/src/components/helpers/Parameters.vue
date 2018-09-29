@@ -3,26 +3,30 @@
     :search="search"
     :items="computedItems"
     :pagination.sync="pagination"
-    class="component-parameters"
+    class="component-parameters container grid-list-md fluid pa-2"
     hide-actions
+    content-tag="v-layout"
+    content-class="wrap"
   >
     <template
       slot="item"
       slot-scope="{ item }"
     >
-      <div class="ma-2">
+      <v-flex xs12>
         <div
           v-if="item.newIn"
           class="pt-2 pl-2 grey lighten-4 caption font-weight-bold primary--text"
         >
           New in — v{{ item.newIn }}
         </div>
+
         <div
           v-else-if="item.deprecatedIn"
           class="pt-2 pl-2 grey lighten-4 caption font-weight-bold error--text"
         >
           Deprecated in — v{{ item.deprecatedIn }}
         </div>
+
         <div class="pa-2 grey lighten-4 d-flex align-top">
           <v-flex
             v-for="header in headers"
@@ -39,6 +43,7 @@
             />
           </v-flex>
         </div>
+
         <div class="pa-2 grey lighten-3 grey--text text--darken-2 d-flex">
           <v-flex>
             <helpers-markdown
@@ -52,7 +57,8 @@
             >{{ genTypescriptDef(item.example) }}</helpers-markup>
           </v-flex>
         </div>
-      </div>
+
+      </v-flex>
     </template>
   </v-data-iterator>
 </template>

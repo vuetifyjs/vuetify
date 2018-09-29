@@ -52,7 +52,7 @@
           v-tabs-items(touchless v-model="tab").white
             v-tab-item(
               v-for="(tabItem, i) in computedTabs"
-              :id="tabItem"
+              :value="tabItem"
               :key="i"
             )
               v-card(flat v-if="hasTab(tabItem)")
