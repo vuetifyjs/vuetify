@@ -31,7 +31,11 @@ const ssrBootable = () => new Promise(resolve => requestAnimationFrame(resolve))
 
 // Avoriaz does not like extended
 // components with no render fn
-const Mock = {
+const TabsMock = {
+  name: 'v-tabs',
+  render: () => {}
+}
+const TabsItemsMock = {
   name: 'v-tabs-items',
   render: () => {}
 }
@@ -40,7 +44,7 @@ test('VTabs', ({ mount }) => {
   it('should provide', () => {
     const wrapper = mount(Component())
 
-    const items = wrapper.first(Mock)
+    const items = wrapper.first(TabsItemsMock)
     expect(typeof items.vm.tabProxy).toBe('function')
     expect(typeof items.vm.registerItems).toBe('function')
     expect(typeof items.vm.unregisterItems).toBe('function')
@@ -53,7 +57,7 @@ test('VTabs', ({ mount }) => {
       }
     })
 
-    const items = wrapper.first(Mock)
+    const items = wrapper.first(TabsItemsMock)
     expect(typeof wrapper.vm.tabItems).toBe('function')
     items.destroy()
     expect(wrapper.vm.tabItems).toBe(null)
@@ -62,7 +66,7 @@ test('VTabs', ({ mount }) => {
   it('should call slider on application resize', async () => {
     const wrapper = mount(Component())
 
-    const tabs = wrapper.find(VTabs)[0]
+    const tabs = wrapper.first(TabsMock)
 
     expect(tabs.vm.resizeTimeout).toBe(null)
     tabs.vm.$vuetify.application.left = 100
@@ -82,7 +86,7 @@ test('VTabs', ({ mount }) => {
 
     await ssrBootable()
 
-    const tabs = wrapper.find(VTabs)[0]
+    const tabs = wrapper.first(TabsMock)
 
     tabs.setData({ scrollOffset: 1 })
     tabs.vm.onResize()
@@ -258,7 +262,7 @@ test('VTabs', ({ mount }) => {
 
     await ssrBootable()
 
-    expect(wrapper.find(Mock).length).toBe(1)
+    expect(wrapper.find(TabsItemsMock).length).toBe(1)
   })
 
   it('should scroll active item into view if off screen', async () => {

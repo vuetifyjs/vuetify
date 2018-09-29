@@ -22,15 +22,13 @@ import Touch from '../../directives/touch'
 import { deprecate } from '../../util/console'
 
 /* @vue/component */
-export default {
+export default BaseItemGroup.extend({
   name: 'v-tabs',
 
   directives: {
     Resize,
     Touch
   },
-
-  extends: BaseItemGroup,
 
   mixins: [
     Colorable,
@@ -245,4 +243,4 @@ export default {
       this.genItems(items, item)
     ])
   }
-}
+})
