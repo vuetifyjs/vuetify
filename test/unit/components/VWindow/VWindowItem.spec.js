@@ -31,5 +31,46 @@ test('VWindowItem.ts', ({ mount }) => {
     // Before leave
     item.vm.onBeforeLeave(el)
     expect(wrapper.vm.internalHeight).toBe('0px')
+
+    // Canceling
+    item.vm.onBeforeEnter()
+    item.vm.onEnter(el)
+    item.vm.onEnterCancelled()
+
+    expect(item.vm.wasCancelled).toBe(true)
+    expect(wrapper.vm.isActive).toBe(true)
+
+    item.vm.onAfterEnter()
+
+    await new Promise(resolve => requestAnimationFrame(resolve))
+
+    expect(wrapper.vm.isActive).toBe(true)
+  })
+
+  it('should use custom transition', () => {
+    const wrapper = mount(VWindowItem, {
+      propsData: {
+        transition: 'foo',
+        reverseTransition: 'bar'
+      },
+      data: {
+        windowGroup: {
+          internalReverse: false,
+          register: () => {},
+          unregister: () => {}
+        }
+      }
+    })
+
+    expect(wrapper.vm.computedTransition).toBe('foo')
+
+    wrapper.setProps({ transition: false })
+    expect(wrapper.vm.computedTransition).toBe('')
+
+    wrapper.vm.windowGroup.internalReverse = true
+    expect(wrapper.vm.computedTransition).toBe('bar')
+
+    wrapper.setProps({ reverseTransition: false })
+    expect(wrapper.vm.computedTransition).toBe('')
   })
 })

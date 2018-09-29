@@ -16,6 +16,7 @@ export default VWindowItem.extend({
     const render = VWindowItem.options.render.call(this, h)
 
     // For backwards compatibility with v1.2
+    /* istanbul ignore next */
     if (this.id) {
       deprecate('id', 'value', this)
 

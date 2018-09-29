@@ -42,6 +42,7 @@ export default VWindow.extend({
     },
     // For backwards compatability with v1.2
     getValue (item, i) {
+      /* istanbul ignore if */
       if (item.id) return item.id
 
       return VWindow.options.methods.getValue.call(this, item, i)

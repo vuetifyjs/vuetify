@@ -111,6 +111,7 @@ export default BaseItemGroup.extend({
       const activeTab = this.activeTab
 
       this.$nextTick(() => {
+        /* istanbul ignore if */
         if (!activeTab || !activeTab.$el) return
         this.sliderWidth = activeTab.$el.scrollWidth
         this.sliderLeft = activeTab.$el.offsetLeft

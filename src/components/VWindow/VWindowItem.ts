@@ -60,15 +60,15 @@ export default mixins<options & ExtractVue<[typeof Bootable]>>(
 
   computed: {
     computedTransition (): string | boolean {
-      if (this.windowGroup.internalReverse) {
+      if (!this.windowGroup.internalReverse) {
         return typeof this.transition !== 'undefined'
           ? this.transition || ''
           : this.windowGroup.computedTransition
-      } else {
-        return typeof this.reverseTransition !== 'undefined'
-          ? this.reverseTransition || ''
-          : this.windowGroup.computedTransition
       }
+
+      return typeof this.reverseTransition !== 'undefined'
+        ? this.reverseTransition || ''
+        : this.windowGroup.computedTransition
     }
   },
 

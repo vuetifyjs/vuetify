@@ -30,6 +30,7 @@ export default {
     },
     /* @deprecate */
     internalValue (val) {
+      /* istanbul ignore else */
       if (!this.$listeners['input']) return
 
       this.$emit('input', val)
