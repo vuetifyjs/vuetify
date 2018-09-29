@@ -92,15 +92,6 @@ export default BaseItemGroup.extend({
     tabs: 'onResize'
   },
 
-  mounted () {
-    this.checkIcons()
-
-    /* istanbul ignore next */
-    if (this.$listeners['input']) {
-      deprecate('@input', '@change', this)
-    }
-  },
-
   methods: {
     checkIcons () {
       this.prevIconVisible = this.checkPrevIcon()
@@ -130,7 +121,14 @@ export default BaseItemGroup.extend({
     // painted
     init () {
       BaseItemGroup.options.methods.init.call(this)
-      setTimeout(this.callSlider, 0)
+      this.checkIcons()
+
+      /* istanbul ignore next */
+      if (this.$listeners['input']) {
+        deprecate('@input', '@change', this)
+      }
+
+      setTimeout(this.callSlider, 33)
     },
     /**
      * When v-navigation-drawer changes the
