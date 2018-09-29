@@ -140,7 +140,7 @@ export default mixins(VDataIterator).extend({
       const headers = this.computeSlots('header')
 
       if (!this.hideDefaultHeader && !this.static) {
-        headers.push(this.$createElement(this.isMobile ? VDataHeaderMobile : VDataHeader))
+        return [this.$createElement(this.isMobile ? VDataHeaderMobile : VDataHeader, [headers])]
       }
 
       return headers

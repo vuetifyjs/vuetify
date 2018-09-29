@@ -183,6 +183,8 @@ export default mixins<options>().extend({
       children.push(this.genLoading())
     }
 
+    children.unshift(this.$slots.default)
+
     return h('thead', {
       class: 'v-data-header'
     }, children)

@@ -14,8 +14,11 @@ v-data-table($material)
 
   thead
     tr
-      th
+
+      &:last-child th
         border-bottom: 1px solid rgba($material.fg-color, $material.divider-percent)
+
+      th
         // box-shadow: inset 0 -1px 0 rgba($material.fg-color, $material.divider-percent)
         color: rgba($material.text-color, $material.secondary-text-percent)
 
