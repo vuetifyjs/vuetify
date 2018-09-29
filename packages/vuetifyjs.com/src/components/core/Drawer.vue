@@ -70,6 +70,13 @@
               v-list-tile(slot="activator" ripple)
                 v-list-tile-content
                   v-list-tile-title {{ subItem.title }}
+              v-chip(
+                v-if="subItem.badge"
+                :color="subItem.color || 'primary'"
+                class="white--text pa-0 v-chip--x-small"
+                disabled
+                slot="appendIcon"
+              ) {{ subItem.badge }}
               v-list-tile(
                 v-for="(grand, i) in subItem.items",
                 :key="i",

@@ -93,6 +93,17 @@ export default [
       { name: 'expansion-panels', title: 'Expansion panels' },
       { name: 'footer', title: 'Footer' },
       {
+        title: 'Groups',
+        group: '(button-groups|item-groups|windows)',
+        namespace: 'components',
+        badge: 'new',
+        items: [
+          { name: 'button-groups', title: 'Button groups' },
+          { name: 'item-groups', title: 'Item groups' },
+          { name: 'windows', title: 'Windows' }
+        ]
+      },
+      {
         title: 'Inputs & controls',
         group: '(autocompletes|combobox|forms|inputs|overflow-btns|selects|selection|text-fields|sliders|textarea)',
         namespace: 'components',
@@ -136,7 +147,7 @@ export default [
       { name: 'timelines', title: 'Timelines', badge: 'new' },
       { name: 'toolbars', title: 'Toolbars' },
       { name: 'tooltips', title: 'Tooltips' },
-      { name: 'windows', title: 'Windows', badge: 'new' }
+      { name: 'treeview', title: 'Treeview', badge: 'new' }
     ]
   },
   {

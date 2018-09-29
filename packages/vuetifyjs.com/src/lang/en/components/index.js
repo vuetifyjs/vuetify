@@ -6,6 +6,7 @@ import Badges from './Badges'
 import BottomNavigation from './BottomNavigation'
 import BottomSheets from './BottomSheets'
 import Breadcrumbs from './Breadcrumbs'
+import ButtonGroups from './ButtonGroups'
 import Buttons from './Buttons'
 import Cards from './Cards'
 import Carousels from './Carousels'
@@ -25,6 +26,7 @@ import Hover from './Hover'
 import Icons from './Icons'
 import Images from './Images'
 import Inputs from './Inputs'
+import ItemGroups from './ItemGroups'
 import Lists from './Lists'
 import Jumbotrons from './Jumbotrons'
 import Menus from './Menus'
@@ -59,6 +61,7 @@ export default {
   BottomNavigation,
   BottomSheets,
   Breadcrumbs,
+  ButtonGroups,
   Buttons,
   Cards,
   Carousels,
@@ -78,6 +81,7 @@ export default {
   Icons,
   Images,
   Inputs,
+  ItemGroups,
   Lists,
   Jumbotrons,
   Menus,
