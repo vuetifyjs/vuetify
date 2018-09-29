@@ -28,9 +28,9 @@ export default {
     hasArrows (val) {
       if (!val) this.scrollOffset = 0
     },
-    isBooted: 'init',
     /* @deprecate */
     internalValue (val) {
+      /* istanbul ignore else */
       if (!this.$listeners['input']) return
 
       this.$emit('input', val)

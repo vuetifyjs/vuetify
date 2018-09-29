@@ -2,7 +2,7 @@
 import '../../stylus/components/_tabs.styl'
 
 // Extensions
-import VItemGroup from '../VItemGroup/VItemGroup'
+import { BaseItemGroup } from '../VItemGroup/VItemGroup'
 
 // Component level mixins
 import TabsComputed from './mixins/tabs-computed'
@@ -22,15 +22,13 @@ import Touch from '../../directives/touch'
 import { deprecate } from '../../util/console'
 
 /* @vue/component */
-export default {
+export default BaseItemGroup.extend({
   name: 'v-tabs',
 
   directives: {
     Resize,
     Touch
   },
-
-  extends: VItemGroup,
 
   mixins: [
     Colorable,
@@ -45,6 +43,7 @@ export default {
 
   provide () {
     return {
+      tabGroup: this,
       tabProxy: this.tabProxy,
       registerItems: this.registerItems,
       unregisterItems: this.unregisterItems
@@ -59,12 +58,10 @@ export default {
       nextIconVisible: false,
       prevIconVisible: false,
       resizeTimeout: null,
-      reverse: false,
       scrollOffset: 0,
       sliderWidth: null,
       sliderLeft: null,
       startX: 0,
-      tabsContainer: null,
       tabItems: null,
       transitionTime: 300,
       widths: {
@@ -95,15 +92,6 @@ export default {
     tabs: 'onResize'
   },
 
-  mounted () {
-    this.checkIcons()
-
-    /* istanbul ignore next */
-    if (this.$listeners['input']) {
-      deprecate('@input', '@change', this)
-    }
-  },
-
   methods: {
     checkIcons () {
       this.prevIconVisible = this.checkPrevIcon()
@@ -123,6 +111,7 @@ export default {
       const activeTab = this.activeTab
 
       this.$nextTick(() => {
+        /* istanbul ignore if */
         if (!activeTab || !activeTab.$el) return
         this.sliderWidth = activeTab.$el.scrollWidth
         this.sliderLeft = activeTab.$el.offsetLeft
@@ -132,10 +121,15 @@ export default {
     // until DOM is
     // painted
     init () {
-      if (!this.isBooted) return
+      BaseItemGroup.options.methods.init.call(this)
+      this.checkIcons()
 
-      VItemGroup.options.methods.init.call(this)
-      setTimeout(this.callSlider, 0)
+      /* istanbul ignore next */
+      if (this.$listeners['input']) {
+        deprecate('@input', '@change', this)
+      }
+
+      setTimeout(this.callSlider, 33)
     },
     /**
      * When v-navigation-drawer changes the
@@ -202,6 +196,7 @@ export default {
     },
     registerItems (fn) {
       this.tabItems = fn
+      fn(this.internalValue)
     },
     unregisterItems () {
       this.tabItems = null
@@ -247,4 +242,4 @@ export default {
       this.genItems(items, item)
     ])
   }
-}
+})

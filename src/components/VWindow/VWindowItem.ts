@@ -60,15 +60,15 @@ export default mixins<options & ExtractVue<[typeof Bootable]>>(
 
   computed: {
     computedTransition (): string | boolean {
-      if (this.windowGroup.internalReverse) {
+      if (!this.windowGroup.internalReverse) {
         return typeof this.transition !== 'undefined'
           ? this.transition || ''
           : this.windowGroup.computedTransition
-      } else {
-        return typeof this.reverseTransition !== 'undefined'
-          ? this.reverseTransition || ''
-          : this.windowGroup.computedTransition
       }
+
+      return typeof this.reverseTransition !== 'undefined'
+        ? this.reverseTransition || ''
+        : this.windowGroup.computedTransition
     }
   },
 
@@ -97,10 +97,19 @@ export default mixins<options & ExtractVue<[typeof Bootable]>>(
       this.wasCancelled = true
     },
     onEnter (el: HTMLElement, done: () => void) {
-      addOnceEventListener(el, 'transitionend', done)
+      const isBooted = this.windowGroup.isBooted
+
+      if (isBooted) {
+        addOnceEventListener(el, 'transitionend', done)
+      }
 
       requestAnimationFrame(() => {
         this.windowGroup.internalHeight = convertToUnit(el.clientHeight)
+
+        // On initial render, there is no transition
+        // Vue leaves a `enter` transition class
+        // if done is called too fast
+        !isBooted && setTimeout(done, 100)
       })
     }
   },
