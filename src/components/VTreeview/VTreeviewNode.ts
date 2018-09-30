@@ -243,6 +243,7 @@ export default mixins<options>(
           activeClass: this.activeClass,
           item,
           selectable: this.selectable,
+          selectedColor: this.selectedColor,
           expandIcon: this.expandIcon,
           indeterminateIcon: this.indeterminateIcon,
           offIcon: this.offIcon,
