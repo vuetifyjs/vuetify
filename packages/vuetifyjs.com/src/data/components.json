@@ -762,7 +762,8 @@
       "usage",
       "fileExplorer",
       "country",
-      "directory"
+      "directory",
+      "hotspots"
     ]
   },
   "windows": {

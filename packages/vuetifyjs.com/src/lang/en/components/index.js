@@ -50,6 +50,7 @@ import TextFields from './TextFields'
 import TimePickers from './TimePickers'
 import Toolbars from './Toolbars'
 import Tooltips from './Tooltips'
+import Treeview from './Treeview'
 import Windows from './Windows'
 
 export default {
@@ -105,5 +106,6 @@ export default {
   TimePickers,
   Toolbars,
   Tooltips,
+  Treeview,
   Windows
 }
