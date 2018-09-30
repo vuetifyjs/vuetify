@@ -461,6 +461,12 @@
     "description": "Tooltip components for the Vuetify framework.",
     "keywords": "tooltips"
   },
+  "components/treeview": {
+    "h1": "Treeview",
+    "title": "Treeview",
+    "description": "Treeview component for the Vuetify framework",
+    "keywords": "treeview"
+  },
   "components/windows": {
     "h1": "Windows",
     "title": "Windows",
