@@ -4,6 +4,7 @@
       :items="dropdown_font"
       label="Select font"
       hide-details
+      class="pa-0"
     ></v-overflow-btn>
 
     <v-divider vertical></v-divider>
@@ -13,6 +14,7 @@
       editable
       label="Select size"
       hide-details
+      class="pa-0"
       overflow
     ></v-overflow-btn>
 

@@ -233,6 +233,12 @@
     "description": "Button component for Vuetify Framework.",
     "keywords": "vuetify, buttons, components"
   },
+  "components/button-groups": {
+    "h1": "Button groups",
+    "title": "Button groups",
+    "description": "Button groups for Vuetify Framework.",
+    "keywords": "vuetify, buttons, components, groups, button group"
+  },
   "components/floating-action-buttons": {
     "h1": "Floating Action Buttons",
     "title": "Floating Action Button Component",
@@ -322,6 +328,12 @@
     "title": "Input Component",
     "description": "Create customized inputs by extending the v-input component",
     "keywords": "inputs"
+  },
+  "components/item-groups": {
+    "h1": "Item groups",
+    "title": "Item groups",
+    "description": "Create dynamic groups for any situation",
+    "keywords": "groups"
   },
   "components/lists": {
     "h1": "Lists",

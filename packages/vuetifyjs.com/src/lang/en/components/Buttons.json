@@ -23,10 +23,6 @@
       "desc": "Button dropdowns are regular selects with additional styling.",
       "uninverted": true
     },
-    "toggle": {
-      "header": "Button Toggle",
-      "desc": "Toggle buttons are essentially styled radio or checkboxes, depending on the properties selected. This component is compatible with the `v-toolbar` component."
-    },
     "icon": {
       "header": "Icon",
       "desc": "Icons can be used for the primary content of a button."
@@ -54,10 +50,6 @@
     "block": {
       "header": "Block",
       "desc": "Block buttons extend the full available width."
-    },
-    "appBar": {
-      "header": "In toolbar",
-      "desc": "Easily integrate customized button solutions with a `v-toolbar`"
     }
   },
   "props": {
