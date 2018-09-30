@@ -80,27 +80,29 @@
     "spec": false
   },
   "buttons": {
-    "components": ["v-btn", "v-btn-toggle"],
+    "components": ["v-btn"],
     "examples": [
       "usage",
       "flat",
       "raised",
       "depressed",
       "dropdown",
-      "toggle",
       "icon",
       "floating",
       "loaders",
       "sizing",
       "outline",
       "round",
-      "block",
-      {
-        "file": "appBar" ,
-        "newIn": "1.1"
-      }
+      "block"
     ],
     "spec": false
+  },
+  "button-groups": {
+    "components": ["v-btn-toggle"],
+    "examples": [
+      "toggle",
+      "appBar"
+    ]
   },
   "cards": {
     "components": [
@@ -368,6 +370,14 @@
     "components": ["v-input"],
     "examples": ["usage"],
     "spec": false
+  },
+  "item-groups": {
+    "components": ["v-item-group", "v-item"],
+    "newIn": "1.3",
+    "examples": [
+      "usage",
+      "post"
+    ]
   },
   "jumbotrons": {
     "components": ["v-jumbotron"],
@@ -675,7 +685,7 @@
     "spec": false
   },
   "timelines": {
-    "components": ["v-timeline"],
+    "components": ["v-timeline", "v-timeline-item"],
     "examples": [
       "usage",
       "small",
@@ -761,13 +771,12 @@
     "examples": [
       "usage",
       "fileExplorer",
-      "country",
       "directory",
       "hotspots"
     ]
   },
   "windows": {
-    "components": ["v-window"],
+    "components": ["v-window", "v-window-item"],
     "examples": [
       "usage",
       "onboarding",
