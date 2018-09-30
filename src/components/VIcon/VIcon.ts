@@ -109,10 +109,13 @@ const VIcon = mixins(
     renderSvgIcon (icon: VuetifyIconComponent, h: CreateElement): VNode {
       const data = this.getDefaultData()
 
-      data.class['v-icon--component'] = true
-
-      const height = this.getSize()
-      if (height) data.style = { height }
+      const size = this.getSize()
+      if (size) {
+        data.style = {
+          fontSize: size,
+          height: size
+        }
+      }
 
       this.applyColors(data)
 
