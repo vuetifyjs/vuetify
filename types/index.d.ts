@@ -1,6 +1,7 @@
 import Vue, { PluginFunction, PluginObject, VueConstructor, DirectiveFunction, DirectiveOptions } from 'vue'
 import { VuetifyLanguage } from './lang'
 import './alacarte'
+import './colors'
 
 declare const Vuetify: Vuetify
 export default Vuetify
