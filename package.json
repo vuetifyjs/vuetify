@@ -13,7 +13,8 @@
   "jsdelivr": "dist/vuetify.js",
   "types": "types/index.d.ts",
   "sideEffects": [
-    "*.styl"
+    "*.styl",
+    "*.css"
   ],
   "scripts": {
     "watch": "cross-env TARGET=development webpack --config build/config.js --progress --hide-modules --watch",
