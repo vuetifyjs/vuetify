@@ -11,16 +11,24 @@ module.exports = {
         "name": "dark",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "themeable"
       },
       {
         "name": "id",
         "type": "string",
         "default": "'app'",
         "source": null
+      },
+      {
+        "name": "light",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
       }
     ],
-    "mixins": [],
+    "mixins": [
+      "themeable"
+    ],
     "slots": [
       "default"
     ]
@@ -100,76 +108,10 @@ module.exports = {
   "v-autocomplete": {
     "props": [
       {
-        "name": "suffix",
-        "type": "string",
-        "default": "undefined",
-        "source": "v-text-field"
-      },
-      {
-        "name": "color",
-        "type": "string",
-        "default": "'primary'",
-        "source": "colorable"
-      },
-      {
-        "name": "chips",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-select"
-      },
-      {
-        "name": "cacheItems",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-select"
-      },
-      {
-        "name": "attach",
-        "type": "any",
-        "default": false,
-        "source": "v-select"
-      },
-      {
         "name": "allowOverflow",
         "type": "boolean",
         "default": "true",
-        "source": "menuable"
-      },
-      {
-        "name": "activator",
-        "type": "any",
-        "default": "undefined",
-        "source": "menuable"
-      },
-      {
-        "name": "closeOnContentClick",
-        "type": "boolean",
-        "default": "true",
-        "source": "v-menu"
-      },
-      {
-        "name": "closeOnClick",
-        "type": "boolean",
-        "default": "true",
-        "source": "v-menu"
-      },
-      {
-        "name": "auto",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-menu"
-      },
-      {
-        "name": "clearIconCb",
-        "type": "function",
-        "default": "null",
-        "source": "v-text-field"
-      },
-      {
-        "name": "clearIcon",
-        "type": "string",
-        "default": "'$vuetify.icons.clear'",
-        "source": "v-text-field"
+        "source": null
       },
       {
         "name": "appendIcon",
@@ -184,13 +126,37 @@ module.exports = {
         "source": "v-input"
       },
       {
+        "name": "appendOuterIcon",
+        "type": "string",
+        "default": "undefined",
+        "source": "v-text-field"
+      },
+      {
+        "name": "appendOuterIconCb",
+        "type": "function",
+        "default": "null",
+        "source": "v-text-field"
+      },
+      {
+        "name": "attach",
+        "type": "any",
+        "default": false,
+        "source": "v-select"
+      },
+      {
+        "name": "autofocus",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-text-field"
+      },
+      {
         "name": "backgroundColor",
         "type": "string",
         "default": "undefined",
         "source": "v-input"
       },
       {
-        "name": "clearable",
+        "name": "box",
         "type": "boolean",
         "default": "false",
         "source": "v-text-field"
@@ -202,142 +168,40 @@ module.exports = {
         "source": "v-text-field"
       },
       {
-        "name": "box",
+        "name": "cacheItems",
         "type": "boolean",
         "default": "false",
+        "source": "v-select"
+      },
+      {
+        "name": "chips",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-select"
+      },
+      {
+        "name": "clearIcon",
+        "type": "string",
+        "default": "'$vuetify.icons.clear'",
         "source": "v-text-field"
       },
       {
-        "name": "autofocus",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-text-field"
-      },
-      {
-        "name": "appendOuterIconCb",
+        "name": "clearIconCb",
         "type": "function",
         "default": "null",
         "source": "v-text-field"
       },
       {
-        "name": "appendOuterIcon",
-        "type": "string",
-        "default": "undefined",
+        "name": "clearable",
+        "type": "boolean",
+        "default": "false",
         "source": "v-text-field"
       },
       {
-        "name": "origin",
+        "name": "color",
         "type": "string",
-        "default": "'top left'",
-        "source": "v-menu"
-      },
-      {
-        "name": "noFilter",
-        "type": "boolean",
-        "default": "false",
-        "source": null
-      },
-      {
-        "name": "hideNoData",
-        "type": "boolean",
-        "default": "false",
-        "source": null
-      },
-      {
-        "name": "filter",
-        "type": "function",
-        "default": "(item: object, queryText: string, itemText: string) => boolean",
-        "source": null
-      },
-      {
-        "name": "multiLine",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-select"
-      },
-      {
-        "name": "dontFillMaskBlanks",
-        "type": "boolean",
-        "default": "false",
-        "source": "maskable"
-      },
-      {
-        "name": "mask",
-        "type": [
-          "object",
-          "string"
-        ],
-        "default": "undefined",
-        "source": "maskable"
-      },
-      {
-        "name": "multiple",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-select"
-      },
-      {
-        "name": "itemValue",
-        "type": [
-          "string",
-          "array",
-          "function"
-        ],
-        "default": "value",
-        "source": "v-select"
-      },
-      {
-        "name": "label",
-        "type": "string",
-        "default": "undefined",
-        "source": "v-input"
-      },
-      {
-        "name": "hint",
-        "type": "string",
-        "default": "undefined",
-        "source": "v-input"
-      },
-      {
-        "name": "hideDetails",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-input"
-      },
-      {
-        "name": "height",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": "undefined",
-        "source": "v-input"
-      },
-      {
-        "name": "disabled",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-input"
-      },
-      {
-        "name": "itemText",
-        "type": [
-          "string",
-          "array",
-          "function"
-        ],
-        "default": "text",
-        "source": "v-select"
-      },
-      {
-        "name": "itemDisabled",
-        "type": [
-          "string",
-          "array",
-          "function"
-        ],
-        "default": "disabled",
-        "source": "v-select"
+        "default": "'primary'",
+        "source": "colorable"
       },
       {
         "name": "counter",
@@ -350,35 +214,13 @@ module.exports = {
         "source": "v-text-field"
       },
       {
-        "name": "flat",
+        "name": "dark",
         "type": "boolean",
         "default": "false",
-        "source": "v-text-field"
+        "source": "themeable"
       },
       {
-        "name": "fullWidth",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-text-field"
-      },
-      {
-        "name": "itemAvatar",
-        "type": [
-          "string",
-          "array",
-          "function"
-        ],
-        "default": "avatar",
-        "source": "v-select"
-      },
-      {
-        "name": "items",
-        "type": "array",
-        "default": [],
-        "source": "v-select"
-      },
-      {
-        "name": "hideSelected",
+        "name": "deletableChips",
         "type": "boolean",
         "default": "false",
         "source": "v-select"
@@ -390,92 +232,22 @@ module.exports = {
         "source": "v-select"
       },
       {
-        "name": "deletableChips",
+        "name": "disabled",
         "type": "boolean",
         "default": "false",
-        "source": "v-select"
+        "source": "v-input"
       },
       {
-        "name": "contentClass",
-        "type": "string",
-        "default": "undefined",
-        "source": "v-select"
-      },
-      {
-        "name": "dark",
+        "name": "dontFillMaskBlanks",
         "type": "boolean",
         "default": "false",
-        "source": "themeable"
-      },
-      {
-        "name": "light",
-        "type": "boolean",
-        "default": "false",
-        "source": "themeable"
+        "source": "maskable"
       },
       {
         "name": "error",
         "type": "boolean",
         "default": "false",
         "source": "validatable"
-      },
-      {
-        "name": "loading",
-        "type": [
-          "boolean",
-          "string"
-        ],
-        "default": false,
-        "source": "loadable"
-      },
-      {
-        "name": "noDataText",
-        "type": "string",
-        "default": "'$vuetify.noDataText'",
-        "source": "filterable"
-      },
-      {
-        "name": "minWidth",
-        "type": [
-          "boolean",
-          "number",
-          "string"
-        ],
-        "default": 0,
-        "source": "menuable"
-      },
-      {
-        "name": "maxWidth",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": "auto",
-        "source": "menuable"
-      },
-      {
-        "name": "inputActivator",
-        "type": "boolean",
-        "default": "false",
-        "source": "menuable"
-      },
-      {
-        "name": "messages",
-        "type": [
-          "string",
-          "array"
-        ],
-        "default": [],
-        "source": "validatable"
-      },
-      {
-        "name": "maxHeight",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": 300,
-        "source": "v-menu"
       },
       {
         "name": "errorCount",
@@ -496,16 +268,176 @@ module.exports = {
         "source": "validatable"
       },
       {
-        "name": "soloInverted",
+        "name": "filter",
+        "type": "function",
+        "default": "(item: object, queryText: string, itemText: string) => boolean",
+        "source": null
+      },
+      {
+        "name": "flat",
         "type": "boolean",
         "default": "false",
         "source": "v-text-field"
       },
       {
-        "name": "openOnClick",
+        "name": "fullWidth",
         "type": "boolean",
-        "default": "true",
-        "source": "v-menu"
+        "default": "false",
+        "source": "v-text-field"
+      },
+      {
+        "name": "height",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": "undefined",
+        "source": "v-input"
+      },
+      {
+        "name": "hideDetails",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-input"
+      },
+      {
+        "name": "hideNoData",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "hideSelected",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-select"
+      },
+      {
+        "name": "hint",
+        "type": "string",
+        "default": "undefined",
+        "source": "v-input"
+      },
+      {
+        "name": "itemAvatar",
+        "type": [
+          "string",
+          "array",
+          "function"
+        ],
+        "default": "avatar",
+        "source": "v-select"
+      },
+      {
+        "name": "itemDisabled",
+        "type": [
+          "string",
+          "array",
+          "function"
+        ],
+        "default": "disabled",
+        "source": "v-select"
+      },
+      {
+        "name": "itemText",
+        "type": [
+          "string",
+          "array",
+          "function"
+        ],
+        "default": "text",
+        "source": "v-select"
+      },
+      {
+        "name": "itemValue",
+        "type": [
+          "string",
+          "array",
+          "function"
+        ],
+        "default": "value",
+        "source": "v-select"
+      },
+      {
+        "name": "items",
+        "type": "array",
+        "default": [],
+        "source": "v-select"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "default": "undefined",
+        "source": "v-input"
+      },
+      {
+        "name": "light",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
+      },
+      {
+        "name": "loading",
+        "type": [
+          "boolean",
+          "string"
+        ],
+        "default": false,
+        "source": "loadable"
+      },
+      {
+        "name": "mask",
+        "type": [
+          "object",
+          "string"
+        ],
+        "default": "undefined",
+        "source": "maskable"
+      },
+      {
+        "name": "menuProps",
+        "type": [
+          "string",
+          "array",
+          "object"
+        ],
+        "default": {
+          "closeOnClick": false,
+          "closeOnContentClick": false,
+          "openOnClick": false,
+          "maxHeight": 300,
+          "offsetY": true,
+          "offsetOverflow": true,
+          "transition": false
+        },
+        "source": "v-select"
+      },
+      {
+        "name": "messages",
+        "type": [
+          "string",
+          "array"
+        ],
+        "default": [],
+        "source": "validatable"
+      },
+      {
+        "name": "multiple",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-select"
+      },
+      {
+        "name": "noDataText",
+        "type": "string",
+        "default": "'$vuetify.noDataText'",
+        "source": "filterable"
+      },
+      {
+        "name": "noFilter",
+        "type": "boolean",
+        "default": "false",
+        "source": null
       },
       {
         "name": "openOnClear",
@@ -514,67 +446,22 @@ module.exports = {
         "source": "v-select"
       },
       {
-        "name": "offsetOverflow",
-        "type": "boolean",
-        "default": "true",
-        "source": "menuable"
-      },
-      {
-        "name": "offsetY",
-        "type": "boolean",
-        "default": "true",
-        "source": "v-menu"
-      },
-      {
-        "name": "offsetX",
+        "name": "outline",
         "type": "boolean",
         "default": "false",
-        "source": "v-menu"
+        "source": "v-text-field"
       },
       {
-        "name": "nudgeWidth",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": 0,
-        "source": "menuable"
+        "name": "persistentHint",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-input"
       },
       {
-        "name": "nudgeTop",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": 0,
-        "source": "menuable"
-      },
-      {
-        "name": "nudgeRight",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": 0,
-        "source": "menuable"
-      },
-      {
-        "name": "nudgeBottom",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": 0,
-        "source": "menuable"
-      },
-      {
-        "name": "nudgeLeft",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": 0,
-        "source": "menuable"
+        "name": "placeholder",
+        "type": "string",
+        "default": "undefined",
+        "source": "v-text-field"
       },
       {
         "name": "prefix",
@@ -589,69 +476,15 @@ module.exports = {
         "source": "v-input"
       },
       {
-        "name": "persistentHint",
-        "type": "boolean",
-        "default": "false",
+        "name": "prependIconCb",
+        "type": "function",
+        "default": "null",
         "source": "v-input"
       },
       {
-        "name": "outline",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-text-field"
-      },
-      {
-        "name": "positionX",
-        "type": "number",
-        "default": "undefined",
-        "source": "menuable"
-      },
-      {
-        "name": "positionY",
-        "type": "number",
-        "default": "undefined",
-        "source": "menuable"
-      },
-      {
-        "name": "placeholder",
+        "name": "prependInnerIcon",
         "type": "string",
         "default": "undefined",
-        "source": "v-text-field"
-      },
-      {
-        "name": "openOnHover",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-menu"
-      },
-      {
-        "name": "validateOnBlur",
-        "type": "boolean",
-        "default": "false",
-        "source": "validatable"
-      },
-      {
-        "name": "textarea",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-text-field"
-      },
-      {
-        "name": "solo",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-text-field"
-      },
-      {
-        "name": "singleLine",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-text-field"
-      },
-      {
-        "name": "reverse",
-        "type": "boolean",
-        "default": "false",
         "source": "v-text-field"
       },
       {
@@ -661,9 +494,63 @@ module.exports = {
         "source": "v-text-field"
       },
       {
-        "name": "prependInnerIcon",
-        "type": "string",
+        "name": "readonly",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-input"
+      },
+      {
+        "name": "returnMaskedValue",
+        "type": "boolean",
+        "default": "false",
+        "source": "maskable"
+      },
+      {
+        "name": "returnObject",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-select"
+      },
+      {
+        "name": "reverse",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-text-field"
+      },
+      {
+        "name": "rules",
+        "type": "array",
+        "default": [],
+        "source": "validatable"
+      },
+      {
+        "name": "searchInput",
+        "type": "any",
         "default": "undefined",
+        "source": "v-select"
+      },
+      {
+        "name": "singleLine",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-text-field"
+      },
+      {
+        "name": "smallChips",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-select"
+      },
+      {
+        "name": "solo",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-text-field"
+      },
+      {
+        "name": "soloInverted",
+        "type": "boolean",
+        "default": "false",
         "source": "v-text-field"
       },
       {
@@ -671,18 +558,6 @@ module.exports = {
         "type": "boolean",
         "default": "false",
         "source": "validatable"
-      },
-      {
-        "name": "readonly",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-input"
-      },
-      {
-        "name": "tabindex",
-        "type": "any",
-        "default": 0,
-        "source": "v-input"
       },
       {
         "name": "successMessages",
@@ -694,55 +569,28 @@ module.exports = {
         "source": "validatable"
       },
       {
-        "name": "smallChips",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-select"
-      },
-      {
-        "name": "rules",
-        "type": "array",
-        "default": [],
-        "source": "validatable"
-      },
-      {
-        "name": "returnMaskedValue",
-        "type": "boolean",
-        "default": "false",
-        "source": "maskable"
-      },
-      {
-        "name": "searchInput",
-        "type": "any",
+        "name": "suffix",
+        "type": "string",
         "default": "undefined",
-        "source": "v-select"
+        "source": "v-text-field"
       },
       {
-        "name": "prependIconCb",
-        "type": "function",
-        "default": "null",
-        "source": "v-input"
-      },
-      {
-        "name": "returnObject",
+        "name": "textarea",
         "type": "boolean",
         "default": "false",
-        "source": "v-select"
-      },
-      {
-        "name": "transition",
-        "type": [
-          "boolean",
-          "string"
-        ],
-        "default": false,
-        "source": "v-menu"
+        "source": "v-text-field"
       },
       {
         "name": "type",
         "type": "string",
         "default": "'text'",
         "source": "v-text-field"
+      },
+      {
+        "name": "validateOnBlur",
+        "type": "boolean",
+        "default": "false",
+        "source": "validatable"
       },
       {
         "name": "value",
@@ -755,23 +603,11 @@ module.exports = {
         "type": "function",
         "default": "(a: any, b: any) => boolean",
         "source": "comparable"
-      },
-      {
-        "name": "zIndex",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": "undefined",
-        "source": "menuable"
       }
     ],
     "mixins": [
       "comparable",
-      "dependent",
-      "filterable",
-      "menuable",
-      "v-menu"
+      "filterable"
     ],
     "slots": [
       "append",
@@ -962,7 +798,7 @@ module.exports = {
         "name": "mandatory",
         "type": "boolean",
         "default": "false",
-        "source": "button-group"
+        "source": null
       },
       {
         "name": "shift",
@@ -979,10 +815,8 @@ module.exports = {
     ],
     "mixins": [
       "applicationable",
-      "button-group",
       "colorable",
-      "positionable",
-      "registrable-provide"
+      "positionable"
     ],
     "slots": [
       "default"
@@ -1061,6 +895,12 @@ module.exports = {
   "v-breadcrumbs": {
     "props": [
       {
+        "name": "dark",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
+      },
+      {
         "name": "divider",
         "type": "string",
         "default": "'/'",
@@ -1083,24 +923,23 @@ module.exports = {
         "type": "boolean",
         "default": "false",
         "source": null
+      },
+      {
+        "name": "light",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
       }
     ],
-    "mixins": [],
+    "mixins": [
+      "themeable"
+    ],
     "slots": [
       "default"
     ]
   },
   "v-breadcrumbs-item": {
     "props": [
-      {
-        "name": "to",
-        "type": [
-          "string",
-          "object"
-        ],
-        "default": "undefined",
-        "source": "routable"
-      },
       {
         "name": "activeClass",
         "type": "string",
@@ -1172,6 +1011,15 @@ module.exports = {
         "type": "string",
         "default": "undefined",
         "source": "routable"
+      },
+      {
+        "name": "to",
+        "type": [
+          "string",
+          "object"
+        ],
+        "default": "undefined",
+        "source": "routable"
       }
     ],
     "mixins": [
@@ -1181,19 +1029,23 @@ module.exports = {
       "default"
     ]
   },
+  "v-breadcrumbs-divider": {
+    "props": [],
+    "mixins": []
+  },
   "v-btn": {
     "props": [
       {
-        "name": "right",
+        "name": "absolute",
         "type": "boolean",
         "default": "false",
         "source": "positionable"
       },
       {
-        "name": "color",
+        "name": "activeClass",
         "type": "string",
-        "default": "undefined",
-        "source": "colorable"
+        "default": "'v-btn--active'",
+        "source": "routable"
       },
       {
         "name": "append",
@@ -1208,19 +1060,94 @@ module.exports = {
         "source": null
       },
       {
-        "name": "activeClass",
-        "type": "string",
-        "default": "'v-btn--active'",
-        "source": "routable"
-      },
-      {
         "name": "bottom",
         "type": "boolean",
         "default": "false",
         "source": "positionable"
       },
       {
-        "name": "absolute",
+        "name": "color",
+        "type": "string",
+        "default": "undefined",
+        "source": "colorable"
+      },
+      {
+        "name": "dark",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
+      },
+      {
+        "name": "depressed",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": "false",
+        "source": "routable"
+      },
+      {
+        "name": "exact",
+        "type": "boolean",
+        "default": "false",
+        "source": "routable"
+      },
+      {
+        "name": "exactActiveClass",
+        "type": "string",
+        "default": "undefined",
+        "source": "routable"
+      },
+      {
+        "name": "fab",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "fixed",
+        "type": "boolean",
+        "default": "false",
+        "source": "positionable"
+      },
+      {
+        "name": "flat",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "href",
+        "type": [
+          "string",
+          "object"
+        ],
+        "default": "undefined",
+        "source": "routable"
+      },
+      {
+        "name": "icon",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "inputValue",
+        "type": "any",
+        "default": "undefined",
+        "source": "toggleable"
+      },
+      {
+        "name": "large",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "left",
         "type": "boolean",
         "default": "false",
         "source": "positionable"
@@ -1232,13 +1159,22 @@ module.exports = {
         "source": "themeable"
       },
       {
-        "name": "to",
-        "type": [
-          "string",
-          "object"
-        ],
-        "default": "undefined",
+        "name": "loading",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "nuxt",
+        "type": "boolean",
+        "default": "false",
         "source": "routable"
+      },
+      {
+        "name": "outline",
+        "type": "boolean",
+        "default": "false",
+        "source": null
       },
       {
         "name": "replace",
@@ -1247,13 +1183,31 @@ module.exports = {
         "source": "routable"
       },
       {
+        "name": "right",
+        "type": "boolean",
+        "default": "false",
+        "source": "positionable"
+      },
+      {
         "name": "ripple",
         "type": [
           "boolean",
           "object"
         ],
-        "default": true,
+        "default": "undefined",
         "source": "routable"
+      },
+      {
+        "name": "round",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "small",
+        "type": "boolean",
+        "default": "false",
+        "source": null
       },
       {
         "name": "tag",
@@ -1268,115 +1222,13 @@ module.exports = {
         "source": "routable"
       },
       {
-        "name": "href",
+        "name": "to",
         "type": [
           "string",
           "object"
         ],
         "default": "undefined",
         "source": "routable"
-      },
-      {
-        "name": "exactActiveClass",
-        "type": "string",
-        "default": "undefined",
-        "source": "routable"
-      },
-      {
-        "name": "fixed",
-        "type": "boolean",
-        "default": "false",
-        "source": "positionable"
-      },
-      {
-        "name": "left",
-        "type": "boolean",
-        "default": "false",
-        "source": "positionable"
-      },
-      {
-        "name": "exact",
-        "type": "boolean",
-        "default": "false",
-        "source": "routable"
-      },
-      {
-        "name": "small",
-        "type": "boolean",
-        "default": "false",
-        "source": null
-      },
-      {
-        "name": "dark",
-        "type": "boolean",
-        "default": "false",
-        "source": "themeable"
-      },
-      {
-        "name": "nuxt",
-        "type": "boolean",
-        "default": "false",
-        "source": "routable"
-      },
-      {
-        "name": "inputValue",
-        "type": "any",
-        "default": "undefined",
-        "source": "toggleable"
-      },
-      {
-        "name": "disabled",
-        "type": "boolean",
-        "default": "false",
-        "source": "routable"
-      },
-      {
-        "name": "depressed",
-        "type": "boolean",
-        "default": "false",
-        "source": null
-      },
-      {
-        "name": "fab",
-        "type": "boolean",
-        "default": "false",
-        "source": null
-      },
-      {
-        "name": "flat",
-        "type": "boolean",
-        "default": "false",
-        "source": null
-      },
-      {
-        "name": "icon",
-        "type": "boolean",
-        "default": "false",
-        "source": null
-      },
-      {
-        "name": "large",
-        "type": "boolean",
-        "default": "false",
-        "source": null
-      },
-      {
-        "name": "loading",
-        "type": "boolean",
-        "default": "false",
-        "source": null
-      },
-      {
-        "name": "outline",
-        "type": "boolean",
-        "default": "false",
-        "source": null
-      },
-      {
-        "name": "round",
-        "type": "boolean",
-        "default": "false",
-        "source": null
       },
       {
         "name": "top",
@@ -1399,8 +1251,8 @@ module.exports = {
     ],
     "mixins": [
       "colorable",
+      "groupable",
       "positionable",
-      "registrable-inject",
       "routable",
       "themeable",
       "toggleable"
@@ -1412,16 +1264,16 @@ module.exports = {
   "v-btn-toggle": {
     "props": [
       {
+        "name": "activeClass",
+        "type": "string",
+        "default": "'v-btn--active'",
+        "source": null
+      },
+      {
         "name": "dark",
         "type": "boolean",
         "default": "false",
         "source": "themeable"
-      },
-      {
-        "name": "inputValue",
-        "type": "any",
-        "default": "undefined",
-        "source": null
       },
       {
         "name": "light",
@@ -1433,18 +1285,32 @@ module.exports = {
         "name": "mandatory",
         "type": "boolean",
         "default": "false",
-        "source": "button-group"
+        "source": null
+      },
+      {
+        "name": "max",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": "undefined",
+        "source": null
       },
       {
         "name": "multiple",
         "type": "boolean",
         "default": "false",
         "source": null
+      },
+      {
+        "name": "value",
+        "type": "any",
+        "default": "undefined",
+        "source": "proxyable"
       }
     ],
     "mixins": [
-      "button-group",
-      "registrable-provide",
+      "proxyable",
       "themeable"
     ],
     "slots": [
@@ -1460,9 +1326,15 @@ module.exports = {
   "v-card": {
     "props": [
       {
-        "name": "tag",
+        "name": "activeClass",
         "type": "string",
-        "default": "'div'",
+        "default": "undefined",
+        "source": "routable"
+      },
+      {
+        "name": "append",
+        "type": "boolean",
+        "default": "false",
         "source": "routable"
       },
       {
@@ -1472,28 +1344,10 @@ module.exports = {
         "source": "colorable"
       },
       {
-        "name": "append",
-        "type": "boolean",
-        "default": "false",
-        "source": "routable"
-      },
-      {
-        "name": "activeClass",
-        "type": "string",
-        "default": "undefined",
-        "source": "routable"
-      },
-      {
         "name": "dark",
         "type": "boolean",
         "default": "false",
         "source": "themeable"
-      },
-      {
-        "name": "exact",
-        "type": "boolean",
-        "default": "false",
-        "source": "routable"
       },
       {
         "name": "disabled",
@@ -1502,19 +1356,88 @@ module.exports = {
         "source": "routable"
       },
       {
-        "name": "light",
+        "name": "exact",
         "type": "boolean",
         "default": "false",
-        "source": "themeable"
+        "source": "routable"
       },
       {
-        "name": "to",
+        "name": "exactActiveClass",
+        "type": "string",
+        "default": "undefined",
+        "source": "routable"
+      },
+      {
+        "name": "flat",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "height",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": "undefined",
+        "source": "measurable"
+      },
+      {
+        "name": "hover",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "href",
         "type": [
           "string",
           "object"
         ],
         "default": "undefined",
         "source": "routable"
+      },
+      {
+        "name": "img",
+        "type": "string",
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "light",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
+      },
+      {
+        "name": "maxHeight",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": "undefined",
+        "source": "measurable"
+      },
+      {
+        "name": "maxWidth",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": "undefined",
+        "source": "measurable"
+      },
+      {
+        "name": "nuxt",
+        "type": "boolean",
+        "default": "false",
+        "source": "routable"
+      },
+      {
+        "name": "raised",
+        "type": "boolean",
+        "default": "false",
+        "source": null
       },
       {
         "name": "replace",
@@ -1532,12 +1455,9 @@ module.exports = {
         "source": "routable"
       },
       {
-        "name": "href",
-        "type": [
-          "string",
-          "object"
-        ],
-        "default": "undefined",
+        "name": "tag",
+        "type": "string",
+        "default": "'div'",
         "source": "routable"
       },
       {
@@ -1547,68 +1467,33 @@ module.exports = {
         "source": "routable"
       },
       {
-        "name": "exactActiveClass",
-        "type": "string",
-        "default": "undefined",
-        "source": "routable"
-      },
-      {
-        "name": "nuxt",
-        "type": "boolean",
-        "default": "false",
-        "source": "routable"
-      },
-      {
-        "name": "flat",
-        "type": "boolean",
-        "default": "false",
-        "source": null
-      },
-      {
-        "name": "height",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": "undefined",
-        "source": null
-      },
-      {
-        "name": "hover",
-        "type": "boolean",
-        "default": "false",
-        "source": null
-      },
-      {
-        "name": "img",
-        "type": "string",
-        "default": "undefined",
-        "source": null
-      },
-      {
-        "name": "raised",
-        "type": "boolean",
-        "default": "false",
-        "source": null
-      },
-      {
         "name": "tile",
         "type": "boolean",
         "default": "false",
         "source": null
       },
       {
-        "name": "width",
+        "name": "to",
         "type": [
           "string",
-          "number"
+          "object"
         ],
         "default": "undefined",
-        "source": null
+        "source": "routable"
+      },
+      {
+        "name": "width",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": "undefined",
+        "source": "measurable"
       }
     ],
     "mixins": [
       "colorable",
+      "measurable",
       "routable",
       "themeable"
     ],
@@ -1619,9 +1504,30 @@ module.exports = {
   "v-card-media": {
     "props": [
       {
+        "name": "alt",
+        "type": "string",
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "aspectRatio",
+        "type": [
+          "string",
+          "number"
+        ],
+        "default": "undefined",
+        "source": null
+      },
+      {
         "name": "contain",
         "type": "boolean",
         "default": "false",
+        "source": null
+      },
+      {
+        "name": "gradient",
+        "type": "string",
+        "default": "undefined",
         "source": null
       },
       {
@@ -1630,17 +1536,82 @@ module.exports = {
           "number",
           "string"
         ],
-        "default": "auto",
+        "default": "undefined",
+        "source": "measurable"
+      },
+      {
+        "name": "lazySrc",
+        "type": "string",
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "maxHeight",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": "undefined",
+        "source": "measurable"
+      },
+      {
+        "name": "maxWidth",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": "undefined",
+        "source": "measurable"
+      },
+      {
+        "name": "position",
+        "type": "string",
+        "default": "'center center'",
+        "source": null
+      },
+      {
+        "name": "sizes",
+        "type": "string",
+        "default": "undefined",
         "source": null
       },
       {
         "name": "src",
+        "type": [
+          "string",
+          "object"
+        ],
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "srcset",
         "type": "string",
         "default": "undefined",
         "source": null
+      },
+      {
+        "name": "transition",
+        "type": [
+          "boolean",
+          "string"
+        ],
+        "default": "fade-transition",
+        "source": null
+      },
+      {
+        "name": "width",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": "undefined",
+        "source": "measurable"
       }
     ],
-    "mixins": []
+    "mixins": [
+      "measurable"
+    ]
   },
   "v-card-title": {
     "props": [
@@ -1664,16 +1635,49 @@ module.exports = {
   "v-carousel": {
     "props": [
       {
+        "name": "activeClass",
+        "type": "string",
+        "default": "'v-item--active'",
+        "source": null
+      },
+      {
+        "name": "cycle",
+        "type": "boolean",
+        "default": "true",
+        "source": null
+      },
+      {
+        "name": "dark",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
+      },
+      {
+        "name": "delimiterIcon",
+        "type": "string",
+        "default": "'$vuetify.icons.delimiter'",
+        "source": null
+      },
+      {
+        "name": "height",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": 500,
+        "source": null
+      },
+      {
         "name": "hideControls",
         "type": "boolean",
         "default": "false",
         "source": null
       },
       {
-        "name": "lazy",
+        "name": "hideDelimiters",
         "type": "boolean",
         "default": "false",
-        "source": "bootable"
+        "source": null
       },
       {
         "name": "interval",
@@ -1685,34 +1689,31 @@ module.exports = {
         "source": null
       },
       {
-        "name": "cycle",
+        "name": "light",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
+      },
+      {
+        "name": "mandatory",
         "type": "boolean",
         "default": "true",
         "source": null
       },
       {
-        "name": "delimiterIcon",
-        "type": "string",
-        "default": "'$vuetify.icons.delimiter'",
+        "name": "max",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": "undefined",
         "source": null
       },
       {
-        "name": "dark",
-        "type": "boolean",
-        "default": "false",
-        "source": "themeable"
-      },
-      {
-        "name": "hideDelimiters",
+        "name": "multiple",
         "type": "boolean",
         "default": "false",
         "source": null
-      },
-      {
-        "name": "light",
-        "type": "boolean",
-        "default": "false",
-        "source": "themeable"
       },
       {
         "name": "nextIcon",
@@ -1733,15 +1734,32 @@ module.exports = {
         "source": null
       },
       {
+        "name": "reverse",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "touchless",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
         "name": "value",
-        "type": "number",
+        "type": "any",
         "default": "undefined",
+        "source": "proxyable"
+      },
+      {
+        "name": "vertical",
+        "type": "boolean",
+        "default": "false",
         "source": null
       }
     ],
     "mixins": [
-      "bootable",
-      "registrable-provide",
+      "proxyable",
       "themeable"
     ],
     "slots": [
@@ -1757,20 +1775,50 @@ module.exports = {
   "v-carousel-item": {
     "props": [
       {
-        "name": "reverseTransition",
+        "name": "activeClass",
         "type": "string",
-        "default": "'tab-reverse-transition'",
+        "source": "groupable"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": "false",
+        "source": "groupable"
+      },
+      {
+        "name": "lazy",
+        "type": "boolean",
+        "default": "false",
+        "source": "bootable"
+      },
+      {
+        "name": "reverseTransition",
+        "type": [
+          "boolean",
+          "string"
+        ],
+        "default": "undefined",
         "source": null
       },
       {
         "name": "transition",
-        "type": "string",
-        "default": "'tab-transition'",
+        "type": [
+          "boolean",
+          "string"
+        ],
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "value",
+        "type": "any",
+        "default": "undefined",
         "source": null
       }
     ],
     "mixins": [
-      "registrable-inject"
+      "bootable",
+      "groupable"
     ],
     "slots": [
       "default"
@@ -1779,19 +1827,7 @@ module.exports = {
   "v-checkbox": {
     "props": [
       {
-        "name": "label",
-        "type": "string",
-        "default": "undefined",
-        "source": "v-input"
-      },
-      {
-        "name": "color",
-        "type": "string",
-        "default": "'accent'",
-        "source": "colorable"
-      },
-      {
-        "name": "backgroundColor",
+        "name": "appendIcon",
         "type": "string",
         "default": "undefined",
         "source": "v-input"
@@ -1803,16 +1839,34 @@ module.exports = {
         "source": "v-input"
       },
       {
-        "name": "appendIcon",
+        "name": "backgroundColor",
         "type": "string",
         "default": "undefined",
         "source": "v-input"
       },
       {
-        "name": "prependIcon",
+        "name": "color",
         "type": "string",
-        "default": "undefined",
+        "default": "'accent'",
+        "source": "colorable"
+      },
+      {
+        "name": "dark",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": "false",
         "source": "v-input"
+      },
+      {
+        "name": "error",
+        "type": "boolean",
+        "default": "false",
+        "source": "validatable"
       },
       {
         "name": "errorCount",
@@ -1824,61 +1878,19 @@ module.exports = {
         "source": "validatable"
       },
       {
-        "name": "disabled",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-input"
-      },
-      {
-        "name": "dark",
-        "type": "boolean",
-        "default": "false",
-        "source": "themeable"
-      },
-      {
-        "name": "error",
-        "type": "boolean",
-        "default": "false",
-        "source": "validatable"
-      },
-      {
-        "name": "tabindex",
-        "type": "any",
-        "default": 0,
-        "source": "v-input"
-      },
-      {
-        "name": "offIcon",
-        "type": "string",
-        "default": "'$vuetify.icons.checkboxOff'",
-        "source": null
-      },
-      {
-        "name": "indeterminateIcon",
-        "type": "string",
-        "default": "'$vuetify.icons.checkboxIndeterminate'",
-        "source": null
-      },
-      {
-        "name": "light",
-        "type": "boolean",
-        "default": "false",
-        "source": "themeable"
-      },
-      {
-        "name": "indeterminate",
-        "type": "boolean",
-        "default": "false",
-        "source": null
-      },
-      {
-        "name": "messages",
+        "name": "errorMessages",
         "type": [
           "string",
           "array"
         ],
         "default": [],
         "source": "validatable"
+      },
+      {
+        "name": "falseValue",
+        "type": "any",
+        "default": "undefined",
+        "source": "selectable"
       },
       {
         "name": "height",
@@ -1902,6 +1914,42 @@ module.exports = {
         "source": "v-input"
       },
       {
+        "name": "id",
+        "type": "string",
+        "default": "undefined",
+        "source": "selectable"
+      },
+      {
+        "name": "indeterminate",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "indeterminateIcon",
+        "type": "string",
+        "default": "'$vuetify.icons.checkboxIndeterminate'",
+        "source": null
+      },
+      {
+        "name": "inputValue",
+        "type": "any",
+        "default": "undefined",
+        "source": "selectable"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "default": "undefined",
+        "source": "v-input"
+      },
+      {
+        "name": "light",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
+      },
+      {
         "name": "loading",
         "type": [
           "boolean",
@@ -1911,52 +1959,25 @@ module.exports = {
         "source": "loadable"
       },
       {
+        "name": "messages",
+        "type": [
+          "string",
+          "array"
+        ],
+        "default": [],
+        "source": "validatable"
+      },
+      {
         "name": "multiple",
         "type": "boolean",
         "default": "false",
         "source": "selectable"
       },
       {
-        "name": "errorMessages",
-        "type": [
-          "string",
-          "array"
-        ],
-        "default": [],
-        "source": "validatable"
-      },
-      {
-        "name": "falseValue",
-        "type": "any",
-        "default": "undefined",
-        "source": "selectable"
-      },
-      {
-        "name": "inputValue",
-        "type": "any",
-        "default": "undefined",
-        "source": "selectable"
-      },
-      {
-        "name": "id",
+        "name": "offIcon",
         "type": "string",
-        "default": "undefined",
-        "source": "selectable"
-      },
-      {
-        "name": "trueValue",
-        "type": "any",
-        "default": "undefined",
-        "source": "selectable"
-      },
-      {
-        "name": "successMessages",
-        "type": [
-          "string",
-          "array"
-        ],
-        "default": [],
-        "source": "validatable"
+        "default": "'$vuetify.icons.checkboxOff'",
+        "source": null
       },
       {
         "name": "onIcon",
@@ -1965,21 +1986,27 @@ module.exports = {
         "source": null
       },
       {
-        "name": "success",
+        "name": "persistentHint",
         "type": "boolean",
         "default": "false",
-        "source": "validatable"
+        "source": "v-input"
       },
       {
-        "name": "readonly",
-        "type": "boolean",
-        "default": "false",
+        "name": "prependIcon",
+        "type": "string",
+        "default": "undefined",
         "source": "v-input"
       },
       {
         "name": "prependIconCb",
         "type": "function",
         "default": "null",
+        "source": "v-input"
+      },
+      {
+        "name": "readonly",
+        "type": "boolean",
+        "default": "false",
         "source": "v-input"
       },
       {
@@ -1992,24 +2019,30 @@ module.exports = {
         "source": "rippleable"
       },
       {
-        "name": "persistentHint",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-input"
-      },
-      {
         "name": "rules",
         "type": "array",
         "default": [],
         "source": "validatable"
       },
       {
-        "name": "toggleKeys",
-        "type": "array",
-        "default": [
-          13,
-          32
+        "name": "success",
+        "type": "boolean",
+        "default": "false",
+        "source": "validatable"
+      },
+      {
+        "name": "successMessages",
+        "type": [
+          "string",
+          "array"
         ],
+        "default": [],
+        "source": "validatable"
+      },
+      {
+        "name": "trueValue",
+        "type": "any",
+        "default": "undefined",
         "source": "selectable"
       },
       {
@@ -2046,7 +2079,7 @@ module.exports = {
   "v-chip": {
     "props": [
       {
-        "name": "disabled",
+        "name": "close",
         "type": "boolean",
         "default": "false",
         "source": null
@@ -2058,16 +2091,16 @@ module.exports = {
         "source": "colorable"
       },
       {
-        "name": "close",
-        "type": "boolean",
-        "default": "false",
-        "source": null
-      },
-      {
         "name": "dark",
         "type": "boolean",
         "default": "false",
         "source": "themeable"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": "false",
+        "source": null
       },
       {
         "name": "label",
@@ -2130,76 +2163,10 @@ module.exports = {
   "v-combobox": {
     "props": [
       {
-        "name": "textarea",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-text-field"
-      },
-      {
-        "name": "color",
-        "type": "string",
-        "default": "'primary'",
-        "source": "colorable"
-      },
-      {
-        "name": "chips",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-select"
-      },
-      {
-        "name": "cacheItems",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-select"
-      },
-      {
-        "name": "attach",
-        "type": "any",
-        "default": false,
-        "source": "v-select"
-      },
-      {
         "name": "allowOverflow",
         "type": "boolean",
         "default": "true",
-        "source": "menuable"
-      },
-      {
-        "name": "activator",
-        "type": "any",
-        "default": "undefined",
-        "source": "menuable"
-      },
-      {
-        "name": "closeOnContentClick",
-        "type": "boolean",
-        "default": "true",
-        "source": "v-menu"
-      },
-      {
-        "name": "closeOnClick",
-        "type": "boolean",
-        "default": "true",
-        "source": "v-menu"
-      },
-      {
-        "name": "auto",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-menu"
-      },
-      {
-        "name": "clearIconCb",
-        "type": "function",
-        "default": "null",
-        "source": "v-text-field"
-      },
-      {
-        "name": "clearIcon",
-        "type": "string",
-        "default": "'$vuetify.icons.clear'",
-        "source": "v-text-field"
+        "source": "v-autocomplete"
       },
       {
         "name": "appendIcon",
@@ -2214,13 +2181,37 @@ module.exports = {
         "source": "v-input"
       },
       {
+        "name": "appendOuterIcon",
+        "type": "string",
+        "default": "undefined",
+        "source": "v-text-field"
+      },
+      {
+        "name": "appendOuterIconCb",
+        "type": "function",
+        "default": "null",
+        "source": "v-text-field"
+      },
+      {
+        "name": "attach",
+        "type": "any",
+        "default": false,
+        "source": "v-select"
+      },
+      {
+        "name": "autofocus",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-text-field"
+      },
+      {
         "name": "backgroundColor",
         "type": "string",
         "default": "undefined",
         "source": "v-input"
       },
       {
-        "name": "clearable",
+        "name": "box",
         "type": "boolean",
         "default": "false",
         "source": "v-text-field"
@@ -2232,58 +2223,40 @@ module.exports = {
         "source": "v-text-field"
       },
       {
-        "name": "box",
+        "name": "cacheItems",
         "type": "boolean",
         "default": "false",
+        "source": "v-select"
+      },
+      {
+        "name": "chips",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-select"
+      },
+      {
+        "name": "clearIcon",
+        "type": "string",
+        "default": "'$vuetify.icons.clear'",
         "source": "v-text-field"
       },
       {
-        "name": "autofocus",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-text-field"
-      },
-      {
-        "name": "appendOuterIconCb",
+        "name": "clearIconCb",
         "type": "function",
         "default": "null",
         "source": "v-text-field"
       },
       {
-        "name": "appendOuterIcon",
-        "type": "string",
-        "default": "undefined",
+        "name": "clearable",
+        "type": "boolean",
+        "default": "false",
         "source": "v-text-field"
       },
       {
-        "name": "origin",
+        "name": "color",
         "type": "string",
-        "default": "'top left'",
-        "source": "v-menu"
-      },
-      {
-        "name": "delimiters",
-        "type": "array",
-        "default": [],
-        "source": null
-      },
-      {
-        "name": "deletableChips",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-select"
-      },
-      {
-        "name": "contentClass",
-        "type": "string",
-        "default": "undefined",
-        "source": "v-select"
-      },
-      {
-        "name": "dark",
-        "type": "boolean",
-        "default": "false",
-        "source": "themeable"
+        "default": "'primary'",
+        "source": "colorable"
       },
       {
         "name": "counter",
@@ -2296,6 +2269,48 @@ module.exports = {
         "source": "v-text-field"
       },
       {
+        "name": "dark",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
+      },
+      {
+        "name": "deletableChips",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-select"
+      },
+      {
+        "name": "delimiters",
+        "type": "array",
+        "default": [],
+        "source": null
+      },
+      {
+        "name": "dense",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-select"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-input"
+      },
+      {
+        "name": "dontFillMaskBlanks",
+        "type": "boolean",
+        "default": "false",
+        "source": "maskable"
+      },
+      {
+        "name": "error",
+        "type": "boolean",
+        "default": "false",
+        "source": "validatable"
+      },
+      {
         "name": "errorCount",
         "type": [
           "number",
@@ -2305,74 +2320,19 @@ module.exports = {
         "source": "validatable"
       },
       {
-        "name": "mask",
+        "name": "errorMessages",
         "type": [
-          "object",
-          "string"
+          "string",
+          "array"
         ],
-        "default": "undefined",
-        "source": "maskable"
-      },
-      {
-        "name": "hideNoData",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-autocomplete"
-      },
-      {
-        "name": "label",
-        "type": "string",
-        "default": "undefined",
-        "source": "v-input"
-      },
-      {
-        "name": "hint",
-        "type": "string",
-        "default": "undefined",
-        "source": "v-input"
-      },
-      {
-        "name": "hideDetails",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-input"
-      },
-      {
-        "name": "height",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": "undefined",
-        "source": "v-input"
-      },
-      {
-        "name": "disabled",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-input"
+        "default": [],
+        "source": "validatable"
       },
       {
         "name": "filter",
         "type": "function",
         "default": "(item: object, queryText: string, itemText: string) => boolean",
         "source": "v-autocomplete"
-      },
-      {
-        "name": "itemValue",
-        "type": [
-          "string",
-          "array",
-          "function"
-        ],
-        "default": "value",
-        "source": "v-select"
-      },
-      {
-        "name": "dontFillMaskBlanks",
-        "type": "boolean",
-        "default": "false",
-        "source": "maskable"
       },
       {
         "name": "flat",
@@ -2387,13 +2347,46 @@ module.exports = {
         "source": "v-text-field"
       },
       {
-        "name": "itemText",
+        "name": "height",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": "undefined",
+        "source": "v-input"
+      },
+      {
+        "name": "hideDetails",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-input"
+      },
+      {
+        "name": "hideNoData",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-autocomplete"
+      },
+      {
+        "name": "hideSelected",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-select"
+      },
+      {
+        "name": "hint",
+        "type": "string",
+        "default": "undefined",
+        "source": "v-input"
+      },
+      {
+        "name": "itemAvatar",
         "type": [
           "string",
           "array",
           "function"
         ],
-        "default": "text",
+        "default": "avatar",
         "source": "v-select"
       },
       {
@@ -2407,13 +2400,23 @@ module.exports = {
         "source": "v-select"
       },
       {
-        "name": "itemAvatar",
+        "name": "itemText",
         "type": [
           "string",
           "array",
           "function"
         ],
-        "default": "avatar",
+        "default": "text",
+        "source": "v-select"
+      },
+      {
+        "name": "itemValue",
+        "type": [
+          "string",
+          "array",
+          "function"
+        ],
+        "default": "value",
         "source": "v-select"
       },
       {
@@ -2423,43 +2426,16 @@ module.exports = {
         "source": "v-select"
       },
       {
-        "name": "hideSelected",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-select"
-      },
-      {
-        "name": "dense",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-select"
+        "name": "label",
+        "type": "string",
+        "default": "undefined",
+        "source": "v-input"
       },
       {
         "name": "light",
         "type": "boolean",
         "default": "false",
         "source": "themeable"
-      },
-      {
-        "name": "error",
-        "type": "boolean",
-        "default": "false",
-        "source": "validatable"
-      },
-      {
-        "name": "inputActivator",
-        "type": "boolean",
-        "default": "false",
-        "source": "menuable"
-      },
-      {
-        "name": "errorMessages",
-        "type": [
-          "string",
-          "array"
-        ],
-        "default": [],
-        "source": "validatable"
       },
       {
         "name": "loading",
@@ -2471,25 +2447,31 @@ module.exports = {
         "source": "loadable"
       },
       {
-        "name": "zIndex",
+        "name": "mask",
         "type": [
-          "number",
+          "object",
           "string"
         ],
         "default": "undefined",
-        "source": "menuable"
+        "source": "maskable"
       },
       {
-        "name": "prependIcon",
-        "type": "string",
-        "default": "undefined",
-        "source": "v-input"
-      },
-      {
-        "name": "noFilter",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-autocomplete"
+        "name": "menuProps",
+        "type": [
+          "string",
+          "array",
+          "object"
+        ],
+        "default": {
+          "closeOnClick": false,
+          "closeOnContentClick": false,
+          "openOnClick": false,
+          "maxHeight": 300,
+          "offsetY": true,
+          "offsetOverflow": true,
+          "transition": false
+        },
+        "source": "v-select"
       },
       {
         "name": "messages",
@@ -2501,58 +2483,25 @@ module.exports = {
         "source": "validatable"
       },
       {
-        "name": "maxHeight",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": 300,
-        "source": "v-menu"
-      },
-      {
-        "name": "offsetX",
+        "name": "multiple",
         "type": "boolean",
         "default": "false",
-        "source": "v-menu"
+        "source": "v-select"
       },
       {
-        "name": "offsetY",
-        "type": "boolean",
-        "default": "true",
-        "source": "v-menu"
+        "name": "noDataText",
+        "type": "string",
+        "default": "'$vuetify.noDataText'",
+        "source": "filterable"
       },
       {
-        "name": "openOnClick",
-        "type": "boolean",
-        "default": "true",
-        "source": "v-menu"
-      },
-      {
-        "name": "openOnHover",
+        "name": "noFilter",
         "type": "boolean",
         "default": "false",
-        "source": "v-menu"
-      },
-      {
-        "name": "persistentHint",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-input"
+        "source": "v-autocomplete"
       },
       {
         "name": "openOnClear",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-select"
-      },
-      {
-        "name": "multiLine",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-select"
-      },
-      {
-        "name": "multiple",
         "type": "boolean",
         "default": "false",
         "source": "v-select"
@@ -2564,86 +2513,10 @@ module.exports = {
         "source": "v-text-field"
       },
       {
-        "name": "maxWidth",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": "auto",
-        "source": "menuable"
-      },
-      {
-        "name": "minWidth",
-        "type": [
-          "boolean",
-          "number",
-          "string"
-        ],
-        "default": 0,
-        "source": "menuable"
-      },
-      {
-        "name": "nudgeBottom",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": 0,
-        "source": "menuable"
-      },
-      {
-        "name": "nudgeLeft",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": 0,
-        "source": "menuable"
-      },
-      {
-        "name": "nudgeRight",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": 0,
-        "source": "menuable"
-      },
-      {
-        "name": "nudgeTop",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": 0,
-        "source": "menuable"
-      },
-      {
-        "name": "nudgeWidth",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": 0,
-        "source": "menuable"
-      },
-      {
-        "name": "offsetOverflow",
+        "name": "persistentHint",
         "type": "boolean",
-        "default": "true",
-        "source": "menuable"
-      },
-      {
-        "name": "positionX",
-        "type": "number",
-        "default": "undefined",
-        "source": "menuable"
-      },
-      {
-        "name": "positionY",
-        "type": "number",
-        "default": "undefined",
-        "source": "menuable"
+        "default": "false",
+        "source": "v-input"
       },
       {
         "name": "placeholder",
@@ -2658,22 +2531,49 @@ module.exports = {
         "source": "v-text-field"
       },
       {
-        "name": "noDataText",
+        "name": "prependIcon",
         "type": "string",
-        "default": "'$vuetify.noDataText'",
-        "source": "filterable"
+        "default": "undefined",
+        "source": "v-input"
       },
       {
-        "name": "successMessages",
-        "type": [
-          "string",
-          "array"
-        ],
-        "default": [],
-        "source": "validatable"
+        "name": "prependIconCb",
+        "type": "function",
+        "default": "null",
+        "source": "v-input"
       },
       {
-        "name": "solo",
+        "name": "prependInnerIcon",
+        "type": "string",
+        "default": "undefined",
+        "source": "v-text-field"
+      },
+      {
+        "name": "prependInnerIconCb",
+        "type": "function",
+        "default": "null",
+        "source": "v-text-field"
+      },
+      {
+        "name": "readonly",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-input"
+      },
+      {
+        "name": "returnMaskedValue",
+        "type": "boolean",
+        "default": "false",
+        "source": "maskable"
+      },
+      {
+        "name": "returnObject",
+        "type": "boolean",
+        "default": "true",
+        "source": "v-select"
+      },
+      {
+        "name": "reverse",
         "type": "boolean",
         "default": "false",
         "source": "v-text-field"
@@ -2685,51 +2585,9 @@ module.exports = {
         "source": "validatable"
       },
       {
-        "name": "prependIconCb",
-        "type": "function",
-        "default": "null",
-        "source": "v-input"
-      },
-      {
-        "name": "readonly",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-input"
-      },
-      {
-        "name": "reverse",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-text-field"
-      },
-      {
-        "name": "prependInnerIconCb",
-        "type": "function",
-        "default": "null",
-        "source": "v-text-field"
-      },
-      {
-        "name": "prependInnerIcon",
-        "type": "string",
-        "default": "undefined",
-        "source": "v-text-field"
-      },
-      {
-        "name": "smallChips",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-select"
-      },
-      {
         "name": "searchInput",
         "type": "any",
         "default": "undefined",
-        "source": "v-select"
-      },
-      {
-        "name": "returnObject",
-        "type": "boolean",
-        "default": "true",
         "source": "v-select"
       },
       {
@@ -2739,10 +2597,16 @@ module.exports = {
         "source": "v-text-field"
       },
       {
-        "name": "returnMaskedValue",
+        "name": "smallChips",
         "type": "boolean",
         "default": "false",
-        "source": "maskable"
+        "source": "v-select"
+      },
+      {
+        "name": "solo",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-text-field"
       },
       {
         "name": "soloInverted",
@@ -2757,25 +2621,25 @@ module.exports = {
         "source": "validatable"
       },
       {
+        "name": "successMessages",
+        "type": [
+          "string",
+          "array"
+        ],
+        "default": [],
+        "source": "validatable"
+      },
+      {
         "name": "suffix",
         "type": "string",
         "default": "undefined",
         "source": "v-text-field"
       },
       {
-        "name": "tabindex",
-        "type": "any",
-        "default": 0,
-        "source": "v-input"
-      },
-      {
-        "name": "transition",
-        "type": [
-          "boolean",
-          "string"
-        ],
-        "default": false,
-        "source": "v-menu"
+        "name": "textarea",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-text-field"
       },
       {
         "name": "type",
@@ -2804,10 +2668,7 @@ module.exports = {
     ],
     "mixins": [
       "comparable",
-      "dependent",
-      "filterable",
-      "menuable",
-      "v-menu"
+      "filterable"
     ],
     "slots": [
       "append",
@@ -2859,6 +2720,18 @@ module.exports = {
   "v-counter": {
     "props": [
       {
+        "name": "dark",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
+      },
+      {
+        "name": "light",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
+      },
+      {
         "name": "max",
         "type": [
           "number",
@@ -2877,36 +2750,17 @@ module.exports = {
         "source": null
       }
     ],
-    "mixins": []
+    "mixins": [
+      "themeable"
+    ]
   },
   "v-data-iterator": {
     "props": [
-      {
-        "name": "selectAll",
-        "type": [
-          "boolean",
-          "string"
-        ],
-        "default": "undefined",
-        "source": "data-iterable"
-      },
       {
         "name": "contentClass",
         "type": "string",
         "default": "undefined",
         "source": null
-      },
-      {
-        "name": "search",
-        "type": "any",
-        "default": "undefined",
-        "source": "data-iterable"
-      },
-      {
-        "name": "dark",
-        "type": "boolean",
-        "default": "false",
-        "source": "themeable"
       },
       {
         "name": "contentProps",
@@ -2921,16 +2775,22 @@ module.exports = {
         "source": null
       },
       {
+        "name": "customFilter",
+        "type": "function",
+        "default": "(items: object[], search: string, filter: Filter): object[]",
+        "source": "data-iterable"
+      },
+      {
         "name": "customSort",
         "type": "function",
         "default": "(items: object[], index: number, isDescending: boolean): object[]",
         "source": "data-iterable"
       },
       {
-        "name": "customFilter",
-        "type": "function",
-        "default": "(items: object[], search: string, filter: Filter): object[]",
-        "source": "data-iterable"
+        "name": "dark",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
       },
       {
         "name": "disableInitialSort",
@@ -2939,15 +2799,15 @@ module.exports = {
         "source": "data-iterable"
       },
       {
-        "name": "noDataText",
-        "type": "string",
-        "default": "'$vuetify.noDataText'",
-        "source": "filterable"
-      },
-      {
         "name": "expand",
         "type": "boolean",
         "default": "false",
+        "source": "data-iterable"
+      },
+      {
+        "name": "filter",
+        "type": "function",
+        "default": "(val: object, search: string): boolean",
         "source": "data-iterable"
       },
       {
@@ -2963,13 +2823,10 @@ module.exports = {
         "source": "data-iterable"
       },
       {
-        "name": "loading",
-        "type": [
-          "boolean",
-          "string"
-        ],
-        "default": false,
-        "source": "loadable"
+        "name": "items",
+        "type": "array",
+        "default": [],
+        "source": "data-iterable"
       },
       {
         "name": "light",
@@ -2978,10 +2835,13 @@ module.exports = {
         "source": "themeable"
       },
       {
-        "name": "filter",
-        "type": "function",
-        "default": "(val: object, search: string): boolean",
-        "source": "data-iterable"
+        "name": "loading",
+        "type": [
+          "boolean",
+          "string"
+        ],
+        "default": false,
+        "source": "loadable"
       },
       {
         "name": "mustSort",
@@ -2996,10 +2856,10 @@ module.exports = {
         "source": "data-iterable"
       },
       {
-        "name": "items",
-        "type": "array",
-        "default": [],
-        "source": "data-iterable"
+        "name": "noDataText",
+        "type": "string",
+        "default": "'$vuetify.noDataText'",
+        "source": "filterable"
       },
       {
         "name": "noResultsText",
@@ -3040,6 +2900,21 @@ module.exports = {
         "source": "data-iterable"
       },
       {
+        "name": "search",
+        "type": "any",
+        "default": "undefined",
+        "source": "data-iterable"
+      },
+      {
+        "name": "selectAll",
+        "type": [
+          "boolean",
+          "string"
+        ],
+        "default": "undefined",
+        "source": "data-iterable"
+      },
+      {
         "name": "totalItems",
         "type": "number",
         "default": "undefined",
@@ -3059,6 +2934,14 @@ module.exports = {
       "themeable"
     ],
     "slots": [
+      {
+        "name": "actions-append",
+        "source": "data-iterable"
+      },
+      {
+        "name": "actions-prepend",
+        "source": "data-iterable"
+      },
       {
         "name": "footer",
         "source": "data-iterable"
@@ -3109,16 +2992,16 @@ module.exports = {
   "v-data-table": {
     "props": [
       {
-        "name": "search",
-        "type": "any",
-        "default": "undefined",
+        "name": "customFilter",
+        "type": "function",
+        "default": "(items: object[], search: string, filter: Filter): object[]",
         "source": "data-iterable"
       },
       {
-        "name": "hideHeaders",
-        "type": "boolean",
-        "default": "false",
-        "source": null
+        "name": "customSort",
+        "type": "function",
+        "default": "(items: object[], index: number, isDescending: boolean): object[]",
+        "source": "data-iterable"
       },
       {
         "name": "dark",
@@ -3127,10 +3010,10 @@ module.exports = {
         "source": "themeable"
       },
       {
-        "name": "headerText",
-        "type": "string",
-        "default": "'text'",
-        "source": null
+        "name": "disableInitialSort",
+        "type": "boolean",
+        "default": "false",
+        "source": "data-iterable"
       },
       {
         "name": "expand",
@@ -3139,21 +3022,21 @@ module.exports = {
         "source": "data-iterable"
       },
       {
-        "name": "hideActions",
-        "type": "boolean",
-        "default": "false",
+        "name": "filter",
+        "type": "function",
+        "default": "(val: object, search: string): boolean",
         "source": "data-iterable"
       },
       {
-        "name": "disableInitialSort",
-        "type": "boolean",
-        "default": "false",
-        "source": "data-iterable"
-      },
-      {
-        "name": "headersLength",
-        "type": "number",
+        "name": "headerKey",
+        "type": "string",
         "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "headerText",
+        "type": "string",
+        "default": "'text'",
         "source": null
       },
       {
@@ -3171,34 +3054,40 @@ module.exports = {
         }
       },
       {
-        "name": "customSort",
-        "type": "function",
-        "default": "(items: object[], index: number, isDescending: boolean): object[]",
-        "source": "data-iterable"
-      },
-      {
-        "name": "customFilter",
-        "type": "function",
-        "default": "(items: object[], search: string, filter: Filter): object[]",
-        "source": "data-iterable"
-      },
-      {
-        "name": "filter",
-        "type": "function",
-        "default": "(val: object, search: string): boolean",
-        "source": "data-iterable"
-      },
-      {
-        "name": "totalItems",
+        "name": "headersLength",
         "type": "number",
         "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "hideActions",
+        "type": "boolean",
+        "default": "false",
         "source": "data-iterable"
       },
       {
-        "name": "noDataText",
+        "name": "hideHeaders",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "itemKey",
         "type": "string",
-        "default": "'$vuetify.noDataText'",
-        "source": "filterable"
+        "default": "'id'",
+        "source": "data-iterable"
+      },
+      {
+        "name": "items",
+        "type": "array",
+        "default": [],
+        "source": "data-iterable"
+      },
+      {
+        "name": "light",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
       },
       {
         "name": "loading",
@@ -3208,12 +3097,6 @@ module.exports = {
         ],
         "default": false,
         "source": "loadable"
-      },
-      {
-        "name": "light",
-        "type": "boolean",
-        "default": "false",
-        "source": "themeable"
       },
       {
         "name": "mustSort",
@@ -3228,16 +3111,10 @@ module.exports = {
         "source": "data-iterable"
       },
       {
-        "name": "itemKey",
+        "name": "noDataText",
         "type": "string",
-        "default": "'id'",
-        "source": "data-iterable"
-      },
-      {
-        "name": "items",
-        "type": "array",
-        "default": [],
-        "source": "data-iterable"
+        "default": "'$vuetify.noDataText'",
+        "source": "filterable"
       },
       {
         "name": "noResultsText",
@@ -3278,6 +3155,12 @@ module.exports = {
         "source": "data-iterable"
       },
       {
+        "name": "search",
+        "type": "any",
+        "default": "undefined",
+        "source": "data-iterable"
+      },
+      {
         "name": "selectAll",
         "type": [
           "boolean",
@@ -3293,6 +3176,12 @@ module.exports = {
         "source": null
       },
       {
+        "name": "totalItems",
+        "type": "number",
+        "default": "undefined",
+        "source": "data-iterable"
+      },
+      {
         "name": "value",
         "type": "array",
         "default": [],
@@ -3306,6 +3195,14 @@ module.exports = {
       "themeable"
     ],
     "slots": [
+      {
+        "name": "actions-append",
+        "source": "data-iterable"
+      },
+      {
+        "name": "actions-prepend",
+        "source": "data-iterable"
+      },
       {
         "name": "footer",
         "source": "data-iterable"
@@ -3375,6 +3272,12 @@ module.exports = {
         "source": null
       },
       {
+        "name": "dark",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
+      },
+      {
         "name": "large",
         "type": "boolean",
         "default": "false",
@@ -3385,6 +3288,12 @@ module.exports = {
         "type": "boolean",
         "default": "false",
         "source": null
+      },
+      {
+        "name": "light",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
       },
       {
         "name": "persistent",
@@ -3412,7 +3321,8 @@ module.exports = {
       }
     ],
     "mixins": [
-      "returnable"
+      "returnable",
+      "themeable"
     ],
     "slots": [
       "default",
@@ -3444,9 +3354,9 @@ module.exports = {
   "v-date-picker": {
     "props": [
       {
-        "name": "max",
-        "type": "string",
-        "default": "undefined",
+        "name": "allowedDates",
+        "type": "function",
+        "default": "null",
         "source": null
       },
       {
@@ -3456,36 +3366,15 @@ module.exports = {
         "source": "colorable"
       },
       {
-        "name": "allowedDates",
-        "type": "function",
-        "default": "null",
-        "source": null
-      },
-      {
-        "name": "min",
-        "type": "string",
-        "default": "undefined",
-        "source": null
-      },
-      {
-        "name": "fullWidth",
-        "type": "boolean",
-        "default": "false",
-        "source": "picker"
-      },
-      {
         "name": "dark",
         "type": "boolean",
         "default": "false",
         "source": "themeable"
       },
       {
-        "name": "firstDayOfWeek",
-        "type": [
-          "string",
-          "number"
-        ],
-        "default": 0,
+        "name": "dayFormat",
+        "type": "function",
+        "default": "null",
         "source": null
       },
       {
@@ -3509,22 +3398,19 @@ module.exports = {
         "source": null
       },
       {
-        "name": "dayFormat",
-        "type": "function",
-        "default": "null",
+        "name": "firstDayOfWeek",
+        "type": [
+          "string",
+          "number"
+        ],
+        "default": 0,
         "source": null
       },
       {
-        "name": "prevIcon",
-        "type": "string",
-        "default": "'$vuetify.icons.prev'",
-        "source": null
-      },
-      {
-        "name": "light",
+        "name": "fullWidth",
         "type": "boolean",
         "default": "false",
-        "source": "themeable"
+        "source": "picker"
       },
       {
         "name": "headerColor",
@@ -3545,10 +3431,10 @@ module.exports = {
         "source": "picker"
       },
       {
-        "name": "readonly",
+        "name": "light",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "themeable"
       },
       {
         "name": "locale",
@@ -3557,9 +3443,15 @@ module.exports = {
         "source": null
       },
       {
-        "name": "scrollable",
-        "type": "boolean",
-        "default": "false",
+        "name": "max",
+        "type": "string",
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "min",
+        "type": "string",
+        "default": "undefined",
         "source": null
       },
       {
@@ -3569,18 +3461,9 @@ module.exports = {
         "source": null
       },
       {
-        "name": "showCurrent",
-        "type": [
-          "boolean",
-          "string"
-        ],
-        "default": true,
-        "source": null
-      },
-      {
-        "name": "pickerDate",
-        "type": "string",
-        "default": "undefined",
+        "name": "multiple",
+        "type": "boolean",
+        "default": "false",
         "source": null
       },
       {
@@ -3596,9 +3479,42 @@ module.exports = {
         "source": "picker"
       },
       {
+        "name": "pickerDate",
+        "type": "string",
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "prevIcon",
+        "type": "string",
+        "default": "'$vuetify.icons.prev'",
+        "source": null
+      },
+      {
         "name": "reactive",
         "type": "boolean",
         "default": "false",
+        "source": null
+      },
+      {
+        "name": "readonly",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "scrollable",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "showCurrent",
+        "type": [
+          "boolean",
+          "string"
+        ],
+        "default": true,
         "source": null
       },
       {
@@ -3615,7 +3531,10 @@ module.exports = {
       },
       {
         "name": "value",
-        "type": "string",
+        "type": [
+          "array",
+          "string"
+        ],
         "default": "undefined",
         "source": null
       },
@@ -3720,12 +3639,6 @@ module.exports = {
   "v-date-picker-header": {
     "props": [
       {
-        "name": "locale",
-        "type": "string",
-        "default": "'en-us'",
-        "source": null
-      },
-      {
         "name": "color",
         "type": "string",
         "default": "undefined",
@@ -3754,6 +3667,12 @@ module.exports = {
         "type": "boolean",
         "default": "false",
         "source": "themeable"
+      },
+      {
+        "name": "locale",
+        "type": "string",
+        "default": "'en-us'",
+        "source": null
       },
       {
         "name": "max",
@@ -3797,9 +3716,9 @@ module.exports = {
   "v-date-picker-date-table": {
     "props": [
       {
-        "name": "scrollable",
-        "type": "boolean",
-        "default": "false",
+        "name": "allowedDates",
+        "type": "function",
+        "default": "null",
         "source": null
       },
       {
@@ -3809,21 +3728,9 @@ module.exports = {
         "source": "colorable"
       },
       {
-        "name": "allowedDates",
-        "type": "function",
-        "default": "null",
-        "source": null
-      },
-      {
-        "name": "value",
+        "name": "current",
         "type": "string",
         "default": "undefined",
-        "source": null
-      },
-      {
-        "name": "disabled",
-        "type": "boolean",
-        "default": "false",
         "source": null
       },
       {
@@ -3833,9 +3740,9 @@ module.exports = {
         "source": "themeable"
       },
       {
-        "name": "current",
-        "type": "string",
-        "default": "undefined",
+        "name": "disabled",
+        "type": "boolean",
+        "default": "false",
         "source": null
       },
       {
@@ -3898,8 +3805,23 @@ module.exports = {
         "source": null
       },
       {
+        "name": "scrollable",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
         "name": "tableDate",
         "type": "string",
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "value",
+        "type": [
+          "string",
+          "array"
+        ],
         "default": "undefined",
         "source": null
       },
@@ -3918,9 +3840,9 @@ module.exports = {
   "v-date-picker-month-table": {
     "props": [
       {
-        "name": "min",
-        "type": "string",
-        "default": "undefined",
+        "name": "allowedDates",
+        "type": "function",
+        "default": "null",
         "source": null
       },
       {
@@ -3928,12 +3850,6 @@ module.exports = {
         "type": "string",
         "default": "undefined",
         "source": "colorable"
-      },
-      {
-        "name": "allowedDates",
-        "type": "function",
-        "default": "null",
-        "source": null
       },
       {
         "name": "current",
@@ -3978,6 +3894,12 @@ module.exports = {
         "source": null
       },
       {
+        "name": "min",
+        "type": "string",
+        "default": "undefined",
+        "source": null
+      },
+      {
         "name": "scrollable",
         "type": "boolean",
         "default": "false",
@@ -3991,7 +3913,10 @@ module.exports = {
       },
       {
         "name": "value",
-        "type": "string",
+        "type": [
+          "string",
+          "array"
+        ],
         "default": "undefined",
         "source": null
       }
@@ -4056,16 +3981,10 @@ module.exports = {
   "v-dialog": {
     "props": [
       {
-        "name": "fullscreen",
-        "type": "boolean",
-        "default": "false",
-        "source": null
-      },
-      {
-        "name": "lazy",
-        "type": "boolean",
-        "default": "false",
-        "source": "bootable"
+        "name": "attach",
+        "type": "any",
+        "default": false,
+        "source": "detachable"
       },
       {
         "name": "contentClass",
@@ -4074,10 +3993,16 @@ module.exports = {
         "source": "detachable"
       },
       {
-        "name": "hideOverlay",
+        "name": "dark",
         "type": "boolean",
         "default": "false",
-        "source": "overlayable"
+        "source": null
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": "false",
+        "source": null
       },
       {
         "name": "fullWidth",
@@ -4086,13 +4011,25 @@ module.exports = {
         "source": null
       },
       {
-        "name": "attach",
-        "type": "any",
-        "default": false,
-        "source": "detachable"
+        "name": "fullscreen",
+        "type": "boolean",
+        "default": "false",
+        "source": null
       },
       {
-        "name": "disabled",
+        "name": "hideOverlay",
+        "type": "boolean",
+        "default": "false",
+        "source": "overlayable"
+      },
+      {
+        "name": "lazy",
+        "type": "boolean",
+        "default": "false",
+        "source": "bootable"
+      },
+      {
+        "name": "light",
         "type": "boolean",
         "default": "false",
         "source": null
@@ -4433,45 +4370,8 @@ module.exports = {
       }
     ]
   },
-  "v-content": {
-    "props": [
-      {
-        "name": "tag",
-        "type": "string",
-        "default": "'main'",
-        "source": null
-      }
-    ],
-    "mixins": [
-      "ssr-bootable"
-    ]
-  },
   "v-container": {
     "props": [
-      {
-        "name": "id",
-        "type": "String",
-        "default": "undefined",
-        "source": null
-      },
-      {
-        "name": "tag",
-        "type": "String",
-        "default": "div",
-        "source": null
-      },
-      {
-        "name": "grid-list-{xs through xl}",
-        "type": "Boolean",
-        "default": "false",
-        "source": null
-      },
-      {
-        "name": "fluid",
-        "type": "Boolean",
-        "default": "false",
-        "source": null
-      },
       {
         "name": "alignBaseline",
         "type": "Boolean",
@@ -4539,6 +4439,24 @@ module.exports = {
         "source": null
       },
       {
+        "name": "fluid",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "grid-list-{xs through xl}",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "id",
+        "type": "String",
+        "default": "undefined",
+        "source": null
+      },
+      {
         "name": "justifyCenter",
         "type": "Boolean",
         "default": "false",
@@ -4575,6 +4493,12 @@ module.exports = {
         "source": null
       },
       {
+        "name": "tag",
+        "type": "String",
+        "default": "div",
+        "source": null
+      },
+      {
         "name": "wrap",
         "type": "Boolean",
         "default": "false",
@@ -4583,32 +4507,21 @@ module.exports = {
     ],
     "mixins": []
   },
-  "v-flex": {
+  "v-content": {
     "props": [
       {
-        "name": "id",
-        "type": "String",
-        "default": "undefined",
-        "source": null
-      },
-      {
         "name": "tag",
-        "type": "String",
-        "default": "div",
+        "type": "string",
+        "default": "'main'",
         "source": null
-      },
-      {
-        "name": "offset-(size)(0-12)",
-        "type": "Boolean",
-        "default": "false",
-        "source": null
-      },
-      {
-        "name": "order-(size)(0-12)",
-        "type": "Boolean",
-        "default": "false",
-        "source": null
-      },
+      }
+    ],
+    "mixins": [
+      "ssr-bootable"
+    ]
+  },
+  "v-flex": {
+    "props": [
       {
         "name": "(size)(1-12)",
         "type": "Boolean",
@@ -4682,6 +4595,12 @@ module.exports = {
         "source": null
       },
       {
+        "name": "id",
+        "type": "String",
+        "default": "undefined",
+        "source": null
+      },
+      {
         "name": "justifyCenter",
         "type": "Boolean",
         "default": "false",
@@ -4712,9 +4631,27 @@ module.exports = {
         "source": null
       },
       {
+        "name": "offset-(size)(0-12)",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "order-(size)(0-12)",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
         "name": "reverse",
         "type": "Boolean",
         "default": "false",
+        "source": null
+      },
+      {
+        "name": "tag",
+        "type": "String",
+        "default": "div",
         "source": null
       },
       {
@@ -4728,30 +4665,6 @@ module.exports = {
   },
   "v-layout": {
     "props": [
-      {
-        "name": "id",
-        "type": "String",
-        "default": "undefined",
-        "source": null
-      },
-      {
-        "name": "tag",
-        "type": "String",
-        "default": "div",
-        "source": null
-      },
-      {
-        "name": "row",
-        "type": "Boolean",
-        "default": "true",
-        "source": null
-      },
-      {
-        "name": "column",
-        "type": "Boolean",
-        "default": "false",
-        "source": null
-      },
       {
         "name": "alignBaseline",
         "type": "Boolean",
@@ -4807,6 +4720,12 @@ module.exports = {
         "source": null
       },
       {
+        "name": "column",
+        "type": "Boolean",
+        "default": "false",
+        "source": null
+      },
+      {
         "name": "d-{type}",
         "type": "Boolean",
         "default": "false",
@@ -4816,6 +4735,12 @@ module.exports = {
         "name": "fillHeight",
         "type": "Boolean",
         "default": "false",
+        "source": null
+      },
+      {
+        "name": "id",
+        "type": "String",
+        "default": "undefined",
         "source": null
       },
       {
@@ -4855,6 +4780,18 @@ module.exports = {
         "source": null
       },
       {
+        "name": "row",
+        "type": "Boolean",
+        "default": "true",
+        "source": null
+      },
+      {
+        "name": "tag",
+        "type": "String",
+        "default": "div",
+        "source": null
+      },
+      {
         "name": "wrap",
         "type": "Boolean",
         "default": "false",
@@ -4867,14 +4804,54 @@ module.exports = {
     "props": [],
     "mixins": []
   },
-  "v-icon": {
+  "v-hover": {
     "props": [
       {
-        "name": "left",
+        "name": "closeDelay",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": 0,
+        "source": "delayable"
+      },
+      {
+        "name": "disabled",
         "type": "boolean",
         "default": "false",
         "source": null
       },
+      {
+        "name": "openDelay",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": 0,
+        "source": "delayable"
+      },
+      {
+        "name": "value",
+        "type": "boolean",
+        "default": "false",
+        "source": "toggleable"
+      }
+    ],
+    "mixins": [
+      "delayable",
+      "toggleable"
+    ],
+    "scopedSlots": [
+      {
+        "name": "default",
+        "props": {
+          "hover": "boolean"
+        }
+      }
+    ]
+  },
+  "v-icon": {
+    "props": [
       {
         "name": "color",
         "type": "string",
@@ -4897,6 +4874,12 @@ module.exports = {
         "name": "large",
         "type": "boolean",
         "default": "false",
+        "source": "sizeable"
+      },
+      {
+        "name": "left",
+        "type": "boolean",
+        "default": "false",
         "source": null
       },
       {
@@ -4909,7 +4892,7 @@ module.exports = {
         "name": "medium",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "sizeable"
       },
       {
         "name": "right",
@@ -4924,23 +4907,24 @@ module.exports = {
           "string"
         ],
         "default": "undefined",
-        "source": null
+        "source": "sizeable"
       },
       {
         "name": "small",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "sizeable"
       },
       {
         "name": "xLarge",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "sizeable"
       }
     ],
     "mixins": [
       "colorable",
+      "sizeable",
       "themeable"
     ],
     "slots": [
@@ -4949,12 +4933,6 @@ module.exports = {
   },
   "v-img": {
     "props": [
-      {
-        "name": "srcset",
-        "type": "string",
-        "default": "undefined",
-        "source": null
-      },
       {
         "name": "alt",
         "type": "string",
@@ -4977,13 +4955,19 @@ module.exports = {
         "source": null
       },
       {
-        "name": "height",
-        "type": [
-          "string",
-          "number"
-        ],
+        "name": "gradient",
+        "type": "string",
         "default": "undefined",
         "source": null
+      },
+      {
+        "name": "height",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": "undefined",
+        "source": "measurable"
       },
       {
         "name": "lazySrc",
@@ -4994,11 +4978,20 @@ module.exports = {
       {
         "name": "maxHeight",
         "type": [
-          "string",
-          "number"
+          "number",
+          "string"
         ],
         "default": "undefined",
-        "source": null
+        "source": "measurable"
+      },
+      {
+        "name": "maxWidth",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": "undefined",
+        "source": "measurable"
       },
       {
         "name": "position",
@@ -5022,20 +5015,52 @@ module.exports = {
         "source": null
       },
       {
-        "name": "transition",
+        "name": "srcset",
         "type": "string",
-        "default": "'fade-transition'",
+        "default": "undefined",
         "source": null
+      },
+      {
+        "name": "transition",
+        "type": [
+          "boolean",
+          "string"
+        ],
+        "default": "fade-transition",
+        "source": null
+      },
+      {
+        "name": "width",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": "undefined",
+        "source": "measurable"
       }
     ],
-    "mixins": []
+    "mixins": [
+      "measurable"
+    ]
   },
   "v-input": {
     "props": [
       {
+        "name": "appendIcon",
+        "type": "string",
+        "default": "undefined",
+        "source": null
+      },
+      {
         "name": "appendIconCb",
         "type": "function",
         "default": "null",
+        "source": null
+      },
+      {
+        "name": "backgroundColor",
+        "type": "string",
+        "default": "undefined",
         "source": null
       },
       {
@@ -5045,16 +5070,10 @@ module.exports = {
         "source": "colorable"
       },
       {
-        "name": "backgroundColor",
-        "type": "string",
-        "default": "undefined",
-        "source": null
-      },
-      {
-        "name": "appendIcon",
-        "type": "string",
-        "default": "undefined",
-        "source": null
+        "name": "dark",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
       },
       {
         "name": "disabled",
@@ -5069,10 +5088,22 @@ module.exports = {
         "source": "validatable"
       },
       {
-        "name": "dark",
-        "type": "boolean",
-        "default": "false",
-        "source": "themeable"
+        "name": "errorCount",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": 1,
+        "source": "validatable"
+      },
+      {
+        "name": "errorMessages",
+        "type": [
+          "string",
+          "array"
+        ],
+        "default": [],
+        "source": "validatable"
       },
       {
         "name": "height",
@@ -5084,18 +5115,9 @@ module.exports = {
         "source": null
       },
       {
-        "name": "messages",
-        "type": [
-          "string",
-          "array"
-        ],
-        "default": [],
-        "source": "validatable"
-      },
-      {
-        "name": "label",
-        "type": "string",
-        "default": "undefined",
+        "name": "hideDetails",
+        "type": "boolean",
+        "default": "false",
         "source": null
       },
       {
@@ -5105,9 +5127,9 @@ module.exports = {
         "source": null
       },
       {
-        "name": "hideDetails",
-        "type": "boolean",
-        "default": "false",
+        "name": "label",
+        "type": "string",
+        "default": "undefined",
         "source": null
       },
       {
@@ -5126,21 +5148,12 @@ module.exports = {
         "source": "loadable"
       },
       {
-        "name": "errorMessages",
+        "name": "messages",
         "type": [
           "string",
           "array"
         ],
         "default": [],
-        "source": "validatable"
-      },
-      {
-        "name": "errorCount",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": 1,
         "source": "validatable"
       },
       {
@@ -5189,12 +5202,6 @@ module.exports = {
         "source": "validatable"
       },
       {
-        "name": "tabindex",
-        "type": "any",
-        "default": 0,
-        "source": null
-      },
-      {
         "name": "validateOnBlur",
         "type": "boolean",
         "default": "false",
@@ -5216,10 +5223,93 @@ module.exports = {
       "validatable"
     ]
   },
+  "v-item": {
+    "props": [
+      {
+        "name": "activeClass",
+        "type": "string",
+        "source": "groupable"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": "false",
+        "source": "groupable"
+      },
+      {
+        "name": "value",
+        "type": "any",
+        "default": "undefined",
+        "source": null
+      }
+    ],
+    "mixins": [
+      "groupable"
+    ]
+  },
+  "v-item-group": {
+    "props": [
+      {
+        "name": "activeClass",
+        "type": "string",
+        "default": "'v-item--active'",
+        "source": null
+      },
+      {
+        "name": "dark",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
+      },
+      {
+        "name": "light",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
+      },
+      {
+        "name": "mandatory",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "max",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "multiple",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "value",
+        "type": "any",
+        "default": "undefined",
+        "source": "proxyable"
+      }
+    ],
+    "mixins": [
+      "proxyable",
+      "themeable"
+    ]
+  },
   "v-jumbotron": {
     "props": [
       {
-        "name": "replace",
+        "name": "activeClass",
+        "type": "string",
+        "default": "undefined",
+        "source": "routable"
+      },
+      {
+        "name": "append",
         "type": "boolean",
         "default": "false",
         "source": "routable"
@@ -5231,30 +5321,6 @@ module.exports = {
         "source": "colorable"
       },
       {
-        "name": "append",
-        "type": "boolean",
-        "default": "false",
-        "source": "routable"
-      },
-      {
-        "name": "activeClass",
-        "type": "string",
-        "default": "undefined",
-        "source": "routable"
-      },
-      {
-        "name": "tag",
-        "type": "string",
-        "default": "'div'",
-        "source": "routable"
-      },
-      {
-        "name": "exact",
-        "type": "boolean",
-        "default": "false",
-        "source": "routable"
-      },
-      {
         "name": "dark",
         "type": "boolean",
         "default": "false",
@@ -5262,6 +5328,12 @@ module.exports = {
       },
       {
         "name": "disabled",
+        "type": "boolean",
+        "default": "false",
+        "source": "routable"
+      },
+      {
+        "name": "exact",
         "type": "boolean",
         "default": "false",
         "source": "routable"
@@ -5309,6 +5381,12 @@ module.exports = {
         "source": "routable"
       },
       {
+        "name": "replace",
+        "type": "boolean",
+        "default": "false",
+        "source": "routable"
+      },
+      {
         "name": "ripple",
         "type": [
           "boolean",
@@ -5322,6 +5400,12 @@ module.exports = {
         "type": "string",
         "default": "undefined",
         "source": null
+      },
+      {
+        "name": "tag",
+        "type": "string",
+        "default": "'div'",
+        "source": "routable"
       },
       {
         "name": "target",
@@ -5363,6 +5447,12 @@ module.exports = {
         "source": null
       },
       {
+        "name": "dark",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
+      },
+      {
         "name": "disabled",
         "type": "boolean",
         "default": "false",
@@ -5390,6 +5480,12 @@ module.exports = {
         "source": null
       },
       {
+        "name": "light",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
+      },
+      {
         "name": "right",
         "type": [
           "number",
@@ -5405,7 +5501,9 @@ module.exports = {
         "source": null
       }
     ],
-    "mixins": []
+    "mixins": [
+      "themeable"
+    ]
   },
   "v-list": {
     "props": [
@@ -5526,16 +5624,10 @@ module.exports = {
   "v-list-tile": {
     "props": [
       {
-        "name": "nuxt",
-        "type": "boolean",
-        "default": "false",
-        "source": "routable"
-      },
-      {
-        "name": "color",
+        "name": "activeClass",
         "type": "string",
-        "default": "undefined",
-        "source": "colorable"
+        "default": "'primary--text'",
+        "source": "routable"
       },
       {
         "name": "append",
@@ -5550,25 +5642,16 @@ module.exports = {
         "source": null
       },
       {
-        "name": "activeClass",
-        "type": "string",
-        "default": "'primary--text'",
-        "source": "routable"
-      },
-      {
-        "name": "ripple",
-        "type": [
-          "boolean",
-          "object"
-        ],
-        "default": "undefined",
-        "source": "routable"
-      },
-      {
-        "name": "exactActiveClass",
+        "name": "color",
         "type": "string",
         "default": "undefined",
-        "source": "routable"
+        "source": "colorable"
+      },
+      {
+        "name": "dark",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
       },
       {
         "name": "disabled",
@@ -5580,6 +5663,12 @@ module.exports = {
         "name": "exact",
         "type": "boolean",
         "default": "false",
+        "source": "routable"
+      },
+      {
+        "name": "exactActiveClass",
+        "type": "string",
+        "default": "undefined",
         "source": "routable"
       },
       {
@@ -5598,9 +5687,30 @@ module.exports = {
         "source": null
       },
       {
+        "name": "light",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
+      },
+      {
+        "name": "nuxt",
+        "type": "boolean",
+        "default": "false",
+        "source": "routable"
+      },
+      {
         "name": "replace",
         "type": "boolean",
         "default": "false",
+        "source": "routable"
+      },
+      {
+        "name": "ripple",
+        "type": [
+          "boolean",
+          "object"
+        ],
+        "default": "undefined",
         "source": "routable"
       },
       {
@@ -5634,6 +5744,7 @@ module.exports = {
     "mixins": [
       "colorable",
       "routable",
+      "themeable",
       "toggleable"
     ],
     "slots": [
@@ -5646,10 +5757,6 @@ module.exports = {
     "slots": [
       "default"
     ]
-  },
-  "v-list-tile-action-text": {
-    "props": [],
-    "mixins": []
   },
   "v-list-tile-avatar": {
     "props": [
@@ -5680,18 +5787,22 @@ module.exports = {
       "default"
     ]
   },
+  "v-list-tile-action-text": {
+    "props": [],
+    "mixins": []
+  },
   "v-list-tile-content": {
     "props": [],
     "mixins": []
   },
-  "v-list-tile-sub-title": {
+  "v-list-tile-title": {
     "props": [],
     "mixins": [],
     "slots": [
       "default"
     ]
   },
-  "v-list-tile-title": {
+  "v-list-tile-sub-title": {
     "props": [],
     "mixins": [],
     "slots": [
@@ -5701,88 +5812,10 @@ module.exports = {
   "v-menu": {
     "props": [
       {
-        "name": "nudgeRight",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": 0,
-        "source": "menuable"
-      },
-      {
-        "name": "openDelay",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": 0,
-        "source": "delayable"
-      },
-      {
-        "name": "lazy",
-        "type": "boolean",
-        "default": "false",
-        "source": "bootable"
-      },
-      {
-        "name": "attach",
-        "type": "any",
-        "default": false,
-        "source": "detachable"
-      },
-      {
-        "name": "contentClass",
-        "type": "any",
-        "default": "undefined",
-        "source": "detachable"
-      },
-      {
         "name": "absolute",
         "type": "boolean",
         "default": "false",
         "source": "positionable"
-      },
-      {
-        "name": "bottom",
-        "type": "boolean",
-        "default": "false",
-        "source": "positionable"
-      },
-      {
-        "name": "fixed",
-        "type": "boolean",
-        "default": "false",
-        "source": "positionable"
-      },
-      {
-        "name": "left",
-        "type": "boolean",
-        "default": "false",
-        "source": "positionable"
-      },
-      {
-        "name": "offsetY",
-        "type": "boolean",
-        "default": "false",
-        "source": null
-      },
-      {
-        "name": "offsetX",
-        "type": "boolean",
-        "default": "false",
-        "source": null
-      },
-      {
-        "name": "dark",
-        "type": "boolean",
-        "default": "false",
-        "source": "themeable"
-      },
-      {
-        "name": "light",
-        "type": "boolean",
-        "default": "false",
-        "source": "themeable"
       },
       {
         "name": "activator",
@@ -5797,10 +5830,103 @@ module.exports = {
         "source": "menuable"
       },
       {
+        "name": "attach",
+        "type": "any",
+        "default": false,
+        "source": "detachable"
+      },
+      {
+        "name": "auto",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "bottom",
+        "type": "boolean",
+        "default": "false",
+        "source": "positionable"
+      },
+      {
+        "name": "closeDelay",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": 0,
+        "source": "delayable"
+      },
+      {
+        "name": "closeOnClick",
+        "type": "boolean",
+        "default": "true",
+        "source": null
+      },
+      {
+        "name": "closeOnContentClick",
+        "type": "boolean",
+        "default": "true",
+        "source": null
+      },
+      {
+        "name": "contentClass",
+        "type": "any",
+        "default": "undefined",
+        "source": "detachable"
+      },
+      {
+        "name": "dark",
+        "type": "boolean",
+        "default": "false",
+        "source": "menuable"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "fixed",
+        "type": "boolean",
+        "default": "false",
+        "source": "positionable"
+      },
+      {
+        "name": "fullWidth",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
         "name": "inputActivator",
         "type": "boolean",
         "default": "false",
         "source": "menuable"
+      },
+      {
+        "name": "lazy",
+        "type": "boolean",
+        "default": "false",
+        "source": "bootable"
+      },
+      {
+        "name": "left",
+        "type": "boolean",
+        "default": "false",
+        "source": "positionable"
+      },
+      {
+        "name": "light",
+        "type": "boolean",
+        "default": "false",
+        "source": "menuable"
+      },
+      {
+        "name": "maxHeight",
+        "type": "any",
+        "default": "auto",
+        "source": null
       },
       {
         "name": "maxWidth",
@@ -5839,13 +5965,13 @@ module.exports = {
         "source": "menuable"
       },
       {
-        "name": "closeDelay",
+        "name": "nudgeRight",
         "type": [
           "number",
           "string"
         ],
-        "default": 200,
-        "source": "delayable"
+        "default": 0,
+        "source": "menuable"
       },
       {
         "name": "nudgeTop",
@@ -5872,54 +5998,36 @@ module.exports = {
         "source": "menuable"
       },
       {
-        "name": "maxHeight",
-        "type": "any",
-        "default": "auto",
-        "source": null
-      },
-      {
-        "name": "fullWidth",
+        "name": "offsetX",
         "type": "boolean",
         "default": "false",
         "source": null
       },
       {
-        "name": "disabled",
+        "name": "offsetY",
         "type": "boolean",
         "default": "false",
         "source": null
       },
       {
-        "name": "closeOnContentClick",
-        "type": "boolean",
-        "default": "true",
-        "source": null
-      },
-      {
-        "name": "closeOnClick",
-        "type": "boolean",
-        "default": "true",
-        "source": null
-      },
-      {
-        "name": "auto",
-        "type": "boolean",
-        "default": "false",
-        "source": null
-      },
-      {
-        "name": "top",
-        "type": "boolean",
-        "default": "false",
-        "source": "positionable"
-      },
-      {
-        "name": "transition",
+        "name": "openDelay",
         "type": [
-          "boolean",
+          "number",
           "string"
         ],
-        "default": "v-menu-transition",
+        "default": 0,
+        "source": "delayable"
+      },
+      {
+        "name": "openOnClick",
+        "type": "boolean",
+        "default": "true",
+        "source": null
+      },
+      {
+        "name": "openOnHover",
+        "type": "boolean",
+        "default": "false",
         "source": null
       },
       {
@@ -5929,13 +6037,13 @@ module.exports = {
         "source": null
       },
       {
-        "name": "positionY",
+        "name": "positionX",
         "type": "number",
         "default": "undefined",
         "source": "menuable"
       },
       {
-        "name": "positionX",
+        "name": "positionY",
         "type": "number",
         "default": "undefined",
         "source": "menuable"
@@ -5953,15 +6061,18 @@ module.exports = {
         "source": "positionable"
       },
       {
-        "name": "openOnClick",
-        "type": "boolean",
-        "default": "true",
-        "source": null
-      },
-      {
-        "name": "openOnHover",
+        "name": "top",
         "type": "boolean",
         "default": "false",
+        "source": "positionable"
+      },
+      {
+        "name": "transition",
+        "type": [
+          "boolean",
+          "string"
+        ],
+        "default": "v-menu-transition",
         "source": null
       },
       {
@@ -5989,7 +6100,6 @@ module.exports = {
       "positionable",
       "returnable",
       "stackable",
-      "themeable",
       "toggleable"
     ],
     "slots": [
@@ -6006,6 +6116,18 @@ module.exports = {
         "source": "colorable"
       },
       {
+        "name": "dark",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
+      },
+      {
+        "name": "light",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
+      },
+      {
         "name": "value",
         "type": "array",
         "default": [],
@@ -6013,28 +6135,17 @@ module.exports = {
       }
     ],
     "mixins": [
-      "colorable"
+      "colorable",
+      "themeable"
     ]
   },
   "v-navigation-drawer": {
     "props": [
       {
-        "name": "floating",
-        "type": "boolean",
-        "default": "false",
-        "source": null
-      },
-      {
         "name": "absolute",
         "type": "boolean",
         "default": "false",
         "source": "positionable"
-      },
-      {
-        "name": "miniVariant",
-        "type": "boolean",
-        "default": "false",
-        "source": null
       },
       {
         "name": "app",
@@ -6043,12 +6154,9 @@ module.exports = {
         "source": "applicationable"
       },
       {
-        "name": "miniVariantWidth",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": 80,
+        "name": "clipped",
+        "type": "boolean",
+        "default": "false",
         "source": null
       },
       {
@@ -6058,13 +6166,7 @@ module.exports = {
         "source": "themeable"
       },
       {
-        "name": "clipped",
-        "type": "boolean",
-        "default": "false",
-        "source": null
-      },
-      {
-        "name": "permanent",
+        "name": "disableResizeWatcher",
         "type": "boolean",
         "default": "false",
         "source": null
@@ -6076,22 +6178,16 @@ module.exports = {
         "source": null
       },
       {
-        "name": "disableResizeWatcher",
-        "type": "boolean",
-        "default": "false",
-        "source": null
-      },
-      {
-        "name": "right",
-        "type": "boolean",
-        "default": "false",
-        "source": null
-      },
-      {
         "name": "fixed",
         "type": "boolean",
         "default": "false",
         "source": "positionable"
+      },
+      {
+        "name": "floating",
+        "type": "boolean",
+        "default": "false",
+        "source": null
       },
       {
         "name": "height",
@@ -6115,12 +6211,39 @@ module.exports = {
         "source": "themeable"
       },
       {
+        "name": "miniVariant",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "miniVariantWidth",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": 80,
+        "source": null
+      },
+      {
         "name": "mobileBreakPoint",
         "type": [
           "number",
           "string"
         ],
         "default": 1264,
+        "source": null
+      },
+      {
+        "name": "permanent",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "right",
+        "type": "boolean",
+        "default": "false",
         "source": null
       },
       {
@@ -6159,6 +6282,7 @@ module.exports = {
     ],
     "mixins": [
       "applicationable",
+      "dependent",
       "overlayable",
       "positionable",
       "ssr-bootable",
@@ -6181,76 +6305,10 @@ module.exports = {
   "v-overflow-btn": {
     "props": [
       {
-        "name": "textarea",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-text-field"
-      },
-      {
-        "name": "color",
-        "type": "string",
-        "default": "'primary'",
-        "source": "colorable"
-      },
-      {
-        "name": "chips",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-select"
-      },
-      {
-        "name": "cacheItems",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-select"
-      },
-      {
-        "name": "attach",
-        "type": "any",
-        "default": false,
-        "source": "v-select"
-      },
-      {
         "name": "allowOverflow",
         "type": "boolean",
         "default": "true",
-        "source": "menuable"
-      },
-      {
-        "name": "activator",
-        "type": "any",
-        "default": "undefined",
-        "source": "menuable"
-      },
-      {
-        "name": "closeOnContentClick",
-        "type": "boolean",
-        "default": "true",
-        "source": "v-menu"
-      },
-      {
-        "name": "closeOnClick",
-        "type": "boolean",
-        "default": "true",
-        "source": "v-menu"
-      },
-      {
-        "name": "auto",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-menu"
-      },
-      {
-        "name": "clearIconCb",
-        "type": "function",
-        "default": "null",
-        "source": "v-text-field"
-      },
-      {
-        "name": "clearIcon",
-        "type": "string",
-        "default": "'$vuetify.icons.clear'",
-        "source": "v-text-field"
+        "source": "v-autocomplete"
       },
       {
         "name": "appendIcon",
@@ -6265,13 +6323,37 @@ module.exports = {
         "source": "v-input"
       },
       {
+        "name": "appendOuterIcon",
+        "type": "string",
+        "default": "undefined",
+        "source": "v-text-field"
+      },
+      {
+        "name": "appendOuterIconCb",
+        "type": "function",
+        "default": "null",
+        "source": "v-text-field"
+      },
+      {
+        "name": "attach",
+        "type": "any",
+        "default": false,
+        "source": "v-select"
+      },
+      {
+        "name": "autofocus",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-text-field"
+      },
+      {
         "name": "backgroundColor",
         "type": "string",
         "default": "undefined",
         "source": "v-input"
       },
       {
-        "name": "clearable",
+        "name": "box",
         "type": "boolean",
         "default": "false",
         "source": "v-text-field"
@@ -6283,70 +6365,40 @@ module.exports = {
         "source": "v-text-field"
       },
       {
-        "name": "box",
+        "name": "cacheItems",
         "type": "boolean",
         "default": "false",
+        "source": "v-select"
+      },
+      {
+        "name": "chips",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-select"
+      },
+      {
+        "name": "clearIcon",
+        "type": "string",
+        "default": "'$vuetify.icons.clear'",
         "source": "v-text-field"
       },
       {
-        "name": "autofocus",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-text-field"
-      },
-      {
-        "name": "appendOuterIconCb",
+        "name": "clearIconCb",
         "type": "function",
         "default": "null",
         "source": "v-text-field"
       },
       {
-        "name": "appendOuterIcon",
-        "type": "string",
-        "default": "undefined",
+        "name": "clearable",
+        "type": "boolean",
+        "default": "false",
         "source": "v-text-field"
       },
       {
-        "name": "transition",
-        "type": "any",
-        "default": "undefined",
-        "source": "v-menu"
-      },
-      {
-        "name": "editable",
-        "type": "boolean",
-        "default": "false",
-        "source": null
-      },
-      {
-        "name": "dense",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-select"
-      },
-      {
-        "name": "deletableChips",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-select"
-      },
-      {
-        "name": "contentClass",
+        "name": "color",
         "type": "string",
-        "default": "undefined",
-        "source": "v-select"
-      },
-      {
-        "name": "dontFillMaskBlanks",
-        "type": "boolean",
-        "default": "false",
-        "source": "maskable"
-      },
-      {
-        "name": "dark",
-        "type": "boolean",
-        "default": "false",
-        "source": "themeable"
+        "default": "'primary'",
+        "source": "colorable"
       },
       {
         "name": "counter",
@@ -6359,134 +6411,46 @@ module.exports = {
         "source": "v-text-field"
       },
       {
+        "name": "dark",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
+      },
+      {
+        "name": "deletableChips",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-select"
+      },
+      {
+        "name": "dense",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-select"
+      },
+      {
         "name": "disabled",
         "type": "boolean",
         "default": "false",
         "source": "v-input"
       },
       {
-        "name": "maxWidth",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": "auto",
-        "source": "menuable"
-      },
-      {
-        "name": "label",
-        "type": "string",
-        "default": "undefined",
-        "source": "v-input"
-      },
-      {
-        "name": "hideDetails",
+        "name": "dontFillMaskBlanks",
         "type": "boolean",
         "default": "false",
-        "source": "v-input"
+        "source": "maskable"
       },
       {
-        "name": "height",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": "undefined",
-        "source": "v-input"
-      },
-      {
-        "name": "hideNoData",
+        "name": "editable",
         "type": "boolean",
         "default": "false",
-        "source": "v-autocomplete"
-      },
-      {
-        "name": "filter",
-        "type": "function",
-        "default": "(item, queryText, itemText) => {}",
-        "source": "v-autocomplete"
-      },
-      {
-        "name": "itemValue",
-        "type": [
-          "string",
-          "array",
-          "function"
-        ],
-        "default": "value",
-        "source": "v-select"
-      },
-      {
-        "name": "itemText",
-        "type": [
-          "string",
-          "array",
-          "function"
-        ],
-        "default": "text",
-        "source": "v-select"
-      },
-      {
-        "name": "flat",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-text-field"
-      },
-      {
-        "name": "fullWidth",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-text-field"
-      },
-      {
-        "name": "itemDisabled",
-        "type": [
-          "string",
-          "array",
-          "function"
-        ],
-        "default": "disabled",
-        "source": "v-select"
-      },
-      {
-        "name": "itemAvatar",
-        "type": [
-          "string",
-          "array",
-          "function"
-        ],
-        "default": "avatar",
-        "source": "v-select"
-      },
-      {
-        "name": "items",
-        "type": "array",
-        "default": [],
-        "source": "v-select"
-      },
-      {
-        "name": "hideSelected",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-select"
+        "source": null
       },
       {
         "name": "error",
         "type": "boolean",
         "default": "false",
         "source": "validatable"
-      },
-      {
-        "name": "hint",
-        "type": "string",
-        "default": "undefined",
-        "source": "v-input"
-      },
-      {
-        "name": "inputActivator",
-        "type": "boolean",
-        "default": "false",
-        "source": "menuable"
       },
       {
         "name": "errorCount",
@@ -6507,188 +6471,113 @@ module.exports = {
         "source": "validatable"
       },
       {
-        "name": "zIndex",
+        "name": "filter",
+        "type": "function",
+        "default": "(item, queryText, itemText) => {}",
+        "source": "v-autocomplete"
+      },
+      {
+        "name": "flat",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-text-field"
+      },
+      {
+        "name": "fullWidth",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-text-field"
+      },
+      {
+        "name": "height",
         "type": [
           "number",
           "string"
         ],
         "default": "undefined",
-        "source": "menuable"
-      },
-      {
-        "name": "prependIcon",
-        "type": "string",
-        "default": "undefined",
         "source": "v-input"
       },
       {
-        "name": "noFilter",
+        "name": "hideDetails",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-input"
+      },
+      {
+        "name": "hideNoData",
         "type": "boolean",
         "default": "false",
         "source": "v-autocomplete"
       },
       {
-        "name": "persistentHint",
+        "name": "hideSelected",
         "type": "boolean",
         "default": "false",
+        "source": "v-select"
+      },
+      {
+        "name": "hint",
+        "type": "string",
+        "default": "undefined",
         "source": "v-input"
       },
       {
-        "name": "openOnClear",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-select"
-      },
-      {
-        "name": "messages",
+        "name": "itemAvatar",
         "type": [
           "string",
-          "array"
+          "array",
+          "function"
         ],
+        "default": "avatar",
+        "source": "v-select"
+      },
+      {
+        "name": "itemDisabled",
+        "type": [
+          "string",
+          "array",
+          "function"
+        ],
+        "default": "disabled",
+        "source": "v-select"
+      },
+      {
+        "name": "itemText",
+        "type": [
+          "string",
+          "array",
+          "function"
+        ],
+        "default": "text",
+        "source": "v-select"
+      },
+      {
+        "name": "itemValue",
+        "type": [
+          "string",
+          "array",
+          "function"
+        ],
+        "default": "value",
+        "source": "v-select"
+      },
+      {
+        "name": "items",
+        "type": "array",
         "default": [],
-        "source": "validatable"
-      },
-      {
-        "name": "maxHeight",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": 300,
-        "source": "v-menu"
-      },
-      {
-        "name": "offsetX",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-menu"
-      },
-      {
-        "name": "offsetY",
-        "type": "boolean",
-        "default": "true",
-        "source": "v-menu"
-      },
-      {
-        "name": "openOnClick",
-        "type": "boolean",
-        "default": "true",
-        "source": "v-menu"
-      },
-      {
-        "name": "openOnHover",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-menu"
-      },
-      {
-        "name": "origin",
-        "type": "string",
-        "default": "'top left'",
-        "source": "v-menu"
-      },
-      {
-        "name": "multiLine",
-        "type": "boolean",
-        "default": "false",
         "source": "v-select"
       },
       {
-        "name": "multiple",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-select"
-      },
-      {
-        "name": "outline",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-text-field"
-      },
-      {
-        "name": "placeholder",
+        "name": "label",
         "type": "string",
         "default": "undefined",
-        "source": "v-text-field"
+        "source": "v-input"
       },
       {
-        "name": "prefix",
-        "type": "string",
-        "default": "undefined",
-        "source": "v-text-field"
-      },
-      {
-        "name": "minWidth",
-        "type": [
-          "boolean",
-          "number",
-          "string"
-        ],
-        "default": 0,
-        "source": "menuable"
-      },
-      {
-        "name": "nudgeBottom",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": 0,
-        "source": "menuable"
-      },
-      {
-        "name": "nudgeLeft",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": 0,
-        "source": "menuable"
-      },
-      {
-        "name": "nudgeRight",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": 0,
-        "source": "menuable"
-      },
-      {
-        "name": "nudgeTop",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": 0,
-        "source": "menuable"
-      },
-      {
-        "name": "nudgeWidth",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": 0,
-        "source": "menuable"
-      },
-      {
-        "name": "offsetOverflow",
+        "name": "light",
         "type": "boolean",
-        "default": "true",
-        "source": "menuable"
-      },
-      {
-        "name": "positionX",
-        "type": "number",
-        "default": "undefined",
-        "source": "menuable"
-      },
-      {
-        "name": "positionY",
-        "type": "number",
-        "default": "undefined",
-        "source": "menuable"
+        "default": "false",
+        "source": "themeable"
       },
       {
         "name": "loading",
@@ -6709,28 +6598,85 @@ module.exports = {
         "source": "maskable"
       },
       {
+        "name": "menuProps",
+        "type": [
+          "string",
+          "array",
+          "object"
+        ],
+        "default": {
+          "closeOnClick": false,
+          "closeOnContentClick": false,
+          "openOnClick": false,
+          "maxHeight": 300,
+          "offsetY": true,
+          "offsetOverflow": true,
+          "transition": false
+        },
+        "source": "v-select"
+      },
+      {
+        "name": "messages",
+        "type": [
+          "string",
+          "array"
+        ],
+        "default": [],
+        "source": "validatable"
+      },
+      {
+        "name": "multiple",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-select"
+      },
+      {
         "name": "noDataText",
         "type": "string",
         "default": "'$vuetify.noDataText'",
         "source": "filterable"
       },
       {
-        "name": "light",
+        "name": "noFilter",
         "type": "boolean",
         "default": "false",
-        "source": "themeable"
+        "source": "v-autocomplete"
       },
       {
-        "name": "soloInverted",
+        "name": "openOnClear",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-select"
+      },
+      {
+        "name": "outline",
         "type": "boolean",
         "default": "false",
         "source": "v-text-field"
       },
       {
-        "name": "prependInnerIconCb",
-        "type": "function",
-        "default": "null",
+        "name": "persistentHint",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-input"
+      },
+      {
+        "name": "placeholder",
+        "type": "string",
+        "default": "undefined",
         "source": "v-text-field"
+      },
+      {
+        "name": "prefix",
+        "type": "string",
+        "default": "undefined",
+        "source": "v-text-field"
+      },
+      {
+        "name": "prependIcon",
+        "type": "string",
+        "default": "undefined",
+        "source": "v-input"
       },
       {
         "name": "prependIconCb",
@@ -6745,16 +6691,22 @@ module.exports = {
         "source": "v-text-field"
       },
       {
-        "name": "rules",
-        "type": "array",
-        "default": [],
-        "source": "validatable"
+        "name": "prependInnerIconCb",
+        "type": "function",
+        "default": "null",
+        "source": "v-text-field"
       },
       {
         "name": "readonly",
         "type": "boolean",
         "default": "false",
         "source": "v-input"
+      },
+      {
+        "name": "returnMaskedValue",
+        "type": "boolean",
+        "default": "false",
+        "source": "maskable"
       },
       {
         "name": "returnObject",
@@ -6769,15 +6721,33 @@ module.exports = {
         "source": "v-text-field"
       },
       {
-        "name": "returnMaskedValue",
-        "type": "boolean",
-        "default": "false",
-        "source": "maskable"
+        "name": "rules",
+        "type": "array",
+        "default": [],
+        "source": "validatable"
       },
       {
         "name": "searchInput",
         "type": "any",
         "default": "undefined",
+        "source": "v-select"
+      },
+      {
+        "name": "segmented",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "singleLine",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-text-field"
+      },
+      {
+        "name": "smallChips",
+        "type": "boolean",
+        "default": "false",
         "source": "v-select"
       },
       {
@@ -6787,19 +6757,7 @@ module.exports = {
         "source": "v-text-field"
       },
       {
-        "name": "segmented",
-        "type": "boolean",
-        "default": "false",
-        "source": null
-      },
-      {
-        "name": "smallChips",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-select"
-      },
-      {
-        "name": "singleLine",
+        "name": "soloInverted",
         "type": "boolean",
         "default": "false",
         "source": "v-text-field"
@@ -6826,10 +6784,16 @@ module.exports = {
         "source": "v-text-field"
       },
       {
-        "name": "tabindex",
+        "name": "textarea",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-text-field"
+      },
+      {
+        "name": "transition",
         "type": "any",
-        "default": 0,
-        "source": "v-input"
+        "default": "undefined",
+        "source": null
       },
       {
         "name": "type",
@@ -6858,10 +6822,7 @@ module.exports = {
     ],
     "mixins": [
       "comparable",
-      "dependent",
-      "filterable",
-      "menuable",
-      "v-menu"
+      "filterable"
     ]
   },
   "v-pagination": {
@@ -6879,6 +6840,12 @@ module.exports = {
         "source": "colorable"
       },
       {
+        "name": "dark",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
+      },
+      {
         "name": "disabled",
         "type": "boolean",
         "default": "false",
@@ -6889,6 +6856,12 @@ module.exports = {
         "type": "number",
         "default": 0,
         "source": null
+      },
+      {
+        "name": "light",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
       },
       {
         "name": "nextIcon",
@@ -6919,7 +6892,8 @@ module.exports = {
       }
     ],
     "mixins": [
-      "colorable"
+      "colorable",
+      "themeable"
     ],
     "events": [
       {
@@ -6951,7 +6925,7 @@ module.exports = {
           "number"
         ],
         "default": 500,
-        "source": null
+        "source": "translatable"
       },
       {
         "name": "src",
@@ -7057,7 +7031,10 @@ module.exports = {
       },
       {
         "name": "value",
-        "type": "number",
+        "type": [
+          "number",
+          "string"
+        ],
         "default": 0,
         "source": null
       },
@@ -7151,19 +7128,7 @@ module.exports = {
   "v-radio-group": {
     "props": [
       {
-        "name": "disabled",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-input"
-      },
-      {
-        "name": "color",
-        "type": "string",
-        "default": "undefined",
-        "source": "colorable"
-      },
-      {
-        "name": "backgroundColor",
+        "name": "appendIcon",
         "type": "string",
         "default": "undefined",
         "source": "v-input"
@@ -7175,25 +7140,16 @@ module.exports = {
         "source": "v-input"
       },
       {
-        "name": "appendIcon",
+        "name": "backgroundColor",
         "type": "string",
         "default": "undefined",
         "source": "v-input"
       },
       {
-        "name": "hint",
+        "name": "color",
         "type": "string",
         "default": "undefined",
-        "source": "v-input"
-      },
-      {
-        "name": "errorCount",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": 1,
-        "source": "validatable"
+        "source": "colorable"
       },
       {
         "name": "column",
@@ -7208,49 +7164,34 @@ module.exports = {
         "source": "themeable"
       },
       {
+        "name": "disabled",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-input"
+      },
+      {
         "name": "error",
         "type": "boolean",
         "default": "false",
         "source": "validatable"
       },
       {
-        "name": "persistentHint",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-input"
-      },
-      {
-        "name": "row",
-        "type": "boolean",
-        "default": "false",
-        "source": null
-      },
-      {
-        "name": "name",
-        "type": "string",
-        "default": "undefined",
-        "source": null
-      },
-      {
-        "name": "light",
-        "type": "boolean",
-        "default": "false",
-        "source": "themeable"
-      },
-      {
-        "name": "mandatory",
-        "type": "boolean",
-        "default": "true",
-        "source": null
-      },
-      {
-        "name": "loading",
+        "name": "errorCount",
         "type": [
-          "boolean",
+          "number",
           "string"
         ],
-        "default": false,
-        "source": "loadable"
+        "default": 1,
+        "source": "validatable"
+      },
+      {
+        "name": "errorMessages",
+        "type": [
+          "string",
+          "array"
+        ],
+        "default": [],
+        "source": "validatable"
       },
       {
         "name": "height",
@@ -7268,19 +7209,37 @@ module.exports = {
         "source": "v-input"
       },
       {
-        "name": "errorMessages",
-        "type": [
-          "string",
-          "array"
-        ],
-        "default": [],
-        "source": "validatable"
+        "name": "hint",
+        "type": "string",
+        "default": "undefined",
+        "source": "v-input"
       },
       {
         "name": "label",
         "type": "string",
         "default": "undefined",
         "source": "v-input"
+      },
+      {
+        "name": "light",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
+      },
+      {
+        "name": "loading",
+        "type": [
+          "boolean",
+          "string"
+        ],
+        "default": false,
+        "source": "loadable"
+      },
+      {
+        "name": "mandatory",
+        "type": "boolean",
+        "default": "true",
+        "source": null
       },
       {
         "name": "messages",
@@ -7290,6 +7249,18 @@ module.exports = {
         ],
         "default": [],
         "source": "validatable"
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "persistentHint",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-input"
       },
       {
         "name": "prependIcon",
@@ -7308,6 +7279,12 @@ module.exports = {
         "type": "boolean",
         "default": "false",
         "source": "v-input"
+      },
+      {
+        "name": "row",
+        "type": "boolean",
+        "default": "false",
+        "source": null
       },
       {
         "name": "rules",
@@ -7329,12 +7306,6 @@ module.exports = {
         ],
         "default": [],
         "source": "validatable"
-      },
-      {
-        "name": "tabindex",
-        "type": "any",
-        "default": 0,
-        "source": "v-input"
       },
       {
         "name": "validateOnBlur",
@@ -7380,11 +7351,8 @@ module.exports = {
     "props": [
       {
         "name": "color",
-        "type": [
-          "boolean",
-          "string"
-        ],
-        "default": "accent",
+        "type": "string",
+        "default": "'accent'",
         "source": "colorable"
       },
       {
@@ -7461,25 +7429,13 @@ module.exports = {
   "v-range-slider": {
     "props": [
       {
-        "name": "label",
-        "type": "string",
-        "default": "undefined",
-        "source": "v-input"
-      },
-      {
-        "name": "color",
-        "type": "string",
-        "default": "undefined",
-        "source": "colorable"
-      },
-      {
         "name": "alwaysDirty",
         "type": "boolean",
         "default": "false",
         "source": "v-slider"
       },
       {
-        "name": "backgroundColor",
+        "name": "appendIcon",
         "type": "string",
         "default": "undefined",
         "source": "v-input"
@@ -7491,25 +7447,16 @@ module.exports = {
         "source": "v-input"
       },
       {
-        "name": "appendIcon",
+        "name": "backgroundColor",
         "type": "string",
         "default": "undefined",
         "source": "v-input"
       },
       {
-        "name": "prependIconCb",
-        "type": "function",
-        "default": "null",
-        "source": "v-input"
-      },
-      {
-        "name": "errorMessages",
-        "type": [
-          "string",
-          "array"
-        ],
-        "default": [],
-        "source": "validatable"
+        "name": "color",
+        "type": "string",
+        "default": "undefined",
+        "source": "colorable"
       },
       {
         "name": "dark",
@@ -7539,27 +7486,12 @@ module.exports = {
         "source": "validatable"
       },
       {
-        "name": "value",
-        "type": "array",
+        "name": "errorMessages",
+        "type": [
+          "string",
+          "array"
+        ],
         "default": [],
-        "source": "v-input"
-      },
-      {
-        "name": "trackColor",
-        "type": "string",
-        "default": "undefined",
-        "source": "v-slider"
-      },
-      {
-        "name": "light",
-        "type": "boolean",
-        "default": "false",
-        "source": "themeable"
-      },
-      {
-        "name": "success",
-        "type": "boolean",
-        "default": "false",
         "source": "validatable"
       },
       {
@@ -7584,6 +7516,24 @@ module.exports = {
         "source": "v-input"
       },
       {
+        "name": "inverseLabel",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-slider"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "default": "undefined",
+        "source": "v-input"
+      },
+      {
+        "name": "light",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
+      },
+      {
         "name": "loading",
         "type": [
           "boolean",
@@ -7591,6 +7541,33 @@ module.exports = {
         ],
         "default": false,
         "source": "loadable"
+      },
+      {
+        "name": "max",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": 100,
+        "source": "v-slider"
+      },
+      {
+        "name": "messages",
+        "type": [
+          "string",
+          "array"
+        ],
+        "default": [],
+        "source": "validatable"
+      },
+      {
+        "name": "min",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": 0,
+        "source": "v-slider"
       },
       {
         "name": "persistentHint",
@@ -7605,13 +7582,16 @@ module.exports = {
         "source": "v-input"
       },
       {
-        "name": "messages",
-        "type": [
-          "string",
-          "array"
-        ],
-        "default": [],
-        "source": "validatable"
+        "name": "prependIconCb",
+        "type": "function",
+        "default": "null",
+        "source": "v-input"
+      },
+      {
+        "name": "range",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-slider"
       },
       {
         "name": "readonly",
@@ -7620,55 +7600,10 @@ module.exports = {
         "source": "v-input"
       },
       {
-        "name": "tabindex",
-        "type": "any",
-        "default": 0,
-        "source": "v-input"
-      },
-      {
-        "name": "successMessages",
-        "type": [
-          "string",
-          "array"
-        ],
-        "default": [],
-        "source": "validatable"
-      },
-      {
         "name": "rules",
         "type": "array",
         "default": [],
         "source": "validatable"
-      },
-      {
-        "name": "inverseLabel",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-slider"
-      },
-      {
-        "name": "min",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": 0,
-        "source": "v-slider"
-      },
-      {
-        "name": "max",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": 100,
-        "source": "v-slider"
-      },
-      {
-        "name": "range",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-slider"
       },
       {
         "name": "step",
@@ -7680,28 +7615,19 @@ module.exports = {
         "source": "v-slider"
       },
       {
-        "name": "ticks",
-        "type": [
-          "boolean",
-          "string"
-        ],
-        "default": false,
-        "source": "v-slider"
+        "name": "success",
+        "type": "boolean",
+        "default": "false",
+        "source": "validatable"
       },
       {
-        "name": "tickLabels",
-        "type": "array",
+        "name": "successMessages",
+        "type": [
+          "string",
+          "array"
+        ],
         "default": [],
-        "source": "v-slider"
-      },
-      {
-        "name": "tickSize",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": 1,
-        "source": "v-slider"
+        "source": "validatable"
       },
       {
         "name": "thumbColor",
@@ -7728,10 +7654,46 @@ module.exports = {
         "source": "v-slider"
       },
       {
+        "name": "tickLabels",
+        "type": "array",
+        "default": [],
+        "source": "v-slider"
+      },
+      {
+        "name": "tickSize",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": 1,
+        "source": "v-slider"
+      },
+      {
+        "name": "ticks",
+        "type": [
+          "boolean",
+          "string"
+        ],
+        "default": false,
+        "source": "v-slider"
+      },
+      {
+        "name": "trackColor",
+        "type": "string",
+        "default": "undefined",
+        "source": "v-slider"
+      },
+      {
         "name": "validateOnBlur",
         "type": "boolean",
         "default": "false",
         "source": "validatable"
+      },
+      {
+        "name": "value",
+        "type": "array",
+        "default": [],
+        "source": "v-input"
       }
     ],
     "mixins": [
@@ -7765,13 +7727,28 @@ module.exports = {
       }
     ]
   },
-  "v-select": {
+  "v-rating": {
     "props": [
       {
-        "name": "soloInverted",
+        "name": "backgroundColor",
+        "type": "string",
+        "default": "'accent'",
+        "source": null
+      },
+      {
+        "name": "clearable",
         "type": "boolean",
         "default": "false",
-        "source": "v-text-field"
+        "source": null
+      },
+      {
+        "name": "closeDelay",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": 0,
+        "source": "delayable"
       },
       {
         "name": "color",
@@ -7780,65 +7757,188 @@ module.exports = {
         "source": "colorable"
       },
       {
-        "name": "chips",
+        "name": "dark",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
+      },
+      {
+        "name": "dense",
         "type": "boolean",
         "default": "false",
         "source": null
       },
       {
-        "name": "cacheItems",
-        "type": "boolean",
-        "default": "false",
-        "source": null
-      },
-      {
-        "name": "attach",
-        "type": "any",
-        "default": false,
-        "source": null
-      },
-      {
-        "name": "allowOverflow",
-        "type": "boolean",
-        "default": "false",
-        "source": "menuable"
-      },
-      {
-        "name": "activator",
-        "type": "any",
-        "default": "undefined",
-        "source": "menuable"
-      },
-      {
-        "name": "closeOnContentClick",
-        "type": "boolean",
-        "default": "true",
-        "source": "v-menu"
-      },
-      {
-        "name": "closeOnClick",
-        "type": "boolean",
-        "default": "true",
-        "source": "v-menu"
-      },
-      {
-        "name": "auto",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-menu"
-      },
-      {
-        "name": "clearIconCb",
-        "type": "function",
-        "default": "null",
-        "source": "v-text-field"
-      },
-      {
-        "name": "clearIcon",
+        "name": "emptyIcon",
         "type": "string",
-        "default": "'$vuetify.icons.clear'",
-        "source": "v-text-field"
+        "default": "'$vuetify.icons.ratingEmpty'",
+        "source": null
       },
+      {
+        "name": "fullIcon",
+        "type": "string",
+        "default": "'$vuetify.icons.ratingFull'",
+        "source": null
+      },
+      {
+        "name": "halfIcon",
+        "type": "string",
+        "default": "'$vuetify.icons.ratingHalf'",
+        "source": null
+      },
+      {
+        "name": "halfIncrements",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "hover",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "large",
+        "type": "boolean",
+        "default": "false",
+        "source": "sizeable"
+      },
+      {
+        "name": "length",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": 5,
+        "source": null
+      },
+      {
+        "name": "light",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
+      },
+      {
+        "name": "medium",
+        "type": "boolean",
+        "default": "false",
+        "source": "sizeable"
+      },
+      {
+        "name": "openDelay",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": 0,
+        "source": "delayable"
+      },
+      {
+        "name": "readonly",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "ripple",
+        "type": [
+          "boolean",
+          "object"
+        ],
+        "default": true,
+        "source": "rippleable"
+      },
+      {
+        "name": "size",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": "undefined",
+        "source": "sizeable"
+      },
+      {
+        "name": "small",
+        "type": "boolean",
+        "default": "false",
+        "source": "sizeable"
+      },
+      {
+        "name": "value",
+        "type": "number",
+        "default": 0,
+        "source": null
+      },
+      {
+        "name": "xLarge",
+        "type": "boolean",
+        "default": "false",
+        "source": "sizeable"
+      }
+    ],
+    "mixins": [
+      "colorable",
+      "delayable",
+      "rippleable",
+      "sizeable",
+      "themeable"
+    ]
+  },
+  "v-responsive": {
+    "props": [
+      {
+        "name": "aspectRatio",
+        "type": [
+          "string",
+          "number"
+        ],
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "height",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": "undefined",
+        "source": "measurable"
+      },
+      {
+        "name": "maxHeight",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": "undefined",
+        "source": "measurable"
+      },
+      {
+        "name": "maxWidth",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": "undefined",
+        "source": "measurable"
+      },
+      {
+        "name": "width",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": "undefined",
+        "source": "measurable"
+      }
+    ],
+    "mixins": [
+      "measurable"
+    ]
+  },
+  "v-select": {
+    "props": [
       {
         "name": "appendIcon",
         "type": "string",
@@ -7852,13 +7952,37 @@ module.exports = {
         "source": "v-input"
       },
       {
+        "name": "appendOuterIcon",
+        "type": "string",
+        "default": "undefined",
+        "source": "v-text-field"
+      },
+      {
+        "name": "appendOuterIconCb",
+        "type": "function",
+        "default": "null",
+        "source": "v-text-field"
+      },
+      {
+        "name": "attach",
+        "type": "any",
+        "default": false,
+        "source": null
+      },
+      {
+        "name": "autofocus",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-text-field"
+      },
+      {
         "name": "backgroundColor",
         "type": "string",
         "default": "undefined",
         "source": "v-input"
       },
       {
-        "name": "clearable",
+        "name": "box",
         "type": "boolean",
         "default": "false",
         "source": "v-text-field"
@@ -7870,142 +7994,40 @@ module.exports = {
         "source": "v-text-field"
       },
       {
-        "name": "box",
+        "name": "cacheItems",
         "type": "boolean",
         "default": "false",
+        "source": null
+      },
+      {
+        "name": "chips",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "clearIcon",
+        "type": "string",
+        "default": "'$vuetify.icons.clear'",
         "source": "v-text-field"
       },
       {
-        "name": "autofocus",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-text-field"
-      },
-      {
-        "name": "appendOuterIconCb",
+        "name": "clearIconCb",
         "type": "function",
         "default": "null",
         "source": "v-text-field"
       },
       {
-        "name": "appendOuterIcon",
-        "type": "string",
-        "default": "undefined",
+        "name": "clearable",
+        "type": "boolean",
+        "default": "false",
         "source": "v-text-field"
       },
       {
-        "name": "openOnClick",
-        "type": "boolean",
-        "default": "true",
-        "source": "v-menu"
-      },
-      {
-        "name": "prependIcon",
+        "name": "color",
         "type": "string",
-        "default": "undefined",
-        "source": "v-input"
-      },
-      {
-        "name": "openOnClear",
-        "type": "boolean",
-        "default": "false",
-        "source": null
-      },
-      {
-        "name": "multiLine",
-        "type": "boolean",
-        "default": "false",
-        "source": null
-      },
-      {
-        "name": "multiple",
-        "type": "boolean",
-        "default": "false",
-        "source": null
-      },
-      {
-        "name": "dontFillMaskBlanks",
-        "type": "boolean",
-        "default": "false",
-        "source": "maskable"
-      },
-      {
-        "name": "mask",
-        "type": [
-          "object",
-          "string"
-        ],
-        "default": "undefined",
-        "source": "maskable"
-      },
-      {
-        "name": "itemValue",
-        "type": [
-          "string",
-          "array",
-          "function"
-        ],
-        "default": "value",
-        "source": null
-      },
-      {
-        "name": "persistentHint",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-input"
-      },
-      {
-        "name": "label",
-        "type": "string",
-        "default": "undefined",
-        "source": "v-input"
-      },
-      {
-        "name": "hint",
-        "type": "string",
-        "default": "undefined",
-        "source": "v-input"
-      },
-      {
-        "name": "hideDetails",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-input"
-      },
-      {
-        "name": "height",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": "undefined",
-        "source": "v-input"
-      },
-      {
-        "name": "disabled",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-input"
-      },
-      {
-        "name": "itemText",
-        "type": [
-          "string",
-          "array",
-          "function"
-        ],
-        "default": "text",
-        "source": null
-      },
-      {
-        "name": "itemDisabled",
-        "type": [
-          "string",
-          "array",
-          "function"
-        ],
-        "default": "disabled",
-        "source": null
+        "default": "'primary'",
+        "source": "colorable"
       },
       {
         "name": "counter",
@@ -8016,6 +8038,64 @@ module.exports = {
         ],
         "default": "undefined",
         "source": "v-text-field"
+      },
+      {
+        "name": "dark",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
+      },
+      {
+        "name": "deletableChips",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "dense",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-input"
+      },
+      {
+        "name": "dontFillMaskBlanks",
+        "type": "boolean",
+        "default": "false",
+        "source": "maskable"
+      },
+      {
+        "name": "error",
+        "type": "boolean",
+        "default": "false",
+        "source": "validatable"
+      },
+      {
+        "name": "errorCount",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": 1,
+        "source": "validatable"
+      },
+      {
+        "name": "errorMessages",
+        "type": [
+          "string",
+          "array"
+        ],
+        "default": [],
+        "source": "validatable"
+      },
+      {
+        "name": "filter",
+        "default": "(item: object, queryText: string, itemText: string) => boolean"
       },
       {
         "name": "flat",
@@ -8030,10 +8110,161 @@ module.exports = {
         "source": "v-text-field"
       },
       {
+        "name": "height",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": "undefined",
+        "source": "v-input"
+      },
+      {
+        "name": "hideDetails",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-input"
+      },
+      {
+        "name": "hideSelected",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "hint",
+        "type": "string",
+        "default": "undefined",
+        "source": "v-input"
+      },
+      {
+        "name": "itemAvatar",
+        "type": [
+          "string",
+          "array",
+          "function"
+        ],
+        "default": "avatar",
+        "source": null
+      },
+      {
+        "name": "itemDisabled",
+        "type": [
+          "string",
+          "array",
+          "function"
+        ],
+        "default": "disabled",
+        "source": null
+      },
+      {
+        "name": "itemText",
+        "type": [
+          "string",
+          "array",
+          "function"
+        ],
+        "default": "text",
+        "source": null
+      },
+      {
+        "name": "itemValue",
+        "type": [
+          "string",
+          "array",
+          "function"
+        ],
+        "default": "value",
+        "source": null
+      },
+      {
+        "name": "items",
+        "type": "array",
+        "default": [],
+        "source": null
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "default": "undefined",
+        "source": "v-input"
+      },
+      {
+        "name": "light",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
+      },
+      {
+        "name": "loading",
+        "type": [
+          "boolean",
+          "string"
+        ],
+        "default": false,
+        "source": "loadable"
+      },
+      {
+        "name": "mask",
+        "type": [
+          "object",
+          "string"
+        ],
+        "default": "undefined",
+        "source": "maskable"
+      },
+      {
+        "name": "menuProps",
+        "type": [
+          "string",
+          "array",
+          "object"
+        ],
+        "default": {
+          "closeOnClick": false,
+          "closeOnContentClick": false,
+          "openOnClick": false,
+          "maxHeight": 300
+        },
+        "source": null
+      },
+      {
+        "name": "messages",
+        "type": [
+          "string",
+          "array"
+        ],
+        "default": [],
+        "source": "validatable"
+      },
+      {
+        "name": "multiple",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "noDataText",
+        "type": "string",
+        "default": "'$vuetify.noDataText'",
+        "source": "filterable"
+      },
+      {
+        "name": "openOnClear",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
         "name": "outline",
         "type": "boolean",
         "default": "false",
         "source": "v-text-field"
+      },
+      {
+        "name": "persistentHint",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-input"
       },
       {
         "name": "placeholder",
@@ -8048,267 +8279,16 @@ module.exports = {
         "source": "v-text-field"
       },
       {
-        "name": "itemAvatar",
-        "type": [
-          "string",
-          "array",
-          "function"
-        ],
-        "default": "avatar",
-        "source": null
-      },
-      {
-        "name": "items",
-        "type": "array",
-        "default": [],
-        "source": null
-      },
-      {
-        "name": "hideSelected",
-        "type": "boolean",
-        "default": "false",
-        "source": null
-      },
-      {
-        "name": "dense",
-        "type": "boolean",
-        "default": "false",
-        "source": null
-      },
-      {
-        "name": "deletableChips",
-        "type": "boolean",
-        "default": "false",
-        "source": null
-      },
-      {
-        "name": "loading",
-        "type": [
-          "boolean",
-          "string"
-        ],
-        "default": false,
-        "source": "loadable"
-      },
-      {
-        "name": "contentClass",
+        "name": "prependIcon",
         "type": "string",
         "default": "undefined",
-        "source": null
-      },
-      {
-        "name": "dark",
-        "type": "boolean",
-        "default": "false",
-        "source": "themeable"
-      },
-      {
-        "name": "light",
-        "type": "boolean",
-        "default": "false",
-        "source": "themeable"
-      },
-      {
-        "name": "error",
-        "type": "boolean",
-        "default": "false",
-        "source": "validatable"
-      },
-      {
-        "name": "noDataText",
-        "type": "string",
-        "default": "'$vuetify.noDataText'",
-        "source": "filterable"
-      },
-      {
-        "name": "messages",
-        "type": [
-          "string",
-          "array"
-        ],
-        "default": [],
-        "source": "validatable"
-      },
-      {
-        "name": "maxHeight",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": 300,
-        "source": "v-menu"
-      },
-      {
-        "name": "offsetX",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-menu"
-      },
-      {
-        "name": "offsetY",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-menu"
-      },
-      {
-        "name": "positionY",
-        "type": "number",
-        "default": "undefined",
-        "source": "menuable"
-      },
-      {
-        "name": "openOnHover",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-menu"
-      },
-      {
-        "name": "origin",
-        "type": "string",
-        "default": "'top left'",
-        "source": "v-menu"
-      },
-      {
-        "name": "positionX",
-        "type": "number",
-        "default": "undefined",
-        "source": "menuable"
-      },
-      {
-        "name": "errorMessages",
-        "type": [
-          "string",
-          "array"
-        ],
-        "default": [],
-        "source": "validatable"
-      },
-      {
-        "name": "errorCount",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": 1,
-        "source": "validatable"
-      },
-      {
-        "name": "inputActivator",
-        "type": "boolean",
-        "default": "false",
-        "source": "menuable"
-      },
-      {
-        "name": "maxWidth",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": "auto",
-        "source": "menuable"
-      },
-      {
-        "name": "minWidth",
-        "type": [
-          "boolean",
-          "number",
-          "string"
-        ],
-        "default": 0,
-        "source": "menuable"
-      },
-      {
-        "name": "nudgeBottom",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": 0,
-        "source": "menuable"
-      },
-      {
-        "name": "nudgeLeft",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": 0,
-        "source": "menuable"
-      },
-      {
-        "name": "nudgeRight",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": 0,
-        "source": "menuable"
-      },
-      {
-        "name": "nudgeTop",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": 0,
-        "source": "menuable"
-      },
-      {
-        "name": "nudgeWidth",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": 0,
-        "source": "menuable"
-      },
-      {
-        "name": "offsetOverflow",
-        "type": "boolean",
-        "default": "false",
-        "source": "menuable"
-      },
-      {
-        "name": "reverse",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-text-field"
-      },
-      {
-        "name": "smallChips",
-        "type": "boolean",
-        "default": "false",
-        "source": null
-      },
-      {
-        "name": "searchInput",
-        "type": "any",
-        "default": "undefined",
-        "source": null
-      },
-      {
-        "name": "returnObject",
-        "type": "boolean",
-        "default": "false",
-        "source": null
-      },
-      {
-        "name": "rules",
-        "type": "array",
-        "default": [],
-        "source": "validatable"
-      },
-      {
-        "name": "readonly",
-        "type": "boolean",
-        "default": "false",
         "source": "v-input"
       },
       {
-        "name": "returnMaskedValue",
-        "type": "boolean",
-        "default": "false",
-        "source": "maskable"
+        "name": "prependIconCb",
+        "type": "function",
+        "default": "null",
+        "source": "v-input"
       },
       {
         "name": "prependInnerIcon",
@@ -8323,10 +8303,40 @@ module.exports = {
         "source": "v-text-field"
       },
       {
-        "name": "prependIconCb",
-        "type": "function",
-        "default": "null",
+        "name": "readonly",
+        "type": "boolean",
+        "default": "false",
         "source": "v-input"
+      },
+      {
+        "name": "returnMaskedValue",
+        "type": "boolean",
+        "default": "false",
+        "source": "maskable"
+      },
+      {
+        "name": "returnObject",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "reverse",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-text-field"
+      },
+      {
+        "name": "rules",
+        "type": "array",
+        "default": [],
+        "source": "validatable"
+      },
+      {
+        "name": "searchInput",
+        "type": "any",
+        "default": "undefined",
+        "source": null
       },
       {
         "name": "singleLine",
@@ -8335,13 +8345,19 @@ module.exports = {
         "source": "v-text-field"
       },
       {
-        "name": "value",
-        "type": "any",
-        "default": "undefined",
-        "source": "v-input"
+        "name": "smallChips",
+        "type": "boolean",
+        "default": "false",
+        "source": null
       },
       {
         "name": "solo",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-text-field"
+      },
+      {
+        "name": "soloInverted",
         "type": "boolean",
         "default": "false",
         "source": "v-text-field"
@@ -8368,25 +8384,10 @@ module.exports = {
         "source": "v-text-field"
       },
       {
-        "name": "tabindex",
-        "type": "any",
-        "default": 0,
-        "source": "v-input"
-      },
-      {
         "name": "textarea",
         "type": "boolean",
         "default": "false",
         "source": "v-text-field"
-      },
-      {
-        "name": "transition",
-        "type": [
-          "boolean",
-          "string"
-        ],
-        "default": "v-menu-transition",
-        "source": "v-menu"
       },
       {
         "name": "type",
@@ -8401,31 +8402,21 @@ module.exports = {
         "source": "validatable"
       },
       {
+        "name": "value",
+        "type": "any",
+        "default": "undefined",
+        "source": "v-input"
+      },
+      {
         "name": "valueComparator",
         "type": "function",
         "default": "(a: any, b: any) => boolean",
         "source": "comparable"
-      },
-      {
-        "name": "zIndex",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": "undefined",
-        "source": "menuable"
-      },
-      {
-        "name": "filter",
-        "default": "(item: object, queryText: string, itemText: string) => boolean"
       }
     ],
     "mixins": [
       "comparable",
-      "dependent",
-      "filterable",
-      "menuable",
-      "v-menu"
+      "filterable"
     ],
     "slots": [
       "append",
@@ -8477,25 +8468,13 @@ module.exports = {
   "v-slider": {
     "props": [
       {
-        "name": "label",
-        "type": "string",
-        "default": "undefined",
-        "source": "v-input"
-      },
-      {
-        "name": "color",
-        "type": "string",
-        "default": "undefined",
-        "source": "colorable"
-      },
-      {
         "name": "alwaysDirty",
         "type": "boolean",
         "default": "false",
         "source": null
       },
       {
-        "name": "backgroundColor",
+        "name": "appendIcon",
         "type": "string",
         "default": "undefined",
         "source": "v-input"
@@ -8507,25 +8486,16 @@ module.exports = {
         "source": "v-input"
       },
       {
-        "name": "appendIcon",
+        "name": "backgroundColor",
         "type": "string",
         "default": "undefined",
         "source": "v-input"
       },
       {
-        "name": "prependIconCb",
-        "type": "function",
-        "default": "null",
-        "source": "v-input"
-      },
-      {
-        "name": "errorMessages",
-        "type": [
-          "string",
-          "array"
-        ],
-        "default": [],
-        "source": "validatable"
+        "name": "color",
+        "type": "string",
+        "default": "undefined",
+        "source": "colorable"
       },
       {
         "name": "dark",
@@ -8555,30 +8525,12 @@ module.exports = {
         "source": "validatable"
       },
       {
-        "name": "value",
+        "name": "errorMessages",
         "type": [
-          "number",
-          "string"
+          "string",
+          "array"
         ],
-        "default": "undefined",
-        "source": "v-input"
-      },
-      {
-        "name": "trackColor",
-        "type": "string",
-        "default": "undefined",
-        "source": null
-      },
-      {
-        "name": "light",
-        "type": "boolean",
-        "default": "false",
-        "source": "themeable"
-      },
-      {
-        "name": "success",
-        "type": "boolean",
-        "default": "false",
+        "default": [],
         "source": "validatable"
       },
       {
@@ -8603,6 +8555,24 @@ module.exports = {
         "source": "v-input"
       },
       {
+        "name": "inverseLabel",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "default": "undefined",
+        "source": "v-input"
+      },
+      {
+        "name": "light",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
+      },
+      {
         "name": "loading",
         "type": [
           "boolean",
@@ -8610,6 +8580,33 @@ module.exports = {
         ],
         "default": false,
         "source": "loadable"
+      },
+      {
+        "name": "max",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": 100,
+        "source": null
+      },
+      {
+        "name": "messages",
+        "type": [
+          "string",
+          "array"
+        ],
+        "default": [],
+        "source": "validatable"
+      },
+      {
+        "name": "min",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": 0,
+        "source": null
       },
       {
         "name": "persistentHint",
@@ -8624,13 +8621,16 @@ module.exports = {
         "source": "v-input"
       },
       {
-        "name": "messages",
-        "type": [
-          "string",
-          "array"
-        ],
-        "default": [],
-        "source": "validatable"
+        "name": "prependIconCb",
+        "type": "function",
+        "default": "null",
+        "source": "v-input"
+      },
+      {
+        "name": "range",
+        "type": "boolean",
+        "default": "false",
+        "source": null
       },
       {
         "name": "readonly",
@@ -8639,55 +8639,10 @@ module.exports = {
         "source": "v-input"
       },
       {
-        "name": "tabindex",
-        "type": "any",
-        "default": 0,
-        "source": "v-input"
-      },
-      {
-        "name": "successMessages",
-        "type": [
-          "string",
-          "array"
-        ],
-        "default": [],
-        "source": "validatable"
-      },
-      {
         "name": "rules",
         "type": "array",
         "default": [],
         "source": "validatable"
-      },
-      {
-        "name": "inverseLabel",
-        "type": "boolean",
-        "default": "false",
-        "source": null
-      },
-      {
-        "name": "min",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": 0,
-        "source": null
-      },
-      {
-        "name": "max",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": 100,
-        "source": null
-      },
-      {
-        "name": "range",
-        "type": "boolean",
-        "default": "false",
-        "source": null
       },
       {
         "name": "step",
@@ -8699,28 +8654,19 @@ module.exports = {
         "source": null
       },
       {
-        "name": "ticks",
-        "type": [
-          "boolean",
-          "string"
-        ],
-        "default": false,
-        "source": null
+        "name": "success",
+        "type": "boolean",
+        "default": "false",
+        "source": "validatable"
       },
       {
-        "name": "tickLabels",
-        "type": "array",
+        "name": "successMessages",
+        "type": [
+          "string",
+          "array"
+        ],
         "default": [],
-        "source": null
-      },
-      {
-        "name": "tickSize",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": 1,
-        "source": null
+        "source": "validatable"
       },
       {
         "name": "thumbColor",
@@ -8747,10 +8693,49 @@ module.exports = {
         "source": null
       },
       {
+        "name": "tickLabels",
+        "type": "array",
+        "default": [],
+        "source": null
+      },
+      {
+        "name": "tickSize",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": 1,
+        "source": null
+      },
+      {
+        "name": "ticks",
+        "type": [
+          "boolean",
+          "string"
+        ],
+        "default": false,
+        "source": null
+      },
+      {
+        "name": "trackColor",
+        "type": "string",
+        "default": "undefined",
+        "source": null
+      },
+      {
         "name": "validateOnBlur",
         "type": "boolean",
         "default": "false",
         "source": "validatable"
+      },
+      {
+        "name": "value",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": "undefined",
+        "source": "v-input"
       }
     ],
     "mixins": [
@@ -8787,18 +8772,6 @@ module.exports = {
   "v-snackbar": {
     "props": [
       {
-        "name": "left",
-        "type": "boolean",
-        "default": "false",
-        "source": "positionable"
-      },
-      {
-        "name": "color",
-        "type": "string",
-        "default": "undefined",
-        "source": "colorable"
-      },
-      {
         "name": "absolute",
         "type": "boolean",
         "default": "false",
@@ -8812,6 +8785,18 @@ module.exports = {
       },
       {
         "name": "bottom",
+        "type": "boolean",
+        "default": "false",
+        "source": "positionable"
+      },
+      {
+        "name": "color",
+        "type": "string",
+        "default": "undefined",
+        "source": "colorable"
+      },
+      {
+        "name": "left",
         "type": "boolean",
         "default": "false",
         "source": "positionable"
@@ -8864,12 +8849,6 @@ module.exports = {
   },
   "v-speed-dial": {
     "props": [
-      {
-        "name": "value",
-        "type": "any",
-        "default": "undefined",
-        "source": "toggleable"
-      },
       {
         "name": "absolute",
         "type": "boolean",
@@ -8935,6 +8914,12 @@ module.exports = {
         "type": "string",
         "default": "'scale-transition'",
         "source": "transitionable"
+      },
+      {
+        "name": "value",
+        "type": "any",
+        "default": "undefined",
+        "source": "toggleable"
       }
     ],
     "mixins": [
@@ -9123,19 +9108,7 @@ module.exports = {
   "v-switch": {
     "props": [
       {
-        "name": "hideDetails",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-input"
-      },
-      {
-        "name": "color",
-        "type": "string",
-        "default": "'accent'",
-        "source": "colorable"
-      },
-      {
-        "name": "backgroundColor",
+        "name": "appendIcon",
         "type": "string",
         "default": "undefined",
         "source": "v-input"
@@ -9147,16 +9120,34 @@ module.exports = {
         "source": "v-input"
       },
       {
-        "name": "appendIcon",
+        "name": "backgroundColor",
         "type": "string",
         "default": "undefined",
         "source": "v-input"
       },
       {
-        "name": "label",
+        "name": "color",
         "type": "string",
-        "default": "undefined",
+        "default": "'accent'",
+        "source": "colorable"
+      },
+      {
+        "name": "dark",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": "false",
         "source": "v-input"
+      },
+      {
+        "name": "error",
+        "type": "boolean",
+        "default": "false",
+        "source": "validatable"
       },
       {
         "name": "errorCount",
@@ -9168,31 +9159,7 @@ module.exports = {
         "source": "validatable"
       },
       {
-        "name": "disabled",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-input"
-      },
-      {
-        "name": "dark",
-        "type": "boolean",
-        "default": "false",
-        "source": "themeable"
-      },
-      {
-        "name": "error",
-        "type": "boolean",
-        "default": "false",
-        "source": "validatable"
-      },
-      {
-        "name": "prependIconCb",
-        "type": "function",
-        "default": "null",
-        "source": "v-input"
-      },
-      {
-        "name": "successMessages",
+        "name": "errorMessages",
         "type": [
           "string",
           "array"
@@ -9201,31 +9168,10 @@ module.exports = {
         "source": "validatable"
       },
       {
-        "name": "success",
-        "type": "boolean",
-        "default": "false",
-        "source": "validatable"
-      },
-      {
-        "name": "light",
-        "type": "boolean",
-        "default": "false",
-        "source": "themeable"
-      },
-      {
-        "name": "rules",
-        "type": "array",
-        "default": [],
-        "source": "validatable"
-      },
-      {
-        "name": "messages",
-        "type": [
-          "string",
-          "array"
-        ],
-        "default": [],
-        "source": "validatable"
+        "name": "falseValue",
+        "type": "any",
+        "default": "undefined",
+        "source": "selectable"
       },
       {
         "name": "height",
@@ -9237,6 +9183,42 @@ module.exports = {
         "source": "v-input"
       },
       {
+        "name": "hideDetails",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-input"
+      },
+      {
+        "name": "hint",
+        "type": "string",
+        "default": "undefined",
+        "source": "v-input"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "default": "undefined",
+        "source": "selectable"
+      },
+      {
+        "name": "inputValue",
+        "type": "any",
+        "default": "undefined",
+        "source": "selectable"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "default": "undefined",
+        "source": "v-input"
+      },
+      {
+        "name": "light",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
+      },
+      {
         "name": "loading",
         "type": [
           "boolean",
@@ -9246,19 +9228,19 @@ module.exports = {
         "source": "loadable"
       },
       {
-        "name": "hint",
-        "type": "string",
-        "default": "undefined",
-        "source": "v-input"
-      },
-      {
-        "name": "errorMessages",
+        "name": "messages",
         "type": [
           "string",
           "array"
         ],
         "default": [],
         "source": "validatable"
+      },
+      {
+        "name": "multiple",
+        "type": "boolean",
+        "default": "false",
+        "source": "selectable"
       },
       {
         "name": "persistentHint",
@@ -9273,28 +9255,16 @@ module.exports = {
         "source": "v-input"
       },
       {
-        "name": "multiple",
-        "type": "boolean",
-        "default": "false",
-        "source": "selectable"
+        "name": "prependIconCb",
+        "type": "function",
+        "default": "null",
+        "source": "v-input"
       },
       {
         "name": "readonly",
         "type": "boolean",
         "default": "false",
         "source": "v-input"
-      },
-      {
-        "name": "falseValue",
-        "type": "any",
-        "default": "undefined",
-        "source": "selectable"
-      },
-      {
-        "name": "inputValue",
-        "type": "any",
-        "default": "undefined",
-        "source": "selectable"
       },
       {
         "name": "ripple",
@@ -9306,25 +9276,25 @@ module.exports = {
         "source": "rippleable"
       },
       {
-        "name": "id",
-        "type": "string",
-        "default": "undefined",
-        "source": "selectable"
-      },
-      {
-        "name": "tabindex",
-        "type": "any",
-        "default": 0,
-        "source": "v-input"
-      },
-      {
-        "name": "toggleKeys",
+        "name": "rules",
         "type": "array",
-        "default": [
-          13,
-          32
+        "default": [],
+        "source": "validatable"
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "default": "false",
+        "source": "validatable"
+      },
+      {
+        "name": "successMessages",
+        "type": [
+          "string",
+          "array"
         ],
-        "source": "selectable"
+        "default": [],
+        "source": "validatable"
       },
       {
         "name": "trueValue",
@@ -9439,24 +9409,9 @@ module.exports = {
   "v-tabs": {
     "props": [
       {
-        "name": "mobileBreakPoint",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": 1264,
-        "source": null
-      },
-      {
-        "name": "color",
+        "name": "activeClass",
         "type": "string",
-        "default": "undefined",
-        "source": "colorable"
-      },
-      {
-        "name": "centered",
-        "type": "boolean",
-        "default": "false",
+        "default": "'v-tabs__item--active'",
         "source": null
       },
       {
@@ -9466,16 +9421,16 @@ module.exports = {
         "source": null
       },
       {
-        "name": "prevIcon",
-        "type": "string",
-        "default": "'$vuetify.icons.prev'",
-        "source": null
-      },
-      {
-        "name": "grow",
+        "name": "centered",
         "type": "boolean",
         "default": "false",
         "source": null
+      },
+      {
+        "name": "color",
+        "type": "string",
+        "default": "undefined",
+        "source": "colorable"
       },
       {
         "name": "dark",
@@ -9485,6 +9440,12 @@ module.exports = {
       },
       {
         "name": "fixedTabs",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "grow",
         "type": "boolean",
         "default": "false",
         "source": null
@@ -9517,9 +9478,45 @@ module.exports = {
         "source": "themeable"
       },
       {
+        "name": "mandatory",
+        "type": "boolean",
+        "default": "true",
+        "source": null
+      },
+      {
+        "name": "max",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "mobileBreakPoint",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": 1264,
+        "source": null
+      },
+      {
+        "name": "multiple",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
         "name": "nextIcon",
         "type": "string",
         "default": "'$vuetify.icons.next'",
+        "source": null
+      },
+      {
+        "name": "prevIcon",
+        "type": "string",
+        "default": "'$vuetify.icons.prev'",
         "source": null
       },
       {
@@ -9552,7 +9549,6 @@ module.exports = {
     ],
     "mixins": [
       "colorable",
-      "registrable-provide",
       "ssr-bootable",
       "themeable"
     ],
@@ -9569,18 +9565,8 @@ module.exports = {
   "v-tab": {
     "props": [
       {
-        "name": "to",
-        "type": [
-          "string",
-          "object"
-        ],
-        "default": "undefined",
-        "source": "routable"
-      },
-      {
         "name": "activeClass",
         "type": "string",
-        "default": "'v-tabs__item--active'",
         "source": "routable"
       },
       {
@@ -9588,6 +9574,12 @@ module.exports = {
         "type": "boolean",
         "default": "false",
         "source": "routable"
+      },
+      {
+        "name": "dark",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
       },
       {
         "name": "disabled",
@@ -9615,6 +9607,12 @@ module.exports = {
         ],
         "default": "undefined",
         "source": "routable"
+      },
+      {
+        "name": "light",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
       },
       {
         "name": "nuxt",
@@ -9648,55 +9646,39 @@ module.exports = {
         "type": "string",
         "default": "undefined",
         "source": "routable"
-      }
-    ],
-    "mixins": [
-      "registrable-inject",
-      "routable"
-    ],
-    "slots": [
-      "default"
-    ]
-  },
-  "v-tabs-items": {
-    "props": [
-      {
-        "name": "cycle",
-        "type": "boolean",
-        "default": "false",
-        "source": null
       },
       {
-        "name": "touchless",
-        "type": "boolean",
-        "default": "false",
-        "source": null
-      },
-      {
-        "name": "value",
+        "name": "to",
         "type": [
-          "number",
-          "string"
+          "string",
+          "object"
         ],
         "default": "undefined",
-        "source": null
+        "source": "routable"
       }
     ],
     "mixins": [
-      "registrable-provide"
+      "groupable",
+      "routable",
+      "themeable"
     ],
     "slots": [
       "default"
-    ],
-    "events": [
-      {
-        "name": "input",
-        "value": "string"
-      }
     ]
   },
   "v-tab-item": {
     "props": [
+      {
+        "name": "activeClass",
+        "type": "string",
+        "source": "groupable"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": "false",
+        "source": "groupable"
+      },
       {
         "name": "id",
         "type": "string",
@@ -9715,7 +9697,7 @@ module.exports = {
           "boolean",
           "string"
         ],
-        "default": "tab-reverse-transition",
+        "default": "undefined",
         "source": null
       },
       {
@@ -9724,16 +9706,108 @@ module.exports = {
           "boolean",
           "string"
         ],
-        "default": "tab-transition",
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "value",
+        "type": "any",
+        "default": "undefined",
         "source": null
       }
     ],
     "mixins": [
       "bootable",
-      "registrable-inject"
+      "groupable"
     ],
     "slots": [
       "default"
+    ]
+  },
+  "v-tabs-items": {
+    "props": [
+      {
+        "name": "activeClass",
+        "type": "string",
+        "default": "'v-item--active'",
+        "source": null
+      },
+      {
+        "name": "cycle",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "dark",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
+      },
+      {
+        "name": "light",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
+      },
+      {
+        "name": "mandatory",
+        "type": "boolean",
+        "default": "true",
+        "source": null
+      },
+      {
+        "name": "max",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "multiple",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "reverse",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "touchless",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "value",
+        "type": "any",
+        "default": "undefined",
+        "source": "proxyable"
+      },
+      {
+        "name": "vertical",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      }
+    ],
+    "mixins": [
+      "proxyable",
+      "themeable"
+    ],
+    "slots": [
+      "default"
+    ],
+    "events": [
+      {
+        "name": "input",
+        "value": "string"
+      }
     ]
   },
   "v-tabs-slider": {
@@ -9752,78 +9826,6 @@ module.exports = {
   "v-textarea": {
     "props": [
       {
-        "name": "returnMaskedValue",
-        "type": "boolean",
-        "default": "false",
-        "source": "maskable"
-      },
-      {
-        "name": "color",
-        "type": "string",
-        "default": "'primary'",
-        "source": "colorable"
-      },
-      {
-        "name": "autoGrow",
-        "type": "boolean",
-        "default": "false",
-        "source": null
-      },
-      {
-        "name": "clearIconCb",
-        "type": "function",
-        "default": "null",
-        "source": "v-text-field"
-      },
-      {
-        "name": "clearIcon",
-        "type": "string",
-        "default": "'$vuetify.icons.clear'",
-        "source": "v-text-field"
-      },
-      {
-        "name": "clearable",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-text-field"
-      },
-      {
-        "name": "browserAutocomplete",
-        "type": "string",
-        "default": "undefined",
-        "source": "v-text-field"
-      },
-      {
-        "name": "box",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-text-field"
-      },
-      {
-        "name": "autofocus",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-text-field"
-      },
-      {
-        "name": "appendOuterIconCb",
-        "type": "function",
-        "default": "null",
-        "source": "v-text-field"
-      },
-      {
-        "name": "appendOuterIcon",
-        "type": "string",
-        "default": "undefined",
-        "source": "v-text-field"
-      },
-      {
-        "name": "backgroundColor",
-        "type": "string",
-        "default": "undefined",
-        "source": "v-input"
-      },
-      {
         "name": "appendIcon",
         "type": "string",
         "default": "undefined",
@@ -9836,19 +9838,134 @@ module.exports = {
         "source": "v-input"
       },
       {
+        "name": "appendOuterIcon",
+        "type": "string",
+        "default": "undefined",
+        "source": "v-text-field"
+      },
+      {
+        "name": "appendOuterIconCb",
+        "type": "function",
+        "default": "null",
+        "source": "v-text-field"
+      },
+      {
+        "name": "autoGrow",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "autofocus",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-text-field"
+      },
+      {
+        "name": "backgroundColor",
+        "type": "string",
+        "default": "undefined",
+        "source": "v-input"
+      },
+      {
+        "name": "box",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-text-field"
+      },
+      {
+        "name": "browserAutocomplete",
+        "type": "string",
+        "default": "undefined",
+        "source": "v-text-field"
+      },
+      {
+        "name": "clearIcon",
+        "type": "string",
+        "default": "'$vuetify.icons.clear'",
+        "source": "v-text-field"
+      },
+      {
+        "name": "clearIconCb",
+        "type": "function",
+        "default": "null",
+        "source": "v-text-field"
+      },
+      {
+        "name": "clearable",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-text-field"
+      },
+      {
+        "name": "color",
+        "type": "string",
+        "default": "'primary'",
+        "source": "colorable"
+      },
+      {
+        "name": "counter",
+        "type": [
+          "boolean",
+          "number",
+          "string"
+        ],
+        "default": "undefined",
+        "source": "v-text-field"
+      },
+      {
+        "name": "dark",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-input"
+      },
+      {
+        "name": "dontFillMaskBlanks",
+        "type": "boolean",
+        "default": "false",
+        "source": "maskable"
+      },
+      {
         "name": "error",
         "type": "boolean",
         "default": "false",
         "source": "validatable"
       },
       {
-        "name": "rows",
+        "name": "errorCount",
         "type": [
           "number",
           "string"
         ],
-        "default": 5,
-        "source": null
+        "default": 1,
+        "source": "validatable"
+      },
+      {
+        "name": "errorMessages",
+        "type": [
+          "string",
+          "array"
+        ],
+        "default": [],
+        "source": "validatable"
+      },
+      {
+        "name": "flat",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-text-field"
+      },
+      {
+        "name": "fullWidth",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-text-field"
       },
       {
         "name": "height",
@@ -9878,58 +9995,10 @@ module.exports = {
         "source": "v-input"
       },
       {
-        "name": "persistentHint",
+        "name": "light",
         "type": "boolean",
         "default": "false",
-        "source": "v-input"
-      },
-      {
-        "name": "prependIcon",
-        "type": "string",
-        "default": "undefined",
-        "source": "v-input"
-      },
-      {
-        "name": "prependIconCb",
-        "type": "function",
-        "default": "null",
-        "source": "v-input"
-      },
-      {
-        "name": "readonly",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-input"
-      },
-      {
-        "name": "rowHeight",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": 24,
-        "source": null
-      },
-      {
-        "name": "noResize",
-        "type": "boolean",
-        "default": "false",
-        "source": null
-      },
-      {
-        "name": "dontFillMaskBlanks",
-        "type": "boolean",
-        "default": "false",
-        "source": "maskable"
-      },
-      {
-        "name": "mask",
-        "type": [
-          "object",
-          "string"
-        ],
-        "default": "undefined",
-        "source": "maskable"
+        "source": "themeable"
       },
       {
         "name": "loading",
@@ -9941,22 +10010,13 @@ module.exports = {
         "source": "loadable"
       },
       {
-        "name": "dark",
-        "type": "boolean",
-        "default": "false",
-        "source": "themeable"
-      },
-      {
-        "name": "reverse",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-text-field"
-      },
-      {
-        "name": "prependInnerIconCb",
-        "type": "function",
-        "default": "null",
-        "source": "v-text-field"
+        "name": "mask",
+        "type": [
+          "object",
+          "string"
+        ],
+        "default": "undefined",
+        "source": "maskable"
       },
       {
         "name": "messages",
@@ -9968,62 +10028,22 @@ module.exports = {
         "source": "validatable"
       },
       {
-        "name": "errorMessages",
-        "type": [
-          "string",
-          "array"
-        ],
-        "default": [],
-        "source": "validatable"
-      },
-      {
-        "name": "errorCount",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": 1,
-        "source": "validatable"
-      },
-      {
-        "name": "disabled",
+        "name": "noResize",
         "type": "boolean",
         "default": "false",
-        "source": "v-input"
-      },
-      {
-        "name": "light",
-        "type": "boolean",
-        "default": "false",
-        "source": "themeable"
-      },
-      {
-        "name": "counter",
-        "type": [
-          "boolean",
-          "number",
-          "string"
-        ],
-        "default": "undefined",
-        "source": "v-text-field"
-      },
-      {
-        "name": "flat",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-text-field"
-      },
-      {
-        "name": "fullWidth",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-text-field"
+        "source": null
       },
       {
         "name": "outline",
         "type": "boolean",
         "default": "false",
         "source": "v-text-field"
+      },
+      {
+        "name": "persistentHint",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-input"
       },
       {
         "name": "placeholder",
@@ -10038,16 +10058,64 @@ module.exports = {
         "source": "v-text-field"
       },
       {
+        "name": "prependIcon",
+        "type": "string",
+        "default": "undefined",
+        "source": "v-input"
+      },
+      {
+        "name": "prependIconCb",
+        "type": "function",
+        "default": "null",
+        "source": "v-input"
+      },
+      {
         "name": "prependInnerIcon",
         "type": "string",
         "default": "undefined",
         "source": "v-text-field"
       },
       {
-        "name": "textarea",
+        "name": "prependInnerIconCb",
+        "type": "function",
+        "default": "null",
+        "source": "v-text-field"
+      },
+      {
+        "name": "readonly",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-input"
+      },
+      {
+        "name": "returnMaskedValue",
+        "type": "boolean",
+        "default": "false",
+        "source": "maskable"
+      },
+      {
+        "name": "reverse",
         "type": "boolean",
         "default": "false",
         "source": "v-text-field"
+      },
+      {
+        "name": "rowHeight",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": 24,
+        "source": null
+      },
+      {
+        "name": "rows",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": 5,
+        "source": null
       },
       {
         "name": "rules",
@@ -10095,10 +10163,10 @@ module.exports = {
         "source": "v-text-field"
       },
       {
-        "name": "tabindex",
-        "type": "any",
-        "default": 0,
-        "source": "v-input"
+        "name": "textarea",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-text-field"
       },
       {
         "name": "type",
@@ -10126,67 +10194,7 @@ module.exports = {
   "v-text-field": {
     "props": [
       {
-        "name": "dontFillMaskBlanks",
-        "type": "boolean",
-        "default": "false",
-        "source": "maskable"
-      },
-      {
-        "name": "color",
-        "type": "string",
-        "default": "'primary'",
-        "source": "colorable"
-      },
-      {
-        "name": "clearIconCb",
-        "type": "function",
-        "default": "null",
-        "source": null
-      },
-      {
-        "name": "clearIcon",
-        "type": "string",
-        "default": "'$vuetify.icons.clear'",
-        "source": null
-      },
-      {
-        "name": "clearable",
-        "type": "boolean",
-        "default": "false",
-        "source": null
-      },
-      {
-        "name": "browserAutocomplete",
-        "type": "string",
-        "default": "undefined",
-        "source": null
-      },
-      {
-        "name": "box",
-        "type": "boolean",
-        "default": "false",
-        "source": null
-      },
-      {
-        "name": "autofocus",
-        "type": "boolean",
-        "default": "false",
-        "source": null
-      },
-      {
-        "name": "appendOuterIconCb",
-        "type": "function",
-        "default": "null",
-        "source": null
-      },
-      {
-        "name": "appendOuterIcon",
-        "type": "string",
-        "default": "undefined",
-        "source": null
-      },
-      {
-        "name": "backgroundColor",
+        "name": "appendIcon",
         "type": "string",
         "default": "undefined",
         "source": "v-input"
@@ -10198,10 +10206,107 @@ module.exports = {
         "source": "v-input"
       },
       {
-        "name": "appendIcon",
+        "name": "appendOuterIcon",
+        "type": "string",
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "appendOuterIconCb",
+        "type": "function",
+        "default": "null",
+        "source": null
+      },
+      {
+        "name": "autofocus",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "backgroundColor",
         "type": "string",
         "default": "undefined",
         "source": "v-input"
+      },
+      {
+        "name": "box",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "browserAutocomplete",
+        "type": "string",
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "clearIcon",
+        "type": "string",
+        "default": "'$vuetify.icons.clear'",
+        "source": null
+      },
+      {
+        "name": "clearIconCb",
+        "type": "function",
+        "default": "null",
+        "source": null
+      },
+      {
+        "name": "clearable",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "color",
+        "type": "string",
+        "default": "'primary'",
+        "source": "colorable"
+      },
+      {
+        "name": "counter",
+        "type": [
+          "boolean",
+          "number",
+          "string"
+        ],
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "dark",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-input"
+      },
+      {
+        "name": "dontFillMaskBlanks",
+        "type": "boolean",
+        "default": "false",
+        "source": "maskable"
+      },
+      {
+        "name": "error",
+        "type": "boolean",
+        "default": "false",
+        "source": "validatable"
+      },
+      {
+        "name": "errorCount",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": 1,
+        "source": "validatable"
       },
       {
         "name": "errorMessages",
@@ -10213,16 +10318,16 @@ module.exports = {
         "source": "validatable"
       },
       {
-        "name": "type",
-        "type": "string",
-        "default": "'text'",
+        "name": "flat",
+        "type": "boolean",
+        "default": "false",
         "source": null
       },
       {
-        "name": "disabled",
+        "name": "fullWidth",
         "type": "boolean",
         "default": "false",
-        "source": "v-input"
+        "source": null
       },
       {
         "name": "height",
@@ -10252,40 +10357,10 @@ module.exports = {
         "source": "v-input"
       },
       {
-        "name": "persistentHint",
+        "name": "light",
         "type": "boolean",
         "default": "false",
-        "source": "v-input"
-      },
-      {
-        "name": "prependIcon",
-        "type": "string",
-        "default": "undefined",
-        "source": "v-input"
-      },
-      {
-        "name": "prependIconCb",
-        "type": "function",
-        "default": "null",
-        "source": "v-input"
-      },
-      {
-        "name": "readonly",
-        "type": "boolean",
-        "default": "false",
-        "source": "v-input"
-      },
-      {
-        "name": "tabindex",
-        "type": "any",
-        "default": 0,
-        "source": "v-input"
-      },
-      {
-        "name": "textarea",
-        "type": "boolean",
-        "default": "false",
-        "source": null
+        "source": "themeable"
       },
       {
         "name": "loading",
@@ -10306,24 +10381,6 @@ module.exports = {
         "source": "maskable"
       },
       {
-        "name": "returnMaskedValue",
-        "type": "boolean",
-        "default": "false",
-        "source": "maskable"
-      },
-      {
-        "name": "success",
-        "type": "boolean",
-        "default": "false",
-        "source": "validatable"
-      },
-      {
-        "name": "rules",
-        "type": "array",
-        "default": [],
-        "source": "validatable"
-      },
-      {
         "name": "messages",
         "type": [
           "string",
@@ -10333,68 +10390,16 @@ module.exports = {
         "source": "validatable"
       },
       {
-        "name": "successMessages",
-        "type": [
-          "string",
-          "array"
-        ],
-        "default": [],
-        "source": "validatable"
-      },
-      {
-        "name": "errorCount",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": 1,
-        "source": "validatable"
-      },
-      {
-        "name": "error",
-        "type": "boolean",
-        "default": "false",
-        "source": "validatable"
-      },
-      {
-        "name": "light",
-        "type": "boolean",
-        "default": "false",
-        "source": "themeable"
-      },
-      {
-        "name": "dark",
-        "type": "boolean",
-        "default": "false",
-        "source": "themeable"
-      },
-      {
-        "name": "counter",
-        "type": [
-          "boolean",
-          "number",
-          "string"
-        ],
-        "default": "undefined",
-        "source": null
-      },
-      {
-        "name": "flat",
-        "type": "boolean",
-        "default": "false",
-        "source": null
-      },
-      {
-        "name": "fullWidth",
-        "type": "boolean",
-        "default": "false",
-        "source": null
-      },
-      {
         "name": "outline",
         "type": "boolean",
         "default": "false",
         "source": null
+      },
+      {
+        "name": "persistentHint",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-input"
       },
       {
         "name": "placeholder",
@@ -10409,6 +10414,18 @@ module.exports = {
         "source": null
       },
       {
+        "name": "prependIcon",
+        "type": "string",
+        "default": "undefined",
+        "source": "v-input"
+      },
+      {
+        "name": "prependIconCb",
+        "type": "function",
+        "default": "null",
+        "source": "v-input"
+      },
+      {
         "name": "prependInnerIcon",
         "type": "string",
         "default": "undefined",
@@ -10421,10 +10438,28 @@ module.exports = {
         "source": null
       },
       {
+        "name": "readonly",
+        "type": "boolean",
+        "default": "false",
+        "source": "v-input"
+      },
+      {
+        "name": "returnMaskedValue",
+        "type": "boolean",
+        "default": "false",
+        "source": "maskable"
+      },
+      {
         "name": "reverse",
         "type": "boolean",
         "default": "false",
         "source": null
+      },
+      {
+        "name": "rules",
+        "type": "array",
+        "default": [],
+        "source": "validatable"
       },
       {
         "name": "singleLine",
@@ -10445,9 +10480,36 @@ module.exports = {
         "source": null
       },
       {
+        "name": "success",
+        "type": "boolean",
+        "default": "false",
+        "source": "validatable"
+      },
+      {
+        "name": "successMessages",
+        "type": [
+          "string",
+          "array"
+        ],
+        "default": [],
+        "source": "validatable"
+      },
+      {
         "name": "suffix",
         "type": "string",
         "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "textarea",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "type",
+        "type": "string",
+        "default": "'text'",
         "source": null
       },
       {
@@ -10476,6 +10538,10 @@ module.exports = {
         "value": "string"
       },
       {
+        "name": "click:prepend-inner",
+        "value": "Event"
+      },
+      {
         "name": "click:append-outer",
         "value": "Event"
       },
@@ -10485,51 +10551,12 @@ module.exports = {
       }
     ]
   },
-  "v-time-picker": {
+  "v-timeline": {
     "props": [
       {
-        "name": "width",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": 290,
-        "source": "picker"
-      },
-      {
-        "name": "color",
-        "type": "string",
-        "default": "undefined",
-        "source": "colorable"
-      },
-      {
-        "name": "allowedMinutes",
-        "type": "function",
-        "default": "null",
-        "source": null
-      },
-      {
-        "name": "allowedHours",
-        "type": "function",
-        "default": "null",
-        "source": null
-      },
-      {
-        "name": "light",
+        "name": "alignTop",
         "type": "boolean",
         "default": "false",
-        "source": "themeable"
-      },
-      {
-        "name": "headerColor",
-        "type": "string",
-        "default": "undefined",
-        "source": "picker"
-      },
-      {
-        "name": "format",
-        "type": "string",
-        "default": "'ampm'",
         "source": null
       },
       {
@@ -10539,9 +10566,138 @@ module.exports = {
         "source": "themeable"
       },
       {
+        "name": "dense",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "light",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
+      }
+    ],
+    "mixins": [
+      "themeable"
+    ]
+  },
+  "v-timeline-item": {
+    "props": [
+      {
+        "name": "color",
+        "type": "string",
+        "default": "'primary'",
+        "source": "colorable"
+      },
+      {
+        "name": "dark",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
+      },
+      {
+        "name": "fillDot",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "hideDot",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "icon",
+        "type": "string",
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "iconColor",
+        "type": "string",
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "large",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "left",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "light",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
+      },
+      {
+        "name": "right",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "small",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      }
+    ],
+    "mixins": [
+      "colorable",
+      "themeable"
+    ]
+  },
+  "v-time-picker": {
+    "props": [
+      {
+        "name": "allowedHours",
+        "type": "function",
+        "default": "null",
+        "source": null
+      },
+      {
+        "name": "allowedMinutes",
+        "type": "function",
+        "default": "null",
+        "source": null
+      },
+      {
+        "name": "color",
+        "type": "string",
+        "default": "undefined",
+        "source": "colorable"
+      },
+      {
+        "name": "dark",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
+      },
+      {
+        "name": "format",
+        "type": "string",
+        "default": "'ampm'",
+        "source": null
+      },
+      {
         "name": "fullWidth",
         "type": "boolean",
         "default": "false",
+        "source": "picker"
+      },
+      {
+        "name": "headerColor",
+        "type": "string",
+        "default": "undefined",
         "source": "picker"
       },
       {
@@ -10549,6 +10705,12 @@ module.exports = {
         "type": "boolean",
         "default": "false",
         "source": "picker"
+      },
+      {
+        "name": "light",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
       },
       {
         "name": "max",
@@ -10569,6 +10731,12 @@ module.exports = {
         "source": "picker"
       },
       {
+        "name": "readonly",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
         "name": "scrollable",
         "type": "boolean",
         "default": "false",
@@ -10579,6 +10747,15 @@ module.exports = {
         "type": "any",
         "default": "undefined",
         "source": null
+      },
+      {
+        "name": "width",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": 290,
+        "source": "picker"
       }
     ],
     "mixins": [
@@ -10596,9 +10773,9 @@ module.exports = {
   "v-time-picker-clock": {
     "props": [
       {
-        "name": "max",
-        "type": "number",
-        "default": "undefined",
+        "name": "allowedValues",
+        "type": "function",
+        "default": "null",
         "source": null
       },
       {
@@ -10606,12 +10783,6 @@ module.exports = {
         "type": "string",
         "default": "undefined",
         "source": "colorable"
-      },
-      {
-        "name": "allowedValues",
-        "type": "function",
-        "default": "null",
-        "source": null
       },
       {
         "name": "dark",
@@ -10638,9 +10809,21 @@ module.exports = {
         "source": "themeable"
       },
       {
+        "name": "max",
+        "type": "number",
+        "default": "undefined",
+        "source": null
+      },
+      {
         "name": "min",
         "type": "number",
         "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "readonly",
+        "type": "boolean",
+        "default": "false",
         "source": null
       },
       {
@@ -10653,15 +10836,6 @@ module.exports = {
         "name": "scrollable",
         "type": "boolean",
         "default": "false",
-        "source": null
-      },
-      {
-        "name": "size",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": 270,
         "source": null
       },
       {
@@ -10709,6 +10883,12 @@ module.exports = {
         "source": null
       },
       {
+        "name": "readonly",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
         "name": "selectingHour",
         "type": "boolean",
         "default": "false",
@@ -10720,43 +10900,16 @@ module.exports = {
   "v-toolbar": {
     "props": [
       {
-        "name": "extensionHeight",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": "undefined",
-        "source": null
-      },
-      {
         "name": "absolute",
         "type": "boolean",
         "default": "false",
         "source": "positionable"
       },
       {
-        "name": "flat",
-        "type": "boolean",
-        "default": "false",
-        "source": null
-      },
-      {
         "name": "app",
         "type": "boolean",
         "default": "false",
         "source": "applicationable"
-      },
-      {
-        "name": "floating",
-        "type": "boolean",
-        "default": "false",
-        "source": null
-      },
-      {
-        "name": "dark",
-        "type": "boolean",
-        "default": "false",
-        "source": "themeable"
       },
       {
         "name": "card",
@@ -10783,7 +10936,13 @@ module.exports = {
         "source": "colorable"
       },
       {
-        "name": "manualScroll",
+        "name": "dark",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
+      },
+      {
+        "name": "dense",
         "type": "boolean",
         "default": "false",
         "source": null
@@ -10795,9 +10954,12 @@ module.exports = {
         "source": null
       },
       {
-        "name": "dense",
-        "type": "boolean",
-        "default": "false",
+        "name": "extensionHeight",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": "undefined",
         "source": null
       },
       {
@@ -10805,6 +10967,18 @@ module.exports = {
         "type": "boolean",
         "default": "false",
         "source": "positionable"
+      },
+      {
+        "name": "flat",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "floating",
+        "type": "boolean",
+        "default": "false",
+        "source": null
       },
       {
         "name": "height",
@@ -10826,6 +11000,12 @@ module.exports = {
         "type": "boolean",
         "default": "false",
         "source": "themeable"
+      },
+      {
+        "name": "manualScroll",
+        "type": "boolean",
+        "default": "false",
+        "source": null
       },
       {
         "name": "prominent",
@@ -10876,7 +11056,7 @@ module.exports = {
       "extension"
     ]
   },
-  "v-toolbar-items": {
+  "v-toolbar-side-icon": {
     "props": [],
     "mixins": []
   },
@@ -10884,32 +11064,23 @@ module.exports = {
     "props": [],
     "mixins": []
   },
-  "v-toolbar-side-icon": {
+  "v-toolbar-items": {
     "props": [],
     "mixins": []
   },
   "v-tooltip": {
     "props": [
       {
-        "name": "inputActivator",
+        "name": "absolute",
         "type": "boolean",
         "default": "false",
-        "source": "menuable"
+        "source": "positionable"
       },
       {
-        "name": "color",
-        "type": "string",
+        "name": "activator",
+        "type": "any",
         "default": "undefined",
-        "source": "colorable"
-      },
-      {
-        "name": "closeDelay",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": 200,
-        "source": "delayable"
+        "source": "menuable"
       },
       {
         "name": "allowOverflow",
@@ -10924,43 +11095,37 @@ module.exports = {
         "source": "detachable"
       },
       {
-        "name": "activator",
-        "type": "any",
-        "default": "undefined",
-        "source": "menuable"
-      },
-      {
-        "name": "absolute",
-        "type": "boolean",
-        "default": "false",
-        "source": "positionable"
-      },
-      {
         "name": "bottom",
         "type": "boolean",
         "default": "false",
         "source": "positionable"
       },
       {
-        "name": "nudgeLeft",
+        "name": "closeDelay",
         "type": [
           "number",
           "string"
         ],
-        "default": 0,
-        "source": "menuable"
+        "default": 200,
+        "source": "delayable"
       },
       {
-        "name": "fixed",
-        "type": "boolean",
-        "default": "true",
-        "source": "positionable"
+        "name": "color",
+        "type": "string",
+        "default": "undefined",
+        "source": "colorable"
       },
       {
-        "name": "disabled",
+        "name": "contentClass",
+        "type": "any",
+        "default": "undefined",
+        "source": "detachable"
+      },
+      {
+        "name": "dark",
         "type": "boolean",
         "default": "false",
-        "source": null
+        "source": "menuable"
       },
       {
         "name": "debounce",
@@ -10972,31 +11137,22 @@ module.exports = {
         "source": null
       },
       {
-        "name": "dark",
+        "name": "disabled",
         "type": "boolean",
         "default": "false",
-        "source": "themeable"
+        "source": null
       },
       {
-        "name": "contentClass",
-        "type": "any",
-        "default": "undefined",
-        "source": "detachable"
+        "name": "fixed",
+        "type": "boolean",
+        "default": "true",
+        "source": "positionable"
       },
       {
-        "name": "nudgeWidth",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": 0,
+        "name": "inputActivator",
+        "type": "boolean",
+        "default": "false",
         "source": "menuable"
-      },
-      {
-        "name": "light",
-        "type": "boolean",
-        "default": "false",
-        "source": "themeable"
       },
       {
         "name": "lazy",
@@ -11011,18 +11167,9 @@ module.exports = {
         "source": "positionable"
       },
       {
-        "name": "positionX",
-        "type": "number",
-        "default": "undefined",
-        "source": "menuable"
-      },
-      {
-        "name": "minWidth",
-        "type": [
-          "number",
-          "string"
-        ],
-        "default": "undefined",
+        "name": "light",
+        "type": "boolean",
+        "default": "false",
         "source": "menuable"
       },
       {
@@ -11035,18 +11182,12 @@ module.exports = {
         "source": "menuable"
       },
       {
-        "name": "zIndex",
-        "type": "any",
-        "default": "undefined",
-        "source": "menuable"
-      },
-      {
-        "name": "nudgeRight",
+        "name": "minWidth",
         "type": [
           "number",
           "string"
         ],
-        "default": 0,
+        "default": "undefined",
         "source": "menuable"
       },
       {
@@ -11059,7 +11200,34 @@ module.exports = {
         "source": "menuable"
       },
       {
+        "name": "nudgeLeft",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": 0,
+        "source": "menuable"
+      },
+      {
+        "name": "nudgeRight",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": 0,
+        "source": "menuable"
+      },
+      {
         "name": "nudgeTop",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": 0,
+        "source": "menuable"
+      },
+      {
+        "name": "nudgeWidth",
         "type": [
           "number",
           "string"
@@ -11081,6 +11249,12 @@ module.exports = {
         ],
         "default": 200,
         "source": "delayable"
+      },
+      {
+        "name": "positionX",
+        "type": "number",
+        "default": "undefined",
+        "source": "menuable"
       },
       {
         "name": "positionY",
@@ -11117,6 +11291,12 @@ module.exports = {
         "type": "any",
         "default": "undefined",
         "source": "toggleable"
+      },
+      {
+        "name": "zIndex",
+        "type": "any",
+        "default": "undefined",
+        "source": "menuable"
       }
     ],
     "mixins": [
@@ -11128,7 +11308,6 @@ module.exports = {
       "menuable",
       "positionable",
       "stackable",
-      "themeable",
       "toggleable"
     ],
     "slots": [
@@ -11136,8 +11315,407 @@ module.exports = {
       "default"
     ]
   },
+  "v-treeview": {
+    "props": [
+      {
+        "name": "activatable",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "active",
+        "type": "array",
+        "default": [],
+        "source": null
+      },
+      {
+        "name": "activeClass",
+        "type": "string",
+        "default": "'v-treeview-node--active'",
+        "source": null
+      },
+      {
+        "name": "dark",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
+      },
+      {
+        "name": "expandIcon",
+        "type": "string",
+        "default": "'$vuetify.icons.subgroup'",
+        "source": null
+      },
+      {
+        "name": "hoverable",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "indeterminateIcon",
+        "type": "string",
+        "default": "'$vuetify.icons.checkboxIndeterminate'",
+        "source": null
+      },
+      {
+        "name": "itemChildren",
+        "type": "string",
+        "default": "'children'",
+        "source": null
+      },
+      {
+        "name": "itemKey",
+        "type": "string",
+        "default": "'id'",
+        "source": null
+      },
+      {
+        "name": "itemText",
+        "type": "string",
+        "default": "'name'",
+        "source": null
+      },
+      {
+        "name": "items",
+        "type": "array",
+        "default": [],
+        "source": null
+      },
+      {
+        "name": "light",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
+      },
+      {
+        "name": "loadChildren",
+        "type": "function",
+        "default": "null",
+        "source": null
+      },
+      {
+        "name": "loadingIcon",
+        "type": "string",
+        "default": "'$vuetify.icons.loading'",
+        "source": null
+      },
+      {
+        "name": "multipleActive",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "offIcon",
+        "type": "string",
+        "default": "'$vuetify.icons.checkboxOff'",
+        "source": null
+      },
+      {
+        "name": "onIcon",
+        "type": "string",
+        "default": "'$vuetify.icons.checkboxOn'",
+        "source": null
+      },
+      {
+        "name": "open",
+        "type": "array",
+        "default": [],
+        "source": null
+      },
+      {
+        "name": "openAll",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "openOnClick",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "selectable",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "selectedColor",
+        "type": "string",
+        "default": "'accent'",
+        "source": null
+      },
+      {
+        "name": "transition",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "value",
+        "type": "array",
+        "default": [],
+        "source": null
+      }
+    ],
+    "mixins": [
+      "registrable-provide",
+      "themeable"
+    ]
+  },
+  "v-treeview-node": {
+    "props": [
+      {
+        "name": "activatable",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "activeClass",
+        "type": "string",
+        "default": "'v-treeview-node--active'",
+        "source": null
+      },
+      {
+        "name": "expandIcon",
+        "type": "string",
+        "default": "'$vuetify.icons.subgroup'",
+        "source": null
+      },
+      {
+        "name": "indeterminateIcon",
+        "type": "string",
+        "default": "'$vuetify.icons.checkboxIndeterminate'",
+        "source": null
+      },
+      {
+        "name": "item",
+        "type": "object",
+        "default": null,
+        "source": null
+      },
+      {
+        "name": "itemChildren",
+        "type": "string",
+        "default": "'children'",
+        "source": null
+      },
+      {
+        "name": "itemKey",
+        "type": "string",
+        "default": "'id'",
+        "source": null
+      },
+      {
+        "name": "itemText",
+        "type": "string",
+        "default": "'name'",
+        "source": null
+      },
+      {
+        "name": "loadChildren",
+        "type": "function",
+        "default": "null",
+        "source": null
+      },
+      {
+        "name": "loadingIcon",
+        "type": "string",
+        "default": "'$vuetify.icons.loading'",
+        "source": null
+      },
+      {
+        "name": "offIcon",
+        "type": "string",
+        "default": "'$vuetify.icons.checkboxOff'",
+        "source": null
+      },
+      {
+        "name": "onIcon",
+        "type": "string",
+        "default": "'$vuetify.icons.checkboxOn'",
+        "source": null
+      },
+      {
+        "name": "openOnClick",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "selectable",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "selectedColor",
+        "type": "string",
+        "default": "'accent'",
+        "source": null
+      },
+      {
+        "name": "transition",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      }
+    ],
+    "mixins": [
+      "registrable-inject"
+    ]
+  },
+  "v-window": {
+    "props": [
+      {
+        "name": "activeClass",
+        "type": "string",
+        "default": "'v-item--active'",
+        "source": null
+      },
+      {
+        "name": "dark",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
+      },
+      {
+        "name": "light",
+        "type": "boolean",
+        "default": "false",
+        "source": "themeable"
+      },
+      {
+        "name": "mandatory",
+        "type": "boolean",
+        "default": "true",
+        "source": null
+      },
+      {
+        "name": "max",
+        "type": [
+          "number",
+          "string"
+        ],
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "multiple",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "reverse",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "touchless",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "value",
+        "type": "any",
+        "default": "undefined",
+        "source": "proxyable"
+      },
+      {
+        "name": "vertical",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      }
+    ],
+    "mixins": [
+      "proxyable",
+      "themeable"
+    ]
+  },
+  "v-window-item": {
+    "props": [
+      {
+        "name": "activeClass",
+        "type": "string",
+        "source": "groupable"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": "false",
+        "source": "groupable"
+      },
+      {
+        "name": "lazy",
+        "type": "boolean",
+        "default": "false",
+        "source": "bootable"
+      },
+      {
+        "name": "reverseTransition",
+        "type": [
+          "boolean",
+          "string"
+        ],
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "transition",
+        "type": [
+          "boolean",
+          "string"
+        ],
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "value",
+        "type": "any",
+        "default": "undefined",
+        "source": null
+      }
+    ],
+    "mixins": [
+      "bootable",
+      "groupable"
+    ]
+  },
   "v-bottom-sheet-transition": {
     "props": [
+      {
+        "name": "group",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "hideOnLeave",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "leaveAbsolute",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "mode",
+        "type": "string",
+        "default": "undefined",
+        "source": null
+      },
       {
         "name": "origin",
         "type": "string",
@@ -11150,6 +11728,30 @@ module.exports = {
   "v-carousel-transition": {
     "props": [
       {
+        "name": "group",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "hideOnLeave",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "leaveAbsolute",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "mode",
+        "type": "string",
+        "default": "undefined",
+        "source": null
+      },
+      {
         "name": "origin",
         "type": "string",
         "default": "'top center 0'",
@@ -11161,126 +11763,29 @@ module.exports = {
   "v-carousel-reverse-transition": {
     "props": [
       {
-        "name": "origin",
-        "type": "string",
-        "default": "'top center 0'",
+        "name": "group",
+        "type": "boolean",
+        "default": "false",
         "source": null
-      }
-    ],
-    "mixins": []
-  },
-  "v-dialog-transition": {
-    "props": [
+      },
       {
-        "name": "origin",
-        "type": "string",
-        "default": "'top center 0'",
+        "name": "hideOnLeave",
+        "type": "boolean",
+        "default": "false",
         "source": null
-      }
-    ],
-    "mixins": []
-  },
-  "v-dialog-bottom-transition": {
-    "props": [
+      },
       {
-        "name": "origin",
-        "type": "string",
-        "default": "'top center 0'",
+        "name": "leaveAbsolute",
+        "type": "boolean",
+        "default": "false",
         "source": null
-      }
-    ],
-    "mixins": []
-  },
-  "v-fab-transition": {
-    "props": [
+      },
       {
-        "name": "origin",
+        "name": "mode",
         "type": "string",
-        "default": "'center center'",
+        "default": "undefined",
         "source": null
-      }
-    ],
-    "mixins": []
-  },
-  "v-fade-transition": {
-    "props": [
-      {
-        "name": "origin",
-        "type": "string",
-        "default": "'top center 0'",
-        "source": null
-      }
-    ],
-    "mixins": []
-  },
-  "v-menu-transition": {
-    "props": [
-      {
-        "name": "origin",
-        "type": "string",
-        "default": "'top center 0'",
-        "source": null
-      }
-    ],
-    "mixins": []
-  },
-  "v-scale-transition": {
-    "props": [
-      {
-        "name": "origin",
-        "type": "string",
-        "default": "'top center 0'",
-        "source": null
-      }
-    ],
-    "mixins": []
-  },
-  "v-slide-x-transition": {
-    "props": [
-      {
-        "name": "origin",
-        "type": "string",
-        "default": "'top center 0'",
-        "source": null
-      }
-    ],
-    "mixins": []
-  },
-  "v-slide-x-reverse-transition": {
-    "props": [
-      {
-        "name": "origin",
-        "type": "string",
-        "default": "'top center 0'",
-        "source": null
-      }
-    ],
-    "mixins": []
-  },
-  "v-slide-y-transition": {
-    "props": [
-      {
-        "name": "origin",
-        "type": "string",
-        "default": "'top center 0'",
-        "source": null
-      }
-    ],
-    "mixins": []
-  },
-  "v-slide-y-reverse-transition": {
-    "props": [
-      {
-        "name": "origin",
-        "type": "string",
-        "default": "'top center 0'",
-        "source": null
-      }
-    ],
-    "mixins": []
-  },
-  "v-tab-reverse-transition": {
-    "props": [
+      },
       {
         "name": "origin",
         "type": "string",
@@ -11293,6 +11798,555 @@ module.exports = {
   "v-tab-transition": {
     "props": [
       {
+        "name": "group",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "hideOnLeave",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "leaveAbsolute",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "mode",
+        "type": "string",
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "origin",
+        "type": "string",
+        "default": "'top center 0'",
+        "source": null
+      }
+    ],
+    "mixins": []
+  },
+  "v-tab-reverse-transition": {
+    "props": [
+      {
+        "name": "group",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "hideOnLeave",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "leaveAbsolute",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "mode",
+        "type": "string",
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "origin",
+        "type": "string",
+        "default": "'top center 0'",
+        "source": null
+      }
+    ],
+    "mixins": []
+  },
+  "v-menu-transition": {
+    "props": [
+      {
+        "name": "group",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "hideOnLeave",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "leaveAbsolute",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "mode",
+        "type": "string",
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "origin",
+        "type": "string",
+        "default": "'top center 0'",
+        "source": null
+      }
+    ],
+    "mixins": []
+  },
+  "v-fab-transition": {
+    "props": [
+      {
+        "name": "group",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "hideOnLeave",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "leaveAbsolute",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "mode",
+        "type": "string",
+        "default": "'out-in'",
+        "source": null
+      },
+      {
+        "name": "origin",
+        "type": "string",
+        "default": "'center center'",
+        "source": null
+      }
+    ],
+    "mixins": []
+  },
+  "v-dialog-transition": {
+    "props": [
+      {
+        "name": "group",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "hideOnLeave",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "leaveAbsolute",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "mode",
+        "type": "string",
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "origin",
+        "type": "string",
+        "default": "'top center 0'",
+        "source": null
+      }
+    ],
+    "mixins": []
+  },
+  "v-dialog-bottom-transition": {
+    "props": [
+      {
+        "name": "group",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "hideOnLeave",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "leaveAbsolute",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "mode",
+        "type": "string",
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "origin",
+        "type": "string",
+        "default": "'top center 0'",
+        "source": null
+      }
+    ],
+    "mixins": []
+  },
+  "v-fade-transition": {
+    "props": [
+      {
+        "name": "group",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "hideOnLeave",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "leaveAbsolute",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "mode",
+        "type": "string",
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "origin",
+        "type": "string",
+        "default": "'top center 0'",
+        "source": null
+      }
+    ],
+    "mixins": []
+  },
+  "v-scale-transition": {
+    "props": [
+      {
+        "name": "group",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "hideOnLeave",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "leaveAbsolute",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "mode",
+        "type": "string",
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "origin",
+        "type": "string",
+        "default": "'top center 0'",
+        "source": null
+      }
+    ],
+    "mixins": []
+  },
+  "v-scroll-x-transition": {
+    "props": [
+      {
+        "name": "group",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "hideOnLeave",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "leaveAbsolute",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "mode",
+        "type": "string",
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "origin",
+        "type": "string",
+        "default": "'top center 0'",
+        "source": null
+      }
+    ],
+    "mixins": []
+  },
+  "v-scroll-x-reverse-transition": {
+    "props": [
+      {
+        "name": "group",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "hideOnLeave",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "leaveAbsolute",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "mode",
+        "type": "string",
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "origin",
+        "type": "string",
+        "default": "'top center 0'",
+        "source": null
+      }
+    ],
+    "mixins": []
+  },
+  "v-scroll-y-transition": {
+    "props": [
+      {
+        "name": "group",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "hideOnLeave",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "leaveAbsolute",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "mode",
+        "type": "string",
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "origin",
+        "type": "string",
+        "default": "'top center 0'",
+        "source": null
+      }
+    ],
+    "mixins": []
+  },
+  "v-scroll-y-reverse-transition": {
+    "props": [
+      {
+        "name": "group",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "hideOnLeave",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "leaveAbsolute",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "mode",
+        "type": "string",
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "origin",
+        "type": "string",
+        "default": "'top center 0'",
+        "source": null
+      }
+    ],
+    "mixins": []
+  },
+  "v-slide-x-transition": {
+    "props": [
+      {
+        "name": "group",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "hideOnLeave",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "leaveAbsolute",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "mode",
+        "type": "string",
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "origin",
+        "type": "string",
+        "default": "'top center 0'",
+        "source": null
+      }
+    ],
+    "mixins": []
+  },
+  "v-slide-x-reverse-transition": {
+    "props": [
+      {
+        "name": "group",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "hideOnLeave",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "leaveAbsolute",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "mode",
+        "type": "string",
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "origin",
+        "type": "string",
+        "default": "'top center 0'",
+        "source": null
+      }
+    ],
+    "mixins": []
+  },
+  "v-slide-y-transition": {
+    "props": [
+      {
+        "name": "group",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "hideOnLeave",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "leaveAbsolute",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "mode",
+        "type": "string",
+        "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "origin",
+        "type": "string",
+        "default": "'top center 0'",
+        "source": null
+      }
+    ],
+    "mixins": []
+  },
+  "v-slide-y-reverse-transition": {
+    "props": [
+      {
+        "name": "group",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "hideOnLeave",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "leaveAbsolute",
+        "type": "boolean",
+        "default": "false",
+        "source": null
+      },
+      {
+        "name": "mode",
+        "type": "string",
+        "default": "undefined",
+        "source": null
+      },
+      {
         "name": "origin",
         "type": "string",
         "default": "'top center 0'",
@@ -11304,12 +12358,6 @@ module.exports = {
   "v-expand-transition": {
     "props": [
       {
-        "name": "css",
-        "type": "boolean",
-        "default": "true",
-        "source": null
-      },
-      {
         "name": "mode",
         "type": "string",
         "default": "'in-out'",
@@ -11320,12 +12368,6 @@ module.exports = {
   },
   "v-row-expand-transition": {
     "props": [
-      {
-        "name": "css",
-        "type": "boolean",
-        "default": "true",
-        "source": null
-      },
       {
         "name": "mode",
         "type": "string",
@@ -11342,55 +12384,5 @@ module.exports = {
         "signature": "(target: string | number | HTMLElement | VueComponent, options?: object) => void"
       }
     ]
-  },
-  "v-resize": {
-    "options": [
-      {
-        "name": "modifiers.quiet",
-        "default": "false",
-        "type": "Boolean"
-      },
-      {
-        "name": "value",
-        "default": "undefined",
-        "type": "Function"
-      }
-    ],
-    "type": "undefined"
-  },
-  "v-ripple": {
-    "options": [
-      {
-        "name": "value",
-        "default": "{}",
-        "type": "Object"
-      }
-    ],
-    "type": "undefined"
-  },
-  "v-scroll": {
-    "options": [
-      {
-        "name": "arg:target",
-        "default": "window",
-        "type": "String"
-      },
-      {
-        "name": "value",
-        "default": "() => {}",
-        "type": "Function"
-      }
-    ],
-    "type": "undefined"
-  },
-  "v-touch": {
-    "options": [
-      {
-        "name": "value",
-        "default": "{}",
-        "type": "Object"
-      }
-    ],
-    "type": "undefined"
   }
 }
