@@ -1,6 +1,9 @@
 // Components
 import VIcon from '../VIcon'
 
+// Mixins
+import Colorable from '../../mixins/colorable'
+
 // Directives
 import Ripple from '../../directives/ripple'
 
@@ -9,6 +12,8 @@ export default {
   name: 'v-stepper-step',
 
   directives: { Ripple },
+
+  mixins: [Colorable],
 
   inject: ['stepClick'],
 
@@ -99,12 +104,10 @@ export default {
       stepContent = this.step
     }
 
-    const step = h('span', {
-      staticClass: 'v-stepper__step__step',
-      'class': {
-        [this.color]: !this.hasError && (this.complete || this.isActive)
-      }
-    }, stepContent)
+    const color = (!this.hasError && (this.complete || this.isActive)) ? this.color : false
+    const step = h('span', this.setBackgroundColor(color, {
+      staticClass: 'v-stepper__step__step'
+    }), stepContent)
 
     const label = h('div', {
       staticClass: 'v-stepper__label'
