@@ -49,7 +49,7 @@
     "vuex-router-sync": "^5.0.0"
   },
   "devDependencies": {
-    "@mdi/font": "^2.4.85",
+    "@mdi/font": "^2.4.94",
     "autoprefixer": "^8.6.5",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.6",
