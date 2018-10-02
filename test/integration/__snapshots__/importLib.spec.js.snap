@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`a-la-carte import - direct should register all subcomponents 1`] = `
+exports[`a-la-carte import - from /lib should register all subcomponents 1`] = `
 Array [
   "VAlert",
   "VApp",

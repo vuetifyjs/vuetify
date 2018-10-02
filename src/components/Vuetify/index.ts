@@ -57,7 +57,7 @@ const Vuetify: VuetifyPlugin = {
       if (components) {
         for (const key in components) {
           const component = components[key]
-          if (!registerComponents(component.$_vuetify_subcomponents)) {
+          if (component && !registerComponents(component.$_vuetify_subcomponents)) {
             Vue.component(key, component)
           }
         }
