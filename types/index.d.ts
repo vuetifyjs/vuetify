@@ -1,5 +1,6 @@
-import Vue, { PluginFunction, PluginObject, VueConstructor, DirectiveFunction, DirectiveOptions } from 'vue'
+import Vue, { Component, PluginFunction, PluginObject, VueConstructor, DirectiveFunction, DirectiveOptions } from 'vue'
 import { VuetifyLanguage } from './lang'
+import './lib'
 import './alacarte'
 import './colors'
 
@@ -10,12 +11,11 @@ export interface Vuetify {
   version: string
 }
 
-export type VuetifyDirective = DirectiveOptions & { name: string }
-export type ComponentOrPack = VueConstructor | { $_vuetify_subcomponents: Record<string, ComponentOrPack> }
+export type ComponentOrPack = Component & { $_vuetify_subcomponents?: Record<string, ComponentOrPack> }
 
 export interface VuetifyUseOptions {
   transitions?: Record<string, VueConstructor>
-  directives?: Record<string, VuetifyDirective>
+  directives?: Record<string, DirectiveOptions>
   components?: Record<string, ComponentOrPack>
   /** @see https://vuetifyjs.com/style/theme */
   theme?: Partial<VuetifyTheme> | false
