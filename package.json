@@ -28,6 +28,7 @@
     "test:coverage": "yarn test --coverage",
     "test:types": "tsc -p ./types/test/tsconfig.json",
     "lint": "concurrently \"tsc --noEmit --pretty\" \"tslint -p . -c .tslint.js src/**/*.ts -t stylish\" \"eslint --ext .js,.ts src\" \"yarn test:types\" --kill-others-on-fail -n \"tsc,tslint,eslint,types\"",
+    "lint:fix": "concurrently \"tsc --noEmit --pretty\" \"tslint --fix -p . -c .tslint.js src/**/*.ts -t stylish\" \"eslint --fix --ext .js,.ts src\" \"yarn test:types\" --kill-others-on-fail -n \"tsc,tslint,eslint,types\"",
     "preparecommitmsg": "node dev/prepare-commit-message.js",
     "commitmsg": "node dev/lint-commit-message.js",
     "precommit": "node dev/warn-npm-install.js && concurrently \"yarn test\" \"yarn lint\" -n \"test,lint\" --kill-others-on-fail"
