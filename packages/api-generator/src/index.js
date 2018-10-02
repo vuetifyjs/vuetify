@@ -41,7 +41,7 @@ function getPropDefault (def, type) {
   ) {
     return 'undefined'
   } else if (typeof(def) === 'function' && type !== 'function') {
-    def = def()
+    def = def.call({})
   }
 
   if (type === 'boolean') {

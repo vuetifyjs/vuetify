@@ -178,6 +178,8 @@ Vue.component('v-breadcrumbs-item', {
   }
 })
 // noinspection JSUnresolvedFunction
+Vue.component('v-breadcrumbs-divider', {})
+// noinspection JSUnresolvedFunction
 Vue.component('v-btn', {
   props: {
     absolute: Boolean,
@@ -219,11 +221,13 @@ Vue.component('v-btn', {
 // noinspection JSUnresolvedFunction
 Vue.component('v-btn-toggle', {
   props: {
+    activeClass: String,
     dark: Boolean,
-    inputValue: null,
     light: Boolean,
     mandatory: Boolean,
-    multiple: Boolean
+    max: [Number,String],
+    multiple: Boolean,
+    value: null
   }
 })
 // noinspection JSUnresolvedFunction
@@ -287,23 +291,35 @@ Vue.component('v-card-text', {})
 // noinspection JSUnresolvedFunction
 Vue.component('v-carousel', {
   props: {
+    activeClass: String,
     cycle: Boolean,
     dark: Boolean,
     delimiterIcon: String,
+    height: [Number,String],
     hideControls: Boolean,
     hideDelimiters: Boolean,
     interval: [Number,String],
     light: Boolean,
+    mandatory: Boolean,
+    max: [Number,String],
+    multiple: Boolean,
     nextIcon: [Boolean,String],
     prevIcon: [Boolean,String],
-    value: Number
+    reverse: Boolean,
+    touchless: Boolean,
+    value: null,
+    vertical: Boolean
   }
 })
 // noinspection JSUnresolvedFunction
 Vue.component('v-carousel-item', {
   props: {
-    reverseTransition: String,
-    transition: String
+    activeClass: String,
+    disabled: Boolean,
+    lazy: Boolean,
+    reverseTransition: [Boolean,String],
+    transition: [Boolean,String],
+    value: null
   }
 })
 // noinspection JSUnresolvedFunction
@@ -651,11 +667,13 @@ Vue.component('v-dialog', {
   props: {
     attach: null,
     contentClass: null,
+    dark: Boolean,
     disabled: Boolean,
     fullWidth: Boolean,
     fullscreen: Boolean,
     hideOverlay: Boolean,
     lazy: Boolean,
+    light: Boolean,
     maxWidth: [String,Number],
     noClickAnimation: Boolean,
     origin: String,
@@ -887,6 +905,26 @@ Vue.component('v-input', {
   }
 })
 // noinspection JSUnresolvedFunction
+Vue.component('v-item', {
+  props: {
+    activeClass: String,
+    disabled: Boolean,
+    value: null
+  }
+})
+// noinspection JSUnresolvedFunction
+Vue.component('v-item-group', {
+  props: {
+    activeClass: String,
+    dark: Boolean,
+    light: Boolean,
+    mandatory: Boolean,
+    max: [Number,String],
+    multiple: Boolean,
+    value: null
+  }
+})
+// noinspection JSUnresolvedFunction
 Vue.component('v-jumbotron', {
   props: {
     activeClass: String,
@@ -976,8 +1014,6 @@ Vue.component('v-list-tile', {
 // noinspection JSUnresolvedFunction
 Vue.component('v-list-tile-action', {})
 // noinspection JSUnresolvedFunction
-Vue.component('v-list-tile-action-text', {})
-// noinspection JSUnresolvedFunction
 Vue.component('v-list-tile-avatar', {
   props: {
     color: String,
@@ -986,11 +1022,13 @@ Vue.component('v-list-tile-avatar', {
   }
 })
 // noinspection JSUnresolvedFunction
+Vue.component('v-list-tile-action-text', {})
+// noinspection JSUnresolvedFunction
 Vue.component('v-list-tile-content', {})
 // noinspection JSUnresolvedFunction
-Vue.component('v-list-tile-sub-title', {})
-// noinspection JSUnresolvedFunction
 Vue.component('v-list-tile-title', {})
+// noinspection JSUnresolvedFunction
+Vue.component('v-list-tile-sub-title', {})
 // noinspection JSUnresolvedFunction
 Vue.component('v-menu', {
   props: {
@@ -1197,7 +1235,7 @@ Vue.component('v-progress-circular', {
     indeterminate: Boolean,
     rotate: Number,
     size: [Number,String],
-    value: Number,
+    value: [Number,String],
     width: Number
   }
 })
@@ -1594,6 +1632,7 @@ Vue.component('v-system-bar', {
 // noinspection JSUnresolvedFunction
 Vue.component('v-tabs', {
   props: {
+    activeClass: String,
     alignWithTitle: Boolean,
     centered: Boolean,
     color: String,
@@ -1604,7 +1643,10 @@ Vue.component('v-tabs', {
     hideSlider: Boolean,
     iconsAndText: Boolean,
     light: Boolean,
+    mandatory: Boolean,
+    max: [Number,String],
     mobileBreakPoint: [Number,String],
+    multiple: Boolean,
     nextIcon: String,
     prevIcon: String,
     right: Boolean,
@@ -1633,20 +1675,31 @@ Vue.component('v-tab', {
   }
 })
 // noinspection JSUnresolvedFunction
-Vue.component('v-tabs-items', {
-  props: {
-    cycle: Boolean,
-    touchless: Boolean,
-    value: [Number,String]
-  }
-})
-// noinspection JSUnresolvedFunction
 Vue.component('v-tab-item', {
   props: {
+    activeClass: String,
+    disabled: Boolean,
     id: String,
     lazy: Boolean,
     reverseTransition: [Boolean,String],
-    transition: [Boolean,String]
+    transition: [Boolean,String],
+    value: null
+  }
+})
+// noinspection JSUnresolvedFunction
+Vue.component('v-tabs-items', {
+  props: {
+    activeClass: String,
+    cycle: Boolean,
+    dark: Boolean,
+    light: Boolean,
+    mandatory: Boolean,
+    max: [Number,String],
+    multiple: Boolean,
+    reverse: Boolean,
+    touchless: Boolean,
+    value: null,
+    vertical: Boolean
   }
 })
 // noinspection JSUnresolvedFunction
@@ -1772,6 +1825,31 @@ Vue.component('v-text-field', {
   }
 })
 // noinspection JSUnresolvedFunction
+Vue.component('v-timeline', {
+  props: {
+    alignTop: Boolean,
+    dark: Boolean,
+    dense: Boolean,
+    light: Boolean
+  }
+})
+// noinspection JSUnresolvedFunction
+Vue.component('v-timeline-item', {
+  props: {
+    color: String,
+    dark: Boolean,
+    fillDot: Boolean,
+    hideDot: Boolean,
+    icon: String,
+    iconColor: String,
+    large: Boolean,
+    left: Boolean,
+    light: Boolean,
+    right: Boolean,
+    small: Boolean
+  }
+})
+// noinspection JSUnresolvedFunction
 Vue.component('v-time-picker', {
   props: {
     allowedHours: Function,
@@ -1806,7 +1884,6 @@ Vue.component('v-time-picker-clock', {
     readonly: Boolean,
     rotate: Number,
     scrollable: Boolean,
-    size: [Number,String],
     step: Number,
     value: Number
   }
@@ -1851,11 +1928,11 @@ Vue.component('v-toolbar', {
   }
 })
 // noinspection JSUnresolvedFunction
-Vue.component('v-toolbar-items', {})
+Vue.component('v-toolbar-side-icon', {})
 // noinspection JSUnresolvedFunction
 Vue.component('v-toolbar-title', {})
 // noinspection JSUnresolvedFunction
-Vue.component('v-toolbar-side-icon', {})
+Vue.component('v-toolbar-items', {})
 // noinspection JSUnresolvedFunction
 Vue.component('v-tooltip', {
   props: {
@@ -1895,6 +1972,82 @@ Vue.component('v-tooltip', {
   }
 })
 // noinspection JSUnresolvedFunction
+Vue.component('v-treeview', {
+  props: {
+    activatable: Boolean,
+    active: Array,
+    activeClass: String,
+    dark: Boolean,
+    expandIcon: String,
+    hoverable: Boolean,
+    indeterminateIcon: String,
+    itemChildren: String,
+    itemKey: String,
+    itemText: String,
+    items: Array,
+    light: Boolean,
+    loadChildren: Function,
+    loadingIcon: String,
+    multipleActive: Boolean,
+    offIcon: String,
+    onIcon: String,
+    open: Array,
+    openAll: Boolean,
+    openOnClick: Boolean,
+    selectable: Boolean,
+    selectedColor: String,
+    transition: Boolean,
+    value: Array
+  }
+})
+// noinspection JSUnresolvedFunction
+Vue.component('v-treeview-node', {
+  props: {
+    activatable: Boolean,
+    activeClass: String,
+    expandIcon: String,
+    indeterminateIcon: String,
+    item: Object,
+    itemChildren: String,
+    itemKey: String,
+    itemText: String,
+    loadChildren: Function,
+    loadingIcon: String,
+    offIcon: String,
+    onIcon: String,
+    openOnClick: Boolean,
+    selectable: Boolean,
+    selectedColor: String,
+    transition: Boolean
+  }
+})
+// noinspection JSUnresolvedFunction
+Vue.component('v-window', {
+  props: {
+    activeClass: String,
+    dark: Boolean,
+    light: Boolean,
+    mandatory: Boolean,
+    max: [Number,String],
+    multiple: Boolean,
+    reverse: Boolean,
+    touchless: Boolean,
+    value: null,
+    vertical: Boolean
+  }
+})
+// noinspection JSUnresolvedFunction
+Vue.component('v-window-item', {
+  props: {
+    activeClass: String,
+    disabled: Boolean,
+    lazy: Boolean,
+    reverseTransition: [Boolean,String],
+    transition: [Boolean,String],
+    value: null
+  }
+})
+// noinspection JSUnresolvedFunction
 Vue.component('v-bottom-sheet-transition', {
   props: {
     group: Boolean,
@@ -1925,6 +2078,46 @@ Vue.component('v-carousel-reverse-transition', {
   }
 })
 // noinspection JSUnresolvedFunction
+Vue.component('v-tab-transition', {
+  props: {
+    group: Boolean,
+    hideOnLeave: Boolean,
+    leaveAbsolute: Boolean,
+    mode: String,
+    origin: String
+  }
+})
+// noinspection JSUnresolvedFunction
+Vue.component('v-tab-reverse-transition', {
+  props: {
+    group: Boolean,
+    hideOnLeave: Boolean,
+    leaveAbsolute: Boolean,
+    mode: String,
+    origin: String
+  }
+})
+// noinspection JSUnresolvedFunction
+Vue.component('v-menu-transition', {
+  props: {
+    group: Boolean,
+    hideOnLeave: Boolean,
+    leaveAbsolute: Boolean,
+    mode: String,
+    origin: String
+  }
+})
+// noinspection JSUnresolvedFunction
+Vue.component('v-fab-transition', {
+  props: {
+    group: Boolean,
+    hideOnLeave: Boolean,
+    leaveAbsolute: Boolean,
+    mode: String,
+    origin: String
+  }
+})
+// noinspection JSUnresolvedFunction
 Vue.component('v-dialog-transition', {
   props: {
     group: Boolean,
@@ -1945,27 +2138,7 @@ Vue.component('v-dialog-bottom-transition', {
   }
 })
 // noinspection JSUnresolvedFunction
-Vue.component('v-fab-transition', {
-  props: {
-    group: Boolean,
-    hideOnLeave: Boolean,
-    leaveAbsolute: Boolean,
-    mode: String,
-    origin: String
-  }
-})
-// noinspection JSUnresolvedFunction
 Vue.component('v-fade-transition', {
-  props: {
-    group: Boolean,
-    hideOnLeave: Boolean,
-    leaveAbsolute: Boolean,
-    mode: String,
-    origin: String
-  }
-})
-// noinspection JSUnresolvedFunction
-Vue.component('v-menu-transition', {
   props: {
     group: Boolean,
     hideOnLeave: Boolean,
@@ -2056,26 +2229,6 @@ Vue.component('v-slide-y-transition', {
 })
 // noinspection JSUnresolvedFunction
 Vue.component('v-slide-y-reverse-transition', {
-  props: {
-    group: Boolean,
-    hideOnLeave: Boolean,
-    leaveAbsolute: Boolean,
-    mode: String,
-    origin: String
-  }
-})
-// noinspection JSUnresolvedFunction
-Vue.component('v-tab-reverse-transition', {
-  props: {
-    group: Boolean,
-    hideOnLeave: Boolean,
-    leaveAbsolute: Boolean,
-    mode: String,
-    origin: String
-  }
-})
-// noinspection JSUnresolvedFunction
-Vue.component('v-tab-transition', {
   props: {
     group: Boolean,
     hideOnLeave: Boolean,

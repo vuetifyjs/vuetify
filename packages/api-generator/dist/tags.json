@@ -2,7 +2,8 @@
   "v-app": {
     "attributes": [
       "dark",
-      "id"
+      "id",
+      "light"
     ],
     "description": ""
   },
@@ -22,14 +23,12 @@
   },
   "v-autocomplete": {
     "attributes": [
-      "activator",
       "allow-overflow",
       "append-icon",
       "append-icon-cb",
       "append-outer-icon",
       "append-outer-icon-cb",
       "attach",
-      "auto",
       "autofocus",
       "background-color",
       "box",
@@ -39,10 +38,7 @@
       "clear-icon",
       "clear-icon-cb",
       "clearable",
-      "close-on-click",
-      "close-on-content-click",
       "color",
-      "content-class",
       "counter",
       "dark",
       "deletable-chips",
@@ -60,7 +56,6 @@
       "hide-no-data",
       "hide-selected",
       "hint",
-      "input-activator",
       "item-avatar",
       "item-disabled",
       "item-text",
@@ -70,31 +65,15 @@
       "light",
       "loading",
       "mask",
-      "max-height",
-      "max-width",
+      "menu-props",
       "messages",
-      "min-width",
-      "multi-line",
       "multiple",
       "no-data-text",
       "no-filter",
-      "nudge-bottom",
-      "nudge-left",
-      "nudge-right",
-      "nudge-top",
-      "nudge-width",
-      "offset-overflow",
-      "offset-x",
-      "offset-y",
       "open-on-clear",
-      "open-on-click",
-      "open-on-hover",
-      "origin",
       "outline",
       "persistent-hint",
       "placeholder",
-      "position-x",
-      "position-y",
       "prefix",
       "prepend-icon",
       "prepend-icon-cb",
@@ -113,14 +92,11 @@
       "success",
       "success-messages",
       "suffix",
-      "tabindex",
       "textarea",
-      "transition",
       "type",
       "validate-on-blur",
       "value",
-      "value-comparator",
-      "z-index"
+      "value-comparator"
     ],
     "description": ""
   },
@@ -174,10 +150,12 @@
   },
   "v-breadcrumbs": {
     "attributes": [
+      "dark",
       "divider",
       "justify-center",
       "justify-end",
-      "large"
+      "large",
+      "light"
     ],
     "description": ""
   },
@@ -196,6 +174,10 @@
       "target",
       "to"
     ],
+    "description": ""
+  },
+  "v-breadcrumbs-divider": {
+    "attributes": [],
     "description": ""
   },
   "v-btn": {
@@ -239,11 +221,13 @@
   },
   "v-btn-toggle": {
     "attributes": [
+      "active-class",
       "dark",
-      "input-value",
       "light",
       "mandatory",
-      "multiple"
+      "max",
+      "multiple",
+      "value"
     ],
     "description": ""
   },
@@ -262,6 +246,8 @@
       "href",
       "img",
       "light",
+      "max-height",
+      "max-width",
       "nuxt",
       "raised",
       "replace",
@@ -276,9 +262,20 @@
   },
   "v-card-media": {
     "attributes": [
+      "alt",
+      "aspect-ratio",
       "contain",
+      "gradient",
       "height",
-      "src"
+      "lazy-src",
+      "max-height",
+      "max-width",
+      "position",
+      "sizes",
+      "src",
+      "srcset",
+      "transition",
+      "width"
     ],
     "description": ""
   },
@@ -298,24 +295,35 @@
   },
   "v-carousel": {
     "attributes": [
+      "active-class",
       "cycle",
       "dark",
       "delimiter-icon",
+      "height",
       "hide-controls",
       "hide-delimiters",
       "interval",
-      "lazy",
       "light",
+      "mandatory",
+      "max",
+      "multiple",
       "next-icon",
       "prev-icon",
-      "value"
+      "reverse",
+      "touchless",
+      "value",
+      "vertical"
     ],
     "description": ""
   },
   "v-carousel-item": {
     "attributes": [
+      "active-class",
+      "disabled",
+      "lazy",
       "reverse-transition",
-      "transition"
+      "transition",
+      "value"
     ],
     "description": ""
   },
@@ -353,8 +361,6 @@
       "rules",
       "success",
       "success-messages",
-      "tabindex",
-      "toggle-keys",
       "true-value",
       "validate-on-blur",
       "value",
@@ -380,14 +386,12 @@
   },
   "v-combobox": {
     "attributes": [
-      "activator",
       "allow-overflow",
       "append-icon",
       "append-icon-cb",
       "append-outer-icon",
       "append-outer-icon-cb",
       "attach",
-      "auto",
       "autofocus",
       "background-color",
       "box",
@@ -397,10 +401,7 @@
       "clear-icon",
       "clear-icon-cb",
       "clearable",
-      "close-on-click",
-      "close-on-content-click",
       "color",
-      "content-class",
       "counter",
       "dark",
       "deletable-chips",
@@ -419,7 +420,6 @@
       "hide-no-data",
       "hide-selected",
       "hint",
-      "input-activator",
       "item-avatar",
       "item-disabled",
       "item-text",
@@ -429,31 +429,15 @@
       "light",
       "loading",
       "mask",
-      "max-height",
-      "max-width",
+      "menu-props",
       "messages",
-      "min-width",
-      "multi-line",
       "multiple",
       "no-data-text",
       "no-filter",
-      "nudge-bottom",
-      "nudge-left",
-      "nudge-right",
-      "nudge-top",
-      "nudge-width",
-      "offset-overflow",
-      "offset-x",
-      "offset-y",
       "open-on-clear",
-      "open-on-click",
-      "open-on-hover",
-      "origin",
       "outline",
       "persistent-hint",
       "placeholder",
-      "position-x",
-      "position-y",
       "prefix",
       "prepend-icon",
       "prepend-icon-cb",
@@ -472,19 +456,18 @@
       "success",
       "success-messages",
       "suffix",
-      "tabindex",
       "textarea",
-      "transition",
       "type",
       "validate-on-blur",
       "value",
-      "value-comparator",
-      "z-index"
+      "value-comparator"
     ],
     "description": ""
   },
   "v-counter": {
     "attributes": [
+      "dark",
+      "light",
       "max",
       "value"
     ],
@@ -529,6 +512,7 @@
       "disable-initial-sort",
       "expand",
       "filter",
+      "header-key",
       "header-text",
       "headers",
       "headers-length",
@@ -557,8 +541,10 @@
   "v-edit-dialog": {
     "attributes": [
       "cancel-text",
+      "dark",
       "large",
       "lazy",
+      "light",
       "persistent",
       "return-value",
       "save-text",
@@ -588,6 +574,7 @@
       "max",
       "min",
       "month-format",
+      "multiple",
       "next-icon",
       "no-title",
       "picker-date",
@@ -686,11 +673,13 @@
     "attributes": [
       "attach",
       "content-class",
+      "dark",
       "disabled",
       "full-width",
       "fullscreen",
       "hide-overlay",
       "lazy",
+      "light",
       "max-width",
       "no-click-animation",
       "origin",
@@ -758,12 +747,6 @@
     ],
     "description": ""
   },
-  "v-content": {
-    "attributes": [
-      "tag"
-    ],
-    "description": ""
-  },
   "v-container": {
     "attributes": [
       "align-baseline",
@@ -788,6 +771,12 @@
       "reverse",
       "tag",
       "wrap"
+    ],
+    "description": ""
+  },
+  "v-content": {
+    "attributes": [
+      "tag"
     ],
     "description": ""
   },
@@ -850,6 +839,15 @@
     "attributes": [],
     "description": ""
   },
+  "v-hover": {
+    "attributes": [
+      "close-delay",
+      "disabled",
+      "open-delay",
+      "value"
+    ],
+    "description": ""
+  },
   "v-icon": {
     "attributes": [
       "color",
@@ -871,14 +869,17 @@
       "alt",
       "aspect-ratio",
       "contain",
+      "gradient",
       "height",
       "lazy-src",
       "max-height",
+      "max-width",
       "position",
       "sizes",
       "src",
       "srcset",
-      "transition"
+      "transition",
+      "width"
     ],
     "description": ""
   },
@@ -907,8 +908,27 @@
       "rules",
       "success",
       "success-messages",
-      "tabindex",
       "validate-on-blur",
+      "value"
+    ],
+    "description": ""
+  },
+  "v-item": {
+    "attributes": [
+      "active-class",
+      "disabled",
+      "value"
+    ],
+    "description": ""
+  },
+  "v-item-group": {
+    "attributes": [
+      "active-class",
+      "dark",
+      "light",
+      "mandatory",
+      "max",
+      "multiple",
       "value"
     ],
     "description": ""
@@ -940,10 +960,12 @@
     "attributes": [
       "absolute",
       "color",
+      "dark",
       "disabled",
       "focused",
       "for",
       "left",
+      "light",
       "right",
       "value"
     ],
@@ -981,11 +1003,13 @@
       "append",
       "avatar",
       "color",
+      "dark",
       "disabled",
       "exact",
       "exact-active-class",
       "href",
       "inactive",
+      "light",
       "nuxt",
       "replace",
       "ripple",
@@ -1000,10 +1024,6 @@
     "attributes": [],
     "description": ""
   },
-  "v-list-tile-action-text": {
-    "attributes": [],
-    "description": ""
-  },
   "v-list-tile-avatar": {
     "attributes": [
       "color",
@@ -1012,15 +1032,19 @@
     ],
     "description": ""
   },
+  "v-list-tile-action-text": {
+    "attributes": [],
+    "description": ""
+  },
   "v-list-tile-content": {
     "attributes": [],
     "description": ""
   },
-  "v-list-tile-sub-title": {
+  "v-list-tile-title": {
     "attributes": [],
     "description": ""
   },
-  "v-list-tile-title": {
+  "v-list-tile-sub-title": {
     "attributes": [],
     "description": ""
   },
@@ -1073,6 +1097,8 @@
   "v-messages": {
     "attributes": [
       "color",
+      "dark",
+      "light",
       "value"
     ],
     "description": ""
@@ -1105,14 +1131,12 @@
   },
   "v-overflow-btn": {
     "attributes": [
-      "activator",
       "allow-overflow",
       "append-icon",
       "append-icon-cb",
       "append-outer-icon",
       "append-outer-icon-cb",
       "attach",
-      "auto",
       "autofocus",
       "background-color",
       "box",
@@ -1122,10 +1146,7 @@
       "clear-icon",
       "clear-icon-cb",
       "clearable",
-      "close-on-click",
-      "close-on-content-click",
       "color",
-      "content-class",
       "counter",
       "dark",
       "deletable-chips",
@@ -1144,7 +1165,6 @@
       "hide-no-data",
       "hide-selected",
       "hint",
-      "input-activator",
       "item-avatar",
       "item-disabled",
       "item-text",
@@ -1154,31 +1174,15 @@
       "light",
       "loading",
       "mask",
-      "max-height",
-      "max-width",
+      "menu-props",
       "messages",
-      "min-width",
-      "multi-line",
       "multiple",
       "no-data-text",
       "no-filter",
-      "nudge-bottom",
-      "nudge-left",
-      "nudge-right",
-      "nudge-top",
-      "nudge-width",
-      "offset-overflow",
-      "offset-x",
-      "offset-y",
       "open-on-clear",
-      "open-on-click",
-      "open-on-hover",
-      "origin",
       "outline",
       "persistent-hint",
       "placeholder",
-      "position-x",
-      "position-y",
       "prefix",
       "prepend-icon",
       "prepend-icon-cb",
@@ -1198,14 +1202,12 @@
       "success",
       "success-messages",
       "suffix",
-      "tabindex",
       "textarea",
       "transition",
       "type",
       "validate-on-blur",
       "value",
-      "value-comparator",
-      "z-index"
+      "value-comparator"
     ],
     "description": ""
   },
@@ -1213,8 +1215,10 @@
     "attributes": [
       "circle",
       "color",
+      "dark",
       "disabled",
       "length",
+      "light",
       "next-icon",
       "prev-icon",
       "total-visible",
@@ -1297,7 +1301,6 @@
       "rules",
       "success",
       "success-messages",
-      "tabindex",
       "validate-on-blur",
       "value",
       "value-comparator"
@@ -1350,7 +1353,6 @@
       "step",
       "success",
       "success-messages",
-      "tabindex",
       "thumb-color",
       "thumb-label",
       "thumb-size",
@@ -1363,16 +1365,50 @@
     ],
     "description": ""
   },
+  "v-rating": {
+    "attributes": [
+      "background-color",
+      "clearable",
+      "close-delay",
+      "color",
+      "dark",
+      "dense",
+      "empty-icon",
+      "full-icon",
+      "half-icon",
+      "half-increments",
+      "hover",
+      "large",
+      "length",
+      "light",
+      "medium",
+      "open-delay",
+      "readonly",
+      "ripple",
+      "size",
+      "small",
+      "value",
+      "x-large"
+    ],
+    "description": ""
+  },
+  "v-responsive": {
+    "attributes": [
+      "aspect-ratio",
+      "height",
+      "max-height",
+      "max-width",
+      "width"
+    ],
+    "description": ""
+  },
   "v-select": {
     "attributes": [
-      "activator",
-      "allow-overflow",
       "append-icon",
       "append-icon-cb",
       "append-outer-icon",
       "append-outer-icon-cb",
       "attach",
-      "auto",
       "autofocus",
       "background-color",
       "box",
@@ -1382,10 +1418,7 @@
       "clear-icon",
       "clear-icon-cb",
       "clearable",
-      "close-on-click",
-      "close-on-content-click",
       "color",
-      "content-class",
       "counter",
       "dark",
       "deletable-chips",
@@ -1402,7 +1435,6 @@
       "hide-details",
       "hide-selected",
       "hint",
-      "input-activator",
       "item-avatar",
       "item-disabled",
       "item-text",
@@ -1412,30 +1444,14 @@
       "light",
       "loading",
       "mask",
-      "max-height",
-      "max-width",
+      "menu-props",
       "messages",
-      "min-width",
-      "multi-line",
       "multiple",
       "no-data-text",
-      "nudge-bottom",
-      "nudge-left",
-      "nudge-right",
-      "nudge-top",
-      "nudge-width",
-      "offset-overflow",
-      "offset-x",
-      "offset-y",
       "open-on-clear",
-      "open-on-click",
-      "open-on-hover",
-      "origin",
       "outline",
       "persistent-hint",
       "placeholder",
-      "position-x",
-      "position-y",
       "prefix",
       "prepend-icon",
       "prepend-icon-cb",
@@ -1454,14 +1470,11 @@
       "success",
       "success-messages",
       "suffix",
-      "tabindex",
       "textarea",
-      "transition",
       "type",
       "validate-on-blur",
       "value",
-      "value-comparator",
-      "z-index"
+      "value-comparator"
     ],
     "description": ""
   },
@@ -1496,7 +1509,6 @@
       "step",
       "success",
       "success-messages",
-      "tabindex",
       "thumb-color",
       "thumb-label",
       "thumb-size",
@@ -1618,8 +1630,6 @@
       "rules",
       "success",
       "success-messages",
-      "tabindex",
-      "toggle-keys",
       "true-value",
       "validate-on-blur",
       "value",
@@ -1644,6 +1654,7 @@
   },
   "v-tabs": {
     "attributes": [
+      "active-class",
       "align-with-title",
       "centered",
       "color",
@@ -1654,7 +1665,10 @@
       "hide-slider",
       "icons-and-text",
       "light",
+      "mandatory",
+      "max",
       "mobile-break-point",
+      "multiple",
       "next-icon",
       "prev-icon",
       "right",
@@ -1668,10 +1682,12 @@
     "attributes": [
       "active-class",
       "append",
+      "dark",
       "disabled",
       "exact",
       "exact-active-class",
       "href",
+      "light",
       "nuxt",
       "replace",
       "ripple",
@@ -1681,20 +1697,31 @@
     ],
     "description": ""
   },
-  "v-tabs-items": {
+  "v-tab-item": {
     "attributes": [
-      "cycle",
-      "touchless",
+      "active-class",
+      "disabled",
+      "id",
+      "lazy",
+      "reverse-transition",
+      "transition",
       "value"
     ],
     "description": ""
   },
-  "v-tab-item": {
+  "v-tabs-items": {
     "attributes": [
-      "id",
-      "lazy",
-      "reverse-transition",
-      "transition"
+      "active-class",
+      "cycle",
+      "dark",
+      "light",
+      "mandatory",
+      "max",
+      "multiple",
+      "reverse",
+      "touchless",
+      "value",
+      "vertical"
     ],
     "description": ""
   },
@@ -1757,7 +1784,6 @@
       "success",
       "success-messages",
       "suffix",
-      "tabindex",
       "textarea",
       "type",
       "validate-on-blur",
@@ -1814,11 +1840,35 @@
       "success",
       "success-messages",
       "suffix",
-      "tabindex",
       "textarea",
       "type",
       "validate-on-blur",
       "value"
+    ],
+    "description": ""
+  },
+  "v-timeline": {
+    "attributes": [
+      "align-top",
+      "dark",
+      "dense",
+      "light"
+    ],
+    "description": ""
+  },
+  "v-timeline-item": {
+    "attributes": [
+      "color",
+      "dark",
+      "fill-dot",
+      "hide-dot",
+      "icon",
+      "icon-color",
+      "large",
+      "left",
+      "light",
+      "right",
+      "small"
     ],
     "description": ""
   },
@@ -1836,6 +1886,7 @@
       "max",
       "min",
       "no-title",
+      "readonly",
       "scrollable",
       "value",
       "width"
@@ -1852,9 +1903,9 @@
       "light",
       "max",
       "min",
+      "readonly",
       "rotate",
       "scrollable",
-      "size",
       "step",
       "value"
     ],
@@ -1866,6 +1917,7 @@
       "hour",
       "minute",
       "period",
+      "readonly",
       "selecting-hour"
     ],
     "description": ""
@@ -1898,7 +1950,7 @@
     ],
     "description": ""
   },
-  "v-toolbar-items": {
+  "v-toolbar-side-icon": {
     "attributes": [],
     "description": ""
   },
@@ -1906,7 +1958,7 @@
     "attributes": [],
     "description": ""
   },
-  "v-toolbar-side-icon": {
+  "v-toolbar-items": {
     "attributes": [],
     "description": ""
   },
@@ -1948,106 +2000,280 @@
     ],
     "description": ""
   },
+  "v-treeview": {
+    "attributes": [
+      "activatable",
+      "active",
+      "active-class",
+      "dark",
+      "expand-icon",
+      "hoverable",
+      "indeterminate-icon",
+      "item-children",
+      "item-key",
+      "item-text",
+      "items",
+      "light",
+      "load-children",
+      "loading-icon",
+      "multiple-active",
+      "off-icon",
+      "on-icon",
+      "open",
+      "open-all",
+      "open-on-click",
+      "selectable",
+      "selected-color",
+      "transition",
+      "value"
+    ],
+    "description": ""
+  },
+  "v-treeview-node": {
+    "attributes": [
+      "activatable",
+      "active-class",
+      "expand-icon",
+      "indeterminate-icon",
+      "item",
+      "item-children",
+      "item-key",
+      "item-text",
+      "load-children",
+      "loading-icon",
+      "off-icon",
+      "on-icon",
+      "open-on-click",
+      "selectable",
+      "selected-color",
+      "transition"
+    ],
+    "description": ""
+  },
+  "v-window": {
+    "attributes": [
+      "active-class",
+      "dark",
+      "light",
+      "mandatory",
+      "max",
+      "multiple",
+      "reverse",
+      "touchless",
+      "value",
+      "vertical"
+    ],
+    "description": ""
+  },
+  "v-window-item": {
+    "attributes": [
+      "active-class",
+      "disabled",
+      "lazy",
+      "reverse-transition",
+      "transition",
+      "value"
+    ],
+    "description": ""
+  },
   "v-bottom-sheet-transition": {
     "attributes": [
+      "group",
+      "hide-on-leave",
+      "leave-absolute",
+      "mode",
       "origin"
     ],
     "description": ""
   },
   "v-carousel-transition": {
     "attributes": [
+      "group",
+      "hide-on-leave",
+      "leave-absolute",
+      "mode",
       "origin"
     ],
     "description": ""
   },
   "v-carousel-reverse-transition": {
     "attributes": [
-      "origin"
-    ],
-    "description": ""
-  },
-  "v-dialog-transition": {
-    "attributes": [
-      "origin"
-    ],
-    "description": ""
-  },
-  "v-dialog-bottom-transition": {
-    "attributes": [
-      "origin"
-    ],
-    "description": ""
-  },
-  "v-fab-transition": {
-    "attributes": [
-      "origin"
-    ],
-    "description": ""
-  },
-  "v-fade-transition": {
-    "attributes": [
-      "origin"
-    ],
-    "description": ""
-  },
-  "v-menu-transition": {
-    "attributes": [
-      "origin"
-    ],
-    "description": ""
-  },
-  "v-scale-transition": {
-    "attributes": [
-      "origin"
-    ],
-    "description": ""
-  },
-  "v-slide-x-transition": {
-    "attributes": [
-      "origin"
-    ],
-    "description": ""
-  },
-  "v-slide-x-reverse-transition": {
-    "attributes": [
-      "origin"
-    ],
-    "description": ""
-  },
-  "v-slide-y-transition": {
-    "attributes": [
-      "origin"
-    ],
-    "description": ""
-  },
-  "v-slide-y-reverse-transition": {
-    "attributes": [
-      "origin"
-    ],
-    "description": ""
-  },
-  "v-tab-reverse-transition": {
-    "attributes": [
+      "group",
+      "hide-on-leave",
+      "leave-absolute",
+      "mode",
       "origin"
     ],
     "description": ""
   },
   "v-tab-transition": {
     "attributes": [
+      "group",
+      "hide-on-leave",
+      "leave-absolute",
+      "mode",
+      "origin"
+    ],
+    "description": ""
+  },
+  "v-tab-reverse-transition": {
+    "attributes": [
+      "group",
+      "hide-on-leave",
+      "leave-absolute",
+      "mode",
+      "origin"
+    ],
+    "description": ""
+  },
+  "v-menu-transition": {
+    "attributes": [
+      "group",
+      "hide-on-leave",
+      "leave-absolute",
+      "mode",
+      "origin"
+    ],
+    "description": ""
+  },
+  "v-fab-transition": {
+    "attributes": [
+      "group",
+      "hide-on-leave",
+      "leave-absolute",
+      "mode",
+      "origin"
+    ],
+    "description": ""
+  },
+  "v-dialog-transition": {
+    "attributes": [
+      "group",
+      "hide-on-leave",
+      "leave-absolute",
+      "mode",
+      "origin"
+    ],
+    "description": ""
+  },
+  "v-dialog-bottom-transition": {
+    "attributes": [
+      "group",
+      "hide-on-leave",
+      "leave-absolute",
+      "mode",
+      "origin"
+    ],
+    "description": ""
+  },
+  "v-fade-transition": {
+    "attributes": [
+      "group",
+      "hide-on-leave",
+      "leave-absolute",
+      "mode",
+      "origin"
+    ],
+    "description": ""
+  },
+  "v-scale-transition": {
+    "attributes": [
+      "group",
+      "hide-on-leave",
+      "leave-absolute",
+      "mode",
+      "origin"
+    ],
+    "description": ""
+  },
+  "v-scroll-x-transition": {
+    "attributes": [
+      "group",
+      "hide-on-leave",
+      "leave-absolute",
+      "mode",
+      "origin"
+    ],
+    "description": ""
+  },
+  "v-scroll-x-reverse-transition": {
+    "attributes": [
+      "group",
+      "hide-on-leave",
+      "leave-absolute",
+      "mode",
+      "origin"
+    ],
+    "description": ""
+  },
+  "v-scroll-y-transition": {
+    "attributes": [
+      "group",
+      "hide-on-leave",
+      "leave-absolute",
+      "mode",
+      "origin"
+    ],
+    "description": ""
+  },
+  "v-scroll-y-reverse-transition": {
+    "attributes": [
+      "group",
+      "hide-on-leave",
+      "leave-absolute",
+      "mode",
+      "origin"
+    ],
+    "description": ""
+  },
+  "v-slide-x-transition": {
+    "attributes": [
+      "group",
+      "hide-on-leave",
+      "leave-absolute",
+      "mode",
+      "origin"
+    ],
+    "description": ""
+  },
+  "v-slide-x-reverse-transition": {
+    "attributes": [
+      "group",
+      "hide-on-leave",
+      "leave-absolute",
+      "mode",
+      "origin"
+    ],
+    "description": ""
+  },
+  "v-slide-y-transition": {
+    "attributes": [
+      "group",
+      "hide-on-leave",
+      "leave-absolute",
+      "mode",
+      "origin"
+    ],
+    "description": ""
+  },
+  "v-slide-y-reverse-transition": {
+    "attributes": [
+      "group",
+      "hide-on-leave",
+      "leave-absolute",
+      "mode",
       "origin"
     ],
     "description": ""
   },
   "v-expand-transition": {
     "attributes": [
-      "css",
       "mode"
     ],
     "description": ""
   },
   "v-row-expand-transition": {
     "attributes": [
-      "css",
       "mode"
     ],
     "description": ""
