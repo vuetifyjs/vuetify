@@ -25,22 +25,22 @@ export default Vue.extend({
     const computedSlots = slots()
     const children = []
 
-    if (computedSlots.headerColumn) {
+    if (computedSlots['column.header']) {
       children.push(h('tr', {
         staticClass: props.headerClass
-      }, computedSlots.headerColumn))
-    } else if (computedSlots.headerRow) {
-      children.push(...computedSlots.headerRow)
+      }, computedSlots['column.header']))
+    } else if (computedSlots['row.header']) {
+      children.push(...computedSlots['row.header'])
     }
 
-    if (computedSlots.content && props.value) children.push(...computedSlots.content)
+    if (computedSlots['row.content'] && props.value) children.push(...computedSlots['row.content'])
 
-    if (computedSlots.summaryColumn) {
+    if (computedSlots['column.summary']) {
       children.push(h('tr', {
         staticClass: props.summaryClass
-      }, computedSlots.summaryColumn))
-    } else if (computedSlots.summaryRow) {
-      children.push(...computedSlots.summaryRow)
+      }, computedSlots['column.summary']))
+    } else if (computedSlots['row.summary']) {
+      children.push(...computedSlots['row.summary'])
     }
 
     return children as any

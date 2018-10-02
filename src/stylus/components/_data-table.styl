@@ -111,7 +111,15 @@ td, th
   // &:not(:nth-child(1)), &:first-child
   padding: 0 16px
 
+.v-row
+  &__header
+    font-weight: 600
+
+  &__value
+    text-align: right
+
 .v-simple-checkbox
+  align-self: center
   position: relative
   user-select: none
   cursor: pointer
@@ -121,8 +129,14 @@ td, th
     th
       height: initial
 
-      .v-select
-        margin-top: 0
+      > div
+        display: flex
+
+        .v-simple-checkbox
+          margin-right: 24px
+
+        .v-select
+          margin-top: 0
 
   &__progress
     height: auto !important
@@ -199,7 +213,7 @@ td, th
       margin-right: 0
 
 td
-  height: 47px
+  height: 48px
 
 th
   height: 48px

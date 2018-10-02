@@ -9,7 +9,6 @@ import VRow from './VRow'
 import VRowFunctional from './VRowFunctional'
 import VRowRegular from './VRowRegular'
 import VRowExpansion from './VRowExpansion'
-import VCellCheckbox from './VCellCheckbox'
 
 const VTableOverflow = createSimpleFunctional('v-table__overflow')
 
@@ -20,7 +19,6 @@ export {
   VDataHeader,
   VDataHeaderMobile,
   VRowGroup,
-  VCellCheckbox,
   VRow,
   VRowRegular,
   VRowFunctional,
@@ -35,7 +33,6 @@ export default {
     VDataHeader,
     VDataHeaderMobile,
     VRowGroup,
-    VCellCheckbox,
     VRow,
     VRowRegular,
     VRowFunctional,

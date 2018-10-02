@@ -1,9 +1,10 @@
 // Components
-import { VDataTable, VCellCheckbox, VRowFunctional } from '.'
+import { VDataTable, VRowFunctional } from '.'
 
 // Types
 import Vue, { VNode } from 'vue'
 import mixins from '../../util/mixins'
+import { VSimpleCheckbox } from '../VCheckbox'
 
 type VDataTableInstance = InstanceType<typeof VDataTable>
 
@@ -25,12 +26,12 @@ export default mixins<options>().extend({
     const scopedSlots: any = {}
 
     if (!this.$scopedSlots['dataTableSelect']) {
-      scopedSlots['dataTableSelect'] = (props: any) => h(VCellCheckbox, {
+      scopedSlots['dataTableSelect'] = (props: any) => h(VSimpleCheckbox, {
         props: {
-          inputValue: this.dataTable.isSelected(this.item)
+          value: this.dataTable.isSelected(this.item)
         },
         on: {
-          change: (v: boolean) => this.dataTable.select(this.item, v)
+          input: (v: boolean) => this.dataTable.select(this.item, v)
         }
       }) as any
     }

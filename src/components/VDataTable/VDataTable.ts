@@ -8,7 +8,7 @@ import { VIcon } from '../VIcon'
 import { VSimpleCheckbox } from '../VCheckbox'
 
 // Utils
-import { getObjectValueByPath, wrapInArray, groupByProperty, convertToUnit } from '../../util/helpers'
+import { getObjectValueByPath, groupByProperty, convertToUnit } from '../../util/helpers'
 
 // Types
 import { VNodeChildrenArrayContents, VNode } from 'vue'
@@ -25,7 +25,7 @@ export default mixins(VDataIterator).extend({
   inheritAttrs: false,
 
   provide (): any {
-    return { dataTable: this }
+    return { dataTable: this } // TODO: only provide used things
   },
 
   props: {
@@ -54,12 +54,8 @@ export default mixins(VDataIterator).extend({
       openCache: {} as { [key: string]: boolean },
       widths: [] as number[],
       options: {
-        sortBy: wrapInArray(this.sortBy) as string[],
-        sortDesc: wrapInArray(this.sortDesc) as boolean[],
-        itemsPerPage: this.itemsPerPage,
-        page: this.page,
         groupBy: this.groupBy
-      } // TODO: Better way than to reproduce this whole object?
+      }
     }
   },
 
@@ -90,14 +86,12 @@ export default mixins(VDataIterator).extend({
     }
   },
 
-  created () {
-    if (!this.sortBy || !this.sortBy.length) {
-      const firstSortable = this.headers.find(h => !('sortable' in h) || !!h.sortable)
-      if (firstSortable) this.options.sortBy = [firstSortable.value]
-    }
-  },
-
   mounted () {
+    if ((!this.sortBy || !this.sortBy.length) && (!this.options.sortBy || !this.options.sortBy.length)) {
+      const firstSortable = this.headers.find(h => !('sortable' in h) || !!h.sortable)
+      if (firstSortable) this.updateOptions({ sortBy: [firstSortable.value], sortDesc: [false] })
+    }
+
     if (this.calculateWidths) {
       window.addEventListener('resize', this.calcWidths)
     }

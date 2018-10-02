@@ -1,9 +1,10 @@
 import Vue, { VNode, VNodeChildrenArrayContents } from 'vue'
 import mixins from '../../util/mixins'
-import { VDataTable, VCellCheckbox } from '.'
+import { VDataTable } from '.'
 import VSelect from '../VSelect/VSelect'
 import VChip from '../VChip'
 import VIcon from '../VIcon'
+import { VSimpleCheckbox } from '../VCheckbox'
 
 type VDataTableInstance = InstanceType<typeof VDataTable>
 
@@ -25,16 +26,15 @@ export default mixins<options>().extend({
 
   methods: {
     genSelectAll () {
-      return this.$createElement(VCellCheckbox, {
+      return this.$createElement(VSimpleCheckbox, {
         props: {
-          head: true,
-          inputValue: this.dataTable.everyItem
+          value: this.dataTable.everyItem
         },
         attrs: {
           indeterminate: !this.dataTable.everyItem && this.dataTable.someItems
         },
         on: {
-          change: () => this.dataTable.toggleSelectAll()
+          input: () => this.dataTable.toggleSelectAll()
         }
       })
     },
@@ -112,7 +112,7 @@ export default mixins<options>().extend({
       attrs: {
         colspan: this.dataTable.computedHeaders.length
       }
-    }, [h('div', { staticClass: 'd-flex' }, children)])
+    }, [h('div', children)])
 
     const tr = h('tr', [th])
 

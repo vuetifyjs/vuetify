@@ -19,7 +19,18 @@ export default mixins(
   name: 'v-data-iterator',
 
   provide (): any {
-    return { dataIterator: this }
+    const dataIterator = {
+      updateOptions: this.updateOptions
+    }
+
+    Object.defineProperties(dataIterator, {
+      options: { get: () => this.options },
+      itemsLength: { get: () => this.itemsLength },
+      pageStart: { get: () => this.pageStart },
+      pageStop: { get: () => this.pageStop }
+    })
+
+    return { dataIterator }
   },
 
   props: {
@@ -140,7 +151,8 @@ export default mixins(
     mobileBreakpoint: {
       type: String,
       default: 'smAndDown'
-    }
+    },
+    dataOptions: Object // TODO: Better name!
   },
 
   data () {
@@ -203,6 +215,23 @@ export default mixins(
   },
 
   watch: {
+    dataOptions: {
+      handler (v, old) {
+        if (deepEqual(v, old)) return
+
+        this.updateOptions(v)
+      },
+      deep: true,
+      immediate: true
+    },
+    options: {
+      handler (v, old) {
+        if (deepEqual(v, old)) return
+
+        this.$emit('update:dataOptions', v)
+      },
+      deep: true
+    },
     'options.sortBy' (v, old) {
       if (deepEqual(v, old)) return
       this.$emit('update:sortBy', !this.multiSort && !Array.isArray(this.sortBy) ? v[0] : v)
@@ -263,6 +292,10 @@ export default mixins(
     }
   },
 
+  mounted () {
+    this.$emit('update:dataOptions', this.options)
+  },
+
   methods: {
     sortItems (items: any[], sortBy: string[], sortDesc: boolean[], locale: string): any[] {
       return this.customSort(items, sortBy, sortDesc, locale)
@@ -299,7 +332,16 @@ export default mixins(
         sortDesc[sortByIndex] = false
       }
 
-      this.options = Object.assign(this.options, { sortBy, sortDesc })
+      // Reset page to 1 if sortBy or sortDesc have changed
+      let page = this.options.page
+      if (!deepEqual(sortBy, this.options.sortBy) || !deepEqual(sortDesc, this.options.sortDesc)) {
+        page = 1
+      }
+
+      this.updateOptions({ sortBy, sortDesc, page })
+    },
+    updateOptions (options: any) {
+      this.options = Object.assign({}, this.options, options)
     },
     isSelected (item: any): boolean {
       return this.selection[getObjectValueByPath(item, this.itemKey)] || false

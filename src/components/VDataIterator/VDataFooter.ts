@@ -75,8 +75,7 @@ export default mixins<options>().extend({
           },
           on: {
             input: (val: any) => {
-              this.dataIterator.options.page = 1
-              this.dataIterator.options.itemsPerPage = val
+              this.dataIterator.updateOptions({ page: 1, itemsPerPage: val })
             }
           }
         })
@@ -125,7 +124,7 @@ export default mixins<options>().extend({
       const icons: VNodeChildrenArrayContents = []
 
       icons.push(this.genIcon(() => {
-        this.dataIterator.options.page = this.dataIterator.options.page - 1
+        this.dataIterator.updateOptions({ page: this.dataIterator.options.page - 1 })
       }, this.dataIterator.options.page === 1, 'Previous page', this.$vuetify.rtl ? this.nextIcon : this.prevIcon))
 
       if (this.showPageNumber) {
@@ -133,16 +132,16 @@ export default mixins<options>().extend({
       }
 
       icons.push(this.genIcon(() => {
-        this.dataIterator.options.page = this.dataIterator.options.page + 1
+        this.dataIterator.updateOptions({ page: this.dataIterator.options.page + 1 })
       }, this.dataIterator.options.itemsPerPage < 0 || this.dataIterator.options.page * this.dataIterator.options.itemsPerPage >= this.dataIterator.itemsLength || this.dataIterator.pageStop < 0, 'Next page', this.$vuetify.rtl ? this.prevIcon : this.nextIcon))
 
       if (this.showFirstLastPage) {
         icons.unshift(this.genIcon(() => {
-          this.dataIterator.options.page = 1
+          this.dataIterator.updateOptions({ page: 1 })
         }, this.dataIterator.options.page === 1, 'First page', this.$vuetify.rtl ? this.lastIcon : this.firstIcon))
 
         icons.push(this.genIcon(() => {
-          this.dataIterator.options.page = this.dataIterator.pageCount
+          this.dataIterator.updateOptions({ page: this.dataIterator.pageCount })
         }, this.dataIterator.options.page === this.dataIterator.pageCount || this.dataIterator.options.itemsPerPage === -1, 'Last page', this.$vuetify.rtl ? this.firstIcon : this.lastIcon))
       }
 

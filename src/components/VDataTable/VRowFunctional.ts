@@ -38,8 +38,8 @@ export default Vue.extend({
       } else {
         if (props.mobile) {
           children.push(h('div', { class: 'd-flex justify-content-between' }, [
-            h('span', [header.text]),
-            h('span', { class: 'text-xs-right' }, [value])
+            h('span', { staticClass: 'v-row__header' }, [header.text]),
+            h('span', { staticClass: 'v-row__value' }, [value])
           ]))
         } else {
           children.push(value)
