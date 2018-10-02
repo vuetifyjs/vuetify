@@ -424,6 +424,8 @@ export default {
             hideDetails: true,
             menuProps: {
               auto: true,
+              dark: this.dark,
+              light: this.light,
               minWidth: '75px'
             }
           },
