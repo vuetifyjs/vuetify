@@ -114,40 +114,39 @@ export default mixins<options>().extend({
         Array.isArray(c.class) ? c.class.forEach(c => classes[c] = true) : classes[c.class] = true
       }
       const children = []
+      const listeners: any = {}
 
       if (c.value === 'dataTableSelect') {
         children.push(this.genSelectAll())
       } else {
         children.push(this.$scopedSlots.text ? this.$scopedSlots.text({ header: c }) : h('span', [c.text]))
-      }
 
-      const listeners: any = {}
+        if (c.sortable || !c.hasOwnProperty('sortable')) {
+          listeners['click'] = () => {
+            this.dataTable.resetExpanded()
+            this.dataTable.sort(c.value)
+          }
 
-      if (c.sortable || !c.hasOwnProperty('sortable')) {
-        listeners['click'] = () => {
-          this.dataTable.resetExpanded()
-          this.dataTable.sort(c.value)
+          const sortIndex = this.dataTable.options.sortBy.findIndex(k => k === c.value)
+          const beingSorted = sortIndex >= 0
+          const isDesc = this.dataTable.options.sortDesc[sortIndex]
+
+          classes['sortable'] = true
+          classes['active'] = beingSorted
+          classes['asc'] = beingSorted && !isDesc
+          classes['desc'] = beingSorted && isDesc
+
+          if (c.align === 'end') children.unshift(this.genSortIcon())
+          else children.push(this.genSortIcon())
+
+          this.dataTable.multiSort && beingSorted && children.push(h('span', { class: 'badge' }, [String(sortIndex + 1)]))
         }
 
-        const sortIndex = this.dataTable.options.sortBy.findIndex(k => k === c.value)
-        const beingSorted = sortIndex >= 0
-        const isDesc = this.dataTable.options.sortDesc[sortIndex]
+        const groupable = this.dataTable.options.groupBy !== undefined
 
-        classes['sortable'] = true
-        classes['active'] = beingSorted
-        classes['asc'] = beingSorted && !isDesc
-        classes['desc'] = beingSorted && isDesc
-
-        if (c.align === 'end') children.unshift(this.genSortIcon())
-        else children.push(this.genSortIcon())
-
-        this.dataTable.multiSort && beingSorted && children.push(h('span', { class: 'badge' }, [String(sortIndex + 1)]))
+        if (groupable) children.push(this.genGroupHandle(c.value))
+        if (c.resizable) children.push(this.genResizeHandle(i))
       }
-
-      const groupable = this.dataTable.options.groupBy !== undefined
-
-      if (groupable) children.push(this.genGroupHandle(c.value))
-      if (c.resizable) children.push(this.genResizeHandle(i))
 
       return h('th', {
         class: classes,

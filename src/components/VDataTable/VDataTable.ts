@@ -176,11 +176,11 @@ export default mixins(VDataIterator).extend({
     genDefaultGroupedRow (groupBy: string, group: string, items: any[]) {
       const isOpen = !!this.openCache[group]
       const children: VNodeChildrenArrayContents = [
-        this.$createElement('template', { slot: 'content' }, this.genDefaultRows(items))
+        this.$createElement('template', { slot: 'row.content' }, this.genDefaultRows(items))
       ]
 
       if (this.$scopedSlots['group.header']) {
-        children.unshift(this.$createElement('template', { slot: 'headerColumn' }, [
+        children.unshift(this.$createElement('template', { slot: 'column.header' }, [
           this.$scopedSlots['group.header']({ group, groupBy, items, headers: this.computedHeaders })
         ]))
       } else {
@@ -213,11 +213,11 @@ export default mixins(VDataIterator).extend({
           }
         }, [toggle, `${groupBy}: ${group}`, remove])
 
-        children.unshift(this.$createElement('template', { slot: 'headerColumn' }, [column]))
+        children.unshift(this.$createElement('template', { slot: 'column.header' }, [column]))
       }
 
       if (this.$scopedSlots['group.summary']) {
-        children.push(this.$createElement('template', { slot: 'summaryColumn' }, [
+        children.push(this.$createElement('template', { slot: 'column.summary' }, [
           this.$scopedSlots['group.summary']({ group, groupBy, items, headers: this.computedHeaders })
         ]))
       }
@@ -255,8 +255,8 @@ export default mixins(VDataIterator).extend({
           value: isExpanded
         }
       }, [
-        this.$createElement('template', { slot: 'headerRow' }, [headerRow]),
-        this.$createElement('template', { slot: 'content' }, [expandedRow])
+        this.$createElement('template', { slot: 'row.header' }, [headerRow]),
+        this.$createElement('template', { slot: 'row.content' }, [expandedRow])
       ])
     },
     genDefaultSimpleRow (item: any, classes: string | string[] | object | null = null): VNode {
