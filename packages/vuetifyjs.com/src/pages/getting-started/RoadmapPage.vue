@@ -107,7 +107,7 @@
           complete: true,
           title: 'v1.0 Release',
           caption: 'February 2018',
-          text: 'The officialy v1.0 release party. After 18 months and kaels sanity, we rolled into our first **minor** release.',
+          text: 'The officialy v1.0 release party. After 18 months and kaels sanity, we rolled into our first **MAJOR** release.',
           value: false
         },
         {
@@ -115,7 +115,7 @@
           complete: true,
           title: 'v1.1 Release',
           caption: 'June 2018',
-          text: 'A complete rebuild of all form functionality. Abstracted functionality from components like `v-select` into new implementations, `v-autocomplete`, `v-combobox`, etc. First official support of **RTL** support.',
+          text: 'A complete rebuild of all form functionality. Abstracted features from components like `v-select` into new implementations, `v-autocomplete`, `v-combobox`, etc. First official support of **RTL** support.',
           value: false
         },
         {
@@ -131,7 +131,7 @@
           complete: false,
           title: 'v1.3 Release',
           caption: 'October 2018',
-          text: 'Add new components, `v-treeview`, `v-timeline` and `v-item-group`. Unify the interfaces used in `v-tabs`, `v-stepper` and `v-carousel`.',
+          text: 'Add new components, `v-treeview`, `v-timeline` and `v-item-group`. Unify the interfaces used in `v-tabs` and `v-carousel`. Improve the **vuetify-loader** to support effortless application tree-shaking of Vuetify components.',
           value: true
         },
         {
@@ -147,15 +147,7 @@
           complete: false,
           title: 'v1.4 Release',
           caption: 'December 2018',
-          text: 'Add new components, `v-calendar`, `v-sparkline` and a abstracting `v-toolbar`\'s functionality into multiple components',
-          value: false
-        },
-        {
-          ...video,
-          complete: false,
-          title: 'Vuetify Casts',
-          caption: 'Q1 2019',
-          text: 'More information coming soon',
+          text: 'Add new components, `v-calendar`, `v-sparkline` and a abstracting `v-toolbar`\'s functionality into multiple components.',
           value: false
         },
         {
@@ -163,7 +155,7 @@
           complete: false,
           title: 'v1.5 Release',
           caption: 'Q1 2019',
-          text: 'More information coming soon',
+          text: 'Add new components, `v-file-upload`, `v-discovery` and `v-color-picker`.',
           value: false
         },
         {
@@ -171,7 +163,7 @@
           complete: false,
           title: 'Vuetify Snips',
           caption: 'Q2 2019',
-          text: 'More information coming soon',
+          text: 'Website dedicated to creating and sharing Vuetify snippets.',
           value: false
         },
         {
@@ -179,7 +171,7 @@
           complete: false,
           title: 'v2.0 Release',
           caption: 'Q2 2019',
-          text: 'More information coming soon',
+          text: 'A complete rebuild of the framework core. Improving the layout and theme systems, platform integration, accessibility and performance. Fully modular and automatic tree-shaking from the vuetify-loader.',
           value: false
         }
       ]
