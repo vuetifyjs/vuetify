@@ -345,7 +345,7 @@ export default {
       // has had time to update
       this.$nextTick(() => {
         this.internalSearch = (
-          !this.selectedItem ||
+          !this.selectedItems.length ||
           this.multiple ||
           this.hasSlot
         )
