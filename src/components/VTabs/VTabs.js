@@ -89,6 +89,7 @@ export default BaseItemGroup.extend({
   },
 
   watch: {
+    items: 'onResize',
     tabs: 'onResize'
   },
 

@@ -405,5 +405,9 @@ test('VTabs', ({ mount }) => {
     await resizeWindow(1800)
 
     expect(setWidths).toHaveBeenCalledTimes(2)
+
+    await resizeWindow(1800)
+
+    expect(setWidths).toHaveBeenCalledTimes(3)
   })
 })
