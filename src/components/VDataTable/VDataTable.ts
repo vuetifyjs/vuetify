@@ -328,10 +328,11 @@ export default mixins(VDataIterator).extend({
     },
     genTable () {
       const children: VNodeChildrenArrayContents = [
-        this.genColGroup(),
         ...this.genHeaders(),
         ...this.genBodies()
       ]
+
+      if (!this.static) children.unshift(this.genColGroup())
 
       this.caption && children.unshift(this.$createElement('caption', [this.caption]))
 

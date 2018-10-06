@@ -73,7 +73,7 @@ export default mixins<options>().extend({
       return this.$createElement(VSelect, {
         props: {
           label: 'Sort by',
-          items: this.dataTable.computedHeaders,
+          items: this.dataTable.computedHeaders.filter(h => h.value !== 'dataTableSelect'),
           hideDetails: true,
           multiple: this.dataTable.multiSort,
           value: this.dataTable.multiSort ? this.dataTable.options.sortBy : this.dataTable.options.sortBy[0]

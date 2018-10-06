@@ -24,10 +24,11 @@ export default mixins(
     }
 
     Object.defineProperties(dataIterator, {
-      options: { get: () => this.options },
-      itemsLength: { get: () => this.itemsLength },
-      pageStart: { get: () => this.pageStart },
-      pageStop: { get: () => this.pageStop }
+      options: { get: () => this.options, enumerable: true },
+      itemsLength: { get: () => this.itemsLength, enumerable: true },
+      pageStart: { get: () => this.pageStart, enumerable: true },
+      pageStop: { get: () => this.pageStop, enumerable: true },
+      pageCount: { get: () => this.pageCount, enumerable: true }
     })
 
     return { dataIterator }

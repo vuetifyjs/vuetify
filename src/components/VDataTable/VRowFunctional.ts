@@ -51,11 +51,7 @@ export default Vue.extend({
       }, children)
     }) as any
 
-    const tr = h('tr', {
-      staticClass: data.staticClass,
-      class: data.class,
-      key: data.key
-    }, columns)
+    const tr = h('tr', data, columns)
 
     return tr
   }
