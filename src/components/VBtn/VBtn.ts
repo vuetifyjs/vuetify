@@ -12,19 +12,19 @@ import VProgressCircular from '../VProgressCircular'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
+import { factory as GroupableFactory } from '../../mixins/groupable'
 import Positionable from '../../mixins/positionable'
 import Routable from '../../mixins/routable'
 import Themeable from '../../mixins/themeable'
 import { factory as ToggleableFactory } from '../../mixins/toggleable'
-import { inject as RegistrableInject } from '../../mixins/registrable'
 
 export default mixins(
   Colorable,
   Routable,
   Positionable,
   Themeable,
-  ToggleableFactory('inputValue'),
-  RegistrableInject('buttonGroup')
+  GroupableFactory('btnToggle'),
+  ToggleableFactory('inputValue')
   /* @vue/component */
 ).extend({
   name: 'v-btn',
@@ -92,18 +92,6 @@ export default mixins(
     }
   },
 
-  mounted () {
-    if (this.buttonGroup) {
-      this.buttonGroup.register(this)
-    }
-  },
-
-  beforeDestroy () {
-    if (this.buttonGroup) {
-      this.buttonGroup.unregister(this)
-    }
-  },
-
   methods: {
     // Prevent focus to match md spec
     click (e: MouseEvent): void {
@@ -112,6 +100,8 @@ export default mixins(
       this.$el.blur()
 
       this.$emit('click', e)
+
+      this.btnToggle && this.toggle()
     },
     genContent (): VNode {
       return this.$createElement(

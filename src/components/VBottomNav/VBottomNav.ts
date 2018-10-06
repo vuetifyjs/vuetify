@@ -18,7 +18,6 @@ export default mixins(
     'height',
     'value'
   ]),
-  ButtonGroup,
   Colorable
   /* @vue/component */
 ).extend({
@@ -26,6 +25,7 @@ export default mixins(
 
   props: {
     active: [Number, String],
+    mandatory: Boolean,
     height: {
       default: 56,
       type: [Number, String],
@@ -49,37 +49,29 @@ export default mixins(
     }
   },
 
-  watch: {
-    active () {
-      this.update()
-    }
-  },
-
   methods: {
-    isSelected (i: number): boolean {
-      const item = this.getValue(i)
-      return this.active === item
-    },
     updateApplication (): number {
       return !this.value
         ? 0
         : this.computedHeight
     },
-    updateValue (i: number) {
-      const item = this.getValue(i)
-
-      this.$emit('update:active', item)
+    updateValue (val: any) {
+      this.$emit('update:active', val)
     }
   },
 
   render (h): VNode {
-    return h('div', this.setBackgroundColor(this.color, {
+    return h(ButtonGroup, this.setBackgroundColor(this.color, {
       staticClass: 'v-bottom-nav',
-      'class': this.classes,
+      class: this.classes,
       style: {
         height: `${parseInt(this.computedHeight)}px`
       },
-      ref: 'content'
+      props: {
+        mandatory: Boolean(this.mandatory || this.active !== undefined),
+        value: this.active
+      },
+      on: { change: this.updateValue }
     }), this.$slots.default)
   }
 })

@@ -11,3 +11,11 @@ export {
   Scroll,
   Touch
 }
+
+export default {
+  ClickOutside,
+  Ripple,
+  Resize,
+  Scroll,
+  Touch
+}

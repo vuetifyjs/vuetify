@@ -5,9 +5,6 @@ import VBtn from 'vuetify/es5/components/VBtn'
 import * as VCard from 'vuetify/es5/components/VCard'
 import { Ripple } from 'vuetify/es5/directives'
 import * as directives from 'vuetify/es5/directives'
-import directivesPlugin from 'vuetify/es5/directives'
-
-Vue.use(directivesPlugin)
 
 Vuetify.install(Vue, {
   components: {

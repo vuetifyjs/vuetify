@@ -2,8 +2,9 @@
 import '../../stylus/components/_item-group.styl'
 
 // Mixins
-import Proxyable from '../../mixins/proxyable'
 import Groupable from '../../mixins/groupable'
+import Proxyable from '../../mixins/proxyable'
+import Themeable from '../../mixins/themeable'
 
 // Utilities
 import mixins from '../../util/mixins'
@@ -14,14 +15,11 @@ import { VNode } from 'vue/types'
 
 type GroupableInstance = InstanceType<typeof Groupable> & { value?: any }
 
-export default mixins(Proxyable).extend({
-  name: 'v-item-group',
-
-  provide (): object {
-    return {
-      itemGroup: this
-    }
-  },
+export const BaseItemGroup = mixins(
+  Proxyable,
+  Themeable
+).extend({
+  name: 'base-item-group',
 
   props: {
     activeClass: {
@@ -49,6 +47,11 @@ export default mixins(Proxyable).extend({
   },
 
   computed: {
+    classes (): Record<string, boolean> {
+      return {
+        ...this.themeClasses
+      }
+    },
     selectedItems (): GroupableInstance[] {
       return this.items.filter((item, index) => {
         return this.toggleMethod(this.getValue(item, index))
@@ -84,7 +87,7 @@ export default mixins(Proxyable).extend({
   },
 
   mounted () {
-    this.init()
+    this.$nextTick(this.init)
   },
 
   methods: {
@@ -207,7 +210,18 @@ export default mixins(Proxyable).extend({
 
   render (h): VNode {
     return h('div', {
-      staticClass: 'v-item-group'
+      staticClass: 'v-item-group',
+      class: this.classes
     }, this.$slots.default)
+  }
+})
+
+export default BaseItemGroup.extend({
+  name: 'v-item-group',
+
+  provide (): object {
+    return {
+      itemGroup: this
+    }
   }
 })

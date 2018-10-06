@@ -9,8 +9,10 @@ v-btn-toggle($material)
   .v-btn
     color: $material.text.primary
 
-    &.v-btn--active:not(:last-child):not([data-only-child])
-      border-right-color: $material.buttons.disabled
+  &:not(.v-btn-toggle--only-child)
+    .v-btn
+      &.v-btn--active:not(:last-child)
+        border-right-color: $material.buttons.disabled
 
 theme(v-btn-toggle, "v-btn-toggle")
 

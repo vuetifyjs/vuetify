@@ -6,7 +6,7 @@
 
 <p align="center">
   <a href="https://travis-ci.org/vuetifyjs/vuetify">
-    <img src="https://img.shields.io/travis/vuetifyjs/vuetify.svg" alt="travis ci badge">
+    <img src="https://img.shields.io/travis/vuetifyjs/vuetify/dev.svg" alt="travis ci badge">
   </a>
   <a href="https://codecov.io/gh/vuetifyjs/vuetify">
     <img src="https://img.shields.io/codecov/c/github/vuetifyjs/vuetify.svg" alt="Coverage">

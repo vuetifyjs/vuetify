@@ -104,19 +104,19 @@ export default mixins(
       deep: true
     },
     active (v) {
-      if (deepEqual(this.activeCache, v)) return
+      if (deepEqual([...this.activeCache], v)) return
 
       this.active.forEach(key => this.updateActive(key, true))
       this.emitActive()
     },
     value (v) {
-      if (!v || deepEqual(v, this.selectedCache)) return
+      if (!v || deepEqual([...this.selectedCache], v)) return
 
       this.value.forEach(key => this.updateSelected(key, true))
       this.emitSelected()
     },
     open (v) {
-      if (deepEqual(this.openCache, v)) return
+      if (deepEqual([...this.openCache], v)) return
 
       this.openCache.forEach(key => this.updateOpen(key, false))
       this.open.forEach(key => this.updateOpen(key, true))

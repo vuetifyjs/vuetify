@@ -20,16 +20,13 @@ declare module 'vuetify/es5/components/*' {
 }
 
 declare module 'vuetify/es5/directives' {
-  import { PluginFunction } from 'vue'
-  import { VuetifyDirective } from 'vuetify'
+  import { DirectiveOptions, PluginFunction } from 'vue'
 
-  const ClickOutside: VuetifyDirective
-  const Ripple: VuetifyDirective
-  const Resize: VuetifyDirective
-  const Scroll: VuetifyDirective
-  const Touch: VuetifyDirective
-
-  const Plugin: PluginFunction<never>
+  const ClickOutside: DirectiveOptions
+  const Ripple: DirectiveOptions
+  const Resize: DirectiveOptions
+  const Scroll: DirectiveOptions
+  const Touch: DirectiveOptions
 
   export {
     ClickOutside,
@@ -38,5 +35,4 @@ declare module 'vuetify/es5/directives' {
     Scroll,
     Touch
   }
-  export default Plugin
 }

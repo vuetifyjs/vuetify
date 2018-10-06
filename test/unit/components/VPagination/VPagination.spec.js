@@ -127,7 +127,7 @@ test('VPagination.vue', ({ mount }) => {
     expect(wrapper.find('.v-pagination__more').length).toEqual(2)
   })
 
-  it('should only render start and end of range if value is equals "left"', async () => {
+  it('should only render start of range if value is equals "left"', async () => {
     jest.useFakeTimers()
     const wrapper = mount(VPagination, {
       propsData: {
@@ -146,7 +146,7 @@ test('VPagination.vue', ({ mount }) => {
     expect(wrapper.find('.v-pagination__more').length).toEqual(1)
   })
 
-  it('should only render start and end of range if value is equals "right"', async () => {
+  it('should only render end of range if value is equals "right"', async () => {
     jest.useFakeTimers()
     const wrapper = mount(VPagination, {
       propsData: {

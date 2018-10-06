@@ -1,71 +1,72 @@
-import Vue from 'vue'
-
-// Components
-import VItemGroup from '../components/VItemGroup/VItemGroup'
-
 // Mixins
-import { inject as RegistrableInject } from './registrable'
+import { Registrable, inject as RegistrableInject } from './registrable'
 
 // Utilities
-import mixins from '../util/mixins'
+import { ExtractVue } from '../util/mixins'
 import { PropValidator } from 'vue/types/options'
-import { consoleWarn } from '../util/console'
+import { VueConstructor } from 'vue'
 
-type VItemGroupInstance = InstanceType<typeof VItemGroup>
+/* eslint-disable-next-line no-use-before-define */
+export type Groupable<T extends string> = VueConstructor<ExtractVue<Registrable<T>> & {
+  activeClass: string
+  isActive: boolean
+  groupClasses: object
+  toggle (): void
+}>
 
-interface options extends Vue {
-  itemGroup: VItemGroupInstance
+export function factory<T extends string> (
+  namespace: T,
+  child?: string,
+  parent?: string
+): Groupable<T> {
+  return RegistrableInject(namespace, child, parent).extend({
+    name: 'groupable',
+
+    props: {
+      activeClass: {
+        type: String,
+        default (): string | undefined {
+          if (!this[namespace]) return undefined
+
+          return this[namespace].activeClass
+        }
+      } as any as PropValidator<string>,
+      disabled: Boolean
+    },
+
+    data () {
+      return {
+        isActive: false
+      }
+    },
+
+    computed: {
+      groupClasses (): object {
+        if (!this.activeClass) return {}
+
+        return {
+          [this.activeClass]: this.isActive
+        }
+      }
+    },
+
+    created () {
+      this[namespace] && (this[namespace] as any).register(this)
+    },
+
+    beforeDestroy () {
+      this[namespace] && (this[namespace] as any).unregister(this)
+    },
+
+    methods: {
+      toggle () {
+        this.$emit('change')
+      }
+    }
+  })
 }
 
-export default mixins<options>(
-  RegistrableInject('itemGroup', 'v-item', 'v-item-group')
-  /* @vue/component */
-).extend({
-  name: 'groupable',
+/* eslint-disable-next-line no-redeclare */
+const Groupable = factory('itemGroup')
 
-  props: {
-    activeClass: {
-      type: String,
-      default (): string | undefined {
-        if (!this.itemGroup) return undefined
-
-        return this.itemGroup.activeClass
-      }
-    } as any as PropValidator<string>,
-    disabled: Boolean
-  },
-
-  data () {
-    return {
-      isActive: false
-    }
-  },
-
-  computed: {
-    groupClasses (): object {
-      if (!this.activeClass) return {}
-
-      return {
-        [this.activeClass]: this.isActive
-      }
-    }
-  },
-
-  created () {
-    if (!('value' in this)) {
-      consoleWarn('Implementing component is missing a value property', this)
-    }
-
-    this.itemGroup && this.itemGroup.register(this)
-  },
-
-  beforeDestroy () {
-    this.itemGroup && this.itemGroup.unregister(this)
-  },
-
-  methods: {
-    toggle () {
-      this.$emit('change')
-    }
-  }
-})
+export default Groupable
