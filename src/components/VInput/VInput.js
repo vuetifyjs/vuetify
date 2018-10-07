@@ -53,6 +53,7 @@ export default {
 
   data: vm => ({
     lazyValue: vm.value,
+    hasMouseDown: false,
     isFocused: false
   }),
 
@@ -272,9 +273,11 @@ export default {
       this.$emit('click', e)
     },
     onMouseDown (e) {
+      this.hasMouseDown = true
       this.$emit('mousedown', e)
     },
     onMouseUp (e) {
+      this.hasMouseDown = false
       this.$emit('mouseup', e)
     }
   },
