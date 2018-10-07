@@ -260,7 +260,7 @@ export default {
             : -1
 
         if (newIndex === -1) {
-          this.internalValue = this.multiple ? [] : undefined
+          this.setValue(this.multiple ? [] : undefined)
         } else {
           this.selectItem(currentItem)
         }
@@ -328,11 +328,6 @@ export default {
       VSelect.methods.onTabDown.call(this, e)
       this.updateSelf()
     },
-    selectItem (item) {
-      VSelect.methods.selectItem.call(this, item)
-
-      this.setSearch()
-    },
     setSelectedItems () {
       VSelect.methods.setSelectedItems.call(this)
 
@@ -352,10 +347,6 @@ export default {
           ? null
           : this.getText(this.selectedItem)
       })
-    },
-    setValue () {
-      this.internalValue = this.internalSearch
-      this.$emit('change', this.internalSearch)
     },
     updateSelf () {
       this.updateAutocomplete()
