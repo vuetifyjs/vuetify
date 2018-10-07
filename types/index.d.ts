@@ -59,7 +59,7 @@ declare module 'vue/types/vue' {
 }
 
 export type VuetifyIconComponent = {
-  component: Component
+  component: Component | string
   props?: object
 }
 export type VuetifyIcon = string | VuetifyIconComponent

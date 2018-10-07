@@ -1,4 +1,5 @@
-import { VuetifyIcons } from 'vuetify'
+import { VuetifyIcon, VuetifyIcons } from 'vuetify'
+import { Component } from 'vue'
 
 // Maps internal Vuetify icon names to actual Material Design icon names.
 const ICONS_MATERIAL: VuetifyIcons = {
@@ -120,11 +121,30 @@ const ICONS_FONTAWESOME: VuetifyIcons = {
   'ratingHalf': 'fas fa-star-half'
 }
 
+export function convertToComponentDeclarations (
+  component: Component | string,
+  iconSet: VuetifyIcons
+) {
+  const result: {[name: string]: VuetifyIcon} = {}
+
+  for (const key in iconSet) {
+    result[key] = {
+      component,
+      props: {
+        icon: (iconSet[key] as string).split(' fa-')
+      }
+    }
+  }
+
+  return result as VuetifyIcons
+}
+
 const iconSets: Record<string, VuetifyIcons> = {
   md: ICONS_MATERIAL,
   mdi: ICONS_MDI,
   fa: ICONS_FONTAWESOME,
-  fa4: ICONS_FONTAWESOME4
+  fa4: ICONS_FONTAWESOME4,
+  faSvg: convertToComponentDeclarations('font-awesome-icon', ICONS_FONTAWESOME)
 }
 
 export default function icons (iconfont = 'md', icons: Partial<VuetifyIcons> = {}) {
