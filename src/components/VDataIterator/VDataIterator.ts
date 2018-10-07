@@ -6,7 +6,7 @@ import Themeable from '../../mixins/themeable'
 
 // Utils
 import mixins from '../../util/mixins'
-import { getObjectValueByPath, deepEqual, wrapInArray } from '../../util/helpers'
+import { getObjectValueByPath, deepEqual, wrapInArray, computeSlots } from '../../util/helpers'
 
 // Types
 import { VNode, VNodeChildrenArrayContents } from 'vue'
@@ -407,39 +407,31 @@ export default mixins(
     createSlotProps () {
       return { items: this.computedItems, mobile: this.isMobile }
     },
-    computeSlots (name: string): VNodeChildrenArrayContents {
-      const slots: VNodeChildrenArrayContents = []
-
-      if (this.$slots[name]) slots.push(...this.$slots[name])
-      if (this.$scopedSlots[name]) {
-        const scoped = this.$scopedSlots[name](this.createSlotProps())
-        Array.isArray(scoped) ? slots.push(...scoped) : slots.push(scoped)
-      }
-
-      return slots
-    },
-    genHeaders (): VNodeChildrenArrayContents {
-      return this.computeSlots('header')
-    },
-    genEmpty (content: VNodeChildrenArrayContents) {
+    genEmptyWrapper (content: VNodeChildrenArrayContents) {
       return this.$createElement('div', content)
     },
-    genBodies () {
-      const bodies: VNodeChildrenArrayContents = []
+    genEmpty () {
       if (!this.serverItemsLength && this.loading) {
         const loading = this.$slots['loading'] || this.$vuetify.t(this.loadingText)
-        return [this.genEmpty(loading)]
+        return this.genEmptyWrapper(loading)
       } else if (!this.itemsLength && !this.items.length) {
         const noData = this.$slots['no-data'] || this.$vuetify.t(this.noDataText)
-        return [this.genEmpty(noData)]
+        return this.genEmptyWrapper(noData)
       } else if (!this.computedItems.length) {
         const noResults = this.$slots['no-results'] || this.$vuetify.t(this.noResultsText)
-        return [this.genEmpty(noResults)]
+        return this.genEmptyWrapper(noResults)
       }
 
-      bodies.push(this.$slots.default)
+      return null
+    },
+    genBodies () {
+      const empty = this.genEmpty()
 
-      const slots = this.computeSlots('body')
+      if (empty) return [empty]
+
+      const bodies: VNodeChildrenArrayContents = [this.$slots.default]
+
+      const slots = computeSlots(this, 'body', this.createSlotProps())
       if (slots.length) {
         bodies.push(slots)
         return bodies
@@ -457,7 +449,7 @@ export default mixins(
 
       if (this.$scopedSlots.item) {
         const slotItems = this.computedItems.map((item: any) => this.$scopedSlots.item(this.createItemProps(item)))
-        return this.genBodyWrapper(slotItems)
+        return this.$createElement('div', slotItems)
       }
 
       return null
@@ -474,17 +466,14 @@ export default mixins(
       }
 
       return footers
-    },
-    genBodyWrapper (items: any[]): VNode {
-      return this.$createElement('div', items)
     }
   },
 
   render (h): VNode {
     const children: VNodeChildrenArrayContents = [
-      ...this.genHeaders(),
+      computeSlots(this, 'header', this.createSlotProps()),
       ...this.genBodies(),
-      ...this.computeSlots('footer'),
+      computeSlots(this, 'footer', this.createSlotProps()),
       ...this.genFooter()
     ]
 

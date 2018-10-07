@@ -1,5 +1,5 @@
 import { Vue } from 'vue/types/vue'
-import { VNode, VNodeDirective, FunctionalComponentOptions } from 'vue/types'
+import { VNode, VNodeDirective, FunctionalComponentOptions, VNodeChildrenArrayContents } from 'vue/types'
 
 export function createSimpleFunctional (
   c: string,
@@ -331,3 +331,15 @@ export function groupByProperty (xs: any[], key: string) {
 }
 
 export function wrapInArray<T> (v: T | T[]): T[] { return Array.isArray(v) ? v : [v] }
+
+export function computeSlots (cmp: Vue, name: string, props: object) {
+  const slots: VNodeChildrenArrayContents = []
+
+  if (cmp.$slots[name]) slots.push(...cmp.$slots[name])
+  if (cmp.$scopedSlots[name]) {
+    const scoped = cmp.$scopedSlots[name](props)
+    Array.isArray(scoped) ? slots.push(...scoped) : slots.push(scoped)
+  }
+
+  return slots
+}

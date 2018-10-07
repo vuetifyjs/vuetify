@@ -65,6 +65,30 @@ v-data-table($material)
 
 theme(v-data-table, "v-data-table")
 
+.v-table-virtual
+  &__container
+    position: relative
+    overflow-y: hidden
+    padding-right: 17px
+
+  &__scroller
+    position: absolute
+    top: 0
+    right: 0
+    height: 100%
+    width: 17px
+    overflow-x: hidden
+
+  &__wrapper
+    width: 100%
+    height: 100%
+    overflow-x: auto
+    overflow-y: hidden
+
+.v-table-regular
+  &__wrapper
+    overflow-y: auto
+
 .v-data-table
   table
     width: 100%
@@ -75,13 +99,6 @@ theme(v-data-table, "v-data-table")
     colgroup
       .divider
         border-right: 1px solid lightgrey
-
-  &__wrapper
-    overflow-x: auto
-    width: 100%
-    position: relative
-    overflow-y: hidden
-    height: 100%
 
   &--dense
     td
@@ -98,19 +115,6 @@ theme(v-data-table, "v-data-table")
 
     .v-table__header, .v-table__actions
       margin-right: 17px
-
-  &__container
-    padding-right: 17px
-    position: relative
-    overflow-y: hidden
-
-  &__scroller
-    overflow-x: hidden
-    height: 100%
-    width: 17px
-    position: absolute
-    top: 0
-    right: 0
 
   &--mobile
     tr, td, th
