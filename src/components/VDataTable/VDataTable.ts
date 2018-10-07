@@ -1,7 +1,7 @@
 import '../../stylus/components/_data-table.styl'
 
 // Components
-import { VDataHeader, VRowFunctional, VRowGroup, VDataHeaderMobile } from '.'
+import { VDataHeader, VRowFunctional, VRowGroup, VDataHeaderMobile, VTableVirtual } from '.'
 import { VDataIterator } from '../VDataIterator'
 import { VBtn } from '../VBtn'
 import { VIcon } from '../VIcon'
@@ -11,7 +11,7 @@ import { VSimpleCheckbox } from '../VCheckbox'
 import { getObjectValueByPath, groupByProperty, convertToUnit } from '../../util/helpers'
 
 // Types
-import { VNodeChildrenArrayContents, VNode } from 'vue'
+import Vue, { VNodeChildrenArrayContents, VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
 import mixins from '../../util/mixins'
 import TableHeader from './TableHeader'
@@ -39,7 +39,7 @@ export default mixins(VDataIterator).extend({
       type: Array,
       default: () => ([])
     } as PropValidator<TableHeader[]>,
-    height: String,
+    height: [String, Number],
     hideDefaultHeader: Boolean,
     loading: Boolean,
     showSelect: Boolean,
@@ -55,7 +55,8 @@ export default mixins(VDataIterator).extend({
       widths: [] as number[],
       options: {
         groupBy: this.groupBy
-      }
+      },
+      scrollTop: 0
     }
   },
 
@@ -107,8 +108,9 @@ export default mixins(VDataIterator).extend({
 
   methods: {
     calcWidths () {
-      const table = this.$refs.table as Element
-      this.widths = Array.from(table.querySelectorAll('th')).map(e => e.clientWidth)
+      const table = this.$refs.table as Vue
+      console.log({ table })
+      this.widths = Array.from(table.$el.querySelectorAll('th')).map(e => e.clientWidth)
     },
     searchItems (items: any[]): any[] {
       // If we have column-specific filters, run them here
@@ -127,8 +129,18 @@ export default mixins(VDataIterator).extend({
 
       return this.customSort(items, sortBy, sortDesc, locale, this.headersWithCustomSort)
     },
+    createItemProps (item: any) {
+      const props = VDataIterator.options.methods.createItemProps.call(this, item)
+      props.headers = this.computedHeaders
+
+      return props
+    },
     createSlotProps () {
-      return { items: this.computedItems, headers: this.computedHeaders, widths: this.widths }
+      const props = VDataIterator.options.methods.createSlotProps.call(this)
+      props.headers = this.computedHeaders
+      props.widths = this.computedWidths
+
+      return props
     },
     genHeaders (): VNodeChildrenArrayContents {
       const headers = this.computeSlots('header')
@@ -234,7 +246,6 @@ export default mixins(VDataIterator).extend({
     genScopedRows (items: any[]): VNodeChildrenArrayContents {
       return items.map((item: any) => {
         const props = this.createItemProps(item)
-        props.headers = this.computedHeaders
         return this.$scopedSlots.item(props)
       })
     },
@@ -309,6 +320,12 @@ export default mixins(VDataIterator).extend({
       return this.$createElement('tbody', {
         staticClass: 'v-data-table__body'
       }, items)
+      // return this.$createElement(VDataBody, {
+      //   // props: {
+      //   //   headers: this.computedHeaders,
+      //   //   items: this.computedItems
+      //   // }
+      // })
     },
     genEmpty (content: VNodeChildrenArrayContents) {
       return this.$createElement('tr', [this.$createElement('td', { attrs: { colspan: this.computedHeaders.length } }, content)])
@@ -327,21 +344,33 @@ export default mixins(VDataIterator).extend({
       return this.$createElement('colgroup', cols)
     },
     genTable () {
-      const children: VNodeChildrenArrayContents = [
-        ...this.genHeaders(),
-        ...this.genBodies()
-      ]
+      return this.$createElement(VTableVirtual, {
+        ref: 'table'
+      })
+      // const children: VNodeChildrenArrayContents = [
+      //   ...this.genHeaders(),
+      //   ...this.genBodies()
+      // ]
 
-      if (!this.static) children.unshift(this.genColGroup())
+      // if (!this.static) children.unshift(this.genColGroup())
 
-      this.caption && children.unshift(this.$createElement('caption', [this.caption]))
+      // this.caption && children.unshift(this.$createElement('caption', [this.caption]))
 
-      return this.$createElement('div', {
-        staticClass: 'v-data-table__wrapper',
-        style: {
-          height: this.height
-        }
-      }, [this.$createElement('table', { ref: 'table' }, children)])
+      // return this.$createElement('div', {
+      //   staticClass: 'v-data-table__wrapper',
+      //   style: {
+      //     height: convertToUnit(this.height)
+      //   },
+      //   on: {
+      //     scroll: (e: Event) => {
+      //       // this.$nextTick(() => {
+      //       const target = e.target as Element
+      //       this.scrollTop = target.scrollTop
+      //       console.log(this.scrollTop)
+      //       // })
+      //     }
+      //   }
+      // }, [this.$createElement('table', { ref: 'table' }, children)])
     }
   },
 
@@ -354,7 +383,7 @@ export default mixins(VDataIterator).extend({
       staticClass: 'v-data-table',
       class: {
         'v-data-table--dense': this.dense,
-        'v-data-table--fixed': !!this.height,
+        // 'v-data-table--fixed': !!this.height,
         'v-data-table--mobile': this.isMobile,
         ...this.themeClasses
       }

@@ -14,7 +14,8 @@ export default Vue.extend({
   props: {
     headers: Array as PropValidator<TableHeader[]>,
     item: Object,
-    mobile: Boolean
+    mobile: Boolean,
+    widths: Array as PropValidator<any[]>
   },
 
   render (h, { props, slots, data }): VNode {

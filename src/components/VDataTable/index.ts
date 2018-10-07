@@ -9,6 +9,7 @@ import VRow from './VRow'
 import VRowFunctional from './VRowFunctional'
 import VRowRegular from './VRowRegular'
 import VRowExpansion from './VRowExpansion'
+import VTableVirtual from './VTableVirtual'
 
 const VTableOverflow = createSimpleFunctional('v-table__overflow')
 
@@ -22,7 +23,8 @@ export {
   VRow,
   VRowRegular,
   VRowFunctional,
-  VRowExpansion
+  VRowExpansion,
+  VTableVirtual
 }
 
 export default {
@@ -36,6 +38,7 @@ export default {
     VRow,
     VRowRegular,
     VRowFunctional,
-    VRowExpansion
+    VRowExpansion,
+    VTableVirtual
   }
 }

@@ -79,7 +79,9 @@ theme(v-data-table, "v-data-table")
   &__wrapper
     overflow-x: auto
     width: 100%
-    display: block
+    position: relative
+    overflow-y: hidden
+    height: 100%
 
   &--dense
     td
@@ -97,8 +99,18 @@ theme(v-data-table, "v-data-table")
     .v-table__header, .v-table__actions
       margin-right: 17px
 
-    .v-data-table__wrapper
-      overflow-y: scroll
+  &__container
+    padding-right: 17px
+    position: relative
+    overflow-y: hidden
+
+  &__scroller
+    overflow-x: hidden
+    height: 100%
+    width: 17px
+    position: absolute
+    top: 0
+    right: 0
 
   &--mobile
     tr, td, th

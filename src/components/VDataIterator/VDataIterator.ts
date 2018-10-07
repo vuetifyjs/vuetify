@@ -385,7 +385,8 @@ export default mixins(
     },
     createItemProps (item: any): any {
       const props = {
-        item
+        item,
+        mobile: this.isMobile
       }
 
       Object.defineProperties(props, {
@@ -404,7 +405,7 @@ export default mixins(
       return props
     },
     createSlotProps () {
-      return { items: this.computedItems }
+      return { items: this.computedItems, mobile: this.isMobile }
     },
     computeSlots (name: string): VNodeChildrenArrayContents {
       const slots: VNodeChildrenArrayContents = []
