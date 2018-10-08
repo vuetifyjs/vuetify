@@ -126,11 +126,10 @@ export default mixins(Colorable).extend({
       staticClass: 'v-progress-linear__bar',
       style: this.styles
     }, [fade, slide])
-    const background = h('div', {
+    const background = h('div', this.setBackgroundColor(this.backgroundColor || this.color, {
       staticClass: 'v-progress-linear__background',
-      class: [this.backgroundColor || this.color],
       style: this.backgroundStyle
-    })
+    }))
 
     return h('div', {
       staticClass: 'v-progress-linear',

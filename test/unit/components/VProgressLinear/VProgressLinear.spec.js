@@ -34,6 +34,17 @@ test('VProgressLinear.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should render component with css color and match snapshot', () => {
+    const wrapper = mount(VProgressLinear, {
+      propsData: {
+        value: 33,
+        color: '#336699'
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it('should render component with color and background opacity and match snapshot', () => {
     const wrapper = mount(VProgressLinear, {
       propsData: {
