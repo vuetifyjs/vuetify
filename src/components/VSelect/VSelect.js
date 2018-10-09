@@ -220,7 +220,6 @@ export default {
   watch: {
     internalValue (val) {
       this.initialValue = val
-      this.$emit('change', this.internalValue)
       this.setSelectedItems()
     },
     isBooted () {
@@ -264,7 +263,7 @@ export default {
       this.isMenuActive = true
     },
     clearableCallback () {
-      this.internalValue = this.multiple ? [] : undefined
+      this.setValue(this.multiple ? [] : undefined)
       this.$nextTick(() => this.$refs.input.focus())
 
       if (this.openOnClear) this.isMenuActive = true
@@ -527,7 +526,7 @@ export default {
     },
     onChipInput (item) {
       if (this.multiple) this.selectItem(item)
-      else this.internalValue = null
+      else this.setValue(null)
 
       // If all items have been deleted,
       // open `v-menu`
@@ -637,16 +636,16 @@ export default {
     },
     selectItem (item) {
       if (!this.multiple) {
-        this.internalValue = this.returnObject ? item : this.getValue(item)
+        this.setValue(this.returnObject ? item : this.getValue(item))
         this.isMenuActive = false
       } else {
         const internalValue = (this.internalValue || []).slice()
         const i = this.findExistingIndex(item)
 
         i !== -1 ? internalValue.splice(i, 1) : internalValue.push(item)
-        this.internalValue = internalValue.map(i => {
+        this.setValue(internalValue.map(i => {
           return this.returnObject ? i : this.getValue(i)
-        })
+        }))
 
         // When selecting multiple
         // adjust menu after each
@@ -678,6 +677,10 @@ export default {
       }
 
       this.selectedItems = selectedItems
+    },
+    setValue (value) {
+      this.internalValue = value
+      this.$emit('change', value)
     }
   }
 }

@@ -69,7 +69,7 @@ export default {
       // actual link, do not
       // prevent default
       if (this.href &&
-        this.href.indexOf('#') > -1
+        this.href === '#'
       ) e.preventDefault()
 
       this.$emit('click', e)

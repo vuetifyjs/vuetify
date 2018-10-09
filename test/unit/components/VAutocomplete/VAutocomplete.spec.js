@@ -754,4 +754,45 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
 
     expect(wrapper.vm.isMenuActive).toBe(false)
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/5110
+  it('should set internal search', async () => {
+    const wrapper = mount(VAutocomplete, {
+      propsData: {
+        value: undefined,
+        items: [0, 1, 2]
+      }
+    })
+
+    // Initial value
+    expect(wrapper.vm.internalSearch).toBe(undefined)
+
+    wrapper.vm.setSearch()
+
+    await wrapper.vm.$nextTick()
+
+    // !this.selectedItem
+    expect(wrapper.vm.internalSearch).toBe(null)
+
+    wrapper.setData({ internalSearch: undefined })
+    wrapper.setProps({ multiple: true, value: 1 })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.selectedItems.length).toBe(1)
+
+    wrapper.vm.setSearch()
+
+    await wrapper.vm.$nextTick()
+
+    // this.multiple
+    expect(wrapper.vm.internalSearch).toBe(null)
+
+    wrapper.setData({ internalSearch: undefined })
+    wrapper.setProps({ multiple: false, value: 0 })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.internalSearch).toBe(0)
+  })
 })

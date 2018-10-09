@@ -26,14 +26,14 @@ export default {
           name: 'message-transition',
           tag: 'div'
         }
-      }, this.value.map(m => this.genMessage(m)))
+      }, this.value.map(this.genMessage))
     },
-    genMessage (key) {
+    genMessage (message, key) {
       return this.$createElement('div', {
         staticClass: 'v-messages__message',
         key,
         domProps: {
-          innerHTML: key
+          innerHTML: message
         }
       })
     }

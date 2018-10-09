@@ -108,7 +108,9 @@ export default {
         value: this.isActive,
         closeOnClick: !this.persistent,
         closeOnContentClick: false,
-        lazy: this.lazy
+        lazy: this.lazy,
+        light: this.light,
+        dark: this.dark
       },
       on: {
         input: val => (this.isActive = val)

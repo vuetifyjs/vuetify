@@ -803,4 +803,19 @@ test('VTextField.js', ({ mount }) => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/5018
+  it('should not focus input when mousedown did not originate from input', () => {
+    const focus = jest.fn()
+    const wrapper = mount(VTextField, {
+      methods: { focus }
+    })
+
+    const input = wrapper.first('.v-input__slot')
+    input.trigger('mousedown')
+    input.trigger('mouseup')
+    input.trigger('mouseup')
+
+    expect(focus).toHaveBeenCalledTimes(1)
+  })
 })

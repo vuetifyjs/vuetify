@@ -222,8 +222,9 @@ export default {
     }, [
       this.$createElement(ThemeProvider, {
         props: {
-          dark: !this.light && (this.$vuetify.dark || this.dark),
-          light: !this.dark && (this.light || !this.$vuetify.dark)
+          root: true,
+          light: this.light,
+          dark: this.dark
         }
       }, [dialog])
     ]))
