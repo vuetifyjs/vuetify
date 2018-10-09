@@ -20,10 +20,6 @@ export default BaseItemGroup.extend({
     expand: Boolean,
     focusable: Boolean,
     inset: Boolean,
-    multiple: {
-      type: Boolean,
-      default: true
-    },
     popout: Boolean
   },
 
