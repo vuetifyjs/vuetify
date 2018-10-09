@@ -13,7 +13,7 @@ import { consoleWarn } from '../../util/console'
 // Types
 import { VNode } from 'vue/types'
 
-type GroupableInstance = InstanceType<typeof Groupable> & { value?: any }
+export type GroupableInstance = InstanceType<typeof Groupable> & { value?: any }
 
 export const BaseItemGroup = mixins(
   Proxyable,
@@ -47,10 +47,13 @@ export const BaseItemGroup = mixins(
   },
 
   computed: {
-    classes (): Record<string, boolean> {
+    classes (): object {
       return {
         ...this.themeClasses
       }
+    },
+    isMulti (): boolean {
+      return this.multiple
     },
     selectedItems (): GroupableInstance[] {
       return this.items.filter((item, index) => {
@@ -63,7 +66,7 @@ export const BaseItemGroup = mixins(
         : [this.internalValue]
     },
     toggleMethod (): (v: any) => boolean {
-      if (!this.multiple) {
+      if (!this.isMulti) {
         return (v: any) => this.internalValue === v
       }
 
@@ -81,7 +84,7 @@ export const BaseItemGroup = mixins(
   },
 
   created () {
-    if (this.multiple && !Array.isArray(this.internalValue)) {
+    if (this.isMulti && !Array.isArray(this.internalValue)) {
       consoleWarn('Model must be bound to an array if the multiple property is true.', this)
     }
   },
@@ -126,7 +129,7 @@ export const BaseItemGroup = mixins(
       }
 
       // Remove the value
-      if (this.multiple && Array.isArray(this.internalValue)) {
+      if (this.isMulti && Array.isArray(this.internalValue)) {
         this.internalValue = this.internalValue.filter(v => v !== value)
       } else {
         this.internalValue = undefined
@@ -156,7 +159,7 @@ export const BaseItemGroup = mixins(
       })
     },
     updateInternalValue (value: any) {
-      this.multiple
+      this.isMulti
         ? this.updateMultiple(value)
         : this.updateSingle(value)
     },

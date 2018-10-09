@@ -2,9 +2,9 @@
 
 exports[`VExpansionPanel.js should render an expanded component and match snapshot 1`] = `
 
-<ul class="v-expansion-panel theme--light">
-  <li tabindex="0"
-      class="v-expansion-panel__container"
+<div class="v-item-group theme--light v-expansion-panel">
+  <div tabindex="0"
+       class="v-expansion-panel__container"
   >
     <div class="v-expansion-panel__header">
       <div>
@@ -23,16 +23,16 @@ exports[`VExpansionPanel.js should render an expanded component and match snapsh
     >
       content
     </div>
-  </li>
-</ul>
+  </div>
+</div>
 
 `;
 
 exports[`VExpansionPanel.js should render an expanded component and match snapshot 2`] = `
 
-<ul class="v-expansion-panel theme--light">
-  <li tabindex="0"
-      class="v-expansion-panel__container v-expansion-panel__container--active"
+<div class="v-item-group theme--light v-expansion-panel">
+  <div tabindex="0"
+       class="v-expansion-panel__container v-expansion-panel__container--active"
   >
     <div class="v-expansion-panel__header">
       <div>
@@ -51,16 +51,16 @@ exports[`VExpansionPanel.js should render an expanded component and match snapsh
     >
       content
     </div>
-  </li>
-</ul>
+  </div>
+</div>
 
 `;
 
 exports[`VExpansionPanel.js should render component and match snapshot 1`] = `
 
-<ul class="v-expansion-panel theme--light">
-  <li tabindex="0"
-      class="v-expansion-panel__container"
+<div class="v-item-group theme--light v-expansion-panel">
+  <div tabindex="0"
+       class="v-expansion-panel__container"
   >
     <div class="v-expansion-panel__header">
       <div>
@@ -79,16 +79,16 @@ exports[`VExpansionPanel.js should render component and match snapshot 1`] = `
     >
       content
     </div>
-  </li>
-</ul>
+  </div>
+</div>
 
 `;
 
 exports[`VExpansionPanel.js should render component and match snapshot 2`] = `
 
-<ul class="v-expansion-panel theme--light">
-  <li tabindex="0"
-      class="v-expansion-panel__container v-expansion-panel__container--active"
+<div class="v-item-group theme--light v-expansion-panel">
+  <div tabindex="0"
+       class="v-expansion-panel__container v-expansion-panel__container--active"
   >
     <div class="v-expansion-panel__header">
       <div>
@@ -107,22 +107,22 @@ exports[`VExpansionPanel.js should render component and match snapshot 2`] = `
     >
       content
     </div>
-  </li>
-</ul>
+  </div>
+</div>
 
 `;
 
 exports[`VExpansionPanel.js should show content on v-model change 1`] = `
 
-<ul class="v-expansion-panel theme--light">
-  <li tabindex="0"
-      class="v-expansion-panel__container"
+<div class="v-item-group theme--light v-expansion-panel">
+  <div tabindex="0"
+       class="v-expansion-panel__container"
   >
     <div class="v-expansion-panel__body"
          style="display: none;"
     >
     </div>
-  </li>
-</ul>
+  </div>
+</div>
 
 `;
