@@ -9,6 +9,7 @@ import Detachable from '../../mixins/detachable'
 import Menuable from '../../mixins/menuable.js'
 import Returnable from '../../mixins/returnable'
 import Toggleable from '../../mixins/toggleable'
+import Themeable from '../../mixins/themeable'
 
 // Component level mixins
 import Activator from './mixins/menu-activator'
@@ -28,6 +29,13 @@ import ThemeProvider from '../../util/ThemeProvider'
 export default Vue.extend({
   name: 'v-menu',
 
+  provide () {
+    return {
+      // Pass theme through to default slot
+      theme: this.theme
+    }
+  },
+
   directives: {
     ClickOutside,
     Resize
@@ -43,7 +51,8 @@ export default Vue.extend({
     Menuable,
     Position,
     Returnable,
-    Toggleable
+    Toggleable,
+    Themeable
   ],
 
   props: {
@@ -207,8 +216,9 @@ export default Vue.extend({
       this.genActivator(),
       this.$createElement(ThemeProvider, {
         props: {
-          dark: !this.light && (this.$vuetify.dark || this.dark),
-          light: !this.dark && (this.light || !this.$vuetify.dark)
+          root: true,
+          light: this.light,
+          dark: this.dark
         }
       }, [this.genTransition()])
     ])
