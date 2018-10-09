@@ -33,25 +33,8 @@ export default BaseItemGroup.extend({
         'v-expansion-panel--inset': this.inset
       }
     },
-    internalValue: {
-      get (): boolean[] {
-        return this.internalLazyValue
-      },
-      set (val: any) {
-        if (val === this.internalLazyValue) return
-
-        this.internalLazyValue = val
-
-        this.$emit('change', val)
-      }
-    },
     isMulti (): boolean {
       return this.expand
-    },
-    selectedIndexes () {
-      return this.items.map((item, index) => {
-        return this.toggleMethod(this.getValue(item, index))
-      })
     },
     toggleMethod (): (v:any) => boolean {
       return (v: any) => v
