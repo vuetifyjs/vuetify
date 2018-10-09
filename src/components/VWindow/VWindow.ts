@@ -31,6 +31,7 @@ export default BaseItemGroup.extend({
       type: Boolean,
       default: undefined
     },
+    touch: Object,
     touchless: Boolean,
     value: {
       required: false
@@ -118,12 +119,14 @@ export default BaseItemGroup.extend({
     }
 
     if (!this.touchless) {
+      const value = this.touch || {
+        left: this.next,
+        right: this.prev
+      }
+
       data.directives.push({
         name: 'touch',
-        value: {
-          left: this.next,
-          right: this.prev
-        }
+        value
       } as VNodeDirective)
     }
 

@@ -154,4 +154,32 @@ test('VWindow.ts', ({ mount }) => {
     touch(wrapper).start(0, 0).end(200, 0)
     expect(wrapper.vm.internalValue).toBe(4)
   })
+
+  it('should accept a custom touch object', async () => {
+    const left = jest.fn()
+    const right = jest.fn()
+    const fns = { left, right }
+    const wrapper = mount(VWindow, {
+      propsData: {
+        touch: fns,
+        value: 1
+      },
+      slots: {
+        default: [
+          VWindowItem,
+          VWindowItem,
+          VWindowItem,
+          VWindowItem,
+          VWindowItem
+        ]
+      }
+    })
+
+    await wrapper.vm.$nextTick()
+
+    touch(wrapper).start(200, 0).end(0, 0)
+    touch(wrapper).start(0, 0).end(200, 0)
+    expect(left).toBeCalled()
+    expect(right).toBeCalled()
+  })
 })
