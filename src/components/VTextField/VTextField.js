@@ -411,7 +411,7 @@ export default {
       VInput.methods.onMouseDown.call(this, e)
     },
     onMouseUp (e) {
-      this.focus()
+      if (this.hasMouseDown) this.focus()
 
       VInput.methods.onMouseUp.call(this, e)
     }

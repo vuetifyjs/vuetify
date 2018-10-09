@@ -142,8 +142,6 @@ export default {
       } else {
         VSelect.methods.selectItem.call(this, item)
       }
-
-      this.setSearch()
     },
     setSelectedItems () {
       if (this.internalValue == null ||
@@ -154,11 +152,14 @@ export default {
         this.selectedItems = this.multiple ? this.internalValue : [this.internalValue]
       }
     },
+    setValue (value = this.internalSearch) {
+      VSelect.methods.setValue.call(this, value)
+    },
     updateEditing () {
       const value = this.internalValue.slice()
       value[this.editingIndex] = this.internalSearch
 
-      this.internalValue = value
+      this.setValue(value)
 
       this.editingIndex = -1
     },
@@ -199,7 +200,10 @@ export default {
       // this might need to change to bring
       // the duplicated item to the last entered
       if (index > -1) {
-        this.internalValue.splice(index, 1)
+        const internalValue = this.internalValue.slice()
+        internalValue.splice(index, 1)
+
+        this.setValue(internalValue)
       }
 
       // If menu index is greater than 1
