@@ -56,6 +56,34 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
     expect(change).toBeCalledWith('2013-05-05')
   })
 
+  it('should emit date-mouse-enter event on date mouseenter', async () => {
+    const wrapper = mount(VDatePicker, {
+      propsData: {
+        value: '2013-05-07'
+      }
+    })
+
+    const mouseenter = jest.fn()
+    wrapper.vm.$on('date-mouse-enter', mouseenter)
+
+    wrapper.find('.v-date-picker-table--date tbody tr+tr td:first-child button')[0].trigger('mouseenter')
+    expect(mouseenter).toBeCalledWith('2013-05-05')
+  })
+
+  it('should emit date-mouse-leave event on date mouseleave', async () => {
+    const wrapper = mount(VDatePicker, {
+      propsData: {
+        value: '2013-05-07'
+      }
+    })
+
+    const mouseleave = jest.fn()
+    wrapper.vm.$on('date-mouse-leave', mouseleave)
+
+    wrapper.find('.v-date-picker-table--date tbody tr+tr td:first-child button')[0].trigger('mouseleave')
+    expect(mouseleave).toBeCalledWith('2013-05-05')
+  })
+
   it('should not emit input event on month click if date is not allowed', async () => {
     const cb = jest.fn()
     const wrapper = mount(VDatePicker, {
