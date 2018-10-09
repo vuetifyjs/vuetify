@@ -10,6 +10,7 @@ import VLabel from '../VLabel'
 
 // Mixins
 import Maskable from '../../mixins/maskable'
+import Loadable from '../../mixins/loadable'
 
 // Directives
 import Ripple from '../../directives/ripple'
@@ -30,7 +31,7 @@ export default {
 
   extends: VInput,
 
-  mixins: [Maskable],
+  mixins: [Maskable, Loadable],
 
   inheritAttrs: false,
 
@@ -280,7 +281,8 @@ export default {
       return [
         this.genTextFieldSlot(),
         this.genClearIcon(),
-        this.genIconSlot()
+        this.genIconSlot(),
+        this.genProgress()
       ]
     },
     genLabel () {
