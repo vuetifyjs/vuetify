@@ -95,6 +95,10 @@ export default {
         this.removeOverlay()
         this.unbind()
       }
+    },
+    fullscreen (val) {
+      if (val) this.hideScroll()
+      else this.showScroll()
     }
   },
 
@@ -140,6 +144,13 @@ export default {
       // close dialog if !persistent, clicked outside and we're the topmost dialog.
       // Since this should only be called in a capture event (bottom up), we shouldn't need to stop propagation
       return getZIndex(this.$refs.content) >= this.getMaxZIndex()
+    },
+    hideScroll () {
+      if (this.fullscreen) {
+        document.documentElement.classList.add('overflow-y-hidden')
+      } else {
+        Overlayable.methods.hideScroll.call(this)
+      }
     },
     show () {
       !this.fullscreen && !this.hideOverlay && this.genOverlay()

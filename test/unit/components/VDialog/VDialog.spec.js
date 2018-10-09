@@ -194,4 +194,23 @@ test('VDialog.js', ({ mount, compileToFunctions }) => {
 
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/3101
+  it('should always remove scrollbar when fullscreen', async () => {
+    const wrapper = mount(VDialog)
+
+    wrapper.setProps({ value: true })
+
+    await wrapper.vm.$nextTick()
+
+    expect(document.documentElement.className).not.toContain('overflow-y-hidden')
+
+    wrapper.setProps({ fullscreen: true })
+
+    await wrapper.vm.$nextTick()
+
+    expect(document.documentElement.className).toContain('overflow-y-hidden')
+
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
 })
