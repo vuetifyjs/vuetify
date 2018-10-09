@@ -1,12 +1,18 @@
+// Styles
 import '../../stylus/components/_steppers.styl'
 
+// Mixins
+import { provide as RegistrableProvide } from '../../mixins/registrable'
 import Themeable from '../../mixins/themeable'
 
 /* @vue/component */
 export default {
   name: 'v-stepper',
 
-  mixins: [Themeable],
+  mixins: [
+    RegistrableProvide('stepper'),
+    Themeable
+  ],
 
   provide () {
     return {
@@ -59,29 +65,29 @@ export default {
       prev && (this.isBooted = true)
     },
     value () {
-      this.getSteps()
       this.$nextTick(() => (this.inputValue = this.value))
     }
   },
 
   mounted () {
-    this.getSteps()
-
     this.inputValue = this.value || this.steps[0].step || 1
   },
 
   methods: {
-    getSteps () {
-      this.steps = []
-      this.content = []
-      for (let index = 0; index < this.$children.length; index++) {
-        const child = this.$children[index]
-        if (child.$options.name === 'v-stepper-step') {
-          this.steps.push(child)
-        } else if (child.$options.name === 'v-stepper-content') {
-          child.isVertical = this.vertical
-          this.content.push(child)
-        }
+    register (item) {
+      if (item.$options.name === 'v-stepper-step') {
+        this.steps.push(item)
+      } else if (item.$options.name === 'v-stepper-content') {
+        item.isVertical = this.vertical
+        this.content.push(item)
+      }
+    },
+    unregister (item) {
+      if (item.$options.name === 'v-stepper-step') {
+        this.steps = this.steps.filter(i => i !== item)
+      } else if (item.$options.name === 'v-stepper-content') {
+        item.isVertical = this.vertical
+        this.content = this.content.filter(i => i !== item)
       }
     },
     stepClick (step) {
