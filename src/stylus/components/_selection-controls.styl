@@ -54,12 +54,13 @@ rtl(v-selection-control-rtl, "v-input--selection-controls")
 
   &__ripple
     cursor: pointer
-    height: 48px
+    height: 34px
     position: absolute
     transition: inherit
-    width: 48px
+    width: 34px
     left: -12px
     top: calc(50% - 24px)
+    margin: 7px
 
     &:before
       border-radius: 50%
@@ -73,6 +74,9 @@ rtl(v-selection-control-rtl, "v-input--selection-controls")
       transform-origin: center center
       transform: scale(0.2)
       transition: inherit
+
+    .v-ripple__container
+      transform: scale(1.4)
 
   &.v-input .v-label
     align-items: center
