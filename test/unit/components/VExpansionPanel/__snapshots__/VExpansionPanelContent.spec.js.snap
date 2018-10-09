@@ -2,34 +2,34 @@
 
 exports[`VExpansionPanelContent.js should render an expanded component and match snapshot 1`] = `
 
-<li tabindex="0"
-    class="v-expansion-panel__container"
+<div tabindex="0"
+     class="v-expansion-panel__container"
 >
   <div class="v-expansion-panel__body"
        style="display: none;"
   >
   </div>
-</li>
+</div>
 
 `;
 
 exports[`VExpansionPanelContent.js should render an expanded component with lazy prop and match snapshot 1`] = `
 
-<li tabindex="0"
-    class="v-expansion-panel__container"
+<div tabindex="0"
+     class="v-expansion-panel__container"
 >
   <div class="v-expansion-panel__body"
        style="display: none;"
   >
   </div>
-</li>
+</div>
 
 `;
 
 exports[`VExpansionPanelContent.js should render component and match snapshot 1`] = `
 
-<li tabindex="0"
-    class="v-expansion-panel__container"
+<div tabindex="0"
+     class="v-expansion-panel__container"
 >
   <div class="v-expansion-panel__header">
     <span>
@@ -48,14 +48,14 @@ exports[`VExpansionPanelContent.js should render component and match snapshot 1`
       default
     </span>
   </div>
-</li>
+</div>
 
 `;
 
 exports[`VExpansionPanelContent.js should respect hideActions prop 1`] = `
 
-<li tabindex="0"
-    class="v-expansion-panel__container"
+<div tabindex="0"
+     class="v-expansion-panel__container"
 >
   <div class="v-expansion-panel__header">
     <span>
@@ -66,14 +66,14 @@ exports[`VExpansionPanelContent.js should respect hideActions prop 1`] = `
        style="display: none;"
   >
   </div>
-</li>
+</div>
 
 `;
 
 exports[`VExpansionPanelContent.js should toggle panel on header click 1`] = `
 
-<li tabindex="0"
-    class="v-expansion-panel__container v-expansion-panel__container--active"
+<div tabindex="0"
+     class="v-expansion-panel__container"
 >
   <div class="v-expansion-panel__header">
     <span>
@@ -87,10 +87,10 @@ exports[`VExpansionPanelContent.js should toggle panel on header click 1`] = `
       </i>
     </div>
   </div>
-  <div class="v-expansion-panel__body expand-transition-enter expand-transition-enter-active"
-       style="overflow: hidden; height: 0px; display: block;"
+  <div class="v-expansion-panel__body"
+       style="display: none;"
   >
   </div>
-</li>
+</div>
 
 `;

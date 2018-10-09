@@ -1,18 +1,11 @@
+// Styles
 import '../../stylus/components/_expansion-panel.styl'
 
-import { VExpansionPanelContent } from '.'
-
-import Themeable from '../../mixins/themeable'
-import { provide as RegistrableProvide } from '../../mixins/registrable'
-
-import mixins from '../../util/mixins'
-import { VNode } from 'vue'
-import { PropValidator } from 'vue/types/options'
-
-type VExpansionPanelContentInstance = InstanceType<typeof VExpansionPanelContent>
+// Extensions
+import { BaseItemGroup, GroupableInstance } from '../VItemGroup/VItemGroup'
 
 /* @vue/component */
-export default mixins(Themeable, RegistrableProvide('expansionPanel')).extend({
+export default BaseItemGroup.extend({
   name: 'v-expansion-panel',
 
   provide (): object {
@@ -27,106 +20,56 @@ export default mixins(Themeable, RegistrableProvide('expansionPanel')).extend({
     expand: Boolean,
     focusable: Boolean,
     inset: Boolean,
-    popout: Boolean,
-    value: {
-      type: [Number, Array],
-      default: () => null
-    } as any as PropValidator<number | number[]>
+    popout: Boolean
   },
-
-  data: () => ({
-    items: [] as VExpansionPanelContentInstance[],
-    open: [] as boolean[]
-  }),
 
   computed: {
     classes (): object {
       return {
+        ...BaseItemGroup.options.computed.classes.call(this),
+        'v-expansion-panel': true,
         'v-expansion-panel--focusable': this.focusable,
         'v-expansion-panel--popout': this.popout,
-        'v-expansion-panel--inset': this.inset,
-        ...this.themeClasses
+        'v-expansion-panel--inset': this.inset
       }
-    }
-  },
-
-  watch: {
-    expand (v: boolean) {
-      let openIndex = -1
-      if (!v) {
-        // Close all panels unless only one is open
-        const openCount = this.open.reduce((acc, val) => val ? acc + 1 : acc, 0)
-        const open = Array(this.items.length).fill(false)
-
-        if (openCount === 1) {
-          openIndex = this.open.indexOf(true)
-        }
-
-        if (openIndex > -1) {
-          open[openIndex] = true
-        }
-
-        this.open = open
-      }
-
-      this.$emit('input', v ? this.open : (openIndex > -1 ? openIndex : null))
     },
-    value (v: number | number[]) {
-      this.updateFromValue(v)
+    isMulti (): boolean {
+      return this.expand
+    },
+    toggleMethod (): (v:any) => boolean {
+      return (v: any) => v
     }
   },
 
-  mounted () {
-    this.value !== null && this.updateFromValue(this.value)
+  beforeMount () {
+    this.updateFromValue(this.internalLazyValue)
   },
 
   methods: {
-    updateFromValue (v: number | number[]) {
-      if (Array.isArray(v) && !this.expand) return
+    getValue (item: GroupableInstance, i: number): unknown {
+      return this.internalValue[i]
+    },
+    onClick (item: GroupableInstance, index: number) {
+      const internalValue = this.internalValue.slice()
+      let value: number | boolean[] = index
 
-      let open = Array(this.items.length).fill(false)
+      if (this.isMulti) {
+        internalValue[index] = !internalValue[index]
+
+        value = internalValue
+      } else if (internalValue[index]) value = []
+
+      this.updateFromValue(value)
+    },
+    updateFromValue (v: number | boolean[]) {
+      let model = Array(this.items.length).fill(false)
       if (typeof v === 'number') {
-        open[v] = true
+        model[v] = true
       } else if (v !== null) {
-        open = v
+        model = v
       }
 
-      this.updatePanels(open)
-    },
-    updatePanels (open: boolean[]) {
-      this.open = open
-      for (let i = 0; i < this.items.length; i++) {
-        const active = open && open[i]
-        this.items[i].toggle(active)
-      }
-    },
-    panelClick (uid: number) {
-      const open = this.expand ? this.open.slice() : Array(this.items.length).fill(false)
-      for (let i = 0; i < this.items.length; i++) {
-        if (this.items[i]._uid === uid) {
-          open[i] = !this.open[i]
-          !this.expand && this.$emit('input', open[i] ? i : null)
-        }
-      }
-
-      this.updatePanels(open)
-      if (this.expand) this.$emit('input', open)
-    },
-    register (content: VExpansionPanelContentInstance) {
-      this.items.push(content)
-      this.open.push(false)
-    },
-    unregister (content: VExpansionPanelContentInstance) {
-      const index = this.items.findIndex(i => i._uid === content._uid)
-      this.items.splice(index, 1)
-      this.open.splice(index, 1)
+      this.internalValue = model
     }
-  },
-
-  render (h): VNode {
-    return h('ul', {
-      staticClass: 'v-expansion-panel',
-      class: this.classes
-    }, this.$slots.default)
   }
 })
