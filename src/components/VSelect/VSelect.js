@@ -337,7 +337,6 @@ export default {
       const color = index === this.selectedIndex && this.color
       const isDisabled = (
         this.disabled ||
-        this.readonly ||
         this.getDisabled(item)
       )
 
