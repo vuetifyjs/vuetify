@@ -20,7 +20,7 @@ export default {
       // watcher
       if (oldVal == null) return
 
-      this.callSlider()
+      this.updateTabsView()
     },
     alignWithTitle: 'callSlider',
     centered: 'callSlider',

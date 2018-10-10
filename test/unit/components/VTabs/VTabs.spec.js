@@ -90,7 +90,9 @@ test('VTabs', ({ mount }) => {
 
     tabs.setData({ scrollOffset: 1 })
     tabs.vm.onResize()
-    await new Promise(resolve => setTimeout(resolve, 300))
+
+    await new Promise(resolve => setTimeout(resolve, 400))
+
     expect(tabs.vm.scrollOffset).toBe(0)
     tabs.setData({ scrollOffset: 2 })
     await tabs.vm.$nextTick()
@@ -190,6 +192,8 @@ test('VTabs', ({ mount }) => {
       attachToDocument: true
     })
 
+    await ssrBootable()
+
     wrapper.setData({ isOverflowing: true })
 
     const onTouch = jest.fn()
@@ -198,7 +202,6 @@ test('VTabs', ({ mount }) => {
       onTouchMove: onTouch,
       onTouchEnd: onTouch
     })
-    await ssrBootable()
 
     const tabsWrapper = wrapper.find('.v-tabs__wrapper')[0]
 
@@ -357,9 +360,7 @@ test('VTabs', ({ mount }) => {
       propsData: { value: 'foo' }
     })
 
-    await wrapper.vm.$nextTick()
     wrapper.setProps({ value: 'bar' })
-    await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.internalValue).toBe('bar')
   })
@@ -395,18 +396,17 @@ test('VTabs', ({ mount }) => {
       },
       methods: { setWidths }
     })
-
     expect(setWidths).not.toBeCalled()
 
-    await wrapper.vm.$nextTick()
+    await ssrBootable()
 
     expect(setWidths).toHaveBeenCalledTimes(1)
 
-    await resizeWindow(800)
+    await new Promise(resolve => setTimeout(resolve, 33))
 
     expect(setWidths).toHaveBeenCalledTimes(2)
 
-    await resizeWindow(1800)
+    await resizeWindow(800)
 
     expect(setWidths).toHaveBeenCalledTimes(3)
 

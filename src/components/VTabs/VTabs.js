@@ -123,14 +123,13 @@ export default BaseItemGroup.extend({
     // painted
     init () {
       BaseItemGroup.options.methods.init.call(this)
-      this.checkIcons()
 
       /* istanbul ignore next */
       if (this.$listeners['input']) {
         deprecate('@input', '@change', this)
       }
 
-      setTimeout(this.callSlider, 33)
+      setTimeout(this.onResize, 33)
     },
     /**
      * When v-navigation-drawer changes the
@@ -143,11 +142,7 @@ export default BaseItemGroup.extend({
       this.setWidths()
 
       clearTimeout(this.resizeTimeout)
-      this.resizeTimeout = setTimeout(() => {
-        this.callSlider()
-        this.scrollIntoView()
-        this.checkIcons()
-      }, this.transitionTime)
+      this.resizeTimeout = setTimeout(this.updateTabsView, this.transitionTime)
     },
     overflowCheck (e, fn) {
       this.isOverflowing && fn(e)
@@ -201,6 +196,11 @@ export default BaseItemGroup.extend({
     },
     unregisterItems () {
       this.tabItems = null
+    },
+    updateTabsView () {
+      this.callSlider()
+      this.scrollIntoView()
+      this.checkIcons()
     },
     scrollIntoView () {
       /* istanbul ignore next */
