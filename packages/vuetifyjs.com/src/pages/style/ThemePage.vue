@@ -125,6 +125,31 @@
           |     themeCache
           |   }
           | })
+        h3.mb-3 {{ $t(`${namespace}.optionHeader4`) }}
+        helpers-section-text(:value="`${namespace}.optionText5`")
+        helpers-markup(lang="javascript")
+          | Vue.use(Vuetify, {
+          |   options: {
+          |     customProperties: true
+          |   }
+          | })
+        helpers-markup(lang="html")
+          | #{'<style scoped>'}
+          |   .something {
+          |     color: var(--v-primary-base)
+          |     background-color: var(--v-accent-lighten2)
+          |   }
+          | #{'</style>'}
+        h3.mb-3 {{ $t(`${namespace}.optionHeader5`) }}
+        helpers-section-text(:value="`${namespace}.optionText6`")
+        helpers-markup()
+          | Content-Security-Policy: script-src 'self' 'nonce-dQw4w9WgXcQ'
+        helpers-markup(lang="javascript")
+          | Vue.use(Vuetify, {
+          |   options: {
+          |     cspNonce: 'dQw4w9WgXcQ'
+          |   }
+          | })
 
       section#stylus-guide
         helpers-section-head(:value="`${namespace}.stylusHeader`")
