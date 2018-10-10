@@ -11,6 +11,7 @@ interface RippleOptions {
 }
 
 const ripple = {
+  /* eslint-disable max-statements */
   show (e: MouseEvent, el: HTMLElement, value: RippleOptions = {}) {
     if (!el._ripple || !el._ripple.enabled) {
       return
