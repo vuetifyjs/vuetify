@@ -69,11 +69,9 @@ export default {
     validate (focus = false) {
       let flag = true
       this.inputs.some(input => {
-        if (!input.validate(true)) {
-          if (flag) {
-            if (focus) input.focus()
-            flag = false
-          }
+        if (!input.validate(true) && flag) {
+          if (focus) input.focus()
+          flag = false
         }
       })
       return flag
