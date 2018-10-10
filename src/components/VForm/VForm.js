@@ -66,9 +66,17 @@ export default {
       return watchers
     },
     /** @public */
-    validate () {
-      const errors = this.inputs.filter(input => !input.validate(true)).length
-      return !errors
+    validate (focus = false) {
+      let flag = true
+      this.inputs.some(input => {
+        if (!input.validate(true)) {
+          if (flag) {
+            if (focus) input.focus()
+            flag = false
+          }
+        }
+      })
+      return flag
     },
     /** @public */
     reset () {
