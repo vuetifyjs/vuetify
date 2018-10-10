@@ -15,6 +15,9 @@
     <img src="https://codebeat.co/badges/b2d1ce87-848b-440e-9d7e-df9883c0cd93" alt="codebeat badge">
   </a>
   <a href="https://www.npmjs.com/package/vuetify">
+    <img src="https://img.shields.io/npm/dt/vuetify.svg" alt="Downloads">
+  </a>
+  <a href="https://www.npmjs.com/package/vuetify">
     <img src="https://img.shields.io/npm/dm/vuetify.svg" alt="Downloads">
   </a>
   <br>
