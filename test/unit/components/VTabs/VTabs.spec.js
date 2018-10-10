@@ -380,7 +380,7 @@ test('VTabs', ({ mount }) => {
     wrapper.vm.setOverflow()
   })
 
-  it.only('should set dimensions when onResize is called', async () => {
+  it('should set dimensions when onResize is called', async () => {
     const setWidths = jest.fn()
     const wrapper = mount(VTabs, {
       propsData: {
