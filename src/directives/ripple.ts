@@ -11,6 +11,7 @@ interface RippleOptions {
 }
 
 const ripple = {
+  /* eslint-disable max-statements */
   show (e: MouseEvent, el: HTMLElement, value: RippleOptions = {}) {
     if (!el._ripple || !el._ripple.enabled) {
       return
@@ -36,8 +37,12 @@ const ripple = {
     animation.style.height = `${size}px`
 
     el.appendChild(container)
+
     const computed = window.getComputedStyle(el)
-    if (computed.position !== 'absolute' && computed.position !== 'fixed') el.style.position = 'relative'
+    if (computed.position === 'static') {
+      el.style.position = 'relative'
+      el.dataset.previousPosition = 'static'
+    }
 
     const offset = el.getBoundingClientRect()
     const x = value.center ? 0 : e.clientX - offset.left - halfSize
@@ -73,7 +78,11 @@ const ripple = {
 
       setTimeout(() => {
         const ripples = el.getElementsByClassName('v-ripple__animation')
-        if (ripples.length === 0) el.style.position = null
+        if (ripples.length === 1 && el.dataset.previousPosition) {
+          el.style.position = el.dataset.previousPosition
+          delete el.dataset.previousPosition
+        }
+
         animation.parentNode && el.removeChild(animation.parentNode)
       }, 300)
     }, delay)
