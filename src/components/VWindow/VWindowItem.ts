@@ -124,6 +124,8 @@ export default mixins<options & ExtractVue<[typeof Bootable]>>(
       on: this.$listeners
     }, this.showLazyContent(this.genDefaultSlot()))
 
+    if (!this.computedTransition) return div
+
     return h('transition', {
       props: {
         name: this.computedTransition
