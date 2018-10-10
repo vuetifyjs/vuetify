@@ -17,7 +17,7 @@ if (!shell.which('npm')) {
 let tag
 let branch = exec('git symbolic-ref --short HEAD')
 const latest = exec('npm view vuetify version')
-let latestGit = exec('git describe --abbrev=0 --tags')
+const latestGit = exec('git describe --abbrev=0 --tags')
 
 shell.echo(`
 Current branch is ${branch}
@@ -26,14 +26,13 @@ Latest npm version is ${latest}
 `)
 
 promptForVersion()
+  .then(verifyTag)
   .then(verifyBranch)
   .then(confirmVersion)
   .then(version => {
     lint()
     release(version)
   })
-
-//============================ FUNCTIONS =============================//
 
 function exec (command) {
   const result = shell.exec(command, { silent: true })
@@ -94,8 +93,6 @@ function promptForVersion () {
 }
 
 function verifyBranch (version) {
-  tag = semver.prerelease(version) == null ? 'latest' : 'next'
-
   if (tag === 'latest' && branch !== 'master') {
     shell.echo('\nReleasing on a branch other than \'master\'')
     shell.echo('This may have unintended side-effects')
@@ -107,6 +104,26 @@ function verifyBranch (version) {
     }).then(({ yes }) => yes ? version : shell.exit(1))
   }
   return Promise.resolve(version)
+}
+
+function verifyTag (version) {
+  tag = semver.prerelease(version) == null ? 'latest' : 'next'
+
+  return inquirer.prompt({
+    type: 'list',
+    choices: [
+      'next',
+      'latest',
+      'stable'
+    ],
+    name: 'tag',
+    message: `Releasing with tag ${tag}`,
+    default: tag
+  }).then(answer => {
+    tag = answer.tag
+
+    return version
+  })
 }
 
 function confirmVersion (version) {
