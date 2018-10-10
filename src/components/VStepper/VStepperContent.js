@@ -1,7 +1,11 @@
+// Components
 import {
   VTabTransition,
   VTabReverseTransition
 } from '../transitions'
+
+// Mixins
+import { inject as RegistrableInject } from '../../mixins/registrable'
 
 // Helpers
 import { convertToUnit } from '../../util/helpers'
@@ -9,6 +13,10 @@ import { convertToUnit } from '../../util/helpers'
 /* @vue/component */
 export default {
   name: 'v-stepper-content',
+
+  mixins: [
+    RegistrableInject('stepper', 'v-stepper-content', 'v-stepper')
+  ],
 
   inject: {
     isVerticalProvided: {
@@ -80,6 +88,7 @@ export default {
       this.onTransition,
       false
     )
+    this.stepper && this.stepper.register(this)
   },
 
   beforeDestroy () {
@@ -88,6 +97,7 @@ export default {
       this.onTransition,
       false
     )
+    this.stepper && this.stepper.unregister(this)
   },
 
   methods: {
