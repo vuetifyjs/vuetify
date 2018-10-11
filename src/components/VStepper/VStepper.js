@@ -74,6 +74,19 @@ export default {
   },
 
   methods: {
+    getSteps () {
+      this.steps = []
+      this.content = []
+      for (let index = 0; index < this.$children.length; index++) {
+        const child = this.$children[index]
+        if (child.$options.name === 'v-stepper-step') {
+          this.steps.push(child)
+        } else if (child.$options.name === 'v-stepper-content') {
+          child.isVertical = this.vertical
+          this.content.push(child)
+        }
+      }
+    },
     register (item) {
       if (item.$options.name === 'v-stepper-step') {
         this.steps.push(item)
