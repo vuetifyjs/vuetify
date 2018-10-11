@@ -2,9 +2,6 @@
 @import '../theme'
 
 .v-input--radio-group
-  .v-radio:not(:last-child):not(:only-child)
-    margin-bottom: 8px
-
   &__input
     display: flex
     width: 100%
@@ -18,5 +15,8 @@
       flex-wrap: wrap
 
   &--column
+    .v-radio:not(:last-child):not(:only-child)
+      margin-bottom: 8px
+
     .v-input--radio-group__input
       flex-direction: column
