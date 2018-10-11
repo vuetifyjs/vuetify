@@ -82,6 +82,10 @@ export default {
       validator: type => ['date', 'month'].includes(type) // TODO: year
     },
     value: [Array, String],
+    weekdayFormat: {
+      type: Function,
+      default: null
+    },
     // Function formatting the year in table header and pickup title
     yearFormat: {
       type: Function,
@@ -345,7 +349,8 @@ export default {
           max: this.max,
           tableDate: `${this.tableYear}-${pad(this.tableMonth + 1)}`,
           scrollable: this.scrollable,
-          value: this.value
+          value: this.value,
+          weekdayFormat: this.weekdayFormat
         },
         ref: 'table',
         on: {
