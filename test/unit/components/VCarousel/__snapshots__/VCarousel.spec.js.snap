@@ -408,9 +408,7 @@ exports[`VCarousel.ts should render component with selected active item 1`] = `
         </div>
       </div>
     </div>
-    <div class="v-window-item v-enter v-enter-active"
-         style
-    >
+    <div class="v-window-item">
       <div class="v-responsive v-image v-carousel__item"
            style="height: 500px;"
       >
