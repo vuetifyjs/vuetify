@@ -233,7 +233,7 @@ This project exists thanks to all the people who contribute. [[Contribute](CONTR
 
 Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/vuetify#backer)]
 
-<a href="https://opencollective.com/vuetify#backers" target="_blank"><img src="https://opencollective.com/vuetify/backers.svg?width=890”></a>
+<a href="https://opencollective.com/vuetify#backers" target="_blank"><img src="https://opencollective.com/vuetify/backers.svg?width=890"></a>
 
 ### Sponsors
 
