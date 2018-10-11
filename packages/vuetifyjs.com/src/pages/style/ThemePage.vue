@@ -182,10 +182,13 @@
         h3.mb-3 {{ $t(`${namespace}.stylusHeader3`) }}
         helpers-section-text(:value="`${namespace}.stylusText7`")
         helpers-markup(lang="stylus")
+          | @import '~vuetify/src/stylus/settings/_variables'
+          | &nbsp;
+          | $material-light.background = #FFF
           | $body-font-family = 'Open Sans'
           | $alert-font-size = 18px
           | &nbsp;
           | @import '~vuetify/src/stylus/main'
-          | // For a-la-carte
+          | // Or for a-la-carte:
           | @import '~vuetify/src/stylus/app'
 </template>

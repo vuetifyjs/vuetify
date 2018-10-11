@@ -21,7 +21,7 @@
   "optionHeader5": "CSP Nonce",
   "optionText6": "Pages with the `script-src` CSP rule enabled may require a **nonce** to be specified for embedded style tags. ",
   "stylusHeader": "Modifying Stylus variables",
-  "stylusText1": "Vuetify is built on top of **stylus**. Similar to **scss**, you can change variables and re-compile the style files. A list of available variables is located [here](https://github.com/vuetifyjs/vuetify/blob/master/src/stylus/settings/_variables.styl). In order to build the stylus file, you will need to configure your application to support stylus. If you are using one of the pre-made templates available on the [Quick Start](/getting-started/quick-start) guide, you can skip the next section.",
+  "stylusText1": "Vuetify is built on top of **stylus**. Similar to **scss**, you can change variables and re-compile the style files. A list of available variables is located [here](https://github.com/vuetifyjs/vuetify/blob/master/src/stylus/settings/_variables.styl). In order to build the stylus file, you will need to configure your application to support stylus. If you are using vue-cli 3 or one of the pre-made templates available on the [Quick Start](/getting-started/quick-start) guide, you can skip the next section.",
   "stylusHeader2": "Setup stylus-loader with Webpack",
   "stylusText2": "In the command line, run:",
   "stylusText3": "This will install the dependencies needed to import and parse stylus files. Once installed, open your webpack config and add a rule for stylus. For **SSR** based applications, ensure that the import is in your main `client-entry`.",
