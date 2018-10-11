@@ -91,7 +91,6 @@ export default {
       }
     },
     stepClick (step) {
-      this.getSteps()
       this.$nextTick(() => (this.inputValue = step))
     }
   },
