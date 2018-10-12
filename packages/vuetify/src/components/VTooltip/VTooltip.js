@@ -141,6 +141,30 @@ export default {
       this.updateDimensions()
       // Start the transition
       requestAnimationFrame(this.startTransition)
+    },
+    genActivator () {
+      const listeners = this.disabled ? {} : {
+        mouseenter: e => {
+          this.getActivator(e)
+          this.runDelay('open', () => (this.isActive = true))
+        },
+        mouseleave: e => {
+          this.getActivator(e)
+          this.runDelay('close', () => (this.isActive = false))
+        }
+      }
+
+      if (this.$scopedSlots.activator) {
+        return this.$scopedSlots.activator({
+          on: listeners
+        })
+      }
+      if (this.$slots.activator) {
+        return this.$createElement('span', {
+          on: listeners,
+          ref: 'activator'
+        }, this.$slots.activator)
+      }
     }
   },
 
@@ -169,17 +193,7 @@ export default {
           name: this.computedTransition
         }
       }, [tooltip]),
-      h('span', {
-        on: this.disabled ? {} : {
-          mouseenter: () => {
-            this.runDelay('open', () => (this.isActive = true))
-          },
-          mouseleave: () => {
-            this.runDelay('close', () => (this.isActive = false))
-          }
-        },
-        ref: 'activator'
-      }, this.$slots.activator)
+      this.genActivator()
     ])
   }
 }
