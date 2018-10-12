@@ -3,6 +3,7 @@ import Vue from 'vue'
 import Positionable from './positionable'
 
 import Stackable from './stackable'
+import { consoleError } from '../util/console'
 
 /* eslint-disable object-property-newline */
 const dimensions = {
@@ -130,7 +131,7 @@ export default Vue.extend({
       return top
     },
     hasActivator () {
-      return !!this.$slots.activator || this.activator || this.inputActivator
+      return !!this.$slots.activator || !!this.$scopedSlots.activator || this.activator || this.inputActivator
     },
     isAttached () {
       return this.attach !== false
@@ -250,7 +251,7 @@ export default Vue.extend({
       }
     },
     deactivate () {},
-    getActivator () {
+    getActivator (e) {
       if (this.inputActivator) {
         return this.$el.querySelector('.v-input__slot')
       }
@@ -261,9 +262,20 @@ export default Vue.extend({
           : this.activator
       }
 
-      return this.$refs.activator.children.length > 0
-        ? this.$refs.activator.children[0]
-        : this.$refs.activator
+      if (this.$refs.activator) {
+        return this.$refs.activator.children.length > 0
+          ? this.$refs.activator.children[0]
+          : this.$refs.activator
+      }
+
+      if (e) {
+        this.activatedBy = e.currentTarget || e.target
+        return this.activatedBy
+      }
+
+      if (this.activatedBy) return this.activatedBy
+
+      consoleError('No activator found')
     },
     getInnerHeight () {
       if (!this.hasWindow) return 0
