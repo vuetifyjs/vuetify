@@ -55,6 +55,25 @@ test('VItemGroup.ts', ({ mount }) => {
     expect(wrapper.vm.items.length).toBe(0)
   })
 
+  it('should register and activate elements', () => {
+    const wrapper = mount(VItemGroup, {
+      propsData: { value: 0 },
+      slots: { default: [Mock] }
+    })
+
+    expect(wrapper.vm.items.length).toBe(1)
+
+    // Avoriaz doesn't like
+    // components without
+    // a render function
+    const item = wrapper.first({
+      name: 'v-item',
+      render: () => null
+    })
+
+    expect(item.vm.isActive).toBe(true)
+  })
+
   it('should update state from child clicks', () => {
     const change = jest.fn()
     const wrapper = mount(VItemGroup, {

@@ -1,6 +1,9 @@
 import { test } from '@/test'
 import VStepperStep from '@/components//VStepper/VStepperStep'
 
+const tip = '[Vuetify] The v-stepper-step component must be used inside a v-stepper'
+const warning = '[Vue warn]: Injection "stepClick" not found'
+
 test('VStepperStep.js', ({ mount }) => {
   it('should accept a custom color', async () => {
     const wrapper = mount(VStepperStep, {
@@ -12,7 +15,8 @@ test('VStepperStep.js', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('[Vue warn]: Injection "stepClick" not found').toHaveBeenWarned()
+    expect(warning).toHaveBeenWarned()
+    expect(tip).toHaveBeenTipped()
   })
 
   it('should accept a custom css color', async () => {
@@ -25,6 +29,7 @@ test('VStepperStep.js', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('[Vue warn]: Injection "stepClick" not found').toHaveBeenWarned()
+    expect(warning).toHaveBeenWarned()
+    expect(tip).toHaveBeenTipped()
   })
 })

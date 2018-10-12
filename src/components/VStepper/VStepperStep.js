@@ -3,6 +3,7 @@ import VIcon from '../VIcon'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
+import { inject as RegistrableInject } from '../../mixins/registrable'
 
 // Directives
 import Ripple from '../../directives/ripple'
@@ -13,7 +14,10 @@ export default {
 
   directives: { Ripple },
 
-  mixins: [Colorable],
+  mixins: [
+    Colorable,
+    RegistrableInject('stepper', 'v-stepper-step', 'v-stepper')
+  ],
 
   inject: ['stepClick'],
 
@@ -65,6 +69,14 @@ export default {
     hasError () {
       return this.rules.some(i => (i() !== true))
     }
+  },
+
+  mounted () {
+    this.stepper && this.stepper.register(this)
+  },
+
+  beforeDestroy () {
+    this.stepper && this.stepper.unregister(this)
   },
 
   methods: {

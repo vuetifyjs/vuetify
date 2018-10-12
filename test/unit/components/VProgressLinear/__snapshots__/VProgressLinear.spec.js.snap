@@ -190,6 +190,29 @@ exports[`VProgressLinear.js should render component with color and match snapsho
 
 `;
 
+exports[`VProgressLinear.js should render component with css color and match snapshot 1`] = `
+
+<div role="progressbar"
+     aria-valuemin="0"
+     aria-valuemax="100"
+     aria-valuenow="33"
+     class="v-progress-linear"
+     style="height: 7px;"
+>
+  <div class="v-progress-linear__background"
+       style="height: 7px; opacity: 0.3; width: 100%; background-color: rgb(51, 102, 153); border-color: #336699;"
+  >
+  </div>
+  <div class="v-progress-linear__bar">
+    <div class="v-progress-linear__bar__determinate"
+         style="width: 33%; background-color: rgb(51, 102, 153); border-color: #336699;"
+    >
+    </div>
+  </div>
+</div>
+
+`;
+
 exports[`VProgressLinear.js should render inactive component and match snapshot 1`] = `
 
 <div role="progressbar"

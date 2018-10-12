@@ -153,6 +153,22 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect(change).toHaveBeenCalledTimes(1)
   })
 
+  it('should not call change when model updated externally', async () => {
+    const change = jest.fn()
+    const wrapper = mount(VSelect)
+
+    wrapper.vm.$on('change', change)
+
+    wrapper.setProps({ value: 'foo' })
+
+    expect(change).not.toBeCalled()
+
+    wrapper.vm.setValue('foo')
+
+    expect(change).toBeCalledWith('foo')
+    expect(change).toHaveBeenCalledTimes(1)
+  })
+
   // https://github.com/vuetifyjs/vuetify/issues/4713
   it('should nudge select menu', () => {
     const wrapper = mount(VSelect, {

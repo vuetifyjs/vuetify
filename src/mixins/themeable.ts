@@ -72,6 +72,25 @@ const Themeable = Vue.extend<Themeable>().extend({
         'theme--dark': this.isDark,
         'theme--light': !this.isDark
       }
+    },
+    /** Used by menus and dialogs, inherits from v-app instead of the parent */
+    rootIsDark (): boolean {
+      if (this.dark === true) {
+        // explicitly dark
+        return true
+      } else if (this.light === true) {
+        // explicitly light
+        return false
+      } else {
+        // inherit from v-app
+        return this.$vuetify.dark
+      }
+    },
+    rootThemeClasses (): Dictionary<boolean> {
+      return {
+        'theme--dark': this.rootIsDark,
+        'theme--light': !this.rootIsDark
+      }
     }
   },
 
