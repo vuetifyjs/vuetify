@@ -166,6 +166,26 @@ export default {
     },
     onKeydown (e) {
       this.$emit('keydown', e)
+    },
+    genActivator () {
+      const listeners = {
+        click: e => {
+          e.stopPropagation()
+          if (!this.disabled) this.isActive = !this.isActive
+        }
+      }
+
+      if (this.$scopedSlots.activator) {
+        return this.$scopedSlots.activator({ on: listeners })
+      }
+
+      return this.$createElement('div', {
+        staticClass: 'v-dialog__activator',
+        'class': {
+          'v-dialog__activator--disabled': this.disabled
+        },
+        on: listeners
+      }, [this.$slots.activator])
     }
   },
 
@@ -197,20 +217,7 @@ export default {
       }
     }
 
-    if (this.$slots.activator) {
-      children.push(h('div', {
-        staticClass: 'v-dialog__activator',
-        'class': {
-          'v-dialog__activator--disabled': this.disabled
-        },
-        on: {
-          click: e => {
-            e.stopPropagation()
-            if (!this.disabled) this.isActive = !this.isActive
-          }
-        }
-      }, [this.$slots.activator]))
-    }
+    children.push(this.genActivator())
 
     let dialog = h('div', data, this.showLazyContent(this.$slots.default))
     if (this.transition) {
