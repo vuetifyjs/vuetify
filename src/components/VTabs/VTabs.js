@@ -20,6 +20,9 @@ import {
 import Resize from '../../directives/resize'
 import Touch from '../../directives/touch'
 
+// Utils
+import ThemeProvider from '../../util/ThemeProvider'
+
 /* @vue/component */
 export default {
   name: 'v-tabs',
@@ -74,22 +77,6 @@ export default {
         bar: 0,
         container: 0,
         wrapper: 0
-      }
-    }
-  },
-
-  computed: {
-    isDark () {
-      // Always inherit from parent
-      return this.theme.isDark
-    },
-    selfIsDark () {
-      return Themeable.options.computed.isDark.call(this)
-    },
-    themeClasses () {
-      return {
-        'theme--dark': this.selfIsDark,
-        'theme--light': !this.selfIsDark
       }
     }
   },
@@ -268,7 +255,11 @@ export default {
       }]
     }, [
       this.genBar([this.hideSlider ? null : this.genSlider(slider), tab]),
-      this.genItems(items, item)
+      h(ThemeProvider, {
+        props: { dark: this.theme.isDark, light: !this.theme.isDark }
+      }, [
+        this.genItems(items, item)
+      ])
     ])
   }
 }
