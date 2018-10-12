@@ -108,6 +108,7 @@ export const BaseItemGroup = mixins(
       const index = this.items.push(item) - 1
 
       item.$on('change', () => this.onClick(item, index))
+      this.updateItem(item, index)
     },
     unregister (item: GroupableInstance) {
       const index = this.items.indexOf(item)
@@ -139,6 +140,11 @@ export const BaseItemGroup = mixins(
         this.updateMandatory(true)
       }
     },
+    updateItem (item: GroupableInstance, index: number) {
+      const value = this.getValue(item, index)
+
+      item.isActive = this.toggleMethod(value)
+    },
     updateItemsState () {
       if (this.mandatory &&
         !this.selectedItems.length
@@ -149,11 +155,7 @@ export const BaseItemGroup = mixins(
       // TODO: Make this smarter so it
       // doesn't have to iterate every
       // child in an update
-      this.items.forEach((item, i) => {
-        const value = this.getValue(item, i)
-
-        item.isActive = this.toggleMethod(value)
-      })
+      this.items.forEach(this.updateItem)
     },
     updateInternalValue (value: any) {
       this.multiple
