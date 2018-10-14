@@ -105,6 +105,9 @@ export default {
   mounted () {
     this.isBooted = this.isActive
     this.isActive && this.show()
+    if (this.activatorNode && this.activatorNode.elm) {
+      this.$el.parentNode.insertBefore(this.activatorNode.elm, this.$el)
+    }
   },
 
   beforeDestroy () {
@@ -176,7 +179,9 @@ export default {
       }
 
       if (this.$scopedSlots.activator) {
-        return this.$scopedSlots.activator({ on: listeners })
+        const activator = this.$scopedSlots.activator({ on: listeners })
+        this.activatorNode = activator
+        return activator
       }
 
       return this.$createElement('div', {

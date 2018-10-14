@@ -132,6 +132,9 @@ export default {
 
   mounted () {
     this.value && this.callActivate()
+    if (this.activatorNode && this.activatorNode.elm) {
+      this.$el.parentNode.insertBefore(this.activatorNode.elm, this.$el)
+    }
   },
 
   methods: {
@@ -155,9 +158,9 @@ export default {
       }
 
       if (this.$scopedSlots.activator) {
-        return this.$scopedSlots.activator({
-          on: listeners
-        })
+        const activator = this.$scopedSlots.activator({ on: listeners })
+        this.activatorNode = activator
+        return activator
       }
       if (this.$slots.activator) {
         return this.$createElement('span', {
