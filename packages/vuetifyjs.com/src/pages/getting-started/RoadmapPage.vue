@@ -83,11 +83,11 @@
     small: true
   }
 
-  const video = {
-    icon: 'mdi-video',
-    color: 'blue',
-    small: true
-  }
+  // const video = {
+  //   icon: 'mdi-video',
+  //   color: 'blue',
+  //   small: true
+  // }
 
   export default {
     data: () => ({
