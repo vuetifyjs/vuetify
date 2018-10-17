@@ -62,7 +62,7 @@
     <img src="https://c5.patreon.com/external/logo/become_a_patron_button.png" alt="Become a Patron" />
   </a>
   <a href="https://opencollective.com/vuetify">
-    <img src="https://opencollective.com/vuetify/sponsor/999/avatar.svg" alt="Donate to OpenCollective">
+    <img src="https://opencollective.com/static/images/become_sponsor.svg" alt="Donate to OpenCollective">
   </a>
 </p>
 <p align="center"><b>Diamond</b></p>
