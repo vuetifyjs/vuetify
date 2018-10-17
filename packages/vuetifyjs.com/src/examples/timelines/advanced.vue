@@ -39,8 +39,8 @@
           small
         >
           <v-layout justify-space-between>
-            <v-flex xs7 v-text="event.text" ></v-flex>
-            <v-flex xs5 text-xs-right v-text="event.time" ></v-flex>
+            <v-flex xs7 v-text="event.text"></v-flex>
+            <v-flex xs5 text-xs-right v-text="event.time"></v-flex>
           </v-layout>
         </v-timeline-item>
       </v-slide-x-transition>
@@ -157,7 +157,7 @@
         this.events.push({
           id: this.nonce++,
           text: this.input,
-          time: time.replace(/:\d{2}\sGMT\-\d{4}\s\((.*)\)/, (match, contents, offset) => {
+          time: time.replace(/:\d{2}\sGMT-\d{4}\s\((.*)\)/, (match, contents, offset) => {
             return ` ${contents.split(' ').map(v => v.charAt(0)).join('')}`
           })
         })
