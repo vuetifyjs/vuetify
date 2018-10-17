@@ -1,92 +1,29 @@
-import Bootable from '../../mixins/bootable'
+// Extensions
+import VWindowItem from '../VWindow/VWindowItem'
 
-import {
-  VTabTransition,
-  VTabReverseTransition
-} from '../transitions'
-
-import {
-  inject as RegistrableInject
-} from '../../mixins/registrable'
-
-import Touch from '../../directives/touch'
+// Mixins
+import { deprecate } from '../../util/console'
 
 /* @vue/component */
-export default {
+export default VWindowItem.extend({
   name: 'v-tab-item',
 
-  components: {
-    VTabTransition,
-    VTabReverseTransition
-  },
-
-  directives: {
-    Touch
-  },
-
-  mixins: [
-    Bootable,
-    RegistrableInject('tabs', 'v-tab-item', 'v-tabs-items')
-  ],
-
   props: {
-    id: String,
-    transition: {
-      type: [Boolean, String],
-      default: 'tab-transition'
-    },
-    reverseTransition: {
-      type: [Boolean, String],
-      default: 'tab-reverse-transition'
-    }
-  },
-
-  data () {
-    return {
-      isActive: false,
-      reverse: false
-    }
-  },
-
-  computed: {
-    computedTransition () {
-      return this.reverse ? this.reverseTransition : this.transition
-    }
-  },
-
-  mounted () {
-    this.tabs.register(this)
-  },
-
-  beforeDestroy () {
-    this.tabs.unregister(this)
-  },
-
-  methods: {
-    toggle (isActive, reverse, showTransition) {
-      this.$el.style.transition = !showTransition ? 'none' : null
-      this.reverse = reverse
-      this.isActive = isActive
-    }
+    id: String
   },
 
   render (h) {
-    const data = {
-      staticClass: 'v-tabs__content',
-      directives: [{
-        name: 'show',
-        value: this.isActive
-      }],
-      domProps: { id: this.id },
-      on: this.$listeners
+    const render = VWindowItem.options.render.call(this, h)
+
+    // For backwards compatibility with v1.2
+    /* istanbul ignore next */
+    if (this.id) {
+      deprecate('id', 'value', this)
+
+      render.data.domProps = render.data.domProps || {}
+      render.data.domProps.id = this.id
     }
 
-    const div = h('div', data, this.showLazyContent(this.$slots.default))
-
-    if (!this.computedTransition) return div
-
-    return h('transition', {
-      props: { name: this.computedTransition }
-    }, [div])
+    return render
   }
-}
+})

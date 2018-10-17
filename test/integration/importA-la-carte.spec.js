@@ -29,6 +29,7 @@ import VHover from '@/components/VHover'
 import VIcon from '@/components/VIcon'
 import VImg from '@/components/VImg'
 import VInput from '@/components/VInput'
+import VItemGroup from '@/components/VItemGroup'
 import VJumbotron from '@/components/VJumbotron'
 import VLabel from '@/components/VLabel'
 import VList from '@/components/VList'
@@ -56,9 +57,12 @@ import VSystemBar from '@/components/VSystemBar'
 import VTabs from '@/components/VTabs'
 import VTextarea from '@/components/VTextarea'
 import VTextField from '@/components/VTextField'
+import VTimeline from '@/components/VTimeline'
 import VTimePicker from '@/components/VTimePicker'
 import VToolbar from '@/components/VToolbar'
 import VTooltip from '@/components/VTooltip'
+import VTreeview from '@/components/VTreeview'
+import VWindow from '@/components/VWindow'
 import Transitions from '@/components/transitions'
 import Vuetify from '@/components/Vuetify'
 
@@ -92,6 +96,7 @@ const components = {
   VIcon,
   VImg,
   VInput,
+  VItemGroup,
   VJumbotron,
   VLabel,
   VList,
@@ -119,17 +124,25 @@ const components = {
   VTabs,
   VTextarea,
   VTextField,
+  VTimeline,
   VTimePicker,
   VToolbar,
   VTooltip,
+  VTreeview,
+  VWindow,
   Transitions
 }
 
-describe('a-la-carte import', () => {
+delete allComponents.default // TODO: update ts-jest
+
+describe('a-la-carte import - direct', () => {
   Vue.use(Vuetify, {
     components
   })
   const registeredComponents = Object.keys(Vue.options.components).sort()
+
+  // remove vue builtins
+  registeredComponents.splice(0, 3)
 
   it('should register all subcomponents', () => {
     expect(registeredComponents).toMatchSnapshot()
@@ -142,6 +155,6 @@ describe('a-la-carte import', () => {
   })
 
   it('should check all components', () => {
-    expect(Object.keys(components).sort()).toEqual(Object.keys(allComponents).sort())
+    expect(registeredComponents).toEqual(Object.keys(allComponents).sort())
   })
 })

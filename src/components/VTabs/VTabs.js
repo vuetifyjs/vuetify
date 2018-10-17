@@ -1,6 +1,9 @@
 // Styles
 import '../../stylus/components/_tabs.styl'
 
+// Extensions
+import { BaseItemGroup } from '../VItemGroup/VItemGroup'
+
 // Component level mixins
 import TabsComputed from './mixins/tabs-computed'
 import TabsGenerators from './mixins/tabs-generators'
@@ -12,19 +15,17 @@ import TabsWatchers from './mixins/tabs-watchers'
 import Colorable from '../../mixins/colorable'
 import SSRBootable from '../../mixins/ssr-bootable'
 import Themeable from '../../mixins/themeable'
-import {
-  provide as RegistrableProvide
-} from '../../mixins/registrable'
 
 // Directives
 import Resize from '../../directives/resize'
 import Touch from '../../directives/touch'
+import { deprecate } from '../../util/console'
 
 // Utils
 import ThemeProvider from '../../util/ThemeProvider'
 
 /* @vue/component */
-export default {
+export default BaseItemGroup.extend({
   name: 'v-tabs',
 
   directives: {
@@ -33,7 +34,6 @@ export default {
   },
 
   mixins: [
-    RegistrableProvide('tabs'),
     Colorable,
     SSRBootable,
     TabsComputed,
@@ -46,8 +46,7 @@ export default {
 
   provide () {
     return {
-      tabs: this,
-      tabClick: this.tabClick,
+      tabGroup: this,
       tabProxy: this.tabProxy,
       registerItems: this.registerItems,
       unregisterItems: this.unregisterItems
@@ -58,19 +57,14 @@ export default {
     return {
       bar: [],
       content: [],
-      isBooted: false,
       isOverflowing: false,
-      lazyValue: this.value,
       nextIconVisible: false,
       prevIconVisible: false,
       resizeTimeout: null,
-      reverse: false,
       scrollOffset: 0,
       sliderWidth: null,
       sliderLeft: null,
       startX: 0,
-      tabsContainer: null,
-      tabs: [],
       tabItems: null,
       transitionTime: 300,
       widths: {
@@ -82,11 +76,8 @@ export default {
   },
 
   watch: {
+    items: 'onResize',
     tabs: 'onResize'
-  },
-
-  mounted () {
-    this.checkIcons()
   },
 
   methods: {
@@ -105,16 +96,27 @@ export default {
       if (this.hideSlider || !this.activeTab) return false
 
       // Give screen time to paint
-      const action = (this.activeTab || {}).action
-      const activeTab = action === this.activeTab
-        ? this.activeTab
-        : this.tabs.find(tab => tab.action === action)
+      const activeTab = this.activeTab
 
       this.$nextTick(() => {
+        /* istanbul ignore if */
         if (!activeTab || !activeTab.$el) return
         this.sliderWidth = activeTab.$el.scrollWidth
         this.sliderLeft = activeTab.$el.offsetLeft
       })
+    },
+    // Do not process
+    // until DOM is
+    // painted
+    init () {
+      BaseItemGroup.options.methods.init.call(this)
+
+      /* istanbul ignore next */
+      if (this.$listeners['input']) {
+        deprecate('@input', '@change', this)
+      }
+
+      setTimeout(this.onResize, 33)
     },
     /**
      * When v-navigation-drawer changes the
@@ -127,11 +129,7 @@ export default {
       this.setWidths()
 
       clearTimeout(this.resizeTimeout)
-      this.resizeTimeout = setTimeout(() => {
-        this.callSlider()
-        this.scrollIntoView()
-        this.checkIcons()
-      }, this.transitionTime)
+      this.resizeTimeout = setTimeout(this.updateTabsView, this.transitionTime)
     },
     overflowCheck (e, fn) {
       this.isOverflowing && fn(e)
@@ -150,22 +148,6 @@ export default {
       this.widths = { bar, container, wrapper }
 
       this.setOverflow()
-    },
-    findActiveLink () {
-      if (!this.tabs.length) return
-
-      const activeIndex = this.tabs.findIndex((tabItem, index) => {
-        const id = tabItem.action === tabItem ? index : tabItem.action
-        return id === this.lazyValue ||
-          tabItem.$el.firstChild.className.indexOf(this.activeClass) > -1
-      })
-
-      const index = activeIndex > -1 ? activeIndex : 0
-      const tab = this.tabs[index]
-
-      /* istanbul ignore next */
-      // There is not a reliable way to test
-      this.inputValue = tab.action === tab ? index : tab.action
     },
     parseNodes () {
       const item = []
@@ -195,10 +177,20 @@ export default {
 
       return { tab, slider, items, item }
     },
-    register (options) {
-      this.tabs.push(options)
+    registerItems (fn) {
+      this.tabItems = fn
+      fn(this.internalValue)
+    },
+    unregisterItems () {
+      this.tabItems = null
+    },
+    updateTabsView () {
+      this.callSlider()
+      this.scrollIntoView()
+      this.checkIcons()
     },
     scrollIntoView () {
+      /* istanbul ignore next */
       if (!this.activeTab) return
       if (!this.isOverflowing) return (this.scrollOffset = 0)
 
@@ -206,7 +198,8 @@ export default {
       const { clientWidth, offsetLeft } = this.activeTab.$el
       const itemOffset = clientWidth + offsetLeft
       let additionalOffset = clientWidth * 0.3
-      if (this.activeIndex === this.tabs.length - 1) {
+
+      if (this.activeTab === this.items[this.items.length - 1]) {
         additionalOffset = 0 // don't add an offset if selecting the last tab
       }
 
@@ -217,28 +210,8 @@ export default {
         this.scrollOffset -= totalWidth - itemOffset - additionalOffset
       }
     },
-    tabClick (tab) {
-      this.inputValue = tab.action === tab ? this.tabs.indexOf(tab) : tab.action
-      this.scrollIntoView()
-    },
     tabProxy (val) {
-      this.inputValue = val
-    },
-    registerItems (fn) {
-      this.tabItems = fn
-    },
-    unregisterItems () {
-      this.tabItems = null
-    },
-    unregister (tab) {
-      this.tabs = this.tabs.filter(o => o !== tab)
-    },
-    updateTabs () {
-      for (let index = this.tabs.length; --index >= 0;) {
-        this.tabs[index].toggle(this.target)
-      }
-
-      this.setOverflow()
+      this.internalValue = val
     }
   },
 
@@ -249,7 +222,6 @@ export default {
       staticClass: 'v-tabs',
       directives: [{
         name: 'resize',
-        arg: 400,
         modifiers: { quiet: true },
         value: this.onResize
       }]
@@ -262,4 +234,4 @@ export default {
       ])
     ])
   }
-}
+})

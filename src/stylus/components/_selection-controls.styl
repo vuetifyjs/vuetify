@@ -25,6 +25,10 @@ rtl(v-selection-control-rtl, "v-input--selection-controls")
     margin-top: 0
     margin-bottom: 0
 
+  .v-input__control
+    flex-grow: 0
+    width: auto
+
   .v-input__slot
     margin-bottom: 12px
 
@@ -35,7 +39,8 @@ rtl(v-selection-control-rtl, "v-input--selection-controls")
     height: 24px
     position: relative
     margin-right: 8px
-    transition: color .2s cubic-bezier(.25,.8,.25,1), transform .3s cubic-bezier(.25,.8,.25,1)
+    transition: .3s cubic-bezier(.25,.8,.25,1)
+    transition-property: color, transform
     width: 24px
     user-select: none
 
@@ -53,6 +58,7 @@ rtl(v-selection-control-rtl, "v-input--selection-controls")
       user-select: none
 
   &__ripple
+    border-radius: 50%
     cursor: pointer
     height: 34px
     position: absolute
@@ -63,7 +69,7 @@ rtl(v-selection-control-rtl, "v-input--selection-controls")
     margin: 7px
 
     &:before
-      border-radius: 50%
+      border-radius: inherit
       bottom: 0
       content: ''
       position: absolute

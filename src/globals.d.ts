@@ -19,6 +19,10 @@ declare global {
     Vue: VueConstructor
   }
 
+  interface HTMLCollection {
+    [Symbol.iterator] (): IterableIterator<Element>
+  }
+
   interface Element {
     getElementsByClassName(classNames: string): NodeListOf<HTMLElement>
   }
@@ -33,6 +37,7 @@ declare global {
       enabled?: boolean
       centered?: boolean
       class?: string
+      circle?: boolean
     }
     _onScroll?: {
       callback: EventListenerOrEventListenerObject

@@ -372,7 +372,8 @@ export default {
           selections,
           this.suffix ? this.genAffix('suffix') : null,
           this.genClearIcon(),
-          this.genIconSlot()
+          this.genIconSlot(),
+          this.genProgress()
         ]),
         this.genMenu()
       ]

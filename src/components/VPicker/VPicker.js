@@ -5,6 +5,9 @@ import '../../stylus/components/_cards.styl'
 import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
 
+// Helpers
+import { convertToUnit } from '../../util/helpers'
+
 /* @vue/component */
 export default {
   name: 'v-picker',
@@ -20,8 +23,7 @@ export default {
     },
     width: {
       type: [Number, String],
-      default: 290,
-      validator: value => parseInt(value, 10) > 0
+      default: 290
     }
   },
 
@@ -53,7 +55,7 @@ export default {
         staticClass: 'v-picker__body',
         'class': this.themeClasses,
         style: this.fullWidth ? undefined : {
-          width: this.width + 'px'
+          width: convertToUnit(this.width)
         }
       }, [
         this.genBodyTransition()
@@ -71,6 +73,7 @@ export default {
       staticClass: 'v-picker v-card',
       'class': {
         'v-picker--landscape': this.landscape,
+        'v-picker--full-width': this.fullWidth,
         ...this.themeClasses
       }
     }, [

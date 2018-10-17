@@ -169,7 +169,10 @@ exports[`VTextField.js should render component with async loading and custom pro
       <div class="v-text-field__slot">
         <input type="text">
       </div>
-      <div class="v-progress-linear"
+      <div role="progressbar"
+           aria-valuemin="0"
+           aria-valuemax="100"
+           class="v-progress-linear"
            style="height: 7px;"
       >
         <div class="v-progress-linear__background orange"
@@ -205,7 +208,10 @@ exports[`VTextField.js should render component with async loading and match snap
       <div class="v-text-field__slot">
         <input type="text">
       </div>
-      <div class="v-progress-linear"
+      <div role="progressbar"
+           aria-valuemin="0"
+           aria-valuemax="100"
+           class="v-progress-linear"
            style="height: 2px;"
       >
         <div class="v-progress-linear__background primary"

@@ -6,16 +6,10 @@
 /* @vue/component */
 export default {
   computed: {
-    activeIndex () {
-      return this.tabs.findIndex((tab, index) => {
-        const id = tab.action === tab ? index : tab.action
-        return id === this.lazyValue
-      })
-    },
     activeTab () {
-      if (!this.tabs.length) return undefined
+      if (!this.selectedItems.length) return undefined
 
-      return this.tabs[this.activeIndex]
+      return this.selectedItems[0]
     },
     containerStyles () {
       return this.height ? {
@@ -24,17 +18,6 @@ export default {
     },
     hasArrows () {
       return (this.showArrows || !this.isMobile) && this.isOverflowing
-    },
-    inputValue: {
-      get () {
-        return this.lazyValue
-      },
-      set (val) {
-        if (this.inputValue === val) return
-
-        this.lazyValue = val
-        this.$emit('input', val)
-      }
     },
     isMobile () {
       return this.$vuetify.breakpoint.width < this.mobileBreakPoint
@@ -45,11 +28,6 @@ export default {
         transition: this.sliderLeft != null ? null : 'none',
         width: `${this.sliderWidth}px`
       }
-    },
-    target () {
-      return this.activeTab
-        ? this.activeTab.action
-        : null
     }
   }
 }

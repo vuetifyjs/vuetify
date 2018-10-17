@@ -10,6 +10,38 @@ test('VProgressLinear.js', ({ mount }) => {
     })
 
     expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({ value: -1, bufferValue: -1 })
+    const htmlMinus1 = wrapper.html()
+
+    wrapper.setProps({ value: 0, bufferValue: 0 })
+    const html0 = wrapper.html()
+
+    wrapper.setProps({ value: 100, bufferValue: 100 })
+    const html100 = wrapper.html()
+
+    wrapper.setProps({ value: 101, bufferValue: 101 })
+    const html101 = wrapper.html()
+
+    expect(htmlMinus1).toBe(html0)
+    expect(html100).toBe(html101)
+    expect(html0).not.toBe(html100)
+
+    wrapper.setProps({ value: '-1', bufferValue: '-1' })
+    const htmlMinus1String = wrapper.html()
+
+    wrapper.setProps({ value: '0', bufferValue: '0' })
+    const html0String = wrapper.html()
+
+    wrapper.setProps({ value: '100', bufferValue: '100' })
+    const html100String = wrapper.html()
+
+    wrapper.setProps({ value: '101', bufferValue: '101' })
+    const html101String = wrapper.html()
+
+    expect(htmlMinus1String).toBe(html0String)
+    expect(html100String).toBe(html101String)
+    expect(html0String).not.toBe(html100String)
   })
 
   it('should render inactive component and match snapshot', () => {

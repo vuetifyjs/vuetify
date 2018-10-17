@@ -3,7 +3,7 @@
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",
-    "outDir": "./es5-temp",
+    "outDir": "./lib-temp",
     "sourceMap": false,
     "inlineSourceMap": true,
     "inlineSources": true

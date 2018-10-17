@@ -12,17 +12,10 @@ v-carousel-rtl()
 rtl(v-carousel-rtl, "v-carousel")
 
 .v-carousel
-  height: 500px
   width: 100%
   position: relative
   overflow: hidden
   elevation(2)
-
-  &__item
-    position: absolute
-    top: 0
-    width: 100%
-    transition: .3s $transition.swing
 
   &__prev,
   &__next
@@ -60,6 +53,9 @@ rtl(v-carousel-rtl, "v-carousel")
     list-style-type: none
     width: 100%
     z-index: 1
+
+    > .v-item-group
+      flex: 0 1 auto
 
     &__item
       margin: 0 8px !important

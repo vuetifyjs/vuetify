@@ -19,6 +19,7 @@ import {
   deepEqual
 } from '../../util/helpers'
 import { consoleWarn } from '../../util/console'
+import Loadable from '../../mixins/loadable'
 
 /* @vue/component */
 export default {
@@ -27,6 +28,8 @@ export default {
   directives: { ClickOutside },
 
   extends: VInput,
+
+  mixins: [Loadable],
 
   props: {
     alwaysDirty: Boolean,
@@ -224,10 +227,11 @@ export default {
     genDefaultSlot () {
       const children = [this.genLabel()]
       const slider = this.genSlider()
-
       this.inverseLabel
         ? children.unshift(slider)
         : children.push(slider)
+
+      children.push(this.genProgress())
 
       return children
     },
@@ -249,7 +253,11 @@ export default {
           tabindex: this.disabled ? -1 : this.$attrs.tabindex,
           value: this.internalValue,
           readonly: true,
-          'aria-readonly': String(this.readonly)
+          'aria-readonly': String(this.readonly),
+          'aria-valuemin': this.min,
+          'aria-valuemax': this.max,
+          'aria-valuenow': this.internalValue,
+          ...this.$attrs
         },
         on: this.genListeners(),
         ref: 'input'
