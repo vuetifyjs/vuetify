@@ -128,11 +128,11 @@
         },
         {
           ...release,
-          complete: false,
+          complete: true,
           title: 'v1.3 Release',
           caption: 'October 2018',
           text: 'Add new components, `v-treeview`, `v-timeline` and `v-item-group`. Unify the interfaces used in `v-tabs` and `v-carousel`. Improve the **vuetify-loader** to support effortless application tree-shaking of Vuetify components.',
-          value: true
+          value: false
         },
         {
           ...packages,
@@ -140,7 +140,7 @@
           title: 'AWS Cognito Vuex Module',
           caption: 'November 2018',
           text: 'A fully featured Vuex module for interacting with AWS Cognito. Useful for websites that require authentication.',
-          value: false
+          value: true
         },
         {
           ...release,
