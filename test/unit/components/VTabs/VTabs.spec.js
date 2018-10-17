@@ -91,7 +91,7 @@ test('VTabs', ({ mount }) => {
     tabs.setData({ scrollOffset: 1 })
     tabs.vm.onResize()
 
-    await new Promise(resolve => setTimeout(resolve, 400))
+    await new Promise(resolve => setTimeout(resolve, 500))
 
     expect(tabs.vm.scrollOffset).toBe(0)
     tabs.setData({ scrollOffset: 2 })
