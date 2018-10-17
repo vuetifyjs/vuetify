@@ -1,6 +1,6 @@
 {
   "header": "Treeview",
-  "headerText": "The `v-treeview` component is...",
+  "headerText": "The `v-treeview` component is useful for displaying large amounts of nested data.",
   "examples": {
     "usage": {
       "desc": "A basic example"
