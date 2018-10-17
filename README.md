@@ -61,6 +61,7 @@
   <a href="https://www.patreon.com/vuetify">
     <img src="https://c5.patreon.com/external/logo/become_a_patron_button.png" alt="Become a Patron" />
   </a>
+  <br>
   <a href="https://opencollective.com/vuetify">
     <img src="https://opencollective.com/static/images/become_sponsor.svg" alt="Donate to OpenCollective">
   </a>
