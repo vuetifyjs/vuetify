@@ -33,7 +33,7 @@ theme(v-datatable, "v-datatable")
       cursor: pointer
       outline: 0
 
-      i
+      i, svg
         font-size: 16px
         display: inline-block
         opacity: 0
@@ -41,17 +41,17 @@ theme(v-datatable, "v-datatable")
 
       &:focus,
       &:hover
-        i
+        i, svg
           opacity: .6
 
       &.active
         transform: none
 
-        i
+        i, svg
           opacity: 1
 
         &.desc
-          i
+          i, svg
             transform: rotate(-180deg)
 
 /** Actions */
