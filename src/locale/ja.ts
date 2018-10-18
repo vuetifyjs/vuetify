@@ -1,14 +1,14 @@
 export default {
   dataIterator: {
-    rowsPerPageText: 'Items per page:',
-    rowsPerPageAll: 'All',
-    pageText: '{0}-{1} of {2}',
-    noResultsText: 'No matching records found',
-    nextPage: 'Next page',
-    prevPage: 'Previous page'
+    rowsPerPageText: '表示件数:',
+    rowsPerPageAll: '全て',
+    pageText: '{2} 件中 {0}-{1} 件',
+    noResultsText: '該当するレコードが見つかりません',
+    nextPage: '次ページ',
+    prevPage: '前ページ'
   },
   dataTable: {
-    rowsPerPageText: 'Rows per page:'
+    rowsPerPageText: '表示件数:'
   },
-  noDataText: 'No data available'
+  noDataText: 'データがありません'
 }
