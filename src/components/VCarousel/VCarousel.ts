@@ -179,7 +179,7 @@ export default VWindow.extend({
     startTimeout () {
       if (!this.cycle) return
 
-      this.slideTimeout = window.setTimeout(this.next, this.interval > 0 ? this.interval : 6000)
+      this.slideTimeout = window.setTimeout(this.next, +this.interval > 0 ? +this.interval : 6000)
     },
     updateReverse (val: number, oldVal: number) {
       if (this.changedByControls) {
