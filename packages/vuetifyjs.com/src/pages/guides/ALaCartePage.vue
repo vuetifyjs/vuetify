@@ -6,7 +6,7 @@
         helpers-section-head(:value="`${namespace}.importHeader`")
         helpers-section-text(:value="`${namespace}.importText1`")
         core-alert(:value="`${namespace}.webpackVersionWarning`" warning).text--primary
-        helpers-markup(lang="js").
+        helpers-markup#global-import(lang="js").
           // main.js
           import Vue from 'vue'
           import App from './App.vue'
@@ -20,20 +20,20 @@
           import { Ripple } from 'vuetify/lib/directives'
 
           Vue.use(Vuetify, {
-             components: {
-               VApp,
-               VNavigationDrawer,
-               VFooter,
-               VToolbar,
-               transitions
-             },
-             directives: {
-               Ripple
-             }
+            components: {
+              VApp,
+              VNavigationDrawer,
+              VFooter,
+              VToolbar,
+              transitions
+            },
+            directives: {
+              Ripple
+            }
           })
         core-alert(:value="`${namespace}.optionsDirectivesNotice`" info)
         helpers-section-text(:value="`${namespace}.importText2`")
-        helpers-markup(lang="js").
+        helpers-markup#local-import(lang="js").
           // .vue files
           import { VCard, VCardText, VCardMedia } from 'vuetify/lib'
 
@@ -86,4 +86,40 @@
             }
           }
         helpers-section-text(:value="`${namespace}.loaderText2`")
+
+      section#loader-limitations
+        helpers-section-head(:value="`${namespace}.loaderLimitationsHeader`")
+        helpers-section-text(:value="`${namespace}.loaderLimitationsText1`")
+        helpers-section-subheader(:value="`${namespace}.loaderLimitationsDynamicHeader`")
+        helpers-section-text(:value="`${namespace}.loaderLimitationsDynamicText1`")
+        helpers-markup(lang="html").
+          // SomeComponent.vue
+          #{'<template>'}
+            #{'<v-data-iterator content-tag="v-layout">'}
+            ...
+        helpers-markup(lang="js").
+          // main.js
+          import Vuetify, { VLayout } from 'vuetify'
+
+          Vue.use(Vuetify, {
+            components: { VLayout }
+          })
+        helpers-section-text(:value="`${namespace}.loaderLimitationsDynamicText2`")
+        helpers-markup(lang="html").
+          #{'<template>'}
+            #{'<component :is="button ? \'v-btn\' : \'v-chip\'">'}
+            ...
+          #{'</template>'}
+
+          &lt;script&gt;
+            import { VBtn, VChip } from 'vuetify/lib'
+            export default {
+              components: { VBtn, VChip },
+              data: () => ({ button: false })
+            }
+          #{'</script>'}
+        helpers-section-subheader(:value="`${namespace}.loaderLimitationsFunctionalHeader`")
+        helpers-section-text(:value="`${namespace}.loaderLimitationsFunctionalText1`")
+        helpers-section-subheader(:value="`${namespace}.loaderLimitationsPugHeader`")
+        helpers-section-text(:value="`${namespace}.loaderLimitationsPugText1`")
 </template>
