@@ -94,7 +94,7 @@
         helpers-section-text(:value="`${namespace}.loaderLimitationsDynamicText1`")
         helpers-markup(lang="html").
           // SomeComponent.vue
-          #{'<template>'}
+          &lt;template&gt;
             #{'<v-data-iterator content-tag="v-layout">'}
             ...
         helpers-markup(lang="js").
