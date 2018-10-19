@@ -48,11 +48,6 @@ export default mixins(
     return { treeview: this }
   },
 
-  model: {
-    prop: 'value',
-    event: 'change'
-  },
-
   props: {
     active: {
       type: Array,
@@ -103,23 +98,29 @@ export default mixins(
       },
       deep: true
     },
-    active (v) {
-      if (deepEqual([...this.activeCache], v)) return
+    active (value: (string | number)[]) {
+      const old = [...this.activeCache]
+      if (!value || deepEqual(old, value)) return
 
-      this.active.forEach(key => this.updateActive(key, true))
+      old.forEach(key => this.updateActive(key, false))
+      value.forEach(key => this.updateActive(key, true))
       this.emitActive()
     },
-    value (v) {
-      if (!v || deepEqual([...this.selectedCache], v)) return
+    value (value: (string | number)[]) {
+      const old = [...this.selectedCache]
+      if (!value || deepEqual(old, value)) return
 
-      this.value.forEach(key => this.updateSelected(key, true))
+      old.forEach(key => this.updateSelected(key, false))
+      value.forEach(key => this.updateSelected(key, true))
       this.emitSelected()
     },
-    open (v) {
-      if (deepEqual([...this.openCache], v)) return
-
-      this.openCache.forEach(key => this.updateOpen(key, false))
-      this.open.forEach(key => this.updateOpen(key, true))
+    open (value: (string | number)[]) {
+      const old = [...this.openCache]
+      console.log('watch', value, old)
+      if (deepEqual(old, value)) return
+      console.log('not equal')
+      old.forEach(key => this.updateOpen(key, false))
+      value.forEach(key => this.updateOpen(key, true))
       this.emitOpen()
     }
   },
@@ -210,10 +211,11 @@ export default mixins(
       return node
     },
     emitOpen () {
+      console.log('emit', [...this.openCache])
       this.$emit('update:open', [...this.openCache])
     },
     emitSelected () {
-      this.$emit('change', [...this.selectedCache])
+      this.$emit('input', [...this.selectedCache])
     },
     emitActive () {
       this.$emit('update:active', [...this.activeCache])
@@ -250,7 +252,9 @@ export default mixins(
       const key = getObjectValueByPath(node.item, this.itemKey)
       this.nodes[key].vnode = null
     },
-    updateActive (key: string | number, value: boolean) {
+    updateActive (key: string | number, isActive: boolean) {
+      if (!this.nodes.hasOwnProperty(key)) return
+
       if (!this.multipleActive) {
         this.activeCache.forEach(active => {
           this.nodes[active].isActive = false
@@ -260,11 +264,12 @@ export default mixins(
       }
 
       const node = this.nodes[key]
-
       if (!node) return
-      if (value) this.activeCache.add(key)
 
-      node.isActive = value
+      if (isActive) this.activeCache.add(key)
+      else this.activeCache.delete(key)
+
+      node.isActive = isActive
 
       this.updateVnodeState(key)
     },
@@ -295,10 +300,11 @@ export default mixins(
     },
     updateOpen (key: string | number, isOpen: boolean) {
       if (!this.nodes.hasOwnProperty(key)) return
+      console.log(key, isOpen)
 
       const node = this.nodes[key]
 
-      if (node.vnode && !node.vnode.hasLoaded) {
+      if (node.children && !node.children.length && node.vnode && !node.vnode.hasLoaded) {
         node.vnode.checkChildren().then(() => this.updateOpen(key, isOpen))
       } else {
         node.isOpen = isOpen
@@ -306,6 +312,7 @@ export default mixins(
         node.isOpen ? this.openCache.add(key) : this.openCache.delete(key)
 
         this.updateVnodeState(key)
+        console.log([...this.openCache])
       }
     },
     updateVnodeState (key: string | number) {
