@@ -182,6 +182,10 @@ test('VTimePicker.js', ({ mount }) => {
     wrapper.vm.setInputData(null)
     expect(wrapper.vm.inputHour).toBe(null)
     expect(wrapper.vm.inputMinute).toBe(null)
+    
+    wrapper.vm.setInputData('')
+    expect(wrapper.vm.inputHour).toBe(null)
+    expect(wrapper.vm.inputMinute).toBe(null)
 
     wrapper.vm.setInputData('12:34am')
     expect(wrapper.vm.inputHour).toBe(0)
