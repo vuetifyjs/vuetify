@@ -52,6 +52,30 @@ export default {
   },
 
   computed: {
+    selectingHour: {
+      get () {
+        return this.selecting === selectingTimes.hour
+      },
+      set (v) {
+        this.selecting = selectingTimes.hour
+      }
+    },
+    selectingMinute: {
+      get () {
+        return this.selecting === selectingTimes.minute
+      },
+      set (v) {
+        this.selecting = selectingTimes.minute
+      }
+    },
+    selectingSecond: {
+      get () {
+        return this.selecting === selectingTimes.second
+      },
+      set (v) {
+        this.selecting = selectingTimes.second
+      }
+    },
     isAllowedHourCb () {
       if (!this.min && !this.max) return this.allowedHours
 
@@ -171,6 +195,7 @@ export default {
     onChange () {
       if (this.selecting === (this.useSeconds ? selectingTimes.second : selectingTimes.minute)) {
         this.$emit('change', this.value)
+        // this.selecting = selectingTimes.hour
       } else {
         this.selecting++
       }
