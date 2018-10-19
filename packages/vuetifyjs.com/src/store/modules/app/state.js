@@ -329,6 +329,10 @@ export default () => ({
         {
           text: 'Guides.ALaCarte.loaderHeader',
           href: 'vuetify-loader'
+        },
+        {
+          text: 'Guides.ALaCarte.loaderLimitationsHeader',
+          href: 'loader-limitations'
         }
       ],
       SSR: [
