@@ -19,7 +19,7 @@
           v-tabs(
             v-model="tab"
             color="grey lighten-3"
-            slider-color="primary"
+            :slider-color="computedTabs.length ? 'primary' : 'transparent'"
           )
             template(v-for="(tab, i) in computedTabs")
               v-tab(
@@ -199,18 +199,16 @@
       currentApi () {
         const api = this.currentApi[this.tab]
 
-        if (
-          !api ||
-          (this.currentApi.hasOwnProperty(this.tab) &&
-          api.length > 0)
-        ) return
+        if (api && api.length) return
 
-        for (let tab of ['props', 'slots', 'options']) {
-          if (this.currentApi[tab].length > 0) {
+        for (const tab of ['props', 'slots', 'options']) {
+          if (this.currentApi[tab] && this.currentApi[tab].length > 0) {
             this.tab = tab
-            break
+            return
           }
         }
+
+        this.tab = ''
       }
     },
 
