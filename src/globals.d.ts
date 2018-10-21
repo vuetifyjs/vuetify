@@ -49,10 +49,6 @@ declare global {
     }
   }
 
-  interface HTMLImageElement {
-    decode: () => Promise<never>
-  }
-
   function parseInt(s: string | number, radix?: number): number
   function parseFloat(string: string | number): number
 
