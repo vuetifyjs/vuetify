@@ -16,6 +16,6 @@
     "babel-preset-env": "^1.6.1",
     "deepmerge": "^2.1.1",
     "vue": "^2.5.16",
-    "vuetify": "^1.0.18"
+    "vuetify": "^1.3.1"
   }
 }

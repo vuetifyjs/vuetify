@@ -1843,10 +1843,10 @@ vue@^2.5.16:
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.16.tgz#07edb75e8412aaeed871ebafa99f4672584a0085"
   integrity sha512-/ffmsiVuPC8PsWcFkZngdpas19ABm5mh2wA7iDqcltyCTwlgZjHGeJYOXkBMo422iPwIcviOtrTCUpSfXmToLQ==
 
-vuetify@^1.0.18:
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-1.2.3.tgz#519bab56c31420892912c0c7dbd23e790c9287bb"
-  integrity sha512-ssMsLVwth62T4usPAFbn8yk69qqBDp4VWPmlY4XiYZ7aGMPoa/sQ08BlAeG8J81y+K60bY88FZ2gquQKlGqlsg==
+vuetify@^1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-1.3.1.tgz#bbfc5014af2cd6c82c8fb6b9c84551367b6cc5d4"
+  integrity sha512-n2JOEm4T0C4pHzaUSgV1+rAh/cTm2g89YIbLMyfwgencYON0kmr2ulY7vSVsBJGqv5ODDccbCzboXkfEXPYS5Q==
 
 wide-align@^1.1.0:
   version "1.1.2"
