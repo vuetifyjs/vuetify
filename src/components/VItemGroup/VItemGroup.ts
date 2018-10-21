@@ -77,7 +77,10 @@ export const BaseItemGroup = mixins(
   },
 
   watch: {
-    internalValue: 'updateItemsState'
+    internalValue () {
+      // https://github.com/vuetifyjs/vuetify/issues/5352
+      this.$nextTick(this.updateItemsState)
+    }
   },
 
   created () {
