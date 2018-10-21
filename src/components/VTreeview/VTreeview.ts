@@ -116,9 +116,8 @@ export default mixins(
     },
     open (value: (string | number)[]) {
       const old = [...this.openCache]
-      console.log('watch', value, old)
       if (deepEqual(old, value)) return
-      console.log('not equal')
+
       old.forEach(key => this.updateOpen(key, false))
       value.forEach(key => this.updateOpen(key, true))
       this.emitOpen()
@@ -211,7 +210,6 @@ export default mixins(
       return node
     },
     emitOpen () {
-      console.log('emit', [...this.openCache])
       this.$emit('update:open', [...this.openCache])
     },
     emitSelected () {
@@ -300,7 +298,6 @@ export default mixins(
     },
     updateOpen (key: string | number, isOpen: boolean) {
       if (!this.nodes.hasOwnProperty(key)) return
-      console.log(key, isOpen)
 
       const node = this.nodes[key]
 
@@ -312,7 +309,6 @@ export default mixins(
         node.isOpen ? this.openCache.add(key) : this.openCache.delete(key)
 
         this.updateVnodeState(key)
-        console.log([...this.openCache])
       }
     },
     updateVnodeState (key: string | number) {
