@@ -3,7 +3,7 @@ import mixins from '../../util/mixins'
 import VDataTable from './VDataTable'
 import { PropValidator } from 'vue/types/options'
 import { groupByProperty } from '../../util/helpers'
-import { VRowGroup, VRowFunctional } from '.'
+import { VRowGroup, VRow } from '.'
 import VBtn from '../VBtn'
 import VIcon from '../VIcon'
 import { VSimpleCheckbox } from '../VCheckbox'
@@ -173,7 +173,7 @@ export default mixins<options>().extend({
         }, [this.$vuetify.icons.expand]) // TODO: prop?
       }
 
-      return this.$createElement(VRowFunctional, {
+      return this.$createElement(VRow, {
         class: classes,
         props: {
           headers: this.headers,

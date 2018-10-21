@@ -1,5 +1,5 @@
 // Components
-import { VRowFunctional, VRowGroup } from '.'
+import { VRow, VRowGroup } from '.'
 import VIcon from '../VIcon'
 
 // Types
@@ -30,7 +30,7 @@ export default Vue.extend({
         open: props.value
       }
     }, [
-      h(VRowFunctional, {
+      h(VRow, {
         staticClass: 'v-row-expansion',
         class: {
           'v-row-expansion--open': props.value

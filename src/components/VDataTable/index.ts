@@ -6,8 +6,6 @@ import VDataHeaderMobile from './VDataHeaderMobile'
 import VRowGroup from './VRowGroup'
 import VEditDialog from './VEditDialog'
 import VRow from './VRow'
-import VRowFunctional from './VRowFunctional'
-import VRowRegular from './VRowRegular'
 import VRowExpansion from './VRowExpansion'
 import VTableVirtual from './VTableVirtual'
 import VTable from './VTable'
@@ -22,8 +20,6 @@ export {
   VDataHeaderMobile,
   VRowGroup,
   VRow,
-  VRowRegular,
-  VRowFunctional,
   VRowExpansion,
   VTableVirtual,
   VTable
@@ -38,8 +34,6 @@ export default {
     VDataHeaderMobile,
     VRowGroup,
     VRow,
-    VRowRegular,
-    VRowFunctional,
     VRowExpansion,
     VTableVirtual,
     VTable
