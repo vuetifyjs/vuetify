@@ -175,7 +175,7 @@ export default mixins(
     isHalfEvent (e: MouseEvent): boolean {
       if (this.halfIncrements) {
         const rect = e.target && (e.target as HTMLElement).getBoundingClientRect()
-        if (rect && e.offsetX < rect.width / 2) return true
+        if (rect && (e.pageX - rect.left) < rect.width / 2) return true
       }
 
       return false
