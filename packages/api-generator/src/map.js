@@ -326,7 +326,15 @@ module.exports = {
     slots: ['badge', 'default']
   },
   'v-breadcrumbs': {
-    slots: ['default']
+    slots: ['divider'],
+    scopedSlots: [
+      {
+        name: 'item',
+        props: {
+          item: 'any[]'
+        }
+      }
+    ]
   },
   'v-breadcrumbs-item': {
     slots: ['default']

@@ -152,6 +152,7 @@
     "attributes": [
       "dark",
       "divider",
+      "items",
       "justify-center",
       "justify-end",
       "large",
@@ -310,6 +311,7 @@
       "next-icon",
       "prev-icon",
       "reverse",
+      "touch",
       "touchless",
       "value",
       "vertical"
@@ -348,7 +350,6 @@
       "input-value",
       "label",
       "light",
-      "loading",
       "messages",
       "multiple",
       "off-icon",
@@ -586,6 +587,7 @@
       "title-date-format",
       "type",
       "value",
+      "weekday-format",
       "width",
       "year-format",
       "year-icon"
@@ -899,7 +901,6 @@
       "hint",
       "label",
       "light",
-      "loading",
       "messages",
       "persistent-hint",
       "prepend-icon",
@@ -1289,7 +1290,6 @@
       "hint",
       "label",
       "light",
-      "loading",
       "mandatory",
       "messages",
       "name",
@@ -1719,6 +1719,7 @@
       "max",
       "multiple",
       "reverse",
+      "touch",
       "touchless",
       "value",
       "vertical"
@@ -2059,6 +2060,7 @@
       "max",
       "multiple",
       "reverse",
+      "touch",
       "touchless",
       "value",
       "vertical"

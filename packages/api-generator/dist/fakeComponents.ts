@@ -147,6 +147,7 @@ Vue.component('v-breadcrumbs', {
   props: {
     dark: Boolean,
     divider: String,
+    items: Array,
     justifyCenter: Boolean,
     justifyEnd: Boolean,
     large: Boolean,
@@ -289,6 +290,7 @@ Vue.component('v-carousel', {
     nextIcon: [Boolean,String],
     prevIcon: [Boolean,String],
     reverse: Boolean,
+    touch: Object,
     touchless: Boolean,
     value: null as any as PropValidator<any>,
     vertical: Boolean
@@ -325,7 +327,6 @@ Vue.component('v-checkbox', {
     inputValue: null as any as PropValidator<any>,
     label: String,
     light: Boolean,
-    loading: [Boolean,String],
     messages: [String,Array],
     multiple: Boolean,
     offIcon: String,
@@ -553,6 +554,7 @@ Vue.component('v-date-picker', {
     titleDateFormat: Function,
     type: String,
     value: [Array,String],
+    weekdayFormat: Function,
     width: [Number,String],
     yearFormat: Function,
     yearIcon: String
@@ -844,7 +846,6 @@ Vue.component('v-input', {
     hint: String,
     label: String,
     light: Boolean,
-    loading: [Boolean,String],
     messages: [String,Array],
     persistentHint: Boolean,
     prependIcon: String,
@@ -1201,7 +1202,6 @@ Vue.component('v-radio-group', {
     hint: String,
     label: String,
     light: Boolean,
-    loading: [Boolean,String],
     mandatory: Boolean,
     messages: [String,Array],
     name: String,
@@ -1607,6 +1607,7 @@ Vue.component('v-tabs-items', {
     max: [Number,String],
     multiple: Boolean,
     reverse: Boolean,
+    touch: Object,
     touchless: Boolean,
     value: null as any as PropValidator<any>,
     vertical: Boolean
@@ -1925,6 +1926,7 @@ Vue.component('v-window', {
     max: [Number,String],
     multiple: Boolean,
     reverse: Boolean,
+    touch: Object,
     touchless: Boolean,
     value: null as any as PropValidator<any>,
     vertical: Boolean

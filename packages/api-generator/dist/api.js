@@ -907,6 +907,12 @@ module.exports = {
         "source": null
       },
       {
+        "name": "items",
+        "type": "array",
+        "default": [],
+        "source": null
+      },
+      {
         "name": "justifyCenter",
         "type": "boolean",
         "default": "false",
@@ -935,7 +941,15 @@ module.exports = {
       "themeable"
     ],
     "slots": [
-      "default"
+      "divider"
+    ],
+    "scopedSlots": [
+      {
+        "name": "item",
+        "props": {
+          "item": "any[]"
+        }
+      }
     ]
   },
   "v-breadcrumbs-item": {
@@ -1740,6 +1754,12 @@ module.exports = {
         "source": null
       },
       {
+        "name": "touch",
+        "type": "object",
+        "default": "undefined",
+        "source": null
+      },
+      {
         "name": "touchless",
         "type": "boolean",
         "default": "false",
@@ -1948,15 +1968,6 @@ module.exports = {
         "type": "boolean",
         "default": "false",
         "source": "themeable"
-      },
-      {
-        "name": "loading",
-        "type": [
-          "boolean",
-          "string"
-        ],
-        "default": false,
-        "source": "loadable"
       },
       {
         "name": "messages",
@@ -3536,6 +3547,12 @@ module.exports = {
           "string"
         ],
         "default": "undefined",
+        "source": null
+      },
+      {
+        "name": "weekdayFormat",
+        "type": "function",
+        "default": "null",
         "source": null
       },
       {
@@ -5139,15 +5156,6 @@ module.exports = {
         "source": "themeable"
       },
       {
-        "name": "loading",
-        "type": [
-          "boolean",
-          "string"
-        ],
-        "default": false,
-        "source": "loadable"
-      },
-      {
         "name": "messages",
         "type": [
           "string",
@@ -5217,7 +5225,6 @@ module.exports = {
     "mixins": [
       "colorable",
       "colorable",
-      "loadable",
       "registrable-inject",
       "themeable",
       "validatable"
@@ -6100,6 +6107,7 @@ module.exports = {
       "positionable",
       "returnable",
       "stackable",
+      "themeable",
       "toggleable"
     ],
     "slots": [
@@ -7227,15 +7235,6 @@ module.exports = {
         "source": "themeable"
       },
       {
-        "name": "loading",
-        "type": [
-          "boolean",
-          "string"
-        ],
-        "default": false,
-        "source": "loadable"
-      },
-      {
         "name": "mandatory",
         "type": "boolean",
         "default": "true",
@@ -7697,12 +7696,7 @@ module.exports = {
       }
     ],
     "mixins": [
-      "colorable",
-      "colorable",
-      "loadable",
-      "registrable-inject",
-      "themeable",
-      "validatable"
+      "loadable"
     ],
     "events": [
       {
@@ -8739,12 +8733,7 @@ module.exports = {
       }
     ],
     "mixins": [
-      "colorable",
-      "colorable",
-      "loadable",
-      "registrable-inject",
-      "themeable",
-      "validatable"
+      "loadable"
     ],
     "events": [
       {
@@ -8975,6 +8964,7 @@ module.exports = {
       }
     ],
     "mixins": [
+      "registrable-provide",
       "themeable"
     ],
     "slots": [
@@ -8999,7 +8989,9 @@ module.exports = {
         "source": null
       }
     ],
-    "mixins": [],
+    "mixins": [
+      "registrable-inject"
+    ],
     "slots": [
       "default"
     ]
@@ -9010,7 +9002,7 @@ module.exports = {
         "name": "color",
         "type": "string",
         "default": "'primary'",
-        "source": null
+        "source": "colorable"
       },
       {
         "name": "complete",
@@ -9058,7 +9050,10 @@ module.exports = {
         "source": null
       }
     ],
-    "mixins": [],
+    "mixins": [
+      "colorable",
+      "registrable-inject"
+    ],
     "slots": [
       "default"
     ]
@@ -9225,7 +9220,7 @@ module.exports = {
           "string"
         ],
         "default": false,
-        "source": "loadable"
+        "source": null
       },
       {
         "name": "messages",
@@ -9778,6 +9773,12 @@ module.exports = {
         "source": null
       },
       {
+        "name": "touch",
+        "type": "object",
+        "default": "undefined",
+        "source": null
+      },
+      {
         "name": "touchless",
         "type": "boolean",
         "default": "false",
@@ -10188,6 +10189,7 @@ module.exports = {
       }
     ],
     "mixins": [
+      "loadable",
       "maskable"
     ]
   },
@@ -10526,6 +10528,7 @@ module.exports = {
       }
     ],
     "mixins": [
+      "loadable",
       "maskable"
     ],
     "events": [
@@ -11615,6 +11618,12 @@ module.exports = {
         "name": "reverse",
         "type": "boolean",
         "default": "false",
+        "source": null
+      },
+      {
+        "name": "touch",
+        "type": "object",
+        "default": "undefined",
         "source": null
       },
       {
