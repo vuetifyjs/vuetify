@@ -30,7 +30,7 @@ test('VTreeView.ts', ({ mount }) => {
     })
 
     const fn = jest.fn()
-    wrapper.vm.$on('change', fn)
+    wrapper.vm.$on('input', fn)
 
     wrapper.find('.v-treeview-node__checkbox')[0].trigger('click')
     await wrapper.vm.$nextTick()
@@ -74,7 +74,7 @@ test('VTreeView.ts', ({ mount }) => {
     })
 
     const fn = jest.fn()
-    wrapper.vm.$on('change', fn)
+    wrapper.vm.$on('input', fn)
 
     expect(wrapper.html()).toMatchSnapshot()
 
@@ -221,42 +221,6 @@ test('VTreeView.ts', ({ mount }) => {
     expect([...wrapper.vm.selectedCache]).toEqual([1, 2])
   })
 
-  it.skip('should react to changes for value, selected and activated', async () => {
-    const wrapper = mount(VTreeview, {
-      propsData: {
-        items: threeLevels,
-        active: [2],
-        value: [1]
-      }
-    })
-
-    const active = jest.fn()
-    const selected = jest.fn()
-    wrapper.vm.$on('update:active', active)
-    wrapper.vm.$on('change', selected)
-
-    wrapper.setProps({ active: [0] })
-    await wrapper.vm.$nextTick()
-
-    expect(active).toHaveBeenCalledWith([0])
-
-    // Should not update values that do not exist in the tree
-
-    wrapper.setProps({ active: [7], value: [7] })
-    await wrapper.vm.$nextTick()
-
-    expect(active).toHaveBeenCalledWith([])
-    expect(selected).toHaveBeenCalledWith([])
-
-    // Should rebuild tree and reuse cached values
-
-    wrapper.setProps({ active: [0], items: singleRootTwoChildren })
-    await wrapper.vm.$nextTick()
-
-    expect(active).toHaveBeenCalledWith([0])
-    expect(selected).toHaveBeenCalledWith([1, 2, 0])
-  })
-
   it('should react to changes for active items', async () => {
     const wrapper = mount(VTreeview, {
       propsData: {
@@ -291,33 +255,33 @@ test('VTreeView.ts', ({ mount }) => {
     expect(active).toHaveBeenCalledWith([0])
   })
 
-  it.only('should react to changes for open items', async () => {
+  it('should react to changes for selected items', async () => {
     const wrapper = mount(VTreeview, {
       propsData: {
         items: threeLevels,
-        open: [2]
+        value: [2]
       }
     })
 
-    const open = jest.fn()
-    wrapper.vm.$on('update:open', open)
+    const value = jest.fn()
+    wrapper.vm.$on('input', value)
 
-    wrapper.setProps({ open: [] })
+    wrapper.setProps({ value: [] })
     await wrapper.vm.$nextTick()
-    expect(open).toHaveBeenCalledWith([])
+    expect(value).toHaveBeenCalledWith([])
 
-    wrapper.setProps({ open: [1, 3] })
+    wrapper.setProps({ value: [3] })
     await wrapper.vm.$nextTick()
-    expect(open).toHaveBeenCalledWith([1, 3])
+    expect(value).toHaveBeenCalledWith([3])
 
     // 7 does not exist, we get nothing back
-    wrapper.setProps({ open: [7] })
+    wrapper.setProps({ value: [7] })
     await wrapper.vm.$nextTick()
-    expect(open).toHaveBeenCalledWith([])
+    expect(value).toHaveBeenCalledWith([])
 
-    wrapper.setProps({ open: [0], items: singleRootTwoChildren })
+    wrapper.setProps({ value: [0], items: singleRootTwoChildren })
     await wrapper.vm.$nextTick()
-    expect(open).toHaveBeenCalledWith([0])
+    expect(value).toHaveBeenCalledWith([0, 1, 2, 3])
   })
 
   it('should accept string value for id', async () => {
