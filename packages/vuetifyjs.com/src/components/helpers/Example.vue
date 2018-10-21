@@ -73,7 +73,7 @@
         ref="panel"
         v-model="panel"
       ).elevation-0
-        v-expansion-panel-content
+        v-expansion-panel-content(lazy)
           v-divider(v-if="!readonly")
           v-tabs(
             ref="tabs"
