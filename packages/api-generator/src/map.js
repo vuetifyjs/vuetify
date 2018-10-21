@@ -793,7 +793,8 @@ module.exports = {
         name: 'click:append-outer',
         value: 'Event'
       }
-    ].concat(validatableEvents)
+    ].concat(validatableEvents),
+    slots: ['label']
   },
   'v-time-picker': {
     events: [
