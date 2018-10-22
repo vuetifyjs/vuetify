@@ -579,7 +579,8 @@
       "customColors",
       "validation",
       { "file": "range", "newIn": "1.1" },
-      "minMax"
+      "minMax",
+      "metronome"
     ],
     "spec": false
   },
