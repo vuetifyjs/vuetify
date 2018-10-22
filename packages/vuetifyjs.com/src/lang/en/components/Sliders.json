@@ -45,6 +45,10 @@
     "minMax": {
       "header": "Min & Max values",
       "desc": "You can set `min` and `max` values of sliders."
+    },
+    "metronome": {
+      "header": "Metronome",
+      "desc": "Use slotted _prepend_ and _append_ icons to easily customize the `v-slider` to fit any situation."
     }
   },
   "props": {
