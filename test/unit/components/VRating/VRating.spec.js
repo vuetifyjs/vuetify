@@ -132,16 +132,16 @@ test('VRating.js', ({ mount }) => {
     wrapper.setProps({ halfIncrements: true })
 
     expect(wrapper.vm.genHoverIndex({
-      offsetX: 4,
+      pageX: 0,
       target: {
-        getBoundingClientRect: () => ({ width: 10 })
+        getBoundingClientRect: () => ({ width: 10, left: 0 })
       }
     }, 1)).toBe(1.5)
 
     expect(wrapper.vm.genHoverIndex({
-      offsetX: 8,
+      pageX: 6,
       target: {
-        getBoundingClientRect: () => ({ width: 10 })
+        getBoundingClientRect: () => ({ width: 10, left: 0 })
       }
     }, 1)).toBe(2)
   })
