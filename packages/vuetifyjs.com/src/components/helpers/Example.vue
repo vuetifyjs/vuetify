@@ -73,10 +73,11 @@
         ref="panel"
         v-model="panel"
       ).elevation-0
-        v-expansion-panel-content(lazy)
+        v-expansion-panel-content
           v-divider(v-if="!readonly")
           v-tabs(
             ref="tabs"
+            v-model="tab"
             v-show="!readonly"
           )
             v-tab(
@@ -154,10 +155,11 @@
 
     data () {
       return {
+        tab: 'template',
         tabs: ['template', 'script', 'style'],
         component: null,
         invertedProxy: this.inverted,
-        panel: [],
+        panel: null,
         parsed: {
           script: null,
           style: null,
@@ -250,9 +252,10 @@
         this.$refs.codepen.submit()
       },
       togglePanel () {
-        const panel = this.$refs.panel.items[0]._uid
-
-        this.$refs.panel.panelClick(panel)
+        this.panel = this.panel === 0 ? null : 0
+        this.$refs.tabs && requestAnimationFrame(() => {
+          this.$refs.tabs.callSlider()
+        })
       }
     }
   }
