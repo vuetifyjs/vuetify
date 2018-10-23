@@ -1,0 +1,30 @@
+@import ../../styles/styles.sass
+
+.v-tooltip
+  &__content
+    background: rgba(map-get($grey, 'darken-2'), 0.9)
+    border-radius: 4px
+    color: #FFFFFF
+    font-size: 14px
+    line-height: 22px
+    display: inline-block
+    padding: 5px 16px
+    position: absolute
+    text-transform: initial
+    width: auto
+    opacity: 1
+    pointer-events: none
+
+    &[class*="-active"]
+      transition-timing-function: map-get($transition, 'linear-out-slow-in')
+
+    &[class*="enter-active"]
+      transition-duration: 150ms
+
+    &[class*="leave-active"]
+      transition-duration: 75ms
+
+    @media #{map-get($display-breakpoints, 'md-and-up')}
+      font-size: 10px
+      line-height: 14px
+      padding: 5px 8px
