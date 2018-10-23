@@ -77,21 +77,6 @@
     "pledge": "Gold ($50)"
   },
   {
-    "name": "Live Casino",
-    "href": "https://livecasino.com/",
-    "logo": "backers/casino.webp",
-    "type": "Patron",
-    "pledge": "Gold ($50)",
-    "dark": true
-  },
-  {
-    "name": "Nate Controls",
-    "href": "http://www.natecontrols.com/",
-    "logo": "backers/n8controls.png",
-    "type": "Patron",
-    "pledge": "Gold ($50)"
-  },
-  {
     "name": "Zweidenker",
     "href": "http://zweidenker.de/",
     "logo": "backers/zweidenker-logo-grey.svg",
