@@ -106,7 +106,7 @@ export default {
       }
     },
     setInputData (value) {
-      if (value == null) {
+      if (value == null || value === '') {
         this.inputHour = null
         this.inputMinute = null
         return
