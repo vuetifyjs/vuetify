@@ -382,7 +382,7 @@ test('VTabs', ({ mount }) => {
 
   it('should set dimensions when onResize is called', async () => {
     const setWidths = jest.fn()
-    const wrapper = mount(VTabs, {
+    mount(VTabs, {
       propsData: {
         value: 'foo'
       },
@@ -396,22 +396,19 @@ test('VTabs', ({ mount }) => {
       },
       methods: { setWidths }
     })
+
     expect(setWidths).not.toBeCalled()
 
     await ssrBootable()
 
     expect(setWidths).toHaveBeenCalledTimes(1)
 
-    await new Promise(resolve => setTimeout(resolve, 33))
+    await resizeWindow(800)
 
     expect(setWidths).toHaveBeenCalledTimes(2)
 
-    await resizeWindow(800)
-
-    expect(setWidths).toHaveBeenCalledTimes(3)
-
     await resizeWindow(1800)
 
-    expect(setWidths).toHaveBeenCalledTimes(4)
+    expect(setWidths).toHaveBeenCalledTimes(3)
   })
 })

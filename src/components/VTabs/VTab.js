@@ -26,9 +26,6 @@ export default {
   },
 
   computed: {
-    isDark () {
-      return this.tabGroup && this.tabGroup.selfIsDark
-    },
     classes () {
       return {
         'v-tabs__item': true,

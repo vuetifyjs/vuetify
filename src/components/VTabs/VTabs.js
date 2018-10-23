@@ -116,7 +116,7 @@ export default BaseItemGroup.extend({
         deprecate('@input', '@change', this)
       }
 
-      setTimeout(this.onResize, 33)
+      this.updateTabsView()
     },
     /**
      * When v-navigation-drawer changes the

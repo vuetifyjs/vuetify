@@ -218,6 +218,8 @@ test('VTimePickerClock.js', ({ mount }) => {
     finger.move(120, 0)
     expect(input).toBeCalledWith(0)
     finger.move(135, 90)
+    expect(input).toBeCalledWith(4)
+    finger.move(90, 135)
     expect(input).toBeCalledWith(7)
   })
 })

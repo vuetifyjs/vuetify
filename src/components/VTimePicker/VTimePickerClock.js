@@ -175,10 +175,10 @@ export default {
       const value = Math.round(handAngle / this.degreesPerUnit) +
         this.min + (insideClick ? this.roundCount : 0)
 
-      // Necessary to fix edge case when selecting left part of max value
+      // Necessary to fix edge case when selecting left part of the value(s) at 12 o'clock
       let newValue
       if (handAngle >= (360 - this.degreesPerUnit / 2)) {
-        newValue = insideClick ? this.max : this.min
+        newValue = insideClick ? this.max - this.roundCount + 1 : this.min
       } else {
         newValue = value
       }
