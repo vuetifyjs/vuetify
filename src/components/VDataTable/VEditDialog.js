@@ -54,6 +54,16 @@ export default {
       this.isActive = false
       this.$emit('cancel')
     },
+    dispatchSave (value) {
+      if (this.$el.dispatchEvent(new CustomEvent('save', { bubbles: false,
+        cancelable: true,
+        detail: {
+          vnodes: this.$slots.input
+        } }))) {
+        this.save(value)
+        this.$emit('save')
+      }
+    },
     focus () {
       const input = this.$refs.content.querySelector('input')
       input && input.focus()
@@ -74,8 +84,7 @@ export default {
       }, [
         this.genButton(this.cancel, this.cancelText),
         this.genButton(() => {
-          this.save(this.returnValue)
-          this.$emit('save')
+          this.dispatchSave(this.returnValue)
         }, this.saveText)
       ])
     },
@@ -86,8 +95,7 @@ export default {
             const input = this.$refs.content.querySelector('input')
             e.keyCode === keyCodes.esc && this.cancel()
             if (e.keyCode === keyCodes.enter && input) {
-              this.save(input.value)
-              this.$emit('save')
+              this.dispatchSave(input.value)
             }
           }
         },
