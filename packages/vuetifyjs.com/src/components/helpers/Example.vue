@@ -83,6 +83,7 @@
             v-tab(
               v-for="tab in tabs"
               :key="tab"
+              :href="`#${tab}`"
               v-show="parsed[tab]"
               active-class=""
               class="body-2"
@@ -92,8 +93,8 @@
             )
               v-tab-item(
                 v-for="tab in tabs"
-                :id="null"
                 :key="tab"
+                :value="tab"
               )
                 helpers-markup(lang="html" v-if="parsed[tab]").ma-0
                   | {{ parsed[tab] }}
@@ -188,7 +189,7 @@
 
     watch: {
       panel () {
-        this.$nextTick(this.$refs.tabs.callSlider)
+        requestAnimationFrame(this.$refs.tabs.callSlider)
       }
     },
 
