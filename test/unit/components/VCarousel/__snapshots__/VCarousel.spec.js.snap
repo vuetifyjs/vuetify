@@ -160,9 +160,7 @@ exports[`VCarousel.ts should render component with custom icon and match snapsho
     </div>
   </div>
   <div class="v-window__container">
-    <div class="v-window-item v-window-x-transition-enter v-window-x-transition-enter-active"
-         style
-    >
+    <div class="v-window-item">
       <div class="v-responsive v-image v-carousel__item"
            style="height: 500px;"
       >
@@ -465,9 +463,7 @@ exports[`VCarousel.ts should render component without delimiters 1`] = `
     </button>
   </div>
   <div class="v-window__container">
-    <div class="v-window-item v-window-x-transition-enter v-window-x-transition-enter-active"
-         style
-    >
+    <div class="v-window-item">
       <div class="v-responsive v-image v-carousel__item"
            style="height: 500px;"
       >

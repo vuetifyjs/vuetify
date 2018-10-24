@@ -5,8 +5,8 @@ import { test, touch } from '@/test'
 test('VWindow.ts', ({ mount }) => {
   it('it should return the correct transition', async () => {
     const wrapper = mount(VWindow)
-    // Wait for booted
-    await wrapper.vm.$nextTick()
+    // Force booted
+    wrapper.setData({ isBooted: true })
 
     expect(wrapper.vm.computedTransition).toBe('v-window-x-transition')
 

@@ -83,6 +83,10 @@ export default VWindow.extend({
     }
   },
 
+  mounted () {
+    this.startTimeout()
+  },
+
   methods: {
     genDelimiters (): VNode {
       return this.$createElement('div', {
@@ -163,11 +167,6 @@ export default VWindow.extend({
           }
         }
       }, children)
-    },
-    init () {
-      VWindow.options.methods.init.call(this)
-
-      this.startTimeout()
     },
     restartTimeout () {
       this.slideTimeout && clearTimeout(this.slideTimeout)

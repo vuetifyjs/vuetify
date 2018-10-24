@@ -89,18 +89,11 @@ export const BaseItemGroup = mixins(
     }
   },
 
-  mounted () {
-    this.$nextTick(this.init)
-  },
-
   methods: {
     getValue (item: GroupableInstance, i: number): unknown {
       return item.value == null || item.value === ''
         ? i
         : item.value
-    },
-    init () {
-      this.updateItemsState()
     },
     onClick (item: GroupableInstance, index: number) {
       this.updateInternalValue(
@@ -111,6 +104,13 @@ export const BaseItemGroup = mixins(
       const index = this.items.push(item) - 1
 
       item.$on('change', () => this.onClick(item, index))
+
+      // If no value provided and mandatory,
+      // assign first registered item
+      if (this.mandatory && this.internalLazyValue == null) {
+        this.updateMandatory()
+      }
+
       this.updateItem(item, index)
     },
     unregister (item: GroupableInstance) {
