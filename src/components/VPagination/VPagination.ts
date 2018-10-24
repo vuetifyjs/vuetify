@@ -143,6 +143,9 @@ export default mixins(Colorable, Themeable).extend({
           class: {
             'v-pagination__navigation--disabled': disabled
           },
+          attrs: {
+            type: 'button'
+          },
           on: disabled ? {} : { click: fn }
         }, [h(VIcon, [icon])])
       ])
@@ -153,6 +156,9 @@ export default mixins(Colorable, Themeable).extend({
         staticClass: 'v-pagination__item',
         class: {
           'v-pagination__item--active': i === this.value
+        },
+        attrs: {
+          type: 'button'
         },
         on: {
           click: () => this.$emit('input', i)
