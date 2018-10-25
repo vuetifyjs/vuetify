@@ -11,7 +11,7 @@
     },
     "directory": {
       "header": "Async items",
-      "desc": "Save requests by supplying a _Promise_ callback and load your data only if/when you need it"
+      "desc": "You can dynamically load child data by supplying a _Promise_ callback to the `load-children` prop. This callback will be executed the first time a user tries to expand an item that has a children property that is an empty array."
     },
     "hotspots": {
       "header": "Custom selectable icons",
