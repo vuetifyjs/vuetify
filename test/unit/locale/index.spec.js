@@ -1,5 +1,5 @@
 import { test } from '@/test'
-import locales from '@/locale'
+import * as locales from '@/locale'
 import fs from 'fs'
 
 test('locale.js', ({ mount }) => {
