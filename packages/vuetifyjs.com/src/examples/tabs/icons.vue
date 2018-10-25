@@ -8,7 +8,7 @@
   >
     <v-tabs-slider color="yellow"></v-tabs-slider>
     <v-tab
-      v-for="i in 15"
+      v-for="i in 30"
       :href="'#tab-' + i"
       :key="i"
     >
@@ -17,7 +17,7 @@
 
     <v-tabs-items>
       <v-tab-item
-        v-for="i in 15"
+        v-for="i in 30"
         :id="'tab-' + i"
         :key="i"
       >
