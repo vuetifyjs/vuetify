@@ -253,4 +253,24 @@ test('VItemGroup.ts', ({ mount }) => {
 
     expect(change).toBeCalledWith(undefined)
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/5384
+  it('should not unregister children when is destroyed', () => {
+    const wrapper = mount(VItemGroup, {
+      propsData: {
+        value: 0
+      },
+      slots: {
+        default: [Mock]
+      }
+    })
+
+    const change = jest.fn()
+
+    wrapper.vm.$on('change', change)
+
+    wrapper.destroy()
+
+    expect(change).not.toBeCalled()
+  })
 })
