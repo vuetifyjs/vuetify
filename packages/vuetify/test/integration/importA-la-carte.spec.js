@@ -37,6 +37,7 @@ import VMenu from '@/components/VMenu'
 import VMessages from '@/components/VMessages'
 import VNavigationDrawer from '@/components/VNavigationDrawer'
 import VOverflowBtn from '@/components/VOverflowBtn'
+import VOverlay from '@/components/VOverlay'
 import VPagination from '@/components/VPagination'
 import VSheet from '@/components/VSheet'
 import VParallax from '@/components/VParallax'
@@ -105,6 +106,7 @@ const components = {
   VMessages,
   VNavigationDrawer,
   VOverflowBtn,
+  VOverlay,
   VPagination,
   VSheet,
   VParallax,

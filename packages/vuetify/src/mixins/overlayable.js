@@ -1,7 +1,7 @@
 import '../stylus/components/_overlay.styl'
 
 // Utils
-import { keyCodes } from '../util/helpers'
+import { keyCodes, addOnceEventListener } from '../util/helpers'
 import VOverlay from '../components/VOverlay'
 
 /* @vue/component */
@@ -41,21 +41,24 @@ export default {
 
       this.hideScroll()
 
-      this.overlay.zIndex = this.activeZIndex && this.activeZIndex
+      this.overlay.zIndex = (this.activeZIndex && this.activeZIndex) - 1 || 1
 
-      requestAnimationFrame(() => {
+      // Removed transition-delay in favor of this
+      // TODO: Make this better, maybe 2.0
+      setTimeout(() => {
         this.overlay.isActive = true
-      })
+      }, 150)
     },
     removeOverlay () {
       if (!this.overlay) return this.showScroll()
 
-      this.overlay.isActive = false
-
-      this.$nextTick(() => {
+      addOnceEventListener(this.overlay.$el, 'transitionend', () => {
+        this.overlay.$el.parentNode.removeChild(this.overlay.$el)
         this.overlay.$destroy()
         this.overlay = null
       })
+
+      this.overlay.isActive = false
     },
     /**
      * @param {Event} e

@@ -1,7 +1,14 @@
 @import '../bootstrap'
+@import '../theme'
+
+v-overlay($material)
+  color: $material.text.primary
+
+theme(v-overlay, "v-overlay")
 
 .v-overlay
   align-items: center
+  border-radius: inherit
   display: flex
   justify-content: center
   position: fixed
@@ -10,39 +17,25 @@
   right: 0
   bottom: 0
   pointer-events: none
-  // The overlay has a dynamically set
-  // z-index, we want the transition
-  // timing to affect its changing
-  // https://github.com/vuetifyjs/vuetify/issues/2146
   transition: $primary-transition
-  // This is the standard index
-  z-index: 5
+
+  &__content
+    position: relative
+
+  &__scrim
+    border-radius: inherit
+    bottom: 0
+    height: 100%
+    left: 0
+    position: absolute
+    right: 0
+    top: 0
+    transition: .3s cubic-bezier(.25,.8,.50,1)
+    will-change: opacity
 
   &--absolute
     position: absolute
 
-  &:before
-    background-color: rgba(33, 33, 33, 1)
-    bottom: 0
-    content: ''
-    height: 100%
-    left: 0
-    opacity: 0
-    position: absolute
-    right: 0
-    top: 0
-    transition: inherit
-    // Delay the transition to avoid a
-    // rendering bug that is visible
-    // within Edge and Firefox
-    // https://github.com/vuetifyjs/vuetify/issues/2146
-    transition-delay: 150ms
-    width: 100%
-    will-change: opacity
-
   &--active
     pointer-events: auto
     touch-action: none
-
-    &:before
-      opacity: .46
