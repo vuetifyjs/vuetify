@@ -75,7 +75,8 @@
     ],
     "examples": [
       "textDividers",
-      "iconDividers"
+      "iconDividers",
+      "itemSlot"
     ],
     "spec": false
   },

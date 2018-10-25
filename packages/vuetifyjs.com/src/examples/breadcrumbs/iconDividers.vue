@@ -1,50 +1,35 @@
 <template>
   <div>
-    <v-breadcrumbs>
+    <v-breadcrumbs :items="items">
       <v-icon slot="divider">forward</v-icon>
-
-      <v-breadcrumbs-item
-        v-for="item in items"
-        :disabled="item.disabled"
-        :key="item.text"
-      >
-        {{ item.text }}
-      </v-breadcrumbs-item>
     </v-breadcrumbs>
 
-    <v-breadcrumbs>
+    <v-breadcrumbs :items="items">
       <v-icon slot="divider">chevron_right</v-icon>
-
-      <v-breadcrumbs-item
-        v-for="item in items"
-        :disabled="item.disabled"
-        :key="item.text"
-      >
-        {{ item.text }}
-      </v-breadcrumbs-item>
     </v-breadcrumbs>
   </div>
 </template>
 
 <script>
   export default {
-    data () {
-      return {
-        items: [
-          {
-            text: 'Dashboard',
-            disabled: false
-          },
-          {
-            text: 'Link 1',
-            disabled: false
-          },
-          {
-            text: 'Link 2',
-            disabled: true
-          }
-        ]
-      }
-    }
+    data: () => ({
+      items: [
+        {
+          text: 'Dashboard',
+          disabled: false,
+          href: 'breadcrumbs_dashboard'
+        },
+        {
+          text: 'Link 1',
+          disabled: false,
+          href: 'breadcrumbs_link_1'
+        },
+        {
+          text: 'Link 2',
+          disabled: true,
+          href: 'breadcrumbs_link_2'
+        }
+      ]
+    })
   }
 </script>
