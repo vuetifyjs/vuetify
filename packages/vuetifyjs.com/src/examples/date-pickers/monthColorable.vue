@@ -13,8 +13,8 @@
   export default {
     data () {
       return {
-        picker: null,
-        picker2: null
+        picker: new Date().toISOString().substr(0, 7),
+        picker2: new Date().toISOString().substr(0, 7)
       }
     }
   }

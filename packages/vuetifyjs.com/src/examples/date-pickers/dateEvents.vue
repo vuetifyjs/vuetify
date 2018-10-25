@@ -23,8 +23,8 @@
   export default {
     data: () => ({
       arrayEvents: null,
-      date1: null,
-      date2: null
+      date1: new Date().toISOString().substr(0, 10),
+      date2: new Date().toISOString().substr(0, 10)
     }),
 
     mounted () {

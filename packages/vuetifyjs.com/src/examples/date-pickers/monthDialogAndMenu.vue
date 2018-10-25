@@ -64,7 +64,7 @@
 <script>
   export default {
     data: () => ({
-      date: null,
+      date: new Date().toISOString().substr(0, 7),
       menu: false,
       modal: false
     })

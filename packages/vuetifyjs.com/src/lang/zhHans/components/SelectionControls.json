@@ -54,6 +54,10 @@
     "switchesColors": {
       "header": "开关 - 颜色",
       "desc": "开关也可以通过 `color` 属性使用内置的颜色来设置色彩。"
+    },
+    "labelSlot": {
+      "header": "Label slot",
+      "desc": "Selection controls' labels can be defined in `label` slot - that will allow to use HTML content"
     }
   },
   "props": {

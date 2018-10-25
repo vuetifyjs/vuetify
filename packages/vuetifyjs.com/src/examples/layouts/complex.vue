@@ -94,10 +94,10 @@
 <script>
   export default {
     data: () => ({
-      drawer: true,
-      drawerRight: true,
-      right: null,
-      left: null
+      drawer: null,
+      drawerRight: null,
+      right: false,
+      left: false
     }),
     props: {
       source: String

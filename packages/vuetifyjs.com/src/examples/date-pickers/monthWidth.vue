@@ -19,7 +19,7 @@
 <script>
   export default {
     data: () => ({
-      date: '2018-03'
+      date: new Date().toISOString().substr(0, 7)
     })
   }
 </script>

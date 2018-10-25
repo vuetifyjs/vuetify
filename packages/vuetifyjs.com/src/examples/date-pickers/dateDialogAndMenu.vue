@@ -54,11 +54,9 @@
     </v-flex>
     <v-flex xs12 sm6 md4>
       <v-menu
-        ref="menu2"
         :close-on-content-click="false"
         v-model="menu2"
         :nudge-right="40"
-        :return-value.sync="date"
         lazy
         transition="scale-transition"
         offset-y
@@ -72,8 +70,7 @@
           prepend-icon="event"
           readonly
         ></v-text-field>
-        <v-date-picker v-model="date" @input="$refs.menu2.save(date)"></v-date-picker>
-
+        <v-date-picker v-model="date" @input="menu2 = false"></v-date-picker>
       </v-menu>
     </v-flex>
     <v-spacer></v-spacer>
@@ -83,7 +80,7 @@
 <script>
   export default {
     data: () => ({
-      date: null,
+      date: new Date().toISOString().substr(0, 10),
       menu: false,
       modal: false,
       menu2: false

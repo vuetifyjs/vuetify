@@ -60,6 +60,10 @@
             "switchesColors": {
                 "header": "Switches - Colors",
                 "desc": "Puedes cambiar el color de los switches si usas cualquiera de los colores prefabricados y los nombres contextuales en la prop `color`."
+            },
+            "labelSlot": {
+              "header": "Label slot",
+              "desc": "Selection controls' labels can be defined in `label` slot - that will allow to use HTML content"
             }
         }
     ],

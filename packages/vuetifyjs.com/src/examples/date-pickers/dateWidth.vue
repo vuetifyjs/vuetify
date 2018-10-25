@@ -17,7 +17,7 @@
 <script>
   export default {
     data: () => ({
-      date: '2018-03-02'
+      date: new Date().toISOString().substr(0, 10)
     })
   }
 </script>

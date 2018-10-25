@@ -53,6 +53,10 @@
     "switchesColors": {
       "header": "Switches - Colors",
       "desc": "Switches can be colored by using any of the builtin colors and contextual names using the `color` prop."
+    },
+    "labelSlot": {
+      "header": "Label slot",
+      "desc": "Selection controls' labels can be defined in `label` slot - that will allow to use HTML content"
     }
   },
   "props": {
