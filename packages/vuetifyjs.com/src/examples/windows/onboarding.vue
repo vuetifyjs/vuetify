@@ -26,7 +26,7 @@
       </v-window-item>
     </v-window>
 
-    <v-card-actions>
+    <v-card-actions class="justify-space-between">
       <v-btn
         flat
         @click="prev"
