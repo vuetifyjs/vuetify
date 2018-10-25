@@ -18,6 +18,10 @@
       "header": "Date pickers - formatting date",
       "desc": "If you need to display date in the custom format (different than YYYY-MM-DD) you need to use the formatting function."
     },
+    "dateFormattingMomentDatefns": {
+      "header": "Date pickers - formatting date using external libs",
+      "desc": "Formatting dates is possible also with external libs such as Moment.js or date-fns"
+    },
     "dateAllowedDates": {
       "header": "Date pickers - Allowed dates",
       "desc": "You can specify allowed dates using arrays, objects, and functions."
