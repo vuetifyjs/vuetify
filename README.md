@@ -210,7 +210,7 @@ It is important to note that for each release, the detailed changes are document
 
 ### Contributing Guide
 
-You can request features using the [Feature Request Template](https://github.com/vuetifyjs/vuetify/issues/new?template=feature_request.md) or report bugs using the [Bug Report Template](https://github.com/vuetifyjs/vuetify/issues/new?template=bug_report.md) and create a minimal reproduction with a [CodePen template](https://template.vuetifyjs.com/) or a full project at [CodeSandbox](https://codesandbox.io/s/vue).
+You can report issues by following the [Issue Template](https://issues.vuetifyjs.com/) and you can create a minimal reproduction with a [CodePen template](https://template.vuetifyjs.com/) or a full project at [CodeSandbox](https://codesandbox.io/s/vue).
 
 ### Good First Issue
 
