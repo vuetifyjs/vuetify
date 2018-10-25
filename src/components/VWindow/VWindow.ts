@@ -75,6 +75,10 @@ export default BaseItemGroup.extend({
     internalIndex: 'updateReverse'
   },
 
+  mounted () {
+    this.$nextTick(() => (this.isBooted = true))
+  },
+
   methods: {
     genContainer (): VNode {
       return this.$createElement('div', {
@@ -86,12 +90,6 @@ export default BaseItemGroup.extend({
           height: this.internalHeight
         }
       }, this.$slots.default)
-    },
-    init () {
-      BaseItemGroup.options.methods.init.call(this)
-
-      // Ensure no entry animation
-      this.$nextTick(() => (this.isBooted = true))
     },
     next () {
       this.isReverse = false

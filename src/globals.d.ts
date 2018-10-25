@@ -76,6 +76,7 @@ declare module 'vue/types/vue' {
 
   export interface Vue {
     _uid: number
+    _isDestroyed: boolean
 
     /** bindObjectListeners */
      _g (data: VNodeData, value: {}): VNodeData

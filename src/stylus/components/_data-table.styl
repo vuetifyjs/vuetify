@@ -5,7 +5,7 @@
 v-datatable($material)
   thead
     th.column.sortable
-      i
+      .v-icon
         color: rgba($material.fg-color, $material.disabledORhints-text-percent)
 
       &:hover
@@ -14,7 +14,7 @@ v-datatable($material)
       &.active
         color: rgba($material.fg-color, $material.primary-text-percent)
 
-        i
+        .v-icon
           color: rgba($material.fg-color, $material.primary-text-percent)
 
   .v-datatable__actions
@@ -33,7 +33,7 @@ theme(v-datatable, "v-datatable")
       cursor: pointer
       outline: 0
 
-      i
+      .v-icon
         font-size: 16px
         display: inline-block
         opacity: 0
@@ -41,17 +41,17 @@ theme(v-datatable, "v-datatable")
 
       &:focus,
       &:hover
-        i
+        .v-icon
           opacity: .6
 
       &.active
         transform: none
 
-        i
+        .v-icon
           opacity: 1
 
         &.desc
-          i
+          .v-icon
             transform: rotate(-180deg)
 
 /** Actions */
