@@ -47,16 +47,18 @@
     }
   },
   "props": {
-    "disabled": "Disabled the ability to open the dialog",
+    "dark": "Mixins.Themeable.props.dark",
+    "disabled": "Disables the ability to open the dialog",
     "fullWidth": "Specifies the modal to force 100% width",
     "fullscreen": "Changes layout for fullscreen display",
-    "hideOverlay": "Hide the display of the overlay",
+    "hideOverlay": "Hides the display of the overlay",
     "lazy": "Mixins.Bootable.props.lazy",
+    "light": "Mixins.Themeable.props.light",
     "maxWidth": "The maximum width of the content",
     "noClickAnimation": "Disables the bounce effect when clicking outside of a `v-dialog`'s content when using the **persistent** prop",
     "origin": "Mixins.Transitionable.props.origin",
     "persistent": "Clicking outside will not dismiss the dialog",
-    "scrollable": "When set to true, expects a card, card-title, card-text and card-actions. Additionally card-text should have specified height. Will set card-text to overflow-y",
+    "scrollable": "When set to true, expects a card, card-title, card-text and card-actions. Additionally, card-text should have specified height. Will set card-text to overflow-y",
     "transition": "Mixins.Transitionable.props.transition",
     "width": "Sets the dialog width"
   }
