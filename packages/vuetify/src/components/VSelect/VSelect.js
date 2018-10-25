@@ -680,7 +680,9 @@ export default {
     },
     setValue (value) {
       this.internalValue = value
-      this.$emit('change', value)
+      this.$nextTick(() => {
+        this.$emit('change', value)
+      })
     }
   }
 }

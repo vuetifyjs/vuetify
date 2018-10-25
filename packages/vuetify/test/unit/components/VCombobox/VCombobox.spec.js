@@ -103,6 +103,7 @@ test('VCombobox', ({ shallow }) => {
     input.element.value = 'foo'
     input.trigger('input')
     input.trigger('keydown.enter')
+    await wrapper.vm.$nextTick()
 
     expect(change).toBeCalledWith('foo')
     expect(change).toHaveBeenCalledTimes(2)
@@ -111,6 +112,7 @@ test('VCombobox', ({ shallow }) => {
     input.element.value = ''
     input.trigger('input')
     input.trigger('keydown.tab')
+    await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.internalValue).toBe('')
     expect(change).toHaveBeenCalledTimes(4)
@@ -149,6 +151,7 @@ test('VCombobox', ({ shallow }) => {
     input.trigger('input')
 
     input.trigger('keydown.tab')
+    await wrapper.vm.$nextTick()
     expect(change).toHaveBeenCalledWith('foo')
 
     input.trigger('keydown.esc')

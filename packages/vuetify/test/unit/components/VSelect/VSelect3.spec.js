@@ -164,6 +164,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect(change).not.toBeCalled()
 
     wrapper.vm.setValue('foo')
+    await wrapper.vm.$nextTick()
 
     expect(change).toBeCalledWith('foo')
     expect(change).toHaveBeenCalledTimes(1)
