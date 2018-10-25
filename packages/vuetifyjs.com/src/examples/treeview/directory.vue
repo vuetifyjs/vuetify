@@ -126,14 +126,14 @@
     },
 
     methods: {
-      async fetchUsers () {
+      async fetchUsers (item) {
         // Remove in 6 months and say
         // you've made optimizations! :)
         await pause(1500)
 
-        fetch('https://jsonplaceholder.typicode.com/users')
+        return fetch('https://jsonplaceholder.typicode.com/users')
           .then(res => res.json())
-          .then(json => (this.users = json))
+          .then(json => (item.children.push(...json)))
           .catch(err => console.warn(err))
       },
       randomAvatar () {
