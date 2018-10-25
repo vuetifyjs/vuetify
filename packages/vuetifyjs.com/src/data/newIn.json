@@ -7,6 +7,9 @@
     "v-autocomplete": {
       "no-filter": "1.1"
     },
+    "v-breadcrumbs": {
+      "items": "1.2"
+    },
     "v-combobox": {
       "delimiters": "1.1"
     },

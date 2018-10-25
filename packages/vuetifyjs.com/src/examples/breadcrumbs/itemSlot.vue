@@ -1,8 +1,10 @@
 <template>
   <div>
-    <v-breadcrumbs :items="items" divider=">"></v-breadcrumbs>
-
-    <v-breadcrumbs :items="items" divider="-"></v-breadcrumbs>
+    <v-breadcrumbs :items="items">
+      <template slot="item" slot-scope="props">
+        <a :href="props.item.href">{{ props.item.text.toUpperCase() }}</a>
+      </template>
+    </v-breadcrumbs>
   </div>
 </template>
 
