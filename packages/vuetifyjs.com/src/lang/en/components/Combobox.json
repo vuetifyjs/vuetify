@@ -5,7 +5,7 @@
   "examples": {
     "combobox": {
       "header": "Combobox",
-      "desc": "With combobox you can allow a user to create new values that may not be present in a provided items list."
+      "desc": "With Combobox, you can allow a user to create new values that may not be present in a provided items list."
     },
     "noData": {
       "header": "No data with chips",

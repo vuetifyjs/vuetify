@@ -24,7 +24,7 @@
     },
     "hideControls": {
       "header": "Hide controls",
-      "desc": "You can hide the navigtion controls with the `hide-controls` prop.",
+      "desc": "You can hide the navigation controls with the `hide-controls` prop.",
       "uninverted": true
     }
   },
