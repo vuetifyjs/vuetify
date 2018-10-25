@@ -231,7 +231,7 @@
         return this.genTypescriptDef(props)
       },
       genDefault (value) {
-        if (typeof value !== 'string') return JSON.stringify(value)
+        if (typeof value !== 'string') return JSON.stringify(value, null, 2)
         else return value
       },
       genTypescriptDef (obj) {

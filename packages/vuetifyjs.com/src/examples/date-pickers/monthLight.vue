@@ -9,7 +9,7 @@
   export default {
     data () {
       return {
-        picker: null,
+        picker: new Date().toISOString().substr(0, 7),
         landscape: false
       }
     }

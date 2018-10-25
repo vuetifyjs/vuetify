@@ -57,7 +57,7 @@
     },
     "systemBarsStatusWindow": {
       "header": "System bars - status/window",
-      "desc": "System bars are useful for notification icons on mobile and desktop. For live examples of, head to the pre-defined layouts."
+      "desc": "System bars are useful for notification icons on mobile and desktop. For live examples of these, head to the pre-defined layouts."
     }
   },
   "props": {

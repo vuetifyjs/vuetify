@@ -54,6 +54,10 @@
     "switchesColors": {
       "header": "Switches - Цвета",
       "desc": "Switches можно покрасить, используя любой из встроенных цветов и контекстных имён, используя свойство `color`."
+    },
+    "labelSlot": {
+      "header": "Label slot",
+      "desc": "Selection controls' labels can be defined in `label` slot - that will allow to use HTML content"
     }
   },
   "props": {

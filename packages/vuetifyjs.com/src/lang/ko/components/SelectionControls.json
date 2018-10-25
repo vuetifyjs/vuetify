@@ -54,6 +54,10 @@
     "switchesColors": {
       "header": "스위치 - 색깔",
       "desc": "`color` prop를 이용하면 스위치를 어떠한 내장 색(builtin colors) 이나 contextual 이름에 대응 하는 색으로 만들 수 있습니다."
+    },
+    "labelSlot": {
+      "header": "Label slot",
+      "desc": "Selection controls' labels can be defined in `label` slot - that will allow to use HTML content"
     }
   },
   "props": {

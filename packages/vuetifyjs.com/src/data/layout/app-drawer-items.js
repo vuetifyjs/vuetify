@@ -103,6 +103,9 @@ export default [
           { name: 'windows', title: 'Windows' }
         ]
       },
+      { name: 'hover', title: 'Hover' },
+      { name: 'icons', title: 'Icons' },
+      { name: 'images', 'title': 'Images' },
       {
         title: 'Inputs & controls',
         group: '(autocompletes|combobox|forms|inputs|overflow-btns|selects|selection|text-fields|sliders|textarea)',
@@ -120,9 +123,6 @@ export default [
           { name: 'text-fields', title: 'Text fields' }
         ]
       },
-      { name: 'hover', title: 'Hover' },
-      { name: 'icons', title: 'Icons' },
-      { name: 'images', 'title': 'Images' },
       { name: 'jumbotrons', title: 'Jumbotrons', badge: 'deprecated', color: 'black' },
       { name: 'lists', title: 'Lists' },
       { name: 'menus', title: 'Menus' },

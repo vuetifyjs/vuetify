@@ -13,7 +13,7 @@
   export default {
     data () {
       return {
-        month1: null,
+        month1: new Date().toISOString().substr(0, 7),
         month2: '2013-09'
       }
     }
