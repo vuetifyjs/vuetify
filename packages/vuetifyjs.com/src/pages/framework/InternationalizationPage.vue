@@ -30,8 +30,8 @@
         |
         | Vue.use(Vuetify, {
         |   lang: {
-        |     locales: { zhHans, pl, sv },
-        |     current: 'zhHans'
+        |     locales: { 'zh-Hans': zhHans, pl, sv },
+        |     current: 'zh-Hans'
         |   }
         | })
         |
