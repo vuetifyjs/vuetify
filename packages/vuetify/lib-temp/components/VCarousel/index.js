@@ -1,0 +1,10 @@
+import VCarousel from './VCarousel';
+import VCarouselItem from './VCarouselItem';
+export { VCarousel, VCarouselItem };
+export default {
+    $_vuetify_subcomponents: {
+        VCarousel,
+        VCarouselItem
+    }
+};
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi9zcmMvY29tcG9uZW50cy9WQ2Fyb3VzZWwvaW5kZXgudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxTQUFTLE1BQU0sYUFBYSxDQUFBO0FBQ25DLE9BQU8sYUFBYSxNQUFNLGlCQUFpQixDQUFBO0FBRTNDLE9BQU8sRUFBRSxTQUFTLEVBQUUsYUFBYSxFQUFFLENBQUE7QUFFbkMsZUFBZTtJQUNiLHVCQUF1QixFQUFFO1FBQ3ZCLFNBQVM7UUFDVCxhQUFhO0tBQ2Q7Q0FDRixDQUFBIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IFZDYXJvdXNlbCBmcm9tICcuL1ZDYXJvdXNlbCdcbmltcG9ydCBWQ2Fyb3VzZWxJdGVtIGZyb20gJy4vVkNhcm91c2VsSXRlbSdcblxuZXhwb3J0IHsgVkNhcm91c2VsLCBWQ2Fyb3VzZWxJdGVtIH1cblxuZXhwb3J0IGRlZmF1bHQge1xuICAkX3Z1ZXRpZnlfc3ViY29tcG9uZW50czoge1xuICAgIFZDYXJvdXNlbCxcbiAgICBWQ2Fyb3VzZWxJdGVtXG4gIH1cbn1cbiJdfQ==

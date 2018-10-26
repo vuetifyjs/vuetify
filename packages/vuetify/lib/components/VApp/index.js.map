@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../src/components/VApp/index.js"],"names":[],"mappings":"AAAA,OAAO,IAAP,MAAiB,QAAjB;AAEA,SAAS,IAAT;AACA,eAAe,IAAf","sourcesContent":["import VApp from './VApp'\n\nexport { VApp }\nexport default VApp\n"],"sourceRoot":""}

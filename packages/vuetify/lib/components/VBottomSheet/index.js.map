@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../src/components/VBottomSheet/index.js"],"names":[],"mappings":"AAAA,OAAO,YAAP,MAAyB,gBAAzB;AAEA,SAAS,YAAT;AACA,eAAe,YAAf","sourcesContent":["import VBottomSheet from './VBottomSheet'\n\nexport { VBottomSheet }\nexport default VBottomSheet\n"],"sourceRoot":""}

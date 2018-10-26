@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../src/components/VMenu/index.js"],"names":[],"mappings":";;;;;;;;;;;;;QAES,K,GAAA,e;kBACM,e","sourcesContent":["import VMenu from './VMenu'\n\nexport { VMenu }\nexport default VMenu\n"],"sourceRoot":""}

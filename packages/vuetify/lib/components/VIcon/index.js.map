@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../src/components/VIcon/index.ts"],"names":[],"mappings":"AAAA,OAAO,KAAP,MAAkB,SAAlB;AAEA,SAAS,KAAT;AACA,eAAe,KAAf","sourcesContent":["import VIcon from './VIcon'\n\nexport { VIcon }\nexport default VIcon\n"],"sourceRoot":""}

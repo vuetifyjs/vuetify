@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../src/components/VDataIterator/index.js"],"names":[],"mappings":"AAAA,OAAO,aAAP,MAA0B,iBAA1B;AAEA,SAAS,aAAT;AACA,eAAe,aAAf","sourcesContent":["import VDataIterator from './VDataIterator'\n\nexport { VDataIterator }\nexport default VDataIterator\n"],"sourceRoot":""}

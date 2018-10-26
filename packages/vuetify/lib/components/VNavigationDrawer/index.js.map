@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../src/components/VNavigationDrawer/index.js"],"names":[],"mappings":"AAAA,OAAO,iBAAP,MAA8B,qBAA9B;AAEA,SAAS,iBAAT;AACA,eAAe,iBAAf","sourcesContent":["import VNavigationDrawer from './VNavigationDrawer'\n\nexport { VNavigationDrawer }\nexport default VNavigationDrawer\n"],"sourceRoot":""}

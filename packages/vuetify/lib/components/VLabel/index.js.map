@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../src/components/VLabel/index.js"],"names":[],"mappings":"AAAA,OAAO,MAAP,MAAmB,UAAnB;AAEA,SAAS,MAAT;AACA,eAAe,MAAf","sourcesContent":["import VLabel from './VLabel'\n\nexport { VLabel }\nexport default VLabel\n"],"sourceRoot":""}

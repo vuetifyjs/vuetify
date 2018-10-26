@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../src/components/VSpeedDial/index.js"],"names":[],"mappings":"AAAA,OAAO,UAAP,MAAuB,cAAvB;AAEA,SAAS,UAAT;AACA,eAAe,UAAf","sourcesContent":["import VSpeedDial from './VSpeedDial'\n\nexport { VSpeedDial }\nexport default VSpeedDial\n"],"sourceRoot":""}

@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../src/components/VDialog/index.js"],"names":[],"mappings":";;;;;;;;;;;;;QAES,O,GAAA,iB;kBACM,iB","sourcesContent":["import VDialog from './VDialog'\n\nexport { VDialog }\nexport default VDialog\n"],"sourceRoot":""}

@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../src/components/VForm/index.js"],"names":[],"mappings":";;;;;;;;;;;;;QAES,K,GAAA,e;kBACM,e","sourcesContent":["import VForm from './VForm'\n\nexport { VForm }\nexport default VForm\n"],"sourceRoot":""}

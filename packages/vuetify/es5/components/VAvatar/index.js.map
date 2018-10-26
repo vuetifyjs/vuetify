@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../src/components/VAvatar/index.ts"],"names":[],"mappings":";;;;;;;;;;;;;QAES,O,GAAA,iB;kBACM,iB","sourcesContent":["import VAvatar from './VAvatar'\n\nexport { VAvatar }\nexport default VAvatar\n"],"sourceRoot":""}
