@@ -1,0 +1,10 @@
+import VWindow from './VWindow';
+import VWindowItem from './VWindowItem';
+export { VWindow, VWindowItem };
+export default {
+    $_vuetify_subcomponents: {
+        VWindow,
+        VWindowItem
+    }
+};
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi9zcmMvY29tcG9uZW50cy9WV2luZG93L2luZGV4LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sT0FBTyxNQUFNLFdBQVcsQ0FBQTtBQUMvQixPQUFPLFdBQVcsTUFBTSxlQUFlLENBQUE7QUFFdkMsT0FBTyxFQUFFLE9BQU8sRUFBRSxXQUFXLEVBQUUsQ0FBQTtBQUUvQixlQUFlO0lBQ2IsdUJBQXVCLEVBQUU7UUFDdkIsT0FBTztRQUNQLFdBQVc7S0FDWjtDQUNGLENBQUEiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgVldpbmRvdyBmcm9tICcuL1ZXaW5kb3cnXG5pbXBvcnQgVldpbmRvd0l0ZW0gZnJvbSAnLi9WV2luZG93SXRlbSdcblxuZXhwb3J0IHsgVldpbmRvdywgVldpbmRvd0l0ZW0gfVxuXG5leHBvcnQgZGVmYXVsdCB7XG4gICRfdnVldGlmeV9zdWJjb21wb25lbnRzOiB7XG4gICAgVldpbmRvdyxcbiAgICBWV2luZG93SXRlbVxuICB9XG59XG4iXX0=

@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../src/components/VParallax/index.ts"],"names":[],"mappings":";;;;;;;;;;;;;QAES,S,GAAA,mB;kBACM,mB","sourcesContent":["import VParallax from './VParallax'\n\nexport { VParallax }\nexport default VParallax\n"],"sourceRoot":""}

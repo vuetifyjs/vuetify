@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../src/components/VSnackbar/index.ts"],"names":[],"mappings":";;;;;;;;;;;;;QAES,S,GAAA,mB;kBACM,mB","sourcesContent":["import VSnackbar from './VSnackbar'\n\nexport { VSnackbar }\nexport default VSnackbar\n"],"sourceRoot":""}

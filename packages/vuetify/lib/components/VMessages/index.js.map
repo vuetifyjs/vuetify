@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../src/components/VMessages/index.js"],"names":[],"mappings":"AAAA,OAAO,SAAP,MAAsB,aAAtB;AAEA,SAAS,SAAT;AACA,eAAe,SAAf","sourcesContent":["import VMessages from './VMessages'\n\nexport { VMessages }\nexport default VMessages\n"],"sourceRoot":""}

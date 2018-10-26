@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../src/components/VSwitch/index.js"],"names":[],"mappings":"AAAA,OAAO,OAAP,MAAoB,WAApB;AAEA,SAAS,OAAT;AACA,eAAe,OAAf","sourcesContent":["import VSwitch from './VSwitch'\n\nexport { VSwitch }\nexport default VSwitch\n"],"sourceRoot":""}

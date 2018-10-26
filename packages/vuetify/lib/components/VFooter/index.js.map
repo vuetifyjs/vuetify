@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../src/components/VFooter/index.js"],"names":[],"mappings":"AAAA,OAAO,OAAP,MAAoB,WAApB;AAEA,SAAS,OAAT;AACA,eAAe,OAAf","sourcesContent":["import VFooter from './VFooter'\n\nexport { VFooter }\nexport default VFooter\n"],"sourceRoot":""}

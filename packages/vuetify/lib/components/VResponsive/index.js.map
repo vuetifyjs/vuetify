@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../src/components/VResponsive/index.ts"],"names":[],"mappings":"AAAA,OAAO,WAAP,MAAwB,eAAxB;AAEA,SAAS,WAAT;AACA,eAAe,WAAf","sourcesContent":["import VResponsive from './VResponsive'\n\nexport { VResponsive }\nexport default VResponsive\n"],"sourceRoot":""}
