@@ -52,7 +52,7 @@ v-text-field($material)
     .v-input__slot
       border: 2px solid $material.text.secondary
 
-    &:not(.v-input--is-focused)
+    &:not(.v-input--is-focused):not(.v-input--has-state)
       .v-input__slot:hover
         border: 2px solid $material.text.primary
 
@@ -308,7 +308,7 @@ rtl(v-text-field-rtl, "v-text-field")
     .v-input__append-outer
       margin-top: 18px // 2px for border
 
-    &.v-input--is-focused
+    &.v-input--is-focused, &.v-input--has-state
       .v-input__slot
         border: 2px solid currentColor
         transition: border $primary-transition
