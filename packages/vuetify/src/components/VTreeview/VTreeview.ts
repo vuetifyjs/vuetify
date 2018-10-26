@@ -3,7 +3,7 @@ import '../../stylus/components/_treeview.styl'
 
 // Types
 import { VNode, VNodeChildrenArrayContents } from 'vue'
-import { PropValidator } from '../../../node_modules/vue/types/options'
+import { PropValidator } from 'vue/types/options'
 
 // Components
 import VTreeviewNode, { VTreeviewNodeProps } from './VTreeviewNode'
