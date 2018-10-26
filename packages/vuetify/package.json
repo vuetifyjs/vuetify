@@ -64,7 +64,6 @@
     "eslint-friendly-formatter": "^4.0.1",
     "eslint-loader": "^2.1.0",
     "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-local-rules": "^0.1.0",
     "eslint-plugin-node": "^7.0.1",
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-standard": "^3.1.0",
@@ -112,50 +111,14 @@
     "webpack-dev-server": "^3.1.5",
     "webpack-merge": "^4.1.4"
   },
-  "dependencies": {},
+  "dependencies": {
+    "eslint-plugin-local-rules": "^0.1.0"
+  },
   "peerDependencies": {
     "vue": "^2.5.10"
   },
   "engines": {
     "node": ">= 4.0.0",
     "npm": ">= 3.0.0"
-  },
-  "jest": {
-    "verbose": false,
-    "roots": [
-      "<rootDir>/test/unit",
-      "<rootDir>/test/integration"
-    ],
-    "moduleFileExtensions": [
-      "ts",
-      "js"
-    ],
-    "moduleDirectories": [
-      "node_modules"
-    ],
-    "moduleNameMapper": {
-      "^@/test$": "<rootDir>/test/index.js",
-      "^@/test/(.*)$": "<rootDir>/test/$1",
-      "^@/(.*)$": "<rootDir>/src/$1"
-    },
-    "transform": {
-      "\\.(styl)$": "jest-css-modules",
-      ".*\\.(j|t)s$": "ts-jest"
-    },
-    "mapCoverage": true,
-    "collectCoverageFrom": [
-      "src/**/*.{js,ts,tsx}"
-    ],
-    "transformIgnorePatterns": [
-      "node_modules/(?!vue-router)"
-    ],
-    "snapshotSerializers": [
-      "jest-serializer-html"
-    ],
-    "globals": {
-      "ts-jest": {
-        "useBabelrc": true
-      }
-    }
   }
 }

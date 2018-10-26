@@ -22,13 +22,11 @@ module.exports = {
     '__REQUIRED_VUE__': true
   },
   plugins: [
-    'typescript',
-    'eslint-plugin-local-rules'
+    'typescript'
   ],
   rules: {
     // allow paren-less arrow functions
     'arrow-parens': [2, 'as-needed'],
-    'local-rules/no-render-string-reference': 2,
     // set maximum line characters
     'max-len': [2, 140, 4, {
       'ignoreUrls': true,

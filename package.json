@@ -18,6 +18,7 @@
     ]
   },
   "devDependencies": {
+    "@mdi/font": "^2.6.95",
     "@types/jest": "^23.3.2",
     "chalk": "^2.4.1",
     "dts-bundle": "^0.7.3",
