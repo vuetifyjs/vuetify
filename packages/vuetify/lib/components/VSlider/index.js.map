@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../../src/components/VSlider/index.js"],"names":[],"mappings":"AAAA,OAAO,OAAP,MAAoB,WAApB;AAEA,SAAS,OAAT;AACA,eAAe,OAAf","sourcesContent":["import VSlider from './VSlider'\n\nexport { VSlider }\nexport default VSlider\n"],"sourceRoot":""}

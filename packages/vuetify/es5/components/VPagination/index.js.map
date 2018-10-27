@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../../src/components/VPagination/index.ts"],"names":[],"mappings":";;;;;;;;;;;;;QAES,W,GAAA,qB;kBACM,qB","sourcesContent":["import VPagination from './VPagination'\n\nexport { VPagination }\nexport default VPagination\n"],"sourceRoot":""}

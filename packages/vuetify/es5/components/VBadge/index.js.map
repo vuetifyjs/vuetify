@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../../src/components/VBadge/index.ts"],"names":[],"mappings":";;;;;;;;;;;;;QAES,M,GAAA,gB;kBACM,gB","sourcesContent":["import VBadge from './VBadge'\n\nexport { VBadge }\nexport default VBadge\n"],"sourceRoot":""}

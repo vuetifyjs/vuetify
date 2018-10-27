@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../../src/components/VSnackbar/index.ts"],"names":[],"mappings":"AAAA,OAAO,SAAP,MAAsB,aAAtB;AAEA,SAAS,SAAT;AACA,eAAe,SAAf","sourcesContent":["import VSnackbar from './VSnackbar'\n\nexport { VSnackbar }\nexport default VSnackbar\n"],"sourceRoot":""}

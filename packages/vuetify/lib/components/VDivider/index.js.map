@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../../src/components/VDivider/index.ts"],"names":[],"mappings":"AAAA,OAAO,QAAP,MAAqB,YAArB;AAEA,SAAS,QAAT;AACA,eAAe,QAAf","sourcesContent":["import VDivider from './VDivider'\n\nexport { VDivider }\nexport default VDivider\n"],"sourceRoot":""}

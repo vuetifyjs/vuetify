@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../../src/components/VCombobox/index.js"],"names":[],"mappings":"AAAA,OAAO,SAAP,MAAsB,aAAtB;AAEA,SAAS,SAAT;AACA,eAAe,SAAf","sourcesContent":["import VCombobox from './VCombobox'\n\nexport { VCombobox }\nexport default VCombobox\n"],"sourceRoot":""}

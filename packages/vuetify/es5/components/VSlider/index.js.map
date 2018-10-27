@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../../src/components/VSlider/index.js"],"names":[],"mappings":";;;;;;;;;;;;;QAES,O,GAAA,iB;kBACM,iB","sourcesContent":["import VSlider from './VSlider'\n\nexport { VSlider }\nexport default VSlider\n"],"sourceRoot":""}

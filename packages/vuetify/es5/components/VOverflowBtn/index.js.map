@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../../src/components/VOverflowBtn/index.js"],"names":[],"mappings":";;;;;;;;;;;;;QAES,Y,GAAA,sB;kBACM,sB","sourcesContent":["import VOverflowBtn from './VOverflowBtn'\n\nexport { VOverflowBtn }\nexport default VOverflowBtn\n"],"sourceRoot":""}

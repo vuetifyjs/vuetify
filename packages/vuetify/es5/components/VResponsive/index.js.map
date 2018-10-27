@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../../src/components/VResponsive/index.ts"],"names":[],"mappings":";;;;;;;;;;;;;QAES,W,GAAA,qB;kBACM,qB","sourcesContent":["import VResponsive from './VResponsive'\n\nexport { VResponsive }\nexport default VResponsive\n"],"sourceRoot":""}

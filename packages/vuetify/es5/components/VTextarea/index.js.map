@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../../src/components/VTextarea/index.js"],"names":[],"mappings":";;;;;;;;;;;;;QAES,S,GAAA,mB;kBACM,mB","sourcesContent":["import VTextarea from './VTextarea'\n\nexport { VTextarea }\nexport default VTextarea\n"],"sourceRoot":""}
