@@ -1,0 +1,19 @@
+import './stylus/app.styl';
+import VuetifyComponent from './components/Vuetify';
+import * as components from './components';
+import * as directives from './directives';
+const Vuetify = {
+    install(Vue, args) {
+        Vue.use(VuetifyComponent, {
+            components,
+            directives,
+            ...args
+        });
+    },
+    version: __VUETIFY_VERSION__
+};
+if (typeof window !== 'undefined' && window.Vue) {
+    window.Vue.use(Vuetify);
+}
+export default Vuetify;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9zcmMvaW5kZXgudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxtQkFBbUIsQ0FBQTtBQUMxQixPQUFPLGdCQUFnQixNQUFNLHNCQUFzQixDQUFBO0FBQ25ELE9BQU8sS0FBSyxVQUFVLE1BQU0sY0FBYyxDQUFBO0FBQzFDLE9BQU8sS0FBSyxVQUFVLE1BQU0sY0FBYyxDQUFBO0FBSTFDLE1BQU0sT0FBTyxHQUFrQjtJQUM3QixPQUFPLENBQUUsR0FBbUIsRUFBRSxJQUF3QjtRQUNwRCxHQUFHLENBQUMsR0FBRyxDQUFDLGdCQUFnQixFQUFFO1lBQ3hCLFVBQVU7WUFDVixVQUFVO1lBQ1YsR0FBRyxJQUFJO1NBQ1IsQ0FBQyxDQUFBO0lBQ0osQ0FBQztJQUNELE9BQU8sRUFBRSxtQkFBbUI7Q0FDN0IsQ0FBQTtBQUVELElBQUksT0FBTyxNQUFNLEtBQUssV0FBVyxJQUFJLE1BQU0sQ0FBQyxHQUFHLEVBQUU7SUFDL0MsTUFBTSxDQUFDLEdBQUcsQ0FBQyxHQUFHLENBQUMsT0FBTyxDQUFDLENBQUE7Q0FDeEI7QUFFRCxlQUFlLE9BQU8sQ0FBQSIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCAnLi9zdHlsdXMvYXBwLnN0eWwnXG5pbXBvcnQgVnVldGlmeUNvbXBvbmVudCBmcm9tICcuL2NvbXBvbmVudHMvVnVldGlmeSdcbmltcG9ydCAqIGFzIGNvbXBvbmVudHMgZnJvbSAnLi9jb21wb25lbnRzJ1xuaW1wb3J0ICogYXMgZGlyZWN0aXZlcyBmcm9tICcuL2RpcmVjdGl2ZXMnXG5pbXBvcnQgeyBWdWVDb25zdHJ1Y3RvciB9IGZyb20gJ3Z1ZSdcbmltcG9ydCB7IFZ1ZXRpZnkgYXMgVnVldGlmeVBsdWdpbiwgVnVldGlmeVVzZU9wdGlvbnMgfSBmcm9tICd0eXBlcydcblxuY29uc3QgVnVldGlmeTogVnVldGlmeVBsdWdpbiA9IHtcbiAgaW5zdGFsbCAoVnVlOiBWdWVDb25zdHJ1Y3RvciwgYXJncz86IFZ1ZXRpZnlVc2VPcHRpb25zKTogdm9pZCB7XG4gICAgVnVlLnVzZShWdWV0aWZ5Q29tcG9uZW50LCB7XG4gICAgICBjb21wb25lbnRzLFxuICAgICAgZGlyZWN0aXZlcyxcbiAgICAgIC4uLmFyZ3NcbiAgICB9KVxuICB9LFxuICB2ZXJzaW9uOiBfX1ZVRVRJRllfVkVSU0lPTl9fXG59XG5cbmlmICh0eXBlb2Ygd2luZG93ICE9PSAndW5kZWZpbmVkJyAmJiB3aW5kb3cuVnVlKSB7XG4gIHdpbmRvdy5WdWUudXNlKFZ1ZXRpZnkpXG59XG5cbmV4cG9ydCBkZWZhdWx0IFZ1ZXRpZnlcbiJdfQ==
