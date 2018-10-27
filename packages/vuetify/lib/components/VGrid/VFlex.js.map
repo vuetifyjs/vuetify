@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../../src/components/VGrid/VFlex.js"],"names":[],"mappings":"AAAA,OAAO,2CAAP;AAEA,OAAO,IAAP,MAAiB,QAAjB;AAEA,eAAe,KAAK,MAAL,CAAf","sourcesContent":["import '../../stylus/components/_grid.styl'\n\nimport Grid from './grid'\n\nexport default Grid('flex')\n"],"sourceRoot":""}

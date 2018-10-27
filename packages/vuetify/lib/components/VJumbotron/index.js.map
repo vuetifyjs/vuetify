@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../../src/components/VJumbotron/index.js"],"names":[],"mappings":"AAAA,OAAO,UAAP,MAAuB,cAAvB;AAEA,SAAS,UAAT;AACA,eAAe,UAAf","sourcesContent":["import VJumbotron from './VJumbotron'\n\nexport { VJumbotron }\nexport default VJumbotron\n"],"sourceRoot":""}

@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../../src/components/VImg/index.ts"],"names":[],"mappings":";;;;;;;;;;;;;QAES,I,GAAA,c;kBACM,c","sourcesContent":["import VImg from './VImg'\n\nexport { VImg }\nexport default VImg\n"],"sourceRoot":""}

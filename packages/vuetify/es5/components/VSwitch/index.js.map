@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../../src/components/VSwitch/index.js"],"names":[],"mappings":";;;;;;;;;;;;;QAES,O,GAAA,iB;kBACM,iB","sourcesContent":["import VSwitch from './VSwitch'\n\nexport { VSwitch }\nexport default VSwitch\n"],"sourceRoot":""}

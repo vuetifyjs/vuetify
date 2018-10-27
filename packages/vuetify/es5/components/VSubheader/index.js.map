@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../../src/components/VSubheader/index.js"],"names":[],"mappings":";;;;;;;;;;;;;QAES,U,GAAA,oB;kBACM,oB","sourcesContent":["import VSubheader from './VSubheader'\n\nexport { VSubheader }\nexport default VSubheader\n"],"sourceRoot":""}

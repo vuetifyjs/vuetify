@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../../src/components/VGrid/VLayout.js"],"names":[],"mappings":";;;;;;;;AAEA;;;;;;kBAEe,oBAAK,QAAL,C","sourcesContent":["import '../../stylus/components/_grid.styl'\n\nimport Grid from './grid'\n\nexport default Grid('layout')\n"],"sourceRoot":""}

@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../../src/components/VRangeSlider/index.js"],"names":[],"mappings":";;;;;;;;;;;;;QAES,Y,GAAA,sB;kBACM,sB","sourcesContent":["import VRangeSlider from './VRangeSlider'\n\nexport { VRangeSlider }\nexport default VRangeSlider\n"],"sourceRoot":""}
