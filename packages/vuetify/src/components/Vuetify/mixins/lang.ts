@@ -1,8 +1,8 @@
 import en from '../../../locale/en'
 import { getObjectValueByPath } from '../../../util/helpers'
-import { VuetifyUseOptions as Options } from 'types'
-import { VuetifyLanguage, VuetifyLocale } from 'types/lang'
 import { consoleError, consoleWarn } from '../../../util/console'
+import { VuetifyUseOptions as Options } from 'vuetify/types'
+import { VuetifyLanguage, VuetifyLocale } from 'vuetify/types/lang'
 
 const LANG_PREFIX = '$vuetify.'
 const fallback = Symbol('Lang fallback')

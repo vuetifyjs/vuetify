@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { VuetifyBreakpoint } from 'types'
+import { VuetifyBreakpoint } from 'vuetify/types'
 
 /**
  * A modified version of https://gist.github.com/cb109/b074a65f7595cffc21cea59ce8d15f9b

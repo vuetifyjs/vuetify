@@ -1,7 +1,7 @@
 import { colorToInt, intToHex, colorToHex, RGB } from './colorUtils'
 import * as sRGB from './color/transformSRGB'
 import * as LAB from './color/transformCIELAB'
-import { VuetifyTheme } from 'types'
+import { VuetifyTheme } from 'vuetify/types'
 
 interface ParsedThemeItem {
   base: string

@@ -30,7 +30,7 @@
     "test:win32": "cross-env NODE_ENV=test jest -i",
     "test:coverage": "yarn test --coverage",
     "test:types": "tsc -p ./types/test/tsconfig.json",
-    "lint": "concurrently \"tsc --noEmit --pretty\" \"tslint -p . -c .tslint.js src/**/*.ts -t stylish\" \"eslint --ext .js,.ts src\" \"yarn test:types\" --kill-others-on-fail -n \"tsc,tslint,eslint,types\"",
+    "lint": "concurrently \"tsc --noEmit --pretty\" \"tslint -p . src/**/*.ts -t stylish\" \"eslint --ext .js,.ts src\" \"yarn test:types\" --kill-others-on-fail -n \"tsc,tslint,eslint,types\"",
     "lint:fix": "concurrently \"tsc --noEmit --pretty\" \"tslint --fix -p . -c .tslint.js src/**/*.ts -t stylish\" \"eslint --fix --ext .js,.ts src\" \"yarn test:types\" --kill-others-on-fail -n \"tsc,tslint,eslint,types\"",
     "preparecommitmsg": "node dev/prepare-commit-message.js",
     "commitmsg": "node dev/lint-commit-message.js",
@@ -110,9 +110,6 @@
     "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.5",
     "webpack-merge": "^4.1.4"
-  },
-  "dependencies": {
-    "eslint-plugin-local-rules": "^0.1.0"
   },
   "peerDependencies": {
     "vue": "^2.5.10"
