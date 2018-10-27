@@ -51,7 +51,7 @@ export default {
 
         const props = headers.map(h => h.value)
 
-        return items.filter(item => props.some(prop => filter(getObjectValueByPath(item, prop), search)))
+        return items.filter(item => props.some(prop => filter(getObjectValueByPath(item, prop, item[prop]), search)))
       }
     }
   },

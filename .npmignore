@@ -9,7 +9,7 @@ dev/
 build/
 release/
 **/*.spec.js
-/es5-temp
+/lib-temp
 /.babelrc
 /.editorconfig
 /.eslintignore

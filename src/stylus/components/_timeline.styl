@@ -40,6 +40,10 @@ timeline-dots($dot-size, $inner-dot-size, $inner-dot-margin)
     .v-timeline-item__opposite
       margin-left: 96px
       text-align: left
+      
+      .v-card:before, .v-card:after
+        transform: rotate(0)
+        left: -10px
 
   &:nth-child(even):not(.v-timeline-item--left), &--right
     .v-card:before, .v-card:after
@@ -48,6 +52,10 @@ timeline-dots($dot-size, $inner-dot-size, $inner-dot-margin)
     .v-timeline-item__opposite
       margin-right: 96px
       text-align: right
+      
+      .v-card:before, .v-card:after
+        transform: rotate(180deg)
+        right: -10px
 
   &__dot,
   &__inner-dot

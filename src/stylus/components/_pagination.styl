@@ -5,6 +5,9 @@ v-pagination($material)
   .v-pagination__item
     background: $material.cards
     color: $material.fg-color
+    width: auto
+    min-width: 34px
+    padding: 0 5px
 
     &--active
       color: $material.text.theme
@@ -42,9 +45,6 @@ theme(v-pagination, "v-pagination")
   &__item
     elevation(2)
     border-radius: 4px
-    display: inline-flex
-    justify-content: center
-    align-items: center
     font-size: $button-font-size
     background: transparent
     height: 34px

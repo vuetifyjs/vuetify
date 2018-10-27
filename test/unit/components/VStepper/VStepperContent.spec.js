@@ -5,6 +5,8 @@ import {
 } from '@/components/transitions'
 import VStepperContent from '@/components/VStepper/VStepperContent'
 
+const tip = '[Vuetify] The v-stepper-content component must be used inside a v-stepper'
+
 test('VStepperContent.js', ({ mount }) => {
   it('should set height to auto', async () => {
     const wrapper = mount(VStepperContent, {
@@ -22,6 +24,7 @@ test('VStepperContent.js', ({ mount }) => {
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.isActive).toBe(true)
     expect(wrapper.vm.height).toBe('auto')
+    expect(tip).toHaveBeenTipped()
   })
 
   it('should use reverse transition', () => {
@@ -37,6 +40,7 @@ test('VStepperContent.js', ({ mount }) => {
     wrapper.setData({ isReverse: true })
 
     expect(wrapper.vm.computedTransition).toBe(VTabReverseTransition)
+    expect(tip).toHaveBeenTipped()
   })
 
   it('should accept a custom height', async () => {
@@ -83,6 +87,7 @@ test('VStepperContent.js', ({ mount }) => {
     await wrapper.vm.$nextTick()
     expect(enter.mock.calls.length).toBe(1)
     expect(leave.mock.calls.length).toBe(1)
+    expect(tip).toHaveBeenTipped()
   })
 
   it('should toggle isActive state', () => {
@@ -107,6 +112,7 @@ test('VStepperContent.js', ({ mount }) => {
 
     expect(wrapper.vm.isActive).toBe(false)
     expect(wrapper.vm.isReverse).toBe(true)
+    expect(tip).toHaveBeenTipped()
   })
 
   it('should set height', async () => {
@@ -136,6 +142,7 @@ test('VStepperContent.js', ({ mount }) => {
     await new Promise(resolve => setTimeout(resolve, 10))
 
     expect(wrapper.vm.height).toBe(0)
+    expect(tip).toHaveBeenTipped()
   })
 
   it('should set height only if isActive', async () => {
@@ -161,6 +168,7 @@ test('VStepperContent.js', ({ mount }) => {
     await new Promise(resolve => setTimeout(resolve, 450))
 
     expect(wrapper.vm.height).toBe(0)
+    expect(tip).toHaveBeenTipped()
   })
 
   it('should reset height', async () => {
@@ -195,5 +203,6 @@ test('VStepperContent.js', ({ mount }) => {
     expect(wrapper.vm.height).toBe('auto')
 
     wrapper.destroy()
+    expect(tip).toHaveBeenTipped()
   })
 })

@@ -106,7 +106,7 @@ export default {
       }
     },
     setInputData (value) {
-      if (value == null) {
+      if (value == null || value === '') {
         this.inputHour = null
         this.inputMinute = null
         return
@@ -187,10 +187,6 @@ export default {
     genPickerBody () {
       return this.$createElement('div', {
         staticClass: 'v-time-picker-clock__container',
-        style: {
-          width: `${this.width}px`,
-          height: `${this.width - ((!this.fullWidth && this.landscape) ? 60 : 0)}px`
-        },
         key: this.selectingHour
       }, [this.genClock()])
     },

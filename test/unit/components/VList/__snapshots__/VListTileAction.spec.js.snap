@@ -33,3 +33,13 @@ exports[`VListTileAction.js should render component with static class and match 
 </div>
 
 `;
+
+exports[`VListTileAction.js should work with v-html 1`] = `
+
+<div class="v-list__tile__action">
+  <b>
+    something
+  </b>
+</div>
+
+`;

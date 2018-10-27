@@ -39,6 +39,7 @@ import VMessages from '@/components/VMessages'
 import VNavigationDrawer from '@/components/VNavigationDrawer'
 import VOverflowBtn from '@/components/VOverflowBtn'
 import VPagination from '@/components/VPagination'
+import VPaper from '@/components/VPaper'
 import VParallax from '@/components/VParallax'
 import VPicker from '@/components/VPicker'
 import VProgressCircular from '@/components/VProgressCircular'
@@ -62,6 +63,8 @@ import VTimeline from '@/components/VTimeline'
 import VTimePicker from '@/components/VTimePicker'
 import VToolbar from '@/components/VToolbar'
 import VTooltip from '@/components/VTooltip'
+import VTreeview from '@/components/VTreeview'
+import VWindow from '@/components/VWindow'
 import Transitions from '@/components/transitions'
 import Vuetify from '@/components/Vuetify'
 
@@ -105,6 +108,7 @@ const components = {
   VNavigationDrawer,
   VOverflowBtn,
   VPagination,
+  VPaper,
   VParallax,
   VPicker,
   VProgressCircular,
@@ -128,14 +132,21 @@ const components = {
   VTimePicker,
   VToolbar,
   VTooltip,
+  VTreeview,
+  VWindow,
   Transitions
 }
 
-describe('a-la-carte import', () => {
+delete allComponents.default // TODO: update ts-jest
+
+describe('a-la-carte import - direct', () => {
   Vue.use(Vuetify, {
     components
   })
   const registeredComponents = Object.keys(Vue.options.components).sort()
+
+  // remove vue builtins
+  registeredComponents.splice(0, 3)
 
   it('should register all subcomponents', () => {
     expect(registeredComponents).toMatchSnapshot()
@@ -148,6 +159,6 @@ describe('a-la-carte import', () => {
   })
 
   it('should check all components', () => {
-    expect(Object.keys(components).sort()).toEqual(Object.keys(allComponents).sort())
+    expect(registeredComponents).toEqual(Object.keys(allComponents).sort())
   })
 })

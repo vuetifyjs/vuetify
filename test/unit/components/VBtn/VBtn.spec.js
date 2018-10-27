@@ -102,7 +102,7 @@ test('VBtn.js', ({ mount, compileToFunctions }) => {
 
     const wrapper = mount(VBtn, {
       provide: {
-        buttonGroup: {
+        btnToggle: {
           register: register,
           unregister: unregister
         }

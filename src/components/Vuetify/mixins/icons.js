@@ -25,7 +25,8 @@ const ICONS_MATERIAL = {
   'edit': 'edit',
   'ratingEmpty': 'star_border',
   'ratingFull': 'star',
-  'ratingHalf': 'star_half'
+  'ratingHalf': 'star_half',
+  'loading': 'cached'
 }
 
 // Maps internal Vuetify icon names to actual icons from materialdesignicons.com

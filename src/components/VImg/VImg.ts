@@ -132,11 +132,10 @@ export default VResponsive.extend({
       this.isLoading = false
       this.$emit('load', this.src)
     },
-    onError (err: ErrorEvent) {
+    onError () {
       consoleError(
         `Image load failed\n\n` +
-        `src: ${this.normalisedSrc.src}` +
-        (err.message ? `\nOriginal error: ${err.message}` : ''),
+        `src: ${this.normalisedSrc.src}`,
         this
       )
       this.$emit('error', this.src)

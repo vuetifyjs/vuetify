@@ -74,11 +74,17 @@ export default mixins(Colorable, Themeable).extend({
         const end = this.value + left - 2 - even
 
         return [1, '...', ...this.range(start, end), '...', this.length]
+      } else if (this.value === left) {
+        const end = this.value + left - 1 - even
+        return [...this.range(1, end), '...', this.length]
+      } else if (this.value === right) {
+        const start = this.value - left + 1
+        return [1, '...', ...this.range(start, this.length)]
       } else {
         return [
           ...this.range(1, left),
           '...',
-          ...this.range(this.length - left + 1 + even, this.length)
+          ...this.range(right, this.length)
         ]
       }
     }
@@ -137,6 +143,9 @@ export default mixins(Colorable, Themeable).extend({
           class: {
             'v-pagination__navigation--disabled': disabled
           },
+          attrs: {
+            type: 'button'
+          },
           on: disabled ? {} : { click: fn }
         }, [h(VIcon, [icon])])
       ])
@@ -147,6 +156,9 @@ export default mixins(Colorable, Themeable).extend({
         staticClass: 'v-pagination__item',
         class: {
           'v-pagination__item--active': i === this.value
+        },
+        attrs: {
+          type: 'button'
         },
         on: {
           click: () => this.$emit('input', i)

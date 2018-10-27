@@ -18,7 +18,8 @@ const router = new VueRouter({
       path: '/page2',
       name: 'Page 2',
       component: component2
-    }
+    },
+    { path: '*', redirect: '/page1' }
   ]
 })
 

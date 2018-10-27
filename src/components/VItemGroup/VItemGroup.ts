@@ -2,8 +2,9 @@
 import '../../stylus/components/_item-group.styl'
 
 // Mixins
-import Proxyable from '../../mixins/proxyable'
 import Groupable from '../../mixins/groupable'
+import Proxyable from '../../mixins/proxyable'
+import Themeable from '../../mixins/themeable'
 
 // Utilities
 import mixins from '../../util/mixins'
@@ -12,16 +13,13 @@ import { consoleWarn } from '../../util/console'
 // Types
 import { VNode } from 'vue/types'
 
-type GroupableInstance = InstanceType<typeof Groupable>
+type GroupableInstance = InstanceType<typeof Groupable> & { value?: any }
 
-export default mixins(Proxyable).extend({
-  name: 'v-item-group',
-
-  provide (): object {
-    return {
-      itemGroup: this
-    }
-  },
+export const BaseItemGroup = mixins(
+  Proxyable,
+  Themeable
+).extend({
+  name: 'base-item-group',
 
   props: {
     activeClass: {
@@ -49,6 +47,11 @@ export default mixins(Proxyable).extend({
   },
 
   computed: {
+    classes (): Record<string, boolean> {
+      return {
+        ...this.themeClasses
+      }
+    },
     selectedItems (): GroupableInstance[] {
       return this.items.filter((item, index) => {
         return this.toggleMethod(this.getValue(item, index))
@@ -74,7 +77,10 @@ export default mixins(Proxyable).extend({
   },
 
   watch: {
-    internalValue: 'updateItemsState'
+    internalValue () {
+      // https://github.com/vuetifyjs/vuetify/issues/5352
+      this.$nextTick(this.updateItemsState)
+    }
   },
 
   created () {
@@ -83,18 +89,11 @@ export default mixins(Proxyable).extend({
     }
   },
 
-  mounted () {
-    this.init()
-  },
-
   methods: {
     getValue (item: GroupableInstance, i: number): unknown {
       return item.value == null || item.value === ''
         ? i
         : item.value
-    },
-    init () {
-      this.updateItemsState()
     },
     onClick (item: GroupableInstance, index: number) {
       this.updateInternalValue(
@@ -105,8 +104,18 @@ export default mixins(Proxyable).extend({
       const index = this.items.push(item) - 1
 
       item.$on('change', () => this.onClick(item, index))
+
+      // If no value provided and mandatory,
+      // assign first registered item
+      if (this.mandatory && this.internalLazyValue == null) {
+        this.updateMandatory()
+      }
+
+      this.updateItem(item, index)
     },
     unregister (item: GroupableInstance) {
+      if (this._isDestroyed) return
+
       const index = this.items.indexOf(item)
       const value = this.getValue(item, index)
 
@@ -136,6 +145,11 @@ export default mixins(Proxyable).extend({
         this.updateMandatory(true)
       }
     },
+    updateItem (item: GroupableInstance, index: number) {
+      const value = this.getValue(item, index)
+
+      item.isActive = this.toggleMethod(value)
+    },
     updateItemsState () {
       if (this.mandatory &&
         !this.selectedItems.length
@@ -146,11 +160,7 @@ export default mixins(Proxyable).extend({
       // TODO: Make this smarter so it
       // doesn't have to iterate every
       // child in an update
-      this.items.forEach((item, i) => {
-        const value = this.getValue(item, i)
-
-        item.isActive = this.toggleMethod(value)
-      })
+      this.items.forEach(this.updateItem)
     },
     updateInternalValue (value: any) {
       this.multiple
@@ -207,7 +217,18 @@ export default mixins(Proxyable).extend({
 
   render (h): VNode {
     return h('div', {
-      staticClass: 'v-item-group'
+      staticClass: 'v-item-group',
+      class: this.classes
     }, this.$slots.default)
+  }
+})
+
+export default BaseItemGroup.extend({
+  name: 'v-item-group',
+
+  provide (): object {
+    return {
+      itemGroup: this
+    }
   }
 })

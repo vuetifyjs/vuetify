@@ -1,10 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`a-la-carte import should register all subcomponents 1`] = `
+exports[`a-la-carte import - direct should register all subcomponents 1`] = `
 Array [
-  "KeepAlive",
-  "Transition",
-  "TransitionGroup",
   "VAlert",
   "VApp",
   "VAutocomplete",
@@ -82,6 +79,7 @@ Array [
   "VNavigationDrawer",
   "VOverflowBtn",
   "VPagination",
+  "VPaper",
   "VParallax",
   "VPicker",
   "VProgressCircular",
@@ -134,5 +132,9 @@ Array [
   "VToolbarSideIcon",
   "VToolbarTitle",
   "VTooltip",
+  "VTreeview",
+  "VTreeviewNode",
+  "VWindow",
+  "VWindowItem",
 ]
 `;

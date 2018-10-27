@@ -122,7 +122,7 @@ export default Vue.extend({
 function getClientWidth () {
   if (typeof document === 'undefined') return 0 // SSR
   return Math.max(
-    document.documentElement.clientWidth,
+    document.documentElement!.clientWidth,
     window.innerWidth || 0
   )
 }
@@ -130,7 +130,7 @@ function getClientWidth () {
 function getClientHeight () {
   if (typeof document === 'undefined') return 0 // SSR
   return Math.max(
-    document.documentElement.clientHeight,
+    document.documentElement!.clientHeight,
     window.innerHeight || 0
   )
 }

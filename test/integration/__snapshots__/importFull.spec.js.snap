@@ -94,6 +94,7 @@ Array [
   "VNavigationDrawer",
   "VOverflowBtn",
   "VPagination",
+  "VPaper",
   "VParallax",
   "VPicker",
   "VProgressCircular",
@@ -146,5 +147,9 @@ Array [
   "VToolbarSideIcon",
   "VToolbarTitle",
   "VTooltip",
+  "VTreeview",
+  "VTreeviewNode",
+  "VWindow",
+  "VWindowItem",
 ]
 `;

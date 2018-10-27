@@ -14,14 +14,7 @@ const create = (props = {}, slots = 3) => Vue.component('zxc', {
   }
 })
 
-test('VCarousel.js', ({ mount }) => {
-  it('should render component and match snapshot', async () => {
-    const wrapper = mount(VCarousel)
-    await wrapper.vm.$nextTick()
-
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-
+test('VCarousel.ts', ({ mount }) => {
   it('should render component in RTL mode and match snapshot', async () => {
     const wrapper = mount(VCarousel)
     wrapper.vm.$vuetify.rtl = true
@@ -121,7 +114,7 @@ test('VCarousel.js', ({ mount }) => {
 
   // TODO: Use jest's fake timers
   it('should emit input event after interval', async () => {
-    const vm = mount(VCarousel).vm
+    const vm = new Vue()
     const wrapper = mount(VCarousel, {
       propsData: {
         value: 1,
@@ -138,13 +131,13 @@ test('VCarousel.js', ({ mount }) => {
 
     const input = jest.fn()
     await new Promise(resolve => {
-      wrapper.vm.$on('input', value => {
+      wrapper.vm.$on('change', value => {
         input(value)
         input.mock.calls.length === 3 && resolve()
       })
     })
 
-    expect([].concat(...input.mock.calls)).toEqual([1, 2, 0])
+    expect([].concat(...input.mock.calls)).toEqual([2, 0, 1])
   })
 
   it('should render component without delimiters', async () => {
@@ -170,7 +163,7 @@ test('VCarousel.js', ({ mount }) => {
     await wrapper.vm.$nextTick()
 
     const input = jest.fn()
-    wrapper.vm.$children[0].$on('input', input)
+    wrapper.vm.$children[0].$on('change', input)
 
     touch(wrapper).start(0, 0).end(-20, 0)
     await wrapper.vm.$nextTick()
@@ -185,7 +178,7 @@ test('VCarousel.js', ({ mount }) => {
     await wrapper.vm.$nextTick()
 
     const input = jest.fn()
-    wrapper.vm.$children[0].$on('input', input)
+    wrapper.vm.$children[0].$on('change', input)
 
     wrapper.find('.v-carousel__controls__item')[2].trigger('click')
     await wrapper.vm.$nextTick()

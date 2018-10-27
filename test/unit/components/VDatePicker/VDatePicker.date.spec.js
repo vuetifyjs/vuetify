@@ -227,12 +227,14 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
       propsData: {
         value: '2005-11-01',
         headerDateFormat: dateFormat,
-        titleDateFormat: dateFormat
+        titleDateFormat: dateFormat,
+        weekdayFormat: () => 'W'
       }
     })
 
     expect(wrapper.find('.v-date-picker-title__date')[0].text()).toBe('(2005-11-01)')
     expect(wrapper.find('.v-date-picker-header__value')[0].text()).toBe('(2005-11)')
+    expect(wrapper.find('.v-date-picker-table--date th')[1].text()).toBe('W')
   })
 
   it('should match snapshot with colored picker', () => {

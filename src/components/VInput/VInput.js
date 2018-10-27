@@ -8,7 +8,6 @@ import VMessages from '../VMessages'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
-import Loadable from '../../mixins/loadable'
 import Themeable from '../../mixins/themeable'
 import Validatable from '../../mixins/validatable'
 
@@ -25,7 +24,6 @@ export default {
 
   mixins: [
     Colorable,
-    Loadable,
     Themeable,
     Validatable
   ],
@@ -53,6 +51,7 @@ export default {
 
   data: vm => ({
     lazyValue: vm.value,
+    hasMouseDown: false,
     isFocused: false
   }),
 
@@ -66,7 +65,7 @@ export default {
         'v-input--is-dirty': this.isDirty,
         'v-input--is-disabled': this.disabled,
         'v-input--is-focused': this.isFocused,
-        'v-input--is-loading': this.loading !== false,
+        'v-input--is-loading': this.loading !== false && this.loading !== undefined,
         'v-input--is-readonly': this.readonly,
         ...this.themeClasses
       }
@@ -198,10 +197,7 @@ export default {
           mouseup: this.onMouseUp
         },
         ref: 'input-slot'
-      }), [
-        this.genDefaultSlot(),
-        this.genProgress()
-      ])
+      }), [this.genDefaultSlot()])
     },
     genLabel () {
       if (!this.hasLabel) return null
@@ -272,9 +268,11 @@ export default {
       this.$emit('click', e)
     },
     onMouseDown (e) {
+      this.hasMouseDown = true
       this.$emit('mousedown', e)
     },
     onMouseUp (e) {
+      this.hasMouseDown = false
       this.$emit('mouseup', e)
     }
   },
