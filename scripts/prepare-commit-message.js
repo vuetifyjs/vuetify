@@ -4,7 +4,7 @@ const [
   messageFile,
   commitType,
   commitHash
-] = process.env.GIT_PARAMS.split(' ')
+] = process.env.HUSKY_GIT_PARAMS.split(' ')
 
 if (commitType == null) {
   const currentMessage = fs.readFileSync(messageFile)
