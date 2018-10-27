@@ -51,7 +51,11 @@
       name: { required, maxLength: maxLength(10) },
       email: { required, email },
       select: { required },
-      checkbox: { required }
+      checkbox: {
+        checked (val) {
+          return val
+        }
+      }
     },
 
     data: () => ({
@@ -71,7 +75,7 @@
       checkboxErrors () {
         const errors = []
         if (!this.$v.checkbox.$dirty) return errors
-        !this.$v.checkbox.required && errors.push('You must agree to continue!')
+        !this.$v.checkbox.checked && errors.push('You must agree to continue!')
         return errors
       },
       selectErrors () {
