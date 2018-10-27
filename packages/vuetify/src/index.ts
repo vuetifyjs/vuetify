@@ -3,7 +3,7 @@ import VuetifyComponent from './components/Vuetify'
 import * as components from './components'
 import directives from './directives'
 import { VueConstructor } from 'vue'
-import { Vuetify as VuetifyPlugin, VuetifyUseOptions } from 'types'
+import { Vuetify as VuetifyPlugin, VuetifyUseOptions } from 'vuetify/types'
 
 const Vuetify: VuetifyPlugin = {
   install (Vue: VueConstructor, args?: VuetifyUseOptions): void {
