@@ -2,14 +2,12 @@
 *
 
 # Keep source
-!/src/
+!/src/**/*
 
 # Keep built files
-!/dist/
-!/lib/
-!/es5/
+!/dist/**/*
+!/lib/**/*
+!/es5/**/*
 
 # Keep types
-!/types/
-# But not the tests
-/types/test/
+!/types/*.d.ts
