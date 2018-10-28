@@ -1,0 +1,77 @@
+{
+  "backToDocs": "返回文档",
+  "cart": "购物车",
+  "docs": "文档",
+  "documentation": "开发文档",
+  "support": "支持",
+  "supports": [
+    {
+      "href": "https://community.vuetifyjs.com/",
+      "text": "在线聊天",
+      "icon": "mdi-discord"
+    },
+    {
+      "href": "https://issues.vuetifyjs.com",
+      "text": "创建一个工单",
+      "icon": "mdi-alert-octagon"
+    },
+    {
+      "href": "https://github.com/vuetifyjs/vuetify/issues",
+      "text": "GitHub工单页",
+      "icon": "mdi-github-face"
+    },
+    {
+      "href": "https://stackoverflow.com/search?q=vuetify",
+      "text": "Stack overflow",
+      "icon": "mdi-stack-overflow"
+    }
+  ],
+  "ecosystem": "生态系统",
+  "ecosystems": [
+    {
+      "href": "https://www.reddit.com/r/vuetifyjs/",
+      "text": "Reddit新闻网",
+      "icon": "mdi-reddit"
+    },
+    {
+      "href": "https://medium.com/vuetify",
+      "text": "Medium 出版物",
+      "icon": "mdi-medium"
+    },
+    {
+      "href": "https://github.com/vuetifyjs/awesome-vuetify",
+      "text": "超棒的 Vuetify",
+      "icon": "mdi-creation"
+    },
+    {
+      "href": "https://template.vuetifyjs.com",
+      "text": "Codepen 模版",
+      "icon": "mdi-codepen"
+    },
+    {
+      "href": "https://github.com/vuetifyjs/vuetify/releases",
+      "text": "最新版本",
+      "icon": "mdi-format-list-checks"
+    }
+  ],
+  "quickLinks": "快速链接",
+  "social": "社交",
+  "socials": [
+    {
+      "href": "https://github.com/vuetifyjs/vuetify",
+      "text": "GitHub",
+      "icon": "mdi-github-box"
+    },
+    {
+      "href": "https://twitter.com/vuetifyjs",
+      "text": "Twitter",
+      "icon": "mdi-twitter-box"
+    },
+    {
+      "href": "https://www.facebook.com/vuetifyjs",
+      "text": "Facebook",
+      "icon": "mdi-facebook-box"
+    }
+  ],
+  "store": "商店"
+}

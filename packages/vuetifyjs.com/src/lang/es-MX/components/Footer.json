@@ -1,0 +1,20 @@
+{
+    "header": "Footer",
+    "headerText": "El componente `v-footer` se usa para mostrar información general que el usuario podría querer accesar desde cualquier página de tu sitio.",
+    "components": [
+        "v-footer"
+    ],
+    "examples": [
+        {
+            "default": {
+                "header": "Default",
+                "desc": "El componente _footer_ sólo es un contenedor básico."
+            }
+        }
+    ],
+    "props": {
+        "absolute": "Mixins.Positionable.props.absolute",
+        "fixed": "Mixins.Positionable.props.fixed",
+        "inset": "Posiciona el desplazamiento de la _toolbar_ en el `v-navigation-drawer`"
+    }
+}
