@@ -20,7 +20,7 @@ jobs:
         - npm i codecov -g
       script:
         - lerna run lint
-        - lerna run test:coverage -i
+        - lerna run test:coverage -- -i
       after_script:
         - codecov
 
