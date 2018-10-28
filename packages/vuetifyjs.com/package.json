@@ -20,7 +20,7 @@
     "npm": ">=4.0"
   },
   "dependencies": {
-    "api-generator": "vuetifyjs/api-generator",
+    "@vuetify/api-generator": "^1.0.0",
     "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
     "chokidar": "^2.0.4",
