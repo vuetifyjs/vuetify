@@ -260,6 +260,10 @@ const fakeComponents = ts => {
   }).join('\n')
 }
 
+if (!fs.existsSync('dist')) {
+  fs.mkdirSync('dist', 0o755)
+}
+
 writeJsonFile(tags, 'dist/tags.json')
 writeJsonFile(attributes, 'dist/attributes.json')
 writePlainFile(fakeComponents(false), 'dist/fakeComponents.js')
