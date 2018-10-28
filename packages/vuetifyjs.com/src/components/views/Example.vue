@@ -89,7 +89,7 @@
 </template>
 
 <script>
-  import api from 'api-generator'
+  import api from '@vuetify/api-generator'
   // Utilities
   import { camel } from '@/util/helpers'
 

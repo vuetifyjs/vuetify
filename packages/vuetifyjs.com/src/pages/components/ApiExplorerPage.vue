@@ -117,7 +117,7 @@
 </template>
 
 <script>
-  import api from 'api-generator'
+  import api from '@vuetify/api-generator'
   import { camel } from '@/util/helpers'
   import { mapState } from 'vuex'
   import Example from '@/components/views/Example'
