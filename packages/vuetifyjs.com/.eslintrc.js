@@ -1,3 +1,6 @@
+const path = require('path')
+const resolve = file => path.resolve(__dirname, file)
+
 module.exports = {
   root: true,
   parserOptions: {
@@ -5,14 +8,15 @@ module.exports = {
     ecmaVersion: 2017,
     sourceType: 'module'
   },
+  extends: [
+    'plugin:vue/recommended',
+    'standard',
+    resolve('../../.eslintrc.js')
+  ],
   env: {
     node: true,
     browser: true
   },
-  extends: [
-    'plugin:vue/recommended',
-    'standard'
-  ],
   plugins: [
     'json'
   ],
@@ -20,6 +24,7 @@ module.exports = {
     docsearch: true
   },
   rules: {
+    'max-len': 0,
     "vue/max-attributes-per-line": [2, {
       "singleline": 5,
       "multiline": {

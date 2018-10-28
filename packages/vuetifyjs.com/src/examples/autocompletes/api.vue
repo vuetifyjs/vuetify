@@ -77,7 +77,7 @@
 
         return Object.keys(this.model).map(key => {
           return {
-            key: key,
+            key,
             value: this.model[key] || 'n/a'
           }
         })

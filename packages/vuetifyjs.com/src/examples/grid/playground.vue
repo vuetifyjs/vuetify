@@ -68,7 +68,7 @@
   import Markup from '../../components/helpers/Markup'
 
   export default {
-    components: {Markup},
+    components: { Markup },
     data () {
       return {
         alignmentsAvailable: ['align-center', 'align-end', 'align-space-around', 'align-space-between', 'align-start', ''],

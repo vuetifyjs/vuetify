@@ -163,6 +163,7 @@
     },
 
     methods: {
+      /* eslint-disable max-statements */
       genDescription (name, item) {
         let description = ''
         let devPrepend = ''
@@ -215,7 +216,7 @@
         if (item.signature) return name
 
         name = name || ''
-        name = name.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`)
+        name = name.replace(/([A-Z])/g, g => `-${g[0].toLowerCase()}`)
         const sync = (item.sync && '.sync') || ''
 
         return `${name}${sync}`

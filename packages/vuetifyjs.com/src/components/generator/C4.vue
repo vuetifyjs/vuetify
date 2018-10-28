@@ -74,7 +74,7 @@
     data () {
       return {
         valid: false,
-        required: (v) => !!v || 'Required'
+        required: v => !!v || 'Required'
       }
     }
   }

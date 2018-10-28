@@ -88,13 +88,7 @@
           key: `${item.text}-${index}`
         })
 
-        return this.$createElement('li', [
-          this.$createElement('translation-translatable', {
-            props: {
-              i18n: item.text
-            }
-          }, [link])
-        ])
+        return this.$createElement('li', [link])
       },
       async genList () {
         const list = []
@@ -104,7 +98,7 @@
         // Give page time to transition
         await new Promise(resolve => setTimeout(resolve, 300))
 
-        for (let item of this.items) {
+        for (const item of this.items) {
           const target = this.findTarget(item)
 
           if (!target) continue

@@ -24,7 +24,7 @@ export function createRouter (store) {
     const hasChildren = Array.isArray(children)
 
     return {
-      path: path,
+      path,
       meta: { fullscreen },
       name: hasChildren ? undefined : view,
       props,

@@ -37,7 +37,7 @@
         if (!component) return []
 
         return component.examples.map(example => {
-          let file = example
+          const file = example
 
           return {
             file,

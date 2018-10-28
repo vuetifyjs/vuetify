@@ -34,7 +34,7 @@
     methods: {
       allowedHours: v => v % 2,
       allowedMinutes: v => v >= 10 && v <= 50,
-      allowedStep: (m) => m % 10 === 0
+      allowedStep: m => m % 10 === 0
     }
   }
 </script>
