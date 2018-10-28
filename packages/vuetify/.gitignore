@@ -1,0 +1,8 @@
+# Ignore everything in dev, use git add -f to add new files
+/dev/
+
+# Built files
+/es5/
+/lib/
+/lib-temp/
+/dist/
