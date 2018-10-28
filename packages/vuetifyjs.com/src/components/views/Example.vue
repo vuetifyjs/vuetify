@@ -147,7 +147,7 @@
 
     computed: {
       components () {
-        let components = (this.data.components || []).slice()
+        const components = (this.data.components || []).slice()
 
         if (this.data.component) {
           components.unshift(this.data.component)

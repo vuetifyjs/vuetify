@@ -140,7 +140,7 @@
           response = await this.$store.dispatch('translation/status', msg)
 
           if (response.status === 200 && response.data.status) {
-            let status = response.data.status
+            const status = response.data.status
 
             this.$store.commit('translation/UPDATE_BTN', { key: this.currentKey, status })
           }

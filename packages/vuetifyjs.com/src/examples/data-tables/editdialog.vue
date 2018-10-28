@@ -72,7 +72,7 @@
         snack: false,
         snackColor: '',
         snackText: '',
-        max25chars: (v) => v.length <= 25 || 'Input too long!',
+        max25chars: v => v.length <= 25 || 'Input too long!',
         pagination: {},
         headers: [
           {
@@ -81,11 +81,11 @@
             sortable: false,
             value: 'name'
           },
-          {text: 'Calories', value: 'calories'},
-          {text: 'Fat (g)', value: 'fat'},
-          {text: 'Carbs (g)', value: 'carbs'},
-          {text: 'Protein (g)', value: 'protein'},
-          {text: 'Iron (%)', value: 'iron'}
+          { text: 'Calories', value: 'calories' },
+          { text: 'Fat (g)', value: 'fat' },
+          { text: 'Carbs (g)', value: 'carbs' },
+          { text: 'Protein (g)', value: 'protein' },
+          { text: 'Iron (%)', value: 'iron' }
         ],
         desserts: [
           {

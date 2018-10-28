@@ -114,6 +114,7 @@ function getPreviousCommit (log, commit) {
   return null
 }
 
+/* eslint-disable max-statements */
 async function checkStatus (locale, key) {
   const { sourcePath, localePath, fileKey } = getPaths(locale, key)
 

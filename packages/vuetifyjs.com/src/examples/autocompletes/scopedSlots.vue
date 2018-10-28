@@ -155,7 +155,7 @@
 <script>
   export default {
     data () {
-      let srcs = {
+      const srcs = {
         1: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
         2: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
         3: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',

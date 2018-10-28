@@ -177,7 +177,7 @@
         let icon
         let namespace
         let subtext
-        let text = component
+        const text = component
 
         if (this.directives.includes(text)) {
           namespace = 'Directives'

@@ -79,7 +79,7 @@
           const response = await this.$store.dispatch('translation/status', msg)
 
           if (response.status === 200 && response.data.status) {
-            let status = response.data.status
+            const status = response.data.status
 
             this.updateBtn({ key: this.i18n, status })
           }

@@ -120,7 +120,7 @@
 
         return highlight.variants[0].image.src
       },
-      shortId: shortId
+      shortId
     }
   }
 </script>
