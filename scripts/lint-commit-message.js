@@ -3,7 +3,7 @@ const fs = require('fs')
 const reset = '\x1b[0m'
 const red = '\x1b[31m'
 
-const [messageFile] = process.env.GIT_PARAMS.split(' ')
+const [messageFile] = process.env.HUSKY_GIT_PARAMS.split(' ')
 const currentMessage = fs.readFileSync(messageFile, 'utf8').replace(/^# ------------------------ >8 ------------------------[\s\S]*$|^#.*\n/gm, '')
 
 const errors = []
