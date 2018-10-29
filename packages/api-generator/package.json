@@ -6,13 +6,12 @@
   "main": "dist/api.js",
   "scripts": {
     "debug": "babel-node inspect src/index.js",
-    "build": "node src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "node src/index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "deepmerge": "^2.1.1",
+    "deepmerge": "^2.2.1",
     "vue": "^2.5.16",
     "vuetify": "^1.3.1"
   },

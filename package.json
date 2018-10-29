@@ -8,7 +8,7 @@
     "hooks": {
       "prepare-commit-msg": "node scripts/prepare-commit-message.js",
       "commit-msg": "node scripts/lint-commit-message.js",
-      "pre-commit": "node scripts/warn-npm-install.js && yarn run lint"
+      "pre-commit": "node scripts/warn-npm-install.js && yarn run lint && lerna run test -- -o"
     }
   },
   "scripts": {

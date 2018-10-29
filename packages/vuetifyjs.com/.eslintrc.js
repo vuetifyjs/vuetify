@@ -1,8 +1,6 @@
 const path = require('path')
-const resolve = file => path.resolve(__dirname, file)
 
 module.exports = {
-  root: true,
   parserOptions: {
     parser: 'babel-eslint',
     ecmaVersion: 2017,
@@ -10,8 +8,7 @@ module.exports = {
   },
   extends: [
     'plugin:vue/recommended',
-    'standard',
-    resolve('../../.eslintrc.js')
+    'standard'
   ],
   env: {
     node: true,
@@ -24,21 +21,21 @@ module.exports = {
     docsearch: true
   },
   rules: {
-    'max-len': 0,
-    "vue/max-attributes-per-line": [2, {
+    'max-len': 'off',
+    "vue/max-attributes-per-line": ['error', {
       "singleline": 5,
       "multiline": {
         "max": 1,
         "allowFirstLine": false
       }
     }],
-    "prefer-promise-reject-errors": 0
+    "prefer-promise-reject-errors": 'off'
   },
   overrides: [
     {
       files: '**/*.vue',
       rules: {
-        indent: false,
+        indent: 'off',
         "vue/script-indent": ["error", 2, {
           "baseIndent": 1,
           "switchCase": 1,
@@ -54,8 +51,8 @@ module.exports = {
     {
       files: 'src/examples/**/*.vue',
       rules: {
-        "vue/valid-v-on": false,
-        "vue/no-parsing-error": false, // This rule doesn't allow empty event listeners
+        "vue/valid-v-on": 'off',
+        "vue/no-parsing-error": 'off', // This rule doesn't allow empty event listeners
         "vue/html-self-closing": ["error", {
           "html": {
             "void": "never",
@@ -70,8 +67,8 @@ module.exports = {
     {
       files: 'src/examples/layouts/**/*.vue',
       rules: {
-        "vue/order-in-components": false,
-        "vue/require-default-prop": false
+        "vue/order-in-components": 'off',
+        "vue/require-default-prop": 'off'
       }
     }
   ]
