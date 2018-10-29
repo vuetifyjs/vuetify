@@ -23,7 +23,7 @@ module.exports = {
   },
   mapCoverage: true,
   collectCoverageFrom: [
-    '<rootDir>/src/**/*.{js,ts,tsx}'
+    'src/**/*.{js,ts,tsx}'
   ],
   transformIgnorePatterns: [
     'node_modules/(?!vue-router)'
