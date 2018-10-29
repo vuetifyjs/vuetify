@@ -26,7 +26,7 @@ let plugins = [
   }),
   new HardSourceWebpackPlugin.ExcludeModulePlugin([
     { test: /mini-css-extract-plugin[\\/]dist[\\/]loader/ },
-    { test: /vuetify[\\/](dist|es5)/ }
+    { test: /vuetify[\\/](dist|es5|lib|src)/ }
   ])
 ]
 
@@ -42,8 +42,7 @@ module.exports = {
     extensions: ['*', '.js', '.json', '.vue'],
     alias: {
       '@': path.resolve(__dirname, '../src'),
-      // Make sure *our* version of vue is always loaded. This is needed for `yarn link vuetify` to work
-      'vue$': path.resolve(__dirname, '../node_modules/vue/dist/vue.common.js')
+      'vue$': 'vue/dist/vue.runtime.esm.js'
     },
     symlinks: false
   },
@@ -54,7 +53,7 @@ module.exports = {
         // Load sourcemaps from vuetify, both css + js
         test: /\.(js|css)$/,
         loader: 'source-map-loader',
-        include: path.resolve(__dirname, '../node_modules/vuetify'),
+        include: /vuetify[\\/](dist|es5|lib|src)/,
         enforce: 'pre'
       },
       {
