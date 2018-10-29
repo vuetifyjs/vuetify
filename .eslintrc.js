@@ -27,20 +27,20 @@ module.exports = {
   ],
   rules: {
     // allow paren-less arrow functions
-    'arrow-parens': [2, 'as-needed'],
-    'local-rules/no-render-string-reference': 2,
+    'arrow-parens': ['error', 'as-needed'],
+    'local-rules/no-render-string-reference': 'error',
     // set maximum line characters
-    'max-len': [2, 140, 4, {
+    'max-len': ['error', 140, 4, {
       'ignoreUrls': true,
       'ignoreTemplateLiterals': true,
       'ignoreStrings': true
     }],
-    'max-statements': [2, 24],
+    'max-statements': ['error', 24],
     'no-console': 'off',
     // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
-    'no-return-assign': 0,
-    'prefer-promise-reject-errors': 0,
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'no-return-assign': 'off',
+    'prefer-promise-reject-errors': 'off',
     'no-unused-vars': ['error', {
       vars: 'all',
       args: 'none', // This needs to be off so we can specify mixin interfaces
@@ -64,9 +64,9 @@ module.exports = {
       'ignoreReadBeforeAssign': true
     }],
 
-    'vue/name-property-casing': false,
-    'vue/require-default-prop': false,
-    'vue/require-prop-types': false,
+    'vue/name-property-casing': 'off',
+    'vue/require-default-prop': 'off',
+    'vue/require-prop-types': 'off',
     'vue/prop-name-casing': 'error'
   },
   overrides: [
