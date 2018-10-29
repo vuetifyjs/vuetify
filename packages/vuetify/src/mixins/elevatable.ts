@@ -8,13 +8,10 @@ export default Vue.extend({
   },
 
   computed: {
-    computedElevation (): string | number | undefined {
-      return this.elevation
-    },
     elevationClasses (): Record<string, boolean> {
-      if (!this.computedElevation) return {}
+      if (!this.elevation) return {}
 
-      return { [`elevation-${this.computedElevation}`]: true }
+      return { [`elevation-${this.elevation}`]: true }
     }
   }
 })
