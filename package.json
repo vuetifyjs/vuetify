@@ -8,11 +8,14 @@
     "hooks": {
       "prepare-commit-msg": "node scripts/prepare-commit-message.js",
       "commit-msg": "node scripts/lint-commit-message.js",
-      "pre-commit": "node scripts/warn-npm-install.js && lint-staged"
+      "pre-commit": "node scripts/warn-npm-install.js && yarn run lint"
     }
   },
   "scripts": {
-    "setup": "lerna run build:dist && lerna run build:lib && lerna bootstrap && lerna link"
+    "build": "lerna run build --stream",
+    "start": "lerna run start --scope vuetifyjs.com --stream",
+    "lint": "lerna run lint --parallel",
+    "dev": "lerna run dev --scope vuetify --stream"
   },
   "devDependencies": {
     "eslint": "^5.8.0",
