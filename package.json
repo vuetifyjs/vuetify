@@ -12,7 +12,7 @@
     }
   },
   "scripts": {
-    "setup": "lerna run build:dist && lerna bootstrap && lerna link"
+    "setup": "lerna run build:dist && lerna run build:lib && lerna bootstrap && lerna link"
   },
   "devDependencies": {
     "eslint": "^5.8.0",
