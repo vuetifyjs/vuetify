@@ -113,7 +113,7 @@ export default VResponsive.extend({
     '$vuetify.breakpoint.width': 'getSrc'
   },
 
-  beforeMount () {
+  mounted () {
     this.init()
   },
 
