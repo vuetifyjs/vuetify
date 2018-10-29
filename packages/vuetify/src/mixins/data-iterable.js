@@ -474,7 +474,9 @@ export default {
       return [this.$createElement('div', {
         'class': this.actionsClasses
       }, [
-        this.$slots['actions-prepend'] ? this.$createElement('div', {}, this.$slots['actions-prepend']) : null,
+        this.$slots['actions-prepend'] ? this.$createElement('div', {
+          'class': 'flex'
+        }, this.$slots['actions-prepend']) : null,
         this.rowsPerPageItems.length > 1 ? this.genSelect() : null,
         rangeControls,
         this.$slots['actions-append'] ? this.$createElement('div', {}, this.$slots['actions-append']) : null
