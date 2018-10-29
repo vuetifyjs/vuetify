@@ -20,22 +20,17 @@ theme(v-icon, "v-icon")
   transition: $primary-transition
   vertical-align: text-bottom
 
-  &--right
-    margin-left: $grid-gutters.lg
-  &--left
-    margin-right: $grid-gutters.lg
-
   &.v-icon.v-icon--link
     cursor: pointer
 
-  &--medium
-    font-size: 2rem
-
-  &--large
+  &.v-icon--large
     font-size: 2.5rem
 
-  &--x-large
+  &.v-icon--medium
+    font-size: 2rem
+
+  &.v-icon--x-large
     font-size: 3rem
 
-  &--disabled
+  &.v-icon--disabled
     pointer-events: none
