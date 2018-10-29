@@ -14,11 +14,17 @@ module.exports = merge(base, {
     filename: 'server-bundle.js',
     libraryTarget: 'commonjs2'
   },
+  resolve: {
+    alias: {
+      'vue$': 'vue/dist/vue.runtime.common.js'
+    }
+  },
   // https://webpack.js.org/configuration/externals/#externals
   // https://github.com/liady/webpack-node-externals
   externals: nodeExternals({
     // do not externalize CSS files in case we need to import it from a dep
-    whitelist: isProd ? undefined : 'vuetify'
+    whitelist: isProd ? undefined : /^vuetify/,
+    modulesFromFile: true
   }),
   module: {
     rules: [
