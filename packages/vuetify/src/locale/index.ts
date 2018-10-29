@@ -1,3 +1,4 @@
+export {default as ca} from './ca'
 export {default as de} from './de'
 export {default as el} from './el'
 export {default as en} from './en'
