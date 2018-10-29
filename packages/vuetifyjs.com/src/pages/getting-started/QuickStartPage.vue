@@ -119,6 +119,26 @@
         helpers-markup(lang="js")
           | // index.js or main.js
           | import 'material-design-icons-iconfont/dist/material-design-icons.css' // Ensure you are using css-loader
+        helpers-section-text(:value="`${namespace}.existingText7`")
+        helpers-markup(lang="js")
+          | // App.vue
+          | import WebFontLoader from 'webfontloader'
+          | &nbsp;
+          | export default {
+          |   mounted () {
+          |     WebFontLoader.load({
+          |       google: {
+          |         families: ['Roboto:100,300,400,500,700,900']
+          |       },
+          |       active: this.setFontLoaded
+          |     })
+          |   },
+          |   methods: {
+          |     setFontLoaded () {
+          |       this.$emit('font-loaded')
+          |     }
+          |   }
+          | }
         core-alert(error :value="`${namespace}.alert2`")
 
       section#ie11-support
