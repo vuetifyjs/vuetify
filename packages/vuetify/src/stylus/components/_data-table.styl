@@ -2,66 +2,279 @@
 @import '../theme'
 
 /* Theme */
-v-datatable($material)
+v-data-table($material)
+  background-color: $material.cards
+  color: $material.text.primary
+
+  &--fixed
+    thead th
+      background: white
+      border-bottom: 0px !important
+      box-shadow: inset 0 -1px 0 rgba($material.fg-color, $material.divider-percent)
+
   thead
-    th.column.sortable
-      .v-icon
-        color: rgba($material.fg-color, $material.disabledORhints-text-percent)
+    tr
 
-      &:hover
-        color: rgba($material.fg-color, $material.primary-text-percent)
+      &:last-child th
+        border-bottom: 1px solid rgba($material.fg-color, $material.divider-percent)
 
-      &.active
-        color: rgba($material.fg-color, $material.primary-text-percent)
+      th
+        // box-shadow: inset 0 -1px 0 rgba($material.fg-color, $material.divider-percent)
+        color: rgba($material.text-color, $material.secondary-text-percent)
 
-        .v-icon
+      &.sortable
+        i
+          color: rgba($material.fg-color, $material.disabledORhints-text-percent)
+
+        &:hover
           color: rgba($material.fg-color, $material.primary-text-percent)
 
-  .v-datatable__actions
-    background-color: $material.cards
-    color: rgba($material.fg-color, $material.secondary-text-percent)
-    border-top: 1px solid rgba($material.fg-color, $material.divider-percent)
+        &.active
+          color: rgba($material.fg-color, $material.primary-text-percent)
 
-theme(v-datatable, "v-datatable")
+          i
+            color: rgba($material.fg-color, $material.primary-text-percent)
+
+  tbody
+    tr
+      &:not(:last-child)
+        // box-shadow: inset 0 -1px 0 rgba($material.fg-color, $material.divider-percent)
+        border-bottom: 1px solid rgba($material.fg-color, $material.divider-percent)
+
+      &.active
+        background: $material.table.active
+
+      &:hover:not(.datatable__expand-row)
+        background: $material.table.hover
+
+      &.expanded
+        border-bottom: 0
+
+        // td:first-child
+          // border-left: 2px solid rgba($material.fg-color, $material.divider-percent)
+
+        &.expanded__row
+          background: $material.table.active
+
+        &.expanded__content
+          box-shadow: inset 0px 4px 8px -5px rgba(50, 50, 50, 0.75), inset 0px -4px 8px -5px rgba(50, 50, 50, 0.75)
+
+  .v-table__footer
+    .v-row
+      border-top: 1px solid rgba($material.fg-color, $material.divider-percent)
+
+theme(v-data-table, "v-data-table")
 
 .v-datatable
   .v-input--selection-controls
     margin: 0
     padding: 0
 
-  thead
-    th.column.sortable
-      cursor: pointer
-      outline: 0
+.v-table-virtual
+  &__container
+    position: relative
+    overflow-y: hidden
+    padding-right: 17px
 
-      .v-icon
-        font-size: 16px
-        display: inline-block
-        opacity: 0
-        transition: .3s $transition.swing
+  &__scroller
+    position: absolute
+    top: 0
+    right: 0
+    height: 100%
+    width: 17px
+    overflow-x: hidden
 
-      &:focus,
+  &__wrapper
+    width: 100%
+    height: 100%
+    overflow-x: auto
+    overflow-y: hidden
+
+.v-table-regular
+  &__wrapper
+    overflow-y: auto
+
+.v-data-table
+  table
+    width: 100%
+    max-width: 100%
+    border-collapse: collapse
+    // border-spacing: 0
+
+    colgroup
+      .divider
+        border-right: 1px solid lightgrey
+
+  &--dense
+    td
+      height: 24px
+    th
+      height: 32px
+
+  &--fixed
+    thead
+      th
+        position: sticky
+        top: 0
+        z-index: 10
+
+    .v-table__header, .v-table__actions
+      margin-right: 17px
+
+  &--mobile
+    tr, td, th
+      display: block
+
+    td, th
+      padding: 14px
+
+td, th
+  // &:not(:nth-child(1)), &:first-child
+  padding: 0 16px
+
+.v-row
+  &__header
+    font-weight: 600
+
+  &__value
+    text-align: right
+
+.v-simple-checkbox
+  align-self: center
+  position: relative
+  user-select: none
+  cursor: pointer
+
+.v-data-table-header
+  &--mobile
+    th
+      height: initial
+
+      > div
+        display: flex
+
+        .v-simple-checkbox
+          margin-right: 24px
+
+        .v-select
+          margin-top: 0
+
+  &__progress
+    height: auto !important
+
+    th
+      height: auto !important
+      border: none !important
+      padding: 0
+
+      .v-progress-linear
+        margin: 0
+
+  th
+    font-weight: 500
+    font-size: 12px
+    transition: .3s $transition.swing
+    white-space: nowrap
+    user-select: none
+    position: relative
+
+    .resize-handle
+      z-index: 10
+      position: absolute
+      right: -4px
+      top: 0
+      height: 100%
+      width: 8px
+      cursor: ew-resize
+
       &:hover
-        .v-icon
-          opacity: .6
+        background: grey
 
-      &.active
-        transform: none
+  .sortable
+    pointer-events: auto
+    cursor: pointer
+    outline: 0
 
-        .v-icon
-          opacity: 1
+    i
+      font-size: 18px
+      display: inline-block
+      opacity: 0
+      transition: .3s $transition.swing
 
-        &.desc
-          .v-icon
-            transform: rotate(-180deg)
+    &:focus,
+    &:hover
+      i
+        opacity: .6
+
+    &.active
+      transform: none
+
+      i
+        opacity: 1
+
+      &.desc
+        i
+          transform: rotate(-180deg)
+
+.v-data-table__body
+  .v-row
+    transition: background $primary-transition
+    will-change: background
+
+  .v-cell
+    font-weight: 400
+    font-size: 13px
+
+td, th
+  > .v-input
+    margin-top: 0
+    padding-top: 0
+
+    .v-input--selection-controls__input
+      margin-right: 0
+
+td
+  height: 48px
+
+th
+  height: 48px
+
+  .badge
+    display: inline-flex
+    justify-content: center
+    border: 0px
+    border-radius: 50%
+    background-color: lightgrey // TODO: theme
+    min-width: 16px
+    min-height: 16px
+    height: 16px
+    width: 16px
+    color: white // TODO: theme
+    font-size: 0.8rem
+
+th
+  font-weight: bold
+
+tr > th
+  white-space: normal
+
+.v-row, .v-row-expandable
+  &:not(:last-child)
+    .v-cell
+      border-bottom: 1px solid rgba(0,0,0,.12) // TODO: theme
+
+.v-cell, .v-head
+  word-break: break-word
+  overflow: hidden
+  text-overflow: ellipsis
 
 /** Actions */
-.v-datatable__actions
+.v-data-table__actions
   display: flex
+  flex-wrap: wrap
   justify-content: flex-end
   align-items: center
   font-size: 12px
-  flex-wrap: wrap-reverse
 
   .v-btn
     color: inherit
@@ -98,19 +311,11 @@ theme(v-datatable, "v-datatable")
       .v-select__selection--comma
         font-size: 12px
 
-.v-datatable__progress
-  height: auto !important
+.v-row-expandable
+  &__wrapper
+    transition: all 0.3s ease-out
 
-  tr, td, th
-    height: auto !important
-
-  th
-    padding: 0 !important
-
-    .v-progress-linear
-      margin: 0
-
-.v-datatable__expand
+.v-data-table__expand
   &-row
     border: none !important
 
@@ -119,7 +324,7 @@ theme(v-datatable, "v-datatable")
     height: 0px !important
 
     &--expanded
-      border-bottom: 1px solid rgba(0,0,0,0.12)
+      border-bottom: 1px solid rgba(0,0,0,0.12) // TODO: theme
 
   &-content
     transition: height $primary-transition
@@ -127,3 +332,17 @@ theme(v-datatable, "v-datatable")
     > .card
       border-radius: 0
       box-shadow: none
+
+.v-row-group
+  &__header, &__summary
+    background: lightgrey
+
+    td
+      height: 35px
+
+.expand__icon
+  user-select: none
+  cursor: pointer
+
+  &--active
+    transform: rotate(-180deg)

@@ -25,6 +25,7 @@ export interface DataProps {
   items: any[]
   pagination: DataPaginaton
   options: DataOptions
+  updateOptions: (obj: any) => void
   sort: (value: string) => void
   group: (value: string) => void
   groupedItems?: Record<string, any[]>
@@ -49,7 +50,14 @@ export default Vue.extend({
     },
     options: {
       type: Object,
-      default: () => {}
+      default: () => ({
+        page: 1,
+        itemsPerPage: 10,
+        sortBy: [],
+        sortDesc: [],
+        groupBy: [],
+        groupDesc: []
+      })
     },
     sortBy: {
       type: [String, Array],
@@ -108,14 +116,15 @@ export default Vue.extend({
         : Math.ceil(this.itemsLength / this.internalOptions.itemsPerPage) // TODO: can't use items.length here
     },
     pageStart (): number {
-      return this.internalOptions.itemsPerPage === -1
-        ? 0
-        : (this.internalOptions.page - 1) * this.internalOptions.itemsPerPage
+      if (this.internalOptions.itemsPerPage === -1 || !this.items.length) return 0
+
+      return (this.internalOptions.page - 1) * this.internalOptions.itemsPerPage
     },
     pageStop (): number {
-      return this.internalOptions.itemsPerPage === -1
-        ? this.itemsLength
-        : Math.min(this.itemsLength, this.internalOptions.page * this.internalOptions.itemsPerPage)
+      if (this.internalOptions.itemsPerPage === -1) return this.itemsLength
+      if (!this.items.length) return 0
+
+      return Math.min(this.itemsLength, this.internalOptions.page * this.internalOptions.itemsPerPage)
     },
     pagination (): DataPaginaton {
       return {

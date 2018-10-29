@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import { VNode, VNodeDirective, FunctionalComponentOptions, VNodeChildrenArrayContents } from 'vue/types'
 import { VuetifyIcon } from 'vuetify'
+import { TableHeader } from '../components/VDataTable/VDataTableHeader'
 
 export function createSimpleFunctional (
   c: string,
