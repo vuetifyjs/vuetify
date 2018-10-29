@@ -38,6 +38,27 @@ test('VCard.vue', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should render a colored card', () => {
+    const wrapper = mount(VCard, {
+      propsData: {
+        color: 'blue lighten-1'
+      }
+    })
+
+    expect(wrapper.element.classList).toContain('blue')
+    expect(wrapper.element.classList).toContain('lighten-1')
+  })
+
+  it('should render a tile card', () => {
+    const wrapper = mount(VCard, {
+      propsData: {
+        tile: true
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it('should render a card with custom height', () => {
     const heightpx = '400px'
     const wrapper = mount(VCard, {
@@ -53,5 +74,16 @@ test('VCard.vue', ({ mount }) => {
       height: 401
     })
     expect(wrapper.hasStyle('height', '401px')).toBe(true)
+  })
+
+  it('should render a tile card', () => {
+    const wrapper = mount(VCard, {
+      propsData: {
+        tile: true
+      }
+    })
+
+    expect(wrapper.hasClass('v-card--tile')).toBe(true)
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })
