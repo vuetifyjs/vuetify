@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { VNode, VNodeDirective, FunctionalComponentOptions } from 'vue/types'
+import { VNode, VNodeDirective, FunctionalComponentOptions, VNodeChildrenArrayContents } from 'vue/types'
 import { VuetifyIcon } from 'vuetify'
 
 export function createSimpleFunctional (
@@ -340,4 +340,71 @@ export function arrayDiff (a: any[], b: any[]): any[] {
  */
 export function upperFirst (str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1)
+}
+
+export function groupByProperty (xs: any[], key: string) {
+  return xs.reduce((rv, x) => {
+    (rv[x[key]] = rv[x[key]] || []).push(x)
+    return rv
+  }, {})
+}
+
+export function wrapInArray<T> (v: T | T[]): T[] { return Array.isArray(v) ? v : [v] }
+
+export function computeSlots (cmp: Vue, name: string, props: object) {
+  const slots: VNodeChildrenArrayContents = []
+
+  if (cmp.$slots[name]) slots.push(...cmp.$slots[name])
+  if (cmp.$scopedSlots[name]) {
+    const scoped = cmp.$scopedSlots[name](props)
+    Array.isArray(scoped) ? slots.push(...scoped) : slots.push(scoped)
+  }
+
+  return slots
+}
+
+export function sortItems (items: any[], sortBy: string[], sortDesc: boolean[], locale: string, headers?: Record<string, TableHeader>) {
+  if (sortBy === null || !sortBy.length) return items
+
+  return items.sort((a: any, b: any): number => {
+    for (let i = 0; i < sortBy.length; i++) {
+      const sortKey = sortBy[i]
+
+      let sortA = getObjectValueByPath(a, sortKey)
+      let sortB = getObjectValueByPath(b, sortKey)
+
+      if (sortDesc[i]) {
+        [sortA, sortB] = [sortB, sortA]
+      }
+
+      if (headers && headers[sortKey]) return headers[sortKey].sort!(sortA, sortB)
+
+      // Check if both cannot be evaluated
+      if (sortA === null && sortB === null) {
+        return 0
+      }
+
+      [sortA, sortB] = [sortA, sortB].map(s => (s || '').toString().toLocaleLowerCase())
+
+      if (sortA !== sortB) {
+        if (!isNaN(sortA) && !isNaN(sortB)) return Number(sortA) - Number(sortB)
+        return sortA.localeCompare(sortB, locale)
+      }
+    }
+
+    return 0
+  })
+}
+
+export function searchItems (items: any[], search: string) {
+  if (!search) return items
+  search = search.toString().toLowerCase()
+  if (search.trim() === '') return items
+
+  return items.filter(i => Object.keys(i).some(j => {
+    const val = i[j]
+    return val != null &&
+      typeof val !== 'boolean' &&
+      val.toString().toLowerCase().indexOf(search) !== -1
+  }))
 }
