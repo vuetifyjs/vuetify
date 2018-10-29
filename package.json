@@ -11,6 +11,9 @@
       "pre-commit": "node scripts/warn-npm-install.js && lint-staged"
     }
   },
+  "scripts": {
+    "setup": "lerna run build:dist && lerna bootstrap && lerna link"
+  },
   "devDependencies": {
     "eslint": "^5.8.0",
     "eslint-config-standard": "^12.0.0",
