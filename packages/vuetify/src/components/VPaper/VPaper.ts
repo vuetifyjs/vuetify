@@ -8,6 +8,7 @@ import Measurable from '../../mixins/measurable'
 import Themeable from '../../mixins/themeable'
 
 // Helpers
+import { convertToUnit } from '../../util/helpers'
 import mixins from '../../util/mixins'
 
 // Types
@@ -40,7 +41,12 @@ export default mixins(
       }
     },
     styles (): object {
-      return this.measurableStyles
+      return {
+        height: convertToUnit(this.height),
+        maxHeight: convertToUnit(this.maxHeight),
+        maxWidth: convertToUnit(this.maxWidth),
+        width: convertToUnit(this.width)
+      }
     }
   },
 
