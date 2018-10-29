@@ -1,0 +1,40 @@
+{
+  "header": "Time picker",
+  "headerText": "O `v-time-picker` é um componente autônomo que pode ser utilizado em vários componentes existentes do Vuetify. Ele oferece ao usuário uma representação visual para a seleção do tempo.",
+  "examples": {
+    "timeLight": {
+      "header": "Time pickers",
+      "desc": "Time pickers possuem o tema claro habilitado por padrão."
+    },
+    "timeColorable": {
+      "header": "Time pickers - Cores",
+      "desc": "As cores de um Time picker podem ser modificadas usando as propriedades `color` e `header-color`. Se não foi fornecido valor para a propriedade `header-color`, logo o cabeçalho (header) utilizará o valor da propriedade `color`."
+    },
+    "timeDialogAndMenu": {
+      "header": "Time pickers - Em um dialog e menu",
+      "desc": "Devido a flexibilidade dos pickers, você pode realmente marcar a experiência exatamente como você desejar."
+    },
+    "time24hFormat": {
+      "header": "Time pickers - Formato 24h",
+      "desc": "Um time picker pode ser alterado para o formato de 24 horas."
+    },
+    "timeAllowedTimes": {
+      "header": "Time pickers - Tempos permitidos",
+      "desc": "Você pode especificar os tempos permitidos utilizando arrays, objetos e funções."
+    },
+    "timeWidth": {
+      "header": "Time pickers - Definindo a largura do picker",
+      "desc": "Você pode especificar ao picker uma largura ou fazer com que ele possua largura total."
+    }
+  },
+  "props": {
+    "v-time-picker": {
+      "format": "Opções disponíveis são `ampm` e `24hr`",
+      "allowedHours": "Restringe quais horas podem ser selecionadas",
+      "allowedMinutes": "Restringe quais minutos podem ser selecionados",
+      "scrollable": "Permite alterar a hora/minuto com a rolagem do mouse",
+      "min": "Mínimo tempo permitido",
+      "max": "Máximo tempo permitido"
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+    "header": "Directiva resize",
+    "headerText": "La directiva `v-resize` puede ser utilizada para llamar funciones específicas cuando la ventana cambia de tamaño.",
+    "components": [
+        "v-resize"
+    ],
+    "examples": [
+        {
+            "default": {
+                "header": "Default",
+                "desc": "Cambia el tamaño de tu ventana y observa cómo cambian los valores...",
+                "uninverted": true
+            }
+        }
+    ],
+    "params": [
+        {
+            "v-resize": [
+                {
+                    "name": "callback",
+                    "type": "Function",
+                    "default": "null"
+                },
+                {
+                    "name": "quiet",
+                    "type": "Boolean",
+                    "default": "false",
+                    "desc": "El método callback no será invocado cuando la directiva esté presente"
+                },
+                {
+                    "name": "debounce",
+                    "type": "Number",
+                    "default": "200"
+                }
+            ]
+        }
+    ]
+}

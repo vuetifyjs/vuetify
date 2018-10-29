@@ -1,0 +1,25 @@
+{
+    "header": "Grid list",
+    "headerText": "Las _Grid lists_ son un aditamento del componente `v-container` que agregan espacios de control entre los elementos que las componen.",
+    "components": [
+        "v-container",
+        "v-layout",
+        "v-flex",
+        "v-spacer"
+    ],
+    "examples": [
+        {
+            "default": {
+                "header": "Grid lists",
+                "desc": "Estas listas enriquecen el componente `v-container` para permitir mayor flexibilidad con los espacios. Viene en 5 variantes, desde xs hasta xl y puede cambiarse dinámicamente."
+            },
+            "subheader": {
+                "header": "Grid lists",
+                "desc": "Las _grid lists_ trabajarán sin problema con tu implementación de grid actual y te permitirán crear interfaces de usuario asombrosas."
+            }
+        }
+    ],
+    "props": {
+        "tag": "Mixins.Routable.props.tag"
+    }
+}

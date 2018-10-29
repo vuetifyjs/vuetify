@@ -1,6 +1,8 @@
 <!--
 MAKE SURE TO READ THE CONTRIBUTING GUIDE BEFORE CREATING A PR
 https://github.com/vuetifyjs/vuetify/blob/master/.github/CONTRIBUTING.md
+
+Testing and markup sections can be removed for doumentation changes
 -->
 
 <!-- Provide a general summary of your changes in the Title above -->
@@ -38,7 +40,5 @@ https://github.com/vuetifyjs/vuetify/blob/master/.github/CONTRIBUTING.md
 <!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
 <!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
 - [ ] The PR title is no longer than 64 characters.
-- [ ] The PR is submitted to the correct branch (`master` for bug fixes, `dev` for new features and breaking changes).
+- [ ] The PR is submitted to the correct branch (`master` for bug fixes and documentation updates, `dev` for new features and breaking changes).
 - [ ] My code follows the code style of this project.
-- [ ] My change requires a change to the documentation.
-- [ ] I have created a PR in the [documentation](https://github.com/vuetifyjs/vuetifyjs.com) with the necessary changes.
