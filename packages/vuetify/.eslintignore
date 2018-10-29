@@ -1,0 +1,15 @@
+/dev/
+/build/
+*.styl
+
+# Tests
+*.spec.js
+/types/test
+src/util/testing.js
+src/util/to-have-been-warned.js
+
+# Built files
+/es5/
+/lib/
+/lib-temp/
+/dist/

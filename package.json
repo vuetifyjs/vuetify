@@ -1,161 +1,44 @@
 {
-  "name": "vuetify",
-  "version": "1.3.3",
-  "author": {
-    "name": "John Leider",
-    "email": "john@vuetifyjs.com"
-  },
-  "license": "MIT",
-  "homepage": "http://vuetifyjs.com",
-  "repository": "vuetifyjs/vuetify",
-  "main": "dist/vuetify.js",
-  "module": "dist/vuetify.js",
-  "jsdelivr": "dist/vuetify.js",
-  "types": "types/index.d.ts",
-  "sideEffects": [
-    "*.styl",
-    "*.css"
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "dev"
   ],
-  "scripts": {
-    "watch": "cross-env TARGET=development webpack --config build/config.js --progress --hide-modules --watch",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.config.js --hot",
-    "build": "concurrently \"yarn build:dist --no-progress\" \"yarn build:lib\" -n\"dist,lib\" --kill-others-on-fail -r",
-    "build:dev": "cross-env NODE_ENV=production node build/webpack.dev.config.js",
-    "build:dist": "rimraf dist && cross-env NODE_ENV=production webpack --config build/config.js --progress --hide-modules",
-    "build:lib": "node build/build-lib.js",
-    "debug-build": "node --inspect --debug-brk build/config.js",
-    "debug:test": "cross-env NODE_ENV=test node --inspect --inspect-brk ./node_modules/jest/bin/jest.js --no-cache -i --verbose",
-    "test": "node build/run-tests.js",
-    "test:unix": "cross-env NODE_ENV=test jest",
-    "test:win32": "cross-env NODE_ENV=test jest -i",
-    "test:coverage": "yarn test --coverage",
-    "test:types": "tsc -p ./types/test/tsconfig.json",
-    "lint": "concurrently \"tsc --noEmit --pretty\" \"tslint -p . -c .tslint.js src/**/*.ts -t stylish\" \"eslint --ext .js,.ts src\" \"yarn test:types\" --kill-others-on-fail -n \"tsc,tslint,eslint,types\"",
-    "lint:fix": "concurrently \"tsc --noEmit --pretty\" \"tslint --fix -p . -c .tslint.js src/**/*.ts -t stylish\" \"eslint --fix --ext .js,.ts src\" \"yarn test:types\" --kill-others-on-fail -n \"tsc,tslint,eslint,types\"",
-    "preparecommitmsg": "node dev/prepare-commit-message.js",
-    "commitmsg": "node dev/lint-commit-message.js",
-    "precommit": "node dev/warn-npm-install.js && concurrently \"yarn test\" \"yarn lint\" -n \"test,lint\" --kill-others-on-fail"
+  "husky": {
+    "hooks": {
+      "prepare-commit-msg": "node scripts/prepare-commit-message.js",
+      "commit-msg": "node scripts/lint-commit-message.js",
+      "pre-commit": "node scripts/warn-npm-install.js && yarn run lint && lerna run test -- -o"
+    }
   },
-  "description": "Vue.js 2 Semantic Component Framework",
+  "scripts": {
+    "build": "lerna run build --stream",
+    "start": "lerna run start --scope vuetifyjs.com --stream",
+    "lint": "lerna run lint --parallel",
+    "dev": "lerna run dev --scope vuetify --stream"
+  },
   "devDependencies": {
-    "@mdi/font": "^2.6.95",
-    "@types/jest": "^22.2.3",
-    "@types/node": "^10.12.0",
-    "autoprefixer": "^9.1.1",
-    "avoriaz": "^6.3.0",
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-eslint": "^8.2.6",
-    "babel-loader": "^7.1.5",
-    "babel-plugin-detective": "2.0.0",
-    "babel-plugin-module-resolver": "3.1.1",
-    "babel-plugin-transform-define": "^1.3.0",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-polyfill": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "concurrently": "^3.6.1",
-    "cross-env": "^5.2.0",
-    "css-loader": "^1.0.0",
-    "css-mqpacker": "^7.0.0",
-    "cssnano": "^4.0.5",
-    "dotenv": "^6.0.0",
-    "eslint": "^5.3.0",
-    "eslint-config-standard": "^12.0.0-alpha.0",
-    "eslint-friendly-formatter": "^4.0.1",
-    "eslint-loader": "^2.1.0",
+    "eslint": "^5.8.0",
+    "eslint-config-standard": "^12.0.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-local-rules": "^0.1.0",
     "eslint-plugin-node": "^7.0.1",
-    "eslint-plugin-promise": "^3.8.0",
-    "eslint-plugin-standard": "^3.1.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-typescript": "^0.12.0",
     "eslint-plugin-vue": "^4.7.1",
-    "file-loader": "^1.1.11",
-    "fork-ts-checker-webpack-plugin": "^0.4.8",
-    "friendly-errors-webpack-plugin": "^1.7.0",
-    "happypack": "^5.0.0",
-    "husky": "^0.14.3",
-    "inquirer": "^6.1.0",
+    "husky": "^1.1.2",
     "jest": "^21.2.1",
     "jest-cli": "^21.2.1",
     "jest-css-modules": "^1.1.0",
     "jest-serializer-html": "^5.0.0",
-    "mini-css-extract-plugin": "^0.4.1",
-    "optimize-css-assets-webpack-plugin": "^5.0.0",
-    "postcss-loader": "^3.0.0",
-    "pug": "^2.0.3",
-    "pug-loader": "^2.4.0",
-    "rimraf": "^2.6.2",
-    "semver": "^5.5.0",
-    "shelljs": "^0.8.2",
-    "style-loader": "^0.22.1",
-    "stylus": "^0.54.5",
-    "stylus-loader": "^3.0.2",
+    "lerna": "^3.4.3",
+    "lint-staged": "^7.3.0",
     "ts-jest": "^21.2.1",
-    "ts-loader": "^5.2.2",
     "tslint": "^5.11.0",
-    "tslint-loader": "^3.6.0",
-    "tslint-stylish": "^2.1.0",
     "typescript": "^3.1.3",
     "typescript-eslint-parser": "^20.0.0",
     "typestrict": "^1.0.1",
-    "uglifyjs-webpack-plugin": "^1.2.7",
-    "url-loader": "^1.0.1",
-    "vue": "^2.5.17",
-    "vue-loader": "^15.3.0",
-    "vue-router": "^3.0.1",
-    "vue-template-compiler": "^2.5.17",
-    "vue-template-es2015-compiler": "^1.6.0",
-    "vuetify-loader": "^0.2.0",
-    "webpack": "^4.16.5",
-    "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "^3.1.5",
-    "webpack-merge": "^4.1.4"
-  },
-  "dependencies": {},
-  "peerDependencies": {
-    "vue": "^2.5.10"
-  },
-  "engines": {
-    "node": ">= 4.0.0",
-    "npm": ">= 3.0.0"
-  },
-  "jest": {
-    "verbose": false,
-    "roots": [
-      "<rootDir>/test/unit",
-      "<rootDir>/test/integration"
-    ],
-    "moduleFileExtensions": [
-      "ts",
-      "js"
-    ],
-    "moduleDirectories": [
-      "node_modules"
-    ],
-    "moduleNameMapper": {
-      "^@/test$": "<rootDir>/test/index.js",
-      "^@/test/(.*)$": "<rootDir>/test/$1",
-      "^@/(.*)$": "<rootDir>/src/$1"
-    },
-    "transform": {
-      "\\.(styl)$": "jest-css-modules",
-      ".*\\.(j|t)s$": "ts-jest"
-    },
-    "mapCoverage": true,
-    "collectCoverageFrom": [
-      "src/**/*.{js,ts,tsx}"
-    ],
-    "transformIgnorePatterns": [
-      "node_modules/(?!vue-router)"
-    ],
-    "snapshotSerializers": [
-      "jest-serializer-html"
-    ],
-    "globals": {
-      "ts-jest": {
-        "useBabelrc": true
-      }
-    }
+    "vue": "^2.5.17"
   }
 }

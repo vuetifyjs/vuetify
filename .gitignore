@@ -1,23 +1,16 @@
 .DS_Store
 node_modules/
-.vscode/
-npm-debug.log
-.idea/
-coverage/
-Playground.vue
-report.html
-.vs/
-dev/*.js
-dev/*css
-!dev/index.js
-!dev/router.js
-!dev/prepare-commit-message.js
-!dev/lint-commit-message.js
-!dev/warn-npm-install.js
-/es5
-/lib
-/lib-temp
-/dist
-/release
 .env
+
+# IDE user config
+.vscode/
+.idea/
+.vs/
+
+# Logs
 yarn-error.log
+npm-debug.log
+lerna-debug.log
+
+# Istanbul coverage
+coverage/

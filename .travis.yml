@@ -19,13 +19,13 @@ jobs:
       before_script:
         - npm i codecov -g
       script:
-        - yarn run lint
-        - yarn run test:coverage -i
+        - lerna run lint
+        - lerna run test:coverage -- -i
       after_script:
         - codecov
 
     - stage: test
-      script: yarn run build
+      script: lerna run build
 
     - stage: deploy
       before_script:
