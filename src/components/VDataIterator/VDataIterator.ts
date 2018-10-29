@@ -1,349 +1,52 @@
+import Vue, { VNode } from 'vue'
+
 // Components
-import VDataFooter from './VDataFooter'
+import { VLocalData } from '../VData'
 
-// Mixins
-import Themeable from '../../mixins/themeable'
-
-// Utils
-import mixins from '../../util/mixins'
-import { getObjectValueByPath, deepEqual, wrapInArray, computeSlots } from '../../util/helpers'
-
-// Types
-import { VNode, VNodeChildrenArrayContents } from 'vue'
+// Helpers
+import { sortItems, deepEqual, searchItems, getObjectValueByPath } from '../../util/helpers'
+import { DataProps } from '../VData/VLocalData'
 import { PropValidator } from 'vue/types/options'
 
-export default mixins(
-  Themeable
-  /* @vue/component */
-).extend({
-  name: 'v-data-iterator',
-
-  provide (): any {
-    const dataIterator = {
-      updateOptions: this.updateOptions
-    }
-
-    Object.defineProperties(dataIterator, {
-      options: { get: () => this.options, enumerable: true },
-      itemsLength: { get: () => this.itemsLength, enumerable: true },
-      pageStart: { get: () => this.pageStart, enumerable: true },
-      pageStop: { get: () => this.pageStop, enumerable: true },
-      pageCount: { get: () => this.pageCount, enumerable: true }
-    })
-
-    return { dataIterator }
-  },
-
+export default Vue.extend({
   props: {
-    items: {
+    ...VLocalData.options.props,
+    value: {
       type: Array,
-      default: () => ([])
+      default: () => []
     } as PropValidator<any[]>,
-    itemKey: {
-      type: String,
-      default: 'id'
-    },
-    customSort: {
-      type: Function,
-      default: (items: any[], sortBy: string[], sortDesc: boolean[], locale: string) => {
-        if (sortBy === null) return items
-
-        return items.sort((a: any, b: any): number => {
-          for (let i = 0; i < sortBy.length; i++) {
-            const sortKey = sortBy[i]
-
-            let sortA = getObjectValueByPath(a, sortKey)
-            let sortB = getObjectValueByPath(b, sortKey)
-
-            if (sortDesc[i]) {
-              [sortA, sortB] = [sortB, sortA]
-            }
-
-            // Check if both cannot be evaluated
-            if (sortA === null && sortB === null) {
-              return 0
-            }
-
-            [sortA, sortB] = [sortA, sortB].map(s => (s || '').toString().toLocaleLowerCase())
-
-            if (sortA !== sortB) {
-              if (!isNaN(sortA) && !isNaN(sortB)) return Number(sortA) - Number(sortB)
-              // if (sortA > sortB) return 1
-              // if (sortA < sortB) return -1
-              return sortA.localeCompare(sortB, locale)
-            }
-          }
-
-          return 0
-        })
-      }
-    },
-    // TODO: should probably not combine customFilter and filter
-    // but having both of them is confusing and overly complex.
-    // Also should we do built-in column filter in headers?
-    customFilter: {
-      type: Function,
-      default: (items: any[], search: string) => {
-        search = search.toString().toLowerCase()
-        if (search.trim() === '') return items
-
-        return items.filter(i => Object.keys(i).some(j => {
-          const val = i[j]
-          return val != null &&
-            typeof val !== 'boolean' &&
-            val.toString().toLowerCase().indexOf(search) !== -1
-        }))
-      }
-    },
-    search: {
-      type: String
-    },
-    sortBy: {
-      type: [String, Array],
-      default: () => ([])
-    } as PropValidator<string | string[]>,
-    sortDesc: {
-      type: [Boolean, Array],
-      default: () => ([])
-    } as PropValidator<boolean | boolean[]>,
-    itemsPerPage: {
-      type: Number,
-      default: 10
-    },
-    page: {
-      type: Number,
-      default: 1
-    },
-    serverItemsLength: {
-      type: Number
-    },
-    noResultsText: {
-      type: String,
-      default: '$vuetify.dataIterator.noResultsText'
-    },
-    noDataText: {
-      type: String,
-      default: '$vuetify.noDataText'
-    },
-    loading: Boolean,
-    loadingText: {
-      type: String,
-      default: '$vuetify.dataIterator.loadingText'
-    },
-    multiSort: {
-      type: Boolean
-    },
-    mustSort: {
-      type: Boolean
-    },
-    value: Array as PropValidator<any[]>,
-    singleSelect: Boolean, // TODO: Better name to fit in with similar functionality in other components?
-    expanded: Array as PropValidator<any[]>,
-    singleExpand: Boolean, // TODO: Better name to fit in with similar functionality in other components?
-    hideDefaultFooter: Boolean,
-    footerProps: {
-      type: Object,
-      default: () => ({})
-    } as PropValidator<any>, // TODO: Type VDataFooter props here
-    locale: {
-      type: String,
-      default: 'en-us'
-    },
-    mobileBreakpoint: {
-      type: String,
-      default: 'smAndDown'
-    },
-    dataOptions: Object // TODO: Better name!
+    singleSelect: Boolean,
+    expanded: {
+      type: Array,
+      default: () => []
+    } as PropValidator<any[]>,
+    singleExpand: Boolean
   },
 
-  data () {
-    return {
-      searchItemsLength: 0,
-      selection: {} as Record<string, boolean>,
-      expansion: {} as Record<string, boolean>,
-      options: {
-        sortBy: wrapInArray(this.sortBy),
-        sortDesc: wrapInArray(this.sortDesc),
-        itemsPerPage: this.itemsPerPage,
-        page: this.page
-      }
-    }
-  },
-
-  computed: {
-    hasSearch (): boolean {
-      return typeof this.search !== 'undefined' && this.search !== null
-    },
-    computedItems (): any[] {
-      let items = this.items.slice()
-
-      if (this.serverItemsLength) return items
-
-      items = this.searchItems(items)
-
-      items = this.sortItems(items, this.options.sortBy, this.options.sortDesc, this.locale)
-
-      return this.paginateItems(items)
-    },
-    pageStart (): number {
-      return this.options.itemsPerPage === -1
-        ? 0
-        : (this.options.page - 1) * this.options.itemsPerPage
-    },
-    pageStop (): number {
-      return this.options.itemsPerPage === -1
-        ? this.itemsLength // TODO: Does this need to be something other (server-side, etc?)
-        : this.options.page * this.options.itemsPerPage
-    },
-    pageCount (): number {
-      // We can't simply use computedItems.length here since it's already sliced
-      return this.options.itemsPerPage <= 0 ? 1 : Math.ceil(this.itemsLength / this.options.itemsPerPage)
-    },
-    itemsLength (): number {
-      if (typeof this.serverItemsLength !== 'undefined' && !isNaN(this.serverItemsLength)) return this.serverItemsLength
-      if (this.hasSearch) return this.searchItemsLength
-      return this.items.length
-    },
-    everyItem (): boolean {
-      return !!this.computedItems.length && this.computedItems.every((i: any) => this.isSelected(i))
-    },
-    someItems (): boolean {
-      return this.computedItems.some((i: any) => this.isSelected(i))
-    },
-    isMobile (): boolean {
-      return this.$vuetify.breakpoint.name === this.mobileBreakpoint
-    }
-  },
+  data: () => ({
+    selection: {} as Record<string, boolean>,
+    expansion: {} as Record<string, boolean>
+  }),
 
   watch: {
-    dataOptions: {
-      handler (v, old) {
-        if (deepEqual(v, old)) return
-
-        this.updateOptions(v)
-      },
-      deep: true,
-      immediate: true
-    },
-    options: {
-      handler (v, old) {
-        if (deepEqual(v, old)) return
-
-        this.$emit('update:dataOptions', v)
-      },
-      deep: true
-    },
-    'options.sortBy' (v, old) {
-      if (deepEqual(v, old)) return
-      this.$emit('update:sortBy', !this.multiSort && !Array.isArray(this.sortBy) ? v[0] : v)
-    },
-    'options.sortDesc' (v, old) {
-      if (deepEqual(v, old)) return
-      this.$emit('update:sortDesc', !this.multiSort && !Array.isArray(this.sortBy) ? v[0] : v)
-    },
-    'options.page' (v) {
-      this.$emit('update:page', v)
-    },
-    'options.itemsPerPage' (v) {
-      this.$emit('update:itemsPerPage', v)
-    },
-    sortBy (v) {
-      this.options.sortBy = wrapInArray(v)
-    },
-    sortDesc (v) {
-      this.options.sortDesc = wrapInArray(v)
-    },
-    page (v) {
-      this.options.page = v
-    },
-    itemsPerPage (v) {
-      this.options.itemsPerPage = v
-    },
-    selected (v) {
-      const selection: Record<string, boolean> = {}
-      v.forEach((i: any) => selection[getObjectValueByPath(i, this.itemKey)] = true)
-      this.selection = selection
-    },
-    expanded: {
-      handler (v) {
-        if (!v) return
-        const expansion: Record<string, boolean> = {}
-        v.forEach((i: any) => expansion[getObjectValueByPath(i, this.itemKey)] = true)
-        this.expansion = expansion
-      },
-      immediate: true
+    value (value: any[]) {
+      this.selection = value.reduce((selection, item) => {
+        selection[getObjectValueByPath(item, this.itemKey)] = true
+        return selection
+      }, {})
     },
     selection: {
-      handler (v, old) {
-        if (deepEqual(v, old)) return
-        const keys = Object.keys(this.selection).filter(k => this.selection[k])
+      handler (value: Record<string, boolean>, old: Record<string, boolean>) {
+        if (deepEqual(value, old)) return
+        const keys = Object.keys(value).filter(k => value[k])
         const selected = !keys.length ? [] : this.items.filter(i => keys.includes(String(getObjectValueByPath(i, this.itemKey))))
         this.$emit('input', selected)
       },
       deep: true
-    },
-    expansion: {
-      handler (v, old) {
-        if (deepEqual(v, old)) return
-        const keys = Object.keys(this.expansion)
-        const expanded = !keys.length ? [] : this.items.filter(i => keys.includes(String(getObjectValueByPath(i, this.itemKey))))
-        this.$emit('update:expanded', expanded)
-      },
-      deep: true
     }
   },
 
-  mounted () {
-    this.$emit('update:dataOptions', this.options)
-  },
-
   methods: {
-    sortItems (items: any[], sortBy: string[], sortDesc: boolean[], locale: string): any[] {
-      return this.customSort(items, sortBy, sortDesc, locale)
-    },
-    paginateItems (items: any[]): any[] {
-      return items.slice(this.pageStart, this.pageStop)
-    },
-    searchItems (items: any[]): any[] {
-      if (this.hasSearch) {
-        items = this.customFilter(items, this.search)
-        this.searchItemsLength = items.length
-      }
-
-      return items
-    },
-    sort (key: string): void {
-      let sortBy = this.options.sortBy.slice()
-      let sortDesc = this.options.sortDesc.slice()
-      const sortByIndex = sortBy.findIndex((k: string) => k === key)
-
-      if (sortByIndex < 0) {
-        if (!this.multiSort) {
-          sortBy = []
-          sortDesc = []
-        }
-        sortBy.push(key)
-        sortDesc.push(false)
-      } else if (sortByIndex >= 0 && !sortDesc[sortByIndex]) {
-        sortDesc[sortByIndex] = true
-      } else if (!this.mustSort) {
-        sortBy.splice(sortByIndex, 1)
-        sortDesc.splice(sortByIndex, 1)
-      } else {
-        sortDesc[sortByIndex] = false
-      }
-
-      // Reset page to 1 if sortBy or sortDesc have changed
-      let page = this.options.page
-      if (!deepEqual(sortBy, this.options.sortBy) || !deepEqual(sortDesc, this.options.sortDesc)) {
-        page = 1
-      }
-
-      this.updateOptions({ sortBy, sortDesc, page })
-    },
-    updateOptions (options: any) {
-      this.options = Object.assign({}, this.options, options)
-    },
     isSelected (item: any): boolean {
       return this.selection[getObjectValueByPath(item, this.itemKey)] || false
     },
@@ -370,29 +73,15 @@ export default mixins(
       this.expansion = expansion
       this.$emit('item-expanded', { item, value })
     },
-    resetExpanded (): void {
-      this.expansion = {}
-    },
-    toggleSelectAll (): void {
-      const selection: Record<string, boolean> = {}
-
-      this.computedItems.forEach((item: any) => {
-        const key = getObjectValueByPath(item, this.itemKey)
-        selection[key] = !this.everyItem
-      })
-
-      this.selection = Object.assign({}, this.selection, selection)
-    },
-    createItemProps (item: any): any {
+    itemSlotProps (item: any) {
       const props = {
-        item,
-        mobile: this.isMobile
+        item
       }
 
       Object.defineProperties(props, {
         selected: {
           get: () => this.isSelected(item),
-          set: v => this.select(item, v),
+          set: (value: boolean) => this.select(item, value),
           enumerable: true
         },
         expanded: {
@@ -404,82 +93,58 @@ export default mixins(
 
       return props
     },
-    createSlotProps () {
-      return { items: this.computedItems, mobile: this.isMobile }
-    },
-    genEmptyWrapper (content: VNodeChildrenArrayContents) {
-      return this.$createElement('div', content)
-    },
-    genEmpty () {
-      if (!this.serverItemsLength && this.loading) {
-        const loading = this.$slots['loading'] || this.$vuetify.t(this.loadingText)
-        return this.genEmptyWrapper(loading)
-      } else if (!this.itemsLength && !this.items.length) {
-        const noData = this.$slots['no-data'] || this.$vuetify.t(this.noDataText)
-        return this.genEmptyWrapper(noData)
-      } else if (!this.computedItems.length) {
-        const noResults = this.$slots['no-results'] || this.$vuetify.t(this.noResultsText)
-        return this.genEmptyWrapper(noResults)
-      }
-
-      return null
-    },
-    genBodies () {
-      const empty = this.genEmpty()
-
-      if (empty) return [empty]
-
-      const bodies: VNodeChildrenArrayContents = [this.$slots.default]
-
-      const slots = computeSlots(this, 'body', this.createSlotProps())
-      if (slots.length) {
-        bodies.push(slots)
-        return bodies
-      }
-
-      const items = this.genItems()
-      if (items) bodies.push(items)
-
-      return bodies
-    },
-    genItems (): string | VNodeChildrenArrayContents | VNode | null {
-      if (this.$scopedSlots.items) {
-        return this.$scopedSlots.items({ items: this.computedItems })
-      }
+    genItems (props: DataProps) {
+      if (this.$scopedSlots.default) return this.$scopedSlots.default(props)
 
       if (this.$scopedSlots.item) {
-        const slotItems = this.computedItems.map((item: any) => this.$scopedSlots.item(this.createItemProps(item)))
-        return this.$createElement('div', slotItems)
+        return props.items.map((item: any) => this.$scopedSlots.item(this.itemSlotProps(item)))
       }
 
-      return null
+      return []
     },
-    genFooter (): VNodeChildrenArrayContents {
-      const footers = []
-
-      if (!this.hideDefaultFooter) {
-        footers.push(this.$createElement(VDataFooter, {
-          props: {
-            ...this.footerProps
-          }
-        }))
-      }
-
-      return footers
+    genSlots (slot: string, props: any) {
+      return [
+        ...this.$slots[slot] || [],
+        this.$scopedSlots[slot] && this.$scopedSlots[slot](props)
+      ]
+    },
+    genDefaultScopedSLot (props: any) {
+      return this.$createElement('div', {
+        staticClass: 'v-data-iterator'
+      }, [
+        this.genSlots('prepend', props),
+        this.genItems(props),
+        this.genSlots('append', props)
+      ]) as any
     }
   },
 
-  render (h): VNode {
-    const children: VNodeChildrenArrayContents = [
-      computeSlots(this, 'header', this.createSlotProps()),
-      ...this.genBodies(),
-      computeSlots(this, 'footer', this.createSlotProps()),
-      ...this.genFooter()
-    ]
-
-    return h('div', {
-      staticClass: 'v-data-iterator',
-      class: this.themeClasses
-    }, children)
+  render (): VNode {
+    return this.$createElement(VLocalData, {
+      props: {
+        items: this.items,
+        options: this.options,
+        page: this.page,
+        itemsPerPage: this.itemsPerPage,
+        sortBy: this.sortBy,
+        sortDesc: this.sortDesc,
+        groupBy: this.groupBy,
+        groupDesc: this.groupDesc,
+        customSort: this.customSort
+      },
+      on: {
+        'update:options': (v: any, old: any) => !deepEqual(v, old) && this.$emit('update:options', v),
+        'update:page': (v: any) => this.$emit('update:page', v),
+        'update:itemsPerPage': (v: any) => this.$emit('update:itemsPerPage', v),
+        'update:sortBy': (v: any) => this.$emit('update:sortBy', v),
+        'update:sortDesc': (v: any) => this.$emit('update:sortDesc', v),
+        'update:groupBy': (v: any) => this.$emit('update:groupBy', v),
+        'update:groupDesc': (v: any) => this.$emit('update:groupDesc', v),
+        'pagination': (v: any, old: any) => !deepEqual(v, old) && this.$emit('pagination', v)
+      },
+      scopedSlots: {
+        default: this.genDefaultScopedSLot
+      }
+    })
   }
 })

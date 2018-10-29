@@ -1,191 +1,76 @@
+// Helpers
 import Vue, { VNode } from 'vue'
-import VDataTable from './VDataTable'
+import { PropValidator } from 'vue/types/options'
+import { DataOptions } from '../VData/VLocalData'
+import TableHeader from './TableHeader'
 
-// import VCellCheckbox from './VCellCheckbox'
-import VIcon from '../VIcon'
-import mixins from '../../util/mixins'
-import VProgressLinear from '../VProgressLinear'
-import { VSimpleCheckbox } from '../VCheckbox'
-
-type VDataTableInstance = InstanceType<typeof VDataTable>
-
-interface options extends Vue {
-  dataTable: VDataTableInstance
-}
-
-export default mixins<options>().extend({
-  name: 'v-data-header',
-
-  inject: ['dataTable'],
-
+export default Vue.extend({
   props: {
-    sortIcon: {
-      type: String,
-      default: '$vuetify.icons.sort'
-    }
+    headers: {
+      type: Array,
+      required: true
+    } as PropValidator<TableHeader[]>,
+    options: {
+      type: Object,
+      default: () => ({
+        page: 1,
+        itemsPerPage: 10,
+        sortBy: [],
+        sortDesc: [],
+        groupBy: [],
+        groupDesc: []
+      })
+    } as PropValidator<DataOptions>,
+    multiSort: Boolean
   },
-
-  data: () => ({
-    resize: {
-      column: -1,
-      start: -1
-    }
-  }),
 
   methods: {
-    genSelectAll (classes: string | string[] = []) {
-      return this.$createElement(VSimpleCheckbox, {
-        staticClass: 'v-data-table__checkbox',
-        props: {
-          value: this.dataTable.everyItem
-        },
-        attrs: {
-          indeterminate: !this.dataTable.everyItem && this.dataTable.someItems
-        },
-        on: {
-          input: () => this.dataTable.toggleSelectAll()
-        }
-      })
+    genSortIcon (beingSorted: boolean, isDesc: boolean): VNode {
+      return this.$createElement('div', [`${beingSorted ? 's' : ''}${isDesc ? 'd' : ''}`])
     },
-    genSortIcon () {
-      return this.$createElement(VIcon, [this.sortIcon])
-    },
-    genLoading () {
-      const progress = this.$createElement(VProgressLinear, {
-        props: {
-          // color: this.dataTable.loading === true
-          //   ? 'primary'
-          //   : this.dataTable.loading,
-          height: 2,
-          indeterminate: true
-        }
-      })
+    genHeaders () {
+      return this.headers.map(header => {
+        const listeners: any = {}
+        const children = [
+          this.$createElement('span', [header.text])
+        ]
 
-      const th = this.$createElement('th', {
-        staticClass: 'column',
-        attrs: {
-          colspan: this.dataTable.computedHeaders.length
+        let classes = {
+          [`text-xs-${header.align || 'left'}`]: true
         }
-      }, [progress])
 
-      return this.$createElement('tr', {
-        staticClass: 'v-data-header__progress'
-      }, [th])
-    },
-    genGroupHandle (value: any) {
-      return this.$createElement('span', {
-        on: {
-          click: (e: MouseEvent) => {
-            e.stopPropagation()
-            this.dataTable.options.groupBy = value
+        if (header.sortable || !header.hasOwnProperty('sortable')) {
+          listeners['click'] = () => {
+            this.$emit('sort', header.value)
           }
-        }
-      }, ['group'])
-    },
-    genResizeHandle (i: number) {
-      return this.$createElement('div', {
-        staticClass: 'resize-handle',
-        on: {
-          click: (e: MouseEvent) => {
-            e.stopPropagation()
-          },
-          dblclick: (e: MouseEvent) => {
-            e.stopPropagation()
-            this.$set(this.dataTable.widths, i, 1)
-            this.$nextTick(() => {
-              this.dataTable.calcWidths()
-            })
-          },
-          mousedown: (e: MouseEvent) => {
-            e.stopPropagation()
-            this.resize = { column: i, start: e.clientX }
+
+          const sortIndex = this.options.sortBy.findIndex(k => k === header.value)
+          const beingSorted = sortIndex >= 0
+          const isDesc = this.options.sortDesc[sortIndex]
+
+          classes = {
+            ...classes,
+            'sortable': true,
+            'active': beingSorted,
+            'asc': beingSorted && !isDesc,
+            'desc': beingSorted && isDesc
           }
+
+          if (header.align === 'end') children.unshift(this.genSortIcon(beingSorted, isDesc))
+          else children.push(this.genSortIcon(beingSorted, isDesc))
         }
+
+        return this.$createElement('th', {
+          class: classes,
+          on: listeners
+        }, children)
       })
     }
   },
 
-  render (h): VNode {
-    const headers = this.dataTable.computedHeaders.map((c, i) => {
-      const classes = {
-        [`text-xs-${c.align || 'left'}`]: true
-      }
-      if (c.class) {
-        Array.isArray(c.class) ? c.class.forEach(c => classes[c] = true) : classes[c.class] = true
-      }
-      const children = []
-      const listeners: any = {}
-
-      if (c.value === 'dataTableSelect') {
-        children.push(this.genSelectAll())
-      } else {
-        children.push(this.$scopedSlots.text ? this.$scopedSlots.text({ header: c }) : h('span', [c.text]))
-
-        if (c.sortable || !c.hasOwnProperty('sortable')) {
-          listeners['click'] = () => {
-            this.dataTable.resetExpanded()
-            this.dataTable.sort(c.value)
-          }
-
-          const sortIndex = this.dataTable.options.sortBy.findIndex(k => k === c.value)
-          const beingSorted = sortIndex >= 0
-          const isDesc = this.dataTable.options.sortDesc[sortIndex]
-
-          classes['sortable'] = true
-          classes['active'] = beingSorted
-          classes['asc'] = beingSorted && !isDesc
-          classes['desc'] = beingSorted && isDesc
-
-          if (c.align === 'end') children.unshift(this.genSortIcon())
-          else children.push(this.genSortIcon())
-
-          this.dataTable.multiSort && beingSorted && children.push(h('span', { class: 'badge' }, [String(sortIndex + 1)]))
-        }
-
-        const groupable = this.dataTable.options.groupBy !== undefined
-
-        if (groupable) children.push(this.genGroupHandle(c.value))
-        if (c.resizable) children.push(this.genResizeHandle(i))
-      }
-
-      return h('th', {
-        class: classes,
-        on: listeners
-      }, children)
-    })
-
-    const children = [h('tr', {
-      on: {
-        mousemove: (e: MouseEvent) => {
-          if (this.resize.column < 0) return
-          const amount = this.resize.start - e.clientX
-
-          for (let i = this.resize.column; i <= this.resize.column + 1; i++) {
-            if (i >= headers.length) continue
-            const currentWidth = this.dataTable.widths[i]
-            if (i === this.resize.column) {
-              this.$set(this.dataTable.widths, i, currentWidth - amount)
-            } else {
-              this.$set(this.dataTable.widths, i, currentWidth + amount)
-            }
-          }
-
-          this.resize.start = e.clientX
-        },
-        mouseup: (e: MouseEvent) => {
-          this.resize = { column: -1, start: -1 }
-        }
-      }
-    }, headers)]
-
-    if (this.dataTable.loading !== false) {
-      children.push(this.genLoading())
-    }
-
-    this.$slots.default && children.unshift(...this.$slots.default)
-
-    return h('thead', {
-      class: 'v-data-header'
-    }, children)
+  render (): VNode {
+    return this.$createElement('thead', [
+      this.$createElement('tr', this.genHeaders())
+    ])
   }
 })

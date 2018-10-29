@@ -343,3 +343,49 @@ export function computeSlots (cmp: Vue, name: string, props: object) {
 
   return slots
 }
+
+export function sortItems (items: any[], sortBy: string[], sortDesc: boolean[], locale: string, headers?: Record<string, TableHeader>) {
+  if (sortBy === null || !sortBy.length) return items
+
+  return items.sort((a: any, b: any): number => {
+    for (let i = 0; i < sortBy.length; i++) {
+      const sortKey = sortBy[i]
+
+      let sortA = getObjectValueByPath(a, sortKey)
+      let sortB = getObjectValueByPath(b, sortKey)
+
+      if (sortDesc[i]) {
+        [sortA, sortB] = [sortB, sortA]
+      }
+
+      if (headers && headers[sortKey]) return headers[sortKey].sort!(sortA, sortB)
+
+      // Check if both cannot be evaluated
+      if (sortA === null && sortB === null) {
+        return 0
+      }
+
+      [sortA, sortB] = [sortA, sortB].map(s => (s || '').toString().toLocaleLowerCase())
+
+      if (sortA !== sortB) {
+        if (!isNaN(sortA) && !isNaN(sortB)) return Number(sortA) - Number(sortB)
+        return sortA.localeCompare(sortB, locale)
+      }
+    }
+
+    return 0
+  })
+}
+
+export function searchItems (items: any[], search: string) {
+  if (!search) return items
+  search = search.toString().toLowerCase()
+  if (search.trim() === '') return items
+
+  return items.filter(i => Object.keys(i).some(j => {
+    const val = i[j]
+    return val != null &&
+      typeof val !== 'boolean' &&
+      val.toString().toLowerCase().indexOf(search) !== -1
+  }))
+}
