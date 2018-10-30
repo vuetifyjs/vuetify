@@ -1,48 +1,7 @@
 <template lang="pug">
   views-doc
     template(slot-scope="{ namespace }")
-      section#reporting-issues
-        helpers-section-head(:value="`${namespace}.issuesHeader`")
-        div.mb-3
-          ul.browser-list
-            li
-              translation-translatable(:i18n="`${namespace}.issue1`")
-                helpers-markdown(:source="$t(`${namespace}.issue1`)")
-            ul.browser-list
-              li
-                translation-translatable(:i18n="`${namespace}.issue2`")
-                  helpers-markdown(:source="$t(`${namespace}.issue2`)")
-            li
-              translation-translatable(:i18n="`${namespace}.issue3`")
-                helpers-markdown(:source="$t(`${namespace}.issue3`)")
-            li
-              translation-translatable(:i18n="`${namespace}.issue4`")
-                helpers-markdown(:source="$t(`${namespace}.issue4`)")
-            li
-              translation-translatable(:i18n="`${namespace}.issue5`")
-                helpers-markdown(:source="$t(`${namespace}.issue5`)")
-            li
-              translation-translatable(:i18n="`${namespace}.issue6`")
-                helpers-markdown(:source="$t(`${namespace}.issue6`)")
-      section#pull-requests
-        helpers-section-head(:value="`${namespace}.pullRequestsHeader`")
-        div.mb-3
-          ul.browser-list
-            li(
-              v-for="n in 3"
-              :key="n"
-            )
-              translation-translatable(:i18n="`${namespace}.pullRequest${n}`")
-                helpers-markdown(:source="$t(`${namespace}.pullRequest${n}`)")
-      section#setup-local-dev
-        helpers-section-head(:value="`${namespace}.localDevHeader`")
-        helpers-section-text(:value="`${namespace}.localDevText1`").mb-5
-        helpers-markup(lang="cli").mb-5
-          | $ git clone git@github.com:vuetifyjs/vuetify
-        helpers-section-text(:value="`${namespace}.localDevText2`").mb-5
-        helpers-markup(lang="cli").mb-5
-          | $ git checkout dev
-          | $ yarn // or npm install
-          | $ yarn dev // or npm run dev
-        helpers-section-text(:value="`${namespace}.localDevText3`")
+      section#under-construction
+        v-alert(type="error" value="true")
+          | The contributing section is currently under construction. Vuetify has moved to a mono repo for easier maintenance of packages as outlined in this <a href="https://github.com/vuetifyjs/vuetify/releases/tag/v1.3.4" target="blank">release</a>. If you would like to contribute in the mean time, please reach out to us in the <a href="https://community.vuetifyjs.com" class="white--text">community</a>.
 </template>
