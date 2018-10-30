@@ -26,18 +26,18 @@
         | import Vuetify from 'vuetify'
         |
         | // Translation provided by Vuetify (javascript)
-        | import zhHans from 'vuetify/es5/locale/zh-Hans'
+        | import { zhHans } from 'vuetify/lib/locale'
         |
         | // Translation provided by Vuetify (typescript)
-        | import pl from 'vuetify/src/locale/pl'
+        | import { pl } from 'vuetify/src/locale'
         |
         | // Your own translation file
         | import sv from './i18n/vuetify/sv'
         |
         | Vue.use(Vuetify, {
         |   lang: {
-        |     locales: { zhHans, pl, sv },
-        |     current: 'zhHans'
+        |     locales: { 'zh-Hans': zhHans, pl, sv },
+        |     current: 'zh-Hans'
         |   }
         | })
         |
