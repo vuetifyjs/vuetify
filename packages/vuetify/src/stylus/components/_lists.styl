@@ -33,7 +33,15 @@ v-list($material)
     .v-list__group__header__prepend-icon .v-icon
       color: $material.icons.inactive !important
 
+v-list-rtl()
+  &__tile
+    &__title
+      text-align: right
+    &__content
+      text-align: right
+
 theme(v-list, "v-list")
+rtl(v-list-rtl, "v-list")
 
 .v-list
   list-style-type: none
