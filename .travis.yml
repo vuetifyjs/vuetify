@@ -29,10 +29,6 @@ jobs:
       after_script:
         - codecov
 
-    - stage: test
-      name: 'Build'
-      script: yarn run build
-
     - stage: deploy
       before_script:
         - yarn global add codecov
