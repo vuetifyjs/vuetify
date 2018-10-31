@@ -423,7 +423,8 @@ test('VTabs', ({ mount }) => {
   // https://github.com/vuetifyjs/vuetify/issues/5371
   it('should call updateTabsView once when registering a tab', async () => {
     const updateTabsView = jest.fn()
-    mount(VTabs, {
+    const wrapper = mount(VTabs, {
+      attachToDocument: true,
       slots: {
         default: [{
           functional: true,
@@ -432,6 +433,9 @@ test('VTabs', ({ mount }) => {
       },
       methods: { updateTabsView }
     })
+
+    // Ensure component is mounted
+    await wrapper.vm.$nextTick()
 
     // Wait for onResize setTimeout
     await new Promise(resolve => setTimeout(resolve, 0))
