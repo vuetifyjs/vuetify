@@ -52,7 +52,7 @@ jobs:
             tags: true
         - provider: releases
           api_key: $GITHUB_API_KEY
-          file: "release/vuetify-${TRAVIS_TAG}.zip"
+          file: "packages/vuetify/release/vuetify-${TRAVIS_TAG}.zip"
           skip_cleanup: true
           on:
             repo: vuetifyjs/vuetify
