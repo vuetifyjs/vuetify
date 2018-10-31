@@ -15,7 +15,10 @@
     "build": "lerna run build --stream",
     "start": "lerna run start --scope vuetifyjs.com --stream",
     "lint": "lerna run lint --parallel",
-    "dev": "lerna run dev --scope vuetify --stream"
+    "dev": "lerna run dev --scope vuetify --stream",
+    "version": "node scripts/confirm-npm-tag.js",
+    "postversion": "node scripts/post-release-merge.js",
+    "now-build": "echo 'Built on Travis CI'"
   },
   "devDependencies": {
     "eslint": "^5.8.0",
@@ -28,12 +31,15 @@
     "eslint-plugin-typescript": "^0.12.0",
     "eslint-plugin-vue": "^4.7.1",
     "husky": "^1.1.2",
+    "inquirer": "^6.2.0",
     "jest": "^21.2.1",
     "jest-cli": "^21.2.1",
     "jest-css-modules": "^1.1.0",
     "jest-serializer-html": "^5.0.0",
     "lerna": "^3.4.3",
     "lint-staged": "^7.3.0",
+    "semver": "^5.6.0",
+    "shelljs": "^0.8.2",
     "ts-jest": "^21.2.1",
     "tslint": "^5.11.0",
     "typescript": "^3.1.3",
