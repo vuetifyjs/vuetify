@@ -1,4 +1,10 @@
 {
   "name": "vuetifyjs.com",
-  "alias": "vuetifyjs.com"
+  "alias": "vuetifyjs.com",
+  "files": [
+    "dist",
+    "package.json",
+    "server.js",
+    "yarn.lock"
+  ]
 }
