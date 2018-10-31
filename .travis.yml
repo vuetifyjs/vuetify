@@ -37,13 +37,12 @@ jobs:
       before_script:
         - yarn global add codecov
       script:
-        - cd packages/vuetify
-        - yarn run lint
-        - yarn run test:coverage -i && codecov
-        - yarn run build
+        - lerna run lint --scope vuetify
+        - lerna run test:coverage --scope vuetify -- -i && codecov
+        - lerna run build --scope vuetify
         - rm -rf release
         - mkdir -p release
-        - for file in ./dist/*; do cp "$file" "${file/dist\/vuetify/release/vuetify-${TRAVIS_TAG}}"; done
+        - for file in ./packages/vuetify/dist/*; do cp "$file" "${file/dist\/vuetify/release/vuetify-${TRAVIS_TAG}}"; done
         - zip -jr "release/vuetify-${TRAVIS_TAG}.zip" release/*
       deploy:
         - provider: script
@@ -54,7 +53,7 @@ jobs:
             tags: true
         - provider: releases
           api_key: $GITHUB_API_KEY
-          file: "packages/vuetify/release/vuetify-${TRAVIS_TAG}.zip"
+          file: "release/vuetify-${TRAVIS_TAG}.zip"
           skip_cleanup: true
           on:
             repo: vuetifyjs/vuetify
