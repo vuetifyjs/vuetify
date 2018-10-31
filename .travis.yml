@@ -10,8 +10,8 @@ install:
 stages:
   - name: test
     if: (tag IS blank) OR (type != push) OR (repo != vuetifyjs/vuetify)
-  - name: deploy-master
-    if: (tag IS present) AND (type = push) AND (branch = master) AND fork = false
+  - name: deploy
+    if: (tag IS present) AND (type = push) AND (repo = vuetifyjs/vuetify)
 
 jobs:
   include:
@@ -28,7 +28,7 @@ jobs:
       script: yarn run build
 
     # Vuetify Github
-    - stage: deploy-master
+    - stage: deploy
       before_script:
         - yarn global add codecov
       script:
