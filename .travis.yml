@@ -10,12 +10,14 @@ install:
 stages:
   - name: test
     if: (tag IS blank) OR (type != push) OR (repo != vuetifyjs/vuetify)
+  - name: deploy-master
+    if: (tag IS present) AND (type = push) AND (branch = master) AND fork = false
 
 jobs:
   include:
     - stage: test
       before_script:
-        - npm i codecov -g
+        - yarn global add codecov
       script:
         - lerna run lint
         - lerna run test:coverage -- -i
@@ -24,3 +26,33 @@ jobs:
 
     - stage: test
       script: lerna run build
+
+    # Vuetify Github
+    - stage: deploy-master
+      before_script:
+        - yarn global add codecov
+      script:
+        - cd packages/vuetify
+        - yarn run lint
+        - yarn run test:coverage -i && codecov
+        - yarn run build
+        - rm -rf release
+        - mkdir -p release
+        - for file in ./dist/*; do cp "$file" "${file/dist\/vuetify/release/vuetify-${TRAVIS_TAG}}"; done
+        - zip -jr "release/vuetify-${TRAVIS_TAG}.zip" release/*
+      deploy:
+        - provider: npm
+          email: "john.j.leider@gmail.com"
+          api_key: $NPM_API_KEY
+          tag: $(node ./build/parse-npm-tag.js ${TRAVIS_TAG})
+          skip_cleanup: true
+          on:
+            repo: vuetifyjs/vuetify
+            tags: true
+        - provider: releases
+          api_key: $GITHUB_API_KEY
+          file: "release/vuetify-${TRAVIS_TAG}.zip"
+          skip_cleanup: true
+          on:
+            repo: vuetifyjs/vuetify
+            tags: true
