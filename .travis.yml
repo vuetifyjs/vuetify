@@ -20,6 +20,7 @@ stages:
 jobs:
   include:
     - stage: test
+      name: 'Lint and test'
       before_script:
         - yarn global add codecov
       script:
@@ -29,6 +30,7 @@ jobs:
         - codecov
 
     - stage: test
+      name: 'Build'
       script: yarn run build
 
     - stage: deploy
@@ -59,13 +61,16 @@ jobs:
             tags: true
 
     - stage: publish-docs-live
+      name: 'Publish docs - live'
       before_script: yarn global add now
       script:
         - yarn run build
         - now -e --team=vuetifyjs --token=$NOW_TOKEN --npm
+        - node scripts/set-now-alias.js vuetifyjs.com
         - now alias --team=vuetifyjs --token=$NOW_TOKEN
 
     - stage: publish-docs-next
+      name: 'Publish docs - next'
       before_script: yarn global add now
       script:
         - yarn run build
