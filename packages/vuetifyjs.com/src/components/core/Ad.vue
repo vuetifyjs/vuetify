@@ -1,5 +1,5 @@
 <template>
-  <div id="ad__container">
+  <v-flex id="ad__container">
     <v-system-bar
       v-if="viewport === 'xs' && shouldShowAd"
       v-show="$vuetify.breakpoint.xsOnly"
@@ -30,15 +30,57 @@
       stateless
       width="192"
     >
-      <no-ssr>
-        <core-table-of-contents
-          :offset="85"
-          :threshold="50"
+      <v-layout
+        column
+        fill-height
+      >
+        <v-flex shrink mb-3>
+          <no-ssr>
+            <core-table-of-contents
+              :offset="85"
+              :threshold="50"
+            />
+          </no-ssr>
+        </v-flex>
+
+        <v-flex
+          xs12
+          text-xs-center
+        >
+          <h4 class="caption font-weight-bold grey--text">Diamond Sponsors</h4>
+          <div class="my-3">
+            <div
+              v-for="diamond in diamonds"
+              :key="diamond.name"
+              class="text-xs-center mt-2"
+            >
+              <a
+                :href="diamond.href"
+                target="_blank"
+                rel="noopener"
+                @click="$ga.event('drawer sponsor click', 'click', diamond.name)"
+              >
+                <v-img
+                  :src="`https://cdn.vuetifyjs.com/images/${diamond.logo}`"
+                  :alt="diamond.Name"
+                  contain
+                  height="30"
+                />
+              </a>
+            </div>
+          </div>
+          <misc-sponsor-btn small />
+        </v-flex>
+
+        <v-flex
+          :key="`${path}-md`"
+          :id="navId"
+          mt-auto
+          style="margin-bottom: 72px;"
         />
-      </no-ssr>
-      <div :key="`${path}-md`" :id="navId" />
+      </v-layout>
     </v-navigation-drawer>
-  </div>
+  </v-flex>
 </template>
 
 <script>
@@ -46,7 +88,10 @@
   import ssrBootable from 'vuetify/es5/mixins/ssr-bootable'
 
   // Utilities
-  import { mapState } from 'vuex'
+  import {
+    mapGetters,
+    mapState
+  } from 'vuex'
 
   export default {
     name: 'AppAd',
@@ -59,12 +104,16 @@
     }),
 
     computed: {
+      ...mapGetters('app', ['supporters']),
       ...mapState('route', ['path', 'name']),
       shouldShowAd () {
         return (
           this.name !== 'home/Home' &&
           this.name.indexOf('store/') < 0
         )
+      },
+      diamonds () {
+        return this.supporters.diamond
       }
     },
 
