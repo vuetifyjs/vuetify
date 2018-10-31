@@ -16,7 +16,8 @@
     "start": "lerna run start --scope vuetifyjs.com --stream",
     "lint": "lerna run lint --parallel",
     "dev": "lerna run dev --scope vuetify --stream",
-    "version": "node scripts/confirm-npm-tag.js"
+    "version": "node scripts/confirm-npm-tag.js",
+    "now-build": "echo 'Built on Travis CI'"
   },
   "devDependencies": {
     "eslint": "^5.8.0",

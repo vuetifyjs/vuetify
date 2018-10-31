@@ -12,6 +12,10 @@ stages:
     if: (tag IS blank) OR (type != push) OR (repo != vuetifyjs/vuetify)
   - name: deploy
     if: (tag IS present) AND (type = push) AND (repo = vuetifyjs/vuetify)
+  - name: publish-docs-live
+    if: (branch = master) AND (type = push) AND (repo = vuetifyjs/vuetify)
+  - name: publish-docs-next
+    if: (branch = dev) AND (type = push) AND (repo = vuetifyjs/vuetify)
 
 jobs:
   include:
@@ -27,7 +31,6 @@ jobs:
     - stage: test
       script: yarn run build
 
-    # Vuetify Github
     - stage: deploy
       before_script:
         - yarn global add codecov
@@ -54,3 +57,18 @@ jobs:
           on:
             repo: vuetifyjs/vuetify
             tags: true
+
+    - stage: publish-docs-live
+      before_script: yarn global add now
+      script:
+        - yarn run build
+        - now -e --team=vuetifyjs --token=$NOW_TOKEN --npm
+        - now alias --team=vuetifyjs --token=$NOW_TOKEN
+
+    - stage: publish-docs-next
+      before_script: yarn global add now
+      script:
+        - yarn run build
+        - now -e --team=vuetifyjs --token=$NOW_TOKEN --npm
+        - node scripts/set-now-alias.js next.vuetifyjs.com
+        - now alias --team=vuetifyjs --token=$NOW_TOKEN
