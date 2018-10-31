@@ -15,7 +15,8 @@
     "build": "lerna run build --stream",
     "start": "lerna run start --scope vuetifyjs.com --stream",
     "lint": "lerna run lint --parallel",
-    "dev": "lerna run dev --scope vuetify --stream"
+    "dev": "lerna run dev --scope vuetify --stream",
+    "version": "node scripts/confirm-npm-tag.js"
   },
   "devDependencies": {
     "eslint": "^5.8.0",
@@ -34,6 +35,7 @@
     "jest-serializer-html": "^5.0.0",
     "lerna": "^3.4.3",
     "lint-staged": "^7.3.0",
+    "semver": "^5.6.0",
     "ts-jest": "^21.2.1",
     "tslint": "^5.11.0",
     "typescript": "^3.1.3",

@@ -67,7 +67,6 @@
     "pug": "^2.0.3",
     "pug-loader": "^2.4.0",
     "rimraf": "^2.6.2",
-    "semver": "^5.6.0",
     "shelljs": "^0.8.2",
     "style-loader": "^0.23.1",
     "stylus": "^0.54.5",
