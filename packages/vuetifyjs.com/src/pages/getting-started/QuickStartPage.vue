@@ -60,7 +60,7 @@
           | &lt;!DOCTYPE html&gt;
           | &lt;html&gt;
           | &lt;head&gt;
-          |   &lt;link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet"&gt;
+          |   &lt;link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' rel="stylesheet"&gt;
           |   &lt;link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet"&gt;
           |   &lt;meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui"&gt;
           | &lt;/head&gt;
@@ -113,7 +113,7 @@
         helpers-section-text(:value="`${namespace}.existingText5`")
         helpers-markup(lang="html")
           | &lt;head&gt;
-          |   &lt;link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet"&gt;
+          |   &lt;link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' rel="stylesheet"&gt;
           | &lt;/head&gt;
         helpers-section-text(:value="`${namespace}.existingText6`")
         helpers-markup(lang="js")
