@@ -19,13 +19,13 @@ jobs:
       before_script:
         - yarn global add codecov
       script:
-        - lerna run lint
+        - yarn run lint
         - lerna run test:coverage -- -i
       after_script:
         - codecov
 
     - stage: test
-      script: lerna run build
+      script: yarn run build
 
     # Vuetify Github
     - stage: deploy-master
