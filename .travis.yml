@@ -42,7 +42,7 @@ jobs:
         - lerna run build --scope vuetify
         - rm -rf release
         - mkdir -p release
-        - for file in ./packages/vuetify/dist/*; do cp "$file" "${file/dist\/vuetify/release/vuetify-${TRAVIS_TAG}}"; done
+        - for file in ./packages/vuetify/dist/*; do cp "$file" "${file/packages\/vuetify\/dist\/vuetify/release/vuetify-${TRAVIS_TAG}}"; done
         - zip -jr "release/vuetify-${TRAVIS_TAG}.zip" release/*
       deploy:
         - provider: script
