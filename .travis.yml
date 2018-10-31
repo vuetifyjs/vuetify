@@ -10,17 +10,66 @@ install:
 stages:
   - name: test
     if: (tag IS blank) OR (type != push) OR (repo != vuetifyjs/vuetify)
+  - name: deploy
+    if: (tag IS present) AND (type = push) AND (repo = vuetifyjs/vuetify)
+  - name: publish-docs-live
+    if: (branch = master) AND (type = push) AND (repo = vuetifyjs/vuetify)
+  - name: publish-docs-next
+    if: (branch = dev) AND (type = push) AND (repo = vuetifyjs/vuetify)
 
 jobs:
   include:
     - stage: test
+      name: 'Lint and test'
       before_script:
-        - npm i codecov -g
+        - yarn global add codecov
       script:
-        - lerna run lint
+        - yarn run lint
         - lerna run test:coverage -- -i
       after_script:
         - codecov
 
-    - stage: test
-      script: lerna run build
+    - stage: deploy
+      before_script:
+        - yarn global add codecov
+      script:
+        - cd packages/vuetify
+        - yarn run lint
+        - yarn run test:coverage -i && codecov
+        - yarn run build
+        - rm -rf release
+        - mkdir -p release
+        - for file in ./dist/*; do cp "$file" "${file/dist\/vuetify/release/vuetify-${TRAVIS_TAG}}"; done
+        - zip -jr "release/vuetify-${TRAVIS_TAG}.zip" release/*
+      deploy:
+        - provider: script
+          script: bash scripts/deploy.sh
+          skip_cleanup: true
+          on:
+            repo: vuetifyjs/vuetify
+            tags: true
+        - provider: releases
+          api_key: $GITHUB_API_KEY
+          file: "packages/vuetify/release/vuetify-${TRAVIS_TAG}.zip"
+          skip_cleanup: true
+          on:
+            repo: vuetifyjs/vuetify
+            tags: true
+
+    - stage: publish-docs-live
+      name: 'Publish docs - live'
+      before_script: yarn global add now
+      script:
+        - yarn run build
+        - node scripts/set-now-alias.js vuetifyjs.com
+        - now -e --team=vuetifyjs --token=$NOW_TOKEN --npm
+        - now alias --team=vuetifyjs --token=$NOW_TOKEN
+
+    - stage: publish-docs-next
+      name: 'Publish docs - next'
+      before_script: yarn global add now
+      script:
+        - yarn run build
+        - node scripts/set-now-alias.js next.vuetifyjs.com
+        - now -e --team=vuetifyjs --token=$NOW_TOKEN --npm
+        - now alias --team=vuetifyjs --token=$NOW_TOKEN

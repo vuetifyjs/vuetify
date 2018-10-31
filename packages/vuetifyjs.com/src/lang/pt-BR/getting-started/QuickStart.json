@@ -16,6 +16,7 @@
   "existingText4": "Você também precisará incluir o arquivo CSS do Vuetify. Basta incluir o arquivo CSS do Vuetify em seu `index.html` ou importar o arquivo stylus ou o CSS minificado.",
   "existingText5": "Alguns components, como o seletor de data, usam Material Design Icons. A maneira mais fácil de incluir os ícones é colocando a tag `link` no seu arquivo `index.html`.",
   "existingText6": "Alternativamente você pode usar o `npm` ou o `yarn` para instalar `material-design-icons-iconfont`.",
+  "existingText7": "Você também pode carregar as fontes de forma assíncrona. Para isso, utilize o `npm` ou o `yarn` para instalar o `webfontloader`.",
   "alert2": "*Aviso*: Embora o Vuetify tenta ao máximo não causar qualquer colisão no CSS, não há garantia de que seus estilos personalizados não alterem sua experiência ao integrar este framework em seu projeto existente.",
   "ie11Header": "Suporte ao IE11 e Safari 9",
   "ie11Text": "No diretório de seu projeto, instale o `babel-polyfill` e importe-o em sua entrada principal:",

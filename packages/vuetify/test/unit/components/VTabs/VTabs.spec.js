@@ -411,4 +411,35 @@ test('VTabs', ({ mount }) => {
 
     expect(setWidths).toHaveBeenCalledTimes(3)
   })
+
+  it('should call init when mounted', () => {
+    const init = jest.fn()
+
+    mount(VTabs, { methods: { init } })
+
+    expect(init).toBeCalled()
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/5371
+  it('should call updateTabsView once when registering a tab', async () => {
+    const updateTabsView = jest.fn()
+    const wrapper = mount(VTabs, {
+      attachToDocument: true,
+      slots: {
+        default: [{
+          functional: true,
+          render: h => h(VTab)
+        }]
+      },
+      methods: { updateTabsView }
+    })
+
+    // Ensure component is mounted
+    await wrapper.vm.$nextTick()
+
+    // Wait for onResize setTimeout
+    await new Promise(resolve => setTimeout(resolve, 0))
+
+    expect(updateTabsView).toHaveBeenCalledTimes(1)
+  })
 })
