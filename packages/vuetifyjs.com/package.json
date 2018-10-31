@@ -11,7 +11,8 @@
     "build": "rimraf dist && cross-env NODE_ENV=production webpack --config build/webpack.prod.config.js --progress --hide-modules",
     "lint": "eslint --ext .js,.vue,.json src",
     "deploy": "now -e --team=vuetifyjs --token=$NOW_TOKEN --npm",
-    "alias": "now alias --team=vuetifyjs --token=$NOW_TOKEN"
+    "alias": "now alias --team=vuetifyjs --token=$NOW_TOKEN",
+    "now-build": "echo 'Built on Travis CI'"
   },
   "engines": {
     "node": ">=7.0 <10",
