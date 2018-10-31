@@ -80,6 +80,10 @@ export default BaseItemGroup.extend({
     tabs: 'onResize'
   },
 
+  mounted () {
+    this.init()
+  },
+
   methods: {
     checkIcons () {
       this.prevIconVisible = this.checkPrevIcon()
@@ -109,14 +113,10 @@ export default BaseItemGroup.extend({
     // until DOM is
     // painted
     init () {
-      BaseItemGroup.options.methods.init.call(this)
-
       /* istanbul ignore next */
       if (this.$listeners['input']) {
         deprecate('@input', '@change', this)
       }
-
-      this.updateTabsView()
     },
     /**
      * When v-navigation-drawer changes the
@@ -128,8 +128,10 @@ export default BaseItemGroup.extend({
 
       this.setWidths()
 
+      const delay = this.isBooted ? this.transitionTime : 0
+
       clearTimeout(this.resizeTimeout)
-      this.resizeTimeout = setTimeout(this.updateTabsView, this.transitionTime)
+      this.resizeTimeout = setTimeout(this.updateTabsView, delay)
     },
     overflowCheck (e, fn) {
       this.isOverflowing && fn(e)
