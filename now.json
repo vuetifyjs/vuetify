@@ -16,5 +16,9 @@
     "packages/vuetifyjs.com/package.json",
     "package.json",
     "yarn.lock"
-  ]
+  ],
+  "github": {
+    "enabled": false,
+    "autoAlias": false
+  }
 }
