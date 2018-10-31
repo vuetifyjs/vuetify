@@ -1,0 +1,22 @@
+@import '../bootstrap'
+@import '../theme'
+
+.v-input--radio-group
+  &__input
+    display: flex
+    width: 100%
+
+    & > .v-label
+      padding-bottom: 8px
+
+  &--row
+    .v-input--radio-group__input
+      flex-direction: row
+      flex-wrap: wrap
+
+  &--column
+    .v-radio:not(:last-child):not(:only-child)
+      margin-bottom: 8px
+
+    .v-input--radio-group__input
+      flex-direction: column

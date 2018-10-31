@@ -1,0 +1,13 @@
+# Ignore everything by default
+*
+
+# Keep source
+!/src/**/*
+
+# Keep built files
+!/dist/**/*
+!/lib/**/*
+!/es5/**/*
+
+# Keep types
+!/types/*.d.ts

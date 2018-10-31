@@ -1,0 +1,8 @@
+{
+    "props": {
+        "error": "Pone el input en un estado de error manual",
+        "errorMessages": "Pone el input en un estado de error y pasa los mensajes de error personalizados. Se combinará con cualquier validación que ocurra desde la prop **rules**. Este campo no propicia ninguna validación.",
+        "rules": "Arreglo de funciones que regresa ya sea True o un String con el mensaje de error",
+        "validateOnBlur": "Retrasa la validación hasta el evento blur"
+    }
+}
