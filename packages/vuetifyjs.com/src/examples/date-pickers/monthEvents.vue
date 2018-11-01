@@ -13,7 +13,7 @@
       <div class="subheading">Defined by function</div>
       <v-date-picker
         v-model="date2"
-        :event-color="date => date[9] % 2 ? 'red' : 'yellow'"
+        :event-color="functionEventColors"
         :events="functionEvents"
         type="month"
       ></v-date-picker>
@@ -31,17 +31,21 @@
 
     mounted () {
       this.arrayEvents = [...Array(6)].map(() => {
-        const day = Math.floor(Math.random() * 12)
+        const month = Math.floor(Math.random() * 12)
         const d = new Date()
-        d.setDate(day)
+        d.setMonth(month)
         return d.toISOString().substr(0, 7)
       })
     },
 
     methods: {
       functionEvents (date) {
-        const [, month] = date.split('-')
-        return parseInt(month, 10) % 4 === 1
+        const month = parseInt(date.split('-')[1], 10)
+        return month % 2 === 1
+      },
+      functionEventColors (date) {
+        const month = parseInt(date.split('-')[1], 10)
+        return [false, 'purple', false, 'red'][month % 4]
       }
     }
   }
