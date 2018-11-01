@@ -25,7 +25,8 @@
     "`d-flex` - sets the element display property to `flex`",
     "`d-inline-block` - sets the element display property to `inline-block`",
     "`d-block` - sets the element display property to `block`",
-    "`d-inline` - sets the element display property to `inline`"
+    "`d-inline` - sets the element display property to `inline`",
+    "`d-none` - sets the element display property to `none`"
   ],
   "exampleText": "Resize your screen to see the elements conditionally hide.",
   "overflowHeader": "Overflow",
