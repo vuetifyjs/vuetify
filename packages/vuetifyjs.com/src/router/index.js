@@ -12,8 +12,6 @@ Vue.use(Router)
 // /^[a-z]{2,3}|[a-z]{2,3}-[a-zA-Z]{4}|[a-z]{2,3}-[A-Z]{2,3}$/
 const languageRegex = /^\/([a-z]{2,3}|[a-z]{2,3}-[a-zA-Z]{4}|[a-z]{2,3}-[A-Z]{2,3})(?:\/.*)?$/
 
-const release = process.env.RELEASE
-
 function getLanguageCookie () {
   if (typeof document === 'undefined') return
   return new Map(document.cookie.split('; ').map(c => c.split('='))).get('currentLanguage')
