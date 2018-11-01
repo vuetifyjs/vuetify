@@ -3,7 +3,6 @@ require('dotenv').config()
 const path = require('path')
 const webpack = require('webpack')
 const vueConfig = require('./vue-loader.config')
-const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
@@ -14,20 +13,7 @@ let plugins = [
   new webpack.DefinePlugin({
     'process.env': JSON.stringify(process.env)
   }),
-  new VueLoaderPlugin(),
-  new HardSourceWebpackPlugin({
-    info: {
-      level: 'info'
-    },
-    cachePrune: {
-      // Prune once cache reaches 250MB
-      sizeThreshold: 250 * 1024 * 1024
-    }
-  }),
-  new HardSourceWebpackPlugin.ExcludeModulePlugin([
-    { test: /mini-css-extract-plugin[\\/]dist[\\/]loader/ },
-    { test: /vuetify[\\/](dist|es5|lib|src)/ }
-  ])
+  new VueLoaderPlugin()
 ]
 
 module.exports = {

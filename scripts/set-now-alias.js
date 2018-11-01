@@ -23,6 +23,7 @@ config.files = [
   'packages/vuetifyjs.com/server.js',
   'packages/vuetifyjs.com/package.json',
   'package.json',
+  'lerna.json',
   'yarn.lock'
 ]
 

@@ -4,28 +4,17 @@
     v-model="inputValue"
     :stateless="isFullscreen"
   )#app-drawer
-    div.text-xs-center.pt-3
-      div(
-        v-for="diamond in diamonds"
-        :key="diamond.name"
-      )
-        a(
-          :href="diamond.href"
-          target="_blank"
-          rel="noopener"
-          @click="$ga.event('drawer sponsor click', 'click', diamond.name)"
-        )
-          img.diamond-sponsor(
-            :src="`https://cdn.vuetifyjs.com/images/${diamond.logo}`"
-            :alt="diamond.Name"
-          )
-      misc-patreon-btn
-    v-container(fluid)
+    v-container(fluid pb-0)
+      div.text-xs-center
+        h4.body-2.font-weight-bold.grey--text Premiere sponsor
+        span.d-block.mb-3.caption.grey--text.text--lighten-1 One spot available
+        misc-sponsor-btn(large href="https://www.patreon.com/join/vuetify").mb-4
       v-text-field(
         placeholder="Search"
         append-icon="search"
         id="search"
         clearable
+        hide-details
         single-line
         solo
         key="search"
@@ -33,7 +22,10 @@
         ref="search"
         light
       )
-    div.pt-3.text-xs-center
+
+    v-divider.my-3
+
+    v-layout.px-3
       a(
         href="https://vuejobs.com/?utm_source=vuejobs&utm_medium=banner&utm_campaign=linking&ref=vuetifyjs.com"
         target="_blank"
@@ -41,11 +33,13 @@
         class="d-inline-block"
         @click="$ga.event('drawer jobs click', 'click', 'vuejobs')"
       )
-        img(
+        v-img(
           src="https://cdn.vuetifyjs.com/images/affiliates/vuejobs-logo.svg"
           alt="VueJobs"
           title="VueJobs"
-          width="30%"
+          contain
+          height="18"
+          width="60"
         )
 
     v-list(dense expand)
@@ -150,7 +144,6 @@
 <script>
   // Utilities
   import {
-    mapGetters,
     mapMutations,
     mapState
   } from 'vuex'
@@ -167,10 +160,6 @@
 
     computed: {
       ...mapState('app', ['isFullscreen', 'stateless', 'appDrawer']),
-      ...mapGetters('app', ['supporters']),
-      diamonds () {
-        return this.supporters.diamond
-      },
       inputValue: {
         get (state) {
           return this.appDrawer &&
