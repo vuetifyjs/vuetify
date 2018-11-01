@@ -53,14 +53,7 @@
                   )
 
               v-flex(xs12).text-xs-center
-                translation-translatable(i18n="Vuetify.Home.becomeSponsor")
-                v-btn(
-                  :to="{ name: 'getting-started/SponsorsAndBackers' }"
-                  color="primary"
-                  large
-                  outline
-                ) {{ $t("Vuetify.Home.becomeSponsor") }}
-                  v-icon(right color="primary") chevron_right
+                misc-sponsor-btn(large)
 
     section#checked-features.mb-5
       v-container
