@@ -42,6 +42,7 @@
         "`d-flex` - la propiedad display queda definida como `flex`",
         "`d-inline-block` - la propiedad display queda definida como `inline-block`",
         "`d-block` - la propiedad display queda definida como `block`",
-        "`d-inline` - la propiedad display queda definida como `inline`"
+        "`d-inline` - la propiedad display queda definida como `inline`",
+        "`d-none` - la propiedad display queda definida como `none`"
     ]
 }

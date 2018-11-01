@@ -25,6 +25,7 @@
     "`d-flex` - 요소의 display 속성을 `flex` 로 정합니다.",
     "`d-inline-block` - 요소의 display 속성을 `inline-block` 으로 저앟ㅂ니다.",
     "`d-block` - 요소의 display 속성을 `block` 으로 정합니다.",
-    "`d-inline` - 요소의 display 속성을 `inline` 으로 정합니다."
+    "`d-inline` - 요소의 display 속성을 `inline` 으로 정합니다.",
+    "`d-none` - 요소의 display 속성을 `none` 으로 정합니다."
   ]
 }
