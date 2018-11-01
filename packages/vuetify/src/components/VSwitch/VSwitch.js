@@ -55,7 +55,10 @@ export default {
       return this.$createElement('div', {
         staticClass: 'v-input--selection-controls__input'
       }, [
-        this.genInput('checkbox', this.$attrs),
+        this.genInput('checkbox', {
+          ...this.$attrs,
+          'checked': this.isActive
+        }),
         !this.disabled && this.genRipple(this.setTextColor(this.computedColor, {
           directives: [{
             name: 'touch',

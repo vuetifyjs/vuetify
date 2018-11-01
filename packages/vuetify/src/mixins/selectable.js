@@ -93,7 +93,9 @@ export default {
           id: this.id,
           role: type,
           type,
-          value: this.inputValue
+          value: ['checkbox', 'radio'].some(el => el === type)
+            ? this.value || this.inputValue
+            : this.inputValue
         }, attrs),
         domProps: {
           checked: this.isActive

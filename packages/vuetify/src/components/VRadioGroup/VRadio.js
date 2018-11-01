@@ -118,6 +118,7 @@ export default {
         this.genInput('radio', {
           name: this.radio.name || (this.radio._uid ? 'v-radio-' + this.radio._uid : false),
           value: this.value,
+          'checked': this.isActive,
           ...this.$attrs
         }),
         !this.isDisabled && this.genRipple(this.setTextColor(this.computedColor)),
