@@ -1,0 +1,22 @@
+{
+  "api": "API",
+  "default": "Padrão",
+  "description": "Descrição",
+  "examples": "Exemplos",
+  "howItWorks": "Como funciona",
+  "name": "Nome",
+  "openInCodePen": "Abrir no Codepen",
+  "options": "Opções",
+  "props": "Propriedades",
+  "showExample": "Mostrar Exemplo",
+  "slots": "Slots",
+  "supplemental": "Suplementar",
+  "type": "Tipos",
+  "introduction": "Introdução",
+  "usage": "Utilização",
+  "parameters": "Parâmetros",
+  "return": "Retornos",
+  "example": "Exemplo",
+  "signature": "Assinatura",
+  "value": "Valor"
+}

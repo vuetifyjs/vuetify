@@ -1,0 +1,85 @@
+{
+    "header": "Select",
+    "headerText": "Los componentes _select fields_ son utilizados para recolectar información provista por el usuario de una lista de opciones.",
+    "components": [
+        "v-select"
+    ],
+    "supplemental": [
+        "MaskTable"
+    ],
+    "examples": [
+        {
+            "light": {
+                "header": "Tema _Light_",
+                "desc": "Un único _select_ estándar tiene una multitud de opciones de configuración."
+            },
+            "icons": {
+                "header": "Íconos",
+                "desc": "Utiliza un ícono personalizado al principio o al final."
+            },
+            "multiple": {
+                "header": "Múltiple",
+                "desc": "Un multi-select puede utilizar `v-chip` para mostrar los elementos seleccionados."
+            },
+            "autocomplete": {
+                "header": "Autocomplete",
+                "desc": "Provee la funcionalidad de autocompletar al escribir (_type-ahead_)."
+            },
+            "customFilter": {
+                "header": "Filtro personalizado al autocompletar",
+                "desc": "La prop `filter` puede ser utilizada para filtrar cada elemento individual con lógica personalizada. En este ejemplo filtramos los elementos por nombre."
+            },
+            "scopedSlots": {
+                "header": "Scoped slots",
+                "desc": "Con el poder de los _scoped slots_ puedes personalizar el resultado visual del select. En este ejemplo agregamos una foto de perfil para los chips y los elementos de la lista."
+            },
+            "customTextAndValue": {
+                "header": "Texto y valor del elemento personalizado",
+                "desc": "Puedes especificar las propiedades dentro de tu arreglo de elementos que correspondan a los campos texto y valor (_text_ y _value_). En este ejemplo también usamos la prop `return-object` que retornará el objeto entero del elemento seleccionado."
+            },
+            "tags": {
+                "header": "Tags",
+                "desc": "Con los _tags_ puedes permitirle a un usuario crear nuevos valores que pueden no estar presentes en una lista. Ten en cuenta que los tags sólo soportan arreglos de elementos **primitivos** y no pueden ser usados con props como `item-text` o `item-value`, por ejemplo."
+            },
+            "asynchronous": {
+                "header": "Elementos asíncronos",
+                "desc": "Algunas veces necesitas cargar datos externos basados en una búsqueda. Utiliza la prop `search-input` con el modificador **.sync** cuando uses la prop `autocomplete`. También hacemos uso de la nueva prop `cache-items`. Esto mantendrá una lista única de todos los elementos que han sido pasados a la prop `items` y es **REQUERIDO** cuando se usa con elementos asíncronos y la prop `multiple`"
+            }
+        }
+    ],
+    "props": {
+        "attach": "Mixins.Detachable.props.attach",
+        "autocomplete": "Filtrar los elementos en la lista basado en el input del usuario",
+        "browserAutocomplete": "Configura la prop de autocompletar para cuando el usuario escribe",
+        "cacheItems": "Mantiene una copia local _única_ de todos los elementos que han sido pasados a través de la prop `items`",
+        "chips": "Cambia el display de las selecciones a _chips_",
+        "combobox": "La variante de selección simple de **tags**",
+        "contentClass": "Mixins.Detachable.props.contentClass",
+        "debounceSearch": "Retrasa el tiempo entre valores emitidos desde la búsqueda",
+        "deletableChips": "Agrega un ícono de _quitar_ a los chips seleccionados",
+        "dense": "Reduce la altura máxima de los elementos de la lista",
+        "disabled": "Deshabilita el input",
+        "editable": " Crea un botón editable- [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
+        "filter": "La función utilizada para filtrar los elementos",
+        "hideSelected": "No mostrar elementos en las opciones que ya hayan sido seleccionados",
+        "itemAvatar": "Configura el avatar del elemento",
+        "itemDisabled": "Determina si el elemento está deshabilitado",
+        "itemText": "Configura el texto del elemento",
+        "itemValue": "Configura el valor del elemento",
+        "items": "Puede ser un arreglo de objetos o un arreglo de strings. Cuando se usan objetos, buscará por campos _text_ y _field_. Esto puede cambiarse usando las props `item-text` y `item-value`",
+        "minWidth": "Mixins.Menuable.props.minWidth",
+        "multiple": "Cambia a múltiple. Acepta un arreglo.",
+        "multiLine": "Hace que la etiqueta flote cuando el componente se enfoca o su valor cambia (_dirty_)",
+        "noDataText": "Texto a mostrar cuando no hay datos",
+        "openOnClear": "Cuando se usa la prop `clearable` y ha sido _limpiado_, el menu del select se abrirá o permanecerá abierto, dependiendo del estado actual",
+        "overflow": "Crea un botón _overflow_ - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
+        "returnObject": "Cambia el comportamiento al seleccionar para que regrese un objeto directamente en lugar del valor especificado con **item-value**",
+        "searchInput": "Ligado cuando se usa la prop autocomplete. Utiliza el modificador **.sync** para leer lo que el usuario escribe desde el input de búscada para autocompletar.",
+        "segmented": "Crea un botón _segmented_ - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
+        "tags": "Funcionalidad de _tagging_, que permite al usuario crear nuevos valors no disponibles desde la prop **items**"
+    },
+    "slots": {
+        "item": "_Scoped slot_ para indicar el markup de un _list-tile_",
+        "selection": "_Scoped slot_ para indicar el markup de los elementos seleccionados"
+    }
+}

@@ -1,0 +1,13 @@
+{
+  "header": "Item Groups",
+  "headerText": "The `v-item-group` provides the ability to create a group of selectable items out of any component. This is the baseline functionality for components such as `v-tabs` and `v-carousel`.",
+  "examples": {
+    "usage": {
+      "desc": "The core usage of the `v-item-group` is to create groups of anything that should be controlled by a **model**."
+    },
+    "post": {
+      "header": "Chips",
+      "desc": "Easily hook up a custom chip group."
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "props": {
+    "error": "Puts the input in a manual error state",
+    "errorCount": "The total number of errors that should display at once",
+    "errorMessages": "Puts the input in an error state and passes through custom error messsages. Will be combined with any validations that occur from the **rules** prop. This field will not trigger validation",
+    "messages": "Displays a list of messages or message if using a string",
+    "rules": "Accepts an array of functions that return either True or a String with an error message",
+    "success": "Puts the input in a manual success state",
+    "successMessages": "Puts the input in a success state and passes through custom success messsages.",
+    "validateOnBlur": "Delays validation until blur event"
+  },
+  "events": {
+    "update:error": "The `update.sync` event"
+  }
+}
