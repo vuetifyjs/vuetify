@@ -47,10 +47,10 @@
       this.snackbar({
         color: 'default',
         close: true,
-        id: 'september-2018-21931872',
-        text: 'Go to Video',
-        msg: 'September Framework Update',
-        href: 'https://www.patreon.com/posts/september-2018-21931872',
+        id: 'twitter-vueconf-to',
+        text: 'Join now',
+        msg: 'Vuetify **VueConf** logo contest',
+        href: 'https://twitter.com/vuetifyjs/status/1057766550508396544',
         timeout: 0
       })
     },
