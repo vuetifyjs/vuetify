@@ -1,165 +1,287 @@
-<template lang="pug">
-  v-navigation-drawer(
-    app
+<template>
+  <v-navigation-drawer
     v-model="inputValue"
     :stateless="isFullscreen"
-  )#app-drawer
-    v-container(fluid pb-0)
-      div.text-xs-center
-        h4.body-2.font-weight-bold.grey--text Premiere sponsor
-        span.d-block.mb-3.caption.grey--text.text--lighten-1 One spot available
-        misc-sponsor-btn(large href="https://www.patreon.com/join/vuetify").mb-4
-      v-text-field(
-        placeholder="Search"
-        append-icon="search"
-        id="search"
-        clearable
-        hide-details
-        single-line
-        solo
-        key="search"
-        v-model="search"
-        ref="search"
-        light
-      )
+    app
+  >
+    <v-container
+      fluid
+      pb-0
+    >
+      <div class="text-xs-center">
+        <h4 class="body-2 font-weight-bold grey--text">Premiere sponsor</h4>
+        <span class="d-block mb-3 caption grey--text text--lighten-1">
+          One spot available
+        </span>
 
-    v-divider.my-3
+        <misc-sponsor-btn
+          large
+          class="mb-4"
+          href="https://www.patreon.com/join/vuetify"
+        />
 
-    v-layout.px-3
-      a(
+        <v-text-field
+          id="search"
+          key="search"
+          ref="search"
+          v-model="search"
+          placeholder="Search"
+          append-icon="search"
+          clearable
+          hide-details
+          single-line
+          solo
+          light
+        />
+      </div>
+    </v-container>
+
+    <v-divider class="mt-3" />
+
+    <v-layout pa-3>
+      <a
         href="https://vuejobs.com/?utm_source=vuejobs&utm_medium=banner&utm_campaign=linking&ref=vuetifyjs.com"
         target="_blank"
         rel="noopener"
         class="d-inline-block"
         @click="$ga.event('drawer jobs click', 'click', 'vuejobs')"
-      )
-        v-img(
+      >
+        <v-img
           src="https://cdn.vuetifyjs.com/images/affiliates/vuejobs-logo.svg"
           alt="VueJobs"
           title="VueJobs"
           contain
           height="18"
           width="60"
-        )
-
-    v-list(dense expand)
-      template(v-for="item in items")
-        <!--group with subitems-->
-        v-list-group(
-          v-if="item.items",
-          :group="item.group",
-          :prepend-icon="item.icon",
-          no-action
-        )
-          v-list-tile(slot="activator" ripple)
-            v-list-tile-content
-              v-list-tile-title {{ item.title }}
-          template(v-for="(subItem, i) in item.items")
-            <!--sub group-->
-            v-list-group(
-              v-if="subItem.items",
-              :group="subItem.group",
-              sub-group
-            )
-              v-list-tile(slot="activator" ripple)
-                v-list-tile-content
-                  v-list-tile-title {{ subItem.title }}
-              v-chip(
-                v-if="subItem.badge"
-                :color="subItem.color || 'primary'"
-                class="white--text pa-0 v-chip--x-small"
-                disabled
-                slot="appendIcon"
-              ) {{ subItem.badge }}
-              v-list-tile(
-                v-for="(grand, i) in subItem.items",
-                :key="i",
-                :to="genChildTarget(item, grand)",
-                :href="grand.href"
-                ripple
-              )
-                v-list-tile-content
-                  v-list-tile-title {{ grand.title }}
-                v-chip(
-                  v-if="grand.badge"
-                  :color="grand.color || 'primary'"
-                  class="white--text pa-0 v-chip--x-small"
-                  disabled
-                ) {{ grand.badge }}
-            <!--child item-->
-            v-list-tile(
-              v-else,
-              :key="i",
-              :to="genChildTarget(item, subItem)",
-              :href="subItem.href",
-              :disabled="subItem.disabled",
-              :target="subItem.target",
-              ripple
-            )
-              v-list-tile-content
-                v-list-tile-title
-                  span {{ subItem.title }}
-              v-chip(
-                v-if="subItem.badge"
-                :color="subItem.color || 'primary'"
-                class="white--text pa-0 v-chip--x-small"
-                disabled
-              ) {{ subItem.badge }}
-              v-list-tile-action(v-if="subItem.action")
-                v-icon(:class="[subItem.actionClass || 'success--text']") {{ subItem.action }}
-
-        v-subheader(v-else-if="item.header").grey--text {{ item.header }}
-        v-divider(v-else-if="item.divider")
-
-        <!--top-level link-->
-        v-list-tile(
-          v-else,
-          :to="!item.href ? { name: item.name } : null",
-          :href="item.href",
-          ripple,
-          :disabled="item.disabled",
-          :target="item.target",
-          rel="noopener"
-        )
-          v-list-tile-action(v-if="item.icon")
-            v-icon {{ item.icon }}
-          v-list-tile-content
-            v-list-tile-title {{ item.title }}
-          v-chip(
-            v-if="item.badge"
-            class="white--text pa-0 v-chip--x-small"
-            :color="item.color || 'primary'"
-            disabled
-          ) {{ item.badge }}
-          v-list-tile-action(v-if="item.subAction")
-            v-icon(class="success--text") {{ item.subAction }}
-          v-chip(
-            v-else-if="item.chip"
-            label
-            small
-            class="caption blue lighten-2 white--text mx-0"
-          ) {{ item.chip }}
+        />
+      </a>
+    </v-layout>
+    <v-list
+      class="pa-0"
+      dense
+      expand
+    >
+      <template v-for="(item, i) in items">
+        <v-subheader
+          v-if="item.header"
+          :key="`subheader-${i}`"
+          v-text="item.header"
+        />
+        <v-divider
+          v-else-if="item.divider"
+          :key="`divider-${i}`"
+        />
+        <core-group
+          v-else-if="item.group"
+          :key="`group-${i}`"
+          :item="item"
+        />
+        <core-item
+          v-else
+          :icon="item.icon"
+          :key="`item-${i}`"
+          :text="item.text"
+          :to="item.to"
+        />
+      </template>
+    </v-list>
+  </v-navigation-drawer>
 </template>
 
 <script>
   // Utilities
   import {
+    mapGetters,
     mapMutations,
     mapState
   } from 'vuex'
-  import appDrawerItems from '@/data/layout/app-drawer-items'
-  import { camel } from '@/util/helpers'
+  import kebabCase from 'lodash/kebabCase'
 
   export default {
     data: () => ({
       docSearch: {},
       isSearching: false,
-      items: appDrawerItems,
+      items: [
+        {
+          group: 'getting-started',
+          text: 'Getting started',
+          icon: 'mdi-speedometer',
+          children: [
+            { text: 'Quick start', to: 'quick-start' },
+            { text: 'Why Vuetify?', to: 'why-vuetify' },
+            { text: 'Frequently asked questions', to: 'frequently-asked-questions' },
+            { text: 'Sponsors and backers', to: 'sponsors-and-backers' },
+            { text: 'Contributing', to: 'contributing' },
+            { text: 'Roadmap', to: 'roadmap' },
+            { text: 'Consulting and support', to: 'consulting-and-support' }
+          ]
+        },
+        {
+          group: 'framework',
+          text: 'Framework options',
+          icon: 'mdi-buffer',
+          children: [
+            { text: 'A-la-carte', to: 'a-la-carte' },
+            { text: 'Icons', to: 'icons' },
+            { text: 'Internationalization', to: 'internationalization' }
+          ]
+        },
+        {
+          group: 'layout',
+          text: 'Application layout',
+          icon: 'mdi-page-layout-body',
+          children: [
+            { text: 'Pre-defined layouts', to: 'pre-defined' },
+            { text: 'Pre-made themes', to: 'pre-made-themes' },
+            {
+              group: 'layout',
+              text: 'Grid system',
+              children: [
+                { text: 'Grid', to: 'grid' },
+                { text: 'Grid lists', to: 'grid-lists' }
+              ]
+            },
+            { text: 'Breakpoints', to: 'breakpoints' },
+            { text: 'Aspect ratios', to: 'aspect-ratios' },
+            { text: 'Spacing', to: 'spacing' },
+            { text: 'Text alignment', to: 'alignment' },
+            { text: 'Display', to: 'display' },
+            { text: 'Elevation', to: 'elevation' },
+            { text: 'Sandbox', to: 'sandbox' }
+          ]
+        },
+        {
+          group: 'style',
+          text: 'Styles & themes',
+          icon: 'mdi-format-color-fill',
+          children: [
+            { text: 'Colors', to: 'colors' },
+            { text: 'Theme', to: 'theme' },
+            { text: 'Typography', to: 'typography' },
+            { text: 'Content', to: 'content' }
+          ]
+        },
+        {
+          group: 'motion',
+          text: 'Motion & transitions',
+          icon: 'mdi-clock-fast',
+          children: [
+            { text: 'Scrolling', to: 'scrolling' },
+            { text: 'Transitions', to: 'transitions' }
+          ]
+        },
+        {
+          group: 'components',
+          text: 'UI components',
+          icon: 'mdi-view-dashboard',
+          children: [
+            { text: 'API explorer', to: 'api-explorer' },
+            { text: 'Alerts', to: 'alerts' },
+            { text: 'Avatars', to: 'avatars' },
+            { text: 'Badges', to: 'Badges' },
+            { text: 'Bottom navigation', to: 'bottom-navigation' },
+            { text: 'Bottom sheets', to: 'bottom-sheets' },
+            { text: 'Breadcrumbs', to: 'breadcrumbs' },
+            { text: 'Buttons', to: 'buttons' },
+            { text: 'Buttons: Floating action buttons', to: 'floating-action-buttons' },
+            { text: 'Cards', to: 'cards' },
+            { text: 'Carousels', to: 'carousels' },
+            { text: 'Chips', to: 'chips' },
+            { text: 'Data iterator', to: 'data-iterator' },
+            { text: 'Data tables', to: 'data-tables' },
+            { text: 'Dialogs', to: 'dialogs' },
+            { text: 'Dividers', to: 'dividers' },
+            { text: 'Expansion panels', to: 'expansion-panels' },
+            { text: 'Footer', to: 'footer' },
+            {
+              group: 'components',
+              text: 'Groups',
+              children: [
+                { text: 'Button groups', to: 'button-groups' },
+                { text: 'Item groups', to: 'item-groups' },
+                { text: 'Windows', to: 'windows' }
+              ]
+            },
+            {
+              group: 'components',
+              text: 'Inputs & controls',
+              children: [
+                { text: 'Autocompletes', to: 'autocompletes' },
+                { text: 'Combobox', to: 'combobox' },
+                { text: 'Forms', to: 'forms' },
+                { text: 'Inputs', to: 'inputs' },
+                { text: 'Overflow buttons', to: 'overflow-btns' },
+                { text: 'Selects', to: 'selects' },
+                { text: 'Selection controls', to: 'selection-controls' },
+                { text: 'Sliders', to: 'sliders' },
+                { text: 'Textareas', to: 'textarea' },
+                { text: 'Text fields', to: 'text-fields' }
+              ]
+            },
+            { text: 'Hover', to: 'hover' },
+            { text: 'Icons', to: 'icons' },
+            { text: 'Images', to: 'images' },
+            { text: 'Lists', to: 'lists' },
+            { text: 'Menus', to: 'menus' },
+            { text: 'Navigation drawers', to: 'navigation-drawers' },
+            { text: 'Paginations', to: 'paginations' },
+            { text: 'Parallax', to: 'parallax' },
+            {
+              group: 'components',
+              text: 'Pickers',
+              children: [
+                { text: 'Date pickers', to: 'date-pickers' },
+                { text: 'Time pickers', to: 'time-pickers' }
+              ]
+            },
+            { text: 'Progress', to: 'progress' },
+            { text: 'Ratings', to: 'ratings' },
+            { text: 'Snackbars', to: 'snackbars' },
+            { text: 'Steppers', to: 'steppers' },
+            { text: 'Subheaders', to: 'subheaders' },
+            { text: 'Tabs', to: 'tabs' },
+            { text: 'Timelines', to: 'timelines' },
+            { text: 'Toolbars', to: 'toolbars' },
+            { text: 'Tooltips', to: 'tooltips' }
+          ]
+        },
+        {
+          group: 'directives',
+          text: 'Directives',
+          icon: 'mdi-function',
+          children: [
+            { text: 'Resizing', to: 'resizing' },
+            { text: 'Ripples', to: 'ripples' },
+            { text: 'Scrolling', to: 'scrolling' },
+            { text: 'Touch support', to: 'touch-support' }
+          ]
+        },
+        {
+          text: 'Theme generator',
+          icon: 'mdi-format-paint',
+          to: 'theme-generator'
+        }
+      ],
       search: ''
     }),
 
     computed: {
+      ...mapGetters('app', ['supporters']),
       ...mapState('app', ['isFullscreen', 'stateless', 'appDrawer']),
+      children () {
+        return this.item.children.map(item => ({
+          ...item,
+          to: `${this.item.group}/${item.to}`
+        }))
+      },
+      diamonds () {
+        return this.supporters.diamond
+      },
+      group () {
+        return this.item.children.map(item => {
+          return `${this.item.group}/${kebabCase(item.name)}`
+        }).join('|')
+      },
       inputValue: {
         get (state) {
           return this.appDrawer &&
@@ -183,7 +305,6 @@
       },
       isSearching (val) {
         this.$refs.toolbar.isScrolling = !val
-
         if (val) {
           this.$nextTick(() => this.$refs.search.focus())
         } else {
@@ -205,25 +326,8 @@
       ...mapMutations('app', {
         drawer: 'DRAWER'
       }),
-      genChildTarget (item, subItem) {
-        if (subItem.href) return
-        if (item.component &&
-          // Quick and dirty fix
-          subItem.name !== 'api-explorer'
-        ) {
-          return {
-            name: item.component,
-            params: {
-              section: item.group,
-              component: subItem.name
-            }
-          }
-        }
-        return { name: `${item.group}/${camel(subItem.name)}` }
-      },
       init ({ default: docsearch }) {
         const vm = this
-
         this.docSearch = docsearch({
           apiKey: '259d4615e283a1bbaa3313b4eff7881c',
           autocompleteOptions: {
@@ -236,7 +340,6 @@
           handleSelected (input, event, suggestion) {
             const url = suggestion.url
             const loc = url.split('.com')
-
             vm.search = ''
             vm.isSearching = false
             vm.$router.push(loc.pop())
