@@ -25,6 +25,7 @@
     "`d-flex` - 将元素显示属性设置为`flex`",
     "`d-inline-block` - 将元素显示属性设置为`inline-block`",
     "`d-block` - 将元素显示属性设置为`block`",
-    "`d-inline` - 将元素显示属性设置为`inline`"
+    "`d-inline` - 将元素显示属性设置为`inline`",
+    "`d-none` - 将元素显示属性设置为`none`"
   ]
 }
