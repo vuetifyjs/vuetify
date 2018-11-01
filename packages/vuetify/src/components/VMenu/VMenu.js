@@ -216,9 +216,9 @@ export default Vue.extend({
         name: 'resize',
         value: this.onResize
       }],
-      on: this.keyable ? {
+      on: this.disableKeys ? undefined : {
         keydown: this.onKeyDown
-      } : undefined
+      }
     }
 
     return h('div', data, [

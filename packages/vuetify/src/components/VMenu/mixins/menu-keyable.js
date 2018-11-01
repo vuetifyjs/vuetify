@@ -14,10 +14,7 @@ import { keyCodes } from '../../../util/helpers'
 /* @vue/component */
 export default {
   props: {
-    keyable: {
-      type: Boolean,
-      default: true
-    }
+    disableKeys: Boolean
   },
 
   data: () => ({
