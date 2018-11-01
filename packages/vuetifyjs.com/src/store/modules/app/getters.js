@@ -4,6 +4,7 @@ export default {
   supporters: () => {
     const diamond = []
     const palladium = []
+    const special = []
     const gold = []
     const affiliate = []
     const service = []
@@ -17,6 +18,7 @@ export default {
       if (pledge) {
         if (matches(pledge, 'diamond')) diamond.push(supporter)
         if (matches(pledge, 'palladium')) palladium.push(supporter)
+        if (matches(pledge, 'special')) special.push(supporter)
         if (matches(pledge, 'gold')) gold.push(supporter)
       } else {
         if (matches(type, 'affiliate')) affiliate.push(supporter)
@@ -27,6 +29,7 @@ export default {
     return {
       diamond,
       palladium,
+      special,
       gold,
       affiliate,
       service
