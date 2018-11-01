@@ -128,7 +128,7 @@ const dataIterableProps = [
     example: {
       descending: 'boolean',
       sortBy: 'string',
-      rowsPerPage: '\'integer\' | \'-1 === All\'',
+      rowsPerPage: 'number // -1 for All',
       page: 'interger'
     }
   },
