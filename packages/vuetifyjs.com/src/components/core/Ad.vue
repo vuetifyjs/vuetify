@@ -1,5 +1,5 @@
 <template>
-  <v-flex id="ad__container">
+  <v-flex id="ad__container" shrink>
     <v-system-bar
       v-if="viewport === 'xs' && shouldShowAd"
       v-show="$vuetify.breakpoint.xsOnly"
