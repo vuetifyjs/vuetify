@@ -1,0 +1,61 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "why-vuetify"
+        },
+        {
+          "type": "text",
+          "lang": "whyText1"
+        },
+        {
+          "type": "text",
+          "lang": "whyText2"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "subtitle",
+          "lang": "designHeader"
+        },
+        {
+          "type": "text",
+          "lang": "designText"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "subtitle",
+          "lang": "communityHeader"
+        },
+        {
+          "type": "text",
+          "lang": "communityText"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "subtitle",
+          "lang": "comparisonHeader"
+        },
+        {
+          "type": "text",
+          "lang": "comparisonText"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "usage",
+          "value": "toolbar"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": [
+            "v-tabs",
+            "v-tab",
+            "v-tabs-items",
+            "v-tab-item",
+            "v-tabs-slider"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [
+            "fixedTabs",
+            "right",
+            "content",
+            "search",
+            "iconsAndText",
+            "desktop",
+            "alignWithTitle",
+            "grow",
+            "overflowToMenu",
+            "pagination",
+            "icons"
+          ]
+        }
+      ]
+    }
+  ]
+}

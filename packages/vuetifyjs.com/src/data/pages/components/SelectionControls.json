@@ -1,0 +1,51 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "usage",
+          "value": "example"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": [
+            "v-radio-group",
+            "v-radio",
+            "v-checkbox",
+            "v-switch"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [
+            "checkboxesBoolean",
+            "checkboxesArray",
+            "checkboxesStates",
+            "checkboxesColors",
+            "checkboxesInlineTexfield",
+            "radiosDefault",
+            "radiosDirection",
+            "radiosColors",
+            "switchesBoolean",
+            "switchesArray",
+            "switchesStates",
+            "switchesColors"
+          ]
+        }
+      ]
+    }
+  ]
+}

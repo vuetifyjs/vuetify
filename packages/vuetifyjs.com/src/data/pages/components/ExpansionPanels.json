@@ -1,0 +1,43 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "usage",
+          "value": "accordion"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": [
+            "v-expansion-panel",
+            "v-expansion-panel-content"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [
+            "expand",
+            "external",
+            "disabledAndReadonly",
+            "popout",
+            "customIcons",
+            "focusable"
+          ]
+        }
+      ]
+    }
+  ]
+}

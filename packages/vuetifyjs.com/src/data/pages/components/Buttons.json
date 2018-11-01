@@ -1,0 +1,50 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "usage",
+          "value": "usage"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": [
+            "v-btn",
+            "v-btn-toggle"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [
+            "flat",
+            "raised",
+            "depressed",
+            "dropdown",
+            "toggle",
+            "icon",
+            "floating",
+            "loaders",
+            "sizing",
+            "outline",
+            "round",
+            "block",
+            "appBar"
+          ]
+        }
+      ]
+    }
+  ]
+}

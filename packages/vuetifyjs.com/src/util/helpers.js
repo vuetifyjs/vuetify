@@ -68,3 +68,18 @@ export function goTo (id) {
     }
   })
 }
+
+export function getComponent (type) {
+  switch (type) {
+    case 'alert': return 'core-alert'
+    case 'heading': return 'core-heading'
+    case 'text': return 'core-text'
+    case 'title': return 'core-title'
+    case 'markup': return 'core-markup'
+    case 'markdown': return 'core-markdown'
+    case 'section': return 'core-section'
+    case 'subtitle': return 'core-subtitle'
+    case 'tree': return 'core-tree'
+    default: return type
+  }
+}

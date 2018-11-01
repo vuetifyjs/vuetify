@@ -238,6 +238,8 @@
           this.isFullscreen
       },
       isStore () {
+        if (!this.$route.name) return false
+
         return this.$route.name.startsWith('store/')
       },
       logoLink () {

@@ -1,0 +1,3 @@
+<v-dialog :fullscreen="$vuetify.breakpoint.xsOnly">
+  ...
+</v-dialog>

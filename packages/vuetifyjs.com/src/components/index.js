@@ -8,6 +8,12 @@ const requireComponent = require.context(
   '@/components', true, /\.vue$/
 )
 
+Vue.component('v-paper', {
+  render (h) {
+    return h('v-card', this.$slots.default)
+  }
+})
+
 // Dynamically load all components
 // and lazily load them
 // https://vuejs.org/v2/guide/components-dynamic-async

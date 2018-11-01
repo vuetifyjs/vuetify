@@ -1,0 +1,39 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "usage",
+          "value": "timeLight"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": ["v-time-picker"]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [
+            "timeColorable",
+            "timeDialogAndMenu",
+            "time24hFormat",
+            "timeAllowedTimes",
+            "timeWidth"
+          ]
+        }
+      ]
+    }
+  ]
+}

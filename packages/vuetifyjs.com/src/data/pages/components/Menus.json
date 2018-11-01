@@ -1,0 +1,40 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "usage",
+          "value": "activator"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": ["v-menu"]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [
+            "absolute",
+            "absoluteWithoutActivator",
+            "hover",
+            "menus",
+            "customTransition",
+            "popover"
+          ]
+        }
+      ]
+    }
+  ]
+}
