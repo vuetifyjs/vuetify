@@ -86,6 +86,10 @@
       "header": "Month pickers - Setting picker width",
       "desc": "You can specify allowed the picker's width or make it full width."
     },
+    "monthEvents": {
+      "header": "Month pickers - Events",
+      "desc": "You can specify events using arrays, objects, and functions. To change the default color of the event use **event-color** prop."
+    },
     "monthInternationalization": {
       "header": "Month pickers - Internationalization",
       "desc": "The month picker supports internationalization through the JavaScript Date object. Specify a BCP 47 language tag using the `locale` prop, and then set the first day of the week with the `first-day-of-week` prop."
