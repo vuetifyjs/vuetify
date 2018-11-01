@@ -96,6 +96,7 @@ export default {
           value: this.inputValue
         }, attrs),
         domProps: {
+          value: this.value,
           checked: this.isActive
         },
         on: {
