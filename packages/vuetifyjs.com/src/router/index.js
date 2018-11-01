@@ -60,8 +60,8 @@ export function createRouter (store) {
   })
 
   const router = new Router({
-    base: release ? `/releases/${release}` : __dirname,
-    mode: release ? 'hash' : 'history',
+    base: __dirname,
+    mode: 'history',
     scrollBehavior,
     routes: [
       {

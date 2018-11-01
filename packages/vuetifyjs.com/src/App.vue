@@ -42,7 +42,7 @@
     },
 
     mounted () {
-      this.getReleases()
+      // this.getReleases()
 
       this.snackbar({
         color: 'store',

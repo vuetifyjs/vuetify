@@ -77,21 +77,12 @@ app.use(compression({ threshold: 0 }))
 app.use(favicon('./src/public/favicon.ico'))
 app.use('/', serve('./src/public', true))
 app.use('/dist', serve('./dist', true))
-app.use('/releases', serve('./src/releases'))
 app.use('/themes', serve('./src/themes'))
-app.get('/releases/:release', (req, res) => {
-  res.setHeader('Content-Type', 'text/html')
-  res.sendFile(resolve(`./src/releases/${req.params.release}`))
-})
 
 app.get('/sitemap.xml', (req, res) => {
   res.setHeader('Content-Type', 'text/xml')
   res.sendFile(resolve('./src/public/sitemap.xml'))
 })
-
-if (process.env.TRANSLATE) {
-  app.use('/api/translation', require('./src/translation/router'))
-}
 
 // 301 redirect for changed routes
 Object.keys(redirects).forEach(k => {
