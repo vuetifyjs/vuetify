@@ -1,7 +1,7 @@
 <template>
   <v-btn
     v-bind="$attrs"
-    :to="!href && to"
+    :to="!href && to ? to : undefined"
     :href="href"
     :target="href ? '_blank' : undefined"
     color="primary"
