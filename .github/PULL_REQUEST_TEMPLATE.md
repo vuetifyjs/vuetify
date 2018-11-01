@@ -42,3 +42,4 @@ Testing and markup sections can be removed for doumentation changes
 - [ ] The PR title is no longer than 64 characters.
 - [ ] The PR is submitted to the correct branch (`master` for bug fixes and documentation updates, `dev` for new features and breaking changes).
 - [ ] My code follows the code style of this project.
+- [ ] I've added relevant changes to the documentation (applies to new features and breaking changes in core library) 
