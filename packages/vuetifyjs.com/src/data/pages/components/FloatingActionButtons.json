@@ -1,0 +1,41 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "usage",
+          "value": "promotedAction"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": [
+            "v-speed-dial",
+            "v-btn"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [
+            "small",
+            "displayAnimation",
+            "lateralScreens",
+            "speedDial"
+          ]
+        }
+      ]
+    }
+  ]
+}

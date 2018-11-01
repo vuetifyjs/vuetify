@@ -1,6 +1,6 @@
 {
   "header": "What's the difference?",
-  "headerText": "",
+  "headerText": "Choosing a framework can be a daunting task, and I'm not even talking about component frameworks. You've arrived at Vue and now it's time to start developing your next great idea. There are many options to choose from, and everyone says that they are great. So you have to decide, what are my metrics for success?",
   "philosophies": [
     {
       "title": "Vibrant Community",
@@ -19,11 +19,8 @@
       "caption": "Vuetify is constantly updated, responding to community issues and requests at breakneck pace. Feel confident knowing your application will be supported and updated frequently."
     }
   ],
-  "whyText": [
-    "Choosing a framework can be a daunting task, and I'm not even talking about component frameworks. You've arrived at Vue and now it's time to start developing your next great idea. There are many options to choose from, and everyone says that they are great. So you have to decide, what are my metrics for success?",
-    "This was me almost a year ago. There were plenty of **UI toolkits** to choose from, but none them had everything that I needed...yeah, you've heard that before. Often enough though, it _is_ the reason individual's attempts to create products that fill gaps, and is why I started working on Vuetify.",
-    "But now you are the one searching for that perfect framework, and Vuetify is another on a list of many, vying for your attention. While my opinion will be subjective, I will try to outline features that I believe will be valuable to you and/or your organization."
-  ],
+  "whyText1": "This was me almost a year ago. There were plenty of **UI toolkits** to choose from, but none them had everything that I needed...yeah, you've heard that before. Often enough though, it _is_ the reason individual's attempts to create products that fill gaps, and is why I started working on Vuetify.",
+  "whyText2": "But now you are the one searching for that perfect framework, and Vuetify is another on a list of many, vying for your attention. While my opinion will be subjective, I will try to outline features that I believe will be valuable to you and/or your organization.",
   "designHeader": "Design principles",
   "designText": "Vuetify is developed exactly according to Material Design spec. Every component is hand crafted to bring you the best possible UI tools to your next great app. The development doesn't stop at the core components outlined in Google's spec. Through the support of community members and sponsors, additional components will be designed and made available for everyone to enjoy.",
   "communityHeader": "Active help",

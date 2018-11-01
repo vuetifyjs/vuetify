@@ -1,0 +1,41 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "usage",
+          "value": "buttons"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": ["v-ripple"]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [
+            "customColor",
+            "tabs",
+            "navigationDrawers",
+            "toolbars",
+            "expansionPanels",
+            "customRipple",
+            "htmlElement"
+          ]
+        }
+      ]
+    }
+  ]
+}

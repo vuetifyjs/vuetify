@@ -1,0 +1,44 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "usage",
+          "value": "components"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": [
+            "v-card",
+            "v-card-actions",
+            "v-card-media",
+            "v-card-text",
+            "v-card-title"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [
+            "mediaWithText",
+            "horizontal",
+            "grids",
+            "customActions"
+          ]
+        }
+      ]
+    }
+  ]
+}

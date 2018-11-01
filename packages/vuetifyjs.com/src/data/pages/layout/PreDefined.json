@@ -1,0 +1,46 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "alert",
+          "lang": "alert1",
+          "value": "error"
+        },
+        {
+          "type": "subtitle",
+          "lang": "markupHeader"
+        },
+        {
+          "type": "text",
+          "lang": "markupText"
+        },
+        {
+          "type": "markup",
+          "value": "html_default_markup"
+        },
+        {
+          "type": "alert",
+          "lang": "alert2",
+          "value": "info"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "subtitle",
+          "lang": "appHeader"
+        },
+        {
+          "type": "text",
+          "lang": "appText"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "usage",
+          "value": "usage"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": ["v-text-field"]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [
+            "singleLine",
+            "disabledAndReadonly",
+            "icon",
+            "clearable",
+            "iconEvents",
+            "iconSlots",
+            "characterCounter",
+            "password",
+            "validation",
+            "fullWidthWithCharacterCounter",
+            "hint",
+            "prefixesAndSuffixes",
+            "customValidation",
+            "box",
+            "solo",
+            "outline",
+            "customColors",
+            "masks",
+            "progressBar"
+          ]
+        }
+      ]
+    }
+  ]
+}

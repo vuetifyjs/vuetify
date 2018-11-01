@@ -1,0 +1,40 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "usage",
+          "value": "usage"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": ["v-select"]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [
+            "light",
+            "icons",
+            "multiple",
+            "customTextAndValue",
+            "slots",
+            "selectionAppearance"
+          ]
+        }
+      ]
+    }
+  ]
+}

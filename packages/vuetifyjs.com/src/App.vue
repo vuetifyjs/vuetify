@@ -1,12 +1,20 @@
 <template>
   <v-fade-transition appear>
-    <core-documentation v-if="!examples" />
-    <div
-      v-else
-      id="app"
-    >
-      <router-view />
-    </div>
+    <v-app v-cloak>
+      <core-ad />
+
+      <core-toolbar />
+
+      <core-drawer />
+
+      <v-content>
+        <router-view />
+      </v-content>
+
+      <core-fab />
+
+      <core-snackbar />
+    </v-app>
   </v-fade-transition>
 </template>
 

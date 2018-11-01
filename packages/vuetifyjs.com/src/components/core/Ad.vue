@@ -108,6 +108,7 @@
       ...mapState('route', ['path', 'name']),
       shouldShowAd () {
         return (
+          this.name &&
           this.name !== 'home/Home' &&
           this.name.indexOf('store/') < 0
         )

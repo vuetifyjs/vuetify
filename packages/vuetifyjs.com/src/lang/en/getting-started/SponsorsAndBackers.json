@@ -1,13 +1,18 @@
 {
   "header": "Support Vuetify's development",
-  "headerText": "Vuetify is an open source project under the MIT license. It is and will always be free to use. However, the amount of effort it takes to maintain the core framework and all supplementing packages is quite considerable. With the goal to continue development of additional functionality even after the completion of Material Design spec, you can help by <a href=\"https://www.patreon.com/vuetify\" target=\"_blank\" rel=\"noreferrer\">backing Vuetify on Patreon</a>.",
+  "headerText": "Vuetify is an open source project under the MIT license. It is and will always be free to use. The time and dedication it takes to maintain the core framework and all supplementing packages is substantial. One-time Donors, Patreon Backers, Affiliates and Special Sponsor contributions allow for continual development of additional functionality even after the completion of Material Design spec. You can  support Vuetify’s open-source project by becoming a backer through one of the following means:",
   "backersHeader": "Patreon backers:",
   "backersSubHeader": "Diamond ($500/mo)",
   "backersSubHeader2": "Palladium ($250/mo)",
   "backersSubHeader3": "Platinum ($100/mo)",
   "backersSubHeader4": "Gold ($50/mo)",
   "affiliatesHeader": "Affiliates:",
+  "patrons": "Patreon Backers:",
+  "patreon": "Patreon:",
+  "patreonBlurb": "Patreon Backers are monthly donors that receive special perks, including the top two tiers placing their logo on the front of the Vuetify website.",
   "sponsorsHeader": "Service sponsors:",
+  "oneTime": "One Time Donation:",
+  "oneTimeBlurb": "Vuetify is greatful for any one-time donations received through:",
   "questionHeader": "Have additional questions?",
   "questionButton": "Contact Us"
 }

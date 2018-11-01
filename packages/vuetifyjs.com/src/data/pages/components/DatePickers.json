@@ -1,0 +1,58 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "usage",
+          "value": "dateLight"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": ["v-date-picker"]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [
+            "dateLight",
+            "dateColorable",
+            "dateDialogAndMenu",
+            "dateFormatting",
+            "dateAllowedDates",
+            "dateMultiple",
+            "dateWidth",
+            "dateBirthday",
+            "datePickerDate",
+            "dateEvents",
+            "dateInternationalization",
+            "dateIcons",
+            "dateReadonly",
+            "dateCurrent",
+            "monthLight",
+            "monthColorable",
+            "monthDialogAndMenu",
+            "monthAllowedMonths",
+            "monthMultiple",
+            "monthWidth",
+            "monthInternationalization",
+            "monthIcons",
+            "monthReadonly",
+            "monthCurrent"
+          ]
+        }
+      ]
+    }
+  ]
+}

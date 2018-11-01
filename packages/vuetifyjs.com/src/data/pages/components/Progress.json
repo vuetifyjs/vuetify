@@ -1,0 +1,47 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "usage",
+          "value": "circularDefault"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": [
+            "v-progress-circular",
+            "v-progress-linear"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [
+            "circularColored",
+            "circularIndeterminate",
+            "circularSizeAndWidth",
+            "circularRotate",
+            "linearDeterminate",
+            "linearIndeterminate",
+            "linearBuffer",
+            "linearQueryIndeterminateAndDeterminate",
+            "linearCustomHeightAndContextualColors",
+            "linearCustomColors"
+          ]
+        }
+      ]
+    }
+  ]
+}

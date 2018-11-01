@@ -1,0 +1,71 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "subtitle",
+          "lang": "blockquoteHeader"
+        },
+        {
+          "type": "example",
+          "value": "block"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "subtitle",
+          "lang": "paragraphsHeader"
+        },
+        {
+          "type": "example",
+          "value": "paragraph"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "subtitle",
+          "lang": "codeHeader"
+        },
+        {
+          "type": "example",
+          "value": "code"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "subtitle",
+          "lang": "variablesHeader"
+        },
+        {
+          "type": "example",
+          "value": "variables"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "subtitle",
+          "lang": "userInputHeader"
+        },
+        {
+          "type": "example",
+          "value": "user"
+        }
+      ]
+    }
+  ]
+}
