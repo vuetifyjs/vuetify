@@ -38,7 +38,7 @@ test('VMenu.js', ({ mount, compileToFunctions }) => {
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.isActive).toBe(false)
 
-    wrapper.setProps({ keyable: false })
+    wrapper.setProps({ disableKeys: true })
     wrapper.vm.isActive = true
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.isActive).toBe(true)
