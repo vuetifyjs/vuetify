@@ -129,7 +129,7 @@ const dataIterableProps = [
       descending: 'boolean',
       sortBy: 'string',
       rowsPerPage: 'number // -1 for All',
-      page: 'interger'
+      page: 'number'
     }
   },
   {
