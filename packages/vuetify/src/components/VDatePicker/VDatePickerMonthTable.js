@@ -38,8 +38,7 @@ export default {
           return this.$createElement('td', {
             key: month
           }, [
-            this.genButton(date, false),
-            this.isEvent(date) ? this.genEvent(date) : null
+            this.genButton(date, false)
           ])
         })
 

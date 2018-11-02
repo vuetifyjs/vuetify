@@ -69,8 +69,7 @@ export default {
         const date = `${this.displayedYear}-${pad(this.displayedMonth + 1)}-${pad(day)}`
 
         rows.push(this.$createElement('td', [
-          this.genButton(date, true),
-          this.isEvent(date) ? this.genEvent(date) : null
+          this.genButton(date, true)
         ]))
 
         if (rows.length % 7 === 0) {

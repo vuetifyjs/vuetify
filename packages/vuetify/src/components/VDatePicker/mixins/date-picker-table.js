@@ -89,13 +89,17 @@ export default {
           type: 'button'
         },
         domProps: {
-          disabled: !isAllowed,
-          innerHTML: `<div class="v-btn__content">${this.formatter(value)}</div>`
+          disabled: !isAllowed
         },
         on: (this.disabled || !isAllowed) ? {} : {
           click: () => this.$emit('input', value)
         }
-      }))
+      }), [
+        this.$createElement('div', {
+          staticClass: 'v-btn__content'
+        }, [this.formatter(value)]),
+        this.isEvent(value) ? this.genEvent(value) : null
+      ])
     },
     isEvent (date) {
       if (Array.isArray(this.events)) {
