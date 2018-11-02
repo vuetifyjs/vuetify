@@ -12,6 +12,16 @@
 
 <script>
   export default {
-    inject: ['namespace', 'page']
+    props: {
+      // Provided by router
+      namespace: {
+        type: String,
+        default: undefined
+      },
+      page: {
+        type: String,
+        default: undefined
+      }
+    }
   }
 </script>
