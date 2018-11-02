@@ -6,7 +6,10 @@
 
     <core-drawer />
 
-    <core-view />
+    <core-view
+      :namespace="namespace"
+      :page="page"
+    />
 
     <core-fab />
 
@@ -15,19 +18,8 @@
 </template>
 
 <script>
-  // Utilities
-  import camelCase from 'lodash/camelCase'
-  import upperFirst from 'lodash/upperFirst'
-
   export default {
     name: 'Documentation',
-
-    provide () {
-      return {
-        namespace: upperFirst(camelCase(this.namespace)),
-        page: upperFirst(camelCase(this.page))
-      }
-    },
 
     props: {
       // Provided by router
