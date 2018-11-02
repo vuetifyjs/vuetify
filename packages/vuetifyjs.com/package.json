@@ -7,7 +7,6 @@
   "scripts": {
     "dev": "cross-env NODE_OPTIONS=--max_old_space_size=8192 node server",
     "start": "cross-env NODE_ENV=production node server",
-    "translate": "cross-env TRANSLATE=true node server",
     "build": "rimraf dist && cross-env NODE_ENV=production webpack --config build/webpack.prod.config.js --progress --hide-modules",
     "lint": "eslint --ext .js,.vue,.json src"
   },

@@ -67,11 +67,6 @@
                 width="24px"
               )
             v-list-tile-title {{language.name}}
-          v-list-tile(
-            v-if="isTranslating"
-            @click="showCreateDialog(true)"
-          )
-            v-list-tile-title New translation
     v-toolbar-items
       v-btn(
         :to="{ name: 'store/Front' }"
@@ -187,7 +182,6 @@
   // Utilities
   import {
     mapGetters,
-    mapMutations,
     mapState
   } from 'vuex'
   import languages from '@/data/i18n/languages.json'
@@ -207,9 +201,6 @@
 
     computed: {
       ...mapGetters('store', ['storeSale']),
-      ...mapState('translation', [
-        'isTranslating'
-      ]),
       ...mapState('app', [
         'appToolbar',
         'isFullscreen',
@@ -246,9 +237,6 @@
     },
 
     methods: {
-      ...mapMutations({
-        showCreateDialog: 'translation/SHOW_CREATE_DIALOG'
-      }),
       changeToRelease (release) {
         // Remove language setting
         const path = this.$route.fullPath.split('/')
