@@ -1,7 +1,10 @@
 <template lang="pug">
   v-container(
-    class="spacing-playground"
+    fluid
     grid-list-lg
+    spacing-playground
+    py-0
+    px-2
   )
     v-layout(
       row

@@ -46,15 +46,15 @@
 
         <div class="pa-2 grey lighten-3 grey--text text--darken-2 d-flex">
           <v-flex>
-            <helpers-markdown
-              :source="item.description"
+            <core-markdown
+              :code="item.description"
               class="justify"
             />
-            <helpers-markup
+            <core-markup
               v-if="item.example"
               class="mt-2 mb-0"
               lang="ts"
-            >{{ genTypescriptDef(item.example) }}</helpers-markup>
+            >{{ genTypescriptDef(item.example) }}</core-markup>
           </v-flex>
         </div>
 
@@ -163,7 +163,6 @@
     },
 
     methods: {
-      /* eslint-disable max-statements */
       genDescription (name, item) {
         let description = ''
         let devPrepend = ''
@@ -216,7 +215,7 @@
         if (item.signature) return name
 
         name = name || ''
-        name = name.replace(/([A-Z])/g, g => `-${g[0].toLowerCase()}`)
+        name = name.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`)
         const sync = (item.sync && '.sync') || ''
 
         return `${name}${sync}`
@@ -232,7 +231,7 @@
         return this.genTypescriptDef(props)
       },
       genDefault (value) {
-        if (typeof value !== 'string') return JSON.stringify(value, null, 2)
+        if (typeof value !== 'string') return JSON.stringify(value)
         else return value
       },
       genTypescriptDef (obj) {

@@ -65,7 +65,7 @@
 </template>
 
 <script>
-  import Markup from '../../components/helpers/Markup'
+  import Markup from '../../components/core/Markup'
 
   export default {
     components: { Markup },
