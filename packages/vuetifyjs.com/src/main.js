@@ -32,7 +32,6 @@ export function createApp (ssrContext) {
   const i18n = createI18n(ssrContext)
 
   store.state.app.currentVersion = Vuetify.version
-  store.state.translation.isTranslating = typeof process.env.TRANSLATE !== 'undefined'
 
   // sync the router with the vuex store.
   // this registers `store.state.route`
