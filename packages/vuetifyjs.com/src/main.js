@@ -29,7 +29,7 @@ export function createApp (ssrContext) {
   // create store and router instances
   const store = createStore()
   const router = createRouter(store)
-  const i18n = createI18n(ssrContext)
+  const i18n = createI18n(ssrContext, router)
 
   store.state.app.currentVersion = Vuetify.version
 
