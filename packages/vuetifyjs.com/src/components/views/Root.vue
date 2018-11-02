@@ -1,11 +1,8 @@
 <template>
-  <v-slide-y-transition mode="out-in">
-    <router-view
-      v-if="languageIsValid"
-      :key="$route.path"
-    />
+  <v-fade-transition mode="out-in">
+    <router-view v-if="languageIsValid" />
     <not-found-page v-else to="/en/" />
-  </v-slide-y-transition>
+  </v-fade-transition>
 </template>
 
 <script>

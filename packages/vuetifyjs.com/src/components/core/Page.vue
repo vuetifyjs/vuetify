@@ -30,24 +30,7 @@
 
   // TODO: This is where 404 redirect will occur
   export default {
-    provide () {
-      return {
-        app: this.app,
-        namespace: upperFirst(camelCase(this.namespace)),
-        page: upperFirst(camelCase(this.page))
-      }
-    },
-
-    props: {
-      namespace: {
-        type: String,
-        required: true
-      },
-      page: {
-        type: String,
-        required: true
-      }
-    },
+    inject: ['namespace', 'page'],
 
     computed: {
       composite () {
