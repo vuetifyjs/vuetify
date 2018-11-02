@@ -1,3 +1,4 @@
+import api from '@vuetify/api-generator'
 import components from '@/data/components'
 import deprecatedIn from '@/data/deprecatedIn'
 import newIn from '@/data/newIn'
@@ -27,6 +28,7 @@ const docPage = [
 ]
 
 export default () => ({
+  api,
   appDrawer: null,
   appFooter: true,
   appSnackbar: {
