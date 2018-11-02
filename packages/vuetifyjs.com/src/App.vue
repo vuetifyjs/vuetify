@@ -1,21 +1,9 @@
 <template>
-  <v-fade-transition appear>
-    <v-app v-cloak>
-      <core-ad />
-
-      <core-toolbar />
-
-      <core-drawer />
-
-      <v-content>
-        <router-view />
-      </v-content>
-
-      <core-fab />
-
-      <core-snackbar />
-    </v-app>
-  </v-fade-transition>
+  <v-app>
+    <v-fade-transition mode="out-in">
+      <router-view />
+    </v-fade-transition>
+  </v-app>
 </template>
 
 <script>
@@ -77,26 +65,3 @@
     }
   }
 </script>
-
-<style lang="stylus">
-  @import '~vuetify/src/stylus/settings/_variables.styl'
-
-  main
-    section
-      &:before
-        content ''
-        display block
-        position relative
-        width 0
-        height 80px
-        margin-top -80px
-
-  .container.page
-    max-width: 1185px !important
-    padding-top: 75px
-    padding-bottom: 0
-    transition: .2s $transition.fast-out-slow-in
-
-    section
-      margin-bottom: 48px
-</style>
