@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 import axios from 'axios'
-import messages from '@/lang'
+import en from '@/lang/en'
 
 Vue.use(VueI18n)
 
@@ -18,7 +18,7 @@ export function createI18n (ssrContext, router) {
 
   const i18n = new VueI18n({
     locale,
-    messages,
+    messages: { en },
     fallbackLocale: 'en'
   })
 
@@ -38,10 +38,10 @@ export function createI18n (ssrContext, router) {
       return import(/* webpackChunkName: "lang-[request]" */ `@/lang/${lang}`).then(msgs => {
         loadedLanguages.push(lang)
         globalLanguages[lang] = msgs.default
-        i18n.setLocaleMessage(lang, globalLanguages)
+        i18n.setLocaleMessage(lang, globalLanguages[lang])
         return Promise.resolve(setI18nLanguage(lang))
       }).catch(err => {
-        console.log(err)
+        console.log(lang, err)
       })
     }
     return Promise.resolve(setI18nLanguage(lang))

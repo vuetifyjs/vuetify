@@ -1,33 +1,28 @@
-// Pages
-import Vuetify from './vuetify'
-import GettingStarted from './getting-started'
-import Guides from './guides'
-import Layout from './layout'
-import Style from './style'
+import camelCase from 'lodash/camelCase'
+import upperFirst from 'lodash/upperFirst'
 
-// Generic
-import Generic from './generic'
+const requireLang = require.context(
+  './',
+  true,
+  /\.json$/
+)
 
-// Components
-import Components from './components'
+const messages = {}
 
-// Directives
-import Directives from './directives'
+for (const file of requireLang.keys()) {
+  if (file === './index.js') continue
 
-// Mixins
-import Mixins from './mixins'
+  const path = file.replace(/(\.\/|\.json$)/g, '').split('/')
 
-import Meta from './meta'
+  path.reduce((o, s, i) => {
+    const prop = upperFirst(camelCase(s))
 
-export default {
-  Components,
-  Directives,
-  Generic,
-  GettingStarted,
-  Guides,
-  Layout,
-  Mixins,
-  Style,
-  Vuetify,
-  Meta
+    o[prop] = i + 1 === path.length
+      ? requireLang(file)
+      : o[prop] || {}
+
+    return o[prop]
+  }, messages)
 }
+
+export default messages
