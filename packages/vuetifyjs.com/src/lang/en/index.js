@@ -15,9 +15,7 @@ for (const file of requireLang.keys()) {
   const path = file.replace(/(\.\/|\.json$)/g, '').split('/')
 
   path.reduce((o, s, i) => {
-    const prop = i !== 0
-      ? upperFirst(camelCase(s))
-      : s
+    const prop = upperFirst(camelCase(s))
 
     o[prop] = i + 1 === path.length
       ? requireLang(file)
