@@ -31,7 +31,9 @@
     "restrict-plus-operands": false,
 
     // Fails with no-unused-variable for some reason
-    "no-useless-cast": false
+    "no-useless-cast": false,
+
+    "no-floating-promises": false
   },
   "rulesDirectory": []
 }
