@@ -108,33 +108,6 @@
     "route": "components/api-explorer"
   },
   {
-    "page": "store/Index",
-    "route": "store",
-    "children": [
-      {
-        "page": "store/Front",
-        "route": ""
-      },
-      {
-        "page": "store/Cart",
-        "route": "cart"
-      },
-      {
-        "page": "store/ThankYou",
-        "route": "thank-you"
-      },
-      {
-        "page": "store/Licensing",
-        "route": "licensing"
-      },
-      {
-        "page": "store/Product",
-        "route": "product/:id",
-        "props": true
-      }
-    ]
-  },
-  {
     "page": "guides/SSR",
     "route": "guides/server-side-rendering"
   },
