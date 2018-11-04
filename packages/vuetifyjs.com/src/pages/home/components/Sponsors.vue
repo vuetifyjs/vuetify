@@ -41,7 +41,7 @@
         </v-layout>
       </v-container>
       <v-flex xs12>
-        <misc-sponsor-btn large />
+        <sponsor-btn large />
       </v-flex>
     </v-layout>
 
