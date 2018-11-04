@@ -35,7 +35,6 @@
     "route-cache": "^0.4.4",
     "serialize-javascript": "^1.5.0",
     "serve-favicon": "^2.5.0",
-    "shopify-buy": "^1.4.0",
     "vee-validate": "^2.1.1",
     "vue": "^2.5.17",
     "vue-analytics": "^5.16.0",

@@ -411,40 +411,4 @@
        <changefreq>daily</changefreq>
        <priority>0.8000</priority>
   </url>
-  <url>
-       <loc>https://vuetifyjs.com/en/store</loc>
-       <lastmod>2018-02-19T14:46:47+00:00</lastmod>
-       <changefreq>daily</changefreq>
-       <priority>0.8000</priority>
-  </url>
-  <url>
-       <loc>https://vuetifyjs.com/en/store/product/813199294506</loc>
-       <lastmod>2018-02-19T14:46:47+00:00</lastmod>
-       <changefreq>daily</changefreq>
-       <priority>0.6400</priority>
-  </url>
-  <url>
-       <loc>https://vuetifyjs.com/en/store/product/824249286698</loc>
-       <lastmod>2018-02-19T14:46:47+00:00</lastmod>
-       <changefreq>daily</changefreq>
-       <priority>0.6400</priority>
-  </url>
-  <url>
-       <loc>https://vuetifyjs.com/en/store/product/686614085674</loc>
-       <lastmod>2018-02-19T14:46:47+00:00</lastmod>
-       <changefreq>daily</changefreq>
-       <priority>0.6400</priority>
-  </url>
-  <url>
-       <loc>https://vuetifyjs.com/en/store/product/686676869162</loc>
-       <lastmod>2018-02-19T14:46:47+00:00</lastmod>
-       <changefreq>daily</changefreq>
-       <priority>0.6400</priority>
-  </url>
-  <url>
-       <loc>https://vuetifyjs.com/en/store/product/686690467882</loc>
-       <lastmod>2018-02-19T14:46:47+00:00</lastmod>
-       <changefreq>daily</changefreq>
-       <priority>0.6400</priority>
-  </url>
 </urlset>

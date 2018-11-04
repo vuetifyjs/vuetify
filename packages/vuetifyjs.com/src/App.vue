@@ -9,24 +9,13 @@
 <script>
   import Meta from '@/mixins/meta'
 
-  // Utilities
-  import asyncData from '@/util/asyncData'
-
   import {
     mapMutations,
     mapState
   } from 'vuex'
 
   export default {
-    mixins: [asyncData, Meta],
-
-    asyncData ({ store }) {
-      if (store.state.store.hasFetchedProducts &&
-        store.state.store.products.length
-      ) return Promise.resolve()
-
-      return store.dispatch('store/getProducts')
-    },
+    mixins: [Meta],
 
     computed: {
       ...mapState({

@@ -95,8 +95,7 @@ Object.keys(redirects).forEach(k => {
 // headers.
 // 10-minute microcache.
 // https://www.nginx.com/blog/benefits-of-microcaching-nginx/
-const isStore = req => !!req.params && !!req.params[1] && req.params[1].includes('store')
-const cacheMiddleware = microcache.cacheSeconds(10 * 60, req => useMicroCache && !isStore(req) && req.originalUrl)
+const cacheMiddleware = microcache.cacheSeconds(10 * 60, req => useMicroCache && req.originalUrl)
 
 const ouchInstance = (new Ouch()).pushHandler(new Ouch.handlers.PrettyPageHandler('orange', null, 'sublime'))
 
@@ -108,15 +107,6 @@ function render (req, res) {
   res.cookie('currentLanguage', req.params[0], {
     maxAge: 1000 * 60 * 60 * 24 * 7 // 7 days
   })
-
-  if (!/^\/store/.test(req.params[1])) {
-    res.setHeader('Last-Modified', startTime.toUTCString())
-    res.setHeader('Cache-Control', 'public, must-revalidate')
-
-    if (req.fresh) {
-      return res.status(304).end()
-    }
-  }
 
   const handleError = err => {
     if (err.url) {

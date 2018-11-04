@@ -18,27 +18,6 @@ export function capitalize (str) {
   return `${str.substr(0, 1).toUpperCase()}${str.slice(1)}`
 }
 
-export function shortId (id) {
-  // atob() but for node
-  const arr = Buffer.from(id, 'base64').toString('binary').split('/')
-  return arr[arr.length - 1]
-}
-
-export function getLongId (id) {
-  // btoa() but for node
-  return Buffer.from(`gid://shopify/Product/${id}`, 'binary').toString('base64')
-}
-
-export function findProduct (store, id) {
-  return store.state.store.products.find(p => p.id === id)
-}
-
-export function isOnSale (variants) {
-  return variants.some(variant => {
-    return parseFloat(variant.price) < parseFloat(variant.compareAtPrice)
-  })
-}
-
 export function randomNumber (min, max) {
   return Math.floor(Math.random() * max) + min
 }

@@ -22,11 +22,7 @@
         width="38px"
       )
 
-    v-fade-transition(mode="out-in")
-      v-btn(flat :to="backPath" v-if="$route.path.name === 'store/Index'")
-        v-icon(left) mdi-arrow-left
-        span {{ $t('Vuetify.AppToolbar.backToDocs' )}}
-      v-toolbar-title(v-else).pb-1.hidden-xs-only Vuetify
+    v-toolbar-title.pb-1.hidden-xs-only Vuetify
 
     v-spacer
     v-toolbar-items
@@ -67,20 +63,6 @@
                 width="24px"
               )
             v-list-tile-title {{language.name}}
-    v-toolbar-items
-      v-btn(
-        :to="{ name: 'store/Front' }"
-        flat
-        style="min-width: 48px"
-      )
-        v-badge(color="red lighten-2")
-          v-icon(
-            v-if="storeSale"
-            slot="badge"
-            v-text="storeSale"
-          )
-          span.hidden-sm-and-down {{ $t('Vuetify.AppToolbar.store' )}}
-          v-icon.hidden-md-and-up store
 
     v-toolbar-items
       v-menu(
@@ -168,29 +150,16 @@
           flat
         )
           span.mr-1 {{ currentVersion }}
-
-    store-toolbar(
-      v-if="isStore"
-      slot="extension"
-    )
 </template>
 
 <script>
-  // Components
-  import StoreToolbar from '@/components/store/Toolbar'
-
   // Utilities
   import {
-    mapGetters,
     mapState
   } from 'vuex'
   import languages from '@/data/i18n/languages.json'
 
   export default {
-    components: {
-      StoreToolbar
-    },
-
     data: vm => ({
       ecosystems: vm.$t('Vuetify.AppToolbar.ecosystems'),
       supports: vm.$t('Vuetify.AppToolbar.supports'),
@@ -200,7 +169,6 @@
     }),
 
     computed: {
-      ...mapGetters('store', ['storeSale']),
       ...mapState('app', [
         'appToolbar',
         'isFullscreen',
@@ -223,11 +191,6 @@
       isManualScrolled () {
         return !this.isHome &&
           this.isFullscreen
-      },
-      isStore () {
-        if (!this.$route.name) return false
-
-        return this.$route.name.startsWith('store/')
       },
       logoLink () {
         return this.isHome
