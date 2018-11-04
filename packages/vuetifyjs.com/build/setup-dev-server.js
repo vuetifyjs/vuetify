@@ -44,7 +44,7 @@ module.exports = function setupDevServer (app, templatePath, cb) {
   ]
   clientConfig.entry.app = entries
   clientConfig.output.filename = '[name].js'
-  clientConfig.plugins.push(new webpack.HotModuleReplacementPlugin({ multiStep: true }))
+  clientConfig.plugins.push(new webpack.HotModuleReplacementPlugin())
 
   const combinedConfig = [clientConfig, serverConfig]
 
