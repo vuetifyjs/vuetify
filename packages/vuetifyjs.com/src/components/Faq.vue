@@ -55,7 +55,7 @@
                 class="pa-3"
                 elevation="1"
               >
-                <core-markdown :code="gotcha.a" />
+                <doc-markdown :code="gotcha.a" />
               </v-paper>
             </div>
           </template>

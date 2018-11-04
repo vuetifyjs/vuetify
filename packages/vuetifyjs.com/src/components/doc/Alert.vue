@@ -5,7 +5,7 @@
     :value="true"
     class="app-alert mb-3"
   >
-    <core-markdown><slot /></core-markdown>
+    <doc-markdown><slot /></doc-markdown>
   </v-alert>
 </template>
 

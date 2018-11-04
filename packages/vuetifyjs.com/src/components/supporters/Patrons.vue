@@ -6,7 +6,7 @@
     wrap
   >
     <v-flex xs12>
-      <core-subtitle goto="patrons">patrons</core-subtitle>
+      <doc-subtitle goto="patrons">patrons</doc-subtitle>
     </v-flex>
 
     <v-flex

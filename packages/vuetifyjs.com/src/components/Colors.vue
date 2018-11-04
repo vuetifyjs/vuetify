@@ -1,7 +1,7 @@
 <template>
   <div>
-    <core-subtitle>colorHeader</core-subtitle>
-    <core-text>colorText</core-text>
+    <doc-subtitle>colorHeader</doc-subtitle>
+    <doc-text>colorText</doc-text>
 
     <v-text-field
       v-model="search"

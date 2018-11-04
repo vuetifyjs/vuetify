@@ -1,15 +1,15 @@
 <template>
   <v-container fluid>
-    <core-title>
+    <doc-title>
       {{ structure.title }}
-    </core-title>
+    </doc-title>
     <div class="mb-5">
-      <core-text
+      <doc-text
         v-if="structure.titleText"
         class="mb-4"
       >
         {{ structure.titleText }}
-      </core-text>
+      </doc-text>
     </div>
 
     <component
