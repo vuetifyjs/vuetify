@@ -1,5 +1,5 @@
 <template>
   <v-display-1>
-    <core-markdown><slot /></core-markdown>
+    <doc-markdown><slot /></doc-markdown>
   </v-display-1>
 </template>

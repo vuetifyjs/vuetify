@@ -50,15 +50,15 @@ export function goTo (id) {
 
 export function getComponent (type) {
   switch (type) {
-    case 'alert': return 'core-alert'
-    case 'heading': return 'core-heading'
-    case 'text': return 'core-text'
-    case 'title': return 'core-title'
-    case 'markup': return 'core-markup'
-    case 'markdown': return 'core-markdown'
-    case 'section': return 'core-section'
-    case 'subtitle': return 'core-subtitle'
-    case 'tree': return 'core-tree'
+    case 'alert': return 'doc-alert'
+    case 'heading': return 'doc-heading'
+    case 'text': return 'doc-text'
+    case 'title': return 'doc-title'
+    case 'markup': return 'doc-markup'
+    case 'markdown': return 'doc-markdown'
+    case 'section': return 'doc-section'
+    case 'subtitle': return 'doc-subtitle'
+    case 'tree': return 'doc-tree'
     default: return type
   }
 }

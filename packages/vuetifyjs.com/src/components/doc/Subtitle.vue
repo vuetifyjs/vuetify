@@ -5,7 +5,7 @@
         v-if="props.goto"
         :href="props.goto"
       />
-      <core-markdown tag="h4"><slot /></core-markdown>
+      <doc-markdown tag="h4"><slot /></doc-markdown>
     </v-layout>
   </v-headline>
 </template>

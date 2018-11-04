@@ -6,7 +6,7 @@
     wrap
   >
     <v-flex xs12>
-      <core-subtitle goto="one-time-donation">oneTime</core-subtitle>
+      <doc-subtitle goto="one-time-donation">oneTime</doc-subtitle>
     </v-flex>
 
     <v-flex
@@ -19,7 +19,7 @@
       xs12
       tag="p"
     >
-      <core-markdown>oneTimeBlurb</core-markdown>
+      <doc-markdown>oneTimeBlurb</doc-markdown>
     </v-flex>
 
     <v-flex

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <core-subtitle>Generic.Pages.api</core-subtitle>
+    <doc-subtitle>Generic.Pages.api</doc-subtitle>
     <v-card class="py-1">
       <parameters
         :headers="headers[tab]"

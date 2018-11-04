@@ -1,7 +1,7 @@
 <template>
   <div>
-    <core-subtitle>Generic.Pages.usage</core-subtitle>
-    <core-text>{{ `${namespace}.${page}.examples.${value}.desc` }}</core-text>
+    <doc-subtitle>Generic.Pages.usage</doc-subtitle>
+    <doc-text>{{ `${namespace}.${page}.examples.${value}.desc` }}</doc-text>
     <example
       :id="`usage-${-1}`"
       :value="value"

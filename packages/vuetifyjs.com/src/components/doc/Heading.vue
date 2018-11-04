@@ -1,6 +1,6 @@
 <template functional>
   <v-subtitle-2 class="doc-heading">
-    <core-markdown><slot /></core-markdown>
+    <doc-markdown><slot /></doc-markdown>
   </v-subtitle-2>
 </template>
 
