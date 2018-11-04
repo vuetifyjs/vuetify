@@ -14,7 +14,7 @@
           One spot available
         </span>
 
-        <misc-sponsor-btn
+        <sponsor-btn
           large
           class="mb-4"
           href="https://www.patreon.com/join/vuetify"

@@ -22,7 +22,10 @@
       to: {
         type: [Object, String],
         default: () => ({
-          name: 'getting-started/SponsorsAndBackers'
+          params: {
+            namespace: 'getting-started',
+            page: 'sponsors-and-backers'
+          }
         })
       },
       href: {
