@@ -58,7 +58,7 @@
       </v-flex>
       <v-flex xs12>
         <h5>Output:</h5>
-        <markup lang="vue">{{ formatAttributes(layoutAttributes) }}</markup>
+        <markup>{{ formatAttributes(layoutAttributes) }}</markup>
       </v-flex>
     </v-layout>
   </v-container>
