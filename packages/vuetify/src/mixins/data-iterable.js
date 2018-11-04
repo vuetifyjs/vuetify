@@ -227,6 +227,11 @@ export default {
   },
 
   watch: {
+    items () {
+      if (this.pageStart >= this.itemsLength) {
+        this.resetPagination()
+      }
+    },
     search () {
       this.$nextTick(() => {
         this.updatePagination({ page: 1, totalItems: this.itemsLength })
