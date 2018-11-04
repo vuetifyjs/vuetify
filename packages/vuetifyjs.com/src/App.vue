@@ -43,16 +43,6 @@
 
     mounted () {
       this.getReleases()
-
-      this.snackbar({
-        color: 'default',
-        close: true,
-        id: 'twitter-vueconf-to',
-        text: 'Join now',
-        msg: 'Vuetify **VueConf** logo contest',
-        href: 'https://twitter.com/vuetifyjs/status/1057766550508396544',
-        timeout: 0
-      })
     },
 
     methods: {
