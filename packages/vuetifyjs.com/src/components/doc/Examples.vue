@@ -10,7 +10,7 @@
         {{ `${namespace}.${page}.examples.${example}.desc` }}
       </doc-text>
 
-      <example
+      <doc-example
         :key="i"
         :value="example"
       />

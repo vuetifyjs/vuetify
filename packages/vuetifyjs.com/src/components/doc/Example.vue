@@ -38,7 +38,7 @@
       import(
         /* webpackChunkName: "examples" */
         /* webpackMode: "lazy-once" */
-        `../examples/${this.file}.vue`
+        `../../examples/${this.file}.vue`
       ).then(comp => {
         this.component = comp.default
       })
@@ -46,7 +46,7 @@
       import(
         /* webpackChunkName: "examples-source" */
         /* webpackMode: "lazy-once" */
-        `!raw-loader!../examples/${this.file}.vue`
+        `!raw-loader!../../examples/${this.file}.vue`
       ).then(comp => this.boot(comp.default))
     },
 

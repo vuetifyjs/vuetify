@@ -2,7 +2,7 @@
   <div>
     <doc-subtitle>Generic.Pages.usage</doc-subtitle>
     <doc-text>{{ `${namespace}.${page}.examples.${value}.desc` }}</doc-text>
-    <example
+    <doc-example
       :id="`usage-${-1}`"
       :value="value"
     />

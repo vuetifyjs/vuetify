@@ -51,14 +51,19 @@ export function goTo (id) {
 export function getComponent (type) {
   switch (type) {
     case 'alert': return 'doc-alert'
+    case 'api': return 'doc-api'
+    case 'example': return 'doc-example'
+    case 'examples': return 'doc-examples'
     case 'heading': return 'doc-heading'
     case 'text': return 'doc-text'
     case 'title': return 'doc-title'
     case 'markup': return 'doc-markup'
     case 'markdown': return 'doc-markdown'
+    case 'parameters': return 'doc-parameters'
     case 'section': return 'doc-section'
     case 'subtitle': return 'doc-subtitle'
     case 'tree': return 'doc-tree'
+    case 'usage': return 'doc-usage'
     default: return type
   }
 }
