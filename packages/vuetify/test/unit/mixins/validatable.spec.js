@@ -25,7 +25,7 @@ test('validatable.js', ({ mount }) => {
     expect(form.unregister).toBeCalled()
   })
 
-  it('should manually set isResetting') {
+  it('should manually set isResetting', () => {
     const wrapper = mount(Mock)
 
     expect(wrapper.vm.isResetting).toBe(false)
@@ -33,7 +33,7 @@ test('validatable.js', ({ mount }) => {
     wrapper.vm.resetValidation()
 
     expect(wrapper.vm.isResetting).toBe(true)
-  }
+  })
 
   it('should manually validate', () => {
     const wrapper = mount(Mock)
