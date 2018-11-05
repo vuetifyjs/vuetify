@@ -1,23 +1,25 @@
 <template>
   <v-container fluid>
-    <doc-title>
-      {{ structure.title }}
-    </doc-title>
-    <div class="mb-5">
-      <doc-text
-        v-if="structure.titleText"
-        class="mb-4"
-      >
-        {{ structure.titleText }}
-      </doc-text>
-    </div>
+    <template v-if="structure">
+      <doc-title>
+        {{ structure.title }}
+      </doc-title>
+      <div class="mb-5">
+        <doc-text
+          v-if="structure.titleText"
+          class="mb-4"
+        >
+          {{ structure.titleText }}
+        </doc-text>
+      </div>
 
-    <component
-      v-for="(child, i) in structure.children"
-      :key="`${composite}-${i}`"
-      :is="getComponent(child.type)"
-      :value="child"
-    />
+      <component
+        v-for="(child, i) in structure.children"
+        :key="`${composite}-${i}`"
+        :is="getComponent(child.type)"
+        :value="child"
+      />
+    </template>
   </v-container>
 </template>
 
@@ -49,16 +51,29 @@
       }
     },
 
+    data: () => ({
+      structure: undefined
+    }),
+
     computed: {
       composite () {
         return `${this.namespace}-${this.page}`
-      },
-      structure () {
-        const namespace = kebabCase(this.namespace)
-        const page = upperFirst(camelCase(this.page))
-
-        return require(`@/data/pages/${namespace}/${page}.json`)
       }
+    },
+
+    created () {
+      const namespace = kebabCase(this.namespace)
+      const page = upperFirst(camelCase(this.page))
+
+      import(
+        /* webpackChunkName: "pages" */
+        `@/data/pages/${namespace}/${page}.json`
+      ).then(res => {
+        this.structure = res.default
+      }).catch(() => {
+        // Add 404
+        throw new Error(`Unable to find page for <${namespace}/${page}>`)
+      })
     },
 
     methods: { getComponent }
