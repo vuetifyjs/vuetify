@@ -1,5 +1,4 @@
 import api from '@vuetify/api-generator'
-import components from '@/data/components'
 import deprecatedIn from '@/data/deprecatedIn'
 import newIn from '@/data/newIn'
 import removed from '@/data/removed'
@@ -17,7 +16,6 @@ export default () => ({
     timeout: 6000
   },
   appToolbar: null,
-  components,
   currentVersion: null,
   deprecatedIn,
   isFullscreen: false,
