@@ -2,7 +2,7 @@
   <div>
     <doc-subtitle>Generic.Pages.api</doc-subtitle>
     <v-card class="py-1">
-      <parameters
+      <doc-parameters
         :headers="headers[tab]"
         :items="component.props"
       />

@@ -25,7 +25,7 @@
             tile
           >
             <v-card-text>
-              <v-title v-text="key" />
+              <span class="title" v-text="key" />
             </v-card-text>
           </v-card>
           <v-card
