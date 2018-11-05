@@ -308,6 +308,8 @@ export default Vue.extend({
         rect.top = parseInt(style.marginTop)
       }
 
+      rect.left += window.scrollX
+
       return rect
     },
     sneakPeek (cb) {
