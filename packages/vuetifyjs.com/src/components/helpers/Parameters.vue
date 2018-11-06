@@ -236,7 +236,7 @@
         else return value
       },
       genTypescriptDef (obj) {
-        return JSON.stringify(obj, null, 2).replace(/"(.*)":\s"(.*)",?/g, '$1: $2;')
+        return JSON.stringify(obj, null, 2).replace(/"(.*)":\s"(.*)",?/g, '$1: $2')
       },
       genHeaderName (header, item) {
         let name = header
@@ -249,10 +249,6 @@
 
 <style lang="stylus">
   .component-parameters
-    code
-      white-space: nowrap
-      box-shadow: none
-
     p
       margin-bottom: 0
 
