@@ -127,9 +127,10 @@ const dataIterableProps = [
     sync: true,
     example: {
       descending: 'boolean',
-      sortBy: 'string',
+      page: 'number',
       rowsPerPage: 'number // -1 for All',
-      page: 'number'
+      sortBy: 'string',
+      totalItems: 'number'
     }
   },
   {
