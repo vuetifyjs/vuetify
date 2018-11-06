@@ -25,6 +25,12 @@ v-treeview-rtl()
       margin-right: 50px
       margin-left: 0
 
+    &__toggle
+      transform: rotate(90deg)
+
+      &--open
+        transform: none
+
 theme(v-treeview, "v-treeview")
 rtl(v-treeview-rtl, "v-treeview")
 
