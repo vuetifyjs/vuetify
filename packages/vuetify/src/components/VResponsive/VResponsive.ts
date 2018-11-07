@@ -8,7 +8,6 @@ import { VNode } from 'vue'
 
 // Utils
 import mixins from '../../util/mixins'
-import { convertToUnit } from '../../util/helpers'
 
 /* @vue/component */
 export default mixins(Measurable).extend({
@@ -48,12 +47,7 @@ export default mixins(Measurable).extend({
   render (h): VNode {
     return h('div', {
       staticClass: 'v-responsive',
-      style: {
-        height: convertToUnit(this.height),
-        maxHeight: convertToUnit(this.maxHeight),
-        maxWidth: convertToUnit(this.maxWidth),
-        width: convertToUnit(this.width)
-      },
+      style: this.measurableStyles,
       on: this.$listeners
     }, [
       this.__cachedSizer,

@@ -9,7 +9,24 @@ v-treeview($material)
   .v-treeview-node--active
     background: $material.dividers
 
+v-treeview-rtl()
+  > .v-treeview-node
+    margin-right: 0
+
+    &--leaf
+      margin-right: 24px
+      margin-left: 0
+
+  &-node
+    margin-right: 26px
+    margin-left: 0
+
+    &--leaf
+      margin-right: 50px
+      margin-left: 0
+
 theme(v-treeview, "v-treeview")
+rtl(v-treeview-rtl, "v-treeview")
 
 .v-treeview
   > .v-treeview-node

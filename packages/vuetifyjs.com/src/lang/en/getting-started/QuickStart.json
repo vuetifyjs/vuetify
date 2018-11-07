@@ -24,6 +24,7 @@
   "existingText4": "You will also need to include the Vuetify css file. Simply include the Vuetify css file in your `index.html` or import the actual stylus file or the minified css.",
   "existingText5": "Some components like the date picker use Material Icons. The easiest way to include them is to add a `link` tag to your `index.html` file.",
   "existingText6": "Alternatively use `npm` or `yarn` to install `material-design-icons-iconfont`.",
+  "existingText7": "You can also asynchronously load the fonts. For this, use `npm` or `yarn` to install `webfontloader`.",
   "alert2": "*Warning*: While Vuetify attempts to not cause any css collision as much as possible, there is no guarantee that your custom styles will not alter your experience when integrating this framework into your existing project.",
   "ie11Header": "IE11 & Safari 9 support",
   "ie11Text": "Vuetify utilizes features of ES2015/2017 that require the need to use polyfills for **Internet Explorer 11** and **Safari 9/10**. If you are using vue-cli-3, this is done automatically for you. Otherwise, in your project directory, you can install `babel-polyfill`:",
