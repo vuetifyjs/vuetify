@@ -124,7 +124,14 @@ const sharedGridProps = [
 const dataIterableProps = [
   {
     name: 'pagination',
-    sync: true
+    sync: true,
+    example: {
+      descending: 'boolean',
+      page: 'number',
+      rowsPerPage: 'number // -1 for All',
+      sortBy: 'string',
+      totalItems: 'number'
+    }
   },
   {
     name: 'filter',

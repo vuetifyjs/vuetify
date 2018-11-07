@@ -43,16 +43,6 @@
 
     mounted () {
       this.getReleases()
-
-      this.snackbar({
-        color: 'default',
-        close: true,
-        id: 'september-2018-21931872',
-        text: 'Go to Video',
-        msg: 'September Framework Update',
-        href: 'https://www.patreon.com/posts/september-2018-21931872',
-        timeout: 0
-      })
     },
 
     methods: {

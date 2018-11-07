@@ -3,6 +3,7 @@
     <v-item-group
       v-model="window"
       class="shrink mr-4"
+      mandatory
       tag="v-flex"
     >
       <v-item

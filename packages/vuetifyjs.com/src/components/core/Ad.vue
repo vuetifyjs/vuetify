@@ -1,85 +1,65 @@
 <template>
-  <v-flex id="ad__container">
-    <v-system-bar
-      v-if="viewport === 'xs' && shouldShowAd"
-      v-show="$vuetify.breakpoint.xsOnly"
-      :app="$vuetify.breakpoint.xsOnly"
-      class="white"
-      height="40"
-    >
-      <div :key="`${path}-xs`" :id="barId" />
-    </v-system-bar>
+  <v-flex id="ad__container" shrink>
+    <template v-if="shouldShowAd">
+      <ad-system-bar v-if="viewport === 'xs' && $vuetify.breakpoint.xsOnly">
+        <ad-shown :viewport="viewport" />
+      </ad-system-bar>
 
-    <v-bottom-nav
-      v-else-if="viewport === 'sm' && shouldShowAd"
-      :value="$vuetify.breakpoint.smOnly"
-      app
-      height="48"
-    >
-      <div :key="`${path}-sm`" :id="botId" />
-    </v-bottom-nav>
+      <ad-bottom-nav v-else-if="viewport === 'sm' && $vuetify.breakpoint.smOnly">
+        <ad-shown :viewport="viewport" />
+      </ad-bottom-nav>
 
-    <v-navigation-drawer
-      v-else-if="viewport === 'md' && shouldShowAd"
-      :value="$vuetify.breakpoint.mdAndUp"
-      app
-      class="transparent pa-3"
-      clipped
-      floating
-      right
-      stateless
-      width="192"
-    >
-      <v-layout
-        column
-        fill-height
-      >
-        <v-flex shrink mb-3>
-          <no-ssr>
-            <core-table-of-contents
-              :offset="85"
-              :threshold="50"
-            />
-          </no-ssr>
-        </v-flex>
-
-        <v-flex
-          xs12
-          text-xs-center
+      <ad-drawer v-else-if="viewport === 'md' && $vuetify.breakpoint.mdAndUp">
+        <v-layout
+          column
+          fill-height
         >
-          <h4 class="caption font-weight-bold grey--text">Diamond Sponsors</h4>
-          <div class="my-3">
-            <div
-              v-for="diamond in diamonds"
-              :key="diamond.name"
-              class="text-xs-center mt-2"
-            >
-              <a
-                :href="diamond.href"
-                target="_blank"
-                rel="noopener"
-                @click="$ga.event('drawer sponsor click', 'click', diamond.name)"
-              >
-                <v-img
-                  :src="`https://cdn.vuetifyjs.com/images/${diamond.logo}`"
-                  :alt="diamond.Name"
-                  contain
-                  height="30"
-                />
-              </a>
-            </div>
-          </div>
-          <misc-sponsor-btn small />
-        </v-flex>
+          <v-flex shrink mb-3>
+            <no-ssr>
+              <core-table-of-contents
+                :offset="85"
+                :threshold="50"
+              />
+            </no-ssr>
+          </v-flex>
 
-        <v-flex
-          :key="`${path}-md`"
-          :id="navId"
-          mt-auto
-          style="margin-bottom: 72px;"
-        />
-      </v-layout>
-    </v-navigation-drawer>
+          <v-flex
+            xs12
+            text-xs-center
+          >
+            <h4 class="caption font-weight-bold grey--text">Diamond Sponsors</h4>
+            <div class="my-3">
+              <div
+                v-for="diamond in diamonds"
+                :key="diamond.name"
+                class="text-xs-center mt-2"
+              >
+                <a
+                  :href="diamond.href"
+                  target="_blank"
+                  rel="noopener"
+                  @click="$ga.event('drawer sponsor click', 'click', diamond.name)"
+                >
+                  <v-img
+                    :src="`https://cdn.vuetifyjs.com/images/${diamond.logo}`"
+                    :alt="diamond.Name"
+                    contain
+                    height="30"
+                  />
+                </a>
+              </div>
+            </div>
+            <misc-sponsor-btn small />
+          </v-flex>
+
+          <ad-shown
+            :viewport="viewport"
+            class="mt-auto"
+            style="margin-bottom: 72px;"
+          />
+        </v-layout>
+      </ad-drawer>
+    </template>
   </v-flex>
 </template>
 
@@ -106,46 +86,27 @@
     computed: {
       ...mapGetters('app', ['supporters']),
       ...mapState('route', ['path', 'name']),
+      diamonds () {
+        return this.supporters.diamond
+      },
       shouldShowAd () {
         return (
           this.name !== 'home/Home' &&
           this.name.indexOf('store/') < 0
         )
-      },
-      diamonds () {
-        return this.supporters.diamond
       }
     },
 
     watch: {
+      path: 'init',
       isBooted (val) {
         if (val) this.init()
-      },
-      path () {
-        if (typeof window === 'undefined') return
-
-        clearTimeout(this.timeout)
-        this.timeout = setTimeout(() => window._codefund.serve(), 300)
-      },
-      viewport (val) {
-        const cfAd = 'codefund_ad'
-        this.barId = val === 'xs' ? cfAd : 'ad__bar'
-        this.botId = val === 'sm' ? cfAd : 'ad__bot'
-        this.navId = val === 'md' ? cfAd : 'ad__nav'
       }
     },
 
     methods: {
-      attachScript () {
-        const script = document.createElement('script')
-        script.type = 'text/javascript'
-        script.src = '//codefund.io/scripts/50bda123-f278-4574-88e2-c7401f869261/embed.js'
-
-        this.$el.append(script)
-      },
       init () {
         this.setViewport()
-        this.attachScript()
       },
       setViewport () {
         const { xsOnly, smOnly } = this.$vuetify.breakpoint
@@ -155,66 +116,3 @@
     }
   }
 </script>
-
-<style lang="stylus">
-  #ad__container
-    #cf_ad
-      .cf-wrapper
-        border-radius: 4px
-
-        .cf-img-wrapper
-          margin-bottom: 16px
-
-    .v-system-bar,
-    .v-bottom-nav
-      #codefund_ad
-        height: 100%
-        width: 100%
-
-      .cf-img-wrapper
-        display: none
-
-      #cf_ad
-        height: 100%
-        margin: 0
-        max-width: 100%
-
-        .cf-powered-by
-          margin-top: 0
-          margin-left: auto
-
-        > span > .cf-wrapper
-          align-items: center
-          display: flex
-          height: 100%
-          padding: 0
-
-    .v-system-bar
-      padding: 0
-
-      #cf_ad
-        > span > .cf-wrapper
-          padding: 0 8px
-
-          > a
-            font-size: 12px
-
-          a.cf-powered-by
-            font-size: 9px
-
-    .v-bottom-nav
-      #cf_ad
-        > span > .cf-wrapper
-          .cf-text
-            padding-right: 24px
-
-          &:before
-            background: #08c
-            border-radius: 4px
-            content: 'Advertiser'
-            color: white
-            font-size: 12px
-            font-weight: 500
-            margin: 0 8px
-            padding: 4px
-</style>

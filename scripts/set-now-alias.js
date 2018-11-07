@@ -1,5 +1,6 @@
 const fs = require('fs')
 const config = require('../now.json')
+const pkg = require('../package.json')
 
 const alias = process.argv[2]
 
@@ -26,8 +27,13 @@ config.files = [
   'lerna.json',
   'yarn.lock'
 ]
+pkg.scripts['now-build'] = "echo 'Built on Travis CI'"
 
 fs.writeFileSync(
   require.resolve('../now.json'),
   JSON.stringify(config, null, 2)
+)
+fs.writeFileSync(
+  require.resolve('../package.json'),
+  JSON.stringify(pkg, null, 2)
 )

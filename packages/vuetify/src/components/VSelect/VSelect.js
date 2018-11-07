@@ -556,7 +556,7 @@ export default {
       const keyCode = e.keyCode
 
       // If enter, space, up, or down is pressed, open menu
-      if (!this.isMenuActive && [
+      if (!this.readonly && !this.isMenuActive && [
         keyCodes.enter,
         keyCodes.space,
         keyCodes.up, keyCodes.down
