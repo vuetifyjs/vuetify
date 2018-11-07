@@ -16,14 +16,20 @@
       helpers-section-head(value="Framework.Internationalization.gettingStarted")
       helpers-section-text(value="Framework.Internationalization.gettingStartedText")
       helpers-section-text(value="Framework.Internationalization.availableLocalesText")
+      div.text-xs-justify.ml-3
+        p
+          span(v-for="({localeCode, localeName, localeNativeName}, index) in localeNames")
+            | {{ index ? ', ' : '' }}
+            strong {{ localeCode }}
+            |  - {{ localeName }} {{ localeNativeName ? ` (${localeNativeName})` : '' }}
       helpers-markup(lang="js")
         | import Vuetify from 'vuetify'
         |
         | // Translation provided by Vuetify (javascript)
-        | import zhHans from 'vuetify/es5/locale/zh-Hans'
+        | import { zhHans } from 'vuetify/lib/locale'
         |
         | // Translation provided by Vuetify (typescript)
-        | import pl from 'vuetify/src/locale/pl'
+        | import { pl } from 'vuetify/src/locale'
         |
         | // Your own translation file
         | import sv from './i18n/vuetify/sv'
@@ -50,7 +56,7 @@
       helpers-section-text(value="Framework.Internationalization.createTranslationText")
 
       helpers-markup(lang="js")
-        | export default {{ enLocale }}
+        | export default {{ locales.en }}
 
     section#custom-components
       helpers-section-head(value="Framework.Internationalization.customComponents")
@@ -120,11 +126,12 @@
 </template>
 
 <script>
-  import enLocale from 'vuetify/es5/locale/en'
+  import * as locales from 'vuetify/es5/locale'
+  import ISO6391 from 'iso-639-1'
 
   export default {
     data: vm => ({
-      enLocale,
+      locales,
       headers: [
         { value: 'name', size: 1 },
         { value: 'default', size: 7 },
@@ -147,6 +154,17 @@
           type: 'Function'
         }
       ]
-    })
+    }),
+    computed: {
+      localeNames () {
+        const array = Object.keys(locales).map(localeCode => ({
+          localeCode,
+          localeName: ISO6391.getName(localeCode.substr(0, 2)),
+          localeNativeName: localeCode === 'en' ? '' : ISO6391.getNativeName(localeCode.substr(0, 2))
+        }))
+        array.sort((a, b) => (a.localeCode < b.localeCode ? -1 : (a.localeCode > b.localeCode ? 1 : 0)))
+        return array
+      }
+    }
   }
 </script>
