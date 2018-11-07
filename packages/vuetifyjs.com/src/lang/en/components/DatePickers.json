@@ -42,6 +42,10 @@
       "header": "Date pickers - react to displayed month/year change",
       "desc": "You can watch the `pickerDate` which is the displayed month/year (depending on the picker type and active view) to perform some action when it changes."
     },
+    "datePickerDblclick": {
+      "header": "Date pickers - dblclick event",
+      "desc": "You can watch the `dblclick` event which is emitted when user double clicks on the date. Available also in month picker."
+    },
     "dateEvents": {
       "header": "Date pickers - Events",
       "desc": "You can specify events using arrays, objects, and functions. To change the default color of the event use **event-color** prop."

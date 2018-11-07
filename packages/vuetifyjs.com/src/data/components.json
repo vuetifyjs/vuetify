@@ -207,6 +207,7 @@
       "dateWidth",
       "dateBirthday",
       "datePickerDate",
+      { "file": "datePickerDblclick", "newIn": "1.4" },
       "dateEvents",
       "dateInternationalization",
       "dateIcons",
