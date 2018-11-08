@@ -15,6 +15,11 @@
         >Copied</span>
       </v-slide-x-transition>
     </div>
+
+    <div
+      class="v-markup__filename"
+      v-text="value"
+    />
   </div>
 </template>
 
@@ -128,6 +133,14 @@
       width: 25px
       height: 25px
       z-index: 1
+
+    &__filename
+      position: absolute
+      bottom: 0
+      right: 0
+      padding: 8px
+      font-size: 12px
+      color: rgba(#fff, .12)
 
     &:after
       position: absolute
