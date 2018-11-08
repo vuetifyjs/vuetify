@@ -55,6 +55,7 @@ export function getComponent (type) {
     case 'example': return 'doc-example'
     case 'examples': return 'doc-examples'
     case 'heading': return 'doc-heading'
+    case 'img': return 'doc-img'
     case 'text': return 'doc-text'
     case 'title': return 'doc-title'
     case 'markup': return 'doc-markup'
