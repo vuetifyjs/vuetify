@@ -59,8 +59,8 @@
       "desc": "If you're loading data from a backend and want to paginate and sort the results before displaying them, you can use the `total-items` prop. Defining this prop will disable the built-in sorting and pagination, and you will instead need to use the `pagination` prop to listen for changes. Use the `loading` prop to display a progress bar while fetching data."
     },
     "headerless": {
-      "header": "Headerless tables",
-      "desc": "Setting the `hide-headers` prop creates a headerless table."
+      "header": "Remove default header and footer",
+      "desc": "You can apply the `hide-headers` and `hide-actions` props to remove the default header and footer respectively."
     },
     "editdialog": {
       "header": "Inline Editing",
