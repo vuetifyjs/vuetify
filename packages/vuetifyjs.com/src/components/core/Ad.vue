@@ -14,15 +14,6 @@
           column
           fill-height
         >
-          <v-flex shrink mb-3>
-            <no-ssr>
-              <core-table-of-contents
-                :offset="85"
-                :threshold="50"
-              />
-            </no-ssr>
-          </v-flex>
-
           <v-flex
             xs12
             text-xs-center
@@ -49,7 +40,7 @@
                 </a>
               </div>
             </div>
-            <misc-sponsor-btn small />
+            <sponsor-btn small />
           </v-flex>
 
           <ad-shown
