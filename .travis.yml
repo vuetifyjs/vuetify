@@ -65,7 +65,6 @@ jobs:
       name: 'Publish docs - live'
       before_script: yarn global add now
       script:
-        - yarn run build
         - node scripts/set-now-alias.js vuetifyjs.com
         - now -e --team=vuetifyjs --token=$NOW_TOKEN --npm
         - now alias --team=vuetifyjs --token=$NOW_TOKEN
@@ -74,7 +73,6 @@ jobs:
       name: 'Publish docs - next'
       before_script: yarn global add now
       script:
-        - yarn run build
         - node scripts/set-now-alias.js next.vuetifyjs.com
         - now -e --team=vuetifyjs --token=$NOW_TOKEN --npm
         - now alias --team=vuetifyjs --token=$NOW_TOKEN
