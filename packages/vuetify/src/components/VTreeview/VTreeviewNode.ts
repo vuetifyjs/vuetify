@@ -135,7 +135,7 @@ export default mixins<options>(
 
   methods: {
     checkChildren (): Promise<void> {
-      return new Promise(resolve => {
+      return new Promise<void>(resolve => {
         // TODO: Potential issue with always trying
         // to load children if response is empty?
         if (!this.children || this.children.length || !this.loadChildren || this.hasLoaded) return resolve()

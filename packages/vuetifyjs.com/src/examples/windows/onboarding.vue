@@ -36,6 +36,7 @@
       <v-item-group
         v-model="onboarding"
         class="text-xs-center"
+        mandatory
       >
         <v-item
           v-for="n in length"

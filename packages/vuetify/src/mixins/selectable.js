@@ -92,10 +92,10 @@ export default {
           disabled: this.isDisabled,
           id: this.id,
           role: type,
-          type,
-          value: this.inputValue
+          type
         }, attrs),
         domProps: {
+          value: this.value,
           checked: this.isActive
         },
         on: {

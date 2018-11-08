@@ -94,7 +94,8 @@ export default {
         'v-text-field--box': this.box,
         'v-text-field--enclosed': this.isEnclosed,
         'v-text-field--reverse': this.reverse,
-        'v-text-field--outline': this.hasOutline
+        'v-text-field--outline': this.hasOutline,
+        'v-text-field--placeholder': this.placeholder
       }
     },
     counterValue () {
@@ -144,7 +145,7 @@ export default {
       return this.solo || this.soloInverted
     },
     labelPosition () {
-      const offset = (this.prefix && !this.labelValue) ? 16 : 0
+      const offset = (this.prefix && !this.labelValue) ? this.prefixWidth : 0
 
       return (!this.$vuetify.rtl !== !this.reverse) ? {
         left: 'auto',
@@ -155,11 +156,19 @@ export default {
       }
     },
     showLabel () {
-      return this.hasLabel && (!this.isSingle || (!this.isLabelActive && !this.placeholder))
+      return this.hasLabel && (!this.isSingle || (!this.isLabelActive && !this.placeholder && !this.prefixLabel))
     },
     labelValue () {
       return !this.isSingle &&
-        Boolean(this.isFocused || this.isLabelActive || this.placeholder)
+        Boolean(this.isFocused || this.isLabelActive || this.placeholder || this.prefixLabel)
+    },
+    prefixWidth () {
+      if (!this.prefix && !this.$refs.prefix) return
+
+      return this.$refs.prefix.offsetWidth
+    },
+    prefixLabel () {
+      return (this.prefix && !this.value)
     }
   },
 
