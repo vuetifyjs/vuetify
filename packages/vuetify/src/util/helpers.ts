@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import { VNode, VNodeDirective, FunctionalComponentOptions, VNodeChildrenArrayContents } from 'vue/types'
 import { VuetifyIcon } from 'vuetify'
-import { TableHeader } from '../components/VDataTable/VDataTableHeader'
 
 export function createSimpleFunctional (
   c: string,
@@ -364,7 +363,13 @@ export function computeSlots (cmp: Vue, name: string, props: object) {
   return slots
 }
 
-export function sortItems (items: any[], sortBy: string[], sortDesc: boolean[], locale: string, headers?: Record<string, TableHeader>) {
+export function sortItems (
+  items: any[],
+  sortBy: string[],
+  sortDesc: boolean[],
+  locale: string,
+  customSorters?: Record<string, (a: any, b: any) => number>
+) {
   if (sortBy === null || !sortBy.length) return items
 
   return items.sort((a: any, b: any): number => {
@@ -378,7 +383,7 @@ export function sortItems (items: any[], sortBy: string[], sortDesc: boolean[], 
         [sortA, sortB] = [sortB, sortA]
       }
 
-      if (headers && headers[sortKey]) return headers[sortKey].sort!(sortA, sortB)
+      if (customSorters && customSorters[sortKey]) return customSorters[sortKey](sortA, sortB)
 
       // Check if both cannot be evaluated
       if (sortA === null && sortB === null) {

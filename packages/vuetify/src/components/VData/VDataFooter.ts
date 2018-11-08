@@ -9,6 +9,8 @@ import VBtn from '../VBtn'
 // Styles
 
 export default Vue.extend({
+  name: 'v-data-footer',
+
   props: {
     options: {
       type: Object,
@@ -69,7 +71,7 @@ export default Vue.extend({
     },
     genItemsPerPageSelect () {
       return this.$createElement('div', {
-        staticClass: 'v-data-table__actions__select'
+        staticClass: 'v-data-footer__select'
       }, [
         this.$vuetify.t(this.itemsPerPageText),
         this.$createElement(VSelect, {
@@ -105,7 +107,7 @@ export default Vue.extend({
       }
 
       return this.$createElement('div', {
-        'class': 'v-data-table__actions__pagination'
+        'class': 'v-data-footer__pagination'
       }, children)
     },
     genIcon (click: Function, disabled: boolean, label: string, icon: string): VNode {
@@ -162,7 +164,9 @@ export default Vue.extend({
   },
 
   render (): VNode {
-    return this.$createElement('div', [
+    return this.$createElement('div', {
+      staticClass: 'v-data-footer'
+    }, [
       this.genItemsPerPageSelect(),
       this.genPaginationInfo(),
       this.genIcons()

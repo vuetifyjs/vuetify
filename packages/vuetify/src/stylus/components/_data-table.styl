@@ -112,13 +112,16 @@ theme(v-data-table, "v-data-table")
       height: 32px
 
   &--fixed
+    .v-data-table__wrapper
+      overflow-y: auto
+
     thead
       th
         position: sticky
         top: 0
         z-index: 10
 
-    .v-table__header, .v-table__actions
+    .v-table__header, .v-data-footer
       margin-right: 17px
 
   &--mobile
@@ -127,6 +130,17 @@ theme(v-data-table, "v-data-table")
 
     td, th
       padding: 14px
+
+  &__progress
+    height: auto !important
+
+    th
+      height: auto !important
+      border: none !important
+      padding: 0
+
+      .v-progress-linear
+        margin: 0
 
 td, th
   // &:not(:nth-child(1)), &:first-child
@@ -158,17 +172,6 @@ td, th
 
         .v-select
           margin-top: 0
-
-  &__progress
-    height: auto !important
-
-    th
-      height: auto !important
-      border: none !important
-      padding: 0
-
-      .v-progress-linear
-        margin: 0
 
   th
     font-weight: 500
@@ -269,7 +272,7 @@ tr > th
   text-overflow: ellipsis
 
 /** Actions */
-.v-data-table__actions
+.v-data-footer
   display: flex
   flex-wrap: wrap
   justify-content: flex-end

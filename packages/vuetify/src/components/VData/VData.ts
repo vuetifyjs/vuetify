@@ -10,6 +10,8 @@ export interface DataOptions {
   sortDesc: boolean[]
   groupBy: string[]
   groupDesc: boolean[]
+  multiSort: boolean
+  mustSort: boolean
 }
 
 export interface DataPaginaton {
@@ -50,14 +52,7 @@ export default Vue.extend({
     },
     options: {
       type: Object,
-      default: () => ({
-        page: 1,
-        itemsPerPage: 10,
-        sortBy: [],
-        sortDesc: [],
-        groupBy: [],
-        groupDesc: []
-      })
+      default: () => ({})
     },
     sortBy: {
       type: [String, Array],
@@ -72,6 +67,7 @@ export default Vue.extend({
       default: sortItems
     },
     mustSort: Boolean,
+    multiSort: Boolean,
     page: {
       type: Number,
       default: 1
@@ -104,8 +100,10 @@ export default Vue.extend({
         sortBy: wrapInArray(this.sortBy),
         sortDesc: wrapInArray(this.sortDesc),
         groupBy: wrapInArray(this.groupBy),
-        groupDesc: wrapInArray(this.groupDesc)
-      } as any
+        groupDesc: wrapInArray(this.groupDesc),
+        mustSort: this.mustSort,
+        multiSort: this.multiSort
+      } as DataOptions
     }
   },
 
@@ -147,11 +145,14 @@ export default Vue.extend({
         items = this.paginateItems(items)
       }
 
+      this.$emit('visible-items', items)
+
       return items
     },
     scopedProps (): object {
       const props = {
         sort: this.sort,
+        sortArray: this.sortArray,
         group: this.group
       }
 
@@ -185,7 +186,8 @@ export default Vue.extend({
         if (deepEqual(options, old)) return
         this.updateOptions(options)
       },
-      deep: true
+      deep: true,
+      immediate: true
     },
     internalOptions: {
       handler (options: DataOptions, old: DataOptions) {
@@ -193,8 +195,8 @@ export default Vue.extend({
         this.$emit('update:options', options)
         this.$emit('pagination', this.pagination)
       },
-      deep: true,
-      immediate: true
+      deep: true
+      // immediate: true
     },
     page (page: number) {
       this.updateOptions({ page })
@@ -234,15 +236,25 @@ export default Vue.extend({
     }
   },
 
+  created () {
+    // console.log(defaultOptions, this.options)
+    // this.$emit('update:options', {}, defaultOptions, this.options)
+  },
+
   methods: {
-    toggle (key: string, oldBy: string[], oldDesc: boolean[], page: number, mustSort: boolean) {
+    toggle (key: string, oldBy: string[], oldDesc: boolean[], page: number, mustSort: boolean, multiSort: boolean) {
       let by = oldBy.slice()
       let desc = oldDesc.slice()
       const byIndex = by.findIndex((k: string) => k === key)
 
       if (byIndex < 0) {
-        by = [key]
-        desc = [false]
+        if (!multiSort) {
+          by = []
+          desc = []
+        }
+
+        by.push(key)
+        desc.push(false)
       } else if (byIndex >= 0 && !desc[byIndex]) {
         desc[byIndex] = true
       } else if (!mustSort) {
@@ -265,19 +277,31 @@ export default Vue.extend({
         this.internalOptions.groupBy,
         this.internalOptions.groupDesc,
         this.internalOptions.page,
-        true
+        true,
+        false
       )
       this.updateOptions({ groupBy, groupDesc, page })
     },
-    sort (key: string): void {
+    sort (key: string | string[]): void {
+      if (Array.isArray(key)) return this.sortArray(key)
+
       const { by: sortBy, desc: sortDesc, page } = this.toggle(
         key,
         this.internalOptions.sortBy,
         this.internalOptions.sortDesc,
         this.internalOptions.page,
-        this.mustSort
+        this.mustSort,
+        this.multiSort
       )
       this.updateOptions({ sortBy, sortDesc, page })
+    },
+    sortArray (sortBy: string[]) {
+      const sortDesc = sortBy.map(s => {
+        const i = this.internalOptions.sortBy.findIndex((k: string) => k === s)
+        return i > -1 ? this.internalOptions.sortDesc[i] : false
+      })
+
+      this.updateOptions({ sortBy, sortDesc })
     },
     updateOptions (options: any) {
       this.internalOptions = Object.assign({}, this.internalOptions, {

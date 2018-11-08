@@ -1,15 +1,17 @@
-import Vue, { VNode } from 'vue'
+import { VNode, VNodeChildrenArrayContents } from 'vue'
 
 // Components
 import { VData } from '../VData'
 
 // Helpers
-import { sortItems, deepEqual, searchItems, getObjectValueByPath } from '../../util/helpers'
+import { deepEqual, getObjectValueByPath } from '../../util/helpers'
 import { DataProps } from '../VData/VData'
 import { PropValidator } from 'vue/types/options'
+import mixins from '../../util/mixins'
+import Themeable from '../../mixins/themeable'
 
 /* @vue/component */
-export default Vue.extend({
+export default mixins(Themeable).extend({
   props: {
     ...VData.options.props, // TODO: filter out props not used
     value: {
@@ -25,12 +27,26 @@ export default Vue.extend({
     itemsLength: {
       type: Number,
       default: -1
+    },
+    loading: Boolean,
+    noResultsText: {
+      type: String,
+      default: '$vuetify.dataIterator.noResultsText'
+    },
+    noDataText: {
+      type: String,
+      default: '$vuetify.noDataText'
+    },
+    loadingText: {
+      type: String,
+      default: '$vuetify.dataIterator.loadingText'
     }
   },
 
   data: () => ({
     selection: {} as Record<string, boolean>,
-    expansion: {} as Record<string, boolean>
+    expansion: {} as Record<string, boolean>,
+    visibleItems: [] as any[]
   }),
 
   computed: {
@@ -120,7 +136,27 @@ export default Vue.extend({
 
       return props
     },
+    genEmptyWrapper (content: VNodeChildrenArrayContents) {
+      return this.$createElement('div', content)
+    },
+    genEmpty () {
+      if (this.itemsLength < 0 && this.loading) {
+        const loading = this.$slots['loading'] || this.$vuetify.t(this.loadingText)
+        return this.genEmptyWrapper(loading)
+      } else if (this.itemsLength < 0 && !this.items.length) {
+        const noData = this.$slots['no-data'] || this.$vuetify.t(this.noDataText)
+        return this.genEmptyWrapper(noData)
+      } else if (!this.items.length) {
+        const noResults = this.$slots['no-results'] || this.$vuetify.t(this.noResultsText)
+        return this.genEmptyWrapper(noResults)
+      }
+
+      return null
+    },
     genItems (props: DataProps) {
+      const empty = this.genEmpty()
+      if (empty) return [empty]
+
       if (this.$scopedSlots.default) return this.$scopedSlots.default(props)
 
       if (this.$scopedSlots.item) {
@@ -168,7 +204,8 @@ export default Vue.extend({
         'update:sortDesc': (v: any) => this.$emit('update:sortDesc', v),
         'update:groupBy': (v: any) => this.$emit('update:groupBy', v),
         'update:groupDesc': (v: any) => this.$emit('update:groupDesc', v),
-        'pagination': (v: any, old: any) => !deepEqual(v, old) && this.$emit('pagination', v)
+        'pagination': (v: any, old: any) => !deepEqual(v, old) && this.$emit('pagination', v),
+        'visible-items': (v: any[]) => this.visibleItems = v
       },
       scopedSlots: {
         default: this.genDefaultScopedSLot

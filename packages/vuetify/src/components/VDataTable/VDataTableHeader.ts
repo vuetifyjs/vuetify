@@ -28,6 +28,8 @@ interface options extends Vue {
 }
 
 export default mixins<options>().extend({
+  name: 'v-data-table-header',
+
   inject: ['dataTable'],
 
   props: {
@@ -46,7 +48,6 @@ export default mixins<options>().extend({
         groupDesc: []
       })
     } as PropValidator<DataOptions>,
-    multiSort: Boolean,
     sortIcon: {
       type: String,
       default: '$vuetify.icons.sort'
@@ -105,6 +106,10 @@ export default mixins<options>().extend({
 
             if (header.align === 'end') children.unshift(this.genSortIcon())
             else children.push(this.genSortIcon())
+
+            if (this.options.multiSort && beingSorted) {
+              children.push(this.$createElement('span', { class: 'badge' }, [String(sortIndex + 1)]))
+            }
           }
         }
 
