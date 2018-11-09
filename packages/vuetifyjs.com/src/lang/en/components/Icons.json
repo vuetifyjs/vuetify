@@ -1,6 +1,6 @@
 {
   "header": "Icon",
-  "headerText": "The `v-icon` component provides a large set of glyphs to provide context to various aspects of your application. Vuetify icons utilize Google's Material Icons font library. For a list of all available icons, visit the official <a href=\"https://material.io/icons/\" target=\"_blank\" rel=\"noopener\">Material Icons</a> page.",
+  "headerText": "The `v-icon` component provides a large set of glyphs to provide context to various aspects of your application. Vuetify icons utilize Google's Material Icons font library. For a list of all available icons, visit the official [Material Icons](https://material.io/icons/) page.",
   "examples": {
     "standard": {
       "header": "Standard",

@@ -1,6 +1,6 @@
 {
   "header": "Frequently asked questions",
-  "headerText": "Stuck on a particular problem? Check some of these common gotchas before creating a ticket. If you still cannot find what you are looking for, submit an <a href=\"https://issues.vuetifyjs.com\" target=\"_blank\" rel=\"noopener\">issue</a> on github or ask the community in <a href=\"https://chat.vuetifyjs.com\" target=\"_blank\" rel=\"noopener\">discord</a>.",
+  "headerText": "Stuck on a particular problem? Check some of these common gotchas before creating a ticket. If you still cannot find what you are looking for, submit an [issue](https://issues.vuetifyjs.com) on github or ask the community in [discord](https://community.vuetifyjs.com).",
   "question": "Question:",
   "answer": "Answer",
   "noResultsFound": "No results found",
