@@ -4,18 +4,24 @@
     class="mr-2 d-inline-flex core-goto text--primary"
     @click.prevent="onClick"
   >
-    <v-layout align-center>
-      <v-hover>
-        <v-icon
-          slot-scope="{ hover }"
-          :color="hover ? 'primary' : ''"
-          class="mr-2"
-        >
-          mdi-pound
-        </v-icon>
-      </v-hover>
-      <slot />
-    </v-layout>
+    <v-hover>
+      <v-layout
+        slot-scope="{ hover }"
+        align-center
+      >
+        <slot />
+        <v-slide-x-reverse-transition mode="out-in">
+          <v-icon
+            v-if="hover"
+            color="primary"
+            class="ml-2"
+            size="16"
+          >
+            mdi-pound
+          </v-icon>
+        </v-slide-x-reverse-transition>
+      </v-layout>
+    </v-hover>
   </a>
 </template>
 
