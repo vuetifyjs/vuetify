@@ -1,6 +1,6 @@
 <template>
   <div>
-    <doc-subtitle>Generic.Pages.examples</doc-subtitle>
+    <doc-subheading>Generic.Pages.examples</doc-subheading>
     <template v-for="(example, i) in value">
       <doc-heading :key="`heading-${i}`">
         {{ `${namespace}.${page}.examples.${example}.header` }}
