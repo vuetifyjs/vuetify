@@ -76,6 +76,36 @@
       })
     },
 
-    methods: { getComponent }
+    mounted () {
+      // Wait for page animation
+      setTimeout(this.init, 300)
+    },
+
+    methods: {
+      getComponent,
+      init () {
+        const sameInternal = this.$el.querySelectorAll('a.markdown--same-internal')
+
+        Array.prototype.forEach.call(sameInternal, el => {
+          el.addEventListener('click', this.onSameInternalClick)
+        })
+
+        const internal = this.$el.querySelectorAll('a.markdown--internal')
+
+        Array.prototype.forEach.call(internal, el => {
+          el.addEventListener('click', this.onInternalClick)
+        })
+      },
+      onSameInternalClick (e) {
+        e.preventDefault()
+
+        this.$vuetify.goTo(e.target.href, { offset: -80 })
+      },
+      onInternalClick (e) {
+        e.preventDefault()
+
+        this.$router.push(e.target.getAttribute('href'))
+      }
+    }
   }
 </script>

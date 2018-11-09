@@ -68,3 +68,26 @@ export function getComponent (type) {
     default: return type
   }
 }
+
+export function parseLink (match, text, link) {
+  let attrs = ''
+  let linkClass = 'markdown--link'
+  let icon = ''
+
+  // External link
+  if (link.indexOf('http') > -1) {
+    attrs = `target="_blank" rel="noopener"`
+    icon = 'open-in-new'
+    linkClass += ' markdown--external'
+  // Same page internal link
+  } else if (link.charAt(0) === '#') {
+    linkClass += ' markdown--same-internal'
+    icon = 'pound'
+  // Different page internal link
+  } else {
+    linkClass += ' markdown--internal'
+    icon = 'page-next'
+  }
+
+  return `<a href="${link}" ${attrs} class="${linkClass}">${text}<i class="v-icon mdi mdi-${icon}"></i></a>`
+}
