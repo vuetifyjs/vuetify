@@ -26,7 +26,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subtitle",
+          "type": "subheading",
           "lang": "firstHeader"
         },
         {
@@ -47,7 +47,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subtitle",
+          "type": "subheading",
           "lang": "secondHeader"
         },
         {
@@ -68,7 +68,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subtitle",
+          "type": "subheading",
           "lang": "thirdHeader"
         },
         {

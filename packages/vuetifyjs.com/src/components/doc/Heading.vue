@@ -1,11 +1,34 @@
 <template>
-  <v-subtitle-2 class="doc-heading">
-    <doc-markdown><slot /></doc-markdown>
-  </v-subtitle-2>
+  <core-goto :id="id">
+    <doc-markdown
+      :id="id"
+      :tag="tag"
+    ><slot /></doc-markdown>
+  </core-goto>
 </template>
 
-<style>
-  .doc-heading p {
-    margin-bottom: 4px;
+<script>
+  // Utilities
+  import kebabCase from 'lodash/kebabCase'
+
+  export default {
+    name: 'Heading',
+
+    props: {
+      lang: {
+        type: String,
+        default: ''
+      },
+      tag: {
+        type: String,
+        default: 'v-display-1'
+      }
+    },
+
+    computed: {
+      id () {
+        return kebabCase(this.lang)
+      }
+    }
   }
-</style>
+</script>

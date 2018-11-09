@@ -1,9 +1,9 @@
 <template>
   <v-container fluid>
     <template v-if="structure">
-      <doc-title>
+      <doc-heading>
         {{ structure.title }}
-      </doc-title>
+      </doc-heading>
       <div class="mb-5">
         <doc-text
           v-if="structure.titleText"
