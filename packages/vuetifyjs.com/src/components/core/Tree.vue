@@ -19,7 +19,10 @@
         }
 
         return h(getComponent(child.type), {
-          props: { value: child.value }
+          props: {
+            lang: child.lang,
+            value: child.value
+          }
         }, child.lang)
       })
 

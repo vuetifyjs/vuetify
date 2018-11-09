@@ -9,7 +9,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subtitle",
+          "type": "subheading",
           "lang": "breakpointHeader"
         },
         {

@@ -22,7 +22,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subtitle",
+          "type": "subheading",
           "lang": "designHeader"
         },
         {
@@ -35,7 +35,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subtitle",
+          "type": "subheading",
           "lang": "communityHeader"
         },
         {
@@ -48,7 +48,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subtitle",
+          "type": "subheading",
           "lang": "comparisonHeader"
         },
         {

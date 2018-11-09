@@ -6,7 +6,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subtitle",
+          "type": "subheading",
           "lang": "Generic.Pages.usage"
         },
         {
@@ -27,7 +27,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subtitle",
+          "type": "subheading",
           "lang": "installHeader"
         },
         {
@@ -35,7 +35,7 @@
           "lang": "installText1"
         },
         {
-          "type": "heading",
+          "type": "sub-subheading",
           "lang": "installMD"
         },
         {
@@ -63,7 +63,7 @@
           "value": "js_import_material_icons"
         },
         {
-          "type": "heading",
+          "type": "sub-subheading",
           "lang": "installFA"
         },
         {
@@ -91,7 +91,7 @@
           "value": "js_import_fa4"
         },
         {
-          "type": "heading",
+          "type": "sub-subheading",
           "lang": "installFA4"
         },
         {
@@ -124,7 +124,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subtitle",
+          "type": "subheading",
           "lang": "customIconsHeader"
         },
         {
@@ -149,7 +149,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subtitle",
+          "type": "subheading",
           "lang": "reusableHeader"
         },
         {
@@ -174,7 +174,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subtitle",
+          "type": "subheading",
           "lang": "customComponentHeader"
         },
         {

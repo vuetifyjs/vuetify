@@ -6,7 +6,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subtitle",
+          "type": "subheading",
           "lang": "playgroundHeader"
         },
         {
@@ -23,7 +23,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subtitle",
+          "type": "subheading",
           "lang": "Generic.Pages.howItWorks"
         },
         {

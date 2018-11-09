@@ -9,7 +9,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subtitle",
+          "type": "subheading",
           "lang": "visibilityHeader"
         },
         {
@@ -38,7 +38,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subtitle",
+          "type": "subheading",
           "lang": "overflowHeader"
         },
         {
@@ -55,7 +55,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subtitle",
+          "type": "subheading",
           "lang": "displayHeader"
         },
         {
@@ -72,7 +72,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subtitle",
+          "type": "subheading",
           "lang": "Generic.Pages.examples"
         },
         {

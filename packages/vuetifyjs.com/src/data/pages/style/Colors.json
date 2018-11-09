@@ -6,7 +6,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subtitle",
+          "type": "subheading",
           "lang": "classesHeader"
         },
         {
@@ -31,7 +31,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subtitle",
+          "type": "subheading",
           "lang": "javascriptPackHeader"
         },
         {
@@ -48,7 +48,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subtitle",
+          "type": "subheading",
           "lang": "stylusPackHeader"
         },
         {

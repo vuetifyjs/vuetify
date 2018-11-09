@@ -6,7 +6,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subtitle",
+          "type": "subheading",
           "lang": "browserHeader"
         },
         {
@@ -22,7 +22,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subtitle",
+          "type": "subheading",
           "lang": "newHeader"
         },
         {
@@ -76,7 +76,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subtitle",
+          "type": "subheading",
           "lang": "existingHeader"
         },
         {
@@ -134,7 +134,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subtitle",
+          "type": "subheading",
           "lang": "uiHeader"
         },
         {
@@ -169,7 +169,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subtitle",
+          "type": "subheading",
           "lang": "cdnHeader"
         },
         {
@@ -186,7 +186,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subtitle",
+          "type": "subheading",
           "lang": "ie11Header"
         },
         {
