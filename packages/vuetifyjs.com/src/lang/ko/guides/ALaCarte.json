@@ -10,7 +10,7 @@
   "importText3": "아래와 같이 .vue 파일에서 컴포넌트를 임포트할 수도 있습니다. 이 경우 중요한 점은 이름을 가진 export들(named exports)을 모두 임포트하고 컴포넌트 내내에서 비구조화(destructure)해야 한다는 것입니다. 그렇지 않으면 `v-card-text` 나 `v-expansion-panel-content` 와 같은 자식 컴포넌트들을 사용할 수 없게 됩니다.",
   "styleHeader": "필요한 스타일 (Required styles)",
   "styleText1": "필요한 모든 스타일을 적용하려면 스타일들을 stylus 내에 임포트해야 합니다. 웹팩이 이 것을 다루기 때문에, `stylus` 와 `stylus-loader` 를 **npm** 으로 설치해야 합니다.",
-  "alert4": "stylus 설정에 대한 더 자세한 설명은 <a href=\"/ko/style/themes\">테마 페이지</a>를 참고하세요.",
+  "alert4": "stylus 설정에 대한 더 자세한 설명은 [테마 페이지](/style/themes) 를 참고하세요.",
   "styleText2": "이제 어플리케이션의 엔트리 포인트에서 stylus를 require 해야합니다. 이 엔트리 포인트는 Vue 와  Vuetify 를 임포팅한 것과 같은 파일입니다 (보통 `main.js`나 `app.js`). 메인 `App.vue`에서 stylus 를 require 하면 업데이트마다 다시 프로세싱되기 때문에 로딩 타임이 느려질 수 있습니다.",
   "applicationHeader": "어플리케이션 (Application)",
   "applicationText1": "**src** 폴더로 가서 `main.js` 를 여세요. a-la-carte 템플릿을 사용하고 계신다면 이미 일부 컴포넌트들이 로딩되도록 설정되어 있을 겁니다.",

@@ -10,7 +10,7 @@
     "importText3": "También puedes importar componentes en los archivos .vue, como se muestra más abajo. Cuando lo haces es importante que importes todos los named exports y después los destructures en componentes. De otra manera los componentes hijo como `v-card-text` o `v-expansion-panel-content` no estarán disponibles",
     "styleHeader": "Estilos requeridos",
     "styleText1": "Para lograr obtener todos los estilos requeridos, necesitamos importarlos en stylus. Y para que webpack pueda manejar esto, deberás instalar `stylus` y el `stylus-loader` desde **npm**",
-    "alert4": "Para una explicación más detallada acerca de cómo preparar tu aplicación para que use stylus, por favor ve a la <a href=\"/style/themes\">página de temas.</a>.",
+    "alert4": "Para una explicación más detallada acerca de cómo preparar tu aplicación para que use stylus, por favor ve a la [página de temas](/style/themes).",
     "styleText2": "Ahora necesitarás requerir stylus desde el entry point de tu aplicación. Este es el mismo lugar desde el que estás importando Vue y Vuetify (generalmente `main.js` o `app.js`). Toma en cuenta que requerirlos en tu `App.vue` puede causar tiempos lentos de carga porque estará siendo re-procesado cuando hagas cambios al archivo.",
     "applicationHeader": "Aplicación",
     "applicationText1": "Navega al folder **src** y abre `main.js`. Veremos que en la plantilla vienen algunos componentes ya configurados para ser cargados.",

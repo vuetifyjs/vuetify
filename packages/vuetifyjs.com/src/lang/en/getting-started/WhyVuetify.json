@@ -24,7 +24,7 @@
   "designHeader": "Design principles",
   "designText": "Vuetify is developed exactly according to Material Design spec. Every component is hand crafted to bring you the best possible UI tools to your next great app. The development doesn't stop at the core components outlined in Google's spec. Through the support of community members and sponsors, additional components will be designed and made available for everyone to enjoy.",
   "communityHeader": "Active help",
-  "communityText": "Developing with Vuetify means you will never be alone. Get help immediately from the dev team and other community members in the official Discord server. Get the opportunity to speak with talented individuals that want you to succeed in your efforts. Need premium support? Become a <a href=\"https://www.patreon.com/vuetify\" target=\"_blank\" rel=\"noopener\">Patreon backer</a> and get access to the #patron or #elite-patron support channels.",
+  "communityText": "Developing with Vuetify means you will never be alone. Get help immediately from the dev team and other community members in the official Discord server. Get the opportunity to speak with talented individuals that want you to succeed in your efforts. Need premium support? Become a [Patreon backer](https://www.patreon.com/vuetify) and get access to the #patron or #elite-patron support channels.",
   "comparisonHeader": "Comparison to other Frameworks",
   "comparisonText": "Vuetify is not the only Vue material framework out there. Plenty of other talented developers have created some amazing applications under the guise of Google's Material Design spec. Each offer their own unique take on development and process, however, here are a few things that set Vuetify apart:",
   "featuresHeader": "What you get:",
