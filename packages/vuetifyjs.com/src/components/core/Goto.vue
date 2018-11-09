@@ -4,11 +4,8 @@
     class="mr-2 d-inline-flex core-goto text--primary"
     @click.prevent="onClick"
   >
-    <v-hover>
-      <v-layout
-        slot-scope="{ hover }"
-        align-center
-      >
+    <v-hover v-model="hover">
+      <v-layout align-center>
         <slot />
         <v-slide-x-reverse-transition mode="out-in">
           <v-icon
@@ -33,6 +30,10 @@
         required: true
       }
     },
+
+    data: () => ({
+      hover: false
+    }),
 
     methods: {
       onClick (e) {
