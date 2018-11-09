@@ -1,4 +1,4 @@
-<template functional>
+<template>
   <v-subtitle-2 class="doc-heading">
     <doc-markdown><slot /></doc-markdown>
   </v-subtitle-2>
