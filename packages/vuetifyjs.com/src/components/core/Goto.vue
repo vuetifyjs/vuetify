@@ -28,6 +28,10 @@
       }
     },
 
+    data: () => ({
+      hover: false
+    }),
+
     methods: {
       onClick (e) {
         e.stopPropagation()
