@@ -257,6 +257,15 @@ const VSelect = {
   ].concat(validatableEvents)
 }
 
+const VTreeviewScopedProps = {
+  item: 'any',
+  leaf: 'boolean',
+  selected: 'boolean',
+  indeterminate: 'boolean',
+  active: 'boolean',
+  open: 'boolean'
+}
+
 module.exports = {
   '$vuetify': {
     functions: [
@@ -824,5 +833,21 @@ module.exports = {
   },
   'v-tooltip': {
     slots: ['activator', 'default']
+  },
+  'v-treeview': {
+    scopedSlots: [
+      {
+        name: 'prepend',
+        props: VTreeviewScopedProps
+      },
+      {
+        name: 'label',
+        props: VTreeviewScopedProps
+      },
+      {
+        name: 'append',
+        props: VTreeviewScopedProps
+      }
+    ]
   }
 }
