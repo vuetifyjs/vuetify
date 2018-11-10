@@ -1,6 +1,6 @@
 <template>
   <div>
-    <doc-subtitle>colorHeader</doc-subtitle>
+    <doc-heading>colorHeader</doc-heading>
     <doc-text>colorText</doc-text>
 
     <v-text-field
