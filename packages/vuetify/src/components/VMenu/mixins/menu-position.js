@@ -37,7 +37,7 @@ export default {
 
       this.selectedIndex = Array.from(this.tiles).indexOf(activeTile)
 
-      const tileDistanceFromMenuTop = activeTile.offsetTop - this.getScrollPosition()
+      const tileDistanceFromMenuTop = activeTile.offsetTop - this.calcScrollPosition()
       const firstTileOffsetTop = $el.querySelector('.v-list__tile').offsetTop
 
       return this.computedTop - tileDistanceFromMenuTop - firstTileOffsetTop
