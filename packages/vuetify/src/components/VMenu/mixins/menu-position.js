@@ -32,6 +32,9 @@ export default {
 
       if (!activeTile) {
         this.selectedIndex = null
+      }
+
+      if (this.offsetY || !activeTile) {
         return this.computedTop
       }
 
