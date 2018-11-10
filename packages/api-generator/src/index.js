@@ -157,6 +157,7 @@ for (const name in installedComponents) {
 
   components[kebabName] = options
 }
+
 for (const key of ['Ripple', 'Resize', 'Scroll', 'Touch']) {
   if (!installedDirectives[key]) continue
 
@@ -166,8 +167,6 @@ for (const key of ['Ripple', 'Resize', 'Scroll', 'Touch']) {
   directive.type = getPropDefault(directive.default, directive.type)
   directives[vKey] = directive
 }
-
-console.log(directives)
 
 function writeApiFile (obj, file) {
   const stream = fs.createWriteStream(file)
