@@ -5,51 +5,46 @@
     tag="section"
     wrap
   >
-    <v-flex xs12>
-      <doc-subtitle goto="patrons">patrons</doc-subtitle>
-    </v-flex>
-
-    <v-flex
-      xs12
-      my-3
-      tag="v-divider"
-    />
-
     <v-flex>
       <v-container
         fluid
         grid-list-md
       >
         <supporter-group
+          v-if="tier >= 1"
           :group="supporters.diamond"
-          class="mb-5"
-          title="Diamond"
+          :title="!hideTitles ? 'Diamond' : undefined"
+          :class="classes"
         />
 
         <supporter-group
+          v-if="tier >= 2"
           :group="supporters.palladium"
-          class="mb-5"
-          title="Palladium"
+          :title="!hideTitles ? 'Palladium' : undefined"
+          :class="classes"
           small
         />
 
         <supporter-group
+          v-if="tier >= 3"
           :group="supporters.gold"
-          class="mb-5"
-          title="Gold"
+          :title="!hideTitles ? 'Gold' : undefined"
+          :class="classes"
           small
         />
 
         <supporter-group
+          v-if="tier >= 4"
           :group="supporters.affiliates"
-          class="mb-5"
-          title="Affiliate"
+          :title="!hideTitles ? 'Affiliate' : undefined"
+          :class="classes"
           small
         />
 
         <supporter-group
+          v-if="tier >= 5"
           :group="supporters.service"
-          title="Service"
+          :title="!hideTitles ? 'Service' : undefined"
           small
         />
       </v-container>
@@ -65,8 +60,32 @@
       SupporterGroup: () => import('@/components/supporters/SupporterGroup')
     },
 
+    props: {
+      dense: {
+        type: Boolean,
+        default: false
+      },
+      hideTitles: {
+        type: Boolean,
+        default: false
+      },
+      tier: {
+        type: Number,
+        default: 10
+      }
+    },
+
     data: () => ({
       supporters
-    })
+    }),
+
+    computed: {
+      classes () {
+        return {
+          'mb-2': this.dense,
+          'mb-5': !this.dense
+        }
+      }
+    }
   }
 </script>
