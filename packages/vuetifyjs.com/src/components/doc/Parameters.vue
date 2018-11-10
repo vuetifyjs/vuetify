@@ -106,7 +106,7 @@
     }),
 
     computed: {
-      ...mapState('app', ['deprecatedIn', 'newIn', 'removed']),
+      ...mapState('documentation', ['deprecatedIn', 'newIn', 'removed']),
       computedItems () {
         const items = []
 

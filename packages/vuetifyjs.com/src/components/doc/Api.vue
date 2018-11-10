@@ -61,7 +61,7 @@
     }),
 
     computed: {
-      ...mapState('app', ['api']),
+      ...mapState('documentation', ['api']),
       component () {
         return this.api[this.selected] || {
           props: [],

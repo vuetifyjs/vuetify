@@ -19,7 +19,7 @@
     mounted () {
       // this.getReleases()
 
-      this.snackbar({
+      this.setSnackbar({
         color: 'default',
         close: true,
         id: 'october-2018-22572142',
@@ -31,12 +31,11 @@
     },
 
     methods: {
-      ...mapMutations('app', {
-        snackbar: 'SNACKBAR'
-      }),
+      ...mapMutations('app', ['setReleases']),
+      ...mapMutations('snackbar', ['setSnackbar']),
       getReleases () {
         this.$http.get('/releases/releases.json').then(({ data }) => {
-          this.$store.commit('app/RELEASES', data)
+          this.setReleases(data)
         }).catch(err => {
           console.log(err)
         })

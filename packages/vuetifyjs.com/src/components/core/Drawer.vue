@@ -1,7 +1,6 @@
 <template>
   <v-navigation-drawer
     v-model="inputValue"
-    :stateless="isFullscreen"
     app
   >
     <v-container
@@ -267,7 +266,7 @@
 
     computed: {
       ...mapGetters('app', ['supporters']),
-      ...mapState('app', ['isFullscreen', 'stateless', 'appDrawer']),
+      ...mapState('app', ['drawer']),
       children () {
         return this.item.children.map(item => ({
           ...item,
@@ -283,12 +282,11 @@
         }).join('|')
       },
       inputValue: {
-        get (state) {
-          return this.appDrawer &&
-            !this.isFullscreen
+        get () {
+          return this.drawer
         },
         set (val) {
-          this.drawer(val)
+          this.setDrawer(val)
         }
       }
     },
@@ -323,9 +321,7 @@
     },
 
     methods: {
-      ...mapMutations('app', {
-        drawer: 'DRAWER'
-      }),
+      ...mapMutations('app', ['setDrawer']),
       init ({ default: docsearch }) {
         const vm = this
         this.docSearch = docsearch({
