@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import VueAnalytics from 'vue-analytics'
 import scrollBehavior from './scroll-behavior'
-import Root from '@/views/Root'
 
 Vue.use(Router)
 
@@ -24,13 +23,15 @@ export function createRouter () {
     routes: [
       {
         path: '/:lang([a-z]{2,3}|[a-z]{2,3}-[a-zA-Z]{4}|[a-z]{2,3}-[A-Z]{2,3})',
-        component: Root,
+        component: () => import(
+          /* webpackChunkName: "root" */
+          '@/views/Root.vue'
+        ),
         props: route => ({ lang: route.params.lang }),
         children: [
           {
             path: '/',
             name: 'home/Home',
-            meta: { fullscreen: true },
             component: () => import(
               /* webpackChunkName: "home" */
               '@/pages/home/HomePage.vue'
@@ -44,7 +45,7 @@ export function createRouter () {
               page: route.params.page
             }),
             component: () => import(
-              /* webpackChunkName: "guide" */
+              /* webpackChunkName: "documentation" */
               '@/pages/Documentation.vue'
             )
           }
