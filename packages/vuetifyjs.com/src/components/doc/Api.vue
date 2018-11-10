@@ -81,9 +81,9 @@
       },
       tab () {
         const directives = ['v-resize', 'v-ripple', 'v-scroll', 'v-touch']
-        if (directives.indexOf(this.selected) !== -1 ) {
+        if (directives.indexOf(this.selected) !== -1) {
           return 'options'
-        } else if (this.selected == '$vuetify') {
+        } else if (this.selected === '$vuetify') {
           return 'functions'
         } else {
           return 'props'
