@@ -19,8 +19,8 @@
     mounted () {
       // this.getReleases()
 
-      this.snackbar({
-        color: 'store',
+      this.setSnackbar({
+        color: 'default',
         close: true,
         id: 'cyber-monday-sale',
         text: 'Shop now',
@@ -31,12 +31,11 @@
     },
 
     methods: {
-      ...mapMutations('app', {
-        snackbar: 'SNACKBAR'
-      }),
+      ...mapMutations('app', ['setReleases']),
+      ...mapMutations('snackbar', ['setSnackbar']),
       getReleases () {
         this.$http.get('/releases/releases.json').then(({ data }) => {
-          this.$store.commit('app/RELEASES', data)
+          this.setReleases(data)
         }).catch(err => {
           console.log(err)
         })

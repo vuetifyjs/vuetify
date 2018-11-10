@@ -7,15 +7,12 @@
     fixed
     height="58"
     extension-height="48"
-    :flat="isHome"
-    :manual-scroll="isManualScrolled"
     ref="toolbar"
   )#app-toolbar
     v-toolbar-side-icon(
-      @click="$store.commit('app/DRAWER_TOGGLE')"
-      v-show="!stateless"
+      @click="toggleDrawer"
     )
-    router-link(:to="logoLink").d-flex
+    router-link(:to="{ name: 'home/Home' }").d-flex
       img(
         src="https://cdn.vuetifyjs.com/images/logos/v-alt.svg"
         height="38px"
@@ -26,15 +23,6 @@
 
     v-spacer
     v-toolbar-items
-      v-btn(
-        v-show="isHome"
-        :to="logoLink"
-        class="hidden-xs-only"
-        flat
-        style="min-width: 48px"
-      )
-        span.hidden-sm-and-down {{ $t('Vuetify.AppToolbar.documentation' )}}
-        v-icon.hidden-md-and-up mdi-file-document-box
       v-menu(
         bottom
         offset-y
@@ -155,6 +143,7 @@
 <script>
   // Utilities
   import {
+    mapMutations,
     mapState
   } from 'vuex'
   import languages from '@/data/i18n/languages.json'
@@ -163,17 +152,12 @@
     data: vm => ({
       ecosystems: vm.$t('Vuetify.AppToolbar.ecosystems'),
       supports: vm.$t('Vuetify.AppToolbar.supports'),
-      fixed: false,
       languages,
       socials: vm.$t('Vuetify.AppToolbar.socials')
     }),
 
     computed: {
       ...mapState('app', [
-        'appToolbar',
-        'isFullscreen',
-        'releases',
-        'stateless',
         'currentVersion'
       ]),
       ...mapState(['route']),
@@ -184,22 +168,11 @@
       },
       currentLanguage () {
         return this.languages.find(l => l.locale === this.$i18n.locale)
-      },
-      isHome () {
-        return this.route.name === 'home/Home'
-      },
-      isManualScrolled () {
-        return !this.isHome &&
-          this.isFullscreen
-      },
-      logoLink () {
-        return this.isHome
-          ? { name: 'getting-started/QuickStart' }
-          : { name: 'home/Home' }
       }
     },
 
     methods: {
+      ...mapMutations('app', ['toggleDrawer']),
       changeToRelease (release) {
         // Remove language setting
         const path = this.$route.fullPath.split('/')
