@@ -169,12 +169,15 @@ export default Vue.extend({
       // and its activator
       this.updateDimensions()
       // Start the transition
-      requestAnimationFrame(this.startTransition)
-      // Once transitioning, calculate scroll and top position
-      setTimeout(() => {
-        this.calculatedTopAuto = this.calcTopAuto()
-        this.auto && this.setScrollPosition()
-      }, 50)
+      requestAnimationFrame(() => {
+        // Once transitioning, calculate scroll and top position
+        this.startTransition().then(() => {
+          if (this.$refs.content) {
+            this.calculatedTopAuto = this.calcTopAuto()
+            this.auto && (this.$refs.content.scrollTop = this.calcScrollPosition())
+          }
+        })
+      })
     },
     closeConditional () {
       return this.isActive && this.closeOnClick
