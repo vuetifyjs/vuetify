@@ -16,7 +16,7 @@ function getLanguageCookie () {
   return new Map(document.cookie.split('; ').map(c => c.split('='))).get('currentLanguage')
 }
 
-export function createRouter (store) {
+export function createRouter () {
   const router = new Router({
     base: __dirname,
     mode: 'history',
@@ -59,13 +59,6 @@ export function createRouter (store) {
         }
       }
     ]
-  })
-
-  router.beforeEach((to, from, next) => {
-    if (to.meta.fullscreen || from.meta.fullscreen) {
-      store.commit('app/FULLSCREEN', !!to.meta.fullscreen)
-    }
-    next()
   })
 
   Vue.use(VueAnalytics, {
