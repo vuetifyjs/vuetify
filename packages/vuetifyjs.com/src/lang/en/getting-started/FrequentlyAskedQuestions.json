@@ -48,19 +48,22 @@
     },
     {
       "q": "My page on mobile is not responsive",
-      "a": "Add the `<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui\">` to the `<head>` section in your index.html."
+      "a": "Ensure that you have the proper meta tags inside of the `<head>` section of your index.html.",
+      "s": "html_mobile_viewport"
     },
     {
       "q": "How do I use Font Awesome Icons or Material Design Icons (mdi)?",
-      "a": "You must add the fonts to your index.html or otherwise import them into your project<br>**MDI**: [Material Design Icons](https://materialdesignicons.com/getting-started)<br>**FA**: [Font Awesome](http://fontawesome.io/get-started/)"
+      "a": "You must add the fonts to your index.html or otherwise import them into your project. <br><br>**MDI**: [Material Design Icons](/framework/icons#install-mdi)<br>**FA**: [Font Awesome](/framework/icons#install-fa)"
     },
     {
       "q": "My dialog closes immediately after clicking the button",
-      "a": "When not using the **activator** slot for `v-menu` and `v-dialog` for example, you must manually stop the _propagation_ of the click event. To do this, simply add the _.stop_ modifier to the click event, `@click.stop=\"myMethod\"`."
+      "a": "When not using the **activator** slot for `v-menu` and `v-dialog` for example, you must manually stop the _propagation_ of the click event. To do this, simply add the _.stop_ modifier to the click event.",
+      "s": "html_stop_click_propagation"
     },
     {
       "q": "Relative images are not working in `v-card` , `v-img` and other custom vuetify components",
-      "a": "Vue loader converts relative paths into require functions automatically for you. Unfortunately, this is not the case when it comes to custom components. You can circumvent this issue by using `require`.<br><br>`<v-card :src=\"require('path/to/img/img.jpg')\">`<br/><br/>If you're using Vuetify as a Vue-CLI 3 plugin, you can edit your project's [vue.config.js](https://cli.vuejs.org/config/#vue-config-js) file by modifying the options for [vue-loader](https://cli.vuejs.org/guide/webpack.html#modifying-options-of-a-loader)."
+      "a": "Vue loader converts relative paths into require functions automatically for you. Unfortunately, this is not the case when it comes to custom components. You can circumvent this issue by using `require`. If you're using Vuetify as a Vue-CLI 3 plugin, you can edit your project's [vue.config.js](https://cli.vuejs.org/config/#vue-config-js) file by modifying the options for [vue-loader](https://cli.vuejs.org/guide/webpack.html#modifying-options-of-a-loader).",
+      "s": "html_img_require"
     }
   ],
   "questionHeader": "Have something that you think belongs here?",
