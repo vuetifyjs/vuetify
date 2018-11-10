@@ -30,6 +30,28 @@ test('VSelect2', ({ mount, compileToFunctions }) => {
     }
   })
 
+  it('should not open the select when readonly and focused and enter, space, up or down are pressed', async () => {
+    const wrapper = mount(VSelect, {
+      attachToDocument: true,
+      propsData: {
+        items: ['foo', 'bar'],
+        readonly: true
+      }
+    })
+
+    const input = wrapper.first('input')
+
+    for (const key of ['up', 'down', 'space', 'enter']) {
+      input.trigger('focus')
+      await wrapper.vm.$nextTick()
+      expect(wrapper.vm.isMenuActive).toBe(false)
+      input.trigger(`keydown.${key}`)
+      await wrapper.vm.$nextTick()
+      expect(wrapper.vm.isMenuActive).toBe(false)
+      await wrapper.vm.$nextTick()
+    }
+  })
+
   it('should clear input value', async () => {
     const wrapper = mount(VSelect, {
       attachToDocument: true,

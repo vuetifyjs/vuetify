@@ -47,10 +47,10 @@
       this.snackbar({
         color: 'default',
         close: true,
-        id: 'september-2018-21931872',
-        text: 'Go to Video',
-        msg: 'September Framework Update',
-        href: 'https://www.patreon.com/posts/september-2018-21931872',
+        id: 'october-2018-22572142',
+        text: 'Go to video',
+        msg: 'October framework update',
+        href: 'https://www.patreon.com/posts/october-2018-22572142',
         timeout: 0
       })
     },

@@ -558,3 +558,245 @@ exports[`VDataIterator.js should match a snapshot - with data 2`] = `
 </div>
 
 `;
+
+exports[`VDataIterator.js should reset to page 1 when data is smaller than current page 1`] = `
+
+<div class="v-data-iterator theme--light">
+  <div>
+  </div>
+  <div>
+    <div class="v-data-iterator__actions">
+      <div class="v-data-iterator__actions__select">
+        Items per page:
+        <div role="combobox"
+             class="v-input v-text-field v-select v-input--hide-details theme--light"
+        >
+          <div class="v-input__control">
+            <div class="v-input__slot">
+              <div class="v-select__slot">
+                <div class="v-select__selections">
+                  <input aria-label="Items per page:"
+                         readonly="readonly"
+                         type="text"
+                         autocomplete="on"
+                         aria-readonly="false"
+                  >
+                </div>
+                <div class="v-input__append-inner">
+                  <div class="v-input__icon v-input__icon--append">
+                    <i aria-hidden="true"
+                       class="v-icon material-icons theme--light"
+                    >
+                      arrow_drop_down
+                    </i>
+                  </div>
+                </div>
+              </div>
+              <div class="v-menu">
+                <div class="v-menu__content theme--light v-menu__content--auto "
+                     style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
+                >
+                  <div class="v-select-list v-card theme--light">
+                    <div class="v-list theme--light">
+                      <div>
+                        <a class="v-list__tile v-list__tile--link theme--light">
+                          <div class="v-list__tile__content">
+                            <div class="v-list__tile__title">
+                              5
+                            </div>
+                          </div>
+                        </a>
+                      </div>
+                      <div>
+                        <a class="v-list__tile v-list__tile--link theme--light">
+                          <div class="v-list__tile__content">
+                            <div class="v-list__tile__title">
+                              10
+                            </div>
+                          </div>
+                        </a>
+                      </div>
+                      <div>
+                        <a class="v-list__tile v-list__tile--link theme--light">
+                          <div class="v-list__tile__content">
+                            <div class="v-list__tile__title">
+                              25
+                            </div>
+                          </div>
+                        </a>
+                      </div>
+                      <div>
+                        <a class="v-list__tile v-list__tile--link theme--light">
+                          <div class="v-list__tile__content">
+                            <div class="v-list__tile__title">
+                              All
+                            </div>
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="v-data-iterator__actions__range-controls">
+        <div class="v-data-iterator__actions__pagination">
+          2-2 of 3
+        </div>
+        <button type="button"
+                class="v-btn v-btn--flat v-btn--icon theme--light"
+                aria-label="Previous page"
+        >
+          <div class="v-btn__content">
+            <i aria-hidden="true"
+               class="v-icon material-icons theme--light"
+            >
+              chevron_left
+            </i>
+          </div>
+        </button>
+        <button type="button"
+                class="v-btn v-btn--flat v-btn--icon theme--light"
+                aria-label="Next page"
+        >
+          <div class="v-btn__content">
+            <i aria-hidden="true"
+               class="v-icon material-icons theme--light"
+            >
+              chevron_right
+            </i>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VDataIterator.js should reset to page 1 when data is smaller than current page 2`] = `
+
+<div class="v-data-iterator theme--light">
+  <div>
+    <div class="text-xs-center"
+         style="width: 100%;"
+    >
+      No data available
+    </div>
+  </div>
+  <div>
+    <div class="v-data-iterator__actions">
+      <div class="v-data-iterator__actions__select">
+        Items per page:
+        <div role="combobox"
+             class="v-input v-text-field v-select v-input--hide-details theme--light"
+        >
+          <div class="v-input__control">
+            <div class="v-input__slot">
+              <div class="v-select__slot">
+                <div class="v-select__selections">
+                  <input aria-label="Items per page:"
+                         readonly="readonly"
+                         type="text"
+                         autocomplete="on"
+                         aria-readonly="false"
+                  >
+                </div>
+                <div class="v-input__append-inner">
+                  <div class="v-input__icon v-input__icon--append">
+                    <i aria-hidden="true"
+                       class="v-icon material-icons theme--light"
+                    >
+                      arrow_drop_down
+                    </i>
+                  </div>
+                </div>
+              </div>
+              <div class="v-menu">
+                <div class="v-menu__content theme--light v-menu__content--auto "
+                     style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
+                >
+                  <div class="v-select-list v-card theme--light">
+                    <div class="v-list theme--light">
+                      <div>
+                        <a class="v-list__tile v-list__tile--link theme--light">
+                          <div class="v-list__tile__content">
+                            <div class="v-list__tile__title">
+                              5
+                            </div>
+                          </div>
+                        </a>
+                      </div>
+                      <div>
+                        <a class="v-list__tile v-list__tile--link theme--light">
+                          <div class="v-list__tile__content">
+                            <div class="v-list__tile__title">
+                              10
+                            </div>
+                          </div>
+                        </a>
+                      </div>
+                      <div>
+                        <a class="v-list__tile v-list__tile--link theme--light">
+                          <div class="v-list__tile__content">
+                            <div class="v-list__tile__title">
+                              25
+                            </div>
+                          </div>
+                        </a>
+                      </div>
+                      <div>
+                        <a class="v-list__tile v-list__tile--link theme--light">
+                          <div class="v-list__tile__content">
+                            <div class="v-list__tile__title">
+                              All
+                            </div>
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="v-data-iterator__actions__range-controls">
+        <div class="v-data-iterator__actions__pagination">
+          –
+        </div>
+        <button type="button"
+                class="v-btn v-btn--flat v-btn--icon theme--light"
+                aria-label="Previous page"
+        >
+          <div class="v-btn__content">
+            <i aria-hidden="true"
+               class="v-icon material-icons theme--light"
+            >
+              chevron_left
+            </i>
+          </div>
+        </button>
+        <button type="button"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--icon theme--light"
+                aria-label="Next page"
+                disabled="disabled"
+        >
+          <div class="v-btn__content">
+            <i aria-hidden="true"
+               class="v-icon material-icons theme--light"
+            >
+              chevron_right
+            </i>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;

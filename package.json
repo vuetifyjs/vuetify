@@ -17,8 +17,7 @@
     "lint": "lerna run lint --parallel",
     "dev": "lerna run dev --scope vuetify --stream",
     "version": "node scripts/confirm-npm-tag.js",
-    "postversion": "node scripts/post-release-merge.js",
-    "now-build": "echo 'Built on Travis CI'"
+    "postversion": "node scripts/post-release-merge.js"
   },
   "devDependencies": {
     "eslint": "^5.8.0",

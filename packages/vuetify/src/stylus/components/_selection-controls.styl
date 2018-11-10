@@ -29,8 +29,9 @@ rtl(v-selection-control-rtl, "v-input--selection-controls")
     flex-grow: 0
     width: auto
 
-  .v-input__slot
-    margin-bottom: 12px
+  &:not(.v-input--hide-details)
+    .v-input__slot
+      margin-bottom: 12px
 
   &__input
     color: inherit
