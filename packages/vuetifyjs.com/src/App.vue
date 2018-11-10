@@ -10,21 +10,11 @@
   import Meta from '@/mixins/meta'
 
   import {
-    mapMutations,
-    mapState
+    mapMutations
   } from 'vuex'
 
   export default {
     mixins: [Meta],
-
-    computed: {
-      ...mapState({
-        isFullscreen: state => state.isFullscreen
-      }),
-      examples () {
-        return !!this.$route.params.example
-      }
-    },
 
     mounted () {
       // this.getReleases()

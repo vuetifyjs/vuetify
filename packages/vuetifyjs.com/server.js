@@ -19,8 +19,6 @@ const serverInfo =
 
 const availableLanguages = require('./src/data/i18n/languages').map(lang => lang.locale)
 
-const startTime = new Date()
-
 const app = express()
 
 function createRenderer (bundle, options) {
@@ -31,8 +29,6 @@ function createRenderer (bundle, options) {
       max: 1000,
       maxAge: 1000 * 60 * 15
     }),
-    // this is only needed when vue-server-renderer is npm-linked
-    basedir: resolve('./public'),
     // recommended for performance
     runInNewContext: false
   }))
