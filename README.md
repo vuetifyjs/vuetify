@@ -6,13 +6,16 @@
 
 <p align="center">
   <a href="https://travis-ci.org/vuetifyjs/vuetify">
-    <img src="https://img.shields.io/travis/vuetifyjs/vuetify.svg" alt="travis ci badge">
+    <img src="https://img.shields.io/travis/vuetifyjs/vuetify/dev.svg" alt="travis ci badge">
   </a>
   <a href="https://codecov.io/gh/vuetifyjs/vuetify">
     <img src="https://img.shields.io/codecov/c/github/vuetifyjs/vuetify.svg" alt="Coverage">
   </a>
   <a href="https://codebeat.co/projects/github-com-vuetifyjs-vuetify-dev">
     <img src="https://codebeat.co/badges/b2d1ce87-848b-440e-9d7e-df9883c0cd93" alt="codebeat badge">
+  </a>
+  <a href="https://www.npmjs.com/package/vuetify">
+    <img src="https://img.shields.io/npm/dt/vuetify.svg" alt="Downloads">
   </a>
   <a href="https://www.npmjs.com/package/vuetify">
     <img src="https://img.shields.io/npm/dm/vuetify.svg" alt="Downloads">
@@ -211,7 +214,7 @@ It is important to note that for each release, the detailed changes are document
 
 ### Contributing Guide
 
-You can request features using the [Feature Request Template](https://github.com/vuetifyjs/vuetify/issues/new?template=feature_request.md) or report bugs using the [Bug Report Template](https://github.com/vuetifyjs/vuetify/issues/new?template=bug_report.md) and create a minimal reproduction with a [CodePen template](https://template.vuetifyjs.com/) or a full project at [CodeSandbox](https://codesandbox.io/s/vue).
+You can report issues by following the [Issue Template](https://issues.vuetifyjs.com/) and you can create a minimal reproduction with a [CodePen template](https://template.vuetifyjs.com/) or a full project at [CodeSandbox](https://codesandbox.io/s/vue).
 
 ### Good First Issue
 

@@ -1,0 +1,14 @@
+{
+  "props": {
+    "v-text-field": {
+      "textarea": "1.1"
+    },
+    "v-select": {
+      "multi-line": "1.1"
+    },
+    "v-breadcrumbs": {
+      "justify-center": "1.2",
+      "justify-end": "1.2"
+    }
+  }
+}
