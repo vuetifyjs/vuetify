@@ -1,0 +1,555 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VCarousel.ts should render component in RTL mode and match snapshot 1`] = `
+
+<div class="v-window v-carousel"
+     style="height: 500px;"
+>
+  <div class="v-carousel__prev">
+    <button type="button"
+            class="v-btn v-btn--icon theme--dark"
+    >
+      <div class="v-btn__content">
+        <i aria-hidden="true"
+           class="v-icon material-icons theme--dark"
+           style="font-size: 46px;"
+        >
+          chevron_right
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="v-carousel__next">
+    <button type="button"
+            class="v-btn v-btn--icon theme--dark"
+    >
+      <div class="v-btn__content">
+        <i aria-hidden="true"
+           class="v-icon material-icons theme--dark"
+           style="font-size: 46px;"
+        >
+          chevron_left
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="v-carousel__controls">
+    <div class="v-item-group theme--dark">
+    </div>
+  </div>
+  <div class="v-window__container">
+  </div>
+</div>
+
+`;
+
+exports[`VCarousel.ts should render component with custom duration between image cycles and match snapshot 1`] = `
+
+<div class="v-window v-carousel"
+     style="height: 500px;"
+>
+  <div class="v-carousel__prev">
+    <button type="button"
+            class="v-btn v-btn--icon theme--dark"
+    >
+      <div class="v-btn__content">
+        <i aria-hidden="true"
+           class="v-icon material-icons theme--dark"
+           style="font-size: 46px;"
+        >
+          chevron_left
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="v-carousel__next">
+    <button type="button"
+            class="v-btn v-btn--icon theme--dark"
+    >
+      <div class="v-btn__content">
+        <i aria-hidden="true"
+           class="v-icon material-icons theme--dark"
+           style="font-size: 46px;"
+        >
+          chevron_right
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="v-carousel__controls">
+    <div class="v-item-group theme--dark">
+    </div>
+  </div>
+  <div class="v-window__container">
+  </div>
+</div>
+
+`;
+
+exports[`VCarousel.ts should render component with custom icon and match snapshot 1`] = `
+
+<div class="v-window v-carousel"
+     style="height: 500px;"
+>
+  <div class="v-carousel__prev">
+    <button type="button"
+            class="v-btn v-btn--icon theme--dark"
+    >
+      <div class="v-btn__content">
+        <i aria-hidden="true"
+           class="v-icon material-icons theme--dark"
+           style="font-size: 46px;"
+        >
+          chevron_left
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="v-carousel__next">
+    <button type="button"
+            class="v-btn v-btn--icon theme--dark"
+    >
+      <div class="v-btn__content">
+        <i aria-hidden="true"
+           class="v-icon material-icons theme--dark"
+           style="font-size: 46px;"
+        >
+          chevron_right
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="v-carousel__controls">
+    <div class="v-item-group theme--dark">
+      <button type="button"
+              class="v-btn v-btn--active v-btn--icon v-btn--small theme--dark v-carousel__controls__item"
+      >
+        <div class="v-btn__content">
+          <i aria-hidden="true"
+             class="v-icon material-icons theme--dark"
+             style="font-size: 18px;"
+          >
+            stop
+          </i>
+        </div>
+      </button>
+      <button type="button"
+              class="v-btn v-btn--icon v-btn--small theme--dark v-carousel__controls__item"
+      >
+        <div class="v-btn__content">
+          <i aria-hidden="true"
+             class="v-icon material-icons theme--dark"
+             style="font-size: 18px;"
+          >
+            stop
+          </i>
+        </div>
+      </button>
+      <button type="button"
+              class="v-btn v-btn--icon v-btn--small theme--dark v-carousel__controls__item"
+      >
+        <div class="v-btn__content">
+          <i aria-hidden="true"
+             class="v-icon material-icons theme--dark"
+             style="font-size: 18px;"
+          >
+            stop
+          </i>
+        </div>
+      </button>
+    </div>
+  </div>
+  <div class="v-window__container">
+    <div class="v-window-item">
+      <div class="v-responsive v-image v-carousel__item"
+           style="height: 500px;"
+      >
+        <div class="v-responsive__content">
+        </div>
+      </div>
+    </div>
+    <div class="v-window-item"
+         style="display: none;"
+    >
+      <div class="v-responsive v-image v-carousel__item"
+           style="height: 500px;"
+      >
+        <div class="v-responsive__content">
+        </div>
+      </div>
+    </div>
+    <div class="v-window-item"
+         style="display: none;"
+    >
+      <div class="v-responsive v-image v-carousel__item"
+           style="height: 500px;"
+      >
+        <div class="v-responsive__content">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VCarousel.ts should render component with custom next icon and match snapshot 1`] = `
+
+<div class="v-window v-carousel"
+     style="height: 500px;"
+>
+  <div class="v-carousel__prev">
+    <button type="button"
+            class="v-btn v-btn--icon theme--dark"
+    >
+      <div class="v-btn__content">
+        <i aria-hidden="true"
+           class="v-icon material-icons theme--dark"
+           style="font-size: 46px;"
+        >
+          chevron_left
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="v-carousel__next">
+    <button type="button"
+            class="v-btn v-btn--icon theme--dark"
+    >
+      <div class="v-btn__content">
+        <i aria-hidden="true"
+           class="v-icon material-icons theme--dark"
+           style="font-size: 46px;"
+        >
+          stop
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="v-carousel__controls">
+    <div class="v-item-group theme--dark">
+    </div>
+  </div>
+  <div class="v-window__container">
+  </div>
+</div>
+
+`;
+
+exports[`VCarousel.ts should render component with custom prev icon and match snapshot 1`] = `
+
+<div class="v-window v-carousel"
+     style="height: 500px;"
+>
+  <div class="v-carousel__prev">
+    <button type="button"
+            class="v-btn v-btn--icon theme--dark"
+    >
+      <div class="v-btn__content">
+        <i aria-hidden="true"
+           class="v-icon material-icons theme--dark"
+           style="font-size: 46px;"
+        >
+          stop
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="v-carousel__next">
+    <button type="button"
+            class="v-btn v-btn--icon theme--dark"
+    >
+      <div class="v-btn__content">
+        <i aria-hidden="true"
+           class="v-icon material-icons theme--dark"
+           style="font-size: 46px;"
+        >
+          chevron_right
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="v-carousel__controls">
+    <div class="v-item-group theme--dark">
+    </div>
+  </div>
+  <div class="v-window__container">
+  </div>
+</div>
+
+`;
+
+exports[`VCarousel.ts should render component with image cycling off and match snapshot 1`] = `
+
+<div class="v-window v-carousel"
+     style="height: 500px;"
+>
+  <div class="v-carousel__prev">
+    <button type="button"
+            class="v-btn v-btn--icon theme--dark"
+    >
+      <div class="v-btn__content">
+        <i aria-hidden="true"
+           class="v-icon material-icons theme--dark"
+           style="font-size: 46px;"
+        >
+          chevron_left
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="v-carousel__next">
+    <button type="button"
+            class="v-btn v-btn--icon theme--dark"
+    >
+      <div class="v-btn__content">
+        <i aria-hidden="true"
+           class="v-icon material-icons theme--dark"
+           style="font-size: 46px;"
+        >
+          chevron_right
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="v-carousel__controls">
+    <div class="v-item-group theme--dark">
+    </div>
+  </div>
+  <div class="v-window__container">
+  </div>
+</div>
+
+`;
+
+exports[`VCarousel.ts should render component with selected active item 1`] = `
+
+<div class="v-window v-carousel"
+     style="height: 500px;"
+>
+  <div class="v-carousel__prev">
+    <button type="button"
+            class="v-btn v-btn--icon theme--dark"
+    >
+      <div class="v-btn__content">
+        <i aria-hidden="true"
+           class="v-icon material-icons theme--dark"
+           style="font-size: 46px;"
+        >
+          chevron_left
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="v-carousel__next">
+    <button type="button"
+            class="v-btn v-btn--icon theme--dark"
+    >
+      <div class="v-btn__content">
+        <i aria-hidden="true"
+           class="v-icon material-icons theme--dark"
+           style="font-size: 46px;"
+        >
+          chevron_right
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="v-carousel__controls">
+    <div class="v-item-group theme--dark">
+      <button type="button"
+              class="v-btn v-btn--icon v-btn--small theme--dark v-carousel__controls__item"
+      >
+        <div class="v-btn__content">
+          <i aria-hidden="true"
+             class="v-icon material-icons theme--dark"
+             style="font-size: 18px;"
+          >
+            fiber_manual_record
+          </i>
+        </div>
+      </button>
+      <button type="button"
+              class="v-btn v-btn--active v-btn--icon v-btn--small theme--dark v-carousel__controls__item"
+      >
+        <div class="v-btn__content">
+          <i aria-hidden="true"
+             class="v-icon material-icons theme--dark"
+             style="font-size: 18px;"
+          >
+            fiber_manual_record
+          </i>
+        </div>
+      </button>
+      <button type="button"
+              class="v-btn v-btn--icon v-btn--small theme--dark v-carousel__controls__item"
+      >
+        <div class="v-btn__content">
+          <i aria-hidden="true"
+             class="v-icon material-icons theme--dark"
+             style="font-size: 18px;"
+          >
+            fiber_manual_record
+          </i>
+        </div>
+      </button>
+    </div>
+  </div>
+  <div class="v-window__container">
+    <div class="v-window-item"
+         style="display: none;"
+    >
+      <div class="v-responsive v-image v-carousel__item"
+           style="height: 500px;"
+      >
+        <div class="v-responsive__content">
+        </div>
+      </div>
+    </div>
+    <div class="v-window-item">
+      <div class="v-responsive v-image v-carousel__item"
+           style="height: 500px;"
+      >
+        <div class="v-responsive__content">
+        </div>
+      </div>
+    </div>
+    <div class="v-window-item"
+         style="display: none;"
+    >
+      <div class="v-responsive v-image v-carousel__item"
+           style="height: 500px;"
+      >
+        <div class="v-responsive__content">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VCarousel.ts should render component without delimiters 1`] = `
+
+<div class="v-window v-carousel"
+     style="height: 500px;"
+>
+  <div class="v-carousel__prev">
+    <button type="button"
+            class="v-btn v-btn--icon theme--dark"
+    >
+      <div class="v-btn__content">
+        <i aria-hidden="true"
+           class="v-icon material-icons theme--dark"
+           style="font-size: 46px;"
+        >
+          chevron_left
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="v-carousel__next">
+    <button type="button"
+            class="v-btn v-btn--icon theme--dark"
+    >
+      <div class="v-btn__content">
+        <i aria-hidden="true"
+           class="v-icon material-icons theme--dark"
+           style="font-size: 46px;"
+        >
+          chevron_right
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="v-window__container">
+    <div class="v-window-item">
+      <div class="v-responsive v-image v-carousel__item"
+           style="height: 500px;"
+      >
+        <div class="v-responsive__content">
+        </div>
+      </div>
+    </div>
+    <div class="v-window-item"
+         style="display: none;"
+    >
+      <div class="v-responsive v-image v-carousel__item"
+           style="height: 500px;"
+      >
+        <div class="v-responsive__content">
+        </div>
+      </div>
+    </div>
+    <div class="v-window-item"
+         style="display: none;"
+    >
+      <div class="v-responsive v-image v-carousel__item"
+           style="height: 500px;"
+      >
+        <div class="v-responsive__content">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VCarousel.ts should render component without next icon and match snapshot 1`] = `
+
+<div class="v-window v-carousel"
+     style="height: 500px;"
+>
+  <div class="v-carousel__prev">
+    <button type="button"
+            class="v-btn v-btn--icon theme--dark"
+    >
+      <div class="v-btn__content">
+        <i aria-hidden="true"
+           class="v-icon material-icons theme--dark"
+           style="font-size: 46px;"
+        >
+          chevron_left
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="v-carousel__controls">
+    <div class="v-item-group theme--dark">
+    </div>
+  </div>
+  <div class="v-window__container">
+  </div>
+</div>
+
+`;
+
+exports[`VCarousel.ts should render component without prev icon and match snapshot 1`] = `
+
+<div class="v-window v-carousel"
+     style="height: 500px;"
+>
+  <div class="v-carousel__next">
+    <button type="button"
+            class="v-btn v-btn--icon theme--dark"
+    >
+      <div class="v-btn__content">
+        <i aria-hidden="true"
+           class="v-icon material-icons theme--dark"
+           style="font-size: 46px;"
+        >
+          chevron_right
+        </i>
+      </div>
+    </button>
+  </div>
+  <div class="v-carousel__controls">
+    <div class="v-item-group theme--dark">
+    </div>
+  </div>
+  <div class="v-window__container">
+  </div>
+</div>
+
+`;

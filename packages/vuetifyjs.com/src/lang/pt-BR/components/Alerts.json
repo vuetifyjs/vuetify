@@ -1,0 +1,32 @@
+{
+  "header": "Alert",
+  "headerText": "O componente `v-alert` é utilizado para transmitir informações importantes para o usuário. Ele tem 4 variações: **success**, **info**, **warning** and **error**. Estas têm ícones padrão atribuídos que podem ser alterados e representar diferentes ações",
+  "examples": {
+    "contextual": {
+      "header": "Contextual",
+      "desc": "Alertas podem ter cor contextual e por padrão são ocultos."
+    },
+    "closable": {
+      "header": "Fechável",
+      "desc": "Usando `v-model` você pode controlar o estado do alerta. Se você não deseja atribuir um v-model e apenas exibir o alerta, você pode simplesmente atribuir a propriedade `value`."
+    },
+    "icon": {
+      "header": "Ícone personalizado / Sem ícone",
+      "desc": "Você pode facilmente atribuir um ícone personalizado ou remover qualquer ícone."
+    },
+    "transition": {
+      "header": "Transição de exibição",
+      "desc": "Você pode aplicar uma transição personalizada ao exibir/ocultar o alerta."
+    },
+    "outline": {
+      "header": "Contorno",
+      "desc": "Alertas de contorno herdam suas bordas da cor atual aplicada."
+    }
+  },
+  "props": {
+    "dismissible": "Especifica que o alerta pode ser fechado",
+    "icon": "Determina um ícone específico",
+    "outline": "Alerta terá um contorno",
+    "type": "Especifica um alerta de **success**, **info**, **warning** ou **error**. Usa a cor contextual e um ícone pré-definido."
+  }
+}

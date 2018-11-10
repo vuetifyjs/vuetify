@@ -1,0 +1,218 @@
+@import '../bootstrap'
+
+.container
+  flex: 1 1 100%
+  margin: auto
+  padding: $grid-gutters.xl
+  width: 100%
+
+  for $size, $width in $container-max-widths
+    @media only screen and (min-width: $width)
+      max-width: ($width * 0.9375) // Credit to bootstrap
+
+  @media $display-breakpoints.sm-and-down
+    padding: $grid-gutters.lg
+
+  &.fluid
+    max-width: 100%
+
+  &.fill-height
+    align-items: center
+    display: flex
+
+    > .layout
+      height: 100%
+      flex: 1 1 auto
+
+  &.grid-list
+    for $size, $gutter in $grid-gutters
+      &-{$size}
+        .layout
+          .flex
+            padding: ($gutter / 2)
+
+        .layout:only-child
+          margin: -($gutter / 2)
+
+        .layout:not(:only-child)
+          margin: auto -($gutter / 2)
+
+        *:not(:only-child)
+          .layout:first-child
+            margin-top: -($gutter / 2)
+
+          .layout:last-child
+            margin-bottom: -($gutter / 2)
+
+.layout
+  display: flex
+  flex: 1 1 auto
+  flex-wrap: nowrap
+  // https://github.com/vuetifyjs/vuetify/issues/3873
+  min-width: 0
+
+  &.row
+    flex-direction: row
+
+    &.reverse
+      flex-direction: row-reverse
+
+  &.column
+    flex-direction: column
+
+    &.reverse
+      flex-direction: column-reverse
+
+    > .flex
+      max-width: 100%
+
+  &.wrap
+    flex-wrap: wrap
+
+for $size, $width in $grid-breakpoints
+  @media all and (min-width: $width)
+    for n in (1..$grid-columns)
+      .flex.{$size}{n}
+        flex-basis: (n / $grid-columns * 100)%
+        flex-grow: 0
+        max-width: (n / $grid-columns * 100)%
+
+      .flex.order-{$size}{n}
+        order: n
+
+    for n in (0..$grid-columns)
+      .flex.offset-{$size}{n}
+        // Offsets can only ever work in row layouts
+        margin-left: (n / $grid-columns * 100)%
+
+.flex,
+.child-flex > *
+  flex: 1 1 auto
+  max-width: 100%
+
+.align
+  &-start
+    align-items: flex-start
+
+  &-end
+    align-items: flex-end
+
+  &-center
+    align-items: center
+
+  &-baseline
+    align-items: baseline
+
+.align-self
+  &-start
+    align-self: flex-start
+
+  &-end
+    align-self: flex-end
+
+  &-center
+    align-self: center
+
+  &-baseline
+    align-self: baseline
+
+.align-content
+  &-start
+    align-content: flex-start
+
+  &-end
+    align-content: flex-end
+
+  &-center
+    align-content: center
+
+  &-space-between
+    align-content: space-between
+
+  &-space-around
+    align-content: space-around
+
+.justify
+  &-start
+    justify-content: flex-start
+
+  &-end
+    justify-content: flex-end
+
+  &-center
+    justify-content: center
+
+  &-space-around
+    justify-content: space-around
+
+  &-space-between
+    justify-content: space-between
+
+.justify-self
+  &-start
+    justify-self: flex-start
+
+  &-end
+    justify-self: flex-end
+
+  &-center
+    justify-self: center
+
+  &-baseline
+    justify-self: baseline
+
+.spacer
+  flex-grow: 1 !important
+
+.grow
+  flex-grow: 1 !important
+  flex-shrink: 0 !important
+
+.shrink
+  flex-grow: 0 !important
+  flex-shrink: 1 !important
+
+.scroll-y
+  overflow-y: auto
+
+.fill-height
+  height: 100%
+
+.hide-overflow
+  overflow: hidden !important
+
+.show-overflow
+  overflow: visible !important
+
+.no-wrap
+  white-space: nowrap
+
+.ellipsis
+  white-space: nowrap
+  overflow: hidden
+  text-overflow: ellipsis
+
+// Display helpers
+.d-flex
+  display: flex !important
+
+.d-inline-flex
+  display: inline-flex !important
+
+// TODO: Remove this in v2.0 (╯°□°）╯︵ ┻━┻
+.d-flex,
+.d-inline-flex
+  > *
+    flex: 1 1 auto !important
+
+.d-block
+  display: block !important
+
+.d-inline-block
+  display: inline-block !important
+
+.d-inline
+  display: inline !important
+
+.d-none
+  display: none !important

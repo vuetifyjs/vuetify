@@ -1,0 +1,41 @@
+{
+  "header": "Breakpoints",
+  "headerText": "Vuetify has a 12 point grid system. Built using <kbd>flex-box</kbd>, the grid is used to layout an application's content.  It contains 5 types of media breakpoints that are used for targeting specific screen sizes or orientations. The props for grid components are actually classes that are derived from their defined properties. This allows you to easily specify these helper classes as props, while still providing the classes to be used anywhere.",
+  "components": [
+    "v-container",
+    "v-layout",
+    "v-flex",
+    "v-spacer"
+  ],
+  "toc": [
+    {
+      "text": "Introduction",
+      "href": "introduction"
+    },
+    {
+      "text": "Usage",
+      "href": "usage"
+    },
+    {
+      "text": "API",
+      "href": "api"
+    },
+    {
+      "text": "Supplemental",
+      "href": "supplemental"
+    },
+    {
+      "text": "Examples",
+      "href": "examples"
+    },
+    {
+      "text": "Breakpoint object",
+      "href": "breakpoint-object"
+    }
+  ],
+  "breakpointHeader": "Объект точки останова",
+  "breakpointText1": "Vuetify преобразует доступные точки останова в доступный объект из вашего приложения. Это позволит вам назначать / применять определённые свойства и атрибуты на основе размера viewport. Доступ к объекту можно получить из:",
+  "breakpointText2": "Этот объект содержит те же семантические свойства, которые вы уже использовали для использования в grid Давайте попробуем пример реального мира. У вас есть компонент `v-dialog` , который вы хотите преобразовать в **full-screen** на мобильных устройствах. Обычно вам нужно привязывать наблюдателей к размеру viewport и/или проверять каждый раз, когда загружается страница.",
+  "breakpointText3": "Это много шаблонов для написания. Даже если вы решите использовать встроенную директиву <a href=\"/directives/resizing\"> v-resize </a>, вам все равно придётся определять метод изменения размера. С объектом **breakpoint** вы можете полностью пропустить эту логику и вернуться к созданию своего приложения.",
+  "breakpointText4": "All **breakpoint** props:"
+}
