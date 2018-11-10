@@ -7,8 +7,8 @@ module.exports = {
       cwd: './packages/vuetify/',
       env: {
         NODE_ENV: 'development',
-        HOST: '0.0.0.0',
-      },
+        HOST: '0.0.0.0'
+      }
     },
     {
       name: 'vuetify-build',
@@ -16,14 +16,14 @@ module.exports = {
       cwd: './packages/vuetify/',
       args: 'watch',
       env: {
-        NODE_ENV: 'production',
-      },
+        NODE_ENV: 'production'
+      }
     },
     {
       name: 'vuetify-docs',
       script: 'yarn.js',
       cwd: './packages/vuetify/',
-      args: 'dev',
-    },
-  ],
-};
+      args: 'dev'
+    }
+  ]
+}
