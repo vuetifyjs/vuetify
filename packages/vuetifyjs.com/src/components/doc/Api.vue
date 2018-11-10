@@ -4,7 +4,7 @@
     <v-card class="py-1">
       <doc-parameters
         :headers="headers[tab]"
-        :items="component.props"
+        :items="component[tab]"
       />
     </v-card>
   </div>
@@ -80,7 +80,14 @@
         return this.value[this.index]
       },
       tab () {
-        return 'props'
+        const directives = ['v-resize', 'v-ripple', 'v-scroll', 'v-touch']
+        if (directives.indexOf(this.selected) !== -1 ) {
+          return 'options'
+        } else if (this.selected == '$vuetify') {
+          return 'functions'
+        } else {
+          return 'props'
+        }
       }
     }
   }
