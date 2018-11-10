@@ -5,7 +5,7 @@
   >
     <v-layout wrap>
       <v-flex
-        mb-5
+        mb-3
         xs12
       >
         <v-text-field
@@ -56,6 +56,12 @@
                 elevation="1"
               >
                 <doc-markdown :code="gotcha.a" />
+
+                <doc-markup
+                  v-if="gotcha.s"
+                  :value="gotcha.s"
+                  class="mb-0 mt-3"
+                />
               </v-paper>
             </div>
           </template>
@@ -76,6 +82,21 @@
     computed: {
       gotchas () {
         return this.$t('GettingStarted.FrequentlyAskedQuestions.gotchas')
+      },
+      filtered () {
+        if (!this.search) return this.gotchas
+
+        const search = this.search.toLowerCase()
+
+        return this.gotchas.filter(gotcha => {
+          const q = gotcha.q.toLowerCase()
+          const a = gotcha.a.toLowerCase()
+
+          return (
+            q.indexOf(search) > -1 ||
+            a.indexOf(search) > -1
+          )
+        })
       }
     }
   }

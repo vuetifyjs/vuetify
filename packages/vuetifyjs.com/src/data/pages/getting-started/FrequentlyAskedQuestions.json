@@ -6,7 +6,7 @@
       "type": "section",
       "children": [
         {
-          "type": "faq"
+          "type": "page-faq"
         }
       ]
     }
