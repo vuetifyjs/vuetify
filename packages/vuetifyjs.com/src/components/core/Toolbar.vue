@@ -1,5 +1,6 @@
-<template lang="pug">
-  v-toolbar(
+<template>
+  <v-toolbar
+    id="app-toolbar"
     app
     clipped-right
     color="primary"
@@ -7,137 +8,194 @@
     fixed
     height="58"
     extension-height="48"
-    ref="toolbar"
-  )#app-toolbar
-    v-toolbar-side-icon(
-      @click="toggleDrawer"
-    )
-    router-link(:to="{ name: 'home/Home' }").d-flex
-      img(
+  >
+    <v-toolbar-side-icon @click="toggleDrawer" />
+
+    <router-link
+      :to="{ name: 'home/Home' }"
+      class="d-flex"
+    >
+      <v-img
         src="https://cdn.vuetifyjs.com/images/logos/v-alt.svg"
+        contain
+        transition="scale-transition"
         height="38px"
         width="38px"
-      )
+      />
+    </router-link>
 
-    v-toolbar-title.pb-1.hidden-xs-only Vuetify
+    <v-toolbar-title class="pb-1 hidden-xs-only">Vuetify</v-toolbar-title>
 
-    v-spacer
-    v-toolbar-items
-      v-menu(
-        bottom
-        offset-y
-        left
+    <v-spacer />
+
+    <v-toolbar-items>
+      <v-menu
         attach
-      )
-        v-btn(
+        bottom
+        lazy
+        left
+        offset-y
+      >
+        <v-btn
           slot="activator"
           flat
           style="min-width: 48px"
-        )
-          img(
+        >
+          <v-img
             :src="`https://cdn.vuetifyjs.com/images/flags/${currentLanguage.country}.png`"
             width="26px"
-          )
-        v-list(light)
-          v-list-tile(
-            avatar
+          />
+        </v-btn>
+        <v-list light>
+          <v-list-tile
             v-for="language in languages"
             :key="language.locale"
+            avatar
             @click="translateI18n(language.locale)"
-          )
-            v-list-tile-avatar(tile size="24px")
-              img(
+          >
+            <v-list-tile-avatar
+              tile
+              size="24px"
+            >
+              <v-img
                 :src="`https://cdn.vuetifyjs.com/images/flags/${language.country}.png`"
                 width="24px"
-              )
-            v-list-tile-title {{language.name}}
+              />
+            </v-list-tile-avatar>
+            <v-list-tile-title v-text="language.name" />
+          </v-list-tile>
+        </v-list>
+      </v-menu>
 
-    v-toolbar-items
-      v-menu(
+      <v-menu
         attach
         bottom
+        lazy
         left
         offset-y
         max-height="500"
-      )
-        v-btn(
-          flat
+      >
+        <v-btn
           slot="activator"
+          flat
           style="min-width: 48px"
-        )
-          span.mr-1 {{ $t('Vuetify.AppToolbar.ecosystem' )}}
-          v-icon.hidden-sm-and-down mdi-menu-down
-          v-icon.hidden-md-and-up mdi-earth
+        >
+          <span
+            class="mr-1"
+            v-text="$t('Vuetify.AppToolbar.ecosystem')"
+          />
+          <v-icon class="hidden-sm-and-down">mdi-menu-down</v-icon>
+          <v-icon class="hidden-md-and-up">mdi-earth</v-icon>
+        </v-btn>
 
-        v-list(light)
-          v-subheader(light) {{ $t('Vuetify.AppToolbar.quickLinks' )}}
-          v-list-tile(
-            target="_blank"
-            rel="noopener"
+        <v-list light>
+          <v-subheader
+            light
+            v-text="$t('Vuetify.AppToolbar.quickLinks')"
+          />
+
+          <v-list-tile
             v-for="ecosystem in ecosystems"
             :href="ecosystem.href"
             :key="ecosystem.text"
-          )
-            v-list-tile-action
-              v-icon(light) {{ ecosystem.icon }}
-            v-list-tile-content
-              v-list-tile-title {{ ecosystem.text }}
-
-          v-divider(light)
-
-          v-subheader(light) {{ $t('Vuetify.AppToolbar.social' )}}
-
-          v-list-tile(
             target="_blank"
             rel="noopener"
+          >
+            <v-list-tile-action>
+              <v-icon
+                light
+                v-text="ecosystem.icon"
+              />
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title v-text="ecosystem.text" />
+            </v-list-tile-content>
+          </v-list-tile>
+          <v-divider />
+
+          <v-subheader v-text="$t('Vuetify.AppToolbar.social')" />
+
+          <v-list-tile
             v-for="social in socials"
             :href="social.href"
             :key="social.text"
-          )
-            v-list-tile-action
-              v-icon(light) {{ social.icon }}
-            v-list-tile-content
-              v-list-tile-title {{ social.text }}
+            target="_blank"
+            rel="noopener"
+          >
+            <v-list-tile-action>
+              <v-icon
+                light
+                v-text="social.icon"
+              />
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title v-text="social.text" />
+            </v-list-tile-content>
+          </v-list-tile>
+        </v-list>
+      </v-menu>
 
-      v-menu(
+      <v-menu
         attach
         bottom
+        lazy
         left
         offset-y
         max-height="500"
-      )
-        v-btn(
-          flat
+      >
+        <v-btn
           slot="activator"
+          flat
           style="min-width: 48px"
-        )
-          span.mr-1 {{ $t('Vuetify.AppToolbar.support' )}}
-          v-icon.hidden-sm-and-down mdi-menu-down
-          v-icon.hidden-md-and-up mdi-lifebuoy
-        v-list(light)
-          v-list-tile(
-            target="_blank"
-            rel="noopener"
+        >
+          <span
+            class="mr-1"
+            v-text="$t('Vuetify.AppToolbar.support' )"
+          />
+          <v-icon class="hidden-sm-and-down">mdi-menu-down</v-icon>
+          <v-icon class="hidden-md-and-up">mdi-lifebuoy</v-icon>
+        </v-btn>
+        <v-list>
+          <v-list-tile
             v-for="support in supports"
             :href="support.href"
             :key="support.text"
-          )
-            v-list-tile-action
-              v-icon(light) {{ support.icon }}
-            v-list-tile-content
-              v-list-tile-title {{ support.text }}
+            target="_blank"
+            rel="noopener"
+          >
+            <v-list-tile-action>
+              <v-icon
+                light
+                v-text="support.icon"
+              />
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title v-text="support.text" />
+            </v-list-tile-content>
+          </v-list-tile>
+        </v-list>
+      </v-menu>
 
-      v-menu(
+      <v-menu
+        attach
         bottom
+        lazy
         left
         offset-y
-        attach
-      ).hidden-xs-only
-        v-btn(
+        class="hidden-xs-only"
+      >
+        <v-btn
           slot="activator"
           flat
-        )
-          span.mr-1 {{ currentVersion }}
+        >
+          <span
+            class="mr-1"
+            v-text="currentVersion"
+          />
+        </v-btn>
+      </v-menu>
+    </v-toolbar-items>
+  </v-toolbar>
 </template>
 
 <script>
@@ -160,12 +218,6 @@
       ...mapState('app', [
         'currentVersion'
       ]),
-      ...mapState(['route']),
-      backPath () {
-        return this.route.from.path === '/'
-          ? { name: 'getting-started/QuickStart' }
-          : this.route.from.path
-      },
       currentLanguage () {
         return this.languages.find(l => l.locale === this.$i18n.locale)
       }
