@@ -2,7 +2,6 @@
   <v-data-table
     :headers="headers"
     :items="desserts"
-    hide-actions
     item-key="name"
   >
     <template slot="items" slot-scope="props">
