@@ -220,6 +220,7 @@
                 { text: 'Text fields', to: 'text-fields' }
               ]
             },
+            { text: 'Jumbotrons', to: 'jumbotrons' },
             { text: 'Lists', to: 'lists' },
             { text: 'Menus', to: 'menus' },
             { text: 'Navigation drawers', to: 'navigation-drawers' },
