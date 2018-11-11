@@ -88,9 +88,6 @@ export default Vue.extend({
   data () {
     return {
       defaultOffset: 8,
-      maxHeightAutoDefault: '200px',
-      startIndex: 3,
-      stopIndex: 0,
       hasJustFocused: false,
       resizeTimeout: null
     }
