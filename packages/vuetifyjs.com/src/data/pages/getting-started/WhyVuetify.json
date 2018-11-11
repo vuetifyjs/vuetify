@@ -54,6 +54,14 @@
         {
           "type": "text",
           "lang": "comparisonText"
+        },
+        {
+          "type": "sub-subheading",
+          "lang": "featuresHeader"
+        },
+        {
+          "type": "checklist",
+          "value": "featuresList"
         }
       ]
     }
