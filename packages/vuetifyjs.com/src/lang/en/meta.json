@@ -59,6 +59,12 @@
     "description": "Get help and support from the creator of Vuetify, John Leider",
     "keywords": "consulting, support, help"
   },
+  "framework/a-la-carte": {
+    "h1": "A La Carte",
+    "title": "A La Carte",
+    "description": "Use only the components you need. Single component importing allows you to select what you want and leave the rest.",
+    "keywords": "a la carte, a-la-carte, vuetify single import, vuetify import, component importing"
+  },
   "framework/icons": {
     "h1": "Installing Icons",
     "title": "Installing Icons",
@@ -562,12 +568,6 @@
     "title": "Layout Sandbox",
     "description": "Layout Sandbox for the Vuetify.js framework",
     "keywords": "template, pre-made, vuetify layout, sandbox"
-  },
-  "guides/a-la-carte": {
-    "h1": "A La Carte",
-    "title": "A La Carte",
-    "description": "Use only the components you need. Single component importing allows you to select what you want and leave the rest.",
-    "keywords": "a la carte, a-la-carte, vuetify single import, vuetify import, component importing"
   },
   "guides/server-side-rendering": {
     "h1": "Server side rendering",
