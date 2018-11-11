@@ -1,6 +1,7 @@
 {
   "header": "Overview",
   "headerText": "Being a component framework, Vuetify will always grow horizontally. Depending on your project, a small **package size** may be a requirement. The A la carte system enables you to pick and choose which components to import, drastically _lowering_ your build size.",
+  "header2": "Example",
   "headerText2": "For a pre-built project demonstrating single component imports, install the **a-la-carte** template from the cli, using the command `vue init vuetifyjs/a-la-carte`. Some of our other templates also include options for enabling a-la-carte components. More information is located in the [Quick start guide](/getting-started/quick-start).",
   "importHeader": "Importing components",
   "webpackVersionWarning": "Tree shaking only works with webpack 4 in production mode",
@@ -15,7 +16,7 @@
   "loaderText1": "Keeping track of all the components you're using can be a real chore, so we wrote a webpack loader to help you. [**vuetify-loader**](https://github.com/vuetifyjs/vuetify-loader) will automatically import all the vuetify components you use, where you use them.\nThis will also make code-splitting more effective, as webpack will only load the components required for that chunk to be displayed.",
   "loaderText2": "Now any Vuetify component used in a template will be automatically added to an in-component import like above.",
   "loaderLimitationsHeader": "Limitations",
-  "loaderLimitationsText1": "Vuetify-loader can't do everything, there are still some scenarios where you'll need to import components manually",
+  "loaderLimitationsText1": "When using the `vuetify-loader`, there are a few secnarios which will require manual importing of components.",
   "loaderLimitationsDynamicHeader": "Dynamic components",
   "loaderLimitationsDynamicText1": "`v-data-iterator` can use any component via the **content-tag** prop. This component must be registered [globally](#global-import):",
   "loaderLimitationsDynamicText2": "Dynamic components used with `<component :is=\"\">` can be registered [locally](#local-import):",
