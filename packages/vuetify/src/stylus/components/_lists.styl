@@ -48,14 +48,6 @@ rtl(v-list-rtl, "v-list")
   padding: $list-top-padding 0 $list-bottom-padding
   transition: $primary-transition
 
-  .v-input
-    .v-messages
-      display: none
-
-  .v-input,
-  .v-input__slot
-    margin: 0
-
   // TODO: Remove for List rewrite v2.0
   > div
     transition: inherit
@@ -122,6 +114,13 @@ rtl(v-list-rtl, "v-list")
       // QoL when using selection controls in actions
       .v-input--selection-controls
         padding: 0
+        margin: 0
+
+        .v-messages
+          display: none
+
+        .v-input__slot
+          margin: 0
 
       &-text
         color: $list-action-text-font-color
