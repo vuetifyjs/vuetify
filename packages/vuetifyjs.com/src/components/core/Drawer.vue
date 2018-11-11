@@ -201,6 +201,9 @@
                 { text: 'Windows', to: 'windows' }
               ]
             },
+            { text: 'Hover', to: 'hover' },
+            { text: 'Icons', to: 'icons' },
+            { text: 'Images', to: 'images' },
             {
               group: 'components',
               text: 'Inputs & controls',
@@ -217,9 +220,6 @@
                 { text: 'Text fields', to: 'text-fields' }
               ]
             },
-            { text: 'Hover', to: 'hover' },
-            { text: 'Icons', to: 'icons' },
-            { text: 'Images', to: 'images' },
             { text: 'Lists', to: 'lists' },
             { text: 'Menus', to: 'menus' },
             { text: 'Navigation drawers', to: 'navigation-drawers' },
