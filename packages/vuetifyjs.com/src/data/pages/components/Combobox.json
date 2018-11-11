@@ -26,6 +26,7 @@
         {
           "type": "examples",
           "value": [
+            "noData",
             "advanced",
             "comboboxMultiple"
           ]

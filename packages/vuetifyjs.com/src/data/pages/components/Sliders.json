@@ -38,7 +38,8 @@
             "customColors",
             "validation",
             "range",
-            "minMax"
+            "minMax",
+            "metronome"
           ]
         }
       ]

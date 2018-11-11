@@ -42,7 +42,8 @@
             "switchesBoolean",
             "switchesArray",
             "switchesStates",
-            "switchesColors"
+            "switchesColors",
+            "labelSlot"
           ]
         }
       ]
