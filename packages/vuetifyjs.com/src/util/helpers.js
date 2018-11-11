@@ -52,6 +52,7 @@ export function getComponent (type) {
   switch (type) {
     case 'alert': return 'doc-alert'
     case 'api': return 'doc-api'
+    case 'checklist': return 'doc-checklist'
     case 'example': return 'doc-example'
     case 'examples': return 'doc-examples'
     case 'heading': return 'doc-heading'
