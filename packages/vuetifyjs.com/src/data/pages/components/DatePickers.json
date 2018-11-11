@@ -26,10 +26,10 @@
         {
           "type": "examples",
           "value": [
-            "dateLight",
             "dateColorable",
             "dateDialogAndMenu",
             "dateFormatting",
+            "dateFormattingMomentDatefns",
             "dateAllowedDates",
             "dateMultiple",
             "dateWidth",

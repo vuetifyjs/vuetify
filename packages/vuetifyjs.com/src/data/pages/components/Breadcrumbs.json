@@ -29,7 +29,9 @@
         {
           "type": "examples",
           "value": [
-            "iconDividers"
+            "textDividers",
+            "iconDividers",
+            "itemSlot"
           ]
         }
       ]
