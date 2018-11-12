@@ -1,5 +1,7 @@
 import ExpandTransitionGenerator from '../../transitions/expand-transition'
 
+import { getObjectValueByPath } from '../../../util/helpers'
+
 /* @vue/component */
 export default {
   methods: {
@@ -14,7 +16,7 @@ export default {
       if (this.isExpanded(props.item)) {
         const expand = this.$createElement('div', {
           class: 'v-datatable__expand-content',
-          key: props.item[this.itemKey]
+          key: getObjectValueByPath(props.item, this.itemKey)
         }, [this.$scopedSlots.expand(props)])
 
         children.push(expand)
@@ -44,7 +46,7 @@ export default {
 
         rows.push(this.hasTag(row, 'td')
           ? this.genTR(row, {
-            key: this.itemKey ? props.item[this.itemKey] : index,
+            key: this.itemKey ? getObjectValueByPath(props.item, this.itemKey) : index,
             attrs: { active: this.isSelected(item) }
           })
           : row)
