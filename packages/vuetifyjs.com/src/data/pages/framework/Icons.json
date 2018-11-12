@@ -64,6 +64,22 @@
         },
         {
           "type": "sub-subheading",
+          "lang": "installMDI"
+        },
+        {
+          "type": "markup",
+          "value": "bash_yarn_install_mdi"
+        },
+        {
+          "type": "text",
+          "lang": "installMDIText1"
+        },
+        {
+          "type": "markup",
+          "value": "js_import_mdi"
+        },
+        {
+          "type": "sub-subheading",
           "lang": "installFA"
         },
         {
