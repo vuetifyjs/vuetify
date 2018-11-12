@@ -133,11 +133,11 @@ export default {
       // If we made it here, the click is outside
       // and is active. If persistent, and the
       // click is on the overlay, animate
+      this.$emit('click:outside')
       if (this.persistent) {
-        if (!this.noClickAnimation &&
-          this.overlay === e.target
-        ) this.animateClick()
-
+        if (!this.noClickAnimation && this.overlay === e.target) {
+          this.animateClick()
+        }
         return false
       }
 
