@@ -367,6 +367,8 @@ export default {
           current: this.current ? this.sanitizeDateString(this.current, 'month') : null,
           dark: this.dark,
           disabled: this.readonly,
+          events: this.type === 'month' ? this.events : null,
+          eventColor: this.type === 'month' ? this.eventColor : null,
           format: this.monthFormat,
           light: this.light,
           locale: this.locale,

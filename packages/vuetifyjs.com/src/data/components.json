@@ -218,6 +218,7 @@
       "monthAllowedMonths",
       { "file": "monthMultiple", "newIn": "1.2" },
       "monthWidth",
+      { "file": "monthEvents", "newIn": "1.4" },
       "monthInternationalization",
       "monthIcons",
       "monthReadonly",

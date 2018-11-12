@@ -1043,9 +1043,9 @@ exports[`VDatePickerDateTable.js should render component with events (array) and
             <div class="v-btn__content">
               3
             </div>
+            <div class="v-date-picker-table__event red">
+            </div>
           </button>
-          <div class="v-date-picker-table__event red">
-          </div>
         </td>
         <td>
           <button type="button"
@@ -1370,9 +1370,9 @@ exports[`VDatePickerDateTable.js should render component with events (function) 
             <div class="v-btn__content">
               3
             </div>
+            <div class="v-date-picker-table__event red">
+            </div>
           </button>
-          <div class="v-date-picker-table__event red">
-          </div>
         </td>
         <td>
           <button type="button"
@@ -1697,9 +1697,9 @@ exports[`VDatePickerDateTable.js should render component with events colored by 
             <div class="v-btn__content">
               3
             </div>
+            <div class="v-date-picker-table__event red">
+            </div>
           </button>
-          <div class="v-date-picker-table__event red">
-          </div>
         </td>
         <td>
           <button type="button"
@@ -1708,9 +1708,9 @@ exports[`VDatePickerDateTable.js should render component with events colored by 
             <div class="v-btn__content">
               4
             </div>
+            <div class="v-date-picker-table__event accent">
+            </div>
           </button>
-          <div class="v-date-picker-table__event accent">
-          </div>
         </td>
         <td>
           <button type="button"
@@ -2026,9 +2026,9 @@ exports[`VDatePickerDateTable.js should render component with events colored by 
             <div class="v-btn__content">
               3
             </div>
+            <div class="v-date-picker-table__event red">
+            </div>
           </button>
-          <div class="v-date-picker-table__event red">
-          </div>
         </td>
         <td>
           <button type="button"
@@ -2037,9 +2037,9 @@ exports[`VDatePickerDateTable.js should render component with events colored by 
             <div class="v-btn__content">
               4
             </div>
+            <div class="v-date-picker-table__event blue lighten-1">
+            </div>
           </button>
-          <div class="v-date-picker-table__event blue lighten-1">
-          </div>
         </td>
         <td>
           <button type="button"

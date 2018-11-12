@@ -18,6 +18,14 @@ export default {
       type: Function,
       default: null
     },
+    events: {
+      type: [Array, Object, Function],
+      default: () => null
+    },
+    eventColor: {
+      type: [String, Function, Object],
+      default: 'warning'
+    },
     locale: {
       type: String,
       default: 'en-us'
@@ -81,12 +89,38 @@ export default {
           type: 'button'
         },
         domProps: {
-          disabled: !isAllowed,
-          innerHTML: `<div class="v-btn__content">${this.formatter(value)}</div>`
+          disabled: !isAllowed
         },
         on: (this.disabled || !isAllowed) ? {} : {
           click: () => this.$emit('input', value)
         }
+      }), [
+        this.$createElement('div', {
+          staticClass: 'v-btn__content'
+        }, [this.formatter(value)]),
+        this.isEvent(value) ? this.genEvent(value) : null
+      ])
+    },
+    isEvent (date) {
+      if (Array.isArray(this.events)) {
+        return this.events.indexOf(date) > -1
+      } else if (this.events instanceof Function) {
+        return this.events(date)
+      } else {
+        return false
+      }
+    },
+    genEvent (date) {
+      let eventColor
+      if (typeof this.eventColor === 'string') {
+        eventColor = this.eventColor
+      } else if (typeof this.eventColor === 'function') {
+        eventColor = this.eventColor(date)
+      } else {
+        eventColor = this.eventColor[date]
+      }
+      return this.$createElement('div', this.setBackgroundColor(eventColor || this.color || 'accent', {
+        staticClass: 'v-date-picker-table__event'
       }))
     },
     wheel (e) {

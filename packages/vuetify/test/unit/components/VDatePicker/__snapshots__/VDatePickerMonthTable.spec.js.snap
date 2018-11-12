@@ -253,3 +253,527 @@ exports[`VDatePickerMonthTable.js should render component and match snapshot 1`]
 </div>
 
 `;
+
+exports[`VDatePickerMonthTable.js should render component with events (array) and match snapshot 1`] = `
+
+<div class="v-date-picker-table v-date-picker-table--month theme--light">
+  <table>
+    <tbody>
+      <tr>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Jan
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Feb
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Mar
+            </div>
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Apr
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              May
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Jun
+            </div>
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Jul
+            </div>
+            <div class="v-date-picker-table__event red">
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Aug
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Sep
+            </div>
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Oct
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Nov
+            </div>
+            <div class="v-date-picker-table__event red">
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Dec
+            </div>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+`;
+
+exports[`VDatePickerMonthTable.js should render component with events (function) and match snapshot 1`] = `
+
+<div class="v-date-picker-table v-date-picker-table--month theme--light">
+  <table>
+    <tbody>
+      <tr>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Jan
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Feb
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Mar
+            </div>
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Apr
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              May
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Jun
+            </div>
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Jul
+            </div>
+            <div class="v-date-picker-table__event red">
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Aug
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Sep
+            </div>
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Oct
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Nov
+            </div>
+            <div class="v-date-picker-table__event red">
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Dec
+            </div>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+`;
+
+exports[`VDatePickerMonthTable.js should render component with events colored by function and match snapshot 1`] = `
+
+<div class="v-date-picker-table v-date-picker-table--month theme--light">
+  <table>
+    <tbody>
+      <tr>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Jan
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Feb
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Mar
+            </div>
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Apr
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              May
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Jun
+            </div>
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Jul
+            </div>
+            <div class="v-date-picker-table__event red">
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Aug
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Sep
+            </div>
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Oct
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Nov
+            </div>
+            <div class="v-date-picker-table__event blue lighten-1">
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Dec
+            </div>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+`;
+
+exports[`VDatePickerMonthTable.js should render component with events colored by object and match snapshot 1`] = `
+
+<div class="v-date-picker-table v-date-picker-table--month theme--light">
+  <table>
+    <tbody>
+      <tr>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Jan
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Feb
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Mar
+            </div>
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Apr
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              May
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Jun
+            </div>
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Jul
+            </div>
+            <div class="v-date-picker-table__event red">
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Aug
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Sep
+            </div>
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Oct
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Nov
+            </div>
+            <div class="v-date-picker-table__event blue lighten-1">
+            </div>
+          </button>
+        </td>
+        <td>
+          <button type="button"
+                  class="v-btn v-btn--flat theme--light"
+          >
+            <div class="v-btn__content">
+              Dec
+            </div>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+`;
