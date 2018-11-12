@@ -99,6 +99,7 @@ Array [
   "VSlider",
   "VSnackbar",
   "VSpacer",
+  "VSparkline",
   "VSpeedDial",
   "VStepper",
   "VStepperContent",

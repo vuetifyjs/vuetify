@@ -50,6 +50,7 @@ import VResponsive from '@/components/VResponsive'
 import VSelect from '@/components/VSelect'
 import VSlider from '@/components/VSlider'
 import VSnackbar from '@/components/VSnackbar'
+import VSparkline from '@/components/VSparkline'
 import VSpeedDial from '@/components/VSpeedDial'
 import VStepper from '@/components/VStepper'
 import VSubheader from '@/components/VSubheader'
@@ -118,6 +119,7 @@ const components = {
   VSelect,
   VSlider,
   VSnackbar,
+  VSparkline,
   VSpeedDial,
   VStepper,
   VSubheader,
