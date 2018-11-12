@@ -40,6 +40,7 @@ import SelectionControls from './SelectionControls'
 import Selects from './Selects'
 import Sliders from './Sliders'
 import Snackbars from './Snackbars'
+import Sparklines from './Sparklines'
 import Steppers from './Steppers'
 import Subheaders from './Subheaders'
 import Tabs from './Tabs'
@@ -96,6 +97,7 @@ export default {
   Selects,
   Sliders,
   Snackbars,
+  Sparklines,
   Steppers,
   Subheaders,
   Tabs,

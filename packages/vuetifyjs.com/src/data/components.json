@@ -595,6 +595,13 @@
     ],
     "spec": false
   },
+  "sparklines": {
+    "components": ["v-sparkline"],
+    "examples": [
+      "playground"
+    ],
+    "spec": false
+  },
   "steppers": {
     "components": [
       "v-stepper",
