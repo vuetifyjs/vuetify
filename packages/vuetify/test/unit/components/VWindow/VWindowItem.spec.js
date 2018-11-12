@@ -28,8 +28,8 @@ test('VWindowItem.ts', ({ mount }) => {
     expect(wrapper.vm.internalHeight).toBe(undefined)
     expect(wrapper.vm.isActive).toBe(false)
 
-    // Before leave
-    item.vm.onBeforeLeave(el)
+    // Leave
+    item.vm.onLeave(el)
     expect(wrapper.vm.internalHeight).toBe('0px')
 
     // Canceling

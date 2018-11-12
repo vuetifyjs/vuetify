@@ -90,7 +90,7 @@ export default mixins<options & ExtractVue<[typeof Bootable]>>(
     onBeforeEnter () {
       this.windowGroup.isActive = true
     },
-    onBeforeLeave (el: HTMLElement) {
+    onLeave (el: HTMLElement) {
       this.windowGroup.internalHeight = convertToUnit(el.clientHeight)
     },
     onEnterCancelled () {
@@ -131,7 +131,7 @@ export default mixins<options & ExtractVue<[typeof Bootable]>>(
       on: {
         afterEnter: this.onAfterEnter,
         beforeEnter: this.onBeforeEnter,
-        beforeLeave: this.onBeforeLeave,
+        leave: this.onLeave,
         enter: this.onEnter,
         enterCancelled: this.onEnterCancelled
       }
