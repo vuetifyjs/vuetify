@@ -550,7 +550,10 @@ export default {
     },
     onEscDown (e) {
       e.preventDefault()
-      this.isMenuActive = false
+      if (this.isMenuActive) {
+        e.stopPropagation()
+        this.isMenuActive = false
+      }
     },
     onKeyDown (e) {
       const keyCode = e.keyCode
