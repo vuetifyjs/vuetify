@@ -3,8 +3,10 @@
     <doc-subheading>Generic.Pages.api</doc-subheading>
     <v-card class="py-1">
       <doc-parameters
-        :headers="headers[tab]"
-        :items="component[tab]"
+        :headers="headers[type]"
+        :items="component[type]"
+        :target="target"
+        :type="type"
       />
     </v-card>
   </div>
@@ -26,6 +28,11 @@
 
     data: vm => ({
       headers: {
+        api: [
+          { value: 'name', align: 'left', size: 3 },
+          { value: 'default', align: 'left', size: 6 },
+          { value: 'type', align: 'right', size: 3 }
+        ],
         props: [
           { value: 'name', align: 'left', size: 3 },
           { value: 'default', align: 'left', size: 6 },
@@ -63,7 +70,10 @@
     computed: {
       ...mapState('documentation', ['api']),
       component () {
-        return this.api[this.selected] || {
+        const component = this.api[this.target] || {}
+
+        return {
+          api: [],
           props: [],
           slots: [],
           scopedSlots: [],
@@ -71,23 +81,27 @@
           events: [],
           functions: [],
           functional: [],
-          options: []
+          options: [],
+          ...component
         }
       },
-      selected () {
+      target () {
         if (this.index < 0) return undefined
 
         return this.value[this.index]
       },
-      tab () {
-        const directives = ['v-resize', 'v-ripple', 'v-scroll', 'v-touch']
-        if (directives.indexOf(this.selected) !== -1) {
-          return 'options'
-        } else if (this.selected === '$vuetify') {
-          return 'functions'
-        } else {
-          return 'props'
-        }
+      type () {
+        return [
+          'api',
+          'props',
+          'slots',
+          'scopedSlots',
+          'params',
+          'events',
+          'functions',
+          'functional',
+          'options'
+        ].find(type => this.component[type].length > 0)
       }
     }
   }
