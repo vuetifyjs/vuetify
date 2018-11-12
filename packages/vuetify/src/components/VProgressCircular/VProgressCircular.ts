@@ -62,7 +62,7 @@ export default mixins(Colorable).extend({
         return 100
       }
 
-      return parseInt(this.value, 10)
+      return parseFloat(this.value)
     },
 
     radius (): number {
