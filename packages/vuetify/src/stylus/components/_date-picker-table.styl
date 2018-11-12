@@ -58,17 +58,23 @@ theme(v-date-picker-table, "v-date-picker-table")
   td
     width: 45px
 
-.v-date-picker-table__event
-  border-radius: 50%
-  display: block
+.v-date-picker-table__events
   height: 8px
-  left: 50%
+  left: 0
   position: absolute
-  transform: translateX(-4px)
-  width: 8px
+  text-align: center
+  white-space: pre
+  width: 100%
 
-.v-date-picker-table--date .v-date-picker-table__event
-  bottom: 2px
+  > div
+    border-radius: 50%
+    display: inline-block
+    height: 8px
+    margin: 0 1px
+    width: 8px
 
-.v-date-picker-table--month .v-date-picker-table__event
-  bottom: 3px
+.v-date-picker-table--date .v-date-picker-table__events
+  bottom: 6px
+
+.v-date-picker-table--month .v-date-picker-table__events
+  bottom: 8px

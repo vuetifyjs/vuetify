@@ -325,7 +325,9 @@ exports[`VDatePickerMonthTable.js should render component with events (array) an
             <div class="v-btn__content">
               Jul
             </div>
-            <div class="v-date-picker-table__event red">
+            <div class="v-date-picker-table__events">
+              <div class="red">
+              </div>
             </div>
           </button>
         </td>
@@ -365,7 +367,9 @@ exports[`VDatePickerMonthTable.js should render component with events (array) an
             <div class="v-btn__content">
               Nov
             </div>
-            <div class="v-date-picker-table__event red">
+            <div class="v-date-picker-table__events">
+              <div class="red">
+              </div>
             </div>
           </button>
         </td>
@@ -456,7 +460,9 @@ exports[`VDatePickerMonthTable.js should render component with events (function)
             <div class="v-btn__content">
               Jul
             </div>
-            <div class="v-date-picker-table__event red">
+            <div class="v-date-picker-table__events">
+              <div class="red">
+              </div>
             </div>
           </button>
         </td>
@@ -496,7 +502,9 @@ exports[`VDatePickerMonthTable.js should render component with events (function)
             <div class="v-btn__content">
               Nov
             </div>
-            <div class="v-date-picker-table__event red">
+            <div class="v-date-picker-table__events">
+              <div class="red">
+              </div>
             </div>
           </button>
         </td>
@@ -587,7 +595,9 @@ exports[`VDatePickerMonthTable.js should render component with events colored by
             <div class="v-btn__content">
               Jul
             </div>
-            <div class="v-date-picker-table__event red">
+            <div class="v-date-picker-table__events">
+              <div class="red">
+              </div>
             </div>
           </button>
         </td>
@@ -627,7 +637,9 @@ exports[`VDatePickerMonthTable.js should render component with events colored by
             <div class="v-btn__content">
               Nov
             </div>
-            <div class="v-date-picker-table__event blue lighten-1">
+            <div class="v-date-picker-table__events">
+              <div class="blue lighten-1">
+              </div>
             </div>
           </button>
         </td>
@@ -718,7 +730,9 @@ exports[`VDatePickerMonthTable.js should render component with events colored by
             <div class="v-btn__content">
               Jul
             </div>
-            <div class="v-date-picker-table__event red">
+            <div class="v-date-picker-table__events">
+              <div class="red">
+              </div>
             </div>
           </button>
         </td>
@@ -758,7 +772,9 @@ exports[`VDatePickerMonthTable.js should render component with events colored by
             <div class="v-btn__content">
               Nov
             </div>
-            <div class="v-date-picker-table__event blue lighten-1">
+            <div class="v-date-picker-table__events">
+              <div class="blue lighten-1">
+              </div>
             </div>
           </button>
         </td>

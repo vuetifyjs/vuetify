@@ -27,12 +27,12 @@ export default {
       default: null
     },
     events: {
-      type: [Array, Object, Function],
+      type: [Array, Function, Object],
       default: () => null
     },
     eventColor: {
-      type: [String, Function, Object],
-      default: 'warning'
+      type: [Array, Function, Object, String],
+      default: () => 'warning'
     },
     firstDayOfWeek: {
       type: [String, Number],

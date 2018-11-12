@@ -13,7 +13,6 @@
       <div class="subheading">Defined by function</div>
       <v-date-picker
         v-model="date2"
-        :event-color="functionEventColors"
         :events="functionEvents"
         type="month"
       ></v-date-picker>
@@ -41,11 +40,9 @@
     methods: {
       functionEvents (date) {
         const month = parseInt(date.split('-')[1], 10)
-        return month % 2 === 1
-      },
-      functionEventColors (date) {
-        const month = parseInt(date.split('-')[1], 10)
-        return [false, 'purple', false, 'red'][month % 4]
+        if ([1, 3, 7].includes(month)) return true
+        if ([2, 5, 12].includes(month)) return ['error', 'purple', 'rgba(0, 128, 0, 0.5)']
+        return false
       }
     }
   }
