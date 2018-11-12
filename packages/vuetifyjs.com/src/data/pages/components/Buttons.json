@@ -33,15 +33,13 @@
             "raised",
             "depressed",
             "dropdown",
-            "toggle",
             "icon",
             "floating",
             "loaders",
             "sizing",
             "outline",
             "round",
-            "block",
-            "appBar"
+            "block"
           ]
         }
       ]
