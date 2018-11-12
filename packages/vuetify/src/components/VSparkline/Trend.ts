@@ -1,6 +1,5 @@
-import { ExtractVue } from './../../util/mixins'
 import { VNode } from 'vue'
-import mixins from '../../util/mixins'
+import mixins, { ExtractVue } from '../../util/mixins'
 
 import props from './mixins/props'
 import Path from './components/path'
