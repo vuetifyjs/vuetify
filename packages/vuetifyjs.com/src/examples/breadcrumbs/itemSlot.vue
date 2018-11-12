@@ -2,7 +2,7 @@
   <div>
     <v-breadcrumbs :items="items">
       <template slot="item" slot-scope="props">
-        <a :href="props.item.href">{{ props.item.text.toUpperCase() }}</a>
+        <a :href="props.item.href" :class="[props.item.disabled && 'disabled']">{{ props.item.text.toUpperCase() }}</a>
       </template>
     </v-breadcrumbs>
   </div>
@@ -31,3 +31,9 @@
     })
   }
 </script>
+
+<style lang="stylus" scoped>
+  .disabled
+    color: grey
+    pointer-events: none
+</style>
