@@ -3,6 +3,7 @@ import { PropValidator } from 'vue/types/options'
 
 import bar from './Bar'
 import trend from './Trend'
+import props from './mixins/props'
 
 const COMPONENTS = {
   bar,
@@ -28,6 +29,8 @@ export default Vue.extend({
   name: 'v-sparkline',
 
   functional: true,
+
+  $_wrapperFor: props,
 
   props: {
     type: {
