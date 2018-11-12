@@ -19,12 +19,12 @@ export default {
       default: null
     },
     events: {
-      type: [Array, Object, Function],
+      type: [Array, Function, Object],
       default: () => null
     },
     eventColor: {
-      type: [String, Function, Object],
-      default: 'warning'
+      type: [Array, Function, Object, String],
+      default: () => 'warning'
     },
     locale: {
       type: String,
@@ -98,30 +98,45 @@ export default {
         this.$createElement('div', {
           staticClass: 'v-btn__content'
         }, [this.formatter(value)]),
-        this.isEvent(value) ? this.genEvent(value) : null
+        this.genEvents(value)
       ])
     },
-    isEvent (date) {
+    /**
+     *
+     * @param {string} date
+     * @returns boolean|string|string[]
+     */
+    getEventData (date) {
       if (Array.isArray(this.events)) {
-        return this.events.indexOf(date) > -1
+        return this.events.includes(date)
       } else if (this.events instanceof Function) {
-        return this.events(date)
+        return this.events(date) || false
+      } else if (this.events) {
+        return this.events[date] || false
       } else {
         return false
       }
     },
-    genEvent (date) {
-      let eventColor
-      if (typeof this.eventColor === 'string') {
-        eventColor = this.eventColor
-      } else if (typeof this.eventColor === 'function') {
-        eventColor = this.eventColor(date)
-      } else {
-        eventColor = this.eventColor[date]
+    genEvents (date) {
+      let eventColors = this.getEventData(date)
+
+      if (eventColors === true) {
+        if (typeof this.eventColor === 'string') {
+          eventColors = this.eventColor
+        } else if (typeof this.eventColor === 'function') {
+          eventColors = this.eventColor(date)
+        } else if (Array.isArray(this.eventColor)) {
+          eventColors = this.eventColor
+        } else {
+          eventColors = this.eventColor[date]
+        }
       }
-      return this.$createElement('div', this.setBackgroundColor(eventColor || this.color || 'accent', {
-        staticClass: 'v-date-picker-table__event'
-      }))
+      if (!Array.isArray(eventColors)) eventColors = [eventColors]
+      eventColors = eventColors.filter(v => v)
+
+      return eventColors.length ? this.$createElement('div', {
+        staticClass: 'v-date-picker-table__events'
+      }, eventColors.map(color => this.$createElement('div', this.setBackgroundColor(color || this.color)))) : null
     },
     wheel (e) {
       e.preventDefault()
