@@ -60,8 +60,6 @@ theme(v-date-picker-table, "v-date-picker-table")
 
 .v-date-picker-table__event
   border-radius: 50%
-  bottom: 2px
-  content: ""
   display: block
   height: 8px
   left: 50%
@@ -69,3 +67,8 @@ theme(v-date-picker-table, "v-date-picker-table")
   transform: translateX(-4px)
   width: 8px
 
+.v-date-picker-table--date .v-date-picker-table__event
+  bottom: 2px
+
+.v-date-picker-table--month .v-date-picker-table__event
+  bottom: 3px
