@@ -157,7 +157,11 @@ export default {
       return this.selectedItems.length > 0
     },
     listData () {
+      const scopeId = this.$vnode && this.$vnode.context.$options._scopeId
       return {
+        attrs: scopeId ? {
+          [scopeId]: true
+        } : null,
         props: {
           action: this.multiple && !this.isHidingSelected,
           color: this.color,
