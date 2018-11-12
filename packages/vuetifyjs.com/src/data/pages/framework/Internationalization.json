@@ -6,8 +6,8 @@
       "type": "section",
       "children": [
         {
-          "type": "subheading",
-          "lang": "Generic.Pages.api"
+          "type": "api",
+          "value": ["internationalization"]
         }
       ]
     },

@@ -71,6 +71,8 @@
   import { getObjectValueByPath } from 'vuetify/es5/util/helpers'
 
   export default {
+    inject: ['namespace', 'page'],
+
     props: {
       target: {
         type: String,
@@ -83,10 +85,6 @@
       items: {
         type: Array,
         default: () => ([])
-      },
-      namespace: {
-        type: String,
-        default: ''
       },
       search: {
         type: String,
@@ -168,8 +166,8 @@
         let devPrepend = ''
         const camelSource = camel(item.source)
 
-        const specialLevelDesc = `${this.namespace}.${this.type}.${this.target}['${name}']`
-        const selfDesc = `${this.namespace}.${this.type}['${name}']`
+        const specialLevelDesc = `${this.namespace}.${this.page}.${this.type}['${name}']`
+        const selfDesc = `${this.namespace}.${this.page}['${name}']`
         const mixinDesc = `Mixins.${camelSource}.${this.type}['${name}']`
         const componentDesc = `Components.${componentNameMap[item.source]}.${this.type}['${name}']`
         const genericDesc = `Generic.${capitalize(this.type)}['${name}']`
@@ -252,11 +250,11 @@
       margin-bottom: 0
 
     .mono
-      font-family: monospace
+      font-family: 'Roboto Mono', monospace
       font-weight: 900
 
     .header
-      font-family: monospace
+      font-family: 'Roboto Mono', monospace
       font-size: 0.8rem
 
     .justify
