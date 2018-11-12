@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VTimeline.js should match snapshot 1`] = `
+
+<div class="v-timeline theme--light">
+</div>
+
+`;

@@ -1,0 +1,55 @@
+{
+  "props": {
+    "v-autocomplete": {
+      "activator": true,
+      "closeOnClick": true,
+      "closeOnContentClick": true,
+      "combobox": true,
+      "delimiters": true,
+      "nudgeBottom": true,
+      "nudgeLeft": true,
+      "nudgeRight": true,
+      "nudgeTop": true,
+      "nudgeWidth": true,
+      "offsetX": true,
+      "offsetY": true,
+      "transition": true
+    },
+    "v-combobox": {
+      "activator": true,
+      "closeOnClick": true,
+      "closeOnContentClick": true,
+      "combobox": true,
+      "delimiters": true,
+      "nudgeBottom": true,
+      "nudgeLeft": true,
+      "nudgeRight": true,
+      "nudgeTop": true,
+      "nudgeWidth": true,
+      "offsetX": true,
+      "offsetY": true,
+      "transition": true
+    },
+    "v-overflow-btn": {
+      "activator": true,
+      "closeOnClick": true,
+      "closeOnContentClick": true,
+      "combobox": true,
+      "delimiters": true,
+      "nudgeBottom": true,
+      "nudgeLeft": true,
+      "nudgeRight": true,
+      "nudgeTop": true,
+      "nudgeWidth": true,
+      "offsetX": true,
+      "offsetY": true,
+      "transition": true
+    }
+  },
+  "functions": {
+    "v-autocomplete": {
+      "append-icon-cb": true,
+      "prepend-icon-cb": true
+    }
+  }
+}

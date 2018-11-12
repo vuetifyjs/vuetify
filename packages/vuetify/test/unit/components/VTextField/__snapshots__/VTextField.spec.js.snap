@@ -1,0 +1,240 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VTextField.js should apply theme to label, counter, messages and icons 1`] = `
+
+<div class="v-input v-text-field theme--light">
+  <div class="v-input__prepend-outer">
+    <div class="v-input__icon v-input__icon--prepend">
+      <i aria-hidden="true"
+         class="v-icon material-icons theme--light"
+      >
+        prepend
+      </i>
+    </div>
+  </div>
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-input__prepend-inner">
+        <div class="v-input__icon v-input__icon--prepend-inner">
+          <i aria-hidden="true"
+             class="v-icon prepend prepend-inner theme--light"
+          >
+          </i>
+        </div>
+      </div>
+      <div class="v-text-field__slot">
+        <label aria-hidden="true"
+               class="v-label theme--light"
+               style="left: 0px; position: absolute;"
+        >
+          foo
+        </label>
+        <input aria-label="foo"
+               type="text"
+        >
+      </div>
+      <div class="v-input__append-inner">
+        <div class="v-input__icon v-input__icon--append">
+          <i aria-hidden="true"
+             class="v-icon material-icons theme--light"
+          >
+            append
+          </i>
+        </div>
+      </div>
+    </div>
+    <div class="v-text-field__details">
+      <div class="v-messages theme--light">
+        <div class="v-messages__wrapper">
+          <div class="v-messages__message">
+            bar
+          </div>
+        </div>
+      </div>
+      <div class="v-counter theme--light">
+        0
+      </div>
+    </div>
+  </div>
+  <div class="v-input__append-outer">
+    <div class="v-input__icon v-input__icon--append-outer">
+      <i aria-hidden="true"
+         class="v-icon append append-outer theme--light"
+      >
+      </i>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VTextField.js should have prefix and suffix 1`] = `
+
+<div class="v-input v-text-field v-text-field--prefix theme--light">
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-text-field__slot">
+        <div class="v-text-field__prefix">
+          $
+        </div>
+        <input type="text">
+        <div class="v-text-field__suffix">
+          .com
+        </div>
+      </div>
+    </div>
+    <div class="v-text-field__details">
+      <div class="v-messages theme--light">
+        <div class="v-messages__wrapper">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VTextField.js should not display counter when set to false/undefined/null 1`] = `
+
+<div class="v-input v-text-field theme--light">
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-text-field__slot">
+        <input maxlength="50"
+               type="text"
+        >
+      </div>
+    </div>
+    <div class="v-text-field__details">
+      <div class="v-messages theme--light">
+        <div class="v-messages__wrapper">
+        </div>
+      </div>
+      <div class="v-counter theme--light">
+        0 / 50
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VTextField.js should not display counter when set to false/undefined/null 2`] = `
+
+<div class="v-input v-text-field theme--light">
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-text-field__slot">
+        <input maxlength="50"
+               type="text"
+        >
+      </div>
+    </div>
+    <div class="v-text-field__details">
+      <div class="v-messages theme--light">
+        <div class="v-messages__wrapper">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VTextField.js should render component and match snapshot 1`] = `
+
+<div class="v-input v-text-field theme--light">
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-text-field__slot">
+        <input type="text">
+      </div>
+    </div>
+    <div class="v-text-field__details">
+      <div class="v-messages theme--light">
+        <div class="v-messages__wrapper">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VTextField.js should render component with async loading and custom progress and match snapshot 1`] = `
+
+<div class="v-input v-text-field v-input--is-loading theme--light">
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-text-field__slot">
+        <input type="text">
+      </div>
+      <div role="progressbar"
+           aria-valuemin="0"
+           aria-valuemax="100"
+           class="v-progress-linear"
+           style="height: 7px;"
+      >
+        <div class="v-progress-linear__background orange"
+             style="height: 7px; opacity: 0.3; width: 100%;"
+        >
+        </div>
+        <div class="v-progress-linear__bar">
+          <div class="v-progress-linear__bar__indeterminate v-progress-linear__bar__indeterminate--active">
+            <div class="v-progress-linear__bar__indeterminate long orange">
+            </div>
+            <div class="v-progress-linear__bar__indeterminate short orange">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-text-field__details">
+      <div class="v-messages theme--light">
+        <div class="v-messages__wrapper">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VTextField.js should render component with async loading and match snapshot 1`] = `
+
+<div class="v-input v-text-field v-input--is-loading theme--light">
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-text-field__slot">
+        <input type="text">
+      </div>
+      <div role="progressbar"
+           aria-valuemin="0"
+           aria-valuemax="100"
+           class="v-progress-linear"
+           style="height: 2px;"
+      >
+        <div class="v-progress-linear__background primary"
+             style="height: 2px; opacity: 0.3; width: 100%;"
+        >
+        </div>
+        <div class="v-progress-linear__bar">
+          <div class="v-progress-linear__bar__indeterminate v-progress-linear__bar__indeterminate--active">
+            <div class="v-progress-linear__bar__indeterminate long primary">
+            </div>
+            <div class="v-progress-linear__bar__indeterminate short primary">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-text-field__details">
+      <div class="v-messages theme--light">
+        <div class="v-messages__wrapper">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;

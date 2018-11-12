@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": [
+      "dom",
+      "es2015"
+    ],
+    "module": "commonjs",
+    "strict": true,
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "vuetify": ["../../"]
+    }
+  },
+  "files": [
+    "../index.d.ts",
+    "../alacarte.d.ts",
+    "../lang.d.ts",
+    "../lib.d.ts",
+    "alacarte.ts",
+    "plugin.ts",
+    "global.ts",
+    "lib.ts"
+  ],
+  "compileOnSave": false
+}

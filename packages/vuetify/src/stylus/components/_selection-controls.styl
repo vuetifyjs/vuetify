@@ -1,0 +1,98 @@
+@import '../bootstrap'
+@import '../theme'
+
+/** Theme */
+selection-control($material)
+  &.v-input--is-disabled
+    .v-icon
+      // needed for helper override
+      color: $material.buttons.disabled !important
+
+v-selection-control-rtl()
+  .v-input--selection-controls__input
+    margin-right: 0
+    margin-left: 8px
+
+theme(selection-control, "v-input--selection-controls")
+rtl(v-selection-control-rtl, "v-input--selection-controls")
+
+.v-input--selection-controls
+  margin-top: $input-top-spacing
+  padding-top: 4px
+
+  .v-input__append-outer,
+  .v-input__prepend-outer
+    margin-top: 0
+    margin-bottom: 0
+
+  .v-input__control
+    flex-grow: 0
+    width: auto
+
+  &:not(.v-input--hide-details)
+    .v-input__slot
+      margin-bottom: 12px
+
+  &__input
+    color: inherit
+    display: inline-flex
+    flex: 0 0 auto
+    height: 24px
+    position: relative
+    margin-right: 8px
+    transition: .3s cubic-bezier(.25,.8,.25,1)
+    transition-property: color, transform
+    width: 24px
+    user-select: none
+
+    input
+      position: absolute
+      opacity: 0
+      width: 100%
+      height: 100%
+      cursor: pointer
+      user-select: none
+
+    // Sibling selector to avoid targeting v-radio-group's label
+    & + .v-label
+      cursor: pointer
+      user-select: none
+
+  &__ripple
+    border-radius: 50%
+    cursor: pointer
+    height: 34px
+    position: absolute
+    transition: inherit
+    width: 34px
+    left: -12px
+    top: calc(50% - 24px)
+    margin: 7px
+
+    &:before
+      border-radius: inherit
+      bottom: 0
+      content: ''
+      position: absolute
+      opacity: .2
+      left: 0
+      right: 0
+      top: 0
+      transform-origin: center center
+      transform: scale(0.2)
+      transition: inherit
+
+    .v-ripple__container
+      transform: scale(1.4)
+
+  &.v-input .v-label
+    align-items: center
+    display: inline-flex
+    top: 0
+    height: auto
+
+  &.v-input--is-focused,
+  .v-radio--is-focused
+    .v-input--selection-controls__ripple:before
+      background: currentColor
+      transform: scale(.8)

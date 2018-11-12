@@ -1,0 +1,476 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VTreeView.ts should load children when expanding 1`] = `
+
+<div class="v-treeview theme--light">
+  <div class="v-treeview-node">
+    <div class="v-treeview-node__root">
+      <i aria-hidden="true"
+         class="v-icon v-treeview-node__toggle v-icon--link material-icons theme--light"
+      >
+        arrow_drop_down
+      </i>
+      <div class="v-treeview-node__content">
+        <label class="v-treeview-node__label">
+          Root
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VTreeView.ts should load children when expanding 2`] = `
+
+<div class="v-treeview theme--light">
+  <div class="v-treeview-node">
+    <div class="v-treeview-node__root">
+      <i aria-hidden="true"
+         class="v-icon v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+      >
+        arrow_drop_down
+      </i>
+      <div class="v-treeview-node__content">
+        <label class="v-treeview-node__label">
+          Root
+        </label>
+      </div>
+    </div>
+    <div class="v-treeview-node__children">
+      <div class="v-treeview-node v-treeview-node--leaf">
+        <div class="v-treeview-node__root">
+          <div class="v-treeview-node__content">
+            <label class="v-treeview-node__label">
+              Child
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VTreeView.ts should load children when selecting, but not render 1`] = `
+
+<div class="v-treeview theme--light">
+  <div class="v-treeview-node">
+    <div class="v-treeview-node__root">
+      <i aria-hidden="true"
+         class="v-icon v-treeview-node__toggle v-icon--link material-icons theme--light"
+      >
+        arrow_drop_down
+      </i>
+      <i aria-hidden="true"
+         class="v-icon v-treeview-node__checkbox v-icon--link material-icons theme--light"
+      >
+        check_box_outline_blank
+      </i>
+      <div class="v-treeview-node__content">
+        <label class="v-treeview-node__label">
+          Root
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VTreeView.ts should load children when selecting, but not render 2`] = `
+
+<div class="v-treeview theme--light">
+  <div class="v-treeview-node v-treeview-node--selected">
+    <div class="v-treeview-node__root">
+      <i aria-hidden="true"
+         class="v-icon v-treeview-node__toggle v-icon--link material-icons theme--light"
+      >
+        arrow_drop_down
+      </i>
+      <i aria-hidden="true"
+         class="v-icon v-treeview-node__checkbox v-icon--link material-icons theme--light accent--text"
+      >
+        check_box
+      </i>
+      <div class="v-treeview-node__content">
+        <label class="v-treeview-node__label">
+          Root
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VTreeView.ts should open all children when using open-all prop 1`] = `
+
+<div class="v-treeview theme--light">
+  <div class="v-treeview-node">
+    <div class="v-treeview-node__root">
+      <i aria-hidden="true"
+         class="v-icon v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+      >
+        arrow_drop_down
+      </i>
+      <div class="v-treeview-node__content">
+        <label class="v-treeview-node__label">
+          Root
+        </label>
+      </div>
+    </div>
+    <div class="v-treeview-node__children">
+      <div class="v-treeview-node">
+        <div class="v-treeview-node__root">
+          <i aria-hidden="true"
+             class="v-icon v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+          >
+            arrow_drop_down
+          </i>
+          <div class="v-treeview-node__content">
+            <label class="v-treeview-node__label">
+              Child
+            </label>
+          </div>
+        </div>
+        <div class="v-treeview-node__children">
+          <div class="v-treeview-node v-treeview-node--leaf">
+            <div class="v-treeview-node__root">
+              <div class="v-treeview-node__content">
+                <label class="v-treeview-node__label">
+                  Grandchild
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="v-treeview-node v-treeview-node--leaf">
+        <div class="v-treeview-node__root">
+          <div class="v-treeview-node__content">
+            <label class="v-treeview-node__label">
+              Child
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VTreeView.ts should react to open changes 1`] = `
+
+<div class="v-treeview theme--light">
+  <div class="v-treeview-node">
+    <div class="v-treeview-node__root">
+      <i aria-hidden="true"
+         class="v-icon v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+      >
+        arrow_drop_down
+      </i>
+      <div class="v-treeview-node__content">
+        <label class="v-treeview-node__label">
+          Root
+        </label>
+      </div>
+    </div>
+    <div class="v-treeview-node__children">
+      <div class="v-treeview-node">
+        <div class="v-treeview-node__root">
+          <i aria-hidden="true"
+             class="v-icon v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+          >
+            arrow_drop_down
+          </i>
+          <div class="v-treeview-node__content">
+            <label class="v-treeview-node__label">
+              Child
+            </label>
+          </div>
+        </div>
+        <div class="v-treeview-node__children">
+          <div class="v-treeview-node v-treeview-node--leaf">
+            <div class="v-treeview-node__root">
+              <div class="v-treeview-node__content">
+                <label class="v-treeview-node__label">
+                  Grandchild
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="v-treeview-node v-treeview-node--leaf">
+        <div class="v-treeview-node__root">
+          <div class="v-treeview-node__content">
+            <label class="v-treeview-node__label">
+              Child
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VTreeView.ts should react to open changes 2`] = `
+
+<div class="v-treeview theme--light">
+  <div class="v-treeview-node">
+    <div class="v-treeview-node__root">
+      <i aria-hidden="true"
+         class="v-icon v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+      >
+        arrow_drop_down
+      </i>
+      <div class="v-treeview-node__content">
+        <label class="v-treeview-node__label">
+          Root
+        </label>
+      </div>
+    </div>
+    <div class="v-treeview-node__children">
+      <div class="v-treeview-node">
+        <div class="v-treeview-node__root">
+          <i aria-hidden="true"
+             class="v-icon v-treeview-node__toggle v-icon--link material-icons theme--light"
+          >
+            arrow_drop_down
+          </i>
+          <div class="v-treeview-node__content">
+            <label class="v-treeview-node__label">
+              Child
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="v-treeview-node v-treeview-node--leaf">
+        <div class="v-treeview-node__root">
+          <div class="v-treeview-node__content">
+            <label class="v-treeview-node__label">
+              Child
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VTreeView.ts should react to open changes 3`] = `
+
+<div class="v-treeview theme--light">
+  <div class="v-treeview-node">
+    <div class="v-treeview-node__root">
+      <i aria-hidden="true"
+         class="v-icon v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+      >
+        arrow_drop_down
+      </i>
+      <div class="v-treeview-node__content">
+        <label class="v-treeview-node__label">
+          Root
+        </label>
+      </div>
+    </div>
+    <div class="v-treeview-node__children">
+      <div class="v-treeview-node">
+        <div class="v-treeview-node__root">
+          <i aria-hidden="true"
+             class="v-icon v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+          >
+            arrow_drop_down
+          </i>
+          <div class="v-treeview-node__content">
+            <label class="v-treeview-node__label">
+              Child
+            </label>
+          </div>
+        </div>
+        <div class="v-treeview-node__children">
+          <div class="v-treeview-node v-treeview-node--leaf">
+            <div class="v-treeview-node__root">
+              <div class="v-treeview-node__content">
+                <label class="v-treeview-node__label">
+                  Grandchild
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="v-treeview-node v-treeview-node--leaf">
+        <div class="v-treeview-node__root">
+          <div class="v-treeview-node__content">
+            <label class="v-treeview-node__label">
+              Child
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VTreeView.ts should react to open changes 4`] = `
+
+<div class="v-treeview theme--light">
+  <div class="v-treeview-node">
+    <div class="v-treeview-node__root">
+      <i aria-hidden="true"
+         class="v-icon v-treeview-node__toggle v-icon--link material-icons theme--light"
+      >
+        arrow_drop_down
+      </i>
+      <div class="v-treeview-node__content">
+        <label class="v-treeview-node__label">
+          Root
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VTreeView.ts should render items 1`] = `
+
+<div class="v-treeview theme--light">
+  <div class="v-treeview-node">
+    <div class="v-treeview-node__root">
+      <i aria-hidden="true"
+         class="v-icon v-treeview-node__toggle v-icon--link material-icons theme--light"
+      >
+        arrow_drop_down
+      </i>
+      <div class="v-treeview-node__content">
+        <label class="v-treeview-node__label">
+          Root
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VTreeView.ts should select all descendants 1`] = `
+
+<div class="v-treeview theme--light">
+  <div class="v-treeview-node">
+    <div class="v-treeview-node__root">
+      <i aria-hidden="true"
+         class="v-icon v-treeview-node__toggle v-icon--link material-icons theme--light"
+      >
+        arrow_drop_down
+      </i>
+      <i aria-hidden="true"
+         class="v-icon v-treeview-node__checkbox v-icon--link material-icons theme--light"
+      >
+        check_box_outline_blank
+      </i>
+      <div class="v-treeview-node__content">
+        <label class="v-treeview-node__label">
+          Root
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VTreeView.ts should update selection when selected prop changes 1`] = `
+
+<div class="v-treeview theme--light">
+  <div class="v-treeview-node">
+    <div class="v-treeview-node__root">
+      <i aria-hidden="true"
+         class="v-icon v-treeview-node__toggle v-icon--link material-icons theme--light"
+      >
+        arrow_drop_down
+      </i>
+      <div class="v-treeview-node__content">
+        <label class="v-treeview-node__label">
+          Root
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VTreeView.ts should update selection when selected prop changes 2`] = `
+
+<div class="v-treeview theme--light">
+  <div class="v-treeview-node v-treeview-node--selected">
+    <div class="v-treeview-node__root">
+      <i aria-hidden="true"
+         class="v-icon v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+      >
+        arrow_drop_down
+      </i>
+      <div class="v-treeview-node__content">
+        <label class="v-treeview-node__label">
+          Root
+        </label>
+      </div>
+    </div>
+    <div class="v-treeview-node__children">
+      <div class="v-treeview-node v-treeview-node--leaf v-treeview-node--selected">
+        <div class="v-treeview-node__root">
+          <div class="v-treeview-node__content">
+            <label class="v-treeview-node__label">
+              Child
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VTreeView.ts should update selection when selected prop changes 3`] = `
+
+<div class="v-treeview theme--light">
+  <div class="v-treeview-node v-treeview-node--selected">
+    <div class="v-treeview-node__root">
+      <i aria-hidden="true"
+         class="v-icon v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+      >
+        arrow_drop_down
+      </i>
+      <div class="v-treeview-node__content">
+        <label class="v-treeview-node__label">
+          Root
+        </label>
+      </div>
+    </div>
+    <div class="v-treeview-node__children">
+      <div class="v-treeview-node v-treeview-node--leaf v-treeview-node--selected">
+        <div class="v-treeview-node__root">
+          <div class="v-treeview-node__content">
+            <label class="v-treeview-node__label">
+              Child
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
