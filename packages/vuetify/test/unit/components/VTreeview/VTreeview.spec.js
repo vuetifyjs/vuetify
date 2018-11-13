@@ -310,4 +310,37 @@ test('VTreeView.ts', ({ mount }) => {
 
     expect('[Vuetify] The prepend and append slots require a slot-scope attribute').toHaveBeenTipped()
   })
+
+  it('should not show expand icon when children is empty', () => {
+    const wrapper = mount(VTreeview, {
+      propsData: {
+        items: [
+          {
+            text: 'root',
+            children: []
+          }
+        ],
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.find('.v-treeview-node__toggle').length).toBe(0)
+  })
+
+  it('should show expand icon when children is empty and load-children prop used', () => {
+    const wrapper = mount(VTreeview, {
+      propsData: {
+        loadChildren: () => {},
+        items: [
+          {
+            text: 'root',
+            children: []
+          }
+        ],
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.find('.v-treeview-node__toggle').length).toBe(1)
+  })
 })
