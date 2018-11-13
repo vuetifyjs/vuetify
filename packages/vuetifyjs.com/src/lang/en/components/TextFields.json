@@ -13,7 +13,7 @@
     },
     "disabledAndReadonly": {
       "header": "Disabled and readonly",
-      "Desc": "Text fields can be `disabled` or `readonly`."
+      "desc": "Text fields can be `disabled` or `readonly`."
     },
     "icon": {
       "header": "Icons",
