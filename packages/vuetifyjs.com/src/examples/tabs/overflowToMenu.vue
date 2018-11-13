@@ -61,7 +61,7 @@
     <v-tabs-items v-model="currentItem">
       <v-tab-item
         v-for="item in items.concat(more)"
-        :id="'tab-' + item"
+        :value="'tab-' + item"
         :key="item"
       >
         <v-card flat>
