@@ -38,6 +38,15 @@ export function createRouter () {
             )
           },
           {
+            path: 'examples/layouts/:page',
+            name: 'Layouts',
+            props: true,
+            component: () => import(
+              /* webpackChunkName: "layouts" */
+              '@/views/Layouts.vue'
+            )
+          },
+          {
             path: ':namespace/:page',
             name: 'Documentation',
             props: route => ({

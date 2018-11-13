@@ -39,6 +39,9 @@
         {
           "type": "text",
           "lang": "appText"
+        },
+        {
+          "type": "doc-pre-defined-layouts"
         }
       ]
     }
