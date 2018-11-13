@@ -1,7 +1,6 @@
 {
   "header": "Typography",
   "headerText": "The typography of an application is just as important as its functionality. Vuetify.js uses the Material Design spec Roboto Font. Each heading size also has a corresponding helper class to style other elements the same.",
-  "examplesHeader": "Examples",
   "fontHeader": "Font sizes",
   "fontText": "Typography helper classes allow you to easily style text according to Material Design sizing.",
   "fonts": [
