@@ -44,15 +44,17 @@ const Vuetify: VuetifyPlugin = {
       watch: {
         rtl: {
           handler (value: boolean) {
-            if (typeof document !== 'undefined')
+            if (typeof document !== 'undefined') {
               document.documentElement!.dir = value ? 'rtl' : 'ltr'
+            }
           },
           immediate: true
         },
         'lang.current': {
           handler (value: string) {
-            if (value && typeof document !== 'undefined')
+            if (value && typeof document !== 'undefined') {
               document.documentElement!.lang = value
+            }
           },
           immediate: true
         }
