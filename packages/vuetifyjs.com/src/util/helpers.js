@@ -64,6 +64,7 @@ export function getComponent (type) {
     case 'markdown': return 'doc-markdown'
     case 'parameters': return 'doc-parameters'
     case 'section': return 'doc-section'
+    case 'supplemental': return 'doc-supplemental'
     case 'tree': return 'doc-tree'
     case 'usage': return 'doc-usage'
     default: return type
