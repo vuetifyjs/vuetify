@@ -1,0 +1,83 @@
+{
+    "title": "header",
+    "titleText": "headerText",
+    "children": [
+      {
+        "type": "section",
+        "children": [
+          {
+            "type": "subheading",
+            "lang": "fontHeader"
+          },
+          {
+            "type": "text",
+            "lang": "fontText"
+          },
+          {
+            "type": "markdown",
+            "lang": "fonts"
+          }
+        ]
+      },
+      {
+        "type": "section",
+        "children": [
+          {
+            "type": "subheading",
+            "lang": "weightsHeader"
+          },
+          {
+            "type": "text",
+            "lang": "weightsText"
+          },
+          {
+            "type": "markdown",
+            "lang": "weights"
+          },
+          {
+            "type": "text",
+            "lang": "italicText"
+          },
+          {
+            "type": "markdown",
+            "lang": "italic"
+          }
+        ]
+      },
+      {
+        "type": "section",
+        "children": [
+          {
+            "type": "subheading",
+            "lang": "transformHeader"
+          },
+          {
+            "type": "text",
+            "lang": "transformText"
+          },
+          {
+            "type": "markdown",
+            "lang": "transforms"
+          }
+        ]
+      },
+      {
+        "type": "section",
+        "children": [
+          {
+            "type": "subheading",
+            "lang": "wrapHeader"
+          },
+          {
+            "type": "text",
+            "lang": "wrapText"
+          },
+          {
+            "type": "markdown",
+            "lang": "wraps"
+          }
+        ]
+      }
+    ]
+  }
+  
