@@ -117,6 +117,11 @@ export const maskText = (text, masked, dontFillMaskBlanks) => {
     } else if (maskValidates(mask, char)) {
       newText += convert(mask, char)
       textIndex++
+    // Check if validation is failed
+    // and not end of text
+    } else if (textIndex < text.length) {
+      textIndex++
+      continue
     } else {
       return newText
     }
