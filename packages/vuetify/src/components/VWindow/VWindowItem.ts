@@ -9,10 +9,7 @@ import { factory as GroupableFactory } from '../../mixins/groupable'
 import Touch from '../../directives/touch'
 
 // Utilities
-import {
-  addOnceEventListener,
-  convertToUnit
-} from '../../util/helpers'
+import { convertToUnit } from '../../util/helpers'
 import { ExtractVue } from './../../util/mixins'
 import mixins from '../../util/mixins'
 
@@ -53,6 +50,7 @@ export default mixins<options & ExtractVue<[typeof Bootable]>>(
 
   data () {
     return {
+      done: null as null | (() => void),
       isActive: false,
       wasCancelled: false
     }
@@ -70,6 +68,14 @@ export default mixins<options & ExtractVue<[typeof Bootable]>>(
         ? this.reverseTransition || ''
         : this.windowGroup.computedTransition
     }
+  },
+
+  mounted () {
+    this.$el.addEventListener('transitionend', this.onTransitionEnd, false)
+  },
+
+  beforeDestroy () {
+    this.$el.removeEventListener('transitionend', this.onTransitionEnd, false)
   },
 
   methods: {
@@ -97,20 +103,24 @@ export default mixins<options & ExtractVue<[typeof Bootable]>>(
       this.wasCancelled = true
     },
     onEnter (el: HTMLElement, done: () => void) {
-      const isBooted = this.windowGroup.isBooted
-
-      if (isBooted) {
-        addOnceEventListener(el, 'transitionend', done)
-      }
+      this.done = done
 
       requestAnimationFrame(() => {
         this.windowGroup.internalHeight = convertToUnit(el.clientHeight)
-
-        // On initial render, there is no transition
-        // Vue leaves a `enter` transition class
-        // if done is called too fast
-        !isBooted && setTimeout(done, 100)
       })
+    },
+    onTransitionEnd (e: TransitionEvent) {
+      // This ensures we only call done
+      // when the element transform
+      // completes
+      if (
+        e.propertyName !== 'transform' ||
+        e.target !== this.$el ||
+        !this.done
+      ) return
+
+      this.done()
+      this.done = null
     }
   },
 
