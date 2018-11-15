@@ -228,7 +228,7 @@ We also have a list of [help wanted](https://github.com/vuetifyjs/vuetify/labels
 
 This project exists thanks to all the people who contribute.
 
-<a href="graphs/contributors"><img src="https://opencollective.com/vuetify/contributors.svg?width=890&button=false" /></a>
+<a href="https://github.com/vuetifyjs/vuetify/graphs/contributors"><img src="https://opencollective.com/vuetify/contributors.svg?width=890&button=false" /></a>
 
 ### Backers
 
