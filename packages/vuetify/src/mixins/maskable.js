@@ -135,6 +135,10 @@ export default {
     // re-created, ensure that the
     // caret location is correct
     setSelectionRange () {
+      if (this.$refs.input) {
+        const unmasked = this.unmaskText(this.$refs.input.value)
+        this.lazySelection += this.lazyValue.length - unmasked.length
+      }
       this.$nextTick(this.updateRange)
     },
     resetSelections (input) {

@@ -113,9 +113,7 @@ export default {
       },
       set (val) {
         if (this.mask) {
-          const oldlen = this.lazyValue ? this.lazyValue.length : 0
           this.lazyValue = this.unmaskText(this.maskText(this.unmaskText(val)))
-          oldlen !== this.lazyValue.length || (this.lazySelection -= 1)
           this.setSelectionRange()
         } else {
           this.lazyValue = val
