@@ -21,7 +21,7 @@
             </v-fab-transition>
           </v-toolbar>
           <v-card-text style="height: 300px;" class="grey lighten-5 text-xs-center">
-            <v-btn color="primary" @click.native="hidden = !hidden">
+            <v-btn color="primary" @click="hidden = !hidden">
               {{ hidden ? 'Show' : 'Hide' }}
             </v-btn>
           </v-card-text>
