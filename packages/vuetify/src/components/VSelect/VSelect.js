@@ -626,7 +626,7 @@ export default {
       // menu-index should toggled
       if (
         listTile &&
-        listTile.className.indexOf('v-list__tile--highlighted') > -1 &&
+        listTile.classList.includes('v-list__tile--highlighted') &&
         this.isMenuActive &&
         menuIndex > -1
       ) {
