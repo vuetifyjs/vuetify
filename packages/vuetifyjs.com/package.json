@@ -12,7 +12,7 @@
     "lint": "eslint --ext .js,.vue,.json src"
   },
   "engines": {
-    "node": ">=7.0 <10",
+    "node": ">=7.0",
     "npm": ">=4.0"
   },
   "dependencies": {
