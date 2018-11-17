@@ -44,7 +44,7 @@ export default {
     menuCanShow () {
       if (!this.isFocused) return false
 
-      return (this.displayedItemsCount > 0) ||
+      return this.hasDisplayedItems ||
         (!!this.$slots['no-data'] && !this.hideNoData)
     }
   },
