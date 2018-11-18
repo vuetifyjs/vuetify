@@ -48,7 +48,8 @@
       </v-flex>
       <v-flex xs6>
         <v-layout fill-height align-center>
-          <v-btn-toggle v-model="lineCap">
+          <v-subheader class="pl-0">Linecap</v-subheader>
+          <v-btn-toggle v-model="lineCap" mandatory>
             <v-btn flat value="butt">butt</v-btn>
             <v-btn flat value="round">round</v-btn>
             <v-btn flat value="square">square</v-btn>
@@ -65,10 +66,13 @@
         ></v-slider>
       </v-flex>
       <v-flex xs6>
-        <v-radio-group v-model="type" label="Type" row>
-          <v-radio value="trend" label="Trend"></v-radio>
-          <v-radio value="bar" label="Bar"></v-radio>
-        </v-radio-group>
+        <v-layout fill-height align-center>
+          <v-subheader class="pl-0">Type</v-subheader>
+          <v-btn-toggle v-model="type" mandatory>
+            <v-btn flat value="trend">Trend</v-btn>
+            <v-btn flat value="bar">Bar</v-btn>
+          </v-btn-toggle>
+        </v-layout>
       </v-flex>
       <v-flex xs6>
         <v-slider
