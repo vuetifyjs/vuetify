@@ -16,7 +16,7 @@ export default Vue.extend({
     'offsetX'
   ] as any as {
     id: Prop<string>
-    smooth: Prop<boolean>
+    smooth: Prop<boolean | number>
     boundary: Prop<Boundary>
     lineWidth: Prop<number>
     gradient: Prop<string[]>
@@ -28,7 +28,9 @@ export default Vue.extend({
 
   render (h): VNode {
     const { maxY } = this.boundary
-    const rounding = this.smooth ? 2 : Number(this.smooth)
+    const rounding = typeof this.smooth === 'number'
+      ? this.smooth
+      : this.smooth ? 2 : 0
 
     return h('clipPath', {
       attrs: {
