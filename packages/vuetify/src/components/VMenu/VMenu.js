@@ -163,10 +163,12 @@ export default Vue.extend({
     }
   },
 
-  mounted () {
-    if (this.activatorNode && this.activatorNode.elm) {
-      this.$el.parentNode.insertBefore(this.activatorNode.elm, this.$el)
-    }
+  beforeMount () {
+    this.$nextTick(() => {
+      if (this.activatorNode && this.activatorNode.elm) {
+        this.$el.parentNode.insertBefore(this.activatorNode.elm, this.$el)
+      }
+    })
   },
 
   methods: {

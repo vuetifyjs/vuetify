@@ -130,11 +130,10 @@ export default {
     }
   },
 
-  mounted () {
-    this.value && this.callActivate()
-    if (this.activatorNode && this.activatorNode.elm) {
-      this.$el.parentNode.insertBefore(this.activatorNode.elm, this.$el)
-    }
+  beforeMount () {
+    this.$nextTick(() => {
+      this.value && this.callActivate()
+    })
   },
 
   methods: {

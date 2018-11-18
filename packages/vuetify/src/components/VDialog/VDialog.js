@@ -102,12 +102,11 @@ export default {
     }
   },
 
-  mounted () {
-    this.isBooted = this.isActive
-    this.isActive && this.show()
-    if (this.activatorNode && this.activatorNode.elm) {
-      this.$el.parentNode.insertBefore(this.activatorNode.elm, this.$el)
-    }
+  beforeMount () {
+    this.$nextTick(() => {
+      this.isBooted = this.isActive
+      this.isActive && this.show()
+    })
   },
 
   beforeDestroy () {
