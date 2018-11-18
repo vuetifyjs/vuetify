@@ -38,7 +38,7 @@ import VMessages from '@/components/VMessages'
 import VNavigationDrawer from '@/components/VNavigationDrawer'
 import VOverflowBtn from '@/components/VOverflowBtn'
 import VPagination from '@/components/VPagination'
-import VPaper from '@/components/VPaper'
+import VSheet from '@/components/VSheet'
 import VParallax from '@/components/VParallax'
 import VPicker from '@/components/VPicker'
 import VProgressCircular from '@/components/VProgressCircular'
@@ -106,7 +106,7 @@ const components = {
   VNavigationDrawer,
   VOverflowBtn,
   VPagination,
-  VPaper,
+  VSheet,
   VParallax,
   VPicker,
   VProgressCircular,
