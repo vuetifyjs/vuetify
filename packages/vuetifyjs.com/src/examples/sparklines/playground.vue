@@ -5,6 +5,7 @@
       :type="type"
       :gradient="gradient"
       :smooth="radius || false"
+      :padding="padding"
       :line-width="width"
       :stroke-linecap="lineCap"
       auto-draw
@@ -40,8 +41,9 @@
           v-model="width"
           label="Width"
           min="0.1"
-          max="5"
+          max="50"
           step="0.1"
+          thumb-label
         ></v-slider>
       </v-flex>
       <v-flex xs6>
@@ -59,6 +61,22 @@
           label="Radius"
           min="0"
           max="25"
+          thumb-label
+        ></v-slider>
+      </v-flex>
+      <v-flex xs6>
+        <v-radio-group v-model="type" label="Type" row>
+          <v-radio value="trend" label="Trend"></v-radio>
+          <v-radio value="bar" label="Bar"></v-radio>
+        </v-radio-group>
+      </v-flex>
+      <v-flex xs6>
+        <v-slider
+          v-model="padding"
+          label="Padding"
+          min="0"
+          max="25"
+          thumb-label
         ></v-slider>
       </v-flex>
     </v-layout>
@@ -80,6 +98,7 @@
       type: 'trend',
       width: 2,
       radius: 10,
+      padding: 8,
       lineCap: 'round',
       gradient: gradients[5],
       data: [0, 2, 5, 9, 5, 10, 3, 5, 0, 0, 1, 8, 2, 9, 0],
