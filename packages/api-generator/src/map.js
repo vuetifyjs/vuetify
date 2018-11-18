@@ -691,9 +691,13 @@ module.exports = {
     slots: ['default']
   },
   'v-sparkline': {
-    props: {
-      type: "'trend' | 'bar'"
-    }
+    props: [
+      {
+        name: 'type',
+        type: "'trend' | 'bar'",
+        default: "'trend'"
+      }
+    ]
   },
   'v-select': VSelect,
   'v-slider': {
