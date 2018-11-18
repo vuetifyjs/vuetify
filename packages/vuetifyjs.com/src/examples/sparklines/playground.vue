@@ -41,7 +41,7 @@
           v-model="width"
           label="Width"
           min="0.1"
-          max="50"
+          max="10"
           step="0.1"
           thumb-label
         ></v-slider>
