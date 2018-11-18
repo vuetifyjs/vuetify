@@ -170,6 +170,8 @@ export default {
       this.$emit('keydown', e)
     },
     genActivator () {
+      if (!this.$slots.activator && !this.$scopedSlots.activator) return null
+
       const listeners = {
         click: e => {
           e.stopPropagation()
