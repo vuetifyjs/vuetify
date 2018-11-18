@@ -141,7 +141,7 @@ export default [
       { name: 'progress', title: 'Progress' },
       { name: 'ratings', title: 'Ratings' },
       { name: 'snackbars', title: 'Snackbars' },
-      { name: 'sparklines', title: 'Sparklines' },
+      { name: 'sparklines', title: 'Sparklines', badge: 'new' },
       { name: 'steppers', title: 'Steppers' },
       { name: 'subheaders', title: 'Subheaders' },
       { name: 'tabs', title: 'Tabs' },
