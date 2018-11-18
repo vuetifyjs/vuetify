@@ -4,6 +4,12 @@
       "textarea": "1.1"
     },
     "v-select": {
+      "autocomplete": "1.1",
+      "combobox": "1.1",
+      "tags": "1.1",
+      "editable": "1.1",
+      "overflow": "1.1",
+      "segmented": "1.1",
       "multi-line": "1.1"
     },
     "v-breadcrumbs": {

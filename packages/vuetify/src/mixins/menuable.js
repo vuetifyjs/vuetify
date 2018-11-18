@@ -201,7 +201,7 @@ export default Vue.extend({
 
       if (left < 0) left = 12
 
-      return left
+      return left + this.getOffsetLeft()
     },
     calcYOverflow (top) {
       const documentHeight = this.getInnerHeight()
@@ -287,6 +287,12 @@ export default Vue.extend({
       if (!this.hasWindow) return 0
 
       return window.innerWidth
+    },
+    getOffsetLeft () {
+      if (!this.hasWindow) return 0
+
+      return window.pageXOffset ||
+        document.documentElement.scrollLeft
     },
     getOffsetTop () {
       if (!this.hasWindow) return 0

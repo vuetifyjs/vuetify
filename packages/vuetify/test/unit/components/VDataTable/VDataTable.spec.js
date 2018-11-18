@@ -427,4 +427,33 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
 
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
+
+  it('should support setting item-key using nested values', async () => {
+    const data = dataTableNestedTestData()
+
+    const vm = new Vue()
+    const component = Vue.component('test', {
+      render (h) {
+        return h(VDataTable, {
+          props: data.propsData,
+          scopedSlots: {
+            items: props => {
+              return [vm.$createElement('td', [props.item.nested.value.name])]
+            }
+          }
+        })
+      }
+    })
+    const wrapper = mount(component)
+
+    const table = wrapper.vm.$children[0]
+    table.genTR = jest.fn()
+    table.genTBody()
+    
+    expect(table.genTR.mock.calls.every(([ node, attrs ], i) => {
+      return (attrs.key === data.propsData.items[i].nested.value.id)
+    })).toBe(true)
+
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
 })
