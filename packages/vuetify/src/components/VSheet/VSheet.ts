@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_paper.styl'
+import '../../stylus/components/_sheet.styl'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
@@ -20,7 +20,7 @@ export default mixins(
   Measurable,
   Themeable
 ).extend({
-  name: 'v-paper',
+  name: 'v-sheet',
 
   props: {
     tag: {
@@ -33,8 +33,8 @@ export default mixins(
   computed: {
     classes (): object {
       return {
-        'v-paper': true,
-        'v-paper--tile': this.tile,
+        'v-sheet': true,
+        'v-sheet--tile': this.tile,
         ...this.themeClasses,
         ...this.elevationClasses
       }
