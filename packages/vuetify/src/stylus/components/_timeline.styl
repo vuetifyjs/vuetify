@@ -22,7 +22,7 @@ timeline-dots($dot-size, $inner-dot-size, $inner-dot-margin)
 
   .v-timeline-item__inner-dot
     height: $inner-dot-size
-    margin:$inner-dot-margin
+    margin: $inner-dot-margin
     width: $inner-dot-size
 
 .v-timeline-item
@@ -96,20 +96,20 @@ timeline-dots($dot-size, $inner-dot-size, $inner-dot-margin)
     flex: 1 1 100%
     max-width: calc(50% - 48px)
 
-  .v-card
-    &:before, &:after
-      content: ''
-      position: absolute
-      border-top: $timeline-wedge-size solid transparent
-      border-bottom: $timeline-wedge-size solid transparent
-      border-right: $timeline-wedge-size solid black
-      top: 'calc(50% - %s)' % $timeline-wedge-size
+    > .v-card
+      &:before, &:after
+        content: ''
+        position: absolute
+        border-top: $timeline-wedge-size solid transparent
+        border-bottom: $timeline-wedge-size solid transparent
+        border-right: $timeline-wedge-size solid black
+        top: 'calc(50% - %s)' % $timeline-wedge-size
 
-    &:after
-      border-right-color: inherit
+      &:after
+        border-right-color: inherit
 
-    &:before
-      top: 'calc(50% - %s + 2px)' % $timeline-wedge-size
+      &:before
+        top: 'calc(50% - %s + 2px)' % $timeline-wedge-size
 
   &__opposite
     flex: 1 1 auto
