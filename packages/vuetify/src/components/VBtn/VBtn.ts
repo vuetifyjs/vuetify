@@ -18,6 +18,9 @@ import Routable from '../../mixins/routable'
 import Themeable from '../../mixins/themeable'
 import { factory as ToggleableFactory } from '../../mixins/toggleable'
 
+// Utilities
+import { getObjectValueByPath } from '../../util/helpers'
+
 export default mixins(
   Colorable,
   Routable,
@@ -92,6 +95,10 @@ export default mixins(
     }
   },
 
+  watch: {
+    '$route': 'onRouteChange'
+  },
+
   methods: {
     // Prevent focus to match md spec
     click (e: MouseEvent): void {
@@ -126,6 +133,17 @@ export default mixins(
       }
 
       return this.$createElement('span', { 'class': 'v-btn__loading' }, children)
+    },
+    onRouteChange () {
+      if (!this.to || !this.$refs.link) return
+
+      const path = `_vnode.data.class.${this.activeClass}`
+
+      this.$nextTick(() => {
+        if (getObjectValueByPath(this.$refs.link, path)) {
+          this.toggle()
+        }
+      })
     }
   },
 
@@ -140,6 +158,10 @@ export default mixins(
     data.attrs!.value = ['string', 'number'].includes(typeof this.value)
       ? this.value
       : JSON.stringify(this.value)
+
+    if (this.btnToggle) {
+      data.ref = 'link'
+    }
 
     return h(tag, setColor(this.color, data), children)
   }

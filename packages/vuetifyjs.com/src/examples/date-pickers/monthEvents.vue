@@ -6,14 +6,15 @@
         v-model="date1"
         :events="arrayEvents"
         event-color="green lighten-1"
+        type="month"
       ></v-date-picker>
     </v-flex>
     <v-flex xs12 sm6 class="my-3">
       <div class="subheading">Defined by function</div>
       <v-date-picker
         v-model="date2"
-        :event-color="date => date[9] % 2 ? 'red' : 'yellow'"
         :events="functionEvents"
+        type="month"
       ></v-date-picker>
     </v-flex>
   </v-layout>
@@ -23,24 +24,24 @@
   export default {
     data: () => ({
       arrayEvents: null,
-      date1: new Date().toISOString().substr(0, 10),
-      date2: new Date().toISOString().substr(0, 10)
+      date1: new Date().toISOString().substr(0, 7),
+      date2: new Date().toISOString().substr(0, 7)
     }),
 
     mounted () {
       this.arrayEvents = [...Array(6)].map(() => {
-        const day = Math.floor(Math.random() * 30)
+        const month = Math.floor(Math.random() * 12)
         const d = new Date()
-        d.setDate(day)
-        return d.toISOString().substr(0, 10)
+        d.setMonth(month)
+        return d.toISOString().substr(0, 7)
       })
     },
 
     methods: {
       functionEvents (date) {
-        const [,, day] = date.split('-')
-        if ([12, 17, 28].includes(parseInt(day, 10))) return true
-        if ([1, 19, 22].includes(parseInt(day, 10))) return ['red', '#00f']
+        const month = parseInt(date.split('-')[1], 10)
+        if ([1, 3, 7].includes(month)) return true
+        if ([2, 5, 12].includes(month)) return ['error', 'purple', 'rgba(0, 128, 0, 0.5)']
         return false
       }
     }

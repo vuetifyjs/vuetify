@@ -88,7 +88,7 @@ exports[`VExpansionPanelContent.js should toggle panel on header click 1`] = `
     </div>
   </div>
   <div class="v-expansion-panel__body expand-transition-enter expand-transition-enter-active"
-       style="overflow: hidden; height: 0px; display: block;"
+       style="overflow: hidden; height: 0px;"
   >
   </div>
 </li>
