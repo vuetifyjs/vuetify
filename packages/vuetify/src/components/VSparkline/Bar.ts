@@ -10,6 +10,13 @@ import { genPoints } from './helpers/core'
 export default mixins(props).extend({
   name: 'bar',
 
+  props: {
+    autoDrawDuration: {
+      type: Number,
+      default: 500
+    }
+  },
+
   render (h): VNode {
     if (!this.data || this.data.length < 2) return undefined as never
     const { width, height, padding, lineWidth } = this
