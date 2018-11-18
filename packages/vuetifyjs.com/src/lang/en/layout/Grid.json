@@ -70,20 +70,26 @@
     "justifySpaceAround": "Justify content to the space around.",
     "justifySpaceBetween": "Justify content to the space between.",
     "justifyStart": "Justify content to the start.",
-    "reverse": "Reverses the currently selected direction (column, row).",
-    "wrap": "Allows children to wrap within the container if the elements use more than 100%.",
     "v-container": {
       "grid-list-{xs through xl}": "Sets the gutter between grid list items ranging from 2px to 24px",
       "fluid": "Removes viewport size breakpoints"
     },
     "v-flex": {
-      "offset-(size)(1-12)": "offset-xs: extra small, offset-sm: small, offset-md: medium, offset-lg: large, offset-xl: extra large. Example: offset-xs3",
+      "alignSelfStart": "Apply `align-self: start`\n\n[MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/align-self)",
+      "alignSelfEnd": "Apply `align-self: end`\n\n[MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/align-self)",
+      "alignSelfCenter": "Apply `align-self: center`\n\n[MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/align-self)",
+      "alignSelfBaseline": "Apply `align-self: baseline`\n\n[MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/align-self)",
+      "grow": "Apply `flex-grow: 1`\n\n[MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-grow)",
+      "shrink": "Apply `flex-shrink: 1`\n\n[MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-shrink)",
+      "offset-(size)(0-12)": "offset-xs: extra small, offset-sm: small, offset-md: medium, offset-lg: large, offset-xl: extra large. Example: offset-xs3",
       "order-(size)(1-12)": "order-xs: extra small, order-sm: small, order-md: medium, order-lg: large, order-xl: extra large. Example: order-xs3",
       "(size)(1-12)": "xs: extra small, sm: small, md: medium, lg: large, xl: extra large - 1 through 12"
     },
     "v-layout": {
       "row": "Sets flex direction to row",
-      "column": "Sets flex direction to column"
+      "column": "Sets flex direction to column",
+      "reverse": "Reverses the currently selected direction (column, row).",
+      "wrap": "Allows children to wrap within the container if the elements use more than 100%."
     }
   }
 }

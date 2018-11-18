@@ -2,7 +2,6 @@
   <v-data-table
     :headers="headers"
     :items="desserts"
-    hide-actions
     class="elevation-1"
   >
     <template slot="items" slot-scope="props">
