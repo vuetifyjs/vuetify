@@ -9,7 +9,7 @@
     height="58"
     extension-height="48"
   >
-    <v-toolbar-side-icon @click="toggleDrawer" />
+    <v-toolbar-side-icon v-if="!hideSideIcon" @click="toggleDrawer" />
 
     <router-link
       :to="{ name: 'home/Home' }"
@@ -207,6 +207,8 @@
   import languages from '@/data/i18n/languages.json'
 
   export default {
+    name: 'CoreToolbar',
+
     data: vm => ({
       ecosystems: vm.$t('Vuetify.AppToolbar.ecosystems'),
       supports: vm.$t('Vuetify.AppToolbar.supports'),
@@ -220,6 +222,9 @@
       ]),
       currentLanguage () {
         return this.languages.find(l => l.locale === this.$i18n.locale)
+      },
+      hideSideIcon () {
+        return this.$route.name === 'home/Home'
       }
     },
 
