@@ -15,7 +15,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subheading",
+          "type": "heading",
           "lang": "gettingStarted"
         },
         {
@@ -36,7 +36,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subheading",
+          "type": "heading",
           "lang": "createTranslation"
         },
         {
@@ -53,7 +53,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subheading",
+          "type": "heading",
           "lang": "customComponents"
         },
         {
@@ -70,7 +70,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subheading",
+          "type": "heading",
           "lang": "vueI18nHeader"
         },
         {
@@ -91,7 +91,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subheading",
+          "type": "heading",
           "lang": "rtlHeader"
         },
         {

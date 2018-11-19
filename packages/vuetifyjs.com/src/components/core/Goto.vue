@@ -7,7 +7,7 @@
     <v-hover v-model="hover">
       <v-layout align-center>
         <slot />
-        <v-slide-x-reverse-transition mode="out-in">
+        <v-fade-transition hide-on-leave>
           <v-icon
             v-if="hover"
             color="primary"
@@ -16,7 +16,7 @@
           >
             mdi-pound
           </v-icon>
-        </v-slide-x-reverse-transition>
+        </v-fade-transition>
       </v-layout>
     </v-hover>
   </a>
@@ -24,15 +24,9 @@
 
 <script>
   export default {
-    props: {
-      id: {
-        type: String,
-        required: true
-      }
-    },
-
     data: () => ({
-      hover: false
+      hover: false,
+      id: ''
     }),
 
     methods: {

@@ -6,7 +6,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subheading",
+          "type": "heading",
           "lang": "themeGeneratorHeader"
         },
         {
@@ -19,7 +19,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subheading",
+          "type": "heading",
           "lang": "lightAndDarkHeader"
         },
         {
@@ -40,7 +40,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subheading",
+          "type": "heading",
           "lang": "customizingHeader"
         },
         {
@@ -113,7 +113,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subheading",
+          "type": "heading",
           "lang": "optionHeader"
         },
         {
@@ -150,7 +150,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subheading",
+          "type": "heading",
           "lang": "stylusHeader"
         },
         {
