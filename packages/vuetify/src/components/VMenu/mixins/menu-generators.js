@@ -14,11 +14,13 @@ export default {
         on: {}
       }
 
-      if (this.openOnHover) {
-        options.on['mouseenter'] = this.mouseEnterHandler
-        options.on['mouseleave'] = this.mouseLeaveHandler
-      } else if (this.openOnClick) {
-        options.on['click'] = this.activatorClickHandler
+      if (!this.disabled) {
+        if (this.openOnHover) {
+          options.on['mouseenter'] = this.mouseEnterHandler
+          options.on['mouseleave'] = this.mouseLeaveHandler
+        } else if (this.openOnClick) {
+          options.on['click'] = this.activatorClickHandler
+        }
       }
 
       return this.$createElement('div', options, this.$slots.activator)
