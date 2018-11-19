@@ -1,17 +1,19 @@
 <template>
   <div>
-    <v-container
-      fluid
-      pa-0
-    >
-      <hero />
+    <v-content>
+      <v-container
+        fluid
+        pa-0
+      >
+        <hero />
 
-      <feature />
+        <feature />
 
-      <sponsors />
+        <sponsors />
 
-      <made-with-vuetify />
-    </v-container>
+        <made-with-vuetify />
+      </v-container>
+    </v-content>
 
     <home-footer />
   </div>
