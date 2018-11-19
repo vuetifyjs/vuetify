@@ -6,7 +6,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subheading",
+          "type": "heading",
           "lang": "header2"
         },
         {
@@ -19,7 +19,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subheading",
+          "type": "heading",
           "lang": "importHeader"
         },
         {
@@ -54,7 +54,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subheading",
+          "type": "heading",
           "lang": "styleHeader"
         },
         {
@@ -84,7 +84,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subheading",
+          "type": "heading",
           "lang": "loaderHeader"
         },
         {
@@ -109,7 +109,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subheading",
+          "type": "heading",
           "lang": "loaderLimitationsHeader"
         },
         {
@@ -117,7 +117,7 @@
           "lang": "loaderLimitationsText1"
         },
         {
-          "type": "sub-subheading",
+          "type": "heading",
           "lang": "loaderLimitationsDynamicHeader"
         },
         {
@@ -141,7 +141,7 @@
           "value": "html_a_la_carte_dynamic_component"
         },
         {
-          "type": "sub-subheading",
+          "type": "heading",
           "lang": "loaderLimitationsFunctionalHeader"
         },
         {
@@ -149,7 +149,7 @@
           "lang": "loaderLimitationsFunctionalText1"
         },
         {
-          "type": "sub-subheading",
+          "type": "heading",
           "lang": "loaderLimitationsPugHeader"
         },
         {

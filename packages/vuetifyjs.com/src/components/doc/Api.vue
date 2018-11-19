@@ -1,6 +1,6 @@
 <template>
   <div>
-    <doc-subheading>Generic.Pages.api</doc-subheading>
+    <doc-heading>Generic.Pages.api</doc-heading>
     <v-card class="py-1">
       <doc-parameters
         :headers="headers[type]"

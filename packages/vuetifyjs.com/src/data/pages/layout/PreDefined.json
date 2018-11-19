@@ -11,7 +11,7 @@
           "value": "error"
         },
         {
-          "type": "subheading",
+          "type": "heading",
           "lang": "markupHeader"
         },
         {
@@ -33,7 +33,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subheading",
+          "type": "heading",
           "lang": "appHeader"
         },
         {

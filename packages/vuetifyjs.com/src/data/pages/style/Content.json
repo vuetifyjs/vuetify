@@ -6,7 +6,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subheading",
+          "type": "heading",
           "lang": "blockquoteHeader"
         },
         {
@@ -19,7 +19,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subheading",
+          "type": "heading",
           "lang": "paragraphsHeader"
         },
         {
@@ -32,7 +32,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subheading",
+          "type": "heading",
           "lang": "codeHeader"
         },
         {
@@ -45,7 +45,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subheading",
+          "type": "heading",
           "lang": "variablesHeader"
         },
         {
@@ -58,7 +58,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subheading",
+          "type": "heading",
           "lang": "userInputHeader"
         },
         {

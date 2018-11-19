@@ -6,7 +6,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subheading",
+          "type": "heading",
           "lang": "Generic.Pages.usage"
         },
         {
@@ -27,7 +27,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subheading",
+          "type": "heading",
           "lang": "installHeader"
         },
         {
@@ -35,7 +35,7 @@
           "lang": "installText1"
         },
         {
-          "type": "sub-subheading",
+          "type": "heading",
           "lang": "installMD"
         },
         {
@@ -63,7 +63,7 @@
           "value": "js_import_material_icons"
         },
         {
-          "type": "sub-subheading",
+          "type": "heading",
           "lang": "installMDI"
         },
         {
@@ -79,7 +79,7 @@
           "value": "js_import_mdi"
         },
         {
-          "type": "sub-subheading",
+          "type": "heading",
           "lang": "installFA"
         },
         {
@@ -107,7 +107,7 @@
           "value": "js_import_fa4"
         },
         {
-          "type": "sub-subheading",
+          "type": "heading",
           "lang": "installFA4"
         },
         {
@@ -140,7 +140,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subheading",
+          "type": "heading",
           "lang": "customIconsHeader"
         },
         {
@@ -165,7 +165,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subheading",
+          "type": "heading",
           "lang": "reusableHeader"
         },
         {
@@ -190,7 +190,7 @@
       "type": "section",
       "children": [
         {
-          "type": "subheading",
+          "type": "heading",
           "lang": "customComponentHeader"
         },
         {

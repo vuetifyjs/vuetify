@@ -6,7 +6,7 @@
         "type": "section",
         "children": [
           {
-            "type": "subheading",
+            "type": "heading",
             "lang": "fontHeader"
           },
           {
@@ -23,7 +23,7 @@
         "type": "section",
         "children": [
           {
-            "type": "subheading",
+            "type": "heading",
             "lang": "weightsHeader"
           },
           {
@@ -48,7 +48,7 @@
         "type": "section",
         "children": [
           {
-            "type": "subheading",
+            "type": "heading",
             "lang": "transformHeader"
           },
           {
@@ -65,7 +65,7 @@
         "type": "section",
         "children": [
           {
-            "type": "subheading",
+            "type": "heading",
             "lang": "wrapHeader"
           },
           {
@@ -80,4 +80,3 @@
       }
     ]
   }
-  
