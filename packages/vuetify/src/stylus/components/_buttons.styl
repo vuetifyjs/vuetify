@@ -12,7 +12,7 @@ button($material)
     .v-btn__loading
       color: $material.buttons.disabled !important
 
-    &:not(.v-btn--icon):not(.v-btn--flat)
+    &:not(.v-btn--icon):not(.v-btn--flat):not(.v-btn--outline)
       background-color: $material.buttons.focused !important
 
   &:not(.v-btn--icon):not(.v-btn--flat)
@@ -315,17 +315,6 @@ theme(button, "v-btn")
 
     &:after
       border-radius: 28px
-
-
-/** Button w/ directional Icon */
-.v-btn
-  .v-icon
-    &--right
-      margin-left: 16px
-
-    &--left
-      margin-right: 16px
-
 
 /** Themes */
 .v-btn:not(.v-btn--outline)
