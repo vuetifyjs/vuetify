@@ -3,6 +3,12 @@ node_js: '8'
 
 cache:
   yarn: true
+  directories:
+    - node_modules
+
+before_install:
+  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.12.1
+  - export PATH="$HOME/.yarn/bin:$PATH"
 
 install:
   - yarn --frozen-lockfile --non-interactive
@@ -12,37 +18,37 @@ stages:
     if: (tag IS blank) OR (type != push) OR (repo != vuetifyjs/vuetify)
   - name: deploy
     if: (tag IS present) AND (type = push) AND (repo = vuetifyjs/vuetify)
+  - name: publish-docs-live
+    if: (branch = master) AND (type = push) AND (repo = vuetifyjs/vuetify)
+  - name: publish-docs-next
+    if: (branch = dev) AND (type = push) AND (repo = vuetifyjs/vuetify)
 
 jobs:
   include:
     - stage: test
+      name: 'Lint and test'
       before_script:
-        - npm i codecov -g
+        - yarn global add codecov
       script:
         - yarn run lint
-        - yarn run test:coverage -i
+        - lerna run test:coverage -- -i
       after_script:
         - codecov
 
-    - stage: test
-      script: yarn run build
-
     - stage: deploy
       before_script:
-        - npm i codecov -g
+        - yarn global add codecov
       script:
-        - yarn run lint
-        - yarn run test:coverage -i && codecov
-        - yarn run build
+        - lerna run lint --scope vuetify
+        - lerna run test:coverage --scope vuetify -- -i && codecov
+        - lerna run build --scope vuetify
         - rm -rf release
         - mkdir -p release
-        - for file in ./dist/*; do cp "$file" "${file/dist\/vuetify/release/vuetify-${TRAVIS_TAG}}"; done
+        - for file in ./packages/vuetify/dist/*; do cp "$file" "${file/packages\/vuetify\/dist\/vuetify/release/vuetify-${TRAVIS_TAG}}"; done
         - zip -jr "release/vuetify-${TRAVIS_TAG}.zip" release/*
       deploy:
-        - provider: npm
-          email: "john.j.leider@gmail.com"
-          api_key: $NPM_API_KEY
-          tag: $(node ./build/parse-npm-tag.js ${TRAVIS_TAG})
+        - provider: script
+          script: bash scripts/deploy.sh
           skip_cleanup: true
           on:
             repo: vuetifyjs/vuetify
@@ -54,3 +60,19 @@ jobs:
           on:
             repo: vuetifyjs/vuetify
             tags: true
+
+    - stage: publish-docs-live
+      name: 'Publish docs - live'
+      before_script: yarn global add now
+      script:
+        - node scripts/set-now-alias.js vuetifyjs.com
+        - now --team=vuetifyjs --token=$NOW_TOKEN --npm
+        - now alias --team=vuetifyjs --token=$NOW_TOKEN
+
+    - stage: publish-docs-next
+      name: 'Publish docs - next'
+      before_script: yarn global add now
+      script:
+        - node scripts/set-now-alias.js next.vuetifyjs.com
+        - now --team=vuetifyjs --token=$NOW_TOKEN --npm
+        - now alias --team=vuetifyjs --token=$NOW_TOKEN

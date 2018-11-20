@@ -1,0 +1,87 @@
+@import '../bootstrap'
+
+.v-dialog
+  elevation(24)
+  border-radius: $card-border-radius
+  margin: 24px
+  overflow-y: auto
+  pointer-events: auto
+  transition: .3s $transition.fast-in-fast-out
+  width: 100%
+  z-index: inherit
+
+  &__content
+    align-items: center
+    display: flex
+    height: 100%
+    justify-content: center
+    left: 0
+    pointer-events: none
+    position: fixed
+    top: 0
+    transition: .2s $transition.fast-in-fast-out
+    width: 100%
+    z-index: 6
+    outline: none
+
+  &:not(.v-dialog--fullscreen)
+    max-height: 90%
+
+  &__activator
+    cursor: pointer
+
+    *
+      cursor: pointer
+
+    &--disabled
+      pointer-events: none
+
+  &__container
+    display: inline-block
+    vertical-align: middle
+
+  @keyframes animate-dialog
+    0%
+      transform: scale(1)
+
+    50%
+      transform: scale(1.03)
+
+    100%
+      transform: scale(1)
+
+  &--animated
+    animation-duration: .15s
+    animation-name: animate-dialog
+    animation-timing-function: $transition.fast-in-fast-out
+
+  &--fullscreen
+    border-radius: 0
+    margin 0
+    height 100%
+    position fixed
+    overflow-y: auto
+    top: 0
+    left 0
+
+    > .v-card
+      min-height 100%
+      min-width 100%
+      margin 0 !important
+      padding 0 !important
+
+  &--scrollable
+    display: flex
+
+    > .v-card
+      display: flex
+      flex: 1 1 100%
+      flex-direction: column
+
+      > .v-card__title
+      > .v-card__actions
+        flex: 1 0 auto
+
+      > .v-card__text
+        overflow-y: auto
+        backface-visibility: hidden

@@ -1,0 +1,27 @@
+{
+  "header": "Data iterator",
+  "headerText": "El componente `v-data-iterator` se utiliza para mostrar datos, y comparte la mayor parte de su funcionalidad con el componente `v-data-table`. Algunas características incluyen ordenamiento, búsqueda, paginación y selección.",
+  "examples": {
+    "simple": {
+      "header": "Simple",
+      "desc": "`v-data-iterator` te permite personalizar exactamente cómo quieres mostrar tus datos. En este ejemplo estamos usando un grid list con cards. Podemos usar la prop `content-tag` (junto con `content-class` y `content-props`) para especificar cómo se debería ver el componente que envuelve a los elementos de la lista."
+    },
+    "slots": {
+      "header": "Slots",
+      "desc": "El `v-data-iterator` tiene tanto un slot `header` como un `footer` para agregar contenido extra"
+    }
+  },
+  "props": {
+    "contentClass": "Aplica una clase personalizada al elemento que envuelve a loss elementos de la lista",
+    "contentProps": "Aplica props personalizadas al elemento que envuelve a los elementos de la lista",
+    "contentTag": "Especifica qué etiqueta debe ser utilizada por el elemento que envuelve a los elementos de la lista",
+    "nextIcon": "Mixins.DataIterable.props.nextIcon",
+    "prevIcon": "Mixins.DataIterable.props.prevIcon"
+  },
+  "slots": {
+    "header": "Define un encabezado por encima de los elementos"
+  },
+  "events": {
+    "update:pagination": "El evento de actualización `pagination.sync`"
+  }
+}

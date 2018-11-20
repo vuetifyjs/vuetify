@@ -1,0 +1,19 @@
+{
+  "presets": [
+    ["es2015", { "modules": false }],
+    ["stage-2"]
+  ],
+  "plugins": [
+    "transform-runtime",
+    "transform-async-to-generator",
+    "syntax-async-functions",
+    "transform-regenerator"
+  ],
+  "comments": true,
+  "env": {
+    "test": {
+      "presets": ["es2015", "stage-2"],
+      "plugins": ["istanbul"]
+    }
+  }
+}

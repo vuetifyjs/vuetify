@@ -1,0 +1,22 @@
+{
+  "header": "무엇이 다를까?",
+  "headerText": "",
+
+  "philosophies": [
+    {
+      "img": "/vuetify_semantic.svg",
+      "title": "시맨틱 툴킷"
+    },
+    {
+      "img": "/vuetify_sizes.svg",
+      "title": "지속적 업데이트"
+    },
+    {
+      "img": "/vuetify_cli.svg",
+      "title": "놀라운 지원"
+    }
+  ],
+  "designHeader": "디자인 원칙",
+  "communityHeader": "역동적 커뮤니티 (Vibrant community)",
+  "comparisonHeader": "다른 프레임웤들과 비교"
+}
