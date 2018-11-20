@@ -26,10 +26,7 @@ export default {
       type: [Array, Function, Object, String],
       default: () => 'warning'
     },
-    locale: {
-      type: String,
-      default: 'en-us'
-    },
+    locale: String,
     min: String,
     max: String,
     scrollable: Boolean,

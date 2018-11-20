@@ -17,10 +17,7 @@ export default {
       type: Function,
       default: null
     },
-    locale: {
-      type: String,
-      default: 'en-us'
-    },
+    locale: String,
     min: [Number, String],
     max: [Number, String],
     value: [Number, String]
@@ -34,7 +31,7 @@ export default {
 
   computed: {
     formatter () {
-      return this.format || createNativeLocaleFormatter(this.locale, { year: 'numeric', timeZone: 'UTC' }, { length: 4 })
+      return this.format || createNativeLocaleFormatter(this.locale || this.$vuetify.lang.current, { year: 'numeric', timeZone: 'UTC' }, { length: 4 })
     }
   },
 

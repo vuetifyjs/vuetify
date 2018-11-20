@@ -43,10 +43,7 @@ export default {
       type: Function,
       default: null
     },
-    locale: {
-      type: String,
-      default: 'en-us'
-    },
+    locale: String,
     max: String,
     min: String,
     // Function formatting month in the months table
@@ -162,7 +159,7 @@ export default {
     },
     formatters () {
       return {
-        year: this.yearFormat || createNativeLocaleFormatter(this.locale, { year: 'numeric', timeZone: 'UTC' }, { length: 4 }),
+        year: this.yearFormat || createNativeLocaleFormatter(this.locale || this.$vuetify.lang.current, { year: 'numeric', timeZone: 'UTC' }, { length: 4 }),
         titleDate: this.titleDateFormat || (this.multiple ? this.defaultTitleMultipleDateFormatter : this.defaultTitleDateFormatter)
       }
     },
@@ -180,7 +177,7 @@ export default {
         date: { weekday: 'short', month: 'short', day: 'numeric', timeZone: 'UTC' }
       }
 
-      const titleDateFormatter = createNativeLocaleFormatter(this.locale, titleFormats[this.type], {
+      const titleDateFormatter = createNativeLocaleFormatter(this.locale || this.$vuetify.lang.current, titleFormats[this.type], {
         start: 0,
         length: { date: 10, month: 7, year: 4 }[this.type]
       })

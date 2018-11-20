@@ -26,10 +26,7 @@ export default {
       type: Function,
       default: null
     },
-    locale: {
-      type: String,
-      default: 'en-us'
-    },
+    locale: String,
     min: String,
     max: String,
     nextIcon: {
@@ -57,9 +54,9 @@ export default {
       if (this.format) {
         return this.format
       } else if (String(this.value).split('-')[1]) {
-        return createNativeLocaleFormatter(this.locale, { month: 'long', year: 'numeric', timeZone: 'UTC' }, { length: 7 })
+        return createNativeLocaleFormatter(this.locale || this.$vuetify.lang.current, { month: 'long', year: 'numeric', timeZone: 'UTC' }, { length: 7 })
       } else {
-        return createNativeLocaleFormatter(this.locale, { year: 'numeric', timeZone: 'UTC' }, { length: 4 })
+        return createNativeLocaleFormatter(this.locale || this.$vuetify.lang.current, { year: 'numeric', timeZone: 'UTC' }, { length: 4 })
       }
     }
   },

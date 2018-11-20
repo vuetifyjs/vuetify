@@ -30,10 +30,10 @@ export default {
 
   computed: {
     formatter () {
-      return this.format || createNativeLocaleFormatter(this.locale, { day: 'numeric', timeZone: 'UTC' }, { start: 8, length: 2 })
+      return this.format || createNativeLocaleFormatter(this.locale || this.$vuetify.lang.current, { day: 'numeric', timeZone: 'UTC' }, { start: 8, length: 2 })
     },
     weekdayFormatter () {
-      return this.weekdayFormat || createNativeLocaleFormatter(this.locale, { weekday: 'narrow', timeZone: 'UTC' })
+      return this.weekdayFormat || createNativeLocaleFormatter(this.locale || this.$vuetify.lang.current, { weekday: 'narrow', timeZone: 'UTC' })
     },
     weekDays () {
       const first = parseInt(this.firstDayOfWeek, 10)
