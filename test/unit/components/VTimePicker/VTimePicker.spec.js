@@ -11,7 +11,7 @@ test('VTimePicker.js', ({ mount }) => {
     })
 
     await wrapper.vm.$nextTick()
-    expect(wrapper.vm.selecting).toBe(1)
+    expect(wrapper.vm.selectingHour).toBe(true)
     expect(wrapper.vm.inputHour).toBe(9)
     expect(wrapper.vm.inputMinute).toBe(12)
     expect(wrapper.html()).toMatchSnapshot()
@@ -162,7 +162,7 @@ test('VTimePicker.js', ({ mount }) => {
     clock.$emit('input', 8)
     expect(wrapper.vm.inputHour).toBe(8)
 
-    wrapper.vm.selecting = 2
+    wrapper.vm.selectingHour = false
     clock.$emit('input', 33)
     expect(wrapper.vm.inputHour).toBe(8)
     expect(wrapper.vm.inputMinute).toBe(33)
@@ -180,6 +180,10 @@ test('VTimePicker.js', ({ mount }) => {
     expect(wrapper.vm.inputMinute).toBe(35)
 
     wrapper.vm.setInputData(null)
+    expect(wrapper.vm.inputHour).toBe(null)
+    expect(wrapper.vm.inputMinute).toBe(null)
+    
+    wrapper.vm.setInputData('')
     expect(wrapper.vm.inputHour).toBe(null)
     expect(wrapper.vm.inputMinute).toBe(null)
 
@@ -212,7 +216,7 @@ test('VTimePicker.js', ({ mount }) => {
     expect(wrapper.vm.inputHour).toBe(15)
   })
 
-  it('should change selecting when hour/minute is selected', () => {
+  it('should change selectingHour when hour/minute is selected', () => {
     const wrapper = mount(VTimePicker, {
       propsData: {
         value: '01:23pm',
@@ -223,12 +227,12 @@ test('VTimePicker.js', ({ mount }) => {
     const clock = wrapper.vm.$refs.clock
 
     clock.$emit('change')
-    expect(wrapper.vm.selecting).toBe(2)
+    expect(wrapper.vm.selectingHour).toBe(false)
     clock.$emit('change')
-    expect(wrapper.vm.selecting).toBe(2)
+    expect(wrapper.vm.selectingHour).toBe(false)
   })
 
-  it('should change selecting when clicked in title', () => {
+  it('should change selectingHour when clicked in title', () => {
     const wrapper = mount(VTimePicker, {
       propsData: {
         value: '01:23pm',
@@ -238,11 +242,11 @@ test('VTimePicker.js', ({ mount }) => {
 
     const title = wrapper.vm.$refs.title
 
-    expect(wrapper.vm.selecting).toBe(1)
-    title.$emit('update:selecting', 2)
-    expect(wrapper.vm.selecting).toBe(2)
-    title.$emit('update:selecting', 3)
-    expect(wrapper.vm.selecting).toBe(3)
+    expect(wrapper.vm.selectingHour).toBe(true)
+    title.$emit('update:selectingHour', false)
+    expect(wrapper.vm.selectingHour).toBe(false)
+    title.$emit('update:selectingHour', true)
+    expect(wrapper.vm.selectingHour).toBe(true)
   })
 
   it('should change period when clicked in title', () => {

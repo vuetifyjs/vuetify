@@ -13,8 +13,6 @@ const rangeHours24 = createRange(24)
 const rangeHours12am = createRange(12)
 const rangeHours12pm = rangeHours12am.map(v => v + 12)
 const rangeMinutes = createRange(60)
-const rangeSeconds = createRange(60)
-const selectingTimes = { hour: 1, minute: 2, second: 3 }
 
 /* @vue/component */
 export default {
@@ -23,10 +21,8 @@ export default {
   mixins: [Picker],
 
   props: {
-    useSeconds: Boolean,
     allowedHours: Function,
     allowedMinutes: Function,
-    allowedSeconds: Function,
     format: {
       type: String,
       default: 'ampm',
@@ -45,37 +41,12 @@ export default {
     return {
       inputHour: null,
       inputMinute: null,
-      inputSecond: null,
       period: 'am',
-      selecting: selectingTimes.hour
+      selectingHour: true
     }
   },
 
   computed: {
-    selectingHour: {
-      get () {
-        return this.selecting === selectingTimes.hour
-      },
-      set (v) {
-        this.selecting = selectingTimes.hour
-      }
-    },
-    selectingMinute: {
-      get () {
-        return this.selecting === selectingTimes.minute
-      },
-      set (v) {
-        this.selecting = selectingTimes.minute
-      }
-    },
-    selectingSecond: {
-      get () {
-        return this.selecting === selectingTimes.second
-      },
-      set (v) {
-        this.selecting = selectingTimes.second
-      }
-    },
     isAllowedHourCb () {
       if (!this.min && !this.max) return this.allowedHours
 
@@ -107,26 +78,6 @@ export default {
           (!this.allowedMinutes || this.allowedMinutes(val))
       }
     },
-    isAllowedSecondCb () {
-      const isHourAllowed = !this.allowedHours || this.allowedHours(this.inputHour)
-      const isMinuteAllowed = !this.allowedMinutes || this.allowedMinutes(this.inputMinute)
-      if (!this.min && !this.max) {
-        return isHourAllowed && isMinuteAllowed ? this.allowedSeconds : () => false
-      }
-
-      const [minHour, minMinute, minSecond] = this.min ? this.min.split(':') : [0, 0, 0]
-      const [maxHour, maxMinute, maxSecond] = this.max ? this.max.split(':') : [23, 59, 59]
-      const minTime = minHour * 3600 + minMinute * 60 + (minSecond || 0) * 1
-      const maxTime = maxHour * 3600 + maxMinute * 60 + (maxSecond || 0) * 1
-
-      return val => {
-        const time = 3600 * this.inputHour + 60 * this.inputMinute + val
-        return time >= minTime &&
-          time <= maxTime &&
-          isHourAllowed && isMinuteAllowed &&
-          (!this.allowedSeconds || this.allowedSeconds(val))
-      }
-    },
     isAmPm () {
       return this.format === 'ampm'
     }
@@ -142,8 +93,8 @@ export default {
 
   methods: {
     emitValue () {
-      if (this.inputHour != null && this.inputMinute != null && (!this.useSeconds || this.inputSecond != null)) {
-        this.$emit('input', `${pad(this.inputHour)}:${pad(this.inputMinute)}` + (this.useSeconds ? `:${pad(this.inputSecond)}` : ''))
+      if (this.inputHour != null && this.inputMinute != null) {
+        this.$emit('input', `${pad(this.inputHour)}:${pad(this.inputMinute)}`)
       }
     },
     setPeriod (period) {
@@ -158,20 +109,17 @@ export default {
       if (value == null || value === '') {
         this.inputHour = null
         this.inputMinute = null
-        this.inputSecond = null
         return
       }
 
       if (value instanceof Date) {
         this.inputHour = value.getHours()
         this.inputMinute = value.getMinutes()
-        this.inputSecond = value.getSeconds()
       } else {
-        const [, hour, minute, , second, period] = value.trim().toLowerCase().match(/^(\d+):(\d+)(:)?(\d+)?([ap]m)?$/, '') || []
+        const [, hour, minute, , period] = value.trim().toLowerCase().match(/^(\d+):(\d+)(:\d+)?([ap]m)?$/, '') || []
 
         this.inputHour = period ? this.convert12to24(parseInt(hour, 10), period) : parseInt(hour, 10)
         this.inputMinute = parseInt(minute, 10)
-        this.inputSecond = parseInt(second || 0, 10)
       }
 
       this.period = this.inputHour < 12 ? 'am' : 'pm'
@@ -183,65 +131,51 @@ export default {
       return hour % 12 + (period === 'pm' ? 12 : 0)
     },
     onInput (value) {
-      if (this.selecting === selectingTimes.hour) {
+      if (this.selectingHour) {
         this.inputHour = this.isAmPm ? this.convert12to24(value, this.period) : value
-      } else if (this.selecting === selectingTimes.minute) {
-        this.inputMinute = value
       } else {
-        this.inputSecond = value
+        this.inputMinute = value
       }
       this.emitValue()
     },
     onChange () {
-      if (this.selecting === (this.useSeconds ? selectingTimes.second : selectingTimes.minute)) {
+      if (!this.selectingHour) {
         this.$emit('change', this.value)
-        // this.selecting = selectingTimes.hour
       } else {
-        this.selecting++
+        this.selectingHour = false
       }
     },
     firstAllowed (type, value) {
-      const allowedFn = type === 'hour' ? this.isAllowedHourCb : (type === 'minute' ? this.isAllowedMinuteCb : this.isAllowedSecondCb)
+      const allowedFn = type === 'hour' ? this.isAllowedHourCb : this.isAllowedMinuteCb
       if (!allowedFn) return value
 
       // TODO: clean up
       const range = type === 'minute'
         ? rangeMinutes
-        : (type === 'second'
-          ? rangeSeconds
-          : (this.isAmPm
-            ? (value < 12
-              ? rangeHours12am
-              : rangeHours12pm)
-            : rangeHours24))
+        : (this.isAmPm
+          ? (value < 12
+            ? rangeHours12am
+            : rangeHours12pm)
+          : rangeHours24)
       const first = range.find(v => allowedFn((v + value) % range.length + range[0]))
       return ((first || 0) + value) % range.length + range[0]
     },
     genClock () {
       return this.$createElement(VTimePickerClock, {
         props: {
-          allowedValues:
-            this.selecting === selectingTimes.hour
-              ? this.isAllowedHourCb
-              : (this.selecting === selectingTimes.minute
-                ? this.isAllowedMinuteCb
-                : this.isAllowedSecondCb),
+          allowedValues: this.selectingHour ? this.isAllowedHourCb : this.isAllowedMinuteCb,
           color: this.color,
           dark: this.dark,
-          double: this.selecting === selectingTimes.hour && !this.isAmPm,
-          format: this.selecting === selectingTimes.hour ? (this.isAmPm ? this.convert24to12 : val => val) : val => pad(val, 2),
+          double: this.selectingHour && !this.isAmPm,
+          format: this.selectingHour ? (this.isAmPm ? this.convert24to12 : val => val) : val => pad(val, 2),
           light: this.light,
-          max: this.selecting === selectingTimes.hour ? (this.isAmPm && this.period === 'am' ? 11 : 23) : 59,
-          min: this.selecting === selectingTimes.hour && this.isAmPm && this.period === 'pm' ? 12 : 0,
+          max: this.selectingHour ? (this.isAmPm && this.period === 'am' ? 11 : 23) : 59,
+          min: this.selectingHour && this.isAmPm && this.period === 'pm' ? 12 : 0,
           readonly: this.readonly,
           scrollable: this.scrollable,
           size: this.width - ((!this.fullWidth && this.landscape) ? 80 : 20),
-          step: this.selecting === selectingTimes.hour ? 1 : 5,
-          value: this.selecting === selectingTimes.hour
-            ? this.inputHour
-            : (this.selecting === selectingTimes.minute
-              ? this.inputMinute
-              : this.inputSecond)
+          step: this.selectingHour ? 1 : 5,
+          value: this.selectingHour ? this.inputHour : this.inputMinute
         },
         on: {
           input: this.onInput,
@@ -253,7 +187,7 @@ export default {
     genPickerBody () {
       return this.$createElement('div', {
         staticClass: 'v-time-picker-clock__container',
-        key: this.selecting
+        key: this.selectingHour
       }, [this.genClock()])
     },
     genPickerTitle () {
@@ -262,14 +196,12 @@ export default {
           ampm: this.isAmPm,
           hour: this.inputHour,
           minute: this.inputMinute,
-          second: this.inputSecond,
           period: this.period,
           readonly: this.readonly,
-          useSeconds: this.useSeconds,
-          selecting: this.selecting
+          selectingHour: this.selectingHour
         },
         on: {
-          'update:selecting': value => (this.selecting = value),
+          'update:selectingHour': value => (this.selectingHour = value),
           'update:period': this.setPeriod
         },
         ref: 'title',
