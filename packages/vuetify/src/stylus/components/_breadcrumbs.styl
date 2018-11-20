@@ -1,0 +1,44 @@
+﻿@import '../bootstrap'
+@import '../theme'
+
+v-breadcrumbs($material)
+  .v-breadcrumbs__divider, .v-breadcrumbs__item--disabled
+    color: $material.text.disabled
+
+theme(v-breadcrumbs, "v-breadcrumbs")
+
+.v-breadcrumbs
+  align-items: center
+  display: flex
+  flex-wrap: wrap
+  flex: $breadcrumbs-flex
+  list-style-type: none
+  margin: $breadcrumbs-margin
+  padding: $breadcrumbs-padding
+
+  li
+    align-items: center
+    display: inline-flex
+    font-size: $breadcrumbs-item-font-size
+
+    .v-icon
+      font-size: $breadcrumbs-item-large-font-size
+
+    &:nth-child(even)
+      padding: $breadcrumbs-even-child-padding
+
+  &--large
+    li
+      font-size: $breadcrumbs-item-large-font-size
+
+      .v-icon
+        font-size: $breadcrumbs-item-large-font-size
+
+  &__item
+    align-items: center
+    display: inline-flex
+    text-decoration: none
+    transition: $primary-transition
+
+    &--disabled
+      pointer-events: none

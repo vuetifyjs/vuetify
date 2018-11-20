@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VSelectList should display falsy items 1`] = `
+
+<div class="v-select-list v-card theme--light">
+  <div class="v-list theme--light">
+    <div>
+      <a class="v-list__tile v-list__tile--link theme--light">
+        <div class="v-list__tile__content">
+          <div class="v-list__tile__title">
+            0
+          </div>
+        </div>
+      </a>
+    </div>
+    <div>
+      <a class="v-list__tile v-list__tile--link theme--light">
+        <div class="v-list__tile__content">
+          <div class="v-list__tile__title">
+            null
+          </div>
+        </div>
+      </a>
+    </div>
+    <div>
+      <a class="v-list__tile v-list__tile--link theme--light">
+        <div class="v-list__tile__content">
+          <div class="v-list__tile__title">
+            false
+          </div>
+        </div>
+      </a>
+    </div>
+    <div>
+      <a class="v-list__tile v-list__tile--link theme--light">
+        <div class="v-list__tile__content">
+          <div class="v-list__tile__title">
+            undefined
+          </div>
+        </div>
+      </a>
+    </div>
+    <div>
+      <a class="v-list__tile v-list__tile--link theme--light">
+        <div class="v-list__tile__content">
+          <div class="v-list__tile__title">
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VSelectList should display no-data-text when item slot is provided 1`] = `
+
+<div class="v-select-list v-card theme--light">
+  <div class="v-list theme--light">
+    <div>
+      <div class="v-list__tile theme--light">
+        <div class="v-list__tile__content">
+          <div class="v-list__tile__title">
+            this is ok
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VSelectList should generate children 1`] = `
+
+<div class="v-select-list v-card theme--light">
+  <div class="v-list theme--light">
+    <div class="v-subheader theme--light">
+      true
+    </div>
+    <hr class="v-divider theme--light">
+    <div>
+      <a class="v-list__tile v-list__tile--link theme--light">
+        <div class="v-list__tile__content">
+          <div class="v-list__tile__title">
+            foo
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+`;

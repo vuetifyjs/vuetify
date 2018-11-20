@@ -1,0 +1,129 @@
+@import '../bootstrap'
+@import '../theme'
+
+/* Theme */
+v-datatable($material)
+  thead
+    th.column.sortable
+      .v-icon
+        color: rgba($material.fg-color, $material.disabledORhints-text-percent)
+
+      &:hover
+        color: rgba($material.fg-color, $material.primary-text-percent)
+
+      &.active
+        color: rgba($material.fg-color, $material.primary-text-percent)
+
+        .v-icon
+          color: rgba($material.fg-color, $material.primary-text-percent)
+
+  .v-datatable__actions
+    background-color: $material.cards
+    color: rgba($material.fg-color, $material.secondary-text-percent)
+    border-top: 1px solid rgba($material.fg-color, $material.divider-percent)
+
+theme(v-datatable, "v-datatable")
+
+.v-datatable
+  .v-input--selection-controls
+    margin: 0
+    padding: 0
+
+  thead
+    th.column.sortable
+      cursor: pointer
+      outline: 0
+
+      .v-icon
+        font-size: 16px
+        display: inline-block
+        opacity: 0
+        transition: .3s $transition.swing
+
+      &:focus,
+      &:hover
+        .v-icon
+          opacity: .6
+
+      &.active
+        transform: none
+
+        .v-icon
+          opacity: 1
+
+        &.desc
+          .v-icon
+            transform: rotate(-180deg)
+
+/** Actions */
+.v-datatable__actions
+  display: flex
+  justify-content: flex-end
+  align-items: center
+  font-size: 12px
+  flex-wrap: wrap-reverse
+
+  .v-btn
+    color: inherit
+
+    &:last-of-type
+      margin-left: 14px
+
+  &__range-controls
+    display: flex
+    align-items: center
+    min-height: 48px
+
+  &__pagination
+    display: block
+    text-align: center
+    margin: 0 32px 0 24px
+
+  &__select
+    display: flex
+    align-items: center
+    justify-content: flex-end
+    margin-right: 14px
+    white-space: nowrap
+
+    .v-select
+      flex: 0 1 0
+      margin: 13px 0 13px 34px
+      padding: 0
+      position: initial
+
+    .v-select__selections
+      flex-wrap: nowrap
+
+      .v-select__selection--comma
+        font-size: 12px
+
+.v-datatable__progress
+  height: auto !important
+
+  tr, td, th
+    height: auto !important
+
+  th
+    padding: 0 !important
+
+    .v-progress-linear
+      margin: 0
+
+.v-datatable__expand
+  &-row
+    border: none !important
+
+  &-col
+    padding: 0 !important
+    height: 0px !important
+
+    &--expanded
+      border-bottom: 1px solid rgba(0,0,0,0.12)
+
+  &-content
+    transition: height $primary-transition
+
+    > .card
+      border-radius: 0
+      box-shadow: none

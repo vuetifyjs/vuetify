@@ -1,0 +1,31 @@
+{
+  "header": "Badge (insignia)",
+  "headerText": "El componente `v-badge` puede envolver cualquier tipo de contenido para resaltar información al usuario o sólo para llamar su atención a un elemento específico.",
+  "examples": {
+    "character": {
+      "header": "Caracter",
+      "desc": "Cualquier elemento puede ser utilizado con una insignia."
+    },
+    "overlap": {
+      "header": "Traslape",
+      "desc": "La insignia traslapará su contenido cuando se utilice la prop `overlap`"
+    },
+    "inline": {
+      "header": "En línea",
+      "desc": "Las insignias pueden ser colocadas en línea con el texto."
+    },
+    "icon": {
+      "header": "Ícono",
+      "desc": "La insignia puede utilizar cualquiera de los íconos soportados actualmente."
+    },
+    "visibility": {
+      "header": "Visibilidad",
+      "desc": "La visibilidad de las insignias puede ser controlada usando `v-model`."
+    }
+  },
+  "props": {
+    "bottom": "Mixins.Positionable.props.bottom",
+    "left": "Mixins.Positionable.props.left",
+    "transition": "Mixins.Transitionable.props.transition"
+  }
+}

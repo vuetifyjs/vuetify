@@ -1,0 +1,9 @@
+{
+  "props": {
+    "large": "Makes the icon large **(36px)**",
+    "medium": "Makes the icon medium **(28px)**",
+    "size": "Specifies a custom font size for the icon",
+    "small": "Makes the icon small **(16px)**",
+    "xLarge": "Makes the icon extra large **(40px)**"
+  }
+}

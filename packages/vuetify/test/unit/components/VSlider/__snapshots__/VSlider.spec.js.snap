@@ -1,0 +1,664 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VSlider.vue should change track styles in rtl 1`] = `
+
+<div class="v-input v-input--slider theme--light">
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-slider">
+        <input role="slider"
+               value="0"
+               readonly="readonly"
+               aria-readonly="false"
+               aria-valuemin="0"
+               aria-valuemax="100"
+               aria-valuenow="0"
+        >
+        <div class="v-slider__track__container">
+          <div class="v-slider__track"
+               style="left: 7px; width: 100%;"
+          >
+          </div>
+          <div class="v-slider__track-fill primary"
+               style="left: 0px; width: 0%;"
+          >
+          </div>
+        </div>
+        <div class="v-slider__thumb-container"
+             style="left: 0%;"
+        >
+          <div class="v-slider__thumb">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-messages theme--light">
+      <div class="v-messages__wrapper">
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VSlider.vue should change track styles in rtl 2`] = `
+
+<div class="v-input v-input--slider v-input--is-label-active v-input--is-dirty theme--light">
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-slider">
+        <input role="slider"
+               value="50"
+               readonly="readonly"
+               aria-readonly="false"
+               aria-valuemin="0"
+               aria-valuemax="100"
+               aria-valuenow="50"
+        >
+        <div class="v-slider__track__container">
+          <div class="v-slider__track"
+               style="left: 0px; width: 100%;"
+          >
+          </div>
+          <div class="v-slider__track-fill primary"
+               style="left: 0px; width: 50%;"
+          >
+          </div>
+        </div>
+        <div class="v-slider__thumb-container primary--text"
+             style="left: 50%;"
+        >
+          <div class="v-slider__thumb primary">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-messages theme--light">
+      <div class="v-messages__wrapper">
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VSlider.vue should change track styles in rtl 3`] = `
+
+<div class="v-input v-input--slider v-input--is-label-active v-input--is-dirty v-input--is-disabled theme--light">
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-slider">
+        <input role="slider"
+               value="50"
+               readonly="readonly"
+               aria-readonly="false"
+               aria-valuemin="0"
+               aria-valuemax="100"
+               aria-valuenow="50"
+               tabindex="-1"
+        >
+        <div class="v-slider__track__container">
+          <div class="v-slider__track"
+               style="left: 0px; width: 100%;"
+          >
+          </div>
+          <div class="v-slider__track-fill"
+               style="left: 0px; width: 50%;"
+          >
+          </div>
+        </div>
+        <div class="v-slider__thumb-container"
+             style="left: 50%;"
+        >
+          <div class="v-slider__thumb">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-messages theme--light">
+      <div class="v-messages__wrapper">
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VSlider.vue should change track styles in rtl 4`] = `
+
+<div class="v-input v-input--slider theme--light">
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-slider">
+        <input role="slider"
+               value="0"
+               readonly="readonly"
+               aria-readonly="false"
+               aria-valuemin="0"
+               aria-valuemax="100"
+               aria-valuenow="0"
+        >
+        <div class="v-slider__track__container">
+          <div class="v-slider__track"
+               style="left: 0px; width: 100%; right: 7px;"
+          >
+          </div>
+          <div class="v-slider__track-fill primary"
+               style="left: 0px; width: 0%; right: 0px;"
+          >
+          </div>
+        </div>
+        <div class="v-slider__thumb-container"
+             style="left: 100%;"
+        >
+          <div class="v-slider__thumb">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-messages theme--light">
+      <div class="v-messages__wrapper">
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VSlider.vue should change track styles in rtl 5`] = `
+
+<div class="v-input v-input--slider v-input--is-label-active v-input--is-dirty theme--light">
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-slider">
+        <input role="slider"
+               value="50"
+               readonly="readonly"
+               aria-readonly="false"
+               aria-valuemin="0"
+               aria-valuemax="100"
+               aria-valuenow="50"
+        >
+        <div class="v-slider__track__container">
+          <div class="v-slider__track"
+               style="left: 0px; width: 100%; right: 0px;"
+          >
+          </div>
+          <div class="v-slider__track-fill primary"
+               style="left: 0px; width: 50%; right: 0px;"
+          >
+          </div>
+        </div>
+        <div class="v-slider__thumb-container primary--text"
+             style="left: 50%;"
+        >
+          <div class="v-slider__thumb primary">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-messages theme--light">
+      <div class="v-messages__wrapper">
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VSlider.vue should change track styles in rtl 6`] = `
+
+<div class="v-input v-input--slider v-input--is-label-active v-input--is-dirty v-input--is-disabled theme--light">
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-slider">
+        <input role="slider"
+               value="50"
+               readonly="readonly"
+               aria-readonly="false"
+               aria-valuemin="0"
+               aria-valuemax="100"
+               aria-valuenow="50"
+               tabindex="-1"
+        >
+        <div class="v-slider__track__container">
+          <div class="v-slider__track"
+               style="left: 0px; width: 100%; right: 0px;"
+          >
+          </div>
+          <div class="v-slider__track-fill"
+               style="left: 0px; width: 50%; right: 0px;"
+          >
+          </div>
+        </div>
+        <div class="v-slider__thumb-container"
+             style="left: 50%;"
+        >
+          <div class="v-slider__thumb">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-messages theme--light">
+      <div class="v-messages__wrapper">
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VSlider.vue should display label and have different aria-label 1`] = `
+
+<div class="v-input v-input--slider theme--light">
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <label aria-hidden="true"
+             class="v-label theme--light"
+             style="left: 0px; position: relative;"
+      >
+        foo
+      </label>
+      <div class="v-slider">
+        <input aria-label="bar"
+               role="slider"
+               value="0"
+               readonly="readonly"
+               aria-readonly="false"
+               aria-valuemin="0"
+               aria-valuemax="100"
+               aria-valuenow="0"
+        >
+        <div class="v-slider__track__container">
+          <div class="v-slider__track"
+               style="left: 7px; width: 100%;"
+          >
+          </div>
+          <div class="v-slider__track-fill primary"
+               style="left: 0px; width: 0%;"
+          >
+          </div>
+        </div>
+        <div class="v-slider__thumb-container"
+             style="left: 0%;"
+        >
+          <div class="v-slider__thumb">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-messages theme--light">
+      <div class="v-messages__wrapper">
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VSlider.vue should match a snapshot 1`] = `
+
+<div class="v-input v-input--slider theme--light">
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-slider">
+        <input role="slider"
+               value="0"
+               readonly="readonly"
+               aria-readonly="false"
+               aria-valuemin="0"
+               aria-valuemax="100"
+               aria-valuenow="0"
+        >
+        <div class="v-slider__track__container">
+          <div class="v-slider__track"
+               style="left: 7px; width: 100%;"
+          >
+          </div>
+          <div class="v-slider__track-fill primary"
+               style="left: 0px; width: 0%;"
+          >
+          </div>
+        </div>
+        <div class="v-slider__thumb-container"
+             style="left: 0%;"
+        >
+          <div class="v-slider__thumb">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-messages theme--light">
+      <div class="v-messages__wrapper">
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VSlider.vue should render component with thumbLabel and match a snapshot 1`] = `
+
+<div class="v-input v-input--slider v-input--slider--thumb-label theme--light">
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-slider">
+        <input role="slider"
+               value="0"
+               readonly="readonly"
+               aria-readonly="false"
+               aria-valuemin="0"
+               aria-valuemax="100"
+               aria-valuenow="0"
+        >
+        <div class="v-slider__track__container">
+          <div class="v-slider__track"
+               style="left: 7px; width: 100%;"
+          >
+          </div>
+          <div class="v-slider__track-fill primary"
+               style="left: 0px; width: 0%;"
+          >
+          </div>
+        </div>
+        <div class="v-slider__thumb-container v-slider__thumb-container--show-label"
+             style="left: 0%;"
+        >
+          <div class="v-slider__thumb">
+          </div>
+          <div class="v-slider__thumb-label__container"
+               style="display: none;"
+          >
+            <div class="v-slider__thumb-label"
+                 style="height: 32px; width: 32px;"
+            >
+              <span>
+                0
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-messages theme--light">
+      <div class="v-messages__wrapper">
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VSlider.vue should render component with thumbLabel and match a snapshot 2`] = `
+
+<div class="v-input v-input--slider v-input--slider--thumb-label theme--light">
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-slider">
+        <input role="slider"
+               value="0"
+               readonly="readonly"
+               aria-readonly="false"
+               aria-valuemin="0"
+               aria-valuemax="100"
+               aria-valuenow="0"
+        >
+        <div class="v-slider__track__container">
+          <div class="v-slider__track"
+               style="left: 7px; width: 100%;"
+          >
+          </div>
+          <div class="v-slider__track-fill primary"
+               style="left: 0px; width: 0%;"
+          >
+          </div>
+        </div>
+        <div class="v-slider__thumb-container v-slider__thumb-container--show-label"
+             style="left: 0%;"
+        >
+          <div class="v-slider__thumb">
+          </div>
+          <div class="v-slider__thumb-label__container"
+               style="display: none;"
+          >
+            <div class="v-slider__thumb-label"
+                 style="height: 32px; width: 32px;"
+            >
+              <span>
+                0
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-messages theme--light">
+      <div class="v-messages__wrapper">
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VSlider.vue should render component with ticks and match a snapshot 1`] = `
+
+<div class="v-input v-input--slider v-input--slider--ticks theme--light">
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-slider">
+        <input role="slider"
+               value="0"
+               readonly="readonly"
+               aria-readonly="false"
+               aria-valuemin="0"
+               aria-valuemax="100"
+               aria-valuenow="0"
+        >
+        <div class="v-slider__track__container">
+          <div class="v-slider__track"
+               style="left: 7px; width: 100%;"
+          >
+          </div>
+          <div class="v-slider__track-fill primary"
+               style="left: 0px; width: 0%;"
+          >
+          </div>
+        </div>
+        <div class="v-slider__ticks-container">
+          <span class="v-slider__ticks"
+                style="border-width: 1px; left: 0%;"
+          >
+          </span>
+          <span class="v-slider__ticks"
+                style="border-width: 1px; left: 25%;"
+          >
+          </span>
+          <span class="v-slider__ticks"
+                style="border-width: 1px; left: 50%;"
+          >
+          </span>
+          <span class="v-slider__ticks"
+                style="border-width: 1px; left: 75%;"
+          >
+          </span>
+          <span class="v-slider__ticks"
+                style="border-width: 1px; left: 100%;"
+          >
+          </span>
+        </div>
+        <div class="v-slider__thumb-container"
+             style="left: 0%;"
+        >
+          <div class="v-slider__thumb">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-messages theme--light">
+      <div class="v-messages__wrapper">
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VSlider.vue should render component with ticks and match a snapshot 2`] = `
+
+<div class="v-input v-input--slider v-input--slider--ticks theme--light">
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-slider">
+        <input role="slider"
+               value="0"
+               readonly="readonly"
+               aria-readonly="false"
+               aria-valuemin="0"
+               aria-valuemax="100"
+               aria-valuenow="0"
+        >
+        <div class="v-slider__track__container">
+          <div class="v-slider__track"
+               style="left: 7px; width: 100%;"
+          >
+          </div>
+          <div class="v-slider__track-fill primary"
+               style="left: 0px; width: 0%;"
+          >
+          </div>
+        </div>
+        <div class="v-slider__ticks-container">
+          <span class="v-slider__ticks v-slider__ticks--always-show"
+                style="border-width: 1px; left: 0%;"
+          >
+          </span>
+          <span class="v-slider__ticks v-slider__ticks--always-show"
+                style="border-width: 1px; left: 25%;"
+          >
+          </span>
+          <span class="v-slider__ticks v-slider__ticks--always-show"
+                style="border-width: 1px; left: 50%;"
+          >
+          </span>
+          <span class="v-slider__ticks v-slider__ticks--always-show"
+                style="border-width: 1px; left: 75%;"
+          >
+          </span>
+          <span class="v-slider__ticks v-slider__ticks--always-show"
+                style="border-width: 1px; left: 100%;"
+          >
+          </span>
+        </div>
+        <div class="v-slider__thumb-container"
+             style="left: 0%;"
+        >
+          <div class="v-slider__thumb">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-messages theme--light">
+      <div class="v-messages__wrapper">
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VSlider.vue should reverse label location when inverse 1`] = `
+
+<div class="v-input v-input--slider theme--light">
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <label aria-hidden="true"
+             class="v-label theme--light"
+             style="left: 0px; position: relative;"
+      >
+        foo
+      </label>
+      <div class="v-slider">
+        <input aria-label="foo"
+               role="slider"
+               value="0"
+               readonly="readonly"
+               aria-readonly="false"
+               aria-valuemin="0"
+               aria-valuemax="100"
+               aria-valuenow="0"
+        >
+        <div class="v-slider__track__container">
+          <div class="v-slider__track"
+               style="left: 7px; width: 100%;"
+          >
+          </div>
+          <div class="v-slider__track-fill primary"
+               style="left: 0px; width: 0%;"
+          >
+          </div>
+        </div>
+        <div class="v-slider__thumb-container"
+             style="left: 0%;"
+        >
+          <div class="v-slider__thumb">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v-messages theme--light">
+      <div class="v-messages__wrapper">
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VSlider.vue should reverse label location when inverse 2`] = `
+
+<div class="v-input v-input--slider v-input--slider--inverse-label theme--light">
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-slider">
+        <input aria-label="foo"
+               role="slider"
+               value="0"
+               readonly="readonly"
+               aria-readonly="false"
+               aria-valuemin="0"
+               aria-valuemax="100"
+               aria-valuenow="0"
+        >
+        <div class="v-slider__track__container">
+          <div class="v-slider__track"
+               style="left: 7px; width: 100%;"
+          >
+          </div>
+          <div class="v-slider__track-fill primary"
+               style="left: 0px; width: 0%;"
+          >
+          </div>
+        </div>
+        <div class="v-slider__thumb-container"
+             style="left: 0%;"
+        >
+          <div class="v-slider__thumb">
+          </div>
+        </div>
+      </div>
+      <label aria-hidden="true"
+             class="v-label theme--light"
+             style="left: 0px; position: relative;"
+      >
+        foo
+      </label>
+    </div>
+    <div class="v-messages theme--light">
+      <div class="v-messages__wrapper">
+      </div>
+    </div>
+  </div>
+</div>
+
+`;

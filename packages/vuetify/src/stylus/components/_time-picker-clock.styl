@@ -1,0 +1,128 @@
+@import '../bootstrap'
+@import '../theme'
+
+/** Themes */
+v-time-picker-clock($material)
+  background: $material.picker.clock
+
+  .v-time-picker-clock__item--disabled
+    color: $material.buttons.disabled
+
+    &.v-time-picker-clock__item--active
+      color: $material-dark.buttons.disabled
+
+  &--indeterminate
+    .v-time-picker-clock__hand
+      background-color: $material.picker.indeterminateTime
+
+      &:after
+        color: $material.picker.indeterminateTime
+
+    .v-time-picker-clock__item--active
+        background-color: $material.picker.indeterminateTime
+
+theme(v-time-picker-clock, "v-time-picker-clock")
+
+.v-time-picker-clock
+  border-radius: 100%
+  position: relative
+  transition: $primary-transition
+  user-select: none
+  width: 100%
+  padding-top: 100%
+
+  &__container
+    display: flex
+    align-items: center
+    justify-content: center
+    padding: 10px
+
+  &__hand
+    height: calc(50% - 4px)
+    width: 2px
+    bottom: 50%
+    left: calc(50% - 1px)
+    transform-origin: center bottom
+    position: absolute
+    will-change: transform
+    z-index: 1
+
+    &:before
+      background: transparent
+      border-width: 2px
+      border-style: solid
+      border-color: inherit
+      border-radius: 100%
+      width: 10px
+      height: 10px
+      content: ''
+      position: absolute
+      top: -4px
+      left: 50%
+      transform: translate(-50%, -50%)
+
+    &:after
+      content: ''
+      position: absolute
+      height: 8px
+      width: 8px
+      top: 100%
+      left: 50%
+      border-radius: 100%
+      border-style: solid
+      border-color: inherit
+      background-color: inherit
+      transform: translate(-50%, -50%)
+
+    &--inner:after
+      height: 14px
+
+.v-picker--full-width
+  .v-time-picker-clock__container
+    max-width: 290px
+
+.v-time-picker-clock__inner
+  position: absolute
+  bottom: 27px
+  left: 27px
+  right: 27px
+  top: 27px
+
+.v-time-picker-clock__item
+  align-items: center
+  border-radius: 100%
+  cursor: default
+  display: flex
+  font-size: $time-picker-number-font-size
+  justify-content: center
+  height: $time-picker-indicator-size
+  position: absolute
+  text-align: center
+  width: $time-picker-indicator-size
+  user-select: none
+  transform: translate(-50%, -50%)
+
+  > span
+    z-index: 1
+
+  &:before, &:after
+    content: ''
+    border-radius: 100%
+    position: absolute
+    top: 50%
+    left: 50%
+    height: 14px
+    width: 14px
+    transform: translate(-50%, -50%)
+
+  &:after, &:before
+    height: $time-picker-indicator-size
+    width: $time-picker-indicator-size
+
+  &--active
+    color: #fff
+    cursor: default
+    z-index: 2
+
+  &--disabled
+    pointer-events: none
