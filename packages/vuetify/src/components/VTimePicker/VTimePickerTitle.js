@@ -16,12 +16,17 @@ export default {
     ampm: Boolean,
     hour: Number,
     minute: Number,
+    second: Number,
     period: {
       type: String,
       validator: period => period === 'am' || period === 'pm'
     },
     readonly: Boolean,
-    selectingHour: Boolean
+    useSeconds: Boolean,
+    selecting: {
+      type: Number,
+      default: 2
+    }
   },
 
   methods: {
@@ -33,14 +38,20 @@ export default {
 
       const displayedHour = this.hour == null ? '--' : this.ampm ? hour : pad(hour)
       const displayedMinute = this.minute == null ? '--' : pad(this.minute)
+      const displayedSecond = this.second == null ? '--' : pad(this.second)
 
+      const titleContent = [
+        this.genPickerButton('selecting', 1, displayedHour),
+        this.$createElement('span', ':'),
+        this.genPickerButton('selecting', 2, displayedMinute)
+      ]
+      if (this.useSeconds) {
+        titleContent.push(this.$createElement('span', ':'))
+        titleContent.push(this.genPickerButton('selecting', 3, displayedSecond))
+      }
       return this.$createElement('div', {
         'class': 'v-time-picker-title__time'
-      }, [
-        this.genPickerButton('selectingHour', true, displayedHour),
-        this.$createElement('span', ':'),
-        this.genPickerButton('selectingHour', false, displayedMinute)
-      ])
+      }, titleContent)
     },
     genAmPm () {
       return this.$createElement('div', {
