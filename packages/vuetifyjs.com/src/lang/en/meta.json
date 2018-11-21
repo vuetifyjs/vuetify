@@ -83,11 +83,11 @@
     "description": "Make an amazing application with smooth built in animations.",
     "keywords": "motion, transitions"
   },
-  "motion/scrolling": {
-    "h1": "Scrolling",
-    "title": "Scrolling",
+  "motion/scroll": {
+    "h1": "Scroll",
+    "title": "Scroll",
     "description": "Scroll to a target location on the page.",
-    "keywords": "scrolling, smooth scroll, transitions"
+    "keywords": "scrolling, scroll, smooth scroll, transitions"
   },
   "style/colors": {
     "h1": "Colors",

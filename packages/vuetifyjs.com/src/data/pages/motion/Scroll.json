@@ -16,9 +16,7 @@
       "children": [
         {
           "type": "api",
-          "value": [
-            "$vuetify"
-          ]
+          "value": [ "$vuetify" ]
         }
       ]
     },

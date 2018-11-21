@@ -165,7 +165,7 @@
           text: 'Motion & transitions',
           icon: 'mdi-clock-fast',
           children: [
-            { text: 'Scrolling', to: 'scrolling' },
+            { text: 'Scroll', to: 'scroll' },
             { text: 'Transitions', to: 'transitions' }
           ]
         },

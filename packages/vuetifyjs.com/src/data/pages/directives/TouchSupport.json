@@ -7,7 +7,7 @@
       "children": [
         {
           "type": "usage",
-          "value": "default"
+          "value": "usage"
         }
       ]
     },
@@ -16,7 +16,7 @@
       "children": [
         {
           "type": "api",
-          "value": ["v-touch"]
+          "value": [ "v-touch" ]
         }
       ]
     }
