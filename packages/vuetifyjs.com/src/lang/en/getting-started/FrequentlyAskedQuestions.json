@@ -53,7 +53,11 @@
     },
     {
       "q": "How do I use Font Awesome Icons or Material Design Icons (mdi)?",
-      "a": "You must add the fonts to your index.html or otherwise import them into your project. <br><br>**MDI**: [Material Design Icons](/framework/icons#install-mdi)<br>**FA**: [Font Awesome](/framework/icons#install-fa)"
+      "a": "You must add the fonts to your index.html or otherwise import them into your project.",
+      "a2": [
+        "**MDI**: [Material Design Icons](/framework/icons#install-mdi)",
+        "**FA**: [Font Awesome](/framework/icons#install-fa)"
+      ]
     },
     {
       "q": "My dialog closes immediately after clicking the button",
@@ -64,6 +68,26 @@
       "q": "Relative images are not working in `v-card` , `v-img` and other custom vuetify components",
       "a": "Vue loader converts relative paths into require functions automatically for you. Unfortunately, this is not the case when it comes to custom components. You can circumvent this issue by using `require`. If you're using Vuetify as a Vue-CLI 3 plugin, you can edit your project's [vue.config.js](https://cli.vuejs.org/config/#vue-config-js) file by modifying the options for [vue-loader](https://cli.vuejs.org/guide/webpack.html#modifying-options-of-a-loader).",
       "s": "html_img_require"
+    },
+    {
+      "q": "How do I upgrade to the latest version?",
+      "a": "All required changes are noted in the **Upgrade Guide** of our releases.",
+      "a2": [
+        "[v1.3.0](https://github.com/vuetifyjs/vuetify/releases/tag/v1.3.0)",
+        "[v1.2.0](https://github.com/vuetifyjs/vuetify/releases/tag/v1.2.0)",
+        "[v1.1.0](https://github.com/vuetifyjs/vuetify/releases/tag/v1.1.0)",
+        "[v1.0.0](https://github.com/vuetifyjs/vuetify/releases/tag/v1.0.0)",
+        "[v0.17.0](https://github.com/vuetifyjs/vuetify/releases/tag/v0.17.0)",
+        "[v0.16.0](https://github.com/vuetifyjs/vuetify/releases/tag/v0.16.0)",
+        "[v0.15.0](https://github.com/vuetifyjs/vuetify/releases/tag/v0.15.0)",
+        "[v0.14.0](https://github.com/vuetifyjs/vuetify/releases/tag/v0.14.0)",
+        "[v0.13.0](https://github.com/vuetifyjs/vuetify/releases/tag/v0.13.0)",
+        "[v0.12.0](https://github.com/vuetifyjs/vuetify/releases/tag/v0.12.0)"
+      ]
+    },
+    {
+      "q": "How do a report a bug or request a feature?",
+      "a": "In order to ensure all required information is provided, we have created an [Issue Generator](https://github.com/vuetifyjs/vuetify-issue-helper) that helps you through the process. Any issue created not using the generator will automatically be closed, so please use this."
     }
   ],
   "questionHeader": "Have something that you think belongs here?",
