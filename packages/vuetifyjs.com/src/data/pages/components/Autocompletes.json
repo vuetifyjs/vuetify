@@ -7,7 +7,7 @@
       "children": [
         {
           "type": "usage",
-          "value": "autocomplete"
+          "value": "usage"
         }
       ]
     },
@@ -16,7 +16,7 @@
       "children": [
         {
           "type": "api",
-          "value": ["v-autocomplete"]
+          "value": [ "v-autocomplete" ]
         }
       ]
     },
@@ -38,13 +38,7 @@
       "children": [
         {
           "type": "examples",
-          "value": [
-            "api",
-            "scopedSlots",
-            "customFilter",
-            "asynchronous",
-            "advanced"
-          ]
+          "value": [ "api", "scopedSlots", "customFilter", "asynchronous", "advanced" ]
         }
       ]
     }
