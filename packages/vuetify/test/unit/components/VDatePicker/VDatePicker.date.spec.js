@@ -38,6 +38,17 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should render disabled picker', () => {
+    const wrapper = mount(VDatePicker, {
+      propsData: {
+        value: '2013-05-07',
+        disabled: true
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it('should emit input event on date click', async () => {
     const wrapper = mount(VDatePicker, {
       propsData: {
