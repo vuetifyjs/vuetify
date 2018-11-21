@@ -6,7 +6,7 @@
         class="custom-ripple"
         ripple
         height="300"
-        @click.native="color = (color + 1) % colors.length"
+        @click="color = (color + 1) % colors.length"
       >
         <div class="title white--text pl-3 pt-3">{{ colors[color] }}</div>
       </v-card>
