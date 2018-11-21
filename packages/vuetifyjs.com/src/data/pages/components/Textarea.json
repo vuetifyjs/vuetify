@@ -7,7 +7,7 @@
       "children": [
         {
           "type": "usage",
-          "value": "multiLine"
+          "value": "usage"
         }
       ]
     },
@@ -16,7 +16,7 @@
       "children": [
         {
           "type": "api",
-          "value": ["v-textarea"]
+          "value": [ "v-textarea" ]
         }
       ]
     },
@@ -25,10 +25,7 @@
       "children": [
         {
           "type": "examples",
-          "value": [
-            "autoGrow",
-            "signupBox"
-          ]
+          "value": [ "autoGrow", "signupBox" ]
         }
       ]
     }
