@@ -3,6 +3,8 @@
   import { getComponent } from '@/util/helpers'
 
   export default {
+    functional: true,
+
     props: {
       children: {
         type: Array,
@@ -10,8 +12,8 @@
       }
     },
 
-    render (h) {
-      const children = this.children.map(child => {
+    render (h, { props }) {
+      return props.children.map(child => {
         if (child.children) {
           return h('core-tree', {
             props: { children: child.children }
@@ -25,8 +27,6 @@
           }
         }, child.lang)
       })
-
-      return h('div', children)
     }
   }
 </script>
