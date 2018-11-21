@@ -236,6 +236,7 @@
             },
             { text: 'Progress', to: 'progress' },
             { text: 'Ratings', to: 'ratings' },
+            { text: 'Sheets', to: 'sheets' },
             { text: 'Snackbars', to: 'snackbars' },
             { text: 'Steppers', to: 'steppers' },
             { text: 'Subheaders', to: 'subheaders' },
