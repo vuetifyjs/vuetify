@@ -7,7 +7,7 @@
       "children": [
         {
           "type": "usage",
-          "value": "basicValidation"
+          "value": "usage"
         }
       ]
     },
@@ -16,7 +16,7 @@
       "children": [
         {
           "type": "api",
-          "value": ["v-form"]
+          "value": [ "v-form" ]
         }
       ]
     },
@@ -25,11 +25,7 @@
       "children": [
         {
           "type": "examples",
-          "value": [
-            "validationWithSubmitAndClear",
-            "vuelidate",
-            "veeValidate"
-          ]
+          "value": [ "validationWithSubmitAndClear", "vuelidate", "veeValidate" ]
         }
       ]
     }
