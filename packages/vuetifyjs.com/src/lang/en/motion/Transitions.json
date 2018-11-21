@@ -3,27 +3,27 @@
   "headerText": "Smooth animations help make a UI feel great. Using Vue's transition system and re-usable functional components, you can easily control the motion of your application. Most components can have their transition altered through the <code>transition</code> prop.",
   "examples": {
     "slideXTransitions": {
-      "header": "## Slide X transitions",
+      "header": "### Slide X transitions",
       "desc": "Slide x transitions move along the horizontal axis."
     },
     "slideYTransitions": {
-      "header": "## Slide Y transitions",
+      "header": "### Slide Y transitions",
       "desc": "Animations use the applications <code>$primary-transition</code>."
     },
     "scaleTransition": {
-      "header": "## Scale transition",
+      "header": "### Scale transition",
       "desc": "Many of Vuetify's components contain a <code>transition</code> prop which allows you to specify your own."
     },
     "fadeTransition": {
-      "header": "## Fade transition",
+      "header": "### Fade transition",
       "desc": "Another example of the fade transition can be found on the Carousel component."
     },
     "customOrigin": {
-      "header": "## Custom Origin",
+      "header": "### Custom Origin",
       "desc": "Programmatically control the transition origin with a simple prop."
     },
     "todo": {
-      "header": "## Todo list",
+      "header": "### Todo list",
       "desc": "Using multiple custom transitions, it is easy to bring a simple todo list to life!"
     }
   },
