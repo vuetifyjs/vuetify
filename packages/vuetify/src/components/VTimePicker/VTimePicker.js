@@ -12,8 +12,7 @@ import pad from '../VDatePicker/util/pad'
 const rangeHours24 = createRange(24)
 const rangeHours12am = createRange(12)
 const rangeHours12pm = rangeHours12am.map(v => v + 12)
-const rangeMinutes = createRange(60)
-const rangeSeconds = createRange(60)
+const range60 = createRange(60)
 const selectingTimes = { hour: 1, minute: 2, second: 3 }
 
 /* @vue/component */
@@ -206,9 +205,9 @@ export default {
 
       // TODO: clean up
       const range = type === 'minute'
-        ? rangeMinutes
+        ? range60
         : (type === 'second'
-          ? rangeSeconds
+          ? range60
           : (this.isAmPm
             ? (value < 12
               ? rangeHours12am
