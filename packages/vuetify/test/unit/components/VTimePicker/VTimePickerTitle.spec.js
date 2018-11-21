@@ -28,6 +28,20 @@ test('VTimePickerTitle.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should render disabled component', () => {
+    const wrapper = mount(VTimePickerTitle, {
+      propsData: {
+        disabled: true,
+        hour: 14,
+        minute: 13,
+        period: 'pm',
+        ampm: true
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it('should render component when selecting hour', () => {
     const wrapper = mount(VTimePickerTitle, {
       propsData: {

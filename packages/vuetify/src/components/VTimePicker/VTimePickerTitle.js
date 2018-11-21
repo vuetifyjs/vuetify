@@ -14,6 +14,7 @@ export default {
 
   props: {
     ampm: Boolean,
+    disabled: Boolean,
     hour: Number,
     minute: Number,
     period: {
@@ -37,17 +38,17 @@ export default {
       return this.$createElement('div', {
         'class': 'v-time-picker-title__time'
       }, [
-        this.genPickerButton('selectingHour', true, displayedHour),
+        this.genPickerButton('selectingHour', true, displayedHour, this.disabled),
         this.$createElement('span', ':'),
-        this.genPickerButton('selectingHour', false, displayedMinute)
+        this.genPickerButton('selectingHour', false, displayedMinute, this.disabled)
       ])
     },
     genAmPm () {
       return this.$createElement('div', {
         staticClass: 'v-time-picker-title__ampm'
       }, [
-        this.genPickerButton('period', 'am', 'am', this.readonly),
-        this.genPickerButton('period', 'pm', 'pm', this.readonly)
+        this.genPickerButton('period', 'am', 'am', this.disabled || this.readonly),
+        this.genPickerButton('period', 'pm', 'pm', this.disabled || this.readonly)
       ])
     }
   },

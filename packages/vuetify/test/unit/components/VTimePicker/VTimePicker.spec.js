@@ -29,6 +29,18 @@ test('VTimePicker.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should render disabled component', async () => {
+    var wrapper = mount(VTimePicker, {
+      propsData: {
+        disabled: true,
+        value: '09:12:34'
+      }
+    })
+
+    await wrapper.vm.$nextTick()
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it('should render component without a title', () => {
     const wrapper = mount(VTimePicker, {
       propsData: {
@@ -182,7 +194,7 @@ test('VTimePicker.js', ({ mount }) => {
     wrapper.vm.setInputData(null)
     expect(wrapper.vm.inputHour).toBe(null)
     expect(wrapper.vm.inputMinute).toBe(null)
-    
+
     wrapper.vm.setInputData('')
     expect(wrapper.vm.inputHour).toBe(null)
     expect(wrapper.vm.inputMinute).toBe(null)
