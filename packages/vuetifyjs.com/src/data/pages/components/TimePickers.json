@@ -7,7 +7,7 @@
       "children": [
         {
           "type": "usage",
-          "value": "timeLight"
+          "value": "usage"
         }
       ]
     },
@@ -16,7 +16,7 @@
       "children": [
         {
           "type": "api",
-          "value": ["v-time-picker"]
+          "value": [ "v-time-picker" ]
         }
       ]
     },
@@ -25,13 +25,7 @@
       "children": [
         {
           "type": "examples",
-          "value": [
-            "timeColorable",
-            "timeDialogAndMenu",
-            "time24hFormat",
-            "timeAllowedTimes",
-            "timeWidth"
-          ]
+          "value": [ "timeColorable", "timeDialogAndMenu", "time24hFormat", "timeAllowedTimes", "timeWidth" ]
         }
       ]
     }
