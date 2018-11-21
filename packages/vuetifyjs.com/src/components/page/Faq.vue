@@ -57,6 +57,11 @@
               >
                 <doc-markdown :code="gotcha.a" />
 
+                <doc-markdown
+                  v-if="gotcha.a2"
+                  :code="gotcha.a2"
+                />
+
                 <doc-markup
                   v-if="gotcha.s"
                   :value="gotcha.s"
@@ -105,6 +110,10 @@
 <style>
 .v-data-iterator--faq p {
   margin: 0;
+}
+
+.markdown:not(:last-child) {
+  margin-bottom: 16px;
 }
 
 .text-decoration-none {
