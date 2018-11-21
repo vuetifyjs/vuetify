@@ -407,6 +407,12 @@
     "description": "Star rating component for the Vuetify framework.",
     "keywords": "rating, star rating, ratings, stars"
   },
+  "components/sheets": {
+    "h1": "Sheets",
+    "title": "Sheet Component",
+    "description": "The v-sheet component is the baseline paper element in Vuetify.",
+    "keywords": "sheet, components"
+  },
   "components/sliders": {
     "h1": "Sliders",
     "title": "Slider Component",
