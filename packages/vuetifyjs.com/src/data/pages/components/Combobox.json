@@ -7,7 +7,7 @@
       "children": [
         {
           "type": "usage",
-          "value": "combobox"
+          "value": "usage"
         }
       ]
     },
@@ -16,7 +16,7 @@
       "children": [
         {
           "type": "api",
-          "value": ["v-combobox"]
+          "value": [ "v-combobox" ]
         }
       ]
     },
@@ -38,11 +38,7 @@
       "children": [
         {
           "type": "examples",
-          "value": [
-            "noData",
-            "advanced",
-            "comboboxMultiple"
-          ]
+          "value": [ "noData", "advanced", "comboboxMultiple" ]
         }
       ]
     }
