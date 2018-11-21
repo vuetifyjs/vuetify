@@ -6,6 +6,8 @@ import PickerButton from '../../mixins/picker-button'
 // Utils
 import { pad } from '../VDatePicker/util'
 
+import { selectingTimes } from './VTimePicker'
+
 /* @vue/component */
 export default {
   name: 'v-time-picker-title',
@@ -38,13 +40,13 @@ export default {
       const displayedSecond = this.second == null ? '--' : pad(this.second)
 
       const titleContent = [
-        this.genPickerButton('selecting', 1, displayedHour),
+        this.genPickerButton('selecting', selectingTimes.hour, displayedHour),
         this.$createElement('span', ':'),
-        this.genPickerButton('selecting', 2, displayedMinute)
+        this.genPickerButton('selecting', selectingTimes.minute, displayedMinute)
       ]
       if (this.useSeconds) {
         titleContent.push(this.$createElement('span', ':'))
-        titleContent.push(this.genPickerButton('selecting', 3, displayedSecond))
+        titleContent.push(this.genPickerButton('selecting', selectingTimes.second, displayedSecond))
       }
       return this.$createElement('div', {
         'class': 'v-time-picker-title__time'
