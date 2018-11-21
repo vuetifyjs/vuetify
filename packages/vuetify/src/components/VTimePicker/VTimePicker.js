@@ -167,7 +167,7 @@ export default {
         this.inputMinute = value.getMinutes()
         this.inputSecond = value.getSeconds()
       } else {
-        const [, hour, minute, , second, period] = value.trim().toLowerCase().match(/^(\d+):(\d+)(:)?(\d+)?([ap]m)?$/, '') || []
+        const [, hour, minute, , second, period] = value.trim().toLowerCase().match(/^(\d+):(\d+)(:(\d+))?([ap]m)?$/, '') || []
 
         this.inputHour = period ? this.convert12to24(parseInt(hour, 10), period) : parseInt(hour, 10)
         this.inputMinute = parseInt(minute, 10)
