@@ -1,12 +1,12 @@
 <template>
   <v-layout
-    id="patreon"
+    id="open-collective"
     mb-5
     tag="section"
     wrap
   >
     <v-flex xs12>
-      <doc-heading goto="one-time-donation">patreon</doc-heading>
+      <doc-heading>openCollective</doc-heading>
     </v-flex>
 
     <v-flex
@@ -19,14 +19,14 @@
       xs12
       tag="p"
     >
-      <doc-markdown>patreonBlurb</doc-markdown>
+      <doc-markdown>openCollectiveBlurb</doc-markdown>
     </v-flex>
 
     <v-flex
       xs12
       text-xs-center
     >
-      <core-patreon-btn />
+      <core-open-collective-btn />
     </v-flex>
   </v-layout>
 </template>

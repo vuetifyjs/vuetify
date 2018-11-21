@@ -1,7 +1,7 @@
 <template>
   <v-card
     :href="value.href"
-    :width="small ? 150 : 175"
+    :width="small ? 130 : large ? 195 : 160"
     flat
     tile
     color="transparent"
@@ -23,6 +23,10 @@
 <script>
   export default {
     props: {
+      large: {
+        type: Boolean,
+        default: false
+      },
       small: {
         type: Boolean,
         default: false

@@ -3,9 +3,11 @@
     fluid
     pa-0
   >
-    <supporters-one-time />
-
     <supporters-patreon-sub />
+
+    <supporters-open-collective-sub />
+
+    <supporters-one-time />
 
     <v-flex xs12>
       <doc-heading>patrons</doc-heading>
@@ -13,7 +15,7 @@
 
     <v-flex
       xs12
-      my-3
+      my-2
       tag="v-divider"
     />
 

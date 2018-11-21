@@ -11,7 +11,7 @@
 
     <v-flex
       xs12
-      my-3
+      my-2
       tag="v-divider"
     />
 

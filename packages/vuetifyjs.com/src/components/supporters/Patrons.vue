@@ -15,6 +15,7 @@
           :group="supporters.diamond"
           :title="!hideTitles ? 'Diamond' : undefined"
           :class="classes"
+          large
         />
 
         <supporter-group
@@ -22,7 +23,6 @@
           :group="supporters.palladium"
           :title="!hideTitles ? 'Palladium' : undefined"
           :class="classes"
-          small
         />
 
         <supporter-group

@@ -5,7 +5,7 @@
     </v-subtitle-1>
 
     <supporters-patrons
-      :tier="2"
+      :tier="3"
       dense
       hide-titles
     />

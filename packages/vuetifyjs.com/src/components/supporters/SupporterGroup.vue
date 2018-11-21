@@ -26,6 +26,7 @@
       >
         <patron
           :value="item"
+          :large="$attrs.large"
           :small="$attrs.small"
         />
       </v-flex>
