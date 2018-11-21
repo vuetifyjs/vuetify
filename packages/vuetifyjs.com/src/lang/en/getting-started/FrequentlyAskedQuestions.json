@@ -1,5 +1,5 @@
 {
-  "header": "Frequently asked questions",
+  "header": "# Frequently asked questions",
   "headerText": "Stuck on a particular problem? Check some of these common gotchas before creating a ticket. If you still cannot find what you are looking for, submit an [issue](https://issues.vuetifyjs.com) on github or ask the community in [discord](https://community.vuetifyjs.com).",
   "question": "Question:",
   "answer": "Answer",
@@ -90,6 +90,6 @@
       "a": "In order to ensure all required information is provided, we have created an [Issue Generator](https://github.com/vuetifyjs/vuetify-issue-helper) that helps you through the process. Any issue created not using the generator will automatically be closed, so please use this."
     }
   ],
-  "questionHeader": "Have something that you think belongs here?",
+  "questionHeader": "## Have something that you think belongs here?",
   "questionButton": "Let us know"
 }
