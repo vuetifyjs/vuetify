@@ -518,5 +518,27 @@ test('VTimePicker.js', ({ mount }) => {
       wrapper.vm.emitValue()
       expect(currentValue).toBeCalledWith(useSecondsValue ? '13:23:45' : '13:23')
     })
+
+    it('should update selecting when set selectingSecond/selectingMinute/selectingHour' + useSecondsDesc, () => {
+      const wrapper = mount(VTimePicker, {
+        propsData: {
+          useSeconds: useSecondsValue
+        }
+      })
+      wrapper.vm.selectingHour = true
+      expect(wrapper.vm.selecting).toBe(1)
+      expect(wrapper.vm.selectingMinute).toBe(false)
+      expect(wrapper.vm.selectingSecond).toBe(false)
+
+      wrapper.vm.selectingMinute = true
+      expect(wrapper.vm.selecting).toBe(2)
+      expect(wrapper.vm.selectingHour).toBe(false)
+      expect(wrapper.vm.selectingSecond).toBe(false)
+
+      wrapper.vm.selectingSecond = true
+      expect(wrapper.vm.selecting).toBe(3)
+      expect(wrapper.vm.selectingHour).toBe(false)
+      expect(wrapper.vm.selectingMinute).toBe(false)
+    })
   })
 })
