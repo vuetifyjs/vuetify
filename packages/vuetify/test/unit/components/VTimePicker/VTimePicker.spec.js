@@ -1,9 +1,7 @@
 import Vue from 'vue'
 import { test } from '@/test'
 import VTimePicker from '@/components/VTimePicker/VTimePicker'
-
-/* eslint max-statements: 0 */
-/* eslint no-trailing-spaces: 0 */
+import { selectingTimes } from '@/components/VTimePicker/VTimePicker'
 
 test('VTimePicker.js', ({ mount }) => {
   [true, false].forEach(useSecondsValue => {
@@ -20,7 +18,7 @@ test('VTimePicker.js', ({ mount }) => {
       expect(wrapper.vm.selectingHour).toBe(true)
       expect(wrapper.vm.selectingMinute).toBe(false)
       expect(wrapper.vm.selectingSecond).toBe(false)
-      expect(wrapper.vm.selecting).toBe(1)
+      expect(wrapper.vm.selecting).toBe(selectingTimes.hour)
       expect(wrapper.vm.inputHour).toBe(9)
       expect(wrapper.vm.inputMinute).toBe(12)
       expect(wrapper.vm.inputSecond).toBe(34)
@@ -200,14 +198,14 @@ test('VTimePicker.js', ({ mount }) => {
       clock.$emit('input', 8)
       expect(wrapper.vm.inputHour).toBe(8)
 
-      wrapper.vm.selecting = 2
+      wrapper.vm.selecting = selectingTimes.minute
       clock.$emit('input', 33)
       expect(wrapper.vm.inputHour).toBe(8)
       expect(wrapper.vm.inputMinute).toBe(33)
       expect(wrapper.vm.inputSecond).toBe(0)
 
       // with seconds
-      wrapper.vm.selecting = 1
+      wrapper.vm.selecting = selectingTimes.hour
       wrapper.setProps({ format: 'ampm' })
       wrapper.setProps({ value: '01:23:45pm' })
       clock.$emit('input', 7)
@@ -217,13 +215,13 @@ test('VTimePicker.js', ({ mount }) => {
       clock.$emit('input', 8)
       expect(wrapper.vm.inputHour).toBe(8)
 
-      wrapper.vm.selecting = 2
+      wrapper.vm.selecting = selectingTimes.minute
       clock.$emit('input', 33)
       expect(wrapper.vm.inputHour).toBe(8)
       expect(wrapper.vm.inputMinute).toBe(33)
       expect(wrapper.vm.inputSecond).toBe(45)
 
-      wrapper.vm.selecting = 3
+      wrapper.vm.selecting = selectingTimes.second
       clock.$emit('input', 44)
       expect(wrapper.vm.inputHour).toBe(8)
       expect(wrapper.vm.inputMinute).toBe(33)
@@ -310,12 +308,12 @@ test('VTimePicker.js', ({ mount }) => {
       const clock = wrapper.vm.$refs.clock
   
       clock.$emit('change')
-      expect(wrapper.vm.selecting).toBe(2)
+      expect(wrapper.vm.selecting).toBe(selectingTimes.minute)
       expect(wrapper.vm.selectingHour).toBe(false)
       expect(wrapper.vm.selectingMinute).toBe(true)
       expect(wrapper.vm.selectingSecond).toBe(false)
       clock.$emit('change')
-      expect(wrapper.vm.selecting).toBe(useSecondsValue ? 3 : 2)
+      expect(wrapper.vm.selecting).toBe(useSecondsValue ? selectingTimes.second : selectingTimes.minute)
       expect(wrapper.vm.selectingHour).toBe(false)
       expect(wrapper.vm.selectingMinute).toBe(!useSecondsValue)
       expect(wrapper.vm.selectingSecond).toBe(useSecondsValue)
@@ -332,17 +330,17 @@ test('VTimePicker.js', ({ mount }) => {
   
       const title = wrapper.vm.$refs.title
   
-      expect(wrapper.vm.selecting).toBe(1)
+      expect(wrapper.vm.selecting).toBe(selectingTimes.hour)
       expect(wrapper.vm.selectingHour).toBe(true)
       expect(wrapper.vm.selectingMinute).toBe(false)
       expect(wrapper.vm.selectingSecond).toBe(false)
-      title.$emit('update:selecting', 2)
-      expect(wrapper.vm.selecting).toBe(2)
+      title.$emit('update:selecting', selectingTimes.minute)
+      expect(wrapper.vm.selecting).toBe(selectingTimes.minute)
       expect(wrapper.vm.selectingHour).toBe(false)
       expect(wrapper.vm.selectingMinute).toBe(true)
       expect(wrapper.vm.selectingSecond).toBe(false)
-      title.$emit('update:selecting', 3)
-      expect(wrapper.vm.selecting).toBe(3)
+      title.$emit('update:selecting', selectingTimes.second)
+      expect(wrapper.vm.selecting).toBe(selectingTimes.second)
       expect(wrapper.vm.selectingHour).toBe(false)
       expect(wrapper.vm.selectingMinute).toBe(false)
       expect(wrapper.vm.selectingSecond).toBe(true)
@@ -526,17 +524,17 @@ test('VTimePicker.js', ({ mount }) => {
         }
       })
       wrapper.vm.selectingHour = true
-      expect(wrapper.vm.selecting).toBe(1)
+      expect(wrapper.vm.selecting).toBe(selectingTimes.hour)
       expect(wrapper.vm.selectingMinute).toBe(false)
       expect(wrapper.vm.selectingSecond).toBe(false)
 
       wrapper.vm.selectingMinute = true
-      expect(wrapper.vm.selecting).toBe(2)
+      expect(wrapper.vm.selecting).toBe(selectingTimes.minute)
       expect(wrapper.vm.selectingHour).toBe(false)
       expect(wrapper.vm.selectingSecond).toBe(false)
 
       wrapper.vm.selectingSecond = true
-      expect(wrapper.vm.selecting).toBe(3)
+      expect(wrapper.vm.selecting).toBe(selectingTimes.second)
       expect(wrapper.vm.selectingHour).toBe(false)
       expect(wrapper.vm.selectingMinute).toBe(false)
     })

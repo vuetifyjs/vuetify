@@ -1,4 +1,5 @@
 import VTimePickerTitle from '@/components/VTimePicker/VTimePickerTitle'
+import { selectingTimes } from '@/components/VTimePicker/VTimePicker'
 import { test } from '@/test'
 
 test('VTimePickerTitle.js', ({ mount }) => {
@@ -41,7 +42,7 @@ test('VTimePickerTitle.js', ({ mount }) => {
           minute: 13,
           second: 25,
           period: 'pm',
-          selecting: 1,
+          selecting: selectingTimes.hour,
           useSeconds: useSecondsValue
         }
       })
@@ -114,17 +115,17 @@ test('VTimePickerTitle.js', ({ mount }) => {
       wrapper.vm.$on('update:selecting', selecting)
 
       wrapper.find('.v-time-picker-title__time .v-picker__title__btn')[1].trigger('click')
-      expect(selecting).toBeCalledWith(2)
+      expect(selecting).toBeCalledWith(selectingTimes.minute)
       wrapper.find('.v-time-picker-title__time .v-picker__title__btn')[0].trigger('click')
-      expect(selecting).toBeCalledWith(1)
+      expect(selecting).toBeCalledWith(selectingTimes.hour)
       if (useSecondsValue) {
         wrapper.find('.v-time-picker-title__time .v-picker__title__btn')[2].trigger('click')
-        expect(selecting).toBeCalledWith(3)
+        expect(selecting).toBeCalledWith(selectingTimes.second)
       }
-      wrapper.setProps({ selecting: 1 })
+      wrapper.setProps({ selecting: selectingTimes.hour })
       await wrapper.vm.$nextTick()
       wrapper.find('.v-time-picker-title__time .v-picker__title__btn')[1].trigger('click')
-      expect(selecting).toBeCalledWith(2)
+      expect(selecting).toBeCalledWith(selectingTimes.minute)
     })
 
     it('should emit event when clicked on readonly hours/minutes' + useSecondsDesc, async () => {
@@ -142,7 +143,7 @@ test('VTimePickerTitle.js', ({ mount }) => {
       wrapper.vm.$on('update:selecting', selecting)
 
       wrapper.find('.v-time-picker-title__time .v-picker__title__btn')[0].trigger('click')
-      expect(selecting).toBeCalledWith(1)
+      expect(selecting).toBeCalledWith(selectingTimes.hour)
     })
   })
 })
