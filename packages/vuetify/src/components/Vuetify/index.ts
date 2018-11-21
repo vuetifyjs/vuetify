@@ -6,7 +6,7 @@ import theme from './mixins/theme'
 import icons from './mixins/icons'
 import options from './mixins/options'
 import genLang from './mixins/lang'
-import goTo from './util/goTo'
+import goTo from './goTo'
 
 // Utils
 import { consoleWarn, consoleError } from '../../util/console'
