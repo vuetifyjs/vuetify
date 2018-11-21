@@ -7,7 +7,7 @@
       "children": [
         {
           "type": "usage",
-          "value": "example"
+          "value": "usage"
         }
       ]
     },
@@ -16,12 +16,7 @@
       "children": [
         {
           "type": "api",
-          "value": [
-            "v-radio-group",
-            "v-radio",
-            "v-checkbox",
-            "v-switch"
-          ]
+          "value": [ "v-radio-group", "v-radio", "v-checkbox", "v-switch" ]
         }
       ]
     },
