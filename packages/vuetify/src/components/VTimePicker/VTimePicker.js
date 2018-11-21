@@ -23,7 +23,6 @@ export default {
   mixins: [Picker],
 
   props: {
-    useSeconds: Boolean,
     allowedHours: Function,
     allowedMinutes: Function,
     allowedSeconds: Function,
@@ -38,6 +37,7 @@ export default {
     max: String,
     readonly: Boolean,
     scrollable: Boolean,
+    useSeconds: Boolean,
     value: null
   },
 
