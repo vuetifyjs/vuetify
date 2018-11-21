@@ -14,6 +14,7 @@ const rangeHours12am = createRange(12)
 const rangeHours12pm = rangeHours12am.map(v => v + 12)
 const range60 = createRange(60)
 const selectingTimes = { hour: 1, minute: 2, second: 3 }
+export { selectingTimes }
 
 /* @vue/component */
 export default {
