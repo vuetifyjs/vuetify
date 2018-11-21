@@ -23,10 +23,7 @@ export default {
     },
     readonly: Boolean,
     useSeconds: Boolean,
-    selecting: {
-      type: Number,
-      default: 2
-    }
+    selecting: Number
   },
 
   methods: {
