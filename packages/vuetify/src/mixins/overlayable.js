@@ -9,6 +9,7 @@ export default {
   name: 'overlayable',
 
   props: {
+    absolute: Boolean,
     hideOverlay: Boolean
   },
 
@@ -111,7 +112,7 @@ export default {
      * @param {Event} e
      * @returns boolean
      */
-    checkPath (e) {
+    checkPath /* istanbul ignore next */ (e) {
       const path = e.path || this.composedPath(e)
       const delta = e.deltaY || -e.wheelDelta
 
@@ -141,7 +142,7 @@ export default {
      * @param {Event} e
      * @returns Element[]
      */
-    composedPath (e) {
+    composedPath /* istanbul ignore next */ (e) {
       if (e.composedPath) return e.composedPath()
 
       const path = []
