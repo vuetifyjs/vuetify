@@ -2,6 +2,6 @@
 
 module.exports = {
   'no-render-string-reference': {
-    create: require('./eslint-rules/no-render-string-reference')
+    create: require('./scripts/no-render-string-reference')
   }
 }

@@ -1,0 +1,185 @@
+@import '../bootstrap'
+@import '../theme'
+
+v-timeline($material)
+  &:before
+    background: $material.dividers
+
+  .v-timeline-item
+    &__dot
+      background: $material.cards
+
+    .v-card
+      &:before
+        border-right-color: $shadow-key-ambient-opacity
+
+theme(v-timeline, "v-timeline")
+
+timeline-dots($dot-size, $inner-dot-size, $inner-dot-margin)
+  height: $dot-size
+  left: 'calc(50% - %s)' % ($dot-size / 2)
+  width: $dot-size
+
+  .v-timeline-item__inner-dot
+    height: $inner-dot-size
+    margin:$inner-dot-margin
+    width: $inner-dot-size
+
+.v-timeline-item
+  display: flex
+  flex-direction: row-reverse
+  padding-bottom: 24px
+
+  &:nth-child(odd):not(.v-timeline-item--right), &--left
+    flex-direction: row
+
+    .v-card:before, .v-card:after
+      transform: rotate(180deg)
+      left: 100%
+
+    .v-timeline-item__opposite
+      margin-left: 96px
+      text-align: left
+      
+      .v-card:before, .v-card:after
+        transform: rotate(0)
+        left: -10px
+
+  &:nth-child(even):not(.v-timeline-item--left), &--right
+    .v-card:before, .v-card:after
+      right: 100%
+
+    .v-timeline-item__opposite
+      margin-right: 96px
+      text-align: right
+      
+      .v-card:before, .v-card:after
+        transform: rotate(180deg)
+        right: -10px
+
+  &__dot,
+  &__inner-dot
+    border-radius: 50%
+
+  &__dot
+    elevation(1)
+    align-self: center
+    position: absolute
+    timeline-dots(
+      $timeline-dot-regular-size,
+      $timeline-inner-dot-regular-size,
+      $timeline-inner-dot-regular-margin
+    )
+
+    &--small
+      timeline-dots(
+        $timeline-dot-small-size,
+        $timeline-inner-dot-small-size,
+        $timeline-inner-dot-small-margin
+      )
+
+    &--large
+      timeline-dots(
+        $timeline-dot-large-size,
+        $timeline-inner-dot-large-size,
+        $timeline-inner-dot-large-margin
+      )
+
+  &__inner-dot
+    display: flex
+    justify-content: center
+    align-items: center
+
+  &__body
+    position: relative
+    height: 100%
+    flex: 1 1 100%
+    max-width: calc(50% - 48px)
+
+  .v-card
+    &:before, &:after
+      content: ''
+      position: absolute
+      border-top: $timeline-wedge-size solid transparent
+      border-bottom: $timeline-wedge-size solid transparent
+      border-right: $timeline-wedge-size solid black
+      top: 'calc(50% - %s)' % $timeline-wedge-size
+
+    &:after
+      border-right-color: inherit
+
+    &:before
+      top: 'calc(50% - %s + 2px)' % $timeline-wedge-size
+
+  &__opposite
+    flex: 1 1 auto
+    align-self: center
+    max-width: calc(50% - 48px)
+
+  &--fill-dot
+    .v-timeline-item__inner-dot
+      height: inherit
+      margin: 0
+      width: inherit
+
+.v-timeline
+  padding-top: 24px
+  position: relative
+
+  &:before
+    bottom: 0
+    content: ''
+    height: 100%
+    left: calc(50% - 1px)
+    position: absolute
+    top: 0
+    width: 2px
+
+  &--align-top
+    .v-timeline-item
+      position: relative
+
+      &__dot
+        top: 6px
+
+        &--small
+          top: 12px
+
+        &--large
+          top: 0
+
+      .v-card
+        &:before
+          top: 'calc(0% + %s + 2px)' % $timeline-wedge-size
+
+        &:after
+          top: 'calc(0% + %s)' % $timeline-wedge-size
+
+  &--dense
+    &:before
+      left: 18px // -1 for line width
+
+    .v-timeline-item
+      &:nth-child(odd):not(.v-timeline-item--right), &--left
+        flex-direction: row-reverse
+
+        .v-card
+          &:before, &:after
+            right: initial
+            left: -($timeline-wedge-size)
+            transform: none
+
+      &__dot
+        left: 0
+
+      &__dot--small
+        left: 7px // -1 for line width
+
+      &__dot--large
+        left: -7px
+
+      &__body
+        max-width: calc(100% - 64px)
+
+      &__opposite
+        display: none

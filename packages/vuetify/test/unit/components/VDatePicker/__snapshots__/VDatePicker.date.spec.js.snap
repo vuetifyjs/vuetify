@@ -1,0 +1,3432 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
+
+<div class="v-picker v-card v-picker--date theme--light">
+  <div class="v-picker__title orange darken-1">
+    <div class="v-date-picker-title">
+      <div class="v-picker__title__btn v-date-picker-title__year">
+        2005
+      </div>
+      <div class="v-picker__title__btn v-date-picker-title__date v-picker__title__btn--active">
+        <div>
+          Tue, Nov 1
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="v-picker__body theme--light"
+       style="width: 290px;"
+  >
+    <div>
+      <div class="v-date-picker-header theme--light">
+        <button type="button"
+                class="v-btn v-btn--icon theme--light"
+        >
+          <div class="v-btn__content">
+            <i aria-hidden="true"
+               class="v-icon material-icons theme--light"
+            >
+              chevron_left
+            </i>
+          </div>
+        </button>
+        <div class="v-date-picker-header__value">
+          <strong class="primary--text">
+            November 2005
+          </strong>
+        </div>
+        <button type="button"
+                class="v-btn v-btn--icon theme--light"
+        >
+          <div class="v-btn__content">
+            <i aria-hidden="true"
+               class="v-icon material-icons theme--light"
+            >
+              chevron_right
+            </i>
+          </div>
+        </button>
+      </div>
+      <div class="v-date-picker-table v-date-picker-table--date theme--light">
+        <table>
+          <thead>
+            <tr>
+              <th>
+                S
+              </th>
+              <th>
+                M
+              </th>
+              <th>
+                T
+              </th>
+              <th>
+                W
+              </th>
+              <th>
+                T
+              </th>
+              <th>
+                F
+              </th>
+              <th>
+                S
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+              </td>
+              <td>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--active v-btn--icon v-btn--floating theme--light primary"
+                >
+                  <div class="v-btn__content">
+                    1
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    2
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    3
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    4
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    5
+                  </div>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    6
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    7
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    8
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    9
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    10
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    11
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    12
+                  </div>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    13
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    14
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    15
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    16
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    17
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    18
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    19
+                  </div>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    20
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    21
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    22
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    23
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    24
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    25
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    26
+                  </div>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    27
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    28
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    29
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    30
+                  </div>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
+
+<div class="v-picker v-card v-picker--date theme--light">
+  <div class="v-picker__title orange darken-1">
+    <div class="v-date-picker-title">
+      <div class="v-picker__title__btn v-date-picker-title__year">
+        2005
+      </div>
+      <div class="v-picker__title__btn v-date-picker-title__date v-picker__title__btn--active">
+        <div>
+          Tue, Nov 1
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="v-picker__body theme--light"
+       style="width: 290px;"
+  >
+    <div>
+      <div class="v-date-picker-header theme--light">
+        <button type="button"
+                class="v-btn v-btn--icon theme--light"
+        >
+          <div class="v-btn__content">
+            <i aria-hidden="true"
+               class="v-icon material-icons theme--light"
+            >
+              chevron_left
+            </i>
+          </div>
+        </button>
+        <div class="v-date-picker-header__value">
+          <strong class="orange--text text--darken-1">
+            November 2005
+          </strong>
+        </div>
+        <button type="button"
+                class="v-btn v-btn--icon theme--light"
+        >
+          <div class="v-btn__content">
+            <i aria-hidden="true"
+               class="v-icon material-icons theme--light"
+            >
+              chevron_right
+            </i>
+          </div>
+        </button>
+      </div>
+      <div class="v-date-picker-table v-date-picker-table--date theme--light">
+        <table>
+          <thead>
+            <tr>
+              <th>
+                S
+              </th>
+              <th>
+                M
+              </th>
+              <th>
+                T
+              </th>
+              <th>
+                W
+              </th>
+              <th>
+                T
+              </th>
+              <th>
+                F
+              </th>
+              <th>
+                S
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+              </td>
+              <td>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--active v-btn--icon v-btn--floating theme--light orange darken-1"
+                >
+                  <div class="v-btn__content">
+                    1
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    2
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    3
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    4
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    5
+                  </div>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    6
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    7
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    8
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    9
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    10
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    11
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    12
+                  </div>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    13
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    14
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    15
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    16
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    17
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    18
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    19
+                  </div>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    20
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    21
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    22
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    23
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    24
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    25
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    26
+                  </div>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    27
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    28
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    29
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    30
+                  </div>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
+
+<div class="v-picker v-card v-picker--date theme--dark">
+  <div class="v-picker__title">
+    <div class="v-date-picker-title">
+      <div class="v-picker__title__btn v-date-picker-title__year">
+        2013
+      </div>
+      <div class="v-picker__title__btn v-date-picker-title__date v-picker__title__btn--active">
+        <div>
+          Tue, May 7
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="v-picker__body theme--dark"
+       style="width: 290px;"
+  >
+    <div>
+      <div class="v-date-picker-header theme--dark">
+        <button type="button"
+                class="v-btn v-btn--icon theme--dark"
+        >
+          <div class="v-btn__content">
+            <i aria-hidden="true"
+               class="v-icon material-icons theme--dark"
+            >
+              chevron_left
+            </i>
+          </div>
+        </button>
+        <div class="v-date-picker-header__value">
+          <strong class="accent--text">
+            May 2013
+          </strong>
+        </div>
+        <button type="button"
+                class="v-btn v-btn--icon theme--dark"
+        >
+          <div class="v-btn__content">
+            <i aria-hidden="true"
+               class="v-icon material-icons theme--dark"
+            >
+              chevron_right
+            </i>
+          </div>
+        </button>
+      </div>
+      <div class="v-date-picker-table v-date-picker-table--date theme--dark">
+        <table>
+          <thead>
+            <tr>
+              <th>
+                S
+              </th>
+              <th>
+                M
+              </th>
+              <th>
+                T
+              </th>
+              <th>
+                W
+              </th>
+              <th>
+                T
+              </th>
+              <th>
+                F
+              </th>
+              <th>
+                S
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+              </td>
+              <td>
+              </td>
+              <td>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
+                >
+                  <div class="v-btn__content">
+                    1
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
+                >
+                  <div class="v-btn__content">
+                    2
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
+                >
+                  <div class="v-btn__content">
+                    3
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
+                >
+                  <div class="v-btn__content">
+                    4
+                  </div>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
+                >
+                  <div class="v-btn__content">
+                    5
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
+                >
+                  <div class="v-btn__content">
+                    6
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--active v-btn--icon v-btn--floating theme--dark accent"
+                >
+                  <div class="v-btn__content">
+                    7
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
+                >
+                  <div class="v-btn__content">
+                    8
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
+                >
+                  <div class="v-btn__content">
+                    9
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
+                >
+                  <div class="v-btn__content">
+                    10
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
+                >
+                  <div class="v-btn__content">
+                    11
+                  </div>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
+                >
+                  <div class="v-btn__content">
+                    12
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
+                >
+                  <div class="v-btn__content">
+                    13
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
+                >
+                  <div class="v-btn__content">
+                    14
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
+                >
+                  <div class="v-btn__content">
+                    15
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
+                >
+                  <div class="v-btn__content">
+                    16
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
+                >
+                  <div class="v-btn__content">
+                    17
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
+                >
+                  <div class="v-btn__content">
+                    18
+                  </div>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
+                >
+                  <div class="v-btn__content">
+                    19
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
+                >
+                  <div class="v-btn__content">
+                    20
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
+                >
+                  <div class="v-btn__content">
+                    21
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
+                >
+                  <div class="v-btn__content">
+                    22
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
+                >
+                  <div class="v-btn__content">
+                    23
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
+                >
+                  <div class="v-btn__content">
+                    24
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
+                >
+                  <div class="v-btn__content">
+                    25
+                  </div>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
+                >
+                  <div class="v-btn__content">
+                    26
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
+                >
+                  <div class="v-btn__content">
+                    27
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
+                >
+                  <div class="v-btn__content">
+                    28
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
+                >
+                  <div class="v-btn__content">
+                    29
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
+                >
+                  <div class="v-btn__content">
+                    30
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--dark"
+                >
+                  <div class="v-btn__content">
+                    31
+                  </div>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VDatePicker.js should match snapshot with default settings 1`] = `
+
+<div class="v-picker v-card v-picker--date theme--light">
+  <div class="v-picker__title primary">
+    <div class="v-date-picker-title">
+      <div class="v-picker__title__btn v-date-picker-title__year">
+        2013
+      </div>
+      <div class="v-picker__title__btn v-date-picker-title__date v-picker__title__btn--active">
+        <div>
+          Tue, May 7
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="v-picker__body theme--light"
+       style="width: 290px;"
+  >
+    <div>
+      <div class="v-date-picker-header theme--light">
+        <button type="button"
+                class="v-btn v-btn--icon theme--light"
+        >
+          <div class="v-btn__content">
+            <i aria-hidden="true"
+               class="v-icon material-icons theme--light"
+            >
+              chevron_left
+            </i>
+          </div>
+        </button>
+        <div class="v-date-picker-header__value">
+          <strong class="accent--text">
+            May 2013
+          </strong>
+        </div>
+        <button type="button"
+                class="v-btn v-btn--icon theme--light"
+        >
+          <div class="v-btn__content">
+            <i aria-hidden="true"
+               class="v-icon material-icons theme--light"
+            >
+              chevron_right
+            </i>
+          </div>
+        </button>
+      </div>
+      <div class="v-date-picker-table v-date-picker-table--date theme--light">
+        <table>
+          <thead>
+            <tr>
+              <th>
+                S
+              </th>
+              <th>
+                M
+              </th>
+              <th>
+                T
+              </th>
+              <th>
+                W
+              </th>
+              <th>
+                T
+              </th>
+              <th>
+                F
+              </th>
+              <th>
+                S
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+              </td>
+              <td>
+              </td>
+              <td>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    1
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    2
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    3
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    4
+                  </div>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    5
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    6
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--active v-btn--icon v-btn--floating theme--light accent"
+                >
+                  <div class="v-btn__content">
+                    7
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    8
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    9
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    10
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    11
+                  </div>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    12
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    13
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    14
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    15
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    16
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    17
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    18
+                  </div>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    19
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    20
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    21
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    22
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    23
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    24
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    25
+                  </div>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    26
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    27
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    28
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    29
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    30
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    31
+                  </div>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VDatePicker.js should match snapshot with year icon 1`] = `
+
+<div class="v-picker__title primary">
+  <div class="v-date-picker-title">
+    <div class="v-picker__title__btn v-date-picker-title__year">
+      2005
+      <i aria-hidden="true"
+         class="v-icon material-icons theme--dark"
+      >
+        year
+      </i>
+    </div>
+    <div class="v-picker__title__btn v-date-picker-title__date v-picker__title__btn--active">
+      <div>
+        Tue, Nov 1
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VDatePicker.js should render component with min/max props 1`] = `
+
+<div class="v-picker v-card v-picker--date theme--light">
+  <div class="v-picker__title primary">
+    <div class="v-date-picker-title">
+      <div class="v-picker__title__btn v-date-picker-title__year">
+        2013
+      </div>
+      <div class="v-picker__title__btn v-date-picker-title__date v-picker__title__btn--active">
+        <div>
+          Mon, Jan 7
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="v-picker__body theme--light"
+       style="width: 290px;"
+  >
+    <div>
+      <div class="v-date-picker-header theme--light">
+        <button disabled="disabled"
+                type="button"
+                class="v-btn v-btn--disabled v-btn--icon theme--light"
+        >
+          <div class="v-btn__content">
+            <i aria-hidden="true"
+               class="v-icon material-icons theme--light"
+            >
+              chevron_left
+            </i>
+          </div>
+        </button>
+        <div class="v-date-picker-header__value">
+          <strong class="accent--text">
+            January 2013
+          </strong>
+        </div>
+        <button disabled="disabled"
+                type="button"
+                class="v-btn v-btn--disabled v-btn--icon theme--light"
+        >
+          <div class="v-btn__content">
+            <i aria-hidden="true"
+               class="v-icon material-icons theme--light"
+            >
+              chevron_right
+            </i>
+          </div>
+        </button>
+      </div>
+      <div class="v-date-picker-table v-date-picker-table--date theme--light">
+        <table>
+          <thead>
+            <tr>
+              <th>
+                S
+              </th>
+              <th>
+                M
+              </th>
+              <th>
+                T
+              </th>
+              <th>
+                W
+              </th>
+              <th>
+                T
+              </th>
+              <th>
+                F
+              </th>
+              <th>
+                S
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+              </td>
+              <td>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    1
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    2
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    3
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    4
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    5
+                  </div>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    6
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--active v-btn--icon v-btn--floating theme--light accent"
+                >
+                  <div class="v-btn__content">
+                    7
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    8
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    9
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    10
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    11
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    12
+                  </div>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    13
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    14
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    15
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    16
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    17
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    18
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    19
+                  </div>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    20
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    21
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    22
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    23
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    24
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    25
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    26
+                  </div>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    27
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    28
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    29
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    30
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    31
+                  </div>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VDatePicker.js should render component with min/max props 2`] = `
+
+<div class="v-picker v-card v-picker--date theme--light">
+  <div class="v-picker__title primary">
+    <div class="v-date-picker-title">
+      <div class="v-picker__title__btn v-date-picker-title__year">
+        2013
+      </div>
+      <div class="v-picker__title__btn v-date-picker-title__date v-picker__title__btn--active">
+        <div>
+          Mon, Jan 7
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="v-picker__body theme--light"
+       style="width: 290px;"
+  >
+    <div class="fade-transition-leave fade-transition-leave-active">
+      <div class="v-date-picker-header theme--light">
+        <button disabled="disabled"
+                type="button"
+                class="v-btn v-btn--disabled v-btn--icon theme--light"
+        >
+          <div class="v-btn__content">
+            <i aria-hidden="true"
+               class="v-icon material-icons theme--light"
+            >
+              chevron_left
+            </i>
+          </div>
+        </button>
+        <div class="v-date-picker-header__value">
+          <strong class="accent--text">
+            January 2013
+          </strong>
+        </div>
+        <button disabled="disabled"
+                type="button"
+                class="v-btn v-btn--disabled v-btn--icon theme--light"
+        >
+          <div class="v-btn__content">
+            <i aria-hidden="true"
+               class="v-icon material-icons theme--light"
+            >
+              chevron_right
+            </i>
+          </div>
+        </button>
+      </div>
+      <div class="v-date-picker-table v-date-picker-table--date theme--light">
+        <table>
+          <thead>
+            <tr>
+              <th>
+                S
+              </th>
+              <th>
+                M
+              </th>
+              <th>
+                T
+              </th>
+              <th>
+                W
+              </th>
+              <th>
+                T
+              </th>
+              <th>
+                F
+              </th>
+              <th>
+                S
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+              </td>
+              <td>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    1
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    2
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    3
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    4
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    5
+                  </div>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    6
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--active v-btn--icon v-btn--floating theme--light accent"
+                >
+                  <div class="v-btn__content">
+                    7
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    8
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    9
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    10
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    11
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    12
+                  </div>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    13
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    14
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    15
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    16
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    17
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    18
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    19
+                  </div>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    20
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    21
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    22
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    23
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    24
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    25
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    26
+                  </div>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    27
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    28
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    29
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    30
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    31
+                  </div>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="fade-transition-enter fade-transition-enter-active">
+      <div class="v-date-picker-header theme--light">
+        <button disabled="disabled"
+                type="button"
+                class="v-btn v-btn--disabled v-btn--icon theme--light"
+        >
+          <div class="v-btn__content">
+            <i aria-hidden="true"
+               class="v-icon material-icons theme--light"
+            >
+              chevron_left
+            </i>
+          </div>
+        </button>
+        <div class="v-date-picker-header__value">
+          <strong class="accent--text">
+            2013
+          </strong>
+        </div>
+        <button disabled="disabled"
+                type="button"
+                class="v-btn v-btn--disabled v-btn--icon theme--light"
+        >
+          <div class="v-btn__content">
+            <i aria-hidden="true"
+               class="v-icon material-icons theme--light"
+            >
+              chevron_right
+            </i>
+          </div>
+        </button>
+      </div>
+      <div class="v-date-picker-table v-date-picker-table--month theme--light">
+        <table>
+          <tbody>
+            <tr>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--active v-btn--depressed theme--light accent"
+                >
+                  <div class="v-btn__content">
+                    Jan
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    Feb
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    Mar
+                  </div>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    Apr
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    May
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    Jun
+                  </div>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    Jul
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    Aug
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    Sep
+                  </div>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    Oct
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    Nov
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    Dec
+                  </div>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VDatePicker.js should render component with min/max props 3`] = `
+
+<div class="v-picker v-card v-picker--date theme--light">
+  <div class="v-picker__title primary">
+    <div class="v-date-picker-title">
+      <div class="v-picker__title__btn v-date-picker-title__year v-picker__title__btn--active">
+        2013
+      </div>
+      <div class="v-picker__title__btn v-date-picker-title__date">
+        <div>
+          Mon, Jan 7
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="v-picker__body theme--light"
+       style="width: 290px;"
+  >
+    <div class="fade-transition-leave fade-transition-leave-active">
+      <div class="v-date-picker-header theme--light">
+        <button disabled="disabled"
+                type="button"
+                class="v-btn v-btn--disabled v-btn--icon theme--light"
+        >
+          <div class="v-btn__content">
+            <i aria-hidden="true"
+               class="v-icon material-icons theme--light"
+            >
+              chevron_left
+            </i>
+          </div>
+        </button>
+        <div class="v-date-picker-header__value">
+          <strong class="accent--text">
+            January 2013
+          </strong>
+        </div>
+        <button disabled="disabled"
+                type="button"
+                class="v-btn v-btn--disabled v-btn--icon theme--light"
+        >
+          <div class="v-btn__content">
+            <i aria-hidden="true"
+               class="v-icon material-icons theme--light"
+            >
+              chevron_right
+            </i>
+          </div>
+        </button>
+      </div>
+      <div class="v-date-picker-table v-date-picker-table--date theme--light">
+        <table>
+          <thead>
+            <tr>
+              <th>
+                S
+              </th>
+              <th>
+                M
+              </th>
+              <th>
+                T
+              </th>
+              <th>
+                W
+              </th>
+              <th>
+                T
+              </th>
+              <th>
+                F
+              </th>
+              <th>
+                S
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+              </td>
+              <td>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    1
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    2
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    3
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    4
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    5
+                  </div>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    6
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--active v-btn--icon v-btn--floating theme--light accent"
+                >
+                  <div class="v-btn__content">
+                    7
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    8
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    9
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    10
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    11
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    12
+                  </div>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    13
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    14
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    15
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    16
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    17
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    18
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    19
+                  </div>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    20
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    21
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    22
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    23
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    24
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    25
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    26
+                  </div>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    27
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    28
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    29
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    30
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    31
+                  </div>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="fade-transition-leave fade-transition-leave-active">
+      <div class="v-date-picker-header theme--light">
+        <button disabled="disabled"
+                type="button"
+                class="v-btn v-btn--disabled v-btn--icon theme--light"
+        >
+          <div class="v-btn__content">
+            <i aria-hidden="true"
+               class="v-icon material-icons theme--light"
+            >
+              chevron_left
+            </i>
+          </div>
+        </button>
+        <div class="v-date-picker-header__value">
+          <strong class="accent--text">
+            2013
+          </strong>
+        </div>
+        <button disabled="disabled"
+                type="button"
+                class="v-btn v-btn--disabled v-btn--icon theme--light"
+        >
+          <div class="v-btn__content">
+            <i aria-hidden="true"
+               class="v-icon material-icons theme--light"
+            >
+              chevron_right
+            </i>
+          </div>
+        </button>
+      </div>
+      <div class="v-date-picker-table v-date-picker-table--month theme--light">
+        <table>
+          <tbody>
+            <tr>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--active v-btn--depressed theme--light accent"
+                >
+                  <div class="v-btn__content">
+                    Jan
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    Feb
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    Mar
+                  </div>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    Apr
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    May
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    Jun
+                  </div>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    Jul
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    Aug
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    Sep
+                  </div>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    Oct
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    Nov
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--disabled theme--light"
+                        disabled
+                >
+                  <div class="v-btn__content">
+                    Dec
+                  </div>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="fade-transition-enter fade-transition-enter-active">
+      <ul class="v-date-picker-years">
+        <li class="active primary--text">
+          2013
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VDatePicker.js should render readonly picker 1`] = `
+
+<div class="v-picker v-card v-picker--date theme--light">
+  <div class="v-picker__title primary">
+    <div class="v-date-picker-title"
+         style="pointer-events: none;"
+    >
+      <div class="v-picker__title__btn v-date-picker-title__year">
+        2013
+      </div>
+      <div class="v-picker__title__btn v-date-picker-title__date v-picker__title__btn--active">
+        <div>
+          Tue, May 7
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="v-picker__body theme--light"
+       style="width: 290px;"
+  >
+    <div style="pointer-events: none;">
+      <div class="v-date-picker-header theme--light">
+        <button disabled="disabled"
+                type="button"
+                class="v-btn v-btn--disabled v-btn--icon theme--light"
+        >
+          <div class="v-btn__content">
+            <i aria-hidden="true"
+               class="v-icon material-icons theme--light"
+            >
+              chevron_left
+            </i>
+          </div>
+        </button>
+        <div class="v-date-picker-header__value v-date-picker-header__value--disabled">
+          <strong>
+            May 2013
+          </strong>
+        </div>
+        <button disabled="disabled"
+                type="button"
+                class="v-btn v-btn--disabled v-btn--icon theme--light"
+        >
+          <div class="v-btn__content">
+            <i aria-hidden="true"
+               class="v-icon material-icons theme--light"
+            >
+              chevron_right
+            </i>
+          </div>
+        </button>
+      </div>
+      <div class="v-date-picker-table v-date-picker-table--date theme--light">
+        <table>
+          <thead>
+            <tr>
+              <th>
+                S
+              </th>
+              <th>
+                M
+              </th>
+              <th>
+                T
+              </th>
+              <th>
+                W
+              </th>
+              <th>
+                T
+              </th>
+              <th>
+                F
+              </th>
+              <th>
+                S
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+              </td>
+              <td>
+              </td>
+              <td>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    1
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    2
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    3
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    4
+                  </div>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    5
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    6
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--active v-btn--icon v-btn--floating v-btn--disabled theme--light accent"
+                >
+                  <div class="v-btn__content">
+                    7
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    8
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    9
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    10
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    11
+                  </div>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    12
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    13
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    14
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    15
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    16
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    17
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    18
+                  </div>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    19
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    20
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    21
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    22
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    23
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    24
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    25
+                  </div>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    26
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    27
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    28
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    29
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    30
+                  </div>
+                </button>
+              </td>
+              <td>
+                <button type="button"
+                        class="v-btn v-btn--flat v-btn--floating theme--light"
+                >
+                  <div class="v-btn__content">
+                    31
+                  </div>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;

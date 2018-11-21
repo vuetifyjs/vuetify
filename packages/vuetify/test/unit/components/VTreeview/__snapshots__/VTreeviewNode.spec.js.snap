@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VTreeViewNode.ts should generate a transition element 1`] = `
+
+<div class="v-treeview-node v-treeview-node--leaf">
+  <div class="v-treeview-node__root">
+    <div class="v-treeview-node__content">
+      <label class="v-treeview-node__label">
+      </label>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VTreeViewNode.ts should use scoped slots 1`] = `
+
+<div class="v-treeview-node v-treeview-node--leaf">
+  <div class="v-treeview-node__root">
+    <div class="v-treeview-node__content">
+      <div>
+        foobar
+      </div>
+      <label class="v-treeview-node__label">
+      </label>
+      <div>
+        foobar
+      </div>
+    </div>
+  </div>
+</div>
+
+`;

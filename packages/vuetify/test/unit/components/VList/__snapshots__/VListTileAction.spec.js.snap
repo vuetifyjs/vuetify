@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VListTileAction.js should render component and match snapshot 1`] = `
+
+<div class="v-list__tile__action">
+</div>
+
+`;
+
+exports[`VListTileAction.js should render component with many children and match snapshot 1`] = `
+
+<div class="v-list__tile__action v-list__tile__action--stack">
+  <div>
+  </div>
+  <span>
+  </span>
+</div>
+
+`;
+
+exports[`VListTileAction.js should render component with one children and match snapshot 1`] = `
+
+<div class="v-list__tile__action">
+  <div>
+  </div>
+</div>
+
+`;
+
+exports[`VListTileAction.js should render component with static class and match snapshot 1`] = `
+
+<div class="v-list__tile__action static-class">
+</div>
+
+`;
+
+exports[`VListTileAction.js should work with v-html 1`] = `
+
+<div class="v-list__tile__action">
+  <b>
+    something
+  </b>
+</div>
+
+`;

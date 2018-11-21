@@ -1,0 +1,145 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VSelect2 should add color to selected index 1`] = `
+
+<div role="combobox"
+     class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty theme--light"
+>
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-select__slot">
+        <div class="v-select__selections">
+          <div class="v-select__selection v-select__selection--comma primary--text">
+            foo
+          </div>
+          <input readonly="readonly"
+                 type="text"
+                 autocomplete="on"
+                 aria-readonly="false"
+          >
+        </div>
+        <div class="v-input__append-inner">
+          <div class="v-input__icon v-input__icon--append">
+            <i aria-hidden="true"
+               class="v-icon material-icons theme--light"
+            >
+              arrow_drop_down
+            </i>
+          </div>
+        </div>
+      </div>
+      <div class="v-menu">
+      </div>
+    </div>
+    <div class="v-text-field__details">
+      <div class="v-messages theme--light">
+        <div class="v-messages__wrapper">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VSelect2 should be clearable with prop, dirty and multi select 1`] = `
+
+<div role="combobox"
+     class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty theme--light"
+>
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-select__slot">
+        <div class="v-select__selections">
+          <div class="v-select__selection v-select__selection--comma">
+            1
+          </div>
+          <input readonly="readonly"
+                 type="text"
+                 autocomplete="on"
+                 aria-readonly="false"
+          >
+        </div>
+        <div class="v-input__append-inner">
+          <div class="v-input__icon v-input__icon--clear">
+            <i aria-hidden="true"
+               class="v-icon v-icon--link material-icons theme--light"
+            >
+              clear
+            </i>
+          </div>
+        </div>
+        <div class="v-input__append-inner">
+          <div class="v-input__icon v-input__icon--append">
+            <i aria-hidden="true"
+               class="v-icon material-icons theme--light"
+            >
+              arrow_drop_down
+            </i>
+          </div>
+        </div>
+      </div>
+      <div class="v-menu">
+      </div>
+    </div>
+    <div class="v-text-field__details">
+      <div class="v-messages theme--light">
+        <div class="v-messages__wrapper">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VSelect2 should be clearable with prop, dirty and single select 1`] = `
+
+<div role="combobox"
+     class="v-input v-text-field v-select v-input--is-label-active v-input--is-dirty theme--light"
+>
+  <div class="v-input__control">
+    <div class="v-input__slot">
+      <div class="v-select__slot">
+        <div class="v-select__selections">
+          <div class="v-select__selection v-select__selection--comma">
+            1
+          </div>
+          <input readonly="readonly"
+                 type="text"
+                 autocomplete="on"
+                 aria-readonly="false"
+          >
+        </div>
+        <div class="v-input__append-inner">
+          <div class="v-input__icon v-input__icon--clear">
+            <i aria-hidden="true"
+               class="v-icon v-icon--link material-icons theme--light"
+            >
+              clear
+            </i>
+          </div>
+        </div>
+        <div class="v-input__append-inner">
+          <div class="v-input__icon v-input__icon--append">
+            <i aria-hidden="true"
+               class="v-icon material-icons theme--light"
+            >
+              arrow_drop_down
+            </i>
+          </div>
+        </div>
+      </div>
+      <div class="v-menu">
+      </div>
+    </div>
+    <div class="v-text-field__details">
+      <div class="v-messages theme--light">
+        <div class="v-messages__wrapper">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;

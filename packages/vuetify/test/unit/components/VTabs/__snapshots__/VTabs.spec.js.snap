@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VTabs should render generic elements in the tab container 1`] = `
+
+<div class="v-tabs">
+  <div class="v-tabs__bar theme--light">
+    <div class="v-tabs__wrapper">
+      <div class="v-tabs__container">
+        <div class="test-element">
+          foobar
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VTabs should show tabs arrows 1`] = `
+
+<div class="v-tabs">
+  <div class="v-tabs__bar theme--light">
+    <div class="v-tabs__wrapper v-tabs__wrapper--show-arrows">
+      <div class="v-tabs__container v-tabs__container--overflow">
+        <div class="v-tabs__slider-wrapper">
+          <div class="v-tabs__slider accent">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;

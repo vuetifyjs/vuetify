@@ -1,0 +1,38 @@
+@import '../bootstrap'
+@import '../theme'
+
+v-divider($material)
+  border-color: $material.dividers
+
+theme(v-divider, "v-divider")
+
+.v-divider
+  display: block
+  flex: 1 1 0px
+  max-width: 100%
+  height: 0px
+  max-height: 0px
+  border: solid
+  border-width: thin 0 0 0
+  transition: inherit
+
+  &--inset:not(.v-divider--vertical)
+    margin-left: 72px
+    max-width: calc(100% - 72px)
+
+  &--vertical
+    align-self: stretch
+    border: solid
+    border-width: 0 thin 0 0
+    display: inline-flex
+    height: inherit
+    min-height: 100%
+    max-height: 100%
+    max-width: 0px
+    width: 0px
+    vertical-align: text-bottom
+
+    &.v-divider--inset
+      margin-top: 8px
+      min-height: 0
+      max-height: calc(100% - 16px)
