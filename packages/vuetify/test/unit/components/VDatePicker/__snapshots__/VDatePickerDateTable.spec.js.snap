@@ -2316,12 +2316,6 @@ exports[`VDatePickerDateTable.js should render component with showWeek and match
         <th>
         </th>
         <th>
-          S
-        </th>
-        <th>
-          M
-        </th>
-        <th>
           T
         </th>
         <th>
@@ -2336,14 +2330,24 @@ exports[`VDatePickerDateTable.js should render component with showWeek and match
         <th>
           S
         </th>
+        <th>
+          S
+        </th>
+        <th>
+          M
+        </th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td>
           <small class="v-date-picker-table--date__week">
-            19
+            06
           </small>
+        </td>
+        <td>
+        </td>
+        <td>
         </td>
         <td>
           <button type="button"
@@ -2390,6 +2394,13 @@ exports[`VDatePickerDateTable.js should render component with showWeek and match
             </div>
           </button>
         </td>
+      </tr>
+      <tr>
+        <td>
+          <small class="v-date-picker-table--date__week">
+            07
+          </small>
+        </td>
         <td>
           <button type="button"
                   class="v-btn v-btn--flat v-btn--floating theme--light"
@@ -2407,13 +2418,6 @@ exports[`VDatePickerDateTable.js should render component with showWeek and match
               7
             </div>
           </button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <small class="v-date-picker-table--date__week">
-            20
-          </small>
         </td>
         <td>
           <button type="button"
@@ -2460,6 +2464,13 @@ exports[`VDatePickerDateTable.js should render component with showWeek and match
             </div>
           </button>
         </td>
+      </tr>
+      <tr>
+        <td>
+          <small class="v-date-picker-table--date__week">
+            08
+          </small>
+        </td>
         <td>
           <button type="button"
                   class="v-btn v-btn--flat v-btn--floating theme--light"
@@ -2477,13 +2488,6 @@ exports[`VDatePickerDateTable.js should render component with showWeek and match
               14
             </div>
           </button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <small class="v-date-picker-table--date__week">
-            21
-          </small>
         </td>
         <td>
           <button type="button"
@@ -2530,6 +2534,13 @@ exports[`VDatePickerDateTable.js should render component with showWeek and match
             </div>
           </button>
         </td>
+      </tr>
+      <tr>
+        <td>
+          <small class="v-date-picker-table--date__week">
+            09
+          </small>
+        </td>
         <td>
           <button type="button"
                   class="v-btn v-btn--flat v-btn--floating theme--light"
@@ -2547,13 +2558,6 @@ exports[`VDatePickerDateTable.js should render component with showWeek and match
               21
             </div>
           </button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <small class="v-date-picker-table--date__week">
-            22
-          </small>
         </td>
         <td>
           <button type="button"
@@ -2600,6 +2604,13 @@ exports[`VDatePickerDateTable.js should render component with showWeek and match
             </div>
           </button>
         </td>
+      </tr>
+      <tr>
+        <td>
+          <small class="v-date-picker-table--date__week">
+            10
+          </small>
+        </td>
         <td>
           <button type="button"
                   class="v-btn v-btn--flat v-btn--floating theme--light"
@@ -2615,40 +2626,6 @@ exports[`VDatePickerDateTable.js should render component with showWeek and match
           >
             <div class="v-btn__content">
               28
-            </div>
-          </button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <small class="v-date-picker-table--date__week">
-            23
-          </small>
-        </td>
-        <td>
-          <button type="button"
-                  class="v-btn v-btn--flat v-btn--floating theme--light"
-          >
-            <div class="v-btn__content">
-              29
-            </div>
-          </button>
-        </td>
-        <td>
-          <button type="button"
-                  class="v-btn v-btn--flat v-btn--floating theme--light"
-          >
-            <div class="v-btn__content">
-              30
-            </div>
-          </button>
-        </td>
-        <td>
-          <button type="button"
-                  class="v-btn v-btn--flat v-btn--floating theme--light"
-          >
-            <div class="v-btn__content">
-              31
             </div>
           </button>
         </td>

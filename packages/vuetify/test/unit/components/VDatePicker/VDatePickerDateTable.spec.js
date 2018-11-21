@@ -17,9 +17,10 @@ test('VDatePickerDateTable.js', ({ mount }) => {
   it('should render component with showWeek and match snapshot', () => {
     const wrapper = mount(VDatePickerDateTable, {
       propsData: {
-        tableDate: '2005-05',
+        tableDate: '2018-02',
         current: '2005-07',
-        value: '2005-11-03',
+        value: null,
+        firstDayOfWeek: 2,
         showWeek: true
       }
     })
