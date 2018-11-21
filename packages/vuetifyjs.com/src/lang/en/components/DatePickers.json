@@ -1,109 +1,109 @@
 {
-  "header": "Date/month picker",
+  "header": "# Date/month picker",
   "headerText": "The `v-date-picker` is stand-alone component that can be utilized in many existing Vuetify components. It offers the user a visual representation for selecting date/month.",
   "examples": {
     "dateLight": {
-      "header": "Date pickers",
+      "header": "### Date pickers",
       "desc": "Date pickers come in two orientation variations, portrait **(default)** and landscape. By default they are emitting `input` event when the day (for date picker) or month (for month picker), but with **reactive** prop they can update the model even after clicking year/month."
     },
     "dateColorable": {
-      "header": "Date pickers - Colors",
+      "header": "### Date pickers - Colors",
       "desc": "Date picker colors can be set using the `color` and `header-color` props. If `header-color` prop is not provided header will use the `color` prop value."
     },
     "dateDialogAndMenu": {
-      "header": "Date pickers - In dialog and menu",
+      "header": "### Date pickers - In dialog and menu",
       "desc": "When integrating a picker into a `v-text-field`, it is recommended to use the **readonly** prop. This will prevent mobile keyboards from triggering. To save vertical space, you can also hide the picker title.  \n\n  Pickers expose a scoped slot that allow you to hook into save and cancel functionality. This will maintain an old value which can be replaced if the user cancels."
     },
     "dateFormatting": {
-      "header": "Date pickers - formatting date",
+      "header": "### Date pickers - formatting date",
       "desc": "If you need to display date in the custom format (different than YYYY-MM-DD) you need to use the formatting function."
     },
     "dateFormattingMomentDatefns": {
-      "header": "Date pickers - formatting date using external libs",
+      "header": "### Date pickers - formatting date using external libs",
       "desc": "Formatting dates is possible also with external libs such as Moment.js or date-fns"
     },
     "dateAllowedDates": {
-      "header": "Date pickers - Allowed dates",
+      "header": "### Date pickers - Allowed dates",
       "desc": "You can specify allowed dates using arrays, objects, and functions."
     },
     "dateMultiple": {
-      "header": "Date pickers - Mutiple",
+      "header": "### Date pickers - Mutiple",
       "desc": "Date picker can now select multiple dates with the `multiple` prop. If using `multiple` then date picker expects its model to be an array."
     },
     "dateWidth": {
-      "header": "Date pickers - Setting picker width",
+      "header": "### Date pickers - Setting picker width",
       "desc": "You can specify allowed the picker's width or make it full width."
     },
     "dateBirthday": {
-      "header": "Date pickers - birthday picker",
+      "header": "### Date pickers - birthday picker",
       "desc": "Starting with year picker by default, resticting dates range and closing the picker menu after selecting the day make the perfect birthday picker."
     },
     "datePickerDate": {
-      "header": "Date pickers - react to displayed month/year change",
+      "header": "### Date pickers - react to displayed month/year change",
       "desc": "You can watch the `pickerDate` which is the displayed month/year (depending on the picker type and active view) to perform some action when it changes."
     },
     "dateEvents": {
-      "header": "Date pickers - Events",
+      "header": "### Date pickers - Events",
       "desc": "You can specify events using arrays, objects or functions. To change the default color of the event use **event-color** prop. Your **events** function or object can return an array of colors (material or css) in case you want to display multiple event indicators."
     },
     "dateInternationalization": {
-      "header": "Date pickers - Internationalization",
+      "header": "### Date pickers - Internationalization",
       "desc": "The date picker supports internationalization through the JavaScript Date object. Specify a BCP 47 language tag using the `locale` prop, and then set the first day of the week with the `first-day-of-week` prop."
     },
     "dateIcons": {
-      "header": "Date pickers - icons",
+      "header": "### Date pickers - icons",
       "desc": "You can override the default icons used in the picker."
     },
     "dateReadonly": {
-      "header": "Date pickers - read only",
+      "header": "### Date pickers - read only",
       "desc": "Selecting new date could be disabled by adding **readonly** prop."
     },
     "dateCurrent": {
-      "header": "Date pickers - current date indicator",
+      "header": "### Date pickers - current date indicator",
       "desc": "By default the current date is displayed using outline button - **show-current** prop allows you to remove the border or select different date to be displayed as the current one."
     },
     "monthLight": {
-      "header": "Month pickers",
+      "header": "### Month pickers",
       "desc": "Month pickers come in two orientation variations, portrait **(default)** and landscape."
     },
     "monthColorable": {
-      "header": "Month pickers - Colors",
+      "header": "### Month pickers - Colors",
       "desc": "Month picker colors can be set using the `color` and `header-color` props. If `header-color` prop is not provided header will use the `color` prop value."
     },
     "monthDialogAndMenu": {
-      "header": "Month pickers - In dialog and menu",
+      "header": "### Month pickers - In dialog and menu",
       "desc": "When integrating a picker into a `v-text-field`, it is recommended to use the **readonly** prop. This will prevent mobile keyboards from triggering. To save vertical space, you can also hide the picker title. \n\n Pickers expose a scoped slot that allow you to hook into save and cancel functionality. This will maintain an old value which can be replaced if the user cancels."
     },
     "monthAllowedMonths": {
-      "header": "Month pickers - Allowed months",
+      "header": "### Month pickers - Allowed months",
       "desc": "You can specify allowed months using arrays, objects or functions."
     },
     "monthMultiple": {
-      "header": "Month pickers - Multiple",
+      "header": "### Month pickers - Multiple",
       "desc": "Month pickers can now select multiple months with the `multiple` prop. If using `multiple` then the month picker expects its model to be an array."
     },
     "monthWidth": {
-      "header": "Month pickers - Setting picker width",
+      "header": "### Month pickers - Setting picker width",
       "desc": "You can specify allowed the picker's width or make it full width."
     },
     "monthEvents": {
-      "header": "Month pickers - Events",
+      "header": "### Month pickers - Events",
       "desc": "You can specify events using arrays, objects or functions. To change the default color of the event use **event-color** prop. Your **events** function or object can return an array of colors (material or css) in case you want to display multiple event indicators."
     },
     "monthInternationalization": {
-      "header": "Month pickers - Internationalization",
+      "header": "### Month pickers - Internationalization",
       "desc": "The month picker supports internationalization through the JavaScript Date object. Specify a BCP 47 language tag using the `locale` prop, and then set the first day of the week with the `first-day-of-week` prop."
     },
     "monthIcons": {
-      "header": "Month pickers - icons",
+      "header": "### Month pickers - icons",
       "desc": "You can override the default icons used in the picker."
     },
     "monthReadonly": {
-      "header": "Month pickers - read only",
+      "header": "### Month pickers - read only",
       "desc": "Selecting new date could be disabled by adding **readonly** prop."
     },
     "monthCurrent": {
-      "header": "Month pickers - current month indicator",
+      "header": "### Month pickers - current month indicator",
       "desc": "By default the current month is displayed using outline button - **show-current** prop allows you to remove the border or select different month to be displayed as the current one."
     }
   },

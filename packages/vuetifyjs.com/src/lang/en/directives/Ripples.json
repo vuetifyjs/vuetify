@@ -3,42 +3,42 @@
   "headerText": "The `v-ripple` directive is used to show action from a user. It can be applied to any block level element. Numerous components come with the ripple directive built in, such as the `v-btn`, `v-tabs-item` and many more.",
   "examples": {
     "buttons": {
-      "header": "## Default",
+      "header": "Default",
       "desc": "Buttons by default have ripples enabled. This can be removed with the prop `:ripple=\"false\"`",
       "uninverted": true
     },
     "customColor": {
-      "header": "## Custom color",
+      "header": "### Custom color",
       "desc": "Using a helper class, you can change the color of the ripple.",
       "uninverted": true
     },
     "tabs": {
-      "header": "## Tabs",
+      "header": "### Tabs",
       "desc": "Tabs by default have ripples disabled. This can be enabled with the `ripple` prop.",
       "uninverted": true
     },
     "navigationDrawers": {
-      "header": "## Navigation drawers",
+      "header": "### Navigation drawers",
       "desc": "List items by default have ripples disabled. This can be enabled with the `ripple` prop",
       "uninverted": true
     },
     "toolbars": {
-      "header": "## Toolbars",
+      "header": "### Toolbars",
       "desc": "Toolbar items by default have ripples disabled. This can be enabled with the `ripple` prop.",
       "uninverted": true
     },
     "expansionPanels": {
-      "header": "## Expansion panels",
+      "header": "### Expansion panels",
       "desc": "Expansion panels by default have ripples disabled. This can be enabled with the `ripple` prop.",
       "uninverted": true
     },
     "customRipple": {
-      "header": "## Components",
+      "header": "### Components",
       "desc": "Several other components have built-in support for ripples. Enable it with the `ripple` prop.",
       "uninverted": true
     },
     "htmlElement": {
-      "header": "## Standard HTML element",
+      "header": "### Standard HTML element",
       "desc": "Add the ripple effect to a standard HTML element. This can be enabled with the `v-ripple` directive.",
       "uninverted": true
     }
