@@ -1,0 +1,15 @@
+{
+  "header": "国际化",
+  "headerText": "Vuetify支持其组件的语言国际化。 安装 Vuetify 时，您可以使用 `lang` 选项指定可用的语言环境和当前活动的语言环境。 请参阅“入门”部分。",
+  "gettingStarted": "入门",
+  "gettingStartedText": "要设置可用的区域设置或当前区域设置，请在安装 Vuetify 时提供 `lang` 选项。 提供的 `locales` 属性将与现有的语言环境合并。 您可以在运行时通过Vue实例上的 `$ vuetify` 对象更改语言环境。",
+  "availableLocalesText": "目前，Vuetify提供以下语言的翻译：英语（**en**），加泰罗尼亚语（**ca**），繁体中文（**zh-Hant**），简体中文（**zh-Hans**），荷兰语（**nl**），波斯语（**fa**），法语（**fr**）， 德语（**de**），希腊语（**gr**），意大利语（**it**），波兰语（**pl**），葡萄牙语（**pt**），俄语（**ru**），塞尔维亚语cyrilic（**sr-Cyrl**）和乌克兰语（**uk**）。",
+  "createTranslationText": "要创建自己的翻译，请使用以下代码或将文件 `vuetify / src / locale / en.ts` 复制并重命名为您的项目并进行更改。",
+  "createTranslation": "创建翻译",
+  "customComponents": "自定义组件",
+  "customComponentsText": "如果要构建需要挂钩到国际化引擎的自定义 Vuetify 组件，则可以使用直接存在于 `$ vuetify` 对象和 `$ vuetify.lang` 上的t函数。",
+  "vueI18nText1": "如果您使用的是 `vue-i18n` 包，则可以非常轻松地将其与 Vuetify 集成。 这使您可以将所有翻译保存在一个位置。 只需在入口中为 $ vuetify 创建一个条目，然后添加相应的语言更改。 然后通过提供自定义翻译功能将 vue-i18n 连接到 Vuetify （如下例所示）。 有关所有可用 keys 的完整列表，[查看此处](#create-translation)。",
+  "vueI18nText2": "使用外部本地化插件时的一个重要注意事项是，如果当前区域设置不存在本地化，则 vuetify 将不会自动回退到使用英语。 因此，请确保为插件提供英语本地化以及您自己的本地化。",
+  "rtlText1": "Vuetify 在 bootstrap 期间通过 rtl prop 支持 RTL（从右到左）语言。 此值是动态的，将应用自定义样式来更改组件的方向。",
+  "rtlHeader": "RTL 支持"
+}

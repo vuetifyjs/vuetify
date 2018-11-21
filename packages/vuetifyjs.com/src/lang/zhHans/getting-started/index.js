@@ -4,6 +4,7 @@ import QuickStart from './QuickStart'
 import Roadmap from './Roadmap'
 import SponsorsAndBackers from './SponsorsAndBackers'
 import WhyVuetify from './WhyVuetify'
+import Consulting from './Consulting'
 
 export default {
   Contributing,
@@ -11,5 +12,6 @@ export default {
   QuickStart,
   Roadmap,
   SponsorsAndBackers,
-  WhyVuetify
+  WhyVuetify,
+  Consulting
 }
