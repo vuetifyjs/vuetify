@@ -7,7 +7,7 @@
       "children": [
         {
           "type": "usage",
-          "value": "default"
+          "value": "usage"
         }
       ]
     },
@@ -16,7 +16,7 @@
       "children": [
         {
           "type": "api",
-          "value": ["v-scroll"]
+          "value": [ "v-scroll" ]
         }
       ]
     },
@@ -25,9 +25,7 @@
       "children": [
         {
           "type": "examples",
-          "value": [
-            "options"
-          ]
+          "value": [ "options" ]
         }
       ]
     }

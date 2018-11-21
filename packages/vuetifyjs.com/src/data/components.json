@@ -1,29 +1,17 @@
 {
   "alerts": {
-    "components": ["v-alert"],
-    "examples": [
-      "contextual",
-      "closable",
-      "icon",
-      "transition",
-      "outline"
-    ],
+    "components": [ "v-alert" ],
+    "examples": [ "contextual", "closable", "icon", "transition", "outline" ],
     "spec": false
   },
   "aspect-ratios": {
-    "components": [
-      "v-responsive"
-    ],
-    "examples": [
-      { "file": "ratios", "newIn": "1.2" }
-    ]
+    "components": [ "v-responsive" ],
+    "examples": [ { "file": "ratios", "newIn": "1.2" } ]
   },
   "autocompletes": {
-    "components": [
-      "v-autocomplete"
-    ],
+    "components": [ "v-autocomplete" ],
     "examples": [
-      { "file": "autocomplete", "newIn": "1.1" },
+      { "file": "usage", "newIn": "1.1" },
       { "file": "api", "newIn": "1.1" },
       { "file": "scopedSlots", "newIn": "1.1" },
       { "file": "customFilter", "newIn": "1.1" },
@@ -32,56 +20,32 @@
     ]
   },
   "avatars": {
-    "components": ["v-avatar"],
-    "examples": [
-      "standard",
-      "advanced",
-      "iconAndText"
-    ],
+    "components": [ "v-avatar" ],
+    "examples": [ "standard", "advanced", "iconAndText" ],
     "spec": false
   },
   "badges": {
-    "components": ["v-badge"],
-    "examples": [
-      "character",
-      "overlap",
-      "inline",
-      "icon",
-      "visibility"
-    ],
+    "components": [ "v-badge" ],
+    "examples": [ "character", "overlap", "inline", "icon", "visibility" ],
     "spec": false
   },
   "bottom-navigation": {
-    "components": ["v-bottom-nav"],
-    "examples": [
-      "iconsAndText",
-      "colorAndShift",
-      "toggle"
-    ],
+    "components": [ "v-bottom-nav" ],
+    "examples": [ "iconsAndText", "colorAndShift", "toggle" ],
     "spec": false
   },
   "bottom-sheets": {
-    "components": ["v-bottom-sheet"],
-    "examples": [
-      "standard",
-      "inset"
-    ],
+    "components": [ "v-bottom-sheet" ],
+    "examples": [ "standard", "inset" ],
     "spec": false
   },
   "breadcrumbs": {
-    "components": [
-      "v-breadcrumbs",
-      "v-breadcrumbs-item"
-    ],
-    "examples": [
-      "textDividers",
-      "iconDividers",
-      "itemSlot"
-    ],
+    "components": [ "v-breadcrumbs", "v-breadcrumbs-item" ],
+    "examples": [ "textDividers", "iconDividers", "itemSlot" ],
     "spec": false
   },
   "buttons": {
-    "components": ["v-btn"],
+    "components": [ "v-btn" ],
     "examples": [
       "usage",
       "flat",
@@ -99,80 +63,40 @@
     "spec": false
   },
   "button-groups": {
-    "components": ["v-btn-toggle"],
-    "examples": [
-      "toggle",
-      "appBar"
-    ]
+    "components": [ "v-btn-toggle" ],
+    "examples": [ "toggle", "appBar" ]
   },
   "cards": {
-    "components": [
-      "v-card",
-      "v-card-actions",
-      "v-card-media",
-      "v-card-text",
-      "v-card-title"
-    ],
-    "examples": [
-      "components",
-      "mediaWithText",
-      "horizontal",
-      "grids",
-      "customActions"
-    ],
+    "components": [ "v-card", "v-card-actions", "v-card-media", "v-card-text", "v-card-title" ],
+    "examples": [ "components", "mediaWithText", "horizontal", "grids", "customActions" ],
     "spec": false
   },
   "carousels": {
-    "components": [
-      "v-carousel",
-      "v-carousel-item"
-    ],
-    "examples": [
-      "default",
-      "customTransition",
-      "customIcons",
-      "hideControls",
-      "hideDelimiters"
-    ],
+    "components": [ "v-carousel", "v-carousel-item" ],
+    "examples": [ "default", "customTransition", "customIcons", "hideControls", "hideDelimiters" ],
     "spec": false
   },
   "chips": {
-    "components": ["v-chip"],
-    "examples": [
-      "default",
-      "colored",
-      "icon",
-      "outline",
-      "label",
-      "closable",
-      "inSelects"
-    ],
+    "components": [ "v-chip" ],
+    "examples": [ "default", "colored", "icon", "outline", "label", "closable", "inSelects" ],
     "spec": false
   },
   "combobox": {
-    "components": [
-      "v-combobox"
-    ],
+    "components": [ "v-combobox" ],
     "examples": [
-      { "file": "combobox", "newIn": "1.1" },
+      { "file": "usage", "newIn": "1.1" },
       "noData",
       { "file": "advanced", "newIn": "1.1" },
       "comboboxMultiple"
     ]
   },
   "data-iterator": {
-    "components": ["v-data-iterator"],
-    "examples": [
-      "simple",
-      "slots"
-    ],
+    "components": [ "v-data-iterator" ],
+    "examples": [ "simple", "slots" ],
     "spec": false
   },
   "data-tables": {
-    "components": [
-      "v-data-table",
-      "v-edit-dialog"
-    ],
+    "components": [ "v-data-table", "v-edit-dialog" ],
     "examples": [
       "standard",
       "noData",
@@ -195,9 +119,9 @@
     "spec": false
   },
   "date-pickers": {
-    "components": ["v-date-picker"],
+    "components": [ "v-date-picker" ],
     "examples": [
-      "dateLight",
+      "usage",
       "dateColorable",
       "dateDialogAndMenu",
       "dateFormatting",
@@ -227,7 +151,7 @@
     "spec": false
   },
   "dialogs": {
-    "components": ["v-dialog"],
+    "components": [ "v-dialog" ],
     "examples": [
       "simple",
       "withoutActivator",
@@ -242,7 +166,7 @@
     "spec": false
   },
   "dividers": {
-    "components": ["v-divider"],
+    "components": [ "v-divider" ],
     "examples": [
       "fullBleed",
       "lightAndDark",
@@ -255,64 +179,32 @@
     "spec": false
   },
   "expansion-panels": {
-    "components": [
-      "v-expansion-panel",
-      "v-expansion-panel-content"
-    ],
-    "examples": [
-      "accordion",
-      "expand",
-      "external",
-      "disabledAndReadonly",
-      "popout",
-      "customIcons",
-      "focusable"
-    ],
+    "components": [ "v-expansion-panel", "v-expansion-panel-content" ],
+    "examples": [ "accordion", "expand", "external", "disabledAndReadonly", "popout", "customIcons", "focusable" ],
     "spec": false
   },
   "floating-action-buttons": {
-    "components": [
-      "v-speed-dial",
-      "v-btn"
-    ],
-    "examples": [
-      "promotedAction",
-      "small",
-      "displayAnimation",
-      "lateralScreens",
-      "speedDial"
-    ],
+    "components": [ "v-speed-dial", "v-btn" ],
+    "examples": [ "promotedAction", "small", "displayAnimation", "lateralScreens", "speedDial" ],
     "spec": false
   },
   "footer": {
-    "components": ["v-footer"],
-    "examples": [
-      "default",
-      "companyFooter",
-      "indigoFooter",
-      "tealFooter"
-    ],
+    "components": [ "v-footer" ],
+    "examples": [ "default", "companyFooter", "indigoFooter", "tealFooter" ],
     "spec": false
   },
   "forms": {
-    "components": ["v-form"],
-    "examples": [
-      "basicValidation",
-      "validationWithSubmitAndClear",
-      "vuelidate",
-      "veeValidate"
-    ],
+    "components": [ "v-form" ],
+    "examples": [ "usage", "validationWithSubmitAndClear", "vuelidate", "veeValidate" ],
     "spec": false
   },
   "goto": {
-    "components": ["$vuetify"],
-    "examples": [
-      "usage"
-    ],
+    "components": [ "$vuetify" ],
+    "examples": [ "usage" ],
     "spec": false
   },
   "grid": {
-    "components": ["v-container", "v-layout", "v-flex", "v-spacer"],
+    "components": [ "v-container", "v-layout", "v-flex", "v-spacer" ],
     "examples": [
       "grid",
       "playground",
@@ -328,23 +220,17 @@
     "spec": false
   },
   "grid-lists": {
-    "components": ["v-container", "v-layout", "v-flex", "v-spacer"],
-    "examples": [
-      "default",
-      "subheader"
-    ],
+    "components": [ "v-container", "v-layout", "v-flex", "v-spacer" ],
+    "examples": [ "default", "subheader" ],
     "spec": false
   },
   "hover": {
-    "components": ["v-hover"],
-    "examples": [
-      { "file": "default", "newIn": "1.2" },
-      { "file": "transition", "newIn": "1.2" }
-    ],
+    "components": [ "v-hover" ],
+    "examples": [ { "file": "default", "newIn": "1.2" }, { "file": "transition", "newIn": "1.2" } ],
     "spec": false
   },
   "icons": {
-    "components": ["v-icon"],
+    "components": [ "v-icon" ],
     "examples": [
       "standard",
       "fontAwesome",
@@ -359,37 +245,23 @@
     "spec": false
   },
   "images": {
-    "components": ["v-img"],
-    "examples": [
-      "usage",
-      "containCover",
-      "maxHeight",
-      "ratio",
-      "gradients"
-    ],
+    "components": [ "v-img" ],
+    "examples": [ "usage", "containCover", "maxHeight", "ratio", "gradients" ],
     "spec": false
   },
   "inputs": {
-    "components": ["v-input"],
-    "examples": ["usage"],
+    "components": [ "v-input" ],
+    "examples": [ "usage" ],
     "spec": false
   },
   "item-groups": {
-    "components": ["v-item-group", "v-item"],
+    "components": [ "v-item-group", "v-item" ],
     "newIn": "1.3",
-    "examples": [
-      "usage",
-      "post"
-    ]
+    "examples": [ "usage", "post" ]
   },
   "jumbotrons": {
-    "components": ["v-jumbotron"],
-    "examples": [
-      "usage",
-      "color",
-      "gradient",
-      "gradientWithImage"
-    ],
+    "components": [ "v-jumbotron" ],
+    "examples": [ "usage", "color", "gradient", "gradientWithImage" ],
     "spec": false
   },
   "lists": {
@@ -419,7 +291,7 @@
     "spec": false
   },
   "menus": {
-    "components": ["v-menu"],
+    "components": [ "v-menu" ],
     "examples": [
       "activator",
       "absolute",
@@ -432,7 +304,7 @@
     "spec": false
   },
   "navigation-drawers": {
-    "components": ["v-navigation-drawer"],
+    "components": [ "v-navigation-drawer" ],
     "examples": [
       "permanent",
       "permanentClipped",
@@ -447,36 +319,22 @@
     "spec": false
   },
   "overflow-btns": {
-    "components": ["v-overflow-btn"],
+    "components": [ "v-overflow-btn" ],
     "examples": [],
     "spec": false
   },
   "paginations": {
-    "components": ["v-pagination"],
-    "examples": [
-      "short",
-      "long",
-      "limit",
-      "round",
-      "icons",
-      "disabled"
-    ],
+    "components": [ "v-pagination" ],
+    "examples": [ "short", "long", "limit", "round", "icons", "disabled" ],
     "spec": false
   },
   "parallax": {
-    "components": ["v-parallax"],
-    "examples": [
-      "default",
-      "content",
-      "customHeight"
-    ],
+    "components": [ "v-parallax" ],
+    "examples": [ "default", "content", "customHeight" ],
     "spec": false
   },
   "progress": {
-    "components": [
-      "v-progress-circular",
-      "v-progress-linear"
-    ],
+    "components": [ "v-progress-circular", "v-progress-linear" ],
     "examples": [
       "circularDefault",
       "circularColored",
@@ -493,7 +351,7 @@
     "spec": false
   },
   "ratings": {
-    "components": ["v-rating"],
+    "components": [ "v-rating" ],
     "examples": [
       { "file": "default", "newIn": "1.2" },
       { "file": "sizes", "newIn": "1.2" },
@@ -505,15 +363,13 @@
     ]
   },
   "resizing": {
-    "components": ["v-resize"],
-    "examples": [
-      "default"
-    ]
+    "components": [ "v-resize" ],
+    "examples": [ "usage" ]
   },
   "ripples": {
-    "components": ["v-ripple"],
+    "components": [ "v-ripple" ],
     "examples": [
-      "buttons",
+      "usage",
       "customColor",
       "tabs",
       "navigationDrawers",
@@ -524,23 +380,15 @@
     ],
     "spec": false
   },
-  "scrolling": {
-    "components": ["v-scroll"],
-    "examples": [
-      "default",
-      "options"
-    ],
+  "scroll": {
+    "components": [ "v-scroll" ],
+    "examples": [ "usage", "options" ],
     "spec": false
   },
   "selection-controls": {
-    "components": [
-      "v-radio-group",
-      "v-radio",
-      "v-checkbox",
-      "v-switch"
-    ],
+    "components": [ "v-radio-group", "v-radio", "v-checkbox", "v-switch" ],
     "examples": [
-      "example",
+      "usage",
       "checkboxesBoolean",
       "checkboxesArray",
       "checkboxesStates",
@@ -558,7 +406,7 @@
     "spec": false
   },
   "selects": {
-    "components": ["v-select"],
+    "components": [ "v-select" ],
     "examples": [
       "usage",
       "light",
@@ -571,7 +419,7 @@
     "spec": false
   },
   "sliders": {
-    "components": ["v-slider", "v-range-slider"],
+    "components": [ "v-slider", "v-range-slider" ],
     "examples": [
       "usage",
       "thumb",
@@ -589,20 +437,12 @@
     "spec": false
   },
   "snackbars": {
-    "components": ["v-snackbar"],
-    "examples": [
-      "position",
-      "contextual"
-    ],
+    "components": [ "v-snackbar" ],
+    "examples": [ "position", "contextual" ],
     "spec": false
   },
   "steppers": {
-    "components": [
-      "v-stepper",
-      "v-stepper-step",
-      "v-stepper-content",
-      "v-stepper-header"
-    ],
+    "components": [ "v-stepper", "v-stepper-step", "v-stepper-content", "v-stepper-header" ],
     "examples": [
       "example",
       "editable",
@@ -621,23 +461,12 @@
     "spec": false
   },
   "subheaders": {
-    "components": ["v-subheader"],
-    "examples": [
-      "list",
-      "grid",
-      "menu",
-      "social"
-    ],
+    "components": [ "v-subheader" ],
+    "examples": [ "list", "grid", "menu", "social" ],
     "spec": false
   },
   "tabs": {
-    "components": [
-      "v-tabs",
-      "v-tab",
-      "v-tabs-items",
-      "v-tab-item",
-      "v-tabs-slider"
-    ],
+    "components": [ "v-tabs", "v-tab", "v-tabs-items", "v-tab-item", "v-tabs-slider" ],
     "examples": [
       "toolbar",
       "fixedTabs",
@@ -655,16 +484,12 @@
     "spec": false
   },
   "textarea": {
-    "components": ["v-textarea"],
-    "examples": [
-      "multiLine",
-      "autoGrow",
-      { "file": "signupBox", "newIn": "1.1" }
-    ],
+    "components": [ "v-textarea" ],
+    "examples": [ "usage", "autoGrow", { "file": "signupBox", "newIn": "1.1" } ],
     "spec": false
   },
   "text-fields": {
-    "components": ["v-text-field"],
+    "components": [ "v-text-field" ],
     "examples": [
       "usage",
       "singleLine",
@@ -691,38 +516,17 @@
     "spec": false
   },
   "timelines": {
-    "components": ["v-timeline", "v-timeline-item"],
-    "examples": [
-      "usage",
-      "small",
-      "icons",
-      "color",
-      "slot",
-      "alert",
-      "advanced"
-    ],
+    "components": [ "v-timeline", "v-timeline-item" ],
+    "examples": [ "usage", "small", "icons", "color", "slot", "alert", "advanced" ],
     "spec": false
   },
   "time-pickers": {
-    "components": ["v-time-picker"],
-    "examples": [
-      "timeLight",
-      "timeColorable",
-      "timeDialogAndMenu",
-      "time24hFormat",
-      "timeAllowedTimes",
-      "timeWidth"
-    ],
+    "components": [ "v-time-picker" ],
+    "examples": [ "usage", "timeColorable", "timeDialogAndMenu", "time24hFormat", "timeAllowedTimes", "timeWidth" ],
     "spec": false
   },
   "toolbars": {
-    "components": [
-      "v-toolbar",
-      "v-toolbar-items",
-      "v-toolbar-side-icon",
-      "v-toolbar-title",
-      "v-system-bar"
-    ],
+    "components": [ "v-toolbar", "v-toolbar-items", "v-toolbar-side-icon", "v-toolbar-title", "v-system-bar" ],
     "examples": [
       "usage",
       "appBar",
@@ -741,17 +545,13 @@
     "spec": false
   },
   "tooltips": {
-    "components": ["v-tooltip"],
-    "examples": [
-      "default",
-      "alignment",
-      "visibility"
-    ],
+    "components": [ "v-tooltip" ],
+    "examples": [ "default", "alignment", "visibility" ],
     "spec": false
   },
   "touch-support": {
-    "components": ["v-touch"],
-    "examples": ["default"]
+    "components": [ "v-touch" ],
+    "examples": [ "usage" ]
   },
   "transitions": {
     "components": [
@@ -776,20 +576,11 @@
     ]
   },
   "treeview": {
-    "components": ["v-treeview"],
-    "examples": [
-      "usage",
-      "fileExplorer",
-      "directory",
-      "hotspots"
-    ]
+    "components": [ "v-treeview" ],
+    "examples": [ "usage", "fileExplorer", "directory", "hotspots" ]
   },
   "windows": {
-    "components": ["v-window", "v-window-item"],
-    "examples": [
-      "usage",
-      "onboarding",
-      "account"
-    ]
+    "components": [ "v-window", "v-window-item" ],
+    "examples": [ "usage", "onboarding", "account" ]
   }
 }

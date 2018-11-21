@@ -7,7 +7,7 @@
       "children": [
         {
           "type": "usage",
-          "value": "buttons"
+          "value": "usage"
         }
       ]
     },
@@ -16,7 +16,7 @@
       "children": [
         {
           "type": "api",
-          "value": ["v-ripple"]
+          "value": [ "v-ripple" ]
         }
       ]
     },
