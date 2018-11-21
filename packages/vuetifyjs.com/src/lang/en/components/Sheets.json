@@ -12,7 +12,7 @@
     },
     "elevation": {
       "header": "## Using elevation",
-      "desc": "Sheet may have any **elevation** value"
+      "desc": "Sheet may have any `elevation` value"
     }
   },
   "props": {
