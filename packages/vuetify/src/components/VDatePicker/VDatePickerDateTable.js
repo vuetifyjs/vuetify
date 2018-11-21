@@ -22,6 +22,7 @@ export default {
       type: [String, Number],
       default: 0
     },
+    showWeek: Boolean,
     weekdayFormat: {
       type: Function,
       default: null
@@ -50,6 +51,9 @@ export default {
     },
     genTHead () {
       const days = this.weekDays.map(day => this.$createElement('th', day))
+      if (this.showWeek) {
+        days.unshift(this.$createElement('th', ''))
+      }
       return this.$createElement('thead', this.genTR(days))
     },
     // Returns number of the days from the firstDayOfWeek to the first day of the current month
@@ -58,11 +62,28 @@ export default {
       const weekDay = firstDayOfTheMonth.getUTCDay()
       return (weekDay - parseInt(this.firstDayOfWeek) + 7) % 7
     },
+    getWeekNumber () {
+      const isLeapYear = ((this.displayedYear % 4 === 0) && (this.displayedYear % 100 !== 0)) || (this.displayedYear % 400 === 0)
+      const daysInMonth = [31, isLeapYear ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+      const dayOfYear = daysInMonth.slice(0, this.displayedMonth).reduce((carry, item) => carry + item, 0) // Starts from 0
+      const weekdayOfFirstDayInYear = new Date(Date.UTC(this.displayedYear, 0, 1)).getDay()
+      const offset = (weekdayOfFirstDayInYear - this.firstDayOfWeek + 7) % 7
+      return Math.floor((dayOfYear + offset) / 7) + 1
+    },
     genTBody () {
       const children = []
       const daysInMonth = new Date(this.displayedYear, this.displayedMonth + 1, 0).getDate()
       let rows = []
       let day = this.weekDaysBeforeFirstDayOfTheMonth()
+      let weekNumber = this.getWeekNumber()
+
+      if (this.showWeek) {
+        rows.push(this.$createElement('td', [
+          this.$createElement('small', {
+            staticClass: 'v-date-picker-table--date__week'
+          }, String(weekNumber++).padStart(2, '0'))
+        ]))
+      }
 
       while (day--) rows.push(this.$createElement('td'))
       for (day = 1; day <= daysInMonth; day++) {
@@ -72,9 +93,16 @@ export default {
           this.genButton(date, true)
         ]))
 
-        if (rows.length % 7 === 0) {
+        if (rows.length % (this.showWeek ? 8 : 7) === 0) {
           children.push(this.genTR(rows))
           rows = []
+          if (day < daysInMonth && this.showWeek) {
+            rows.push(this.$createElement('td', [
+              this.$createElement('small', {
+                staticClass: 'v-date-picker-table--date__week'
+              }, String(weekNumber++).padStart(2, '0'))
+            ]))
+          }
         }
       }
 
