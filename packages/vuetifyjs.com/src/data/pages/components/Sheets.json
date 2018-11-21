@@ -1,0 +1,42 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "usage",
+          "value": "color"
+        },
+        {
+          "type": "usage",
+          "value": "tag"
+        },
+        {
+          "type": "usage",
+          "value": "elevation"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": ["v-sheet"]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [
+          ]
+        }
+      ]
+    }
+  ]
+}
