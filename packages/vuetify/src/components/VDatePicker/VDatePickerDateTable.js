@@ -66,8 +66,12 @@ export default {
       const isLeapYear = ((this.displayedYear % 4 === 0) && (this.displayedYear % 100 !== 0)) || (this.displayedYear % 400 === 0)
       const daysInMonth = [31, isLeapYear ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
       const dayOfYear = daysInMonth.slice(0, this.displayedMonth).reduce((carry, item) => carry + item, 0) // Starts from 0
-      const weekdayOfFirstDayInYear = new Date(Date.UTC(this.displayedYear, 0, 1)).getDay()
-      const offset = (weekdayOfFirstDayInYear - this.firstDayOfWeek + 7) % 7
+      const offset = (
+        (this.displayedYear + Math.floor((this.displayedYear - 1) / 4)) -
+        Math.floor((this.displayedYear - 1) / 100) +
+        Math.floor((this.displayedYear - 1) / 400) -
+        this.firstDayOfWeek
+      ) % 7 // https://en.wikipedia.org/wiki/Zeller%27s_congruence
       return Math.floor((dayOfYear + offset) / 7) + 1
     },
     genTBody () {
