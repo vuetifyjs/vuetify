@@ -34,7 +34,7 @@ export function createRouter () {
             name: 'home/Home',
             component: () => import(
               /* webpackChunkName: "home" */
-              '@/pages/home/HomePage.vue'
+              '@/pages/home/Page.vue'
             )
           },
           {
@@ -55,7 +55,7 @@ export function createRouter () {
             }),
             component: () => import(
               /* webpackChunkName: "documentation" */
-              '@/pages/Documentation.vue'
+              '@/pages/documentation/Page.vue'
             )
           }
         ]
