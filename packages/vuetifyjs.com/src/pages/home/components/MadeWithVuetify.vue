@@ -67,16 +67,16 @@
     },
 
     mounted () {
-      this.$http({
-        method: 'GET',
-        url: 'https://madewithvuejs.com/api/tag/vuetify',
+      fetch('https://madewithvuejs.com/api/tag/vuetify', {
+        method: 'get',
         headers: {
           'Access-Control-Allow-Origin': '*',
           'Content-Type': 'application/json'
         }
       })
+        .then(res => res.json())
         .then(res => {
-          this.featured = this.setFeatured(res.data)
+          this.featured = this.setFeatured(res)
         })
         .catch(err => console.log(err))
     },
