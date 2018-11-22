@@ -24,6 +24,7 @@
 </template>
 
 <script>
+  import 'prismjs/themes/prism-tomorrow.css'
   import 'prismjs'
   import 'prismjs/components/prism-bash.js'
   import 'prismjs/components/prism-css.js'
