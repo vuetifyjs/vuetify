@@ -1,7 +1,7 @@
 {
-  "header": "Typography",
+  "header": "# Typography",
   "headerText": "The typography of an application is just as important as its functionality. Vuetify.js uses the Material Design spec Roboto Font. Each heading size also has a corresponding helper class to style other elements the same.",
-  "fontHeader": "Font sizes",
+  "fontHeader": "## Font sizes",
   "fontText": "Typography helper classes allow you to easily style text according to Material Design sizing.",
   "fonts": [
     "`.display-4` - Good for `<h1>`",
@@ -17,7 +17,7 @@
   ],
   "italic": "`.font-italic` - Sets the font-style to **italic**",
   "italicText": "Text can also have an _italic_ applied to it.",
-  "transformHeader": "Text transforms",
+  "transformHeader": "## Text transforms",
   "transformText": "Control the casing with a _text transform_.",
   "transforms": [
     "`.text-capitalize` - Sets text-transform to **capitalize**",
@@ -25,7 +25,7 @@
     "`.text-none` - Sets text-transform to **none**",
     "`.text-uppercase` - Sets text-transform to **uppercase**"
   ],
-  "weightsHeader": "Font weights",
+  "weightsHeader": "## Font weights",
   "weightsText": "Material design supports **100, 300, 400, 500, 700, 900** font weights.",
   "weights": [
     "`.font-weight-thin` - Sets font-weight to **100**",
@@ -35,7 +35,7 @@
     "`.font-weight-bold` - Sets font-weight to **700**",
     "`.font-weight-black` - Sets font-weight to **900**"
   ],
-  "wrapHeader": "Text wrapping",
+  "wrapHeader": "## Text wrapping",
   "wrapText": "Force text to not wrap or truncate it if its too long.",
   "wraps": [
     "`.text-no-wrap` - Sets whitespace to **no-wrap**",
