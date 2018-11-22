@@ -1,6 +1,6 @@
 <template>
   <v-card flat color="grey lighten-4 pa-5 text-xs-center">
-    <v-subtitle-1 class="grey--text font-weight-bold">
+    <v-subtitle-1 class="title font-weight-regular">
       Patreon Sponsors
     </v-subtitle-1>
 
@@ -10,7 +10,7 @@
       hide-titles
     />
 
-    <v-subtitle-1 class="grey--text font-weight-bold mb-5">
+    <v-subtitle-1 class="title font-weight-regular mb-5">
       Open Collective Sponsors
     </v-subtitle-1>
 

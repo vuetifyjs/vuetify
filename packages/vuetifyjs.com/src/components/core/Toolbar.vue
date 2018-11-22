@@ -16,6 +16,7 @@
       class="d-flex"
     >
       <v-img
+        alt="Vuetify Logo"
         src="https://cdn.vuetifyjs.com/images/logos/v-alt.svg"
         contain
         transition="scale-transition"
@@ -40,6 +41,7 @@
           slot="activator"
           flat
           style="min-width: 48px"
+          aria-label="Translations"
         >
           <v-img
             :src="`https://cdn.vuetifyjs.com/images/flags/${currentLanguage.country}.png`"
@@ -77,6 +79,7 @@
       >
         <v-btn
           slot="activator"
+          :aria-label="$t('Vuetify.AppToolbar.ecosystem')"
           flat
           style="min-width: 48px"
         >
@@ -150,7 +153,7 @@
         >
           <span
             class="mr-1"
-            v-text="$t('Vuetify.AppToolbar.support' )"
+            v-text="$t('Vuetify.AppToolbar.support')"
           />
           <v-icon class="hidden-sm-and-down">mdi-menu-down</v-icon>
           <v-icon class="hidden-md-and-up">mdi-lifebuoy</v-icon>

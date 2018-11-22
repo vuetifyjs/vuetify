@@ -3,7 +3,7 @@
     class="pa-5 text-xs-center"
     flat
   >
-    <v-subtitle-1 class="grey--text font-weight-bold">
+    <v-subtitle-1 class="title font-weight-regular">
       Made With Vuetify
     </v-subtitle-1>
 
@@ -21,15 +21,20 @@
           sm6
           md4
         >
-          <v-card
+          <a
             :href="`${feature.url}?ref=vuetifyjs.com`"
-            :img="feature.image"
-            class="elevation-24"
-            height="300px"
             target="_blank"
             rel="noopener"
             @click="$ga.event('home mwvjs click', 'click', feature.title)"
-          />
+          >
+            <v-img
+              :alt="feature.title"
+              :src="feature.image"
+              class="elevation-24"
+              height="300px"
+              width="100%"
+            />
+          </a>
         </v-flex>
       </v-layout>
     </v-container>
@@ -42,6 +47,7 @@
         @click="$ga.event('home mwvjs click', 'click', 'madewithvuejs')"
       >
         <v-img
+          alt="Powered by madewithvuejs.com"
           contain
           src="https://cdn.vuetifyjs.com/images/home/powered-by-madewithvue-1.svg"
           height="65px"
