@@ -5,6 +5,17 @@ import 'es6-promise/auto'
 import { createApp } from './main'
 import WebFontLoader from 'webfontloader'
 
+// async load fonts
+WebFontLoader.load({
+  google: {
+    families: [
+      'Roboto:100,300,400,500,700,900',
+      'Roboto Mono',
+      'Material Icons'
+    ]
+  }
+})
+
 createApp({
   start ({ app, router, store }) {
     // prime the store with server-initialized state.
@@ -41,17 +52,6 @@ createApp({
     router.onReady(() => {
       // actually mount to DOM
       app.$mount('#app')
-
-      // async load fonts
-      WebFontLoader.load({
-        google: {
-          families: [
-            'Roboto:100,300,400,500,700,900',
-            'Roboto Mono',
-            'Material Icons'
-          ]
-        }
-      })
     })
   }
 })
