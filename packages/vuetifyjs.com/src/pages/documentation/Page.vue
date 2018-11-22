@@ -1,5 +1,7 @@
 <template>
   <div>
+    <core-toolbar />
+
     <core-ad />
 
     <core-drawer />
