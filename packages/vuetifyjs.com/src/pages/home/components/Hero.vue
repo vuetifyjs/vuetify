@@ -37,7 +37,6 @@
               {{ $t('Vuetify.Home.getStarted') }}
             </v-btn>
             <v-btn
-              class="grey--text"
               color="grey lighten-3"
               depressed
               large
