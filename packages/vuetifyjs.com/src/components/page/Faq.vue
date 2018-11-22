@@ -107,13 +107,15 @@
   }
 </script>
 
-<style>
-.v-data-iterator--faq p {
-  margin: 0;
-}
+<style lang="stylus">
+.v-data-iterator--faq {
+  p {
+    margin: 0;
+  }
 
-.markdown:not(:last-child) {
-  margin-bottom: 16px;
+  .markdown:not(:last-child) {
+    margin-bottom: 16px;
+  }
 }
 
 .text-decoration-none {
