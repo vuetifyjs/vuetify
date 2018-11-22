@@ -56,7 +56,7 @@ export default {
         staticClass: 'v-input--selection-controls__input'
       }, [
         this.genInput('checkbox', this.$attrs),
-        !this.disabled && this.genRipple(this.setTextColor(this.computedColor, {
+        this.genRipple(this.setTextColor(this.computedColor, {
           directives: [{
             name: 'touch',
             value: {
