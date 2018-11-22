@@ -2,7 +2,6 @@ import 'vuetify/dist/vuetify.css'
 import '@mdi/font/css/materialdesignicons.css'
 import 'es6-promise/auto'
 
-import axios from 'axios'
 import { createApp } from './main'
 
 createApp({
@@ -12,9 +11,6 @@ createApp({
     if (window.__INITIAL_STATE__) {
       store.replaceState(window.__INITIAL_STATE__)
     }
-
-    // Used for examples
-    window.axios = axios
 
     // Add router hook for handling asyncData.
     // Doing it after initial route is resolved so that we don't double-fetch
