@@ -7,15 +7,7 @@
       "children": [
         {
           "type": "usage",
-          "value": "color"
-        },
-        {
-          "type": "usage",
-          "value": "tag"
-        },
-        {
-          "type": "usage",
-          "value": "elevation"
+          "value": "usage"
         }
       ]
     },
@@ -34,6 +26,8 @@
         {
           "type": "examples",
           "value": [
+            "tag",
+            "elevation"
           ]
         }
       ]
