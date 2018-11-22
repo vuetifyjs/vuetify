@@ -1,5 +1,5 @@
 {
-    "header": "Alineación del texto",
+    "header": "# Alineación del texto",
     "headerText": "Las distribuciones pueden cambiar cuando cambian las resoluciones. Las clases de alineación te ayudan a posicionar tu texto basados en el tamaño del área visible (viewport)",
     "toc": [
         {

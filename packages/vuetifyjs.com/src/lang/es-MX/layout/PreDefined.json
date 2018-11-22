@@ -1,9 +1,9 @@
 {
-    "header": "Distribuciones (layouts)",
+    "header": "# Distribuciones (layouts)",
     "headerText": "El sistema de distribuciones es el corazón de todas las aplicaciones. A continuación se encuentran los ejemplos soportados oficialmente, que van desde apliaciones de escritorio hasta aplicaciones móviles. ",
-    "markupHeader": "Markup default de la aplicación",
+    "markupHeader": "## Markup default de la aplicación",
     "markupText": "Este es un ejemplo del markup default para Vuetify. Puedes colocar tus elementos de layout en cualquier parte, siempre y cuando apliques la propiedad **app**. El componente clave en todo esto es el elemento `v-content`. Su tamaño será ajustado dinámicamente dependiendo de la estructura que hayas designado a tus componentes **app**. Esto te permite crear soluciones extremadamente personalizadas.",
-    "appHeader": "Todo acerca de _app_",
+    "appHeader": "## Todo acerca de _app_",
     "appText": "En Vuetify, el componente `v-app` y la propiedad **app** ayudan a cargar tu aplicación con el tamaño adecuado alrededor de `v-content`. Esto te permite crear interfaces verdaderamente únicas sin los problemas de administrar la distribución por tu cuenta. El componente `v-app` es **REQUERIDO** para todas las aplicaciones. Este es el punto de montaje para mucha de la funcionalidad y los componentes de Vuetify.",
     "alert1": "Para que tu aplicación funcione correctamente, **debes** envolverla en un componente `v-app`. Este componente es requerido para determinar los breakpoints del grid para la distribución (layout). Puede existir **en cualquier parte** dentro de la etiqueta `body`, pero debe ser el padre de **TODOS** tus componentes de Vuetify.",
     "alert2": "Al aplicar la propiedad **app** automáticamente se aplica la propiedad **fixed** (position: fixed) al elemento de layout. Si tu aplicación requiere de un elemento posicionado como _absolute_, puedes sobreescribir esta funcionalidad usando la propiedad **absolute**",
