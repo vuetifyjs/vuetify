@@ -36,11 +36,13 @@
       ...mapMutations('app', ['setReleases']),
       ...mapMutations('snackbar', ['setSnackbar']),
       getReleases () {
-        this.$http.get('/releases/releases.json').then(({ data }) => {
-          this.setReleases(data)
-        }).catch(err => {
-          console.log(err)
-        })
+        fetch('/releases/releases.json')
+          .then(res => res.json())
+          .then(({ data }) => {
+            this.setReleases(data)
+          }).catch(err => {
+            console.log(err)
+          })
       }
     }
   }
