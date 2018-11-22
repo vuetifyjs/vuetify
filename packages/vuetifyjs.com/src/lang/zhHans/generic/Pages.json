@@ -3,7 +3,7 @@
   "default": "默认值",
   "description": "描述",
   "examples": "示例",
-  "howItWorks": "如何运行",
+  "howItWorks": "## 如何运行",
   "name": "名称",
   "openInCodePen": "在Codepen中打开",
   "options": "设置项",
@@ -12,6 +12,6 @@
   "slots": "插槽",
   "supplemental": "补充",
   "type": "类型",
-  
+
   "usage": "用例"
 }
