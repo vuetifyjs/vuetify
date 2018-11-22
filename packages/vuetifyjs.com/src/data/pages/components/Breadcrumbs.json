@@ -7,7 +7,7 @@
       "children": [
         {
           "type": "usage",
-          "value": "textDividers"
+          "value": "usage"
         }
       ]
     },
@@ -29,7 +29,6 @@
         {
           "type": "examples",
           "value": [
-            "textDividers",
             "iconDividers",
             "itemSlot"
           ]
