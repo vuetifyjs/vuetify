@@ -17,7 +17,7 @@
 
     props: {
       code: {
-        type: String,
+        type: [Array, String],
         default: ''
       },
       source: {
