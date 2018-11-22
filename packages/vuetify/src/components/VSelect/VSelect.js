@@ -448,10 +448,16 @@ export default {
           if (onlyBools) {
             replacement = Object.keys(replacement).join(', ')
           } else {
-            replacement = JSON.stringify(replacement, null, multiple ? 2 : 0).replace(/"([^(")"]+)":/g, '$1:').replace(/"/g, '\'')
+            replacement = JSON.stringify(replacement, null, multiple ? 2 : 0)
+              .replace(/"([^(")"]+)":/g, '$1:')
+              .replace(/"/g, '\'')
           }
 
-          consoleWarn(`${props} ${multiple ? 'are' : 'is'} deprecated, use ${separator}:menu-props="${replacement}"${separator} instead`, this)
+          consoleWarn(
+            `${props} ${multiple ? 'are' : 'is'} deprecated, use ` +
+            `${separator}${onlyBools ? '' : ':'}menu-props="${replacement}"${separator} instead`,
+            this
+          )
         }
       }
 
