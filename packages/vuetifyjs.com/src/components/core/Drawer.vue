@@ -319,7 +319,14 @@
     },
 
     mounted () {
-      import('docsearch.js').then(this.init)
+      import(
+        /* webpackChunkName: "docsearch" */
+        'docsearch.js/dist/cdn/docsearch.min.css'
+      )
+      import(
+        /* webpackChunkName: "docsearch" */
+        'docsearch.js'
+      ).then(this.init)
     },
 
     methods: {
