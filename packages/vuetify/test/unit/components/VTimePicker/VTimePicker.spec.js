@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import { test } from '@/test'
-import VTimePicker from '@/components/VTimePicker/VTimePicker'
-import { selectingTimes } from '@/components/VTimePicker/VTimePicker'
+import VTimePicker, { selectingTimes } from '@/components/VTimePicker/VTimePicker'
 
 test('VTimePicker.js', ({ mount }) => {
   [true, false].forEach(useSecondsValue => {
