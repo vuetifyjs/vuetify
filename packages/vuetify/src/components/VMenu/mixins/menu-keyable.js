@@ -43,8 +43,20 @@ export default {
       ].includes(e.keyCode)
       ) e.preventDefault()
 
-      if ([keyCodes.esc, keyCodes.tab].includes(e.keyCode)) {
+      if (
+        e.keyCode === keyCodes.esc ||
+        (e.keyCode === keyCodes.tab && !this.$refs.content.contains(document.activeElement))
+      ) {
         return this.isActive = false
+      }
+
+      if (e.keyCode === keyCodes.tab) {
+        setTimeout(() => {
+          if (!this.$refs.content.contains(document.activeElement)) {
+            this.isActive = false
+          }
+        })
+        return
       }
 
       this.changeListIndex(e)
