@@ -1,40 +1,54 @@
 <template>
-  <v-card flat color="white">
-    <v-container pa-5>
+  <v-card
+    flat
+    class="py-4"
+    color="white"
+  >
+    <v-container>
       <v-layout
         align-center
         justify-center
+        wrap
       >
         <v-img
-          class="shrink mr-5"
+          :class="{
+            'mr-5': $vuetify.breakpoint.mdAndUp,
+            'mb-3': $vuetify.breakpoint.smAndDown
+          }"
+          :height="$vuetify.breakpoint.mdAndUp ? 216 : 135"
+          :width="$vuetify.breakpoint.mdAndUp ? 216 : 135"
+          class="shrink"
           contain
           src="https://cdn.vuetifyjs.com/images/logos/v.svg"
-          height="216"
-          width="216"
         />
-        <div>
+        <div class="text-xs-center">
           <v-display-2
-            class="mono font-weight-light mb-4"
-            v-html="$t('Vuetify.Home.callout')"
+            :class="$vuetify.breakpoint.smAndDown && 'headline'"
+            tag="h1"
+            class="mono font-weight-light mb-4 text-md-left"
+            v-html="$vuetify.breakpoint.mdAndUp ? $t('Vuetify.Home.callout') : 'Vuetify.js'"
           />
-          <v-layout>
+          <v-layout
+            justify-center
+            wrap
+          >
             <v-btn
               color="primary"
               depressed
               large
               round
-              to="/getting-started/why-vuetify"
+              to="/getting-started/quick-start"
             >
-              {{ $t('Vuetify.Home.whyVuetify') }}
+              {{ $t('Vuetify.Home.getStarted') }}
             </v-btn>
             <v-btn
               color="primary"
               outline
               large
               round
-              to="/getting-started/quick-start"
+              to="/getting-started/why-vuetify"
             >
-              {{ $t('Vuetify.Home.getStarted') }}
+              {{ $t('Vuetify.Home.whyVuetify') }}
             </v-btn>
             <v-btn
               color="grey lighten-3"

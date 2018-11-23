@@ -13,7 +13,6 @@
 
     <router-link
       :to="{ name: 'home/Home' }"
-      class="d-flex"
     >
       <v-img
         alt="Vuetify Logo"
@@ -79,7 +78,11 @@
         target="_blank"
         rel="noopener"
       >
-        {{ $t('Vuetify.AppToolbar.store') }}
+        <span
+          class="hidden-sm-and-down"
+          v-text="$t('Vuetify.AppToolbar.store')"
+        />
+        <v-icon class="hidden-md-and-up">mdi-store</v-icon>
       </v-btn>
 
       <v-menu
@@ -97,11 +100,11 @@
           style="min-width: 48px"
         >
           <span
-            class="mr-1"
+            class="hidden-sm-and-down mr-1"
             v-text="$t('Vuetify.AppToolbar.ecosystem')"
           />
           <v-icon class="hidden-sm-and-down">mdi-menu-down</v-icon>
-          <v-icon class="hidden-md-and-up">mdi-earth</v-icon>
+          <v-icon class="hidden-md-and-up">mdi-open-in-new</v-icon>
         </v-btn>
 
         <v-list
@@ -168,11 +171,11 @@
           style="min-width: 48px"
         >
           <span
-            class="mr-1"
+            class="hidden-sm-and-down mr-1"
             v-text="$t('Vuetify.AppToolbar.support')"
           />
           <v-icon class="hidden-sm-and-down">mdi-menu-down</v-icon>
-          <v-icon class="hidden-md-and-up">mdi-lifebuoy</v-icon>
+          <v-icon class="hidden-md-and-up">mdi-comment-question</v-icon>
         </v-btn>
         <v-list dense>
           <v-list-tile
