@@ -41,7 +41,7 @@
                 </a>
               </div>
             </div>
-            <sponsor-btn small />
+            <supporters-sponsor-btn small />
           </v-flex>
 
           <ad-shown

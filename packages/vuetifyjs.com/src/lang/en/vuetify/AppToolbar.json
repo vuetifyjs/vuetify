@@ -3,6 +3,7 @@
   "cart": "Cart",
   "docs": "Docs",
   "documentation": "Documentation",
+  "store": "Store",
   "support": "Support",
   "supports": [
     {
@@ -28,6 +29,11 @@
   ],
   "ecosystem": "Ecosystem",
   "ecosystems": [
+    {
+      "text": "Theme generator",
+      "icon": "mdi-format-paint",
+      "href": "https://theme-generator.vuetifyjs.com"
+    },
     {
       "href": "https://www.reddit.com/r/vuetifyjs/",
       "text": "Reddit",

@@ -13,7 +13,7 @@
           One spot available
         </span>
 
-        <sponsor-btn
+        <supporters-sponsor-btn
           large
           class="mb-4"
           href="https://www.patreon.com/join/vuetify"
@@ -177,7 +177,7 @@
             { text: 'API explorer', to: 'api-explorer' },
             { text: 'Alerts', to: 'alerts' },
             { text: 'Avatars', to: 'avatars' },
-            { text: 'Badges', to: 'Badges' },
+            { text: 'Badges', to: 'badges' },
             { text: 'Bottom navigation', to: 'bottom-navigation' },
             { text: 'Bottom sheets', to: 'bottom-sheets' },
             { text: 'Breadcrumbs', to: 'breadcrumbs' },
@@ -256,11 +256,6 @@
             { text: 'Scrolling', to: 'scrolling' },
             { text: 'Touch support', to: 'touch-support' }
           ]
-        },
-        {
-          text: 'Theme generator',
-          icon: 'mdi-format-paint',
-          to: 'theme-generator'
         }
       ],
       search: ''

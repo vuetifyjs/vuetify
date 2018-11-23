@@ -27,7 +27,7 @@
           "type": "supplemental",
           "value": [
             {
-              "type": "mask-table"
+              "type": "components-mask-table"
             }
           ]
         }

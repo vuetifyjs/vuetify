@@ -3,7 +3,7 @@
   "titleText": "headerText",
   "children": [
     {
-      "type": "grid"
+      "type": "layout-grid"
     },
     {
       "type": "section",

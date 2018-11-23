@@ -6,7 +6,7 @@
       "type": "section",
       "children": [
         {
-          "type": "page-api-explorer"
+          "type": "components-api-explorer"
         }
       ]
     }
