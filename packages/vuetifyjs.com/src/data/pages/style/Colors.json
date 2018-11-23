@@ -86,7 +86,7 @@
       "type": "section",
       "children": [
         {
-          "type": "colors"
+          "type": "style-colors"
         }
       ]
     }

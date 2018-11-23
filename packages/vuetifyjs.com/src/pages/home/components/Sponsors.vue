@@ -14,7 +14,7 @@
       Open Collective Sponsors
     </v-subtitle-1>
 
-    <sponsor-btn
+    <supporters-sponsor-btn
       append
       to="getting-started/sponsors-and-backers"
       large

@@ -8,6 +8,7 @@
     right
     stateless
     width="210"
+    style="z-index: 2;"
   >
     <slot />
   </v-navigation-drawer>

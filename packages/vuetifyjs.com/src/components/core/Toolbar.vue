@@ -48,7 +48,10 @@
             width="26px"
           />
         </v-btn>
-        <v-list light>
+        <v-list
+          dense
+          light
+        >
           <v-list-tile
             v-for="language in languages"
             :key="language.locale"
@@ -68,6 +71,16 @@
           </v-list-tile>
         </v-list>
       </v-menu>
+
+      <v-btn
+        flat
+        style="min-width: 48px"
+        href="https://store.vuetifyjs.com"
+        target="_blank"
+        rel="noopener"
+      >
+        {{ $t('Vuetify.AppToolbar.store') }}
+      </v-btn>
 
       <v-menu
         attach
@@ -91,7 +104,10 @@
           <v-icon class="hidden-md-and-up">mdi-earth</v-icon>
         </v-btn>
 
-        <v-list light>
+        <v-list
+          light
+          dense
+        >
           <v-subheader
             light
             v-text="$t('Vuetify.AppToolbar.quickLinks')"
@@ -158,7 +174,7 @@
           <v-icon class="hidden-sm-and-down">mdi-menu-down</v-icon>
           <v-icon class="hidden-md-and-up">mdi-lifebuoy</v-icon>
         </v-btn>
-        <v-list>
+        <v-list dense>
           <v-list-tile
             v-for="support in supports"
             :href="support.href"
