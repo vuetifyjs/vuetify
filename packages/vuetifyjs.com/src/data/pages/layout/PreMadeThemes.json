@@ -4,7 +4,11 @@
   "children": [
     {
       "type": "section",
-      "children": []
+      "children": [
+        {
+          "type": "layout-pre-made-themes"
+        }
+      ]
     }
   ]
 }
