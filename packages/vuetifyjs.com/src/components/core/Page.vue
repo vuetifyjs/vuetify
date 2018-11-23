@@ -1,5 +1,8 @@
 <template>
-  <v-container fluid>
+  <v-container
+    id="page"
+    fluid
+  >
     <template v-if="structure">
       <doc-heading>
         {{ structure.title }}
