@@ -16,6 +16,9 @@
           {
             "type": "markdown",
             "lang": "fonts"
+          },
+          {
+            "type": "style-headings"
           }
         ]
       },
@@ -41,6 +44,9 @@
           {
             "type": "markdown",
             "lang": "italic"
+          },
+          {
+            "type": "style-weights"
           }
         ]
       },
@@ -58,6 +64,9 @@
           {
             "type": "markdown",
             "lang": "transforms"
+          },
+          {
+            "type": "style-typefaces"
           }
         ]
       },
@@ -75,6 +84,10 @@
           {
             "type": "markdown",
             "lang": "wraps"
+          },
+          {
+            "type": "example",
+            "value": "truncate"
           }
         ]
       }
