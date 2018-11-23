@@ -1,6 +1,6 @@
 <template>
   <a
-    :href="id"
+    :href="`#${id}`"
     class="mr-2 d-inline-flex core-goto text--primary"
     @click.prevent="onClick"
   >
@@ -28,6 +28,14 @@
       hover: false,
       id: ''
     }),
+
+    mounted () {
+      const goto = this.$el.querySelector('[id]')
+
+      if (!goto) return
+
+      this.id = goto.id
+    },
 
     methods: {
       onClick (e) {
