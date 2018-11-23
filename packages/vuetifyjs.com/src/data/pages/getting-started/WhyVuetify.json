@@ -6,7 +6,7 @@
       "type": "section",
       "children": [
         {
-          "type": "why-vuetify"
+          "type": "getting-started-why-vuetify"
         },
         {
           "type": "text",
