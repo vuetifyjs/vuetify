@@ -1,6 +1,6 @@
 <template>
   <v-card
-    class="pa-5 text-xs-center"
+    class="text-xs-center pb-4"
     color="white"
     flat
   >

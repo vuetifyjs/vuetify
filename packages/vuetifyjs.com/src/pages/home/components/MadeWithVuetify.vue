@@ -1,6 +1,6 @@
 <template>
   <v-card
-    class="pa-5 text-xs-center"
+    class="text-xs-center py-4"
     flat
   >
     <v-subtitle-1 class="title font-weight-regular">
