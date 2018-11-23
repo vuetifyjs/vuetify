@@ -1,29 +1,29 @@
 <template>
   <v-container
+    v-if="structure"
     id="page"
     fluid
   >
-    <template v-if="structure">
-      <doc-heading>
-        {{ structure.title }}
-      </doc-heading>
-      <div class="mb-5">
-        <doc-text
-          v-if="structure.titleText"
-          class="mb-4"
-        >
-          {{ structure.titleText }}
-        </doc-text>
-      </div>
+    <doc-heading>
+      {{ structure.title }}
+    </doc-heading>
+    <div class="mb-5">
+      <doc-text
+        v-if="structure.titleText"
+        class="mb-4"
+      >
+        {{ structure.titleText }}
+      </doc-text>
+    </div>
 
-      <component
-        v-for="(child, i) in structure.children"
-        :key="`${composite}-${i}`"
-        :is="getComponent(child.type)"
-        :value="child"
-      />
-    </template>
+    <component
+      v-for="(child, i) in structure.children"
+      :key="`${composite}-${i}`"
+      :is="getComponent(child.type)"
+      :value="child"
+    />
   </v-container>
+  <not-found-page v-else />
 </template>
 
 <script>
@@ -32,9 +32,14 @@
   import kebabCase from 'lodash/kebabCase'
   import camelCase from 'lodash/camelCase'
   import upperFirst from 'lodash/upperFirst'
+  import NotFoundPage from '@/pages/general/404Page.vue'
 
   // TODO: This is where 404 redirect will occur
   export default {
+    components: {
+      NotFoundPage
+    },
+
     provide () {
       return {
         namespace: upperFirst(camelCase(this.namespace)),
