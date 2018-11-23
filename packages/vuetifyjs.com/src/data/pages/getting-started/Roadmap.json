@@ -7,6 +7,9 @@
       "children": [
         {
           "type": "getting-started-roadmap"
+        },
+        {
+          "type": "core-support-vuetify"
         }
       ]
     }
