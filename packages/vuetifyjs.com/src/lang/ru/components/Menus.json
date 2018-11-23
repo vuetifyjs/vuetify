@@ -30,7 +30,7 @@
     },
     "customTransition": {
       "header": "Пользовательские переходы",
-      "desc": "Vuetify поставляется с 3 стандартными переходами, **scale**, **slide-x** и **slide-y**. Вы также можете создать свой собственный и передать его в качестве аргумента перехода. Для примера того, как построены стоковые переходы,<a href=\"https://github.com/vuetifyjs/vuetify/blob/master/src/util/helpers.js#L13\" target=\"_blank\" rel=\"noopener\"> посетите это</a>.",
+      "desc": "Vuetify поставляется с 3 стандартными переходами, **scale**, **slide-x** и **slide-y**. Вы также можете создать свой собственный и передать его в качестве аргумента перехода. Для примера того, как построены стоковые переходы,<a href=\"https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/util/helpers.ts#L31\" target=\"_blank\" rel=\"noopener\"> посетите это</a>.",
       "uninverted": true
     },
     "popover": {

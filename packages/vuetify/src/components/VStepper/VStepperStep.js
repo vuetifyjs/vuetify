@@ -83,6 +83,8 @@ export default {
     click (e) {
       e.stopPropagation()
 
+      this.$emit('click', e)
+
       if (this.editable) {
         this.stepClick(this.step)
       }
