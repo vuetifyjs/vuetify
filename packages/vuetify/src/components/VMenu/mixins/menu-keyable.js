@@ -43,10 +43,7 @@ export default {
       ].includes(e.keyCode)
       ) e.preventDefault()
 
-      if (
-        e.keyCode === keyCodes.esc ||
-        (e.keyCode === keyCodes.tab && !this.$refs.content.contains(document.activeElement))
-      ) {
+      if (e.keyCode === keyCodes.esc) {
         return this.isActive = false
       }
 
