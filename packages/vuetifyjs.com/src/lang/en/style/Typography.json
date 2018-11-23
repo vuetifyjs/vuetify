@@ -23,6 +23,7 @@
   "transforms": [
     "`.text-capitalize` - Sets text-transform to **capitalize**",
     "`.text-lowercase` - Sets text-transform to **lowercase**",
+    "`.text-none` - Sets text-transform to **none**",
     "`.text-uppercase` - Sets text-transform to **uppercase**"
   ],
   "weightsHeader": "Font weights",
