@@ -56,7 +56,7 @@
       },
       group () {
         return this.item.children.map(item => {
-          return `${this.item.group}/${kebabCase(item.name)}`
+          return `${this.item.group}/${kebabCase(item.to)}`
         }).join('|')
       }
     }
