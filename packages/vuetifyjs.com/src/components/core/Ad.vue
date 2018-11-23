@@ -18,6 +18,7 @@
             xs12
             text-xs-center
           >
+            <core-toc />
             <h4 class="caption font-weight-bold grey--text">Diamond Sponsors</h4>
             <div class="my-3">
               <div

@@ -7,7 +7,7 @@
     floating
     right
     stateless
-    width="192"
+    width="210"
   >
     <slot />
   </v-navigation-drawer>

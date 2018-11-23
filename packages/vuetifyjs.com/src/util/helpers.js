@@ -35,7 +35,7 @@ export function randomString (length = 5) {
 
 // Must be called in Vue context
 export function goTo (id) {
-  this.$vuetify.goTo(id).then(() => {
+  this.$vuetify.goTo(id, { offset: -80 }).then(() => {
     if (!id) {
       return (document.location.hash = '')
     }
