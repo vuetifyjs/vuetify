@@ -44,19 +44,16 @@ export default {
       ) e.preventDefault()
 
       if (e.keyCode === keyCodes.esc) {
-        return this.isActive = false
-      }
-
-      if (e.keyCode === keyCodes.tab) {
+        this.isActive = false
+      } else if (e.keyCode === keyCodes.tab) {
         setTimeout(() => {
           if (!this.$refs.content.contains(document.activeElement)) {
             this.isActive = false
           }
         })
-        return
+      } else {
+        this.changeListIndex(e)
       }
-
-      this.changeListIndex(e)
     },
     changeListIndex (e) {
       // For infinite scroll and autocomplete, re-evaluate children
