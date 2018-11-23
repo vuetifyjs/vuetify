@@ -4,7 +4,7 @@
       :loading="loading"
       :disabled="loading"
       color="secondary"
-      @click.native="loader = 'loading'"
+      @click="loader = 'loading'"
     >
       Accept Terms
     </v-btn>
@@ -14,7 +14,7 @@
       :disabled="loading3"
       color="blue-grey"
       class="white--text"
-      @click.native="loader = 'loading3'"
+      @click="loader = 'loading3'"
     >
       Upload
       <v-icon right dark>cloud_upload</v-icon>
@@ -24,7 +24,7 @@
       :loading="loading2"
       :disabled="loading2"
       color="success"
-      @click.native="loader = 'loading2'"
+      @click="loader = 'loading2'"
     >
       Custom Loader
       <span slot="loader">Loading...</span>
@@ -34,7 +34,7 @@
       :loading="loading4"
       :disabled="loading4"
       color="info"
-      @click.native="loader = 'loading4'"
+      @click="loader = 'loading4'"
     >
       Icon Loader
       <span slot="loader" class="custom-loader">

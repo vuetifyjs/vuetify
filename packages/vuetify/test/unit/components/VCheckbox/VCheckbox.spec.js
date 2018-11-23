@@ -134,7 +134,7 @@ test('VCheckbox.js', ({ mount }) => {
     expect(change.mock.calls).toEqual([[true], [false]])
   })
 
-  it('should enable ripple based on disabled state', () => {
+  it('should enable ripple', () => {
     const wrapper = mount(VCheckbox, {
       propsData: {
         inputValue: false,
@@ -149,24 +149,7 @@ test('VCheckbox.js', ({ mount }) => {
 
     wrapper.setProps({ disabled: true })
 
-    expect(wrapper.contains('.v-input--selection-controls__ripple')).toBe(false)
-  })
-
-  it('should set ripple centered property when enabled', () => {
-    const wrapper = mount(VCheckbox, {
-      propsData: {
-        inputValue: false,
-        disabled: true
-      }
-    })
-
-    expect(wrapper.contains('.v-input--selection-controls__ripple')).toBe(false)
-
-    wrapper.setProps({ disabled: false })
-
-    const ripple = wrapper.first('.v-input--selection-controls__ripple')
-    expect(ripple.element._ripple.enabled).toBe(true)
-    expect(ripple.element._ripple.centered).toBe(true)
+    expect(wrapper.contains('.v-input--selection-controls__ripple')).toBe(true)
   })
 
   it('should not render ripple when ripple prop is false', () => {

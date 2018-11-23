@@ -76,9 +76,6 @@ export default {
       class: this.listClasses,
       attrs: {
         disabled: this.disabled
-      },
-      on: {
-        ...this.$listeners
       }
     }), [h(tag, data, this.$slots.default)])
   }
