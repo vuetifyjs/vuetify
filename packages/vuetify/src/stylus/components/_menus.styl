@@ -44,16 +44,6 @@
     max-width: none
 
   &-transition
-    &-enter
-      .v-list__tile
-        min-width: 0
-        pointer-events: none
-
-    &-enter-to
-      .v-list__tile
-        pointer-events: auto
-        transition-delay: .1s
-
     &-leave-active,
     &-leave-to
       pointer-events: none
@@ -64,15 +54,4 @@
 
     &-enter-active,
     &-leave-active
-      transition: all .3s $transition.fast-in-fast-out
-
-.v-menu-transition-enter
-  &.v-menu__content--auto
-    .v-list__tile
-        opacity: 0
-        transform: translateY(-15px)
-
-    .v-list__tile--active
-      opacity: 1
-      transform: none !important
-      pointer-events: auto
+      transition: all .3s $transition.fast-in-fast-out, top 0
