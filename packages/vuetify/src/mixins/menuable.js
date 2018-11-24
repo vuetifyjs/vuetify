@@ -328,7 +328,10 @@ export default Vue.extend({
       })
     },
     startTransition () {
-      requestAnimationFrame(() => (this.isContentActive = true))
+      return new Promise(resolve => requestAnimationFrame(() => {
+        this.isContentActive = true
+        resolve()
+      }))
     },
     isShown (el) {
       return el.style.display !== 'none'

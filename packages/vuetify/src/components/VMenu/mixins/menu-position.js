@@ -8,31 +8,18 @@
  */
 /* @vue/component */
 export default {
+  data: () => ({
+    calculatedTopAuto: 0
+  }),
   methods: {
-    // Revisit this
-    calculateScroll () {
-      if (this.selectedIndex === null) return
+    calcScrollPosition () {
+      const $el = this.$refs.content
+      const activeTile = $el.querySelector('.v-list__tile--active')
+      const maxScrollTop = $el.scrollHeight - $el.offsetHeight
 
-      let scrollTop = 0
-
-      if (this.selectedIndex >= this.stopIndex) {
-        scrollTop = this.$refs.content.scrollHeight
-      } else if (this.selectedIndex > this.startIndex) {
-        scrollTop = (
-          // Top position of selected item
-          (this.selectedIndex * this.tileHeight) +
-          // Remove half of a tile's height
-          (this.tileHeight / 2) +
-          // Account for padding offset on lists
-          (this.defaultOffset / 2) -
-          // Half of the auto content's height
-          100
-        )
-      }
-
-      if (this.$refs.content) {
-        this.$refs.content.scrollTop = scrollTop
-      }
+      return activeTile
+        ? Math.min(maxScrollTop, Math.max(0, activeTile.offsetTop - $el.offsetHeight / 2 + activeTile.offsetHeight / 2))
+        : $el.scrollTop
     },
     calcLeftAuto () {
       if (this.isAttached) return 0
@@ -40,45 +27,23 @@ export default {
       return parseInt(this.dimensions.activator.left - this.defaultOffset * 2)
     },
     calcTopAuto () {
-      const selectedIndex = Array.from(this.tiles)
-        .findIndex(n => n.classList.contains('v-list__tile--active'))
+      const $el = this.$refs.content
+      const activeTile = $el.querySelector('.v-list__tile--active')
 
-      if (selectedIndex === -1) {
+      if (!activeTile) {
         this.selectedIndex = null
+      }
 
+      if (this.offsetY || !activeTile) {
         return this.computedTop
       }
 
-      this.selectedIndex = selectedIndex
-      this.stopIndex = this.tiles.length > 4
-        ? this.tiles.length - 4
-        : this.tiles.length
-      let additionalOffset = this.defaultOffset
-      let offsetPadding
+      this.selectedIndex = Array.from(this.tiles).indexOf(activeTile)
 
-      // Menu should be centered
-      if (selectedIndex > this.startIndex &&
-        selectedIndex < this.stopIndex
-      ) {
-        offsetPadding = 1.5 * this.tileHeight
-      // Menu should be offset top
-      } else if (selectedIndex >= this.stopIndex) {
-        // Being offset top means
-        // we have to account for top
-        // and bottom list padding
-        additionalOffset *= 2
-        offsetPadding = (selectedIndex - this.stopIndex) * this.tileHeight
-      // Menu should be offset bottom
-      } else {
-        offsetPadding = selectedIndex * this.tileHeight
-      }
+      const tileDistanceFromMenuTop = activeTile.offsetTop - this.calcScrollPosition()
+      const firstTileOffsetTop = $el.querySelector('.v-list__tile').offsetTop
 
-      return (
-        this.computedTop +
-        additionalOffset -
-        offsetPadding -
-        (this.tileHeight / 2)
-      )
+      return this.computedTop - tileDistanceFromMenuTop - firstTileOffsetTop
     }
   }
 }

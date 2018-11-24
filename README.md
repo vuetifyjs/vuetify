@@ -246,4 +246,4 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
 
 ### License
 
-Vuetify is [MIT licensed](./LICENSE).
+Vuetify is [MIT licensed](./LICENSE.md).
