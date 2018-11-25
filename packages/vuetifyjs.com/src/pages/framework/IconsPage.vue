@@ -88,6 +88,29 @@
         |  iconfont: 'fa'
         | })
 
+      // FA SVG
+      helpers-section-subheader(value="Framework.Icons.installFASvg")
+      helpers-section-text(value="Framework.Icons.installFASvgText1")
+      helpers-markup(lang="cli")
+        | $ yarn add @fortawesome/fontawesome-svg-core @fortawesome/vue-fontawesome @fortawesome/free-solid-svg-icons -D
+        | // or
+        | $ npm install @fortawesome/fontawesome-svg-core @fortawesome/vue-fontawesome @fortawesome/free-solid-svg-icons -D
+      helpers-section-text(value="Framework.Icons.installFASvgText2")
+      helpers-markup(lang="js")
+        | // main.js
+        | import Vue from 'vue'
+        | import Vuetify from 'vuetify'
+        | import { library } from '@fortawesome/fontawesome-svg-core'
+        | import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+        | import { fas } from '@fortawesome/free-solid-svg-icons'
+        |
+        | Vue.component('font-awesome-icon', FontAwesomeIcon) // Register component globally
+        | library.add(fas) // Include needed icons.
+        |
+        | Vue.use(Vuetify, {
+        |   iconfont: 'faSvg',
+        | })
+
       // FA4
       helpers-section-subheader(value="Framework.Icons.installFA4")
       helpers-section-text(value="Framework.Icons.installFA4Text1")
@@ -239,5 +262,24 @@
         |     }
         |   }
         | &lt;/script&gt;
+
+    section#component-icons
+      helpers-section-head(value="Framework.Icons.componentIconsHeader")
+      helpers-section-text(value="Framework.Icons.componentIconsText1")
+      helpers-markup(lang="js")
+        | import Vue from 'vue'
+        | import Vuetify from 'vuetify'
+        | import IconComponent from './IconComponent.vue'
+        |
+        | Vue.use(Vuetify, {
+        |   icons: {
+        |     'product': {
+        |       component: IconComponent, // you can use string here if component is registered globally
+        |       props: { // pass props to your component if needed
+        |         name: 'product'
+        |       }
+        |     }
+        |   }
+        | })
 
 </template>
