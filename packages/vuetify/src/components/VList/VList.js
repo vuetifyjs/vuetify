@@ -69,7 +69,10 @@ export default {
   render (h) {
     const data = {
       staticClass: 'v-list',
-      'class': this.classes
+      'class': this.classes,
+      attrs: {
+        role: 'list'
+      }
     }
 
     return h('div', data, [this.$slots.default])
