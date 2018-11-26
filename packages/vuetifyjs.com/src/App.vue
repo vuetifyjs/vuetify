@@ -47,9 +47,9 @@
       this.snackbar({
         color: 'store',
         close: true,
-        id: 'thanksgiving-sale',
+        id: 'cyber-monday-sale',
         text: 'Shop now',
-        msg: 'Holiday Store Sale',
+        msg: 'Happy Cyber Monday',
         to: '/store/',
         timeout: 0
       })
