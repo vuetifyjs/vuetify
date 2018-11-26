@@ -77,9 +77,6 @@ export default {
       attrs: {
         disabled: this.disabled,
         role: 'listitem'
-      },
-      on: {
-        ...this.$listeners
       }
     }), [h(tag, data, this.$slots.default)])
   }
