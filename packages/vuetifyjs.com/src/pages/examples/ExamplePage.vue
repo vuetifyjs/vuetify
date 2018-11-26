@@ -14,7 +14,7 @@
     computed: {
       source () {
         const path = this.$route.path.split('/').slice(2).join('/')
-        return `https://github.com/vuetifyjs/vuetifyjs.com/blob/master/src/${path}.vue`
+        return `https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetifyjs.com/src/${path}.vue`
       }
     },
 

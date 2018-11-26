@@ -6,6 +6,8 @@ import PickerButton from '../../mixins/picker-button'
 // Utils
 import { pad } from '../VDatePicker/util'
 
+import { selectingTimes } from './VTimePicker'
+
 /* @vue/component */
 export default {
   name: 'v-time-picker-title',
@@ -16,12 +18,14 @@ export default {
     ampm: Boolean,
     hour: Number,
     minute: Number,
+    second: Number,
     period: {
       type: String,
       validator: period => period === 'am' || period === 'pm'
     },
     readonly: Boolean,
-    selectingHour: Boolean
+    useSeconds: Boolean,
+    selecting: Number
   },
 
   methods: {
@@ -33,14 +37,20 @@ export default {
 
       const displayedHour = this.hour == null ? '--' : this.ampm ? hour : pad(hour)
       const displayedMinute = this.minute == null ? '--' : pad(this.minute)
+      const displayedSecond = this.second == null ? '--' : pad(this.second)
 
+      const titleContent = [
+        this.genPickerButton('selecting', selectingTimes.hour, displayedHour),
+        this.$createElement('span', ':'),
+        this.genPickerButton('selecting', selectingTimes.minute, displayedMinute)
+      ]
+      if (this.useSeconds) {
+        titleContent.push(this.$createElement('span', ':'))
+        titleContent.push(this.genPickerButton('selecting', selectingTimes.second, displayedSecond))
+      }
       return this.$createElement('div', {
         'class': 'v-time-picker-title__time'
-      }, [
-        this.genPickerButton('selectingHour', true, displayedHour),
-        this.$createElement('span', ':'),
-        this.genPickerButton('selectingHour', false, displayedMinute)
-      ])
+      }, titleContent)
     },
     genAmPm () {
       return this.$createElement('div', {
