@@ -1,9 +1,10 @@
 import '../../stylus/components/_data-table.styl'
 
 import { VNode, VNodeChildrenArrayContents } from 'vue'
-import { DataProps, DataOptions } from '../VData/VData'
+import { DataProps } from '../VData/VData'
 import { deepEqual, getObjectValueByPath, convertToUnit } from '../../util/helpers'
-import VDataTableHeader, { TableHeader } from './VDataTableHeader'
+import VDataTableHeader from './VDataTableHeader'
+import { TableHeader } from './mixins/header'
 import { PropValidator } from 'vue/types/options'
 import VRow from './VRow'
 import { VData, VDataFooter } from '../VData'
@@ -14,6 +15,7 @@ import VBtn from '../VBtn'
 import VRowGroup from './VRowGroup'
 import VDataTableHeaderMobile from './VDataTableHeaderMobile'
 import VProgressLinear from '../VProgressLinear'
+import VDataTableVirtual from './VDataTableVirtual'
 
 /* @vue/component */
 export default VDataIterator.extend({
@@ -61,11 +63,15 @@ export default VDataIterator.extend({
     }
   },
 
-  created () {
-    console.log(this)
-  },
-
   methods: {
+    customSearchWithColumns (items: any[], search: string) {
+      const filterableHeaders = this.headers.filter(h => !!h.filter)
+      if (filterableHeaders.length) {
+        items = items.filter(i => filterableHeaders.every(h => h.filter!(getObjectValueByPath(i, h.value), this.search, i)))
+      }
+
+      return this.customSearch(items, search)
+    },
     customSortWithHeaders (items: any[], sortBy: string[], sortDesc: boolean[], locale: string) {
       const customSorters = this.computedHeaders.reduce((obj: Record<string, Function>, header: TableHeader) => {
         if (header.sort) obj[header.value] = header.sort
@@ -101,9 +107,7 @@ export default VDataIterator.extend({
     genLoading () {
       const progress = this.$createElement(VProgressLinear, {
         props: {
-          // color: this.dataTable.loading === true
-          //   ? 'primary'
-          //   : this.dataTable.loading,
+          color: this.loading === true ? 'primary' : this.loading,
           height: 2,
           indeterminate: true
         }
@@ -130,7 +134,6 @@ export default VDataIterator.extend({
             options: props.options
           },
           on: {
-            'update:options': (options: DataOptions) => props.options = options,
             'sort': props.sort
           }
         }))
@@ -149,16 +152,16 @@ export default VDataIterator.extend({
         }, content)
       ])
     },
-    genItems (props: DataProps): VNodeChildrenArrayContents {
-      const empty = this.genEmpty()
+    genItems (items: any[], props: DataProps): VNodeChildrenArrayContents {
+      const empty = this.genEmpty(props.pagination.itemsLength)
       if (empty) return [empty]
 
       return props.options.groupBy.length
-        ? this.genGroupedRows(props)
-        : this.genRows(props)
+        ? this.genGroupedRows(props.groupedItems!, props)
+        : this.genRows(items, props)
     },
-    genGroupedRows (props: DataProps): VNodeChildrenArrayContents {
-      const groups = Object.keys(props.groupedItems || {})
+    genGroupedRows (groupedItems: Record<string, any[]>, props: DataProps): VNodeChildrenArrayContents {
+      const groups = Object.keys(groupedItems || {})
 
       return groups.map(group => {
         if (!this.openCache.hasOwnProperty(group)) this.$set(this.openCache, group, true)
@@ -166,18 +169,18 @@ export default VDataIterator.extend({
         if (this.$scopedSlots.group) {
           return this.$scopedSlots.group({
             group,
-            items: props.groupedItems![group],
+            items: groupedItems![group],
             headers: this.computedHeaders
           })
         } else {
-          return this.genDefaultGroupedRow(group, props.groupedItems![group], props)
+          return this.genDefaultGroupedRow(group, groupedItems![group], props)
         }
       })
     },
     genDefaultGroupedRow (group: string, items: any[], props: DataProps) {
       const isOpen = !!this.openCache[group]
       const children: VNodeChildrenArrayContents = [
-        this.$createElement('template', { slot: 'row.content' }, this.genDefaultRows(props))
+        this.$createElement('template', { slot: 'row.content' }, this.genDefaultRows(props.groupedItems![group], props))
       ]
 
       if (this.$scopedSlots['group.header']) {
@@ -224,21 +227,22 @@ export default VDataIterator.extend({
       }
 
       return this.$createElement(VRowGroup, {
+        key: group,
         props: {
           value: isOpen
         }
       }, children)
     },
-    genRows (props: DataProps): VNodeChildrenArrayContents {
-      return this.$scopedSlots.item ? this.genScopedRows(props) : this.genDefaultRows(props)
+    genRows (items: any[], props: DataProps): VNodeChildrenArrayContents {
+      return this.$scopedSlots.item ? this.genScopedRows(items, props) : this.genDefaultRows(items, props)
     },
-    genScopedRows (props: DataProps): VNodeChildrenArrayContents {
-      return props.items.map((item: any) => this.$scopedSlots.item(this.createItemProps(item)))
+    genScopedRows (items: any[], props: DataProps): VNodeChildrenArrayContents {
+      return items.map((item: any) => this.$scopedSlots.item(this.createItemProps(item)))
     },
-    genDefaultRows (props: DataProps): VNodeChildrenArrayContents {
+    genDefaultRows (items: any[], props: DataProps): VNodeChildrenArrayContents {
       return this.$scopedSlots['item.expanded']
-        ? props.items.map(item => this.genDefaultExpandedRow(item))
-        : props.items.map(item => this.genDefaultSimpleRow(item))
+        ? items.map(item => this.genDefaultExpandedRow(item))
+        : items.map(item => this.genDefaultSimpleRow(item))
     },
     genDefaultExpandedRow (item: any): VNode {
       const isExpanded = this.isExpanded(item)
@@ -300,12 +304,12 @@ export default VDataIterator.extend({
       })
     },
     genBody (props: DataProps): VNode | string | VNodeChildrenArrayContents {
-      // if (this.$scopedSlots.body) return this.$scopedSlots.body(this.bodySlotProps(props))
+      if (this.$scopedSlots.body) return this.$scopedSlots.body(this.createSlotProps(props))
 
       return this.$createElement('tbody', [
-        this.genSlots('row.prepend', props),
-        this.genItems(props),
-        this.genSlots('row.append', props)
+        this.genSlots('body.prepend', props),
+        this.genItems(props.items, props),
+        this.genSlots('body.append', props)
       ])
     },
     genFooters (props: DataProps) {
@@ -342,19 +346,29 @@ export default VDataIterator.extend({
       ])
     },
     genDefaultScopedSlot (props: DataProps): VNode {
-      // const children: VNodeChildrenArrayContents = [this.genTable(props)]
-
       // TODO: Do we have to support static? Is there another way?
       // if (this.static) {
       //   return this.$createElement('div', ['static'])
       // }
 
       if (this.virtualRows) {
-        return this.$createElement('div', ['virtual'])
+        return this.$createElement(VDataTableVirtual, {
+          class: {
+            'v-data-table--fixed': !!this.height
+          },
+          props: {
+            itemsLength: props.items.length,
+            height: Number(this.height)
+          },
+          scopedSlots: {
+            items: ({ start, stop }) => this.genItems(props.items.slice(start, stop), props)
+          }
+        }, [
+          this.$createElement('template', { slot: 'header' }, this.genHeaders(props)),
+          this.$createElement('template', { slot: 'footer' }, this.genFooters(props))
+        ])
       }
 
-      // const footers = computeSlots(this, 'footer', this.createSlotProps())
-      // children.push(...footers, ...this.genFooter())
 
       return this.$createElement('div', {
         staticClass: 'v-data-table',
@@ -372,24 +386,14 @@ export default VDataIterator.extend({
   },
 
   render (): VNode {
+    const props = Object.assign({}, this.$props)
+
+    props.disableSort = this.serverItemsLength >= 0
+    props.disablePagination = this.serverItemsLength >= 0
+    props.disableSearch = this.serverItemsLength >= 0
+
     return this.$createElement(VData, {
-      props: {
-        items: this.items,
-        itemsLength: this.totalItems,
-        options: this.options,
-        page: this.page,
-        itemsPerPage: this.itemsPerPage,
-        sortBy: this.sortBy,
-        sortDesc: this.sortDesc,
-        groupBy: this.groupBy,
-        groupDesc: this.groupDesc,
-        customSort: this.customSortWithHeaders,
-        mustSort: this.mustSort,
-        multiSort: this.multiSort,
-        locale: this.locale,
-        disableSort: this.itemsLength >= 0,
-        disablePagination: this.itemsLength >= 0
-      },
+      props,
       on: {
         'update:options': (v: any, old: any) => {
           this.internalGroupBy = v.groupBy || []
@@ -402,7 +406,7 @@ export default VDataIterator.extend({
         'update:groupBy': (v: any) => this.$emit('update:groupBy', v),
         'update:groupDesc': (v: any) => this.$emit('update:groupDesc', v),
         'pagination': (v: any, old: any) => !deepEqual(v, old) && this.$emit('pagination', v),
-        'visible-items': (v: any[]) => this.visibleItems = v
+        'current-items': (v: any[]) => this.$emit('current-items', v)
       },
       scopedSlots: {
         default: this.genDefaultScopedSlot as any

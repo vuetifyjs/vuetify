@@ -12,6 +12,8 @@ import Themeable from '../../mixins/themeable'
 
 /* @vue/component */
 export default mixins(Themeable).extend({
+  name: 'v-data-iterator',
+
   props: {
     ...VData.options.props, // TODO: filter out props not used
     value: {
@@ -24,11 +26,7 @@ export default mixins(Themeable).extend({
       default: () => []
     } as PropValidator<any[]>,
     singleExpand: Boolean,
-    itemsLength: {
-      type: Number,
-      default: -1
-    },
-    loading: Boolean,
+    loading: [Boolean, String],
     noResultsText: {
       type: String,
       default: '$vuetify.dataIterator.noResultsText'
@@ -50,9 +48,6 @@ export default mixins(Themeable).extend({
   }),
 
   computed: {
-    totalItems (): number {
-      return this.itemsLength > -1 ? this.itemsLength : this.items.length
-    },
     everyItem (): boolean {
       return !!this.items.length && this.items.every((i: any) => this.isSelected(i))
     },
@@ -139,14 +134,14 @@ export default mixins(Themeable).extend({
     genEmptyWrapper (content: VNodeChildrenArrayContents) {
       return this.$createElement('div', content)
     },
-    genEmpty () {
-      if (this.itemsLength < 0 && this.loading) {
+    genEmpty (itemsLength: number) {
+      if (itemsLength <= 0 && this.loading) {
         const loading = this.$slots['loading'] || this.$vuetify.t(this.loadingText)
         return this.genEmptyWrapper(loading)
-      } else if (this.itemsLength < 0 && !this.items.length) {
+      } else if (itemsLength <= 0 && !this.items.length) {
         const noData = this.$slots['no-data'] || this.$vuetify.t(this.noDataText)
         return this.genEmptyWrapper(noData)
-      } else if (!this.items.length) {
+      } else if (itemsLength <= 0 && this.search) {
         const noResults = this.$slots['no-results'] || this.$vuetify.t(this.noResultsText)
         return this.genEmptyWrapper(noResults)
       }
@@ -154,7 +149,7 @@ export default mixins(Themeable).extend({
       return null
     },
     genItems (props: DataProps) {
-      const empty = this.genEmpty()
+      const empty = this.genEmpty(props)
       if (empty) return [empty]
 
       if (this.$scopedSlots.default) return this.$scopedSlots.default(props)
@@ -183,19 +178,14 @@ export default mixins(Themeable).extend({
   },
 
   render (): VNode {
+    const props = Object.assign({}, this.$props)
+
+    props.disableSort = this.serverItemsLength >= 0
+    props.disablePagination = this.serverItemsLength >= 0
+    props.disableSearch = this.serverItemsLength >= 0
+
     return this.$createElement(VData, {
-      props: {
-        items: this.items,
-        itemsLength: this.totalItems,
-        options: this.options,
-        page: this.page,
-        itemsPerPage: this.itemsPerPage,
-        sortBy: this.sortBy,
-        sortDesc: this.sortDesc,
-        groupBy: this.groupBy,
-        groupDesc: this.groupDesc,
-        customSort: this.customSort
-      },
+      props,
       on: {
         'update:options': (v: any, old: any) => !deepEqual(v, old) && this.$emit('update:options', v),
         'update:page': (v: any) => this.$emit('update:page', v),
@@ -205,7 +195,7 @@ export default mixins(Themeable).extend({
         'update:groupBy': (v: any) => this.$emit('update:groupBy', v),
         'update:groupDesc': (v: any) => this.$emit('update:groupDesc', v),
         'pagination': (v: any, old: any) => !deepEqual(v, old) && this.$emit('pagination', v),
-        'visible-items': (v: any[]) => this.visibleItems = v
+        'current-items': (v: any[]) => this.$emit('current-items', v)
       },
       scopedSlots: {
         default: this.genDefaultScopedSLot

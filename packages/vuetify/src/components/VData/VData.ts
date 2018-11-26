@@ -1,5 +1,5 @@
 // Helpers
-import { wrapInArray, sortItems, deepEqual, groupByProperty } from '../../util/helpers'
+import { wrapInArray, sortItems, deepEqual, groupByProperty, searchItems } from '../../util/helpers'
 import { PropValidator } from 'vue/types/options'
 import Vue, { VNode } from 'vue'
 
@@ -37,15 +37,13 @@ export interface DataProps {
 export default Vue.extend({
   name: 'v-data',
 
+  inheritAttrs: false,
+
   props: {
     items: {
       type: Array,
       default: () => []
     } as PropValidator<any[]>,
-    itemsLength: {
-      type: Number,
-      required: true
-    },
     itemKey: {
       type: String,
       default: 'id'
@@ -63,7 +61,7 @@ export default Vue.extend({
       default: () => []
     } as PropValidator<boolean | boolean[]>,
     customSort: {
-      type: Function,
+      type: Function, // TODO: specific typing?
       default: sortItems
     },
     mustSort: Boolean,
@@ -89,7 +87,17 @@ export default Vue.extend({
       default: 'en-US'
     },
     disableSort: Boolean,
-    disablePagination: Boolean
+    disablePagination: Boolean,
+    disableSearch: Boolean,
+    search: String,
+    customSearch: {
+      type: Function, // TODO: specific typing?
+      default: searchItems
+    },
+    serverItemsLength: {
+      type: Number,
+      default: -1
+    }
   },
 
   data () {
@@ -108,6 +116,9 @@ export default Vue.extend({
   },
 
   computed: {
+    itemsLength (): number {
+      return this.serverItemsLength >= 0 ? this.serverItemsLength : this.filteredItems.length
+    },
     pageCount (): number {
       return this.internalOptions.itemsPerPage === -1
         ? 1
@@ -137,6 +148,15 @@ export default Vue.extend({
     filteredItems (): any[] {
       let items = this.items.slice()
 
+      if (!this.disableSearch) {
+        items = this.customSearch(items, this.search)
+      }
+
+      return items
+    },
+    computedItems (): any[] {
+      let items = this.filteredItems.slice()
+
       if (!this.disableSort) {
         items = this.sortItems(items)
       }
@@ -145,9 +165,12 @@ export default Vue.extend({
         items = this.paginateItems(items)
       }
 
-      this.$emit('visible-items', items)
+      this.$emit('current-items', items)
 
       return items
+    },
+    groupedItems (): any[] {
+      return groupByProperty(this.computedItems, this.internalOptions.groupBy[0])
     },
     scopedProps (): object {
       const props = {
@@ -158,7 +181,7 @@ export default Vue.extend({
 
       Object.defineProperties(props, {
         items: {
-          get: () => this.filteredItems
+          get: () => this.computedItems
         },
         options: {
           get: () => this.internalOptions,
@@ -172,7 +195,7 @@ export default Vue.extend({
       // TODO: Only suppports one level of grouping
       if (this.internalOptions.groupBy.length) {
         Object.defineProperty(props, 'groupedItems', {
-          get: () => groupByProperty(this.filteredItems, this.internalOptions.groupBy[0])
+          get: () => this.groupedItems
         })
       }
 
@@ -196,7 +219,6 @@ export default Vue.extend({
         this.$emit('pagination', this.pagination)
       },
       deep: true
-      // immediate: true
     },
     page (page: number) {
       this.updateOptions({ page })
@@ -234,11 +256,6 @@ export default Vue.extend({
     'internalOptions.groupDesc' (groupDesc: boolean[], old: boolean[]) {
       !deepEqual(groupDesc, old) && this.$emit('update:groupDesc', Array.isArray(this.groupDesc) ? groupDesc : groupDesc[0])
     }
-  },
-
-  created () {
-    // console.log(defaultOptions, this.options)
-    // this.$emit('update:options', {}, defaultOptions, this.options)
   },
 
   methods: {

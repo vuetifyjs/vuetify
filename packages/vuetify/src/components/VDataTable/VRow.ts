@@ -1,7 +1,7 @@
 // Types
 import Vue, { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
-import { TableHeader } from './VDataTableHeader'
+import { TableHeader } from './mixins/header'
 
 // Utils
 import { getObjectValueByPath } from '../../util/helpers'
