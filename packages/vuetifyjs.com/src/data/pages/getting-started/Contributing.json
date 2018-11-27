@@ -90,14 +90,6 @@
             {
               "type": "markup",
               "value": "bash_npm_install_pm2"
-            },
-            {
-              "type": "text",
-              "lang": "localText6"
-            },
-            {
-              "type": "markup",
-              "value": "bash_pm2_commands"
             }
           ]
         }
@@ -155,12 +147,8 @@
               "lang": "startupSubHeader1"
             },
             {
-              "type": "text",
-              "lang": "startupText2"
-            },
-            {
-              "type": "text",
-              "lang": "startupText3"
+              "type": "markup",
+              "value": "bash_yarn_startup_vuetify"
             }
           ]
         },
@@ -176,8 +164,20 @@
               "lang": "startupText4"
             },
             {
+              "type": "markup",
+              "value": "bash_pm2_import"
+            },
+            {
               "type": "text",
               "lang": "startupText5"
+            },
+            {
+              "type": "markup",
+              "value": "bash_pm2_commands"
+            },
+            {
+              "type": "text",
+              "lang": "startupText6"
             }
           ]
         }

@@ -1,0 +1,5 @@
+// To start playground
+$ yarn dev
+
+//To start docs
+$ yarn docs-dev
