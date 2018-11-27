@@ -107,24 +107,12 @@
           "lang": "setupText1"
         },
         {
+          "type": "markup",
+          "value": "bash_setup_dev"
+        },
+        {
           "type": "text",
           "lang": "setupText2"
-        },
-        {
-          "type": "text",
-          "lang": "setupText3"
-        },
-        {
-          "type": "text",
-          "lang": "setupText4"
-        },
-        {
-          "type": "text",
-          "lang": "setupText5"
-        },
-        {
-          "type": "text",
-          "lang": "setupText6"
         }
       ]
     },
