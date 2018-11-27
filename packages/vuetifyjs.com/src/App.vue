@@ -44,15 +44,15 @@
     mounted () {
       this.getReleases()
 
-      this.snackbar({
-        color: 'store',
-        close: true,
-        id: 'cyber-monday-sale',
-        text: 'Shop now',
-        msg: 'Happy Cyber Monday',
-        to: '/store/',
-        timeout: 0
-      })
+      // this.snackbar({
+      //   color: 'store',
+      //   close: true,
+      //   id: 'cyber-monday-sale',
+      //   text: 'Shop now',
+      //   msg: 'Happy Cyber Monday',
+      //   to: '/store/',
+      //   timeout: 0
+      // })
     },
 
     methods: {
