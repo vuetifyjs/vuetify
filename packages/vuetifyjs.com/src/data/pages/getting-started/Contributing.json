@@ -164,8 +164,9 @@
               "value": "bash_pm2_commands"
             },
             {
-              "type": "text",
-              "lang": "startupText6"
+              "type": "alert",
+              "lang": "startupText6",
+              "value": "info"
             }
           ]
         }
@@ -179,8 +180,9 @@
           "lang": "commitHeader"
         },
         {
-          "type": "text",
-          "lang": "commitText"
+          "type": "alert",
+          "lang": "commitText",
+          "value": "error"
         }
       ]
     },
@@ -223,8 +225,9 @@
               "lang": "changesSubHeader1"
             },
             {
-              "type": "text",
-              "lang": "changesText7"
+              "type": "alert",
+              "lang": "changesText7",
+              "value": "info"
             }
           ]
         },
@@ -236,8 +239,9 @@
               "lang": "changesSubHeader2"
             },
             {
-              "type": "text",
-              "lang": "changesText8"
+              "type": "alert",
+              "lang": "changesText8",
+              "value": "info"
             }
           ]
         }

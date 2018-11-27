@@ -33,7 +33,7 @@
   "startupText6": "Currently there are only 2 major process names: `vuetify` (playground) and `vuetify-docs`",
 
   "commitHeader": "## Commit Guidelines w/Commitizen",
-  "commitText": "Guidelines here",
+  "commitText": "Coming Soon",
 
   "changesHeader": "## Submitting Changes / Pull Requests",
   "changesText1": "Pull Request / Merge Changes from Upstream",
@@ -42,22 +42,8 @@
   "changesText4": "git cz",
   "changesText5": "fill out commit info",
   "changesText6": "push",
-  "changesSubHeader1": "### PR For Vuetify",
-  "changesText7": "submit PR to dev",
-  "changesSubHeader2": "### PR For Docs",
-  "changesText8": "submit PR to master",
-
-  "pullRequestsHeader": "## Pull requests",
-  "pullRequest1": "All PRs should be made to the `dev` branch of Vuetify.",
-  "pullRequest2": "For changes and feature requests, please include an example of what you are trying to solve and an example of the markup",
-
-  "localText22": "After cloned, use your cli to <kbd>cd vuetify</kbd>. Once in the directory, you will need to create a new file in the <kbd>dev</kbd> directory called `Playground.vue`. An example has been provided, `Playground.example.vue`, which you can rename. Keep in mind, this file is not tracked by version control. Once copied, go back to your cli and run:",
-  "localText23": "This will start a local node server located at [http://localhost:8080](http://localhost:8080). Now from your code editor you can easily load components and test whatever you want at lightning speed!",
-
-  "pushingHeader": "Pushing",
-  "pushingMainHeader": "Contribute to Main Vuetify",
-  "pushingMainText": "Standard Flow fork/clone dev → branch → PR to dev",
-
-  "pushingDocsHeader": "Contribute to Docs",
-  "pushingDocsText": "PR to master"
+  "changesSubHeader1": "### Pull Requests For Vuetify",
+  "changesText7": "For any pull requests related to Vuetify framework itself (eg: bug fixes and features), submit your pull request to the `dev` branch",
+  "changesSubHeader2": "### Pull Requests For Docs",
+  "changesText8": "For any pull requests related to Vuetify docs, submit your pull request to the `master` branch"
 }
