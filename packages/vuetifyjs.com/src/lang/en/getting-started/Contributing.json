@@ -1,8 +1,8 @@
 {
-  "header": "# Be a part of something bigger!",
+  "header": "# Be a Part of Something Bigger!",
   "headerText": "Vuetify is made possible by an amazing community that submits issues, creates pull requests, and provides invaluable feedback. It is our job to enable you to create amazing applications. A lot of the time, you come across something that can be made better. Maybe you find a bug, or you have an idea for additional functionality. That's great! It's as easy as cloning the Vuetify repository to get started working in a development environment.",
 
-  "issueHeader": "## Reporting issues",
+  "issueHeader": "## Reporting Issues",
   "issue1": "The issue list of this repo is exclusively for bug reports and feature requests. Non-conforming issues will be closed immediately.",
   "issue2": "For general questions, please join the [community](https://chat.vuetifyjs.com).",
   "issue3": "Try to search for your issue, it may have been answered.",
@@ -11,14 +11,15 @@
   "issue6": "Please use the [issue creator](https://issues.vuetifyjs.com) to create a new issue.",
 
   "localHeader": "## Dev Environment Pre-reqs",
-  "localText1": "Vuetify contains a local dev environment that you can bootup to test new features, functionality, and components.",
+  "localText1": "Vuetify contains a local dev environment that you can bootup to test new features, functionality, and components. Before you can get started however, there are a few things you will need to install that will assist you in managing the many aspects of vuetify.",
   "localSubHeader1": "### Pre-req: Install Commitizen",
-  "localText2" : "install commitizen",
-  "localText3" : "install cz-conventional-changelog",
-  "localText4" : "create .czrc file",
-  "localText5" : "useable commands",
+  "localText2": "The Vuetify team uses [Commitizen](https://github.com/commitizen/cz-cli) for all repository commits. This allows for easy to read and organized commits with minimal change to normal commit functions. To get started install Commitizen globally using npm:",
+  "localTextWarning": "Sometimes creating .czrc wont work using cmd, if you get unexpected results, try creating the file in your home directory using VS Code",
+  "localText3": "Congrats! Commitizen is installed! When you do commits, add your files like normal and replace `git commit -m \"your message\"` with `git cz` and follow the prompts.",
+  "localText4": "See \"Commit Guidelines w/Commitizen\" below for commit guidelines",
   "localSubHeader2": "### Install PM2 (optional)",
-  "localText6": "install pm2",
+  "localText5": "If you choose, you can use PM2 to run and manage multiple portions of the Vuetify mono-repo at the same time (Playground, Docs, Etc...) Included in the root directory are a few PM2 config files which will boot up and manage all that Vuetify has to offer. To get started you need to start PM2:",
+  "localText6": "Once installed you can use the following commands to import, start, stop all or specific services within PM2:",
 
   "setupHeader": "## Setup Dev Environment",
   "setupText1": "Fork vuetify https://github.com/vuetifyjs/vuetify",
@@ -37,10 +38,9 @@
   "startupText4": "pm2 start ecosystem.config.js",
   "startupText5": "basic commands",
 
-  
   "commitHeader": "## Commit Guidelines w/Commitizen",
   "commitText": "Guidelines here",
-  
+
   "changesHeader": "## Submitting Changes / Pull Requests",
   "changesText1": "Pull Request / Merge Changes from Upstream",
   "changesText2": "Fix any merge issues",
@@ -52,20 +52,18 @@
   "changesText7": "submit PR to dev",
   "changesSubHeader2": "### PR For Docs",
   "changesText8": "submit PR to master",
-  
+
   "pullRequestsHeader": "## Pull requests",
   "pullRequest1": "All PRs should be made to the `dev` branch of Vuetify.",
   "pullRequest2": "For changes and feature requests, please include an example of what you are trying to solve and an example of the markup",
 
   "localText22": "After cloned, use your cli to <kbd>cd vuetify</kbd>. Once in the directory, you will need to create a new file in the <kbd>dev</kbd> directory called `Playground.vue`. An example has been provided, `Playground.example.vue`, which you can rename. Keep in mind, this file is not tracked by version control. Once copied, go back to your cli and run:",
   "localText23": "This will start a local node server located at [http://localhost:8080](http://localhost:8080). Now from your code editor you can easily load components and test whatever you want at lightning speed!",
-  
-  
+
   "pushingHeader": "Pushing",
   "pushingMainHeader": "Contribute to Main Vuetify",
   "pushingMainText": "Standard Flow fork/clone dev → branch → PR to dev",
-  
+
   "pushingDocsHeader": "Contribute to Docs",
   "pushingDocsText": "PR to master"
-
 }

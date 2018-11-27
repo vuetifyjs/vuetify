@@ -58,16 +58,21 @@
               "lang": "localText2"
             },
             {
+              "type": "markup",
+              "value": "bash_npm_install_commitizen"
+            },
+            {
+              "type": "alert",
+              "lang": "localTextWarning",
+              "value": "warning"
+            },
+            {
               "type": "text",
               "lang": "localText3"
             },
             {
               "type": "text",
               "lang": "localText4"
-            },
-            {
-              "type": "text",
-              "lang": "localText5"
             }
           ]
         },
@@ -80,7 +85,19 @@
             },
             {
               "type": "text",
+              "lang": "localText5"
+            },
+            {
+              "type": "markup",
+              "value": "bash_npm_install_pm2"
+            },
+            {
+              "type": "text",
               "lang": "localText6"
+            },
+            {
+              "type": "markup",
+              "value": "bash_pm2_commands"
             }
           ]
         }
