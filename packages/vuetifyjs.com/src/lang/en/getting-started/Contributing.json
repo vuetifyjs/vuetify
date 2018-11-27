@@ -19,7 +19,6 @@
   "localText4": "See \"Commit Guidelines w/Commitizen\" below for commit guidelines",
   "localSubHeader2": "### Install PM2 (optional)",
   "localText5": "If you choose, you can use PM2 to run and manage multiple portions of the Vuetify mono-repo at the same time (Playground, Docs, Etc...) Included in the root directory are a few PM2 config files which will boot up and manage all that Vuetify has to offer. To get started you need to start PM2:",
-  "localText6": "Once installed you can use the following commands to import, start, stop all or specific services within PM2:",
 
   "setupHeader": "## Setup Dev Environment",
   "setupText1": "Fork vuetify https://github.com/vuetifyjs/vuetify",
@@ -30,13 +29,12 @@
   "setupText6": "yarn build",
 
   "startupHeader": "## Starting up dev environment",
-  "startupText1": "There are a few ways to startup",
+  "startupText1": "There are a few ways to startup the dev environments in Vuetify mono-repo:",
   "startupSubHeader1": "### Yarn",
-  "startupText2": "yarn dev",
-  "startupText3": "yarn docs-dev",
   "startupSubHeader2": "### PM2",
-  "startupText4": "pm2 start ecosystem.config.js",
-  "startupText5": "basic commands",
+  "startupText4": "To import pre-configured PM2 instance use the following",
+  "startupText5": "Here are some commands to use with PM2 to start/stop/restart instances",
+  "startupText6": "Currently there are only 2 major process names: `vuetify` (playground) and `vuetify-docs`",
 
   "commitHeader": "## Commit Guidelines w/Commitizen",
   "commitText": "Guidelines here",
