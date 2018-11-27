@@ -1,14 +1,17 @@
 export default function (expandedParentClass = '') {
   return {
-    enter (el) {
+    beforeEnter (el) {
       el._parent = el.parentNode
-      const initialStyle = el._initialStyle = {
+      el._initialStyle = {
         transition: el.style.transition,
         visibility: el.style.visibility,
         overflow: el.style.overflow,
         height: el.style.height
       }
+    },
 
+    enter (el) {
+      const initialStyle = el._initialStyle
       el.style.setProperty('transition', 'none', 'important')
       el.style.visibility = 'hidden'
       const height = `${el.offsetHeight}px`
@@ -25,9 +28,8 @@ export default function (expandedParentClass = '') {
       })
     },
 
-    afterEnter (el) {
-      resetStyles(el)
-    },
+    afterEnter: resetStyles,
+    enterCancelled: resetStyles,
 
     leave (el) {
       el._initialStyle = {
@@ -41,10 +43,13 @@ export default function (expandedParentClass = '') {
       requestAnimationFrame(() => el.style.height = 0)
     },
 
-    afterLeave (el) {
-      expandedParentClass && el._parent && el._parent.classList.remove(expandedParentClass)
-      resetStyles(el)
-    }
+    afterLeave,
+    leaveCancelled: afterLeave
+  }
+
+  function afterLeave (el) {
+    expandedParentClass && el._parent && el._parent.classList.remove(expandedParentClass)
+    resetStyles(el)
   }
 }
 
