@@ -45,12 +45,12 @@
       this.getReleases()
 
       this.snackbar({
-        color: 'default',
+        color: 'store',
         close: true,
-        id: 'october-2018-22572142',
-        text: 'Go to video',
-        msg: 'October framework update',
-        href: 'https://www.patreon.com/posts/october-2018-22572142',
+        id: 'cyber-monday-sale',
+        text: 'Shop now',
+        msg: 'Happy Cyber Monday',
+        to: '/store/',
         timeout: 0
       })
     },

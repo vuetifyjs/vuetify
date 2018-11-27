@@ -91,14 +91,22 @@ export default {
     isActive (val) {
       if (val) {
         this.show()
+        this.hideScroll()
       } else {
         this.removeOverlay()
         this.unbind()
       }
     },
     fullscreen (val) {
-      if (val) this.hideScroll()
-      else this.showScroll()
+      if (!this.isActive) return
+
+      if (val) {
+        this.hideScroll()
+        this.removeOverlay(false)
+      } else {
+        this.showScroll()
+        this.genOverlay()
+      }
     }
   },
 
@@ -154,7 +162,6 @@ export default {
     },
     show () {
       !this.fullscreen && !this.hideOverlay && this.genOverlay()
-      this.fullscreen && this.hideScroll()
       this.$refs.content.focus()
       this.$listeners.keydown && this.bind()
     },

@@ -18,7 +18,7 @@
         >
           <v-img
             height="100%"
-            src="https://cdn.vuetifyjs.com/images/store/angryman.png"
+            src="https://cdn.vuetifyjs.com/images/store/winter_banner.jpg"
           />
         </v-card>
       </v-flex>

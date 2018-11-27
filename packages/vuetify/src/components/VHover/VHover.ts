@@ -29,14 +29,10 @@ export default mixins(
 
   methods: {
     onMouseEnter () {
-      this.runDelay('open', () => {
-        this.isActive = true
-      })
+      this.runDelay('open')
     },
     onMouseLeave () {
-      this.runDelay('close', () => {
-        this.isActive = false
-      })
+      this.runDelay('close')
     }
   },
 
