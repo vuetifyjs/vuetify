@@ -21,7 +21,7 @@ export default function (expandedParentClass = '') {
       void el.offsetHeight // force reflow
       el.style.transition = initialStyle.transition
 
-      expandedParentClass && el._parent.classList.add(expandedParentClass)
+      expandedParentClass && el._parent && el._parent.classList.add(expandedParentClass)
 
       requestAnimationFrame(() => {
         el.style.height = height
