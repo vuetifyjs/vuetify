@@ -1,0 +1,24 @@
+// Import and start all services into PM2
+$ pm2 start ecosystem.config.js
+
+//Import and start all services into PM2 (for Windows Only)
+$ pm2 start ecosystem-win.config.js
+
+//Import and start single service
+$ pm2 start ecosystem.config.js --only <process name>
+
+// Start all services
+$ pm2 start all
+
+// Stop all services
+$ pm2 stop all
+
+// Restart all services
+$ pm2 restart all
+
+// Start/Stop/Restart single service
+$ pm2 <task> <process name>
+
+// Stop and remove all services
+$ pm2 kill
+
