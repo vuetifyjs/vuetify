@@ -1,5 +1,6 @@
 <template>
   <a
+    :class="classes"
     :href="`#${id}`"
     class="mr-2 d-inline-flex core-goto text--primary"
     @click.prevent="onClick"
@@ -26,14 +27,26 @@
   export default {
     data: () => ({
       hover: false,
-      id: ''
+      id: '',
+      tag: null
     }),
+
+    computed: {
+      classes () {
+        return {
+          'mb-4': this.tag === 'H1',
+          'mb-3': this.tag === 'H2',
+          'mb-2': this.tag === 'H3'
+        }
+      }
+    },
 
     mounted () {
       const goto = this.$el.querySelector('[id]')
 
       if (!goto) return
 
+      this.tag = goto.tagName
       this.id = goto.id
     },
 
