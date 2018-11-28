@@ -148,7 +148,7 @@ exports[`VCarousel.ts should render component with custom icon and match snapsho
         </div>
       </button>
       <button type="button"
-              value="3"
+              value="2"
               class="v-btn v-btn--icon v-btn--small theme--dark v-carousel__controls__item"
       >
         <div class="v-btn__content">
