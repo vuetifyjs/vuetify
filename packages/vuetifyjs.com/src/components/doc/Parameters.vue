@@ -104,7 +104,7 @@
     }),
 
     computed: {
-      ...mapState('documentation', ['deprecatedIn', 'newIn', 'removed']),
+      ...mapState('documentation', ['deprecatedIn', 'newIn']),
       computedItems () {
         const items = []
 
@@ -112,11 +112,6 @@
           const newItem = item !== Object(item)
             ? { name: item }
             : Object.assign({}, item)
-
-          if (getObjectValueByPath(
-            this.removed,
-            `${this.type}.${this.target}.${newItem.name}`
-          )) continue
 
           const keys = Object.keys(newItem)
           for (let i = 0; i < keys.length; i++) {
@@ -138,6 +133,8 @@
             this.deprecatedIn,
             `${this.type}.${this.target}.${newItem.name}`
           )
+
+          if (newItem.deprecatedIn === false) continue
 
           if (!newItem.newIn && newItem.source) {
             newItem.newIn = getObjectValueByPath(

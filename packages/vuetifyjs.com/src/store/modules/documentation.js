@@ -1,7 +1,6 @@
 import api from '@vuetify/api-generator'
 import deprecatedIn from '@/data/deprecated'
 import newIn from '@/data/new'
-import removed from '@/data/removed'
 
 export default {
   namespaced: true,
@@ -30,7 +29,6 @@ export default {
       }
     },
     deprecatedIn,
-    newIn,
-    removed
+    newIn
   }
 }
