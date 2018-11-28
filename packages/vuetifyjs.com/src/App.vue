@@ -19,15 +19,15 @@
     mounted () {
       // this.getReleases()
 
-      this.setSnackbar({
-        color: 'default',
-        close: true,
-        id: 'thanksgiving-sale',
-        text: 'Shop now',
-        msg: 'Holiday Store Sale',
-        to: '/store/',
-        timeout: 0
-      })
+      // this.setSnackbar({
+      //   color: 'default',
+      //   close: true,
+      //   id: 'thanksgiving-sale',
+      //   text: 'Shop now',
+      //   msg: 'Holiday Store Sale',
+      //   to: '/store/',
+      //   timeout: 0
+      // })
     },
 
     methods: {
