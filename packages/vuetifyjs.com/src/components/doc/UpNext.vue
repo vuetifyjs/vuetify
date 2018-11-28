@@ -19,8 +19,8 @@
               :to="link.link"
               :avatar="link.icon"
               :avatar-color="link.color"
-              :text="link.section"
-              :subtext="link.target"
+              :text="link.target"
+              :subtext="link.section"
             >
               <v-list-tile-action>
                 <v-icon>mdi-arrow-right</v-icon>
