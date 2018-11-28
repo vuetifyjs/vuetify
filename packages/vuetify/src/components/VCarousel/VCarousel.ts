@@ -157,6 +157,7 @@ export default VWindow.extend({
             'v-carousel__controls__item': true
           },
           props: {
+            value: this.getValue(this.items[i], i),
             icon: true,
             small: true
           }
