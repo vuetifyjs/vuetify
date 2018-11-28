@@ -15,6 +15,51 @@
     "v-breadcrumbs": {
       "justify-center": "1.2",
       "justify-end": "1.2"
+    },
+    "v-autocomplete": {
+      "activator": false,
+      "closeOnClick": false,
+      "closeOnContentClick": false,
+      "combobox": false,
+      "delimiters": false,
+      "nudgeBottom": false,
+      "nudgeLeft": false,
+      "nudgeRight": false,
+      "nudgeTop": false,
+      "nudgeWidth": false,
+      "offsetX": false,
+      "offsetY": false,
+      "transition": false
+    },
+    "v-combobox": {
+      "activator": false,
+      "closeOnClick": false,
+      "closeOnContentClick": false,
+      "combobox": false,
+      "delimiters": false,
+      "nudgeBottom": false,
+      "nudgeLeft": false,
+      "nudgeRight": false,
+      "nudgeTop": false,
+      "nudgeWidth": false,
+      "offsetX": false,
+      "offsetY": false,
+      "transition": false
+    },
+    "v-overflow-btn": {
+      "activator": false,
+      "closeOnClick": false,
+      "closeOnContentClick": false,
+      "combobox": false,
+      "delimiters": false,
+      "nudgeBottom": false,
+      "nudgeLeft": false,
+      "nudgeRight": false,
+      "nudgeTop": false,
+      "nudgeWidth": false,
+      "offsetX": false,
+      "offsetY": false,
+      "transition": false
     }
   }
 }
