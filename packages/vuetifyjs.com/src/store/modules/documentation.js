@@ -1,6 +1,6 @@
 import api from '@vuetify/api-generator'
-import deprecatedIn from '@/data/deprecatedIn'
-import newIn from '@/data/newIn'
+import deprecatedIn from '@/data/deprecated'
+import newIn from '@/data/new'
 import removed from '@/data/removed'
 
 export default {
