@@ -64,6 +64,7 @@ export function getComponent (type) {
     case 'section': return 'doc-section'
     case 'supplemental': return 'doc-supplemental'
     case 'tree': return 'doc-tree'
+    case 'up-next': return 'doc-up-next'
     case 'usage': return 'doc-usage'
     default: return type
   }
