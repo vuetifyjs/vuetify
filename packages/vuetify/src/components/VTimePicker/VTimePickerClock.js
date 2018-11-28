@@ -170,8 +170,8 @@ export default {
       const center = { x: width / 2, y: -width / 2 }
       const coords = { x: clientX - left, y: top - clientY }
       const handAngle = Math.round(this.angle(center, coords) - this.rotate + 360) % 360
-      // (1 + this.innerRadius) / 4 = radius of the circle equally distant from inner and outer circles
-      const insideClick = this.double && this.euclidean(center, coords) / width < (1 + this.innerRadius) / 4
+      // 0.5 (radius of circle) * (this.innerRadius (percent of inner radius) + 3.5% (add 3.5% border))
+      const insideClick = this.double && this.euclidean(center, coords) / width < (0.5 * (this.innerRadius + 0.035))
       const value = Math.round(handAngle / this.degreesPerUnit) +
         this.min + (insideClick ? this.roundCount : 0)
 
