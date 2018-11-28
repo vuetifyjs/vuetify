@@ -148,7 +148,7 @@ export default Vue.extend({
     filteredItems (): any[] {
       let items = this.items.slice()
 
-      if (!this.disableSearch) {
+      if (!this.disableSearch && this.serverItemsLength <= 0) {
         items = this.customSearch(items, this.search)
       }
 
@@ -157,11 +157,11 @@ export default Vue.extend({
     computedItems (): any[] {
       let items = this.filteredItems.slice()
 
-      if (!this.disableSort) {
+      if (!this.disableSort && this.serverItemsLength <= 0) {
         items = this.sortItems(items)
       }
 
-      if (!this.disablePagination) {
+      if (!this.disablePagination && this.serverItemsLength <= 0) {
         items = this.paginateItems(items)
       }
 
@@ -218,7 +218,8 @@ export default Vue.extend({
         this.$emit('update:options', options)
         this.$emit('pagination', this.pagination)
       },
-      deep: true
+      deep: true,
+      immediate: true
     },
     page (page: number) {
       this.updateOptions({ page })
@@ -255,6 +256,18 @@ export default Vue.extend({
     },
     'internalOptions.groupDesc' (groupDesc: boolean[], old: boolean[]) {
       !deepEqual(groupDesc, old) && this.$emit('update:groupDesc', Array.isArray(this.groupDesc) ? groupDesc : groupDesc[0])
+    },
+    multiSort (multiSort: boolean) {
+      this.updateOptions({ multiSort })
+    },
+    'internalOptions.multiSort' (multiSort: boolean) {
+      this.$emit('update:multiSort', multiSort)
+    },
+    mustSort (mustSort: boolean) {
+      this.updateOptions({ mustSort })
+    },
+    'internalOptions.mustSort' (mustSort: boolean) {
+      this.$emit('update:mustSort', mustSort)
     }
   },
 

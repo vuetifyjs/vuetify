@@ -48,11 +48,13 @@ export default Vue.extend({
     itemsPerPageText: {
       type: String,
       default: '$vuetify.dataIterator.itemsPerPageText'
-    }
+    },
+    showFirstLastPage: Boolean,
+    showCurrentPage: Boolean
   },
 
   computed: {
-    showNextPageIcon (): boolean {
+    disableNextPageIcon (): boolean {
       return this.options.itemsPerPage < 0 ||
         this.options.page * this.options.itemsPerPage >= this.pagination.itemsLength ||
         this.pagination.pageStop < 0
@@ -60,14 +62,23 @@ export default Vue.extend({
   },
 
   methods: {
+    updateOptions (obj: object) {
+      this.$emit('update:options', Object.assign({}, this.options, obj))
+    },
+    onFirstPage () {
+      this.updateOptions({ page: 1 })
+    },
     onPreviousPage () {
-      this.$emit('update:options', Object.assign({}, this.options, { page: this.options.page - 1 }))
+      this.updateOptions({ page: this.options.page - 1 })
     },
     onNextPage () {
-      this.$emit('update:options', Object.assign({}, this.options, { page: this.options.page + 1 }))
+      this.updateOptions({ page: this.options.page + 1 })
+    },
+    onLastPage () {
+      this.updateOptions({ page: this.pagination.pageCount })
     },
     onChangeItemsPerPage (itemsPerPage: number) {
-      this.$emit('update:options', Object.assign({}, this.options, { itemsPerPage, page: 1 }))
+      this.updateOptions({ itemsPerPage, page: 1 })
     },
     genItemsPerPageSelect () {
       return this.$createElement('div', {
@@ -137,27 +148,32 @@ export default Vue.extend({
         this.$vuetify.rtl ? this.nextIcon : this.prevIcon
       ))
 
-      // if (this.showPageNumber) {
-      //   icons.push(this.$createElement('span', [this.dataIterator.options.page.toString()]))
-      // }
+      if (this.showCurrentPage) {
+        icons.push(this.$createElement('span', [this.options.page.toString()]))
+      }
 
       icons.push(this.genIcon(
         this.onNextPage,
-        this.showNextPageIcon,
+        this.disableNextPageIcon,
         'Next page',
         this.$vuetify.rtl ? this.prevIcon : this.nextIcon
       ))
 
-      // if (this.showFirstLastPage) {
-      //   icons.unshift(this.genIcon(() => {
-      //     this.dataIterator.updateOptions({ page: 1 })
-      //   }, this.dataIterator.options.page === 1, 'First page', this.$vuetify.rtl ? this.lastIcon : this.firstIcon))
+      if (this.showFirstLastPage) {
+        icons.unshift(this.genIcon(
+          this.onFirstPage,
+          this.options.page === 1,
+          'First page',
+          this.$vuetify.rtl ? this.lastIcon : this.firstIcon
+        ))
 
-      //   icons.push(this.genIcon(() => {
-      //     this.dataIterator.updateOptions({ page: this.dataIterator.pageCount })
-      //   }, this.dataIterator.options.page === this.dataIterator.pageCount || this.dataIterator.options.itemsPerPage === -1,
-      // 'Last page', this.$vuetify.rtl ? this.firstIcon : this.lastIcon))
-      // }
+        icons.push(this.genIcon(
+          this.onLastPage,
+          this.options.page === this.pagination.pageCount || this.options.itemsPerPage === -1,
+          'Last page',
+          this.$vuetify.rtl ? this.firstIcon : this.lastIcon
+        ))
+      }
 
       return icons
     }

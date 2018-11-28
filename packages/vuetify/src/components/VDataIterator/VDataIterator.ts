@@ -178,14 +178,8 @@ export default mixins(Themeable).extend({
   },
 
   render (): VNode {
-    const props = Object.assign({}, this.$props)
-
-    props.disableSort = this.serverItemsLength >= 0
-    props.disablePagination = this.serverItemsLength >= 0
-    props.disableSearch = this.serverItemsLength >= 0
-
     return this.$createElement(VData, {
-      props,
+      props: this.$props,
       on: {
         'update:options': (v: any, old: any) => !deepEqual(v, old) && this.$emit('update:options', v),
         'update:page': (v: any) => this.$emit('update:page', v),

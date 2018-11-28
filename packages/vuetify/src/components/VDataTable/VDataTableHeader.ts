@@ -19,7 +19,11 @@ export default mixins(header).extend({
         if (header.value === 'dataTableSelect') {
           children.push(this.genSelectAll())
         } else {
-          children.push(this.$createElement('span', [header.text]))
+          if (this.$scopedSlots[header.value]) {
+            children.push(this.$scopedSlots[header.value]({ header }))
+          } else {
+            children.push(this.$createElement('span', [header.text]))
+          }
 
           if (header.sortable || !header.hasOwnProperty('sortable')) {
             listeners['click'] = () => {
@@ -44,6 +48,14 @@ export default mixins(header).extend({
             if (this.options.multiSort && beingSorted) {
               children.push(this.$createElement('span', { class: 'badge' }, [String(sortIndex + 1)]))
             }
+          }
+
+          if (this.dataTable.showGroupBy) {
+            children.push(this.$createElement('span', {
+              on: {
+                click: () => this.$emit('group', header.value)
+              }
+            }, ['group']))
           }
         }
 

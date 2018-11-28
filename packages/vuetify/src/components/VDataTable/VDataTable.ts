@@ -1,21 +1,26 @@
 import '../../stylus/components/_data-table.styl'
 
+// Types
 import { VNode, VNodeChildrenArrayContents } from 'vue'
-import { DataProps } from '../VData/VData'
-import { deepEqual, getObjectValueByPath, convertToUnit } from '../../util/helpers'
-import VDataTableHeader from './VDataTableHeader'
-import { TableHeader } from './mixins/header'
 import { PropValidator } from 'vue/types/options'
-import VRow from './VRow'
+import { DataProps } from '../VData/VData'
+import { TableHeader } from './mixins/header'
+
+// Components
 import { VData, VDataFooter } from '../VData'
-import VDataIterator from '../VDataIterator'
-import VIcon from '../VIcon'
-import VSimpleCheckbox from '../VCheckbox/VSimpleCheckbox'
 import VBtn from '../VBtn'
-import VRowGroup from './VRowGroup'
+import VDataIterator from '../VDataIterator'
+import VDataTableHeader from './VDataTableHeader'
 import VDataTableHeaderMobile from './VDataTableHeaderMobile'
-import VProgressLinear from '../VProgressLinear'
 import VDataTableVirtual from './VDataTableVirtual'
+import VIcon from '../VIcon'
+import VProgressLinear from '../VProgressLinear'
+import VRow from './VRow'
+import VRowGroup from './VRowGroup'
+import VSimpleCheckbox from '../VCheckbox/VSimpleCheckbox'
+
+// Helpers
+import { deepEqual, getObjectValueByPath, convertToUnit } from '../../util/helpers'
 
 /* @vue/component */
 export default VDataIterator.extend({
@@ -32,6 +37,7 @@ export default VDataIterator.extend({
     } as PropValidator<TableHeader[]>,
     showSelect: Boolean,
     showExpand: Boolean,
+    showGroupBy: Boolean,
     virtualRows: Boolean,
     mobileBreakpoint: {
       type: String,
@@ -82,9 +88,9 @@ export default VDataIterator.extend({
     },
     createItemProps (item: any) {
       const props = VDataIterator.options.methods.createItemProps.call(this, item)
-      props.headers = this.computedHeaders
 
-      return props
+      // TODO: Will {}, props mess up .syncing?
+      return Object.assign(props, { headers: this.computedHeaders })
     },
     createSlotProps (props: any) {
       props.headers = this.computedHeaders
@@ -134,7 +140,8 @@ export default VDataIterator.extend({
             options: props.options
           },
           on: {
-            'sort': props.sort
+            'sort': props.sort,
+            'group': props.group
           }
         }))
       }
@@ -169,6 +176,7 @@ export default VDataIterator.extend({
         if (this.$scopedSlots.group) {
           return this.$scopedSlots.group({
             group,
+            options: props.options,
             items: groupedItems![group],
             headers: this.computedHeaders
           })
@@ -351,11 +359,16 @@ export default VDataIterator.extend({
       //   return this.$createElement('div', ['static'])
       // }
 
+      const classes = {
+        // 'v-data-table--dense': this.dense,
+        'v-data-table--fixed': !!this.height,
+        'v-data-table--mobile': this.isMobile,
+        ...this.themeClasses
+      }
+
       if (this.virtualRows) {
         return this.$createElement(VDataTableVirtual, {
-          class: {
-            'v-data-table--fixed': !!this.height
-          },
+          class: classes,
           props: {
             itemsLength: props.items.length,
             height: Number(this.height)
@@ -369,15 +382,9 @@ export default VDataIterator.extend({
         ])
       }
 
-
       return this.$createElement('div', {
         staticClass: 'v-data-table',
-        class: {
-          // 'v-data-table--dense': this.dense,
-          'v-data-table--fixed': !!this.height,
-          'v-data-table--mobile': this.isMobile,
-          ...this.themeClasses
-        }
+        class: classes
       }, [
         this.genTable(props),
         this.genFooters(props)
@@ -386,14 +393,12 @@ export default VDataIterator.extend({
   },
 
   render (): VNode {
-    const props = Object.assign({}, this.$props)
-
-    props.disableSort = this.serverItemsLength >= 0
-    props.disablePagination = this.serverItemsLength >= 0
-    props.disableSearch = this.serverItemsLength >= 0
-
     return this.$createElement(VData, {
-      props,
+      props: {
+        ...this.$props,
+        customSearch: this.customSearchWithColumns,
+        customSort: this.customSortWithHeaders
+      },
       on: {
         'update:options': (v: any, old: any) => {
           this.internalGroupBy = v.groupBy || []
