@@ -46,6 +46,19 @@
           ]
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "layout/breakpoints",
+            "components/buttons",
+            "components/windows"
+          ]
+        }
+      ]
     }
   ]
 }

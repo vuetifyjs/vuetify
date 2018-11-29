@@ -41,6 +41,19 @@
           "value": [ "api", "scopedSlots", "customFilter", "asynchronous", "advanced" ]
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/combobox",
+            "components/forms",
+            "components/selects"
+          ]
+        }
+      ]
     }
   ]
 }

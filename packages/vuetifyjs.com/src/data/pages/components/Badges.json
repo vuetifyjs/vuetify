@@ -33,6 +33,19 @@
           ]
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/avatars",
+            "components/icons",
+            "components/toolbars"
+          ]
+        }
+      ]
     }
   ]
 }

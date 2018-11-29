@@ -62,6 +62,19 @@
           ]
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/forms",
+            "components/selects",
+            "components/textarea"
+          ]
+        }
+      ]
     }
   ]
 }

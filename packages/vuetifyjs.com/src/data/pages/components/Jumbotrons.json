@@ -32,6 +32,19 @@
           ]
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "layout/aspect-ratios",
+            "components/images",
+            "style/typography"
+          ]
+        }
+      ]
     }
   ]
 }

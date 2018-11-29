@@ -36,6 +36,19 @@
           ]
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/parallax",
+            "components/images",
+            "components/windows"
+          ]
+        }
+      ]
     }
   ]
 }

@@ -28,6 +28,19 @@
           "value": [ "timeColorable", "timeDialogAndMenu", "time24hFormat", "timeAllowedTimes", "timeWidth" ]
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/buttons",
+            "components/date-pickers",
+            "components/text-fields"
+          ]
+        }
+      ]
     }
   ]
 }

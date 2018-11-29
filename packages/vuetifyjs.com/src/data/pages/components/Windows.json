@@ -34,6 +34,19 @@
           ]
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/carousels",
+            "components/steppers",
+            "components/tabs"
+          ]
+        }
+      ]
     }
   ]
 }

@@ -53,6 +53,19 @@
           ]
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/buttons",
+            "components/text-fields",
+            "components/time-pickers"
+          ]
+        }
+      ]
     }
   ]
 }
