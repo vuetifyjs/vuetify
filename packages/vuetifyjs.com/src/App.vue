@@ -44,15 +44,15 @@
     mounted () {
       this.getReleases()
 
-      // this.snackbar({
-      //   color: 'store',
-      //   close: true,
-      //   id: 'cyber-monday-sale',
-      //   text: 'Shop now',
-      //   msg: 'Happy Cyber Monday',
-      //   to: '/store/',
-      //   timeout: 0
-      // })
+      this.snackbar({
+        color: 'default',
+        close: true,
+        id: 'cognito-module-release',
+        text: 'Go to Docs',
+        msg: '🎉 **NEW**: Vuetify Vuex Cognito Module',
+        href: 'https://cognito.vuetifyjs.com',
+        timeout: 0
+      })
     },
 
     methods: {
