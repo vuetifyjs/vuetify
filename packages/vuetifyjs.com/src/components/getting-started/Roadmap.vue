@@ -1,8 +1,8 @@
 <template>
   <v-timeline
+    id="roadmap"
     class="mb-5"
     dense
-    id="roadmap"
   >
     <v-timeline-item
       v-for="(item, i) in items"

@@ -19,15 +19,15 @@
     mounted () {
       // this.getReleases()
 
-      this.setSnackbar({
-        color: 'default',
-        close: true,
-        id: 'cyber-monday-sale',
-        text: 'Shop now',
-        msg: 'Happy Cyber Monday',
-        to: '/store/',
-        timeout: 0
-      })
+      // this.setSnackbar({
+      //   color: 'default',
+      //   close: true,
+      //   id: 'cyber-monday-sale',
+      //   text: 'Shop now',
+      //   msg: 'Happy Cyber Monday',
+      //   to: '/store/',
+      //   timeout: 0
+      // })
     },
 
     methods: {
