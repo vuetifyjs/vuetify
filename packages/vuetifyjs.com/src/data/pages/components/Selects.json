@@ -48,6 +48,19 @@
           ]
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/autocompletes",
+            "components/combobox",
+            "components/forms"
+          ]
+        }
+      ]
     }
   ]
 }

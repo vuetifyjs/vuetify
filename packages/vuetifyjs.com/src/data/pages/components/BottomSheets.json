@@ -30,6 +30,19 @@
           ]
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/dialogs",
+            "components/lists",
+            "components/menus"
+          ]
+        }
+      ]
     }
   ]
 }

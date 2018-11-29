@@ -28,6 +28,19 @@
           "value": ["appBar"]
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/buttons",
+            "components/icons",
+            "components/selection-controls"
+          ]
+        }
+      ]
     }
   ]
 }

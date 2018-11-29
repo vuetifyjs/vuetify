@@ -28,6 +28,19 @@
           "value": [ "validationWithSubmitAndClear", "vuelidate", "veeValidate" ]
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/selects",
+            "components/selection-controls",
+            "components/text-fields"
+          ]
+        }
+      ]
     }
   ]
 }

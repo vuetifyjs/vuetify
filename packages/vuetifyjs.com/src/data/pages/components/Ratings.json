@@ -35,6 +35,19 @@
           ]
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/cards",
+            "components/icons",
+            "components/lists"
+          ]
+        }
+      ]
     }
   ]
 }

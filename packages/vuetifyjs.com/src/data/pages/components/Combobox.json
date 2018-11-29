@@ -41,6 +41,19 @@
           "value": [ "noData", "advanced", "comboboxMultiple" ]
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/autocompletes",
+            "components/forms",
+            "components/selects"
+          ]
+        }
+      ]
     }
   ]
 }

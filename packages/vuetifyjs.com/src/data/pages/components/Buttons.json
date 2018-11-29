@@ -43,6 +43,19 @@
           ]
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/button-groups",
+            "components/icons",
+            "components/floating-action-buttons"
+          ]
+        }
+      ]
     }
   ]
 }

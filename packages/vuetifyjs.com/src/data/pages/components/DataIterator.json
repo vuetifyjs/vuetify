@@ -30,6 +30,19 @@
           ]
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/data-tables",
+            "components/footer",
+            "components/toolbars"
+          ]
+        }
+      ]
     }
   ]
 }

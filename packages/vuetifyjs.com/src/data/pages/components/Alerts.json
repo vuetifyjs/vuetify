@@ -40,7 +40,7 @@
         {
           "type": "up-next",
           "value": [
-            "components/avatars",
+            "components/buttons",
             "components/icons",
             "components/snackbars"
           ]

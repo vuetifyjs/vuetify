@@ -32,6 +32,19 @@
           ]
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/cards",
+            "layout/grid-lists",
+            "components/lists"
+          ]
+        }
+      ]
     }
   ]
 }

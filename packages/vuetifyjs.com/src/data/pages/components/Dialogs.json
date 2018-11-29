@@ -37,6 +37,19 @@
           ]
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/buttons",
+            "components/cards",
+            "components/menus"
+          ]
+        }
+      ]
     }
   ]
 }

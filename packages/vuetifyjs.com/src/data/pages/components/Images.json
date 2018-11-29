@@ -33,6 +33,19 @@
           ]
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "layout/grid-lists",
+            "layout/aspect-ratios",
+            "components/parallax"
+          ]
+        }
+      ]
     }
   ]
 }

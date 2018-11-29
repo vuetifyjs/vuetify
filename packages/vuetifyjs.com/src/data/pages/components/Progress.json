@@ -42,6 +42,19 @@
           ]
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/cards",
+            "components/data-tables",
+            "components/lists"
+          ]
+        }
+      ]
     }
   ]
 }

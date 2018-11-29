@@ -32,6 +32,19 @@
           ]
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "layout/grid",
+            "components/buttons",
+            "components/toolbars"
+          ]
+        }
+      ]
     }
   ]
 }
