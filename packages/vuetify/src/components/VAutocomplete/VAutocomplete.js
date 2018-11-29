@@ -2,14 +2,14 @@
 import '../../stylus/components/_autocompletes.styl'
 
 // Extensions
-import VSelect, { defaultMenuProps as VSelectMenuProps } from '../VSelect/VSelect'
+import VSelect, { defaultMenuProps as VSelectDefaultMenuProps } from '../VSelect/VSelect'
 import VTextField from '../VTextField/VTextField'
 
 // Utils
 import { keyCodes } from '../../util/helpers'
 
 const defaultMenuProps = {
-  ...VSelectMenuProps,
+  ...VSelectDefaultMenuProps,
   offsetY: true,
   offsetOverflow: true,
   transition: false
