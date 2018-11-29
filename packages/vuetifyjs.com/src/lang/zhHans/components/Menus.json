@@ -30,7 +30,7 @@
     },
     "customTransition": {
       "header": "自定义过渡",
-      "desc": "Vuetify带有3个标准过渡，**scale**、**slide-x**和**slide-y**。您也可以创建自己的并将其作为过渡参数传递。有关如何构建内置过渡的示例，请访问[此处](https://github.com/vuetifyjs/vuetify/blob/master/src/util/helpers.js#L13)。",
+      "desc": "Vuetify带有3个标准过渡，**scale**、**slide-x**和**slide-y**。您也可以创建自己的并将其作为过渡参数传递。有关如何构建内置过渡的示例，请访问[此处](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/util/helpers.ts#L31)。",
       "uninverted": true
     },
     "popover": {

@@ -48,7 +48,6 @@
       .v-list__tile
         min-width: 0
         pointer-events: none
-
     &-enter-to
       .v-list__tile
         pointer-events: auto
@@ -68,9 +67,11 @@
 
 .v-menu-transition-enter
   &.v-menu__content--auto
+    transition: none !important
+
     .v-list__tile
-        opacity: 0
-        transform: translateY(-15px)
+      opacity: 0
+      transform: translateY(-15px)
 
     .v-list__tile--active
       opacity: 1

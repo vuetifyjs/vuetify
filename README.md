@@ -228,7 +228,7 @@ We also have a list of [help wanted](https://github.com/vuetifyjs/vuetify/labels
 
 This project exists thanks to all the people who contribute.
 
-<a href="graphs/contributors"><img src="https://opencollective.com/vuetify/contributors.svg?width=890&button=false" /></a>
+<a href="https://github.com/vuetifyjs/vuetify/graphs/contributors"><img src="https://opencollective.com/vuetify/contributors.svg?width=890&button=false" /></a>
 
 ### Backers
 
@@ -246,4 +246,4 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
 
 ### License
 
-Vuetify is [MIT licensed](./LICENSE).
+Vuetify is [MIT licensed](./LICENSE.md).
