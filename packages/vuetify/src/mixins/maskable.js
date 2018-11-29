@@ -59,6 +59,7 @@ export default {
     mask () {
       if (!this.$refs.input) return
 
+      this.resetSelections(this.$refs.input) // Prevent incorrect cursor location if mask has changed.
       const oldValue = this.$refs.input.value
       const newValue = this.maskText(unmaskText(this.lazyValue))
       let position = 0
