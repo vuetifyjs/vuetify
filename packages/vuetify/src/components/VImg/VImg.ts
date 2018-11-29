@@ -48,7 +48,8 @@ export default VResponsive.extend({
       currentSrc: '', // Set from srcset
       image: null as HTMLImageElement | null,
       isLoading: true,
-      calculatedAspectRatio: undefined as number | undefined
+      calculatedAspectRatio: undefined as number | undefined,
+      naturalWidth: undefined as number | undefined
     }
   },
 
@@ -177,6 +178,7 @@ export default VResponsive.extend({
         const { naturalHeight, naturalWidth } = img
 
         if (naturalHeight || naturalWidth) {
+          this.naturalWidth = naturalWidth
           this.calculatedAspectRatio = naturalWidth / naturalHeight
         } else {
           timeout != null && setTimeout(poll, timeout)
@@ -184,6 +186,13 @@ export default VResponsive.extend({
       }
 
       poll()
+    },
+    genContent () {
+      const content: VNode = VResponsive.options.methods.genContent.call(this)
+      this._b(content.data!, 'div', {
+        style: { width: `${this.naturalWidth}px` }
+      }, false)
+      return content
     },
     __genPlaceholder (): VNode | void {
       if (this.$slots.placeholder) {
