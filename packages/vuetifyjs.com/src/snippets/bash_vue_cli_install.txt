@@ -1,0 +1,3 @@
+$ yarn global add @vue/cli
+// OR
+$ npm install @vue/cli -g

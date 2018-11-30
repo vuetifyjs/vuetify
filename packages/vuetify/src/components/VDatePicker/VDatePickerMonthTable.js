@@ -34,10 +34,11 @@ export default {
       for (let row = 0; row < rows; row++) {
         const tds = cols.map((_, col) => {
           const month = row * cols.length + col
+          const date = `${this.displayedYear}-${pad(month + 1)}`
           return this.$createElement('td', {
             key: month
           }, [
-            this.genButton(`${this.displayedYear}-${pad(month + 1)}`, false)
+            this.genButton(date, false)
           ])
         })
 

@@ -98,8 +98,10 @@ export default {
   },
 
   methods: {
-    click () {
+    click (e) {
       if (this.disabled) return
+
+      this.$emit('click', e)
 
       this.isActive = !this.isActive
     },
@@ -121,9 +123,10 @@ export default {
       return this.$createElement('div', {
         staticClass: 'v-list__group__header',
         'class': this.headerClasses,
-        on: Object.assign({}, {
+        on: {
+          ...this.$listeners,
           click: this.click
-        }, this.$listeners),
+        },
         ref: 'item'
       }, [
         this.genPrependIcon(),

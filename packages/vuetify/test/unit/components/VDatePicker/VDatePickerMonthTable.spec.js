@@ -151,4 +151,53 @@ test('VDatePickerMonthTable.js', ({ mount }) => {
     wrapper.vm.touch(-1)
     expect(tableDate).toBeCalledWith('2004')
   })
+
+  it('should render component with events (array) and match snapshot', () => {
+    const wrapper = mount(VDatePickerMonthTable, {
+      propsData: {
+        tableDate: '2005',
+        events: ['2005-07', '2005-11'],
+        eventColor: 'red'
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render component with events (function) and match snapshot', () => {
+    const wrapper = mount(VDatePickerMonthTable, {
+      propsData: {
+        tableDate: '2005',
+        events: date => date === '2005-07' || date === '2005-11',
+        eventColor: 'red'
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render component with events colored by object and match snapshot', () => {
+    const wrapper = mount(VDatePickerMonthTable, {
+      propsData: {
+        tableDate: '2005',
+        events: ['2005-07', '2005-11'],
+        eventColor: {'2005-07': 'red', '2005-11': 'blue lighten-1'}
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render component with events colored by function and match snapshot', () => {
+    const wrapper = mount(VDatePickerMonthTable, {
+      propsData: {
+        tableDate: '2005',
+        events: ['2005-07', '2005-11'],
+        eventColor: date => ({'2005-07': 'red', '2005-11': 'blue lighten-1'}[date])
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
 })

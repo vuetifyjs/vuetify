@@ -53,9 +53,6 @@
           </v-edit-dialog>
         </td>
       </template>
-      <template slot="pageText" slot-scope="{ pageStart, pageStop }">
-        From {{ pageStart }} to {{ pageStop }}
-      </template>
     </v-data-table>
 
     <v-snackbar v-model="snack" :timeout="3000" :color="snackColor">

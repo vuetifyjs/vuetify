@@ -1,0 +1,51 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "usage",
+          "value": "usage"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": ["v-img"]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [
+            "containCover",
+            "maxHeight",
+            "ratio",
+            "gradients"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "layout/grid-lists",
+            "layout/aspect-ratios",
+            "components/parallax"
+          ]
+        }
+      ]
+    }
+  ]
+}

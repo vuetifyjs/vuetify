@@ -16,7 +16,7 @@
             :indeterminate="props.indeterminate"
             primary
             hide-details
-            @click.native="toggleAll"
+            @click="toggleAll"
           ></v-checkbox>
         </th>
         <th

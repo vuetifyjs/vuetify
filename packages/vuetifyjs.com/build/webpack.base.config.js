@@ -63,6 +63,10 @@ module.exports = {
           limit: 10000,
           name: 'img/[name].[hash:7].[ext]'
         }
+      },
+      {
+        test: /\.txt$/,
+        use: ['raw-loader']
       }
     ]
   },

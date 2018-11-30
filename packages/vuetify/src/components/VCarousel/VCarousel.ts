@@ -14,6 +14,7 @@ import ButtonGroup from '../../mixins/button-group'
 
 // Utilities
 import { convertToUnit } from '../../util/helpers'
+import { deprecate } from '../../util/console'
 
 // Types
 import { VNode } from 'vue'
@@ -71,7 +72,14 @@ export default VWindow.extend({
   },
 
   watch: {
-    internalValue: 'restartTimeout',
+    internalValue (val) {
+      this.restartTimeout()
+      /* @deprecate */
+      /* istanbul ignore else */
+      if (!this.$listeners['input']) return
+
+      this.$emit('input', val)
+    },
     interval: 'restartTimeout',
     cycle (val) {
       if (val) {
@@ -84,6 +92,11 @@ export default VWindow.extend({
   },
 
   mounted () {
+    /* @deprecate */
+    /* istanbul ignore next */
+    if (this.$listeners['input']) {
+      deprecate('@input', '@change', this)
+    }
     this.startTimeout()
   },
 

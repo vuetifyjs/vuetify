@@ -67,7 +67,6 @@ export default {
     solo: Boolean,
     soloInverted: Boolean,
     suffix: String,
-    textarea: Boolean, // TODO: Deprecate
     type: {
       type: String,
       default: 'text'

@@ -1,0 +1,7 @@
+// src/plugins/vuetify.js
+
+import Vuetify, { VLayout } from 'vuetify/lib'
+
+Vue.use(Vuetify, {
+  components: { VLayout }
+})

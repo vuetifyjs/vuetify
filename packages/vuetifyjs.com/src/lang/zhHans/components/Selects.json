@@ -53,7 +53,7 @@
     "deletableChips": "添加一个去除图标的到选定的小纸片（chips）",
     "dense": "减小列表的最大高度",
     "disabled": "禁用输入",
-    "editable": " 创建一个可编辑按钮 - <a href=\"https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons\" target=\"_blank\" rel=\"noopener\">spec<a/>",
+    "editable": " 创建一个可编辑按钮 - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
     "filter": "用于过滤选项的函数",
     "hideSelected": "不要在选择菜单中显示已选择的项",
     "itemAvatar": "设置 **items** 属性的头像",
@@ -66,10 +66,10 @@
     "multiLine": "当选择器组件被聚焦或使用时，使标签浮动",
     "noDataText": "当没有数据时现实的文本",
     "openOnClear": "当使用 **clearable** 属性, 一旦清除，选择菜单将打开或保持打开，这个取决于当前状态",
-    "overflow": "创建一个溢出按钮 - <a href=\"https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons\" target=\"_blank\" rel=\"noopener\">spec</a>",
+    "overflow": "创建一个溢出按钮 - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
     "returnObject": "将选择器的行为更改为直接返回对象，而不是 item-value 指定的值",
     "searchInput": "使用自动补全（autocomplete）属性，使用 .sync 修饰符从自动补全搜索框中捕获用户的输入",
-    "segmented": "创建一个分段按钮 - <a href=\"https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons\" target=\"_blank\" rel=\"noopener\">spec</a>",
+    "segmented": "创建一个分段按钮 - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
     "tags": "标记功能允许用户创建一个 **items** 属性中不存在的新值"
   },
   "slots": {

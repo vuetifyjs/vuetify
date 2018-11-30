@@ -18,14 +18,6 @@ export default {
   ],
 
   props: {
-    events: {
-      type: [Array, Object, Function],
-      default: () => null
-    },
-    eventColor: {
-      type: [String, Function, Object],
-      default: 'warning'
-    },
     firstDayOfWeek: {
       type: [String, Number],
       default: 0
@@ -60,33 +52,11 @@ export default {
       const days = this.weekDays.map(day => this.$createElement('th', day))
       return this.$createElement('thead', this.genTR(days))
     },
-    genEvent (date) {
-      let eventColor
-      if (typeof this.eventColor === 'string') {
-        eventColor = this.eventColor
-      } else if (typeof this.eventColor === 'function') {
-        eventColor = this.eventColor(date)
-      } else {
-        eventColor = this.eventColor[date]
-      }
-      return this.$createElement('div', this.setBackgroundColor(eventColor || this.color || 'accent', {
-        staticClass: 'v-date-picker-table__event'
-      }))
-    },
     // Returns number of the days from the firstDayOfWeek to the first day of the current month
     weekDaysBeforeFirstDayOfTheMonth () {
       const firstDayOfTheMonth = new Date(`${this.displayedYear}-${pad(this.displayedMonth + 1)}-01T00:00:00+00:00`)
       const weekDay = firstDayOfTheMonth.getUTCDay()
       return (weekDay - parseInt(this.firstDayOfWeek) + 7) % 7
-    },
-    isEvent (date) {
-      if (Array.isArray(this.events)) {
-        return this.events.indexOf(date) > -1
-      } else if (this.events instanceof Function) {
-        return this.events(date)
-      } else {
-        return false
-      }
     },
     genTBody () {
       const children = []
@@ -99,8 +69,7 @@ export default {
         const date = `${this.displayedYear}-${pad(this.displayedMonth + 1)}-${pad(day)}`
 
         rows.push(this.$createElement('td', [
-          this.genButton(date, true),
-          this.isEvent(date) ? this.genEvent(date) : null
+          this.genButton(date, true)
         ]))
 
         if (rows.length % 7 === 0) {
