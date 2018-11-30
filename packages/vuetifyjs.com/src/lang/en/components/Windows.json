@@ -6,11 +6,11 @@
       "desc": "Designed to easily cycle through content, `v-window` provides a simple interface to create truly custom implementations."
     },
     "onboarding": {
-      "header": "Onboarding",
+      "header": "### Onboarding",
       "desc": "`v-window` makes it easy to create custom components such as a different styled stepper."
     },
     "account": {
-      "header": "Account creation",
+      "header": "### Account creation",
       "desc": "Create rich forms with smooth animations. `v-window` automatically tracks the current selection index to automatically change the transition direction. This can be manually controlled with the **reverse** prop."
     }
   }

@@ -1,0 +1,247 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "themeGeneratorHeader"
+        },
+        {
+          "type": "text",
+          "lang": "themeGeneratorText1"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "lightAndDarkHeader"
+        },
+        {
+          "type": "text",
+          "lang": "lightAndDarkText1"
+        },
+        {
+          "type": "markup",
+          "value": "html_app_theme"
+        },
+        {
+          "type": "text",
+          "lang": "lightAndDarkText2"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "customizingHeader"
+        },
+        {
+          "type": "text",
+          "lang": "customizingText1"
+        },
+        {
+          "type": "markup",
+          "value": "js_theme_defaults"
+        },
+        {
+          "type": "text",
+          "lang": "customizingText2"
+        },
+        {
+          "type": "markup",
+          "value": "js_vuetify_use_theme"
+        },
+        {
+          "type": "text",
+          "lang": "customizingText3"
+        },
+        {
+          "type": "markup",
+          "value": "js_vuetify_color_util"
+        },
+        {
+          "type": "text",
+          "lang": "customizingText4"
+        },
+        {
+          "type": "text",
+          "lang": "customizingText5"
+        },
+        {
+          "type": "markup",
+          "value": "js_dynamic_theme"
+        },
+        {
+          "type": "heading",
+          "lang": "variantsSubheader"
+        },
+        {
+          "type": "text",
+          "lang": "variantsText1"
+        },
+        {
+          "type": "markup",
+          "value": "js_theme_file"
+        },
+        {
+          "type": "text",
+          "lang": "variantsText2"
+        },
+        {
+          "type": "markup",
+          "value": "js_theme_file_import"
+        },
+        {
+          "type": "text",
+          "lang": "variantsText3"
+        },
+        {
+          "type": "markup",
+          "value": "ts_theme_item"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "optionHeader"
+        },
+        {
+          "type": "text",
+          "lang": "optionText1"
+        },
+        {
+          "type": "heading",
+          "lang": "optionHeader2"
+        },
+        {
+          "type": "text",
+          "lang": "optionText3"
+        },
+        {
+          "type": "markup",
+          "value": "js_minify_theme"
+        },
+        {
+          "type": "heading",
+          "lang": "optionHeader3"
+        },
+        {
+          "type": "text",
+          "lang": "optionText4"
+        },
+        {
+          "type": "markup",
+          "value": "js_cache_theme"
+        },
+        {
+          "type": "heading",
+          "lang": "optionHeader4"
+        },
+        {
+          "type": "text",
+          "lang": "optionText5"
+        },
+        {
+          "type": "markup",
+          "value": "js_vuetify_custom_properties"
+        },
+        {
+          "type": "markup",
+          "value": "html_vuetify_custom_properties"
+        },
+        {
+          "type": "heading",
+          "lang": "optionHeader5"
+        },
+        {
+          "type": "text",
+          "lang": "optionText6"
+        },
+        {
+          "type": "markup",
+          "value": "html_vuetify_csp"
+        },
+        {
+          "type": "markup",
+          "value": "js_vuetify_csp"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "stylusHeader"
+        },
+        {
+          "type": "text",
+          "lang": "stylusText1"
+        },
+        {
+          "type": "heading",
+          "lang": "stylusHeader2"
+        },
+        {
+          "type": "text",
+          "lang": "stylusText2"
+        },
+        {
+          "type": "markup",
+          "value": "bash_yarn_install_stylus"
+        },
+        {
+          "type": "text",
+          "lang": "stylusText3"
+        },
+        {
+          "type": "markup",
+          "value": "js_webpack_stylus"
+        },
+        {
+          "type": "text",
+          "lang": "stylusText4"
+        },
+        {
+          "type": "markup",
+          "value": "stylus_import_vuetify_css"
+        },
+        {
+          "type": "text",
+          "lang": "stylusText5"
+        },
+        {
+          "type": "markup",
+          "value": "js_import_vuetify_css"
+        },
+        {
+          "type": "text",
+          "lang": "stylusText6"
+        },
+        {
+          "type": "heading",
+          "lang": "stylusHeader3"
+        },
+        {
+          "type": "text",
+          "lang": "stylusText7"
+        },
+        {
+          "type": "markup",
+          "value": "stylus_changing_variables"
+        }
+      ]
+    }
+  ]
+}

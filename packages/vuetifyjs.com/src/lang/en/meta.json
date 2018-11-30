@@ -15,7 +15,7 @@
     "h1": "Quick Start",
     "title": "Quick Start",
     "description": "Get started with Vue and Vuetify in no time.",
-    "keywords": "quick start, vuetify templates, get started"
+    "keywords": "quick start, vuetify templates, installing vuetify, install vuetify"
   },
   "getting-started/starter-templates": {
     "h1": "Starter Templates",
@@ -53,11 +53,17 @@
     "description": "The upcoming planned features and new functionality coming to Vuetify. New vue components, new directives, and much much more!.",
     "keywords": "roadmap, future plans"
   },
-  "getting-started/consulting": {
+  "getting-started/consulting-and-support": {
     "h1": "Consulting & Support",
     "title": "Consulting & Support",
     "description": "Get help and support from the creator of Vuetify, John Leider",
     "keywords": "consulting, support, help"
+  },
+  "framework/a-la-carte": {
+    "h1": "A La Carte",
+    "title": "A La Carte",
+    "description": "Use only the components you need. Single component importing allows you to select what you want and leave the rest.",
+    "keywords": "a la carte, a-la-carte, vuetify single import, vuetify import, component importing"
   },
   "framework/icons": {
     "h1": "Installing Icons",
@@ -77,11 +83,11 @@
     "description": "Make an amazing application with smooth built in animations.",
     "keywords": "motion, transitions"
   },
-  "motion/scrolling": {
-    "h1": "Scrolling",
-    "title": "Scrolling",
+  "motion/scroll": {
+    "h1": "Scroll",
+    "title": "Scroll",
     "description": "Scroll to a target location on the page.",
-    "keywords": "scrolling, smooth scroll, transitions"
+    "keywords": "scrolling, scroll, smooth scroll, transitions"
   },
   "style/colors": {
     "h1": "Colors",
@@ -401,6 +407,12 @@
     "description": "Star rating component for the Vuetify framework.",
     "keywords": "rating, star rating, ratings, stars"
   },
+  "components/sheets": {
+    "h1": "Sheets",
+    "title": "Sheet Component",
+    "description": "The v-sheet component is the baseline paper element in Vuetify.",
+    "keywords": "sheet, components"
+  },
   "components/sliders": {
     "h1": "Sliders",
     "title": "Slider Component",
@@ -563,12 +575,6 @@
     "description": "Layout Sandbox for the Vuetify.js framework",
     "keywords": "template, pre-made, vuetify layout, sandbox"
   },
-  "guides/a-la-carte": {
-    "h1": "A La Carte",
-    "title": "A La Carte",
-    "description": "Use only the components you need. Single component importing allows you to select what you want and leave the rest.",
-    "keywords": "a la carte, a-la-carte, vuetify single import, vuetify import, component importing"
-  },
   "guides/server-side-rendering": {
     "h1": "Server side rendering",
     "title": "Server side rendering",
@@ -580,29 +586,5 @@
     "title": "Material design theme generator",
     "description": "Create a custom Material Design theme for your next application.",
     "keywords": "material theme, theme generator, material theme generator, vuetify theme generator"
-  },
-  "store/": {
-    "h1": "Vuetify Store",
-    "title": "Store",
-    "description": "Vuetify Themes, fitted soft t-shirts, vinyl stickers and more.",
-    "keywords": "vuetify store, vuetify shop, vuetify merch, vuetify themes"
-  },
-  "store/cart": {
-    "h1": "",
-    "title": "Your Cart",
-    "description": "Vuetify cart checkout",
-    "keywords": "vuetify store, vuetify shop, vuetify merch, vuetify themes"
-  },
-  "store/thank-you": {
-    "h1": "",
-    "title": "Thank you for supporting Vuetify",
-    "description": "Thank you for supporting open source and Vuetify",
-    "keywords": "thank you from vuetify"
-  },
-  "store/licensing": {
-    "h1": "",
-    "title": "Product licensing",
-    "description": "",
-    "keywords": ""
   }
 }

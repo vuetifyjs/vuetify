@@ -18,7 +18,7 @@
     <v-tabs-items>
       <v-tab-item
         v-for="i in 30"
-        :id="'tab-' + i"
+        :value="'tab-' + i"
         :key="i"
       >
         <v-card flat>

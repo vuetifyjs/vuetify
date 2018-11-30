@@ -484,29 +484,5 @@
     "title": "Material design theme generator",
     "description": "Create a custom Material Design theme for your next application.",
     "keywords": "material theme, theme generator, material theme generator, vuetify theme generator"
-  },
-  "store": {
-    "h1": "Vuetify Store",
-    "title": "Store",
-    "description": "Vuetify Themes, fitted soft t-shirts, vinyl stickers and more.",
-    "keywords": "vuetify store, vuetify shop, vuetify merch, vuetify themes"
-  },
-  "store/cart": {
-    "h1": "",
-    "title": "Your Cart",
-    "description": "Vuetify cart checkout",
-    "keywords": "vuetify store, vuetify shop, vuetify merch, vuetify themes"
-  },
-  "store/thank-you": {
-    "h1": "",
-    "title": "Thank you for supporting Vuetify",
-    "description": "Thank you for supporting open source and Vuetify",
-    "keywords": "thank you from vuetify"
-  },
-  "store/licensing": {
-    "h1": "",
-    "title": "Product licensing",
-    "description": "",
-    "keywords": ""
   }
 }

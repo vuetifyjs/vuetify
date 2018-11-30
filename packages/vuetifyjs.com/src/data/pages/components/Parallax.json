@@ -1,0 +1,49 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "usage",
+          "value": "usage"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": ["v-parallax"]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [
+            "content",
+            "customHeight"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "layout/aspect-ratios",
+            "components/cards",
+            "components/images"
+          ]
+        }
+      ]
+    }
+  ]
+}

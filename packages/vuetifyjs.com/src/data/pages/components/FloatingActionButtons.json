@@ -1,0 +1,54 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "usage",
+          "value": "usage"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": [
+            "v-speed-dial",
+            "v-btn"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [
+            "small",
+            "displayAnimation",
+            "lateralScreens",
+            "speedDial"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/buttons",
+            "components/icons",
+            "motion/transitions"
+          ]
+        }
+      ]
+    }
+  ]
+}

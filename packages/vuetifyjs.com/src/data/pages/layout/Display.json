@@ -1,0 +1,89 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "layout-grid"
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "visibilityHeader"
+        },
+        {
+          "type": "text",
+          "lang": "visibilityText"
+        },
+        {
+          "type": "text",
+          "lang": "breakpointText"
+        },
+        {
+          "type": "markdown",
+          "lang": "breakpoints"
+        },
+        {
+          "type": "text",
+          "lang": "conditionText"
+        },
+        {
+          "type": "markdown",
+          "lang": "conditions"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "overflowHeader"
+        },
+        {
+          "type": "text",
+          "lang": "overflowText"
+        },
+        {
+          "type": "markdown",
+          "lang": "overflows"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "displayHeader"
+        },
+        {
+          "type": "text",
+          "lang": "displayText"
+        },
+        {
+          "type": "markdown",
+          "lang": "displays"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "Generic.Pages.examples"
+        },
+        {
+          "type": "text",
+          "lang": "exampleText"
+        },
+        {
+          "type": "example",
+          "value": "hiddenElements"
+        }
+      ]
+    }
+  ]
+}

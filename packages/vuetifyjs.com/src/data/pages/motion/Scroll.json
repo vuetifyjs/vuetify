@@ -1,0 +1,87 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "usage",
+          "value": "usage"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": [ "$vuetify" ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "firstHeader"
+        },
+        {
+          "type": "text",
+          "lang": "loremIpsum"
+        },
+        {
+          "type": "text",
+          "lang": "loremIpsum"
+        },
+        {
+          "type": "text",
+          "lang": "loremIpsum"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "secondHeader"
+        },
+        {
+          "type": "text",
+          "lang": "loremIpsum"
+        },
+        {
+          "type": "text",
+          "lang": "loremIpsum"
+        },
+        {
+          "type": "text",
+          "lang": "loremIpsum"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "thirdHeader"
+        },
+        {
+          "type": "text",
+          "lang": "loremIpsum"
+        },
+        {
+          "type": "text",
+          "lang": "loremIpsum"
+        },
+        {
+          "type": "text",
+          "lang": "loremIpsum"
+        }
+      ]
+    }
+  ]
+}

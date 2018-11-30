@@ -1,0 +1,46 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "usage",
+          "value": "usage"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": [ "v-textarea" ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [ "autoGrow", "signupBox" ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/forms",
+            "components/selects",
+            "components/text-fields"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -158,10 +158,11 @@ for (const name in installedComponents) {
   components[kebabName] = options
 }
 
-for (const key of ['ripple', 'resize', 'scroll', 'touch']) {
+for (const key of ['Ripple', 'Resize', 'Scroll', 'Touch']) {
   if (!installedDirectives[key]) continue
 
-  const vKey = `v-${key}`
+  const lowerCaseVersion = key.toLowerCase()
+  const vKey = `v-${lowerCaseVersion}`
   const directive = map[vKey]
   directive.type = getPropDefault(directive.default, directive.type)
   directives[vKey] = directive
@@ -184,6 +185,7 @@ function writeApiFile (obj, file) {
     stream.write(JSON.stringify(obj, null, 2))
     stream.end()
   })
+  
 }
 
 function writeJsonFile (obj, file) {
