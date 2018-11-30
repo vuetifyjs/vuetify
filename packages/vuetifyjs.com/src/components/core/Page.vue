@@ -35,6 +35,7 @@
   import camelCase from 'lodash/camelCase'
   import upperFirst from 'lodash/upperFirst'
   import NotFoundPage from '@/pages/general/404Page.vue'
+  import { mapMutations } from 'vuex'
 
   // TODO: This is where 404 redirect will occur
   export default {
@@ -92,9 +93,15 @@
       setTimeout(this.init, 300)
     },
 
+    destroyed () {
+      this.setToc(false)
+    },
+
     methods: {
+      ...mapMutations('app', ['setToc']),
       getComponent,
       init () {
+        this.setToc(true)
         const sameInternal = this.$el.querySelectorAll('a.markdown--same-internal')
 
         Array.prototype.forEach.call(sameInternal, el => {

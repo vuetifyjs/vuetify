@@ -33,6 +33,7 @@
 <script>
   // Utilities
   import { goTo } from '@/util/helpers'
+  import { mapState } from 'vuex'
 
   export default {
     data: () => ({
@@ -42,8 +43,14 @@
       timeout: null
     }),
 
+    computed: {
+      ...mapState('app', ['toc'])
+    },
+
     watch: {
-      '$route.path': 'genList'
+      toc (val) {
+        val && this.genList()
+      }
     },
 
     mounted () {
@@ -55,15 +62,18 @@
       async genList () {
         const list = []
 
-        // Give page time to transition
-        await new Promise(resolve => setTimeout(resolve, 500))
-
         const items = document.querySelectorAll('#page [id]')
 
         for (const item of items) {
-          if (!['H1', 'H2'].includes(item.tagName)) continue
+          if (
+            // Not a top level heading
+            !['H1', 'H2'].includes(item.tagName) ||
+            // From previous list
+            this.list.find(l => l.item === item)
+          ) continue
 
           list.push({
+            item,
             text: item.innerText,
             target: `#${item.id}`,
             offsetTop: item.offsetTop

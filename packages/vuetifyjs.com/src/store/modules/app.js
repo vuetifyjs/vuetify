@@ -10,13 +10,15 @@ export default {
 
   mutations: {
     setDrawer: set('drawer'),
-    toggleDrawer: toggle('drawer'),
-    setReleases: set('releases')
+    setToc: set('toc'),
+    setReleases: set('releases'),
+    toggleDrawr: toggle('drawer')
   },
 
   state: {
     drawer: null,
     currentVersion: null,
-    releases: []
+    releases: [],
+    toc: false
   }
 }
