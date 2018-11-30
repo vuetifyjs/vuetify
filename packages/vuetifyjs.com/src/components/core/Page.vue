@@ -18,17 +18,12 @@
         </doc-text>
       </div>
 
-      <v-fade-transition
-        appear
-        group
-      >
-        <component
-          v-for="(child, i) in structure.children"
-          :key="`${composite}-${i}`"
-          :is="getComponent(child.type)"
-          :value="child"
-        />
-      </v-fade-transition>
+      <component
+        v-for="(child, i) in structure.children"
+        :key="`${composite}-${i}`"
+        :is="getComponent(child.type)"
+        :value="child"
+      />
     </template>
   </v-container>
 </template>

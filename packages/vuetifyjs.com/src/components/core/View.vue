@@ -1,12 +1,12 @@
 <template>
   <v-content>
-    <v-slide-y-transition mode="out-in">
+    <v-slide-x-transition hide-on-leave>
       <core-page
         :page="page"
         :namespace="namespace"
         :key="$route.path"
       />
-    </v-slide-y-transition>
+    </v-slide-x-transition>
   </v-content>
 </template>
 
