@@ -1,29 +1,36 @@
 <template>
   <v-container
-    v-if="structure"
     id="page"
     fluid
   >
-    <doc-heading>
-      {{ structure.title }}
-    </doc-heading>
-    <div class="mb-5">
-      <doc-text
-        v-if="structure.titleText"
-        class="mb-4"
-      >
-        {{ structure.titleText }}
-      </doc-text>
-    </div>
+    <not-found-page v-if="structure === false" />
 
-    <component
-      v-for="(child, i) in structure.children"
-      :key="`${composite}-${i}`"
-      :is="getComponent(child.type)"
-      :value="child"
-    />
+    <template v-else-if="structure">
+      <doc-heading>
+        {{ structure.title }}
+      </doc-heading>
+      <div class="mb-5">
+        <doc-text
+          v-if="structure.titleText"
+          class="mb-4"
+        >
+          {{ structure.titleText }}
+        </doc-text>
+      </div>
+
+      <v-fade-transition
+        appear
+        group
+      >
+        <component
+          v-for="(child, i) in structure.children"
+          :key="`${composite}-${i}`"
+          :is="getComponent(child.type)"
+          :value="child"
+        />
+      </v-fade-transition>
+    </template>
   </v-container>
-  <not-found-page v-else />
 </template>
 
 <script>
@@ -80,6 +87,7 @@
         this.structure = res.default
       }).catch(() => {
         // Add 404
+        this.structure = false
         throw new Error(`Unable to find page for <${namespace}/${page}>`)
       })
     },
