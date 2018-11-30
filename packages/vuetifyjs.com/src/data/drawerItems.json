@@ -142,7 +142,8 @@
       { "text": "tabs", "to": "tabs" },
       { "text": "timelines", "to": "timelines" },
       { "text": "toolbars", "to": "toolbars" },
-      { "text": "tooltips", "to": "tooltips" }
+      { "text": "tooltips", "to": "tooltips" },
+      { "text": "treeview", "to": "treeview" }
     ]
   },
   {
