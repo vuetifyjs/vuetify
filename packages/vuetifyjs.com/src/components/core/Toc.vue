@@ -1,6 +1,7 @@
 <template>
   <div
     v-scroll="onScroll"
+    class="mb-4"
     v-on="$listeners"
   >
     <slot name="top" />
@@ -14,12 +15,12 @@
           :href="item.id"
           :class="{
             'primary--text': activeIndex === i,
-            'grey--text text--darken-1': !activeIndex === i
+            'grey--text text--darken-1': activeIndex !== i
           }"
           :style="{
             borderColor: activeIndex === i ? 'inherit' : null
           }"
-          class="body-2 mb-3 d-block"
+          class="mb-3 d-block"
           @click.stop.prevent="goTo(item.target)"
           v-text="item.text"
         />
@@ -108,7 +109,7 @@
     text-align: left;
     width: 100%;
 
-    li a.body-2 {
+    li a {
       border-left: 2px solid transparent;
       padding-left: 16px;
       text-decoration: none;
