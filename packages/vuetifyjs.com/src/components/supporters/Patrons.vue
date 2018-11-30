@@ -9,6 +9,7 @@
       <v-container
         fluid
         grid-list-md
+        pa-0
       >
         <supporter-group
           v-if="tier >= 1"
