@@ -136,6 +136,7 @@
       { "text": "ratings", "to": "ratings" },
       { "text": "sheets", "to": "sheets" },
       { "text": "snackbars", "to": "snackbars" },
+      { "text": "sparklines", "to": "sparklines" },
       { "text": "steppers", "to": "steppers" },
       { "text": "subheaders", "to": "subheaders" },
       { "text": "tabs", "to": "tabs" },

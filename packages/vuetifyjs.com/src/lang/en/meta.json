@@ -425,6 +425,12 @@
     "description": "Snackbar component for Vuetify Framework",
     "keywords": "snackbar"
   },
+  "components/sparklines": {
+    "h1": "Sparklines",
+    "title": "Sparkline Component",
+    "description": "Sparkline component for Vuetify Framework",
+    "keywords": "sparkline, graph, chart, line"
+  },
   "components/steppers": {
     "h1": "Steppers",
     "title": "Stepper Component",
