@@ -16,11 +16,20 @@
       <v-icon v-text="icon" />
     </v-list-tile-action>
     <v-list-tile-content>
-      <v-list-tile-title v-text="text" />
-      <v-list-tile-sub-title
-        v-if="subtext"
-        v-text="subtext"
-      />
+      <v-list-tile-title>
+        <span
+          v-if="noMarkdown"
+          v-text="text"
+        />
+        <doc-markdown v-else>{{ text }}</doc-markdown>
+      </v-list-tile-title>
+      <v-list-tile-sub-title v-if="subtext">
+        <span
+          v-if="noMarkdown"
+          v-text="subtext"
+        />
+        <doc-markdown v-else>{{ subtext }}</doc-markdown>
+      </v-list-tile-sub-title>
     </v-list-tile-content>
     <slot />
   </v-list-tile>
@@ -47,6 +56,10 @@
       },
       icon: {
         type: [Boolean, String],
+        default: false
+      },
+      noMarkdown: {
+        type: Boolean,
         default: false
       },
       subtext: {

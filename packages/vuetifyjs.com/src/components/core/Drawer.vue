@@ -97,164 +97,169 @@
   import kebabCase from 'lodash/kebabCase'
 
   export default {
+    provide: {
+      namespace: 'Vuetify',
+      page: 'AppDrawer'
+    },
+
     data: () => ({
       docSearch: {},
       isSearching: false,
       items: [
         {
           group: 'getting-started',
-          text: 'Getting started',
+          text: 'gettingStarted',
           icon: 'mdi-speedometer',
           children: [
-            { text: 'Quick start', to: 'quick-start' },
-            { text: 'Why Vuetify?', to: 'why-vuetify' },
-            { text: 'Frequently asked questions', to: 'frequently-asked-questions' },
-            { text: 'Sponsors and backers', to: 'sponsors-and-backers' },
-            { text: 'Contributing', to: 'contributing' },
-            { text: 'Roadmap', to: 'roadmap' },
-            { text: 'Consulting and support', to: 'consulting-and-support' }
+            { text: 'quickStart', to: 'quick-start' },
+            { text: 'whyVuetify', to: 'why-vuetify' },
+            { text: 'faq', to: 'frequently-asked-questions' },
+            { text: 'sponsorsAndBackers', to: 'sponsors-and-backers' },
+            { text: 'contributing', to: 'contributing' },
+            { text: 'roadmap', to: 'roadmap' },
+            { text: 'consulting', to: 'consulting-and-support' }
           ]
         },
         {
           group: 'framework',
-          text: 'Framework options',
+          text: 'frameworkOptions',
           icon: 'mdi-buffer',
           children: [
-            { text: 'A-la-carte', to: 'a-la-carte' },
-            { text: 'Icons', to: 'icons' },
-            { text: 'Internationalization', to: 'internationalization' }
+            { text: 'aLaCarte', to: 'a-la-carte' },
+            { text: 'icons', to: 'icons' },
+            { text: 'i18n', to: 'internationalization' }
           ]
         },
         {
           group: 'layout',
-          text: 'Application layout',
+          text: 'layout',
           icon: 'mdi-page-layout-body',
           children: [
-            { text: 'Pre-defined layouts', to: 'pre-defined' },
-            { text: 'Pre-made themes', to: 'pre-made-themes' },
+            { text: 'preDefinedLayouts', to: 'pre-defined' },
+            { text: 'preMadeThemes', to: 'pre-made-themes' },
             {
               group: 'layout',
-              text: 'Grid system',
+              text: 'gridSystem',
               children: [
-                { text: 'Grid', to: 'grid' },
-                { text: 'Grid lists', to: 'grid-lists' }
+                { text: 'grid', to: 'grid' },
+                { text: 'gridLists', to: 'grid-lists' }
               ]
             },
-            { text: 'Breakpoints', to: 'breakpoints' },
-            { text: 'Aspect ratios', to: 'aspect-ratios' },
-            { text: 'Spacing', to: 'spacing' },
-            { text: 'Text alignment', to: 'alignment' },
-            { text: 'Display', to: 'display' },
-            { text: 'Elevation', to: 'elevation' },
-            { text: 'Sandbox', to: 'sandbox' }
+            { text: 'breakpoints', to: 'breakpoints' },
+            { text: 'aspectRatios', to: 'aspect-ratios' },
+            { text: 'spacing', to: 'spacing' },
+            { text: 'textAlignment', to: 'alignment' },
+            { text: 'display', to: 'display' },
+            { text: 'elevation', to: 'elevation' },
+            { text: 'sandbox', to: 'sandbox' }
           ]
         },
         {
           group: 'style',
-          text: 'Styles & themes',
+          text: 'stylesAndThemes',
           icon: 'mdi-format-color-fill',
           children: [
-            { text: 'Colors', to: 'colors' },
-            { text: 'Theme', to: 'theme' },
-            { text: 'Typography', to: 'typography' },
-            { text: 'Content', to: 'content' }
+            { text: 'colors', to: 'colors' },
+            { text: 'theme', to: 'theme' },
+            { text: 'typography', to: 'typography' },
+            { text: 'content', to: 'content' }
           ]
         },
         {
           group: 'motion',
-          text: 'Motion & transitions',
+          text: 'motion',
           icon: 'mdi-clock-fast',
           children: [
-            { text: 'Scroll', to: 'scroll' },
-            { text: 'Transitions', to: 'transitions' }
+            { text: 'scroll', to: 'scroll' },
+            { text: 'transitions', to: 'transitions' }
           ]
         },
         {
           group: 'components',
-          text: 'UI components',
+          text: 'components',
           icon: 'mdi-view-dashboard',
           children: [
-            { text: 'API explorer', to: 'api-explorer' },
-            { text: 'Alerts', to: 'alerts' },
-            { text: 'Avatars', to: 'avatars' },
-            { text: 'Badges', to: 'badges' },
-            { text: 'Bottom navigation', to: 'bottom-navigation' },
-            { text: 'Bottom sheets', to: 'bottom-sheets' },
-            { text: 'Breadcrumbs', to: 'breadcrumbs' },
-            { text: 'Buttons', to: 'buttons' },
-            { text: 'Buttons: Floating action buttons', to: 'floating-action-buttons' },
-            { text: 'Cards', to: 'cards' },
-            { text: 'Carousels', to: 'carousels' },
-            { text: 'Chips', to: 'chips' },
-            { text: 'Data iterator', to: 'data-iterator' },
-            { text: 'Data tables', to: 'data-tables' },
-            { text: 'Dialogs', to: 'dialogs' },
-            { text: 'Dividers', to: 'dividers' },
-            { text: 'Expansion panels', to: 'expansion-panels' },
-            { text: 'Footer', to: 'footer' },
+            { text: 'apiExplorer', to: 'api-explorer' },
+            { text: 'alerts', to: 'alerts' },
+            { text: 'avatars', to: 'avatars' },
+            { text: 'badges', to: 'badges' },
+            { text: 'bottomNavigation', to: 'bottom-navigation' },
+            { text: 'bottomSheets', to: 'bottom-sheets' },
+            { text: 'breadcrumbs', to: 'breadcrumbs' },
+            { text: 'buttons', to: 'buttons' },
+            { text: 'fabs', to: 'floating-action-buttons' },
+            { text: 'cards', to: 'cards' },
+            { text: 'carousels', to: 'carousels' },
+            { text: 'chips', to: 'chips' },
+            { text: 'dataIterator', to: 'data-iterator' },
+            { text: 'dataTables', to: 'data-tables' },
+            { text: 'dialogs', to: 'dialogs' },
+            { text: 'dividers', to: 'dividers' },
+            { text: 'expansionPanels', to: 'expansion-panels' },
+            { text: 'footer', to: 'footer' },
             {
               group: 'components',
-              text: 'Groups',
+              text: 'groups',
               children: [
-                { text: 'Button groups', to: 'button-groups' },
-                { text: 'Item groups', to: 'item-groups' },
-                { text: 'Windows', to: 'windows' }
+                { text: 'buttonGroups', to: 'button-groups' },
+                { text: 'itemGroups', to: 'item-groups' },
+                { text: 'windows', to: 'windows' }
               ]
             },
-            { text: 'Hover', to: 'hover' },
-            { text: 'Icons', to: 'icons' },
-            { text: 'Images', to: 'images' },
+            { text: 'hover', to: 'hover' },
+            { text: 'icons', to: 'icons' },
+            { text: 'images', to: 'images' },
             {
               group: 'components',
-              text: 'Inputs & controls',
+              text: 'inputsAndControls',
               children: [
-                { text: 'Autocompletes', to: 'autocompletes' },
-                { text: 'Combobox', to: 'combobox' },
-                { text: 'Forms', to: 'forms' },
-                { text: 'Inputs', to: 'inputs' },
-                { text: 'Overflow buttons', to: 'overflow-btns' },
-                { text: 'Selects', to: 'selects' },
-                { text: 'Selection controls', to: 'selection-controls' },
-                { text: 'Sliders', to: 'sliders' },
-                { text: 'Textareas', to: 'textarea' },
-                { text: 'Text fields', to: 'text-fields' }
+                { text: 'autocompletes', to: 'autocompletes' },
+                { text: 'combobox', to: 'combobox' },
+                { text: 'forms', to: 'forms' },
+                { text: 'inputs', to: 'inputs' },
+                { text: 'overflowButtons', to: 'overflow-btns' },
+                { text: 'selects', to: 'selects' },
+                { text: 'selectionControls', to: 'selection-controls' },
+                { text: 'sliders', to: 'sliders' },
+                { text: 'textareas', to: 'textarea' },
+                { text: 'textFields', to: 'text-fields' }
               ]
             },
-            { text: 'Jumbotrons', to: 'jumbotrons' },
-            { text: 'Lists', to: 'lists' },
-            { text: 'Menus', to: 'menus' },
-            { text: 'Navigation drawers', to: 'navigation-drawers' },
-            { text: 'Paginations', to: 'paginations' },
-            { text: 'Parallax', to: 'parallax' },
+            { text: 'jumbotrons', to: 'jumbotrons' },
+            { text: 'lists', to: 'lists' },
+            { text: 'menus', to: 'menus' },
+            { text: 'navigationDrawers', to: 'navigation-drawers' },
+            { text: 'paginations', to: 'paginations' },
+            { text: 'parallax', to: 'parallax' },
             {
               group: 'components',
-              text: 'Pickers',
+              text: 'pickers',
               children: [
-                { text: 'Date pickers', to: 'date-pickers' },
-                { text: 'Time pickers', to: 'time-pickers' }
+                { text: 'datePickers', to: 'date-pickers' },
+                { text: 'timePickers', to: 'time-pickers' }
               ]
             },
-            { text: 'Progress', to: 'progress' },
-            { text: 'Ratings', to: 'ratings' },
-            { text: 'Sheets', to: 'sheets' },
-            { text: 'Snackbars', to: 'snackbars' },
-            { text: 'Steppers', to: 'steppers' },
-            { text: 'Subheaders', to: 'subheaders' },
-            { text: 'Tabs', to: 'tabs' },
-            { text: 'Timelines', to: 'timelines' },
-            { text: 'Toolbars', to: 'toolbars' },
-            { text: 'Tooltips', to: 'tooltips' }
+            { text: 'progress', to: 'progress' },
+            { text: 'ratings', to: 'ratings' },
+            { text: 'sheets', to: 'sheets' },
+            { text: 'snackbars', to: 'snackbars' },
+            { text: 'steppers', to: 'steppers' },
+            { text: 'subheaders', to: 'subheaders' },
+            { text: 'tabs', to: 'tabs' },
+            { text: 'timelines', to: 'timelines' },
+            { text: 'toolbars', to: 'toolbars' },
+            { text: 'tooltips', to: 'tooltips' }
           ]
         },
         {
           group: 'directives',
-          text: 'Directives',
+          text: 'directives',
           icon: 'mdi-function',
           children: [
-            { text: 'Resizing', to: 'resizing' },
-            { text: 'Ripples', to: 'ripples' },
-            { text: 'Scrolling', to: 'scrolling' },
-            { text: 'Touch support', to: 'touch-support' }
+            { text: 'resizing', to: 'resizing' },
+            { text: 'ripples', to: 'ripples' },
+            { text: 'scrolling', to: 'scrolling' },
+            { text: 'touchSupport', to: 'touch-support' }
           ]
         }
       ],

@@ -21,6 +21,7 @@
               :avatar-color="link.color"
               :text="link.target"
               :subtext="link.section"
+              no-markdown
             >
               <v-list-tile-action>
                 <v-icon>mdi-arrow-right</v-icon>
