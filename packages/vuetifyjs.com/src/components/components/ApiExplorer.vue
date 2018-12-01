@@ -74,9 +74,11 @@
 
 <script>
   // Utilities
+  import api from '@vuetify/api-generator'
   import camelCase from 'lodash/camelCase'
   import upperFirst from 'lodash/upperFirst'
   import { mapState } from 'vuex'
+  import pluralize from 'pluralize'
 
   export default {
     name: 'ApiExplorerPage',
@@ -126,14 +128,13 @@
 
     computed: {
       ...mapState('app', ['components']),
-      ...mapState('documentation', ['api']),
       composite () {
         return `${this.namespace}-${this.page}`
       },
       computedApi () {
         const computedApi = []
 
-        Object.keys(this.api).forEach(key => {
+        Object.keys(api).forEach(key => {
           if (
             key.indexOf('v-') < 0 ||
             this.directives.includes(key)
@@ -151,7 +152,7 @@
       items () {
         if (!this.selected) return []
 
-        return this.api[this.selected.text].props // come back to this
+        return api[this.selected.text].props // come back to this
       },
       namespace () {
         return this.selected
@@ -162,7 +163,7 @@
         const str = this.selected.text.replace('v-', '')
 
         return this.selected
-          ? upperFirst(camelCase(str))
+          ? pluralize(upperFirst(camelCase(str)))
           : undefined
       }
     },
@@ -179,7 +180,6 @@
         let namespace
         let subtext
         const text = component
-        const api = this.api
 
         if (this.directives.includes(text)) {
           namespace = 'Directives'

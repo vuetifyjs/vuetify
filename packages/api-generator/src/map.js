@@ -248,6 +248,25 @@ module.exports = {
       }
     ]
   },
+  'internationalization': {
+    api: [
+      {
+        name: 'locales',
+        default: '{ en: VuetifyLocale }',
+        type: 'Record<string, VuetifyLocale>'
+      },
+      {
+        name: 'current',
+        default: 'en',
+        type: 'string'
+      },
+      {
+        name: 't',
+        default: '(key: string, ...params: Array<string | number>): string',
+        type: 'Function'
+      }
+    ]
+  },
   'v-resize': {
     options: [
       {
@@ -484,12 +503,12 @@ module.exports = {
   'v-divider': {
     props: [
       {
-        "name": "dark",
-        "source": 'themeable'
+        'name': 'dark',
+        'source': 'themeable'
       },
       {
-        "name": "light",
-        "source": 'themeable'
+        'name': 'light',
+        'source': 'themeable'
       }
     ]
   },
@@ -607,7 +626,7 @@ module.exports = {
         props: {
           hover: 'boolean'
         }
-      },
+      }
     ]
   },
   'v-icon': {

@@ -40,7 +40,7 @@ function getPropDefault (def, type) {
     (def == null && type !== 'boolean' && type !== 'function')
   ) {
     return 'undefined'
-  } else if (typeof(def) === 'function' && type !== 'function') {
+  } else if (typeof (def) === 'function' && type !== 'function') {
     def = def.call({})
   }
 
@@ -60,14 +60,14 @@ function getPropDefault (def, type) {
 }
 
 function getPropSource (name, mixins) {
-  let source = null
+  const source = null
   for (let i = 0; i < mixins.length; i++) {
     let mixin = mixins[i]
     if (mixin.name === 'VueComponent') mixin = mixin.options
 
     if (mixin.name) {
       const source = Object.keys(mixin.props || {}).find(p => p === name) && mixin.name
-      let found = getPropSource(name, [mixin.extends].concat(mixin.mixins).filter(m => !!m)) || source
+      const found = getPropSource(name, [mixin.extends].concat(mixin.mixins).filter(m => !!m)) || source
       if (found) return found
     }
   }
@@ -100,7 +100,7 @@ function parseProps (component, array = [], mixin = false) {
   const props = component.props || {}
 
   Object.keys(props).forEach(prop => {
-    let generated = genProp(prop, props, mixins)
+    const generated = genProp(prop, props, mixins)
     array.push(generated)
   })
 
@@ -185,7 +185,6 @@ function writeApiFile (obj, file) {
     stream.write(JSON.stringify(obj, null, 2))
     stream.end()
   })
-  
 }
 
 function writeJsonFile (obj, file) {
@@ -208,13 +207,12 @@ function writePlainFile (content, file) {
 
 const tags = Object.keys(components).reduce((t, k) => {
   t[k] = {
-    attributes: components[k].props.map(p => p.name.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`)).sort(),
+    attributes: components[k].props.map(p => p.name.replace(/([A-Z])/g, g => `-${g[0].toLowerCase()}`)).sort(),
     description: ''
   }
 
   return t
 }, {})
-
 
 const attributes = Object.keys(components).reduce((attrs, k) => {
   const tmp = components[k].props.reduce((a, prop) => {
@@ -224,7 +222,7 @@ const attributes = Object.keys(components).reduce((attrs, k) => {
     else if (Array.isArray(type)) type = type.map(t => t.toLowerCase()).join('|')
     else type = type.toLowerCase()
 
-    const name = prop.name.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`)
+    const name = prop.name.replace(/([A-Z])/g, g => `-${g[0].toLowerCase()}`)
 
     a[`${k}/${name}`] = {
       type,
@@ -253,8 +251,8 @@ const fakeComponents = ts => {
     const quoteProp = name => name.match(/-/) ? `'${name}'` : name
     const componentProps = components[component].props
     componentProps.sort((a, b) => {
-      if (a.name < b.name) return -1;
-      return a.name === b.name ? 0 : 1;
+      if (a.name < b.name) return -1
+      return a.name === b.name ? 0 : 1
     })
     let props = componentProps.map(prop => `    ${quoteProp(prop.name)}: ${propType(prop.type)}`).join(',\n')
     if (props) props = `\n  props: {\n${props}\n  }\n`
@@ -272,5 +270,6 @@ writePlainFile(fakeComponents(false), 'dist/fakeComponents.js')
 writePlainFile(fakeComponents(true), 'dist/fakeComponents.ts')
 
 components['$vuetify'] = map['$vuetify']
+components['internationalization'] = map['internationalization']
 
 writeApiFile({ ...components, ...directives }, 'dist/api.js')

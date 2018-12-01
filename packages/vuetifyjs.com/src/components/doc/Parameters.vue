@@ -66,9 +66,11 @@
 <script>
   // Utilities
   import { mapState } from 'vuex'
-  import { capitalize, camel } from '@/util/helpers'
-  import componentNameMap from '@/data/i18n/componentNameMap'
+  import { capitalize } from '@/util/helpers'
   import { getObjectValueByPath } from 'vuetify/es5/util/helpers'
+  import camelCase from 'lodash/camelCase'
+  import upperFirst from 'lodash/upperFirst'
+  import pluralize from 'pluralize'
 
   export default {
     inject: ['namespace', 'page'],
@@ -158,47 +160,51 @@
     },
 
     methods: {
+      isNested (str) {
+        return (
+          str.indexOf('Mixins.') > -1 ||
+          str.indexOf('Components.') > -1
+        )
+      },
       genDescription (name, item) {
         let description = ''
         let devPrepend = ''
-        const camelSource = camel(item.source)
+        const camelSource = this.parseSource(item.source)
+        const composite = `${this.namespace}.${this.page}`
 
-        const specialLevelDesc = `${this.namespace}.${this.page}.${this.type}['${name}']`
-        const selfDesc = `${this.namespace}.${this.page}['${name}']`
+        // Components.Alerts.props['v-alert'].value
+        const specialDesc = `${composite}.${this.type}['${this.target}']['${name}']`
+        // Components.Inputs.props.value
+        const componentDesc = `${this.namespace}.${camelSource}.${this.type}['${name}']`
+        // Components.Alerts.props.value
+        const selfDesc = `${composite}.${this.type}['${name}']`
+        // Mixins.Bootable.props.value
         const mixinDesc = `Mixins.${camelSource}.${this.type}['${name}']`
-        const componentDesc = `Components.${componentNameMap[item.source]}.${this.type}['${name}']`
+        // Generic.Props.value
         const genericDesc = `Generic.${capitalize(this.type)}['${name}']`
 
-        if (this.$te(specialLevelDesc)) {
-          description = this.$t(specialLevelDesc)
-
-          if (description.indexOf('Mixins.') > -1) {
-            description = this.$t(description)
-          }
-
+        if (this.$te(specialDesc)) {
+          description = this.$t(specialDesc)
           devPrepend = `**SPECIAL (${item.source})** - `
-        } else if (this.$te(selfDesc)) {
-          description = this.$t(selfDesc)
-
-          if (description.indexOf('Mixins.') > -1 ||
-            description.indexOf('Components.') > -1
-          ) {
-            description = this.$t(description)
-          }
-
-          devPrepend = '**SELF** - '
-        } else if (this.$te(mixinDesc)) {
-          description = this.$t(mixinDesc)
-          devPrepend = `**MIXIN (${item.source})** - `
         } else if (this.$te(componentDesc)) {
           description = this.$t(componentDesc)
           devPrepend = `**COMPONENT (${item.source})** - `
+        } else if (this.$te(selfDesc)) {
+          description = this.$t(selfDesc)
+          devPrepend = `**SELF** - `
+        } else if (this.$te(mixinDesc)) {
+          description = this.$t(mixinDesc)
+          devPrepend = `**MIXIN (${item.source})** - `
         } else if (this.$te(genericDesc)) {
           description = this.$t(genericDesc)
           devPrepend = `**GENERIC (${item.source})** - `
         } else {
           description = ''
           devPrepend = `**MISSING DESCRIPTION** - ${item.source}`
+        }
+
+        if (this.isNested(description)) {
+          description = this.$t(description)
         }
 
         const prepend = process.env.NODE_ENV === 'development' ? devPrepend : ''
@@ -236,6 +242,15 @@
         let name = header
         if (header === 'default' && item.type === 'Function') name = 'signature'
         return this.$t(`Generic.Pages.${name}`)
+      },
+      parseSource (source) {
+        if (!source) return ''
+
+        if (source.match(/^v-/)) {
+          source = pluralize(source.replace(/v-/, ''))
+        }
+
+        return upperFirst(camelCase(source))
       }
     }
   }

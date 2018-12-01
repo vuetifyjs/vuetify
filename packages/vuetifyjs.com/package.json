@@ -31,6 +31,7 @@
     "memory-fs": "^0.4.1",
     "moment": "^2.22.2",
     "node-fetch": "^2.1.2",
+    "pluralize": "^7.0.0",
     "route-cache": "^0.4.4",
     "serialize-javascript": "^1.5.0",
     "serve-favicon": "^2.5.0",

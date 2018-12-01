@@ -14,9 +14,7 @@
 
 <script>
   // Utilities
-  import {
-    mapState
-  } from 'vuex'
+  import api from '@vuetify/api-generator'
 
   export default {
     props: {
@@ -68,9 +66,8 @@
     }),
 
     computed: {
-      ...mapState('documentation', ['api']),
       component () {
-        const component = this.api[this.target] || {}
+        const component = api[this.target] || {}
 
         return {
           api: [],
