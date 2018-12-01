@@ -25,11 +25,12 @@
       />
       <v-spacer />
       <v-btn
-        :color="!computedIcon ? 'primary lighten-3' : null"
+        :color="computedColor"
         :ripple="false"
         v-bind="bind"
+        :flat="snackbar.color !== 'store'"
         dark
-        flat
+        depressed
         @click="onClick"
       >
         {{ snackbar.text }}
@@ -71,8 +72,16 @@
 
         return {}
       },
+      computedColor () {
+        if (this.snackbar.color !== 'store') {
+          return !this.computedIcon ? 'primary lighten-3' : null
+        }
+
+        return 'green'
+      },
       computedIcon () {
         switch (this.snackbar.color) {
+          case 'store': return 'mdi-cart'
           case 'success': return 'check'
           case 'info': return 'info'
           case 'warning': return 'warning'
