@@ -75,10 +75,8 @@ export default {
     return h('div', this.setTextColor(!this.disabled && this.color, {
       class: this.listClasses,
       attrs: {
-        disabled: this.disabled
-      },
-      on: {
-        ...this.$listeners
+        disabled: this.disabled,
+        role: 'listitem'
       }
     }), [h(tag, data, this.$slots.default)])
   }

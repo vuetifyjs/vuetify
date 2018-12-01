@@ -1,17 +1,16 @@
 {
-  "header": "Textarea",
+  "header": "# Textarea",
   "headerText": "Textarea components are used for collecting large amounts of textual data.",
   "examples": {
-    "multiLine": {
-      "header": "Multi-Line",
+    "usage": {
       "desc": "A multi-line text-field is useful for larger amounts of text."
     },
     "autoGrow": {
-      "header": "Auto grow",
+      "header": "### Auto grow",
       "desc": "Textarea can automatically resize when entered text exceeds its size."
     },
     "signupBox": {
-      "header": "Beautiful Forms",
+      "header": "### Beautiful Forms",
       "desc": "Utilizing alternative input styles, you can create amazing interfaces that are easy to build and easy to use."
     }
   }

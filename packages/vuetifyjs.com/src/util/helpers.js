@@ -18,27 +18,6 @@ export function capitalize (str) {
   return `${str.substr(0, 1).toUpperCase()}${str.slice(1)}`
 }
 
-export function shortId (id) {
-  // atob() but for node
-  const arr = Buffer.from(id, 'base64').toString('binary').split('/')
-  return arr[arr.length - 1]
-}
-
-export function getLongId (id) {
-  // btoa() but for node
-  return Buffer.from(`gid://shopify/Product/${id}`, 'binary').toString('base64')
-}
-
-export function findProduct (store, id) {
-  return store.state.store.products.find(p => p.id === id)
-}
-
-export function isOnSale (variants) {
-  return variants.some(variant => {
-    return parseFloat(variant.price) < parseFloat(variant.compareAtPrice)
-  })
-}
-
 export function randomNumber (min, max) {
   return Math.floor(Math.random() * max) + min
 }
@@ -56,7 +35,7 @@ export function randomString (length = 5) {
 
 // Must be called in Vue context
 export function goTo (id) {
-  this.$vuetify.goTo(id).then(() => {
+  this.$vuetify.goTo(id, { offset: -80 }).then(() => {
     if (!id) {
       return (document.location.hash = '')
     }
@@ -67,4 +46,49 @@ export function goTo (id) {
       document.location.hash = id
     }
   })
+}
+
+export function getComponent (type) {
+  switch (type) {
+    case 'alert': return 'doc-alert'
+    case 'api': return 'doc-api'
+    case 'checklist': return 'doc-checklist'
+    case 'example': return 'doc-example'
+    case 'examples': return 'doc-examples'
+    case 'heading': return 'doc-heading'
+    case 'img': return 'doc-img'
+    case 'text': return 'doc-text'
+    case 'markup': return 'doc-markup'
+    case 'markdown': return 'doc-markdown'
+    case 'parameters': return 'doc-parameters'
+    case 'section': return 'doc-section'
+    case 'supplemental': return 'doc-supplemental'
+    case 'tree': return 'doc-tree'
+    case 'up-next': return 'doc-up-next'
+    case 'usage': return 'doc-usage'
+    default: return type
+  }
+}
+
+export function parseLink (match, text, link) {
+  let attrs = ''
+  let linkClass = 'markdown--link'
+  let icon = ''
+
+  // External link
+  if (link.indexOf('http') > -1) {
+    attrs = `target="_blank" rel="noopener"`
+    icon = 'open-in-new'
+    linkClass += ' markdown--external'
+  // Same page internal link
+  } else if (link.charAt(0) === '#') {
+    linkClass += ' markdown--same-internal'
+    icon = 'pound'
+  // Different page internal link
+  } else {
+    linkClass += ' markdown--internal'
+    icon = 'page-next'
+  }
+
+  return `<a href="${link}" ${attrs} class="${linkClass}">${text}<i class="v-icon mdi mdi-${icon}"></i></a>`
 }

@@ -79,8 +79,8 @@
             v-card-text
               kbd {{ themeExport }}
             v-card-actions
-              v-btn(block color="grey white--text" flat @click.native="useNames = !useNames") Use {{ useNames && 'hex codes' || 'names' }}
-              v-btn(block color="blue darken-2 white--text" flat @click.native="dialog = false") Close
+              v-btn(block color="grey white--text" flat @click="useNames = !useNames") Use {{ useNames && 'hex codes' || 'names' }}
+              v-btn(block color="blue darken-2 white--text" flat @click="dialog = false") Close
 
 </template>
 

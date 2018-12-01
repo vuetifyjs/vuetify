@@ -19,8 +19,6 @@ const serverInfo =
 
 const availableLanguages = require('./src/data/i18n/languages').map(lang => lang.locale)
 
-const startTime = new Date()
-
 const app = express()
 
 function createRenderer (bundle, options) {
@@ -31,8 +29,6 @@ function createRenderer (bundle, options) {
       max: 1000,
       maxAge: 1000 * 60 * 15
     }),
-    // this is only needed when vue-server-renderer is npm-linked
-    basedir: resolve('./public'),
     // recommended for performance
     runInNewContext: false
   }))
@@ -77,21 +73,12 @@ app.use(compression({ threshold: 0 }))
 app.use(favicon('./src/public/favicon.ico'))
 app.use('/', serve('./src/public', true))
 app.use('/dist', serve('./dist', true))
-app.use('/releases', serve('./src/releases'))
 app.use('/themes', serve('./src/themes'))
-app.get('/releases/:release', (req, res) => {
-  res.setHeader('Content-Type', 'text/html')
-  res.sendFile(resolve(`./src/releases/${req.params.release}`))
-})
 
 app.get('/sitemap.xml', (req, res) => {
   res.setHeader('Content-Type', 'text/xml')
   res.sendFile(resolve('./src/public/sitemap.xml'))
 })
-
-if (process.env.TRANSLATE) {
-  app.use('/api/translation', require('./src/translation/router'))
-}
 
 // 301 redirect for changed routes
 Object.keys(redirects).forEach(k => {
@@ -104,8 +91,7 @@ Object.keys(redirects).forEach(k => {
 // headers.
 // 10-minute microcache.
 // https://www.nginx.com/blog/benefits-of-microcaching-nginx/
-const isStore = req => !!req.params && !!req.params[1] && req.params[1].includes('store')
-const cacheMiddleware = microcache.cacheSeconds(10 * 60, req => useMicroCache && !isStore(req) && req.originalUrl)
+const cacheMiddleware = microcache.cacheSeconds(10 * 60, req => useMicroCache && req.originalUrl)
 
 const ouchInstance = (new Ouch()).pushHandler(new Ouch.handlers.PrettyPageHandler('orange', null, 'sublime'))
 
@@ -117,15 +103,6 @@ function render (req, res) {
   res.cookie('currentLanguage', req.params[0], {
     maxAge: 1000 * 60 * 60 * 24 * 7 // 7 days
   })
-
-  if (!/^\/store/.test(req.params[1])) {
-    res.setHeader('Last-Modified', startTime.toUTCString())
-    res.setHeader('Cache-Control', 'public, must-revalidate')
-
-    if (req.fresh) {
-      return res.status(304).end()
-    }
-  }
 
   const handleError = err => {
     if (err.url) {

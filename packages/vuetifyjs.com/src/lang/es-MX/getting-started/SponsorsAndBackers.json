@@ -1,6 +1,6 @@
 {
     "header": "Apoya al desarrollo de Vuetify",
-    "headerText": "Vuetify es un proyecto open source bajo la licencia MIT. Es y siempre será gratuito para usarse. Sin embargo, la cantidad de esfuerzo que toma mantener el core del framework y todos los paquetes complementarios es bastante considerable. Con la meta de continuar el desarrollo de funcionalidad adicional aún después de completar el spec de Material Design, puedes ayudar <a href=\"https://www.patreon.com/vuetify\" target=\"_blank\" rel=\"noreferrer\">aportando a Vuetify en Patreon</a>.",
+    "headerText": "Vuetify es un proyecto open source bajo la licencia MIT. Es y siempre será gratuito para usarse. Sin embargo, la cantidad de esfuerzo que toma mantener el core del framework y todos los paquetes complementarios es bastante considerable. Con la meta de continuar el desarrollo de funcionalidad adicional aún después de completar el spec de Material Design, puedes ayudar [aportando a Vuetify en Patreon](https://www.patreon.com/vuetify).",
     "backersHeader": "Patrocinadores en Patreon:",
     "backersSubHeader": "Diamond (USD $500/mo)",
     "backersSubHeader2": "Palladium (USD $250/mo)",

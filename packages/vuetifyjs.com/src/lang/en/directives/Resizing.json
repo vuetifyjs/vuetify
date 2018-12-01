@@ -1,9 +1,8 @@
 {
-  "header": "Resize directive",
+  "header": "# Resize directive",
   "headerText": "The `v-resize` directive can be used for calling specific functions when the window resizes.",
   "examples": {
-    "default": {
-      "header": "Default",
+    "usage": {
       "desc": "Resize your window and observe the values change..",
       "uninverted": true
     }

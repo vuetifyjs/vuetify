@@ -1,0 +1,2 @@
+// src/main.js
+import 'vuetify/src/stylus/app.styl'
