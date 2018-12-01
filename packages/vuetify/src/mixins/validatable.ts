@@ -1,4 +1,3 @@
-
 // Mixins
 import Colorable from './colorable'
 import { inject as RegistrableInject } from './registrable'
@@ -7,9 +6,9 @@ import { inject as RegistrableInject } from './registrable'
 import { deepEqual } from '../util/helpers'
 import { consoleError } from '../util/console'
 import mixins from '../util/mixins'
-import { PropValidator } from 'vue/types/options'
 
 // Types
+import { PropValidator } from 'vue/types/options'
 export type VuetifyRuleValidator = (value: any) => string | false
 export type VuetifyMessage = string | string[] | VuetifyRuleValidator
 export type VuetifyRuleValidations = (VuetifyRuleValidator | string)[]
