@@ -1,18 +1,25 @@
-import { deepEqual } from '../util/helpers'
-import { inject as RegistrableInject } from './registrable'
-import { consoleError } from '../util/console'
 
 // Mixins
 import Colorable from './colorable'
+import { inject as RegistrableInject } from './registrable'
+
+// Utilities
+import { deepEqual } from '../util/helpers'
+import { consoleError } from '../util/console'
+import mixins from '../util/mixins'
+import { PropValidator } from 'vue/types/options'
+
+// Types
+export type VuetifyFormValidator = (value: any) => string | false
+export type VuetifyFormMessage = string | string[] | VuetifyFormValidator
+export type VuetifyFormValidations = (VuetifyFormValidator | string)[]
 
 /* @vue/component */
-export default {
+export default mixins(
+  Colorable,
+  RegistrableInject('form')
+).extend({
   name: 'validatable',
-
-  mixins: [
-    Colorable,
-    RegistrableInject('form')
-  ],
 
   props: {
     disabled: Boolean,
@@ -24,93 +31,112 @@ export default {
     errorMessages: {
       type: [String, Array],
       default: () => []
-    },
+    } as PropValidator<VuetifyFormMessage>,
     messages: {
       type: [String, Array],
       default: () => []
-    },
+    } as PropValidator<VuetifyFormMessage>,
     readonly: Boolean,
     rules: {
       type: Array,
       default: () => []
-    },
+    } as PropValidator<VuetifyFormValidator[]>,
     success: Boolean,
     successMessages: {
       type: [String, Array],
       default: () => []
-    },
-    validateOnBlur: Boolean
+    } as PropValidator<VuetifyFormMessage>,
+    validateOnBlur: Boolean,
+    value: { required: false }
   },
 
-  data: () => ({
-    errorBucket: [],
-    hasColor: false,
-    hasFocused: false,
-    hasInput: false,
-    isFocused: false,
-    isResetting: false,
-    valid: false
-  }),
+  data () {
+    return {
+      errorBucket: [] as string[],
+      hasColor: false,
+      hasFocused: false,
+      hasInput: false,
+      isFocused: false,
+      isResetting: false,
+      lazyValue: this.value,
+      valid: false
+    }
+  },
 
   computed: {
-    hasError () {
-      return this.internalErrorMessages.length > 0 ||
+    hasError (): boolean {
+      return (
+        this.internalErrorMessages.length > 0 ||
         this.errorBucket.length > 0 ||
         this.error
-    },
-    externalError () {
-      return this.internalErrorMessages.length > 0 || this.error
+      )
     },
     // TODO: Add logic that allows the user to enable based
     // upon a good validation
-    hasSuccess () {
-      return this.successMessages.length > 0 ||
+    hasSuccess (): boolean {
+      return (
+        this.internalSuccessMessages.length > 0 ||
         this.success
+      )
     },
-    hasMessages () {
-      return this.validations.length > 0
+    externalError (): boolean {
+      return this.errorMessages.length > 0 || this.error
     },
-    hasState () {
-      return this.hasSuccess || (this.shouldValidate && this.hasError)
+    hasMessages (): boolean {
+      return this.validationTarget.length > 0
     },
-    internalErrorMessages () {
-      return this.errorMessages || ''
+    hasState (): boolean {
+      return (
+        this.hasSuccess ||
+        (this.shouldValidate && this.hasError)
+      )
     },
-    shouldValidate () {
-      return this.externalError || (!this.isResetting && (
-        this.validateOnBlur
-          ? this.hasFocused && !this.isFocused
-          : (this.hasInput || this.hasFocused)
-      ))
+    internalErrorMessages (): VuetifyFormValidations {
+      return this.genInternalMessages(this.errorMessages)
     },
-    validations () {
-      return this.validationTarget.slice(0, this.errorCount)
+    internalMessages (): VuetifyFormValidations {
+      return this.genInternalMessages(this.messages)
     },
-    validationState () {
+    internalSuccessMessages (): VuetifyFormValidations {
+      return this.genInternalMessages(this.successMessages)
+    },
+    internalValue: {
+      get (): unknown {
+        return this.lazyValue
+      },
+      set (val: any) {
+        this.lazyValue = val
+
+        this.$emit('input', val)
+      }
+    },
+    shouldValidate (): boolean {
+      if (this.externalError) return true
+      if (this.isResetting) return false
+
+      return this.validateOnBlur
+        ? this.hasFocused && !this.isFocused
+        : (this.hasInput || this.hasFocused)
+    },
+    validations (): VuetifyFormValidations {
+      return this.validationTarget.slice(0, Number(this.errorCount))
+    },
+    validationState (): string | null {
       if (this.hasError && this.shouldValidate) return 'error'
       if (this.hasSuccess) return 'success'
       if (this.hasColor) return this.color
       return null
     },
-    validationTarget () {
-      const target = this.internalErrorMessages.length > 0
-        ? this.errorMessages
-        : this.successMessages.length > 0
-          ? this.successMessages
-          : this.messages
-
-      // String
-      if (!Array.isArray(target)) {
-        return [target]
-      // Array with items
-      } else if (target.length > 0) {
-        return target
-      // Currently has validation
+    validationTarget (): VuetifyFormValidations {
+      if (this.errorMessages.length > 0) {
+        return this.internalErrorMessages
+      } else if (this.successMessages.length > 0) {
+        return this.internalSuccessMessages
+      } else if (this.messages.length > 0) {
+        return this.internalMessages
       } else if (this.shouldValidate) {
         return this.errorBucket
-      } else {
-        return []
-      }
+      } else return []
     }
   },
 
@@ -151,6 +177,9 @@ export default {
       if (this.shouldValidate) {
         this.$emit('update:error', val)
       }
+    },
+    value (val) {
+      this.lazyValue = val
     }
   },
 
@@ -167,6 +196,11 @@ export default {
   },
 
   methods: {
+    genInternalMessages (messages: VuetifyFormMessage): VuetifyFormValidations {
+      if (Array.isArray(messages)) return messages
+
+      return [messages]
+    },
     /** @public */
     reset () {
       this.isResetting = true
@@ -179,18 +213,19 @@ export default {
       this.isResetting = true
     },
     /** @public */
-    validate (force = false, value = this.internalValue) {
+    validate (force = false, value?: any): boolean {
       const errorBucket = []
+      value = value || this.internalValue
 
       if (force) this.hasInput = this.hasFocused = true
 
       for (let index = 0; index < this.rules.length; index++) {
-        const rule = this.rules[index]
+        const rule = this.rules[index] as VuetifyFormValidator | string
         const valid = typeof rule === 'function' ? rule(value) : rule
 
-        if (valid === false || typeof valid === 'string') {
+        if (typeof valid === 'string') {
           errorBucket.push(valid)
-        } else if (valid !== true) {
+        } else if (typeof valid !== 'boolean') {
           consoleError(`Rules should return a string or boolean, received '${typeof valid}' instead`, this)
         }
       }
@@ -201,4 +236,4 @@ export default {
       return this.valid
     }
   }
-}
+})
