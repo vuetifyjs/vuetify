@@ -66,8 +66,8 @@
         default: false
       },
       chip: {
-        type: Boolean,
-        default: false
+        type: String,
+        default: ''
       },
       noMarkdown: {
         type: Boolean,
