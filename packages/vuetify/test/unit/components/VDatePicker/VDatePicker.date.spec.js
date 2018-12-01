@@ -17,6 +17,19 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
     expect(header.text()).toBe('November 2005')
   })
 
+  it('should display the correct year when model is null', () => {
+    const wrapper = mount(VDatePicker, {
+      propsData: {
+        value: null,
+        pickerDate: '2013-01'
+      }
+    })
+
+    const year = wrapper.find('.v-date-picker-title__year')[0]
+
+    expect(year.text()).toBe('2013')
+  })
+
   it('should match snapshot with default settings', () => {
     const wrapper = mount(VDatePicker, {
       propsData: {
