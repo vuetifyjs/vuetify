@@ -1,0 +1,19 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "playgroundHeader"
+        },
+        {
+          "type": "example",
+          "value": "playground"
+        }
+      ]
+    }
+  ]
+}

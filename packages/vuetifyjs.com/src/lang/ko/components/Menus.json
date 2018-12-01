@@ -30,7 +30,7 @@
     },
     "customTransition": {
       "header": "커스텀 트랜지션 (Custom transitions)",
-      "desc": "Vuetify엔 3개의 기본 트랜지션 **scale**, **slide**, **slide-x**, **slide-y** 가 있습니다. 하지만 트랜지션 인자로 직접 만든 트랜지션을 사용할 수도 있ㅅ브니다. 예를 들어 어떻게 스톡(stock) 트랜지션이 작동하는지 보려면  <a href=\"https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/util/helpers.ts#L31\" target=\"_blank\" rel=\"noopener\">here</a>를 방문하세요.",
+      "desc": "Vuetify엔 3개의 기본 트랜지션 **scale**, **slide**, **slide-x**, **slide-y** 가 있습니다. 하지만 트랜지션 인자로 직접 만든 트랜지션을 사용할 수도 있ㅅ브니다. 예를 들어 어떻게 스톡(stock) 트랜지션이 작동하는지 보려면  [here](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/util/helpers.ts)를 방문하세요.",
       "uninverted": true
     },
     "popover": {

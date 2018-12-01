@@ -3,7 +3,7 @@
   "default": "По умолчанию",
   "description": "Описание",
   "examples": "Примеры",
-  "howItWorks": "Как это работает",
+  "howItWorks": "## Как это работает",
   "name": "Имя",
   "openInCodePen": "Открыть в Codepen",
   "options": "Опции",
@@ -12,7 +12,7 @@
   "slots": "Slots",
   "supplemental": "Дополнительный",
   "type": "Тип",
-  
+
   "usage": "Применение",
   "parameters": "Параметры",
   "return": "Возвращает",

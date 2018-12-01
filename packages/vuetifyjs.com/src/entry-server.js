@@ -3,8 +3,6 @@ import { createApp } from './main'
 // ENV Variables
 require('dotenv').config()
 
-global.fetch = require('node-fetch')
-
 const isDev = process.env.NODE_ENV !== 'production'
 
 // This exported function will be called by `bundleRenderer`.
@@ -13,9 +11,13 @@ const isDev = process.env.NODE_ENV !== 'production'
 // Since data fetching is async, this function is expected to
 // return a Promise that resolves to the app instance.
 export default context => {
-  return new Promise((resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     const s = isDev && Date.now()
-    const { app, router, store } = createApp(context)
+    const {
+      app,
+      router,
+      store
+    } = await createApp(undefined, context)
 
     // set router's location
     router.push(context.url)
@@ -23,20 +25,21 @@ export default context => {
     // wait until router has resolved possible async hooks
     router.onReady(() => {
       const matchedComponents = router.getMatchedComponents()
-      // no matched routes
-      if (!matchedComponents.length) {
-        reject({ code: 404 })
-      }
+
       // Call fetchData hooks on components matched by the route.
       // A preFetch hook dispatches a store action and returns a Promise,
       // which is resolved when the action is complete and store state has been
       // updated.
-      Promise.all(matchedComponents.map(component => {
-        return component.asyncData && component.asyncData({
-          store,
-          route: router.currentRoute
+      Promise.all([
+        ...matchedComponents.map(component => {
+          if (component.asyncData) {
+            return component.asyncData({
+              store,
+              route: router.currentRoute
+            })
+          }
         })
-      })).then(() => {
+      ]).then(() => {
         isDev && console.log(`data pre-fetch: ${Date.now() - s}ms`)
         // After all preFetch hooks are resolved, our store is now
         // filled with the state needed to render the app.
@@ -45,8 +48,9 @@ export default context => {
         // store to pick-up the server-side state without having to duplicate
         // the initial data fetching on the client.
         context.state = store.state
+
         resolve(app)
-      }).catch(reject)
+      })
     }, reject)
   })
 }
