@@ -4,18 +4,18 @@
 
     <div />
 
-    <template v-for="(example, i) in value">
+    <template v-for="(example, i) in examples">
       <doc-heading :key="`heading-${i}`">
-        {{ `${namespace}.${page}.examples.${example}.header` }}
+        {{ example.header }}
       </doc-heading>
 
       <doc-text :key="`text-${i}`">
-        {{ `${namespace}.${page}.examples.${example}.desc` }}
+        {{ example.desc }}
       </doc-text>
 
       <doc-example
         :key="i"
-        :value="example"
+        :value="value[i]"
       />
     </template>
   </div>
@@ -30,6 +30,18 @@
       value: {
         type: Array,
         default: () => ([])
+      }
+    },
+
+    computed: {
+      examples () {
+        return this.value.map(example => {
+          const file = example === Object(example) ? example.file : example
+          return {
+            header: `${this.namespace}.${this.page}.examples.${file}.header`,
+            desc: `${this.namespace}.${this.page}.examples.${file}.desc`
+          }
+        })
       }
     }
   }

@@ -22,13 +22,6 @@
     "v-divider": {
       "vertical": "1.1"
     },
-    "v-rating": {
-      "usage": "1.2",
-      "incremented": "1.2",
-      "slots": "1.2",
-      "card": "1.2",
-      "advanced": "1.2"
-    },
     "v-text-field": {
       "append-outer-icon": "1.1",
       "append-outer-icon-cb": "1.1",
