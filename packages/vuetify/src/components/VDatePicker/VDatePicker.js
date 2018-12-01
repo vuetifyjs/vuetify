@@ -305,9 +305,9 @@ export default {
           disabled: this.disabled,
           readonly: this.readonly,
           selectingYear: this.activePicker === 'YEAR',
-          value: this.multiple ? this.value[0] : this.value,
           year: this.formatters.year(`${this.inputYear}`),
-          yearIcon: this.yearIcon
+          yearIcon: this.yearIcon,
+          value: this.multiple ? this.value[0] : this.value
         },
         slot: 'title',
         on: {
