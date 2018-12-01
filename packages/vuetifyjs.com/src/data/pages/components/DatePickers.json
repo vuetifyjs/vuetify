@@ -35,6 +35,7 @@
             "dateWidth",
             "dateBirthday",
             "datePickerDate",
+            "datePickerDblclick",
             "dateEvents",
             "dateInternationalization",
             "dateIcons",

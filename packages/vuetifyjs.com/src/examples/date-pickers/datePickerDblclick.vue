@@ -11,7 +11,7 @@
     <v-flex xs12 sm6 class="my-2 px-1">
       <v-subheader>Double click on any date in the picker</v-subheader>
       <ul class="ma-3">
-        <li v-for="(clickedDate, index) in dates" :key="index">Clicked date: {{ clickedDate }}</li>
+        <li v-for="(clickedDate, index) in dates" :key="index">Double clicked date: {{ clickedDate }}</li>
       </ul>
     </v-flex>
   </v-layout>

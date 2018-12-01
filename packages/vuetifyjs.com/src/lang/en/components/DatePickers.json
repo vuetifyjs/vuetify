@@ -43,7 +43,7 @@
     },
     "datePickerDblclick": {
       "header": "Date pickers - dblclick:date event",
-      "desc": "You can watch the `dblclick:date` event which is emitted when user double clicks on the date. Available also in month picker."
+      "desc": "You can listen to the `dblclick:date` event which is emitted when user double clicks on the date. Available also in month picker."
     },
     "dateEvents": {
       "header": "### Date pickers - Events",
