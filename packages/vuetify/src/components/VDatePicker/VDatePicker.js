@@ -72,6 +72,7 @@ export default {
       type: [Boolean, String],
       default: true
     },
+    showWeek: Boolean,
     // Function formatting currently selected date in the picker title
     titleDateFormat: {
       type: Function,
@@ -354,6 +355,7 @@ export default {
           max: this.max,
           readonly: this.readonly,
           scrollable: this.scrollable,
+          showWeek: this.showWeek,
           tableDate: `${this.tableYear}-${pad(this.tableMonth + 1)}`,
           value: this.value,
           weekdayFormat: this.weekdayFormat
