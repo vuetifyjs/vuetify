@@ -1,10 +1,96 @@
 <template>
-  <v-card class="mb-5 pa-3">
-    <v-overline class="mb-3" v-text="file" />
+  <v-card class="mb-5">
+    <v-toolbar
+      card
+      dense
+      flat
+    >
+      <v-spacer />
+      <v-btn
+        icon
+        @click="dark = !dark"
+      >
+        <v-icon>mdi-invert-colors</v-icon>
+      </v-btn>
+      <v-btn
+        icon
+        disabled
+      >
+        <v-icon>mdi-codepen</v-icon>
+      </v-btn>
+      <v-btn
+        icon
+        disabled
+      >
+        <v-icon>mdi-github-circle</v-icon>
+      </v-btn>
+      <v-btn
+        icon
+        @click="expand = !expand"
+      >
+        <v-icon>mdi-code-tags</v-icon>
+      </v-btn>
+    </v-toolbar>
 
-    <div data-app="true">
-      <component :is="component" />
-    </div>
+    <v-expand-transition v-if="parsed">
+      <v-card
+        v-if="expand"
+        color="#2d2d2d"
+        dark
+        flat
+        tile
+      >
+        <v-item-group
+          v-model="selected"
+          class="pa-2"
+          mandatory
+        >
+          <v-item
+            v-for="(section, i) in sections"
+            v-if="parsed[section]"
+            :key="`item-${i}`"
+            :value="section"
+          >
+            <v-btn
+              slot-scope="{ active, toggle }"
+              :color="active ? 'white' : 'transparent'"
+              :light="active"
+              class="mr-0"
+              depressed
+              round
+              @click="toggle"
+            >
+              {{ section }}
+            </v-btn>
+          </v-item>
+        </v-item-group>
+        <v-divider />
+        <v-window v-model="selected">
+          <v-window-item
+            v-for="(section, i) in sections"
+            v-if="parsed[section]"
+            :key="`window-${i}`"
+            :value="section"
+          >
+            <doc-markup
+              :value="file"
+              class="mb-0"
+            >{{ parsed[section] }}</doc-markup>
+          </v-window-item>
+        </v-window>
+      </v-card>
+    </v-expand-transition>
+
+    <v-sheet
+      :dark="dark"
+      tile
+    >
+      <v-card-text>
+        <div data-app="true">
+          <component :is="component" />
+        </div>
+      </v-card-text>
+    </v-sheet>
   </v-card>
 </template>
 
@@ -14,7 +100,7 @@
   import { goTo } from '@/util/helpers'
 
   export default {
-    inject: ['page'],
+    inject: ['namespace', 'page'],
 
     props: {
       value: {
@@ -25,7 +111,11 @@
 
     data: () => ({
       component: undefined,
-      parsed: {}
+      dark: false,
+      expand: false,
+      parsed: undefined,
+      sections: ['template', 'style', 'script'],
+      selected: 'template'
     }),
 
     computed: {
@@ -39,9 +129,7 @@
         /* webpackChunkName: "examples" */
         /* webpackMode: "lazy-once" */
         `../../examples/${this.file}.vue`
-      ).then(comp => {
-        this.component = comp.default
-      })
+      ).then(comp => (this.component = comp.default))
 
       import(
         /* webpackChunkName: "examples-source" */
