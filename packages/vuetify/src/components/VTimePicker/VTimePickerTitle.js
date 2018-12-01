@@ -16,6 +16,7 @@ export default {
 
   props: {
     ampm: Boolean,
+    disabled: Boolean,
     hour: Number,
     minute: Number,
     second: Number,
@@ -40,13 +41,13 @@ export default {
       const displayedSecond = this.second == null ? '--' : pad(this.second)
 
       const titleContent = [
-        this.genPickerButton('selecting', selectingTimes.hour, displayedHour),
+        this.genPickerButton('selecting', selectingTimes.hour, displayedHour, this.disabled),
         this.$createElement('span', ':'),
-        this.genPickerButton('selecting', selectingTimes.minute, displayedMinute)
+        this.genPickerButton('selecting', selectingTimes.minute, displayedMinute, this.disabled)
       ]
       if (this.useSeconds) {
         titleContent.push(this.$createElement('span', ':'))
-        titleContent.push(this.genPickerButton('selecting', selectingTimes.second, displayedSecond))
+        titleContent.push(this.genPickerButton('selecting', selectingTimes.second, displayedSecond, this.disabled))
       }
       return this.$createElement('div', {
         'class': 'v-time-picker-title__time'
@@ -56,8 +57,8 @@ export default {
       return this.$createElement('div', {
         staticClass: 'v-time-picker-title__ampm'
       }, [
-        this.genPickerButton('period', 'am', 'am', this.readonly),
-        this.genPickerButton('period', 'pm', 'pm', this.readonly)
+        this.genPickerButton('period', 'am', 'am', this.disabled || this.readonly),
+        this.genPickerButton('period', 'pm', 'pm', this.disabled || this.readonly)
       ])
     }
   },

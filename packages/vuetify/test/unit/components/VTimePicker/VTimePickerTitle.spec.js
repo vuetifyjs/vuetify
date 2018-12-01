@@ -20,6 +20,21 @@ test('VTimePickerTitle.js', ({ mount }) => {
       expect(wrapper.html()).toMatchSnapshot()
     })
 
+    it('should render disabled component' + useSecondsDesc, () => {
+      const wrapper = mount(VTimePickerTitle, {
+        propsData: {
+          disabled: true,
+          hour: 14,
+          minute: 13,
+          period: 'pm',
+          ampm: true,
+          useSeconds: useSecondsValue
+        }
+      })
+
+      expect(wrapper.html()).toMatchSnapshot()
+    })
+
     it('should render component in 12hr' + useSecondsDesc, () => {
       const wrapper = mount(VTimePickerTitle, {
         propsData: {

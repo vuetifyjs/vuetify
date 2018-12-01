@@ -15,6 +15,7 @@ export default {
 
   props: {
     allowedValues: Function,
+    disabled: Boolean,
     double: Boolean,
     format: {
       type: Function,
@@ -110,7 +111,7 @@ export default {
           staticClass: 'v-time-picker-clock__item',
           'class': {
             'v-time-picker-clock__item--active': value === this.displayedValue,
-            'v-time-picker-clock__item--disabled': !this.isAllowed(value)
+            'v-time-picker-clock__item--disabled': this.disabled || !this.isAllowed(value)
           },
           style: this.getTransform(value),
           domProps: { innerHTML: `<span>${this.format(value)}</span>` }
@@ -216,7 +217,7 @@ export default {
         'v-time-picker-clock--indeterminate': this.value == null,
         ...this.themeClasses
       },
-      on: this.readonly ? undefined : {
+      on: (this.readonly || this.disabled) ? undefined : {
         mousedown: this.onMouseDown,
         mouseup: this.onMouseUp,
         mouseleave: () => (this.isDragging && this.onMouseUp()),
@@ -228,7 +229,7 @@ export default {
       ref: 'clock'
     }
 
-    !this.readonly && this.scrollable && (data.on.wheel = this.wheel)
+    !this.readonly && !this.disabled && this.scrollable && (data.on.wheel = this.wheel)
 
     return h('div', data, [
       h('div', {
