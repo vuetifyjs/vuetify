@@ -116,7 +116,7 @@ export default {
       if (newValue) {
         for (let index = 0; index < newValue.length; index++) {
           if (this.lazySelection <= 0) break
-          isMaskDelimiter(newValue[index]) || this.lazySelection--
+          isMaskDelimiter(newValue[index]) && this.lazySelection--
           selection++
         }
       }
