@@ -365,7 +365,7 @@ export default {
           input: this.dateClick,
           tableDate: value => this.tableDate = value
         }, this.type === 'date' ? {
-          dblclick: date => this.$emit('dblclick:date', date)
+          'dblclick:date': date => this.$emit('dblclick:date', date)
         } : {})
       })
     },
@@ -394,7 +394,7 @@ export default {
           input: this.monthClick,
           tableDate: value => this.tableDate = value
         }, this.type === 'month' ? {
-          dblclick: date => this.$emit('dblclick:date', date)
+          'dblclick:date': date => this.$emit('dblclick:date', date)
         } : {})
       })
     },

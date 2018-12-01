@@ -4,7 +4,8 @@
       <v-date-picker
         v-model="date"
         full-width
-        @dblclick="dblclick"
+        readonly
+        @dblclick:date="dblclick"
       ></v-date-picker>
     </v-flex>
     <v-flex xs12 sm6 class="my-2 px-1">
