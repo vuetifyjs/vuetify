@@ -145,10 +145,16 @@ export default {
   },
 
   methods: {
-    emitValue () {
+    genValue () {
       if (this.inputHour != null && this.inputMinute != null && (!this.useSeconds || this.inputSecond != null)) {
-        this.$emit('input', `${pad(this.inputHour)}:${pad(this.inputMinute)}` + (this.useSeconds ? `:${pad(this.inputSecond)}` : ''))
+        return `${pad(this.inputHour)}:${pad(this.inputMinute)}` + (this.useSeconds ? `:${pad(this.inputSecond)}` : '')
       }
+
+      return null
+    },
+    emitValue () {
+      const value = this.genValue()
+      if (value !== null) this.$emit('input', value)
     },
     setPeriod (period) {
       this.period = period
@@ -200,17 +206,18 @@ export default {
         this.selecting = selectingTimes.second
       }
 
-      if (this.inputHour !== this.lazyInputHour ||
-        this.inputMinute !== this.lazyInputMinute ||
-        (this.useSeconds && this.inputSecond !== this.lazyInputSecond)
-      ) {
-        if (this.inputHour != null && this.inputMinute != null && (!this.useSeconds || this.inputSecond != null)) {
-          this.lazyInputHour = this.inputHour
-          this.lazyInputMinute = this.inputMinute
-          this.useSeconds && (this.lazyInputSecond = this.inputSecond)
-          this.$emit('change', `${pad(this.inputHour)}:${pad(this.inputMinute)}` + (this.useSeconds ? `:${pad(this.inputSecond)}` : ''))
-        }
-      }
+      if (this.inputHour === this.lazyInputHour &&
+        this.inputMinute === this.lazyInputMinute &&
+        (!this.useSeconds || this.inputSecond === this.lazyInputSecond)
+      ) return
+
+      const value = this.genValue()
+      if (value === null) return
+
+      this.lazyInputHour = this.inputHour
+      this.lazyInputMinute = this.inputMinute
+      this.useSeconds && (this.lazyInputSecond = this.inputSecond)
+      this.$emit('change', value)
     },
     firstAllowed (type, value) {
       const allowedFn = type === 'hour' ? this.isAllowedHourCb : (type === 'minute' ? this.isAllowedMinuteCb : this.isAllowedSecondCb)
