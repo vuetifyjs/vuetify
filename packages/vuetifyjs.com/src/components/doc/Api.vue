@@ -1,13 +1,71 @@
 <template>
   <div>
     <doc-heading>Generic.Pages.api</doc-heading>
-    <v-card class="py-1">
-      <doc-parameters
-        :headers="headers[type]"
-        :items="component[type]"
-        :target="target"
-        :type="type"
-      />
+    <v-card>
+      <v-tabs
+        :slider-color="computedTabs.length ? 'primary' : 'transparent'"
+        v-model="tab"
+        color="grey lighten-3"
+      >
+        <v-tab
+          v-for="(tab, i) in computedTabs"
+          :key="`tab-${i}`"
+          :href="`#${tab}`"
+        >
+          {{ tab.replace(/([A-Z])/g, ' $1') }}
+        </v-tab>
+      </v-tabs>
+
+      <v-card-text>
+        <v-layout justify-space-between>
+          <v-flex
+            xs12
+            sm4
+          >
+            <v-select
+              :items="value"
+              v-model="current"
+              :disabled="value.length < 2"
+              hide-details
+              single-line
+              menu-props="auto"
+            />
+          </v-flex>
+
+          <v-flex xs12 sm4>
+            <v-text-field
+              v-model="search"
+              append-icon="search"
+              label="Search..."
+              single-line
+              hide-details
+            />
+          </v-flex>
+        </v-layout>
+      </v-card-text>
+
+      <v-tabs-items
+        v-model="tab"
+        touchless
+        class="white"
+      >
+        <v-tab-item
+          v-for="(tab, i) in computedTabs"
+          :key="`tab-item-${i}`"
+          :value="tab"
+          lazy
+        >
+          <v-card flat>
+            <doc-parameters
+              :headers="headers[tab]"
+              :items="component[tab]"
+              :search="search"
+              :target="tab"
+              :type="tab"
+            />
+          </v-card>
+        </v-tab-item>
+      </v-tabs-items>
     </v-card>
   </div>
 </template>
@@ -25,6 +83,7 @@
     },
 
     data: vm => ({
+      current: vm.value && vm.value.length ? vm.value[0] : null,
       headers: {
         api: [
           { value: 'name', align: 'left', size: 3 },
@@ -61,44 +120,43 @@
           { value: 'type', align: 'right' }
         ]
       },
-      // select first option if available
-      index: vm.value.length > 0 ? 0 : -1
+      search: null,
+      tab: null,
+      tabs: ['props', 'slots', 'scopedSlots', 'params', 'events', 'functions', 'functional', 'options']
     }),
 
     computed: {
       component () {
-        const component = api[this.target] || {}
+        const component = {}
+
+        for (const tab of this.tabs) {
+          component[tab] = []
+        }
 
         return {
-          api: [],
-          props: [],
-          slots: [],
-          scopedSlots: [],
-          params: [],
-          events: [],
-          functions: [],
-          functional: [],
-          options: [],
-          ...component
+          ...component,
+          ...(api[this.current] || {})
         }
       },
-      target () {
-        if (this.index < 0) return undefined
+      computedTabs () {
+        return this.tabs.filter(tab => (this.component[tab] || []).length > 0)
+      }
+    },
 
-        return this.value[this.index]
-      },
-      type () {
-        return [
-          'api',
-          'props',
-          'slots',
-          'scopedSlots',
-          'params',
-          'events',
-          'functions',
-          'functional',
-          'options'
-        ].find(type => this.component[type].length > 0)
+    watch: {
+      component () {
+        const api = this.component[this.tab]
+
+        if (api && api.length) return
+
+        for (const tab of ['props', 'slots', 'options']) {
+          if (this.component[tab] && this.component[tab].length > 0) {
+            this.tab = tab
+            return
+          }
+        }
+
+        this.tab = ''
       }
     }
   }
