@@ -533,6 +533,7 @@ export default {
     },
     onBlur (e) {
       this.$emit('blur', e)
+      this.blur()
     },
     onChipInput (item) {
       if (this.multiple) this.selectItem(item)
