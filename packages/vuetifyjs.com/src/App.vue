@@ -45,12 +45,12 @@
       this.getReleases()
 
       this.snackbar({
-        color: 'store',
+        color: 'default',
         close: true,
-        id: 'thanksgiving-sale',
-        text: 'Shop now',
-        msg: 'Holiday Store Sale',
-        to: '/store/',
+        id: 'cognito-module-release',
+        text: 'Go to Docs',
+        msg: '🎉 **NEW**: Vuetify Vuex Cognito Module',
+        href: 'https://cognito.vuetifyjs.com',
         timeout: 0
       })
     },
