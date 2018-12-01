@@ -62,24 +62,25 @@
       async genList () {
         const list = []
 
-        const items = document.querySelectorAll('#page [id]')
+        if (this.toc) {
+          const items = document.querySelectorAll('#page [id]')
 
-        for (const item of items) {
-          if (
-            // Not a top level heading
-            !['H1', 'H2'].includes(item.tagName) ||
-            // From previous list
-            this.list.find(l => l.item === item)
-          ) continue
+          for (const item of items) {
+            if (
+              // Not a top level heading
+              !['H1', 'H2'].includes(item.tagName) ||
+              // From previous list
+              this.list.find(l => l.item === item)
+            ) continue
 
-          list.push({
-            item,
-            text: item.innerText,
-            target: `#${item.id}`,
-            offsetTop: item.offsetTop
-          })
+            list.push({
+              item,
+              text: item.innerText,
+              target: `#${item.id}`,
+              offsetTop: item.offsetTop
+            })
+          }
         }
-
         this.list = list
       },
       findActiveIndex () {
