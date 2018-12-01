@@ -47,6 +47,9 @@ export default {
       inputHour: null,
       inputMinute: null,
       inputSecond: null,
+      lazyInputHour: null,
+      lazyInputMinute: null,
+      lazyInputSecond: null,
       period: 'am',
       selecting: selectingTimes.hour
     }
@@ -160,10 +163,7 @@ export default {
         this.inputHour = null
         this.inputMinute = null
         this.inputSecond = null
-        return
-      }
-
-      if (value instanceof Date) {
+      } else if (value instanceof Date) {
         this.inputHour = value.getHours()
         this.inputMinute = value.getMinutes()
         this.inputSecond = value.getSeconds()
@@ -175,7 +175,7 @@ export default {
         this.inputSecond = parseInt(second || 0, 10)
       }
 
-      this.period = this.inputHour < 12 ? 'am' : 'pm'
+      this.period = (this.inputHour == null || this.inputHour < 12) ? 'am' : 'pm'
     },
     convert24to12 (hour) {
       return hour ? ((hour - 1) % 12 + 1) : 12
@@ -194,11 +194,22 @@ export default {
       this.emitValue()
     },
     onChange () {
-      if (this.selecting === (this.useSeconds ? selectingTimes.second : selectingTimes.minute)) {
-        this.$emit('change', this.value)
-        // this.selecting = selectingTimes.hour
-      } else {
-        this.selecting++
+      if (this.selecting === selectingTimes.hour) {
+        this.selecting = selectingTimes.minute
+      } else if (this.useSeconds && this.selecting === selectingTimes.minute) {
+        this.selecting = selectingTimes.second
+      }
+
+      if (this.inputHour !== this.lazyInputHour ||
+        this.inputMinute !== this.lazyInputMinute ||
+        (this.useSeconds && this.inputSecond !== this.lazyInputSecond)
+      ) {
+        if (this.inputHour != null && this.inputMinute != null && (!this.useSeconds || this.inputSecond != null)) {
+          this.lazyInputHour = this.inputHour
+          this.lazyInputMinute = this.inputMinute
+          this.useSeconds && (this.lazyInputSecond = this.inputSecond)
+          this.$emit('change', `${pad(this.inputHour)}:${pad(this.inputMinute)}` + (this.useSeconds ? `:${pad(this.inputSecond)}` : ''))
+        }
       }
     },
     firstAllowed (type, value) {
