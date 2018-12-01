@@ -10,7 +10,7 @@ import mixins from '../util/mixins'
 // Types
 import { PropValidator } from 'vue/types/options'
 export type VuetifyRuleValidator = (value: any) => string | false
-export type VuetifyMessage = string | string[] | VuetifyRuleValidator
+export type VuetifyMessage = string | string[] | VuetifyRuleValidator[]
 export type VuetifyRuleValidations = (VuetifyRuleValidator | string)[]
 
 /* @vue/component */
@@ -34,12 +34,12 @@ export default mixins(
     messages: {
       type: [String, Array],
       default: () => []
-    } as PropValidator<VuetifyMessage>,
+    } as PropValidator<string | string[]>,
     readonly: Boolean,
     rules: {
       type: Array,
       default: () => []
-    } as PropValidator<VuetifyRuleValidator[]>,
+    } as PropValidator<VuetifyRuleValidations>,
     success: Boolean,
     successMessages: {
       type: [String, Array],
@@ -219,7 +219,7 @@ export default mixins(
       if (force) this.hasInput = this.hasFocused = true
 
       for (let index = 0; index < this.rules.length; index++) {
-        const rule = this.rules[index] as VuetifyRuleValidator | string
+        const rule = this.rules[index]
         const valid = typeof rule === 'function' ? rule(value) : rule
 
         if (typeof valid === 'string') {
