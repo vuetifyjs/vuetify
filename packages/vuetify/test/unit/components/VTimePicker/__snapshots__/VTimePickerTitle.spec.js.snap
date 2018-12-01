@@ -141,3 +141,61 @@ exports[`VTimePickerTitle.js should render component when selecting hour. with u
 </div>
 
 `;
+
+exports[`VTimePickerTitle.js should render disabled component 1`] = `
+
+<div class="v-time-picker-title">
+  <div class="v-time-picker-title__time">
+    <div class="v-picker__title__btn v-picker__title__btn--readonly">
+      2
+    </div>
+    <span>
+      :
+    </span>
+    <div class="v-picker__title__btn v-picker__title__btn--readonly">
+      13
+    </div>
+  </div>
+  <div class="v-time-picker-title__ampm">
+    <div class="v-picker__title__btn v-picker__title__btn--readonly">
+      am
+    </div>
+    <div class="v-picker__title__btn v-picker__title__btn--active v-picker__title__btn--readonly">
+      pm
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VTimePickerTitle.js should render disabled component. with useSeconds 1`] = `
+
+<div class="v-time-picker-title">
+  <div class="v-time-picker-title__time">
+    <div class="v-picker__title__btn v-picker__title__btn--readonly">
+      2
+    </div>
+    <span>
+      :
+    </span>
+    <div class="v-picker__title__btn v-picker__title__btn--readonly">
+      13
+    </div>
+    <span>
+      :
+    </span>
+    <div class="v-picker__title__btn v-picker__title__btn--readonly">
+      --
+    </div>
+  </div>
+  <div class="v-time-picker-title__ampm">
+    <div class="v-picker__title__btn v-picker__title__btn--readonly">
+      am
+    </div>
+    <div class="v-picker__title__btn v-picker__title__btn--active v-picker__title__btn--readonly">
+      pm
+    </div>
+  </div>
+</div>
+
+`;

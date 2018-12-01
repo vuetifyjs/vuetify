@@ -26,6 +26,7 @@ export default {
     allowedHours: Function,
     allowedMinutes: Function,
     allowedSeconds: Function,
+    disabled: Boolean,
     format: {
       type: String,
       default: 'ampm',
@@ -228,6 +229,7 @@ export default {
                 : this.isAllowedSecondCb),
           color: this.color,
           dark: this.dark,
+          disabled: this.disabled,
           double: this.selecting === selectingTimes.hour && !this.isAmPm,
           format: this.selecting === selectingTimes.hour ? (this.isAmPm ? this.convert24to12 : val => val) : val => pad(val, 2),
           light: this.light,
@@ -260,6 +262,7 @@ export default {
       return this.$createElement(VTimePickerTitle, {
         props: {
           ampm: this.isAmPm,
+          disabled: this.disabled,
           hour: this.inputHour,
           minute: this.inputMinute,
           second: this.inputSecond,

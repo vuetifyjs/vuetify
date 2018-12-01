@@ -40,6 +40,7 @@ export default {
       type: String,
       default: '$vuetify.icons.prev'
     },
+    readonly: Boolean,
     value: {
       type: [Number, String],
       required: true
@@ -129,7 +130,10 @@ export default {
   render () {
     return this.$createElement('div', {
       staticClass: 'v-date-picker-header',
-      class: this.themeClasses
+      class: {
+        'v-date-picker-header--disabled': this.disabled,
+        ...this.themeClasses
+      }
     }, [
       this.genBtn(-1),
       this.genHeader(),
