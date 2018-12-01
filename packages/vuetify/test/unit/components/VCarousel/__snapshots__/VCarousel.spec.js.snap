@@ -122,6 +122,7 @@ exports[`VCarousel.ts should render component with custom icon and match snapsho
   <div class="v-carousel__controls">
     <div class="v-item-group theme--dark">
       <button type="button"
+              value="0"
               class="v-btn v-btn--active v-btn--icon v-btn--small theme--dark v-carousel__controls__item"
       >
         <div class="v-btn__content">
@@ -134,6 +135,7 @@ exports[`VCarousel.ts should render component with custom icon and match snapsho
         </div>
       </button>
       <button type="button"
+              value="1"
               class="v-btn v-btn--icon v-btn--small theme--dark v-carousel__controls__item"
       >
         <div class="v-btn__content">
@@ -146,6 +148,7 @@ exports[`VCarousel.ts should render component with custom icon and match snapsho
         </div>
       </button>
       <button type="button"
+              value="2"
               class="v-btn v-btn--icon v-btn--small theme--dark v-carousel__controls__item"
       >
         <div class="v-btn__content">
@@ -358,6 +361,7 @@ exports[`VCarousel.ts should render component with selected active item 1`] = `
   <div class="v-carousel__controls">
     <div class="v-item-group theme--dark">
       <button type="button"
+              value="0"
               class="v-btn v-btn--icon v-btn--small theme--dark v-carousel__controls__item"
       >
         <div class="v-btn__content">
@@ -370,6 +374,7 @@ exports[`VCarousel.ts should render component with selected active item 1`] = `
         </div>
       </button>
       <button type="button"
+              value="1"
               class="v-btn v-btn--active v-btn--icon v-btn--small theme--dark v-carousel__controls__item"
       >
         <div class="v-btn__content">
@@ -382,6 +387,7 @@ exports[`VCarousel.ts should render component with selected active item 1`] = `
         </div>
       </button>
       <button type="button"
+              value="2"
               class="v-btn v-btn--icon v-btn--small theme--dark v-carousel__controls__item"
       >
         <div class="v-btn__content">

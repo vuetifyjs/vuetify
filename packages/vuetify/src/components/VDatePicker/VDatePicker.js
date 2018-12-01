@@ -297,7 +297,7 @@ export default {
         props: {
           date: this.value ? this.formatters.titleDate(this.value) : '',
           selectingYear: this.activePicker === 'YEAR',
-          year: this.formatters.year(`${this.inputYear}`),
+          year: this.formatters.year(this.value ? `${this.inputYear}` : this.tableDate),
           yearIcon: this.yearIcon,
           value: this.multiple ? this.value[0] : this.value
         },

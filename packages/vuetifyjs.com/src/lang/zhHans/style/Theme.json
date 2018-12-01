@@ -11,7 +11,7 @@
   "customizingText4": "在引擎盖下，Vuetify将会根据这些可以在DOM中访问的值生成CSS类。这些类将遵循与其他辅助器类相同的标记，例如`primary`或者`secondary--text`。",
   "customizingText5": "这些值会在**theme**属性下的**$vuetify**对象示例中可用。这可以让您动态地修改您的主题，Vuetify将在后台重新生成并更新您的主题类，无缝更新您的应用程序。",
   "stylusHeader": "修改Stylus的变量",
-  "stylusText1": "Vuetify建立在**stylus**的顶部，类似于**scss**，您可以更改变量并重新编译样式文件，可用变量的列表在[这里](https://github.com/vuetifyjs/vuetify/blob/master/src/stylus/settings/_variables.styl)。为了重新构建stylus文件，您需要配置您的应用程序以支持。如果您正在使用[快速入门](/getting-started/quick-start)指南，则可以跳过下一节。",
+  "stylusText1": "Vuetify建立在**stylus**的顶部，类似于**scss**，您可以更改变量并重新编译样式文件，可用变量的列表在[这里](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/stylus/settings/_variables.styl)。为了重新构建stylus文件，您需要配置您的应用程序以支持。如果您正在使用[快速入门](/getting-started/quick-start)指南，则可以跳过下一节。",
   "stylusHeader2": "安装stylus-loader到Webpack",
   "stylusText2": "在命令行执行：",
   "stylusText3": "这将安装导入和解析stylus文件所需的依赖包。安装完成后，打开您的webpack配置并且加入一个stylus的规则（rule）。对于基于**SSR**的应用程序，请确保导入操作是在您的`client-entry`中.",

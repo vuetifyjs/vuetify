@@ -185,7 +185,7 @@ test('VTimePickerClock.js', ({ mount }) => {
         min: 0,
         max: 7,
         value: 0,
-        size: 300,
+        size: 320,
         double: true
       }
     })
@@ -203,15 +203,28 @@ test('VTimePickerClock.js', ({ mount }) => {
       }
     }
 
+    wrapper.vm.$refs.innerClock.getBoundingClientRect = () => {
+      return {
+        width: 246,
+        height: 246,
+        top: 0,
+        left: 0,
+        right: 246,
+        bottom: 246,
+        x: 0,
+        y: 0
+      }
+    }
+
     const input = jest.fn()
     const finger = touch(wrapper).start(0, 0)
     wrapper.vm.$on('input', input)
 
     finger.move(300, 150)
     expect(input).toBeCalledWith(1)
-    finger.move(150, 300)
+    finger.move(150, 250)
     expect(input).toBeCalledWith(2)
-    finger.move(150, 200)
+    finger.move(150, 249)
     expect(input).toBeCalledWith(6)
 
     // edge case
