@@ -1,9 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import VueAnalytics from 'vue-analytics'
-import Routes from '@/data/routes.json'
 import scrollBehavior from './scroll-behavior'
-import Root from '@/components/views/Root'
 
 Vue.use(Router)
 
@@ -12,63 +10,55 @@ Vue.use(Router)
 // /^[a-z]{2,3}|[a-z]{2,3}-[a-zA-Z]{4}|[a-z]{2,3}-[A-Z]{2,3}$/
 const languageRegex = /^\/([a-z]{2,3}|[a-z]{2,3}-[a-zA-Z]{4}|[a-z]{2,3}-[A-Z]{2,3})(?:\/.*)?$/
 
-const release = process.env.RELEASE
-
 function getLanguageCookie () {
   if (typeof document === 'undefined') return
   return new Map(document.cookie.split('; ').map(c => c.split('='))).get('currentLanguage')
 }
 
-export function createRouter (store) {
-  function route (path, view, fullscreen, props, children) {
-    const hasChildren = Array.isArray(children)
-
-    return {
-      path,
-      meta: { fullscreen },
-      name: hasChildren ? undefined : view,
-      props,
-      component: () => import(`@/pages/${view}Page.vue`),
-      children: hasChildren
-        ? children.map(r => route(
-          r.route,
-          r.page,
-          r.fullscreen,
-          r.props,
-          r.children
-        ))
-        : []
-    }
-  }
-
-  const routes = Routes.map(r => route(
-    r.route,
-    r.page,
-    r.fullscreen,
-    r.props,
-    r.children
-  ))
-
-  routes.unshift({
-    path: '/',
-    name: 'home/Home',
-    meta: { fullscreen: true },
-    component: () => import(
-      /* webpackChunkName: "home" */
-      '@/pages/home/HomePage.vue'
-    )
-  })
-
+export function createRouter () {
   const router = new Router({
-    base: release ? `/releases/${release}` : __dirname,
-    mode: release ? 'hash' : 'history',
+    base: __dirname,
+    mode: 'history',
     scrollBehavior,
     routes: [
       {
         path: '/:lang([a-z]{2,3}|[a-z]{2,3}-[a-zA-Z]{4}|[a-z]{2,3}-[A-Z]{2,3})',
-        component: Root,
+        component: () => import(
+          /* webpackChunkName: "root" */
+          '@/views/Root.vue'
+        ),
         props: route => ({ lang: route.params.lang }),
-        children: routes
+        children: [
+          {
+            path: '/',
+            name: 'home/Home',
+            component: () => import(
+              /* webpackChunkName: "home" */
+              '@/pages/home/Page.vue'
+            )
+          },
+          {
+            path: 'examples/layouts/:page',
+            name: 'Layouts',
+            props: true,
+            component: () => import(
+              /* webpackChunkName: "layouts" */
+              '@/views/Layouts.vue'
+            )
+          },
+          {
+            path: ':namespace/:page',
+            name: 'Documentation',
+            props: route => ({
+              namespace: route.params.namespace,
+              page: route.params.page
+            }),
+            component: () => import(
+              /* webpackChunkName: "documentation" */
+              '@/pages/documentation/Page.vue'
+            )
+          }
+        ]
       },
       {
         path: '*',
@@ -79,13 +69,6 @@ export function createRouter (store) {
         }
       }
     ]
-  })
-
-  router.beforeEach((to, from, next) => {
-    if (to.meta.fullscreen || from.meta.fullscreen) {
-      store.commit('app/FULLSCREEN', !!to.meta.fullscreen)
-    }
-    next()
   })
 
   Vue.use(VueAnalytics, {

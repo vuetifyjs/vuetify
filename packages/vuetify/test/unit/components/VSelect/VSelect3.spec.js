@@ -11,29 +11,34 @@ test('VSelect', ({ mount, compileToFunctions }) => {
   it('should open the select when focused and enter, space, up or down are pressed', async () => {
     const wrapper = mount(VSelect)
 
+    wrapper.vm.hasMouseDown = true
     wrapper.trigger('mouseup')
 
     expect(wrapper.vm.isMenuActive).toBe(false)
 
     wrapper.setProps({ box: true })
+    wrapper.vm.hasMouseDown = true
     wrapper.first('.v-input__slot').trigger('mouseup')
 
     expect(wrapper.vm.isMenuActive).toBe(true)
 
     wrapper.setData({ isMenuActive: false })
     wrapper.setProps({ box: false, solo: true })
+    wrapper.vm.hasMouseDown = true
     wrapper.first('.v-input__slot').trigger('mouseup')
 
     expect(wrapper.vm.isMenuActive).toBe(true)
 
     wrapper.setData({ isMenuActive: false })
     wrapper.setProps({ solo: false, soloInverted: true })
+    wrapper.vm.hasMouseDown = true
     wrapper.first('.v-input__slot').trigger('mouseup')
 
     expect(wrapper.vm.isMenuActive).toBe(true)
 
     wrapper.setData({ isMenuActive: false })
     wrapper.setProps({ soloInverted: false, outline: true })
+    wrapper.vm.hasMouseDown = true
     wrapper.first('.v-input__slot').trigger('mouseup')
 
     expect(wrapper.vm.isMenuActive).toBe(true)

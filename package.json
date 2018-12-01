@@ -1,8 +1,6 @@
 {
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
+  "workspaces": [ "packages/*" ],
   "husky": {
     "hooks": {
       "prepare-commit-msg": "node scripts/prepare-commit-message.js",
@@ -15,6 +13,7 @@
     "start": "lerna run start --scope vuetifyjs.com --stream",
     "lint": "lerna run lint --parallel",
     "dev": "lerna run dev --scope vuetify --stream",
+    "docs-dev": "lerna run dev --scope vuetifyjs.com --stream",
     "version": "node scripts/confirm-npm-tag.js",
     "postversion": "node scripts/post-release-merge.js"
   },

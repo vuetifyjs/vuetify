@@ -3,8 +3,10 @@
 exports[`VSelectList should display falsy items 1`] = `
 
 <div class="v-select-list v-card theme--light">
-  <div class="v-list theme--light">
-    <div>
+  <div role="list"
+       class="v-list theme--light"
+  >
+    <div role="listitem">
       <a class="v-list__tile v-list__tile--link theme--light">
         <div class="v-list__tile__content">
           <div class="v-list__tile__title">
@@ -13,7 +15,7 @@ exports[`VSelectList should display falsy items 1`] = `
         </div>
       </a>
     </div>
-    <div>
+    <div role="listitem">
       <a class="v-list__tile v-list__tile--link theme--light">
         <div class="v-list__tile__content">
           <div class="v-list__tile__title">
@@ -22,7 +24,7 @@ exports[`VSelectList should display falsy items 1`] = `
         </div>
       </a>
     </div>
-    <div>
+    <div role="listitem">
       <a class="v-list__tile v-list__tile--link theme--light">
         <div class="v-list__tile__content">
           <div class="v-list__tile__title">
@@ -31,7 +33,7 @@ exports[`VSelectList should display falsy items 1`] = `
         </div>
       </a>
     </div>
-    <div>
+    <div role="listitem">
       <a class="v-list__tile v-list__tile--link theme--light">
         <div class="v-list__tile__content">
           <div class="v-list__tile__title">
@@ -40,7 +42,7 @@ exports[`VSelectList should display falsy items 1`] = `
         </div>
       </a>
     </div>
-    <div>
+    <div role="listitem">
       <a class="v-list__tile v-list__tile--link theme--light">
         <div class="v-list__tile__content">
           <div class="v-list__tile__title">
@@ -56,8 +58,10 @@ exports[`VSelectList should display falsy items 1`] = `
 exports[`VSelectList should display no-data-text when item slot is provided 1`] = `
 
 <div class="v-select-list v-card theme--light">
-  <div class="v-list theme--light">
-    <div>
+  <div role="list"
+       class="v-list theme--light"
+  >
+    <div role="listitem">
       <div class="v-list__tile theme--light">
         <div class="v-list__tile__content">
           <div class="v-list__tile__title">
@@ -74,12 +78,14 @@ exports[`VSelectList should display no-data-text when item slot is provided 1`] 
 exports[`VSelectList should generate children 1`] = `
 
 <div class="v-select-list v-card theme--light">
-  <div class="v-list theme--light">
+  <div role="list"
+       class="v-list theme--light"
+  >
     <div class="v-subheader theme--light">
       true
     </div>
     <hr class="v-divider theme--light">
-    <div>
+    <div role="listitem">
       <a class="v-list__tile v-list__tile--link theme--light">
         <div class="v-list__tile__content">
           <div class="v-list__tile__title">

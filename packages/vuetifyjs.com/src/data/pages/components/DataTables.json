@@ -1,0 +1,66 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "usage",
+          "value": "usage"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": [
+            "v-data-table",
+            "v-edit-dialog"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [
+            "noData",
+            "headers",
+            "headerCell",
+            "progress",
+            "footer",
+            "expand",
+            "pageText",
+            "select",
+            "search",
+            "customIcons",
+            "paginate",
+            "sort",
+            "server",
+            "headerless",
+            "editdialog",
+            "crud"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/data-iterator",
+            "components/paginations",
+            "components/lists"
+          ]
+        }
+      ]
+    }
+  ]
+}
