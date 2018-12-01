@@ -32,6 +32,6 @@
     }
   },
   "createYourOwnHeader": "创建您自己的",
-  "createYourOwnText1": "您可以用Vuetify的过渡辅助器函数来创建您自己的自定义的过渡效果，这个函数会返回一个可以导入到Vue的对象。使用Vue的<a href=\"https://vuejs.org/v2/guide/render-function.html#Functional-Components\" target=\"_blank\" rel=\"noopener\">函数式组件</a>配置将确保您的过渡效果尽可能高效。只需要导入函数：",
+  "createYourOwnText1": "您可以用Vuetify的过渡辅助器函数来创建您自己的自定义的过渡效果，这个函数会返回一个可以导入到Vue的对象。使用Vue的 [函数式组件](https://vuejs.org/v2/guide/render-function.html#Functional-Components) 配置将确保您的过渡效果尽可能高效。只需要导入函数：",
   "createYourOwnText2": "其中`createSimpleTransition`函数接受1个参数，即名称。这将是您可以与您的样式挂钩的名称。这是一个展示`v-fade-transition`的示例："
 }

@@ -1,11 +1,5 @@
 const sharedGridProps = [
   {
-    'name': 'id',
-    'type': 'String',
-    'default': 'undefined',
-    'source': null
-  },
-  {
     'name': 'tag',
     'type': 'String',
     'default': 'div',
@@ -106,25 +100,20 @@ const sharedGridProps = [
     'type': 'Boolean',
     'default': 'false',
     'source': null
-  },
-  {
-    'name': 'reverse',
-    'type': 'Boolean',
-    'default': 'false',
-    'source': null
-  },
-  {
-    'name': 'wrap',
-    'type': 'Boolean',
-    'default': 'false',
-    'source': null
   }
 ]
 
 const dataIterableProps = [
   {
     name: 'pagination',
-    sync: true
+    sync: true,
+    example: {
+      descending: 'boolean',
+      page: 'number',
+      rowsPerPage: 'number // -1 for All',
+      sortBy: 'string',
+      totalItems: 'number'
+    }
   },
   {
     name: 'filter',
@@ -256,6 +245,25 @@ module.exports = {
       {
         name: 'goTo',
         signature: '(target: string | number | HTMLElement | VueComponent, options?: object) => void'
+      }
+    ]
+  },
+  'internationalization': {
+    api: [
+      {
+        name: 'locales',
+        default: '{ en: VuetifyLocale }',
+        type: 'Record<string, VuetifyLocale>'
+      },
+      {
+        name: 'current',
+        default: 'en',
+        type: 'string'
+      },
+      {
+        name: 't',
+        default: '(key: string, ...params: Array<string | number>): string',
+        type: 'Function'
       }
     ]
   },
@@ -495,12 +503,12 @@ module.exports = {
   'v-divider': {
     props: [
       {
-        "name": "dark",
-        "source": 'themeable'
+        'name': 'dark',
+        'source': 'themeable'
       },
       {
-        "name": "light",
-        "source": 'themeable'
+        'name': 'light',
+        'source': 'themeable'
       }
     ]
   },
@@ -540,7 +548,7 @@ module.exports = {
         'source': null
       },
       {
-        'name': 'order-(size)(0-12)',
+        'name': 'order-(size)(1-12)',
         'type': 'Boolean',
         'default': 'false',
         'source': null
@@ -550,8 +558,44 @@ module.exports = {
         'type': 'Boolean',
         'default': 'false',
         'source': null
+      },
+      {
+        'name': 'alignSelfStart',
+        'type': 'Boolean',
+        'default': 'false',
+        'source': null
+      },
+      {
+        'name': 'alignSelfEnd',
+        'type': 'Boolean',
+        'default': 'false',
+        'source': null
+      },
+      {
+        'name': 'alignSelfCenter',
+        'type': 'Boolean',
+        'default': 'false',
+        'source': null
+      },
+      {
+        'name': 'alignSelfBaseline',
+        'type': 'Boolean',
+        'default': 'false',
+        'source': null
+      },
+      {
+        'name': 'grow',
+        'type': 'Boolean',
+        'default': 'false',
+        'source': null
+      },
+      {
+        'name': 'shrink',
+        'type': 'Boolean',
+        'default': 'false',
+        'source': null
       }
-    ].concat(sharedGridProps)
+    ]
   },
   'v-footer': {
     slots: ['default']
@@ -582,7 +626,7 @@ module.exports = {
         props: {
           hover: 'boolean'
         }
-      },
+      }
     ]
   },
   'v-icon': {
@@ -598,6 +642,18 @@ module.exports = {
       },
       {
         'name': 'column',
+        'type': 'Boolean',
+        'default': 'false',
+        'source': null
+      },
+      {
+        'name': 'reverse',
+        'type': 'Boolean',
+        'default': 'false',
+        'source': null
+      },
+      {
+        'name': 'wrap',
         'type': 'Boolean',
         'default': 'false',
         'source': null
@@ -683,6 +739,15 @@ module.exports = {
   'v-snackbar': {
     slots: ['default']
   },
+  'v-sparkline': {
+    props: [
+      {
+        name: 'type',
+        type: "'trend' | 'bar'",
+        default: "'trend'"
+      }
+    ]
+  },
   'v-select': VSelect,
   'v-slider': {
     events: [
@@ -723,6 +788,20 @@ module.exports = {
         value: 'array'
       }
     ].concat(validatableEvents)
+  },
+  'v-sheet': {
+    slots: ['default'],
+    props: [
+      {
+        name: 'tag',
+        type: 'String',
+        default: 'div'
+      },
+      {
+        name: 'tile',
+        type: 'Boolean'
+      }
+    ]
   },
   'v-speed-dial': {
     slots: ['activator', 'default']

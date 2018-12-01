@@ -18,12 +18,21 @@ export default {
       type: Function,
       default: null
     },
+    events: {
+      type: [Array, Function, Object],
+      default: () => null
+    },
+    eventColor: {
+      type: [Array, Function, Object, String],
+      default: () => 'warning'
+    },
     locale: {
       type: String,
       default: 'en-us'
     },
     min: String,
     max: String,
+    readonly: Boolean,
     scrollable: Boolean,
     tableDate: {
       type: String,
@@ -67,13 +76,15 @@ export default {
         ...this.themeClasses
       }
     },
-    genButtonEvents (value) {
-      const events = {
-        click: () => this.$emit('input', value)
+    genButtonEvents (value, isAllowed) {
+      const events = {}
+
+      if (!this.disabled && !this.readonly && isAllowed) {
+        events.click = () => this.$emit('input', value)
       }
 
-      if (this.$listeners.dblclick) {
-        events.dblclick = () => this.$listeners.dblclick(value)
+      if (!this.disabled) {
+        events.dblclick = () => this.$emit('dblclick:date', value)
       }
 
       return events
@@ -92,11 +103,52 @@ export default {
           type: 'button'
         },
         domProps: {
-          disabled: !isAllowed,
-          innerHTML: `<div class="v-btn__content">${this.formatter(value)}</div>`
+          disabled: this.disabled || !isAllowed
         },
-        on: (this.disabled || !isAllowed) ? undefined : this.genButtonEvents(value)
-      }))
+        on: this.genButtonEvents(value, isAllowed)
+      }), [
+        this.$createElement('div', {
+          staticClass: 'v-btn__content'
+        }, [this.formatter(value)]),
+        this.genEvents(value)
+      ])
+    },
+    /**
+     *
+     * @param {string} date
+     * @returns boolean|string|string[]
+     */
+    getEventData (date) {
+      if (Array.isArray(this.events)) {
+        return this.events.includes(date)
+      } else if (this.events instanceof Function) {
+        return this.events(date) || false
+      } else if (this.events) {
+        return this.events[date] || false
+      } else {
+        return false
+      }
+    },
+    genEvents (date) {
+      let eventColors = this.getEventData(date)
+
+      if (eventColors === true) {
+        if (typeof this.eventColor === 'string') {
+          eventColors = this.eventColor
+        } else if (typeof this.eventColor === 'function') {
+          eventColors = this.eventColor(date)
+        } else if (Array.isArray(this.eventColor)) {
+          eventColors = this.eventColor
+        } else {
+          eventColors = this.eventColor[date]
+        }
+      }
+      if (!Array.isArray(eventColors)) eventColors = [eventColors]
+      eventColors = eventColors.filter(v => v)
+
+      return eventColors.length ? this.$createElement('div', {
+        staticClass: 'v-date-picker-table__events'
+      }, eventColors.map(color => this.$createElement('div', this.setBackgroundColor(color || this.color)))) : null
     },
     wheel (e) {
       e.preventDefault()
@@ -120,8 +172,11 @@ export default {
 
       return this.$createElement('div', {
         staticClass,
-        class: this.themeClasses,
-        on: this.scrollable ? { wheel: this.wheel } : undefined,
+        class: {
+          'v-date-picker-table--disabled': this.disabled,
+          ...this.themeClasses
+        },
+        on: (!this.disabled && this.scrollable) ? { wheel: this.wheel } : undefined,
         directives: [touchDirective]
       }, [transition])
     }

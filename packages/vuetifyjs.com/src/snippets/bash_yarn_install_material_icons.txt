@@ -1,0 +1,3 @@
+$ yarn add material-design-icons-iconfont -D
+// OR
+$ npm install material-design-icons-iconfont -D

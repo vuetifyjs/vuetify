@@ -1,0 +1,55 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "usage",
+          "value": "usage"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": ["v-navigation-drawer"]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [
+            "permanentClipped",
+            "permanentFloating",
+            "persistent",
+            "mini",
+            "temporary",
+            "dark",
+            "combined",
+            "nested"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/lists",
+            "components/icons",
+            "layout/pre-defined"
+          ]
+        }
+      ]
+    }
+  ]
+}

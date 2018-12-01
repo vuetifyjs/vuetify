@@ -1,0 +1,51 @@
+{
+  "props": {
+    "validatable": {
+      "success": "1.1",
+      "success-messages": "1.1"
+    },
+    "v-autocomplete": {
+      "no-filter": "1.1"
+    },
+    "v-breadcrumbs": {
+      "items": "1.2"
+    },
+    "v-combobox": {
+      "delimiters": "1.1"
+    },
+    "v-date-picker": {
+      "multiple": "1.2"
+    },
+    "v-dialog": {
+      "no-click-animation": "1.1"
+    },
+    "v-divider": {
+      "vertical": "1.1"
+    },
+    "v-rating": {
+      "usage": "1.2",
+      "incremented": "1.2",
+      "slots": "1.2",
+      "card": "1.2",
+      "advanced": "1.2"
+    },
+    "v-text-field": {
+      "append-outer-icon": "1.1",
+      "append-outer-icon-cb": "1.1",
+      "prepend-inner-icon": "1.1",
+      "prepend-inner-icon-cb": "1.1",
+      "reverse": "1.1"
+    },
+    "v-select": {
+      "small-chips": "1.1",
+      "menu-props": "1.2"
+    },
+    "v-slider": {
+      "always-dirty": "1.1",
+      "inverse-label": "1.1",
+      "thumb-size": "1.1",
+      "tick-labels": "1.1",
+      "tick-size": "1.1"
+    }
+  }
+}

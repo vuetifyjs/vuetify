@@ -15,6 +15,7 @@ export default {
   ],
 
   props: {
+    disabled: Boolean,
     error: Boolean,
     errorCount: {
       type: [Number, String],
@@ -28,6 +29,7 @@ export default {
       type: [String, Array],
       default: () => []
     },
+    readonly: Boolean,
     rules: {
       type: Array,
       default: () => []
@@ -45,6 +47,7 @@ export default {
     hasColor: false,
     hasFocused: false,
     hasInput: false,
+    isFocused: false,
     isResetting: false,
     valid: false
   }),
@@ -126,7 +129,13 @@ export default {
       this.validateOnBlur || this.$nextTick(this.validate)
     },
     isFocused (val) {
-      if (!val) {
+      // Should not check validation
+      // if disabled or readonly
+      if (
+        !val &&
+        !this.disabled &&
+        !this.readonly
+      ) {
         this.hasFocused = true
         this.validateOnBlur && this.validate()
       }

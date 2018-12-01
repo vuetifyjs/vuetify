@@ -13,7 +13,7 @@
       <td class="text-xs-right">{{ props.item.iron }}</td>
     </template>
     <template slot="footer">
-      <td colspan="100%">
+      <td :colspan="headers.length">
         <strong>This is an extra footer</strong>
       </td>
     </template>

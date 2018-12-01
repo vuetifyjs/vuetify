@@ -122,6 +122,9 @@ export default mixins<options>(
       if (this.isIndeterminate) return this.indeterminateIcon
       else if (this.isSelected) return this.onIcon
       else return this.offIcon
+    },
+    hasChildren (): boolean {
+      return !!this.children && (!!this.children.length || !!this.loadChildren)
     }
   },
 
@@ -135,7 +138,7 @@ export default mixins<options>(
 
   methods: {
     checkChildren (): Promise<void> {
-      return new Promise(resolve => {
+      return new Promise<void>(resolve => {
         // TODO: Potential issue with always trying
         // to load children if response is empty?
         if (!this.children || this.children.length || !this.loadChildren || this.hasLoaded) return resolve()
@@ -218,7 +221,7 @@ export default mixins<options>(
       const children = [this.genContent()]
 
       if (this.selectable) children.unshift(this.genCheckbox())
-      if (this.children) children.unshift(this.genToggle())
+      if (this.hasChildren) children.unshift(this.genToggle())
 
       return this.$createElement('div', {
         staticClass: 'v-treeview-node__root',
@@ -283,7 +286,7 @@ export default mixins<options>(
       staticClass: 'v-treeview-node',
       class: {
         [this.activeClass]: this.isActive,
-        'v-treeview-node--leaf': !this.children,
+        'v-treeview-node--leaf': !this.hasChildren,
         'v-treeview-node--click': this.openOnClick,
         'v-treeview-node--selected': this.isSelected
       }

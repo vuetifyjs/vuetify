@@ -82,7 +82,7 @@ export default mixins(Colorable).extend({
         return 100
       }
 
-      return parseInt(this.bufferValue, 10)
+      return parseFloat(this.bufferValue)
     },
 
     normalizedValue (): number {
@@ -94,7 +94,7 @@ export default mixins(Colorable).extend({
         return 100
       }
 
-      return parseInt(this.value, 10)
+      return parseFloat(this.value)
     },
 
     styles (): object {
@@ -104,7 +104,7 @@ export default mixins(Colorable).extend({
         styles.height = 0
       }
 
-      if (!this.indeterminate && parseInt(this.normalizedBufer, 10) !== 100) {
+      if (!this.indeterminate && parseFloat(this.normalizedBufer) !== 100) {
         styles.width = `${this.normalizedBufer}%`
       }
 

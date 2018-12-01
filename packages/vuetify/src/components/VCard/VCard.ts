@@ -2,7 +2,7 @@
 import '../../stylus/components/_cards.styl'
 
 // Extensions
-import VPaper from '../VPaper'
+import VSheet from '../VSheet'
 
 // Mixins
 import Routable from '../../mixins/routable'
@@ -16,7 +16,7 @@ import { VNode } from 'vue'
 /* @vue/component */
 export default mixins(
   Routable,
-  VPaper
+  VSheet
 ).extend({
   name: 'v-card',
 
@@ -36,18 +36,18 @@ export default mixins(
       return {
         'v-card': true,
         'v-card--hover': this.hover,
-        ...VPaper.options.computed.classes.call(this)
+        ...VSheet.options.computed.classes.call(this)
       }
     },
     computedElevation (): number | string {
       if (this.flat) return 0
       if (this.raised) return 3
 
-      return (VPaper.options.computed as any).computedElevation.call(this)
+      return (VSheet.options.computed as any).computedElevation.call(this)
     },
     styles (): object {
       const style = {
-        ...VPaper.options.computed.styles.call(this)
+        ...VSheet.options.computed.styles.call(this)
       }
 
       if (this.img) {

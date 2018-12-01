@@ -1,0 +1,1 @@
+this.$vuetify.theme.primary = '#4caf50'
