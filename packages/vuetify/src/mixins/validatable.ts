@@ -10,9 +10,9 @@ import mixins from '../util/mixins'
 import { PropValidator } from 'vue/types/options'
 
 // Types
-export type VuetifyFormValidator = (value: any) => string | false
-export type VuetifyFormMessage = string | string[] | VuetifyFormValidator
-export type VuetifyFormValidations = (VuetifyFormValidator | string)[]
+export type VuetifyRuleValidator = (value: any) => string | false
+export type VuetifyMessage = string | string[] | VuetifyRuleValidator
+export type VuetifyRuleValidations = (VuetifyRuleValidator | string)[]
 
 /* @vue/component */
 export default mixins(
@@ -31,21 +31,21 @@ export default mixins(
     errorMessages: {
       type: [String, Array],
       default: () => []
-    } as PropValidator<VuetifyFormMessage>,
+    } as PropValidator<VuetifyMessage>,
     messages: {
       type: [String, Array],
       default: () => []
-    } as PropValidator<VuetifyFormMessage>,
+    } as PropValidator<VuetifyMessage>,
     readonly: Boolean,
     rules: {
       type: Array,
       default: () => []
-    } as PropValidator<VuetifyFormValidator[]>,
+    } as PropValidator<VuetifyRuleValidator[]>,
     success: Boolean,
     successMessages: {
       type: [String, Array],
       default: () => []
-    } as PropValidator<VuetifyFormMessage>,
+    } as PropValidator<VuetifyMessage>,
     validateOnBlur: Boolean,
     value: { required: false }
   },
@@ -91,13 +91,13 @@ export default mixins(
         (this.shouldValidate && this.hasError)
       )
     },
-    internalErrorMessages (): VuetifyFormValidations {
+    internalErrorMessages (): VuetifyRuleValidations {
       return this.genInternalMessages(this.errorMessages)
     },
-    internalMessages (): VuetifyFormValidations {
+    internalMessages (): VuetifyRuleValidations {
       return this.genInternalMessages(this.messages)
     },
-    internalSuccessMessages (): VuetifyFormValidations {
+    internalSuccessMessages (): VuetifyRuleValidations {
       return this.genInternalMessages(this.successMessages)
     },
     internalValue: {
@@ -118,7 +118,7 @@ export default mixins(
         ? this.hasFocused && !this.isFocused
         : (this.hasInput || this.hasFocused)
     },
-    validations (): VuetifyFormValidations {
+    validations (): VuetifyRuleValidations {
       return this.validationTarget.slice(0, Number(this.errorCount))
     },
     validationState (): string | null {
@@ -127,7 +127,7 @@ export default mixins(
       if (this.hasColor) return this.color
       return null
     },
-    validationTarget (): VuetifyFormValidations {
+    validationTarget (): VuetifyRuleValidations {
       if (this.errorMessages.length > 0) {
         return this.internalErrorMessages
       } else if (this.successMessages.length > 0) {
@@ -196,7 +196,7 @@ export default mixins(
   },
 
   methods: {
-    genInternalMessages (messages: VuetifyFormMessage): VuetifyFormValidations {
+    genInternalMessages (messages: VuetifyMessage): VuetifyRuleValidations {
       if (Array.isArray(messages)) return messages
 
       return [messages]
@@ -220,7 +220,7 @@ export default mixins(
       if (force) this.hasInput = this.hasFocused = true
 
       for (let index = 0; index < this.rules.length; index++) {
-        const rule = this.rules[index] as VuetifyFormValidator | string
+        const rule = this.rules[index] as VuetifyRuleValidator | string
         const valid = typeof rule === 'function' ? rule(value) : rule
 
         if (typeof valid === 'string') {
