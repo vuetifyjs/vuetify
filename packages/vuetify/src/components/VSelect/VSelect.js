@@ -532,8 +532,8 @@ export default {
       return getPropertyFromItem(item, this.itemValue, this.getText(item))
     },
     onBlur (e) {
-      this.$emit('blur', e)
       this.blur()
+      this.$emit('blur', e)
     },
     onChipInput (item) {
       if (this.multiple) this.selectItem(item)
@@ -557,7 +557,7 @@ export default {
       }
     },
     onEnterDown () {
-      this.onBlur()
+      this.$emit('blur', undefined)
     },
     onEscDown (e) {
       e.preventDefault()
