@@ -5,7 +5,15 @@
       dense
       flat
     >
+      <v-chip v-if="newIn" color="warning" small>
+        <v-avatar>
+          <v-icon>mdi-star</v-icon>
+        </v-avatar>
+        <span>New in <strong>{{ newIn }}</strong></span>
+      </v-chip>
+
       <v-spacer />
+
       <v-btn
         icon
         @click="dark = !dark"
@@ -126,6 +134,9 @@
       },
       file () {
         return `${this.kebabCase(this.page)}/${this.internalValue.file}`
+      },
+      newIn () {
+        return this.internalValue.newIn
       }
     },
 
