@@ -394,13 +394,7 @@
        <priority>0.8000</priority>
   </url>
   <url>
-       <loc>https://vuetifyjs.com/en/guides/server-side-rendering</loc>
-       <lastmod>2018-02-19T14:46:47+00:00</lastmod>
-       <changefreq>daily</changefreq>
-       <priority>0.8000</priority>
-  </url>
-  <url>
-       <loc>https://vuetifyjs.com/en/guides/a-la-carte</loc>
+       <loc>https://vuetifyjs.com/en/framework/a-la-carte</loc>
        <lastmod>2018-02-19T14:46:47+00:00</lastmod>
        <changefreq>daily</changefreq>
        <priority>0.8000</priority>
