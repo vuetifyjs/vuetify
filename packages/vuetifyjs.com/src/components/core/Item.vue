@@ -1,6 +1,7 @@
 <template>
   <v-list-tile
     :to="path"
+    class="v-list__tile--doc"
     ripple
   >
     <v-list-tile-avatar
@@ -31,6 +32,12 @@
         <doc-markdown v-else>{{ subtext }}</doc-markdown>
       </v-list-tile-sub-title>
     </v-list-tile-content>
+    <v-chip
+      v-if="chip"
+      :color="chipColor"
+      class="v-chip--x-small"
+      dark
+    >{{ chip }}</v-chip>
     <slot />
   </v-list-tile>
 </template>
@@ -58,6 +65,10 @@
         type: [Boolean, String],
         default: false
       },
+      chip: {
+        type: Boolean,
+        default: false
+      },
       noMarkdown: {
         type: Boolean,
         default: false
@@ -73,6 +84,11 @@
     },
 
     computed: {
+      chipColor () {
+        if (this.chip === 'new') return 'primary'
+        if (this.chip === 'updated') return 'red lighten-3'
+        if (this.chip === 'new') return 'black'
+      },
       path () {
         if (!this.to) return this.to
 
@@ -85,3 +101,17 @@
     }
   }
 </script>
+
+<style lang="stylus">
+.v-list__tile--doc {
+  .v-chip--x-small {
+    font-size: 10px;
+    height: 16px;
+
+    .v-chip__content {
+      line-height: 1;
+      padding: 8px;
+    }
+  }
+}
+</style>
