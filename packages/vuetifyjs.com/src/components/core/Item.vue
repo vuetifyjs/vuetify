@@ -87,7 +87,7 @@
       chipColor () {
         if (this.chip === 'new') return 'primary'
         if (this.chip === 'updated') return 'red lighten-3'
-        if (this.chip === 'new') return 'black'
+        if (this.chip === 'deprecated') return 'black'
       },
       path () {
         if (!this.to) return this.to
