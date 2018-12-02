@@ -103,6 +103,7 @@ export default Vue.extend({
         }
       }, [
         this.$createElement('table', [
+          this.$slots.caption,
           this.$slots.header,
           this.genBody()
         ])

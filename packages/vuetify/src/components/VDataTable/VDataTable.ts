@@ -44,7 +44,8 @@ export default VDataIterator.extend({
     },
     height: [Number, String],
     hideDefaultFooter: Boolean,
-    hideDefaultHeader: Boolean
+    hideDefaultHeader: Boolean,
+    caption: String
   },
 
   data () {
@@ -95,6 +96,11 @@ export default VDataIterator.extend({
       props.headers = this.computedHeaders
 
       return props
+    },
+    genCaption (props: DataProps) {
+      if (this.caption) return this.$createElement('caption', [this.caption])
+
+      return this.genSlots('caption', props)
     },
     genColgroup (props: DataProps) {
       return this.$createElement('colgroup', this.computedHeaders.map(header => {
@@ -348,6 +354,7 @@ export default VDataIterator.extend({
         }
       }, [
         this.$createElement('table', [
+          this.genCaption(props),
           this.genColgroup(props),
           this.genHeaders(props),
           this.genBody(props)
@@ -378,6 +385,7 @@ export default VDataIterator.extend({
             items: ({ start, stop }) => this.genItems(props.items.slice(start, stop), props)
           }
         }, [
+          this.$createElement('template', { slot: 'caption' }, this.genCaption(props)),
           this.$createElement('template', { slot: 'header' }, this.genHeaders(props)),
           this.$createElement('template', { slot: 'footer' }, this.genFooters(props))
         ])
