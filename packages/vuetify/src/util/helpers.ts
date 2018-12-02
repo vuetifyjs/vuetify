@@ -414,3 +414,12 @@ export function searchItems (items: any[], search: string) {
       val.toString().toLowerCase().indexOf(search) !== -1
   }))
 }
+
+export function getTextAlignment (align: string | undefined, rtl: boolean): string {
+  align = align || 'start'
+
+  if (align === 'start') align = rtl ? 'right' : 'left'
+  else if (align === 'end') align = rtl ? 'left' : 'right'
+
+  return `text-xs-${align}`
+}

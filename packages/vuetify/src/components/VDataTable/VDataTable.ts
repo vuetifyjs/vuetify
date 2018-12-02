@@ -307,7 +307,8 @@ export default VDataIterator.extend({
         props: {
           headers: this.computedHeaders,
           item,
-          mobile: this.isMobile
+          mobile: this.isMobile,
+          rtl: this.$vuetify.rtl
         },
         scopedSlots
       })

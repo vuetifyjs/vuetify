@@ -4,7 +4,7 @@ import { PropValidator } from 'vue/types/options'
 import { TableHeader } from './mixins/header'
 
 // Utils
-import { getObjectValueByPath } from '../../util/helpers'
+import { getObjectValueByPath, getTextAlignment } from '../../util/helpers'
 
 export default Vue.extend({
   name: 'v-row',
@@ -14,7 +14,8 @@ export default Vue.extend({
   props: {
     headers: Array as PropValidator<TableHeader[]>,
     item: Object,
-    mobile: Boolean
+    mobile: Boolean,
+    rtl: Boolean
   },
 
   render (h, { props, slots, data }): VNode {
@@ -22,7 +23,7 @@ export default Vue.extend({
 
     const columns = props.headers.map(header => {
       const classes = {
-        [`text-xs-${header.align || 'left'}`]: true
+        [getTextAlignment(header.align, props.rtl)]: true
       }
 
       const children = []
