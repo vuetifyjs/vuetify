@@ -12,7 +12,7 @@ export default {
     setDrawer: set('drawer'),
     setToc: set('toc'),
     setReleases: set('releases'),
-    toggleDrawr: toggle('drawer')
+    toggleDrawer: toggle('drawer')
   },
 
   state: {
