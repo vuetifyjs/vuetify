@@ -134,10 +134,11 @@ export default VDataIterator.extend({
       const children: VNodeChildrenArrayContents = [this.genSlots('header', this.createSlotProps(props))]
 
       if (!this.hideDefaultHeader) {
-        children.push(this.$createElement(this.isMobile ? VDataTableHeaderMobile : VDataTableHeader, {
+        children.push(this.$createElement(VDataTableHeader, {
           props: {
             headers: this.computedHeaders,
-            options: props.options
+            options: props.options,
+            mobile: this.isMobile
           },
           on: {
             'sort': props.sort,
