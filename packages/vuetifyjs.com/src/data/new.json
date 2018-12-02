@@ -13,8 +13,14 @@
     "v-combobox": {
       "delimiters": "1.1"
     },
+    "v-data-table": {
+      "header-key": "1.2"
+    },
     "v-date-picker": {
-      "multiple": "1.2"
+      "disabled": "1.4",
+      "multiple": "1.2",
+      "show-week": "1.4",
+      "weekday-format": "1.3"
     },
     "v-dialog": {
       "no-click-animation": "1.1"
@@ -22,12 +28,23 @@
     "v-divider": {
       "vertical": "1.1"
     },
+    "v-img": {
+      "gradient": "1.2"
+    },
+    "v-list-tile": {
+      "dark": "1.2",
+      "light": "1.2"
+    },
     "v-text-field": {
       "append-outer-icon": "1.1",
       "append-outer-icon-cb": "1.1",
       "prepend-inner-icon": "1.1",
       "prepend-inner-icon-cb": "1.1",
       "reverse": "1.1"
+    },
+    "v-time-picker": {
+      "disabled": "1.4",
+      "readonly": "1.2"
     },
     "v-select": {
       "small-chips": "1.1",

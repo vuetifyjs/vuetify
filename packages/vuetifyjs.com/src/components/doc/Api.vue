@@ -60,7 +60,7 @@
               :headers="headers[tab]"
               :items="component[tab]"
               :search="search"
-              :target="tab"
+              :target="current"
               :type="tab"
             />
           </v-card>
