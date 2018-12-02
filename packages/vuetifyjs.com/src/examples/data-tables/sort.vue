@@ -17,8 +17,8 @@
       </template>
     </v-data-table>
     <div class="text-xs-center pt-2">
-      <v-btn color="primary" @click.native="toggleOrder">Toggle sort order</v-btn>
-      <v-btn color="primary" @click.native="nextSort">Sort next column</v-btn>
+      <v-btn color="primary" @click="toggleOrder">Toggle sort order</v-btn>
+      <v-btn color="primary" @click="nextSort">Sort next column</v-btn>
     </div>
   </div>
 </template>

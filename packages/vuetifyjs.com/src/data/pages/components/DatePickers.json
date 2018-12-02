@@ -1,0 +1,71 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "usage",
+          "value": "usage"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": [ "v-date-picker" ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [
+            "dateColorable",
+            "dateDialogAndMenu",
+            "dateFormatting",
+            "dateFormattingMomentDatefns",
+            "dateAllowedDates",
+            "dateMultiple",
+            "dateWidth",
+            "dateBirthday",
+            "datePickerDate",
+            "dateEvents",
+            "dateInternationalization",
+            "dateIcons",
+            "dateReadonly",
+            "dateCurrent",
+            "monthLight",
+            "monthColorable",
+            "monthDialogAndMenu",
+            "monthAllowedMonths",
+            "monthMultiple",
+            "monthWidth",
+            "monthInternationalization",
+            "monthIcons",
+            "monthReadonly",
+            "monthCurrent"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/buttons",
+            "components/text-fields",
+            "components/time-pickers"
+          ]
+        }
+      ]
+    }
+  ]
+}

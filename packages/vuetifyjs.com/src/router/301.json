@@ -21,5 +21,6 @@
   "/vuetify/roadmap": "/getting-started/roadmap",
   "/vuetify/a-la-carte": "/guides/a-la-carte",
   "/getting-started/a-la-carte": "/guides/a-la-carte",
+  "/guides/a-la-carte": "/framework/a-la-carte",
   "/pre-made-themes": "/layout/pre-made-themes"
 }

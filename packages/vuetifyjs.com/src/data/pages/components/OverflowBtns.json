@@ -1,0 +1,28 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": ["v-overflow-btn"]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/forms",
+            "components/selection-controls",
+            "components/selects"
+          ]
+        }
+      ]
+    }
+  ]
+}

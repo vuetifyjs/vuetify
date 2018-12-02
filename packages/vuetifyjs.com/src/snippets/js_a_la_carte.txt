@@ -1,0 +1,25 @@
+// src/main.js
+
+import Vue from 'vue'
+import App from './App.vue'
+import Vuetify, {
+  VApp, // required
+  VNavigationDrawer,
+  VFooter,
+  VToolbar,
+  transitions
+} from 'vuetify/lib'
+import { Ripple } from 'vuetify/lib/directives'
+
+Vue.use(Vuetify, {
+  components: {
+    VApp,
+    VNavigationDrawer,
+    VFooter,
+    VToolbar,
+    transitions
+  },
+  directives: {
+    Ripple
+  }
+})

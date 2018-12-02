@@ -13,6 +13,28 @@ test('VDatePickerHeader.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should render disabled component and match snapshot', () => {
+    const wrapper = mount(VDatePickerHeader, {
+      propsData: {
+        value: '2005-11',
+        disabled: true
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render readonly component and match snapshot', () => {
+    const wrapper = mount(VDatePickerHeader, {
+      propsData: {
+        value: '2005-11',
+        readonly: true
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it('should render component in RTL mode and match snapshot', async () => {
     const wrapper = mount(VDatePickerHeader, {
       propsData: {

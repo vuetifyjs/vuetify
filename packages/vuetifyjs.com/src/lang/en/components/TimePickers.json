@@ -1,29 +1,28 @@
 {
-  "header": "Time picker",
+  "header": "# Time picker",
   "headerText": "The `v-time-picker` is stand-alone component that can be utilized in many existing Vuetify components. It offers the user a visual representation for selecting the time.",
   "examples": {
-    "timeLight": {
-      "header": "Time pickers",
+    "usage": {
       "desc": "Time pickers have the light theme enabled by default."
     },
     "timeColorable": {
-      "header": "Time pickers - Colors",
+      "header": "### Time pickers - Colors",
       "desc": "Time picker colors can be set using the `color` and `header-color` props. If `header-color` prop is not provided  header will use the `color` prop value."
     },
     "timeDialogAndMenu": {
-      "header": "Time pickers - In dialog and menu",
+      "header": "### Time pickers - In dialog and menu",
       "desc": "Due to the flexibility of pickers, you can really dial in the experience exactly how you want it."
     },
     "time24hFormat": {
-      "header": "Time pickers - 24h format",
+      "header": "### Time pickers - 24h format",
       "desc": "A time picker can be switched to 24hr format. Note that the `format` prop defines only the way the picker is displayed, picker's value (model) is always in 24hr format."
     },
     "timeAllowedTimes": {
-      "header": "Time pickers - Allowed times",
+      "header": "### Time pickers - Allowed times",
       "desc": "You can specify allowed times using arrays, objects, and functions. You can also specify time step/precision/interval - e.g. 10 minutes."
     },
     "timeWidth": {
-      "header": "Time pickers - Setting picker width",
+      "header": "### Time pickers - Setting picker width",
       "desc": "You can specify allowed the picker's width or make it full width."
     }
   },

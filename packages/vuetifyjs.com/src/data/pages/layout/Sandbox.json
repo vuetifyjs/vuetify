@@ -1,0 +1,9 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "layout-sandbox"
+    }
+  ]
+}

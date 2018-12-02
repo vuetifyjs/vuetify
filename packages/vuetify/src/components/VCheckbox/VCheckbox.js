@@ -71,7 +71,7 @@ export default {
             ? 'mixed'
             : this.isActive.toString()
         }),
-        !this.disabled && this.genRipple(this.setTextColor(this.computedColor)),
+        this.genRipple(this.setTextColor(this.computedColor)),
         this.$createElement(VIcon, this.setTextColor(this.computedColor, {
           props: {
             dark: this.dark,

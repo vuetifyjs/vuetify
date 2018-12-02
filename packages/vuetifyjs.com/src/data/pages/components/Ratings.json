@@ -1,0 +1,74 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "usage",
+          "value": {
+            "file": "usage",
+            "newIn": "1.2"
+          }
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": ["v-rating"]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [
+            {
+              "file": "sizes",
+              "newIn": "1.2"
+            },
+            {
+              "file": "length",
+              "newIn": "1.2"
+            },
+            {
+              "file": "increments",
+              "newIn": "1.2"
+            },
+            {
+              "file": "slots",
+              "newIn": "1.2"
+            },
+            {
+              "file": "card",
+              "newIn": "1.2"
+            },
+            {
+              "file": "advanced",
+              "newIn": "1.2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/cards",
+            "components/icons",
+            "components/lists"
+          ]
+        }
+      ]
+    }
+  ]
+}

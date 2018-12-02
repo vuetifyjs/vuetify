@@ -448,10 +448,16 @@ export default {
           if (onlyBools) {
             replacement = Object.keys(replacement).join(', ')
           } else {
-            replacement = JSON.stringify(replacement, null, multiple ? 2 : 0).replace(/"([^(")"]+)":/g, '$1:').replace(/"/g, '\'')
+            replacement = JSON.stringify(replacement, null, multiple ? 2 : 0)
+              .replace(/"([^(")"]+)":/g, '$1:')
+              .replace(/"/g, '\'')
           }
 
-          consoleWarn(`${props} ${multiple ? 'are' : 'is'} deprecated, use ${separator}:menu-props="${replacement}"${separator} instead`, this)
+          consoleWarn(
+            `${props} ${multiple ? 'are' : 'is'} deprecated, use ` +
+            `${separator}${onlyBools ? '' : ':'}menu-props="${replacement}"${separator} instead`,
+            this
+          )
         }
       }
 
@@ -581,21 +587,23 @@ export default {
       if (keyCode === keyCodes.tab) return this.onTabDown(e)
     },
     onMouseUp (e) {
-      const appendInner = this.$refs['append-inner']
+      if (this.hasMouseDown) {
+        const appendInner = this.$refs['append-inner']
 
-      // If append inner is present
-      // and the target is itself
-      // or inside, toggle menu
-      if (this.isMenuActive &&
-        appendInner &&
-        (appendInner === e.target ||
-        appendInner.contains(e.target))
-      ) {
-        this.$nextTick(() => (this.isMenuActive = !this.isMenuActive))
-      // If user is clicking in the container
-      // and field is enclosed, activate it
-      } else if (this.isEnclosed && !this.isDisabled) {
-        this.isMenuActive = true
+        // If append inner is present
+        // and the target is itself
+        // or inside, toggle menu
+        if (this.isMenuActive &&
+          appendInner &&
+          (appendInner === e.target ||
+          appendInner.contains(e.target))
+        ) {
+          this.$nextTick(() => (this.isMenuActive = !this.isMenuActive))
+        // If user is clicking in the container
+        // and field is enclosed, activate it
+        } else if (this.isEnclosed && !this.isDisabled) {
+          this.isMenuActive = true
+        }
       }
 
       VTextField.methods.onMouseUp.call(this, e)

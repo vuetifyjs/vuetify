@@ -120,7 +120,7 @@ export default {
           value: this.value,
           ...this.$attrs
         }),
-        !this.isDisabled && this.genRipple(this.setTextColor(this.computedColor)),
+        this.genRipple(this.setTextColor(this.computedColor)),
         this.$createElement(VIcon, this.setTextColor(this.computedColor, {
           props: {
             dark: this.dark,

@@ -24,7 +24,7 @@
               :class="`elevation-${item.value ? 8 : 1}`"
               class="py-2"
               hover
-              @click.native="item.value = !item.value"
+              @click="item.value = !item.value"
             >
               <v-card-title class="py-0 pr-2">
                 <span

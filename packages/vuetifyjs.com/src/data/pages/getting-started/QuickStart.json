@@ -1,0 +1,239 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "browserHeader"
+        },
+        {
+          "type": "text",
+          "lang": "browserText"
+        },
+        {
+          "type": "getting-started-browsers"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "newHeader"
+        },
+        {
+          "type": "text",
+          "lang": "vueCliText1"
+        },
+        {
+          "type": "markup",
+          "value": "bash_vue_cli_install"
+        },
+        {
+          "type": "alert",
+          "lang": "vueCliText2",
+          "value": "info"
+        },
+        {
+          "type": "text",
+          "lang": "vueCliText4"
+        },
+        {
+          "type": "markup",
+          "value": "bash_vue_cli_create_app"
+        },
+        {
+          "type": "text",
+          "lang": "vueCliText3"
+        },
+        {
+          "type": "text",
+          "lang": "vueCliText5"
+        },
+        {
+          "type": "markup",
+          "value": "bash_vue_add_vuetify"
+        },
+        {
+          "type": "text",
+          "lang": "vueCliText6"
+        },
+        {
+          "type": "markup",
+          "value": "bash_vuetify_cli_install"
+        },
+        {
+          "type": "text",
+          "lang": "vueCliText7"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "existingHeader"
+        },
+        {
+          "type": "text",
+          "lang": "existingText1"
+        },
+        {
+          "type": "text",
+          "lang": "existingText2"
+        },
+        {
+          "type": "markup",
+          "value": "bash_yarn_install_vuetify"
+        },
+        {
+          "type": "text",
+          "lang": "existingText3"
+        },
+        {
+          "type": "markup",
+          "value": "js_use_vuetify"
+        },
+        {
+          "type": "text",
+          "lang": "existingText4"
+        },
+        {
+          "type": "markup",
+          "value": "js_import_vuetify_css"
+        },
+        {
+          "type": "markup",
+          "value": "stylus_import_vuetify_css"
+        },
+        {
+          "type": "text",
+          "lang": "existingText5"
+        },
+        {
+          "type": "markup",
+          "value": "html_material_font"
+        },
+        {
+          "type": "text",
+          "lang": "existingText6"
+        },
+        {
+          "type": "alert",
+          "lang": "alert2",
+          "value": "error"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "uiHeader"
+        },
+        {
+          "type": "text",
+          "lang": "uiText1"
+        },
+        {
+          "type": "markup",
+          "value": "bash_vue_ui"
+        },
+        {
+          "type": "text",
+          "lang": "uiText2"
+        },
+        {
+          "type": "img",
+          "lang": "uiImg1",
+          "value": "quick-start/vue_ui.png"
+        },
+        {
+          "type": "text",
+          "lang": "uiText3"
+        },
+        {
+          "type": "img",
+          "lang": "uiImg2",
+          "value": "quick-start/vue_ui_vuetify_config.png"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "cdnHeader"
+        },
+        {
+          "type": "text",
+          "lang": "cdnText"
+        },
+        {
+          "type": "markup",
+          "value": "html_cdn_quickstart"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "ie11Header"
+        },
+        {
+          "type": "text",
+          "lang": "ie11Text1"
+        },
+        {
+          "type": "markup",
+          "value": "bash_yarn_install_polyfill"
+        },
+        {
+          "type": "text",
+          "lang": "ie11Text2"
+        },
+        {
+          "type": "markup",
+          "value": "js_import_polyfill"
+        },
+        {
+          "type": "text",
+          "lang": "ie11Text3"
+        },
+        {
+          "type": "markup",
+          "value": "bash_yarn_install_preset_env"
+        },
+        {
+          "type": "text",
+          "lang": "ie11Text4"
+        },
+        {
+          "type": "markup",
+          "value": "json_presets_babel"
+        },
+        {
+          "type": "markup",
+          "value": "js_vue_config_preset"
+        },
+        {
+          "type": "text",
+          "lang": "ie11Text5"
+        },
+        {
+          "type": "markup",
+          "value": "html_ie11"
+        }
+      ]
+    }
+  ]
+}

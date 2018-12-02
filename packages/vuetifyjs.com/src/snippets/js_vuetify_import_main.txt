@@ -1,0 +1,5 @@
+// src/index.js
+
+import './assets/stylus/main.styl'
+// OR
+require('./assets/stylus/main.styl')

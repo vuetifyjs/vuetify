@@ -23,7 +23,11 @@
       </v-tabs>
     </v-toolbar>
     <v-tabs-items v-model="tabs">
-      <v-tab-item v-for="content in ['one', 'two', 'three']" :key="content" :id="content">
+      <v-tab-item
+        v-for="content in ['one', 'two', 'three']"
+        :key="content"
+        :value="content"
+      >
         <v-card height="200px" flat>
         </v-card>
       </v-tab-item>

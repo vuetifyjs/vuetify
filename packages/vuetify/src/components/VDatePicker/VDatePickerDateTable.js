@@ -22,6 +22,7 @@ export default {
       type: [String, Number],
       default: 0
     },
+    showWeek: Boolean,
     weekdayFormat: {
       type: Function,
       default: null
@@ -50,6 +51,7 @@ export default {
     },
     genTHead () {
       const days = this.weekDays.map(day => this.$createElement('th', day))
+      this.showWeek && days.unshift(this.$createElement('th'))
       return this.$createElement('thead', this.genTR(days))
     },
     // Returns number of the days from the firstDayOfWeek to the first day of the current month
@@ -58,11 +60,37 @@ export default {
       const weekDay = firstDayOfTheMonth.getUTCDay()
       return (weekDay - parseInt(this.firstDayOfWeek) + 7) % 7
     },
+    getWeekNumber () {
+      let dayOfYear = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334][this.displayedMonth]
+      if (this.displayedMonth > 1 &&
+        (((this.displayedYear % 4 === 0) && (this.displayedYear % 100 !== 0)) || (this.displayedYear % 400 === 0))
+      ) {
+        dayOfYear++
+      }
+      const offset = (
+        this.displayedYear +
+        ((this.displayedYear - 1) >> 2) -
+        Math.floor((this.displayedYear - 1) / 100) +
+        Math.floor((this.displayedYear - 1) / 400) -
+        this.firstDayOfWeek
+      ) % 7 // https://en.wikipedia.org/wiki/Zeller%27s_congruence
+      return Math.floor((dayOfYear + offset) / 7) + 1
+    },
+    genWeekNumber (weekNumber) {
+      return this.$createElement('td', [
+        this.$createElement('small', {
+          staticClass: 'v-date-picker-table--date__week'
+        }, String(weekNumber).padStart(2, '0'))
+      ])
+    },
     genTBody () {
       const children = []
       const daysInMonth = new Date(this.displayedYear, this.displayedMonth + 1, 0).getDate()
       let rows = []
       let day = this.weekDaysBeforeFirstDayOfTheMonth()
+      let weekNumber = this.getWeekNumber()
+
+      this.showWeek && rows.push(this.genWeekNumber(weekNumber++))
 
       while (day--) rows.push(this.$createElement('td'))
       for (day = 1; day <= daysInMonth; day++) {
@@ -72,9 +100,10 @@ export default {
           this.genButton(date, true)
         ]))
 
-        if (rows.length % 7 === 0) {
+        if (rows.length % (this.showWeek ? 8 : 7) === 0) {
           children.push(this.genTR(rows))
           rows = []
+          day < daysInMonth && this.showWeek && rows.push(this.genWeekNumber(weekNumber++))
         }
       }
 

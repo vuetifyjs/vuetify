@@ -38,7 +38,7 @@ import VMessages from '@/components/VMessages'
 import VNavigationDrawer from '@/components/VNavigationDrawer'
 import VOverflowBtn from '@/components/VOverflowBtn'
 import VPagination from '@/components/VPagination'
-import VPaper from '@/components/VPaper'
+import VSheet from '@/components/VSheet'
 import VParallax from '@/components/VParallax'
 import VPicker from '@/components/VPicker'
 import VProgressCircular from '@/components/VProgressCircular'
@@ -50,6 +50,7 @@ import VResponsive from '@/components/VResponsive'
 import VSelect from '@/components/VSelect'
 import VSlider from '@/components/VSlider'
 import VSnackbar from '@/components/VSnackbar'
+import VSparkline from '@/components/VSparkline'
 import VSpeedDial from '@/components/VSpeedDial'
 import VStepper from '@/components/VStepper'
 import VSubheader from '@/components/VSubheader'
@@ -106,7 +107,7 @@ const components = {
   VNavigationDrawer,
   VOverflowBtn,
   VPagination,
-  VPaper,
+  VSheet,
   VParallax,
   VPicker,
   VProgressCircular,
@@ -118,6 +119,7 @@ const components = {
   VSelect,
   VSlider,
   VSnackbar,
+  VSparkline,
   VSpeedDial,
   VStepper,
   VSubheader,

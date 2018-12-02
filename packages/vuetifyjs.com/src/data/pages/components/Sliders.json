@@ -1,0 +1,61 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "usage",
+          "value": "usage"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": [
+            "v-slider",
+            "v-range-slider"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [
+            "thumb",
+            "customThumb",
+            "ticks",
+            "discrete",
+            "icons",
+            "editableNumericValue",
+            "customColors",
+            "validation",
+            "range",
+            "minMax",
+            "metronome"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/forms",
+            "components/selects",
+            "components/text-fields"
+          ]
+        }
+      ]
+    }
+  ]
+}

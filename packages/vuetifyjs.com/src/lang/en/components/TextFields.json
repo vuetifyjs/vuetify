@@ -1,90 +1,89 @@
 {
-  "header": "Text field",
+  "header": "# Text field",
   "headerText": "Text fields components are used for collecting user provided information.",
-  "supplemental": ["MaskTable"],
+  "supplemental": [ "MaskTable" ],
   "examples": {
     "usage": {
-      "header": "Standard text field",
       "desc": "A simple text field with placeholder and/or label."
     },
     "singleLine": {
-      "header": "Single line",
+      "header": "### Single line",
       "desc": "Single line text fields do not float their label on focus or with data."
     },
     "disabledAndReadonly": {
-      "header": "Disabled and readonly",
-      "Desc": "Text fields can be `disabled` or `readonly`."
+      "header": "### Disabled and readonly",
+      "desc": "Text fields can be `disabled` or `readonly`."
     },
     "icon": {
-      "header": "Icons",
+      "header": "### Icons",
       "desc": "You can add icons to the text field with `prepend-icon`, `append-icon` and `append-outer-icon` props."
     },
     "clearable": {
-      "header": "Clearable",
+      "header": "### Clearable",
       "desc": "When `clearable`, you can customize the clear icon with `clear-icon`."
     },
     "iconEvents": {
-      "header": "Icon events",
+      "header": "### Icon events",
       "desc": "`click:prepend`, `click:append`, `click:append-outer`, and `click:clear` will be emitted when you click on the respective icon. Note that these events will not be fired if the slot is used instead. "
     },
     "iconSlots": {
-      "header": "Icon slots",
+      "header": "### Icon slots",
       "desc": "Instead of using prepend / append / append-outer icons you can use slots to extend input's functionality."
     },
     "labelSlot": {
-      "header": "Label slot",
+      "header": "### Label slot",
       "desc": "Text field label can be defined in `label` slot - that will allow to use HTML content"
     },
     "characterCounter": {
-      "header": "Character counter",
+      "header": "### Character counter",
       "desc": "Use a `counter` prop to inform a user of the character limit. The counter does not perform any validation by itself. You will need to pair it with either the internal validation system, or a 3rd party library. You can use it on regular, box or outline text fields."
     },
     "password": {
-      "header": "Password input",
+      "header": "### Password input",
       "desc": "A password input can be used with an appended icon and callback to control the visibility."
     },
     "validation": {
-      "header": "Validation",
+      "header": "### Validation",
       "desc": "Vuetify includes simple validation through the `rules` prop. The prop accepts an array of callbacks. While validating rules, the current v-model value will be passed to the callback. This callback should return either `true` or a `String`, the error message."
     },
     "fullWidthWithCharacterCounter": {
-      "header": "Full-width text field with character counter",
+      "header": "### Full-width text field with character counter",
       "desc": "Full width text fields allow you to create boundless inputs. In this example, we use a `v-divider` to separate the fields."
     },
     "hint": {
-      "header": "Hint text",
+      "header": "### Hint text",
       "desc": "The `hint` property on text fields adds the provided string beneath the text field. Using `persistent-hint` keeps the hint visible when the text field is not focused. Hint prop is **not** supported in solo mode."
     },
     "prefixesAndSuffixes": {
-      "header": "Prefixes & suffixes",
+      "header": "### Prefixes & suffixes",
       "desc": "The `prefix` and `suffix` properties allows you to prepend and append inline non-modifiable text next to the text field."
     },
     "customValidation": {
-      "header": "Custom validation",
+      "header": "### Custom validation",
       "desc": "While the built in `v-form` or 3rd party plugin such as [vuelidate](https://github.com/monterail/vuelidate) or [vee-validation](https://github.com/logaretm/vee-validate) can help streamline your validation process, you can choose to simply control it yourself."
     },
     "box": {
-      "header": "Box style",
+      "header": "### Box style",
       "desc": "Text fields can be used with an alternative box design. Append and prepend icon props are **not** supported in this mode."
     },
     "solo": {
-      "header": "Solo style",
+      "header": "### Solo style",
       "desc": "Text fields can be used with an alternative solo design."
     },
     "outline": {
-      "header": "Outline style",
+      "header": "### Outline style",
       "desc": "Text fields can be used with an alternative outline design."
     },
     "customColors": {
-      "header": "Custom colors",
+      "header": "### Custom colors",
       "desc": "You can optionally change a text field into any color in the Material design palette. Below is an example implementation of a custom form with validation."
     },
     "masks": {
-      "header": "Masks",
+      "header": "### Masks",
       "desc": "Text fields can validate against character masks. Using either a pre-made or custom rules, you can optionally format and validate specific character sets. Note that **masks work only with text fields**, using them with date/number/file etc inputs may end up in unexpected behaviour or exception."
     },
     "progressBar": {
-      "header": "Progress bar",
+      "header": "### Progress bar",
       "desc": "You can display a progress bar instead of the bottom line. You can use the default indeterminate progress having same color as the text field or designate a custom one using the `progress` slot"
     }
   },
