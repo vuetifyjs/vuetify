@@ -1,5 +1,5 @@
 <template>
-  <component :is="Math.random() > 0.5 || viewport !== 'md' ? 'ad-code-fund' : 'ad-carbon'" />
+  <component :is="'ad-carbon'" />
 </template>
 
 <script>

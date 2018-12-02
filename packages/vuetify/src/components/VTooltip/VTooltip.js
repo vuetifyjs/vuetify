@@ -148,11 +148,11 @@ export default {
       const listeners = this.disabled ? {} : {
         mouseenter: e => {
           this.getActivator(e)
-          this.runDelay('open', () => (this.isActive = true))
+          this.runDelay('open')
         },
         mouseleave: e => {
           this.getActivator(e)
-          this.runDelay('close', () => (this.isActive = false))
+          this.runDelay('close')
         }
       }
 

@@ -1,17 +1,28 @@
-import Additional from './additional'
-import Components from './components'
-import Directives from './directives'
-import Meta from './meta'
-import Motion from './motion'
-import Style from './style'
-import Vuetify from './vuetify'
+import camelCase from 'lodash/camelCase'
+import upperFirst from 'lodash/upperFirst'
 
-export default {
-  Additional,
-  Components,
-  Directives,
-  Meta,
-  Motion,
-  Style,
-  Vuetify
+const requireLang = require.context(
+  './',
+  true,
+  /\.json$/
+)
+
+const messages = {}
+
+for (const file of requireLang.keys()) {
+  if (file === './index.js') continue
+
+  const path = file.replace(/(\.\/|\.json$)/g, '').split('/')
+
+  path.reduce((o, s, i) => {
+    const prop = upperFirst(camelCase(s))
+
+    o[prop] = i + 1 === path.length
+      ? requireLang(file)
+      : o[prop] || {}
+
+    return o[prop]
+  }, messages)
 }
+
+export default messages

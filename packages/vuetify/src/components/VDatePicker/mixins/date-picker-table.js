@@ -32,6 +32,7 @@ export default {
     },
     min: String,
     max: String,
+    readonly: Boolean,
     scrollable: Boolean,
     tableDate: {
       type: String,
@@ -89,9 +90,9 @@ export default {
           type: 'button'
         },
         domProps: {
-          disabled: !isAllowed
+          disabled: this.disabled || !isAllowed
         },
-        on: (this.disabled || !isAllowed) ? {} : {
+        on: (this.disabled || this.readonly || !isAllowed) ? {} : {
           click: () => this.$emit('input', value)
         }
       }), [
@@ -160,8 +161,11 @@ export default {
 
       return this.$createElement('div', {
         staticClass,
-        class: this.themeClasses,
-        on: this.scrollable ? { wheel: this.wheel } : undefined,
+        class: {
+          'v-date-picker-table--disabled': this.disabled,
+          ...this.themeClasses
+        },
+        on: (!this.disabled && this.scrollable) ? { wheel: this.wheel } : undefined,
         directives: [touchDirective]
       }, [transition])
     }

@@ -1,0 +1,64 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "usage",
+          "value": "usage"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": [
+            "v-stepper",
+            "v-stepper-step",
+            "v-stepper-content",
+            "v-stepper-header"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [
+            "editable",
+            "nonEditable",
+            "optional",
+            "horizontal",
+            "vertical",
+            "linear",
+            "nonLinear",
+            "alternateLabels",
+            "error",
+            "alternateError",
+            "verticalError",
+            "dynamic"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "layout/breakpoints",
+            "components/buttons",
+            "components/windows"
+          ]
+        }
+      ]
+    }
+  ]
+}

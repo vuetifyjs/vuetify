@@ -103,3 +103,73 @@ exports[`VDatePickerHeader.js should render component with default slot and matc
 </div>
 
 `;
+
+exports[`VDatePickerHeader.js should render disabled component and match snapshot 1`] = `
+
+<div class="v-date-picker-header v-date-picker-header--disabled theme--light">
+  <button disabled="disabled"
+          type="button"
+          class="v-btn v-btn--disabled v-btn--icon theme--light"
+  >
+    <div class="v-btn__content">
+      <i aria-hidden="true"
+         class="v-icon material-icons theme--light"
+      >
+        chevron_left
+      </i>
+    </div>
+  </button>
+  <div class="v-date-picker-header__value v-date-picker-header__value--disabled">
+    <strong>
+      November 2005
+    </strong>
+  </div>
+  <button disabled="disabled"
+          type="button"
+          class="v-btn v-btn--disabled v-btn--icon theme--light"
+  >
+    <div class="v-btn__content">
+      <i aria-hidden="true"
+         class="v-icon material-icons theme--light"
+      >
+        chevron_right
+      </i>
+    </div>
+  </button>
+</div>
+
+`;
+
+exports[`VDatePickerHeader.js should render readonly component and match snapshot 1`] = `
+
+<div class="v-date-picker-header theme--light">
+  <button type="button"
+          class="v-btn v-btn--icon theme--light"
+  >
+    <div class="v-btn__content">
+      <i aria-hidden="true"
+         class="v-icon material-icons theme--light"
+      >
+        chevron_left
+      </i>
+    </div>
+  </button>
+  <div class="v-date-picker-header__value">
+    <strong class="accent--text">
+      November 2005
+    </strong>
+  </div>
+  <button type="button"
+          class="v-btn v-btn--icon theme--light"
+  >
+    <div class="v-btn__content">
+      <i aria-hidden="true"
+         class="v-icon material-icons theme--light"
+      >
+        chevron_right
+      </i>
+    </div>
+  </button>
+</div>
+
+`;

@@ -23,6 +23,7 @@ export default {
     },
     min: [Number, String],
     max: [Number, String],
+    readonly: Boolean,
     value: [Number, String]
   },
 

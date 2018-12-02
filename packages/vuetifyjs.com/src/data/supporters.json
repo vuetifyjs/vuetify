@@ -1,0 +1,142 @@
+{
+  "diamond": [
+    {
+      "type": "Patron",
+      "name": "LMAX Exchange",
+      "href": "https://careers.lmax.com/?utm_source=vuetify&utm_medium=logo-link&utm_campaign=lmax-careers",
+      "logo": "backers/lmax-exchange.png",
+      "pledge": "Diamond ($500)"
+    },
+    {
+      "name": "Intygrate",
+      "logo": "backers/intygrate.png",
+      "href": "http://intygrate.com/",
+      "type": "Patron",
+      "pledge": "Diamond ($500)"
+    },
+    {
+      "name": "ResaleAI",
+      "logo": "backers/resaleai_logo_blue.svg",
+      "href": "http://resaleai.com/",
+      "type": "Patron",
+      "pledge": "Diamond ($500)"
+    }
+  ],
+  "palladium": [
+    {
+      "name": "Eikos Partners",
+      "logo": "backers/eikos-partners.webp",
+      "href": "http://www.eikospartners.com/",
+      "type": "Patron",
+      "pledge": "Palladium ($250)"
+    },
+    {
+      "name": "rateGenius",
+      "href": "https://application.rategenius.com/",
+      "logo": "backers/rate-genius.png",
+      "type": "Patron",
+      "pledge": "Palladium ($250)"
+    },
+    {
+      "name": "Clearblue Technologies",
+      "href": "http://www.clearbluetechnologies.com/",
+      "logo": "backers/clear-blue.png",
+      "type": "Patron",
+      "pledge": "Palladium ($250)"
+    },
+    {
+      "name": "DigitalMaas",
+      "href": "https://www.digitalmaas.com/",
+      "logo": "backers/digital-maas.svg",
+      "type": "Patron",
+      "pledge": "Palladium ($250)"
+    }
+  ],
+  "gold": [
+    {
+      "name": "Deister Software",
+      "href": "http://www.deister.es/",
+      "logo": "backers/deister-logo-light.png",
+      "type": "Patron",
+      "pledge": "Gold ($50)"
+    },
+    {
+      "name": "Cocoatech",
+      "type": "Patron",
+      "pledge": "Gold ($50)",
+      "href": "https://cocoatech.com/",
+      "logo": "backers/cocoatechlogo.png"
+    },
+    {
+      "name": "Cycloid",
+      "href": "https://www.cycloid.io/",
+      "logo": "backers/cycloid.png",
+      "type": "Patron",
+      "pledge": "Gold ($50)"
+    },
+    {
+      "name": "Zweidenker",
+      "href": "http://zweidenker.de/",
+      "logo": "backers/zweidenker-logo-grey.svg",
+      "type": "Patron",
+      "pledge": "Gold ($50)"
+    },
+    {
+      "name": "Identity Panel",
+      "href": "https://support.identitypanel.com/",
+      "logo": "backers/identity-panel.png",
+      "type": "Patron",
+      "pledge": "Gold ($50)"
+    },
+    {
+      "name": "Hohenstein",
+      "href": "https://www.hohenstein.de/en/home/home.xhtml",
+      "logo": "backers/hohenstein.svg",
+      "type": "Patron",
+      "pledge": "Gold ($50)"
+    },
+    {
+      "name": "P2L Technologies",
+      "href": "https://p2l.tech/",
+      "logo": "backers/p2l.png",
+      "type": "Patron",
+      "pledge": "Gold ($50)"
+    },
+    {
+      "name": "madhead",
+      "href": "https://www.madhead.com/",
+      "logo": "backers/madhead.png",
+      "type": "Patron",
+      "pledge": "Gold ($50)",
+      "dark": true
+    }
+  ],
+  "affiliates": [
+    {
+      "name": "VueJobs",
+      "logo": "affiliates/vuejobs-logo.svg",
+      "href": "https://vuejobs.com/?utm_source=vuejobs&utm_medium=affiliates&utm_campaign=linking",
+      "type": "Affiliate"
+    },
+    {
+      "name": "Made with Vue.js",
+      "href": "https://madewithvuejs.com",
+      "logo": "affiliates/madewithvuejs.png",
+      "type": "Affiliate"
+    },
+    {
+      "name": "Vue.js Radar",
+      "href": "https://vuejsradar.com",
+      "logo": "affiliates/vueradar2.png",
+      "type": "Affiliate"
+    }
+  ],
+  "service": [
+    {
+      "name": "Cloudflare",
+      "href": "https://www.cloudflare.com/",
+      "logo": "sponsors/cloudflare.svg",
+      "type": "Service Sponsor"
+    }
+  ]
+}

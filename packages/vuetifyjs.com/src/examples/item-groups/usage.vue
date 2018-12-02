@@ -15,7 +15,7 @@
               class="d-flex align-center"
               dark
               height="200"
-              @click.native="toggle"
+              @click="toggle"
             >
               <v-scroll-y-transition>
                 <div

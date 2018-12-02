@@ -1,35 +1,34 @@
 {
-  "header": "Expansion Panel",
+  "header": "# Expansion Panel",
   "headerText": "The `v-expansion-panel` component is useful for reducing vertical space with large amounts of information. The default functionality of the component is to only display one expansion-panel body at a time; however, with the `expandable` property, the expansion-panel can remain open until explicitly closed.",
   "examples": {
-    "accordion": {
-      "header": "Accordion",
+    "usage": {
       "desc": "Accordion expansion-panels can only have 1 panel open at a time."
     },
     "expand": {
-      "header": "Expand",
+      "header": "### Expand",
       "desc": "Expand expansion-panels will stay open until closed. When providing a model, any value not specified will be interpreted as false.",
       "uninverted": true
     },
     "external": {
-      "header": "External control",
+      "header": "### External control",
       "desc": "Expansion panels can be controlled externally by modifying the `v-model`. Its value corresponds to a zero-based index of the currently opened expansion panel content. If `expand` prop is used then it is an array of booleans where the index corresponds to the index of the content."
     },
     "disabledAndReadonly": {
-      "header": "Disabled and readonly",
+      "header": "### Disabled and readonly",
       "desc": "Both the expansion-panel and its content supports the `disabled` and `readonly` props."
     },
     "popout": {
-      "header": "Popout & Inset",
+      "header": "### Popout & Inset",
       "desc": "The expansion-panel also has two alternative designs you can activate with the props `popout` and `inset`.",
       "inverted": true
     },
     "customIcons": {
-      "header": "Custom icon",
+      "header": "### Custom icon",
       "desc": "Expand action icon can be customized with `expand-icon` prop."
     },
     "focusable": {
-      "header": "Focusable",
+      "header": "### Focusable",
       "desc": "The expansion-panel headers can be made focusable with the prop `focusable`.",
       "uninverted": true
     }
