@@ -131,6 +131,7 @@ Array [
   "VTooltip",
   "VTreeview",
   "VTreeviewNode",
+  "VVideo",
   "VWindow",
   "VWindowItem",
 ]
