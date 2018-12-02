@@ -149,7 +149,7 @@ export default mixins(Themeable).extend({
       return null
     },
     genItems (props: DataProps) {
-      const empty = this.genEmpty(props)
+      const empty = this.genEmpty(props.pagination.itemsLength)
       if (empty) return [empty]
 
       if (this.$scopedSlots.default) return this.$scopedSlots.default(props)
