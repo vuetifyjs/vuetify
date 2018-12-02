@@ -10,7 +10,7 @@ import mixins from '../util/mixins'
 // Types
 import { PropValidator } from 'vue/types/options'
 export type VuetifyRuleValidator = (value: any) => string | false
-export type VuetifyMessage = string | string[] | VuetifyRuleValidator[]
+export type VuetifyMessage = string | string[]
 export type VuetifyRuleValidations = (VuetifyRuleValidator | string)[]
 
 /* @vue/component */
@@ -34,7 +34,7 @@ export default mixins(
     messages: {
       type: [String, Array],
       default: () => []
-    } as PropValidator<string | string[]>,
+    } as PropValidator<VuetifyMessage>,
     readonly: Boolean,
     rules: {
       type: Array,
