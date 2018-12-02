@@ -2,9 +2,10 @@
 import { VNode } from 'vue'
 import mixins from '../../util/mixins'
 import header from './mixins/header'
+import { getTextAlignment } from '../../util/helpers'
 
 export default mixins(header).extend({
-  name: 'v-data-table-header',
+  name: 'v-data-table-header-desktop',
 
   methods: {
     genHeaders () {
@@ -13,7 +14,7 @@ export default mixins(header).extend({
         const children = []
 
         let classes = {
-          [`text-xs-${header.align || 'left'}`]: true
+          [getTextAlignment(header.align, this.$vuetify.rtl)]: true
         }
 
         if (header.value === 'dataTableSelect') {
