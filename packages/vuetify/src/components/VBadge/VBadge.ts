@@ -52,8 +52,8 @@ export default mixins(
       directives: [{
         name: 'show',
         value: this.isActive
-      }] as any
-    }), this.$slots.badge)] as any : null
+      }]
+    }), this.$slots.badge)] : null
 
     return h('span', {
       staticClass: 'v-badge',

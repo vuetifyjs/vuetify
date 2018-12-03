@@ -4,7 +4,7 @@ import '../../stylus/components/_buttons.styl'
 // Types
 import { VNode, VNodeChildren } from 'vue'
 import { PropValidator } from 'vue/types/options'
-import mixins from '../../util/mixins'
+import mixins, { ExtractVue } from '../../util/mixins'
 import { RippleOptions } from '../../directives/ripple'
 
 // Components
@@ -21,7 +21,7 @@ import { factory as ToggleableFactory } from '../../mixins/toggleable'
 // Utilities
 import { getObjectValueByPath } from '../../util/helpers'
 
-export default mixins(
+const baseMixins = mixins(
   Colorable,
   Routable,
   Positionable,
@@ -29,7 +29,12 @@ export default mixins(
   GroupableFactory('btnToggle'),
   ToggleableFactory('inputValue')
   /* @vue/component */
-).extend({
+)
+interface options extends ExtractVue<typeof baseMixins> {
+  $el: HTMLElement
+}
+
+export default baseMixins.extend<options>().extend({
   name: 'v-btn',
 
   props: {

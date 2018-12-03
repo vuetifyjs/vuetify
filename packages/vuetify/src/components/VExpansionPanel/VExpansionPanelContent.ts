@@ -99,7 +99,7 @@ export default mixins<options &
         directives: [{
           name: 'show',
           value: this.isActive
-        }] as any
+        }]
       }, this.showLazyContent(this.$slots.default))
     },
     genHeader () {
@@ -112,7 +112,7 @@ export default mixins<options &
         directives: [{
           name: 'ripple',
           value: this.ripple
-        }] as any,
+        }],
         on: {
           click: this.onHeaderClick
         }
@@ -130,7 +130,7 @@ export default mixins<options &
           directives: [{
             name: 'show',
             value: !this.isDisabled
-          }] as any
+          }]
         }, icon)
       ])
     },

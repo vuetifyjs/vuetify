@@ -327,7 +327,7 @@ export default mixins(
     const children: VNodeChildrenArrayContents = this.items.length
       ? this.items.map(VTreeviewNode.options.methods.genChild.bind(this))
       /* istanbul ignore next */
-      : this.$slots.default
+      : this.$slots.default!
 
     return h('div', {
       staticClass: 'v-treeview',

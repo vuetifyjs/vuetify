@@ -162,10 +162,11 @@ export default mixins<options>(
       }, [this.text])
     },
     genContent () {
+      // TODO: remove non-null assertions (vuejs/vue#8498)
       const children = [
-        this.$scopedSlots.prepend && this.$scopedSlots.prepend(this.scopedProps),
+        this.$scopedSlots.prepend! && this.$scopedSlots.prepend!(this.scopedProps),
         this.genLabel(),
-        this.$scopedSlots.append && this.$scopedSlots.append(this.scopedProps)
+        this.$scopedSlots.append! && this.$scopedSlots.append!(this.scopedProps)
       ]
 
       return this.$createElement('div', {

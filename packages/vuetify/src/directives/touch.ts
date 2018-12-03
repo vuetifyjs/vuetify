@@ -29,7 +29,7 @@ interface TouchWrapper extends TouchHandlers {
 }
 
 interface TouchVNodeDirective extends VNodeDirective {
-  value: TouchHandlers & {
+  value?: TouchHandlers & {
     parent?: boolean
     options?: AddEventListenerOptions
   }
@@ -108,14 +108,14 @@ function createHandlers (value: TouchHandlers): TouchStoredHandlers {
 }
 
 function inserted (el: HTMLElement, binding: TouchVNodeDirective, vnode: VNode) {
-  const value = binding.value
+  const value = binding.value!
   const target = value.parent ? el.parentElement : el
   const options = value.options || { passive: true }
 
   // Needed to pass unit tests
   if (!target) return
 
-  const handlers = createHandlers(binding.value)
+  const handlers = createHandlers(binding.value!)
   target._touchHandlers = Object(target._touchHandlers)
   target._touchHandlers![vnode.context!._uid] = handlers
 
@@ -125,7 +125,7 @@ function inserted (el: HTMLElement, binding: TouchVNodeDirective, vnode: VNode) 
 }
 
 function unbind (el: HTMLElement, binding: TouchVNodeDirective, vnode: VNode) {
-  const target = binding.value.parent ? el.parentElement : el
+  const target = binding.value!.parent ? el.parentElement : el
   if (!target || !target._touchHandlers) return
 
   const handlers = target._touchHandlers[vnode.context!._uid]
