@@ -19,7 +19,7 @@
       >
         {{ computedIcon }}
       </v-icon>
-      <helpers-markdown
+      <doc-markdown
         :source="snackbar.msg"
         class="snack-markdown"
       />
@@ -57,9 +57,7 @@
     }),
 
     computed: {
-      ...mapState('app', {
-        snackbar: state => state.appSnackbar
-      }),
+      ...mapState('snackbar', ['snackbar']),
       bind () {
         if (this.snackbar.to) return { to: this.snackbar.to }
         if (this.snackbar.href) {

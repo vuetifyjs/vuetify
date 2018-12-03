@@ -1,0 +1,23 @@
+{
+  "header": "# Sparkline",
+  "headerText": "The sparkline component can be used to create simple graphs, like GitHub's contribution chart.\n\nAny [SVG attribute](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute) may be used in addition to the ones listed below.",
+  "examples": {
+    "playground": {
+      "header": "",
+      "desc": ""
+    }
+  },
+  "props": {
+    "autoDraw": "Trace the length of the line when first rendered",
+    "autoDrawDuration": "Amount of time (in ms) to run the trace animation",
+    "autoDrawEasing": "The easing function to use for the trace animation",
+    "data": "An array of data points",
+    "gradient": "An array of colors to use as a linear-gradient",
+    "gradientDirection": "The direction the gradient should run",
+    "lineWidth": "The thickness of the line, in px",
+    "padding": "Low `smooth` or high `line-width` values may result in cropping, increase padding to compensate",
+    "showLabel": "Show labels below each data point",
+    "smooth": "Number of px to use as a corner radius. `true` defaults to 8, `false` is 0",
+    "type": "Choose between a trendline or bars"
+  }
+}

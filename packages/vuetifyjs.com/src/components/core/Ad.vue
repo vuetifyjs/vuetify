@@ -14,19 +14,11 @@
           column
           fill-height
         >
-          <v-flex shrink mb-3>
-            <no-ssr>
-              <core-table-of-contents
-                :offset="85"
-                :threshold="50"
-              />
-            </no-ssr>
-          </v-flex>
-
           <v-flex
             xs12
             text-xs-center
           >
+            <core-toc />
             <h4 class="caption font-weight-bold grey--text">Diamond Sponsors</h4>
             <div class="my-3">
               <div
@@ -49,7 +41,7 @@
                 </a>
               </div>
             </div>
-            <misc-sponsor-btn small />
+            <supporters-sponsor-btn small />
           </v-flex>
 
           <ad-shown
@@ -91,8 +83,8 @@
       },
       shouldShowAd () {
         return (
-          this.name !== 'home/Home' &&
-          this.name.indexOf('store/') < 0
+          this.name &&
+          this.name !== 'home/Home'
         )
       }
     },

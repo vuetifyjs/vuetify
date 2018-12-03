@@ -1,0 +1,162 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "header2"
+        },
+        {
+          "type": "text",
+          "lang": "headerText2"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "importHeader"
+        },
+        {
+          "type": "alert",
+          "lang": "webpackVersionWarning",
+          "value": "warning"
+        },
+        {
+          "type": "text",
+          "lang": "importText1"
+        },
+        {
+          "type": "markup",
+          "value": "js_a_la_carte"
+        },
+        {
+          "type": "alert",
+          "lang": "optionsDirectivesNotice",
+          "value": "info"
+        },
+        {
+          "type": "text",
+          "lang": "importText2"
+        },
+        {
+          "type": "markup",
+          "value": "js_a_la_carte_destructuring"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "styleHeader"
+        },
+        {
+          "type": "text",
+          "lang": "styleText1"
+        },
+        {
+          "type": "markup",
+          "value": "bash_yarn_install_stylus"
+        },
+        {
+          "type": "text",
+          "lang": "styleText2"
+        },
+        {
+          "type": "markup",
+          "value": "js_import_stylus"
+        },
+        {
+          "type": "alert",
+          "lang": "stylusDetailNotice",
+          "value": "info"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "loaderHeader"
+        },
+        {
+          "type": "text",
+          "lang": "loaderText1"
+        },
+        {
+          "type": "markup",
+          "value": "js_plugin_vuetify"
+        },
+        {
+          "type": "markup",
+          "value": "js_a_la_carte_webpack"
+        },
+        {
+          "type": "text",
+          "lang": "loaderText2"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "loaderLimitationsHeader"
+        },
+        {
+          "type": "text",
+          "lang": "loaderLimitationsText1"
+        },
+        {
+          "type": "heading",
+          "lang": "loaderLimitationsDynamicHeader"
+        },
+        {
+          "type": "text",
+          "lang": "loaderLimitationsDynamicText1"
+        },
+        {
+          "type": "markup",
+          "value": "html_a_la_carte_string_tag"
+        },
+        {
+          "type": "markup",
+          "value": "js_a_la_carte_manual"
+        },
+        {
+          "type": "text",
+          "lang": "loaderLimitationsDynamicText2"
+        },
+        {
+          "type": "markup",
+          "value": "html_a_la_carte_dynamic_component"
+        },
+        {
+          "type": "heading",
+          "lang": "loaderLimitationsFunctionalHeader"
+        },
+        {
+          "type": "text",
+          "lang": "loaderLimitationsFunctionalText1"
+        },
+        {
+          "type": "heading",
+          "lang": "loaderLimitationsPugHeader"
+        },
+        {
+          "type": "text",
+          "lang": "loaderLimitationsPugText1"
+        }
+      ]
+    }
+  ]
+}

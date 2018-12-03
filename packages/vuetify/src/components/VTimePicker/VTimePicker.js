@@ -26,6 +26,7 @@ export default {
     allowedHours: Function,
     allowedMinutes: Function,
     allowedSeconds: Function,
+    disabled: Boolean,
     format: {
       type: String,
       default: 'ampm',
@@ -46,6 +47,9 @@ export default {
       inputHour: null,
       inputMinute: null,
       inputSecond: null,
+      lazyInputHour: null,
+      lazyInputMinute: null,
+      lazyInputSecond: null,
       period: 'am',
       selecting: selectingTimes.hour
     }
@@ -141,10 +145,16 @@ export default {
   },
 
   methods: {
-    emitValue () {
+    genValue () {
       if (this.inputHour != null && this.inputMinute != null && (!this.useSeconds || this.inputSecond != null)) {
-        this.$emit('input', `${pad(this.inputHour)}:${pad(this.inputMinute)}` + (this.useSeconds ? `:${pad(this.inputSecond)}` : ''))
+        return `${pad(this.inputHour)}:${pad(this.inputMinute)}` + (this.useSeconds ? `:${pad(this.inputSecond)}` : '')
       }
+
+      return null
+    },
+    emitValue () {
+      const value = this.genValue()
+      if (value !== null) this.$emit('input', value)
     },
     setPeriod (period) {
       this.period = period
@@ -159,10 +169,7 @@ export default {
         this.inputHour = null
         this.inputMinute = null
         this.inputSecond = null
-        return
-      }
-
-      if (value instanceof Date) {
+      } else if (value instanceof Date) {
         this.inputHour = value.getHours()
         this.inputMinute = value.getMinutes()
         this.inputSecond = value.getSeconds()
@@ -174,7 +181,7 @@ export default {
         this.inputSecond = parseInt(second || 0, 10)
       }
 
-      this.period = this.inputHour < 12 ? 'am' : 'pm'
+      this.period = (this.inputHour == null || this.inputHour < 12) ? 'am' : 'pm'
     },
     convert24to12 (hour) {
       return hour ? ((hour - 1) % 12 + 1) : 12
@@ -193,12 +200,24 @@ export default {
       this.emitValue()
     },
     onChange () {
-      if (this.selecting === (this.useSeconds ? selectingTimes.second : selectingTimes.minute)) {
-        this.$emit('change', this.value)
-        // this.selecting = selectingTimes.hour
-      } else {
-        this.selecting++
+      if (this.selecting === selectingTimes.hour) {
+        this.selecting = selectingTimes.minute
+      } else if (this.useSeconds && this.selecting === selectingTimes.minute) {
+        this.selecting = selectingTimes.second
       }
+
+      if (this.inputHour === this.lazyInputHour &&
+        this.inputMinute === this.lazyInputMinute &&
+        (!this.useSeconds || this.inputSecond === this.lazyInputSecond)
+      ) return
+
+      const value = this.genValue()
+      if (value === null) return
+
+      this.lazyInputHour = this.inputHour
+      this.lazyInputMinute = this.inputMinute
+      this.useSeconds && (this.lazyInputSecond = this.inputSecond)
+      this.$emit('change', value)
     },
     firstAllowed (type, value) {
       const allowedFn = type === 'hour' ? this.isAllowedHourCb : (type === 'minute' ? this.isAllowedMinuteCb : this.isAllowedSecondCb)
@@ -228,6 +247,7 @@ export default {
                 : this.isAllowedSecondCb),
           color: this.color,
           dark: this.dark,
+          disabled: this.disabled,
           double: this.selecting === selectingTimes.hour && !this.isAmPm,
           format: this.selecting === selectingTimes.hour ? (this.isAmPm ? this.convert24to12 : val => val) : val => pad(val, 2),
           light: this.light,
@@ -260,6 +280,7 @@ export default {
       return this.$createElement(VTimePickerTitle, {
         props: {
           ampm: this.isAmPm,
+          disabled: this.disabled,
           hour: this.inputHour,
           minute: this.inputMinute,
           second: this.inputSecond,

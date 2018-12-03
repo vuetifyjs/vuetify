@@ -36,10 +36,11 @@
     "Blazing Fast"
   ],
   "componentFramework": "Component Framework",
+  "github": "Github",
   "letterFromAuthor": [
     "Hey there,",
     "I know choosing a UI framework can be a daunting task -- there are so many options to choose from and every one of them claims that they are the best. So you have to decide for *yourself*: what are the metrics for success?",
-    "This was me almost a year ago. There were plenty of UI toolkits to choose from, but none of them had everything that I needed, and that is why I started working on Vuetify.",
+    "This was me almost a year ago. There were plenty of UI toolkits to choose from, but none of them had everything that I needed, and that is why I started working on Home.",
     "I am extremely humbled that you have considered using Vuetify as your next UI Framework. A lot of care has went into crafting the perfect setup for taking any idea from conception to production. I look forward to you joining the Vuetify community and am excited to see what incredible interfaces you create!"
   ],
   "authorOfVuetify": "Author of Vuetify",
@@ -50,9 +51,10 @@
   },
   "becomeSponsor": "Become a Sponsor",
   "proudlySponsoredBy": "Patreon Sponsors",
-  "callout": "Supercharge your Development",
+  "callout": "Supercharge your<br>Development",
   "madeWithVuetify": "Projects Made With/For Vuetify",
   "materialDesign": "Material Design",
   "mit": "MIT License",
-  "specialSponsors": "Special Sponsors"
+  "specialSponsors": "Special Sponsors",
+  "whyVuetify": "Why Vuetify?"
 }

@@ -20,6 +20,6 @@
       "desc": "複数のトランジションを使用すれば、簡単にToDoリストを作成することができます！"
     }
   },
-  "createYourOwnText1": "Vuetifyのトランジションヘルパー関数を使用すると、簡単に独自のトランジションを作成することができます。この関数はVueにインポート可能なオブジェクトを返却します。Vueの<a href=\"https://jp.vuejs.org/v2/guide/render-function.html#%E9%96%A2%E6%95%B0%E5%9E%8B%E3%82%B3%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%8D%E3%83%B3%E3%83%88\" target=\"_blank\" rel=\"noopener\">関数型コンポーネント</a>を使用することによって、効率的にトランジションを作ることができます。",
+  "createYourOwnText1": "Vuetifyのトランジションヘルパー関数を使用すると、簡単に独自のトランジションを作成することができます。この関数はVueにインポート可能なオブジェクトを返却します。Vueの[関数型コンポーネント](https://jp.vuejs.org/v2/guide/render-function.html#%E9%96%A2%E6%95%B0%E5%9E%8B%E3%82%B3%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%8D%E3%83%B3%E3%83%88)を使用することによって、効率的にトランジションを作ることができます。",
   "createYourOwnText2": "`createSimpleTransition`関数は引数としてnameを受け取ります。これはスタイルで利用するための名前となります。これは`v-fade-transition`がどのように見えるかの例です。"
 }

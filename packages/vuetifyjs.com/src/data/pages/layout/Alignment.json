@@ -1,0 +1,15 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "usage",
+          "value": "example"
+        }
+      ]
+    }
+  ]
+}

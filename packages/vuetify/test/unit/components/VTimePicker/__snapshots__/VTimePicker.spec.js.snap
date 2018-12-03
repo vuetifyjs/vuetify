@@ -1548,7 +1548,265 @@ exports[`VTimePicker.js should render dark time picker. with useSeconds 1`] = `
 
 `;
 
-exports[`VTimePicker.js should render landscape component. with useSeconds 1`] = `
+exports[`VTimePicker.js should render disabled component 1`] = `
+
+<div class="v-picker v-card v-picker--time theme--light">
+  <div class="v-picker__title primary">
+    <div class="v-time-picker-title">
+      <div class="v-time-picker-title__time">
+        <div class="v-picker__title__btn v-picker__title__btn--active v-picker__title__btn--readonly">
+          9
+        </div>
+        <span>
+          :
+        </span>
+        <div class="v-picker__title__btn v-picker__title__btn--readonly">
+          12
+        </div>
+      </div>
+      <div class="v-time-picker-title__ampm">
+        <div class="v-picker__title__btn v-picker__title__btn--active v-picker__title__btn--readonly">
+          am
+        </div>
+        <div class="v-picker__title__btn v-picker__title__btn--readonly">
+          pm
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="v-picker__body theme--light"
+       style="width: 290px;"
+  >
+    <div class="v-time-picker-clock__container">
+      <div class="v-time-picker-clock theme--light">
+        <div class="v-time-picker-clock__inner">
+          <div class="v-time-picker-clock__hand accent">
+          </div>
+          <span class="v-time-picker-clock__item v-time-picker-clock__item--disabled"
+                style="left: 50%; top: 0%;"
+          >
+            <span>
+              12
+            </span>
+          </span>
+          <span class="v-time-picker-clock__item v-time-picker-clock__item--disabled"
+                style="left: 75%; top: 6.698729810778062%;"
+          >
+            <span>
+              1
+            </span>
+          </span>
+          <span class="v-time-picker-clock__item v-time-picker-clock__item--disabled"
+                style="left: 93.30127018922192%; top: 24.999999999999993%;"
+          >
+            <span>
+              2
+            </span>
+          </span>
+          <span class="v-time-picker-clock__item v-time-picker-clock__item--disabled"
+                style="left: 100%; top: 50%;"
+          >
+            <span>
+              3
+            </span>
+          </span>
+          <span class="v-time-picker-clock__item v-time-picker-clock__item--disabled"
+                style="left: 93.30127018922194%; top: 74.99999999999999%;"
+          >
+            <span>
+              4
+            </span>
+          </span>
+          <span class="v-time-picker-clock__item v-time-picker-clock__item--disabled"
+                style="left: 75.00000000000001%; top: 93.30127018922192%;"
+          >
+            <span>
+              5
+            </span>
+          </span>
+          <span class="v-time-picker-clock__item v-time-picker-clock__item--disabled"
+                style="left: 50.00000000000001%; top: 100%;"
+          >
+            <span>
+              6
+            </span>
+          </span>
+          <span class="v-time-picker-clock__item v-time-picker-clock__item--disabled"
+                style="left: 25.000000000000014%; top: 93.30127018922194%;"
+          >
+            <span>
+              7
+            </span>
+          </span>
+          <span class="v-time-picker-clock__item v-time-picker-clock__item--disabled"
+                style="left: 6.698729810778076%; top: 75.00000000000003%;"
+          >
+            <span>
+              8
+            </span>
+          </span>
+          <span class="v-time-picker-clock__item v-time-picker-clock__item--active v-time-picker-clock__item--disabled accent"
+                style="left: 0%; top: 50.00000000000001%;"
+          >
+            <span>
+              9
+            </span>
+          </span>
+          <span class="v-time-picker-clock__item v-time-picker-clock__item--disabled"
+                style="left: 6.6987298107780475%; top: 25.000000000000032%;"
+          >
+            <span>
+              10
+            </span>
+          </span>
+          <span class="v-time-picker-clock__item v-time-picker-clock__item--disabled"
+                style="left: 24.99999999999998%; top: 6.698729810778083%;"
+          >
+            <span>
+              11
+            </span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VTimePicker.js should render disabled component. with useSeconds 1`] = `
+
+<div class="v-picker v-card v-picker--time theme--light">
+  <div class="v-picker__title primary">
+    <div class="v-time-picker-title">
+      <div class="v-time-picker-title__time">
+        <div class="v-picker__title__btn v-picker__title__btn--active v-picker__title__btn--readonly">
+          9
+        </div>
+        <span>
+          :
+        </span>
+        <div class="v-picker__title__btn v-picker__title__btn--readonly">
+          12
+        </div>
+        <span>
+          :
+        </span>
+        <div class="v-picker__title__btn v-picker__title__btn--readonly">
+          34
+        </div>
+      </div>
+      <div class="v-time-picker-title__ampm">
+        <div class="v-picker__title__btn v-picker__title__btn--active v-picker__title__btn--readonly">
+          am
+        </div>
+        <div class="v-picker__title__btn v-picker__title__btn--readonly">
+          pm
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="v-picker__body theme--light"
+       style="width: 290px;"
+  >
+    <div class="v-time-picker-clock__container">
+      <div class="v-time-picker-clock theme--light">
+        <div class="v-time-picker-clock__inner">
+          <div class="v-time-picker-clock__hand accent">
+          </div>
+          <span class="v-time-picker-clock__item v-time-picker-clock__item--disabled"
+                style="left: 50%; top: 0%;"
+          >
+            <span>
+              12
+            </span>
+          </span>
+          <span class="v-time-picker-clock__item v-time-picker-clock__item--disabled"
+                style="left: 75%; top: 6.698729810778062%;"
+          >
+            <span>
+              1
+            </span>
+          </span>
+          <span class="v-time-picker-clock__item v-time-picker-clock__item--disabled"
+                style="left: 93.30127018922192%; top: 24.999999999999993%;"
+          >
+            <span>
+              2
+            </span>
+          </span>
+          <span class="v-time-picker-clock__item v-time-picker-clock__item--disabled"
+                style="left: 100%; top: 50%;"
+          >
+            <span>
+              3
+            </span>
+          </span>
+          <span class="v-time-picker-clock__item v-time-picker-clock__item--disabled"
+                style="left: 93.30127018922194%; top: 74.99999999999999%;"
+          >
+            <span>
+              4
+            </span>
+          </span>
+          <span class="v-time-picker-clock__item v-time-picker-clock__item--disabled"
+                style="left: 75.00000000000001%; top: 93.30127018922192%;"
+          >
+            <span>
+              5
+            </span>
+          </span>
+          <span class="v-time-picker-clock__item v-time-picker-clock__item--disabled"
+                style="left: 50.00000000000001%; top: 100%;"
+          >
+            <span>
+              6
+            </span>
+          </span>
+          <span class="v-time-picker-clock__item v-time-picker-clock__item--disabled"
+                style="left: 25.000000000000014%; top: 93.30127018922194%;"
+          >
+            <span>
+              7
+            </span>
+          </span>
+          <span class="v-time-picker-clock__item v-time-picker-clock__item--disabled"
+                style="left: 6.698729810778076%; top: 75.00000000000003%;"
+          >
+            <span>
+              8
+            </span>
+          </span>
+          <span class="v-time-picker-clock__item v-time-picker-clock__item--active v-time-picker-clock__item--disabled accent"
+                style="left: 0%; top: 50.00000000000001%;"
+          >
+            <span>
+              9
+            </span>
+          </span>
+          <span class="v-time-picker-clock__item v-time-picker-clock__item--disabled"
+                style="left: 6.6987298107780475%; top: 25.000000000000032%;"
+          >
+            <span>
+              10
+            </span>
+          </span>
+          <span class="v-time-picker-clock__item v-time-picker-clock__item--disabled"
+                style="left: 24.99999999999998%; top: 6.698729810778083%;"
+          >
+            <span>
+              11
+            </span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VTimePicker.js should render landscape component 1`] = `
 
 <div class="v-picker v-card v-picker--time v-picker--landscape theme--light">
   <div class="v-picker__title v-picker__title--landscape primary">
@@ -1674,7 +1932,7 @@ exports[`VTimePicker.js should render landscape component. with useSeconds 1`] =
 
 `;
 
-exports[`VTimePicker.js should render landscape component. with useSeconds. with useSeconds 1`] = `
+exports[`VTimePicker.js should render landscape component. with useSeconds 1`] = `
 
 <div class="v-picker v-card v-picker--time v-picker--landscape theme--light">
   <div class="v-picker__title v-picker__title--landscape primary">

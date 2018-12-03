@@ -3,7 +3,7 @@
     "default": "Default",
     "description": "Descripción",
     "examples": "Ejemplos",
-    "howItWorks": "Cómo funciona",
+    "howItWorks": "## Cómo funciona",
     "name": "Nombre",
     "openInCodePen": "Abrir en Codepen",
     "options": "Opciones",
