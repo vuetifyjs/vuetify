@@ -78,14 +78,6 @@ declare module 'vue/types/vue' {
     _uid: number
     _isDestroyed: boolean
 
-    /** bindObjectProps */
-    _b (
-      data: VNodeData,
-      tag: string,
-      value: any,
-      asProp: boolean,
-      isSync?: boolean
-    ): VNodeData
     /** bindObjectListeners */
      _g (data: VNodeData, value: {}): VNodeData
   }
