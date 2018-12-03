@@ -818,4 +818,28 @@ test('VTextField.js', ({ mount }) => {
 
     expect(focus).toHaveBeenCalledTimes(1)
   })
+
+  it('should fire a change event on clear', async () => {
+    let value = 'asd'
+    const change = jest.fn()
+
+    const component = {
+      render (h) {
+        return h(VTextField, {
+          on: {
+            input: (i) => value = i,
+            change
+          },
+          props: { value, clearable: true }
+        })
+      }
+    }
+    const wrapper = mount(component)
+    const clearIcon = wrapper.first('.v-input__icon--clear .v-icon')
+
+    clearIcon.trigger('click')
+
+    expect(change).toBeCalledWith(null)
+    expect(change.mock.calls).toHaveLength(1)
+  })
 })
