@@ -165,6 +165,7 @@ export default {
         props: {
           action: this.multiple && !this.isHidingSelected,
           color: this.color,
+          dark: this.dark,
           dense: this.dense,
           hideSelected: this.hideSelected,
           items: this.virtualizedItems,
