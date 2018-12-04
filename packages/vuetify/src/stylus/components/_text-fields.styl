@@ -121,6 +121,7 @@ rtl(v-text-field-rtl, "v-text-field")
 .v-text-field
   // padding-top: $text-field-active-label-height
   margin-top: $input-top-spacing - $text-field-active-label-height
+  input-affix(4px, 4px)
 
   input
     flex: 1 1 auto
@@ -243,7 +244,9 @@ rtl(v-text-field-rtl, "v-text-field")
     .v-input__slot
       min-height: 56px
 
-  &--box
+  &.v-text-field--box
+    input-affix(16px, 16px)
+
     .v-input__slot
       border-top-left-radius: 4px
       border-top-right-radius: 4px
@@ -274,6 +277,7 @@ rtl(v-text-field-rtl, "v-text-field")
       margin-bottom: 8px
 
   &.v-text-field--full-width
+    input-affix(16px, 16px)
     // &.v-input
     //   margin-bottom: 0
     //   margin-top: 0
@@ -311,9 +315,10 @@ rtl(v-text-field-rtl, "v-text-field")
       &:after
         display: none
 
-  &--outline
+  &.v-text-field--outline
     margin-bottom: 16px
     transition: border $primary-transition
+    input-affix(14px, 16px)
 
     .v-input__slot
       background: transparent !important
@@ -339,6 +344,8 @@ rtl(v-text-field-rtl, "v-text-field")
         transition: border $primary-transition
 
   &.v-text-field--solo
+    input-affix(12px, 12px)
+
     .v-label
       top: calc(50% - 10px)
 
