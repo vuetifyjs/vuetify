@@ -1,0 +1,56 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "usage",
+          "value": "usage"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": [
+            "v-expansion-panel",
+            "v-expansion-panel-content"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [
+            "expand",
+            "external",
+            "disabledAndReadonly",
+            "popout",
+            "customIcons",
+            "focusable"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/cards",
+            "components/data-tables",
+            "components/lists"
+          ]
+        }
+      ]
+    }
+  ]
+}

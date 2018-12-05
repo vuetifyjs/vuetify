@@ -1,61 +1,60 @@
-import { addOnceEventListener } from '../../util/helpers'
-
 export default function (expandedParentClass = '') {
   return {
-    enter (el, done) {
+    beforeEnter (el) {
       el._parent = el.parentNode
-      el._height = el._height != null ? el._height : el.style.height
+      el._initialStyle = {
+        transition: el.style.transition,
+        visibility: el.style.visibility,
+        overflow: el.style.overflow,
+        height: el.style.height
+      }
+    },
 
-      addOnceEventListener(el, 'transitionend', done)
-
-      // Get height that is to be scrolled
+    enter (el) {
+      const initialStyle = el._initialStyle
+      el.style.setProperty('transition', 'none', 'important')
+      el.style.visibility = 'hidden'
+      const height = `${el.offsetHeight}px`
+      el.style.visibility = initialStyle.visibility
       el.style.overflow = 'hidden'
       el.style.height = 0
-      el.style.display = 'block'
-      expandedParentClass && el._parent.classList.add(expandedParentClass)
+      void el.offsetHeight // force reflow
+      el.style.transition = initialStyle.transition
 
-      setTimeout(() => {
-        el.style.height = el._height ||
-          (!el.scrollHeight
-            ? 'auto'
-            : `${el.scrollHeight}px`)
-      }, 100)
+      expandedParentClass && el._parent && el._parent.classList.add(expandedParentClass)
+
+      requestAnimationFrame(() => {
+        el.style.height = height
+      })
     },
 
-    afterEnter (el) {
-      el.style.overflow = null
+    afterEnter: resetStyles,
+    enterCancelled: resetStyles,
 
-      // If user supplied height
-      // leave it
-      if (el._height) return
-
-      el.style.height = null
-    },
-
-    leave (el, done) {
-      // Remove initial transition
-      addOnceEventListener(el, 'transitionend', done)
-
-      // Set height before we transition to 0
-      el.style.overflow = 'hidden'
-
-      // If no user supplied height
-      // pass in the scrollHeight
-      if (!el._height) {
-        el.style.height = `${el.scrollHeight}px`
+    leave (el) {
+      el._initialStyle = {
+        overflow: el.style.overflow,
+        height: el.style.height
       }
 
-      setTimeout(() => (el.style.height = 0), 100)
+      el.style.overflow = 'hidden'
+      el.style.height = `${el.offsetHeight}px`
+
+      requestAnimationFrame(() => el.style.height = 0)
     },
 
-    afterLeave (el) {
-      expandedParentClass && el._parent && el._parent.classList.remove(expandedParentClass)
-
-      // If user supplied height
-      // leave it
-      if (el._height) return
-
-      el.style.height = null
-    }
+    afterLeave,
+    leaveCancelled: afterLeave
   }
+
+  function afterLeave (el) {
+    expandedParentClass && el._parent && el._parent.classList.remove(expandedParentClass)
+    resetStyles(el)
+  }
+}
+
+function resetStyles (el) {
+  el.style.overflow = el._initialStyle.overflow
+  el.style.height = el._initialStyle.height
+  delete el._initialStyle
 }

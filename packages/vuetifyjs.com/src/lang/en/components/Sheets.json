@@ -1,0 +1,21 @@
+{
+  "header": "# Sheet",
+  "headerText": "The `v-sheet` component is the baseline paper element in Vuetify.",
+  "examples": {
+    "usage": {
+      "desc": "Sheet may have different colors, such a Material Design colors or CSS colors"
+    },
+    "tag": {
+      "header": "### Using different tags",
+      "desc": "Sheet may use different tags. You can check it in the example below using DevTools!"
+    },
+    "elevation": {
+      "header": "### Using elevation",
+      "desc": "Sheet may have any `elevation` value"
+    }
+  },
+  "props": {
+    "tag": "Specifies a tag",
+    "tile": "Sheet won't have border-radius"
+  }
+}

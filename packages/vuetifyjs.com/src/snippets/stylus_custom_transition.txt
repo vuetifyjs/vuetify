@@ -1,0 +1,9 @@
+.fade-transition
+  &-leave-active
+    position: absolute
+
+  &-enter-active, &-leave, &-leave-to
+    transition: $primary-transition
+
+  &-enter, &-leave-to
+    opacity: 0

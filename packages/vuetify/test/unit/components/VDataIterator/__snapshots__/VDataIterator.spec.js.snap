@@ -44,8 +44,10 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
                      style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
                 >
                   <div class="v-select-list v-card theme--light">
-                    <div class="v-list theme--light">
-                      <div>
+                    <div role="list"
+                         class="v-list theme--light"
+                    >
+                      <div role="listitem">
                         <a class="v-list__tile v-list__tile--link v-list__tile--active theme--light primary--text">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
@@ -54,7 +56,7 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
                           </div>
                         </a>
                       </div>
-                      <div>
+                      <div role="listitem">
                         <a class="v-list__tile v-list__tile--link theme--light">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
@@ -63,7 +65,7 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
                           </div>
                         </a>
                       </div>
-                      <div>
+                      <div role="listitem">
                         <a class="v-list__tile v-list__tile--link theme--light">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
@@ -72,7 +74,7 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
                           </div>
                         </a>
                       </div>
-                      <div>
+                      <div role="listitem">
                         <a class="v-list__tile v-list__tile--link theme--light">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
@@ -181,8 +183,10 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
                      style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
                 >
                   <div class="v-select-list v-card theme--light">
-                    <div class="v-list theme--light">
-                      <div>
+                    <div role="list"
+                         class="v-list theme--light"
+                    >
+                      <div role="listitem">
                         <a class="v-list__tile v-list__tile--link v-list__tile--active theme--light primary--text">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
@@ -191,7 +195,7 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
                           </div>
                         </a>
                       </div>
-                      <div>
+                      <div role="listitem">
                         <a class="v-list__tile v-list__tile--link theme--light">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
@@ -200,7 +204,7 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
                           </div>
                         </a>
                       </div>
-                      <div>
+                      <div role="listitem">
                         <a class="v-list__tile v-list__tile--link theme--light">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
@@ -209,7 +213,7 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
                           </div>
                         </a>
                       </div>
-                      <div>
+                      <div role="listitem">
                         <a class="v-list__tile v-list__tile--link theme--light">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
@@ -309,8 +313,10 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
                      style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
                 >
                   <div class="v-select-list v-card theme--light">
-                    <div class="v-list theme--light">
-                      <div>
+                    <div role="list"
+                         class="v-list theme--light"
+                    >
+                      <div role="listitem">
                         <a class="v-list__tile v-list__tile--link v-list__tile--active theme--light primary--text">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
@@ -319,7 +325,7 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
                           </div>
                         </a>
                       </div>
-                      <div>
+                      <div role="listitem">
                         <a class="v-list__tile v-list__tile--link theme--light">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
@@ -328,7 +334,7 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
                           </div>
                         </a>
                       </div>
-                      <div>
+                      <div role="listitem">
                         <a class="v-list__tile v-list__tile--link theme--light">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
@@ -337,7 +343,7 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
                           </div>
                         </a>
                       </div>
-                      <div>
+                      <div role="listitem">
                         <a class="v-list__tile v-list__tile--link theme--light">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
@@ -441,8 +447,10 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
                      style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
                 >
                   <div class="v-select-list v-card theme--light">
-                    <div class="v-list theme--light">
-                      <div>
+                    <div role="list"
+                         class="v-list theme--light"
+                    >
+                      <div role="listitem">
                         <a class="v-list__tile v-list__tile--link v-list__tile--active theme--light primary--text">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
@@ -451,7 +459,7 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
                           </div>
                         </a>
                       </div>
-                      <div>
+                      <div role="listitem">
                         <a class="v-list__tile v-list__tile--link theme--light">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
@@ -460,7 +468,7 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
                           </div>
                         </a>
                       </div>
-                      <div>
+                      <div role="listitem">
                         <a class="v-list__tile v-list__tile--link theme--light">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
@@ -469,7 +477,7 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
                           </div>
                         </a>
                       </div>
-                      <div>
+                      <div role="listitem">
                         <a class="v-list__tile v-list__tile--link theme--light">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
@@ -597,8 +605,10 @@ exports[`VDataIterator.js should reset to page 1 when data is smaller than curre
                      style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
                 >
                   <div class="v-select-list v-card theme--light">
-                    <div class="v-list theme--light">
-                      <div>
+                    <div role="list"
+                         class="v-list theme--light"
+                    >
+                      <div role="listitem">
                         <a class="v-list__tile v-list__tile--link theme--light">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
@@ -607,7 +617,7 @@ exports[`VDataIterator.js should reset to page 1 when data is smaller than curre
                           </div>
                         </a>
                       </div>
-                      <div>
+                      <div role="listitem">
                         <a class="v-list__tile v-list__tile--link theme--light">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
@@ -616,7 +626,7 @@ exports[`VDataIterator.js should reset to page 1 when data is smaller than curre
                           </div>
                         </a>
                       </div>
-                      <div>
+                      <div role="listitem">
                         <a class="v-list__tile v-list__tile--link theme--light">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
@@ -625,7 +635,7 @@ exports[`VDataIterator.js should reset to page 1 when data is smaller than curre
                           </div>
                         </a>
                       </div>
-                      <div>
+                      <div role="listitem">
                         <a class="v-list__tile v-list__tile--link theme--light">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
@@ -720,8 +730,10 @@ exports[`VDataIterator.js should reset to page 1 when data is smaller than curre
                      style="max-height: 200px; min-width: 75px; max-width: auto; top: 12px; left: 12px; z-index: 0; display: none;"
                 >
                   <div class="v-select-list v-card theme--light">
-                    <div class="v-list theme--light">
-                      <div>
+                    <div role="list"
+                         class="v-list theme--light"
+                    >
+                      <div role="listitem">
                         <a class="v-list__tile v-list__tile--link theme--light">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
@@ -730,7 +742,7 @@ exports[`VDataIterator.js should reset to page 1 when data is smaller than curre
                           </div>
                         </a>
                       </div>
-                      <div>
+                      <div role="listitem">
                         <a class="v-list__tile v-list__tile--link theme--light">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
@@ -739,7 +751,7 @@ exports[`VDataIterator.js should reset to page 1 when data is smaller than curre
                           </div>
                         </a>
                       </div>
-                      <div>
+                      <div role="listitem">
                         <a class="v-list__tile v-list__tile--link theme--light">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">
@@ -748,7 +760,7 @@ exports[`VDataIterator.js should reset to page 1 when data is smaller than curre
                           </div>
                         </a>
                       </div>
-                      <div>
+                      <div role="listitem">
                         <a class="v-list__tile v-list__tile--link theme--light">
                           <div class="v-list__tile__content">
                             <div class="v-list__tile__title">

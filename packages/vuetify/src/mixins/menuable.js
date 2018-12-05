@@ -200,7 +200,7 @@ export default Vue.extend({
 
       if (left < 0) left = 12
 
-      return left
+      return left + this.getOffsetLeft()
     },
     calcYOverflow (top) {
       const documentHeight = this.getInnerHeight()
@@ -276,6 +276,12 @@ export default Vue.extend({
 
       return window.innerWidth
     },
+    getOffsetLeft () {
+      if (!this.hasWindow) return 0
+
+      return window.pageXOffset ||
+        document.documentElement.scrollLeft
+    },
     getOffsetTop () {
       if (!this.hasWindow) return 0
 
@@ -322,7 +328,10 @@ export default Vue.extend({
       })
     },
     startTransition () {
-      requestAnimationFrame(() => (this.isContentActive = true))
+      return new Promise(resolve => requestAnimationFrame(() => {
+        this.isContentActive = true
+        resolve()
+      }))
     },
     isShown (el) {
       return el.style.display !== 'none'

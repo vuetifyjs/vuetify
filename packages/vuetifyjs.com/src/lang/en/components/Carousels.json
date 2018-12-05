@@ -1,29 +1,28 @@
 {
-  "header": "Carousel",
+  "header": "# Carousel",
   "headerText": "The `v-carousel` component is used to display large numbers of visual content on a rotating timer.",
   "examples": {
-    "default": {
-      "header": "Default",
+    "usage": {
       "desc": "A carousel by default has a slide transition.",
       "uninverted": true
     },
     "customTransition": {
-      "header": "Custom transition",
+      "header": "### Custom transition",
       "desc": "You can also apply your own custom transition.",
       "uninverted": true
     },
     "customIcons": {
-      "header": "Custom icons",
+      "header": "### Custom icons",
       "desc": "You can also change the icon for the carousel delimiter and previous/next icons.",
       "uninverted": true
     },
     "hideDelimiters": {
-      "header": "Hide delimiters",
+      "header": "### Hide delimiters",
       "desc": "You can hide the bottom controls with the `hide-delimiters` prop.",
       "uninverted": true
     },
     "hideControls": {
-      "header": "Hide controls",
+      "header": "### Hide controls",
       "desc": "You can hide the navigation controls with the `hide-controls` prop.",
       "uninverted": true
     }

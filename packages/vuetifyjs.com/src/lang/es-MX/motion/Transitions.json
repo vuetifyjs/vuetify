@@ -34,7 +34,7 @@
         }
     ],
     "createYourOwnHeader": "Crea una propia",
-    "createYourOwnText1": "Puedes utilizar la función auxiliar transition de Vuetify para crear fácilmente tus propias transiciones personalizadas. Utilizando una opción <a href=\"https://vuejs.org/v2/guide/render-function.html#Functional-Components\" target=\"_blank\" rel=\"noopener\">componente funcional</a> se asegurará de que tu transición es tan eficiente como sea posible. Simplemente importa la función:",
+    "createYourOwnText1": "Puedes utilizar la función auxiliar transition de Vuetify para crear fácilmente tus propias transiciones personalizadas. Utilizando una opción [componente funcional](https://vuejs.org/v2/guide/render-function.html#Functional-Components) se asegurará de que tu transición es tan eficiente como sea posible. Simplemente importa la función:",
     "createYourOwnText2": "La función <code>createSimpleTransition</code> toma 1 argumento: name. Este será el nombre al que puedes ligar tu estilo. Aquí un ejemplo de cómo se ve <code>v-fade-transition</code>:",
     "toc": [
         {

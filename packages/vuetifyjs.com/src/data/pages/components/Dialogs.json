@@ -1,0 +1,55 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "usage",
+          "value": "usage"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": ["v-dialog"]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [
+            "withoutActivator",
+            "modal",
+            "fullscreen",
+            "form",
+            "scrollable",
+            "overflowed",
+            "advanced",
+            "loader"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/buttons",
+            "components/cards",
+            "components/menus"
+          ]
+        }
+      ]
+    }
+  ]
+}

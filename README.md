@@ -58,11 +58,15 @@
 <br>
 
 <h2 align="center">Supporting through Patreon</h2>
-<p>Vuetify is an open source MIT project that has been made possible due to the generous contributions by <a href="https://github.com/vuetifyjs/vuetify/blob/dev/BACKERS.md">community backers</a>. If you are interested in supporting this project, please consider becoming a patron.</p>
+<p>Vuetify is an open source MIT project that has been made possible due to the generous contributions by <a href="https://github.com/vuetifyjs/vuetify/blob/dev/BACKERS.md">community backers</a>. If you are interested in supporting this project, please consider becoming a patron or donating to our <a href="https://opencollective.com/vuetify">OpenCollective</a>.</p>
 
 <p align="center">
   <a href="https://www.patreon.com/vuetify">
     <img src="https://c5.patreon.com/external/logo/become_a_patron_button.png" alt="Become a Patron" />
+  </a>
+  <br>
+  <a href="https://opencollective.com/vuetify">
+    <img src="https://opencollective.com/static/images/become_sponsor.svg" alt="Donate to OpenCollective">
   </a>
 </p>
 <p align="center"><b>Diamond</b></p>
@@ -218,6 +222,28 @@ To help you get you familiar with our contribution process, we have a list of [g
 
 We also have a list of [help wanted](https://github.com/vuetifyjs/vuetify/labels/help%20wanted) issues that you might want to check.
 
+## Credits
+
+### Contributors
+
+This project exists thanks to all the people who contribute.
+
+<a href="https://github.com/vuetifyjs/vuetify/graphs/contributors"><img src="https://opencollective.com/vuetify/contributors.svg?width=890&button=false" /></a>
+
+### Backers
+
+Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/vuetify#backer)]
+
+<a href="https://opencollective.com/vuetify#backers" target="_blank"><img src="https://opencollective.com/vuetify/backers.svg?width=890"></a>
+
+### Sponsors
+
+Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/vuetify#sponsor)]
+
+<a href="https://opencollective.com/vuetify/sponsor/0/website" target="_blank"><img src="https://opencollective.com/vuetify/sponsor/0/avatar.svg"></a>
+
+
+
 ### License
 
-Vuetify is [MIT licensed](./LICENSE).
+Vuetify is [MIT licensed](./LICENSE.md).

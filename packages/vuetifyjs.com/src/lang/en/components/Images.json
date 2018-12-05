@@ -1,20 +1,24 @@
 {
-  "header": "Image",
-  "headerText": "",
+  "header": "# Image",
+  "headerText": "The `v-img` component is packed with features to support rich media. Combined with the [vuetify-loader](https://github.com/vuetifyjs/vuetify-loader), you can add dynamic progressive images to provide a better user experience.",
   "examples": {
+    "usage": {
+      "desc": ""
+    },
     "containCover": {
-      "header": "Contain and Cover",
+      "header": "### Contain and Cover",
       "desc": "If the provided aspect ratio doesn't match that of the actual image, the default behavior is to fill as much space as possible, clipping the sides of the image. Enabling the `contain` prop will prevent this, but will result in empty space at the sides."
     },
     "maxHeight": {
-      "header": "Height",
+      "header": "### Height",
       "desc": "`v-img` will automatically grow to the size of its `src`, preserving the correct aspect ratio. You can limit this with the `height` and `max-height` props."
     },
     "ratio": {
-      "header": "Fixed ratio"
+      "header": "### Fixed ratio",
+      "desc": ""
     },
     "gradients": {
-      "header": "Gradients",
+      "header": "### Gradients",
       "desc": "The `gradient` prop can be used to apply a simple gradient overlay to the image. More complex gradients should be written as a class on the content slot instead."
     }
   },

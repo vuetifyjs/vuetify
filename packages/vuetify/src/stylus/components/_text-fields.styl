@@ -19,6 +19,10 @@ v-text-field($material)
         transparent 4px
       ) 1 repeat
 
+    .v-text-field__prefix,
+    .v-text-field__suffix
+      color: $material.text.disabled
+
   &__prefix,
   &__suffix
     color: $material.text.secondary
@@ -156,7 +160,7 @@ rtl(v-text-field-rtl, "v-text-field")
     pointer-events: none
 
     &--active
-      max-width: 100%
+      max-width: 133%
       transform: translateY(-18px) scale(.75)
 
   & > .v-input__control > .v-input__slot
@@ -329,7 +333,7 @@ rtl(v-text-field-rtl, "v-text-field")
         margin-top: 22px
         transition: $primary-transition
 
-    &.v-input--is-focused
+    &.v-input--is-focused, &.v-input--has-state
       .v-input__slot
         border: 2px solid currentColor
         transition: border $primary-transition
