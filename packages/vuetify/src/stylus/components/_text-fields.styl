@@ -119,7 +119,7 @@ theme(v-text-field, "v-text-field")
 rtl(v-text-field-rtl, "v-text-field")
 
 .v-text-field
-  // padding-top: $text-field-active-label-height
+  padding-top: $text-field-active-label-height
   margin-top: $input-top-spacing - $text-field-active-label-height
   input-affix(4px, 4px)
 
@@ -130,22 +130,6 @@ rtl(v-text-field-rtl, "v-text-field")
     max-width: 100%
     min-width: 0px
     width: 100%
-
-  // .v-input__prepend-inner,
-  // .v-input__append-inner
-  //   align-self: flex-start
-  //   display: inline-flex
-  //   margin-top: 4px
-  //   line-height: 1
-  //   user-select: none
-
-  // .v-input__prepend-inner
-  //   margin-right: auto
-  //   padding-right: 4px
-
-  // .v-input__append-inner
-  //   margin-left: auto
-  //   padding-left: 4px
 
   .v-counter
     margin-left: 8px
@@ -225,15 +209,12 @@ rtl(v-text-field-rtl, "v-text-field")
   &--outline
     position: relative
 
-    // .v-input__slot
-    //   align-items: stretch
+    .v-input__slot
+      min-height: 56px
 
-    input
-      // margin-top: 22px
-
-    &.v-text-field--single-line
-      // input
-      //   margin-top: 10px
+  &.v-text-field--box
+    input-affix(16px, 16px)
+    text-field-padding(23px, 12px)
 
     .v-label
       top: 18px
@@ -241,11 +222,12 @@ rtl(v-text-field-rtl, "v-text-field")
       &--active
         transform: translateY(-6px) scale(.75)
 
-    .v-input__slot
-      min-height: 56px
+    .v-text-field__slot
+      padding-top: 23px
 
-  &.v-text-field--box
-    input-affix(16px, 16px)
+    &.v-text-field--single-line
+      .v-text-field__slot
+        padding-top: 12px
 
     .v-input__slot
       border-top-left-radius: 4px
@@ -263,12 +245,6 @@ rtl(v-text-field-rtl, "v-text-field")
       .v-progress-linear__background
         display: none
 
-    // .v-input__prepend-outer,
-    // .v-input__prepend-inner,
-    // .v-input__append-inner,
-    // .v-input__append-outer
-    //   margin-top: 16px
-
     .v-text-field__details,
     .v-input__slot
       padding: 0 12px
@@ -278,23 +254,10 @@ rtl(v-text-field-rtl, "v-text-field")
 
   &.v-text-field--full-width
     input-affix(16px, 16px)
-    // &.v-input
-    //   margin-bottom: 0
-    //   margin-top: 0
+    text-field-padding(12px, 12px)
 
-    // .v-label
-    //   top: calc(50% - 10px)
-
-    // .v-input__control
-    //   padding: 12px 0
-
-    // .v-input__prepend-outer,
-    // .v-input__append-outer
-    //   margin-top: 4px
-
-    // .v-input__append-inner
-    //   align-self: center
-    //   margin-top: 0
+    .v-text-field__slot
+      margin-top: 12px
 
   &--reverse
     input
@@ -320,16 +283,22 @@ rtl(v-text-field-rtl, "v-text-field")
     transition: border $primary-transition
     input-affix(14px, 16px)
 
+    .v-label
+      top: 16px
+
+      &--active
+        transform: translateY(-8px) scale(.75)
+
+    .v-text-field__slot
+      padding-top: 20px
+
+    &.v-text-field--single-line
+      .v-text-field__slot
+        padding-top: 10px
+
     .v-input__slot
       background: transparent !important
       border-radius: 4px
-
-    // .v-text-field__prefix
-    //   max-height: 32px
-
-    // .v-input__prepend-outer,
-    // .v-input__append-outer
-    //   margin-top: 18px // 2px for border
 
     &.v-input--is-dirty,
     &.v-input--is-focused,
@@ -346,8 +315,11 @@ rtl(v-text-field-rtl, "v-text-field")
   &.v-text-field--solo
     input-affix(12px, 12px)
 
+    .v-text-field__slot
+      padding-top: 8px
+
     .v-label
-      top: calc(50% - 10px)
+      top: calc(50% - 6px)
 
     .v-input__control
       min-height: 48px
@@ -356,18 +328,6 @@ rtl(v-text-field-rtl, "v-text-field")
     &:not(.v-text-field--solo-flat)
       .v-input__slot
         elevation(2)
-
-    // .v-text-field__slot
-    //   align-items: center
-
-    // .v-input__append-inner,
-    // .v-input__prepend-inner
-    //   align-self: center
-    //   margin-top: 0
-
-    // .v-input__prepend-outer,
-    // .v-input__append-outer
-    //   margin-top: 12px
 
   &.v-input--is-focused
     .v-input__slot:after

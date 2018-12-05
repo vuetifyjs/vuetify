@@ -138,7 +138,7 @@ export default {
       return this.isDirty || dirtyTypes.includes(this.type)
     },
     isSingle () {
-      return this.isSolo || this.singleLine
+      return this.isSolo || this.singleLine || this.fullWidth
     },
     isSolo () {
       return this.solo || this.soloInverted

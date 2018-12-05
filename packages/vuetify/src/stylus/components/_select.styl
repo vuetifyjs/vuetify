@@ -46,10 +46,6 @@ theme(v-select, 'v-select')
           top: 7px
           transition: $primary-transition
 
-  // &.v-text-field--enclosed:not(.v-text-field--single-line)
-  //   .v-select__selections
-  //     padding-top: 24px
-
   &.v-text-field
     input
       flex: 1 1 // Doesn't resize on IE11 with 3rd param
@@ -89,7 +85,7 @@ theme(v-select, 'v-select')
       flex-direction: row-reverse
 
   &__selections
-    // align-items: center
+    align-items: center
     display: flex
     flex: 1 1 auto
     flex-wrap: wrap
@@ -104,12 +100,20 @@ theme(v-select, 'v-select')
       margin: 7px 4px 7px 0
 
   &__slot
+    align-items: center
     position: relative
-    // align-items: center
     display: flex
     width: 100%
 
   &:not(.v-text-field--single-line)
+    &.v-text-field--box
+      .v-select__selections
+        padding-top: 22px
+
+    &.v-text-field--outline
+      .v-select__selections
+        padding-top: 20px
+
     .v-select__slot
       // If an input is a direct child
       // there is no selections div
@@ -117,3 +121,16 @@ theme(v-select, 'v-select')
       // the end of the container
       > input
         align-self: flex-end
+
+  &.v-text-field--single-line
+    &.v-text-field--box
+      .v-select__selections
+        padding-top: 12px
+
+    &.v-text-field--outline
+      .v-select__selections
+        padding-top: 10px
+
+    &.v-text-field--solo
+      .v-select__selections
+        padding-top: 8px

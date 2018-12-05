@@ -31,10 +31,6 @@ rtl(v-textarea-rtl, 'v-textarea')
     padding: 7px 0 8px
     width: 100%
 
-  // .v-text-field__prefix
-  //   padding-top: 4px
-  //   align-self: start
-
   &.v-text-field--full-width,
   &.v-text-field--full-width.v-text-field--single-line
     .v-text-field__slot
@@ -51,28 +47,9 @@ rtl(v-textarea-rtl, 'v-textarea')
       textarea
         padding-right: 12px
 
-  // &.v-text-field--box,
-  // &.v-text-field--enclosed
-  //   textarea
-  //     margin-top: 24px
-
-  //   &.v-text-field--single-line
-  //     .v-label
-  //       top: 18px
-
-  //     &.v-text-field--outline
-  //       .v-input__control
-  //         padding-top: 0
-
   &.v-text-field--solo
-    // Essentially revert styles
-    // applied by v-text-field
-    // .v-input__prepend-inner,
-    // .v-input__prepend-outer,
-    // .v-input__append-inner,
-    // .v-input__append-outer
-    //   align-self: flex-start
-    //   margin-top: 16px
+    .v-label
+      top: 14px
 
   &--auto-grow
     textarea
