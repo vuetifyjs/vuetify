@@ -136,11 +136,11 @@
         },
         {
           ...packages,
-          complete: false,
+          complete: true,
           title: 'AWS Cognito Vuex Module',
           caption: 'November 2018',
           text: 'A fully featured Vuex module for interacting with AWS Cognito. Useful for websites that require authentication.',
-          value: true
+          value: false
         },
         {
           ...release,
@@ -148,7 +148,7 @@
           title: 'v1.4 Release',
           caption: 'December 2018',
           text: 'Add new components, `v-calendar`, `v-sparkline` and a abstracting `v-toolbar`\'s functionality into multiple components.',
-          value: false
+          value: true
         },
         {
           ...release,
