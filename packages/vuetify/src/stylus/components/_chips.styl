@@ -10,11 +10,11 @@ v-chip($material)
 
 v-chip-rtl()
   &__close
-    margin: 0 8px 0 2px
+    margin: $chip-close-margin-rtl
 
   &--removable
     .v-chip__content
-      padding: 0 12px 0 4px
+      padding: $chip-removeable-padding-rtl
 
   &--select-multi
     margin: $chip-margin 0 $chip-margin $chip-margin
@@ -61,7 +61,7 @@ rtl(v-chip-rtl, "v-chip")
 
   &--removable
     .v-chip__content
-      padding: 0 4px 0 12px
+      padding: $chip-removeable-padding
 
   .v-avatar
     // Important is needed to account for new avatar structure
@@ -123,7 +123,7 @@ rtl(v-chip-rtl, "v-chip")
     color: inherit
     display: flex
     font-size: $chip-icon-font-size
-    margin: 0 2px 0 8px
+    margin: $chip-close-margin
     text-decoration: none
     user-select: none
 
