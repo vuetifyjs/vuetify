@@ -32,9 +32,11 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
           </div>
         </button>
         <div class="v-date-picker-header__value">
-          <strong class="primary--text">
-            November 2005
-          </strong>
+          <div class="primary--text">
+            <button>
+              November 2005
+            </button>
+          </div>
         </div>
         <button type="button"
                 class="v-btn v-btn--icon theme--light"
@@ -401,9 +403,11 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
           </div>
         </button>
         <div class="v-date-picker-header__value">
-          <strong class="orange--text text--darken-1">
-            November 2005
-          </strong>
+          <div class="orange--text text--darken-1">
+            <button>
+              November 2005
+            </button>
+          </div>
         </div>
         <button type="button"
                 class="v-btn v-btn--icon theme--light"
@@ -770,9 +774,11 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
           </div>
         </button>
         <div class="v-date-picker-header__value">
-          <strong class="accent--text">
-            May 2013
-          </strong>
+          <div class="accent--text">
+            <button>
+              May 2013
+            </button>
+          </div>
         </div>
         <button type="button"
                 class="v-btn v-btn--icon theme--dark"
@@ -1150,9 +1156,11 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
           </div>
         </button>
         <div class="v-date-picker-header__value">
-          <strong class="accent--text">
-            May 2013
-          </strong>
+          <div class="accent--text">
+            <button>
+              May 2013
+            </button>
+          </div>
         </div>
         <button type="button"
                 class="v-btn v-btn--icon theme--light"
@@ -1553,9 +1561,11 @@ exports[`VDatePicker.js should render component with min/max props 1`] = `
           </div>
         </button>
         <div class="v-date-picker-header__value">
-          <strong class="accent--text">
-            January 2013
-          </strong>
+          <div class="accent--text">
+            <button>
+              January 2013
+            </button>
+          </div>
         </div>
         <button disabled="disabled"
                 type="button"
@@ -1949,9 +1959,11 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
           </div>
         </button>
         <div class="v-date-picker-header__value">
-          <strong class="accent--text">
-            January 2013
-          </strong>
+          <div class="accent--text">
+            <button>
+              January 2013
+            </button>
+          </div>
         </div>
         <button disabled="disabled"
                 type="button"
@@ -2322,9 +2334,11 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
           </div>
         </button>
         <div class="v-date-picker-header__value">
-          <strong class="accent--text">
-            2013
-          </strong>
+          <div class="accent--text">
+            <button>
+              2013
+            </button>
+          </div>
         </div>
         <button disabled="disabled"
                 type="button"
@@ -2511,9 +2525,11 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
           </div>
         </button>
         <div class="v-date-picker-header__value">
-          <strong class="accent--text">
-            January 2013
-          </strong>
+          <div class="accent--text">
+            <button>
+              January 2013
+            </button>
+          </div>
         </div>
         <button disabled="disabled"
                 type="button"
@@ -2884,9 +2900,11 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
           </div>
         </button>
         <div class="v-date-picker-header__value">
-          <strong class="accent--text">
-            2013
-          </strong>
+          <div class="accent--text">
+            <button>
+              2013
+            </button>
+          </div>
         </div>
         <button disabled="disabled"
                 type="button"
@@ -3080,9 +3098,11 @@ exports[`VDatePicker.js should render disabled picker 1`] = `
           </div>
         </button>
         <div class="v-date-picker-header__value v-date-picker-header__value--disabled">
-          <strong>
-            May 2013
-          </strong>
+          <div>
+            <button>
+              May 2013
+            </button>
+          </div>
         </div>
         <button disabled="disabled"
                 type="button"
@@ -3492,9 +3512,11 @@ exports[`VDatePicker.js should render readonly picker 1`] = `
           </div>
         </button>
         <div class="v-date-picker-header__value">
-          <strong class="accent--text">
-            May 2013
-          </strong>
+          <div class="accent--text">
+            <button>
+              May 2013
+            </button>
+          </div>
         </div>
         <button type="button"
                 class="v-btn v-btn--icon theme--light"
