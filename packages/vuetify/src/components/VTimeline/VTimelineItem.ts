@@ -80,7 +80,7 @@ export default mixins(
     genOpposite () {
       return this.$createElement('div', {
         staticClass: 'v-timeline-item__opposite'
-      }, [this.$slots.opposite])
+      }, [this.$slots.opposite!])
     }
   },
 

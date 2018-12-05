@@ -63,7 +63,7 @@ export default mixins(Colorable, Themeable, Toggleable).extend({
       ])
     },
     genContent (h: CreateElement): VNode {
-      const children: VNodeChildren = [this.$slots.default]
+      const children: VNodeChildren = [this.$slots.default!]
 
       this.close && children.push(this.genClose(h))
 

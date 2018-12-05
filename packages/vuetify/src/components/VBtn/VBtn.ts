@@ -119,7 +119,7 @@ export default baseMixins.extend<options>().extend({
       return this.$createElement(
         'div',
         { 'class': 'v-btn__content' },
-        [this.$slots.default]
+        [this.$slots.default!]
       )
     },
     genLoader (): VNode {

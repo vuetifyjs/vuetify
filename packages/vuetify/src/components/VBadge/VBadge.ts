@@ -53,13 +53,13 @@ export default mixins(
         name: 'show',
         value: this.isActive
       }]
-    }), this.$slots.badge)] : null
+    }), this.$slots.badge)] : undefined
 
     return h('span', {
       staticClass: 'v-badge',
       'class': this.classes
     }, [
-      this.$slots.default,
+      this.$slots.default!,
       h('transition', {
         props: {
           name: this.transition,
