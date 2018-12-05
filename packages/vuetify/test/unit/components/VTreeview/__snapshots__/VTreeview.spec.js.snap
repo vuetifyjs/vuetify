@@ -111,8 +111,8 @@ exports[`VTreeView.ts should not show expand icon when children is empty 1`] = `
   <div class="v-treeview-node v-treeview-node--leaf">
     <div class="v-treeview-node__root">
       <div class="v-treeview-node__content">
-        <label class="v-treeview-node__label">
-        </label>
+        <div class="v-treeview-node__label">
+        </div>
       </div>
     </div>
   </div>
@@ -416,8 +416,8 @@ exports[`VTreeView.ts should show expand icon when children is empty and load-ch
         arrow_drop_down
       </i>
       <div class="v-treeview-node__content">
-        <label class="v-treeview-node__label">
-        </label>
+        <div class="v-treeview-node__label">
+        </div>
       </div>
     </div>
   </div>
