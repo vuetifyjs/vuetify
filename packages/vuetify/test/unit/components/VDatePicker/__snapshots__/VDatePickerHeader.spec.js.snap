@@ -15,9 +15,11 @@ exports[`VDatePickerHeader.js should render component and match snapshot 1`] = `
     </div>
   </button>
   <div class="v-date-picker-header__value">
-    <strong class="accent--text">
-      November 2005
-    </strong>
+    <div class="accent--text">
+      <button>
+        November 2005
+      </button>
+    </div>
   </div>
   <button type="button"
           class="v-btn v-btn--icon theme--light"
@@ -49,9 +51,11 @@ exports[`VDatePickerHeader.js should render component in RTL mode and match snap
     </div>
   </button>
   <div class="v-date-picker-header__value">
-    <strong class="accent--text">
-      November 2005
-    </strong>
+    <div class="accent--text">
+      <button>
+        November 2005
+      </button>
+    </div>
   </div>
   <button type="button"
           class="v-btn v-btn--icon theme--light"
@@ -83,11 +87,13 @@ exports[`VDatePickerHeader.js should render component with default slot and matc
     </div>
   </button>
   <div class="v-date-picker-header__value">
-    <strong class="accent--text">
-      <span>
-        foo
-      </span>
-    </strong>
+    <div class="accent--text">
+      <button>
+        <span>
+          foo
+        </span>
+      </button>
+    </div>
   </div>
   <button type="button"
           class="v-btn v-btn--icon theme--light"
@@ -120,9 +126,11 @@ exports[`VDatePickerHeader.js should render disabled component and match snapsho
     </div>
   </button>
   <div class="v-date-picker-header__value v-date-picker-header__value--disabled">
-    <strong>
-      November 2005
-    </strong>
+    <div>
+      <button>
+        November 2005
+      </button>
+    </div>
   </div>
   <button disabled="disabled"
           type="button"
@@ -155,9 +163,11 @@ exports[`VDatePickerHeader.js should render readonly component and match snapsho
     </div>
   </button>
   <div class="v-date-picker-header__value">
-    <strong class="accent--text">
-      November 2005
-    </strong>
+    <div class="accent--text">
+      <button>
+        November 2005
+      </button>
+    </div>
   </div>
   <button type="button"
           class="v-btn v-btn--icon theme--light"
