@@ -54,4 +54,34 @@ test('VCard.vue', ({ mount }) => {
     })
     expect(wrapper.hasStyle('height', '401px')).toBe(true)
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/5815
+  it('should apply the correct elevation on hover', async () => {
+    const wrapper = mount(VCard, {
+      propsData: {
+        hover: true
+      }
+    })
+
+    expect(wrapper.vm.computedElevation).toBe(2)
+
+    wrapper.trigger('mouseenter')
+    await new Promise(resolve => setTimeout(resolve, 0))
+    expect(wrapper.vm.computedElevation).toBe(8)
+
+    wrapper.trigger('mouseleave')
+    await new Promise(resolve => setTimeout(resolve, 0))
+    expect(wrapper.vm.computedElevation).toBe(2)
+
+    wrapper.setProps({ elevation: 12, hover: 2 })
+    expect(wrapper.vm.computedElevation).toBe(12)
+
+    wrapper.trigger('mouseenter')
+    await new Promise(resolve => setTimeout(resolve, 0))
+    expect(wrapper.vm.computedElevation).toBe(2)
+
+    wrapper.trigger('mouseleave')
+    await new Promise(resolve => setTimeout(resolve, 0))
+    expect(wrapper.vm.computedElevation).toBe(12)
+  })
 })

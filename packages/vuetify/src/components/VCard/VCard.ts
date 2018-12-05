@@ -4,6 +4,9 @@ import '../../stylus/components/_cards.styl'
 // Extensions
 import VSheet from '../VSheet'
 
+// Extensions
+import VHover from '../VHover'
+
 // Mixins
 import Routable from '../../mixins/routable'
 
@@ -26,24 +29,34 @@ export default mixins(
       default: 2
     },
     flat: Boolean,
-    hover: Boolean,
+    hover: [Boolean, String, Number],
     img: String,
     raised: Boolean
   },
+
+  data: () => ({
+    isHovered: false
+  }),
 
   computed: {
     classes (): object {
       return {
         'v-card': true,
-        'v-card--hover': this.hover,
+        'v-card--hover': this.isHoverable,
         ...VSheet.options.computed.classes.call(this)
       }
     },
     computedElevation (): number | string {
+      if (this.isHovered) {
+        return typeof this.hover === 'boolean' ? 8 : Number(this.hover)
+      }
       if (this.flat) return 0
       if (this.raised) return 3
 
       return (VSheet.options.computed as any).computedElevation.call(this)
+    },
+    isHoverable (): boolean {
+      return this.hover != null && this.hover !== false
     },
     styles (): object {
       const style = {
@@ -63,6 +76,17 @@ export default mixins(
 
     data.style = this.styles
 
-    return h(tag, this.setBackgroundColor(this.color, data), this.$slots.default)
+    const card = h(tag, this.setBackgroundColor(this.color, data), this.$slots.default)
+
+    if (!this.isHoverable) return card
+
+    return h(VHover, {
+      props: { value: this.isHovered },
+      on: {
+        input: (val: boolean) => {
+          this.isHovered = val
+        }
+      }
+    }, [card])
   }
 })
