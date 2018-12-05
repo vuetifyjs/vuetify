@@ -118,7 +118,7 @@ test('VDatePickerHeader.js', ({ mount }) => {
     const toggle = jest.fn()
     wrapper.vm.$on('toggle', toggle)
 
-    wrapper.find('.v-date-picker-header__value strong')[0].trigger('click')
+    wrapper.find('.v-date-picker-header__value div button')[0].trigger('click')
     expect(toggle).toBeCalled()
   })
 

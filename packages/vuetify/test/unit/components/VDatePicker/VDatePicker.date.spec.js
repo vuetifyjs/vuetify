@@ -318,7 +318,7 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const button = wrapper.find('.v-date-picker-header strong')[0]
+    const button = wrapper.find('.v-date-picker-header div button')[0]
 
     button.trigger('click')
     expect(wrapper.vm.activePicker).toBe('MONTH')
