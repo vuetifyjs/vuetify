@@ -21,3 +21,4 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 export default Vuetify
+export * from './components'
