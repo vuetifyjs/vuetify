@@ -29,5 +29,12 @@
   },
   "createYourOwnHeader": "## Create your own",
   "createYourOwnText1": "You can use Vuetify's transition helper function to easily create your own custom transitions. This function will return an object that you can import into Vue. Using Vue's [functional component](https://vuejs.org/v2/guide/render-function.html#Functional-Components) option will make sure your transition is as efficient as possible. Simply import the function:",
-  "createYourOwnText2": "The <code>createSimpleTransition</code> function accepts 1 argument, name. This will be the name that you can hook into with your style. This is an example of what <code>v-fade-transition</code> looks like:"
+  "createYourOwnText2": "The <code>createSimpleTransition</code> function accepts 1 argument, name. This will be the name that you can hook into with your style. This is an example of what <code>v-fade-transition</code> looks like:",
+  "props": {
+    "group": "Creates a `transition-group` component. [vue docs](https://vuejs.org/v2/api/#transition-group)",
+    "hideOnLeave": "Hides the leaving element (no exit animation)",
+    "leaveAbsolute": "Absolutely positions the leaving element (useful for [FLIP](https://aerotwist.com/blog/flip-your-animations/))",
+    "mode": "Mixins.Transitionable.props.mode",
+    "origin": "Mixins.Transitionable.props.origin"
+  }
 }
