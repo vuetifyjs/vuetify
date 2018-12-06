@@ -1,0 +1,207 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "Generic.Pages.usage"
+        },
+        {
+          "type": "text",
+          "lang": "usageText1"
+        },
+        {
+          "type": "markup",
+          "value": "js_vuetify_iconfont"
+        },
+        {
+          "type": "text",
+          "lang": "usageText2"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "installHeader"
+        },
+        {
+          "type": "text",
+          "lang": "installText1"
+        },
+        {
+          "type": "heading",
+          "lang": "installMD"
+        },
+        {
+          "type": "text",
+          "lang": "installMDText1"
+        },
+        {
+          "type": "markup",
+          "value": "html_material_icons_link"
+        },
+        {
+          "type": "text",
+          "lang": "installMDText2"
+        },
+        {
+          "type": "markup",
+          "value": "bash_yarn_install_material_icons"
+        },
+        {
+          "type": "text",
+          "lang": "installMDText3"
+        },
+        {
+          "type": "markup",
+          "value": "js_import_material_icons"
+        },
+        {
+          "type": "heading",
+          "lang": "installMDI"
+        },
+        {
+          "type": "markup",
+          "value": "bash_yarn_install_mdi"
+        },
+        {
+          "type": "text",
+          "lang": "installMDIText1"
+        },
+        {
+          "type": "markup",
+          "value": "js_import_mdi"
+        },
+        {
+          "type": "heading",
+          "lang": "installFA"
+        },
+        {
+          "type": "text",
+          "lang": "installFAText1"
+        },
+        {
+          "type": "markup",
+          "value": "html_fa5_link"
+        },
+        {
+          "type": "text",
+          "lang": "installFAText2"
+        },
+        {
+          "type": "markup",
+          "value": "bash_yarn_install_fa5"
+        },
+        {
+          "type": "text",
+          "lang": "installFAText3"
+        },
+        {
+          "type": "markup",
+          "value": "js_import_fa4"
+        },
+        {
+          "type": "heading",
+          "lang": "installFA4"
+        },
+        {
+          "type": "text",
+          "lang": "installFA4Text1"
+        },
+        {
+          "type": "markup",
+          "value": "html_fa4_link"
+        },
+        {
+          "type": "text",
+          "lang": "installFA4Text2"
+        },
+        {
+          "type": "markup",
+          "value": "bash_yarn_install_fa4"
+        },
+        {
+          "type": "text",
+          "lang": "installFA4Text3"
+        },
+        {
+          "type": "markup",
+          "value": "js_import_fa4"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "customIconsHeader"
+        },
+        {
+          "type": "text",
+          "lang": "customIconsText1"
+        },
+        {
+          "type": "markup",
+          "value": "js_vuetify_custom_icon"
+        },
+        {
+          "type": "text",
+          "lang": "customIconsText1"
+        },
+        {
+          "type": "markup",
+          "value": "js_vuetify_custom_icon_preset"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "reusableHeader"
+        },
+        {
+          "type": "text",
+          "lang": "reusableText1"
+        },
+        {
+          "type": "markup",
+          "value": "js_vuetify_reusable_custom_icons"
+        },
+        {
+          "type": "text",
+          "lang": "reusableText2"
+        },
+        {
+          "type": "markup",
+          "value": "html_vuetify_reusable_custom_icons"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "customComponentHeader"
+        },
+        {
+          "type": "text",
+          "lang": "customComponentText1"
+        },
+        {
+          "type": "markup",
+          "value": "html_custom_icons_custom_component"
+        }
+      ]
+    }
+  ]
+}

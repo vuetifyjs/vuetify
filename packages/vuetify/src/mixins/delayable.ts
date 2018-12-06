@@ -7,7 +7,7 @@ import Vue from 'vue'
  *
  * Changes the open or close delay time for elements
  */
-export default Vue.extend({
+export default Vue.extend<Vue & { isActive?: boolean }>().extend({
   name: 'delayable',
 
   props: {
@@ -37,12 +37,14 @@ export default Vue.extend({
     /**
      * Runs callback after a specified delay
      */
-    runDelay (type: 'open' | 'close', cb: () => void): void {
+    runDelay (type: 'open' | 'close', cb?: () => void): void {
       this.clearDelay()
 
       const delay = parseInt((this as any)[`${type}Delay`], 10)
 
-      ;(this as any)[`${type}Timeout`] = setTimeout(cb, delay)
+      ;(this as any)[`${type}Timeout`] = setTimeout(cb || (() => {
+        this.isActive = { open: true, close: false }[type]
+      }), delay)
     }
   }
 })

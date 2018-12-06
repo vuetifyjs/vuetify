@@ -43,12 +43,10 @@ export default {
     persistentHint: Boolean,
     prependIcon: String,
     /** @deprecated */
-    prependIconCb: Function,
-    value: { required: false }
+    prependIconCb: Function
   },
 
   data: vm => ({
-    lazyValue: vm.value,
     hasMouseDown: false
   }),
 
@@ -99,12 +97,6 @@ export default {
     },
     isLabelActive () {
       return this.isDirty
-    }
-  },
-
-  watch: {
-    value (val) {
-      this.lazyValue = val
     }
   },
 

@@ -3,11 +3,12 @@
 
 v-date-picker-header($material)
   .v-date-picker-header__value:not(.v-date-picker-header__value--disabled)
-    strong:not(:hover)
-      color: $material.text.primary !important
+    button:not(:hover):not(:focus)
+      color: $material.text.primary
 
-  .v-date-picker-header__value--disabled strong
-    color: $material.text.disabled
+  .v-date-picker-header__value--disabled
+    button
+      color: $material.text.disabled
 
 theme(v-date-picker-header, "v-date-picker-header")
 
@@ -33,8 +34,16 @@ theme(v-date-picker-header, "v-date-picker-header")
   position: relative
   overflow: hidden
 
-  strong
-    cursor: pointer
+  div
     transition: $primary-transition
-    display: block
     width: 100%
+
+  button
+    cursor: pointer
+    font-weight: bold
+    outline: none
+    padding: 0.5rem
+    transition: $primary-transition
+
+.v-date-picker-header--disabled
+  pointer-events: none

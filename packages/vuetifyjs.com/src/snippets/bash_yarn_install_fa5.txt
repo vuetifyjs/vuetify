@@ -1,0 +1,3 @@
+$ yarn add @fortawesome/fontawesome-free -D
+// OR
+$ npm install @fortawesome/fontawesome-free -D

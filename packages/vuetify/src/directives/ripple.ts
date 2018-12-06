@@ -58,9 +58,10 @@ const ripple = {
 
     const { radius, scale, x, y, centerX, centerY } = calculate(e, el, value)
 
+    const size = `${radius * 2}px`
     animation.className = 'v-ripple__animation'
-    animation.style.width = `${radius * 2}px`
-    animation.style.height = animation.style.width
+    animation.style.width = size
+    animation.style.height = size
 
     el.appendChild(container)
 

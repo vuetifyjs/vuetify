@@ -239,12 +239,40 @@ const VSelect = {
   ].concat(validatableEvents)
 }
 
+const VTreeviewScopedProps = {
+  item: 'any',
+  leaf: 'boolean',
+  selected: 'boolean',
+  indeterminate: 'boolean',
+  active: 'boolean',
+  open: 'boolean'
+}
+
 module.exports = {
   '$vuetify': {
     functions: [
       {
         name: 'goTo',
         signature: '(target: string | number | HTMLElement | VueComponent, options?: object) => void'
+      }
+    ]
+  },
+  'internationalization': {
+    api: [
+      {
+        name: 'locales',
+        default: '{ en: VuetifyLocale }',
+        type: 'Record<string, VuetifyLocale>'
+      },
+      {
+        name: 'current',
+        default: 'en',
+        type: 'string'
+      },
+      {
+        name: 't',
+        default: '(key: string, ...params: Array<string | number>): string',
+        type: 'Function'
       }
     ]
   },
@@ -363,6 +391,15 @@ module.exports = {
     ]
   },
   'v-card': {
+    slots: ['default']
+  },
+  'v-card-actions': {
+    slots: ['default']
+  },
+  'v-card-text': {
+    slots: ['default']
+  },
+  'v-card-title': {
     slots: ['default']
   },
   'v-carousel': {
@@ -484,12 +521,12 @@ module.exports = {
   'v-divider': {
     props: [
       {
-        "name": "dark",
-        "source": 'themeable'
+        'name': 'dark',
+        'source': 'themeable'
       },
       {
-        "name": "light",
-        "source": 'themeable'
+        'name': 'light',
+        'source': 'themeable'
       }
     ]
   },
@@ -607,7 +644,7 @@ module.exports = {
         props: {
           hover: 'boolean'
         }
-      },
+      }
     ]
   },
   'v-icon': {
@@ -720,6 +757,15 @@ module.exports = {
   'v-snackbar': {
     slots: ['default']
   },
+  'v-sparkline': {
+    props: [
+      {
+        name: 'type',
+        type: "'trend' | 'bar'",
+        default: "'trend'"
+      }
+    ]
+  },
   'v-select': VSelect,
   'v-slider': {
     events: [
@@ -760,6 +806,20 @@ module.exports = {
         value: 'array'
       }
     ].concat(validatableEvents)
+  },
+  'v-sheet': {
+    slots: ['default'],
+    props: [
+      {
+        name: 'tag',
+        type: 'String',
+        default: 'div'
+      },
+      {
+        name: 'tile',
+        type: 'Boolean'
+      }
+    ]
   },
   'v-speed-dial': {
     slots: ['activator', 'default']
@@ -854,5 +914,36 @@ module.exports = {
   },
   'v-tooltip': {
     slots: ['activator', 'default']
+  },
+  'v-treeview': {
+    scopedSlots: [
+      {
+        name: 'prepend',
+        props: VTreeviewScopedProps
+      },
+      {
+        name: 'label',
+        props: VTreeviewScopedProps
+      },
+      {
+        name: 'append',
+        props: VTreeviewScopedProps
+      }
+    ]
+  },
+  'v-window': {
+    props: [
+      {
+        name: 'touch',
+        example: {
+          left: 'Function',
+          right: 'Function'
+        }
+      }
+    ],
+    slots: ['default']
+  },
+  'v-window-item': {
+    slots: ['default']
   }
 }

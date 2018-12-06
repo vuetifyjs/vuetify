@@ -1,0 +1,50 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "layout-grid"
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "breakpointHeader"
+        },
+        {
+          "type": "text",
+          "lang": "breakpointText1"
+        },
+        {
+          "type": "markup",
+          "value": "js_breakpoint_example1"
+        },
+        {
+          "type": "text",
+          "lang": "breakpointText2"
+        },
+        {
+          "type": "markup",
+          "value": "js_breakpoint_example2"
+        },
+        {
+          "type": "text",
+          "lang": "breakpointText3"
+        },
+        {
+          "type": "markup",
+          "value": "html_breakpoint_example1"
+        },
+        {
+          "type": "text",
+          "lang": "breakpointText4"
+        },
+        {
+          "type": "markup",
+          "value": "ts_breakpoint_example1"
+        }
+      ]
+    }
+  ]
+}

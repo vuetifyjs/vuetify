@@ -67,9 +67,10 @@ export default {
 
       return true
     },
-    removeOverlay () {
+    /** removeOverlay(false) will not restore the scollbar afterwards */
+    removeOverlay (showScroll = true) {
       if (!this.overlay) {
-        return this.showScroll()
+        return showScroll && this.showScroll()
       }
 
       this.overlay.classList.remove('v-overlay--active')
@@ -81,7 +82,7 @@ export default {
             this.overlay.parentNode.removeChild(this.overlay)
           }
           this.overlay = null
-          this.showScroll()
+          showScroll && this.showScroll()
         } catch (e) { console.log(e) }
 
         clearTimeout(this.overlayTimeout)
