@@ -63,13 +63,12 @@ export default mixins(Colorable, Themeable, Toggleable).extend({
       ])
     },
     genContent (h: CreateElement): VNode {
-      const children: VNodeChildren = [this.$slots.default!]
-
-      this.close && children.push(this.genClose(h))
-
       return h('span', {
         staticClass: 'v-chip__content'
-      }, children)
+      }, [
+        this.$slots.default,
+        this.close && this.genClose(h)
+      ])
     }
   },
 

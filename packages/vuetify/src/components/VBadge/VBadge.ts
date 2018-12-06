@@ -59,7 +59,7 @@ export default mixins(
       staticClass: 'v-badge',
       'class': this.classes
     }, [
-      this.$slots.default!,
+      this.$slots.default,
       h('transition', {
         props: {
           name: this.transition,

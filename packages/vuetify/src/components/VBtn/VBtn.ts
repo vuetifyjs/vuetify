@@ -119,25 +119,19 @@ export default baseMixins.extend<options>().extend({
       return this.$createElement(
         'div',
         { 'class': 'v-btn__content' },
-        [this.$slots.default!]
+        this.$slots.default
       )
     },
     genLoader (): VNode {
-      const children: VNodeChildren = []
-
-      if (!this.$slots.loader) {
-        children.push(this.$createElement(VProgressCircular, {
-          props: {
-            indeterminate: true,
-            size: 23,
-            width: 2
-          }
-        }))
-      } else {
-        children.push(this.$slots.loader)
-      }
-
-      return this.$createElement('span', { 'class': 'v-btn__loading' }, children)
+      return this.$createElement('span', {
+        class: 'v-btn__loading'
+      }, this.$slots.loader || [this.$createElement(VProgressCircular, {
+        props: {
+          indeterminate: true,
+          size: 23,
+          width: 2
+        }
+      })])
     },
     onRouteChange () {
       if (!this.to || !this.$refs.link) return
@@ -155,10 +149,12 @@ export default baseMixins.extend<options>().extend({
   render (h): VNode {
     const setColor = (!this.outline && !this.flat && !this.disabled) ? this.setBackgroundColor : this.setTextColor
     const { tag, data } = this.generateRouteLink(this.classes)
-    const children = [this.genContent()]
+    const children = [
+      this.genContent(),
+      this.loading && this.genLoader()
+    ]
 
-    tag === 'button' && (data.attrs!.type = this.type)
-    this.loading && children.push(this.genLoader())
+    if (tag === 'button') data.attrs!.type = this.type
 
     data.attrs!.value = ['string', 'number'].includes(typeof this.value)
       ? this.value
