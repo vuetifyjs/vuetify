@@ -1,7 +1,7 @@
 import '../../stylus/components/_chips.styl'
 
 // Types
-import { CreateElement, VNode, VNodeChildren } from 'vue'
+import { CreateElement, VNode } from 'vue'
 import mixins from '../../util/mixins'
 
 // Components

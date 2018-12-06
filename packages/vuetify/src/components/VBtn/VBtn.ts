@@ -2,7 +2,7 @@
 import '../../stylus/components/_buttons.styl'
 
 // Types
-import { VNode, VNodeChildren } from 'vue'
+import { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
 import mixins, { ExtractVue } from '../../util/mixins'
 import { RippleOptions } from '../../directives/ripple'
