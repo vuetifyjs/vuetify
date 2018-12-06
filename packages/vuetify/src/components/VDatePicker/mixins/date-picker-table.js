@@ -84,9 +84,7 @@ export default {
           isAllowed && !this.readonly && this.$emit('input', value)
           this.$emit(`click:${mouseEventType}`, value)
         },
-        dblclick: () => this.$emit(`dblclick:${mouseEventType}`, value),
-        mouseenter: () => this.$emit(`mouseenter:${mouseEventType}`, value),
-        mouseleave: () => this.$emit(`mouseleave:${mouseEventType}`, value)
+        dblclick: () => this.$emit(`dblclick:${mouseEventType}`, value)
       }
     },
     genButton (value, isFloating, mouseEventType) {
