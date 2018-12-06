@@ -3,7 +3,7 @@
     :search="search"
     :items="computedItems"
     :pagination.sync="pagination"
-    class="component-parameters container grid-list-md fluid pa-2"
+    class="component-parameters pa-2"
     hide-actions
     content-tag="v-layout"
     content-class="wrap"
@@ -12,52 +12,61 @@
       slot="item"
       slot-scope="{ item }"
     >
-      <v-flex xs12>
-        <div
-          v-if="item.newIn"
-          class="pt-2 pl-2 grey lighten-4 caption font-weight-bold primary--text"
-        >
-          New in — v{{ item.newIn }}
-        </div>
-
-        <div
-          v-else-if="item.deprecatedIn"
-          class="pt-2 pl-2 grey lighten-4 caption font-weight-bold error--text"
-        >
-          Deprecated in — v{{ item.deprecatedIn }}
-        </div>
-
-        <div class="pa-2 grey lighten-4 d-flex align-top">
+      <v-flex xs12 grey lighten-2 mt-2>
+        <v-layout wrap px-2 py-1>
           <v-flex
-            v-for="header in headers"
-            :class="[header.size ? `xs${header.size}` : 'shrink', `text-xs-${header.align}`]"
+            v-for="(header, i) in headers"
+            :class="header.class"
             :key="header.value"
           >
             <div
-              class="header grey--text text--darken-1"
+              class="header grey--text text--darken-2"
               v-text="genHeaderName(header.value, item)"
             />
-            <div
-              :class="['mono', header.value]"
-              v-text="item[header.value]"
-            />
+            <div :class="['mono', header.value]">
+              <span v-text="item[header.value]" />
+              <template v-if="i === 0">
+                <v-chip
+                  v-if="item.newIn"
+                  class="v-chip--x-small"
+                  dark
+                  color="primary"
+                >
+                  New in — v{{ item.newIn }}
+                </v-chip>
+                <v-chip
+                  v-else-if="item.deprecatedIn"
+                  class="v-chip--x-small"
+                  dark
+                  color="red lighten-3"
+                >
+                  Deprecated in — v{{ item.deprecatedIn }}
+                </v-chip>
+              </template>
+            </div>
           </v-flex>
-        </div>
-
-        <div class="pa-2 grey lighten-3 grey--text text--darken-2 d-flex">
-          <v-flex>
+        </v-layout>
+        <v-layout
+          grey
+          lighten-4
+          pa-2
+          wrap
+        >
+          <v-flex grey--text text--darken-3 xs12>
             <doc-markdown
               :code="item.description"
               class="justify"
             />
+          </v-flex>
+          <v-flex>
             <doc-markup
               v-if="item.example"
               class="mt-2 mb-0"
               lang="ts"
+              value="example"
             >{{ genTypescriptDef(item.example) }}</doc-markup>
           </v-flex>
-        </div>
-
+        </v-layout>
       </v-flex>
     </template>
   </v-data-iterator>

@@ -5,7 +5,15 @@
       dense
       flat
     >
+      <v-chip v-if="newIn" color="warning" small>
+        <v-avatar>
+          <v-icon>mdi-star</v-icon>
+        </v-avatar>
+        <span>New in <strong>{{ newIn }}</strong></span>
+      </v-chip>
+
       <v-spacer />
+
       <v-btn
         icon
         @click="dark = !dark"
@@ -104,7 +112,7 @@
 
     props: {
       value: {
-        type: String,
+        type: [Object, String],
         default: undefined
       }
     },
@@ -119,9 +127,21 @@
     }),
 
     computed: {
+      internalValue () {
+        if (this.value === Object(this.value)) return this.value
+
+        return { file: this.value }
+      },
       file () {
-        return `${this.kebabCase(this.page)}/${this.value}`
+        return `${this.kebabCase(this.page)}/${this.internalValue.file}`
+      },
+      newIn () {
+        return this.internalValue.newIn
       }
+    },
+
+    created () {
+      this.expand = Boolean(this.internalValue.show)
     },
 
     mounted () {

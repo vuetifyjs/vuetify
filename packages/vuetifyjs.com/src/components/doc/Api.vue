@@ -1,13 +1,71 @@
 <template>
   <div>
     <doc-heading>Generic.Pages.api</doc-heading>
-    <v-card class="py-1">
-      <doc-parameters
-        :headers="headers[type]"
-        :items="component[type]"
-        :target="target"
-        :type="type"
-      />
+    <v-card>
+      <v-tabs
+        :slider-color="computedTabs.length ? 'primary' : 'transparent'"
+        v-model="tab"
+        color="grey lighten-3"
+      >
+        <v-tab
+          v-for="(tab, i) in computedTabs"
+          :key="`tab-${i}`"
+          :href="`#${tab}`"
+        >
+          {{ tab.replace(/([A-Z])/g, ' $1') }}
+        </v-tab>
+      </v-tabs>
+
+      <v-card-text>
+        <v-layout justify-space-between>
+          <v-flex
+            xs12
+            sm4
+          >
+            <v-select
+              :items="value"
+              v-model="current"
+              :disabled="value.length < 2"
+              hide-details
+              single-line
+              menu-props="auto"
+            />
+          </v-flex>
+
+          <v-flex xs12 sm4>
+            <v-text-field
+              v-model="search"
+              append-icon="search"
+              label="Search..."
+              single-line
+              hide-details
+            />
+          </v-flex>
+        </v-layout>
+      </v-card-text>
+
+      <v-tabs-items
+        v-model="tab"
+        touchless
+        class="white"
+      >
+        <v-tab-item
+          v-for="(tab, i) in computedTabs"
+          :key="`tab-item-${i}`"
+          :value="tab"
+          lazy
+        >
+          <v-card flat>
+            <doc-parameters
+              :headers="headers[tab]"
+              :items="component[tab]"
+              :search="search"
+              :target="current"
+              :type="tab"
+            />
+          </v-card>
+        </v-tab-item>
+      </v-tabs-items>
     </v-card>
   </div>
 </template>
@@ -15,6 +73,21 @@
 <script>
   // Utilities
   import api from '@vuetify/api-generator'
+
+  const propProps = [
+    {
+      value: 'name',
+      class: 'xs6 sm3 lg2'
+    },
+    {
+      value: 'default',
+      class: 'xs6 sm3 text-xs-right'
+    },
+    {
+      value: 'type',
+      class: 'xs6 ml-auto sm4 text-sm-right'
+    }
+  ]
 
   export default {
     props: {
@@ -25,80 +98,95 @@
     },
 
     data: vm => ({
+      current: vm.value && vm.value.length ? vm.value[0] : null,
       headers: {
-        api: [
-          { value: 'name', align: 'left', size: 3 },
-          { value: 'default', align: 'left', size: 6 },
-          { value: 'type', align: 'right', size: 3 }
-        ],
-        props: [
-          { value: 'name', align: 'left', size: 3 },
-          { value: 'default', align: 'left', size: 6 },
-          { value: 'type', align: 'right', size: 3 }
-        ],
+        api: [...propProps],
+        props: [...propProps],
         slots: [
-          { value: 'name', align: 'left' }
+          {
+            value: 'name',
+            class: 'left'
+          }
         ],
         scopedSlots: [
-          { value: 'name', align: 'left', size: 3 },
-          { value: 'props', align: 'right', size: 9 }
+          {
+            value: 'name',
+            class: 'xs3'
+          },
+          {
+            value: 'props',
+            class: 'xs9'
+          }
         ],
         events: [
-          { value: 'name', align: 'left' },
-          { value: 'value', align: 'right' }
+          {
+            value: 'name',
+            class: ''
+          },
+          {
+            value: 'value',
+            class: 'text-xs-right'
+          }
         ],
         functions: [
-          { value: 'name', align: 'left' },
-          { value: 'signature', align: 'right' }
+          {
+            value: 'name',
+            class: ''
+          },
+          {
+            value: 'signature',
+            class: 'text-xs-right'
+          }
         ],
         functional: [
-          { value: 'name', align: 'left' },
-          { value: 'description', align: 'left' }
+          {
+            value: 'name',
+            class: ''
+          },
+          {
+            value: 'description',
+            class: 'text-xs-right'
+          }
         ],
-        options: [
-          { value: 'name', align: 'left', size: 3 },
-          { value: 'default', align: 'left', size: 3 },
-          { value: 'type', align: 'right' }
-        ]
+        options: [...propProps]
       },
-      // select first option if available
-      index: vm.value.length > 0 ? 0 : -1
+      search: null,
+      tab: null,
+      tabs: ['api', 'props', 'slots', 'scopedSlots', 'params', 'events', 'functions', 'functional', 'options']
     }),
 
     computed: {
       component () {
-        const component = api[this.target] || {}
+        const component = {}
+
+        for (const tab of this.tabs) {
+          component[tab] = []
+        }
 
         return {
-          api: [],
-          props: [],
-          slots: [],
-          scopedSlots: [],
-          params: [],
-          events: [],
-          functions: [],
-          functional: [],
-          options: [],
-          ...component
+          ...component,
+          ...(api[this.current] || {})
         }
       },
-      target () {
-        if (this.index < 0) return undefined
+      computedTabs () {
+        return this.tabs.filter(tab => (this.component[tab] || []).length > 0)
+      }
+    },
 
-        return this.value[this.index]
-      },
-      type () {
-        return [
-          'api',
-          'props',
-          'slots',
-          'scopedSlots',
-          'params',
-          'events',
-          'functions',
-          'functional',
-          'options'
-        ].find(type => this.component[type].length > 0)
+    watch: {
+      component () {
+        const api = this.component[this.tab]
+
+        if (api && api.length) return
+
+        for (const tab of ['props', 'slots', 'options']) {
+          if (this.component[tab] && this.component[tab].length > 0) {
+            this.tab = tab
+            return
+          }
+        }
+
+        this.tab = ''
       }
     }
   }

@@ -9,5 +9,10 @@
       "header": "### Chips",
       "desc": "Easily hook up a custom chip group."
     }
+  },
+  "props": {
+    "activeClass": "CSS Class to apply when active",
+    "mandatory": "Forces a value to always be selected",
+    "multiple": "Allows for multiple selections. Model used must be an `Array`"
   }
 }

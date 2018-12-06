@@ -21,6 +21,7 @@
         :key="`item-${i}`"
         :to="child.to"
         :text="child.text"
+        :chip="genChip(child)"
       />
     </template>
   </v-list-group>
@@ -58,6 +59,14 @@
         return this.item.children.map(item => {
           return `${this.item.group}/${kebabCase(item.to)}`
         }).join('|')
+      }
+    },
+
+    methods: {
+      genChip (item) {
+        if (item.new) return 'new'
+        if (item.updated) return 'updated'
+        if (item.deprecated) return 'deprecated'
       }
     }
   }

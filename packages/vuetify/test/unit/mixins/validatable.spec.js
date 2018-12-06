@@ -63,7 +63,7 @@ test('validatable.js', ({ mount }) => {
 
     wrapper.vm.validate()
 
-    expect(wrapper.vm.errorBucket).toEqual([false])
+    expect(wrapper.vm.errorBucket).toEqual([])
 
     // Boolean true sets no messages
     wrapper.setProps({ rules: [true] })
@@ -203,6 +203,15 @@ test('validatable.js', ({ mount }) => {
 
     expect(wrapper.vm.shouldValidate).toBe(true)
     expect(wrapper.vm.hasMessages).toBe(true)
+
+    wrapper.setData({ isResetting: true })
+
+    expect(wrapper.vm.shouldValidate).toBe(false)
+
+    wrapper.setData({ isResetting: false })
+    wrapper.setProps({ validateOnBlur: true })
+
+    expect(wrapper.vm.shouldValidate).toBe(true)
   })
 
   it('should have state', () => {
@@ -237,5 +246,98 @@ test('validatable.js', ({ mount }) => {
     wrapper.setProps({ success: false, color: 'blue' })
     wrapper.setData({ hasColor: true })
     expect(wrapper.vm.validationState).toBe('blue')
+  })
+
+  it('should return a sliced amount based on error count', () => {
+    const wrapper = mount(Mock, {
+      propsData: {
+        errorMessages: [
+          'foobar',
+          'fizzbuzz'
+        ]
+      }
+    })
+
+    expect(wrapper.vm.validations.length).toBe(1)
+
+    wrapper.setProps({ errorCount: 2 })
+
+    expect(wrapper.vm.validations.length).toBe(2)
+  })
+
+  it('should validate when internalValue changes', async () => {
+    const validate = jest.fn()
+    const wrapper = mount(Mock, {
+      methods: { validate }
+    })
+
+    expect(wrapper.vm.hasInput).toBe(false)
+    wrapper.setData({ lazyValue: 'foo' })
+
+    // Wait for watcher's $nextTick call
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.hasInput).toBe(true)
+    expect(validate).toBeCalled()
+  })
+
+  it('should update values when resetting after timeout', async () => {
+    const wrapper = mount(Mock)
+
+    wrapper.setData({
+      hasInput: true,
+      hasFocused: true,
+      isResetting: true
+    })
+
+    expect(wrapper.vm.hasInput).toBe(true)
+    expect(wrapper.vm.hasFocused).toBe(true)
+    expect(wrapper.vm.isResetting).toBe(true)
+
+    // Wait for timeout
+    await new Promise(resolve => setTimeout(resolve, 0))
+
+    expect(wrapper.vm.hasInput).toBe(false)
+    expect(wrapper.vm.hasFocused).toBe(false)
+    expect(wrapper.vm.isResetting).toBe(false)
+  })
+
+  it('should emit error update when value changes and shouldValidate', async () => {
+    const wrapper = mount(Mock)
+
+    const onError = jest.fn()
+
+    wrapper.vm.$on('update:error', onError)
+
+    wrapper.setProps({ error: true })
+
+    await wrapper.vm.$nextTick()
+
+    wrapper.setProps({ error: false })
+
+    await wrapper.vm.$nextTick()
+
+    expect(onError).toHaveBeenCalledTimes(1)
+  })
+
+  it('should reset validation and internalValue', async () => {
+    const wrapper = mount(Mock, {
+      propsData: {
+        value: 'foobar'
+      }
+    })
+
+    wrapper.vm.reset()
+
+    expect(wrapper.vm.isResetting).toBe(true)
+    expect(wrapper.internalValue).toBe(undefined)
+
+    wrapper.setProps({ value: ['foobar'] })
+
+    await wrapper.vm.$nextTick()
+
+    wrapper.vm.reset()
+    expect(wrapper.vm.isResetting).toBe(true)
+    expect(wrapper.vm.internalValue).toEqual([])
   })
 })

@@ -1,10 +1,10 @@
 <template>
   <div>
     <doc-heading>Generic.Pages.usage</doc-heading>
-    <doc-text>{{ `${namespace}.${page}.examples.${value}.desc` }}</doc-text>
+    <doc-text>{{ `${namespace}.${page}.examples.${internalValue.file}.desc` }}</doc-text>
     <doc-example
       :id="`usage-${-1}`"
-      :value="value"
+      :value="internalValue"
     />
   </div>
 </template>
@@ -18,8 +18,16 @@
 
     props: {
       value: {
-        type: String,
+        type: [Object, String],
         default: undefined
+      }
+    },
+
+    computed: {
+      internalValue () {
+        return this.value === Object(this.value)
+          ? this.value
+          : { file: this.value }
       }
     },
 
