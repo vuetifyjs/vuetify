@@ -363,7 +363,11 @@ export default {
         ref: 'table',
         on: {
           input: this.dateClick,
-          tableDate: value => this.tableDate = value
+          tableDate: value => this.tableDate = value,
+          'click:date': value => this.$emit('click:date', value),
+          'dblclick:date': value => this.$emit('dblclick:date', value),
+          'mouseenter:date': value => this.$emit('mouseenter:date', value),
+          'mouseleave:date': value => this.$emit('mouseleave:date', value)
         }
       })
     },
@@ -390,7 +394,11 @@ export default {
         ref: 'table',
         on: {
           input: this.monthClick,
-          tableDate: value => this.tableDate = value
+          tableDate: value => this.tableDate = value,
+          'click:month': value => this.$emit('click:month', value),
+          'dblclick:month': value => this.$emit('dblclick:month', value),
+          'mouseenter:month': value => this.$emit('mouseenter:month', value),
+          'mouseleave:month': value => this.$emit('mouseleave:month', value)
         }
       })
     },
@@ -405,7 +413,10 @@ export default {
           value: `${this.tableYear}`
         },
         on: {
-          input: this.yearClick
+          input: this.yearClick,
+          'click:year': value => this.$emit('click:year', value),
+          'mouseenter:year': value => this.$emit('mouseenter:year', value),
+          'mouseleave:year': value => this.$emit('mouseleave:year', value)
         }
       })
     },

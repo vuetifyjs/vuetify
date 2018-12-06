@@ -58,7 +58,12 @@ export default {
         key: year,
         'class': { active },
         on: {
-          click: () => this.$emit('input', year)
+          click: () => {
+            this.$emit('input', year)
+            this.$emit(`click:year`, year)
+          },
+          mouseenter: () => this.$emit(`mouseenter:year`, year),
+          mouseleave: () => this.$emit(`mouseleave:year`, year)
         }
       }), formatted)
     },
