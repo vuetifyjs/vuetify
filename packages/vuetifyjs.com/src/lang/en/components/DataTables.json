@@ -79,6 +79,7 @@
       "transition": "Mixins.Transitionable.props.transition"
     },
     "v-data-table": {
+      "headerKey": "If using an object, the key value for the header",
       "headerText": "If using an object, the text value for the header",
       "headers": "An array of objects that each describe a header column. See the example below for a definition of all properties.",
       "headersLength": "Can be used in combination with `hide-headers` to specify the number of columns in the table to allow expansion rows and loading bar to function properly",
