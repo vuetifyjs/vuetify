@@ -6,7 +6,7 @@
       grid-list-xl
       pa-0
     >
-      <v-layout>
+      <v-layout wrap>
         <v-flex
           v-for="(link, i) in links"
           :key="i"
