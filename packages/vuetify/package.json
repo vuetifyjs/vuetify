@@ -12,6 +12,7 @@
   "main": "dist/vuetify.js",
   "module": "dist/vuetify.js",
   "jsdelivr": "dist/vuetify.js",
+  "unpkg": "dist/vuetify.js",
   "types": "types/index.d.ts",
   "sideEffects": [
     "*.styl",
