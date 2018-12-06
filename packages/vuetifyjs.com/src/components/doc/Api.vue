@@ -74,6 +74,21 @@
   // Utilities
   import api from '@vuetify/api-generator'
 
+  const propProps = [
+    {
+      value: 'name',
+      class: 'xs6 sm3 lg2'
+    },
+    {
+      value: 'default',
+      class: 'xs6 sm3 text-xs-right'
+    },
+    {
+      value: 'type',
+      class: 'xs6 ml-auto sm4 text-sm-right'
+    }
+  ]
+
   export default {
     props: {
       value: {
@@ -85,34 +100,8 @@
     data: vm => ({
       current: vm.value && vm.value.length ? vm.value[0] : null,
       headers: {
-        api: [
-          {
-            value: 'name',
-            class: 'xs6 sm4'
-          },
-          {
-            value: 'default',
-            class: 'xs6 sm4 text-xs-right'
-          },
-          {
-            value: 'type',
-            class: 'xs6 sm4 text-sm-right'
-          }
-        ],
-        props: [
-          {
-            value: 'name',
-            class: 'xs6 sm4'
-          },
-          {
-            value: 'default',
-            class: 'xs6 sm4 text-xs-right'
-          },
-          {
-            value: 'type',
-            class: 'xs6 sm4 text-sm-right'
-          }
-        ],
+        api: [...propProps],
+        props: [...propProps],
         slots: [
           {
             value: 'name',
@@ -159,20 +148,7 @@
             class: 'text-xs-right'
           }
         ],
-        options: [
-          {
-            value: 'name',
-            class: 'xs6 sm4'
-          },
-          {
-            value: 'default',
-            class: 'xs6 sm4 text-xs-right'
-          },
-          {
-            value: 'type',
-            class: 'xs6 sm4 text-sm-right'
-          }
-        ]
+        options: [...propProps]
       },
       search: null,
       tab: null,

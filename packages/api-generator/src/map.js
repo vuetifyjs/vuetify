@@ -393,6 +393,15 @@ module.exports = {
   'v-card': {
     slots: ['default']
   },
+  'v-card-actions': {
+    slots: ['default']
+  },
+  'v-card-text': {
+    slots: ['default']
+  },
+  'v-card-title': {
+    slots: ['default']
+  },
   'v-carousel': {
     slots: ['default'],
     events: [
@@ -921,5 +930,20 @@ module.exports = {
         props: VTreeviewScopedProps
       }
     ]
+  },
+  'v-window': {
+    props: [
+      {
+        name: 'touch',
+        example: {
+          left: 'Function',
+          right: 'Function'
+        }
+      }
+    ],
+    slots: ['default']
+  },
+  'v-window-item': {
+    slots: ['default']
   }
 }
