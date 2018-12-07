@@ -46,7 +46,8 @@
     "vuelidate": "^0.6.2",
     "vuetify": "^1.4.0-alpha.0",
     "vuex": "^3.0.1",
-    "vuex-router-sync": "^5.0.0"
+    "vuex-router-sync": "^5.0.0",
+    "webfontloader": "^1.6.28"
   },
   "devDependencies": {
     "@mdi/font": "^3.0.39",
