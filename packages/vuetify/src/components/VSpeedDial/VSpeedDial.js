@@ -1,5 +1,6 @@
 import '../../stylus/components/_speed-dial.styl'
 
+import Overlayable from '../../mixins/overlayable'
 import Toggleable from '../../mixins/toggleable'
 import Positionable from '../../mixins/positionable'
 import Transitionable from '../../mixins/transitionable'
@@ -12,7 +13,7 @@ export default {
 
   directives: { ClickOutside },
 
-  mixins: [Positionable, Toggleable, Transitionable],
+  mixins: [Overlayable, Positionable, Toggleable, Transitionable],
 
   props: {
     direction: {
@@ -26,6 +27,10 @@ export default {
     transition: {
       type: String,
       default: 'scale-transition'
+    },
+    hasOverlay: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -68,6 +73,12 @@ export default {
 
         return b
       })
+
+      if (this.hasOverlay) {
+        this.genOverlay()
+      }
+    } else if (this.hasOverlay) {
+      this.removeOverlay()
     }
 
     const list = h('transition-group', {
