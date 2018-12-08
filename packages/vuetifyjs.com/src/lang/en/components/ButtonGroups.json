@@ -9,5 +9,10 @@
       "header": "### In toolbar",
       "desc": "Easily integrate customized button solutions with a `v-toolbar`"
     }
+  },
+  "props": {
+    "activeClass": "Components.ItemGroups.props.activeClass",
+    "mandatory": "Components.ItemGroups.props.mandatory",
+    "multiple": "Components.ItemGroups.props.multiple"
   }
 }

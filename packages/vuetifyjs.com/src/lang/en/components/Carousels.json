@@ -28,6 +28,10 @@
     }
   },
   "props": {
+    "activeClass": "Components.ItemGroups.props.activeClass",
+    "disabled": "Components.Windows.props.disabled",
+    "mandatory": "Components.ItemGroups.props.mandatory",
+    "multiple": "Components.ItemGroups.props.multiple",
     "nextIcon": "The displayed icon for forcing pagination to the next item",
     "prevIcon": "The displayed icon for forcing pagination to the previous item",
     "cycle": "Determines if carousel should cycle through images",
@@ -35,8 +39,12 @@
     "hideControls": "Hides the navigation controls",
     "hideDelimiters": "Hides the panel with carousel delimiters",
     "interval": "The duration between image cycles",
-    "reverseTransition": "Sets the reverse transition",
+    "reverse": "Components.Windows.props.reverse",
+    "reverseTransition": "Components.Windows.props.reverseTransition",
     "src": "The image src",
-    "transition": "Mixins.Transitionable.props.transition"
+    "touch": "Components.Windows.props.touch",
+    "touchless": "Components.Windows.props.touchless",
+    "transition": "Mixins.Transitionable.props.transition",
+    "vertical": "Components.Windows.props.vertical"
   }
 }

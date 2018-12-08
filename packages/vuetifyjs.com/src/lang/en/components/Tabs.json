@@ -58,7 +58,7 @@
     "iconsAndText": "Will stack icon and text vertically",
     "prevIcon": "Left pagination icon",
     "nextIcon": "Right pagination icon",
-    "reverseTransition": "Components.Carousels.props.reverseTransition",
+    "reverseTransition": "Components.Windows.props.reverseTransition",
     "right": "Aligns tabs to the right",
     "showArrows": "Always show pagination arrows",
     "sliderColor": "Changes the background color of an auto-generated `v-tabs-slider`",
