@@ -45,7 +45,8 @@ export default VDataIterator.extend({
     height: [Number, String],
     hideDefaultFooter: Boolean,
     hideDefaultHeader: Boolean,
-    caption: String
+    caption: String,
+    dense: Boolean
   },
 
   data () {
@@ -368,7 +369,7 @@ export default VDataIterator.extend({
       // }
 
       const classes = {
-        // 'v-data-table--dense': this.dense,
+        'v-data-table--dense': this.dense,
         'v-data-table--fixed': !!this.height,
         'v-data-table--mobile': this.isMobile,
         ...this.themeClasses

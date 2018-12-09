@@ -71,6 +71,18 @@ export default mixins(Themeable).extend({
         this.$emit('input', selected)
       },
       deep: true
+    },
+    expanded (value: any[]) {
+      this.expansion = value.reduce((expansion, item) => {
+        expansion[getObjectValueByPath(item, this.itemKey)] = true
+        return expansion
+      }, {})
+    },
+    expansion (value: Record<string, boolean>, old: Record<string, boolean>) {
+      if (deepEqual(value, old)) return
+      const keys = Object.keys(value).filter(k => value[k])
+      const expanded = !keys.length ? [] : this.items.filter(i => keys.includes(String(getObjectValueByPath(i, this.itemKey))))
+      this.$emit('update:expanded', expanded)
     }
   },
 
