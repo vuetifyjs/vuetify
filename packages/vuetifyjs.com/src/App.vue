@@ -45,3 +45,9 @@
     }
   }
 </script>
+
+<style>
+  .wf-loading .material-icons {
+    display: none;
+  }
+</style>

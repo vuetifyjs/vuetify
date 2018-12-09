@@ -3,6 +3,17 @@ import '@mdi/font/css/materialdesignicons.css'
 import 'es6-promise/auto'
 
 import { createApp } from './main'
+import WebFontLoader from 'webfontloader'
+
+// async load fonts
+WebFontLoader.load({
+  google: {
+    families: [
+      'Roboto:100,300,400,500,700,900',
+      'Roboto Mono'
+    ]
+  }
+})
 
 createApp({
   start ({ app, router, store }) {

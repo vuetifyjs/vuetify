@@ -13,5 +13,17 @@
       "header": "### Account creation",
       "desc": "Create rich forms with smooth animations. `v-window` automatically tracks the current selection index to automatically change the transition direction. This can be manually controlled with the **reverse** prop."
     }
+  },
+  "props": {
+    "activeClass": "Components.ItemGroups.props.activeClass",
+    "disabled": "Disables the item",
+    "mandatory": "Components.ItemGroups.props.mandatory",
+    "multiple": "Components.ItemGroups.props.multiple",
+    "reverse": "Manually set the window to use the **reverseTransition**",
+    "reverseTransition": "Sets the reverse transition",
+    "touch": "Provide a custom **left** and **right** function when swiped left or right",
+    "touchless": "Disable touch support",
+    "transition": "Mixins.Transitionable.props.transition",
+    "vertical": "Uses a vertical transition when changing windows"
   }
 }

@@ -18,6 +18,7 @@
     "`and-down` - hide the element on the specified breakpoint and down `sm` through `lg` breakpoints",
     "`and-up` - hide the element on the specified breakpoint and up `sm` through `lg` breakpoints"
   ],
+  "mediaText": "Additionally, **media types** can be targeted using the `only` condition. Both `hidden-screen-only` and `hidden-print-only` are currently supported.",
   "displayHeader": "## Display",
   "displayText": "Specify the elements `display` property. These classes can be applied using the following format `d-{display}`.",
   "displays": [
