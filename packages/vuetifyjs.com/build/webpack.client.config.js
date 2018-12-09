@@ -52,7 +52,7 @@ const config = merge(base, {
   ],
   optimization: {
     minimize: isProd,
-    runtimeChunk: 'single',
+    runtimeChunk: true,
     removeAvailableModules: isProd,
     removeEmptyChunks: isProd,
     splitChunks: isProd && {

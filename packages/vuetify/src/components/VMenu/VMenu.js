@@ -88,9 +88,6 @@ export default Vue.extend({
   data () {
     return {
       defaultOffset: 8,
-      maxHeightAutoDefault: '200px',
-      startIndex: 3,
-      stopIndex: 0,
       hasJustFocused: false,
       resizeTimeout: null
     }
@@ -135,7 +132,7 @@ export default Vue.extend({
     calculatedTop () {
       if (!this.auto || this.isAttached) return this.calcTop()
 
-      return `${this.calcYOverflow(this.calcTopAuto())}px`
+      return `${this.calcYOverflow(this.calculatedTopAuto)}px`
     },
     styles () {
       return {
@@ -147,9 +144,6 @@ export default Vue.extend({
         transformOrigin: this.origin,
         zIndex: this.zIndex || this.activeZIndex
       }
-    },
-    tileHeight () {
-      return this.dense ? 36 : 48
     }
   },
 
@@ -172,9 +166,15 @@ export default Vue.extend({
       // and its activator
       this.updateDimensions()
       // Start the transition
-      requestAnimationFrame(this.startTransition)
-      // Once transitioning, calculate scroll position
-      setTimeout(this.calculateScroll, 50)
+      requestAnimationFrame(() => {
+        // Once transitioning, calculate scroll and top position
+        this.startTransition().then(() => {
+          if (this.$refs.content) {
+            this.calculatedTopAuto = this.calcTopAuto()
+            this.auto && (this.$refs.content.scrollTop = this.calcScrollPosition())
+          }
+        })
+      })
     },
     closeConditional () {
       return this.isActive && this.closeOnClick
