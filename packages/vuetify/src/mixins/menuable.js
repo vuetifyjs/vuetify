@@ -329,7 +329,7 @@ export default Vue.extend({
     },
     startTransition () {
       return new Promise(resolve => requestAnimationFrame(() => {
-        this.isContentActive = true
+        this.isContentActive = this.hasJustFocused = this.isActive
         resolve()
       }))
     },
