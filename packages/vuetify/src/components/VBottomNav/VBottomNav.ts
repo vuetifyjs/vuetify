@@ -5,6 +5,7 @@ import '../../stylus/components/_bottom-navs.styl'
 import Applicationable from '../../mixins/applicationable'
 import ButtonGroup from '../../mixins/button-group'
 import Colorable from '../../mixins/colorable'
+import Themeable from '../../mixins/themeable'
 
 // Util
 import mixins from '../../util/mixins'
@@ -18,7 +19,8 @@ export default mixins(
     'height',
     'value'
   ]),
-  Colorable
+  Colorable,
+  Themeable
   /* @vue/component */
 ).extend({
   name: 'v-bottom-nav',
