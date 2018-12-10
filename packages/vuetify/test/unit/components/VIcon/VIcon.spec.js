@@ -187,7 +187,7 @@ test('VIcon.js', ({ mount, compileToFunctions }) => {
       const wrapper = mount(VIcon, context)
 
       expect(wrapper.text()).toBe('test icon')
-      expect(wrapper.element.className).toBe('v-icon test-component theme--light')
+      expect(wrapper.element.className).toBe('v-icon test-component v-icon--is-component theme--light')
       expect(wrapper.html()).toMatchSnapshot()
     })
 
