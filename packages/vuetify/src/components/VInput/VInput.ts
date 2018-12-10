@@ -110,10 +110,10 @@ export default mixins<options &
         this.$emit(this.$_modelEvent, val)
       }
     },
-    isDirty (): Boolean {
+    isDirty () {
       return !!this.lazyValue
     },
-    isDisabled (): Boolean {
+    isDisabled () {
       return Boolean(this.disabled || this.readonly)
     },
     isLabelActive () {
