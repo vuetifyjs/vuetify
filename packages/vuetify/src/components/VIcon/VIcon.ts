@@ -109,7 +109,7 @@ const VIcon = mixins(
     renderSvgIcon (icon: VuetifyIconComponent, h: CreateElement): VNode {
       const data = this.getDefaultData()
 
-      const size = this.getSize()
+      const size = this.getSize() || SIZE_MAP.default
       if (size) {
         data.style = {
           fontSize: size,
