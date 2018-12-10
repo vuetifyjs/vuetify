@@ -179,7 +179,7 @@ export default mixins<options &
         deprecate(`:${type}-icon-cb`, `@${eventName}`, this)
       }
 
-      const data = {
+      const data: VNodeData = {
         props: {
           color: this.validationState,
           dark: this.dark,
@@ -187,7 +187,7 @@ export default mixins<options &
           light: this.light
         },
         on: !(this.$listeners[eventName] || cb)
-          ? null
+          ? undefined
           : {
             click: (e: Event) => {
               e.preventDefault()
@@ -203,7 +203,7 @@ export default mixins<options &
               e.stopPropagation()
             }
           }
-      } as VNodeData
+      }
 
       return this.$createElement('div', {
         staticClass: `v-input__icon v-input__icon--${kebabCase(type)}`,
