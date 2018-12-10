@@ -17,16 +17,30 @@ import {
   kebabCase
 } from '../../util/helpers'
 import { deprecate } from '../../util/console'
+import mixins, { ExtractVue } from '../../util/mixins'
 
-/* @vue/component */
-export default {
+// Types
+import Vue, { VNode, VNodeData, VNodeChildren } from 'vue'
+interface options extends Vue {
+  /* eslint-disable-next-line camelcase */
+  $_modelEvent: string
+}
+
+export default mixins<options &
+/* eslint-disable indent */
+  ExtractVue<[
+    typeof Colorable,
+    typeof Themeable,
+    typeof Validatable
+  ]>
+/* eslint-enable indent */
+>(
+  Colorable,
+  Themeable,
+  Validatable
+  /* @vue/component */
+).extend({
   name: 'v-input',
-
-  mixins: [
-    Colorable,
-    Themeable,
-    Validatable
-  ],
 
   props: {
     appendIcon: String,
@@ -40,18 +54,25 @@ export default {
     hideDetails: Boolean,
     hint: String,
     label: String,
+    loading: Boolean,
     persistentHint: Boolean,
     prependIcon: String,
     /** @deprecated */
-    prependIconCb: Function
+    prependIconCb: Function,
+    value: { required: false }
   },
 
-  data: vm => ({
-    hasMouseDown: false
-  }),
+  data () {
+    return {
+      attrsInput: {},
+      lazyValue: this.value as any,
+      hasMouseDown: false
+    }
+  },
 
   computed: {
-    classesInput () {
+    classes: () => ({}),
+    classesInput (): object {
       return {
         ...this.classes,
         'v-input--has-state': this.hasState,
@@ -84,19 +105,25 @@ export default {
       get () {
         return this.lazyValue
       },
-      set (val) {
+      set (val: any) {
         this.lazyValue = val
         this.$emit(this.$_modelEvent, val)
       }
     },
-    isDirty () {
+    isDirty (): Boolean {
       return !!this.lazyValue
     },
-    isDisabled () {
+    isDisabled (): Boolean {
       return Boolean(this.disabled || this.readonly)
     },
     isLabelActive () {
       return this.isDirty
+    }
+  },
+
+  watch: {
+    value (val) {
+      this.lazyValue = val
     }
   },
 
@@ -107,32 +134,52 @@ export default {
   },
 
   methods: {
-    genContent () {
-      return [
-        this.genPrependSlot(),
-        this.genControl(),
-        this.genAppendSlot()
-      ]
+    genContent (): VNode[] {
+      const children = []
+
+      const prepend = this.genPrependSlot()
+
+      prepend && children.push(prepend)
+
+      children.push(this.genControl())
+
+      const append = this.genAppendSlot()
+
+      append && children.push(append)
+
+      return children
     },
     genControl () {
+      const children = []
+
+      const input = this.genInputSlot()
+      const messages = this.genMessages()
+
+      input && children.push(input)
+      messages && children.push(messages)
+
       return this.$createElement('div', {
         staticClass: 'v-input__control'
-      }, [
-        this.genInputSlot(),
-        this.genMessages()
-      ])
+      }, children)
     },
     genDefaultSlot () {
-      return [
-        this.genLabel(),
-        this.$slots.default
-      ]
+      const children: VNodeChildren = [this.$slots.default]
+
+      const label = this.genLabel()
+
+      label && children.unshift(label)
+
+      return children
     },
     // TODO: remove shouldDeprecate (2.0), used for clearIcon
-    genIcon (type, cb, shouldDeprecate = true) {
-      const icon = this[`${type}Icon`]
+    genIcon (
+      type: string,
+      cb?: (e: Event) => void,
+      shouldDeprecate = true
+    ) {
+      const icon = (this as any)[`${type}Icon`]
       const eventName = `click:${kebabCase(type)}`
-      cb = cb || this[`${type}IconCb`]
+      cb = cb || (this as any)[`${type}IconCb`]
 
       if (shouldDeprecate && type && cb) {
         deprecate(`:${type}-icon-cb`, `@${eventName}`, this)
@@ -148,7 +195,7 @@ export default {
         on: !(this.$listeners[eventName] || cb)
           ? null
           : {
-            click: e => {
+            click: (e: Event) => {
               e.preventDefault()
               e.stopPropagation()
 
@@ -157,12 +204,12 @@ export default {
             },
             // Container has mouseup event that will
             // trigger menu open if enclosed
-            mouseup: e => {
+            mouseup: (e: Event) => {
               e.preventDefault()
               e.stopPropagation()
             }
           }
-      }
+      } as VNodeData
 
       return this.$createElement('div', {
         staticClass: `v-input__icon v-input__icon--${kebabCase(type)}`,
@@ -217,7 +264,11 @@ export default {
         }
       })
     },
-    genSlot (type, location, slot) {
+    genSlot (
+      type: string,
+      location: string,
+      slot: (VNode | VNode[])[]
+    ) {
       if (!slot.length) return null
 
       const ref = `${type}-${location}`
@@ -253,24 +304,24 @@ export default {
 
       return this.genSlot('append', 'outer', slot)
     },
-    onClick (e) {
+    onClick (e: Event) {
       this.$emit('click', e)
     },
-    onMouseDown (e) {
+    onMouseDown (e: Event) {
       this.hasMouseDown = true
       this.$emit('mousedown', e)
     },
-    onMouseUp (e) {
+    onMouseUp (e: Event) {
       this.hasMouseDown = false
       this.$emit('mouseup', e)
     }
   },
 
-  render (h) {
+  render (h): VNode {
     return h('div', this.setTextColor(this.validationState, {
       staticClass: 'v-input',
       attrs: this.attrsInput,
       'class': this.classesInput
     }), this.genContent())
   }
-}
+})
