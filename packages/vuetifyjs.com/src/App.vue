@@ -47,10 +47,10 @@
       this.snackbar({
         color: 'default',
         close: true,
-        id: 'october-2018-22572142',
-        text: 'Go to video',
-        msg: 'October framework update',
-        href: 'https://www.patreon.com/posts/october-2018-22572142',
+        id: 'cognito-module-release',
+        text: 'Go to Docs',
+        msg: '🎉 **NEW**: Vuetify Vuex Cognito Module',
+        href: 'https://cognito.vuetifyjs.com',
         timeout: 0
       })
     },

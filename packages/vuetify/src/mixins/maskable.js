@@ -25,12 +25,14 @@ export default {
       type: [Object, String],
       default: null
     },
-    returnMaskedValue: Boolean
+    returnMaskedValue: Boolean,
+    value: { required: false }
   },
 
-  data: () => ({
+  data: vm => ({
     selection: 0,
     lazySelection: 0,
+    lazyValue: vm.value,
     preDefined: {
       'credit-card': '#### - #### - #### - ####',
       'date': '##/##/####',
@@ -107,6 +109,7 @@ export default {
       }, 0)
     },
     updateRange () {
+      /* istanbul ignore next */
       if (!this.$refs.input) return
 
       const newValue = this.maskText(this.lazyValue)

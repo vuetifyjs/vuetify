@@ -108,6 +108,8 @@ export default mixins<options & ExtractVue<[typeof Bootable]>>(
       if (isBooted) this.done = done
 
       requestAnimationFrame(() => {
+        if (!this.computedTransition) return done()
+
         this.windowGroup.internalHeight = convertToUnit(el.clientHeight)
 
         // On initial render, there is no transition

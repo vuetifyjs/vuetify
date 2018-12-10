@@ -1,7 +1,7 @@
 {
   "name": "vuetify",
   "description": "Vue.js 2 Semantic Component Framework",
-  "version": "1.3.8",
+  "version": "1.3.12",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -12,6 +12,7 @@
   "main": "dist/vuetify.js",
   "module": "dist/vuetify.js",
   "jsdelivr": "dist/vuetify.js",
+  "unpkg": "dist/vuetify.js",
   "types": "types/index.d.ts",
   "sideEffects": [
     "*.styl",

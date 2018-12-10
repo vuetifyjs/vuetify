@@ -20,7 +20,14 @@ v-toolbar-content($direction)
     .v-btn--icon
       margin-{$direction}: -6px
 
+v-toolbar-rtl()
+  &__title
+    &:not(:first-child)
+      margin-left: 0
+      margin-right: 20px
+
 theme(v-toolbar, "v-toolbar")
+rtl(v-toolbar-rtl, "v-toolbar")
 
 .v-toolbar
   bootable()
