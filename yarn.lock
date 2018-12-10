@@ -12416,10 +12416,10 @@ vue-router@^3.0.1:
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.0.1.tgz#d9b05ad9c7420ba0f626d6500d693e60092cc1e9"
   integrity sha512-vLLoY452L+JBpALMP5UHum9+7nzR9PeIBCghU9ZtJ1eWm6ieUI8Zb/DI3MYxH32bxkjzYV1LRjNv4qr8d+uX/w==
 
-vue-server-renderer@^2.5.18-beta.0:
-  version "2.5.18-beta.0"
-  resolved "https://registry.yarnpkg.com/vue-server-renderer/-/vue-server-renderer-2.5.18-beta.0.tgz#81863e86c3d4b9e1fd6cb76953b1fb942a51abc8"
-  integrity sha512-E7ijGH16Xz2/cPFJLviMx6iQR+0S5NxfnozSizcmO0e7tmTNyjxitERrH2eiiMM4p59ABesI9jp3Szj+bQyu4g==
+vue-server-renderer@^2.5.19:
+  version "2.5.19"
+  resolved "https://registry.yarnpkg.com/vue-server-renderer/-/vue-server-renderer-2.5.19.tgz#f420552bde912e8b1d66f99dbead0e535d2fecf2"
+  integrity sha512-JZ96eorrH/X29MjidX21l50ybYSZtCywkAK4G7Gyjq4qbm0c/B75332XplVN4ngq/c737Mx28sTXqs6DDfVfDQ==
   dependencies:
     chalk "^1.1.3"
     hash-sum "^1.0.2"
@@ -12446,10 +12446,10 @@ vue-style-loader@^4.1.2:
     hash-sum "^1.0.2"
     loader-utils "^1.0.2"
 
-vue-template-compiler@^2.5.18-beta.0:
-  version "2.5.18-beta.0"
-  resolved "https://registry.yarnpkg.com/vue-template-compiler/-/vue-template-compiler-2.5.18-beta.0.tgz#29da5c41e51e914668e5de30911e8f481b2675ac"
-  integrity sha512-8D5iZ02GlXi38veoQutYObGvYd5az/Xor6qII0U/2IdPYwGZi5hTBlR6m+14co5P9rIUusTX4cXuBS8vni5zlg==
+vue-template-compiler@^2.5.19:
+  version "2.5.19"
+  resolved "https://registry.yarnpkg.com/vue-template-compiler/-/vue-template-compiler-2.5.19.tgz#c23fcbea22fe6c116814141d2e6680023d6456f2"
+  integrity sha512-SIoE8gvl0UjZ/wccwHhj0HUqL+kLkJNy/8v7TXElz6rqxqKOKLoAynVV4L78qHZOHhLoyRl5BOmUFQPPdcD5qw==
   dependencies:
     de-indent "^1.0.2"
     he "^1.1.0"
@@ -12459,10 +12459,10 @@ vue-template-es2015-compiler@^1.6.0:
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.6.0.tgz#dc42697133302ce3017524356a6c61b7b69b4a18"
   integrity sha512-x3LV3wdmmERhVCYy3quqA57NJW7F3i6faas++pJQWtknWT+n7k30F4TVdHvCLn48peTJFRvCpxs3UuFPqgeELg==
 
-vue@^2.5.18-beta.0:
-  version "2.5.18-beta.0"
-  resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.18-beta.0.tgz#7d15c02993d17e6a1c5e6e64df1299117ee3e2e5"
-  integrity sha512-vW+F5f3cb8iN20mjoOqmYwywTiBqXjk6IHsgAiQ0bJJa8lqPEobGB8cmmHN3n+ifFID0GZRVeFkoVr4pY+DMpA==
+vue@^2.5.19:
+  version "2.5.19"
+  resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.19.tgz#c4c9ba01a97a23ea24018d4702e994c15785e025"
+  integrity sha512-zs7w/dy/yMTCcUunUl05UHhYEI2bt67R7G2jD42HnJ28JxCtC1FY8zZ9GU4PF2SJP8Ff/B9HyojWk/NztqKfFA==
 
 vuelidate@^0.6.2:
   version "0.6.2"
