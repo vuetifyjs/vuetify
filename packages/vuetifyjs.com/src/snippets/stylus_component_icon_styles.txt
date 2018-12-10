@@ -1,0 +1,3 @@
+.your-svg-icon
+  fill: currentColor
+  height: 1.5rem

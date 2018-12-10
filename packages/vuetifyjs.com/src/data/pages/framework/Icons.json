@@ -237,6 +237,14 @@
         {
           "type": "markup",
           "value": "js_component_icons_install"
+        },
+        {
+          "type": "text",
+          "lang": "componentIconsText2"
+        },
+        {
+          "type": "markup",
+          "value": "stylus_component_icon_styles"
         }
       ]
     }
