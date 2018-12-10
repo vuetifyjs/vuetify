@@ -136,22 +136,17 @@ export default mixins<options &
   methods: {
     genContent (): VNode[] {
       const children = []
-
       const prepend = this.genPrependSlot()
-
-      prepend && children.push(prepend)
-
-      children.push(this.genControl())
-
       const append = this.genAppendSlot()
 
+      prepend && children.push(prepend)
+      children.push(this.genControl())
       append && children.push(append)
 
       return children
     },
     genControl () {
       const children = []
-
       const input = this.genInputSlot()
       const messages = this.genMessages()
 
@@ -164,7 +159,6 @@ export default mixins<options &
     },
     genDefaultSlot () {
       const children: VNodeChildren = [this.$slots.default]
-
       const label = this.genLabel()
 
       label && children.unshift(label)
