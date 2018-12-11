@@ -46,14 +46,16 @@ v-text-field($material)
 
     .v-text-field__prefix
       max-height: 32px
-      margin-top: 22px
 
     &.v-input--is-dirty,
     &.v-input--is-focused,
     &.v-text-field--placeholder
-      .v-text-field__prefix
-        margin-top: 22px
-        transition: $primary-transition
+      &:not(.v-text-field--single-line)
+        .v-text-field__prefix
+          margin-top: 22px
+          line-height: 32px
+          align-self: stretch
+          transition: $primary-transition
 
     &:not(.v-input--is-focused) > .v-input__control > .v-input__slot:hover
       background: $material.text-fields.box-hover
@@ -310,7 +312,9 @@ rtl(v-text-field-rtl, "v-text-field")
       border-radius: 4px
 
     .v-text-field__prefix
-      max-height: 32px
+      margin-top: 12px
+      line-height: 32px
+      align-self: stretch
 
     .v-input__prepend-outer,
     .v-input__append-outer
@@ -319,16 +323,10 @@ rtl(v-text-field-rtl, "v-text-field")
     &.v-input--is-dirty,
     &.v-input--is-focused,
     &.v-text-field--placeholder
-      .v-text-field__prefix
-        margin-top: 22px
-        transition: $primary-transition
-
-    &.v-text-field--single-line
-      .v-text-field__prefix
-        margin-top: 0px
-        padding-top: 8px
-        padding-bottom: 8px
-        line-height: 20px
+      &:not(.v-text-field--single-line)
+        .v-text-field__prefix
+          margin-top: 22px
+          transition: $primary-transition
 
     &.v-input--is-focused, &.v-input--has-state
       & > .v-input__control > .v-input__slot
