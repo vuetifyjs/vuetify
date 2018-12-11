@@ -4,6 +4,7 @@
       <core-page
         :page="page"
         :namespace="namespace"
+        :lang="lang"
         :key="$route.path"
       />
     </v-slide-x-transition>
@@ -19,6 +20,10 @@
         default: undefined
       },
       page: {
+        type: String,
+        default: undefined
+      },
+      lang: {
         type: String,
         default: undefined
       }
