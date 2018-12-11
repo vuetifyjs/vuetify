@@ -51,7 +51,8 @@ export function createRouter () {
             name: 'Documentation',
             props: route => ({
               namespace: route.params.namespace,
-              page: route.params.page
+              page: route.params.page,
+              lang: route.params.lang
             }),
             component: () => import(
               /* webpackChunkName: "documentation" */
