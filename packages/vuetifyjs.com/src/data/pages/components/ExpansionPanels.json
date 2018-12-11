@@ -34,6 +34,7 @@
             "disabledAndReadonly",
             "popout",
             "customIcons",
+            "iconSlot",
             "focusable"
           ]
         }
