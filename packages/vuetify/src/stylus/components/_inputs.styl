@@ -100,14 +100,13 @@ theme(v-input, "v-input")
   &--is-disabled:not(.v-input--is-readonly)
     pointer-events: none
 
-  &--is-loading
-    .v-input__slot:before,
-    .v-input__slot:after
+  &--is-loading > .v-input__control > .v-input__slot
+    &:before,
+    &:after
       display: none
 
-  &--hide-details
-    .v-input__slot
-      margin-bottom: 0
+  &--hide-details > .v-input__control > .v-input__slot
+    margin-bottom: 0
 
   &--has-state
     &.error--text .v-label
