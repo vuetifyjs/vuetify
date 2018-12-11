@@ -5,14 +5,18 @@ import VPicker from '../components/VPicker'
 import Colorable from './colorable'
 import Themeable from './themeable'
 
-/* @vue/component */
-export default {
-  name: 'picker',
+// Utils
+import mixins from '../util/mixins'
 
-  mixins: [
-    Colorable,
-    Themeable
-  ],
+// Types
+import { VNode } from 'vue'
+
+/* @vue/component */
+export default mixins(
+  Colorable,
+  Themeable
+).extend({
+  name: 'picker',
 
   props: {
     fullWidth: Boolean,
@@ -26,15 +30,31 @@ export default {
   },
 
   methods: {
-    genPickerTitle () {},
-    genPickerBody () {},
+    genPickerTitle (): VNode | null {
+      return null
+    },
+    genPickerBody (): VNode | null {
+      return null
+    },
     genPickerActionsSlot () {
       return this.$scopedSlots.default ? this.$scopedSlots.default({
-        save: this.save,
-        cancel: this.cancel
+        save: (this as any).save,
+        cancel: (this as any).cancel
       }) : this.$slots.default
     },
-    genPicker (staticClass) {
+    genPicker (staticClass: string) {
+      const children: VNode[] = []
+
+      if (!this.noTitle) {
+        const title = this.genPickerTitle()
+        title && children.push(title)
+      }
+
+      const body = this.genPickerBody()
+      body && children.push(body)
+
+      children.push(this.$createElement('template', { slot: 'actions' }, [this.genPickerActionsSlot()]))
+
       return this.$createElement(VPicker, {
         staticClass,
         props: {
@@ -45,11 +65,7 @@ export default {
           light: this.light,
           width: this.width
         }
-      }, [
-        this.noTitle ? null : this.genPickerTitle(),
-        this.genPickerBody(),
-        this.$createElement('template', { slot: 'actions' }, [this.genPickerActionsSlot()])
-      ])
+      }, children)
     }
   }
-}
+})
