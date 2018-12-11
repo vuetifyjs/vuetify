@@ -323,6 +323,13 @@ rtl(v-text-field-rtl, "v-text-field")
         margin-top: 22px
         transition: $primary-transition
 
+    &.v-text-field--single-line
+      .v-text-field__prefix
+        margin-top: 0px
+        padding-top: 8px
+        padding-bottom: 8px
+        line-height: 20px
+
     &.v-input--is-focused, &.v-input--has-state
       & > .v-input__control > .v-input__slot
         border: 2px solid currentColor
