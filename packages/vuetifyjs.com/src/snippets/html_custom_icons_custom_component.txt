@@ -1,0 +1,17 @@
+<template>
+  <div class="my-component">
+    <v-icon v-text="icon"></v-icon>
+    <slot></slot>
+  </div>
+</template>
+
+<script>
+  export default {
+    props: {
+      icon: {
+        type: String,
+        default: '$vuetify.icons.cancel'
+      }
+    }
+  }
+</script>

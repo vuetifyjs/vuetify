@@ -36,7 +36,6 @@ export default {
       type: String,
       default: ''
     },
-    disabled: Boolean,
     height: [Number, String],
     hideDetails: Boolean,
     hint: String,
@@ -44,15 +43,11 @@ export default {
     persistentHint: Boolean,
     prependIcon: String,
     /** @deprecated */
-    prependIconCb: Function,
-    readonly: Boolean,
-    value: { required: false }
+    prependIconCb: Function
   },
 
   data: vm => ({
-    lazyValue: vm.value,
-    hasMouseDown: false,
-    isFocused: false
+    hasMouseDown: false
   }),
 
   computed: {
@@ -102,12 +97,6 @@ export default {
     },
     isLabelActive () {
       return this.isDirty
-    }
-  },
-
-  watch: {
-    value (val) {
-      this.lazyValue = val
     }
   },
 

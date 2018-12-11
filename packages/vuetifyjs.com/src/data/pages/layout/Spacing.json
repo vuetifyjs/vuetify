@@ -1,0 +1,60 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "playgroundHeader"
+        },
+        {
+          "type": "text",
+          "lang": "playgroundText1"
+        },
+        {
+          "type": "example",
+          "value": "playground"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "Generic.Pages.howItWorks"
+        },
+        {
+          "type": "text",
+          "lang": "howText"
+        },
+        {
+          "type": "text",
+          "lang": "propertyText"
+        },
+        {
+          "type": "text",
+          "lang": "properties"
+        },
+        {
+          "type": "text",
+          "lang": "directionText"
+        },
+        {
+          "type": "text",
+          "lang": "directions"
+        },
+        {
+          "type": "text",
+          "lang": "sizeText"
+        },
+        {
+          "type": "text",
+          "lang": "sizes"
+        }
+      ]
+    }
+  ]
+}

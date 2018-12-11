@@ -156,4 +156,26 @@ test('VDataIterator.js', ({ mount, compileToFunctions }) => {
     expect(wrapper.find('span.header').length).toBe(1)
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
+
+  it('should reset to page 1 when data is smaller than current page', async () => {
+    const data = dataIteratorTestData()
+    data.propsData.pagination.rowsPerPage = 1
+    data.propsData.pagination.page = 2
+
+    const wrapper = mount(VDataIterator, data)
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.find('.v-data-iterator__actions__pagination')[0].text()).toBe('2-2 of 3')
+
+    wrapper.setProps({ items: [] })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.find('.v-data-iterator__actions__pagination')[0].text()).toBe('–')
+    expect(wrapper.find('[aria-label="Previous page"]')[0].hasClass('v-btn--disabled')).toBe(false)
+    expect(wrapper.find('[aria-label="Next page"]')[0].hasClass('v-btn--disabled')).toBe(true)
+
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
 })

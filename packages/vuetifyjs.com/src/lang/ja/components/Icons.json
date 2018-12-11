@@ -1,6 +1,6 @@
 {
   "header": "Icon",
-  "headerText": "`v-icon`コンポーネントは、あなたのアプリケーションの様々な場面に応じて多くのアイコンを提供します。Vuetifyのアイコンは、GoogleのMaterial Iconsライブラリを使用します。 全ての利用可能なアイコンのリストは、公式の<a href=\"https://material.io/icons/\" target=\"_blank\" rel=\"noopener\">Material Icons</a>ページをご覧ください。",
+  "headerText": "`v-icon`コンポーネントは、あなたのアプリケーションの様々な場面に応じて多くのアイコンを提供します。Vuetifyのアイコンは、GoogleのMaterial Iconsライブラリを使用します。 全ての利用可能なアイコンのリストは、公式の[Material Icons](https://material.io/icons/)ページをご覧ください。",
   "components": ["v-icon"],
   "examples": {
     "standard": {

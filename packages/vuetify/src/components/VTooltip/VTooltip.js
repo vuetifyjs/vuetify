@@ -172,10 +172,10 @@ export default {
       h('span', {
         on: this.disabled ? {} : {
           mouseenter: () => {
-            this.runDelay('open', () => (this.isActive = true))
+            this.runDelay('open')
           },
           mouseleave: () => {
-            this.runDelay('close', () => (this.isActive = false))
+            this.runDelay('close')
           }
         },
         ref: 'activator'

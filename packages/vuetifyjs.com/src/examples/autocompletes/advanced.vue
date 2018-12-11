@@ -90,9 +90,10 @@
         this.isLoading = true
 
         // Lazily load input items
-        window.axios.get('https://api.coinmarketcap.com/v2/listings/')
+        fetch('https://api.coinmarketcap.com/v2/listings/')
+          .then(res => res.json())
           .then(res => {
-            this.items = res.data.data
+            this.items = res.data
           })
           .catch(err => {
             console.log(err)
@@ -105,7 +106,6 @@
 
 <codepen-resources lang="json">
   {
-    "js": ["https://cdn.jsdelivr.net/npm/axios@0.18.0/dist/axios.min.js"],
     "css": ["https://cdn.materialdesignicons.com/2.5.94/css/materialdesignicons.min.css"]
   }
 </codepen-resources>

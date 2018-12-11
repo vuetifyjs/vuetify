@@ -60,8 +60,6 @@
 </template>
 
 <script>
-  import axios from 'axios'
-
   export default {
     data: () => ({
       descriptionLimit: 60,
@@ -104,7 +102,8 @@
         this.isLoading = true
 
         // Lazily load input items
-        axios.get('https://api.publicapis.org/entries')
+        fetch('https://api.publicapis.org/entries')
+          .then(res => res.json())
           .then(res => {
             const { count, entries } = res.data
             this.count = count
@@ -121,7 +120,6 @@
 
 <codepen-resources lang="json">
   {
-    "js": ["https://cdn.jsdelivr.net/npm/axios@0.18.0/dist/axios.min.js"],
     "css": ["https://cdn.materialdesignicons.com/2.5.94/css/materialdesignicons.min.css"]
   }
 </codepen-resources>

@@ -1,0 +1,114 @@
+<template>
+  <v-footer
+    id="footer"
+    class="justify-center align-center py-5"
+    color="grey darken-4"
+    dark
+    height="auto"
+  >
+    <v-container>
+      <v-layout wrap>
+        <v-flex xs12>
+          <h5 class="mb-3">
+            <v-layout
+              align-center
+              column
+              justify-center
+            >
+              <v-img
+                contain
+                height="64px"
+                src="https://cdn.vuetifyjs.com/images/logos/v-alt.svg"
+                width="64px"
+              />
+            </v-layout>
+          </h5>
+        </v-flex>
+        <v-flex xs12>
+          <v-layout justify-center mb-3>
+            <a
+              v-for="(social, i) in socials"
+              :href="social.href"
+              :key="i"
+              :title="social.title"
+              class="mx-3"
+              target="_blank"
+              rel="noopener"
+            >
+              <v-icon
+                dark
+                v-text="social.icon"
+              />
+            </a>
+          </v-layout>
+        </v-flex>
+        <v-flex xs12>
+          <v-layout
+            column
+            text-xs-center
+          >
+            <div>
+              Released under the&nbsp;
+              <a
+                href="https://opensource.org/licenses/MIT"
+                class="body-2 white--text"
+                rel="noopener"
+                style="text-decoration: none;"
+                target="_blank"
+                v-text="$t('Vuetify.Home.mit')"
+              />
+              <div>
+                Copyright &copy; 2016-{{ (new Date()).getFullYear() }} Vuetify, LLC
+              </div>
+            </div>
+          </v-layout>
+        </v-flex>
+      </v-layout>
+    </v-container>
+  </v-footer>
+</template>
+
+<script>
+  export default {
+    data: () => ({
+      socials: [
+        {
+          icon: 'mdi-reddit',
+          href: 'https://www.reddit.com/r/vuetifyjs',
+          title: 'Reddit'
+        },
+        {
+          icon: 'mdi-medium',
+          href: 'https://medium.com/vuetify',
+          title: 'Medium'
+        },
+        {
+          icon: 'mdi-github-circle',
+          href: 'https://github.com/vuetifyjs/vuetify',
+          title: 'Github'
+        },
+        {
+          icon: 'mdi-twitter',
+          href: 'https://twitter.com/vuetifyjs',
+          title: 'Twitter'
+        },
+        {
+          icon: 'mdi-facebook',
+          href: 'https://www.facebook.com/vuetifyjs',
+          title: 'Facebook'
+        },
+        {
+          icon: 'mdi-discord',
+          href: 'https://community.vuetifyjs.com',
+          title: 'Discord Community'
+        }
+      ]
+    })
+  }
+</script>
+
+<style lang="stylus">
+  #footer
+    a
+      text-decoration: none
+</style>

@@ -114,6 +114,13 @@
     "dark": true
   },
   {
+    "name": "Osolabs",
+    "href": "https://www.osolabs.com/",
+    "logo": "backers/osolabs-logo.png",
+    "type": "Patron",
+    "pledge": "Gold ($50)"
+  },
+  {
     "name": "VueJobs",
     "logo": "affiliates/vuejobs-logo.svg",
     "href": "https://vuejobs.com/?utm_source=vuejobs&utm_medium=affiliates&utm_campaign=linking",

@@ -795,4 +795,23 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
 
     expect(wrapper.vm.internalSearch).toBe(0)
   })
+
+  it('should auto select first', async () => {
+    const wrapper = shallow(VAutocomplete, {
+      propsData: {
+        autoSelectFirst: true,
+        items: [
+          'foo',
+          'foobar',
+          'bar'
+        ]
+      }
+    })
+
+    wrapper.setData({ internalSearch: 'fo' })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.getMenuIndex()).toBe(0)
+  })
 })
