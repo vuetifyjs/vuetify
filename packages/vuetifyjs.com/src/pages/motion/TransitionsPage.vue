@@ -4,7 +4,7 @@
       helpers-section-head(value="Motion.Transitions.createYourOwnHeader")
       helpers-section-text(value="Motion.Transitions.createYourOwnText1")
       helpers-markup(lang="javascript")
-        | import { createSimpleTransition } from 'vuetify/es5/util/helpers'
+        | import { createSimpleTransition } from 'vuetify/lib/util/helpers'
         | &nbsp;
         | const myTransition = createSimpleTransition('my-transition')
         | &nbsp;

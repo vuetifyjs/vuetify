@@ -39,7 +39,7 @@
           | })
         helpers-section-text(:value="`${namespace}.customizingText3`")
         helpers-markup(lang="javascript")
-          | import colors from 'vuetify/es5/util/colors'
+          | import colors from 'vuetify/lib/util/colors'
           |
           | Vue.use(Vuetify, {
           |   theme: {
@@ -58,7 +58,7 @@
         helpers-section-text(:value="`${namespace}.variantsText1`")
         helpers-markup(lang="javascript")
           | // src/theme.js
-          | import colors from 'vuetify/es5/util/colors'
+          | import colors from 'vuetify/lib/util/colors'
           |
           | export default {
           |   primary: {

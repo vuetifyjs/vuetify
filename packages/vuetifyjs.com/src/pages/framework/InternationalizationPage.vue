@@ -20,7 +20,7 @@
         | import Vuetify from 'vuetify'
         |
         | // Translation provided by Vuetify (javascript)
-        | import zhHans from 'vuetify/es5/locale/zh-Hans'
+        | import zhHans from 'vuetify/lib/locale/zh-Hans'
         |
         | // Translation provided by Vuetify (typescript)
         | import pl from 'vuetify/src/locale/pl'
@@ -120,7 +120,7 @@
 </template>
 
 <script>
-  import enLocale from 'vuetify/es5/locale/en'
+  import enLocale from 'vuetify/lib/locale/en'
 
   export default {
     data: vm => ({

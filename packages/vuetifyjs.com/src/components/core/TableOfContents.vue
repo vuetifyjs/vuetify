@@ -2,7 +2,7 @@
   // Utilities
   import { goTo } from '@/util/helpers'
   import { mapState } from 'vuex'
-  import { getObjectValueByPath } from 'vuetify/es5/util/helpers'
+  import { getObjectValueByPath } from 'vuetify/lib/util/helpers'
   import upperFirst from 'lodash/upperFirst'
   import camelCase from 'lodash/camelCase'
 
