@@ -36,13 +36,6 @@ export default {
 
   methods: {
     onKeyDown (e) {
-      if ([
-        keyCodes.down,
-        keyCodes.up,
-        keyCodes.enter
-      ].includes(e.keyCode)
-      ) e.preventDefault()
-
       if ([keyCodes.esc, keyCodes.tab].includes(e.keyCode)) {
         return this.isActive = false
       }
@@ -50,6 +43,13 @@ export default {
       this.changeListIndex(e)
     },
     changeListIndex (e) {
+      if ([
+        keyCodes.down,
+        keyCodes.up,
+        keyCodes.enter
+      ].includes(e.keyCode)
+      ) e.preventDefault()
+
       // For infinite scroll and autocomplete, re-evaluate children
       this.getTiles()
 
