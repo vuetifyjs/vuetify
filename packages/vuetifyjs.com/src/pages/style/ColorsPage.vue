@@ -25,7 +25,7 @@
           | import Vuetify from 'vuetify'
           |
           | // Helpers
-          | import colors from 'vuetify/lib/util/colors'
+          | import colors from 'vuetify/es5/util/colors'
           |
           | Vue.use(Vuetify, {
           |   theme: {
@@ -102,7 +102,7 @@
 </template>
 
 <script>
-  import colors from 'vuetify/lib/util/colors'
+  import colors from 'vuetify/es5/util/colors'
   import { kebab } from '@/util/helpers'
 
   export default {
