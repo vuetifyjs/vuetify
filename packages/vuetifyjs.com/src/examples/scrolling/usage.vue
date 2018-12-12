@@ -26,7 +26,7 @@
 </template>
 
 <script>
-  import * as easings from 'vuetify/es5/util/easing-patterns'
+  import * as easings from 'vuetify/lib/util/easing-patterns'
 
   export default {
     data () {

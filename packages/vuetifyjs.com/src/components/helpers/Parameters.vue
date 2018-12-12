@@ -68,7 +68,7 @@
   import { mapState } from 'vuex'
   import { capitalize, camel } from '@/util/helpers'
   import componentNameMap from '@/data/i18n/componentNameMap'
-  import { getObjectValueByPath } from 'vuetify/es5/util/helpers'
+  import { getObjectValueByPath } from 'vuetify/lib/util/helpers'
 
   export default {
     props: {

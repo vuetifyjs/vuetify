@@ -99,7 +99,7 @@ export default mixins<options &
         directives: [{
           name: 'show',
           value: this.isActive
-        }] as any
+        }]
       }, this.showLazyContent(this.$slots.default))
     },
     genHeader () {
@@ -112,7 +112,7 @@ export default mixins<options &
         directives: [{
           name: 'ripple',
           value: this.ripple
-        }] as any,
+        }],
         on: {
           click: this.onHeaderClick
         }
@@ -130,7 +130,7 @@ export default mixins<options &
           directives: [{
             name: 'show',
             value: !this.isDisabled
-          }] as any
+          }]
         }, icon)
       ])
     },
@@ -142,11 +142,6 @@ export default mixins<options &
   },
 
   render (h): VNode {
-    const children = []
-
-    this.$slots.header && children.push(this.genHeader())
-    children.push(h(VExpandTransition, [this.genBody()]))
-
     return h('li', {
       staticClass: 'v-expansion-panel__container',
       class: this.containerClasses,
@@ -156,6 +151,9 @@ export default mixins<options &
       on: {
         keydown: this.onKeydown
       }
-    }, children)
+    }, [
+      this.$slots.header && this.genHeader(),
+      h(VExpandTransition, [this.genBody()])
+    ])
   }
 })

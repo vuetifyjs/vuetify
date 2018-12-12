@@ -194,4 +194,28 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect(menu.nudgeBottom).toBe(5)
     expect(menu.nudgeLeft).toBe(5)
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/5774
+  it('should close menu on tab down when no selectedIndex', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        items: ['foo', 'bar']
+      }
+    })
+
+    const menu = wrapper.first('.v-input__slot')
+    const input = wrapper.first('input')
+
+    menu.trigger('click')
+
+    expect(wrapper.vm.isFocused).toBe(true)
+    expect(wrapper.vm.isMenuActive).toBe(true)
+
+    input.trigger('keydown.tab')
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.isFocused).toBe(false)
+    expect(wrapper.vm.isMenuActive).toBe(false)
+  })
 })

@@ -256,11 +256,12 @@ export default {
 
   methods: {
     /** @public */
-    blur () {
+    blur (e) {
       this.isMenuActive = false
       this.isFocused = false
       this.$refs.input && this.$refs.input.blur()
       this.selectedIndex = -1
+      this.onBlur(e)
     },
     /** @public */
     activateMenu () {
@@ -532,7 +533,6 @@ export default {
       return getPropertyFromItem(item, this.itemValue, this.getText(item))
     },
     onBlur (e) {
-      this.blur()
       this.$emit('blur', e)
     },
     onChipInput (item) {
@@ -557,7 +557,7 @@ export default {
       }
     },
     onEnterDown () {
-      this.$emit('blur', undefined)
+      this.onBlur()
     },
     onEscDown (e) {
       e.preventDefault()
@@ -647,7 +647,7 @@ export default {
         // If we make it here,
         // the user has no selected indexes
         // and is probably tabbing out
-        VTextField.methods.onBlur.call(this, e)
+        this.blur(e)
       }
     },
     selectItem (item) {
