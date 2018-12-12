@@ -242,7 +242,7 @@ test('VSelect2', ({ mount, compileToFunctions }) => {
 
   })
 
-  it.only('should react to different key down', async () => {
+  it('should react to different key down', async () => {
     const wrapper = mount(VSelect)
     const blur = jest.fn()
     wrapper.vm.$on('blur', blur)
