@@ -1,12 +1,12 @@
-import { Vue } from 'vue/types/vue'
+import Vue from 'vue'
 import { VNode, VNodeDirective, FunctionalComponentOptions } from 'vue/types'
 
 export function createSimpleFunctional (
   c: string,
   el = 'div',
   name?: string
-): FunctionalComponentOptions {
-  return {
+) {
+  return Vue.extend({
     name: name || c.replace(/__/g, '-'),
 
     functional: true,
@@ -16,7 +16,7 @@ export function createSimpleFunctional (
 
       return h(el, data, children)
     }
-  }
+  })
 }
 
 function mergeTransitions (
