@@ -85,7 +85,7 @@
     "webpack-merge": "^4.1.4"
   },
   "peerDependencies": {
-    "vue": "^2.5.21"
+    "vue": "^2.5.18"
   },
   "publishConfig": {
     "access": "public"
