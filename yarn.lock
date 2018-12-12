@@ -9545,12 +9545,12 @@ postcss-reduce-transforms@^4.0.1:
     postcss "^7.0.0"
     postcss-value-parser "^3.0.0"
 
-postcss-rtl@^1.3.2:
-  version "1.3.2"
-  resolved "https://registry.yarnpkg.com/postcss-rtl/-/postcss-rtl-1.3.2.tgz#54748ca913d0852236c09eceb2aecf597ed7bf95"
-  integrity sha512-tUV/lZ4FAzfDvipJV+NdaU8QzlyZLR992Lh65QccrxQBiuQMOwTD5svISLW8gCYgLZ9rBkjEDA+xIBPNxROJ4A==
+postcss-rtl@^1.3.3:
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/postcss-rtl/-/postcss-rtl-1.3.3.tgz#9ded22ba783cce5516640072f3cee0d28b746eaf"
+  integrity sha512-iKdSko4zSvchZSPplz0iLD4dQyd4RiiARivMwboknD2eHu4tde1K7BqZ4CizZmnxrfhi4fvS774YSQPX6LJfMQ==
   dependencies:
-    rtlcss "^2.3.0"
+    rtlcss "^2.4.0"
 
 postcss-selector-parser@^3.0.0, postcss-selector-parser@^3.1.1:
   version "3.1.1"
@@ -10593,7 +10593,7 @@ rsvp@^3.3.3:
   resolved "https://registry.yarnpkg.com/rsvp/-/rsvp-3.6.2.tgz#2e96491599a96cde1b515d5674a8f7a91452926a"
   integrity sha512-OfWGQTb9vnwRjwtA2QwpG2ICclHC3pgXZO5xt8H2EfgDquO0qVdSb5T88L4qJVAEugbS56pAuV4XZM58UX8ulw==
 
-rtlcss@^2.3.0:
+rtlcss@^2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/rtlcss/-/rtlcss-2.4.0.tgz#482ea28f2b9fe06dd0ab3057997be9af13da84c1"
   integrity sha512-hdjFhZ5FCI0ABOfyXOMOhBtwPWtANLCG7rOiOcRf+yi5eDdxmDjqBruWouEnwVdzfh/TWF6NNncIEsigOCFZOA==

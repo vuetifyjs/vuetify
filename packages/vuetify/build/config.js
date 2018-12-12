@@ -6,7 +6,8 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
 const base = require('./webpack.prod.config')
 const version = process.env.VERSION || require('../package.json').version
-const dirSuffix = process.env.DIRECTION ? `.${process.env.DIRECTION}` : ''
+const dirSuffix = process.env.DIRECTION && process.env.NODE_ENV !== 'production' ? `.${process.env.DIRECTION}` : ''
+const discardCommentsRegex = new RegExp(/^!?\s*rtl:/)
 
 const builds = {
   development: {
@@ -77,7 +78,7 @@ function genConfig (opts) {
           assetNameRegExp: /\.css$/g,
           cssProcessor: require('cssnano'),
           cssProcessorOptions: {
-            discardComments: { removeAll: true },
+            discardComments: { remove: comment => !discardCommentsRegex.test(comment) },
             postcssZindex: false,
             reduceIdents: false
           },

@@ -2,6 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const postcss = require('postcss')
 const postcssrtl = require('postcss-rtl')
+const postcssDiscardComments = require('postcss-discard-comments')
 
 function getPath (filename) {
   return path.join(__dirname, '../dist', filename)
@@ -15,6 +16,11 @@ const addIgnoreComments = postcss.plugin('add-ignore-comments', () => root => {
   root.prepend('/*rtl:begin:ignore*/')
   root.append('/*rtl:end:ignore*/')
 })
+
+const discardCommentsRegex = new RegExp(/^!?\s*rtl:/)
+const discardCommentsOptions = {
+  remove: comment => discardCommentsRegex.test(comment)
+}
 
 const files = {
   'vuetify.css': {
@@ -31,9 +37,12 @@ function runPostcss (filename, direction) {
   const src = getPath(filename)
   const { css, map } = files[filename]
   const dst = outputPath(src, direction)
-  const options = direction === 'bidi' ? undefined : { onlyDirection: direction }
-  const plugins = direction ? [postcssrtl(options)] : []
-  plugins.push(addIgnoreComments())
+  const rtlOptions = direction === 'bidi' ? undefined : { onlyDirection: direction }
+  const plugins = direction ? [postcssrtl(rtlOptions)] : []
+  plugins.push(
+    postcssDiscardComments(discardCommentsOptions),
+    addIgnoreComments()
+  )
   return postcss(plugins)
     .process(css, { from: src, to: dst, map: map && { prev: map } })
     .then(({ css, map }) => {

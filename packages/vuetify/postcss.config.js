@@ -2,9 +2,14 @@ const autoprefixer = require('autoprefixer')
 const mqpacker = require('css-mqpacker')
 
 function rtl () {
+  if (process.env.NODE_ENV === 'production') return undefined
+
   const dir = process.env.DIRECTION
   if (!dir) return undefined
-  const options = dir === 'bidi' ? undefined : { onlyDirection: dir }
+
+  const options = { removeComments: false }
+  if (dir !== 'bidi') options.onlyDirection = dir
+
   return require('postcss-rtl')(options)
 }
 
