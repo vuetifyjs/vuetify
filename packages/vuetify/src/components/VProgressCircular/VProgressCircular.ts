@@ -17,7 +17,7 @@ export default mixins(Colorable).extend({
     indeterminate: Boolean,
 
     rotate: {
-      type: Number,
+      type: [Number, String],
       default: 0
     },
 
@@ -90,7 +90,7 @@ export default mixins(Colorable).extend({
 
     svgStyles (): object {
       return {
-        transform: `rotate(${this.rotate}deg)`
+        transform: `rotate(${Number(this.rotate)}deg)`
       }
     },
 
