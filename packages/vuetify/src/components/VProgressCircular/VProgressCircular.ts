@@ -27,7 +27,7 @@ export default mixins(Colorable).extend({
     },
 
     width: {
-      type: Number,
+      type: [Number, String],
       default: 4
     },
 
@@ -78,7 +78,7 @@ export default mixins(Colorable).extend({
     },
 
     strokeWidth (): number {
-      return this.width / +this.size * this.viewBoxSize * 2
+      return Number(this.width) / +this.size * this.viewBoxSize * 2
     },
 
     styles (): object {
@@ -95,7 +95,7 @@ export default mixins(Colorable).extend({
     },
 
     viewBoxSize (): number {
-      return this.radius / (1 - this.width / +this.size)
+      return this.radius / (1 - Number(this.width) / +this.size)
     }
   },
 
