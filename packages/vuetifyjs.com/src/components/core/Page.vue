@@ -24,6 +24,16 @@
         :is="getComponent(child.type)"
         :value="child"
       />
+
+      <div>
+        Caught a mistake? Want to Contribute to this page or the docs as a whole?
+        Consider checking out the
+        <a href="../getting-started/contributing">Contribution Guide</a>
+        or <a
+          :href="contributionFooter.link"
+          v-text="contributionFooter.text"
+        />
+      </div>
     </template>
   </v-container>
 </template>
@@ -59,6 +69,10 @@
       page: {
         type: String,
         default: undefined
+      },
+      lang: {
+        type: String,
+        default: undefined
       }
     },
 
@@ -69,6 +83,12 @@
     computed: {
       composite () {
         return `${this.namespace}-${this.page}`
+      },
+      contributionFooter () {
+        return {
+          text: 'edit this page on Github',
+          link: `https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetifyjs.com/src/lang/${this.lang}/${this.namespace}/${upperFirst(camelCase(this.page))}.json`
+        }
       }
     },
 

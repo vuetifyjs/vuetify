@@ -1,7 +1,10 @@
 import Vue from 'vue'
 import Rollbar from 'vue-rollbar'
 
-if (process.env.ROLLBAR_ACCESS_TOKEN) {
+if (
+  process.env.NODE_ENV === 'production' &&
+  process.env.ROLLBAR_ACCESS_TOKEN
+) {
   Vue.use(Rollbar, {
     accessToken: process.env.ROLLBAR_ACCESS_TOKEN,
     captureUncaught: true,
