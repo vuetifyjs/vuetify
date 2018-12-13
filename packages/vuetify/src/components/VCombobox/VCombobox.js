@@ -57,7 +57,7 @@ export default {
       if (
         val &&
         this.multiple &&
-         this.delimiters.length
+        this.delimiters.length
       ) {
         const delimiter = this.delimiters.find(d => val.endsWith(d))
         if (delimiter != null) {
