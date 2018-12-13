@@ -147,7 +147,7 @@ export default mixins<options &
       class: this.containerClasses,
       attrs: {
         tabindex: this.isReadonly || this.isDisabled ? null : 0,
-        'aria-expanded': this.isActive
+        'aria-expanded': Boolean(this.isActive)
       },
       on: {
         keydown: this.onKeydown
