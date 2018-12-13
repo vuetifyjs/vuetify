@@ -60,10 +60,10 @@ export default {
         this.delimiters
       ) {
         const delimiter = this.delimiters.find(d => val.endsWith(d))
-        if (delimiter == null) return
-
-        this.internalSearch = val.slice(0, val.length - delimiter.length)
-        this.updateTags()
+        if (delimiter != null) {
+          this.internalSearch = val.slice(0, val.length - delimiter.length)
+          this.updateTags()
+        }
       }
 
       this.updateMenuDimensions()
