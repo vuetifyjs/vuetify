@@ -55,7 +55,7 @@
     props: {
       lang: {
         type: String,
-        default: ''
+        default: 'markup'
       }
     },
 
@@ -67,10 +67,8 @@
       language () {
         const lang = LANGUAGE_MAP[this.lang] || this.lang
 
-        if (lang && !AVAILABLE_LANGUAGES.includes(lang)) {
-          console.log(lang + ' is unavailable')
-
-          return undefined
+        if (!AVAILABLE_LANGUAGES.includes(lang)) {
+          return 'markup'
         }
 
         return lang
