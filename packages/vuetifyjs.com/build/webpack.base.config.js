@@ -18,6 +18,7 @@ let plugins = [
 
 module.exports = {
   mode: isProd ? 'production' : 'development',
+  devtool: 'source-map',
   output: {
     path: resolve('../dist'),
     publicPath: '/dist/',
