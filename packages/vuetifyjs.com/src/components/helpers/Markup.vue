@@ -67,7 +67,7 @@
       language () {
         const lang = LANGUAGE_MAP[this.lang] || this.lang
 
-        if (!AVAILABLE_LANGUAGES.includes(lang)) {
+        if (lang && !AVAILABLE_LANGUAGES.includes(lang)) {
           console.log(lang + ' is unavailable')
 
           return undefined
