@@ -278,7 +278,7 @@ export default {
       VSelect.methods.clearableCallback.call(this)
     },
     genInput () {
-      const input = VTextField.methods.genInput.call(this)
+      const input = VTextField.options.methods.genInput.call(this)
 
       input.data.attrs.role = 'combobox'
       input.data.domProps.value = this.internalSearch

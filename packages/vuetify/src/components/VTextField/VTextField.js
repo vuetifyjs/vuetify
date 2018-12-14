@@ -24,12 +24,10 @@ import { deprecate } from '../../util/console'
 const dirtyTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
 
 /* @vue/component */
-export default {
+export default VInput.extend({
   name: 'v-text-field',
 
   directives: { Ripple },
-
-  extends: VInput,
 
   mixins: [Maskable, Loadable],
 
@@ -247,7 +245,7 @@ export default {
       return this.genSlot('append', 'inner', slot)
     },
     genInputSlot () {
-      const input = VInput.methods.genInputSlot.call(this)
+      const input = VInput.options.methods.genInputSlot.call(this)
 
       const prepend = this.genPrependInnerSlot()
       prepend && input.children.unshift(prepend)
@@ -352,7 +350,7 @@ export default {
       return this.$createElement('div', {
         staticClass: 'v-text-field__details'
       }, [
-        VInput.methods.genMessages.call(this),
+        VInput.options.methods.genMessages.call(this),
         this.genCounter()
       ])
     },
@@ -418,12 +416,12 @@ export default {
         e.stopPropagation()
       }
 
-      VInput.methods.onMouseDown.call(this, e)
+      VInput.options.methods.onMouseDown.call(this, e)
     },
     onMouseUp (e) {
       if (this.hasMouseDown) this.focus()
 
-      VInput.methods.onMouseUp.call(this, e)
+      VInput.options.methods.onMouseUp.call(this, e)
     }
   }
-}
+})

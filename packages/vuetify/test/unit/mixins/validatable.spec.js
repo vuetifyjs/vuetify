@@ -235,7 +235,7 @@ test('validatable.js', ({ mount }) => {
   it('should return validation state', () => {
     const wrapper = mount(Mock)
 
-    expect(wrapper.vm.validationState).toBe(null)
+    expect(wrapper.vm.validationState).toBe(undefined)
 
     wrapper.setProps({ error: true })
     expect(wrapper.vm.validationState).toBe('error')

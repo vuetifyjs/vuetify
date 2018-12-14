@@ -17,16 +17,30 @@ import {
   kebabCase
 } from '../../util/helpers'
 import { deprecate } from '../../util/console'
+import mixins, { ExtractVue } from '../../util/mixins'
 
-/* @vue/component */
-export default {
+// Types
+import Vue, { VNode, VNodeData } from 'vue'
+interface options extends Vue {
+  /* eslint-disable-next-line camelcase */
+  $_modelEvent: string
+}
+
+export default mixins<options &
+/* eslint-disable indent */
+  ExtractVue<[
+    typeof Colorable,
+    typeof Themeable,
+    typeof Validatable
+  ]>
+/* eslint-enable indent */
+>(
+  Colorable,
+  Themeable,
+  Validatable
+  /* @vue/component */
+).extend({
   name: 'v-input',
-
-  mixins: [
-    Colorable,
-    Themeable,
-    Validatable
-  ],
 
   props: {
     appendIcon: String,
@@ -40,18 +54,25 @@ export default {
     hideDetails: Boolean,
     hint: String,
     label: String,
+    loading: Boolean,
     persistentHint: Boolean,
     prependIcon: String,
     /** @deprecated */
-    prependIconCb: Function
+    prependIconCb: Function,
+    value: { required: false }
   },
 
-  data: vm => ({
-    hasMouseDown: false
-  }),
+  data () {
+    return {
+      attrsInput: {},
+      lazyValue: this.value as any,
+      hasMouseDown: false
+    }
+  },
 
   computed: {
-    classesInput () {
+    classes: () => ({}),
+    classesInput (): object {
       return {
         ...this.classes,
         'v-input--has-state': this.hasState,
@@ -84,7 +105,7 @@ export default {
       get () {
         return this.lazyValue
       },
-      set (val) {
+      set (val: any) {
         this.lazyValue = val
         this.$emit(this.$_modelEvent, val)
       }
@@ -97,6 +118,12 @@ export default {
     },
     isLabelActive () {
       return this.isDirty
+    }
+  },
+
+  watch: {
+    value (val) {
+      this.lazyValue = val
     }
   },
 
@@ -129,16 +156,20 @@ export default {
       ]
     },
     // TODO: remove shouldDeprecate (2.0), used for clearIcon
-    genIcon (type, cb, shouldDeprecate = true) {
-      const icon = this[`${type}Icon`]
+    genIcon (
+      type: string,
+      cb?: (e: Event) => void,
+      shouldDeprecate = true
+    ) {
+      const icon = (this as any)[`${type}Icon`]
       const eventName = `click:${kebabCase(type)}`
-      cb = cb || this[`${type}IconCb`]
+      cb = cb || (this as any)[`${type}IconCb`]
 
       if (shouldDeprecate && type && cb) {
         deprecate(`:${type}-icon-cb`, `@${eventName}`, this)
       }
 
-      const data = {
+      const data: VNodeData = {
         props: {
           color: this.validationState,
           dark: this.dark,
@@ -146,9 +177,9 @@ export default {
           light: this.light
         },
         on: !(this.$listeners[eventName] || cb)
-          ? null
+          ? undefined
           : {
-            click: e => {
+            click: (e: Event) => {
               e.preventDefault()
               e.stopPropagation()
 
@@ -157,7 +188,7 @@ export default {
             },
             // Container has mouseup event that will
             // trigger menu open if enclosed
-            mouseup: e => {
+            mouseup: (e: Event) => {
               e.preventDefault()
               e.stopPropagation()
             }
@@ -217,7 +248,11 @@ export default {
         }
       })
     },
-    genSlot (type, location, slot) {
+    genSlot (
+      type: string,
+      location: string,
+      slot: (VNode | VNode[])[]
+    ) {
       if (!slot.length) return null
 
       const ref = `${type}-${location}`
@@ -230,8 +265,8 @@ export default {
     genPrependSlot () {
       const slot = []
 
-      if (this.$slots['prepend']) {
-        slot.push(this.$slots['prepend'])
+      if (this.$slots.prepend) {
+        slot.push(this.$slots.prepend)
       } else if (this.prependIcon) {
         slot.push(this.genIcon('prepend'))
       }
@@ -245,32 +280,32 @@ export default {
       // an appended inner icon, v-text-field
       // will overwrite this method in order to obtain
       // backwards compat
-      if (this.$slots['append']) {
-        slot.push(this.$slots['append'])
+      if (this.$slots.append) {
+        slot.push(this.$slots.append)
       } else if (this.appendIcon) {
         slot.push(this.genIcon('append'))
       }
 
       return this.genSlot('append', 'outer', slot)
     },
-    onClick (e) {
+    onClick (e: Event) {
       this.$emit('click', e)
     },
-    onMouseDown (e) {
+    onMouseDown (e: Event) {
       this.hasMouseDown = true
       this.$emit('mousedown', e)
     },
-    onMouseUp (e) {
+    onMouseUp (e: Event) {
       this.hasMouseDown = false
       this.$emit('mouseup', e)
     }
   },
 
-  render (h) {
+  render (h): VNode {
     return h('div', this.setTextColor(this.validationState, {
       staticClass: 'v-input',
       attrs: this.attrsInput,
       'class': this.classesInput
     }), this.genContent())
   }
-}
+})
