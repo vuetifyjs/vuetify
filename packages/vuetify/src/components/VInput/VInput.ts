@@ -20,7 +20,7 @@ import { deprecate } from '../../util/console'
 import mixins, { ExtractVue } from '../../util/mixins'
 
 // Types
-import Vue, { VNode, VNodeData, VNodeChildren } from 'vue'
+import Vue, { VNode, VNodeData } from 'vue'
 interface options extends Vue {
   /* eslint-disable-next-line camelcase */
   $_modelEvent: string
@@ -134,36 +134,28 @@ export default mixins<options &
   },
 
   methods: {
-    genContent (): VNode[] {
-      const children = []
-      const prepend = this.genPrependSlot()
-      const append = this.genAppendSlot()
-
-      prepend && children.push(prepend)
-      children.push(this.genControl())
-      append && children.push(append)
-
-      return children
+    genContent () {
+      return [
+        this.genPrependSlot(),
+        this.genControl(),
+        this.genAppendSlot()
+      ]
     },
     genControl () {
-      const children = []
-      const input = this.genInputSlot()
-      const messages = this.genMessages()
-
-      input && children.push(input)
-      messages && children.push(messages)
+      const children = [
+        this.genInputSlot(),
+        this.genMessages()
+      ]
 
       return this.$createElement('div', {
         staticClass: 'v-input__control'
       }, children)
     },
     genDefaultSlot () {
-      const children: VNodeChildren = [this.$slots.default]
-      const label = this.genLabel()
-
-      label && children.unshift(label)
-
-      return children
+      return [
+        this.$slots.default,
+        this.genLabel()
+      ]
     },
     // TODO: remove shouldDeprecate (2.0), used for clearIcon
     genIcon (
@@ -275,8 +267,8 @@ export default mixins<options &
     genPrependSlot () {
       const slot = []
 
-      if (this.$slots['prepend']) {
-        slot.push(this.$slots['prepend'])
+      if (this.$slots.prepend) {
+        slot.push(this.$slots.prepend)
       } else if (this.prependIcon) {
         slot.push(this.genIcon('prepend'))
       }
@@ -290,8 +282,8 @@ export default mixins<options &
       // an appended inner icon, v-text-field
       // will overwrite this method in order to obtain
       // backwards compat
-      if (this.$slots['append']) {
-        slot.push(this.$slots['append'])
+      if (this.$slots.append) {
+        slot.push(this.$slots.append)
       } else if (this.appendIcon) {
         slot.push(this.genIcon('append'))
       }
