@@ -35,6 +35,20 @@ test('validatable.js', ({ mount }) => {
     expect(wrapper.vm.isResetting).toBe(true)
   })
 
+  it('should reset valid flag on resetValidation', () => {
+    const wrapper = mount(Mock, {
+      data: {
+        valid: true
+      }
+    })
+
+    expect(wrapper.vm.valid).toBe(true)
+
+    wrapper.vm.resetValidation()
+
+    expect(wrapper.vm.valid).toBe(false)
+  })
+
   it('should manually validate', () => {
     const wrapper = mount(Mock)
 
