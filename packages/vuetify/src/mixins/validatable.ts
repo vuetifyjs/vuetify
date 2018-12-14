@@ -46,7 +46,12 @@ export default mixins(
       default: () => []
     } as PropValidator<VuetifyMessage>,
     validateOnBlur: Boolean,
-    value: { required: false }
+    value: { required: false },
+    warning: Boolean,
+    warningMessages: {
+      type: [String, Array],
+      default: () => []
+    } as PropValidator<VuetifyMessage>
   },
 
   data () {
@@ -78,6 +83,12 @@ export default mixins(
         this.success
       )
     },
+    hasWarning (): boolean {
+      return (
+        this.internalWarningMessages.length > 0 ||
+        this.warning
+      )
+    },
     externalError (): boolean {
       return this.errorMessages.length > 0 || this.error
     },
@@ -86,7 +97,7 @@ export default mixins(
     },
     hasState (): boolean {
       return (
-        this.hasSuccess ||
+        this.hasSuccess || this.hasWarning ||
         (this.shouldValidate && this.hasError)
       )
     },
@@ -98,6 +109,9 @@ export default mixins(
     },
     internalSuccessMessages (): VuetifyRuleValidations {
       return this.genInternalMessages(this.successMessages)
+    },
+    internalWarningMessages (): VuetifyRuleValidations {
+      return this.genInternalMessages(this.warningMessages)
     },
     internalValue: {
       get (): unknown {
@@ -123,6 +137,7 @@ export default mixins(
     validationState (): string | null {
       if (this.hasError && this.shouldValidate) return 'error'
       if (this.hasSuccess) return 'success'
+      if (this.hasWarning) return 'warning'
       if (this.hasColor) return this.color
       return null
     },
@@ -131,6 +146,8 @@ export default mixins(
         return this.internalErrorMessages
       } else if (this.successMessages.length > 0) {
         return this.internalSuccessMessages
+      } else if (this.warningMessages.length > 0) {
+        return this.internalWarningMessages
       } else if (this.messages.length > 0) {
         return this.internalMessages
       } else if (this.shouldValidate) {
