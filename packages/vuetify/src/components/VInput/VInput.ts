@@ -153,8 +153,8 @@ export default mixins<options &
     },
     genDefaultSlot () {
       return [
-        this.$slots.default,
-        this.genLabel()
+        this.genLabel(),
+        this.$slots.default
       ]
     },
     // TODO: remove shouldDeprecate (2.0), used for clearIcon
