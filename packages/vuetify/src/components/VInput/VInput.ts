@@ -142,14 +142,12 @@ export default mixins<options &
       ]
     },
     genControl () {
-      const children = [
-        this.genInputSlot(),
-        this.genMessages()
-      ]
-
       return this.$createElement('div', {
         staticClass: 'v-input__control'
-      }, children)
+      }, [
+        this.genInputSlot(),
+        this.genMessages()
+      ])
     },
     genDefaultSlot () {
       return [
