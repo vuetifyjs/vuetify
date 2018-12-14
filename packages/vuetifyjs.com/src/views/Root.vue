@@ -1,8 +1,6 @@
 <template>
-  <v-fade-transition mode="out-in">
-    <router-view v-if="languageIsValid" />
-    <not-found-page v-else to="/en/" />
-  </v-fade-transition>
+  <router-view v-if="languageIsValid" />
+  <not-found-page v-else to="/en/" />
 </template>
 
 <script>
