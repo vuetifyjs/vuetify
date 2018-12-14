@@ -5,14 +5,17 @@ import PickerButton from '../../mixins/picker-button'
 
 // Utils
 import { pad } from '../VDatePicker/util'
+import mixins from '../../util/mixins'
 
 import { selectingTimes } from './VTimePicker'
+import { PropValidator } from 'vue/types/options'
+import { VNode } from 'vue'
 
+export default mixins(
+  PickerButton
 /* @vue/component */
-export default {
+).extend({
   name: 'v-time-picker-title',
-
-  mixins: [PickerButton],
 
   props: {
     ampm: Boolean,
@@ -23,7 +26,7 @@ export default {
     period: {
       type: String,
       validator: period => period === 'am' || period === 'pm'
-    },
+    } as PropValidator<'am' | 'pm'>,
     readonly: Boolean,
     useSeconds: Boolean,
     selecting: Number
@@ -36,16 +39,16 @@ export default {
         hour = hour ? ((hour - 1) % 12 + 1) : 12
       }
 
-      const displayedHour = this.hour == null ? '--' : this.ampm ? hour : pad(hour)
+      const displayedHour = this.hour == null ? '--' : this.ampm ? String(hour) : pad(hour)
       const displayedMinute = this.minute == null ? '--' : pad(this.minute)
-      const displayedSecond = this.second == null ? '--' : pad(this.second)
-
       const titleContent = [
         this.genPickerButton('selecting', selectingTimes.hour, displayedHour, this.disabled),
         this.$createElement('span', ':'),
         this.genPickerButton('selecting', selectingTimes.minute, displayedMinute, this.disabled)
       ]
+
       if (this.useSeconds) {
+        const displayedSecond = this.second == null ? '--' : pad(this.second)
         titleContent.push(this.$createElement('span', ':'))
         titleContent.push(this.genPickerButton('selecting', selectingTimes.second, displayedSecond, this.disabled))
       }
@@ -63,12 +66,13 @@ export default {
     }
   },
 
-  render (h) {
+  render (h): VNode {
+    const children = [this.genTime()]
+
+    this.ampm && children.push(this.genAmPm())
+
     return h('div', {
       staticClass: 'v-time-picker-title'
-    }, [
-      this.genTime(),
-      this.ampm ? this.genAmPm() : null
-    ])
+    }, children)
   }
-}
+})
