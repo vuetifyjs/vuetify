@@ -19,6 +19,9 @@
   "installFA4Text1": "Same as above. Installing FontAwesome through cdn is the easiest way to check it out within your project:",
   "installFA4Text2": "Installing FontAwesome**4** is the same as its newer version, just from a different repository. You will be targeting the `font-awesome` repo as opposed to `@fortawesome` one.",
   "installFA4Text3": "Don't forget, your project will need to recognize css. If you are using webpack, install and setup the [css loader](https://github.com/webpack-contrib/css-loader).",
+  "installFASvg": "### Install Font Awesome SVG Icons",
+  "installFASvgText1": "Add required dependencies.",
+  "installFASvgText2": "Then add globally `font-awesome-icon` component and set `faSvg` as iconfont in Vuetify config.",
   "customIconsHeader": "## Using custom icons",
   "customIconsText1": "Let's say your application calls for a custom icon in a Vuetify component. Instead of creating a wrapper component or manually defining the specific icon each time a component appears, you can configure it at a global level.",
   "customIconsText2": "If you are using a icon library that does not have a preset, you can create a custom one.",
@@ -26,5 +29,8 @@
   "reusableText1": "Vuetify will _automatically_ merge any icon strings provided into the pool of available presets. This allows you to create custom strings that can be utilized in your application by simply referencing the **global icons**.",
   "reusableText2": "This can help ensure your application is always using a specific icon given a provided string. Here are a few ways that you can use `<v-icon>` with this system.",
   "customComponentHeader": "## Custom components",
-  "customComponentText1": "You can utilize the same icon strings in your own custom components. Any time **$vuetify.icons** is passed in through _v-text_, _v-html_ or as text, `<v-icon>` will look up that specified value. This allows you to create customized solutions that are easy to build and easy to manage."
+  "customComponentText1": "You can utilize the same icon strings in your own custom components. Any time **$vuetify.icons** is passed in through _v-text_, _v-html_ or as text, `<v-icon>` will look up that specified value. This allows you to create customized solutions that are easy to build and easy to manage.",
+  "componentIconsHeader": "## Component icons",
+  "componentIconsText1": "Instead of provided icon fonts presets you can use your own component icons. You also can switch icons that are used in Vuetify component with your own.",
+  "componentIconsText2": "If you want your SVG icon to inherit colors and scale correctly - be sure add the following css to it:"
 }

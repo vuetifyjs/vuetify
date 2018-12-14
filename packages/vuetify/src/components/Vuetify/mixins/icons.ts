@@ -1,5 +1,8 @@
+import { VuetifyIcon, VuetifyIcons } from 'vuetify'
+import { Component } from 'vue'
+
 // Maps internal Vuetify icon names to actual Material Design icon names.
-const ICONS_MATERIAL = {
+const ICONS_MATERIAL: VuetifyIcons = {
   'complete': 'check',
   'cancel': 'cancel',
   'close': 'close',
@@ -30,7 +33,7 @@ const ICONS_MATERIAL = {
 }
 
 // Maps internal Vuetify icon names to actual icons from materialdesignicons.com
-const ICONS_MDI = {
+const ICONS_MDI: VuetifyIcons = {
   'complete': 'mdi-check',
   'cancel': 'mdi-close-circle',
   'close': 'mdi-close',
@@ -60,7 +63,7 @@ const ICONS_MDI = {
 }
 
 // Maps internal Vuetify icon names to actual Font-Awesome 4 icon names.
-const ICONS_FONTAWESOME4 = {
+const ICONS_FONTAWESOME4: VuetifyIcons = {
   'complete': 'fa fa-check',
   'cancel': 'fa fa-times-circle',
   'close': 'fa fa-times',
@@ -90,7 +93,7 @@ const ICONS_FONTAWESOME4 = {
 }
 
 // Maps internal Vuetify icon names to actual Font-Awesome 5+ icon names.
-const ICONS_FONTAWESOME = {
+const ICONS_FONTAWESOME: VuetifyIcons = {
   'complete': 'fas fa-check',
   'cancel': 'fas fa-times-circle',
   'close': 'fas fa-times',
@@ -119,13 +122,32 @@ const ICONS_FONTAWESOME = {
   'ratingHalf': 'fas fa-star-half'
 }
 
-const iconSets = {
+export function convertToComponentDeclarations (
+  component: Component | string,
+  iconSet: VuetifyIcons
+) {
+  const result: {[name: string]: VuetifyIcon} = {}
+
+  for (const key in iconSet) {
+    result[key] = {
+      component,
+      props: {
+        icon: (iconSet[key] as string).split(' fa-')
+      }
+    }
+  }
+
+  return result as VuetifyIcons
+}
+
+const iconSets: Record<string, VuetifyIcons> = {
   md: ICONS_MATERIAL,
   mdi: ICONS_MDI,
   fa: ICONS_FONTAWESOME,
-  fa4: ICONS_FONTAWESOME4
+  fa4: ICONS_FONTAWESOME4,
+  faSvg: convertToComponentDeclarations('font-awesome-icon', ICONS_FONTAWESOME)
 }
 
-export default function icons (iconfont = 'md', icons = {}) {
+export default function icons (iconfont = 'md', icons: Partial<VuetifyIcons> = {}) {
   return Object.assign({}, iconSets[iconfont] || iconSets.md, icons)
 }
