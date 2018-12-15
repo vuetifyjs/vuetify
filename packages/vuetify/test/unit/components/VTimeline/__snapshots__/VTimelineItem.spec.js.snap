@@ -55,3 +55,42 @@ exports[`VTimelineItem.js should conditionally render dot 2`] = `
 </div>
 
 `;
+
+exports[`VTimelineItem.js should render a large icon correctly 1`] = `
+
+<div class="v-timeline-item theme--light">
+  <div class="v-timeline-item__dot v-timeline-item__dot--large">
+    <div class="v-timeline-item__inner-dot primary">
+    </div>
+  </div>
+  <div class="v-timeline-item__body">
+  </div>
+</div>
+
+`;
+
+exports[`VTimelineItem.js should render a medium icon correctly 1`] = `
+
+<div class="v-timeline-item theme--light">
+  <div class="v-timeline-item__dot v-timeline-item__dot--medium">
+    <div class="v-timeline-item__inner-dot primary">
+    </div>
+  </div>
+  <div class="v-timeline-item__body">
+  </div>
+</div>
+
+`;
+
+exports[`VTimelineItem.js should render a small icon correctly 1`] = `
+
+<div class="v-timeline-item theme--light">
+  <div class="v-timeline-item__dot v-timeline-item__dot--small">
+    <div class="v-timeline-item__inner-dot primary">
+    </div>
+  </div>
+  <div class="v-timeline-item__body">
+  </div>
+</div>
+
+`;

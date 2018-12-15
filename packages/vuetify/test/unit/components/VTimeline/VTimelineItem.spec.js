@@ -39,4 +39,28 @@ test('VTimelineItem.js', ({ mount }) => {
       }
     }).html())
   })
+
+  it('should render a small icon correctly', () => {
+    expect(mount(VTimelineItem, {
+      propsData: {
+        small: true
+      }
+    }).html()).toMatchSnapshot()
+  })
+
+  it('should render a medium icon correctly', () => {
+    expect(mount(VTimelineItem, {
+      propsData: {
+        medium: true
+      }
+    }).html()).toMatchSnapshot()
+  })
+
+  it('should render a large icon correctly', () => {
+    expect(mount(VTimelineItem, {
+      propsData: {
+        large: true
+      }
+    }).html()).toMatchSnapshot()
+  })
 })
