@@ -5,6 +5,7 @@ import Meta from './meta'
 import Motion from './motion'
 import Style from './style'
 import Vuetify from './vuetify'
+import Layout from './layout'
 
 export default {
   Additional,
@@ -13,5 +14,6 @@ export default {
   Meta,
   Motion,
   Style,
-  Vuetify
+  Vuetify,
+  Layout
 }
