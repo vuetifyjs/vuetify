@@ -39,7 +39,7 @@
                   color="blue-grey"
                   text-color="white"
                 >
-                  {{ $t('Layout.PreMadeThemes.free') }}
+                  {{ $t('Framework.PreMadeThemes.free') }}
                 </v-chip>
               </h2>
               <v-spacer />
@@ -57,7 +57,7 @@
                 target="_blank"
                 rel="noopener"
               >
-                {{ $t('Layout.PreMadeThemes.demo') }}
+                {{ $t('Framework.PreMadeThemes.demo') }}
               </v-btn>
 
               <v-spacer />
@@ -70,7 +70,7 @@
                 color="primary"
                 flat
               >
-                {{ $t('Layout.PreMadeThemes.buy') }}
+                {{ $t('Framework.PreMadeThemes.buy') }}
                 <v-icon right>mdi-arrow-right</v-icon>
               </v-btn>
 
@@ -82,7 +82,7 @@
                 target="_blank"
                 rel="noopener"
               >
-                {{ $t('Layout.PreMadeThemes.sourceCode') }}
+                {{ $t('Framework.PreMadeThemes.sourceCode') }}
                 <v-icon
                   right
                   success
@@ -102,7 +102,7 @@
   export default {
     computed: {
       templates () {
-        return this.$t('Layout.PreMadeThemes.templates', 'en')
+        return this.$t('Framework.PreMadeThemes.templates', 'en')
       }
     }
   }

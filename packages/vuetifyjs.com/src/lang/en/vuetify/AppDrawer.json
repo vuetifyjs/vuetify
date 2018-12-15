@@ -32,7 +32,7 @@
   "typography": "Typography",
   "content": "Content",
   "motion": "Motion & transitions",
-  "scroll": "Scroll",
+  "scroll": "Programmatic Scrolling",
   "transitions": "Transitions",
   "components": "UI Components",
   "apiExplorer": "API explorer",

@@ -19,51 +19,29 @@
     "icon": "mdi-buffer",
     "children": [
       { "text": "aLaCarte", "to": "a-la-carte", "updated": true },
-      { "text": "icons", "to": "icons" },
-      { "text": "i18n", "to": "internationalization" }
-    ]
-  },
-  {
-    "group": "layout",
-    "text": "layout",
-    "icon": "mdi-page-layout-body",
-    "children": [
-      { "text": "preDefinedLayouts", "to": "pre-defined" },
-      { "text": "preMadeThemes", "to": "pre-made-themes" },
       {
-        "group": "layout",
-        "text": "gridSystem",
+        "group": "framework",
+        "text": "layout",
         "children": [
-          { "text": "grid", "to": "grid" },
-          { "text": "gridLists", "to": "grid-lists" }
+          { "text": "preDefinedLayouts", "to": "pre-defined" },
+          { "text": "preMadeThemes", "to": "pre-made-themes" },
+          { "text": "breakpoints", "to": "breakpoints" },
+          { "text": "aspectRatios", "to": "aspect-ratios" },
+          { "text": "spacing", "to": "spacing" },
+          { "text": "textAlignment", "to": "alignment" },
+          { "text": "display", "to": "display" },
+          { "text": "elevation", "to": "elevation" },
+          { "text": "sandbox", "to": "sandbox" }
         ]
       },
-      { "text": "breakpoints", "to": "breakpoints" },
-      { "text": "aspectRatios", "to": "aspect-ratios" },
-      { "text": "spacing", "to": "spacing" },
-      { "text": "textAlignment", "to": "alignment" },
-      { "text": "display", "to": "display" },
-      { "text": "elevation", "to": "elevation" },
-      { "text": "sandbox", "to": "sandbox" }
-    ]
-  },
-  {
-    "group": "style",
-    "text": "stylesAndThemes",
-    "icon": "mdi-format-color-fill",
-    "children": [
       { "text": "colors", "to": "colors" },
-      { "text": "theme", "to": "theme" },
-      { "text": "typography", "to": "typography", "updated": true },
-      { "text": "content", "to": "content" }
-    ]
-  },
-  {
-    "group": "motion",
-    "text": "motion",
-    "icon": "mdi-clock-fast",
-    "children": [
+      { "text": "content", "to": "content" },
+      { "text": "grid", "to": "grid" },
+      { "text": "gridLists", "to": "grid-lists" },
+      { "text": "icons", "to": "icons" },
+      { "text": "i18n", "to": "internationalization" },
       { "text": "scroll", "to": "scroll" },
+      { "text": "theme", "to": "theme" },
       { "text": "transitions", "to": "transitions" }
     ]
   },

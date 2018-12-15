@@ -1,5 +1,5 @@
 <template>
   <div class="my-component">
-    {{ $vuetify.t('my-component.text') }}
+    {{ $vuetify.t('$vuetify.my-component.text') }}
   </div>
 </template>

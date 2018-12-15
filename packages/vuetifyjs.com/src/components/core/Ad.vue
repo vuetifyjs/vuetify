@@ -90,16 +90,11 @@
     },
 
     watch: {
-      path: 'init',
-      isBooted (val) {
-        if (val) this.init()
-      }
+      path: 'setViewport',
+      isBooted: 'setViewport'
     },
 
     methods: {
-      init () {
-        this.setViewport()
-      },
       setViewport () {
         const { xsOnly, smOnly } = this.$vuetify.breakpoint
 

@@ -1,8 +1,8 @@
 <template>
   <v-app>
-    <v-fade-transition mode="out-in">
-      <router-view />
-    </v-fade-transition>
+    <router-view />
+
+    <core-toolbar />
   </v-app>
 </template>
 

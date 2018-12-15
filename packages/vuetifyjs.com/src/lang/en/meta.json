@@ -77,103 +77,103 @@
     "description": "Vuetify supports language internationalization of its components.",
     "keywords": "vue, i18n, language, internationalization"
   },
-  "motion/transitions": {
+  "framework/transitions": {
     "h1": "Transitions",
     "title": "Transitions",
     "description": "Make an amazing application with smooth built in animations.",
     "keywords": "motion, transitions"
   },
-  "motion/scroll": {
+  "framework/scroll": {
     "h1": "Scroll",
     "title": "Scroll",
     "description": "Scroll to a target location on the page.",
     "keywords": "scrolling, scroll, smooth scroll, transitions"
   },
-  "style/colors": {
+  "framework/colors": {
     "h1": "Colors",
     "title": "Material color palette",
     "description": "Easily apply any color from the material design palette.",
     "keywords": "colors"
   },
-  "style/theme": {
+  "framework/theme": {
     "h1": "Theme",
     "title": "Application theming",
     "description": "Setup your custom application theme by changing a few variables.",
     "keywords": "themes"
   },
-  "style/typography": {
+  "framework/typography": {
     "h1": "Typography",
     "title": "Application typography",
     "description": "View the various typography styles. From headings to captions, with various weights and sizes.",
     "keywords": "typography, headings, titles"
   },
-  "style/content": {
+  "framework/content": {
     "h1": "Content",
     "title": "Content styles",
     "description": "Vuetify has custom styling for default html markup.",
     "keywords": "content, html, markup"
   },
-  "layout/pre-defined": {
+  "framework/pre-defined": {
     "h1": "Pre-defined",
     "title": "Application layouts",
     "description": "Select from a multitude of official material design layouts.",
     "keywords": "pre-defined layouts, layouts, application layout, material design layouts"
   },
-  "layout/pre-made-themes": {
+  "framework/pre-made-themes": {
     "h1": "Pre-made themes",
     "title": "Free / Premium Themes",
     "description": "Vuetify offers numerous pre-build starter and premium themes. Kickstart your next application today, no design skills needed.",
     "keywords": "vuetify themes, pre-built material themes, premium themes"
   },
-  "layout/grid": {
+  "framework/grid": {
     "h1": "Grid",
     "title": "Layout grid system",
     "description": "Vuetify supports the material design 12 point grid for laying out your application.",
     "keywords": "grid, layout, flex"
   },
-  "layout/grid-lists": {
+  "framework/grid-lists": {
     "h1": "Grid lists",
     "title": "Grid List Component",
     "description": "Grid list component for Vuetify Framework",
     "keywords": "grid lists, grid"
   },
-  "layout/breakpoints": {
+  "framework/breakpoints": {
     "h1": "Breakpoints",
     "title": "Breakpoints",
     "description": "Breakpoints for Vuetify Framework",
     "keywords": "breakpoints"
   },
-  "layout/aspect-ratios": {
+  "framework/aspect-ratios": {
     "h1": "Aspect ratios",
     "title": "Aspect ratios",
     "description": "Aspect ratios for Vuetify Framework",
     "keywords": "ratio, responsive"
   },
-  "layout/spacing": {
+  "framework/spacing": {
     "h1": "Spacing",
     "title": "Spacing helpers",
     "description": "Spacing helper classes allow you to apply margin or padding to any element.",
     "keywords": "spacing helper classes"
   },
-  "layout/alignment": {
+  "framework/alignment": {
     "h1": "Alignment",
     "title": "Alignment helpers",
     "description": "Alignment helpers assist in modifying your application layout on varying viewport sizes.",
     "keywords": "alignment helper classes"
   },
-  "layout/display": {
+  "framework/display": {
     "h1": "Display",
     "title": "Display helpers",
     "description": "Display helper classes allow you to control when elements should display based upon viewport.",
     "keywords": "display helper classes"
   },
-  "layout/elevation": {
+  "framework/elevation": {
     "h1": "Elevation",
     "title": "Elevation helpers",
     "description": "Elevation helper classes allow you to control relative depth, or distance, between two surfaces along the z-axis.",
     "keywords": "elevation helper classes"
   },
-  "layout/sandbox": {
+  "framework/sandbox": {
     "h1": "Sandbox",
     "title": "Sandbox",
     "description": "Play around with the available configuring options for your next application.",
@@ -580,12 +580,6 @@
     "title": "Layout Sandbox",
     "description": "Layout Sandbox for the Vuetify.js framework",
     "keywords": "template, pre-made, vuetify layout, sandbox"
-  },
-  "guides/server-side-rendering": {
-    "h1": "Server side rendering",
-    "title": "Server side rendering",
-    "description": "Server side rendering guide for the Vuetify framework.",
-    "keywords": "server side rendering, ssr"
   },
   "theme-generator": {
     "h1": "Theme generator",

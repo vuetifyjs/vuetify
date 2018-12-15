@@ -1,7 +1,5 @@
 <template>
   <div>
-    <core-toolbar />
-
     <v-content>
       <v-container
         fluid

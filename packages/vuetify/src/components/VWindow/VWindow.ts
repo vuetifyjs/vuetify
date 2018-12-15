@@ -125,7 +125,7 @@ export default BaseItemGroup.extend({
       data.directives.push({
         name: 'touch',
         value
-      } as VNodeDirective)
+      })
     }
 
     return h('div', data, [this.genContainer()])

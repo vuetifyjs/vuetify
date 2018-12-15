@@ -59,34 +59,41 @@ declare module 'vue/types/vue' {
   }
 }
 
-export interface VuetifyIcons {
-  [name: string]: string
+export type VuetifyIconComponent = {
+  component: Component | string
+  props?: object
+}
+export type VuetifyIcon = string | VuetifyIconComponent
 
-  cancel: string
-  close: string
-  delete: string
-  clear: string
-  success: string
-  info: string
-  warning: string
-  error: string
-  prev: string
-  next: string
-  checkboxOn: string
-  checkboxOff: string
-  checkboxIndeterminate: string
-  delimiter: string
-  sort: string
-  expand: string
-  menu: string
-  subgroup: string
-  dropdown: string
-  radioOn: string
-  radioOff: string
-  edit: string
-  ratingEmpty: string
-  ratingFull: string
-  ratingHalf: string
+export interface VuetifyIcons {
+  [name: string]: VuetifyIcon
+
+  complete: VuetifyIcon
+  cancel: VuetifyIcon
+  close: VuetifyIcon
+  delete: VuetifyIcon
+  clear: VuetifyIcon
+  success: VuetifyIcon
+  info: VuetifyIcon
+  warning: VuetifyIcon
+  error: VuetifyIcon
+  prev: VuetifyIcon
+  next: VuetifyIcon
+  checkboxOn: VuetifyIcon
+  checkboxOff: VuetifyIcon
+  checkboxIndeterminate: VuetifyIcon
+  delimiter: VuetifyIcon
+  sort: VuetifyIcon
+  expand: VuetifyIcon
+  menu: VuetifyIcon
+  subgroup: VuetifyIcon
+  dropdown: VuetifyIcon
+  radioOn: VuetifyIcon
+  radioOff: VuetifyIcon
+  edit: VuetifyIcon
+  ratingEmpty: VuetifyIcon
+  ratingFull: VuetifyIcon
+  ratingHalf: VuetifyIcon
 }
 
 export interface VuetifyApplication {
