@@ -2,8 +2,6 @@
   <div>
     <core-drawer />
 
-    <core-toolbar />
-
     <core-ad />
 
     <core-view

@@ -1,6 +1,8 @@
 <template>
   <v-app>
     <router-view />
+
+    <core-toolbar />
   </v-app>
 </template>
 
