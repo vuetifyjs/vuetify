@@ -11,10 +11,10 @@
     height="58"
     extension-height="48"
   >
-    <!-- <v-toolbar-side-icon
-      v-if="!hideSideIcon"
+    <v-toolbar-side-icon
+      class="hidden-md-and-up"
       @click="toggleDrawer"
-    /> -->
+    />
 
     <router-link
       :to="{ name: 'home/Home' }"
@@ -30,7 +30,7 @@
       />
     </router-link>
 
-    <v-toolbar-items>
+    <v-toolbar-items class="hidden-sm-and-down">
       <v-btn
         v-for="(item, i) in items"
         :key="i"
@@ -112,11 +112,7 @@
     }),
 
     computed: {
-      ...mapState('route', ['params']),
-      hideSideIcon () {
-        return this.$route.name === 'home/Home' ||
-          this.$vuetify.breakpoint.smAndUp
-      }
+      ...mapState('route', ['params'])
     },
 
     methods: {
