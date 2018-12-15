@@ -27,6 +27,7 @@ export default mixins(
     iconColor: String,
     large: Boolean,
     left: Boolean,
+    medium: Boolean,
     right: Boolean,
     small: Boolean
   },
@@ -52,7 +53,9 @@ export default mixins(
         props: {
           color: this.iconColor,
           dark: !this.theme.isDark,
-          small: this.small
+          medium: this.medium,
+          small: this.small,
+          large: this.large
         }
       }, this.icon)
     },
@@ -69,7 +72,8 @@ export default mixins(
         staticClass: 'v-timeline-item__dot',
         class: {
           'v-timeline-item__dot--small': this.small,
-          'v-timeline-item__dot--large': this.large
+          'v-timeline-item__dot--large': this.large,
+          'v-timeline-item__dot--medium': this.medium
         }
       }, [this.genInnerDot()])
     },
