@@ -4,6 +4,9 @@
       v-for="(item, i) in items"
       :color="item.color"
       :icon="item.icon"
+      :small="item.small"
+      :large="item.large"
+      :medium="item.medium"
       :key="i"
       fill-dot
     >
@@ -33,19 +36,31 @@
       items: [
         {
           color: 'red lighten-2',
-          icon: 'mdi-star'
+          icon: 'mdi-buffer',
+          small: true,
+          large: false,
+          medium: false
         },
         {
           color: 'purple darken-1',
-          icon: 'mdi-book-variant'
+          icon: 'mdi-buffer',
+          small: false,
+          large: false,
+          medium: false
         },
         {
           color: 'green lighten-1',
-          icon: 'mdi-airballoon'
+          icon: 'mdi-buffer',
+          small: false,
+          large: false,
+          medium: true
         },
         {
           color: 'indigo',
-          icon: 'mdi-buffer'
+          icon: 'mdi-buffer',
+          small: false,
+          large: true,
+          medium: false
         }
       ]
     })
