@@ -69,6 +69,7 @@
   },
   "events": {
     "change": "Components.Inputs.events.change",
-    "update:error": "Mixins.Validatable.events['update:error']"
+    "update:error": "Mixins.Validatable.events['update:error']",
+    "focus": "Emitted when the radio is focused"
   }
 }

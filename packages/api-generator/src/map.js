@@ -742,6 +742,10 @@ module.exports = {
       {
         name: 'change',
         value: 'any'
+      },
+      {
+        name: 'focus',
+        value: 'any'
       }
     ]
   },
