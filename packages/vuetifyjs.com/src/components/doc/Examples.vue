@@ -1,30 +1,20 @@
 <template>
   <div>
     <doc-heading>Generic.Pages.examples</doc-heading>
-
     <div />
-
-    <v-expansion-panel>
-      <v-expansion-panel-content
-        v-for="(example, i) in examples"
+    <template v-for="(example, i) in examples">
+      <doc-heading :key="`heading-${i}`">
+        {{ example.header }}
+      </doc-heading>
+      <doc-text :key="`text-${i}`">
+        {{ example.desc }}
+      </doc-text>
+      <doc-example
         :key="i"
-      >
-        <div slot="header">
-          <doc-heading :key="`heading-${i}`">
-            {{ example.header }}
-          </doc-heading>
-        </div>
-        <v-card class="pa-3 px-5">
-          <doc-text :key="`text-${i}`">
-            {{ example.desc }}
-          </doc-text>
-        </v-card>
-        <doc-example
-          :key="i"
-          :value="value[i]"
-        />
-      </v-expansion-panel-content>
-    </v-expansion-panel>
+        :value="value[i]"
+        :example="example"
+      />
+    </template>
   </div>
 </template>
 

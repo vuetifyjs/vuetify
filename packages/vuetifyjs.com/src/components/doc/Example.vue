@@ -11,9 +11,7 @@
         </v-avatar>
         <span>New in <strong>{{ newIn }}</strong></span>
       </v-chip>
-
       <v-spacer />
-
       <v-btn
         icon
         @click="dark = !dark"
@@ -38,11 +36,12 @@
       >
         <v-icon>mdi-code-tags</v-icon>
       </v-btn>
+      <v-spacer />
     </v-toolbar>
 
     <v-expand-transition v-if="parsed">
       <v-card
-        v-if="expand"
+        v-if="expand && $vuetify.breakpoint.smAndDown"
         color="#2d2d2d"
         dark
         flat
@@ -87,6 +86,42 @@
           </v-window-item>
         </v-window>
       </v-card>
+      <v-card
+        v-if="expand && $vuetify.breakpoint.mdAndUp"
+        color="#2d2d2d"
+        dark
+        flat
+        tile
+      >
+        <v-layout row>
+          <v-flex
+            v-for="(section, i) in sections"
+            v-if="parsed[section]"
+            :key="`window-${i}`"
+            :value="section"
+            xs12
+            shrink
+          >
+            <v-btn
+              dark
+              class="mr-0"
+              depressed
+              flat
+            >
+              {{ section }}
+            </v-btn>
+            <v-divider />
+            <div
+              class="example-container"
+            >
+              <doc-markup
+                :value="file"
+                class="mb-0"
+              >{{ parsed[section] }}</doc-markup>
+            </div>
+          </v-flex>
+        </v-layout>
+      </v-card>
     </v-expand-transition>
 
     <v-sheet
@@ -105,7 +140,6 @@
 <script>
   // Utilities
   import kebabCase from 'lodash/kebabCase'
-  import { goTo } from '@/util/helpers'
 
   export default {
     inject: ['namespace', 'page'],
@@ -186,9 +220,6 @@
           codepenAdditional
         }
       },
-      goTo () {
-        goTo.call(this, `#${this.id}`)
-      },
       kebabCase,
       toggle () {
         this.active = !this.active
@@ -211,6 +242,10 @@
   #snackbars, #data-tables
     .component-example .application--example
       z-index: auto
+
+  .example-container
+    max-height: 500px;
+    overflow-y: auto;
 
   .component-example
     // margin-bottom: 32px
