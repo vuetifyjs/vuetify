@@ -176,7 +176,7 @@ export default {
     },
     /** @public */
     resetValidation () {
-      this.valid = false
+      this.validate()
       this.isResetting = true
     },
     /** @public */
