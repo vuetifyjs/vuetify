@@ -18,6 +18,8 @@
           "type": "api",
           "value": [
             "v-fade-transition",
+            "v-expand-transition",
+            "v-scale-transition",
             "v-scroll-x-transition",
             "v-scroll-x-reverse-transition",
             "v-scroll-y-transition",
@@ -25,8 +27,7 @@
             "v-slide-x-transition",
             "v-slide-x-reverse-transition",
             "v-slide-y-transition",
-            "v-slide-y-reverse-transition",
-            "v-scale-transition"
+            "v-slide-y-reverse-transition"
           ]
         }
       ]
@@ -41,6 +42,7 @@
             "slideYTransitions",
             "scaleTransition",
             "fadeTransition",
+            "expandTransition",
             "customOrigin",
             "todo"
           ]
