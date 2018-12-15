@@ -44,7 +44,7 @@
           "value": [
             "components/cards",
             "components/icons",
-            "layout/grid"
+            "framework/grid"
           ]
         }
       ]

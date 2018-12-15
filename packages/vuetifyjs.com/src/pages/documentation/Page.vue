@@ -1,10 +1,10 @@
 <template>
   <div>
+    <core-drawer />
+
     <core-toolbar />
 
     <core-ad />
-
-    <core-drawer />
 
     <core-view
       :namespace="namespace"

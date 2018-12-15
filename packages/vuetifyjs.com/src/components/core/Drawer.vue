@@ -1,6 +1,7 @@
 <template>
   <v-navigation-drawer
     v-model="inputValue"
+    clipped
     app
   >
     <v-container

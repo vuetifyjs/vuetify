@@ -1,8 +1,10 @@
 {
-  "backToDocs": "Back to Docs",
-  "cart": "Cart",
+  "api": "API",
+  "components": "Components",
+  "directives": "Directives",
   "docs": "Docs",
-  "documentation": "Documentation",
+  "framework": "Framework",
+  "guide": "Guide",
   "store": "Store",
   "support": "Support",
   "supports": [
@@ -61,22 +63,5 @@
     }
   ],
   "quickLinks": "Quick Links",
-  "social": "Social",
-  "socials": [
-    {
-      "href": "https://github.com/vuetifyjs/vuetify",
-      "text": "GitHub",
-      "icon": "mdi-github-box"
-    },
-    {
-      "href": "https://twitter.com/vuetifyjs",
-      "text": "Twitter",
-      "icon": "mdi-twitter-box"
-    },
-    {
-      "href": "https://www.facebook.com/vuetifyjs",
-      "text": "Facebook",
-      "icon": "mdi-facebook-box"
-    }
-  ]
+  "social": "Social"
 }
