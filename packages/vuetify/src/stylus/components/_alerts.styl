@@ -1,56 +1,55 @@
 @import '../bootstrap'
+@import '../theme'
+
+v-alert($material)
+  &.v-alert:not(.v-alert--outline)
+    border-color: $material.buttons.disabled !important
+
+theme(v-alert, "v-alert")
 
 .v-alert
-  border-radius: $alert-border-radius
   border-width: $alert-border-width
   border-style: solid
-  color: #fff
-  display: flex
   font-size: $alert-font-size
   margin: $alert-margin
   padding: $alert-padding
-  position: relative
-  transition: $primary-transition
 
-  .v-alert__icon.v-icon,
-  &__dismissible .v-icon
-    align-self: center
-    color: $alert-icon-color
-    font-size: $alert-icon-font-size
-  &--outline .v-icon
-    color: inherit !important
+  &.v-sheet
+    display: flex
 
-  &__icon
-    margin-right: $alert-padding
+  &__action,
+  &__dismissible
+    display: inline-flex
+    flex: 0 1 auto
+
+    .v-icon
+      font-size: $alert-icon-font-size
+      user-select: none
+
+  &__action
+    padding-right: $alert-padding
 
   &__dismissible
     align-self: flex-start
-    color: inherit
-    margin-left: $alert-padding
-    margin-right: 0
-    text-decoration: none
-    transition: $primary-transition
-    user-select: none
+    margin-left: auto
+    outline: none
+    padding-left: $alert-padding
 
-    &:hover
-      opacity: .8
+    .v-btn
+      height: 24px
+      margin: 0 // TODO: remove in 2.0
+      width: 24px
 
-  &--no-icon
-    .v-alert__icon
-      display: none
+      &:focus .v-icon
+        opacity: 1
 
-  > div
-    align-self: center
-    flex: 1 1
+    .v-icon
+      font-size: $alert-dismissible-icon-font-size
+      opacity: .56
 
-  @media screen and (max-width: $grid-breakpoints.sm)
-    &__icon
-      display: none
-
-// Double .v-alert is intended - it increases css specificity
-// to properly set the border color where alert has set color
-// with modifier (for example "red lighten-2")
-.v-alert.v-alert
-  border-color: $material-light.dividers !important
   &--outline
     border: $alert-outline-border-width $alert-outline-border-style currentColor !important
+    background: transparent !important
+
+    .v-icon
+      color: inherit !important

@@ -1,16 +1,15 @@
 import { test } from '@/test'
 import VAlert from '@/components/VAlert'
-import VIcon from '@/components/VIcon'
 
 test('VAlert.vue', ({ mount }) => {
-  it('should be closed by default', async () => {
+  it('should be closed by default', () => {
     const wrapper = mount(VAlert)
 
     expect(wrapper.vm.isActive).toBe(false)
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should have a close icon', async () => {
+  it('should have a close icon', () => {
     const wrapper = mount(VAlert, {
       propsData: { dismissible: true }
     })
@@ -28,7 +27,7 @@ test('VAlert.vue', ({ mount }) => {
     expect(wrapper.hasClass('foo-enter')).toBe(true)
   })
 
-  it('should render component with outline prop', async () => {
+  it('should render component with outline prop', () => {
     const wrapper = mount(VAlert, {
       propsData: { outline: true }
     })
@@ -44,12 +43,12 @@ test('VAlert.vue', ({ mount }) => {
       }
     })
 
-    const icon = wrapper.find('.v-alert__dismissible')[0]
+    const btn = wrapper.first('.v-alert__dismissible .v-btn')
 
     const input = jest.fn(value => wrapper.setProps({ value }))
     wrapper.vm.$on('input', input)
 
-    icon.trigger('click')
+    btn.trigger('click')
 
     await wrapper.vm.$nextTick()
 
@@ -57,7 +56,7 @@ test('VAlert.vue', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should have a custom icon', async () => {
+  it('should have a custom icon', () => {
     const wrapper = mount(VAlert, {
       propsData: {
         value: true,
@@ -65,7 +64,7 @@ test('VAlert.vue', ({ mount }) => {
       }
     })
 
-    const icon = wrapper.find('.v-alert__icon')[0]
+    const icon = wrapper.first('.v-icon')
 
     expect(icon.text()).toBe('list')
   })
@@ -98,7 +97,7 @@ test('VAlert.vue', ({ mount }) => {
     expect(wrapper.vm.computedColor).toBe('info')
   })
 
-  it('should allow overriding color for contextual alert', async () => {
+  it('should allow overriding color for contextual alert', () => {
     const wrapper = mount(VAlert, {
       propsData: {
         type: 'error',
@@ -109,7 +108,7 @@ test('VAlert.vue', ({ mount }) => {
     expect(wrapper.vm.computedColor).toBe('primary')
   })
 
-  it('should allow overriding icon for contextual alert', async () => {
+  it('should allow overriding icon for contextual alert', () => {
     const wrapper = mount(VAlert, {
       propsData: {
         type: 'error',
@@ -117,8 +116,32 @@ test('VAlert.vue', ({ mount }) => {
       }
     })
 
-    const icon = wrapper.find('.v-alert__icon')[0]
+    const icon = wrapper.first('.v-icon')
 
     expect(icon.text()).toBe('block')
+  })
+
+  it('should return a custom isDark', () => {
+    const wrapper = mount(VAlert)
+
+    expect(wrapper.vm.isDark).toBe(false)
+
+    wrapper.setProps({ type: 'info' })
+
+    expect(wrapper.vm.isDark).toBe(true)
+
+    wrapper.setProps({
+      color: 'blue' ,
+      type: undefined
+    })
+
+    expect(wrapper.vm.isDark).toBe(true)
+
+    wrapper.setProps({
+      color: undefined,
+      light: true
+    })
+
+    expect(wrapper.vm.isDark).toBe(false)
   })
 })
