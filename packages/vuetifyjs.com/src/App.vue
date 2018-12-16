@@ -16,32 +16,9 @@
   export default {
     mixins: [Meta],
 
-    mounted () {
-      // this.getReleases()
-
-      // this.setSnackbar({
-      //   color: 'default',
-      //   close: true,
-      //   id: 'cyber-monday-sale',
-      //   text: 'Shop now',
-      //   msg: 'Happy Cyber Monday',
-      //   to: '/store/',
-      //   timeout: 0
-      // })
-    },
-
     methods: {
       ...mapMutations('app', ['setReleases']),
-      ...mapMutations('snackbar', ['setSnackbar']),
-      getReleases () {
-        fetch('/releases/releases.json')
-          .then(res => res.json())
-          .then(({ data }) => {
-            this.setReleases(data)
-          }).catch(err => {
-            console.log(err)
-          })
-      }
+      ...mapMutations('snackbar', ['setSnackbar'])
     }
   }
 </script>
