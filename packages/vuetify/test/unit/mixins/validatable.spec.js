@@ -272,7 +272,7 @@ test('validatable.js', ({ mount }) => {
     })
 
     expect(wrapper.vm.hasInput).toBe(false)
-    wrapper.setData({ lazyValue: 'foo' })
+    wrapper.setProps({ value: 'foo' })
 
     // Wait for watcher's $nextTick call
     await wrapper.vm.$nextTick()
