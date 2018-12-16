@@ -107,6 +107,16 @@
               page: 'resizing'
             }
           }
+        },
+        {
+          text: vm.$t('Vuetify.AppToolbar.themes'),
+          to: {
+            name: 'Documentation',
+            params: {
+              namespace: 'themes',
+              page: 'premium'
+            }
+          }
         }
       ],
       languages

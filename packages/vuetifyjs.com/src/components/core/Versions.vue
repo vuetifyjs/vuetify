@@ -1,7 +1,7 @@
 <template>
   <v-btn
     :href="`https://github.com/vuetifyjs/vuetify/releases/${version}`"
-    class="hidden-xs-only"
+    class="hidden-md-and-down"
     flat
     target="_blank"
     rel="noopener"

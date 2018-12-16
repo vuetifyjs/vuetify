@@ -27,7 +27,7 @@
   "/layout/grid": "/framework/grid",
   "/layout/grid-lists": "/framework/grid-lists",
   "/layout/pre-defined": "/framework/pre-defined",
-  "/layout/pre-made-themes": "/framework/pre-made-themes",
+  "/layout/pre-made-themes": "/themes/premium",
   "/layout/breakpoints": "/framework/breakpoints",
   "/layout/aspect-ratios": "/framework/aspect-ratios",
   "/layout/spacing": "/framework/spacing",

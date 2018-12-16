@@ -95,7 +95,7 @@
     "description": "Select from a multitude of official material design layouts.",
     "keywords": "pre-defined layouts, layouts, application layout, material design layouts"
   },
-  "framework/pre-made-themes": {
+  "themes/premium": {
     "h1": "Pre-made themes",
     "title": "Free / Premium Themes",
     "description": "Vuetify offers numerous pre-build starter and premium themes. Kickstart your next application today, no design skills needed.",

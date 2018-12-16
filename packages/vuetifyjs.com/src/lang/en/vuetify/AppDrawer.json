@@ -15,7 +15,7 @@
   "i18n": "Internationalization",
   "layout": "Application layout",
   "preDefinedLayouts": "Pre-defined layouts",
-  "preMadeThemes": "Pre-made themes",
+  "premiumThemes": "Premium themes",
   "gridSystem": "Grid system",
   "grid": "Grid",
   "gridLists": "Grid lists",
@@ -95,5 +95,6 @@
   "ripples": "Ripples",
   "scrolling": "Scrolling",
   "touchSupport": "Touch support",
-  "treeview": "Treeview"
+  "treeview": "Treeview",
+  "helperClasses": "Helper classes"
 }
