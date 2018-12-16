@@ -12,7 +12,6 @@
       <doc-example
         :key="i"
         :value="value[i]"
-        :example="example"
       />
     </template>
   </div>
