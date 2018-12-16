@@ -9,7 +9,7 @@ exports[`VFooter.js should accept an auto height 1`] = `
 
 `;
 
-exports[`VFooter.js should get the right padding with app prop 1`] = `
+exports[`VFooter.js should have no padding with app prop 1`] = `
 
 <footer class="v-footer v-footer--absolute theme--light"
         style="height: 32px;"
@@ -18,10 +18,10 @@ exports[`VFooter.js should get the right padding with app prop 1`] = `
 
 `;
 
-exports[`VFooter.js should get the right padding with app prop 2`] = `
+exports[`VFooter.js should have no padding with app prop 2`] = `
 
 <footer class="v-footer v-footer--absolute theme--light"
-        style="height: 32px; padding-right: 30px;"
+        style="height: 32px;"
 >
 </footer>
 
