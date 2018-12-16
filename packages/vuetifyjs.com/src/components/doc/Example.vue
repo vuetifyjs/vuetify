@@ -20,13 +20,13 @@
       </v-btn>
       <v-btn
         icon
-        disabled
+        @click="sendToCodepen"
       >
         <v-icon>mdi-codepen</v-icon>
       </v-btn>
       <v-btn
+        :href="`https://github.com/vuetifyjs/vuetifyjs.com/tree/master/src/examples/${file}.vue`"
         icon
-        disabled
       >
         <v-icon>mdi-github-circle</v-icon>
       </v-btn>
@@ -36,9 +36,7 @@
       >
         <v-icon>mdi-code-tags</v-icon>
       </v-btn>
-      <v-spacer />
     </v-toolbar>
-
     <v-expand-transition v-if="parsed">
       <v-card
         v-if="expand && $vuetify.breakpoint.smAndDown"
@@ -123,7 +121,6 @@
         </v-layout>
       </v-card>
     </v-expand-transition>
-
     <v-sheet
       :dark="dark"
       tile
@@ -134,6 +131,7 @@
         </div>
       </v-card-text>
     </v-sheet>
+    <doc-codepen ref="codepen" :pen="parsed" />
   </v-card>
 </template>
 
