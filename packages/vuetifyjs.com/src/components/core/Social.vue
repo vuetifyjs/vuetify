@@ -4,6 +4,7 @@
       v-for="(social, i) in socials"
       :key="i"
       :href="social.href"
+      :title="social.text"
       class="mx-2"
       rel="noopener"
       target="_blank"

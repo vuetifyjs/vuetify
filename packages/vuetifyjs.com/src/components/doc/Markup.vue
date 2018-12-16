@@ -141,7 +141,7 @@
       right: 0
       padding: 8px
       font-size: 12px
-      color: rgba(#fff, .12)
+      color: rgba(#fff, .56)
 
     &:after
       position: absolute

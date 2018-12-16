@@ -12,7 +12,7 @@
     extension-height="48"
   >
     <v-toolbar-side-icon
-      v-if="$route.name !== 'home/Home'"
+      aria-label="Menu"
       class="hidden-lg-and-up"
       @click="toggleDrawer"
     />

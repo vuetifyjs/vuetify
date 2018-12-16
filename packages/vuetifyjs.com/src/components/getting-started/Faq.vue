@@ -35,6 +35,7 @@
               >
                 <a
                   :href="`#question-${index + 1}`"
+                  aria-label="Question Link"
                   class="text-decoration-none"
                   @click="$vuetify.goTo(`#question-${index + 1}`, { offset: -80 })"
                 >
