@@ -12,7 +12,8 @@
     extension-height="48"
   >
     <v-toolbar-side-icon
-      class="hidden-md-and-up"
+      v-if="$route.name !== 'home/Home'"
+      class="hidden-lg-and-up"
       @click="toggleDrawer"
     />
 
