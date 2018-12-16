@@ -2,17 +2,19 @@
   <div>
     <v-alert
       :value="true"
-      color="success"
+      color="green lighten-4"
       icon="new_releases"
+      light
     >
-      This is a success alert with a custom icon.
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
     </v-alert>
 
     <v-alert
       :value="true"
-      color="error"
+      color="error lighten-3"
+      light
     >
-      This is an error alert with no icon.
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
     </v-alert>
   </div>
 </template>

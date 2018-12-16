@@ -23,6 +23,7 @@
     }
   },
   "props": {
+    "closeIcon": "The icon used when the **dismissible** prop is present",
     "dismissible": "Specifies that the Alert can be closed",
     "icon": "Designates a specific icon",
     "outline": "Alert will have an outline",

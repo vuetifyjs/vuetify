@@ -10,10 +10,11 @@
     </div>
     <v-alert
       :value="alert"
-      type="success"
+      color="purple"
       transition="scale-transition"
+      type="success"
     >
-      This is a success alert.
+      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
     </v-alert>
   </div>
 </template>
