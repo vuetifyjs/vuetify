@@ -75,7 +75,6 @@
 <script>
   // Utilities
   import { mapState } from 'vuex'
-  import { capitalize } from '@/util/helpers'
   import { getObjectValueByPath } from 'vuetify/es5/util/helpers'
   import camelCase from 'lodash/camelCase'
   import upperFirst from 'lodash/upperFirst'
@@ -127,7 +126,7 @@
           const keys = Object.keys(newItem)
           for (let i = 0; i < keys.length; i++) {
             const key = keys[i]
-            const fn = this[`gen${capitalize(key)}`]
+            const fn = this[`gen${upperFirst(key)}`]
 
             if (fn) {
               newItem[key] = fn(newItem[key], item)
@@ -190,7 +189,7 @@
         // Mixins.Bootable.props.value
         const mixinDesc = `Mixins.${camelSource}.${this.type}['${name}']`
         // Generic.Props.value
-        const genericDesc = `Generic.${capitalize(this.type)}['${name}']`
+        const genericDesc = `Generic.${upperFirst(this.type)}['${name}']`
 
         if (this.$te(specialDesc)) {
           description = this.$t(specialDesc)

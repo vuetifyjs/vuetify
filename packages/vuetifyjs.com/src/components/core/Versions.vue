@@ -1,24 +1,16 @@
 <template>
-  <v-menu
-    attach
-    bottom
-    lazy
-    left
-    offset-y
+  <v-btn
+    :href="`https://github.com/vuetifyjs/vuetify/releases/${version}`"
     class="hidden-xs-only"
+    flat
+    target="_blank"
+    rel="noopener"
   >
-    <v-btn
-      slot="activator"
-      class="pr-1 pl-3"
-      flat
-    >
-      <span
-        class="mr-1 text-lowercase"
-        v-text="`v${currentVersion}`"
-      />
-      <v-icon>mdi-menu-down</v-icon>
-    </v-btn>
-  </v-menu>
+    <span
+      class="text-lowercase"
+      v-text="version"
+    />
+  </v-btn>
 </template>
 
 <script>
@@ -31,7 +23,10 @@
     computed: {
       ...mapState('app', [
         'currentVersion'
-      ])
+      ]),
+      version () {
+        return `v${this.currentVersion}`
+      }
     }
   }
 </script>

@@ -272,7 +272,7 @@ test('validatable.js', ({ mount }) => {
     })
 
     expect(wrapper.vm.hasInput).toBe(false)
-    wrapper.setData({ lazyValue: 'foo' })
+    wrapper.setProps({ value: 'foo' })
 
     // Wait for watcher's $nextTick call
     await wrapper.vm.$nextTick()
@@ -294,7 +294,10 @@ test('validatable.js', ({ mount }) => {
     expect(wrapper.vm.hasFocused).toBe(true)
     expect(wrapper.vm.isResetting).toBe(true)
 
-    // Wait for timeout
+    // Wait for watcher
+    await wrapper.vm.$nextTick()
+
+    // Wait for watcher's timeout
     await new Promise(resolve => setTimeout(resolve, 0))
 
     expect(wrapper.vm.hasInput).toBe(false)
