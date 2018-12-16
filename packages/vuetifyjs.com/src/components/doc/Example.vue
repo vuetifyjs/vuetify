@@ -68,6 +68,10 @@
               {{ section }}
             </v-btn>
           </v-item>
+          <span
+            class="filename"
+            v-text="file"
+          />
         </v-item-group>
         <v-divider />
         <v-window v-model="selected">
@@ -108,6 +112,10 @@
             >
               {{ section }}
             </v-btn>
+            <span
+              class="filename"
+              v-text="file"
+            />
             <v-divider />
             <div
               class="example-container"
@@ -155,7 +163,8 @@
       expand: false,
       parsed: undefined,
       sections: ['template', 'style', 'script'],
-      selected: 'template'
+      selected: 'template',
+      lastSection: 'template'
     }),
 
     computed: {
@@ -200,20 +209,20 @@
         const string = `(<${target}(.*)?>[\\w\\W]*<\\/${target}>)`
         const regex = new RegExp(string, 'g')
         const parsed = regex.exec(template) || []
-
+        this.lastSection = parsed[1] ? target : this.lastSection
         return parsed[1] || ''
       },
       boot (res) {
         const template = this.parseTemplate('template', res)
-        const script = this.parseTemplate('script', res)
         const style = this.parseTemplate('style', res)
+        const script = this.parseTemplate('script', res)
         const codepenResources = this.parseTemplate('codepen-resources', res)
         const codepenAdditional = this.parseTemplate('codepen-additional', res)
 
         this.parsed = {
           template,
-          script,
           style,
+          script,
           codepenResources,
           codepenAdditional
         }
@@ -242,8 +251,16 @@
       z-index: auto
 
   .example-container
-    max-height: 500px;
-    overflow-y: auto;
+    height: 100%
+    max-height: 500px
+    overflow-y: scroll
+
+  .filename
+    position: absolute
+    right: 0
+    padding: 15px
+    font-size: 12px
+    color: rgba(#fff, .12)
 
   .component-example
     // margin-bottom: 32px
