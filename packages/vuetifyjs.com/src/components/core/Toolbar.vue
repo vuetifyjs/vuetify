@@ -1,10 +1,10 @@
 <template>
   <v-toolbar
     id="app-toolbar"
+    :class="`elevation-${isHome ? 0 : 6}`"
     app
     clipped-left
     clipped-right
-    class="elevation-6"
     color="primary"
     dark
     fixed
@@ -12,15 +12,13 @@
     extension-height="48"
   >
     <v-toolbar-side-icon
+      v-if="!isHome"
       aria-label="Menu"
       class="hidden-lg-and-up"
       @click="toggleDrawer"
     />
 
-    <router-link
-      :to="{ name: 'home/Home' }"
-      class="mr-3"
-    >
+    <router-link :to="{ name: 'home/Home' }">
       <v-img
         alt="Vuetify Logo"
         src="https://cdn.vuetifyjs.com/images/logos/v-alt.svg"
@@ -30,27 +28,25 @@
         width="38px"
       />
     </router-link>
-
-    <v-toolbar-items class="hidden-sm-and-down">
-      <v-btn
-        v-for="(item, i) in items"
-        :key="i"
-        :input-value="params.namespace === item.to.params.namespace"
-        :to="item.to"
-        flat
-        style="min-width: 0;"
-      >
-        {{ item.text }}
-      </v-btn>
-    </v-toolbar-items>
-
+    <v-toolbar-title class="hidden-xs-only">Vuetify</v-toolbar-title>
     <v-spacer />
 
     <v-toolbar-items>
+      <v-btn
+        v-show="isHome"
+        class="hidden-xs-only"
+        flat
+        style="min-width: 48px;"
+        to="getting-started/quick-start"
+      >
+        <span class="hidden-sm-and-down">{{ $t('Vuetify.AppToolbar.documentation' ) }}</span>
+        <v-icon class="hidden-md-and-up">mdi-file-document-box</v-icon>
+      </v-btn>
+      <core-store />
+      <core-supports />
+      <core-ecosystems />
       <core-versions />
-      <core-social />
       <core-locales />
-      <core-github />
     </v-toolbar-items>
   </v-toolbar>
 </template>
@@ -67,63 +63,14 @@
     name: 'CoreToolbar',
 
     data: vm => ({
-      items: [
-        {
-          text: vm.$t('Vuetify.AppToolbar.docs'),
-          to: {
-            name: 'Documentation',
-            params: {
-              namespace: 'getting-started',
-              page: 'quick-start'
-            }
-          }
-        },
-        {
-          text: vm.$t('Vuetify.AppToolbar.framework'),
-          to: {
-            name: 'Documentation',
-            params: {
-              namespace: 'framework',
-              page: 'a-la-carte'
-            }
-          }
-        },
-        {
-          text: vm.$t('Vuetify.AppToolbar.components'),
-          to: {
-            name: 'Documentation',
-            params: {
-              namespace: 'components',
-              page: 'api-explorer'
-            }
-          }
-        },
-        {
-          text: vm.$t('Vuetify.AppToolbar.directives'),
-          to: {
-            name: 'Documentation',
-            params: {
-              namespace: 'directives',
-              page: 'resizing'
-            }
-          }
-        },
-        {
-          text: vm.$t('Vuetify.AppToolbar.themes'),
-          to: {
-            name: 'Documentation',
-            params: {
-              namespace: 'themes',
-              page: 'premium'
-            }
-          }
-        }
-      ],
       languages
     }),
 
     computed: {
-      ...mapState('route', ['params'])
+      ...mapState('route', ['name', 'params']),
+      isHome () {
+        return this.name === 'home/Home'
+      }
     },
 
     methods: {

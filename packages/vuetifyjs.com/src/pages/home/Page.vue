@@ -7,8 +7,6 @@
       >
         <hero />
 
-        <feature />
-
         <sponsors />
 
         <made-with-vuetify />
@@ -22,7 +20,6 @@
 <script>
   export default {
     components: {
-      Feature: () => import('./components/Feature'),
       Hero: () => import('./components/Hero'),
       MadeWithVuetify: () => import('./components/MadeWithVuetify'),
       Sponsors: () => import('./components/Sponsors'),

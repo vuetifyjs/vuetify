@@ -1,11 +1,10 @@
 <template>
-  <v-card
-    class="text-xs-center pb-4"
-    color="white"
-    flat
-  >
+  <v-responsive class="text-xs-center pb-4">
     <v-container grid-list-xl>
-      <v-layout wrap>
+      <v-layout
+        justify-center
+        wrap
+      >
         <v-flex
           v-for="(_, i) in 3"
           :key="i"
@@ -16,14 +15,15 @@
           lg4
         >
           <v-card
-            class="elevation-12 hide-overflow text-xs-center"
+            class="elevation-12 hide-overflow text-xs-center mx-auto"
             light
             max-width="375px"
           >
-            <img
+            <v-img
               :alt="$t(`Vuetify.Home.features[${i}].title`)"
               :src="$t(`Vuetify.Home.features[${i}].img`)"
-            >
+              height="144"
+            />
             <v-card-text>
               <h3
                 class="subheading font-weight-bold"
@@ -38,7 +38,7 @@
         </v-flex>
       </v-layout>
     </v-container>
-  </v-card>
+  </v-responsive>
 </template>
 
 <script>
