@@ -54,17 +54,18 @@ export default {
     calculatedLeft () {
       const { activator, content } = this.dimensions
       const unknown = !this.bottom && !this.left && !this.top && !this.right
+      const activatorLeft = this.isAttached ? activator.offsetLeft : activator.left
       let left = 0
 
       if (this.top || this.bottom || unknown) {
         left = (
-          activator.offsetLeft +
+          activatorLeft +
           (activator.width / 2) -
           (content.width / 2)
         )
       } else if (this.left || this.right) {
         left = (
-          activator.offsetLeft +
+          activatorLeft +
           (this.right ? activator.width : -content.width) +
           (this.right ? 10 : -10)
         )
