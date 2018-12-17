@@ -124,7 +124,11 @@ export default Vue.extend({
       let top = this.top ? a.bottom - c.height : a.top
 
       if (!this.isAttached) top += this.pageYOffset
-      if (this.offsetY) top += this.top ? -a.height : a.height
+      if (this.offsetY) {
+        top += this.top
+          ? -a.height
+          : a.height + a.offsetTop
+      }
       if (this.nudgeTop) top -= parseInt(this.nudgeTop)
       if (this.nudgeBottom) top += parseInt(this.nudgeBottom)
 
@@ -311,9 +315,7 @@ export default Vue.extend({
         height: Math.round(rect.height)
       }
     },
-    measure (el, selector) {
-      el = selector ? el.querySelector(selector) : el
-
+    measure (el) {
       if (!el || !this.hasWindow) return null
 
       const rect = this.getRoundedBoundedClientRect(el)
@@ -355,9 +357,17 @@ export default Vue.extend({
       const dimensions = {}
 
       // Activator should already be shown
-      dimensions.activator = !this.hasActivator || this.absolute
-        ? this.absolutePosition()
-        : this.measure(this.getActivator())
+      if (!this.hasActivator || this.absolute) {
+        dimensions.activator = this.absolutePosition()
+      } else {
+        const activator = this.getActivator()
+        dimensions.activator = this.measure(activator)
+        if (this.isAttached && this.$attachTarget && this.$attachTarget.contains(activator)) {
+          // account for css padding causing things to not line up
+          // this is mostly for v-autocomplete, hopefully it won't break anything
+          dimensions.activator.offsetTop = activator.offsetTop
+        }
+      }
 
       // Display and hide to get dimensions
       this.sneakPeek(() => {
