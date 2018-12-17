@@ -10,7 +10,6 @@
 export default {
   methods: {
     activatorClickHandler (e) {
-      if (this.disabled) return
       if (this.openOnClick && !this.isActive) {
         this.getActivator().focus()
         this.isActive = true
@@ -41,7 +40,7 @@ export default {
       })
     },
     addActivatorEvents (activator = null) {
-      if (!activator) return
+      if (!activator || this.disabled) return
       activator.addEventListener('click', this.activatorClickHandler)
     },
     removeActivatorEvents (activator = null) {

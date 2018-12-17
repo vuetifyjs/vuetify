@@ -1,6 +1,7 @@
 <template>
   <v-navigation-drawer
     v-model="inputValue"
+    clipped
     app
   >
     <v-container
@@ -24,7 +25,7 @@
           key="search"
           ref="search"
           v-model="search"
-          placeholder="Search"
+          label="Search"
           append-icon="search"
           clearable
           hide-details

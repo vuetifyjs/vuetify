@@ -39,7 +39,7 @@
         {
           "type": "up-next",
           "value": [
-            "layout/grid",
+            "framework/grid",
             "components/buttons",
             "components/toolbars"
           ]

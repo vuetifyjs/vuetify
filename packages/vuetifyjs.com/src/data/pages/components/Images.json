@@ -40,8 +40,8 @@
         {
           "type": "up-next",
           "value": [
-            "layout/grid-lists",
-            "layout/aspect-ratios",
+            "framework/grid-lists",
+            "framework/aspect-ratios",
             "components/parallax"
           ]
         }

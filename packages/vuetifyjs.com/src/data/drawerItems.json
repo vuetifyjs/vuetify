@@ -19,52 +19,47 @@
     "icon": "mdi-buffer",
     "children": [
       { "text": "aLaCarte", "to": "a-la-carte", "updated": true },
+      { "text": "grid", "to": "grid" },
+      { "text": "gridLists", "to": "grid-lists" },
       { "text": "icons", "to": "icons" },
-      { "text": "i18n", "to": "internationalization" }
-    ]
-  },
-  {
-    "group": "layout",
-    "text": "layout",
-    "icon": "mdi-page-layout-body",
-    "children": [
-      { "text": "preDefinedLayouts", "to": "pre-defined" },
-      { "text": "preMadeThemes", "to": "pre-made-themes" },
+      { "text": "i18n", "to": "internationalization" },
       {
-        "group": "layout",
-        "text": "gridSystem",
+        "group": "framework",
+        "text": "layout",
         "children": [
-          { "text": "grid", "to": "grid" },
-          { "text": "gridLists", "to": "grid-lists" }
+          { "text": "aspectRatios", "to": "aspect-ratios" },
+          { "text": "breakpoints", "to": "breakpoints" },
+          { "text": "preDefinedLayouts", "to": "pre-defined" }
         ]
       },
-      { "text": "breakpoints", "to": "breakpoints" },
-      { "text": "aspectRatios", "to": "aspect-ratios" },
-      { "text": "spacing", "to": "spacing" },
-      { "text": "textAlignment", "to": "alignment" },
-      { "text": "display", "to": "display" },
-      { "text": "elevation", "to": "elevation" },
-      { "text": "sandbox", "to": "sandbox" }
-    ]
-  },
-  {
-    "group": "style",
-    "text": "stylesAndThemes",
-    "icon": "mdi-format-color-fill",
-    "children": [
-      { "text": "colors", "to": "colors" },
-      { "text": "theme", "to": "theme" },
-      { "text": "typography", "to": "typography", "updated": true },
-      { "text": "content", "to": "content" }
-    ]
-  },
-  {
-    "group": "motion",
-    "text": "motion",
-    "icon": "mdi-clock-fast",
-    "children": [
-      { "text": "scroll", "to": "scroll" },
-      { "text": "transitions", "to": "transitions" }
+      {
+        "group": "framework",
+        "text": "stylesAndThemes",
+        "children": [
+          { "text": "colors", "to": "colors" },
+          { "text": "content", "to": "content" },
+          { "text": "theme", "to": "theme" },
+          { "text": "typography", "to": "typography" }
+        ]
+      },
+      {
+        "group": "framework",
+        "text": "helperClasses",
+        "children": [
+          { "text": "display", "to": "display" },
+          { "text": "elevation", "to": "elevation" },
+          { "text": "spacing", "to": "spacing" },
+          { "text": "textAlignment", "to": "alignment" }
+        ]
+      },
+      {
+        "group": "framework",
+        "text": "motion",
+        "children": [
+          { "text": "scroll", "to": "scroll" },
+          { "text": "transitions", "to": "transitions" }
+        ]
+      }
     ]
   },
   {
@@ -156,5 +151,10 @@
       { "text": "scrolling", "to": "scrolling" },
       { "text": "touchSupport", "to": "touch-support" }
     ]
+  },
+  {
+    "text": "premiumThemes",
+    "icon": "mdi-palette",
+    "to": "themes/premium"
   }
 ]

@@ -59,7 +59,7 @@ export default {
         : VSelect.methods.genCommaSelection.call(this, item, index, last)
     },
     genInput () {
-      const input = VTextField.methods.genInput.call(this)
+      const input = VTextField.options.methods.genInput.call(this)
 
       input.data.domProps.value = this.editable ? this.internalSearch : ''
       input.data.attrs.readonly = !this.isAnyValueAllowed
@@ -69,7 +69,7 @@ export default {
     genLabel () {
       if (this.editable && this.isFocused) return null
 
-      const label = VTextField.methods.genLabel.call(this)
+      const label = VTextField.options.methods.genLabel.call(this)
 
       if (!label) return label
 

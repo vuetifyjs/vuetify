@@ -17,7 +17,7 @@
       )
         v-select(
           :items="directions"
-          :label="$t('Layout.Spacing.padding')"
+          :label="$t('Framework.Spacing.padding')"
           class="pr-2"
           v-model="paddingDirection"
         )
@@ -26,7 +26,7 @@
 
         v-select(
           :items="sizes.slice(1)"
-          :label="$t('Layout.Spacing.size')"
+          :label="$t('Framework.Spacing.size')"
           v-model="paddingSize"
         )
       v-flex(
@@ -36,7 +36,7 @@
       )
         v-select(
           :items="directions"
-          :label="$t('Layout.Spacing.margin')"
+          :label="$t('Framework.Spacing.margin')"
           class="pr-2"
           v-model="marginDirection"
         )
@@ -45,7 +45,7 @@
 
         v-select(
           :items="sizes"
-          :label="$t('Layout.Spacing.size')"
+          :label="$t('Framework.Spacing.size')"
           v-model="marginSize"
         )
       v-flex(
@@ -62,7 +62,7 @@
           )
             div(
               class="white text-xs-center"
-              v-text="$t('Layout.Spacing.playgroundText2')"
+              v-text="$t('Framework.Spacing.playgroundText2')"
             )
 </template>
 

@@ -33,28 +33,25 @@
 <script>
   // Utilities
   import { goTo } from '@/util/helpers'
-  import { mapState } from 'vuex'
 
   export default {
     data: () => ({
       activeIndex: 0,
       currentOffset: 0,
       list: [],
+      routeTimeout: null,
       timeout: null
     }),
 
-    computed: {
-      ...mapState('app', ['toc'])
-    },
-
     watch: {
-      toc (val) {
-        val && this.genList()
+      '$route.path' () {
+        clearTimeout(this.routeTimeout)
+        this.routeTimeout = setTimeout(this.genList, 100)
       }
     },
 
     mounted () {
-      this.genList()
+      setTimeout(this.genList, 100)
     },
 
     methods: {

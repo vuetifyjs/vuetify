@@ -4,7 +4,7 @@ import VMenu from '@/components/VMenu/VMenu'
 import { test } from '@/test'
 
 // TODO: Most of these have exactly the same snapshots
-test('VMenu.js', ({ mount }) => {
+test('VMenu.js', ({ mount, compileToFunctions }) => {
   it('should work', async () => {
     const wrapper = mount(VMenu, {
       propsData: {
@@ -369,6 +369,24 @@ test('VMenu.js', ({ mount }) => {
     await new Promise(resolve => requestAnimationFrame(resolve))
 
     expect(content.getAttribute('style')).toMatchSnapshot()
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should not attach event handlers to the activator container if disabled', async () => {
+    const wrapper = mount(VMenu, {
+      propsData: {
+        disabled: true,
+      },
+      slots: {
+        activator: [compileToFunctions('<button></button>')]
+      }
+    })
+
+    expect(Object.keys(wrapper.find('.v-menu__activator')[0].vNode.data.on)).toHaveLength(0)
+
+    wrapper.setProps({ openOnHover: true })
+    expect(Object.keys(wrapper.find('.v-menu__activator')[0].vNode.data.on)).toHaveLength(0)
+
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 })

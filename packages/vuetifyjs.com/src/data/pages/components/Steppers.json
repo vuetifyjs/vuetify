@@ -53,7 +53,7 @@
         {
           "type": "up-next",
           "value": [
-            "layout/breakpoints",
+            "framework/breakpoints",
             "components/buttons",
             "components/windows"
           ]

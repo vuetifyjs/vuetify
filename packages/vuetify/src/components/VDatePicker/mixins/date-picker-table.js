@@ -76,7 +76,18 @@ export default {
         ...this.themeClasses
       }
     },
-    genButton (value, isFloating) {
+    genButtonEvents (value, isAllowed, mouseEventType) {
+      if (this.disabled) return undefined
+
+      return {
+        click: () => {
+          isAllowed && !this.readonly && this.$emit('input', value)
+          this.$emit(`click:${mouseEventType}`, value)
+        },
+        dblclick: () => this.$emit(`dblclick:${mouseEventType}`, value)
+      }
+    },
+    genButton (value, isFloating, mouseEventType) {
       const isAllowed = isDateAllowed(value, this.min, this.max, this.allowedDates)
       const isSelected = value === this.value || (Array.isArray(this.value) && this.value.indexOf(value) !== -1)
       const isCurrent = value === this.current
@@ -92,9 +103,7 @@ export default {
         domProps: {
           disabled: this.disabled || !isAllowed
         },
-        on: (this.disabled || this.readonly || !isAllowed) ? {} : {
-          click: () => this.$emit('input', value)
-        }
+        on: this.genButtonEvents(value, isAllowed, mouseEventType)
       }), [
         this.$createElement('div', {
           staticClass: 'v-btn__content'

@@ -210,10 +210,10 @@ export default {
         'class': {
           'v-dialog__activator--disabled': this.disabled
         },
-        on: {
+        on: this.disabled ? {} : {
           click: e => {
             e.stopPropagation()
-            if (!this.disabled) this.isActive = !this.isActive
+            this.isActive = !this.isActive
           }
         }
       }, [this.$slots.activator]))

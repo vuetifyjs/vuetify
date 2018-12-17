@@ -37,7 +37,7 @@
               depressed
               large
               round
-              to="/getting-started/quick-start"
+              to="getting-started/quick-start"
             >
               {{ $t('Vuetify.Home.getStarted') }}
             </v-btn>
@@ -46,7 +46,7 @@
               outline
               large
               round
-              to="/getting-started/why-vuetify"
+              to="getting-started/why-vuetify"
             >
               {{ $t('Vuetify.Home.whyVuetify') }}
             </v-btn>

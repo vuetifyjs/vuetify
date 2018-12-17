@@ -133,6 +133,26 @@
         {
           "type": "markup",
           "value": "js_import_fa4"
+        },
+        {
+          "type": "heading",
+          "lang": "installFASvg"
+        },
+        {
+          "type": "text",
+          "lang": "installFASvgText1"
+        },
+        {
+          "type": "markup",
+          "value": "bash_yarn_install_fa_svg"
+        },
+        {
+          "type": "text",
+          "lang": "installFASvgText2"
+        },
+        {
+          "type": "markup",
+          "value": "js_import_fa_svg"
         }
       ]
     },
@@ -200,6 +220,31 @@
         {
           "type": "markup",
           "value": "html_custom_icons_custom_component"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "componentIconsHeader"
+        },
+        {
+          "type": "text",
+          "lang": "componentIconsText1"
+        },
+        {
+          "type": "markup",
+          "value": "js_component_icons_install"
+        },
+        {
+          "type": "text",
+          "lang": "componentIconsText2"
+        },
+        {
+          "type": "markup",
+          "value": "stylus_component_icon_styles"
         }
       ]
     }

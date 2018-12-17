@@ -17,6 +17,6 @@ export default mixins(Themeable).extend({
   },
 
   render (): VNode {
-    return this.$slots.default! && this.$slots.default.find(node => !node.isComment && node.text !== ' ')!
+    return this.$slots.default! && this.$slots.default!.find(node => !node.isComment && node.text !== ' ')!
   }
 })
