@@ -1,22 +1,22 @@
 import Vue from 'vue'
 import { VuetifyUseOptions, VuetifyBreakpoint } from 'vuetify/types'
 
+const BREAKPOINTS_DEFAULTS = {
+  thresholds: {
+    xs: 600,
+    sm: 960,
+    md: 1280,
+    lg: 1920
+  },
+  scrollbarWidth: 16
+}
+
 /**
  * Factory function for the breakpoint mixin.
  */
 export default function breakpoint (opts: VuetifyUseOptions['breakpoint'] = {}) {
   if (!opts) {
     opts = {}
-  }
-
-  const DEFAULTS_FOR_USER_CONFIGURABLE_OPTIONS = {
-    thresholds: {
-      xs: 600,
-      sm: 960,
-      md: 1280,
-      lg: 1920
-    },
-    scrollbarWidth: 16
   }
 
   return Vue.extend({
@@ -26,7 +26,7 @@ export default function breakpoint (opts: VuetifyUseOptions['breakpoint'] = {}) 
         clientWidth: getClientWidth(),
         resizeTimeout: undefined as number | undefined,
 
-        ...DEFAULTS_FOR_USER_CONFIGURABLE_OPTIONS,
+        ...BREAKPOINTS_DEFAULTS,
         ...opts
       }
     },
