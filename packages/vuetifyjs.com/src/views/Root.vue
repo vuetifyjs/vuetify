@@ -1,17 +1,11 @@
 <template>
-  <router-view v-if="languageIsValid" />
-  <not-found-page v-else to="/en/" />
+  <router-view />
 </template>
 
 <script>
   import languages from '@/data/i18n/languages.json'
-  import NotFoundPage from '@/pages/general/404Page.vue'
 
   export default {
-    components: {
-      NotFoundPage
-    },
-
     props: {
       lang: {
         type: String,
@@ -28,6 +22,10 @@
       languageIsValid () {
         return this.availableLocales.includes(this.lang)
       }
+    },
+
+    created () {
+      if (!this.languageIsValid) this.$router.push('/en')
     }
   }
 </script>

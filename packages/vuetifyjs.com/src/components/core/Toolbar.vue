@@ -12,7 +12,8 @@
     extension-height="48"
   >
     <v-toolbar-side-icon
-      class="hidden-md-and-up"
+      aria-label="Menu"
+      class="hidden-lg-and-up"
       @click="toggleDrawer"
     />
 
@@ -104,6 +105,16 @@
             params: {
               namespace: 'directives',
               page: 'resizing'
+            }
+          }
+        },
+        {
+          text: vm.$t('Vuetify.AppToolbar.themes'),
+          to: {
+            name: 'Documentation',
+            params: {
+              namespace: 'themes',
+              page: 'premium'
             }
           }
         }

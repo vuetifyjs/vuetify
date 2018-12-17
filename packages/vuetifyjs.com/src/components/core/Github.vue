@@ -10,6 +10,7 @@
       scrolling="0"
       width="100px"
       height="20px"
+      title="Star Vuetify on Github"
     />
   </v-layout>
 </template>

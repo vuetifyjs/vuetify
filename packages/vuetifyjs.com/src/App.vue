@@ -2,7 +2,7 @@
   <v-app>
     <router-view />
 
-    <core-toolbar />
+    <core-toolbar v-if="hasToolbar" />
   </v-app>
 </template>
 
@@ -10,11 +10,19 @@
   import Meta from '@/mixins/meta'
 
   import {
-    mapMutations
+    mapMutations,
+    mapState
   } from 'vuex'
 
   export default {
     mixins: [Meta],
+
+    computed: {
+      ...mapState('route', ['name']),
+      hasToolbar () {
+        return this.name !== 'Layouts'
+      }
+    },
 
     methods: {
       ...mapMutations('app', ['setReleases']),

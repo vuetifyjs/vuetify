@@ -25,7 +25,7 @@
           key="search"
           ref="search"
           v-model="search"
-          placeholder="Search"
+          label="Search"
           append-icon="search"
           clearable
           hide-details
