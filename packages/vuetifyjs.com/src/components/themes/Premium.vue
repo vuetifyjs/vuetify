@@ -50,7 +50,7 @@
                 >
                   <v-btn
                     slot="activator"
-                    :href="template.demoUrl.length === 1 ? `${template.demoUrl[0]}?rel=vuetifyjs.com` : undefined"
+                    :href="template.demoUrl.length === 1 ? `${template.demoUrl[0]}?ref=vuetifyjs.com` : undefined"
                     icon
                     target="_blank"
                     rel="noopener"
@@ -64,7 +64,7 @@
                   <v-list-tile
                     v-for="([title, demo], i) in template.demoUrl"
                     :key="i"
-                    :href="`${demo}?rel=vuetifyjs.com`"
+                    :href="`${demo}?ref=vuetifyjs.com`"
                     target="_blank"
                     rel="noopener"
                   >
@@ -81,7 +81,7 @@
               <v-spacer />
 
               <v-btn
-                :href="template.url"
+                :href="`${template.url}?ref=vuetifyjs.com`"
                 color="primary"
                 flat
                 outline
