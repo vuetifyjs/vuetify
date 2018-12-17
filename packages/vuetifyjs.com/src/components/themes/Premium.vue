@@ -14,32 +14,20 @@
         >
           <v-card height="100%">
             <v-img
-              :src="template.screenshot"
+              :src="template.src"
               height="350px"
             />
 
             <v-card-title class="align-center">
               <h2 class="headline mb-0">{{ template.title }}
                 <v-chip
-                  v-if="template.tag"
+                  :color="template.free ? 'blue-grey' : 'indigo'"
                   label
                   small
                   class="text-uppercase"
-                  color="indigo"
                   text-color="white"
                 >
-                  {{ template.tag }}
-                </v-chip>
-
-                <v-chip
-                  v-else
-                  label
-                  small
-                  class="text-uppercase"
-                  color="blue-grey"
-                  text-color="white"
-                >
-                  {{ $t('Themes.Premium.free') }}
+                  {{ $t(`Themes.Premium.${template.free ? 'free' : 'premium'}`) }}
                 </v-chip>
               </h2>
               <v-spacer />
@@ -48,47 +36,59 @@
             <v-divider />
 
             <v-card-text style="min-height: 95px;">{{ template.description }}</v-card-text>
-            <v-card-actions>
-              <v-btn
-                v-if="template.demoUrl"
-                :href="template.demoUrl"
-                flat="flat"
-                color="success"
-                target="_blank"
-                rel="noopener"
+            <v-card-actions class="grey lighten-4">
+              <v-menu
+                :disabled="template.demoUrl.length === 1"
+                transition="scale-transition"
+                origin="bottom left"
+                top
+                right
               >
-                {{ $t('Themes.Premium.demo') }}
-              </v-btn>
+                <v-tooltip
+                  slot="activator"
+                  right
+                >
+                  <v-btn
+                    slot="activator"
+                    :href="template.demoUrl.length === 1 ? `${template.demoUrl[0]}?rel=vuetifyjs.com` : undefined"
+                    icon
+                    target="_blank"
+                    rel="noopener"
+                    aria-label="View Demo"
+                  >
+                    <v-icon color="primary">mdi-eye</v-icon>
+                  </v-btn>
+                  <span v-text="$t('Themes.Premium.viewDemo')" />
+                </v-tooltip>
+                <v-list v-if="template.demoUrl.length > 1">
+                  <v-list-tile
+                    v-for="([title, demo], i) in template.demoUrl"
+                    :key="i"
+                    :href="`${demo}?rel=vuetifyjs.com`"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    <v-list-tile-content>
+                      <v-list-tile-title v-text="title" />
+                    </v-list-tile-content>
+                    <v-list-tile-action>
+                      <v-icon>mdi-open-in-new</v-icon>
+                    </v-list-tile-action>
+                  </v-list-tile>
+                </v-list>
+              </v-menu>
 
               <v-spacer />
 
               <v-btn
-                v-if="template.price"
-                href="https://store.vuetifyjs.com/product/813199294506"
-                target="_blank"
-                rel="noopener"
+                :href="template.url"
                 color="primary"
                 flat
-              >
-                {{ $t('Themes.Premium.buy') }}
-                <v-icon right>mdi-arrow-right</v-icon>
-              </v-btn>
-
-              <v-btn
-                v-else
-                :href="`https://github.com/${template.sourceUrl}/tree/master/template`"
-                flat
-                color="success"
+                outline
                 target="_blank"
                 rel="noopener"
               >
-                {{ $t('Themes.Premium.sourceCode') }}
-                <v-icon
-                  right
-                  success
-                >
-                  mdi-arrow-right
-                </v-icon>
+                {{ $t('Themes.Premium.downloadNow') }}
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -100,10 +100,46 @@
 
 <script>
   export default {
-    computed: {
-      templates () {
-        return this.$t('Themes.Premium.templates', 'en')
-      }
-    }
+    data: vm => ({
+      templates: [
+        {
+          title: vm.$t('Themes.Premium.templates.alpha.title'),
+          description: vm.$t('Themes.Premium.templates.alpha.description'),
+          src: 'https://cdn.vuetifyjs.com/images/starter/vuetify-premium.jpg',
+          free: false,
+          url: 'https://store.vuetifyjs.com/product/813199294506',
+          demoUrl: [
+            ['Construction', 'https://alpha-construction.vuetifyjs.com'],
+            ['Creative', 'https://alpha-creative.vuetifyjs.com'],
+            ['SaaS', 'https://alpha-saas.vuetifyjs.com'],
+            ['Ecommerce', 'https://alpha-ecommerce.vuetifyjs.com']
+          ]
+        },
+        {
+          title: vm.$t('Themes.Premium.templates.dashboard.title'),
+          description: vm.$t('Themes.Premium.templates.dashboard.description'),
+          src: 'https://cdn.vuetifyjs.com/images/starter/vuetify-admin-dashboard.jpg',
+          free: true,
+          url: 'https://www.creative-tim.com/product/vuetify-material-dashboard',
+          demoUrl: ['https://demos.creative-tim.com/vuetify-material-dashboard/#/dashboard']
+        },
+        {
+          title: vm.$t('Themes.Premium.templates.parallax.title'),
+          description: vm.$t('Themes.Premium.templates.parallax.description'),
+          src: 'https://cdn.vuetifyjs.com/images/starter/vuetify-parallax-starter.png',
+          free: true,
+          url: 'https://github.com/vuetifyjs/parallax-starter',
+          demoUrl: ['/themes/parallax-starter']
+        },
+        {
+          title: vm.$t('Themes.Premium.templates.blog.title'),
+          description: vm.$t('Themes.Premium.templates.blog.description'),
+          src: 'https://cdn.vuetifyjs.com/images/starter/vuetify-blog-starter.png',
+          free: true,
+          url: 'https://github.com/vuetifyjs/blog-starter',
+          demoUrl: ['/themes/blog-starter']
+        }
+      ]
+    })
   }
 </script>

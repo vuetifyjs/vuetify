@@ -3,31 +3,26 @@
   "headerText": "Vuetify offers both **free** and **premium** pre-made themes designed to get you started in a flash. Free themes are available to install through vue-cli or you can simply download the source.",
   "buy": "Information and Demos",
   "free": "Free",
-  "demo": "Demo",
-  "comingSoon": "coming soon",
-  "sourceCode": "source code",
-  "templates": [
-    {
-      "screenshot": "https://cdn.vuetifyjs.com/images/starter/vuetify-premium.jpg",
+  "live": "Live Preview",
+  "premium": "Premium",
+  "downloadNow": "Download Now",
+  "viewDemo": "View Demo",
+  "templates": {
+    "alpha": {
       "title": "Alpha Theme",
-      "tag": "Premium",
-      "description": "Complete theme experience including enhanced vue-cli, full documentation, 5 custom components and much more!",
-      "price": "25$",
-      "demoUrl": ""
+      "description": "Complete theme experience including enhanced vue-cli, full documentation, 5 custom components and much more!"
     },
-    {
-      "screenshot": "https://cdn.vuetifyjs.com/images/starter/vuetify-parallax-starter.png",
+    "dashboard": {
+      "title": "Material Dashboard",
+      "description": "Vuetify Material Dashboard is a beautiful resource built over Vuetify, Vuex and Vuejs. It will help you get started developing dashboards in no time."
+    },
+    "parallax": {
       "title": "Parallax",
-      "description": "This beautiful single page parallax is a great home page for any application.",
-      "sourceUrl": "vuetifyjs/parallax-starter",
-      "demoUrl": "/themes/parallax-starter"
+      "description": "This beautiful single page parallax is a great home page for any application."
     },
-    {
-      "screenshot": "https://cdn.vuetifyjs.com/images/starter/vuetify-blog-starter.png",
+    "blog": {
       "title": "Blog",
-      "description": "A simple template that features a clean interface for creating a blog or blog-like application.",
-      "sourceUrl": "vuetifyjs/blog-starter",
-      "demoUrl": "/themes/blog-starter"
+      "description": "A simple template that features a clean interface for creating a blog or blog-like application."
     }
-  ]
+  }
 }
