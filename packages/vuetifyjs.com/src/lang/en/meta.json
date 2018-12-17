@@ -11,7 +11,7 @@
   },
   "getting-started/quick-start": {
     "title": "Quick Start",
-    "description": "Get started with Vue and Vuetify in no time.",
+    "description": "Get started with Vue and Vuetify in no time. Support for vue-cli-3, existing projects and more.",
     "keywords": "quick start, vuetify templates, installing vuetify, install vuetify"
   },
   "getting-started/starter-templates": {
@@ -36,7 +36,7 @@
   },
   "getting-started/contributing": {
     "title": "Contributing",
-    "description": "Help develop Vuetify with new features and functionality.",
+    "description": "Learn how to help contribute to the Vuetify framework.",
     "keywords": "contribute, contributing, feature request"
   },
   "getting-started/roadmap": {
@@ -51,7 +51,7 @@
   },
   "framework/a-la-carte": {
     "title": "A La Carte",
-    "description": "Use only the components you need. Single component importing allows you to select what you want and leave the rest.",
+    "description": "Get ready for automatic treeshaking. Use only the components you need. Single component importing only pulls in what you use.",
     "keywords": "a la carte, a-la-carte, vuetify single import, vuetify import, component importing"
   },
   "framework/icons": {
@@ -71,7 +71,7 @@
   },
   "framework/scroll": {
     "title": "Scroll",
-    "description": "Scroll to a target location on the page.",
+    "description": "Using the goTo helper you can smoothly scroll to any location on the page.",
     "keywords": "scrolling, scroll, smooth scroll, transitions"
   },
   "framework/colors": {
@@ -81,7 +81,7 @@
   },
   "framework/theme": {
     "title": "Application theming",
-    "description": "Setup your custom application theme by changing a few variables.",
+    "description": "Setup your application's theme and supplemental colors in a flash.",
     "keywords": "themes"
   },
   "framework/typography": {
@@ -106,12 +106,12 @@
   },
   "framework/grid-lists": {
     "title": "Grid List Component",
-    "description": "Grid list component for Vuetify Framework",
+    "description": "Grid lists allow you to specify the gutter used when separating grid items.",
     "keywords": "grid lists, grid"
   },
   "framework/breakpoints": {
     "title": "Breakpoints",
-    "description": "Breakpoints for Vuetify Framework",
+    "description": "Access the Vuetify grid system directly in components.",
     "keywords": "breakpoints"
   },
   "framework/aspect-ratios": {
