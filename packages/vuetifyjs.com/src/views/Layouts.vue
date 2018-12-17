@@ -4,10 +4,6 @@
 
 <script>
   export default {
-    components: {
-      NotFoundPage: () => import('@/pages/general/404Page.vue')
-    },
-
     props: {
       page: {
         type: String,
@@ -22,9 +18,9 @@
     created () {
       import(`@/examples/layouts/${this.page}.vue`)
         .then(res => (this.component = res.default))
-        .catch(err => {
-          console.warn(err)
-          this.component = 'NotFoundPage'
+        .catch(() => {
+          this.$router.push({ name: '404' })
+          throw new Error(`Unable to find layout for <${this.page}>`)
         })
     }
   }

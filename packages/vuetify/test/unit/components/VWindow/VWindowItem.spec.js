@@ -111,4 +111,30 @@ test('VWindowItem.ts', ({ mount }) => {
 
     expect(done).toHaveBeenCalledTimes(1)
   })
+
+  it('should immediately call done when no transition', async () => {
+    const done = jest.fn()
+
+    const wrapper = mount(VWindowItem, {
+      propsData: {
+        transition: false,
+        reverseTransition: false
+      },
+      data: {
+        windowGroup: {
+          internalHeight: 0,
+          register: () => {},
+          unregister: () => {}
+        }
+      }
+    })
+
+    expect(wrapper.vm.computedTransition).toBeFalsy()
+
+    wrapper.vm.onEnter(wrapper.$el, done)
+
+    await new Promise(resolve => requestAnimationFrame(resolve))
+
+    expect(done).toBeCalled()
+  })
 })

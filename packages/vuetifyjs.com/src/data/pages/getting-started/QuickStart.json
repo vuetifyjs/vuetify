@@ -230,6 +230,19 @@
           "lang": "ie11Text5"
         },
         {
+          "type": "alert",
+          "lang": "ie11Text5",
+          "value": "info"
+        },
+        {
+          "type": "markup",
+          "value": "js_transpileDependencies"
+        },
+        {
+          "type": "text",
+          "lang": "ie11Text6"
+        },
+        {
           "type": "markup",
           "value": "html_ie11"
         }

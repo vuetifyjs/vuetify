@@ -51,6 +51,10 @@ export default {
     menuProps: {
       type: VSelect.props.menuProps.type,
       default: () => defaultMenuProps
+    },
+    autoSelectFirst: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -205,7 +209,7 @@ export default {
       this.setMenuIndex(-1)
 
       this.$nextTick(() => {
-        this.setMenuIndex(val.length === 1 ? 0 : -1)
+        this.setMenuIndex(val.length > 0 && (val.length === 1 || this.autoSelectFirst) ? 0 : -1)
       })
     },
     onInternalSearchChanged (val) {
@@ -274,7 +278,7 @@ export default {
       VSelect.methods.clearableCallback.call(this)
     },
     genInput () {
-      const input = VTextField.methods.genInput.call(this)
+      const input = VTextField.options.methods.genInput.call(this)
 
       input.data.attrs.role = 'combobox'
       input.data.domProps.value = this.internalSearch

@@ -139,7 +139,7 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const [leftButton, rightButton] = wrapper.find('.v-date-picker-header button')
+    const [leftButton, rightButton] = wrapper.find('.v-date-picker-header button.v-btn')
 
     leftButton.trigger('click')
     expect(wrapper.vm.tableDate).toBe('2004')
@@ -156,7 +156,7 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const button = wrapper.find('.v-date-picker-header strong')[0]
+    const button = wrapper.find('.v-date-picker-header__value button')[0]
 
     button.trigger('click')
     expect(wrapper.vm.activePicker).toBe('YEAR')
@@ -202,5 +202,24 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
     const icons = wrapper.find('.v-date-picker-header .v-icon')
     expect(icons[0].element.textContent).toBe('block')
     expect(icons[1].element.textContent).toBe('check')
+  })
+
+  it('should emit click/dblclick:month event', async () => {
+    const wrapper = mount(VDatePicker, {
+      propsData: {
+        value: '2013-05',
+        type: 'month'
+      }
+    })
+
+    const click = jest.fn()
+    wrapper.vm.$on(`click:month`, click)
+    wrapper.find('.v-date-picker-table--month tbody tr+tr td:first-child button')[0].trigger('click')
+    expect(click).toBeCalledWith('2013-04')
+
+    const dblclick = jest.fn()
+    wrapper.vm.$on(`dblclick:month`, dblclick)
+    wrapper.find('.v-date-picker-table--month tbody tr+tr td:first-child button')[0].trigger('dblclick')
+    expect(dblclick).toBeCalledWith('2013-04')
   })
 })

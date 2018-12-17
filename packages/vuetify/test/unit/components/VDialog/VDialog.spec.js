@@ -213,4 +213,20 @@ test('VDialog.js', ({ mount, compileToFunctions }) => {
 
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
+
+  it('should not attach event handlers to the activator container if disabled', async () => {
+    const wrapper = mount(VDialog, {
+      propsData: {
+        disabled: true
+      },
+      slots: {
+        activator: [compileToFunctions('<button></button>')]
+      }
+    })
+
+    const activator = wrapper.find('.v-dialog__activator')[0]
+    expect(Object.keys(activator.vNode.data.on)).toHaveLength(0)
+
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
 })

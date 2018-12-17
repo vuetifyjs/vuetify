@@ -51,21 +51,28 @@ export function createRouter () {
             name: 'Documentation',
             props: route => ({
               namespace: route.params.namespace,
-              page: route.params.page
+              page: route.params.page,
+              lang: route.params.lang
             }),
             component: () => import(
               /* webpackChunkName: "documentation" */
               '@/pages/documentation/Page.vue'
             )
+          },
+          {
+            path: '404',
+            name: '404',
+            component: () => import('@/pages/general/404')
           }
         ]
       },
       {
         path: '*',
         redirect: to => {
-          let lang = getLanguageCookie() || 'en'
-          if (!languageRegex.test('/' + lang)) lang = 'en'
-          return `/${lang}${to.path}`
+          let lang = `/${getLanguageCookie() || 'en'}`
+          if (!languageRegex.test(lang)) lang = '/en'
+
+          return `${lang}/404`
         }
       }
     ]

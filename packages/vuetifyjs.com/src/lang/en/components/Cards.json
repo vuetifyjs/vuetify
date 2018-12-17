@@ -31,6 +31,14 @@
     "primaryTitle": "Applies primary title specific padding.",
     "raised": "Specifies a higher default elevation",
     "src": "The image to display as a background.",
-    "tile": "Turn the card into a tile by removing the border radius"
+    "tile": "Turn the card into a tile by removing the border radius",
+    "alt": "Components.Images.props.alt",
+    "aspectRatio": "Components.Images.props.aspectRatio",
+    "gradient": "Components.Images.props.gradient",
+    "lazySrc": "Components.Images.props.lazySrc",
+    "position": "Components.Images.props.position",
+    "sizes": "Components.Images.props.sizes",
+    "srcset": "Components.Images.props.srcset",
+    "transition": "Components.Images.props.transition"
   }
 }

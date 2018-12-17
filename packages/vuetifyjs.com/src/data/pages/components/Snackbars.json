@@ -38,7 +38,7 @@
           "type": "up-next",
           "value": [
             "components/buttons",
-            "style/colors",
+            "framework/colors",
             "components/forms"
           ]
         }

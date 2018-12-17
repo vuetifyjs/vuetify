@@ -11,9 +11,9 @@ exports[`VTreeView.ts should load children when expanding 1`] = `
         arrow_drop_down
       </i>
       <div class="v-treeview-node__content">
-        <label class="v-treeview-node__label">
+        <div class="v-treeview-node__label">
           Root
-        </label>
+        </div>
       </div>
     </div>
   </div>
@@ -32,18 +32,18 @@ exports[`VTreeView.ts should load children when expanding 2`] = `
         arrow_drop_down
       </i>
       <div class="v-treeview-node__content">
-        <label class="v-treeview-node__label">
+        <div class="v-treeview-node__label">
           Root
-        </label>
+        </div>
       </div>
     </div>
     <div class="v-treeview-node__children">
       <div class="v-treeview-node v-treeview-node--leaf">
         <div class="v-treeview-node__root">
           <div class="v-treeview-node__content">
-            <label class="v-treeview-node__label">
+            <div class="v-treeview-node__label">
               Child
-            </label>
+            </div>
           </div>
         </div>
       </div>
@@ -69,9 +69,9 @@ exports[`VTreeView.ts should load children when selecting, but not render 1`] = 
         check_box_outline_blank
       </i>
       <div class="v-treeview-node__content">
-        <label class="v-treeview-node__label">
+        <div class="v-treeview-node__label">
           Root
-        </label>
+        </div>
       </div>
     </div>
   </div>
@@ -95,9 +95,9 @@ exports[`VTreeView.ts should load children when selecting, but not render 2`] = 
         check_box
       </i>
       <div class="v-treeview-node__content">
-        <label class="v-treeview-node__label">
+        <div class="v-treeview-node__label">
           Root
-        </label>
+        </div>
       </div>
     </div>
   </div>
@@ -111,8 +111,8 @@ exports[`VTreeView.ts should not show expand icon when children is empty 1`] = `
   <div class="v-treeview-node v-treeview-node--leaf">
     <div class="v-treeview-node__root">
       <div class="v-treeview-node__content">
-        <label class="v-treeview-node__label">
-        </label>
+        <div class="v-treeview-node__label">
+        </div>
       </div>
     </div>
   </div>
@@ -131,9 +131,9 @@ exports[`VTreeView.ts should open all children when using open-all prop 1`] = `
         arrow_drop_down
       </i>
       <div class="v-treeview-node__content">
-        <label class="v-treeview-node__label">
+        <div class="v-treeview-node__label">
           Root
-        </label>
+        </div>
       </div>
     </div>
     <div class="v-treeview-node__children">
@@ -145,18 +145,18 @@ exports[`VTreeView.ts should open all children when using open-all prop 1`] = `
             arrow_drop_down
           </i>
           <div class="v-treeview-node__content">
-            <label class="v-treeview-node__label">
+            <div class="v-treeview-node__label">
               Child
-            </label>
+            </div>
           </div>
         </div>
         <div class="v-treeview-node__children">
           <div class="v-treeview-node v-treeview-node--leaf">
             <div class="v-treeview-node__root">
               <div class="v-treeview-node__content">
-                <label class="v-treeview-node__label">
+                <div class="v-treeview-node__label">
                   Grandchild
-                </label>
+                </div>
               </div>
             </div>
           </div>
@@ -165,9 +165,9 @@ exports[`VTreeView.ts should open all children when using open-all prop 1`] = `
       <div class="v-treeview-node v-treeview-node--leaf">
         <div class="v-treeview-node__root">
           <div class="v-treeview-node__content">
-            <label class="v-treeview-node__label">
+            <div class="v-treeview-node__label">
               Child
-            </label>
+            </div>
           </div>
         </div>
       </div>
@@ -188,9 +188,9 @@ exports[`VTreeView.ts should react to open changes 1`] = `
         arrow_drop_down
       </i>
       <div class="v-treeview-node__content">
-        <label class="v-treeview-node__label">
+        <div class="v-treeview-node__label">
           Root
-        </label>
+        </div>
       </div>
     </div>
     <div class="v-treeview-node__children">
@@ -202,18 +202,18 @@ exports[`VTreeView.ts should react to open changes 1`] = `
             arrow_drop_down
           </i>
           <div class="v-treeview-node__content">
-            <label class="v-treeview-node__label">
+            <div class="v-treeview-node__label">
               Child
-            </label>
+            </div>
           </div>
         </div>
         <div class="v-treeview-node__children">
           <div class="v-treeview-node v-treeview-node--leaf">
             <div class="v-treeview-node__root">
               <div class="v-treeview-node__content">
-                <label class="v-treeview-node__label">
+                <div class="v-treeview-node__label">
                   Grandchild
-                </label>
+                </div>
               </div>
             </div>
           </div>
@@ -222,9 +222,9 @@ exports[`VTreeView.ts should react to open changes 1`] = `
       <div class="v-treeview-node v-treeview-node--leaf">
         <div class="v-treeview-node__root">
           <div class="v-treeview-node__content">
-            <label class="v-treeview-node__label">
+            <div class="v-treeview-node__label">
               Child
-            </label>
+            </div>
           </div>
         </div>
       </div>
@@ -245,9 +245,9 @@ exports[`VTreeView.ts should react to open changes 2`] = `
         arrow_drop_down
       </i>
       <div class="v-treeview-node__content">
-        <label class="v-treeview-node__label">
+        <div class="v-treeview-node__label">
           Root
-        </label>
+        </div>
       </div>
     </div>
     <div class="v-treeview-node__children">
@@ -259,18 +259,18 @@ exports[`VTreeView.ts should react to open changes 2`] = `
             arrow_drop_down
           </i>
           <div class="v-treeview-node__content">
-            <label class="v-treeview-node__label">
+            <div class="v-treeview-node__label">
               Child
-            </label>
+            </div>
           </div>
         </div>
       </div>
       <div class="v-treeview-node v-treeview-node--leaf">
         <div class="v-treeview-node__root">
           <div class="v-treeview-node__content">
-            <label class="v-treeview-node__label">
+            <div class="v-treeview-node__label">
               Child
-            </label>
+            </div>
           </div>
         </div>
       </div>
@@ -291,9 +291,9 @@ exports[`VTreeView.ts should react to open changes 3`] = `
         arrow_drop_down
       </i>
       <div class="v-treeview-node__content">
-        <label class="v-treeview-node__label">
+        <div class="v-treeview-node__label">
           Root
-        </label>
+        </div>
       </div>
     </div>
     <div class="v-treeview-node__children">
@@ -305,18 +305,18 @@ exports[`VTreeView.ts should react to open changes 3`] = `
             arrow_drop_down
           </i>
           <div class="v-treeview-node__content">
-            <label class="v-treeview-node__label">
+            <div class="v-treeview-node__label">
               Child
-            </label>
+            </div>
           </div>
         </div>
         <div class="v-treeview-node__children">
           <div class="v-treeview-node v-treeview-node--leaf">
             <div class="v-treeview-node__root">
               <div class="v-treeview-node__content">
-                <label class="v-treeview-node__label">
+                <div class="v-treeview-node__label">
                   Grandchild
-                </label>
+                </div>
               </div>
             </div>
           </div>
@@ -325,9 +325,9 @@ exports[`VTreeView.ts should react to open changes 3`] = `
       <div class="v-treeview-node v-treeview-node--leaf">
         <div class="v-treeview-node__root">
           <div class="v-treeview-node__content">
-            <label class="v-treeview-node__label">
+            <div class="v-treeview-node__label">
               Child
-            </label>
+            </div>
           </div>
         </div>
       </div>
@@ -348,9 +348,9 @@ exports[`VTreeView.ts should react to open changes 4`] = `
         arrow_drop_down
       </i>
       <div class="v-treeview-node__content">
-        <label class="v-treeview-node__label">
+        <div class="v-treeview-node__label">
           Root
-        </label>
+        </div>
       </div>
     </div>
   </div>
@@ -369,9 +369,9 @@ exports[`VTreeView.ts should render items 1`] = `
         arrow_drop_down
       </i>
       <div class="v-treeview-node__content">
-        <label class="v-treeview-node__label">
+        <div class="v-treeview-node__label">
           Root
-        </label>
+        </div>
       </div>
     </div>
   </div>
@@ -395,9 +395,9 @@ exports[`VTreeView.ts should select all descendants 1`] = `
         check_box_outline_blank
       </i>
       <div class="v-treeview-node__content">
-        <label class="v-treeview-node__label">
+        <div class="v-treeview-node__label">
           Root
-        </label>
+        </div>
       </div>
     </div>
   </div>
@@ -416,8 +416,8 @@ exports[`VTreeView.ts should show expand icon when children is empty and load-ch
         arrow_drop_down
       </i>
       <div class="v-treeview-node__content">
-        <label class="v-treeview-node__label">
-        </label>
+        <div class="v-treeview-node__label">
+        </div>
       </div>
     </div>
   </div>
@@ -436,9 +436,9 @@ exports[`VTreeView.ts should update selection when selected prop changes 1`] = `
         arrow_drop_down
       </i>
       <div class="v-treeview-node__content">
-        <label class="v-treeview-node__label">
+        <div class="v-treeview-node__label">
           Root
-        </label>
+        </div>
       </div>
     </div>
   </div>
@@ -457,18 +457,18 @@ exports[`VTreeView.ts should update selection when selected prop changes 2`] = `
         arrow_drop_down
       </i>
       <div class="v-treeview-node__content">
-        <label class="v-treeview-node__label">
+        <div class="v-treeview-node__label">
           Root
-        </label>
+        </div>
       </div>
     </div>
     <div class="v-treeview-node__children">
       <div class="v-treeview-node v-treeview-node--leaf v-treeview-node--selected">
         <div class="v-treeview-node__root">
           <div class="v-treeview-node__content">
-            <label class="v-treeview-node__label">
+            <div class="v-treeview-node__label">
               Child
-            </label>
+            </div>
           </div>
         </div>
       </div>
@@ -489,18 +489,18 @@ exports[`VTreeView.ts should update selection when selected prop changes 3`] = `
         arrow_drop_down
       </i>
       <div class="v-treeview-node__content">
-        <label class="v-treeview-node__label">
+        <div class="v-treeview-node__label">
           Root
-        </label>
+        </div>
       </div>
     </div>
     <div class="v-treeview-node__children">
       <div class="v-treeview-node v-treeview-node--leaf v-treeview-node--selected">
         <div class="v-treeview-node__root">
           <div class="v-treeview-node__content">
-            <label class="v-treeview-node__label">
+            <div class="v-treeview-node__label">
               Child
-            </label>
+            </div>
           </div>
         </div>
       </div>

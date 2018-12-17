@@ -1,8 +1,8 @@
 <template>
   <v-app>
-    <v-fade-transition mode="out-in">
-      <router-view />
-    </v-fade-transition>
+    <router-view />
+
+    <core-toolbar v-if="hasToolbar" />
   </v-app>
 </template>
 
@@ -10,38 +10,29 @@
   import Meta from '@/mixins/meta'
 
   import {
-    mapMutations
+    mapMutations,
+    mapState
   } from 'vuex'
 
   export default {
     mixins: [Meta],
 
-    mounted () {
-      // this.getReleases()
-
-      // this.setSnackbar({
-      //   color: 'default',
-      //   close: true,
-      //   id: 'cyber-monday-sale',
-      //   text: 'Shop now',
-      //   msg: 'Happy Cyber Monday',
-      //   to: '/store/',
-      //   timeout: 0
-      // })
+    computed: {
+      ...mapState('route', ['name']),
+      hasToolbar () {
+        return this.name !== 'Layouts'
+      }
     },
 
     methods: {
       ...mapMutations('app', ['setReleases']),
-      ...mapMutations('snackbar', ['setSnackbar']),
-      getReleases () {
-        fetch('/releases/releases.json')
-          .then(res => res.json())
-          .then(({ data }) => {
-            this.setReleases(data)
-          }).catch(err => {
-            console.log(err)
-          })
-      }
+      ...mapMutations('snackbar', ['setSnackbar'])
     }
   }
 </script>
+
+<style>
+  .wf-loading .material-icons {
+    display: none;
+  }
+</style>

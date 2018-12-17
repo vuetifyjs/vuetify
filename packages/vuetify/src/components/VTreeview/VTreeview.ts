@@ -327,7 +327,7 @@ export default mixins(
     const children: VNodeChildrenArrayContents = this.items.length
       ? this.items.map(VTreeviewNode.options.methods.genChild.bind(this))
       /* istanbul ignore next */
-      : this.$slots.default
+      : this.$slots.default! // TODO: remove type annotation with TS 3.2
 
     return h('div', {
       staticClass: 'v-treeview',

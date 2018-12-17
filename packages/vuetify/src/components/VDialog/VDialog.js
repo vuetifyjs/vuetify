@@ -179,7 +179,7 @@ export default {
     genActivator () {
       if (!this.$slots.activator && !this.$scopedSlots.activator) return null
 
-      const listeners = {
+      const listeners = this.disabled ? {} : {
         click: e => {
           e.stopPropagation()
           if (!this.disabled) this.isActive = !this.isActive

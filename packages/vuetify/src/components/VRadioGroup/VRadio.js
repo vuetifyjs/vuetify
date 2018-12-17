@@ -95,7 +95,7 @@ export default {
       // We can't actually use the mixin directly because
       // it's made for standalone components, but its
       // genInput method is exactly what we need
-      return Selectable.methods.genInput.call(this, ...args)
+      return Selectable.options.methods.genInput.call(this, ...args)
     },
     genLabel () {
       return this.$createElement(VLabel, {

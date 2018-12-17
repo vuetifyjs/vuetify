@@ -1,6 +1,7 @@
 <template>
   <v-navigation-drawer
     v-model="inputValue"
+    clipped
     app
   >
     <v-container
@@ -24,7 +25,7 @@
           key="search"
           ref="search"
           v-model="search"
-          placeholder="Search"
+          label="Search"
           append-icon="search"
           clearable
           hide-details
@@ -205,6 +206,16 @@
   .algolia-autocomplete
     flex: 1 1 auto
 
+  .v-chip--x-small
+    font-family: 'Roboto', sans-serif
+    font-size: 10px
+    font-weight: 400 !important
+    height: 16px
+
+    .v-chip__content
+      line-height: 1
+      padding: 8px
+
   #search
     width: 100%
 
@@ -220,14 +231,6 @@
   #app-drawer
     img.logo
       margin 40px 0 15px
-
-    .v-chip--x-small
-      font-size: 10px
-      height: 16px
-
-      .v-chip__content
-        line-height: 1
-        padding: 8px
 
     .diamond-sponsor
       // todo trim down actual image file dimensions

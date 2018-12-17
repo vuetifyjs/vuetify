@@ -6,11 +6,13 @@ export default {
 
       const listeners = {}
 
-      if (this.openOnHover) {
-        listeners.mouseenter = this.mouseEnterHandler
-        listeners.mouseleave = this.mouseLeaveHandler
-      } else if (this.openOnClick) {
-        listeners.click = this.activatorClickHandler
+      if (!this.disabled) {
+        if (this.openOnHover) {
+          listeners.mouseenter = this.mouseEnterHandler
+          listeners.mouseleave = this.mouseLeaveHandler
+        } else if (this.openOnClick) {
+          listeners.click = this.activatorClickHandler
+        }
       }
 
       if (this.$scopedSlots.activator) {

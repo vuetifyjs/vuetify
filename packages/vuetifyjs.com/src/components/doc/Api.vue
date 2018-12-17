@@ -74,6 +74,21 @@
   // Utilities
   import api from '@vuetify/api-generator'
 
+  const propProps = [
+    {
+      value: 'name',
+      class: 'xs6 sm3 lg2'
+    },
+    {
+      value: 'default',
+      class: 'xs6 sm3 text-xs-right'
+    },
+    {
+      value: 'type',
+      class: 'xs6 ml-auto sm4 text-sm-right'
+    }
+  ]
+
   export default {
     props: {
       value: {
@@ -85,44 +100,59 @@
     data: vm => ({
       current: vm.value && vm.value.length ? vm.value[0] : null,
       headers: {
-        api: [
-          { value: 'name', align: 'left', size: 3 },
-          { value: 'default', align: 'left', size: 6 },
-          { value: 'type', align: 'right', size: 3 }
-        ],
-        props: [
-          { value: 'name', align: 'left', size: 3 },
-          { value: 'default', align: 'left', size: 6 },
-          { value: 'type', align: 'right', size: 3 }
-        ],
+        api: [...propProps],
+        props: [...propProps],
         slots: [
-          { value: 'name', align: 'left' }
+          {
+            value: 'name',
+            class: 'left'
+          }
         ],
         scopedSlots: [
-          { value: 'name', align: 'left', size: 3 },
-          { value: 'props', align: 'right', size: 9 }
+          {
+            value: 'name',
+            class: 'xs3'
+          },
+          {
+            value: 'props',
+            class: 'xs9'
+          }
         ],
         events: [
-          { value: 'name', align: 'left' },
-          { value: 'value', align: 'right' }
+          {
+            value: 'name',
+            class: ''
+          },
+          {
+            value: 'value',
+            class: 'text-xs-right'
+          }
         ],
         functions: [
-          { value: 'name', align: 'left' },
-          { value: 'signature', align: 'right' }
+          {
+            value: 'name',
+            class: ''
+          },
+          {
+            value: 'signature',
+            class: 'text-xs-right'
+          }
         ],
         functional: [
-          { value: 'name', align: 'left' },
-          { value: 'description', align: 'left' }
+          {
+            value: 'name',
+            class: ''
+          },
+          {
+            value: 'description',
+            class: 'text-xs-right'
+          }
         ],
-        options: [
-          { value: 'name', align: 'left', size: 3 },
-          { value: 'default', align: 'left', size: 3 },
-          { value: 'type', align: 'right' }
-        ]
+        options: [...propProps]
       },
       search: null,
       tab: null,
-      tabs: ['props', 'slots', 'scopedSlots', 'params', 'events', 'functions', 'functional', 'options']
+      tabs: ['api', 'props', 'slots', 'scopedSlots', 'params', 'events', 'functions', 'functional', 'options']
     }),
 
     computed: {

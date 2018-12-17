@@ -90,7 +90,7 @@ export default mixins(Colorable, Toggleable, Transitionable).extend({
       directives: [{
         name: 'show',
         value: this.isActive
-      }] as any,
+      }],
       on: this.$listeners
     }), children)
 

@@ -6,6 +6,7 @@
     :target="href ? '_blank' : undefined"
     color="primary"
     outline
+    rel="noopener"
     v-on="$listeners"
   >
     <span class="caption font-weight-bold">

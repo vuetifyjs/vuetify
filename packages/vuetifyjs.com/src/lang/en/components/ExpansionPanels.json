@@ -27,6 +27,10 @@
       "header": "### Custom icon",
       "desc": "Expand action icon can be customized with `expand-icon` prop."
     },
+    "iconSlot": {
+      "header": "### Icon slot",
+      "desc": "Expand action icon can be customized using `actions` slot."
+    },
     "focusable": {
       "header": "### Focusable",
       "desc": "The expansion-panel headers can be made focusable with the prop `focusable`.",
