@@ -3,9 +3,7 @@
     id="page"
     fluid
   >
-    <not-found-page v-if="structure === false" />
-
-    <template v-else-if="structure">
+    <template v-if="structure">
       <doc-heading>
         {{ structure.title }}
       </doc-heading>
@@ -44,14 +42,9 @@
   import kebabCase from 'lodash/kebabCase'
   import camelCase from 'lodash/camelCase'
   import upperFirst from 'lodash/upperFirst'
-  import NotFoundPage from '@/pages/general/404Page.vue'
 
   // TODO: This is where 404 redirect will occur
   export default {
-    components: {
-      NotFoundPage
-    },
-
     provide () {
       return {
         namespace: upperFirst(camelCase(this.namespace)),
@@ -103,6 +96,7 @@
       }).catch(() => {
         // Add 404
         this.structure = false
+        this.$router.push({ name: '404' })
         throw new Error(`Unable to find page for <${namespace}/${page}>`)
       })
     },

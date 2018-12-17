@@ -7,7 +7,7 @@ export default {
 
   computed: {
     title () {
-      return this.meta.title || 'Vue Component Framework'
+      return this.meta.title
     },
     description () {
       return this.meta.description
@@ -60,7 +60,7 @@ export default {
       const lang = this.$route.path.split('/')[1]
       const meta = this.$i18n.getLocaleMessage(lang).Meta || {}
 
-      this.meta = meta[path] || this.getFallbackMeta(path) || {}
+      this.meta = meta[path] || this.getFallbackMeta(path) || meta['']
     },
     getFallbackMeta (path) {
       const fallbackmeta = this.$i18n.getLocaleMessage('en').Meta
