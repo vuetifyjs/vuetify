@@ -193,6 +193,11 @@ export default {
       ) this.activateMenu()
     },
     searchInput (val) {
+      if (val && val.length === 0) {
+        this.lazySearch = undefined
+        this.setMenuIndex(-1)
+        return
+      }
       this.lazySearch = val
     },
     internalSearch (val) {
