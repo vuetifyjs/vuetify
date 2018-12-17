@@ -58,13 +58,13 @@ export default {
 
       if (this.top || this.bottom || unknown) {
         left = (
-          activator.left +
+          activator.offsetLeft +
           (activator.width / 2) -
           (content.width / 2)
         )
       } else if (this.left || this.right) {
         left = (
-          activator.left +
+          activator.offsetLeft +
           (this.right ? activator.width : -content.width) +
           (this.right ? 10 : -10)
         )
@@ -77,17 +77,18 @@ export default {
     },
     calculatedTop () {
       const { activator, content } = this.dimensions
+      const activatorTop = this.isAttached ? activator.offsetTop : activator.top
       let top = 0
 
       if (this.top || this.bottom) {
         top = (
-          activator.top +
+          activatorTop +
           (this.bottom ? activator.height : -content.height) +
           (this.bottom ? 10 : -10)
         )
       } else if (this.left || this.right) {
         top = (
-          activator.top +
+          activatorTop +
           (activator.height / 2) -
           (content.height / 2)
         )
