@@ -107,11 +107,11 @@ export default Vue.extend({
     computedLeft () {
       const a = this.dimensions.activator
       const c = this.dimensions.content
-      const minWidth = a.width < c.width ? c.width : a.width
+      const minWidth = Math.max(a.width, c.width)
       let left = 0
 
-      left += this.left ? a.left - (minWidth - a.width) : a.left
-
+      if (this.left) left += a.left - (minWidth - a.width)
+      if (this.isAttached) left += a.offsetLeft
       if (this.offsetX) left += this.left ? -a.width : a.width
       if (this.nudgeLeft) left -= parseInt(this.nudgeLeft)
       if (this.nudgeRight) left += parseInt(this.nudgeRight)
@@ -121,14 +121,12 @@ export default Vue.extend({
     computedTop () {
       const a = this.dimensions.activator
       const c = this.dimensions.content
-      let top = this.top ? a.bottom - c.height : a.top
+      let top = 0
 
+      if (this.top) top += a.bottom - c.height
       if (!this.isAttached) top += this.pageYOffset
-      if (this.offsetY) {
-        top += this.top
-          ? -a.height
-          : a.height + a.offsetTop
-      }
+      else top += a.offsetTop
+      if (this.offsetY) top += this.top ? -a.height : a.height
       if (this.nudgeTop) top -= parseInt(this.nudgeTop)
       if (this.nudgeBottom) top += parseInt(this.nudgeBottom)
 
@@ -161,6 +159,7 @@ export default Vue.extend({
     absolutePosition () {
       return {
         offsetTop: 0,
+        offsetLeft: 0,
         scrollHeight: 0,
         top: this.positionY || this.absoluteY,
         bottom: this.positionY || this.absoluteY,
@@ -362,10 +361,13 @@ export default Vue.extend({
       } else {
         const activator = this.getActivator()
         dimensions.activator = this.measure(activator)
-        if (this.isAttached && this.$attachTarget && this.$attachTarget.contains(activator)) {
+        dimensions.activator.offsetLeft = activator.offsetLeft
+        if (this.isAttached) {
           // account for css padding causing things to not line up
           // this is mostly for v-autocomplete, hopefully it won't break anything
           dimensions.activator.offsetTop = activator.offsetTop
+        } else {
+          dimensions.activator.offsetTop = 0
         }
       }
 

@@ -93,8 +93,6 @@ export default {
         target = this.attach
       }
 
-      this.$attachTarget = target
-
       if (!target) {
         consoleWarn(`Unable to locate target ${this.attach || '[data-app]'}`, this)
         return
