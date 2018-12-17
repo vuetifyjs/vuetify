@@ -261,7 +261,7 @@
     right: 0
     padding: 15px
     font-size: 12px
-    color: rgba(#fff, .12)
+    color: rgba(#fff, .56)
 
   .component-example
     // margin-bottom: 32px
