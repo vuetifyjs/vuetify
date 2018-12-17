@@ -25,8 +25,9 @@
         <v-icon>mdi-codepen</v-icon>
       </v-btn>
       <v-btn
-        :href="`https://github.com/vuetifyjs/vuetifyjs.com/tree/master/src/examples/${file}.vue`"
+        :href="`https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetifyjs.com/src/examples/${file}.vue`"
         icon
+        target="_blank"
       >
         <v-icon>mdi-github-circle</v-icon>
       </v-btn>
