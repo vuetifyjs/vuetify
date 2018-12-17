@@ -112,6 +112,7 @@ export default Vue.extend({
 
       if (this.left) left += a.left - (minWidth - a.width)
       if (this.isAttached) left += a.offsetLeft
+      else left += a.left
       if (this.offsetX) left += this.left ? -a.width : a.width
       if (this.nudgeLeft) left -= parseInt(this.nudgeLeft)
       if (this.nudgeRight) left += parseInt(this.nudgeRight)
@@ -124,8 +125,8 @@ export default Vue.extend({
       let top = 0
 
       if (this.top) top += a.bottom - c.height
-      if (!this.isAttached) top += this.pageYOffset
-      else top += a.offsetTop
+      if (this.isAttached) top += a.offsetTop
+      else top += a.top + this.pageYOffset
       if (this.offsetY) top += this.top ? -a.height : a.height
       if (this.nudgeTop) top -= parseInt(this.nudgeTop)
       if (this.nudgeBottom) top += parseInt(this.nudgeBottom)
