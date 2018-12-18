@@ -110,9 +110,8 @@ export default Vue.extend({
       const minWidth = Math.max(a.width, c.width)
       let left = 0
 
-      if (this.left) left += a.left - (minWidth - a.width)
       if (this.isAttached) left += a.offsetLeft
-      else left += a.left
+      else left += this.left ? a.left - (minWidth - a.width) : a.left
       if (this.offsetX) left += this.left ? -a.width : a.width
       if (this.nudgeLeft) left -= parseInt(this.nudgeLeft)
       if (this.nudgeRight) left += parseInt(this.nudgeRight)
@@ -124,7 +123,7 @@ export default Vue.extend({
       const c = this.dimensions.content
       let top = 0
 
-      if (this.top) top += a.bottom - c.height
+      if (this.top) top += a.height - c.height
       if (this.isAttached) top += a.offsetTop
       else top += a.top + this.pageYOffset
       if (this.offsetY) top += this.top ? -a.height : a.height
