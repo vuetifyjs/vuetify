@@ -2,28 +2,38 @@
 export default {
   methods: {
     genActivator () {
-      if (!this.$slots.activator) return null
+      if (!this.$slots.activator && !this.$scopedSlots.activator) return null
 
-      const options = {
-        staticClass: 'v-menu__activator',
-        'class': {
-          'v-menu__activator--active': this.hasJustFocused || this.isActive,
-          'v-menu__activator--disabled': this.disabled
-        },
-        ref: 'activator',
-        on: {}
-      }
+      const listeners = {}
 
       if (!this.disabled) {
         if (this.openOnHover) {
-          options.on['mouseenter'] = this.mouseEnterHandler
-          options.on['mouseleave'] = this.mouseLeaveHandler
+          listeners.mouseenter = this.mouseEnterHandler
+          listeners.mouseleave = this.mouseLeaveHandler
         } else if (this.openOnClick) {
-          options.on['click'] = this.activatorClickHandler
+          listeners.click = this.activatorClickHandler
         }
       }
 
-      return this.$createElement('div', options, this.$slots.activator)
+      if (this.$scopedSlots.activator) {
+        const activator = this.$scopedSlots.activator({ on: listeners })
+        this.activatorNode = activator
+        return activator
+      }
+
+      if (this.$slots.activator) {
+        const options = {
+          staticClass: 'v-menu__activator',
+          'class': {
+            'v-menu__activator--active': this.hasJustFocused || this.isActive,
+            'v-menu__activator--disabled': this.disabled
+          },
+          ref: 'activator',
+          on: listeners
+        }
+
+        return this.$createElement('div', options, this.$slots.activator)
+      }
     },
 
     genTransition () {
