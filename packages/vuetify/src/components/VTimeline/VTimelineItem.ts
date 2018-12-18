@@ -77,6 +77,9 @@ export default mixins(
       return this.$createElement('div', {
         staticClass: 'v-timeline-item__opposite'
       }, this.$slots.opposite)
+    },
+    onMouseEnter (e: MouseEvent) {
+      this.$emit('hover', e)
     }
   },
 
@@ -93,6 +96,9 @@ export default mixins(
         'v-timeline-item--left': this.left,
         'v-timeline-item--right': this.right,
         ...this.themeClasses
+      },
+      on: {
+        mouseenter: this.onMouseEnter
       }
     }, children)
   }
