@@ -107,11 +107,11 @@ export default Vue.extend({
     computedLeft () {
       const a = this.dimensions.activator
       const c = this.dimensions.content
+      const activatorLeft = this.isAttached ? a.offsetLeft : a.left
       const minWidth = Math.max(a.width, c.width)
       let left = 0
 
-      if (this.isAttached) left += a.offsetLeft
-      else left += this.left ? a.left - (minWidth - a.width) : a.left
+      left += this.left ? activatorLeft - (minWidth - a.width) : activatorLeft
       if (this.offsetX) left += this.left ? -a.width : a.width
       if (this.nudgeLeft) left -= parseInt(this.nudgeLeft)
       if (this.nudgeRight) left += parseInt(this.nudgeRight)
