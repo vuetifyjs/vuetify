@@ -29,26 +29,6 @@ test('VMenu.js', ({ mount, compileToFunctions }) => {
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
-  it('should close menu when tab is pressed', async () => {
-    const wrapper = mount(VMenu)
-
-    wrapper.vm.isActive = true
-    await wrapper.vm.$nextTick()
-    wrapper.trigger(`keydown.tab`)
-    await wrapper.vm.$nextTick()
-    expect(wrapper.vm.isActive).toBe(false)
-
-    wrapper.setProps({ disableKeys: true })
-    wrapper.vm.isActive = true
-    await wrapper.vm.$nextTick()
-    expect(wrapper.vm.isActive).toBe(true)
-    wrapper.trigger(`keydown.tab`)
-    await wrapper.vm.$nextTick()
-    expect(wrapper.vm.isActive).toBe(true)
-
-    expect('Unable to locate target [data-app]').toHaveBeenTipped()
-  })
-
   it('should render component with custom top and match snapshot', () => {
     const wrapper = mount(VMenu, {
       propsData: {
@@ -406,6 +386,26 @@ test('VMenu.js', ({ mount, compileToFunctions }) => {
 
     wrapper.setProps({ openOnHover: true })
     expect(Object.keys(wrapper.find('.v-menu__activator')[0].vNode.data.on)).toHaveLength(0)
+
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should close menu when tab is pressed', async () => {
+    const wrapper = mount(VMenu)
+
+    wrapper.vm.isActive = true
+    await wrapper.vm.$nextTick()
+    wrapper.trigger(`keydown.tab`)
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isActive).toBe(false)
+
+    wrapper.setProps({ disableKeys: true })
+    wrapper.vm.isActive = true
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isActive).toBe(true)
+    wrapper.trigger(`keydown.tab`)
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isActive).toBe(true)
 
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
