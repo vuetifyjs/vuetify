@@ -37,11 +37,14 @@ test('validatable.js', ({ mount }) => {
 
   it('should reset valid flag on resetValidation', () => {
     const wrapper = mount(Mock, {
-      data: {
-        valid: true
+      propsData: {
+        rules: [() => false]
       }
     })
 
+    expect(wrapper.vm.valid).toBe(false)
+
+    wrapper.setData({ valid: true })
     expect(wrapper.vm.valid).toBe(true)
 
     wrapper.vm.resetValidation()
