@@ -15,6 +15,11 @@
         >Copied</span>
       </v-slide-x-transition>
     </div>
+    <div
+      v-if="filename"
+      class="v-markup__filename"
+      v-text="value"
+    />
   </div>
 </template>
 
@@ -43,6 +48,10 @@
       value: {
         type: String,
         default: 'markup'
+      },
+      filename: {
+        type: Boolean,
+        default: process.env.NODE_ENV === 'development'
       }
     },
 
@@ -120,6 +129,21 @@
       position: absolute
       top: 12px
       right: 50px
+
+    &__filename
+      position: absolute
+      bottom: 0
+      right: 0
+      padding: 8px
+      font-size: 12px
+      color: rgba(#fff, .56)
+
+      &__top
+        position: absolute
+        right: 0
+        padding: 15px
+        font-size: 12px
+        color: rgba(#fff, .56)
 
     &__copy
       position: absolute
