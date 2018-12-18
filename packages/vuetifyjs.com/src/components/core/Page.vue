@@ -25,12 +25,9 @@
 
       <div>
         Caught a mistake? Want to Contribute to this page or the docs as a whole?
-        Consider checking out the
-        <a href="../getting-started/contributing">Contribution Guide</a>
-        or <a
-          :href="contributionFooter.link"
-          v-text="contributionFooter.text"
-        />
+        Consider checking out the <span v-html="contributionGuide" />
+        or
+        <span v-html="contributionGithub" />
       </div>
     </template>
   </v-container>
@@ -38,7 +35,7 @@
 
 <script>
   // Utilities
-  import { getComponent } from '@/util/helpers'
+  import { getComponent, parseLink } from '@/util/helpers'
   import kebabCase from 'lodash/kebabCase'
   import camelCase from 'lodash/camelCase'
   import upperFirst from 'lodash/upperFirst'
@@ -76,11 +73,14 @@
       composite () {
         return `${this.namespace}-${this.page}`
       },
-      contributionFooter () {
-        return {
-          text: 'edit this page on Github',
-          link: `https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetifyjs.com/src/lang/${this.lang}/${this.namespace}/${upperFirst(camelCase(this.page))}.json`
-        }
+      contributionLink () {
+        return `https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetifyjs.com/src/lang/${this.lang}/${this.namespace}/${upperFirst(camelCase(this.page))}.json`
+      },
+      contributionGuide () {
+        return this.parseLink('', 'Contribution Guide', '/getting-started/contributing')
+      },
+      contributionGithub () {
+        return this.parseLink('', 'edit this page on Github', this.contributionLink)
       }
     },
 
@@ -129,8 +129,9 @@
       onInternalClick (e) {
         e.preventDefault()
 
-        this.$router.push(e.target.getAttribute('href'))
-      }
+        this.$router.push(`/${this.lang}${e.target.getAttribute('href')}`)
+      },
+      parseLink
     }
   }
 </script>
