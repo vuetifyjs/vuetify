@@ -103,7 +103,7 @@ export default mixins<options &
       }, this.showLazyContent(this.$slots.default))
     },
     genHeader () {
-      const children = [...this.$slots.header]
+      const children = [...(this.$slots.header || [])]
 
       if (!this.hideActions) children.push(this.genIcon())
 
