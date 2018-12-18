@@ -39,4 +39,15 @@ test('VTimelineItem.js', ({ mount }) => {
       }
     }).html())
   })
+
+  it('should emit hover event', () => {
+    const hover = jest.fn()
+    const wrapper = mount(VTimelineItem)
+
+    wrapper.vm.$on('hover', hover)
+    expect(hover).toHaveBeenCalledTimes(0)
+
+    wrapper.trigger('mouseenter')
+    expect(hover).toHaveBeenCalledTimes(1)
+  })
 })
