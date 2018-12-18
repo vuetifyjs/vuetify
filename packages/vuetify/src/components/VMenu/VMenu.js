@@ -166,14 +166,6 @@ export default Vue.extend({
     }
   },
 
-  beforeMount () {
-    this.$nextTick(() => {
-      if (this.activatorNode && this.activatorNode.elm) {
-        this.$el.parentNode.insertBefore(this.activatorNode.elm, this.$el)
-      }
-    })
-  },
-
   methods: {
     activate () {
       // This exists primarily for v-select
