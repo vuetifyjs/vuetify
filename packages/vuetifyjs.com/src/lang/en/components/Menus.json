@@ -41,6 +41,7 @@
     "closeOnClick": "Designates if menu should close on outside-activator click",
     "closeOnContentClick": "Designates if menu should close when its content is clicked",
     "disabled": "Disables the menu",
+    "disableKeys": "Removes all keyboard interaction",
     "offsetX": "Offset the menu on the x-axis. Works in conjunction with direction left/right",
     "offsetY": "Offset the menu on the y-axis. Works in conjunction with direction top/bottom",
     "openOnClick": "Designates whether menu should open on activator click",

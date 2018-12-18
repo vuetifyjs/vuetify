@@ -1,4 +1,5 @@
 import { test } from '@/test'
+import { keyCodes } from '@/util/helpers'
 import VAutocomplete from '@/components/VAutocomplete'
 
 test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
@@ -248,46 +249,46 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
     expect(wrapper.vm.selectedItems.length).toBe(3)
 
     // Right arrow
-    wrapper.vm.changeSelectedIndex(39)
+    wrapper.vm.changeSelectedIndex(keyCodes.right)
     expect(wrapper.vm.selectedIndex).toBe(0)
 
-    wrapper.vm.changeSelectedIndex(39)
+    wrapper.vm.changeSelectedIndex(keyCodes.right)
     expect(wrapper.vm.selectedIndex).toBe(1)
 
-    wrapper.vm.changeSelectedIndex(39)
+    wrapper.vm.changeSelectedIndex(keyCodes.right)
     expect(wrapper.vm.selectedIndex).toBe(2)
 
     // Left arrow
-    wrapper.vm.changeSelectedIndex(37)
+    wrapper.vm.changeSelectedIndex(keyCodes.left)
     expect(wrapper.vm.selectedIndex).toBe(1)
 
-    wrapper.vm.changeSelectedIndex(37)
+    wrapper.vm.changeSelectedIndex(keyCodes.left)
     expect(wrapper.vm.selectedIndex).toBe(0)
 
-    wrapper.vm.changeSelectedIndex(37)
+    wrapper.vm.changeSelectedIndex(keyCodes.left)
     expect(wrapper.vm.selectedIndex).toBe(-1)
 
-    wrapper.vm.changeSelectedIndex(37)
+    wrapper.vm.changeSelectedIndex(keyCodes.left)
     expect(wrapper.vm.selectedIndex).toBe(2)
 
-    wrapper.vm.changeSelectedIndex(37)
+    wrapper.vm.changeSelectedIndex(keyCodes.left)
     expect(wrapper.vm.selectedIndex).toBe(1)
 
     // Delete key
-    wrapper.vm.changeSelectedIndex(8)
+    wrapper.vm.changeSelectedIndex(keyCodes.backspace)
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.selectedIndex).toBe(1)
 
-    wrapper.vm.changeSelectedIndex(37)
+    wrapper.vm.changeSelectedIndex(keyCodes.left)
     expect(wrapper.vm.selectedIndex).toBe(0)
 
-    wrapper.vm.changeSelectedIndex(8)
+    wrapper.vm.changeSelectedIndex(keyCodes.backspace)
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.selectedIndex).toBe(0)
 
     // Should not change index if search is dirty
     wrapper.setProps({ searchInput: 'foo' })
-    wrapper.vm.changeSelectedIndex(8)
+    wrapper.vm.changeSelectedIndex(keyCodes.backspace)
 
     expect(wrapper.vm.selectedIndex).toBe(0)
     expect(wrapper.vm.selectedItems.length).toBe(1)
@@ -301,14 +302,14 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
     expect(wrapper.vm.selectedIndex).toBe(0)
     expect(wrapper.vm.selectedItems.length).toBe(1)
 
-    wrapper.vm.changeSelectedIndex(8)
+    wrapper.vm.changeSelectedIndex(keyCodes.backspace)
     await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.selectedItems.length).toBe(0)
     expect(wrapper.vm.selectedIndex).toBe(-1)
 
     // Should not change/error if called with no selection
-    wrapper.vm.changeSelectedIndex(8)
+    wrapper.vm.changeSelectedIndex(keyCodes.backspace)
     await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.selectedIndex).toBe(-1)
@@ -329,7 +330,7 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
     expect(wrapper.vm.selectedIndex).toBe(2)
 
     // Backspace
-    wrapper.vm.changeSelectedIndex(46)
+    wrapper.vm.changeSelectedIndex(keyCodes.delete)
     expect(wrapper.vm.selectedIndex).toBe(-1)
   })
 

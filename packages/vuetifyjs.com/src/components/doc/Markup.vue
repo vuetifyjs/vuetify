@@ -47,7 +47,7 @@
       },
       value: {
         type: String,
-        default: null
+        default: 'markup'
       }
     },
 

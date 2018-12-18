@@ -6,7 +6,8 @@ exports[`VParallax.js should render 1`] = `
      style="height: 500px;"
 >
   <div class="v-parallax__image-container">
-    <img class="v-parallax__image"
+    <img alt
+         class="v-parallax__image"
          style="display: block; opacity: 0;"
     >
   </div>
@@ -23,6 +24,23 @@ exports[`VParallax.js should use alt tag when supplied 1`] = `
 >
   <div class="v-parallax__image-container">
     <img alt="name"
+         class="v-parallax__image"
+         style="display: block; opacity: 0;"
+    >
+  </div>
+  <div class="v-parallax__content">
+  </div>
+</div>
+
+`;
+
+exports[`VParallax.js should use empty alt tag when not supplied 1`] = `
+
+<div class="v-parallax"
+     style="height: 500px;"
+>
+  <div class="v-parallax__image-container">
+    <img alt
          class="v-parallax__image"
          style="display: block; opacity: 0;"
     >

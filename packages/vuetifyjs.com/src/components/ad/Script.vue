@@ -38,7 +38,8 @@
 
         if (this.scriptId) script.id = this.scriptId
 
-        this.$el.append(script)
+        if (this.$el) this.$el.append(script)
+        else console.warn('%cPlease consider allowing ads, we\'ve gotta eat too :(', 'font-size: 24px')
       }, 300)
     },
 

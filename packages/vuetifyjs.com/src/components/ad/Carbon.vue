@@ -17,7 +17,7 @@
 
     methods: {
       serve () {
-        window._carbonads.refresh()
+        window._carbonads && window._carbonads.refresh()
       }
     }
   }

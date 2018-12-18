@@ -38,6 +38,14 @@ export default {
     hasContent: 'initDetach'
   },
 
+  beforeMount () {
+    this.$nextTick(() => {
+      if (this.activatorNode && this.activatorNode.elm) {
+        this.$el.parentNode.insertBefore(this.activatorNode.elm, this.$el)
+      }
+    })
+  },
+
   mounted () {
     !this.lazy && this.initDetach()
   },
