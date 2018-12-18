@@ -1,4 +1,5 @@
 import { test } from '@/test'
+import { keyCodes } from '@/util/helpers'
 import VTextarea from '@/components/VTextarea'
 import Vue from 'vue'
 
@@ -67,7 +68,7 @@ test('VTextarea.vue', ({ mount }) => {
 
     const stopPropagation = jest.fn()
     const onKeyDown = {
-      keyCode: 13,
+      keyCode: keyCodes.enter,
       stopPropagation
    }
     wrapper.vm.onKeyDown(onKeyDown)

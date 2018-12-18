@@ -45,6 +45,23 @@
           "value": "ts_breakpoint_example1"
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "lang": "customizeThresholdsHeader"
+        },
+        {
+          "type": "text",
+          "lang": "customizeThresholdsText1"
+        },
+        {
+          "type": "markup",
+          "value": "js_breakpoint_example3"
+        }
+      ]
     }
   ]
 }

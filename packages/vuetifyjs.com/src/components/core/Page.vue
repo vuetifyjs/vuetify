@@ -23,19 +23,14 @@
         :value="child"
       />
 
-      <div>
-        Caught a mistake? Want to Contribute to this page or the docs as a whole?
-        Consider checking out the <span v-html="contributionGuide" />
-        or
-        <span v-html="contributionGithub" />
-      </div>
+      <doc-contribution />
     </template>
   </v-container>
 </template>
 
 <script>
   // Utilities
-  import { getComponent, parseLink } from '@/util/helpers'
+  import { getComponent } from '@/util/helpers'
   import kebabCase from 'lodash/kebabCase'
   import camelCase from 'lodash/camelCase'
   import upperFirst from 'lodash/upperFirst'
@@ -45,6 +40,7 @@
     provide () {
       return {
         namespace: upperFirst(camelCase(this.namespace)),
+        lang: this.lang,
         page: upperFirst(camelCase(this.page))
       }
     },
@@ -72,15 +68,6 @@
     computed: {
       composite () {
         return `${this.namespace}-${this.page}`
-      },
-      contributionLink () {
-        return `https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetifyjs.com/src/lang/${this.lang}/${this.namespace}/${upperFirst(camelCase(this.page))}.json`
-      },
-      contributionGuide () {
-        return this.parseLink('', 'Contribution Guide', '/getting-started/contributing')
-      },
-      contributionGithub () {
-        return this.parseLink('', 'edit this page on Github', this.contributionLink)
       }
     },
 
@@ -130,8 +117,7 @@
         e.preventDefault()
 
         this.$router.push(`/${this.lang}${e.target.getAttribute('href')}`)
-      },
-      parseLink
+      }
     }
   }
 </script>
