@@ -47,10 +47,10 @@
       this.snackbar({
         color: 'default',
         close: true,
-        id: 'cognito-module-release',
+        id: '1.4-beta',
         text: 'Go to Docs',
-        msg: '🎉 **NEW**: Vuetify Vuex Cognito Module',
-        href: 'https://cognito.vuetifyjs.com',
+        msg: '🎉 **1.4** — The next version of Vuetify is now in beta',
+        href: 'https://next.vuetifyjs.com',
         timeout: 0
       })
     },
