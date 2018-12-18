@@ -814,4 +814,15 @@ test('VAutocomplete.js', ({ mount, shallow, compileToFunctions }) => {
 
     expect(wrapper.vm.getMenuIndex()).toBe(0)
   })
+
+  it('should auto clear when empty', async () => {
+    const wrapper = shallow(VAutocomplete)
+
+    wrapper.setData({ internalSearch: 'fo' })
+
+    await wrapper.vm.$nextTick()
+    wrapper.vm.searchInput = ''
+
+    expect(wrapper.vm.getMenuIndex()).toBe(-1)
+  })
 })
