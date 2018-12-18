@@ -19,6 +19,7 @@ export interface VuetifyUseOptions {
   components?: Record<string, ComponentOrPack>
   /** @see https://vuetifyjs.com/style/theme */
   theme?: Partial<VuetifyTheme> | false
+  breakpoint?: Partial<VuetifyBreakpointOptions> | false
   /**
    * Select a base icon font to use. Note that none of these are included, you must install them yourself
    *
@@ -108,6 +109,18 @@ export interface VuetifyApplication {
   update (target: string): void
 }
 
+export interface VuetifyBreakpointThresholds {
+  xs: number
+  sm: number
+  md: number
+  lg: number
+}
+
+export interface VuetifyBreakpointOptions {
+  thresholds: VuetifyBreakpointThresholds
+  scrollbarWidth: number
+}
+
 export interface VuetifyBreakpoint {
   height: number
   lg: boolean
@@ -128,6 +141,8 @@ export interface VuetifyBreakpoint {
   xlOnly: boolean
   xs: boolean
   xsOnly: boolean
+  thresholds: VuetifyBreakpointThresholds
+  scrollbarWidth: number
 }
 
 export type VuetifyThemeItem = string | number | {

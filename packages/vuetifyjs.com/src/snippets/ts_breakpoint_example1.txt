@@ -20,4 +20,6 @@
   name: ('xs' | 'sm' | 'md' | 'lg' | 'xl')
   width: number
   height: number
+  thresholds: { xs: number, sm: number, md: number, lg: number }
+  scrollbarWidth: number
 }
