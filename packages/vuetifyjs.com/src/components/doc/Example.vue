@@ -70,6 +70,7 @@
             </v-btn>
           </v-item>
           <span
+            v-if="filename"
             class="filename"
             v-text="file"
           />
@@ -84,6 +85,7 @@
           >
             <doc-markup
               :value="file"
+              :filename="false"
               class="mb-0"
             >{{ parsed[section] }}</doc-markup>
           </v-window-item>
@@ -114,6 +116,7 @@
               {{ section }}
             </v-btn>
             <span
+              v-if="filename"
               class="filename"
               v-text="file"
             />
@@ -123,6 +126,7 @@
             >
               <doc-markup
                 :value="file"
+                :filename="false"
                 class="mb-0"
               >{{ parsed[section] }}</doc-markup>
             </div>
@@ -165,7 +169,8 @@
       parsed: undefined,
       sections: ['template', 'style', 'script'],
       selected: 'template',
-      lastSection: 'template'
+      lastSection: 'template',
+      filename: process.env.NODE_ENV === 'development'
     }),
 
     computed: {
@@ -257,11 +262,11 @@
     overflow-y: scroll
 
   .filename
-    position: absolute
-    right: 0
-    padding: 15px
-    font-size: 12px
-    color: rgba(#fff, .56)
+      position: absolute
+      right: 0
+      padding: 15px
+      font-size: 12px
+      color: rgba(#fff, .56)
 
   .component-example
     // margin-bottom: 32px

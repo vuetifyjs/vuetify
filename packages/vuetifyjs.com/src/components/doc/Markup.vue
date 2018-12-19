@@ -138,13 +138,6 @@
       font-size: 12px
       color: rgba(#fff, .56)
 
-      &__top
-        position: absolute
-        right: 0
-        padding: 15px
-        font-size: 12px
-        color: rgba(#fff, .56)
-
     &__copy
       position: absolute
       right: 0px
