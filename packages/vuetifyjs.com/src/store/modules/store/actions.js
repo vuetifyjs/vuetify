@@ -2,7 +2,7 @@ import shopifyClient from '@/util/shopifyClient'
 
 export default {
   getProducts ({ commit }) {
-    return shopifyClient.product.fetchAll().then(products => {
+    return shopifyClient.product.fetchAll(40).then(products => {
       commit('SET_PRODUCTS', products)
     })
   },
