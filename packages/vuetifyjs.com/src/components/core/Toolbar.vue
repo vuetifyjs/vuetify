@@ -9,7 +9,6 @@
     dark
     fixed
     height="58"
-    extension-height="48"
   >
     <v-toolbar-side-icon
       v-if="!isHome"
