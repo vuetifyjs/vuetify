@@ -32,6 +32,9 @@
 </template>
 <script>
   // Utilities
+  import {
+    mapState
+  } from 'vuex'
   import { goTo } from '@/util/helpers'
 
   export default {
@@ -39,19 +42,17 @@
       activeIndex: 0,
       currentOffset: 0,
       list: [],
-      routeTimeout: null,
       timeout: null
     }),
 
-    watch: {
-      '$route.path' () {
-        clearTimeout(this.routeTimeout)
-        this.routeTimeout = setTimeout(this.genList, 100)
-      }
+    computed: {
+      ...mapState('app', ['isLoading'])
     },
 
-    mounted () {
-      setTimeout(this.genList, 100)
+    watch: {
+      isLoading (val) {
+        !val && this.genList()
+      }
     },
 
     methods: {
