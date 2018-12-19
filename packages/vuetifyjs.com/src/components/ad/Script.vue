@@ -3,6 +3,11 @@
 </template>
 
 <script>
+  // Utilities
+  import {
+    mapState
+  } from 'vuex'
+
   export default {
     props: {
       id: {
@@ -20,27 +25,38 @@
     },
 
     data: () => ({
-      timeout: null
+      isBooted: false,
+      script: null
     }),
 
+    computed: {
+      ...mapState('app', ['isLoading'])
+    },
+
     watch: {
-      '$route.path': 'serve'
+      isLoading (val) {
+        if (!this.isBooted) {
+          return this.isBooted = true
+        }
+
+        clearTimeout(this.timeout)
+
+        if (val) return
+
+        this.timeout = setTimeout(this.serve, 100)
+      }
     },
 
     mounted () {
       if (!this.src) return
 
-      clearTimeout(this.timeout)
-      this.timeout = setTimeout(() => {
-        const script = document.createElement('script')
-        script.type = 'text/javascript'
-        script.src = this.src
+      const script = document.createElement('script')
+      script.type = 'text/javascript'
+      script.src = this.src
+      script.id = this.scriptId
 
-        if (this.scriptId) script.id = this.scriptId
-
-        if (this.$el) this.$el.append(script)
-        else console.warn('%cPlease consider allowing ads, we\'ve gotta eat too :(', 'font-size: 24px')
-      }, 300)
+      if (this.$el) this.$el.append(script)
+      else console.warn('%cPlease consider allowing ads, we\'ve gotta eat too :(', 'font-size: 24px')
     },
 
     methods: {
