@@ -69,11 +69,6 @@
               {{ section }}
             </v-btn>
           </v-item>
-          <span
-            v-if="filename"
-            class="filename"
-            v-text="file"
-          />
         </v-item-group>
         <v-divider />
         <v-window v-model="selected">
@@ -107,20 +102,6 @@
             xs12
             shrink
           >
-            <v-btn
-              dark
-              class="mr-0"
-              depressed
-              flat
-            >
-              {{ section }}
-            </v-btn>
-            <span
-              v-if="filename"
-              class="filename"
-              v-text="file"
-            />
-            <v-divider />
             <div
               class="example-container"
             >
@@ -260,13 +241,6 @@
     height: 100%
     max-height: 550px
     overflow-y: auto
-
-  .filename
-      position: absolute
-      right: 0
-      padding: 15px
-      font-size: 12px
-      color: rgba(#fff, .56)
 
   .component-example
     // margin-bottom: 32px
