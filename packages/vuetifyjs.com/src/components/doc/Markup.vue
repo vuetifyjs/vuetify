@@ -186,6 +186,9 @@
       top: 5px
 
     &:hover
+      .v-markup__copy .v-icon
+        opacity: 1
+
       &:after
         opacity: 0
 
@@ -200,8 +203,4 @@
       width: 50px
       height: 50px
       z-index: 4
-
-      &:hover
-        .v-icon
-          opacity: 1
 </style>
