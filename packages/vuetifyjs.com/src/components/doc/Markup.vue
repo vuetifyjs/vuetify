@@ -15,7 +15,6 @@
         >Copied</span>
       </v-slide-x-transition>
     </div>
-    
     <a
       v-if="filename"
       :href="href"

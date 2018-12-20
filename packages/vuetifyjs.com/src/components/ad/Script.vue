@@ -36,7 +36,7 @@
     watch: {
       isLoading (val) {
         if (!this.isBooted) {
-          return this.isBooted = true
+          return (this.isBooted = true)
         }
 
         clearTimeout(this.timeout)
