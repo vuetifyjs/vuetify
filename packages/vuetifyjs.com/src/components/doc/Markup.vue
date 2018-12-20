@@ -15,8 +15,8 @@
         >Copied</span>
       </v-slide-x-transition>
     </div>
-
     <a
+      v-if="filename"
       :href="href"
       target="_blank"
       rel="noopener"
@@ -59,6 +59,10 @@
       value: {
         type: String,
         default: 'markup'
+      },
+      filename: {
+        type: Boolean,
+        default: process.env.NODE_ENV === 'development'
       }
     },
 
