@@ -30,6 +30,9 @@
 
 <script>
   // Utilities
+  import {
+    mapMutations
+  } from 'vuex'
   import { getComponent } from '@/util/helpers'
   import kebabCase from 'lodash/kebabCase'
   import camelCase from 'lodash/camelCase'
@@ -75,6 +78,8 @@
       const namespace = kebabCase(this.namespace)
       const page = upperFirst(camelCase(this.page))
 
+      this.setIsLoading(true)
+
       import(
         /* webpackChunkName: "pages" */
         `@/data/pages/${namespace}/${page}.json`
@@ -85,7 +90,7 @@
         this.structure = false
         this.$router.push({ name: '404' })
         throw new Error(`Unable to find page for <${namespace}/${page}>`)
-      })
+      }).finally(this.setIsLoading)
     },
 
     mounted () {
@@ -94,6 +99,7 @@
     },
 
     methods: {
+      ...mapMutations('app', ['setIsLoading']),
       getComponent,
       init () {
         const sameInternal = this.$el.querySelectorAll('a.markdown--same-internal')

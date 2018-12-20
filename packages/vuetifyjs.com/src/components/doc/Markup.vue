@@ -15,11 +15,23 @@
         >Copied</span>
       </v-slide-x-transition>
     </div>
-    <div
+    
+    <a
       v-if="filename"
+      :href="href"
+      target="_blank"
+      rel="noopener"
       class="v-markup__filename"
-      v-text="value"
-    />
+    >
+      <span v-text="file" />
+      <v-icon
+        class="ml-1"
+        dark
+        small
+      >
+        mdi-open-in-new
+      </v-icon>
+    </a>
   </div>
 </template>
 
@@ -61,6 +73,22 @@
       language: vm.lang
     }),
 
+    computed: {
+      file () {
+        const split = this.value.split('_')
+        const folder = split.shift()
+        const file = split.join('_')
+
+        return `${folder}/${file}.txt`
+      },
+      href () {
+        const branch = process.env.NODE_ENV === 'production' ? 'master' : 'dev'
+        const href = `https://github.com/vuetifyjs/vuetify/tree/${branch}/packages/vuetifyjs.com/src/snippets`
+
+        return `${href}/${this.file}`
+      }
+    },
+
     mounted () {
       this.$nextTick(this.init)
     },
@@ -78,7 +106,7 @@
       init () {
         if (this.$slots.default || !this.value) return
 
-        import(`@/snippets/${this.value}.txt`)
+        import(`@/snippets/${this.file}`)
           .then(this.parseRaw)
           .catch(err => console.log(err))
       },
@@ -130,14 +158,6 @@
       top: 12px
       right: 50px
 
-    &__filename
-      position: absolute
-      bottom: 0
-      right: 0
-      padding: 8px
-      font-size: 12px
-      color: rgba(#fff, .56)
-
     &__copy
       position: absolute
       right: 0px
@@ -146,6 +166,15 @@
       width: 25px
       height: 25px
       z-index: 1
+
+    &__filename
+      text-decoration: none
+      position: absolute
+      bottom: 0
+      right: 0
+      padding: 8px
+      font-size: 12px
+      color: rgba(#fff, .56)
 
     &:after
       position: absolute
@@ -161,7 +190,7 @@
       &:after
         opacity: 0
 
-    .v-icon
+    .v-markup__copy .v-icon
       color: inherit
       position: absolute
       right: 0
@@ -173,7 +202,7 @@
       height: 50px
       z-index: 4
 
-    &:hover
-      .v-icon
-        opacity: 1
+      &:hover
+        .v-icon
+          opacity: 1
 </style>
