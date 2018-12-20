@@ -258,8 +258,8 @@
 
   .example-container
     height: 100%
-    max-height: 500px
-    overflow-y: scroll
+    max-height: 550px
+    overflow-y: auto
 
   .filename
       position: absolute
