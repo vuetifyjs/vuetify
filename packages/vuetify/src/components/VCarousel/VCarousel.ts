@@ -231,6 +231,6 @@ export default VWindow.extend({
       children.push(this.genDelimiters())
     }
 
-    return h('div', data, [children, this.genContainer()])
+    return h('div', data, [this.genContainer(), children])
   }
 })
