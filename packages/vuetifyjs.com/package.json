@@ -50,7 +50,7 @@
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {
-    "@mdi/font": "^3.0.39",
+    "@mdi/font": "^3.2.89",
     "autoprefixer": "^9.3.1",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.6",

@@ -1,85 +1,47 @@
 {
   "api": "API",
+  "awesome": "Awesome Vuetify",
+  "codepen": "Codepen template",
+  "cognito": "Cognito module",
   "components": "Components",
   "directives": "Directives",
   "documentation": "Documentation",
+  "ecosystem": "Ecosystem",
+  "eslint": "Eslint config",
+  "facebook": "Facebook",
   "framework": "Framework",
+  "github": "Github",
   "guide": "Guide",
+  "latest": "Latest releases",
+  "medium": "Medium publication",
+  "quickLinks": "Quick links",
+  "reddit": "Reddit",
+  "social": "Social",
   "store": "Store",
   "support": "Support",
-  "themes": "Themes",
   "supports": [
     {
       "href": "https://community.vuetifyjs.com/",
-      "text": "Chat",
-      "icon": "mdi-discord"
+      "icon": "mdi-discord",
+      "text": "Chat"
     },
     {
       "href": "https://issues.vuetifyjs.com",
-      "text": "Create an Issue",
-      "icon": "mdi-alert-octagon"
+      "icon": "mdi-alert-octagon",
+      "text": "Create an Issue"
     },
     {
       "href": "https://github.com/vuetifyjs/vuetify/issues",
-      "text": "GitHub Issue board",
-      "icon": "mdi-github-face"
+      "icon": "mdi-github-face",
+      "text": "GitHub Issue board"
     },
     {
       "href": "https://stackoverflow.com/search?q=vuetify",
-      "text": "Stack overflow",
-      "icon": "mdi-stack-overflow"
+      "icon": "mdi-stack-overflow",
+      "text": "Stack overflow"
     }
   ],
-  "ecosystem": "Ecosystem",
-  "ecosystems": [
-    {
-      "text": "Theme generator",
-      "icon": "mdi-format-paint",
-      "href": "https://theme-generator.vuetifyjs.com"
-    },
-    {
-      "href": "https://www.reddit.com/r/vuetifyjs/",
-      "text": "Reddit",
-      "icon": "mdi-reddit"
-    },
-    {
-      "href": "https://medium.com/vuetify",
-      "text": "Medium Publication",
-      "icon": "mdi-medium"
-    },
-    {
-      "href": "https://github.com/vuetifyjs/awesome-vuetify",
-      "text": "Awesome Vuetify",
-      "icon": "mdi-creation"
-    },
-    {
-      "href": "https://template.vuetifyjs.com",
-      "text": "Codepen Template",
-      "icon": "mdi-codepen"
-    },
-    {
-      "href": "https://github.com/vuetifyjs/vuetify/releases",
-      "text": "Latest Releases",
-      "icon": "mdi-format-list-checks"
-    }
-  ],
-  "quickLinks": "Quick Links",
-  "social": "Social",
-  "socials": [
-    {
-      "href": "https://github.com/vuetifyjs/vuetify",
-      "text": "GitHub",
-      "icon": "mdi-github-box"
-    },
-    {
-      "href": "https://twitter.com/vuetifyjs",
-      "text": "Twitter",
-      "icon": "mdi-twitter-box"
-    },
-    {
-      "href": "https://www.facebook.com/vuetifyjs",
-      "text": "Facebook",
-      "icon": "mdi-facebook-box"
-    }
-  ]
+  "themeGenerator": "Theme generator",
+  "themes": "Themes",
+  "twitter": "Twitter"
 }
