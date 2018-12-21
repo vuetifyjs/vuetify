@@ -71,7 +71,7 @@
           "value": [
             "directives/resizing",
             "framework/display",
-            "framework/text-alignment"
+            "framework/alignment"
           ]
         }
       ]

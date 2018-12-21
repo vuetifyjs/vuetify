@@ -89,6 +89,19 @@
           "type": "style-colors"
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "framework/theme",
+            "themes/premium",
+            "framework/pre-made-layouts"
+          ]
+        }
+      ]
     }
   ]
 }

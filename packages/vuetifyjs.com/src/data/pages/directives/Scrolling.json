@@ -28,6 +28,18 @@
           "value": [ "options" ]
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "framework/scroll",
+            "directives/touch-support"
+          ]
+        }
+      ]
     }
   ]
 }

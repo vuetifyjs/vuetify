@@ -157,6 +157,17 @@
           "lang": "loaderLimitationsPugText1"
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/api-explorer"
+          ]
+        }
+      ]
     }
   ]
 }
