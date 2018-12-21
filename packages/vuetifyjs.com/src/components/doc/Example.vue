@@ -25,7 +25,7 @@
         <v-icon>mdi-codepen</v-icon>
       </v-btn>
       <v-btn
-        :href="`https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetifyjs.com/src/examples/${file}.vue`"
+        :href="`https://github.com/vuetifyjs/vuetify/tree/${branch}/packages/vuetifyjs.com/src/examples/${file}.vue`"
         icon
         target="_blank"
       >
@@ -149,7 +149,8 @@
       expand: false,
       parsed: undefined,
       sections: ['template', 'style', 'script'],
-      selected: 'template'
+      selected: 'template',
+      branch: process.env.NODE_ENV === 'production' ? 'master' : 'dev'
     }),
 
     computed: {
