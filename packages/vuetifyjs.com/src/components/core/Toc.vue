@@ -87,7 +87,11 @@
 
         const list = this.list.slice().reverse()
         const index = list.findIndex(item => {
-          return item.item.offsetParent.offsetTop - 100 < this.currentOffset
+          const { offsetParent } = item.item
+
+          if (!offsetParent) return false
+
+          return offsetParent.offsetTop - 100 < this.currentOffset
         })
 
         const lastIndex = list.length
