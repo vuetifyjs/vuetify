@@ -2,7 +2,6 @@
   <v-menu
     attach
     bottom
-    lazy
     left
     offset-y
     max-height="500"
