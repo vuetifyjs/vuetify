@@ -247,6 +247,19 @@
           "value": "stylus_component_icon_styles"
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/icons",
+            "components/buttons",
+            "components/avatars"
+          ]
+        }
+      ]
     }
   ]
 }

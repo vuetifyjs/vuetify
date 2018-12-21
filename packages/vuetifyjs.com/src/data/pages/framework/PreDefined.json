@@ -44,6 +44,19 @@
           "type": "doc-pre-defined-layouts"
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "themes/premium",
+            "framework/colors",
+            "framework/theme"
+          ]
+        }
+      ]
     }
   ]
 }

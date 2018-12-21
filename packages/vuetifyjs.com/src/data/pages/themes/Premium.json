@@ -9,6 +9,19 @@
           "type": "themes-premium"
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "framework/pre-defined-layouts",
+            "framework/theme",
+            "getting-started/quick-start"
+          ]
+        }
+      ]
     }
   ]
 }

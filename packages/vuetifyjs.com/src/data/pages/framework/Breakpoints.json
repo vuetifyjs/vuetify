@@ -62,6 +62,19 @@
           "value": "js_breakpoint_example3"
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "directives/resizing",
+            "framework/display",
+            "framework/text-alignment"
+          ]
+        }
+      ]
     }
   ]
 }
