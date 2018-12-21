@@ -46,7 +46,7 @@
               >
                 <v-tooltip
                   slot="activator"
-                  right
+                  bottom
                 >
                   <v-btn
                     slot="activator"
