@@ -44,7 +44,28 @@
 <script>
   export default {
     data: vm => ({
-      supports: vm.$t('Vuetify.AppToolbar.supports')
+      supports: [
+        {
+          href: 'https://community.vuetifyjs.com/',
+          icon: 'mdi-discord',
+          text: vm.$t('Vuetify.AppToolbar.community')
+        },
+        {
+          href: 'https://issues.vuetifyjs.com',
+          icon: 'mdi-bug',
+          text: vm.$t('Vuetify.AppToolbar.bug')
+        },
+        {
+          href: 'https://github.com/vuetifyjs/vuetify/issues',
+          icon: 'mdi-github-face',
+          text: vm.$t('Vuetify.AppToolbar.issues')
+        },
+        {
+          href: 'https://stackoverflow.com/search?q=vuetify',
+          icon: 'mdi-stack-overflow',
+          text: vm.$t('Vuetify.AppToolbar.stack')
+        }
+      ]
     })
   }
 </script>

@@ -1,8 +1,10 @@
 {
   "api": "API",
   "awesome": "Awesome Vuetify",
+  "bug": "Report a bug",
   "codepen": "Codepen template",
   "cognito": "Cognito module",
+  "community": "Discord community",
   "components": "Components",
   "directives": "Directives",
   "documentation": "Documentation",
@@ -12,35 +14,15 @@
   "framework": "Framework",
   "github": "Github",
   "guide": "Guide",
+  "issues": "Github issue board",
   "latest": "Latest releases",
   "medium": "Medium publication",
   "quickLinks": "Quick links",
   "reddit": "Reddit",
   "social": "Social",
+  "stack": "Stack overflow",
   "store": "Store",
   "support": "Support",
-  "supports": [
-    {
-      "href": "https://community.vuetifyjs.com/",
-      "icon": "mdi-discord",
-      "text": "Chat"
-    },
-    {
-      "href": "https://issues.vuetifyjs.com",
-      "icon": "mdi-alert-octagon",
-      "text": "Create an Issue"
-    },
-    {
-      "href": "https://github.com/vuetifyjs/vuetify/issues",
-      "icon": "mdi-github-face",
-      "text": "GitHub Issue board"
-    },
-    {
-      "href": "https://stackoverflow.com/search?q=vuetify",
-      "icon": "mdi-stack-overflow",
-      "text": "Stack overflow"
-    }
-  ],
   "themeGenerator": "Theme generator",
   "themes": "Themes",
   "twitter": "Twitter"
