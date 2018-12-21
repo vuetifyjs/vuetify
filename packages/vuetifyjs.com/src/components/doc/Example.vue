@@ -149,9 +149,7 @@
       expand: false,
       parsed: undefined,
       sections: ['template', 'style', 'script'],
-      selected: 'template',
-      lastSection: 'template',
-      filename: process.env.NODE_ENV === 'development'
+      selected: 'template'
     }),
 
     computed: {
@@ -196,7 +194,6 @@
         const string = `(<${target}(.*)?>[\\w\\W]*<\\/${target}>)`
         const regex = new RegExp(string, 'g')
         const parsed = regex.exec(template) || []
-        this.lastSection = parsed[1] ? target : this.lastSection
         return parsed[1] || ''
       },
       boot (res) {

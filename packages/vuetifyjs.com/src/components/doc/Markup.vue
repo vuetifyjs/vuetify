@@ -23,13 +23,6 @@
       class="v-markup__filename"
     >
       <span v-text="file" />
-      <v-icon
-        class="ml-1"
-        dark
-        small
-      >
-        mdi-open-in-new
-      </v-icon>
     </a>
   </div>
 </template>
@@ -62,7 +55,7 @@
       },
       filename: {
         type: Boolean,
-        default: process.env.NODE_ENV === 'development'
+        default: process.env.NODE_ENV !== 'production'
       }
     },
 
@@ -171,7 +164,7 @@
       position: absolute
       bottom: 0
       right: 0
-      padding: 8px
+      padding: 8px 12px 8px 8px
       font-size: 12px
       color: rgba(#fff, .56)
 
