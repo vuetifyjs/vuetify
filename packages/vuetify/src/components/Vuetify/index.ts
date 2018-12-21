@@ -30,7 +30,7 @@ const Vuetify: VuetifyPlugin = {
 
     Vue.prototype.$vuetify = new Vue({
       mixins: [
-        breakpoint
+        breakpoint(opts.breakpoint)
       ],
       data: {
         application,

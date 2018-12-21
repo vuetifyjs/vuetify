@@ -1,15 +1,11 @@
 <template>
   <div>
-    <core-toolbar />
-
     <v-content>
       <v-container
         fluid
         pa-0
       >
         <hero />
-
-        <feature />
 
         <sponsors />
 
@@ -24,7 +20,6 @@
 <script>
   export default {
     components: {
-      Feature: () => import('./components/Feature'),
       Hero: () => import('./components/Hero'),
       MadeWithVuetify: () => import('./components/MadeWithVuetify'),
       Sponsors: () => import('./components/Sponsors'),

@@ -1,14 +1,13 @@
 <template>
   <div>
-    <core-toolbar />
+    <core-drawer />
 
     <core-ad />
-
-    <core-drawer />
 
     <core-view
       :namespace="namespace"
       :page="page"
+      :lang="lang"
     />
 
     <core-fab />
@@ -35,6 +34,10 @@
         default: undefined
       },
       page: {
+        type: String,
+        default: undefined
+      },
+      lang: {
         type: String,
         default: undefined
       }

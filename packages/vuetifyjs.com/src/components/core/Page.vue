@@ -3,9 +3,7 @@
     id="page"
     fluid
   >
-    <not-found-page v-if="structure === false" />
-
-    <template v-else-if="structure">
+    <template v-if="structure">
       <doc-heading>
         {{ structure.title }}
       </doc-heading>
@@ -24,28 +22,28 @@
         :is="getComponent(child.type)"
         :value="child"
       />
+
+      <doc-contribution />
     </template>
   </v-container>
 </template>
 
 <script>
   // Utilities
+  import {
+    mapMutations
+  } from 'vuex'
   import { getComponent } from '@/util/helpers'
   import kebabCase from 'lodash/kebabCase'
   import camelCase from 'lodash/camelCase'
   import upperFirst from 'lodash/upperFirst'
-  import NotFoundPage from '@/pages/general/404Page.vue'
-  import { mapMutations } from 'vuex'
 
   // TODO: This is where 404 redirect will occur
   export default {
-    components: {
-      NotFoundPage
-    },
-
     provide () {
       return {
         namespace: upperFirst(camelCase(this.namespace)),
+        lang: this.lang,
         page: upperFirst(camelCase(this.page))
       }
     },
@@ -57,6 +55,10 @@
         default: undefined
       },
       page: {
+        type: String,
+        default: undefined
+      },
+      lang: {
         type: String,
         default: undefined
       }
@@ -76,6 +78,8 @@
       const namespace = kebabCase(this.namespace)
       const page = upperFirst(camelCase(this.page))
 
+      this.setIsLoading(true)
+
       import(
         /* webpackChunkName: "pages" */
         `@/data/pages/${namespace}/${page}.json`
@@ -84,8 +88,9 @@
       }).catch(() => {
         // Add 404
         this.structure = false
+        this.$router.push({ name: '404' })
         throw new Error(`Unable to find page for <${namespace}/${page}>`)
-      })
+      }).finally(this.setIsLoading)
     },
 
     mounted () {
@@ -93,15 +98,10 @@
       setTimeout(this.init, 300)
     },
 
-    destroyed () {
-      this.setToc(false)
-    },
-
     methods: {
-      ...mapMutations('app', ['setToc']),
+      ...mapMutations('app', ['setIsLoading']),
       getComponent,
       init () {
-        this.setToc(true)
         const sameInternal = this.$el.querySelectorAll('a.markdown--same-internal')
 
         Array.prototype.forEach.call(sameInternal, el => {
@@ -122,7 +122,7 @@
       onInternalClick (e) {
         e.preventDefault()
 
-        this.$router.push(e.target.getAttribute('href'))
+        this.$router.push(`/${this.lang}${e.target.getAttribute('href')}`)
       }
     }
   }

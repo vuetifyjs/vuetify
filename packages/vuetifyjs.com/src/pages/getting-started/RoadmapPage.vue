@@ -153,7 +153,7 @@
         {
           ...release,
           complete: false,
-          title: 'v1.5 Release',
+          title: '~~v1.5 Release~~',
           caption: 'Q1 2019',
           text: 'Add new components, `v-file-upload`, `v-discovery` and `v-color-picker`.',
           value: false

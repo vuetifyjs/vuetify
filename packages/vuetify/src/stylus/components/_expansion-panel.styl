@@ -68,9 +68,9 @@ theme(v-expansion-panel, "v-expansion-panel")
   &__body
     transition: $primary-transition
 
-    .v-card
+    > .v-card
       border-radius: 0
-      elevation(0)
+      elevation(0, true)
 
   &--popout, &--inset
     elevation(0)

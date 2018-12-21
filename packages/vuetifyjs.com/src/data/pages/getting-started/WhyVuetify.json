@@ -64,6 +64,19 @@
           "value": "featuresList"
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "getting-started/consulting-and-support",
+            "getting-started/roadmap",
+            "themes/premium"
+          ]
+        }
+      ]
     }
   ]
 }

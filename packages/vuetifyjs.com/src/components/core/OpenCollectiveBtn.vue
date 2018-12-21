@@ -1,6 +1,7 @@
 <template>
   <v-btn
     active-class=""
+    aria-label="Vuetify Open Collective"
     flat
     href="https://opencollective.com/vuetify"
     large

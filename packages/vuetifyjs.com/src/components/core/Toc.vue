@@ -32,8 +32,10 @@
 </template>
 <script>
   // Utilities
+  import {
+    mapState
+  } from 'vuex'
   import { goTo } from '@/util/helpers'
-  import { mapState } from 'vuex'
 
   export default {
     data: () => ({
@@ -44,17 +46,13 @@
     }),
 
     computed: {
-      ...mapState('app', ['toc'])
+      ...mapState('app', ['isLoading'])
     },
 
     watch: {
-      toc (val) {
-        val && this.genList()
+      isLoading (val) {
+        !val && this.genList()
       }
-    },
-
-    mounted () {
-      this.genList()
     },
 
     methods: {

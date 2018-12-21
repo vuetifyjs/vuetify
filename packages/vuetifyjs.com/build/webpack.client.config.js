@@ -19,9 +19,6 @@ const cssLoaders = [
 
 const config = merge(base, {
   name: 'client',
-  devtool: isProd
-    ? false
-    : 'source-map',
   entry: {
     app: './src/entry-client.js'
   },

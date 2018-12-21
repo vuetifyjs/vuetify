@@ -49,7 +49,10 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
+  import {
+    mapMutations,
+    mapState
+  } from 'vuex'
 
   export default {
     data: () => ({
@@ -100,7 +103,18 @@
       }
     },
 
+    async created () {
+      const notify = await fetch('https://cdn.vuetifyjs.com/notify.json', {
+        headers: {
+          'Access-Control-Allow-Origin': '*'
+        }
+      }).then(res => res.json())
+
+      if (notify) this.setSnackbar(notify)
+    },
+
     methods: {
+      ...mapMutations('snackbar', ['setSnackbar']),
       markViewed () {
         if (this.snackbar.id) {
           localStorage.setItem(this.snackbar.id, true)

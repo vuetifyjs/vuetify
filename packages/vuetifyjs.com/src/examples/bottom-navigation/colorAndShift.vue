@@ -5,6 +5,7 @@
       :color="color"
       :value="true"
       absolute
+      dark
       shift
     >
       <v-btn dark>

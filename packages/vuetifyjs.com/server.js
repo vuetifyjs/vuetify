@@ -10,6 +10,7 @@ const resolve = file => path.resolve(__dirname, file)
 const { createBundleRenderer } = require('vue-server-renderer')
 const Ouch = require('ouch')
 const redirects = require('./src/router/301.json')
+const rollbar = require('./src/util/rollbar')
 
 const isProd = process.env.NODE_ENV === 'production'
 const useMicroCache = process.env.MICRO_CACHE !== 'false'
@@ -69,6 +70,7 @@ const serve = (path, cache) => express.static(resolve(path), {
 
 app.use(express.json())
 app.use(cookieParser())
+rollbar.options.enabled && app.use(rollbar.errorHandler())
 app.use(compression({ threshold: 0 }))
 app.use(favicon('./src/public/favicon.ico'))
 app.use('/', serve('./src/public', true))

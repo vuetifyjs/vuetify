@@ -1,5 +1,59 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`VIcon.js for component icon should render component 1`] = `
+
+<div class="v-icon test-component v-icon--is-component theme--light"
+     aria-hidden="true"
+>
+  test icon
+</div>
+
+`;
+
+exports[`VIcon.js for component icon should set font size from helper prop 1`] = `
+
+<div class="v-icon test-component v-icon--is-component theme--light"
+     aria-hidden="true"
+     style="font-size: 16px; height: 16px;"
+>
+  test icon
+</div>
+
+`;
+
+exports[`VIcon.js for component icon should set font size from helper prop 2`] = `
+
+<div class="v-icon test-component v-icon--is-component theme--light"
+     aria-hidden="true"
+     style="font-size: 28px; height: 28px;"
+>
+  test icon
+</div>
+
+`;
+
+exports[`VIcon.js for component icon should set font size from helper prop 3`] = `
+
+<div class="v-icon test-component v-icon--is-component theme--light"
+     aria-hidden="true"
+     style="font-size: 36px; height: 36px;"
+>
+  test icon
+</div>
+
+`;
+
+exports[`VIcon.js for component icon should set font size from helper prop 4`] = `
+
+<div class="v-icon test-component v-icon--is-component theme--light"
+     aria-hidden="true"
+     style="font-size: 40px; height: 40px;"
+>
+  test icon
+</div>
+
+`;
+
 exports[`VIcon.js set font size from helper prop 1`] = `
 
 <i aria-hidden="true"

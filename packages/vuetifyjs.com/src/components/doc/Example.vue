@@ -11,9 +11,7 @@
         </v-avatar>
         <span>New in <strong>{{ newIn }}</strong></span>
       </v-chip>
-
       <v-spacer />
-
       <v-btn
         icon
         @click="dark = !dark"
@@ -22,13 +20,14 @@
       </v-btn>
       <v-btn
         icon
-        disabled
+        @click="sendToCodepen"
       >
         <v-icon>mdi-codepen</v-icon>
       </v-btn>
       <v-btn
+        :href="`https://github.com/vuetifyjs/vuetify/tree/${branch}/packages/vuetifyjs.com/src/examples/${file}.vue`"
         icon
-        disabled
+        target="_blank"
       >
         <v-icon>mdi-github-circle</v-icon>
       </v-btn>
@@ -39,10 +38,9 @@
         <v-icon>mdi-code-tags</v-icon>
       </v-btn>
     </v-toolbar>
-
     <v-expand-transition v-if="parsed">
       <v-card
-        v-if="expand"
+        v-if="expand && $vuetify.breakpoint.smAndDown"
         color="#2d2d2d"
         dark
         flat
@@ -82,13 +80,41 @@
           >
             <doc-markup
               :value="file"
+              :filename="false"
               class="mb-0"
             >{{ parsed[section] }}</doc-markup>
           </v-window-item>
         </v-window>
       </v-card>
+      <v-card
+        v-if="expand && $vuetify.breakpoint.mdAndUp"
+        color="#2d2d2d"
+        dark
+        flat
+        tile
+      >
+        <v-layout row>
+          <v-flex
+            v-for="(section, i) in sections"
+            v-if="parsed[section]"
+            :key="`window-${i}`"
+            :value="section"
+            xs12
+            shrink
+          >
+            <div
+              class="example-container"
+            >
+              <doc-markup
+                :value="file"
+                :filename="false"
+                class="mb-0"
+              >{{ parsed[section] }}</doc-markup>
+            </div>
+          </v-flex>
+        </v-layout>
+      </v-card>
     </v-expand-transition>
-
     <v-sheet
       :dark="dark"
       tile
@@ -99,13 +125,13 @@
         </div>
       </v-card-text>
     </v-sheet>
+    <doc-codepen ref="codepen" :pen="parsed" />
   </v-card>
 </template>
 
 <script>
   // Utilities
   import kebabCase from 'lodash/kebabCase'
-  import { goTo } from '@/util/helpers'
 
   export default {
     inject: ['namespace', 'page'],
@@ -123,7 +149,8 @@
       expand: false,
       parsed: undefined,
       sections: ['template', 'style', 'script'],
-      selected: 'template'
+      selected: 'template',
+      branch: process.env.NODE_ENV === 'production' ? 'master' : 'dev'
     }),
 
     computed: {
@@ -168,26 +195,22 @@
         const string = `(<${target}(.*)?>[\\w\\W]*<\\/${target}>)`
         const regex = new RegExp(string, 'g')
         const parsed = regex.exec(template) || []
-
         return parsed[1] || ''
       },
       boot (res) {
         const template = this.parseTemplate('template', res)
-        const script = this.parseTemplate('script', res)
         const style = this.parseTemplate('style', res)
+        const script = this.parseTemplate('script', res)
         const codepenResources = this.parseTemplate('codepen-resources', res)
         const codepenAdditional = this.parseTemplate('codepen-additional', res)
 
         this.parsed = {
           template,
-          script,
           style,
+          script,
           codepenResources,
           codepenAdditional
         }
-      },
-      goTo () {
-        goTo.call(this, `#${this.id}`)
       },
       kebabCase,
       toggle () {
@@ -211,6 +234,11 @@
   #snackbars, #data-tables
     .component-example .application--example
       z-index: auto
+
+  .example-container
+    height: 100%
+    max-height: 550px
+    overflow-y: auto
 
   .component-example
     // margin-bottom: 32px

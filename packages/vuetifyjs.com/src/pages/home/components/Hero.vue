@@ -1,8 +1,7 @@
 <template>
-  <v-card
-    flat
-    class="py-4"
-    color="white"
+  <v-responsive
+    class="white--text py-5"
+    style="background: linear-gradient(to bottom, #1867c0, #5CBBF6)"
   >
     <v-container>
       <v-layout
@@ -15,66 +14,63 @@
             'mr-5': $vuetify.breakpoint.mdAndUp,
             'mb-3': $vuetify.breakpoint.smAndDown
           }"
-          :height="$vuetify.breakpoint.mdAndUp ? 216 : 135"
-          :width="$vuetify.breakpoint.mdAndUp ? 216 : 135"
+          :height="$vuetify.breakpoint.mdAndUp ? 256 : 135"
+          :width="$vuetify.breakpoint.mdAndUp ? 256 : 135"
           class="shrink"
           contain
-          src="https://cdn.vuetifyjs.com/images/logos/v.svg"
+          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-300.png"
         />
-        <div class="text-xs-center">
-          <v-display-2
-            :class="$vuetify.breakpoint.smAndDown && 'headline'"
-            tag="h1"
-            class="mono font-weight-light mb-4 text-md-left"
-            v-html="$vuetify.breakpoint.mdAndUp ? $t('Vuetify.Home.callout') : 'Vuetify.js'"
+        <div class="text-xs-center text-lg-left">
+          <h1
+            :class="$vuetify.breakpoint.smAndDown && 'display-1' || 'display-3'"
+            class="font-weight-light mb-4"
+            v-html="$vuetify.breakpoint.smAndUp ? $t('Vuetify.Home.callout') : 'Vuetify.js'"
           />
           <v-layout
             justify-center
             wrap
           >
             <v-btn
-              color="primary"
-              depressed
+              class="primary--text ml-0"
+              color="white"
               large
-              round
-              to="/getting-started/quick-start"
+              to="getting-started/quick-start"
             >
               {{ $t('Vuetify.Home.getStarted') }}
             </v-btn>
             <v-btn
-              color="primary"
+              color="white"
               outline
               large
-              round
-              to="/getting-started/why-vuetify"
+              to="getting-started/why-vuetify"
             >
-              {{ $t('Vuetify.Home.whyVuetify') }}
+              <v-icon left>mdi-github-circle</v-icon>
+              Github
             </v-btn>
             <v-btn
-              color="grey lighten-3"
-              depressed
+              color="grey lighten-3 mr-0"
+              outline
               large
               href="https://github.com/vuetifyjs/vuetify"
               rel="noopener"
-              round
               target="_blank"
             >
-              <v-icon
-                large
-                left
-              >
-                mdi-github-circle
-              </v-icon>
-              {{ $t('Vuetify.Home.github') }}
+              <v-icon left>mdi-discord</v-icon>
+              {{ $t('Vuetify.Home.getHelp') }}
             </v-btn>
           </v-layout>
         </div>
       </v-layout>
     </v-container>
-  </v-card>
+
+    <feature />
+  </v-responsive>
 </template>
 
-<style lang="stylus" scoped>
-  .display-2
-    line-height: 1.3
-</style>
+<script>
+  export default {
+    components: {
+      Feature: () => import('./Feature')
+    }
+  }
+</script>

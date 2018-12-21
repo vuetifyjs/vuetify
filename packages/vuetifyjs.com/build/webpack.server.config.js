@@ -1,3 +1,4 @@
+const path = require('path')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const base = require('./webpack.base.config')
@@ -24,7 +25,7 @@ module.exports = merge(base, {
   externals: nodeExternals({
     // do not externalize CSS files in case we need to import it from a dep
     whitelist: isProd ? undefined : /^vuetify/,
-    modulesFromFile: true
+    modulesDir: path.resolve(__dirname, '../../../node_modules')
   }),
   module: {
     rules: [

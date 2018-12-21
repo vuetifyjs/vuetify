@@ -56,9 +56,7 @@
         }))
       },
       group () {
-        return this.item.children.map(item => {
-          return `${this.item.group}/${kebabCase(item.to)}`
-        }).join('|')
+        return this.genGroup(this.item.children)
       }
     },
 
@@ -67,6 +65,18 @@
         if (item.new) return 'new'
         if (item.updated) return 'updated'
         if (item.deprecated) return 'deprecated'
+      },
+      genGroup (children) {
+        return children.map(item => {
+          let parent = item.group || this.item.group
+          let group = `${parent}/${kebabCase(item.to)}`
+
+          if (item.children) {
+            group = `${group}|${this.genGroup(item.children)}`
+          }
+
+          return group
+        }).join('|')
       }
     }
   }

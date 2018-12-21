@@ -45,7 +45,7 @@
           "value": [
             "components/buttons",
             "components/icons",
-            "motion/transitions"
+            "framework/transitions"
           ]
         }
       ]

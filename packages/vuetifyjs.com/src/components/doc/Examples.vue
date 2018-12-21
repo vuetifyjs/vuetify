@@ -1,18 +1,14 @@
 <template>
   <div>
     <doc-heading>Generic.Pages.examples</doc-heading>
-
     <div />
-
     <template v-for="(example, i) in examples">
       <doc-heading :key="`heading-${i}`">
         {{ example.header }}
       </doc-heading>
-
       <doc-text :key="`text-${i}`">
         {{ example.desc }}
       </doc-text>
-
       <doc-example
         :key="i"
         :value="value[i]"

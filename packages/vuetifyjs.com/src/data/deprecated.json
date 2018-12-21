@@ -60,6 +60,9 @@
       "offsetX": false,
       "offsetY": false,
       "transition": false
+    },
+    "v-input": {
+      "append-icon-cb": false
     }
   }
 }
