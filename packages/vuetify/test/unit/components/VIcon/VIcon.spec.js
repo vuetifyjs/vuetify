@@ -237,5 +237,12 @@ test('VIcon.js', ({ mount, compileToFunctions }) => {
 
       expect(wrapper.element.classList).toContain('v-icon--right')
     })
+
+    it('should render a flipped component', () => {
+      const context = functionalContext({ props: { flipped: true } }, '$vuetify.icons.testIcon')
+      const wrapper = mount(VIcon, context)
+
+      expect(wrapper.element.classList).toContain('v-icon--flipped')
+    })
   })
 })
