@@ -25,8 +25,7 @@
     },
 
     methods: {
-      ...mapMutations('app', ['setReleases']),
-      ...mapMutations('snackbar', ['setSnackbar'])
+      ...mapMutations('app', ['setReleases'])
     }
   }
 </script>
