@@ -73,8 +73,7 @@
           list.push({
             item,
             text: item.innerText,
-            target: `#${item.id}`,
-            offsetTop: item.offsetTop
+            target: `#${item.id}`
           })
         }
 
@@ -88,7 +87,7 @@
 
         const list = this.list.slice().reverse()
         const index = list.findIndex(item => {
-          return item.offsetTop - 100 < this.currentOffset
+          return item.item.offsetParent.offsetTop - 100 < this.currentOffset
         })
 
         const lastIndex = list.length

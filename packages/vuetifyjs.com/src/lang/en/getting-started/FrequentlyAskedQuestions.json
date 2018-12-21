@@ -7,70 +7,70 @@
   "resetSearch": "Reset search",
   "gotchas": [
     {
-      "q": "Why does Vuetify not match Material Design 2?",
+      "q": "### Why does Vuetify not match Material Design 2",
       "a": "The MD spec was updated in May of 2018, during the middle of beta testing for v1.1. Because of this, there are plenty of components that will not match the new spec. We will be updating the styles and functionality to match in a future release."
     },
     {
-      "q": "My code doesn't work - what should I do?",
+      "q": "### My code doesn't work - what should I do",
       "a": "First, ensure that you're using the latest version of Vue.js and Vuetify. Try to reproduce it in codepen using the following [template](https://template.vuetifyjs.com/). If you are unable to reproduce the issue outside of your environment, this usually means the issue resides locally. If you are still unable to resolve your issue, please provide your codepen and issue in **#need-help** in the [community](https://chat.vuetifyjs.com)."
     },
     {
-      "q": "I'm receiving an error similar to the following:<br>Error in ./node_modules/vuetify/src/dir/file.js Module parse \"failed\": Unexpected token (&lt;lineno&gt;:&lt;characterno&gt;)",
+      "q": "### I'm receiving an error similar to the following:<br>Error in ./node_modules/vuetify/src/dir/file.js Module parse \"failed\": Unexpected token (&lt;lineno&gt;:&lt;characterno&gt;)",
       "a": "If you're using an IDE, such as IntelliJ IDEA or WebStorm, it will often add automatic imports pointing to the `vuetify/src/` directory for components you use.  Change the import statement path from `vuetify/src/` to `vuetify/es5/`."
     },
     {
-      "q": "Is there a codepen template with router?",
+      "q": "### Is there a codepen template with router",
       "a": "Yes. [Vuetify Codepen Router Template](https://codepen.io/zikeji/pen/ypeQNm)."
     },
     {
-      "q": "My application does not look correct",
+      "q": "### My application does not look correct",
       "a": "Vuetify requires the use of the `v-app` component. It should wrap your entire application and is the center point for much of the framework functionality. If for whatever reason you cannot use this element, you can mimic it from attributes and classes. Set the `data-app` attribute to true on the highest element available (not including body), and the **application application--{light|dark}** classes."
     },
     {
-      "q": "The Dark or Light theme are not working.",
+      "q": "### The Dark or Light theme are not working.",
       "a": "Vuetify requires a mounting point in order to perform tasks such as theme styling. Ensure that you have a `v-app` wrapping your application. In the event that this is not possible, for whatever reason, you can mimic its behavior by applying **data-app** and **class=\"application application--light (or dark)\"** to the highest element that you can within your application."
     },
     {
-      "q": "Menu/Dialog/Navigation drawer are not opening properly.",
+      "q": "### Menu/Dialog/Navigation drawer are not opening properly.",
       "a": "Ensure that your components are wrapped with a `v-app` element. If you are using an element to activate the component that is not placed into the <kbd>activator</kbd> slot, ensure that you stop propagation of the click event. These components utilize the `v-outside-click` directive and will immediately close."
     },
     {
-      "q": "The scrollbar is showing even though my content is not overflowing vertically.",
+      "q": "### The scrollbar is showing even though my content is not overflowing vertically.",
       "a": "Vuetify by default turns on the html scrollbar. This is a design choice and has been debated numerous times. There are pros and cons to having and not having it and as of now, the vote is in favor of leaving it as is. If you wish to disable this functionality, simply add `html { overflow-y: auto }` to your style file."
     },
     {
-      "q": "How to center vertically?",
+      "q": "### How to center vertically",
       "a": "Apply the **fill-height** prop to `v-container`. This helper class normally only adds **height: 100%**, but for the container, it also looks for a child `v-layout` and applies the needed classes to vertically center the content."
     },
     {
-      "q": "My _/_ link is active when I'm on _/home_ page",
+      "q": "### My _/_ link is active when I'm on _/home_ page",
       "a": "Add the **exact** to the link that points to absolute /. For more information on this, you can visit the official Vue router [documentation](https://router.vuejs.org/en/api/router-link.html)."
     },
     {
-      "q": "My page on mobile is not responsive",
+      "q": "### My page on mobile is not responsive",
       "a": "Ensure that you have the proper meta tags inside of the `<head>` section of your index.html.",
       "s": "html_mobile_viewport"
     },
     {
-      "q": "How do I use Font Awesome Icons or Material Design Icons (mdi)?",
+      "q": "### How do I use Font Awesome Icons or Material Design Icons (mdi)",
       "a": "You must add the fonts to your index.html or otherwise import them into your project.",
       "a2": [
-        "**MDI**: [Material Design Icons](/framework/icons#install-mdi)",
-        "**FA**: [Font Awesome](/framework/icons#install-fa)"
+        "**MDI**: [Material Design Icons](/framework/icons#install-material-design-icons)",
+        "**FA**: [Font Awesome](/framework/icons#install-font-awesome-5-icons)"
       ]
     },
     {
-      "q": "My dialog closes immediately after clicking the button",
+      "q": "### My dialog closes immediately after clicking the button",
       "a": "When not using the **activator** slot for `v-menu` and `v-dialog` for example, you must manually stop the _propagation_ of the click event. To do this, simply add the _.stop_ modifier to the click event.",
       "s": "html_stop_click_propagation"
     },
     {
-      "q": "Relative images are not working in `v-card` , `v-img` and other custom vuetify components",
+      "q": "### Relative images are not working in `v-card` , `v-img` and other custom vuetify components",
       "a": "Vue loader converts relative paths into require functions automatically for you. Unfortunately, this is not the case when it comes to custom components. You can circumvent this issue by using `require`. If you're using Vuetify as a Vue-CLI 3 plugin, you can edit your project's [vue.config.js](https://cli.vuejs.org/config/#vue-config-js) file by modifying the options for [vue-loader](https://cli.vuejs.org/guide/webpack.html#modifying-options-of-a-loader).",
       "s": "html_img_require"
     },
     {
-      "q": "How do I upgrade to the latest version?",
+      "q": "### How do I upgrade to the latest version",
       "a": "All required changes are noted in the **Upgrade Guide** of our releases.",
       "a2": [
         "[v1.3.0](https://github.com/vuetifyjs/vuetify/releases/tag/v1.3.0)",
@@ -86,10 +86,8 @@
       ]
     },
     {
-      "q": "How do a report a bug or request a feature?",
-      "a": "In order to ensure all required information is provided, we have created an [Issue Generator](https://github.com/vuetifyjs/vuetify-issue-helper) that helps you through the process. Any issue created not using the generator will automatically be closed, so please use this."
+      "q": "### How do a report a bug or request a feature",
+      "a": "In order to ensure all required information is provided, we have created an [Issue Generator](https://issues.vuetifyjs.com) that helps you through the process. Any issue created not using the generator will automatically be closed, so please use it."
     }
-  ],
-  "questionHeader": "## Have something that you think belongs here?",
-  "questionButton": "Let us know"
+  ]
 }
