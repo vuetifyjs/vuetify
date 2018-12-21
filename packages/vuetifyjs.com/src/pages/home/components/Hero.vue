@@ -20,18 +20,18 @@
           contain
           src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-300.png"
         />
-        <div class="text-xs-center">
+        <div class="text-xs-center text-lg-left">
           <h1
-            :class="$vuetify.breakpoint.smAndDown && 'headline' || 'display-3'"
-            class="font-weight-light mb-4 text-md-left"
-            v-html="$vuetify.breakpoint.mdAndUp ? $t('Vuetify.Home.callout') : 'Vuetify.js'"
+            :class="$vuetify.breakpoint.smAndDown && 'display-1' || 'display-3'"
+            class="font-weight-light mb-4"
+            v-html="$vuetify.breakpoint.smAndUp ? $t('Vuetify.Home.callout') : 'Vuetify.js'"
           />
           <v-layout
             justify-center
             wrap
           >
             <v-btn
-              class="primary--text"
+              class="primary--text ml-0"
               color="white"
               large
               to="getting-started/quick-start"
@@ -48,7 +48,7 @@
               Github
             </v-btn>
             <v-btn
-              color="grey lighten-3"
+              color="grey lighten-3 mr-0"
               outline
               large
               href="https://github.com/vuetifyjs/vuetify"
