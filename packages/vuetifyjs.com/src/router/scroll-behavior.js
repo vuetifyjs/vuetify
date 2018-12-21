@@ -1,25 +1,25 @@
+import goTo from 'vuetify/lib/components/Vuetify/util/goTo'
+import { waitForReadystate } from '../util/helpers'
+
 export default async function (to, from, savedPosition) {
-  if (document.readyState !== 'complete') {
-    await new Promise(resolve => {
-      const cb = () => {
-        window.requestAnimationFrame(resolve)
-        window.removeEventListener('load', cb)
-      }
-      window.addEventListener('load', cb)
-    })
-  }
+  await waitForReadystate()
+
+  let scrollTo = 0
+  let options = {}
 
   if (to.hash) {
-    return {
-      selector: to.hash
-    }
+    scrollTo = to.hash
+    options.offset = -80
   }
 
   if (savedPosition) {
-    return savedPosition
+    scrollTo = savedPosition.y
   }
 
   return new Promise(resolve => {
-    setTimeout(() => resolve({ y: 0 }), 200)
+    setTimeout(() => {
+      goTo(scrollTo, options)
+      resolve()
+    }, 100)
   })
 }

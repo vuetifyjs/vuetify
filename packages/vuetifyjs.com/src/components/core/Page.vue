@@ -117,7 +117,7 @@
       onSameInternalClick (e) {
         e.preventDefault()
 
-        this.$vuetify.goTo(e.target.href, { offset: -80 })
+        this.$router.push(e.target)
       },
       onInternalClick (e) {
         e.preventDefault()
