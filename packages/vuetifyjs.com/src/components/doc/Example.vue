@@ -5,7 +5,11 @@
       dense
       flat
     >
-      <v-chip v-if="newIn" color="warning" small>
+      <v-chip
+        v-if="newIn"
+        color="warning"
+        small
+      >
         <v-avatar>
           <v-icon>mdi-star</v-icon>
         </v-avatar>
@@ -98,13 +102,11 @@
             v-for="(section, i) in sections"
             v-if="parsed[section]"
             :key="`window-${i}`"
-            :value="section"
+            class="v-example"
             xs12
             shrink
           >
-            <div
-              class="example-container"
-            >
+            <div class="v-example__container">
               <doc-markup
                 :value="file"
                 :filename="false"
@@ -235,10 +237,14 @@
     .component-example .application--example
       z-index: auto
 
-  .example-container
+  .v-example__container
     height: 100%
     max-height: 550px
     overflow-y: auto
+
+  .v-example:not(:first-child) .v-example__container {
+    border-left: 1px solid rgba(#FFF, .12)
+  }
 
   .component-example
     // margin-bottom: 32px
