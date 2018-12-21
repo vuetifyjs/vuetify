@@ -31,7 +31,7 @@
   "/layout/breakpoints": "/framework/breakpoints",
   "/layout/aspect-ratios": "/framework/aspect-ratios",
   "/layout/spacing": "/framework/spacing",
-  "/layout/text-alignment": "/framework/text-alignment",
+  "/layout/alignment": "/framework/alignment",
   "/layout/display": "/framework/display",
   "/layout/elevation": "/framework/elevation",
   "/layout/sandbox": "/framework/sandbox",
