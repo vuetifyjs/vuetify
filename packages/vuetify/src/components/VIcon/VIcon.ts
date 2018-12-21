@@ -33,7 +33,8 @@ const VIcon = mixins(
   props: {
     disabled: Boolean,
     left: Boolean,
-    right: Boolean
+    right: Boolean,
+    flipped: Boolean
   },
 
   methods: {
@@ -63,7 +64,8 @@ const VIcon = mixins(
           'v-icon--disabled': this.disabled,
           'v-icon--left': this.left,
           'v-icon--link': this.$listeners.click || this.$listeners['!click'],
-          'v-icon--right': this.right
+          'v-icon--right': this.right,
+          'v-icon--flipped': this.flipped
         },
         attrs: {
           'aria-hidden': true,
