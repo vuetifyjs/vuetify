@@ -55,12 +55,8 @@
   } from 'vuex'
 
   export default {
-    data: () => ({
-      snack: false
-    }),
-
     computed: {
-      ...mapState('snackbar', ['snackbar']),
+      ...mapState('snackbar', ['snackbar', 'value']),
       bind () {
         if (this.snackbar.to) return { to: this.snackbar.to }
         if (this.snackbar.href) {
@@ -89,6 +85,14 @@
           case 'error': return 'error'
           default: return false
         }
+      },
+      snack: {
+        get () {
+          return this.value
+        },
+        set (val) {
+          this.setValue(val)
+        }
       }
     },
 
@@ -114,7 +118,7 @@
     },
 
     methods: {
-      ...mapMutations('snackbar', ['setSnackbar']),
+      ...mapMutations('snackbar', ['setSnackbar', 'setValue']),
       markViewed () {
         if (this.snackbar.id) {
           localStorage.setItem(this.snackbar.id, true)

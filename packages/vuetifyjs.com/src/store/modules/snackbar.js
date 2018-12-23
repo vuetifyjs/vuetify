@@ -1,3 +1,5 @@
+import { set } from '@/util/vuex'
+
 const DEFAULT_SNACKBAR = Object.freeze({
   color: 'success',
   href: false,
@@ -12,7 +14,8 @@ export default {
   state: {
     snackbar: {
       ...DEFAULT_SNACKBAR
-    }
+    },
+    value: false
   },
   mutations: {
     setSnackbar: (state, payload) => {
@@ -24,6 +27,7 @@ export default {
         to: false,
         timeout: 6000
       }, payload)
-    }
+    },
+    setValue: set('value')
   }
 }
