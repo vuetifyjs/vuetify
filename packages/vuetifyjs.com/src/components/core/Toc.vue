@@ -50,8 +50,11 @@
     },
 
     watch: {
-      isLoading (val) {
-        !val && this.genList()
+      isLoading: {
+        immediate: true,
+        handler (val) {
+          !val && this.genList()
+        }
       }
     },
 
