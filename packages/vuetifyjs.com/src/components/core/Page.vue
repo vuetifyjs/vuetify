@@ -90,7 +90,9 @@
         this.structure = false
         this.$router.push({ name: '404' })
         throw new Error(`Unable to find page for <${namespace}/${page}>`)
-      }).finally(this.setIsLoading)
+      }).finally(() => {
+        this.$nextTick(this.setIsLoading)
+      })
     },
 
     mounted () {
