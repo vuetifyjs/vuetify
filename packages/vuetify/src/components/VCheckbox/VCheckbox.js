@@ -63,7 +63,10 @@ export default {
   methods: {
     genCheckbox () {
       return this.$createElement('div', {
-        staticClass: 'v-input--selection-controls__input'
+        staticClass: 'v-input--selection-controls__input',
+        on: {
+          click: this.onChange
+        }
       }, [
         this.genInput('checkbox', {
           ...this.$attrs,
