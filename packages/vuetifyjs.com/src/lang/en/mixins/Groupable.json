@@ -1,0 +1,5 @@
+{
+  "props": {
+    "disabled": "Disables the item from changing value from the toggle method"
+  }
+}
