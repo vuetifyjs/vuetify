@@ -1,5 +1,5 @@
 // Styles
-import '../../stylus/components/_buttons.styl'
+import './VBtn.styl'
 
 // Types
 import { VNode } from 'vue'
