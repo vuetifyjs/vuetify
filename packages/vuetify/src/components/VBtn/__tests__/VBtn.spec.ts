@@ -107,8 +107,8 @@ describe('VBtn.js', () => {
     const wrapper = mountFunction({
       provide: {
         btnToggle: {
-          register: register,
-          unregister: unregister
+          register,
+          unregister
         }
       }
     })
@@ -119,7 +119,6 @@ describe('VBtn.js', () => {
   })
 
   it('should emit a click event', async () => {
-
     const wrapper = mountFunction({
       propsData: {
         href: '#!'
