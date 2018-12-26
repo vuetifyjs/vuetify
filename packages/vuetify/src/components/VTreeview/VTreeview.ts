@@ -190,9 +190,9 @@ export default mixins(
     countItems (items: any[]) {
       let count = 0
       for (let i = 0; i < items.length; i++) {
-        const item = items[i]
+        const children = getObjectValueByPath(items[i], this.itemChildren)
         count += 1
-        count += item.children ? this.countItems(item.children) : 0
+        count += children ? this.countItems(children) : 0
       }
 
       return count

@@ -343,4 +343,27 @@ test('VTreeView.ts', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
     expect(wrapper.find('.v-treeview-node__toggle').length).toBe(1)
   })
+
+  it('should recalculate tree when loading async children using custom key', async () => {
+    const wrapper = mount(VTreeview, {
+      propsData: {
+        items: [
+          {
+            id: 1,
+            name: 'One',
+            __children: []
+          }
+        ],
+        itemChildren: '__children',
+        loadChildren: item => item.__children.push({ id: 2, name: 'Two' })
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.find('.v-treeview-node__toggle')[0].trigger('click')
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })
