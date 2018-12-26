@@ -1,41 +1,61 @@
-import { test } from '@/test'
+// Libraries
 import Vue from 'vue'
-import VBtn from '@/components/VBtn'
-import VProgressCircular from '@/components/VProgressCircular'
 
-const stub = {
-  name: 'router-link',
-  render: h => h('button')
-}
+// Plugins
+import Router from 'vue-router'
 
-test('VBtn.js', ({ mount, compileToFunctions }) => {
+// Components
+import VBtn from '../VBtn'
+
+// Utilities
+import {
+  createLocalVue,
+  shallowMount,
+  mount,
+  Wrapper
+} from '@vue/test-utils'
+import { compileToFunctions } from 'vue-template-compiler'
+
+describe('VBtn.js', () => {
+  let mountFunction: (options?: object) => Wrapper<Vue>
+  let router: Router
+  let localVue: typeof Vue
+
+  beforeEach(() => {
+    router = new Router()
+    localVue = createLocalVue()
+    localVue.use(Router)
+
+    mountFunction = (options = {}) => {
+      return shallowMount(VBtn, {
+        localVue,
+        router,
+        ...options
+      })
+    }
+  })
+
   it('should render component and match snapshot', () => {
-    const wrapper = mount(VBtn)
-
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(mountFunction().html()).toMatchSnapshot()
   })
 
   it('should render component with color prop and match snapshot', () => {
-    const wrapper1 = mount(VBtn, {
+    expect(mountFunction({
       propsData: {
         color: 'green darken-1'
       }
-    })
+    }).html()).toMatchSnapshot()
 
-    expect(wrapper1.html()).toMatchSnapshot()
-
-    const wrapper2 = mount(VBtn, {
+    expect(mountFunction({
       propsData: {
         color: 'green darken-1',
         flat: true
       }
-    })
-
-    expect(wrapper2.html()).toMatchSnapshot()
+    }).html()).toMatchSnapshot()
   })
 
   it('should render component with loader slot and match snapshot', () => {
-    const wrapper = mount(VBtn, {
+    const wrapper = mountFunction({
       propsData: {
         loading: true
       },
@@ -58,35 +78,19 @@ test('VBtn.js', ({ mount, compileToFunctions }) => {
   })
 
   it('should render an <a> tag when using href prop', () => {
-    const wrapper = mount(VBtn, {
+    const wrapper = mountFunction({
       propsData: {
         href: 'http://www.google.com'
       }
     })
 
     expect(wrapper.is('a')).toBe(true)
-    expect(wrapper.getAttribute('href')).toBe('http://www.google.com')
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-
-  it('should render a <button> tag when using to prop', () => {
-    const instance = Vue.extend()
-    instance.component('router-link', stub)
-
-    const wrapper = mount(VBtn, {
-      propsData: {
-        to: '/home'
-      },
-      instance
-    })
-
-    expect(wrapper.is('button')).toBe(true)
-    expect(wrapper.vm.$props.to).toBe('/home')
+    expect(wrapper.vm.$el.getAttribute('href')).toBe('http://www.google.com')
     expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should render specified tag when using tag prop', () => {
-    const wrapper = mount(VBtn, {
+    const wrapper = mountFunction({
       propsData: {
         tag: 'a'
       }
@@ -100,7 +104,7 @@ test('VBtn.js', ({ mount, compileToFunctions }) => {
     const register = jest.fn()
     const unregister = jest.fn()
 
-    const wrapper = mount(VBtn, {
+    const wrapper = mountFunction({
       provide: {
         btnToggle: {
           register: register,
@@ -115,14 +119,11 @@ test('VBtn.js', ({ mount, compileToFunctions }) => {
   })
 
   it('should emit a click event', async () => {
-    const instance = Vue.extend()
-    instance.component('router-link', stub)
 
-    const wrapper = mount(VBtn, {
+    const wrapper = mountFunction({
       propsData: {
         href: '#!'
-      },
-      instance
+      }
     })
 
     const click = jest.fn()
@@ -136,45 +137,45 @@ test('VBtn.js', ({ mount, compileToFunctions }) => {
   })
 
   it('should use custom active-class', () => {
-    const wrapper = mount(VBtn, {
+    const wrapper = mountFunction({
       propsData: {
         inputValue: true,
         activeClass: 'foo'
       }
     })
 
-    expect(wrapper.hasClass('foo')).toBe(true)
+    expect(wrapper.classes('foo')).toBe(true)
   })
 
   it('should have v-btn--depressed class when using depressed prop', () => {
-    const wrapper = mount(VBtn, {
+    const wrapper = mountFunction({
       propsData: {
         depressed: true
       }
     })
 
-    expect(wrapper.hasClass('v-btn--depressed')).toBe(true)
+    expect(wrapper.classes('v-btn--depressed')).toBe(true)
   })
 
   it('should have v-btn--flat class when using flat and depressed props', () => {
-    const wrapper = mount(VBtn, {
+    const wrapper = mountFunction({
       propsData: {
         depressed: true,
         flat: true
       }
     })
 
-    expect(wrapper.hasClass('v-btn--flat')).toBe(true)
+    expect(wrapper.classes('v-btn--flat')).toBe(true)
   })
 
   it('should have v-btn--outline and v-btn--depressed classes when using outline prop', () => {
-    const wrapper = mount(VBtn, {
+    const wrapper = mountFunction({
       propsData: {
         outline: true
       }
     })
 
-    expect(wrapper.hasClass('v-btn--outline')).toBe(true)
-    expect(wrapper.hasClass('v-btn--depressed')).toBe(true)
+    expect(wrapper.classes('v-btn--outline')).toBe(true)
+    expect(wrapper.classes('v-btn--depressed')).toBe(true)
   })
 })

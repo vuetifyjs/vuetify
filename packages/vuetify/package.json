@@ -37,6 +37,7 @@
     "@mdi/font": "^3.0.39",
     "@types/jest": "^22.2.3",
     "@types/node": "^10.12.0",
+    "@vue/test-utils": "^1.0.0-beta.27",
     "autoprefixer": "^9.3.1",
     "avoriaz": "^6.3.0",
     "babel-cli": "^6.26.0",

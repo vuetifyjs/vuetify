@@ -1,12 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VBtn.js should render a <button> tag when using to prop 1`] = `
-
-<button class="v-btn v-btn--router theme--light">
-</button>
-
-`;
-
 exports[`VBtn.js should render an <a> tag when using href prop 1`] = `
 
 <a href="http://www.google.com"

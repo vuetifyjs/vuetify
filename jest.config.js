@@ -32,6 +32,11 @@ module.exports = {
   snapshotSerializers: [
     'jest-serializer-html'
   ],
+  testMatch: [
+    // Default
+    '**/test/**/*.js',
+    '**/__tests__/**/*.spec.ts'
+  ],
   globals: {
     'ts-jest': {
       'useBabelrc': true
