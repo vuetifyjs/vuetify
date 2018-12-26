@@ -27,6 +27,7 @@
           "type": "examples",
           "value": [
             "alignment",
+            "detached",
             "visibility"
           ]
         }
