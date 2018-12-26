@@ -3,7 +3,7 @@ import { test } from '@/test'
 import VTreeview from '@/components/VTreeview/VTreeview'
 
 const singleRootTwoChildren = [
-  { id: 0, name: 'Root', children: [{ id: 1, name: 'Child' }, { id: 2, name: 'Child 2'}]}
+  { id: 0, name: 'Root', children: [{ id: 1, name: 'Child' }, { id: 2, name: 'Child 2' }] }
 ]
 
 const threeLevels = [
@@ -36,12 +36,12 @@ test('VTreeView.ts', ({ mount }) => {
     await wrapper.vm.$nextTick()
 
     expect(fn).toHaveBeenCalledTimes(1)
-    expect(fn).toHaveBeenCalledWith([0, 1, 2, 3])
+    expect(fn).toHaveBeenCalledWith([0, 1, 3, 2])
     expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should load children when expanding', async () => {
-    const loadChildren = (item) => {
+    const loadChildren = item => {
       item.children = [{ id: 1, name: 'Child' }]
     }
 
@@ -61,7 +61,7 @@ test('VTreeView.ts', ({ mount }) => {
   })
 
   it('should load children when selecting, but not render', async () => {
-    const loadChildren = (item) => {
+    const loadChildren = item => {
       item.children = [{ id: 1, name: 'Child' }]
     }
 
@@ -175,7 +175,7 @@ test('VTreeView.ts', ({ mount }) => {
     const fn = jest.fn()
 
     wrapper.vm.$on('update:open', fn)
-    wrapper.setProps({ open: [0, 1]})
+    wrapper.setProps({ open: [0, 1] })
 
     await wrapper.vm.$nextTick()
 
@@ -281,7 +281,7 @@ test('VTreeView.ts', ({ mount }) => {
 
     wrapper.setProps({ value: [0], items: singleRootTwoChildren })
     await wrapper.vm.$nextTick()
-    expect(value).toHaveBeenCalledWith([0, 1, 2, 3])
+    expect(value).toHaveBeenCalledWith([0, 1, 3, 2])
   })
 
   it('should accept string value for id', async () => {
@@ -289,7 +289,7 @@ test('VTreeView.ts', ({ mount }) => {
       propsData: { itemKey: 'name' }
     })
 
-    wrapper.setProps({ items: [{ name: 'Foobar' }]})
+    wrapper.setProps({ items: [{ name: 'Foobar' }] })
 
     await wrapper.vm.$nextTick()
 
@@ -301,7 +301,7 @@ test('VTreeView.ts', ({ mount }) => {
   })
 
   it('should warn developer when using non-scoped slots', () => {
-    const wrapper = mount(VTreeview, {
+    mount(VTreeview, {
       slots: {
         prepend: [{ render: h => h('div') }],
         append: [{ render: h => h('div') }]
@@ -319,7 +319,7 @@ test('VTreeView.ts', ({ mount }) => {
             text: 'root',
             children: []
           }
-        ],
+        ]
       }
     })
 
@@ -336,7 +336,7 @@ test('VTreeView.ts', ({ mount }) => {
             text: 'root',
             children: []
           }
-        ],
+        ]
       }
     })
 
