@@ -1,6 +1,7 @@
 {
   "presets": [
-    ["env", {
+    "@vue/babel-preset-jsx",
+    ["@babel/preset-env", {
       "targets": {
         "browsers": [">0.5%", "last 2 versions", "not dead", "not op_mini all"],
         "node": 8
@@ -8,10 +9,7 @@
       "modules": false
     }]
   ],
-  "plugins": [
-    ["transform-define", "./build/babel-transform-define.js"],
-    "transform-object-rest-spread"
-  ],
+  "plugins": ["@babel/plugin-syntax-jsx"],
   "env": {
     "test": {
       "presets": [

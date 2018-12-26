@@ -1,6 +1,9 @@
 {
   "extends": "../../tsconfig.json",
   "baseUrl": "./",
+  "comilerOptions": {
+    "jsx": "preserve"
+  },
   "include": [
     "src"
   ]

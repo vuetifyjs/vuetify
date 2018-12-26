@@ -1,16 +1,13 @@
 require('dotenv').config()
 
 const os = require('os')
-const HappyPack = require('happypack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
+const webpack = require('webpack')
+const vuetifyPackage = require('../package.json')
 
 const isProd = process.env.NODE_ENV === 'production'
 const extractCSS = isProd || process.env.TARGET === 'development'
-
-exports.happyThreadPool = HappyPack.ThreadPool({
-  size: Math.min(os.cpus().length, 4)
-})
 
 const cssLoaders = [
   // https://github.com/webpack-contrib/mini-css-extract-plugin#user-content-advanced-configuration-example
@@ -24,13 +21,17 @@ const cssLoaders = [
 const plugins = [
   new FriendlyErrorsWebpackPlugin({
     clearConsole: true
+  }),
+  new webpack.DefinePlugin({
+    __VUETIFY_VERSION__: JSON.stringify(vuetifyPackage.version),
+    __REQUIRED_VUE__: JSON.stringify(vuetifyPackage.peerDependencies.vue)
   })
 ]
 
 exports.config = {
   mode: isProd ? 'production' : 'development',
   resolve: {
-    extensions: ['*', '.js', '.json', '.vue', '.ts']
+    extensions: ['*', '.js', '.json', '.vue', '.ts', '.tsx']
   },
   node: {
     fs: 'empty'

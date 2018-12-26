@@ -4,7 +4,8 @@ import {
   VueConstructor,
   ComponentOptions,
   FunctionalComponentOptions,
-  VNodeData
+  VNodeData,
+  VNode
 } from 'vue'
 import { CombinedVueInstance, Vue } from 'vue/types/vue'
 import {
@@ -112,5 +113,17 @@ declare module 'vue/types/vue' {
     extend<Options, PropNames extends string = never> (definition: FunctionalComponentOptions<Record<PropNames, any>, PropNames[]> & Options): OptionsVue<V, {}, {}, {}, Record<PropNames, any>, Options>
     extend<Props, Options> (definition: FunctionalComponentOptions<Props, RecordPropsDefinition<Props>> & Options): OptionsVue<V, {}, {}, {}, Props, Options>
     extend<V extends Vue = Vue> (options?: ComponentOptions<V> & Options): OptionsVue<V, {}, {}, {}, {}, Options>
+  }
+}
+
+declare global {
+  namespace JSX {
+    // tslint:disable no-empty-interface
+    interface Element extends VNode {}
+    // tslint:disable no-empty-interface
+    interface ElementClass extends Vue {}
+    interface IntrinsicElements {
+      [elem: string]: any
+    }
   }
 }
