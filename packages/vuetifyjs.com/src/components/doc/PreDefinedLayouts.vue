@@ -12,39 +12,48 @@
         sm4
       >
         <v-hover>
-          <v-card
-            slot-scope="{ hover }"
-            :href="layout.href"
-            rel="noopener"
-            target="_blank"
-          >
+          <v-card slot-scope="{ hover }">
             <v-img
               :src="genSrc(layout.name)"
               :aspect-ratio="16/9"
               width="100%"
             />
-            <v-card
-              v-if="hover"
-              color="rgba(0,0,0,0.70)"
+            <v-sheet
+              :color="hover ? 'rgba(0, 0, 0, 0.52)' : 'transparent'"
+              class="transition-swing"
               dark
               style="position: absolute; top: 0; left: 0; right: 0; bottom: 0;"
               height="100%"
               width="100%"
             >
               <v-layout
+                v-if="hover"
                 layout
                 align-center
                 justify-center
                 fill-height
                 ma-0
               >
-                <span
-                  class="title mr-1"
-                  v-text="layout.name"
-                />
-                <v-icon>mdi-open-in-new</v-icon>
+                <a
+                  :href="`https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetifyjs.com/src${layout.href}.vue`"
+                  class="text-decoration-none mx-2"
+                  target="_blank"
+                  rel="noopener"
+                  title="Source code"
+                >
+                  <v-icon>mdi-code-tags</v-icon>
+                </a>
+                <a
+                  :href="layout.href"
+                  class="text-decoration-none mx-2"
+                  target="_blank"
+                  rel="noopener"
+                  title="Demo"
+                >
+                  <v-icon>mdi-open-in-new</v-icon>
+                </a>
               </v-layout>
-            </v-card>
+            </v-sheet>
           </v-card>
         </v-hover>
         <div

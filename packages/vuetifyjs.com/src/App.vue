@@ -44,6 +44,10 @@
 </script>
 
 <style>
+  .text-decoration-none {
+    text-decoration: none;
+  }
+
   .wf-loading .material-icons {
     display: none;
   }
