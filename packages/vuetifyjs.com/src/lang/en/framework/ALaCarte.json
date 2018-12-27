@@ -8,7 +8,7 @@
   "importText2": "You can also import components in .vue files, as seen below. When doing so it's important that you import all named exports, and then destructure them in components. Otherwise child components such as `v-card-text` or `v-expansion-panel-content` will not be available.",
   "styleHeader": "## Required styles",
   "styleText1": "To obtain all the required styles, we need to import them in stylus. In order for webpack to handle this, you will need to install `stylus` and the `stylus-loader` from **npm**.",
-  "stylusDetailNotice": "For a more detailed explanation on how to setup your application to handle stylus, please navigate to the [theme page](/style/theme#stylus-guide).",
+  "stylusDetailNotice": "For a more detailed explanation on how to setup your application to handle stylus, please navigate to the [theme page](/framework/theme#modifying-stylus-variables).",
   "styleText2": "Now you will need to require the stylus from the entry point of your application. This is the same place where you're importing Vue and Vuetify (usually `main.js` or `app.js`). Keep in mind, requiring this in your main `App.vue` can cause slow load times as it is re-processed when you make updates.",
   "loaderHeader": "# vuetify-loader",
   "loaderText1": "Keeping track of all the components you're using can be a real chore, so we wrote a webpack loader to help you. [**vuetify-loader**](https://github.com/vuetifyjs/vuetify-loader) will automatically import all the vuetify components you use, where you use them.\nThis will also make code-splitting more effective, as webpack will only load the components required for that chunk to be displayed.",

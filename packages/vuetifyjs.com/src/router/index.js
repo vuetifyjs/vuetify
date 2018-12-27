@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import VueAnalytics from 'vue-analytics'
 import scrollBehavior from './scroll-behavior'
+import redirects from './301.json'
 
 Vue.use(Router)
 
@@ -29,6 +30,10 @@ export function createRouter () {
         ),
         props: route => ({ lang: route.params.lang }),
         children: [
+          ...Object.keys(redirects).map(k => ({
+            path: k.replace(/^\//, ''),
+            redirect: () => redirects[k].replace(/^\//, '')
+          })),
           {
             path: '/',
             name: 'home/Home',
