@@ -11,20 +11,18 @@ import VBtn from '../VBtn'
 import { consoleWarn } from '../../util/console'
 
 /* @vue/component */
-export default {
+export default VAutocomplete.extend({
   name: 'v-overflow-btn',
-
-  extends: VAutocomplete,
 
   props: {
     segmented: Boolean,
     editable: Boolean,
-    transition: VSelect.props.transition
+    transition: VSelect.options.props.transition
   },
 
   computed: {
     classes () {
-      return Object.assign(VAutocomplete.computed.classes.call(this), {
+      return Object.assign(VAutocomplete.options.computed.classes.call(this), {
         'v-overflow-btn': true,
         'v-overflow-btn--segmented': this.segmented,
         'v-overflow-btn--editable': this.editable
@@ -32,7 +30,7 @@ export default {
     },
     isAnyValueAllowed () {
       return this.editable ||
-        VAutocomplete.computed.isAnyValueAllowed.call(this)
+        VAutocomplete.options.computed.isAnyValueAllowed.call(this)
     },
     isSingle () {
       return true
@@ -41,7 +39,7 @@ export default {
       return this.segmented ? this.allItems : this.filteredItems
     },
     $_menuProps () {
-      const props = VAutocomplete.computed.$_menuProps.call(this)
+      const props = VAutocomplete.options.computed.$_menuProps.call(this)
       props.transition = props.transition || 'v-menu-transition'
       return props
     }
@@ -50,13 +48,13 @@ export default {
   methods: {
     genSelections () {
       return this.editable
-        ? VAutocomplete.methods.genSelections.call(this)
-        : VSelect.methods.genSelections.call(this) // Override v-autocomplete's override
+        ? VAutocomplete.options.methods.genSelections.call(this)
+        : VSelect.options.methods.genSelections.call(this) // Override v-autocomplete's override
     },
     genCommaSelection (item, index, last) {
       return this.segmented
         ? this.genSegmentedBtn(item)
-        : VSelect.methods.genCommaSelection.call(this, item, index, last)
+        : VSelect.options.methods.genCommaSelection.call(this, item, index, last)
     },
     genInput () {
       const input = VTextField.options.methods.genInput.call(this)
@@ -105,4 +103,4 @@ export default {
       }
     }
   }
-}
+})

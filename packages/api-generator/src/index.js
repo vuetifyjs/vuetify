@@ -145,8 +145,9 @@ for (const name in installedComponents) {
   if (!componentNameRegex.test(name)) continue
 
   let component = installedComponents[name]
+
   if (component.options.$_wrapperFor) {
-    component = Vue.extend(component).extend(component.options.$_wrapperFor)
+    component = component.options.$_wrapperFor
   }
 
   const kebabName = hyphenate(name)
