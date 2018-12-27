@@ -9,10 +9,6 @@
       "header": "### Alignment",
       "desc": "Tooltip can be aligned to any of the four sides of the activator element"
     },
-    "detached": {
-      "header": "### Detached",
-      "desc": "Though tooltips can wrap any element, you can also used them detached via the `attach` prop . When using `attach`, tooltip style changes can be done using `content-class`."
-    },
     "visibility": {
       "header": "### Visibility",
       "desc": "Tooltip visibility can be programmatically changed using `v-model`."
