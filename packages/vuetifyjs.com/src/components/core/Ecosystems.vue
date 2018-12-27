@@ -81,6 +81,11 @@
           href: 'https://theme-generator.vuetifyjs.com'
         },
         {
+          text: 'vuetify-loader',
+          icon: 'mdi-package-variant-closed',
+          href: 'https://github.com/vuetifyjs/vuetify-loader'
+        },
+        {
           text: vm.$t('Vuetify.AppToolbar.cognito'),
           icon: 'mdi-server-network',
           href: 'https://cognito.vuetifyjs.com'
