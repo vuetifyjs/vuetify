@@ -13,20 +13,67 @@
         md6
         d-flex
       >
-        <v-card class="text-xs-center">
-          <div>
-            <v-avatar
-              :color="philosophy.color"
-              class="ma-4"
-              size="150"
+        <v-card
+          :color="philosophy.color"
+          class="mx-auto"
+          dark
+          elevation="6"
+          style="border-radius: 6px; min-height: 350px;"
+        >
+          <v-container
+            grid-list-xl
+            fill-height
+          >
+            <v-layout
+              justify-space-between
+              align-center
             >
-              <v-icon dark size="54" v-text="philosophy.icon" />
-            </v-avatar>
-          </div>
-          <v-headline class="mb-3" v-text="philosophy.title" />
-          <v-card-text class="text-xs-justify">
-            <doc-markdown :code="philosophy.caption" />
-          </v-card-text>
+              <v-flex
+                xs6
+                align-self-start
+              >
+                <h2 class="text-uppercase mb-3">
+                  <strong
+                    class="headline font-weight-bold"
+                    v-text="philosophy.title"
+                  />
+                  <div
+                    class="font-weight-thin display-1"
+                    v-text="philosophy.subtitle"
+                  />
+                </h2>
+
+                <div class="text-xs-justify">
+                  <doc-markdown :code="philosophy.caption" />
+                </div>
+
+                <div
+                  v-if="philosophy.more"
+                  class="mt-3"
+                >
+                  <v-btn
+                    :href="philosophy.more"
+                    class="ma-0"
+                    color="white"
+                    outline
+                    rel="noopener"
+                    small
+                    target="_blank"
+                  >
+                    More
+                  </v-btn>
+                </div>
+              </v-flex>
+
+              <v-flex pa-3>
+                <v-img
+                  :src="philosophy.src"
+                  class="ml-auto elevation-6"
+                  width="225"
+                />
+              </v-flex>
+            </v-layout>
+          </v-container>
         </v-card>
       </v-flex>
     </v-layout>
@@ -39,33 +86,39 @@
       namespace: undefined
     },
 
-    data: () => ({
-      icons: [
+    data: vm => ({
+      philosophies: [
         {
-          icon: 'mdi-account-multiple',
-          color: 'indigo'
+          color: 'indigo',
+          title: vm.$t('GettingStarted.WhyVuetify.vibrant'),
+          subtitle: vm.$t('GettingStarted.WhyVuetify.community'),
+          caption: vm.$t('GettingStarted.WhyVuetify.communityCaption'),
+          src: 'https://cdn.vuetifyjs.com/images/why-vuetify/community.png',
+          more: 'https://community.vuetifyjs.com'
         },
         {
-          icon: 'mdi-toolbox',
-          color: 'purple'
+          color: 'purple',
+          title: vm.$t('GettingStarted.WhyVuetify.semantic'),
+          subtitle: vm.$t('GettingStarted.WhyVuetify.toolkit'),
+          caption: vm.$t('GettingStarted.WhyVuetify.toolkitCaption'),
+          src: 'https://cdn.vuetifyjs.com/images/why-vuetify/toolkit.png'
         },
         {
-          icon: 'mdi-update',
-          color: 'red lighten-2'
+          color: 'red lighten-2',
+          title: vm.$t('GettingStarted.WhyVuetify.continuous'),
+          subtitle: vm.$t('GettingStarted.WhyVuetify.updates'),
+          caption: vm.$t('GettingStarted.WhyVuetify.updatesCaption'),
+          src: 'https://cdn.vuetifyjs.com/images/why-vuetify/updates.png',
+          more: 'https://github.com/vuetifyjs/vuetify/releases'
         },
         {
-          icon: 'mdi-flash',
-          color: 'yellow darken-3'
+          color: 'teal',
+          title: vm.$t('GettingStarted.WhyVuetify.amazing'),
+          subtitle: vm.$t('GettingStarted.WhyVuetify.support'),
+          caption: vm.$t('GettingStarted.WhyVuetify.supportCaption'),
+          src: 'https://cdn.vuetifyjs.com/images/why-vuetify/support.png'
         }
       ]
-    }),
-
-    computed: {
-      philosophies () {
-        return this.$t('GettingStarted.WhyVuetify.philosophies', 'en').map((o, i) => {
-          return Object.assign({}, o, this.icons[i])
-        })
-      }
-    }
+    })
   }
 </script>
