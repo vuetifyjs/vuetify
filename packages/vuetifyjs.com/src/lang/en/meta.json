@@ -29,6 +29,11 @@
     "description": "Stuck on a problem? Check these frequently asked questions.",
     "keywords": "frequently asked questions, faq"
   },
+  "getting-started/meet-the-team": {
+    "title": "Meet the team",
+    "description": "Meet the team responsible for making Vuetify great. Thank you for supporting Vuetify!",
+    "keywords": "vuetify dev team, vuetify core team"
+  },
   "getting-started/sponsors-and-backers": {
     "title": "Sponsors and backers",
     "description": "Help support Vuetify.js by backing the development of new features",
