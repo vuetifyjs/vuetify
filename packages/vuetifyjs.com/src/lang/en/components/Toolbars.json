@@ -80,5 +80,8 @@
     "status": "Reduces the system bar height",
     "tabs": "Will set an explicit **42px** height for extension. Useful when default `v-tab`s are used in the extended slot. If you have a custom height `v-tab`, you should specify a height with **extensionHeight**.",
     "window": "Increases the system bar height"
+  },
+  "slots": {
+    "extension": "Slot positioned directly under main content"
   }
 }

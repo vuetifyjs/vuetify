@@ -22,6 +22,7 @@
     "v-treeview": {
       "activatable": "Allows user to mark a node as active by clicking on it",
       "active": "Syncable prop that allows one to control which nodes are active. The array consists of the `item-key` of each active item.",
+      "activeClass": "The class applied to the node when active",
       "expandIcon": "Icon used to indicate that a node can be expanded",
       "hoverable": "Applies a hover class when mousing over nodes",
       "indeterminateIcon": "Icon used when node is in an indeterminate state",
