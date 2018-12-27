@@ -40,6 +40,8 @@
   "props": {
     "closeOnClick": "Designates if menu should close on outside-activator click",
     "closeOnContentClick": "Designates if menu should close when its content is clicked",
+    "dark": "Mixins.Themeable.props.dark",
+    "light": "Mixins.Themeable.props.light",
     "disabled": "Disables the menu",
     "disableKeys": "Removes all keyboard interaction",
     "offsetX": "Offset the menu on the x-axis. Works in conjunction with direction left/right",
