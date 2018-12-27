@@ -287,7 +287,7 @@
 
     .mono
       font-family: 'Roboto Mono', monospace
-      font-weight: 900
+      font-weight: 500
 
     .header
       font-family: 'Roboto Mono', monospace
