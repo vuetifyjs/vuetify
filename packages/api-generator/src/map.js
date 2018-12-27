@@ -723,7 +723,7 @@ module.exports = {
         value: 'void'
       },
       {
-        name: 'right',
+        name: 'previous',
         value: 'void'
       }
     ]
