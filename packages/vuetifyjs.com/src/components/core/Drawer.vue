@@ -78,8 +78,10 @@
         />
         <core-item
           v-else
+          :chip="genChip(item)"
           :icon="item.icon"
           :key="`item-${i}`"
+          :subtext="item.subtext"
           :text="item.text"
           :to="item.to"
         />
@@ -97,6 +99,7 @@
   } from 'vuex'
   import kebabCase from 'lodash/kebabCase'
   import drawerItems from '@/data/drawerItems.json'
+  import { genChip } from '@/util/helpers'
 
   export default {
     provide: {
@@ -175,6 +178,7 @@
     },
 
     methods: {
+      genChip,
       ...mapMutations('app', ['setDrawer']),
       init ({ default: docsearch }) {
         const vm = this
