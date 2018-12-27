@@ -12,7 +12,7 @@
       <ad-drawer v-else-if="viewport === 'md' && $vuetify.breakpoint.mdAndUp">
         <v-layout
           column
-          style="min-height: 100vh"
+          fill-height
         >
           <v-flex
             xs12
