@@ -104,6 +104,8 @@
     "outline": "Applies the outline style to the input",
     "placeholder": "Sets the input’s placeholder text",
     "prefix": "Displays prefix text",
+    "prependInnerIcon": "Prepends an icon inside the component, uses the same syntax as `v-icon`",
+    "prependInnerIconCb": "Callback for prepended icon when clicked",
     "reverse": "Reverses the input orientation",
     "rows": "Controls the number of rows in a textarea",
     "rowHeight": "Designate a custom _row-height_. Used for determining input height when using **multi-line** or **textarea** props",
