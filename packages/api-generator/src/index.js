@@ -63,12 +63,12 @@ function getPropSource (name, mixins) {
   const source = null
   for (let i = 0; i < mixins.length; i++) {
     let mixin = mixins[i]
-    if (mixin.name === 'VueComponent') mixin = mixin.options
+    if (mixin.name !== 'VueComponent') mixin = Vue.extend(mixin)
 
-    if (mixin.name) {
-      const source = Object.keys(mixin.props || {}).find(p => p === name) && mixin.name
-      const found = getPropSource(name, [mixin.extends].concat(mixin.mixins).filter(m => !!m)) || source
-      if (found) return found
+    if (mixin.options.name) {
+      const source = Object.keys(mixin.options.props || {}).find(p => p === name) && mixin.options.name
+      const found = getPropSource(name, [mixin.super].concat(mixin.options.extends).concat(mixin.options.mixins).filter(m => !!m)) || source
+      if (found) return hyphenate(found)
     }
   }
 
@@ -96,8 +96,9 @@ function parseComponent (component) {
 }
 
 function parseProps (component, array = [], mixin = false) {
-  const mixins = [component.extends].concat(component.mixins).filter(m => !!m)
-  const props = component.props || {}
+  const options = component.options
+  const mixins = [component.super].concat(options.extends).concat(options.mixins).filter(m => !!m)
+  const props = options.props || {}
 
   Object.keys(props).forEach(prop => {
     const generated = genProp(prop, props, mixins)
@@ -108,18 +109,18 @@ function parseProps (component, array = [], mixin = false) {
 }
 
 function parseMixins (component) {
-  if (!component.mixins) return []
+  if (!component.options.mixins) return []
 
   let mixins = []
-  for (let i = 0; i < component.mixins.length; i++) {
-    let mixin = component.mixins[i]
+  for (let i = 0; i < component.options.mixins.length; i++) {
+    let mixin = component.options.mixins[i]
 
-    if (mixin.name === 'VueComponent') mixin = mixin.options
+    if (mixin.name !== 'VueComponent') mixin = Vue.extend(mixin)
 
-    if (mixin.name) {
-      mixins.push(mixin.name)
+    if (mixin.options.name) {
+      mixins.push(mixin.options.name)
 
-      if (mixin.mixins) {
+      if (mixin.options.mixins) {
         mixins = mixins.concat(parseMixins(mixin))
       }
     }
@@ -149,7 +150,7 @@ for (const name in installedComponents) {
   }
 
   const kebabName = hyphenate(name)
-  let options = parseComponent(component.options || component)
+  let options = parseComponent(component)
 
   if (map[kebabName]) {
     options = deepmerge(options, map[kebabName], { arrayMerge })
