@@ -41,7 +41,6 @@ export default VInput.extend({
       type: [Number, String],
       default: 100
     },
-    range: Boolean,
     step: {
       type: [Number, String],
       default: 1
