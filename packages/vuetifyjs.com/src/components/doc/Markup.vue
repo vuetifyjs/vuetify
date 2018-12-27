@@ -1,5 +1,5 @@
 <template>
-  <div class="v-markup">
+  <div :id="id" class="v-markup">
     <prism
       v-if="$slots.default || code"
       :language="language"
@@ -78,6 +78,10 @@
         const href = `https://github.com/vuetifyjs/vuetify/tree/${branch}/packages/vuetifyjs.com/src/snippets`
 
         return `${href}/${this.file}`
+      },
+      id () {
+        if (this.value === 'markup') return
+        return 'markup-' + this.value.replace(/_/g, '-')
       }
     },
 
