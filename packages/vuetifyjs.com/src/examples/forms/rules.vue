@@ -73,7 +73,7 @@
 
         if (this.match) {
           const rule =
-            v => !!v && v === this.match ||
+            v => (!!v && v) === this.match ||
               'Values do not match'
 
           rules.push(rule)
