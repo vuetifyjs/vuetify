@@ -626,6 +626,10 @@ module.exports = {
         signature: '(): void'
       },
       {
+        name: 'resetValidation',
+        signature: '(): void'
+      },
+      {
         name: 'validate',
         signature: '(): boolean'
       }
