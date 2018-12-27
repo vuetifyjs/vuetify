@@ -9,7 +9,7 @@
       { "text": "faq", "to": "frequently-asked-questions" },
       { "text": "meetTheTeam", "to": "meet-the-team", "new": true },
       { "text": "sponsorsAndBackers", "to": "sponsors-and-backers" },
-      { "text": "contributing", "to": "contributing" },
+      { "text": "contributing", "to": "contributing", "updated": true },
       { "text": "roadmap", "to": "roadmap" },
       { "text": "consulting", "to": "consulting-and-support" }
     ]
@@ -30,7 +30,7 @@
         "children": [
           { "text": "aspectRatios", "to": "aspect-ratios" },
           { "text": "breakpoints", "to": "breakpoints" },
-          { "text": "preDefinedLayouts", "to": "pre-defined" }
+          { "text": "preDefinedLayouts", "to": "pre-defined", "updated": true }
         ]
       },
       {
@@ -68,7 +68,7 @@
     "text": "components",
     "icon": "mdi-view-dashboard",
     "children": [
-      { "text": "apiExplorer", "to": "api-explorer" },
+      { "text": "apiExplorer", "subtext": "browseAllComponents", "to": "api-explorer" },
       { "text": "alerts", "to": "alerts" },
       { "text": "avatars", "to": "avatars" },
       { "text": "badges", "to": "badges" },
@@ -156,6 +156,7 @@
   {
     "text": "premiumThemes",
     "icon": "mdi-palette",
-    "to": "themes/premium"
+    "to": "themes/premium",
+    "new": true
   }
 ]
