@@ -343,4 +343,49 @@ test('VTreeView.ts', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
     expect(wrapper.find('.v-treeview-node__toggle').length).toBe(1)
   })
+
+  it.only('should remove old nodes', async () => {
+    const wrapper = mount(VTreeview, {
+      propsData: {
+        items: [
+          {
+            id: 1,
+            name: 'one'
+          },
+          {
+            id: 2,
+            name: 'two'
+          }
+        ]
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({ items: [
+      {
+        id: 1,
+        name: 'one'
+      }
+    ] })
+
+    await wrapper.vm.$nextTick()
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({ items: [
+      {
+        id: 1,
+        name: 'one'
+      },
+      {
+        id: 3,
+        name: 'three'
+      }
+    ] })
+
+    await wrapper.vm.$nextTick()
+    expect(wrapper.html()).toMatchSnapshot()
+
+    expect(Object.keys(wrapper.vm.nodes).length).toBe(2)
+  })
 })
