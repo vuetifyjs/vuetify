@@ -25,7 +25,7 @@
           </div>
           <v-headline class="mb-3" v-text="philosophy.title" />
           <v-card-text class="text-xs-justify">
-            <doc-markdown v-text="philosophy.caption" />
+            <doc-markdown :code="philosophy.caption" />
           </v-card-text>
         </v-card>
       </v-flex>
