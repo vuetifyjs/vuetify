@@ -1,7 +1,9 @@
 {
   "header": "# Text field",
   "headerText": "Text fields components are used for collecting user provided information.",
-  "supplemental": [ "MaskTable" ],
+  "supplemental": [
+    "MaskTable"
+  ],
   "examples": {
     "usage": {
       "desc": "A simple text field with placeholder and/or label."
@@ -118,6 +120,8 @@
   },
   "events": {
     "change": "Components.Inputs.events.change",
+    "click:append-outer": "Emitted when appended outer icon is clicked",
+    "click:prepend-inner": "Emitted when prepended inner icon is clicked",
     "update:error": "Mixins.Validatable.events['update:error']"
   }
 }
