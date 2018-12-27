@@ -2,6 +2,7 @@
   <v-navigation-drawer
     :value="true"
     app
+    absolute
     class="transparent pa-3"
     clipped
     floating
