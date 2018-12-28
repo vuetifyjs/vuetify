@@ -44,7 +44,7 @@
           title: 'core',
           name: 'Kael Watts-Deuchar',
           github: 'kaelwd',
-          avatar: 'avatarStyle=Transparent&topType=ShortHairShaggyMullet&accessoriesType=Blank&hairColor=BlondeGolden&facialHairType=Blank&clotheType=ShirtCrewNeck&clotheColor=Heather&eyeType=Squint&eyebrowType=SadConcerned&mouthType=ScreamOpen&skinColor=Pale'
+          avatar: 'avatarStyle=Transparent&topType=ShortHairShaggyMullet&accessoriesType=Blank&hairColor=BrownDark&facialHairType=Blank&clotheType=ShirtCrewNeck&clotheColor=Heather&eyeType=Squint&eyebrowType=SadConcernedNatural&mouthType=Concerned&skinColor=Pale'
         },
         {
           title: 'core',
