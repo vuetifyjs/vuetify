@@ -188,6 +188,42 @@
        <priority>0.8000</priority>
   </url>
   <url>
+       <loc>https://vuetifyjs.com/en/components/categories/forms</loc>
+       <lastmod>2018-011-30T20:39:47+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://vuetifyjs.com/en/components/categories/navigation</loc>
+       <lastmod>2018-011-30T20:39:47+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://vuetifyjs.com/en/components/categories/layout</loc>
+       <lastmod>2018-011-30T20:39:47+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://vuetifyjs.com/en/components/categories/buttons</loc>
+       <lastmod>2018-011-30T20:39:47+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://vuetifyjs.com/en/components/categories/modals</loc>
+       <lastmod>2018-011-30T20:39:47+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://vuetifyjs.com/en/components/categories/tables</loc>
+       <lastmod>2018-011-30T20:39:47+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.8000</priority>
+  </url>
+  <url>
        <loc>https://vuetifyjs.com/en/components/alerts</loc>
        <lastmod>2018-12-15</lastmod>
        <changefreq>daily</changefreq>
