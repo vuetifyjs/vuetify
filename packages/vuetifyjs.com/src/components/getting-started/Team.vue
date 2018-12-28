@@ -62,6 +62,13 @@
           name: 'Andrew Henry',
           github: 'MajesticPotatoe',
           avatar: 'avatarStyle=Transparent&topType=ShortHairShortRound&accessoriesType=Blank&hairColor=BrownDark&facialHairType=Blank&clotheType=Hoodie&clotheColor=Heather&eyeType=Dizzy&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light'
+        },
+        {
+          title: 'cm',
+          name: 'Brandon Deo',
+          github: 'bdeo',
+          linkedin: 'brandondeo',
+          avatar: 'avatarStyle=Transparent&clotheColor=Heather&clotheType=ShirtCrewNeck&eyeType=Default&eyebrowType=Default&facialHairColor=Black&facialHairType=Blank&hairColor=Blonde&mouthType=Default&skinColor=Pale&topType=ShortHairShortRound'
         }
       ]
     })
