@@ -1,8 +1,5 @@
 <template>
-  <v-container
-    id="page"
-    fluid
-  >
+  <v-container id="page">
     <template v-if="structure">
       <doc-heading v-if="structure.title">
         {{ structure.title }}
@@ -130,3 +127,9 @@
     }
   }
 </script>
+
+<style>
+#page {
+  max-width: 1185px;
+}
+</style>
