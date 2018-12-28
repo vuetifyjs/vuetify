@@ -27,6 +27,7 @@
             "~directives": "directives",
             "~mixins": "mixins",
             "~stylus": "stylus",
+            "~scss": "scss",
             "~util": "util"
           }
         }]

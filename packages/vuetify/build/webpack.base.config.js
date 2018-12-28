@@ -21,6 +21,12 @@ const cssLoaders = [
   { loader: 'stylus-loader', options: { sourceMap: !isProd } }
 ]
 
+const scssLoaders = [
+  { loader: 'style-loader', options: { sourceMap: !isProd } },
+  { loader: 'css-loader', options: { sourceMap: !isProd } },
+  { loader: 'sass-loader', options: { sourceMap: !isProd } }
+]
+
 const plugins = [
   new FriendlyErrorsWebpackPlugin({
     clearConsole: true
@@ -40,6 +46,10 @@ exports.config = {
       {
         test: /\.styl(us)?$/,
         use: cssLoaders
+      },
+      {
+        test: /\.scss$/,
+        use: scssLoaders
       }
     ]
   },
