@@ -4,14 +4,15 @@
     fluid
     pa-0
     mb-5
+    why-vuetify
   >
     <v-layout wrap>
       <v-flex
         v-for="(philosophy, i) in philosophies"
         :key="i"
-        xs12
-        md6
         d-flex
+        xs12
+        lg6
       >
         <v-card
           :color="philosophy.color"
@@ -31,15 +32,12 @@
               ma-0
             >
               <v-flex
-                xs12
-                md6
-                align-self-start
-                fill-height
                 pa-0
+                xs12
+                mb-3
               >
                 <v-layout
                   column
-                  fill-height
                   ma-0
                 >
                   <h2 class="text-uppercase mb-3">
@@ -56,35 +54,36 @@
                   <div class="text-xs-justify">
                     <doc-markdown :code="philosophy.caption" />
                   </div>
-
-                  <div
-                    v-if="philosophy.more"
-                    class="mt-auto"
-                  >
-                    <v-btn
-                      :href="philosophy.more"
-                      class="ma-0"
-                      color="white"
-                      outline
-                      rel="noopener"
-                      small
-                      target="_blank"
-                    >
-                      More
-                    </v-btn>
-                  </div>
                 </v-layout>
               </v-flex>
 
               <v-flex
-                pa-3
-                hidden-sm-and-down
+                hidden-xs-only
+                xs12
               >
                 <v-img
                   :src="philosophy.src"
-                  class="ml-auto elevation-6"
+                  class="elevation-6 mx-auto"
                   width="225"
                 />
+              </v-flex>
+
+              <v-flex
+                v-if="philosophy.more"
+                xs12
+                mt-3
+                text-xs-center
+              >
+                <v-btn
+                  :href="philosophy.more"
+                  color="white"
+                  outline
+                  rel="noopener"
+                  small
+                  target="_blank"
+                >
+                  More
+                </v-btn>
               </v-flex>
             </v-layout>
           </v-container>
@@ -138,3 +137,9 @@
     })
   }
 </script>
+
+<style>
+.why-vuetify p {
+  margin-bottom: 0;
+}
+</style>

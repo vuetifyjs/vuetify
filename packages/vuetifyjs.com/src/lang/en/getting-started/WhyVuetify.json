@@ -37,6 +37,5 @@
   "updates": "Updates",
   "updatesCaption": "Vuetify has a consistent update cycle, allowing you to get your hands on bug fixes and enhancements more often. The development team is committed to providing you with the best experience you can have.",
   "vibrant": "Vibrant",
-  "whyText1": "This was me almost a year ago. There were plenty of **UI toolkits** to choose from, but none them had everything that I needed...yeah, you've heard that before. Often enough though, it _is_ the reason individual's attempts to create products that fill gaps, and is why I started working on Vuetify.",
-  "whyText2": "But now you are the one searching for that perfect framework, and Vuetify is another on a list of many, vying for your attention. While my opinion will be subjective, I will try to outline features that I believe will be valuable to you and/or your organization."
+  "whyText1": "There are plenty of **UI toolkits** to choose from, but what are your metrics for success? Vuetify is a fully featured _development framework_ that provides you with everything you need to take any idea from conception to production."
 }
