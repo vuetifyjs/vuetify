@@ -27,45 +27,59 @@
             <v-layout
               justify-space-between
               align-center
+              wrap
+              ma-0
             >
               <v-flex
-                xs6
+                xs12
+                md6
                 align-self-start
+                fill-height
+                pa-0
               >
-                <h2 class="text-uppercase mb-3">
-                  <strong
-                    class="headline font-weight-bold"
-                    v-text="philosophy.title"
-                  />
-                  <div
-                    class="font-weight-thin display-1"
-                    v-text="philosophy.subtitle"
-                  />
-                </h2>
-
-                <div class="text-xs-justify">
-                  <doc-markdown :code="philosophy.caption" />
-                </div>
-
-                <div
-                  v-if="philosophy.more"
-                  class="mt-3"
+                <v-layout
+                  column
+                  fill-height
+                  ma-0
                 >
-                  <v-btn
-                    :href="philosophy.more"
-                    class="ma-0"
-                    color="white"
-                    outline
-                    rel="noopener"
-                    small
-                    target="_blank"
+                  <h2 class="text-uppercase mb-3">
+                    <strong
+                      class="headline font-weight-bold"
+                      v-text="philosophy.title"
+                    />
+                    <div
+                      class="font-weight-thin display-1"
+                      v-text="philosophy.subtitle"
+                    />
+                  </h2>
+
+                  <div class="text-xs-justify">
+                    <doc-markdown :code="philosophy.caption" />
+                  </div>
+
+                  <div
+                    v-if="philosophy.more"
+                    class="mt-auto"
                   >
-                    More
-                  </v-btn>
-                </div>
+                    <v-btn
+                      :href="philosophy.more"
+                      class="ma-0"
+                      color="white"
+                      outline
+                      rel="noopener"
+                      small
+                      target="_blank"
+                    >
+                      More
+                    </v-btn>
+                  </div>
+                </v-layout>
               </v-flex>
 
-              <v-flex pa-3>
+              <v-flex
+                pa-3
+                hidden-sm-and-down
+              >
                 <v-img
                   :src="philosophy.src"
                   class="ml-auto elevation-6"
@@ -98,10 +112,11 @@
         },
         {
           color: 'purple',
-          title: vm.$t('GettingStarted.WhyVuetify.semantic'),
+          title: vm.$t('GettingStarted.WhyVuetify.material'),
           subtitle: vm.$t('GettingStarted.WhyVuetify.toolkit'),
           caption: vm.$t('GettingStarted.WhyVuetify.toolkitCaption'),
-          src: 'https://cdn.vuetifyjs.com/images/why-vuetify/toolkit.png'
+          src: 'https://cdn.vuetifyjs.com/images/why-vuetify/toolkit.png',
+          more: 'https://material.io/design/'
         },
         {
           color: 'red lighten-2',
@@ -116,7 +131,8 @@
           title: vm.$t('GettingStarted.WhyVuetify.amazing'),
           subtitle: vm.$t('GettingStarted.WhyVuetify.support'),
           caption: vm.$t('GettingStarted.WhyVuetify.supportCaption'),
-          src: 'https://cdn.vuetifyjs.com/images/why-vuetify/support.png'
+          src: 'https://cdn.vuetifyjs.com/images/why-vuetify/support.png',
+          more: 'https://github.com/vuetifyjs/vuetify/pulse'
         }
       ]
     })

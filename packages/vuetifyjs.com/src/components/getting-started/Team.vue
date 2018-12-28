@@ -7,8 +7,9 @@
       <v-flex
         v-for="(member, i) in team"
         :key="i"
-        xs6
-        sm4
+        xs12
+        sm6
+        md4
       >
         <getting-started-member :value="member" />
       </v-flex>
