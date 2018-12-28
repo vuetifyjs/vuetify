@@ -52,7 +52,7 @@ export function createRouter () {
             )
           },
           {
-            path: ':namespace/:page',
+            path: ':namespace/:page/:section?',
             name: 'Documentation',
             props: route => ({
               namespace: route.params.namespace,

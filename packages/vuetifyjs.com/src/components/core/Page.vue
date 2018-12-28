@@ -4,10 +4,13 @@
     fluid
   >
     <template v-if="structure">
-      <doc-heading>
+      <doc-heading v-if="structure.title">
         {{ structure.title }}
       </doc-heading>
-      <div class="mb-5">
+      <div
+        v-if="structure.titleText"
+        class="mb-5"
+      >
         <doc-text
           v-if="structure.titleText"
           class="mb-4"

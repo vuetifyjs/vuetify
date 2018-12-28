@@ -38,5 +38,12 @@
   "/style/typography": "/framework/typography",
   "/style/content": "/framework/content",
   "/motion/scroll": "/framework/scrolling",
-  "/motion/transitions": "/framework/transitions"
+  "/motion/transitions": "/framework/transitions",
+  "/components/checkboxes": "/components/selection-controls",
+  "/components/form": "/components/forms",
+  "/components/radios": "/components/selection-controls",
+  "/components/slide-toggles": "/components/selection-controls",
+  "/components/buttons-and-indicators": "/components/buttons",
+  "/components/progress-circular": "/components/progress",
+  "/components/progress-linear": "/components/progress"
 }
