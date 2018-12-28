@@ -26,39 +26,54 @@
               ma-0
               wrap
             >
-              <v-flex xs12>
+              <v-flex
+                xs12
+                pb-0
+              >
                 <doc-markdown>{{ value.title }}</doc-markdown>
               </v-flex>
-              <a
-                v-if="value.email"
-                :href="`mailto:${value.email}`"
-                :title="`${value.name}'s' Email`"
-                class="text-decoration-none mx-2"
-                target="_blank"
-                rel="noopener"
-              >
-                <v-icon>mdi-email</v-icon>
-              </a>
-              <a
-                v-if="value.github"
-                :href="`https://github.com/${value.github}`"
-                :title="`${value.name}'s' Github Profile`"
-                class="text-decoration-none mx-2"
-                target="_blank"
-                rel="noopener"
-              >
-                <v-icon>mdi-github-face</v-icon>
-              </a>
-              <a
-                v-if="value.linkedin"
-                :href="`https://linkedin.com/in/${value.linkedin}`"
-                :title="`${value.name}'s' LinkedIn Profile`"
-                class="text-decoration-none mx-2"
-                target="_blank"
-                rel="noopener"
-              >
-                <v-icon>mdi-linkedin</v-icon>
-              </a>
+              <v-flex>
+                <a
+                  v-if="value.email"
+                  :href="`mailto:${value.email}`"
+                  :title="`${value.name}'s Email`"
+                  class="text-decoration-none mx-2"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <v-icon>mdi-email</v-icon>
+                </a>
+                <a
+                  v-if="value.twitter"
+                  :href="`https://twitter.com/${value.twitter}`"
+                  :title="`${value.name}'s Twitter Profile`"
+                  class="text-decoration-none mx-2"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <v-icon>mdi-twitter</v-icon>
+                </a>
+                <a
+                  v-if="value.github"
+                  :href="`https://github.com/${value.github}`"
+                  :title="`${value.name}'s Github Profile`"
+                  class="text-decoration-none mx-2"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <v-icon>mdi-github-face</v-icon>
+                </a>
+                <a
+                  v-if="value.linkedin"
+                  :href="`https://linkedin.com/in/${value.linkedin}`"
+                  :title="`${value.name}'s LinkedIn Profile`"
+                  class="text-decoration-none mx-2"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <v-icon>mdi-linkedin</v-icon>
+                </a>
+              </v-flex>
             </v-layout>
           </v-sheet>
         </v-img>

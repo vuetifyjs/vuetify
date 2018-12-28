@@ -26,6 +26,7 @@
           name: 'John Leider',
           email: 'john@vuetifyjs.com',
           github: 'johnleider',
+          twitter: '@zeroskillz',
           avatar: 'avatarStyle=Transparent&topType=ShortHairShortFlat&accessoriesType=Blank&hairColor=Blonde&facialHairType=Blank&clotheType=Hoodie&clotheColor=Heather&eyeType=Side&eyebrowType=DefaultNatural&mouthType=Smile&skinColor=Light'
         },
         {
@@ -41,7 +42,7 @@
           avatar: 'avatarStyle=Transparent&topType=LongHairCurvy&accessoriesType=Round&hairColor=BrownDark&facialHairType=Blank&clotheType=ShirtScoopNeck&clotheColor=Heather&eyeType=Side&eyebrowType=RaisedExcited&mouthType=Default&skinColor=Light'
         },
         {
-          title: 'core',
+          title: 'keeper',
           name: 'Kael Watts-Deuchar',
           github: 'kaelwd',
           avatar: 'avatarStyle=Transparent&topType=ShortHairShaggyMullet&accessoriesType=Blank&hairColor=BrownDark&facialHairType=Blank&clotheType=ShirtCrewNeck&clotheColor=Heather&eyeType=Squint&eyebrowType=SadConcernedNatural&mouthType=Concerned&skinColor=Pale'
