@@ -1,3 +1,5 @@
+import Vue, { VNode } from 'vue'
+
 // Styles
 import '../../stylus/components/_content.styl'
 
@@ -5,10 +7,10 @@ import '../../stylus/components/_content.styl'
 import SSRBootable from '../../mixins/ssr-bootable'
 
 /* @vue/component */
-export default {
+export default Vue.extend({
   name: 'v-content',
 
-  mixins: [SSRBootable],
+  mixins: [ SSRBootable ],
 
   props: {
     tag: {
@@ -18,7 +20,7 @@ export default {
   },
 
   computed: {
-    styles () {
+    styles (): object {
       const {
         bar, top, right, footer, insetFooter, bottom, left
       } = this.$vuetify.application
@@ -32,7 +34,7 @@ export default {
     }
   },
 
-  render (h) {
+  render (h): VNode {
     const data = {
       staticClass: 'v-content',
       style: this.styles,
@@ -47,4 +49,4 @@ export default {
       )
     ])
   }
-}
+})

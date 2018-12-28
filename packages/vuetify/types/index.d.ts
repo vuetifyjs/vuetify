@@ -101,6 +101,7 @@ export interface VuetifyApplication {
   bar: number
   bottom: number
   footer: number
+  insetFooter: number
   left: number
   right: number
   top: number

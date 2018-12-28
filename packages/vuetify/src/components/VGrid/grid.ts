@@ -1,6 +1,8 @@
-export default function Grid (name) {
+import Vue, { VNode } from 'vue'
+
+export default function Grid (name: string) {
   /* @vue/component */
-  return {
+  return Vue.extend({
     name: `v-${name}`,
 
     functional: true,
@@ -13,7 +15,7 @@ export default function Grid (name) {
       }
     },
 
-    render: (h, { props, data, children }) => {
+    render: (h, { props, data, children }): VNode => {
       data.staticClass = (`${name} ${data.staticClass || ''}`).trim()
 
       if (data.attrs) {
@@ -22,6 +24,7 @@ export default function Grid (name) {
           // https://github.com/vuejs/vue/issues/7841
           if (key === 'slot') return false
 
+          data.attrs = data.attrs || []
           const value = data.attrs[key]
           return value || typeof value === 'string'
         })
@@ -37,5 +40,5 @@ export default function Grid (name) {
 
       return h(props.tag, data, children)
     }
-  }
+  })
 }
