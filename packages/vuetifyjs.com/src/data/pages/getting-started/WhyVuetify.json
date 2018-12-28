@@ -6,15 +6,11 @@
       "type": "section",
       "children": [
         {
-          "type": "getting-started-why-vuetify"
-        },
-        {
           "type": "text",
           "lang": "whyText1"
         },
         {
-          "type": "text",
-          "lang": "whyText2"
+          "type": "getting-started-why-vuetify"
         }
       ]
     },
