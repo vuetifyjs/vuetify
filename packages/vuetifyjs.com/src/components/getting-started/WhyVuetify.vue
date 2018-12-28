@@ -63,8 +63,9 @@
               >
                 <v-img
                   :src="philosophy.src"
+                  :aspect-ratio="16/9"
                   class="elevation-6 mx-auto"
-                  width="225"
+                  width="275"
                 />
               </v-flex>
 
