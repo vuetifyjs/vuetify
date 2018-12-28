@@ -4,11 +4,11 @@
   "components": ["v-breadcrumbs', 'v-breadcrumbs-items"],
   "examples": {
     "textDividers": {
-      "header": "## Текстовые разделители",
+      "header": "### Текстовые разделители",
       "desc": "По умолчанию breadcrumbs используют разделитель текста. Это может быть любая строка."
     },
     "iconDividers": {
-      "header": "## Разделители иконок",
+      "header": "### Разделители иконок",
       "desc": "Для варианта иконок breadcrumbs могут использовать любую икону из иконок Material Design."
     }
   },

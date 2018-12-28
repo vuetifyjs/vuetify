@@ -4,7 +4,7 @@
   "components": ["v-resize"],
   "examples": {
     "default": {
-      "header": "## По умолчанию",
+      "header": "### По умолчанию",
       "desc": "Измените размер окна и соблюдайте изменение значений",
       "uninverted": true
     }
