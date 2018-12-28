@@ -3,9 +3,10 @@
     class="text-xs-center py-4"
     flat
   >
-    <v-subtitle-1 class="title font-weight-regular">
-      Made With Vuetify
-    </v-subtitle-1>
+    <v-subtitle-1
+      class="title font-weight-regular"
+      v-text="$t('Vuetify.Home.madeWithVuetify')"
+    />
 
     <v-container grid-list-xl mb-3>
       <v-layout

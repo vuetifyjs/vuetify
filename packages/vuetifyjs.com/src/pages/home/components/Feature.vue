@@ -6,7 +6,7 @@
         wrap
       >
         <v-flex
-          v-for="(_, i) in 3"
+          v-for="(feature, i) in features"
           :key="i"
           d-flex
           xs12
@@ -20,18 +20,18 @@
             max-width="375px"
           >
             <v-img
-              :alt="$t(`Vuetify.Home.features[${i}].title`)"
-              :src="$t(`Vuetify.Home.features[${i}].img`)"
+              :alt="feature.title"
+              :src="`https://cdn.vuetifyjs.com/images/home/${feature.src}`"
               height="144"
             />
             <v-card-text>
               <h3
                 class="subheading font-weight-bold"
-                v-text="$t(`Vuetify.Home.features[${i}].title`)"
+                v-text="feature.title"
               />
               <p
                 class="mb-2"
-                v-text="$t(`Vuetify.Home.features[${i}].text`)"
+                v-text="feature.text"
               />
             </v-card-text>
           </v-card>
@@ -43,9 +43,22 @@
 
 <script>
   export default {
+    data: () => ({
+      images: [
+        'feature3.png',
+        'feature2.png',
+        'feature1.png'
+      ]
+    }),
+
     computed: {
       features () {
-        return this.$t('Vuetify.Home.features')
+        return this.$t('Vuetify.Home.features').map((feature, i) => {
+          return {
+            ...feature,
+            src: this.images[i]
+          }
+        })
       }
     }
   }
