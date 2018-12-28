@@ -76,6 +76,10 @@
       "readonly": "Mixins.Validatable.props.readonly"
     }
   },
+  "slots": {
+    "append": "Components.Selects.slots.append",
+    "prepend": "Components.Selects.slots.prepend"
+  },
   "events": {
     "change": "Components.Inputs.events.change",
     "update:error": "Mixins.Validatable.events['update:error']"
