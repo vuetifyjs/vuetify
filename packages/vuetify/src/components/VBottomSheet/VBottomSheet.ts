@@ -1,9 +1,10 @@
 import '../../stylus/components/_bottom-sheets.styl'
 
 import VDialog from '../VDialog/VDialog'
+import Vue, { VNode } from 'vue'
 
 /* @vue/component */
-export default {
+export default Vue.extend({
   name: 'v-bottom-sheet',
 
   props: {
@@ -17,10 +18,10 @@ export default {
       default: 'auto'
     },
     persistent: Boolean,
-    value: null
+    value: Boolean
   },
 
-  render (h) {
+  render (h: Function): VNode {
     const activator = h('template', {
       slot: 'activator'
     }, this.$slots.activator)
@@ -45,4 +46,4 @@ export default {
       }
     }, [activator, this.$slots.default])
   }
-}
+})
