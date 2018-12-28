@@ -56,7 +56,7 @@
           title: 'core',
           name: 'Jacek Karczmarczyk',
           github: 'jacekkarczmarczyk',
-          avatar: 'avatarStyle=Transparent&topType=ShortHairSides&accessoriesType=Prescription02&hairColor=BrownDark&facialHairType=Blank&clotheType=Overall&clotheColor=Heather&eyeType=Squint&eyebrowType=Angry&mouthType=Serious&skinColor=Brown'
+          avatar: 'accessoriesType=Prescription02&avatarStyle=Circle&clotheColor=Red&clotheType=ShirtCrewNeck&eyeType=EyeRoll&eyebrowType=AngryNatural&facialHairType=Blank&mouthType=Concerned&skinColor=Yellow&topType=ShortHairShortRound'
         },
         {
           title: 'core',
