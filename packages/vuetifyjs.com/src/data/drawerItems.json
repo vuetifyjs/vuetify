@@ -68,7 +68,7 @@
     "text": "components",
     "icon": "mdi-view-dashboard",
     "children": [
-      { "text": "apiExplorer", "subtext": "browseAllComponents", "to": "api-explorer" },
+      { "text": "apiExplorer", "subtext": "browseAllComponents", "to": "api-explorer", "updated": true },
       { "text": "alerts", "to": "alerts" },
       { "text": "avatars", "to": "avatars" },
       { "text": "badges", "to": "badges" },
