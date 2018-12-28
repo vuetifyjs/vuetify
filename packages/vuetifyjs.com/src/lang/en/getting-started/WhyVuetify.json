@@ -31,11 +31,11 @@
   "questionButton": "Ask the Community",
   "questionHeader": "## Still have questions?",
   "support": "Support",
-  "supportCaption": "Vuetify is constantly updated, responding to community issues and requests at breakneck pace. Feel confident knowing your application will be supported and updated frequently.",
+  "supportCaption": "Vuetify is patched **weekly**, responding to community issues and reports at breakneck speed. Feel confident knowing your application will be supported and updated frequently with fixes and new features.",
   "toolkit": "Toolkit",
   "toolkitCaption": "Vuetify is built from the ground up to be semantic. Easy to learn, easy to remember&mdash;this means that whether you are developing your own application, or onboarding a new developer, Vuetify's _write-as-you-speak_ components and properties make development a breeze.",
   "updates": "Updates",
-  "updatesCaption": "Vuetify is built from the ground up to be semantic. Easy to learn, easy to remember&mdash;this means that whether you are developing your own application, or onboarding a new developer, Vuetify's _write-as-you-speak_ components and properties make development a breeze.",
+  "updatesCaption": "Vuetify has a consistent update cycle, allowing you to get your hands on bug fixes and enhancements more often. The development team is committed to providing you with the best experience you can have.",
   "vibrant": "Vibrant",
   "whyText1": "This was me almost a year ago. There were plenty of **UI toolkits** to choose from, but none them had everything that I needed...yeah, you've heard that before. Often enough though, it _is_ the reason individual's attempts to create products that fill gaps, and is why I started working on Vuetify.",
   "whyText2": "But now you are the one searching for that perfect framework, and Vuetify is another on a list of many, vying for your attention. While my opinion will be subjective, I will try to outline features that I believe will be valuable to you and/or your organization."
