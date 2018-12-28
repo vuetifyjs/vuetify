@@ -194,6 +194,36 @@
     "description": "Card component for Vuetify framework.",
     "keywords": "vuetify, cards, components"
   },
+  "components/categories/forms": {
+    "title": "Format components",
+    "description": "Vuetify Components that are useful when building forms",
+    "keywords": "forms, vuetify form components"
+  },
+  "components/categories/navigation": {
+    "title": "Navigation components",
+    "description": "Vuetify Components that are useful when building forms",
+    "keywords": "navigation, vuetify navigation components"
+  },
+  "components/categories/layout": {
+    "title": "Layout components",
+    "description": "Vuetify Components that are useful when building layouts",
+    "keywords": "layout, vuetify layout components"
+  },
+  "components/categories/buttons": {
+    "title": "Buttons & Indicators",
+    "description": "Vuetify components that are useful for building interactive apps",
+    "keywords": "vuetify button components"
+  },
+  "components/categories/modals": {
+    "title": "Popups & Modals",
+    "description": "Vuetify Components that are useful for showing dynamic content",
+    "keywords": "vuetify modal components"
+  },
+  "components/categories/tables": {
+    "title": "Table components",
+    "description": "Vuetify Components that are useful when showing tabular data",
+    "keywords": "vuetify table components"
+  },
   "components/buttons": {
     "title": "Button Component",
     "description": "Button component for Vuetify Framework.",

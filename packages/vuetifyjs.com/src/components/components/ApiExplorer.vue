@@ -55,7 +55,11 @@
         class="display-1"
         v-text="$t('Components.ApiExplorer.search')"
       />
-      <p v-text="$t('Components.ApiExplorer.searchText')" />
+      <div v-text="$t('Components.ApiExplorer.or')" />
+      <h3
+        class="display-1"
+        v-text="$t('Components.ApiExplorer.browseCategories')"
+      />
     </v-flex>
     <v-flex
       v-else
