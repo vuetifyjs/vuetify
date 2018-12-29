@@ -1,0 +1,9 @@
+@mixin rtl($component, $name) {
+  .application {
+    &--is-rtl {
+      .#{$name} {
+        @include component();
+      }
+    }
+  }
+}
