@@ -4,7 +4,11 @@
   "examples": {
     "playground": {
       "header": "",
-      "desc": ""
+      "desc": "The sparkline component comes in 2 variations, **trend**(default) and **bar**. Each support a multitude of options for customizing the look and feel of the sparkline."
+    },
+    "heartRate": {
+      "header": "### Take a break",
+      "desc": "For concise information, a complete chart might be overkill. Using a trend line with gradient provides enough detail for the user without showing too much information."
     }
   },
   "props": {
