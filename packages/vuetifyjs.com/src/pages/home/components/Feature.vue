@@ -12,7 +12,7 @@
           xs12
           sm6
           md4
-          lg4
+          lg3
         >
           <v-card
             class="elevation-12 hide-overflow text-xs-center mx-auto"
