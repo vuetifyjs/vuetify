@@ -9,24 +9,22 @@
           v-for="(feature, i) in features"
           :key="i"
           d-flex
-          xs12
-          sm6
-          md4
-          lg3
+          shrink
         >
           <v-card
             class="elevation-12 hide-overflow text-xs-center mx-auto"
             light
-            max-width="375px"
+            max-width="350px"
           >
             <v-img
               :alt="feature.title"
+              :aspect-ratio="2.6"
               :src="`https://cdn.vuetifyjs.com/images/home/${feature.src}`"
-              height="144"
+              width="100%"
             />
             <v-card-text>
               <h3
-                class="subheading font-weight-bold"
+                class="subheading font-weight-bold mb-2"
                 v-text="feature.title"
               />
               <p
