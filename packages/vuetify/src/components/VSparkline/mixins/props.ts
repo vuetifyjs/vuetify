@@ -5,19 +5,6 @@ import { SparklineItem } from '../VSparkline'
 
 export default Vue.extend({
   props: {
-    data: {
-      type: Array as Prop<SparklineItem[]>,
-      required: true
-    },
-    gradient: {
-      type: Array as Prop<string[]>,
-      required: true
-    },
-    gradientDirection: {
-      type: String as Prop<'top' | 'bottom' | 'left' | 'right'>,
-      validator: (val: string) => ['top', 'bottom', 'left', 'right'].includes(val),
-      default: 'top'
-    },
     autoDraw: Boolean,
     autoDrawDuration: {
       type: Number,
@@ -27,14 +14,31 @@ export default Vue.extend({
       type: String,
       default: 'ease'
     },
+    color: {
+      type: String,
+      default: 'blue'
+    },
+    gradient: {
+      type: Array as Prop<string[]>,
+      default: () => ([])
+    },
+    gradientDirection: {
+      type: String as Prop<'top' | 'bottom' | 'left' | 'right'>,
+      validator: (val: string) => ['top', 'bottom', 'left', 'right'].includes(val),
+      default: 'top'
+    },
     height: Number,
-    width: Number,
+    lineWidth: Number,
     padding: {
       type: Number,
       default: 8
     },
     smooth: [Boolean, Number],
-    lineWidth: Number,
-    showLabel: Boolean
+    showLabel: Boolean,
+    value: {
+      type: Array as Prop<SparklineItem[]>,
+      default: () => ([])
+    },
+    width: Number
   }
 })
