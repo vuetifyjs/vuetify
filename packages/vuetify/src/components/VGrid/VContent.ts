@@ -1,4 +1,4 @@
-import Vue, { VNode } from 'vue'
+import { VNode } from 'vue'
 
 // Styles
 import '../../stylus/components/_content.styl'
@@ -7,10 +7,8 @@ import '../../stylus/components/_content.styl'
 import SSRBootable from '../../mixins/ssr-bootable'
 
 /* @vue/component */
-export default Vue.extend({
+export default SSRBootable.extend({
   name: 'v-content',
-
-  mixins: [ SSRBootable ],
 
   props: {
     tag: {
