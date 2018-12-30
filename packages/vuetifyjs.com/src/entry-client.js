@@ -2,8 +2,16 @@ import 'vuetify/dist/vuetify.css'
 import '@mdi/font/css/materialdesignicons.css'
 import 'es6-promise/auto'
 
-import { createApp } from './main'
+import { createApp, production } from './main'
 import WebFontLoader from 'webfontloader'
+
+if ('serviceWorker' in navigator && production) {
+  navigator.serviceWorker.register('/sw.js')
+    .then(() => navigator.serviceWorker.ready.then((worker) => {
+      worker.sync.register('syncdata')
+    }))
+    .catch((err) => console.log(err))
+}
 
 // async load fonts
 WebFontLoader.load({
