@@ -42,6 +42,8 @@ const calculate = (e: MouseEvent, el: HTMLElement, value: RippleOptions = {}) =>
 const ripple = {
   /* eslint-disable max-statements */
   show (e: MouseEvent, el: HTMLElement, value: RippleOptions = {}) {
+    if (e.target !== e.currentTarget) return
+
     if (!el._ripple || !el._ripple.enabled) {
       return
     }
