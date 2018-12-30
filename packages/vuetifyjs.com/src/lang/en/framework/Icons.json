@@ -32,5 +32,7 @@
   "customComponentText1": "You can utilize the same icon strings in your own custom components. Any time **$vuetify.icons** is passed in through _v-text_, _v-html_ or as text, `<v-icon>` will look up that specified value. This allows you to create customized solutions that are easy to build and easy to manage.",
   "componentIconsHeader": "## Component icons",
   "componentIconsText1": "Instead of provided icon fonts presets you can use your own component icons. You also can switch icons that are used in Vuetify component with your own.",
-  "componentIconsText2": "If you want your SVG icon to inherit colors and scale correctly - be sure add the following css to it:"
+  "componentIconsText2": "If you want your SVG icon to inherit colors and scale correctly - be sure add the following css to it:",
+  "customFASvg": "### Custom Font Awesome Pro Icons",
+  "customFASvgText1": "You can utilize component icons with Font Awesome Pro to select individual icon weights:"
 }
