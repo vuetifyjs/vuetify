@@ -94,5 +94,21 @@
       "headerCell": "Slot to customize header cells",
       "headers": "Slot to customize entire header"
     }
+  },
+  "slots": {
+    "v-edit-dialog": {
+      "input": "Slot used to denote input component for v-edit-dialog"
+    }
+  },
+  "events": {
+    "v-edit-dialog": {
+      "cancel": "Emits when editting is canceled",
+      "close": "Emits when edit-dialog close button is pressed",
+      "open": "Emits when editting is opened",
+      "save": "Emits when edit-dialog save button is pressed"
+    },
+    "v-data-table": {
+      "update:pagination": "Emits when the `pagination.sync` event is updated"
+    }
   }
 }

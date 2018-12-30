@@ -39,9 +39,9 @@
         {
           "type": "up-next",
           "value": [
-            "layout/aspect-ratios",
+            "framework/aspect-ratios",
             "components/images",
-            "style/typography"
+            "framework/typography"
           ]
         }
       ]

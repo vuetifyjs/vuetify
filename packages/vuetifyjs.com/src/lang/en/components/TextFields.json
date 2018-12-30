@@ -1,7 +1,9 @@
 {
   "header": "# Text field",
   "headerText": "Text fields components are used for collecting user provided information.",
-  "supplemental": [ "MaskTable" ],
+  "supplemental": [
+    "MaskTable"
+  ],
   "examples": {
     "usage": {
       "desc": "A simple text field with placeholder and/or label."
@@ -104,6 +106,8 @@
     "outline": "Applies the outline style to the input",
     "placeholder": "Sets the input’s placeholder text",
     "prefix": "Displays prefix text",
+    "prependInnerIcon": "Prepends an icon inside the component, uses the same syntax as `v-icon`",
+    "prependInnerIconCb": "Callback for prepended icon when clicked",
     "reverse": "Reverses the input orientation",
     "rows": "Controls the number of rows in a textarea",
     "rowHeight": "Designate a custom _row-height_. Used for determining input height when using **multi-line** or **textarea** props",
@@ -116,6 +120,8 @@
   },
   "events": {
     "change": "Components.Inputs.events.change",
+    "click:append-outer": "Emitted when appended outer icon is clicked",
+    "click:prepend-inner": "Emitted when prepended inner icon is clicked",
     "update:error": "Mixins.Validatable.events['update:error']"
   }
 }

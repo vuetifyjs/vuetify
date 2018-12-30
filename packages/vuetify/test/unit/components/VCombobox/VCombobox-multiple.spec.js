@@ -1,4 +1,5 @@
 import { test } from '@/test'
+import { keyCodes } from '@/util/helpers'
 import VCombobox from '@/components/VCombobox'
 
 test('VCombobox - multiple', ({ shallow, compileToFunctions }) => {
@@ -6,7 +7,7 @@ test('VCombobox - multiple', ({ shallow, compileToFunctions }) => {
   app.setAttribute('data-app', true)
   document.body.appendChild(app)
   const backspace = new Event('keydown')
-  backspace.keyCode = 8
+  backspace.keyCode = keyCodes.delete
 
   function createMultipleCombobox (propsData) {
     const change = jest.fn()

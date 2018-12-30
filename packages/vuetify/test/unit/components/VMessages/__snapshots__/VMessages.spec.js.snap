@@ -39,10 +39,6 @@ exports[`VMessages.js should show messages 2`] = `
     <div class="v-messages__message message-transition-leave message-transition-leave-active">
       bar
     </div>
-    <div class="v-messages__message message-transition-move"
-         style="display: none;"
-    >
-    </div>
   </div>
 </div>
 

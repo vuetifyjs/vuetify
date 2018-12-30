@@ -46,7 +46,7 @@
           "value": [
             "components/lists",
             "components/icons",
-            "layout/pre-defined"
+            "framework/pre-defined"
           ]
         }
       ]

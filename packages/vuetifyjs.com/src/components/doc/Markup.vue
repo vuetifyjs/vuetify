@@ -1,5 +1,5 @@
 <template>
-  <div class="v-markup">
+  <div :id="id" class="v-markup">
     <prism
       v-if="$slots.default || code"
       :language="language"
@@ -15,11 +15,15 @@
         >Copied</span>
       </v-slide-x-transition>
     </div>
-
-    <div
+    <a
+      v-if="filename"
+      :href="href"
+      target="_blank"
+      rel="noopener"
       class="v-markup__filename"
-      v-text="value"
-    />
+    >
+      <span v-text="file" />
+    </a>
   </div>
 </template>
 
@@ -47,7 +51,11 @@
       },
       value: {
         type: String,
-        default: null
+        default: 'markup'
+      },
+      filename: {
+        type: Boolean,
+        default: process.env.NODE_ENV !== 'production'
       }
     },
 
@@ -56,6 +64,26 @@
       copied: false,
       language: vm.lang
     }),
+
+    computed: {
+      file () {
+        const split = this.value.split('_')
+        const folder = split.shift()
+        const file = split.join('_')
+
+        return `${folder}/${file}.txt`
+      },
+      href () {
+        const branch = process.env.NODE_ENV === 'production' ? 'master' : 'dev'
+        const href = `https://github.com/vuetifyjs/vuetify/tree/${branch}/packages/vuetifyjs.com/src/snippets`
+
+        return `${href}/${this.file}`
+      },
+      id () {
+        if (this.value === 'markup') return
+        return 'markup-' + this.value.replace(/_/g, '-')
+      }
+    },
 
     mounted () {
       this.$nextTick(this.init)
@@ -74,7 +102,7 @@
       init () {
         if (this.$slots.default || !this.value) return
 
-        import(`@/snippets/${this.value}.txt`)
+        import(`@/snippets/${this.file}`)
           .then(this.parseRaw)
           .catch(err => console.log(err))
       },
@@ -136,12 +164,13 @@
       z-index: 1
 
     &__filename
+      text-decoration: none
       position: absolute
       bottom: 0
       right: 0
-      padding: 8px
+      padding: 8px 12px 8px 8px
       font-size: 12px
-      color: rgba(#fff, .12)
+      color: rgba(#fff, .56)
 
     &:after
       position: absolute
@@ -154,10 +183,13 @@
       top: 5px
 
     &:hover
+      .v-markup__copy .v-icon
+        opacity: 1
+
       &:after
         opacity: 0
 
-    .v-icon
+    .v-markup__copy .v-icon
       color: inherit
       position: absolute
       right: 0
@@ -168,8 +200,4 @@
       width: 50px
       height: 50px
       z-index: 4
-
-    &:hover
-      .v-icon
-        opacity: 1
 </style>

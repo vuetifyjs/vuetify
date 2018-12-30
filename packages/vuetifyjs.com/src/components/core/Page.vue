@@ -1,15 +1,13 @@
 <template>
-  <v-container
-    id="page"
-    fluid
-  >
-    <not-found-page v-if="structure === false" />
-
-    <template v-else-if="structure">
-      <doc-heading>
+  <v-container id="page">
+    <template v-if="structure">
+      <doc-heading v-if="structure.title">
         {{ structure.title }}
       </doc-heading>
-      <div class="mb-5">
+      <div
+        v-if="structure.titleText"
+        class="mb-5"
+      >
         <doc-text
           v-if="structure.titleText"
           class="mb-4"
@@ -25,37 +23,27 @@
         :value="child"
       />
 
-      <div>
-        Caught a mistake? Want to Contribute to this page or the docs as a whole?
-        Consider checking out the
-        <a href="../getting-started/contributing">Contribution Guide</a>
-        or <a
-          :href="contributionFooter.link"
-          v-text="contributionFooter.text"
-        />
-      </div>
+      <doc-contribution />
     </template>
   </v-container>
 </template>
 
 <script>
   // Utilities
+  import {
+    mapMutations
+  } from 'vuex'
   import { getComponent } from '@/util/helpers'
   import kebabCase from 'lodash/kebabCase'
   import camelCase from 'lodash/camelCase'
   import upperFirst from 'lodash/upperFirst'
-  import NotFoundPage from '@/pages/general/404Page.vue'
-  import { mapMutations } from 'vuex'
 
   // TODO: This is where 404 redirect will occur
   export default {
-    components: {
-      NotFoundPage
-    },
-
     provide () {
       return {
         namespace: upperFirst(camelCase(this.namespace)),
+        lang: this.lang,
         page: upperFirst(camelCase(this.page))
       }
     },
@@ -83,18 +71,14 @@
     computed: {
       composite () {
         return `${this.namespace}-${this.page}`
-      },
-      contributionFooter () {
-        return {
-          text: 'edit this page on Github',
-          link: `https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetifyjs.com/src/lang/${this.lang}/${this.namespace}/${upperFirst(camelCase(this.page))}.json`
-        }
       }
     },
 
     created () {
       const namespace = kebabCase(this.namespace)
       const page = upperFirst(camelCase(this.page))
+
+      this.setIsLoading(true)
 
       import(
         /* webpackChunkName: "pages" */
@@ -104,8 +88,9 @@
       }).catch(() => {
         // Add 404
         this.structure = false
+        this.$router.push({ name: '404' })
         throw new Error(`Unable to find page for <${namespace}/${page}>`)
-      })
+      }).finally(() => this.setIsLoading(false))
     },
 
     mounted () {
@@ -113,15 +98,10 @@
       setTimeout(this.init, 300)
     },
 
-    destroyed () {
-      this.setToc(false)
-    },
-
     methods: {
-      ...mapMutations('app', ['setToc']),
+      ...mapMutations('app', ['setIsLoading']),
       getComponent,
       init () {
-        this.setToc(true)
         const sameInternal = this.$el.querySelectorAll('a.markdown--same-internal')
 
         Array.prototype.forEach.call(sameInternal, el => {
@@ -137,13 +117,19 @@
       onSameInternalClick (e) {
         e.preventDefault()
 
-        this.$vuetify.goTo(e.target.href, { offset: -80 })
+        this.$router.push(e.target)
       },
       onInternalClick (e) {
         e.preventDefault()
 
-        this.$router.push(e.target.getAttribute('href'))
+        this.$router.push(`/${this.lang}${e.target.getAttribute('href')}`)
       }
     }
   }
 </script>
+
+<style>
+#page {
+  max-width: 1185px;
+}
+</style>

@@ -26,11 +26,18 @@
       xs12
       text-xs-center
     >
-      <v-img
-        class="d-inline-block"
-        src="https://cdn.vuetifyjs.com/images/social/paypal.png"
-        width="150"
-      />
+      <a
+        href="https://paypal.me/vuetify"
+        rel="noopener"
+        target="_blank"
+        title="Support Vuetify through Paypal"
+      >
+        <v-img
+          class="d-inline-block"
+          src="https://cdn.vuetifyjs.com/images/social/paypal.png"
+          width="150"
+        />
+      </a>
     </v-flex>
   </v-layout>
 </template>

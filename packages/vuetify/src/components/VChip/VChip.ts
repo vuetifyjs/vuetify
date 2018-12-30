@@ -1,7 +1,7 @@
 import '../../stylus/components/_chips.styl'
 
 // Types
-import { CreateElement, VNode, VNodeChildren } from 'vue'
+import { CreateElement, VNode } from 'vue'
 import mixins from '../../util/mixins'
 
 // Components
@@ -63,13 +63,12 @@ export default mixins(Colorable, Themeable, Toggleable).extend({
       ])
     },
     genContent (h: CreateElement): VNode {
-      const children: VNodeChildren = [this.$slots.default]
-
-      this.close && children.push(this.genClose(h))
-
       return h('span', {
         staticClass: 'v-chip__content'
-      }, children)
+      }, [
+        this.$slots.default,
+        this.close && this.genClose(h)
+      ])
     }
   },
 
@@ -81,7 +80,7 @@ export default mixins(Colorable, Themeable, Toggleable).extend({
       directives: [{
         name: 'show',
         value: this.isActive
-      }] as any,
+      }],
       on: this.$listeners
     })
 

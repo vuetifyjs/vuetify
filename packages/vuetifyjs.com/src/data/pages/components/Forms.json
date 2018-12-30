@@ -25,7 +25,12 @@
       "children": [
         {
           "type": "examples",
-          "value": [ "validationWithSubmitAndClear", "vuelidate", "veeValidate" ]
+          "value": [
+            "rules",
+            "validationWithSubmitAndClear",
+            "vuelidate",
+            "veeValidate"
+          ]
         }
       ]
     },

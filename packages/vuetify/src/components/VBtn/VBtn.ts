@@ -2,9 +2,9 @@
 import '../../stylus/components/_buttons.styl'
 
 // Types
-import { VNode, VNodeChildren } from 'vue'
+import { VNode } from 'vue'
 import { PropValidator } from 'vue/types/options'
-import mixins from '../../util/mixins'
+import mixins, { ExtractVue } from '../../util/mixins'
 import { RippleOptions } from '../../directives/ripple'
 
 // Components
@@ -21,7 +21,7 @@ import { factory as ToggleableFactory } from '../../mixins/toggleable'
 // Utilities
 import { getObjectValueByPath } from '../../util/helpers'
 
-export default mixins(
+const baseMixins = mixins(
   Colorable,
   Routable,
   Positionable,
@@ -29,7 +29,12 @@ export default mixins(
   GroupableFactory('btnToggle'),
   ToggleableFactory('inputValue')
   /* @vue/component */
-).extend({
+)
+interface options extends ExtractVue<typeof baseMixins> {
+  $el: HTMLElement
+}
+
+export default baseMixins.extend<options>().extend({
   name: 'v-btn',
 
   props: {
@@ -114,25 +119,19 @@ export default mixins(
       return this.$createElement(
         'div',
         { 'class': 'v-btn__content' },
-        [this.$slots.default]
+        this.$slots.default
       )
     },
     genLoader (): VNode {
-      const children: VNodeChildren = []
-
-      if (!this.$slots.loader) {
-        children.push(this.$createElement(VProgressCircular, {
-          props: {
-            indeterminate: true,
-            size: 23,
-            width: 2
-          }
-        }))
-      } else {
-        children.push(this.$slots.loader)
-      }
-
-      return this.$createElement('span', { 'class': 'v-btn__loading' }, children)
+      return this.$createElement('span', {
+        class: 'v-btn__loading'
+      }, this.$slots.loader || [this.$createElement(VProgressCircular, {
+        props: {
+          indeterminate: true,
+          size: 23,
+          width: 2
+        }
+      })])
     },
     onRouteChange () {
       if (!this.to || !this.$refs.link) return
@@ -150,10 +149,12 @@ export default mixins(
   render (h): VNode {
     const setColor = (!this.outline && !this.flat && !this.disabled) ? this.setBackgroundColor : this.setTextColor
     const { tag, data } = this.generateRouteLink(this.classes)
-    const children = [this.genContent()]
+    const children = [
+      this.genContent(),
+      this.loading && this.genLoader()
+    ]
 
-    tag === 'button' && (data.attrs!.type = this.type)
-    this.loading && children.push(this.genLoader())
+    if (tag === 'button') data.attrs!.type = this.type
 
     data.attrs!.value = ['string', 'number'].includes(typeof this.value)
       ? this.value

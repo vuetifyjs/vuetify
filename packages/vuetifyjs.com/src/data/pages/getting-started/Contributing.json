@@ -180,9 +180,52 @@
           "lang": "commitHeader"
         },
         {
-          "type": "alert",
-          "lang": "commitText",
-          "value": "error"
+          "type": "text",
+          "lang": "commitText1"
+        },
+        {
+          "type": "text",
+          "lang": "commitText2"
+        },
+        {
+          "type": "heading",
+          "lang": "commitSubHeader1"
+        },
+        {
+          "type": "text",
+          "lang": "commitText3"
+        },
+        {
+          "type": "text",
+          "lang": "commitText4"
+        },
+        {
+          "type": "text",
+          "lang": "commitText5"
+        },
+        {
+          "type": "text",
+          "lang": "commitText6"
+        },
+        {
+          "type": "text",
+          "lang": "commitText7"
+        },
+        {
+          "type": "text",
+          "lang": "commitText8"
+        },
+        {
+          "type": "text",
+          "lang": "commitText9"
+        },
+        {
+          "type": "text",
+          "lang": "commitText10"
+        },
+        {
+          "type": "text",
+          "lang": "commitText11"
         }
       ]
     },
@@ -208,14 +251,6 @@
         {
           "type": "text",
           "lang": "changesText4"
-        },
-        {
-          "type": "text",
-          "lang": "changesText5"
-        },
-        {
-          "type": "text",
-          "lang": "changesText6"
         },
         {
           "type": "section",

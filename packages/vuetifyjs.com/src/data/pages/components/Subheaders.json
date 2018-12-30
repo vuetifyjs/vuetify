@@ -40,7 +40,7 @@
           "type": "up-next",
           "value": [
             "components/cards",
-            "layout/grid-lists",
+            "framework/grid-lists",
             "components/lists"
           ]
         }

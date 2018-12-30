@@ -54,5 +54,8 @@
     "stateless": "Remove all automated state functionality (resize, mobile, route) and manually control the drawer state",
     "temporary": "A temporary drawer sits above its application and uses a scrim (overlay) to darken the background",
     "touchless": "Disable mobile touch functionality"
+  },
+  "events": {
+    "update:miniVariant": "The `update.sync` event for mini-variant"
   }
 }

@@ -1,10 +1,8 @@
 <template>
   <div>
-    <core-toolbar />
+    <core-drawer />
 
     <core-ad />
-
-    <core-drawer />
 
     <core-view
       :namespace="namespace"
