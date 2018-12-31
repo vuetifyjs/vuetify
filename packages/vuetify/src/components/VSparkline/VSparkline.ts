@@ -1,20 +1,16 @@
 // Components
-import bar from './Bar'
-import trend from './Trend'
+import Path from './components/path'
+import Text from './components/text'
+import Gradient from './components/gradient'
 
 // Utilities
-import props from './mixins/props'
+import mixins, { ExtractVue } from '../../util/mixins'
+import { genPoints } from './helpers/core'
 
 // Types
-import Vue from 'vue'
-import { PropValidator } from 'vue/types/options'
-
-const COMPONENTS = {
-  bar,
-  trend
-}
-
 export type SparklineItem = number | { value: number }
+import { VNode } from 'vue'
+import props from './mixins/props'
 
 export interface Boundary {
   minX: number
@@ -29,26 +25,73 @@ export interface Point {
   value: number
 }
 
-export default Vue.extend({
-  name: 'v-sparkline',
+interface options {
+  $refs: {
+    path: InstanceType<typeof Path>
+  }
+}
 
-  functional: true,
+export default mixins<options & ExtractVue<typeof props>>(props).extend({
+  name: 'trend',
 
-  $_wrapperFor: props,
+  data: () => ({
+    lastLength: 0
+  }),
 
-  props: {
-    type: {
-      type: String,
-      default: 'trend',
-      validator: (val: string) => ['trend', 'bar'].includes(val)
-    } as PropValidator<'trend' | 'bar'>
+  watch: {
+    value: {
+      immediate: true,
+      handler () {
+        this.$nextTick(() => {
+          if (!this.autoDraw) return
+
+          const path = this.$refs.path.$el
+          const length = path.getTotalLength()
+
+          path.style.transition = 'none'
+          path.style.strokeDasharray = length + ' ' + length
+          path.style.strokeDashoffset = Math.abs(length - (this.lastLength || 0)).toString()
+          path.getBoundingClientRect()
+          path.style.transition = `stroke-dashoffset ${this.autoDrawDuration}ms ${this.autoDrawEasing}`
+          path.style.strokeDashoffset = '0'
+          this.lastLength = length
+        })
+      }
+    }
   },
 
-  render (h, { props, data }) {
-    return h('div', {
-      staticClass: 'sparkline'
+  render (h): VNode {
+    if (this.value.length < 2) return undefined as never
+
+    const { width, height, padding } = this
+    const viewWidth = width || 300
+    const viewHeight = height || 75
+    const boundary = {
+      minX: padding,
+      minY: padding,
+      maxX: viewWidth - padding,
+      maxY: viewHeight - padding
+    }
+    const props = this.$props
+
+    props.boundary = boundary
+    props.id = 'sparkline-trend-' + this._uid
+    props.points = genPoints(this.value, boundary)
+
+    return h('svg', {
+      attrs: {
+        'stroke-width': this.lineWidth || 1,
+        width: width || '100%',
+        height: height || '25%',
+        viewBox: `0 0 ${viewWidth} ${viewHeight}`
+      }
     }, [
-      h(COMPONENTS[props.type], data)
+      h(Gradient, { props }),
+      this.showLabel ? h(Text, { props }) : undefined as never,
+      h(Path, {
+        props,
+        ref: 'path'
+      })
     ])
   }
 })
