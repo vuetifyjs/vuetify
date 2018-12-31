@@ -1,16 +1,16 @@
-// Components
-import Path from './components/path'
-import Text from './components/text'
-import Gradient from './components/gradient'
+// Mixins
+import Colorable from '../../mixins/colorable'
 
 // Utilities
 import mixins, { ExtractVue } from '../../util/mixins'
 import { genPoints } from './helpers/core'
+import { genPath } from './helpers/path'
 
 // Types
+import Vue, { VNode } from 'vue'
+import { Prop } from 'vue/types/options'
+
 export type SparklineItem = number | { value: number }
-import { VNode } from 'vue'
-import props from './mixins/props'
 
 export interface Boundary {
   minX: number
@@ -25,18 +25,94 @@ export interface Point {
   value: number
 }
 
-interface options {
+interface options extends Vue {
   $refs: {
-    path: InstanceType<typeof Path>
+    path: SVGPathElement
   }
 }
 
-export default mixins<options & ExtractVue<typeof props>>(props).extend({
-  name: 'trend',
+export default mixins<options &
+/* eslint-disable indent */
+  ExtractVue<[
+    typeof Colorable
+  ]>
+/* eslint-enable indent */
+>(
+  Colorable
+).extend({
+  name: 'VSparkline',
+
+  props: {
+    autoDraw: Boolean,
+    autoDrawDuration: {
+      type: Number,
+      default: 2000
+    },
+    autoDrawEasing: {
+      type: String,
+      default: 'ease'
+    },
+    color: {
+      type: String,
+      default: 'primary'
+    },
+    gradient: {
+      type: Array as Prop<string[]>,
+      default: () => ([])
+    },
+    gradientDirection: {
+      type: String as Prop<'top' | 'bottom' | 'left' | 'right'>,
+      validator: (val: string) => ['top', 'bottom', 'left', 'right'].includes(val),
+      default: 'top'
+    },
+    height: {
+      type: [String, Number],
+      default: 75
+    },
+    lineWidth: {
+      type: [String, Number],
+      default: 4
+    },
+    padding: {
+      type: [String, Number],
+      default: 8
+    },
+    smooth: {
+      type: [Boolean, Number, String],
+      default: false
+    },
+    showLabel: Boolean,
+    value: {
+      type: Array as Prop<SparklineItem[]>,
+      default: () => ([])
+    },
+    width: {
+      type: [Number, String],
+      default: 300
+    }
+  },
 
   data: () => ({
     lastLength: 0
   }),
+
+  computed: {
+    boundary (): Boundary {
+      const padding = Number(this.padding)
+      const height = Number(this.height)
+      const width = Number(this.width)
+
+      return {
+        minX: padding,
+        minY: padding,
+        maxX: width - padding,
+        maxY: height - padding
+      }
+    },
+    points (): Point[] {
+      return genPoints(this.value, this.boundary)
+    }
+  },
 
   watch: {
     value: {
@@ -45,7 +121,7 @@ export default mixins<options & ExtractVue<typeof props>>(props).extend({
         this.$nextTick(() => {
           if (!this.autoDraw) return
 
-          const path = this.$refs.path.$el
+          const path = this.$refs.path
           const length = path.getTotalLength()
 
           path.style.transition = 'none'
@@ -60,38 +136,85 @@ export default mixins<options & ExtractVue<typeof props>>(props).extend({
     }
   },
 
+  methods: {
+    genGradient () {
+      const gradientDirection = this.gradientDirection
+      const gradient = this.gradient.slice()
+
+      // Pushes empty string to force
+      // a fallback to currentColor
+      if (!gradient.length) gradient.push('')
+
+      const len = Math.max(gradient.length - 1, 1)
+      const stops = gradient.reverse().map((color, index) =>
+        this.$createElement('stop', {
+          attrs: {
+            offset: index / len,
+            'stop-color': color || 'currentColor'
+          }
+        })
+      )
+
+      return this.$createElement('defs', [
+        this.$createElement('linearGradient', {
+          attrs: {
+            id: this._uid,
+            x1: +(gradientDirection === 'left'),
+            y1: +(gradientDirection === 'top'),
+            x2: +(gradientDirection === 'right'),
+            y2: +(gradientDirection === 'bottom')
+          }
+        }, stops)
+      ])
+    },
+    genLabels () {
+      if (!this.showLabel) return undefined
+
+      return this.$createElement('g', {
+        style: {
+          fontSize: '8',
+          textAnchor: 'middle',
+          dominantBaseline: 'mathematical',
+          fill: 'currentColor'
+        }
+      }, this.points.map(item => {
+        return this.$createElement('text', {
+          attrs: {
+            x: item.x,
+            y: this.boundary.maxY + 4
+          }
+        }, item.value.toString())
+      }))
+    },
+    genPath () {
+      const radius = this.smooth === true ? 8 : Number(this.smooth)
+
+      return this.$createElement('path', {
+        attrs: {
+          id: this._uid,
+          d: genPath(this.points, radius),
+          fill: 'none',
+          stroke: `url(#${this._uid})`
+        },
+        ref: 'path'
+      })
+    }
+  },
+
   render (h): VNode {
     if (this.value.length < 2) return undefined as never
 
-    const { width, height, padding } = this
-    const viewWidth = width || 300
-    const viewHeight = height || 75
-    const boundary = {
-      minX: padding,
-      minY: padding,
-      maxX: viewWidth - padding,
-      maxY: viewHeight - padding
-    }
-    const props = this.$props
-
-    props.boundary = boundary
-    props.id = 'sparkline-trend-' + this._uid
-    props.points = genPoints(this.value, boundary)
-
-    return h('svg', {
+    return h('svg', this.setTextColor(this.color, {
       attrs: {
         'stroke-width': this.lineWidth || 1,
-        width: width || '100%',
-        height: height || '25%',
-        viewBox: `0 0 ${viewWidth} ${viewHeight}`
+        width: '100%',
+        height: '25%',
+        viewBox: `0 0 ${this.width} ${this.height}`
       }
-    }, [
-      h(Gradient, { props }),
-      this.showLabel ? h(Text, { props }) : undefined as never,
-      h(Path, {
-        props,
-        ref: 'path'
-      })
+    }), [
+      this.genGradient(),
+      this.genLabels(),
+      this.genPath()
     ])
   }
 })
