@@ -34,7 +34,9 @@ export default mixins(props).extend({
       maxX: viewWidth - padding,
       maxY: viewHeight - padding
     }
-    const props = this.$props
+    const props = {
+      ...this.$props
+    }
 
     props.points = genPoints(this.value, boundary)
 
