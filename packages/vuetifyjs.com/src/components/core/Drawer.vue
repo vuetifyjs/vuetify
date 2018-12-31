@@ -44,7 +44,7 @@
         target="_blank"
         rel="noopener"
         class="d-inline-block"
-        @click="$ga.event('drawer jobs click', 'click', 'vuejobs')"
+        @click="$ga.event('drawer', 'click', 'vuejobs')"
       >
         <v-img
           src="https://cdn.vuetifyjs.com/images/affiliates/vuejobs-logo.svg"

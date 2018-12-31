@@ -27,7 +27,7 @@
             elevation="24"
             target="_blank"
             rel="noopener"
-            @click="$ga.event('home mwvjs click', 'click', feature.title)"
+            @click="$ga.event('home', 'click', 'mwvjs', feature.title)"
           >
             <v-img
               :alt="feature.title"
@@ -45,7 +45,7 @@
         href="https://madewithvuejs.com?ref=vuetifyjs.com"
         target="_blank"
         rel="noopener"
-        @click="$ga.event('home mwvjs click', 'click', 'madewithvuejs')"
+        @click="$ga.event('home', 'click', ' mwvjs')"
       >
         <v-img
           alt="Powered by madewithvuejs.com"

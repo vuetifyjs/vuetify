@@ -56,6 +56,7 @@
         :key="social.text"
         target="_blank"
         rel="noopener"
+        @click="$ga.event('toolbar', 'click', 'support', social.href)"
       >
         <v-list-tile-action>
           <v-icon
