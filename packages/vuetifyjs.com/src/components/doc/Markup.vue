@@ -6,8 +6,27 @@
       :code="code"
     ><slot /></prism>
 
+    <div
+      v-if="filename"
+      class="v-markup__edit"
+    >
+      <a
+        :href="`https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetifyjs.com/src/snippets/${file}`"
+        target="_blank"
+        rel="noopener"
+        title="Edit code"
+      >
+        <v-icon>mdi-pencil</v-icon>
+      </a>
+    </div>
+
     <div class="v-markup__copy">
-      <v-icon @click="copyMarkup">content_copy</v-icon>
+      <v-icon
+        title="Copy code"
+        @click="copyMarkup"
+      >
+        content_copy
+      </v-icon>
       <v-slide-x-transition>
         <span
           v-if="copied"
@@ -15,6 +34,7 @@
         >Copied</span>
       </v-slide-x-transition>
     </div>
+
     <a
       v-if="filename"
       :href="href"
@@ -152,16 +172,26 @@
     &__copied
       position: absolute
       top: 12px
-      right: 50px
+      right: 100px
 
-    &__copy
+    &__copy,
+    &__edit
       position: absolute
-      right: 0px
       top: 0px
       cursor: pointer
       width: 25px
       height: 25px
       z-index: 1
+
+    &__copy
+      right: 0
+
+    &__edit
+      right: 36px
+
+      > a
+        color: inherit
+        text-decoration: none
 
     &__filename
       text-decoration: none
@@ -183,21 +213,25 @@
       top: 5px
 
     &:hover
-      .v-markup__copy .v-icon
-        opacity: 1
+      .v-markup__copy,
+      .v-markup__edit
+        .v-icon
+          opacity: 1
 
-      &:after
+        &:after
+          opacity: 0
+
+    .v-markup__copy,
+    .v-markup__edit
+      .v-icon
+        color: inherit
+        position: absolute
+        right: 0
+        transition: opacity .2s ease-in
+        font-size: 1.5rem
         opacity: 0
-
-    .v-markup__copy .v-icon
-      color: inherit
-      position: absolute
-      right: 0
-      transition: opacity .2s ease-in
-      font-size: 1.5rem
-      opacity: 0
-      top: 0
-      width: 50px
-      height: 50px
-      z-index: 4
+        top: 0
+        width: 50px
+        height: 50px
+        z-index: 4
 </style>
