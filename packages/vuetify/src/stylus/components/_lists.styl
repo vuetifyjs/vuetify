@@ -52,9 +52,6 @@ rtl(v-list-rtl, "v-list")
   > div
     transition: inherit
 
-    .v-icon
-      transition: inherit
-
   &__tile
     align-items: center
     color: inherit
@@ -66,7 +63,7 @@ rtl(v-list-rtl, "v-list")
     padding: 0 16px
     position: relative
     text-decoration: none
-    transition: $primary-transition
+    transition: background $primary-transition
 
     &--link
       cursor: pointer
@@ -81,6 +78,7 @@ rtl(v-list-rtl, "v-list")
       white-space: nowrap
       overflow: hidden
       text-overflow: ellipsis
+      transition: $primary-transition
       width: 100%
 
     &__title

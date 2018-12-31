@@ -1,8 +1,8 @@
 {
-  "api": "API",
+  "api": "## API",
   "default": "По умолчанию",
   "description": "Описание",
-  "examples": "Примеры",
+  "examples": "## Примеры",
   "howItWorks": "## Как это работает",
   "name": "Имя",
   "openInCodePen": "Открыть в Codepen",
@@ -12,11 +12,12 @@
   "slots": "Slots",
   "supplemental": "Дополнительный",
   "type": "Тип",
-
-  "usage": "Применение",
+  "introduction": "Введение",
+  "upNext": "## Что дальше?",
+  "usage": "## Применение",
   "parameters": "Параметры",
   "return": "Возвращает",
   "example": "Пример",
-  "signature": "Signature",
+  "signature": "Сигнатура",
   "value": "Значение"
 }

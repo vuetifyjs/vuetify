@@ -1,7 +1,7 @@
 <template>
   <v-footer
     id="footer"
-    class="justify-center align-center py-5"
+    class="justify-center align-center py-4"
     color="grey darken-4"
     dark
     height="auto"
@@ -51,15 +51,33 @@
               Released under the&nbsp;
               <a
                 href="https://opensource.org/licenses/MIT"
-                class="body-2 white--text"
+                class="grey--text text--lighten-1"
                 rel="noopener"
                 style="text-decoration: none;"
                 target="_blank"
-                v-text="$t('Vuetify.Home.mit')"
-              />
-              <div>
+              >
+                MIT License
+              </a>
+              <div class="mb-3">
                 Copyright &copy; 2016-{{ (new Date()).getFullYear() }} Vuetify, LLC
               </div>
+              <a
+                class="grey--text text--lighten-1"
+                target="_blank"
+                rel="noopener"
+                href="https://www.iubenda.com/privacy-policy/76325752"
+              >
+                Privacy Policy
+              </a>
+              &nbsp;•&nbsp;
+              <a
+                class="grey--text text--lighten-1"
+                target="_blank"
+                rel="noopener"
+                href="https://www.iubenda.com/privacy-policy/76325752/cookie-policy"
+              >
+                Cookie Policy
+              </a>
             </div>
           </v-layout>
         </v-flex>
@@ -110,5 +128,10 @@
 <style lang="stylus">
   #footer
     a
+      opacity: .8
       text-decoration: none
+
+      &:hover
+        color: #FFF
+        opacity: 1
 </style>

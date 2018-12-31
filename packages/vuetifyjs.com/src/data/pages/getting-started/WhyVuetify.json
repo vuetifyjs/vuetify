@@ -6,15 +6,11 @@
       "type": "section",
       "children": [
         {
-          "type": "getting-started-why-vuetify"
-        },
-        {
           "type": "text",
           "lang": "whyText1"
         },
         {
-          "type": "text",
-          "lang": "whyText2"
+          "type": "getting-started-why-vuetify"
         }
       ]
     },
@@ -62,6 +58,19 @@
         {
           "type": "checklist",
           "value": "featuresList"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "getting-started/consulting-and-support",
+            "getting-started/roadmap",
+            "themes/premium"
+          ]
         }
       ]
     }

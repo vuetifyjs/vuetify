@@ -7,7 +7,7 @@
   "vueCliText3": "**Tip**: If you already have **vue-cli** installed, make sure you are on the latest version by typing <kbd>vue --version</kbd> into your cli.",
   "vueCliText4": "Once the cli is installed, you can generate a new project scaffold. Select the _default install_ unless you have specific packages that you need to include (e.g. _vuex_ or _vue-router_). This will create a new Vue project that's ready to go with your selected options.",
   "vueCliText5": "Now that you have an instantiated project, you can add the [Vuetify package](https://github.com/vuetifyjs/vue-cli-plugin-vuetify) using the cli.",
-  "vueCliText6": "This will provide you with a set of options for customizing your installation.",
+  "vueCliText6": "This will provide you with a set of options for customizing your installation. The default preset has [a-la-carte](/framework/a-la-carte) already enabled for you.",
   "vueCliText7": "After installation simply run <kbd>yarn serve</kbd> or <kbd>npm run serve</kbd> to start your application.",
   "uiHeader": "## Vue UI",
   "uiText1": "Vuetify can also be installed using **Vue UI**, the new visual application for _vue-cli-3_. Ensure that you have the latest version of vue-cli installed and from your terminal type:",

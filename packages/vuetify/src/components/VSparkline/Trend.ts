@@ -1,10 +1,14 @@
-import { VNode } from 'vue'
-import mixins, { ExtractVue } from '../../util/mixins'
-
-import props from './mixins/props'
+// Components
 import Path from './components/path'
 import Text from './components/text'
 import Gradient from './components/gradient'
+
+// Types
+import { VNode } from 'vue'
+import props from './mixins/props'
+
+// Utilities
+import mixins, { ExtractVue } from '../../util/mixins'
 import { genPoints } from './helpers/core'
 
 interface options {
@@ -21,13 +25,11 @@ export default mixins<options & ExtractVue<typeof props>>(props).extend({
   }),
 
   watch: {
-    data: {
+    value: {
       immediate: true,
       handler () {
         this.$nextTick(() => {
-          if (!this.autoDraw) {
-            return
-          }
+          if (!this.autoDraw) return
 
           const path = this.$refs.path.$el
           const length = path.getTotalLength()
@@ -45,7 +47,8 @@ export default mixins<options & ExtractVue<typeof props>>(props).extend({
   },
 
   render (h): VNode {
-    if (!this.data || this.data.length < 2) return undefined as never
+    if (this.value.length < 2) return undefined as never
+
     const { width, height, padding } = this
     const viewWidth = width || 300
     const viewHeight = height || 75
@@ -59,7 +62,7 @@ export default mixins<options & ExtractVue<typeof props>>(props).extend({
 
     props.boundary = boundary
     props.id = 'sparkline-trend-' + this._uid
-    props.points = genPoints(this.data, boundary)
+    props.points = genPoints(this.value, boundary)
 
     return h('svg', {
       attrs: {

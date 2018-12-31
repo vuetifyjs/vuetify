@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-sparkline
-      :data="data"
+      :value="value"
       :type="type"
       :gradient="gradient"
       :smooth="radius || false"
@@ -105,7 +105,7 @@
       padding: 8,
       lineCap: 'round',
       gradient: gradients[5],
-      data: [0, 2, 5, 9, 5, 10, 3, 5, 0, 0, 1, 8, 2, 9, 0],
+      value: [0, 2, 5, 9, 5, 10, 3, 5, 0, 0, 1, 8, 2, 9, 0],
       gradients
     })
   }

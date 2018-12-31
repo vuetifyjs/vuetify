@@ -1,9 +1,11 @@
+// Types
 import Vue, { VNode } from 'vue'
 import { Prop } from 'vue/types/options'
-
 import { Boundary, Point } from '../VSparkline'
 
 export default Vue.extend({
+  name: 'VSparklineRect',
+
   props: [
     'id',
     'smooth',
