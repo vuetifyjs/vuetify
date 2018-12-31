@@ -26,7 +26,7 @@ export default mixins(props).extend({
   render (h): VNode {
     if (!this.value || this.value.length < 2) return undefined as never
     const { width, height, padding, lineWidth } = this
-    const viewWidth = width || 300
+    const viewWidth = width || this.value.length * padding * 2
     const viewHeight = height || 75
     const boundary = {
       minX: padding,
