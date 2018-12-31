@@ -30,6 +30,7 @@ type NodeState = {
   isSelected: boolean
   isIndeterminate: boolean
   isOpen: boolean
+  item: any
 }
 
 function ston (s: string | number) {
@@ -81,8 +82,16 @@ export default mixins(
   watch: {
     items: {
       handler () {
+        const oldKeys = Object.keys(this.nodes).map(k => getObjectValueByPath(this.nodes[k].item, this.itemKey))
+        const newKeys = this.getKeys(this.items)
+
         // We only care if nodes are removed or added
-        if (Object.keys(this.nodes).length === this.countItems(this.items)) return
+        if (oldKeys.length === newKeys.length) return
+
+        // If nodes are removed we need to clear them from this.nodes
+        if (oldKeys.length > newKeys.length) {
+          oldKeys.filter(k => !newKeys.includes(k)).forEach(k => delete this.nodes[k])
+        }
 
         const oldSelectedCache = [...this.selectedCache]
         this.selectedCache = new Set()
@@ -148,6 +157,18 @@ export default mixins(
   },
 
   methods: {
+    getKeys (items: any[], keys: any[] = []) {
+      for (let i = 0; i < items.length; i++) {
+        const key = getObjectValueByPath(items[i], this.itemKey)
+        keys.push(key)
+        const children = getObjectValueByPath(items[i], this.itemChildren)
+        if (children) {
+          keys.push(...this.getKeys(children))
+        }
+      }
+
+      return keys
+    },
     buildTree (items: any[], parent: (string | number | null) = null) {
       for (let i = 0; i < items.length; i++) {
         const item = items[i]
@@ -160,7 +181,8 @@ export default mixins(
         const node: any = {
           vnode: oldNode.vnode,
           parent,
-          children: children.map((c: any) => getObjectValueByPath(c, this.itemKey))
+          children: children.map((c: any) => getObjectValueByPath(c, this.itemKey)),
+          item
         }
 
         this.buildTree(children, key)
@@ -186,16 +208,6 @@ export default mixins(
 
         this.updateVnodeState(key)
       }
-    },
-    countItems (items: any[]) {
-      let count = 0
-      for (let i = 0; i < items.length; i++) {
-        const item = items[i]
-        count += 1
-        count += item.children ? this.countItems(item.children) : 0
-      }
-
-      return count
     },
     calculateState (node: NodeState, state: Record<string | number, NodeState>) {
       const counts = node.children.reduce((counts: number[], child: string | number) => {
@@ -248,7 +260,7 @@ export default mixins(
     },
     unregister (node: VTreeviewNodeInstance) {
       const key = getObjectValueByPath(node.item, this.itemKey)
-      this.nodes[key].vnode = null
+      if (this.nodes[key]) this.nodes[key].vnode = null
     },
     updateActive (key: string | number, isActive: boolean) {
       if (!this.nodes.hasOwnProperty(key)) return
