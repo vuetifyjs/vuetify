@@ -33,11 +33,6 @@ type NodeState = {
   item: any
 }
 
-function ston (s: string | number) {
-  const n = Number(s)
-  return !isNaN(n) ? n : s
-}
-
 export default mixins(
   RegistrableProvide('treeview'),
   Themeable
@@ -148,7 +143,7 @@ export default mixins(
     }
 
     if (this.openAll) {
-      Object.keys(this.nodes).forEach(key => this.updateOpen(ston(key), true))
+      Object.keys(this.nodes).forEach(key => this.updateOpen(getObjectValueByPath(this.nodes[key].item, this.itemKey), true))
     } else {
       this.open.forEach(key => this.updateOpen(key, true))
     }
@@ -286,36 +281,37 @@ export default mixins(
     updateSelected (key: string | number, isSelected: boolean) {
       if (!this.nodes.hasOwnProperty(key)) return
 
-      const changed: Record<string | number, boolean> = {}
+      const changed = new Map()
 
       const descendants = [key, ...this.getDescendants(key)]
       descendants.forEach(descendant => {
         this.nodes[descendant].isSelected = isSelected
         this.nodes[descendant].isIndeterminate = false
-        changed[descendant] = isSelected
+        changed.set(descendant, isSelected)
       })
 
       const parents = this.getParents(key)
       parents.forEach(parent => {
         this.nodes[parent] = this.calculateState(this.nodes[parent], this.nodes)
-        changed[parent] = this.nodes[parent].isSelected
+        changed.set(parent, this.nodes[parent].isSelected)
       })
 
       const all = [key, ...descendants, ...parents]
       all.forEach(this.updateVnodeState)
 
-      Object.keys(changed).forEach(k => {
-        changed[k] === true ? this.selectedCache.add(ston(k)) : this.selectedCache.delete(ston(k))
-      })
+      for (const [key, value] of changed.entries()) {
+        value === true ? this.selectedCache.add(key) : this.selectedCache.delete(key)
+      }
     },
     updateOpen (key: string | number, isOpen: boolean) {
       if (!this.nodes.hasOwnProperty(key)) return
 
       const node = this.nodes[key]
+      const children = getObjectValueByPath(node.item, this.itemChildren)
 
-      if (node.children && !node.children.length && node.vnode && !node.vnode.hasLoaded) {
+      if (children && !children.length && node.vnode && !node.vnode.hasLoaded) {
         node.vnode.checkChildren().then(() => this.updateOpen(key, isOpen))
-      } else {
+      } else if (children && children.length) {
         node.isOpen = isOpen
 
         node.isOpen ? this.openCache.add(key) : this.openCache.delete(key)
