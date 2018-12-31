@@ -358,6 +358,72 @@ exports[`VTreeView.ts should react to open changes 4`] = `
 
 `;
 
+exports[`VTreeView.ts should remove old nodes 1`] = `
+
+<div class="v-treeview theme--light">
+  <div class="v-treeview-node v-treeview-node--leaf">
+    <div class="v-treeview-node__root">
+      <div class="v-treeview-node__content">
+        <label class="v-treeview-node__label">
+          one
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="v-treeview-node v-treeview-node--leaf">
+    <div class="v-treeview-node__root">
+      <div class="v-treeview-node__content">
+        <label class="v-treeview-node__label">
+          two
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VTreeView.ts should remove old nodes 2`] = `
+
+<div class="v-treeview theme--light">
+  <div class="v-treeview-node v-treeview-node--leaf">
+    <div class="v-treeview-node__root">
+      <div class="v-treeview-node__content">
+        <label class="v-treeview-node__label">
+          one
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VTreeView.ts should remove old nodes 3`] = `
+
+<div class="v-treeview theme--light">
+  <div class="v-treeview-node v-treeview-node--leaf">
+    <div class="v-treeview-node__root">
+      <div class="v-treeview-node__content">
+        <label class="v-treeview-node__label">
+          one
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="v-treeview-node v-treeview-node--leaf">
+    <div class="v-treeview-node__root">
+      <div class="v-treeview-node__content">
+        <label class="v-treeview-node__label">
+          three
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
 exports[`VTreeView.ts should render items 1`] = `
 
 <div class="v-treeview theme--light">
