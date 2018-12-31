@@ -20,7 +20,7 @@
         {{ computedIcon }}
       </v-icon>
       <doc-markdown
-        :source="snackbar.msg"
+        :code="snackbar.msg"
         class="snack-markdown"
       />
       <v-spacer />
