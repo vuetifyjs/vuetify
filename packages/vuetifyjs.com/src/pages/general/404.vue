@@ -1,5 +1,8 @@
 <template>
-  <v-container fill-height>
+  <v-container
+    fill-height
+    style="height: calc(100vh - 58px);"
+  >
     <v-layout align-center>
       <v-flex text-xs-center>
         <h1 class="display-2 primary--text">Whoops, 404</h1>

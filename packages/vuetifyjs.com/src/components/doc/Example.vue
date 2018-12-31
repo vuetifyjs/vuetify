@@ -5,7 +5,11 @@
       dense
       flat
     >
-      <v-chip v-if="newIn" color="warning" small>
+      <v-chip
+        v-if="newIn"
+        color="warning"
+        small
+      >
         <v-avatar>
           <v-icon>mdi-star</v-icon>
         </v-avatar>
@@ -40,7 +44,7 @@
     </v-toolbar>
     <v-expand-transition v-if="parsed">
       <v-card
-        v-if="expand && $vuetify.breakpoint.smAndDown"
+        v-if="expand"
         color="#2d2d2d"
         dark
         flat
@@ -78,32 +82,8 @@
             :key="`window-${i}`"
             :value="section"
           >
-            <doc-markup
-              :value="file"
-              :filename="false"
-              class="mb-0"
-            >{{ parsed[section] }}</doc-markup>
-          </v-window-item>
-        </v-window>
-      </v-card>
-      <v-card
-        v-if="expand && $vuetify.breakpoint.mdAndUp"
-        color="#2d2d2d"
-        dark
-        flat
-        tile
-      >
-        <v-layout row>
-          <v-flex
-            v-for="(section, i) in sections"
-            v-if="parsed[section]"
-            :key="`window-${i}`"
-            :value="section"
-            xs12
-            shrink
-          >
             <div
-              class="example-container"
+              :class="($vuetify.breakpoint.smAndUp) ? 'v-example__container' : ''"
             >
               <doc-markup
                 :value="file"
@@ -111,8 +91,8 @@
                 class="mb-0"
               >{{ parsed[section] }}</doc-markup>
             </div>
-          </v-flex>
-        </v-layout>
+          </v-window-item>
+        </v-window>
       </v-card>
     </v-expand-transition>
     <v-sheet
@@ -235,10 +215,14 @@
     .component-example .application--example
       z-index: auto
 
-  .example-container
+  .v-example__container
     height: 100%
-    max-height: 550px
+    max-height: calc(100vh - 275px)
     overflow-y: auto
+
+  .v-example:not(:first-child) .v-example__container {
+    border-left: 1px solid rgba(#FFF, .12)
+  }
 
   .component-example
     // margin-bottom: 32px

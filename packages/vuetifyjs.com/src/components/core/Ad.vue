@@ -30,7 +30,7 @@
                   :href="diamond.href"
                   target="_blank"
                   rel="noopener"
-                  @click="$ga.event('drawer sponsor click', 'click', diamond.name)"
+                  @click="$ga.event('drawer', 'click', 'sponsor click', diamond.name)"
                 >
                   <v-img
                     :src="`https://cdn.vuetifyjs.com/images/${diamond.logo}`"

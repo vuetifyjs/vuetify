@@ -1,9 +1,11 @@
+// Types
 import Vue, { VNode } from 'vue'
 import { Prop } from 'vue/types/options'
-
 import { Boundary, Point } from '../VSparkline'
 
 export default Vue.extend({
+  name: 'VSparklineText',
+
   props: ['points', 'boundary', 'offsetX'] as any as {
     points: Prop<Point[]>
     boundary: Prop<Boundary>
@@ -23,7 +25,7 @@ export default Vue.extend({
     }, this.points.map(item => (
       h('text', {
         attrs: {
-          x: item.x - offsetX,
+          x: item.x - offsetX * -0.45,
           y: this.boundary.maxY + 2
         }
       }, item.value.toString())

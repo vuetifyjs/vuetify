@@ -29,29 +29,9 @@
         >
           <template slot="item" slot-scope="{ item: gotcha, index }">
             <div class="mb-5">
-              <h5
-                :id="`question-${index + 1}`"
-                class="subheading font-weight-medium mb-2"
-              >
-                <a
-                  :href="`#question-${index + 1}`"
-                  aria-label="Question Link"
-                  class="text-decoration-none"
-                  @click="$vuetify.goTo(`#question-${index + 1}`, { offset: -80 })"
-                >
-                  <v-hover>
-                    <v-icon
-                      slot-scope="{ hover }"
-                      :color="hover ? 'primary' : ''"
-                      class="mr-2"
-                      size="18"
-                    >
-                      mdi-pound
-                    </v-icon>
-                  </v-hover>
-                </a>
-                <span v-html="gotcha.q" />
-              </h5>
+              <core-goto :id="`question-${index + 1}`">
+                <doc-markdown :code="gotcha.q" />
+              </core-goto>
               <v-paper
                 class="pa-3"
                 elevation="1"
@@ -112,10 +92,6 @@
 .v-data-iterator--faq {
   p {
     margin: 0;
-  }
-
-  .markdown:not(:last-child) {
-    margin-bottom: 16px;
   }
 }
 

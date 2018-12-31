@@ -1,10 +1,16 @@
+// Components
+import { Point } from '../VSparkline'
+
+// Utilities
+import { genPath } from '../helpers/path'
+
+// Types
 import Vue, { VNode } from 'vue'
 import { Prop } from 'vue/types/options'
 
-import { Point } from '../VSparkline'
-import { genPath } from '../helpers/path'
-
 export default Vue.extend<Vue & { $el: SVGPathElement }>().extend({
+  name: 'VSparklinePath',
+
   props: ['smooth', 'radius', 'id', 'points'] as any as {
     smooth: Prop<boolean>
     radius: Prop<number>

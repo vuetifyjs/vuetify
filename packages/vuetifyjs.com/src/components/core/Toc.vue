@@ -50,8 +50,11 @@
     },
 
     watch: {
-      isLoading (val) {
-        !val && this.genList()
+      isLoading: {
+        immediate: true,
+        handler (val) {
+          !val && setTimeout(this.genList, 50)
+        }
       }
     },
 
@@ -73,8 +76,7 @@
           list.push({
             item,
             text: item.innerText,
-            target: `#${item.id}`,
-            offsetTop: item.offsetTop
+            target: `#${item.id}`
           })
         }
 
@@ -88,7 +90,11 @@
 
         const list = this.list.slice().reverse()
         const index = list.findIndex(item => {
-          return item.offsetTop - 100 < this.currentOffset
+          const { offsetParent } = item.item
+
+          if (!offsetParent) return false
+
+          return offsetParent.offsetTop - 100 < this.currentOffset
         })
 
         const lastIndex = list.length

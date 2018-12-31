@@ -57,3 +57,24 @@ export function parseLink (match, text, link) {
 
   return `<a href="${link}" ${attrs} class="${linkClass}">${text}<i class="v-icon mdi mdi-${icon}"></i></a>`
 }
+
+export async function waitForReadystate () {
+  if (
+    typeof document !== 'undefined' &&
+    document.readyState !== 'complete'
+  ) {
+    await new Promise(resolve => {
+      const cb = () => {
+        window.requestAnimationFrame(resolve)
+        window.removeEventListener('load', cb)
+      }
+      window.addEventListener('load', cb)
+    })
+  }
+}
+
+export function genChip (item) {
+  if (item.new) return 'new'
+  if (item.updated) return 'updated'
+  if (item.deprecated) return 'deprecated'
+}

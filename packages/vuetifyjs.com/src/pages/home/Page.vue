@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="home">
     <v-content>
       <v-container
         fluid
@@ -29,6 +29,10 @@
 </script>
 
 <style lang="stylus">
+  #home
+    .v-card {
+      border-radius: 6px;
+    }
   .mono
     font-family: 'Roboto Mono', monospace !important
 </style>

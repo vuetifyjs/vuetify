@@ -61,5 +61,11 @@
     "tickLabels": "When provided with Array<string>, will attempt to map the labels to each step in index order",
     "tickSize": "Controls the size of **ticks**",
     "trackColor": "Sets the track fill color"
+  },
+  "events": {
+    "change": "Components.Inputs.events.change",
+    "end": "Slider value emitted at the end of slider movement",
+    "start": "Slider value emitted at start of slider movement",
+    "update:error": "Mixins.Validatable.events['update:error']"
   }
 }

@@ -1,9 +1,13 @@
-import Vue from 'vue'
-import { PropValidator } from 'vue/types/options'
-
+// Components
 import bar from './Bar'
 import trend from './Trend'
+
+// Utilities
 import props from './mixins/props'
+
+// Types
+import Vue from 'vue'
+import { PropValidator } from 'vue/types/options'
 
 const COMPONENTS = {
   bar,

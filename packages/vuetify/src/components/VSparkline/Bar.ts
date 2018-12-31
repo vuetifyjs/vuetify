@@ -1,14 +1,20 @@
-import mixins from '../../util/mixins'
-import { VNode } from 'vue'
-
-import props from './mixins/props'
+// Components
+import Gradient from './components/gradient'
 import Rect from './components/rect'
 import Text from './components/text'
-import Gradient from './components/gradient'
+
+// Mixins
+import props from './mixins/props'
+
+// Utilities
+import mixins from '../../util/mixins'
 import { genPoints } from './helpers/core'
 
+// Types
+import { VNode } from 'vue'
+
 export default mixins(props).extend({
-  name: 'bar',
+  name: 'VBar',
 
   props: {
     autoDrawDuration: {
@@ -18,9 +24,9 @@ export default mixins(props).extend({
   },
 
   render (h): VNode {
-    if (!this.data || this.data.length < 2) return undefined as never
+    if (!this.value || this.value.length < 2) return undefined as never
     const { width, height, padding, lineWidth } = this
-    const viewWidth = width || 300
+    const viewWidth = width || this.value.length * padding * 2
     const viewHeight = height || 75
     const boundary = {
       minX: padding,
@@ -28,9 +34,11 @@ export default mixins(props).extend({
       maxX: viewWidth - padding,
       maxY: viewHeight - padding
     }
-    const props = this.$props
+    const props = {
+      ...this.$props
+    }
 
-    props.points = genPoints(this.data, boundary)
+    props.points = genPoints(this.value, boundary)
 
     const totalWidth = boundary.maxX / (props.points.length - 1)
 
