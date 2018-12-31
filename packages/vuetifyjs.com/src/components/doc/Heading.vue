@@ -1,8 +1,14 @@
 <template functional>
   <core-goto class="core-goto--heading">
-    <doc-markdown><slot /></doc-markdown>
+    <doc-markdown v-bind="$attrs"><slot /></doc-markdown>
   </core-goto>
 </template>
+
+<script>
+  export default {
+    inherritAttrs: false
+  }
+</script>
 
 <style lang="stylus">
 .core-goto--heading {

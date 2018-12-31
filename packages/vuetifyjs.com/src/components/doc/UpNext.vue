@@ -52,13 +52,11 @@
     methods: {
       genColor (section) {
         switch (section) {
-          case 'getting-started': return 'primary'
-          case 'framework': return 'primary'
-          case 'layout': return 'primary'
-          case 'style': return 'primary'
-          case 'motion': return 'primary'
+          case 'getting-started': return 'teal'
+          case 'framework': return 'brown'
           case 'components': return 'primary'
-          case 'directives': return 'primary'
+          case 'directives': return 'blue-grey'
+          case 'themes': return 'tertiary'
           default: return 'grey'
         }
       },
@@ -66,11 +64,9 @@
         switch (section) {
           case 'getting-started': return 'mdi-speedometer'
           case 'framework': return 'mdi-buffer'
-          case 'layout': return 'mdi-page-layout-body'
-          case 'style': return 'mdi-format-color-fill'
-          case 'motion': return 'mdi-clock-fast'
           case 'components': return 'mdi-view-dashboard'
           case 'directives': return 'mdi-function'
+          case 'themes': return 'mdi-palette'
         }
       },
       genLink (link) {

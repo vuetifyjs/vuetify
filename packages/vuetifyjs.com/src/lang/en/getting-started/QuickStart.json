@@ -7,7 +7,7 @@
   "vueCliText3": "**Tip**: If you already have **vue-cli** installed, make sure you are on the latest version by typing <kbd>vue --version</kbd> into your cli.",
   "vueCliText4": "Once the cli is installed, you can generate a new project scaffold. Select the _default install_ unless you have specific packages that you need to include (e.g. _vuex_ or _vue-router_). This will create a new Vue project that's ready to go with your selected options.",
   "vueCliText5": "Now that you have an instantiated project, you can add the [Vuetify package](https://github.com/vuetifyjs/vue-cli-plugin-vuetify) using the cli.",
-  "vueCliText6": "This will provide you with a set of options for customizing your installation.",
+  "vueCliText6": "This will provide you with a set of options for customizing your installation. The default preset has [a-la-carte](/framework/a-la-carte) already enabled for you.",
   "vueCliText7": "After installation simply run <kbd>yarn serve</kbd> or <kbd>npm run serve</kbd> to start your application.",
   "uiHeader": "## Vue UI",
   "uiText1": "Vuetify can also be installed using **Vue UI**, the new visual application for _vue-cli-3_. Ensure that you have the latest version of vue-cli installed and from your terminal type:",
@@ -38,7 +38,8 @@
   "ie11Text2": "It is important to include the plugin as early as possible within your main **index.js** file. If using a Vuetify SSR package, this will apply to the **client-entry.js** file",
   "ie11Text3": "It is recommended that you use `babel-preset-env` with the corresponding polyfill to ensure only the necessary polyfills are added to your application. For more information on `babel-present-env`, [visit the documentation](https://babeljs.io/docs/en/next/babel-preset-env.html)",
   "ie11Text4": "Once installed, add the preset to your `.babelrc` or `babel.config.js`",
-  "ie11Text5": "Due to Internet Explorer's limited support for `<template>` tags, you must send fully compiled dom elements to the browser. This can be done by either building your Vue code in advance or by creating helper components to replace the dom elements. For instance, if sent directly to IE, this will fail:",
+  "ie11Text5": "Unfortunately vue-cli-3 doesn't automatically bring IE11 compatibility in which you may encounter various errors (such as <i>Symbol is not defined</i>). To assist in resolving these errors you may need to manually add `transpileDependencies` parameter in `vue.config.js`",
+  "ie11Text6": "Due to Internet Explorer's limited support for `<template>` tags, you must send fully compiled dom elements to the browser. This can be done by either building your Vue code in advance or by creating helper components to replace the dom elements. For instance, if sent directly to IE, this will fail:",
   "browserSupport": {
     "supported": "Supported",
     "notSupported": "Not supported",

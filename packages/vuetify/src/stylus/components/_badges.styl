@@ -1,5 +1,27 @@
 @import '../bootstrap'
 
+v-badge-rtl()
+  &__badge
+    right: initial
+    left: -($badge-width)
+
+  &--overlap
+    .v-badge__badge
+      right: initial
+      left: -8px
+
+    &.v-badge--left
+      .v-badge__badge
+        right: -8px
+        left: initial
+
+  &--left
+    .v-badge__badge
+      right: -($badge-width)
+      left: initial
+
+rtl(v-badge-rtl, "v-badge")
+
 .v-badge
   display: inline-block
   position: relative

@@ -21,7 +21,6 @@ test('VMessages.js', ({ mount }) => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect('Cannot read property \'split\' of undefined').toHaveBeenWarned()
   })
 
   it('should allow HTML', () => {

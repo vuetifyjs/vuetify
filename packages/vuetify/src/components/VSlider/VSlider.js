@@ -22,12 +22,10 @@ import { consoleWarn } from '../../util/console'
 import Loadable from '../../mixins/loadable'
 
 /* @vue/component */
-export default {
+export default VInput.extend({
   name: 'v-slider',
 
   directives: { ClickOutside },
-
-  extends: VInput,
 
   mixins: [Loadable],
 
@@ -43,7 +41,6 @@ export default {
       type: [Number, String],
       default: 100
     },
-    range: Boolean,
     step: {
       type: [Number, String],
       default: 1
@@ -520,4 +517,4 @@ export default {
       this.internalValue = value
     }
   }
-}
+})

@@ -1,15 +1,16 @@
 <template>
   <v-container
+    v-if="structure !== false"
     id="page"
-    fluid
   >
-    <not-found-page v-if="structure === false" />
-
-    <template v-else-if="structure">
-      <doc-heading>
+    <template v-if="structure">
+      <doc-heading v-if="structure.title">
         {{ structure.title }}
       </doc-heading>
-      <div class="mb-5">
+      <div
+        v-if="structure.titleText"
+        class="mb-5"
+      >
         <doc-text
           v-if="structure.titleText"
           class="mb-4"
@@ -24,28 +25,32 @@
         :is="getComponent(child.type)"
         :value="child"
       />
+
+      <doc-contribution />
     </template>
   </v-container>
+  <not-found v-else />
 </template>
 
 <script>
   // Utilities
+  import {
+    mapMutations
+  } from 'vuex'
   import { getComponent } from '@/util/helpers'
   import kebabCase from 'lodash/kebabCase'
   import camelCase from 'lodash/camelCase'
   import upperFirst from 'lodash/upperFirst'
-  import NotFoundPage from '@/pages/general/404Page.vue'
-  import { mapMutations } from 'vuex'
 
-  // TODO: This is where 404 redirect will occur
   export default {
     components: {
-      NotFoundPage
+      NotFound: () => import('@/pages/general/404')
     },
 
     provide () {
       return {
         namespace: upperFirst(camelCase(this.namespace)),
+        lang: this.lang,
         page: upperFirst(camelCase(this.page))
       }
     },
@@ -57,6 +62,10 @@
         default: undefined
       },
       page: {
+        type: String,
+        default: undefined
+      },
+      lang: {
         type: String,
         default: undefined
       }
@@ -76,16 +85,17 @@
       const namespace = kebabCase(this.namespace)
       const page = upperFirst(camelCase(this.page))
 
+      this.setIsLoading(true)
+
       import(
         /* webpackChunkName: "pages" */
         `@/data/pages/${namespace}/${page}.json`
       ).then(res => {
         this.structure = res.default
       }).catch(() => {
-        // Add 404
         this.structure = false
         throw new Error(`Unable to find page for <${namespace}/${page}>`)
-      })
+      }).finally(() => this.setIsLoading(false))
     },
 
     mounted () {
@@ -93,15 +103,10 @@
       setTimeout(this.init, 300)
     },
 
-    destroyed () {
-      this.setToc(false)
-    },
-
     methods: {
-      ...mapMutations('app', ['setToc']),
+      ...mapMutations('app', ['setIsLoading']),
       getComponent,
       init () {
-        this.setToc(true)
         const sameInternal = this.$el.querySelectorAll('a.markdown--same-internal')
 
         Array.prototype.forEach.call(sameInternal, el => {
@@ -117,13 +122,19 @@
       onSameInternalClick (e) {
         e.preventDefault()
 
-        this.$vuetify.goTo(e.target.href, { offset: -80 })
+        this.$router.push(e.target)
       },
       onInternalClick (e) {
         e.preventDefault()
 
-        this.$router.push(e.target.getAttribute('href'))
+        this.$router.push(`/${this.lang}${e.target.getAttribute('href')}`)
       }
     }
   }
 </script>
+
+<style>
+#page {
+  max-width: 1185px;
+}
+</style>

@@ -32,6 +32,7 @@
   },
   "props": {
     "backgroundColor": "The color used empty icons",
+    "dense": "Icons have a smaller size",
     "emptyIcon": "The icon displayed when empty",
     "fullIcon": "The icon displayed when full",
     "halfIcon": "The icon displayed when half (requires **half-increments** prop)",

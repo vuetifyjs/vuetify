@@ -26,7 +26,6 @@
         {
           "type": "examples",
           "value": [
-            "tag",
             "elevation"
           ]
         }
@@ -38,9 +37,9 @@
         {
           "type": "up-next",
           "value": [
-            "style/colors",
-            "layout/elevation",
-            "layout/grid"
+            "framework/colors",
+            "framework/elevation",
+            "framework/grid"
           ]
         }
       ]

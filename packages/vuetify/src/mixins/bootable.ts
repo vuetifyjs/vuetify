@@ -37,7 +37,7 @@ export default Vue.extend<Vue & Toggleable>().extend({
   },
 
   methods: {
-    showLazyContent (content: VNode[]): VNode[] | undefined {
+    showLazyContent (content?: VNode[]): VNode[] | undefined {
       return this.hasContent ? content : undefined
     }
   }

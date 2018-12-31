@@ -1,21 +1,32 @@
 <template>
-  <v-container>
-    <v-layout>
-      <v-flex>
-        <v-sheet elevation="1">
-          This sheet has <code>elevation="1"</code>
-        </v-sheet>
-      </v-flex>
-      <v-flex>
-        <v-sheet elevation="5">
-          This sheet has <code>elevation="5"</code>
-        </v-sheet>
-      </v-flex>
-      <v-flex>
-        <v-sheet elevation="24">
-          This sheet has <code>elevation="24"</code>
+  <v-container grid-list-xl>
+    <v-layout wrap>
+      <v-flex
+        v-for="elevation in elevations"
+        :key="elevation"
+        xs12
+        md4
+      >
+        <v-sheet
+          class="pa-5"
+          color="grey lighten-3"
+        >
+          <v-sheet
+            :elevation="elevation"
+            class="mx-auto"
+            height="100"
+            width="100"
+          ></v-sheet>
         </v-sheet>
       </v-flex>
     </v-layout>
   </v-container>
 </template>
+
+<script>
+  export default {
+    data: () => ({
+      elevations: [6, 12, 18]
+    })
+  }
+</script>

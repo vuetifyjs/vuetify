@@ -1,7 +1,7 @@
 {
   "name": "vuetify",
   "description": "Vue.js 2 Semantic Component Framework",
-  "version": "1.4.0-alpha.0",
+  "version": "1.4.0-beta.0",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -12,6 +12,7 @@
   "main": "dist/vuetify.js",
   "module": "dist/vuetify.js",
   "jsdelivr": "dist/vuetify.js",
+  "unpkg": "dist/vuetify.js",
   "types": "types/index.d.ts",
   "sideEffects": [
     "*.styl",
@@ -76,7 +77,6 @@
     "url-loader": "^1.1.2",
     "vue-loader": "^15.4.2",
     "vue-router": "^3.0.1",
-    "vue-template-compiler": "^2.5.17",
     "vue-template-es2015-compiler": "^1.6.0",
     "vuetify-loader": "^0.2.0",
     "webpack": "^4.23.1",
@@ -85,7 +85,7 @@
     "webpack-merge": "^4.1.4"
   },
   "peerDependencies": {
-    "vue": "^2.5.10"
+    "vue": "^2.5.18"
   },
   "publishConfig": {
     "access": "public"
