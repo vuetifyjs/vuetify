@@ -22,12 +22,7 @@ export default Vue.extend({
     } as PropValidator<DataPaginaton>,
     itemsPerPageOptions: {
       type: Array,
-      default: () => ([
-        { text: '5', value: 5 },
-        { text: '10', value: 10 },
-        { text: '15', value: 15 },
-        { text: 'All', value: -1 }
-      ])
+      default: () => ([5, 10, 15, -1])
     } as PropValidator<any[]>,
     prevIcon: {
       type: String,
@@ -49,6 +44,10 @@ export default Vue.extend({
       type: String,
       default: '$vuetify.dataIterator.itemsPerPageText'
     },
+    itemsPerPageAllText: {
+      type: String,
+      default: '$vuetify.dataIterator.itemsPerPageAll'
+    },
     showFirstLastPage: Boolean,
     showCurrentPage: Boolean
   },
@@ -58,6 +57,28 @@ export default Vue.extend({
       return this.options.itemsPerPage < 0 ||
         this.options.page * this.options.itemsPerPage >= this.pagination.itemsLength ||
         this.pagination.pageStop < 0
+    },
+    isCustomItemsPerPage (): boolean {
+      for (let i = 0; i < this.itemsPerPageOptions.length; i++) {
+        if (this.options.itemsPerPage === this.itemsPerPageOptions[i]) return false
+      }
+
+      return true
+    },
+    computedItemsPerPageOptions (): any[] {
+      const itemsPerPageOptions = this.itemsPerPageOptions.slice()
+
+      if (this.isCustomItemsPerPage) {
+        itemsPerPageOptions.push(this.options.itemsPerPage)
+
+        itemsPerPageOptions.sort((a, b) => {
+          if (a === -1) return 1
+          else if (b === -1) return -1
+          else return a - b
+        })
+      }
+
+      return itemsPerPageOptions.map(value => ({ text: value === -1 ? this.$vuetify.t(this.itemsPerPageAllText) : String(value), value }))
     }
   },
 
@@ -90,7 +111,7 @@ export default Vue.extend({
             'aria-label': this.itemsPerPageText
           },
           props: {
-            items: this.itemsPerPageOptions,
+            items: this.computedItemsPerPageOptions,
             value: this.options.itemsPerPage,
             hideDetails: true,
             auto: true,
