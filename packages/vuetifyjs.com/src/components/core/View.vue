@@ -1,16 +1,30 @@
 <template>
   <v-content>
-    <router-view />
-    <translation-bar v-if="isTranslating" />
+    <core-page
+      :page="page"
+      :namespace="namespace"
+      :lang="lang"
+      :key="$route.path"
+    />
   </v-content>
 </template>
 
 <script>
-  import { mapState } from 'vuex'
-
   export default {
-    computed: {
-      ...mapState('translation', ['isTranslating'])
+    props: {
+      // Provided by router
+      namespace: {
+        type: String,
+        default: undefined
+      },
+      page: {
+        type: String,
+        default: undefined
+      },
+      lang: {
+        type: String,
+        default: undefined
+      }
     }
   }
 </script>

@@ -1,0 +1,59 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "usage",
+          "value": "usage"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": [ "v-autocomplete" ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "supplemental",
+          "value": [
+            {
+              "type": "components-mask-table"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [ "api", "scopedSlots", "customFilter", "asynchronous", "advanced" ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/combobox",
+            "components/forms",
+            "components/selects"
+          ]
+        }
+      ]
+    }
+  ]
+}

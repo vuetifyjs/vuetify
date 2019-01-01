@@ -39,7 +39,9 @@
     methods: {
       functionEvents (date) {
         const [,, day] = date.split('-')
-        return parseInt(day, 10) % 3 === 0
+        if ([12, 17, 28].includes(parseInt(day, 10))) return true
+        if ([1, 19, 22].includes(parseInt(day, 10))) return ['red', '#00f']
+        return false
       }
     }
   }

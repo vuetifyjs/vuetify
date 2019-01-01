@@ -95,17 +95,19 @@
 
     .v-navigation-drawer #carbonads {
       display: flex;
-      justify-content: flex-start;
+      justify-content: center;
       z-index: 3;
       margin-bottom: 48px;
 
       > span {
         background: rgba(#000, .03);
+        display: inline-block;
         padding: 8px;
+        max-width: 146px;
       }
 
-      .carbon-img > img {
-        max-width: 130px;
+      .carbon-poweredby {
+        white-space: nowrap;
       }
 
       a {

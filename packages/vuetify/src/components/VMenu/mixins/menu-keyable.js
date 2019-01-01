@@ -13,6 +13,10 @@ import { keyCodes } from '../../../util/helpers'
 
 /* @vue/component */
 export default {
+  props: {
+    disableKeys: Boolean
+  },
+
   data: () => ({
     listIndex: -1,
     tiles: []

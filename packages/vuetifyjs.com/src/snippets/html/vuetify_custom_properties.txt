@@ -1,0 +1,6 @@
+<style scoped>
+  .something {
+    color: var(--v-primary-base)
+    background-color: var(--v-accent-lighten2)
+  }
+</style>

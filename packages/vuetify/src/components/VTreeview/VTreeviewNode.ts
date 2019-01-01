@@ -156,10 +156,15 @@ export default mixins<options>(
       this.treeview.emitOpen()
     },
     genLabel () {
-      return this.$createElement('label', {
+      const children = []
+
+      if (this.$scopedSlots.label) children.push(this.$scopedSlots.label(this.scopedProps))
+      else children.push(this.text)
+
+      return this.$createElement('div', {
         slot: 'label',
         staticClass: 'v-treeview-node__label'
-      }, [this.text])
+      }, children)
     },
     genContent () {
       const children = [

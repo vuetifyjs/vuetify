@@ -1,0 +1,4 @@
+// my-project/src/index.js
+import 'babel-polyfill'
+...
+new Vue()

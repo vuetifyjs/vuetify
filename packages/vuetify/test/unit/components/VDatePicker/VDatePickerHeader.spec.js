@@ -13,6 +13,28 @@ test('VDatePickerHeader.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should render disabled component and match snapshot', () => {
+    const wrapper = mount(VDatePickerHeader, {
+      propsData: {
+        value: '2005-11',
+        disabled: true
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render readonly component and match snapshot', () => {
+    const wrapper = mount(VDatePickerHeader, {
+      propsData: {
+        value: '2005-11',
+        readonly: true
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it('should render component in RTL mode and match snapshot', async () => {
     const wrapper = mount(VDatePickerHeader, {
       propsData: {
@@ -33,7 +55,7 @@ test('VDatePickerHeader.js', ({ mount }) => {
       }
     })
 
-    expect(wrapper.find('.v-date-picker-header__value strong')[0].element.textContent).toBe('2005')
+    expect(wrapper.find('.v-date-picker-header__value div')[0].element.textContent).toBe('2005')
   })
 
   it('should render prev/next icons', () => {
@@ -57,7 +79,7 @@ test('VDatePickerHeader.js', ({ mount }) => {
       }
     })
 
-    expect(wrapper.find('.v-date-picker-header__value strong')[0].element.textContent).toBe('(2005-11)')
+    expect(wrapper.find('.v-date-picker-header__value div')[0].element.textContent).toBe('(2005-11)')
   })
 
   it('should render colored component and match snapshot', () => {
@@ -68,9 +90,9 @@ test('VDatePickerHeader.js', ({ mount }) => {
       }
     })
 
-    const strong = wrapper.find('.v-date-picker-header__value strong')[0]
-    expect(strong.hasClass('green--text')).toBe(true)
-    expect(strong.hasClass('text--lighten-1')).toBe(true)
+    const div = wrapper.find('.v-date-picker-header__value div')[0]
+    expect(div.hasClass('green--text')).toBe(true)
+    expect(div.hasClass('text--lighten-1')).toBe(true)
   })
 
   it('should render component with default slot and match snapshot', () => {
@@ -96,7 +118,7 @@ test('VDatePickerHeader.js', ({ mount }) => {
     const toggle = jest.fn()
     wrapper.vm.$on('toggle', toggle)
 
-    wrapper.find('.v-date-picker-header__value strong')[0].trigger('click')
+    wrapper.find('.v-date-picker-header__value button')[0].trigger('click')
     expect(toggle).toBeCalled()
   })
 
@@ -110,10 +132,10 @@ test('VDatePickerHeader.js', ({ mount }) => {
     const input = jest.fn()
     wrapper.vm.$on('input', input)
 
-    wrapper.find('button')[0].trigger('click')
+    wrapper.find('button.v-btn')[0].trigger('click')
     expect(input).toBeCalledWith('2005-11')
 
-    wrapper.find('button')[1].trigger('click')
+    wrapper.find('button.v-btn')[1].trigger('click')
     expect(input).toBeCalledWith('2006-01')
   })
 
@@ -144,8 +166,8 @@ test('VDatePickerHeader.js', ({ mount }) => {
       value: 2006
     })
     await wrapper.vm.$nextTick()
-    expect(wrapper.find('.v-date-picker-header__value strong')[0].hasClass('tab-transition-enter')).toBe(true)
-    expect(wrapper.find('.v-date-picker-header__value strong')[0].hasClass('tab-transition-enter-active')).toBe(true)
+    expect(wrapper.find('.v-date-picker-header__value div')[0].hasClass('tab-transition-enter')).toBe(true)
+    expect(wrapper.find('.v-date-picker-header__value div')[0].hasClass('tab-transition-enter-active')).toBe(true)
   })
 
   it('should watch value and run reverse transition', async () => {
@@ -159,8 +181,8 @@ test('VDatePickerHeader.js', ({ mount }) => {
       value: 2004
     })
     await wrapper.vm.$nextTick()
-    expect(wrapper.find('.v-date-picker-header__value strong')[0].hasClass('tab-reverse-transition-enter')).toBe(true)
-    expect(wrapper.find('.v-date-picker-header__value strong')[0].hasClass('tab-reverse-transition-enter-active')).toBe(true)
+    expect(wrapper.find('.v-date-picker-header__value div')[0].hasClass('tab-reverse-transition-enter')).toBe(true)
+    expect(wrapper.find('.v-date-picker-header__value div')[0].hasClass('tab-reverse-transition-enter-active')).toBe(true)
   })
 
 })
