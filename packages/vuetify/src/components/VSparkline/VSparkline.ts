@@ -12,6 +12,11 @@ import { Prop } from 'vue/types/options'
 
 export type SparklineItem = number | { value: number }
 
+export type SparklineText = {
+  x: number
+  value: string
+}
+
 export interface Boundary {
   minX: number
   minY: number
@@ -69,6 +74,10 @@ export default mixins<options &
       type: [String, Number],
       default: 75
     },
+    labels: {
+      type: Array as Prop<SparklineItem[]>,
+      default: () => ([])
+    },
     lineWidth: {
       type: [String, Number],
       default: 4
@@ -81,7 +90,7 @@ export default mixins<options &
       type: [Boolean, Number, String],
       default: false
     },
-    showLabel: Boolean,
+    showLabels: Boolean,
     value: {
       type: Array as Prop<SparklineItem[]>,
       default: () => ([])
@@ -109,8 +118,37 @@ export default mixins<options &
         maxY: height - padding
       }
     },
+    hasLabels (): boolean {
+      return this.showLabels || this.labels.length > 0
+    },
+    parsedLabels (): SparklineText[] {
+      const labels = []
+      const points = this.points
+      const len = points.length
+
+      for (let i = 0; labels.length < len; i++) {
+        const item = points[i]
+        let value = this.labels[i]
+
+        if (!value) {
+          value = item === Object(item)
+            ? item.value
+            : item
+        }
+
+        labels.push({
+          ...item,
+          value: String(value)
+        })
+      }
+
+      return labels
+    },
     points (): Point[] {
       return genPoints(this.value, this.boundary)
+    },
+    textY (): number {
+      return this.boundary.maxY + 6
     }
   },
 
@@ -168,7 +206,7 @@ export default mixins<options &
       ])
     },
     genLabels () {
-      if (!this.showLabel) return undefined
+      if (!this.hasLabels) return undefined
 
       return this.$createElement('g', {
         style: {
@@ -177,14 +215,7 @@ export default mixins<options &
           dominantBaseline: 'mathematical',
           fill: 'currentColor'
         }
-      }, this.points.map(item => {
-        return this.$createElement('text', {
-          attrs: {
-            x: item.x,
-            y: this.boundary.maxY + 4
-          }
-        }, item.value.toString())
-      }))
+      }, this.parsedLabels.map(this.genText))
     },
     genPath () {
       const radius = this.smooth === true ? 8 : Number(this.smooth)
@@ -198,6 +229,18 @@ export default mixins<options &
         },
         ref: 'path'
       })
+    },
+    genText (item: SparklineText, index: number) {
+      const children = this.$scopedSlots.label
+        ? this.$scopedSlots.label({ index, value: item.value })
+        : item.value
+
+      return this.$createElement('text', {
+        attrs: {
+          x: item.x,
+          y: this.textY
+        }
+      }, [children])
     }
   },
 
