@@ -26,9 +26,10 @@
     "data": "An array of data points",
     "gradient": "An array of colors to use as a linear-gradient",
     "gradientDirection": "The direction the gradient should run",
+    "labels": "An array of string labels that correspond to the same index as its data counterpart",
     "lineWidth": "The thickness of the line, in px",
     "padding": "Low `smooth` or high `line-width` values may result in cropping, increase padding to compensate",
-    "showLabel": "Show labels below each data point",
+    "showLabels": "Show labels below each data point",
     "smooth": "Number of px to use as a corner radius. `true` defaults to 8, `false` is 0",
     "type": "Choose between a trendline or bars"
   }
