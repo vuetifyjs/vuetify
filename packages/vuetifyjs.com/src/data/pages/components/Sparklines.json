@@ -26,7 +26,8 @@
         {
           "type": "examples",
           "value": [
-            "heartRate"
+            "heartRate",
+            "dashboardCard"
           ]
         }
       ]
