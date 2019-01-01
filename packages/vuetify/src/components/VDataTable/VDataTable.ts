@@ -46,7 +46,9 @@ export default VDataIterator.extend({
     hideDefaultFooter: Boolean,
     hideDefaultHeader: Boolean,
     caption: String,
-    dense: Boolean
+    dense: Boolean,
+    footerProps: Object,
+    headerProps: Object
   },
 
   data () {
@@ -142,6 +144,7 @@ export default VDataIterator.extend({
       if (!this.hideDefaultHeader) {
         children.push(this.$createElement(VDataTableHeader, {
           props: {
+            ...this.headerProps,
             headers: this.computedHeaders,
             options: props.options,
             mobile: this.isMobile
@@ -336,6 +339,7 @@ export default VDataIterator.extend({
       if (!this.hideDefaultFooter) {
         children.push(this.$createElement(VDataFooter, {
           props: {
+            ...this.footerProps,
             options: props.options,
             pagination: props.pagination
           },
