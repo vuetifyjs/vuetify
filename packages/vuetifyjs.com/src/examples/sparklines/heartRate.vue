@@ -36,7 +36,7 @@
       </v-btn>
     </v-card-title>
 
-    <v-sheet height="150" color="transparent">
+    <v-sheet color="transparent">
       <v-sparkline
         :smooth="16"
         :gradient="['#f72047', '#ffd200', '#1feaea']"
