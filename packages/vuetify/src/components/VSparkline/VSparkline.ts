@@ -119,7 +119,11 @@ export default mixins<options &
       }
     },
     hasLabels (): boolean {
-      return this.showLabels || this.labels.length > 0
+      return Boolean(
+        this.showLabels ||
+        this.labels.length > 0 ||
+        this.$scopedSlots.label
+      )
     },
     parsedLabels (): SparklineText[] {
       const labels = []
