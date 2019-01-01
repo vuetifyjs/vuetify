@@ -65,7 +65,7 @@ export default mixins<options>().extend({
           indeterminate: !this.dataTable.everyItem && this.dataTable.someItems
         },
         on: {
-          input: () => this.dataTable.toggleSelectAll()
+          input: (v: boolean) => this.dataTable.toggleSelectAll(v)
         }
       })
     },

@@ -44,15 +44,15 @@ export default mixins(Themeable).extend({
   data: () => ({
     selection: {} as Record<string, boolean>,
     expansion: {} as Record<string, boolean>,
-    visibleItems: [] as any[]
+    internalCurrentItems: [] as any[]
   }),
 
   computed: {
     everyItem (): boolean {
-      return !!this.items.length && this.items.every((i: any) => this.isSelected(i))
+      return !!this.internalCurrentItems.length && this.internalCurrentItems.every((i: any) => this.isSelected(i))
     },
     someItems (): boolean {
-      return this.items.some((i: any) => this.isSelected(i))
+      return this.internalCurrentItems.some((i: any) => this.isSelected(i))
     }
   },
 
@@ -87,15 +87,11 @@ export default mixins(Themeable).extend({
   },
 
   methods: {
-    toggleSelectAll (): void {
-      const selection: Record<string, boolean> = {}
-
-      this.items.forEach((item: any) => {
+    toggleSelectAll (value: boolean): void {
+      this.internalCurrentItems.forEach((item: any) => {
         const key = getObjectValueByPath(item, this.itemKey)
-        selection[key] = !this.everyItem
+        this.$set(this.selection, key, value)
       })
-
-      this.selection = Object.assign({}, this.selection, selection)
     },
     isSelected (item: any): boolean {
       return this.selection[getObjectValueByPath(item, this.itemKey)] || false
@@ -201,7 +197,10 @@ export default mixins(Themeable).extend({
         'update:groupBy': (v: any) => this.$emit('update:groupBy', v),
         'update:groupDesc': (v: any) => this.$emit('update:groupDesc', v),
         'pagination': (v: any, old: any) => !deepEqual(v, old) && this.$emit('pagination', v),
-        'current-items': (v: any[]) => this.$emit('current-items', v)
+        'current-items': (v: any[]) => {
+          this.internalCurrentItems = v
+          this.$emit('current-items', v)
+        }
       },
       scopedSlots: {
         default: this.genDefaultScopedSLot

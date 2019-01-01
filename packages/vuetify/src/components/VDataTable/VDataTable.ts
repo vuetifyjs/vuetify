@@ -421,7 +421,10 @@ export default VDataIterator.extend({
         'update:groupBy': (v: any) => this.$emit('update:groupBy', v),
         'update:groupDesc': (v: any) => this.$emit('update:groupDesc', v),
         'pagination': (v: any, old: any) => !deepEqual(v, old) && this.$emit('pagination', v),
-        'current-items': (v: any[]) => this.$emit('current-items', v)
+        'current-items': (v: any[]) => {
+          this.internalCurrentItems = v
+          this.$emit('current-items', v)
+        }
       },
       scopedSlots: {
         default: this.genDefaultScopedSlot as any
