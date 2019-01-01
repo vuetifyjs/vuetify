@@ -30,11 +30,7 @@ type NodeState = {
   isSelected: boolean
   isIndeterminate: boolean
   isOpen: boolean
-}
-
-function ston (s: string | number) {
-  const n = Number(s)
-  return !isNaN(n) ? n : s
+  item: any
 }
 
 export default mixins(
@@ -81,8 +77,16 @@ export default mixins(
   watch: {
     items: {
       handler () {
+        const oldKeys = Object.keys(this.nodes).map(k => getObjectValueByPath(this.nodes[k].item, this.itemKey))
+        const newKeys = this.getKeys(this.items)
+
         // We only care if nodes are removed or added
-        if (Object.keys(this.nodes).length === this.countItems(this.items)) return
+        if (oldKeys.length === newKeys.length) return
+
+        // If nodes are removed we need to clear them from this.nodes
+        if (oldKeys.length > newKeys.length) {
+          oldKeys.filter(k => !newKeys.includes(k)).forEach(k => delete this.nodes[k])
+        }
 
         const oldSelectedCache = [...this.selectedCache]
         this.selectedCache = new Set()
@@ -139,7 +143,7 @@ export default mixins(
     }
 
     if (this.openAll) {
-      Object.keys(this.nodes).forEach(key => this.updateOpen(ston(key), true))
+      Object.keys(this.nodes).forEach(key => this.updateOpen(getObjectValueByPath(this.nodes[key].item, this.itemKey), true))
     } else {
       this.open.forEach(key => this.updateOpen(key, true))
     }
@@ -148,6 +152,18 @@ export default mixins(
   },
 
   methods: {
+    getKeys (items: any[], keys: any[] = []) {
+      for (let i = 0; i < items.length; i++) {
+        const key = getObjectValueByPath(items[i], this.itemKey)
+        keys.push(key)
+        const children = getObjectValueByPath(items[i], this.itemChildren)
+        if (children) {
+          keys.push(...this.getKeys(children))
+        }
+      }
+
+      return keys
+    },
     buildTree (items: any[], parent: (string | number | null) = null) {
       for (let i = 0; i < items.length; i++) {
         const item = items[i]
@@ -160,7 +176,8 @@ export default mixins(
         const node: any = {
           vnode: oldNode.vnode,
           parent,
-          children: children.map((c: any) => getObjectValueByPath(c, this.itemKey))
+          children: children.map((c: any) => getObjectValueByPath(c, this.itemKey)),
+          item
         }
 
         this.buildTree(children, key)
@@ -186,16 +203,6 @@ export default mixins(
 
         this.updateVnodeState(key)
       }
-    },
-    countItems (items: any[]) {
-      let count = 0
-      for (let i = 0; i < items.length; i++) {
-        const item = items[i]
-        count += 1
-        count += item.children ? this.countItems(item.children) : 0
-      }
-
-      return count
     },
     calculateState (node: NodeState, state: Record<string | number, NodeState>) {
       const counts = node.children.reduce((counts: number[], child: string | number) => {
@@ -248,7 +255,7 @@ export default mixins(
     },
     unregister (node: VTreeviewNodeInstance) {
       const key = getObjectValueByPath(node.item, this.itemKey)
-      this.nodes[key].vnode = null
+      if (this.nodes[key]) this.nodes[key].vnode = null
     },
     updateActive (key: string | number, isActive: boolean) {
       if (!this.nodes.hasOwnProperty(key)) return
@@ -274,36 +281,37 @@ export default mixins(
     updateSelected (key: string | number, isSelected: boolean) {
       if (!this.nodes.hasOwnProperty(key)) return
 
-      const changed: Record<string | number, boolean> = {}
+      const changed = new Map()
 
       const descendants = [key, ...this.getDescendants(key)]
       descendants.forEach(descendant => {
         this.nodes[descendant].isSelected = isSelected
         this.nodes[descendant].isIndeterminate = false
-        changed[descendant] = isSelected
+        changed.set(descendant, isSelected)
       })
 
       const parents = this.getParents(key)
       parents.forEach(parent => {
         this.nodes[parent] = this.calculateState(this.nodes[parent], this.nodes)
-        changed[parent] = this.nodes[parent].isSelected
+        changed.set(parent, this.nodes[parent].isSelected)
       })
 
       const all = [key, ...descendants, ...parents]
       all.forEach(this.updateVnodeState)
 
-      Object.keys(changed).forEach(k => {
-        changed[k] === true ? this.selectedCache.add(ston(k)) : this.selectedCache.delete(ston(k))
-      })
+      for (const [key, value] of changed.entries()) {
+        value === true ? this.selectedCache.add(key) : this.selectedCache.delete(key)
+      }
     },
     updateOpen (key: string | number, isOpen: boolean) {
       if (!this.nodes.hasOwnProperty(key)) return
 
       const node = this.nodes[key]
+      const children = getObjectValueByPath(node.item, this.itemChildren)
 
-      if (node.children && !node.children.length && node.vnode && !node.vnode.hasLoaded) {
+      if (children && !children.length && node.vnode && !node.vnode.hasLoaded) {
         node.vnode.checkChildren().then(() => this.updateOpen(key, isOpen))
-      } else {
+      } else if (children && children.length) {
         node.isOpen = isOpen
 
         node.isOpen ? this.openCache.add(key) : this.openCache.delete(key)
