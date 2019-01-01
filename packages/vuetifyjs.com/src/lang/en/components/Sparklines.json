@@ -13,6 +13,10 @@
     "dashboardCard": {
       "header": "### Dashboard card",
       "desc": "The `v-sparkline` component pairs nicely with `v-card` and `v-sheet` to create customized information cards, perfect for admin dashboards. Here we use custom labels to provide additional context for the sparkline."
+    },
+    "salesCard": {
+      "header": "### Custom labels",
+      "desc": "By providing a scoped slot **label**, we are able to modify the displayed content adding a dollar sign ($). This slot is **_exclusively_** for text content. For more information on the svg `<text>` element, [navigate here](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/text)."
     }
   },
   "props": {
