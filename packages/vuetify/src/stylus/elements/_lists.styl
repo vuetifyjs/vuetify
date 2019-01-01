@@ -1,2 +1,9 @@
 ul, ol
   padding-left: $spacers.four.x
+
+lists-rtl()
+  padding-left: 0
+  padding-right: $spacers.four.x
+
+rtl(lists-rtl, 'ul')
+rtl(lists-rtl, 'ol')
