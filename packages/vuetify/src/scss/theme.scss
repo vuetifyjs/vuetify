@@ -1,20 +1,15 @@
 @import './settings/_theme';
 
-@function theme($component, $name) {
-
-  @include light($component, $name);
-  @return
-  @include dark($component, $name);
+///extract to global functions at some point and rename
+@function getVar($var){
+  @return get-map($var);
 }
 
-@mixin light($component, $name) {
+@mixin theme($component, $name) {
   .theme--light.#{$name} {
-    @include $component($material-light);
+    @include getVar($material-light);
   }
-}
-
-@mixin dark($component, $name) {
   .theme--dark.#{$name} {
-    @include $component($material-dark);
+    @include getVar($material-dark);
   }
 }

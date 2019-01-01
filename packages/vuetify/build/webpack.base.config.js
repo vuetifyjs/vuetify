@@ -22,9 +22,10 @@ const cssLoaders = [
 ]
 
 const scssLoaders = [
-  { loader: 'style-loader', options: { sourceMap: !isProd } },
-  { loader: 'css-loader', options: { sourceMap: !isProd } },
-  { loader: 'sass-loader', options: { sourceMap: !isProd } }
+  extractCSS ? MiniCssExtractPlugin.loader : 'style-loader',
+  { loader: 'css-loader' },
+  { loader: 'postcss-loader', options: { sourceMap: !isProd } },
+  { loader: 'sass-loader' }
 ]
 
 const plugins = [
