@@ -43,6 +43,19 @@
           ]
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "framework/grid-lists",
+            "framework/breakpoints",
+            "framework/display"
+          ]
+        }
+      ]
     }
   ]
 }

@@ -1,13 +1,11 @@
 <template>
-  <div>
+  <div id="home">
     <v-content>
       <v-container
         fluid
         pa-0
       >
         <hero />
-
-        <feature />
 
         <sponsors />
 
@@ -22,7 +20,6 @@
 <script>
   export default {
     components: {
-      Feature: () => import('./components/Feature'),
       Hero: () => import('./components/Hero'),
       MadeWithVuetify: () => import('./components/MadeWithVuetify'),
       Sponsors: () => import('./components/Sponsors'),
@@ -32,6 +29,10 @@
 </script>
 
 <style lang="stylus">
+  #home
+    .v-card {
+      border-radius: 6px;
+    }
   .mono
     font-family: 'Roboto Mono', monospace !important
 </style>

@@ -3,9 +3,10 @@
     class="text-xs-center py-4"
     flat
   >
-    <v-subtitle-1 class="title font-weight-regular">
-      Made With Vuetify
-    </v-subtitle-1>
+    <v-subtitle-1
+      class="title font-weight-regular"
+      v-text="$t('Vuetify.Home.madeWithVuetify')"
+    />
 
     <v-container grid-list-xl mb-3>
       <v-layout
@@ -21,20 +22,20 @@
           sm6
           md4
         >
-          <a
+          <v-card
             :href="`${feature.url}?ref=vuetifyjs.com`"
+            elevation="24"
             target="_blank"
             rel="noopener"
-            @click="$ga.event('home mwvjs click', 'click', feature.title)"
+            @click="$ga.event('home', 'click', 'mwvjs', feature.title)"
           >
             <v-img
               :alt="feature.title"
               :src="feature.image"
-              class="elevation-24"
               height="300px"
               width="100%"
             />
-          </a>
+          </v-card>
         </v-flex>
       </v-layout>
     </v-container>
@@ -44,7 +45,7 @@
         href="https://madewithvuejs.com?ref=vuetifyjs.com"
         target="_blank"
         rel="noopener"
-        @click="$ga.event('home mwvjs click', 'click', 'madewithvuejs')"
+        @click="$ga.event('home', 'click', ' mwvjs')"
       >
         <v-img
           alt="Powered by madewithvuejs.com"

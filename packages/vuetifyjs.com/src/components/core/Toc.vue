@@ -32,6 +32,9 @@
 </template>
 <script>
   // Utilities
+  import {
+    mapState
+  } from 'vuex'
   import { goTo } from '@/util/helpers'
 
   export default {
@@ -39,19 +42,20 @@
       activeIndex: 0,
       currentOffset: 0,
       list: [],
-      routeTimeout: null,
       timeout: null
     }),
 
-    watch: {
-      '$route.path' () {
-        clearTimeout(this.routeTimeout)
-        this.routeTimeout = setTimeout(this.genList, 100)
-      }
+    computed: {
+      ...mapState('app', ['isLoading'])
     },
 
-    mounted () {
-      setTimeout(this.genList, 100)
+    watch: {
+      isLoading: {
+        immediate: true,
+        handler (val) {
+          !val && setTimeout(this.genList, 50)
+        }
+      }
     },
 
     methods: {
@@ -72,8 +76,7 @@
           list.push({
             item,
             text: item.innerText,
-            target: `#${item.id}`,
-            offsetTop: item.offsetTop
+            target: `#${item.id}`
           })
         }
 
@@ -87,7 +90,11 @@
 
         const list = this.list.slice().reverse()
         const index = list.findIndex(item => {
-          return item.offsetTop - 100 < this.currentOffset
+          const { offsetParent } = item.item
+
+          if (!offsetParent) return false
+
+          return offsetParent.offsetTop - 100 < this.currentOffset
         })
 
         const lastIndex = list.length

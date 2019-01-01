@@ -242,6 +242,19 @@
           "value": "stylus_changing_variables"
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "framework/colors",
+            "framework/pre-made-layouts",
+            "themes/premium"
+          ]
+        }
+      ]
     }
   ]
 }

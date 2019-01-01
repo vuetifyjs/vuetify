@@ -1,24 +1,24 @@
 {
-  "header": "Jumbotron",
+  "header": "# Jumbotron",
   "headerText": "Jumbotron представляет собой гибкий вызов компонента действия. Поддержка фоновых изображений, наложения градиента и многое другое.",
   "components": [
     "v-jumbotron"
   ],
   "examples": {
     "usage": {
-      "header": "Использование",
+      "header": "### Использование",
       "desc": ""
     },
     "color": {
-      "header": "Пользовательский цвет",
+      "header": "### Пользовательский цвет",
       "desc": "Применение специального фонового цвета"
     },
     "gradient": {
-      "header": "Градиент",
+      "header": "### Градиент",
       "desc": "Более подробную информацию о градиентах можно найти [здесь](https://developer.mozilla.org/en-US/docs/Web/CSS/linear-gradient)"
     },
     "gradientWithImage": {
-      "header": "Градиент с изображением",
+      "header": "### Градиент с изображением",
       "desc": "Более подробную информацию о градиентах можно найти [здесь](https://developer.mozilla.org/en-US/docs/Web/CSS/linear-gradient)"
     }
   },

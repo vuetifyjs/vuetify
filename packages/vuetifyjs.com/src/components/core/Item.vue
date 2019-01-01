@@ -86,7 +86,7 @@
     computed: {
       chipColor () {
         if (this.chip === 'new') return 'primary'
-        if (this.chip === 'updated') return 'red lighten-3'
+        if (this.chip === 'updated') return 'warning'
         if (this.chip === 'deprecated') return 'black'
       },
       path () {
@@ -104,6 +104,10 @@
 
 <style lang="stylus">
 .v-list__tile--doc {
+  p {
+    margin-bottom: 0;
+  }
+
   .v-chip--x-small {
     font-size: 10px;
     height: 16px;

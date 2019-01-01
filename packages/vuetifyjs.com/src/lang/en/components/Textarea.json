@@ -13,5 +13,11 @@
       "header": "### Beautiful Forms",
       "desc": "Utilizing alternative input styles, you can create amazing interfaces that are easy to build and easy to use."
     }
+  },
+  "props": {
+    "autoGrow": "Automatically grow the textarea depending on amount of text",
+    "noResize": "Remove resize handle",
+    "rowHeight": "Height value for each row",
+    "rows": "Default row count"
   }
 }

@@ -1,0 +1,60 @@
+{
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "categories-list-alt",
+          "value": {
+            "buttons": [
+              "buttonsAndIndicators",
+              "buttonGroups",
+              "badges",
+              "chips",
+              "icons",
+              "progressCircular",
+              "progressLinear"
+            ],
+            "forms": [
+              "autocompletes",
+              "checkboxes",
+              "datePickers",
+              "form",
+              "inputs",
+              "radios",
+              "selects",
+              "sliders",
+              "slideToggles"
+            ],
+            "layout": [
+              "cards",
+              "dividers",
+              "expansionPanels",
+              "gridLists",
+              "lists",
+              "steppers",
+              "tabs",
+              "treeview"
+            ],
+            "modals": [
+              "bottomSheets",
+              "dialogs",
+              "snackbars",
+              "tooltips"
+            ],
+            "navigation": [
+              "menus",
+              "navigationDrawers",
+              "toolbars"
+            ],
+            "tables": [
+              "paginations",
+              "dataIterator",
+              "dataTables"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

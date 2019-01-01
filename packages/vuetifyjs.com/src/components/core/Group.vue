@@ -17,18 +17,21 @@
       />
       <core-item
         v-else
+        :chip="genChip(child)"
         :icon="child.icon"
         :key="`item-${i}`"
+        :subtext="child.subtext"
         :to="child.to"
         :text="child.text"
-        :chip="genChip(child)"
       />
     </template>
   </v-list-group>
 </template>
 
 <script>
+  // Utilities
   import kebabCase from 'lodash/kebabCase'
+  import { genChip } from '@/util/helpers'
 
   export default {
     inheritAttrs: false,
@@ -61,11 +64,7 @@
     },
 
     methods: {
-      genChip (item) {
-        if (item.new) return 'new'
-        if (item.updated) return 'updated'
-        if (item.deprecated) return 'deprecated'
-      },
+      genChip,
       genGroup (children) {
         return children.map(item => {
           let parent = item.group || this.item.group

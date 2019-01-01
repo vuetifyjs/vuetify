@@ -31,9 +31,13 @@
       "format": "Defines the format of a time displayed in picker. Available options are `ampm` and `24hr`.",
       "allowedHours": "Restricts which hours can be selected",
       "allowedMinutes": "Restricts which minutes can be selected",
+      "allowedSeconds": "Restricts which seconds can be selected",
+      "disabled": "disables picker",
       "scrollable": "Allows changing hour/minute with mouse scroll",
       "min": "Minimum allowed time",
       "max": "Maximum allowed time",
+      "readonly": "Puts picker in readonly state",
+      "useSeconds": "Toggles the use of seconds in picker",
       "value": "Time picker model (ISO 8601 format, 24hr hh:mm)"
     }
   }

@@ -189,6 +189,7 @@ test('VDialog.js', ({ mount, compileToFunctions }) => {
     }
     const wrapper = mount(component)
 
+    await wrapper.vm.$nextTick()
     window.dispatchEvent(new Event('keydown'))
     expect(keydown).toBeCalled()
 
