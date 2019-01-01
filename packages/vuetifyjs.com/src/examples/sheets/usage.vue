@@ -1,6 +1,9 @@
 <template>
   <v-container grid-list-xl>
-    <v-layout flex-child>
+    <v-layout
+      flex-child
+      wrap
+    >
       <v-flex
         xs12
         md4
