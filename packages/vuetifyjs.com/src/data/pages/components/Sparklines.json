@@ -19,6 +19,19 @@
           "value": ["v-sparkline"]
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [
+            "heartRate",
+            "dashboardCard",
+            "salesCard"
+          ]
+        }
+      ]
     }
   ]
 }

@@ -72,3 +72,9 @@ export async function waitForReadystate () {
     })
   }
 }
+
+export function genChip (item) {
+  if (item.new) return 'new'
+  if (item.updated) return 'updated'
+  if (item.deprecated) return 'deprecated'
+}

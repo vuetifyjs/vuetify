@@ -1,75 +1,84 @@
 <template>
-  <v-data-iterator
-    :search="search"
-    :items="computedItems"
-    :pagination.sync="pagination"
-    class="component-parameters pa-2"
-    hide-actions
-    content-tag="v-layout"
-    content-class="wrap"
-  >
-    <template
-      slot="item"
-      slot-scope="{ item }"
+  <div>
+    <div
+      v-if="missingItems.length > 0"
+      class="px-2"
     >
-      <v-flex xs12 grey lighten-2 mt-2>
-        <v-layout wrap px-2 py-1>
-          <v-flex
-            v-for="(header, i) in headers"
-            :class="header.class"
-            :key="header.value"
+      <strong>MISSING ITEMS:</strong>
+      {{ missingItems.join(', ') }}
+    </div>
+    <v-data-iterator
+      :search="search"
+      :items="computedItems"
+      :pagination.sync="pagination"
+      class="component-parameters pa-2"
+      hide-actions
+      content-tag="v-layout"
+      content-class="wrap"
+    >
+      <template
+        slot="item"
+        slot-scope="{ item }"
+      >
+        <v-flex xs12 grey lighten-2 mt-2>
+          <v-layout wrap px-2 py-1>
+            <v-flex
+              v-for="(header, i) in headers"
+              :class="header.class"
+              :key="header.value"
+            >
+              <div
+                class="header grey--text text--darken-2"
+                v-text="genHeaderName(header.value, item)"
+              />
+              <div :class="['mono', header.value]">
+                <span v-text="item[header.value]" />
+                <template v-if="i === 0">
+                  <v-chip
+                    v-if="item.newIn"
+                    class="v-chip--x-small"
+                    dark
+                    color="primary"
+                  >
+                    New in — v{{ item.newIn }}
+                  </v-chip>
+                  <v-chip
+                    v-else-if="item.deprecatedIn"
+                    class="v-chip--x-small"
+                    dark
+                    color="red lighten-3"
+                  >
+                    Deprecated in — v{{ item.deprecatedIn }}
+                  </v-chip>
+                </template>
+              </div>
+            </v-flex>
+          </v-layout>
+          <v-layout
+            grey
+            lighten-4
+            pa-2
+            wrap
           >
-            <div
-              class="header grey--text text--darken-2"
-              v-text="genHeaderName(header.value, item)"
-            />
-            <div :class="['mono', header.value]">
-              <span v-text="item[header.value]" />
-              <template v-if="i === 0">
-                <v-chip
-                  v-if="item.newIn"
-                  class="v-chip--x-small"
-                  dark
-                  color="primary"
-                >
-                  New in — v{{ item.newIn }}
-                </v-chip>
-                <v-chip
-                  v-else-if="item.deprecatedIn"
-                  class="v-chip--x-small"
-                  dark
-                  color="red lighten-3"
-                >
-                  Deprecated in — v{{ item.deprecatedIn }}
-                </v-chip>
-              </template>
-            </div>
-          </v-flex>
-        </v-layout>
-        <v-layout
-          grey
-          lighten-4
-          pa-2
-          wrap
-        >
-          <v-flex grey--text text--darken-3 xs12>
-            <doc-markdown
-              :code="item.description"
-              class="justify"
-            />
-          </v-flex>
-          <v-flex>
-            <doc-markup
-              v-if="item.example"
-              class="mt-2 mb-0"
-              lang="ts"
-              value="example"
-            >{{ genTypescriptDef(item.example) }}</doc-markup>
-          </v-flex>
-        </v-layout>
-      </v-flex>
-    </template>
-  </v-data-iterator>
+            <v-flex grey--text text--darken-3 xs12>
+              <doc-markdown
+                :code="item.description"
+                class="justify"
+              />
+            </v-flex>
+            <v-flex>
+              <doc-markup
+                v-if="item.example"
+                class="mt-2 mb-0"
+                lang="ts"
+                value="example"
+              >{{ genTypescriptDef(item.example) }}</doc-markup>
+            </v-flex>
+          </v-layout>
+        </v-flex>
+      </template>
+    </v-data-iterator>
+  </div>
 </template>
 
 <script>
@@ -164,6 +173,13 @@
         }
 
         return items
+      },
+      missingItems () {
+        if (process.env.NODE_ENV !== 'development') return []
+
+        return this.computedItems.filter(item => {
+          return item.description.indexOf('MISSING DESCRIPTION') > -1
+        }).map(item => item.name)
       }
     },
 
@@ -271,7 +287,7 @@
 
     .mono
       font-family: 'Roboto Mono', monospace
-      font-weight: 900
+      font-weight: 500
 
     .header
       font-family: 'Roboto Mono', monospace

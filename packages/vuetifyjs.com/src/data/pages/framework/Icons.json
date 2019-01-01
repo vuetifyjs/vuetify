@@ -220,6 +220,18 @@
         {
           "type": "markup",
           "value": "html_custom_icons_custom_component"
+        },
+        {
+          "type": "heading",
+          "lang": "customFASvg"
+        },
+        {
+          "type": "text",
+          "lang": "customFASvgText1"
+        },
+        {
+          "type": "markup",
+          "value": "js_vuetify_custom_fa_svg_icons"
         }
       ]
     },

@@ -104,6 +104,10 @@
 
 <style lang="stylus">
 .v-list__tile--doc {
+  p {
+    margin-bottom: 0;
+  }
+
   .v-chip--x-small {
     font-size: 10px;
     height: 16px;

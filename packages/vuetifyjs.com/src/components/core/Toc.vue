@@ -53,7 +53,7 @@
       isLoading: {
         immediate: true,
         handler (val) {
-          !val && this.genList()
+          !val && setTimeout(this.genList, 50)
         }
       }
     },

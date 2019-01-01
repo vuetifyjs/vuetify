@@ -31,7 +31,6 @@
     "primaryTitle": "Applies primary title specific padding.",
     "raised": "Specifies a higher default elevation",
     "src": "The image to display as a background.",
-    "tile": "Turn the card into a tile by removing the border radius",
     "alt": "Components.Images.props.alt",
     "aspectRatio": "Components.Images.props.aspectRatio",
     "gradient": "Components.Images.props.gradient",

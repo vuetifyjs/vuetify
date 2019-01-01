@@ -36,7 +36,7 @@ export default {
         : (this.internalSearch || '').toString().length
     },
     hasSlot () {
-      return VSelect.computed.hasSlot.call(this) || this.multiple
+      return VSelect.options.computed.hasSlot.call(this) || this.multiple
     },
     isAnyValueAllowed () {
       return true
@@ -69,7 +69,7 @@ export default {
       this.updateMenuDimensions()
     },
     genChipSelection (item, index) {
-      const chip = VSelect.methods.genChipSelection.call(this, item, index)
+      const chip = VSelect.options.methods.genChipSelection.call(this, item, index)
 
       // Allow user to update an existing value
       if (this.multiple) {
@@ -83,7 +83,7 @@ export default {
       return chip
     },
     onChipInput (item) {
-      VSelect.methods.onChipInput.call(this, item)
+      VSelect.options.methods.onChipInput.call(this, item)
 
       this.editingIndex = -1
     },
@@ -92,7 +92,7 @@ export default {
     onEnterDown (e) {
       e.preventDefault()
 
-      VSelect.methods.onEnterDown.call(this)
+      VSelect.options.methods.onEnterDown.call(this)
 
       // If has menu index, let v-select-list handle
       if (this.getMenuIndex() > -1) return
@@ -102,7 +102,7 @@ export default {
     onKeyDown (e) {
       const keyCode = e.keyCode
 
-      VSelect.methods.onKeyDown.call(this, e)
+      VSelect.options.methods.onKeyDown.call(this, e)
 
       // If user is at selection index of 0
       // create a new tag
@@ -133,14 +133,14 @@ export default {
         return this.updateTags()
       }
 
-      VAutocomplete.methods.onTabDown.call(this, e)
+      VAutocomplete.options.methods.onTabDown.call(this, e)
     },
     selectItem (item) {
       // Currently only supports items:<string[]>
       if (this.editingIndex > -1) {
         this.updateEditing()
       } else {
-        VSelect.methods.selectItem.call(this, item)
+        VSelect.options.methods.selectItem.call(this, item)
       }
     },
     setSelectedItems () {
@@ -153,7 +153,7 @@ export default {
       }
     },
     setValue (value = this.internalSearch) {
-      VSelect.methods.setValue.call(this, value)
+      VSelect.options.methods.setValue.call(this, value)
     },
     updateEditing () {
       const value = this.internalValue.slice()

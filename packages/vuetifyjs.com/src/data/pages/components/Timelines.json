@@ -16,7 +16,10 @@
       "children": [
         {
           "type": "api",
-          "value": ["v-timeline"]
+          "value": [
+            "v-timeline",
+            "v-timeline-item"
+          ]
         }
       ]
     },
