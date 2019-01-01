@@ -1,7 +1,7 @@
 import '../../stylus/components/_data-table.styl'
 
 // Types
-import { VNode, VNodeChildrenArrayContents, VNodeChildren } from 'vue'
+import Vue, { VNode, VNodeChildrenArrayContents, VNodeChildren } from 'vue'
 import { PropValidator } from 'vue/types/options'
 import { DataProps } from '../VData/VData'
 import { TableHeader } from './mixins/header'
@@ -48,13 +48,15 @@ export default VDataIterator.extend({
     caption: String,
     dense: Boolean,
     footerProps: Object,
-    headerProps: Object
+    headerProps: Object,
+    calculateWidths: Boolean
   },
 
   data () {
     return {
       internalGroupBy: [] as string[],
-      openCache: {} as { [key: string]: boolean }
+      openCache: {} as { [key: string]: boolean },
+      widths: [] as number[]
     }
   },
 
@@ -72,7 +74,29 @@ export default VDataIterator.extend({
     }
   },
 
+  mounted () {
+    // if ((!this.sortBy || !this.sortBy.length) && (!this.options.sortBy || !this.options.sortBy.length)) {
+    //   const firstSortable = this.headers.find(h => !('sortable' in h) || !!h.sortable)
+    //   if (firstSortable) this.updateOptions({ sortBy: [firstSortable.value], sortDesc: [false] })
+    // }
+
+    if (this.calculateWidths) {
+      window.addEventListener('resize', this.calcWidths)
+    }
+
+    this.calcWidths()
+  },
+
+  beforeDestroy () {
+    if (this.calculateWidths) {
+      window.removeEventListener('resize', this.calcWidths)
+    }
+  },
+
   methods: {
+    calcWidths () {
+      this.widths = Array.from(this.$el.querySelectorAll('th')).map(e => e.clientWidth)
+    },
     customSearchWithColumns (items: any[], search: string) {
       const filterableHeaders = this.headers.filter(h => !!h.filter)
       if (filterableHeaders.length) {
@@ -97,6 +121,7 @@ export default VDataIterator.extend({
     },
     createSlotProps (props: any) {
       props.headers = this.computedHeaders
+      props.widths = this.widths
 
       return props
     },
