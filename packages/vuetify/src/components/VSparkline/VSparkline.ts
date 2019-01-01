@@ -145,7 +145,7 @@ export default mixins<options &
       return labels
     },
     points (): Point[] {
-      return genPoints(this.value, this.boundary)
+      return genPoints(this.value.slice(), this.boundary)
     },
     textY (): number {
       return this.boundary.maxY + 6
@@ -223,7 +223,7 @@ export default mixins<options &
       return this.$createElement('path', {
         attrs: {
           id: this._uid,
-          d: genPath(this.points, radius),
+          d: genPath(this.points.slice(), radius),
           fill: 'none',
           stroke: `url(#${this._uid})`
         },
