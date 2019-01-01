@@ -87,7 +87,7 @@ export default Vue.extend({
     genBody () {
       return this.$createElement('tbody', [
         this.$createElement('tr', { style: this.createStyleHeight(this.offsetTop) }),
-        this.$scopedSlots.items({ start: this.startIndex, stop: this.stopIndex }),
+        this.$scopedSlots.items ? this.$scopedSlots.items({ start: this.startIndex, stop: this.stopIndex }) : null,
         this.$createElement('tr', { style: this.createStyleHeight(this.offsetBottom) })
       ])
     },

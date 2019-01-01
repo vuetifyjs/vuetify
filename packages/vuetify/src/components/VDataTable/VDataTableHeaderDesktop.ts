@@ -21,7 +21,7 @@ export default mixins(header).extend({
           children.push(this.genSelectAll())
         } else {
           if (this.$scopedSlots[header.value]) {
-            children.push(this.$scopedSlots[header.value]({ header }))
+            children.push(this.$scopedSlots[header.value]!({ header }))
           } else {
             children.push(this.$createElement('span', [header.text]))
           }

@@ -43,7 +43,9 @@ export default mixins<options>().extend({
         sortBy: [],
         sortDesc: [],
         groupBy: [],
-        groupDesc: []
+        groupDesc: [],
+        multiSort: false,
+        mustSort: false
       })
     } as PropValidator<DataOptions>,
     sortIcon: {

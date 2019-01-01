@@ -1,4 +1,4 @@
-import { VNode, VNodeChildrenArrayContents } from 'vue'
+import { VNode, VNodeChildren } from 'vue'
 
 // Components
 import { VData } from '../VData'
@@ -143,7 +143,7 @@ export default mixins(Themeable).extend({
 
       return props
     },
-    genEmptyWrapper (content: VNodeChildrenArrayContents) {
+    genEmptyWrapper (content: VNodeChildren) {
       return this.$createElement('div', content)
     },
     genEmpty (itemsLength: number) {
@@ -167,15 +167,15 @@ export default mixins(Themeable).extend({
       if (this.$scopedSlots.default) return this.$scopedSlots.default(props)
 
       if (this.$scopedSlots.item) {
-        return props.items.map((item: any) => this.$scopedSlots.item(this.createItemProps(item)))
+        return props.items.map((item: any) => this.$scopedSlots.item!(this.createItemProps(item)))
       }
 
       return []
     },
-    genSlots (slot: string, props: any) {
+    genSlots (slot: string, props: any): VNodeChildren {
       return [
         ...this.$slots[slot] || [],
-        this.$scopedSlots[slot] && this.$scopedSlots[slot](props)
+        this.$scopedSlots[slot] && this.$scopedSlots[slot]!(props)
       ]
     },
     genDefaultScopedSLot (props: any) {

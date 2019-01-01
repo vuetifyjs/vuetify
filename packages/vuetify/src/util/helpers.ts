@@ -356,7 +356,7 @@ export function computeSlots (cmp: Vue, name: string, props: object) {
 
   if (cmp.$slots[name]) slots.push(...cmp.$slots[name])
   if (cmp.$scopedSlots[name]) {
-    const scoped = cmp.$scopedSlots[name](props)
+    const scoped = cmp.$scopedSlots[name]!(props)
     Array.isArray(scoped) ? slots.push(...scoped) : slots.push(scoped)
   }
 

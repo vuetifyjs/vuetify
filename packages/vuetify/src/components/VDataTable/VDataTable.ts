@@ -1,7 +1,7 @@
 import '../../stylus/components/_data-table.styl'
 
 // Types
-import { VNode, VNodeChildrenArrayContents } from 'vue'
+import { VNode, VNodeChildrenArrayContents, VNodeChildren } from 'vue'
 import { PropValidator } from 'vue/types/options'
 import { DataProps } from '../VData/VData'
 import { TableHeader } from './mixins/header'
@@ -99,7 +99,7 @@ export default VDataIterator.extend({
       return props
     },
     genCaption (props: DataProps) {
-      if (this.caption) return this.$createElement('caption', [this.caption])
+      if (this.caption) return [this.$createElement('caption', [this.caption])]
 
       return this.genSlots('caption', props)
     },
@@ -166,7 +166,7 @@ export default VDataIterator.extend({
         }, content)
       ])
     },
-    genItems (items: any[], props: DataProps): VNodeChildrenArrayContents {
+    genItems (items: any[], props: DataProps): VNodeChildren {
       const empty = this.genEmpty(props.pagination.itemsLength)
       if (empty) return [empty]
 
@@ -174,7 +174,7 @@ export default VDataIterator.extend({
         ? this.genGroupedRows(props.groupedItems!, props)
         : this.genRows(items, props)
     },
-    genGroupedRows (groupedItems: Record<string, any[]>, props: DataProps): VNodeChildrenArrayContents {
+    genGroupedRows (groupedItems: Record<string, any[]>, props: DataProps): VNodeChildren {
       const groups = Object.keys(groupedItems || {})
 
       return groups.map(group => {
@@ -194,13 +194,13 @@ export default VDataIterator.extend({
     },
     genDefaultGroupedRow (group: string, items: any[], props: DataProps) {
       const isOpen = !!this.openCache[group]
-      const children: VNodeChildrenArrayContents = [
+      const children: VNodeChildren = [
         this.$createElement('template', { slot: 'row.content' }, this.genDefaultRows(props.groupedItems![group], props))
       ]
 
       if (this.$scopedSlots['group.header']) {
         children.unshift(this.$createElement('template', { slot: 'column.header' }, [
-          this.$scopedSlots['group.header']({ group, groupBy: props.options.groupBy, items, headers: this.computedHeaders })
+          this.$scopedSlots['group.header']!({ group, groupBy: props.options.groupBy, items, headers: this.computedHeaders })
         ]))
       } else {
         const toggle = this.$createElement(VBtn, {
@@ -237,7 +237,7 @@ export default VDataIterator.extend({
 
       if (this.$scopedSlots['group.summary']) {
         children.push(this.$createElement('template', { slot: 'column.summary' }, [
-          this.$scopedSlots['group.summary']({ group, groupBy: props.options.groupBy, items, headers: this.computedHeaders })
+          this.$scopedSlots['group.summary']!({ group, groupBy: props.options.groupBy, items, headers: this.computedHeaders })
         ]))
       }
 
@@ -248,13 +248,13 @@ export default VDataIterator.extend({
         }
       }, children)
     },
-    genRows (items: any[], props: DataProps): VNodeChildrenArrayContents {
+    genRows (items: any[], props: DataProps): VNodeChildren {
       return this.$scopedSlots.item ? this.genScopedRows(items, props) : this.genDefaultRows(items, props)
     },
-    genScopedRows (items: any[], props: DataProps): VNodeChildrenArrayContents {
-      return items.map((item: any) => this.$scopedSlots.item(this.createItemProps(item)))
+    genScopedRows (items: any[], props: DataProps): VNodeChildren {
+      return items.map((item: any) => this.$scopedSlots.item!(this.createItemProps(item)))
     },
-    genDefaultRows (items: any[], props: DataProps): VNodeChildrenArrayContents {
+    genDefaultRows (items: any[], props: DataProps): VNodeChildren {
       return this.$scopedSlots['item.expanded']
         ? items.map(item => this.genDefaultExpandedRow(item))
         : items.map(item => this.genDefaultSimpleRow(item))
@@ -264,7 +264,7 @@ export default VDataIterator.extend({
       const headerRow = this.genDefaultSimpleRow(item, isExpanded ? 'expanded expanded__row' : null)
       const expandedRow = this.$createElement('tr', {
         staticClass: 'expanded expanded__content'
-      }, [this.$scopedSlots['item.expanded']({ item, headers: this.computedHeaders })])
+      }, [this.$scopedSlots['item.expanded']!({ item, headers: this.computedHeaders })])
 
       return this.$createElement(VRowGroup, {
         props: {
@@ -304,7 +304,7 @@ export default VDataIterator.extend({
           on: {
             click: () => this.expand(item, !expanded)
           }
-        }, [this.$vuetify.icons.expand]) // TODO: prop?
+        }, [this.$vuetify.icons.expand as string]) // TODO: prop?
       }
 
       return this.$createElement(VRow, {
@@ -319,8 +319,8 @@ export default VDataIterator.extend({
         scopedSlots
       })
     },
-    genBody (props: DataProps): VNode | string | VNodeChildrenArrayContents {
-      if (this.$scopedSlots.body) return this.$scopedSlots.body(this.createSlotProps(props))
+    genBody (props: DataProps): VNode | string | VNodeChildren {
+      if (this.$scopedSlots.body) return this.$scopedSlots.body!(this.createSlotProps(props))
 
       return this.$createElement('tbody', [
         this.genSlots('body.prepend', props),
@@ -329,7 +329,7 @@ export default VDataIterator.extend({
       ])
     },
     genFooters (props: DataProps) {
-      const children: VNodeChildrenArrayContents = [
+      const children: VNodeChildren = [
         this.genSlots('footer', props)
       ]
 
@@ -383,7 +383,7 @@ export default VDataIterator.extend({
             height: Number(this.height)
           },
           scopedSlots: {
-            items: ({ start, stop }) => this.genItems(props.items.slice(start, stop), props)
+            items: ({ start, stop }) => this.genItems(props.items.slice(start, stop), props) as any // TODO: What is up with this typing?
           }
         }, [
           this.$createElement('template', { slot: 'caption' }, this.genCaption(props)),
