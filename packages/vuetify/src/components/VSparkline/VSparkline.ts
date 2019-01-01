@@ -61,6 +61,10 @@ export default mixins<options &
       type: String,
       default: 'primary'
     },
+    fill: {
+      type: Boolean,
+      default: false
+    },
     gradient: {
       type: Array as Prop<string[]>,
       default: () => ([])
@@ -166,12 +170,21 @@ export default mixins<options &
           const path = this.$refs.path
           const length = path.getTotalLength()
 
-          path.style.transition = 'none'
-          path.style.strokeDasharray = length + ' ' + length
-          path.style.strokeDashoffset = Math.abs(length - (this.lastLength || 0)).toString()
-          path.getBoundingClientRect()
-          path.style.transition = `stroke-dashoffset ${this.autoDrawDuration}ms ${this.autoDrawEasing}`
-          path.style.strokeDashoffset = '0'
+          if (!this.fill) {
+            path.style.transition = 'none'
+            path.style.strokeDasharray = length + ' ' + length
+            path.style.strokeDashoffset = Math.abs(length - (this.lastLength || 0)).toString()
+            path.getBoundingClientRect()
+            path.style.transition = `stroke-dashoffset ${this.autoDrawDuration}ms ${this.autoDrawEasing}`
+            path.style.strokeDashoffset = '0'
+          } else {
+            path.style.transformOrigin = 'bottom center'
+            path.style.transition = 'none'
+            path.style.transform = `scaleY(0)`
+            path.getBoundingClientRect()
+            path.style.transition = `transform ${this.autoDrawDuration}ms ${this.autoDrawEasing}`
+            path.style.transform = `scaleY(1)`
+          }
           this.lastLength = length
         })
       }
@@ -227,9 +240,9 @@ export default mixins<options &
       return this.$createElement('path', {
         attrs: {
           id: this._uid,
-          d: genPath(this.points.slice(), radius),
-          fill: 'none',
-          stroke: `url(#${this._uid})`
+          d: genPath(this.points.slice(), radius, this.fill, Number(this.height)),
+          fill: this.fill ? `url(#${this._uid})` : 'none',
+          stroke: this.fill ? 'none' : `url(#${this._uid})`
         },
         ref: 'path'
       })

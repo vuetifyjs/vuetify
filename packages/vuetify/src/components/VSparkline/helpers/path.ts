@@ -4,11 +4,12 @@ import { checkCollinear, getDistance, moveTo } from './math'
 /**
  * From https://github.com/unsplash/react-trend/blob/master/src/helpers/DOM.helpers.js#L18
  */
-export function genPath (points: Point[], radius: number) {
+export function genPath (points: Point[], radius: number, fill = false, height = 75) {
   const start = points.shift()!
+  const end = points[points.length - 1]
 
   return (
-    `M${start.x} ${start.y}` +
+    (fill ? `M${start.x} ${height} L${start.x} ${start.y}` : `M${start.x} ${start.y}`) +
     points
       .map((point, index) => {
         const next = points[index + 1]
@@ -31,6 +32,6 @@ export function genPath (points: Point[], radius: number) {
 
         return `L${before.x} ${before.y}S${point.x} ${point.y} ${after.x} ${after.y}`
       })
-      .join('')
-  )
+      .join('') +
+    (fill ? `L${end.x} ${height} Z` : ''))
 }
