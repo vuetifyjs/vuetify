@@ -38,7 +38,6 @@ v-data-table($material)
   tbody
     tr
       &:not(:last-child)
-        // box-shadow: inset 0 -1px 0 rgba($material.fg-color, $material.divider-percent)
         border-bottom: 1px solid rgba($material.fg-color, $material.divider-percent)
 
       &.active
@@ -50,18 +49,15 @@ v-data-table($material)
       &.expanded
         border-bottom: 0
 
-        // td:first-child
-          // border-left: 2px solid rgba($material.fg-color, $material.divider-percent)
-
         &.expanded__row
           background: $material.table.active
 
         &.expanded__content
           box-shadow: inset 0px 4px 8px -5px rgba(50, 50, 50, 0.75), inset 0px -4px 8px -5px rgba(50, 50, 50, 0.75)
 
-  .v-table__footer
-    .v-row
-      border-top: 1px solid rgba($material.fg-color, $material.divider-percent)
+    .v-table__footer
+      .v-row
+        border-top: 1px solid rgba($material.fg-color, $material.divider-percent)
 
 theme(v-data-table, "v-data-table")
 
@@ -136,7 +132,6 @@ theme(v-data-table, "v-data-table")
         margin: 0
 
 td, th
-  // &:not(:nth-child(1)), &:first-child
   padding: 0 16px
 
 .v-row
