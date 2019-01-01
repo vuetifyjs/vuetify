@@ -358,6 +358,104 @@ exports[`VTreeView.ts should react to open changes 4`] = `
 
 `;
 
+exports[`VTreeView.ts should recalculate tree when loading async children using custom key 1`] = `
+
+<div class="v-treeview theme--light">
+  <div class="v-treeview-node">
+    <div class="v-treeview-node__root">
+      <i aria-hidden="true"
+         class="v-icon v-treeview-node__toggle v-icon--link material-icons theme--light v-treeview-node__toggle--open"
+      >
+        arrow_drop_down
+      </i>
+      <div class="v-treeview-node__content">
+        <div class="v-treeview-node__label">
+          One
+        </div>
+      </div>
+    </div>
+    <div class="v-treeview-node__children">
+      <div class="v-treeview-node v-treeview-node--leaf">
+        <div class="v-treeview-node__root">
+          <div class="v-treeview-node__content">
+            <div class="v-treeview-node__label">
+              Two
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VTreeView.ts should remove old nodes 1`] = `
+
+<div class="v-treeview theme--light">
+  <div class="v-treeview-node v-treeview-node--leaf">
+    <div class="v-treeview-node__root">
+      <div class="v-treeview-node__content">
+        <div class="v-treeview-node__label">
+          one
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="v-treeview-node v-treeview-node--leaf">
+    <div class="v-treeview-node__root">
+      <div class="v-treeview-node__content">
+        <div class="v-treeview-node__label">
+          two
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VTreeView.ts should remove old nodes 2`] = `
+
+<div class="v-treeview theme--light">
+  <div class="v-treeview-node v-treeview-node--leaf">
+    <div class="v-treeview-node__root">
+      <div class="v-treeview-node__content">
+        <div class="v-treeview-node__label">
+          one
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
+exports[`VTreeView.ts should remove old nodes 3`] = `
+
+<div class="v-treeview theme--light">
+  <div class="v-treeview-node v-treeview-node--leaf">
+    <div class="v-treeview-node__root">
+      <div class="v-treeview-node__content">
+        <div class="v-treeview-node__label">
+          one
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="v-treeview-node v-treeview-node--leaf">
+    <div class="v-treeview-node__root">
+      <div class="v-treeview-node__content">
+        <div class="v-treeview-node__label">
+          three
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;
+
 exports[`VTreeView.ts should render items 1`] = `
 
 <div class="v-treeview theme--light">

@@ -63,11 +63,6 @@ export function createRouter () {
               /* webpackChunkName: "documentation" */
               '@/pages/documentation/Page.vue'
             )
-          },
-          {
-            path: '404',
-            name: '404',
-            component: () => import('@/pages/general/404')
           }
         ]
       },

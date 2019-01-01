@@ -1,5 +1,8 @@
 <template>
-  <v-container id="page">
+  <v-container
+    v-if="structure !== false"
+    id="page"
+  >
     <template v-if="structure">
       <doc-heading v-if="structure.title">
         {{ structure.title }}
@@ -26,6 +29,7 @@
       <doc-contribution />
     </template>
   </v-container>
+  <not-found v-else />
 </template>
 
 <script>
@@ -38,8 +42,11 @@
   import camelCase from 'lodash/camelCase'
   import upperFirst from 'lodash/upperFirst'
 
-  // TODO: This is where 404 redirect will occur
   export default {
+    components: {
+      NotFound: () => import('@/pages/general/404')
+    },
+
     provide () {
       return {
         namespace: upperFirst(camelCase(this.namespace)),
@@ -86,9 +93,7 @@
       ).then(res => {
         this.structure = res.default
       }).catch(() => {
-        // Add 404
         this.structure = false
-        this.$router.push({ name: '404' })
         throw new Error(`Unable to find page for <${namespace}/${page}>`)
       }).finally(() => this.setIsLoading(false))
     },

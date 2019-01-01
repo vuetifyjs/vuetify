@@ -761,15 +761,6 @@ module.exports = {
   'v-snackbar': {
     slots: ['default']
   },
-  'v-sparkline': {
-    props: [
-      {
-        name: 'type',
-        type: "'trend' | 'bar'",
-        default: "'trend'"
-      }
-    ]
-  },
   'v-select': VSelect,
   'v-slider': {
     events: [

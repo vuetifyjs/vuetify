@@ -44,7 +44,7 @@
     </v-toolbar>
     <v-expand-transition v-if="parsed">
       <v-card
-        v-if="expand && $vuetify.breakpoint.smAndDown"
+        v-if="expand"
         color="#2d2d2d"
         dark
         flat
@@ -82,39 +82,17 @@
             :key="`window-${i}`"
             :value="section"
           >
-            <doc-markup
-              :value="file"
-              :filename="false"
-              class="mb-0"
-            >{{ parsed[section] }}</doc-markup>
-          </v-window-item>
-        </v-window>
-      </v-card>
-      <v-card
-        v-if="expand && $vuetify.breakpoint.mdAndUp"
-        color="#2d2d2d"
-        dark
-        flat
-        tile
-      >
-        <v-layout row>
-          <v-flex
-            v-for="(section, i) in sections"
-            v-if="parsed[section]"
-            :key="`window-${i}`"
-            class="v-example"
-            xs12
-            shrink
-          >
-            <div class="v-example__container">
+            <div
+              :class="($vuetify.breakpoint.smAndUp) ? 'v-example__container' : ''"
+            >
               <doc-markup
                 :value="file"
                 :filename="false"
                 class="mb-0"
               >{{ parsed[section] }}</doc-markup>
             </div>
-          </v-flex>
-        </v-layout>
+          </v-window-item>
+        </v-window>
       </v-card>
     </v-expand-transition>
     <v-sheet
@@ -239,7 +217,7 @@
 
   .v-example__container
     height: 100%
-    max-height: 550px
+    max-height: calc(100vh - 275px)
     overflow-y: auto
 
   .v-example:not(:first-child) .v-example__container {
