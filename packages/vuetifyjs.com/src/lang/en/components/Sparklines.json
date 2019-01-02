@@ -4,7 +4,19 @@
   "examples": {
     "playground": {
       "header": "",
-      "desc": ""
+      "desc": "The `v-sparkline` component is the bridge between having a chart and not. It is a rich and lightweight pseudo chart that excels in displaying numerical data."
+    },
+    "heartRate": {
+      "header": "### Take a break",
+      "desc": "For concise information, a complete chart might be overkill. Using a trend line with gradient provides enough detail for the user without showing too much information."
+    },
+    "dashboardCard": {
+      "header": "### Dashboard card",
+      "desc": "The `v-sparkline` component pairs nicely with `v-card` and `v-sheet` to create customized information cards, perfect for admin dashboards. Here we use custom labels to provide additional context for the sparkline."
+    },
+    "salesCard": {
+      "header": "### Custom labels",
+      "desc": "By providing a scoped slot **label**, we are able to modify the displayed content adding a dollar sign ($). This slot is **_exclusively_** for text content. For more information on the svg `<text>` element, [navigate here](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/text)."
     }
   },
   "props": {
@@ -14,9 +26,10 @@
     "data": "An array of data points",
     "gradient": "An array of colors to use as a linear-gradient",
     "gradientDirection": "The direction the gradient should run",
+    "labels": "An array of string labels that correspond to the same index as its data counterpart",
     "lineWidth": "The thickness of the line, in px",
     "padding": "Low `smooth` or high `line-width` values may result in cropping, increase padding to compensate",
-    "showLabel": "Show labels below each data point",
+    "showLabels": "Show labels below each data point",
     "smooth": "Number of px to use as a corner radius. `true` defaults to 8, `false` is 0",
     "type": "Choose between a trendline or bars"
   }

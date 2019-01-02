@@ -1,11 +1,15 @@
 <template>
-  <component :is="component" />
+  <component
+    v-if="component !== false"
+    :is="component"
+  />
+  <not-found v-else />
 </template>
 
 <script>
   export default {
     components: {
-      NotFoundPage: () => import('@/pages/general/404Page.vue')
+      NotFound: () => import('@/pages/general/404')
     },
 
     props: {
@@ -16,15 +20,15 @@
     },
 
     data: () => ({
-      component: null
+      component: undefined
     }),
 
     created () {
       import(`@/examples/layouts/${this.page}.vue`)
         .then(res => (this.component = res.default))
-        .catch(err => {
-          console.warn(err)
-          this.component = 'NotFoundPage'
+        .catch(() => {
+          this.component = false
+          throw new Error(`Unable to find layout for <${this.page}>`)
         })
     }
   }

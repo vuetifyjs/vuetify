@@ -90,6 +90,18 @@
             "value": "truncate"
           }
         ]
+      },
+      {
+        "type": "section",
+        "children": [
+          {
+            "type": "up-next",
+            "value": [
+              "framework/alignment",
+              "framework/content"
+            ]
+          }
+        ]
       }
     ]
   }

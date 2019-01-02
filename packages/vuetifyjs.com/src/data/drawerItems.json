@@ -7,8 +7,9 @@
       { "text": "quickStart", "to": "quick-start", "updated": true },
       { "text": "whyVuetify", "to": "why-vuetify" },
       { "text": "faq", "to": "frequently-asked-questions" },
+      { "text": "meetTheTeam", "to": "meet-the-team", "new": true },
       { "text": "sponsorsAndBackers", "to": "sponsors-and-backers" },
-      { "text": "contributing", "to": "contributing" },
+      { "text": "contributing", "to": "contributing", "updated": true },
       { "text": "roadmap", "to": "roadmap" },
       { "text": "consulting", "to": "consulting-and-support" }
     ]
@@ -19,30 +20,47 @@
     "icon": "mdi-buffer",
     "children": [
       { "text": "aLaCarte", "to": "a-la-carte", "updated": true },
-      {
-        "group": "framework",
-        "text": "layout",
-        "children": [
-          { "text": "preDefinedLayouts", "to": "pre-defined" },
-          { "text": "preMadeThemes", "to": "pre-made-themes" },
-          { "text": "breakpoints", "to": "breakpoints" },
-          { "text": "aspectRatios", "to": "aspect-ratios" },
-          { "text": "spacing", "to": "spacing" },
-          { "text": "textAlignment", "to": "alignment" },
-          { "text": "display", "to": "display" },
-          { "text": "elevation", "to": "elevation" },
-          { "text": "sandbox", "to": "sandbox" }
-        ]
-      },
-      { "text": "colors", "to": "colors" },
-      { "text": "content", "to": "content" },
       { "text": "grid", "to": "grid" },
       { "text": "gridLists", "to": "grid-lists" },
       { "text": "icons", "to": "icons" },
       { "text": "i18n", "to": "internationalization" },
-      { "text": "scroll", "to": "scroll" },
-      { "text": "theme", "to": "theme" },
-      { "text": "transitions", "to": "transitions" }
+      {
+        "group": "framework",
+        "text": "layout",
+        "children": [
+          { "text": "aspectRatios", "to": "aspect-ratios" },
+          { "text": "breakpoints", "to": "breakpoints" },
+          { "text": "preDefinedLayouts", "to": "pre-defined", "updated": true }
+        ]
+      },
+      {
+        "group": "framework",
+        "text": "stylesAndThemes",
+        "children": [
+          { "text": "colors", "to": "colors" },
+          { "text": "content", "to": "content" },
+          { "text": "theme", "to": "theme" },
+          { "text": "typography", "to": "typography" }
+        ]
+      },
+      {
+        "group": "framework",
+        "text": "helperClasses",
+        "children": [
+          { "text": "display", "to": "display" },
+          { "text": "elevation", "to": "elevation" },
+          { "text": "spacing", "to": "spacing" },
+          { "text": "textAlignment", "to": "alignment" }
+        ]
+      },
+      {
+        "group": "framework",
+        "text": "motion",
+        "children": [
+          { "text": "scroll", "to": "scroll" },
+          { "text": "transitions", "to": "transitions" }
+        ]
+      }
     ]
   },
   {
@@ -50,7 +68,7 @@
     "text": "components",
     "icon": "mdi-view-dashboard",
     "children": [
-      { "text": "apiExplorer", "to": "api-explorer" },
+      { "text": "apiExplorer", "subtext": "browseAllComponents", "to": "api-explorer", "updated": true },
       { "text": "alerts", "to": "alerts" },
       { "text": "avatars", "to": "avatars" },
       { "text": "badges", "to": "badges" },
@@ -134,5 +152,11 @@
       { "text": "scrolling", "to": "scrolling" },
       { "text": "touchSupport", "to": "touch-support" }
     ]
+  },
+  {
+    "text": "premiumThemes",
+    "icon": "mdi-palette",
+    "to": "themes/premium",
+    "new": true
   }
 ]

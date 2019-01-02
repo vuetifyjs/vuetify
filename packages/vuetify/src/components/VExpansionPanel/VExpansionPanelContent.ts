@@ -103,7 +103,7 @@ export default mixins<options &
       }, this.showLazyContent(this.$slots.default))
     },
     genHeader () {
-      const children = [...this.$slots.header]
+      const children = [...(this.$slots.header || [])]
 
       if (!this.hideActions) children.push(this.genIcon())
 
@@ -146,7 +146,8 @@ export default mixins<options &
       staticClass: 'v-expansion-panel__container',
       class: this.containerClasses,
       attrs: {
-        tabindex: this.isReadonly || this.isDisabled ? null : 0
+        tabindex: this.isReadonly || this.isDisabled ? null : 0,
+        'aria-expanded': Boolean(this.isActive)
       },
       on: {
         keydown: this.onKeydown

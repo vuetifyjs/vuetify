@@ -73,6 +73,19 @@
           "value": "stylus_custom_transition"
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/menus",
+            "framework/colors",
+            "components/expansion-panels"
+          ]
+        }
+      ]
     }
   ]
 }

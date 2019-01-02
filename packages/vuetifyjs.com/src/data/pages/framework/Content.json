@@ -66,6 +66,18 @@
           "value": "user"
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "framework/typography",
+            "framework/alignment"
+          ]
+        }
+      ]
     }
   ]
 }

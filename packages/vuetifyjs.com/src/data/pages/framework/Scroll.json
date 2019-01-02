@@ -82,6 +82,19 @@
           "lang": "loremIpsum"
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "directives/scrolling",
+            "framework/content",
+            "components/sliders"
+          ]
+        }
+      ]
     }
   ]
 }

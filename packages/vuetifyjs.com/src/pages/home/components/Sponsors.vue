@@ -18,7 +18,6 @@
       append
       to="getting-started/sponsors-and-backers"
       large
-      round
     />
   </v-card>
 </template>

@@ -20,7 +20,10 @@ export default mixins<options & ExtractVue<typeof Translatable>>(Translatable).e
   name: 'v-parallax',
 
   props: {
-    alt: String,
+    alt: {
+      type: String,
+      default: ''
+    },
     height: {
       type: [String, Number],
       default: 500
@@ -78,12 +81,11 @@ export default mixins<options & ExtractVue<typeof Translatable>>(Translatable).e
       staticClass: 'v-parallax__image',
       style: this.styles,
       attrs: {
-        src: this.src
+        src: this.src,
+        alt: this.alt
       },
       ref: 'img'
     }
-
-    if (this.alt) imgData.attrs!.alt = this.alt
 
     const container = h('div', {
       staticClass: 'v-parallax__image-container'

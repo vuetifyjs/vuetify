@@ -247,6 +247,19 @@
           "value": "html_ie11"
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "getting-started/why-vuetify",
+            "getting-started/frequently-asked-questions",
+            "getting-started/sponsors-and-backers"
+          ]
+        }
+      ]
     }
   ]
 }

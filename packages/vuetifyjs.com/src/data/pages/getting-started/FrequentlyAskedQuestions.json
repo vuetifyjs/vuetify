@@ -9,6 +9,19 @@
           "type": "getting-started-faq"
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "getting-started/contributing",
+            "getting-started/consulting-and-support",
+            "framework/a-la-carte"
+          ]
+        }
+      ]
     }
   ]
 }

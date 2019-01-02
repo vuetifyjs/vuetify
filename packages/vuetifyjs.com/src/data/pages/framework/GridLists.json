@@ -35,6 +35,19 @@
           ]
         }
       ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "framework/grid",
+            "components/images",
+            "components/cards"
+          ]
+        }
+      ]
     }
   ]
 }

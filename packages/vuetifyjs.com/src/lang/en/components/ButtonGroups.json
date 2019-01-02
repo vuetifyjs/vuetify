@@ -14,5 +14,8 @@
     "activeClass": "Components.ItemGroups.props.activeClass",
     "mandatory": "Components.ItemGroups.props.mandatory",
     "multiple": "Components.ItemGroups.props.multiple"
+  },
+  "events": {
+    "change": "Components.Inputs.events.change"
   }
 }
