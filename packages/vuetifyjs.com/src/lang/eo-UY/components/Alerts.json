@@ -1,0 +1,31 @@
+{
+  "header": "crwdns11062:0crwdne11062:0",
+  "headerText": "crwdns11064:0crwdne11064:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns11066:0crwdne11066:0"
+    },
+    "closable": {
+      "header": "crwdns11068:0crwdne11068:0",
+      "desc": "crwdns11070:0crwdne11070:0"
+    },
+    "icon": {
+      "header": "crwdns11072:0crwdne11072:0",
+      "desc": "crwdns11074:0crwdne11074:0"
+    },
+    "transition": {
+      "header": "crwdns11076:0crwdne11076:0",
+      "desc": "crwdns11078:0crwdne11078:0"
+    },
+    "outline": {
+      "header": "crwdns11080:0crwdne11080:0",
+      "desc": "crwdns11082:0crwdne11082:0"
+    }
+  },
+  "props": {
+    "dismissible": "crwdns11084:0crwdne11084:0",
+    "icon": "crwdns11086:0crwdne11086:0",
+    "outline": "crwdns11088:0crwdne11088:0",
+    "type": "crwdns11090:0crwdne11090:0"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "header": "crwdns11382:0crwdne11382:0",
+  "headerText": "crwdns11384:0crwdne11384:0",
+  "examples": {
+    "usage": {
+      "desc": "crwdns11386:0crwdne11386:0"
+    },
+    "mediaWithText": {
+      "header": "crwdns11388:0crwdne11388:0",
+      "desc": "crwdns11390:0crwdne11390:0"
+    },
+    "horizontal": {
+      "header": "crwdns11392:0crwdne11392:0",
+      "desc": "crwdns11394:0crwdne11394:0"
+    },
+    "grids": {
+      "header": "crwdns11396:0crwdne11396:0",
+      "desc": "crwdns11398:0crwdne11398:0"
+    },
+    "customActions": {
+      "header": "crwdns11400:0crwdne11400:0",
+      "desc": "crwdns11402:0crwdne11402:0"
+    },
+    "twitterCard": {
+      "header": "crwdns11404:0crwdne11404:0",
+      "desc": "crwdns11406:0crwdne11406:0"
+    }
+  },
+  "props": {
+    "contain": "crwdns11408:0crwdne11408:0",
+    "flat": "crwdns11410:0crwdne11410:0",
+    "height": "crwdns11412:0crwdne11412:0",
+    "hover": "crwdns11414:0crwdne11414:0",
+    "img": "crwdns11416:0crwdne11416:0",
+    "primaryTitle": "crwdns11418:0crwdne11418:0",
+    "raised": "crwdns11420:0crwdne11420:0",
+    "src": "crwdns11422:0crwdne11422:0",
+    "alt": "crwdns11424:0crwdne11424:0",
+    "aspectRatio": "crwdns11426:0crwdne11426:0",
+    "gradient": "crwdns11428:0crwdne11428:0",
+    "lazySrc": "crwdns11430:0crwdne11430:0",
+    "position": "crwdns11432:0crwdne11432:0",
+    "sizes": "crwdns11434:0crwdne11434:0",
+    "srcset": "crwdns11436:0crwdne11436:0",
+    "transition": "crwdns11438:0crwdne11438:0"
+  }
+}
