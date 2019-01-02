@@ -203,6 +203,11 @@
   max-width: auto;
 }
 
+.v-btn--depressed {
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
 .v-btn--fab {
   @include fab(40);
   min-height: 0;

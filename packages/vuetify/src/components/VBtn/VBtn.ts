@@ -134,7 +134,6 @@ export default baseMixins.extend<options>().extend({
       return Boolean(
         this.text ||
         this.flat ||
-        this.depressed ||
         this.outline
       )
     },
