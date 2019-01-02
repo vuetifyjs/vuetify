@@ -54,17 +54,18 @@ export default {
     calculatedLeft () {
       const { activator, content } = this.dimensions
       const unknown = !this.bottom && !this.left && !this.top && !this.right
+      const activatorLeft = this.isAttached ? activator.offsetLeft : activator.left
       let left = 0
 
       if (this.top || this.bottom || unknown) {
         left = (
-          activator.left +
+          activatorLeft +
           (activator.width / 2) -
           (content.width / 2)
         )
       } else if (this.left || this.right) {
         left = (
-          activator.left +
+          activatorLeft +
           (this.right ? activator.width : -content.width) +
           (this.right ? 10 : -10)
         )
@@ -77,17 +78,18 @@ export default {
     },
     calculatedTop () {
       const { activator, content } = this.dimensions
+      const activatorTop = this.isAttached ? activator.offsetTop : activator.top
       let top = 0
 
       if (this.top || this.bottom) {
         top = (
-          activator.top +
+          activatorTop +
           (this.bottom ? activator.height : -content.height) +
           (this.bottom ? 10 : -10)
         )
       } else if (this.left || this.right) {
         top = (
-          activator.top +
+          activatorTop +
           (activator.height / 2) -
           (content.height / 2)
         )
@@ -130,8 +132,10 @@ export default {
     }
   },
 
-  mounted () {
-    this.value && this.callActivate()
+  beforeMount () {
+    this.$nextTick(() => {
+      this.value && this.callActivate()
+    })
   },
 
   methods: {
@@ -141,6 +145,30 @@ export default {
       this.updateDimensions()
       // Start the transition
       requestAnimationFrame(this.startTransition)
+    },
+    genActivator () {
+      const listeners = this.disabled ? {} : {
+        mouseenter: e => {
+          this.getActivator(e)
+          this.runDelay('open')
+        },
+        mouseleave: e => {
+          this.getActivator(e)
+          this.runDelay('close')
+        }
+      }
+
+      if (this.$scopedSlots.activator) {
+        const activator = this.$scopedSlots.activator({ on: listeners })
+        this.activatorNode = activator
+        return activator
+      }
+      if (this.$slots.activator) {
+        return this.$createElement('span', {
+          on: listeners,
+          ref: 'activator'
+        }, this.$slots.activator)
+      }
     }
   },
 
@@ -169,17 +197,7 @@ export default {
           name: this.computedTransition
         }
       }, [tooltip]),
-      h('span', {
-        on: this.disabled ? {} : {
-          mouseenter: () => {
-            this.runDelay('open')
-          },
-          mouseleave: () => {
-            this.runDelay('close')
-          }
-        },
-        ref: 'activator'
-      }, this.$slots.activator)
+      this.genActivator()
     ])
   }
 }

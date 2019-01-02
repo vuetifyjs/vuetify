@@ -4,7 +4,7 @@
       v-scroll="onScroll"
       v-show="fab"
       :style="{
-        bottom: $vuetify.breakpoint.smOnly ? '64px' : ''
+        bottom: value ? '80px' : ''
       }"
       fab
       dark
@@ -20,12 +20,21 @@
 </template>
 
 <script>
+  // Utilities
+  import {
+    mapState
+  } from 'vuex'
+
   export default {
     name: 'AppFab',
 
     data: () => ({
       fab: false
     }),
+
+    computed: {
+      ...mapState('snackbar', ['value'])
+    },
 
     methods: {
       onScroll () {

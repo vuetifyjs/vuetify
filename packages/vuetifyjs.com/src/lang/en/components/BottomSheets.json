@@ -1,13 +1,12 @@
 {
-  "header": "Bottom sheet",
+  "header": "# Bottom sheet",
   "headerText": "The bottom sheet is a modified `v-dialog` that slides from the bottom of the screen, similar to a `v-bottom-nav`. Whereas a bottom navigation component is for buttons and specific application level actions, a bottom sheet can contain anything.",
   "examples": {
-    "standard": {
-      "header": "Standard display",
+    "usage": {
       "desc": "Here we display an example list of actions that could be present in an application."
     },
     "inset": {
-      "header": "Inset bottom sheets",
+      "header": "### Inset bottom sheets",
       "desc": "Bottom sheets can be inset, reducing their maximum width on desktop to 70%. This can be further reduced manually using the `width` prop. We also showcase dynamic class binding using the Vuetify breakpoint object."
     }
   },

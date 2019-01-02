@@ -3,6 +3,7 @@ import Vue from 'vue'
 import Positionable from './positionable'
 
 import Stackable from './stackable'
+import { consoleError } from '../util/console'
 
 /* eslint-disable object-property-newline */
 const dimensions = {
@@ -106,11 +107,11 @@ export default Vue.extend({
     computedLeft () {
       const a = this.dimensions.activator
       const c = this.dimensions.content
-      const minWidth = a.width < c.width ? c.width : a.width
+      const activatorLeft = this.isAttached ? a.offsetLeft : a.left
+      const minWidth = Math.max(a.width, c.width)
       let left = 0
 
-      left += this.left ? a.left - (minWidth - a.width) : a.left
-
+      left += this.left ? activatorLeft - (minWidth - a.width) : activatorLeft
       if (this.offsetX) left += this.left ? -a.width : a.width
       if (this.nudgeLeft) left -= parseInt(this.nudgeLeft)
       if (this.nudgeRight) left += parseInt(this.nudgeRight)
@@ -120,9 +121,11 @@ export default Vue.extend({
     computedTop () {
       const a = this.dimensions.activator
       const c = this.dimensions.content
-      let top = this.top ? a.bottom - c.height : a.top
+      let top = 0
 
-      if (!this.isAttached) top += this.pageYOffset
+      if (this.top) top += a.height - c.height
+      if (this.isAttached) top += a.offsetTop
+      else top += a.top + this.pageYOffset
       if (this.offsetY) top += this.top ? -a.height : a.height
       if (this.nudgeTop) top -= parseInt(this.nudgeTop)
       if (this.nudgeBottom) top += parseInt(this.nudgeBottom)
@@ -130,7 +133,7 @@ export default Vue.extend({
       return top
     },
     hasActivator () {
-      return !!this.$slots.activator || this.activator || this.inputActivator
+      return !!this.$slots.activator || !!this.$scopedSlots.activator || this.activator || this.inputActivator
     },
     isAttached () {
       return this.attach !== false
@@ -156,6 +159,7 @@ export default Vue.extend({
     absolutePosition () {
       return {
         offsetTop: 0,
+        offsetLeft: 0,
         scrollHeight: 0,
         top: this.positionY || this.absoluteY,
         bottom: this.positionY || this.absoluteY,
@@ -250,7 +254,7 @@ export default Vue.extend({
       }
     },
     deactivate () {},
-    getActivator () {
+    getActivator (e) {
       if (this.inputActivator) {
         return this.$el.querySelector('.v-input__slot')
       }
@@ -261,9 +265,20 @@ export default Vue.extend({
           : this.activator
       }
 
-      return this.$refs.activator.children.length > 0
-        ? this.$refs.activator.children[0]
-        : this.$refs.activator
+      if (this.$refs.activator) {
+        return this.$refs.activator.children.length > 0
+          ? this.$refs.activator.children[0]
+          : this.$refs.activator
+      }
+
+      if (e) {
+        this.activatedBy = e.currentTarget || e.target
+        return this.activatedBy
+      }
+
+      if (this.activatedBy) return this.activatedBy
+
+      consoleError('No activator found')
     },
     getInnerHeight () {
       if (!this.hasWindow) return 0
@@ -299,9 +314,7 @@ export default Vue.extend({
         height: Math.round(rect.height)
       }
     },
-    measure (el, selector) {
-      el = selector ? el.querySelector(selector) : el
-
+    measure (el) {
       if (!el || !this.hasWindow) return null
 
       const rect = this.getRoundedBoundedClientRect(el)
@@ -343,9 +356,20 @@ export default Vue.extend({
       const dimensions = {}
 
       // Activator should already be shown
-      dimensions.activator = !this.hasActivator || this.absolute
-        ? this.absolutePosition()
-        : this.measure(this.getActivator())
+      if (!this.hasActivator || this.absolute) {
+        dimensions.activator = this.absolutePosition()
+      } else {
+        const activator = this.getActivator()
+        dimensions.activator = this.measure(activator)
+        dimensions.activator.offsetLeft = activator.offsetLeft
+        if (this.isAttached) {
+          // account for css padding causing things to not line up
+          // this is mostly for v-autocomplete, hopefully it won't break anything
+          dimensions.activator.offsetTop = activator.offsetTop
+        } else {
+          dimensions.activator.offsetTop = 0
+        }
+      }
 
       // Display and hide to get dimensions
       this.sneakPeek(() => {

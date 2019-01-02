@@ -17,15 +17,17 @@ export default {
       type: String,
       default: ''
     },
+    disabled: Boolean,
+    readonly: Boolean,
     selectingYear: Boolean,
+    value: {
+      type: String
+    },
     year: {
       type: [Number, String],
       default: ''
     },
     yearIcon: {
-      type: String
-    },
-    value: {
       type: String
     }
   },
@@ -79,7 +81,10 @@ export default {
 
   render (h) {
     return h('div', {
-      staticClass: 'v-date-picker-title'
+      staticClass: 'v-date-picker-title',
+      'class': {
+        'v-date-picker-title--disabled': this.disabled
+      }
     }, [
       this.getYearBtn(),
       this.genTitleDate()

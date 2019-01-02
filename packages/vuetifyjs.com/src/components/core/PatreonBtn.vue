@@ -1,0 +1,20 @@
+<template>
+  <v-btn
+    dark
+    color="#F96854"
+    active-class=""
+    href="https://www.patreon.com/vuetify"
+    target="_blank"
+    rel="noopener"
+  >
+    <v-img
+      src="https://cdn.vuetifyjs.com/images/social/patreon-dark.png"
+      width="24"
+      class="mr-2"
+    />
+    <span
+      class="font-weight-black"
+      v-text="`Become a Patron`"
+    />
+  </v-btn>
+</template>

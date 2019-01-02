@@ -1,0 +1,3 @@
+$ npm install vuetify --save
+// OR
+$ yarn add vuetify
