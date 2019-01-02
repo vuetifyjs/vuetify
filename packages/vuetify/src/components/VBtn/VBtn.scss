@@ -44,6 +44,10 @@
   height: #{$size}px;
   width: #{$size}px;
 
+  .v-icon {
+    font-size: #{round($size / 1.7)}px;
+  }
+
   &.v-btn--absolute {
     &.v-btn--bottom {
       bottom: -#{$size / 2}px;
@@ -104,12 +108,14 @@
   font-size: 14px;
   justify-content: center;
   outline: 0;
+  max-width: 100%;
   position: relative;
   text-decoration: none;
   text-transform: uppercase;
   transition: $primary-transition;
   user-select: none;
   vertical-align: middle;
+  white-space: nowrap;
 
   &:before {
     border-radius: inherit;
@@ -169,6 +175,7 @@
 
   &.v-btn--loading {
     pointer-events: none;
+    transition: none;
 
     .v-btn__content {
       opacity: 0;
