@@ -3,7 +3,7 @@
   "headerText": "The `v-icon` component provides a large set of glyphs to provide context to various aspects of your application. Vuetify icons utilize Google's Material Icons font library. For a list of all available icons, visit the official [Material Icons](https://material.io/icons/) page.",
   "examples": {
     "usage": {
-      "desc": "Icons come in two themes (light and dark), and four different sizes (standard, medium, large, and x-large)."
+      "desc": "Icons come in two themes (light and dark), and four different sizes (standard, medium, large, and x-large). If you want to use SVG icons with `VIcon` component, read about using SVG icons with `VIcon` [here](/framework/icons#component-icons)."
     },
     "fontAwesome": {
       "header": "### Font Awesome",
