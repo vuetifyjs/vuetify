@@ -369,18 +369,18 @@ exports[`VTreeView.ts should recalculate tree when loading async children using 
         arrow_drop_down
       </i>
       <div class="v-treeview-node__content">
-        <label class="v-treeview-node__label">
+        <div class="v-treeview-node__label">
           One
-        </label>
+        </div>
       </div>
     </div>
     <div class="v-treeview-node__children">
       <div class="v-treeview-node v-treeview-node--leaf">
         <div class="v-treeview-node__root">
           <div class="v-treeview-node__content">
-            <label class="v-treeview-node__label">
+            <div class="v-treeview-node__label">
               Two
-            </label>
+            </div>
           </div>
         </div>
       </div>
@@ -396,18 +396,18 @@ exports[`VTreeView.ts should remove old nodes 1`] = `
   <div class="v-treeview-node v-treeview-node--leaf">
     <div class="v-treeview-node__root">
       <div class="v-treeview-node__content">
-        <label class="v-treeview-node__label">
+        <div class="v-treeview-node__label">
           one
-        </label>
+        </div>
       </div>
     </div>
   </div>
   <div class="v-treeview-node v-treeview-node--leaf">
     <div class="v-treeview-node__root">
       <div class="v-treeview-node__content">
-        <label class="v-treeview-node__label">
+        <div class="v-treeview-node__label">
           two
-        </label>
+        </div>
       </div>
     </div>
   </div>
@@ -421,9 +421,9 @@ exports[`VTreeView.ts should remove old nodes 2`] = `
   <div class="v-treeview-node v-treeview-node--leaf">
     <div class="v-treeview-node__root">
       <div class="v-treeview-node__content">
-        <label class="v-treeview-node__label">
+        <div class="v-treeview-node__label">
           one
-        </label>
+        </div>
       </div>
     </div>
   </div>
@@ -437,18 +437,18 @@ exports[`VTreeView.ts should remove old nodes 3`] = `
   <div class="v-treeview-node v-treeview-node--leaf">
     <div class="v-treeview-node__root">
       <div class="v-treeview-node__content">
-        <label class="v-treeview-node__label">
+        <div class="v-treeview-node__label">
           one
-        </label>
+        </div>
       </div>
     </div>
   </div>
   <div class="v-treeview-node v-treeview-node--leaf">
     <div class="v-treeview-node__root">
       <div class="v-treeview-node__content">
-        <label class="v-treeview-node__label">
+        <div class="v-treeview-node__label">
           three
-        </label>
+        </div>
       </div>
     </div>
   </div>
