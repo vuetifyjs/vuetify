@@ -79,6 +79,7 @@ export default baseMixins.extend<options>().extend({
   },
 
   data: () => ({
+    hasDeprecatedIcon: false,
     hasMouseDown: false,
     hasHover: false
   }),
@@ -93,7 +94,7 @@ export default baseMixins.extend<options>().extend({
         'v-btn--bottom': this.bottom,
         'v-btn--disabled': this.disabled,
         'v-btn--flat': this.flat,
-        'v-btn--fab': this.fab,
+        'v-btn--fab': this.fab || this.hasDeprecatedIcon,
         'v-btn--fixed': this.fixed,
         'v-btn--left': this.left,
         'v-btn--loading': this.loading,
@@ -132,6 +133,7 @@ export default baseMixins.extend<options>().extend({
     },
     isFlat (): boolean {
       return Boolean(
+        this.hasDeprecatedIcon ||
         this.text ||
         this.flat ||
         this.outline
@@ -139,6 +141,7 @@ export default baseMixins.extend<options>().extend({
     },
     isRound (): boolean {
       return Boolean(
+        this.hasDeprecatedIcon ||
         this.round ||
         this.fab
       )
@@ -157,6 +160,7 @@ export default baseMixins.extend<options>().extend({
   created () {
     if (this.flat) deprecate('flat', 'text', this)
     if (this.icon as any === '' || typeof this.icon === 'boolean') {
+      this.hasDeprecatedIcon = true
       deprecate('icon', 'fab flat')
     }
   },
