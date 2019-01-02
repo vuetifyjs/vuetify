@@ -53,11 +53,11 @@ exports[`VBtn.js should render component with color prop and match snapshot 2`] 
 exports[`VBtn.js should render component with loader and match snapshot 1`] = `
 
 <button type="button"
-        class="v-btn v-btn--loader theme--light elevation-2"
+        class="v-btn v-btn--loading theme--light elevation-2"
 >
   <div class="v-btn__content">
   </div>
-  <span class="v-btn__loading">
+  <span class="v-btn__loader">
     <div role="progressbar"
          aria-valuemin="0"
          aria-valuemax="100"
@@ -90,11 +90,11 @@ exports[`VBtn.js should render component with loader slot and match snapshot 1`]
 
 <vuecomponent-stub>
   <button type="button"
-          class="v-btn v-btn--loader theme--light elevation-2"
+          class="v-btn v-btn--loading theme--light elevation-2"
   >
     <div class="v-btn__content">
     </div>
-    <span class="v-btn__loading">
+    <span class="v-btn__loader">
       <span>
         loader
       </span>

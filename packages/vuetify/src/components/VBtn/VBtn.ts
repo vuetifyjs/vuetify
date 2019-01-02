@@ -1,12 +1,6 @@
 // Styles
 import './VBtn.scss'
 
-// Types
-import { VNode } from 'vue'
-import { PropValidator } from 'vue/types/options'
-import mixins, { ExtractVue } from '../../util/mixins'
-import { RippleOptions } from '../../directives/ripple'
-
 // Extensions
 import VSheet from '../VSheet'
 
@@ -15,23 +9,27 @@ import VHover from '../VHover'
 import VProgressCircular from '../VProgressCircular'
 
 // Mixins
-import Colorable from '../../mixins/colorable'
 import { factory as GroupableFactory } from '../../mixins/groupable'
-import Positionable from '../../mixins/positionable'
-import Elevatable from '../../mixins/elevatable'
-import Routable from '../../mixins/routable'
-import Themeable from '../../mixins/themeable'
 import { factory as ToggleableFactory } from '../../mixins/toggleable'
+import Positionable from '../../mixins/positionable'
+import Routable from '../../mixins/routable'
+import Sizeable from '../../mixins/sizeable'
 
 // Utilities
 import { getObjectValueByPath } from '../../util/helpers'
+import { deprecate } from '../../util/console'
+
+// Types
+import { VNode } from 'vue'
+import { Prop, PropValidator } from 'vue/types/options'
+import mixins, { ExtractVue } from '../../util/mixins'
+import { RippleOptions } from '../../directives/ripple'
 
 const baseMixins = mixins(
-  Colorable,
-  Elevatable,
+  VSheet,
   Routable,
   Positionable,
-  Themeable,
+  Sizeable,
   GroupableFactory('btnToggle'),
   ToggleableFactory('inputValue')
   /* @vue/component */
@@ -56,8 +54,10 @@ export default baseMixins.extend<options>().extend({
     },
     fab: Boolean,
     flat: Boolean,
-    icon: Boolean,
-    large: Boolean,
+    icon: {
+      type: String as Prop<'left' | 'right'>,
+      default: undefined
+    },
     loading: Boolean,
     outline: Boolean,
     ripple: {
@@ -65,11 +65,12 @@ export default baseMixins.extend<options>().extend({
       default: null
     },
     round: Boolean,
-    small: Boolean,
+    rounded: Boolean,
     tag: {
       type: String,
       default: 'button'
     },
+    text: Boolean,
     type: {
       type: String,
       default: 'button'
@@ -84,7 +85,7 @@ export default baseMixins.extend<options>().extend({
 
   computed: {
     classes (): any {
-      return {
+      const classes = {
         'v-btn': true,
         [this.activeClass]: this.isActive,
         'v-btn--absolute': this.absolute,
@@ -92,27 +93,34 @@ export default baseMixins.extend<options>().extend({
         'v-btn--bottom': this.bottom,
         'v-btn--disabled': this.disabled,
         'v-btn--flat': this.flat,
-        'v-btn--floating': this.fab,
+        'v-btn--fab': this.fab,
         'v-btn--fixed': this.fixed,
-        'v-btn--icon': this.icon,
-        'v-btn--large': this.large,
         'v-btn--left': this.left,
-        'v-btn--loader': this.loading,
+        'v-btn--loading': this.loading,
         'v-btn--outline': this.outline,
         'v-btn--depressed': (this.depressed && !this.flat) || this.outline,
         'v-btn--right': this.right,
-        'v-btn--round': this.round,
+        'v-btn--round': this.isRound,
+        'v-btn--rounded': this.round,
         'v-btn--router': this.to,
-        'v-btn--small': this.small,
+        'v-btn--text': this.text,
         'v-btn--top': this.top,
         ...this.themeClasses,
         ...this.groupClasses,
-        ...this.elevationClasses
+        ...this.elevationClasses,
+        ...this.sizeableClasses
       }
+
+      if (this.icon) {
+        classes['v-btn--icon'] = true
+        classes[`v-btn--icon-${this.icon}`] = true
+      }
+
+      return classes
     },
     computedElevation (): string | number {
-      if (this.isFlat) return 0
-      if (this.fab) return this.hasMouseDown ? 12 : 6
+      if (this.isFlat || this.disabled) return 0
+      if (this.fab) return this.hasMouseDown ? 12 : this.hasHover ? 8 : 6
       if (this.hasMouseDown) return 8
       if (this.hasHover) return 4
       return this.elevation
@@ -123,12 +131,35 @@ export default baseMixins.extend<options>().extend({
       else return this.ripple !== null ? this.ripple : defaultRipple
     },
     isFlat (): boolean {
-      return this.flat || this.depressed || this.outline
+      return Boolean(
+        this.text ||
+        this.flat ||
+        this.depressed ||
+        this.outline
+      )
+    },
+    isRound (): boolean {
+      return Boolean(
+        this.round ||
+        this.fab
+      )
+    },
+    styles (): object {
+      return {
+        ...this.measurableStyles
+      }
     }
   },
 
   watch: {
     '$route': 'onRouteChange'
+  },
+
+  created () {
+    if (this.flat) deprecate('flat', 'text', this)
+    if (this.icon as any === '' || typeof this.icon === 'boolean') {
+      deprecate('icon', 'fab flat')
+    }
   },
 
   methods: {
@@ -151,7 +182,7 @@ export default baseMixins.extend<options>().extend({
     },
     genLoader (): VNode {
       return this.$createElement('span', {
-        class: 'v-btn__loading'
+        class: 'v-btn__loader'
       }, this.$slots.loader || [this.$createElement(VProgressCircular, {
         props: {
           indeterminate: true,
@@ -174,12 +205,12 @@ export default baseMixins.extend<options>().extend({
   },
 
   render (h): VNode {
-    const setColor = (!this.outline && !this.flat && !this.disabled) ? this.setBackgroundColor : this.setTextColor
-    const { tag, data } = this.generateRouteLink(this.classes)
     const children = [
       this.genContent(),
       this.loading && this.genLoader()
     ]
+    const setColor = !this.isFlat ? this.setBackgroundColor : this.setTextColor
+    const { tag, data } = this.generateRouteLink(this.classes, this.styles)
 
     if (tag === 'button') data.attrs!.type = this.type
 

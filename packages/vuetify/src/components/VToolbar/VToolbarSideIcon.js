@@ -15,7 +15,8 @@ export default {
     const d = Object.assign(data, {
       staticClass: classes,
       props: Object.assign(props, {
-        icon: true
+        fab: true,
+        flat: true
       }),
       on: listeners
     })
