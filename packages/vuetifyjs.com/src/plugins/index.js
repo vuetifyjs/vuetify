@@ -1,4 +1,4 @@
 // Make this dynamic
-import '@/plugins/axios'
-import './rollbar'
+import '@/plugins/no-ssr'
+import '@/plugins/rollbar'
 import '@/plugins/vuetify'

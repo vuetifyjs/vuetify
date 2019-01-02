@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import { VNode, VNodeDirective, FunctionalComponentOptions } from 'vue/types'
+import { VuetifyIcon } from 'vuetify'
 
 export function createSimpleFunctional (
   c: string,
@@ -300,9 +301,9 @@ export const keyCodes = Object.freeze({
 
 const ICONS_PREFIX = '$vuetify.icons.'
 
-// This remaps internal names like '$vuetify.icons.cancel' to the current name
-// for that icon.
-export function remapInternalIcon (vm: Vue, iconName: string): string {
+// This remaps internal names like '$vuetify.icons.cancel'
+// to the current name or component for that icon.
+export function remapInternalIcon (vm: Vue, iconName: string): VuetifyIcon {
   if (!iconName.startsWith(ICONS_PREFIX)) {
     return iconName
   }

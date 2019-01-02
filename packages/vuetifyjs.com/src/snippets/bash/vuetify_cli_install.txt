@@ -1,0 +1,4 @@
+$ ? Choose a preset: (Use arrow keys)
+$ > Default (recommended)
+$   Prototype (rapid development)
+$   Configure (advanced)

@@ -74,6 +74,7 @@ exports[`VExpansionPanelContent.js should toggle panel on header click 1`] = `
 
 <li tabindex="0"
     class="v-expansion-panel__container v-expansion-panel__container--active"
+    aria-expanded="true"
 >
   <div class="v-expansion-panel__header">
     <span>

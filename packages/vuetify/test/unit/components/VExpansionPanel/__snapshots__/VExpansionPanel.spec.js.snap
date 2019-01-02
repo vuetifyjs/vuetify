@@ -33,6 +33,7 @@ exports[`VExpansionPanel.js should render an expanded component and match snapsh
 <ul class="v-expansion-panel theme--light">
   <li tabindex="0"
       class="v-expansion-panel__container v-expansion-panel__container--active"
+      aria-expanded="true"
   >
     <div class="v-expansion-panel__header">
       <div>
@@ -89,6 +90,7 @@ exports[`VExpansionPanel.js should render component and match snapshot 2`] = `
 <ul class="v-expansion-panel theme--light">
   <li tabindex="0"
       class="v-expansion-panel__container v-expansion-panel__container--active"
+      aria-expanded="true"
   >
     <div class="v-expansion-panel__header">
       <div>

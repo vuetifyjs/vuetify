@@ -1,94 +1,54 @@
 <template>
-  <v-fade-transition appear>
-    <core-documentation v-if="!examples" />
-    <div
-      v-else
-      id="app"
-    >
-      <router-view />
-    </div>
-  </v-fade-transition>
+  <v-app>
+    <router-view />
+
+    <core-toolbar v-if="hasToolbar" />
+  </v-app>
 </template>
 
 <script>
+  // Mixins
   import Meta from '@/mixins/meta'
 
   // Utilities
-  import asyncData from '@/util/asyncData'
+  import { waitForReadystate } from '@/util/helpers'
 
-  import {
-    mapMutations,
-    mapState
-  } from 'vuex'
+  import { mapState } from 'vuex'
 
   export default {
-    mixins: [asyncData, Meta],
+    mixins: [Meta],
 
-    asyncData ({ store }) {
-      if (store.state.store.hasFetchedProducts &&
-        store.state.store.products.length
-      ) return Promise.resolve()
-
-      return store.dispatch('store/getProducts')
-    },
+    data: () => ({
+      isBooted: false
+    }),
 
     computed: {
-      ...mapState({
-        isFullscreen: state => state.isFullscreen
-      }),
-      examples () {
-        return !!this.$route.params.example
+      ...mapState('app', ['isLoading']),
+      ...mapState('route', ['hash', 'name']),
+      hasToolbar () {
+        return this.name !== 'Layouts'
       }
     },
 
-    mounted () {
-      this.getReleases()
+    watch: {
+      async isLoading (val) {
+        if (this.isBooted || !this.hash || val) return
 
-      this.snackbar({
-        color: 'default',
-        close: true,
-        id: '1.4-beta',
-        text: 'Go to Docs',
-        msg: '🎉 **1.4** — The next version of Vuetify is now in beta',
-        href: 'https://next.vuetifyjs.com',
-        timeout: 0
-      })
-    },
+        await waitForReadystate()
 
-    methods: {
-      ...mapMutations('app', {
-        snackbar: 'SNACKBAR'
-      }),
-      getReleases () {
-        this.$http.get('/releases/releases.json').then(({ data }) => {
-          this.$store.commit('app/RELEASES', data)
-        }).catch(err => {
-          console.log(err)
-        })
+        this.$vuetify.goTo(this.hash, { offset: -80 })
+        this.isBooted = true
       }
     }
   }
 </script>
 
-<style lang="stylus">
-  @import '~vuetify/src/stylus/settings/_variables.styl'
+<style>
+  .text-decoration-none {
+    text-decoration: none;
+  }
 
-  main
-    section
-      &:before
-        content ''
-        display block
-        position relative
-        width 0
-        height 80px
-        margin-top -80px
-
-  .container.page
-    max-width: 1185px !important
-    padding-top: 75px
-    padding-bottom: 0
-    transition: .2s $transition.fast-out-slow-in
-
-    section
-      margin-bottom: 48px
+  .wf-loading .material-icons {
+    display: none;
+  }
 </style>

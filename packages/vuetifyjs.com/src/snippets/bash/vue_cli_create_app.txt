@@ -1,0 +1,2 @@
+$ vue create my-app
+$ cd my-app

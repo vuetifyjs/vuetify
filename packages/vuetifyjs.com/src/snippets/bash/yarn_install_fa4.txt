@@ -1,0 +1,3 @@
+$ yarn add font-awesome@4.7.0 -D -D
+// OR
+$ npm install font-awesome@4.7.0 -D -D

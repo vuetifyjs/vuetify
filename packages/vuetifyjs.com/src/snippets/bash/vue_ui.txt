@@ -1,0 +1,5 @@
+// ensure vue-cli is >= 3.0
+$ vue --version
+
+// Then start the UI
+$ vue ui
