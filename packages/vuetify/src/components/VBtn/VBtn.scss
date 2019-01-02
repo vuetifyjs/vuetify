@@ -197,6 +197,7 @@
 
 // Modifiers
 .v-btn--block {
+  display: flex;
   flex: 1 0 auto;
   min-width: 100% !important;
   max-width: auto;
