@@ -79,7 +79,7 @@ export default mixins(
       )
     },
     externalError (): boolean {
-      return this.errorMessages.length > 0 || this.error
+      return this.internalErrorMessages.length > 0 || this.error
     },
     hasMessages (): boolean {
       return this.validationTarget.length > 0
@@ -127,7 +127,7 @@ export default mixins(
       return undefined
     },
     validationTarget (): VuetifyRuleValidations {
-      if (this.errorMessages.length > 0) {
+      if (this.internalErrorMessages.length > 0) {
         return this.internalErrorMessages
       } else if (this.successMessages.length > 0) {
         return this.internalSuccessMessages
@@ -196,9 +196,9 @@ export default mixins(
 
   methods: {
     genInternalMessages (messages: VuetifyMessage): VuetifyRuleValidations {
-      if (Array.isArray(messages)) return messages
-
-      return [messages]
+      if (!messages) return []
+      else if (Array.isArray(messages)) return messages
+      else return [messages]
     },
     /** @public */
     reset () {
