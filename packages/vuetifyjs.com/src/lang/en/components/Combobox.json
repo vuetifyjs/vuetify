@@ -20,8 +20,10 @@
     }
   },
   "slots": {
+    "append": "Components.Selects.slots.append",
     "item": "Scoped slot for designating the markup for a list-tile",
     "no-data": "Mixins.Filterable.slots.noData",
+    "prepend": "Components.Selects.slots.prepend",
     "selection": "Scoped slot for designating the markup for the selected items"
   },
   "scopedSlots": {
@@ -29,6 +31,7 @@
     "selection": "Define a custom selection appearance"
   },
   "events": {
+    "change": "Components.Inputs.events.change",
     "update:error": "Mixins.Validatable.events['update:error']",
     "update:searchInput": "The `search-input.sync` event"
   }

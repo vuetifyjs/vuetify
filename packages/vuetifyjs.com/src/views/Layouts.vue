@@ -1,9 +1,17 @@
 <template>
-  <component :is="component" />
+  <component
+    v-if="component !== false"
+    :is="component"
+  />
+  <not-found v-else />
 </template>
 
 <script>
   export default {
+    components: {
+      NotFound: () => import('@/pages/general/404')
+    },
+
     props: {
       page: {
         type: String,
@@ -12,14 +20,14 @@
     },
 
     data: () => ({
-      component: null
+      component: undefined
     }),
 
     created () {
       import(`@/examples/layouts/${this.page}.vue`)
         .then(res => (this.component = res.default))
         .catch(() => {
-          this.$router.push({ name: '404' })
+          this.component = false
           throw new Error(`Unable to find layout for <${this.page}>`)
         })
     }

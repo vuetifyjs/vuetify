@@ -1,22 +1,22 @@
 {
-  "header": "Footer",
+  "header": "# Footer",
   "headerText": "`v-footer`компонент используется для отображения общей информации, которую пользователь может захотеть получить с любой страницы вашего сайта.",
   "components": ["v-footer"],
   "examples": {
     "default": {
-      "header": "По умолчанию",
+      "header": "### По умолчанию",
       "desc": "Компонент footer - это просто базовый контейнер."
     },
     "companyFooter": {
-      "header": "Footer компании",
+      "header": "### Footer компании",
       "desc": "Компонент footer как базовый footer компании со ссылками."
     },
     "indigoFooter": {
-      "header": "Indigo Footer",
+      "header": "### Indigo Footer",
       "desc": "Компонент footer с цветом фона индиго и значками социальных сетей и кнопкой."
     },
     "tealFooter": {
-      "header": "Teal Footer",
+      "header": "### Teal Footer",
       "desc": "Компонент footer с заголовком цвета Teal и столбцами и строками ссылок."
     }
   },

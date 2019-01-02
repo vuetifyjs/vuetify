@@ -49,6 +49,13 @@
       .carbon-wrap {
         display: flex;
       }
+
+      .carbon-img {
+        > img {
+          max-width: 39px !important;
+          min-height: 30px;
+        }
+      }
     }
 
     .v-system-bar,
@@ -65,8 +72,6 @@
       .carbon-img {
         > img {
           margin-right: 8px;
-          max-width: 48px !important;
-          min-height: 32px;
           height: 100%;
           vertical-align: middle;
         }

@@ -1,5 +1,5 @@
 // Styles
-import './VBtn.styl'
+import './VBtn.scss'
 
 // Types
 import { VNode } from 'vue'

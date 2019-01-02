@@ -1,8 +1,6 @@
 {
   "/components/dropdowns": "/components/menus",
   "/quick-start": "/vuetify/quick-start",
-  "/overview": "/guides/server-side-rendering",
-  "/guides/server-side-rendering": "/",
   "/motion": "/motion/transitions",
   "/components/sidebars": "/components/navigation-drawers",
   "/components/collapsible": "/components/expansion-panels",
@@ -20,8 +18,8 @@
   "/vuetify/sponsors-and-backers": "/getting-started/sponsors-and-backers",
   "/vuetify/contributing": "/getting-started/contributing",
   "/vuetify/roadmap": "/getting-started/roadmap",
-  "/vuetify/a-la-carte": "/guides/a-la-carte",
-  "/getting-started/a-la-carte": "/guides/a-la-carte",
+  "/vuetify/a-la-carte": "/framework/a-la-carte",
+  "/getting-started/a-la-carte": "/framework/a-la-carte",
   "/guides/a-la-carte": "/framework/a-la-carte",
   "/pre-made-themes": "/layout/pre-made-themes",
   "/layout/grid": "/framework/grid",
@@ -40,5 +38,12 @@
   "/style/typography": "/framework/typography",
   "/style/content": "/framework/content",
   "/motion/scroll": "/framework/scrolling",
-  "/motion/transitions": "/framework/transitions"
+  "/motion/transitions": "/framework/transitions",
+  "/components/checkboxes": "/components/selection-controls",
+  "/components/form": "/components/forms",
+  "/components/radios": "/components/selection-controls",
+  "/components/slide-toggles": "/components/selection-controls",
+  "/components/buttons-and-indicators": "/components/buttons",
+  "/components/progress-circular": "/components/progress",
+  "/components/progress-linear": "/components/progress"
 }

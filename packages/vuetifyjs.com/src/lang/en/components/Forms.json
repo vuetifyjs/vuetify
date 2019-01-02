@@ -3,19 +3,23 @@
   "headerText": "When it comes to form validation, Vuetify has a multitude of integrations and baked in functionality. Want to use a 3rd party validation plugin? Out of the box you can use [Vee-validate](https://github.com/baianat/Vee-validate) and [vuelidate](https://github.com/monterail/vuelidate).",
   "examples": {
     "usage": {
-      "desc": "The internal `v-form` component makes it easy to add validation to form inputs. All input components have a `rules` prop which takes an array of functions. Whenever the value of an input is changed, each function in the array will receive the new value. If a function returns false or a string, validation has failed."
+      "desc": "The internal `v-form` component makes it easy to add validation to form inputs. All input components have a `rules` prop which takes an array of functions. These functions allow you to specify conditions in which the field is _valid_ or _invalid_. Whenever the value of an input is changed, each function in the array will receive the new value. If a function returns false or a string, validation has failed."
+    },
+    "rules": {
+      "header": "### Creating rules",
+      "desc": "Rules allow you to apply custom validation on all form components. These are validated sequentially and will display a **maximum** of 1 error at a time, so make sure you order your rules accordingly."
     },
     "validationWithSubmitAndClear": {
       "header": "### Validation with submit & clear",
-      "desc": "The `v-form` component has two functions that can be accessed by setting a ref on the component. `validate()` will validate all inputs and return if they are all valid or not. `reset()` will clear validation errors from all inputs."
+      "desc": "The `v-form` component has **three** functions that can be accessed by setting a _ref_ on the component. A ref allows us to access internal methods on a component, for example, `<v-form ref=\"form\">`. **this.$refs.form.validate()** will validate all inputs and return if they are all valid or not. **this.$refs.form.reset()** will clear validation errors from all inputs. **this.$refs.form.resetValidation()** will only reset input validation and not alter their state."
     },
     "vuelidate": {
       "header": "### Vuelidate",
-      "desc": ""
+      "desc": "**vuelidate** is a simple, lightweight model-based validation for Vue.js. [Documentation](https://monterail.github.io/vuelidate/#getting-started)"
     },
     "veeValidate": {
       "header": "### Vee-validate",
-      "desc": "Vee-validate is another validation plugin that allows you to check your forms. One caveat is that you must add the **type=\"checkbox\"** to properly validate a `v-checkbox` when using the **value** prop."
+      "desc": "**vee-validate** is a template Based Validation Framework for Vue.js. [Documentation](https://baianat.github.io/vee-validate/)"
     }
   },
   "props": {
@@ -23,7 +27,8 @@
     "value": "A boolean value representing the validity of the form."
   },
   "functions": {
-    "reset": "Resets validation for all inputs",
-    "validate": "Validates all inputs and returns result"
+    "reset": "Resets the state of all registered inputs (inside the form) to **[ ]** for arrays and **null** for all other values. Resets errors bag when using the **lazy-validation** prop.",
+    "resetValidation": "Resets the state of all registered inputs without modifying their state",
+    "validate": "Validates all registered inputs. Returns **true** if successful and **false** if not"
   }
 }

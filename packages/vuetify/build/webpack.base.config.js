@@ -18,6 +18,13 @@ const cssLoaders = [
   { loader: 'stylus-loader', options: { sourceMap: !isProd } }
 ]
 
+const scssLoaders = [
+  extractCSS ? MiniCssExtractPlugin.loader : 'style-loader',
+  { loader: 'css-loader' },
+  { loader: 'postcss-loader', options: { sourceMap: !isProd } },
+  { loader: 'sass-loader' }
+]
+
 const plugins = [
   new FriendlyErrorsWebpackPlugin({
     clearConsole: true
@@ -41,6 +48,10 @@ exports.config = {
       {
         test: /\.styl(us)?$/,
         use: cssLoaders
+      },
+      {
+        test: /\.scss$/,
+        use: scssLoaders
       }
     ]
   },

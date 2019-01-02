@@ -7,19 +7,6 @@
       "children": [
         {
           "type": "heading",
-          "lang": "header2"
-        },
-        {
-          "type": "text",
-          "lang": "headerText2"
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "children": [
-        {
-          "type": "heading",
           "lang": "importHeader"
         },
         {
@@ -147,14 +134,6 @@
         {
           "type": "text",
           "lang": "loaderLimitationsFunctionalText1"
-        },
-        {
-          "type": "heading",
-          "lang": "loaderLimitationsPugHeader"
-        },
-        {
-          "type": "text",
-          "lang": "loaderLimitationsPugText1"
         }
       ]
     },

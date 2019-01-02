@@ -8,6 +8,7 @@
   >
     <v-btn
       slot="activator"
+      :aria-label="$t('Vuetify.AppToolbar.support')"
       flat
       style="min-width: 48px"
     >
@@ -25,6 +26,7 @@
         :key="support.text"
         target="_blank"
         rel="noopener"
+        @click="$ga.event('toolbar', 'click', 'support', support.href)"
       >
         <v-list-tile-action>
           <v-icon

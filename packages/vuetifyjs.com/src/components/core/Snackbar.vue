@@ -20,7 +20,7 @@
         {{ computedIcon }}
       </v-icon>
       <doc-markdown
-        :source="snackbar.msg"
+        :code="snackbar.msg"
         class="snack-markdown"
       />
       <v-spacer />
@@ -38,6 +38,7 @@
       <v-btn
         v-if="snackbar.close"
         :ripple="false"
+        :aria-label="$t('Vuetify.Snackbar.close')"
         icon
         class="ml-3"
         @click="markViewed"

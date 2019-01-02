@@ -71,5 +71,10 @@
       "mandatory": "Components.ItemGroups.props.mandatory",
       "multiple": "Components.ItemGroups.props.multiple"
     }
+  },
+  "events": {
+    "v-btn-toggle": {
+      "change": "Components.Inputs.events.change"
+    }
   }
 }

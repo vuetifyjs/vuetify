@@ -1,13 +1,16 @@
 <template>
   <v-container
+    v-if="structure !== false"
     id="page"
-    fluid
   >
     <template v-if="structure">
-      <doc-heading>
+      <doc-heading v-if="structure.title">
         {{ structure.title }}
       </doc-heading>
-      <div class="mb-5">
+      <div
+        v-if="structure.titleText"
+        class="mb-5"
+      >
         <doc-text
           v-if="structure.titleText"
           class="mb-4"
@@ -26,6 +29,7 @@
       <doc-contribution />
     </template>
   </v-container>
+  <not-found v-else />
 </template>
 
 <script>
@@ -38,8 +42,11 @@
   import camelCase from 'lodash/camelCase'
   import upperFirst from 'lodash/upperFirst'
 
-  // TODO: This is where 404 redirect will occur
   export default {
+    components: {
+      NotFound: () => import('@/pages/general/404')
+    },
+
     provide () {
       return {
         namespace: upperFirst(camelCase(this.namespace)),
@@ -86,13 +93,9 @@
       ).then(res => {
         this.structure = res.default
       }).catch(() => {
-        // Add 404
         this.structure = false
-        this.$router.push({ name: '404' })
         throw new Error(`Unable to find page for <${namespace}/${page}>`)
-      }).finally(() => {
-        this.$nextTick(this.setIsLoading)
-      })
+      }).finally(() => this.setIsLoading(false))
     },
 
     mounted () {
@@ -129,3 +132,9 @@
     }
   }
 </script>
+
+<style>
+#page {
+  max-width: 1185px;
+}
+</style>

@@ -490,27 +490,27 @@ module.exports = {
     ],
     functions: [
       {
-        name: 'title-date-format',
+        name: 'titleDateFormat',
         signature: '(date: string, locale: string): string'
       },
       {
-        name: 'day-format',
+        name: 'dayFormat',
         signature: '(date: string, locale: string): string'
       },
       {
-        name: 'header-date-format',
+        name: 'headerDateFormat',
         signature: '(date: string, locale: string): string'
       },
       {
-        name: 'month-format',
+        name: 'monthFormat',
         signature: '(date: string, locale: string): string'
       },
       {
-        name: 'year-format',
+        name: 'yearFormat',
         signature: '(date: string, locale: string): string'
       },
       {
-        name: 'allowed-dates',
+        name: 'allowedDates',
         signature: '(date: string): boolean'
       }
     ]
@@ -626,6 +626,10 @@ module.exports = {
         signature: '(): void'
       },
       {
+        name: 'resetValidation',
+        signature: '(): void'
+      },
+      {
         name: 'validate',
         signature: '(): boolean'
       }
@@ -723,7 +727,7 @@ module.exports = {
         value: 'void'
       },
       {
-        name: 'right',
+        name: 'previous',
         value: 'void'
       }
     ]
@@ -756,15 +760,6 @@ module.exports = {
   },
   'v-snackbar': {
     slots: ['default']
-  },
-  'v-sparkline': {
-    props: [
-      {
-        name: 'type',
-        type: "'trend' | 'bar'",
-        default: "'trend'"
-      }
-    ]
   },
   'v-select': VSelect,
   'v-slider': {

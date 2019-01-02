@@ -88,6 +88,10 @@
     {
       "q": "### How do a report a bug or request a feature",
       "a": "In order to ensure all required information is provided, we have created an [Issue Generator](https://issues.vuetifyjs.com) that helps you through the process. Any issue created not using the generator will automatically be closed, so please use it."
+    },
+    {
+      "q": "### The vuetify-loader doesn't load all components",
+      "a": "The vuetify-loader has limitations in _dynamic_ components. Make sure to checkout the [limitations](/framework/a-la-carte#limitations) section for more information."
     }
   ]
 }

@@ -56,6 +56,7 @@
         :key="social.text"
         target="_blank"
         rel="noopener"
+        @click="$ga.event('toolbar', 'click', 'support', social.href)"
       >
         <v-list-tile-action>
           <v-icon
@@ -79,6 +80,11 @@
           text: vm.$t('Vuetify.AppToolbar.themeGenerator'),
           icon: 'mdi-format-paint',
           href: 'https://theme-generator.vuetifyjs.com'
+        },
+        {
+          text: 'vuetify-loader',
+          icon: 'mdi-package-variant-closed',
+          href: 'https://github.com/vuetifyjs/vuetify-loader'
         },
         {
           text: vm.$t('Vuetify.AppToolbar.cognito'),
