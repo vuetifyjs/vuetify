@@ -158,7 +158,10 @@ export default baseMixins.extend<options>().extend({
   },
 
   created () {
+    /* istanbul ignore next */
     if (this.flat) deprecate('flat', 'text', this)
+
+    /* istanbul ignore next */
     if (this.icon as any === '' || typeof this.icon === 'boolean') {
       this.hasDeprecatedIcon = true
       deprecate('icon', 'fab flat')

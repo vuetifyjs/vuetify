@@ -27,7 +27,7 @@ describe('VBtn.js', () => {
     localVue.use(Router)
 
     mountFunction = (options = {}) => {
-      return shallowMount(VBtn, {
+      return mount(VBtn, {
         localVue,
         router,
         ...options
@@ -49,7 +49,7 @@ describe('VBtn.js', () => {
     expect(mountFunction({
       propsData: {
         color: 'green darken-1',
-        flat: true
+        text: true
       }
     }).html()).toMatchSnapshot()
   })
@@ -123,12 +123,11 @@ describe('VBtn.js', () => {
     })
 
     const click = jest.fn()
-    const link = wrapper.find('a')
     wrapper.vm.$on('click', click)
-    link.trigger('click')
+    wrapper.trigger('click')
 
     wrapper.setProps({ href: undefined, to: '/foo' })
-    link.trigger('click')
+    wrapper.trigger('click')
 
     expect(click.mock.calls.length).toBe(2)
   })
@@ -141,8 +140,7 @@ describe('VBtn.js', () => {
       }
     })
 
-    const link = wrapper.find('button')
-    expect(link.classes('foo')).toBe(true)
+    expect(wrapper.classes('foo')).toBe(true)
   })
 
   it('should have v-btn--depressed class when using depressed prop', () => {
@@ -159,11 +157,11 @@ describe('VBtn.js', () => {
     const wrapper = mountFunction({
       propsData: {
         depressed: true,
-        flat: true
+        text: true
       }
     })
 
-    expect(wrapper.classes('v-btn--flat')).toBe(true)
+    expect(wrapper.classes('v-btn--text')).toBe(true)
   })
 
   it('should have v-btn--outline and v-btn--depressed classes when using outline prop', () => {
@@ -175,5 +173,65 @@ describe('VBtn.js', () => {
 
     expect(wrapper.classes('v-btn--outline')).toBe(true)
     expect(wrapper.classes('v-btn--depressed')).toBe(true)
+  })
+
+  it('should have the correct icon classes', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        icon: 'left'
+      }
+    })
+    expect(wrapper.classes('v-btn--icon')).toBe(true)
+    expect(wrapper.classes('v-btn--icon-left')).toBe(true)
+
+    wrapper.setProps({ icon: 'right' })
+
+    expect(wrapper.classes('v-btn--icon')).toBe(true)
+    expect(wrapper.classes('v-btn--icon-right')).toBe(true)
+  })
+
+  it('should have the correct elevation', async () => {
+    const wrapper = mountFunction()
+    expect(wrapper.classes('elevation-2')).toBe(true)
+
+    wrapper.setProps({ disabled: true })
+    expect(wrapper.classes('elevation-2')).toBe(false)
+    expect(wrapper.classes('v-btn--disabled')).toBe(true)
+
+    wrapper.setProps({ disabled: false, elevation: 24 })
+    expect(wrapper.classes('elevation-24')).toBe(true)
+
+    wrapper.setProps({ elevation: 2 })
+    expect(wrapper.classes('elevation-2')).toBe(true)
+
+    wrapper.trigger('mousedown')
+    expect(wrapper.classes('elevation-8')).toBe(true)
+
+    wrapper.trigger('mouseup')
+    expect(wrapper.classes('elevation-2')).toBe(true)
+
+    wrapper.trigger('mouseenter')
+    await new Promise(resolve => setTimeout(resolve, 0))
+    expect(wrapper.classes('elevation-4')).toBe(true)
+    expect(wrapper.vm.hasHover).toBe(true)
+    wrapper.trigger('mouseleave')
+    await new Promise(resolve => setTimeout(resolve, 0))
+    expect(wrapper.vm.hasHover).toBe(false)
+
+    wrapper.setProps({ fab: true })
+    expect(wrapper.classes('elevation-6')).toBe(true)
+
+    wrapper.trigger('mousedown')
+    expect(wrapper.classes('elevation-12')).toBe(true)
+
+    wrapper.trigger('mouseup')
+    expect(wrapper.classes('elevation-6')).toBe(true)
+
+    wrapper.trigger('mouseenter')
+    await new Promise(resolve => setTimeout(resolve, 0))
+    expect(wrapper.classes('elevation-8')).toBe(true)
+    wrapper.trigger('mouseleave')
+    await new Promise(resolve => setTimeout(resolve, 0))
+    expect(wrapper.vm.hasHover).toBe(false)
   })
 })
