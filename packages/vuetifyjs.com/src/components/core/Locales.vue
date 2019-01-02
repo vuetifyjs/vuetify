@@ -2,15 +2,14 @@
   <v-menu
     attach
     bottom
-    lazy
     left
     offset-y
   >
     <v-btn
       slot="activator"
+      :aria-label="$t('Vuetify.AppToolbar.translations')"
       flat
       style="min-width: 48px"
-      aria-label="Translations"
     >
       <v-img
         :src="`https://cdn.vuetifyjs.com/images/flags/${currentLanguage.country}.png`"
