@@ -34,5 +34,10 @@
     "name": "日本語",
     "locale": "ja-JP",
     "country": "jp"
+  },
+  {
+    "name": "Crowdin",
+    "locale": "eo-UY",
+    "country": "uy"
   }
 ]

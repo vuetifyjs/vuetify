@@ -131,8 +131,20 @@ function render (req, res) {
     res,
     hreflangs: availableLanguages.reduce((acc, lang) => {
       return acc + `<link rel="alternate" hreflang="${lang}" href="https://${req.hostname}/${lang}${req.params[1]}" />`
-    }, '')
+    }, ''),
+    crowdin: ''
   }
+
+  if (process.env.TRANSLATE) {
+    context.crowdin = `
+    <script type="text/javascript">
+      var _jipt = [];
+      _jipt.push(['project', 'vuetify']);
+    </script>
+    <script type="text/javascript" src="//cdn.crowdin.com/jipt/jipt.js"></script>
+    `
+  }
+
   renderer.renderToString(context, (err, html) => {
     if (err) {
       return handleError(err)
