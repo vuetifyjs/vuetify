@@ -177,6 +177,10 @@
       ).then(this.init)
     },
 
+    destroyed () {
+      this.docSearch.autocomplete.autocomplete.close()
+    },
+
     methods: {
       genChip,
       ...mapMutations('app', ['setDrawer']),
