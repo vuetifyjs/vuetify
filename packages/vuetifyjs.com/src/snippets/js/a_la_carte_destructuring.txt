@@ -1,0 +1,11 @@
+// .vue files
+
+import { VCard, VCardText, VCardMedia } from 'vuetify/lib'
+
+export default {
+  components: {
+    VCard,
+    VCardText,
+    VCardMedia
+  }
+}

@@ -17,6 +17,22 @@ test('VTimePickerClock.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should render disabled component', () => {
+    const wrapper = mount(VTimePickerClock, {
+      propsData: {
+        allowedValues: n => n % 2,
+        disabled: true,
+        max: 59,
+        min: 0,
+        size: 280,
+        step: 5,
+        value: 10
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it('should render component with double prop', () => {
     const wrapper = mount(VTimePickerClock, {
       propsData: {

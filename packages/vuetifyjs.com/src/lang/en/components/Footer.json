@@ -1,21 +1,20 @@
 {
-  "header": "Footer",
+  "header": "# Footer",
   "headerText": "The `v-footer` component is used for displaying general information that a user might want to access from any page within your site.",
   "examples": {
-    "default": {
-      "header": "Default",
+    "usage": {
       "desc": "The footer component is just a basic container."
     },
     "companyFooter": {
-      "header": "Company Footer",
+      "header": "### Company Footer",
       "desc": "The footer component as a basic company footer with links."
     },
     "indigoFooter": {
-      "header": "Indigo Footer",
+      "header": "### Indigo Footer",
       "desc": "The footer component with Indigo background color and social media icons and button."
     },
     "tealFooter": {
-      "header": "Teal Footer",
+      "header": "### Teal Footer",
       "desc": "The footer component with a Teal color header and columns and rows of links."
     }
   },

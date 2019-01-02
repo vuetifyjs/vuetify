@@ -146,7 +146,8 @@ export default mixins<options &
       staticClass: 'v-expansion-panel__container',
       class: this.containerClasses,
       attrs: {
-        tabindex: this.isReadonly || this.isDisabled ? null : 0
+        tabindex: this.isReadonly || this.isDisabled ? null : 0,
+        'aria-expanded': Boolean(this.isActive)
       },
       on: {
         keydown: this.onKeydown

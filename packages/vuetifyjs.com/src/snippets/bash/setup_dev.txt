@@ -1,0 +1,14 @@
+// Clone your forked repo
+$ git clone <forked-vuetify-repo>
+
+// Change to your new vuetify directory
+$ cd vuetify
+
+// Checkout the branch you are working on
+$ git checkout <branch name>
+
+// Install dependencies 
+$ yarn
+
+// Build
+$ yarn build

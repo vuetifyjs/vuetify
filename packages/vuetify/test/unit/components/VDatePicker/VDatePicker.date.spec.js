@@ -11,7 +11,7 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
     })
 
     const title = wrapper.find('.v-date-picker-title__date')[0]
-    const header = wrapper.find('.v-date-picker-header__value strong')[0]
+    const header = wrapper.find('.v-date-picker-header__value div')[0]
 
     expect(title.text()).toBe('Tue, Nov 1')
     expect(header.text()).toBe('November 2005')
@@ -45,6 +45,17 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
       propsData: {
         value: '2013-05-07',
         readonly: true
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render disabled picker', () => {
+    const wrapper = mount(VDatePicker, {
+      propsData: {
+        value: '2013-05-07',
+        disabled: true
       }
     })
 
@@ -291,7 +302,7 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const [leftButton, rightButton] = wrapper.find('.v-date-picker-header button')
+    const [leftButton, rightButton] = wrapper.find('.v-date-picker-header button.v-btn')
 
     leftButton.trigger('click')
     expect(wrapper.vm.tableDate).toBe('2005-10')
@@ -307,7 +318,7 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
       }
     })
 
-    const button = wrapper.find('.v-date-picker-header strong')[0]
+    const button = wrapper.find('.v-date-picker-header__value button')[0]
 
     button.trigger('click')
     expect(wrapper.vm.activePicker).toBe('MONTH')
@@ -539,5 +550,24 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
     wrapper.vm.$nextTick()
     expect(change).not.toBeCalled()
     expect(input).not.toBeCalled()
+  })
+
+  it('should emit click/dblclick:date event', async () => {
+    const wrapper = mount(VDatePicker, {
+      propsData: {
+        value: '2013-05-20',
+        type: 'date'
+      }
+    })
+
+    const click = jest.fn()
+    wrapper.vm.$on(`click:date`, click)
+    wrapper.find('.v-date-picker-table--date tbody tr+tr td:first-child button')[0].trigger('click')
+    expect(click).toBeCalledWith('2013-05-05')
+
+    const dblclick = jest.fn()
+    wrapper.vm.$on(`dblclick:date`, dblclick)
+    wrapper.find('.v-date-picker-table--date tbody tr+tr td:first-child button')[0].trigger('dblclick')
+    expect(dblclick).toBeCalledWith('2013-05-05')
   })
 })

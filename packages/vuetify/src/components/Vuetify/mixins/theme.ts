@@ -8,7 +8,7 @@ const THEME_DEFAULTS = {
   error: '#FF5252',     // red.accent2
   info: '#2196F3',      // blue.base
   success: '#4CAF50',   // green.base
-  warning: '#FFC107'    // amber.base
+  warning: '#FB8C00'    // orange.darken1
 }
 
 export default function theme (theme: VuetifyUseOptions['theme'] = {}): VuetifyTheme | false {

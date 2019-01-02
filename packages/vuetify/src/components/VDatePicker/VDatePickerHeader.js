@@ -40,6 +40,7 @@ export default {
       type: String,
       default: '$vuetify.icons.prev'
     },
+    readonly: Boolean,
     value: {
       type: [Number, String],
       required: true
@@ -104,12 +105,13 @@ export default {
     },
     genHeader () {
       const color = !this.disabled && (this.color || 'accent')
-      const header = this.$createElement('strong', this.setTextColor(color, {
-        key: String(this.value),
+      const header = this.$createElement('div', this.setTextColor(color, {
+        key: String(this.value)
+      }), [this.$createElement('button', {
         on: {
           click: () => this.$emit('toggle')
         }
-      }), [this.$slots.default || this.formatter(String(this.value))])
+      }, [this.$slots.default || this.formatter(String(this.value))])])
 
       const transition = this.$createElement('transition', {
         props: {
@@ -129,7 +131,10 @@ export default {
   render () {
     return this.$createElement('div', {
       staticClass: 'v-date-picker-header',
-      class: this.themeClasses
+      class: {
+        'v-date-picker-header--disabled': this.disabled,
+        ...this.themeClasses
+      }
     }, [
       this.genBtn(-1),
       this.genHeader(),

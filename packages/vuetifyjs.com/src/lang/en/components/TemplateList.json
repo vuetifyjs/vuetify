@@ -19,7 +19,7 @@
   },
   "webpackSSR": {
     "title": "Webpack SSR",
-    "desc": "This template is for advanced users looking to utilize the new Vue SSR (server-side rendering). Based off of the structure in the Vue.js 2 <a class=\"white--text\" href=\"https://github.com/vuejs/vue-hackernews-2.0\" target=\"_blank\" rel=\"noopener\">Hackernews</a> repository. The Vuetify.js SSR template provides next generation functionality for advanced Vue applications."
+    "desc": "This template is for advanced users looking to utilize the new Vue SSR (server-side rendering). Based off of the structure in the Vue.js 2 [Hackernews](https://github.com/vuejs/vue-hackernews-2.0) repository. The Vuetify.js SSR template provides next generation functionality for advanced Vue applications."
   },
   "nuxt": {
     "title": "NUXT",

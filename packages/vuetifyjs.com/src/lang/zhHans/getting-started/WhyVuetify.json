@@ -27,7 +27,7 @@
   "designHeader": "设计原则",
   "designText": "Vuetify完全根据Material Design规范开发。每个组件都是手工制作的，为您的下一个伟大的应用程序带来最好的UI工具。开发并没有停留在Google规范中的核心组件上。通过社区成员和赞助商的支持，更多的组件将被设计并提供给大家享受。",
   "communityHeader": "充满活力的社区",
-  "communityText": "用Vuetify开发意味着你永远不会孤单。可通过官方Discord服务上的开发团队和其他社区成员立即获得帮助。找机会与有才能的人交谈，希望你在努力中取得成功。需要高级支持？成为一个<a href=\"https://www.patreon.com/vuetify\" target=\"_blank\" rel=\"noopener\">Patreon 支持者</a>并访问 #patron 或 #elite-patron 支持渠道。",
+  "communityText": "用Vuetify开发意味着你永远不会孤单。可通过官方Discord服务上的开发团队和其他社区成员立即获得帮助。找机会与有才能的人交谈，希望你在努力中取得成功。需要高级支持？成为一个[Patreon 支持者](https://www.patreon.com/vuetify)并访问 #patron 或 #elite-patron 支持渠道。",
   "comparisonHeader": "对比其它框架",
   "comparisonText": "Vuetify不是唯一的Vue Material框架。许多其他有才华的开发人员在Google的Material Design规范下创建了一些令人惊叹的应用程序。每个人都提供了他们自己独特的发展和过程，但是，这里有一些事情跟Vuetify不同：",
   "featuresHeader": "你能获得的:",

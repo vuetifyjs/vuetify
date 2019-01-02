@@ -1,0 +1,7 @@
+// src/plugins/vuetify.js
+
+Vue.use(Vuetify, {
+  options: {
+    cspNonce: 'dQw4w9WgXcQ'
+  }
+})

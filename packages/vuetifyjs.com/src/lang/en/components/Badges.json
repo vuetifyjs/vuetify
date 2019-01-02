@@ -1,25 +1,24 @@
 {
-  "header": "Badge",
+  "header": "# Badge",
   "headerText": "The `v-badge` component can wrap any type of content to highlight information to a user or to just draw attention to a specific element.",
   "examples": {
-    "character": {
-      "header": "Character",
+    "usage": {
       "desc": "Any element can be used with a badge."
     },
     "overlap": {
-      "header": "Overlap",
+      "header": "### Overlap",
       "desc": "The badge will overlap its content when using the `overlap` prop"
     },
     "inline": {
-      "header": "Inline",
+      "header": "### Inline",
       "desc": "Badges can also be placed inline with text."
     },
     "icon": {
-      "header": "Icon",
+      "header": "### Icon",
       "desc": "The badge can use all of the currently supported icon sets."
     },
     "visibility": {
-      "header": "Visibility",
+      "header": "### Visibility",
       "desc": "The visibility of badges can be controlled using `v-model`."
     }
   },

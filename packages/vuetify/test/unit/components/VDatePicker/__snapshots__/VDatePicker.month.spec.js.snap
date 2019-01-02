@@ -163,9 +163,11 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
           </div>
         </button>
         <div class="v-date-picker-header__value">
-          <strong class="primary--text">
-            2005
-          </strong>
+          <div class="primary--text">
+            <button>
+              2005
+            </button>
+          </div>
         </div>
         <button type="button"
                 class="v-btn v-btn--icon theme--light"
@@ -339,9 +341,11 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
           </div>
         </button>
         <div class="v-date-picker-header__value">
-          <strong class="orange--text text--darken-1">
-            2005
-          </strong>
+          <div class="orange--text text--darken-1">
+            <button>
+              2005
+            </button>
+          </div>
         </div>
         <button type="button"
                 class="v-btn v-btn--icon theme--light"
@@ -638,9 +642,11 @@ exports[`VDatePicker.js should match snapshot with pick-month prop 1`] = `
           </div>
         </button>
         <div class="v-date-picker-header__value">
-          <strong class="accent--text">
-            2013
-          </strong>
+          <div class="accent--text">
+            <button>
+              2013
+            </button>
+          </div>
         </div>
         <button type="button"
                 class="v-btn v-btn--icon theme--light"

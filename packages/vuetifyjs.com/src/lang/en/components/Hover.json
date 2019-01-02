@@ -1,13 +1,13 @@
 {
-  "header": "Hover",
+  "header": "# Hover",
   "headerText": "The `v-hover` component provides a clean interface for handling hover states for any component.",
   "examples": {
-    "default": {
+    "usage": {
       "desc": "Easily change the elevation of a card."
     },
     "transition": {
       "header": "Transitions",
-      "desc": "Create highly customized components that respond to user interaction."
+      "desc": "### Create highly customized components that respond to user interaction."
     }
   },
   "props": {

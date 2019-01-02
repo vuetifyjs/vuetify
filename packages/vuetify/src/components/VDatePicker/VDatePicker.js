@@ -26,13 +26,14 @@ export default {
       type: Function,
       default: null
     },
+    disabled: Boolean,
     events: {
-      type: [Array, Object, Function],
+      type: [Array, Function, Object],
       default: () => null
     },
     eventColor: {
-      type: [String, Function, Object],
-      default: 'warning'
+      type: [Array, Function, Object, String],
+      default: () => 'warning'
     },
     firstDayOfWeek: {
       type: [String, Number],
@@ -71,6 +72,7 @@ export default {
       type: [Boolean, String],
       default: true
     },
+    showWeek: Boolean,
     // Function formatting currently selected date in the picker title
     titleDateFormat: {
       type: Function,
@@ -273,7 +275,9 @@ export default {
         this.tableDate = `${value}-${pad(this.tableMonth + 1)}`
       }
       this.activePicker = 'MONTH'
-      this.reactive && !this.multiple && this.isDateAllowed(this.inputDate) && this.$emit('input', this.inputDate)
+      if (this.reactive && !this.readonly && !this.multiple && this.isDateAllowed(this.inputDate)) {
+        this.$emit('input', this.inputDate)
+      }
     },
     monthClick (value) {
       this.inputYear = parseInt(value.split('-')[0], 10)
@@ -281,7 +285,9 @@ export default {
       if (this.type === 'date') {
         this.tableDate = value
         this.activePicker = 'DATE'
-        this.reactive && !this.multiple && this.isDateAllowed(this.inputDate) && this.$emit('input', this.inputDate)
+        if (this.reactive && !this.readonly && !this.multiple && this.isDateAllowed(this.inputDate)) {
+          this.$emit('input', this.inputDate)
+        }
       } else {
         this.emitInput(this.inputDate)
       }
@@ -296,15 +302,14 @@ export default {
       return this.$createElement(VDatePickerTitle, {
         props: {
           date: this.value ? this.formatters.titleDate(this.value) : '',
+          disabled: this.disabled,
+          readonly: this.readonly,
           selectingYear: this.activePicker === 'YEAR',
           year: this.formatters.year(this.value ? `${this.inputYear}` : this.tableDate),
           yearIcon: this.yearIcon,
           value: this.multiple ? this.value[0] : this.value
         },
         slot: 'title',
-        style: this.readonly ? {
-          'pointer-events': 'none'
-        } : undefined,
         on: {
           'update:selectingYear': value => this.activePicker = value ? 'YEAR' : this.type.toUpperCase()
         }
@@ -316,13 +321,14 @@ export default {
           nextIcon: this.nextIcon,
           color: this.color,
           dark: this.dark,
-          disabled: this.readonly,
+          disabled: this.disabled,
           format: this.headerDateFormat,
           light: this.light,
           locale: this.locale,
           min: this.activePicker === 'DATE' ? this.minMonth : this.minYear,
           max: this.activePicker === 'DATE' ? this.maxMonth : this.maxYear,
           prevIcon: this.prevIcon,
+          readonly: this.readonly,
           value: this.activePicker === 'DATE' ? `${this.tableYear}-${pad(this.tableMonth + 1)}` : `${this.tableYear}`
         },
         on: {
@@ -338,7 +344,7 @@ export default {
           color: this.color,
           current: this.current,
           dark: this.dark,
-          disabled: this.readonly,
+          disabled: this.disabled,
           events: this.events,
           eventColor: this.eventColor,
           firstDayOfWeek: this.firstDayOfWeek,
@@ -347,15 +353,19 @@ export default {
           locale: this.locale,
           min: this.min,
           max: this.max,
-          tableDate: `${this.tableYear}-${pad(this.tableMonth + 1)}`,
+          readonly: this.readonly,
           scrollable: this.scrollable,
+          showWeek: this.showWeek,
+          tableDate: `${this.tableYear}-${pad(this.tableMonth + 1)}`,
           value: this.value,
           weekdayFormat: this.weekdayFormat
         },
         ref: 'table',
         on: {
           input: this.dateClick,
-          tableDate: value => this.tableDate = value
+          tableDate: value => this.tableDate = value,
+          'click:date': value => this.$emit('click:date', value),
+          'dblclick:date': value => this.$emit('dblclick:date', value)
         }
       })
     },
@@ -366,12 +376,15 @@ export default {
           color: this.color,
           current: this.current ? this.sanitizeDateString(this.current, 'month') : null,
           dark: this.dark,
-          disabled: this.readonly,
+          disabled: this.disabled,
+          events: this.type === 'month' ? this.events : null,
+          eventColor: this.type === 'month' ? this.eventColor : null,
           format: this.monthFormat,
           light: this.light,
           locale: this.locale,
           min: this.minMonth,
           max: this.maxMonth,
+          readonly: this.readonly && this.type === 'month',
           scrollable: this.scrollable,
           value: this.selectedMonths,
           tableDate: `${this.tableYear}`
@@ -379,7 +392,9 @@ export default {
         ref: 'table',
         on: {
           input: this.monthClick,
-          tableDate: value => this.tableDate = value
+          tableDate: value => this.tableDate = value,
+          'click:month': value => this.$emit('click:month', value),
+          'dblclick:month': value => this.$emit('dblclick:month', value)
         }
       })
     },
@@ -407,10 +422,7 @@ export default {
       ]
 
       return this.$createElement('div', {
-        key: this.activePicker,
-        style: this.readonly ? {
-          'pointer-events': 'none'
-        } : undefined
+        key: this.activePicker
       }, children)
     },
     // Adds leading zero to month/day if necessary, returns 'YYYY' if type = 'year',
