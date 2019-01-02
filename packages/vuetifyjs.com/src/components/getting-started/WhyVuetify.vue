@@ -119,7 +119,7 @@
           more: 'https://material.io/design/'
         },
         {
-          color: 'red lighten-2',
+          color: 'red darken-3',
           title: vm.$t('GettingStarted.WhyVuetify.continuous'),
           subtitle: vm.$t('GettingStarted.WhyVuetify.updates'),
           caption: vm.$t('GettingStarted.WhyVuetify.updatesCaption'),
@@ -127,7 +127,7 @@
           more: 'https://github.com/vuetifyjs/vuetify/releases'
         },
         {
-          color: 'teal',
+          color: 'teal darken-2',
           title: vm.$t('GettingStarted.WhyVuetify.amazing'),
           subtitle: vm.$t('GettingStarted.WhyVuetify.support'),
           caption: vm.$t('GettingStarted.WhyVuetify.supportCaption'),

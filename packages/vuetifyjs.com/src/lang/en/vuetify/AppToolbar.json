@@ -17,6 +17,7 @@
   "issues": "Github issue board",
   "latest": "Latest releases",
   "medium": "Medium publication",
+  "menu": "Menu",
   "quickLinks": "Quick links",
   "reddit": "Reddit",
   "social": "Social",
@@ -25,5 +26,6 @@
   "support": "Support",
   "themeGenerator": "Theme generator",
   "themes": "Themes",
+  "translations": "Translations",
   "twitter": "Twitter"
 }

@@ -1,5 +1,6 @@
 <template>
   <v-card
+    v-if="featured.length > 0"
     class="text-xs-center py-4"
     flat
   >
@@ -73,22 +74,36 @@
       }
     },
 
+    // TODO: Remove when v-img
+    // supports lazy loading
     mounted () {
-      fetch('https://madewithvuejs.com/api/tag/vuetify', {
-        method: 'get',
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Content-Type': 'application/json'
-        }
-      })
-        .then(res => res.json())
-        .then(res => {
-          this.featured = this.setFeatured(res)
-        })
-        .catch(err => console.log(err))
+      window.addEventListener('scroll', this.init, { passive: true })
+    },
+
+    beforeDestroy () {
+      this.removeListener()
     },
 
     methods: {
+      removeListener () {
+        window.removeEventListener('scroll', this.init, { passive: true })
+      },
+      init () {
+        this.removeListener()
+
+        fetch('https://madewithvuejs.com/api/tag/vuetify', {
+          method: 'get',
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json'
+          }
+        })
+          .then(res => res.json())
+          .then(res => {
+            this.featured = this.setFeatured(res)
+          })
+          .catch(err => console.log(err))
+      },
       setFeatured (data) {
         if (!data) return []
         const featured = data.data.map(f => {

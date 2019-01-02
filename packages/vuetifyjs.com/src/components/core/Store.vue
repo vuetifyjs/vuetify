@@ -1,5 +1,6 @@
 <template>
   <v-btn
+    :aria-label="$t('Vuetify.AppToolbar.store')"
     flat
     style="min-width: 48px"
     href="https://store.vuetifyjs.com"
