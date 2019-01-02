@@ -84,8 +84,6 @@ describe('VBtn.js', () => {
       }
     })
 
-    expect(wrapper.is('a')).toBe(true)
-    expect(wrapper.vm.$el.getAttribute('href')).toBe('http://www.google.com')
     expect(wrapper.html()).toMatchSnapshot()
   })
 
@@ -96,7 +94,6 @@ describe('VBtn.js', () => {
       }
     })
 
-    expect(wrapper.is('a')).toBe(true)
     expect(wrapper.html()).toMatchSnapshot()
   })
 
@@ -126,11 +123,12 @@ describe('VBtn.js', () => {
     })
 
     const click = jest.fn()
+    const link = wrapper.find('a')
     wrapper.vm.$on('click', click)
-    wrapper.trigger('click')
+    link.trigger('click')
 
     wrapper.setProps({ href: undefined, to: '/foo' })
-    wrapper.trigger('click')
+    link.trigger('click')
 
     expect(click.mock.calls.length).toBe(2)
   })
@@ -143,7 +141,8 @@ describe('VBtn.js', () => {
       }
     })
 
-    expect(wrapper.classes('foo')).toBe(true)
+    const link = wrapper.find('button')
+    expect(link.classes('foo')).toBe(true)
   })
 
   it('should have v-btn--depressed class when using depressed prop', () => {

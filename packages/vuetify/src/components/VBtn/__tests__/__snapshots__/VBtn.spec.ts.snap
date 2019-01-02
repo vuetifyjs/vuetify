@@ -2,34 +2,40 @@
 
 exports[`VBtn.js should render an <a> tag when using href prop 1`] = `
 
-<a href="http://www.google.com"
-   class="v-btn theme--light"
->
-  <div class="v-btn__content">
-  </div>
-</a>
+<vuecomponent-stub>
+  <a href="http://www.google.com"
+     class="v-btn theme--light elevation-2"
+  >
+    <div class="v-btn__content">
+    </div>
+  </a>
+</vuecomponent-stub>
 
 `;
 
 exports[`VBtn.js should render component and match snapshot 1`] = `
 
-<button type="button"
-        class="v-btn theme--light"
->
-  <div class="v-btn__content">
-  </div>
-</button>
+<vuecomponent-stub>
+  <button type="button"
+          class="v-btn theme--light elevation-2"
+  >
+    <div class="v-btn__content">
+    </div>
+  </button>
+</vuecomponent-stub>
 
 `;
 
 exports[`VBtn.js should render component with color prop and match snapshot 1`] = `
 
-<button type="button"
-        class="v-btn theme--light green darken-1"
->
-  <div class="v-btn__content">
-  </div>
-</button>
+<vuecomponent-stub>
+  <button type="button"
+          class="v-btn theme--light elevation-2 green darken-1"
+  >
+    <div class="v-btn__content">
+    </div>
+  </button>
+</vuecomponent-stub>
 
 `;
 
@@ -47,7 +53,7 @@ exports[`VBtn.js should render component with color prop and match snapshot 2`] 
 exports[`VBtn.js should render component with loader and match snapshot 1`] = `
 
 <button type="button"
-        class="v-btn v-btn--loader theme--light"
+        class="v-btn v-btn--loader theme--light elevation-2"
 >
   <div class="v-btn__content">
   </div>
@@ -82,25 +88,29 @@ exports[`VBtn.js should render component with loader and match snapshot 1`] = `
 
 exports[`VBtn.js should render component with loader slot and match snapshot 1`] = `
 
-<button type="button"
-        class="v-btn v-btn--loader theme--light"
->
-  <div class="v-btn__content">
-  </div>
-  <span class="v-btn__loading">
-    <span>
-      loader
+<vuecomponent-stub>
+  <button type="button"
+          class="v-btn v-btn--loader theme--light elevation-2"
+  >
+    <div class="v-btn__content">
+    </div>
+    <span class="v-btn__loading">
+      <span>
+        loader
+      </span>
     </span>
-  </span>
-</button>
+  </button>
+</vuecomponent-stub>
 
 `;
 
 exports[`VBtn.js should render specified tag when using tag prop 1`] = `
 
-<a class="v-btn theme--light">
-  <div class="v-btn__content">
-  </div>
-</a>
+<vuecomponent-stub>
+  <a class="v-btn theme--light elevation-2">
+    <div class="v-btn__content">
+    </div>
+  </a>
+</vuecomponent-stub>
 
 `;

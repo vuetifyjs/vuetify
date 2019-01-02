@@ -7,13 +7,18 @@ import { PropValidator } from 'vue/types/options'
 import mixins, { ExtractVue } from '../../util/mixins'
 import { RippleOptions } from '../../directives/ripple'
 
+// Extensions
+import VSheet from '../VSheet'
+
 // Components
+import VHover from '../VHover'
 import VProgressCircular from '../VProgressCircular'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
 import { factory as GroupableFactory } from '../../mixins/groupable'
 import Positionable from '../../mixins/positionable'
+import Elevatable from '../../mixins/elevatable'
 import Routable from '../../mixins/routable'
 import Themeable from '../../mixins/themeable'
 import { factory as ToggleableFactory } from '../../mixins/toggleable'
@@ -23,6 +28,7 @@ import { getObjectValueByPath } from '../../util/helpers'
 
 const baseMixins = mixins(
   Colorable,
+  Elevatable,
   Routable,
   Positionable,
   Themeable,
@@ -44,6 +50,10 @@ export default baseMixins.extend<options>().extend({
     },
     block: Boolean,
     depressed: Boolean,
+    elevation: {
+      type: [Number, String],
+      default: 2
+    },
     fab: Boolean,
     flat: Boolean,
     icon: Boolean,
@@ -66,6 +76,11 @@ export default baseMixins.extend<options>().extend({
     },
     value: null as any as PropValidator<any>
   },
+
+  data: () => ({
+    hasMouseDown: false,
+    hasHover: false
+  }),
 
   computed: {
     classes (): any {
@@ -90,13 +105,25 @@ export default baseMixins.extend<options>().extend({
         'v-btn--router': this.to,
         'v-btn--small': this.small,
         'v-btn--top': this.top,
-        ...this.themeClasses
+        ...this.themeClasses,
+        ...this.groupClasses,
+        ...this.elevationClasses
       }
+    },
+    computedElevation (): string | number {
+      if (this.isFlat) return 0
+      if (this.fab) return this.hasMouseDown ? 12 : 6
+      if (this.hasMouseDown) return 8
+      if (this.hasHover) return 4
+      return this.elevation
     },
     computedRipple (): RippleOptions | boolean {
       const defaultRipple = this.icon || this.fab ? { circle: true } : true
       if (this.disabled) return false
       else return this.ripple !== null ? this.ripple : defaultRipple
+    },
+    isFlat (): boolean {
+      return this.flat || this.depressed || this.outline
     }
   },
 
@@ -160,10 +187,22 @@ export default baseMixins.extend<options>().extend({
       ? this.value
       : JSON.stringify(this.value)
 
-    if (this.btnToggle) {
-      data.ref = 'link'
-    }
+    if (this.btnToggle) data.ref = 'link'
 
-    return h(tag, setColor(this.color, data), children)
+    const render = h(tag, setColor(this.color, data), children)
+
+    if (this.isFlat) return render
+
+    this._g(render.data!, {
+      mousedown: () => (this.hasMouseDown = true),
+      mouseup: () => (this.hasMouseDown = false)
+    })
+
+    return h(VHover, {
+      props: { value: this.hasHover },
+      on: {
+        input: (val: boolean) => (this.hasHover = val)
+      }
+    }, [render])
   }
 })
