@@ -209,6 +209,7 @@
 
   .algolia-autocomplete
     flex: 1 1 auto
+    position: fixed !important
 
   .v-chip--x-small
     font-family: 'Roboto', sans-serif
