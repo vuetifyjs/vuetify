@@ -18,7 +18,9 @@ const serverInfo =
   `express/${require('express/package.json').version} ` +
   `vue-server-renderer/${require('vue-server-renderer/package.json').version}`
 
-const availableLanguages = require('./src/data/i18n/languages').map(lang => lang.locale)
+const languages = require('./src/data/i18n/languages')
+const availableLanguages = languages.map(lang => lang.locale)
+const fallbackLocale = languages.find(lang => lang.fallback === true).locale
 
 const app = express()
 
@@ -148,8 +150,8 @@ app.get(languageRegex, isProd ? render : (req, res) => {
 
 // 302 redirect for no language
 app.get('*', (req, res) => {
-  let lang = req.cookies.currentLanguage || req.acceptsLanguages(availableLanguages) || 'en'
-  if (!languageRegex.test('/' + lang)) lang = 'en'
+  let lang = req.cookies.currentLanguage || req.acceptsLanguages(availableLanguages) || fallbackLocale
+  if (!languageRegex.test('/' + lang)) lang = fallbackLocale
   res.redirect(302, `/${lang}${req.originalUrl}`)
 })
 
