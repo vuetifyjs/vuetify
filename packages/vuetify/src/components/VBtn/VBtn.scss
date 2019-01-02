@@ -1,6 +1,6 @@
 @import '../../scss/bootstrap';
 @import '../../scss/components/_ripples';
-// @import '../../scss/theme';
+@import '../../scss/settings/_theme';
 
 // first function, should move to global functions
 // does a deep map-get
@@ -31,7 +31,7 @@
     background-color: map-get($material, 'app-bar');
   }
 }
-// @include theme(button, "v-btn");
+
 
 /** Base Spec */
 .v-btn {
@@ -411,4 +411,11 @@
   &.info {
     color: map-deep-get($material-dark, 'text', 'primary');
   }
+}
+
+.v-btn.theme--light {
+  @include button($material-light);
+}
+.v-btn.theme--dark {
+  @include button($material-dark);
 }
