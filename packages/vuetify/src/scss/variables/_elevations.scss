@@ -85,12 +85,3 @@ $shadow-key-ambient: (
   23: (0px 9px 44px 8px $shadow-key-ambient-opacity),
   24: (0px 9px 46px 8px $shadow-key-ambient-opacity)
 ) !default;
-
-@mixin elevation($z, $important: false) {
-  box-shadow: map-get($shadow-key-umbra, $z), map-get($shadow-key-penumbra, $z), map-get($shadow-key-ambient, $z),  undefined ;
-}
-
-@mixin elevationTransition($duration: 280ms, $easing: cubic-bezier(0.4, 0, 0.2, 1)) {
-  transition: box-shadow $duration $easing;
-  will-change: box-shadow;
-}

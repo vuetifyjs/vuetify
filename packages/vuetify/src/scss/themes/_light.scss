@@ -1,0 +1,92 @@
+$material-light: (
+  'status-bar': (
+    'regular': #E0E0E0,
+    'lights-out': rgba(#fff, 0.7)
+  ),
+  'app-bar': #F5F5F5,
+  'background': #FAFAFA,
+  'cards': #FFFFFF,
+  'chips': (
+    'background': map-get($grey, 'lighten-2'),
+    'color': rgba(#000, 0.87)
+  ),
+  'dividers': rgba(#000, 0.12),
+  'text': (
+    'theme': #fff,
+    'primary': rgba(#000, 0.87),
+    'secondary': rgba(#000, 0.54),
+    'disabled': rgba(#000, 0.38),
+    'link': map-get($blue, 'darken-2'),
+    'link-hover': map-get($grey, 'darken-3')
+  ),
+  'icons': (
+    'active': rgba(#000, 0.54),
+    'inactive': rgba(#000, 0.38)
+  ),
+  'inputs': (
+    'box': rgba(#000, 0.04),
+    'solo-inverted': rgba(#000, 0.16),
+    'solo-inverted-focused': #424242,
+    'solo-inverted-focused-text': #fff
+  ),
+  'buttons': (
+    'disabled': rgba(#000, 0.26),
+    'focused': rgba(#000, 0.12),
+    'focused-alt': rgba(#fff, 0.6),
+    'pressed': rgba(#999, 0.4)
+  ),
+  'expansion-panels': (
+    'focus': #EEEEEE
+  ),
+  'list-tile': (
+    'hover': rgba(#000, 0.04)
+  ),
+  'selection-controls': (
+    'thumb': (
+      'inactive': map-get($grey, 'lighten-5'),
+      'disabled': map-get($grey, 'lighten-1')
+    ),
+    'track': (
+      'inactive': rgba(#000, 0.38),
+      'disabled': rgba(#000, 0.12)
+    )
+  ),
+  'slider': (
+    'active': rgba(#000, 0.38),
+    'inactive': rgba(#000, 0.26),
+    'disabled': rgba(#000, 0.26),
+    'discrete': #000
+  ),
+  'tabs': (
+    'active': rgba(#000, 0.87)
+  ),
+  'text-fields': (
+    'box': rgba(#000, 0.06),
+    'box-hover': rgba(#000, 0.12)
+  ),
+  'input-bottom-line': rgba(#000, 0.42),
+  'stepper': (
+    'active': rgba(#fff, 1),
+    'completed': rgba(#000, 0.87),
+    'hover': rgba(#000, 0.54)
+  ),
+  'table': (
+    'active': map-get($grey, 'lighten-4'),
+    'hover': map-get($grey, 'lighten-3')
+  ),
+  'picker': (
+    'body': #fff,
+    'clock': map-get($grey, 'lighten-2'),
+    'indeterminateTime': map-get($grey, 'lighten-1'),
+    'title': map-get($grey, 'lighten-2')
+  ),
+  'bg-color': #fff,
+  'fg-color': #000,
+  'text-color': #000,
+  'primary-text-percent': 0.87,
+  'secondary-text-percent': 0.54,
+  'disabledORhints-text-percent': 0.38,
+  'divider-percent': 0.12,
+  'active-icon-percent': 0.54,
+  'inactive-icon-percent': 0.38
+);
