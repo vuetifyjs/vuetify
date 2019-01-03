@@ -47,7 +47,7 @@ exports[`VOverflowBtn should use default autocomplete selections 2`] = `
       <div class="v-select__slot">
         <div class="v-select__selections">
           <button type="button"
-                  class="v-btn v-btn--flat theme--light"
+                  class="v-btn v-btn--flat theme--light v-size--default"
           >
             <div class="v-btn__content">
               foo

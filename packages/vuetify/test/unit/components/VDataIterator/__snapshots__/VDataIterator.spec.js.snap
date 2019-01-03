@@ -97,7 +97,7 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
         </div>
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--flat theme--light v-btn--icon v-btn--icon-true"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--fab v-btn--round theme--light v-size--default v-btn--icon"
                 aria-label="Previous page"
         >
           <div class="v-btn__content">
@@ -110,7 +110,7 @@ exports[`VDataIterator.js should match a snapshot - footer slot 1`] = `
         </button>
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--flat theme--light v-btn--icon v-btn--icon-true"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--fab v-btn--round theme--light v-size--default v-btn--icon"
                 aria-label="Next page"
         >
           <div class="v-btn__content">
@@ -236,7 +236,7 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
         </div>
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--flat theme--light v-btn--icon v-btn--icon-true"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--fab v-btn--round theme--light v-size--default v-btn--icon"
                 aria-label="Previous page"
         >
           <div class="v-btn__content">
@@ -249,7 +249,7 @@ exports[`VDataIterator.js should match a snapshot - no data 1`] = `
         </button>
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--flat theme--light v-btn--icon v-btn--icon-true"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--fab v-btn--round theme--light v-size--default v-btn--icon"
                 aria-label="Next page"
         >
           <div class="v-btn__content">
@@ -366,7 +366,7 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
         </div>
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--flat theme--light v-btn--icon v-btn--icon-true"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--fab v-btn--round theme--light v-size--default v-btn--icon"
                 aria-label="Previous page"
         >
           <div class="v-btn__content">
@@ -379,7 +379,7 @@ exports[`VDataIterator.js should match a snapshot - no matching records 1`] = `
         </button>
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--flat theme--light v-btn--icon v-btn--icon-true"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--fab v-btn--round theme--light v-size--default v-btn--icon"
                 aria-label="Next page"
         >
           <div class="v-btn__content">
@@ -500,7 +500,7 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
         </div>
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--flat theme--light v-btn--icon v-btn--icon-true"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--fab v-btn--round theme--light v-size--default v-btn--icon"
                 aria-label="Previous page"
         >
           <div class="v-btn__content">
@@ -513,7 +513,7 @@ exports[`VDataIterator.js should match a snapshot - with data 1`] = `
         </button>
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--flat theme--light v-btn--icon v-btn--icon-true"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--fab v-btn--round theme--light v-size--default v-btn--icon"
                 aria-label="Next page"
         >
           <div class="v-btn__content">
@@ -539,7 +539,7 @@ exports[`VDataIterator.js should match a snapshot - with data 2`] = `
   </div>
   <button disabled="disabled"
           type="button"
-          class="v-btn v-btn--disabled v-btn--flat theme--light v-btn--icon v-btn--icon-true"
+          class="v-btn v-btn--disabled v-btn--flat v-btn--fab v-btn--round theme--light v-size--default v-btn--icon"
           aria-label="Previous page"
   >
     <div class="v-btn__content">
@@ -552,7 +552,7 @@ exports[`VDataIterator.js should match a snapshot - with data 2`] = `
   </button>
   <button disabled="disabled"
           type="button"
-          class="v-btn v-btn--disabled v-btn--flat theme--light v-btn--icon v-btn--icon-true"
+          class="v-btn v-btn--disabled v-btn--flat v-btn--fab v-btn--round theme--light v-size--default v-btn--icon"
           aria-label="Next page"
   >
     <div class="v-btn__content">
@@ -657,7 +657,7 @@ exports[`VDataIterator.js should reset to page 1 when data is smaller than curre
           2-2 of 3
         </div>
         <button type="button"
-                class="v-btn v-btn--flat theme--light v-btn--icon v-btn--icon-true"
+                class="v-btn v-btn--flat v-btn--fab v-btn--round theme--light v-size--default v-btn--icon"
                 aria-label="Previous page"
         >
           <div class="v-btn__content">
@@ -669,7 +669,7 @@ exports[`VDataIterator.js should reset to page 1 when data is smaller than curre
           </div>
         </button>
         <button type="button"
-                class="v-btn v-btn--flat theme--light v-btn--icon v-btn--icon-true"
+                class="v-btn v-btn--flat v-btn--fab v-btn--round theme--light v-size--default v-btn--icon"
                 aria-label="Next page"
         >
           <div class="v-btn__content">
@@ -782,7 +782,7 @@ exports[`VDataIterator.js should reset to page 1 when data is smaller than curre
           –
         </div>
         <button type="button"
-                class="v-btn v-btn--flat theme--light v-btn--icon v-btn--icon-true"
+                class="v-btn v-btn--flat v-btn--fab v-btn--round theme--light v-size--default v-btn--icon"
                 aria-label="Previous page"
         >
           <div class="v-btn__content">
@@ -794,7 +794,7 @@ exports[`VDataIterator.js should reset to page 1 when data is smaller than curre
           </div>
         </button>
         <button type="button"
-                class="v-btn v-btn--disabled v-btn--flat theme--light v-btn--icon v-btn--icon-true"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--fab v-btn--round theme--light v-size--default v-btn--icon"
                 aria-label="Next page"
                 disabled="disabled"
         >
