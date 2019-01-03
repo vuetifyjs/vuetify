@@ -234,4 +234,60 @@ describe('VBtn.js', () => {
     await new Promise(resolve => setTimeout(resolve, 0))
     expect(wrapper.vm.hasHover).toBe(false)
   })
+
+  it('should toggle on route change if provided a to prop', async () => {
+    const toggle = jest.fn()
+    const register = jest.fn()
+    const unregister = jest.fn()
+    const wrapper = mountFunction({
+      provide: {
+        btnToggle: { register, unregister }
+      },
+      methods: { toggle },
+      ref: 'link'
+    })
+
+    router.push('/foobar')
+
+    await wrapper.vm.$nextTick()
+    expect(toggle).not.toBeCalled()
+
+    wrapper.setProps({ to: 'fizzbuzz' })
+
+    router.push('/fizzbuzz')
+
+    await wrapper.vm.$nextTick()
+    expect(toggle).toBeCalled()
+  })
+
+  it('should call toggle when used in button group', () => {
+    const register = jest.fn()
+    const unregister = jest.fn()
+    const toggle = jest.fn()
+    const wrapper = mountFunction({
+      provide: {
+        btnToggle: { register, unregister }
+      },
+      methods: { toggle }
+    })
+
+    wrapper.trigger('click')
+    expect(toggle).toBeCalled()
+  })
+
+  it('should stringify non string|number values', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        value: 'foo'
+      }
+    })
+
+    expect(wrapper.attributes('value')).toBe('foo')
+
+    wrapper.setProps({ value: 2 })
+    expect(wrapper.attributes('value')).toBe('2')
+
+    wrapper.setProps({ value: { foo: 'bar' }})
+    expect(wrapper.attributes('value')).toBe("{\"foo\":\"bar\"}")
+  })
 })

@@ -203,6 +203,7 @@ export default baseMixins.extend<options>().extend({
       const path = `_vnode.data.class.${this.activeClass}`
 
       this.$nextTick(() => {
+        /* istanbul ignore else */
         if (getObjectValueByPath(this.$refs.link, path)) {
           this.toggle()
         }
