@@ -5,7 +5,6 @@ export default Vue.extend({
 
   props: {
     large: Boolean,
-    medium: Boolean,
     size: {
       type: [Number, String]
     },
@@ -16,10 +15,17 @@ export default Vue.extend({
 
   computed: {
     sizeableClasses (): object {
+      const medium = Boolean(
+        !this.xSmall &&
+        !this.small &&
+        !this.large &&
+        !this.xLarge
+      )
+
       return {
         'v-size--x-small': this.xSmall,
         'v-size--small': this.small,
-        'v-size--medium': this.medium,
+        'v-size--default': medium,
         'v-size--large': this.large,
         'v-size--x-large': this.xLarge
       }
