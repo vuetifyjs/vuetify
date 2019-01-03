@@ -1,8 +1,10 @@
 <template>
   <v-list-tile
     :to="path"
+    v-bind="customAttrs"
     class="v-list__tile--doc"
     ripple
+    v-on="$listeners"
   >
     <v-list-tile-avatar
       v-if="avatar"
@@ -44,6 +46,8 @@
 
 <script>
   export default {
+    inheritAttrs: false,
+
     props: {
       avatar: {
         type: String,
@@ -56,6 +60,10 @@
       text: {
         type: String,
         default: ''
+      },
+      href: {
+        type: String,
+        default: undefined
       },
       name: {
         type: String,
@@ -88,6 +96,19 @@
         if (this.chip === 'new') return 'primary'
         if (this.chip === 'updated') return 'warning'
         if (this.chip === 'deprecated') return 'black'
+      },
+      customAttrs () {
+        const attrs = {
+          ...this.$attrs
+        }
+
+        if (this.href) {
+          attrs.target = '_blank'
+          attrs.rel = 'noopener'
+          attrs.href = this.href
+        }
+
+        return attrs
       },
       path () {
         if (!this.to) return this.to
