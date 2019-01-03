@@ -38,7 +38,7 @@ export default Vue.extend({
     click (e: MouseEvent): void {
       this.$emit('click', e)
     },
-    generateRouteLink (classes: object, styles: object) {
+    generateRouteLink (classes: object, styles: object = {}) {
       let exact = this.exact
       let tag
 
