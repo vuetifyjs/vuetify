@@ -3,7 +3,7 @@
 exports[`VBtn.js should render an <a> tag when using href prop 1`] = `
 
 <a href="http://www.google.com"
-   class="v-btn theme--light elevation-2"
+   class="v-btn theme--light elevation-2 v-size--default"
 >
   <div class="v-btn__content">
   </div>
@@ -14,7 +14,7 @@ exports[`VBtn.js should render an <a> tag when using href prop 1`] = `
 exports[`VBtn.js should render component and match snapshot 1`] = `
 
 <button type="button"
-        class="v-btn theme--light elevation-2"
+        class="v-btn theme--light elevation-2 v-size--default"
 >
   <div class="v-btn__content">
   </div>
@@ -25,7 +25,7 @@ exports[`VBtn.js should render component and match snapshot 1`] = `
 exports[`VBtn.js should render component with color prop and match snapshot 1`] = `
 
 <button type="button"
-        class="v-btn theme--light elevation-2 green darken-1"
+        class="v-btn theme--light elevation-2 v-size--default green darken-1"
 >
   <div class="v-btn__content">
   </div>
@@ -36,7 +36,7 @@ exports[`VBtn.js should render component with color prop and match snapshot 1`] 
 exports[`VBtn.js should render component with color prop and match snapshot 2`] = `
 
 <button type="button"
-        class="v-btn v-btn--text theme--light green--text text--darken-1"
+        class="v-btn v-btn--flat v-btn--text theme--light v-size--default green--text text--darken-1"
 >
   <div class="v-btn__content">
   </div>
@@ -47,7 +47,7 @@ exports[`VBtn.js should render component with color prop and match snapshot 2`] 
 exports[`VBtn.js should render component with loader and match snapshot 1`] = `
 
 <button type="button"
-        class="v-btn v-btn--loading theme--light elevation-2"
+        class="v-btn v-btn--loading theme--light elevation-2 v-size--default"
 >
   <div class="v-btn__content">
   </div>
@@ -83,7 +83,7 @@ exports[`VBtn.js should render component with loader and match snapshot 1`] = `
 exports[`VBtn.js should render component with loader slot and match snapshot 1`] = `
 
 <button type="button"
-        class="v-btn v-btn--loading theme--light elevation-2"
+        class="v-btn v-btn--loading theme--light elevation-2 v-size--default"
 >
   <div class="v-btn__content">
   </div>
@@ -98,7 +98,7 @@ exports[`VBtn.js should render component with loader slot and match snapshot 1`]
 
 exports[`VBtn.js should render specified tag when using tag prop 1`] = `
 
-<a class="v-btn theme--light elevation-2">
+<a class="v-btn theme--light elevation-2 v-size--default">
   <div class="v-btn__content">
   </div>
 </a>

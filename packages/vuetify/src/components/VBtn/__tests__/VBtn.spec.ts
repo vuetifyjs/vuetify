@@ -10,7 +10,6 @@ import VBtn from '../VBtn'
 // Utilities
 import {
   createLocalVue,
-  shallowMount,
   mount,
   Wrapper
 } from '@vue/test-utils'

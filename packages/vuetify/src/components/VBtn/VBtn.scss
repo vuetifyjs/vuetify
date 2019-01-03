@@ -45,7 +45,7 @@
   width: #{$size}px;
 
   .v-icon {
-    font-size: #{round($size / 1.7)}px;
+    font-size: #{round($size / 1.5)}px;
   }
 
   &.v-btn--absolute {
@@ -100,7 +100,6 @@
 
 // Block
 .v-btn {
-  @include button(36);
   align-items: center;
   border-radius: 4px;
   display: inline-flex;
@@ -136,19 +135,23 @@
 
   &:not(.v-btn--round) {
     &.v-size--x-small {
-      @include button(12);
+      @include button(20);
     }
 
     &.v-size--small {
       @include button(28);
     }
 
+    &.v-size--default {
+      @include button(36);
+    }
+
     &.v-size--large {
-      @include button(52);
+      @include button(54);
     }
 
     &.v-size--x-large {
-      @include button(68);
+      @include button(70);
     }
   }
 
@@ -203,6 +206,10 @@
 }
 
 // Modifiers
+.v-btn--absolute {
+  position: absolute;
+}
+
 .v-btn--block {
   display: flex;
   flex: 1 0 auto;
@@ -212,11 +219,10 @@
 
 .v-btn--depressed {
   box-shadow: none !important;
-  background: transparent !important;
+  background-color: transparent !important;
 }
 
 .v-btn--fab {
-  @include fab(40);
   min-height: 0;
   min-width: 0;
   padding: 0;
@@ -227,24 +233,24 @@
   }
 
   &.v-size--x-small {
-    @include fab(26);
+    @include fab(20);
   }
 
   &.v-size--small {
-    @include fab(32);
+    @include fab(28);
+  }
+
+  &.v-size--default {
+    @include fab(36);
   }
 
   &.v-size--large {
-    @include fab(56);
+    @include fab(54);
   }
 
   &.v-size--x-large {
-    @include fab(64);
+    @include fab(70);
   }
-}
-
-.v-btn--absolute {
-  position: absolute;
 }
 
 .v-btn--fixed {
@@ -258,17 +264,20 @@
 }
 
 .v-btn--outline {
-  background: transparent !important;
   border: 2px solid currentColor;
-
-  .v-icon {
-    color: inherit;
-  }
 }
 
 .v-btn--text,
+.v-btn--outline,
 .v-btn--flat {
-  background: transparent !important;
+  background-color: transparent !important;
+}
+
+.v-btn--round,
+.v-btn--outline {
+  .v-icon {
+    color: currentColor;
+  }
 }
 
 .v-btn--round {

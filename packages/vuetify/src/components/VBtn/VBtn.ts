@@ -5,7 +5,6 @@ import './VBtn.scss'
 import VSheet from '../VSheet'
 
 // Components
-import VHover from '../VHover'
 import VProgressCircular from '../VProgressCircular'
 
 // Mixins
@@ -55,7 +54,7 @@ export default baseMixins.extend<options>().extend({
     fab: Boolean,
     flat: Boolean,
     icon: {
-      type: String as Prop<'left' | 'right'>,
+      type: [Boolean, String],
       default: undefined
     },
     loading: Boolean,
@@ -79,7 +78,6 @@ export default baseMixins.extend<options>().extend({
   },
 
   data: () => ({
-    hasDeprecatedIcon: false,
     hasMouseDown: false,
     hasHover: false
   }),
@@ -93,8 +91,8 @@ export default baseMixins.extend<options>().extend({
         'v-btn--block': this.block,
         'v-btn--bottom': this.bottom,
         'v-btn--disabled': this.disabled,
-        'v-btn--flat': this.flat,
-        'v-btn--fab': this.fab || this.hasDeprecatedIcon,
+        'v-btn--flat': this.isFlat,
+        'v-btn--fab': this.fab || this.icon === true,
         'v-btn--fixed': this.fixed,
         'v-btn--left': this.left,
         'v-btn--loading': this.loading,
@@ -114,7 +112,10 @@ export default baseMixins.extend<options>().extend({
 
       if (this.icon) {
         classes['v-btn--icon'] = true
-        classes[`v-btn--icon-${this.icon}`] = true
+
+        if (typeof this.icon !== 'boolean') {
+          classes[`v-btn--icon-${this.icon}`] = true
+        }
       }
 
       return classes
@@ -133,7 +134,7 @@ export default baseMixins.extend<options>().extend({
     },
     isFlat (): boolean {
       return Boolean(
-        this.hasDeprecatedIcon ||
+        this.icon === true ||
         this.text ||
         this.flat ||
         this.outline
@@ -141,8 +142,7 @@ export default baseMixins.extend<options>().extend({
     },
     isRound (): boolean {
       return Boolean(
-        this.hasDeprecatedIcon ||
-        this.round ||
+        this.icon === true ||
         this.fab
       )
     },
@@ -160,12 +160,6 @@ export default baseMixins.extend<options>().extend({
   created () {
     /* istanbul ignore next */
     if (this.flat) deprecate('flat', 'text', this)
-
-    /* istanbul ignore next */
-    if (this.icon as any === '' || typeof this.icon === 'boolean') {
-      this.hasDeprecatedIcon = true
-      deprecate('icon', 'fab flat')
-    }
   },
 
   methods: {
@@ -233,14 +227,11 @@ export default baseMixins.extend<options>().extend({
 
     this._g(render.data!, {
       mousedown: () => (this.hasMouseDown = true),
-      mouseup: () => (this.hasMouseDown = false)
+      mouseup: () => (this.hasMouseDown = false),
+      mouseenter: () => (this.hasHover = true),
+      mouseleave: () => (this.hasHover = false)
     })
 
-    return h(VHover, {
-      props: { value: this.hasHover },
-      on: {
-        input: (val: boolean) => (this.hasHover = val)
-      }
-    }, [render])
+    return render
   }
 })
