@@ -2,7 +2,6 @@
   <v-container fluid>
     <v-sparkline
       :value="value"
-      :type="type"
       :gradient="gradient"
       :smooth="radius || false"
       :padding="padding"
@@ -10,9 +9,14 @@
       :stroke-linecap="lineCap"
       auto-draw
     ></v-sparkline>
+
     <v-divider></v-divider>
+
     <v-layout wrap>
-      <v-flex xs6>
+      <v-flex
+        xs12
+        md6
+      >
         <v-layout fill-height align-center>
           <v-item-group v-model="gradient" mandatory>
             <v-layout>
@@ -36,7 +40,11 @@
           </v-item-group>
         </v-layout>
       </v-flex>
-      <v-flex xs6>
+
+      <v-flex
+        xs12
+        md6
+      >
         <v-slider
           v-model="width"
           label="Width"
@@ -46,6 +54,7 @@
           thumb-label
         ></v-slider>
       </v-flex>
+
       <v-flex xs6>
         <v-layout fill-height align-center>
           <v-subheader class="pl-0">Linecap</v-subheader>
@@ -56,7 +65,11 @@
           </v-btn-toggle>
         </v-layout>
       </v-flex>
-      <v-flex xs6>
+
+      <v-flex
+        xs12
+        md6
+      >
         <v-slider
           v-model="radius"
           label="Radius"
@@ -65,16 +78,12 @@
           thumb-label
         ></v-slider>
       </v-flex>
-      <v-flex xs6>
-        <v-layout fill-height align-center>
-          <v-subheader class="pl-0">Type</v-subheader>
-          <v-btn-toggle v-model="type" mandatory>
-            <v-btn flat value="trend">Trend</v-btn>
-            <v-btn flat value="bar">Bar</v-btn>
-          </v-btn-toggle>
-        </v-layout>
-      </v-flex>
-      <v-flex xs6>
+
+      <v-flex
+        xs12
+        md6
+        offset-md6
+      >
         <v-slider
           v-model="padding"
           label="Padding"
@@ -99,7 +108,6 @@
 
   export default {
     data: () => ({
-      type: 'trend',
       width: 2,
       radius: 10,
       padding: 8,
