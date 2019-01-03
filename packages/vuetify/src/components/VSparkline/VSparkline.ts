@@ -24,6 +24,11 @@ export interface Boundary {
   maxY: number
 }
 
+export interface ColorStop {
+  color: string
+  percent?: number
+}
+
 export interface Point {
   x: number
   y: number
@@ -62,7 +67,7 @@ export default mixins<options &
       default: 'primary'
     },
     gradient: {
-      type: Array as Prop<string[]>,
+      type: Array as Prop<(string | ColorStop)[]>,
       default: () => ([])
     },
     gradientDirection: {
@@ -191,8 +196,8 @@ export default mixins<options &
       const stops = gradient.reverse().map((color, index) =>
         this.$createElement('stop', {
           attrs: {
-            offset: index / len,
-            'stop-color': color || 'currentColor'
+            offset: (typeof color !== 'string' && color.percent) ? `${color.percent}%` : index / len,
+            'stop-color': (typeof color === 'string') ? color : color.color || 'currentColor'
           }
         })
       )
