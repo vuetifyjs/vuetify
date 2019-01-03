@@ -6,6 +6,7 @@ exports[`VStepperStep.js should accept a custom color 1`] = `
   <span class="v-stepper__step__step pink">
     <i aria-hidden="true"
        class="v-icon material-icons theme--light"
+       style="font-size: 28px;"
     >
       check
     </i>
@@ -24,6 +25,7 @@ exports[`VStepperStep.js should accept a custom css color 1`] = `
   >
     <i aria-hidden="true"
        class="v-icon material-icons theme--light"
+       style="font-size: 28px;"
     >
       check
     </i>

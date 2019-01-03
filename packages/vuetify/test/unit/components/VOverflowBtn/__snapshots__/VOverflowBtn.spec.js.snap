@@ -19,6 +19,7 @@ exports[`VOverflowBtn should use default autocomplete selections 1`] = `
           <div class="v-input__icon v-input__icon--append">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 28px;"
             >
               arrow_drop_down
             </i>
@@ -47,7 +48,7 @@ exports[`VOverflowBtn should use default autocomplete selections 2`] = `
       <div class="v-select__slot">
         <div class="v-select__selections">
           <button type="button"
-                  class="v-btn v-btn--flat theme--light v-size--default"
+                  class="v-btn v-btn--flat v-btn--text theme--light v-size--default"
           >
             <div class="v-btn__content">
               foo
@@ -62,6 +63,7 @@ exports[`VOverflowBtn should use default autocomplete selections 2`] = `
           <div class="v-input__icon v-input__icon--append">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 28px;"
             >
               arrow_drop_down
             </i>

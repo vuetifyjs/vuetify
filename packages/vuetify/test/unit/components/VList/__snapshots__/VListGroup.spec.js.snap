@@ -10,6 +10,7 @@ exports[`VListGroup.js should render a component with no padding for action icon
       <div class="v-list__group__header__append-icon">
         <i aria-hidden="true"
            class="v-icon material-icons theme--light"
+           style="font-size: 28px;"
         >
           keyboard_arrow_down
         </i>
@@ -34,6 +35,7 @@ exports[`VListGroup.js should render a component with route namespace and match 
       <div class="v-list__group__header__append-icon">
         <i aria-hidden="true"
            class="v-icon material-icons theme--light"
+           style="font-size: 28px;"
         >
           keyboard_arrow_down
         </i>
@@ -58,6 +60,7 @@ exports[`VListGroup.js should render a lazy component and match snapshot 1`] = `
       <div class="v-list__group__header__append-icon">
         <i aria-hidden="true"
            class="v-icon material-icons theme--light"
+           style="font-size: 28px;"
         >
           keyboard_arrow_down
         </i>
@@ -82,6 +85,7 @@ exports[`VListGroup.js should render component and match snapshot 1`] = `
       <div class="v-list__group__header__append-icon">
         <i aria-hidden="true"
            class="v-icon material-icons theme--light"
+           style="font-size: 28px;"
         >
           keyboard_arrow_down
         </i>

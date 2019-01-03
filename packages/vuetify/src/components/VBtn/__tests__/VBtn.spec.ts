@@ -189,7 +189,7 @@ describe('VBtn.js', () => {
     expect(wrapper.classes('v-btn--icon-right')).toBe(true)
   })
 
-  it('should have the correct elevation', async () => {
+  it('should have the correct elevation', async () => { // eslint-disable-line max-statements
     const wrapper = mountFunction()
     expect(wrapper.classes('elevation-2')).toBe(true)
 
@@ -286,7 +286,7 @@ describe('VBtn.js', () => {
     wrapper.setProps({ value: 2 })
     expect(wrapper.attributes('value')).toBe('2')
 
-    wrapper.setProps({ value: { foo: 'bar' }})
-    expect(wrapper.attributes('value')).toBe("{\"foo\":\"bar\"}")
+    wrapper.setProps({ value: { foo: 'bar' } })
+    expect(wrapper.attributes('value')).toBe('{"foo":"bar"}')
   })
 })

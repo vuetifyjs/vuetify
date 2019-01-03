@@ -66,6 +66,7 @@ exports[`VDatePickerTitle.js should render year icon 1`] = `
   1234
   <i aria-hidden="true"
      class="v-icon material-icons theme--dark"
+     style="font-size: 28px;"
   >
     year
   </i>

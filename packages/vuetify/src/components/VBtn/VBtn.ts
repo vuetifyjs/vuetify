@@ -20,7 +20,7 @@ import { deprecate } from '../../util/console'
 
 // Types
 import { VNode } from 'vue'
-import { Prop, PropValidator } from 'vue/types/options'
+import { PropValidator } from 'vue/types/options'
 import mixins, { ExtractVue } from '../../util/mixins'
 import { RippleOptions } from '../../directives/ripple'
 

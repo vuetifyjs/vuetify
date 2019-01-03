@@ -22,6 +22,7 @@ exports[`VSelect2 should add color to selected index 1`] = `
           <div class="v-input__icon v-input__icon--append">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 28px;"
             >
               arrow_drop_down
             </i>
@@ -64,6 +65,7 @@ exports[`VSelect2 should be clearable with prop, dirty and multi select 1`] = `
           <div class="v-input__icon v-input__icon--clear">
             <i aria-hidden="true"
                class="v-icon v-icon--link material-icons theme--light"
+               style="font-size: 28px;"
             >
               clear
             </i>
@@ -73,6 +75,7 @@ exports[`VSelect2 should be clearable with prop, dirty and multi select 1`] = `
           <div class="v-input__icon v-input__icon--append">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 28px;"
             >
               arrow_drop_down
             </i>
@@ -115,6 +118,7 @@ exports[`VSelect2 should be clearable with prop, dirty and single select 1`] = `
           <div class="v-input__icon v-input__icon--clear">
             <i aria-hidden="true"
                class="v-icon v-icon--link material-icons theme--light"
+               style="font-size: 28px;"
             >
               clear
             </i>
@@ -124,6 +128,7 @@ exports[`VSelect2 should be clearable with prop, dirty and single select 1`] = `
           <div class="v-input__icon v-input__icon--append">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 28px;"
             >
               arrow_drop_down
             </i>

@@ -9,6 +9,7 @@ exports[`VPagination.vue emits an event when next or previous is clicked 1`] = `
     >
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
+         style="font-size: 28px;"
       >
         chevron_left
       </i>
@@ -55,6 +56,7 @@ exports[`VPagination.vue emits an event when next or previous is clicked 1`] = `
     >
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
+         style="font-size: 28px;"
       >
         chevron_right
       </i>
@@ -73,6 +75,7 @@ exports[`VPagination.vue should only render end of range if value is equals "rig
     >
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
+         style="font-size: 28px;"
       >
         chevron_left
       </i>
@@ -117,6 +120,7 @@ exports[`VPagination.vue should only render end of range if value is equals "rig
     >
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
+         style="font-size: 28px;"
       >
         chevron_right
       </i>
@@ -135,6 +139,7 @@ exports[`VPagination.vue should only render middle of range if length is big and
     >
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
+         style="font-size: 28px;"
       >
         chevron_left
       </i>
@@ -296,6 +301,7 @@ exports[`VPagination.vue should only render middle of range if length is big and
     >
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
+         style="font-size: 28px;"
       >
         chevron_right
       </i>
@@ -314,6 +320,7 @@ exports[`VPagination.vue should only render start and end of range if length is 
     >
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
+         style="font-size: 28px;"
       >
         chevron_left
       </i>
@@ -477,6 +484,7 @@ exports[`VPagination.vue should only render start and end of range if length is 
     >
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
+         style="font-size: 28px;"
       >
         chevron_right
       </i>
@@ -495,6 +503,7 @@ exports[`VPagination.vue should only render start of range if value is equals "l
     >
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
+         style="font-size: 28px;"
       >
         chevron_left
       </i>
@@ -539,6 +548,7 @@ exports[`VPagination.vue should only render start of range if value is equals "l
     >
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
+         style="font-size: 28px;"
       >
         chevron_right
       </i>
@@ -557,6 +567,7 @@ exports[`VPagination.vue should render component in RTL mode and match snapshot 
     >
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
+         style="font-size: 28px;"
       >
         chevron_right
       </i>
@@ -603,6 +614,7 @@ exports[`VPagination.vue should render component in RTL mode and match snapshot 
     >
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
+         style="font-size: 28px;"
       >
         chevron_left
       </i>
@@ -621,6 +633,7 @@ exports[`VPagination.vue should render disabled buttons with length equals to 0 
     >
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
+         style="font-size: 28px;"
       >
         chevron_left
       </i>
@@ -632,6 +645,7 @@ exports[`VPagination.vue should render disabled buttons with length equals to 0 
     >
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
+         style="font-size: 28px;"
       >
         chevron_right
       </i>
@@ -650,6 +664,7 @@ exports[`VPagination.vue should use totalVisible prop if defined 1`] = `
     >
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
+         style="font-size: 28px;"
       >
         chevron_left
       </i>
@@ -727,6 +742,7 @@ exports[`VPagination.vue should use totalVisible prop if defined 1`] = `
     >
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
+         style="font-size: 28px;"
       >
         chevron_right
       </i>

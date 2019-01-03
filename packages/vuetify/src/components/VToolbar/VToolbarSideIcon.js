@@ -16,7 +16,7 @@ export default {
       staticClass: classes,
       props: Object.assign(props, {
         fab: true,
-        flat: true
+        text: true
       }),
       on: listeners
     })
