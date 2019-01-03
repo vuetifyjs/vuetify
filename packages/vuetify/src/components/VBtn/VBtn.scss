@@ -32,49 +32,21 @@
   }
 }
 
-@mixin button($minHeight) {
-  min-height: #{$minHeight}px;
-  min-width: #{round($minHeight * 1.777777777777778)}px; // default ratio
-  padding: 0 #{$minHeight / 2}px;
-}
+$button-sizes: (
+  'x-small': 20,
+  'small': 28,
+  'default': 36,
+  'large': 54,
+  'x-large': 70
+);
 
-@mixin fab($size) {
-  height: #{$size}px;
-  width: #{$size}px;
-
-  .v-icon {
-    font-size: #{round($size / 1.5)}px;
-  }
-
-  &.v-btn--absolute {
-    &.v-btn--bottom {
-      bottom: -#{$size / 2}px;
-    }
-
-    &.v-btn--top {
-      top: -#{$size / 2}px;
-    }
-  }
-
-  &.v-btn--fixed {
-    &.v-btn--top {
-      top: map-get($grid-gutters, 'lg');
-    }
-    &.v-btn--bottom {
-      bottom: map-get($grid-gutters, 'lg');
-    }
-  }
-
-  &.v-btn--absolute,
-  &.v-btn--fixed {
-    &.v-btn--left {
-      left: map-get($grid-gutters, 'lg');
-    }
-    &.v-btn--right {
-      right: map-get($grid-gutters, 'lg');
-    }
-  }
-}
+$fab-sizes: (
+  'x-small': 20,
+  'small': 28,
+  'default': 36,
+  'large': 54,
+  'x-large': 70
+);
 
 // Theme
 .v-btn:not(.v-btn--outline) {
@@ -132,24 +104,12 @@
   }
 
   &:not(.v-btn--round) {
-    &.v-size--x-small {
-      @include button(20);
-    }
-
-    &.v-size--small {
-      @include button(28);
-    }
-
-    &.v-size--default {
-      @include button(36);
-    }
-
-    &.v-size--large {
-      @include button(54);
-    }
-
-    &.v-size--x-large {
-      @include button(70);
+    @each $name, $size in $button-sizes {
+      &.v-size--#{$name} {
+        min-height: #{$size}px;
+        min-width: #{round($size * 1.777777777777778)}px; // default ratio
+        padding: 0 #{$size / 2}px;
+      }
     }
   }
 
@@ -230,24 +190,44 @@
     z-index: 4;
   }
 
-  &.v-size--x-small {
-    @include fab(20);
-  }
+  @each $name, $size in $fab-sizes {
+    &.v-size--#{$name} {
+      height: #{$size}px;
+      width: #{$size}px;
 
-  &.v-size--small {
-    @include fab(28);
-  }
+      .v-icon {
+        font-size: #{round($size / 1.5)}px;
+      }
 
-  &.v-size--default {
-    @include fab(36);
-  }
+      &.v-btn--absolute {
+        &.v-btn--bottom {
+          bottom: -#{$size / 2}px;
+        }
 
-  &.v-size--large {
-    @include fab(54);
-  }
+        &.v-btn--top {
+          top: -#{$size / 2}px;
+        }
+      }
 
-  &.v-size--x-large {
-    @include fab(70);
+      &.v-btn--fixed {
+        &.v-btn--top {
+          top: map-get($grid-gutters, 'lg');
+        }
+        &.v-btn--bottom {
+          bottom: map-get($grid-gutters, 'lg');
+        }
+      }
+
+      &.v-btn--absolute,
+      &.v-btn--fixed {
+        &.v-btn--left {
+          left: map-get($grid-gutters, 'lg');
+        }
+        &.v-btn--right {
+          right: map-get($grid-gutters, 'lg');
+        }
+      }
+    }
   }
 }
 
