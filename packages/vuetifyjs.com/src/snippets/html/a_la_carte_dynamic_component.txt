@@ -1,0 +1,12 @@
+<template>
+  <component :is="button ? 'v-btn' : 'v-chip'">
+</template>
+
+<script>
+  import { VBtn, VChip } from 'vuetify/lib'
+
+  export default {
+    components: { VBtn, VChip },
+    data: () => ({ button: false })
+  }
+</script>

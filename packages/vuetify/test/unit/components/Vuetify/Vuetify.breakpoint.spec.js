@@ -1,5 +1,5 @@
 import { test, resizeWindow } from '@/test'
-import breakpointMixin from '@/components/Vuetify/mixins/breakpoint'
+import breakpointMixinFactory from '@/components/Vuetify/mixins/breakpoint'
 
 test('breakpoint.ts', ({ mount }) => {
   const scenarios = [
@@ -230,15 +230,13 @@ test('breakpoint.ts', ({ mount }) => {
   ]
 
   scenarios.forEach(scenario => {
-    it('should calculate breakpoint for ' + scenario.description, () => {
+    it('should calculate breakpoint for ' + scenario.description, async () => {
       const wrapper = mount({
-        mixins: [breakpointMixin],
+        mixins: [breakpointMixinFactory()],
         render: h => h('div')
       })
-      wrapper.setData({
-        clientWidth: scenario.width,
-        clientHeight: scenario.height
-      })
+
+      await resizeWindow(scenario.width, scenario.height)
       const breakpoint = wrapper.vm.breakpoint
 
       expect(breakpoint.width).toBe(scenario.width)
@@ -253,11 +251,47 @@ test('breakpoint.ts', ({ mount }) => {
 
   it('should update breakpoint on window resize', async () => {
     const wrapper = mount({
-      mixins: [breakpointMixin],
+      mixins: [breakpointMixinFactory()],
       render: h => h('div')
     })
 
     await resizeWindow(715)
     expect(wrapper.vm.breakpoint.width).toBe(715)
   })
+
+  it('should allow to change thresholds during runtime', async () => {
+    const wrapper = mount({
+      mixins: [breakpointMixinFactory()],
+      render: h => h('div')
+    })
+
+    await resizeWindow(401)
+    expect(wrapper.vm.breakpoint.xs).toBe(true)
+
+    wrapper.vm.breakpoint.thresholds.xs = 400
+    expect(wrapper.vm.breakpoint.xs).toBe(false)
+
+    await resizeWindow(399)
+    expect(wrapper.vm.breakpoint.xs).toBe(true)
+  })
+
+  it('should allow to override defaults via factory args', async () => {
+    const wrapper = mount({
+      mixins: [
+        breakpointMixinFactory({
+          thresholds: {
+            xs: 400
+          }
+        })
+      ],
+      render: h => h('div')
+    })
+
+    await resizeWindow(401)
+    expect(wrapper.vm.breakpoint.xs).toBe(false)
+
+    await resizeWindow(399)
+    expect(wrapper.vm.breakpoint.xs).toBe(true)
+  })
+
 })

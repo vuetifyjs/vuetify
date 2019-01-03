@@ -2,7 +2,6 @@
   "header": "Inicio rápido",
   "headerText": "Use um dos pacotes Vuetify Vue CLI _(com base nos exemplos oficiais)_ para começar seu projeto. Vuetify suporta **SSR** (server-side rendering), **SPA** (single page application), **PWA** (progressive web application) e páginas **HTML** padrão.",
   "alert1": "Para que seu aplicativo funcione corretamente, você **deve** colocá-lo dentro do componente `v-app`. Este componente é usado para gerenciar dinamicamente sua área de conteúdo e é o ponto de montagem para muitos componentes.",
-  "newStoreAlert": "A nova loja do Vuetify agora está no ar!. Ajude a sustentar o projeto e receba algum produto legal ao mesmo tempo! <a href=\"https://vuetifyjs.com/store\" class=\"btn btn--white primary--text\"><span class=\"btn__content\">Confira</span></a>",
   "browserHeader": "Navegadores suportados",
   "browserText": "Vuetify é um framework progressivo que tenta levar o desenvolvimento web para o próximo nível. Para melhor realizar esta tarefa, alguns sacrifícios tiveram que ser feitos em termos de suporte para versões antigas do Internet Explorer. Esta não é uma lista completa dos navegadores compatíveis, mas sim dos principais.",
   "cdnHeader": "Instalação via CDN",

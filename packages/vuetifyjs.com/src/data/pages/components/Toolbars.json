@@ -1,0 +1,62 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "usage",
+          "value": "usage"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": [
+            "v-toolbar",
+            "v-system-bar"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [
+            "appBar",
+            "appBarItems",
+            "appBarExtension",
+            "columnWidthWithHierarchy",
+            "flexibleAndCard",
+            "floatingWithSearch",
+            "variations",
+            "prominent",
+            "dense",
+            "scrolling",
+            "appBarMenu",
+            "systemBarsStatusWindow"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/buttons",
+            "components/footer",
+            "components/tabs"
+          ]
+        }
+      ]
+    }
+  ]
+}

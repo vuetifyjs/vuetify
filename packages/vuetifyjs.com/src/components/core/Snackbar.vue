@@ -19,8 +19,8 @@
       >
         {{ computedIcon }}
       </v-icon>
-      <helpers-markdown
-        :source="snackbar.msg"
+      <doc-markdown
+        :code="snackbar.msg"
         class="snack-markdown"
       />
       <v-spacer />
@@ -38,6 +38,7 @@
       <v-btn
         v-if="snackbar.close"
         :ripple="false"
+        :aria-label="$t('Vuetify.Snackbar.close')"
         icon
         class="ml-3"
         @click="markViewed"
@@ -49,17 +50,14 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
+  import {
+    mapMutations,
+    mapState
+  } from 'vuex'
 
   export default {
-    data: () => ({
-      snack: false
-    }),
-
     computed: {
-      ...mapState('app', {
-        snackbar: state => state.appSnackbar
-      }),
+      ...mapState('snackbar', ['snackbar', 'value']),
       bind () {
         if (this.snackbar.to) return { to: this.snackbar.to }
         if (this.snackbar.href) {
@@ -88,6 +86,14 @@
           case 'error': return 'error'
           default: return false
         }
+      },
+      snack: {
+        get () {
+          return this.value
+        },
+        set (val) {
+          this.setValue(val)
+        }
       }
     },
 
@@ -102,7 +108,18 @@
       }
     },
 
+    async created () {
+      const notify = await fetch('https://cdn.vuetifyjs.com/notify.json', {
+        headers: {
+          'Access-Control-Allow-Origin': '*'
+        }
+      }).then(res => res.json())
+
+      if (notify) this.setSnackbar(notify)
+    },
+
     methods: {
+      ...mapMutations('snackbar', ['setSnackbar', 'setValue']),
       markViewed () {
         if (this.snackbar.id) {
           localStorage.setItem(this.snackbar.id, true)

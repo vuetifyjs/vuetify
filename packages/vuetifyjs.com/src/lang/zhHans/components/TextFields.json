@@ -46,7 +46,7 @@
     },
     "customValidation": {
       "header": "自定义验证",
-      "desc": "虽然内置的 `v-form` 组件以及第三方插件比如 <a href=\"https://github.com/monterail/vuelidate\" target=\"_blank\" rel=\"noopener\">vuelidate</a> or <a href=\"https://github.com/logaretm/vee-validate\" target=\"_blank\" rel=\"noopener\">vee-validation</a> 可以帮助你简化验证过程，但你仍可以简单的自行控制它。"
+      "desc": "虽然内置的 `v-form` 组件以及第三方插件比如 [vuelidate](https://github.com/monterail/vuelidate) or [vee-validation](https://github.com/logaretm/vee-validate) 可以帮助你简化验证过程，但你仍可以简单的自行控制它。"
     },
     "textarea": {
       "header": "多行文本框",

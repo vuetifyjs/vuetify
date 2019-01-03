@@ -1,0 +1,46 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "usage",
+          "value": "usage"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": [ "v-time-picker" ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [ "timeColorable", "timeDialogAndMenu", "time24hFormat", "timeAllowedTimes", "timeWidth" ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/buttons",
+            "components/date-pickers",
+            "components/text-fields"
+          ]
+        }
+      ]
+    }
+  ]
+}
