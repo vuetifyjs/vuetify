@@ -1,8 +1,8 @@
 const Rollbar = require('rollbar')
 
 const tokens = {
-  server: 'c2ddf7aafca54bd298295e9da8c1ca4b',
-  client: '29988c905fd2469e85a95aef5a16f411'
+  server: '55e39f2b749c4fb88a4e097b1922af8d',
+  client: 'ab7bd8b91ef94a13897d45f6972578d4'
 }
 
 const rollbar = new Rollbar({
