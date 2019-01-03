@@ -24,50 +24,21 @@
       light
       dense
     >
-      <v-subheader
-        light
-        v-text="$t('Vuetify.AppToolbar.quickLinks')"
-      />
-
-      <v-list-tile
+      <v-subheader v-text="$t('Vuetify.AppToolbar.quickLinks')" />
+      <core-item
         v-for="ecosystem in ecosystems"
-        :href="ecosystem.href"
         :key="ecosystem.text"
-        target="_blank"
-        rel="noopener"
-      >
-        <v-list-tile-action>
-          <v-icon
-            light
-            v-text="ecosystem.icon"
-          />
-        </v-list-tile-action>
-        <v-list-tile-content>
-          <v-list-tile-title v-text="ecosystem.text" />
-        </v-list-tile-content>
-      </v-list-tile>
+        v-bind="ecosystem"
+        @click="$ga.event('toolbar', 'click', 'ecosystems', ecosystem.text)"
+      />
       <v-divider />
-
       <v-subheader v-text="$t('Vuetify.AppToolbar.social')" />
-
-      <v-list-tile
+      <core-item
         v-for="social in socials"
-        :href="social.href"
         :key="social.text"
-        target="_blank"
-        rel="noopener"
-        @click="$ga.event('toolbar', 'click', 'support', social.href)"
-      >
-        <v-list-tile-action>
-          <v-icon
-            light
-            v-text="social.icon"
-          />
-        </v-list-tile-action>
-        <v-list-tile-content>
-          <v-list-tile-title v-text="social.text" />
-        </v-list-tile-content>
-      </v-list-tile>
+        v-bind="social"
+        @click="$ga.event('toolbar', 'click', 'ecosystems', social.text)"
+      />
     </v-list>
   </v-menu>
 </template>
