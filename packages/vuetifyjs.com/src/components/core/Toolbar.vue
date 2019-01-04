@@ -12,7 +12,7 @@
   >
     <v-toolbar-side-icon
       v-if="!isHome"
-      aria-label="Menu"
+      :aria-label="$t('Vuetify.AppToolbar.menu')"
       class="hidden-lg-and-up"
       @click="toggleDrawer"
     />
@@ -33,6 +33,7 @@
     <v-toolbar-items>
       <v-btn
         v-show="isHome"
+        :aria-label="$t('Vuetify.AppToolbar.documentation')"
         class="hidden-xs-only"
         flat
         style="min-width: 48px;"

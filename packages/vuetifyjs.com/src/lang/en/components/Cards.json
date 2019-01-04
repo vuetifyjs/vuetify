@@ -20,6 +20,10 @@
     "customActions": {
       "header": "### Custom actions",
       "desc": "With a simple conditional, you can easily add supplementary text that is hidden until opened."
+    },
+    "twitterCard": {
+      "header": "### Twitter card",
+      "desc": "The `v-card` component has multiple children components that help you build complex examples without having to worry about spacing. This example is comprised of the `v-card-title`, `v-card-text` and `v-card-actions` components."
     }
   },
   "props": {

@@ -38,6 +38,7 @@
       <v-btn
         v-if="snackbar.close"
         :ripple="false"
+        :aria-label="$t('Vuetify.Snackbar.close')"
         icon
         class="ml-3"
         @click="markViewed"

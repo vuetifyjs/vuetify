@@ -1,6 +1,6 @@
 <template>
   <a
-    class="v-chip v-chip--tidelift white--text"
+    class="v-chip v-chip--tidelift text--primary"
     href="https://tidelift.com/subscription/npm/vuetify?utm_source=vuetify&utm_medium=referral&utm_campaign=homepage"
     rel="noopener"
     target="_blank"

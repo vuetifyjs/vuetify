@@ -1,6 +1,6 @@
 {
     "header": "# Tema",
-    "headerText": "Cambia fácilmente los colores de tu aplicación mediante código. Reconstruye las hojas de estilo que vienen por default y personaliza varios aspectos del framework para tus necesidades particulares. Si estás buscando el **Generador de Temas**, por favor ve [aquí](/theme-generator).",
+    "headerText": "Cambia fácilmente los colores de tu aplicación mediante código. Reconstruye las hojas de estilo que vienen por default y personaliza varios aspectos del framework para tus necesidades particulares. Si estás buscando el **Generador de Temas**, por favor ve [aquí](https://theme-generator.vuetifyjs.com).",
     "lightAndDarkHeader": "## Light y Dark",
     "lightAndDarkText1": "Vuetify soporta variantes tanto **light** como **dark** del spec de Material Design. Esto se aplica desde el componente raíz `v-app` y está soportado por la mayoría de los componentes. Por default, tu aplicación usará el tema **light**, pero puedes sobreescribirlo al agregar la propiedad **dark**.",
     "lightAndDarkText2": "Cuando designas a un componente como light o dark, todos sus hijos heredarán y aplicarán el mismo estilo a menos que se especifique lo contrario. Debido a la especificidad de CSS, hay ciertas combinaciones que harán que tengas que asignar manualmente el _tema_ para hijos anidados. Esto podría darse más a menudo cuando usas el tema **dark**.",
