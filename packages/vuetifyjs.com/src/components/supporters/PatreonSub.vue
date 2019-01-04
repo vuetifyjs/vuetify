@@ -15,10 +15,7 @@
       tag="v-divider"
     />
 
-    <v-flex
-      xs12
-      tag="p"
-    >
+    <v-flex xs12>
       <doc-markdown>patreonBlurb</doc-markdown>
     </v-flex>
 

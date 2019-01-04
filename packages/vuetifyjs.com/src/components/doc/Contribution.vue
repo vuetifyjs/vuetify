@@ -24,7 +24,7 @@
       ]),
       ...mapState('route', ['params']),
       contributionGuide () {
-        return this.parseLink('', 'Contribution Guide', '/getting-started/contributing')
+        return this.parseLink('', 'Contribution Guide', `/${this.params.lang}/getting-started/contributing`)
       },
       contributionLanguageGithub () {
         return this.parseLink('', 'language', this.contributionLanguageLink)

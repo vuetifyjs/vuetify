@@ -44,6 +44,10 @@
       NotFound: () => import('@/pages/general/404')
     },
 
+    data: () => ({
+      timeout: null
+    }),
+
     computed: {
       ...mapState('documentation', ['structure']),
       ...mapState('route', ['params']),
@@ -52,25 +56,32 @@
       }
     },
 
+    watch: {
+      '$route.path': 'init'
+    },
+
     mounted () {
-      // Wait for page animation
-      setTimeout(this.init, 300)
+      this.init()
     },
 
     methods: {
       getComponent,
-      init () {
-        const sameInternal = this.$el.querySelectorAll('a.markdown--same-internal')
+      async init () {
+        clearTimeout(this.timeout)
 
-        Array.prototype.forEach.call(sameInternal, el => {
-          el.addEventListener('click', this.onSameInternalClick)
-        })
+        this.timeout = setTimeout(() => {
+          const sameInternal = this.$el.querySelectorAll('a.markdown--same-internal')
 
-        const internal = this.$el.querySelectorAll('a.markdown--internal')
+          Array.prototype.forEach.call(sameInternal, el => {
+            el.addEventListener('click', this.onSameInternalClick)
+          })
 
-        Array.prototype.forEach.call(internal, el => {
-          el.addEventListener('click', this.onInternalClick)
-        })
+          const internal = this.$el.querySelectorAll('a.markdown--internal')
+
+          Array.prototype.forEach.call(internal, el => {
+            el.addEventListener('click', this.onInternalClick)
+          })
+        }, 300)
       },
       onSameInternalClick (e) {
         e.preventDefault()
@@ -80,7 +91,7 @@
       onInternalClick (e) {
         e.preventDefault()
 
-        this.$router.push(`/${this.lang}${e.target.getAttribute('href')}`)
+        this.$router.push(`/${this.params.lang}${e.target.getAttribute('href')}`)
       }
     }
   }

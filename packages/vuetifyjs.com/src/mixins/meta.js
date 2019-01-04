@@ -60,7 +60,7 @@ export default {
       const lang = this.$route.path.split('/')[1]
       const meta = this.$i18n.getLocaleMessage(lang).Meta || {}
 
-      this.meta = meta[path] || this.getFallbackMeta(path) || meta['']
+      this.meta = meta[path] || this.getFallbackMeta(path) || {}
     },
     getFallbackMeta (path) {
       const fallbackmeta = this.$i18n.getLocaleMessage('en').Meta
