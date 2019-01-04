@@ -5,6 +5,7 @@ const express = require('express')
 const cookieParser = require('cookie-parser')
 const favicon = require('serve-favicon')
 const compression = require('compression')
+const portfinder = require('portfinder')
 const microcache = require('route-cache')
 const resolve = file => path.resolve(__dirname, file)
 const { createBundleRenderer } = require('vue-server-renderer')
@@ -12,6 +13,7 @@ const Ouch = require('ouch')
 const redirects = require('./src/router/301.json')
 const rollbar = require('./src/util/rollbar')
 
+portfinder.basePort = 8095
 const isProd = process.env.NODE_ENV === 'production'
 const useMicroCache = process.env.MICRO_CACHE !== 'false'
 const serverInfo =
@@ -153,8 +155,14 @@ app.get('*', (req, res) => {
   res.redirect(302, `/${lang}${req.originalUrl}`)
 })
 
-const port = process.env.PORT || 8095
-const host = process.env.HOST || '0.0.0.0'
-app.listen(port, host, () => {
-  console.log(`server started at ${host}:${port}`)
+portfinder.getPort(function (err, port) {
+  if (err) {
+    console.log(err)
+  }
+
+  const host = process.env.HOST || '0.0.0.0'
+  port = process.env.PORT || port
+  app.listen(port, host, () => {
+    console.log(`server started at ${host}:${port}`)
+  })
 })
