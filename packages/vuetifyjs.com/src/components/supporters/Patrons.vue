@@ -91,7 +91,7 @@
     },
 
     async created () {
-      if (Object.keys(this.supporters).length) return
+      if (this.$ssrContext || Object.keys(this.supporters).length) return
 
       const supporters = await fetch('https://cdn.vuetifyjs.com/supporters.json', {
         headers: {
