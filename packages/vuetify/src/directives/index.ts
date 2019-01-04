@@ -3,13 +3,15 @@ import Resize from './resize'
 import Ripple from './ripple'
 import Scroll from './scroll'
 import Touch from './touch'
+import LinearGradient from './linear-gradient'
 
 export {
   ClickOutside,
   Ripple,
   Resize,
   Scroll,
-  Touch
+  Touch,
+  LinearGradient
 }
 
 export default {
@@ -17,5 +19,6 @@ export default {
   Ripple,
   Resize,
   Scroll,
-  Touch
+  Touch,
+  LinearGradient
 }
