@@ -28,8 +28,6 @@
 
 $button-sizes: ('x-small': 20, 'small': 28, 'default': 36, 'large': 54, 'x-large': 70)
 
-$fab-sizes: ('x-small': 20, 'small': 28, 'default': 36, 'large': 54, 'x-large': 70)
-
 // Theme
 .v-btn:not(.v-btn--outline)
   &.primary,
@@ -148,7 +146,7 @@ $fab-sizes: ('x-small': 20, 'small': 28, 'default': 36, 'large': 54, 'x-large': 
   &.v-btn--absolute
     z-index: 4
 
-  @each $name, $size in $fab-sizes
+  @each $name, $size in $button-sizes
     &.v-size--#{$name}
       height: #{$size}px
       width: #{$size}px
