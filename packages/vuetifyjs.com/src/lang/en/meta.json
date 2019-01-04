@@ -454,6 +454,11 @@
     "description": "Resize directive for the Vuetify framework.",
     "keywords": "resize, resize directive, window resize directive"
   },
+  "directives/linear-gradients": {
+    "title": "Linear gradients",
+    "description": "Linear gradient directive for the Vuetify framework.",
+    "keywords": "gradient, linear gradient"
+  },
   "directives/ripples": {
     "title": "Ripple",
     "description": "Ripple directive for the Vuetify framework.",

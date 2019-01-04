@@ -150,7 +150,8 @@
       { "text": "resizing", "to": "resizing" },
       { "text": "ripples", "to": "ripples" },
       { "text": "scrolling", "to": "scrolling" },
-      { "text": "touchSupport", "to": "touch-support" }
+      { "text": "touchSupport", "to": "touch-support" },
+      { "text": "linearGradients", "to": "linear-gradients" }
     ]
   },
   {

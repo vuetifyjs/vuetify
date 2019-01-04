@@ -290,6 +290,15 @@ module.exports = {
       }
     ]
   },
+  'v-linear-gradient': {
+    options: [
+      {
+        name: 'value',
+        default: 'undefined',
+        type: 'Object'
+      }
+    ]
+  },
   'v-ripple': {
     options: [
       {

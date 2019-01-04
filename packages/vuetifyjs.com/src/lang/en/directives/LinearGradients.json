@@ -1,0 +1,12 @@
+{
+  "header": "# Linear gradient directive",
+  "headerText": "The `v-linear-gradient` directive can be used for making elements with linear gradient background.",
+  "examples": {
+    "usage": {
+      "desc": "Linear gradient with some color stops. You can define color stop percent."
+    }
+  },
+  "options": {
+    "value": "`v-resize=\"gradient\"` Gradient properties."
+  }
+}
