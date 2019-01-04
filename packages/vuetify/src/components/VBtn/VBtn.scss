@@ -1,15 +1,6 @@
 // Imports
 @import '../../styles/styles';
 
-// first function, should move to global functions
-// does a deep map-get
-@function map-deep-get($map, $keys...) {
-  @each $key in $keys {
-    $map: map-get($map, $key);
-  }
-  @return $map;
-}
-
 // Mixins
 @mixin button-theme($material) {
   color: map-deep-get($material, 'text', 'primary');
