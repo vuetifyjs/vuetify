@@ -3,6 +3,7 @@
 exports[`full import should register all directives 1`] = `
 Array [
   "ClickOutside",
+  "LinearGradient",
   "Resize",
   "Ripple",
   "Scroll",
