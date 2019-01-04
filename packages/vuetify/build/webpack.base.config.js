@@ -49,11 +49,7 @@ exports.config = {
         use: cssLoaders
       },
       {
-        test: /\.scss$/,
-        use: sassLoaders
-      },
-      {
-        test: /\.sass$/,
+        test: /\.s(a|c)ss$/,
         use: sassLoaders
       }
     ]
