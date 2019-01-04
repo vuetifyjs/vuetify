@@ -16,7 +16,8 @@
           :group="supporters.diamond"
           :title="!hideTitles ? 'Diamond' : undefined"
           :class="classes"
-          large
+          :large="!compact"
+          :small="compact"
         />
 
         <supporter-group
@@ -66,6 +67,10 @@
     },
 
     props: {
+      compact: {
+        type: Boolean,
+        default: false
+      },
       dense: {
         type: Boolean,
         default: false
@@ -75,7 +80,7 @@
         default: false
       },
       tier: {
-        type: Number,
+        type: [Number, String],
         default: 10
       }
     },
@@ -84,7 +89,7 @@
       ...mapState('app', ['supporters']),
       classes () {
         return {
-          'mb-2': this.dense,
+          'mb-0': this.dense,
           'mb-5': !this.dense
         }
       }

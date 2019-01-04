@@ -6,6 +6,7 @@
 
     <supporters-patrons
       :tier="3"
+      class="mb-5"
       dense
       hide-titles
     />

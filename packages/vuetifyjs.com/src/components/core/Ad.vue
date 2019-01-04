@@ -1,7 +1,6 @@
 <template>
   <v-flex
     id="ad__container"
-    :key="$route.path"
     shrink
   >
     <template v-if="shouldShowAd">
@@ -23,29 +22,13 @@
             text-xs-center
           >
             <core-toc />
-            <h4 class="caption font-weight-bold grey--text">Diamond Sponsors</h4>
             <div class="my-3">
-              <div
-                v-for="diamond in diamonds"
-                :key="diamond.name"
-                class="text-xs-center mt-2"
-              >
-                <a
-                  :href="diamond.href"
-                  target="_blank"
-                  rel="noopener"
-                  @click="$ga.event('drawer', 'click', 'sponsor click', diamond.name)"
-                >
-                  <v-img
-                    :src="`https://cdn.vuetifyjs.com/images/${diamond.logo}`"
-                    :alt="diamond.Name"
-                    contain
-                    height="30"
-                  />
-                </a>
-              </div>
+              <supporters-patrons
+                compact
+                tier="1"
+              />
+              <supporters-sponsor-btn small />
             </div>
-            <supporters-sponsor-btn small />
           </v-flex>
 
           <ad-shown
