@@ -1,5 +1,9 @@
 <template>
-  <v-flex id="ad__container" shrink>
+  <v-flex
+    id="ad__container"
+    :key="$route.path"
+    shrink
+  >
     <template v-if="shouldShowAd">
       <ad-system-bar v-if="viewport === 'xs' && $vuetify.breakpoint.xsOnly">
         <ad-shown :viewport="viewport" />
