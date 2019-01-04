@@ -95,7 +95,6 @@
 <script>
   // Utilities
   import {
-    mapGetters,
     mapMutations,
     mapState
   } from 'vuex'

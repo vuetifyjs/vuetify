@@ -61,7 +61,6 @@
 
   // Utilities
   import {
-    mapGetters,
     mapState
   } from 'vuex'
 
