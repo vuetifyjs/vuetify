@@ -216,9 +216,10 @@ $button-floating-large-width: 72px !default;
 $button-floating-small-icon-width: 18px !default;
 $button-floating-large-icon-width: 30px !default;
 
-
+/** Cards */
 $card-border-radius: 2px !default;
 
+/** Chips */
 $chip-border-radius: 28px !default;
 $chip-close-margin: 0 2px 0 8px !default;
 $chip-close-margin-rtl: 0 8px 0 2px !default;
@@ -240,9 +241,11 @@ $chip-removable-padding-rtl: 0 $chip-icon-offset 0 $chip-margin !default;
 
 $chip-removable-padding: $chip-removeable-padding !default;
 
+/** Expansion panels */
 $expansion-panel-collapse-height: 48px !default;
 $collapsible-transition-height: 0.23s !default;
 
+/** Footer */
 $footer-height: 36px !default;
 
 /** Lists */
@@ -287,35 +290,43 @@ $list-item-dense-avatar-height: 38px !default;
 $list-dense-subheader-height: $list-item-dense-single-height !default;
 $list-dense-subheader-group-height: $list-dense-subheader-height !default;
 
+/** Sheets */
 $sheet-border-radius: 2px !default;
 
+/** Time pickers */
 $time-picker-number-font-size: 16px !default;
 $time-picker-indicator-size: 40px !default;
 
+/** Toolbars */
 $toolbar-height: 56px !default;
 $toolbar-item-padding: 0 16px !default;
 $toolbar-padding-y: 0 !default;
 $toolbar-padding-x: 16px !default;
 
+/** Circular progress bars */
 $progress-circular-rotate-animation: progress-circular-rotate 1.4s linear infinite !default;
 $progress-circular-rotate-dash: progress-circular-dash 1.4s ease-in-out infinite !default;
 $process-circular-intermediate-svg-transition: all 0.2s ease-in-out !default;
 $progress-circular-underlay-stroke: rgba(map-get($material-light, 'fg-color'), 0.1) !default;
 $progress-circular-overlay-transition: all 0.6s ease-in-out !default;
 
+/** Navigation drawers */
 $navigation-drawer-item-font-size: 14px !default;
 $navigation-drawer-item-font-weight: map-get($font-weights, 'medium') !default;
 $navigation-drawer-group-item-font-weight: map-get($font-weights, 'regular') !default;
 
+/** Snackbars */
 $snackbar-color: #fff !default;
 $snackbar-background-color: #323232 !default;
 $snackbar-corner-offset: 24px !default;
 
 $tab-text-transform: uppercase !default;
 
+/** Inputs */
 $input-top-spacing: 16px !default;
 $text-field-active-label-height: 12px !default;
 
+/** Timelines */
 $timeline-wedge-size: 10px !default;
 $timeline-dot-small-size: 24px !default;
 $timeline-dot-regular-size: 38px !default;
@@ -328,8 +339,10 @@ $timeline-inner-dot-regular-margin: 4px !default;
 $timeline-inner-dot-large-size: 42px !default;
 $timeline-inner-dot-large-margin: 5px !default;
 
+/** Ripples */
 $ripple-animation-transition-in: transform 0.25s map-get($transition, 'fast-out-slow-in'), opacity 0.1s map-get($transition, 'fast-out-slow-in') !default;
 $ripple-animation-transition-out: opacity 0.3s map-get($transition, 'fast-out-slow-in') !default;
 $ripple-animation-visible-opacity: 0.15 !default;
 
+/** Treeviews */
 $treeview-transition: 0.2s map-get($transition, 'linear-out-slow-in') !default;
