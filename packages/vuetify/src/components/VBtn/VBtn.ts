@@ -1,5 +1,5 @@
 // Styles
-import './VBtn.scss'
+import './VBtn.sass'
 
 // Extensions
 import VSheet from '../VSheet'

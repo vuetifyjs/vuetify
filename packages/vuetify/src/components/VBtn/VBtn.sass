@@ -1,0 +1,204 @@
+// Imports
+@import '../../styles/styles'
+
+// first function, should move to global functions
+// does a deep map-get
+@function map-deep-get($map, $keys...)
+  @each $key in $keys
+    $map: map-get($map, $key)
+
+  @return $map
+
+// Mixins
+@mixin button-theme($material)
+  color: map-deep-get($material, 'text', 'primary')
+
+  &.v-btn--disabled
+    color: map-deep-get($material, 'buttons', 'disabled') !important
+
+    .v-icon,
+    .v-btn__loading
+      color: map-deep-get($material, 'buttons', 'disabled') !important
+
+    &:not(.v-btn--flat):not(.v-btn--outline)
+      background-color: map-deep-get($material, 'buttons', 'focused') !important
+
+  &:not(.v-btn--flat)
+    background-color: map-get($material, 'app-bar')
+
+$button-sizes: ('x-small': 20, 'small': 28, 'default': 36, 'large': 54, 'x-large': 70)
+
+$fab-sizes: ('x-small': 20, 'small': 28, 'default': 36, 'large': 54, 'x-large': 70)
+
+// Theme
+.v-btn:not(.v-btn--outline)
+  &.primary,
+  &.secondary,
+  &.accent,
+  &.success,
+  &.error,
+  &.warning,
+  &.info
+    color: map-deep-get($material-dark, 'text', 'primary')
+
+.v-btn.theme--light
+  @include button-theme($material-light)
+.v-btn.theme--dark
+  @include button-theme($material-dark)
+
+// Block
+.v-btn
+  align-items: center
+  border-radius: 4px
+  display: inline-flex
+  flex: 0 0 auto
+  font-size: 14px
+  justify-content: center
+  outline: 0
+  max-width: 100%
+  position: relative
+  text-decoration: none
+  text-transform: uppercase
+  transition: $primary-transition
+  user-select: none
+  vertical-align: middle
+  white-space: nowrap
+
+  &:before
+    border-radius: inherit
+    bottom: 0
+    color: inherit
+    content: ''
+    position: absolute
+    left: 0
+    top: 0
+    opacity: 0.12
+    right: 0
+    transition: $primary-transition
+
+  &:not(.v-btn--disabled)
+    will-change: box-shadow
+
+  &:not(.v-btn--round)
+    @each $name, $size in $button-sizes
+      &.v-size--#{$name}
+        min-height: #{$size}px
+        min-width: #{round($size * 1.777777777777778)}px // default ratio
+        padding: 0 #{$size / 2}px
+
+  &.v-btn--active,
+  &:hover,
+  &:focus
+    &:before
+      background-color: currentColor
+
+  &.v-btn--disabled
+    pointer-events: none
+
+  &.v-btn--icon
+    &-left
+      padding-left: 12px
+    &-right
+      padding-right: 12px
+
+  &.v-btn--loading
+    pointer-events: none
+    transition: none
+
+    .v-btn__content
+      opacity: 0
+
+  &__loader
+    align-items: center
+    display: flex
+    height: 100%
+    justify-content: center
+    left: 0
+    position: absolute
+    top: 0
+    width: 100%
+
+// Elements
+.v-btn__content
+  align-items: center
+  color: inherit
+  display: flex
+  justify-content: center
+
+// Modifiers
+.v-btn--absolute
+  position: absolute
+
+.v-btn--block
+  display: flex
+  flex: 1 0 auto
+  min-width: 100% !important
+  max-width: auto
+
+.v-btn--depressed
+  box-shadow: none !important
+  background-color: transparent !important
+
+.v-btn--fab
+  min-height: 0
+  min-width: 0
+  padding: 0
+
+  &.v-btn--fixed,
+  &.v-btn--absolute
+    z-index: 4
+
+  @each $name, $size in $fab-sizes
+    &.v-size--#{$name}
+      height: #{$size}px
+      width: #{$size}px
+
+      .v-icon
+        font-size: #{round($size / 1.5)}px
+
+      &.v-btn--absolute
+        &.v-btn--bottom
+          bottom: -#{$size / 2}px
+
+        &.v-btn--top
+          top: -#{$size / 2}px
+
+      &.v-btn--fixed
+        &.v-btn--top
+          top: map-get($grid-gutters, 'lg')
+        &.v-btn--bottom
+          bottom: map-get($grid-gutters, 'lg')
+
+      &.v-btn--absolute,
+      &.v-btn--fixed
+        &.v-btn--left
+          left: map-get($grid-gutters, 'lg')
+        &.v-btn--right
+          right: map-get($grid-gutters, 'lg')
+
+
+.v-btn--fixed
+  position: fixed
+
+.v-btn--icon
+  .v-icon
+    font-size: 18px
+
+.v-btn--outline
+  border: 2px solid currentColor
+
+.v-btn--text,
+.v-btn--outline,
+.v-btn--flat
+  background-color: transparent !important
+
+.v-btn--round,
+.v-btn--outline
+  .v-icon
+    color: currentColor
+
+.v-btn--round
+  border-radius: 50%
+
+.v-btn--rounded
+  border-radius: 28px

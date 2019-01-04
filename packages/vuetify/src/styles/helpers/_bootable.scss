@@ -1,7 +1,0 @@
-@mixin bootable() {
-  transition: none;
-
-  &[data-booted="true"] {
-    transition: 0.2s map-get($transition, 'fast-out-slow-in');
-  }
-}
