@@ -325,9 +325,9 @@ test('VTimePicker.js', ({ mount }) => {
       expect(wrapper.vm.selectingMinute).toBe(true)
       expect(wrapper.vm.selectingSecond).toBe(false)
       clock.$emit('change')
-      expect(wrapper.vm.selecting).toBe(useSecondsValue ? selectingTimes.second : selectingTimes.minute)
-      expect(wrapper.vm.selectingHour).toBe(false)
-      expect(wrapper.vm.selectingMinute).toBe(!useSecondsValue)
+      expect(wrapper.vm.selecting).toBe(useSecondsValue ? selectingTimes.second : selectingTimes.hour)
+      expect(wrapper.vm.selectingHour).toBe(!useSecondsValue)
+      expect(wrapper.vm.selectingMinute).toBe(false)
       expect(wrapper.vm.selectingSecond).toBe(useSecondsValue)
     })
 

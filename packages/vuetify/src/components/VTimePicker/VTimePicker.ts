@@ -213,6 +213,8 @@ export default mixins(
         this.selecting = selectingTimes.minute
       } else if (this.useSeconds && this.selecting === selectingTimes.minute) {
         this.selecting = selectingTimes.second
+      } else {
+        this.selecting = selectingTimes.hour
       }
 
       if (this.inputHour === this.lazyInputHour &&
