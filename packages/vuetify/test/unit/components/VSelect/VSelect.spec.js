@@ -539,7 +539,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect(change.mock.calls).toEqual([['foo']])
   })
 
-  it('should not emit change event when clicked on the selecterd item', async () => {
+  it('should not emit change event when clicked on the selected item', async () => {
     const wrapper = mount(VSelect, {
       propsData: {
         items: ['foo', 'bar']
