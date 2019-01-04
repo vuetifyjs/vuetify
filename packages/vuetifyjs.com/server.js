@@ -160,9 +160,9 @@ portfinder.getPort(function (err, port) {
     console.log(err)
   }
 
-  const host = process.env.HOST || '0.0.0.0'
+  const host = process.env.HOST || 'localhost'
   port = process.env.PORT || port
   app.listen(port, host, () => {
-    console.log(`server started at ${host}:${port}`)
+    console.log(`server started at http://${host}:${port}`)
   })
 })
