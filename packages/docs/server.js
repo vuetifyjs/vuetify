@@ -135,7 +135,7 @@ function render (req, res) {
     crowdin: ''
   }
 
-  if (process.env.TRANSLATE) {
+  if (context.lang === 'eo-UY') {
     context.crowdin = `
     <script type="text/javascript">
       var _jipt = [];
