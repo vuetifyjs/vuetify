@@ -24,6 +24,7 @@
           id="search"
           key="search"
           ref="search"
+          :disabled="isProd"
           v-model="search"
           label="Search"
           append-icon="search"
@@ -33,6 +34,7 @@
           solo
           light
         />
+        <div class="text-xs-center caption grey--text">Under maintenance</div>
       </div>
     </v-container>
 
@@ -93,7 +95,6 @@
 <script>
   // Utilities
   import {
-    mapGetters,
     mapMutations,
     mapState
   } from 'vuex'
@@ -111,20 +112,17 @@
       docSearch: {},
       isSearching: false,
       items: drawerItems,
+      isProd: process.env.NODE_ENV === 'production',
       search: ''
     }),
 
     computed: {
-      ...mapGetters('app', ['supporters']),
       ...mapState('app', ['drawer']),
       children () {
         return this.item.children.map(item => ({
           ...item,
           to: `${this.item.group}/${item.to}`
         }))
-      },
-      diamonds () {
-        return this.supporters.diamond
       },
       group () {
         return this.item.children.map(item => {

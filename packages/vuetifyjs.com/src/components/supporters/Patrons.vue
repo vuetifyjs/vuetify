@@ -54,7 +54,11 @@
 </template>
 
 <script>
-  const supporters = require('@/data/supporters.json')
+  // Utilities
+  import {
+    mapMutations,
+    mapState
+  } from 'vuex'
 
   export default {
     components: {
@@ -76,17 +80,30 @@
       }
     },
 
-    data: () => ({
-      supporters
-    }),
-
     computed: {
+      ...mapState('app', ['supporters']),
       classes () {
         return {
           'mb-2': this.dense,
           'mb-5': !this.dense
         }
       }
+    },
+
+    async created () {
+      if (Object.keys(this.supporters).length) return
+
+      const supporters = await fetch('https://cdn.vuetifyjs.com/supporters.json', {
+        headers: {
+          'Access-Control-Allow-Origin': '*'
+        }
+      }).then(res => res.json())
+
+      if (supporters) this.setSupporters(supporters)
+    },
+
+    methods: {
+      ...mapMutations('app', ['setSupporters'])
     }
   }
 </script>
