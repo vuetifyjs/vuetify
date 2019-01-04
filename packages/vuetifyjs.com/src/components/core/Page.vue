@@ -81,21 +81,22 @@
       }
     },
 
-    created () {
+    async created () {
       const namespace = kebabCase(this.namespace)
       const page = upperFirst(camelCase(this.page))
 
       this.setIsLoading(true)
 
-      import(
-        /* webpackChunkName: "pages" */
-        `@/data/pages/${namespace}/${page}.json`
-      ).then(res => {
-        this.structure = res.default
-      }).catch(() => {
+      try {
+        this.structure = (await import(
+          /* webpackChunkName: "pages" */
+          `@/data/pages/${namespace}/${page}.json`
+        )).default
+      } catch (err) {
         this.structure = false
-        throw new Error(`Unable to find page for <${namespace}/${page}>`)
-      }).finally(() => this.setIsLoading(false))
+      }
+
+      this.setIsLoading(false)
     },
 
     mounted () {
