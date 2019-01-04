@@ -83,7 +83,7 @@ module.exports = async () => {
       devServer: {
          contentBase: resolve('../dev'),
          publicPath: '/dev/',
-         host: process.env.HOST || '0.0.0.0',
+         host: process.env.HOST || 'localhost',
          port: process.env.PORT || await portfinder.getPortPromise(),
          disableHostCheck: true
       },
