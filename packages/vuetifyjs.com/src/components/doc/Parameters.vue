@@ -83,15 +83,16 @@
 
 <script>
   // Utilities
-  import { mapState } from 'vuex'
+  import {
+    mapGetters,
+    mapState
+  } from 'vuex'
   import { getObjectValueByPath } from 'vuetify/es5/util/helpers'
   import camelCase from 'lodash/camelCase'
   import upperFirst from 'lodash/upperFirst'
   import pluralize from 'pluralize'
 
   export default {
-    inject: ['namespace', 'page'],
-
     props: {
       target: {
         type: String,
@@ -123,6 +124,10 @@
     }),
 
     computed: {
+      ...mapGetters('documentation', [
+        'namespace',
+        'page'
+      ]),
       ...mapState('documentation', ['deprecatedIn', 'newIn']),
       computedItems () {
         const items = []

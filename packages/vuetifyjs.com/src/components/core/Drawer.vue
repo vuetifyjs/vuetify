@@ -103,15 +103,10 @@
   import { genChip } from '@/util/helpers'
 
   export default {
-    provide: {
-      namespace: 'Vuetify',
-      page: 'AppDrawer'
-    },
-
     data: () => ({
       docSearch: {},
       isSearching: false,
-      items: drawerItems,
+      drawerItems,
       isProd: process.env.NODE_ENV === 'production',
       search: ''
     }),
@@ -136,6 +131,9 @@
         set (val) {
           this.setDrawer(val)
         }
+      },
+      items () {
+        return this.drawerItems.map(this.addLanguagePrefix)
       }
     },
 
@@ -181,6 +179,23 @@
 
     methods: {
       genChip,
+      addLanguagePrefix (item) {
+        const { children, subtext, ...props } = item
+        const newItem = {
+          ...props,
+          text: `Vuetify.AppDrawer.${item.text}`
+        }
+
+        if (children) {
+          newItem.children = children.map(this.addLanguagePrefix)
+        }
+
+        if (subtext) {
+          newItem.subtext = `Vuetify.AppDrawer.${item.subtext}`
+        }
+
+        return newItem
+      },
       ...mapMutations('app', ['setDrawer']),
       init ({ default: docsearch }) {
         const vm = this

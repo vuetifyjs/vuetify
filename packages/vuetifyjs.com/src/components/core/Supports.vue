@@ -25,6 +25,7 @@
         v-for="support in supports"
         :key="support.text"
         v-bind="support"
+        no-markdown
         @click="$ga.event('toolbar', 'click', 'support', support.text)"
       />
     </v-list>

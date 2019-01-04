@@ -29,6 +29,7 @@
         v-for="ecosystem in ecosystems"
         :key="ecosystem.text"
         v-bind="ecosystem"
+        no-markdown
         @click="$ga.event('toolbar', 'click', 'ecosystems', ecosystem.text)"
       />
       <v-divider />
@@ -37,6 +38,7 @@
         v-for="social in socials"
         :key="social.text"
         v-bind="social"
+        no-markdown
         @click="$ga.event('toolbar', 'click', 'ecosystems', social.text)"
       />
     </v-list>

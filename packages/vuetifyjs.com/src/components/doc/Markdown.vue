@@ -2,19 +2,13 @@
   // Utilities
   import marked from 'marked'
   import { parseLink } from '@/util/helpers'
+  // Utilities
+  import {
+    mapGetters,
+    mapState
+  } from 'vuex'
 
   export default {
-    inject: {
-      namespace: {
-        default: undefined
-      },
-      page: {
-        default: undefined
-      }
-    },
-
-    functional: true,
-
     props: {
       code: {
         type: [Array, String],
@@ -30,23 +24,30 @@
       }
     },
 
-    render (h, ctx) {
-      const { children, data, injections, props } = ctx
-      let code = props.code || props.source
+    computed: {
+      ...mapGetters('documentation', [
+        'namespace',
+        'page'
+      ]),
+      ...mapState('route', ['params'])
+    },
 
-      if (!props.code) {
-        if (children) {
-          code = children[0].text
+    render (h) {
+      let code = this.code || this.source
+
+      if (!this.code) {
+        if (this.$slots.default) {
+          code = this.$slots.default[0].text
         }
 
         if (code.indexOf('.') > -1) {
-          code = ctx.parent.$t(code)
+          code = this.$t(code)
         } else if (
-          injections.namespace &&
-          injections.page
+          this.namespace &&
+          this.page
         ) {
-          code = ctx.parent.$t(
-            `${injections.namespace}.${injections.page}.${code}`
+          code = this.$t(
+            `${this.namespace}.${this.page}.${code}`
           )
         }
       }
@@ -61,13 +62,12 @@
       // Convert markdown links
       code = code.replace(/\[([^\]]*)\]\(([^)]*)\)/g, parseLink)
 
-      return h(props.tag, {
+      return h(this.tag, {
         staticClass: 'markdown',
         class: {
           'mb-3': wantsList
         },
-        domProps: { innerHTML: marked(code) },
-        ...data
+        domProps: { innerHTML: marked(code) }
       })
     }
   }

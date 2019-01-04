@@ -35,68 +35,21 @@
 <script>
   // Utilities
   import {
-    mapMutations
+    mapState
   } from 'vuex'
   import { getComponent } from '@/util/helpers'
-  import kebabCase from 'lodash/kebabCase'
-  import camelCase from 'lodash/camelCase'
-  import upperFirst from 'lodash/upperFirst'
 
   export default {
     components: {
       NotFound: () => import('@/pages/general/404')
     },
 
-    provide () {
-      return {
-        namespace: upperFirst(camelCase(this.namespace)),
-        lang: this.lang,
-        page: upperFirst(camelCase(this.page))
-      }
-    },
-
-    props: {
-      // Provided by router
-      namespace: {
-        type: String,
-        default: undefined
-      },
-      page: {
-        type: String,
-        default: undefined
-      },
-      lang: {
-        type: String,
-        default: undefined
-      }
-    },
-
-    data: () => ({
-      structure: undefined
-    }),
-
     computed: {
+      ...mapState('documentation', ['structure']),
+      ...mapState('route', ['params']),
       composite () {
-        return `${this.namespace}-${this.page}`
+        return `${this.params.namespace}-${this.params.page}`
       }
-    },
-
-    async created () {
-      const namespace = kebabCase(this.namespace)
-      const page = upperFirst(camelCase(this.page))
-
-      this.setIsLoading(true)
-
-      try {
-        this.structure = (await import(
-          /* webpackChunkName: "pages" */
-          `@/data/pages/${namespace}/${page}.json`
-        )).default
-      } catch (err) {
-        this.structure = false
-      }
-
-      this.setIsLoading(false)
     },
 
     mounted () {
@@ -105,7 +58,6 @@
     },
 
     methods: {
-      ...mapMutations('app', ['setIsLoading']),
       getComponent,
       init () {
         const sameInternal = this.$el.querySelectorAll('a.markdown--same-internal')
