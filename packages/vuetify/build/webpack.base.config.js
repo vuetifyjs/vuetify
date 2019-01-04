@@ -21,7 +21,7 @@ const cssLoaders = [
   { loader: 'stylus-loader', options: { sourceMap: !isProd } }
 ]
 
-const scssLoaders = [
+const sassLoaders = [
   extractCSS ? MiniCssExtractPlugin.loader : 'style-loader',
   { loader: 'css-loader' },
   { loader: 'postcss-loader', options: { sourceMap: !isProd } },
@@ -50,7 +50,11 @@ exports.config = {
       },
       {
         test: /\.scss$/,
-        use: scssLoaders
+        use: sassLoaders
+      },
+      {
+        test: /\.sass$/,
+        use: sassLoaders
       }
     ]
   },
