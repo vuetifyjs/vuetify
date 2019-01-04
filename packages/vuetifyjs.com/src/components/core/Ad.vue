@@ -76,7 +76,7 @@
     }),
 
     computed: {
-      ...mapGetters('app', ['supporters']),
+      ...mapState('app', ['supporters']),
       ...mapState('route', ['path', 'name']),
       diamonds () {
         return this.supporters.diamond

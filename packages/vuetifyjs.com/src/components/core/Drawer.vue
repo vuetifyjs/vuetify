@@ -118,16 +118,12 @@
     }),
 
     computed: {
-      ...mapGetters('app', ['supporters']),
       ...mapState('app', ['drawer']),
       children () {
         return this.item.children.map(item => ({
           ...item,
           to: `${this.item.group}/${item.to}`
         }))
-      },
-      diamonds () {
-        return this.supporters.diamond
       },
       group () {
         return this.item.children.map(item => {
