@@ -1,0 +1,93 @@
+$material-dark: (
+  'status-bar': (
+    'regular': #000000,
+    'lights-out': rgba(#000, 0.2)
+  ),
+  'app-bar': #212121,
+  'background': #303030,
+  'cards': #424242,
+  'chips': (
+    'background': #555,
+    'color': #fff
+  ),
+  'dividers': rgba(#fff, 0.12),
+  'text': (
+    'theme': #fff,
+    'primary': #fff,
+    'secondary': rgba(#fff, 0.7),
+    'disabled': rgba(#fff, 0.5),
+    'link': map-get($blue, 'accent-1'),
+    'link-hover': map-get($grey, 'lighten-3')
+  ),
+  'icons': (
+    'active': #fff,
+    'inactive': rgba(#fff, 0.5)
+  ),
+  'inputs': (
+    'box': #fff,
+    'solo-inverted': rgba(#fff, 0.16),
+    'solo-inverted-focused': #fff,
+    'solo-inverted-focused-text': map-get(map-get($material-light, 'text'), 'primary')
+  ),
+  'list-tile': (
+    'hover': rgba(#fff, 0.08)
+  ),
+  'buttons': (
+    'disabled': rgba(#fff, 0.3),
+    'focused': rgba(#fff, 0.12),
+    'focused-alt': rgba(#fff, 0.1),
+    'pressed': rgba(#ccc, 0.25)
+  ),
+  'expansion-panels': (
+    'focus': #494949
+  ),
+  'selection-controls': (
+    'thumb': (
+      'inactive': map-get($grey, 'lighten-1'),
+      'disabled': map-get($grey, 'darken-3')
+    ),
+    'track': (
+      'inactive': rgba(#fff, 0.3),
+      'disabled': rgba(#fff, 0.1)
+    )
+  ),
+  'slider': (
+    'active': rgba(#fff, 0.3),
+    'inactive': rgba(#fff, 0.2),
+    'disabled': rgba(#fff, 0.2),
+    'discrete': #fff
+  ),
+  'tabs': (
+    'active': #fff
+  ),
+  'text-fields': (
+    'box': rgba(#000, 0.1),
+    'box-hover': rgba(#000, 0.2),
+    'box-focus': rgba(#000, 0.3)
+  ),
+  'input-bottom-line': rgba(#fff, 0.7),
+  'stepper': (
+    'active': rgba(#fff, 1),
+    'completed': rgba(#fff, 0.87),
+    'hover': rgba(#fff, 0.75)
+  ),
+  'table': (
+    'active': #505050,
+    'hover': map-get($grey, 'darken-2')
+  ),
+  'picker': (
+    'body': #424242,
+    'clock': map-get($grey, 'darken-2'),
+    'indeterminateTime': map-get($grey, 'darken-1'),
+    'title': map-get($grey, 'darken-2')
+  ),
+  'bg-color': #303030,
+  'fg-color': #fff,
+  'text-color': #fff,
+  'primary-text-percent': 1,
+  'secondary-text-percent': 0.7,
+  'disabledORhints-text-percent': 0.5,
+  'divider-percent': 0.12,
+  'active-icon-percent': 1,
+  'inactive-icon-percent': 0.5
+)
