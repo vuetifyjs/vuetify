@@ -132,7 +132,8 @@ test('VTreeView.ts', ({ mount }) => {
     const wrapper = mount(VTreeview, {
       propsData: {
         items: [{ id: 0, name: 'Root', children: [{ id: 1, name: 'Child' }] }],
-        value: []
+        value: [],
+        selectable: true
       }
     })
 
@@ -146,7 +147,7 @@ test('VTreeView.ts', ({ mount }) => {
     expect(wrapper.find('.v-treeview-node--selected').length).toBe(2)
     expect(wrapper.html()).toMatchSnapshot()
 
-    wrapper.setProps({ value: undefined })
+    wrapper.setProps({ value: [] })
     await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
   })
@@ -409,5 +410,43 @@ test('VTreeView.ts', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
 
     expect(Object.keys(wrapper.vm.nodes).length).toBe(2)
+  })
+
+  it('should emit objects when return-object prop is used', async () => {
+    const items = [{ id: 0, name: 'Root', children: [{ id: 1, name: 'Child' }] }]
+
+    const wrapper = mount(VTreeview, {
+      propsData: {
+        items,
+        activatable: true,
+        selectable: true,
+        returnObject: true
+      }
+    })
+
+    const active = jest.fn()
+    wrapper.vm.$on('update:active', active)
+    const selected = jest.fn()
+    wrapper.vm.$on('input', selected)
+    const open = jest.fn()
+    wrapper.vm.$on('update:open', open)
+
+    wrapper.find('.v-treeview-node__root')[0].trigger('click')
+    await wrapper.vm.$nextTick()
+
+    expect(active).toHaveBeenCalledTimes(1)
+    expect(active).toHaveBeenCalledWith([items[0]])
+
+    wrapper.find('.v-treeview-node__checkbox')[0].trigger('click')
+    await wrapper.vm.$nextTick()
+
+    expect(selected).toHaveBeenCalledTimes(1)
+    expect(selected).toHaveBeenCalledWith([items[0], items[0].children[0]])
+
+    wrapper.find('.v-treeview-node__toggle')[0].trigger('click')
+    await wrapper.vm.$nextTick()
+
+    expect(open).toHaveBeenCalledTimes(1)
+    expect(open).toHaveBeenCalledWith([items[0]])
   })
 })
