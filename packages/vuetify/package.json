@@ -16,6 +16,7 @@
   "types": "types/index.d.ts",
   "sideEffects": [
     "*.styl",
+    "*.scss",
     "*.css"
   ],
   "scripts": {
@@ -62,11 +63,13 @@
     "friendly-errors-webpack-plugin": "^1.7.0",
     "happypack": "^5.0.0",
     "mini-css-extract-plugin": "^0.4.4",
+    "node-sass": "^4.11.0",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "postcss-loader": "^3.0.0",
     "pug": "^2.0.3",
     "pug-loader": "^2.4.0",
     "rimraf": "^2.6.2",
+    "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
