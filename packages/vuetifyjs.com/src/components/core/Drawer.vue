@@ -24,7 +24,6 @@
           id="search"
           key="search"
           ref="search"
-          :disabled="isProd"
           v-model="search"
           label="Search"
           append-icon="search"
@@ -34,7 +33,6 @@
           solo
           light
         />
-        <div class="text-xs-center caption grey--text">Under maintenance</div>
       </div>
     </v-container>
 
@@ -107,7 +105,6 @@
       docSearch: {},
       isSearching: false,
       drawerItems,
-      isProd: process.env.NODE_ENV === 'production',
       search: ''
     }),
 
