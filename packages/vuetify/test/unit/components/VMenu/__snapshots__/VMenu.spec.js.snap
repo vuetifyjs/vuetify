@@ -315,7 +315,7 @@ exports[`VMenu.js should work 1`] = `
 <div class="v-menu">
   <div class="v-menu__activator v-menu__activator--active">
     <button type="button"
-            class="v-btn theme--light elevation-2 v-size--default"
+            class="v-btn v-btn--contained theme--light v-size--default"
     >
       <div class="v-btn__content">
       </div>

@@ -86,7 +86,6 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
                   <div class="v-input__icon v-input__icon--append">
                     <i aria-hidden="true"
                        class="v-icon material-icons theme--light"
-                       style="font-size: 28px;"
                     >
                       arrow_drop_down
                     </i>
@@ -157,7 +156,6 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
           <div class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
-               style="font-size: 28px;"
             >
               chevron_left
             </i>
@@ -171,7 +169,6 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
           <div class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
-               style="font-size: 28px;"
             >
               chevron_right
             </i>
@@ -270,7 +267,6 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
                   <div class="v-input__icon v-input__icon--append">
                     <i aria-hidden="true"
                        class="v-icon material-icons theme--light"
-                       style="font-size: 28px;"
                     >
                       arrow_drop_down
                     </i>
@@ -341,7 +337,6 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
           <div class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
-               style="font-size: 28px;"
             >
               chevron_left
             </i>
@@ -355,7 +350,6 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
           <div class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
-               style="font-size: 28px;"
             >
               chevron_right
             </i>
@@ -456,7 +450,6 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
                   <div class="v-input__icon v-input__icon--append">
                     <i aria-hidden="true"
                        class="v-icon material-icons theme--light"
-                       style="font-size: 28px;"
                     >
                       arrow_drop_down
                     </i>
@@ -527,7 +520,6 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
           <div class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
-               style="font-size: 28px;"
             >
               chevron_left
             </i>
@@ -541,7 +533,6 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
           <div class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
-               style="font-size: 28px;"
             >
               chevron_right
             </i>
@@ -625,7 +616,6 @@ exports[`VDataTable.vue should match a snapshot with single rows-per-page-items 
           <div class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
-               style="font-size: 28px;"
             >
               chevron_left
             </i>
@@ -638,7 +628,6 @@ exports[`VDataTable.vue should match a snapshot with single rows-per-page-items 
           <div class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
-               style="font-size: 28px;"
             >
               chevron_right
             </i>

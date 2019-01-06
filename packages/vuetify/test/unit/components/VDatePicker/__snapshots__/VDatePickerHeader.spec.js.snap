@@ -9,7 +9,6 @@ exports[`VDatePickerHeader.js should render component and match snapshot 1`] = `
     <div class="v-btn__content">
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
-         style="font-size: 28px;"
       >
         chevron_left
       </i>
@@ -28,7 +27,6 @@ exports[`VDatePickerHeader.js should render component and match snapshot 1`] = `
     <div class="v-btn__content">
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
-         style="font-size: 28px;"
       >
         chevron_right
       </i>
@@ -47,7 +45,6 @@ exports[`VDatePickerHeader.js should render component in RTL mode and match snap
     <div class="v-btn__content">
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
-         style="font-size: 28px;"
       >
         chevron_right
       </i>
@@ -66,7 +63,6 @@ exports[`VDatePickerHeader.js should render component in RTL mode and match snap
     <div class="v-btn__content">
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
-         style="font-size: 28px;"
       >
         chevron_left
       </i>
@@ -85,7 +81,6 @@ exports[`VDatePickerHeader.js should render component with default slot and matc
     <div class="v-btn__content">
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
-         style="font-size: 28px;"
       >
         chevron_left
       </i>
@@ -106,7 +101,6 @@ exports[`VDatePickerHeader.js should render component with default slot and matc
     <div class="v-btn__content">
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
-         style="font-size: 28px;"
       >
         chevron_right
       </i>
@@ -126,7 +120,6 @@ exports[`VDatePickerHeader.js should render disabled component and match snapsho
     <div class="v-btn__content">
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
-         style="font-size: 28px;"
       >
         chevron_left
       </i>
@@ -146,7 +139,6 @@ exports[`VDatePickerHeader.js should render disabled component and match snapsho
     <div class="v-btn__content">
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
-         style="font-size: 28px;"
       >
         chevron_right
       </i>
@@ -165,7 +157,6 @@ exports[`VDatePickerHeader.js should render readonly component and match snapsho
     <div class="v-btn__content">
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
-         style="font-size: 28px;"
       >
         chevron_left
       </i>
@@ -184,7 +175,6 @@ exports[`VDatePickerHeader.js should render readonly component and match snapsho
     <div class="v-btn__content">
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
-         style="font-size: 28px;"
       >
         chevron_right
       </i>

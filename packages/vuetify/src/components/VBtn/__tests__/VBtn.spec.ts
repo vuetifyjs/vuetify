@@ -15,7 +15,7 @@ import {
 } from '@vue/test-utils'
 import { compileToFunctions } from 'vue-template-compiler'
 
-describe('VBtn.js', () => {
+describe('VBtn.ts', () => {
   let mountFunction: (options?: object) => Wrapper<Vue>
   let router: Router
   let localVue: typeof Vue
@@ -191,7 +191,6 @@ describe('VBtn.js', () => {
 
   it('should have the correct elevation', async () => { // eslint-disable-line max-statements
     const wrapper = mountFunction()
-    expect(wrapper.classes('elevation-2')).toBe(true)
 
     wrapper.setProps({ disabled: true })
     expect(wrapper.classes('elevation-2')).toBe(false)
@@ -202,36 +201,6 @@ describe('VBtn.js', () => {
 
     wrapper.setProps({ elevation: 2 })
     expect(wrapper.classes('elevation-2')).toBe(true)
-
-    wrapper.trigger('mousedown')
-    expect(wrapper.classes('elevation-8')).toBe(true)
-
-    wrapper.trigger('mouseup')
-    expect(wrapper.classes('elevation-2')).toBe(true)
-
-    wrapper.trigger('mouseenter')
-    await new Promise(resolve => setTimeout(resolve, 0))
-    expect(wrapper.classes('elevation-4')).toBe(true)
-    expect(wrapper.vm.hasHover).toBe(true)
-    wrapper.trigger('mouseleave')
-    await new Promise(resolve => setTimeout(resolve, 0))
-    expect(wrapper.vm.hasHover).toBe(false)
-
-    wrapper.setProps({ fab: true })
-    expect(wrapper.classes('elevation-6')).toBe(true)
-
-    wrapper.trigger('mousedown')
-    expect(wrapper.classes('elevation-12')).toBe(true)
-
-    wrapper.trigger('mouseup')
-    expect(wrapper.classes('elevation-6')).toBe(true)
-
-    wrapper.trigger('mouseenter')
-    await new Promise(resolve => setTimeout(resolve, 0))
-    expect(wrapper.classes('elevation-8')).toBe(true)
-    wrapper.trigger('mouseleave')
-    await new Promise(resolve => setTimeout(resolve, 0))
-    expect(wrapper.vm.hasHover).toBe(false)
   })
 
   it('should toggle on route change if provided a to prop', async () => {
