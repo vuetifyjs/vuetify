@@ -67,6 +67,7 @@ $button-sizes: ('x-small': 20, 'small': 28, 'default': 36, 'large': 54, 'x-large
 
   &:before,
   &:after
+    border-radius: inherit
     bottom: 0
     color: inherit
     content: ''
@@ -79,9 +80,6 @@ $button-sizes: ('x-small': 20, 'small': 28, 'default': 36, 'large': 54, 'x-large
 
   &:before
     background-color: currentColor
-
-  &:after
-    border-radius: inherit
 
   &:not(.v-btn--disabled)
     will-change: box-shadow
@@ -103,6 +101,7 @@ $button-sizes: ('x-small': 20, 'small': 28, 'default': 36, 'large': 54, 'x-large
       opacity: 1
 
   &.v-btn--disabled
+    box-shadow: none
     pointer-events: none
 
   &.v-btn--icon
@@ -213,6 +212,9 @@ $button-sizes: ('x-small': 20, 'small': 28, 'default': 36, 'large': 54, 'x-large
 
 .v-btn--outline
   border: 2px solid currentColor
+
+  &:before
+    border-radius: 0
 
 .v-btn--outline,
 .v-btn--round

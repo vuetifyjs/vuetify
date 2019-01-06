@@ -123,10 +123,6 @@ export default baseMixins.extend<options>().extend({
         !this.depressed
       )
     },
-    computedElevation (): string | number {
-      if (this.disabled) return 0
-      return this.elevation
-    },
     computedRipple (): RippleOptions | boolean {
       const defaultRipple = this.icon || this.fab ? { circle: true } : true
       if (this.disabled) return false
