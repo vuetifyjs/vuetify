@@ -53,14 +53,15 @@
 </template>
 
 <script>
+// Utilities
+import {
+  mapGetters
+} from 'vuex'
+
 export default {
   name: 'Codepen',
 
   props: {
-    pen: {
-      type: Object,
-      default: () => ({})
-    },
     title: {
       type: String,
       default: 'Cooking with Vuetify'
@@ -72,9 +73,11 @@ export default {
   }),
 
   computed: {
+    ...mapGetters('app', ['ingredients']),
     cssResources () {
       return [
         'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons',
+        'https://cdn.materialdesignicons.com/2.5.94/css/materialdesignicons.min.css',
         `https://cdn.jsdelivr.net/npm/vuetify@${this.version}/dist/vuetify.min.css`
       ]
     },
@@ -85,21 +88,15 @@ export default {
         `https://cdn.jsdelivr.net/npm/vuetify@${this.version}/dist/vuetify.min.js`
       ]
     },
-    parseTemplate (target, template) {
-      const string = `(<${target}(.*)?>[\\w\\W]*<\\/${target}>)`
-      const regex = new RegExp(string, 'g')
-      const parsed = regex.exec(template) || []
-      return parsed[1] || ''
-    },
     script () {
       const imports = /(import*) ([^'\n]*) from ([^\n]*)/g
-      let component = /export default {([\s\S]*)}/g.exec(this.pen.script || '')
+      let component = /export default {([\s\S]*)}/g.exec(this.ingredients.script || '')
 
       component = ((component && component[1]) || '')
         .replace(/\n {2}/g, '\n')
         .trim()
 
-      let script = /<script>([\s\S]*)export default {/g.exec(this.pen.script || '')
+      let script = /<script>([\s\S]*)export default {/g.exec(this.ingredients.script || '')
 
       script = ((script && script[1]) || '')
         .replace(imports, '')
@@ -108,7 +105,7 @@ export default {
 
       script += script ? '\n\n' : ''
 
-      return this.additionalScript + script +
+      return script +
           `new Vue({
   el: '#app',
   ${component}
@@ -116,12 +113,12 @@ export default {
     },
     style () {
       return {
-        content: (this.pen.style || '').replace(/(<style.*?>|<\/style>)/g, '').replace(/\n {2}/g, '\n').trim(),
-        language: /<style.*lang=["'](.*)["'].*>/.exec(this.pen.style || '')
+        content: (this.ingredients.style || '').replace(/(<style.*?>|<\/style>)/g, '').replace(/\n {2}/g, '\n').trim(),
+        language: /<style.*lang=["'](.*)["'].*>/.exec(this.ingredients.style || '')
       }
     },
     template () {
-      const template = this.pen.template || ''
+      const template = this.ingredients.template || ''
 
       return template
         .replace(/(<template>|<\/template>$)/g, '')

@@ -24,16 +24,30 @@ export default {
     ...mapState('app', ['component'])
   },
 
-  created () {
-    if (!this.$route.params.component) return
-
-    import(`@/pan/${this.$route.params.component}`)
-      .then(res => this.setComponent(res.default))
-      .catch(() => this.$router.push('/'))
+  watch: {
+    '$route.params': {
+      immediate: true,
+      handler: 'load'
+    }
   },
 
   methods: {
-    ...mapMutations('app', ['setComponent'])
+    ...mapMutations('app', [
+      'setComponent',
+      'setRaw'
+    ]),
+    load (params) {
+      const component = params.component
+
+      if (!component) return
+
+      import(`@/pan/${component}`)
+        .then(res => this.setComponent(res.default))
+        .catch(() => this.$router.push('/'))
+
+      import(`!raw-loader!@/pan/${component}.vue`)
+        .then(res => this.setRaw(res.default))
+    }
   }
 }
 </script>
