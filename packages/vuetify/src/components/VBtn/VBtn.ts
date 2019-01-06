@@ -120,7 +120,10 @@ export default baseMixins.extend<options>().extend({
     contained (): boolean {
       return Boolean(
         !this.isFlat &&
-        !this.depressed
+        !this.depressed &&
+        // Contained class only adds elevation
+        // is not needed if user provides value
+        !this.elevation
       )
     },
     computedRipple (): RippleOptions | boolean {
