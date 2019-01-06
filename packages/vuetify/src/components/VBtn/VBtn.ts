@@ -47,10 +47,6 @@ export default baseMixins.extend<options>().extend({
     },
     block: Boolean,
     depressed: Boolean,
-    elevation: {
-      type: [Number, String],
-      default: 2
-    },
     fab: Boolean,
     flat: Boolean,
     icon: {
@@ -90,6 +86,7 @@ export default baseMixins.extend<options>().extend({
         'v-btn--absolute': this.absolute,
         'v-btn--block': this.block,
         'v-btn--bottom': this.bottom,
+        'v-btn--contained': this.contained,
         'v-btn--disabled': this.disabled,
         'v-btn--flat': this.isFlat,
         'v-btn--fab': this.fab || this.icon === true,
@@ -120,11 +117,14 @@ export default baseMixins.extend<options>().extend({
 
       return classes
     },
+    contained (): boolean {
+      return Boolean(
+        !this.isFlat &&
+        !this.depressed
+      )
+    },
     computedElevation (): string | number {
-      if (this.isFlat || this.disabled) return 0
-      if (this.fab) return this.hasMouseDown ? 12 : this.hasHover ? 8 : 6
-      if (this.hasMouseDown) return 8
-      if (this.hasHover) return 4
+      if (this.disabled) return 0
       return this.elevation
     },
     computedRipple (): RippleOptions | boolean {
