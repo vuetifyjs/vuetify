@@ -1,26 +1,30 @@
 <template>
-  <v-system-bar
+  <v-toolbar
     app
-    window
+    flat
+    height="52"
   >
     <strong class="font-weight-black">Cooking:&nbsp;</strong>{{ cooking }} 🔥
     <v-spacer/>
-    <v-icon
-      title="Change theme"
+    <codepen />
+    <v-btn
+      icon
       @click="$vuetify.dark = !$vuetify.dark"
     >
-      mdi-invert-colors
-    </v-icon>
-    <a
+      <v-icon title="Change theme">
+        mdi-invert-colors
+      </v-icon>
+    </v-btn>
+    <v-btn
       :href="href"
       target="_blank"
       rel="noopener"
-      style="text-decoration: none;"
+      icon
       title="Edit this page on Github"
     >
       <v-icon>mdi-pencil</v-icon>
-    </a>
-  </v-system-bar>
+    </v-btn>
+  </v-toolbar>
 </template>
 
 <script>
@@ -30,6 +34,10 @@ import {
 } from 'vuex'
 
 export default {
+  components: {
+    Codepen: () => import('@/components/Codepen')
+  },
+
   computed: {
     ...mapGetters('app', ['cooking']),
     href () {

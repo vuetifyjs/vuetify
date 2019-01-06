@@ -1,6 +1,6 @@
 <template>
   <v-content>
-    <core-system-bar />
+    <core-toolbar />
 
     <component :is="component" />
   </v-content>
@@ -17,7 +17,7 @@ export default {
   name: 'Bootstrapper',
 
   components: {
-    CoreSystemBar: () => import('@/components/core/SystemBar')
+    CoreToolbar: () => import('@/components/core/Toolbar')
   },
 
   computed: {
