@@ -1,14 +1,21 @@
-import { set, toggle } from '@/utils/vuex'
+import { set } from '@/utils/vuex'
 
 export default {
   namespaced: true,
 
   state: {
-    drawer: null
+    component: null
+  },
+
+  getters: {
+    cooking: state => {
+      return state.component
+        ? state.component.name
+        : null
+    }
   },
 
   mutations: {
-    setDrawer: set('drawer'),
-    toggleDrawer: toggle('drawer')
+    setComponent: set('component')
   }
 }
