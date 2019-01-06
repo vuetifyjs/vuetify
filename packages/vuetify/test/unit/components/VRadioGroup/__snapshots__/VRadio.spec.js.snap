@@ -13,7 +13,6 @@ exports[`VRadio.vue should not render aria-label attribute with no label value o
     </div>
     <i aria-hidden="true"
        class="v-icon material-icons theme--light"
-       style="font-size: 28px;"
     >
       radio_button_unchecked
     </i>
@@ -41,7 +40,6 @@ exports[`VRadio.vue should render aria-label attribute with label value on input
     </div>
     <i aria-hidden="true"
        class="v-icon material-icons theme--light"
-       style="font-size: 28px;"
     >
       radio_button_unchecked
     </i>
@@ -69,7 +67,6 @@ exports[`VRadio.vue should render proper input name 1`] = `
     </div>
     <i aria-hidden="true"
        class="v-icon material-icons theme--light"
-       style="font-size: 28px;"
     >
       radio_button_unchecked
     </i>
@@ -96,7 +93,6 @@ exports[`VRadio.vue should render role and aria-checked attributes on input grou
     </div>
     <i aria-hidden="true"
        class="v-icon material-icons theme--light accent--text"
-       style="font-size: 28px;"
     >
       radio_button_unchecked
     </i>
@@ -122,7 +118,6 @@ exports[`VRadio.vue should render themed component 1`] = `
     </div>
     <i aria-hidden="true"
        class="v-icon material-icons theme--light"
-       style="font-size: 28px;"
     >
       radio_button_unchecked
     </i>
@@ -148,7 +143,6 @@ exports[`VRadio.vue should use custom icons 1`] = `
     </div>
     <i aria-hidden="true"
        class="v-icon material-icons theme--light"
-       style="font-size: 28px;"
     >
       bar
     </i>
@@ -174,7 +168,6 @@ exports[`VRadio.vue should use custom icons 2`] = `
     </div>
     <i aria-hidden="true"
        class="v-icon material-icons theme--light accent--text"
-       style="font-size: 28px;"
     >
       bar
     </i>

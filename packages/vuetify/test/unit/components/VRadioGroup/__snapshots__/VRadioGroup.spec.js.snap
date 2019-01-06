@@ -21,7 +21,6 @@ exports[`VRadioGroup.vue should be in error when v-radio-group is 1`] = `
             </div>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light error--text"
-               style="font-size: 28px;"
             >
               radio_button_unchecked
             </i>
@@ -64,7 +63,6 @@ exports[`VRadioGroup.vue should be in error when v-radio-group is 2`] = `
             </div>
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
-               style="font-size: 28px;"
             >
               radio_button_unchecked
             </i>

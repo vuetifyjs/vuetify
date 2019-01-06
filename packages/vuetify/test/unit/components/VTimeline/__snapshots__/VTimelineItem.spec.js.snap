@@ -23,7 +23,6 @@ exports[`VTimelineItem.js should conditionally render an icon or icon slot 2`] =
     <div class="v-timeline-item__inner-dot primary">
       <i aria-hidden="true"
          class="v-icon material-icons theme--dark"
-         style="font-size: 28px;"
       >
         foo
       </i>

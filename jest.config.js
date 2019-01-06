@@ -15,7 +15,8 @@ module.exports = {
   moduleNameMapper: {
     '^@/test$': '<rootDir>/test/index.js',
     '^@/test/(.*)$': '<rootDir>/test/$1',
-    '^@/(.*)$': '<rootDir>/src/$1'
+    '^@/(.*)$': '<rootDir>/src/$1',
+    '\\.(css|sass|scss)$': 'identity-obj-proxy'
   },
   transform: {
     '\\.(styl)$': 'jest-css-modules',

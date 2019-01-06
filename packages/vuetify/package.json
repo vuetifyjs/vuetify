@@ -63,6 +63,7 @@
     "fork-ts-checker-webpack-plugin": "^0.4.14",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "happypack": "^5.0.0",
+    "identity-obj-proxy": "^3.0.0",
     "mini-css-extract-plugin": "^0.4.4",
     "node-sass": "^4.11.0",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
