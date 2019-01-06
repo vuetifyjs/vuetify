@@ -35,7 +35,7 @@
 
       <v-flex>
         <v-alert
-          v-model="alert"
+          v-model="alertDismissible"
           dismissible
           type="success"
         >
@@ -44,10 +44,10 @@
 
         <div class="text-xs-center">
           <v-btn
-            v-if="!alert"
+            v-if="!alertDismissible"
             color="primary"
             dark
-            @click="alert = true"
+            @click="alertDismissible = true"
           >
             Reset
           </v-btn>
@@ -75,13 +75,13 @@
         <div class="text-xs-center">
           <v-btn
             color="primary"
-            @click="alert = !alert"
+            @click="alertTransition = !alertTransition"
           >
             Toggle
           </v-btn>
         </div>
         <v-alert
-          :value="alert"
+          v-model="alertTransition"
           type="success"
           transition="scale-transition"
         >
@@ -131,7 +131,8 @@ export default {
   name: 'Alerts',
 
   data: () => ({
-    alert: true
+    alertDismissible: true,
+    alertTransition: true
   })
 }
 </script>
