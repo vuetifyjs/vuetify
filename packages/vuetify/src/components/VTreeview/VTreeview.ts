@@ -215,7 +215,7 @@ export default mixins(
       this.emitNodeCache('update:active', this.activeCache)
     },
     emitNodeCache (event: string, cache: NodeCache) {
-      this.$emit(event, [...cache].map(key => this.returnObject ? this.nodes[key].item : key))
+      this.$emit(event, this.returnObject ? [...cache].map(key => this.nodes[key].item) : [...cache])
     },
     handleNodeCacheWatcher (value: any[], cache: NodeCache, updateFn: Function, emitFn: Function) {
       value = this.returnObject ? value.map(v => getObjectValueByPath(v, this.itemKey)) : value
