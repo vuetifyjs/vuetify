@@ -13,6 +13,7 @@ exports[`VExpansionPanel.js should render an expanded component and match snapsh
       <div class="v-expansion-panel__header__icon">
         <i aria-hidden="true"
            class="v-icon material-icons theme--light"
+           style="font-size: 28px;"
         >
           keyboard_arrow_down
         </i>
@@ -42,6 +43,7 @@ exports[`VExpansionPanel.js should render an expanded component and match snapsh
       <div class="v-expansion-panel__header__icon">
         <i aria-hidden="true"
            class="v-icon material-icons theme--light"
+           style="font-size: 28px;"
         >
           keyboard_arrow_down
         </i>
@@ -70,6 +72,7 @@ exports[`VExpansionPanel.js should render component and match snapshot 1`] = `
       <div class="v-expansion-panel__header__icon">
         <i aria-hidden="true"
            class="v-icon material-icons theme--light"
+           style="font-size: 28px;"
         >
           keyboard_arrow_down
         </i>
@@ -99,6 +102,7 @@ exports[`VExpansionPanel.js should render component and match snapshot 2`] = `
       <div class="v-expansion-panel__header__icon">
         <i aria-hidden="true"
            class="v-icon material-icons theme--light"
+           style="font-size: 28px;"
         >
           keyboard_arrow_down
         </i>

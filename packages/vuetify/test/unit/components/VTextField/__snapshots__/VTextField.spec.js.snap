@@ -7,6 +7,7 @@ exports[`VTextField.js should apply theme to label, counter, messages and icons 
     <div class="v-input__icon v-input__icon--prepend">
       <i aria-hidden="true"
          class="v-icon material-icons theme--light"
+         style="font-size: 28px;"
       >
         prepend
       </i>
@@ -18,6 +19,7 @@ exports[`VTextField.js should apply theme to label, counter, messages and icons 
         <div class="v-input__icon v-input__icon--prepend-inner">
           <i aria-hidden="true"
              class="v-icon prepend prepend-inner theme--light"
+             style="font-size: 28px;"
           >
           </i>
         </div>
@@ -37,6 +39,7 @@ exports[`VTextField.js should apply theme to label, counter, messages and icons 
         <div class="v-input__icon v-input__icon--append">
           <i aria-hidden="true"
              class="v-icon material-icons theme--light"
+             style="font-size: 28px;"
           >
             append
           </i>
@@ -60,6 +63,7 @@ exports[`VTextField.js should apply theme to label, counter, messages and icons 
     <div class="v-input__icon v-input__icon--append-outer">
       <i aria-hidden="true"
          class="v-icon append append-outer theme--light"
+         style="font-size: 28px;"
       >
       </i>
     </div>

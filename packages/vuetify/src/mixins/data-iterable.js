@@ -378,7 +378,7 @@ export default {
         props: {
           disabled: this.computedPagination.page === 1,
           icon: true,
-          flat: true
+          text: true
         },
         on: {
           click: () => {
@@ -401,7 +401,7 @@ export default {
         props: {
           disabled,
           icon: true,
-          flat: true
+          text: true
         },
         on: {
           click: () => {

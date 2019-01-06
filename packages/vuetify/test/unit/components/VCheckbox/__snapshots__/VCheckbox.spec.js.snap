@@ -24,6 +24,7 @@ exports[`VCheckbox.js should render themed component 1`] = `
         </div>
         <i aria-hidden="true"
            class="v-icon material-icons theme--light"
+           style="font-size: 28px;"
         >
           check_box_outline_blank
         </i>
@@ -52,6 +53,7 @@ exports[`VCheckbox.js should use custom icons 1`] = `
         </div>
         <i aria-hidden="true"
            class="v-icon material-icons theme--light"
+           style="font-size: 28px;"
         >
           fizzbuzz
         </i>
@@ -80,6 +82,7 @@ exports[`VCheckbox.js should use custom icons 2`] = `
         </div>
         <i aria-hidden="true"
            class="v-icon material-icons theme--light"
+           style="font-size: 28px;"
         >
           fizzbuzz
         </i>
@@ -108,6 +111,7 @@ exports[`VCheckbox.js should use custom icons 3`] = `
         </div>
         <i aria-hidden="true"
            class="v-icon material-icons theme--light"
+           style="font-size: 28px;"
         >
           fizzbuzz
         </i>

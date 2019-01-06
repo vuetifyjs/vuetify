@@ -24,6 +24,7 @@
           id="search"
           key="search"
           ref="search"
+          :disabled="isProd"
           v-model="search"
           label="Search"
           append-icon="search"
@@ -33,6 +34,7 @@
           solo
           light
         />
+        <div class="text-xs-center caption grey--text">Under maintenance</div>
       </div>
     </v-container>
 
@@ -111,6 +113,7 @@
       docSearch: {},
       isSearching: false,
       items: drawerItems,
+      isProd: process.env.NODE_ENV === 'production',
       search: ''
     }),
 
@@ -177,6 +180,10 @@
       ).then(this.init)
     },
 
+    destroyed () {
+      this.docSearch.autocomplete.autocomplete.close()
+    },
+
     methods: {
       genChip,
       ...mapMutations('app', ['setDrawer']),
@@ -209,6 +216,7 @@
 
   .algolia-autocomplete
     flex: 1 1 auto
+    position: fixed !important
 
   .v-chip--x-small
     font-family: 'Roboto', sans-serif

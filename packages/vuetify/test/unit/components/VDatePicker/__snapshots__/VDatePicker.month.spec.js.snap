@@ -152,11 +152,12 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
     <div>
       <div class="v-date-picker-header theme--light">
         <button type="button"
-                class="v-btn v-btn--icon theme--light"
+                class="v-btn v-btn--flat v-btn--fab v-btn--round theme--light v-size--default v-btn--icon"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 28px;"
             >
               chevron_left
             </i>
@@ -170,11 +171,12 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
           </div>
         </div>
         <button type="button"
-                class="v-btn v-btn--icon theme--light"
+                class="v-btn v-btn--flat v-btn--fab v-btn--round theme--light v-size--default v-btn--icon"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 28px;"
             >
               chevron_right
             </i>
@@ -330,11 +332,12 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
     <div>
       <div class="v-date-picker-header theme--light">
         <button type="button"
-                class="v-btn v-btn--icon theme--light"
+                class="v-btn v-btn--flat v-btn--fab v-btn--round theme--light v-size--default v-btn--icon"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 28px;"
             >
               chevron_left
             </i>
@@ -348,11 +351,12 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
           </div>
         </div>
         <button type="button"
-                class="v-btn v-btn--icon theme--light"
+                class="v-btn v-btn--flat v-btn--fab v-btn--round theme--light v-size--default v-btn--icon"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 28px;"
             >
               chevron_right
             </i>
@@ -631,11 +635,12 @@ exports[`VDatePicker.js should match snapshot with pick-month prop 1`] = `
     <div>
       <div class="v-date-picker-header theme--light">
         <button type="button"
-                class="v-btn v-btn--icon theme--light"
+                class="v-btn v-btn--flat v-btn--fab v-btn--round theme--light v-size--default v-btn--icon"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 28px;"
             >
               chevron_left
             </i>
@@ -649,11 +654,12 @@ exports[`VDatePicker.js should match snapshot with pick-month prop 1`] = `
           </div>
         </div>
         <button type="button"
-                class="v-btn v-btn--icon theme--light"
+                class="v-btn v-btn--flat v-btn--fab v-btn--round theme--light v-size--default v-btn--icon"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 28px;"
             >
               chevron_right
             </i>

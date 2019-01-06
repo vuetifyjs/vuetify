@@ -21,11 +21,12 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
     <div>
       <div class="v-date-picker-header theme--light">
         <button type="button"
-                class="v-btn v-btn--icon theme--light"
+                class="v-btn v-btn--flat v-btn--fab v-btn--round theme--light v-size--default v-btn--icon"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 28px;"
             >
               chevron_left
             </i>
@@ -39,11 +40,12 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
           </div>
         </div>
         <button type="button"
-                class="v-btn v-btn--icon theme--light"
+                class="v-btn v-btn--flat v-btn--fab v-btn--round theme--light v-size--default v-btn--icon"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 28px;"
             >
               chevron_right
             </i>
@@ -392,11 +394,12 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
     <div>
       <div class="v-date-picker-header theme--light">
         <button type="button"
-                class="v-btn v-btn--icon theme--light"
+                class="v-btn v-btn--flat v-btn--fab v-btn--round theme--light v-size--default v-btn--icon"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 28px;"
             >
               chevron_left
             </i>
@@ -410,11 +413,12 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
           </div>
         </div>
         <button type="button"
-                class="v-btn v-btn--icon theme--light"
+                class="v-btn v-btn--flat v-btn--fab v-btn--round theme--light v-size--default v-btn--icon"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 28px;"
             >
               chevron_right
             </i>
@@ -763,11 +767,12 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
     <div>
       <div class="v-date-picker-header theme--dark">
         <button type="button"
-                class="v-btn v-btn--icon theme--dark"
+                class="v-btn v-btn--flat v-btn--fab v-btn--round theme--dark v-size--default v-btn--icon"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--dark"
+               style="font-size: 28px;"
             >
               chevron_left
             </i>
@@ -781,11 +786,12 @@ exports[`VDatePicker.js should match snapshot with dark theme 1`] = `
           </div>
         </div>
         <button type="button"
-                class="v-btn v-btn--icon theme--dark"
+                class="v-btn v-btn--flat v-btn--fab v-btn--round theme--dark v-size--default v-btn--icon"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--dark"
+               style="font-size: 28px;"
             >
               chevron_right
             </i>
@@ -1145,11 +1151,12 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
     <div>
       <div class="v-date-picker-header theme--light">
         <button type="button"
-                class="v-btn v-btn--icon theme--light"
+                class="v-btn v-btn--flat v-btn--fab v-btn--round theme--light v-size--default v-btn--icon"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 28px;"
             >
               chevron_left
             </i>
@@ -1163,11 +1170,12 @@ exports[`VDatePicker.js should match snapshot with default settings 1`] = `
           </div>
         </div>
         <button type="button"
-                class="v-btn v-btn--icon theme--light"
+                class="v-btn v-btn--flat v-btn--fab v-btn--round theme--light v-size--default v-btn--icon"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 28px;"
             >
               chevron_right
             </i>
@@ -1514,6 +1522,7 @@ exports[`VDatePicker.js should match snapshot with year icon 1`] = `
       2005
       <i aria-hidden="true"
          class="v-icon material-icons theme--dark"
+         style="font-size: 28px;"
       >
         year
       </i>
@@ -1550,11 +1559,12 @@ exports[`VDatePicker.js should render component with min/max props 1`] = `
       <div class="v-date-picker-header theme--light">
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--icon theme--light"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--fab v-btn--round theme--light v-size--default v-btn--icon"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 28px;"
             >
               chevron_left
             </i>
@@ -1569,11 +1579,12 @@ exports[`VDatePicker.js should render component with min/max props 1`] = `
         </div>
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--icon theme--light"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--fab v-btn--round theme--light v-size--default v-btn--icon"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 28px;"
             >
               chevron_right
             </i>
@@ -1948,11 +1959,12 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
       <div class="v-date-picker-header theme--light">
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--icon theme--light"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--fab v-btn--round theme--light v-size--default v-btn--icon"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 28px;"
             >
               chevron_left
             </i>
@@ -1967,11 +1979,12 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
         </div>
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--icon theme--light"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--fab v-btn--round theme--light v-size--default v-btn--icon"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 28px;"
             >
               chevron_right
             </i>
@@ -2323,11 +2336,12 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
       <div class="v-date-picker-header theme--light">
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--icon theme--light"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--fab v-btn--round theme--light v-size--default v-btn--icon"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 28px;"
             >
               chevron_left
             </i>
@@ -2342,11 +2356,12 @@ exports[`VDatePicker.js should render component with min/max props 2`] = `
         </div>
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--icon theme--light"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--fab v-btn--round theme--light v-size--default v-btn--icon"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 28px;"
             >
               chevron_right
             </i>
@@ -2514,11 +2529,12 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
       <div class="v-date-picker-header theme--light">
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--icon theme--light"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--fab v-btn--round theme--light v-size--default v-btn--icon"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 28px;"
             >
               chevron_left
             </i>
@@ -2533,11 +2549,12 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
         </div>
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--icon theme--light"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--fab v-btn--round theme--light v-size--default v-btn--icon"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 28px;"
             >
               chevron_right
             </i>
@@ -2889,11 +2906,12 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
       <div class="v-date-picker-header theme--light">
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--icon theme--light"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--fab v-btn--round theme--light v-size--default v-btn--icon"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 28px;"
             >
               chevron_left
             </i>
@@ -2908,11 +2926,12 @@ exports[`VDatePicker.js should render component with min/max props 3`] = `
         </div>
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--icon theme--light"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--fab v-btn--round theme--light v-size--default v-btn--icon"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 28px;"
             >
               chevron_right
             </i>
@@ -3087,11 +3106,12 @@ exports[`VDatePicker.js should render disabled picker 1`] = `
       <div class="v-date-picker-header v-date-picker-header--disabled theme--light">
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--icon theme--light"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--fab v-btn--round theme--light v-size--default v-btn--icon"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 28px;"
             >
               chevron_left
             </i>
@@ -3106,11 +3126,12 @@ exports[`VDatePicker.js should render disabled picker 1`] = `
         </div>
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--icon theme--light"
+                class="v-btn v-btn--disabled v-btn--flat v-btn--fab v-btn--round theme--light v-size--default v-btn--icon"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 28px;"
             >
               chevron_right
             </i>
@@ -3501,11 +3522,12 @@ exports[`VDatePicker.js should render readonly picker 1`] = `
     <div>
       <div class="v-date-picker-header theme--light">
         <button type="button"
-                class="v-btn v-btn--icon theme--light"
+                class="v-btn v-btn--flat v-btn--fab v-btn--round theme--light v-size--default v-btn--icon"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 28px;"
             >
               chevron_left
             </i>
@@ -3519,11 +3541,12 @@ exports[`VDatePicker.js should render readonly picker 1`] = `
           </div>
         </div>
         <button type="button"
-                class="v-btn v-btn--icon theme--light"
+                class="v-btn v-btn--flat v-btn--fab v-btn--round theme--light v-size--default v-btn--icon"
         >
           <div class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
+               style="font-size: 28px;"
             >
               chevron_right
             </i>
