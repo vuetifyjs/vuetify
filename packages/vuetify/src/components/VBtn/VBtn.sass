@@ -92,10 +92,16 @@ $button-sizes: ('x-small': 20, 'small': 28, 'default': 36, 'large': 54, 'x-large
         padding: 0 #{$size / 2}px
 
   &.v-btn--active,
-  &:hover,
   &:focus
     &:before
       opacity: 0.12
+
+    &:after
+      opacity: 1
+
+  &:hover
+    &:before
+      opacity: 0.06
 
     &:after
       opacity: 1
