@@ -125,4 +125,3 @@ export default {
   margin-top: 2rem;
 }
 </style>
-

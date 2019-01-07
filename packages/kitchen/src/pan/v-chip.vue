@@ -1,6 +1,8 @@
 <template>
   <v-container text-xs-center>
-    <v-layout column variations>
+    <v-layout
+      column
+      variations>
       <v-flex>
         <v-layout
           align-center
@@ -11,7 +13,9 @@
           <v-chip>Example Chip</v-chip>
           <v-chip close>
             <v-avatar>
-              <img src="https://randomuser.me/api/portraits/men/35.jpg" alt="trevor">
+              <img
+                src="https://randomuser.me/api/portraits/men/35.jpg"
+                alt="trevor">
             </v-avatar>
             Trevor Hansen
           </v-chip>
@@ -37,13 +41,21 @@
           justify-space-around
           wrap
         >
-          <v-chip color="primary" text-color="white">Primary</v-chip>
+          <v-chip
+            color="primary"
+            text-color="white">Primary</v-chip>
 
-          <v-chip color="secondary" text-color="white">Secondary</v-chip>
+          <v-chip
+            color="secondary"
+            text-color="white">Secondary</v-chip>
 
-          <v-chip color="red" text-color="white">Colored Chip</v-chip>
+          <v-chip
+            color="red"
+            text-color="white">Colored Chip</v-chip>
 
-          <v-chip color="green" text-color="white">Colored Chip</v-chip>
+          <v-chip
+            color="green"
+            text-color="white">Colored Chip</v-chip>
         </v-layout>
       </v-flex>
 
@@ -53,29 +65,40 @@
           justify-space-around
           wrap
         >
-          <v-chip color="indigo" text-color="white">
+          <v-chip
+            color="indigo"
+            text-color="white">
             <v-avatar>
               <v-icon>mdi-account-circle</v-icon>
             </v-avatar>
             Ranee
           </v-chip>
 
-          <v-chip color="orange" text-color="white">
+          <v-chip
+            color="orange"
+            text-color="white">
             Premium
             <v-icon right>mdi-star</v-icon>
           </v-chip>
 
-          <v-chip color="primary" text-color="white">
+          <v-chip
+            color="primary"
+            text-color="white">
             1 Year
             <v-icon right>mdi-cake</v-icon>
           </v-chip>
 
-          <v-chip color="green" text-color="white">
+          <v-chip
+            color="green"
+            text-color="white">
             <v-avatar class="green darken-4">1</v-avatar>
             Years
           </v-chip>
 
-          <v-chip close color="teal" text-color="white">
+          <v-chip
+            close
+            color="teal"
+            text-color="white">
             <v-avatar>
               <v-icon>mdi-check-circle</v-icon>
             </v-avatar>
@@ -90,11 +113,17 @@
           justify-space-around
           wrap
         >
-          <v-chip outline color="secondary">Outline</v-chip>
+          <v-chip
+            outline
+            color="secondary">Outline</v-chip>
 
-          <v-chip outline color="primary">Colored</v-chip>
+          <v-chip
+            outline
+            color="primary">Colored</v-chip>
 
-          <v-chip outline color="red">
+          <v-chip
+            outline
+            color="red">
             <v-icon left>mdi-wrench</v-icon>Icon
           </v-chip>
         </v-layout>
@@ -108,11 +137,17 @@
         >
           <v-chip label>Label</v-chip>
 
-          <v-chip label color="pink" text-color="white">
+          <v-chip
+            label
+            color="pink"
+            text-color="white">
             <v-icon left>mdi-label</v-icon>Tags
           </v-chip>
 
-          <v-chip label outline color="red">Outline</v-chip>
+          <v-chip
+            label
+            outline
+            color="red">Outline</v-chip>
         </v-layout>
       </v-flex>
 
