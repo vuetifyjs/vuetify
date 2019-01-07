@@ -73,11 +73,6 @@ export default baseMixins.extend<options>().extend({
     value: null as any as PropValidator<any>
   },
 
-  data: () => ({
-    hasMouseDown: false,
-    hasHover: false
-  }),
-
   computed: {
     classes (): any {
       const classes = {
@@ -223,13 +218,6 @@ export default baseMixins.extend<options>().extend({
     const render = h(tag, setColor(this.color, data), children)
 
     if (this.isFlat) return render
-
-    this._g(render.data!, {
-      mousedown: () => (this.hasMouseDown = true),
-      mouseup: () => (this.hasMouseDown = false),
-      mouseenter: () => (this.hasHover = true),
-      mouseleave: () => (this.hasHover = false)
-    })
 
     return render
   }
