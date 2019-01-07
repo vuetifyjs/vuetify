@@ -462,7 +462,6 @@
           :loading="loading"
           color="blue-grey"
           class="white--text"
-          icon="left"
           @click="loading = true"
         >
           <v-icon
@@ -474,7 +473,6 @@
           :loading="loading"
           color="blue-grey"
           class="white--text"
-          icon="right"
           @click="loading = true"
         >
           Upload
@@ -487,6 +485,7 @@
           disabled
           color="blue-grey"
           class="white--text"
+          @click="loading = true"
         >
           Upload
           <v-icon
@@ -497,9 +496,12 @@
       <!-- Left & right icons, loader with outline -->
       <v-flex>
         <v-btn
+          :loading="loading"
+          :disabled="loading"
           outline
           color="blue-grey"
           class="white--text"
+          @click="loading = true"
         >
           <v-icon
             left
@@ -507,9 +509,11 @@
           Upload
         </v-btn>
         <v-btn
+          :loading="loading"
           outline
           color="blue-grey"
           class="white--text"
+          @click="loading = true"
         >
           Upload
           <v-icon
