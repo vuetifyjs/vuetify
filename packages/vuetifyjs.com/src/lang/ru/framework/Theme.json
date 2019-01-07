@@ -18,7 +18,7 @@
   "optionHeader3": "### Caching",
   "optionText4": "A custom caching object and be provided (works in tandem with **minifyTheme**) to increase SSR efficiency. The object must contain a **get** and a **set** method. Below is an example using [LRU cache](https://www.npmjs.com/package/lru-cache).",
   "stylusHeader": "## Modifying Stylus variables",
-  "stylusText1": "Vuetify is built on top of **stylus**. Similar to **scss**, you can change variables and re-compile the style files. A list of available variables is located [here](https://github.com/vuetifyjs/vuetify/blob/master/src/stylus/settings/_variables.styl). In order to build the stylus file, you will need to configure your application to support stylus. If you are using one of the pre-made templates available on the [Quick Start](/getting-started/quick-start) guide, you can skip the next section.",
+  "stylusText1": "Vuetify is built on top of **stylus**. Similar to **scss**, you can change variables and re-compile the style files. A list of available variables is located [here](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/stylus/settings/_variables.styl). In order to build the stylus file, you will need to configure your application to support stylus. If you are using one of the pre-made templates available on the [Quick Start](/getting-started/quick-start) guide, you can skip the next section.",
   "stylusHeader2": "### Setup stylus-loader with Webpack",
   "stylusText2": "In the command line, run:",
   "stylusText3": "This will install the dependencies needed to import and parse stylus files. Once installed, open your webpack config and add a rule for stylus. For **SSR** based applications, ensure that the import is in your main `client-entry`.",
