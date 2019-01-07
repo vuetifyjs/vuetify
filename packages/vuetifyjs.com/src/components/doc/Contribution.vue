@@ -34,7 +34,7 @@
       },
       contributionLanguageLink () {
         const file = `${this.params.namespace}/${this.page}.json`
-        return `https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetifyjs.com/src/lang/${this.lang}/${file}`
+        return `https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetifyjs.com/src/lang/${this.params.lang}/${file}`
       },
       contributionPageLink () {
         const file = `${this.params.namespace}/${this.page}.json`
