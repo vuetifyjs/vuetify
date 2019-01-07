@@ -4,13 +4,13 @@
       Edit this <span v-html="contributionPageGithub" /> | <span v-html="contributionLanguageGithub" /> on Github
     </div>
     <v-spacer class="hidden-sm-and-down" />
-    <template v-if="$vuetify.breakpoint.smAndUp">
+    <div class="hidden-sm-and-down">
       <span class="hidden-md-and-up">&nbsp;—&nbsp;</span>
       <span
         class="pr-5"
         v-html="contributionGuide"
       />
-    </template>
+    </div>
   </v-layout>
 </template>
 
