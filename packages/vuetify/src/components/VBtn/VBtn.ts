@@ -158,6 +158,8 @@ export default baseMixins.extend<options>().extend({
   created () {
     /* istanbul ignore next */
     if (this.flat) deprecate('flat', 'text', this)
+    /* istanbul ignore next */
+    if (this.round) deprecate('round', 'rounded', this)
   },
 
   methods: {
