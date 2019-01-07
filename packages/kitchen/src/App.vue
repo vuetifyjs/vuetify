@@ -42,7 +42,7 @@
           :to="item.to"
         >
           <v-list-tile-content>
-            <v-list-tile-title>{{ item.title | capitalize }}</v-list-tile-title>
+            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
@@ -54,7 +54,7 @@
 <script>
 import meals from './pan'
 
-const items = meals.map(meal => ({ title: meal.split('-')[1], to: meal }))
+const items = meals.map(meal => ({ title: meal, to: meal }))
 
 export default {
   components: {
