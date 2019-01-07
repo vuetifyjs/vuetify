@@ -7,7 +7,7 @@ export default {
 
   computed: {
     title () {
-      return this.meta.title
+      return this.meta.title || 'Material Component Framework'
     },
     description () {
       return this.meta.description
