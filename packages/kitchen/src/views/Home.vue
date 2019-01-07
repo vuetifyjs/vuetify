@@ -1,23 +1,24 @@
 <template>
-  <v-container>
-    <v-layout column>
-      <h1 class="display-4 center">Oh no, we have no food!</h1>
-      <h2 class="display-3 center">Chef, what will we cook?</h2>
-      <v-select
-        :items="meals"
-        v-model="meal"
-        label="Meals"
-      />
-      <v-btn
-        :to="meal"
-        large
-        color="accent"
-        class="center"
-      >
-        Let's cook it!
-      </v-btn>
-    </v-layout>
-  </v-container>
+  <v-content>
+    <v-container text-xs-center>
+      <v-layout column>
+        <h2 class="display-3 center">What would you like to cook today?</h2>
+        <v-select
+          :items="meals"
+          v-model="meal"
+          label="Meals"
+        />
+        <v-btn
+          :to="meal"
+          large
+          color="accent"
+          class="center"
+        >
+          Let's cook it!
+        </v-btn>
+      </v-layout>
+    </v-container>
+  </v-content>
 </template>
 
 <script>
