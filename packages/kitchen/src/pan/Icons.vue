@@ -1,6 +1,7 @@
 <template>
   <v-container>
     <v-layout column>
+      <h3 class="display-2 mb-3 center">Basic</h3>
       <v-flex>
         <v-layout
           justify-space-around
@@ -83,6 +84,7 @@
         </v-layout>
       </v-flex>
 
+      <h3 class="display-2 mb-3 center">Colors</h3>
       <v-flex>
         <v-layout
           justify-space-around
@@ -197,5 +199,9 @@ export default {
   display: flex;
   flex: 1;
   justify-content: space-around;
+}
+
+.center {
+  align-self: center;
 }
 </style>

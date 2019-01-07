@@ -1,6 +1,15 @@
 <template>
   <v-container>
     <v-layout column>
+      <h3 class="display-2 mb-3 center">Basic</h3>
+      <v-flex>
+        <v-sparkline
+          :value="value"
+          auto-draw
+        />
+      </v-flex>
+
+      <h3 class="display-2 mb-3 center">Gradient</h3>
       <v-flex>
         <v-sparkline
           :value="value"
@@ -12,12 +21,8 @@
           auto-draw
         />
       </v-flex>
-      <v-flex>
-        <v-sparkline
-          :value="value"
-          auto-draw
-        />
-      </v-flex>
+
+      <h3 class="display-2 mb-3 center">With labels</h3>
       <v-flex>
         <v-sparkline
           :labels="labels"
@@ -58,3 +63,9 @@ export default {
   })
 }
 </script>
+
+<style scoped>
+.center {
+  align-self: center;
+}
+</style>

@@ -4,6 +4,7 @@
       column
       variations>
       <v-flex>
+        <h3 class="display-2 mb-3">Simple</h3>
         <v-layout
           align-center
           justify-space-around
@@ -26,16 +27,8 @@
         </v-layout>
       </v-flex>
 
-      <!--<v-flex>
-        <v-layout
-          align-center
-          justify-space-around
-          wrap
-        >
-        </v-layout>
-      </v-flex>-->
-
       <v-flex>
+        <h3 class="display-2 mb-3">Colors</h3>
         <v-layout
           align-center
           justify-space-around
@@ -60,6 +53,7 @@
       </v-flex>
 
       <v-flex>
+        <h3 class="display-2 mb-3">With icons</h3>
         <v-layout
           align-center
           justify-space-around
@@ -108,6 +102,7 @@
       </v-flex>
 
       <v-flex>
+        <h3 class="display-2 mb-3">Outline</h3>
         <v-layout
           align-center
           justify-space-around
@@ -130,6 +125,7 @@
       </v-flex>
 
       <v-flex>
+        <h3 class="display-2 mb-3">Labels</h3>
         <v-layout
           align-center
           justify-space-around
@@ -152,6 +148,7 @@
       </v-flex>
 
       <v-flex>
+        <h3 class="display-2 mb-3">Closable</h3>
         <v-layout
           align-center
           justify-space-around

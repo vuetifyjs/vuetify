@@ -4,6 +4,7 @@
       column
       variations>
       <v-flex>
+        <h3 class="display-2 mb-3">Colors</h3>
         <v-alert
           :value="true"
           type="success"
@@ -34,6 +35,7 @@
       </v-flex>
 
       <v-flex>
+        <h3 class="display-2 mb-3">Closable</h3>
         <v-alert
           v-model="alertDismissible"
           dismissible
@@ -55,6 +57,7 @@
       </v-flex>
 
       <v-flex>
+        <h3 class="display-2 mb-3">Custom icons</h3>
         <v-alert
           :value="true"
           color="success"
@@ -72,6 +75,7 @@
       </v-flex>
 
       <v-flex>
+        <h3 class="display-2 mb-3">Custom transitions</h3>
         <div class="text-xs-center">
           <v-btn
             color="primary"
@@ -90,6 +94,7 @@
       </v-flex>
 
       <v-flex>
+        <h3 class="display-2 mb-3">Outline</h3>
         <v-alert
           :value="true"
           color="success"

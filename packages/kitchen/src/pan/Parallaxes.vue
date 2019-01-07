@@ -1,10 +1,12 @@
 <template>
   <v-container>
     <v-layout column>
+      <h3 class="display-2 center">Basic</h3>
       <v-flex>
         <v-parallax src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"/>
       </v-flex>
 
+      <h3 class="display-2 center">With content</h3>
       <v-flex>
         <v-parallax
           dark
@@ -21,6 +23,7 @@
         </v-parallax>
       </v-flex>
 
+      <h3 class="display-2 center">Custom height</h3>
       <v-flex>
         <v-parallax
           height="300"
@@ -49,5 +52,9 @@ export default {
 <style scoped>
 .flex {
   margin-top: 2rem;
+}
+
+.center {
+  align-self: center;
 }
 </style>
