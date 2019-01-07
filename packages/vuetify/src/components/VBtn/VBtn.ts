@@ -43,8 +43,12 @@ export default baseMixins.extend<options>().extend({
   props: {
     activeClass: {
       type: String,
-      default: 'v-btn--active'
-    },
+      default (): string | undefined {
+        if (!this.btnToggle) return 'v-btn--active'
+
+        return this.btnToggle.activeClass
+      }
+    } as any as PropValidator<string>,
     block: Boolean,
     depressed: Boolean,
     fab: Boolean,
