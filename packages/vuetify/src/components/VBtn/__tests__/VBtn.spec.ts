@@ -258,4 +258,26 @@ describe('VBtn.ts', () => {
     wrapper.setProps({ value: { foo: 'bar' } })
     expect(wrapper.attributes('value')).toBe('{"foo":"bar"}')
   })
+
+  it('it should render a btn with icons', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        icon: 'left',
+        ripple: false
+      }
+    })
+
+    expect(wrapper.classes('v-btn--icon')).toBe(true)
+    expect(wrapper.classes('v-btn--icon-left')).toBe(true)
+
+    wrapper.setProps({ icon: 'right' })
+    expect(wrapper.classes('v-btn--icon-right')).toBe(true)
+
+    wrapper.setProps({ icon: true })
+    expect(wrapper.classes('v-btn--icon-left')).toBe(false)
+    expect(wrapper.classes('v-btn--icon-right')).toBe(false)
+
+    wrapper.setProps({ icon: false })
+    expect(wrapper.classes('v-btn--icon')).toBe(false)
+  })
 })
