@@ -91,7 +91,25 @@
       onInternalClick (e) {
         e.preventDefault()
 
-        this.$router.push(`/${this.params.lang}${e.target.getAttribute('href')}`)
+        const target = e.target.tagName === 'A'
+          ? e.target
+          : e.target.parentElement
+
+        const lang = `/${this.params.lang}`
+        const length = lang.length
+        let href = target.getAttribute('href')
+
+        // If missing leading forward slash
+        if (href.charAt(0) !== '/') {
+          href = `/${href}`
+        }
+
+        // If missing language
+        if (href.slice(0, length) !== lang) {
+          href = `${lang}${href}`
+        }
+
+        this.$router.push(href)
       }
     }
   }
