@@ -18,10 +18,6 @@
   export default {
     mixins: [Meta],
 
-    data: () => ({
-      isBooted: false
-    }),
-
     computed: {
       ...mapState('app', ['isLoading']),
       ...mapState('route', ['hash', 'name']),
@@ -30,15 +26,13 @@
       }
     },
 
-    watch: {
-      async isLoading (val) {
-        if (this.isBooted || !this.hash || val) return
+    async mounted () {
+      if (!this.hash) return
 
-        await waitForReadystate()
+      await this.$nextTick()
+      await waitForReadystate()
 
-        this.$vuetify.goTo(this.hash, { offset: -80 })
-        this.isBooted = true
-      }
+      this.$vuetify.goTo(this.hash, { offset: -80 })
     }
   }
 </script>
