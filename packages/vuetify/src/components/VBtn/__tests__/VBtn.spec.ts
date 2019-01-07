@@ -209,7 +209,11 @@ describe('VBtn.ts', () => {
     const unregister = jest.fn()
     const wrapper = mountFunction({
       provide: {
-        btnToggle: { register, unregister }
+        btnToggle: {
+          activeClass: 'foobar',
+          register,
+          unregister
+        }
       },
       methods: { toggle },
       ref: 'link'
