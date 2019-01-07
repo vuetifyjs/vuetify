@@ -1,0 +1,53 @@
+// Imports
+@import '../../styles/styles.sass'
+
+// first function, should move to global functions
+// does a deep map-get
+@function map-deep-get($map, $keys...)
+  @each $key in $keys
+    $map: map-get($map, $key)
+
+  @return $map
+
+// Mixins
+@mixin button-toggle-theme($material)
+  .v-btn.v-btn
+    border-color: map-get($material, 'dividers')
+
+    &:focus:not(:active)
+      border-color: map-deep-get($material, 'buttons', 'disabled')
+
+.v-btn-toggle.theme--light
+  @include button-toggle-theme($material-light)
+.v-btn-toggle.theme--dark
+  @include button-toggle-theme($material-dark)
+
+// Block
+.v-btn-toggle
+  border-radius: 2px
+  display: inline-flex
+
+  > .v-btn.v-btn
+    border-radius: 0
+    border-style: solid
+    border-width: thin
+    box-shadow: none !important
+    min-height: 0
+    min-width: 48px
+    padding: 0 12px
+    height: 48px
+
+    &:first-child
+      border-top-left-radius: inherit
+      border-bottom-left-radius: inherit
+
+    &:last-child
+      border-top-right-radius: inherit
+      border-bottom-right-radius: inherit
+
+    &:after
+      display: none
+
+// Modifiers
+.v-btn-toggle--rounded
+  border-radius: 24px

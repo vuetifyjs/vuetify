@@ -913,6 +913,24 @@
         </v-btn-toggle>
       </v-flex>
       <v-flex>
+        <v-btn-toggle
+          multiple
+          rounded>
+          <v-btn text>
+            <v-icon>mdi-format-bold</v-icon>
+          </v-btn>
+          <v-btn text>
+            <v-icon>mdi-format-italic</v-icon>
+          </v-btn>
+          <v-btn text>
+            <v-icon>mdi-format-underline</v-icon>
+          </v-btn>
+          <v-btn text>
+            <v-icon>mdi-format-color-fill</v-icon>
+          </v-btn>
+        </v-btn-toggle>
+      </v-flex>
+      <v-flex>
         <v-btn-toggle>
           <v-btn text>
             <v-icon>mdi-format-align-left</v-icon>
