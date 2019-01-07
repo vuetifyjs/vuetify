@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-layout column>
-      <h3 class="display-2 mb-3 center">Basic</h3>
+      <h3 class="title grey--text mb-4 mt-5 center">Basic</h3>
       <v-flex>
         <v-layout
           justify-space-around
@@ -84,7 +84,7 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="display-2 mb-3 center">Colors</h3>
+      <h3 class="title grey--text mb-4 mt-5 center">Colors</h3>
       <v-flex>
         <v-layout
           justify-space-around

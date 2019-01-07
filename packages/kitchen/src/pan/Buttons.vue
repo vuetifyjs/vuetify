@@ -3,7 +3,7 @@
     <v-layout
       column
       variations>
-      <h3 class="display-2 mb-3">Normal</h3>
+      <h3 class="title grey--text mb-4 mt-5">Normal</h3>
       <v-flex>
         <v-btn small>Normal</v-btn>
         <v-btn
@@ -36,7 +36,7 @@
           large
           disabled>Disabled</v-btn>
       </v-flex>
-      <h3 class="display-2 mb-3">Flat</h3>
+      <h3 class="title grey--text mb-4 mt-5">Flat</h3>
       <v-flex>
         <v-btn
           flat
@@ -85,7 +85,7 @@
           large
           disabled>Disabled</v-btn>
       </v-flex>
-      <h3 class="display-2 mb-3">Depressed</h3>
+      <h3 class="title grey--text mb-4 mt-5">Depressed</h3>
       <v-flex>
         <v-btn
           depressed
@@ -134,7 +134,7 @@
           large
           disabled>Disabled</v-btn>
       </v-flex>
-      <h3 class="display-2 mb-3">Rounded</h3>
+      <h3 class="title grey--text mb-4 mt-5">Rounded</h3>
       <v-flex>
         <v-btn
           round
@@ -183,7 +183,7 @@
           large
           disabled>Disabled</v-btn>
       </v-flex>
-      <h3 class="display-2 mb-3">Outline</h3>
+      <h3 class="title grey--text mb-4 mt-5">Outline</h3>
       <v-flex>
         <v-btn
           outline
@@ -232,7 +232,7 @@
           large
           disabled>Disabled</v-btn>
       </v-flex>
-      <h3 class="display-2 mb-3">Rounded with Outline</h3>
+      <h3 class="title grey--text mb-4 mt-5">Rounded with Outline</h3>
       <v-flex>
         <v-btn
           outline
@@ -294,7 +294,7 @@
           large
           disabled>Disabled</v-btn>
       </v-flex>
-      <h3 class="display-2 mb-3">FAB</h3>
+      <h3 class="title grey--text mb-4 mt-5">FAB</h3>
       <v-flex>
         <v-btn
           icon
@@ -392,7 +392,7 @@
           large
           disabled><v-icon>mdi-pencil</v-icon></v-btn>
       </v-flex>
-      <h3 class="display-2 mb-3">Outline FAB</h3>
+      <h3 class="title grey--text mb-4 mt-5">Outline FAB</h3>
       <v-flex>
         <v-btn
           outline
@@ -454,7 +454,7 @@
           large
           disabled><v-icon>mdi-pencil</v-icon></v-btn>
       </v-flex>
-      <h3 class="display-2 mb-3">Left & right icons, loader</h3>
+      <h3 class="title grey--text mb-4 mt-5">Left & right icons, loader</h3>
       <v-flex>
         <v-btn
           :disabled="loading"
@@ -492,7 +492,7 @@
             dark>mdi-cloud-upload</v-icon>
         </v-btn>
       </v-flex>
-      <h3 class="display-2 mb-3">Left & right icons, loader with outline</h3>
+      <h3 class="title grey--text mb-4 mt-5">Left & right icons, loader with outline</h3>
       <v-flex>
         <v-btn
           :loading="loading"
@@ -532,7 +532,7 @@
             dark>mdi-cloud-upload</v-icon>
         </v-btn>
       </v-flex>
-      <h3 class="display-2 mb-3">Block</h3>
+      <h3 class="title grey--text mb-4 mt-5">Block</h3>
       <v-flex>
         <v-btn
           block
@@ -581,7 +581,7 @@
           large
           disabled>Disabled</v-btn>
       </v-flex>
-      <h3 class="display-2 mb-3">Block with Outline</h3>
+      <h3 class="title grey--text mb-4 mt-5">Block with Outline</h3>
       <v-flex>
         <v-btn
           outline
@@ -643,7 +643,7 @@
           large
           disabled>Disabled</v-btn>
       </v-flex>
-      <h3 class="display-2 mb-3">Elevation</h3>
+      <h3 class="title grey--text mb-4 mt-5">Elevation</h3>
       <v-flex>
         <v-btn
           elevation="6"
@@ -743,7 +743,7 @@
       </v-btn>
     </v-layout>
 
-    <h3 class="display-2 mb-3">Groups</h3>
+    <h3 class="title grey--text mb-4 mt-5">Groups</h3>
     <v-layout
       groups
       column>

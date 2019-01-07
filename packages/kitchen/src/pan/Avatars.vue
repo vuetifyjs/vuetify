@@ -4,7 +4,7 @@
       column
       variations>
       <v-flex>
-        <h3 class="display-2 mb-3">Round</h3>
+        <h3 class="title grey--text mb-4 mt-5">Round</h3>
         <v-layout
           justify-space-around
           align-center
@@ -37,7 +37,7 @@
         </v-layout>
       </v-flex>
       <v-flex>
-        <h3 class="display-2 mb-3">Tile</h3>
+        <h3 class="title grey--text mb-4 mt-5">Tile</h3>
         <v-layout
           justify-space-around
           align-center
@@ -74,7 +74,7 @@
         </v-layout>
       </v-flex>
       <v-flex>
-        <h3 class="display-2 mb-3">With icons</h3>
+        <h3 class="title grey--text mb-4 mt-5">With icons</h3>
         <v-layout
           align-center
           justify-space-around
@@ -103,7 +103,7 @@
         </v-layout>
       </v-flex>
       <v-flex>
-        <h3 class="display-2 mb-3">With images</h3>
+        <h3 class="title grey--text mb-4 mt-5">With images</h3>
         <v-layout
           align-center
           justify-space-around
@@ -136,7 +136,7 @@
         </v-layout>
       </v-flex>
       <v-flex>
-        <h3 class="display-2 mb-3">With badges</h3>
+        <h3 class="title grey--text mb-4 mt-5">With badges</h3>
         <v-layout
           align-center
           justify-space-around
@@ -185,7 +185,7 @@
         </v-layout>
       </v-flex>
       <v-flex>
-        <h3 class="display-2 mb-3">With letters</h3>
+        <h3 class="title grey--text mb-4 mt-5">With letters</h3>
         <v-layout
           align-center
           justify-space-around

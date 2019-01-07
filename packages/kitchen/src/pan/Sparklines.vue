@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-layout column>
-      <h3 class="display-2 mb-3 center">Basic</h3>
+      <h3 class="title grey--text mb-4 mt-5 center">Basic</h3>
       <v-flex>
         <v-sparkline
           :value="value"
@@ -9,7 +9,7 @@
         />
       </v-flex>
 
-      <h3 class="display-2 mb-3 center">Gradient</h3>
+      <h3 class="title grey--text mb-4 mt-5 center">Gradient</h3>
       <v-flex>
         <v-sparkline
           :value="value"
@@ -22,7 +22,7 @@
         />
       </v-flex>
 
-      <h3 class="display-2 mb-3 center">With labels</h3>
+      <h3 class="title grey--text mb-4 mt-5 center">With labels</h3>
       <v-flex>
         <v-sparkline
           :labels="labels"
