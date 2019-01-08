@@ -89,7 +89,7 @@ $button-sizes: ('x-small': 20, 'small': 28, 'default': 36, 'large': 54, 'x-large
   &:not(.v-btn--round)
     @each $name, $size in $button-sizes
       &.v-size--#{$name}
-        min-height: #{$size}px
+        height: #{$size}px
         min-width: #{round($size * 1.777777777777778)}px // default ratio
         padding: 0 #{$size / 2}px
 
