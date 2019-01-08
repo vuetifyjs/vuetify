@@ -77,7 +77,7 @@ export default {
   }),
   computed: {
     href () {
-      return `https://github.com/vuetifyjs/vuetify/tree/master/packages/kitchen/src/pan/${this.$route.params.component}`
+      return `https://github.com/vuetifyjs/vuetify/tree/master/packages/kitchen/src/pan/${this.$route.params.component}.vue`
     }
   }
 }
