@@ -396,7 +396,7 @@ test('VMenu.js', ({ mount, compileToFunctions }) => {
     wrapper.vm.isActive = true
     await wrapper.vm.$nextTick()
     wrapper.trigger(`keydown.tab`)
-    await wrapper.vm.$nextTick()
+    await new Promise(resolve => setTimeout(resolve))
     expect(wrapper.vm.isActive).toBe(false)
 
     wrapper.setProps({ disableKeys: true })
