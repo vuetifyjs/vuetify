@@ -12,10 +12,13 @@
 // Mixins
 @mixin button-toggle-theme($material)
   .v-btn.v-btn
-    border-color: map-get($material, 'dividers')
+    border-color: map-get($material, 'dividers') !important
 
     &:focus:not(:active)
       border-color: map-deep-get($material, 'buttons', 'disabled')
+
+    .v-icon
+      color: map-deep-get($material, 'toggle-buttons', 'color')
 
 .v-btn-toggle.theme--light
   @include button-toggle-theme($material-light)
@@ -31,7 +34,7 @@
     border-radius: 0
     border-style: solid
     border-width: thin
-    box-shadow: none !important
+    box-shadow: none
     min-height: 0
     min-width: 48px
     padding: 0 12px

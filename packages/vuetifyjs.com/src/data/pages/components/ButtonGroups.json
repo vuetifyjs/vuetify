@@ -25,7 +25,11 @@
       "children": [
         {
           "type": "examples",
-          "value": ["appBar"]
+          "value": [
+            "appBar",
+            "qwerty",
+            "togglePictures"
+          ]
         }
       ]
     },

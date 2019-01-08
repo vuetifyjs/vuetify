@@ -8,6 +8,14 @@
     "appBar": {
       "header": "### In toolbar",
       "desc": "Easily integrate customized button solutions with a `v-toolbar`"
+    },
+    "qwerty": {
+      "header": "### Selected action",
+      "desc": "Group similar actions and design your own WYSIWYG component."
+    },
+    "togglePictures": {
+      "header": "### Custom groups",
+      "desc": "Icons can be used as toggle buttons when they allow selection, or deselection, of a single choice, such as marking an item as a favorite."
     }
   },
   "props": {
