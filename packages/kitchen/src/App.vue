@@ -8,7 +8,11 @@
       clipped-right
     >
       <v-toolbar-side-icon @click.stop="drawer = !drawer"/>
-      <v-toolbar-title>Vuetify kitchen</v-toolbar-title>
+      <v-toolbar-title class="white--text headline">
+        🍣
+        <span class="font-weight-black">VUETIFY</span>
+        <span class="font-weight-light">KITCHEN</span>
+      </v-toolbar-title>
       <v-spacer />
       <codepen />
       <v-btn

@@ -5,7 +5,7 @@
   "scripts": {
     "deploy": "now && now alias",
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "simmer": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
