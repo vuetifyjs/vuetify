@@ -85,9 +85,6 @@ elevation($z, important = false)
   filter: unquote('drop-shadow(' + $shadow-key-umbra[$z] + ')')
               unquote('drop-shadow(' + $shadow-key-penumbra[$z] + ')')
               unquote('drop-shadow(' + $shadow-key-ambient[$z] + ')') (important ? !important : )
-  -webkit-filter: unquote('drop-shadow(' + $shadow-key-umbra[$z] + ')')
-              unquote('drop-shadow(' + $shadow-key-penumbra[$z] + ')')
-              unquote('drop-shadow(' + $shadow-key-ambient[$z] + ')') (important ? !important : )
 
 elevationTransition($duration = 280ms, $easing = cubic-bezier(.4, 0, .2, 1))
   transition: box-shadow $duration $easing
