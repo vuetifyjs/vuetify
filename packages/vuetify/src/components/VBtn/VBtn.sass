@@ -60,7 +60,9 @@ $button-sizes: ('x-small': 20, 'small': 28, 'default': 36, 'large': 54, 'x-large
   position: relative
   text-decoration: none
   text-transform: uppercase
-  transition: box-shadow 0.28s map-get($transition, 'fast-out-slow-in')
+  transition-duration: 0.28s
+  transition-timing-function: map-get($transition, 'fast-out-slow-in')
+  transition-property: box-shadow, transform, opacity
   user-select: none
   vertical-align: middle
   white-space: nowrap
