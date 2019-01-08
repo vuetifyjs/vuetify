@@ -5,7 +5,7 @@ const ingredients = require.context(
 const meals = []
 
 for (const file of ingredients.keys()) {
-  if (file === './index.js' || file === './_Template.vue') continue
+  if (file.search(/_/) >= 0) continue
 
   meals.push(file.replace(/\.\/|.vue/g, ''))
 }
