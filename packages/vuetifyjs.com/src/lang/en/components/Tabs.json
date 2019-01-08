@@ -53,7 +53,7 @@
   "props": {
     "alignWithTitle": "Make `v-tabs` lined up with the toolbar title",
     "cycle": "Will reset to first or last tab when swiping left or right if at the end of indexes",
-    "grow": "Force `v-tab-item`'s to take up all available space",
+    "grow": "Force `v-tab`'s to take up all available space",
     "hideSlider": "Hide's the generated `v-tabs-slider`",
     "iconsAndText": "Will stack icon and text vertically",
     "prevIcon": "Left pagination icon",

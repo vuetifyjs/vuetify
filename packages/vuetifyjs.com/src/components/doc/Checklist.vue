@@ -14,17 +14,13 @@
 </template>
 
 <script>
+  // Utilities
+  import {
+    mapGetters
+  } from 'vuex'
+
   export default {
     name: 'Checklist',
-
-    inject: {
-      namespace: {
-        default: undefined
-      },
-      page: {
-        default: undefined
-      }
-    },
 
     props: {
       value: {
@@ -34,6 +30,10 @@
     },
 
     computed: {
+      ...mapGetters('documentation', [
+        'namespace',
+        'page'
+      ]),
       items () {
         return this.$t(
           `${this.namespace}.${this.page}.${this.value}`

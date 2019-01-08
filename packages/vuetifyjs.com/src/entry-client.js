@@ -1,5 +1,6 @@
 import 'vuetify/dist/vuetify.css'
 import '@mdi/font/css/materialdesignicons.css'
+import 'prismjs/themes/prism-tomorrow.css'
 import 'es6-promise/auto'
 
 import { createApp } from './main'
@@ -40,7 +41,10 @@ createApp({
       Promise.all([
         ...activated.map(c => {
           if (c.asyncData) {
-            return c.asyncData({ store })
+            return c.asyncData({
+              store,
+              route: to
+            })
           }
         })
       ]).finally(next)

@@ -30,7 +30,7 @@ const wrapper = {
     segmented: Boolean
   },
 
-  render (h, { props, data, slots, parent }) {
+  render (h, { props, data, slots, parent }) { // eslint-disable-line max-statements
     dedupeModelListeners(data)
     const children = rebuildSlots(slots(), h)
 
@@ -53,6 +53,8 @@ const wrapper = {
     if (props.editable) {
       deprecate('<v-select editable>', '<v-overflow-btn editable>', wrapper, parent)
     }
+
+    data.attrs = data.attrs || {}
 
     if (props.combobox || props.tags) {
       data.attrs.multiple = props.tags

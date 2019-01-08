@@ -16,7 +16,7 @@
             :indeterminate="props.indeterminate"
             primary
             hide-details
-            @click="toggleAll"
+            @click.stop="toggleAll"
           ></v-checkbox>
         </th>
         <th

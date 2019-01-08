@@ -30,7 +30,7 @@
         "children": [
           { "text": "aspectRatios", "to": "aspect-ratios" },
           { "text": "breakpoints", "to": "breakpoints" },
-          { "text": "preDefinedLayouts", "to": "pre-defined", "updated": true }
+          { "text": "preMadeLayouts", "to": "pre-made-layouts", "updated": true }
         ]
       },
       {

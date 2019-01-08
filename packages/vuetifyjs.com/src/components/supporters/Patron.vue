@@ -5,7 +5,7 @@
     flat
     tile
     color="transparent"
-    class="d-inline-flex mx-2 mb-3"
+    class="d-inline-flex mx-2"
     target="_blank"
     rel="noopener"
   >

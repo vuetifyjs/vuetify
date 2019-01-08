@@ -10,15 +10,18 @@ export default async function (to, from, savedPosition) {
   if (to.hash) {
     scrollTo = to.hash
     options.offset = -80
-  }
-
-  if (savedPosition) {
+  } else if (savedPosition) {
     scrollTo = savedPosition.y
   }
 
   return new Promise(resolve => {
     setTimeout(() => {
-      goTo(scrollTo, options)
+      try {
+        goTo(scrollTo, options)
+      } catch (err) {
+        console.log(err)
+      }
+
       resolve()
     }, 100)
   })

@@ -1,5 +1,5 @@
 {
-  "header": "# Layouts",
+  "header": "# Pre-made layouts",
   "headerText": "The layout system is the heart of every application. Below are the officially supported examples, ranging from desktop to mobile applications.",
   "markupHeader": "## Default application markup",
   "markupText": "This is an example of the default application markup for Vuetify. You can place your layout elements anywhere, as long as you apply the **app** property. The key component in all of this is the `v-content` element. This will be dynamically sized depending upon the structure of your designated **app** components. This allows you to create extremely customized solutions.",

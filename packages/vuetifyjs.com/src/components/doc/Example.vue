@@ -111,11 +111,13 @@
 
 <script>
   // Utilities
+  import {
+    mapGetters
+  } from 'vuex'
+
   import kebabCase from 'lodash/kebabCase'
 
   export default {
-    inject: ['namespace', 'page'],
-
     props: {
       value: {
         type: [Object, String],
@@ -134,6 +136,10 @@
     }),
 
     computed: {
+      ...mapGetters('documentation', [
+        'namespace',
+        'page'
+      ]),
       internalValue () {
         if (this.value === Object(this.value)) return this.value
 

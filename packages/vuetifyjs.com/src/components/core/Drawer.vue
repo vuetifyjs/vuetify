@@ -24,7 +24,6 @@
           id="search"
           key="search"
           ref="search"
-          :disabled="isProd"
           v-model="search"
           label="Search"
           append-icon="search"
@@ -34,7 +33,6 @@
           solo
           light
         />
-        <div class="text-xs-center caption grey--text">Under maintenance</div>
       </div>
     </v-container>
 
@@ -95,7 +93,6 @@
 <script>
   // Utilities
   import {
-    mapGetters,
     mapMutations,
     mapState
   } from 'vuex'
@@ -104,30 +101,20 @@
   import { genChip } from '@/util/helpers'
 
   export default {
-    provide: {
-      namespace: 'Vuetify',
-      page: 'AppDrawer'
-    },
-
     data: () => ({
       docSearch: {},
       isSearching: false,
-      items: drawerItems,
-      isProd: process.env.NODE_ENV === 'production',
+      drawerItems,
       search: ''
     }),
 
     computed: {
-      ...mapGetters('app', ['supporters']),
       ...mapState('app', ['drawer']),
       children () {
         return this.item.children.map(item => ({
           ...item,
           to: `${this.item.group}/${item.to}`
         }))
-      },
-      diamonds () {
-        return this.supporters.diamond
       },
       group () {
         return this.item.children.map(item => {
@@ -141,6 +128,9 @@
         set (val) {
           this.setDrawer(val)
         }
+      },
+      items () {
+        return this.drawerItems.map(this.addLanguagePrefix)
       }
     },
 
@@ -186,6 +176,23 @@
 
     methods: {
       genChip,
+      addLanguagePrefix (item) {
+        const { children, subtext, ...props } = item
+        const newItem = {
+          ...props,
+          text: `Vuetify.AppDrawer.${item.text}`
+        }
+
+        if (children) {
+          newItem.children = children.map(this.addLanguagePrefix)
+        }
+
+        if (subtext) {
+          newItem.subtext = `Vuetify.AppDrawer.${item.subtext}`
+        }
+
+        return newItem
+      },
       ...mapMutations('app', ['setDrawer']),
       init ({ default: docsearch }) {
         const vm = this
