@@ -1,7 +1,8 @@
 <template>
   <v-container
     v-if="structure !== false"
-    id="page"
+    :id="composite"
+    class="page"
   >
     <template v-if="structure">
       <doc-heading v-if="structure.title">
@@ -115,8 +116,12 @@
   }
 </script>
 
-<style>
-#page {
-  max-width: 1185px;
-}
+<style lang="stylus">
+  .page
+    max-width: 1185px;
+
+  #components-navigation-drawers
+    .v-sheet,
+    .v-card
+      overflow: hidden;
 </style>
