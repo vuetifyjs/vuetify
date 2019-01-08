@@ -55,7 +55,7 @@
       async genList () {
         const list = []
 
-        const items = document.querySelectorAll('#page [id]')
+        const items = document.querySelectorAll('.page [id]')
 
         for (const item of items) {
           if (
