@@ -4,6 +4,9 @@
 v-bottom-nav($material)
   background-color: $material.cards
 
+  .v-btn:not(.v-btn--active)
+    color: $material.text.secondary !important
+
 theme(v-bottom-nav, "v-bottom-nav")
 
 .v-item-group.v-bottom-nav
@@ -37,7 +40,6 @@ theme(v-bottom-nav, "v-bottom-nav")
     min-width: 80px
     padding: 8px 12px 10px
     text-transform: none
-    opacity: .5
     width: 100%
     // https://github.com/vuetifyjs/vuetify/issues/4643
     flex-shrink: 1
@@ -57,7 +59,6 @@ theme(v-bottom-nav, "v-bottom-nav")
         line-height: 1
 
     &--active
-      opacity: 1
       padding-top: 6px
 
       &:before
@@ -68,9 +69,6 @@ theme(v-bottom-nav, "v-bottom-nav")
 
         .v-icon
           transform: none
-
-    &:not(.v-btn--active)
-      filter: grayscale(100%)
 
   &--shift
     .v-btn__content
@@ -90,5 +88,5 @@ theme(v-bottom-nav, "v-bottom-nav")
     .v-icon
       transform: scale(1, 1) translate(0, 8px)
 
-    span
+    > span:not(.v-badge)
       color: transparent

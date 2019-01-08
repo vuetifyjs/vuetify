@@ -89,7 +89,7 @@ export default mixins(
       for (let i = 0; i < this.items.length; i++) {
         const item = this.items[i]
 
-        if (hasSlot) items.push(this.$scopedSlots.item({ item }))
+        if (hasSlot) items.push(this.$scopedSlots.item!({ item }))
         else items.push(this.$createElement(VBreadcrumbsItem, { key: item.text, props: item }, [item.text]))
 
         if (i < this.items.length - 1) items.push(this.genDivider())

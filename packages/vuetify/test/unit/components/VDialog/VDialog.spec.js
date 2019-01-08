@@ -189,6 +189,7 @@ test('VDialog.js', ({ mount, compileToFunctions }) => {
     }
     const wrapper = mount(component)
 
+    await wrapper.vm.$nextTick()
     window.dispatchEvent(new Event('keydown'))
     expect(keydown).toBeCalled()
 
@@ -210,6 +211,22 @@ test('VDialog.js', ({ mount, compileToFunctions }) => {
     await wrapper.vm.$nextTick()
 
     expect(document.documentElement.className).toContain('overflow-y-hidden')
+
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should not attach event handlers to the activator container if disabled', async () => {
+    const wrapper = mount(VDialog, {
+      propsData: {
+        disabled: true
+      },
+      slots: {
+        activator: [compileToFunctions('<button></button>')]
+      }
+    })
+
+    const activator = wrapper.find('.v-dialog__activator')[0]
+    expect(Object.keys(activator.vNode.data.on)).toHaveLength(0)
 
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })

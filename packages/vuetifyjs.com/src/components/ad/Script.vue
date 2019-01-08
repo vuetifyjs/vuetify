@@ -20,26 +20,28 @@
     },
 
     data: () => ({
-      timeout: null
+      isBooted: false,
+      script: null
     }),
 
     watch: {
-      '$route.path': 'serve'
+      '$route.path' () {
+        clearTimeout(this.timeout)
+
+        this.timeout = setTimeout(this.serve, 100)
+      }
     },
 
     mounted () {
       if (!this.src) return
 
-      clearTimeout(this.timeout)
-      this.timeout = setTimeout(() => {
-        const script = document.createElement('script')
-        script.type = 'text/javascript'
-        script.src = this.src
+      const script = document.createElement('script')
+      script.type = 'text/javascript'
+      script.src = this.src
+      script.id = this.scriptId
 
-        if (this.scriptId) script.id = this.scriptId
-
-        this.$el.append(script)
-      }, 300)
+      if (this.$el) this.$el.append(script)
+      else console.warn('%cPlease consider allowing ads, we\'ve gotta eat too :(', 'font-size: 24px')
     },
 
     methods: {

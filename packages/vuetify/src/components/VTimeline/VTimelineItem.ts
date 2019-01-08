@@ -57,16 +57,12 @@ export default mixins(
       }, this.icon)
     },
     genInnerDot () {
-      const children = []
-
-      this.hasIcon && children.push(this.genIcon())
-
       const data: VNodeData = this.setBackgroundColor(this.color)
 
       return this.$createElement('div', {
         staticClass: 'v-timeline-item__inner-dot',
         ...data
-      }, children)
+      }, [this.hasIcon && this.genIcon()])
     },
     genDot () {
       return this.$createElement('div', {
@@ -80,7 +76,7 @@ export default mixins(
     genOpposite () {
       return this.$createElement('div', {
         staticClass: 'v-timeline-item__opposite'
-      }, [this.$slots.opposite])
+      }, this.$slots.opposite)
     }
   },
 

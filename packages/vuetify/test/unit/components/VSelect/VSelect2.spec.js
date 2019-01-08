@@ -1,4 +1,5 @@
 import { test } from '@/test'
+import { keyCodes } from '@/util/helpers'
 import VSelect from '@/components/VSelect/VSelect'
 import VChip from '@/components/VChip'
 
@@ -246,13 +247,18 @@ test('VSelect2', ({ mount, compileToFunctions }) => {
     const blur = jest.fn()
     wrapper.vm.$on('blur', blur)
 
-    wrapper.vm.onKeyDown({ keyCode: 9 })
+
+    const event = new Event('keydown')
+    event.keyCode = keyCodes.tab
+
+    wrapper.vm.onKeyDown(event)
 
     expect(blur).toBeCalled()
     expect(wrapper.vm.isMenuActive).toBe(false)
 
-    for (let keyCode of [13, 32, 38, 40]) {
-      wrapper.vm.onKeyDown({ keyCode })
+    for (let keyCode of [keyCodes.enter, keyCodes.space, keyCodes.up, keyCodes.down]) {
+      event.keyCode = keyCode
+      wrapper.vm.onKeyDown(event)
       expect(wrapper.vm.isMenuActive).toBe(true)
 
       wrapper.vm.isMenuActive = false

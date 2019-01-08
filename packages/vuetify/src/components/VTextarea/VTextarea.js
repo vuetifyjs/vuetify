@@ -34,7 +34,7 @@ export default {
         'v-textarea': true,
         'v-textarea--auto-grow': this.autoGrow,
         'v-textarea--no-resize': this.noResizeHandle,
-        ...VTextField.computed.classes.call(this, null)
+        ...VTextField.options.computed.classes.call(this, null)
       }
     },
     dynamicHeight () {
@@ -44,7 +44,7 @@ export default {
     },
     isEnclosed () {
       return this.textarea ||
-        VTextField.computed.isEnclosed.call(this)
+        VTextField.options.computed.isEnclosed.call(this)
     },
     noResizeHandle () {
       return this.noResize || this.autoGrow
@@ -81,7 +81,7 @@ export default {
       }
     },
     genInput () {
-      const input = VTextField.methods.genInput.call(this)
+      const input = VTextField.options.methods.genInput.call(this)
 
       input.tag = 'textarea'
       delete input.data.attrs.type
@@ -90,7 +90,7 @@ export default {
       return input
     },
     onInput (e) {
-      VTextField.methods.onInput.call(this, e)
+      VTextField.options.methods.onInput.call(this, e)
       this.autoGrow && this.calculateInputHeight()
     },
     onKeyDown (e) {

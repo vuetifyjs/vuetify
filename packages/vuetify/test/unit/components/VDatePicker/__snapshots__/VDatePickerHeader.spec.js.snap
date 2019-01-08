@@ -15,9 +15,11 @@ exports[`VDatePickerHeader.js should render component and match snapshot 1`] = `
     </div>
   </button>
   <div class="v-date-picker-header__value">
-    <strong class="accent--text">
-      November 2005
-    </strong>
+    <div class="accent--text">
+      <button>
+        November 2005
+      </button>
+    </div>
   </div>
   <button type="button"
           class="v-btn v-btn--icon theme--light"
@@ -49,9 +51,11 @@ exports[`VDatePickerHeader.js should render component in RTL mode and match snap
     </div>
   </button>
   <div class="v-date-picker-header__value">
-    <strong class="accent--text">
-      November 2005
-    </strong>
+    <div class="accent--text">
+      <button>
+        November 2005
+      </button>
+    </div>
   </div>
   <button type="button"
           class="v-btn v-btn--icon theme--light"
@@ -83,11 +87,87 @@ exports[`VDatePickerHeader.js should render component with default slot and matc
     </div>
   </button>
   <div class="v-date-picker-header__value">
-    <strong class="accent--text">
-      <span>
-        foo
-      </span>
-    </strong>
+    <div class="accent--text">
+      <button>
+        <span>
+          foo
+        </span>
+      </button>
+    </div>
+  </div>
+  <button type="button"
+          class="v-btn v-btn--icon theme--light"
+  >
+    <div class="v-btn__content">
+      <i aria-hidden="true"
+         class="v-icon material-icons theme--light"
+      >
+        chevron_right
+      </i>
+    </div>
+  </button>
+</div>
+
+`;
+
+exports[`VDatePickerHeader.js should render disabled component and match snapshot 1`] = `
+
+<div class="v-date-picker-header v-date-picker-header--disabled theme--light">
+  <button disabled="disabled"
+          type="button"
+          class="v-btn v-btn--disabled v-btn--icon theme--light"
+  >
+    <div class="v-btn__content">
+      <i aria-hidden="true"
+         class="v-icon material-icons theme--light"
+      >
+        chevron_left
+      </i>
+    </div>
+  </button>
+  <div class="v-date-picker-header__value v-date-picker-header__value--disabled">
+    <div>
+      <button>
+        November 2005
+      </button>
+    </div>
+  </div>
+  <button disabled="disabled"
+          type="button"
+          class="v-btn v-btn--disabled v-btn--icon theme--light"
+  >
+    <div class="v-btn__content">
+      <i aria-hidden="true"
+         class="v-icon material-icons theme--light"
+      >
+        chevron_right
+      </i>
+    </div>
+  </button>
+</div>
+
+`;
+
+exports[`VDatePickerHeader.js should render readonly component and match snapshot 1`] = `
+
+<div class="v-date-picker-header theme--light">
+  <button type="button"
+          class="v-btn v-btn--icon theme--light"
+  >
+    <div class="v-btn__content">
+      <i aria-hidden="true"
+         class="v-icon material-icons theme--light"
+      >
+        chevron_left
+      </i>
+    </div>
+  </button>
+  <div class="v-date-picker-header__value">
+    <div class="accent--text">
+      <button>
+        November 2005
+      </button>
+    </div>
   </div>
   <button type="button"
           class="v-btn v-btn--icon theme--light"

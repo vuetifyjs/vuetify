@@ -19,9 +19,6 @@ const cssLoaders = [
 
 const config = merge(base, {
   name: 'client',
-  devtool: isProd
-    ? false
-    : 'source-map',
   entry: {
     app: './src/entry-client.js'
   },
@@ -52,7 +49,7 @@ const config = merge(base, {
   ],
   optimization: {
     minimize: isProd,
-    runtimeChunk: 'single',
+    runtimeChunk: true,
     removeAvailableModules: isProd,
     removeEmptyChunks: isProd,
     splitChunks: isProd && {

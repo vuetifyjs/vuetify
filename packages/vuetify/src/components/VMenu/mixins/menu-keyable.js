@@ -13,6 +13,10 @@ import { keyCodes } from '../../../util/helpers'
 
 /* @vue/component */
 export default {
+  props: {
+    disableKeys: Boolean
+  },
+
   data: () => ({
     listIndex: -1,
     tiles: []
@@ -36,13 +40,6 @@ export default {
 
   methods: {
     onKeyDown (e) {
-      if ([
-        keyCodes.down,
-        keyCodes.up,
-        keyCodes.enter
-      ].includes(e.keyCode)
-      ) e.preventDefault()
-
       if (e.keyCode === keyCodes.esc) {
         this.isActive = false
       } else if (e.keyCode === keyCodes.tab) {
@@ -56,6 +53,13 @@ export default {
       }
     },
     changeListIndex (e) {
+      if ([
+        keyCodes.down,
+        keyCodes.up,
+        keyCodes.enter
+      ].includes(e.keyCode)
+      ) e.preventDefault()
+
       // For infinite scroll and autocomplete, re-evaluate children
       this.getTiles()
 

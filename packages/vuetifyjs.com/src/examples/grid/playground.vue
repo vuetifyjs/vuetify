@@ -58,14 +58,14 @@
       </v-flex>
       <v-flex xs12>
         <h5>Output:</h5>
-        <markup lang="vue">{{ formatAttributes(layoutAttributes) }}</markup>
+        <markup>{{ formatAttributes(layoutAttributes) }}</markup>
       </v-flex>
     </v-layout>
   </v-container>
 </template>
 
 <script>
-  import Markup from '../../components/helpers/Markup'
+  import Markup from '../../components/doc/Markup'
 
   export default {
     components: { Markup },

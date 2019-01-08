@@ -1,5 +1,8 @@
 <template>
-  <v-flex id="ad__container" shrink>
+  <v-flex
+    id="ad__container"
+    shrink
+  >
     <template v-if="shouldShowAd">
       <ad-system-bar v-if="viewport === 'xs' && $vuetify.breakpoint.xsOnly">
         <ad-shown :viewport="viewport" />
@@ -14,42 +17,18 @@
           column
           fill-height
         >
-          <v-flex shrink mb-3>
-            <no-ssr>
-              <core-table-of-contents
-                :offset="85"
-                :threshold="50"
-              />
-            </no-ssr>
-          </v-flex>
-
           <v-flex
             xs12
             text-xs-center
           >
-            <h4 class="caption font-weight-bold grey--text">Diamond Sponsors</h4>
+            <core-toc />
             <div class="my-3">
-              <div
-                v-for="diamond in diamonds"
-                :key="diamond.name"
-                class="text-xs-center mt-2"
-              >
-                <a
-                  :href="diamond.href"
-                  target="_blank"
-                  rel="noopener"
-                  @click="$ga.event('drawer sponsor click', 'click', diamond.name)"
-                >
-                  <v-img
-                    :src="`https://cdn.vuetifyjs.com/images/${diamond.logo}`"
-                    :alt="diamond.Name"
-                    contain
-                    height="30"
-                  />
-                </a>
-              </div>
+              <supporters-patrons
+                compact
+                tier="1"
+              />
+              <supporters-sponsor-btn small />
             </div>
-            <misc-sponsor-btn small />
           </v-flex>
 
           <ad-shown
@@ -69,7 +48,6 @@
 
   // Utilities
   import {
-    mapGetters,
     mapState
   } from 'vuex'
 
@@ -84,30 +62,25 @@
     }),
 
     computed: {
-      ...mapGetters('app', ['supporters']),
+      ...mapState('app', ['supporters']),
       ...mapState('route', ['path', 'name']),
       diamonds () {
         return this.supporters.diamond
       },
       shouldShowAd () {
         return (
-          this.name !== 'home/Home' &&
-          this.name.indexOf('store/') < 0
+          this.name &&
+          this.name !== 'home/Home'
         )
       }
     },
 
     watch: {
-      path: 'init',
-      isBooted (val) {
-        if (val) this.init()
-      }
+      path: 'setViewport',
+      isBooted: 'setViewport'
     },
 
     methods: {
-      init () {
-        this.setViewport()
-      },
       setViewport () {
         const { xsOnly, smOnly } = this.$vuetify.breakpoint
 

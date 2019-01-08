@@ -10,6 +10,7 @@ const resolve = file => path.resolve(__dirname, file)
 const { createBundleRenderer } = require('vue-server-renderer')
 const Ouch = require('ouch')
 const redirects = require('./src/router/301.json')
+const rollbar = require('./src/util/rollbar')
 
 const isProd = process.env.NODE_ENV === 'production'
 const useMicroCache = process.env.MICRO_CACHE !== 'false'
@@ -18,8 +19,6 @@ const serverInfo =
   `vue-server-renderer/${require('vue-server-renderer/package.json').version}`
 
 const availableLanguages = require('./src/data/i18n/languages').map(lang => lang.locale)
-
-const startTime = new Date()
 
 const app = express()
 
@@ -31,8 +30,6 @@ function createRenderer (bundle, options) {
       max: 1000,
       maxAge: 1000 * 60 * 15
     }),
-    // this is only needed when vue-server-renderer is npm-linked
-    basedir: resolve('./public'),
     // recommended for performance
     runInNewContext: false
   }))
@@ -73,29 +70,24 @@ const serve = (path, cache) => express.static(resolve(path), {
 
 app.use(express.json())
 app.use(cookieParser())
+rollbar.options.enabled && app.use(rollbar.errorHandler())
 app.use(compression({ threshold: 0 }))
 app.use(favicon('./src/public/favicon.ico'))
 app.use('/', serve('./src/public', true))
 app.use('/dist', serve('./dist', true))
-app.use('/releases', serve('./src/releases'))
 app.use('/themes', serve('./src/themes'))
-app.get('/releases/:release', (req, res) => {
-  res.setHeader('Content-Type', 'text/html')
-  res.sendFile(resolve(`./src/releases/${req.params.release}`))
-})
 
 app.get('/sitemap.xml', (req, res) => {
   res.setHeader('Content-Type', 'text/xml')
   res.sendFile(resolve('./src/public/sitemap.xml'))
 })
 
-if (process.env.TRANSLATE) {
-  app.use('/api/translation', require('./src/translation/router'))
-}
+const languagePattern = '/([a-z]{2,3}|[a-z]{2,3}-[a-zA-Z]{4}|[a-z]{2,3}-[A-Z]{2,3})'
+const languageRegex = new RegExp(`^${languagePattern}(/.*)?$`)
 
 // 301 redirect for changed routes
 Object.keys(redirects).forEach(k => {
-  app.get(k, (req, res) => res.redirect(301, redirects[k]))
+  app.get(new RegExp(`^$(${languagePattern})?${k}$`), (req, res) => res.redirect(301, redirects[k]))
 })
 
 // since this app has no user-specific content, every page is micro-cacheable.
@@ -104,8 +96,7 @@ Object.keys(redirects).forEach(k => {
 // headers.
 // 10-minute microcache.
 // https://www.nginx.com/blog/benefits-of-microcaching-nginx/
-const isStore = req => !!req.params && !!req.params[1] && req.params[1].includes('store')
-const cacheMiddleware = microcache.cacheSeconds(10 * 60, req => useMicroCache && !isStore(req) && req.originalUrl)
+const cacheMiddleware = microcache.cacheSeconds(10 * 60, req => useMicroCache && req.originalUrl)
 
 const ouchInstance = (new Ouch()).pushHandler(new Ouch.handlers.PrettyPageHandler('orange', null, 'sublime'))
 
@@ -117,15 +108,6 @@ function render (req, res) {
   res.cookie('currentLanguage', req.params[0], {
     maxAge: 1000 * 60 * 60 * 24 * 7 // 7 days
   })
-
-  if (!/^\/store/.test(req.params[1])) {
-    res.setHeader('Last-Modified', startTime.toUTCString())
-    res.setHeader('Cache-Control', 'public, must-revalidate')
-
-    if (req.fresh) {
-      return res.status(304).end()
-    }
-  }
 
   const handleError = err => {
     if (err.url) {
@@ -159,8 +141,6 @@ function render (req, res) {
     }
   })
 }
-
-const languageRegex = /^\/([a-z]{2,3}|[a-z]{2,3}-[a-zA-Z]{4}|[a-z]{2,3}-[A-Z]{2,3})(\/.*)?$/
 
 app.get(languageRegex, isProd ? render : (req, res) => {
   readyPromise.then(() => render(req, res))

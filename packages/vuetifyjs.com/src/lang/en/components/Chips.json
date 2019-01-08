@@ -1,35 +1,34 @@
 {
-  "header": "Chip",
+  "header": "# Chip",
   "headerText": "The `v-chip` component is used to convey small pieces of information. Using the `close` property, the chip becomes interactive, allowing user interaction.",
   "examples": {
-    "default": {
-      "header": "Default",
+    "usage": {
       "desc": "Chips come in 4 primary variations. Regular, with icon, with portrait and closeable.",
       "uninverted": true
     },
     "colored": {
-      "header": "Colored",
+      "header": "### Colored",
       "desc": "Any color from the Material Design palette can be used to change a chips color."
     },
     "icon": {
-      "header": "Icon",
+      "header": "### Icon",
       "desc": "Chips can use text or any icon available in the Material Icons font library."
     },
     "outline": {
-      "header": "Outline",
+      "header": "### Outline",
       "desc": "Outlined chips inherit their border color from the current text color."
     },
     "label": {
-      "header": "Label",
+      "header": "### Label",
       "desc": "Label chips use the `v-card` border-radius."
     },
     "closable": {
-      "header": "Closable",
+      "header": "### Closable",
       "desc": "Closable chips can be controlled with a v-model. Listen to the `input` event if you want to know when a chip has been closed.",
       "uninverted": true
     },
     "inSelects": {
-      "header": "In selects",
+      "header": "### In selects",
       "desc": "Selects can use chips to display the selected data. Try adding your own tags below.",
       "uninverted": true
     }

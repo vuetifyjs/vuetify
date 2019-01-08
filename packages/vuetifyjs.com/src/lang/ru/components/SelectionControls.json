@@ -1,62 +1,62 @@
 {
-  "header": "Элементы управления выбора",
+  "header": "# Элементы управления выбора",
   "headerText": "Элементы управления выбора, позволяют пользователю выбирать параметры. Эти компоненты **должны** использоваться с помощью `v-model`, поскольку они не поддерживают своё собственное состояние.",
   "components": ["v-radio-group', 'v-radio', 'v-checkbox', 'v-switch"],
   "examples": {
     "example": {
-      "header": "Примеры по умолчанию",
+      "header": "### Примеры по умолчанию",
       "desc": ""
     },
     "checkboxesBoolean": {
-      "header": "Checkboxes - Boolean",
+      "header": "### Checkboxes - Boolean",
       "desc": ""
     },
     "checkboxesArray": {
-      "header": "Checkboxes - Массив",
+      "header": "### Checkboxes - Массив",
       "desc": ""
     },
     "checkboxesStates": {
-      "header": "Checkboxes - Состояние",
+      "header": "### Checkboxes - Состояние",
       "desc": ""
     },
     "checkboxesColors": {
-      "header": "Checkboxes - Цвета",
+      "header": "### Checkboxes - Цвета",
       "desc": "Checkboxes могут быть окрашены с использованием любого из встроенных цветов и контекстных имён с помощью свойства `color`."
     },
     "checkboxesInlineTexfield": {
-      "header": "Checkboxes - в одну линию с текстовым полем",
+      "header": "### Checkboxes - в одну линию с текстовым полем",
       "desc": ""
     },
     "radiosDefault": {
-      "header": "Radio - по умолчанию",
+      "header": "### Radio - по умолчанию",
       "desc": "Radio-группы по умолчанию обязательны. Это можно изменить с помощью свойства `mandatory`."
     },
     "radiosDirection": {
-      "header": "Radios - управление",
+      "header": "### Radios - управление",
       "desc": "Radio-группы могут быть представлены либо в виде строки, либо в столбце, используя их соответствующие свойства. По умолчанию используется столбец."
     },
     "radiosColors": {
-      "header": "Radios - цвета",
+      "header": "### Radios - цвета",
       "desc": "Radio могут быть окрашены с использованием любого из встроенных цветов и контекстных имён, с помощью свойства `color`"
     },
     "switchesBoolean": {
-      "header": "Switches - Boolean",
+      "header": "### Switches - Boolean",
       "desc": ""
     },
     "switchesArray": {
-      "header": "Switches - Массив",
+      "header": "### Switches - Массив",
       "desc": ""
     },
     "switchesStates": {
-      "header": "Switches - Состояние",
+      "header": "### Switches - Состояние",
       "desc": ""
     },
     "switchesColors": {
-      "header": "Switches - Цвета",
+      "header": "### Switches - Цвета",
       "desc": "Switches можно покрасить, используя любой из встроенных цветов и контекстных имён, используя свойство `color`."
     },
     "labelSlot": {
-      "header": "Label slot",
+      "header": "### Label slot",
       "desc": "Selection controls' labels can be defined in `label` slot - that will allow to use HTML content"
     }
   },

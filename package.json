@@ -1,8 +1,6 @@
 {
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
+  "workspaces": [ "packages/*" ],
   "husky": {
     "hooks": {
       "prepare-commit-msg": "node scripts/prepare-commit-message.js",
@@ -15,6 +13,7 @@
     "start": "lerna run start --scope vuetifyjs.com --stream",
     "lint": "lerna run lint --parallel",
     "dev": "lerna run dev --scope vuetify --stream",
+    "docs-dev": "lerna run dev --scope vuetifyjs.com --stream",
     "version": "node scripts/confirm-npm-tag.js",
     "postversion": "node scripts/post-release-merge.js"
   },
@@ -43,6 +42,7 @@
     "typescript": "^3.1.3",
     "typescript-eslint-parser": "^20.0.0",
     "typestrict": "^1.0.1",
-    "vue": "^2.5.17"
+    "vue": "^2.5.21",
+    "vue-template-compiler": "^2.5.21"
   }
 }

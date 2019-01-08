@@ -12,10 +12,8 @@ import {
 } from '../../mixins/registrable'
 
 /* @vue/component */
-export default {
+export default VInput.extend({
   name: 'v-radio-group',
-
-  extends: VInput,
 
   mixins: [
     Comparable,
@@ -88,7 +86,7 @@ export default {
         attrs: {
           role: 'radiogroup'
         }
-      }, VInput.methods.genDefaultSlot.call(this))
+      }, VInput.options.methods.genDefaultSlot.call(this))
     },
     onRadioChange (value) {
       if (this.disabled) return
@@ -131,4 +129,4 @@ export default {
       if (index > -1) this.radios.splice(index, 1)
     }
   }
-}
+})
