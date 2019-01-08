@@ -55,7 +55,7 @@
       "complete": true,
       "title": "v1.4 Release",
       "caption": "December 2018",
-      "text": "Add new components, `v-calendar`, `v-sparkline` and a abstracting `v-toolbar`'s functionality into multiple components.",
+      "text": "Add new component `v-sparkline` and a abstracting `v-toolbar`'s functionality into multiple components. `v-calendar` has been delayed till future release.",
       "value": false
     },
     {
