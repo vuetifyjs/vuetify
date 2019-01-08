@@ -18,7 +18,7 @@
   "optionHeader3": "### Caching",
   "optionText4": "A custom caching object and be provided (works in tandem with **minifyTheme**) to increase SSR efficiency. The object must contain a **get** and a **set** method. Below is an example using [LRU cache](https://www.npmjs.com/package/lru-cache).",
   "stylusHeader": "## 스타일러스 변수 변경하기",
-  "stylusText1": "Vuetify는 **스타일러스 (stylus)** 를 기반으로 만들어졌습니다. **scss** 와 비슷하게, 당신은 변수를 바꾸고 스타일 파일들을 다시 컴파일할 수 있습니다. 가능한 변수 목록은  [여기](https://github.com/vuetifyjs/vuetify/blob/master/src/stylus/settings/_variables.styl)에 있습니다. 스타일러스(stylus) 파일을 빌드하려면, 어플리케이션이 스타일러스를 지원하도록 설정해야 합니다. 이미 [빠른 시작 (Quick Start)](/ko/getting-started/quick-start) 가이드에서 제공하는 Vue-CLI 템플릿을 사용하고 있다면, 이 섹션을 건너뛰어도 좋습니다.",
+  "stylusText1": "Vuetify는 **스타일러스 (stylus)** 를 기반으로 만들어졌습니다. **scss** 와 비슷하게, 당신은 변수를 바꾸고 스타일 파일들을 다시 컴파일할 수 있습니다. 가능한 변수 목록은  [여기](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/stylus/settings/_variables.styl)에 있습니다. 스타일러스(stylus) 파일을 빌드하려면, 어플리케이션이 스타일러스를 지원하도록 설정해야 합니다. 이미 [빠른 시작 (Quick Start)](/ko/getting-started/quick-start) 가이드에서 제공하는 Vue-CLI 템플릿을 사용하고 있다면, 이 섹션을 건너뛰어도 좋습니다.",
   "stylusHeader2": "### 웹펙(Webpack)을 위한 stylus-loader 설정",
   "stylusText2": "명령줄(command line)에서 다음 내용을 실행하세요",
   "stylusText3": "이 명령은 스타일러스 파일들을 임포트(import) 하고 분석(parse) 하기 위해 필요한 의존(dependencies)을 설치합니다. 설치가 끝나면 웹팩(webpack) 설정파일(config)를 열어서 스타일러스를 위한 규칙(rule)들을 추가하세요. **SSR** 기반 어플리케이션의 경우, import가 메인 `client-entry` 안에 있는 것을 확인하세요(ensure that the import is in your main `client-entry`).",

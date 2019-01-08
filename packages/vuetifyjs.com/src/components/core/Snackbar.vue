@@ -109,6 +109,8 @@
     },
 
     async created () {
+      if (this.$ssrContext) return
+
       const notify = await fetch('https://cdn.vuetifyjs.com/notify.json', {
         headers: {
           'Access-Control-Allow-Origin': '*'

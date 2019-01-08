@@ -31,10 +31,6 @@
   </div>
 </template>
 <script>
-  // Utilities
-  import {
-    mapState
-  } from 'vuex'
   import { goTo } from '@/util/helpers'
 
   export default {
@@ -45,15 +41,11 @@
       timeout: null
     }),
 
-    computed: {
-      ...mapState('app', ['isLoading'])
-    },
-
     watch: {
-      isLoading: {
+      '$route.path': {
         immediate: true,
-        handler (val) {
-          !val && setTimeout(this.genList, 50)
+        handler () {
+          setTimeout(this.genList, 50)
         }
       }
     },

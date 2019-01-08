@@ -12,10 +12,11 @@
 <script>
   // Utilities
   import kebabCase from 'lodash/kebabCase'
+  import {
+    mapGetters
+  } from 'vuex'
 
   export default {
-    inject: ['namespace', 'page'],
-
     props: {
       value: {
         type: [Object, String],
@@ -24,6 +25,10 @@
     },
 
     computed: {
+      ...mapGetters('documentation', [
+        'namespace',
+        'page'
+      ]),
       internalValue () {
         return this.value === Object(this.value)
           ? this.value

@@ -1,6 +1,6 @@
 {
   "header": "导航抽屉",
-  "headerText": "`v-navigation-drawer`组件是用户将用来浏览应用程序的内容，导航抽屉被预先配置为可以使用或不实用**vue-router**。",
+  "headerText": "`v-navigation-drawer`组件是用户将用来浏览应用程序的内容，导航抽屉被预先配置为可以使用或不使用**vue-router**。",
   "components": ["v-navigation-drawer"],
   "examples": {
     "permanent": {

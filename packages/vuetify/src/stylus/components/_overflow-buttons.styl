@@ -34,6 +34,7 @@ theme(v-overflow-btn, "v-overflow-btn")
 
     input
       margin-left: 16px
+      cursor: pointer
 
   .v-select__selection--comma:first-child
     margin-left: 16px
@@ -98,6 +99,10 @@ theme(v-overflow-btn, "v-overflow-btn")
             background-color: transparent
 
   &--editable
+    .v-select__slot
+      input
+        cursor: text
+
     .v-input__append-inner,
     .v-input__append-inner *
       cursor: pointer

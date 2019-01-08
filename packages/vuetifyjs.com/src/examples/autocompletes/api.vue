@@ -105,7 +105,7 @@
         fetch('https://api.publicapis.org/entries')
           .then(res => res.json())
           .then(res => {
-            const { count, entries } = res.data
+            const { count, entries } = res
             this.count = count
             this.entries = entries
           })

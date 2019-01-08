@@ -6,6 +6,7 @@
 
     <supporters-patrons
       :tier="3"
+      class="mb-5"
       dense
       hide-titles
     />
@@ -21,32 +22,3 @@
     />
   </v-card>
 </template>
-
-<script>
-  // Utilities
-  import {
-    mapGetters
-  } from 'vuex'
-
-  export default {
-    computed: {
-      ...mapGetters('app', ['supporters']),
-      tiers () {
-        return [
-          {
-            name: 'Diamond',
-            supporters: [...this.supporters.diamond]
-          },
-          {
-            name: 'Palladium',
-            supporters: [...this.supporters.palladium]
-          },
-          {
-            name: 'Special',
-            supporters: [...this.supporters.special]
-          }
-        ]
-      }
-    }
-  }
-</script>

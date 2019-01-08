@@ -164,7 +164,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     wrapper.vm.$on('change', change)
 
-    wrapper.setProps({ value: 'foo' })
+    wrapper.setProps({ value: 'bar' })
 
     expect(change).not.toBeCalled()
 

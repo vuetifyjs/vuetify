@@ -32,10 +32,17 @@
             wrap
           >
             <v-btn
+              :to="{
+                name: 'Documentation',
+                params: {
+                  lang: $route.params.lang,
+                  namespace: 'getting-started',
+                  page: 'quick-start'
+                }
+              }"
               class="primary--text ml-0"
               color="white"
               large
-              to="getting-started/quick-start"
             >
               {{ $t('Vuetify.Home.getStarted') }}
             </v-btn>
