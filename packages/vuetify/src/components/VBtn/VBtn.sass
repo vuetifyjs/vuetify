@@ -141,6 +141,10 @@ $button-sizes: ('x-small': 20, 'small': 28, 'default': 36, 'large': 54, 'x-large
   color: inherit
   display: flex
   justify-content: center
+  // Fixes bug where IE11 moves
+  // button content when clicked
+  // https://stackoverflow.com/questions/10305658/prevent-button-from-shifting-during-click-in-ie
+  position: relative
 
 // Modifiers
 .v-btn--absolute
