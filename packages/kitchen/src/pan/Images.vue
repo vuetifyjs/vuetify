@@ -111,7 +111,7 @@
 
 <script>
 export default {
-  name: '',
+  name: 'Images',
 
   data: () => ({})
 }
