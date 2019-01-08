@@ -16,7 +16,12 @@ export default async function (to, from, savedPosition) {
 
   return new Promise(resolve => {
     setTimeout(() => {
-      goTo(scrollTo, options)
+      try {
+        goTo(scrollTo, options)
+      } catch (err) {
+        console.log(err)
+      }
+
       resolve()
     }, 100)
   })
