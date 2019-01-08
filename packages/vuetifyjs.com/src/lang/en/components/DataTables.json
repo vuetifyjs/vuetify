@@ -30,8 +30,8 @@
       "desc": "The `v-data-table` component also supports expandable rows using the `expand` slot. You can use the prop `expand` to prevent expanded rows from closing when clicking on another row."
     },
     "pageText": {
-      "header": "### Slot: page-text",
-      "desc": "You can customize the page text displaying the range and total items by using the `page-text` slot."
+      "header": "### Slot: pageText",
+      "desc": "You can customize the page text displaying the range and total items by using the `pageText` slot."
     },
     "select": {
       "header": "### Selectable rows",
