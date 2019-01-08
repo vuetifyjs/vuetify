@@ -20,6 +20,7 @@
         </v-icon>
       </v-btn>
       <v-btn
+        v-if="$route.params.component"
         :href="href"
         target="_blank"
         rel="noopener"
