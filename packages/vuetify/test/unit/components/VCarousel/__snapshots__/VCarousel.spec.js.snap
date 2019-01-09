@@ -9,28 +9,28 @@ exports[`VCarousel.ts should render component in RTL mode and match snapshot 1`]
     <button type="button"
             class="v-btn v-btn--flat v-btn--fab v-btn--round theme--dark v-size--default v-btn--icon"
     >
-      <div class="v-btn__content">
+      <span class="v-btn__content">
         <i aria-hidden="true"
            class="v-icon material-icons theme--dark"
            style="font-size: 46px;"
         >
           chevron_right
         </i>
-      </div>
+      </span>
     </button>
   </div>
   <div class="v-carousel__next">
     <button type="button"
             class="v-btn v-btn--flat v-btn--fab v-btn--round theme--dark v-size--default v-btn--icon"
     >
-      <div class="v-btn__content">
+      <span class="v-btn__content">
         <i aria-hidden="true"
            class="v-icon material-icons theme--dark"
            style="font-size: 46px;"
         >
           chevron_left
         </i>
-      </div>
+      </span>
     </button>
   </div>
   <div class="v-carousel__controls">
@@ -52,28 +52,28 @@ exports[`VCarousel.ts should render component with custom duration between image
     <button type="button"
             class="v-btn v-btn--flat v-btn--fab v-btn--round theme--dark v-size--default v-btn--icon"
     >
-      <div class="v-btn__content">
+      <span class="v-btn__content">
         <i aria-hidden="true"
            class="v-icon material-icons theme--dark"
            style="font-size: 46px;"
         >
           chevron_left
         </i>
-      </div>
+      </span>
     </button>
   </div>
   <div class="v-carousel__next">
     <button type="button"
             class="v-btn v-btn--flat v-btn--fab v-btn--round theme--dark v-size--default v-btn--icon"
     >
-      <div class="v-btn__content">
+      <span class="v-btn__content">
         <i aria-hidden="true"
            class="v-icon material-icons theme--dark"
            style="font-size: 46px;"
         >
           chevron_right
         </i>
-      </div>
+      </span>
     </button>
   </div>
   <div class="v-carousel__controls">
@@ -95,28 +95,28 @@ exports[`VCarousel.ts should render component with custom icon and match snapsho
     <button type="button"
             class="v-btn v-btn--flat v-btn--fab v-btn--round theme--dark v-size--default v-btn--icon"
     >
-      <div class="v-btn__content">
+      <span class="v-btn__content">
         <i aria-hidden="true"
            class="v-icon material-icons theme--dark"
            style="font-size: 46px;"
         >
           chevron_left
         </i>
-      </div>
+      </span>
     </button>
   </div>
   <div class="v-carousel__next">
     <button type="button"
             class="v-btn v-btn--flat v-btn--fab v-btn--round theme--dark v-size--default v-btn--icon"
     >
-      <div class="v-btn__content">
+      <span class="v-btn__content">
         <i aria-hidden="true"
            class="v-icon material-icons theme--dark"
            style="font-size: 46px;"
         >
           chevron_right
         </i>
-      </div>
+      </span>
     </button>
   </div>
   <div class="v-carousel__controls">
@@ -125,40 +125,40 @@ exports[`VCarousel.ts should render component with custom icon and match snapsho
               value="0"
               class="v-btn v-btn--active v-btn--flat v-btn--fab v-btn--round theme--dark v-size--small v-btn--icon v-carousel__controls__item"
       >
-        <div class="v-btn__content">
+        <span class="v-btn__content">
           <i aria-hidden="true"
              class="v-icon material-icons theme--dark"
              style="font-size: 18px;"
           >
             stop
           </i>
-        </div>
+        </span>
       </button>
       <button type="button"
               value="1"
               class="v-btn v-btn--flat v-btn--fab v-btn--round theme--dark v-size--small v-btn--icon v-carousel__controls__item"
       >
-        <div class="v-btn__content">
+        <span class="v-btn__content">
           <i aria-hidden="true"
              class="v-icon material-icons theme--dark"
              style="font-size: 18px;"
           >
             stop
           </i>
-        </div>
+        </span>
       </button>
       <button type="button"
               value="2"
               class="v-btn v-btn--flat v-btn--fab v-btn--round theme--dark v-size--small v-btn--icon v-carousel__controls__item"
       >
-        <div class="v-btn__content">
+        <span class="v-btn__content">
           <i aria-hidden="true"
              class="v-icon material-icons theme--dark"
              style="font-size: 18px;"
           >
             stop
           </i>
-        </div>
+        </span>
       </button>
     </div>
   </div>
@@ -205,28 +205,28 @@ exports[`VCarousel.ts should render component with custom next icon and match sn
     <button type="button"
             class="v-btn v-btn--flat v-btn--fab v-btn--round theme--dark v-size--default v-btn--icon"
     >
-      <div class="v-btn__content">
+      <span class="v-btn__content">
         <i aria-hidden="true"
            class="v-icon material-icons theme--dark"
            style="font-size: 46px;"
         >
           chevron_left
         </i>
-      </div>
+      </span>
     </button>
   </div>
   <div class="v-carousel__next">
     <button type="button"
             class="v-btn v-btn--flat v-btn--fab v-btn--round theme--dark v-size--default v-btn--icon"
     >
-      <div class="v-btn__content">
+      <span class="v-btn__content">
         <i aria-hidden="true"
            class="v-icon material-icons theme--dark"
            style="font-size: 46px;"
         >
           stop
         </i>
-      </div>
+      </span>
     </button>
   </div>
   <div class="v-carousel__controls">
@@ -248,28 +248,28 @@ exports[`VCarousel.ts should render component with custom prev icon and match sn
     <button type="button"
             class="v-btn v-btn--flat v-btn--fab v-btn--round theme--dark v-size--default v-btn--icon"
     >
-      <div class="v-btn__content">
+      <span class="v-btn__content">
         <i aria-hidden="true"
            class="v-icon material-icons theme--dark"
            style="font-size: 46px;"
         >
           stop
         </i>
-      </div>
+      </span>
     </button>
   </div>
   <div class="v-carousel__next">
     <button type="button"
             class="v-btn v-btn--flat v-btn--fab v-btn--round theme--dark v-size--default v-btn--icon"
     >
-      <div class="v-btn__content">
+      <span class="v-btn__content">
         <i aria-hidden="true"
            class="v-icon material-icons theme--dark"
            style="font-size: 46px;"
         >
           chevron_right
         </i>
-      </div>
+      </span>
     </button>
   </div>
   <div class="v-carousel__controls">
@@ -291,28 +291,28 @@ exports[`VCarousel.ts should render component with image cycling off and match s
     <button type="button"
             class="v-btn v-btn--flat v-btn--fab v-btn--round theme--dark v-size--default v-btn--icon"
     >
-      <div class="v-btn__content">
+      <span class="v-btn__content">
         <i aria-hidden="true"
            class="v-icon material-icons theme--dark"
            style="font-size: 46px;"
         >
           chevron_left
         </i>
-      </div>
+      </span>
     </button>
   </div>
   <div class="v-carousel__next">
     <button type="button"
             class="v-btn v-btn--flat v-btn--fab v-btn--round theme--dark v-size--default v-btn--icon"
     >
-      <div class="v-btn__content">
+      <span class="v-btn__content">
         <i aria-hidden="true"
            class="v-icon material-icons theme--dark"
            style="font-size: 46px;"
         >
           chevron_right
         </i>
-      </div>
+      </span>
     </button>
   </div>
   <div class="v-carousel__controls">
@@ -334,28 +334,28 @@ exports[`VCarousel.ts should render component with selected active item 1`] = `
     <button type="button"
             class="v-btn v-btn--flat v-btn--fab v-btn--round theme--dark v-size--default v-btn--icon"
     >
-      <div class="v-btn__content">
+      <span class="v-btn__content">
         <i aria-hidden="true"
            class="v-icon material-icons theme--dark"
            style="font-size: 46px;"
         >
           chevron_left
         </i>
-      </div>
+      </span>
     </button>
   </div>
   <div class="v-carousel__next">
     <button type="button"
             class="v-btn v-btn--flat v-btn--fab v-btn--round theme--dark v-size--default v-btn--icon"
     >
-      <div class="v-btn__content">
+      <span class="v-btn__content">
         <i aria-hidden="true"
            class="v-icon material-icons theme--dark"
            style="font-size: 46px;"
         >
           chevron_right
         </i>
-      </div>
+      </span>
     </button>
   </div>
   <div class="v-carousel__controls">
@@ -364,40 +364,40 @@ exports[`VCarousel.ts should render component with selected active item 1`] = `
               value="0"
               class="v-btn v-btn--flat v-btn--fab v-btn--round theme--dark v-size--small v-btn--icon v-carousel__controls__item"
       >
-        <div class="v-btn__content">
+        <span class="v-btn__content">
           <i aria-hidden="true"
              class="v-icon material-icons theme--dark"
              style="font-size: 18px;"
           >
             fiber_manual_record
           </i>
-        </div>
+        </span>
       </button>
       <button type="button"
               value="1"
               class="v-btn v-btn--active v-btn--flat v-btn--fab v-btn--round theme--dark v-size--small v-btn--icon v-carousel__controls__item"
       >
-        <div class="v-btn__content">
+        <span class="v-btn__content">
           <i aria-hidden="true"
              class="v-icon material-icons theme--dark"
              style="font-size: 18px;"
           >
             fiber_manual_record
           </i>
-        </div>
+        </span>
       </button>
       <button type="button"
               value="2"
               class="v-btn v-btn--flat v-btn--fab v-btn--round theme--dark v-size--small v-btn--icon v-carousel__controls__item"
       >
-        <div class="v-btn__content">
+        <span class="v-btn__content">
           <i aria-hidden="true"
              class="v-icon material-icons theme--dark"
              style="font-size: 18px;"
           >
             fiber_manual_record
           </i>
-        </div>
+        </span>
       </button>
     </div>
   </div>
@@ -444,28 +444,28 @@ exports[`VCarousel.ts should render component without delimiters 1`] = `
     <button type="button"
             class="v-btn v-btn--flat v-btn--fab v-btn--round theme--dark v-size--default v-btn--icon"
     >
-      <div class="v-btn__content">
+      <span class="v-btn__content">
         <i aria-hidden="true"
            class="v-icon material-icons theme--dark"
            style="font-size: 46px;"
         >
           chevron_left
         </i>
-      </div>
+      </span>
     </button>
   </div>
   <div class="v-carousel__next">
     <button type="button"
             class="v-btn v-btn--flat v-btn--fab v-btn--round theme--dark v-size--default v-btn--icon"
     >
-      <div class="v-btn__content">
+      <span class="v-btn__content">
         <i aria-hidden="true"
            class="v-icon material-icons theme--dark"
            style="font-size: 46px;"
         >
           chevron_right
         </i>
-      </div>
+      </span>
     </button>
   </div>
   <div class="v-window__container">
@@ -511,14 +511,14 @@ exports[`VCarousel.ts should render component without next icon and match snapsh
     <button type="button"
             class="v-btn v-btn--flat v-btn--fab v-btn--round theme--dark v-size--default v-btn--icon"
     >
-      <div class="v-btn__content">
+      <span class="v-btn__content">
         <i aria-hidden="true"
            class="v-icon material-icons theme--dark"
            style="font-size: 46px;"
         >
           chevron_left
         </i>
-      </div>
+      </span>
     </button>
   </div>
   <div class="v-carousel__controls">
@@ -540,14 +540,14 @@ exports[`VCarousel.ts should render component without prev icon and match snapsh
     <button type="button"
             class="v-btn v-btn--flat v-btn--fab v-btn--round theme--dark v-size--default v-btn--icon"
     >
-      <div class="v-btn__content">
+      <span class="v-btn__content">
         <i aria-hidden="true"
            class="v-icon material-icons theme--dark"
            style="font-size: 46px;"
         >
           chevron_right
         </i>
-      </div>
+      </span>
     </button>
   </div>
   <div class="v-carousel__controls">

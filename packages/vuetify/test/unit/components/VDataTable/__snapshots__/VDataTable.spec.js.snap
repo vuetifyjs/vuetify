@@ -153,26 +153,26 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
                 class="v-btn v-btn--disabled v-btn--flat v-btn--fab v-btn--round v-btn--text theme--light v-size--default v-btn--icon"
                 aria-label="Previous page"
         >
-          <div class="v-btn__content">
+          <span class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
             >
               chevron_left
             </i>
-          </div>
+          </span>
         </button>
         <button disabled="disabled"
                 type="button"
                 class="v-btn v-btn--disabled v-btn--flat v-btn--fab v-btn--round v-btn--text theme--light v-size--default v-btn--icon"
                 aria-label="Next page"
         >
-          <div class="v-btn__content">
+          <span class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
             >
               chevron_right
             </i>
-          </div>
+          </span>
         </button>
       </div>
     </div>
@@ -334,26 +334,26 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
                 class="v-btn v-btn--disabled v-btn--flat v-btn--fab v-btn--round v-btn--text theme--light v-size--default v-btn--icon"
                 aria-label="Previous page"
         >
-          <div class="v-btn__content">
+          <span class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
             >
               chevron_left
             </i>
-          </div>
+          </span>
         </button>
         <button disabled="disabled"
                 type="button"
                 class="v-btn v-btn--disabled v-btn--flat v-btn--fab v-btn--round v-btn--text theme--light v-size--default v-btn--icon"
                 aria-label="Next page"
         >
-          <div class="v-btn__content">
+          <span class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
             >
               chevron_right
             </i>
-          </div>
+          </span>
         </button>
       </div>
     </div>
@@ -517,26 +517,26 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
                 class="v-btn v-btn--disabled v-btn--flat v-btn--fab v-btn--round v-btn--text theme--light v-size--default v-btn--icon"
                 aria-label="Previous page"
         >
-          <div class="v-btn__content">
+          <span class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
             >
               chevron_left
             </i>
-          </div>
+          </span>
         </button>
         <button disabled="disabled"
                 type="button"
                 class="v-btn v-btn--disabled v-btn--flat v-btn--fab v-btn--round v-btn--text theme--light v-size--default v-btn--icon"
                 aria-label="Next page"
         >
-          <div class="v-btn__content">
+          <span class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
             >
               chevron_right
             </i>
-          </div>
+          </span>
         </button>
       </div>
     </div>
@@ -613,25 +613,25 @@ exports[`VDataTable.vue should match a snapshot with single rows-per-page-items 
                 class="v-btn v-btn--disabled v-btn--flat v-btn--fab v-btn--round v-btn--text theme--light v-size--default v-btn--icon"
                 aria-label="Previous page"
         >
-          <div class="v-btn__content">
+          <span class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
             >
               chevron_left
             </i>
-          </div>
+          </span>
         </button>
         <button type="button"
                 class="v-btn v-btn--flat v-btn--fab v-btn--round v-btn--text theme--light v-size--default v-btn--icon"
                 aria-label="Next page"
         >
-          <div class="v-btn__content">
+          <span class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
             >
               chevron_right
             </i>
-          </div>
+          </span>
         </button>
       </div>
     </div>

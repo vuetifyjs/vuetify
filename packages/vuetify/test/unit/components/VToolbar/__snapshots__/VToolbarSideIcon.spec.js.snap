@@ -5,13 +5,13 @@ exports[`VToolbarSideIcon.js should create default icon when no slot used 1`] = 
 <button type="button"
         class="v-toolbar__side-icon v-btn v-btn--flat v-btn--fab v-btn--round v-btn--text theme--light v-size--default"
 >
-  <div class="v-btn__content">
+  <span class="v-btn__content">
     <i aria-hidden="true"
        class="v-icon material-icons theme--light"
     >
       menu
     </i>
-  </div>
+  </span>
 </button>
 
 `;
@@ -21,12 +21,12 @@ exports[`VToolbarSideIcon.js should create slot icon when present 1`] = `
 <button type="button"
         class="v-toolbar__side-icon v-btn v-btn--flat v-btn--fab v-btn--round v-btn--text theme--light v-size--default"
 >
-  <div class="v-btn__content">
+  <span class="v-btn__content">
     <i aria-hidden="true"
        class="v-icon fa fa-add theme--light"
     >
     </i>
-  </div>
+  </span>
 </button>
 
 `;
