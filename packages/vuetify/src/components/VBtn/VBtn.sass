@@ -1,13 +1,6 @@
 // Imports
 @import '../../styles/styles.sass'
-
-// first function, should move to global functions
-// does a deep map-get
-@function map-deep-get($map, $keys...)
-  @each $key in $keys
-    $map: map-get($map, $key)
-
-  @return $map
+@return $map
 
 // Mixins
 @mixin button-theme($material)
