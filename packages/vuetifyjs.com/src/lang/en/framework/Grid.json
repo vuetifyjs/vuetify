@@ -1,7 +1,9 @@
 {
   "header": "# Grid system",
   "headerText": "Vuetify has a 12 point grid system. Built using <kbd>flex-box</kbd>, the grid is used to layout an application's content.  It contains 5 types of media breakpoints that are used for targeting specific screen sizes or orientations. The props for grid components are actually classes that are derived from their defined properties. This allows you to easily specify these helper classes as props, while still providing the classes to be used anywhere.",
-  "components": ["v-container', 'v-layout', 'v-flex', 'v-spacer"],
+  "components": [
+    "v-container', 'v-layout', 'v-flex', 'v-spacer"
+  ],
   "examples": {
     "usage": {
       "desc": "The `v-container` can be used for a center focused page, or given the `fluid` prop to extend its full width. `v-layout` is used for separating sections and contains the `v-flex`. The structure of your layout will be as follows, **v-container** &raquo; **v-layout** &raquo; **v-flex**. Each part of the grid chain is a flex-box element. The final, `v-flex`, automatically sets its children to have <kbd>flex: 1 1 auto</kbd>.",
@@ -30,6 +32,11 @@
     "rowColumnBreakpoint": {
       "header": "### Row and column breakpoints",
       "desc": "Dynamically change your layout based upon resolution. **(resize your screen and watch the layout change to a `row` on small breakpoints)**",
+      "uninverted": true
+    },
+    "growShrink": {
+      "header": "Grow and Shrink",
+      "desc": "Flex components can utilize the `grow` and `shrink` props to automatically fill available space in a row or shrink to only use the space needed for its contents.",
       "uninverted": true
     },
     "nestedGrid": {

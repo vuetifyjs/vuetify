@@ -36,6 +36,7 @@
             "order",
             "directionAndAlign",
             "rowColumnBreakpoint",
+            "growShrink",
             "nestedGrid",
             "uniqueLayouts",
             "spacer",
