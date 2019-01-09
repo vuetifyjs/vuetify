@@ -35,7 +35,7 @@
       "uninverted": true
     },
     "growShrink": {
-      "header": "Grow and Shrink",
+      "header": "### Grow and Shrink",
       "desc": "Flex components can utilize the `grow` and `shrink` props to automatically fill available space in a row or shrink to only use the space needed for its contents.",
       "uninverted": true
     },
