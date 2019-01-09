@@ -1,7 +1,5 @@
 <template>
   <v-content>
-    <core-toolbar />
-
     <component :is="component" />
   </v-content>
 </template>
@@ -15,10 +13,6 @@ import {
 
 export default {
   name: 'Bootstrapper',
-
-  components: {
-    CoreToolbar: () => import('@/components/core/Toolbar')
-  },
 
   computed: {
     ...mapState('app', ['component'])

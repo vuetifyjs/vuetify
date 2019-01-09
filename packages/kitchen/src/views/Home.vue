@@ -1,0 +1,50 @@
+<template>
+  <v-content>
+    <v-container
+      text-xs-center
+      pt-5
+    >
+      <v-layout justify-center>
+        <v-flex
+          xs12
+          md6
+        >
+          <h2 class="display-3 mb-5">What'll it be?</h2>
+          <v-select
+            :items="meals"
+            v-model="meal"
+            label="Meals"
+            solo-inverted
+          />
+          <v-btn
+            :to="meal"
+            large
+            color="primary"
+            class="subheading"
+          >
+            Let's cook it!
+          </v-btn>
+        </v-flex>
+      </v-layout>
+    </v-container>
+  </v-content>
+</template>
+
+<script>
+import meals from '../pan'
+
+export default {
+  name: 'Home',
+
+  data: () => ({
+    meals,
+    meal: ''
+  })
+}
+</script>
+
+<style scoped>
+.center {
+  align-self: center;
+}
+</style>

@@ -1,10 +1,9 @@
 <template>
   <v-container text-xs-center>
-    <!-- Variations -->
     <v-layout
       column
       variations>
-      <!-- Normal -->
+      <h3 class="title grey--text mb-4 mt-5">Normal</h3>
       <v-flex>
         <v-btn small>Normal</v-btn>
         <v-btn
@@ -37,56 +36,56 @@
           large
           disabled>Disabled</v-btn>
       </v-flex>
-      <!-- Text -->
+      <h3 class="title grey--text mb-4 mt-5">Flat</h3>
       <v-flex>
         <v-btn
-          text
-          small>Text</v-btn>
+          flat
+          small>Flat</v-btn>
         <v-btn
-          text
+          flat
           small
           color="primary">Primary</v-btn>
         <v-btn
-          text
+          flat
           small
           color="error">Error</v-btn>
         <v-btn
-          text
+          flat
           small
           disabled>Disabled</v-btn>
       </v-flex>
 
       <v-flex>
-        <v-btn text>Text</v-btn>
+        <v-btn flat>Flat</v-btn>
         <v-btn
-          text
+          flat
           color="primary">Primary</v-btn>
         <v-btn
-          text
+          flat
           color="error">Error</v-btn>
         <v-btn
-          text
+          flat
           disabled>Disabled</v-btn>
       </v-flex>
 
       <v-flex>
         <v-btn
-          text
-          large>Text</v-btn>
+          flat
+          large>Flat</v-btn>
         <v-btn
-          text
+          flat
           large
           color="primary">Primary</v-btn>
         <v-btn
-          text
+          flat
           large
           color="error">Error</v-btn>
         <v-btn
-          text
+          flat
           large
           disabled>Disabled</v-btn>
       </v-flex>
-      <!-- Depressed -->
+      <h3 class="title grey--text mb-4 mt-5">Depressed</h3>
       <v-flex>
         <v-btn
           depressed
@@ -135,7 +134,7 @@
           large
           disabled>Disabled</v-btn>
       </v-flex>
-      <!-- Rounded -->
+      <h3 class="title grey--text mb-4 mt-5">Rounded</h3>
       <v-flex>
         <v-btn
           round
@@ -184,7 +183,7 @@
           large
           disabled>Disabled</v-btn>
       </v-flex>
-      <!-- Outline -->
+      <h3 class="title grey--text mb-4 mt-5">Outline</h3>
       <v-flex>
         <v-btn
           outline
@@ -233,7 +232,7 @@
           large
           disabled>Disabled</v-btn>
       </v-flex>
-      <!-- Rounded with Outline -->
+      <h3 class="title grey--text mb-4 mt-5">Rounded with Outline</h3>
       <v-flex>
         <v-btn
           outline
@@ -529,7 +528,7 @@
           large
           disabled><v-icon>mdi-pencil</v-icon></v-btn>
       </v-flex>
-      <!-- Outline FAB -->
+      <h3 class="title grey--text mb-4 mt-5">Outline FAB</h3>
       <v-flex>
         <v-btn
           outline
@@ -591,14 +590,13 @@
           large
           disabled><v-icon>mdi-pencil</v-icon></v-btn>
       </v-flex>
-      <!-- Left & right icons, loader -->
+      <h3 class="title grey--text mb-4 mt-5">Left & right icons, loader</h3>
       <v-flex>
         <v-btn
           :disabled="loading"
           :loading="loading"
           color="blue-grey"
           class="white--text"
-          icon="left"
           @click="loading = true"
         >
           <v-icon
@@ -610,7 +608,6 @@
           :loading="loading"
           color="blue-grey"
           class="white--text"
-          icon="right"
           @click="loading = true"
         >
           Upload
@@ -623,6 +620,7 @@
           disabled
           color="blue-grey"
           class="white--text"
+          @click="loading = true"
         >
           Upload
           <v-icon
@@ -630,12 +628,15 @@
             dark>mdi-cloud-upload</v-icon>
         </v-btn>
       </v-flex>
-      <!-- Left & right icons, loader with outline -->
+      <h3 class="title grey--text mb-4 mt-5">Left & right icons, loader with outline</h3>
       <v-flex>
         <v-btn
+          :loading="loading"
+          :disabled="loading"
           outline
           color="blue-grey"
           class="white--text"
+          @click="loading = true"
         >
           <v-icon
             left
@@ -643,9 +644,11 @@
           Upload
         </v-btn>
         <v-btn
+          :loading="loading"
           outline
           color="blue-grey"
           class="white--text"
+          @click="loading = true"
         >
           Upload
           <v-icon
@@ -665,7 +668,7 @@
             dark>mdi-cloud-upload</v-icon>
         </v-btn>
       </v-flex>
-      <!-- Block -->
+      <h3 class="title grey--text mb-4 mt-5">Block</h3>
       <v-flex>
         <v-btn
           block
@@ -714,7 +717,7 @@
           large
           disabled>Disabled</v-btn>
       </v-flex>
-      <!-- Block with Outline -->
+      <h3 class="title grey--text mb-4 mt-5">Block with Outline</h3>
       <v-flex>
         <v-btn
           outline
@@ -776,7 +779,7 @@
           large
           disabled>Disabled</v-btn>
       </v-flex>
-      <!-- Elevation -->
+      <h3 class="title grey--text mb-4 mt-5">Elevation</h3>
       <v-flex>
         <v-btn
           elevation="6"
@@ -876,38 +879,38 @@
       </v-btn>
     </v-layout>
 
-    <!-- Groups -->
+    <h3 class="title grey--text mb-4 mt-5">Groups</h3>
     <v-layout
       groups
       column>
       <v-flex>
         <v-btn-toggle>
-          <v-btn text>
+          <v-btn flat>
             <v-icon>mdi-format-align-left</v-icon>
           </v-btn>
-          <v-btn text>
+          <v-btn flat>
             <v-icon>mdi-format-align-center</v-icon>
           </v-btn>
-          <v-btn text>
+          <v-btn flat>
             <v-icon>mdi-format-align-right</v-icon>
           </v-btn>
-          <v-btn text>
+          <v-btn flat>
             <v-icon>mdi-format-align-justify</v-icon>
           </v-btn>
         </v-btn-toggle>
       </v-flex>
       <v-flex>
         <v-btn-toggle multiple>
-          <v-btn text>
+          <v-btn flat>
             <v-icon>mdi-format-bold</v-icon>
           </v-btn>
-          <v-btn text>
+          <v-btn flat>
             <v-icon>mdi-format-italic</v-icon>
           </v-btn>
-          <v-btn text>
+          <v-btn flat>
             <v-icon>mdi-format-underline</v-icon>
           </v-btn>
-          <v-btn text>
+          <v-btn flat>
             <v-icon>mdi-format-color-fill</v-icon>
           </v-btn>
         </v-btn-toggle>
@@ -932,32 +935,32 @@
       </v-flex>
       <v-flex>
         <v-btn-toggle>
-          <v-btn text>
+          <v-btn flat>
             <v-icon>mdi-format-align-left</v-icon>
           </v-btn>
-          <v-btn text>
+          <v-btn flat>
             <v-icon>mdi-format-align-center</v-icon>
           </v-btn>
-          <v-btn text>
+          <v-btn flat>
             <v-icon>mdi-format-align-right</v-icon>
           </v-btn>
-          <v-btn text>
+          <v-btn flat>
             <v-icon>mdi-format-align-justify</v-icon>
           </v-btn>
         </v-btn-toggle>
       </v-flex>
       <v-flex>
         <v-btn-toggle mandatory>
-          <v-btn text>
+          <v-btn flat>
             <v-icon>mdi-format-align-left</v-icon>
           </v-btn>
-          <v-btn text>
+          <v-btn flat>
             <v-icon>mdi-format-align-center</v-icon>
           </v-btn>
-          <v-btn text>
+          <v-btn flat>
             <v-icon>mdi-format-align-right</v-icon>
           </v-btn>
-          <v-btn text>
+          <v-btn flat>
             <v-icon>mdi-format-align-justify</v-icon>
           </v-btn>
         </v-btn-toggle>
@@ -965,22 +968,22 @@
       <v-flex>
         <v-btn-toggle>
           <v-btn
-            text
+            flat
             value="left">
             Left
           </v-btn>
           <v-btn
-            text
+            flat
             value="center">
             Center
           </v-btn>
           <v-btn
-            text
+            flat
             value="right">
             Right
           </v-btn>
           <v-btn
-            text
+            flat
             value="justify">
             Justify
           </v-btn>
@@ -989,25 +992,25 @@
       <v-flex>
         <v-btn-toggle>
           <v-btn
-            text
+            flat
             value="left">
             <span>Left</span>
             <v-icon>mdi-format-align-left</v-icon>
           </v-btn>
           <v-btn
-            text
+            flat
             value="center">
             <span>Center</span>
             <v-icon>mdi-format-align-center</v-icon>
           </v-btn>
           <v-btn
-            text
+            flat
             value="right">
             <span>Right</span>
             <v-icon>mdi-format-align-right</v-icon>
           </v-btn>
           <v-btn
-            text
+            flat
             value="justify">
             <span>Justify</span>
             <v-icon>mdi-format-align-justify</v-icon>
