@@ -1,7 +1,6 @@
 {
   xs: boolean
   xsOnly: boolean
-  xsAndUp: boolean
   sm: boolean
   smOnly: boolean
   smAndDown: boolean
@@ -16,7 +15,6 @@
   lgAndUp: boolean
   xl: boolean
   xlOnly: boolean
-  xlAndDown: boolean
   name: ('xs' | 'sm' | 'md' | 'lg' | 'xl')
   width: number
   height: number
