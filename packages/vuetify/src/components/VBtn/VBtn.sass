@@ -11,6 +11,23 @@ $btn-outline-border-width: 2px
 $btn-sizes: ('x-small': 20, 'small': 28, 'default': 36, 'large': 54, 'x-large': 70)
 
 // Mixins
+@mixin btn-rtl()
+  &.v-btn--icon:not(.v-btn--round)
+    &.v-btn--icon-left
+      padding-right: $btn-icon-padding
+      padding-left: 18px
+
+      .v-btn__content > .v-icon:last-child
+        margin-left: 8px
+        margin-right: 0
+
+    &.v-btn--icon-right
+      padding-left: $btn-icon-padding
+
+      .v-btn__content > .v-icon:last-child
+        margin-left: 0
+        margin-right: 8px
+
 @mixin btn-theme($material)
   color: map-deep-get($material, 'text', 'primary')
 
@@ -45,6 +62,10 @@ $btn-sizes: ('x-small': 20, 'small': 28, 'default': 36, 'large': 54, 'x-large': 
   @include btn-theme($material-light)
 .v-btn.theme--dark
   @include btn-theme($material-dark)
+
+// RTL
+.application--is-rtl .v-btn
+  @include btn-rtl()
 
 // Block
 .v-btn
@@ -107,32 +128,6 @@ $btn-sizes: ('x-small': 20, 'small': 28, 'default': 36, 'large': 54, 'x-large': 
     &:after
       opacity: 1
 
-  &.v-btn--disabled
-    box-shadow: none
-    pointer-events: none
-
-  &.v-btn--icon
-    &-left
-      padding-left: $btn-icon-padding
-    &-right
-      padding-right: $btn-icon-padding
-
-  &.v-btn--loading
-    pointer-events: none
-    transition: none
-
-    .v-btn__content
-      opacity: 0
-
-  &__loader
-    align-items: center
-    display: flex
-    height: 100%
-    justify-content: center
-    left: 0
-    position: absolute
-    top: 0
-    width: 100%
 
 // Elements
 .v-btn__content
@@ -144,6 +139,16 @@ $btn-sizes: ('x-small': 20, 'small': 28, 'default': 36, 'large': 54, 'x-large': 
   // button content when clicked
   // https://stackoverflow.com/questions/10305658/prevent-button-from-shifting-during-click-in-ie
   position: relative
+
+.v-btn__loader
+  align-items: center
+  display: flex
+  height: 100%
+  justify-content: center
+  left: 0
+  position: absolute
+  top: 0
+  width: 100%
 
 // Modifiers
 .v-btn--absolute
@@ -166,6 +171,10 @@ $btn-sizes: ('x-small': 20, 'small': 28, 'default': 36, 'large': 54, 'x-large': 
 
 .v-btn--depressed
   box-shadow: none !important
+
+.v-btn--disabled
+  box-shadow: none
+  pointer-events: none
 
 .v-btn--fab
   min-height: 0
@@ -219,6 +228,26 @@ $btn-sizes: ('x-small': 20, 'small': 28, 'default': 36, 'large': 54, 'x-large': 
 .v-btn--icon
   .v-icon
     font-size: $btn-icon-font-size
+
+  &:not(.v-btn--round)
+    &.v-btn--icon-left
+      padding-left: $btn-icon-padding
+
+      .v-btn__content > .v-icon:first-child
+        margin-right: 8px
+
+    &.v-btn--icon-right
+      padding-right: $btn-icon-padding
+
+      .v-btn__content > .v-icon:last-child
+        margin-left: 8px
+
+.v-btn--loading
+  pointer-events: none
+  transition: none
+
+  .v-btn__content
+    opacity: 0
 
 .v-btn--outline
   border: $btn-outline-border-width solid currentColor
