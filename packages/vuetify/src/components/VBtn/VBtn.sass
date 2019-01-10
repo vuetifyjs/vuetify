@@ -19,7 +19,6 @@
 .v-btn.theme--dark
   @include btn-theme($material-dark)
 
-
 // Block
 .v-btn
   align-items: center
@@ -82,21 +81,13 @@
       opacity: 1
 
   +rtl()
-    &.v-btn--icon:not(.v-btn--round)
-      &.v-btn--icon-left
-        padding-right: $btn-icon-padding
-        padding-left: 18px
+    .v-icon--left
+      margin-left: 8px
+      margin-right: -6px
 
-        .v-btn__content > .v-icon:last-child
-          margin-left: 8px
-          margin-right: 0
-
-      &.v-btn--icon-right
-        padding-left: $btn-icon-padding
-
-        .v-btn__content > .v-icon:last-child
-          margin-left: 0
-          margin-right: 8px
+    .v-icon--right
+      margin-left: -6px
+      margin-right: 8px
 
 // Elements
 .v-btn__content
@@ -108,6 +99,21 @@
   // button content when clicked
   // https://stackoverflow.com/questions/10305658/prevent-button-from-shifting-during-click-in-ie
   position: relative
+
+  .v-icon
+    color: inherit
+
+  .v-icon--left,
+  .v-icon--right
+    font-size: $btn-icon-font-size
+
+  .v-icon--left
+    margin-left: -6px
+    margin-right: 8px
+
+  .v-icon--right
+    margin-left: 8px
+    margin-right: -6px
 
 .v-btn__loader
   align-items: center
@@ -193,23 +199,6 @@
 
 .v-btn--fixed
   position: fixed
-
-.v-btn--icon
-  .v-icon
-    font-size: $btn-icon-font-size
-
-  &:not(.v-btn--round)
-    &.v-btn--icon-left
-      padding-left: $btn-icon-padding
-
-      .v-btn__content > .v-icon:first-child
-        margin-right: 8px
-
-    &.v-btn--icon-right
-      padding-right: $btn-icon-padding
-
-      .v-btn__content > .v-icon:last-child
-        margin-left: 8px
 
 .v-btn--loading
   pointer-events: none

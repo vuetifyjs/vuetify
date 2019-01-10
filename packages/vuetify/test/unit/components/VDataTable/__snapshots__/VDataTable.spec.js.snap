@@ -150,7 +150,7 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
         </div>
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--round v-btn--text theme--light v-size--default v-btn--icon"
+                class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
                 aria-label="Previous page"
         >
           <span class="v-btn__content">
@@ -163,7 +163,7 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
         </button>
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--round v-btn--text theme--light v-size--default v-btn--icon"
+                class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
                 aria-label="Next page"
         >
           <span class="v-btn__content">
@@ -331,7 +331,7 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
         </div>
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--round v-btn--text theme--light v-size--default v-btn--icon"
+                class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
                 aria-label="Previous page"
         >
           <span class="v-btn__content">
@@ -344,7 +344,7 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
         </button>
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--round v-btn--text theme--light v-size--default v-btn--icon"
+                class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
                 aria-label="Next page"
         >
           <span class="v-btn__content">
@@ -514,7 +514,7 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
         </div>
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--round v-btn--text theme--light v-size--default v-btn--icon"
+                class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
                 aria-label="Previous page"
         >
           <span class="v-btn__content">
@@ -527,7 +527,7 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
         </button>
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--round v-btn--text theme--light v-size--default v-btn--icon"
+                class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
                 aria-label="Next page"
         >
           <span class="v-btn__content">
@@ -610,7 +610,7 @@ exports[`VDataTable.vue should match a snapshot with single rows-per-page-items 
         </div>
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--round v-btn--text theme--light v-size--default v-btn--icon"
+                class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
                 aria-label="Previous page"
         >
           <span class="v-btn__content">
@@ -622,7 +622,7 @@ exports[`VDataTable.vue should match a snapshot with single rows-per-page-items 
           </span>
         </button>
         <button type="button"
-                class="v-btn v-btn--fab v-btn--flat v-btn--round v-btn--text theme--light v-size--default v-btn--icon"
+                class="v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
                 aria-label="Next page"
         >
           <span class="v-btn__content">

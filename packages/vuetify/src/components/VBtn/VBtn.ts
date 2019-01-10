@@ -52,11 +52,9 @@ export default baseMixins.extend<options>().extend({
     block: Boolean,
     depressed: Boolean,
     fab: Boolean,
+    /* @deprecate */
     flat: Boolean,
-    icon: {
-      type: [Boolean, String],
-      default: undefined
-    },
+    icon: Boolean,
     loading: Boolean,
     outline: Boolean,
     ripple: {
@@ -79,7 +77,7 @@ export default baseMixins.extend<options>().extend({
 
   computed: {
     classes (): any {
-      const classes = {
+      return {
         'v-btn': true,
         [this.activeClass]: this.isActive,
         'v-btn--absolute': this.absolute,
@@ -88,9 +86,10 @@ export default baseMixins.extend<options>().extend({
         'v-btn--contained': this.contained,
         'v-btn--depressed': (this.depressed && !this.flat) || this.outline,
         'v-btn--disabled': this.disabled,
-        'v-btn--fab': this.fab || this.icon === true,
+        'v-btn--fab': this.fab || this.icon,
         'v-btn--fixed': this.fixed,
         'v-btn--flat': this.isFlat,
+        'v-btn--icon': this.icon,
         'v-btn--left': this.left,
         'v-btn--loading': this.loading,
         'v-btn--outline': this.outline,
@@ -105,16 +104,6 @@ export default baseMixins.extend<options>().extend({
         ...this.elevationClasses,
         ...this.sizeableClasses
       }
-
-      if (this.icon) {
-        classes['v-btn--icon'] = true
-
-        if (typeof this.icon !== 'boolean') {
-          classes[`v-btn--icon-${this.icon}`] = true
-        }
-      }
-
-      return classes
     },
     contained (): boolean {
       return Boolean(
@@ -132,7 +121,7 @@ export default baseMixins.extend<options>().extend({
     },
     isFlat (): boolean {
       return Boolean(
-        this.icon === true ||
+        this.icon ||
         this.text ||
         this.flat ||
         this.outline
@@ -140,7 +129,7 @@ export default baseMixins.extend<options>().extend({
     },
     isRound (): boolean {
       return Boolean(
-        this.icon === true ||
+        this.icon ||
         this.fab
       )
     },
