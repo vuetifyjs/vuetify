@@ -1,5 +1,5 @@
 {
-  "header": "Windows",
+  "header": "# Windows",
   "headerText": "The `v-window` component is the baseline functionality for transitioning content from 1 pane to another. Other components such as `v-tabs`, `v-carousel` and `v-stepper` utilize this component at their core.",
   "examples": {
     "usage": {
