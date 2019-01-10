@@ -2,7 +2,7 @@
 import '../../stylus/components/_calendar-weekly.styl'
 
 // Types
-import { VNode } from 'vue'
+import { VNode, VNodeChildren } from 'vue'
 
 // Mixins
 import CalendarBase from './mixins/calendar-base'
@@ -144,7 +144,7 @@ export default CalendarBase.extend({
           'click:date': { event: 'click', stop: true },
           'contextmenu:date': { event: 'contextmenu', stop: true, prevent: true, result: false }
         }, e => day)
-      }), slot ? slot(day) : this.dayFormatter(day, false))
+      }), slot ? slot(day) as VNodeChildren : this.dayFormatter(day, false))
     },
     genDayMonth (day: VTimestamp): VNode | string {
       const color = day.present ? this.color : undefined
@@ -152,7 +152,7 @@ export default CalendarBase.extend({
 
       return this.$createElement('div', this.setTextColor(color, {
         staticClass: 'v-calendar-weekly__day-month'
-      }), slot ? slot(day) : this.monthFormatter(day, this.shortMonths))
+      }), slot ? slot(day) as VNodeChildren : this.monthFormatter(day, this.shortMonths))
     }
   },
 

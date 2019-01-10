@@ -2,7 +2,7 @@
 import '../../stylus/components/_calendar-daily.styl'
 
 // Types
-import { VNode } from 'vue'
+import { VNode, VNodeChildren } from 'vue'
 
 // Mixins
 import CalendarWithIntervals from './mixins/calendar-with-intervals'
@@ -145,7 +145,7 @@ export default CalendarWithIntervals.extend({
         }
       }
 
-      const children = slot ? slot(interval) : undefined
+      const children = slot ? slot(interval) as VNodeChildren : undefined
 
       return this.$createElement('div', data, children)
     },
