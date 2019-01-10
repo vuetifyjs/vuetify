@@ -31,10 +31,8 @@
         {
           "type": "examples",
           "value": [
-            "mediaWithText",
-            "horizontal",
-            "grids",
-            "customActions"
+            "slots",
+            "eventList"
           ]
         }
       ]

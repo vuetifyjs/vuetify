@@ -5,25 +5,13 @@
     "usage": {
       "desc": "A calendar has a type and a value which determines what type of calendar is shown over what span of time."
     },
-    "mediaWithText": {
-      "header": "### Media with text",
-      "desc": "Using the layout system, we can add custom text anywhere within the background."
+    "slots": {
+      "header": "### Slots",
+      "desc": "Using slots, you can customize contents of every day."
     },
-    "horizontal": {
-      "header": "### Horizontal cards",
-      "desc": "Using `v-flex`, you can create customized horizontal cards. Use the `contain` property to shrink the `v-card-media` to fit inside the container, instead of covering."
-    },
-    "grids": {
-      "header": "### Grids",
-      "desc": "Using grid lists, you can create beautiful layouts."
-    },
-    "customActions": {
-      "header": "### Custom actions",
-      "desc": "With a simple conditional, you can easily add supplementary text that is hidden until opened."
-    },
-    "twitterCard": {
-      "header": "### Twitter card",
-      "desc": "The `v-card` component has multiple children components that help you build complex examples without having to worry about spacing. This example is comprised of the `v-card-title`, `v-card-text` and `v-card-actions` components."
+    "eventList": {
+      "header": "### Event list",
+      "desc": "This is an example of the simple task calendar made using `VCalendar`."
     }
   },
   "props": {
