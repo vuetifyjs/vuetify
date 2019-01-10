@@ -16,9 +16,3 @@
     }
   }
 </script>
-
-<style scoped>
-  .v-calendar {
-
-  }
-</style>
