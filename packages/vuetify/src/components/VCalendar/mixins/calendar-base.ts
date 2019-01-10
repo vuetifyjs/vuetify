@@ -49,9 +49,9 @@ export default mixins(Colorable, Themeable, Times, Mouse).extend({
         this.weekdaySkips
       )
     },
-    dayFormatter (): VTimestampFormatter<string> {
+    dayFormatter (): VTimestampFormatter {
       if (this.dayFormat) {
-        return this.dayFormat as VTimestampFormatter<string>
+        return this.dayFormat as VTimestampFormatter
       }
 
       const options = { timeZone: 'UTC', day: 'numeric' }
@@ -61,9 +61,9 @@ export default mixins(Colorable, Themeable, Times, Mouse).extend({
         (tms, short) => options
       )
     },
-    weekdayFormatter (): VTimestampFormatter<string> {
+    weekdayFormatter (): VTimestampFormatter {
       if (this.weekdayFormat) {
-        return this.weekdayFormat as VTimestampFormatter<string>
+        return this.weekdayFormat as VTimestampFormatter
       }
 
       const longOptions = { timeZone: 'UTC', weekday: 'long' }

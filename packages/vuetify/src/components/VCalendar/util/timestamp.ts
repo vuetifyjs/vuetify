@@ -28,7 +28,9 @@ export interface VTimestamp {
   future: boolean
 }
 
-export type VTimestampFormatter<R> = (timestamp: VTimestamp, short: boolean) => R
+export type VTimestampFormatter = (timestamp: VTimestamp, short: boolean) => string
+
+export type VTimestampFormatOptions = (timestamp: VTimestamp, short: boolean) => object
 
 export type VTimestampOperation = (timestamp: VTimestamp) => VTimestamp
 
@@ -293,8 +295,8 @@ export function createIntervalList (timestamp: VTimestamp, first: number,
   return intervals
 }
 
-export function createNativeLocaleFormatter (locale: string, getOptions: VTimestampFormatter<object>): VTimestampFormatter<string> {
-  const emptyFormatter: VTimestampFormatter<string> = (t, s) => ''
+export function createNativeLocaleFormatter (locale: string, getOptions: VTimestampFormatOptions): VTimestampFormatter {
+  const emptyFormatter: VTimestampFormatter = (t, s) => ''
 
   if (typeof Intl === 'undefined' || typeof Intl.DateTimeFormat === 'undefined') {
     return emptyFormatter

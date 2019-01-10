@@ -26,11 +26,11 @@ export default {
       default: true
     },
     weekdayFormat: {
-      type: Function, // VTimestampFormatter<string>,
+      type: Function, // VTimestampFormatter,
       default: null
     },
     dayFormat: {
-      type: Function, // VTimestampFormatter<string>,
+      type: Function, // VTimestampFormatter,
       default: null
     },
     locale: {
@@ -68,7 +68,7 @@ export default {
       validate: validateNumber
     },
     intervalFormat: {
-      type: Function, // VTimestampFormatter<string>,
+      type: Function, // VTimestampFormatter,
       default: null
     },
     intervalStyle: {
@@ -94,7 +94,7 @@ export default {
       default: true
     },
     monthFormat: {
-      type: Function, // VTimestampFormatter<string>,
+      type: Function, // VTimestampFormatter,
       default: null
     }
   },

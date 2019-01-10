@@ -61,9 +61,9 @@ export default CalendarBase.extend({
         this.weekdays.length
       )
     },
-    monthFormatter (): VTimestampFormatter<string> {
+    monthFormatter (): VTimestampFormatter {
       if (this.monthFormat) {
-        return this.monthFormat as VTimestampFormatter<string>
+        return this.monthFormat as VTimestampFormatter
       }
 
       const longOptions = { timeZone: 'UTC', month: 'long' }

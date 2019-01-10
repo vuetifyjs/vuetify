@@ -57,9 +57,9 @@ export default CalendarBase.extend({
 
       return days.map(d => createIntervalList(d, first, minutes, count, now))
     },
-    intervalFormatter (): VTimestampFormatter<string> {
+    intervalFormatter (): VTimestampFormatter {
       if (this.intervalFormat) {
-        return this.intervalFormat as VTimestampFormatter<string>
+        return this.intervalFormat as VTimestampFormatter
       }
 
       const longOptions = { timeZone: 'UTC', hour12: true, hour: '2-digit', minute: '2-digit' }
