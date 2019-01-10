@@ -11,7 +11,7 @@ $btn-outline-border-width: 2px
 $btn-sizes: ('x-small': 20, 'small': 28, 'default': 36, 'large': 54, 'x-large': 70)
 
 // Mixins
-@mixin v-btn-theme($material)
+@mixin btn-theme($material)
   color: map-deep-get($material, 'text', 'primary')
 
   &.v-btn--disabled
@@ -42,9 +42,9 @@ $btn-sizes: ('x-small': 20, 'small': 28, 'default': 36, 'large': 54, 'x-large': 
     color: map-deep-get($material-dark, 'text', 'primary')
 
 .v-btn.theme--light
-  @include v-btn-theme($material-light)
+  @include btn-theme($material-light)
 .v-btn.theme--dark
-  @include v-btn-theme($material-dark)
+  @include btn-theme($material-dark)
 
 // Block
 .v-btn
