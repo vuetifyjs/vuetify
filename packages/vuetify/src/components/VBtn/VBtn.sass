@@ -1,34 +1,7 @@
 // Imports
 @import '../../styles/styles.sass'
-
-// Variables
-$btn-border-radius: 4px
-$btn-font-size: 14px
-$btn-icon-font-size: 18px
-$btn-icon-padding: 12px
-$btn-rounded-border-radius: 28px
-$btn-outline-border-width: 2px
-$btn-sizes: ('x-small': 20, 'small': 28, 'default': 36, 'large': 54, 'x-large': 70)
-
-// Mixins
-@mixin btn-theme($material)
-  color: map-deep-get($material, 'text', 'primary')
-
-  &.v-btn--disabled
-    color: map-deep-get($material, 'buttons', 'disabled') !important
-
-    .v-icon,
-    .v-btn__loading
-      color: map-deep-get($material, 'buttons', 'disabled') !important
-
-    &:not(.v-btn--flat):not(.v-btn--outline)
-      background-color: map-deep-get($material, 'buttons', 'focused') !important
-
-  &:not(.v-btn--flat)
-    background-color: map-get($material, 'app-bar')
-
-  &.v-btn--outline.v-btn--text
-    border-color: map-get($material, 'dividers')
+@import './_variables.sass'
+@import './_mixins.sass'
 
 // Theme
 .v-btn:not(.v-btn--outline)
