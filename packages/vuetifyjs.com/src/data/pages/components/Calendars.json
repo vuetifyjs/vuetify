@@ -45,9 +45,9 @@
         {
           "type": "up-next",
           "value": [
-            "components/buttons",
-            "components/images",
-            "framework/typography"
+            "components/date-pickers",
+            "components/time-pickers",
+            "components/cards"
           ]
         }
       ]
