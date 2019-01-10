@@ -231,6 +231,29 @@ export default {
       if (this.pageStart >= this.itemsLength) {
         this.resetPagination()
       }
+      const itemsRemoved = {}
+      const selected = this.value.slice()
+      for (let index = 0; index < selected.length; index++) {
+        const key = getObjectValueByPath(selected[index], this.itemKey)
+        itemsRemoved[key] = true
+      }
+      for (let index = 0; index < this.items.length; index++) {
+        const key = getObjectValueByPath(this.items[index], this.itemKey)
+        if (key in itemsRemoved) {
+          itemsRemoved[key] = false
+        }
+      }
+      let selectionHasChanged = false
+      for (let index = selected.length - 1; index >= 0; index--) {
+        const key = getObjectValueByPath(selected[index], this.itemKey)
+        if (itemsRemoved[key]) {
+          selectionHasChanged = true
+          selected.splice(index, 1)
+        }
+      }
+      if (selectionHasChanged) {
+        this.$emit('input', selected)
+      }
     },
     search () {
       this.$nextTick(() => {
