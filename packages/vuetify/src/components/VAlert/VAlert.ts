@@ -13,6 +13,7 @@ import Themeable from '../../mixins/themeable'
 import Transitionable from '../../mixins/transitionable'
 
 // Types
+import { VNodeData } from 'vue'
 import { VNode } from 'vue/types'
 import mixins from '../../util/mixins'
 import { breaking, deprecate } from '../../util/console'
@@ -26,6 +27,23 @@ export default mixins(
   name: 'v-alert',
 
   props: {
+    border: {
+      type: String,
+      validator (val: string) {
+        return [
+          'top',
+          'right',
+          'bottom',
+          'left'
+        ].includes(val)
+      }
+    },
+    coloredBorder: Boolean,
+    closeLabel: {
+      type: String,
+      default: '$vuetify.close'
+    },
+    dense: Boolean,
     dismissible: Boolean,
     icon: String,
     outline: Boolean,
@@ -61,6 +79,22 @@ export default mixins(
   },
 
   computed: {
+    __cachedBorder (): VNode | null {
+      if (!this.border) return null
+      let data: VNodeData = {
+        staticClass: 'v-alert__border',
+        class: {
+          [`v-alert__border--${this.border}`]: true
+        }
+      }
+
+      if (this.coloredBorder) {
+        data = this.setBackgroundColor(this.computedColor, data)
+        data.class['v-alert__border--has-color'] = true
+      }
+
+      return this.$createElement('div', data)
+    },
     __cachedDismissible (): VNode | null {
       if (!this.dismissible) return null
 
@@ -69,6 +103,10 @@ export default mixins(
         on: { click: () => { this.isActive = false } }
       }, [
         this.$createElement(VIcon, {
+          attrs: {
+            'aria-hidden': false,
+            'aria-label': this.$vuetify.t(this.closeLabel)
+          },
           props: {
             right: true
           }
@@ -76,18 +114,28 @@ export default mixins(
       ])
     },
     __cachedIcon (): VNode | null {
-      if (!this.computedIcon) return null
+      if (!this.computedIcon || this.dense) return null
 
       return this.$createElement(VIcon, {
-        staticClass: 'v-alert__icon'
+        staticClass: 'v-alert__icon',
+        props: {
+          color: this.coloredBorder ? this.computedColor : undefined
+        }
       }, this.computedIcon)
     },
     classes (): object {
-      return {
+      const classes: Record<string, boolean> = {
         ...VSheet.options.computed.classes.call(this),
+        'v-alert--border': Boolean(this.border),
         'v-alert--outline': this.hasOutline,
         'v-alert--prominent': this.prominent
       }
+
+      if (this.border) {
+        classes[`v-alert--border-${this.border}`] = true
+      }
+
+      return classes
     },
     computedColor (): string {
       return (this.type && !this.color) ? this.type : (this.color || '')
@@ -105,7 +153,7 @@ export default mixins(
       return this.outline || this.outlined
     },
     isDark () {
-      if (this.type) return true
+      if (this.type && !this.coloredBorder) return true
 
       return Themeable.options.computed.isDark.call(this)
     }
@@ -113,16 +161,16 @@ export default mixins(
 
   methods: {
     genAlert (): VNode {
-      const setColor = this.hasOutline ? this.setTextColor : this.setBackgroundColor
       const children = [
         this.$slots.prepend || this.__cachedIcon,
+        this.__cachedBorder,
         this.genContent(),
-        this.$scopedSlots.append
-          ? this.$scopedSlots.append({ toggle: this.toggle })
+        this.$slots.append,
+        this.$scopedSlots.close
+          ? this.$scopedSlots.close({ toggle: this.toggle })
           : this.__cachedDismissible
       ]
-
-      return this.$createElement('div', setColor(this.computedColor, {
+      let data: VNodeData = {
         staticClass: 'v-alert',
         class: this.classes,
         style: this.styles,
@@ -130,7 +178,14 @@ export default mixins(
           name: 'show',
           value: this.isActive
         }]
-      }), children)
+      }
+
+      if (!this.coloredBorder) {
+        const setColor = this.hasOutline ? this.setTextColor : this.setBackgroundColor
+        data = setColor(this.computedColor, data)
+      }
+
+      return this.$createElement('div', data, children)
     },
     genContent (): VNode {
       return this.$createElement('div', {

@@ -1,4 +1,5 @@
 export default {
+  close: 'Close',
   dataIterator: {
     rowsPerPageText: 'Items per page:',
     rowsPerPageAll: 'All',

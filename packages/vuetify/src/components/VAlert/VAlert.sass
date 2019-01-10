@@ -1,11 +1,6 @@
 // Imports
 @import '../../styles/styles.sass'
-
-// Mixins
-@mixin alert-theme($material)
-  .v-alert--prominent .v-alert__icon
-    &:after
-      background: map-get($material, 'dividers')
+@import './_mixins.sass'
 
 // Theme
 .v-alert.theme--light
@@ -20,10 +15,68 @@
   margin-bottom: 16px
   padding: 16px
 
-  > *:first-child
+  > .v-icon,
+  > .v-alert__content
     margin-right: 16px
 
+  > .v-icon + .v-alert__content
+    margin-right: 0
+
+  > .v-alert__content + .v-icon
+    margin-right: 0
+
+  +rtl()
+    > .v-icon,
+    > .v-alert__content
+      margin-right: 0
+      margin-left: 16px
+
+    > .v-icon + .v-alert__content
+      margin-left: 0
+
+    > .v-alert__content + .v-icon
+      margin-left: 0
+
 // Elements
+.v-alert__border
+  border-style: solid
+  border-width: thick
+  content: ''
+  position: absolute
+
+  &:not(.v-alert__border--has-color)
+    opacity: 0.26
+
+  &--left,
+  &--right
+    bottom: 0
+    top: 0
+
+  &--bottom,
+  &--top
+    left: 0
+    right: 0
+
+  &--bottom
+    border-bottom-left-radius: inherit
+    border-bottom-right-radius: inherit
+    bottom: 0
+
+  &--left
+    border-top-left-radius: inherit
+    border-bottom-left-radius: inherit
+    left: 0
+
+  &--right
+    border-top-right-radius: inherit
+    border-bottom-right-radius: inherit
+    right: 0
+
+  &--top
+    border-top-left-radius: inherit
+    border-top-right-radius: inherit
+    top: 0
+
 .v-alert__content
   flex: 1 1 auto
 
@@ -40,6 +93,11 @@
     font-size: 24px
 
 // Modifiers
+.v-alert--border
+  @each $direction in ['top', 'right', 'bottom', 'left']
+    &-#{$direction}
+      padding-#{$direction}: 24px
+
 .v-alert--outline
   background: transparent !important
   border: 2px solid currentColor !important
@@ -67,57 +125,3 @@
 
     &.v-icon
       font-size: 32px
-
-//   border-radius: $alert-border-radius
-//   border-width: $alert-border-width
-//   border-style: solid
-//   color: #fff
-//   display: flex
-//   font-size: $alert-font-size
-//   margin: $alert-margin
-//   padding: $alert-padding
-//   position: relative
-//   transition: $primary-transition
-
-//   .v-alert__icon.v-icon,
-//   &__dismissible .v-icon
-//     align-self: center
-//     color: $alert-icon-color
-//     font-size: $alert-icon-font-size
-//   &--outline .v-icon
-//     color: inherit !important
-
-//   &__icon
-//     margin-right: $alert-padding
-
-//   &__dismissible
-//     align-self: flex-start
-//     color: inherit
-//     margin-left: $alert-padding
-//     margin-right: 0
-//     text-decoration: none
-//     transition: $primary-transition
-//     user-select: none
-
-//     &:hover
-//       opacity: .8
-
-//   &--no-icon
-//     .v-alert__icon
-//       display: none
-
-//   > div
-//     align-self: center
-//     flex: 1 1
-
-//   @media screen and (max-width: $grid-breakpoints.sm)
-//     &__icon
-//       display: none
-
-// // Double .v-alert is intended - it increases css specificity
-// // to properly set the border color where alert has set color
-// // with modifier (for example "red lighten-2")
-// .v-alert.v-alert
-//   border-color: $material-light.dividers !important
-//   &--outline
-//     border: $alert-outline-border-width $alert-outline-border-style currentColor !important
