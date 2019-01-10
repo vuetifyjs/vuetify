@@ -3,8 +3,8 @@
 
 // Mixins
 @mixin alert-theme($material)
-  .v-alert__icon
-    &:before
+  .v-alert--prominent .v-alert__icon
+    &:after
       background: map-get($material, 'dividers')
 
 // Theme
@@ -14,9 +14,10 @@
   @include alert-theme($material-dark)
 
 // Block
-.v-alert.v-alert
-  align-items: flex-start
+.v-alert
   display: flex
+  font-size: 16px
+  margin-bottom: 16px
   padding: 16px
 
   > *:first-child
@@ -26,22 +27,17 @@
 .v-alert__content
   flex: 1 1 auto
 
+.v-alert__dismissible
+  align-self: flex-start
+
 .v-alert__icon
   border-radius: 50%
-  height: 36px
-  min-width: 36px
+  height: 24px
+  min-width: 24px
   position: relative
 
-  &:before
-    background: currentColor !important
-    content: ''
-    position: absolute
-    top: 0
-    right: 0
-    bottom: 0
-    left: 0
-    opacity: 0.16
-    border-radius: 50%
+  &.v-icon
+    font-size: 24px
 
 // Modifiers
 .v-alert--outline
@@ -52,10 +48,25 @@
     color: inherit !important
 
 .v-alert--prominent
+  align-items: center
+
   .v-alert__icon
-    align-self: center
     height: 48px
     min-width: 48px
+
+    &:after
+      background: currentColor !important
+      content: ''
+      position: absolute
+      top: 0
+      right: 0
+      bottom: 0
+      left: 0
+      opacity: 0.16
+      border-radius: 50%
+
+    &.v-icon
+      font-size: 32px
 
 //   border-radius: $alert-border-radius
 //   border-width: $alert-border-width

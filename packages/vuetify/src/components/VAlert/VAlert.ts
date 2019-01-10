@@ -9,6 +9,7 @@ import VIcon from '../VIcon'
 
 // Mixins
 import { factory as ToggleableFactory } from '../../mixins/toggleable'
+import Themeable from '../../mixins/themeable'
 import Transitionable from '../../mixins/transitionable'
 
 // Types
@@ -89,7 +90,7 @@ export default mixins(
       }
     },
     computedColor (): string {
-      return (this.type && !this.color) ? this.type : (this.color || 'info')
+      return (this.type && !this.color) ? this.type : (this.color || '')
     },
     computedIcon (): string | void {
       switch (this.type) {
@@ -102,6 +103,11 @@ export default mixins(
     },
     hasOutline (): boolean {
       return this.outline || this.outlined
+    },
+    isDark () {
+      if (this.type) return true
+
+      return Themeable.options.computed.isDark.call(this)
     }
   },
 
