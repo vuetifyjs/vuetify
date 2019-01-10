@@ -1,6 +1,14 @@
 // Imports
 @import '../../styles/styles.sass'
 
+  // Variables
+$btn-border-radius: 4px
+$btn-font-size: 14px
+$btn-icon-font-size: 18px
+$btn-icon-padding: 12px
+$btn-rounded-border-radius: 28px
+$btn-outline-border-width: 2px
+
 // Mixins
 @mixin button-theme($material)
   color: map-deep-get($material, 'text', 'primary')
@@ -42,10 +50,10 @@ $button-sizes: ('x-small': 20, 'small': 28, 'default': 36, 'large': 54, 'x-large
 // Block
 .v-btn
   align-items: center
-  border-radius: 4px
+  border-radius: $btn-border-radius
   display: inline-flex
   flex: 0 0 auto
-  font-size: 14px
+  font-size: $btn-font-size
   justify-content: center
   outline: 0
   max-width: 100%
@@ -106,9 +114,9 @@ $button-sizes: ('x-small': 20, 'small': 28, 'default': 36, 'large': 54, 'x-large
 
   &.v-btn--icon
     &-left
-      padding-left: 12px
+      padding-left: $btn-icon-padding
     &-right
-      padding-right: 12px
+      padding-right: $btn-icon-padding
 
   &.v-btn--loading
     pointer-events: none
@@ -211,10 +219,10 @@ $button-sizes: ('x-small': 20, 'small': 28, 'default': 36, 'large': 54, 'x-large
 
 .v-btn--icon
   .v-icon
-    font-size: 18px
+    font-size: $btn-icon-font-size
 
 .v-btn--outline
-  border: 2px solid currentColor
+  border: $btn-outline-border-width solid currentColor
 
   &:before
     border-radius: 0
@@ -238,4 +246,4 @@ $button-sizes: ('x-small': 20, 'small': 28, 'default': 36, 'large': 54, 'x-large
   border-radius: 50%
 
 .v-btn--rounded
-  border-radius: 28px
+  border-radius: $btn-rounded-border-radius
