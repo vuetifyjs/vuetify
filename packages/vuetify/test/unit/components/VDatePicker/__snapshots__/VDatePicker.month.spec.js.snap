@@ -152,7 +152,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
     <div>
       <div class="v-date-picker-header theme--light">
         <button type="button"
-                class="v-btn v-btn--flat v-btn--fab v-btn--round theme--light v-size--default v-btn--icon"
+                class="v-btn v-btn--fab v-btn--flat v-btn--round theme--light v-size--default v-btn--icon"
         >
           <span class="v-btn__content">
             <i aria-hidden="true"
@@ -170,7 +170,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
           </div>
         </div>
         <button type="button"
-                class="v-btn v-btn--flat v-btn--fab v-btn--round theme--light v-size--default v-btn--icon"
+                class="v-btn v-btn--fab v-btn--flat v-btn--round theme--light v-size--default v-btn--icon"
         >
           <span class="v-btn__content">
             <i aria-hidden="true"
@@ -330,7 +330,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
     <div>
       <div class="v-date-picker-header theme--light">
         <button type="button"
-                class="v-btn v-btn--flat v-btn--fab v-btn--round theme--light v-size--default v-btn--icon"
+                class="v-btn v-btn--fab v-btn--flat v-btn--round theme--light v-size--default v-btn--icon"
         >
           <span class="v-btn__content">
             <i aria-hidden="true"
@@ -348,7 +348,7 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
           </div>
         </div>
         <button type="button"
-                class="v-btn v-btn--flat v-btn--fab v-btn--round theme--light v-size--default v-btn--icon"
+                class="v-btn v-btn--fab v-btn--flat v-btn--round theme--light v-size--default v-btn--icon"
         >
           <span class="v-btn__content">
             <i aria-hidden="true"
@@ -631,7 +631,7 @@ exports[`VDatePicker.js should match snapshot with pick-month prop 1`] = `
     <div>
       <div class="v-date-picker-header theme--light">
         <button type="button"
-                class="v-btn v-btn--flat v-btn--fab v-btn--round theme--light v-size--default v-btn--icon"
+                class="v-btn v-btn--fab v-btn--flat v-btn--round theme--light v-size--default v-btn--icon"
         >
           <span class="v-btn__content">
             <i aria-hidden="true"
@@ -649,7 +649,7 @@ exports[`VDatePicker.js should match snapshot with pick-month prop 1`] = `
           </div>
         </div>
         <button type="button"
-                class="v-btn v-btn--flat v-btn--fab v-btn--round theme--light v-size--default v-btn--icon"
+                class="v-btn v-btn--fab v-btn--flat v-btn--round theme--light v-size--default v-btn--icon"
         >
           <span class="v-btn__content">
             <i aria-hidden="true"
