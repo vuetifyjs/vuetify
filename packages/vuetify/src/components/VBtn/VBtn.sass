@@ -11,23 +11,6 @@ $btn-outline-border-width: 2px
 $btn-sizes: ('x-small': 20, 'small': 28, 'default': 36, 'large': 54, 'x-large': 70)
 
 // Mixins
-@mixin btn-rtl()
-  &.v-btn--icon:not(.v-btn--round)
-    &.v-btn--icon-left
-      padding-right: $btn-icon-padding
-      padding-left: 18px
-
-      .v-btn__content > .v-icon:last-child
-        margin-left: 8px
-        margin-right: 0
-
-    &.v-btn--icon-right
-      padding-left: $btn-icon-padding
-
-      .v-btn__content > .v-icon:last-child
-        margin-left: 0
-        margin-right: 8px
-
 @mixin btn-theme($material)
   color: map-deep-get($material, 'text', 'primary')
 
@@ -63,9 +46,6 @@ $btn-sizes: ('x-small': 20, 'small': 28, 'default': 36, 'large': 54, 'x-large': 
 .v-btn.theme--dark
   @include btn-theme($material-dark)
 
-// RTL
-.application--is-rtl .v-btn
-  @include btn-rtl()
 
 // Block
 .v-btn
@@ -128,6 +108,22 @@ $btn-sizes: ('x-small': 20, 'small': 28, 'default': 36, 'large': 54, 'x-large': 
     &:after
       opacity: 1
 
+  +rtl()
+    &.v-btn--icon:not(.v-btn--round)
+      &.v-btn--icon-left
+        padding-right: $btn-icon-padding
+        padding-left: 18px
+
+        .v-btn__content > .v-icon:last-child
+          margin-left: 8px
+          margin-right: 0
+
+      &.v-btn--icon-right
+        padding-left: $btn-icon-padding
+
+        .v-btn__content > .v-icon:last-child
+          margin-left: 0
+          margin-right: 8px
 
 // Elements
 .v-btn__content
