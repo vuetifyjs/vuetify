@@ -1,16 +1,17 @@
 // Imports
 @import '../../styles/styles.sass'
 
-  // Variables
+// Variables
 $btn-border-radius: 4px
 $btn-font-size: 14px
 $btn-icon-font-size: 18px
 $btn-icon-padding: 12px
 $btn-rounded-border-radius: 28px
 $btn-outline-border-width: 2px
+$btn-sizes: ('x-small': 20, 'small': 28, 'default': 36, 'large': 54, 'x-large': 70)
 
 // Mixins
-@mixin button-theme($material)
+@mixin v-btn-theme($material)
   color: map-deep-get($material, 'text', 'primary')
 
   &.v-btn--disabled
@@ -29,8 +30,6 @@ $btn-outline-border-width: 2px
   &.v-btn--outline.v-btn--text
     border-color: map-get($material, 'dividers')
 
-$button-sizes: ('x-small': 20, 'small': 28, 'default': 36, 'large': 54, 'x-large': 70)
-
 // Theme
 .v-btn:not(.v-btn--outline)
   &.primary,
@@ -43,9 +42,9 @@ $button-sizes: ('x-small': 20, 'small': 28, 'default': 36, 'large': 54, 'x-large
     color: map-deep-get($material-dark, 'text', 'primary')
 
 .v-btn.theme--light
-  @include button-theme($material-light)
+  @include v-btn-theme($material-light)
 .v-btn.theme--dark
-  @include button-theme($material-dark)
+  @include v-btn-theme($material-dark)
 
 // Block
 .v-btn
@@ -55,14 +54,14 @@ $button-sizes: ('x-small': 20, 'small': 28, 'default': 36, 'large': 54, 'x-large
   flex: 0 0 auto
   font-size: $btn-font-size
   justify-content: center
-  outline: 0
   max-width: 100%
+  outline: 0
   position: relative
   text-decoration: none
   text-transform: uppercase
   transition-duration: 0.28s
-  transition-timing-function: map-get($transition, 'fast-out-slow-in')
   transition-property: box-shadow, transform, opacity
+  transition-timing-function: map-get($transition, 'fast-out-slow-in')
   user-select: none
   vertical-align: middle
   white-space: nowrap
@@ -87,7 +86,7 @@ $button-sizes: ('x-small': 20, 'small': 28, 'default': 36, 'large': 54, 'x-large
     will-change: box-shadow
 
   &:not(.v-btn--round)
-    @each $name, $size in $button-sizes
+    @each $name, $size in $btn-sizes
       &.v-size--#{$name}
         height: #{$size}px
         min-width: #{round($size * 1.777777777777778)}px // default ratio
@@ -186,7 +185,7 @@ $button-sizes: ('x-small': 20, 'small': 28, 'default': 36, 'large': 54, 'x-large
   &.v-btn--absolute
     z-index: 4
 
-  @each $name, $size in $button-sizes
+  @each $name, $size in $btn-sizes
     &.v-size--#{$name}
       height: #{$size}px
       width: #{$size}px
