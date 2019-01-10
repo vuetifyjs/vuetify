@@ -6,6 +6,7 @@
       fixed
       app
       clipped-right
+      dir="ltr"
     >
       <v-toolbar-side-icon @click.stop="drawer = !drawer"/>
       <v-toolbar-title class="white--text headline">
@@ -17,11 +18,20 @@
       <codepen />
       <v-btn
         icon
+        title="Change theme"
         @click="$vuetify.dark = !$vuetify.dark"
       >
-        <v-icon title="Change theme">
+        <v-icon>
           mdi-invert-colors
         </v-icon>
+      </v-btn>
+      <v-btn
+        icon
+        title="Toggle RTL"
+        @click="$vuetify.rtl = !$vuetify.rtl"
+      >
+        <v-icon v-if="$vuetify.rtl">mdi-format-horizontal-align-right</v-icon>
+        <v-icon v-else>mdi-format-horizontal-align-left</v-icon>
       </v-btn>
       <v-btn
         v-if="$route.params.component"

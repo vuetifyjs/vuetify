@@ -152,15 +152,15 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
     <div>
       <div class="v-date-picker-header theme--light">
         <button type="button"
-                class="v-btn v-btn--icon theme--light"
+                class="v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--default"
         >
-          <div class="v-btn__content">
+          <span class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
             >
               chevron_left
             </i>
-          </div>
+          </span>
         </button>
         <div class="v-date-picker-header__value">
           <div class="primary--text">
@@ -170,15 +170,15 @@ exports[`VDatePicker.js should match snapshot with colored picker 1`] = `
           </div>
         </div>
         <button type="button"
-                class="v-btn v-btn--icon theme--light"
+                class="v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--default"
         >
-          <div class="v-btn__content">
+          <span class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
             >
               chevron_right
             </i>
-          </div>
+          </span>
         </button>
       </div>
       <div class="v-date-picker-table v-date-picker-table--month theme--light">
@@ -330,15 +330,15 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
     <div>
       <div class="v-date-picker-header theme--light">
         <button type="button"
-                class="v-btn v-btn--icon theme--light"
+                class="v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--default"
         >
-          <div class="v-btn__content">
+          <span class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
             >
               chevron_left
             </i>
-          </div>
+          </span>
         </button>
         <div class="v-date-picker-header__value">
           <div class="orange--text text--darken-1">
@@ -348,15 +348,15 @@ exports[`VDatePicker.js should match snapshot with colored picker 2`] = `
           </div>
         </div>
         <button type="button"
-                class="v-btn v-btn--icon theme--light"
+                class="v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--default"
         >
-          <div class="v-btn__content">
+          <span class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
             >
               chevron_right
             </i>
-          </div>
+          </span>
         </button>
       </div>
       <div class="v-date-picker-table v-date-picker-table--month theme--light">
@@ -631,15 +631,15 @@ exports[`VDatePicker.js should match snapshot with pick-month prop 1`] = `
     <div>
       <div class="v-date-picker-header theme--light">
         <button type="button"
-                class="v-btn v-btn--icon theme--light"
+                class="v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--default"
         >
-          <div class="v-btn__content">
+          <span class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
             >
               chevron_left
             </i>
-          </div>
+          </span>
         </button>
         <div class="v-date-picker-header__value">
           <div class="accent--text">
@@ -649,15 +649,15 @@ exports[`VDatePicker.js should match snapshot with pick-month prop 1`] = `
           </div>
         </div>
         <button type="button"
-                class="v-btn v-btn--icon theme--light"
+                class="v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--default"
         >
-          <div class="v-btn__content">
+          <span class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
             >
               chevron_right
             </i>
-          </div>
+          </span>
         </button>
       </div>
       <div class="v-date-picker-table v-date-picker-table--month theme--light">

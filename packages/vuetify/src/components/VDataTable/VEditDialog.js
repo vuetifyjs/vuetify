@@ -61,7 +61,7 @@ export default {
     genButton (fn, text) {
       return this.$createElement(VBtn, {
         props: {
-          flat: true,
+          text: true,
           color: 'primary',
           light: true
         },

@@ -5,7 +5,7 @@ import Vue from 'vue'
 
 function createBtn (val = null) {
   const options = {
-    props: { flat: true }
+    props: { text: true }
   }
   if (val) options.attrs = { value: val }
 

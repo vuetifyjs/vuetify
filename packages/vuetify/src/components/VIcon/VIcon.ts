@@ -36,6 +36,12 @@ const VIcon = mixins(
     right: Boolean
   },
 
+  computed: {
+    medium () {
+      return false
+    }
+  },
+
   methods: {
     getIcon (): VuetifyIcon {
       let iconName = ''

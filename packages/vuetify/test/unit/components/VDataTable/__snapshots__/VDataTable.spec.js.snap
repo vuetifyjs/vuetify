@@ -150,29 +150,29 @@ exports[`VDataTable.vue should match a snapshot - no data 1`] = `
         </div>
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--flat v-btn--icon theme--light"
+                class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
                 aria-label="Previous page"
         >
-          <div class="v-btn__content">
+          <span class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
             >
               chevron_left
             </i>
-          </div>
+          </span>
         </button>
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--flat v-btn--icon theme--light"
+                class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
                 aria-label="Next page"
         >
-          <div class="v-btn__content">
+          <span class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
             >
               chevron_right
             </i>
-          </div>
+          </span>
         </button>
       </div>
     </div>
@@ -331,29 +331,29 @@ exports[`VDataTable.vue should match a snapshot - no matching results 1`] = `
         </div>
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--flat v-btn--icon theme--light"
+                class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
                 aria-label="Previous page"
         >
-          <div class="v-btn__content">
+          <span class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
             >
               chevron_left
             </i>
-          </div>
+          </span>
         </button>
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--flat v-btn--icon theme--light"
+                class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
                 aria-label="Next page"
         >
-          <div class="v-btn__content">
+          <span class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
             >
               chevron_right
             </i>
-          </div>
+          </span>
         </button>
       </div>
     </div>
@@ -514,29 +514,29 @@ exports[`VDataTable.vue should match a snapshot - with data 1`] = `
         </div>
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--flat v-btn--icon theme--light"
+                class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
                 aria-label="Previous page"
         >
-          <div class="v-btn__content">
+          <span class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
             >
               chevron_left
             </i>
-          </div>
+          </span>
         </button>
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--flat v-btn--icon theme--light"
+                class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
                 aria-label="Next page"
         >
-          <div class="v-btn__content">
+          <span class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
             >
               chevron_right
             </i>
-          </div>
+          </span>
         </button>
       </div>
     </div>
@@ -610,28 +610,28 @@ exports[`VDataTable.vue should match a snapshot with single rows-per-page-items 
         </div>
         <button disabled="disabled"
                 type="button"
-                class="v-btn v-btn--disabled v-btn--flat v-btn--icon theme--light"
+                class="v-btn v-btn--disabled v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
                 aria-label="Previous page"
         >
-          <div class="v-btn__content">
+          <span class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
             >
               chevron_left
             </i>
-          </div>
+          </span>
         </button>
         <button type="button"
-                class="v-btn v-btn--flat v-btn--icon theme--light"
+                class="v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round v-btn--text theme--light v-size--default"
                 aria-label="Next page"
         >
-          <div class="v-btn__content">
+          <span class="v-btn__content">
             <i aria-hidden="true"
                class="v-icon material-icons theme--light"
             >
               chevron_right
             </i>
-          </div>
+          </span>
         </button>
       </div>
     </div>

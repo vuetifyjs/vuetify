@@ -294,7 +294,143 @@
           large
           disabled>Disabled</v-btn>
       </v-flex>
-      <h3 class="title grey--text mb-4 mt-5">FAB</h3>
+      <!-- Outline -->
+      <v-flex>
+        <v-btn
+          outline
+          small
+          text>Outline</v-btn>
+        <v-btn
+          outline
+          small
+          text
+          color="primary">Primary</v-btn>
+        <v-btn
+          outline
+          small
+          text
+          color="error">Error</v-btn>
+        <v-btn
+          outline
+          small
+          text
+          disabled>Disabled</v-btn>
+      </v-flex>
+
+      <v-flex>
+        <v-btn
+          text
+          outline>Outline</v-btn>
+        <v-btn
+          outline
+          text
+          color="primary">Primary</v-btn>
+        <v-btn
+          outline
+          text
+          color="error">Error</v-btn>
+        <v-btn
+          outline
+          text
+          disabled>Disabled</v-btn>
+      </v-flex>
+
+      <v-flex>
+        <v-btn
+          outline
+          large
+          text>Outline</v-btn>
+        <v-btn
+          outline
+          large
+          text
+          color="primary">Primary</v-btn>
+        <v-btn
+          outline
+          large
+          text
+          color="error">Error</v-btn>
+        <v-btn
+          outline
+          large
+          text
+          disabled>Disabled</v-btn>
+      </v-flex>
+      <!-- Rounded with Outline -->
+      <v-flex>
+        <v-btn
+          outline
+          text
+          round
+          small>Rounded</v-btn>
+        <v-btn
+          outline
+          text
+          round
+          small
+          color="primary">Primary</v-btn>
+        <v-btn
+          outline
+          text
+          round
+          small
+          color="error">Error</v-btn>
+        <v-btn
+          outline
+          text
+          round
+          small
+          disabled>Disabled</v-btn>
+      </v-flex>
+
+      <v-flex>
+        <v-btn
+          outline
+          text
+          round>Rounded</v-btn>
+        <v-btn
+          outline
+          text
+          round
+          color="primary">Primary</v-btn>
+        <v-btn
+          outline
+          text
+          round
+          color="error">Error</v-btn>
+        <v-btn
+          outline
+          text
+          round
+          disabled>Disabled</v-btn>
+      </v-flex>
+
+      <v-flex>
+        <v-btn
+          outline
+          text
+          round
+          large>Rounded</v-btn>
+        <v-btn
+          outline
+          text
+          round
+          large
+          color="primary">Primary</v-btn>
+        <v-btn
+          outline
+          text
+          round
+          large
+          color="error">Error</v-btn>
+        <v-btn
+          outline
+          text
+          round
+          large
+          disabled>Disabled</v-btn>
+      </v-flex>
+      <!-- FAB -->
       <v-flex>
         <v-btn
           icon
@@ -775,6 +911,24 @@
             <v-icon>mdi-format-underline</v-icon>
           </v-btn>
           <v-btn flat>
+            <v-icon>mdi-format-color-fill</v-icon>
+          </v-btn>
+        </v-btn-toggle>
+      </v-flex>
+      <v-flex>
+        <v-btn-toggle
+          multiple
+          rounded>
+          <v-btn text>
+            <v-icon>mdi-format-bold</v-icon>
+          </v-btn>
+          <v-btn text>
+            <v-icon>mdi-format-italic</v-icon>
+          </v-btn>
+          <v-btn text>
+            <v-icon>mdi-format-underline</v-icon>
+          </v-btn>
+          <v-btn text>
             <v-icon>mdi-format-color-fill</v-icon>
           </v-btn>
         </v-btn-toggle>

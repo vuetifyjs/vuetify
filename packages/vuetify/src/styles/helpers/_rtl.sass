@@ -1,5 +1,3 @@
-@mixin rtl($component, $name)
-  .application
-    &--is-rtl
-      .#{$name}
-        @include component()
+@mixin rtl()
+  .application--is-rtl &
+    @content

@@ -1,0 +1,235 @@
+// Imports
+@import '../../styles/styles.sass'
+@import './_variables.sass'
+@import './_mixins.sass'
+
+// Theme
+.v-btn:not(.v-btn--outline)
+  &.primary,
+  &.secondary,
+  &.accent,
+  &.success,
+  &.error,
+  &.warning,
+  &.info
+    color: map-deep-get($material-dark, 'text', 'primary')
+
+.v-btn.theme--light
+  @include btn-theme($material-light)
+.v-btn.theme--dark
+  @include btn-theme($material-dark)
+
+// Block
+.v-btn
+  align-items: center
+  border-radius: $btn-border-radius
+  display: inline-flex
+  flex: 0 0 auto
+  font-size: $btn-font-size
+  justify-content: center
+  max-width: 100%
+  outline: 0
+  position: relative
+  text-decoration: none
+  text-transform: uppercase
+  transition-duration: 0.28s
+  transition-property: box-shadow, transform, opacity
+  transition-timing-function: map-get($transition, 'fast-out-slow-in')
+  user-select: none
+  vertical-align: middle
+  white-space: nowrap
+
+  &:before,
+  &:after
+    border-radius: inherit
+    bottom: 0
+    color: inherit
+    content: ''
+    left: 0
+    opacity: 0
+    position: absolute
+    right: 0
+    top: 0
+    transition: opacity 0.2s map-get($transition, 'ease-in-out')
+
+  &:before
+    background-color: currentColor
+
+  &:not(.v-btn--disabled)
+    will-change: box-shadow
+
+  &:not(.v-btn--round)
+    @each $name, $size in $btn-sizes
+      &.v-size--#{$name}
+        height: #{$size}px
+        min-width: #{round($size * 1.777777777777778)}px // default ratio
+        padding: 0 #{$size / 2}px
+
+  &.v-btn--active,
+  &:focus
+    &:before
+      opacity: 0.12
+
+    &:after
+      opacity: 1
+
+  &:hover
+    &:before
+      opacity: 0.06
+
+    &:after
+      opacity: 1
+
+  +rtl()
+    .v-icon--left
+      margin-left: 8px
+      margin-right: -6px
+
+    .v-icon--right
+      margin-left: -6px
+      margin-right: 8px
+
+// Elements
+.v-btn__content
+  align-items: center
+  color: inherit
+  display: flex
+  justify-content: center
+  // Fixes bug where IE11 moves
+  // button content when clicked
+  // https://stackoverflow.com/questions/10305658/prevent-button-from-shifting-during-click-in-ie
+  position: relative
+
+  .v-icon
+    color: inherit
+
+  .v-icon--left,
+  .v-icon--right
+    font-size: $btn-icon-font-size
+
+  .v-icon--left
+    margin-left: -6px
+    margin-right: 8px
+
+  .v-icon--right
+    margin-left: 8px
+    margin-right: -6px
+
+.v-btn__loader
+  align-items: center
+  display: flex
+  height: 100%
+  justify-content: center
+  left: 0
+  position: absolute
+  top: 0
+  width: 100%
+
+// Modifiers
+.v-btn--absolute
+  position: absolute
+
+.v-btn--block
+  display: flex
+  flex: 1 0 auto
+  min-width: 100% !important
+  max-width: auto
+
+.v-btn--contained
+  @include elevation(2)
+
+  &:after
+    @include elevation(4)
+
+  &:active
+    @include elevation(8)
+
+.v-btn--depressed
+  box-shadow: none !important
+
+.v-btn--disabled
+  box-shadow: none
+  pointer-events: none
+
+.v-btn--fab
+  min-height: 0
+  min-width: 0
+  padding: 0
+
+  &.v-btn--contained
+    @include elevation(6)
+
+    &:after
+      @include elevation(8)
+
+    &:active
+      @include elevation(12)
+
+  &.v-btn--fixed,
+  &.v-btn--absolute
+    z-index: 4
+
+  @each $name, $size in $btn-sizes
+    &.v-size--#{$name}
+      height: #{$size}px
+      width: #{$size}px
+
+      .v-icon
+        font-size: #{round($size / 1.5)}px
+
+      &.v-btn--absolute
+        &.v-btn--bottom
+          bottom: -#{$size / 2}px
+
+        &.v-btn--top
+          top: -#{$size / 2}px
+
+      &.v-btn--fixed
+        &.v-btn--top
+          top: map-get($grid-gutters, 'lg')
+        &.v-btn--bottom
+          bottom: map-get($grid-gutters, 'lg')
+
+      &.v-btn--absolute,
+      &.v-btn--fixed
+        &.v-btn--left
+          left: map-get($grid-gutters, 'lg')
+        &.v-btn--right
+          right: map-get($grid-gutters, 'lg')
+
+.v-btn--fixed
+  position: fixed
+
+.v-btn--loading
+  pointer-events: none
+  transition: none
+
+  .v-btn__content
+    opacity: 0
+
+.v-btn--outline
+  border: $btn-outline-border-width solid currentColor
+
+  &:before
+    border-radius: 0
+
+.v-btn--outline,
+.v-btn--round
+  .v-icon
+    color: currentColor
+
+.v-btn--outline,
+.v-btn--flat,
+.v-btn--text
+  background-color: transparent !important
+
+.v-btn--round,
+.v-btn--rounded
+  &:before
+    border-radius: inherit
+
+.v-btn--round
+  border-radius: 50%
+
+.v-btn--rounded
+  border-radius: $btn-rounded-border-radius
