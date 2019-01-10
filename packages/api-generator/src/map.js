@@ -248,6 +248,22 @@ const VTreeviewScopedProps = {
   open: 'boolean'
 }
 
+const VTimestampScopedProps = {
+  date: 'string',
+  time: 'string',
+  year: 'number',
+  month: 'number',
+  day: 'number',
+  hour: 'number',
+  minute: 'number',
+  weekday: 'number',
+  hasDay: 'boolean',
+  hasTime: 'boolean',
+  past: 'boolean',
+  present: 'boolean',
+  future: 'boolean'
+}
+
 module.exports = {
   '$vuetify': {
     functions: [
@@ -387,6 +403,194 @@ module.exports = {
       {
         name: 'change',
         value: 'any[] | any'
+      }
+    ]
+  },
+  'v-calendar': {
+    scopedSlots: [
+      {
+        name: 'day',
+        props: VTimestampScopedProps
+      },
+      {
+        name: 'dayBody',
+        props: VTimestampScopedProps
+      },
+      {
+        name: 'dayHeader',
+        props: VTimestampScopedProps
+      },
+      {
+        name: 'dayLabel',
+        props: VTimestampScopedProps
+      },
+      {
+        name: 'dayMonth',
+        props: VTimestampScopedProps
+      },
+      {
+        name: 'interval',
+        props: VTimestampScopedProps
+      }
+    ],
+    functions: [
+      {
+        name: 'weekdayFormat',
+        signature: '(timestamp: {date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}, short: boolean): string'
+      },
+      {
+        name: 'dayFormat',
+        signature: '(timestamp: {date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}, short: boolean): string'
+      },
+      {
+        name: 'monthFormat',
+        signature: '(timestamp: {date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}, short: boolean): string'
+      },
+      {
+        name: 'intervalFormat',
+        signature: '(timestamp: {date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}, short: boolean): string'
+      },
+      {
+        name: 'intervalStyle',
+        signature: '(timestamp: {date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}): object'
+      },
+      {
+        name: 'showIntervalLabel',
+        signature: '(timestamp: {date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}): boolean'
+      }
+    ],
+    events: [
+      {
+        name: 'input',
+        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+      },
+      {
+        name: 'click:date',
+        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+      },
+      {
+        name: 'contextmenu:date',
+        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+      },
+      {
+        name: 'click:day',
+        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+      },
+      {
+        name: 'contextmenu:day',
+        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+      },
+      {
+        name: 'mousedown:day',
+        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+      },
+      {
+        name: 'mousemove:day',
+        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+      },
+      {
+        name: 'mouseup:day',
+        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+      },
+      {
+        name: 'mouseenter:day',
+        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+      },
+      {
+        name: 'mouseleave:day',
+        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+      },
+      {
+        name: 'touchstart:day',
+        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+      },
+      {
+        name: 'touchmove:day',
+        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+      },
+      {
+        name: 'touchend:day',
+        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+      },
+      {
+        name: 'click:time',
+        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+      },
+      {
+        name: 'contextmenu:time',
+        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+      },
+      {
+        name: 'mousedown:time',
+        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+      },
+      {
+        name: 'mousemove:time',
+        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+      },
+      {
+        name: 'mouseup:time',
+        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+      },
+      {
+        name: 'mouseenter:time',
+        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+      },
+      {
+        name: 'mouseleave:time',
+        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+      },
+      {
+        name: 'touchstart:time',
+        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+      },
+      {
+        name: 'touchmove:time',
+        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+      },
+      {
+        name: 'touchend:time',
+        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+      },
+      {
+        name: 'click:interval',
+        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+      },
+      {
+        name: 'contextmenu:interval',
+        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+      },
+      {
+        name: 'mousedown:interval',
+        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+      },
+      {
+        name: 'mousemove:interval',
+        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+      },
+      {
+        name: 'mouseup:interval',
+        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+      },
+      {
+        name: 'mouseenter:interval',
+        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+      },
+      {
+        name: 'mouseleave:interval',
+        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+      },
+      {
+        name: 'touchstart:interval',
+        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+      },
+      {
+        name: 'touchmove:interval',
+        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+      },
+      {
+        name: 'touchend:interval',
+        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
       }
     ]
   },
