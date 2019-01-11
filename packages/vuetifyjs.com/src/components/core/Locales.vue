@@ -8,7 +8,7 @@
     <v-btn
       slot="activator"
       :aria-label="$t('Vuetify.AppToolbar.translations')"
-      flat
+      text
       style="min-width: 48px"
     >
       <v-img

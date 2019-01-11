@@ -9,7 +9,7 @@
     <v-btn
       slot="activator"
       :aria-label="$t('Vuetify.AppToolbar.support')"
-      flat
+      text
       style="min-width: 48px"
     >
       <span

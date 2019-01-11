@@ -35,7 +35,7 @@
         v-show="isHome"
         :aria-label="$t('Vuetify.AppToolbar.documentation')"
         class="hidden-xs-only"
-        flat
+        text
         style="min-width: 48px;"
         to="getting-started/quick-start"
       >

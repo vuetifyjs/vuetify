@@ -2,7 +2,7 @@
   <v-btn
     :href="`https://github.com/vuetifyjs/vuetify/releases/${version}`"
     class="hidden-md-and-down"
-    flat
+    text
     target="_blank"
     rel="noopener"
   >
