@@ -21,7 +21,6 @@
   ],
   "scripts": {
     "watch": "cross-env TARGET=development webpack --config build/config.js --progress --hide-modules --watch",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.config.js --hot",
     "build": "concurrently \"yarn build:dist --no-progress\" \"yarn build:lib\" -n \"dist,lib\" --kill-others-on-fail -r",
     "build:dist": "rimraf dist && cross-env NODE_ENV=production webpack --config build/config.js --progress --hide-modules",
     "build:lib": "node build/build-lib.js",
@@ -35,7 +34,6 @@
     "lint:fix": "concurrently -n \"tsc,tslint,eslint,types\" --kill-others-on-fail \"tsc --noEmit --pretty\" \"tslint --fix -p . -c .tslint.js src/**/*.ts -t stylish\" \"eslint --fix --ext .js,.ts src\" \"yarn test:types\""
   },
   "devDependencies": {
-    "@mdi/font": "^3.0.39",
     "@types/jest": "^22.2.3",
     "@types/node": "^10.12.0",
     "@vue/test-utils": "^1.0.0-beta.27",
@@ -56,7 +54,6 @@
     "css-loader": "^1.0.0",
     "css-mqpacker": "^7.0.0",
     "cssnano": "^4.1.7",
-    "dotenv": "^6.1.0",
     "eslint": "^5.8.0",
     "eslint-loader": "^2.1.1",
     "file-loader": "^1.1.11",
@@ -86,7 +83,6 @@
     "vuetify-loader": "^0.2.0",
     "webpack": "^4.23.1",
     "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.10",
     "webpack-merge": "^4.1.4"
   },
   "peerDependencies": {

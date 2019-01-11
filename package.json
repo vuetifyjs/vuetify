@@ -16,6 +16,7 @@
     "kitchen": "lerna run serve --scope kitchen --stream",
     "docs-dev": "lerna run dev --scope vuetifyjs.com --stream",
     "version": "node scripts/confirm-npm-tag.js",
+    "postinstall": "node scripts/post-install.js",
     "postversion": "node scripts/post-release-merge.js"
   },
   "devDependencies": {
