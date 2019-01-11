@@ -25,19 +25,19 @@ $container-max-widths: (
 ) !default;
 
 $display-breakpoints: (
-  'print-only': "only print",
-  'screen-only': "only screen",
-  'xs-only': "only screen and (max-width: %s)" + (map-get($grid-breakpoints, 'sm') - 1),
-  'sm-only': "only screen and (min-width: %s) and (max-width: %s)" + (map-get($grid-breakpoints, 'sm') map-get($grid-breakpoints, 'md') - 1),
-  'sm-and-down': "only screen and (max-width: %s)" + (map-get($grid-breakpoints, 'md') - 1),
-  'sm-and-up': "only screen and (min-width: %s)" + map-get($grid-breakpoints, 'sm'),
-  'md-only': "only screen and (min-width: %s) and (max-width: %s)" + (map-get($grid-breakpoints, 'md') map-get($grid-breakpoints, 'lg') - 1),
-  'md-and-down': "only screen and (max-width: %s )" + (map-get($grid-breakpoints, 'lg') - 1),
-  'md-and-up': "only screen and (min-width: %s)" + map-get($grid-breakpoints, 'md'),
-  'lg-only': "only screen and (min-width: %s) and (max-width: %s)" + (map-get($grid-breakpoints, 'lg') map-get($grid-breakpoints, 'xl') - 1),
-  'lg-and-down': "only screen and (max-width: (%s - 1))" + map-get($grid-breakpoints, 'xl'),
-  'lg-and-up': "only screen and (min-width: %s)" + map-get($grid-breakpoints, 'lg'),
-  'xl-only': "only screen and (min-width: %s)" + map-get($grid-breakpoints, 'xl')
+  'print-only': 'only print',
+  'screen-only': 'only screen',
+  'xs-only': 'only screen and (max-width: #{map-get($grid-breakpoints, 'sm') - 1})',
+  'sm-only': 'only screen and (min-width: #{map-get($grid-breakpoints, 'sm')}) and (max-width: #{map-get($grid-breakpoints, 'md') - 1})',
+  'sm-and-down': 'only screen and (max-width: #{map-get($grid-breakpoints, 'md') - 1})',
+  'sm-and-up': 'only screen and (min-width: #{map-get($grid-breakpoints, 'sm')})',
+  'md-only': 'only screen and (min-width: #{map-get($grid-breakpoints, 'md')}) and (max-width: #{map-get($grid-breakpoints, 'lg') - 1})',
+  'md-and-down': 'only screen and (max-width: #{map-get($grid-breakpoints, 'lg') - 1})',
+  'md-and-up': 'only screen and (min-width: #{map-get($grid-breakpoints, 'md')})',
+  'lg-only': 'only screen and (min-width: #{map-get($grid-breakpoints, 'lg')}) and (max-width: #{map-get($grid-breakpoints, 'xl') - 1})',
+  'lg-and-down': 'only screen and (max-width: #{map-get($grid-breakpoints, 'xl') - 1})',
+  'lg-and-up': 'only screen and (min-width: #{map-get($grid-breakpoints, 'lg')})',
+  'xl-only': 'only screen and (min-width: #{map-get($grid-breakpoints, 'xl')})'
 ) !default;
 
 $spacer: 16px !default;
