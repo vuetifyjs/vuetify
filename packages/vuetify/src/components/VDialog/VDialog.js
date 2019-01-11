@@ -84,6 +84,9 @@ export default {
         'v-dialog__content': true,
         'v-dialog__content--active': this.isActive
       }
+    },
+    hasNoActivator () {
+      return !this.$slots.activator && !this.$scopedSlots.activator
     }
   },
 
@@ -177,7 +180,7 @@ export default {
       this.$emit('keydown', e)
     },
     genActivator () {
-      if (!this.$slots.activator && !this.$scopedSlots.activator) return null
+      if (this.hasNoActivator) return null
 
       const listeners = this.disabled ? {} : {
         click: e => {
@@ -263,7 +266,7 @@ export default {
     return h('div', {
       staticClass: 'v-dialog__container',
       style: {
-        display: (!this.$slots.activator || this.fullWidth) ? 'block' : 'inline-block'
+        display: (this.hasNoActivator || this.fullWidth) ? 'block' : 'inline-block'
       }
     }, children)
   }
