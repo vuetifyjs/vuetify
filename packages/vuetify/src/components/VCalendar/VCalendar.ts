@@ -10,12 +10,18 @@ import CalendarBase from './mixins/calendar-base'
 // Util
 import props from './util/props'
 import {
+  DAYS_IN_MONTH_MAX,
+  DAY_MIN,
+  DAYS_IN_WEEK,
   VTimestamp,
   parseTimestamp,
   relativeDays,
   nextDay,
+  prevDay,
   copyTimestamp,
-  updateFormatted
+  updateFormatted,
+  updateWeekday,
+  updateRelative
 } from './util/timestamp'
 
 // Calendars
@@ -38,6 +44,46 @@ export default CalendarBase.extend({
       return parseTimestamp(this.value) ||
         this.parsedStart ||
         this.times.today
+    }
+  },
+
+  methods: {
+    move (amount: number = 1): void {
+      const moved = copyTimestamp(this.parsedValue)
+      const forward = amount > 0
+      const mover = forward ? nextDay : prevDay
+      const limit = forward ? DAYS_IN_MONTH_MAX : DAY_MIN
+      let times = forward ? amount : -amount
+
+      while (--times >= 0) {
+        switch (this.type) {
+          case 'month':
+            moved.day = limit
+            mover(moved)
+            break
+          case 'week':
+            relativeDays(moved, mover, DAYS_IN_WEEK)
+            break
+          case 'day':
+            mover(moved)
+            break
+          case '4day':
+            relativeDays(moved, mover, 4)
+            break
+        }
+      }
+
+      updateWeekday(moved)
+      updateFormatted(moved)
+      updateRelative(moved, this.times.now)
+
+      this.$emit('input', moved.date)
+    },
+    next (amount: number = 1): void {
+      this.move(amount)
+    },
+    prev (amount: number = 1): void {
+      this.move(-amount)
     }
   },
 
@@ -80,6 +126,7 @@ export default CalendarBase.extend({
     }
 
     return h(component, {
+      staticClass: 'v-calendar',
       props: {
         ...this.$props,
         start: start.date,

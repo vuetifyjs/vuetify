@@ -42,7 +42,10 @@
     "dayFormat": "Formats day of the month string that appears in a day to a specified locale"
   },
   "functions": {
-    "updateTimes": "Updates now & today in the calendar, possibly updating the styles in the calendar."
+    "updateTimes": "Updates now & today in the calendar, possibly updating the styles in the calendar.",
+    "next": "Triggers the input event with a date that would progress the calendar to the next timespan. If the type is `month` it will return a day in the next month, if the type is `4day` it will return a date 4 days after `value`/`v-model`, etc.",
+    "prev": "Triggers the input event with a date that would progress the calendar to the previous timespan. If the type is `month` it will return a day in the previous month, if the type is `4day` it will return a date 4 days before `value`/`v-model`, etc.",
+    "move": "A generic function that moves the calendar next (if amount is positive) or previous (if amount is negative)."
   },
   "scopedSlots": {
     "day": "The content that is placed in a `week` or `month` view. The day & time object is passed as the slot-scope.",

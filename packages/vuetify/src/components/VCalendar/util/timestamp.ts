@@ -4,6 +4,7 @@ export const PARSE_REGEX: RegExp = /^(\d{1,4})-(\d{1,2})(-(\d{1,2}))?([^\d]+(\d{
 export const DAYS_IN_MONTH: number[] = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 export const DAYS_IN_MONTH_LEAP: number[] = [0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 export const DAYS_IN_MONTH_MIN: number = 28
+export const DAYS_IN_MONTH_MAX: number = 31
 export const MONTH_MAX: number = 12
 export const MONTH_MIN: number = 1
 export const DAY_MIN: number = 1

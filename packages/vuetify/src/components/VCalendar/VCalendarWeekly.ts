@@ -24,11 +24,11 @@ export default CalendarBase.extend({
   props: props.weeks,
 
   computed: {
+    staticClass (): string {
+      return 'v-calendar-weekly'
+    },
     classes (): object {
-      return {
-        'v-calendar-weekly': true,
-        ...this.themeClasses
-      }
+      return this.themeClasses
     },
     parsedMinWeeks (): number {
       return parseInt(this.minWeeks)
@@ -158,6 +158,7 @@ export default CalendarBase.extend({
 
   render (h): VNode {
     return h('div', {
+      staticClass: this.staticClass,
       class: this.classes,
       nativeOn: {
         dragstart: (e: MouseEvent) => {

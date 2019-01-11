@@ -20,3 +20,9 @@
     data: () => ({})
   }
 </script>
+
+<style lang="stylus" scoped>
+  .v-calendar {
+    min-height: 400px;
+  }
+</style>

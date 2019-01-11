@@ -437,6 +437,18 @@ module.exports = {
       {
         name: 'updateTimes',
         signature: '(): void'
+      },
+      {
+        name: 'next',
+        signature: '(amount: number = 1): void'
+      },
+      {
+        name: 'prev',
+        signature: '(amount: number = 1): void'
+      },
+      {
+        name: 'move',
+        signature: '(amount: number = 1): void'
       }
     ],
     events: [
