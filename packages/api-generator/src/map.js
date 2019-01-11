@@ -433,32 +433,6 @@ module.exports = {
         props: VTimestampScopedProps
       }
     ],
-    functions: [
-      {
-        name: 'weekdayFormat',
-        signature: '(timestamp: {date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}, short: boolean): string'
-      },
-      {
-        name: 'dayFormat',
-        signature: '(timestamp: {date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}, short: boolean): string'
-      },
-      {
-        name: 'monthFormat',
-        signature: '(timestamp: {date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}, short: boolean): string'
-      },
-      {
-        name: 'intervalFormat',
-        signature: '(timestamp: {date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}, short: boolean): string'
-      },
-      {
-        name: 'intervalStyle',
-        signature: '(timestamp: {date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}): object'
-      },
-      {
-        name: 'showIntervalLabel',
-        signature: '(timestamp: {date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}): boolean'
-      }
-    ],
     events: [
       {
         name: 'input',

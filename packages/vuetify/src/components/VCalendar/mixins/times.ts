@@ -4,7 +4,7 @@ import {
   VTimestamp,
   validateTimestamp,
   parseTimestamp,
-  updateFormatted
+  parseDate
 } from '../util/timestamp'
 
 export interface TimesObject {
@@ -59,23 +59,7 @@ export default Vue.extend({
       this.updateDay(now, this.times.today)
     },
     getNow (): VTimestamp {
-      const now = new Date()
-
-      return updateFormatted({
-        date: '',
-        time: '',
-        year: now.getFullYear(),
-        month: now.getMonth() + 1,
-        day: now.getDate(),
-        weekday: now.getDay(),
-        hour: now.getHours(),
-        minute: now.getMinutes(),
-        hasDay: true,
-        hasTime: true,
-        past: false,
-        present: true,
-        future: false
-      })
+      return parseDate(new Date())
     },
     updateDay (now: VTimestamp, target: VTimestamp): void {
       if (now.date !== target.date) {

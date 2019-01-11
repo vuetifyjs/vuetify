@@ -1,12 +1,12 @@
 
-import { validateTimestamp } from './timestamp'
+import { validateTimestamp, parseDate } from './timestamp'
 
 export default {
   base: {
     start: {
       type: String,
-      required: true,
-      validate: validateTimestamp
+      validate: validateTimestamp,
+      default: () => parseDate(new Date()).date
     },
     end: {
       type: String,

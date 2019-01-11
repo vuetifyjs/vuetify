@@ -70,6 +70,24 @@ export function parseTimestamp (input: string, now?: VTimestamp): VTimestamp | n
   return timestamp
 }
 
+export function parseDate (date: Date): VTimestamp {
+  return updateFormatted({
+    date: '',
+    time: '',
+    year: date.getFullYear(),
+    month: date.getMonth() + 1,
+    day: date.getDate(),
+    weekday: date.getDay(),
+    hour: date.getHours(),
+    minute: date.getMinutes(),
+    hasDay: true,
+    hasTime: true,
+    past: false,
+    present: true,
+    future: false
+  })
+}
+
 export function getDayIdentifier (timestamp: VTimestamp): number {
   return timestamp.year * 1000000 + timestamp.month * 100 + timestamp.day
 }
