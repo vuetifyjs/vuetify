@@ -26,8 +26,13 @@ describe('VAlert.ts', () => {
     }
   })
 
-  it('should be closed by default', () => {
+  it('should be open by default', () => {
     const wrapper = mountFunction()
+
+    expect(wrapper.element.style.display).toBe('')
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({ value: false })
 
     expect(wrapper.element.style.display).toBe('none')
     expect(wrapper.html()).toMatchSnapshot()
@@ -44,7 +49,6 @@ describe('VAlert.ts', () => {
   it('should be dismissible', () => {
     const wrapper = mountFunction({
       propsData: {
-        show: true,
         dismissible: true
       }
     })
@@ -63,7 +67,6 @@ describe('VAlert.ts', () => {
   it('should have a custom icon', () => {
     const wrapper = mountFunction({
       propsData: {
-        show: true,
         icon: 'list'
       }
     })
@@ -155,10 +158,10 @@ describe('VAlert.ts', () => {
   it('should toggle isActive state', () => {
     const wrapper = mountFunction()
 
-    expect(wrapper.vm.isActive).toBe(false)
+    expect(wrapper.vm.isActive).toBe(true)
 
     wrapper.vm.toggle()
 
-    expect(wrapper.vm.isActive).toBe(true)
+    expect(wrapper.vm.isActive).toBe(false)
   })
 })

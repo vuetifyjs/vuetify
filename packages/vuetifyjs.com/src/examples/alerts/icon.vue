@@ -1,7 +1,6 @@
 <template>
   <div>
     <v-alert
-      show
       type="info"
       icon="new_releases"
       prominent
@@ -10,7 +9,6 @@
     </v-alert>
 
     <v-alert
-      show
       type="error"
       dense
     >

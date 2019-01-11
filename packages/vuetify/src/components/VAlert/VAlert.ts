@@ -8,7 +8,7 @@ import VSheet from '../VSheet'
 import VIcon from '../VIcon'
 
 // Mixins
-import { factory as ToggleableFactory } from '../../mixins/toggleable'
+import Toggleable from '../../mixins/toggleable'
 import Themeable from '../../mixins/themeable'
 import Transitionable from '../../mixins/transitionable'
 
@@ -16,12 +16,12 @@ import Transitionable from '../../mixins/transitionable'
 import { VNodeData } from 'vue'
 import { VNode } from 'vue/types'
 import mixins from '../../util/mixins'
-import { breaking, deprecate } from '../../util/console'
+import { deprecate } from '../../util/console'
 
 /* @vue/component */
 export default mixins(
   VSheet,
-  ToggleableFactory('show'),
+  Toggleable,
   Transitionable
 ).extend({
   name: 'v-alert',
@@ -49,7 +49,6 @@ export default mixins(
     outline: Boolean,
     outlined: Boolean,
     prominent: Boolean,
-    show: Boolean,
     type: {
       type: String,
       validator (val: string) {
@@ -61,19 +60,13 @@ export default mixins(
         ].includes(val)
       }
     },
-    /* @deprecated */
     value: {
       type: Boolean,
-      default: undefined
+      default: true
     }
   },
 
   created () {
-    /* istanbul ignore if */
-    if (this.value !== undefined) {
-      breaking('value', 'show', this)
-    }
-
     /* istanbul ignore if */
     if (this.outline) {
       deprecate('outline', 'outlined')

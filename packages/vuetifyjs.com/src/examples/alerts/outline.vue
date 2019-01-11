@@ -1,7 +1,6 @@
 <template>
   <div>
     <v-alert
-      show
       type="success"
       outlined
       dense
@@ -10,7 +9,6 @@
     </v-alert>
 
     <v-alert
-      show
       type="info"
       outlined
     >
@@ -18,7 +16,6 @@
     </v-alert>
 
     <v-alert
-      show
       type="warning"
       outlined
       prominent
@@ -27,7 +24,6 @@
     </v-alert>
 
     <v-alert
-      show
       type="error"
       outlined
       dismissible

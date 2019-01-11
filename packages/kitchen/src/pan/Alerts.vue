@@ -5,7 +5,6 @@
       <v-flex>
         <h3 class="title grey--text text-xs-center mb-4 mt-5">Dense</h3>
         <v-alert
-          show
           type="success"
           dense
         >
@@ -13,7 +12,6 @@
         </v-alert>
 
         <v-alert
-          show
           type="info"
           dense
         >
@@ -21,7 +19,6 @@
         </v-alert>
 
         <v-alert
-          show
           type="warning"
           dense
         >
@@ -29,7 +26,6 @@
         </v-alert>
 
         <v-alert
-          show
           type="error"
           dense
         >
@@ -40,28 +36,24 @@
       <v-flex>
         <h3 class="title grey--text text-xs-center mb-4 mt-5">Default</h3>
         <v-alert
-          show
           type="success"
         >
           This is a success alert.
         </v-alert>
 
         <v-alert
-          show
           type="info"
         >
           This is a info alert.
         </v-alert>
 
         <v-alert
-          show
           type="warning"
         >
           This is a warning alert.
         </v-alert>
 
         <v-alert
-          show
           type="error"
         >
           This is an error alert.
@@ -71,7 +63,6 @@
       <v-flex>
         <h3 class="title grey--text text-xs-center mb-4 mt-5">Prominent</h3>
         <v-alert
-          show
           type="success"
           prominent
         >
@@ -79,7 +70,6 @@
         </v-alert>
 
         <v-alert
-          show
           type="info"
           prominent
         >
@@ -87,7 +77,6 @@
         </v-alert>
 
         <v-alert
-          show
           type="warning"
           prominent
         >
@@ -95,7 +84,6 @@
         </v-alert>
 
         <v-alert
-          show
           type="error"
           prominent
         >
@@ -106,7 +94,6 @@
       <v-flex>
         <h3 class="title grey--text text-xs-center mb-4 mt-5">Border</h3>
         <v-alert
-          show
           type="success"
           border="top"
         >
@@ -114,7 +101,6 @@
         </v-alert>
 
         <v-alert
-          show
           type="info"
           border="right"
         >
@@ -122,7 +108,6 @@
         </v-alert>
 
         <v-alert
-          show
           type="warning"
           border="bottom"
         >
@@ -130,7 +115,6 @@
         </v-alert>
 
         <v-alert
-          show
           type="error"
           border="left"
         >
@@ -141,7 +125,6 @@
       <v-flex>
         <h3 class="title grey--text text-xs-center mb-4 mt-5">Colored Border</h3>
         <v-alert
-          show
           type="success"
           border="right"
           colored-border
@@ -150,7 +133,6 @@
         </v-alert>
 
         <v-alert
-          show
           type="info"
           border="bottom"
           colored-border
@@ -159,7 +141,6 @@
         </v-alert>
 
         <v-alert
-          show
           type="warning"
           border="left"
           colored-border
@@ -168,7 +149,6 @@
         </v-alert>
 
         <v-alert
-          show
           type="error"
           border="top"
           colored-border
@@ -180,7 +160,6 @@
       <v-flex>
         <h3 class="title grey--text text-xs-center mb-4 mt-5">Outline</h3>
         <v-alert
-          show
           type="success"
           outlined
         >
@@ -188,7 +167,6 @@
         </v-alert>
 
         <v-alert
-          show
           type="info"
           outlined
         >
@@ -196,7 +174,6 @@
         </v-alert>
 
         <v-alert
-          show
           type="warning"
           outlined
         >
@@ -204,7 +181,6 @@
         </v-alert>
 
         <v-alert
-          show
           type="error"
           outlined
         >
@@ -241,7 +217,6 @@
       <v-flex>
         <h3 class="title grey--text text-xs-center mb-4 mt-5">Custom icons</h3>
         <v-alert
-          show
           color="purple"
           dark
           icon="mdi-account-check"
@@ -250,7 +225,6 @@
         </v-alert>
 
         <v-alert
-          show
           type="error"
           dense
         >
@@ -283,7 +257,6 @@
         <v-alert
           v-model="alertTransition2"
           class="mb-0"
-          show
           color="blue darken-3"
           dark
         >

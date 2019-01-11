@@ -9,7 +9,7 @@
       </v-btn>
     </div>
     <v-alert
-      :show="alert"
+      :value="alert"
       color="pink"
       dark
       border="top"

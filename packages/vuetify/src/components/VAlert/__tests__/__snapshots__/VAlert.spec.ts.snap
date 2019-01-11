@@ -1,16 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VAlert.ts should be closed by default 1`] = `
-
-<div class="v-alert v-sheet theme--light"
-     style="display: none;"
->
-  <div class="v-alert__content">
-  </div>
-</div>
-
-`;
-
 exports[`VAlert.ts should be dismissible 1`] = `
 
 <div class="v-alert v-sheet theme--light"
@@ -29,11 +18,29 @@ exports[`VAlert.ts should be dismissible 1`] = `
 
 `;
 
-exports[`VAlert.ts should have a close icon 1`] = `
+exports[`VAlert.ts should be open by default 1`] = `
+
+<div class="v-alert v-sheet theme--light">
+  <div class="v-alert__content">
+  </div>
+</div>
+
+`;
+
+exports[`VAlert.ts should be open by default 2`] = `
 
 <div class="v-alert v-sheet theme--light"
      style="display: none;"
 >
+  <div class="v-alert__content">
+  </div>
+</div>
+
+`;
+
+exports[`VAlert.ts should have a close icon 1`] = `
+
+<div class="v-alert v-sheet theme--light">
   <div class="v-alert__content">
   </div>
   <a class="v-alert__dismissible">
