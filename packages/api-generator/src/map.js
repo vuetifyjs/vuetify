@@ -433,6 +433,12 @@ module.exports = {
         props: VTimestampScopedProps
       }
     ],
+    functions: [
+      {
+        name: 'updateTimes',
+        signature: '(): void'
+      }
+    ],
     events: [
       {
         name: 'input',

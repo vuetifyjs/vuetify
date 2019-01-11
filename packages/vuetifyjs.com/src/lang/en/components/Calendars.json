@@ -41,6 +41,9 @@
     "showIntervalLabel": "Checks if a given day and time should be displayed in the interval gutter of the `day` view.",
     "dayFormat": "Formats day of the month string that appears in a day to a specified locale"
   },
+  "functions": {
+    "updateTimes": "Updates now & today in the calendar, possibly updating the styles in the calendar."
+  },
   "scopedSlots": {
     "day": "The content that is placed in a `week` or `month` view. The day & time object is passed as the slot-scope.",
     "dayBody": "The content that is placed in a `day` view in the scrollable interval container. The day & time object is passed as the slot-scope.",
