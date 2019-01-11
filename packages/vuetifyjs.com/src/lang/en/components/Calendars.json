@@ -12,6 +12,10 @@
     "eventList": {
       "header": "### Event list",
       "desc": "This is an example of the simple task calendar made using `VCalendar`."
+    },
+    "weekly": {
+      "header": "### Weekly",
+      "desc": "You can use `VCalendar` in weekly mode."
     }
   },
   "props": {
