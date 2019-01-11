@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VAlert.ts should be closed by default 1`] = `
+
+<div class="v-alert v-sheet theme--light"
+     style="display: none;"
+>
+  <div class="v-alert__content">
+  </div>
+</div>
+
+`;
+
+exports[`VAlert.ts should be dismissible 1`] = `
+
+<div class="v-alert v-sheet theme--light"
+     style="display: none;"
+>
+  <div class="v-alert__content">
+  </div>
+  <a class="v-alert__dismissible">
+    <i aria-label="$vuetify.close"
+       class="v-icon v-icon--right material-icons theme--light"
+    >
+      $vuetify.icons.cancel
+    </i>
+  </a>
+</div>
+
+`;
+
+exports[`VAlert.ts should have a close icon 1`] = `
+
+<div class="v-alert v-sheet theme--light"
+     style="display: none;"
+>
+  <div class="v-alert__content">
+  </div>
+  <a class="v-alert__dismissible">
+    <i aria-label="$vuetify.close"
+       class="v-icon v-icon--right material-icons theme--light"
+    >
+      $vuetify.icons.cancel
+    </i>
+  </a>
+</div>
+
+`;

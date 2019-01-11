@@ -1,124 +1,164 @@
-import { test } from '@/test'
-import VAlert from '@/components/VAlert'
-import VIcon from '@/components/VIcon'
+// Libraries
+import Vue from 'vue'
 
-test('VAlert.vue', ({ mount }) => {
-  it('should be closed by default', async () => {
-    const wrapper = mount(VAlert)
+// Components
+import VAlert from '../VAlert'
 
-    expect(wrapper.vm.isActive).toBe(false)
+// Utilities
+import {
+  mount,
+  Wrapper
+} from '@vue/test-utils'
+
+describe('VAlert.ts', () => {
+  let mountFunction: (options?: object) => Wrapper<Vue>
+
+  beforeEach(() => {
+    mountFunction = (options = {}) => {
+      return mount(VAlert, {
+        ...options,
+        mocks: {
+          $vuetify: {
+            t: (val: string) => val
+          }
+        }
+      })
+    }
+  })
+
+  it('should be closed by default', () => {
+    const wrapper = mountFunction()
+
+    expect(wrapper.element.style.display).toBe('none')
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should have a close icon', async () => {
-    const wrapper = mount(VAlert, {
+  it('should have a close icon', () => {
+    const wrapper = mountFunction({
       propsData: { dismissible: true }
     })
 
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should render component with transition', async () => {
-    const wrapper = mount(VAlert, {
-      propsData: { transition: 'foo' }
-    })
-
-    wrapper.setProps({ value: true })
-    await wrapper.vm.$nextTick()
-    expect(wrapper.hasClass('foo-enter')).toBe(true)
-  })
-
-  it('should render component with outline prop', async () => {
-    const wrapper = mount(VAlert, {
-      propsData: { outline: true }
-    })
-
-    expect(wrapper.hasClass('v-alert--outline')).toBe(true)
-  })
-
-  it('should be dismissible', async () => {
-    const wrapper = mount(VAlert, {
+  it('should be dismissible', () => {
+    const wrapper = mountFunction({
       propsData: {
-        value: true,
+        show: true,
         dismissible: true
       }
     })
 
-    const icon = wrapper.find('.v-alert__dismissible')[0]
+    const icon = wrapper.find('.v-alert__dismissible')
+    const input = jest.fn(show => wrapper.setProps({ show }))
 
-    const input = jest.fn(value => wrapper.setProps({ value }))
     wrapper.vm.$on('input', input)
 
     icon.trigger('click')
-
-    await wrapper.vm.$nextTick()
 
     expect(input).toBeCalledWith(false)
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('should have a custom icon', async () => {
-    const wrapper = mount(VAlert, {
+  it('should have a custom icon', () => {
+    const wrapper = mountFunction({
       propsData: {
-        value: true,
+        show: true,
         icon: 'list'
       }
     })
 
-    const icon = wrapper.find('.v-alert__icon')[0]
+    const icon = wrapper.find('.v-alert__icon')
 
     expect(icon.text()).toBe('list')
   })
 
   it('should have no icon', () => {
-    const wrapper = mount(VAlert)
+    const wrapper = mountFunction()
 
     expect(wrapper.contains('.v-icon')).toBe(false)
   })
 
-  it('should display contextual colors by type', async () => {
-    const wrapper = mount(VAlert, {
-      propsData: {
-        type: 'error'
-      }
+  it('should display contextual colors by type', () => {
+    const wrapper = mountFunction({
+      propsData: { type: 'error' }
     })
 
-    expect(wrapper.vm.computedColor).toBe('error')
+    expect(wrapper.classes('error')).toBe(true)
 
-    wrapper.setProps({ 'type': 'success' })
-    await wrapper.vm.$nextTick()
-    expect(wrapper.vm.computedColor).toBe('success')
+    wrapper.setProps({ type: 'success' })
+    expect(wrapper.classes('success')).toBe(true)
 
-    wrapper.setProps({ 'type': 'warning' })
-    await wrapper.vm.$nextTick()
-    expect(wrapper.vm.computedColor).toBe('warning')
+    wrapper.setProps({ type: 'warning' })
+    expect(wrapper.classes('warning')).toBe(true)
 
-    wrapper.setProps({ 'type': 'info' })
-    await wrapper.vm.$nextTick()
-    expect(wrapper.vm.computedColor).toBe('info')
+    wrapper.setProps({ type: 'info' })
+    expect(wrapper.classes('info')).toBe(true)
   })
 
-  it('should allow overriding color for contextual alert', async () => {
-    const wrapper = mount(VAlert, {
+  it('should allow overriding color for contextual alert', () => {
+    const wrapper = mountFunction({
       propsData: {
         type: 'error',
         color: 'primary'
       }
     })
 
-    expect(wrapper.vm.computedColor).toBe('primary')
+    expect(wrapper.classes('primary')).toBe(true)
   })
 
-  it('should allow overriding icon for contextual alert', async () => {
-    const wrapper = mount(VAlert, {
+  it('should allow overriding icon for contextual alert', () => {
+    const wrapper = mountFunction({
       propsData: {
         type: 'error',
         icon: 'block'
       }
     })
 
-    const icon = wrapper.find('.v-alert__icon')[0]
+    const icon = wrapper.find('.v-alert__icon')
 
-    expect(icon.text()).toBe('block')
+    expect(icon.text()).toBe('$vuetify.icons.error')
+  })
+
+  it('should show border', () => {
+    const directions = ['top', 'right', 'bottom', 'left']
+    const wrapper = mountFunction()
+
+    expect(wrapper.classes('v-alert--border')).toBe(false)
+
+    for (const border of directions) {
+      wrapper.setProps({ border })
+
+      expect(wrapper.classes('v-alert--border')).toBe(true)
+      expect(wrapper.classes(`v-alert--border-${border}`)).toBe(true)
+    }
+  })
+
+  it('should move color classes to border and icon elements', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        color: 'pink',
+        border: 'left'
+      }
+    })
+    const border = wrapper.find('.v-alert__border')
+
+    expect(wrapper.classes('pink')).toBe(true)
+    expect(border.classes('pink')).toBe(false)
+
+    wrapper.setProps({ coloredBorder: true })
+    expect(wrapper.classes('pink')).toBe(false)
+    expect(border.classes('pink')).toBe(true)
+    expect(border.classes('v-alert__border--has-color')).toBe(true)
+  })
+
+  it('should toggle isActive state', () => {
+    const wrapper = mountFunction()
+
+    expect(wrapper.vm.isActive).toBe(false)
+
+    wrapper.vm.toggle()
+
+    expect(wrapper.vm.isActive).toBe(true)
   })
 })

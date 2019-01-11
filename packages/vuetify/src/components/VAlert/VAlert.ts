@@ -69,10 +69,12 @@ export default mixins(
   },
 
   created () {
+    /* istanbul ignore if */
     if (this.value !== undefined) {
       breaking('value', 'show', this)
     }
 
+    /* istanbul ignore if */
     if (this.outline) {
       deprecate('outline', 'outlined')
     }
@@ -192,6 +194,7 @@ export default mixins(
         staticClass: 'v-alert__content'
       }, this.$slots.default)
     },
+    /** @public */
     toggle () {
       this.isActive = !this.isActive
     }
