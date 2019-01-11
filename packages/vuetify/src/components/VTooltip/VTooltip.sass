@@ -1,12 +1,13 @@
 @import ../../styles/styles.sass
+@import ./_variables
 
 .v-tooltip
   &__content
-    background: rgba(map-get($grey, 'darken-2'), 0.9)
-    border-radius: 4px
-    color: #FFFFFF
-    font-size: 14px
-    line-height: 22px
+    background: $tooltip-background-color
+    color: $tooltip-text-color
+    border-radius: $tooltip-border-radius
+    font-size: $tooltip-font-size
+    line-height: round($tooltip-font-size * 1.6)
     display: inline-block
     padding: 5px 16px
     position: absolute
@@ -23,8 +24,3 @@
 
     &[class*="leave-active"]
       transition-duration: 75ms
-
-    @media #{map-get($display-breakpoints, 'md-and-up')}
-      font-size: 10px
-      line-height: 14px
-      padding: 5px 8px
