@@ -26,7 +26,7 @@
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-typescript": "^0.12.0",
-    "eslint-plugin-vue": "^4.7.1",
+    "eslint-plugin-vue": "^5.1.0",
     "husky": "^1.1.2",
     "inquirer": "^6.2.0",
     "jest": "^21.2.1",
