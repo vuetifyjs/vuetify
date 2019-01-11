@@ -11,8 +11,15 @@
         </div>
       </v-flex>
       <v-flex xs12>
-        <v-layout row xs12 wrap>
-          <v-flex xs12 md4>
+        <v-layout
+          row
+          xs12
+          wrap
+        >
+          <v-flex
+            xs12
+            md4
+          >
             <v-radio-group v-model="alignment">
               <v-radio
                 v-for="n in alignmentsAvailable"
@@ -22,7 +29,10 @@
               ></v-radio>
             </v-radio-group>
           </v-flex>
-          <v-flex xs12 md4>
+          <v-flex
+            xs12
+            md4
+          >
             <v-radio-group v-model="justify">
               <v-radio
                 v-for="n in justifyAvailable"
@@ -32,7 +42,10 @@
               ></v-radio>
             </v-radio-group>
           </v-flex>
-          <v-flex xs12 md4>
+          <v-flex
+            xs12
+            md4
+          >
             <v-layout column>
               <v-radio-group v-model="flexDirection">
                 <v-checkbox

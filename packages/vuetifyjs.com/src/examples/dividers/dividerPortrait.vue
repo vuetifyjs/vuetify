@@ -10,7 +10,9 @@
     >
       <v-card color="grey darken-1">
         <v-card-title>
-          <span class="headline white--text pl-3">Portrait View</span>
+          <span class="headline white--text pl-3">
+            Portrait View
+          </span>
 
           <v-spacer></v-spacer>
 
@@ -37,15 +39,21 @@
         <v-list class="grey darken-1">
           <v-list-tile>
             <v-list-tile-action>
-              <v-icon color="white">phone</v-icon>
+              <v-icon color="white">
+                phone
+              </v-icon>
             </v-list-tile-action>
 
             <v-list-tile-content>
-              <v-list-tile-title class="white--text">(650) 555-1234</v-list-tile-title>
+              <v-list-tile-title class="white--text">
+                (650) 555-1234
+              </v-list-tile-title>
             </v-list-tile-content>
 
             <v-list-tile-action>
-              <v-icon class="white--text">chat</v-icon>
+              <v-icon class="white--text">
+                chat
+              </v-icon>
             </v-list-tile-action>
           </v-list-tile>
 
@@ -53,15 +61,21 @@
 
           <v-list-tile>
             <v-list-tile-action>
-              <v-icon color="white">phone</v-icon>
+              <v-icon color="white">
+                phone
+              </v-icon>
             </v-list-tile-action>
 
             <v-list-tile-content>
-              <v-list-tile-title class="white--text">(323) 555-6789</v-list-tile-title>
+              <v-list-tile-title class="white--text">
+                (323) 555-6789
+              </v-list-tile-title>
             </v-list-tile-content>
 
             <v-list-tile-action>
-              <v-icon class="white--text">chat</v-icon>
+              <v-icon class="white--text">
+                chat
+              </v-icon>
             </v-list-tile-action>
           </v-list-tile>
 
@@ -69,11 +83,15 @@
 
           <v-list-tile>
             <v-list-tile-action>
-              <v-icon color="white">mail</v-icon>
+              <v-icon color="white">
+                mail
+              </v-icon>
             </v-list-tile-action>
 
             <v-list-tile-content>
-              <v-list-tile-title class="white--text">mcbeal@example.com</v-list-tile-title>
+              <v-list-tile-title class="white--text">
+                mcbeal@example.com
+              </v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
 
@@ -81,11 +99,15 @@
 
           <v-list-tile>
             <v-list-tile-action>
-              <v-icon color="white">location_on</v-icon>
+              <v-icon color="white">
+                location_on
+              </v-icon>
             </v-list-tile-action>
 
             <v-list-tile-content>
-              <v-list-tile-title class="white--text">Orlando, FL 79938</v-list-tile-title>
+              <v-list-tile-title class="white--text">
+                Orlando, FL 79938
+              </v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
         </v-list>

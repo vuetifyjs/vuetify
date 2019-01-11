@@ -1,5 +1,8 @@
 <template>
-  <v-card flat color="grey lighten-4 pa-5 text-xs-center">
+  <v-card
+    flat
+    color="grey lighten-4 pa-5 text-xs-center"
+  >
     <v-subtitle-1 class="title font-weight-regular">
       Patreon Sponsors
     </v-subtitle-1>

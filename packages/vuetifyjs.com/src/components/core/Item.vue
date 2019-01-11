@@ -24,14 +24,18 @@
           v-if="noMarkdown"
           v-text="text"
         />
-        <doc-markdown v-else>{{ text }}</doc-markdown>
+        <doc-markdown v-else>
+          {{ text }}
+        </doc-markdown>
       </v-list-tile-title>
       <v-list-tile-sub-title v-if="subtext">
         <span
           v-if="noMarkdown"
           v-text="subtext"
         />
-        <doc-markdown v-else>{{ subtext }}</doc-markdown>
+        <doc-markdown v-else>
+          {{ subtext }}
+        </doc-markdown>
       </v-list-tile-sub-title>
     </v-list-tile-content>
     <v-chip
@@ -39,7 +43,9 @@
       :color="chipColor"
       class="v-chip--x-small"
       dark
-    >{{ chip }}</v-chip>
+    >
+      {{ chip }}
+    </v-chip>
     <slot />
   </v-list-tile>
 </template>
@@ -96,6 +102,7 @@
         if (this.chip === 'new') return 'primary'
         if (this.chip === 'updated') return 'warning'
         if (this.chip === 'deprecated') return 'black'
+        return 'transparent'
       },
       customAttrs () {
         const attrs = {

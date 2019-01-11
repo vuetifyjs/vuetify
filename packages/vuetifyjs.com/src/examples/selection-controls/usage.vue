@@ -1,8 +1,11 @@
 <template>
-  <v-container fluid px-0>
+  <v-container
+    fluid
+    px-0
+  >
     <v-checkbox
-      :label="`Checkbox 1: ${checkbox.toString()}`"
       v-model="checkbox"
+      :label="`Checkbox 1: ${checkbox.toString()}`"
     ></v-checkbox>
     <v-radio-group v-model="radioGroup">
       <v-radio
@@ -13,8 +16,8 @@
       ></v-radio>
     </v-radio-group>
     <v-switch
-      :label="`Switch 1: ${switch1.toString()}`"
       v-model="switch1"
+      :label="`Switch 1: ${switch1.toString()}`"
     ></v-switch>
   </v-container>
 </template>

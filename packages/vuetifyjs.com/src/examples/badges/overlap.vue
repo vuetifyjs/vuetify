@@ -9,7 +9,9 @@
         slot="badge"
         dark
         small
-      >done</v-icon>
+      >
+        done
+      </v-icon>
       <v-icon
         color="grey lighten-1"
         large
@@ -26,7 +28,9 @@
         slot="badge"
         dark
         small
-      >notifications</v-icon>
+      >
+        notifications
+      </v-icon>
       <v-icon
         large
         color="grey darken-1"

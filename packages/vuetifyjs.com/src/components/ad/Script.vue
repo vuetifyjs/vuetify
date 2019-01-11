@@ -1,5 +1,7 @@
 <template>
-  <div :id="id"><!-- Ad --></div>
+  <div :id="id">
+    <!-- Ad -->
+  </div>
 </template>
 
 <script>

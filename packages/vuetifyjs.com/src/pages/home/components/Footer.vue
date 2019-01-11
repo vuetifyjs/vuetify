@@ -25,11 +25,14 @@
           </h5>
         </v-flex>
         <v-flex xs12>
-          <v-layout justify-center mb-3>
+          <v-layout
+            justify-center
+            mb-3
+          >
             <a
               v-for="(social, i) in socials"
-              :href="social.href"
               :key="i"
+              :href="social.href"
               :title="social.title"
               class="mx-3"
               target="_blank"

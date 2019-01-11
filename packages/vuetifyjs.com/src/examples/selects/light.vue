@@ -8,7 +8,10 @@
         align-center
         wrap
       >
-        <v-flex xs12 sm6>
+        <v-flex
+          xs12
+          sm6
+        >
           <v-select
             v-model="value"
             :items="items"
@@ -18,7 +21,10 @@
             multiple
           ></v-select>
         </v-flex>
-        <v-flex xs12 sm6>
+        <v-flex
+          xs12
+          sm6
+        >
           <v-select
             v-model="value"
             :items="items"
@@ -28,7 +34,10 @@
             multiple
           ></v-select>
         </v-flex>
-        <v-flex xs12 sm6>
+        <v-flex
+          xs12
+          sm6
+        >
           <v-select
             v-model="value"
             :items="items"
@@ -38,7 +47,10 @@
             outline
           ></v-select>
         </v-flex>
-        <v-flex xs12 sm6>
+        <v-flex
+          xs12
+          sm6
+        >
           <v-select
             v-model="value"
             :items="items"

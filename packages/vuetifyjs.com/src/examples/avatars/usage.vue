@@ -1,7 +1,14 @@
 <template>
   <v-container grid-list-md>
-    <v-layout row wrap>
-      <v-flex xs12 sm6 md4>
+    <v-layout
+      row
+      wrap
+    >
+      <v-flex
+        xs12
+        sm6
+        md4
+      >
         <v-slider
           v-model="slider"
           :min="16"
@@ -30,7 +37,10 @@
           :size="avatarSize"
           color="grey lighten-4"
         >
-          <img src="https://vuetifyjs.com/apple-touch-icon-180x180.png" alt="avatar">
+          <img
+            src="https://vuetifyjs.com/apple-touch-icon-180x180.png"
+            alt="avatar"
+          >
         </v-avatar>
       </v-flex>
     </v-layout>

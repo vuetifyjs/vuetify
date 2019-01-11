@@ -27,7 +27,10 @@
           content-class="v-data-iterator--faq"
           hide-actions
         >
-          <template slot="item" slot-scope="{ item: gotcha, index }">
+          <template
+            slot="item"
+            slot-scope="{ item: gotcha, index }"
+          >
             <div class="mb-5">
               <core-goto :id="`question-${index + 1}`">
                 <doc-markdown :code="gotcha.q" />

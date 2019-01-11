@@ -1,5 +1,8 @@
 <template>
-  <v-card flat color="transparent">
+  <v-card
+    flat
+    color="transparent"
+  >
     <v-subheader>Min and max default slider</v-subheader>
 
     <v-card-text>
@@ -12,7 +15,10 @@
           ></v-slider>
         </v-flex>
 
-        <v-flex shrink style="width: 60px">
+        <v-flex
+          shrink
+          style="width: 60px"
+        >
           <v-text-field
             v-model="slider"
             class="mt-0"

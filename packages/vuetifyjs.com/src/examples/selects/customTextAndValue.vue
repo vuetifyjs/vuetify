@@ -1,6 +1,10 @@
 <template>
   <v-container fluid>
-    <v-layout row wrap align-center>
+    <v-layout
+      row
+      wrap
+      align-center
+    >
       <v-flex xs6>
         <v-subheader>Custom items</v-subheader>
       </v-flex>

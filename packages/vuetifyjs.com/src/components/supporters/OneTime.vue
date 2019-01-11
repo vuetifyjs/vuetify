@@ -6,7 +6,9 @@
     wrap
   >
     <v-flex xs12>
-      <doc-heading goto="one-time-donation">oneTime</doc-heading>
+      <doc-heading goto="one-time-donation">
+        oneTime
+      </doc-heading>
     </v-flex>
 
     <v-flex

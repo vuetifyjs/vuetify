@@ -11,7 +11,9 @@
       @click="toggle"
     >
       <v-list-tile-action>
-        <v-icon :color="selectedFruits.length > 0 ? 'indigo darken-4' : ''">{{ icon }}</v-icon>
+        <v-icon :color="selectedFruits.length > 0 ? 'indigo darken-4' : ''">
+          {{ icon }}
+        </v-icon>
       </v-list-tile-action>
       <v-list-tile-title>Select All</v-list-tile-title>
     </v-list-tile>

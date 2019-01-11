@@ -1,7 +1,18 @@
 <template>
-  <v-container fluid grid-list-lg>
-    <v-layout row wrap>
-      <v-flex xs12 sm12 md6 offset-md3>
+  <v-container
+    fluid
+    grid-list-lg
+  >
+    <v-layout
+      row
+      wrap
+    >
+      <v-flex
+        xs12
+        sm12
+        md6
+        offset-md3
+      >
         <v-card>
           <v-toolbar extended>
             <v-toolbar-side-icon></v-toolbar-side-icon>
@@ -20,8 +31,14 @@
               </v-btn>
             </v-fab-transition>
           </v-toolbar>
-          <v-card-text style="height: 300px;" class="grey lighten-5 text-xs-center">
-            <v-btn color="primary" @click="hidden = !hidden">
+          <v-card-text
+            style="height: 300px;"
+            class="grey lighten-5 text-xs-center"
+          >
+            <v-btn
+              color="primary"
+              @click="hidden = !hidden"
+            >
               {{ hidden ? 'Show' : 'Hide' }}
             </v-btn>
           </v-card-text>

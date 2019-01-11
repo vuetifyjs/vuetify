@@ -1,5 +1,8 @@
 <template>
-  <v-card flat color="transparent">
+  <v-card
+    flat
+    color="transparent"
+  >
     <v-subheader>Default range slider</v-subheader>
 
     <v-card-text>
@@ -21,7 +24,10 @@
 
     <v-card-text>
       <v-layout row>
-        <v-flex shrink style="width: 60px">
+        <v-flex
+          shrink
+          style="width: 60px"
+        >
           <v-text-field
             v-model="value3[0]"
             class="mt-0"
@@ -40,7 +46,10 @@
           ></v-range-slider>
         </v-flex>
 
-        <v-flex shrink style="width: 60px">
+        <v-flex
+          shrink
+          style="width: 60px"
+        >
           <v-text-field
             v-model="value3[1]"
             class="mt-0"

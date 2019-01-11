@@ -28,8 +28,8 @@
       >
         <v-tab
           v-for="item in items"
-          :href="'#tab-' + item"
           :key="item"
+          :href="'#tab-' + item"
         >
           {{ item }}
         </v-tab>
@@ -40,7 +40,10 @@
           class="v-tabs__div"
           left
         >
-          <a slot="activator" class="v-tabs__item">
+          <a
+            slot="activator"
+            class="v-tabs__item"
+          >
             more
             <v-icon>arrow_drop_down</v-icon>
           </a>
@@ -61,8 +64,8 @@
     <v-tabs-items v-model="currentItem">
       <v-tab-item
         v-for="item in items.concat(more)"
-        :value="'tab-' + item"
         :key="item"
+        :value="'tab-' + item"
       >
         <v-card flat>
           <v-card-text>

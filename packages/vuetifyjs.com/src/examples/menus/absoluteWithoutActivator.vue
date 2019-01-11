@@ -1,6 +1,9 @@
 <template>
   <div>
-    <v-layout flex justify-center>
+    <v-layout
+      flex
+      justify-center
+    >
       <v-card
         class="portrait"
         img="https://cdn.vuetifyjs.com/images/cards/girl.jpg"

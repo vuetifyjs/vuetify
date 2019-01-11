@@ -1,6 +1,9 @@
 <template>
   <v-container fluid>
-    <v-checkbox v-model="custom" label="Custom progress bar"></v-checkbox>
+    <v-checkbox
+      v-model="custom"
+      label="Custom progress bar"
+    ></v-checkbox>
     <v-text-field
       v-model="value"
       color="cyan darken"

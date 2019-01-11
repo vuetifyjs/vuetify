@@ -12,7 +12,10 @@
 
     <v-divider></v-divider>
 
-    <v-list dense class="pt-0">
+    <v-list
+      dense
+      class="pt-0"
+    >
       <v-list-tile
         v-for="item in items"
         :key="item.title"

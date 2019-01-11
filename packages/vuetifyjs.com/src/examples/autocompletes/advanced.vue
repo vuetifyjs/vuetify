@@ -5,7 +5,9 @@
     tabs
   >
     <v-toolbar-side-icon></v-toolbar-side-icon>
-    <v-toolbar-title class="title mr-4">Cryptocurrency</v-toolbar-title>
+    <v-toolbar-title class="title mr-4">
+      Cryptocurrency
+    </v-toolbar-title>
     <v-autocomplete
       v-model="model"
       :items="items"
@@ -37,13 +39,15 @@
           color="blue-grey"
           class="white--text"
         >
-          <v-icon left>mdi-coin</v-icon>
+          <v-icon left>
+            mdi-coin
+          </v-icon>
           <span v-text="item.name"></span>
         </v-chip>
       </template>
       <template
         slot="item"
-        slot-scope="{ item, tile }"
+        slot-scope="{ item }"
       >
         <v-list-tile-avatar
           color="indigo"
@@ -66,9 +70,15 @@
       color="transparent"
       slider-color="blue-grey"
     >
-      <v-tab :disabled="!model">News</v-tab>
-      <v-tab :disabled="!model">Trading</v-tab>
-      <v-tab :disabled="!model">Blog</v-tab>
+      <v-tab :disabled="!model">
+        News
+      </v-tab>
+      <v-tab :disabled="!model">
+        Trading
+      </v-tab>
+      <v-tab :disabled="!model">
+        Blog
+      </v-tab>
     </v-tabs>
   </v-toolbar>
 </template>
