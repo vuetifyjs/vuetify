@@ -130,7 +130,7 @@ export default VResponsive.extend({
     onLoad () {
       this.getSrc()
       this.isLoading = false
-      this.$emit('load', this.src)
+      this.$emit('load', this.src, this)
     },
     onError () {
       consoleError(
@@ -138,7 +138,7 @@ export default VResponsive.extend({
         `src: ${this.normalisedSrc.src}`,
         this
       )
-      this.$emit('error', this.src)
+      this.$emit('error', this.src, this)
     },
     getSrc () {
       /* istanbul ignore else */
