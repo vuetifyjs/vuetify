@@ -16,6 +16,10 @@
     "weekly": {
       "header": "### Weekly",
       "desc": "You can use `VCalendar` in weekly mode."
+    },
+    "daily": {
+      "header": "### Daily",
+      "desc": "You can use `VCalendar` in daily mode to display only one day."
     }
   },
   "props": {

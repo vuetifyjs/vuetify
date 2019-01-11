@@ -33,7 +33,8 @@
           "value": [
             "slots",
             "eventList",
-            "weekly"
+            "weekly",
+            "daily"
           ]
         }
       ]
