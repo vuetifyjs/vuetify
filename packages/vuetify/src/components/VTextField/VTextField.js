@@ -209,6 +209,7 @@ export default VInput.extend({
     },
     clearableCallback () {
       this.internalValue = null
+      this.$emit('change', this.internalValue)
       this.$nextTick(() => this.$refs.input.focus())
     },
     genAppendSlot () {
