@@ -7,7 +7,7 @@ import Vuetify, {
   VNavigationDrawer,
   VFooter,
   VToolbar,
-  transitions
+  VFadeTransition
 } from 'vuetify/lib'
 import { Ripple } from 'vuetify/lib/directives'
 
@@ -17,7 +17,7 @@ Vue.use(Vuetify, {
     VNavigationDrawer,
     VFooter,
     VToolbar,
-    transitions
+    VFadeTransition
   },
   directives: {
     Ripple
