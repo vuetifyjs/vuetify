@@ -6,15 +6,17 @@
           slot="day"
           slot-scope="day"
         >
-          <div
-            v-for="event in events"
-            :key="event.name"
-          >
-            <span
-              v-if="day.date == event.date"
+          <div style="min-height: 5rem">
+            <div
+              v-for="event in events"
+              :key="event.name"
             >
-              {{ event.name }}
-            </span>
+              <span
+                v-if="day.date == event.date"
+              >
+                {{ event.name }}
+              </span>
+            </div>
           </div>
         </template>
       </v-calendar>

@@ -6,8 +6,10 @@
           slot="day"
           slot-scope="day"
         >
-          <div v-if="day.present">
-            Today
+          <div style="min-height: 5rem">
+            <div v-if="day.present">
+              Today
+            </div>
           </div>
         </template>
       </v-calendar>
