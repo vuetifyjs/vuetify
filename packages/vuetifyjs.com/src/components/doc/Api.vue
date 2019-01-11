@@ -3,8 +3,8 @@
     <doc-heading>Generic.Pages.api</doc-heading>
     <v-card>
       <v-tabs
-        :slider-color="computedTabs.length ? 'primary' : 'transparent'"
         v-model="tab"
+        :slider-color="computedTabs.length ? 'primary' : 'transparent'"
         color="grey lighten-3"
       >
         <v-tab
@@ -23,8 +23,8 @@
             sm4
           >
             <v-select
-              :items="value"
               v-model="current"
+              :items="value"
               :disabled="value.length < 2"
               hide-details
               single-line
@@ -32,7 +32,10 @@
             />
           </v-flex>
 
-          <v-flex xs12 sm4>
+          <v-flex
+            xs12
+            sm4
+          >
             <v-text-field
               v-model="search"
               append-icon="search"

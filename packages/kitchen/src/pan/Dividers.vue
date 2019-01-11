@@ -1,13 +1,16 @@
 <template>
   <v-container>
     <v-layout column>
-      <h3 class="title grey--text mb-4 mt-5 center">In list</h3>
+      <h3 class="title grey--text mb-4 mt-5 center">
+        In list
+      </h3>
       <v-flex>
         <v-list two-line>
           <template v-for="index in 5">
             <v-list-tile
               :key="index"
-              ripple>
+              ripple
+            >
               <v-list-tile-content>
                 <v-list-tile-title>Item</v-list-tile-title>
                 <v-list-tile-sub-title>Some item</v-list-tile-sub-title>
@@ -15,12 +18,15 @@
             </v-list-tile>
             <v-divider
               v-if="index + 1 <= 5"
-              :key="`divider-${index}`"/>
+              :key="`divider-${index}`"
+            />
           </template>
         </v-list>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">Vertical</h3>
+      <h3 class="title grey--text mb-4 mt-5 center">
+        Vertical
+      </h3>
       <v-flex>
         <v-toolbar
           color="purple"
@@ -34,50 +40,56 @@
             vertical
           />
 
-          <span class="subheading">My Home</span>
+          <span class="subheading">
+            My Home
+          </span>
 
-          <v-spacer/>
+          <v-spacer />
 
           <v-toolbar-items>
             <v-btn flat>
               News
             </v-btn>
 
-            <v-divider vertical/>
+            <v-divider vertical />
 
             <v-btn flat>
               Blog
             </v-btn>
 
-            <v-divider vertical/>
+            <v-divider vertical />
 
             <v-btn flat>
               Music
             </v-btn>
 
-            <v-divider vertical/>
+            <v-divider vertical />
           </v-toolbar-items>
 
-          <v-toolbar-side-icon/>
+          <v-toolbar-side-icon />
         </v-toolbar>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">Vertical</h3>
+      <h3 class="title grey--text mb-4 mt-5 center">
+        Vertical
+      </h3>
       <v-flex>
         <v-layout justify-center>
           <v-flex
             xs12
             sm8
-            md6>
+            md6
+          >
             <v-card>
               <v-toolbar
                 color="orange lighten-1"
-                dark>
-                <v-toolbar-side-icon/>
+                dark
+              >
+                <v-toolbar-side-icon />
 
                 <v-toolbar-title>Message Board</v-toolbar-title>
 
-                <v-spacer/>
+                <v-spacer />
 
                 <v-btn icon>
                   <v-icon>mdi-magnify</v-icon>
@@ -110,8 +122,8 @@
                       <img :src="item.avatar">
                     </v-list-tile-avatar>
                     <v-list-tile-content>
-                      <v-list-tile-title v-html="item.title"/>
-                      <v-list-tile-sub-title v-html="item.subtitle"/>
+                      <v-list-tile-title v-html="item.title" />
+                      <v-list-tile-sub-title v-html="item.subtitle" />
                     </v-list-tile-content>
                   </v-list-tile>
                 </template>

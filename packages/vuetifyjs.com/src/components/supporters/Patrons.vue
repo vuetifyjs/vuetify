@@ -16,7 +16,8 @@
           :group="supporters.diamond"
           :title="!hideTitles ? 'Diamond' : undefined"
           :class="classes"
-          large
+          :large="!compact"
+          :small="compact"
         />
 
         <supporter-group
@@ -54,7 +55,11 @@
 </template>
 
 <script>
-  const supporters = require('@/data/supporters.json')
+  // Utilities
+  import {
+    mapMutations,
+    mapState
+  } from 'vuex'
 
   export default {
     components: {
@@ -62,6 +67,10 @@
     },
 
     props: {
+      compact: {
+        type: Boolean,
+        default: false
+      },
       dense: {
         type: Boolean,
         default: false
@@ -71,22 +80,35 @@
         default: false
       },
       tier: {
-        type: Number,
+        type: [Number, String],
         default: 10
       }
     },
 
-    data: () => ({
-      supporters
-    }),
-
     computed: {
+      ...mapState('app', ['supporters']),
       classes () {
         return {
-          'mb-2': this.dense,
+          'mb-0': this.dense,
           'mb-5': !this.dense
         }
       }
+    },
+
+    async created () {
+      if (this.$ssrContext || Object.keys(this.supporters).length) return
+
+      const supporters = await fetch('https://cdn.vuetifyjs.com/supporters.json', {
+        headers: {
+          'Access-Control-Allow-Origin': '*'
+        }
+      }).then(res => res.json())
+
+      if (supporters) this.setSupporters(supporters)
+    },
+
+    methods: {
+      ...mapMutations('app', ['setSupporters'])
     }
   }
 </script>

@@ -1,8 +1,15 @@
 <template>
   <v-layout row>
-    <v-flex xs12 sm6 offset-sm3>
+    <v-flex
+      xs12
+      sm6
+      offset-sm3
+    >
       <v-card>
-        <v-toolbar color="cyan" dark>
+        <v-toolbar
+          color="cyan"
+          dark
+        >
           <v-toolbar-side-icon></v-toolbar-side-icon>
           <v-toolbar-title>Inbox</v-toolbar-title>
           <v-spacer></v-spacer>
@@ -12,9 +19,23 @@
         </v-toolbar>
         <v-list two-line>
           <template v-for="(item, index) in items.slice(0, 6)">
-            <v-subheader v-if="item.header" :key="item.header">{{ item.header }}</v-subheader>
-            <v-divider v-else-if="item.divider" :inset="item.inset" :key="index"></v-divider>
-            <v-list-tile v-else :key="item.title" avatar @click="">
+            <v-subheader
+              v-if="item.header"
+              :key="item.header"
+            >
+              {{ item.header }}
+            </v-subheader>
+            <v-divider
+              v-else-if="item.divider"
+              :key="index"
+              :inset="item.inset"
+            ></v-divider>
+            <v-list-tile
+              v-else
+              :key="item.title"
+              avatar
+              @click=""
+            >
               <v-list-tile-avatar>
                 <img :src="item.avatar">
               </v-list-tile-avatar>

@@ -1,7 +1,7 @@
 <template>
   <component
-    v-if="component !== false"
     :is="component"
+    v-if="component !== false"
   />
   <not-found v-else />
 </template>

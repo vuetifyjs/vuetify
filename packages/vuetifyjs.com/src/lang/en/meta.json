@@ -99,7 +99,7 @@
     "description": "Vuetify has custom styling for default html markup.",
     "keywords": "content, html, markup"
   },
-  "framework/pre-defined": {
+  "framework/pre-made-layouts": {
     "title": "Application layouts",
     "description": "Select from a multitude of official material design layouts.",
     "keywords": "pre-defined layouts, layouts, application layout, material design layouts"

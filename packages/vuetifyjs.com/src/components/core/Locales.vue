@@ -12,6 +12,7 @@
       style="min-width: 48px"
     >
       <v-img
+        v-if="currentLanguage"
         :src="`https://cdn.vuetifyjs.com/images/flags/${currentLanguage.country}.png`"
         width="26px"
       />

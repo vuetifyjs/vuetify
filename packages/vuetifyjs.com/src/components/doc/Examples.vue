@@ -18,10 +18,12 @@
 </template>
 
 <script>
+  // Utilities
+  import {
+    mapGetters
+  } from 'vuex'
 
   export default {
-    inject: ['namespace', 'page'],
-
     props: {
       value: {
         type: Array,
@@ -30,6 +32,10 @@
     },
 
     computed: {
+      ...mapGetters('documentation', [
+        'namespace',
+        'page'
+      ]),
       examples () {
         return this.value.map(example => {
           const file = example === Object(example) ? example.file : example

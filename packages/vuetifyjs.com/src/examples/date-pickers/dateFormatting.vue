@@ -1,11 +1,17 @@
 <template>
   <v-container grid-list-md>
-    <v-layout row wrap>
-      <v-flex xs12 lg6>
+    <v-layout
+      row
+      wrap
+    >
+      <v-flex
+        xs12
+        lg6
+      >
         <v-menu
           ref="menu1"
-          :close-on-content-click="false"
           v-model="menu1"
+          :close-on-content-click="false"
           :nudge-right="40"
           lazy
           transition="scale-transition"
@@ -23,15 +29,22 @@
             prepend-icon="event"
             @blur="date = parseDate(dateFormatted)"
           ></v-text-field>
-          <v-date-picker v-model="date" no-title @input="menu1 = false"></v-date-picker>
+          <v-date-picker
+            v-model="date"
+            no-title
+            @input="menu1 = false"
+          ></v-date-picker>
         </v-menu>
         <p>Date in ISO format: <strong>{{ date }}</strong></p>
       </v-flex>
 
-      <v-flex xs12 lg6>
+      <v-flex
+        xs12
+        lg6
+      >
         <v-menu
-          :close-on-content-click="false"
           v-model="menu2"
+          :close-on-content-click="false"
           :nudge-right="40"
           lazy
           transition="scale-transition"
@@ -49,7 +62,11 @@
             prepend-icon="event"
             readonly
           ></v-text-field>
-          <v-date-picker v-model="date" no-title @input="menu2 = false"></v-date-picker>
+          <v-date-picker
+            v-model="date"
+            no-title
+            @input="menu2 = false"
+          ></v-date-picker>
         </v-menu>
         <p>Date in ISO format: <strong>{{ date }}</strong></p>
       </v-flex>

@@ -1,13 +1,10 @@
 <template>
-  <div :id="id"><!-- Ad --></div>
+  <div :id="id">
+    <!-- Ad -->
+  </div>
 </template>
 
 <script>
-  // Utilities
-  import {
-    mapState
-  } from 'vuex'
-
   export default {
     props: {
       id: {
@@ -29,19 +26,9 @@
       script: null
     }),
 
-    computed: {
-      ...mapState('app', ['isLoading'])
-    },
-
     watch: {
-      isLoading (val) {
-        if (!this.isBooted) {
-          return (this.isBooted = true)
-        }
-
+      '$route.path' () {
         clearTimeout(this.timeout)
-
-        if (val) return
 
         this.timeout = setTimeout(this.serve, 100)
       }

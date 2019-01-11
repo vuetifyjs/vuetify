@@ -12,7 +12,6 @@
         ripple
       >
         Item {{ n }}
-
       </v-tab>
       <v-tab-item
         v-for="n in 3"
@@ -25,7 +24,9 @@
     </v-tabs>
 
     <div class="text-xs-center mt-3">
-      <v-btn @click="next">next tab</v-btn>
+      <v-btn @click="next">
+        next tab
+      </v-btn>
     </div>
   </div>
 </template>

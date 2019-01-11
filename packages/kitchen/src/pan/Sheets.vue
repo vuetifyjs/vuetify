@@ -1,11 +1,14 @@
 <template>
   <v-container>
     <v-layout column>
-      <h3 class="title grey--text mb-4 mt-5 center">Elevation</h3>
+      <h3 class="title grey--text mb-4 mt-5 center">
+        Elevation
+      </h3>
       <v-flex>
         <v-layout
           justify-space-around
-          wrap>
+          wrap
+        >
           <v-flex
             v-for="elevation in 25"
             :key="elevation"
@@ -26,11 +29,14 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">Colors</h3>
+      <h3 class="title grey--text mb-4 mt-5 center">
+        Colors
+      </h3>
       <v-flex>
         <v-layout
           justify-space-around
-          wrap>
+          wrap
+        >
           <v-flex
             v-for="color in colors"
             :key="color"
@@ -50,7 +56,9 @@
         </v-layout>
       </v-flex>
 
-      <h3 class="title grey--text mb-4 mt-5 center">Sizes</h3>
+      <h3 class="title grey--text mb-4 mt-5 center">
+        Sizes
+      </h3>
       <v-flex>
         <v-layout
           justify-space-around

@@ -1,23 +1,48 @@
 <template>
   <v-layout row>
-    <v-flex xs12 sm6 offset-sm3>
+    <v-flex
+      xs12
+      sm6
+      offset-sm3
+    >
       <v-card>
-        <v-toolbar color="light-blue" dark>
+        <v-toolbar
+          color="light-blue"
+          dark
+        >
           <v-toolbar-side-icon></v-toolbar-side-icon>
           <v-toolbar-title>My files</v-toolbar-title>
           <v-spacer></v-spacer>
-          <v-btn dark icon>
+          <v-btn
+            dark
+            icon
+          >
             <v-icon>search</v-icon>
           </v-btn>
-          <v-btn dark icon>
+          <v-btn
+            dark
+            icon
+          >
             <v-icon>view_module</v-icon>
           </v-btn>
         </v-toolbar>
-        <v-list two-line subheader>
-          <v-subheader inset>Folders</v-subheader>
-          <v-list-tile v-for="item in items" :key="item.title" avatar @click="">
+        <v-list
+          two-line
+          subheader
+        >
+          <v-subheader inset>
+            Folders
+          </v-subheader>
+          <v-list-tile
+            v-for="item in items"
+            :key="item.title"
+            avatar
+            @click=""
+          >
             <v-list-tile-avatar>
-              <v-icon :class="[item.iconClass]">{{ item.icon }}</v-icon>
+              <v-icon :class="[item.iconClass]">
+                {{ item.icon }}
+              </v-icon>
             </v-list-tile-avatar>
             <v-list-tile-content>
               <v-list-tile-title>{{ item.title }}</v-list-tile-title>
@@ -25,15 +50,25 @@
             </v-list-tile-content>
             <v-list-tile-action>
               <v-btn icon>
-                <v-icon color="grey lighten-1">info</v-icon>
+                <v-icon color="grey lighten-1">
+                  info
+                </v-icon>
               </v-btn>
             </v-list-tile-action>
           </v-list-tile>
           <v-divider inset></v-divider>
-          <v-subheader inset>Files</v-subheader>
-          <v-list-tile v-for="item in items2" :key="item.title" @click="">
+          <v-subheader inset>
+            Files
+          </v-subheader>
+          <v-list-tile
+            v-for="item in items2"
+            :key="item.title"
+            @click=""
+          >
             <v-list-tile-avatar>
-              <v-icon :class="[item.iconClass]">{{ item.icon }}</v-icon>
+              <v-icon :class="[item.iconClass]">
+                {{ item.icon }}
+              </v-icon>
             </v-list-tile-avatar>
             <v-list-tile-content>
               <v-list-tile-title>{{ item.title }}</v-list-tile-title>
@@ -41,7 +76,9 @@
             </v-list-tile-content>
             <v-list-tile-action>
               <v-btn icon>
-                <v-icon color="grey lighten-1">info</v-icon>
+                <v-icon color="grey lighten-1">
+                  info
+                </v-icon>
               </v-btn>
             </v-list-tile-action>
           </v-list-tile>

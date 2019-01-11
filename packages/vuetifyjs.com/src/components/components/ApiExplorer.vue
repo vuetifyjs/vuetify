@@ -1,5 +1,8 @@
 <template>
-  <v-layout wrap mb-5>
+  <v-layout
+    wrap
+    mb-5
+  >
     <v-flex
       xs12
       mb-5

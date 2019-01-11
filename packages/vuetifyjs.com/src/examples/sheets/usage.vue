@@ -49,7 +49,6 @@
             </v-sheet>
           </v-flex>
           <v-flex xs12>
-
             <v-sheet
               class="d-flex"
               color="red lighten-3"

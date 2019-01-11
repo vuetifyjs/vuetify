@@ -32,10 +32,17 @@
             wrap
           >
             <v-btn
+              :to="{
+                name: 'Documentation',
+                params: {
+                  lang: $route.params.lang,
+                  namespace: 'getting-started',
+                  page: 'quick-start'
+                }
+              }"
               class="primary--text ml-0"
               color="white"
               large
-              to="getting-started/quick-start"
             >
               {{ $t('Vuetify.Home.getStarted') }}
             </v-btn>
@@ -45,7 +52,9 @@
               large
               outline
             >
-              <v-icon left>mdi-github-circle</v-icon>
+              <v-icon left>
+                mdi-github-circle
+              </v-icon>
               Github
             </v-btn>
             <v-btn
@@ -56,7 +65,9 @@
               rel="noopener"
               target="_blank"
             >
-              <v-icon left>mdi-discord</v-icon>
+              <v-icon left>
+                mdi-discord
+              </v-icon>
               {{ $t('Vuetify.Home.getHelp') }}
             </v-btn>
           </v-layout>

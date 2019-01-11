@@ -1,5 +1,8 @@
 <template>
-  <v-card flat color="transparent">
+  <v-card
+    flat
+    color="transparent"
+  >
     <v-subheader>Show ticks when using slider</v-subheader>
 
     <v-card-text>

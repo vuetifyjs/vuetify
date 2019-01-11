@@ -1,14 +1,28 @@
 <template>
-  <v-container fluid grid-list-xl>
-    <v-layout wrap align-center>
-      <v-flex xs12 sm6 d-flex>
+  <v-container
+    fluid
+    grid-list-xl
+  >
+    <v-layout
+      wrap
+      align-center
+    >
+      <v-flex
+        xs12
+        sm6
+        d-flex
+      >
         <v-select
           :items="items"
           label="Standard"
         ></v-select>
       </v-flex>
 
-      <v-flex xs12 sm6 d-flex>
+      <v-flex
+        xs12
+        sm6
+        d-flex
+      >
         <v-select
           :items="items"
           box
@@ -16,7 +30,11 @@
         ></v-select>
       </v-flex>
 
-      <v-flex xs12 sm6 d-flex>
+      <v-flex
+        xs12
+        sm6
+        d-flex
+      >
         <v-select
           :items="items"
           label="Outline style"
@@ -24,7 +42,11 @@
         ></v-select>
       </v-flex>
 
-      <v-flex xs12 sm6 d-flex>
+      <v-flex
+        xs12
+        sm6
+        d-flex
+      >
         <v-select
           :items="items"
           label="Solo field"

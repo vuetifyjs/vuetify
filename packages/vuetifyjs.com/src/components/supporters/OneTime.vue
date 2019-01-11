@@ -6,7 +6,9 @@
     wrap
   >
     <v-flex xs12>
-      <doc-heading goto="one-time-donation">oneTime</doc-heading>
+      <doc-heading goto="one-time-donation">
+        oneTime
+      </doc-heading>
     </v-flex>
 
     <v-flex
@@ -15,10 +17,7 @@
       tag="v-divider"
     />
 
-    <v-flex
-      xs12
-      tag="p"
-    >
+    <v-flex xs12>
       <doc-markdown>oneTimeBlurb</doc-markdown>
     </v-flex>
 

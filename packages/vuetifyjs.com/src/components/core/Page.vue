@@ -1,7 +1,8 @@
 <template>
   <v-container
     v-if="structure !== false"
-    id="page"
+    :id="composite"
+    class="page"
   >
     <template v-if="structure">
       <doc-heading v-if="structure.title">
@@ -20,9 +21,9 @@
       </div>
 
       <component
+        :is="getComponent(child.type)"
         v-for="(child, i) in structure.children"
         :key="`${composite}-${i}`"
-        :is="getComponent(child.type)"
         :value="child"
       />
 
@@ -35,89 +36,53 @@
 <script>
   // Utilities
   import {
-    mapMutations
+    mapState
   } from 'vuex'
   import { getComponent } from '@/util/helpers'
-  import kebabCase from 'lodash/kebabCase'
-  import camelCase from 'lodash/camelCase'
-  import upperFirst from 'lodash/upperFirst'
 
   export default {
     components: {
       NotFound: () => import('@/pages/general/404')
     },
 
-    provide () {
-      return {
-        namespace: upperFirst(camelCase(this.namespace)),
-        lang: this.lang,
-        page: upperFirst(camelCase(this.page))
-      }
-    },
-
-    props: {
-      // Provided by router
-      namespace: {
-        type: String,
-        default: undefined
-      },
-      page: {
-        type: String,
-        default: undefined
-      },
-      lang: {
-        type: String,
-        default: undefined
-      }
-    },
-
     data: () => ({
-      structure: undefined
+      timeout: null
     }),
 
     computed: {
+      ...mapState('documentation', ['structure']),
+      ...mapState('route', ['params']),
       composite () {
-        return `${this.namespace}-${this.page}`
+        return `${this.params.namespace}-${this.params.page}`
       }
     },
 
-    created () {
-      const namespace = kebabCase(this.namespace)
-      const page = upperFirst(camelCase(this.page))
-
-      this.setIsLoading(true)
-
-      import(
-        /* webpackChunkName: "pages" */
-        `@/data/pages/${namespace}/${page}.json`
-      ).then(res => {
-        this.structure = res.default
-      }).catch(() => {
-        this.structure = false
-        throw new Error(`Unable to find page for <${namespace}/${page}>`)
-      }).finally(() => this.setIsLoading(false))
+    watch: {
+      '$route.path': 'init'
     },
 
     mounted () {
-      // Wait for page animation
-      setTimeout(this.init, 300)
+      this.init()
     },
 
     methods: {
-      ...mapMutations('app', ['setIsLoading']),
       getComponent,
-      init () {
-        const sameInternal = this.$el.querySelectorAll('a.markdown--same-internal')
+      async init () {
+        clearTimeout(this.timeout)
 
-        Array.prototype.forEach.call(sameInternal, el => {
-          el.addEventListener('click', this.onSameInternalClick)
-        })
+        this.timeout = setTimeout(() => {
+          const sameInternal = this.$el.querySelectorAll('a.markdown--same-internal')
 
-        const internal = this.$el.querySelectorAll('a.markdown--internal')
+          Array.prototype.forEach.call(sameInternal, el => {
+            el.addEventListener('click', this.onSameInternalClick)
+          })
 
-        Array.prototype.forEach.call(internal, el => {
-          el.addEventListener('click', this.onInternalClick)
-        })
+          const internal = this.$el.querySelectorAll('a.markdown--internal')
+
+          Array.prototype.forEach.call(internal, el => {
+            el.addEventListener('click', this.onInternalClick)
+          })
+        }, 300)
       },
       onSameInternalClick (e) {
         e.preventDefault()
@@ -127,14 +92,36 @@
       onInternalClick (e) {
         e.preventDefault()
 
-        this.$router.push(`/${this.lang}${e.target.getAttribute('href')}`)
+        const target = e.target.tagName === 'A'
+          ? e.target
+          : e.target.parentElement
+
+        const lang = `/${this.params.lang}`
+        const length = lang.length
+        let href = target.getAttribute('href')
+
+        // If missing leading forward slash
+        if (href.charAt(0) !== '/') {
+          href = `/${href}`
+        }
+
+        // If missing language
+        if (href.slice(0, length) !== lang) {
+          href = `${lang}${href}`
+        }
+
+        this.$router.push(href)
       }
     }
   }
 </script>
 
-<style>
-#page {
-  max-width: 1185px;
-}
+<style lang="stylus">
+  .page
+    max-width: 1185px;
+
+  #components-navigation-drawers
+    .v-sheet,
+    .v-card
+      overflow: hidden;
 </style>

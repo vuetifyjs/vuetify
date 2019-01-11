@@ -16,28 +16,22 @@
         class="hidden-sm-and-down mr-1"
         v-text="$t('Vuetify.AppToolbar.support')"
       />
-      <v-icon class="hidden-sm-and-down">mdi-menu-down</v-icon>
-      <v-icon class="hidden-md-and-up">mdi-comment-question</v-icon>
+      <v-icon class="hidden-sm-and-down">
+        mdi-menu-down
+      </v-icon>
+      <v-icon class="hidden-md-and-up">
+        mdi-comment-question
+      </v-icon>
     </v-btn>
     <v-list dense>
-      <v-list-tile
+      <v-subheader v-text="$t('Vuetify.AppToolbar.getHelp')" />
+      <core-item
         v-for="support in supports"
-        :href="support.href"
         :key="support.text"
-        target="_blank"
-        rel="noopener"
-        @click="$ga.event('toolbar', 'click', 'support', support.href)"
-      >
-        <v-list-tile-action>
-          <v-icon
-            light
-            v-text="support.icon"
-          />
-        </v-list-tile-action>
-        <v-list-tile-content>
-          <v-list-tile-title v-text="support.text" />
-        </v-list-tile-content>
-      </v-list-tile>
+        v-bind="support"
+        no-markdown
+        @click="$ga.event('toolbar', 'click', 'support', support.text)"
+      />
     </v-list>
   </v-menu>
 </template>

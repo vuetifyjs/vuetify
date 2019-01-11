@@ -12,7 +12,9 @@
       ></v-img>
       <v-card-title>
         <div>
-          <span class="headline">Cafe Badilico</span>
+          <span class="headline">
+            Cafe Badilico
+          </span>
           <div class="d-flex">
             <v-rating
               :value="value"
@@ -29,7 +31,10 @@
           </div>
         </div>
         <v-spacer></v-spacer>
-        <v-btn icon class="mr-0">
+        <v-btn
+          icon
+          class="mr-0"
+        >
           <v-icon>mdi-chevron-right</v-icon>
         </v-btn>
       </v-card-title>

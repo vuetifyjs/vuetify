@@ -14,7 +14,10 @@
         stateless
         value="true"
       >
-        <v-toolbar flat class="transparent">
+        <v-toolbar
+          flat
+          class="transparent"
+        >
           <v-list class="pa-0">
             <v-list-tile avatar>
               <v-list-tile-avatar>
@@ -37,7 +40,10 @@
           </v-list>
         </v-toolbar>
 
-        <v-list class="pt-0" dense>
+        <v-list
+          class="pt-0"
+          dense
+        >
           <v-divider></v-divider>
 
           <v-list-tile

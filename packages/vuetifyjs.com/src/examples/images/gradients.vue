@@ -1,20 +1,32 @@
 <template>
-  <v-container fluid grid-list-sm>
+  <v-container
+    fluid
+    grid-list-sm
+  >
     <v-layout>
-      <v-flex xs6 sm4>
+      <v-flex
+        xs6
+        sm4
+      >
         <v-img
           src="https://cdn.vuetifyjs.com/images/parallax/material2.jpg"
           gradient="to top right, rgba(100,115,201,.33), rgba(25,32,72,.7)"
         ></v-img>
       </v-flex>
 
-      <v-flex xs6 sm4>
+      <v-flex
+        xs6
+        sm4
+      >
         <v-img src="https://cdn.vuetifyjs.com/images/parallax/material2.jpg">
           <div class="fill-height bottom-gradient"></div>
         </v-img>
       </v-flex>
 
-      <v-flex xs6 sm4>
+      <v-flex
+        xs6
+        sm4
+      >
         <v-img src="https://cdn.vuetifyjs.com/images/parallax/material2.jpg">
           <div class="fill-height repeating-gradient"></div>
         </v-img>

@@ -23,8 +23,8 @@
             </template>
             <template v-else>
               <td
-                v-for="(mask, i) in row"
-                :key="i"
+                v-for="(mask, j) in row"
+                :key="j"
                 v-text="mask"
               />
             </template>

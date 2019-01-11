@@ -10,11 +10,15 @@
         pa-3
         white--text
       >
-        <div class="title font-weight-light">Explore our beaches</div>
+        <div class="title font-weight-light">
+          Explore our beaches
+        </div>
       </v-layout>
     </v-img>
     <v-card-title>
-      <div class="text-truncate">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+      <div class="text-truncate">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      </div>
     </v-card-title>
     <v-divider></v-divider>
     <v-card-actions>

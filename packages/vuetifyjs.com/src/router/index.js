@@ -35,7 +35,7 @@ export function createRouter () {
             redirect: () => redirects[k].replace(/^\//, '')
           })),
           {
-            path: '/',
+            path: '',
             name: 'home/Home',
             component: () => import(
               /* webpackChunkName: "home" */
@@ -63,6 +63,15 @@ export function createRouter () {
               /* webpackChunkName: "documentation" */
               '@/pages/documentation/Page.vue'
             )
+          },
+          {
+            path: '*',
+            redirect: to => {
+              let lang = `/${getLanguageCookie() || 'en'}`
+              if (!languageRegex.test(lang)) lang = '/en'
+
+              return `${lang}`
+            }
           }
         ]
       },

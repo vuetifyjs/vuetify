@@ -35,8 +35,12 @@
       @blur="$v.checkbox.$touch()"
     ></v-checkbox>
 
-    <v-btn @click="submit">submit</v-btn>
-    <v-btn @click="clear">clear</v-btn>
+    <v-btn @click="submit">
+      submit
+    </v-btn>
+    <v-btn @click="clear">
+      clear
+    </v-btn>
   </form>
 </template>
 

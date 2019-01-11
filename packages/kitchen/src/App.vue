@@ -8,11 +8,15 @@
       clipped-right
       dir="ltr"
     >
-      <v-toolbar-side-icon @click.stop="drawer = !drawer"/>
+      <v-toolbar-side-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title class="white--text headline">
         🍣
-        <span class="font-weight-black">VUETIFY</span>
-        <span class="font-weight-light">KITCHEN</span>
+        <span class="font-weight-black">
+          VUETIFY
+        </span>
+        <span class="font-weight-light">
+          KITCHEN
+        </span>
       </v-toolbar-title>
       <v-spacer />
       <codepen />
@@ -30,8 +34,12 @@
         title="Toggle RTL"
         @click="$vuetify.rtl = !$vuetify.rtl"
       >
-        <v-icon v-if="$vuetify.rtl">mdi-format-horizontal-align-right</v-icon>
-        <v-icon v-else>mdi-format-horizontal-align-left</v-icon>
+        <v-icon v-if="$vuetify.rtl">
+          mdi-format-horizontal-align-right
+        </v-icon>
+        <v-icon v-else>
+          mdi-format-horizontal-align-left
+        </v-icon>
       </v-btn>
       <v-btn
         v-if="$route.params.component"
@@ -47,10 +55,12 @@
     <v-navigation-drawer
       v-model="drawer"
       app
-      fixed>
+      fixed
+    >
       <v-list
         dense
-        class="pt-0">
+        class="pt-0"
+      >
         <v-list-tile
           v-for="item in items"
           :key="item.title"

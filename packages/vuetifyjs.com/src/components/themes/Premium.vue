@@ -19,7 +19,8 @@
             />
 
             <v-card-title class="align-center">
-              <h2 class="headline mb-0">{{ template.title }}
+              <h2 class="headline mb-0">
+                {{ template.title }}
                 <v-chip
                   :color="template.free ? 'blue-grey' : 'indigo'"
                   label
@@ -35,7 +36,9 @@
 
             <v-divider />
 
-            <v-card-text style="min-height: 95px;">{{ template.description }}</v-card-text>
+            <v-card-text style="min-height: 95px;">
+              {{ template.description }}
+            </v-card-text>
             <v-card-actions class="grey lighten-4">
               <v-menu
                 :disabled="template.demoUrl.length === 1"
@@ -56,7 +59,9 @@
                     rel="noopener"
                     aria-label="View Demo"
                   >
-                    <v-icon color="primary">mdi-eye</v-icon>
+                    <v-icon color="primary">
+                      mdi-eye
+                    </v-icon>
                   </v-btn>
                   <span v-text="$t('Themes.Premium.viewDemo')" />
                 </v-tooltip>

@@ -24,7 +24,9 @@
             slot="prepend"
             slot-scope="{ item, active }"
             :color="active ? 'primary' : ''"
-          >mdi-account</v-icon>
+          >
+            mdi-account
+          </v-icon>
         </v-treeview>
       </v-flex>
       <v-flex
@@ -59,8 +61,12 @@
               <h3 class="headline mb-2">
                 {{ selected.name }}
               </h3>
-              <div class="blue--text mb-2">{{ selected.email }}</div>
-              <div class="blue--text subheading font-weight-bold">{{ selected.username }}</div>
+              <div class="blue--text mb-2">
+                {{ selected.email }}
+              </div>
+              <div class="blue--text subheading font-weight-bold">
+                {{ selected.username }}
+              </div>
             </v-card-text>
             <v-divider></v-divider>
             <v-layout
@@ -68,13 +74,42 @@
               text-xs-left
               wrap
             >
-              <v-flex tag="strong" xs5 text-xs-right mr-3 mb-2>Company:</v-flex>
-              <v-flex>{{ selected.company.name }}</v-flex>
-              <v-flex tag="strong" xs5 text-xs-right mr-3 mb-2>Website:</v-flex>
-              <v-flex>
-                <a :href="`//${selected.website}`" target="_blank">{{ selected.website }}</a>
+              <v-flex
+                tag="strong"
+                xs5
+                text-xs-right
+                mr-3
+                mb-2
+              >
+                Company:
               </v-flex>
-              <v-flex tag="strong" xs5 text-xs-right mr-3 mb-2>Phone:</v-flex>
+              <v-flex>{{ selected.company.name }}</v-flex>
+              <v-flex
+                tag="strong"
+                xs5
+                text-xs-right
+                mr-3
+                mb-2
+              >
+                Website:
+              </v-flex>
+              <v-flex>
+                <a
+                  :href="`//${selected.website}`"
+                  target="_blank"
+                >
+                  {{ selected.website }}
+                </a>
+              </v-flex>
+              <v-flex
+                tag="strong"
+                xs5
+                text-xs-right
+                mr-3
+                mb-2
+              >
+                Phone:
+              </v-flex>
               <v-flex>{{ selected.phone }}</v-flex>
             </v-layout>
           </v-card>

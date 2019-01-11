@@ -27,20 +27,33 @@
         width="38px"
       />
     </router-link>
-    <v-toolbar-title class="hidden-xs-only">Vuetify</v-toolbar-title>
+    <v-toolbar-title class="hidden-xs-only">
+      Vuetify
+    </v-toolbar-title>
     <v-spacer />
 
     <v-toolbar-items>
       <v-btn
         v-show="isHome"
         :aria-label="$t('Vuetify.AppToolbar.documentation')"
+        :to="{
+          name: 'Documentation',
+          params: {
+            lang: $route.params.lang,
+            namespace: 'getting-started',
+            page: 'quick-start'
+          }
+        }"
         class="hidden-xs-only"
         text
         style="min-width: 48px;"
-        to="getting-started/quick-start"
       >
-        <span class="hidden-sm-and-down">{{ $t('Vuetify.AppToolbar.documentation' ) }}</span>
-        <v-icon class="hidden-md-and-up">mdi-file-document-box</v-icon>
+        <span class="hidden-sm-and-down">
+          {{ $t('Vuetify.AppToolbar.documentation' ) }}
+        </span>
+        <v-icon class="hidden-md-and-up">
+          mdi-file-document-box
+        </v-icon>
       </v-btn>
       <core-store />
       <core-supports />

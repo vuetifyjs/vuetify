@@ -1,8 +1,15 @@
 <template>
   <v-layout row>
-    <v-flex xs12 sm6 offset-sm3>
+    <v-flex
+      xs12
+      sm6
+      offset-sm3
+    >
       <v-card>
-        <v-toolbar color="cyan" dark>
+        <v-toolbar
+          color="cyan"
+          dark
+        >
           <v-toolbar-side-icon></v-toolbar-side-icon>
           <v-toolbar-title>Inbox</v-toolbar-title>
           <v-spacer></v-spacer>
@@ -22,8 +29,8 @@
 
             <v-divider
               v-else-if="item.divider"
-              :inset="item.inset"
               :key="index"
+              :inset="item.inset"
             ></v-divider>
 
             <v-list-tile

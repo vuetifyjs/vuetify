@@ -5,7 +5,11 @@
     class="elevation-1"
   >
     <template slot="no-data">
-      <v-alert :value="true" color="error" icon="warning">
+      <v-alert
+        :value="true"
+        color="error"
+        icon="warning"
+      >
         Sorry, nothing to display here :(
       </v-alert>
     </template>

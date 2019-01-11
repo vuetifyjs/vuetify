@@ -15,7 +15,9 @@
       >
         mdi-plus
       </v-icon>
-      <span v-else>{{ text }}</span>
+      <span v-else>
+        {{ text }}
+      </span>
     </v-btn>
 
     <v-flex xs12>
@@ -26,8 +28,8 @@
             md4
           >
             <v-select
-              :items="sizes"
               v-model="size"
+              :items="sizes"
               label="Size"
             ></v-select>
           </v-flex>
@@ -36,8 +38,8 @@
             md4
           >
             <v-select
-              :items="colors"
               v-model="color"
+              :items="colors"
               label="Color"
             ></v-select>
           </v-flex>
@@ -46,8 +48,8 @@
             md4
           >
             <v-select
-              :items="types"
               v-model="type"
+              :items="types"
               label="Type"
               multiple
             ></v-select>

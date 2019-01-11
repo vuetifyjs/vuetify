@@ -39,7 +39,7 @@ export function createI18n (ssrContext, router) {
         i18n.setLocaleMessage(lang, globalLanguages[lang])
         return Promise.resolve(setI18nLanguage(lang))
       }).catch(err => {
-        console.log(lang, err)
+        console.log(err)
       })
     }
     return Promise.resolve(setI18nLanguage(lang))
@@ -48,7 +48,9 @@ export function createI18n (ssrContext, router) {
   router.beforeEach((to, from, next) => {
     loadLanguageAsync(
       to.params.lang
-    ).then(() => next())
+    )
+      .then(() => next())
+      .catch(() => next('/en'))
   })
 
   return i18n
