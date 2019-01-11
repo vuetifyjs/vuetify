@@ -1,37 +1,36 @@
 <template>
   <div>
     <v-alert
-      :value="true"
-      color="success"
-      icon="check_circle"
-      outline
+      show
+      type="success"
+      outlined
+      dense
     >
       This is a success alert.
     </v-alert>
 
     <v-alert
-      :value="true"
-      color="info"
-      icon="info"
-      outline
+      show
+      type="info"
+      outlined
     >
       This is an info alert.
     </v-alert>
 
     <v-alert
-      :value="true"
-      color="warning"
-      icon="priority_high"
-      outline
+      show
+      type="warning"
+      outlined
+      prominent
     >
       This is a warning alert.
     </v-alert>
 
     <v-alert
-      :value="true"
-      color="error"
-      icon="warning"
-      outline
+      show
+      type="error"
+      outlined
+      dismissible
     >
       This is a error alert.
     </v-alert>

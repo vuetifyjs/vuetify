@@ -1,5 +1,8 @@
 {
   "props": {
+    "v-alert": {
+      "outline": "2.0"
+    },
     "v-text-field": {
       "textarea": "1.1"
     },
