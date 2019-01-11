@@ -49,7 +49,7 @@
     "itemAvatar": "Set property of **items**'s avatar value",
     "itemDisabled": "Set property of **items**'s disabled value",
     "itemText": "Set property of **items**'s text value",
-    "itemValue": "Set property of **items**'s value",
+    "itemValue": "Set property of **items**'s value - **must be primative**. Dot notation is supported",
     "items": "Can be an array of objects or array of strings. When using objects, will look for a text and value field. This can be changed using the **item-text** and **item-value** props.",
     "menuProps": "Pass props through to the `v-menu` component. Accepts either a string for boolean props `menu-props=\"auto, overflowY\"`, or an object `:menu-props=\"{ auto: true, overflowY: true }\"`",
     "minWidth": "Sets the minimum width of the select's `v-menu` content",
