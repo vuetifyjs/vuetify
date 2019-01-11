@@ -117,7 +117,7 @@ describe('VAlert.ts', () => {
 
     const icon = wrapper.find('.v-alert__icon')
 
-    expect(icon.text()).toBe('$vuetify.icons.error')
+    expect(icon.text()).toBe('block')
   })
 
   it('should show border', () => {

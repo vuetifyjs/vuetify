@@ -110,6 +110,7 @@ export default mixins(
             'aria-label': this.$vuetify.t(this.closeLabel)
           },
           props: {
+            color: this.hasColoredIcon ? this.computedColor : undefined,
             right: true
           }
         }, '$vuetify.icons.cancel')
@@ -121,7 +122,7 @@ export default mixins(
       return this.$createElement(VIcon, {
         staticClass: 'v-alert__icon',
         props: {
-          color: this.coloredBorder ? this.computedColor : undefined
+          color: this.hasColoredIcon ? this.computedColor : undefined
         }
       }, this.computedIcon)
     },
@@ -143,19 +144,30 @@ export default mixins(
       return (this.type && !this.color) ? this.type : (this.color || '')
     },
     computedIcon (): string | void {
+      if (this.icon) return this.icon
+
       switch (this.type) {
         case 'info': return '$vuetify.icons.info'
         case 'error': return '$vuetify.icons.error'
         case 'success': return '$vuetify.icons.success'
         case 'warning': return '$vuetify.icons.warning'
-        default: return this.icon
       }
+    },
+    hasColoredIcon (): boolean {
+      return (
+        this.hasOutline ||
+        (Boolean(this.border) && this.coloredBorder)
+      )
     },
     hasOutline (): boolean {
       return this.outline || this.outlined
     },
     isDark () {
-      if (this.type && !this.coloredBorder) return true
+      if (
+        this.type &&
+        !this.coloredBorder &&
+        !this.hasOutline
+      ) return true
 
       return Themeable.options.computed.isDark.call(this)
     }
