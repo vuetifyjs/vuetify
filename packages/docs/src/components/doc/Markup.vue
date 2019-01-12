@@ -11,7 +11,7 @@
       class="v-markup__edit"
     >
       <a
-        :href="`https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetifyjs.com/src/snippets/${file}`"
+        :href="`https://github.com/vuetifyjs/vuetify/tree/master/packages/docs/src/snippets/${file}`"
         target="_blank"
         rel="noopener"
         title="Edit code"
@@ -86,7 +86,7 @@
       },
       href () {
         const branch = process.env.NODE_ENV === 'production' ? 'master' : 'dev'
-        const href = `https://github.com/vuetifyjs/vuetify/tree/${branch}/packages/vuetifyjs.com/src/snippets`
+        const href = `https://github.com/vuetifyjs/vuetify/tree/${branch}/packages/docs/src/snippets`
 
         return `${href}/${this.file}`
       },

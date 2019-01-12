@@ -29,7 +29,7 @@
         <v-icon>mdi-codepen</v-icon>
       </v-btn>
       <v-btn
-        :href="`https://github.com/vuetifyjs/vuetify/tree/${branch}/packages/vuetifyjs.com/src/examples/${file}.vue`"
+        :href="`https://github.com/vuetifyjs/vuetify/tree/${branch}/packages/docs/src/examples/${file}.vue`"
         icon
         target="_blank"
       >

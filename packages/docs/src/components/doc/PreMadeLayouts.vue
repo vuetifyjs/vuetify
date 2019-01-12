@@ -35,7 +35,7 @@
                 ma-0
               >
                 <a
-                  :href="`https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetifyjs.com/src${layout.href}.vue`"
+                  :href="`https://github.com/vuetifyjs/vuetify/tree/master/packages/docs/src${layout.href}.vue`"
                   class="text-decoration-none mx-2"
                   target="_blank"
                   rel="noopener"
