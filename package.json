@@ -10,7 +10,7 @@
   },
   "scripts": {
     "dev": "node scripts/dev.js",
-    "build": "lerna run build --stream",
+    "build": "node scripts/build.js",
     "start": "lerna run start --scope vuetifyjs.com --stream",
     "lint": "lerna run lint --parallel",
     "version": "node scripts/confirm-npm-tag.js",
