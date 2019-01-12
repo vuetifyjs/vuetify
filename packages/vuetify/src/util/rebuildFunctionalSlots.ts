@@ -4,7 +4,7 @@
  * @param {function} h
  * @returns {array}
  */
-export default function rebuildFunctionalSlots (slots, h) {
+export default function rebuildFunctionalSlots (slots: object[], h: Function) {
   const children = []
 
   for (const slot in slots) {

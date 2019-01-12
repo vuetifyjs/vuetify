@@ -11,32 +11,32 @@ export const defaultDelimiters = /[-!$%^&*()_+|~=`{}[\]:";'<>?,./\\ ]/
  *
  * @return {Boolean}
  */
-export const isMaskDelimiter = char => char && defaultDelimiters.test(char)
+export const isMaskDelimiter = (char: string): boolean => char ? defaultDelimiters.test(char) : false
 
 /**
  * Mask keys
  *
  * @type {Object}
  */
-const allowedMasks = {
+const allowedMasks: any = {
   '#': {
-    test: char => char.match(/[0-9]/)
+    test: (char: string) => char.match(/[0-9]/)
   },
   'A': {
-    test: char => char.match(/[A-Z]/i),
-    convert: char => char.toUpperCase()
+    test: (char: string) => char.match(/[A-Z]/i),
+    convert: (char: string) => char.toUpperCase()
   },
   'a': {
-    test: char => char.match(/[a-z]/i),
-    convert: char => char.toLowerCase()
+    test: (char: string) => char.match(/[a-z]/i),
+    convert: (char: string) => char.toLowerCase()
   },
   'N': {
-    test: char => char.match(/[0-9A-Z]/i),
-    convert: char => char.toUpperCase()
+    test: (char: string) => char.match(/[0-9A-Z]/i),
+    convert: (char: string) => char.toUpperCase()
   },
   'n': {
-    test: char => char.match(/[0-9a-z]/i),
-    convert: char => char.toLowerCase()
+    test: (char: string) => char.match(/[0-9a-z]/i),
+    convert: (char: string) => char.toLowerCase()
   },
   'X': {
     test: isMaskDelimiter
@@ -50,7 +50,7 @@ const allowedMasks = {
  *
  * @return {Boolean}
  */
-const isMask = char => allowedMasks.hasOwnProperty(char)
+const isMask = (char: string): boolean => allowedMasks.hasOwnProperty(char)
 
 /**
  * Automatically convert char case
@@ -60,7 +60,7 @@ const isMask = char => allowedMasks.hasOwnProperty(char)
  *
  * @return {String}
  */
-const convert = (mask, char) => {
+const convert = (mask: string, char: string): string => {
   return allowedMasks[mask].convert ? allowedMasks[mask].convert(char) : char
 }
 
@@ -72,7 +72,7 @@ const convert = (mask, char) => {
  *
  * @return {Boolean}
  */
-const maskValidates = (mask, char) => {
+const maskValidates = (mask: string, char: string): boolean => {
   if (char == null || !isMask(mask)) return false
   return allowedMasks[mask].test(char)
 }
@@ -89,7 +89,7 @@ const maskValidates = (mask, char) => {
  *
  * @return {String}
  */
-export const maskText = (text, masked, dontFillMaskBlanks) => {
+export const maskText = (text: string | any[], masked: string | any[], dontFillMaskBlanks: boolean): string => {
   if (text == null) return ''
   text = String(text)
   if (!masked.length || !text.length) return text
@@ -134,6 +134,6 @@ export const maskText = (text, masked, dontFillMaskBlanks) => {
  *
  * @return {String}
  */
-export const unmaskText = text => {
+export const unmaskText = (text: string): string => {
   return text ? String(text).replace(new RegExp(defaultDelimiters, 'g'), '') : text
 }
