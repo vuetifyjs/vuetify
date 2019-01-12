@@ -1,6 +1,6 @@
 const shell = require('shelljs')
 
-const target = process.argv[2]
+let target = process.argv[2]
 const alias = {
   docs: 'vuetifyjs.com'
 }
