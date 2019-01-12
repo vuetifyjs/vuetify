@@ -68,14 +68,13 @@ export default mixins(
 
   created () {
     /* istanbul ignore if */
-    if (this.outline) {
-      deprecate('outline', 'outlined')
-    }
+    if (this.outline) deprecate('outline', 'outlined')
   },
 
   computed: {
     __cachedBorder (): VNode | null {
       if (!this.border) return null
+
       let data: VNodeData = {
         staticClass: 'v-alert__border',
         class: {
@@ -103,7 +102,7 @@ export default mixins(
             'aria-label': this.$vuetify.t(this.closeLabel)
           },
           props: {
-            color: this.hasColoredIcon ? this.computedColor : undefined,
+            color: this.iconColor,
             right: true
           }
         }, '$vuetify.icons.cancel')
@@ -114,9 +113,7 @@ export default mixins(
 
       return this.$createElement(VIcon, {
         staticClass: 'v-alert__icon',
-        props: {
-          color: this.hasColoredIcon ? this.computedColor : undefined
-        }
+        props: { color: this.iconColor }
       }, this.computedIcon)
     },
     classes (): object {
@@ -134,7 +131,7 @@ export default mixins(
       return classes
     },
     computedColor (): string {
-      return (this.type && !this.color) ? this.type : (this.color || '')
+      return this.color || this.type
     },
     computedIcon (): string | void {
       if (this.icon) return this.icon
@@ -152,8 +149,12 @@ export default mixins(
         (Boolean(this.border) && this.coloredBorder)
       )
     },
+    // TODO: remove deprecated
     hasOutline (): boolean {
       return this.outline || this.outlined
+    },
+    iconColor () {
+      return this.hasColoredIcon ? this.computedColor : undefined
     },
     isDark () {
       if (
