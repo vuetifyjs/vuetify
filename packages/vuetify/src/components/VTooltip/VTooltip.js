@@ -114,7 +114,7 @@ export default {
       if (this.right) return 'slide-x-transition'
       if (this.bottom) return 'slide-y-transition'
       if (this.left) return 'slide-x-reverse-transition'
-      return false
+      return ''
     },
     offsetY () {
       return this.top || this.bottom
