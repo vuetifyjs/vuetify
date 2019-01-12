@@ -6,7 +6,9 @@ import CalendarBase from './calendar-base'
 import props from '../util/props'
 import {
   VTimestamp,
+  VTime,
   VTimestampFormatter,
+  parseTime,
   copyTimestamp,
   updateMinutes,
   createDayList,
@@ -79,7 +81,7 @@ export default CalendarBase.extend({
       const isFirst: boolean = first.hour === interval.hour && first.minute === interval.minute
       return !isFirst && interval.minute === 0
     },
-    intervalStyleDefault (interval: VTimestamp): object | undefined {
+    intervalStyleDefault (_interval: VTimestamp): object | undefined {
       return undefined
     },
     getTimestampAtEvent (e: MouseEvent | TouchEvent, day: VTimestamp): VTimestamp {
@@ -95,6 +97,50 @@ export default CalendarBase.extend({
       const minutes: number = baseMinutes + addMinutes
 
       return updateMinutes(timestamp, minutes, this.times.now)
+    },
+    getSlotScope (timestamp: VTimestamp): any {
+      const scope = copyTimestamp(timestamp) as any
+      scope.timeToY = this.timeToY
+      scope.minutesToPixels = this.minutesToPixels
+      return scope
+    },
+    scrollToTime (time: VTime): boolean {
+      const y = this.timeToY(time)
+      const pane = this.$refs.scrollArea as HTMLElement
+
+      if (y === false || !pane) {
+        return false
+      }
+
+      pane.scrollTop = y
+
+      return true
+    },
+    minutesToPixels (minutes: number): number {
+      return minutes / this.parsedIntervalMinutes * this.parsedIntervalHeight
+    },
+    timeToY (time: VTime, clamp: boolean = true): number | false {
+      const minutes = parseTime(time)
+
+      if (minutes === false) {
+        return false
+      }
+
+      const min: number = this.firstMinute
+      const gap: number = this.parsedIntervalCount * this.parsedIntervalMinutes
+      const delta: number = (minutes - min) / gap
+      let y: number = delta * this.bodyHeight
+
+      if (clamp) {
+        if (y < 0) {
+          y = 0
+        }
+        if (y > this.bodyHeight) {
+          y = this.bodyHeight
+        }
+      }
+
+      return y
     }
   }
 })

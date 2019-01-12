@@ -4,21 +4,21 @@
       <v-calendar color="primary" type="day">
         <template
           slot="dayHeader"
-          slot-scope="day"
+          slot-scope="{ present }"
         >
-          <div v-if="day.present" class="text-xs-center">
+          <div v-if="present" class="text-xs-center">
             Today
           </div>
         </template>
 
         <template
           slot="interval"
-          slot-scope="date"
+          slot-scope="{ hour }"
         >
           <div
             class="text-xs-center"
           >
-            {{ date.hour }} o'clock
+            {{ hour }} o'clock
           </div>
         </template>
       </v-calendar>
@@ -34,6 +34,6 @@
 
 <style lang="stylus" scoped>
   .v-calendar {
-    min-height: 400px;
+    height: 400px;
   }
 </style>

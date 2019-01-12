@@ -4,6 +4,9 @@ import '../../stylus/components/_calendar-daily.styl'
 // Types
 import { VNode, VNodeChildren } from 'vue'
 
+// Directives
+import Resize from '../../directives/resize'
+
 // Mixins
 import CalendarWithIntervals from './mixins/calendar-with-intervals'
 
@@ -15,6 +18,12 @@ import { VTimestamp } from './util/timestamp'
 export default CalendarWithIntervals.extend({
   name: 'v-calendar-daily',
 
+  directives: { Resize },
+
+  data: () => ({
+    scrollPush: 0
+  }),
+
   computed: {
     classes (): object {
       return {
@@ -24,10 +33,29 @@ export default CalendarWithIntervals.extend({
     }
   },
 
+  mounted () {
+    this.init()
+  },
+
   methods: {
+    init () {
+      this.$nextTick(this.onResize)
+    },
+    onResize () {
+      this.scrollPush = this.getScrollPush()
+    },
+    getScrollPush (): number {
+      const area = this.$refs.scrollArea as HTMLElement
+      const pane = this.$refs.pane as HTMLElement
+
+      return area && pane ? (area.offsetWidth - pane.offsetWidth) : 0
+    },
     genHead (): VNode {
       return this.$createElement('div', {
-        staticClass: 'v-calendar-daily__head'
+        staticClass: 'v-calendar-daily__head',
+        style: {
+          marginRight: this.scrollPush + 'px'
+        }
       }, [
         this.genHeadIntervals(),
         ...this.genHeadDays()
@@ -48,8 +76,8 @@ export default CalendarWithIntervals.extend({
         key: day.date,
         staticClass: 'v-calendar-daily_head-day',
         class: this.getRelativeClasses(day),
-        on: this.getDefaultMouseEventHandlers(':day', e => {
-          return day
+        on: this.getDefaultMouseEventHandlers(':day', _e => {
+          return this.getSlotScope(day)
         })
       }, [
         this.genHeadWeekday(day),
@@ -72,7 +100,7 @@ export default CalendarWithIntervals.extend({
         on: this.getMouseEventHandlers({
           'click:date': { event: 'click', stop: true },
           'contextmenu:date': { event: 'contextmenu', stop: true, prevent: true, result: false }
-        }, e => {
+        }, _e => {
           return day
         })
       }), this.dayFormatter(day, false))
@@ -86,6 +114,7 @@ export default CalendarWithIntervals.extend({
     },
     genScrollArea (): VNode {
       return this.$createElement('div', {
+        ref: 'scrollArea',
         staticClass: 'v-calendar-daily__scroll-area'
       }, [
         this.genPane()
@@ -115,17 +144,18 @@ export default CalendarWithIntervals.extend({
     },
     genDay (day: VTimestamp, index: number): VNode {
       const slot = this.$scopedSlots.dayBody
+      const scope = this.getSlotScope(day)
 
       return this.$createElement('div', {
         key: day.date,
         staticClass: 'v-calendar-daily__day',
         class: this.getRelativeClasses(day),
         on: this.getDefaultMouseEventHandlers(':time', e => {
-          return this.getTimestampAtEvent(e, day)
+          return this.getSlotScope(this.getTimestampAtEvent(e, day))
         })
       }, [
         ...this.genDayIntervals(index),
-        slot ? slot(day) : ''
+        slot ? slot(scope) : ''
       ])
     },
     genDayIntervals (index: number): VNode[] {
@@ -135,6 +165,7 @@ export default CalendarWithIntervals.extend({
       const height: string | undefined = convertToUnit(this.intervalHeight)
       const styler = this.intervalStyle || this.intervalStyleDefault
       const slot = this.$scopedSlots.interval
+      const scope = this.getSlotScope(interval)
 
       const data = {
         key: interval.time,
@@ -145,7 +176,7 @@ export default CalendarWithIntervals.extend({
         }
       }
 
-      const children = slot ? slot(interval) as VNodeChildren : undefined
+      const children = slot ? slot(scope) as VNodeChildren : undefined
 
       return this.$createElement('div', data, children)
     },
@@ -190,7 +221,12 @@ export default CalendarWithIntervals.extend({
         dragstart: (e: MouseEvent) => {
           e.preventDefault()
         }
-      }
+      },
+      directives: [{
+        modifiers: { quiet: true },
+        name: 'resize',
+        value: this.onResize
+      }]
     }, [
       !this.hideHeader ? this.genHead() : '',
       this.genBody()

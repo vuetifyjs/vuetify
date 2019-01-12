@@ -1,5 +1,6 @@
 
 export const PARSE_REGEX: RegExp = /^(\d{1,4})-(\d{1,2})(-(\d{1,2}))?([^\d]+(\d{1,2}))?(:(\d{1,2}))?(:(\d{1,2}))?$/
+export const PARSE_TIME: RegExp = /(\d{1,2})?(:(\d{1,2}))?(:(\d{1,2}))/
 
 export const DAYS_IN_MONTH: number[] = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 export const DAYS_IN_MONTH_LEAP: number[] = [0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
@@ -29,11 +30,41 @@ export interface VTimestamp {
   future: boolean
 }
 
+export interface VTimeObject {
+  hour: number
+  minute: number
+}
+
+export type VTime = number | string | VTimeObject
+
 export type VTimestampFormatter = (timestamp: VTimestamp, short: boolean) => string
 
 export type VTimestampFormatOptions = (timestamp: VTimestamp, short: boolean) => object
 
 export type VTimestampOperation = (timestamp: VTimestamp) => VTimestamp
+
+export function parseTime (input: any): number | false {
+  if (typeof input === 'number') {
+    // when a number is given, it's minutes since 12:00am
+    return input
+  } else if (typeof input === 'string') {
+    // when a string is given, it's a hh:mm:ss format where seconds are optional
+    const parts = PARSE_TIME.exec(input)
+    if (!parts) {
+      return false
+    }
+    return parseInt(parts[1]) * 60 + parseInt(parts[2] || 0)
+  } else if (typeof input === 'object') {
+    // when an object is given, it must have hour and minute
+    if (typeof input.hour !== 'number' || typeof input.minute !== 'number') {
+      return false
+    }
+    return input.hour * 60 + input.minute
+  } else {
+    // unsupported type
+    return false
+  }
+}
 
 export function validateTimestamp (input: any): boolean {
   return !!PARSE_REGEX.exec(input)
@@ -315,7 +346,7 @@ export function createIntervalList (timestamp: VTimestamp, first: number,
 }
 
 export function createNativeLocaleFormatter (locale: string, getOptions: VTimestampFormatOptions): VTimestampFormatter {
-  const emptyFormatter: VTimestampFormatter = (t, s) => ''
+  const emptyFormatter: VTimestampFormatter = (_t, _s) => ''
 
   if (typeof Intl === 'undefined' || typeof Intl.DateTimeFormat === 'undefined') {
     return emptyFormatter

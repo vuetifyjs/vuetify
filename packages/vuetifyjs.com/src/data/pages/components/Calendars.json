@@ -32,9 +32,10 @@
           "type": "examples",
           "value": [
             "slots",
-            "eventList",
+            "events",
             "weekly",
-            "daily"
+            "daily",
+            "features"
           ]
         }
       ]

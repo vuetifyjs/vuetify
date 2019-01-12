@@ -58,7 +58,7 @@ export default mixins(Colorable, Themeable, Times, Mouse).extend({
 
       return createNativeLocaleFormatter(
         this.locale,
-        (tms, short) => options
+        (_tms, _short) => options
       )
     },
     weekdayFormatter (): VTimestampFormatter {
@@ -71,7 +71,7 @@ export default mixins(Colorable, Themeable, Times, Mouse).extend({
 
       return createNativeLocaleFormatter(
         this.locale,
-        (tms, short) => short ? shortOptions : longOptions
+        (_tms, short) => short ? shortOptions : longOptions
       )
     }
   },

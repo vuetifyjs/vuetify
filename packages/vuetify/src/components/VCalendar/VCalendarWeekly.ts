@@ -71,7 +71,7 @@ export default CalendarBase.extend({
 
       return createNativeLocaleFormatter(
         this.locale,
-        (tms, short) => short ? shortOptions : longOptions
+        (_tms, short) => short ? shortOptions : longOptions
       )
     }
   },
@@ -117,7 +117,7 @@ export default CalendarBase.extend({
         staticClass: 'v-calendar-weekly__week'
       }, week.map(this.genDay))
     },
-    genDay (day: VTimestamp, index: number): VNode {
+    genDay (day: VTimestamp): VNode {
       const outside = this.isOutside(day)
       const slot = this.$scopedSlots.day
       const slotData = { outside, ...day }
@@ -127,7 +127,7 @@ export default CalendarBase.extend({
         key: day.date,
         staticClass: 'v-calendar-weekly__day',
         class: this.getRelativeClasses(day, outside),
-        on: this.getDefaultMouseEventHandlers(':day', e => day)
+        on: this.getDefaultMouseEventHandlers(':day', _e => day)
       }, [
         this.genDayLabel(day),
         hasMonth ? this.genDayMonth(day) : '',
@@ -143,7 +143,7 @@ export default CalendarBase.extend({
         on: this.getMouseEventHandlers({
           'click:date': { event: 'click', stop: true },
           'contextmenu:date': { event: 'contextmenu', stop: true, prevent: true, result: false }
-        }, e => day)
+        }, _e => day)
       }), slot ? slot(day) as VNodeChildren : this.dayFormatter(day, false))
     },
     genDayMonth (day: VTimestamp): VNode | string {

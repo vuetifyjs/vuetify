@@ -248,7 +248,7 @@ const VTreeviewScopedProps = {
   open: 'boolean'
 }
 
-const VTimestampScopedProps = {
+const VTimestamp = {
   date: 'string',
   time: 'string',
   year: 'number',
@@ -262,6 +262,23 @@ const VTimestampScopedProps = {
   past: 'boolean',
   present: 'boolean',
   future: 'boolean'
+}
+
+const VTimestampWithTime = {
+  date: 'string',
+  time: 'string',
+  year: 'number',
+  month: 'number',
+  day: 'number',
+  hour: 'number',
+  minute: 'number',
+  weekday: 'number',
+  hasDay: 'boolean',
+  hasTime: 'boolean',
+  past: 'boolean',
+  present: 'boolean',
+  future: 'boolean',
+  timeToY: '(time: string | number | {hour: number, minute: number}, clamp: boolean = false): number'
 }
 
 module.exports = {
@@ -410,27 +427,27 @@ module.exports = {
     scopedSlots: [
       {
         name: 'day',
-        props: VTimestampScopedProps
+        props: VTimestamp
       },
       {
         name: 'dayBody',
-        props: VTimestampScopedProps
+        props: VTimestampWithTime
       },
       {
         name: 'dayHeader',
-        props: VTimestampScopedProps
+        props: VTimestamp
       },
       {
         name: 'dayLabel',
-        props: VTimestampScopedProps
+        props: VTimestamp
       },
       {
         name: 'dayMonth',
-        props: VTimestampScopedProps
+        props: VTimestamp
       },
       {
         name: 'interval',
-        props: VTimestampScopedProps
+        props: VTimestampWithTime
       }
     ],
     functions: [
@@ -449,140 +466,160 @@ module.exports = {
       {
         name: 'move',
         signature: '(amount: number = 1): void'
+      },
+      {
+        name: 'timeToY',
+        signature: '(time: number | string | { hour: number, minute: number }, clamp: boolean = true): number | false'
+      },
+      {
+        name: 'minutesToPixels',
+        signature: '(minutes: number): number'
+      },
+      {
+        name: 'scrollToTime',
+        signature: '(time: number | string | { hour: number, minute: number }): boolean'
       }
     ],
     events: [
       {
         name: 'input',
-        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+        value: VTimestamp
+      },
+      {
+        name: 'moved',
+        value: VTimestamp
+      },
+      {
+        name: 'change',
+        value: { start: VTimestamp, end: VTimestamp }
       },
       {
         name: 'click:date',
-        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+        value: VTimestampWithTime
       },
       {
         name: 'contextmenu:date',
-        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+        value: VTimestampWithTime
       },
       {
         name: 'click:day',
-        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+        value: VTimestampWithTime
       },
       {
         name: 'contextmenu:day',
-        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+        value: VTimestampWithTime
       },
       {
         name: 'mousedown:day',
-        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+        value: VTimestampWithTime
       },
       {
         name: 'mousemove:day',
-        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+        value: VTimestampWithTime
       },
       {
         name: 'mouseup:day',
-        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+        value: VTimestampWithTime
       },
       {
         name: 'mouseenter:day',
-        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+        value: VTimestampWithTime
       },
       {
         name: 'mouseleave:day',
-        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+        value: VTimestampWithTime
       },
       {
         name: 'touchstart:day',
-        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+        value: VTimestampWithTime
       },
       {
         name: 'touchmove:day',
-        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+        value:VTimestampWithTime
       },
       {
         name: 'touchend:day',
-        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+        value: VTimestampWithTime
       },
       {
         name: 'click:time',
-        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+        value: VTimestampWithTime
       },
       {
         name: 'contextmenu:time',
-        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+        value: VTimestampWithTime
       },
       {
         name: 'mousedown:time',
-        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+        value: VTimestampWithTime
       },
       {
         name: 'mousemove:time',
-        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+        value: VTimestampWithTime
       },
       {
         name: 'mouseup:time',
-        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+        value: VTimestampWithTime
       },
       {
         name: 'mouseenter:time',
-        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+        value: VTimestampWithTime
       },
       {
         name: 'mouseleave:time',
-        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+        value: VTimestampWithTime
       },
       {
         name: 'touchstart:time',
-        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+        value: VTimestampWithTime
       },
       {
         name: 'touchmove:time',
-        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+        value: VTimestampWithTime
       },
       {
         name: 'touchend:time',
-        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+        value: VTimestampWithTime
       },
       {
         name: 'click:interval',
-        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+        value: VTimestamp
       },
       {
         name: 'contextmenu:interval',
-        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+        value: VTimestamp
       },
       {
         name: 'mousedown:interval',
-        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+        value: VTimestamp
       },
       {
         name: 'mousemove:interval',
-        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+        value: VTimestamp
       },
       {
         name: 'mouseup:interval',
-        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+        value: VTimestamp
       },
       {
         name: 'mouseenter:interval',
-        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+        value: VTimestamp
       },
       {
         name: 'mouseleave:interval',
-        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+        value: VTimestamp
       },
       {
         name: 'touchstart:interval',
-        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+        value: VTimestamp
       },
       {
         name: 'touchmove:interval',
-        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+        value: VTimestamp
       },
       {
         name: 'touchend:interval',
-        value: '{date: string, time: string, year: number, month: number, day: number, hour: number, minute: number, weekday: number, hasDay: boolean, hasTime: boolean, past: boolean, present: boolean, future: boolean}'
+        value: VTimestamp
       }
     ]
   },
