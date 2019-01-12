@@ -6,7 +6,11 @@
     style="min-height: 434px"
   >
     <v-fade-transition mode="out-in">
-      <v-layout v-if="show" key="0" wrap>
+      <v-layout
+        v-if="show"
+        key="0"
+        wrap
+      >
         <v-flex xs6>
           <v-card>
             <v-img
@@ -14,7 +18,9 @@
               height="125"
               class="grey darken-4"
             ></v-img>
-            <v-card-title class="title">height</v-card-title>
+            <v-card-title class="title">
+              height
+            </v-card-title>
           </v-card>
         </v-flex>
 
@@ -26,7 +32,9 @@
               contain
               class="grey darken-4"
             ></v-img>
-            <v-card-title class="title">height with contain</v-card-title>
+            <v-card-title class="title">
+              height with contain
+            </v-card-title>
           </v-card>
         </v-flex>
 
@@ -37,7 +45,9 @@
               max-height="125"
               class="grey darken-4"
             ></v-img>
-            <v-card-title class="title">max-height</v-card-title>
+            <v-card-title class="title">
+              max-height
+            </v-card-title>
           </v-card>
         </v-flex>
 
@@ -49,13 +59,24 @@
               contain
               class="grey darken-4"
             ></v-img>
-            <v-card-title class="title">max-height with contain</v-card-title>
+            <v-card-title class="title">
+              max-height with contain
+            </v-card-title>
           </v-card>
         </v-flex>
       </v-layout>
 
-      <v-layout v-else key="1" justify-center>
-        <v-btn flat @click="show = true">Load images</v-btn>
+      <v-layout
+        v-else
+        key="1"
+        justify-center
+      >
+        <v-btn
+          flat
+          @click="show = true"
+        >
+          Load images
+        </v-btn>
       </v-layout>
     </v-fade-transition>
   </v-container>

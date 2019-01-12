@@ -4,58 +4,61 @@
     class="mb-5"
     dense
   >
-    <v-timeline-item
-      v-for="(item, i) in items"
-      v-if="index == null || index >= i"
-      :key="i"
-      :icon="item.complete ? 'mdi-check' : item.icon"
-      :color="item.complete ? 'success darken-1' : item.color"
-      :small="item.complete || item.small"
-      fill-dot
-    >
-      <strong
-        slot="opposite"
-        :class="index === i ? 'primary--text' : undefined"
-        v-text="item.caption"
-      />
-      <v-card
-        :class="`elevation-${item.value ? 8 : 1}`"
-        class="py-2"
-        hover
-        @click.native="item.value = !item.value"
+    <template v-for="(item, i) in items">
+      <v-timeline-item
+        v-if="index == null || index >= i"
+        :key="i"
+        :icon="item.complete ? 'mdi-check' : item.icon"
+        :color="item.complete ? 'success darken-1' : item.color"
+        :small="item.complete || item.small"
+        fill-dot
       >
-        <v-card-title class="py-0 pr-2">
-          <span
-            class="body-2"
-            v-text="item.title"
-          />
-          <v-spacer />
-          <v-btn
-            :color="item.value ? 'primary' : ''"
-            :disabled="item.complete"
-            :input-value="item.value"
-            :ripple="false"
-            class="font-weight-light ma-0"
-            flat
-          >
+        <strong
+          slot="opposite"
+          :class="index === i ? 'primary--text' : undefined"
+          v-text="item.caption"
+        />
+        <v-card
+          :class="`elevation-${item.value ? 8 : 1}`"
+          class="py-2"
+          hover
+          @click.native="item.value = !item.value"
+        >
+          <v-card-title class="py-0 pr-2">
             <span
-              class="mr-2"
-              v-text="item.caption"
+              class="body-2"
+              v-text="item.title"
             />
-            <v-icon
-              small
-            >mdi-calendar</v-icon>
-          </v-btn>
-        </v-card-title>
-        <v-expand-transition>
-          <div v-if="(index != null && index >= i) || item.value">
-            <v-card-text>
-              <doc-markdown :code="item.text" />
-            </v-card-text>
-          </div>
-        </v-expand-transition>
-      </v-card>
-    </v-timeline-item>
+            <v-spacer />
+            <v-btn
+              :color="item.value ? 'primary' : ''"
+              :disabled="item.complete"
+              :input-value="item.value"
+              :ripple="false"
+              class="font-weight-light ma-0"
+              flat
+            >
+              <span
+                class="mr-2"
+                v-text="item.caption"
+              />
+              <v-icon
+                small
+              >
+                mdi-calendar
+              </v-icon>
+            </v-btn>
+          </v-card-title>
+          <v-expand-transition>
+            <div v-if="(index != null && index >= i) || item.value">
+              <v-card-text>
+                <doc-markdown :code="item.text" />
+              </v-card-text>
+            </div>
+          </v-expand-transition>
+        </v-card>
+      </v-timeline-item>
+    </template>
   </v-timeline>
 </template>
 
@@ -84,7 +87,7 @@
       items: []
     }),
     mounted () {
-      this.items = this.$t('GettingStarted.Roadmap.roadmapItems').map((item) => {
+      this.items = this.$t('GettingStarted.Roadmap.roadmapItems').map(item => {
         const type = types[item.type]
         return {
           ...type,

@@ -1,9 +1,14 @@
 <template>
   <v-form>
     <v-container>
-      <v-layout row wrap>
-
-        <v-flex xs12 sm6>
+      <v-layout
+        row
+        wrap
+      >
+        <v-flex
+          xs12
+          sm6
+        >
           <v-text-field
             label="Your product or service"
             value="Grocery delivery"
@@ -11,7 +16,10 @@
           ></v-text-field>
         </v-flex>
 
-        <v-flex xs12 sm6>
+        <v-flex
+          xs12
+          sm6
+        >
           <v-text-field
             label="Your landing page"
             hint="www.example.com/page"
@@ -19,7 +27,10 @@
           ></v-text-field>
         </v-flex>
 
-        <v-flex xs12 sm6>
+        <v-flex
+          xs12
+          sm6
+        >
           <v-text-field
             label="Your product or service"
             value="Grocery delivery"
@@ -28,7 +39,10 @@
           ></v-text-field>
         </v-flex>
 
-        <v-flex xs12 sm6>
+        <v-flex
+          xs12
+          sm6
+        >
           <v-text-field
             label="Your landing page"
             hint="www.example.com/page"
@@ -37,7 +51,10 @@
           ></v-text-field>
         </v-flex>
 
-        <v-flex xs12 sm6>
+        <v-flex
+          xs12
+          sm6
+        >
           <v-text-field
             label="Your product or service"
             value="Grocery delivery"
@@ -46,7 +63,10 @@
           ></v-text-field>
         </v-flex>
 
-        <v-flex xs12 sm6>
+        <v-flex
+          xs12
+          sm6
+        >
           <v-text-field
             label="Your landing page"
             hint="www.example.com/page"
@@ -54,7 +74,6 @@
             outline
           ></v-text-field>
         </v-flex>
-
       </v-layout>
     </v-container>
   </v-form>

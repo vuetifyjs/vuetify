@@ -1,5 +1,8 @@
 <template>
-  <v-layout column align-center>
+  <v-layout
+    column
+    align-center
+  >
     <v-rating
       v-model="rating"
       background-color="purple lighten-3"

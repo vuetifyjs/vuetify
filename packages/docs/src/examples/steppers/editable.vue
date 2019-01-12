@@ -14,7 +14,9 @@
       <v-stepper-step
         complete
         step="2"
-      >Create an ad group</v-stepper-step>
+      >
+        Create an ad group
+      </v-stepper-step>
 
       <v-divider></v-divider>
 

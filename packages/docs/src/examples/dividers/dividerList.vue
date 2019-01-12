@@ -1,8 +1,15 @@
 <template>
   <v-layout justify-center>
-    <v-flex xs12 sm8 md6>
+    <v-flex
+      xs12
+      sm8
+      md6
+    >
       <v-card>
-        <v-toolbar color="orange lighten-1" dark>
+        <v-toolbar
+          color="orange lighten-1"
+          dark
+        >
           <v-toolbar-side-icon></v-toolbar-side-icon>
 
           <v-toolbar-title>Message Board</v-toolbar-title>

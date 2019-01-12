@@ -18,7 +18,9 @@
       >
         <code>.{{ text[0] }}</code>
       </div>
-      <v-flex :class="`${text[0]}`">{{ text[1] }}</v-flex>
+      <v-flex :class="`${text[0]}`">
+        {{ text[1] }}
+      </v-flex>
     </v-layout>
   </v-card>
 </template>

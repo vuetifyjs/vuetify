@@ -5,7 +5,9 @@
     </div>
     <v-spacer class="hidden-sm-and-down" />
     <div class="hidden-sm-and-down">
-      <span class="hidden-md-and-up">&nbsp;—&nbsp;</span>
+      <span class="hidden-md-and-up">
+        &nbsp;—&nbsp;
+      </span>
       <span
         class="pr-5"
         v-html="contributionGuide"

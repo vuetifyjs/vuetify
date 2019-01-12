@@ -1,7 +1,14 @@
 <template>
   <div>
-    <v-checkbox v-model="landscape" label="Landscape"></v-checkbox>
-    <v-date-picker v-model="picker" :landscape="landscape" type="month"></v-date-picker>
+    <v-checkbox
+      v-model="landscape"
+      label="Landscape"
+    ></v-checkbox>
+    <v-date-picker
+      v-model="picker"
+      :landscape="landscape"
+      type="month"
+    ></v-date-picker>
   </div>
 </template>
 

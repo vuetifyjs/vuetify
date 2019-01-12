@@ -1,8 +1,12 @@
 <template>
   <v-card>
-    <v-card-title class="headline font-weight-regular blue-grey white--text">Profile</v-card-title>
+    <v-card-title class="headline font-weight-regular blue-grey white--text">
+      Profile
+    </v-card-title>
     <v-card-text>
-      <v-subheader class="pa-0">Where do you live?</v-subheader>
+      <v-subheader class="pa-0">
+        Where do you live?
+      </v-subheader>
       <v-autocomplete
         v-model="model"
         :hint="!isEditing ? 'Click the icon to edit' : 'Click the icon to save'"
@@ -17,8 +21,8 @@
           mode="out-in"
         >
           <v-icon
-            :color="isEditing ? 'success' : 'info'"
             :key="`icon-${isEditing}`"
+            :color="isEditing ? 'success' : 'info'"
             @click="isEditing = !isEditing"
             v-text="isEditing ? 'mdi-check-outline' : 'mdi-circle-edit-outline'"
           ></v-icon>

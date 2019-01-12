@@ -1,6 +1,12 @@
 <template>
-  <v-layout row wrap>
-    <v-flex xs12 sm6>
+  <v-layout
+    row
+    wrap
+  >
+    <v-flex
+      xs12
+      sm6
+    >
       <v-date-picker
         v-model="picker"
         type="month"

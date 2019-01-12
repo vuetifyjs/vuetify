@@ -1,5 +1,8 @@
 <template>
-  <v-container fluid grid-list-md>
+  <v-container
+    fluid
+    grid-list-md
+  >
     <v-textarea
       name="input-7-1"
       box

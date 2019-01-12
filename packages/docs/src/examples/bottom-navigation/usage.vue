@@ -1,5 +1,8 @@
 <template>
-  <v-card height="200px" flat>
+  <v-card
+    height="200px"
+    flat
+  >
     <div class="headline text-xs-center pa-5">
       Active: {{ bottomNav }}
     </div>

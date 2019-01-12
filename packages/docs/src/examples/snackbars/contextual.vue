@@ -2,20 +2,29 @@
   <v-card>
     <v-card-text>
       <v-container fluid>
-        <v-layout row wrap>
+        <v-layout
+          row
+          wrap
+        >
           <v-flex xs12>
-            <v-radio-group v-model="color" row>
+            <v-radio-group
+              v-model="color"
+              row
+            >
               <v-radio
                 v-for="(colorValue, i) in ['success', 'info', 'error', 'cyan darken-2']"
-                :color="colorValue"
                 :key="i"
+                :color="colorValue"
                 :label="colorValue"
                 :value="colorValue"
               ></v-radio>
             </v-radio-group>
           </v-flex>
 
-          <v-flex xs12 sm3>
+          <v-flex
+            xs12
+            sm3
+          >
             <v-checkbox
               v-model="mode"
               label="Multi-line (mobile)"
@@ -23,7 +32,10 @@
             ></v-checkbox>
           </v-flex>
 
-          <v-flex xs12 sm3>
+          <v-flex
+            xs12
+            sm3
+          >
             <v-checkbox
               v-model="mode"
               label="Vertical (mobile)"
@@ -31,7 +43,11 @@
             ></v-checkbox>
           </v-flex>
 
-          <v-flex xs12 sm4 offset-sm4>
+          <v-flex
+            xs12
+            sm4
+            offset-sm4
+          >
             <v-text-field
               v-model="text"
               label="Text"
@@ -39,7 +55,10 @@
             ></v-text-field>
           </v-flex>
 
-          <v-flex xs12 sm4>
+          <v-flex
+            xs12
+            sm4
+          >
             <v-text-field
               v-model.number="timeout"
               label="Timeout"

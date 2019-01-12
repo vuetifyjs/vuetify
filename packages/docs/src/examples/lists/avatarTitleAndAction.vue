@@ -1,8 +1,15 @@
 <template>
   <v-layout row>
-    <v-flex xs12 sm6 offset-sm3>
+    <v-flex
+      xs12
+      sm6
+      offset-sm3
+    >
       <v-card>
-        <v-toolbar color="indigo" dark>
+        <v-toolbar
+          color="indigo"
+          dark
+        >
           <v-toolbar-side-icon></v-toolbar-side-icon>
 
           <v-toolbar-title>Inbox</v-toolbar-title>
@@ -25,7 +32,12 @@
             @click=""
           >
             <v-list-tile-action>
-              <v-icon v-if="item.icon" color="pink">star</v-icon>
+              <v-icon
+                v-if="item.icon"
+                color="pink"
+              >
+                star
+              </v-icon>
             </v-list-tile-action>
 
             <v-list-tile-content>

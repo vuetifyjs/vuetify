@@ -1,8 +1,15 @@
 <template>
   <v-layout row>
-    <v-flex xs12 sm6 offset-sm3>
+    <v-flex
+      xs12
+      sm6
+      offset-sm3
+    >
       <v-card>
-        <v-toolbar color="pink" dark>
+        <v-toolbar
+          color="pink"
+          dark
+        >
           <v-toolbar-side-icon></v-toolbar-side-icon>
 
           <v-toolbar-title>Inbox</v-toolbar-title>
@@ -28,7 +35,9 @@
             >
               <v-list-tile-content>
                 <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-                <v-list-tile-sub-title class="text--primary">{{ item.headline }}</v-list-tile-sub-title>
+                <v-list-tile-sub-title class="text--primary">
+                  {{ item.headline }}
+                </v-list-tile-sub-title>
                 <v-list-tile-sub-title>{{ item.subtitle }}</v-list-tile-sub-title>
               </v-list-tile-content>
 
@@ -48,7 +57,6 @@
                   star
                 </v-icon>
               </v-list-tile-action>
-
             </v-list-tile>
             <v-divider
               v-if="index + 1 < items.length"
