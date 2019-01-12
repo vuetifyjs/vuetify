@@ -1,5 +1,18 @@
-// To start playground
+// All run from root directory
+// To start dev
 $ yarn dev
 
-//To start docs
-$ yarn docs-dev
+// To start docs
+$ yarn dev docs
+
+// To start a specific package
+$ yarn dev <package name>
+
+// To build all packages
+$ yarn build
+
+// To build a specific package
+$ yarn build <pacakage name>
+
+// Package alias
+api-generator: api
