@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "deploy": "now && now alias",
-    "serve": "vue-cli-service serve",
-    "simmer": "vue-cli-service build",
+    "dev": "vue-cli-service serve",
+    "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
