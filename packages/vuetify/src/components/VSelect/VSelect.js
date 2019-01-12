@@ -571,7 +571,7 @@ export default VTextField.extend({
       if (this.multiple) return
 
       const KEYBOARD_LOOKUP_THRESHOLD = 1000 // milliseconds
-      const now = Date.now()
+      const now = performance.now()
       if (now - this.keyboardLookupLastTime > KEYBOARD_LOOKUP_THRESHOLD) {
         this.keyboardLookupPrefix = ''
       }
