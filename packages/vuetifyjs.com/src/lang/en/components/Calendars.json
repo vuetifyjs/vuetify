@@ -11,7 +11,7 @@
     },
     "events": {
       "header": "### Events",
-      "desc": "This is an example of an event calendar with type of `month`"
+      "desc": "This is an example of an event calendar with type of `month`. Click on an event to show event details."
     },
     "weekly": {
       "header": "### Weekly",

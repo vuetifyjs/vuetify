@@ -253,9 +253,9 @@
     data: () => ({
       dark: false,
       startMenu: false,
-      start: '2018-09-12',
+      start: '2019-01-12',
       endMenu: false,
-      end: '2018-09-27',
+      end: '2019-01-27',
       nowMenu: false,
       minWeeks: 1,
       now: null,

@@ -7,16 +7,6 @@ import {
   parseDate
 } from '../util/timestamp'
 
-export interface TimesObject {
-  now: VTimestamp
-  today: VTimestamp
-}
-
-export const times: TimesObject = {
-  now: parseTimestamp('0000-00-00 00:00') as VTimestamp,
-  today: parseTimestamp('0000-00-00') as VTimestamp
-}
-
 export default Vue.extend({
   name: 'times',
 
@@ -28,7 +18,10 @@ export default Vue.extend({
   },
 
   data: () => ({
-    times
+    times: {
+      now: parseTimestamp('0000-00-00 00:00') as VTimestamp,
+      today: parseTimestamp('0000-00-00') as VTimestamp
+    }
   }),
 
   computed: {
