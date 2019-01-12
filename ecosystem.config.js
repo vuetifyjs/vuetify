@@ -12,7 +12,7 @@ module.exports = {
     {
       name: 'vuetify-docs',
       script: 'yarn.js',
-      cwd: './packages/vuetifyjs.com/',
+      cwd: './packages/docs/',
       args: 'dev'
     },
     {
