@@ -323,3 +323,30 @@ const camelizeRE = /-(\w)/g
 export const camelize = (str: string): string => {
   return str.replace(camelizeRE, (_, c) => c ? c.toUpperCase() : '')
 }
+
+export function filterTreeItems (item: any, search: string, textKey: string, childrenKey: string) {
+  if (item[textKey].toLocaleLowerCase().indexOf(search.toLocaleLowerCase()) > -1) {
+    return item
+  }
+
+  const children = item[childrenKey]
+  const matches = []
+
+  if (children) {
+    for (let i = 0; i < children.length; i++) {
+      const match = filterTreeItems(children[i], search, textKey, childrenKey)
+
+      if (match) {
+        matches.push(match)
+      }
+    }
+
+    if (matches.length) {
+      item[childrenKey] = matches
+
+      return item
+    }
+  }
+
+  return null
+}

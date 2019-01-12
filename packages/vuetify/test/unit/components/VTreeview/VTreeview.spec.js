@@ -410,4 +410,31 @@ test('VTreeView.ts', ({ mount }) => {
 
     expect(Object.keys(wrapper.vm.nodes).length).toBe(2)
   })
+
+  it('should filter items', async () => {
+    const wrapper = mount(VTreeview, {
+      propsData: {
+        items: [
+          {
+            id: 1,
+            name: 'one'
+          },
+          {
+            id: 2,
+            name: 'two'
+          }
+        ]
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.setProps({
+      search: 'two'
+    })
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

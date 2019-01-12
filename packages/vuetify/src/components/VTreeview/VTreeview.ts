@@ -13,7 +13,7 @@ import Themeable from '../../mixins/themeable'
 import { provide as RegistrableProvide } from '../../mixins/registrable'
 
 // Utils
-import { getObjectValueByPath, deepEqual } from '../../util/helpers'
+import { getObjectValueByPath, deepEqual, filterTreeItems } from '../../util/helpers'
 import mixins from '../../util/mixins'
 import { consoleWarn } from '../../util/console'
 
@@ -64,6 +64,25 @@ export default mixins(
       type: Array,
       default: () => ([])
     } as PropValidator<NodeArray>,
+    search: String,
+    customFilter: {
+      type: Function,
+      default: (items: any[], search: string, textKey: string, childrenKey: string) => {
+        if (!search) return items
+
+        const matches = []
+
+        for (let i = 0; i < items.length; i++) {
+          const match = filterTreeItems(items[i], search, textKey, childrenKey)
+
+          if (match) {
+            matches.push(match)
+          }
+        }
+
+        return matches
+      }
+    },
     ...VTreeviewNodeProps
   },
 
@@ -73,6 +92,12 @@ export default mixins(
     activeCache: new Set() as NodeCache,
     openCache: new Set() as NodeCache
   }),
+
+  computed: {
+    filteredItems (): any[] {
+      return this.customFilter(this.items.slice(), this.search, this.itemText, this.itemChildren)
+    }
+  },
 
   watch: {
     items: {
@@ -332,8 +357,8 @@ export default mixins(
   },
 
   render (h): VNode {
-    const children: VNodeChildrenArrayContents = this.items.length
-      ? this.items.map(VTreeviewNode.options.methods.genChild.bind(this))
+    const children: VNodeChildrenArrayContents = this.filteredItems.length
+      ? this.filteredItems.map(VTreeviewNode.options.methods.genChild.bind(this))
       /* istanbul ignore next */
       : this.$slots.default! // TODO: remove type annotation with TS 3.2
 
