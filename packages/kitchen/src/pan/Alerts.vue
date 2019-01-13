@@ -3,7 +3,9 @@
     <v-layout column>
       <!-- Dense -->
       <v-flex>
-        <h3 class="title grey--text text-xs-center mb-4 mt-5">Dense</h3>
+        <h3 class="title grey--text text-xs-center mb-4 mt-5">
+          Dense
+        </h3>
         <v-alert
           type="success"
           dense
@@ -34,7 +36,9 @@
       </v-flex>
       <!-- Default -->
       <v-flex>
-        <h3 class="title grey--text text-xs-center mb-4 mt-5">Default</h3>
+        <h3 class="title grey--text text-xs-center mb-4 mt-5">
+          Default
+        </h3>
         <v-alert
           type="success"
         >
@@ -61,7 +65,9 @@
       </v-flex>
       <!-- Prominent -->
       <v-flex>
-        <h3 class="title grey--text text-xs-center mb-4 mt-5">Prominent</h3>
+        <h3 class="title grey--text text-xs-center mb-4 mt-5">
+          Prominent
+        </h3>
         <v-alert
           type="success"
           prominent
@@ -92,7 +98,9 @@
       </v-flex>
       <!-- Border -->
       <v-flex>
-        <h3 class="title grey--text text-xs-center mb-4 mt-5">Border</h3>
+        <h3 class="title grey--text text-xs-center mb-4 mt-5">
+          Border
+        </h3>
         <v-alert
           type="success"
           border="top"
@@ -123,7 +131,9 @@
       </v-flex>
       <!-- Colored Border -->
       <v-flex>
-        <h3 class="title grey--text text-xs-center mb-4 mt-5">Colored Border</h3>
+        <h3 class="title grey--text text-xs-center mb-4 mt-5">
+          Colored Border
+        </h3>
         <v-alert
           type="success"
           border="right"
@@ -158,7 +168,9 @@
       </v-flex>
       <!-- Outline -->
       <v-flex>
-        <h3 class="title grey--text text-xs-center mb-4 mt-5">Outline</h3>
+        <h3 class="title grey--text text-xs-center mb-4 mt-5">
+          Outline
+        </h3>
         <v-alert
           type="success"
           outlined
@@ -189,7 +201,9 @@
       </v-flex>
       <!-- Closable -->
       <v-flex>
-        <h3 class="title grey--text text-xs-center mb-4 mt-5">Closable</h3>
+        <h3 class="title grey--text text-xs-center mb-4 mt-5">
+          Closable
+        </h3>
         <v-alert
           v-model="alertDismissible"
           dismissible
@@ -215,7 +229,9 @@
       </v-flex>
       <!-- Custom icons -->
       <v-flex>
-        <h3 class="title grey--text text-xs-center mb-4 mt-5">Custom icons</h3>
+        <h3 class="title grey--text mb-4 mt-5">
+          Custom icons
+        </h3>
         <v-alert
           color="purple"
           dark
@@ -233,7 +249,9 @@
       </v-flex>
       <!-- CSS Transitions -->
       <v-flex>
-        <h3 class="title grey--text text-xs-center mb-4 mt-5">CSS transitions</h3>
+        <h3 class="title grey--text mb-4 mt-5">
+          Custom transitions
+        </h3>
         <div class="text-xs-center">
           <v-btn
             class="mb-3"
@@ -253,7 +271,9 @@
       </v-flex>
       <!-- Slots -->
       <v-flex>
-        <h3 class="title grey--text text-xs-center mb-4 mt-5">Slots</h3>
+        <h3 class="title grey--text mb-4 mt-5">
+          Outline
+        </h3>
         <v-alert
           v-model="alertTransition2"
           class="mb-0"

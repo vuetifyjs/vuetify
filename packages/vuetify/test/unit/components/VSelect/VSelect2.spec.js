@@ -247,13 +247,18 @@ test('VSelect2', ({ mount, compileToFunctions }) => {
     const blur = jest.fn()
     wrapper.vm.$on('blur', blur)
 
-    wrapper.vm.onKeyDown({ keyCode: keyCodes.tab })
+
+    const event = new Event('keydown')
+    event.keyCode = keyCodes.tab
+
+    wrapper.vm.onKeyDown(event)
 
     expect(blur).toBeCalled()
     expect(wrapper.vm.isMenuActive).toBe(false)
 
     for (let keyCode of [keyCodes.enter, keyCodes.space, keyCodes.up, keyCodes.down]) {
-      wrapper.vm.onKeyDown({ keyCode })
+      event.keyCode = keyCode
+      wrapper.vm.onKeyDown(event)
       expect(wrapper.vm.isMenuActive).toBe(true)
 
       wrapper.vm.isMenuActive = false

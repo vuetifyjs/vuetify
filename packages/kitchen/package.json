@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "deploy": "now && now alias",
-    "serve": "vue-cli-service serve",
-    "simmer": "vue-cli-service build",
+    "dev": "vue-cli-service serve",
+    "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
@@ -24,7 +24,6 @@
     "eslint-config-vuetify": "^0.1.0",
     "eslint-plugin-vue": "^4.7.1",
     "stylus": "^0.54.5",
-    "stylus-loader": "^3.0.1",
-    "vuetify-loader": "^1.1.1"
+    "stylus-loader": "^3.0.1"
   }
 }
