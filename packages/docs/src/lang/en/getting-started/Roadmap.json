@@ -59,12 +59,20 @@
       "value": false
     },
     {
+      "type": "release",
+      "complete": false,
+      "title": "v1.5 Release",
+      "caption": "February 2018",
+      "text": "Add new component `v-calendar`. Improve functionality of `v-sparkline` with a **bar** variant and fill. Improve `v-treeview` and prepare for LTS.",
+      "value": true
+    },
+    {
       "type": "site",
       "complete": false,
       "title": "Vuetify Snips",
       "caption": "Q2 2019",
       "text": "Website dedicated to creating and sharing Vuetify snippets.",
-      "value": true
+      "value": false
     },
     {
       "type": "release",
@@ -72,7 +80,7 @@
       "title": "v2.0 Release",
       "caption": "Q2 2019",
       "text": "A complete rebuild of the framework core. Improving the layout and theme systems, platform integration, accessibility and performance. Fully modular and automatic tree-shaking from the vuetify-loader.",
-      "value": true
+      "value": false
     }
   ]
 }
