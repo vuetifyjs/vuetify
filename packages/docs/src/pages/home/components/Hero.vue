@@ -27,7 +27,7 @@
         >
           <h1
             :class="$vuetify.breakpoint.smAndDown && 'display-1' || 'display-3'"
-            class="font-weight-light mb-4"
+            class="font-weight-light mb-4 mx-3"
             v-html="$vuetify.breakpoint.smAndUp ? $t('Vuetify.Home.callout') : 'Vuetify.js'"
           />
           <v-layout
