@@ -93,9 +93,14 @@ export default mixins(
     __cachedDismissible (): VNode | null {
       if (!this.dismissible) return null
 
+      const color = this.iconColor
+
       return this.$createElement(VBtn, {
         staticClass: 'v-alert__dismissible',
-        props: { icon: true },
+        props: {
+          color,
+          icon: true
+        },
         attrs: {
           'aria-label': this.$vuetify.t(this.closeLabel)
         },
@@ -104,9 +109,7 @@ export default mixins(
         }
       }, [
         this.$createElement(VIcon, {
-          props: {
-            color: this.iconColor
-          }
+          props: { color }
         }, '$vuetify.icons.cancel')
       ])
     },
