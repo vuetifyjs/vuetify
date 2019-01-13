@@ -1,8 +1,6 @@
 import '../../stylus/components/_app.styl'
 
 // Component level mixins
-import AppTheme from './mixins/app-theme'
-
 import Themeable from '../../mixins/themeable'
 
 // Directives
@@ -17,7 +15,6 @@ export default {
   },
 
   mixins: [
-    AppTheme,
     Themeable
   ],
 

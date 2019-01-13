@@ -60,6 +60,14 @@ declare module 'vue/types/vue' {
   }
 }
 
+declare module 'vue/types/vue' {
+  interface VueConstructor {
+    util: {
+      defineReactive (instance: Vue, property: string, obj: object): () => void
+    }
+  }
+}
+
 export type VuetifyIconComponent = {
   component: Component | string
   props?: object

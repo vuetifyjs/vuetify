@@ -5,3 +5,5 @@ import 'vuetify/dist/vuetify.css'
 Vue.use(Vuetify, {
   iconfont: 'mdi'
 })
+
+export default new Vuetify()
