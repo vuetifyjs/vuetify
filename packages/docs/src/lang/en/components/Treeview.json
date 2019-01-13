@@ -38,6 +38,7 @@
       "open": "Syncable prop that allows one to control which nodes are open. The array consists of the `item-key` of each open item.",
       "openAll": "When `true` will cause all branch nodes to be opened when component is mounted",
       "openOnClick": "When `true` will cause nodes to be opened by clicking anywhere on it, instead of only opening by clicking on expand icon. When using this prop with `activatable` you will be unable to mark nodes with children as active.",
+      "returnObject": "When `true` will make v-model, `active.sync` and `open.sync` return the complete object instead of just the key",
       "selectable": "Will render a checkbox next to each node allowing them to be selected",
       "selectedColor": "The color of the selection checkbox",
       "transition": "Applies a transition when nodes are opened and closed",

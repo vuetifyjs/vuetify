@@ -4,7 +4,7 @@
   "examples": {
     "playground": {
       "header": "",
-      "desc": "The `v-sparkline` component is the bridge between having a chart and not. It is a rich and lightweight pseudo chart that excels in displaying numerical data."
+      "desc": "The sparkline component comes in 2 variations, **trend**(default) and **bar**. Each support a multitude of options for customizing the look and feel of the sparkline."
     },
     "heartRate": {
       "header": "### Take a break",
