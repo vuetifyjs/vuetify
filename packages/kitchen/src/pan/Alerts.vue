@@ -316,7 +316,7 @@
 
         <v-alert
           color="error"
-          :icon="false"
+          dark
         >
           This is an error alert with no icon.
         </v-alert>
