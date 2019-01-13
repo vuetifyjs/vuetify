@@ -1,3 +1,9 @@
+export interface MaskItem {
+  test: (char: string) => boolean
+  convert: (char: string) => string // eslint-disable-line no-use-before-define
+}
+export type MaskType = '#' | 'A' | 'a' | 'N' | 'n' | 'X'
+
 /**
  * Default delimiter RegExp
  *
@@ -18,28 +24,30 @@ export const isMaskDelimiter = (char: string): boolean => char ? defaultDelimite
  *
  * @type {Object}
  */
-const allowedMasks: any = {
+const allowedMasks: Record<MaskType, MaskItem> = {
   '#': {
-    test: (char: string) => char.match(/[0-9]/)
+    test: (char: string): boolean => Boolean(char.match(/[0-9]/)),
+    convert: (char: string) => char
   },
   'A': {
-    test: (char: string) => char.match(/[A-Z]/i),
+    test: (char: string): boolean => Boolean(char.match(/[A-Z]/i)),
     convert: (char: string) => char.toUpperCase()
   },
   'a': {
-    test: (char: string) => char.match(/[a-z]/i),
+    test: (char: string): boolean => Boolean(char.match(/[a-z]/i)),
     convert: (char: string) => char.toLowerCase()
   },
   'N': {
-    test: (char: string) => char.match(/[0-9A-Z]/i),
+    test: (char: string): boolean => Boolean(char.match(/[0-9A-Z]/i)),
     convert: (char: string) => char.toUpperCase()
   },
   'n': {
-    test: (char: string) => char.match(/[0-9a-z]/i),
+    test: (char: string): boolean => Boolean(char.match(/[0-9a-z]/i)),
     convert: (char: string) => char.toLowerCase()
   },
   'X': {
-    test: isMaskDelimiter
+    test: isMaskDelimiter,
+    convert: (char: string) => char
   }
 }
 
@@ -60,7 +68,7 @@ const isMask = (char: string): boolean => allowedMasks.hasOwnProperty(char)
  *
  * @return {String}
  */
-const convert = (mask: string, char: string): string => {
+const convert = (mask: MaskType, char: string): string => {
   return allowedMasks[mask].convert ? allowedMasks[mask].convert(char) : char
 }
 
@@ -72,7 +80,7 @@ const convert = (mask: string, char: string): string => {
  *
  * @return {Boolean}
  */
-const maskValidates = (mask: string, char: string): boolean => {
+const maskValidates = (mask: MaskType, char: string): boolean => {
   if (char == null || !isMask(mask)) return false
   return allowedMasks[mask].test(char)
 }
