@@ -46,6 +46,7 @@ export default mixins(Colorable, Toggleable, Transitionable).extend({
         case 'error': return '$vuetify.icons.error'
         case 'success': return '$vuetify.icons.success'
         case 'warning': return '$vuetify.icons.warning'
+        default: return this.icon
       }
     }
   },

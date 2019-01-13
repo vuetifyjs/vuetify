@@ -1,7 +1,7 @@
 import { test } from '@/test'
 import VProgressLinear from '@/components/VProgressLinear'
 
-test('VProgressLinear.js', ({ mount }) => {
+test('VProgressLinear.js', ({ mount, compileToFunctions }) => {
   it('should render component and match snapshot', () => {
     const wrapper = mount(VProgressLinear, {
       propsData: {
@@ -162,4 +162,18 @@ test('VProgressLinear.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should render default slot content', () => {
+    const wrapper = mount(VProgressLinear, {
+      propsData: {
+        value: 90,
+        bufferValue: 80
+      },
+      slots: {
+        default: [compileToFunctions('<div class="foobar">content</div>')]
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.find('.foobar').length).toBe(1)
+  })
 })
