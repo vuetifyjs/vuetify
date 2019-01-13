@@ -19,13 +19,13 @@ module.exports = {
       name: 'vuetify-kitchen',
       script: 'yarn.js',
       cwd: './packages/kitchen/',
-      args: 'serve'
+      args: 'dev'
     },
     {
       name: 'vuetify-playground',
       script: 'yarn.js',
       cwd: './packages/playground/',
-      args: 'serve'
+      args: 'dev'
     }
   ]
 }
