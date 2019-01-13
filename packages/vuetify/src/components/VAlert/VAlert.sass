@@ -113,6 +113,15 @@
     &-#{$direction}
       padding-#{$direction}: 24px
 
+  +rtl()
+    &-left
+      padding-right: 24px
+      padding-left: 16px
+
+    &-right
+      padding-left: 24px
+      padding-right: 16px
+
 .v-alert--dense
   padding-top: 8px
   padding-bottom: 8px
