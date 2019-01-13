@@ -1,15 +1,32 @@
-import { test } from '@/test'
-import VSheet from '@/components/VSheet'
+// Libraries
+import Vue from 'vue'
 
-test('VSheet.vue', ({ mount }) => {
+// Components
+import VSheet from '../VSheet'
+
+// Utilities
+import {
+  shallowMount,
+  Wrapper
+} from '@vue/test-utils'
+
+describe('VSheet.ts', () => {
+  let mountFunction: (options?: object) => Wrapper<Vue>
+
+  beforeEach(() => {
+    mountFunction = (options = {}) => {
+      return shallowMount(VSheet, options)
+    }
+  })
+
   it('should render component and match snapshot', () => {
-    const wrapper = mount(VSheet)
+    const wrapper = mountFunction()
 
     expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('should render a colored paper', () => {
-    const wrapper = mount(VSheet, {
+    const wrapper = mountFunction({
       propsData: {
         color: 'blue lighten-1'
       }
@@ -20,7 +37,7 @@ test('VSheet.vue', ({ mount }) => {
   })
 
   it('should render a tile paper', () => {
-    const wrapper = mount(VSheet, {
+    const wrapper = mountFunction({
       propsData: {
         tile: true
       }
