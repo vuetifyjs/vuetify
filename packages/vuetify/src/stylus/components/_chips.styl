@@ -38,7 +38,6 @@ rtl(v-chip-rtl, "v-chip")
 .v-chip
   align-items: center
   border-radius: $chip-border-radius
-  border: 1px solid transparent
   display: inline-flex
   font-size: $chip-font-size
   margin: $chip-margin
@@ -104,11 +103,15 @@ rtl(v-chip-rtl, "v-chip")
   // Increase specificity to override theme background
   &\&.v-chip--outline
     background: $chip-outline-background
-    border-color: currentColor
+    border: 1px solid currentColor
     color: $chip-outline-color
+    height: $chip-height
+
+    .v-avatar
+      margin-left: -13px
 
   &--small
-    height: $chip-small-height
+    height: $chip-small-height !important
 
     .v-avatar
       height: $chip-small-height !important

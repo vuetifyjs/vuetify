@@ -129,8 +129,9 @@ export default {
         }), this.computedIcon)
       ])
     },
-    onFocus () {
+    onFocus (e) {
       this.isFocused = true
+      this.$emit('focus', e)
     },
     onBlur (e) {
       this.isFocused = false

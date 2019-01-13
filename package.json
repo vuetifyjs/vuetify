@@ -9,11 +9,10 @@
     }
   },
   "scripts": {
-    "build": "lerna run build --stream",
+    "dev": "node scripts/dev.js",
+    "build": "node scripts/build.js",
     "start": "lerna run start --scope vuetifyjs.com --stream",
     "lint": "lerna run lint --parallel",
-    "dev": "lerna run dev --scope vuetify --stream",
-    "docs-dev": "lerna run dev --scope vuetifyjs.com --stream",
     "version": "node scripts/confirm-npm-tag.js",
     "postversion": "node scripts/post-release-merge.js"
   },

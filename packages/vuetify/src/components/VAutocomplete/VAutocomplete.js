@@ -71,10 +71,13 @@ export default VSelect.extend({
     computedItems () {
       return this.filteredItems
     },
-    displayedItemsCount () {
+    selectedValues () {
+      return this.selectedItems.map(item => this.getValue(item))
+    },
+    hasDisplayedItems () {
       return this.hideSelected
-        ? this.filteredItems.length - this.selectedItems.length
-        : this.filteredItems.length
+        ? this.filteredItems.some(item => !this.hasItem(item))
+        : this.filteredItems.length > 0
     },
     /**
      * The range of the current input text
@@ -118,7 +121,7 @@ export default VSelect.extend({
     menuCanShow () {
       if (!this.isFocused) return false
 
-      return (this.displayedItemsCount > 0) || !this.hideNoData
+      return this.hasDisplayedItems || !this.hideNoData
     },
     $_menuProps () {
       const props = VSelect.options.computed.$_menuProps.call(this)
@@ -364,6 +367,9 @@ export default VSelect.extend({
       )) {
         this.setSearch()
       }
+    },
+    hasItem (item) {
+      return this.selectedValues.indexOf(this.getValue(item)) > -1
     }
   }
 })
