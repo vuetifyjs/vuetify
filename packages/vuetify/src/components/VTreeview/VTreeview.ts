@@ -67,20 +67,16 @@ export default mixins(
     search: String,
     customFilter: {
       type: Function,
-      default: (items: any[], search: string, textKey: string, childrenKey: string) => {
-        if (!search) return items
+      default: (items: any[], search: string, idKey: string, textKey: string, childrenKey: string) => {
+        const excluded = new Set()
 
-        const matches = []
+        if (!search) return excluded
 
         for (let i = 0; i < items.length; i++) {
-          const match = filterTreeItems(items[i], search, textKey, childrenKey)
-
-          if (match) {
-            matches.push(match)
-          }
+          filterTreeItems(items[i], search, idKey, textKey, childrenKey, excluded)
         }
 
-        return matches
+        return excluded
       }
     },
     ...VTreeviewNodeProps
@@ -94,8 +90,8 @@ export default mixins(
   }),
 
   computed: {
-    filteredItems (): any[] {
-      return this.customFilter(this.items.slice(), this.search, this.itemText, this.itemChildren)
+    excludedItems (): Set<string | number> {
+      return this.customFilter(this.items.slice(), this.search, this.itemKey, this.itemText, this.itemChildren)
     }
   },
 
@@ -353,12 +349,15 @@ export default mixins(
         node.vnode.isActive = node.isActive
         node.vnode.isOpen = node.isOpen
       }
+    },
+    isExcluded (key: string | number) {
+      return !!this.search && this.excludedItems.has(key)
     }
   },
 
   render (h): VNode {
-    const children: VNodeChildrenArrayContents = this.filteredItems.length
-      ? this.filteredItems.map(VTreeviewNode.options.methods.genChild.bind(this))
+    const children: VNodeChildrenArrayContents = this.items.length
+      ? this.items.map(VTreeviewNode.options.methods.genChild.bind(this))
       /* istanbul ignore next */
       : this.$slots.default! // TODO: remove type annotation with TS 3.2
 

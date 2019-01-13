@@ -324,29 +324,34 @@ export const camelize = (str: string): string => {
   return str.replace(camelizeRE, (_, c) => c ? c.toUpperCase() : '')
 }
 
-export function filterTreeItems (item: any, search: string, textKey: string, childrenKey: string) {
-  if (item[textKey].toLocaleLowerCase().indexOf(search.toLocaleLowerCase()) > -1) {
-    return item
+export function filterTreeItems (
+  item: any,
+  search: string,
+  idKey: string,
+  textKey: string,
+  childrenKey: string,
+  excluded: Set<string | number>
+): boolean {
+  const text = getObjectValueByPath(item, textKey)
+
+  if (text.toLocaleLowerCase().indexOf(search.toLocaleLowerCase()) > -1) {
+    return true
   }
 
-  const children = item[childrenKey]
-  const matches = []
+  const children = getObjectValueByPath(item, childrenKey)
 
   if (children) {
+    let match = false
     for (let i = 0; i < children.length; i++) {
-      const match = filterTreeItems(children[i], search, textKey, childrenKey)
-
-      if (match) {
-        matches.push(match)
+      if (filterTreeItems(children[i], search, idKey, textKey, childrenKey, excluded)) {
+        match = true
       }
     }
 
-    if (matches.length) {
-      item[childrenKey] = matches
-
-      return item
-    }
+    if (match) return true
   }
 
-  return null
+  excluded.add(getObjectValueByPath(item, idKey))
+
+  return false
 }

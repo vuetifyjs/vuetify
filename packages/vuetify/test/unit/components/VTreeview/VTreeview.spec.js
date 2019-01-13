@@ -436,5 +436,6 @@ test('VTreeView.ts', ({ mount }) => {
     await wrapper.vm.$nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.find('.v-treeview-node--excluded').length).toBe(1)
   })
 })
