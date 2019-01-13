@@ -18,7 +18,8 @@
 
   const cssResources = [
     'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons',
-    `https://cdn.jsdelivr.net/npm/vuetify@${version}/dist/vuetify.min.css`
+    `https://cdn.jsdelivr.net/npm/vuetify@${version}/dist/vuetify.min.css`,
+    'https://cdn.materialdesignicons.com/2.5.94/css/materialdesignicons.min.css'
   ]
 
   const jsResources = [
