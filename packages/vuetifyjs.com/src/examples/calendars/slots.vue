@@ -1,26 +1,31 @@
 <template>
-  <v-layout id="VCalendar_slots">
+  <v-layout>
     <v-flex>
-      <v-calendar
-        :now="today"
-        :value="today"
-        color="primary"
-      >
-        <template
-          slot="day"
-          slot-scope="{ present, past, date }"
+      <v-sheet height="500">
+        <v-calendar
+          :now="today"
+          :value="today"
+          color="primary"
         >
-          <div v-if="past && tracked[date]" class="bar-chart">
-            <div
-              v-for="(percent, index) in tracked[date]"
-              :key="index"
-              :title="category[index]"
-              :style="{ width: percent + '%', backgroundColor: colors[index] }"
-              class="bar"
-            ></div>
-          </div>
-        </template>
-      </v-calendar>
+          <v-layout
+            slot="day"
+            slot-scope="{ present, past, date }"
+            fill-height
+          >
+            <template v-if="past && tracked[date]">
+              <v-sheet
+                v-for="(percent, i) in tracked[date]"
+                :key="i"
+                :title="category[i]"
+                :color="colors[i]"
+                :width="`${percent}%`"
+                height="100%"
+                tile
+              ></v-sheet>
+            </template>
+          </v-layout>
+        </v-calendar>
+      </v-sheet>
     </v-flex>
   </v-layout>
 </template>
@@ -45,55 +50,3 @@
     })
   }
 </script>
-
-<style lang="stylus">
-  #VCalendar_slots {
-    .v-calendar {
-      min-height: 400px;
-
-      .v-calendar-weekly__day {
-        padding: 2px;
-
-        .v-calendar-weekly__day-month {
-          left: 0;
-          text-align: center;
-          color: #fff;
-          top: -4px;
-          line-height: 30px;
-          font-weight: bold;
-          text-shadow: 0 0 1px #000;
-          font-size: 18px;
-          width: 100%;
-        }
-
-        .v-calendar-weekly__day-label {
-          width: 100%;
-          height: 100%;
-          color: white;
-          font-size: 30px;
-          text-align: center;
-          font-weight: bold;
-          line-height: 70px;
-          text-shadow: 0 0 1px black;
-
-          &:hover {
-            text-decoration: none;
-          }
-        }
-
-        &.v-present .v-calendar-weekly__day-label {
-          border: none;
-        }
-      }
-    }
-    .bar-chart {
-      height: 100%;
-
-      .bar {
-        float: left;
-        height: 100%;
-        cursor: pointer;
-      }
-    }
-  }
-</style>

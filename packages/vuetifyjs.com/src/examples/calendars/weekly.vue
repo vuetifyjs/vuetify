@@ -1,48 +1,50 @@
 <template>
   <v-layout>
     <v-flex>
-      <!-- now is normally calculated by itself, but to keep the calendar in this date range to view events -->
-      <v-calendar
-        ref="calendar"
-        :now="today"
-        :value="today"
-        color="primary"
-        type="week"
-      >
-        <!-- the events at the top (all-day) -->
-        <template
-          slot="dayHeader"
-          slot-scope="{ date }"
+      <v-sheet height="400">
+        <!-- now is normally calculated by itself, but to keep the calendar in this date range to view events -->
+        <v-calendar
+          ref="calendar"
+          :now="today"
+          :value="today"
+          color="primary"
+          type="week"
         >
-          <template v-for="event in eventsMap[date]">
-            <!-- all day events don't have time -->
-            <div
-              v-if="!event.time"
-              :key="event.title"
-              class="my-event"
-              @click="open(event)"
-              v-html="event.title"
-            ></div>
+          <!-- the events at the top (all-day) -->
+          <template
+            slot="dayHeader"
+            slot-scope="{ date }"
+          >
+            <template v-for="event in eventsMap[date]">
+              <!-- all day events don't have time -->
+              <div
+                v-if="!event.time"
+                :key="event.title"
+                class="my-event"
+                @click="open(event)"
+                v-html="event.title"
+              ></div>
+            </template>
           </template>
-        </template>
-        <!-- the events at the bottom (timed) -->
-        <template
-          slot="dayBody"
-          slot-scope="{ date, timeToY, minutesToPixels }"
-        >
-          <template v-for="event in eventsMap[date]">
-            <!-- timed events -->
-            <div
-              v-if="event.time"
-              :key="event.title"
-              :style="{ top: timeToY(event.time) + 'px', height: minutesToPixels(event.duration) + 'px' }"
-              class="my-event with-time"
-              @click="open(event)"
-              v-html="event.title"
-            ></div>
+          <!-- the events at the bottom (timed) -->
+          <template
+            slot="dayBody"
+            slot-scope="{ date, timeToY, minutesToPixels }"
+          >
+            <template v-for="event in eventsMap[date]">
+              <!-- timed events -->
+              <div
+                v-if="event.time"
+                :key="event.title"
+                :style="{ top: timeToY(event.time) + 'px', height: minutesToPixels(event.duration) + 'px' }"
+                class="my-event with-time"
+                @click="open(event)"
+                v-html="event.title"
+              ></div>
+            </template>
           </template>
-        </template>
-      </v-calendar>
+        </v-calendar>
+      </v-sheet>
     </v-flex>
   </v-layout>
 </template>
@@ -90,9 +92,6 @@
 </script>
 
 <style lang="stylus" scoped>
-  .v-calendar {
-    height: 400px;
-  }
   .my-event {
     overflow: hidden;
     text-overflow: ellipsis;

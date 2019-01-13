@@ -2,13 +2,15 @@
   <v-layout wrap>
 
     <v-flex xs12 class="mb-3">
-      <v-calendar
-        ref="calendar"
-        v-model="start"
-        :type="type"
-        :end="end"
-        color="primary"
-      ></v-calendar>
+      <v-sheet height="500">
+        <v-calendar
+          ref="calendar"
+          v-model="start"
+          :type="type"
+          :end="end"
+          color="primary"
+        ></v-calendar>
+      </v-sheet>
     </v-flex>
 
     <v-flex sm4 xs12 class="text-sm-left text-xs-center">
@@ -51,9 +53,3 @@
     })
   }
 </script>
-
-<style lang="stylus" scoped>
-  .v-calendar {
-    height: 500px;
-  }
-</style>

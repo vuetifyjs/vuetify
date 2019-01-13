@@ -161,54 +161,58 @@
     </v-flex>
     <v-flex sm12 lg9 class="pl-3">
 
-      <v-calendar
-        ref="calendar"
-        :type="type"
-        :start="start"
-        :end="end"
-        :min-weeks="minWeeks"
-        :max-days="maxDays"
-        :now="now"
-        :dark="dark"
-        :weekdays="weekdays"
-        :first-interval="intervals.first"
-        :interval-minutes="intervals.minutes"
-        :interval-count="intervals.count"
-        :interval-height="intervals.height"
-        :interval-style="intervalStyle"
-        :show-interval-label="showIntervalLabel"
-        :color="color"
-        v-model="start"
-      >
+      <v-sheet height="500">
 
-        <template slot="day" slot-scope="day">
-          <div
-            v-if="day.day % 3 === 0"
-            class="day"
-          >
-            day slot {{ day.date }}
-          </div>
-        </template>
+        <v-calendar
+          ref="calendar"
+          :type="type"
+          :start="start"
+          :end="end"
+          :min-weeks="minWeeks"
+          :max-days="maxDays"
+          :now="now"
+          :dark="dark"
+          :weekdays="weekdays"
+          :first-interval="intervals.first"
+          :interval-minutes="intervals.minutes"
+          :interval-count="intervals.count"
+          :interval-height="intervals.height"
+          :interval-style="intervalStyle"
+          :show-interval-label="showIntervalLabel"
+          :color="color"
+          v-model="start"
+        >
 
-        <template slot="dayHeader" slot-scope="day">
-          <div
-            v-if="day.weekday % 2"
-            class="dayHeader"
-          >
-            dayHeader slot {{ day.date }}
-          </div>
-        </template>
+          <template slot="day" slot-scope="day">
+            <div
+              v-if="day.day % 3 === 0"
+              class="day"
+            >
+              day slot {{ day.date }}
+            </div>
+          </template>
 
-        <template slot="dayBody" slot-scope="day">
-          <div
-            v-if="day.weekday % 3 === 2"
-            class="dayBody"
-          >
-            dayBody slot {{ day.date }}
-          </div>
-        </template>
+          <template slot="day-header" slot-scope="day">
+            <div
+              v-if="day.weekday % 2"
+              class="day-header"
+            >
+              day-header slot {{ day.date }}
+            </div>
+          </template>
 
-      </v-calendar>
+          <template slot="day-body" slot-scope="day">
+            <div
+              v-if="day.weekday % 3 === 2"
+              class="day-body"
+            >
+              day-body slot {{ day.date }}
+            </div>
+          </template>
+
+        </v-calendar>
+
+      </v-sheet>
 
     </v-flex>
   </v-layout>
@@ -345,18 +349,13 @@
 
 <style scoped>
 
-  .v-calendar {
-    min-height: 500px;
-    max-height: 700px;
-  }
-
   .feature-pane {
     position: relative;
     padding-top: 30px;
     box-shadow: 0 0 10px rgba(0,0,0,0.3);
   }
 
-  .dayHeader {
+  .day-header {
     margin: 0px 2px 2px 2px;
     padding: 2px 6px;
     background-color: #1867c0;
@@ -369,7 +368,7 @@
     overflow: hidden;
   }
 
-  .dayBody {
+  .day-body {
     position: absolute;
     top: 400px;
     height: 36px;
