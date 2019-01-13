@@ -1,0 +1,64 @@
+{
+  "header": "# Dialog",
+  "headerText": "The `v-dialog` component inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks. Use dialogs sparingly because they are interruptive.",
+  "examples": {
+    "usage": {
+      "desc": "A dialog contains two slots, one for its activator and one for its content (default). Good for Privacy Policies."
+    },
+    "withoutActivator": {
+      "header": "### Without activator",
+      "desc": "If for some reason you are unable to use the activator slot, be sure to add the `.stop` modifier to the event that triggers the dialog.",
+      "uninverted": true
+    },
+    "modal": {
+      "header": "### Modal",
+      "desc": "Similar to a Simple Dialog, except that it's not dismissed when touching outside.",
+      "uninverted": true
+    },
+    "fullscreen": {
+      "header": "### Fullscreen",
+      "desc": "Due to limited space, full-screen dialogs may be more appropriate for mobile devices than dialogs used on devices with larger screens.",
+      "uninverted": true
+    },
+    "form": {
+      "header": "### Form",
+      "desc": "Just a simple example of a form in a dialog.",
+      "uninverted": true
+    },
+    "scrollable": {
+      "header": "### Scrollable",
+      "desc": "Example of a dialog with scrollable content.",
+      "uninverted": true
+    },
+    "overflowed": {
+      "header": "### Overflowed",
+      "desc": "Modals that do not fit within the available window space will scroll the container.",
+      "uninverted": true
+    },
+    "advanced": {
+      "header": "### Simple dialogs",
+      "desc": "Choosing an option immediately closes the menu. Touching outside of the dialog, or pressing Back, cancels the action and closes the dialog.",
+      "uninverted": true
+    },
+    "loader": {
+      "header": "### Loader",
+      "desc": "The `v-dialog` component makes it easy to create a customized loading experience for your application."
+    }
+  },
+  "props": {
+    "dark": "Mixins.Themeable.props.dark",
+    "disabled": "Disables the ability to open the dialog",
+    "fullWidth": "Specifies the modal to force 100% width",
+    "fullscreen": "Changes layout for fullscreen display",
+    "hideOverlay": "Hides the display of the overlay",
+    "lazy": "Mixins.Bootable.props.lazy",
+    "light": "Mixins.Themeable.props.light",
+    "maxWidth": "The maximum width of the content",
+    "noClickAnimation": "Disables the bounce effect when clicking outside of a `v-dialog`'s content when using the **persistent** prop",
+    "origin": "Mixins.Transitionable.props.origin",
+    "persistent": "Clicking outside will not dismiss the dialog",
+    "scrollable": "When set to true, expects a card, card-title, card-text and card-actions. Additionally, card-text should have specified height. Will set card-text to overflow-y",
+    "transition": "Mixins.Transitionable.props.transition",
+    "width": "Sets the dialog width"
+  }
+}

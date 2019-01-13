@@ -1,0 +1,37 @@
+{
+  "header": "# Image",
+  "headerText": "The `v-img` component is packed with features to support rich media. Combined with the [vuetify-loader](https://github.com/vuetifyjs/vuetify-loader), you can add dynamic progressive images to provide a better user experience.",
+  "examples": {
+    "usage": {
+      "desc": ""
+    },
+    "containCover": {
+      "header": "### Contain and Cover",
+      "desc": "If the provided aspect ratio doesn't match that of the actual image, the default behavior is to fill as much space as possible, clipping the sides of the image. Enabling the `contain` prop will prevent this, but will result in empty space at the sides."
+    },
+    "maxHeight": {
+      "header": "### Height",
+      "desc": "`v-img` will automatically grow to the size of its `src`, preserving the correct aspect ratio. You can limit this with the `height` and `max-height` props."
+    },
+    "ratio": {
+      "header": "### Fixed ratio",
+      "desc": ""
+    },
+    "gradients": {
+      "header": "### Gradients",
+      "desc": "The `gradient` prop can be used to apply a simple gradient overlay to the image. More complex gradients should be written as a class on the content slot instead."
+    }
+  },
+  "props": {
+    "alt": "Alternate text for screen readers. Leave empty for decorative images",
+    "aspectRatio": "Calculated as `width/height`, so for a 1920x1080px image this will be `1.7778`. Will be calculated automatically if omitted",
+    "contain": "Prevents the image from being cropped if it doesn't fit",
+    "gradient": "Overlays a gradient onto the image. Only supports [linear-gradient](https://developer.mozilla.org/en-US/docs/Web/CSS/linear-gradient) syntax, anything else should be done with classes (see examples)",
+    "lazySrc": "Something to show while waiting for the main image to load, typically a small base64-encoded thumbnail. Has a slight blur filter applied.\n\nUse [vuetify-loader](https://github.com/vuetifyjs/vuetify-loader) to generate automatically",
+    "position": "Overrides the default to change which parts get cropped off. Uses the same syntax as [`background-position`](https://developer.mozilla.org/en-US/docs/Web/CSS/background-position)",
+    "sizes": "For use with `srcset`, see [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-sizes)",
+    "src": "The image URL. This prop is mandatory",
+    "srcset": "A set of alternate images to use based on device size. [Read more...](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-srcset)",
+    "transition": "The transition to use when switching from `lazy-src` to `src`"
+  }
+}

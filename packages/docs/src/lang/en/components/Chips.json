@@ -1,0 +1,44 @@
+{
+  "header": "# Chip",
+  "headerText": "The `v-chip` component is used to convey small pieces of information. Using the `close` property, the chip becomes interactive, allowing user interaction.",
+  "examples": {
+    "usage": {
+      "desc": "Chips come in 4 primary variations. Regular, with icon, with portrait and closeable.",
+      "uninverted": true
+    },
+    "colored": {
+      "header": "### Colored",
+      "desc": "Any color from the Material Design palette can be used to change a chips color."
+    },
+    "icon": {
+      "header": "### Icon",
+      "desc": "Chips can use text or any icon available in the Material Icons font library."
+    },
+    "outline": {
+      "header": "### Outline",
+      "desc": "Outlined chips inherit their border color from the current text color."
+    },
+    "label": {
+      "header": "### Label",
+      "desc": "Label chips use the `v-card` border-radius."
+    },
+    "closable": {
+      "header": "### Closable",
+      "desc": "Closable chips can be controlled with a v-model. Listen to the `input` event if you want to know when a chip has been closed.",
+      "uninverted": true
+    },
+    "inSelects": {
+      "header": "### In selects",
+      "desc": "Selects can use chips to display the selected data. Try adding your own tags below.",
+      "uninverted": true
+    }
+  },
+  "props": {
+    "close": "Adds remove button",
+    "disabled": "Disables the chip, making it un-selectable",
+    "label": "Removes circle edges",
+    "outline": "Removes background and applies border and text color",
+    "selected": "Applies a selection color to the chip. Primarily used for displaying highlight context in `v-select`",
+    "small": "Decreases the chip size"
+  }
+}

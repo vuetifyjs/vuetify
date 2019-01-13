@@ -1,0 +1,23 @@
+{
+  "api": "## API",
+  "default": "По умолчанию",
+  "description": "Описание",
+  "examples": "## Примеры",
+  "howItWorks": "## Как это работает",
+  "name": "Имя",
+  "openInCodePen": "Открыть в Codepen",
+  "options": "Опции",
+  "props": "Свойства",
+  "showExample": "Показать пример",
+  "slots": "Slots",
+  "supplemental": "Дополнительный",
+  "type": "Тип",
+  "introduction": "Введение",
+  "upNext": "## Что дальше?",
+  "usage": "## Применение",
+  "parameters": "Параметры",
+  "return": "Возвращает",
+  "example": "Пример",
+  "signature": "Сигнатура",
+  "value": "Значение"
+}

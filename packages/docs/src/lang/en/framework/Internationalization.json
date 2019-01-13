@@ -1,0 +1,22 @@
+{
+  "header": "# Internationalization",
+  "headerText": "Vuetify supports language internationalization of its components. When installing Vuetify you can specify available locales and the currently active locale with the `lang` option. See the Getting started section. ",
+  "gettingStarted": "## Getting started",
+  "gettingStartedText": "To set the available locales or the current locale, supply the `lang` option when installing Vuetify. The provided `locales` property will be merged with the already existing locales. You can change the locale during runtime through the `$vuetify` object on the Vue instance.",
+  "availableLocalesText": "Currently Vuetify provides translations in the following languages:",
+  "createTranslation": "## Create translation",
+  "createTranslationText": "To create your own translation, use the code below or copy and rename the file `vuetify/src/locale/en.ts` to your project and make your changes.",
+  "customComponents": "## Custom components",
+  "customComponentsText": "If you are building custom Vuetify components that need to hook into the internationalization engine, you can use the `t` function which exists both directly on the `$vuetify` object and on `$vuetify.lang`.",
+  "api": {
+    "current": "Current locale",
+    "locales": "Available locales",
+    "t": "Translation function used internally"
+  },
+  "vueI18nHeader": "## Vue i18n",
+  "vueI18nText1": "If you are using the vue-i18n package, you can very easily integrate it with Vuetify. This allows you to keep all of your translations in one place. Simply create an entry for $vuetify within your messages and add the corresponding language changes. Then hook up vue-i18n to Vuetify by supplying a custom translation function (as seen in the example below). For a complete list of all available keys, [navigate here](#create-translation).",
+  "vueI18nText2": "An important note when using external localization plugins is that vuetify will not automatically fall back to using english if no localization exists for the current locale. So be sure to supply the plugin with the english localizations as well as your own.",
+  "rtlHeader": "## RTL support",
+  "rtlText1": "Vuetify supports RTL (right to left) languages through the **rtl** prop during bootstrap. This value is dynamic and will apply custom styles to change the orientation of your components.",
+  "rtlText2": "That's it! In order to change this value dynamically, you can modify the **$vuetify.rtl** property at any time within your application."
+}

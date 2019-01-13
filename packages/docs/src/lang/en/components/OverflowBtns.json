@@ -1,0 +1,13 @@
+{
+  "header": "# Overflow Button",
+  "headerText": "Coming soon...",
+  "examples": {},
+  "props": {
+    "editable": "Creates an editable button",
+    "overflow": "Creates an overflow button",
+    "segmented": "Creates a segmented button"
+  },
+  "slots": {},
+  "scopedSlots": {},
+  "events": {}
+}

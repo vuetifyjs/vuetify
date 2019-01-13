@@ -1,0 +1,19 @@
+{
+  "header": "# Hover",
+  "headerText": "The `v-hover` component provides a clean interface for handling hover states for any component.",
+  "examples": {
+    "usage": {
+      "desc": "Easily change the elevation of a card."
+    },
+    "transition": {
+      "header": "Transitions",
+      "desc": "### Create highly customized components that respond to user interaction."
+    }
+  },
+  "props": {
+    "disabled": "Turns off hover functionality"
+  },
+  "scopedSlots": {
+    "default": "The default scoped slot"
+  }
+}

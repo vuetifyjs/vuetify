@@ -186,7 +186,7 @@ export default mixins(Colorable, Themeable).extend({
         modifiers: { quiet: true },
         name: 'resize',
         value: this.onResize
-      }] as any,
+      }],
       class: this.classes
     }, children)
   }

@@ -200,6 +200,10 @@ const VSelect = {
     {
       name: 'valueComparator',
       default: '(a: any, b: any) => boolean'
+    },
+    {
+      name: 'menuProps',
+      default: '{"closeOnClick":false, "closeOnContentClick":false, "openOnClick":false, "maxHeight":300}'
     }
   ],
   slots: inputSlots.concat(['no-data', 'label', 'progress']),
@@ -239,12 +243,40 @@ const VSelect = {
   ].concat(validatableEvents)
 }
 
+const VTreeviewScopedProps = {
+  item: 'any',
+  leaf: 'boolean',
+  selected: 'boolean',
+  indeterminate: 'boolean',
+  active: 'boolean',
+  open: 'boolean'
+}
+
 module.exports = {
   '$vuetify': {
     functions: [
       {
         name: 'goTo',
         signature: '(target: string | number | HTMLElement | VueComponent, options?: object) => void'
+      }
+    ]
+  },
+  'internationalization': {
+    api: [
+      {
+        name: 'locales',
+        default: '{ en: VuetifyLocale }',
+        type: 'Record<string, VuetifyLocale>'
+      },
+      {
+        name: 'current',
+        default: 'en',
+        type: 'string'
+      },
+      {
+        name: 't',
+        default: '(key: string, ...params: Array<string | number>): string',
+        type: 'Function'
       }
     ]
   },
@@ -365,6 +397,15 @@ module.exports = {
   'v-card': {
     slots: ['default']
   },
+  'v-card-actions': {
+    slots: ['default']
+  },
+  'v-card-text': {
+    slots: ['default']
+  },
+  'v-card-title': {
+    slots: ['default']
+  },
   'v-carousel': {
     slots: ['default'],
     events: [
@@ -453,27 +494,27 @@ module.exports = {
     ],
     functions: [
       {
-        name: 'title-date-format',
+        name: 'titleDateFormat',
         signature: '(date: string, locale: string): string'
       },
       {
-        name: 'day-format',
+        name: 'dayFormat',
         signature: '(date: string, locale: string): string'
       },
       {
-        name: 'header-date-format',
+        name: 'headerDateFormat',
         signature: '(date: string, locale: string): string'
       },
       {
-        name: 'month-format',
+        name: 'monthFormat',
         signature: '(date: string, locale: string): string'
       },
       {
-        name: 'year-format',
+        name: 'yearFormat',
         signature: '(date: string, locale: string): string'
       },
       {
-        name: 'allowed-dates',
+        name: 'allowedDates',
         signature: '(date: string): boolean'
       }
     ]
@@ -484,12 +525,12 @@ module.exports = {
   'v-divider': {
     props: [
       {
-        "name": "dark",
-        "source": 'themeable'
+        'name': 'dark',
+        'source': 'themeable'
       },
       {
-        "name": "light",
-        "source": 'themeable'
+        'name': 'light',
+        'source': 'themeable'
       }
     ]
   },
@@ -589,6 +630,10 @@ module.exports = {
         signature: '(): void'
       },
       {
+        name: 'resetValidation',
+        signature: '(): void'
+      },
+      {
         name: 'validate',
         signature: '(): boolean'
       }
@@ -607,7 +652,7 @@ module.exports = {
         props: {
           hover: 'boolean'
         }
-      },
+      }
     ]
   },
   'v-icon': {
@@ -686,7 +731,7 @@ module.exports = {
         value: 'void'
       },
       {
-        name: 'right',
+        name: 'previous',
         value: 'void'
       }
     ]
@@ -760,6 +805,20 @@ module.exports = {
         value: 'array'
       }
     ].concat(validatableEvents)
+  },
+  'v-sheet': {
+    slots: ['default'],
+    props: [
+      {
+        name: 'tag',
+        type: 'String',
+        default: 'div'
+      },
+      {
+        name: 'tile',
+        type: 'Boolean'
+      }
+    ]
   },
   'v-speed-dial': {
     slots: ['activator', 'default']
@@ -854,5 +913,36 @@ module.exports = {
   },
   'v-tooltip': {
     slots: ['activator', 'default']
+  },
+  'v-treeview': {
+    scopedSlots: [
+      {
+        name: 'prepend',
+        props: VTreeviewScopedProps
+      },
+      {
+        name: 'label',
+        props: VTreeviewScopedProps
+      },
+      {
+        name: 'append',
+        props: VTreeviewScopedProps
+      }
+    ]
+  },
+  'v-window': {
+    props: [
+      {
+        name: 'touch',
+        example: {
+          left: 'Function',
+          right: 'Function'
+        }
+      }
+    ],
+    slots: ['default']
+  },
+  'v-window-item': {
+    slots: ['default']
   }
 }

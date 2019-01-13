@@ -1,0 +1,12 @@
+{
+  "header": "# Aspect Ratios",
+  "headerText": "The `v-responsive` component can be used to fix any section to a specific aspect ratio",
+  "examples": {
+    "ratios": {
+      "desc": "Specify a custom aspect-ratio"
+    }
+  },
+  "props": {
+    "aspectRatio": "Sets a base aspect ratio, calculated as width/height. This will only set a **minimum** height, the component can still grow if it has lots of content"
+  }
+}

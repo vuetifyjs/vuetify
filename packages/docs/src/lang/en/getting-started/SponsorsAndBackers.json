@@ -1,0 +1,19 @@
+{
+  "header": "# Support Vuetify's development",
+  "headerText": "Vuetify is an open source project under the [MIT license](https://opensource.org/licenses/MIT). It is and will always be free to use. The time and dedication it takes to maintain the core framework and all supplementing packages is substantial. One-time Donors, Patreon Backers, Affiliates and Special Sponsor contributions allow for continual development of additional functionality even after the completion of Material Design spec. You can  support Vuetify’s open-source project by becoming a backer through one of the following means:",
+  "backersSubHeader": "### Diamond ($500/mo)",
+  "backersSubHeader2": "### Palladium ($250/mo)",
+  "backersSubHeader3": "### Platinum ($100/mo)",
+  "backersSubHeader4": "### Gold ($50/mo)",
+  "affiliatesHeader": "### Affiliates",
+  "openCollective": "### Open Collective",
+  "openCollectiveBlurb": "Open Collective backers are monthly donors that directly support the Core Development Team.",
+  "patrons": "### Patreon Backers",
+  "patreon": "### Patreon",
+  "patreonBlurb": "Patreon backers are monthly donors that directly support the Author, John Leider.",
+  "sponsorsHeader": "## Service sponsors",
+  "oneTime": "### One Time Donation",
+  "oneTimeBlurb": "Vuetify is grateful for any one-time donations received through:",
+  "questionHeader": "## Have additional questions?",
+  "questionButton": "Contact Us"
+}

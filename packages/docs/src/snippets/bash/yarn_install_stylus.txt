@@ -1,0 +1,3 @@
+$ yarn add stylus stylus-loader style-loader css-loader -D
+// OR
+$ npm i stylus stylus-loader style-loader css-loader --save-dev

@@ -5,7 +5,7 @@ import Toggleable from '../../mixins/toggleable'
 import { factory as PositionableFactory } from '../../mixins/positionable'
 
 import mixins from '../../util/mixins'
-import { VNode, VNodeChildrenArrayContents } from 'vue'
+import { VNode } from 'vue'
 
 export default mixins(
   Colorable,
@@ -71,28 +71,22 @@ export default mixins(
   },
 
   render (h): VNode {
-    const children: VNodeChildrenArrayContents = []
-
-    if (this.isActive) {
-      children.push(
-        h('div', {
-          staticClass: 'v-snack',
-          class: this.classes,
-          on: this.$listeners
-        }, [
-          h('div', this.setBackgroundColor(this.color, {
-            staticClass: 'v-snack__wrapper'
-          }), [
-            h('div', {
-              staticClass: 'v-snack__content'
-            }, this.$slots.default)
-          ])
-        ])
-      )
-    }
-
     return h('transition', {
       attrs: { name: 'v-snack-transition' }
-    }, children)
+    }, this.isActive && [
+      h('div', {
+        staticClass: 'v-snack',
+        class: this.classes,
+        on: this.$listeners
+      }, [
+        h('div', this.setBackgroundColor(this.color, {
+          staticClass: 'v-snack__wrapper'
+        }), [
+          h('div', {
+            staticClass: 'v-snack__content'
+          }, this.$slots.default)
+        ])
+      ])
+    ])
   }
 })

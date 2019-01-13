@@ -1,0 +1,38 @@
+{
+  "header": "# Spacing",
+  "headerText": "Update your layout without creating new classes. Spacing helpers are useful for modifying the padding and margin of an element.",
+  "playgroundHeader": "## Playground",
+  "playgroundText1": "Use the playground to get a feel for what the different helper classes can do. For an explanation of how they work, see the **How it works** section below.",
+  "playgroundText2": "Use the controls above to try out the different spacing helpers",
+  "howText": "The helper classes apply **margin** or **padding** to an element ranging from _0 to 5_. Each size increment was designed to align with common Material Design spacings. These classes can be applied using the following format `{property}{direction}-{size}`.",
+  "propertyText": "The **property** applies the type of spacing:",
+  "properties": [
+    "`m` - applies `margin`",
+    "`p` - applies `padding`"
+  ],
+  "directionText": "The **direction** designates the side the property applies to:",
+  "directions": [
+    "`t` - applies the spacing for `*-top`",
+    "`b` - applies the spacing for `*-bottom`",
+    "`l` - applies the spacing for `*-left`",
+    "`r` - applies the spacing for `*-right`",
+    "`x` - applies the spacing for both `*-left` and `*-right`",
+    "`y` - applies the spacing for both `*-top` and `*-bottom`",
+    "`a` - applies the spacing for the property in all directions"
+  ],
+  "sizeText": "The **size** controls the increment of the property:",
+  "sizes": [
+    "`auto` - sets the spacing to `auto`",
+    "`0` - removes the spacing by setting it to `0`",
+    "`1` - sets the spacing to `$spacer * .25`",
+    "`2` - sets the spacing to `$spacer * .5`",
+    "`3` - sets the spacing to `$spacer`",
+    "`4` - sets the spacing to `$spacer * 1.5`",
+    "`5` - sets the spacing to `$spacer * 3`"
+  ],
+  "horizontalHeader": "Horizontal centering",
+  "horizontalText": "For block elements with a designated width, you can apply `.mx-auto` to horizontally center the content.",
+  "margin": "Margin",
+  "padding": "Padding",
+  "size": "Size"
+}

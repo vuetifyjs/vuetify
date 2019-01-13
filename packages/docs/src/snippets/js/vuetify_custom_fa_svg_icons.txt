@@ -1,0 +1,28 @@
+import Vue from 'vue'
+import Vuetify from 'vuetify'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faBars } from '@fortawesome/pro-light-svg-icons'
+import { faVuejs } from '@fortawesome/free-brands-svg-icons'
+
+Vue.component('font-awesome-icon', FontAwesomeIcon)
+library.add(faBars, faVuejs)
+
+Vue.use(Vuetify, {
+  icons: {
+    // set menu to light (default is solid)
+    'menu': {
+      component: FontAwesomeIcon,
+      props: {
+        icon: ['fal', 'bars']
+      }
+    },
+    // reusable custom icon
+    'vuejs': {
+      component: FontAwesomeIcon,
+      props: {
+        icon: ['fab', 'vuejs']
+      }
+    }
+  }
+})

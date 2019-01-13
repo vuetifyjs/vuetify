@@ -2,7 +2,7 @@
 MAKE SURE TO READ THE CONTRIBUTING GUIDE BEFORE CREATING A PR
 https://github.com/vuetifyjs/vuetify/blob/master/.github/CONTRIBUTING.md
 
-Testing and markup sections can be removed for doumentation changes
+Testing and markup sections can be removed for documentation changes
 -->
 
 <!-- Provide a general summary of your changes in the Title above -->

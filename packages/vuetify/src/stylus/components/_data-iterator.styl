@@ -42,13 +42,18 @@ theme(v-dataiterator, "v-data-iterator")
   &__select
     display: flex
     align-items: center
-    justify-content: center
+    justify-content: flex-end
     margin-right: 14px
+    white-space: nowrap
 
     .v-select
+      flex: 0 1 0
       margin: 13px 0 13px 34px
       padding: 0
       position: initial
+
+    .v-select__selections
+      flex-wrap: nowrap
 
       .v-select__selection--comma
         font-size: 12px

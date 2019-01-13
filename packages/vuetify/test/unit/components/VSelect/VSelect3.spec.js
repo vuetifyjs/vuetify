@@ -11,29 +11,34 @@ test('VSelect', ({ mount, compileToFunctions }) => {
   it('should open the select when focused and enter, space, up or down are pressed', async () => {
     const wrapper = mount(VSelect)
 
+    wrapper.vm.hasMouseDown = true
     wrapper.trigger('mouseup')
 
     expect(wrapper.vm.isMenuActive).toBe(false)
 
     wrapper.setProps({ box: true })
+    wrapper.vm.hasMouseDown = true
     wrapper.first('.v-input__slot').trigger('mouseup')
 
     expect(wrapper.vm.isMenuActive).toBe(true)
 
     wrapper.setData({ isMenuActive: false })
     wrapper.setProps({ box: false, solo: true })
+    wrapper.vm.hasMouseDown = true
     wrapper.first('.v-input__slot').trigger('mouseup')
 
     expect(wrapper.vm.isMenuActive).toBe(true)
 
     wrapper.setData({ isMenuActive: false })
     wrapper.setProps({ solo: false, soloInverted: true })
+    wrapper.vm.hasMouseDown = true
     wrapper.first('.v-input__slot').trigger('mouseup')
 
     expect(wrapper.vm.isMenuActive).toBe(true)
 
     wrapper.setData({ isMenuActive: false })
     wrapper.setProps({ soloInverted: false, outline: true })
+    wrapper.vm.hasMouseDown = true
     wrapper.first('.v-input__slot').trigger('mouseup')
 
     expect(wrapper.vm.isMenuActive).toBe(true)
@@ -159,7 +164,7 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     wrapper.vm.$on('change', change)
 
-    wrapper.setProps({ value: 'foo' })
+    wrapper.setProps({ value: 'bar' })
 
     expect(change).not.toBeCalled()
 
@@ -188,5 +193,29 @@ test('VSelect', ({ mount, compileToFunctions }) => {
     expect(menu.nudgeRight).toBe(5)
     expect(menu.nudgeBottom).toBe(5)
     expect(menu.nudgeLeft).toBe(5)
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/5774
+  it('should close menu on tab down when no selectedIndex', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        items: ['foo', 'bar']
+      }
+    })
+
+    const menu = wrapper.first('.v-input__slot')
+    const input = wrapper.first('input')
+
+    menu.trigger('click')
+
+    expect(wrapper.vm.isFocused).toBe(true)
+    expect(wrapper.vm.isMenuActive).toBe(true)
+
+    input.trigger('keydown.tab')
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.isFocused).toBe(false)
+    expect(wrapper.vm.isMenuActive).toBe(false)
   })
 })

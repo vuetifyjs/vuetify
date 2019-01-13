@@ -1,0 +1,31 @@
+{
+  "header": "# Breadcrumbs",
+  "headerText": "The `v-breadcrumbs` component is a navigational helper for pages. It can accept a **Material Icons** icon or text characters as a divider. An array of objects can be passed to the **items** property of the component.  Additionally, a scoped slot exists for more control of the breadcrumbs, either utilizing `v-breadcrumbs-item` or other custom markup.",
+  "examples": {
+    "usage": {
+      "desc": "By default, breadcrumbs use a text divider. This can be any string."
+    },
+    "iconDividers": {
+      "header": "### Icon dividers",
+      "desc": "For the icon variant, breadcrumbs can use any icon in Material Design Icons."
+    },
+    "itemSlot": {
+      "header": "### Item slot",
+      "desc": "You can use the scoped `item` slot to customize each breadcrumb."
+    }
+  },
+  "props": {
+    "divider": "Specifies the dividing character",
+    "icons": "Specifies that the dividers are icons",
+    "items": "An array of objects describing each breadcrumb. See `v-breadcrumbs-item` API section for all object properties. Use `text` property for the breadcrumb text.",
+    "justifyCenter": "Align the breadcrumbs center",
+    "justifyEnd": "Align the breadcrumbs at the end",
+    "large": "Increase the font-size of the breadcrumb item text"
+  },
+  "slots": {
+    "divider": "Specifies the divider content"
+  },
+  "scopedSlots": {
+    "item": "Scoped slot for overriding default breadcrumb item rendering"
+  }
+}

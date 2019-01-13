@@ -95,7 +95,7 @@ export default {
       // We can't actually use the mixin directly because
       // it's made for standalone components, but its
       // genInput method is exactly what we need
-      return Selectable.methods.genInput.call(this, ...args)
+      return Selectable.options.methods.genInput.call(this, ...args)
     },
     genLabel () {
       return this.$createElement(VLabel, {
@@ -120,7 +120,7 @@ export default {
           value: this.value,
           ...this.$attrs
         }),
-        !this.isDisabled && this.genRipple(this.setTextColor(this.computedColor)),
+        this.genRipple(this.setTextColor(this.computedColor)),
         this.$createElement(VIcon, this.setTextColor(this.computedColor, {
           props: {
             dark: this.dark,
@@ -129,8 +129,9 @@ export default {
         }), this.computedIcon)
       ])
     },
-    onFocus () {
+    onFocus (e) {
       this.isFocused = true
+      this.$emit('focus', e)
     },
     onBlur (e) {
       this.isFocused = false

@@ -2,7 +2,8 @@
 @import '../theme'
 
 v-date-picker-table($material)
-  th
+  th,
+  .v-date-picker-table--date__week
     color: $material.text.disabled
 
 theme(v-date-picker-table, "v-date-picker-table")
@@ -78,3 +79,6 @@ theme(v-date-picker-table, "v-date-picker-table")
 
 .v-date-picker-table--month .v-date-picker-table__events
   bottom: 8px
+
+.v-date-picker-table--disabled
+  pointer-events: none

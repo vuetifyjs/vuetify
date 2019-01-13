@@ -13,6 +13,30 @@ test('VDatePickerTitle.js', ({ mount }) => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('should render disabled component and match snapshot', () => {
+    const wrapper = mount(VDatePickerTitle, {
+      propsData: {
+        year: '1234',
+        date: '2005-11-01',
+        disabled: true
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  it('should render readonly component and match snapshot', () => {
+    const wrapper = mount(VDatePickerTitle, {
+      propsData: {
+        year: '1234',
+        date: '2005-11-01',
+        readonly: true
+      }
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
   it('should render component when selecting year and match snapshot', () => {
     const wrapper = mount(VDatePickerTitle, {
       propsData: {

@@ -1,0 +1,38 @@
+{
+  "header": "# Divider",
+  "headerText": "The `v-divider` component is used to separate sections of lists.",
+  "examples": {
+    "usage": {
+      "desc": "Full bleed dividers extend the entire content width."
+    },
+    "lightAndDark": {
+      "header": "### Light and dark",
+      "desc": "Dividers have light and dark variants.",
+      "uninverted": true
+    },
+    "inset": {
+      "header": "### Inset dividers",
+      "desc": "Inset dividers are moved 72px to the right. This will cause them to line up with list items."
+    },
+    "subheaders": {
+      "header": "### Subheaders and dividers",
+      "desc": "Subheaders can be lined up with inset dividers by using the same prop."
+    },
+    "dividerList": {
+      "header": "### List dividers",
+      "desc": "Inset dividers and subheaders can help break up content"
+    },
+    "dividerListPortrait": {
+      "header": "### Dividers in Portrait View",
+      "desc": "Create custom cards to fit any use-case"
+    },
+    "vertical": {
+      "header": "### Vertical dividers",
+      "desc": "Vertical dividers give you even more tools for unique layouts."
+    }
+  },
+  "props": {
+    "inset": "Adds indentation (72px) for **normal** dividers, reduces max height for **vertical**.",
+    "vertical": "Creates a vertical divider"
+  }
+}
