@@ -5,6 +5,7 @@ import './VAlert.sass'
 import VSheet from '../VSheet'
 
 // Components
+import VBtn from '../VBtn'
 import VIcon from '../VIcon'
 
 // Mixins
@@ -92,24 +93,25 @@ export default mixins(
     __cachedDismissible (): VNode | null {
       if (!this.dismissible) return null
 
-      return this.$createElement('a', {
+      return this.$createElement(VBtn, {
         staticClass: 'v-alert__dismissible',
-        on: { click: () => { this.isActive = false } }
+        props: { icon: true },
+        attrs: {
+          'aria-label': this.$vuetify.t(this.closeLabel)
+        },
+        on: {
+          click: () => (this.isActive = false)
+        }
       }, [
         this.$createElement(VIcon, {
-          attrs: {
-            'aria-hidden': false,
-            'aria-label': this.$vuetify.t(this.closeLabel)
-          },
           props: {
-            color: this.iconColor,
-            right: true
+            color: this.iconColor
           }
         }, '$vuetify.icons.cancel')
       ])
     },
     __cachedIcon (): VNode | null {
-      if (!this.computedIcon || this.dense) return null
+      if (!this.computedIcon) return null
 
       return this.$createElement(VIcon, {
         staticClass: 'v-alert__icon',
@@ -120,6 +122,7 @@ export default mixins(
       const classes: Record<string, boolean> = {
         ...VSheet.options.computed.classes.call(this),
         'v-alert--border': Boolean(this.border),
+        'v-alert--dense': this.dense,
         'v-alert--outline': this.hasOutline,
         'v-alert--prominent': this.prominent
       }

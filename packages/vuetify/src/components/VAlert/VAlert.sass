@@ -80,10 +80,6 @@
 .v-alert__content
   flex: 1 1 auto
 
-.v-alert__dismissible
-  align-self: flex-start
-  display: inline-flex
-
 .v-alert__icon
   border-radius: 50%
   height: 24px
@@ -98,6 +94,10 @@
   @each $direction in ['top', 'right', 'bottom', 'left']
     &-#{$direction}
       padding-#{$direction}: 24px
+
+.v-alert--dense
+  padding-top: 8px
+  padding-bottom: 8px
 
 .v-alert--outline
   background: transparent !important

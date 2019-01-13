@@ -7,13 +7,18 @@ exports[`VAlert.ts should be dismissible 1`] = `
 >
   <div class="v-alert__content">
   </div>
-  <a class="v-alert__dismissible">
-    <i aria-label="$vuetify.close"
-       class="v-icon v-icon--right material-icons theme--light"
-    >
-      $vuetify.icons.cancel
-    </i>
-  </a>
+  <button type="button"
+          class="v-alert__dismissible v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--default"
+          aria-label="$vuetify.close"
+  >
+    <span class="v-btn__content">
+      <i aria-hidden="true"
+         class="v-icon material-icons theme--light"
+      >
+        $vuetify.icons.cancel
+      </i>
+    </span>
+  </button>
 </div>
 
 `;
@@ -43,13 +48,18 @@ exports[`VAlert.ts should have a close icon 1`] = `
 <div class="v-alert v-sheet theme--light">
   <div class="v-alert__content">
   </div>
-  <a class="v-alert__dismissible">
-    <i aria-label="$vuetify.close"
-       class="v-icon v-icon--right material-icons theme--light"
-    >
-      $vuetify.icons.cancel
-    </i>
-  </a>
+  <button type="button"
+          class="v-alert__dismissible v-btn v-btn--fab v-btn--flat v-btn--icon v-btn--round theme--light v-size--default"
+          aria-label="$vuetify.close"
+  >
+    <span class="v-btn__content">
+      <i aria-hidden="true"
+         class="v-icon material-icons theme--light"
+      >
+        $vuetify.icons.cancel
+      </i>
+    </span>
+  </button>
 </div>
 
 `;
