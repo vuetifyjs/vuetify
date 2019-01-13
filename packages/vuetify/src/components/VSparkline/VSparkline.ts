@@ -220,17 +220,20 @@ export default mixins<options &
         }, stops)
       ])
     },
-    genLabels () {
-      if (!this.hasLabels) return undefined
-
+    genG (children: VNode[]) {
       return this.$createElement('g', {
         style: {
           fontSize: '8',
           textAnchor: 'middle',
           dominantBaseline: 'mathematical',
-          fill: 'currentColor'
+          fill: this.color || 'currentColor'
         }
-      }, this.parsedLabels.map(this.genText))
+      }, children)
+    },
+    genLabels () {
+      if (!this.hasLabels) return undefined
+
+      return this.genG(this.parsedLabels.map(this.genText))
     },
     genPath () {
       const radius = this.smooth === true ? 8 : Number(this.smooth)
@@ -257,77 +260,7 @@ export default mixins<options &
         }
       }, [children])
     },
-    genBar (offsetX: number, id: string) {
-      const { maxY } = this.boundary
-      const rounding = typeof this.smooth === 'number'
-        ? this.smooth
-        : this.smooth ? 2 : 0
-
-      return this.$createElement('clipPath', {
-        attrs: {
-          id: `${id}-clip`
-        }
-      }, this.points.map((item, index) =>
-        this.$createElement('rect', {
-          attrs: {
-            x: item.x - offsetX,
-            y: 0,
-            width: this.lineWidth,
-            height: maxY - item.y,
-            rx: rounding,
-            ry: rounding
-          }
-        }, [
-          this.autoDraw ? this.$createElement('animate', {
-            attrs: {
-              attributeName: 'height',
-              from: 0,
-              to: maxY - item.y,
-              dur: `${this.autoDrawDuration}ms`,
-              fill: 'freeze'
-            }
-          }) : undefined as never
-        ])
-      ))
-    },
-    genBarLabels (props: BarText): VNode {
-      const offsetX = (props.offsetX || 0) / 2
-
-      return this.$createElement('g', {
-        style: {
-          fontSize: '8',
-          textAnchor: 'middle',
-          dominantBaseline: 'mathematical',
-          fill: this.color || 'currentColor'
-        }
-      }, props.points.map(item => (
-        this.$createElement('text', {
-          attrs: {
-            x: item.x - offsetX * -0.45 - 10,
-            y: props.boundary.maxY + 15
-          }
-        }, item.value.toString())
-      )))
-    }
-  },
-
-  render (h): VNode {
-    if (this.value.length < 2) return undefined as never
-
-    if (this.type === 'trend') {
-      return h('svg', this.setTextColor(this.color, {
-        attrs: {
-          'stroke-width': this.lineWidth || 1,
-          width: '100%',
-          height: '25%',
-          viewBox: `0 0 ${this.width} ${this.height}`
-        }
-      }), [
-        this.genGradient(),
-        this.genLabels(),
-        this.genPath()
-      ])
-    } else {
+    genBar () {
       if (!this.value || this.value.length < 2) return undefined as never
       const { width, height, padding, lineWidth } = this
       const viewWidth = width || this.value.length * Number(padding) * 2
@@ -350,24 +283,24 @@ export default mixins<options &
       props.lineWidth = lineWidth || (totalWidth - Number(padding || 5))
       props.offsetX = (totalWidth - props.lineWidth) / 2
 
-      return h('svg', {
+      return this.$createElement('svg', {
         attrs: {
-          width: width || '100%',
-          height: height || '25%',
+          width: '100%',
+          height: '25%',
           viewBox: `0 0 ${viewWidth} ${viewHeight}`
         }
       }, [
         this.genGradient(),
-        this.genBar(props.offsetX, 'sparkline-bar-' + this._uid),
+        this.genClipPath(props.offsetX, 'sparkline-bar-' + this._uid),
         this.showLabels ? this.genBarLabels(props as BarText) : undefined as never,
-        h('g', {
+        this.$createElement('g', {
           attrs: {
             transform: `scale(1,-1) translate(0,-${boundary.maxY})`,
             'clip-path': `url(#sparkline-bar-${this._uid}-clip)`,
             fill: `url(#${this._uid})`
           }
         }, [
-          h('rect', {
+          this.$createElement('rect', {
             attrs: {
               x: 0,
               y: 0,
@@ -377,6 +310,75 @@ export default mixins<options &
           })
         ])
       ])
+    },
+    genClipPath (offsetX: number, id: string) {
+      const { maxY } = this.boundary
+      const rounding = typeof this.smooth === 'number'
+        ? this.smooth
+        : this.smooth ? 2 : 0
+
+      return this.$createElement('clipPath', {
+        attrs: {
+          id: `${id}-clip`
+        }
+      }, this.points.map(item =>
+        this.$createElement('rect', {
+          attrs: {
+            x: item.x - offsetX,
+            y: 0,
+            width: this.lineWidth,
+            height: Math.max(maxY - item.y, 0),
+            rx: rounding,
+            ry: rounding
+          }
+        }, [
+          this.autoDraw ? this.$createElement('animate', {
+            attrs: {
+              attributeName: 'height',
+              from: 0,
+              to: maxY - item.y,
+              dur: `${this.autoDrawDuration}ms`,
+              fill: 'freeze'
+            }
+          }) : undefined as never
+        ])
+      ))
+    },
+    genBarLabels (props: BarText): VNode {
+      const offsetX = (props.offsetX || 0) / 2
+
+      const children = props.points.map(item => (
+        this.$createElement('text', {
+          attrs: {
+            x: item.x - offsetX * -0.45 - 10,
+            y: props.boundary.maxY + 10
+          }
+        }, item.value.toString())
+      ))
+
+      return this.genG(children)
+    },
+    genTrend () {
+      return this.$createElement('svg', this.setTextColor(this.color, {
+        attrs: {
+          'stroke-width': this.lineWidth || 1,
+          width: '100%',
+          height: '25%',
+          viewBox: `0 0 ${this.width} ${this.height}`
+        }
+      }), [
+        this.genGradient(),
+        this.genLabels(),
+        this.genPath()
+      ])
     }
+  },
+
+  render (h): VNode {
+    if (this.value.length < 2) return undefined as never
+
+    return this.type === 'trend'
+      ? this.genTrend()
+      : this.genBar()
   }
 })
