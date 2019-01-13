@@ -40,6 +40,19 @@ export default {
 
   methods: {
     onKeyDown (e) {
+      if (e.keyCode === keyCodes.esc) {
+        this.isActive = false
+      } else if (e.keyCode === keyCodes.tab) {
+        setTimeout(() => {
+          if (!this.$refs.content.contains(document.activeElement)) {
+            this.isActive = false
+          }
+        })
+      } else {
+        this.changeListIndex(e)
+      }
+    },
+    changeListIndex (e) {
       if ([
         keyCodes.down,
         keyCodes.up,
@@ -47,13 +60,6 @@ export default {
       ].includes(e.keyCode)
       ) e.preventDefault()
 
-      if ([keyCodes.esc, keyCodes.tab].includes(e.keyCode)) {
-        return this.isActive = false
-      }
-
-      this.changeListIndex(e)
-    },
-    changeListIndex (e) {
       // For infinite scroll and autocomplete, re-evaluate children
       this.getTiles()
 
