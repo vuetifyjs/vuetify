@@ -166,6 +166,43 @@
           This is an error alert.
         </v-alert>
       </v-flex>
+      <!-- Prominent outline -->
+      <v-flex>
+        <h3 class="title grey--text text-xs-center mb-4 mt-5">
+          Dense outline
+        </h3>
+        <v-alert
+          type="success"
+          dense
+          outlined
+        >
+          This is a success alert.
+        </v-alert>
+
+        <v-alert
+          type="info"
+          dense
+          outlined
+        >
+          This is an info alert.
+        </v-alert>
+
+        <v-alert
+          type="warning"
+          dense
+          outlined
+        >
+          This is a warning alert.
+        </v-alert>
+
+        <v-alert
+          type="error"
+          dense
+          outlined
+        >
+          This is an error alert.
+        </v-alert>
+      </v-flex>
       <!-- Outline -->
       <v-flex>
         <h3 class="title grey--text text-xs-center mb-4 mt-5">
@@ -279,7 +316,7 @@
 
         <v-alert
           color="error"
-          dense
+          :icon="false"
         >
           This is an error alert with no icon.
         </v-alert>
