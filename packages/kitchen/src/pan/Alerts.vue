@@ -138,6 +138,88 @@
           This is a error alert.
         </v-alert>
       </v-flex>
+
+      <v-flex>
+        <h3 class="title grey--text mb-4 mt-5">
+          Closable with outline
+        </h3>
+        <v-alert
+          v-model="alertDismissible"
+          dismissible
+          color="success"
+          outline
+        >
+          This is a closable success outline alert.
+        </v-alert>
+
+        <v-alert
+          v-model="alertDismissible"
+          dismissible
+          color="info"
+          outline
+        >
+          This is a closable info outline alert.
+        </v-alert>
+
+        <v-alert
+          v-model="alertDismissible"
+          dismissible
+          color="warning"
+          outline
+        >
+          This is a closable warning outline alert.
+        </v-alert>
+
+        <v-alert
+          v-model="alertDismissible"
+          dismissible
+          color="error"
+          outline
+        >
+          This is a closable error outline alert.
+        </v-alert>
+      </v-flex>
+
+      <v-flex>
+        <h3 class="title grey--text mb-4 mt-5">
+          Custom icons with outline
+        </h3>
+        <v-alert
+          :value="true"
+          color="success"
+          outline
+          icon="mdi-account-check"
+        >
+          This is a success alert.
+        </v-alert>
+
+        <v-alert
+          :value="true"
+          color="info"
+          outline
+          icon="mdi-account-check"
+        >
+          This is an info alert.
+        </v-alert>
+
+        <v-alert
+          :value="true"
+          color="warning"
+          outline
+          icon="mdi-account-check"
+        >
+          This is a warning alert.
+        </v-alert>
+
+        <v-alert
+          :value="true"
+          color="error"
+          outline
+          icon="mdi-account-check"
+        >
+          This is a error alert.
+        </v-alert>
+      </v-flex>
     </v-layout>
   </v-container>
 </template>
