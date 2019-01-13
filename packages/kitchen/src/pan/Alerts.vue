@@ -400,7 +400,7 @@
           v-model="alertOutline"
           dismissible
           color="success"
-          outline
+          outlined
         >
           This is a closable success outline alert.
         </v-alert>
@@ -409,7 +409,7 @@
           v-model="alertOutline"
           dismissible
           color="info"
-          outline
+          outlined
         >
           This is a closable info outline alert.
         </v-alert>
@@ -418,7 +418,7 @@
           v-model="alertOutline"
           dismissible
           color="warning"
-          outline
+          outlined
         >
           This is a closable warning outline alert.
         </v-alert>
@@ -427,7 +427,7 @@
           v-model="alertOutline"
           dismissible
           color="error"
-          outline
+          outlined
         >
           This is a closable error outline alert.
         </v-alert>
@@ -450,7 +450,7 @@
         <v-alert
           :value="true"
           color="success"
-          outline
+          outlined
           icon="mdi-account-check"
         >
           This is a success alert.
@@ -459,7 +459,7 @@
         <v-alert
           :value="true"
           color="info"
-          outline
+          outlined
           icon="mdi-account-check"
         >
           This is an info alert.
@@ -468,7 +468,7 @@
         <v-alert
           :value="true"
           color="warning"
-          outline
+          outlined
           icon="mdi-account-check"
         >
           This is a warning alert.
@@ -477,7 +477,7 @@
         <v-alert
           :value="true"
           color="error"
-          outline
+          outlined
           icon="mdi-account-check"
         >
           This is a error alert.
