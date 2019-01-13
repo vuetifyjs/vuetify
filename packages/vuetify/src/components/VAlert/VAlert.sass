@@ -78,6 +78,23 @@
     border-top-right-radius: inherit
     top: 0
 
+  +rtl()
+    &--left
+      border-top-left-radius: 0
+      border-bottom-left-radius: 0
+      border-top-right-radius: inherit
+      border-bottom-right-radius: inherit
+      left: auto
+      right: 0
+
+    &--right
+      border-top-left-radius: inherit
+      border-bottom-left-radius: inherit
+      border-top-right-radius: 0
+      border-bottom-right-radius: 0
+      left: 0
+      right: auto
+
 .v-alert__content
   flex: 1 1 auto
 
