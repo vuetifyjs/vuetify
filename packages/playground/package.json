@@ -3,7 +3,7 @@
   "version": "1.4.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "dev": "vue-cli-service serve",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
