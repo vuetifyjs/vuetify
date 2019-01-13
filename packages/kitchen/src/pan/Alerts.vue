@@ -309,7 +309,7 @@
       <!-- Slots -->
       <v-flex>
         <h3 class="title grey--text mb-4 mt-5">
-          Outline
+          Slots
         </h3>
         <v-alert
           v-model="alertTransition2"
