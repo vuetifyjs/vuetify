@@ -152,10 +152,15 @@ export default mixins(Colorable).extend({
       staticClass: 'v-progress-linear__bar',
       style: this.styles
     }, [fade, slide])
+
     const background = h('div', this.setBackgroundColor(this.backgroundColor || this.color, {
       staticClass: 'v-progress-linear__background',
       style: this.backgroundStyle
     }))
+
+    const content = this.$slots.default && h('div', {
+      staticClass: 'v-progress-linear__content'
+    }, this.$slots.default)
 
     return h('div', {
       staticClass: 'v-progress-linear',
@@ -174,7 +179,8 @@ export default mixins(Colorable).extend({
       on: this.$listeners
     }, [
       background,
-      bar
+      bar,
+      content
     ])
   }
 })
