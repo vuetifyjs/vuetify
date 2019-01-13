@@ -279,7 +279,7 @@
           Closable
         </h3>
         <v-alert
-          v-model="alertDismissible"
+          v-model="alertClosable"
           dismissible
           color="blue-grey"
           dark
@@ -292,10 +292,10 @@
 
         <div class="text-xs-center">
           <v-btn
-            v-if="!alertDismissible"
+            v-if="!alertClosable"
             color="primary"
             dark
-            @click="alertDismissible = true"
+            @click="alertClosable = true"
           >
             Reset
           </v-btn>
@@ -397,7 +397,7 @@
           Closable with outline
         </h3>
         <v-alert
-          v-model="alertDismissible"
+          v-model="alertOutline"
           dismissible
           color="success"
           outline
@@ -406,7 +406,7 @@
         </v-alert>
 
         <v-alert
-          v-model="alertDismissible"
+          v-model="alertOutline"
           dismissible
           color="info"
           outline
@@ -415,7 +415,7 @@
         </v-alert>
 
         <v-alert
-          v-model="alertDismissible"
+          v-model="alertOutline"
           dismissible
           color="warning"
           outline
@@ -424,13 +424,23 @@
         </v-alert>
 
         <v-alert
-          v-model="alertDismissible"
+          v-model="alertOutline"
           dismissible
           color="error"
           outline
         >
           This is a closable error outline alert.
         </v-alert>
+        <div class="text-xs-center">
+          <v-btn
+            v-if="!alertOutline"
+            color="primary"
+            dark
+            @click="alertOutline = true"
+          >
+            Reset
+          </v-btn>
+        </div>
       </v-flex>
 
       <v-flex>
@@ -482,9 +492,10 @@ export default {
   name: 'Alerts',
 
   data: () => ({
-    alertDismissible: true,
+    alertClosable: true,
     alertTransition: true,
-    alertTransition2: true
+    alertTransition2: true,
+    alertOutline: true
   })
 }
 </script>
