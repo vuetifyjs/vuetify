@@ -12,7 +12,7 @@
       >
         <v-img
           :class="{
-            'mr-5': $vuetify.breakpoint.mdAndUp,
+            'mx-5': $vuetify.breakpoint.mdAndUp,
             'mb-3': $vuetify.breakpoint.smAndDown
           }"
           :height="$vuetify.breakpoint.mdAndUp ? 256 : 135"
@@ -21,17 +21,21 @@
           contain
           src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-300.png"
         />
-        <div class="text-xs-center text-lg-left">
+        <div
+          class="text-xs-center text-lg-left"
+          :style="`flex: 1 1 ${$vuetify.breakpoint.mdAndDown ? '100%' : 'auto'}`"
+        >
           <h1
             :class="$vuetify.breakpoint.smAndDown && 'display-1' || 'display-3'"
             class="font-weight-light mb-4"
             v-html="$vuetify.breakpoint.smAndUp ? $t('Vuetify.Home.callout') : 'Vuetify.js'"
           />
           <v-layout
-            justify-center
+            :justify-center="$vuetify.breakpoint.mdAndDown"
             wrap
           >
             <v-btn
+              :block="$vuetify.breakpoint.xsOnly"
               :to="{
                 name: 'Documentation',
                 params: {
@@ -40,13 +44,15 @@
                   page: 'quick-start'
                 }
               }"
-              class="primary--text ml-0"
+              class="primary--text ma-3"
               color="white"
               large
             >
               {{ $t('Vuetify.Home.getStarted') }}
             </v-btn>
             <v-btn
+              :block="$vuetify.breakpoint.xsOnly"
+              class="ma-3"
               color="white"
               href="https://github.com/vuetifyjs/vuetify"
               large
@@ -58,7 +64,9 @@
               Github
             </v-btn>
             <v-btn
-              color="grey lighten-3 mr-0"
+              :block="$vuetify.breakpoint.xsOnly"
+              class="ma-3"
+              color="grey lighten-3"
               outline
               href="https://community.vuetifyjs.com"
               large
