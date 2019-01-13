@@ -278,7 +278,7 @@
         </v-alert>
 
         <v-alert
-          type="error"
+          color="error"
           dense
         >
           This is an error alert with no icon.

@@ -136,14 +136,15 @@ export default mixins(
     computedColor (): string {
       return this.color || this.type
     },
-    computedIcon (): string | void {
-      if (this.icon) return this.icon
+    computedIcon (): string | false {
+      if (this.icon != null) return this.icon
 
       switch (this.type) {
         case 'info': return '$vuetify.icons.info'
         case 'error': return '$vuetify.icons.error'
         case 'success': return '$vuetify.icons.success'
         case 'warning': return '$vuetify.icons.warning'
+        default: return false
       }
     },
     hasColoredIcon (): boolean {
