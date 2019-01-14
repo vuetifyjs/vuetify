@@ -29,8 +29,6 @@ export default mixins(
 ).extend({
   name: 'v-time-picker',
 
-  mixins: [Picker],
-
   props: {
     allowedHours: Function,
     allowedMinutes: Function,
