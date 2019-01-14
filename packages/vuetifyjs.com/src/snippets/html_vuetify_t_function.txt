@@ -1,5 +1,0 @@
-<template>
-  <div class="my-component">
-    {{ $vuetify.t('my-component.text') }}
-  </div>
-</template>

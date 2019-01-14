@@ -19,6 +19,7 @@ export interface VuetifyUseOptions {
   components?: Record<string, ComponentOrPack>
   /** @see https://vuetifyjs.com/style/theme */
   theme?: Partial<VuetifyTheme> | false
+  breakpoint?: Partial<VuetifyBreakpointOptions> | false
   /**
    * Select a base icon font to use. Note that none of these are included, you must install them yourself
    *
@@ -59,34 +60,41 @@ declare module 'vue/types/vue' {
   }
 }
 
-export interface VuetifyIcons {
-  [name: string]: string
+export type VuetifyIconComponent = {
+  component: Component | string
+  props?: object
+}
+export type VuetifyIcon = string | VuetifyIconComponent
 
-  cancel: string
-  close: string
-  delete: string
-  clear: string
-  success: string
-  info: string
-  warning: string
-  error: string
-  prev: string
-  next: string
-  checkboxOn: string
-  checkboxOff: string
-  checkboxIndeterminate: string
-  delimiter: string
-  sort: string
-  expand: string
-  menu: string
-  subgroup: string
-  dropdown: string
-  radioOn: string
-  radioOff: string
-  edit: string
-  ratingEmpty: string
-  ratingFull: string
-  ratingHalf: string
+export interface VuetifyIcons {
+  [name: string]: VuetifyIcon
+
+  complete: VuetifyIcon
+  cancel: VuetifyIcon
+  close: VuetifyIcon
+  delete: VuetifyIcon
+  clear: VuetifyIcon
+  success: VuetifyIcon
+  info: VuetifyIcon
+  warning: VuetifyIcon
+  error: VuetifyIcon
+  prev: VuetifyIcon
+  next: VuetifyIcon
+  checkboxOn: VuetifyIcon
+  checkboxOff: VuetifyIcon
+  checkboxIndeterminate: VuetifyIcon
+  delimiter: VuetifyIcon
+  sort: VuetifyIcon
+  expand: VuetifyIcon
+  menu: VuetifyIcon
+  subgroup: VuetifyIcon
+  dropdown: VuetifyIcon
+  radioOn: VuetifyIcon
+  radioOff: VuetifyIcon
+  edit: VuetifyIcon
+  ratingEmpty: VuetifyIcon
+  ratingFull: VuetifyIcon
+  ratingHalf: VuetifyIcon
 }
 
 export interface VuetifyApplication {
@@ -99,6 +107,18 @@ export interface VuetifyApplication {
   bind (uid: number, target: string, value: number): void
   unbind (uid: number, target: string): void
   update (target: string): void
+}
+
+export interface VuetifyBreakpointThresholds {
+  xs: number
+  sm: number
+  md: number
+  lg: number
+}
+
+export interface VuetifyBreakpointOptions {
+  thresholds: VuetifyBreakpointThresholds
+  scrollbarWidth: number
 }
 
 export interface VuetifyBreakpoint {
@@ -121,6 +141,8 @@ export interface VuetifyBreakpoint {
   xlOnly: boolean
   xs: boolean
   xsOnly: boolean
+  thresholds: VuetifyBreakpointThresholds
+  scrollbarWidth: number
 }
 
 export type VuetifyThemeItem = string | number | {

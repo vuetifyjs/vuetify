@@ -33,7 +33,7 @@ export default {
     classes () {
       return Object.assign({}, {
         'v-input--range-slider': true
-      }, VSlider.computed.classes.call(this))
+      }, VSlider.options.computed.classes.call(this))
     },
     internalValue: {
       get () {
@@ -67,7 +67,7 @@ export default {
       return this.internalValue.some(v => v !== this.min) || this.alwaysDirty
     },
     trackFillStyles () {
-      const styles = VSlider.computed.trackFillStyles.call(this)
+      const styles = VSlider.options.computed.trackFillStyles.call(this)
       const fillPercent = Math.abs(this.inputWidth[0] - this.inputWidth[1])
 
       styles.width = `calc(${fillPercent}% - ${this.trackPadding}px)`
@@ -80,7 +80,7 @@ export default {
         this.internalValue[0]
       ) return 0
 
-      return VSlider.computed.trackPadding.call(this)
+      return VSlider.options.computed.trackPadding.call(this)
     }
   },
 
@@ -91,13 +91,13 @@ export default {
     },
     genInput () {
       return createRange(2).map(i => {
-        const input = VSlider.methods.genInput.call(this)
+        const input = VSlider.options.methods.genInput.call(this)
 
         input.data.attrs.value = this.internalValue[i]
 
         input.data.on.focus = e => {
           this.activeThumb = i
-          VSlider.methods.onFocus.call(this, e)
+          VSlider.options.methods.onFocus.call(this, e)
         }
 
         return input

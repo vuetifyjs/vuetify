@@ -29,14 +29,12 @@ export const defaultMenuProps = {
 }
 
 /* @vue/component */
-export default {
+export default VTextField.extend({
   name: 'v-select',
 
   directives: {
     ClickOutside
   },
-
-  extends: VTextField,
 
   mixins: [
     Comparable,
@@ -119,7 +117,7 @@ export default {
       return this.filterDuplicates(this.cachedItems.concat(this.items))
     },
     classes () {
-      return Object.assign({}, VTextField.computed.classes.call(this), {
+      return Object.assign({}, VTextField.options.computed.classes.call(this), {
         'v-select': true,
         'v-select--chips': this.hasChips,
         'v-select--chips--small': this.smallChips,
@@ -256,11 +254,12 @@ export default {
 
   methods: {
     /** @public */
-    blur () {
+    blur (e) {
       this.isMenuActive = false
       this.isFocused = false
       this.$refs.input && this.$refs.input.blur()
       this.selectedIndex = -1
+      this.onBlur(e)
     },
     /** @public */
     activateMenu () {
@@ -383,7 +382,7 @@ export default {
       ]
     },
     genInput () {
-      const input = VTextField.methods.genInput.call(this)
+      const input = VTextField.options.methods.genInput.call(this)
 
       input.data.domProps.value = null
       input.data.attrs.readonly = true
@@ -606,7 +605,7 @@ export default {
         }
       }
 
-      VTextField.methods.onMouseUp.call(this, e)
+      VTextField.options.methods.onMouseUp.call(this, e)
     },
     onScroll () {
       if (!this.isMenuActive) {
@@ -646,7 +645,7 @@ export default {
         // If we make it here,
         // the user has no selected indexes
         // and is probably tabbing out
-        VTextField.methods.onBlur.call(this, e)
+        this.blur(e)
       }
     },
     selectItem (item) {
@@ -694,8 +693,8 @@ export default {
       this.selectedItems = selectedItems
     },
     setValue (value) {
+      value !== this.internalValue && this.$emit('change', value)
       this.internalValue = value
-      this.$emit('change', value)
     }
   }
-}
+})

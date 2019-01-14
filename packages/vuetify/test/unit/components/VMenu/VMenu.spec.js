@@ -4,7 +4,7 @@ import VMenu from '@/components/VMenu/VMenu'
 import { test } from '@/test'
 
 // TODO: Most of these have exactly the same snapshots
-test('VMenu.js', ({ mount }) => {
+test('VMenu.js', ({ mount, compileToFunctions }) => {
   it('should work', async () => {
     const wrapper = mount(VMenu, {
       propsData: {
@@ -370,5 +370,72 @@ test('VMenu.js', ({ mount }) => {
 
     expect(content.getAttribute('style')).toMatchSnapshot()
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should not attach event handlers to the activator container if disabled', async () => {
+    const wrapper = mount(VMenu, {
+      propsData: {
+        disabled: true,
+      },
+      slots: {
+        activator: [compileToFunctions('<button></button>')]
+      }
+    })
+
+    expect(Object.keys(wrapper.find('.v-menu__activator')[0].vNode.data.on)).toHaveLength(0)
+
+    wrapper.setProps({ openOnHover: true })
+    expect(Object.keys(wrapper.find('.v-menu__activator')[0].vNode.data.on)).toHaveLength(0)
+
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  it('should close menu when tab is pressed', async () => {
+    const wrapper = mount(VMenu)
+
+    wrapper.vm.isActive = true
+    await wrapper.vm.$nextTick()
+    wrapper.trigger(`keydown.tab`)
+    await new Promise(resolve => setTimeout(resolve))
+    expect(wrapper.vm.isActive).toBe(false)
+
+    wrapper.setProps({ disableKeys: true })
+    wrapper.vm.isActive = true
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isActive).toBe(true)
+    wrapper.trigger(`keydown.tab`)
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.isActive).toBe(true)
+
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
+  // TODO: figure out how to simulate tab focus
+  it.skip('should not close on tab if child is focused', async () => {
+    const wrapper = mount({
+      render: h =>  h('div', [
+        h(VMenu, {
+          ref: 'menu',
+          props: {
+            value: true,
+            attach: true
+          }
+        }, [h('input', { class: 'first' }), h('input', { class: 'second' })]),
+        h('input', { class: 'third' })
+      ])
+    }, { attachToDocument: true })
+    const menu = wrapper.first({ name: 'v-menu', render: () => null })
+    const input = wrapper.find('input')
+
+    input[0].element.focus()
+    input[0].trigger('keydown.tab')
+    await wrapper.vm.$nextTick()
+    expect(menu.vm.isActive).toBe(true)
+    expect(document.activeElement).toBe(input[1].element)
+
+    input[1].trigger('keydown.tab')
+    await wrapper.vm.$nextTick()
+    expect(menu.vm.isActive).toBe(false)
+    expect(document.activeElement).toBe(input[2].element)
   })
 })

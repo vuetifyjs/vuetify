@@ -203,4 +203,23 @@ test('VDatePicker.js', ({ mount, compileToFunctions }) => {
     expect(icons[0].element.textContent).toBe('block')
     expect(icons[1].element.textContent).toBe('check')
   })
+
+  it('should emit click/dblclick:month event', async () => {
+    const wrapper = mount(VDatePicker, {
+      propsData: {
+        value: '2013-05',
+        type: 'month'
+      }
+    })
+
+    const click = jest.fn()
+    wrapper.vm.$on(`click:month`, click)
+    wrapper.find('.v-date-picker-table--month tbody tr+tr td:first-child button')[0].trigger('click')
+    expect(click).toBeCalledWith('2013-04')
+
+    const dblclick = jest.fn()
+    wrapper.vm.$on(`dblclick:month`, dblclick)
+    wrapper.find('.v-date-picker-table--month tbody tr+tr td:first-child button')[0].trigger('dblclick')
+    expect(dblclick).toBeCalledWith('2013-04')
+  })
 })

@@ -538,4 +538,23 @@ test('VSelect', ({ mount, compileToFunctions }) => {
 
     expect(change.mock.calls).toEqual([['foo']])
   })
+
+  it('should not emit change event when clicked on the selected item', async () => {
+    const wrapper = mount(VSelect, {
+      propsData: {
+        items: ['foo', 'bar']
+      }
+    })
+
+    const change = jest.fn()
+    wrapper.vm.$on('change', change)
+
+    wrapper.vm.selectItem('foo')
+    await wrapper.vm.$nextTick()
+
+    wrapper.vm.selectItem('foo')
+    await wrapper.vm.$nextTick()
+
+    expect(change.mock.calls.length).toBe(1);
+  })
 })
