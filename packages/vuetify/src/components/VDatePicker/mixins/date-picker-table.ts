@@ -1,23 +1,39 @@
 import '../../../stylus/components/_date-picker-table.styl'
 
 // Directives
-import Touch from '../../../directives/touch'
+import Touch, { TouchWrapper } from '../../../directives/touch'
+
+// Mixins
+import Colorable from '../../../mixins/colorable'
+import Themeable from '../../../mixins/themeable'
 
 // Utils
-import isDateAllowed from '.././util/isDateAllowed'
+import isDateAllowed, { AllowedFunction } from '../util/isDateAllowed'
+import mixins from '../../../util/mixins'
+
+// Types
+import { VNodeChildren } from 'vue'
+import { PropValidator } from 'vue/types/options'
+import { NativeLocaleFormatter } from '../util/createNativeLocaleFormatter'
+
+type CalculateTableDateFunction = (v: number) => string
 
 /* @vue/component */
-export default {
+export default mixins(
+  Colorable,
+  Themeable
+).extend({
   directives: { Touch },
 
   props: {
-    allowedDates: Function,
+    allowedDates: {
+      type: Function
+    } as any as PropValidator<AllowedFunction | undefined>,
     current: String,
     disabled: Boolean,
     format: {
-      type: Function,
-      default: null
-    },
+      type: Function
+    } as any as PropValidator<NativeLocaleFormatter | undefined>,
     events: {
       type: [Array, Function, Object],
       default: () => null
@@ -46,25 +62,25 @@ export default {
   }),
 
   computed: {
-    computedTransition () {
+    computedTransition (): string {
       return (this.isReversing === !this.$vuetify.rtl) ? 'tab-reverse-transition' : 'tab-transition'
     },
-    displayedMonth () {
-      return this.tableDate.split('-')[1] - 1
+    displayedMonth (): number {
+      return Number(this.tableDate.split('-')[1]) - 1
     },
-    displayedYear () {
-      return this.tableDate.split('-')[0] * 1
+    displayedYear (): number {
+      return Number(this.tableDate.split('-')[0])
     }
   },
 
   watch: {
-    tableDate (newVal, oldVal) {
+    tableDate (newVal: string, oldVal: string) {
       this.isReversing = newVal < oldVal
     }
   },
 
   methods: {
-    genButtonClasses (isAllowed, isFloating, isSelected, isCurrent) {
+    genButtonClasses (isAllowed: boolean, isFloating: boolean, isSelected: boolean, isCurrent: boolean) {
       return {
         'v-btn--active': isSelected,
         'v-btn--flat': !isSelected,
@@ -76,7 +92,7 @@ export default {
         ...this.themeClasses
       }
     },
-    genButtonEvents (value, isAllowed, mouseEventType) {
+    genButtonEvents (value: string, isAllowed: boolean, mouseEventType: string) {
       if (this.disabled) return undefined
 
       return {
@@ -87,7 +103,7 @@ export default {
         dblclick: () => this.$emit(`dblclick:${mouseEventType}`, value)
       }
     },
-    genButton (value, isFloating, mouseEventType) {
+    genButton (value: string, isFloating: boolean, mouseEventType: string, formatter: NativeLocaleFormatter) {
       const isAllowed = isDateAllowed(value, this.min, this.max, this.allowedDates)
       const isSelected = value === this.value || (Array.isArray(this.value) && this.value.indexOf(value) !== -1)
       const isCurrent = value === this.current
@@ -107,16 +123,11 @@ export default {
       }), [
         this.$createElement('div', {
           staticClass: 'v-btn__content'
-        }, [this.formatter(value)]),
+        }, [formatter(value)]),
         this.genEvents(value)
       ])
     },
-    /**
-     *
-     * @param {string} date
-     * @returns boolean|string|string[]
-     */
-    getEventData (date) {
+    getEventData (date: string): boolean|string|string[] {
       if (Array.isArray(this.events)) {
         return this.events.includes(date)
       } else if (this.events instanceof Function) {
@@ -127,35 +138,38 @@ export default {
         return false
       }
     },
-    genEvents (date) {
-      let eventColors = this.getEventData(date)
+    genEvents (date: string) {
+      const eventColors = this.getEventData(date)
+      const arrayize = (v: any) => Array.isArray(v) ? v : [v]
+      let realEventColors: string[] = []
 
       if (eventColors === true) {
         if (typeof this.eventColor === 'string') {
-          eventColors = this.eventColor
+          realEventColors = [this.eventColor]
         } else if (typeof this.eventColor === 'function') {
-          eventColors = this.eventColor(date)
+          realEventColors = arrayize(this.eventColor(date))
         } else if (Array.isArray(this.eventColor)) {
-          eventColors = this.eventColor
+          realEventColors = this.eventColor
         } else {
-          eventColors = this.eventColor[date]
+          realEventColors = arrayize(this.eventColor[date])
         }
+      } else {
+        realEventColors = arrayize(eventColors)
       }
-      if (!Array.isArray(eventColors)) eventColors = [eventColors]
-      eventColors = eventColors.filter(v => v)
+      realEventColors = realEventColors.filter(v => v)
 
-      return eventColors.length ? this.$createElement('div', {
+      return realEventColors.length ? this.$createElement('div', {
         staticClass: 'v-date-picker-table__events'
-      }, eventColors.map(color => this.$createElement('div', this.setBackgroundColor(color || this.color)))) : null
+      }, realEventColors.map(color => this.$createElement('div', this.setBackgroundColor(color)))) : null
     },
-    wheel (e) {
+    wheel (e: WheelEvent, calculateTableDate: CalculateTableDateFunction) {
       e.preventDefault()
-      this.$emit('tableDate', this.calculateTableDate(e.deltaY))
+      this.$emit('tableDate', calculateTableDate(e.deltaY))
     },
-    touch (value) {
-      this.$emit('tableDate', this.calculateTableDate(value))
+    touch (value: number, calculateTableDate: CalculateTableDateFunction) {
+      this.$emit('tableDate', calculateTableDate(value))
     },
-    genTable (staticClass, children) {
+    genTable (staticClass: string, children: VNodeChildren, calculateTableDate: CalculateTableDateFunction) {
       const transition = this.$createElement('transition', {
         props: { name: this.computedTransition }
       }, [this.$createElement('table', { key: this.tableDate }, children)])
@@ -163,8 +177,8 @@ export default {
       const touchDirective = {
         name: 'touch',
         value: {
-          left: e => (e.offsetX < -15) && this.touch(1),
-          right: e => (e.offsetX > 15) && this.touch(-1)
+          left: (e: TouchWrapper) => (e.offsetX < -15) && this.touch(1, calculateTableDate),
+          right: (e: TouchWrapper) => (e.offsetX > 15) && this.touch(-1, calculateTableDate)
         }
       }
 
@@ -174,9 +188,11 @@ export default {
           'v-date-picker-table--disabled': this.disabled,
           ...this.themeClasses
         },
-        on: (!this.disabled && this.scrollable) ? { wheel: this.wheel } : undefined,
+        on: (!this.disabled && this.scrollable) ? {
+          wheel: (e: WheelEvent) => this.wheel(e, calculateTableDate)
+        } : undefined,
         directives: [touchDirective]
       }, [transition])
     }
   }
-}
+})
