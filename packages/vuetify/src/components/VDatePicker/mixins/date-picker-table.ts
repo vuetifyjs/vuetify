@@ -131,7 +131,7 @@ export default mixins(
         this.genEvents(value)
       ])
     },
-    getEventColors (date: string): string[] {
+    getEventColors (date: string) {
       const arrayize = (v: string | string[]) => Array.isArray(v) ? v : [v]
       let eventData: boolean | DateEventColorValue
       let eventColors: string[] = []
