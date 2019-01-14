@@ -18,6 +18,10 @@ import { NativeLocaleFormatter } from '../util/createNativeLocaleFormatter'
 
 type CalculateTableDateFunction = (v: number) => string
 
+type DateEventColorValue = string | string[]
+type DateEvents = string[] | ((date: string) => boolean | DateEventColorValue) | Record<string, DateEventColorValue>
+type DateEventColors = DateEventColorValue | Record<string, DateEventColorValue> | ((date: string) => DateEventColorValue)
+
 /* @vue/component */
 export default mixins(
   Colorable,
@@ -37,11 +41,11 @@ export default mixins(
     events: {
       type: [Array, Function, Object],
       default: () => null
-    },
+    } as any as PropValidator<DateEvents>,
     eventColor: {
       type: [Array, Function, Object, String],
       default: () => 'warning'
-    },
+    } as any as PropValidator<DateEventColors>,
     locale: {
       type: String,
       default: 'en-us'
@@ -127,40 +131,43 @@ export default mixins(
         this.genEvents(value)
       ])
     },
-    getEventData (date: string): boolean|string|string[] {
+    getEventColors (date: string): string[] {
+      const arrayize = (v: string | string[]) => Array.isArray(v) ? v : [v]
+      let eventData: boolean | DateEventColorValue
+      let eventColors: string[] = []
+
       if (Array.isArray(this.events)) {
-        return this.events.includes(date)
+        eventData = this.events.includes(date)
       } else if (this.events instanceof Function) {
-        return this.events(date) || false
+        eventData = this.events(date) || false
       } else if (this.events) {
-        return this.events[date] || false
+        eventData = this.events[date] || false
       } else {
-        return false
+        eventData = false
       }
+
+      if (!eventData) {
+        return []
+      } else if (eventData !== true) {
+        eventColors = arrayize(eventData)
+      } else if (typeof this.eventColor === 'string') {
+        eventColors = [this.eventColor]
+      } else if (typeof this.eventColor === 'function') {
+        eventColors = arrayize(this.eventColor(date))
+      } else if (Array.isArray(this.eventColor)) {
+        eventColors = this.eventColor
+      } else {
+        eventColors = arrayize(this.eventColor[date])
+      }
+
+      return eventColors.filter(v => v)
     },
     genEvents (date: string) {
-      const eventColors = this.getEventData(date)
-      const arrayize = (v: any) => Array.isArray(v) ? v : [v]
-      let realEventColors: string[] = []
+      const eventColors = this.getEventColors(date)
 
-      if (eventColors === true) {
-        if (typeof this.eventColor === 'string') {
-          realEventColors = [this.eventColor]
-        } else if (typeof this.eventColor === 'function') {
-          realEventColors = arrayize(this.eventColor(date))
-        } else if (Array.isArray(this.eventColor)) {
-          realEventColors = this.eventColor
-        } else {
-          realEventColors = arrayize(this.eventColor[date])
-        }
-      } else {
-        realEventColors = arrayize(eventColors)
-      }
-      realEventColors = realEventColors.filter(v => v)
-
-      return realEventColors.length ? this.$createElement('div', {
+      return eventColors.length ? this.$createElement('div', {
         staticClass: 'v-date-picker-table__events'
-      }, realEventColors.map(color => this.$createElement('div', this.setBackgroundColor(color)))) : null
+      }, eventColors.map(color => this.$createElement('div', this.setBackgroundColor(color)))) : null
     },
     wheel (e: WheelEvent, calculateTableDate: CalculateTableDateFunction) {
       e.preventDefault()
