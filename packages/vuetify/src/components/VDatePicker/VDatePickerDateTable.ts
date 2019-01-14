@@ -32,14 +32,14 @@ export default mixins(
     formatter (): NativeLocaleFormatter {
       return this.format || createNativeLocaleFormatter(this.locale, { day: 'numeric', timeZone: 'UTC' }, { start: 8, length: 2 })
     },
-    weekdayFormatter (): NativeLocaleFormatter {
+    weekdayFormatter (): NativeLocaleFormatter | undefined {
       return this.weekdayFormat || createNativeLocaleFormatter(this.locale, { weekday: 'narrow', timeZone: 'UTC' })
     },
     weekDays (): string[] {
       const first = parseInt(this.firstDayOfWeek, 10)
 
       return this.weekdayFormatter
-        ? createRange(7).map(i => this.weekdayFormatter(`2017-01-${first + i + 15}`)) // 2017-01-15 is Sunday
+        ? createRange(7).map(i => this.weekdayFormatter!(`2017-01-${first + i + 15}`)) // 2017-01-15 is Sunday
         : createRange(7).map(i => ['S', 'M', 'T', 'W', 'T', 'F', 'S'][(i + first) % 7])
     }
   },
