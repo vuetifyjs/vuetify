@@ -257,9 +257,9 @@ test('VDatePickerDateTable.js', ({ mount }) => {
     const tableDate = jest.fn()
     wrapper.vm.$on('tableDate', tableDate)
 
-    wrapper.vm.touch(1)
+    wrapper.vm.touch(1, wrapper.vm.calculateTableDate)
     expect(tableDate).toBeCalledWith('2005-06')
-    wrapper.vm.touch(-1)
+    wrapper.vm.touch(-1, wrapper.vm.calculateTableDate)
     expect(tableDate).toBeCalledWith('2005-04')
   })
 })
