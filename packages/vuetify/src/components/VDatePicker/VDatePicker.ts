@@ -10,31 +10,47 @@ import Picker from '../../mixins/picker'
 
 // Utils
 import { pad, createNativeLocaleFormatter } from './util'
-import isDateAllowed from './util/isDateAllowed'
+import isDateAllowed, { AllowedFunction } from './util/isDateAllowed'
 import { consoleWarn } from '../../util/console'
+import mixins from '../../util/mixins'
 
+// Types
+import { PropValidator } from 'vue/types/options'
+import { NativeLocaleFormatter } from './util/createNativeLocaleFormatter'
+import { VNode } from 'vue'
+
+export type DateEventColorValue = string | string[]
+export type DateEvents = string[] | ((date: string) => boolean | DateEventColorValue) | Record<string, DateEventColorValue>
+export type DateEventColors = DateEventColorValue | Record<string, DateEventColorValue> | ((date: string) => DateEventColorValue)
+type PickerType = 'date' | 'month'
+type NativeLocaleMultipleFormatter = (date: string[]) => string
+interface Formatters {
+  year: NativeLocaleFormatter
+  titleDate: NativeLocaleFormatter | NativeLocaleMultipleFormatter
+}
+
+export default mixins(
+  Picker
 /* @vue/component */
-export default {
+).extend({
   name: 'v-date-picker',
 
-  mixins: [Picker],
-
   props: {
-    allowedDates: Function,
+    allowedDates: Function as PropValidator<AllowedFunction>,
     // Function formatting the day in date picker table
     dayFormat: {
       type: Function,
       default: null
-    },
+    } as any as PropValidator<AllowedFunction | null>,
     disabled: Boolean,
     events: {
       type: [Array, Function, Object],
       default: () => null
-    },
+    } as any as PropValidator<DateEvents>,
     eventColor: {
       type: [Array, Function, Object, String],
       default: () => 'warning'
-    },
+    } as any as PropValidator<DateEventColors>,
     firstDayOfWeek: {
       type: [String, Number],
       default: 0
@@ -43,7 +59,7 @@ export default {
     headerDateFormat: {
       type: Function,
       default: null
-    },
+    } as any as PropValidator<NativeLocaleFormatter | undefined>,
     locale: {
       type: String,
       default: 'en-us'
@@ -54,7 +70,7 @@ export default {
     monthFormat: {
       type: Function,
       default: null
-    },
+    } as any as PropValidator<NativeLocaleFormatter | undefined>,
     multiple: Boolean,
     nextIcon: {
       type: String,
@@ -77,22 +93,22 @@ export default {
     titleDateFormat: {
       type: Function,
       default: null
-    },
+    } as any as PropValidator<NativeLocaleFormatter | NativeLocaleMultipleFormatter | undefined>,
     type: {
       type: String,
       default: 'date',
-      validator: type => ['date', 'month'].includes(type) // TODO: year
-    },
-    value: [Array, String],
+      validator: (type: any) => ['date', 'month'].includes(type) // TODO: year
+    } as any as PropValidator<PickerType>,
+    value: [Array, String] as PropValidator<string | string[] | null>,
     weekdayFormat: {
       type: Function,
       default: null
-    },
+    } as any as PropValidator<NativeLocaleFormatter | undefined>,
     // Function formatting the year in table header and pickup title
     yearFormat: {
       type: Function,
       default: null
-    },
+    } as any as PropValidator<NativeLocaleFormatter | undefined>,
     yearIcon: String
   },
 
@@ -100,9 +116,9 @@ export default {
     const now = new Date()
     return {
       activePicker: this.type.toUpperCase(),
-      inputDay: null,
-      inputMonth: null,
-      inputYear: null,
+      inputDay: null as number | null,
+      inputMonth: null as number | null,
+      inputYear: null as number | null,
       isReversing: false,
       now,
       // tableDate is a string in 'YYYY' / 'YYYY-M' format (leading zero for month is not required)
@@ -111,71 +127,71 @@ export default {
           return this.pickerDate
         }
 
-        const date = (this.multiple ? this.value[this.value.length - 1] : this.value) ||
+        const date = (this.multiple ? (this.value as string[])[(this.value as string[]).length - 1] : this.value) ||
           `${now.getFullYear()}-${now.getMonth() + 1}`
-        const type = this.type === 'date' ? 'month' : 'year'
+        const type: 'month' | 'year' = this.type === 'date' ? 'month' : 'year'
         return this.sanitizeDateString(date, type)
       })()
     }
   },
 
   computed: {
-    lastValue () {
-      return this.multiple ? this.value[this.value.length - 1] : this.value
+    lastValue (): string | null {
+      return this.multiple ? (this.value as string[])[(this.value as string[]).length - 1] : (this.value as string | null)
     },
-    selectedMonths () {
+    selectedMonths (): string | string[] | null {
       if (!this.value || !this.value.length || this.type === 'month') {
         return this.value
       } else if (this.multiple) {
-        return this.value.map(val => val.substr(0, 7))
+        return (this.value as string[]).map(val => val.substr(0, 7))
       } else {
-        return this.value.substr(0, 7)
+        return (this.value as string).substr(0, 7)
       }
     },
-    current () {
+    current (): string | null {
       if (this.showCurrent === true) {
         return this.sanitizeDateString(`${this.now.getFullYear()}-${this.now.getMonth() + 1}-${this.now.getDate()}`, this.type)
       }
 
       return this.showCurrent || null
     },
-    inputDate () {
+    inputDate (): string {
       return this.type === 'date'
-        ? `${this.inputYear}-${pad(this.inputMonth + 1)}-${pad(this.inputDay)}`
-        : `${this.inputYear}-${pad(this.inputMonth + 1)}`
+        ? `${this.inputYear}-${pad(this.inputMonth! + 1)}-${pad(this.inputDay!)}`
+        : `${this.inputYear}-${pad(this.inputMonth! + 1)}`
     },
-    tableMonth () {
+    tableMonth (): number {
       return (this.pickerDate || this.tableDate).split('-')[1] - 1
     },
-    tableYear () {
+    tableYear (): number {
       return (this.pickerDate || this.tableDate).split('-')[0] * 1
     },
-    minMonth () {
+    minMonth (): string | null {
       return this.min ? this.sanitizeDateString(this.min, 'month') : null
     },
-    maxMonth () {
+    maxMonth (): string | null {
       return this.max ? this.sanitizeDateString(this.max, 'month') : null
     },
-    minYear () {
+    minYear (): string | null {
       return this.min ? this.sanitizeDateString(this.min, 'year') : null
     },
-    maxYear () {
+    maxYear (): string | null {
       return this.max ? this.sanitizeDateString(this.max, 'year') : null
     },
-    formatters () {
+    formatters (): Formatters {
       return {
         year: this.yearFormat || createNativeLocaleFormatter(this.locale, { year: 'numeric', timeZone: 'UTC' }, { length: 4 }),
         titleDate: this.titleDateFormat || (this.multiple ? this.defaultTitleMultipleDateFormatter : this.defaultTitleDateFormatter)
       }
     },
-    defaultTitleMultipleDateFormatter () {
-      if (this.value.length < 2) {
+    defaultTitleMultipleDateFormatter (): NativeLocaleMultipleFormatter {
+      if ((this.value as string[]).length < 2) {
         return dates => dates.length ? this.defaultTitleDateFormatter(dates[0]) : '0 selected'
       }
 
       return dates => `${dates.length} selected`
     },
-    defaultTitleDateFormatter () {
+    defaultTitleDateFormatter (): NativeLocaleFormatter {
       const titleFormats = {
         year: { year: 'numeric', timeZone: 'UTC' },
         month: { month: 'long', timeZone: 'UTC' },
@@ -187,7 +203,7 @@ export default {
         length: { date: 10, month: 7, year: 4 }[this.type]
       })
 
-      const landscapeFormatter = date => titleDateFormatter(date)
+      const landscapeFormatter = (date: string) => titleDateFormatter(date)
         .replace(/([^\d\s])([\d])/g, (match, nonDigit, digit) => `${nonDigit} ${digit}`)
         .replace(', ', ',<br>')
 
@@ -196,14 +212,14 @@ export default {
   },
 
   watch: {
-    tableDate (val, prev) {
+    tableDate (val: string, prev: string) {
       // Make a ISO 8601 strings from val and prev for comparision, otherwise it will incorrectly
       // compare for example '2000-9' and '2000-10'
       const sanitizeType = this.type === 'month' ? 'year' : 'month'
       this.isReversing = this.sanitizeDateString(val, sanitizeType) < this.sanitizeDateString(prev, sanitizeType)
       this.$emit('update:pickerDate', val)
     },
-    pickerDate (val) {
+    pickerDate (val: string | null) {
       if (val) {
         this.tableDate = val
       } else if (this.lastValue && this.type === 'date') {
@@ -212,22 +228,22 @@ export default {
         this.tableDate = this.sanitizeDateString(this.lastValue, 'year')
       }
     },
-    value (newValue, oldValue) {
+    value (newValue: string | string[] | null, oldValue: string | string[] | null) {
       this.checkMultipleProp()
       this.setInputDate()
 
       if (!this.multiple && this.value && !this.pickerDate) {
         this.tableDate = this.sanitizeDateString(this.inputDate, this.type === 'month' ? 'year' : 'month')
-      } else if (this.multiple && this.value.length && !oldValue.length && !this.pickerDate) {
+      } else if (this.multiple && (this.value as string[]).length && !(oldValue as string[]).length && !this.pickerDate) {
         this.tableDate = this.sanitizeDateString(this.inputDate, this.type === 'month' ? 'year' : 'month')
       }
     },
-    type (type) {
+    type (type: PickerType) {
       this.activePicker = type.toUpperCase()
 
       if (this.value && this.value.length) {
-        const output = (this.multiple ? this.value : [this.value])
-          .map(val => this.sanitizeDateString(val, type))
+        const output = (this.multiple ? (this.value as string[]) : [this.value as string])
+          .map((val: string) => this.sanitizeDateString(val, type))
           .filter(this.isDateAllowed)
         this.$emit('input', this.multiple ? output : output[0])
       }
@@ -244,12 +260,12 @@ export default {
   },
 
   methods: {
-    emitInput (newInput) {
+    emitInput (newInput: string) {
       const output = this.multiple
         ? (
-          this.value.indexOf(newInput) === -1
-            ? this.value.concat([newInput])
-            : this.value.filter(x => x !== newInput)
+          (this.value as string[]).indexOf(newInput) === -1
+            ? (this.value as string[]).concat([newInput])
+            : (this.value as string[]).filter(x => x !== newInput)
         )
         : newInput
 
@@ -264,10 +280,10 @@ export default {
         consoleWarn(`Value must be ${this.multiple ? 'an' : 'a'} ${expected}, got ${valueType}`, this)
       }
     },
-    isDateAllowed (value) {
+    isDateAllowed (value: string) {
       return isDateAllowed(value, this.min, this.max, this.allowedDates)
     },
-    yearClick (value) {
+    yearClick (value: number) {
       this.inputYear = value
       if (this.type === 'month') {
         this.tableDate = `${value}`
@@ -279,7 +295,7 @@ export default {
         this.$emit('input', this.inputDate)
       }
     },
-    monthClick (value) {
+    monthClick (value: string) {
       this.inputYear = parseInt(value.split('-')[0], 10)
       this.inputMonth = parseInt(value.split('-')[1], 10) - 1
       if (this.type === 'date') {
@@ -292,7 +308,7 @@ export default {
         this.emitInput(this.inputDate)
       }
     },
-    dateClick (value) {
+    dateClick (value: string) {
       this.inputYear = parseInt(value.split('-')[0], 10)
       this.inputMonth = parseInt(value.split('-')[1], 10) - 1
       this.inputDay = parseInt(value.split('-')[2], 10)
@@ -301,17 +317,17 @@ export default {
     genPickerTitle () {
       return this.$createElement(VDatePickerTitle, {
         props: {
-          date: this.value ? this.formatters.titleDate(this.value) : '',
+          date: this.value ? (this.formatters.titleDate as (value: any) => string)(this.value) : '',
           disabled: this.disabled,
           readonly: this.readonly,
           selectingYear: this.activePicker === 'YEAR',
           year: this.formatters.year(this.value ? `${this.inputYear}` : this.tableDate),
           yearIcon: this.yearIcon,
-          value: this.multiple ? this.value[0] : this.value
+          value: this.multiple ? (this.value as string[])[0] : this.value
         },
         slot: 'title',
         on: {
-          'update:selectingYear': value => this.activePicker = value ? 'YEAR' : this.type.toUpperCase()
+          'update:selectingYear': (value: boolean) => this.activePicker = value ? 'YEAR' : this.type.toUpperCase()
         }
       })
     },
@@ -333,7 +349,7 @@ export default {
         },
         on: {
           toggle: () => this.activePicker = (this.activePicker === 'DATE' ? 'MONTH' : 'YEAR'),
-          input: value => this.tableDate = value
+          input: (value: string) => this.tableDate = value
         }
       })
     },
@@ -363,9 +379,9 @@ export default {
         ref: 'table',
         on: {
           input: this.dateClick,
-          tableDate: value => this.tableDate = value,
-          'click:date': value => this.$emit('click:date', value),
-          'dblclick:date': value => this.$emit('dblclick:date', value)
+          tableDate: (value: string) => this.tableDate = value,
+          'click:date': (value: string) => this.$emit('click:date', value),
+          'dblclick:date': (value: string) => this.$emit('dblclick:date', value)
         }
       })
     },
@@ -392,9 +408,9 @@ export default {
         ref: 'table',
         on: {
           input: this.monthClick,
-          tableDate: value => this.tableDate = value,
-          'click:month': value => this.$emit('click:month', value),
-          'dblclick:month': value => this.$emit('dblclick:month', value)
+          tableDate: (value: string) => this.tableDate = value,
+          'click:month': (value: string) => this.$emit('click:month', value),
+          'dblclick:month': (value: string) => this.$emit('dblclick:month', value)
         }
       })
     },
@@ -427,7 +443,7 @@ export default {
     },
     // Adds leading zero to month/day if necessary, returns 'YYYY' if type = 'year',
     // 'YYYY-MM' if 'month' and 'YYYY-MM-DD' if 'date'
-    sanitizeDateString (dateString, type) {
+    sanitizeDateString (dateString: string, type: 'date' | 'month' | 'year'): string {
       const [year, month = 1, date = 1] = dateString.split('-')
       return `${year}-${pad(month)}-${pad(date)}`.substr(0, { date: 10, month: 7, year: 4 }[type])
     },
@@ -447,7 +463,7 @@ export default {
     }
   },
 
-  render () {
+  render (): VNode {
     return this.genPicker('v-picker--date')
   }
-}
+})

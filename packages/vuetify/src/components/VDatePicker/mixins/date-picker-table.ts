@@ -15,12 +15,10 @@ import mixins from '../../../util/mixins'
 import { VNodeChildren } from 'vue'
 import { PropValidator } from 'vue/types/options'
 import { NativeLocaleFormatter } from '../util/createNativeLocaleFormatter'
+import { DateEvents, DateEventColors, DateEventColorValue } from '../VDatePicker'
 
 type CalculateTableDateFunction = (v: number) => string
 
-type DateEventColorValue = string | string[]
-type DateEvents = string[] | ((date: string) => boolean | DateEventColorValue) | Record<string, DateEventColorValue>
-type DateEventColors = DateEventColorValue | Record<string, DateEventColorValue> | ((date: string) => DateEventColorValue)
 
 /* @vue/component */
 export default mixins(
