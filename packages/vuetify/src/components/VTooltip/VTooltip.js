@@ -9,7 +9,7 @@ import Menuable from '../../mixins/menuable'
 import Toggleable from '../../mixins/toggleable'
 
 // Helpers
-import { convertToUnit } from '../../util/helpers'
+import { convertToUnit, keyCodes } from '../../util/helpers'
 
 /* @vue/component */
 export default {
@@ -20,7 +20,7 @@ export default {
   props: {
     closeDelay: {
       type: [Number, String],
-      default: 1500
+      default: 0
     },
     debounce: {
       type: [Number, String],
@@ -33,7 +33,7 @@ export default {
     },
     openDelay: {
       type: [Number, String],
-      default: 75
+      default: 0
     },
     tag: {
       type: String,
@@ -140,10 +140,9 @@ export default {
       this.updateDimensions()
       // Start the transition
       requestAnimationFrame(this.startTransition)
-      this.runDelay('close', () => (this.isActive = false))
     },
     deactivate () {
-      this.isActive = false
+      this.runDelay('close')
     },
     genActivator () {
       const listeners = this.disabled ? {} : {
@@ -151,10 +150,23 @@ export default {
           this.getActivator(e)
           this.runDelay('open')
         },
+        focus: e => {
+          this.getActivator(e)
+          this.runDelay('open')
+        },
         mouseleave: e => {
           this.getActivator(e)
-          this.clearDelay()
-          this.isActive = false
+          this.runDelay('close')
+        },
+        blur: e => {
+          this.getActivator(e)
+          this.runDelay('close')
+        },
+        keydown: e => {
+          if (e.keyCode === keyCodes.esc) {
+            this.getActivator(e)
+            this.runDelay('close')
+          }
         }
       }
 
