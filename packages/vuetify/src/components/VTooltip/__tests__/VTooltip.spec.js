@@ -1,7 +1,7 @@
-import VTooltip from '@/components/VTooltip'
+import VTooltip from '../VTooltip'
 import { test } from '@/test'
 
-test('VTooltip.js', ({ mount, compileToFunctions }) => {
+test('VTooltip', ({ mount, compileToFunctions }) => {
   it('should render component and match snapshot', async () => {
     const wrapper = mount(VTooltip, {
       propsData: {
@@ -85,14 +85,12 @@ test('VTooltip.js', ({ mount, compileToFunctions }) => {
     activator.trigger('mouseenter')
     jest.runAllTimers()
     await wrapper.vm.$nextTick()
-    expect(setTimeout.mock.calls).toHaveLength(1)
     expect(setTimeout.mock.calls[0][1]).toBe(123)
     expect(cb).toBeCalledWith(true)
 
     activator.trigger('mouseleave')
     jest.runAllTimers()
     await wrapper.vm.$nextTick()
-    expect(setTimeout.mock.calls).toHaveLength(2)
     expect(setTimeout.mock.calls[1][1]).toBe(321)
     expect(cb).toBeCalledWith(false)
 
