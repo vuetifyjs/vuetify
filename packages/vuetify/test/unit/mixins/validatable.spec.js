@@ -287,12 +287,16 @@ test('validatable.js', ({ mount }) => {
     wrapper.setData({
       hasInput: true,
       hasFocused: true,
-      isResetting: true
+      isResetting: true,
+      errorBucket: ['foo'],
+      valid: true
     })
 
     expect(wrapper.vm.hasInput).toBe(true)
     expect(wrapper.vm.hasFocused).toBe(true)
     expect(wrapper.vm.isResetting).toBe(true)
+    expect(wrapper.vm.errorBucket).toEqual(['foo'])
+    expect(wrapper.vm.valid).toBe(true)
 
     // Wait for watcher
     await wrapper.vm.$nextTick()
@@ -303,6 +307,8 @@ test('validatable.js', ({ mount }) => {
     expect(wrapper.vm.hasInput).toBe(false)
     expect(wrapper.vm.hasFocused).toBe(false)
     expect(wrapper.vm.isResetting).toBe(false)
+    expect(wrapper.vm.errorBucket).toEqual([])
+    expect(wrapper.vm.valid).toBe(false)
   })
 
   it('should emit error update when value changes and shouldValidate', async () => {
