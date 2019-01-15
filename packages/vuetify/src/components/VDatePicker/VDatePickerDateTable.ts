@@ -1,21 +1,21 @@
 // Mixins
-import Colorable from '../../mixins/colorable'
 import DatePickerTable from './mixins/date-picker-table'
-import Themeable from '../../mixins/themeable'
 
 // Utils
 import { pad, createNativeLocaleFormatter, monthChange } from './util'
 import { createRange } from '../../util/helpers'
+import mixins from '../../util/mixins'
 
+// Types
+import { NativeLocaleFormatter } from './util/createNativeLocaleFormatter'
+import { PropValidator } from 'vue/types/options'
+import { VNode, VNodeChildren } from 'vue'
+
+export default mixins(
+  DatePickerTable
 /* @vue/component */
-export default {
+).extend({
   name: 'v-date-picker-date-table',
-
-  mixins: [
-    Colorable,
-    DatePickerTable,
-    Themeable
-  ],
 
   props: {
     firstDayOfWeek: {
@@ -24,29 +24,28 @@ export default {
     },
     showWeek: Boolean,
     weekdayFormat: {
-      type: Function,
-      default: null
-    }
+      type: Function
+    } as any as PropValidator<NativeLocaleFormatter | undefined>
   },
 
   computed: {
-    formatter () {
+    formatter (): NativeLocaleFormatter {
       return this.format || createNativeLocaleFormatter(this.locale, { day: 'numeric', timeZone: 'UTC' }, { start: 8, length: 2 })
     },
-    weekdayFormatter () {
+    weekdayFormatter (): NativeLocaleFormatter | undefined {
       return this.weekdayFormat || createNativeLocaleFormatter(this.locale, { weekday: 'narrow', timeZone: 'UTC' })
     },
-    weekDays () {
+    weekDays (): string[] {
       const first = parseInt(this.firstDayOfWeek, 10)
 
       return this.weekdayFormatter
-        ? createRange(7).map(i => this.weekdayFormatter(`2017-01-${first + i + 15}`)) // 2017-01-15 is Sunday
+        ? createRange(7).map(i => this.weekdayFormatter!(`2017-01-${first + i + 15}`)) // 2017-01-15 is Sunday
         : createRange(7).map(i => ['S', 'M', 'T', 'W', 'T', 'F', 'S'][(i + first) % 7])
     }
   },
 
   methods: {
-    calculateTableDate (delta) {
+    calculateTableDate (delta: number) {
       return monthChange(this.tableDate, Math.sign(delta || 1))
     },
     genTHead () {
@@ -72,11 +71,11 @@ export default {
         ((this.displayedYear - 1) >> 2) -
         Math.floor((this.displayedYear - 1) / 100) +
         Math.floor((this.displayedYear - 1) / 400) -
-        this.firstDayOfWeek
+        Number(this.firstDayOfWeek)
       ) % 7 // https://en.wikipedia.org/wiki/Zeller%27s_congruence
       return Math.floor((dayOfYear + offset) / 7) + 1
     },
-    genWeekNumber (weekNumber) {
+    genWeekNumber (weekNumber: number) {
       return this.$createElement('td', [
         this.$createElement('small', {
           staticClass: 'v-date-picker-table--date__week'
@@ -97,7 +96,7 @@ export default {
         const date = `${this.displayedYear}-${pad(this.displayedMonth + 1)}-${pad(day)}`
 
         rows.push(this.$createElement('td', [
-          this.genButton(date, true, 'date')
+          this.genButton(date, true, 'date', this.formatter)
         ]))
 
         if (rows.length % (this.showWeek ? 8 : 7) === 0) {
@@ -113,15 +112,15 @@ export default {
 
       return this.$createElement('tbody', children)
     },
-    genTR (children) {
+    genTR (children: VNodeChildren) {
       return [this.$createElement('tr', children)]
     }
   },
 
-  render () {
+  render (): VNode {
     return this.genTable('v-date-picker-table v-date-picker-table--date', [
       this.genTHead(),
       this.genTBody()
-    ])
+    ], this.calculateTableDate)
   }
-}
+})

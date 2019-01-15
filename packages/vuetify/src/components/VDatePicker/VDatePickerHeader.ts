@@ -10,22 +10,26 @@ import Themeable from '../../mixins/themeable'
 
 // Utils
 import { createNativeLocaleFormatter, monthChange } from './util'
+import mixins from '../../util/mixins'
 
+// Types
+import { VNode } from 'vue'
+import { NativeLocaleFormatter } from './util/createNativeLocaleFormatter'
+import { PropValidator } from 'vue/types/options'
+
+export default mixins(
+  Colorable,
+  Themeable
 /* @vue/component */
-export default {
+).extend({
   name: 'v-date-picker-header',
-
-  mixins: [
-    Colorable,
-    Themeable
-  ],
 
   props: {
     disabled: Boolean,
     format: {
       type: Function,
       default: null
-    },
+    } as any as PropValidator<NativeLocaleFormatter | null>,
     locale: {
       type: String,
       default: 'en-us'
@@ -54,7 +58,7 @@ export default {
   },
 
   computed: {
-    formatter () {
+    formatter (): NativeLocaleFormatter {
       if (this.format) {
         return this.format
       } else if (String(this.value).split('-')[1]) {
@@ -72,7 +76,7 @@ export default {
   },
 
   methods: {
-    genBtn (change) {
+    genBtn (change: number) {
       const disabled = this.disabled ||
         (change < 0 && this.min && this.calculateChange(change) < this.min) ||
         (change > 0 && this.max && this.calculateChange(change) > this.max)
@@ -85,7 +89,7 @@ export default {
           light: this.light
         },
         nativeOn: {
-          click: e => {
+          click: (e: Event) => {
             e.stopPropagation()
             this.$emit('input', this.calculateChange(change))
           }
@@ -94,8 +98,8 @@ export default {
         this.$createElement(VIcon, ((change < 0) === !this.$vuetify.rtl) ? this.prevIcon : this.nextIcon)
       ])
     },
-    calculateChange (sign) {
-      const [year, month] = String(this.value).split('-').map(v => 1 * v)
+    calculateChange (sign: number) {
+      const [year, month] = String(this.value).split('-').map(Number)
 
       if (month == null) {
         return `${year + sign}`
@@ -128,7 +132,7 @@ export default {
     }
   },
 
-  render () {
+  render (): VNode {
     return this.$createElement('div', {
       staticClass: 'v-date-picker-header',
       class: {
@@ -141,4 +145,4 @@ export default {
       this.genBtn(+1)
     ])
   }
-}
+})
