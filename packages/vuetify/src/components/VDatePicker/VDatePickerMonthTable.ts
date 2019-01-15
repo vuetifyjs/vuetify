@@ -1,29 +1,28 @@
 // Mixins
-import Colorable from '../../mixins/colorable'
 import DatePickerTable from './mixins/date-picker-table'
-import Themeable from '../../mixins/themeable'
 
 // Utils
 import { pad, createNativeLocaleFormatter } from './util'
+import mixins from '../../util/mixins'
 
+// Types
+import { VNode } from 'vue'
+import { NativeLocaleFormatter } from './util/createNativeLocaleFormatter'
+
+export default mixins(
+  DatePickerTable
 /* @vue/component */
-export default {
+).extend({
   name: 'v-date-picker-month-table',
 
-  mixins: [
-    Colorable,
-    DatePickerTable,
-    Themeable
-  ],
-
   computed: {
-    formatter () {
+    formatter (): NativeLocaleFormatter {
       return this.format || createNativeLocaleFormatter(this.locale, { month: 'short', timeZone: 'UTC' }, { start: 5, length: 2 })
     }
   },
 
   methods: {
-    calculateTableDate (delta) {
+    calculateTableDate (delta: number) {
       return `${parseInt(this.tableDate, 10) + Math.sign(delta || 1)}`
     },
     genTBody () {
@@ -38,7 +37,7 @@ export default {
           return this.$createElement('td', {
             key: month
           }, [
-            this.genButton(date, false, 'month')
+            this.genButton(date, false, 'month', this.formatter)
           ])
         })
 
@@ -51,9 +50,9 @@ export default {
     }
   },
 
-  render () {
+  render (): VNode {
     return this.genTable('v-date-picker-table v-date-picker-table--month', [
       this.genTBody()
-    ])
+    ], this.calculateTableDate)
   }
-}
+})
