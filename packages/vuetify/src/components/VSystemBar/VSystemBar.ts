@@ -8,7 +8,6 @@ import Themeable from '../../mixins/themeable'
 import { VNode } from 'vue/types'
 import mixins from '../../util/mixins'
 
-/* @vue/component */
 export default mixins(
   Applicationable('bar', [
     'height',
@@ -16,6 +15,7 @@ export default mixins(
   ]),
   Colorable,
   Themeable
+/* @vue/component */
 ).extend({
   name: 'v-system-bar',
 
