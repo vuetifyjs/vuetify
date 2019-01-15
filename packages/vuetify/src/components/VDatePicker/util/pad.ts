@@ -1,4 +1,4 @@
-const padStart = (string, targetLength, padString) => {
+const padStart = (string: number | string, targetLength: number, padString: string) => {
   targetLength = targetLength >> 0
   string = String(string)
   padString = String(padString)
@@ -13,4 +13,4 @@ const padStart = (string, targetLength, padString) => {
   return padString.slice(0, targetLength) + String(string)
 }
 
-export default (n, length = 2) => padStart(n, length, '0')
+export default (n: string | number, length = 2) => padStart(n, length, '0')
