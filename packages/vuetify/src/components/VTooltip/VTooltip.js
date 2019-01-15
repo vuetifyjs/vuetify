@@ -1,4 +1,4 @@
-import '../../stylus/components/_tooltips.styl'
+import './VTooltip.sass'
 
 // Mixins
 import Colorable from '../../mixins/colorable'
@@ -9,7 +9,7 @@ import Menuable from '../../mixins/menuable'
 import Toggleable from '../../mixins/toggleable'
 
 // Helpers
-import { convertToUnit } from '../../util/helpers'
+import { convertToUnit, keyCodes } from '../../util/helpers'
 
 /* @vue/component */
 export default {
@@ -20,7 +20,7 @@ export default {
   props: {
     closeDelay: {
       type: [Number, String],
-      default: 200
+      default: 0
     },
     debounce: {
       type: [Number, String],
@@ -33,7 +33,7 @@ export default {
     },
     openDelay: {
       type: [Number, String],
-      default: 200
+      default: 0
     },
     tag: {
       type: String,
@@ -110,11 +110,8 @@ export default {
     },
     computedTransition () {
       if (this.transition) return this.transition
-      if (this.top) return 'slide-y-reverse-transition'
-      if (this.right) return 'slide-x-transition'
-      if (this.bottom) return 'slide-y-transition'
-      if (this.left) return 'slide-x-reverse-transition'
-      return ''
+
+      return this.isActive ? 'scale-transition' : 'fade-transition'
     },
     offsetY () {
       return this.top || this.bottom
@@ -126,7 +123,6 @@ export default {
       return {
         left: this.calculatedLeft,
         maxWidth: convertToUnit(this.maxWidth),
-        opacity: this.isActive ? 0.9 : 0,
         top: this.calculatedTop,
         zIndex: this.zIndex || this.activeZIndex
       }
@@ -138,10 +134,8 @@ export default {
     positionY: 'updateDimensions'
   },
 
-  beforeMount () {
-    this.$nextTick(() => {
-      this.value && this.callActivate()
-    })
+  mounted () {
+    this.value && this.callActivate()
   },
 
   methods: {
@@ -152,15 +146,32 @@ export default {
       // Start the transition
       requestAnimationFrame(this.startTransition)
     },
+    deactivate () {
+      this.runDelay('close')
+    },
     genActivator () {
       const listeners = this.disabled ? {} : {
         mouseenter: e => {
           this.getActivator(e)
           this.runDelay('open')
         },
+        focus: e => {
+          this.getActivator(e)
+          this.runDelay('open')
+        },
         mouseleave: e => {
           this.getActivator(e)
           this.runDelay('close')
+        },
+        blur: e => {
+          this.getActivator(e)
+          this.runDelay('close')
+        },
+        keydown: e => {
+          if (e.keyCode === keyCodes.esc) {
+            this.getActivator(e)
+            this.runDelay('close')
+          }
         }
       }
 
