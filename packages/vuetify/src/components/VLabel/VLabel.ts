@@ -5,16 +5,18 @@ import '../../stylus/components/_labels.styl'
 import Colorable from '../../mixins/colorable'
 import Themeable, { functionalThemeClasses } from '../../mixins/themeable'
 
+// Types
+import { VNode, RenderContext } from 'vue'
+import mixins from '../../util/mixins'
+
 // Helpers
 import { convertToUnit } from '../../util/helpers'
 
 /* @vue/component */
-export default {
+export default mixins(Themeable).extend({
   name: 'v-label',
 
   functional: true,
-
-  mixins: [Themeable],
 
   props: {
     absolute: Boolean,
@@ -36,7 +38,7 @@ export default {
     value: Boolean
   },
 
-  render (h, ctx) {
+  render (h, ctx: RenderContext): VNode {
     const { children, listeners, props } = ctx
     const data = {
       staticClass: 'v-label',
@@ -59,4 +61,4 @@ export default {
 
     return h('label', Colorable.options.methods.setTextColor(props.focused && props.color, data), children)
   }
-}
+})

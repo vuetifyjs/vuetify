@@ -129,6 +129,11 @@ export default {
     }
   },
 
+  watch: {
+    positionX: 'updateDimensions',
+    positionY: 'updateDimensions'
+  },
+
   mounted () {
     this.value && this.callActivate()
   },

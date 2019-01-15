@@ -196,7 +196,7 @@ export const BaseItemGroup = mixins(
         this.max != null &&
         // Item doesn't exist
         index < 0 &&
-        // value woudl be increased above max
+        // value would be increased above max
         internalValue.length + 1 > this.max
       ) return
 

@@ -29,8 +29,6 @@ export default mixins(
 ).extend({
   name: 'v-time-picker',
 
-  mixins: [Picker],
-
   props: {
     allowedHours: Function,
     allowedMinutes: Function,
@@ -156,7 +154,7 @@ export default mixins(
   methods: {
     genValue () {
       if (this.inputHour != null && this.inputMinute != null && (!this.useSeconds || this.inputSecond != null)) {
-        return `${pad(this.inputHour)}:${pad(this.inputMinute)}` + (this.useSeconds ? `:${pad(this.inputSecond)}` : '')
+        return `${pad(this.inputHour)}:${pad(this.inputMinute)}` + (this.useSeconds ? `:${pad(this.inputSecond!)}` : '')
       }
 
       return null
@@ -209,6 +207,8 @@ export default mixins(
       this.emitValue()
     },
     onChange () {
+      const emitChange = this.selecting === (this.useSeconds ? selectingTimes.second : selectingTimes.minute)
+
       if (this.selecting === selectingTimes.hour) {
         this.selecting = selectingTimes.minute
       } else if (this.useSeconds && this.selecting === selectingTimes.minute) {
@@ -226,7 +226,8 @@ export default mixins(
       this.lazyInputHour = this.inputHour
       this.lazyInputMinute = this.inputMinute
       this.useSeconds && (this.lazyInputSecond = this.inputSecond)
-      this.$emit('change', value)
+
+      emitChange && this.$emit('change', value)
     },
     firstAllowed (type: 'hour' | 'minute' | 'second', value: number) {
       const allowedFn = type === 'hour' ? this.isAllowedHourCb : (type === 'minute' ? this.isAllowedMinuteCb : this.isAllowedSecondCb)

@@ -5,18 +5,34 @@ import Colorable from '../../mixins/colorable'
 
 // Utils
 import { createNativeLocaleFormatter } from './util'
+import mixins, { ExtractVue } from '../../util/mixins'
 
+// Types
+import Vue, { VNode } from 'vue'
+import { NativeLocaleFormatter } from './util/createNativeLocaleFormatter'
+import { PropValidator } from 'vue/types/options'
+
+interface options extends Vue {
+  $el: HTMLElement
+}
+
+export default mixins<options &
+/* eslint-disable indent */
+  ExtractVue<[
+    typeof Colorable
+  ]>
+/* eslint-enable indent */
+>(
+  Colorable
 /* @vue/component */
-export default {
+).extend({
   name: 'v-date-picker-years',
-
-  mixins: [Colorable],
 
   props: {
     format: {
       type: Function,
       default: null
-    },
+    } as any as PropValidator<NativeLocaleFormatter | null>,
     locale: {
       type: String,
       default: 'en-us'
@@ -34,7 +50,7 @@ export default {
   },
 
   computed: {
-    formatter () {
+    formatter (): NativeLocaleFormatter {
       return this.format || createNativeLocaleFormatter(this.locale, { year: 'numeric', timeZone: 'UTC' }, { length: 4 })
     }
   },
@@ -49,7 +65,7 @@ export default {
   },
 
   methods: {
-    genYearItem (year) {
+    genYearItem (year: number): VNode {
       const formatted = this.formatter(`${year}`)
       const active = parseInt(this.value, 10) === year
       const color = active && (this.color || 'primary')
@@ -62,7 +78,8 @@ export default {
         }
       }), formatted)
     },
-    genYearItems () {
+
+    genYearItems (): VNode[] {
       const children = []
       const selectedYear = this.value ? parseInt(this.value, 10) : new Date().getFullYear()
       const maxYear = this.max ? parseInt(this.max, 10) : (selectedYear + 100)
@@ -76,10 +93,10 @@ export default {
     }
   },
 
-  render () {
+  render (): VNode {
     return this.$createElement('ul', {
       staticClass: 'v-date-picker-years',
       ref: 'years'
     }, this.genYearItems())
   }
-}
+})

@@ -1,4 +1,5 @@
 import { VNodeDirective } from 'vue/types/vnode'
+import { DirectiveOptions } from 'vue'
 
 interface ScrollVNodeDirective extends VNodeDirective {
   arg: string
@@ -33,4 +34,4 @@ function unbind (el: HTMLElement) {
 export default {
   inserted,
   unbind
-}
+} as DirectiveOptions
