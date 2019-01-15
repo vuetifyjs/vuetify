@@ -1,0 +1,7 @@
+{
+  "props": {
+    "activeClass": "The class used when item is active",
+    "mandatory": "Specifies that a value must be present or the first available will be selected",
+    "multiple": "Allow multiple selections. **value** prop accepts array"
+  }
+}

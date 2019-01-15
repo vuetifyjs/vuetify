@@ -29,14 +29,12 @@ export const defaultMenuProps = {
 }
 
 /* @vue/component */
-export default {
+export default VTextField.extend({
   name: 'v-select',
 
   directives: {
     ClickOutside
   },
-
-  extends: VTextField,
 
   mixins: [
     Comparable,
@@ -695,8 +693,8 @@ export default {
       this.selectedItems = selectedItems
     },
     setValue (value) {
+      value !== this.internalValue && this.$emit('change', value)
       this.internalValue = value
-      this.$emit('change', value)
     }
   }
-}
+})
