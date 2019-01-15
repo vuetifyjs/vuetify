@@ -21,9 +21,10 @@ export default mixins<options &
   ExtractVue<[
     typeof Colorable
   ]>
-/* @vue/component */
+/* eslint-enable indent */
 >(
   Colorable
+/* @vue/component */
 ).extend({
   name: 'v-date-picker-years',
 
