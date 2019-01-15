@@ -42,7 +42,7 @@ export default {
         : this.$vuetify.application.left
     },
     computedPaddingRight () {
-      return !this.app
+      return !this.app || !this.inset
         ? 0
         : this.$vuetify.application.right
     },

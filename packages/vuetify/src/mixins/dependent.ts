@@ -3,6 +3,7 @@ import Vue from 'vue'
 import mixins from '../util/mixins'
 
 interface options extends Vue {
+  $el: HTMLElement
   $refs: {
     content: HTMLElement
   }

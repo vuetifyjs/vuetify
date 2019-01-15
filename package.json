@@ -9,24 +9,24 @@
     }
   },
   "scripts": {
-    "build": "lerna run build --stream",
+    "dev": "node scripts/dev.js",
+    "build": "node scripts/build.js",
     "start": "lerna run start --scope vuetifyjs.com --stream",
     "lint": "lerna run lint --parallel",
-    "dev": "lerna run dev --scope vuetify --stream",
-    "docs-dev": "lerna run dev --scope vuetifyjs.com --stream",
     "version": "node scripts/confirm-npm-tag.js",
     "postversion": "node scripts/post-release-merge.js"
   },
   "devDependencies": {
     "eslint": "^5.8.0",
     "eslint-config-standard": "^12.0.0",
+    "eslint-config-vuetify": "^0.2.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-local-rules": "^0.1.0",
     "eslint-plugin-node": "^7.0.1",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-typescript": "^0.12.0",
-    "eslint-plugin-vue": "^4.7.1",
+    "eslint-plugin-vue": "^5.1.0",
     "husky": "^1.1.2",
     "inquirer": "^6.2.0",
     "jest": "^21.2.1",
@@ -42,6 +42,7 @@
     "typescript": "^3.1.3",
     "typescript-eslint-parser": "^20.0.0",
     "typestrict": "^1.0.1",
-    "vue": "^2.5.17"
+    "vue": "^2.5.21",
+    "vue-template-compiler": "^2.5.21"
   }
 }

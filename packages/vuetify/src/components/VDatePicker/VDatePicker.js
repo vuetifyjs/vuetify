@@ -305,7 +305,7 @@ export default {
           disabled: this.disabled,
           readonly: this.readonly,
           selectingYear: this.activePicker === 'YEAR',
-          year: this.formatters.year(`${this.inputYear}`),
+          year: this.formatters.year(this.value ? `${this.inputYear}` : this.tableDate),
           yearIcon: this.yearIcon,
           value: this.multiple ? this.value[0] : this.value
         },
@@ -363,7 +363,9 @@ export default {
         ref: 'table',
         on: {
           input: this.dateClick,
-          tableDate: value => this.tableDate = value
+          tableDate: value => this.tableDate = value,
+          'click:date': value => this.$emit('click:date', value),
+          'dblclick:date': value => this.$emit('dblclick:date', value)
         }
       })
     },
@@ -390,7 +392,9 @@ export default {
         ref: 'table',
         on: {
           input: this.monthClick,
-          tableDate: value => this.tableDate = value
+          tableDate: value => this.tableDate = value,
+          'click:month': value => this.$emit('click:month', value),
+          'dblclick:month': value => this.$emit('dblclick:month', value)
         }
       })
     },

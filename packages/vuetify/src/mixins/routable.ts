@@ -49,7 +49,7 @@ export default Vue.extend({
         directives: [{
           name: 'ripple',
           value: this.computedRipple
-        }] as any, // TODO
+        }],
         [this.to ? 'nativeOn' : 'on']: {
           ...this.$listeners,
           click: this.click

@@ -47,7 +47,7 @@ export default mixins(
 
     if (this.$scopedSlots.default) {
       element = this.$scopedSlots.default({ hover: this.isActive })
-    } else if (this.$slots.default.length === 1) {
+    } else if (this.$slots.default && this.$slots.default.length === 1) {
       element = this.$slots.default[0]
     }
 

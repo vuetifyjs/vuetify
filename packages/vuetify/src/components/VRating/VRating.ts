@@ -16,7 +16,7 @@ import { createRange } from '../../util/helpers'
 import mixins from '../../util/mixins'
 
 // Types
-import { VNode, VNodeDirective, VNodeChildrenArrayContents } from 'vue'
+import { VNode, VNodeDirective, VNodeChildren } from 'vue'
 
 type ItemSlotProps = {
   index: number
@@ -188,7 +188,7 @@ export default mixins(
     onMouseLeave (): void {
       this.runDelay('close', () => (this.hoverIndex = -1))
     },
-    genItem (i: number): VNode | VNodeChildrenArrayContents | string {
+    genItem (i: number): VNode | VNodeChildren | string {
       const props = this.createProps(i)
 
       if (this.$scopedSlots.item) return this.$scopedSlots.item(props)

@@ -235,7 +235,7 @@ test('validatable.js', ({ mount }) => {
   it('should return validation state', () => {
     const wrapper = mount(Mock)
 
-    expect(wrapper.vm.validationState).toBe(null)
+    expect(wrapper.vm.validationState).toBe(undefined)
 
     wrapper.setProps({ error: true })
     expect(wrapper.vm.validationState).toBe('error')
@@ -272,7 +272,7 @@ test('validatable.js', ({ mount }) => {
     })
 
     expect(wrapper.vm.hasInput).toBe(false)
-    wrapper.setData({ lazyValue: 'foo' })
+    wrapper.setProps({ value: 'foo' })
 
     // Wait for watcher's $nextTick call
     await wrapper.vm.$nextTick()
@@ -294,7 +294,10 @@ test('validatable.js', ({ mount }) => {
     expect(wrapper.vm.hasFocused).toBe(true)
     expect(wrapper.vm.isResetting).toBe(true)
 
-    // Wait for timeout
+    // Wait for watcher
+    await wrapper.vm.$nextTick()
+
+    // Wait for watcher's timeout
     await new Promise(resolve => setTimeout(resolve, 0))
 
     expect(wrapper.vm.hasInput).toBe(false)
@@ -339,5 +342,25 @@ test('validatable.js', ({ mount }) => {
     wrapper.vm.reset()
     expect(wrapper.vm.isResetting).toBe(true)
     expect(wrapper.vm.internalValue).toEqual([])
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/6025
+  it('should accept null for external messages', () => {
+    const wrapper = mount(Mock, {
+      propsData: {
+        errorMessages: ['Foobar']
+      }
+    })
+
+    expect(wrapper.vm.externalError).toBe(true)
+
+    wrapper.setProps({ errorMessages: [] })
+    expect(wrapper.vm.externalError).toBe(false)
+
+    wrapper.setProps({ errorMessages: 'Fizzbuzz' })
+    expect(wrapper.vm.externalError).toBe(true)
+
+    wrapper.setProps({ errorMessages: null })
+    expect(wrapper.vm.externalError).toBe(false)
   })
 })

@@ -14,12 +14,12 @@ import { ExtractVue } from './../../util/mixins'
 import mixins from '../../util/mixins'
 
 // Types
-import Vue from 'vue'
-import { VNode, VNodeDirective } from 'vue/types'
+import Vue, { VNode } from 'vue'
 
 type VBaseWindow = InstanceType<typeof VWindow>
 
 interface options extends Vue {
+  $el: HTMLElement
   windowGroup: VBaseWindow
 }
 
@@ -108,6 +108,8 @@ export default mixins<options & ExtractVue<[typeof Bootable]>>(
       if (isBooted) this.done = done
 
       requestAnimationFrame(() => {
+        if (!this.computedTransition) return done()
+
         this.windowGroup.internalHeight = convertToUnit(el.clientHeight)
 
         // On initial render, there is no transition
@@ -137,7 +139,7 @@ export default mixins<options & ExtractVue<[typeof Bootable]>>(
       directives: [{
         name: 'show',
         value: this.isActive
-      }] as VNodeDirective[],
+      }],
       on: this.$listeners
     }, this.showLazyContent(this.genDefaultSlot()))
 

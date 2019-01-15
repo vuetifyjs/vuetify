@@ -36,6 +36,8 @@ $container-max-widths := {
 // Display
 // ============================================================
 $display-breakpoints := {
+  print-only: "only print"
+  screen-only: "only screen"
   xs-only: "only screen and (max-width: %s)" % ($grid-breakpoints.sm - 1)
   sm-only: "only screen and (min-width: %s) and (max-width: %s)" % ($grid-breakpoints.sm ($grid-breakpoints.md  - 1))
   sm-and-down: "only screen and (max-width: %s)" % ($grid-breakpoints.md - 1)
@@ -194,11 +196,11 @@ $card-border-radius := 2px
 // Chip
 $chip-border-radius := 28px
 $chip-close-margin := 0 2px 0 8px
+$chip-close-margin-rtl := 0 8px 0 2px
 $chip-font-size := 13px
 $chip-label-border-radius := $card-border-radius
 $chip-icon-font-size := 20px
 $chip-padding := 0 12px
-$chip-removeable-padding := 0 4px 0 12px
 $chip-outline-background := transparent !important
 $chip-outline-color := $grey.base
 $chip-height := 32px
@@ -207,6 +209,12 @@ $chip-small-height := 24px
 $chip-small-font-size := 20px
 $chip-icon-offset := 12px
 $chip-icon-negative-offset := -8px
+// TODO: s/removeable/removable in 2.0
+// invalid name kept to avoid possible breaking change
+$chip-removeable-padding := 0 $chip-margin 0 $chip-icon-offset
+$chip-removable-padding-rtl := 0 $chip-icon-offset 0 $chip-margin
+// TODO: remove in 2.0
+$chip-removable-padding := $chip-removeable-padding
 
 // Collapsible
 $expansion-panel-collapse-height := 48px
@@ -310,6 +318,23 @@ $timeline-inner-dot-regular-size := 30px
 $timeline-inner-dot-regular-margin := 4px
 $timeline-inner-dot-large-size := 42px
 $timeline-inner-dot-large-margin := 5px
+
+// Calendar
+$calendar-daily-weekday-padding := 4px 4px 4px 8px
+$calendar-daily-weekday-font-size := 14px
+$calendar-daily-day-padding := 0px 4px 4px 8px
+$calendar-daily-day-font-size := 40px
+$calendar-daily-day-line-height := 40px
+$calendar-daily-interval-gutter-width := 44px
+$calendar-daily-interval-gutter-top := -6px
+$calendar-daily-interval-gutter-font-size := 10px
+
+$calendar-weekly-weekday-padding := 0px 4px 0px 4px
+$calendar-weekly-weekday-font-size := 14px
+$calendar-weekly-day-padding := 32px 4px 4px 4px
+$calendar-weekly-day-label-size := 32px
+$calendar-weekly-day-label-radius := 16px
+$calendar-weekly-day-month-left := 36px
 
 // Directives
 // ============================================================

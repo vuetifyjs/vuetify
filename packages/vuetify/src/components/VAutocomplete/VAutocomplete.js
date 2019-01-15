@@ -16,10 +16,8 @@ const defaultMenuProps = {
 }
 
 /* @vue/component */
-export default {
+export default VSelect.extend({
   name: 'v-autocomplete',
-
-  extends: VSelect,
 
   props: {
     allowOverflow: {
@@ -49,8 +47,12 @@ export default {
       default: undefined
     },
     menuProps: {
-      type: VSelect.props.menuProps.type,
+      type: VSelect.options.props.menuProps.type,
       default: () => defaultMenuProps
+    },
+    autoSelectFirst: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -61,7 +63,7 @@ export default {
 
   computed: {
     classes () {
-      return Object.assign({}, VSelect.computed.classes.call(this), {
+      return Object.assign({}, VSelect.options.computed.classes.call(this), {
         'v-autocomplete': true,
         'v-autocomplete--is-selecting-index': this.selectedIndex > -1
       })
@@ -119,7 +121,7 @@ export default {
       return (this.displayedItemsCount > 0) || !this.hideNoData
     },
     $_menuProps () {
-      const props = VSelect.computed.$_menuProps.call(this)
+      const props = VSelect.options.computed.$_menuProps.call(this)
       props.contentClass = `v-autocomplete__content ${props.contentClass || ''}`.trim()
       return {
         ...defaultMenuProps,
@@ -138,7 +140,7 @@ export default {
       })
     },
     listData () {
-      const data = VSelect.computed.listData.call(this)
+      const data = VSelect.options.computed.listData.call(this)
 
       Object.assign(data.props, {
         items: this.virtualizedItems,
@@ -205,7 +207,7 @@ export default {
       this.setMenuIndex(-1)
 
       this.$nextTick(() => {
-        this.setMenuIndex(val.length === 1 ? 0 : -1)
+        this.setMenuIndex(val.length > 0 && (val.length === 1 || this.autoSelectFirst) ? 0 : -1)
       })
     },
     onInternalSearchChanged (val) {
@@ -271,10 +273,10 @@ export default {
     clearableCallback () {
       this.internalSearch = undefined
 
-      VSelect.methods.clearableCallback.call(this)
+      VSelect.options.methods.clearableCallback.call(this)
     },
     genInput () {
-      const input = VTextField.methods.genInput.call(this)
+      const input = VTextField.options.methods.genInput.call(this)
 
       input.data.attrs.role = 'combobox'
       input.data.domProps.value = this.internalSearch
@@ -283,7 +285,7 @@ export default {
     },
     genSelections () {
       return this.hasSlot || this.multiple
-        ? VSelect.methods.genSelections.call(this)
+        ? VSelect.options.methods.genSelections.call(this)
         : []
     },
     onClick () {
@@ -316,7 +318,7 @@ export default {
     onKeyDown (e) {
       const keyCode = e.keyCode
 
-      VSelect.methods.onKeyDown.call(this, e)
+      VSelect.options.methods.onKeyDown.call(this, e)
 
       // The ordering is important here
       // allows new value to be updated
@@ -325,11 +327,11 @@ export default {
       this.changeSelectedIndex(keyCode)
     },
     onTabDown (e) {
-      VSelect.methods.onTabDown.call(this, e)
+      VSelect.options.methods.onTabDown.call(this, e)
       this.updateSelf()
     },
     setSelectedItems () {
-      VSelect.methods.setSelectedItems.call(this)
+      VSelect.options.methods.setSelectedItems.call(this)
 
       // #4273 Don't replace if searching
       // #4403 Don't replace if focused
@@ -364,4 +366,4 @@ export default {
       }
     }
   }
-}
+})

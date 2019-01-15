@@ -156,10 +156,15 @@ export default mixins<options>(
       this.treeview.emitOpen()
     },
     genLabel () {
-      return this.$createElement('label', {
+      const children = []
+
+      if (this.$scopedSlots.label) children.push(this.$scopedSlots.label(this.scopedProps))
+      else children.push(this.text)
+
+      return this.$createElement('div', {
         slot: 'label',
         staticClass: 'v-treeview-node__label'
-      }, [this.text])
+      }, children)
     },
     genContent () {
       const children = [
@@ -225,6 +230,9 @@ export default mixins<options>(
 
       return this.$createElement('div', {
         staticClass: 'v-treeview-node__root',
+        class: {
+          [this.activeClass]: this.isActive
+        },
         on: {
           click: () => {
             if (this.openOnClick && this.children) {
@@ -285,7 +293,6 @@ export default mixins<options>(
     return h('div', {
       staticClass: 'v-treeview-node',
       class: {
-        [this.activeClass]: this.isActive,
         'v-treeview-node--leaf': !this.hasChildren,
         'v-treeview-node--click': this.openOnClick,
         'v-treeview-node--selected': this.isSelected

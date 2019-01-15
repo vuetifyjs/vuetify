@@ -158,7 +158,8 @@ export default VWindow.extend({
           },
           props: {
             icon: true,
-            small: true
+            small: true,
+            value: this.getValue(this.items[i], i)
           }
         }, [
           this.$createElement(VIcon, {
@@ -230,6 +231,6 @@ export default VWindow.extend({
       children.push(this.genDelimiters())
     }
 
-    return h('div', data, [children, this.genContainer()])
+    return h('div', data, [this.genContainer(), children])
   }
 })
