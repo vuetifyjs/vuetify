@@ -343,4 +343,24 @@ test('validatable.js', ({ mount }) => {
     expect(wrapper.vm.isResetting).toBe(true)
     expect(wrapper.vm.internalValue).toEqual([])
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/6025
+  it('should accept null for external messages', () => {
+    const wrapper = mount(Mock, {
+      propsData: {
+        errorMessages: ['Foobar']
+      }
+    })
+
+    expect(wrapper.vm.externalError).toBe(true)
+
+    wrapper.setProps({ errorMessages: [] })
+    expect(wrapper.vm.externalError).toBe(false)
+
+    wrapper.setProps({ errorMessages: 'Fizzbuzz' })
+    expect(wrapper.vm.externalError).toBe(true)
+
+    wrapper.setProps({ errorMessages: null })
+    expect(wrapper.vm.externalError).toBe(false)
+  })
 })
