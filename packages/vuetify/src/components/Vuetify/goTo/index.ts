@@ -7,18 +7,22 @@ import {
   isValidTarget,
   isValidContainer
 } from './util'
+import Vue from 'vue'
 
-/**
- * @param {Number|String|HTMLElement|VueComponent} _target
- * @param {Object}                                 _settings - Optional
- * ---
- * @param {String|HTMLElement|VueComponent} _settings.container
- * @param {Number}                          _settings.duration
- * @param {Number}                          _settings.offset
- * @param {String|Function}                 _settings.easing
- * @param {Boolean}                         _settings.appOffset
- */
-export default function goTo (_target, _settings) {
+type GoToTarget = number | string | HTMLElement | Vue
+interface GoToSettings {
+  container: string | HTMLElement | Vue
+  duration: number
+  offset: number
+  easing: string | ((t: number) => number)
+  appOffset: boolean
+}
+
+export default function goTo (
+  this: Vue,
+  _target: GoToTarget,
+  _settings: Partial<GoToSettings> = {}
+): Promise<number> {
   const { bar, top } = this.$vuetify.application
   const defaults = {
     container: document.scrollingElement || document.body || document.documentElement,
@@ -27,10 +31,14 @@ export default function goTo (_target, _settings) {
     easing: 'easeInOutCubic',
     appOffset: true
   }
-  const settings = Object.assign({}, defaults, _settings)
+  const settings = {
+    ...defaults,
+    ..._settings
+  }
 
-  return new Promise((resolve, reject) => {
-    if (typeof window === 'undefined') return reject('Window is undefined.')
+  // tslint:disable-next-line:promise-must-complete
+  return new Promise(resolve => {
+    if (typeof window === 'undefined') throw new Error('Window is undefined.')
 
     if (!isValidTarget(_target)) throw new TypeError(`Target must be a Number/Selector/HTMLElement/VueComponent, received ${type(_target)} instead.`)
     if (!isValidContainer(settings.container)) throw new TypeError(`Container must be a Selector/HTMLElement/VueComponent, received ${type(settings.container)} instead.`)
@@ -45,15 +53,17 @@ export default function goTo (_target, _settings) {
       else settings.offset += bar + top
     }
 
-    const targetLocation = (isNaN(_target) ? offset($(_target)) : _target) - settings.offset
+    const targetLocation = ((typeof _target === 'number') ? _target : offset($(_target))) - settings.offset
     const startLocation = container.scrollTop
     const distance = targetLocation - startLocation
     const startTime = performance.now()
-    const ease = typeof settings.easing === 'function' ? settings.easing : easingPatterns[settings.easing]
+    const ease = typeof settings.easing === 'function'
+      ? settings.easing
+      : (easingPatterns as Record<string, easingPatterns.EasingFunction>)[settings.easing]
 
     if (!ease) throw new TypeError(`Easing function "${settings.easing}" not found.`)
 
-    function step (currentTime) {
+    function step (currentTime: number) {
       const timeElapsed = currentTime - startTime
       const progress = Math.min(timeElapsed / settings.duration, 1)
       const stepTargetLocation = Math.floor(startLocation + distance * ease(progress))
