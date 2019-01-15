@@ -1,0 +1,57 @@
+{
+  "title": "header",
+  "titleText": "headerText",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "usage",
+          "value": "usage"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "api",
+          "value": [
+            "v-calendar",
+            "v-calendar-daily",
+            "v-calendar-monthly",
+            "v-calendar-weekly"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "examples",
+          "value": [
+            "slots",
+            "events",
+            "weekly",
+            "daily",
+            "features"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "up-next",
+          "value": [
+            "components/date-pickers",
+            "components/time-pickers",
+            "components/cards"
+          ]
+        }
+      ]
+    }
+  ]
+}
