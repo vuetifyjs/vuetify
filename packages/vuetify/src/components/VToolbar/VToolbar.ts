@@ -11,24 +11,26 @@ import SSRBootable from '../../mixins/ssr-bootable'
 import Scroll from '../../directives/scroll'
 import { deprecate } from '../../util/console'
 
+// Types
+import mixins from '../../util/mixins'
+import { VNode } from 'vue'
+
+export default mixins(
+  Applicationable('top', [
+    'clippedLeft',
+    'clippedRight',
+    'computedHeight',
+    'invertedScroll',
+    'manualScroll'
+  ]),
+  Colorable,
+  SSRBootable,
+  Themeable
 /* @vue/component */
-export default {
+).extend({
   name: 'v-toolbar',
 
   directives: { Scroll },
-
-  mixins: [
-    Applicationable('top', [
-      'clippedLeft',
-      'clippedRight',
-      'computedHeight',
-      'invertedScroll',
-      'manualScroll'
-    ]),
-    Colorable,
-    SSRBootable,
-    Themeable
-  ],
 
   props: {
     card: Boolean,
@@ -38,13 +40,13 @@ export default {
     extended: Boolean,
     extensionHeight: {
       type: [Number, String],
-      validator: v => !isNaN(parseInt(v))
+      validator: (v: any) => !isNaN(parseInt(v))
     },
     flat: Boolean,
     floating: Boolean,
     height: {
       type: [Number, String],
-      validator: v => !isNaN(parseInt(v))
+      validator: (v: any) => !isNaN(parseInt(v))
     },
     invertedScroll: Boolean,
     manualScroll: Boolean,
@@ -72,14 +74,13 @@ export default {
     isActive: true,
     isExtended: false,
     isScrollingUp: false,
-    previousScroll: null,
-    previousScrollDirection: null,
+    previousScroll: 0,
     savedScroll: 0,
-    target: null
+    target: null as Element | null
   }),
 
   computed: {
-    canScroll () {
+    canScroll (): boolean {
       // TODO: remove
       if (this.scrollToolbarOffScreen) {
         deprecate('scrollToolbarOffScreen', 'scrollOffScreen', this)
@@ -89,7 +90,7 @@ export default {
 
       return this.scrollOffScreen || this.invertedScroll
     },
-    computedContentHeight () {
+    computedContentHeight (): number {
       if (this.height) return parseInt(this.height)
       if (this.dense) return this.heights.dense
 
@@ -104,23 +105,23 @@ export default {
 
       return this.heights.mobile
     },
-    computedExtensionHeight () {
+    computedExtensionHeight (): number {
       if (this.tabs) return 48
       if (this.extensionHeight) return parseInt(this.extensionHeight)
 
       return this.computedContentHeight
     },
-    computedHeight () {
+    computedHeight (): number {
       if (!this.isExtended) return this.computedContentHeight
 
       return this.computedContentHeight + this.computedExtensionHeight
     },
-    computedMarginTop () {
+    computedMarginTop (): number {
       if (!this.app) return 0
 
       return this.$vuetify.application.bar
     },
-    classes () {
+    classes (): object {
       return {
         'v-toolbar': true,
         'elevation-0': this.flat || (
@@ -139,27 +140,27 @@ export default {
         ...this.themeClasses
       }
     },
-    computedPaddingLeft () {
+    computedPaddingLeft (): number {
       if (!this.app || this.clippedLeft) return 0
 
       return this.$vuetify.application.left
     },
-    computedPaddingRight () {
+    computedPaddingRight (): number {
       if (!this.app || this.clippedRight) return 0
 
       return this.$vuetify.application.right
     },
-    computedTransform () {
+    computedTransform (): number {
       return !this.isActive
         ? this.canScroll
           ? -this.computedContentHeight
           : -this.computedHeight
         : 0
     },
-    currentThreshold () {
+    currentThreshold (): number {
       return Math.abs(this.currentScroll - this.savedScroll)
     },
-    styles () {
+    styles (): object {
       return {
         marginTop: `${this.computedMarginTop}px`,
         paddingRight: `${this.computedPaddingRight}px`,
@@ -170,9 +171,10 @@ export default {
   },
 
   watch: {
-    currentThreshold (val) {
+    currentThreshold (val: number) {
       if (this.invertedScroll) {
-        return this.isActive = this.currentScroll > this.scrollThreshold
+        this.isActive = this.currentScroll > this.scrollThreshold
+        return
       }
 
       if (val < this.scrollThreshold ||
@@ -185,10 +187,10 @@ export default {
     isActive () {
       this.savedScroll = 0
     },
-    invertedScroll (val) {
+    invertedScroll (val: boolean) {
       this.isActive = !val
     },
-    manualScroll (val) {
+    manualScroll (val: boolean) {
       this.isActive = !val
     },
     isScrollingUp () {
@@ -215,29 +217,22 @@ export default {
         typeof window === 'undefined'
       ) return
 
-      const target = this.target || window
-
-      this.currentScroll = this.scrollTarget
-        ? target.scrollTop
-        : target.pageYOffset || document.documentElement.scrollTop
+      this.currentScroll = this.target
+        ? this.target.scrollTop
+        : window.pageYOffset
 
       this.isScrollingUp = this.currentScroll < this.previousScroll
 
       this.previousScroll = this.currentScroll
     },
-    /**
-     * Update the application layout
-     *
-     * @return {number}
-     */
-    updateApplication () {
+    updateApplication (): number {
       return this.invertedScroll || this.manualScroll
         ? 0
         : this.computedHeight
     }
   },
 
-  render (h) {
+  render (h): VNode {
     this.isExtended = this.extended || !!this.$slots.extension
 
     const children = []
@@ -268,4 +263,4 @@ export default {
 
     return h('nav', data, children)
   }
-}
+})
