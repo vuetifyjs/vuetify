@@ -35,21 +35,25 @@ test('validatable.js', ({ mount }) => {
     expect(wrapper.vm.isResetting).toBe(true)
   })
 
-  it.each([true, false])('should reset valid flag on resetValidation - %s', returns => {
-    const wrapper = mount(Mock, {
-      propsData: {
-        rules: [() => returns]
-      }
+  ;[true, false].forEach(returns => {
+    it.only('should reset valid flag on resetValidation - ' + String(returns), async () => {
+      jest.useFakeTimers()
+      const wrapper = mount(Mock, {
+        propsData: {
+          rules: [() => returns || String(returns)]
+        }
+      })
+
+      expect(wrapper.vm.valid).toBe(returns)
+
+      wrapper.setData({ valid: !returns })
+
+      wrapper.vm.resetValidation()
+      await wrapper.vm.$nextTick()
+      jest.runAllTimers()
+      expect(wrapper.vm.valid).toBe(returns)
+      jest.useRealTimers()
     })
-
-    expect(wrapper.vm.valid).toBe(returns)
-
-    wrapper.setData({ valid: !returns })
-    expect(wrapper.vm.valid).toBe(!returns)
-
-    wrapper.vm.resetValidation()
-
-    expect(wrapper.vm.valid).toBe(returns)
   })
 
   it('should manually validate', () => {
